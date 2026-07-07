@@ -11,6 +11,8 @@
         "burst3": false,
         "wgDmg": false,
         "starPlus": 0,
+        "showStar": 1,
+        "starColor": "yellow",
         "materials": 35,
         "price": 0
       },
@@ -24,6 +26,8 @@
         "burst3": false,
         "wgDmg": false,
         "starPlus": 0,
+        "showStar": 2,
+        "starColor": "yellow",
         "materials": 30,
         "price": 10000
       },
@@ -37,6 +41,8 @@
         "burst3": false,
         "wgDmg": false,
         "starPlus": 0,
+        "showStar": 3,
+        "starColor": "yellow",
         "materials": 40,
         "price": 10000
       },
@@ -50,6 +56,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 4,
+        "starColor": "yellow",
         "materials": 50,
         "price": 10000
       },
@@ -63,6 +71,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 4,
+        "starColor": "yellow",
         "materials": 0,
         "price": 0
       },
@@ -76,6 +86,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 5,
+        "starColor": "yellow",
         "materials": 70,
         "price": 10000
       },
@@ -89,6 +101,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 5,
+        "starColor": "yellow",
         "materials": 0,
         "price": 0
       },
@@ -102,6 +116,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 2,
+        "showStar": 5,
+        "starColor": "yellow",
         "materials": 0,
         "price": 0
       },
@@ -115,6 +131,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 6,
+        "starColor": "yellow",
         "materials": 100,
         "price": 10000
       }
@@ -130,6 +148,8 @@
         "burst3": false,
         "wgDmg": false,
         "starPlus": 0,
+        "showStar": 2,
+        "starColor": "yellow",
         "materials": 85,
         "price": 0
       },
@@ -143,6 +163,8 @@
         "burst3": false,
         "wgDmg": false,
         "starPlus": 0,
+        "showStar": 3,
+        "starColor": "yellow",
         "materials": 65,
         "price": 10000
       },
@@ -156,6 +178,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 4,
+        "starColor": "yellow",
         "materials": 85,
         "price": 10000
       },
@@ -169,6 +193,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 4,
+        "starColor": "yellow",
         "materials": 0,
         "price": 0
       },
@@ -182,6 +208,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 5,
+        "starColor": "yellow",
         "materials": 100,
         "price": 10000
       },
@@ -195,6 +223,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 5,
+        "starColor": "yellow",
         "materials": 0,
         "price": 0
       },
@@ -208,6 +238,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 2,
+        "showStar": 5,
+        "starColor": "yellow",
         "materials": 0,
         "price": 0
       },
@@ -221,6 +253,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 6,
+        "starColor": "yellow",
         "materials": 200,
         "price": 10000
       }
@@ -236,6 +270,8 @@
         "burst3": false,
         "wgDmg": false,
         "starPlus": 0,
+        "showStar": 3,
+        "starColor": "yellow",
         "materials": 250,
         "price": 0
       },
@@ -249,6 +285,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 4,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -262,6 +300,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 4,
+        "starColor": "orange",
         "materials": 150,
         "price": 10000
       },
@@ -275,6 +315,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 5,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -288,6 +330,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 5,
+        "starColor": "red",
         "materials": 150,
         "price": 10000
       },
@@ -301,6 +345,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 2,
+        "showStar": 5,
+        "starColor": "violet",
         "materials": 150,
         "price": 10000
       },
@@ -314,6 +360,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 6,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       }
@@ -331,6 +379,8 @@
         "burst3": false,
         "wgDmg": false,
         "starPlus": 0,
+        "showStar": 3,
+        "starColor": "yellow",
         "materials": 250,
         "price": 0
       },
@@ -344,6 +394,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 4,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -357,6 +409,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 4,
+        "starColor": "orange",
         "materials": 150,
         "price": 10000
       },
@@ -370,6 +424,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 5,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -383,6 +439,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 5,
+        "starColor": "red",
         "materials": 150,
         "price": 10000
       },
@@ -396,6 +454,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 2,
+        "showStar": 5,
+        "starColor": "violet",
         "materials": 150,
         "price": 10000
       },
@@ -409,6 +469,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 6,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       }
@@ -424,6 +486,8 @@
         "burst3": false,
         "wgDmg": false,
         "starPlus": 0,
+        "showStar": 3,
+        "starColor": "yellow",
         "materials": 250,
         "price": 0
       },
@@ -437,6 +501,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 4,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -450,6 +516,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 4,
+        "starColor": "orange",
         "materials": 150,
         "price": 10000
       },
@@ -463,6 +531,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 5,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -476,6 +546,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 5,
+        "starColor": "red",
         "materials": 150,
         "price": 10000
       },
@@ -489,6 +561,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 2,
+        "showStar": 5,
+        "starColor": "violet",
         "materials": 150,
         "price": 10000
       },
@@ -502,6 +576,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 6,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       }
@@ -517,6 +593,8 @@
         "burst3": false,
         "wgDmg": false,
         "starPlus": 0,
+        "showStar": 3,
+        "starColor": "yellow",
         "materials": 250,
         "price": 0
       },
@@ -530,6 +608,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 4,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -543,6 +623,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 4,
+        "starColor": "orange",
         "materials": 150,
         "price": 10000
       },
@@ -556,6 +638,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 5,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -569,6 +653,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 5,
+        "starColor": "red",
         "materials": 150,
         "price": 10000
       },
@@ -582,6 +668,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 2,
+        "showStar": 5,
+        "starColor": "violet",
         "materials": 150,
         "price": 10000
       },
@@ -595,6 +683,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 6,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       }
@@ -610,6 +700,8 @@
         "burst3": false,
         "wgDmg": false,
         "starPlus": 0,
+        "showStar": 3,
+        "starColor": "yellow",
         "materials": 250,
         "price": 0
       },
@@ -623,6 +715,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 4,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -636,6 +730,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 4,
+        "starColor": "orange",
         "materials": 150,
         "price": 10000
       },
@@ -649,6 +745,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 5,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -662,6 +760,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 5,
+        "starColor": "red",
         "materials": 150,
         "price": 10000
       },
@@ -675,6 +775,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 2,
+        "showStar": 5,
+        "starColor": "violet",
         "materials": 150,
         "price": 10000
       },
@@ -688,6 +790,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 6,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       }
@@ -703,6 +807,8 @@
         "burst3": false,
         "wgDmg": false,
         "starPlus": 0,
+        "showStar": 3,
+        "starColor": "yellow",
         "materials": 250,
         "price": 0
       },
@@ -716,6 +822,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 4,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -729,6 +837,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 4,
+        "starColor": "orange",
         "materials": 150,
         "price": 10000
       },
@@ -742,6 +852,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 5,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -755,6 +867,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 5,
+        "starColor": "red",
         "materials": 150,
         "price": 10000
       },
@@ -768,6 +882,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 2,
+        "showStar": 5,
+        "starColor": "violet",
         "materials": 150,
         "price": 10000
       },
@@ -781,6 +897,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 6,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       }
@@ -796,6 +914,8 @@
         "burst3": false,
         "wgDmg": false,
         "starPlus": 0,
+        "showStar": 3,
+        "starColor": "yellow",
         "materials": 250,
         "price": 0
       },
@@ -809,6 +929,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 4,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -822,6 +944,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 4,
+        "starColor": "orange",
         "materials": 150,
         "price": 10000
       },
@@ -835,6 +959,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 5,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -848,6 +974,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 5,
+        "starColor": "red",
         "materials": 150,
         "price": 10000
       },
@@ -861,6 +989,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 2,
+        "showStar": 5,
+        "starColor": "violet",
         "materials": 150,
         "price": 10000
       },
@@ -874,6 +1004,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 6,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       }
@@ -889,6 +1021,8 @@
         "burst3": false,
         "wgDmg": false,
         "starPlus": 0,
+        "showStar": 3,
+        "starColor": "yellow",
         "materials": 250,
         "price": 0
       },
@@ -902,6 +1036,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 4,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -915,6 +1051,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 4,
+        "starColor": "orange",
         "materials": 150,
         "price": 10000
       },
@@ -928,6 +1066,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 5,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -941,6 +1081,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 5,
+        "starColor": "red",
         "materials": 150,
         "price": 10000
       },
@@ -954,6 +1096,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 2,
+        "showStar": 5,
+        "starColor": "violet",
         "materials": 150,
         "price": 10000
       },
@@ -967,6 +1111,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 6,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       }
@@ -982,6 +1128,8 @@
         "burst3": false,
         "wgDmg": false,
         "starPlus": 0,
+        "showStar": 3,
+        "starColor": "yellow",
         "materials": 250,
         "price": 0
       },
@@ -995,6 +1143,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 4,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -1008,6 +1158,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 4,
+        "starColor": "orange",
         "materials": 150,
         "price": 10000
       },
@@ -1021,6 +1173,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 5,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -1034,6 +1188,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 5,
+        "starColor": "red",
         "materials": 150,
         "price": 10000
       },
@@ -1047,6 +1203,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 2,
+        "showStar": 5,
+        "starColor": "violet",
         "materials": 150,
         "price": 10000
       },
@@ -1060,6 +1218,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 6,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       }
@@ -1075,6 +1235,8 @@
         "burst3": false,
         "wgDmg": false,
         "starPlus": 0,
+        "showStar": 3,
+        "starColor": "yellow",
         "materials": 250,
         "price": 0
       },
@@ -1088,6 +1250,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 4,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -1101,6 +1265,8 @@
         "burst3": false,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 4,
+        "starColor": "orange",
         "materials": 150,
         "price": 10000
       },
@@ -1114,6 +1280,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 5,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       },
@@ -1127,6 +1295,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 1,
+        "showStar": 5,
+        "starColor": "red",
         "materials": 150,
         "price": 10000
       },
@@ -1140,6 +1310,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 2,
+        "showStar": 5,
+        "starColor": "violet",
         "materials": 150,
         "price": 10000
       },
@@ -1153,6 +1325,8 @@
         "burst3": true,
         "wgDmg": true,
         "starPlus": 0,
+        "showStar": 6,
+        "starColor": "yellow",
         "materials": 150,
         "price": 10000
       }

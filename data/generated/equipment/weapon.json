@@ -13,7 +13,7 @@
     "classLimit": null,
     "main": ["1", "1001"],
     "sub": "101",
-    "passive": null,
+    "passives": [],
     "breakLimit": "1|normal"
   },
   "2": {
@@ -30,7 +30,7 @@
     "classLimit": null,
     "main": ["2", "1002"],
     "sub": "101",
-    "passive": null,
+    "passives": [],
     "breakLimit": "1|magic"
   },
   "3": {
@@ -47,7 +47,7 @@
     "classLimit": null,
     "main": ["3", "1003"],
     "sub": "101",
-    "passive": null,
+    "passives": [],
     "breakLimit": "1|rare"
   },
   "4": {
@@ -61,10 +61,16 @@
     "star": 1,
     "icon": "TI_Equipment_Weapon_01",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1001",
+    "passives": [
+      {
+        "id": "1001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "5": {
@@ -81,7 +87,13 @@
     "classLimit": "defender",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1002",
+    "passives": [
+      {
+        "id": "1002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "6": {
@@ -98,7 +110,13 @@
     "classLimit": "ranger",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1003",
+    "passives": [
+      {
+        "id": "1003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "7": {
@@ -115,7 +133,13 @@
     "classLimit": "mage",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1004",
+    "passives": [
+      {
+        "id": "1004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "8": {
@@ -129,10 +153,16 @@
     "star": 1,
     "icon": "TI_Equipment_Weapon_01_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1005",
+    "passives": [
+      {
+        "id": "1005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "9": {
@@ -146,10 +176,16 @@
     "star": 1,
     "icon": "TI_Equipment_Weapon_01",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1006",
+    "passives": [
+      {
+        "id": "1006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "10": {
@@ -166,7 +202,13 @@
     "classLimit": "defender",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1007",
+    "passives": [
+      {
+        "id": "1007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "11": {
@@ -183,7 +225,13 @@
     "classLimit": "ranger",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1008",
+    "passives": [
+      {
+        "id": "1008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "12": {
@@ -200,7 +248,13 @@
     "classLimit": "mage",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1009",
+    "passives": [
+      {
+        "id": "1009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "13": {
@@ -214,10 +268,16 @@
     "star": 1,
     "icon": "TI_Equipment_Weapon_01_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1010",
+    "passives": [
+      {
+        "id": "1010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "14": {
@@ -231,10 +291,16 @@
     "star": 1,
     "icon": "TI_Equipment_Weapon_01",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1011",
+    "passives": [
+      {
+        "id": "1011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "15": {
@@ -251,7 +317,13 @@
     "classLimit": "defender",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1012",
+    "passives": [
+      {
+        "id": "1012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "16": {
@@ -268,7 +340,13 @@
     "classLimit": "ranger",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1013",
+    "passives": [
+      {
+        "id": "1013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "17": {
@@ -285,7 +363,13 @@
     "classLimit": "mage",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1014",
+    "passives": [
+      {
+        "id": "1014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "18": {
@@ -299,10 +383,16 @@
     "star": 1,
     "icon": "TI_Equipment_Weapon_01_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1015",
+    "passives": [
+      {
+        "id": "1015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "19": {
@@ -316,10 +406,16 @@
     "star": 1,
     "icon": "TI_Equipment_Weapon_01",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1016",
+    "passives": [
+      {
+        "id": "1016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "20": {
@@ -336,7 +432,13 @@
     "classLimit": "defender",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1017",
+    "passives": [
+      {
+        "id": "1017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "21": {
@@ -350,10 +452,16 @@
     "star": 1,
     "icon": "TI_Equipment_Weapon_01_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1018",
+    "passives": [
+      {
+        "id": "1018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "22": {
@@ -370,7 +478,13 @@
     "classLimit": "mage",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1019",
+    "passives": [
+      {
+        "id": "1019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "23": {
@@ -387,7 +501,13 @@
     "classLimit": "ranger",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1020",
+    "passives": [
+      {
+        "id": "1020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "24": {
@@ -401,10 +521,16 @@
     "star": 1,
     "icon": "TI_Equipment_Weapon_01",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1021",
+    "passives": [
+      {
+        "id": "1021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "25": {
@@ -421,7 +547,13 @@
     "classLimit": "defender",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1022",
+    "passives": [
+      {
+        "id": "1022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "26": {
@@ -435,10 +567,16 @@
     "star": 1,
     "icon": "TI_Equipment_Weapon_01_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1023",
+    "passives": [
+      {
+        "id": "1023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "27": {
@@ -455,7 +593,13 @@
     "classLimit": "mage",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1024",
+    "passives": [
+      {
+        "id": "1024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "28": {
@@ -472,7 +616,13 @@
     "classLimit": "ranger",
     "main": ["4", "1004"],
     "sub": "101",
-    "passive": "1025",
+    "passives": [
+      {
+        "id": "1025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "1|unique"
   },
   "151": {
@@ -489,7 +639,7 @@
     "classLimit": null,
     "main": ["5", "1011"],
     "sub": "102",
-    "passive": null,
+    "passives": [],
     "breakLimit": "2|normal"
   },
   "152": {
@@ -506,7 +656,7 @@
     "classLimit": null,
     "main": ["6", "1012"],
     "sub": "102",
-    "passive": null,
+    "passives": [],
     "breakLimit": "2|magic"
   },
   "153": {
@@ -523,7 +673,7 @@
     "classLimit": null,
     "main": ["7", "1013"],
     "sub": "102",
-    "passive": null,
+    "passives": [],
     "breakLimit": "2|rare"
   },
   "154": {
@@ -537,10 +687,16 @@
     "star": 2,
     "icon": "TI_Equipment_Weapon_02",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1001",
+    "passives": [
+      {
+        "id": "1001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "155": {
@@ -557,7 +713,13 @@
     "classLimit": "defender",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1002",
+    "passives": [
+      {
+        "id": "1002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "156": {
@@ -574,7 +736,13 @@
     "classLimit": "ranger",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1003",
+    "passives": [
+      {
+        "id": "1003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "157": {
@@ -591,7 +759,13 @@
     "classLimit": "mage",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1004",
+    "passives": [
+      {
+        "id": "1004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "158": {
@@ -605,10 +779,16 @@
     "star": 2,
     "icon": "TI_Equipment_Weapon_02_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1005",
+    "passives": [
+      {
+        "id": "1005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "159": {
@@ -622,10 +802,16 @@
     "star": 2,
     "icon": "TI_Equipment_Weapon_02",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1006",
+    "passives": [
+      {
+        "id": "1006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "160": {
@@ -642,7 +828,13 @@
     "classLimit": "defender",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1007",
+    "passives": [
+      {
+        "id": "1007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "161": {
@@ -659,7 +851,13 @@
     "classLimit": "ranger",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1008",
+    "passives": [
+      {
+        "id": "1008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "162": {
@@ -676,7 +874,13 @@
     "classLimit": "mage",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1009",
+    "passives": [
+      {
+        "id": "1009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "163": {
@@ -690,10 +894,16 @@
     "star": 2,
     "icon": "TI_Equipment_Weapon_02_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1010",
+    "passives": [
+      {
+        "id": "1010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "164": {
@@ -707,10 +917,16 @@
     "star": 2,
     "icon": "TI_Equipment_Weapon_02",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1011",
+    "passives": [
+      {
+        "id": "1011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "165": {
@@ -727,7 +943,13 @@
     "classLimit": "defender",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1012",
+    "passives": [
+      {
+        "id": "1012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "166": {
@@ -744,7 +966,13 @@
     "classLimit": "ranger",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1013",
+    "passives": [
+      {
+        "id": "1013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "167": {
@@ -761,7 +989,13 @@
     "classLimit": "mage",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1014",
+    "passives": [
+      {
+        "id": "1014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "168": {
@@ -775,10 +1009,16 @@
     "star": 2,
     "icon": "TI_Equipment_Weapon_02_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1015",
+    "passives": [
+      {
+        "id": "1015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "169": {
@@ -792,10 +1032,16 @@
     "star": 2,
     "icon": "TI_Equipment_Weapon_02",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1016",
+    "passives": [
+      {
+        "id": "1016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "170": {
@@ -812,7 +1058,13 @@
     "classLimit": "defender",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1017",
+    "passives": [
+      {
+        "id": "1017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "171": {
@@ -826,10 +1078,16 @@
     "star": 2,
     "icon": "TI_Equipment_Weapon_02_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1018",
+    "passives": [
+      {
+        "id": "1018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "172": {
@@ -846,7 +1104,13 @@
     "classLimit": "mage",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1019",
+    "passives": [
+      {
+        "id": "1019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "173": {
@@ -863,7 +1127,13 @@
     "classLimit": "ranger",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1020",
+    "passives": [
+      {
+        "id": "1020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "174": {
@@ -877,10 +1147,16 @@
     "star": 2,
     "icon": "TI_Equipment_Weapon_02",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1021",
+    "passives": [
+      {
+        "id": "1021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "175": {
@@ -897,7 +1173,13 @@
     "classLimit": "defender",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1022",
+    "passives": [
+      {
+        "id": "1022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "176": {
@@ -911,10 +1193,16 @@
     "star": 2,
     "icon": "TI_Equipment_Weapon_02_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1023",
+    "passives": [
+      {
+        "id": "1023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "177": {
@@ -931,7 +1219,13 @@
     "classLimit": "mage",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1024",
+    "passives": [
+      {
+        "id": "1024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "178": {
@@ -948,7 +1242,13 @@
     "classLimit": "ranger",
     "main": ["8", "1014"],
     "sub": "102",
-    "passive": "1025",
+    "passives": [
+      {
+        "id": "1025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "2|unique"
   },
   "301": {
@@ -965,7 +1265,7 @@
     "classLimit": null,
     "main": ["9", "1021"],
     "sub": "103",
-    "passive": null,
+    "passives": [],
     "breakLimit": "3|normal"
   },
   "302": {
@@ -982,7 +1282,7 @@
     "classLimit": null,
     "main": ["10", "1022"],
     "sub": "103",
-    "passive": null,
+    "passives": [],
     "breakLimit": "3|magic"
   },
   "303": {
@@ -999,7 +1299,7 @@
     "classLimit": null,
     "main": ["11", "1023"],
     "sub": "103",
-    "passive": null,
+    "passives": [],
     "breakLimit": "3|rare"
   },
   "304": {
@@ -1013,10 +1313,16 @@
     "star": 3,
     "icon": "TI_Equipment_Weapon_03",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1001",
+    "passives": [
+      {
+        "id": "1001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "305": {
@@ -1033,7 +1339,13 @@
     "classLimit": "defender",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1002",
+    "passives": [
+      {
+        "id": "1002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "306": {
@@ -1050,7 +1362,13 @@
     "classLimit": "ranger",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1003",
+    "passives": [
+      {
+        "id": "1003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "307": {
@@ -1067,7 +1385,13 @@
     "classLimit": "mage",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1004",
+    "passives": [
+      {
+        "id": "1004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "308": {
@@ -1081,10 +1405,16 @@
     "star": 3,
     "icon": "TI_Equipment_Weapon_03_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1005",
+    "passives": [
+      {
+        "id": "1005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "309": {
@@ -1098,10 +1428,16 @@
     "star": 3,
     "icon": "TI_Equipment_Weapon_03",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1006",
+    "passives": [
+      {
+        "id": "1006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "310": {
@@ -1118,7 +1454,13 @@
     "classLimit": "defender",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1007",
+    "passives": [
+      {
+        "id": "1007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "311": {
@@ -1135,7 +1477,13 @@
     "classLimit": "ranger",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1008",
+    "passives": [
+      {
+        "id": "1008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "312": {
@@ -1152,7 +1500,13 @@
     "classLimit": "mage",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1009",
+    "passives": [
+      {
+        "id": "1009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "313": {
@@ -1166,10 +1520,16 @@
     "star": 3,
     "icon": "TI_Equipment_Weapon_03_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1010",
+    "passives": [
+      {
+        "id": "1010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "314": {
@@ -1183,10 +1543,16 @@
     "star": 3,
     "icon": "TI_Equipment_Weapon_03",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1011",
+    "passives": [
+      {
+        "id": "1011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "315": {
@@ -1203,7 +1569,13 @@
     "classLimit": "defender",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1012",
+    "passives": [
+      {
+        "id": "1012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "316": {
@@ -1220,7 +1592,13 @@
     "classLimit": "ranger",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1013",
+    "passives": [
+      {
+        "id": "1013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "317": {
@@ -1237,7 +1615,13 @@
     "classLimit": "mage",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1014",
+    "passives": [
+      {
+        "id": "1014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "318": {
@@ -1251,10 +1635,16 @@
     "star": 3,
     "icon": "TI_Equipment_Weapon_03_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1015",
+    "passives": [
+      {
+        "id": "1015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "319": {
@@ -1268,10 +1658,16 @@
     "star": 3,
     "icon": "TI_Equipment_Weapon_03",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1016",
+    "passives": [
+      {
+        "id": "1016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "320": {
@@ -1288,7 +1684,13 @@
     "classLimit": "defender",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1017",
+    "passives": [
+      {
+        "id": "1017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "321": {
@@ -1302,10 +1704,16 @@
     "star": 3,
     "icon": "TI_Equipment_Weapon_03_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1018",
+    "passives": [
+      {
+        "id": "1018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "322": {
@@ -1322,7 +1730,13 @@
     "classLimit": "mage",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1019",
+    "passives": [
+      {
+        "id": "1019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "323": {
@@ -1339,7 +1753,13 @@
     "classLimit": "ranger",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1020",
+    "passives": [
+      {
+        "id": "1020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "324": {
@@ -1353,10 +1773,16 @@
     "star": 3,
     "icon": "TI_Equipment_Weapon_03",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1021",
+    "passives": [
+      {
+        "id": "1021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "325": {
@@ -1373,7 +1799,13 @@
     "classLimit": "defender",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1022",
+    "passives": [
+      {
+        "id": "1022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "326": {
@@ -1387,10 +1819,16 @@
     "star": 3,
     "icon": "TI_Equipment_Weapon_03_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1023",
+    "passives": [
+      {
+        "id": "1023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "327": {
@@ -1407,7 +1845,13 @@
     "classLimit": "mage",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1024",
+    "passives": [
+      {
+        "id": "1024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "328": {
@@ -1424,7 +1868,13 @@
     "classLimit": "ranger",
     "main": ["12", "1024"],
     "sub": "103",
-    "passive": "1025",
+    "passives": [
+      {
+        "id": "1025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "3|unique"
   },
   "451": {
@@ -1441,7 +1891,7 @@
     "classLimit": null,
     "main": ["13", "1031"],
     "sub": "104",
-    "passive": null,
+    "passives": [],
     "breakLimit": "4|normal"
   },
   "452": {
@@ -1458,7 +1908,7 @@
     "classLimit": null,
     "main": ["14", "1032"],
     "sub": "104",
-    "passive": null,
+    "passives": [],
     "breakLimit": "4|magic"
   },
   "453": {
@@ -1475,7 +1925,7 @@
     "classLimit": null,
     "main": ["15", "1033"],
     "sub": "104",
-    "passive": null,
+    "passives": [],
     "breakLimit": "4|rare"
   },
   "454": {
@@ -1489,10 +1939,16 @@
     "star": 4,
     "icon": "TI_Equipment_Weapon_04",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1001",
+    "passives": [
+      {
+        "id": "1001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "455": {
@@ -1509,7 +1965,13 @@
     "classLimit": "defender",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1002",
+    "passives": [
+      {
+        "id": "1002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "456": {
@@ -1526,7 +1988,13 @@
     "classLimit": "ranger",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1003",
+    "passives": [
+      {
+        "id": "1003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "457": {
@@ -1543,7 +2011,13 @@
     "classLimit": "mage",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1004",
+    "passives": [
+      {
+        "id": "1004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "458": {
@@ -1557,10 +2031,16 @@
     "star": 4,
     "icon": "TI_Equipment_Weapon_04_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1005",
+    "passives": [
+      {
+        "id": "1005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "459": {
@@ -1574,10 +2054,16 @@
     "star": 4,
     "icon": "TI_Equipment_Weapon_04",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1006",
+    "passives": [
+      {
+        "id": "1006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "460": {
@@ -1594,7 +2080,13 @@
     "classLimit": "defender",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1007",
+    "passives": [
+      {
+        "id": "1007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "461": {
@@ -1611,7 +2103,13 @@
     "classLimit": "ranger",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1008",
+    "passives": [
+      {
+        "id": "1008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "462": {
@@ -1628,7 +2126,13 @@
     "classLimit": "mage",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1009",
+    "passives": [
+      {
+        "id": "1009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "463": {
@@ -1642,10 +2146,16 @@
     "star": 4,
     "icon": "TI_Equipment_Weapon_04_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1010",
+    "passives": [
+      {
+        "id": "1010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "464": {
@@ -1659,10 +2169,16 @@
     "star": 4,
     "icon": "TI_Equipment_Weapon_04",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1011",
+    "passives": [
+      {
+        "id": "1011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "465": {
@@ -1679,7 +2195,13 @@
     "classLimit": "defender",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1012",
+    "passives": [
+      {
+        "id": "1012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "466": {
@@ -1696,7 +2218,13 @@
     "classLimit": "ranger",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1013",
+    "passives": [
+      {
+        "id": "1013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "467": {
@@ -1713,7 +2241,13 @@
     "classLimit": "mage",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1014",
+    "passives": [
+      {
+        "id": "1014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "468": {
@@ -1727,10 +2261,16 @@
     "star": 4,
     "icon": "TI_Equipment_Weapon_04_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1015",
+    "passives": [
+      {
+        "id": "1015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "469": {
@@ -1744,10 +2284,16 @@
     "star": 4,
     "icon": "TI_Equipment_Weapon_04",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1016",
+    "passives": [
+      {
+        "id": "1016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "470": {
@@ -1764,7 +2310,13 @@
     "classLimit": "defender",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1017",
+    "passives": [
+      {
+        "id": "1017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "471": {
@@ -1778,10 +2330,16 @@
     "star": 4,
     "icon": "TI_Equipment_Weapon_04_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1018",
+    "passives": [
+      {
+        "id": "1018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "472": {
@@ -1798,7 +2356,13 @@
     "classLimit": "mage",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1019",
+    "passives": [
+      {
+        "id": "1019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "473": {
@@ -1815,7 +2379,13 @@
     "classLimit": "ranger",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1020",
+    "passives": [
+      {
+        "id": "1020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "474": {
@@ -1829,10 +2399,16 @@
     "star": 4,
     "icon": "TI_Equipment_Weapon_04",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1021",
+    "passives": [
+      {
+        "id": "1021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "475": {
@@ -1849,7 +2425,13 @@
     "classLimit": "defender",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1022",
+    "passives": [
+      {
+        "id": "1022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "476": {
@@ -1863,10 +2445,16 @@
     "star": 4,
     "icon": "TI_Equipment_Weapon_04_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1023",
+    "passives": [
+      {
+        "id": "1023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "477": {
@@ -1883,7 +2471,13 @@
     "classLimit": "mage",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1024",
+    "passives": [
+      {
+        "id": "1024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "478": {
@@ -1900,7 +2494,13 @@
     "classLimit": "ranger",
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1025",
+    "passives": [
+      {
+        "id": "1025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "479": {
@@ -1917,7 +2517,13 @@
     "classLimit": null,
     "main": ["16", "1034"],
     "sub": "104",
-    "passive": "1026",
+    "passives": [
+      {
+        "id": "1026",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "4|unique"
   },
   "601": {
@@ -1934,7 +2540,7 @@
     "classLimit": null,
     "main": ["17", "1041"],
     "sub": "105",
-    "passive": null,
+    "passives": [],
     "breakLimit": "5|normal"
   },
   "602": {
@@ -1951,7 +2557,7 @@
     "classLimit": null,
     "main": ["18", "1042"],
     "sub": "105",
-    "passive": null,
+    "passives": [],
     "breakLimit": "5|magic"
   },
   "603": {
@@ -1968,7 +2574,7 @@
     "classLimit": null,
     "main": ["19", "1043"],
     "sub": "105",
-    "passive": null,
+    "passives": [],
     "breakLimit": "5|rare"
   },
   "604": {
@@ -1982,10 +2588,16 @@
     "star": 5,
     "icon": "TI_Equipment_Weapon_05",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1001",
+    "passives": [
+      {
+        "id": "1001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "605": {
@@ -2002,7 +2614,13 @@
     "classLimit": "defender",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1002",
+    "passives": [
+      {
+        "id": "1002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "606": {
@@ -2019,7 +2637,13 @@
     "classLimit": "ranger",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1003",
+    "passives": [
+      {
+        "id": "1003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "607": {
@@ -2036,7 +2660,13 @@
     "classLimit": "mage",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1004",
+    "passives": [
+      {
+        "id": "1004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "608": {
@@ -2050,10 +2680,16 @@
     "star": 5,
     "icon": "TI_Equipment_Weapon_05_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1005",
+    "passives": [
+      {
+        "id": "1005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "609": {
@@ -2067,10 +2703,16 @@
     "star": 5,
     "icon": "TI_Equipment_Weapon_05",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1006",
+    "passives": [
+      {
+        "id": "1006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "610": {
@@ -2087,7 +2729,13 @@
     "classLimit": "defender",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1007",
+    "passives": [
+      {
+        "id": "1007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "611": {
@@ -2104,7 +2752,13 @@
     "classLimit": "ranger",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1008",
+    "passives": [
+      {
+        "id": "1008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "612": {
@@ -2121,7 +2775,13 @@
     "classLimit": "mage",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1009",
+    "passives": [
+      {
+        "id": "1009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "613": {
@@ -2135,10 +2795,16 @@
     "star": 5,
     "icon": "TI_Equipment_Weapon_05_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1010",
+    "passives": [
+      {
+        "id": "1010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "614": {
@@ -2152,10 +2818,16 @@
     "star": 5,
     "icon": "TI_Equipment_Weapon_05",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1011",
+    "passives": [
+      {
+        "id": "1011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "615": {
@@ -2172,7 +2844,13 @@
     "classLimit": "defender",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1012",
+    "passives": [
+      {
+        "id": "1012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "616": {
@@ -2189,7 +2867,13 @@
     "classLimit": "ranger",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1013",
+    "passives": [
+      {
+        "id": "1013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "617": {
@@ -2206,7 +2890,13 @@
     "classLimit": "mage",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1014",
+    "passives": [
+      {
+        "id": "1014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "618": {
@@ -2220,10 +2910,16 @@
     "star": 5,
     "icon": "TI_Equipment_Weapon_05_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1015",
+    "passives": [
+      {
+        "id": "1015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "619": {
@@ -2237,10 +2933,16 @@
     "star": 5,
     "icon": "TI_Equipment_Weapon_05",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1016",
+    "passives": [
+      {
+        "id": "1016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "620": {
@@ -2257,7 +2959,13 @@
     "classLimit": "defender",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1017",
+    "passives": [
+      {
+        "id": "1017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "621": {
@@ -2271,10 +2979,16 @@
     "star": 5,
     "icon": "TI_Equipment_Weapon_05_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1018",
+    "passives": [
+      {
+        "id": "1018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "622": {
@@ -2291,7 +3005,13 @@
     "classLimit": "mage",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1019",
+    "passives": [
+      {
+        "id": "1019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "623": {
@@ -2308,7 +3028,13 @@
     "classLimit": "ranger",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1020",
+    "passives": [
+      {
+        "id": "1020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "624": {
@@ -2322,10 +3048,16 @@
     "star": 5,
     "icon": "TI_Equipment_Weapon_05",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1021",
+    "passives": [
+      {
+        "id": "1021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "625": {
@@ -2342,7 +3074,13 @@
     "classLimit": "defender",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1022",
+    "passives": [
+      {
+        "id": "1022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "626": {
@@ -2356,10 +3094,16 @@
     "star": 5,
     "icon": "TI_Equipment_Weapon_05_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1023",
+    "passives": [
+      {
+        "id": "1023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "627": {
@@ -2376,7 +3120,13 @@
     "classLimit": "mage",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1024",
+    "passives": [
+      {
+        "id": "1024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "628": {
@@ -2393,7 +3143,13 @@
     "classLimit": "ranger",
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": "1025",
+    "passives": [
+      {
+        "id": "1025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "629": {
@@ -2410,7 +3166,13 @@
     "classLimit": "mage",
     "main": ["25", "1061"],
     "sub": "105",
-    "passive": "4001",
+    "passives": [
+      {
+        "id": "4001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "630": {
@@ -2424,10 +3186,16 @@
     "star": 5,
     "icon": "TI_Equipment_Weapon_05",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["26", "1062"],
     "sub": "105",
-    "passive": "4002",
+    "passives": [
+      {
+        "id": "4002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "631": {
@@ -2444,7 +3212,13 @@
     "classLimit": "ranger",
     "main": ["27", "1063"],
     "sub": "105",
-    "passive": "4003",
+    "passives": [
+      {
+        "id": "4003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "632": {
@@ -2461,7 +3235,13 @@
     "classLimit": "ranger",
     "main": ["28", "1064"],
     "sub": "105",
-    "passive": "4004",
+    "passives": [
+      {
+        "id": "4004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "633": {
@@ -2478,7 +3258,13 @@
     "classLimit": "defender",
     "main": ["28", "1064"],
     "sub": "105",
-    "passive": "4005",
+    "passives": [
+      {
+        "id": "4005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "634": {
@@ -2492,10 +3278,16 @@
     "star": 5,
     "icon": "TI_Equipment_Weapon_05",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["28", "1064"],
     "sub": "105",
-    "passive": "4006",
+    "passives": [
+      {
+        "id": "4006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "635": {
@@ -2512,7 +3304,13 @@
     "classLimit": "mage",
     "main": ["28", "1064"],
     "sub": "105",
-    "passive": "4009",
+    "passives": [
+      {
+        "id": "4009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "636": {
@@ -2529,7 +3327,13 @@
     "classLimit": "ranger",
     "main": ["28", "1064"],
     "sub": "105",
-    "passive": "4010",
+    "passives": [
+      {
+        "id": "4010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "637": {
@@ -2546,7 +3350,13 @@
     "classLimit": "mage",
     "main": ["28", "1064"],
     "sub": "106",
-    "passive": "4013",
+    "passives": [
+      {
+        "id": "4013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "638": {
@@ -2563,7 +3373,13 @@
     "classLimit": "ranger",
     "main": ["27", "1063"],
     "sub": "106",
-    "passive": "4015",
+    "passives": [
+      {
+        "id": "4015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "639": {
@@ -2580,7 +3396,13 @@
     "classLimit": "defender",
     "main": ["27", "1063"],
     "sub": "106",
-    "passive": "4016",
+    "passives": [
+      {
+        "id": "4016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "640": {
@@ -2597,7 +3419,13 @@
     "classLimit": "ranger",
     "main": ["27", "1063"],
     "sub": "105",
-    "passive": "4021",
+    "passives": [
+      {
+        "id": "4021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "641": {
@@ -2611,10 +3439,16 @@
     "star": 5,
     "icon": "TI_Equipment_Weapon_05",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["27", "1063"],
     "sub": "105",
-    "passive": "4022",
+    "passives": [
+      {
+        "id": "4022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "642": {
@@ -2631,7 +3465,13 @@
     "classLimit": "mage",
     "main": ["27", "1063"],
     "sub": "105",
-    "passive": "4023",
+    "passives": [
+      {
+        "id": "4023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "643": {
@@ -2648,7 +3488,13 @@
     "classLimit": "ranger",
     "main": ["27", "1063"],
     "sub": "105",
-    "passive": "4024",
+    "passives": [
+      {
+        "id": "4024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "644": {
@@ -2665,7 +3511,13 @@
     "classLimit": "defender",
     "main": ["20", "1063"],
     "sub": "105",
-    "passive": "4027",
+    "passives": [
+      {
+        "id": "4027",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "645": {
@@ -2679,10 +3531,16 @@
     "star": 5,
     "icon": "TI_Equipment_Weapon_04_Product",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["20", "1044"],
     "sub": "106",
-    "passive": "1038",
+    "passives": [
+      {
+        "id": "1038",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "646": {
@@ -2699,7 +3557,13 @@
     "classLimit": "defender",
     "main": ["20", "1044"],
     "sub": "106",
-    "passive": "1039",
+    "passives": [
+      {
+        "id": "1039",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "647": {
@@ -2716,7 +3580,13 @@
     "classLimit": "ranger",
     "main": ["20", "1044"],
     "sub": "106",
-    "passive": "1040",
+    "passives": [
+      {
+        "id": "1040",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "648": {
@@ -2733,7 +3603,13 @@
     "classLimit": "mage",
     "main": ["20", "1044"],
     "sub": "106",
-    "passive": "1041",
+    "passives": [
+      {
+        "id": "1041",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "649": {
@@ -2747,10 +3623,16 @@
     "star": 5,
     "icon": "TI_Equipment_Weapon_04_Product",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["20", "1044"],
     "sub": "106",
-    "passive": "1042",
+    "passives": [
+      {
+        "id": "1042",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "5|unique"
   },
   "650": {
@@ -2767,7 +3649,7 @@
     "classLimit": null,
     "main": ["30", "1066"],
     "sub": "105",
-    "passive": null,
+    "passives": [],
     "breakLimit": "5|unique"
   },
   "652": {
@@ -2784,7 +3666,7 @@
     "classLimit": null,
     "main": ["30", "1068"],
     "sub": "105",
-    "passive": null,
+    "passives": [],
     "breakLimit": "5|unique"
   },
   "653": {
@@ -2801,7 +3683,7 @@
     "classLimit": null,
     "main": ["20", "1044"],
     "sub": "105",
-    "passive": null,
+    "passives": [],
     "breakLimit": "5|unique"
   },
   "654": {
@@ -2818,7 +3700,13 @@
     "classLimit": "defender",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1043",
+    "passives": [
+      {
+        "id": "1043",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "655": {
@@ -2835,7 +3723,13 @@
     "classLimit": "mage",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1044",
+    "passives": [
+      {
+        "id": "1044",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "751": {
@@ -2852,7 +3746,7 @@
     "classLimit": null,
     "main": ["21", "1051"],
     "sub": "106",
-    "passive": null,
+    "passives": [],
     "breakLimit": "6|normal"
   },
   "752": {
@@ -2869,7 +3763,7 @@
     "classLimit": null,
     "main": ["22", "1052"],
     "sub": "106",
-    "passive": null,
+    "passives": [],
     "breakLimit": "6|magic"
   },
   "753": {
@@ -2886,7 +3780,7 @@
     "classLimit": null,
     "main": ["23", "1053"],
     "sub": "106",
-    "passive": null,
+    "passives": [],
     "breakLimit": "6|rare"
   },
   "754": {
@@ -2900,10 +3794,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": true,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1001",
+    "passives": [
+      {
+        "id": "1001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "755": {
@@ -2920,7 +3820,13 @@
     "classLimit": "defender",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1002",
+    "passives": [
+      {
+        "id": "1002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "756": {
@@ -2937,7 +3843,13 @@
     "classLimit": "ranger",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1003",
+    "passives": [
+      {
+        "id": "1003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "757": {
@@ -2954,7 +3866,13 @@
     "classLimit": "mage",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1004",
+    "passives": [
+      {
+        "id": "1004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "758": {
@@ -2968,10 +3886,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": true,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1005",
+    "passives": [
+      {
+        "id": "1005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "759": {
@@ -2985,10 +3909,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": true,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1006",
+    "passives": [
+      {
+        "id": "1006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "760": {
@@ -3005,7 +3935,13 @@
     "classLimit": "defender",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1007",
+    "passives": [
+      {
+        "id": "1007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "761": {
@@ -3022,7 +3958,13 @@
     "classLimit": "ranger",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1008",
+    "passives": [
+      {
+        "id": "1008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "762": {
@@ -3039,7 +3981,13 @@
     "classLimit": "mage",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1009",
+    "passives": [
+      {
+        "id": "1009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "763": {
@@ -3053,10 +4001,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": true,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1010",
+    "passives": [
+      {
+        "id": "1010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "764": {
@@ -3070,10 +4024,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": true,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1011",
+    "passives": [
+      {
+        "id": "1011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "765": {
@@ -3090,7 +4050,13 @@
     "classLimit": "defender",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1012",
+    "passives": [
+      {
+        "id": "1012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "766": {
@@ -3107,7 +4073,13 @@
     "classLimit": "ranger",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1013",
+    "passives": [
+      {
+        "id": "1013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "767": {
@@ -3124,7 +4096,13 @@
     "classLimit": "mage",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1014",
+    "passives": [
+      {
+        "id": "1014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "768": {
@@ -3138,10 +4116,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": true,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1015",
+    "passives": [
+      {
+        "id": "1015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "769": {
@@ -3155,10 +4139,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": true,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1016",
+    "passives": [
+      {
+        "id": "1016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "770": {
@@ -3175,7 +4165,13 @@
     "classLimit": "defender",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1017",
+    "passives": [
+      {
+        "id": "1017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "771": {
@@ -3189,10 +4185,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": true,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1018",
+    "passives": [
+      {
+        "id": "1018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "772": {
@@ -3209,7 +4211,13 @@
     "classLimit": "mage",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1019",
+    "passives": [
+      {
+        "id": "1019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "773": {
@@ -3226,7 +4234,13 @@
     "classLimit": "ranger",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1020",
+    "passives": [
+      {
+        "id": "1020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "774": {
@@ -3240,10 +4254,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": true,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1021",
+    "passives": [
+      {
+        "id": "1021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "775": {
@@ -3260,7 +4280,13 @@
     "classLimit": "defender",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1022",
+    "passives": [
+      {
+        "id": "1022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "776": {
@@ -3274,10 +4300,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": true,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1023",
+    "passives": [
+      {
+        "id": "1023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "777": {
@@ -3294,7 +4326,13 @@
     "classLimit": "mage",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1024",
+    "passives": [
+      {
+        "id": "1024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "778": {
@@ -3311,7 +4349,13 @@
     "classLimit": "ranger",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1025",
+    "passives": [
+      {
+        "id": "1025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "779": {
@@ -3328,7 +4372,7 @@
     "classLimit": null,
     "main": ["29", "1065"],
     "sub": "106",
-    "passive": null,
+    "passives": [],
     "breakLimit": "6|unique"
   },
   "780": {
@@ -3345,7 +4389,13 @@
     "classLimit": null,
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1027",
+    "passives": [
+      {
+        "id": "1027",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "781": {
@@ -3359,10 +4409,16 @@
     "star": 6,
     "icon": "TI_Equipment_Irregular_Weapon_01",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1028",
+    "passives": [
+      {
+        "id": "1028",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "782": {
@@ -3379,7 +4435,13 @@
     "classLimit": "defender",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1029",
+    "passives": [
+      {
+        "id": "1029",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "783": {
@@ -3396,7 +4458,13 @@
     "classLimit": "ranger",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1030",
+    "passives": [
+      {
+        "id": "1030",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "784": {
@@ -3413,7 +4481,13 @@
     "classLimit": "mage",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1031",
+    "passives": [
+      {
+        "id": "1031",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "785": {
@@ -3427,10 +4501,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest_IR_01",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1032",
+    "passives": [
+      {
+        "id": "1032",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "786": {
@@ -3444,10 +4524,16 @@
     "star": 6,
     "icon": "TI_Equipment_Irregular_Weapon_02",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1033",
+    "passives": [
+      {
+        "id": "1033",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "787": {
@@ -3464,7 +4550,13 @@
     "classLimit": "defender",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1034",
+    "passives": [
+      {
+        "id": "1034",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "788": {
@@ -3481,7 +4573,13 @@
     "classLimit": "ranger",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1035",
+    "passives": [
+      {
+        "id": "1035",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "789": {
@@ -3498,7 +4596,13 @@
     "classLimit": "mage",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1036",
+    "passives": [
+      {
+        "id": "1036",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "790": {
@@ -3512,10 +4616,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest_IR_02",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "1054"],
     "sub": "106",
-    "passive": "1037",
+    "passives": [
+      {
+        "id": "1037",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92001": {
@@ -3529,10 +4639,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1001",
+    "passives": [
+      {
+        "id": "1001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92002": {
@@ -3546,10 +4662,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1001",
+    "passives": [
+      {
+        "id": "1001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92003": {
@@ -3563,10 +4685,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1001",
+    "passives": [
+      {
+        "id": "1001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92011": {
@@ -3583,7 +4711,13 @@
     "classLimit": "defender",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1002",
+    "passives": [
+      {
+        "id": "1002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92012": {
@@ -3600,7 +4734,13 @@
     "classLimit": "defender",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1002",
+    "passives": [
+      {
+        "id": "1002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92013": {
@@ -3617,7 +4757,13 @@
     "classLimit": "defender",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1002",
+    "passives": [
+      {
+        "id": "1002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92021": {
@@ -3634,7 +4780,13 @@
     "classLimit": "ranger",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1003",
+    "passives": [
+      {
+        "id": "1003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92022": {
@@ -3651,7 +4803,13 @@
     "classLimit": "ranger",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1003",
+    "passives": [
+      {
+        "id": "1003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92023": {
@@ -3668,7 +4826,13 @@
     "classLimit": "ranger",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1003",
+    "passives": [
+      {
+        "id": "1003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92031": {
@@ -3685,7 +4849,13 @@
     "classLimit": "mage",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1004",
+    "passives": [
+      {
+        "id": "1004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92032": {
@@ -3702,7 +4872,13 @@
     "classLimit": "mage",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1004",
+    "passives": [
+      {
+        "id": "1004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92033": {
@@ -3719,7 +4895,13 @@
     "classLimit": "mage",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1004",
+    "passives": [
+      {
+        "id": "1004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92041": {
@@ -3733,10 +4915,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1005",
+    "passives": [
+      {
+        "id": "1005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92042": {
@@ -3750,10 +4938,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1005",
+    "passives": [
+      {
+        "id": "1005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92043": {
@@ -3767,10 +4961,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1005",
+    "passives": [
+      {
+        "id": "1005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92051": {
@@ -3784,10 +4984,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1006",
+    "passives": [
+      {
+        "id": "1006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92052": {
@@ -3801,10 +5007,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1006",
+    "passives": [
+      {
+        "id": "1006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92053": {
@@ -3818,10 +5030,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1006",
+    "passives": [
+      {
+        "id": "1006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92061": {
@@ -3838,7 +5056,13 @@
     "classLimit": "defender",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1007",
+    "passives": [
+      {
+        "id": "1007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92062": {
@@ -3855,7 +5079,13 @@
     "classLimit": "defender",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1007",
+    "passives": [
+      {
+        "id": "1007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92063": {
@@ -3872,7 +5102,13 @@
     "classLimit": "defender",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1007",
+    "passives": [
+      {
+        "id": "1007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92071": {
@@ -3889,7 +5125,13 @@
     "classLimit": "ranger",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1008",
+    "passives": [
+      {
+        "id": "1008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92072": {
@@ -3906,7 +5148,13 @@
     "classLimit": "ranger",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1008",
+    "passives": [
+      {
+        "id": "1008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92073": {
@@ -3923,7 +5171,13 @@
     "classLimit": "ranger",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1008",
+    "passives": [
+      {
+        "id": "1008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92081": {
@@ -3940,7 +5194,13 @@
     "classLimit": "mage",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1009",
+    "passives": [
+      {
+        "id": "1009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92082": {
@@ -3957,7 +5217,13 @@
     "classLimit": "mage",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1009",
+    "passives": [
+      {
+        "id": "1009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92083": {
@@ -3974,7 +5240,13 @@
     "classLimit": "mage",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1009",
+    "passives": [
+      {
+        "id": "1009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92091": {
@@ -3988,10 +5260,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1010",
+    "passives": [
+      {
+        "id": "1010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92092": {
@@ -4005,10 +5283,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1010",
+    "passives": [
+      {
+        "id": "1010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92093": {
@@ -4022,10 +5306,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1010",
+    "passives": [
+      {
+        "id": "1010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92101": {
@@ -4039,10 +5329,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1011",
+    "passives": [
+      {
+        "id": "1011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92102": {
@@ -4056,10 +5352,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1011",
+    "passives": [
+      {
+        "id": "1011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92103": {
@@ -4073,10 +5375,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1011",
+    "passives": [
+      {
+        "id": "1011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92111": {
@@ -4093,7 +5401,13 @@
     "classLimit": "defender",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1012",
+    "passives": [
+      {
+        "id": "1012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92112": {
@@ -4110,7 +5424,13 @@
     "classLimit": "defender",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1012",
+    "passives": [
+      {
+        "id": "1012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92113": {
@@ -4127,7 +5447,13 @@
     "classLimit": "defender",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1012",
+    "passives": [
+      {
+        "id": "1012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92121": {
@@ -4144,7 +5470,13 @@
     "classLimit": "ranger",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1013",
+    "passives": [
+      {
+        "id": "1013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92122": {
@@ -4161,7 +5493,13 @@
     "classLimit": "ranger",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1013",
+    "passives": [
+      {
+        "id": "1013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92123": {
@@ -4178,7 +5516,13 @@
     "classLimit": "ranger",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1013",
+    "passives": [
+      {
+        "id": "1013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92131": {
@@ -4195,7 +5539,13 @@
     "classLimit": "mage",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1014",
+    "passives": [
+      {
+        "id": "1014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92132": {
@@ -4212,7 +5562,13 @@
     "classLimit": "mage",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1014",
+    "passives": [
+      {
+        "id": "1014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92133": {
@@ -4229,7 +5585,13 @@
     "classLimit": "mage",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1014",
+    "passives": [
+      {
+        "id": "1014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92141": {
@@ -4243,10 +5605,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1015",
+    "passives": [
+      {
+        "id": "1015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92142": {
@@ -4260,10 +5628,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1015",
+    "passives": [
+      {
+        "id": "1015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92143": {
@@ -4277,10 +5651,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1015",
+    "passives": [
+      {
+        "id": "1015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92151": {
@@ -4294,10 +5674,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1016",
+    "passives": [
+      {
+        "id": "1016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92152": {
@@ -4311,10 +5697,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1016",
+    "passives": [
+      {
+        "id": "1016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92153": {
@@ -4328,10 +5720,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1016",
+    "passives": [
+      {
+        "id": "1016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92161": {
@@ -4348,7 +5746,13 @@
     "classLimit": "defender",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1017",
+    "passives": [
+      {
+        "id": "1017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92162": {
@@ -4365,7 +5769,13 @@
     "classLimit": "defender",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1017",
+    "passives": [
+      {
+        "id": "1017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92163": {
@@ -4382,7 +5792,13 @@
     "classLimit": "defender",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1017",
+    "passives": [
+      {
+        "id": "1017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92171": {
@@ -4399,7 +5815,13 @@
     "classLimit": "ranger",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1020",
+    "passives": [
+      {
+        "id": "1020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92172": {
@@ -4416,7 +5838,13 @@
     "classLimit": "ranger",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1020",
+    "passives": [
+      {
+        "id": "1020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92173": {
@@ -4433,7 +5861,13 @@
     "classLimit": "ranger",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1020",
+    "passives": [
+      {
+        "id": "1020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92181": {
@@ -4450,7 +5884,13 @@
     "classLimit": "mage",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1019",
+    "passives": [
+      {
+        "id": "1019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92182": {
@@ -4467,7 +5907,13 @@
     "classLimit": "mage",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1019",
+    "passives": [
+      {
+        "id": "1019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92183": {
@@ -4484,7 +5930,13 @@
     "classLimit": "mage",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1019",
+    "passives": [
+      {
+        "id": "1019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92191": {
@@ -4498,10 +5950,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1018",
+    "passives": [
+      {
+        "id": "1018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92192": {
@@ -4515,10 +5973,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1018",
+    "passives": [
+      {
+        "id": "1018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92193": {
@@ -4532,10 +5996,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1018",
+    "passives": [
+      {
+        "id": "1018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92201": {
@@ -4549,10 +6019,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1021",
+    "passives": [
+      {
+        "id": "1021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92202": {
@@ -4566,10 +6042,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1021",
+    "passives": [
+      {
+        "id": "1021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92203": {
@@ -4583,10 +6065,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1021",
+    "passives": [
+      {
+        "id": "1021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92211": {
@@ -4603,7 +6091,13 @@
     "classLimit": "defender",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1022",
+    "passives": [
+      {
+        "id": "1022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92212": {
@@ -4620,7 +6114,13 @@
     "classLimit": "defender",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1022",
+    "passives": [
+      {
+        "id": "1022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92213": {
@@ -4637,7 +6137,13 @@
     "classLimit": "defender",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1022",
+    "passives": [
+      {
+        "id": "1022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92221": {
@@ -4654,7 +6160,13 @@
     "classLimit": "ranger",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1025",
+    "passives": [
+      {
+        "id": "1025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92222": {
@@ -4671,7 +6183,13 @@
     "classLimit": "ranger",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1025",
+    "passives": [
+      {
+        "id": "1025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92223": {
@@ -4688,7 +6206,13 @@
     "classLimit": "ranger",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1025",
+    "passives": [
+      {
+        "id": "1025",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92231": {
@@ -4705,7 +6229,13 @@
     "classLimit": "mage",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1024",
+    "passives": [
+      {
+        "id": "1024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92232": {
@@ -4722,7 +6252,13 @@
     "classLimit": "mage",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1024",
+    "passives": [
+      {
+        "id": "1024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92233": {
@@ -4739,7 +6275,13 @@
     "classLimit": "mage",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1024",
+    "passives": [
+      {
+        "id": "1024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92241": {
@@ -4753,10 +6295,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1023",
+    "passives": [
+      {
+        "id": "1023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92242": {
@@ -4770,10 +6318,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1023",
+    "passives": [
+      {
+        "id": "1023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92243": {
@@ -4787,10 +6341,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1023",
+    "passives": [
+      {
+        "id": "1023",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92251": {
@@ -4804,10 +6364,16 @@
     "star": 6,
     "icon": "TI_Equipment_Irregular_Weapon_01",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1028",
+    "passives": [
+      {
+        "id": "1028",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92252": {
@@ -4821,10 +6387,16 @@
     "star": 6,
     "icon": "TI_Equipment_Irregular_Weapon_01",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1028",
+    "passives": [
+      {
+        "id": "1028",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92253": {
@@ -4838,10 +6410,16 @@
     "star": 6,
     "icon": "TI_Equipment_Irregular_Weapon_01",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1028",
+    "passives": [
+      {
+        "id": "1028",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92261": {
@@ -4858,7 +6436,13 @@
     "classLimit": "defender",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1029",
+    "passives": [
+      {
+        "id": "1029",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92262": {
@@ -4875,7 +6459,13 @@
     "classLimit": "defender",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1029",
+    "passives": [
+      {
+        "id": "1029",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92263": {
@@ -4892,7 +6482,13 @@
     "classLimit": "defender",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1029",
+    "passives": [
+      {
+        "id": "1029",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92271": {
@@ -4909,7 +6505,13 @@
     "classLimit": "ranger",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1030",
+    "passives": [
+      {
+        "id": "1030",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92272": {
@@ -4926,7 +6528,13 @@
     "classLimit": "ranger",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1030",
+    "passives": [
+      {
+        "id": "1030",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92273": {
@@ -4943,7 +6551,13 @@
     "classLimit": "ranger",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1030",
+    "passives": [
+      {
+        "id": "1030",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92281": {
@@ -4960,7 +6574,13 @@
     "classLimit": "mage",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1031",
+    "passives": [
+      {
+        "id": "1031",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92282": {
@@ -4977,7 +6597,13 @@
     "classLimit": "mage",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1031",
+    "passives": [
+      {
+        "id": "1031",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92283": {
@@ -4994,7 +6620,13 @@
     "classLimit": "mage",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1031",
+    "passives": [
+      {
+        "id": "1031",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92291": {
@@ -5008,10 +6640,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest_IR_01",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1032",
+    "passives": [
+      {
+        "id": "1032",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92292": {
@@ -5025,10 +6663,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest_IR_01",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1032",
+    "passives": [
+      {
+        "id": "1032",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92293": {
@@ -5042,10 +6686,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest_IR_01",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1032",
+    "passives": [
+      {
+        "id": "1032",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92301": {
@@ -5059,10 +6709,16 @@
     "star": 6,
     "icon": "TI_Equipment_Irregular_Weapon_02",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1033",
+    "passives": [
+      {
+        "id": "1033",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92302": {
@@ -5076,10 +6732,16 @@
     "star": 6,
     "icon": "TI_Equipment_Irregular_Weapon_02",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1033",
+    "passives": [
+      {
+        "id": "1033",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92303": {
@@ -5093,10 +6755,16 @@
     "star": 6,
     "icon": "TI_Equipment_Irregular_Weapon_02",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1033",
+    "passives": [
+      {
+        "id": "1033",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92311": {
@@ -5113,7 +6781,13 @@
     "classLimit": "defender",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1034",
+    "passives": [
+      {
+        "id": "1034",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92312": {
@@ -5130,7 +6804,13 @@
     "classLimit": "defender",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1034",
+    "passives": [
+      {
+        "id": "1034",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92313": {
@@ -5147,7 +6827,13 @@
     "classLimit": "defender",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1034",
+    "passives": [
+      {
+        "id": "1034",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92321": {
@@ -5164,7 +6850,13 @@
     "classLimit": "ranger",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1035",
+    "passives": [
+      {
+        "id": "1035",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92322": {
@@ -5181,7 +6873,13 @@
     "classLimit": "ranger",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1035",
+    "passives": [
+      {
+        "id": "1035",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92323": {
@@ -5198,7 +6896,13 @@
     "classLimit": "ranger",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1035",
+    "passives": [
+      {
+        "id": "1035",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92331": {
@@ -5215,7 +6919,13 @@
     "classLimit": "mage",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1036",
+    "passives": [
+      {
+        "id": "1036",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92332": {
@@ -5232,7 +6942,13 @@
     "classLimit": "mage",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1036",
+    "passives": [
+      {
+        "id": "1036",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92333": {
@@ -5249,7 +6965,13 @@
     "classLimit": "mage",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1036",
+    "passives": [
+      {
+        "id": "1036",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92341": {
@@ -5263,10 +6985,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest_IR_02",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11001"],
     "sub": "11121",
-    "passive": "1037",
+    "passives": [
+      {
+        "id": "1037",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92342": {
@@ -5280,10 +7008,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest_IR_02",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11002"],
     "sub": "11122",
-    "passive": "1037",
+    "passives": [
+      {
+        "id": "1037",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "92343": {
@@ -5297,10 +7031,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06_Priest_IR_02",
     "craftable": false,
-    "classLimit": "priest",
+    "classLimit": "healer",
     "main": ["24", "11003"],
     "sub": "11123",
-    "passive": "1037",
+    "passives": [
+      {
+        "id": "1037",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93351": {
@@ -5314,10 +7054,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11001"],
     "sub": "11243",
-    "passive": "1001",
+    "passives": [
+      {
+        "id": "1001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93352": {
@@ -5331,10 +7077,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11002"],
     "sub": "11243",
-    "passive": "1001",
+    "passives": [
+      {
+        "id": "1001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93353": {
@@ -5348,10 +7100,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11003"],
     "sub": "11243",
-    "passive": "1001",
+    "passives": [
+      {
+        "id": "1001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93361": {
@@ -5365,10 +7123,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11001"],
     "sub": "11243",
-    "passive": "1006",
+    "passives": [
+      {
+        "id": "1006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93362": {
@@ -5382,10 +7146,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11002"],
     "sub": "11243",
-    "passive": "1006",
+    "passives": [
+      {
+        "id": "1006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93363": {
@@ -5399,10 +7169,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11003"],
     "sub": "11243",
-    "passive": "1006",
+    "passives": [
+      {
+        "id": "1006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93371": {
@@ -5416,10 +7192,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11001"],
     "sub": "11243",
-    "passive": "1011",
+    "passives": [
+      {
+        "id": "1011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93372": {
@@ -5433,10 +7215,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11002"],
     "sub": "11243",
-    "passive": "1011",
+    "passives": [
+      {
+        "id": "1011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93373": {
@@ -5450,10 +7238,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11003"],
     "sub": "11243",
-    "passive": "1011",
+    "passives": [
+      {
+        "id": "1011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93381": {
@@ -5467,10 +7261,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11001"],
     "sub": "11243",
-    "passive": "1016",
+    "passives": [
+      {
+        "id": "1016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93382": {
@@ -5484,10 +7284,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11002"],
     "sub": "11243",
-    "passive": "1016",
+    "passives": [
+      {
+        "id": "1016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93383": {
@@ -5501,10 +7307,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11003"],
     "sub": "11243",
-    "passive": "1016",
+    "passives": [
+      {
+        "id": "1016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93391": {
@@ -5518,10 +7330,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11001"],
     "sub": "11243",
-    "passive": "1021",
+    "passives": [
+      {
+        "id": "1021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93392": {
@@ -5535,10 +7353,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11002"],
     "sub": "11243",
-    "passive": "1021",
+    "passives": [
+      {
+        "id": "1021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93393": {
@@ -5552,10 +7376,16 @@
     "star": 6,
     "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
-    "classLimit": "attacker",
+    "classLimit": "striker",
     "main": ["24", "11003"],
     "sub": "11243",
-    "passive": "1021",
+    "passives": [
+      {
+        "id": "1021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93451": {
@@ -5572,7 +7402,13 @@
     "classLimit": "mage",
     "main": ["24", "11001"],
     "sub": "11243",
-    "passive": "1004",
+    "passives": [
+      {
+        "id": "1004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93452": {
@@ -5589,7 +7425,13 @@
     "classLimit": "mage",
     "main": ["24", "11002"],
     "sub": "11243",
-    "passive": "1004",
+    "passives": [
+      {
+        "id": "1004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93453": {
@@ -5606,7 +7448,13 @@
     "classLimit": "mage",
     "main": ["24", "11003"],
     "sub": "11243",
-    "passive": "1004",
+    "passives": [
+      {
+        "id": "1004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93461": {
@@ -5623,7 +7471,13 @@
     "classLimit": "mage",
     "main": ["24", "11001"],
     "sub": "11243",
-    "passive": "1009",
+    "passives": [
+      {
+        "id": "1009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93462": {
@@ -5640,7 +7494,13 @@
     "classLimit": "mage",
     "main": ["24", "11002"],
     "sub": "11243",
-    "passive": "1009",
+    "passives": [
+      {
+        "id": "1009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93463": {
@@ -5657,7 +7517,13 @@
     "classLimit": "mage",
     "main": ["24", "11003"],
     "sub": "11243",
-    "passive": "1009",
+    "passives": [
+      {
+        "id": "1009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93471": {
@@ -5674,7 +7540,13 @@
     "classLimit": "mage",
     "main": ["24", "11001"],
     "sub": "11243",
-    "passive": "1014",
+    "passives": [
+      {
+        "id": "1014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93472": {
@@ -5691,7 +7563,13 @@
     "classLimit": "mage",
     "main": ["24", "11002"],
     "sub": "11243",
-    "passive": "1014",
+    "passives": [
+      {
+        "id": "1014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93473": {
@@ -5708,7 +7586,13 @@
     "classLimit": "mage",
     "main": ["24", "11003"],
     "sub": "11243",
-    "passive": "1014",
+    "passives": [
+      {
+        "id": "1014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93481": {
@@ -5725,7 +7609,13 @@
     "classLimit": "mage",
     "main": ["24", "11001"],
     "sub": "11243",
-    "passive": "1019",
+    "passives": [
+      {
+        "id": "1019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93482": {
@@ -5742,7 +7632,13 @@
     "classLimit": "mage",
     "main": ["24", "11002"],
     "sub": "11243",
-    "passive": "1019",
+    "passives": [
+      {
+        "id": "1019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93483": {
@@ -5759,7 +7655,13 @@
     "classLimit": "mage",
     "main": ["24", "11003"],
     "sub": "11243",
-    "passive": "1019",
+    "passives": [
+      {
+        "id": "1019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93491": {
@@ -5776,7 +7678,13 @@
     "classLimit": "mage",
     "main": ["24", "11001"],
     "sub": "11243",
-    "passive": "1024",
+    "passives": [
+      {
+        "id": "1024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93492": {
@@ -5793,7 +7701,13 @@
     "classLimit": "mage",
     "main": ["24", "11002"],
     "sub": "11243",
-    "passive": "1024",
+    "passives": [
+      {
+        "id": "1024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   },
   "93493": {
@@ -5810,7 +7724,13 @@
     "classLimit": "mage",
     "main": ["24", "11003"],
     "sub": "11243",
-    "passive": "1024",
+    "passives": [
+      {
+        "id": "1024",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
     "breakLimit": "6|unique"
   }
 }

@@ -104,21 +104,21 @@
       {
         "2p": {
           "stat": "critical_rate",
-          "value": "150"
+          "value": "15%"
         },
         "4p": {
           "stat": "critical_rate",
-          "value": "100"
+          "value": "10%"
         }
       },
       {
         "2p": {
           "stat": "critical_rate",
-          "value": "180"
+          "value": "18%"
         },
         "4p": {
           "stat": "critical_rate",
-          "value": "120"
+          "value": "12%"
         }
       }
     ]
@@ -197,21 +197,21 @@
       {
         "2p": {
           "stat": "counter_rate",
-          "value": "120"
+          "value": "12%"
         },
         "4p": {
           "stat": "counter_rate",
-          "value": "80"
+          "value": "8%"
         }
       },
       {
         "2p": {
           "stat": "counter_rate",
-          "value": "150"
+          "value": "15%"
         },
         "4p": {
           "stat": "counter_rate",
-          "value": "100"
+          "value": "10%"
         }
       }
     ]
@@ -240,7 +240,13 @@
               "mode": "rate",
               "value": -300
             }
-          ]
+          ],
+          "desc": {
+            "en": "damage taken decreases by 40% for the first 1 incoming attack (Removed when hit/Irremovable)\\nDecreases the caster's Speed for 1 turn (Ignores Immunity/Irremovable)",
+            "jp": "最初の1回の攻撃に対して、受けるダメージDOWN 40% (被弾時解除/解除不可) \\n自身のスピードDOWN 1ターン (免疫効果無視/解除不可)",
+            "kr": "최초 1회의 공격에 대한 받는 피해 감소 -40%(피격 시 해제/해제 불가)\\n자신 속도 감소 1턴(면역 무시/해제 불가)",
+            "zh": "首次受到的1次攻击所受伤害-40%（受到攻击时解除/不可解除）\\n自身速度降低1回合（无视免疫/不可解除）"
+          }
         },
         "4p": null
       },
@@ -259,7 +265,13 @@
               "mode": "rate",
               "value": -300
             }
-          ]
+          ],
+          "desc": {
+            "en": "damage taken decreases by 40% for the first 2 incoming attacks (Removed when hit/Irremovable)\\nDecreases the caster's Speed for 1 turn (Ignores Immunity/Irremovable)",
+            "jp": "最初の2回の攻撃に対して、受けるダメージDOWN 40% (被弾時解除/解除不可) \\n自身のスピードDOWN 1ターン (免疫効果無視/解除不可)",
+            "kr": "최초 2회의 공격에 대한 받는 피해 감소 -40%(피격 시 해제/해제 불가)\\n자신 속도 감소 1턴(면역 무시/해제 불가)",
+            "zh": "首次受到的2次攻击所受伤害-40%（受到攻击时解除/不可解除）\\n自身速度降低1回合（无视免疫/不可解除）"
+          }
         },
         "4p": null
       }
@@ -277,21 +289,21 @@
       {
         "2p": {
           "stat": "e_cri_dmg_reduce",
-          "value": "250"
+          "value": "25%"
         },
         "4p": {
           "stat": "e_cri_dmg_reduce",
-          "value": "200"
+          "value": "20%"
         }
       },
       {
         "2p": {
           "stat": "e_cri_dmg_reduce",
-          "value": "380"
+          "value": "38%"
         },
         "4p": {
           "stat": "e_cri_dmg_reduce",
-          "value": "270"
+          "value": "27%"
         }
       }
     ]
@@ -308,21 +320,21 @@
       {
         "2p": {
           "stat": "vampiric",
-          "value": "100"
+          "value": "10%"
         },
         "4p": {
           "stat": "vampiric",
-          "value": "50"
+          "value": "5%"
         }
       },
       {
         "2p": {
           "stat": "vampiric",
-          "value": "120"
+          "value": "12%"
         },
         "4p": {
           "stat": "vampiric",
-          "value": "70"
+          "value": "7%"
         }
       }
     ]
@@ -340,17 +352,17 @@
         "2p": null,
         "4p": {
           "stat": "pierce_power_rate",
-          "value": "200"
+          "value": "20%"
         }
       },
       {
         "2p": {
           "stat": "pierce_power_rate",
-          "value": "110"
+          "value": "11%"
         },
         "4p": {
           "stat": "pierce_power_rate",
-          "value": "90"
+          "value": "9%"
         }
       }
     ]
@@ -367,21 +379,21 @@
       {
         "2p": {
           "stat": "critical_dmg_rate",
-          "value": "200"
+          "value": "20%"
         },
         "4p": {
           "stat": "critical_dmg_rate",
-          "value": "150"
+          "value": "15%"
         }
       },
       {
         "2p": {
           "stat": "critical_dmg_rate",
-          "value": "330"
+          "value": "33%"
         },
         "4p": {
           "stat": "critical_dmg_rate",
-          "value": "220"
+          "value": "22%"
         }
       }
     ]
@@ -462,7 +474,13 @@
               "mode": "rate",
               "value": 1600
             }
-          ]
+          ],
+          "desc": {
+            "en": "Increases Attack proportional to missing Health",
+            "jp": "自分の残りHPが低いほど、攻撃力がUPする。",
+            "kr": "잃은 체력 비례 공격력 증가",
+            "zh": "根据损失的生命值等比提升攻击力"
+          }
         }
       },
       {
@@ -476,7 +494,13 @@
               "mode": "rate",
               "value": 1600
             }
-          ]
+          ],
+          "desc": {
+            "en": "Increases Attack proportional to missing Health (Maximum efficiency at 50% Health)",
+            "jp": "自分の残りHPが低いほど、\\n攻撃力がUPする。\\n(残りHP50%時に効果が最大になる)",
+            "kr": "잃은 체력 비례 공격력 증가 (체력 50%에서 최대 효율)",
+            "zh": "根据已损失生命值提升攻击力(生命值50%时达到最大效率)"
+          }
         }
       }
     ]
@@ -501,7 +525,13 @@
               "mode": "rate",
               "value": 1600
             }
-          ]
+          ],
+          "desc": {
+            "en": "Increases Defense proportional to missing Health",
+            "jp": "自分の残りHPが低いほど、防御力がUPする。",
+            "kr": "잃은 체력 비례 방어력 증가",
+            "zh": "根据损失的生命值等比提升防御力"
+          }
         }
       },
       {
@@ -515,7 +545,13 @@
               "mode": "rate",
               "value": 1600
             }
-          ]
+          ],
+          "desc": {
+            "en": "Increases Defense proportional to missing Health (Maximum efficiency at 50% Health)",
+            "jp": "自分の残りHPが低いほど、\\n防御力がUPする。\\n(残りHP50%時に効果が最大になる)",
+            "kr": "잃은 체력 비례 방어력 증가 (체력 50%에서 최대 효율)",
+            "zh": "根据已损失生命值提升防御力(生命值50%时达到最大效率)"
+          }
         }
       }
     ]
@@ -538,7 +574,13 @@
               "mode": "rate",
               "value": 350
             }
-          ]
+          ],
+          "desc": {
+            "en": "Increases damage dealt against targets inflicted with Break by 35%",
+            "jp": "ブレイク状態の対象に与える\\nダメージが+35％UPする。",
+            "kr": "브레이크 상태의 대상에게 입히는 피해 +35%",
+            "zh": "对处于力竭状态的目标造成的伤害+35%"
+          }
         },
         "4p": {
           "buff": "BID_ITEM_UO_SET_17_1",
@@ -548,7 +590,13 @@
               "mode": "rate",
               "value": 250
             }
-          ]
+          ],
+          "desc": {
+            "en": "Increases damage dealt against targets inflicted with Break by 25%",
+            "jp": "ブレイク状態の対象に与える\\nダメージが+25％UPする。",
+            "kr": "브레이크 상태의 대상에게 입히는 피해 +25%",
+            "zh": "对处于力竭状态的目标造成的伤害+25%"
+          }
         }
       },
       {
@@ -560,7 +608,13 @@
               "mode": "rate",
               "value": 350
             }
-          ]
+          ],
+          "desc": {
+            "en": "Increases damage dealt against targets inflicted with Break by 70%",
+            "jp": "ブレイク状態の対象に\\n与えるダメージが+70％UPする。",
+            "kr": "브레이크 상태의 대상에게 입히는 피해 +70%",
+            "zh": "对处于力竭状态的目标造成的伤害+70%"
+          }
         },
         "4p": {
           "buff": "BID_ITEM_UO_SET_17",
@@ -570,7 +624,13 @@
               "mode": "rate",
               "value": 350
             }
-          ]
+          ],
+          "desc": {
+            "en": "Increases damage dealt against targets inflicted with Break by 50%",
+            "jp": "ブレイク状態の対象に与える\\nダメージが+50％UPする。",
+            "kr": "브레이크 상태의 대상에게 입히는 피해 +50%",
+            "zh": "对处于力竭状态的目标造成的伤害+50%"
+          }
         }
       }
     ]
@@ -593,7 +653,13 @@
               "mode": "none",
               "value": 0
             }
-          ]
+          ],
+          "desc": {
+            "en": "Gain Immunity to Debuffs for 1 turn at the start of battle",
+            "jp": "戦闘開始後、弱体効果免疫を1ターン間付与する。",
+            "kr": "전투 시작 후 1턴간 약화 효과 면역",
+            "zh": "开始战斗后，对弱化效果免疫，持续1回合"
+          }
         },
         "4p": null
       },
@@ -606,7 +672,13 @@
               "mode": "none",
               "value": 0
             }
-          ]
+          ],
+          "desc": {
+            "en": "Gain Immunity to Debuffs for 1 turn at the start of battle",
+            "jp": "戦闘開始後、弱体効果免疫を1ターン間付与する。",
+            "kr": "전투 시작 후 1턴간 약화 효과 면역",
+            "zh": "开始战斗后，对弱化效果免疫，持续1回合"
+          }
         },
         "4p": {
           "buff": "BID_ITEM_UO_SET_18_1",
@@ -616,7 +688,13 @@
               "mode": "rate",
               "value": 300
             }
-          ]
+          ],
+          "desc": {
+            "en": "Permanently reduces damage taken by 30% (Irremovable)",
+            "jp": "常に受けるダメージが\\n30%DOWNする。(解除不可)",
+            "kr": "상시 피해 감소 +30% (해제 불가)",
+            "zh": "常驻伤害减免+30%(无法解除)"
+          }
         }
       }
     ]
@@ -640,7 +718,13 @@
               "mode": "rate",
               "value": 1000
             }
-          ]
+          ],
+          "desc": {
+            "en": "Increases Speed proportional to missing Health",
+            "jp": "自分の残りHPが低いほど、スピードがUPする。",
+            "kr": "잃은 체력 비례 속도 증가",
+            "zh": "根据损失的生命值等比提升速度"
+          }
         },
         "4p": null
       },
@@ -654,7 +738,13 @@
               "mode": "rate",
               "value": 1000
             }
-          ]
+          ],
+          "desc": {
+            "en": "Increases Speed proportional to missing Health (Maximum efficiency at 50% Health)",
+            "jp": "自分の残りHPが低いほど、\\nスピードがUPする。\\n(残りHP50%時に効果が最大になる)",
+            "kr": "잃은 체력 비례 속도 증가 (체력 50%에서 최대 효율)",
+            "zh": "根据已损失生命值提升速度(生命值50%时达到最大效率)"
+          }
         },
         "4p": null
       }
@@ -678,7 +768,13 @@
               "mode": "rate",
               "value": -250
             }
-          ]
+          ],
+          "desc": {
+            "en": "Increases damage dealt against targets inflicted with a debuff by 25%",
+            "jp": "弱体効果がある対象に与える\\nダメージが+25%UPする。",
+            "kr": "약화 효과를 지닌 대상에게 입히는 피해 +25%",
+            "zh": "对附带弱化效果的目标造成的伤害+25%"
+          }
         },
         "4p": null
       },
@@ -691,7 +787,13 @@
               "mode": "rate",
               "value": -250
             }
-          ]
+          ],
+          "desc": {
+            "en": "Increases damage dealt against targets inflicted with a debuff by 35%",
+            "jp": "弱体効果がある対象に与える\\nダメージが+35%UPする。",
+            "kr": "약화 효과를 지닌 대상에게 입히는 피해 +35%",
+            "zh": "对附带弱化效果的目标造成的伤害+35%"
+          }
         },
         "4p": null
       }
@@ -715,7 +817,13 @@
               "mode": "rate",
               "value": 200
             }
-          ]
+          ],
+          "desc": {
+            "en": "Increases damage dealt while granted a buff by 20%",
+            "jp": "自分に強化効果がある場合、\\n与えるダメージが+20%UPする。",
+            "kr": "강화 효과를 지닌 상태에서 입히는 피해 +20%",
+            "zh": "附带强化效果时造成的伤害+20%"
+          }
         },
         "4p": null
       },
@@ -728,7 +836,13 @@
               "mode": "rate",
               "value": 200
             }
-          ]
+          ],
+          "desc": {
+            "en": "Increases damage dealt while granted a buff by 30%",
+            "jp": "自分に強化効果がある場合、\\n与えるダメージが+30%UPする。",
+            "kr": "강화 효과를 지닌 상태에서 입히는 피해 +30%",
+            "zh": "在附带强化效果状态下造成的伤害+30%"
+          }
         },
         "4p": null
       }

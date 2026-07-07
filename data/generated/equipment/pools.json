@@ -6377,63 +6377,72 @@
       "mode": "rate",
       "value": 80,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_ATK_4"
+      "buff": "BID_ITEM_STAT_OOPARTS_ATK_4",
+      "levels": [80]
     },
     {
       "stat": "def",
       "mode": "rate",
       "value": 80,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_DEF_4"
+      "buff": "BID_ITEM_STAT_OOPARTS_DEF_4",
+      "levels": [80]
     },
     {
       "stat": "hp",
       "mode": "rate",
       "value": 100,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_HP_4"
+      "buff": "BID_ITEM_STAT_OOPARTS_HP_4",
+      "levels": [100]
     },
     {
       "stat": "critical_rate",
       "mode": "flat",
       "value": 48,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_CRI_4"
+      "buff": "BID_ITEM_STAT_OOPARTS_CRI_4",
+      "levels": [48]
     },
     {
       "stat": "critical_dmg_rate",
       "mode": "flat",
       "value": 64,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_CRI_DMG_4"
+      "buff": "BID_ITEM_STAT_OOPARTS_CRI_DMG_4",
+      "levels": [64]
     },
     {
       "stat": "dmg_reduce_rate",
       "mode": "flat",
       "value": 77,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_DMG_REDUCE_4"
+      "buff": "BID_ITEM_STAT_OOPARTS_DMG_REDUCE_4",
+      "levels": [77]
     },
     {
       "stat": "dmg_boost",
       "mode": "flat",
       "value": 64,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_DMG_4"
+      "buff": "BID_ITEM_STAT_OOPARTS_DMG_4",
+      "levels": [64]
     },
     {
       "stat": "buff_chance",
       "mode": "rate",
       "value": 48,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_BUFF_CHANCE_4"
+      "buff": "BID_ITEM_STAT_OOPARTS_BUFF_CHANCE_4",
+      "levels": [48]
     },
     {
       "stat": "buff_resist",
       "mode": "rate",
       "value": 48,
       "weight": 11.12,
-      "buff": "BID_ITEM_STAT_OOPARTS_BUF_RESIST_4"
+      "buff": "BID_ITEM_STAT_OOPARTS_BUF_RESIST_4",
+      "levels": [48]
     }
   ],
   "10001": [
@@ -6442,63 +6451,72 @@
       "mode": "rate",
       "value": 100,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_ATK_5"
+      "buff": "BID_ITEM_STAT_OOPARTS_ATK_5",
+      "levels": [100]
     },
     {
       "stat": "def",
       "mode": "rate",
       "value": 100,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_DEF_5"
+      "buff": "BID_ITEM_STAT_OOPARTS_DEF_5",
+      "levels": [100]
     },
     {
       "stat": "hp",
       "mode": "rate",
       "value": 120,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_HP_5"
+      "buff": "BID_ITEM_STAT_OOPARTS_HP_5",
+      "levels": [120]
     },
     {
       "stat": "critical_rate",
       "mode": "flat",
       "value": 60,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_CRI_5"
+      "buff": "BID_ITEM_STAT_OOPARTS_CRI_5",
+      "levels": [60]
     },
     {
       "stat": "critical_dmg_rate",
       "mode": "flat",
       "value": 80,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_CRI_DMG_5"
+      "buff": "BID_ITEM_STAT_OOPARTS_CRI_DMG_5",
+      "levels": [80]
     },
     {
       "stat": "dmg_reduce_rate",
       "mode": "flat",
       "value": 96,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_DMG_REDUCE_5"
+      "buff": "BID_ITEM_STAT_OOPARTS_DMG_REDUCE_5",
+      "levels": [96]
     },
     {
       "stat": "dmg_boost",
       "mode": "flat",
       "value": 80,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_DMG_5"
+      "buff": "BID_ITEM_STAT_OOPARTS_DMG_5",
+      "levels": [80]
     },
     {
       "stat": "buff_chance",
       "mode": "rate",
       "value": 60,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_BUFF_CHANCE_5"
+      "buff": "BID_ITEM_STAT_OOPARTS_BUFF_CHANCE_5",
+      "levels": [60]
     },
     {
       "stat": "buff_resist",
       "mode": "rate",
       "value": 60,
       "weight": 11.12,
-      "buff": "BID_ITEM_STAT_OOPARTS_BUF_RESIST_5"
+      "buff": "BID_ITEM_STAT_OOPARTS_BUF_RESIST_5",
+      "levels": [60]
     }
   ],
   "10002": [
@@ -6507,63 +6525,72 @@
       "mode": "rate",
       "value": 120,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_ATK_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_ATK_6",
+      "levels": [120, 123, 126, 129, 132, 135, 138, 141, 144, 147, 150]
     },
     {
       "stat": "def",
       "mode": "rate",
       "value": 120,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_DEF_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_DEF_6",
+      "levels": [120, 123, 126, 129, 132, 135, 138, 141, 144, 147, 150]
     },
     {
       "stat": "hp",
       "mode": "rate",
       "value": 140,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_HP_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_HP_6",
+      "levels": [140, 143, 146, 149, 152, 155, 159, 163, 167, 171, 175]
     },
     {
       "stat": "critical_rate",
       "mode": "flat",
       "value": 72,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_CRI_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_CRI_6",
+      "levels": [72, 73, 74, 76, 78, 80, 82, 84, 86, 88, 90]
     },
     {
       "stat": "critical_dmg_rate",
       "mode": "flat",
       "value": 96,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_CRI_DMG_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_CRI_DMG_6",
+      "levels": [96, 98, 100, 102, 104, 106, 108, 111, 114, 117, 120]
     },
     {
       "stat": "dmg_reduce_rate",
       "mode": "flat",
       "value": 115,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_DMG_REDUCE_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_DMG_REDUCE_6",
+      "levels": [115, 118, 120, 122, 125, 127, 130, 133, 137, 140, 144]
     },
     {
       "stat": "dmg_boost",
       "mode": "flat",
       "value": 96,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_DMG_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_DMG_6",
+      "levels": [96, 98, 100, 102, 104, 106, 108, 111, 114, 117, 120]
     },
     {
       "stat": "buff_chance",
       "mode": "rate",
       "value": 72,
       "weight": 11.11,
-      "buff": "BID_ITEM_STAT_OOPARTS_BUFF_CHANCE_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_BUFF_CHANCE_6",
+      "levels": [72, 73, 74, 76, 78, 80, 82, 84, 86, 88, 90]
     },
     {
       "stat": "buff_resist",
       "mode": "rate",
       "value": 72,
       "weight": 11.12,
-      "buff": "BID_ITEM_STAT_OOPARTS_BUF_RESIST_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_BUF_RESIST_6",
+      "levels": [72, 73, 74, 76, 78, 80, 82, 84, 86, 88, 90]
     }
   ],
   "11001": [
@@ -7586,7 +7613,8 @@
       "mode": "rate",
       "value": 120,
       "weight": 100,
-      "buff": "BID_ITEM_STAT_OOPARTS_ATK_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_ATK_6",
+      "levels": [120, 123, 126, 129, 132, 135, 138, 141, 144, 147, 150]
     }
   ],
   "13002": [
@@ -7595,7 +7623,8 @@
       "mode": "rate",
       "value": 120,
       "weight": 100,
-      "buff": "BID_ITEM_STAT_OOPARTS_DEF_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_DEF_6",
+      "levels": [120, 123, 126, 129, 132, 135, 138, 141, 144, 147, 150]
     }
   ],
   "13003": [
@@ -7604,7 +7633,8 @@
       "mode": "rate",
       "value": 140,
       "weight": 100,
-      "buff": "BID_ITEM_STAT_OOPARTS_HP_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_HP_6",
+      "levels": [140, 143, 146, 149, 152, 155, 159, 163, 167, 171, 175]
     }
   ],
   "13004": [
@@ -7613,7 +7643,8 @@
       "mode": "flat",
       "value": 72,
       "weight": 100,
-      "buff": "BID_ITEM_STAT_OOPARTS_CRI_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_CRI_6",
+      "levels": [72, 73, 74, 76, 78, 80, 82, 84, 86, 88, 90]
     }
   ],
   "13005": [
@@ -7622,7 +7653,8 @@
       "mode": "flat",
       "value": 96,
       "weight": 100,
-      "buff": "BID_ITEM_STAT_OOPARTS_CRI_DMG_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_CRI_DMG_6",
+      "levels": [96, 98, 100, 102, 104, 106, 108, 111, 114, 117, 120]
     }
   ],
   "13006": [
@@ -7631,7 +7663,8 @@
       "mode": "flat",
       "value": 115,
       "weight": 100,
-      "buff": "BID_ITEM_STAT_OOPARTS_DMG_REDUCE_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_DMG_REDUCE_6",
+      "levels": [115, 118, 120, 122, 125, 127, 130, 133, 137, 140, 144]
     }
   ],
   "13007": [
@@ -7640,7 +7673,8 @@
       "mode": "flat",
       "value": 96,
       "weight": 100,
-      "buff": "BID_ITEM_STAT_OOPARTS_DMG_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_DMG_6",
+      "levels": [96, 98, 100, 102, 104, 106, 108, 111, 114, 117, 120]
     }
   ],
   "13008": [
@@ -7649,7 +7683,8 @@
       "mode": "rate",
       "value": 72,
       "weight": 100,
-      "buff": "BID_ITEM_STAT_OOPARTS_BUFF_CHANCE_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_BUFF_CHANCE_6",
+      "levels": [72, 73, 74, 76, 78, 80, 82, 84, 86, 88, 90]
     }
   ],
   "13009": [
@@ -7658,7 +7693,8 @@
       "mode": "rate",
       "value": 72,
       "weight": 100,
-      "buff": "BID_ITEM_STAT_OOPARTS_BUF_RESIST_6"
+      "buff": "BID_ITEM_STAT_OOPARTS_BUF_RESIST_6",
+      "levels": [72, 73, 74, 76, 78, 80, 82, 84, 86, 88, 90]
     }
   ],
   "2000001": [
@@ -7668,6 +7704,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -7677,7 +7714,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Earth",
+        "jp": "地属性対象の受ける ダメージDOWN",
+        "kr": "지속성 대상 받는 피해 감소",
+        "zh": "土属性所受伤害降低"
+      }
     }
   ],
   "2000002": [
@@ -7687,6 +7730,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -7696,7 +7740,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Light",
+        "jp": "光属性対象の ダメージUP",
+        "kr": "명속성 대상 피해 증가",
+        "zh": "对光属性目标造成 伤害提升"
+      }
     }
   ],
   "2000003": [
@@ -7706,6 +7756,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -7715,7 +7766,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Fire",
+        "jp": "火属性対象の 効果命中",
+        "kr": "화속성 대상 효과 적중",
+        "zh": "火属性效果命中"
+      }
     }
   ],
   "2000004": [
@@ -7725,6 +7782,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -7734,7 +7792,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Earth",
+        "jp": "地属性対象の 効果命中",
+        "kr": "지속성 대상 효과 적중",
+        "zh": "土属性效果命中"
+      }
     }
   ],
   "2000005": [
@@ -7744,6 +7808,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -7753,7 +7818,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Earth",
+        "jp": "地属性対象の ダメージUP",
+        "kr": "지속성 대상 피해 증가",
+        "zh": "对土属性目标造成 伤害提升"
+      }
     }
   ],
   "2000006": [
@@ -7763,6 +7834,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -7772,7 +7844,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Fire",
+        "jp": "火属性対象の ダメージUP",
+        "kr": "화속성 대상 피해 증가",
+        "zh": "对火属性目标造成 伤害提升"
+      }
     }
   ],
   "2000007": [
@@ -7782,6 +7860,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -7791,7 +7870,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Fire",
+        "jp": "火属性対象の 効果命中",
+        "kr": "화속성 대상 효과 적중",
+        "zh": "火属性效果命中"
+      }
     }
   ],
   "2000008": [
@@ -7801,6 +7886,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -7810,7 +7896,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Water",
+        "jp": "水属性対象の受ける ダメージDOWN",
+        "kr": "수속성 대상 받는 피해 감소",
+        "zh": "水属性所受伤害降低"
+      }
     }
   ],
   "2000009": [
@@ -7820,6 +7912,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -7829,7 +7922,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Dark",
+        "jp": "闇属性対象の受ける ダメージDOWN",
+        "kr": "암속성 대상 받는 피해 감소",
+        "zh": "暗属性所受伤害降低"
+      }
     }
   ],
   "2000010": [
@@ -7839,6 +7938,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -7848,7 +7948,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Water",
+        "jp": "水属性対象の受ける ダメージDOWN",
+        "kr": "수속성 대상 받는 피해 감소",
+        "zh": "水属性所受伤害降低"
+      }
     }
   ],
   "2000011": [
@@ -7858,6 +7964,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -7867,7 +7974,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Fire",
+        "jp": "火属性対象の 効果命中",
+        "kr": "화속성 대상 효과 적중",
+        "zh": "火属性效果命中"
+      }
     }
   ],
   "2000012": [
@@ -7877,6 +7990,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -7886,7 +8000,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Earth",
+        "jp": "地属性対象の 効果命中",
+        "kr": "지속성 대상 효과 적중",
+        "zh": "土属性效果命中"
+      }
     }
   ],
   "2000013": [
@@ -7896,6 +8016,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_EARTH",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -7905,7 +8026,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Water",
+        "jp": "水属性対象の 効果命中",
+        "kr": "수속성 대상 효과 적중",
+        "zh": "水属性效果命中"
+      }
     }
   ],
   "2000014": [
@@ -7915,6 +8042,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -7924,7 +8052,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Fire",
+        "jp": "火属性対象の 効果命中",
+        "kr": "화속성 대상 효과 적중",
+        "zh": "火属性效果命中"
+      }
     }
   ],
   "2000015": [
@@ -7934,6 +8068,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -7943,7 +8078,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Light",
+        "jp": "光属性対象の 効果命中",
+        "kr": "명속성 대상 효과 적중",
+        "zh": "光属性效果命中"
+      }
     }
   ],
   "2000016": [
@@ -7953,6 +8094,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -7962,7 +8104,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Water",
+        "jp": "水属性対象の受ける ダメージDOWN",
+        "kr": "수속성 대상 받는 피해 감소",
+        "zh": "水属性所受伤害降低"
+      }
     }
   ],
   "2000017": [
@@ -7972,6 +8120,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -7981,7 +8130,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Earth",
+        "jp": "地属性対象の ダメージUP",
+        "kr": "지속성 대상 피해 증가",
+        "zh": "对土属性目标造成 伤害提升"
+      }
     }
   ],
   "2000018": [
@@ -7991,6 +8146,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8000,7 +8156,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Light",
+        "jp": "光属性対象の 効果命中",
+        "kr": "명속성 대상 효과 적중",
+        "zh": "光属性效果命中"
+      }
     }
   ],
   "2000019": [
@@ -8010,6 +8172,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8019,7 +8182,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Fire",
+        "jp": "火属性対象の ダメージUP",
+        "kr": "화속성 대상 피해 증가",
+        "zh": "对火属性目标造成 伤害提升"
+      }
     }
   ],
   "2000020": [
@@ -8029,6 +8198,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_EARTH",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8038,7 +8208,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Water",
+        "jp": "水属性対象の 効果命中",
+        "kr": "수속성 대상 효과 적중",
+        "zh": "水属性效果命中"
+      }
     }
   ],
   "2000021": [
@@ -8048,6 +8224,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8057,7 +8234,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Water",
+        "jp": "水属性対象の受ける ダメージDOWN",
+        "kr": "수속성 대상 받는 피해 감소",
+        "zh": "水属性所受伤害降低"
+      }
     }
   ],
   "2000022": [
@@ -8067,6 +8250,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8076,7 +8260,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Water",
+        "jp": "水属性対象の ダメージUP",
+        "kr": "수속성 대상 피해 증가",
+        "zh": "对水属性目标造成 伤害提升"
+      }
     }
   ],
   "2000023": [
@@ -8086,6 +8276,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8095,7 +8286,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Water",
+        "jp": "水属性対象の受ける ダメージDOWN",
+        "kr": "수속성 대상 받는 피해 감소",
+        "zh": "水属性所受伤害降低"
+      }
     }
   ],
   "2000024": [
@@ -8105,6 +8302,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8114,7 +8312,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Earth",
+        "jp": "地属性対象の受ける ダメージDOWN",
+        "kr": "지속성 대상 받는 피해 감소",
+        "zh": "土属性所受伤害降低"
+      }
     }
   ],
   "2000025": [
@@ -8124,6 +8328,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8133,7 +8338,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Fire",
+        "jp": "火属性対象の ダメージUP",
+        "kr": "화속성 대상 피해 증가",
+        "zh": "对火属性目标造成 伤害提升"
+      }
     }
   ],
   "2000026": [
@@ -8143,6 +8354,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8152,7 +8364,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Water",
+        "jp": "水属性対象の受ける ダメージDOWN",
+        "kr": "수속성 대상 받는 피해 감소",
+        "zh": "水属性所受伤害降低"
+      }
     }
   ],
   "2000027": [
@@ -8162,6 +8380,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8171,7 +8390,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Dark",
+        "jp": "闇属性対象の受ける ダメージDOWN",
+        "kr": "암속성 대상 받는 피해 감소",
+        "zh": "暗属性所受伤害降低"
+      }
     }
   ],
   "2000028": [
@@ -8181,6 +8406,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8190,7 +8416,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Light",
+        "jp": "光属性対象の ダメージUP",
+        "kr": "명속성 대상 피해 증가",
+        "zh": "对光属性目标造成 伤害提升"
+      }
     }
   ],
   "2000029": [
@@ -8200,6 +8432,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_EARTH",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8209,7 +8442,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Water",
+        "jp": "水属性対象の 効果命中",
+        "kr": "수속성 대상 효과 적중",
+        "zh": "水属性效果命中"
+      }
     }
   ],
   "2000030": [
@@ -8219,6 +8458,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8228,7 +8468,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Earth",
+        "jp": "地属性対象の受ける ダメージDOWN",
+        "kr": "지속성 대상 받는 피해 감소",
+        "zh": "土属性所受伤害降低"
+      }
     }
   ],
   "2000031": [
@@ -8238,6 +8484,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8247,7 +8494,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Fire",
+        "jp": "火属性対象の受ける ダメージDOWN",
+        "kr": "화속성 대상 받는 피해 감소",
+        "zh": "火属性所受伤害降低"
+      }
     }
   ],
   "2000032": [
@@ -8257,6 +8510,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8266,7 +8520,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Earth",
+        "jp": "地属性対象の 効果命中",
+        "kr": "지속성 대상 효과 적중",
+        "zh": "土属性效果命中"
+      }
     }
   ],
   "2000033": [
@@ -8276,6 +8536,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8285,7 +8546,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Fire",
+        "jp": "火属性対象の ダメージUP",
+        "kr": "화속성 대상 피해 증가",
+        "zh": "对火属性目标造成 伤害提升"
+      }
     }
   ],
   "2000034": [
@@ -8295,6 +8562,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8304,7 +8572,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Earth",
+        "jp": "地属性対象の受ける ダメージDOWN",
+        "kr": "지속성 대상 받는 피해 감소",
+        "zh": "土属性所受伤害降低"
+      }
     }
   ],
   "2000035": [
@@ -8314,6 +8588,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8323,7 +8598,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Light",
+        "jp": "光属性対象の 効果命中",
+        "kr": "명속성 대상 효과 적중",
+        "zh": "光属性效果命中"
+      }
     }
   ],
   "2000036": [
@@ -8333,6 +8614,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8342,7 +8624,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Earth",
+        "jp": "地属性対象の受ける ダメージDOWN",
+        "kr": "지속성 대상 받는 피해 감소",
+        "zh": "土属性所受伤害降低"
+      }
     }
   ],
   "2000037": [
@@ -8352,6 +8640,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8361,7 +8650,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Fire",
+        "jp": "火属性対象の受ける ダメージDOWN",
+        "kr": "화속성 대상 받는 피해 감소",
+        "zh": "火属性所受伤害降低"
+      }
     }
   ],
   "2000038": [
@@ -8371,6 +8666,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8380,7 +8676,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Fire",
+        "jp": "火属性対象の受ける ダメージDOWN",
+        "kr": "화속성 대상 받는 피해 감소",
+        "zh": "火属性所受伤害降低"
+      }
     }
   ],
   "2000039": [
@@ -8390,6 +8692,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_LIGHT",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8399,7 +8702,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Dark",
+        "jp": "闇属性対象の ダメージUP",
+        "kr": "암속성 대상 피해 증가",
+        "zh": "对暗属性目标造成 伤害提升"
+      }
     }
   ],
   "2000040": [
@@ -8409,6 +8718,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8418,7 +8728,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Earth",
+        "jp": "地属性対象の ダメージUP",
+        "kr": "지속성 대상 피해 증가",
+        "zh": "对土属性目标造成 伤害提升"
+      }
     }
   ],
   "2000041": [
@@ -8428,6 +8744,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8437,7 +8754,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Water",
+        "jp": "水属性対象の ダメージUP",
+        "kr": "수속성 대상 피해 증가",
+        "zh": "对水属性目标造成 伤害提升"
+      }
     }
   ],
   "2000042": [
@@ -8447,6 +8770,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8456,7 +8780,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Dark",
+        "jp": "闇属性対象の受ける ダメージDOWN",
+        "kr": "암속성 대상 받는 피해 감소",
+        "zh": "暗属性所受伤害降低"
+      }
     }
   ],
   "2000043": [
@@ -8466,6 +8796,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8475,7 +8806,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Earth",
+        "jp": "地属性対象の 効果命中",
+        "kr": "지속성 대상 효과 적중",
+        "zh": "土属性效果命中"
+      }
     }
   ],
   "2000044": [
@@ -8485,6 +8822,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8494,7 +8832,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Fire",
+        "jp": "火属性対象の 効果命中",
+        "kr": "화속성 대상 효과 적중",
+        "zh": "火属性效果命中"
+      }
     }
   ],
   "2000045": [
@@ -8504,6 +8848,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8513,7 +8858,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Fire",
+        "jp": "火属性対象の ダメージUP",
+        "kr": "화속성 대상 피해 증가",
+        "zh": "对火属性目标造成 伤害提升"
+      }
     }
   ],
   "2000046": [
@@ -8523,6 +8874,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_EARTH",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8532,7 +8884,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Water",
+        "jp": "水属性対象の 効果命中",
+        "kr": "수속성 대상 효과 적중",
+        "zh": "水属性效果命中"
+      }
     }
   ],
   "2000047": [
@@ -8542,6 +8900,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8551,7 +8910,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Fire",
+        "jp": "火属性対象の受ける ダメージDOWN",
+        "kr": "화속성 대상 받는 피해 감소",
+        "zh": "火属性所受伤害降低"
+      }
     }
   ],
   "2000048": [
@@ -8561,6 +8926,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_WATER",
+      "levels": [150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8570,7 +8936,13 @@
           "mode": "flat",
           "value": 150
         }
-      ]
+      ],
+      "label": {
+        "en": "Critical Hit Chance vs Fire",
+        "jp": "火属性対象の会心率",
+        "kr": "화속성 대상 치명 확률",
+        "zh": "对火属性暴击率"
+      }
     }
   ],
   "2000049": [
@@ -8580,6 +8952,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8589,7 +8962,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Earth",
+        "jp": "地属性対象の ダメージUP",
+        "kr": "지속성 대상 피해 증가",
+        "zh": "对土属性目标造成 伤害提升"
+      }
     }
   ],
   "2000050": [
@@ -8599,6 +8978,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8608,7 +8988,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Water",
+        "jp": "水属性対象の受ける ダメージDOWN",
+        "kr": "수속성 대상 받는 피해 감소",
+        "zh": "水属性所受伤害降低"
+      }
     }
   ],
   "2000051": [
@@ -8618,6 +9004,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8627,7 +9014,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Water",
+        "jp": "水属性対象の受ける ダメージDOWN",
+        "kr": "수속성 대상 받는 피해 감소",
+        "zh": "水属性所受伤害降低"
+      }
     }
   ],
   "2000052": [
@@ -8637,6 +9030,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8646,7 +9040,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Light",
+        "jp": "光属性対象の ダメージUP",
+        "kr": "명속성 대상 피해 증가",
+        "zh": "对光属性目标造成 伤害提升"
+      }
     }
   ],
   "2000053": [
@@ -8656,6 +9056,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8665,7 +9066,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Dark",
+        "jp": "闇属性対象の受ける ダメージDOWN",
+        "kr": "암속성 대상 받는 피해 감소",
+        "zh": "暗属性所受伤害降低"
+      }
     }
   ],
   "2000054": [
@@ -8675,6 +9082,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8684,7 +9092,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Fire",
+        "jp": "火属性対象の受ける ダメージDOWN",
+        "kr": "화속성 대상 받는 피해 감소",
+        "zh": "火属性所受伤害降低"
+      }
     }
   ],
   "2000055": [
@@ -8694,6 +9108,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8703,7 +9118,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Earth",
+        "jp": "地属性対象の ダメージUP",
+        "kr": "지속성 대상 피해 증가",
+        "zh": "对土属性目标造成 伤害提升"
+      }
     }
   ],
   "2000056": [
@@ -8713,6 +9134,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8722,7 +9144,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Water",
+        "jp": "水属性対象の ダメージUP",
+        "kr": "수속성 대상 피해 증가",
+        "zh": "对水属性目标造成 伤害提升"
+      }
     }
   ],
   "2000057": [
@@ -8732,6 +9160,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_DARK",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8741,7 +9170,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Light",
+        "jp": "光属性対象の受ける ダメージDOWN",
+        "kr": "명속성 대상 받는 피해 감소",
+        "zh": "光属性所受伤害降低"
+      }
     }
   ],
   "2000058": [
@@ -8751,6 +9186,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8760,7 +9196,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Earth",
+        "jp": "地属性対象の受ける ダメージDOWN",
+        "kr": "지속성 대상 받는 피해 감소",
+        "zh": "土属性所受伤害降低"
+      }
     }
   ],
   "2000059": [
@@ -8770,6 +9212,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8779,7 +9222,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Light",
+        "jp": "光属性対象の ダメージUP",
+        "kr": "명속성 대상 피해 증가",
+        "zh": "对光属性目标造成 伤害提升"
+      }
     }
   ],
   "2000060": [
@@ -8789,6 +9238,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_WATER",
+      "levels": [150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8798,7 +9248,13 @@
           "mode": "flat",
           "value": 150
         }
-      ]
+      ],
+      "label": {
+        "en": "Critical Hit Chance vs Fire",
+        "jp": "火属性対象の会心率",
+        "kr": "화속성 대상 치명 확률",
+        "zh": "对火属性暴击率"
+      }
     }
   ],
   "2000061": [
@@ -8808,6 +9264,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8817,7 +9274,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Earth",
+        "jp": "地属性対象の 効果命中",
+        "kr": "지속성 대상 효과 적중",
+        "zh": "土属性效果命中"
+      }
     }
   ],
   "2000062": [
@@ -8827,6 +9290,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_LIGHT",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8836,7 +9300,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Dark",
+        "jp": "闇属性対象の ダメージUP",
+        "kr": "암속성 대상 피해 증가",
+        "zh": "对暗属性目标造成 伤害提升"
+      }
     }
   ],
   "2000063": [
@@ -8846,6 +9316,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -8855,7 +9326,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Dark",
+        "jp": "闇属性対象の受ける ダメージDOWN",
+        "kr": "암속성 대상 받는 피해 감소",
+        "zh": "暗属性所受伤害降低"
+      }
     }
   ],
   "2000064": [
@@ -8865,6 +9342,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_LIGHT",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8874,7 +9352,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Dark",
+        "jp": "闇属性対象の 効果命中",
+        "kr": "암속성 대상 효과 적중",
+        "zh": "暗属性效果命中"
+      }
     }
   ],
   "2000065": [
@@ -8884,6 +9368,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8893,7 +9378,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Water",
+        "jp": "水属性対象の ダメージUP",
+        "kr": "수속성 대상 피해 증가",
+        "zh": "对水属性目标造成 伤害提升"
+      }
     }
   ],
   "2000066": [
@@ -8903,6 +9394,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_EARTH",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8912,7 +9404,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Water",
+        "jp": "水属性対象の 効果命中",
+        "kr": "수속성 대상 효과 적중",
+        "zh": "水属性效果命中"
+      }
     }
   ],
   "2000067": [
@@ -8922,6 +9420,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_LIGHT",
+      "levels": [150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8931,7 +9430,13 @@
           "mode": "flat",
           "value": 150
         }
-      ]
+      ],
+      "label": {
+        "en": "Critical Hit Chance vs Dark",
+        "jp": "闇属性対象の会心率",
+        "kr": "암속성 대상 치명 확률",
+        "zh": "对暗属性暴击率"
+      }
     }
   ],
   "2000068": [
@@ -8941,6 +9446,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8950,7 +9456,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Fire",
+        "jp": "火属性対象の 効果命中",
+        "kr": "화속성 대상 효과 적중",
+        "zh": "火属性效果命中"
+      }
     }
   ],
   "2000069": [
@@ -8960,6 +9472,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8969,7 +9482,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Light",
+        "jp": "光属性対象の 効果命中",
+        "kr": "명속성 대상 효과 적중",
+        "zh": "光属性效果命中"
+      }
     }
   ],
   "2000070": [
@@ -8979,6 +9498,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -8988,7 +9508,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Light",
+        "jp": "光属性対象の ダメージUP",
+        "kr": "명속성 대상 피해 증가",
+        "zh": "对光属性目标造成 伤害提升"
+      }
     }
   ],
   "2000071": [
@@ -8998,6 +9524,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9007,7 +9534,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Earth",
+        "jp": "地属性対象の ダメージUP",
+        "kr": "지속성 대상 피해 증가",
+        "zh": "对土属性目标造成 伤害提升"
+      }
     }
   ],
   "2000072": [
@@ -9017,6 +9550,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9026,7 +9560,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Fire",
+        "jp": "火属性対象の 効果命中",
+        "kr": "화속성 대상 효과 적중",
+        "zh": "火属性效果命中"
+      }
     }
   ],
   "2000073": [
@@ -9036,6 +9576,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9045,7 +9586,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Earth",
+        "jp": "地属性対象の ダメージUP",
+        "kr": "지속성 대상 피해 증가",
+        "zh": "对土属性目标造成 伤害提升"
+      }
     }
   ],
   "2000074": [
@@ -9055,6 +9602,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_LIGHT",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9064,7 +9612,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Dark",
+        "jp": "闇属性対象の ダメージUP",
+        "kr": "암속성 대상 피해 증가",
+        "zh": "对暗属性目标造成 伤害提升"
+      }
     }
   ],
   "2000075": [
@@ -9074,6 +9628,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9083,7 +9638,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Light",
+        "jp": "光属性対象の 効果命中",
+        "kr": "명속성 대상 효과 적중",
+        "zh": "光属性效果命中"
+      }
     }
   ],
   "2000076": [
@@ -9093,6 +9654,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9102,7 +9664,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Earth",
+        "jp": "地属性対象の ダメージUP",
+        "kr": "지속성 대상 피해 증가",
+        "zh": "对土属性目标造成 伤害提升"
+      }
     }
   ],
   "2000077": [
@@ -9112,6 +9680,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_EARTH",
+      "levels": [150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9121,7 +9690,13 @@
           "mode": "flat",
           "value": 150
         }
-      ]
+      ],
+      "label": {
+        "en": "Critical Hit Chance vs Water",
+        "jp": "水属性対象の会心率",
+        "kr": "수속성 대상 치명 확률",
+        "zh": "对水属性暴击率"
+      }
     }
   ],
   "2000078": [
@@ -9131,6 +9706,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9140,7 +9716,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Fire",
+        "jp": "火属性対象の ダメージUP",
+        "kr": "화속성 대상 피해 증가",
+        "zh": "对火属性目标造成 伤害提升"
+      }
     }
   ],
   "2000079": [
@@ -9150,6 +9732,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_LIGHT",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9159,7 +9742,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Dark",
+        "jp": "闇属性対象の 効果命中",
+        "kr": "암속성 대상 효과 적중",
+        "zh": "暗属性效果命中"
+      }
     }
   ],
   "2000080": [
@@ -9169,6 +9758,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9178,7 +9768,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Earth",
+        "jp": "地属性対象の ダメージUP",
+        "kr": "지속성 대상 피해 증가",
+        "zh": "对土属性目标造成 伤害提升"
+      }
     }
   ],
   "2000081": [
@@ -9188,6 +9784,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9197,7 +9794,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Earth",
+        "jp": "地属性対象の 効果命中",
+        "kr": "지속성 대상 효과 적중",
+        "zh": "土属性效果命中"
+      }
     }
   ],
   "2000082": [
@@ -9207,6 +9810,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CRITICAL_RATE_WATER",
+      "levels": [150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9216,7 +9820,13 @@
           "mode": "flat",
           "value": 150
         }
-      ]
+      ],
+      "label": {
+        "en": "Critical Hit Chance vs Fire",
+        "jp": "火属性対象の会心率",
+        "kr": "화속성 대상 치명 확률",
+        "zh": "对火属性暴击率"
+      }
     }
   ],
   "2000083": [
@@ -9226,6 +9836,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_DARK",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9235,7 +9846,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Light",
+        "jp": "光属性対象の受ける ダメージDOWN",
+        "kr": "명속성 대상 받는 피해 감소",
+        "zh": "光属性所受伤害降低"
+      }
     }
   ],
   "2000084": [
@@ -9245,6 +9862,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9254,7 +9872,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Dark",
+        "jp": "闇属性対象の受ける ダメージDOWN",
+        "kr": "암속성 대상 받는 피해 감소",
+        "zh": "暗属性所受伤害降低"
+      }
     }
   ],
   "2000085": [
@@ -9264,6 +9888,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9273,7 +9898,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Fire",
+        "jp": "火属性対象の ダメージUP",
+        "kr": "화속성 대상 피해 증가",
+        "zh": "对火属性目标造成 伤害提升"
+      }
     }
   ],
   "2000086": [
@@ -9283,6 +9914,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9292,7 +9924,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Water",
+        "jp": "水属性対象の ダメージUP",
+        "kr": "수속성 대상 피해 증가",
+        "zh": "对水属性目标造成 伤害提升"
+      }
     }
   ],
   "2000087": [
@@ -9302,6 +9940,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9311,7 +9950,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Water",
+        "jp": "水属性対象の ダメージUP",
+        "kr": "수속성 대상 피해 증가",
+        "zh": "对水属性目标造成 伤害提升"
+      }
     }
   ],
   "2000088": [
@@ -9321,6 +9966,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9330,7 +9976,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Light",
+        "jp": "光属性対象の 効果命中",
+        "kr": "명속성 대상 효과 적중",
+        "zh": "光属性效果命中"
+      }
     }
   ],
   "2000089": [
@@ -9340,6 +9992,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9349,7 +10002,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Fire",
+        "jp": "火属性対象の受ける ダメージDOWN",
+        "kr": "화속성 대상 받는 피해 감소",
+        "zh": "火属性所受伤害降低"
+      }
     }
   ],
   "2000090": [
@@ -9359,6 +10018,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9368,7 +10028,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Light",
+        "jp": "光属性対象の ダメージUP",
+        "kr": "명속성 대상 피해 증가",
+        "zh": "对光属性目标造成 伤害提升"
+      }
     }
   ],
   "2000091": [
@@ -9378,6 +10044,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9387,7 +10054,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Dark",
+        "jp": "闇属性対象の受ける ダメージDOWN",
+        "kr": "암속성 대상 받는 피해 감소",
+        "zh": "暗属性所受伤害降低"
+      }
     }
   ],
   "2000092": [
@@ -9397,6 +10070,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9406,7 +10080,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Dark",
+        "jp": "闇属性対象の受ける ダメージDOWN",
+        "kr": "암속성 대상 받는 피해 감소",
+        "zh": "暗属性所受伤害降低"
+      }
     }
   ],
   "2000093": [
@@ -9416,6 +10096,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9425,7 +10106,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Earth",
+        "jp": "地属性対象の ダメージUP",
+        "kr": "지속성 대상 피해 증가",
+        "zh": "对土属性目标造成 伤害提升"
+      }
     }
   ],
   "2000094": [
@@ -9435,6 +10122,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9444,7 +10132,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Earth",
+        "jp": "地属性対象の ダメージUP",
+        "kr": "지속성 대상 피해 증가",
+        "zh": "对土属性目标造成 伤害提升"
+      }
     }
   ],
   "2000095": [
@@ -9454,6 +10148,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9463,7 +10158,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Earth",
+        "jp": "地属性対象の ダメージUP",
+        "kr": "지속성 대상 피해 증가",
+        "zh": "对土属性目标造成 伤害提升"
+      }
     }
   ],
   "2000096": [
@@ -9473,6 +10174,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9482,7 +10184,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Dark",
+        "jp": "闇属性対象の受ける ダメージDOWN",
+        "kr": "암속성 대상 받는 피해 감소",
+        "zh": "暗属性所受伤害降低"
+      }
     }
   ],
   "2000097": [
@@ -9492,6 +10200,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9501,7 +10210,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Water",
+        "jp": "水属性対象の ダメージUP",
+        "kr": "수속성 대상 피해 증가",
+        "zh": "对水属性目标造成 伤害提升"
+      }
     }
   ],
   "2000098": [
@@ -9511,6 +10226,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_FIRE",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9520,7 +10236,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Earth",
+        "jp": "地属性対象の受ける ダメージDOWN",
+        "kr": "지속성 대상 받는 피해 감소",
+        "zh": "土属性所受伤害降低"
+      }
     }
   ],
   "2000099": [
@@ -9530,6 +10252,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9539,7 +10262,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Water",
+        "jp": "水属性対象の受ける ダメージDOWN",
+        "kr": "수속성 대상 받는 피해 감소",
+        "zh": "水属性所受伤害降低"
+      }
     }
   ],
   "2000100": [
@@ -9549,6 +10278,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_DARK",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9558,7 +10288,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Light",
+        "jp": "光属性対象の受ける ダメージDOWN",
+        "kr": "명속성 대상 받는 피해 감소",
+        "zh": "光属性所受伤害降低"
+      }
     }
   ],
   "2000101": [
@@ -9568,6 +10304,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9577,7 +10314,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Dark",
+        "jp": "闇属性対象の受ける ダメージDOWN",
+        "kr": "암속성 대상 받는 피해 감소",
+        "zh": "暗属性所受伤害降低"
+      }
     }
   ],
   "2000102": [
@@ -9587,6 +10330,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_DARK",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9596,7 +10340,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Light",
+        "jp": "光属性対象の受ける ダメージDOWN",
+        "kr": "명속성 대상 받는 피해 감소",
+        "zh": "光属性所受伤害降低"
+      }
     }
   ],
   "2000103": [
@@ -9606,6 +10356,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9615,7 +10366,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Fire",
+        "jp": "火属性対象の受ける ダメージDOWN",
+        "kr": "화속성 대상 받는 피해 감소",
+        "zh": "火属性所受伤害降低"
+      }
     }
   ],
   "2000105": [
@@ -9625,6 +10382,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9634,7 +10392,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Water",
+        "jp": "水属性対象の ダメージUP",
+        "kr": "수속성 대상 피해 증가",
+        "zh": "对水属性目标造成 伤害提升"
+      }
     }
   ],
   "2000106": [
@@ -9644,6 +10408,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9653,7 +10418,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Fire",
+        "jp": "火属性対象の ダメージUP",
+        "kr": "화속성 대상 피해 증가",
+        "zh": "对火属性目标造成 伤害提升"
+      }
     }
   ],
   "2000107": [
@@ -9663,6 +10434,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9672,7 +10444,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Fire",
+        "jp": "火属性対象の 効果命中",
+        "kr": "화속성 대상 효과 적중",
+        "zh": "火属性效果命中"
+      }
     }
   ],
   "2000108": [
@@ -9682,6 +10460,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_EARTH",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9691,7 +10470,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Water",
+        "jp": "水属性対象の受ける ダメージDOWN",
+        "kr": "수속성 대상 받는 피해 감소",
+        "zh": "水属性所受伤害降低"
+      }
     }
   ],
   "2000109": [
@@ -9701,6 +10486,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9710,7 +10496,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Light",
+        "jp": "光属性対象の ダメージUP",
+        "kr": "명속성 대상 피해 증가",
+        "zh": "对光属性目标造成 伤害提升"
+      }
     }
   ],
   "2000110": [
@@ -9720,6 +10512,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_LIGHT",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9729,7 +10522,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Dark",
+        "jp": "闇属性対象の ダメージUP",
+        "kr": "암속성 대상 피해 증가",
+        "zh": "对暗属性目标造成 伤害提升"
+      }
     }
   ],
   "2000111": [
@@ -9739,6 +10538,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9748,7 +10548,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Light",
+        "jp": "光属性対象の 効果命中",
+        "kr": "명속성 대상 효과 적중",
+        "zh": "光属性效果命中"
+      }
     }
   ],
   "2000112": [
@@ -9758,6 +10564,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9767,7 +10574,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Light",
+        "jp": "光属性対象の 効果命中",
+        "kr": "명속성 대상 효과 적중",
+        "zh": "光属性效果命中"
+      }
     }
   ],
   "2000113": [
@@ -9777,6 +10590,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_WATER",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9786,7 +10600,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Fire",
+        "jp": "火属性対象の受ける ダメージDOWN",
+        "kr": "화속성 대상 받는 피해 감소",
+        "zh": "火属性所受伤害降低"
+      }
     }
   ],
   "2000114": [
@@ -9796,6 +10616,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9805,7 +10626,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Earth",
+        "jp": "地属性対象の ダメージUP",
+        "kr": "지속성 대상 피해 증가",
+        "zh": "对土属性目标造成 伤害提升"
+      }
     }
   ],
   "2000116": [
@@ -9815,6 +10642,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_REDUCE_LIGHT",
+      "levels": [200, 207, 214, 221, 228, 235, 242, 249, 256, 263, 270],
       "factor": 1,
       "max": 10,
       "effects": [
@@ -9824,7 +10652,13 @@
           "mode": "rate",
           "value": 200
         }
-      ]
+      ],
+      "label": {
+        "en": "Reduced DMG Taken vs Dark",
+        "jp": "闇属性対象の受ける ダメージDOWN",
+        "kr": "암속성 대상 받는 피해 감소",
+        "zh": "暗属性所受伤害降低"
+      }
     }
   ],
   "2000117": [
@@ -9834,6 +10668,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9843,7 +10678,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Earth",
+        "jp": "地属性対象の ダメージUP",
+        "kr": "지속성 대상 피해 증가",
+        "zh": "对土属性目标造成 伤害提升"
+      }
     }
   ],
   "2000119": [
@@ -9853,6 +10694,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_LIGHT",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9862,7 +10704,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Dark",
+        "jp": "闇属性対象の ダメージUP",
+        "kr": "암속성 대상 피해 증가",
+        "zh": "对暗属性目标造成 伤害提升"
+      }
     }
   ],
   "2700003": [
@@ -9872,6 +10720,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_WATER",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9881,7 +10730,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Fire",
+        "jp": "火属性対象の 効果命中",
+        "kr": "화속성 대상 효과 적중",
+        "zh": "火属性效果命中"
+      }
     }
   ],
   "2700005": [
@@ -9891,6 +10746,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_FIRE",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9900,7 +10756,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Earth",
+        "jp": "地属性対象の ダメージUP",
+        "kr": "지속성 대상 피해 증가",
+        "zh": "对土属性目标造成 伤害提升"
+      }
     }
   ],
   "2700037": [
@@ -9910,6 +10772,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_WATER",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9919,7 +10782,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Fire",
+        "jp": "火属性対象の ダメージUP",
+        "kr": "화속성 대상 피해 증가",
+        "zh": "对火属性目标造成 伤害提升"
+      }
     }
   ],
   "2700043": [
@@ -9929,6 +10798,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_FIRE",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9938,7 +10808,13 @@
           "mode": "flat",
           "value": -30
         }
-      ]
+      ],
+      "label": {
+        "en": "Effectiveness vs Earth",
+        "jp": "地属性対象の 効果命中",
+        "kr": "지속성 대상 효과 적중",
+        "zh": "土属性效果命中"
+      }
     }
   ],
   "2700056": [
@@ -9948,6 +10824,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_EARTH",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9957,7 +10834,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Water",
+        "jp": "水属性対象の ダメージUP",
+        "kr": "수속성 대상 피해 증가",
+        "zh": "对水属性目标造成 伤害提升"
+      }
     }
   ],
   "2700070": [
@@ -9967,6 +10850,7 @@
       "value": 0,
       "weight": 100,
       "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
       "factor": 2,
       "max": 20,
       "effects": [
@@ -9976,7 +10860,13 @@
           "mode": "rate",
           "value": 170
         }
-      ]
+      ],
+      "label": {
+        "en": "DMG Increase vs Light",
+        "jp": "光属性対象の ダメージUP",
+        "kr": "명속성 대상 피해 증가",
+        "zh": "对光属性目标造成 伤害提升"
+      }
     }
   ]
 }

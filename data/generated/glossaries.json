@@ -25,18 +25,154 @@
       "zh": "传说"
     }
   },
-  "classes": {
-    "attacker": {
-      "en": "Striker",
-      "jp": "攻撃型",
-      "kr": "공격형",
-      "zh": "攻击型"
+  "statNames": {
+    "atk": {
+      "en": "Attack",
+      "jp": "攻撃力",
+      "kr": "공격력",
+      "zh": "攻击力"
     },
+    "buff_chance": {
+      "en": "Effectiveness",
+      "jp": "効果命中",
+      "kr": "효과 적중",
+      "zh": "效果命中"
+    },
+    "buff_resist": {
+      "en": "Resilience",
+      "jp": "効果抵抗",
+      "kr": "효과 저항",
+      "zh": "效果抵抗"
+    },
+    "counter_rate": {
+      "en": "Counterattack Chance",
+      "jp": "反撃発生率",
+      "kr": "반격 확률",
+      "zh": "反击率"
+    },
+    "critical_dmg_rate": {
+      "en": "Crit DMG",
+      "jp": "会心ダメージ",
+      "kr": "치명 피해",
+      "zh": "暴击伤害"
+    },
+    "critical_rate": {
+      "en": "Crit Chance",
+      "jp": "会心率",
+      "kr": "치명 확률",
+      "zh": "暴击率"
+    },
+    "def": {
+      "en": "Defense",
+      "jp": "防御力",
+      "kr": "방어력",
+      "zh": "防御力"
+    },
+    "dmg_boost": {
+      "en": "DMG Increase",
+      "jp": "与ダメUP",
+      "kr": "피해 증가",
+      "zh": "造成伤害提升"
+    },
+    "dmg_reduce_rate": {
+      "en": "DMG Reduction",
+      "jp": "被ダメDOWN",
+      "kr": "받는 피해 감소",
+      "zh": "受伤害降低"
+    },
+    "e_cri_dmg_reduce": {
+      "en": "Crit DMG Reduc",
+      "jp": "被会心ダメDOWN",
+      "kr": "받는 치명 피해 감소",
+      "zh": "受暴击伤害降低"
+    },
+    "enter_ap": {
+      "en": "Gains AP at the start of battle",
+      "jp": "戦闘開始時、AP獲得",
+      "kr": "입장 시 AP획득",
+      "zh": "入场时获得AP"
+    },
+    "hit_ap": {
+      "en": "Gains AP when hit",
+      "jp": "ダメージを受けるとAP獲得",
+      "kr": "피격 시 AP획득",
+      "zh": "受到攻击时获得AP"
+    },
+    "hp": {
+      "en": "Health",
+      "jp": "HP",
+      "kr": "체력",
+      "zh": "生命值"
+    },
+    "kill_ap": {
+      "en": "Gains AP when an enemy dies",
+      "jp": "敵が倒れた時、AP獲得",
+      "kr": "적 사망 시 AP획득",
+      "zh": "敌人死亡时获得AP"
+    },
+    "pierce_power": {
+      "en": "Penetration",
+      "jp": "貫通力",
+      "kr": "관통력",
+      "zh": "穿透力"
+    },
+    "pierce_power_rate": {
+      "en": "Penetration",
+      "jp": "貫通力",
+      "kr": "관통력",
+      "zh": "穿透力"
+    },
+    "speed": {
+      "en": "Speed",
+      "jp": "スピード",
+      "kr": "속도",
+      "zh": "速度"
+    },
+    "vampiric": {
+      "en": "Lifesteal",
+      "jp": "吸収",
+      "kr": "흡혈",
+      "zh": "吸血"
+    }
+  },
+  "statDescs": {
+    "dmg_boost": {
+      "en": "Increases damage dealt when attacking.\\nThis effect is added to the user's Critical Damage (when a critical hit occurs) and calculated together with the enemy's Critical Damage Reduction and Damage Taken Reduction. (Additive)",
+      "jp": "攻撃時に与えるダメージが増加します。\\nこの効果は自分の会心ダメージ（会心発生時）と加算され、敵の会心ダメージ減少および被ダメージ減少と共に計算されます。（加算）",
+      "kr": "공격 시 주는 피해량이 증가합니다.\\n이 효과는 자신의 치명 피해 수치와 합산되어(치명 발생 시), 적의 치명 피해 감소 및 받는 피해 감소 수치와 함께 계산됩니다. (합연산)",
+      "zh": "攻击时造成的伤害增加。\\n该效果会与自身的暴击伤害（发生暴击时）相加，并与敌方的暴击伤害减免及受到伤害减少一起计算。（加算）"
+    },
+    "dmg_reduce_rate": {
+      "en": "Reduces damage taken when hit.\\nThis effect is added to the user's Critical Damage Reduction (when critically hit) and calculated together with the enemy's Critical Damage and Damage Increase. (Additive)",
+      "jp": "被弾時に受けるダメージが減少します。\\nこの効果は自分の会心ダメージ減少（会心被弾時）と加算され、敵の会心ダメージおよびダメージ増加と共に計算されます。（加算）\\n「被ダメDOWN」および「被会心ダメDOWN」効果で減少できるダメージは、最大70%までです。",
+      "kr": "피격 시 받는 피해량이 감소합니다.\\n이 효과는 자신의 치명 피해 감소 수치와 합산되어(치명 피격 시), 적의 치명 피해 및 피해 증가 수치와 함께 계산됩니다. (합연산)\\n받는 피해 감소 및 받는 치명 피해 감소 효과로 감소시킬 수 있는 피해량은 최대 70%입니다.",
+      "zh": "受到攻击时承受的伤害减少。\\n该效果会与自身的暴击伤害减免（被暴击时）相加，并与敌方的暴击伤害及伤害增加一起计算。（加算）\\n通过[受伤害降低]及[受暴击伤害降低]效果，最多可减少70%的伤害。"
+    },
+    "e_cri_dmg_reduce": {
+      "en": "Reduces damage taken when hit.\\nWhen critically hit, this effect is added to the user's Critical Damage Reduction and is calculated together with the enemy's Critical Damage and Damage Increase. (Additive)\\nThe maximum total reduction from Damage Reduction and Enemy Critical Damage Reduction effects is 70%.",
+      "jp": "会心発生時、受けるダメージが減少します。\\nこの効果は自分の被ダメージ減少と加算され、敵の会心ダメージおよびダメージ増加と共に計算されます。（加算）\\n「被ダメDOWN」および「被会心ダメDOWN」効果で減少できるダメージは、最大70%までです。",
+      "kr": "치명 피격 시 받는 피해가 감소합니다.\\n이 효과는 자신의 받는 피해 감소 수치와 합산되어, 적의 치명 피해 및 피해 증가 수치와 함께 계산됩니다. (합연산)\\n받는 피해 감소 및 받는 치명 피해 감소 효과로 감소시킬 수 있는 피해량은 최대 70%입니다.",
+      "zh": "被暴击时受到的伤害减少。\\n该效果会与自身的受到伤害减少相加，并与敌方的暴击伤害及伤害增加一起计算。（加算）\\n通过[受伤害降低]及[受暴击伤害降低]效果，最多可减少70%的伤害。"
+    },
+    "pierce_power_rate": {
+      "en": "Ignores the target's Defense by the specified percentage when attacking.",
+      "jp": "攻撃時、指定された割合分、対象の防御力を無視します。",
+      "kr": "공격 시 해당 비율만큼 대상의 방어력을 무시합니다.",
+      "zh": "攻击时，无视目标相应比例的防御力。"
+    }
+  },
+  "classes": {
     "defender": {
       "en": "Defender",
       "jp": "防御型",
       "kr": "방어형",
       "zh": "防御型"
+    },
+    "healer": {
+      "en": "Healer",
+      "jp": "回復型",
+      "kr": "회복형",
+      "zh": "恢复型"
     },
     "mage": {
       "en": "Mage",
@@ -44,17 +180,17 @@
       "kr": "마법형",
       "zh": "魔法型"
     },
-    "priest": {
-      "en": "Healer",
-      "jp": "回復型",
-      "kr": "회복형",
-      "zh": "恢复型"
-    },
     "ranger": {
       "en": "Ranger",
       "jp": "スピード型",
       "kr": "속도형",
       "zh": "速度型"
+    },
+    "striker": {
+      "en": "Striker",
+      "jp": "攻撃型",
+      "kr": "공격형",
+      "zh": "攻击型"
     }
   },
   "elements": {
@@ -291,7 +427,13 @@
       "zh": "自然物件"
     }
   },
-  "statusEffects": {
+  "fusionTitle": {
+    "en": "Core Fusion",
+    "jp": "コアフュージョン",
+    "kr": "코어 융합",
+    "zh": "核心融合"
+  },
+  "effects": {
     "1": {
       "id": "1",
       "name": {
@@ -307,7 +449,9 @@
         "zh": "回合开始时，根据施展者的攻击力\\n受到等比伤害。无视目标的防御力。\\n施展者死亡时解除。"
       },
       "icon": "IG_Buff_Dot_Burn",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1"]
     },
     "2": {
       "id": "2",
@@ -324,7 +468,9 @@
         "zh": "回合开始时，根据自身的生命值\\n受到等比伤害。\\n施展者死亡时解除。"
       },
       "icon": "IG_Buff_Dot_Curse",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["2"]
     },
     "3": {
       "id": "3",
@@ -341,7 +487,9 @@
         "zh": "使受到的治愈效果降低，回合开始时，\\n根据施展者的攻击力受到等比伤害。\\n施展者死亡时解除。"
       },
       "icon": "IG_Buff_Dot_Bleed",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["3"]
     },
     "4": {
       "id": "4",
@@ -358,7 +506,9 @@
         "zh": "使所有可获得的行动值提升量降低\\n20%，并在回合开始时，根据施展者\\n的攻击力受到等比伤害。\\n施展者死亡时解除。"
       },
       "icon": "IG_Buff_Dot_Poison",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["4"]
     },
     "5": {
       "id": "5",
@@ -375,7 +525,9 @@
         "zh": "使AP获得量降低50%，并在回合开始\\n时，根据施展者的攻击力受到等比伤\\n害。\\n施展者死亡时解除。"
       },
       "icon": "IG_Buff_Dot_Lightning",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["5"]
     },
     "6": {
       "id": "6",
@@ -392,7 +544,9 @@
         "zh": "使目标的防御力提升50%。"
       },
       "icon": "IG_Buff_Stat_Def",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["6"]
     },
     "7": {
       "id": "7",
@@ -409,7 +563,9 @@
         "zh": "使目标的攻击力提升30%。"
       },
       "icon": "IG_Buff_Stat_Atk",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["7"]
     },
     "8": {
       "id": "8",
@@ -426,7 +582,9 @@
         "zh": "无视目标的30%防御力，并造成伤害。"
       },
       "icon": "IG_Buff_Stat_PierceRate",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["8"]
     },
     "9": {
       "id": "9",
@@ -443,7 +601,9 @@
         "zh": "使目标的效果命中提升100%。"
       },
       "icon": "IG_Buff_Stat_BuffChance",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["9"]
     },
     "10": {
       "id": "10",
@@ -460,7 +620,9 @@
         "zh": "使目标的效果抵抗提升100%。"
       },
       "icon": "IG_Buff_Stat_BuffResist",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["10"]
     },
     "11": {
       "id": "11",
@@ -477,7 +639,9 @@
         "zh": "使目标的暴击率提升50%。"
       },
       "icon": "IG_Buff_Stat_CriRate",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["11"]
     },
     "12": {
       "id": "12",
@@ -494,7 +658,9 @@
         "zh": "使目标的暴击伤害提升50%。"
       },
       "icon": "IG_Buff_Stat_CriDmgRate",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["12"]
     },
     "13": {
       "id": "13",
@@ -511,7 +677,9 @@
         "zh": "使目标的命中提升50%。"
       },
       "icon": "IG_Buff_Stat_Accuracy",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["13"]
     },
     "14": {
       "id": "14",
@@ -528,7 +696,9 @@
         "zh": "目标的未命中率提升15%。发生未命中时，伤害降低50%，且不会触发弱化效果与暴击。"
       },
       "icon": "IG_Buff_Stat_Avoid",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["14"]
     },
     "15": {
       "id": "15",
@@ -545,7 +715,9 @@
         "zh": "使目标的速度提升30%。"
       },
       "icon": "IG_Buff_Stat_Speed",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["15"]
     },
     "16": {
       "id": "16",
@@ -562,7 +734,9 @@
         "zh": "受到攻击时，恢复部分所受伤害。\\n恢复量不超过自身生命值上限10%。"
       },
       "icon": "IG_Buff_Stat_HitRecovery",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["16"]
     },
     "17": {
       "id": "17",
@@ -579,7 +753,9 @@
         "zh": "使目标的防御力降低50%。"
       },
       "icon": "IG_Buff_Stat_Def",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["17"]
     },
     "18": {
       "id": "18",
@@ -596,7 +772,9 @@
         "zh": "使目标的攻击力降低30%。"
       },
       "icon": "IG_Buff_Stat_Atk",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["18"]
     },
     "19": {
       "id": "19",
@@ -613,7 +791,9 @@
         "zh": "无视目标的一定比例防御力，造成\\n伤害。"
       },
       "icon": "IG_Buff_Stat_PierceRate",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["19"]
     },
     "20": {
       "id": "20",
@@ -630,7 +810,9 @@
         "zh": "使目标的效果命中降低100%。"
       },
       "icon": "IG_Buff_Stat_BuffChance",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["20"]
     },
     "21": {
       "id": "21",
@@ -647,7 +829,9 @@
         "zh": "使目标的效果抵抗降低100%。"
       },
       "icon": "IG_Buff_Stat_BuffResist",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["21"]
     },
     "22": {
       "id": "22",
@@ -664,7 +848,9 @@
         "zh": "使目标的暴击率降低50%。"
       },
       "icon": "IG_Buff_Stat_CriRate",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["22"]
     },
     "23": {
       "id": "23",
@@ -681,7 +867,9 @@
         "zh": "使目标的暴击伤害降低50%。"
       },
       "icon": "IG_Buff_Stat_CriDmgRate",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["23"]
     },
     "24": {
       "id": "24",
@@ -698,7 +886,9 @@
         "zh": "使目标的命中降低50%。"
       },
       "icon": "IG_Buff_Stat_Accuracy",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["24"]
     },
     "25": {
       "id": "25",
@@ -715,7 +905,9 @@
         "zh": "目标的未命中率降低15%。发生未命中时，伤害降低50%，且不会触发弱化效果与暴击。"
       },
       "icon": "IG_Buff_Stat_Avoid",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["25"]
     },
     "26": {
       "id": "26",
@@ -732,7 +924,9 @@
         "zh": "使目标的速度降低30%。"
       },
       "icon": "IG_Buff_Stat_Speed",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["26"]
     },
     "27": {
       "id": "27",
@@ -749,7 +943,9 @@
         "zh": "不受任何伤害。"
       },
       "icon": "IG_Buff_Effect_Invincible",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["27"]
     },
     "28": {
       "id": "28",
@@ -766,7 +962,9 @@
         "zh": "每回合恢复生命值上限的15%。"
       },
       "icon": "IG_Buff_Effect_Heal",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["28"]
     },
     "29": {
       "id": "29",
@@ -783,7 +981,9 @@
         "zh": "目标受到攻击时，优先消耗护盾。"
       },
       "icon": "IG_Buff_Effect_Shield",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["29"]
     },
     "30": {
       "id": "30",
@@ -800,7 +1000,9 @@
         "zh": "无视目标受到的弱化效果。"
       },
       "icon": "IG_Buff_Effect_Immune",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["30"]
     },
     "31": {
       "id": "31",
@@ -817,7 +1019,9 @@
         "zh": "当前生命值为0时复活。"
       },
       "icon": "IG_Buff_Revival",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["31"]
     },
     "32": {
       "id": "32",
@@ -834,7 +1038,9 @@
         "zh": "回合开始，对挑衅目标使用基本攻击。\\n施展者死亡时解除。"
       },
       "icon": "IG_Buff_Effect_Aggro",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["32"]
     },
     "33": {
       "id": "33",
@@ -851,7 +1057,9 @@
         "zh": "限制目标行动。\\n施展者死亡时解除。\\n冰冻、石化、黄金诅咒、\\n晕眩中持续时间最长的\\n1种效果生效。"
       },
       "icon": "IG_Buff_Effect_Freeze",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["33"]
     },
     "34": {
       "id": "34",
@@ -868,7 +1076,9 @@
         "zh": "限制目标行动。\\n施展者死亡时解除。\\n冰冻、石化、黄金诅咒、\\n晕眩中持续时间最长的\\n1种效果生效。"
       },
       "icon": "IG_Buff_Effect_Stun",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["34"]
     },
     "35": {
       "id": "35",
@@ -885,7 +1095,9 @@
         "zh": "限制目标行动。\\n施展者死亡时解除。\\n冰冻、石化、黄金诅咒、\\n晕眩中持续时间最长的\\n1种效果生效。"
       },
       "icon": "IG_Buff_Effect_Stone",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["35"]
     },
     "36": {
       "id": "36",
@@ -902,7 +1114,9 @@
         "zh": "成为自动攻击的目标，且所受伤害提升。\\n只对队伍中的1名成员造成标记，\\n且标记消失前不会对其他成员造成标记。"
       },
       "icon": "IG_Buff_Effect_Marking",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["36"]
     },
     "37": {
       "id": "37",
@@ -919,7 +1133,9 @@
         "zh": "效果持续期间，只能使用连携技能与\\n基本攻击。(无法使用爆发技)"
       },
       "icon": "IG_Buff_Effect_Silence",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["37"]
     },
     "38": {
       "id": "38",
@@ -936,7 +1152,9 @@
         "zh": "生命值恢复效果无效。"
       },
       "icon": "IG_Buff_Sealed_Receive_Heal",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["38"]
     },
     "39": {
       "id": "39",
@@ -953,7 +1171,9 @@
         "zh": "无法获得强化效果。\\n(部分效果除外)"
       },
       "icon": "IG_Buff_Effect_Sealed",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["39"]
     },
     "40": {
       "id": "40",
@@ -969,25 +1189,11 @@
         "kr": "아군의 공격을 호출합니다.",
         "zh": "呼叫友军进行攻击。"
       },
-      "icon": "",
-      "isDebuff": false
-    },
-    "41": {
-      "id": "41",
-      "name": {
-        "en": "Additional Attack",
-        "jp": "追加攻撃",
-        "kr": "추가타",
-        "zh": "额外攻击"
-      },
-      "desc": {
-        "en": "Performs an additional attack.",
-        "jp": "敵を通常スキルで\\n追加攻撃する。",
-        "kr": "추가 공격을 입힙니다.",
-        "zh": "造成额外攻击。"
-      },
-      "icon": "",
-      "isDebuff": false
+      "icon": "SC_Buff_Effect_Dual_Attack",
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["40"],
+      "iconEditorial": true
     },
     "42": {
       "id": "42",
@@ -1003,25 +1209,11 @@
         "kr": "추가 공격을 입힙니다.",
         "zh": "造成额外攻击。"
       },
-      "icon": "",
-      "isDebuff": false
-    },
-    "43": {
-      "id": "43",
-      "name": {
-        "en": "Additional Attack",
-        "jp": "追加攻撃",
-        "kr": "추가타",
-        "zh": "额外攻击"
-      },
-      "desc": {
-        "en": "Performs an additional attack.",
-        "jp": "敵を通常スキルで\\n追加攻撃する。",
-        "kr": "추가 공격을 입힙니다.",
-        "zh": "造成额外攻击。"
-      },
-      "icon": "",
-      "isDebuff": false
+      "icon": "SC_Buff_Extra_Skill",
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["42"],
+      "iconEditorial": true
     },
     "44": {
       "id": "44",
@@ -1037,8 +1229,11 @@
         "kr": "한 번 더 행동합니다.",
         "zh": "再行动1次。"
       },
-      "icon": "",
-      "isDebuff": false
+      "icon": "SC_Buff_Effect_Extra_Turn",
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["44"],
+      "iconEditorial": true
     },
     "45": {
       "id": "45",
@@ -1055,7 +1250,9 @@
         "zh": "受到攻击时，对目标进行反击。"
       },
       "icon": "IG_Buff_Counter",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["45"]
     },
     "46": {
       "id": "46",
@@ -1071,8 +1268,11 @@
         "kr": "적 행동 중 아군에게 약화 효과가 적용된 경우, 대상에게 반격합니다.",
         "zh": "敌人对友军造成弱化效果时，对目标\\n进行反击。"
       },
-      "icon": "",
-      "isDebuff": false
+      "icon": "SC_Buff_Revenge",
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["46"],
+      "iconEditorial": true
     },
     "47": {
       "id": "47",
@@ -1088,8 +1288,11 @@
         "kr": "조건 만족 시 아군에게 해당 스킬을 사용합니다.",
         "zh": "满足条件时，对友军使用该技能。"
       },
-      "icon": "",
-      "isDebuff": false
+      "icon": "IG_Buff_Effect_Revenge_Heal",
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["47"],
+      "iconEditorial": true
     },
     "48": {
       "id": "48",
@@ -1105,8 +1308,10 @@
         "kr": "대상의 강화 효과를 일정 수량 해제합니다.",
         "zh": "解除目标一定数量的强化效果。"
       },
-      "icon": "",
-      "isDebuff": true
+      "icon": "SC_Buff_Effect_Remove_Buff",
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["48"]
     },
     "49": {
       "id": "49",
@@ -1122,8 +1327,11 @@
         "kr": "대상의 약화 효과를 일정 수량 해제합니다.",
         "zh": "解除目标一定数量的弱化效果。"
       },
-      "icon": "",
-      "isDebuff": false
+      "icon": "SC_Buff_Effect_Cleanse",
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["49"],
+      "iconEditorial": true
     },
     "50": {
       "id": "50",
@@ -1139,8 +1347,11 @@
         "kr": "대상의 강화 효과 지속 시간을 일정 턴 증가시킵니다.",
         "zh": "使目标的强化效果持续时间增加一定\\n回合。"
       },
-      "icon": "",
-      "isDebuff": false
+      "icon": "IG_Buff_BuffdurationIncrease",
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["50"],
+      "iconEditorial": true
     },
     "51": {
       "id": "51",
@@ -1157,24 +1368,9 @@
         "zh": "使目标的强化效果持续时间减少一定\\n回合。"
       },
       "icon": "",
-      "isDebuff": true
-    },
-    "52": {
-      "id": "52",
-      "name": {
-        "en": "Debuff Duration Increase",
-        "jp": "弱体効果ターン延長",
-        "kr": "약화 효과 지속 증가",
-        "zh": "弱化效果持续时间增加"
-      },
-      "desc": {
-        "en": "Increases the target's debuff durations by a certain number of turns.",
-        "jp": "対象の弱体効果のターンを\\n延長させる。",
-        "kr": "대상의 약화 효과 지속 시간을 일정 턴 증가시킵니다.",
-        "zh": "使目标的弱化效果持续时间增加一定\\n回合。"
-      },
-      "icon": "",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["51"]
     },
     "53": {
       "id": "53",
@@ -1190,8 +1386,11 @@
         "kr": "대상의 약화 효과 지속 시간을 일정 턴 감소시킵니다.",
         "zh": "使目标的弱化效果持续时间减少一定\\n回合。"
       },
-      "icon": "",
-      "isDebuff": false
+      "icon": "IG_Buff_BuffdurationReduce",
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["53"],
+      "iconEditorial": true
     },
     "54": {
       "id": "54",
@@ -1207,8 +1406,11 @@
         "kr": "공격 후 대상의 체력이 특정 수치 이하일 때, 대상을 즉시 사망시킵니다.",
         "zh": "攻击后，若目标的生命值降至特定数\\n值以下，则使目标即死。"
       },
-      "icon": "",
-      "isDebuff": true
+      "icon": "IG_Buff_Effect_InstantDeath",
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["54"],
+      "iconEditorial": true
     },
     "55": {
       "id": "55",
@@ -1224,8 +1426,11 @@
         "kr": "사망한 아군을 부활시킵니다. 부활한 아군은 모든 스킬 쿨타임 및 누적된 스킬 효과가 초기화됩니다.",
         "zh": "使死亡的友军复活。\\n使复活友军的所有技能冷却时间\\n与累积技能效果重置。"
       },
-      "icon": "",
-      "isDebuff": false
+      "icon": "SC_Buff_Resurect_G",
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["55", "86"],
+      "iconEditorial": true
     },
     "56": {
       "id": "56",
@@ -1241,76 +1446,11 @@
         "kr": "지정된 약화 효과를 즉시 발동시킵니다. 턴 수와 적용된 수량에 영향을 받습니다.",
         "zh": "立即发动指定的弱化效果。会受到\\n回合数与附带数量的影响。"
       },
-      "icon": "",
-      "isDebuff": true
-    },
-    "57": {
-      "id": "57",
-      "name": {
-        "en": "Detonate",
-        "jp": "破裂",
-        "kr": "폭발",
-        "zh": "爆炸"
-      },
-      "desc": {
-        "en": "Activates certain debuffs immediately. Magnitude determined by the number of turns remaining and stacks applied.",
-        "jp": "指定された弱体効果の\\nダメージを即時に与える。\\n弱体効果のターン数と付与数が\\n多いほど、ダメージがUPする。",
-        "kr": "지정된 약화 효과를 즉시 발동시킵니다. 턴 수와 적용된 수량에 영향을 받습니다.",
-        "zh": "立即发动指定的弱化效果。会受到\\n回合数与附带数量的影响。"
-      },
-      "icon": "",
-      "isDebuff": true
-    },
-    "58": {
-      "id": "58",
-      "name": {
-        "en": "Detonate",
-        "jp": "破裂",
-        "kr": "폭발",
-        "zh": "爆炸"
-      },
-      "desc": {
-        "en": "Activates certain debuffs immediately. Magnitude determined by the number of turns remaining and stacks applied.",
-        "jp": "指定された弱体効果の\\nダメージを即時に与える。\\n弱体効果のターン数と付与数が\\n多いほど、ダメージがUPする。",
-        "kr": "지정된 약화 효과를 즉시 발동시킵니다. 턴 수와 적용된 수량에 영향을 받습니다.",
-        "zh": "立即发动指定的弱化效果。会受到\\n回合数与附带数量的影响。"
-      },
-      "icon": "",
-      "isDebuff": true
-    },
-    "59": {
-      "id": "59",
-      "name": {
-        "en": "Detonate",
-        "jp": "破裂",
-        "kr": "폭발",
-        "zh": "爆炸"
-      },
-      "desc": {
-        "en": "Activates certain debuffs immediately. Magnitude determined by the number of turns remaining and stacks applied.",
-        "jp": "指定された弱体効果の\\nダメージを即時に与える。\\n弱体効果のターン数と付与数が\\n多いほど、ダメージがUPする。",
-        "kr": "지정된 약화 효과를 즉시 발동시킵니다. 턴 수와 적용된 수량에 영향을 받습니다.",
-        "zh": "立即发动指定的弱化效果。会受到\\n回合数与附带数量的影响。"
-      },
-      "icon": "",
-      "isDebuff": true
-    },
-    "60": {
-      "id": "60",
-      "name": {
-        "en": "Detonate",
-        "jp": "破裂",
-        "kr": "폭발",
-        "zh": "爆炸"
-      },
-      "desc": {
-        "en": "Activates certain debuffs immediately. Magnitude determined by the number of turns remaining and stacks applied.",
-        "jp": "指定された弱体効果の\\nダメージを即時に与える。\\n弱体効果のターン数と付与数が\\n多いほど、ダメージがUPする。",
-        "kr": "지정된 약화 효과를 즉시 발동시킵니다. 턴 수와 적용된 수량에 영향을 받습니다.",
-        "zh": "立即发动指定的弱化效果。会受到\\n回合数与附带数量的影响。"
-      },
-      "icon": "",
-      "isDebuff": true
+      "icon": "SC_Buff_detonate",
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["56", "57", "58", "60", "2300092"],
+      "iconEditorial": true
     },
     "61": {
       "id": "61",
@@ -1326,8 +1466,11 @@
         "kr": "대상의 행동 게이지가 일정 비율 증가합니다.",
         "zh": "使目标的行动值提升一定比例。"
       },
-      "icon": "",
-      "isDebuff": false
+      "icon": "SC_Buff_Effect_Increase_Priority",
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["61"],
+      "iconEditorial": true
     },
     "62": {
       "id": "62",
@@ -1343,8 +1486,11 @@
         "kr": "대상의 행동 게이지가 일정 비율 감소합니다.",
         "zh": "使目标的行动值降低一定比例。"
       },
-      "icon": "",
-      "isDebuff": true
+      "icon": "SC_Buff_Effect_Increase_Priority",
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["62"],
+      "iconEditorial": true
     },
     "63": {
       "id": "63",
@@ -1361,75 +1507,9 @@
         "zh": "使技能冷却时间减少一定回合。"
       },
       "icon": "IG_Buff_Cool_Charge",
-      "isDebuff": false
-    },
-    "64": {
-      "id": "64",
-      "name": {
-        "en": "Cooldown Increase",
-        "jp": "スキルターン増加",
-        "kr": "쿨타임 증가",
-        "zh": "冷却时间增加"
-      },
-      "desc": {
-        "en": "Increases skill cooldowns by a certain number of turns.",
-        "jp": "スキルターンを増加させる。",
-        "kr": "스킬 쿨타임을 일정 턴 증가시킵니다.",
-        "zh": "使技能冷却时间增加一定回合。"
-      },
-      "icon": "IG_Buff_Cool_Charge",
-      "isDebuff": true
-    },
-    "65": {
-      "id": "65",
-      "name": {
-        "en": "Cooldown Reduction",
-        "jp": "スキルターン減少",
-        "kr": "쿨타임 감소",
-        "zh": "冷却时间减少"
-      },
-      "desc": {
-        "en": "Reduces skill cooldowns by a certain number of turns.",
-        "jp": "スキルターンを減少させる。",
-        "kr": "스킬 쿨타임을 일정 턴 감소시킵니다.",
-        "zh": "使技能冷却时间减少一定回合。"
-      },
-      "icon": "IG_Buff_Cool_Charge",
-      "isDebuff": false
-    },
-    "66": {
-      "id": "66",
-      "name": {
-        "en": "Cooldown Increase",
-        "jp": "スキルターン増加",
-        "kr": "쿨타임 증가",
-        "zh": "冷却时间增加"
-      },
-      "desc": {
-        "en": "Increases skill cooldowns by a certain number of turns.",
-        "jp": "スキルターンを増加させる。",
-        "kr": "스킬 쿨타임을 일정 턴 증가시킵니다.",
-        "zh": "使技能冷却时间增加一定回合。"
-      },
-      "icon": "IG_Buff_Cool_Charge",
-      "isDebuff": true
-    },
-    "67": {
-      "id": "67",
-      "name": {
-        "en": "Cooldown Reduction",
-        "jp": "スキルターン減少",
-        "kr": "쿨타임 감소",
-        "zh": "冷却时间减少"
-      },
-      "desc": {
-        "en": "Reduces skill cooldowns by a certain number of turns.",
-        "jp": "スキルターンを減少させる。",
-        "kr": "스킬 쿨타임을 일정 턴 감소시킵니다.",
-        "zh": "使技能冷却时间减少一定回合。"
-      },
-      "icon": "IG_Buff_Cool_Charge",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["63", "65", "67"]
     },
     "68": {
       "id": "68",
@@ -1446,7 +1526,9 @@
         "zh": "使技能冷却时间增加一定回合。"
       },
       "icon": "IG_Buff_Cool_Charge",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["68"]
     },
     "69": {
       "id": "69",
@@ -1463,7 +1545,9 @@
         "zh": "使所受伤害量降低一定比例。"
       },
       "icon": "IG_Buff_Dmg_Reduce",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["69"]
     },
     "70": {
       "id": "70",
@@ -1480,24 +1564,9 @@
         "zh": "使所受伤害量提升一定比例。"
       },
       "icon": "IG_Buff_Dmg_Reduce",
-      "isDebuff": true
-    },
-    "71": {
-      "id": "71",
-      "name": {
-        "en": "No Immunities",
-        "jp": "免疫なし",
-        "kr": "면역 없음",
-        "zh": "无免疫"
-      },
-      "desc": {
-        "en": "No Immunities",
-        "jp": "免疫なし",
-        "kr": "면역 없음",
-        "zh": "无免疫"
-      },
-      "icon": "",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["70"]
     },
     "72": {
       "id": "72",
@@ -1514,7 +1583,9 @@
         "zh": "被动效果，只对连携技能的\\n起始者生效。"
       },
       "icon": "",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["72"]
     },
     "73": {
       "id": "73",
@@ -1531,7 +1602,9 @@
         "zh": "被动效果，无论所处连携顺序，\\n皆会生效。"
       },
       "icon": "",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["73"]
     },
     "74": {
       "id": "74",
@@ -1548,7 +1621,9 @@
         "zh": "被动效果，只对连携技能的收尾者生效。"
       },
       "icon": "",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["74"]
     },
     "75": {
       "id": "75",
@@ -1564,42 +1639,10 @@
         "kr": "적의 방어를 무시하고 피해를 입힙니다.",
         "zh": "无视敌人的防御，并造成伤害。"
       },
-      "icon": "",
-      "isDebuff": true
-    },
-    "76": {
-      "id": "76",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "IG_Buff_Stat_CriRate",
-      "isDebuff": false
-    },
-    "77": {
-      "id": "77",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "IG_Buff_Stat_CriDmgRate",
-      "isDebuff": true
+      "icon": "SC_Buff_Effect_True_Dmg",
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["75"]
     },
     "78": {
       "id": "78",
@@ -1616,7 +1659,9 @@
         "zh": "若选择2~3阶段爆发，将触发其下\\n所有阶段的效果。\\n在使用爆发3阶段时，将获得所消耗\\nAP等比的CP。"
       },
       "icon": "",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["78", "84"]
     },
     "79": {
       "id": "79",
@@ -1633,7 +1678,9 @@
         "zh": "不受任何伤害。"
       },
       "icon": "IG_Buff_Effect_Invincible",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["79"]
     },
     "80": {
       "id": "80",
@@ -1650,7 +1697,9 @@
         "zh": "对处于力竭状态的目标造成的伤害\\n提升。"
       },
       "icon": "IG_Buff_Dmg_Target_Break",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["80"]
     },
     "81": {
       "id": "81",
@@ -1667,7 +1716,9 @@
         "zh": "连携技能造成的伤害大幅提升。"
       },
       "icon": "IG_Buff_Stat_Atk",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["81"]
     },
     "82": {
       "id": "82",
@@ -1684,7 +1735,9 @@
         "zh": "使所受的WG伤害量降低一定比例。"
       },
       "icon": "IG_Buff_Stat_Def",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["82"]
     },
     "83": {
       "id": "83",
@@ -1701,58 +1754,10 @@
         "zh": "对处于力竭状态的目标造成的伤害\\n提升。"
       },
       "icon": "IG_Buff_Dmg_Target_Break_Interruption",
-      "isDebuff": false
-    },
-    "84": {
-      "id": "84",
-      "name": {
-        "en": "Burst Skill",
-        "jp": "バーストスキル",
-        "kr": "버스트 스킬",
-        "zh": "爆发技能"
-      },
-      "desc": {
-        "en": "When using Burst level 2 or 3, the effects of all preceding levels are applied.\\nWhen using Burst level 3, Chain Points are generated proportional to the amount of consumed Action Points.",
-        "jp": "バーストスキル2～3段階では\\n下位段階の効果がすべて適用される。\\nバーストスキルで消費したAPが\\n多いほど、CPをより多く獲得する。",
-        "kr": "버스트 2~3 단계 선택 시, 하위 단계의 효과가 모두 적용되며 소모한 AP에 비례하여 CP를 획득합니다.",
-        "zh": "若选择第2~3阶段爆发，将触发其\\n下所有阶段的效果，且获得所消耗\\nAP等比的CP。"
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "85": {
-      "id": "85",
-      "name": {
-        "en": "Martyrdom",
-        "jp": "殉教",
-        "kr": "순교",
-        "zh": "殉敎"
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "IG_Buff_Death_Timer",
-      "isDebuff": true
-    },
-    "86": {
-      "id": "86",
-      "name": {
-        "en": "Resurrection (Greater)",
-        "jp": "復活(強化)",
-        "kr": "부활(강화)",
-        "zh": "复活(强化)"
-      },
-      "desc": {
-        "en": "Revives a fallen ally. Revived allies will have their skill cooldowns and stacking skill effects reset.",
-        "jp": "倒れた味方を復活させ、\\n復活した味方のスキルターンを\\n初期化させる。\\n累積されたスキル効果が\\n解除される。",
-        "kr": "사망한 아군을 부활시킵니다. 부활한 아군은 모든 스킬 쿨타임 및 누적된 스킬 효과가 초기화됩니다.",
-        "zh": "使死亡的友军复活。\\n使复活友军的所有技能冷却时间\\n与累积技能效果重置。"
-      },
-      "icon": "",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["83"],
+      "irremovable": true
     },
     "87": {
       "id": "87",
@@ -1768,8 +1773,11 @@
         "kr": "해당 공격은 치명 공격이 발생하지 않지만, 주는 피해가 50% 증가하고 보스의 방어력을 30% 무시합니다.",
         "zh": "该攻击不会发生暴击，\\n但造成的伤害提升50%，\\n并无视首领30%的防御力。"
       },
-      "icon": "",
-      "isDebuff": false
+      "icon": "SC_Buff_Effect_Heavy_bk",
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["87"],
+      "iconEditorial": true
     },
     "88": {
       "id": "88",
@@ -1786,24 +1794,9 @@
         "zh": "恢复对目标造成伤害的20%。"
       },
       "icon": "IG_Buff_HPdrain",
-      "isDebuff": false
-    },
-    "89": {
-      "id": "89",
-      "name": {
-        "en": "Reduces Lifesteal",
-        "jp": "吸収DOWN",
-        "kr": "흡혈 감소",
-        "zh": "吸血降低"
-      },
-      "desc": {
-        "en": "Reduces Lifesteal effect by 20%.",
-        "jp": "対象の吸収効果が\\n20%DOWNする。",
-        "kr": "대상의 흡혈 효과가 20% 감소합니다.",
-        "zh": "目标的吸血效果降低20%。"
-      },
-      "icon": "IG_Buff_HPdrain",
-      "isDebuff": true
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["88"]
     },
     "90": {
       "id": "90",
@@ -1820,24 +1813,9 @@
         "zh": "目标的当前生命值不会降低至1以下。"
       },
       "icon": "IG_Buff_Undead",
-      "isDebuff": false
-    },
-    "91": {
-      "id": "91",
-      "name": {
-        "en": "Damage over Time",
-        "jp": "継続ダメージ",
-        "kr": "지속 피해",
-        "zh": "持续伤害"
-      },
-      "desc": {
-        "en": "Burned, Cursed, Bleeding, Poisoned, Shocked",
-        "jp": "火傷、呪い、出血、中毒、感電",
-        "kr": "화상, 저주, 출혈, 중독, 감전",
-        "zh": "烧伤、诅咒、出血、中毒、触电"
-      },
-      "icon": "IG_Buff_Dot_All",
-      "isDebuff": true
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["90"]
     },
     "92": {
       "id": "92",
@@ -1854,7 +1832,9 @@
         "zh": "提升能力值的强化效果效率提升100%。"
       },
       "icon": "IG_Buff_Enhance",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["92"]
     },
     "93": {
       "id": "93",
@@ -1871,41 +1851,9 @@
         "zh": "提升能力值的强化效果效率降低100%。"
       },
       "icon": "IG_Buff_Enhance",
-      "isDebuff": true
-    },
-    "94": {
-      "id": "94",
-      "name": {
-        "en": "Debuff Enhancement",
-        "jp": "弱体促進",
-        "kr": "약화 촉진",
-        "zh": "弱化促进"
-      },
-      "desc": {
-        "en": "Increases the efficiency of debuff effects that decrease stats by 100%.",
-        "jp": "ステータスを下げる弱体効果の\\n効率が100%UPする。",
-        "kr": "능력치를 감소시키는 약화 효과의 효율이 100% 증가됩니다.",
-        "zh": "降低能力值的弱化效果效率提升100%。"
-      },
-      "icon": "IG_Buff_Enhance",
-      "isDebuff": true
-    },
-    "95": {
-      "id": "95",
-      "name": {
-        "en": "Debuff Impairment",
-        "jp": "弱体抑制",
-        "kr": "약화 감쇄",
-        "zh": "弱化消损"
-      },
-      "desc": {
-        "en": "Reduces the efficiency of debuff effects that decrease stats by 100%.",
-        "jp": "ステータスを下げる弱体効果の\\n効率が100%DOWNする。",
-        "kr": "능력치를 감소시키는 약화 효과의 효율이 100% 감소합니다.",
-        "zh": "降低能力值的弱化效果效率降低100%。"
-      },
-      "icon": "IG_Buff_Enhance",
-      "isDebuff": false
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["93"]
     },
     "96": {
       "id": "96",
@@ -1922,7 +1870,9 @@
         "zh": "禁用目标的额外技能"
       },
       "icon": "IG_Buff_Effect_Seal_AddAttack",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["96"]
     },
     "97": {
       "id": "97",
@@ -1938,8 +1888,10 @@
         "kr": "대상에게 걸린 능력치 증가 효과를 감소 효과로 변경합니다.\\n\\n능력치 증가 효과\\n공격력, 방어력, 속도, 치명 확률, 치명 피해, 효과 적중, 효과 저항",
         "zh": "将目标持有的能力值提升效果变更为降低效果。\\n\\n能力值提升效果：\\n攻击力、防御力、速度、暴击率、\\n暴击伤害、效果命中、效果抵抗"
       },
-      "icon": "",
-      "isDebuff": true
+      "icon": "IG_Buff_Effect_Remove_Buff",
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["97"]
     },
     "98": {
       "id": "98",
@@ -1956,58 +1908,9 @@
         "zh": "若有未附带隐身效果的友军存在，\\n则不会成为攻击目标。\\n受到范围攻击时，伤害降低。"
       },
       "icon": "IG_Buff_Stealthed",
-      "isDebuff": false
-    },
-    "99": {
-      "id": "99",
-      "name": {
-        "en": "Dual Attack Disabled",
-        "jp": "連携不可",
-        "kr": "협공 불가",
-        "zh": "无法夹攻"
-      },
-      "desc": {
-        "en": "Target cannot activate Dual Attacks.",
-        "jp": "対象は連携を使用できない。",
-        "kr": "대상은 협공을 사용할 수 없습니다.",
-        "zh": "目标无法使用夹攻。"
-      },
-      "icon": "IG_Buff_SEAL_BT_CALL_BACKUP",
-      "isDebuff": true
-    },
-    "100": {
-      "id": "100",
-      "name": {
-        "en": "Stealing Buff",
-        "jp": "強化効果強奪",
-        "kr": "강화 효과 강탈",
-        "zh": "夺取强化效果"
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": true
-    },
-    "101": {
-      "id": "101",
-      "name": {
-        "en": "Seal Extra Turn",
-        "jp": "追加ターン封印",
-        "kr": "추가 턴 봉인",
-        "zh": "封印额外回合"
-      },
-      "desc": {
-        "en": "The target cannot be granted an extra turn.",
-        "jp": "対象の追加ターンを発動できなくする。",
-        "kr": "대상의 추가 턴을 금지시킵니다.",
-        "zh": "禁止目标获得额外回合。"
-      },
-      "icon": "IG_Buff_Effect_Seal_AddTurn",
-      "isDebuff": true
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["98"]
     },
     "102": {
       "id": "102",
@@ -2024,7 +1927,9 @@
         "zh": "目标的速攻值增加量全部减少。"
       },
       "icon": "IG_Buff_Seal_Action_Gauge",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["102"]
     },
     "103": {
       "id": "103",
@@ -2041,7 +1946,9 @@
         "zh": "所有<color=#28d9ed>行动条</color>提升效果减少20%，每回合开始时受到与施术者生命值成比例的伤害。\\n施术者死亡时解除。"
       },
       "icon": "IG_Buff_Dot_Poison02",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["103"]
     },
     "104": {
       "id": "104",
@@ -2058,7 +1965,9 @@
         "zh": "限制目标行动，\\n并使受到的伤害提升30%。\\n施法者死亡时解除。\\n冰冻、石化、眩晕、黄金诅咒中，\\n仅生效持续时间最长的1种效果。\\n持续时间结束或解除时，\\n使目标的攻击力降低1回合。\\n若目标为光属性，\\n额外使暴击伤害降低2回合。\\n(攻击力降低及暴击伤害降低效果无法解除)"
       },
       "icon": "IG_Buff_Effect_Golden_Curse",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["104"]
     },
     "105": {
       "id": "105",
@@ -2074,8 +1983,11 @@
         "kr": "강화 효과를 제거하고 랜덤한 아군에게 옮깁니다.(면역 무시)\\n동일 강화 효과를 보유 중이라면 지속 시간이 긴 강화 효과가 적용됩니다.\\n아군이 강화 효과를 보유할 수 없는 경우에도 제거되며 해제 불가 효과는 전이되지 않습니다.",
         "zh": "移除强化效果并转移给随机我方单位。\\n(无视免疫)\\n若已拥有相同强化效果，\\n则适用持续时间较长的强化效果。\\n即使我方无法持有强化效果也会被移除，\\n无法解除的效果不会被转移。"
       },
-      "icon": "",
-      "isDebuff": true
+      "icon": "IG_Buff_transfert",
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["105"],
+      "iconEditorial": true
     },
     "998": {
       "id": "998",
@@ -2092,24 +2004,10 @@
         "zh": "首次受到的1次攻击伤害降低40%。（受击时解除 / 不可解除）"
       },
       "icon": "IG_Buff_Start_Bulwark_Interruption",
-      "isDebuff": false
-    },
-    "999": {
-      "id": "999",
-      "name": {
-        "en": "Fortification",
-        "jp": "鉄壁",
-        "kr": "개전 방벽",
-        "zh": "开战防壁"
-      },
-      "desc": {
-        "en": "Damage taken decreases by 40% for the first 2 incoming attacks. (Removed when hit/Irremovable)",
-        "jp": "最初の2回の攻撃に対して、受けるダメージが40%DOWNします。(被弾時解除/解除不可)",
-        "kr": "최초 2회의 공격에 대한 받는 피해가 40% 감소합니다.(피격 시 해제 / 해제 불가)",
-        "zh": "首次受到的2次攻击伤害降低40%。（受击时解除 / 不可解除）"
-      },
-      "icon": "IG_Buff_Start_Bulwark_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["998", "999"],
+      "irremovable": true
     },
     "1001": {
       "id": "1001",
@@ -2126,7 +2024,10 @@
         "zh": "回合开始时，根据施展者的攻击力\\n受到等比伤害。无视目标的防御力。\\n(无法解除)"
       },
       "icon": "IG_Buff_Dot_Burn_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1001"],
+      "irremovable": true
     },
     "1002": {
       "id": "1002",
@@ -2143,7 +2044,10 @@
         "zh": "回合开始时，根据自身的生命值\\n受到等比伤害。\\n施展者死亡时解除。(无法解除)"
       },
       "icon": "IG_Buff_Dot_Curse_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1002"],
+      "irremovable": true
     },
     "1003": {
       "id": "1003",
@@ -2160,7 +2064,10 @@
         "zh": "使受到的治愈效果降低，回\\n合开始时，根据施展者的攻\\n击力受到等比伤害。\\n(无法解除)"
       },
       "icon": "IG_Buff_Dot_Bleed_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1003"],
+      "irremovable": true
     },
     "1004": {
       "id": "1004",
@@ -2177,7 +2084,10 @@
         "zh": "使所有可获得的行动值恢复量降低\\n20%，并在回合开始时，根据施展者\\n的攻击力受到等比伤害。(无法解除)"
       },
       "icon": "IG_Buff_Dot_Poison_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1004"],
+      "irremovable": true
     },
     "1005": {
       "id": "1005",
@@ -2194,7 +2104,10 @@
         "zh": "使AP获得量降低50%，并在回合开始\\n时，根据施展者的攻击力受到等比伤\\n害。(无法解除)"
       },
       "icon": "IG_Buff_Dot_Lightning_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1005"],
+      "irremovable": true
     },
     "1006": {
       "id": "1006",
@@ -2211,7 +2124,10 @@
         "zh": "使目标的防御力提升50%。\\n(无法解除)"
       },
       "icon": "IG_Buff_Stat_Def_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1006"],
+      "irremovable": true
     },
     "1007": {
       "id": "1007",
@@ -2228,7 +2144,10 @@
         "zh": "使目标的攻击力提升30%。\\n(无法解除)"
       },
       "icon": "IG_Buff_Stat_Atk_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1007"],
+      "irremovable": true
     },
     "1008": {
       "id": "1008",
@@ -2245,7 +2164,10 @@
         "zh": "无视30%目标防御力，并造成伤害。\\n(无法解除)"
       },
       "icon": "IG_Buff_Stat_PierceRate_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1008"],
+      "irremovable": true
     },
     "1009": {
       "id": "1009",
@@ -2262,7 +2184,10 @@
         "zh": "使目标的效果命中提升100%。\\n(无法解除)"
       },
       "icon": "IG_Buff_Stat_BuffChance_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1009"],
+      "irremovable": true
     },
     "1010": {
       "id": "1010",
@@ -2279,7 +2204,10 @@
         "zh": "使目标的效果抵抗提升100%。(无法解除)"
       },
       "icon": "IG_Buff_Stat_BuffResist_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1010"],
+      "irremovable": true
     },
     "1011": {
       "id": "1011",
@@ -2296,7 +2224,10 @@
         "zh": "使目标的暴击率提升50%。\\n(无法解除)"
       },
       "icon": "IG_Buff_Stat_CriRate_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1011"],
+      "irremovable": true
     },
     "1012": {
       "id": "1012",
@@ -2313,24 +2244,10 @@
         "zh": "使目标的暴击伤害提升50%。\\n(无法解除)"
       },
       "icon": "IG_Buff_Stat_CriDmgRate_Interruption",
-      "isDebuff": false
-    },
-    "1013": {
-      "id": "1013",
-      "name": {
-        "en": "Increased Accuracy",
-        "jp": "命中UP",
-        "kr": "명중 증가",
-        "zh": "命中提升"
-      },
-      "desc": {
-        "en": "Increases Accuracy by 50%. (Irremovable)",
-        "jp": "対象の命中が50%UPする。\\n(解除不可)",
-        "kr": "대상의 명중이 50% 증가합니다. (해제 불가)",
-        "zh": "使目标的命中提升50%。(无法解除)"
-      },
-      "icon": "IG_Buff_Stat_Accuracy_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1012"],
+      "irremovable": true
     },
     "1014": {
       "id": "1014",
@@ -2347,7 +2264,10 @@
         "zh": "目标的闪避率提升15%。发生闪避时，伤害降低50%，且不会触发弱化效果与暴击。（无法解除）"
       },
       "icon": "IG_Buff_Stat_Avoid_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1014"],
+      "irremovable": true
     },
     "1015": {
       "id": "1015",
@@ -2364,7 +2284,10 @@
         "zh": "使目标的速度提升30%。\\n(无法解除)"
       },
       "icon": "IG_Buff_Stat_Speed_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1015"],
+      "irremovable": true
     },
     "1017": {
       "id": "1017",
@@ -2381,7 +2304,10 @@
         "zh": "使目标的防御力降低50%。（无法解除）"
       },
       "icon": "IG_Buff_Stat_Def_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1017"],
+      "irremovable": true
     },
     "1018": {
       "id": "1018",
@@ -2398,7 +2324,10 @@
         "zh": "使目标的攻击力降低30%。\\n(无法解除)"
       },
       "icon": "IG_Buff_Stat_Atk_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1018"],
+      "irremovable": true
     },
     "1019": {
       "id": "1019",
@@ -2415,7 +2344,10 @@
         "zh": "目标穿透力降低30%。(无法解除)"
       },
       "icon": "IG_Buff_Stat_PierceRate_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1019", "1105"],
+      "irremovable": true
     },
     "1020": {
       "id": "1020",
@@ -2432,7 +2364,10 @@
         "zh": "使目标的效果命中降低100%。（无法解除）"
       },
       "icon": "IG_Buff_Stat_BuffChance_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1020"],
+      "irremovable": true
     },
     "1021": {
       "id": "1021",
@@ -2449,7 +2384,10 @@
         "zh": "使目标的效果抵抗降低100%。\\n(无法解除)"
       },
       "icon": "IG_Buff_Stat_BuffResist_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1021"],
+      "irremovable": true
     },
     "1022": {
       "id": "1022",
@@ -2466,7 +2404,10 @@
         "zh": "使目标的暴击率降低50%。\\n(无法解除)"
       },
       "icon": "IG_Buff_Stat_CriRate_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1022"],
+      "irremovable": true
     },
     "1023": {
       "id": "1023",
@@ -2483,7 +2424,10 @@
         "zh": "使目标的暴击伤害降低50%。\\n(无法解除)"
       },
       "icon": "IG_Buff_Stat_CriDmgRate_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1023"],
+      "irremovable": true
     },
     "1024": {
       "id": "1024",
@@ -2500,7 +2444,10 @@
         "zh": "使目标的命中降低50%。(无法解除)"
       },
       "icon": "IG_Buff_Stat_Accuracy_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1024"],
+      "irremovable": true
     },
     "1025": {
       "id": "1025",
@@ -2517,7 +2464,10 @@
         "zh": "目标的闪避率降低15%。发生闪避时，伤害降低50%，且不会触发弱化效果与暴击。（无法解除）"
       },
       "icon": "IG_Buff_Stat_Avoid_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1025"],
+      "irremovable": true
     },
     "1026": {
       "id": "1026",
@@ -2534,7 +2484,10 @@
         "zh": "使目标的速度降低30%。\\n(无法解除)"
       },
       "icon": "IG_Buff_Stat_Speed_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1026"],
+      "irremovable": true
     },
     "1027": {
       "id": "1027",
@@ -2551,7 +2504,10 @@
         "zh": "不受所有伤害。\\n(无法解除)"
       },
       "icon": "IG_Buff_Effect_Invincible_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1027"],
+      "irremovable": true
     },
     "1028": {
       "id": "1028",
@@ -2568,7 +2524,10 @@
         "zh": "每回合恢复生命值上限的15%。\\n(无法解除)"
       },
       "icon": "IG_Buff_Effect_Heal_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1028"],
+      "irremovable": true
     },
     "1029": {
       "id": "1029",
@@ -2585,7 +2544,10 @@
         "zh": "受击时，生成护盾代替生命值减少。\\n(无法解除)"
       },
       "icon": "IG_Buff_Effect_Shield_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1029"],
+      "irremovable": true
     },
     "1030": {
       "id": "1030",
@@ -2602,7 +2564,10 @@
         "zh": "无视所有状态异常。\\n(无法解除)"
       },
       "icon": "IG_Buff_Effect_Immune_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1030"],
+      "irremovable": true
     },
     "1032": {
       "id": "1032",
@@ -2619,7 +2584,10 @@
         "zh": "回合开始时，对挑衅目标发动基本攻击。\\n施展者死亡前无法解除。"
       },
       "icon": "IG_Buff_Effect_Aggro_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1032"],
+      "irremovable": true
     },
     "1033": {
       "id": "1033",
@@ -2636,7 +2604,10 @@
         "zh": "限制目标的行动。\\n施展者死亡时解除。（无法解除）"
       },
       "icon": "IG_Buff_Effect_Freeze_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1033"],
+      "irremovable": true
     },
     "1034": {
       "id": "1034",
@@ -2653,7 +2624,10 @@
         "zh": "限制目标的行动。\\n施展者死亡时解除。\\n(无法解除)"
       },
       "icon": "IG_Buff_Effect_Stun_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1034"],
+      "irremovable": true
     },
     "1035": {
       "id": "1035",
@@ -2670,7 +2644,10 @@
         "zh": "限制目标的行动。\\n施展者死亡时解除。（无法解除）"
       },
       "icon": "IG_Buff_Effect_Stone_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1035"],
+      "irremovable": true
     },
     "1036": {
       "id": "1036",
@@ -2687,7 +2664,10 @@
         "zh": "自动攻击目标时，所受伤害提升。\\n(无法解除)"
       },
       "icon": "IG_Buff_Effect_Marking_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1036"],
+      "irremovable": true
     },
     "1037": {
       "id": "1037",
@@ -2704,7 +2684,10 @@
         "zh": "效果持续期间，只能使用连携技能与基本攻击。\\n(无法使用爆发技、无法解除)"
       },
       "icon": "IG_Buff_Effect_Silence_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1037"],
+      "irremovable": true
     },
     "1038": {
       "id": "1038",
@@ -2721,7 +2704,10 @@
         "zh": "生命值恢复效果无效。\\n(无法解除)"
       },
       "icon": "IG_Buff_Sealed_Receive_Heal_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1038"],
+      "irremovable": true
     },
     "1039": {
       "id": "1039",
@@ -2738,7 +2724,10 @@
         "zh": "无法获得强化效果。\\n(部分效果除外，无法解除)"
       },
       "icon": "IG_Buff_Effect_Sealed_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1039"],
+      "irremovable": true
     },
     "1045": {
       "id": "1045",
@@ -2755,7 +2744,10 @@
         "zh": "受到攻击时，对目标进行反击。(无法解除)"
       },
       "icon": "IG_Buff_Counter_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1045"],
+      "irremovable": true
     },
     "1069": {
       "id": "1069",
@@ -2772,7 +2764,10 @@
         "zh": "使所受伤害量降低一定比例。\\n(无法解除)"
       },
       "icon": "IG_Buff_Dmg_Reduce_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1069"],
+      "irremovable": true
     },
     "1070": {
       "id": "1070",
@@ -2789,15 +2784,18 @@
         "zh": "使所受伤害量提升一定比例。\\n(无法解除)"
       },
       "icon": "IG_Buff_Dmg_Reduce_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1070"],
+      "irremovable": true
     },
     "1076": {
       "id": "1076",
       "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
+        "en": "Starving Devil",
+        "jp": "飢えた魔獣",
+        "kr": "굶주린 마수",
+        "zh": "饥饿的魔兽"
       },
       "desc": {
         "en": "Increases Critical Hit Chance by 100%. (Irremovable)",
@@ -2806,15 +2804,18 @@
         "zh": "使目标的暴击率提升100%。\\n(无法解除)"
       },
       "icon": "IG_Buff_Stat_CriRate_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1076"],
+      "irremovable": true
     },
     "1077": {
       "id": "1077",
       "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
+        "en": "Starving Devil",
+        "jp": "飢えた魔獣",
+        "kr": "굶주린 마수",
+        "zh": "饥饿的魔兽"
       },
       "desc": {
         "en": "Reduces Critical DMG by 85%. (Irremovable)",
@@ -2823,7 +2824,10 @@
         "zh": "使目标的暴击伤害降低85%。\\n(无法解除)"
       },
       "icon": "IG_Buff_Stat_CriDmgRate_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1077"],
+      "irremovable": true
     },
     "1085": {
       "id": "1085",
@@ -2840,7 +2844,10 @@
         "zh": "持续回合结束之前若无法击杀敌人则立即死亡。"
       },
       "icon": "IG_Buff_Death_Timer_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1085"],
+      "irremovable": true
     },
     "1092": {
       "id": "1092",
@@ -2857,24 +2864,10 @@
         "zh": "提升能力值的强化效果效率提升100%。(无法解除)"
       },
       "icon": "IG_Buff_Enhance_Interruption",
-      "isDebuff": false
-    },
-    "1093": {
-      "id": "1093",
-      "name": {
-        "en": "Buff Impairment",
-        "jp": "強化抑制",
-        "kr": "강화 감쇄",
-        "zh": "强化消损"
-      },
-      "desc": {
-        "en": "Reduces the efficiency of buff effects that increase stats by 100%. (Irremovable)",
-        "jp": "ステータスを上げる強化効果の\\n効率が100%DOWNする。(解除不可)",
-        "kr": "능력치를 증가시키는 강화 효과의 효율이 100% 감소합니다. (해제 불가)",
-        "zh": "提升能力值的强化效果效率减少100%。(无法解除)"
-      },
-      "icon": "IG_Buff_Enhance_Interruption_D",
-      "isDebuff": true
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1092"],
+      "irremovable": true
     },
     "1094": {
       "id": "1094",
@@ -2891,24 +2884,10 @@
         "zh": "降低能力值的弱化效果效率提升100%。(无法解除)"
       },
       "icon": "IG_Buff_Enhance_Interruption_D",
-      "isDebuff": true
-    },
-    "1095": {
-      "id": "1095",
-      "name": {
-        "en": "Debuff Impairment",
-        "jp": "弱体抑制",
-        "kr": "약화 감쇄",
-        "zh": "弱化消损"
-      },
-      "desc": {
-        "en": "Reduces the efficiency of debuff effects that decrease stats by 100%.. (Irremovable)",
-        "jp": "ステータスをDOWNさせる\\n弱体効果の効率が100%\\nDOWNする。(解除不可)",
-        "kr": "능력치를 감소시키는 약화 효과의 효율이 100% 감소합니다. (해제 불가)",
-        "zh": "降低能力值的弱化效果效率降低100%。(无法解除)"
-      },
-      "icon": "IG_Buff_Enhance_Interruption",
-      "isDebuff": false
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1094"],
+      "irremovable": true
     },
     "1096": {
       "id": "1096",
@@ -2925,7 +2904,10 @@
         "zh": "禁止目标获得额外回合\\n及发动额外技能。(无法解除)"
       },
       "icon": "IG_Buff_Effect_Seal_AddAttack_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1096"],
+      "irremovable": true
     },
     "1098": {
       "id": "1098",
@@ -2942,7 +2924,10 @@
         "zh": "若有未附带隐身效果的友军存在，\\n则不会成为攻击目标。\\n受到范围攻击时，伤害降低。(无法解除)"
       },
       "icon": "IG_Buff_Stealthed_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["1098"],
+      "irremovable": true
     },
     "1099": {
       "id": "1099",
@@ -2959,7 +2944,10 @@
         "zh": "目标无法使用夹攻。（无法解除）"
       },
       "icon": "IG_Buff_SEAL_BT_CALL_BACKUP_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1099"],
+      "irremovable": true
     },
     "1101": {
       "id": "1101",
@@ -2976,7 +2964,10 @@
         "zh": "禁止目标获得额外回合。(无法解除)"
       },
       "icon": "IG_Buff_Effect_Seal_AddTurn_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1101"],
+      "irremovable": true
     },
     "1102": {
       "id": "1102",
@@ -2993,24 +2984,10 @@
         "zh": "目标的行动值增加量全部减少。(无法解除)"
       },
       "icon": "IG_Buff_Seal_Action_Gauge_Interruption_D",
-      "isDebuff": true
-    },
-    "1105": {
-      "id": "1105",
-      "name": {
-        "en": "Reduced Penetration",
-        "jp": "貫通力DOWN",
-        "kr": "관통력 감소",
-        "zh": "穿透力降低"
-      },
-      "desc": {
-        "en": "The target's Penetration becomes 0. (Cannot be dispelled)",
-        "jp": "対象の貫通力が0になる。（解除不可）",
-        "kr": "대상의 관통력이 0이 됩니다. (해제 불가)",
-        "zh": "目标的穿透力变为0。（无法解除）"
-      },
-      "icon": "IG_Buff_Stat_PierceRate_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["1102"],
+      "irremovable": true
     },
     "10001": {
       "id": "10001",
@@ -3027,7 +3004,10 @@
         "zh": "队伍中每名异型怪猎人提升造成的伤害40%，降低所受伤害15%。"
       },
       "icon": "IG_Buff_Effect_Irregular_Hunter_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["10001"],
+      "irremovable": true
     },
     "10002": {
       "id": "10002",
@@ -3044,449 +3024,9 @@
         "zh": "获得随机能力值提升效果，持续5回合。\\n攻击力、防御力、速度、暴击率、暴击伤害、效果命中、效果抵抗、穿透力。"
       },
       "icon": "IG_Buff_Effect_Random_Buff",
-      "isDebuff": false
-    },
-    "11000": {
-      "id": "11000",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11001": {
-      "id": "11001",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11002": {
-      "id": "11002",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11003": {
-      "id": "11003",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11004": {
-      "id": "11004",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11010": {
-      "id": "11010",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11011": {
-      "id": "11011",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11012": {
-      "id": "11012",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11013": {
-      "id": "11013",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11014": {
-      "id": "11014",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11100": {
-      "id": "11100",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11101": {
-      "id": "11101",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11102": {
-      "id": "11102",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11103": {
-      "id": "11103",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11104": {
-      "id": "11104",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11110": {
-      "id": "11110",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11111": {
-      "id": "11111",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11112": {
-      "id": "11112",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11113": {
-      "id": "11113",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11114": {
-      "id": "11114",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "11120": {
-      "id": "11120",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "12001": {
-      "id": "12001",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "12002": {
-      "id": "12002",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "12003": {
-      "id": "12003",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "12004": {
-      "id": "12004",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "12005": {
-      "id": "12005",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["10002"]
     },
     "2000020": {
       "id": "2000020",
@@ -3503,7 +3043,10 @@
         "zh": "受到地属性敌人的伤害增加.(无法解除)"
       },
       "icon": "IG_Buff_2000020_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["2000020"],
+      "irremovable": true
     },
     "2000035": {
       "id": "2000035",
@@ -3520,7 +3063,10 @@
         "zh": "行动结束的敌人处于出血状态时，\\n使友军行动值提升10%。\\n我方受到的伤害减少30%。\\n在伊莉莎死亡之前无法被解除。"
       },
       "icon": "IG_Buff_2000035_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000035"],
+      "irremovable": true
     },
     "2000053": {
       "id": "2000053",
@@ -3537,7 +3083,10 @@
         "zh": "敌人使用非攻击技能时：自身AP+50\\n生命值低于自身的敌人行动时：\\n自身行动条 +10%\\n\\n（无法被解除）"
       },
       "icon": "IG_Buff_2000053_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000053"],
+      "irremovable": true
     },
     "2000056": {
       "id": "2000056",
@@ -3554,7 +3103,10 @@
         "zh": "对敌人造成的伤害提升，\\n且强化部分技能效果。\\n在诺缇亚死亡之前无法被解除。"
       },
       "icon": "IG_Buff_2000056_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000056"],
+      "irremovable": true
     },
     "2000057": {
       "id": "2000057",
@@ -3571,7 +3123,10 @@
         "zh": "所受治愈效果降低50%。(无法解除)"
       },
       "icon": "IG_Buff_2000057_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["2000057"],
+      "irremovable": true
     },
     "2000059": {
       "id": "2000059",
@@ -3588,7 +3143,10 @@
         "zh": "对敌人造成的伤害提升30%，\\n对首领提升至80%。\\n在创世之神奥斯黛死亡之前无法被解除。"
       },
       "icon": "IG_Buff_2000059_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000059"],
+      "irremovable": true
     },
     "2000063": {
       "id": "2000063",
@@ -3605,7 +3163,10 @@
         "zh": "代替(创世之神)德雷坎承受其所受伤害的35%。该效果不会使生命值降至1以下。(无法解除)\\n若有生命值高于自身的友军拥有类似效果，则不会触发。"
       },
       "icon": "IG_Buff_2000063_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000063"],
+      "irremovable": true
     },
     "2000065": {
       "id": "2000065",
@@ -3622,7 +3183,10 @@
         "zh": "三日月1式：\\n开花后发动额外攻击(无法解除)"
       },
       "icon": "IG_Buff_Effect_2000065_A_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000065"],
+      "irremovable": true
     },
     "2000067": {
       "id": "2000067",
@@ -3639,7 +3203,10 @@
         "zh": "受到未持有[效果命中提升]状态的敌人的伤害大幅降低。\\n(无法叠加、无法解除)"
       },
       "icon": "IG_Buff_Effect_2000067_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000067"],
+      "irremovable": true
     },
     "2000072": {
       "id": "2000072",
@@ -3656,7 +3223,10 @@
         "zh": "艾妲尔薇斯代替友军承受所受伤害的25%。\\n仅对数值最高的效果生效。\\n在艾妲尔薇斯死亡前无法被解除。"
       },
       "icon": "IG_Buff_Effect_2000072_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000072", "40103045"],
+      "irremovable": true
     },
     "2000075": {
       "id": "2000075",
@@ -3673,7 +3243,10 @@
         "zh": "对敌人造成的伤害提升，\\n并强化重金属猛禽技能的效果。(无法解除)\\n\\n发动重金属猛禽时，\\n额外效果破坏之剑冷却时间-1回合。\\n重金属猛禽发动后，\\n不会触发敌人的反击、复仇、迅速应对效果。"
       },
       "icon": "IG_Buff_2000075_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000075"],
+      "irremovable": true
     },
     "2000076": {
       "id": "2000076",
@@ -3690,58 +3263,10 @@
         "zh": "自身获得回合时，\\n布琳的固有资源：偶像力增加1。\\n此后，使布琳根据攻击力\\n等比获得护盾，持续1回合，\\n并使行动值提升15%。(无法解除)"
       },
       "icon": "IG_Buff_Effect_2000076_Interruption",
-      "isDebuff": false
-    },
-    "2000079": {
-      "id": "2000079",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "2000085": {
-      "id": "2000085",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "2000087": {
-      "id": "2000087",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000076"],
+      "irremovable": true
     },
     "2000090": {
       "id": "2000090",
@@ -3758,24 +3283,10 @@
         "zh": "对敌人造成的伤害提升，\\n并强化部分技能。(无法解除)"
       },
       "icon": "IG_Buff_2000090_Interruption",
-      "isDebuff": false
-    },
-    "2000091": {
-      "id": "2000091",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000090"],
+      "irremovable": true
     },
     "2000092": {
       "id": "2000092",
@@ -3792,7 +3303,10 @@
         "zh": "受到单体攻击时，对全体敌人造成永恒出血效果，\\n持续1回合。\\n惩戒领域无法解除。"
       },
       "icon": "IG_Buff_2000092_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000092"],
+      "irremovable": true
     },
     "2000093": {
       "id": "2000093",
@@ -3809,7 +3323,9 @@
         "zh": "自身获得随机能力值提升效果，持续2回合。\\n\\n攻击力、暴击伤害、暴击率、速度"
       },
       "icon": "IG_Buff_Effect_Random_Buff",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000093"]
     },
     "2000094": {
       "id": "2000094",
@@ -3826,7 +3342,10 @@
         "zh": "友军造成的烧伤伤害提升50%，且部分\\n技能效果改变。（无法解除）"
       },
       "icon": "IG_Buff_Effect_2000094_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000094"],
+      "irremovable": true
     },
     "2000095": {
       "id": "2000095",
@@ -3843,7 +3362,9 @@
         "zh": "使自身获得下列效果中的1个：\\n\\n自身行动值提升100%；\\n圣火英烈斩冷却时间重置；\\n自身生命值恢复100%"
       },
       "icon": "IG_Buff_2000095",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000095"]
     },
     "2000096": {
       "id": "2000096",
@@ -3860,24 +3381,10 @@
         "zh": "攻击敌人后，使自身行动值提升15%。\\n部分技能效果改变。(无法解除)"
       },
       "icon": "IG_Buff_2000096_Interruption",
-      "isDebuff": false
-    },
-    "2000097": {
-      "id": "2000097",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000096"],
+      "irremovable": true
     },
     "2000100": {
       "id": "2000100",
@@ -3894,7 +3401,10 @@
         "zh": "使用爆发技能时，所需AP消耗量降低100%。(无法解除)"
       },
       "icon": "IG_Buff_Effect_2000100_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000100"],
+      "irremovable": true
     },
     "2000102": {
       "id": "2000102",
@@ -3911,24 +3421,10 @@
         "zh": "自身伤害降低50%（持续伤害除外），\\n每回合开始时，自身强化效果/\\n全体敌人弱化效果的持续时间各减少1回合。\\n\\n施放者死亡时解除。（无法解除）"
       },
       "icon": "IG_Buff_Effect_2000102_Interruption_D",
-      "isDebuff": true
-    },
-    "2000106": {
-      "id": "2000106",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["2000102"],
+      "irremovable": true
     },
     "2000109": {
       "id": "2000109",
@@ -3945,7 +3441,10 @@
         "zh": "剧毒领域状态下的各目标将受到以下效果。\\n友方目标：受到的最终伤害‐30％\\n诺希斯·比埃拉：防御力＋30％／受到的最终伤害‐30％\\n敌方目标：攻击力‐50％, 获得回合时：诺斯替斯·维艾拉的行动条 +20%\\n\\n（无法解除／诺希斯·比埃拉死亡时解除／最终伤害减少仅取最高值生效）"
       },
       "icon": "IG_Buff_Effect_2000109_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000109"],
+      "irremovable": true
     },
     "2000110": {
       "id": "2000110",
@@ -3962,24 +3461,10 @@
         "zh": "自身速度降低90%，\\n当我方单位获得回合并行动时，\\n对攻击力最高的敌人使用【忏悔吧!】。\\n\\n之后自身行动值提高40%。\\n（无法驱散，首领进入力竭状态及\\n自身回合结束时解除，\\n独自生存时\\n速度降低效果将被移除且不会触发）"
       },
       "icon": "IG_Buff_2000110_Interruption",
-      "isDebuff": false
-    },
-    "2000111": {
-      "id": "2000111",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000110"],
+      "irremovable": true
     },
     "2000112": {
       "id": "2000112",
@@ -3996,7 +3481,10 @@
         "zh": "受到除基本攻击以外的技能攻击时，\\n受到的最终伤害-90%\\n受到基本攻击时也会减少层数\\n\\n(无法解除，施放者死亡时解除，\\n最终伤害减少仅适用最高值，包含爆发)"
       },
       "icon": "IG_Buff_Effect_Disrupt_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000112"],
+      "irremovable": true
     },
     "2000114": {
       "id": "2000114",
@@ -4013,7 +3501,10 @@
         "zh": "受到的伤害减少50%，部分技能得到强化。（无法解除）\\n施放者死亡时解除。"
       },
       "icon": "IG_Buff_Effect_2000114_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000114"],
+      "irremovable": true
     },
     "2000119": {
       "id": "2000119",
@@ -4030,7 +3521,10 @@
         "zh": "所受的最终伤害降低75%。\\n(最终伤害降低仅生效最高值，\\n无法解除)"
       },
       "icon": "IG_Buff_Effect_2000119_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000119"],
+      "irremovable": true
     },
     "2000120": {
       "id": "2000120",
@@ -4047,7 +3541,10 @@
         "zh": "除自身以外的友军越少，\\n自身造成的伤害越多。\\n(最多150%，无法解除)"
       },
       "icon": "IG_Buff_Effect_2000120_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000120"],
+      "irremovable": true
     },
     "2010109": {
       "id": "2010109",
@@ -4064,7 +3561,10 @@
         "zh": "剧毒领域状态下的各目标将受到以下效果。\\n敌方目标：受到的最终伤害‐30％\\n诺希斯·比埃拉：防御力＋30％／受到的最终伤害‐30％\\n自身：攻击力‐50％, 获得回合时：诺斯替斯·维艾拉的行动条 +20%\\n\\n（无法解除／诺希斯·比埃拉死亡时解除／最终伤害减少仅取最高值生效）"
       },
       "icon": "IG_Buff_Effect_2000109_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["2010109"],
+      "irremovable": true
     },
     "2010112": {
       "id": "2010112",
@@ -4081,7 +3581,10 @@
         "zh": "目标穿透力-30%\\n行动值效率-10%\\n\\n(无法解除，施放者死亡时解除)"
       },
       "icon": "IG_Buff_Effect_Disrupt_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["2010112"],
+      "irremovable": true
     },
     "2100065": {
       "id": "2100065",
@@ -4098,24 +3601,10 @@
         "zh": "三日月1式：\\n开花后发动额外攻击(无法解除)"
       },
       "icon": "IG_Buff_Effect_2000065_B_Interruption",
-      "isDebuff": false
-    },
-    "2100076": {
-      "id": "2100076",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2100065"],
+      "irremovable": true
     },
     "2100091": {
       "id": "2100091",
@@ -4132,7 +3621,10 @@
         "zh": "<color=#ffd732>格诺希斯·内拉死亡时发动</color>（无法解除）\\n\\n解除全体敌人2个强化效果，\\n并附加2回合的沉默/速度减少。\\n<color=#28d9ed>复苏时不会发动。</color>"
       },
       "icon": "IG_Buff_2000091_Interruption_D",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2100091"],
+      "irremovable": true
     },
     "2100092": {
       "id": "2100092",
@@ -4149,7 +3641,9 @@
         "zh": "回合开始时，根据施展者\\n效果命中受到等比例伤害，\\n且全体敌人行动值提升5%。\\n该效果在施展者死亡时解除。"
       },
       "icon": "IG_Buff_2100092",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["2100092"]
     },
     "2100093": {
       "id": "2100093",
@@ -4165,365 +3659,11 @@
         "kr": "자신이 보유한 해제 가능한 강화 효과를 특정 대상에게 부여합니다.\\n\\n선물 가능한 강화 효과\\n공격력, 방어력, 속도, 치명 확률, 치명 피해, 효과 적중, 효과 저항, 관통력",
         "zh": "使特定目标获得自身附带的可解除强化效果。\\n\\n可赠送的强化效果\\n攻击力、防御力、速度、暴击率、\\n暴击伤害、效果命中、效果抵抗、穿透力"
       },
-      "icon": "",
-      "isDebuff": false
-    },
-    "2100095": {
-      "id": "2100095",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "2100100": {
-      "id": "2100100",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "2100102": {
-      "id": "2100102",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "2100106": {
-      "id": "2100106",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "2100109": {
-      "id": "2100109",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "2100110": {
-      "id": "2100110",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "2100111": {
-      "id": "2100111",
-      "name": {
-        "en": "Useless Gene",
-        "jp": "役立たずの遺伝子",
-        "kr": "쓸모없는 유전자",
-        "zh": "无用的基因"
-      },
-      "desc": {
-        "en": "Decreases the target's Attack by 30%. (Irremovable)",
-        "jp": "対象の攻撃力を30%減少させる。（解除不可）",
-        "kr": "대상의 공격력을 30% 감소시킵니다. (해제 불가)",
-        "zh": "使目标的攻击力降低30%。（无法解除）"
-      },
-      "icon": "IG_Buff_Effect_2000111_2_Interruption_D",
-      "isDebuff": false
-    },
-    "2100114": {
-      "id": "2100114",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "2200092": {
-      "id": "2200092",
-      "name": {
-        "en": "Eternal Bleeding",
-        "jp": "絶えざる出血",
-        "kr": "영원한 출혈",
-        "zh": "永恒出血"
-      },
-      "desc": {
-        "en": "At the start of turn, takes damage proportional to the caster's Effectiveness, and increases Priority of all enemies by 5%. (Irremovable)",
-        "jp": "ターン開始時、スキル使用者の\\n効果命中に応じたダメージを受け、\\n敵全体の行動ゲージを5%UP\\nさせる。(解除不可)",
-        "kr": "턴 시작 시 시전자의 효과 적중에 비례한 피해를 입고, 적 전체의 행동 게이지를 5% 증가시킵니다. (해제 불가)",
-        "zh": "回合开始时，根据施展者\\n效果命中受到等比例伤害，且全体敌人行动值提升5%。(无法解除)"
-      },
-      "icon": "IG_Buff_2100092_Interruption_D",
-      "isDebuff": true
-    },
-    "2200095": {
-      "id": "2200095",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "2200100": {
-      "id": "2200100",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "2200106": {
-      "id": "2200106",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "2300092": {
-      "id": "2300092",
-      "name": {
-        "en": "Detonate",
-        "jp": "破裂",
-        "kr": "폭발",
-        "zh": "爆炸"
-      },
-      "desc": {
-        "en": "Activates certain debuffs immediately. Magnitude determined by the number of turns remaining and stacks applied.",
-        "jp": "指定された弱体効果の\\nダメージを即時に与える。\\n弱体効果のターン数と付与数が\\n多いほど、ダメージがUPする。",
-        "kr": "지정된 약화 효과를 즉시 발동시킵니다. 턴 수와 적용된 수량에 영향을 받습니다.",
-        "zh": "立即发动指定的弱化效果。会受到\\n回合数与附带数量的影响。"
-      },
-      "icon": "",
-      "isDebuff": true
-    },
-    "2300106": {
-      "id": "2300106",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "2700003": {
-      "id": "2700003",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "4000000": {
-      "id": "4000000",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "4004005": {
-      "id": "4004005",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "4044006": {
-      "id": "4044006",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "4044007": {
-      "id": "4044007",
-      "name": {
-        "en": "Random Debuff",
-        "jp": "ランダムの弱体効果",
-        "kr": "무작위 약화 효과",
-        "zh": "随机弱化效果"
-      },
-      "desc": {
-        "en": "Inflicts one of the following debuffs on all enemies for 2 turns:\\nReduced Attack, Reduced Critical Hit Chance, Reduced Speed, Reduced Defense",
-        "jp": "敵全体にいずれかの弱体効果を\\n2ターンの間付与する。\\n弱体効果：攻撃力DOWN、会心率DOWN、\\nスピードDOWN、防御力DOWN",
-        "kr": "적 전체에게 2턴 동안 다음 중 하나의 약화 효과를 부여합니다.\\n공격력 감소, 치명 확률 감소, 속도 감소, 방어력 감소",
-        "zh": "对全体敌人造成以下1种弱化效果，\\n持续2回合。\\n攻击力降低、暴击率降低、\\n速度降低、防御力降低"
-      },
-      "icon": "IG_Buff_Effect_Random_Buff",
-      "isDebuff": true
-    },
-    "4044017": {
-      "id": "4044017",
-      "name": {
-        "en": "Random Debuff",
-        "jp": "ランダムの弱体効果",
-        "kr": "무작위 약화 효과",
-        "zh": "随机弱化效果"
-      },
-      "desc": {
-        "en": "Inflicts one of the following debuffs on all enemies for 2 turns:\\nReduced Attack, Reduced Critical Hit Chance, Reduced Speed, Reduced Defense",
-        "jp": "敵全体にいずれかの弱体効果を\\n2ターンの間付与する。\\n弱体効果：攻撃力DOWN、会心率DOWN、\\nスピードDOWN、防御力DOWN",
-        "kr": "적 전체에게 2턴 동안 다음 중 하나의 약화 효과를 부여합니다.\\n공격력 감소, 치명 확률 감소, 속도 감소, 방어력 감소",
-        "zh": "对全体敌人造成以下1种弱化效果，\\n持续2回合。\\n攻击力降低、暴击率降低、\\n速度降低、防御力降低"
-      },
-      "icon": "",
-      "isDebuff": true
-    },
-    "4044027": {
-      "id": "4044027",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
+      "icon": "IG_Buff_2000093_Interruption",
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2100093"],
+      "iconEditorial": true
     },
     "4076102": {
       "id": "4076102",
@@ -4540,7 +3680,10 @@
         "zh": "自身受到的伤害大幅降低。\\n在敌方回合被效果命中高于自己的敌人攻击时，\\n效果次数减少1次。"
       },
       "icon": "IG_Buff_Dmg_Reduce_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["4076102"],
+      "irremovable": true
     },
     "4079002": {
       "id": "4079002",
@@ -4557,7 +3700,9 @@
         "zh": "对全体敌人造成以下1种持续伤害效果，持续5回合。\\n烧伤、诅咒、出血、中毒、触电"
       },
       "icon": "IG_Buff_Effect_Random_Buff",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["4079002"]
     },
     "4086001": {
       "id": "4086001",
@@ -4574,7 +3719,57 @@
         "zh": "为应对强敌，\\n根据自身职业获得特别效果。"
       },
       "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": [
+        "4086001",
+        "40860010",
+        "40860011",
+        "40860012",
+        "40860013",
+        "40860014",
+        "40860015",
+        "40860016",
+        "40860018",
+        "40860019",
+        "40860131",
+        "40860132",
+        "40860133",
+        "40860134",
+        "40860135",
+        "40860141",
+        "40860142",
+        "40860143",
+        "40860144",
+        "40860145",
+        "40860191",
+        "40860192",
+        "40860194",
+        "40860195",
+        "40860196",
+        "4086031",
+        "40860310",
+        "40860311",
+        "40860312",
+        "40860313",
+        "40860314",
+        "40860315",
+        "40860316",
+        "40860317",
+        "40860318",
+        "40860319",
+        "40860250",
+        "40860251",
+        "40860252",
+        "40860253",
+        "40860254",
+        "40860255",
+        "40860256",
+        "40860257",
+        "40860258",
+        "40860259"
+      ],
+      "irremovable": true
     },
     "4086007": {
       "id": "4086007",
@@ -4591,58 +3786,10 @@
         "zh": "激活核心中聚集的能量，触发额外攻击。(无法解除)"
       },
       "icon": "IG_Buff_4086008_Interruption",
-      "isDebuff": false
-    },
-    "4086008": {
-      "id": "4086008",
-      "name": {
-        "en": "Core Energy",
-        "jp": "コアの力",
-        "kr": "코어 에너지",
-        "zh": "核心能量"
-      },
-      "desc": {
-        "en": "Activates an additional attack by activating the energy gathered within the Core. (Irremovable)",
-        "jp": "コアに集まった力を活性化し、追加攻撃が発生する。(解除不可)",
-        "kr": "코어에 응집된 에너지를 활성화하여, 추가 공격이 발생합니다. (해제 불가)",
-        "zh": "激活核心中聚集的能量，触发额外攻击。(无法解除)"
-      },
-      "icon": "IG_Buff_4086008_Interruption",
-      "isDebuff": false
-    },
-    "4086025": {
-      "id": "4086025",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "4086031": {
-      "id": "4086031",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Grants a special effect to the bearer based on their element in order to fight against a powerful enemy.",
-        "jp": "強敵に立ち向かうために付与される\\n特別な効果。\\n自分の属性に応じた効果が付与される。",
-        "kr": "강적에 대항하기 위하여, 자신의 속성에 따라 특별한 효과를 획득합니다.",
-        "zh": "为应对强敌，根据自身属性获得特别效果。"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["4086007", "4086008"],
+      "irremovable": true
     },
     "4089001": {
       "id": "4089001",
@@ -4659,143 +3806,10 @@
         "zh": "在3回合内阻止异型怪首领触发部分特殊效果。"
       },
       "icon": "IG_Buff_Effect_4089001_Interruption_D",
-      "isDebuff": false
-    },
-    "4089002": {
-      "id": "4089002",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "4089003": {
-      "id": "4089003",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "4134036": {
-      "id": "4134036",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "4151011": {
-      "id": "4151011",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "4176102": {
-      "id": "4176102",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "4510277": {
-      "id": "4510277",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "4520277": {
-      "id": "4520277",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "4530277": {
-      "id": "4530277",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["4089001"],
+      "irremovable": true
     },
     "5203701": {
       "id": "5203701",
@@ -4812,7 +3826,10 @@
         "zh": "大幅攻击力降低。"
       },
       "icon": "IG_Buff_Stat_Atk_Interruption_D",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["5203701"],
+      "irremovable": true
     },
     "5204001": {
       "id": "5204001",
@@ -4829,75 +3846,10 @@
         "zh": ""
       },
       "icon": "IG_Buff_Stat_Atk_Interruption_D",
-      "isDebuff": true
-    },
-    "40013041": {
-      "id": "40013041",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40013042": {
-      "id": "40013042",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40013043": {
-      "id": "40013043",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40013044": {
-      "id": "40013044",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["5204001"],
+      "irremovable": true
     },
     "40103013": {
       "id": "40103013",
@@ -4914,143 +3866,9 @@
         "zh": "自身获得随机能力值提升效果，持续2回合。\\n攻击力、防御力、速度、暴击率、暴击伤害"
       },
       "icon": "IG_Buff_Effect_Random_Buff",
-      "isDebuff": false
-    },
-    "40103017": {
-      "id": "40103017",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40103020": {
-      "id": "40103020",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40103021": {
-      "id": "40103021",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40103045": {
-      "id": "40103045",
-      "name": {
-        "en": "A Ninja's Afterimage",
-        "jp": "ニンジャの残像",
-        "kr": "닌자의 잔상",
-        "zh": "忍者的残像"
-      },
-      "desc": {
-        "en": "Reduces the caster's damage taken from enemies.",
-        "jp": "自分が敵から受けるダメージがDOWNする。",
-        "kr": "자신이 적에게 받는 피해가 감소합니다.",
-        "zh": "敌人对自身造成的伤害降低。"
-      },
-      "icon": "IG_Buff_Effect_2000072_Interruption",
-      "isDebuff": false
-    },
-    "40103056": {
-      "id": "40103056",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40103057": {
-      "id": "40103057",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40440081": {
-      "id": "40440081",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40440082": {
-      "id": "40440082",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["40103013"]
     },
     "40760091": {
       "id": "40760091",
@@ -5067,7 +3885,9 @@
         "zh": "对全体敌人造成以下一种\\n弱化效果，持续2回合。晕眩、冰冻、石化、\\n攻击力降低、暴击率降低、速度降低"
       },
       "icon": "IG_Buff_Effect_Random_Buff",
-      "isDebuff": true
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["40760091", "4044007", "4044017"]
     },
     "40760092": {
       "id": "40760092",
@@ -5084,279 +3904,10 @@
         "zh": "演奏结束之后，全体敌人立即死亡。(无法解除)"
       },
       "icon": "IG_Buff_Effect_4076009_Interruption",
-      "isDebuff": false
-    },
-    "40790021": {
-      "id": "40790021",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40860010": {
-      "id": "40860010",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases Priority recovery efficiency of Strikers by 50%. (Irremovable)",
-        "jp": "攻撃型の仲間の行動ゲージUPの\\n効率が50%UPする。\\n(解除不可)",
-        "kr": "공격형 동료의 행동 게이지 회복 효율이 50% 증가합니다. (해제 불가)",
-        "zh": "攻击型同伴的行动值恢复效率提升50%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860011": {
-      "id": "40860011",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases damage of Mages. (Irremovable)",
-        "jp": "魔法型の仲間のダメージがUPする。\\n(解除不可)",
-        "kr": "마법형 동료의 피해가 증가합니다. (해제 불가)",
-        "zh": "魔法型同伴的伤害提升。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860012": {
-      "id": "40860012",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "When a Defender ally performs an action, inflicts an irremovable reduced Defense effect on an enemy for 4 turns. (Irremovable)",
-        "jp": "防御型の仲間が行動時、\\n敵に解除不能な防御力DOWN\\n効果を4ターンの間付与する。\\n(解除不可)",
-        "kr": "방어형 동료가 행동 시 4턴 동안 적에게 해제 불가능한 방어력 감소 효과를 적용합니다. (해제 불가)",
-        "zh": "防御型同伴行动时，对敌人造成无法解除的防御力降低效果，持续4回合。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860013": {
-      "id": "40860013",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "When a Ranger ally performs an action, inflicts an irremovable reduced Resilience effect on an enemy for 4 turns. (Irremovable)",
-        "jp": "スピード型の仲間が行動時、\\n敵に解除不能な効果抵抗DOWN\\n効果を4ターンの間付与する。\\n(解除不可)",
-        "kr": "속도형 동료가 행동 시 4턴 동안 적에게 해제 불가능한 효과 저항 감소 효과를 적용합니다. (해제 불가)",
-        "zh": "速度型同伴行动时，对敌人造成无法解除的效果抵抗降低效果，持续4回合。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860014": {
-      "id": "40860014",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Changes Priority recovery efficiency of an enemy to 60% if there is a Healer. (Irremovable)",
-        "jp": "戦場に回復型の仲間がいる場合、\\n敵の行動ゲージUPの効率を\\n60%に変更する。\\n(解除不可)",
-        "kr": "회복형 동료 존재 시 적의 행동 게이지 회복 효율을 60%로 변경시킵니다. (해제 불가)",
-        "zh": "恢复型同伴存活时，使敌人的行动值恢复效率变更为60%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860015": {
-      "id": "40860015",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases damage of Strikers. (Irremovable)",
-        "jp": "攻撃型の仲間のダメージがUPする。\\n(解除不可)",
-        "kr": "공격형 동료의 피해가 증가합니다. (해제 불가)",
-        "zh": "攻击型同伴的伤害提升。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860016": {
-      "id": "40860016",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases Priority recovery efficiency of Mages by 50%. (Irremovable)",
-        "jp": "魔法型の仲間の行動ゲージUPの\\n効率が50%UPする。\\n(解除不可)",
-        "kr": "마법형 동료의 행동 게이지 회복 효율이 50% 증가합니다. (해제 불가)",
-        "zh": "魔法型同伴的行动值恢复效率提升50%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860017": {
-      "id": "40860017",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Inflicts an irremovable Reduced Defense effect on an enemy for 2 turns when a Defender performs an action. (Irremovable)",
-        "jp": "防御型の仲間が行動時、\\n敵に解除不能な防御力DOWN効果を\\n2ターンの間付与する。\\n(解除不可)",
-        "kr": "방어형 동료가 행동 시 2턴 동안 적에게 해제 불가능한 방어력 감소 효과를 적용합니다. (해제 불가)",
-        "zh": "防御型同伴行动时，对敌人造成无法解除的防御力降低效果，持续2回合。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860018": {
-      "id": "40860018",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Deals 3% of the enemy's Max Health as fixed damage when a Ranger performs an action. (Irremovable)",
-        "jp": "スピード型の仲間が行動時、\\n敵に最大HPの3%の固定ダメージを与える。\\n(解除不可)",
-        "kr": "속도형 동료가 행동 시 적에게 최대 체력 3% 만큼의 고정 피해를 입힙니다. (해제 불가)",
-        "zh": "速度型同伴行动时，对全体敌人造成相当于生命值上限3%的固定伤害。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860019": {
-      "id": "40860019",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "When a Healer ally performs an action, inflicts an irremovable reduced Speed effect on an enemy for 4 turns. (Irremovable)",
-        "jp": "回復型の仲間が行動時、\\n敵に解除不能なスピードDOWN\\n効果を4ターンの間付与する。\\n(解除不可)",
-        "kr": "회복형 동료가 행동 시 4턴 동안 적에게 해제 불가능한 속도 감소 효과를 적용합니다. (해제 불가)",
-        "zh": "恢复型同伴行动时，对敌人造成无法解除的速度降低效果，持续4回合。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860131": {
-      "id": "40860131",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "For each Striker ally, increases Critical Damage of all allies by 60% each. (Irremovable)",
-        "jp": "攻撃型の仲間の数に応じて味方全体の会心ダメージが60％ずつUPする。(解除不可)",
-        "kr": "공격형 동료 한 명 마다 아군 전체의 치명 피해가 60%씩 증가합니다. (해제 불가)",
-        "zh": "每有一名攻击型同伴，\\n全体友军的暴击伤害提升60%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860132": {
-      "id": "40860132",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "For each Mage ally, increases Attack of all allies by 15% each. (Irremovable)",
-        "jp": "魔法型の仲間の数に応じて味方全体の攻撃力が15％ずつUPする。(解除不可)",
-        "kr": "마법형 동료 한 명 마다 아군 전체의 공격력이 15%씩 증가합니다. (해제 불가)",
-        "zh": "每有一名魔法型同伴，\\n全体友军的攻击力提升15%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860133": {
-      "id": "40860133",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "When a Defender ally performs an action, recovers Health of all allies by 3%. (Irremovable)",
-        "jp": "防御型の仲間が行動時、味方全体のHPを3％回復させる。(解除不可)",
-        "kr": "방어형 동료가 행동 시 아군 전체의 체력을 3% 회복합니다. (해제 불가)",
-        "zh": "防御型同伴行动时，\\n全体友军的生命值恢复3%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860134": {
-      "id": "40860134",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "When a Ranger ally performs an action, grants a barrier to all allies for 2 turns. (Irremovable)",
-        "jp": "スピード型の仲間が行動時、味方全体にシールドを2ターンの間付与する。(解除不可)",
-        "kr": "속도형 동료가 행동 시 아군 전체에게 2턴 동안 실드를 부여합니다. (해제 불가)",
-        "zh": "速度型同伴行动时，\\n全体友军获得护盾，持续2回合。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860135": {
-      "id": "40860135",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "When a Healer ally performs an action, reduces Weakness Gauge by 2. (Irremovable)",
-        "jp": "回復型の仲間が行動時、WGを2DOWNさせる。(解除不可)",
-        "kr": "회복형 동료가 행동 시 WG를 2 감소 시킵니다. (해제 불가)",
-        "zh": "恢复型同伴行动时，\\n降低2点WG。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["40760092"],
+      "irremovable": true
     },
     "40860136": {
       "id": "40860136",
@@ -5373,7 +3924,10 @@
         "zh": "使用MG-102开拓炮后，\\n火属性/水属性/土属性敌人的行动值\\n仅恢复80%。(无法解除)"
       },
       "icon": "IG_Buff_Effect_4086013_A_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["40860136"],
+      "irremovable": true
     },
     "40860137": {
       "id": "40860137",
@@ -5390,126 +3944,10 @@
         "zh": "使用MG-102开拓炮后，\\n光属性/暗属性敌人的行动值\\n仅恢复80%。(无法解除)"
       },
       "icon": "IG_Buff_Effect_4086013_B_Interruption",
-      "isDebuff": false
-    },
-    "40860138": {
-      "id": "40860138",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40860139": {
-      "id": "40860139",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40860141": {
-      "id": "40860141",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "For each Striker ally, increases Critical Damage of all allies by 500% each. (Irremovable)",
-        "jp": "攻撃型の仲間の数に応じて味方全体の会心ダメージが500％ずつUPする。(解除不可)",
-        "kr": "공격형 동료 한 명 마다 아군 전체의 치명 피해가 500%씩 증가합니다. (해제 불가)",
-        "zh": "每有一名攻击型同伴，\\n全体友军的暴击伤害提升500%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860142": {
-      "id": "40860142",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "For each Mage ally, increases Attack of all allies by 125% each. (Irremovable)",
-        "jp": "魔法型の仲間の数に応じて味方全体の攻撃力が125％ずつUPする。(解除不可)",
-        "kr": "마법형 동료 한 명 마다 아군 전체의 공격력이 125%씩 증가합니다. (해제 불가)",
-        "zh": "每有一名魔法型同伴，\\n全体友军的攻击力提升125%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860143": {
-      "id": "40860143",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "When a Defender ally performs an action, recovers Health of all allies by 5%. (Irremovable)",
-        "jp": "防御型の仲間が行動時、味方全体のHPを5％回復させる。(解除不可)",
-        "kr": "방어형 동료가 행동 시 아군 전체의 체력을 5% 회복합니다. (해제 불가)",
-        "zh": "防御型同伴行动时，\\n全体友军的生命值恢复5%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860144": {
-      "id": "40860144",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "When a Ranger ally performs an action, grants a barrier to all allies for 2 turns. (Irremovable)",
-        "jp": "スピード型の仲間が行動時、味方全体にシールドを2ターンの間付与する。(解除不可)",
-        "kr": "속도형 동료가 행동 시 아군 전체에게 2턴 동안 실드를 부여합니다. (해제 불가)",
-        "zh": "速度型同伴行动时，\\n全体友军获得护盾，持续2回合。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860145": {
-      "id": "40860145",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "When a Healer ally performs an action, reduces Weakness Gauge by 3. (Irremovable)",
-        "jp": "回復型の仲間が行動時、WGを3DOWNさせる。(解除不可)",
-        "kr": "회복형 동료가 행동 시 WG를 3 감소 시킵니다. (해제 불가)",
-        "zh": "恢复型同伴行动时，\\n降低3点WG。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["40860137"],
+      "irremovable": true
     },
     "40860146": {
       "id": "40860146",
@@ -5526,7 +3964,10 @@
         "zh": "回合开始时，光属性/暗属性敌人的\\n技能冷却时间增加1回合。\\n使用紧急协议：消灭时，火属性/水属性/\\n土属性敌人即死。(无法解除)"
       },
       "icon": "IG_Buff_Effect_4086014_A_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["40860146"],
+      "irremovable": true
     },
     "40860147": {
       "id": "40860147",
@@ -5543,653 +3984,10 @@
         "zh": "回合开始时，火属性/水属性/土属性敌人\\n的技能冷却时间增加1回合。\\n使用紧急协议：消灭时，\\n光属性/暗属性敌人即死。(无法解除)"
       },
       "icon": "IG_Buff_Effect_4086014_B_Interruption",
-      "isDebuff": false
-    },
-    "40860148": {
-      "id": "40860148",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40860149": {
-      "id": "40860149",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40860151": {
-      "id": "40860151",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40860152": {
-      "id": "40860152",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40860153": {
-      "id": "40860153",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40860154": {
-      "id": "40860154",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40860161": {
-      "id": "40860161",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40860162": {
-      "id": "40860162",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40860191": {
-      "id": "40860191",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases Attack of Striker heroes by 30%.",
-        "jp": "攻撃型の仲間の攻撃力が\\n30%UPする。",
-        "kr": "공격형 동료의 공격력이 30% 증가합니다.",
-        "zh": "攻击型同伴的攻击力提升30%。"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860192": {
-      "id": "40860192",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases damage dealt to the Boss by Mage heroes.",
-        "jp": "魔法型の仲間がボスに与える\\nダメージがUPする。",
-        "kr": "마법형 동료가 보스에게 입히는 피해가 증가합니다.",
-        "zh": "魔法型同伴对首领造成的伤害提升。"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860193": {
-      "id": "40860193",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "At the start of battle, grants increased Speed to Ranger heroes for 1 turn.",
-        "jp": "戦闘開始後、スピード型の仲間の\\nスピードが1ターンの間UPする。",
-        "kr": "속도형 동료는 전투 입장 후 1턴 동안 속도가 증가합니다.",
-        "zh": "速度型同伴在进入战斗后1回合内速度提升。"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860194": {
-      "id": "40860194",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Deals 3 Weakness Gauge damage to the Boss when a Defender hero performs an action.",
-        "jp": "防御型の仲間が行動後、\\nボスのWGを3DOWNさせる。",
-        "kr": "방어형 동료가 행동 후 보스의 WG를 3 감소시킵니다.",
-        "zh": "防御型同伴行动后使首领WG降低3。"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860195": {
-      "id": "40860195",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Grants Immunity to Healer heroes (Irremovable)\\nIgnores debuffs inflicted on the target",
-        "jp": "回復型の仲間が免疫を獲得する。\\n(解除不可)対象から付与される弱体効果を無視する。",
-        "kr": "회복형 동료가 면역을 획득합니다. (해제 불가)\\n대상에게 적용되는 약화 효과를 무시합니다.",
-        "zh": "恢复型同伴获得免疫状态。(无法解除)\\n无视目标获得的弱化效果。"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860196": {
-      "id": "40860196",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "The Boss cannot use the 'Reduce Debuff Duration by 2 Turns' effect.",
-        "jp": "ボースは弱体効果の持続2ターン減少効果を使用できない。",
-        "kr": "보스는 약화 효과 지속 시간 2턴 감소 효과를 사용할 수 없습니다.",
-        "zh": "首领无法使用弱化效果持续时间减少2回合效果。"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860197": {
-      "id": "40860197",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "40860250": {
-      "id": "40860250",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases Attack of Striker heroes by 30%. (Irremovable)",
-        "jp": "攻撃型の仲間の攻撃力が30%UPする。(解除不可)",
-        "kr": "공격형 동료의 공격력이 30% 증가합니다. (해제 불가)",
-        "zh": "攻击型同伴的攻击力提升30%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860251": {
-      "id": "40860251",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases Critical Damage of Mage heroes by 50%. (Irremovable)",
-        "jp": "魔法型の仲間の会心ダメージが50%UPする。(解除不可)",
-        "kr": "마법형 동료의 치명 피해가 50% 증가합니다. (해제 불가)",
-        "zh": "魔法型同伴的暴击伤害提升50%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860252": {
-      "id": "40860252",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "When a Defender ally performs an action, inflicts an irremovable reduced Defense effect on an enemy for 4 turns. (Irremovable)",
-        "jp": "防御型の仲間が行動時、敵に解除不能な防御力DOWN効果を4ターンの間付与する。(解除不可)",
-        "kr": "방어형 동료가 행동 시 4턴 동안 적에게 해제 불가능한 방어력 감소 효과를 적용합니다. (해제 불가)",
-        "zh": "防御型同伴行动时，对敌人造成无法解除的防御力降低效果，持续4回合。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860253": {
-      "id": "40860253",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Deals 3% of the enemy's Max Health as fixed damage when a Ranger hero performs an action. (Irremovable)",
-        "jp": "スピード型の仲間が行動時、敵に最大HPの3%の固定ダメージを与える。(解除不可)",
-        "kr": "속도형 동료가 행동 시 적에게 최대 체력 3% 만큼의 고정 피해를 입힙니다. (해제 불가)",
-        "zh": "速度型同伴行动时，对敌人造成相当于生命值上限3%的固定伤害。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860254": {
-      "id": "40860254",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases Priority recovery efficiency of Healer heroes by 50%. (Irremovable)",
-        "jp": "回復型の仲間の行動ゲージUPの効率が50%UPする。(解除不可)",
-        "kr": "회복형 동료의 행동 게이지 회복 효율이 50% 증가합니다. (해제 불가)",
-        "zh": "恢复型同伴的行动值恢复效率提升50%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860255": {
-      "id": "40860255",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases Attack of Striker heroes by 30%. (Irremovable)",
-        "jp": "攻撃型の仲間の攻撃力が30%UPする。(解除不可)",
-        "kr": "공격형 동료의 공격력이 30% 증가합니다. (해제 불가)",
-        "zh": "攻击型同伴的攻击力提升30%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860256": {
-      "id": "40860256",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases Critical Damage of Mage heroes by 50%. (Irremovable)",
-        "jp": "魔法型の仲間の会心ダメージが50%UPする。(解除不可)",
-        "kr": "마법형 동료의 치명 피해가 50% 증가합니다. (해제 불가)",
-        "zh": "魔法型同伴的暴击伤害提升50%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860257": {
-      "id": "40860257",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "When a Defender hero is hit by a single attack, grants Stealth for 2 turns. (Irremovable)",
-        "jp": "防御型の仲間が単体攻撃を受けた場合、2ターンの間隠れ身状態になる。(解除不可)",
-        "kr": "방어형 동료가 단일 공격 피격 시 2턴 동안 은신 상태가 됩니다. (해제 불가)",
-        "zh": "防御型同伴受到单体攻击时，会进入隐身状态，持续2回合。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860258": {
-      "id": "40860258",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases Effectiveness of Ranger heroes by 100%. (Irremovable)",
-        "jp": "スピード型の仲間の効果命中が100%UPする。(解除不可)",
-        "kr": "속도형 동료의 효과 적중이 100% 증가합니다. (해제 불가)",
-        "zh": "速度型同伴的效果命中提升100%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860259": {
-      "id": "40860259",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases Priority recovery efficiency of Healer heroes by 50%. (Irremovable)",
-        "jp": "回復型の仲間の行動ゲージUPの効率が50%UPする。(解除不可)",
-        "kr": "회복형 동료의 행동 게이지 회복 효율이 50% 증가합니다. (해제 불가)",
-        "zh": "恢复型同伴的行动值恢复效率提升50%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860310": {
-      "id": "40860310",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases Critical Damage of Earth heroes by 50%. (Irremovable)",
-        "jp": "地属性の仲間の会心ダメージが\\n50%UPする。(解除不可)",
-        "kr": "지속성 동료의 치명 피해가 50% 증가합니다. (해제 불가)",
-        "zh": "使土属性同伴的暴击伤害提升50%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860311": {
-      "id": "40860311",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases Speed of Water heroes by 10%. (Irremovable)",
-        "jp": "水属性の仲間のスピードが10%\\nUPする。(解除不可)",
-        "kr": "수속성 동료의 속도가 10% 증가합니다. (해제 불가)",
-        "zh": "水属性同伴的速度提升10%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860312": {
-      "id": "40860312",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases efficiency of increased stat effects of Fire heroes by 70%. (Irremovable)",
-        "jp": "火属性の仲間のステータスUPの\\n効率が70%UPする。\\n(解除不可)",
-        "kr": "화속성 동료의 능력치 증가 효율이 70% 증가합니다. (해제 불가)",
-        "zh": "火属性同伴的能力值提升率提升70%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860313": {
-      "id": "40860313",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Deals 1 Weakness Gauge damage to the Boss after a Light hero performs an action.",
-        "jp": "光属性の仲間が行動後、\\nボスのWGを1DOWNさせる。",
-        "kr": "명속성 동료가 행동 후 보스의 WG를 1 감소시킵니다.",
-        "zh": "光属性同伴行动后，首领的WG减少1。"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860314": {
-      "id": "40860314",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Increases Attack of Dark heroes by 30%. (Irremovable)",
-        "jp": "闇属性の仲間の攻撃力が30%UP\\nする。(解除不可)",
-        "kr": "암속성 동료의 공격력이 30% 증가합니다. (해제 불가)",
-        "zh": "暗属性同伴的攻击力提升30%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860315": {
-      "id": "40860315",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Earth heroes increase Critical Damage of all allies by 50%. (Irremovable)",
-        "jp": "地属性の仲間が味方全体の\\n会心ダメージを50％UPさせる。\\n(解除不可)",
-        "kr": "지속성 동료는 아군 전체의 치명 피해를 50% 증가시킵니다. (해제 불가)",
-        "zh": "土属性同伴使全体友军暴击伤害提升50%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860316": {
-      "id": "40860316",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Water heroes increase Speed of all allies by 10%. (Irremovable)",
-        "jp": "水属性の仲間が味方全体の\\nスピードを10%UPさせる。\\n(解除不可)",
-        "kr": "수속성 동료는 아군 전체의 속도를 10% 증가시킵니다. (해제 불가)",
-        "zh": "水属性同伴使全体友军速度提升10%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860317": {
-      "id": "40860317",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Fire heroes increase efficiency of increased stat effects of all allies by 70%. (Irremovable)",
-        "jp": "火属性の仲間が味方全体の\\nステータスUPの効率を70%UP\\nさせる。(解除不可)",
-        "kr": "화속성 동료는 아군 전체의 능력치 증가 효율을 70% 증가시킵니다. (해제 불가)",
-        "zh": "火属性同伴使全体友军能力值提升率提升70%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860318": {
-      "id": "40860318",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Light heroes increase Weakness Gauge damage of all allies by 50%. (Irremovable)",
-        "jp": "光属性の仲間が味方全体の\\nWGダメージを50％UPさせる。\\n(解除不可)",
-        "kr": "명속성 동료는 아군 전체의 WG 피해량을 50% 증가시킵니다. (해제 불가)",
-        "zh": "光属性同伴使全体友军的WG伤害量提升50%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "40860319": {
-      "id": "40860319",
-      "name": {
-        "en": "Courage Against Despair",
-        "jp": "絶望に立ち向かう勇気",
-        "kr": "절망에 맞서는 용기",
-        "zh": "面对绝境的勇气"
-      },
-      "desc": {
-        "en": "Dark heroes increase Attack of all allies by 30%. (Irremovable)",
-        "jp": "闇属性の仲間が味方全体の\\n攻撃力を30%UPさせる。\\n(解除不可)",
-        "kr": "암속성 동료는 아군 전체의 공격력을 30% 증가시킵니다. (해제 불가)",
-        "zh": "暗属性同伴使全体友军的攻击力提升30%。(无法解除)"
-      },
-      "icon": "IG_Buff_4086001_Interruption",
-      "isDebuff": false
-    },
-    "401030051": {
-      "id": "401030051",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "401030052": {
-      "id": "401030052",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
-    },
-    "401030201": {
-      "id": "401030201",
-      "name": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["40860147"],
+      "irremovable": true
     },
     "401030202": {
       "id": "401030202",
@@ -6206,7 +4004,1116 @@
         "zh": "所受伤害量大幅降低，\\n且不会受到WG伤害。(无法解除)"
       },
       "icon": "IG_Buff_Dot_Lightning_Interruption",
-      "isDebuff": false
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["401030202"],
+      "irremovable": true
+    },
+    "SYS_BUFF_CHARGE_CP": {
+      "id": "SYS_BUFF_CHARGE_CP",
+      "name": {
+        "en": "Gain Chain Points",
+        "jp": "CP獲得",
+        "kr": "CP 획득",
+        "zh": "获得CP"
+      },
+      "desc": {
+        "en": "",
+        "jp": "",
+        "kr": "",
+        "zh": ""
+      },
+      "icon": "generatechainpoints",
+      "isDebuff": false,
+      "origin": "type",
+      "tooltips": [],
+      "iconEditorial": true
+    },
+    "SYS_BUFF_DMG": {
+      "id": "SYS_BUFF_DMG",
+      "name": {
+        "en": "Damage Increase",
+        "jp": "ダメージUP",
+        "kr": "피해량 증가",
+        "zh": "伤害量提升"
+      },
+      "desc": {
+        "en": "",
+        "jp": "",
+        "kr": "",
+        "zh": ""
+      },
+      "icon": "",
+      "isDebuff": false,
+      "origin": "type",
+      "tooltips": []
+    },
+    "SYS_BUFF_STEAL": {
+      "id": "SYS_BUFF_STEAL",
+      "name": {
+        "en": "Stealing Buff",
+        "jp": "強化効果強奪",
+        "kr": "강화 효과 강탈",
+        "zh": "夺取强化效果"
+      },
+      "desc": {
+        "en": "",
+        "jp": "",
+        "kr": "",
+        "zh": ""
+      },
+      "icon": "SC_Buff_Steal",
+      "isDebuff": true,
+      "origin": "type",
+      "tooltips": [],
+      "iconEditorial": true
+    },
+    "SYS_BUFF_ADDITIVE_SKILL": {
+      "id": "SYS_BUFF_ADDITIVE_SKILL",
+      "name": {
+        "en": "Extra Skill",
+        "jp": "追加スキル発動",
+        "kr": "추가 스킬",
+        "zh": "额外技能"
+      },
+      "desc": {
+        "en": "",
+        "jp": "",
+        "kr": "",
+        "zh": ""
+      },
+      "icon": "",
+      "isDebuff": false,
+      "origin": "type",
+      "tooltips": []
+    },
+    "SYS_BUFF_EXTEND_DEBUFF_UP": {
+      "id": "SYS_BUFF_EXTEND_DEBUFF_UP",
+      "name": {
+        "en": "Debuff Duration Increase",
+        "jp": "弱体効果ターン延長",
+        "kr": "약화 효과 지속 증가",
+        "zh": "弱化效果持续时间增加"
+      },
+      "desc": {
+        "en": "",
+        "jp": "",
+        "kr": "",
+        "zh": ""
+      },
+      "icon": "",
+      "isDebuff": true,
+      "origin": "type",
+      "tooltips": []
+    },
+    "SYS_BUFF_CHARGE_AP": {
+      "id": "SYS_BUFF_CHARGE_AP",
+      "name": {
+        "en": "Gain Action Points",
+        "jp": "AP獲得",
+        "kr": "AP 획득",
+        "zh": "获得AP"
+      },
+      "desc": {
+        "en": "",
+        "jp": "",
+        "kr": "",
+        "zh": ""
+      },
+      "icon": "SC_Buff_Effect_AP",
+      "isDebuff": false,
+      "origin": "type",
+      "tooltips": []
+    },
+    "SYS_BUFF_REDUCE_AP": {
+      "id": "SYS_BUFF_REDUCE_AP",
+      "name": {
+        "en": "AP Decrease",
+        "jp": "AP減少",
+        "kr": "AP 감소",
+        "zh": "AP降低"
+      },
+      "desc": {
+        "en": "",
+        "jp": "",
+        "kr": "",
+        "zh": ""
+      },
+      "icon": "",
+      "isDebuff": true,
+      "origin": "type",
+      "tooltips": []
+    },
+    "SYS_BUFF_WG_CHARGE": {
+      "id": "SYS_BUFF_WG_CHARGE",
+      "name": {
+        "en": "Weakness Gauge Recovery",
+        "jp": "WG回復",
+        "kr": "WG 회복",
+        "zh": "WG恢复"
+      },
+      "desc": {
+        "en": "",
+        "jp": "",
+        "kr": "",
+        "zh": ""
+      },
+      "icon": "",
+      "isDebuff": false,
+      "origin": "type",
+      "tooltips": []
+    },
+    "SYS_BUFF_WG_INVINCIBLE": {
+      "id": "SYS_BUFF_WG_INVINCIBLE",
+      "name": {
+        "en": "Weakness Gauge Damage Immunity",
+        "jp": "WGダメージ免疫",
+        "kr": "WG 피해 면역",
+        "zh": "WG伤害免疫"
+      },
+      "desc": {
+        "en": "",
+        "jp": "",
+        "kr": "",
+        "zh": ""
+      },
+      "icon": "",
+      "isDebuff": false,
+      "origin": "type",
+      "tooltips": []
+    },
+    "SYS_DESC_SHIELD_UP": {
+      "id": "SYS_DESC_SHIELD_UP",
+      "name": {
+        "en": "Enhances barrier strength",
+        "jp": "シールド強化",
+        "kr": "실드 강화",
+        "zh": "护盾强化"
+      },
+      "desc": {
+        "en": "",
+        "jp": "",
+        "kr": "",
+        "zh": ""
+      },
+      "icon": "",
+      "isDebuff": false,
+      "origin": "type",
+      "tooltips": []
+    },
+    "SYS_BUFF_LOST_CORE": {
+      "id": "SYS_BUFF_LOST_CORE",
+      "name": {
+        "en": "Disconnected from Core",
+        "jp": "コア接続解除",
+        "kr": "코어 접속 해제",
+        "zh": "解除核心连接"
+      },
+      "desc": {
+        "en": "",
+        "jp": "",
+        "kr": "",
+        "zh": ""
+      },
+      "icon": "",
+      "isDebuff": true,
+      "origin": "type",
+      "tooltips": []
+    },
+    "SYS_BUFF_HEAL": {
+      "id": "SYS_BUFF_HEAL",
+      "name": {
+        "en": "Health Recovery",
+        "jp": "HP回復",
+        "kr": "체력 회복",
+        "zh": "恢复生命值"
+      },
+      "desc": {
+        "en": "",
+        "jp": "",
+        "kr": "",
+        "zh": ""
+      },
+      "icon": "",
+      "isDebuff": false,
+      "origin": "type",
+      "tooltips": []
     }
+  },
+  "effectByTooltip": {
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6",
+    "7": "7",
+    "8": "8",
+    "9": "9",
+    "10": "10",
+    "11": "11",
+    "12": "12",
+    "13": "13",
+    "14": "14",
+    "15": "15",
+    "16": "16",
+    "17": "17",
+    "18": "18",
+    "19": "19",
+    "20": "20",
+    "21": "21",
+    "22": "22",
+    "23": "23",
+    "24": "24",
+    "25": "25",
+    "26": "26",
+    "27": "27",
+    "28": "28",
+    "29": "29",
+    "30": "30",
+    "31": "31",
+    "32": "32",
+    "33": "33",
+    "34": "34",
+    "35": "35",
+    "36": "36",
+    "37": "37",
+    "38": "38",
+    "39": "39",
+    "40": "40",
+    "42": "42",
+    "44": "44",
+    "45": "45",
+    "46": "46",
+    "47": "47",
+    "48": "48",
+    "49": "49",
+    "50": "50",
+    "51": "51",
+    "53": "53",
+    "54": "54",
+    "55": "55",
+    "56": "56",
+    "57": "56",
+    "58": "56",
+    "60": "56",
+    "61": "61",
+    "62": "62",
+    "63": "63",
+    "65": "63",
+    "67": "63",
+    "68": "68",
+    "69": "69",
+    "70": "70",
+    "72": "72",
+    "73": "73",
+    "74": "74",
+    "75": "75",
+    "78": "78",
+    "79": "79",
+    "80": "80",
+    "81": "81",
+    "82": "82",
+    "83": "83",
+    "84": "78",
+    "86": "55",
+    "87": "87",
+    "88": "88",
+    "90": "90",
+    "92": "92",
+    "93": "93",
+    "96": "96",
+    "97": "97",
+    "98": "98",
+    "102": "102",
+    "103": "103",
+    "104": "104",
+    "105": "105",
+    "998": "998",
+    "999": "998",
+    "1001": "1001",
+    "1002": "1002",
+    "1003": "1003",
+    "1004": "1004",
+    "1005": "1005",
+    "1006": "1006",
+    "1007": "1007",
+    "1008": "1008",
+    "1009": "1009",
+    "1010": "1010",
+    "1011": "1011",
+    "1012": "1012",
+    "1014": "1014",
+    "1015": "1015",
+    "1017": "1017",
+    "1018": "1018",
+    "1019": "1019",
+    "1020": "1020",
+    "1021": "1021",
+    "1022": "1022",
+    "1023": "1023",
+    "1024": "1024",
+    "1025": "1025",
+    "1026": "1026",
+    "1027": "1027",
+    "1028": "1028",
+    "1029": "1029",
+    "1030": "1030",
+    "1032": "1032",
+    "1033": "1033",
+    "1034": "1034",
+    "1035": "1035",
+    "1036": "1036",
+    "1037": "1037",
+    "1038": "1038",
+    "1039": "1039",
+    "1045": "1045",
+    "1069": "1069",
+    "1070": "1070",
+    "1076": "1076",
+    "1077": "1077",
+    "1085": "1085",
+    "1092": "1092",
+    "1094": "1094",
+    "1096": "1096",
+    "1098": "1098",
+    "1099": "1099",
+    "1101": "1101",
+    "1102": "1102",
+    "1105": "1019",
+    "10001": "10001",
+    "10002": "10002",
+    "2000020": "2000020",
+    "2000035": "2000035",
+    "2000053": "2000053",
+    "2000056": "2000056",
+    "2000057": "2000057",
+    "2000059": "2000059",
+    "2000063": "2000063",
+    "2000065": "2000065",
+    "2000067": "2000067",
+    "2000072": "2000072",
+    "2000075": "2000075",
+    "2000076": "2000076",
+    "2000090": "2000090",
+    "2000092": "2000092",
+    "2000093": "2000093",
+    "2000094": "2000094",
+    "2000095": "2000095",
+    "2000096": "2000096",
+    "2000100": "2000100",
+    "2000102": "2000102",
+    "2000109": "2000109",
+    "2000110": "2000110",
+    "2000112": "2000112",
+    "2000114": "2000114",
+    "2000119": "2000119",
+    "2000120": "2000120",
+    "2010109": "2010109",
+    "2010112": "2010112",
+    "2100065": "2100065",
+    "2100091": "2100091",
+    "2100092": "2100092",
+    "2100093": "2100093",
+    "2300092": "56",
+    "4044007": "40760091",
+    "4044017": "40760091",
+    "4076102": "4076102",
+    "4079002": "4079002",
+    "4086001": "4086001",
+    "4086007": "4086007",
+    "4086008": "4086007",
+    "4086031": "4086001",
+    "4089001": "4089001",
+    "5203701": "5203701",
+    "5204001": "5204001",
+    "40103013": "40103013",
+    "40103045": "2000072",
+    "40760091": "40760091",
+    "40760092": "40760092",
+    "40860010": "4086001",
+    "40860011": "4086001",
+    "40860012": "4086001",
+    "40860013": "4086001",
+    "40860014": "4086001",
+    "40860015": "4086001",
+    "40860016": "4086001",
+    "40860018": "4086001",
+    "40860019": "4086001",
+    "40860131": "4086001",
+    "40860132": "4086001",
+    "40860133": "4086001",
+    "40860134": "4086001",
+    "40860135": "4086001",
+    "40860136": "40860136",
+    "40860137": "40860137",
+    "40860141": "4086001",
+    "40860142": "4086001",
+    "40860143": "4086001",
+    "40860144": "4086001",
+    "40860145": "4086001",
+    "40860146": "40860146",
+    "40860147": "40860147",
+    "40860191": "4086001",
+    "40860192": "4086001",
+    "40860194": "4086001",
+    "40860195": "4086001",
+    "40860196": "4086001",
+    "40860250": "4086001",
+    "40860251": "4086001",
+    "40860252": "4086001",
+    "40860253": "4086001",
+    "40860254": "4086001",
+    "40860255": "4086001",
+    "40860256": "4086001",
+    "40860257": "4086001",
+    "40860258": "4086001",
+    "40860259": "4086001",
+    "40860310": "4086001",
+    "40860311": "4086001",
+    "40860312": "4086001",
+    "40860313": "4086001",
+    "40860314": "4086001",
+    "40860315": "4086001",
+    "40860316": "4086001",
+    "40860317": "4086001",
+    "40860318": "4086001",
+    "40860319": "4086001",
+    "401030202": "401030202"
+  },
+  "effectByLabel": {
+    "SYS_BUFF_ADDITIVE_TURN": "44",
+    "SYS_BUFF_ACTION_SPEED_UP": "15",
+    "SYS_BUFF_ACTION_GAUGE_UP": "61",
+    "SYS_BUFF_BACKUP": "40",
+    "SYS_BUFF_COOLTIME_REDUCE": "63",
+    "SYS_BUFF_CHARGE_CP": "SYS_BUFF_CHARGE_CP",
+    "SYS_BUFF_REMOVE_BUFF": "48",
+    "SYS_BUFF_NAME_2000091": "2100091",
+    "SYS_BUFF_PIERCE_POWER_RATE_UP": "8",
+    "SYS_BUFF_ATTACK_UP": "7",
+    "SYS_BUFF_DMG": "SYS_BUFF_DMG",
+    "SYS_BUFF_ADDITIVE_ATTACK": "42",
+    "SYS_BUFF_BREAK_DMG": "80",
+    "SYS_BUFF_REVIVAL": "31",
+    "SYS_BUFF_DEFENCE_UP": "6",
+    "SYS_BUFF_ACTION_GAUGE_DOWN": "62",
+    "SYS_BUFF_COUNTER": "45",
+    "SYS_BUFF_DOT_IMMEDIATELY": "56",
+    "SYS_BUFF_CRITICAL_DAMAGE_UP": "12",
+    "SYS_BUFF_REMOVE_DEBUFF": "49",
+    "SYS_BUFF_EXTEND_BUFF_DOWN": "51",
+    "SYS_BUFF_EXTEND_BUFF_UP": "50",
+    "SYS_BUFF_REVENGE_HEAL": "47",
+    "SYS_BUFF_REVENGE": "46",
+    "SYS_BUFF_EXTEND_DEBUFF_DOWN": "53",
+    "SYS_BUFF_STEAL": "SYS_BUFF_STEAL",
+    "SYS_BUFF_COOLTIME_INCREASE": "68",
+    "SYS_BUFF_KILL_UNDER_HP_RATE": "54",
+    "SYS_BUFF_RESURRECTION": "55",
+    "SYS_BUFF_ADDITIVE_SKILL": "SYS_BUFF_ADDITIVE_SKILL",
+    "SYS_BUFF_EXTEND_DEBUFF_UP": "SYS_BUFF_EXTEND_DEBUFF_UP",
+    "SYS_BUFF_CONVERT": "97",
+    "SYS_BUFF_CHARGE_AP": "SYS_BUFF_CHARGE_AP",
+    "SYS_BUFF_DEFENCE_DOWN": "17",
+    "SYS_BUFF_REDUCE_AP": "SYS_BUFF_REDUCE_AP",
+    "SYS_BUFF_REDISTRIBUTE": "105",
+    "SYS_BUFF_WG_CHARGE": "SYS_BUFF_WG_CHARGE",
+    "SYS_BUFF_WG_INVINCIBLE": "SYS_BUFF_WG_INVINCIBLE",
+    "SYS_BUFF_CRITICAL_RATE_UP": "11",
+    "SYS_BUFF_ACTION_SPEED_DOWN": "26",
+    "SYS_BUFF_ATTACK_DOWN": "18",
+    "SYS_DESC_SHIELD_UP": "SYS_DESC_SHIELD_UP",
+    "SYS_BUFF_DMG_REDUCE_RATE_DOWN": "70",
+    "SYS_BUFF_LOST_CORE": "SYS_BUFF_LOST_CORE",
+    "SYS_BUFF_ACCURACY_DOWN": "24",
+    "SYS_BUFF_CRITICAL_RATE_DOWN": "22",
+    "SYS_BUFF_HEAL": "SYS_BUFF_HEAL",
+    "SYS_BUFF_RATE_CHANCE_DOWN": "20",
+    "SYS_BUFF_RATE_RESIST_UP": "10",
+    "SYS_BUFF_DMG_REDUCE_RATE_UP": "69",
+    "SYS_BUFF_AVOID_UP": "14",
+    "SYS_BUFF_IMMUNE": "30",
+    "SYS_BUFF_RATE_CHANCE_UP": "9",
+    "SYS_BUFF_PIERCE_POWER_RATE_DOWN": "19"
+  },
+  "effectByKey": {
+    "buff": {
+      "BT_STAT|ST_CRITICAL_DMG_RATE": "12",
+      "BT_STAT|ST_ATK": "7",
+      "BT_ADDITIVE_TURN": "44",
+      "BT_STAT|ST_DMG_REDUCE_RATE": "1069",
+      "BT_INVINCIBLE": "27",
+      "BT_STAT|ST_PIERCE_POWER_RATE": "8",
+      "BT_STAT|ST_SPEED": "15",
+      "BT_STAT|ST_BUFF_CHANCE": "9",
+      "BT_NONE": "4086001",
+      "BT_SHIELD_BASED_TARGET": "29",
+      "BT_ACTION_GAUGE_ON_TURN_END_TEAM_2": "61",
+      "BT_CALL_BACKUP": "40",
+      "BT_CALL_BACKUP_2": "40",
+      "BT_ACTION_GAUGE": "61",
+      "BT_COOL3_CHARGE": "63",
+      "BT_STAT": "2000059",
+      "BT_IMMUNE": "30",
+      "BT_SHARE_DMG": "2000063",
+      "BT_AP_DECREASE": "2000100",
+      "BT_STAT|ST_BUFF_RESIST": "10",
+      "BT_STAT_BUFF_ENHANCE": "1092",
+      "BT_COOL_CHARGE": "63",
+      "BT_DMG_REDUCE_FINAL": "2000109",
+      "BT_DMG": "SYS_BUFF_DMG",
+      "BT_RUN_FIRST_SKILL_TO_HIGHEST_ATK_ON_TURN_END_TEAM": "42",
+      "BT_UNDEAD": "90",
+      "BT_CP_CHARGE": "SYS_BUFF_CHARGE_CP",
+      "BT_AP_CHARGE": "SYS_BUFF_CHARGE_CP",
+      "BT_DMG_TARGET_BREAK": "80",
+      "BT_SHIELD_BASED_CASTER": "29",
+      "BT_STAT|ST_CRITICAL_RATE": "11",
+      "BT_EXTRA_ATTACK_ON_TURN_END": "42",
+      "BT_COOL2_CHARGE": "63",
+      "BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER": "45",
+      "BT_STAT|ST_DEF": "6",
+      "BT_ADDITIVE_ATTACK_ON_EVENT": "42",
+      "BT_HEAL_BASED_TARGET": "28",
+      "BT_RUN_PASSIVE_SKILL_ON_TURN_END": "42",
+      "BT_STAT|ST_COUNTER_RATE": "45",
+      "BT_DMG_TARGET_STAT": "42",
+      "BT_REMOVE_DEBUFF": "49",
+      "BT_EXTEND_BUFF": "50",
+      "BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK": "47",
+      "BT_EXTEND_DEBUFF": "53",
+      "BT_STAT|ST_VAMPIRIC": "88",
+      "BT_KILL_UNDER_HP_RATE": "54",
+      "BT_RESURRECTION": "55",
+      "BT_RUN_PASSIVE_SKILL_ON_TURN_END_TEAM": "42",
+      "BT_STAT|ST_GET_GOLD_RATE": "2000056",
+      "BT_RUN_ACTIVE_SKILL_ON_TURN_END": "SYS_BUFF_ADDITIVE_SKILL",
+      "BT_SECOND_TRIGGER": "47",
+      "BT_DMG_KILL_COUNT_STACK": "SYS_BUFF_DMG",
+      "BT_RUN_PASSIVE_SKILL_ON_TURN_END_TEAM_IGNORE_SEAL_ADDITIVE": "47",
+      "BT_2000065_A": "2000065",
+      "BT_2000065_B": "2100065",
+      "BT_STAT|ST_AVOID": "14",
+      "BT_DMG_REDUCE": "2000067",
+      "BT_STEALTHED": "98",
+      "BT_2000094": "2000094",
+      "BT_REVIVAL": "31",
+      "BT_RUN_FIRST_SKILL_ON_TURN_END_DEFENDER": "45",
+      "BT_STAT|ST_DMG_BOOST": "SYS_BUFF_DMG",
+      "BT_DMG_REDUCE_FINAL_WITH_OUT_FIRST_SKILL": "2000112",
+      "BT_RUN_ACTIVE_SKILL_ON_TURN_END_LOWEST_HP": "42",
+      "BT_STAT|ST_ACCURACY": "13",
+      "BT_WG_HEAL": "SYS_BUFF_WG_CHARGE",
+      "BT_WG_INVINCIBLE": "SYS_BUFF_WG_INVINCIBLE",
+      "BT_STAT|ST_HIT_HP_RECOVERY": "16",
+      "BT_HEAL_BASED_CASTER": "28",
+      "BT_ACTION_GAUGE_ENHANCE": "4086001",
+      "BT_GROUP": "4086001",
+      "BT_DMG_TO_BOSS": "4086001",
+      "BT_HEAL_BATTLE_FINISH": "SYS_BUFF_HEAL",
+      "BT_COOL_MAX_REDUCE": "63",
+      "BT_INCREASE_RECEIVE_HEAL": "SYS_BUFF_HEAL",
+      "BT_STAT_PREMIUM": "9",
+      "INCREASED_DEFENSE": "6",
+      "INCREASED_ATTACK": "7",
+      "INCREASED_PENETRATION": "8",
+      "INCREASED_EFFECTIVENESS": "9",
+      "INCREASED_RESILIENCE": "10",
+      "INCREASED_CRIT_HIT_CHANCE": "11",
+      "INCREASED_CRITICAL_DAMAGE": "12",
+      "INCREASED_ACCURACY": "13",
+      "MISS_RATE_INCREASE": "14",
+      "INCREASED_SPEED": "15",
+      "HEALS_WHEN_HIT": "16",
+      "INVULNERABILITY": "27",
+      "SUSTAINED_RECOVERY": "28",
+      "BARRIER": "29",
+      "IMMUNITY": "30",
+      "REVIVAL": "31",
+      "DUAL_ATTACK": "40",
+      "ADDITIONAL_ATTACK": "42",
+      "EXTRA_TURN": "44",
+      "COUNTERATTACK": "45",
+      "REVENGE": "46",
+      "AGILE_RESPONSE": "47",
+      "DEBUFF_REMOVAL": "49",
+      "BUFF_DURATION_INCREASE": "50",
+      "DEBUFF_DURATION_REDUCTION": "53",
+      "RESURRECTION_GREATER": "55",
+      "PRIORITY_INCREASE": "61",
+      "COOLDOWN_REDUCTION": "63",
+      "REDUCED_DAMAGE_TAKEN": "69",
+      "CHAIN_START": "72",
+      "CHAIN_COMPANION": "73",
+      "FINISH_CHAIN": "74",
+      "BURST_SKILL": "78",
+      "MAXWELLS_SAFEGUARD": "79",
+      "FIND_WEAKNESS": "80",
+      "INCREASES_SKILL_CHAIN_DAMAGE": "81",
+      "REDUCE_WEAKNESS_GAUGE_DAMAGE": "82",
+      "THE_CASTAWAY_REAPER": "83",
+      "HEAVY_STRIKE": "87",
+      "INCREASES_LIFESTEAL": "88",
+      "IMMORTALITY": "90",
+      "BUFF_ENHANCEMENT": "92",
+      "STEALTH": "98",
+      "FORTIFICATION": "998",
+      "STARVING_DEVIL": "1076",
+      "IRREGULAR_ADVERSARY": "10001",
+      "RANDOM_INCREASED_STAT_EFFECT": "10002",
+      "PUREBLOODS_DOMINION": "2000035",
+      "SELFISH_GOD": "2000053",
+      "FIERCE_OFFENSIVE": "2000056",
+      "DOLL_GARDENS_CARETAKER": "2000059",
+      "SHOW_YOUR_LOYALTY": "2000063",
+      "SAKURA_CHIRU": "2000065",
+      "UME_ICHIRIN": "2100065",
+      "REGINAS_WORLD": "2000067",
+      "A_NINJAS_AFTERIMAGE": "2000072",
+      "DESTROYERS_PUNISHMENT": "2000075",
+      "CHARISMA": "2000076",
+      "HUBRISS_DOMINION": "2000090",
+      "FINAL_BRAND": "2100091",
+      "RETRIBUTIONS_DOMINION": "2000092",
+      "ARIEL": "2000096",
+      "GIFT_OF_BUFFS": "2100093",
+      "RADIANT_WILL": "2000094",
+      "GRACE_OF_THE_VIRGIN_GODDESS": "2000095",
+      "ETHER_BOOST": "2000100",
+      "BANES_DOMAIN": "2000109",
+      "MANDALA": "2000110",
+      "RUSH": "2000114",
+      "WHITE_NIGHT": "2000119",
+      "POLAR_NIGHT": "2000120",
+      "SPATIAL_DISTORTION_SELF": "2000112",
+      "HARMONY_OF_DESPAIR": "40760092",
+      "COURAGE_AGAINST_DESPAIR": "4086001",
+      "CORE_ENERGY": "4086007",
+      "DEFENSE_SYSTEM_SIGMA_DOME": "401030202",
+      "ENVIRONMENTAL_CHANGE_RESPONSE": "40860136",
+      "WEATHER_VARIABLE_RESPONSE": "40860137",
+      "REMOVE_DETECTION_INTERFERENCE": "40860146",
+      "EXCLUDE_UNKNOWN_VARIABLES": "40860147",
+      "ADAMS_APPLE": "4089001",
+      "OATH_OF_METEOS": "4076102",
+      "GAIN_CHAIN_POINTS": "SYS_BUFF_CHARGE_CP",
+      "DAMAGE_INCREASE": "SYS_BUFF_DMG",
+      "EXTRA_SKILL": "SYS_BUFF_ADDITIVE_SKILL",
+      "GAIN_ACTION_POINTS": "SYS_BUFF_CHARGE_AP",
+      "WEAKNESS_GAUGE_RECOVERY": "SYS_BUFF_WG_CHARGE",
+      "WEAKNESS_GAUGE_DAMAGE_IMMUNITY": "SYS_BUFF_WG_INVINCIBLE",
+      "ENHANCES_BARRIER_STRENGTH": "SYS_DESC_SHIELD_UP",
+      "HEALTH_RECOVERY": "SYS_BUFF_HEAL",
+      "BT_BARRIER": "29",
+      "BT_FIXED_DAMAGE": "75",
+      "BT_CONTINU_HEAL": "28",
+      "BT_ADDITIVE_ATTACK": "42",
+      "BT_COUNTERATTACK": "45",
+      "BT_AGILE_RESPONSE": "47",
+      "BT_REVENGE": "46"
+    },
+    "debuff": {
+      "BT_DMG_REDUCE": "1070",
+      "BT_STAT|ST_AVOID": "25",
+      "BT_STAT|ST_BUFF_RESIST": "21",
+      "BT_SEAL_ADDITIVE_ATTACK": "96",
+      "BT_REMOVE_BUFF": "48",
+      "BT_SILENCE": "37",
+      "BT_STAT|ST_SPEED": "26",
+      "BT_STAT|ST_GET_GOLD_RATE": "2100091",
+      "BT_DOT_CURSE": "2",
+      "BT_STAT|ST_ATK": "18",
+      "BT_SEALED": "39",
+      "BT_DOT_2000092": "2100092",
+      "BT_STAT": "2000102",
+      "BT_DOT_POISON": "4",
+      "BT_NONE": "4089001",
+      "BT_CP_CHARGE": "SYS_BUFF_CHARGE_CP",
+      "BT_SEAL_BT_CALL_BACKUP": "1099",
+      "BT_AGGRO": "32",
+      "BT_FREEZE": "33",
+      "BT_ACTION_GAUGE": "62",
+      "BT_DOT_BURN": "1",
+      "BT_STAT|ST_DEF": "17",
+      "BT_STUN": "34",
+      "BT_MARKING": "36",
+      "BT_STAT|ST_CRITICAL_RATE": "22",
+      "BT_DOT_BLEED": "3",
+      "BT_DOT_LIGHTNING": "5",
+      "BT_STAT|ST_BUFF_CHANCE": "20",
+      "BT_EXTEND_BUFF": "51",
+      "BT_STEAL_BUFF": "SYS_BUFF_STEAL",
+      "BT_SEALED_RECEIVE_HEAL": "38",
+      "BT_COOL3_CHARGE": "68",
+      "BT_STONE": "35",
+      "BT_REDUCE_RECEIVE_HEAL": "2000057",
+      "BT_DEATH": "1085",
+      "BT_COOL_CHARGE": "68",
+      "BT_EXTEND_DEBUFF": "SYS_BUFF_EXTEND_DEBUFF_UP",
+      "BT_STATBUFF_CONVERT_TO_STATDEBUFF": "97",
+      "BT_UNIQUE_BUFF": "2000102",
+      "BT_AP_CHARGE": "SYS_BUFF_REDUCE_AP",
+      "BT_GOLDEN_CURSE": "104",
+      "BT_STAT|ST_CRITICAL_DMG_RATE": "23",
+      "BT_REDISTRIBUTE_BUFF": "105",
+      "BT_STAT|ST_PIERCE_POWER_RATE": "2010112",
+      "BT_STAT_DEBUFF_ENHANCE": "1094",
+      "BT_GROUP": "40760091",
+      "BT_SEAL_ADDITIVE_TURN": "1101",
+      "BT_ACTION_GAUGE_ENHANCE_REVERSE": "1102",
+      "BT_STAT|ST_ACCURACY": "24",
+      "BT_RESOURCE_USE_SKILL": "1018",
+      "BT_SEALED_RESURRECTION": "32",
+      "BURNED": "1",
+      "CURSED": "2",
+      "BLEEDING": "3",
+      "POISONED": "4",
+      "SHOCKED": "5",
+      "REDUCED_DEFENSE": "17",
+      "REDUCED_ATTACK": "18",
+      "REDUCED_PENETRATION": "19",
+      "REDUCED_EFFECTIVENESS": "20",
+      "REDUCED_RESILIENCE": "21",
+      "REDUCED_CRIT_HIT_CHANCE": "22",
+      "REDUCED_CRITICAL_DAMAGE": "23",
+      "REDUCED_ACCURACY": "24",
+      "MISS_RATE_DECREASE": "25",
+      "REDUCED_SPEED": "26",
+      "TAUNTED": "32",
+      "FROZEN": "33",
+      "STUNNED": "34",
+      "PETRIFIED": "35",
+      "MARKED": "36",
+      "SILENCED": "37",
+      "UNHEALABLE": "38",
+      "UNBUFFABLE": "39",
+      "BUFF_REMOVAL": "48",
+      "BUFF_DURATION_REDUCTION": "51",
+      "INSTANT_DEATH": "54",
+      "DETONATE": "56",
+      "PRIORITY_DECREASE": "62",
+      "COOLDOWN_INCREASE": "68",
+      "INCREASED_DAMAGE_TAKEN": "70",
+      "FIXED_DAMAGE": "75",
+      "BUFF_IMPAIRMENT": "93",
+      "SEAL_EXTRA_SKILL": "96",
+      "BUFF_REVERSAL": "97",
+      "PRIORITY_INCREASE_BANNED": "102",
+      "CORROSIVE_POISON": "103",
+      "GOLDEN_CURSE": "104",
+      "BUFF_TRANSFER": "105",
+      "STARVING_DEVIL": "1077",
+      "MARTYRDOM": "1085",
+      "DEBUFF_ENHANCEMENT": "1094",
+      "DUAL_ATTACK_DISABLED": "1099",
+      "SEAL_EXTRA_TURN": "1101",
+      "EXECUTION_TIME": "2000020",
+      "KERAUNOS": "2000057",
+      "ETERNAL_BLEEDING": "2100092",
+      "IRREGULAR_INFECTION": "2000102",
+      "BANES_DOMAIN": "2010109",
+      "SPATIAL_DISTORTION_ENEMY": "2010112",
+      "RANDOM_DEBUFF": "40760091",
+      "RANDOM_DAMAGE_OVER_TIME": "4079002",
+      "SHICHIFUJAS_CURSE": "5203701",
+      "DRAGON_FEAR": "5204001",
+      "STEALING_BUFF": "SYS_BUFF_STEAL",
+      "DEBUFF_DURATION_INCREASE": "SYS_BUFF_EXTEND_DEBUFF_UP",
+      "AP_DECREASE": "SYS_BUFF_REDUCE_AP",
+      "DISCONNECTED_FROM_CORE": "SYS_BUFF_LOST_CORE",
+      "BT_BARRIER": "29",
+      "BT_FIXED_DAMAGE": "75",
+      "BT_CONTINU_HEAL": "28",
+      "BT_ADDITIVE_ATTACK": "42",
+      "BT_COUNTERATTACK": "45",
+      "BT_AGILE_RESPONSE": "47",
+      "BT_REVENGE": "46"
+    }
+  },
+  "tooltipKinds": {
+    "1": ["BT_DOT_BURN"],
+    "2": ["BT_DOT_CURSE"],
+    "3": ["BT_DOT_BLEED|atk"],
+    "4": ["BT_DOT_POISON|atk"],
+    "5": ["BT_DOT_LIGHTNING|atk"],
+    "6": ["BT_STAT|def"],
+    "7": ["BT_STAT|atk"],
+    "8": ["BT_STAT|critical_rate", "BT_STAT|pierce_power_rate"],
+    "9": ["BT_STAT|buff_chance"],
+    "10": ["BT_STAT|buff_resist"],
+    "11": ["BT_STAT|critical_rate"],
+    "12": ["BT_STAT|critical_dmg_rate"],
+    "13": ["BT_STAT|accuracy"],
+    "14": ["BT_STAT|avoid", "BT_STAT|buff_resist"],
+    "15": ["BT_STAT|speed"],
+    "16": ["BT_STAT|hit_hp_recovery"],
+    "17": ["BT_ADDITIVE_TURN", "BT_STAT|def"],
+    "18": ["BT_STAT|atk"],
+    "19": ["BT_STAT|pierce_power_rate"],
+    "20": ["BT_STAT|buff_chance"],
+    "21": ["BT_STAT|buff_resist"],
+    "22": ["BT_STAT|critical_rate"],
+    "23": ["BT_STAT|critical_dmg_rate"],
+    "24": ["BT_STAT|accuracy"],
+    "25": ["BT_STAT|avoid"],
+    "26": ["BT_STAT|def", "BT_STAT|speed"],
+    "27": ["BT_INVINCIBLE"],
+    "28": ["BT_HEAL_BASED_CASTER|hp", "BT_HEAL_BASED_TARGET|hp"],
+    "29": [
+      "BT_SHIELD_BASED_CASTER",
+      "BT_SHIELD_BASED_CASTER|atk",
+      "BT_SHIELD_BASED_CASTER|buff_chance",
+      "BT_SHIELD_BASED_CASTER|def",
+      "BT_SHIELD_BASED_CASTER|get_gold_rate",
+      "BT_SHIELD_BASED_CASTER|hp",
+      "BT_SHIELD_BASED_CASTER|speed",
+      "BT_SHIELD_BASED_TARGET|atk",
+      "BT_SHIELD_BASED_TARGET|hp"
+    ],
+    "30": ["BT_IMMUNE", "BT_IMMUNE|def"],
+    "31": ["BT_REVIVAL"],
+    "32": ["BT_AGGRO", "BT_SEALED_RESURRECTION", "BT_SEAL_ADDITIVE_ATTACK"],
+    "33": ["BT_FREEZE", "BT_FREEZE|atk"],
+    "34": ["BT_STUN"],
+    "35": ["BT_STONE", "BT_STONE|critical_rate"],
+    "36": ["BT_MARKING"],
+    "37": ["BT_SILENCE", "BT_SILENCE|get_gold_rate"],
+    "38": ["BT_SEALED_RECEIVE_HEAL"],
+    "39": ["BT_SEALED"],
+    "45": ["BT_STAT|counter_rate"],
+    "70": ["BT_DMG_REDUCE"],
+    "79": ["BT_INVINCIBLE"],
+    "80": ["BT_DMG_TARGET_BREAK"],
+    "81": ["BT_DMG"],
+    "83": ["BT_DMG_TARGET_BREAK"],
+    "88": ["BT_STAT|vampiric"],
+    "90": ["BT_UNDEAD"],
+    "92": ["BT_STAT_BUFF_ENHANCE"],
+    "93": ["BT_STAT_BUFF_ENHANCE"],
+    "96": ["BT_SEAL_ADDITIVE_ATTACK"],
+    "98": ["BT_STEALTHED"],
+    "102": ["BT_ACTION_GAUGE_ENHANCE_REVERSE"],
+    "103": ["BT_DOT_POISON|hp"],
+    "104": ["BT_GOLDEN_CURSE"],
+    "998": ["BT_DMG_REDUCE"],
+    "999": ["BT_DMG_REDUCE"],
+    "1001": ["BT_DOT_BURN"],
+    "1002": ["BT_DOT_CURSE"],
+    "1003": ["BT_DOT_BLEED|atk"],
+    "1004": ["BT_DOT_POISON|atk"],
+    "1005": ["BT_DOT_LIGHTNING|atk"],
+    "1006": ["BT_STAT|def"],
+    "1007": ["BT_STAT|atk"],
+    "1008": ["BT_STAT|pierce_power_rate"],
+    "1009": ["BT_STAT|buff_chance"],
+    "1010": ["BT_STAT|buff_resist"],
+    "1011": ["BT_STAT|critical_rate"],
+    "1012": ["BT_STAT|critical_dmg_rate"],
+    "1014": ["BT_STAT|avoid"],
+    "1015": ["BT_STAT|speed"],
+    "1017": ["BT_RESOURCE_USE_SKILL|def", "BT_STAT|def"],
+    "1018": ["BT_RESOURCE_USE_SKILL|atk", "BT_STAT|atk"],
+    "1019": ["BT_STAT|pierce_power_rate"],
+    "1020": ["BT_STAT|buff_chance"],
+    "1021": ["BT_STAT|buff_resist"],
+    "1022": ["BT_STAT|critical_rate"],
+    "1023": ["BT_STAT|critical_dmg_rate"],
+    "1024": ["BT_STAT|accuracy"],
+    "1025": ["BT_STAT|avoid"],
+    "1026": ["BT_STAT|speed"],
+    "1027": ["BT_INVINCIBLE", "BT_INVINCIBLE|def"],
+    "1028": ["BT_HEAL_BASED_TARGET|hp"],
+    "1029": [
+      "BT_SHIELD_BASED_CASTER",
+      "BT_SHIELD_BASED_CASTER|atk",
+      "BT_SHIELD_BASED_CASTER|hp",
+      "BT_SHIELD_BASED_TARGET|hp"
+    ],
+    "1030": ["BT_IMMUNE"],
+    "1032": ["BT_AGGRO"],
+    "1033": ["BT_FREEZE"],
+    "1034": ["BT_STUN"],
+    "1035": ["BT_STONE"],
+    "1036": ["BT_MARKING"],
+    "1037": ["BT_SILENCE"],
+    "1038": ["BT_SEALED_RECEIVE_HEAL"],
+    "1039": ["BT_SEALED"],
+    "1045": ["BT_STAT|counter_rate"],
+    "1069": ["BT_DMG_REDUCE", "BT_STAT|dmg_reduce_rate"],
+    "1070": ["BT_DMG_REDUCE"],
+    "1076": ["BT_STAT|critical_rate"],
+    "1077": ["BT_STAT|critical_dmg_rate"],
+    "1085": ["BT_DEATH"],
+    "1092": ["BT_STAT_BUFF_ENHANCE"],
+    "1094": ["BT_STAT_DEBUFF_ENHANCE"],
+    "1096": ["BT_SEAL_ADDITIVE_ATTACK"],
+    "1098": ["BT_STEALTHED"],
+    "1099": ["BT_SEAL_BT_CALL_BACKUP"],
+    "1101": ["BT_SEAL_ADDITIVE_TURN"],
+    "1102": ["BT_ACTION_GAUGE_ENHANCE_REVERSE"],
+    "1105": ["BT_STAT|pierce_power_rate"],
+    "10001": ["BT_NONE"],
+    "10002": ["BT_GROUP"],
+    "11000": ["BT_STAT"],
+    "11001": ["BT_STAT"],
+    "11002": ["BT_STAT"],
+    "11003": ["BT_STAT"],
+    "11004": ["BT_STAT"],
+    "11010": ["BT_NONE", "BT_STAT"],
+    "11011": ["BT_NONE", "BT_STAT"],
+    "11012": ["BT_NONE", "BT_STAT"],
+    "11013": ["BT_NONE", "BT_STAT"],
+    "11014": ["BT_NONE", "BT_STAT"],
+    "11114": ["BT_STAT"],
+    "11120": ["BT_STAT"],
+    "12001": ["BT_NONE"],
+    "12002": ["BT_NONE"],
+    "12003": ["BT_NONE"],
+    "12004": ["BT_NONE"],
+    "12005": ["BT_NONE"],
+    "2000020": ["BT_DMG_REDUCE"],
+    "2000035": ["BT_NONE"],
+    "2000053": ["BT_NONE"],
+    "2000056": ["BT_NONE", "BT_STAT|get_gold_rate"],
+    "2000057": ["BT_REDUCE_RECEIVE_HEAL"],
+    "2000059": ["BT_STAT", "BT_STAT|get_gold_rate"],
+    "2000063": ["BT_SHARE_DMG"],
+    "2000065": ["BT_2000065_A"],
+    "2000067": ["BT_DMG_REDUCE|accuracy"],
+    "2000072": ["BT_NONE"],
+    "2000075": ["BT_NONE"],
+    "2000076": ["BT_NONE"],
+    "2000079": ["BT_STAT"],
+    "2000085": ["BT_NONE"],
+    "2000087": ["BT_NONE"],
+    "2000090": ["BT_NONE"],
+    "2000091": ["BT_NONE"],
+    "2000092": ["BT_NONE"],
+    "2000094": ["BT_2000094"],
+    "2000096": ["BT_NONE"],
+    "2000097": ["BT_STAT"],
+    "2000100": ["BT_AP_DECREASE"],
+    "2000102": ["BT_STAT", "BT_UNIQUE_BUFF"],
+    "2000106": ["BT_STAT"],
+    "2000109": ["BT_DMG_REDUCE_FINAL"],
+    "2000110": ["BT_STAT"],
+    "2000111": ["BT_NONE"],
+    "2000112": ["BT_DMG_REDUCE_FINAL_WITH_OUT_FIRST_SKILL"],
+    "2000114": ["BT_STAT|dmg_reduce_rate"],
+    "2000119": ["BT_NONE"],
+    "2000120": ["BT_NONE"],
+    "2010109": ["BT_STAT|atk"],
+    "2010112": ["BT_STAT|pierce_power_rate"],
+    "2100065": ["BT_2000065_B"],
+    "2100076": ["BT_STAT"],
+    "2100091": ["BT_NONE"],
+    "2100092": ["BT_DOT_2000092|buff_chance"],
+    "2100095": ["BT_STAT"],
+    "2100100": ["BT_STAT"],
+    "2100102": ["BT_STAT"],
+    "2100106": ["BT_NONE"],
+    "2100114": ["BT_NONE"],
+    "2200095": ["BT_STAT"],
+    "2200100": ["BT_STAT"],
+    "2200106": ["BT_STAT"],
+    "2300106": ["BT_STAT"],
+    "2700003": ["BT_DMG_OWNER_STAT|speed"],
+    "4000000": ["BT_NONE"],
+    "4004005": ["BT_STAT"],
+    "4044006": ["BT_STAT"],
+    "4044017": ["BT_NONE"],
+    "4044027": ["BT_NONE"],
+    "4076102": ["BT_DMG_REDUCE"],
+    "4086007": ["BT_NONE"],
+    "4086008": ["BT_NONE"],
+    "4086025": ["BT_NONE"],
+    "4089001": ["BT_NONE"],
+    "4089002": ["BT_NONE"],
+    "4089003": ["BT_NONE"],
+    "4134036": ["BT_STAT"],
+    "4151011": ["BT_STAT"],
+    "4176102": ["BT_NONE"],
+    "4510277": ["BT_NONE"],
+    "4520277": ["BT_NONE"],
+    "4530277": ["BT_NONE"],
+    "5203701": ["BT_STAT|atk"],
+    "5204001": ["BT_STAT|atk"],
+    "40013041": ["BT_NONE"],
+    "40013042": ["BT_NONE"],
+    "40013043": ["BT_NONE"],
+    "40013044": ["BT_NONE"],
+    "40103017": ["BT_STAT"],
+    "40103020": ["BT_STAT"],
+    "40103021": ["BT_STAT"],
+    "40103045": ["BT_DMG_REDUCE"],
+    "40103056": ["BT_STAT|avoid_add_cap"],
+    "40103057": ["BT_STAT|avoid_add_cap"],
+    "40440081": ["BT_STAT"],
+    "40440082": ["BT_STAT"],
+    "40760091": ["BT_GROUP"],
+    "40760092": ["BT_NONE"],
+    "40790021": ["BT_STAT", "BT_STAT|get_gold_rate"],
+    "40860010": ["BT_ACTION_GAUGE_ENHANCE"],
+    "40860011": ["BT_DMG"],
+    "40860012": ["BT_NONE"],
+    "40860013": ["BT_NONE"],
+    "40860014": ["BT_GROUP"],
+    "40860015": ["BT_DMG"],
+    "40860016": ["BT_ACTION_GAUGE_ENHANCE"],
+    "40860018": ["BT_NONE"],
+    "40860019": ["BT_NONE"],
+    "40860131": ["BT_NONE"],
+    "40860132": ["BT_NONE"],
+    "40860133": ["BT_NONE"],
+    "40860134": ["BT_NONE"],
+    "40860135": ["BT_NONE"],
+    "40860136": ["BT_NONE"],
+    "40860137": ["BT_NONE"],
+    "40860138": ["BT_NONE"],
+    "40860139": ["BT_NONE"],
+    "40860141": ["BT_NONE"],
+    "40860142": ["BT_NONE"],
+    "40860143": ["BT_NONE"],
+    "40860144": ["BT_NONE"],
+    "40860145": ["BT_NONE"],
+    "40860146": ["BT_NONE"],
+    "40860147": ["BT_NONE"],
+    "40860148": ["BT_NONE"],
+    "40860149": ["BT_NONE"],
+    "40860151": ["BT_STAT|critical_dmg_rate"],
+    "40860152": ["BT_STAT|atk"],
+    "40860153": ["BT_DMG"],
+    "40860161": ["BT_STAT|critical_dmg_rate"],
+    "40860162": ["BT_STAT|atk"],
+    "40860191": ["BT_STAT|atk"],
+    "40860192": ["BT_DMG_TO_BOSS"],
+    "40860194": ["BT_NONE"],
+    "40860195": ["BT_IMMUNE"],
+    "40860196": ["BT_NONE"],
+    "40860250": ["BT_STAT|atk"],
+    "40860251": ["BT_STAT|critical_dmg_rate"],
+    "40860252": ["BT_NONE"],
+    "40860253": ["BT_NONE"],
+    "40860254": ["BT_ACTION_GAUGE_ENHANCE"],
+    "40860255": ["BT_STAT|atk"],
+    "40860256": ["BT_STAT|critical_dmg_rate"],
+    "40860257": ["BT_NONE"],
+    "40860258": ["BT_STAT|buff_chance"],
+    "40860259": ["BT_ACTION_GAUGE_ENHANCE"],
+    "40860310": ["BT_NONE"],
+    "40860311": ["BT_NONE"],
+    "40860312": ["BT_NONE"],
+    "40860313": ["BT_NONE"],
+    "40860314": ["BT_NONE"],
+    "40860315": ["BT_NONE"],
+    "40860316": ["BT_NONE"],
+    "40860317": ["BT_NONE"],
+    "40860318": ["BT_NONE"],
+    "40860319": ["BT_NONE"],
+    "401030051": ["BT_STAT"],
+    "401030052": ["BT_STAT"],
+    "401030201": ["BT_STAT|avoid_subtract_cap"],
+    "401030202": ["BT_STAT|get_gold_rate"]
   }
 }

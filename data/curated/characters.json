@@ -8,7 +8,15 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "PueXtFsRHI0"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "PueXtFsRHI0",
+        "title": "[OUTERPLANE] The Lone Avenger, K",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T15:01:53Z"
+      }
+    ]
   },
   "2000002": {
     "rank": "C",
@@ -27,8 +35,14 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "K6sQsTbvzZ0",
     "videos": [
+      {
+        "platform": "youtube",
+        "id": "K6sQsTbvzZ0",
+        "title": "[OUTERPLANE] Heat-Averse Frost Elf, Snow",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T15:15:04Z"
+      },
       {
         "platform": "youtube",
         "id": "pIQNseGWDBg",
@@ -55,7 +69,15 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "iZGdQVbS-8k"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "iZGdQVbS-8k",
+        "title": "[OUTERPLANE] Mana-Seeing Eye, Lisha!",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T15:30:25Z"
+      }
+    ]
   },
   "2000006": {
     "rank": "C",
@@ -124,7 +146,6 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "U3aSzg_kYxo",
     "prosCons": {
       "pros": [
         {
@@ -158,7 +179,16 @@
           "fr": "la rendre trop rapide peut faire perdre beaucoup de tours"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "U3aSzg_kYxo",
+        "title": "[OUTERPLANE] Underworld Queenpin, Valentine",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T15:45:04Z"
+      }
+    ]
   },
   "2000013": {
     "rank": "B",
@@ -176,7 +206,33 @@
       "first": 3,
       "second": 2,
       "ultimate": 1
-    }
+    },
+    "synergies": [
+      {
+        "heroes": ["2000086"],
+        "reason": {
+          "en": "Can {D/DETONATE} {D/BT_DOT_CURSE}",
+          "jp": "{D/BT_DOT_CURSE}を{D/DETONATE}可能",
+          "kr": "{D/BT_DOT_CURSE}를 {D/DETONATE} 가능",
+          "zh": "可{D/DETONATE} {D/BT_DOT_CURSE}"
+        }
+      },
+      {
+        "heroes": ["2000062"],
+        "reason": {
+          "en": "More {D/BT_DOT_CURSE} stacks",
+          "jp": "より多くの{D/BT_DOT_CURSE}スタック",
+          "kr": "더 많은 {D/BT_DOT_CURSE} 중첩",
+          "zh": "更多{D/BT_DOT_CURSE}层数"
+        }
+      },
+      {
+        "heroes": ["2000084", "2000060", "2000103", "2000037"],
+        "reason": {
+          "en": "{B/BT_CALL_BACKUP}"
+        }
+      }
+    ]
   },
   "2000015": {
     "rank": "C",
@@ -188,7 +244,15 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "-QjB2wYAhpk"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "-QjB2wYAhpk",
+        "title": "[OUTERPLANE] Bloodthirsty Brawler, Francesca",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T16:00:00Z"
+      }
+    ]
   },
   "2000016": {
     "rank": "E",
@@ -282,7 +346,6 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "FSHheOc6AkI",
     "prosCons": {
       "pros": [
         {
@@ -316,7 +379,16 @@
           "fr": "faible contre les boss sans équipement exclusif au niveau maximum"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "FSHheOc6AkI",
+        "title": "[OUTERPLANE] Slayer of the Wild Spirits, Rin",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T16:15:01Z"
+      }
+    ]
   },
   "2000020": {
     "rank": "B",
@@ -421,7 +493,6 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "TAmYHXMoGJQ",
     "prosCons": {
       "pros": [
         {
@@ -462,7 +533,16 @@
           "fr": "{SK/Hanbyul Lee|S3} n'a que 80 % de chances d'appliquer la provocation au niveau maximum"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "TAmYHXMoGJQ",
+        "title": "[OUTERPLANE] Twinkling Little Angel, Hanbyul Lee",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T16:30:22Z"
+      }
+    ]
   },
   "2000022": {
     "rank": "C",
@@ -514,7 +594,18 @@
           "fr": "En danger dans les combats qui punissent les attaques de zone"
         }
       ]
-    }
+    },
+    "synergies": [
+      {
+        "heroes": ["2000012"],
+        "reason": {
+          "en": "{B/BT_STAT|ST_CRITICAL_RATE} so Noa doesn't need to use her Skill 3, {B/BT_STAT|ST_CRITICAL_DMG_RATE}, {B/BT_ACTION_GAUGE}, {B/BT_CALL_BACKUP}",
+          "jp": "{B/BT_STAT|ST_CRITICAL_RATE}でNoaがスキル3を使用不要、{B/BT_STAT|ST_CRITICAL_DMG_RATE}、{B/BT_ACTION_GAUGE}、{B/BT_CALL_BACKUP}",
+          "kr": "{B/BT_STAT|ST_CRITICAL_RATE}로 Noa가 스킬 3을 사용할 필요 없음, {B/BT_STAT|ST_CRITICAL_DMG_RATE}, {B/BT_ACTION_GAUGE}, {B/BT_CALL_BACKUP}",
+          "zh": "{B/BT_STAT|ST_CRITICAL_RATE}使Noa无需使用技能3, {B/BT_STAT|ST_CRITICAL_DMG_RATE}, {B/BT_ACTION_GAUGE}, {B/BT_CALL_BACKUP}"
+        }
+      }
+    ]
   },
   "2000023": {
     "rank": "B",
@@ -546,7 +637,6 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "EbAuKJyOzJE",
     "prosCons": {
       "pros": [
         {
@@ -573,7 +663,27 @@
           "fr": "Faible maintien de {D/BT_DOT_BLEED} lorsqu'elle est équipée pour les dégâts, nécessite donc de l'aide"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "EbAuKJyOzJE",
+        "title": "[OUTERPLANE] Archdemon's Adorable Minion, Beth",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T16:45:01Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000035", "2000015", "2000107"],
+        "reason": {
+          "en": "Also {C/Mage} with {I-W/Noblewoman's Guile}: More {D/BT_DOT_BLEED} uptime to enable Beth's extra effects",
+          "jp": "{I-W/Noblewoman's Guile}を装備した{C/Mage}: {D/BT_DOT_BLEED}の稼働時間増加でBethの追加効果を発動",
+          "kr": "{I-W/Noblewoman's Guile}를 장착한 {C/Mage}: {D/BT_DOT_BLEED} 유지 시간 증가로 Beth의 추가 효과 발동",
+          "zh": "装备{I-W/Noblewoman's Guile}的{C/Mage}: 更多{D/BT_DOT_BLEED}持续时间以触发Beth的额外效果"
+        }
+      }
+    ]
   },
   "2000026": {
     "rank": "D",
@@ -814,7 +924,26 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "QBBZaePTff4"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "QBBZaePTff4",
+        "title": "[OUTERPLANE] The Archdemon of Pure Blood, Eliza",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T17:00:40Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000025", "2000015"],
+        "reason": {
+          "en": "Stronger against enemies inflicted with {D/BT_DOT_BLEED}",
+          "jp": "{D/BT_DOT_BLEED}状態の敵に対してより強力",
+          "kr": "{D/BT_DOT_BLEED} 상태의 적에게 더 강함",
+          "zh": "对{D/BT_DOT_BLEED}状态的敌人造成更高伤害"
+        }
+      }
+    ]
   },
   "2000036": {
     "rank": "A",
@@ -835,7 +964,6 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "znqtUpXMza8",
     "prosCons": {
       "pros": [
         {
@@ -865,7 +993,16 @@
           "en": "-"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "znqtUpXMza8",
+        "title": "[OUTERPLANE] The Invincible Knight Commander, Veronica",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T17:15:03Z"
+      }
+    ]
   },
   "2000038": {
     "rank": "D",
@@ -886,7 +1023,6 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "gpJqG0hrrKc",
     "prosCons": {
       "pros": [
         {
@@ -927,7 +1063,16 @@
           "fr": "La réduction de durée des débuffs nécessite qu'elle déclenche son effet Revenge, et peut ne pas toujours suffire à les retirer"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "gpJqG0hrrKc",
+        "title": "[OUTERPLANE] Mysterious Princess, Stella",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T17:30:14Z"
+      }
+    ]
   },
   "2000040": {
     "rank": "A",
@@ -938,7 +1083,26 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "JOkL3JeB3iw"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "JOkL3JeB3iw",
+        "title": "[OUTERPLANE] Re-animator, Mero",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T17:45:00Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000105", "2000099", "2000021"],
+        "reason": {
+          "en": "{B/BT_STAT|ST_COUNTER_RATE}, {B/BT_STAT|ST_VAMPIRIC} and {I-W/Gorgon's Wrath [Ranger]} allow her to keep her {B/BT_UNDEAD} active full time",
+          "jp": "{B/BT_STAT|ST_COUNTER_RATE}、{B/BT_STAT|ST_VAMPIRIC}と{I-W/Gorgon's Wrath [Ranger]}で{B/BT_UNDEAD}を常時維持可能",
+          "kr": "{B/BT_STAT|ST_COUNTER_RATE}, {B/BT_STAT|ST_VAMPIRIC}와 {I-W/Gorgon's Wrath [Ranger]}로 {B/BT_UNDEAD} 상시 유지 가능",
+          "zh": "{B/BT_STAT|ST_COUNTER_RATE}、{B/BT_STAT|ST_VAMPIRIC}和{I-W/Gorgon's Wrath [Ranger]}使其能持续保持{B/BT_UNDEAD}状态"
+        }
+      }
+    ]
   },
   "2000041": {
     "rank": "C",
@@ -970,7 +1134,6 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "NsrNhKUjELE",
     "prosCons": {
       "pros": [
         {
@@ -1011,7 +1174,16 @@
           "fr": "Ne peut appliquer {D/BT_STAT|ST_ATK} qu'aux ennemis {E/Earth}"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "NsrNhKUjELE",
+        "title": "[OUTERPLANE] Exotic Nercomancer, Eternal",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T18:00:18Z"
+      }
+    ]
   },
   "2000044": {
     "rank": "B",
@@ -1023,7 +1195,6 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "QCt2TCasjDA",
     "prosCons": {
       "pros": [
         {
@@ -1057,7 +1228,16 @@
           "fr": "Dépend de ses alliés pour appliquer des débuffs et obtenir de gros dégâts bonus"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "QCt2TCasjDA",
+        "title": "[OUTERPLANE] 43rd Dean of Magnolia, Laplace",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T18:15:03Z"
+      }
+    ]
   },
   "2000045": {
     "rank": "E",
@@ -1201,7 +1381,18 @@
           "fr": "Surclassée en dehors de la Skyward Tower"
         }
       ]
-    }
+    },
+    "synergies": [
+      {
+        "heroes": ["2000082", "2000018"],
+        "reason": {
+          "en": "Better {D/BT_DOT_LIGHTNING} uptime to activate Sigma's extra effects",
+          "jp": "{D/BT_DOT_LIGHTNING}の稼働時間増加でSigmaの追加効果を発動",
+          "kr": "{D/BT_DOT_LIGHTNING} 유지 시간 증가로 Sigma의 추가 효과 발동",
+          "zh": "更多{D/BT_DOT_LIGHTNING}持续时间以触发Sigma的额外效果"
+        }
+      }
+    ]
   },
   "2000053": {
     "rank": "A",
@@ -1213,7 +1404,26 @@
       "second": 1,
       "ultimate": 3
     },
-    "video": "UBgH1dn4Z_g"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "UBgH1dn4Z_g",
+        "title": "[OUTERPLANE] Demiurge Stella",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T18:30:43Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000084"],
+        "reason": {
+          "en": "{B/BT_CALL_BACKUP} and {B/BT_AP_CHARGE} to use her expensive Burst skills",
+          "jp": "{B/BT_CALL_BACKUP}と{B/BT_AP_CHARGE}で高コストバーストスキルを使用",
+          "kr": "{B/BT_CALL_BACKUP}과 {B/BT_AP_CHARGE}로 고비용 버스트 스킬 사용",
+          "zh": "{B/BT_CALL_BACKUP}和{B/BT_AP_CHARGE}用于释放高消耗爆发技能"
+        }
+      }
+    ]
   },
   "2000054": {
     "rank": "B",
@@ -1225,7 +1435,6 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "3WCXBVQRQls",
     "prosCons": {
       "pros": [
         {
@@ -1252,7 +1461,16 @@
           "fr": "La réduction de la durée des débuffs peut ne pas toujours suffire"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "3WCXBVQRQls",
+        "title": "[OUTERPLANE] The Little Insomniac Nun, Mene",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T18:45:01Z"
+      }
+    ]
   },
   "2000055": {
     "rank": "S",
@@ -1264,7 +1482,6 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "X1IylquwEHY",
     "prosCons": {
       "pros": [
         {
@@ -1319,7 +1536,39 @@
           "fr": "DPS strictement monocible, donc moins optimale pour nettoyer rapidement les vagues"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "X1IylquwEHY",
+        "title": "[OUTERPLANE] Slacking Surfer, Aer",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T19:00:33Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000012"],
+        "reason": {
+          "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_ACTION_GAUGE} {B/BT_CALL_BACKUP}"
+        }
+      },
+      {
+        "heroes": ["2000043"],
+        "reason": {
+          "en": "{D/BT_STAT|ST_DEF}"
+        }
+      },
+      {
+        "heroes": ["2000098"],
+        "reason": {
+          "en": "S3's {B/BT_COOL_CHARGE} resets Aer's Skill 3-Skill 2 combo",
+          "jp": "S3の{B/BT_COOL_CHARGE}がAerのスキル3-スキル2コンボをリセット",
+          "kr": "S3의 {B/BT_COOL_CHARGE}가 Aer의 스킬 3-스킬 2 콤보를 초기화",
+          "zh": "S3的{B/BT_COOL_CHARGE}重置Aer的技能3-技能2连招"
+        }
+      }
+    ]
   },
   "2000056": {
     "rank": "B",
@@ -1330,7 +1579,26 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "nFY3ash9VM8"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "nFY3ash9VM8",
+        "title": "[OUTERPLANE] Paladin of Earth, Notia",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T19:15:03Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000060", "2000082", "2000081", "2000075", "2000064", "2000043"],
+        "reason": {
+          "en": "Debuffers to activate Notia's Skill 2 consistently",
+          "jp": "Notiaのスキル2を安定して発動させるデバッファー",
+          "kr": "Notia의 스킬 2를 안정적으로 발동시키는 디버퍼",
+          "zh": "减益施加者以稳定触发Notia的技能2"
+        }
+      }
+    ]
   },
   "2000057": {
     "rank": "B",
@@ -1341,7 +1609,15 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "VRSsXgkMdJ8"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "VRSsXgkMdJ8",
+        "title": "[OUTERPLANE] Sacreed's Lightning, Sterope",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T19:30:08Z"
+      }
+    ]
   },
   "2000058": {
     "rank": "A",
@@ -1352,7 +1628,6 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "2bwlrUTxOHQ",
     "prosCons": {
       "pros": [
         {
@@ -1421,7 +1696,16 @@
           "fr": "Ne dispose ni de résurrection ni de mitigation immédiate (comme des barrières) contrairement à des soigneuses comme Mene ou Nella, la rendant un peu moins optimale pour le PvP de haut niveau"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "2bwlrUTxOHQ",
+        "title": "[OUTERPLANE] A Benevolent Archbishop, Astei",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T19:45:01Z"
+      }
+    ]
   },
   "2000059": {
     "rank": "S",
@@ -1433,13 +1717,41 @@
       "second": 3,
       "ultimate": 1
     },
-    "video": "orOhHJzO9qA",
     "rankByTranscend": {
       "3": "A",
       "4": "A",
       "5": "A",
       "6": "S"
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "orOhHJzO9qA",
+        "title": "[OUTERPLANE] Demiurge Astei",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T20:00:40Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000028"],
+        "reason": {
+          "en": "Strengthens ally {C/Mage}",
+          "jp": "味方{C/Mage}を強化",
+          "kr": "아군 {C/Mage} 강화",
+          "zh": "强化己方{C/Mage}"
+        }
+      },
+      {
+        "heroes": ["2000100"],
+        "reason": {
+          "en": "{B/ETHER_BOOST} after Demiurge Astei used her Skill 3",
+          "jp": "Demiurge Asteiがスキル3を使用後に{B/ETHER_BOOST}",
+          "kr": "Demiurge Astei가 스킬 3을 사용한 후 {B/ETHER_BOOST}",
+          "zh": "Demiurge Astei使用技能3后触发{B/ETHER_BOOST}"
+        }
+      }
+    ]
   },
   "2000060": {
     "rank": "S",
@@ -1450,7 +1762,6 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "gLI0SmnPCoQ",
     "prosCons": {
       "pros": [
         {
@@ -1491,7 +1802,16 @@
           "fr": "nécessite les compétences au maximum pour exploiter tout son potentiel"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "gLI0SmnPCoQ",
+        "title": "[OUTERPLANE] Numbered Hunter, Tamara",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T20:15:02Z"
+      }
+    ]
   },
   "2000061": {
     "rank": "B",
@@ -1502,7 +1822,6 @@
       "second": 3,
       "ultimate": 1
     },
-    "video": "gDEGZ-48v8U",
     "prosCons": {
       "pros": [
         {
@@ -1564,7 +1883,16 @@
           "fr": "son EE est nécessaire pour appliquer ses débuffs de façon fiable à cause de sa faible Effectiveness de base"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "gDEGZ-48v8U",
+        "title": "[OUTERPLANE] Public Affairs Officer, Christina",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T20:30:07Z"
+      }
+    ]
   },
   "2000062": {
     "rank": "S",
@@ -1576,7 +1904,35 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "v1yjw3zD89g"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "v1yjw3zD89g",
+        "title": "[OUTERPLANE] The ruler of the Dreadnought, Drakhan",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T20:45:03Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000086"],
+        "reason": {
+          "en": "Can {D/DETONATE} {D/BT_DOT_CURSE}",
+          "jp": "{D/BT_DOT_CURSE}を{D/DETONATE}可能",
+          "kr": "{D/BT_DOT_CURSE}를 {D/DETONATE} 가능",
+          "zh": "可{D/DETONATE} {D/BT_DOT_CURSE}"
+        }
+      },
+      {
+        "heroes": ["2000014"],
+        "reason": {
+          "en": "More {D/BT_DOT_CURSE} stacks",
+          "jp": "より多くの{D/BT_DOT_CURSE}スタック",
+          "kr": "더 많은 {D/BT_DOT_CURSE} 중첩",
+          "zh": "更多{D/BT_DOT_CURSE}层数"
+        }
+      }
+    ]
   },
   "2000063": {
     "rank": "S",
@@ -1588,7 +1944,6 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "zz0OHkP8y0I",
     "prosCons": {
       "pros": [
         {
@@ -1664,7 +2019,16 @@
           "fr": "comme elle doit empiler énormément de PV max, elle est naturellement vulnérable aux ennemis dont les dégâts dépendent des PV max de la cible"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "zz0OHkP8y0I",
+        "title": "[OUTERPLANE] Demiurge Drakhan",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T21:01:14Z"
+      }
+    ]
   },
   "2000064": {
     "rank": "S",
@@ -1676,7 +2040,6 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "obLIo0FuAIo",
     "prosCons": {
       "pros": [
         {
@@ -1745,7 +2108,16 @@
           "fr": "nécessite les compétences au maximum pour que ses débuffs soient appliqués de façon fiable"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "obLIo0FuAIo",
+        "title": "[OUTERPLANE] Akari, the Desperado of Naniwa",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T21:15:06Z"
+      }
+    ]
   },
   "2000065": {
     "rank": "S",
@@ -1757,7 +2129,6 @@
       "second": 3,
       "ultimate": 1
     },
-    "video": "JKHIYrgk3xY",
     "prosCons": {
       "pros": [
         {
@@ -1780,7 +2151,36 @@
           "en": "-"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "JKHIYrgk3xY",
+        "title": "[OUTERPLANE] The Passing Rain, Ame",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T21:30:04Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000101"],
+        "reason": {
+          "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} \n{B/BT_COOL_CHARGE} closes the gap in Ame's {B/SAKURA_CHIRU} and {B/UME_ICHIRIN} uptime",
+          "jp": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} \n{B/BT_COOL_CHARGE}がAmeの{B/SAKURA_CHIRU}と{B/UME_ICHIRIN}の稼働時間のギャップを埋める",
+          "kr": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} \n{B/BT_COOL_CHARGE}가 Ame의 {B/SAKURA_CHIRU} 및 {B/UME_ICHIRIN} 유지 시간 공백을 메움",
+          "zh": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} \n{B/BT_COOL_CHARGE}填补Ame的{B/SAKURA_CHIRU}和{B/UME_ICHIRIN}持续时间的空档"
+        }
+      },
+      {
+        "heroes": ["2000066"],
+        "reason": {
+          "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_ATK} {B/BT_ACTION_GAUGE} for {C/Mage}",
+          "jp": "{C/Mage}に{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_ATK} {B/BT_ACTION_GAUGE}を付与",
+          "kr": "{C/Mage}를 위한 {B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_ATK} {B/BT_ACTION_GAUGE}",
+          "zh": "为{C/Mage}提供{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_ATK} {B/BT_ACTION_GAUGE}"
+        }
+      }
+    ]
   },
   "2000066": {
     "rank": "A",
@@ -1791,7 +2191,6 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "kmCeAt86rjI",
     "prosCons": {
       "pros": [
         {
@@ -1825,7 +2224,16 @@
           "fr": "peu utile la plupart du temps"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "kmCeAt86rjI",
+        "title": "[OUTERPLANE] Caseless Detective, Charlotte",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T21:45:03Z"
+      }
+    ]
   },
   "2000067": {
     "rank": "A",
@@ -1837,7 +2245,15 @@
       "second": 3,
       "ultimate": 1
     },
-    "video": "C_z5A8XMF60"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "C_z5A8XMF60",
+        "title": "[OUTERPLANE] Personal Trickster, Regina",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T22:00:13Z"
+      }
+    ]
   },
   "2000068": {
     "rank": "B",
@@ -1849,7 +2265,6 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "rfsYrJKYSRg",
     "prosCons": {
       "pros": [
         {
@@ -1918,7 +2333,16 @@
           "fr": "nécessite les compétences au maximum pour que ses débuffs soient appliqués de façon fiable"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "rfsYrJKYSRg",
+        "title": "[OUTERPLANE] Archdemon of Hubris, Dahlia",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T22:15:08Z"
+      }
+    ]
   },
   "2000069": {
     "rank": "A",
@@ -1930,7 +2354,15 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "YrJ06rEKPFY"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "YrJ06rEKPFY",
+        "title": "[OUTERPLANE] The Heartless King, Iota",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T22:30:13Z"
+      }
+    ]
   },
   "2000070": {
     "rank": "D",
@@ -1942,7 +2374,15 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "6ahyMvY4StE"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "6ahyMvY4StE",
+        "title": "[OUTERPLANE] Horrible Murder Machine, Epsilon",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T22:45:00Z"
+      }
+    ]
   },
   "2000071": {
     "rank": "A",
@@ -1953,7 +2393,6 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "Cc6PF35TP08",
     "prosCons": {
       "pros": [
         {
@@ -2022,7 +2461,16 @@
           "fr": "Le déclenchement de sa {SK/Kanon|S2} exige que les alliés infligent ou subissent des coups critiques, elle dépend donc d'une équipe avec un {S/CHC} élevé ou d'ennemis à fort taux de coup critique pour maximiser son rythme"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "Cc6PF35TP08",
+        "title": "[OUTERPLANE] Blazing Fighter, Kanon",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T23:00:27Z"
+      }
+    ]
   },
   "2000072": {
     "rank": "B",
@@ -2034,7 +2482,15 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "XFkW_wEwvUQ"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "XFkW_wEwvUQ",
+        "title": "[OUTERPLANE] Thunderclap Genin, Edelweiss",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T23:15:04Z"
+      }
+    ]
   },
   "2000073": {
     "rank": "A",
@@ -2046,7 +2502,6 @@
       "second": 3,
       "ultimate": 1
     },
-    "video": "xpFNW3RJKkE",
     "prosCons": {
       "pros": [
         {
@@ -2108,7 +2563,27 @@
           "fr": "les stacks de {D/BT_DOT_BURN} disparaissent si l'unité meurt"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "xpFNW3RJKkE",
+        "title": "[OUTERPLANE] Heart of Steel, Vlada",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T23:31:01Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000095", "2000081", "2000094"],
+        "reason": {
+          "en": "{D/BT_DOT_BURN} team",
+          "jp": "{D/BT_DOT_BURN}チーム",
+          "kr": "{D/BT_DOT_BURN} 팀",
+          "zh": "{D/BT_DOT_BURN}队伍"
+        }
+      }
+    ]
   },
   "2000074": {
     "rank": "S",
@@ -2120,7 +2595,15 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "iRbqK7agxug"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "iRbqK7agxug",
+        "title": "[OUTERPLANE] Fully Ready Bride-To-Be, Dianne",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T23:30:16Z"
+      }
+    ]
   },
   "2000075": {
     "rank": "A",
@@ -2132,13 +2615,32 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "sh1x_uf-Cjo",
     "rankByTranscend": {
       "3": "B",
       "4": "B",
       "5": "A",
       "6": "A"
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "sh1x_uf-Cjo",
+        "title": "[OUTERPLANE] Demiurge Vlada",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-22T23:45:05Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000083", "2000084", "2000100"],
+        "reason": {
+          "en": "{B/BT_AP_CHARGE} or {B/ETHER_BOOST} to let her use her Burst 3 every turn",
+          "jp": "{B/BT_AP_CHARGE}または{B/ETHER_BOOST}で毎ターンバースト3を使用可能",
+          "kr": "{B/BT_AP_CHARGE} 또는 {B/ETHER_BOOST}로 매 턴 버스트 3 사용 가능",
+          "zh": "{B/BT_AP_CHARGE}或{B/ETHER_BOOST}使其每回合可使用爆发3"
+        }
+      }
+    ]
   },
   "2000076": {
     "rank": "B",
@@ -2150,7 +2652,6 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "xSs46l7wgQc",
     "prosCons": {
       "pros": [
         {
@@ -2226,7 +2727,16 @@
           "fr": "Ne dispose d'aucune récupération directe de PV, elle peut donc nécessiter un soigneur dédié pour les combats prolongés"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "xSs46l7wgQc",
+        "title": "[OUTERPLANE] Ultimate Idol, Bryn (VA. Katrina Salisbury)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T00:15:05Z"
+      }
+    ]
   },
   "2000077": {
     "rank": "B",
@@ -2238,7 +2748,6 @@
       "second": 3,
       "ultimate": 1
     },
-    "video": "XFySE1Ajg60",
     "prosCons": {
       "pros": [
         {
@@ -2265,7 +2774,16 @@
           "fr": "Difficile à bien équiper en début de partie à cause de son orientation défense"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "XFySE1Ajg60",
+        "title": "[OUTERPLANE] Ruler of the Desert, Kappa (VA. Emi Lo)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T00:30:34Z"
+      }
+    ]
   },
   "2000078": {
     "rank": "B",
@@ -2277,7 +2795,26 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "kW0h_1-SYv4"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "kW0h_1-SYv4",
+        "title": "[OUTERPLANE] Exotic Assassin, Fatal (VA. Anjali Kunapaneni)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T00:45:05Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000092"],
+        "reason": {
+          "en": "Provides {B/BT_STEALTHED}",
+          "jp": "{B/BT_STEALTHED}を付与",
+          "kr": "{B/BT_STEALTHED} 제공",
+          "zh": "提供{B/BT_STEALTHED}"
+        }
+      }
+    ]
   },
   "2000079": {
     "rank": "B",
@@ -2288,7 +2825,15 @@
       "second": 3,
       "ultimate": 1
     },
-    "video": "OniW6CZHBXg"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "OniW6CZHBXg",
+        "title": "[OUTERPLANE] Lucky Black Cat, Kuro!",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T01:00:24Z"
+      }
+    ]
   },
   "2000080": {
     "rank": "A",
@@ -2299,7 +2844,26 @@
       "second": 3,
       "ultimate": 1
     },
-    "video": "9z9o9U0oSsU"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "9z9o9U0oSsU",
+        "title": "[OUTERPLANE] Kitsune of Ruin, Tamamo-no-Mae",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T01:15:01Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000053", "2000097", "2000069", "2000044"],
+        "reason": {
+          "en": "{D/BT_FIXED_DAMAGE} Chain Finishers",
+          "jp": "{D/BT_FIXED_DAMAGE}チェーンフィニッシャー",
+          "kr": "{D/BT_FIXED_DAMAGE} 체인 피니셔",
+          "zh": "{D/BT_FIXED_DAMAGE}连锁终结者"
+        }
+      }
+    ]
   },
   "2000081": {
     "rank": "A",
@@ -2310,13 +2874,41 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "BjBL3AKtwsA",
     "rankByTranscend": {
       "3": "B",
       "4": "B",
       "5": "A",
       "6": "A"
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "BjBL3AKtwsA",
+        "title": "[OUTERPLANE] The Unconstrained Twin, Maxie (VA. Kimberley Wong)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T01:30:17Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000082", "2000056"],
+        "reason": {
+          "en": "The twins will activate eachother's skills and apply debuffs to launch great combo attacks",
+          "jp": "双子がお互いのスキルを発動し、デバフを付与して強力なコンボ攻撃を発動",
+          "kr": "쌍둥이가 서로의 스킬을 발동하고 디버프를 부여하여 강력한 콤보 공격 가능",
+          "zh": "双胞胎可互相触发技能并施加减益以发动强力连击"
+        }
+      },
+      {
+        "heroes": ["2000073", "2000094", "2000095"],
+        "reason": {
+          "en": "{D/BT_DOT_BURN} team",
+          "jp": "{D/BT_DOT_BURN}チーム",
+          "kr": "{D/BT_DOT_BURN} 팀",
+          "zh": "{D/BT_DOT_BURN}队伍"
+        }
+      }
+    ]
   },
   "2000082": {
     "rank": "A",
@@ -2327,7 +2919,35 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "lyNQ73PBPZg"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "lyNQ73PBPZg",
+        "title": "[OUTERPLANE] The Sadistic Twin, Roxie (VA. Risa Mei)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T01:45:09Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000060"],
+        "reason": {
+          "en": "Buffs and {B/BT_CALL_BACKUP}, Roxie wants a {C/Ranger} in the team to trigger her Skill 2",
+          "jp": "バフと{B/BT_CALL_BACKUP}、Roxieはスキル2発動のためにチームに{C/Ranger}が必要",
+          "kr": "버프와 {B/BT_CALL_BACKUP}, Roxie는 스킬 2 발동을 위해 팀에 {C/Ranger}가 필요함",
+          "zh": "增益和{B/BT_CALL_BACKUP}, Roxie需要队伍中有{C/Ranger}来触发技能2"
+        }
+      },
+      {
+        "heroes": ["2000081", "2000056"],
+        "reason": {
+          "en": "The twins will activate eachother's skills and apply debuffs to launch great combo attacks",
+          "jp": "双子がお互いのスキルを発動し、デバフを付与して強力なコンボ攻撃を発動",
+          "kr": "쌍둥이가 서로의 스킬을 발동하고 디버프를 부여하여 강력한 콤보 공격 가능",
+          "zh": "双胞胎可互相触发技能并施加减益以发动强力连击"
+        }
+      }
+    ]
   },
   "2000083": {
     "rank": "S",
@@ -2339,7 +2959,6 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "jmzEGK9lfS8",
     "prosCons": {
       "pros": [
         {
@@ -2359,7 +2978,16 @@
           "fr": "n'a aucun moyen de dissiper les débuffs en dehors de les prévenir avec {B/BT_IMMUNE}"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "jmzEGK9lfS8",
+        "title": "[OUTERPLANE] Archdemon Aspirant, Nella (VA. Dawn M. Bennett)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T02:00:46Z"
+      }
+    ]
   },
   "2000084": {
     "rank": "S",
@@ -2371,7 +2999,6 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "xmzgtcPHmT4",
     "rankByTranscend": {
       "3": "A",
       "4": "A",
@@ -2411,7 +3038,16 @@
           "fr": "nécessite son équipement exclusif pour soigner lors de l'utilisation de {B/BT_AGILE_RESPONSE}"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "xmzgtcPHmT4",
+        "title": "[OUTERPLANE] Monad Eva",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T02:15:07Z"
+      }
+    ]
   },
   "2000085": {
     "rank": "S",
@@ -2423,8 +3059,16 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "7IzjF4jYNaU",
-    "limited": true
+    "limited": true,
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "7IzjF4jYNaU",
+        "title": "[OUTERPLANE] Poolside Trickster Regina (VA. Darcy Rose Byrnes)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T02:30:10Z"
+      }
+    ]
   },
   "2000086": {
     "rank": "S",
@@ -2436,8 +3080,33 @@
       "second": 1,
       "ultimate": 3
     },
-    "video": "Va3W2CmrnMU",
-    "limited": true
+    "limited": true,
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "Va3W2CmrnMU",
+        "title": "[OUTERPLANE] Kitsune of Eternity, Tamamo-no-Mae (VA. Frankie Kevich)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T02:45:04Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000062", "2000014"],
+        "reason": {
+          "en": "More {D/BT_DOT_CURSE} stacks",
+          "jp": "より多くの{D/BT_DOT_CURSE}スタック",
+          "kr": "더 많은 {D/BT_DOT_CURSE} 중첩",
+          "zh": "更多{D/BT_DOT_CURSE}层数"
+        }
+      },
+      {
+        "heroes": ["2000084"],
+        "reason": {
+          "en": "{B/BT_CALL_BACKUP}"
+        }
+      }
+    ]
   },
   "2000087": {
     "rank": "A",
@@ -2449,7 +3118,6 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "NbkIux5uYro",
     "prosCons": {
       "pros": [
         {
@@ -2483,7 +3151,16 @@
           "fr": "peut gaspiller trop de tours ou mourir des débuffs de dégâts sur la durée"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "NbkIux5uYro",
+        "title": "[OUTERPLANE] Optimistic Junior, Rey (VA. Ratana Therakulsathit)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T03:00:23Z"
+      }
+    ]
   },
   "2000088": {
     "rank": "A",
@@ -2495,7 +3172,6 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "XzXM4OJev0I",
     "prosCons": {
       "pros": [
         {
@@ -2557,7 +3233,16 @@
           "fr": "{SK/Hilde|S1} est surtout efficace en PvP, moins rentable pour la progression PvE générale car les boss/ennemis ont toujours plus de PV"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "XzXM4OJev0I",
+        "title": "[OUTERPLANE] Shy Battle Maid Hilde (VA. Kelsey Maher)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T03:15:07Z"
+      }
+    ]
   },
   "2000089": {
     "rank": "A",
@@ -2569,7 +3254,26 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "n_5zHyzmVVQ"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "n_5zHyzmVVQ",
+        "title": "[OUTERPLANE] The Memorizer Caren (VA. Crystal Lee)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T03:30:40Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000037", "2000106"],
+        "reason": {
+          "en": "{B/BT_STAT|ST_DEF} support",
+          "jp": "{B/BT_STAT|ST_DEF}サポート",
+          "kr": "{B/BT_STAT|ST_DEF} 서포트",
+          "zh": "{B/BT_STAT|ST_DEF}辅助"
+        }
+      }
+    ]
   },
   "2000090": {
     "rank": "A",
@@ -2581,7 +3285,6 @@
       "second": 3,
       "ultimate": 1
     },
-    "video": "zwJUawe5X0g",
     "rankByTranscend": {
       "3": "B",
       "4": "A",
@@ -2636,7 +3339,16 @@
           "fr": "nécessite la transcendance maximale pour débloquer tout son potentiel"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "zwJUawe5X0g",
+        "title": "[OUTERPLANE] Gnosis Dahlia (VA. Amber Lee Connors)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T03:45:11Z"
+      }
+    ]
   },
   "2000091": {
     "rank": "S",
@@ -2648,8 +3360,16 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "dwaGHaRFY98",
-    "limited": true
+    "limited": true,
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "dwaGHaRFY98",
+        "title": "[OUTERPLANE] Gnosis Nella (VA. Dawn M. Bennett)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T04:00:46Z"
+      }
+    ]
   },
   "2000092": {
     "rank": "A",
@@ -2661,13 +3381,29 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "zHV45UmIrKc",
     "rankByTranscend": {
       "3": "B",
       "4": "A",
       "5": "A",
       "6": "A"
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "zHV45UmIrKc",
+        "title": "[OUTERPLANE] Gnosis Beth (VA. Kimberly Woods)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T04:15:05Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000064", "2000079", "2000082", "2000081", "2000094", "2000107"],
+        "reason": {
+          "en": "{D/BT_EXTEND_DEBUFF}"
+        }
+      }
+    ]
   },
   "2000093": {
     "rank": "S",
@@ -2679,7 +3415,6 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "zvgoCGKtIfo",
     "rankByTranscend": {
       "3": "A",
       "4": "A",
@@ -2692,7 +3427,16 @@
       "5": "support",
       "6": "dps"
     },
-    "limited": true
+    "limited": true,
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "zvgoCGKtIfo",
+        "title": "[OUTERPLANE] Holy Night's Blessing Dianne (VA. Mia Paige)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T04:30:44Z"
+      }
+    ]
   },
   "2000094": {
     "rank": "A",
@@ -2703,7 +3447,6 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "3_azE5ZfgBo",
     "prosCons": {
       "pros": [
         {
@@ -2765,7 +3508,27 @@
           "fr": "a besoin de synergies d'équipe spécifiques pour tirer pleinement parti de son amplification de Brûlure, ce qui la rend moins polyvalente dans les compositions de cleave standard ou de dégâts bruts purs"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "3_azE5ZfgBo",
+        "title": "[OUTERPLANE] Knight of Flame Ember (VA. Kimberly Wong & Mara Junot)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T04:45:00Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000073", "2000081", "2000095"],
+        "reason": {
+          "en": "{D/BT_DOT_BURN} team",
+          "jp": "{D/BT_DOT_BURN}チーム",
+          "kr": "{D/BT_DOT_BURN} 팀",
+          "zh": "{D/BT_DOT_BURN}队伍"
+        }
+      }
+    ]
   },
   "2000095": {
     "rank": "S",
@@ -2825,7 +3588,18 @@
           "fr": "sa transcendance 5 étoiles n'apporte qu'une valeur minime, rendant délicat l'écart d'investissement entre ses paliers de puissance à 4 et 6 étoiles"
         }
       ]
-    }
+    },
+    "synergies": [
+      {
+        "heroes": ["2000073", "2000081", "2000094"],
+        "reason": {
+          "en": "{D/BT_DOT_BURN} team",
+          "jp": "{D/BT_DOT_BURN}チーム",
+          "kr": "{D/BT_DOT_BURN} 팀",
+          "zh": "{D/BT_DOT_BURN}队伍"
+        }
+      }
+    ]
   },
   "2000096": {
     "rank": "B",
@@ -2877,7 +3651,24 @@
           "fr": "disponibilité limitée en tant qu'unité de collaboration, impossible à obtenir ou à améliorer pour les nouveaux joueurs"
         }
       ]
-    }
+    },
+    "synergies": [
+      {
+        "heroes": ["2000084"],
+        "reason": {
+          "en": "{B/BT_CALL_BACKUP} to reduce Skill 3 cooldown",
+          "jp": "{B/BT_CALL_BACKUP}でスキル3のクールダウンを短縮",
+          "kr": "{B/BT_CALL_BACKUP}로 스킬 3 쿨다운 감소",
+          "zh": "{B/BT_CALL_BACKUP}减少技能3冷却时间"
+        }
+      },
+      {
+        "heroes": ["2000101"],
+        "reason": {
+          "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} {B/BT_COOL_CHARGE}"
+        }
+      }
+    ]
   },
   "2000097": {
     "rank": "S",
@@ -2911,7 +3702,26 @@
       "second": 3,
       "ultimate": 1
     },
-    "video": "A8eKlpmjKJI"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "A8eKlpmjKJI",
+        "title": "[OUTERPLANE] Delta (VA. Risa Mei)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T05:00:07Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000105"],
+        "reason": {
+          "en": "Increased {B/BT_STAT|ST_COUNTER_RATE} buff uptime, {B/BT_ACTION_GAUGE} for highest max health",
+          "jp": "{B/BT_STAT|ST_COUNTER_RATE}バフの稼働時間増加、最大HPが最も高い味方に{B/BT_ACTION_GAUGE}",
+          "kr": "{B/BT_STAT|ST_COUNTER_RATE} 버프 유지 시간 증가, 최대 HP가 가장 높은 아군에게 {B/BT_ACTION_GAUGE}",
+          "zh": "增加{B/BT_STAT|ST_COUNTER_RATE}增益持续时间, 为最大生命值最高的角色提供{B/BT_ACTION_GAUGE}"
+        }
+      }
+    ]
   },
   "2000100": {
     "rank": "A",
@@ -2923,13 +3733,21 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "uswwN1IKlFI",
     "rankByTranscend": {
       "3": "B",
       "4": "B",
       "5": "B",
       "6": "A"
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "uswwN1IKlFI",
+        "title": "[OUTERPLANE] Demiurge Delta (VA. Risa Mei)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T05:15:09Z"
+      }
+    ]
   },
   "2000101": {
     "rank": "S",
@@ -2940,7 +3758,6 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "tMQOsjlpCRM",
     "prosCons": {
       "pros": [
         {
@@ -2967,7 +3784,16 @@
           "fr": "nécessite les compétences au maximum"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "tMQOsjlpCRM",
+        "title": "[OUTERPLANE] Skadi (VA. Anjali Kunapaneni)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T05:30:34Z"
+      }
+    ]
   },
   "2000102": {
     "rank": "A",
@@ -2979,14 +3805,22 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "rLmf9_q9ikc",
     "rankByTranscend": {
       "3": "B",
       "4": "B",
       "5": "A",
       "6": "A"
     },
-    "limited": true
+    "limited": true,
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "rLmf9_q9ikc",
+        "title": "[OUTERPLANE] Omega Nadja (VA. Reba Buhr)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T05:45:05Z"
+      }
+    ]
   },
   "2000103": {
     "rank": "S",
@@ -2997,7 +3831,15 @@
       "second": 2,
       "ultimate": 3
     },
-    "video": "3S8Omrhap5k"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "3S8Omrhap5k",
+        "title": "[OUTERPLANE] Luna (VA. Sam Slade)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T06:00:02Z"
+      }
+    ]
   },
   "2000105": {
     "rank": "A",
@@ -3019,8 +3861,16 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "XDHBkfCI8Sk",
-    "limited": true
+    "limited": true,
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "XDHBkfCI8Sk",
+        "title": "[OUTERPLANE] Summer Knight's Dream Ember (VA. Hikisaka Rie)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-25T06:00:27Z"
+      }
+    ]
   },
   "2000107": {
     "rank": "A",
@@ -3031,7 +3881,15 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "Q7fCc5re3a4"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "Q7fCc5re3a4",
+        "title": "[OUTERPLANE] Ruthless Enforcer Fortuna (VA. Yukinari Toa)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-11-17T08:13:55Z"
+      }
+    ]
   },
   "2000108": {
     "rank": "A",
@@ -3042,7 +3900,15 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "tNURIsVrAC0"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "tNURIsVrAC0",
+        "title": "[OUTERPLANE] The Archdemon of Bane Viella  (VA. Harumi Sakurai)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-10-22T12:39:37Z"
+      }
+    ]
   },
   "2000109": {
     "rank": "A",
@@ -3054,7 +3920,6 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "jb5Myn4eVzc",
     "rankByTranscend": {
       "3": "B",
       "4": "A",
@@ -3062,6 +3927,13 @@
       "6": "A"
     },
     "videos": [
+      {
+        "platform": "youtube",
+        "id": "jb5Myn4eVzc",
+        "title": "[OUTERPLANE] Gnosis Viella  (VA. Harumi Sakurai)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-11-03T11:53:07Z"
+      },
       {
         "platform": "youtube",
         "id": "e2r-aoutmgs",
@@ -3080,14 +3952,22 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "YjRLI-bxF2U",
     "rankByTranscend": {
       "3": "A",
       "4": "A",
       "5": "S",
       "6": "S"
     },
-    "limited": true
+    "limited": true,
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "YjRLI-bxF2U",
+        "title": "[OUTERPLANE] Mystic Sage Ame  (VA. Rena Maeda)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-12-12T08:05:35Z"
+      }
+    ]
   },
   "2000111": {
     "rank": "A",
@@ -3099,13 +3979,18 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "6RsCcgPEosw",
     "rankByTranscend": {
       "3": "B",
       "4": "B",
       "5": "A",
       "6": "A"
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "6RsCcgPEosw"
+      }
+    ]
   },
   "2000112": {
     "rank": "A",
@@ -3117,8 +4002,14 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "1SyNDPO9zzY",
     "videos": [
+      {
+        "platform": "youtube",
+        "id": "1SyNDPO9zzY",
+        "title": "[OUTERPLANE] Gnosis Domine (VA. Kennedy Hibbert)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2026-04-06T06:14:45Z"
+      },
       {
         "platform": "youtube",
         "id": "v_6s_T5hTG0",
@@ -3217,7 +4108,6 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "hYJ1yGhb1zk",
     "prosCons": {
       "pros": [
         {
@@ -3279,7 +4169,16 @@
           "fr": "nécessite toutes les compétences au niveau maximum pour que ses effets soient garantis et qu'ils ignorent la Résilience"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "hYJ1yGhb1zk",
+        "title": "[OUTERPLANE] Primine  (VA. Noriko Shibasaki)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2026-02-10T08:35:52Z"
+      }
+    ]
   },
   "2000114": {
     "rank": "S",
@@ -3291,7 +4190,6 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "S4MwD507dS8",
     "rankByTranscend": {
       "3": "A",
       "4": "A",
@@ -3353,7 +4251,16 @@
           "fr": "très dépendante de son état {B/RUSH} pour maximiser son multiplicateur de dégâts et utiliser son attaque de base en sécurité, ce qui punit une mauvaise gestion des temps de recharge"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "S4MwD507dS8",
+        "title": "[OUTERPLANE] Midnight Rush Skadi (VA. Anjali Kunapaneni)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2026-05-19T07:53:44Z"
+      }
+    ]
   },
   "2000116": {
     "rank": "A",
@@ -3365,7 +4272,15 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "LQpYEN4C0RQ"
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "LQpYEN4C0RQ",
+        "title": "[OUTERPLANE] Anarky (VA. Jackie Lastra)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2026-06-15T05:55:19Z"
+      }
+    ]
   },
   "2000117": {
     "rank": "A",
@@ -3377,7 +4292,6 @@
       "second": 2,
       "ultimate": 1
     },
-    "video": "fIA18JntBdI",
     "prosCons": {
       "pros": [
         {
@@ -3446,7 +4360,16 @@
           "fr": "nécessite un lourd investissement (équipement exclusif niveau 10) pour contourner sans risque les mécaniques de réaction ennemies"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "fIA18JntBdI",
+        "title": "[OUTERPLANE] Eris (VA. Tara Langella)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2026-03-16T07:44:41Z"
+      }
+    ]
   },
   "2000119": {
     "rank": "S",
@@ -3458,7 +4381,6 @@
       "second": 1,
       "ultimate": 2
     },
-    "video": "zlmBL-U6xEI",
     "prosCons": {
       "pros": [
         {
@@ -3527,7 +4449,24 @@
           "fr": "nécessite un investissement important pour atteindre les seuils élevés de {S/CHC} et {S/CHD} requis pour déclencher ses réinitialisations de façon fiable"
         }
       ]
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "zlmBL-U6xEI",
+        "title": "[OUTERPLANE] Demiurge Luna (VA. Sam Slade)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2025-09-23T06:15:05Z"
+      }
+    ],
+    "synergies": [
+      {
+        "heroes": ["2000101"],
+        "reason": {
+          "en": "{B/BT_STAT|ST_CRITICAL_RATE}, {B/BT_STAT|ST_CRITICAL_DMG_RATE} & {B/BT_STAT|ST_ATK}, {B/BT_COOL_CHARGE}"
+        }
+      }
+    ]
   },
   "2700003": {
     "rank": "C",
@@ -3609,7 +4548,45 @@
           "fr": "son potentiel de dégâts maximal et les 50 % de pénétration de Défense de sa {SK/Core Fusion Lisha|S3} sont strictement conditionnels, nécessitant des buffs spécifiques et de cibler des ennemis {E/Earth} pour s'activer pleinement"
         }
       ]
-    }
+    },
+    "synergies": [
+      {
+        "heroes": ["{C/Mage}"],
+        "reason": {
+          "en": "Benefits from her EE and charges her EE+10 {B/BT_STAT|ST_ATK}",
+          "jp": "彼女のEEの恩恵を受け、EE+10の{B/BT_STAT|ST_ATK}をチャージ",
+          "kr": "그녀의 EE 혜택을 받고 EE+10 {B/BT_STAT|ST_ATK}를 충전",
+          "zh": "受益于她的EE并充能EE+10 {B/BT_STAT|ST_ATK}"
+        }
+      },
+      {
+        "heroes": ["2000098"],
+        "reason": {
+          "en": "S3's {B/BT_COOL_CHARGE} to cycle skill 2 and 3 faster",
+          "jp": "S3の{B/BT_COOL_CHARGE}でスキル2と3をより早く回転",
+          "kr": "S3의 {B/BT_COOL_CHARGE}로 스킬 2와 3을 더 빠르게 순환",
+          "zh": "S3的{B/BT_COOL_CHARGE}加快技能2和3的循环"
+        }
+      },
+      {
+        "heroes": ["2000012"],
+        "reason": {
+          "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} {B/BT_ACTION_GAUGE} {B/BT_CALL_BACKUP}"
+        }
+      },
+      {
+        "heroes": ["2000093"],
+        "reason": {
+          "en": "{B/BT_STAT|ST_PIERCE_POWER_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK}"
+        }
+      },
+      {
+        "heroes": ["2000101"],
+        "reason": {
+          "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} {B/BT_COOL_CHARGE}"
+        }
+      }
+    ]
   },
   "2700037": {
     "rank": "A",

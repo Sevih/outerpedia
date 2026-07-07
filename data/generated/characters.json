@@ -26,7 +26,10 @@
       "119",
       "120",
       "121",
-      "1"
+      "1",
+      "132",
+      "131",
+      "130"
     ],
     "stats": {
       "hp": {
@@ -104,7 +107,8 @@
         "icon": "TI_Costume_Clothes_2000001_02",
         "grade": "rare",
         "sort": 1,
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -118,7 +122,7 @@
     },
     "rarity": 2,
     "element": "dark",
-    "class": "attacker",
+    "class": "striker",
     "race": "demon",
     "icon": "2000002",
     "skills": [
@@ -227,7 +231,8 @@
       "319",
       "320",
       "321",
-      "3"
+      "3",
+      "330"
     ],
     "stats": {
       "hp": {
@@ -399,7 +404,8 @@
         "grade": "normal",
         "sort": 1,
         "source": "event_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -508,7 +514,9 @@
         "grade": "normal",
         "sort": 1,
         "source": "event_shop",
-        "fusionModel": "2710005"
+        "fusionModel": "2710005",
+        "art": true,
+        "fusionArt": true
       }
     ],
     "coreFusion": "2700005"
@@ -523,7 +531,7 @@
     },
     "rarity": 2,
     "element": "water",
-    "class": "attacker",
+    "class": "striker",
     "race": "human",
     "icon": "2000006",
     "skills": [
@@ -709,7 +717,8 @@
         "grade": "normal",
         "sort": 1,
         "source": "event_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -723,7 +732,7 @@
     },
     "rarity": 3,
     "element": "earth",
-    "class": "attacker",
+    "class": "striker",
     "race": "human",
     "icon": "2000008",
     "skills": [
@@ -814,7 +823,7 @@
     },
     "rarity": 2,
     "element": "light",
-    "class": "priest",
+    "class": "healer",
     "race": "automaton",
     "icon": "2000009",
     "skills": [
@@ -909,7 +918,8 @@
         "icon": "TI_Costume_Clothes_2000009_02",
         "grade": "normal",
         "sort": 1,
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -923,7 +933,7 @@
     },
     "rarity": 2,
     "element": "earth",
-    "class": "attacker",
+    "class": "striker",
     "race": "human",
     "icon": "2000010",
     "skills": [
@@ -1076,7 +1086,7 @@
     "chainType": "join",
     "gift": "present_04",
     "voiceActor": {
-      "en": "Brenna Larson",
+      "en": "Brenna Larsen",
       "jp": "春野杏",
       "kr": "성예원",
       "zh": ""
@@ -1201,7 +1211,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "17",
@@ -1216,7 +1227,8 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "40",
@@ -1231,7 +1243,8 @@
         "grade": "rare",
         "sort": 3,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -1426,7 +1439,7 @@
     },
     "rarity": 3,
     "element": "dark",
-    "class": "attacker",
+    "class": "striker",
     "race": "demon",
     "icon": "2000015",
     "skills": [
@@ -1443,7 +1456,10 @@
       "1519",
       "1520",
       "1521",
-      "2"
+      "2",
+      "1531",
+      "1532",
+      "1533"
     ],
     "stats": {
       "hp": {
@@ -1519,7 +1535,7 @@
     },
     "rarity": 2,
     "element": "earth",
-    "class": "attacker",
+    "class": "striker",
     "race": "human",
     "icon": "2000016",
     "skills": [
@@ -1535,7 +1551,10 @@
       "1619",
       "1620",
       "1621",
-      "2"
+      "2",
+      "1631",
+      "1632",
+      "1633"
     ],
     "stats": {
       "hp": {
@@ -1611,7 +1630,7 @@
     },
     "rarity": 1,
     "element": "fire",
-    "class": "priest",
+    "class": "healer",
     "race": "human",
     "icon": "2000017",
     "skills": [
@@ -1793,7 +1812,7 @@
     },
     "rarity": 3,
     "element": "water",
-    "class": "attacker",
+    "class": "striker",
     "race": "human",
     "icon": "2000019",
     "skills": [
@@ -1888,7 +1907,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "50",
@@ -1903,7 +1923,8 @@
         "grade": "rare",
         "sort": 2,
         "source": "event_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "77",
@@ -1917,7 +1938,8 @@
         "icon": "TI_Costume_Clothes_2000019_04",
         "grade": "rare",
         "sort": 3,
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -1993,7 +2015,7 @@
     "chainType": "join",
     "gift": "present_03",
     "voiceActor": {
-      "en": "Kaylie Mills",
+      "en": "Kayli Mills",
       "jp": "黒沢ともよ",
       "kr": "강은애",
       "zh": ""
@@ -2114,7 +2136,7 @@
     },
     "rarity": 3,
     "element": "earth",
-    "class": "attacker",
+    "class": "striker",
     "race": "alien",
     "icon": "2000022",
     "skills": [
@@ -2210,7 +2232,8 @@
         "grade": "normal",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -2224,7 +2247,7 @@
     },
     "rarity": 3,
     "element": "earth",
-    "class": "priest",
+    "class": "healer",
     "race": "human",
     "icon": "2000023",
     "skills": [
@@ -2320,7 +2343,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "29",
@@ -2335,7 +2359,8 @@
         "grade": "normal",
         "sort": 2,
         "source": "event_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -2411,7 +2436,7 @@
     "chainType": "join",
     "gift": "present_04",
     "voiceActor": {
-      "en": "Brenna Larson",
+      "en": "Brenna Larsen",
       "jp": "鷲見友美ジェナ",
       "kr": "김예림",
       "zh": ""
@@ -2440,7 +2465,7 @@
     },
     "rarity": 3,
     "element": "water",
-    "class": "attacker",
+    "class": "striker",
     "race": "demon",
     "icon": "2000025",
     "skills": [
@@ -2535,7 +2560,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "20",
@@ -2550,7 +2576,8 @@
         "grade": "normal",
         "sort": 2,
         "source": "event_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -2655,7 +2682,7 @@
     },
     "rarity": 2,
     "element": "light",
-    "class": "priest",
+    "class": "healer",
     "race": "human",
     "icon": "2000027",
     "skills": [
@@ -3110,7 +3137,7 @@
     },
     "rarity": 2,
     "element": "fire",
-    "class": "attacker",
+    "class": "striker",
     "race": "demon",
     "icon": "2000032",
     "skills": [
@@ -3201,7 +3228,7 @@
     },
     "rarity": 2,
     "element": "water",
-    "class": "attacker",
+    "class": "striker",
     "race": "alien",
     "icon": "2000033",
     "skills": [
@@ -3292,7 +3319,7 @@
     },
     "rarity": 2,
     "element": "fire",
-    "class": "attacker",
+    "class": "striker",
     "race": "alien",
     "icon": "2000034",
     "skills": [
@@ -3478,7 +3505,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -3492,7 +3520,7 @@
     },
     "rarity": 2,
     "element": "fire",
-    "class": "priest",
+    "class": "healer",
     "race": "human",
     "icon": "2000036",
     "skills": [
@@ -3600,7 +3628,8 @@
       "3719",
       "3720",
       "3721",
-      "1"
+      "1",
+      "3712"
     ],
     "stats": {
       "hp": {
@@ -3679,7 +3708,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "2710037"
+        "fusionModel": "2710037",
+        "art": true
       },
       {
         "id": "8",
@@ -3694,7 +3724,9 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "2720037"
+        "fusionModel": "2720037",
+        "art": true,
+        "fusionArt": true
       },
       {
         "id": "76",
@@ -3709,7 +3741,8 @@
         "grade": "rare",
         "sort": 3,
         "source": "event_shop",
-        "fusionModel": "2730037"
+        "fusionModel": "2730037",
+        "art": true
       }
     ],
     "coreFusion": "2700037"
@@ -3724,7 +3757,7 @@
     },
     "rarity": 1,
     "element": "water",
-    "class": "priest",
+    "class": "healer",
     "race": "human",
     "icon": "2000038",
     "skills": [
@@ -3832,7 +3865,8 @@
       "3919",
       "3920",
       "3921",
-      "3"
+      "3",
+      "3930"
     ],
     "stats": {
       "hp": {
@@ -3911,7 +3945,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "30",
@@ -3926,7 +3961,8 @@
         "grade": "normal",
         "sort": 2,
         "source": "event_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -4002,8 +4038,8 @@
     "chainType": "join",
     "gift": "present_01",
     "voiceActor": {
-      "en": "Kaylie Mills",
-      "jp": "",
+      "en": "Kayli Mills",
+      "jp": "種﨑敦美",
       "kr": "유영",
       "zh": ""
     },
@@ -4308,7 +4344,9 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "2710043"
+        "fusionModel": "2710043",
+        "art": true,
+        "fusionArt": true
       }
     ],
     "coreFusion": "2700043"
@@ -4419,7 +4457,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -4615,7 +4654,7 @@
     },
     "rarity": 2,
     "element": "water",
-    "class": "priest",
+    "class": "healer",
     "race": "demon",
     "icon": "2000047",
     "skills": [
@@ -4797,7 +4836,7 @@
     },
     "rarity": 1,
     "element": "fire",
-    "class": "attacker",
+    "class": "striker",
     "race": "demon",
     "icon": "2000049",
     "skills": [
@@ -4888,7 +4927,7 @@
     },
     "rarity": 1,
     "element": "earth",
-    "class": "priest",
+    "class": "healer",
     "race": "demon",
     "icon": "2000050",
     "skills": [
@@ -4979,7 +5018,7 @@
     },
     "rarity": 1,
     "element": "earth",
-    "class": "attacker",
+    "class": "striker",
     "race": "alien",
     "icon": "2000051",
     "skills": [
@@ -5162,7 +5201,7 @@
     },
     "rarity": 3,
     "element": "light",
-    "class": "attacker",
+    "class": "striker",
     "race": "demiurge",
     "icon": "2000053",
     "skills": [
@@ -5257,7 +5296,8 @@
         "icon": "TI_Costume_Clothes_2000053_02",
         "grade": "magic",
         "sort": 1,
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -5271,7 +5311,7 @@
     },
     "rarity": 3,
     "element": "water",
-    "class": "priest",
+    "class": "healer",
     "race": "human",
     "icon": "2000054",
     "skills": [
@@ -5333,9 +5373,9 @@
     "chainType": "join",
     "gift": "present_05",
     "voiceActor": {
-      "en": "None",
-      "jp": "메네 성우 이름",
-      "kr": "메네 성우 이름",
+      "en": "Analesa Fisher & Keith Silverstein",
+      "jp": "藤田茜&竹内栄治",
+      "kr": "이은조&이주승",
       "zh": ""
     },
     "profile": {
@@ -5366,7 +5406,8 @@
         "grade": "normal",
         "sort": 1,
         "source": "event_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -5380,7 +5421,7 @@
     },
     "rarity": 3,
     "element": "fire",
-    "class": "attacker",
+    "class": "striker",
     "race": "human",
     "icon": "2000055",
     "skills": [
@@ -5442,9 +5483,9 @@
     "chainType": "join",
     "gift": "present_02",
     "voiceActor": {
-      "en": "None",
-      "jp": "아에르 성우 이름",
-      "kr": "아에르 성우 이름",
+      "en": "Anairis Quiñones",
+      "jp": "ファイルーズあい",
+      "kr": "정혜원",
       "zh": ""
     },
     "profile": {
@@ -5475,7 +5516,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -5551,9 +5593,9 @@
     "chainType": "join",
     "gift": "present_05",
     "voiceActor": {
-      "en": "None",
-      "jp": "노티아 성우 이름",
-      "kr": "노티아 성우 이름",
+      "en": "Kelly Ohanian",
+      "jp": "渡部紗弓",
+      "kr": "성예원",
       "zh": ""
     },
     "profile": {
@@ -5583,7 +5625,8 @@
         "icon": "TI_Costume_Clothes_2000056_02",
         "grade": "normal",
         "sort": 1,
-        "fusionModel": "2710056"
+        "fusionModel": "2710056",
+        "art": true
       },
       {
         "id": "38",
@@ -5598,7 +5641,8 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "2720056"
+        "fusionModel": "2720056",
+        "art": true
       }
     ],
     "coreFusion": "2700056"
@@ -5675,9 +5719,9 @@
     "chainType": "start",
     "gift": "present_01",
     "voiceActor": {
-      "en": "None",
-      "jp": "스테로페 성우 이름",
-      "kr": "스테로페 성우 이름",
+      "en": "Katelyn Gault",
+      "jp": "山村響",
+      "kr": "허예은",
       "zh": ""
     },
     "profile": {
@@ -5704,7 +5748,7 @@
     },
     "rarity": 3,
     "element": "fire",
-    "class": "priest",
+    "class": "healer",
     "race": "human",
     "icon": "2000058",
     "skills": [
@@ -5766,9 +5810,9 @@
     "chainType": "join",
     "gift": "present_05",
     "voiceActor": {
-      "en": "None",
-      "jp": "아스테 성우 이름",
-      "kr": "아스테 성우 이름",
+      "en": "Kayli Mills",
+      "jp": "柚木涼香",
+      "kr": "김예림",
       "zh": ""
     },
     "profile": {
@@ -5799,7 +5843,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -5875,6 +5920,12 @@
     "subClass": "wizard",
     "chainType": "start",
     "gift": "present_01",
+    "voiceActor": {
+      "en": "Kayli Mills",
+      "jp": "柚木涼香",
+      "kr": "김예림",
+      "zh": ""
+    },
     "profile": {
       "birthday": "08/29",
       "height": 168,
@@ -5902,7 +5953,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -5978,9 +6030,9 @@
     "chainType": "join",
     "gift": "present_04",
     "voiceActor": {
-      "en": "None",
-      "jp": "타마라 성우 이름",
-      "kr": "타마라 성우 이름",
+      "en": "Aryn Rozelle",
+      "jp": "松井恵理子",
+      "kr": "이다은",
       "zh": ""
     },
     "profile": {
@@ -6011,7 +6063,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "55",
@@ -6026,7 +6079,8 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop_asset_normal",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "90",
@@ -6040,7 +6094,8 @@
         "icon": "TI_Costume_Clothes_2000060_04",
         "grade": "rare",
         "sort": 3,
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -6116,6 +6171,12 @@
     "subClass": "phalanx",
     "chainType": "finish",
     "gift": "present_02",
+    "voiceActor": {
+      "en": "Cat Protano",
+      "jp": "山本亜衣",
+      "kr": "정유정",
+      "zh": ""
+    },
     "profile": {
       "birthday": "11/29",
       "height": 163,
@@ -6144,7 +6205,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "71",
@@ -6159,7 +6221,8 @@
         "grade": "rare",
         "sort": 2,
         "source": "event_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -6173,7 +6236,7 @@
     },
     "rarity": 3,
     "element": "light",
-    "class": "attacker",
+    "class": "striker",
     "race": "alien",
     "icon": "2000062",
     "skills": [
@@ -6234,6 +6297,12 @@
     "subClass": "attacker",
     "chainType": "join",
     "gift": "present_03",
+    "voiceActor": {
+      "en": "Cristina Valenzuela",
+      "jp": "小清水亜美",
+      "kr": "김보나",
+      "zh": ""
+    },
     "profile": {
       "birthday": "11/12",
       "height": 163,
@@ -6262,7 +6331,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -6338,6 +6408,12 @@
     "subClass": "sweeper",
     "chainType": "join",
     "gift": "present_01",
+    "voiceActor": {
+      "en": "Cristina Valenzuela",
+      "jp": "小清水亜美",
+      "kr": "김보나",
+      "zh": ""
+    },
     "profile": {
       "birthday": "11/12",
       "height": 163,
@@ -6365,7 +6441,8 @@
         "grade": "magic",
         "sort": 1,
         "source": "world_boss_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -6440,6 +6517,12 @@
     "subClass": "tactician",
     "chainType": "start",
     "gift": "present_03",
+    "voiceActor": {
+      "en": "Crystal Lee",
+      "jp": "三宅麻理恵",
+      "kr": "방시우",
+      "zh": ""
+    },
     "profile": {
       "birthday": "12/19",
       "height": 162,
@@ -6468,7 +6551,8 @@
         "grade": "normal",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "46",
@@ -6483,7 +6567,8 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -6559,6 +6644,12 @@
     "subClass": "wizard",
     "chainType": "finish",
     "gift": "present_05",
+    "voiceActor": {
+      "en": "Lizzie Freeman",
+      "jp": "前田玲奈",
+      "kr": "김하루",
+      "zh": ""
+    },
     "profile": {
       "birthday": "03/24",
       "height": 167,
@@ -6587,7 +6678,8 @@
         "grade": "normal",
         "sort": 0,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "14",
@@ -6602,7 +6694,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "22",
@@ -6617,7 +6710,8 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "47",
@@ -6632,7 +6726,8 @@
         "grade": "rare",
         "sort": 3,
         "source": "event_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "73",
@@ -6647,7 +6742,8 @@
         "grade": "rare",
         "sort": 5,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "79",
@@ -6662,7 +6758,8 @@
         "grade": "rare",
         "sort": 6,
         "source": "event_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -6738,6 +6835,12 @@
     "subClass": "tactician",
     "chainType": "finish",
     "gift": "present_04",
+    "voiceActor": {
+      "en": "Lily Pichu",
+      "jp": "水橋かおり",
+      "kr": "혜원",
+      "zh": ""
+    },
     "profile": {
       "birthday": "01/06",
       "height": 159,
@@ -6766,7 +6869,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "56",
@@ -6781,7 +6885,8 @@
         "grade": "rare",
         "sort": 2,
         "source": "event_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -6857,6 +6962,12 @@
     "subClass": "wizard",
     "chainType": "finish",
     "gift": "present_04",
+    "voiceActor": {
+      "en": "Darcy Rose Byrnes",
+      "jp": "福原綾香",
+      "kr": "박이서",
+      "zh": ""
+    },
     "profile": {
       "birthday": "10/31",
       "height": 175,
@@ -6942,6 +7053,12 @@
     "subClass": "enchanter",
     "chainType": "start",
     "gift": "present_03",
+    "voiceActor": {
+      "en": "Amber Lee Connors",
+      "jp": "山崎はるか",
+      "kr": "강새봄",
+      "zh": ""
+    },
     "profile": {
       "birthday": "12/21",
       "height": 171,
@@ -6970,7 +7087,8 @@
         "grade": "normal",
         "sort": 1,
         "source": "event_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "35",
@@ -6985,7 +7103,8 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -7061,6 +7180,12 @@
     "subClass": "enchanter",
     "chainType": "finish",
     "gift": "present_01",
+    "voiceActor": {
+      "en": "Mara Junot",
+      "jp": "森永千才",
+      "kr": "김성희",
+      "zh": ""
+    },
     "profile": {
       "birthday": "08/10",
       "height": 179,
@@ -7089,7 +7214,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "39",
@@ -7104,7 +7230,8 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -7118,7 +7245,7 @@
     },
     "rarity": 3,
     "element": "dark",
-    "class": "attacker",
+    "class": "striker",
     "race": "automaton",
     "icon": "2000070",
     "skills": [
@@ -7179,6 +7306,12 @@
     "subClass": "bruiser",
     "chainType": "start",
     "gift": "present_02",
+    "voiceActor": {
+      "en": "Ashely Biski",
+      "jp": "五十嵐裕美",
+      "kr": "유영",
+      "zh": ""
+    },
     "profile": {
       "birthday": "04/06",
       "height": 167,
@@ -7204,7 +7337,7 @@
     },
     "rarity": 3,
     "element": "fire",
-    "class": "attacker",
+    "class": "striker",
     "race": "human",
     "icon": "2000071",
     "skills": [
@@ -7265,6 +7398,12 @@
     "subClass": "bruiser",
     "chainType": "join",
     "gift": "present_03",
+    "voiceActor": {
+      "en": "Marissa Lenti",
+      "jp": "井上麻里奈",
+      "kr": "김예림",
+      "zh": ""
+    },
     "profile": {
       "birthday": "06/26",
       "height": 171,
@@ -7293,7 +7432,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "69",
@@ -7308,7 +7448,8 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "89",
@@ -7322,7 +7463,8 @@
         "icon": "TI_Costume_Clothes_2000071_04",
         "grade": "rare",
         "sort": 3,
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -7397,6 +7539,12 @@
     "subClass": "tactician",
     "chainType": "join",
     "gift": "present_04",
+    "voiceActor": {
+      "en": "Courtney Lin",
+      "jp": "影山灯",
+      "kr": "원에스더",
+      "zh": ""
+    },
     "profile": {
       "birthday": "02/22",
       "height": 162,
@@ -7425,7 +7573,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "event_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -7439,7 +7588,7 @@
     },
     "rarity": 3,
     "element": "fire",
-    "class": "attacker",
+    "class": "striker",
     "race": "human",
     "icon": "2000073",
     "skills": [
@@ -7500,6 +7649,12 @@
     "subClass": "attacker",
     "chainType": "start",
     "gift": "present_01",
+    "voiceActor": {
+      "en": "Deva Marie Gregory",
+      "jp": "花守ゆみり",
+      "kr": "채림",
+      "zh": ""
+    },
     "profile": {
       "birthday": "08/14",
       "height": 161,
@@ -7524,7 +7679,7 @@
     },
     "rarity": 3,
     "element": "light",
-    "class": "priest",
+    "class": "healer",
     "race": "human",
     "icon": "2000074",
     "skills": [
@@ -7585,6 +7740,12 @@
     "subClass": "sage",
     "chainType": "start",
     "gift": "present_02",
+    "voiceActor": {
+      "en": "Mia Paige",
+      "jp": "末柄里恵",
+      "kr": "이새아",
+      "zh": ""
+    },
     "profile": {
       "birthday": "05/21",
       "height": 172,
@@ -7613,7 +7774,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "72",
@@ -7628,7 +7790,8 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "94",
@@ -7642,7 +7805,8 @@
         "icon": "TI_Costume_Clothes_2000074_04",
         "grade": "rare",
         "sort": 3,
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -7718,6 +7882,12 @@
     "subClass": "vanguard",
     "chainType": "join",
     "gift": "present_03",
+    "voiceActor": {
+      "en": "Deva Marie Gregory",
+      "jp": "花守ゆみり",
+      "kr": "채림",
+      "zh": ""
+    },
     "profile": {
       "birthday": "02/27",
       "height": 174,
@@ -7745,7 +7915,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "70",
@@ -7760,7 +7931,8 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -7835,6 +8007,12 @@
     "subClass": "wizard",
     "chainType": "start",
     "gift": "present_02",
+    "voiceActor": {
+      "en": "Katrina Salisbury",
+      "jp": "木戸衣吹",
+      "kr": "이이로",
+      "zh": ""
+    },
     "profile": {
       "birthday": "08/14",
       "height": 162,
@@ -7863,7 +8041,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "59",
@@ -7878,7 +8057,8 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -7953,6 +8133,12 @@
     "subClass": "sweeper",
     "chainType": "join",
     "gift": "present_01",
+    "voiceActor": {
+      "en": "Emi Lo",
+      "jp": "大橋彩香",
+      "kr": "박시윤",
+      "zh": ""
+    },
     "profile": {
       "birthday": "02/19",
       "height": 161,
@@ -7981,7 +8167,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "60",
@@ -7996,7 +8183,8 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -8072,6 +8260,12 @@
     "subClass": "vanguard",
     "chainType": "finish",
     "gift": "present_04",
+    "voiceActor": {
+      "en": "Anjali Kunapaneni",
+      "jp": "高柳知葉",
+      "kr": "유영",
+      "zh": ""
+    },
     "profile": {
       "birthday": "12/31",
       "height": 163,
@@ -8158,6 +8352,12 @@
     "subClass": "enchanter",
     "chainType": "finish",
     "gift": "present_05",
+    "voiceActor": {
+      "en": "Lizzie Freeman",
+      "jp": "星谷美緒",
+      "kr": "유혜지",
+      "zh": ""
+    },
     "profile": {
       "birthday": "08/08",
       "height": 148,
@@ -8186,7 +8386,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "48",
@@ -8201,7 +8402,8 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -8276,6 +8478,12 @@
     "subClass": "enchanter",
     "chainType": "start",
     "gift": "present_03",
+    "voiceActor": {
+      "en": "Frankie Kevich",
+      "jp": "豊田萌絵",
+      "kr": "이달래",
+      "zh": ""
+    },
     "profile": {
       "birthday": "05/07",
       "height": 182,
@@ -8304,7 +8512,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -8380,6 +8589,12 @@
     "subClass": "vanguard",
     "chainType": "finish",
     "gift": "present_02",
+    "voiceActor": {
+      "en": "Kimberley Wong",
+      "jp": "井澤美香子",
+      "kr": "손선영",
+      "zh": ""
+    },
     "profile": {
       "birthday": "12/13",
       "height": 155,
@@ -8408,7 +8623,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -8483,6 +8699,12 @@
     "subClass": "wizard",
     "chainType": "start",
     "gift": "present_05",
+    "voiceActor": {
+      "en": "Risa Mei",
+      "jp": "指出毬亞",
+      "kr": "김채린",
+      "zh": ""
+    },
     "profile": {
       "birthday": "12/13",
       "height": 155,
@@ -8511,7 +8733,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -8525,7 +8748,7 @@
     },
     "rarity": 3,
     "element": "dark",
-    "class": "priest",
+    "class": "healer",
     "race": "demon",
     "icon": "2000083",
     "skills": [
@@ -8586,6 +8809,12 @@
     "subClass": "reliever",
     "chainType": "start",
     "gift": "present_03",
+    "voiceActor": {
+      "en": "Dawn M. Bennett",
+      "jp": "関根明良",
+      "kr": "이보용",
+      "zh": ""
+    },
     "profile": {
       "birthday": "09/23",
       "height": 177,
@@ -8614,7 +8843,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -8628,7 +8858,7 @@
     },
     "rarity": 3,
     "element": "light",
-    "class": "priest",
+    "class": "healer",
     "race": "monad",
     "icon": "2000084",
     "skills": [
@@ -8690,6 +8920,12 @@
     "subClass": "sage",
     "chainType": "start",
     "gift": "present_01",
+    "voiceActor": {
+      "en": "Courtney Lin",
+      "jp": "小倉唯",
+      "kr": "이새아",
+      "zh": ""
+    },
     "profile": {
       "birthday": "11/11",
       "height": 155,
@@ -8717,7 +8953,8 @@
         "grade": "normal",
         "sort": 1,
         "source": "event_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "65",
@@ -8731,7 +8968,8 @@
         "icon": "TI_Costume_Clothes_2000084_03",
         "grade": "rare",
         "sort": 2,
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "74",
@@ -8746,7 +8984,8 @@
         "grade": "rare",
         "sort": 3,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -8760,7 +8999,7 @@
     },
     "rarity": 3,
     "element": "water",
-    "class": "attacker",
+    "class": "striker",
     "race": "demon",
     "icon": "2000085",
     "skills": [
@@ -8823,6 +9062,12 @@
     "subClass": "attacker",
     "chainType": "finish",
     "gift": "present_04",
+    "voiceActor": {
+      "en": "Darcy Rose Byrnes",
+      "jp": "福原綾香",
+      "kr": "박이서",
+      "zh": ""
+    },
     "profile": {
       "birthday": "10/31",
       "height": 175,
@@ -8909,6 +9154,12 @@
     "subClass": "wizard",
     "chainType": "start",
     "gift": "present_02",
+    "voiceActor": {
+      "en": "Frankie Kevich",
+      "jp": "豊田萌絵",
+      "kr": "이달래",
+      "zh": ""
+    },
     "profile": {
       "birthday": "05/07",
       "height": 182,
@@ -8933,7 +9184,7 @@
     },
     "rarity": 3,
     "element": "earth",
-    "class": "attacker",
+    "class": "striker",
     "race": "human",
     "icon": "2000087",
     "skills": [
@@ -8994,6 +9245,12 @@
     "subClass": "attacker",
     "chainType": "start",
     "gift": "present_05",
+    "voiceActor": {
+      "en": "Ratana Therakulsathit",
+      "jp": "飯田ヒカル",
+      "kr": "이주은",
+      "zh": ""
+    },
     "profile": {
       "birthday": "09/21",
       "height": 167,
@@ -9021,7 +9278,8 @@
         "icon": "TI_Costume_Clothes_2000087_02",
         "grade": "rare",
         "sort": 1,
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "91",
@@ -9035,7 +9293,8 @@
         "icon": "TI_Costume_Clothes_2000087_03",
         "grade": "rare",
         "sort": 2,
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "93",
@@ -9050,7 +9309,8 @@
         "grade": "rare",
         "sort": 3,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -9126,6 +9386,12 @@
     "subClass": "phalanx",
     "chainType": "finish",
     "gift": "present_04",
+    "voiceActor": {
+      "en": "Kelsey Maher",
+      "jp": "木村珠莉",
+      "kr": "김하루",
+      "zh": ""
+    },
     "profile": {
       "birthday": "03/23",
       "height": 169,
@@ -9154,7 +9420,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -9168,7 +9435,7 @@
     },
     "rarity": 3,
     "element": "water",
-    "class": "attacker",
+    "class": "striker",
     "race": "human",
     "icon": "2000089",
     "skills": [
@@ -9229,6 +9496,12 @@
     "subClass": "bruiser",
     "chainType": "join",
     "gift": "present_01",
+    "voiceActor": {
+      "en": "Crystal Lee",
+      "jp": "近藤唯",
+      "kr": "신나리",
+      "zh": ""
+    },
     "profile": {
       "birthday": "09/08",
       "height": 164,
@@ -9257,7 +9530,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -9271,7 +9545,7 @@
     },
     "rarity": 3,
     "element": "dark",
-    "class": "attacker",
+    "class": "striker",
     "race": "gnosis",
     "icon": "2000090",
     "skills": [
@@ -9334,6 +9608,12 @@
     "subClass": "attacker",
     "chainType": "finish",
     "gift": "present_03",
+    "voiceActor": {
+      "en": "Amber Lee Connors",
+      "jp": "山崎はるか",
+      "kr": "강새봄",
+      "zh": ""
+    },
     "profile": {
       "birthday": "12/21",
       "height": 175,
@@ -9362,7 +9642,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -9438,6 +9719,12 @@
     "subClass": "enchanter",
     "chainType": "start",
     "gift": "present_03",
+    "voiceActor": {
+      "en": "Dawn M. Bennett",
+      "jp": "関根明良",
+      "kr": "이보용",
+      "zh": ""
+    },
     "profile": {
       "birthday": "09/23",
       "height": 177,
@@ -9466,7 +9753,8 @@
         "grade": "magic",
         "sort": 1,
         "source": "world_boss_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -9542,6 +9830,12 @@
     "subClass": "tactician",
     "chainType": "join",
     "gift": "present_04",
+    "voiceActor": {
+      "en": "Kimberly Woods",
+      "jp": "戸松遥",
+      "kr": "윤아영",
+      "zh": ""
+    },
     "profile": {
       "birthday": "09/26",
       "height": 163,
@@ -9628,6 +9922,12 @@
     "subClass": "vanguard",
     "chainType": "join",
     "gift": "present_02",
+    "voiceActor": {
+      "en": "Mia Paige",
+      "jp": "末柄里恵",
+      "kr": "이새아",
+      "zh": ""
+    },
     "profile": {
       "birthday": "05/21",
       "height": 172,
@@ -9714,6 +10014,12 @@
     "subClass": "sweeper",
     "chainType": "finish",
     "gift": "present_05",
+    "voiceActor": {
+      "en": "Kimberley Wong & Mara Junot",
+      "jp": "引坂理絵＆大地葉",
+      "kr": "손선영&김성희",
+      "zh": ""
+    },
     "profile": {
       "birthday": "05/16",
       "height": 160,
@@ -9742,7 +10048,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -9817,6 +10124,12 @@
     "subClass": "wizard",
     "chainType": "join",
     "gift": "present_04",
+    "voiceActor": {
+      "en": "Yoshitsugu Matsuoka＆\\nInori Minase",
+      "jp": "松岡禎丞＆水瀬いのり",
+      "kr": "마츠오카 요시츠구&미나세 이노리",
+      "zh": ""
+    },
     "profile": {
       "birthday": "12/08",
       "height": 165,
@@ -9841,7 +10154,7 @@
     },
     "rarity": 3,
     "element": "light",
-    "class": "attacker",
+    "class": "striker",
     "race": "human",
     "icon": "2000096",
     "skills": [
@@ -9902,6 +10215,12 @@
     "subClass": "attacker",
     "chainType": "join",
     "gift": "present_05",
+    "voiceActor": {
+      "en": "Saori Onishi",
+      "jp": "大西沙織",
+      "kr": "오오니시 사오리",
+      "zh": ""
+    },
     "profile": {
       "birthday": "12/08",
       "height": 162,
@@ -9988,6 +10307,12 @@
     "subClass": "vanguard",
     "chainType": "finish",
     "gift": "present_01",
+    "voiceActor": {
+      "en": "Saori Hayami",
+      "jp": "早見沙織",
+      "kr": "하야미 사오리",
+      "zh": ""
+    },
     "profile": {
       "birthday": "12/08",
       "height": 162,
@@ -10012,7 +10337,7 @@
     },
     "rarity": 3,
     "element": "fire",
-    "class": "priest",
+    "class": "healer",
     "race": "human",
     "icon": "2000098",
     "skills": [
@@ -10074,6 +10399,12 @@
     "subClass": "sage",
     "chainType": "finish",
     "gift": "present_03",
+    "voiceActor": {
+      "en": "Alejandra Reynoso",
+      "jp": "矢野優美華",
+      "kr": "김서현",
+      "zh": ""
+    },
     "profile": {
       "birthday": "08/28",
       "height": 172,
@@ -10102,7 +10433,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -10116,7 +10448,7 @@
     },
     "rarity": 3,
     "element": "earth",
-    "class": "attacker",
+    "class": "striker",
     "race": "demon",
     "icon": "2000099",
     "skills": [
@@ -10177,6 +10509,12 @@
     "subClass": "bruiser",
     "chainType": "join",
     "gift": "present_01",
+    "voiceActor": {
+      "en": "Risa Mei",
+      "jp": "井上ほの花",
+      "kr": "김채린",
+      "zh": ""
+    },
     "profile": {
       "birthday": "12/17",
       "height": 166,
@@ -10200,7 +10538,7 @@
     },
     "rarity": 3,
     "element": "dark",
-    "class": "priest",
+    "class": "healer",
     "race": "demiurge",
     "icon": "2000100",
     "skills": [
@@ -10263,6 +10601,12 @@
     "subClass": "reliever",
     "chainType": "finish",
     "gift": "present_01",
+    "voiceActor": {
+      "en": "Risa Mei",
+      "jp": "井上ほの花",
+      "kr": "김채린",
+      "zh": ""
+    },
     "profile": {
       "birthday": "02/25",
       "height": 166,
@@ -10348,6 +10692,12 @@
     "subClass": "tactician",
     "chainType": "finish",
     "gift": "present_04",
+    "voiceActor": {
+      "en": "Anjali Kunapaneni",
+      "jp": "伊瀬茉莉也",
+      "kr": "손정민",
+      "zh": ""
+    },
     "profile": {
       "birthday": "12/08",
       "height": 174,
@@ -10376,7 +10726,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -10452,6 +10803,12 @@
     "subClass": "phalanx",
     "chainType": "join",
     "gift": "present_05",
+    "voiceActor": {
+      "en": "Reba Buhr",
+      "jp": "乾真由璃",
+      "kr": "김유림",
+      "zh": ""
+    },
     "profile": {
       "birthday": "06/25",
       "height": 167,
@@ -10538,6 +10895,12 @@
     "subClass": "phalanx",
     "chainType": "finish",
     "gift": "present_02",
+    "voiceActor": {
+      "en": "Sam Slade",
+      "jp": "久保ユリカ",
+      "kr": "권다예",
+      "zh": ""
+    },
     "profile": {
       "birthday": "07/16",
       "height": 162,
@@ -10623,6 +10986,12 @@
     "subClass": "tactician",
     "chainType": "start",
     "gift": "present_02",
+    "voiceActor": {
+      "en": "Caitlin Rowe",
+      "jp": "山岡ゆり",
+      "kr": "미소",
+      "zh": ""
+    },
     "profile": {
       "birthday": "04/01",
       "height": 163,
@@ -10651,7 +11020,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "event_shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -10727,6 +11097,12 @@
     "subClass": "sweeper",
     "chainType": "join",
     "gift": "present_05",
+    "voiceActor": {
+      "en": "Kimberley Wong",
+      "jp": "引坂理絵",
+      "kr": "손선영",
+      "zh": ""
+    },
     "profile": {
       "birthday": "05/16",
       "height": 160,
@@ -10812,6 +11188,12 @@
     "subClass": "enchanter",
     "chainType": "join",
     "gift": "present_02",
+    "voiceActor": {
+      "en": "Marie Westbrook",
+      "jp": "行成とあ",
+      "kr": "비주언",
+      "zh": ""
+    },
     "profile": {
       "birthday": "09/01",
       "height": 177,
@@ -10840,7 +11222,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -10854,7 +11237,7 @@
     },
     "rarity": 3,
     "element": "earth",
-    "class": "priest",
+    "class": "healer",
     "race": "demon",
     "icon": "2000108",
     "skills": [
@@ -10915,6 +11298,12 @@
     "subClass": "sage",
     "chainType": "start",
     "gift": "present_05",
+    "voiceActor": {
+      "en": "Erika Harlacher",
+      "jp": "櫻井 浩美",
+      "kr": "송하림",
+      "zh": ""
+    },
     "profile": {
       "birthday": "04/01",
       "height": 161,
@@ -10943,7 +11332,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -10957,7 +11347,7 @@
     },
     "rarity": 3,
     "element": "dark",
-    "class": "attacker",
+    "class": "striker",
     "race": "gnosis",
     "icon": "2000109",
     "skills": [
@@ -11019,6 +11409,12 @@
     "subClass": "bruiser",
     "chainType": "join",
     "gift": "present_05",
+    "voiceActor": {
+      "en": "Erika Harlacher",
+      "jp": "櫻井 浩美",
+      "kr": "송하림",
+      "zh": ""
+    },
     "profile": {
       "birthday": "04/01",
       "height": 167,
@@ -11047,7 +11443,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -11124,6 +11521,12 @@
     "subClass": "vanguard",
     "chainType": "finish",
     "gift": "present_04",
+    "voiceActor": {
+      "en": "Lizzie Freeman",
+      "jp": "前田玲奈",
+      "kr": "김하루",
+      "zh": ""
+    },
     "profile": {
       "birthday": "03/24",
       "height": 167,
@@ -11210,6 +11613,12 @@
     "subClass": "tactician",
     "chainType": "join",
     "gift": "present_01",
+    "voiceActor": {
+      "en": "Mara Junot",
+      "jp": "森永千才",
+      "kr": "김성희",
+      "zh": ""
+    },
     "profile": {
       "birthday": "08/10",
       "height": 179,
@@ -11238,7 +11647,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -11314,6 +11724,12 @@
     "subClass": "enchanter",
     "chainType": "join",
     "gift": "present_03",
+    "voiceActor": {
+      "en": "Kennedy Hibbert",
+      "jp": "佐々木未来",
+      "kr": "김순미",
+      "zh": ""
+    },
     "profile": {
       "birthday": "10/23",
       "height": 170,
@@ -11342,7 +11758,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "87",
@@ -11356,7 +11773,8 @@
         "icon": "TI_Costume_Clothes_2000112_03",
         "grade": "rare",
         "sort": 2,
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -11370,7 +11788,7 @@
     },
     "rarity": 3,
     "element": "water",
-    "class": "priest",
+    "class": "healer",
     "race": "elf",
     "icon": "2000113",
     "skills": [
@@ -11431,6 +11849,12 @@
     "subClass": "reliever",
     "chainType": "start",
     "gift": "present_05",
+    "voiceActor": {
+      "en": "Cherami Leigh",
+      "jp": "芝崎典子",
+      "kr": "김채린",
+      "zh": ""
+    },
     "profile": {
       "birthday": "11/07",
       "height": 173,
@@ -11459,7 +11883,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -11473,7 +11898,7 @@
     },
     "rarity": 3,
     "element": "fire",
-    "class": "attacker",
+    "class": "striker",
     "race": "human",
     "icon": "2000114",
     "skills": [
@@ -11535,6 +11960,12 @@
     "subClass": "bruiser",
     "chainType": "join",
     "gift": "present_02",
+    "voiceActor": {
+      "en": "Anjali Kunapaneni",
+      "jp": "伊瀬茉莉也",
+      "kr": "손정민",
+      "zh": ""
+    },
     "profile": {
       "birthday": "12/08",
       "height": 174,
@@ -11563,7 +11994,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -11638,6 +12070,12 @@
     "subClass": "sweeper",
     "chainType": "join",
     "gift": "present_04",
+    "voiceActor": {
+      "en": "Jackie Lastra",
+      "jp": "花井美春",
+      "kr": "채림",
+      "zh": ""
+    },
     "profile": {
       "birthday": "08/06",
       "height": 162,
@@ -11666,7 +12104,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "battlepass",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -11680,7 +12119,7 @@
     },
     "rarity": 3,
     "element": "fire",
-    "class": "attacker",
+    "class": "striker",
     "race": "human",
     "icon": "2000117",
     "skills": [
@@ -11741,6 +12180,12 @@
     "subClass": "attacker",
     "chainType": "start",
     "gift": "present_02",
+    "voiceActor": {
+      "en": "Tara Langella",
+      "jp": "イブ優里安",
+      "kr": "이은조",
+      "zh": ""
+    },
     "profile": {
       "birthday": "10/24",
       "height": 172,
@@ -11769,7 +12214,8 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       },
       {
         "id": "92",
@@ -11783,7 +12229,8 @@
         "icon": "TI_Costume_Clothes_2000117_03",
         "grade": "rare",
         "sort": 2,
-        "fusionModel": "0"
+        "fusionModel": "0",
+        "art": true
       }
     ]
   },
@@ -11813,7 +12260,19 @@
       "11919",
       "11920",
       "11921",
-      "4"
+      "4",
+      "12001",
+      "12002",
+      "12003",
+      "12004",
+      "12005",
+      "12006",
+      "12008",
+      "12009",
+      "12010",
+      "12019",
+      "12020",
+      "12021"
     ],
     "stats": {
       "hp": {
@@ -11859,6 +12318,12 @@
     "subClass": "wizard",
     "chainType": "join",
     "gift": "present_01",
+    "voiceActor": {
+      "en": "Sam Slade",
+      "jp": "久保ユリカ",
+      "kr": "권다예",
+      "zh": ""
+    },
     "profile": {
       "birthday": "05/20",
       "height": 168,
@@ -11946,6 +12411,12 @@
     "subClass": "tactician",
     "chainType": "join",
     "gift": "present_02",
+    "voiceActor": {
+      "en": "Erin Yvette",
+      "jp": "阿澄佳奈",
+      "kr": "김가령",
+      "zh": ""
+    },
     "profile": {
       "birthday": "01/05",
       "height": 163,
@@ -12099,6 +12570,12 @@
     "subClass": "wizard",
     "chainType": "join",
     "gift": "present_03",
+    "voiceActor": {
+      "en": "Jeannie Tirado",
+      "jp": "安済知佳",
+      "kr": "여윤미",
+      "zh": ""
+    },
     "profile": {
       "birthday": "07/29",
       "height": 161,
@@ -12254,6 +12731,12 @@
     "subClass": "sweeper",
     "chainType": "finish",
     "gift": "present_04",
+    "voiceActor": {
+      "en": "Shelby Young",
+      "jp": "佐藤利奈",
+      "kr": "곽규미",
+      "zh": ""
+    },
     "profile": {
       "birthday": "04/28",
       "height": 170,
@@ -12408,6 +12891,12 @@
     "subClass": "enchanter",
     "chainType": "join",
     "gift": "present_05",
+    "voiceActor": {
+      "en": "Jeannie Tirado",
+      "jp": "石見舞菜香",
+      "kr": "장미",
+      "zh": ""
+    },
     "profile": {
       "birthday": "05/01",
       "height": 163,
@@ -12562,6 +13051,12 @@
     "subClass": "vanguard",
     "chainType": "join",
     "gift": "present_05",
+    "voiceActor": {
+      "en": "Kelly Ohanian",
+      "jp": "渡部紗弓",
+      "kr": "성예원",
+      "zh": ""
+    },
     "profile": {
       "birthday": "03/11",
       "height": 162,
@@ -12654,7 +13149,7 @@
     },
     "rarity": 3,
     "element": "dark",
-    "class": "attacker",
+    "class": "striker",
     "race": "automaton",
     "icon": "2700070",
     "skills": [
@@ -12716,6 +13211,12 @@
     "subClass": "bruiser",
     "chainType": "join",
     "gift": "present_02",
+    "voiceActor": {
+      "en": "Ashely Biski",
+      "jp": "五十嵐裕美",
+      "kr": "유영",
+      "zh": ""
+    },
     "profile": {
       "birthday": "04/06",
       "height": 167,

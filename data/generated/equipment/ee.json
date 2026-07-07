@@ -13,7 +13,18 @@
     "character": "2000001",
     "trustLevel": 10,
     "options": ["2000001"],
-    "passive": "2000001"
+    "passives": [
+      {
+        "id": "2000001",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100001",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000002": {
     "name": {
@@ -29,7 +40,18 @@
     "character": "2000002",
     "trustLevel": 10,
     "options": ["2000002"],
-    "passive": "2000002"
+    "passives": [
+      {
+        "id": "2000002",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100002",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000003": {
     "name": {
@@ -45,7 +67,18 @@
     "character": "2000003",
     "trustLevel": 10,
     "options": ["2000003"],
-    "passive": "2000003"
+    "passives": [
+      {
+        "id": "2000003",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100003",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000004": {
     "name": {
@@ -61,7 +94,18 @@
     "character": "2000004",
     "trustLevel": 10,
     "options": ["2000004"],
-    "passive": "2000004"
+    "passives": [
+      {
+        "id": "2000004",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100004",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000005": {
     "name": {
@@ -77,7 +121,18 @@
     "character": "2000005",
     "trustLevel": 10,
     "options": ["2000005"],
-    "passive": "2000005"
+    "passives": [
+      {
+        "id": "2000005",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100005",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000006": {
     "name": {
@@ -93,7 +148,18 @@
     "character": "2000006",
     "trustLevel": 10,
     "options": ["2000006"],
-    "passive": "2000006"
+    "passives": [
+      {
+        "id": "2000006",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100006",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000007": {
     "name": {
@@ -109,7 +175,18 @@
     "character": "2000007",
     "trustLevel": 10,
     "options": ["2000007"],
-    "passive": "2000007"
+    "passives": [
+      {
+        "id": "2000007",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100007",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000008": {
     "name": {
@@ -125,7 +202,18 @@
     "character": "2000008",
     "trustLevel": 10,
     "options": ["2000008"],
-    "passive": "2000008"
+    "passives": [
+      {
+        "id": "2000008",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100008",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000009": {
     "name": {
@@ -141,7 +229,18 @@
     "character": "2000009",
     "trustLevel": 10,
     "options": ["2000009"],
-    "passive": "2000009"
+    "passives": [
+      {
+        "id": "2000009",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100009",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000010": {
     "name": {
@@ -157,7 +256,18 @@
     "character": "2000010",
     "trustLevel": 10,
     "options": ["2000010"],
-    "passive": "2000010"
+    "passives": [
+      {
+        "id": "2000010",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100010",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000011": {
     "name": {
@@ -173,7 +283,18 @@
     "character": "2000011",
     "trustLevel": 10,
     "options": ["2000011"],
-    "passive": "2000011"
+    "passives": [
+      {
+        "id": "2000011",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100011",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000012": {
     "name": {
@@ -189,7 +310,18 @@
     "character": "2000012",
     "trustLevel": 10,
     "options": ["2000012"],
-    "passive": "2000012"
+    "passives": [
+      {
+        "id": "2000012",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100012",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000013": {
     "name": {
@@ -205,7 +337,18 @@
     "character": "2000013",
     "trustLevel": 10,
     "options": ["2000013"],
-    "passive": "2000013"
+    "passives": [
+      {
+        "id": "2000013",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100013",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000014": {
     "name": {
@@ -221,7 +364,18 @@
     "character": "2000014",
     "trustLevel": 10,
     "options": ["2000014"],
-    "passive": "2000014"
+    "passives": [
+      {
+        "id": "2000014",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100014",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000015": {
     "name": {
@@ -237,7 +391,18 @@
     "character": "2000015",
     "trustLevel": 10,
     "options": ["2000015"],
-    "passive": "2000015"
+    "passives": [
+      {
+        "id": "2000015",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100015",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000016": {
     "name": {
@@ -253,7 +418,18 @@
     "character": "2000016",
     "trustLevel": 10,
     "options": ["2000016"],
-    "passive": "2000016"
+    "passives": [
+      {
+        "id": "2000016",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100016",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000017": {
     "name": {
@@ -269,7 +445,18 @@
     "character": "2000017",
     "trustLevel": 10,
     "options": ["2000017"],
-    "passive": "2000017"
+    "passives": [
+      {
+        "id": "2000017",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100017",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000018": {
     "name": {
@@ -285,7 +472,18 @@
     "character": "2000018",
     "trustLevel": 10,
     "options": ["2000018"],
-    "passive": "2000018"
+    "passives": [
+      {
+        "id": "2000018",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100018",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000019": {
     "name": {
@@ -301,7 +499,18 @@
     "character": "2000019",
     "trustLevel": 10,
     "options": ["2000019"],
-    "passive": "2000019"
+    "passives": [
+      {
+        "id": "2000019",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100019",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000020": {
     "name": {
@@ -317,7 +526,18 @@
     "character": "2000020",
     "trustLevel": 10,
     "options": ["2000020"],
-    "passive": "2000020"
+    "passives": [
+      {
+        "id": "2000020",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100020",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000021": {
     "name": {
@@ -333,7 +553,18 @@
     "character": "2000021",
     "trustLevel": 10,
     "options": ["2000021"],
-    "passive": "2000021"
+    "passives": [
+      {
+        "id": "2000021",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100021",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000022": {
     "name": {
@@ -349,7 +580,18 @@
     "character": "2000022",
     "trustLevel": 10,
     "options": ["2000022"],
-    "passive": "2000022"
+    "passives": [
+      {
+        "id": "2000022",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100022",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000023": {
     "name": {
@@ -365,7 +607,18 @@
     "character": "2000023",
     "trustLevel": 10,
     "options": ["2000023"],
-    "passive": "2000023"
+    "passives": [
+      {
+        "id": "2000023",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100023",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000024": {
     "name": {
@@ -381,7 +634,18 @@
     "character": "2000024",
     "trustLevel": 10,
     "options": ["2000024"],
-    "passive": "2000024"
+    "passives": [
+      {
+        "id": "2000024",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100024",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000025": {
     "name": {
@@ -397,7 +661,18 @@
     "character": "2000025",
     "trustLevel": 10,
     "options": ["2000025"],
-    "passive": "2000025"
+    "passives": [
+      {
+        "id": "2000025",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100025",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000026": {
     "name": {
@@ -413,7 +688,18 @@
     "character": "2000026",
     "trustLevel": 10,
     "options": ["2000026"],
-    "passive": "2000026"
+    "passives": [
+      {
+        "id": "2000026",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100026",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000027": {
     "name": {
@@ -429,7 +715,18 @@
     "character": "2000027",
     "trustLevel": 10,
     "options": ["2000027"],
-    "passive": "2000027"
+    "passives": [
+      {
+        "id": "2000027",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100027",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000028": {
     "name": {
@@ -445,7 +742,18 @@
     "character": "2000028",
     "trustLevel": 10,
     "options": ["2000028"],
-    "passive": "2000028"
+    "passives": [
+      {
+        "id": "2000028",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100028",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000029": {
     "name": {
@@ -461,7 +769,18 @@
     "character": "2000029",
     "trustLevel": 10,
     "options": ["2000029"],
-    "passive": "2000029"
+    "passives": [
+      {
+        "id": "2000029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100029",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000030": {
     "name": {
@@ -477,7 +796,18 @@
     "character": "2000030",
     "trustLevel": 10,
     "options": ["2000030"],
-    "passive": "2000030"
+    "passives": [
+      {
+        "id": "2000030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100030",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000031": {
     "name": {
@@ -493,7 +823,18 @@
     "character": "2000031",
     "trustLevel": 10,
     "options": ["2000031"],
-    "passive": "2000031"
+    "passives": [
+      {
+        "id": "2000031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100031",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000032": {
     "name": {
@@ -509,7 +850,18 @@
     "character": "2000032",
     "trustLevel": 10,
     "options": ["2000032"],
-    "passive": "2000032"
+    "passives": [
+      {
+        "id": "2000032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100032",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000033": {
     "name": {
@@ -525,7 +877,18 @@
     "character": "2000033",
     "trustLevel": 10,
     "options": ["2000033"],
-    "passive": "2000033"
+    "passives": [
+      {
+        "id": "2000033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100033",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000034": {
     "name": {
@@ -541,7 +904,18 @@
     "character": "2000034",
     "trustLevel": 10,
     "options": ["2000034"],
-    "passive": "2000034"
+    "passives": [
+      {
+        "id": "2000034",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100034",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000035": {
     "name": {
@@ -557,7 +931,18 @@
     "character": "2000035",
     "trustLevel": 10,
     "options": ["2000035"],
-    "passive": "2000035"
+    "passives": [
+      {
+        "id": "2000035",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100035",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000036": {
     "name": {
@@ -573,7 +958,18 @@
     "character": "2000036",
     "trustLevel": 10,
     "options": ["2000036"],
-    "passive": "2000036"
+    "passives": [
+      {
+        "id": "2000036",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100036",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000037": {
     "name": {
@@ -589,7 +985,18 @@
     "character": "2000037",
     "trustLevel": 10,
     "options": ["2000037"],
-    "passive": "2000037"
+    "passives": [
+      {
+        "id": "2000037",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100037",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000038": {
     "name": {
@@ -605,7 +1012,18 @@
     "character": "2000038",
     "trustLevel": 10,
     "options": ["2000038"],
-    "passive": "2000038"
+    "passives": [
+      {
+        "id": "2000038",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100038",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000039": {
     "name": {
@@ -621,7 +1039,18 @@
     "character": "2000039",
     "trustLevel": 10,
     "options": ["2000039"],
-    "passive": "2000039"
+    "passives": [
+      {
+        "id": "2000039",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100039",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000040": {
     "name": {
@@ -637,7 +1066,18 @@
     "character": "2000040",
     "trustLevel": 10,
     "options": ["2000040"],
-    "passive": "2000040"
+    "passives": [
+      {
+        "id": "2000040",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100040",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000041": {
     "name": {
@@ -653,7 +1093,18 @@
     "character": "2000041",
     "trustLevel": 10,
     "options": ["2000041"],
-    "passive": "2000041"
+    "passives": [
+      {
+        "id": "2000041",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100041",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000042": {
     "name": {
@@ -669,7 +1120,18 @@
     "character": "2000042",
     "trustLevel": 10,
     "options": ["2000042"],
-    "passive": "2000042"
+    "passives": [
+      {
+        "id": "2000042",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100042",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000043": {
     "name": {
@@ -685,7 +1147,18 @@
     "character": "2000043",
     "trustLevel": 10,
     "options": ["2000043"],
-    "passive": "2000043"
+    "passives": [
+      {
+        "id": "2000043",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100043",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000044": {
     "name": {
@@ -701,7 +1174,18 @@
     "character": "2000044",
     "trustLevel": 10,
     "options": ["2000044"],
-    "passive": "2000044"
+    "passives": [
+      {
+        "id": "2000044",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100044",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000045": {
     "name": {
@@ -717,7 +1201,18 @@
     "character": "2000045",
     "trustLevel": 10,
     "options": ["2000045"],
-    "passive": "2000045"
+    "passives": [
+      {
+        "id": "2000045",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100045",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000046": {
     "name": {
@@ -733,7 +1228,18 @@
     "character": "2000046",
     "trustLevel": 10,
     "options": ["2000046"],
-    "passive": "2000046"
+    "passives": [
+      {
+        "id": "2000046",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100046",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000047": {
     "name": {
@@ -749,7 +1255,18 @@
     "character": "2000047",
     "trustLevel": 10,
     "options": ["2000047"],
-    "passive": "2000047"
+    "passives": [
+      {
+        "id": "2000047",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100047",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000048": {
     "name": {
@@ -765,7 +1282,18 @@
     "character": "2000048",
     "trustLevel": 10,
     "options": ["2000048"],
-    "passive": "2000048"
+    "passives": [
+      {
+        "id": "2000048",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100048",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000049": {
     "name": {
@@ -781,7 +1309,18 @@
     "character": "2000049",
     "trustLevel": 10,
     "options": ["2000049"],
-    "passive": "2000049"
+    "passives": [
+      {
+        "id": "2000049",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100049",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000050": {
     "name": {
@@ -797,7 +1336,18 @@
     "character": "2000050",
     "trustLevel": 10,
     "options": ["2000050"],
-    "passive": "2000050"
+    "passives": [
+      {
+        "id": "2000050",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100050",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000051": {
     "name": {
@@ -813,7 +1363,18 @@
     "character": "2000051",
     "trustLevel": 10,
     "options": ["2000051"],
-    "passive": "2000051"
+    "passives": [
+      {
+        "id": "2000051",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100051",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000052": {
     "name": {
@@ -829,7 +1390,18 @@
     "character": "2000052",
     "trustLevel": 10,
     "options": ["2000052"],
-    "passive": "2000052"
+    "passives": [
+      {
+        "id": "2000052",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100052",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000053": {
     "name": {
@@ -845,7 +1417,18 @@
     "character": "2000053",
     "trustLevel": 10,
     "options": ["2000053"],
-    "passive": "2000053"
+    "passives": [
+      {
+        "id": "2000053",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100053",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000054": {
     "name": {
@@ -861,7 +1444,18 @@
     "character": "2000054",
     "trustLevel": 10,
     "options": ["2000054"],
-    "passive": "2000054"
+    "passives": [
+      {
+        "id": "2000054",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100054",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000055": {
     "name": {
@@ -877,7 +1471,18 @@
     "character": "2000055",
     "trustLevel": 10,
     "options": ["2000055"],
-    "passive": "2000055"
+    "passives": [
+      {
+        "id": "2000055",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100055",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000056": {
     "name": {
@@ -893,7 +1498,18 @@
     "character": "2000056",
     "trustLevel": 10,
     "options": ["2000056"],
-    "passive": "2000056"
+    "passives": [
+      {
+        "id": "2000056",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100056",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000057": {
     "name": {
@@ -909,7 +1525,18 @@
     "character": "2000057",
     "trustLevel": 10,
     "options": ["2000057"],
-    "passive": "2000057"
+    "passives": [
+      {
+        "id": "2000057",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100057",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000058": {
     "name": {
@@ -925,7 +1552,18 @@
     "character": "2000058",
     "trustLevel": 10,
     "options": ["2000058"],
-    "passive": "2000058"
+    "passives": [
+      {
+        "id": "2000058",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100058",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000059": {
     "name": {
@@ -941,7 +1579,18 @@
     "character": "2000059",
     "trustLevel": 10,
     "options": ["2000059"],
-    "passive": "2000059"
+    "passives": [
+      {
+        "id": "2000059",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100059",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000060": {
     "name": {
@@ -957,7 +1606,18 @@
     "character": "2000060",
     "trustLevel": 10,
     "options": ["2000060"],
-    "passive": "2000060"
+    "passives": [
+      {
+        "id": "2000060",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100060",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000061": {
     "name": {
@@ -973,7 +1633,18 @@
     "character": "2000061",
     "trustLevel": 10,
     "options": ["2000061"],
-    "passive": "2000061"
+    "passives": [
+      {
+        "id": "2000061",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100061",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000062": {
     "name": {
@@ -989,7 +1660,18 @@
     "character": "2000062",
     "trustLevel": 10,
     "options": ["2000062"],
-    "passive": "2000062"
+    "passives": [
+      {
+        "id": "2000062",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100062",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000063": {
     "name": {
@@ -1005,7 +1687,18 @@
     "character": "2000063",
     "trustLevel": 10,
     "options": ["2000063"],
-    "passive": "2000063"
+    "passives": [
+      {
+        "id": "2000063",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100063",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000064": {
     "name": {
@@ -1021,7 +1714,18 @@
     "character": "2000064",
     "trustLevel": 10,
     "options": ["2000064"],
-    "passive": "2000064"
+    "passives": [
+      {
+        "id": "2000064",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100064",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000065": {
     "name": {
@@ -1037,7 +1741,18 @@
     "character": "2000065",
     "trustLevel": 10,
     "options": ["2000065"],
-    "passive": "2000065"
+    "passives": [
+      {
+        "id": "2000065",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100065",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000066": {
     "name": {
@@ -1053,7 +1768,18 @@
     "character": "2000066",
     "trustLevel": 10,
     "options": ["2000066"],
-    "passive": "2000066"
+    "passives": [
+      {
+        "id": "2000066",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100066",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000067": {
     "name": {
@@ -1069,7 +1795,18 @@
     "character": "2000067",
     "trustLevel": 10,
     "options": ["2000067"],
-    "passive": "2000067"
+    "passives": [
+      {
+        "id": "2000067",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100067",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000068": {
     "name": {
@@ -1085,7 +1822,18 @@
     "character": "2000068",
     "trustLevel": 10,
     "options": ["2000068"],
-    "passive": "2000068"
+    "passives": [
+      {
+        "id": "2000068",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100068",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000069": {
     "name": {
@@ -1101,7 +1849,18 @@
     "character": "2000069",
     "trustLevel": 10,
     "options": ["2000069"],
-    "passive": "2000069"
+    "passives": [
+      {
+        "id": "2000069",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100069",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000070": {
     "name": {
@@ -1117,7 +1876,18 @@
     "character": "2000070",
     "trustLevel": 10,
     "options": ["2000070"],
-    "passive": "2000070"
+    "passives": [
+      {
+        "id": "2000070",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100070",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000071": {
     "name": {
@@ -1133,7 +1903,18 @@
     "character": "2000071",
     "trustLevel": 10,
     "options": ["2000071"],
-    "passive": "2000071"
+    "passives": [
+      {
+        "id": "2000071",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100071",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000072": {
     "name": {
@@ -1149,7 +1930,18 @@
     "character": "2000072",
     "trustLevel": 10,
     "options": ["2000072"],
-    "passive": "2000072"
+    "passives": [
+      {
+        "id": "2000072",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100072",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000073": {
     "name": {
@@ -1165,7 +1957,18 @@
     "character": "2000073",
     "trustLevel": 10,
     "options": ["2000073"],
-    "passive": "2000073"
+    "passives": [
+      {
+        "id": "2000073",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100073",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000074": {
     "name": {
@@ -1181,7 +1984,18 @@
     "character": "2000074",
     "trustLevel": 10,
     "options": ["2000074"],
-    "passive": "2000074"
+    "passives": [
+      {
+        "id": "2000074",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100074",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000075": {
     "name": {
@@ -1197,7 +2011,18 @@
     "character": "2000075",
     "trustLevel": 10,
     "options": ["2000075"],
-    "passive": "2000075"
+    "passives": [
+      {
+        "id": "2000075",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100075",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000076": {
     "name": {
@@ -1213,7 +2038,18 @@
     "character": "2000076",
     "trustLevel": 10,
     "options": ["2000076"],
-    "passive": "2000076"
+    "passives": [
+      {
+        "id": "2000076",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100076",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000077": {
     "name": {
@@ -1229,7 +2065,18 @@
     "character": "2000077",
     "trustLevel": 10,
     "options": ["2000077"],
-    "passive": "2000077"
+    "passives": [
+      {
+        "id": "2000077",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100077",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000078": {
     "name": {
@@ -1245,7 +2092,18 @@
     "character": "2000078",
     "trustLevel": 10,
     "options": ["2000078"],
-    "passive": "2000078"
+    "passives": [
+      {
+        "id": "2000078",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100078",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000079": {
     "name": {
@@ -1261,7 +2119,18 @@
     "character": "2000079",
     "trustLevel": 10,
     "options": ["2000079"],
-    "passive": "2000079"
+    "passives": [
+      {
+        "id": "2000079",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100079",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000080": {
     "name": {
@@ -1277,7 +2146,18 @@
     "character": "2000080",
     "trustLevel": 10,
     "options": ["2000080"],
-    "passive": "2000080"
+    "passives": [
+      {
+        "id": "2000080",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100080",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000081": {
     "name": {
@@ -1293,7 +2173,18 @@
     "character": "2000081",
     "trustLevel": 10,
     "options": ["2000081"],
-    "passive": "2000081"
+    "passives": [
+      {
+        "id": "2000081",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100081",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000082": {
     "name": {
@@ -1309,7 +2200,18 @@
     "character": "2000082",
     "trustLevel": 10,
     "options": ["2000082"],
-    "passive": "2000082"
+    "passives": [
+      {
+        "id": "2000082",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100082",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000083": {
     "name": {
@@ -1325,7 +2227,18 @@
     "character": "2000083",
     "trustLevel": 10,
     "options": ["2000083"],
-    "passive": "2000083"
+    "passives": [
+      {
+        "id": "2000083",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100083",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000084": {
     "name": {
@@ -1341,7 +2254,18 @@
     "character": "2000084",
     "trustLevel": 10,
     "options": ["2000084"],
-    "passive": "2000084"
+    "passives": [
+      {
+        "id": "2000084",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100084",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000085": {
     "name": {
@@ -1357,7 +2281,18 @@
     "character": "2000085",
     "trustLevel": 10,
     "options": ["2000085"],
-    "passive": "2000085"
+    "passives": [
+      {
+        "id": "2000085",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100085",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000086": {
     "name": {
@@ -1373,7 +2308,18 @@
     "character": "2000086",
     "trustLevel": 10,
     "options": ["2000086"],
-    "passive": "2000086"
+    "passives": [
+      {
+        "id": "2000086",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100086",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000087": {
     "name": {
@@ -1389,7 +2335,18 @@
     "character": "2000087",
     "trustLevel": 10,
     "options": ["2000087"],
-    "passive": "2000087"
+    "passives": [
+      {
+        "id": "2000087",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100087",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000088": {
     "name": {
@@ -1405,7 +2362,18 @@
     "character": "2000088",
     "trustLevel": 10,
     "options": ["2000088"],
-    "passive": "2000088"
+    "passives": [
+      {
+        "id": "2000088",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100088",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000089": {
     "name": {
@@ -1421,7 +2389,18 @@
     "character": "2000089",
     "trustLevel": 10,
     "options": ["2000089"],
-    "passive": "2000089"
+    "passives": [
+      {
+        "id": "2000089",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100089",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000090": {
     "name": {
@@ -1437,7 +2416,18 @@
     "character": "2000090",
     "trustLevel": 10,
     "options": ["2000090"],
-    "passive": "2000090"
+    "passives": [
+      {
+        "id": "2000090",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100090",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000091": {
     "name": {
@@ -1453,7 +2443,18 @@
     "character": "2000091",
     "trustLevel": 10,
     "options": ["2000091"],
-    "passive": "2000091"
+    "passives": [
+      {
+        "id": "2000091",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100091",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000092": {
     "name": {
@@ -1469,7 +2470,18 @@
     "character": "2000092",
     "trustLevel": 10,
     "options": ["2000092"],
-    "passive": "2000092"
+    "passives": [
+      {
+        "id": "2000092",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100092",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000093": {
     "name": {
@@ -1485,7 +2497,18 @@
     "character": "2000093",
     "trustLevel": 10,
     "options": ["2000093"],
-    "passive": "2000093"
+    "passives": [
+      {
+        "id": "2000093",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100093",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000094": {
     "name": {
@@ -1501,7 +2524,18 @@
     "character": "2000094",
     "trustLevel": 10,
     "options": ["2000094"],
-    "passive": "2000094"
+    "passives": [
+      {
+        "id": "2000094",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100094",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000095": {
     "name": {
@@ -1517,7 +2551,18 @@
     "character": "2000095",
     "trustLevel": 10,
     "options": ["2000095"],
-    "passive": "2000095"
+    "passives": [
+      {
+        "id": "2000095",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100095",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000096": {
     "name": {
@@ -1533,7 +2578,18 @@
     "character": "2000096",
     "trustLevel": 10,
     "options": ["2000096"],
-    "passive": "2000096"
+    "passives": [
+      {
+        "id": "2000096",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100096",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000097": {
     "name": {
@@ -1549,7 +2605,18 @@
     "character": "2000097",
     "trustLevel": 10,
     "options": ["2000097"],
-    "passive": "2000097"
+    "passives": [
+      {
+        "id": "2000097",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100097",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000098": {
     "name": {
@@ -1565,7 +2632,18 @@
     "character": "2000098",
     "trustLevel": 10,
     "options": ["2000098"],
-    "passive": "2000098"
+    "passives": [
+      {
+        "id": "2000098",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100098",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000099": {
     "name": {
@@ -1581,7 +2659,18 @@
     "character": "2000099",
     "trustLevel": 10,
     "options": ["2000099"],
-    "passive": "2000099"
+    "passives": [
+      {
+        "id": "2000099",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100099",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000100": {
     "name": {
@@ -1597,7 +2686,18 @@
     "character": "2000100",
     "trustLevel": 10,
     "options": ["2000100"],
-    "passive": "2000100"
+    "passives": [
+      {
+        "id": "2000100",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100100",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000101": {
     "name": {
@@ -1613,7 +2713,18 @@
     "character": "2000101",
     "trustLevel": 10,
     "options": ["2000101"],
-    "passive": "2000101"
+    "passives": [
+      {
+        "id": "2000101",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100101",
+        "level": 10,
+        "isAdd": false
+      }
+    ]
   },
   "2000102": {
     "name": {
@@ -1629,7 +2740,18 @@
     "character": "2000102",
     "trustLevel": 10,
     "options": ["2000102"],
-    "passive": "2000102"
+    "passives": [
+      {
+        "id": "2000102",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100102",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000103": {
     "name": {
@@ -1645,7 +2767,18 @@
     "character": "2000103",
     "trustLevel": 10,
     "options": ["2000103"],
-    "passive": "2000103"
+    "passives": [
+      {
+        "id": "2000103",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100103",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000105": {
     "name": {
@@ -1661,7 +2794,18 @@
     "character": "2000105",
     "trustLevel": 10,
     "options": ["2000105"],
-    "passive": "2000105"
+    "passives": [
+      {
+        "id": "2000105",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100105",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000106": {
     "name": {
@@ -1677,7 +2821,18 @@
     "character": "2000106",
     "trustLevel": 10,
     "options": ["2000106"],
-    "passive": "2000106"
+    "passives": [
+      {
+        "id": "2000106",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100106",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000107": {
     "name": {
@@ -1693,7 +2848,18 @@
     "character": "2000107",
     "trustLevel": 10,
     "options": ["2000107"],
-    "passive": "2000107"
+    "passives": [
+      {
+        "id": "2000107",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100107",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000108": {
     "name": {
@@ -1709,7 +2875,18 @@
     "character": "2000108",
     "trustLevel": 10,
     "options": ["2000108"],
-    "passive": "2000108"
+    "passives": [
+      {
+        "id": "2000108",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100108",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000109": {
     "name": {
@@ -1725,7 +2902,18 @@
     "character": "2000109",
     "trustLevel": 10,
     "options": ["2000109"],
-    "passive": "2000109"
+    "passives": [
+      {
+        "id": "2000109",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100109",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000110": {
     "name": {
@@ -1741,7 +2929,18 @@
     "character": "2000110",
     "trustLevel": 10,
     "options": ["2000110"],
-    "passive": "2000110"
+    "passives": [
+      {
+        "id": "2000110",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100110",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000111": {
     "name": {
@@ -1757,7 +2956,18 @@
     "character": "2000111",
     "trustLevel": 10,
     "options": ["2000111"],
-    "passive": "2000111"
+    "passives": [
+      {
+        "id": "2000111",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100111",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000112": {
     "name": {
@@ -1773,7 +2983,18 @@
     "character": "2000112",
     "trustLevel": 10,
     "options": ["2000112"],
-    "passive": "2000112"
+    "passives": [
+      {
+        "id": "2000112",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100112",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000113": {
     "name": {
@@ -1789,7 +3010,18 @@
     "character": "2000113",
     "trustLevel": 10,
     "options": ["2000113"],
-    "passive": "2000113"
+    "passives": [
+      {
+        "id": "2000113",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100113",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000114": {
     "name": {
@@ -1805,7 +3037,18 @@
     "character": "2000114",
     "trustLevel": 10,
     "options": ["2000114"],
-    "passive": "2000114"
+    "passives": [
+      {
+        "id": "2000114",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100114",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000116": {
     "name": {
@@ -1821,7 +3064,18 @@
     "character": "2000116",
     "trustLevel": 10,
     "options": ["2000116"],
-    "passive": "2000116"
+    "passives": [
+      {
+        "id": "2000116",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100116",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000117": {
     "name": {
@@ -1837,7 +3091,18 @@
     "character": "2000117",
     "trustLevel": 10,
     "options": ["2000117"],
-    "passive": "2000117"
+    "passives": [
+      {
+        "id": "2000117",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100117",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2000119": {
     "name": {
@@ -1853,7 +3118,18 @@
     "character": "2000119",
     "trustLevel": 10,
     "options": ["2000119"],
-    "passive": "2000119"
+    "passives": [
+      {
+        "id": "2000119",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100119",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2700003": {
     "name": {
@@ -1869,7 +3145,18 @@
     "character": "2700003",
     "trustLevel": 10,
     "options": ["2700003"],
-    "passive": "2700003"
+    "passives": [
+      {
+        "id": "2700003",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2710003",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2700005": {
     "name": {
@@ -1885,7 +3172,18 @@
     "character": "2700005",
     "trustLevel": 10,
     "options": ["2700005"],
-    "passive": "2700005"
+    "passives": [
+      {
+        "id": "2700005",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2710005",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2700037": {
     "name": {
@@ -1901,7 +3199,18 @@
     "character": "2700037",
     "trustLevel": 10,
     "options": ["2700037"],
-    "passive": "2700037"
+    "passives": [
+      {
+        "id": "2700037",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2710037",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2700043": {
     "name": {
@@ -1917,7 +3226,18 @@
     "character": "2700043",
     "trustLevel": 10,
     "options": ["2700043"],
-    "passive": "2700043"
+    "passives": [
+      {
+        "id": "2700043",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2710043",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2700056": {
     "name": {
@@ -1933,7 +3253,18 @@
     "character": "2700056",
     "trustLevel": 10,
     "options": ["2700056"],
-    "passive": "2700056"
+    "passives": [
+      {
+        "id": "2700056",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2710056",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   },
   "2700070": {
     "name": {
@@ -1949,6 +3280,17 @@
     "character": "2700070",
     "trustLevel": 10,
     "options": ["2700070"],
-    "passive": "2700070"
+    "passives": [
+      {
+        "id": "2700070",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2710070",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
   }
 }

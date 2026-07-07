@@ -1,0 +1,290 @@
+{
+  "51": {
+    "icon": "IG_Buff_BuffdurationIncrease"
+  },
+  "61": {
+    "icon": "IG_Buff_Action_Gauge_Up",
+    "isDebuff": false,
+    "keys": ["BT_ACTION_GAUGE"],
+    "note": "pont type→statut : BT_ACTION_GAUGE côté buff sans label (Polar Night de Luna) → « Priority Increase »"
+  },
+  "62": {
+    "icon": "IG_Buff_Action_Gauge_Down",
+    "isDebuff": true,
+    "keys": ["BT_ACTION_GAUGE"],
+    "note": "pont type→statut : BT_ACTION_GAUGE côté debuff sans label (attaque duo de Snow) → « Priority Decrease »"
+  },
+  "63": {
+    "isDebuff": false,
+    "keys": ["BT_COOL_CHARGE"],
+    "note": "pont type→statut : BT_COOL_CHARGE sans label (Polar Night de Luna) → « Cooldown Reduction »"
+  },
+  "75": {
+    "keys": ["BT_FIXED_DAMAGE", "BT_REVERSE_HEAL_BASED_TARGET", "BT_REVERSE_HEAL_BASED_CASTER"],
+    "note": "dégats FIXES : encodés en reverse-heal (aucun texte/tooltip sur les buffs) — clés type → statut « Fixed Damage », dialecte V2 BT_FIXED_DAMAGE inclus"
+  },
+  "1002": {
+    "icon": "IG_Buff_Dot_Curse_Interruption_D"
+  },
+  "1004": {
+    "icon": "IG_Buff_Dot_Poison_Interruption_D"
+  },
+  "2100093": {
+    "keys": ["BT_CASTER_COPY_BUFF"],
+    "note": "copie de buffs (Dianne) : le buff BT_CASTER_COPY_BUFF n'a pas de tooltip — clé type → statut « Gift of Buffs »"
+  },
+  "DISCHARGE_AP": {
+    "name": {
+      "en": "Discharge AP",
+      "jp": "AP減少",
+      "kr": "AP 감소",
+      "zh": "减少AP"
+    },
+    "desc": {
+      "en": "Reduces enemy Action Points",
+      "jp": "敵のAPを減少させる。",
+      "kr": "적의 AP를 감소시킵니다.",
+      "zh": "减少敌方的AP。"
+    },
+    "icon": "SC_Debuff_Effect_AP",
+    "isDebuff": true,
+    "keys": ["BT_AP_CHARGE", "DISCHARGE_AP"],
+    "tag": "utility",
+    "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
+  },
+  "DISCHARGE_CP": {
+    "name": {
+      "en": "Discharge CP",
+      "jp": "CP減少",
+      "kr": "CP 감소",
+      "zh": "减少CP"
+    },
+    "desc": {
+      "en": "Reduces enemy Chain Points",
+      "jp": "敵のCPを減少させる。",
+      "kr": "적의 CP를 감소시킵니다.",
+      "zh": "减少敌方的CP。"
+    },
+    "icon": "SC_Buff_Effect_CP_down",
+    "isDebuff": true,
+    "keys": ["BT_CP_CHARGE", "DISCHARGE_CP"],
+    "tag": "utility",
+    "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
+  },
+  "DUAL_ATTACK_X2": {
+    "name": {
+      "en": "Dual Attack (x2)",
+      "jp": "連携 (×2)",
+      "kr": "협공 (×2)",
+      "zh": "协同攻击（×2）"
+    },
+    "desc": {
+      "en": "Calls on 2 allies to attack.",
+      "jp": "味方を2人呼び出して攻撃する。",
+      "kr": "아군 2명의 공격을 호출합니다.",
+      "zh": "召唤2名友方一起攻击。"
+    },
+    "icon": "SC_Buff_Effect_Double_Dual_Attack",
+    "isDebuff": false,
+    "keys": ["BT_CALL_BACKUP_2", "DUAL_ATTACK_X2"],
+    "tag": "utility",
+    "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
+  },
+  "ELEMENTAL_ADVANTAGE": {
+    "name": {
+      "en": "Elemental Advantage",
+      "jp": "属性優位",
+      "kr": "속성 우위",
+      "zh": "属性优势"
+    },
+    "desc": {
+      "en": "This skill is always treated as having a favorable attribute",
+      "jp": "常に有利な属性で攻撃する。",
+      "kr": "항상 유리한 속성으로 공격합니다.",
+      "zh": "此技能始终视为具有属性优势。"
+    },
+    "icon": "SC_Buff_Effect_Element_Superiority",
+    "isDebuff": false,
+    "keys": ["BT_DMG_ELEMENT_SUPERIORITY", "ELEMENTAL_ADVANTAGE"],
+    "tag": "utility",
+    "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
+  },
+  "EXTINCTION": {
+    "name": {
+      "en": "Extinction",
+      "jp": "復活不可",
+      "kr": "부활 불가",
+      "zh": "无法复活"
+    },
+    "desc": {
+      "en": "Enemies killed by this skill cannot be Resurrected or Revived.",
+      "jp": "このスキルで倒された敵は蘇生・復活できない。",
+      "kr": "이 스킬로 처치된 적은 부활할 수 없습니다.",
+      "zh": "因该技能死亡的敌人无法触发复活与苏醒效果。"
+    },
+    "icon": "IG_Buff_Seal_Ressurection",
+    "isDebuff": true,
+    "keys": ["BT_SEALED_RESURRECTION", "EXTINCTION"],
+    "tag": "utility",
+    "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
+  },
+  "INCREASE_DEBUFF_DURATION": {
+    "name": {
+      "en": "Increase Debuff Duration",
+      "jp": "弱体効果持続ターン増加",
+      "kr": "약화 효과 지속 시간 증가",
+      "zh": "弱化效果持续时间增加"
+    },
+    "desc": {
+      "en": "Increased duration of detrimental effects granted on target.",
+      "jp": "対象に付与された弱体効果の持続時間が増加する。",
+      "kr": "대상에게 부여된 약화 효과의 지속 시간이 증가합니다.",
+      "zh": "使目标身上的弱化效果持续时间增加。"
+    },
+    "icon": "IG_Buff_BuffdurationIncrease",
+    "isDebuff": true,
+    "keys": ["BT_EXTEND_DEBUFF", "INCREASE_DEBUFF_DURATION"],
+    "tag": "utility",
+    "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
+  },
+  "MISS_RATE_UP": {
+    "name": {
+      "en": "Miss Rate Up",
+      "jp": "ミスヒット発生率UP",
+      "kr": "빗나감 확률 증가",
+      "zh": "未命中率提升"
+    },
+    "desc": {
+      "en": "Increases the target's Miss rate by 15%. When a Miss occurs, damage is reduced by 50%, and debuffs and critical hits do not occur.",
+      "jp": "対象のミスヒット発生率が15%増加します。ミスヒット発生時、ダメージが50%減少し、弱体効果および会心は発生しません。",
+      "kr": "대상의 빗나감 확률이 15% 증가합니다. 빗나감 발생 시 피해량이 50% 감소하며, 약화 효과와 치명타가 발생하지 않습니다.",
+      "zh": "目标的未命中率提升15%。发生未命中时,伤害降低50%,且不会触发弱化效果与暴击。"
+    },
+    "icon": "SC_Buff_Stat_Avoid",
+    "isDebuff": false,
+    "keys": ["BT_STAT|ST_AVOID", "MISS_RATE_UP"],
+    "tag": "utility",
+    "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
+  },
+  "REDUCED_BUFF_DURATION": {
+    "name": {
+      "en": "Reduced Buff Duration",
+      "jp": "強化効果持続ターン減少",
+      "kr": "강화 효과 지속 시간 감소",
+      "zh": "强化效果持续时间减少"
+    },
+    "desc": {
+      "en": "Reduced duration of beneficial effects granted on target.",
+      "jp": "対象に付与された強化効果の持続時間が減少する。",
+      "kr": "대상에게 부여된 강화 효과의 지속 시간이 감소합니다.",
+      "zh": "使目标身上的强化效果持续时间减少。"
+    },
+    "icon": "IG_Buff_BuffdurationReduce",
+    "isDebuff": true,
+    "keys": ["BT_EXTEND_BUFF", "REDUCED_BUFF_DURATION"],
+    "tag": "utility",
+    "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
+  },
+  "REDUCED_EVASION": {
+    "name": {
+      "en": "Reduced Evasion",
+      "jp": "回避DOWN",
+      "kr": "회피 감소",
+      "zh": "回避降低"
+    },
+    "desc": {
+      "en": "Reduces Evasion by 50%.",
+      "jp": "対象の回避を50%DOWNさせる。",
+      "kr": "대상의 회피를 50% 감소시킵니다.",
+      "zh": "使目标的回避降低50%。"
+    },
+    "icon": "SC_Buff_Stat_Avoid",
+    "isDebuff": true,
+    "keys": ["BT_STAT|ST_AVOID", "REDUCED_EVASION"],
+    "tag": "statReduction",
+    "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
+  },
+  "SYS_BUFF_CHARGE_AP": {
+    "desc": {
+      "en": "Generates AP.",
+      "jp": "APを獲得する。",
+      "kr": "AP를 획득합니다.",
+      "zh": "获得AP。"
+    },
+    "keys": ["BT_AP_CHARGE"]
+  },
+  "SYS_BUFF_CHARGE_CP": {
+    "desc": {
+      "en": "Generates Chain Points.",
+      "jp": "CPを獲得する。",
+      "kr": "CP를 획득합니다.",
+      "zh": "获得CP。"
+    },
+    "keys": ["BT_CP_CHARGE"]
+  },
+  "SYS_BUFF_STEAL": {
+    "desc": {
+      "en": "Steal buff from the target.",
+      "jp": "対象の強化効果を奪う。",
+      "kr": "대상의 강화 효과를 빼앗습니다.",
+      "zh": "夺取目标的强化效果。"
+    }
+  },
+  "UNCOUNTERABLE": {
+    "name": {
+      "en": "Uncounterable",
+      "jp": "反撃不可",
+      "kr": "반격 불가",
+      "zh": "无法反击"
+    },
+    "desc": {
+      "en": "Negates enemy reactive strikes: Counterattack, Revenge, or Agile Response.",
+      "jp": "敵の反撃・復讐・迅速対応による反応攻撃を無効化する。",
+      "kr": "적의 반격·복수·신속 대응과 같은 반응 공격을 무효화합니다.",
+      "zh": "无效化敌方的反应攻击：反击、复仇或迅速应对。"
+    },
+    "icon": "IG_Buff_Seal_Counter",
+    "isDebuff": false,
+    "keys": ["BT_SEAL_COUNTER", "UNCOUNTERABLE"],
+    "tag": "utility",
+    "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
+  },
+  "UNIQUE_RESOURCE_DOWN": {
+    "name": {
+      "en": "Unique Resource Down",
+      "jp": "固有リソースDOWN",
+      "kr": "고유 자원 감소",
+      "zh": "固有资源减少"
+    },
+    "desc": {
+      "en": "Reduces the target's Unique Resource.",
+      "jp": "対象の固有リソースを減少させる。",
+      "kr": "대상의 고유 자원을 감소시킵니다.",
+      "zh": "减少目标的固有资源。"
+    },
+    "icon": "SC_Buff_resource_down",
+    "isDebuff": true,
+    "keys": ["BT_RESOURCE_DOWN", "UNIQUE_RESOURCE_DOWN"],
+    "tag": "utility",
+    "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
+  },
+  "WEAKNESS_GAUGE_DAMAGE": {
+    "name": {
+      "en": "Weakness Gauge Damage",
+      "jp": "弱点ゲージダメージ",
+      "kr": "약점 게이지 피해",
+      "zh": "弱点击破伤害"
+    },
+    "desc": {
+      "en": "Deal additional Weakness Gauge damage.",
+      "jp": "WGに追加ダメージを与える。",
+      "kr": "WG에 추가 피해를 줍니다.",
+      "zh": "对WG造成追加伤害。"
+    },
+    "icon": "SC_Buff_Effect_WG_Dmg",
+    "isDebuff": true,
+    "keys": ["BT_WG_REVERSE_HEAL", "BT_WG_DMG", "WEAKNESS_GAUGE_DAMAGE"],
+    "tag": "utility",
+    "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
+  }
+}

@@ -3469,6 +3469,7 @@
     "grade": "magic",
     "star": 0,
     "icon": "TI_present_2000008",
+    "characterLimit": "2000008",
     "desc": {
       "en": "Increases Rhona's Affinity Level by 300.",
       "jp": "ロナにプレゼントすると、親密度が300UPする。",
@@ -3488,6 +3489,7 @@
     "grade": "magic",
     "star": 0,
     "icon": "TI_present_2000037",
+    "characterLimit": "2000037",
     "desc": {
       "en": "Increases Veronica's Affinity Level by 300.",
       "jp": "ヴェロニカにプレゼントすると、親密度が300UPする。",
@@ -3507,6 +3509,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_2000036",
+    "characterLimit": "2000036",
     "desc": {
       "en": "Increases Tio's Affinity Level by 1500.",
       "jp": "ティオにプレゼントすると、親密度が1500UPする。",
@@ -3526,6 +3529,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_2000037_2",
+    "characterLimit": "2000037",
     "desc": {
       "en": "When gifted to Veronica, provides enough EXP (170,000) to grow Affinity to Level 10 at once.\\nIf a perfect bond of affection has already been established, this item can be sold for 100,000 Gold.",
       "jp": "【ヴェロニカ】との絆をより深めることができる証票。\\n【ヴェロニカ】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら10万ゴールドで売却可能。",
@@ -3545,6 +3549,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_2000025",
+    "characterLimit": "2000025",
     "desc": {
       "en": "A token that allows you to forge an eternal bond of Affinity with [Beth].\\nWhen used, provides enough EXP (170,000) to grow [Beth]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 500,000 Gold.",
       "jp": "【ベス】との絆をより深めることができる証票。\\n【ベス】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら50万ゴールドで売却可能。",
@@ -3564,6 +3569,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_2000077",
+    "characterLimit": "2000077",
     "desc": {
       "en": "A token that allows you to forge an eternal bond of Affinity with [Kappa].\\nWhen used, provides enough EXP (170,000) to grow [Kappa]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 500,000 Gold.",
       "jp": "【カッパ】との絆をより深めることができる証票。\\n【カッパ】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら50万ゴールドで売却可能。",
@@ -3583,6 +3589,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_2000055",
+    "characterLimit": "2000055",
     "desc": {
       "en": "A token that allows you to forge an eternal bond of Affinity with [Aer].\\nWhen used, provides enough EXP (170,000) to grow [Aer]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 500,000 Gold.",
       "jp": "【アエル】との絆をより深めることができる証票。\\n【アエル】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら50万ゴールドで売却可能。",
@@ -3602,6 +3609,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_2000044",
+    "characterLimit": "2000044",
     "desc": {
       "en": "A token that allows you to forge an eternal bond of Affinity with [Laplace].\\nWhen used, provides enough EXP (170,000) to grow [Laplace]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 500,000 Gold.",
       "jp": "【ラプラス】との絆をより深めることができる証票。\\n【ラプラス】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら50万ゴールドで売却可能。",
@@ -3621,6 +3629,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_2000022",
+    "characterLimit": "2000022",
     "desc": {
       "en": "A token that allows you to forge an eternal bond of Affinity with [Noa].\\nWhen used, provides enough EXP (170,000) to grow [Noa]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 500,000 Gold.",
       "jp": "【ノア】との絆をより深めることができる証票。\\n【ノア】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら50万ゴールドで売却可能。",
@@ -3640,6 +3649,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_2000043",
+    "characterLimit": "2000043",
     "desc": {
       "en": "A token that allows you to forge an eternal bond of Affinity with [Eternal].\\nWhen used, provides enough EXP (170,000) to grow [Eternal]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 500,000 Gold.",
       "jp": "【エターナル】との絆をより深めることができる証票。\\n【エターナル】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら50万ゴールドで売却可能。",
@@ -3659,6 +3669,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_Public",
+    "characterLimit": "2000075",
     "desc": {
       "en": "A token that forges an eternal bond with [Demiurge Vlada].\\nWhen used, provides enough EXP (170,000) to grow [Demiurge Vlada]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 300 Ether (Free).",
       "jp": "【デミウルゴス・ヴラダ】との絆をより深めることができる証票。\\n使用時、【デミウルゴス・ヴラダ】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら300無償エーテルで売却可能。",
@@ -3678,6 +3689,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_Public",
+    "characterLimit": "2000108",
     "desc": {
       "en": "A token that allows you to forge an eternal bond of Affinity with [Viella].\\nWhen used, provides enough EXP (170,000) to grow [Viella]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 300 Ether (Free).",
       "jp": "【ビエラ】との絆をより深めることができる証票。\\n【ビエラ】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら300無償エーテルで売却可能。",
@@ -3697,6 +3709,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_Public",
+    "characterLimit": "2000107",
     "desc": {
       "en": "A token that forges an eternal bond with [Fortuna].\\nWhen used, provides enough EXP (170,000) to grow [Fortuna]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 300 Ether (Free).",
       "jp": "【フォルトゥナ】との絆をより深めることができる証票。\\n【フォルトゥナ】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら300無償エーテルで売却可能。",
@@ -3716,6 +3729,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_Public",
+    "characterLimit": "2000090",
     "desc": {
       "en": "A token that forges an eternal bond with [Gnosis Dahlia].\\nWhen used, provides enough EXP (170,000) to grow [Gnosis Dahlia]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 300 Ether (Free).",
       "jp": "【グノーシス・ダリア】との絆をより深めることができる証票。\\n【グノーシス・ダリア】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら300無償エーテルで売却可能。",
@@ -3735,6 +3749,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_Public",
+    "characterLimit": "2000109",
     "desc": {
       "en": "A token that forges an eternal bond with [Gnosis Viella].\\nWhen used, provides enough EXP (170,000) to grow [Gnosis Viella]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 300  Ether (Free).",
       "jp": "【グノーシス・ビエラ】との絆をより深めることができる証票。\\n【グノーシス・ビエラ】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら300無償エーテルで売却可能。",
@@ -3754,6 +3769,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_Public",
+    "characterLimit": "2000113",
     "desc": {
       "en": "A token that allows you to forge an eternal bond of Affinity with [Primine].\\nWhen used, provides enough EXP (170,000) to grow [Primine]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 300 Ether (Free).",
       "jp": "【プリミネ】と永遠の愛情関係を築くことができる証。\\n【プリミネ】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら300無償エーテルで売却可能。",
@@ -3773,6 +3789,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_Public",
+    "characterLimit": "2000117",
     "desc": {
       "en": "A token that forges an eternal bond with [Eris].\\nWhen used, provides enough EXP (170,000) to grow [Eris]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 300 Ether (Free).",
       "jp": "【エリス】との絆をより深めることができる証票。\\n【エリス】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら300無償エーテルで売却可能。",
@@ -3792,6 +3809,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_Public",
+    "characterLimit": "2000112",
     "desc": {
       "en": "A token that allows you to build an eternal bond of affection with [Gnosis Domine].\\nWhen used, provides enough EXP (170,000) to grow [Gnosis Domine]'s Affinity to Level 10 at once.\\nIf a perfect bond has already been established, this item can be sold for 300 Free Ether.",
       "jp": "【グノーシス・ドミネ】と永遠の愛情関係を築くことができる証。\\n【グノーシス・ドミネ】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら300無償エーテルで売却可能。",
@@ -3811,6 +3829,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_Public",
+    "characterLimit": "2000074",
     "desc": {
       "en": "A token that forges an eternal bond with [Dianne].\\nWhen used, provides enough EXP (170,000) to grow [Dianne]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 300 Ether (Free).",
       "jp": "【ダイアン】との絆をより深めることができる証票。\\n【ダイアン】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら300無償エーテルで売却可能。",
@@ -3830,6 +3849,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_Public",
+    "characterLimit": "2000087",
     "desc": {
       "en": "A token that forges an eternal bond of Affinity with [Rey].\\nWhen used, provides enough EXP (170,000) to grow [Rey]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 300 Free Ether.",
       "jp": "【レイ】と永遠の愛情関係を築くことができる証。\\n【レイ】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら300無償エーテルで売却可能。",
@@ -3849,6 +3869,7 @@
     "grade": "unique",
     "star": 0,
     "icon": "TI_present_Max_Public",
+    "characterLimit": "2000116",
     "desc": {
       "en": "A token that allows you to forge an eternal bond of Affinity with [Anarky].\\nWhen used, provides enough EXP (170,000) to grow [Anarky]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 300 Ether (Free).",
       "jp": "【アナーキ】と永遠の愛情関係を築くことができる証。\\n【アナーキ】の親密度が170,000上昇し、一度にLv.10まで上げることができます。\\n既に最大なら300無償エーテルで売却可能。",

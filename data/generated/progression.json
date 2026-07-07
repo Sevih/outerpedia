@@ -1,0 +1,9884 @@
+{
+  "evolutions": {
+    "1": [
+      {
+        "ev": 2,
+        "level": 20
+      },
+      {
+        "ev": 3,
+        "level": 40
+      },
+      {
+        "ev": 4,
+        "level": 60
+      },
+      {
+        "ev": 5,
+        "level": 80
+      },
+      {
+        "ev": 6,
+        "level": 100
+      },
+      {
+        "ev": 7,
+        "level": 105
+      },
+      {
+        "ev": 8,
+        "level": 110
+      },
+      {
+        "ev": 9,
+        "level": 120
+      }
+    ],
+    "2": [
+      {
+        "ev": 2,
+        "level": 20
+      },
+      {
+        "ev": 3,
+        "level": 40
+      },
+      {
+        "ev": 4,
+        "level": 60
+      },
+      {
+        "ev": 5,
+        "level": 80
+      },
+      {
+        "ev": 6,
+        "level": 100
+      },
+      {
+        "ev": 7,
+        "level": 105
+      },
+      {
+        "ev": 8,
+        "level": 110
+      },
+      {
+        "ev": 9,
+        "level": 120
+      }
+    ],
+    "3": [
+      {
+        "ev": 2,
+        "level": 20
+      },
+      {
+        "ev": 3,
+        "level": 40
+      },
+      {
+        "ev": 4,
+        "level": 60
+      },
+      {
+        "ev": 5,
+        "level": 80
+      },
+      {
+        "ev": 6,
+        "level": 100
+      },
+      {
+        "ev": 7,
+        "level": 105
+      },
+      {
+        "ev": 8,
+        "level": 110
+      },
+      {
+        "ev": 9,
+        "level": 120
+      }
+    ]
+  },
+  "evoRewards": {
+    "2000001": {
+      "2": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 493,
+        "def": 135,
+        "speed": 5
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "speed": 5
+      }
+    },
+    "2000002": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000003": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000004": {
+      "2": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 73,
+        "speed": 5
+      },
+      "7": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      },
+      "8": {
+        "buff_chance": 20,
+        "speed": 3,
+        "def": 25
+      },
+      "9": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      }
+    },
+    "2000005": {
+      "2": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "dmg_boost": 20
+      },
+      "7": {
+        "atk": 43,
+        "hp": 105,
+        "dmg_boost": 20
+      },
+      "8": {
+        "atk": 43,
+        "buff_chance": 20,
+        "dmg_boost": 20
+      },
+      "9": {
+        "atk": 43,
+        "hp": 105,
+        "def": 35
+      }
+    },
+    "2000006": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000007": {
+      "2": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 73,
+        "speed": 5
+      },
+      "7": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      },
+      "8": {
+        "buff_chance": 20,
+        "speed": 3,
+        "def": 25
+      },
+      "9": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      }
+    },
+    "2000008": {
+      "2": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 135,
+        "speed": 4
+      },
+      "7": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      },
+      "8": {
+        "atk": 33,
+        "dmg_reduce_rate": 20,
+        "hp": 224
+      },
+      "9": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      }
+    },
+    "2000009": {
+      "2": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 126,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 126,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 511,
+        "def": 125,
+        "speed": 4
+      },
+      "7": {
+        "hp": 270,
+        "def": 30,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000010": {
+      "2": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 135,
+        "speed": 4
+      },
+      "7": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      },
+      "8": {
+        "atk": 33,
+        "dmg_reduce_rate": 20,
+        "hp": 224
+      },
+      "9": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      }
+    },
+    "2000011": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000012": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000013": {
+      "2": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 73,
+        "speed": 5
+      },
+      "7": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      },
+      "8": {
+        "buff_chance": 20,
+        "speed": 3,
+        "def": 25
+      },
+      "9": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      }
+    },
+    "2000014": {
+      "2": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 73,
+        "speed": 5
+      },
+      "7": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      },
+      "8": {
+        "buff_chance": 20,
+        "speed": 3,
+        "def": 25
+      },
+      "9": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      }
+    },
+    "2000015": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000016": {
+      "2": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 135,
+        "speed": 4
+      },
+      "7": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      },
+      "8": {
+        "atk": 33,
+        "dmg_reduce_rate": 20,
+        "hp": 224
+      },
+      "9": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      }
+    },
+    "2000017": {
+      "2": {
+        "def": 13,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "def": 13,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "def": 19,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "def": 19,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 439,
+        "def": 180,
+        "buff_resist": 25
+      },
+      "7": {
+        "def": 35,
+        "hp": 250,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "def": 35,
+        "speed": 5,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "def": 35,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000018": {
+      "2": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "dmg_boost": 20
+      },
+      "7": {
+        "atk": 43,
+        "hp": 105,
+        "dmg_boost": 20
+      },
+      "8": {
+        "atk": 43,
+        "buff_chance": 20,
+        "dmg_boost": 20
+      },
+      "9": {
+        "atk": 43,
+        "hp": 105,
+        "def": 35
+      }
+    },
+    "2000019": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000020": {
+      "2": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 73,
+        "speed": 5
+      },
+      "7": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      },
+      "8": {
+        "buff_chance": 20,
+        "speed": 3,
+        "def": 25
+      },
+      "9": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      }
+    },
+    "2000021": {
+      "2": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 592,
+        "def": 150,
+        "speed": 4
+      },
+      "7": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "8": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "9": {
+        "hp": 300,
+        "def": 30,
+        "speed": 5
+      }
+    },
+    "2000022": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000023": {
+      "2": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 126,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 126,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 511,
+        "def": 125,
+        "speed": 4
+      },
+      "7": {
+        "hp": 270,
+        "def": 30,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000024": {
+      "2": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 493,
+        "def": 135,
+        "speed": 5
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "speed": 5
+      }
+    },
+    "2000025": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000026": {
+      "2": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 592,
+        "def": 150,
+        "speed": 4
+      },
+      "7": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "8": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "9": {
+        "hp": 300,
+        "def": 30,
+        "speed": 5
+      }
+    },
+    "2000027": {
+      "2": {
+        "def": 13,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "def": 13,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "def": 19,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "def": 19,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 439,
+        "def": 180,
+        "buff_resist": 25
+      },
+      "7": {
+        "def": 35,
+        "hp": 250,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "def": 35,
+        "speed": 5,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "def": 35,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000028": {
+      "2": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "dmg_boost": 20
+      },
+      "7": {
+        "atk": 43,
+        "hp": 105,
+        "dmg_boost": 20
+      },
+      "8": {
+        "atk": 43,
+        "buff_chance": 20,
+        "dmg_boost": 20
+      },
+      "9": {
+        "atk": 43,
+        "hp": 105,
+        "def": 35
+      }
+    },
+    "2000029": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000030": {
+      "2": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 592,
+        "def": 150,
+        "speed": 4
+      },
+      "7": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "8": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "9": {
+        "hp": 300,
+        "def": 30,
+        "speed": 5
+      }
+    },
+    "2000031": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000032": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000033": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000034": {
+      "2": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 135,
+        "speed": 4
+      },
+      "7": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      },
+      "8": {
+        "atk": 33,
+        "dmg_reduce_rate": 20,
+        "hp": 224
+      },
+      "9": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      }
+    },
+    "2000035": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000036": {
+      "2": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 126,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 126,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 511,
+        "def": 125,
+        "speed": 4
+      },
+      "7": {
+        "hp": 270,
+        "def": 30,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000037": {
+      "2": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 493,
+        "def": 135,
+        "speed": 5
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "speed": 5
+      }
+    },
+    "2000038": {
+      "2": {
+        "def": 13,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "def": 13,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "def": 19,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "def": 19,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 439,
+        "def": 180,
+        "buff_resist": 25
+      },
+      "7": {
+        "def": 35,
+        "hp": 250,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "def": 35,
+        "speed": 5,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "def": 35,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000039": {
+      "2": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 28,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 28,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 394,
+        "def": 73,
+        "dmg_reduce_rate": 24
+      },
+      "7": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "8": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "9": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "buff_chance": 20
+      }
+    },
+    "2000040": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000041": {
+      "2": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 28,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 28,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 394,
+        "def": 73,
+        "dmg_reduce_rate": 24
+      },
+      "7": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "8": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "9": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "buff_chance": 20
+      }
+    },
+    "2000042": {
+      "2": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 592,
+        "def": 150,
+        "speed": 4
+      },
+      "7": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "8": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "9": {
+        "hp": 300,
+        "def": 30,
+        "speed": 5
+      }
+    },
+    "2000043": {
+      "2": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 73,
+        "speed": 5
+      },
+      "7": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      },
+      "8": {
+        "buff_chance": 20,
+        "speed": 3,
+        "def": 25
+      },
+      "9": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      }
+    },
+    "2000044": {
+      "2": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "dmg_boost": 20
+      },
+      "7": {
+        "atk": 43,
+        "hp": 105,
+        "dmg_boost": 20
+      },
+      "8": {
+        "atk": 43,
+        "buff_chance": 20,
+        "dmg_boost": 20
+      },
+      "9": {
+        "atk": 43,
+        "hp": 105,
+        "def": 35
+      }
+    },
+    "2000045": {
+      "2": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "dmg_boost": 20
+      },
+      "7": {
+        "atk": 43,
+        "hp": 105,
+        "dmg_boost": 20
+      },
+      "8": {
+        "atk": 43,
+        "buff_chance": 20,
+        "dmg_boost": 20
+      },
+      "9": {
+        "atk": 43,
+        "hp": 105,
+        "def": 35
+      }
+    },
+    "2000046": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000047": {
+      "2": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 126,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 126,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 511,
+        "def": 125,
+        "speed": 4
+      },
+      "7": {
+        "hp": 270,
+        "def": 30,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000048": {
+      "2": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 592,
+        "def": 150,
+        "speed": 4
+      },
+      "7": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "8": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "9": {
+        "hp": 300,
+        "def": 30,
+        "speed": 5
+      }
+    },
+    "2000049": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000050": {
+      "2": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 126,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 126,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 511,
+        "def": 125,
+        "speed": 4
+      },
+      "7": {
+        "hp": 270,
+        "def": 30,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000051": {
+      "2": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 135,
+        "speed": 4
+      },
+      "7": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      },
+      "8": {
+        "atk": 33,
+        "dmg_reduce_rate": 20,
+        "hp": 224
+      },
+      "9": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      }
+    },
+    "2000052": {
+      "2": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 28,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 28,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 394,
+        "def": 73,
+        "dmg_reduce_rate": 24
+      },
+      "7": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "8": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "9": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "buff_chance": 20
+      }
+    },
+    "2000053": {
+      "2": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 135,
+        "speed": 4
+      },
+      "7": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      },
+      "8": {
+        "atk": 33,
+        "dmg_reduce_rate": 20,
+        "hp": 224
+      },
+      "9": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      }
+    },
+    "2000054": {
+      "2": {
+        "def": 13,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "def": 13,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "def": 19,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "def": 19,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 439,
+        "def": 180,
+        "buff_resist": 25
+      },
+      "7": {
+        "def": 35,
+        "hp": 250,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "def": 35,
+        "speed": 5,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "def": 35,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000055": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000056": {
+      "2": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 28,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 28,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 394,
+        "def": 73,
+        "dmg_reduce_rate": 24
+      },
+      "7": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "8": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "9": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "buff_chance": 20
+      }
+    },
+    "2000057": {
+      "2": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 493,
+        "def": 135,
+        "speed": 5
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "speed": 5
+      }
+    },
+    "2000058": {
+      "2": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 126,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 126,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 511,
+        "def": 125,
+        "speed": 4
+      },
+      "7": {
+        "hp": 270,
+        "def": 30,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000059": {
+      "2": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "dmg_boost": 20
+      },
+      "7": {
+        "atk": 43,
+        "hp": 105,
+        "dmg_boost": 20
+      },
+      "8": {
+        "atk": 43,
+        "buff_chance": 20,
+        "dmg_boost": 20
+      },
+      "9": {
+        "atk": 43,
+        "hp": 105,
+        "def": 35
+      }
+    },
+    "2000060": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000061": {
+      "2": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 592,
+        "def": 150,
+        "speed": 4
+      },
+      "7": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "8": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "9": {
+        "hp": 300,
+        "def": 30,
+        "speed": 5
+      }
+    },
+    "2000062": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000063": {
+      "2": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 493,
+        "def": 135,
+        "speed": 5
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "speed": 5
+      }
+    },
+    "2000064": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000065": {
+      "2": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "dmg_boost": 20
+      },
+      "7": {
+        "atk": 43,
+        "hp": 105,
+        "dmg_boost": 20
+      },
+      "8": {
+        "atk": 43,
+        "buff_chance": 20,
+        "dmg_boost": 20
+      },
+      "9": {
+        "atk": 43,
+        "hp": 105,
+        "def": 35
+      }
+    },
+    "2000066": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000067": {
+      "2": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "dmg_boost": 20
+      },
+      "7": {
+        "atk": 43,
+        "hp": 105,
+        "dmg_boost": 20
+      },
+      "8": {
+        "atk": 43,
+        "buff_chance": 20,
+        "dmg_boost": 20
+      },
+      "9": {
+        "atk": 43,
+        "hp": 105,
+        "def": 35
+      }
+    },
+    "2000068": {
+      "2": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 73,
+        "speed": 5
+      },
+      "7": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      },
+      "8": {
+        "buff_chance": 20,
+        "speed": 3,
+        "def": 25
+      },
+      "9": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      }
+    },
+    "2000069": {
+      "2": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 73,
+        "speed": 5
+      },
+      "7": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      },
+      "8": {
+        "buff_chance": 20,
+        "speed": 3,
+        "def": 25
+      },
+      "9": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      }
+    },
+    "2000070": {
+      "2": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 135,
+        "speed": 4
+      },
+      "7": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      },
+      "8": {
+        "atk": 33,
+        "dmg_reduce_rate": 20,
+        "hp": 224
+      },
+      "9": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      }
+    },
+    "2000071": {
+      "2": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 135,
+        "speed": 4
+      },
+      "7": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      },
+      "8": {
+        "atk": 33,
+        "dmg_reduce_rate": 20,
+        "hp": 224
+      },
+      "9": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      }
+    },
+    "2000072": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000073": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000074": {
+      "2": {
+        "def": 13,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "def": 13,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "def": 19,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "def": 19,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 439,
+        "def": 180,
+        "buff_resist": 25
+      },
+      "7": {
+        "def": 35,
+        "hp": 250,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "def": 35,
+        "speed": 5,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "def": 35,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000075": {
+      "2": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 28,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 28,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 394,
+        "def": 73,
+        "dmg_reduce_rate": 24
+      },
+      "7": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "8": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "9": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "buff_chance": 20
+      }
+    },
+    "2000076": {
+      "2": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "dmg_boost": 20
+      },
+      "7": {
+        "atk": 43,
+        "hp": 105,
+        "dmg_boost": 20
+      },
+      "8": {
+        "atk": 43,
+        "buff_chance": 20,
+        "dmg_boost": 20
+      },
+      "9": {
+        "atk": 43,
+        "hp": 105,
+        "def": 35
+      }
+    },
+    "2000077": {
+      "2": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 493,
+        "def": 135,
+        "speed": 5
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "speed": 5
+      }
+    },
+    "2000078": {
+      "2": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 28,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 28,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 394,
+        "def": 73,
+        "dmg_reduce_rate": 24
+      },
+      "7": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "8": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "9": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "buff_chance": 20
+      }
+    },
+    "2000079": {
+      "2": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 73,
+        "speed": 5
+      },
+      "7": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      },
+      "8": {
+        "buff_chance": 20,
+        "speed": 3,
+        "def": 25
+      },
+      "9": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      }
+    },
+    "2000080": {
+      "2": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 73,
+        "speed": 5
+      },
+      "7": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      },
+      "8": {
+        "buff_chance": 20,
+        "speed": 3,
+        "def": 25
+      },
+      "9": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      }
+    },
+    "2000081": {
+      "2": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 28,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 28,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 394,
+        "def": 73,
+        "dmg_reduce_rate": 24
+      },
+      "7": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "8": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "9": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "buff_chance": 20
+      }
+    },
+    "2000082": {
+      "2": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "dmg_boost": 20
+      },
+      "7": {
+        "atk": 43,
+        "hp": 105,
+        "dmg_boost": 20
+      },
+      "8": {
+        "atk": 43,
+        "buff_chance": 20,
+        "dmg_boost": 20
+      },
+      "9": {
+        "atk": 43,
+        "hp": 105,
+        "def": 35
+      }
+    },
+    "2000083": {
+      "2": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 126,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 126,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 511,
+        "def": 125,
+        "speed": 4
+      },
+      "7": {
+        "hp": 270,
+        "def": 30,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000084": {
+      "2": {
+        "def": 13,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "def": 13,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "def": 19,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "def": 19,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 439,
+        "def": 180,
+        "buff_resist": 25
+      },
+      "7": {
+        "def": 35,
+        "hp": 250,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "def": 35,
+        "speed": 5,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "def": 35,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000085": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000086": {
+      "2": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "dmg_boost": 20
+      },
+      "7": {
+        "atk": 43,
+        "hp": 105,
+        "dmg_boost": 20
+      },
+      "8": {
+        "atk": 43,
+        "buff_chance": 20,
+        "dmg_boost": 20
+      },
+      "9": {
+        "atk": 43,
+        "hp": 105,
+        "def": 35
+      }
+    },
+    "2000087": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000088": {
+      "2": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 592,
+        "def": 150,
+        "speed": 4
+      },
+      "7": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "8": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "9": {
+        "hp": 300,
+        "def": 30,
+        "speed": 5
+      }
+    },
+    "2000089": {
+      "2": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 135,
+        "speed": 4
+      },
+      "7": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      },
+      "8": {
+        "atk": 33,
+        "dmg_reduce_rate": 20,
+        "hp": 224
+      },
+      "9": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      }
+    },
+    "2000090": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000091": {
+      "2": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 73,
+        "speed": 5
+      },
+      "7": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      },
+      "8": {
+        "buff_chance": 20,
+        "speed": 3,
+        "def": 25
+      },
+      "9": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      }
+    },
+    "2000092": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000093": {
+      "2": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 28,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 28,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 394,
+        "def": 73,
+        "dmg_reduce_rate": 24
+      },
+      "7": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "8": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "9": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "buff_chance": 20
+      }
+    },
+    "2000094": {
+      "2": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 493,
+        "def": 135,
+        "speed": 5
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "speed": 5
+      }
+    },
+    "2000095": {
+      "2": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "dmg_boost": 20
+      },
+      "7": {
+        "atk": 43,
+        "hp": 105,
+        "dmg_boost": 20
+      },
+      "8": {
+        "atk": 43,
+        "buff_chance": 20,
+        "dmg_boost": 20
+      },
+      "9": {
+        "atk": 43,
+        "hp": 105,
+        "def": 35
+      }
+    },
+    "2000096": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000097": {
+      "2": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 28,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 28,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 394,
+        "def": 73,
+        "dmg_reduce_rate": 24
+      },
+      "7": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "8": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "9": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "buff_chance": 20
+      }
+    },
+    "2000098": {
+      "2": {
+        "def": 13,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "def": 13,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "def": 19,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "def": 19,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 439,
+        "def": 180,
+        "buff_resist": 25
+      },
+      "7": {
+        "def": 35,
+        "hp": 250,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "def": 35,
+        "speed": 5,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "def": 35,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000099": {
+      "2": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 135,
+        "speed": 4
+      },
+      "7": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      },
+      "8": {
+        "atk": 33,
+        "dmg_reduce_rate": 20,
+        "hp": 224
+      },
+      "9": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      }
+    },
+    "2000100": {
+      "2": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 126,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 126,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 511,
+        "def": 125,
+        "speed": 4
+      },
+      "7": {
+        "hp": 270,
+        "def": 30,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000101": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000102": {
+      "2": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 592,
+        "def": 150,
+        "speed": 4
+      },
+      "7": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "8": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "9": {
+        "hp": 300,
+        "def": 30,
+        "speed": 5
+      }
+    },
+    "2000103": {
+      "2": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 15,
+        "hp": 72,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 22,
+        "hp": 108,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 592,
+        "def": 150,
+        "speed": 4
+      },
+      "7": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "8": {
+        "hp": 300,
+        "def": 30,
+        "dmg_reduce_rate": 20
+      },
+      "9": {
+        "hp": 300,
+        "def": 30,
+        "speed": 5
+      }
+    },
+    "2000105": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000106": {
+      "2": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 493,
+        "def": 135,
+        "speed": 5
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "speed": 5
+      }
+    },
+    "2000107": {
+      "2": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 73,
+        "speed": 5
+      },
+      "7": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      },
+      "8": {
+        "buff_chance": 20,
+        "speed": 3,
+        "def": 25
+      },
+      "9": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      }
+    },
+    "2000108": {
+      "2": {
+        "def": 13,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "def": 13,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "def": 19,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "def": 19,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 439,
+        "def": 180,
+        "buff_resist": 25
+      },
+      "7": {
+        "def": 35,
+        "hp": 250,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "def": 35,
+        "speed": 5,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "def": 35,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000109": {
+      "2": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 135,
+        "speed": 4
+      },
+      "7": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      },
+      "8": {
+        "atk": 33,
+        "dmg_reduce_rate": 20,
+        "hp": 224
+      },
+      "9": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      }
+    },
+    "2000110": {
+      "2": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 28,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 28,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 394,
+        "def": 73,
+        "dmg_reduce_rate": 24
+      },
+      "7": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "8": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "9": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "buff_chance": 20
+      }
+    },
+    "2000111": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000112": {
+      "2": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 24,
+        "def": 10,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 36,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 73,
+        "speed": 5
+      },
+      "7": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      },
+      "8": {
+        "buff_chance": 20,
+        "speed": 3,
+        "def": 25
+      },
+      "9": {
+        "buff_chance": 20,
+        "hp": 224,
+        "def": 25
+      }
+    },
+    "2000113": {
+      "2": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 84,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 126,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 126,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 511,
+        "def": 125,
+        "speed": 4
+      },
+      "7": {
+        "hp": 270,
+        "def": 30,
+        "dmg_reduce_rate": 25
+      },
+      "8": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      },
+      "9": {
+        "hp": 270,
+        "buff_resist": 25,
+        "dmg_reduce_rate": 25
+      }
+    },
+    "2000114": {
+      "2": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 135,
+        "speed": 4
+      },
+      "7": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      },
+      "8": {
+        "atk": 33,
+        "dmg_reduce_rate": 20,
+        "hp": 224
+      },
+      "9": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      }
+    },
+    "2000116": {
+      "2": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 10
+      },
+      "3": {
+        "def": 26,
+        "hp": 92,
+        "buff_chance": 20
+      },
+      "4": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "5": {
+        "def": 39,
+        "hp": 138,
+        "buff_chance": 20
+      },
+      "6": {
+        "hp": 493,
+        "def": 135,
+        "speed": 5
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "hp": 300
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 28,
+        "speed": 5
+      }
+    },
+    "2000117": {
+      "2": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 26,
+        "speed": 2,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 39,
+        "speed": 4,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "atk": 39
+      },
+      "7": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      },
+      "8": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "buff_chance": 20
+      },
+      "9": {
+        "dmg_boost": 20,
+        "atk": 39,
+        "hp": 201
+      }
+    },
+    "2000119": {
+      "2": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "dmg_boost": 20
+      },
+      "7": {
+        "atk": 43,
+        "hp": 105,
+        "dmg_boost": 20
+      },
+      "8": {
+        "atk": 43,
+        "buff_chance": 20,
+        "dmg_boost": 20
+      },
+      "9": {
+        "atk": 43,
+        "hp": 105,
+        "def": 35
+      }
+    },
+    "2000120": {
+      "2": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 29,
+        "hp": 70,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 43,
+        "hp": 105,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 403,
+        "def": 73,
+        "dmg_boost": 20
+      },
+      "7": {
+        "atk": 43,
+        "hp": 105,
+        "dmg_boost": 20
+      },
+      "8": {
+        "atk": 43,
+        "buff_chance": 20,
+        "dmg_boost": 20
+      },
+      "9": {
+        "atk": 43,
+        "hp": 105,
+        "def": 35
+      }
+    }
+  },
+  "limitBreak": {
+    "1_earth": [
+      {
+        "step": 1,
+        "requireLevel": 100,
+        "maxLevel": 105,
+        "pieces": 25,
+        "recallItemId": "30514",
+        "price": 250000,
+        "statModifier": 200
+      },
+      {
+        "step": 2,
+        "requireLevel": 105,
+        "maxLevel": 110,
+        "pieces": 75,
+        "recallItemId": "30514",
+        "price": 500000,
+        "statModifier": 400
+      },
+      {
+        "step": 3,
+        "requireLevel": 110,
+        "maxLevel": 120,
+        "pieces": 100,
+        "recallItemId": "30514",
+        "price": 1000000,
+        "statModifier": 700
+      }
+    ],
+    "2_earth": [
+      {
+        "step": 1,
+        "requireLevel": 100,
+        "maxLevel": 105,
+        "pieces": 40,
+        "recallItemId": "30514",
+        "price": 400000,
+        "statModifier": 200
+      },
+      {
+        "step": 2,
+        "requireLevel": 105,
+        "maxLevel": 110,
+        "pieces": 80,
+        "recallItemId": "30514",
+        "price": 800000,
+        "statModifier": 400
+      },
+      {
+        "step": 3,
+        "requireLevel": 110,
+        "maxLevel": 120,
+        "pieces": 180,
+        "recallItemId": "30514",
+        "price": 1600000,
+        "statModifier": 700
+      }
+    ],
+    "3_earth": [
+      {
+        "step": 1,
+        "requireLevel": 100,
+        "maxLevel": 105,
+        "pieces": 50,
+        "recallItemId": "30514",
+        "price": 500000,
+        "statModifier": 200
+      },
+      {
+        "step": 2,
+        "requireLevel": 105,
+        "maxLevel": 110,
+        "pieces": 100,
+        "recallItemId": "30514",
+        "price": 1000000,
+        "statModifier": 400
+      },
+      {
+        "step": 3,
+        "requireLevel": 110,
+        "maxLevel": 120,
+        "pieces": 250,
+        "recallItemId": "30514",
+        "price": 2000000,
+        "statModifier": 700
+      }
+    ],
+    "1_fire": [
+      {
+        "step": 1,
+        "requireLevel": 100,
+        "maxLevel": 105,
+        "pieces": 25,
+        "recallItemId": "30512",
+        "price": 250000,
+        "statModifier": 200
+      },
+      {
+        "step": 2,
+        "requireLevel": 105,
+        "maxLevel": 110,
+        "pieces": 75,
+        "recallItemId": "30512",
+        "price": 500000,
+        "statModifier": 400
+      },
+      {
+        "step": 3,
+        "requireLevel": 110,
+        "maxLevel": 120,
+        "pieces": 100,
+        "recallItemId": "30512",
+        "price": 1000000,
+        "statModifier": 700
+      }
+    ],
+    "2_fire": [
+      {
+        "step": 1,
+        "requireLevel": 100,
+        "maxLevel": 105,
+        "pieces": 40,
+        "recallItemId": "30512",
+        "price": 400000,
+        "statModifier": 200
+      },
+      {
+        "step": 2,
+        "requireLevel": 105,
+        "maxLevel": 110,
+        "pieces": 80,
+        "recallItemId": "30512",
+        "price": 800000,
+        "statModifier": 400
+      },
+      {
+        "step": 3,
+        "requireLevel": 110,
+        "maxLevel": 120,
+        "pieces": 180,
+        "recallItemId": "30512",
+        "price": 1600000,
+        "statModifier": 700
+      }
+    ],
+    "3_fire": [
+      {
+        "step": 1,
+        "requireLevel": 100,
+        "maxLevel": 105,
+        "pieces": 50,
+        "recallItemId": "30512",
+        "price": 500000,
+        "statModifier": 200
+      },
+      {
+        "step": 2,
+        "requireLevel": 105,
+        "maxLevel": 110,
+        "pieces": 100,
+        "recallItemId": "30512",
+        "price": 1000000,
+        "statModifier": 400
+      },
+      {
+        "step": 3,
+        "requireLevel": 110,
+        "maxLevel": 120,
+        "pieces": 250,
+        "recallItemId": "30512",
+        "price": 2000000,
+        "statModifier": 700
+      }
+    ],
+    "1_water": [
+      {
+        "step": 1,
+        "requireLevel": 100,
+        "maxLevel": 105,
+        "pieces": 25,
+        "recallItemId": "30513",
+        "price": 250000,
+        "statModifier": 200
+      },
+      {
+        "step": 2,
+        "requireLevel": 105,
+        "maxLevel": 110,
+        "pieces": 75,
+        "recallItemId": "30513",
+        "price": 500000,
+        "statModifier": 400
+      },
+      {
+        "step": 3,
+        "requireLevel": 110,
+        "maxLevel": 120,
+        "pieces": 100,
+        "recallItemId": "30513",
+        "price": 1000000,
+        "statModifier": 700
+      }
+    ],
+    "2_water": [
+      {
+        "step": 1,
+        "requireLevel": 100,
+        "maxLevel": 105,
+        "pieces": 40,
+        "recallItemId": "30513",
+        "price": 400000,
+        "statModifier": 200
+      },
+      {
+        "step": 2,
+        "requireLevel": 105,
+        "maxLevel": 110,
+        "pieces": 80,
+        "recallItemId": "30513",
+        "price": 800000,
+        "statModifier": 400
+      },
+      {
+        "step": 3,
+        "requireLevel": 110,
+        "maxLevel": 120,
+        "pieces": 180,
+        "recallItemId": "30513",
+        "price": 1600000,
+        "statModifier": 700
+      }
+    ],
+    "3_water": [
+      {
+        "step": 1,
+        "requireLevel": 100,
+        "maxLevel": 105,
+        "pieces": 50,
+        "recallItemId": "30513",
+        "price": 500000,
+        "statModifier": 200
+      },
+      {
+        "step": 2,
+        "requireLevel": 105,
+        "maxLevel": 110,
+        "pieces": 100,
+        "recallItemId": "30513",
+        "price": 1000000,
+        "statModifier": 400
+      },
+      {
+        "step": 3,
+        "requireLevel": 110,
+        "maxLevel": 120,
+        "pieces": 250,
+        "recallItemId": "30513",
+        "price": 2000000,
+        "statModifier": 700
+      }
+    ],
+    "1_light": [
+      {
+        "step": 1,
+        "requireLevel": 100,
+        "maxLevel": 105,
+        "pieces": 25,
+        "recallItemId": "30515",
+        "price": 250000,
+        "statModifier": 200
+      },
+      {
+        "step": 2,
+        "requireLevel": 105,
+        "maxLevel": 110,
+        "pieces": 75,
+        "recallItemId": "30515",
+        "price": 500000,
+        "statModifier": 400
+      },
+      {
+        "step": 3,
+        "requireLevel": 110,
+        "maxLevel": 120,
+        "pieces": 100,
+        "recallItemId": "30515",
+        "price": 1000000,
+        "statModifier": 700
+      }
+    ],
+    "2_light": [
+      {
+        "step": 1,
+        "requireLevel": 100,
+        "maxLevel": 105,
+        "pieces": 40,
+        "recallItemId": "30515",
+        "price": 400000,
+        "statModifier": 200
+      },
+      {
+        "step": 2,
+        "requireLevel": 105,
+        "maxLevel": 110,
+        "pieces": 80,
+        "recallItemId": "30515",
+        "price": 800000,
+        "statModifier": 400
+      },
+      {
+        "step": 3,
+        "requireLevel": 110,
+        "maxLevel": 120,
+        "pieces": 180,
+        "recallItemId": "30515",
+        "price": 1600000,
+        "statModifier": 700
+      }
+    ],
+    "3_light": [
+      {
+        "step": 1,
+        "requireLevel": 100,
+        "maxLevel": 105,
+        "pieces": 50,
+        "recallItemId": "30515",
+        "price": 500000,
+        "statModifier": 200
+      },
+      {
+        "step": 2,
+        "requireLevel": 105,
+        "maxLevel": 110,
+        "pieces": 100,
+        "recallItemId": "30515",
+        "price": 1000000,
+        "statModifier": 400
+      },
+      {
+        "step": 3,
+        "requireLevel": 110,
+        "maxLevel": 120,
+        "pieces": 250,
+        "recallItemId": "30515",
+        "price": 2000000,
+        "statModifier": 700
+      }
+    ],
+    "1_dark": [
+      {
+        "step": 1,
+        "requireLevel": 100,
+        "maxLevel": 105,
+        "pieces": 25,
+        "recallItemId": "30516",
+        "price": 250000,
+        "statModifier": 200
+      },
+      {
+        "step": 2,
+        "requireLevel": 105,
+        "maxLevel": 110,
+        "pieces": 75,
+        "recallItemId": "30516",
+        "price": 500000,
+        "statModifier": 400
+      },
+      {
+        "step": 3,
+        "requireLevel": 110,
+        "maxLevel": 120,
+        "pieces": 100,
+        "recallItemId": "30516",
+        "price": 1000000,
+        "statModifier": 700
+      }
+    ],
+    "2_dark": [
+      {
+        "step": 1,
+        "requireLevel": 100,
+        "maxLevel": 105,
+        "pieces": 40,
+        "recallItemId": "30516",
+        "price": 400000,
+        "statModifier": 200
+      },
+      {
+        "step": 2,
+        "requireLevel": 105,
+        "maxLevel": 110,
+        "pieces": 80,
+        "recallItemId": "30516",
+        "price": 800000,
+        "statModifier": 400
+      },
+      {
+        "step": 3,
+        "requireLevel": 110,
+        "maxLevel": 120,
+        "pieces": 180,
+        "recallItemId": "30516",
+        "price": 1600000,
+        "statModifier": 700
+      }
+    ],
+    "3_dark": [
+      {
+        "step": 1,
+        "requireLevel": 100,
+        "maxLevel": 105,
+        "pieces": 50,
+        "recallItemId": "30516",
+        "price": 500000,
+        "statModifier": 200
+      },
+      {
+        "step": 2,
+        "requireLevel": 105,
+        "maxLevel": 110,
+        "pieces": 100,
+        "recallItemId": "30516",
+        "price": 1000000,
+        "statModifier": 400
+      },
+      {
+        "step": 3,
+        "requireLevel": 110,
+        "maxLevel": 120,
+        "pieces": 250,
+        "recallItemId": "30516",
+        "price": 2000000,
+        "statModifier": 700
+      }
+    ]
+  },
+  "premium": {
+    "2000001": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000002": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000004": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000005": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000006": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000007": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000008": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000009": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000010": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000013": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000014": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000015": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000016": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000017": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000018": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000019": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000020": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000021": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000022": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000023": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000024": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000025": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000026": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000027": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000028": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000030": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000032": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000033": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000034": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000036": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000037": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000038": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000042": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000043": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000044": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000045": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000047": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000048": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000049": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000050": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000051": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000053": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000054": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000055": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000057": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000058": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000059": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000061": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000062": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000063": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000065": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000067": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000068": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000069": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000070": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000071": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000073": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000074": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000076": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000077": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000079": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000080": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000082": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000083": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000084": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000085": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000086": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000087": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000088": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000089": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000090": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000091": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000094": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000095": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000096": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000098": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000099": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000100": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000102": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000103": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000106": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000107": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000108": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000109": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000112": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000113": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000114": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000116": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2000117": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2000119": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2000120": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010001": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2010004": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010005": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010007": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010009": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010019": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2010022": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2010023": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010025": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2010037": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2010043": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010044": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010053": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2010054": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010055": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2010058": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010061": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2010062": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2010063": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2010065": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010068": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010069": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010071": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2010074": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010076": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010077": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2010079": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010080": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010082": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010083": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010084": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010087": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2010088": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2010089": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2010090": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2010091": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010094": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2010098": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010107": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010108": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010109": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2010112": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010113": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010114": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2010116": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2010117": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2020019": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2020022": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2020023": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2020025": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2020037": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2020059": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2020061": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2020065": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2020068": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2020069": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2020071": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2020074": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2020076": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2020077": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2020079": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2020084": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2020087": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2020112": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2020117": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2030019": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2030037": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2030065": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2030071": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2030074": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2030084": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2030087": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2040065": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2050065": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2300001": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2300005": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2300009": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2400001": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2400015": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2400016": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2500001": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2500005": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2500009": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2500015": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2500037": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2500038": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
+    "2600001": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2600037": {
+      "stat": "def",
+      "mode": "rate",
+      "value": 150
+    },
+    "2700003": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 102
+    },
+    "2700005": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 102
+    },
+    "2700056": {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 500
+    },
+    "2710005": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 102
+    },
+    "2710056": {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 500
+    },
+    "2720056": {
+      "stat": "buff_chance",
+      "mode": "rate",
+      "value": 500
+    }
+  },
+  "codex": [
+    {
+      "atk": 0,
+      "def": 0,
+      "hp": 0
+    },
+    {
+      "atk": 20,
+      "def": 0,
+      "hp": 0
+    },
+    {
+      "atk": 20,
+      "def": 20,
+      "hp": 0
+    },
+    {
+      "atk": 20,
+      "def": 20,
+      "hp": 40
+    },
+    {
+      "atk": 40,
+      "def": 20,
+      "hp": 40
+    },
+    {
+      "atk": 40,
+      "def": 40,
+      "hp": 40
+    },
+    {
+      "atk": 40,
+      "def": 40,
+      "hp": 70
+    },
+    {
+      "atk": 70,
+      "def": 40,
+      "hp": 70
+    },
+    {
+      "atk": 70,
+      "def": 70,
+      "hp": 70
+    },
+    {
+      "atk": 70,
+      "def": 70,
+      "hp": 100
+    },
+    {
+      "atk": 100,
+      "def": 70,
+      "hp": 100
+    },
+    {
+      "atk": 100,
+      "def": 100,
+      "hp": 100
+    }
+  ],
+  "quirks": {
+    "elemental": {
+      "earth": {
+        "stat": [
+          {
+            "stat": "critical_dmg_rate",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "critical_rate",
+            "applying": "add",
+            "value": 30
+          },
+          {
+            "stat": "critical_rate",
+            "applying": "add",
+            "value": 30
+          },
+          {
+            "stat": "critical_rate",
+            "applying": "add",
+            "value": 40
+          },
+          {
+            "stat": "critical_dmg_rate",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "critical_dmg_rate",
+            "applying": "add",
+            "value": 100
+          }
+        ],
+        "buff": []
+      },
+      "water": {
+        "stat": [
+          {
+            "stat": "critical_dmg_rate",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "critical_rate",
+            "applying": "add",
+            "value": 30
+          },
+          {
+            "stat": "critical_dmg_rate",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "critical_rate",
+            "applying": "add",
+            "value": 40
+          },
+          {
+            "stat": "critical_rate",
+            "applying": "add",
+            "value": 30
+          },
+          {
+            "stat": "critical_dmg_rate",
+            "applying": "add",
+            "value": 100
+          }
+        ],
+        "buff": []
+      },
+      "fire": {
+        "stat": [
+          {
+            "stat": "critical_rate",
+            "applying": "add",
+            "value": 40
+          },
+          {
+            "stat": "critical_rate",
+            "applying": "add",
+            "value": 30
+          },
+          {
+            "stat": "critical_dmg_rate",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "critical_dmg_rate",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "critical_dmg_rate",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "critical_rate",
+            "applying": "add",
+            "value": 30
+          }
+        ],
+        "buff": []
+      },
+      "light": {
+        "stat": [
+          {
+            "stat": "critical_dmg_rate",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "critical_rate",
+            "applying": "add",
+            "value": 30
+          },
+          {
+            "stat": "critical_rate",
+            "applying": "add",
+            "value": 30
+          },
+          {
+            "stat": "critical_rate",
+            "applying": "add",
+            "value": 40
+          },
+          {
+            "stat": "critical_dmg_rate",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "critical_dmg_rate",
+            "applying": "add",
+            "value": 100
+          }
+        ],
+        "buff": []
+      },
+      "dark": {
+        "stat": [
+          {
+            "stat": "critical_rate",
+            "applying": "add",
+            "value": 40
+          },
+          {
+            "stat": "critical_dmg_rate",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "critical_rate",
+            "applying": "add",
+            "value": 30
+          },
+          {
+            "stat": "critical_dmg_rate",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "critical_rate",
+            "applying": "add",
+            "value": 30
+          },
+          {
+            "stat": "critical_dmg_rate",
+            "applying": "add",
+            "value": 100
+          }
+        ],
+        "buff": []
+      }
+    },
+    "class": {
+      "striker": {
+        "stat": [],
+        "buff": [
+          {
+            "stat": "atk",
+            "applying": "rate",
+            "value": 150
+          }
+        ]
+      },
+      "ranger": {
+        "stat": [],
+        "buff": [
+          {
+            "stat": "buff_chance",
+            "applying": "add",
+            "value": 50
+          }
+        ]
+      }
+    },
+    "subclass": {
+      "attacker": {
+        "stat": [
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "speed",
+            "applying": "add",
+            "value": 2
+          },
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          }
+        ],
+        "buff": []
+      },
+      "bruiser": {
+        "stat": [
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "speed",
+            "applying": "add",
+            "value": 2
+          },
+          {
+            "stat": "speed",
+            "applying": "add",
+            "value": 2
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          }
+        ],
+        "buff": []
+      },
+      "wizard": {
+        "stat": [
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          }
+        ],
+        "buff": []
+      },
+      "enchanter": {
+        "stat": [
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "speed",
+            "applying": "add",
+            "value": 2
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "speed",
+            "applying": "add",
+            "value": 2
+          },
+          {
+            "stat": "speed",
+            "applying": "add",
+            "value": 2
+          },
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          }
+        ],
+        "buff": []
+      },
+      "vanguard": {
+        "stat": [
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          }
+        ],
+        "buff": []
+      },
+      "tactician": {
+        "stat": [
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          }
+        ],
+        "buff": []
+      },
+      "sweeper": {
+        "stat": [
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "speed",
+            "applying": "add",
+            "value": 2
+          }
+        ],
+        "buff": []
+      },
+      "phalanx": {
+        "stat": [
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "speed",
+            "applying": "add",
+            "value": 2
+          },
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          }
+        ],
+        "buff": []
+      },
+      "reliever": {
+        "stat": [
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          }
+        ],
+        "buff": []
+      },
+      "sage": {
+        "stat": [
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "atk",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "def",
+            "applying": "add",
+            "value": 200
+          },
+          {
+            "stat": "hp",
+            "applying": "add",
+            "value": 100
+          }
+        ],
+        "buff": []
+      }
+    }
+  },
+  "skill8": {
+    "108": {
+      "2": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 48
+        }
+      ]
+    },
+    "208": {
+      "2": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ]
+    },
+    "308": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "358": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "408": {
+      "2": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "508": {
+      "2": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        }
+      ]
+    },
+    "558": {
+      "2": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        }
+      ]
+    },
+    "608": {
+      "2": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ]
+    },
+    "708": {
+      "2": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "808": {
+      "2": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "908": {
+      "2": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "1008": {
+      "2": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "1108": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "1208": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "1308": {
+      "2": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "1408": {
+      "2": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "1508": {
+      "2": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ]
+    },
+    "1608": {
+      "2": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "1708": {
+      "2": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 5
+        }
+      ],
+      "3": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 5
+        }
+      ],
+      "4": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 10
+        }
+      ]
+    },
+    "1808": {
+      "2": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        }
+      ]
+    },
+    "1908": {
+      "2": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ]
+    },
+    "2008": {
+      "2": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "2108": {
+      "2": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "2208": {
+      "2": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ]
+    },
+    "2308": {
+      "2": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "2408": {
+      "2": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 48
+        }
+      ]
+    },
+    "2508": {
+      "2": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ]
+    },
+    "2608": {
+      "2": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "2708": {
+      "2": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 5
+        }
+      ],
+      "3": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 5
+        }
+      ],
+      "4": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 10
+        }
+      ]
+    },
+    "2808": {
+      "2": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        }
+      ]
+    },
+    "2908": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "3008": {
+      "2": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "3108": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "3208": {
+      "2": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ]
+    },
+    "3308": {
+      "2": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ]
+    },
+    "3408": {
+      "2": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "3508": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "3608": {
+      "2": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "3708": {
+      "2": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 48
+        }
+      ]
+    },
+    "3758": {
+      "2": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 48
+        }
+      ]
+    },
+    "3808": {
+      "2": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 5
+        }
+      ],
+      "3": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 5
+        }
+      ],
+      "4": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 10
+        }
+      ]
+    },
+    "3908": {
+      "2": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "4008": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "4108": {
+      "2": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "4208": {
+      "2": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "4308": {
+      "2": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "4358": {
+      "2": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "4408": {
+      "2": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        }
+      ]
+    },
+    "4508": {
+      "2": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        }
+      ]
+    },
+    "4608": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "4708": {
+      "2": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "4808": {
+      "2": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "4908": {
+      "2": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ]
+    },
+    "5008": {
+      "2": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "5108": {
+      "2": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "5208": {
+      "2": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "5308": {
+      "2": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ],
+      "3": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ],
+      "4": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 200
+        }
+      ]
+    },
+    "5408": {
+      "2": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 5
+        }
+      ],
+      "3": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 5
+        }
+      ],
+      "4": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 10
+        }
+      ]
+    },
+    "5508": {
+      "2": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ]
+    },
+    "5608": {
+      "2": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "5658": {
+      "2": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "5708": {
+      "2": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 48
+        }
+      ]
+    },
+    "5808": {
+      "2": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "5908": {
+      "2": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        }
+      ]
+    },
+    "6008": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "6108": {
+      "2": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "6208": {
+      "2": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ]
+    },
+    "6408": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "6508": {
+      "2": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        }
+      ]
+    },
+    "6608": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "6708": {
+      "2": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        }
+      ]
+    },
+    "6808": {
+      "2": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "6908": {
+      "2": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "7008": {
+      "2": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "7058": {
+      "2": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "7108": {
+      "2": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "7208": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "7308": {
+      "2": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ]
+    },
+    "7408": {
+      "2": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 5
+        }
+      ],
+      "3": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 5
+        }
+      ],
+      "4": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 10
+        }
+      ]
+    },
+    "7508": {
+      "2": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 100
+        }
+      ],
+      "3": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 100
+        }
+      ],
+      "4": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 200
+        }
+      ]
+    },
+    "7608": {
+      "2": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        }
+      ]
+    },
+    "7708": {
+      "2": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 48
+        }
+      ]
+    },
+    "7808": {
+      "2": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "7908": {
+      "2": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "8008": {
+      "2": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "8108": {
+      "2": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "atk",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "8208": {
+      "2": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        }
+      ]
+    },
+    "8308": {
+      "2": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "8408": {
+      "2": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 200
+        }
+      ],
+      "3": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 200
+        }
+      ],
+      "4": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 200
+        }
+      ]
+    },
+    "8508": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 50
+        },
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 650
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 50
+        },
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 650
+        }
+      ]
+    },
+    "8608": {
+      "3": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 1000
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 1000
+        }
+      ]
+    },
+    "8708": {
+      "2": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ]
+    },
+    "8808": {
+      "2": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 48
+        }
+      ]
+    },
+    "8908": {
+      "2": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "9008": {
+      "2": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ]
+    },
+    "9108": {
+      "2": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 60
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 60
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 60
+        },
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 350
+        }
+      ]
+    },
+    "9208": {
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "9308": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 50
+        },
+        {
+          "stat": "pierce_power_rate",
+          "applying": "add",
+          "value": 300
+        }
+      ]
+    },
+    "9408": {
+      "2": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 48
+        }
+      ]
+    },
+    "9508": {
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 50
+        }
+      ]
+    },
+    "9608": {
+      "3": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ],
+      "4": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "9708": {
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 50
+        }
+      ]
+    },
+    "9808": {
+      "2": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 5
+        }
+      ],
+      "3": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 5
+        }
+      ],
+      "4": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 10
+        }
+      ]
+    },
+    "9908": {
+      "2": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "10008": {
+      "3": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 10
+        }
+      ],
+      "4": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 10
+        }
+      ]
+    },
+    "10108": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "10208": {
+      "2": [
+        {
+          "stat": "buff_chance",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 60
+        },
+        {
+          "stat": "buff_chance",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 60
+        },
+        {
+          "stat": "buff_chance",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "10308": {
+      "2": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_resist",
+          "applying": "rate",
+          "value": 60
+        }
+      ]
+    },
+    "10508": {
+      "2": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 20
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 40
+        }
+      ]
+    },
+    "10608": {
+      "2": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 350
+        },
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 48
+        }
+      ],
+      "3": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 350
+        },
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 48
+        }
+      ],
+      "4": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 350
+        },
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 48
+        }
+      ]
+    },
+    "10808": {
+      "2": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 5
+        }
+      ],
+      "3": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 5
+        }
+      ],
+      "4": [
+        {
+          "stat": "speed",
+          "applying": "add",
+          "value": 10
+        }
+      ]
+    },
+    "10908": {
+      "2": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ],
+      "3": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ],
+      "4": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        },
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 1000
+        }
+      ]
+    },
+    "11208": {
+      "2": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 1000
+        }
+      ],
+      "3": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 1000
+        }
+      ],
+      "4": [
+        {
+          "stat": "buff_chance",
+          "applying": "rate",
+          "value": 1000
+        }
+      ]
+    },
+    "11308": {
+      "2": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "3": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 50
+        }
+      ],
+      "4": [
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 100
+        }
+      ]
+    },
+    "11408": {
+      "2": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        }
+      ],
+      "3": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        },
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 400
+        }
+      ],
+      "4": [
+        {
+          "stat": "def",
+          "applying": "rate",
+          "value": 100
+        },
+        {
+          "stat": "hp",
+          "applying": "rate",
+          "value": 400
+        }
+      ]
+    },
+    "11608": {
+      "2": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "3": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 24
+        }
+      ],
+      "4": [
+        {
+          "stat": "dmg_reduce_rate",
+          "applying": "add",
+          "value": 48
+        }
+      ]
+    },
+    "11708": {
+      "2": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 40
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 80
+        }
+      ]
+    },
+    "11908": {
+      "2": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        },
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 500
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        },
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 500
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        },
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 500
+        },
+        {
+          "stat": "pierce_power_rate",
+          "applying": "add",
+          "value": 300
+        }
+      ]
+    },
+    "12008": {
+      "2": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        },
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 500
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        },
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 500
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
+        },
+        {
+          "stat": "critical_dmg_rate",
+          "applying": "add",
+          "value": 500
+        },
+        {
+          "stat": "pierce_power_rate",
+          "applying": "add",
+          "value": 300
+        }
+      ]
+    }
+  }
+}

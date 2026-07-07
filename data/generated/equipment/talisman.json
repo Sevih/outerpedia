@@ -11,7 +11,14 @@
     "icon": "TI_Equipment_Talisman_01",
     "craftable": false,
     "options": ["10000"],
-    "passive": "3001"
+    "passives": [
+      {
+        "id": "3001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
   },
   "10002": {
     "name": {
@@ -25,7 +32,14 @@
     "icon": "TI_Equipment_Talisman_02",
     "craftable": false,
     "options": ["10000"],
-    "passive": "3002"
+    "passives": [
+      {
+        "id": "3002",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
   },
   "10003": {
     "name": {
@@ -39,7 +53,14 @@
     "icon": "TI_Equipment_Talisman_03",
     "craftable": false,
     "options": ["10000"],
-    "passive": "3003"
+    "passives": [
+      {
+        "id": "3003",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
   },
   "10004": {
     "name": {
@@ -53,7 +74,14 @@
     "icon": "TI_Equipment_Talisman_04",
     "craftable": false,
     "options": ["10000"],
-    "passive": "3004"
+    "passives": [
+      {
+        "id": "3004",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
   },
   "10005": {
     "name": {
@@ -67,7 +95,14 @@
     "icon": "TI_Equipment_Talisman_05",
     "craftable": false,
     "options": ["10000"],
-    "passive": "3005"
+    "passives": [
+      {
+        "id": "3005",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
   },
   "10006": {
     "name": {
@@ -81,7 +116,14 @@
     "icon": "TI_Equipment_Talisman_06",
     "craftable": false,
     "options": ["10000"],
-    "passive": "3006"
+    "passives": [
+      {
+        "id": "3006",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
   },
   "10007": {
     "name": {
@@ -95,7 +137,14 @@
     "icon": "TI_Equipment_Talisman_07",
     "craftable": false,
     "options": ["10000"],
-    "passive": "3007"
+    "passives": [
+      {
+        "id": "3007",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "10008": {
     "name": {
@@ -109,7 +158,14 @@
     "icon": "TI_Equipment_Talisman_08",
     "craftable": false,
     "options": ["10000"],
-    "passive": "3008"
+    "passives": [
+      {
+        "id": "3008",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "10009": {
     "name": {
@@ -123,7 +179,14 @@
     "icon": "TI_Equipment_Talisman_09",
     "craftable": false,
     "options": ["10000"],
-    "passive": "3009"
+    "passives": [
+      {
+        "id": "3009",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "10010": {
     "name": {
@@ -137,7 +200,14 @@
     "icon": "TI_Equipment_Talisman_10",
     "craftable": false,
     "options": ["10000"],
-    "passive": "3010"
+    "passives": [
+      {
+        "id": "3010",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "10011": {
     "name": {
@@ -151,7 +221,14 @@
     "icon": "TI_Equipment_Talisman_11",
     "craftable": false,
     "options": ["10000"],
-    "passive": "3011"
+    "passives": [
+      {
+        "id": "3011",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "10101": {
     "name": {
@@ -165,7 +242,14 @@
     "icon": "TI_Equipment_Talisman_01",
     "craftable": false,
     "options": ["10001"],
-    "passive": "3012"
+    "passives": [
+      {
+        "id": "3012",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
   },
   "10102": {
     "name": {
@@ -179,7 +263,14 @@
     "icon": "TI_Equipment_Talisman_02",
     "craftable": false,
     "options": ["10001"],
-    "passive": "3013"
+    "passives": [
+      {
+        "id": "3013",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
   },
   "10103": {
     "name": {
@@ -193,7 +284,14 @@
     "icon": "TI_Equipment_Talisman_03",
     "craftable": false,
     "options": ["10001"],
-    "passive": "3014"
+    "passives": [
+      {
+        "id": "3014",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
   },
   "10104": {
     "name": {
@@ -207,7 +305,14 @@
     "icon": "TI_Equipment_Talisman_04",
     "craftable": false,
     "options": ["10001"],
-    "passive": "3015"
+    "passives": [
+      {
+        "id": "3015",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
   },
   "10105": {
     "name": {
@@ -221,7 +326,14 @@
     "icon": "TI_Equipment_Talisman_05",
     "craftable": false,
     "options": ["10001"],
-    "passive": "3016"
+    "passives": [
+      {
+        "id": "3016",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
   },
   "10106": {
     "name": {
@@ -235,7 +347,14 @@
     "icon": "TI_Equipment_Talisman_06",
     "craftable": false,
     "options": ["10001"],
-    "passive": "3017"
+    "passives": [
+      {
+        "id": "3017",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
   },
   "10107": {
     "name": {
@@ -249,7 +368,14 @@
     "icon": "TI_Equipment_Talisman_07",
     "craftable": false,
     "options": ["10001"],
-    "passive": "3018"
+    "passives": [
+      {
+        "id": "3018",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "10108": {
     "name": {
@@ -263,7 +389,14 @@
     "icon": "TI_Equipment_Talisman_08",
     "craftable": false,
     "options": ["10001"],
-    "passive": "3019"
+    "passives": [
+      {
+        "id": "3019",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "10109": {
     "name": {
@@ -277,7 +410,14 @@
     "icon": "TI_Equipment_Talisman_09",
     "craftable": false,
     "options": ["10001"],
-    "passive": "3020"
+    "passives": [
+      {
+        "id": "3020",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "10110": {
     "name": {
@@ -291,7 +431,14 @@
     "icon": "TI_Equipment_Talisman_10",
     "craftable": false,
     "options": ["10001"],
-    "passive": "3021"
+    "passives": [
+      {
+        "id": "3021",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "10111": {
     "name": {
@@ -305,7 +452,14 @@
     "icon": "TI_Equipment_Talisman_11",
     "craftable": false,
     "options": ["10001"],
-    "passive": "3022"
+    "passives": [
+      {
+        "id": "3022",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "10201": {
     "name": {
@@ -319,7 +473,19 @@
     "icon": "TI_Equipment_Talisman_01",
     "craftable": false,
     "options": ["10002"],
-    "passive": "3023"
+    "passives": [
+      {
+        "id": "3023",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3123",
+        "level": 10,
+        "isAdd": true
+      }
+    ],
+    "mode": "CP"
   },
   "10202": {
     "name": {
@@ -333,7 +499,19 @@
     "icon": "TI_Equipment_Talisman_02",
     "craftable": false,
     "options": ["10002"],
-    "passive": "3024"
+    "passives": [
+      {
+        "id": "3024",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3124",
+        "level": 10,
+        "isAdd": true
+      }
+    ],
+    "mode": "CP"
   },
   "10203": {
     "name": {
@@ -347,7 +525,19 @@
     "icon": "TI_Equipment_Talisman_03",
     "craftable": false,
     "options": ["10002"],
-    "passive": "3025"
+    "passives": [
+      {
+        "id": "3025",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3125",
+        "level": 10,
+        "isAdd": true
+      }
+    ],
+    "mode": "CP"
   },
   "10204": {
     "name": {
@@ -361,7 +551,19 @@
     "icon": "TI_Equipment_Talisman_04",
     "craftable": false,
     "options": ["10002"],
-    "passive": "3026"
+    "passives": [
+      {
+        "id": "3026",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3126",
+        "level": 10,
+        "isAdd": true
+      }
+    ],
+    "mode": "CP"
   },
   "10205": {
     "name": {
@@ -375,7 +577,19 @@
     "icon": "TI_Equipment_Talisman_05",
     "craftable": false,
     "options": ["10002"],
-    "passive": "3027"
+    "passives": [
+      {
+        "id": "3027",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3127",
+        "level": 10,
+        "isAdd": true
+      }
+    ],
+    "mode": "CP"
   },
   "10206": {
     "name": {
@@ -389,7 +603,19 @@
     "icon": "TI_Equipment_Talisman_06",
     "craftable": false,
     "options": ["10002"],
-    "passive": "3028"
+    "passives": [
+      {
+        "id": "3028",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3128",
+        "level": 10,
+        "isAdd": true
+      }
+    ],
+    "mode": "CP"
   },
   "10207": {
     "name": {
@@ -403,7 +629,19 @@
     "icon": "TI_Equipment_Talisman_07",
     "craftable": false,
     "options": ["10002"],
-    "passive": "3029"
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "10208": {
     "name": {
@@ -417,7 +655,19 @@
     "icon": "TI_Equipment_Talisman_08",
     "craftable": false,
     "options": ["10002"],
-    "passive": "3030"
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "10209": {
     "name": {
@@ -431,7 +681,19 @@
     "icon": "TI_Equipment_Talisman_09",
     "craftable": false,
     "options": ["10002"],
-    "passive": "3031"
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "10210": {
     "name": {
@@ -445,7 +707,19 @@
     "icon": "TI_Equipment_Talisman_10",
     "craftable": false,
     "options": ["10002"],
-    "passive": "3032"
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "10211": {
     "name": {
@@ -459,7 +733,19 @@
     "icon": "TI_Equipment_Talisman_11",
     "craftable": false,
     "options": ["10002"],
-    "passive": "3033"
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "10996": {
     "name": {
@@ -473,7 +759,19 @@
     "icon": "TI_Equipment_Talisman_08",
     "craftable": false,
     "options": ["10002"],
-    "passive": "5002"
+    "passives": [
+      {
+        "id": "5002",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "5102",
+        "level": 10,
+        "isAdd": true
+      }
+    ],
+    "mode": "AP"
   },
   "10997": {
     "name": {
@@ -487,7 +785,19 @@
     "icon": "TI_Equipment_Talisman_03",
     "craftable": false,
     "options": ["10002"],
-    "passive": "5001"
+    "passives": [
+      {
+        "id": "5001",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "5101",
+        "level": 10,
+        "isAdd": true
+      }
+    ],
+    "mode": "CP"
   },
   "10998": {
     "name": {
@@ -501,7 +811,14 @@
     "icon": "TI_Equipment_Talisman_Fes",
     "craftable": false,
     "options": ["10001"],
-    "passive": "3035"
+    "passives": [
+      {
+        "id": "3035",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
   },
   "10999": {
     "name": {
@@ -515,7 +832,14 @@
     "icon": "TI_Equipment_Talisman_1st_Anniversary",
     "craftable": false,
     "options": ["10001"],
-    "passive": "3034"
+    "passives": [
+      {
+        "id": "3034",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "mode": "CP"
   },
   "95001": {
     "name": {
@@ -529,7 +853,19 @@
     "icon": "TI_Equipment_Talisman_07",
     "craftable": false,
     "options": ["13001"],
-    "passive": "3029"
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95002": {
     "name": {
@@ -543,7 +879,19 @@
     "icon": "TI_Equipment_Talisman_08",
     "craftable": false,
     "options": ["13001"],
-    "passive": "3030"
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95003": {
     "name": {
@@ -557,7 +905,19 @@
     "icon": "TI_Equipment_Talisman_09",
     "craftable": false,
     "options": ["13001"],
-    "passive": "3031"
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95004": {
     "name": {
@@ -571,7 +931,19 @@
     "icon": "TI_Equipment_Talisman_10",
     "craftable": false,
     "options": ["13001"],
-    "passive": "3032"
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95005": {
     "name": {
@@ -585,7 +957,19 @@
     "icon": "TI_Equipment_Talisman_11",
     "craftable": false,
     "options": ["13001"],
-    "passive": "3033"
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95011": {
     "name": {
@@ -599,7 +983,19 @@
     "icon": "TI_Equipment_Talisman_07",
     "craftable": false,
     "options": ["13002"],
-    "passive": "3029"
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95012": {
     "name": {
@@ -613,7 +1009,19 @@
     "icon": "TI_Equipment_Talisman_08",
     "craftable": false,
     "options": ["13002"],
-    "passive": "3030"
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95013": {
     "name": {
@@ -627,7 +1035,19 @@
     "icon": "TI_Equipment_Talisman_09",
     "craftable": false,
     "options": ["13002"],
-    "passive": "3031"
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95014": {
     "name": {
@@ -641,7 +1061,19 @@
     "icon": "TI_Equipment_Talisman_10",
     "craftable": false,
     "options": ["13002"],
-    "passive": "3032"
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95015": {
     "name": {
@@ -655,7 +1087,19 @@
     "icon": "TI_Equipment_Talisman_11",
     "craftable": false,
     "options": ["13002"],
-    "passive": "3033"
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95021": {
     "name": {
@@ -669,7 +1113,19 @@
     "icon": "TI_Equipment_Talisman_07",
     "craftable": false,
     "options": ["13003"],
-    "passive": "3029"
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95022": {
     "name": {
@@ -683,7 +1139,19 @@
     "icon": "TI_Equipment_Talisman_08",
     "craftable": false,
     "options": ["13003"],
-    "passive": "3030"
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95023": {
     "name": {
@@ -697,7 +1165,19 @@
     "icon": "TI_Equipment_Talisman_09",
     "craftable": false,
     "options": ["13003"],
-    "passive": "3031"
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95024": {
     "name": {
@@ -711,7 +1191,19 @@
     "icon": "TI_Equipment_Talisman_10",
     "craftable": false,
     "options": ["13003"],
-    "passive": "3032"
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95025": {
     "name": {
@@ -725,7 +1217,19 @@
     "icon": "TI_Equipment_Talisman_11",
     "craftable": false,
     "options": ["13003"],
-    "passive": "3033"
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95031": {
     "name": {
@@ -739,7 +1243,19 @@
     "icon": "TI_Equipment_Talisman_07",
     "craftable": false,
     "options": ["13004"],
-    "passive": "3029"
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95032": {
     "name": {
@@ -753,7 +1269,19 @@
     "icon": "TI_Equipment_Talisman_08",
     "craftable": false,
     "options": ["13004"],
-    "passive": "3030"
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95033": {
     "name": {
@@ -767,7 +1295,19 @@
     "icon": "TI_Equipment_Talisman_09",
     "craftable": false,
     "options": ["13004"],
-    "passive": "3031"
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95034": {
     "name": {
@@ -781,7 +1321,19 @@
     "icon": "TI_Equipment_Talisman_10",
     "craftable": false,
     "options": ["13004"],
-    "passive": "3032"
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95035": {
     "name": {
@@ -795,7 +1347,19 @@
     "icon": "TI_Equipment_Talisman_11",
     "craftable": false,
     "options": ["13004"],
-    "passive": "3033"
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95041": {
     "name": {
@@ -809,7 +1373,19 @@
     "icon": "TI_Equipment_Talisman_07",
     "craftable": false,
     "options": ["13005"],
-    "passive": "3029"
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95042": {
     "name": {
@@ -823,7 +1399,19 @@
     "icon": "TI_Equipment_Talisman_08",
     "craftable": false,
     "options": ["13005"],
-    "passive": "3030"
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95043": {
     "name": {
@@ -837,7 +1425,19 @@
     "icon": "TI_Equipment_Talisman_09",
     "craftable": false,
     "options": ["13005"],
-    "passive": "3031"
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95044": {
     "name": {
@@ -851,7 +1451,19 @@
     "icon": "TI_Equipment_Talisman_10",
     "craftable": false,
     "options": ["13005"],
-    "passive": "3032"
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95045": {
     "name": {
@@ -865,7 +1477,19 @@
     "icon": "TI_Equipment_Talisman_11",
     "craftable": false,
     "options": ["13005"],
-    "passive": "3033"
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95051": {
     "name": {
@@ -879,7 +1503,19 @@
     "icon": "TI_Equipment_Talisman_07",
     "craftable": false,
     "options": ["13006"],
-    "passive": "3029"
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95052": {
     "name": {
@@ -893,7 +1529,19 @@
     "icon": "TI_Equipment_Talisman_08",
     "craftable": false,
     "options": ["13006"],
-    "passive": "3030"
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95053": {
     "name": {
@@ -907,7 +1555,19 @@
     "icon": "TI_Equipment_Talisman_09",
     "craftable": false,
     "options": ["13006"],
-    "passive": "3031"
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95054": {
     "name": {
@@ -921,7 +1581,19 @@
     "icon": "TI_Equipment_Talisman_10",
     "craftable": false,
     "options": ["13006"],
-    "passive": "3032"
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95055": {
     "name": {
@@ -935,7 +1607,19 @@
     "icon": "TI_Equipment_Talisman_11",
     "craftable": false,
     "options": ["13006"],
-    "passive": "3033"
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95061": {
     "name": {
@@ -949,7 +1633,19 @@
     "icon": "TI_Equipment_Talisman_07",
     "craftable": false,
     "options": ["13007"],
-    "passive": "3029"
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95062": {
     "name": {
@@ -963,7 +1659,19 @@
     "icon": "TI_Equipment_Talisman_08",
     "craftable": false,
     "options": ["13007"],
-    "passive": "3030"
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95063": {
     "name": {
@@ -977,7 +1685,19 @@
     "icon": "TI_Equipment_Talisman_09",
     "craftable": false,
     "options": ["13007"],
-    "passive": "3031"
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95064": {
     "name": {
@@ -991,7 +1711,19 @@
     "icon": "TI_Equipment_Talisman_10",
     "craftable": false,
     "options": ["13007"],
-    "passive": "3032"
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95065": {
     "name": {
@@ -1005,7 +1737,19 @@
     "icon": "TI_Equipment_Talisman_11",
     "craftable": false,
     "options": ["13007"],
-    "passive": "3033"
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95071": {
     "name": {
@@ -1019,7 +1763,19 @@
     "icon": "TI_Equipment_Talisman_07",
     "craftable": false,
     "options": ["13008"],
-    "passive": "3029"
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95072": {
     "name": {
@@ -1033,7 +1789,19 @@
     "icon": "TI_Equipment_Talisman_08",
     "craftable": false,
     "options": ["13008"],
-    "passive": "3030"
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95073": {
     "name": {
@@ -1047,7 +1815,19 @@
     "icon": "TI_Equipment_Talisman_09",
     "craftable": false,
     "options": ["13008"],
-    "passive": "3031"
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95074": {
     "name": {
@@ -1061,7 +1841,19 @@
     "icon": "TI_Equipment_Talisman_10",
     "craftable": false,
     "options": ["13008"],
-    "passive": "3032"
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95075": {
     "name": {
@@ -1075,7 +1867,19 @@
     "icon": "TI_Equipment_Talisman_11",
     "craftable": false,
     "options": ["13008"],
-    "passive": "3033"
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95081": {
     "name": {
@@ -1089,7 +1893,19 @@
     "icon": "TI_Equipment_Talisman_07",
     "craftable": false,
     "options": ["13009"],
-    "passive": "3029"
+    "passives": [
+      {
+        "id": "3029",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3129",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95082": {
     "name": {
@@ -1103,7 +1919,19 @@
     "icon": "TI_Equipment_Talisman_08",
     "craftable": false,
     "options": ["13009"],
-    "passive": "3030"
+    "passives": [
+      {
+        "id": "3030",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3130",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95083": {
     "name": {
@@ -1117,7 +1945,19 @@
     "icon": "TI_Equipment_Talisman_09",
     "craftable": false,
     "options": ["13009"],
-    "passive": "3031"
+    "passives": [
+      {
+        "id": "3031",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3131",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95084": {
     "name": {
@@ -1131,7 +1971,19 @@
     "icon": "TI_Equipment_Talisman_10",
     "craftable": false,
     "options": ["13009"],
-    "passive": "3032"
+    "passives": [
+      {
+        "id": "3032",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3132",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   },
   "95085": {
     "name": {
@@ -1145,6 +1997,18 @@
     "icon": "TI_Equipment_Talisman_11",
     "craftable": false,
     "options": ["13009"],
-    "passive": "3033"
+    "passives": [
+      {
+        "id": "3033",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "3133",
+        "level": 10,
+        "isAdd": false
+      }
+    ],
+    "mode": "AP"
   }
 }
