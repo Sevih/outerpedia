@@ -6,3 +6,10 @@ allowBuilds:
   lefthook: true
   sharp: true
   unrs-resolver: true
+
+# pnpm 11 exige par défaut 24 h d'ancienneté sur toute release (protection
+# supply-chain — on la GARDE). caniuse-lite est son faux positif récurrent :
+# données pures (tables de support navigateurs), publiées plusieurs fois par
+# semaine, systématiquement « trop fraîches » après un bump de deps.
+minimumReleaseAgeExclude:
+  - caniuse-lite
