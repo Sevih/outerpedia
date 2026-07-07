@@ -20,9 +20,13 @@ RUN pnpm install --frozen-lockfile
 
 # ---- Étape 2 : build ----
 FROM base AS builder
-# Domaine baké dans le bundle client AU BUILD.
+# Domaines bakés dans le bundle client AU BUILD (NEXT_PUBLIC_* = build-time) :
+# sans IMG_BASE, les URLs d'images deviennent relatives → servies (404) par le
+# VPS au lieu du bucket R2.
 ARG NEXT_PUBLIC_BASE_DOMAIN=outerpedia.com
 ENV NEXT_PUBLIC_BASE_DOMAIN=${NEXT_PUBLIC_BASE_DOMAIN}
+ARG NEXT_PUBLIC_IMG_BASE=https://img.outerpedia.com
+ENV NEXT_PUBLIC_IMG_BASE=${NEXT_PUBLIC_IMG_BASE}
 ENV NODE_ENV=production
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
