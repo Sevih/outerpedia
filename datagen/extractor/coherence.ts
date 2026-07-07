@@ -13,6 +13,7 @@
  */
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { CHARACTER_CHECKS, type ControlGlossaries } from './v2-control';
 
 type Dict = Record<string, unknown>;
 const load = (p: string): Dict => JSON.parse(readFileSync(resolve(p), 'utf8')) as Dict;
@@ -41,63 +42,12 @@ for (const f of readdirSync(resolve(LEGACY_DIR))) {
   }
 }
 
-// --- 1) Cohérence des valeurs -------------------------------------------------
-
-const stripVA = (s: unknown) =>
-  String(s ?? '')
-    .replace(/^(VA|CV)\.\s*/, '')
-    .trim()
-    .toLowerCase();
-const gloss = (g: Dict, slug: unknown) => (g[String(slug)] as Dict | undefined)?.en;
-
-interface Check {
-  field: string;
-  /** valeur comparable côté V3 */
-  v3: (c: Dict) => unknown;
-  /** valeur comparable côté V2 */
-  v2: (o: Dict) => unknown;
-  /** ignore l'entité (ex. règle de nom des fusions) */
-  skip?: (c: Dict, o: Dict) => boolean;
-  /** différence attendue → informatif, pas un échec */
-  info?: string;
-}
-
-const CHECKS: Check[] = [
-  {
-    field: 'name',
-    v3: (c) =>
-      c.showNickName && c.nickname
-        ? `${(c.nickname as Dict).en} ${(c.name as Dict).en}`
-        : (c.name as Dict).en,
-    v2: (o) => o.Fullname,
-    skip: (c) => Boolean(c.originalCharacter), // fusions : V2 = "Core Fusion: X" (voulu)
-  },
-  { field: 'rarity', v3: (c) => c.rarity, v2: (o) => o.Rarity },
-  { field: 'element', v3: (c) => gloss(G.elements, c.element), v2: (o) => o.Element },
-  { field: 'class', v3: (c) => gloss(G.classes, c.class), v2: (o) => o.Class },
-  {
-    field: 'subClass',
-    v3: (c) => c.subClass,
-    v2: (o) => String(o.SubClass ?? '').toLowerCase() || undefined,
-  },
-  {
-    field: 'chainType',
-    v3: (c) => c.chainType,
-    v2: (o) => String(o.Chain_Type ?? '').toLowerCase() || undefined,
-  },
-  { field: 'gift', v3: (c) => gloss(G.gifts, c.gift), v2: (o) => o.gift },
-  { field: 'originalCharacter', v3: (c) => c.originalCharacter, v2: (o) => o.originalCharacter },
-  {
-    field: 'voiceActor',
-    v3: (c) => stripVA((c.voiceActor as Dict | undefined)?.en),
-    v2: (o) => stripVA(o.VoiceActor),
-    info: 'V3 = valeur du jeu (choix A) ; écarts = orthographe V2',
-  },
-];
+// --- 1) Cohérence des valeurs (CHECKS partagés avec l'admin : v2-control) -----
 
 function valueCoherence() {
   console.log('\n━━━ 1. COHÉRENCE DES VALEURS (V3 vs V2) ━━━');
-  for (const chk of CHECKS) {
+  const CG = G as unknown as ControlGlossaries;
+  for (const chk of CHARACTER_CHECKS) {
     let ok = 0,
       ko = 0,
       seen = 0;
@@ -108,11 +58,11 @@ function valueCoherence() {
       const a = chk.v2(o);
       if (a === undefined || a === '') continue; // V2 n'a pas la donnée
       seen++;
-      if (chk.v3(c) === a) ok++;
+      if (chk.v3(c, CG) === a) ok++;
       else {
         ko++;
         if (ex.length < 3)
-          ex.push(`${id}: v3=${JSON.stringify(chk.v3(c))} v2=${JSON.stringify(a)}`);
+          ex.push(`${id}: v3=${JSON.stringify(chk.v3(c, CG))} v2=${JSON.stringify(a)}`);
       }
     }
     const tag = ko === 0 ? '✅' : chk.info ? 'ℹ️ ' : '❌';

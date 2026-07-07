@@ -29,6 +29,9 @@ export interface TranscendStep {
   wgDmg: boolean;
   /** Étoile « plus » (palier visuel sans gain de stat). */
   starPlus: number;
+  /** Affichage DÉCLARÉ par le jeu : étoile montrée + couleur de la dernière. */
+  showStar: number;
+  starColor: string;
   /** Coût du palier. */
   materials: number;
   price: number;
@@ -52,6 +55,8 @@ function toStep(r: Row): TranscendStep {
     burst3: bool(r.Burst3),
     wgDmg: bool(r.WGDMG),
     starPlus: num(r.StarPlus),
+    showStar: num(r.ShowUIStar),
+    starColor: (r.StarColor || 'YELLOW').toLowerCase(),
     materials: num(r.MaterialCount),
     price: num(r.Price),
   };
@@ -69,6 +74,8 @@ const stepSchema: Schema = {
     burst3: { kind: 'boolean' },
     wgDmg: { kind: 'boolean' },
     starPlus: { kind: 'number', int: true, min: 0 },
+    showStar: { kind: 'number', int: true, min: 0 },
+    starColor: { kind: 'string' },
     materials: { kind: 'number', int: true, min: 0 },
     price: { kind: 'number', int: true, min: 0 },
   },

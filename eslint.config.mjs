@@ -26,6 +26,24 @@ const eslintConfig = defineConfig([
       ],
     },
   },
+  {
+    // FICHE PERSO — portage pixel-perfect de la V2 (layout éditorial sombre,
+    // markup V2 copié à l'identique, zinc/white compris). Exception ASSUMÉE et
+    // CONFINÉE : tout le reste du site reste sous le garde-fou tokens.
+    // À tokeniser le jour où la fiche devra suivre le thème clair.
+    files: [
+      'src/components/character/**/*.tsx',
+      'src/components/inline/**/*.tsx',
+      'src/components/ui/ShareButtons.tsx',
+      'src/lib/parse-text.tsx',
+      // NB: `**` couvre les segments littéraux `[lang]`/`[slug]` (crochets =
+      // classe de caractères en glob, non échappables proprement ici).
+      'src/app/**/characters/**/*.tsx',
+    ],
+    rules: {
+      'no-restricted-syntax': 'off',
+    },
+  },
   globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']),
 ]);
 

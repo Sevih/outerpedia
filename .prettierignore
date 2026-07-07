@@ -7,3 +7,4 @@ pnpm-lock.yaml
 
 # Snapshot V2 figé (oracle de complétude) — ne jamais reformater.
 data/legacy
+.assets-staging/

@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import type { Route } from 'next';
-import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { assertDevOnly } from '@/lib/admin/guard';
 
 // Outil local : jamais prérendu, 404 en prod.
@@ -11,7 +10,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="bg-surface-base text-content min-h-screen">
       <header className="border-line-subtle bg-surface-raised border-b">
-        <div className="mx-auto flex max-w-5xl items-center gap-4 px-6 py-3">
+        <div className="flex items-center gap-4 px-6 py-3">
           <Link href={'/admin' as Route} className="text-content-strong font-semibold">
             Admin
           </Link>
@@ -24,12 +23,39 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           >
             Personnages
           </Link>
-          <div className="ml-auto">
-            <ThemeToggle />
-          </div>
+          <Link
+            href={'/admin/effects' as Route}
+            className="text-content-muted hover:text-content-strong text-sm"
+          >
+            Effets
+          </Link>
+          <Link
+            href={'/admin/gear-presets' as Route}
+            className="text-content-muted hover:text-content-strong text-sm"
+          >
+            Presets gear
+          </Link>
+          <Link
+            href={'/admin/equipment' as Route}
+            className="text-content-muted hover:text-content-strong text-sm"
+          >
+            Équipement
+          </Link>
+          <Link
+            href={'/admin/editorial' as Route}
+            className="text-content-muted hover:text-content-strong text-sm"
+          >
+            Éditorial
+          </Link>
+          <Link
+            href={'/admin/tags' as Route}
+            className="text-content-muted hover:text-content-strong text-sm"
+          >
+            Tags
+          </Link>
         </div>
       </header>
-      <main className="mx-auto max-w-5xl px-6 py-6">{children}</main>
+      <main className="px-6 py-6">{children}</main>
     </div>
   );
 }

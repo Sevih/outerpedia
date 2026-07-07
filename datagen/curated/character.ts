@@ -26,18 +26,32 @@ export interface SkillPriority {
 /** Texte curé localisé (langues de jeu + fr communautaire), partiel. */
 export type LocalizedText = Partial<Record<'en' | 'jp' | 'kr' | 'zh' | 'fr', string>>;
 
-/** Référence vidéo curée (riche). */
+/** Référence vidéo curée (riche). `title`/`author`/`uploadDate` sont fetchés
+ * depuis YouTube ; la miniature se dérive de l'id (pas stockée). */
 export interface VideoRef {
   platform: string;
   id: string;
   title?: string;
   author?: string;
+  /** Date de publication ISO (JSON-LD VideoObject / SEO). */
+  uploadDate?: string;
 }
 
 /** Points forts / faibles curés (texte localisé, placeholders de buff conservés). */
 export interface ProsCons {
   pros?: LocalizedText[];
   cons?: LocalizedText[];
+}
+
+/**
+ * Un groupe de synergie : partenaires (IDS de persos — format V3, plus de
+ * slugs) + raison partagée (tags inline `{B/…}` résolus par parse-text).
+ * Format SIMPLIFIÉ vs V2 (`partner[].hero[]` + LangMap dupliquée ×4) : les
+ * langues identiques à l'anglais ne sont plus stockées (repli `en`).
+ */
+export interface SynergyGroup {
+  heroes: string[];
+  reason?: LocalizedText;
 }
 
 /** Contenu curé d'un personnage (tout optionnel : on ne stocke que le connu). */
@@ -52,8 +66,6 @@ export interface CharacterCurated {
   tags?: string[];
   /** Priorité de montée des compétences. */
   skillPriority?: SkillPriority;
-  /** Identifiant de vidéo (YouTube). */
-  video?: string;
   /** Tier PvE selon le palier de transcendance (transStar → tier). */
   rankByTranscend?: Record<string, string>;
   /** Rôle selon le palier de transcendance (transStar → rôle). */
@@ -64,6 +76,8 @@ export interface CharacterCurated {
   videos?: VideoRef[];
   /** Points forts / faibles. */
   prosCons?: ProsCons;
+  /** Groupes de synergie (partenaires conseillés + raison). */
+  synergies?: SynergyGroup[];
 }
 
 export const characterCuratedSchema: Schema = {
@@ -82,7 +96,6 @@ export const characterCuratedSchema: Schema = {
         ultimate: { kind: 'number', int: true, optional: true },
       },
     },
-    video: { kind: 'string', optional: true },
     rankByTranscend: { kind: 'record', of: { kind: 'string' }, optional: true },
     roleByTranscend: { kind: 'record', of: { kind: 'string' }, optional: true },
     limited: { kind: 'boolean', optional: true },
@@ -96,6 +109,7 @@ export const characterCuratedSchema: Schema = {
           id: { kind: 'string' },
           title: { kind: 'string', optional: true },
           author: { kind: 'string', optional: true },
+          uploadDate: { kind: 'string', optional: true },
         },
       },
     },
@@ -105,6 +119,17 @@ export const characterCuratedSchema: Schema = {
       fields: {
         pros: { kind: 'array', optional: true, of: { kind: 'record', of: { kind: 'string' } } },
         cons: { kind: 'array', optional: true, of: { kind: 'record', of: { kind: 'string' } } },
+      },
+    },
+    synergies: {
+      kind: 'array',
+      optional: true,
+      of: {
+        kind: 'object',
+        fields: {
+          heroes: { kind: 'array', of: { kind: 'string' } },
+          reason: { kind: 'record', of: { kind: 'string' }, optional: true },
+        },
       },
     },
   },
@@ -118,7 +143,6 @@ function compact(c: CharacterCurated): CharacterCurated {
   if (c.role) out.role = c.role;
   if (c.tags?.length) out.tags = c.tags;
   if (c.skillPriority && Object.keys(c.skillPriority).length) out.skillPriority = c.skillPriority;
-  if (c.video) out.video = c.video;
   if (c.rankByTranscend && Object.keys(c.rankByTranscend).length)
     out.rankByTranscend = c.rankByTranscend;
   if (c.roleByTranscend && Object.keys(c.roleByTranscend).length)
@@ -126,6 +150,7 @@ function compact(c: CharacterCurated): CharacterCurated {
   if (c.limited) out.limited = c.limited;
   if (c.videos?.length) out.videos = c.videos;
   if (c.prosCons && (c.prosCons.pros?.length || c.prosCons.cons?.length)) out.prosCons = c.prosCons;
+  if (c.synergies?.length) out.synergies = c.synergies;
   return out;
 }
 
@@ -148,22 +173,26 @@ function normSkillPriority(sp: unknown): SkillPriority | undefined {
 export function seedFromLegacy(
   legacyDir = 'data/legacy/character',
 ): Record<string, CharacterCurated> {
+  const YT_ID = /^[A-Za-z0-9_-]{11}$/;
   const dir = resolve(legacyDir);
   const out: Record<string, CharacterCurated> = {};
   for (const file of readdirSync(dir)) {
     if (!file.endsWith('.json')) continue;
     const d = JSON.parse(readFileSync(resolve(dir, file), 'utf8')) as Record<string, unknown>;
     const id = String(d.ID);
+    // L'ancien champ `video` (id seul) devient une entrée de `videos` (non
+    // enrichie ici : le seed est hors-ligne ; l'admin enrichit ensuite).
+    const legacyVideo = typeof d.video === 'string' && YT_ID.test(d.video) ? d.video : undefined;
     const curated = compact({
       rank: (d.rank as string) || undefined,
       rankPvp: (d.rank_pvp as string) || undefined,
       role: (d.role as CuratedRole) || undefined,
       tags: (d.tags as string[]) || undefined,
       skillPriority: normSkillPriority(d.skill_priority),
-      video: (d.video as string) || undefined,
       rankByTranscend: (d.rank_by_transcend as Record<string, string>) || undefined,
       roleByTranscend: (d.role_by_transcend as Record<string, string>) || undefined,
       limited: d.limited === true || undefined,
+      videos: legacyVideo ? [{ platform: 'youtube', id: legacyVideo }] : undefined,
     });
     const issues = validate(curated, characterCuratedSchema, `curated[${id}]`);
     if (issues.length) throw new Error(`${issues[0].path} — ${issues[0].message}`);
@@ -191,12 +220,39 @@ export function seedFromLegacy(
   };
   for (const [slug, list] of Object.entries(readJson(resolve(root, 'character-videos.json')))) {
     const id = slugToId[slug];
-    if (id) merge(id, { videos: list as VideoRef[] });
+    if (!id) continue;
+    // Append + dédup par id (peut déjà y avoir l'ancien `video` legacy).
+    const seen = new Set((out[id]?.videos ?? []).map((v) => v.id));
+    const fresh = (list as VideoRef[]).filter((v) => !seen.has(v.id));
+    merge(id, { videos: [...(out[id]?.videos ?? []), ...fresh] });
   }
   for (const [slug, pc] of Object.entries(readJson(resolve(root, 'pros-cons.json')))) {
     const id = slugToId[slug];
     const p = pc as ProsCons;
     if (id) merge(id, { prosCons: { pros: p.pros, cons: p.cons } });
+  }
+  // partners.json V2 → synergies : slugs → ids (les réfs `{tag}` restent telles
+  // quelles), langues identiques à l'anglais dédupliquées (repli `en`).
+  // Les slugs V2 gardaient les apostrophes en `-s-` (« knight-s-dream ») ; V3
+  // les colle (« knights-dream ») → repli de normalisation.
+  const idOfSlug = (s: string): string | undefined =>
+    slugToId[s] ?? slugToId[s.replace(/-s-/g, 's-')];
+  for (const [slug, entry] of Object.entries(readJson(resolve(root, 'partners.json')))) {
+    const id = idOfSlug(slug);
+    if (!id) continue;
+    const groups = (entry as { partner?: { hero: string[]; reason?: LocalizedText }[] }).partner;
+    if (!groups?.length) continue;
+    const synergies: SynergyGroup[] = groups.map((g) => {
+      const heroes = g.hero.map((h) => (h.startsWith('{') ? h : (idOfSlug(h) ?? h)));
+      const reason: LocalizedText = {};
+      if (g.reason?.en) reason.en = g.reason.en;
+      for (const l of ['jp', 'kr', 'zh', 'fr'] as const) {
+        const v = g.reason?.[l];
+        if (v && v !== g.reason?.en) reason[l] = v;
+      }
+      return Object.keys(reason).length ? { heroes, reason } : { heroes };
+    });
+    merge(id, { synergies });
   }
   return out;
 }

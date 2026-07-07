@@ -21,9 +21,12 @@ describe('contrats ↔ data/generated', () => {
   });
 
   it('glossaries.json conforme + fusion correcte', () => {
-    expect(glossaries.classes.attacker.en).toBe('Striker'); // mismatch enum→label géré
+    // slug canonique = nom TextSystem (enum jeu `attacker`/`priest` → striker/healer).
+    expect(glossaries.classes.striker.en).toBe('Striker');
+    expect(glossaries.classes.healer.en).toBe('Healer');
+    expect(glossaries.classes.attacker).toBeUndefined();
     expect(glossaries.elements.fire.en).toBe('Fire');
-    expect(glossaries.statusEffects['1'].name.en).toBe('Burned');
+    expect(glossaries.effects['1'].name.en).toBe('Burned');
     expect(glossaries.statScales.critical_dmg).toBe('percent');
   });
 });

@@ -11,8 +11,10 @@
  * des NOMBRES BRUTS, l'échelle (plat/%) vit dans `statScales` (source unique).
  */
 import type { LangDict } from '../../lib/lang';
+import { resolveClass } from '../../lib/class';
 import { loadTextIndex, resolveText } from '../../lib/text';
 import { loadTable, num, splitCsv, type Row } from '../../lib/tables';
+import { buildImageIndex } from '../../assets/source';
 import { runSpec } from '../core/runner';
 import type { ExtractorSpec } from '../core/spec';
 import type { Schema } from '../core/validate';
@@ -95,6 +97,10 @@ export interface Costume {
   source?: string;
   /** Modèle équivalent pour la core-fusion (FusionModelNameID), si présent. */
   fusionModel?: string;
+  /** Full art IMG_<model> présent dans l'extraction (affichable). */
+  art?: boolean;
+  /** Full art IMG_<fusionModel> présent dans l'extraction. */
+  fusionArt?: boolean;
   /** Ordre d'affichage. */
   sort: number;
 }
@@ -177,6 +183,8 @@ export interface CharacterGlossaries {
   statScales: Record<string, StatScale>;
   /** Types de cadeau (slug → libellé), réf par `Character.gift`. */
   gifts: Glossary;
+  /** Libellé « Core Fusion » du jeu (SYS_CHARACTER_FUSION_TITLE) — préfixe du nom. */
+  fusionTitle: LangDict;
 }
 
 /** Contexte partagé pré-calculé une fois pour tout le lot. */
@@ -204,6 +212,10 @@ interface CharacterAux {
   fusionLevelsByGroup: Map<string, Row[]>;
   /** id cible → ids des apparences qui l'empruntent. */
   appearancesOf: Map<string, string[]>;
+  /** id de base → skills de ses FORMES de combat (kit principal remplacé). */
+  formSkillsByBase: Map<string, string[]>;
+  /** slug d'enum de classe brut (`attacker`) → slug canonique (`striker`). */
+  classOf: Map<string, string>;
   glossaries: CharacterGlossaries;
 }
 
@@ -229,10 +241,47 @@ function ownIdentity(r: Row): boolean {
  */
 function cleanVoiceActor(v: string | undefined): string {
   if (!v || v === '0') return '';
-  return v.replace(/^(VA|CV)\.\s*/, '').trim();
+  const name = v.replace(/^(VA|CV)\.\s*/, '').trim();
+  // Placeholders du jeu : « VA. None », « CV.메네 성우 이름 » (« nom du doubleur »).
+  if (name === 'None' || /성우 이름$/.test(name)) return '';
+  return name;
 }
 
-/** Extrait les stats non nulles (paires _Min/_Max) en valeurs brutes. */
+/**
+ * Doubleurs par langue de doublage depuis TextCharacter. Deux formats :
+ * nouveau = une clé par RÉGION (`<id>_CVName_en/_jp/_kr`), le nom natif dans
+ * la colonne de sa langue — PRIORITAIRE (quand les deux coexistent, l'ancienne
+ * clé est un placeholder « VA. None ») ; ancien = UNE clé `<id>_CVName`
+ * (une colonne par langue). `null` si aucun doubleur.
+ */
+function resolveVoiceActor(
+  tchar: Map<string, LangDict>,
+  keyBase: string | undefined,
+): LangDict | null {
+  if (!keyBase) return null;
+  let va: LangDict = {
+    en: cleanVoiceActor(resolveText(tchar, `${keyBase}_en`).en),
+    jp: cleanVoiceActor(resolveText(tchar, `${keyBase}_jp`).jp),
+    kr: cleanVoiceActor(resolveText(tchar, `${keyBase}_kr`).kr),
+    zh: cleanVoiceActor(resolveText(tchar, `${keyBase}_zh`).zh),
+  };
+  if (!(va.en || va.jp || va.kr || va.zh)) {
+    const cv = resolveText(tchar, keyBase);
+    va = {
+      en: cleanVoiceActor(cv.en),
+      jp: cleanVoiceActor(cv.jp),
+      kr: cleanVoiceActor(cv.kr),
+      zh: cleanVoiceActor(cv.zh),
+    };
+  }
+  return va.en || va.jp || va.kr || va.zh ? va : null;
+}
+
+/** Extrait les stats non nulles (paires _Min/_Max) en valeurs brutes.
+ * La plage couvre les niveaux 1..100 SANS éveils — les paliers affichés
+ * (évolutions, dépassement 105/110/120) sont CALCULÉS au runtime par
+ * `computeStatSteps` (src/lib/data/char-progression), validé contre l'oracle
+ * V2 et in-game. Ne pas cuire les éveils ici : double-compte garanti. */
 function extractStats(r: Row): Record<string, StatRange> {
   const out: Record<string, StatRange> = {};
   for (const d of STAT_DEFS) {
@@ -292,6 +341,8 @@ const characterSchema: Schema = {
           grade: { kind: 'string' },
           source: { kind: 'string', optional: true },
           fusionModel: { kind: 'string', optional: true },
+          art: { kind: 'boolean', optional: true },
+          fusionArt: { kind: 'boolean', optional: true },
           sort: { kind: 'number', int: true },
         },
       },
@@ -352,13 +403,19 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     // Glossaires : une entrée par slug rencontré (élément/classe/sous-classe).
     const elements: Glossary = {};
     const classes: Glossary = {};
+    // Slug d'enum brut (`attacker`) → slug canonique (`striker`), via TextSystem.
+    const classOf = new Map<string, string>();
     const subClasses: CharacterGlossaries['subClasses'] = {};
     for (const r of rows) {
       const element = slugAfter(r.Element, 'CET_');
-      const klass = slugAfter(r.Class, 'CCT_');
+      const klassRaw = slugAfter(r.Class, 'CCT_');
       const subClass = r.SubClass && r.SubClass !== 'NONE' ? r.SubClass.toLowerCase() : undefined;
       if (element) elements[element] ??= resolveText(tsys, `SYS_ELEMENT_${element.toUpperCase()}`);
-      if (klass) classes[klass] ??= resolveText(tsys, `SYS_CLASS_${klass.toUpperCase()}`);
+      if (klassRaw && !classOf.has(klassRaw)) {
+        const { slug, name } = resolveClass(klassRaw, tsys);
+        classOf.set(klassRaw, slug);
+        classes[slug] ??= name;
+      }
       if (subClass && !subClasses[subClass]) {
         const up = subClass.toUpperCase();
         const desc = resolveText(tsys, `SYS_CLASS_INFO_${up}`);
@@ -411,7 +468,10 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       if (Object.keys(prof).length) profileById.set(r.CharacterID, prof);
     }
 
-    // Costumes/skins (CostumeTemplet), groupés par perso et ordonnés.
+    // Costumes/skins (CostumeTemplet), groupés par perso et ordonnés. Le flag
+    // `art` (full art IMG_<model> présent dans l'extraction) évite au front de
+    // référencer des rendus que le jeu ne fournit pas pour certains skins.
+    const imageIndex = buildImageIndex();
     const costumesByChar = new Map<string, Costume[]>();
     for (const r of loadTable('CostumeTemplet')) {
       const cos: Costume = {
@@ -425,6 +485,9 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       const source = slugAfter(r.CostumePurchaseType, 'CPT_');
       if (source && source !== 'none') cos.source = source;
       if (r.FusionModelNameID) cos.fusionModel = r.FusionModelNameID;
+      if (imageIndex.has(`img_${cos.model}`.toLowerCase())) cos.art = true;
+      if (cos.fusionModel && imageIndex.has(`img_${cos.fusionModel}`.toLowerCase()))
+        cos.fusionArt = true;
       const list = costumesByChar.get(r.CharacterID);
       if (list) list.push(cos);
       else costumesByChar.set(r.CharacterID, [cos]);
@@ -467,6 +530,26 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       else appearancesOf.set(target, [r.ID]);
     }
 
+    // FORMES DE COMBAT : apparence dont le KIT PRINCIPAL (Skill_1..3) diffère de
+    // la base = même perso sous une autre forme en combat (Demiurge Luna
+    // 2000119 ↔ 2000120 via son S2). Ses skills rejoignent la fiche de la base —
+    // le jeu les présente comme un seul personnage. Les variantes de contenu
+    // spécial (slots annexes uniquement) et les skins ne sont PAS concernés.
+    const rowById = new Map(loadTable('CharacterTemplet').map((r) => [r.ID, r]));
+    const formSkillsByBase = new Map<string, string[]>();
+    for (const r of loadTable('CharacterTemplet')) {
+      if (r.Type !== 'CT_PC' || ownIdentity(r)) continue;
+      const base = rowById.get(r.NameID.replace(/_Name$/, ''));
+      if (!base) continue;
+      const mainSwapped = ['Skill_1', 'Skill_2', 'Skill_3'].some(
+        (k) => r[k] && base[k] && r[k] !== base[k],
+      );
+      if (!mainSwapped) continue;
+      const skills: string[] = [];
+      for (let i = 1; i <= 23; i++) if (r[`Skill_${i}`]) skills.push(r[`Skill_${i}`]);
+      formSkillsByBase.set(base.ID, [...(formSkillsByBase.get(base.ID) ?? []), ...skills]);
+    }
+
     return {
       tchar,
       tsys,
@@ -481,20 +564,31 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       fusionMetaByChar,
       fusionLevelsByGroup,
       appearancesOf,
-      glossaries: { elements, classes, subClasses, statScales, gifts },
+      formSkillsByBase,
+      classOf,
+      glossaries: {
+        elements,
+        classes,
+        subClasses,
+        statScales,
+        gifts,
+        fusionTitle: resolveText(tsys, 'SYS_CHARACTER_FUSION_TITLE'),
+      },
     };
   },
 
   map(r, aux) {
     const skills: string[] = [];
     for (let i = 1; i <= 23; i++) if (r[`Skill_${i}`]) skills.push(r[`Skill_${i}`]);
+    // Skills des formes de combat (cf. formSkillsByBase) — même personnage.
+    for (const s of aux.formSkillsByBase.get(r.ID) ?? []) if (!skills.includes(s)) skills.push(s);
 
     const char: Character = {
       id: r.ID,
       name: resolveText(aux.tchar, r.NameID),
       rarity: num(r.BasicStar),
       element: slugAfter(r.Element, 'CET_'),
-      class: slugAfter(r.Class, 'CCT_'),
+      class: aux.classOf.get(slugAfter(r.Class, 'CCT_')) ?? slugAfter(r.Class, 'CCT_'),
       race: slugAfter(r.Race, 'CRT_'),
       icon: r.FaceIconID ?? r.ID,
       skills,
@@ -510,16 +604,13 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     const gift = aux.giftById.get(r.ID);
     if (gift) char.gift = slugAfter(gift, 'ITS_');
     // Doubleur PAR LANGUE de doublage (en=VA anglais, jp=seiyuu, …), pas une
-    // traduction. Nouvel objet (ne pas partager le dict caché) + nettoyage du
-    // sentinelle « 0 » (= pas de doublage pour cette langue).
-    const cv = resolveText(aux.tchar, r.CVNameID);
-    const va: LangDict = {
-      en: cleanVoiceActor(cv.en),
-      jp: cleanVoiceActor(cv.jp),
-      kr: cleanVoiceActor(cv.kr),
-      zh: cleanVoiceActor(cv.zh),
-    };
-    if (va.en || va.jp || va.kr || va.zh) char.voiceActor = va;
+    // traduction. Une core-fusion prend le doubleur de sa BASE (même voix
+    // in-game — sa propre clé CV est un placeholder « Notia voice actor name »).
+    const fusionBase = aux.baseByFusion.get(r.ID);
+    const va = fusionBase
+      ? resolveVoiceActor(aux.tchar, `${fusionBase}_CVName`)
+      : resolveVoiceActor(aux.tchar, r.CVNameID);
+    if (va) char.voiceActor = va;
     const profile = aux.profileById.get(r.ID);
     if (profile) char.profile = profile;
     const ee = aux.eeByChar.get(r.ID);

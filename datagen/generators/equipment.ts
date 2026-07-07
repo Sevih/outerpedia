@@ -17,10 +17,25 @@
  * NOTE : `Rate` en base-10000 → poids de tirage = Rate/100 (%). Valeurs stat des
  * pools laissées brutes (OAT_RATE = /10 confirmé, décodage à appliquer ensuite).
  */
+import { readFileSync } from 'node:fs';
+import { resolve as resolvePath } from 'node:path';
 import { bool, groupBy, indexBy, loadTable, num, numf, splitCsv } from '../lib/tables';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { slugEnum } from '../lib/enums';
-import { buffValuesAt, fillPlaceholders, loadBuffIndex, type BuffValues } from '../lib/buff';
+import { resolveClass } from '../lib/class';
+import {
+  buffRowAtLevel,
+  buffValuesAt,
+  fillPlaceholders,
+  loadBuffIndex,
+  type BuffValues,
+} from '../lib/buff';
+import {
+  buildEffectGlossary,
+  effectShape,
+  mechanicLabelIndex,
+  type EffectShape,
+} from '../lib/effects';
 import { formatStatValue } from '../lib/stats';
 import { GAME_LANGS, type LangDict } from '../lib/lang';
 
@@ -36,6 +51,14 @@ export interface Option {
   factor?: number; // OptionFactor : gain par niveau (EE)
   max?: number; // OptionMaxValue : plafond (EE)
   effects?: BuffEffect[]; // effets structurés du buff quand il s'ajoute à une stat propre (EE)
+  /** Valeur par NIVEAU du buff (talisman/EE : croissance par table, pas par facteur). */
+  levels?: number[];
+  /**
+   * Libellé OFFICIEL du buff conditionnel par élément (EE : « Reduced DMG
+   * Taken vs Fire ») — résolu depuis `TextSystem` (`SYS_BT_<Type>_<TARGET|
+   * OWNER>_<ELEMENT>` / `SYS_STAT_<StatType>_…`), l'élément venant du BuffID.
+   */
+  label?: LangDict;
 }
 
 /** Facteurs d'enchantement (break-limit) par palier. */
@@ -58,6 +81,7 @@ export interface SetEffect {
   value?: string; // valeur formatée (ex. "30%")
   buff?: string; // BuffID source (effet basé sur un buff)
   effects?: BuffEffect[]; // effets structurés du buff (suit les BT_GROUP)
+  desc?: LangDict; // description OFFICIELLE du jeu (bonus riches, DescID de la ligne de set)
 }
 
 /** Un tier de set : bonus 2 pièces / 4 pièces. */
@@ -77,9 +101,20 @@ export interface GameSet {
 export interface Passive {
   name: LangDict;
   desc: LangDict; // template : 1 phrase avec placeholders [Value]/[Rate]/[Turn]
-  values: BuffValues[]; // valeurs par niveau de reforge (index 0 = niveau 1)
+  /**
+   * Valeurs aux niveaux DÉCLARÉS du buff (`levels`, parallèle) — gear : un
+   * palier par breakthrough (1..5) ; talisman/EE : les niveaux d'objet où le
+   * buff change (souvent [1, 10]), PAS un par niveau d'amélioration.
+   */
+  values: BuffValues[];
+  levels: number[];
   icon: string;
   buff: string;
+  /**
+   * Effets structurés des buffs du passif (classifier — même forme que les
+   * skills) : alimente les chips buff/debuff de la carte EE/talisman.
+   */
+  effects?: EffectShape[];
 }
 
 interface Identity {
@@ -92,12 +127,24 @@ interface Identity {
   // que leur passif (qui le porte déjà, avec tous les niveaux) → redondant.
 }
 
+/**
+ * Référence d'un palier de passif (Unique Option). Un item peut en porter
+ * PLUSIEURS (tous les EE, une partie des talismans) : le 2e se débloque au
+ * niveau `level` (ex. +10) et — c'est la table qui le dit — soit S'AJOUTE au
+ * premier (`isAdd`), soit le REMPLACE (buff `_CHANGE`).
+ */
+export interface PassiveRef {
+  id: string; // ref → passives
+  level: number; // niveau d'objet de déblocage (1, 10…)
+  isAdd: boolean; // true = s'ajoute au palier précédent ; false = le remplace
+}
+
 /** Arme / accessoire : gear stat avec passif + classe. */
 export interface GearItem extends Identity {
   classLimit: string | null; // ref → classes (attacker/…), null = aucune restriction de classe
   main: string[]; // refs → pools (stat fixe et/ou pool aléatoire)
   sub: string | null; // ref → pools
-  passive: string | null; // ref → passives
+  passives: PassiveRef[]; // paliers de passif (armes/amulettes : un seul)
   breakLimit: string | null; // ref → breakLimits
 }
 
@@ -109,16 +156,41 @@ export interface ArmorItem extends Identity {
   set: string | null; // ref → sets
 }
 
-/** Talisman : options à base de buffs + passif. */
+/** Talisman : options à base de buffs + passif(s). */
 export interface SpecialItem extends Identity {
   options: string[]; // refs → pools (options buff)
-  passive: string | null;
+  passives: PassiveRef[];
+  /** Type de points générés, DÉRIVÉ du buff du passif (BT_AP/CP_CHARGE). */
+  mode?: 'AP' | 'CP';
 }
 
 /** EE (exclusive) : comme un talisman, mais restreint à un perso + niveau de confiance. */
 export interface ExclusiveItem extends SpecialItem {
   character: string; // ref → personnage (CharacterLimit) : seul ce perso peut l'équiper
   trustLevel: number; // niveau de confiance requis (TrustLevelLimit)
+}
+
+/**
+ * FAMILLE d'items : le jeu décline un même équipement en variantes techniques
+ * (paliers d'étoiles, 6★ craftable, instances de drop 9xxxx, déclinaisons par
+ * classe) sous un même nom. La règle de regroupement vit ICI (source unique) :
+ * app, manifest d'assets et imports consomment `families.json`.
+ */
+export interface Family {
+  /** Id canonique = plus petit id numérique du groupe (stable). */
+  id: string;
+  /** Membre représentatif (étoiles max) : porte nom/icône/passifs à afficher. */
+  topId: string;
+  /** Tous les membres, triés par id. */
+  ids: string[];
+  stars: number[];
+  /** Restrictions de classe distinctes des membres (slugs). */
+  classLimits: string[];
+  /**
+   * Item de wiki : grade unique au palier haut, OU rare 6★ (le palier
+   * « budget » sans passif — Steel Sword/Necklace). Sinon item de leveling.
+   */
+  wiki: boolean;
 }
 
 export interface EquipmentData {
@@ -130,6 +202,11 @@ export interface EquipmentData {
   shoes: Record<string, ArmorItem>;
   talisman: Record<string, SpecialItem>;
   ee: Record<string, ExclusiveItem>;
+  families: {
+    weapon: Family[];
+    accessory: Family[];
+    talisman: Family[];
+  };
   pools: Record<string, Option[]>;
   passives: Record<string, Passive>;
   breakLimits: Record<string, BreakLimit>;
@@ -137,6 +214,10 @@ export interface EquipmentData {
   // glossaires : slug d'enum → libellé localisé réel du jeu (slug ≠ terme du jeu, ex. unique→Legendary)
   grades: Record<string, LangDict>;
   classes: Record<string, LangDict>;
+  /** Noms OFFICIELS des stats (`SYS_STAT_*` : « Counterattack Chance »…). */
+  statNames: Record<string, LangDict>;
+  /** Descriptions OFFICIELLES des stats (`SYS_STAT_DESC_*`) — rares (4). */
+  statDescs: Record<string, LangDict>;
 }
 
 /** ItemSubType → nom de slot. */
@@ -154,10 +235,59 @@ const SLOT: Record<string, keyof EquipmentData> = {
 const optMode = (applying: string | undefined): Option['mode'] =>
   applying === 'OAT_RATE' ? 'rate' : applying === 'OAT_ADD' ? 'flat' : 'none';
 
+/**
+ * Élément de CONDITION d'un buff (`BuffConditionValue`) → nom d'enum.
+ * ATTENTION : le suffixe du BuffID (`BID_CEQUIP_MAIN_DMG_REDUCE_FIRE`) est
+ * l'élément du PORTEUR, pas celui de la condition — l'affichage suit la
+ * condition. Mapping établi par bijection sur les 25 buffs CEQUIP
+ * (suffixe EARTH → valeur 1, WATER → 2, DARK → 3, LIGHT → 4, FIRE → 0),
+ * qui correspond à l'élément AVANTAGÉ du porteur (fire>earth>water>fire,
+ * light↔dark) — validé contre l'affichage en jeu (K : « vs Earth »).
+ */
+const COND_ELEMENT: Record<string, string> = {
+  '0': 'EARTH',
+  '1': 'WATER',
+  '2': 'FIRE',
+  '3': 'LIGHT',
+  '4': 'DARK',
+};
+
+/**
+ * Libellé officiel d'un buff conditionnel par élément. Le jeu déclare la
+ * condition (`BuffConditionType` TARGET/OWNER_ELEMENT + `BuffConditionValue`)
+ * sur le buff et nomme l'affichage dans `TextSystem` :
+ * `SYS_BT_DMG_REDUCE_TARGET_EARTH` → « Reduced DMG Taken vs Earth ».
+ */
+function conditionalLabel(
+  system: Map<string, LangDict>,
+  b: Row | undefined,
+  buffId: string,
+): LangDict | undefined {
+  const cond = b?.BuffConditionType;
+  if (!b || (cond !== 'TARGET_ELEMENT' && cond !== 'OWNER_ELEMENT')) return undefined;
+  const el = COND_ELEMENT[b.BuffConditionValue ?? '0'] ?? '';
+  const scope = cond === 'TARGET_ELEMENT' ? 'TARGET' : 'OWNER';
+  const keys = [
+    `SYS_${b.Type}_${scope}_${el}`,
+    `SYS_STAT_${(b.StatType ?? '').replace(/^ST_/, '')}_${scope}_${el}`,
+  ];
+  for (const key of keys) {
+    const t = resolveText(system, key);
+    if (t.en) {
+      const out = { ...t };
+      for (const lang of GAME_LANGS) out[lang] = out[lang].replace(/\s*\\n\s*|\s*\n\s*/g, ' ');
+      return out;
+    }
+  }
+  console.warn(`⚠ libellé conditionnel introuvable pour ${buffId} (${keys.join(', ')})`);
+  return undefined;
+}
+
 function resolveGroup(
   byGroup: Map<string, Row[]>,
   buffsByID: ReturnType<typeof loadBuffIndex>,
   resolveBuffEffects: (buffId: string, level: number) => BuffEffect[],
+  system: Map<string, LangDict>,
   groupId: string,
 ): Option[] {
   const rows = byGroup.get(groupId) ?? [];
@@ -185,11 +315,30 @@ function resolveGroup(
       };
     }
 
-    if (o.BuffID) opt.buff = o.BuffID;
+    if (o.BuffID) {
+      opt.buff = o.BuffID;
+      // Croissance par niveau de buff (talisman/EE : UpgradeFactorforOP = 0,
+      // la table des niveaux fait foi).
+      const levels = (buffsByID.get(o.BuffID.split(',')[0].trim()) ?? [])
+        .filter((b) => num(b.Level) > 0)
+        .sort((a, b) => num(a.Level) - num(b.Level))
+        .map((b) => num(b.Value));
+      // Émis MÊME mono-niveau : un main de buff ne scale JAMAIS par le facteur
+      // d'amélioration des armes (ooparts : enhanceFactor = 0 in-game) — sans
+      // `levels`, l'app appliquait ×(1+0.4·niv) à tort (Talisman of Hubris ×5).
+      if (levels.length) opt.levels = levels;
+    }
     if (num(o.OptionFactor) > 0) opt.factor = num(o.OptionFactor);
     if (num(o.OptionMaxValue) > 0) opt.max = num(o.OptionMaxValue);
     // EE : l'option garde sa stat propre (HIT_AP) ET un buff distinct → on capte les effets du buff.
     if (ownStat && o.BuffID) opt.effects = resolveBuffEffects(o.BuffID, 1);
+    // Libellé conditionnel par élément (EE : « Reduced DMG Taken vs Fire »).
+    if (o.BuffID) {
+      const id = o.BuffID.split(',')[0].trim();
+      const b1 = (buffsByID.get(id) ?? []).find((r) => r.Level === '1');
+      const label = conditionalLabel(system, b1, id);
+      if (label) opt.label = label;
+    }
     return opt;
   });
 }
@@ -202,9 +351,14 @@ function setEffect(
 ): SetEffect | null {
   const stat = row[`StatType_${piece}`];
   if (stat && stat !== 'ST_NONE') {
+    const slug = slugEnum(stat);
     return {
-      stat: slugEnum(stat),
-      value: formatStatValue(row[`ApplyingType_${piece}`] ?? '', num(row[`OptionValue_${piece}`])),
+      stat: slug,
+      value: formatStatValue(
+        row[`ApplyingType_${piece}`] ?? '',
+        num(row[`OptionValue_${piece}`]),
+        slug,
+      ),
     };
   }
   const buff = row[`BuffID_${piece}`];
@@ -244,7 +398,141 @@ function resolvePassive(
     for (const k of keys) if (all[k] != null) v[k] = all[k];
     return v;
   });
-  return { name: resolveText(skill, o.NameID), desc, values, icon: o.IconName ?? '', buff };
+  const out: Passive = {
+    name: resolveText(skill, o.NameID),
+    desc,
+    values,
+    levels,
+    icon: o.IconName ?? '',
+    buff,
+  };
+  // Effets structurés (au niveau max déclaré), dédupliqués par type+stat.
+  // Les conteneurs `BT_GROUP` sont EXPANSÉS en leurs enfants (comme pour les
+  // skills) : l'effet réel d'un passif encapsulé (extension de buffs du Bag of
+  // Rare Seeds, priorité d'Innocent Love…) vit dans les enfants du groupe.
+  const shapes: EffectShape[] = [];
+  const seen = new Set<string>();
+  const maxLv = levels.at(-1) ?? 1;
+  for (const id of splitCsv(buff)) {
+    const ids = [id];
+    const row0 = buffRowAtLevel(buffsByID, id, maxLv);
+    if (row0?.Type === 'BT_GROUP' || row0?.Type === 'BT_GROUP_CASTER_TOOLTIP_CHECK')
+      ids.push(...(groupKids().get(row0.Value ?? '') ?? []));
+    for (const bid of ids) {
+      const row = buffRowAtLevel(buffsByID, bid, maxLv);
+      if (!row) continue;
+      const sh = refineEquipShape(effectShape(row));
+      const key = `${sh.type}|${sh.stat ?? ''}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      shapes.push(sh);
+    }
+  }
+  if (shapes.length) out.effects = shapes;
+  return out;
+}
+
+let groupKidsCache: Map<string, string[]> | undefined;
+
+/** Enfants des buffs conteneurs `BT_GROUP` (BuffGroupTemplet) — même expansion
+ * que le générateur de skills. */
+function groupKids(): Map<string, string[]> {
+  if (!groupKidsCache) {
+    groupKidsCache = new Map();
+    for (const g of loadTable('BuffGroupTemplet')) {
+      if (!g.ID) continue;
+      const kids: string[] = [];
+      for (let i = 1; i <= 10; i++) if (g[`Child${i}_BID`]) kids.push(g[`Child${i}_BID`]);
+      groupKidsCache.set(g.ID, kids);
+    }
+  }
+  return groupKidsCache;
+}
+
+/**
+ * Nomme (ou anonymise) un effet de PASSIF d'équipement pour les chips : le
+ * CreateText des buffs d'équipement est le nom de l'OBJET (`ITEM_*`), pas un
+ * nom d'effet — irrésolvable, et IDENTIQUE pour les deux passifs d'un même EE
+ * (collision de clé → chips dédupliquées à tort). Toute réf est VALIDÉE contre
+ * le glossaire : les tooltips techniques VIDES (porteurs IsIgnoreInterruption,
+ * ex. Hestia Knife) et les labels irrésolvables sont retirés, puis remplacés
+ * si possible par le symbole de la MÉCANIQUE (Priority Increase, Debuff
+ * Duration Increase…) via `mechanicLabelIndex`. Un effet resté sans nom
+ * (montée de stat permanente, dégâts aux boss…) n'est pas une chip — même
+ * règle que les kits de skills et que la curation V2.
+ */
+/** Familles jamais pontées : modificateurs permanents de dégâts/soin/stat —
+ * pas des statuts côté joueur, la curation V2 ne les chipait pas non plus
+ * (le « Damage Increase » d'un passif d'EE est du câblage, pas un buff). */
+const NO_BRIDGE_FAMILIES = new Set(['damage', 'stat', 'dmg_reduce', 'heal', 'anti_heal']);
+
+function refineEquipShape(sh: EffectShape): EffectShape {
+  const { byTooltip, byLabel } = buildEffectGlossary();
+  if (sh.tooltip) {
+    if (byTooltip.has(sh.tooltip)) return sh; // statut nommé du glossaire
+    delete sh.tooltip;
+  }
+  if (sh.label && byLabel.has(sh.label) && sh.type !== 'BT_NONE') return sh;
+  delete sh.label;
+  // BT_NONE = marqueur technique sans effet (état de kit « Disconnected from
+  // Core »…) : jamais une chip, même si son symbole résout.
+  if (sh.type === 'BT_NONE') return sh;
+  // AP au début du combat (stat premium ENTER_AP) = la chip « AP » (V2 :
+  // BT_AP_CHARGE) — seule stat permanente chipée.
+  if (sh.stat === 'enter_ap') {
+    sh.label = 'SYS_BUFF_CHARGE_AP';
+    return sh;
+  }
+  // Autre stat sans statut nommé = montée permanente (mécanique) — le pont par
+  // type n'a pas de sens pour BT_STAT* (il nommerait une stat arbitraire).
+  if (sh.stat || sh.type === 'BT_STAT' || sh.type === 'BT_STAT_PREMIUM') return sh;
+  const side = sh.category === 'buff' ? 'buff' : 'debuff';
+  // 1) Pont SYS par (nature, type) — respecte le SENS (buff BT_EXTEND_DEBUFF =
+  //    Debuff Duration Reduction, debuff = … Increase), hors familles de
+  //    modificateurs permanents.
+  if (!NO_BRIDGE_FAMILIES.has(sh.family)) {
+    const sym = mechanicLabelIndex().get(`${side}|${sh.type}`);
+    if (sym) {
+      sh.label = sym;
+      return sh;
+    }
+  }
+  // 2) Créations curées adressées par type (`keys` de data/curated/effects.json,
+  //    nature de l'entrée en préférence, repli sur l'autre sens : Uncounterable,
+  //    Weakness Gauge Damage…) — la réf se pose en `tooltip`, résolue par id à
+  //    l'affichage comme les effets synthétiques des skills.
+  const curated =
+    curatedKeyMap().get(`${side}|${sh.type}`) ??
+    curatedKeyMap().get(`${side === 'buff' ? 'debuff' : 'buff'}|${sh.type}`);
+  if (curated) sh.tooltip = curated;
+  return sh;
+}
+
+let curatedKeyCache: Map<string, string> | undefined;
+
+/** `nature|type` → id de CRÉATION curée (`keys` de data/curated/effects.json) —
+ * mécaniques sans texte dans les tables, nommées par la curation (héritée V2).
+ * La nature vient de l'entrée (`isDebuff`, repli sur l'effet du glossaire). */
+function curatedKeyMap(): Map<string, string> {
+  if (!curatedKeyCache) {
+    curatedKeyCache = new Map();
+    try {
+      const cur = JSON.parse(
+        readFileSync(resolvePath('data/curated/effects.json'), 'utf8'),
+      ) as Record<string, { keys?: string[]; isDebuff?: boolean }>;
+      const { effects } = buildEffectGlossary();
+      for (const [id, c] of Object.entries(cur)) {
+        const side = (c.isDebuff ?? effects.get(id)?.isDebuff) ? 'debuff' : 'buff';
+        for (const k of c.keys ?? []) {
+          const key = `${side}|${k}`;
+          if (!curatedKeyCache.has(key)) curatedKeyCache.set(key, id);
+        }
+      }
+    } catch {
+      /* pas de curated — les mécaniques concernées restent innommées */
+    }
+  }
+  return curatedKeyCache;
 }
 
 function sortByNumericKey<T>(obj: Record<string, T>): Record<string, T> {
@@ -308,15 +596,18 @@ export function buildEquipment(): EquipmentData {
     ee: {},
     pools: {},
     passives: {},
+    families: { weapon: [], accessory: [], talisman: [] },
     breakLimits: {},
     sets: {},
     grades: {},
     classes: {},
+    statNames: {},
+    statDescs: {},
   };
 
   const ensurePool = (g: string) => {
     if (g && !(g in data.pools))
-      data.pools[g] = resolveGroup(optByGroup, buffsByID, resolveBuffEffects, g);
+      data.pools[g] = resolveGroup(optByGroup, buffsByID, resolveBuffEffects, system, g);
   };
 
   // glossaires : résout le libellé localisé réel (slug ≠ terme du jeu)
@@ -324,17 +615,29 @@ export function buildEquipment(): EquipmentData {
     if (g && !(g in data.grades))
       data.grades[g] = resolveText(system, `SYS_ITEM_GRADE_${g.toUpperCase()}`);
   };
-  const ensureClass = (c: string) => {
-    if (c && !(c in data.classes))
-      data.classes[c] = resolveText(system, `SYS_CLASS_${c.toUpperCase()}`);
+
+  // Un item peut porter PLUSIEURS Unique Options (CSV) : paliers de passif
+  // (EE : +10 remplace via buff _CHANGE ; talismans : +10 s'ajoute, IsAdd).
+  const resolvePassiveRefs = (r: Row): PassiveRef[] => {
+    const out: PassiveRef[] = [];
+    for (const optId of splitCsv(r.UniqueOptionID)) {
+      const spec = specById.get(optId);
+      if (!spec) continue;
+      if (!(optId in data.passives)) data.passives[optId] = resolvePassive(spec, skill, buffsByID);
+      out.push({ id: optId, level: num(spec.Level) || 1, isAdd: bool(spec.IsAdd) });
+    }
+    return out.sort((a, b) => a.level - b.level);
   };
 
-  const resolvePassiveRef = (r: Row): string | null => {
-    const optId = splitCsv(r.UniqueOptionID)[0];
-    const spec = optId ? specById.get(optId) : undefined;
-    if (!optId || !spec) return null;
-    if (!(optId in data.passives)) data.passives[optId] = resolvePassive(spec, skill, buffsByID);
-    return optId;
+  // Type de points d'un talisman, DÉRIVÉ des types de buff de ses passifs
+  // (BT_AP_CHARGE / BT_CP_CHARGE) — indécidable depuis les pools de stats.
+  const talismanMode = (passives: PassiveRef[]): 'AP' | 'CP' | undefined => {
+    const types = passives.flatMap((p) =>
+      resolveBuffEffects(data.passives[p.id].buff, 1).map((e) => e.type),
+    );
+    if (types.includes('cp_charge')) return 'CP';
+    if (types.includes('ap_charge')) return 'AP';
+    return undefined;
   };
 
   const resolveBreakRef = (r: Row): string | null => {
@@ -361,10 +664,21 @@ export function buildEquipment(): EquipmentData {
       data.sets[groupId] = {
         name: resolveText(text, row.NameID),
         icon: row.IconName ?? '',
-        tiers: tierRows.map((t) => ({
-          '2p': setEffect(t, '2P', resolveBuffEffects),
-          '4p': setEffect(t, '4P', resolveBuffEffects),
-        })),
+        tiers: tierRows.map((t) => {
+          const tier: SetTier = {
+            '2p': setEffect(t, '2P', resolveBuffEffects),
+            '4p': setEffect(t, '4P', resolveBuffEffects),
+          };
+          // Les bonus RICHES (buff) ont une description officielle : le DescID
+          // de la ligne (CSV) porte les textes dans l'ordre 2P puis 4P.
+          const descIds = splitCsv(t.DescID);
+          let d = 0;
+          for (const p of ['2p', '4p'] as const) {
+            const e = tier[p];
+            if (e?.buff && descIds[d]) e.desc = resolveText(skill, descIds[d++]);
+          }
+          return tier;
+        }),
       };
     }
     return groupId;
@@ -387,7 +701,9 @@ export function buildEquipment(): EquipmentData {
     main.forEach(ensurePool);
 
     if (slot === 'talisman') {
-      data.talisman[r.ID] = { ...identity, options: main, passive: resolvePassiveRef(r) };
+      const passives = resolvePassiveRefs(r);
+      const mode = talismanMode(passives);
+      data.talisman[r.ID] = { ...identity, options: main, passives, ...(mode ? { mode } : {}) };
       continue;
     }
     if (slot === 'ee') {
@@ -396,7 +712,7 @@ export function buildEquipment(): EquipmentData {
         character: splitCsv(r.CharacterLimit)[0] ?? '', // ref → personnage
         trustLevel: num(r.TrustLevelLimit),
         options: main,
-        passive: resolvePassiveRef(r),
+        passives: resolvePassiveRefs(r),
       };
       continue;
     }
@@ -405,15 +721,20 @@ export function buildEquipment(): EquipmentData {
     if (sub) ensurePool(sub);
 
     if (slot === 'weapon' || slot === 'accessory') {
+      // Slug canonique de classe (l'enum jeu diffère : Attacker→striker, Priest→healer).
       const cls = slugEnum(r.ClassLimit);
-      const classLimit = cls === 'none' ? null : cls; // null = aucune restriction
-      if (classLimit) ensureClass(classLimit);
+      let classLimit: string | null = null;
+      if (cls && cls !== 'none') {
+        const resolved = resolveClass(cls, system);
+        classLimit = resolved.slug;
+        data.classes[classLimit] ??= resolved.name;
+      }
       data[slot][r.ID] = {
         ...identity,
         classLimit,
         main,
         sub,
-        passive: resolvePassiveRef(r),
+        passives: resolvePassiveRefs(r),
         breakLimit: resolveBreakRef(r),
       };
     } else {
@@ -430,8 +751,85 @@ export function buildEquipment(): EquipmentData {
 
   // tri stable de chaque collection
   for (const k of Object.keys(data) as (keyof EquipmentData)[]) {
+    if (k === 'families') continue;
     (data[k] as Record<string, unknown>) = sortByNumericKey(data[k] as Record<string, unknown>);
   }
+
+  // FAMILLES : regroupement par nom EN (règle unique — voir doc de `Family`).
+  const norm = (s: string) => s.replace(/['’]/g, "'").trim().toLowerCase();
+  const buildFamilies = (
+    table: Record<string, GearItem | SpecialItem>,
+    wikiMinStar: number,
+  ): Family[] => {
+    const groups = new Map<string, string[]>();
+    for (const [id, item] of Object.entries(table)) {
+      const key = norm(item.name.en);
+      const list = groups.get(key);
+      if (list) list.push(id);
+      else groups.set(key, [id]);
+    }
+    const out: Family[] = [];
+    for (const ids of groups.values()) {
+      ids.sort((a, b) => num(a) - num(b));
+      const items = ids.map((id) => table[id]);
+      const top = ids[items.reduce((mi, x, i) => (x.star > items[mi].star ? i : mi), 0)];
+      out.push({
+        id: ids[0],
+        topId: top,
+        ids,
+        stars: [...new Set(items.map((x) => x.star))].sort(),
+        classLimits: [
+          ...new Set(
+            items
+              .map((x) => ('classLimit' in x ? x.classLimit : null))
+              .filter((c): c is string => Boolean(c)),
+          ),
+        ],
+        wiki:
+          (table[top].grade === 'unique' && table[top].star >= wikiMinStar) ||
+          (table[top].grade === 'rare' && table[top].star >= 6),
+      });
+    }
+    return out.sort((a, b) => num(a.id) - num(b.id));
+  };
+  data.families = {
+    weapon: buildFamilies(data.weapon, 5),
+    accessory: buildFamilies(data.accessory, 5),
+    talisman: buildFamilies(data.talisman, 4),
+  };
+
+  // Glossaire des NOMS de stats (SYS_STAT_*) : toutes les stats réellement
+  // portées par les pools et les bonus de sets — l'app affiche le vrai terme
+  // du jeu (« Counterattack Chance +12% »), pas une abréviation reconstruite.
+  // Amorce : stats affichables hors pools/sets (tokens éditoriaux {S/PEN},
+  // table Base Stats des fiches perso).
+  const statSlugs = new Set<string>([
+    'pierce_power',
+    'speed',
+    'dmg_boost',
+    'dmg_reduce_rate',
+    'buff_chance',
+    'buff_resist',
+  ]);
+  for (const opts of Object.values(data.pools))
+    for (const o of opts) {
+      if (o.stat && o.stat !== 'none') statSlugs.add(o.stat);
+      for (const e of o.effects ?? []) if (e.stat) statSlugs.add(e.stat);
+    }
+  for (const s of Object.values(data.sets))
+    for (const t of s.tiers)
+      for (const p of ['2p', '4p'] as const) {
+        if (t[p]?.stat) statSlugs.add(t[p].stat);
+        for (const e of t[p]?.effects ?? []) if (e.stat) statSlugs.add(e.stat);
+      }
+  for (const slug of [...statSlugs].sort()) {
+    const name = resolveText(system, `SYS_STAT_${slug.toUpperCase()}`);
+    if (name.en) data.statNames[slug] = name;
+    else console.warn(`⚠ nom de stat introuvable : SYS_STAT_${slug.toUpperCase()}`);
+    const desc = resolveText(system, `SYS_STAT_DESC_${slug.toUpperCase()}`);
+    if (desc.en) data.statDescs[slug] = desc;
+  }
+
   return data;
 }
 
@@ -444,9 +842,11 @@ if (process.argv[1] && process.argv[1].endsWith('equipment.ts')) {
   console.log('\n— weapon id 4 —\n' + JSON.stringify(d.weapon['4'], null, 2));
   console.log('\n— helmet id 3001 —\n' + JSON.stringify(d.helmet['3001'], null, 2));
   console.log('\n— talisman id 10001 —\n' + JSON.stringify(d.talisman['10001'], null, 2));
-  const wp = d.weapon['4'].passive!;
+  const wp = d.weapon['4'].passives[0].id;
   console.log(
     '\npassif weapon 4 résolu niv max:',
     fillPlaceholders(d.passives[wp].desc.en, d.passives[wp].values.at(-1)!),
   );
+  const tal = Object.values(d.talisman).find((x) => x.passives.length > 1)!;
+  console.log('talisman multi-passifs:', tal.name.en, tal.mode, JSON.stringify(tal.passives));
 }

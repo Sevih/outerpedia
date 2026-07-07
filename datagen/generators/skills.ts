@@ -58,6 +58,12 @@ export interface SkillLevel {
   tooltips?: string[];
   /** Notes d'amélioration de niveau (« +10% damage »), résolues, non vides. */
   upgrades?: LangDict[];
+  /**
+   * Desc PROPRE à ce niveau — uniquement pour les skills dont la desc vit sur
+   * les lignes de niveau (passif de transcendance : chaque palier a son texte
+   * officiel `SE_DESC_SKILL08_*`, « +4% Ally Team Critical Damage »…).
+   */
+  desc?: LangDict;
 }
 
 /** Une compétence (source unique, référencée par les personnages). */
@@ -76,8 +82,14 @@ export interface Skill {
   /** Portée (slug minuscule de RangeType) si applicable. */
   range?: string;
   icon?: string;
-  /** Coût en points d'action. */
+  /** Coût en points d'action (premier palier). */
   requireAP?: number;
+  /**
+   * Coûts d'AP des bursts 1/2/3 (RequireAP en CSV) — présent UNIQUEMENT sur le
+   * skill « burstable » du perso (un seul par perso ; burst 3 déverrouillé à la
+   * transcendance 5★). Les skills SKT_BURST_1..3 sont ses déclinaisons.
+   */
+  burstAP?: number[];
   /**
    * Structure des effets appliqués (famille/cat/cible/stat + id de buff),
    * INVARIANTE par niveau et définie une seule fois. Les nombres vivent dans
@@ -107,11 +119,79 @@ function subTypeOf(v: string | undefined): SkillSubType {
   return null;
 }
 
+/**
+ * Enfants d'un buff conteneur `BT_GROUP` : sa `Value` pointe une ligne
+ * `BuffGroupTemplet` dont les `Child*_BID` sont les buffs réellement appliqués
+ * (ex. les stacks « Regina's World »). Sans expansion, l'effet réel est invisible.
+ * `all=false` avec plusieurs enfants = le jeu en TIRE UN AU HASARD (Dianne :
+ * une stat aléatoire parmi 4).
+ */
+function loadGroupChildren(): Map<string, { kids: string[]; all: boolean }> {
+  const out = new Map<string, { kids: string[]; all: boolean }>();
+  for (const g of loadTable('BuffGroupTemplet')) {
+    if (!g.ID) continue;
+    const kids: string[] = [];
+    for (let i = 1; i <= 10; i++) {
+      const bid = g[`Child${i}_BID`];
+      if (bid) kids.push(bid);
+    }
+    out.set(g.ID, { kids, all: g.IsAllCreate === 'True' });
+  }
+  return out;
+}
+
+/** Id de buff expansé + provenance (enfant d'un groupe à tirage aléatoire ?). */
+interface ExpandedBuff {
+  id: string;
+  choice?: boolean;
+}
+
+/** Ids de buffs d'un niveau, groupes `BT_GROUP` expansés en leurs enfants (id parent conservé). */
+function expandBuffIds(
+  ids: string[],
+  buffs: ReturnType<typeof loadBuffIndex>,
+  groups: ReturnType<typeof loadGroupChildren>,
+  level: number,
+): ExpandedBuff[] {
+  const out: ExpandedBuff[] = [];
+  for (const id of ids) {
+    out.push({ id });
+    const row = buffRowAtLevel(buffs, id, level);
+    if (row?.Type === 'BT_GROUP' || row?.Type === 'BT_GROUP_CASTER_TOOLTIP_CHECK') {
+      const g = groups.get(row.Value ?? '');
+      if (!g) continue;
+      const choice = !g.all && g.kids.length > 1;
+      for (const child of g.kids) out.push(choice ? { id: child, choice } : { id: child });
+    }
+  }
+  return out;
+}
+
 export function buildSkills(): SkillData {
   const buffs = loadBuffIndex();
+  const groups = loadGroupChildren();
   const tskill = loadTextIndex('TextSkill');
   const skillRows = loadTable('CharacterSkillTemplet');
   const levelsBySkill = groupBy(loadTable('CharacterSkillLevelTemplet'), 'SkillID');
+
+  // Propriétaire d'un skill (id de perso) + buffs référencés par AU MOINS un
+  // niveau de skill : sert à rattacher les buffs de chaîne câblés par pure
+  // CONVENTION `{charId}_chain*` (persos anciens, ex. Rin — aucun niveau ne les
+  // référence, le jeu les applique via BuffCreateType CHAIN_*).
+  const ownerBySkill = new Map<string, string>();
+  for (const c of loadTable('CharacterTemplet')) {
+    if (c.Type !== 'CT_PC') continue;
+    // Les skins partagent les skills de leur base : seule la ligne à IDENTITÉ
+    // PROPRE (NameID = `<ID>_Name`) est le vrai propriétaire.
+    const own = c.NameID === `${c.ID}_Name`;
+    for (let i = 1; i <= 23; i++) {
+      const sid = c[`Skill_${i}`];
+      if (sid && (own || !ownerBySkill.has(sid))) ownerBySkill.set(sid, c.ID);
+    }
+  }
+  const referencedBuffs = new Set<string>();
+  for (const l of loadTable('CharacterSkillLevelTemplet'))
+    for (const id of splitCsv(l.BuffID ?? '')) referencedBuffs.add(id);
 
   const skills: Record<string, Skill> = {};
 
@@ -132,7 +212,7 @@ export function buildSkills(): SkillData {
     const maxLevel = num(lvlRows[lvlRows.length - 1]?.SkillLevel) || lvlRows.length || 1;
 
     const type = slugEnum(s.SkillType ?? '');
-    const levels = lvlRows.map((r) => buildLevel(r, buffs, tskill, mainOnSkill));
+    const levels = lvlRows.map((r) => buildLevel(r, buffs, groups, tskill, mainOnSkill));
     const skill: Skill = {
       id,
       name: resolveText(tskill, s.NameID),
@@ -144,24 +224,96 @@ export function buildSkills(): SkillData {
       levels,
     };
     if (desc && desc.en) skill.desc = desc;
+
+    // Vars des buffs référencés par la DESC mais portés par un AUTRE skill
+    // (formes de combat : le S1 de Demiurge Luna cite `[Buff_T_2000120_1_1]`,
+    // buff du kit jumeau) — résolution GLOBALE par id de buff, niveau à niveau.
+    if (skill.desc) {
+      const refIds = new Set([...skill.desc.en.matchAll(/\[Buff_[CVT]_(.+?)\]/g)].map((m) => m[1]));
+      for (const lv of skill.levels) {
+        for (const refId of refIds) {
+          if (lv.vars?.[refId]) continue;
+          const v = skillBuffVars(buffs, refId, lv.level);
+          if (v.c || v.v || v.t) (lv.vars ??= {})[refId] = v;
+        }
+      }
+    }
     const target = slugTeam(s.TargetTeamType);
     if (target) skill.target = target;
     const range = slugTeam(s.RangeType);
     if (range) skill.range = range;
     if (s.IconName) skill.icon = s.IconName;
-    if (num(s.RequireAP) > 0) skill.requireAP = num(s.RequireAP);
+    if (num(s.RequireAP) > 0) {
+      skill.requireAP = num(s.RequireAP);
+      const costs = splitCsv(s.RequireAP ?? '').map(num);
+      if (costs.length > 1) skill.burstAP = costs;
+    }
 
     // Structure des effets : union des buffs vus sur tous les niveaux (ordre
     // d'apparition), forme invariante prise au niveau max.
     const shapes: EffectShape[] = [];
     const seen = new Set<string>();
+    // Groupes de priorité des buffs posés par ce skill (lien vers les buffs
+    // « ambiants » conditionnés, cf. plus bas).
+    const prioGroups = new Set<string>();
     for (const r of lvlRows) {
-      for (const buffId of splitCsv(r.BuffID ?? '')) {
+      for (const { id: buffId, choice } of expandBuffIds(
+        splitCsv(r.BuffID ?? ''),
+        buffs,
+        groups,
+        maxLevel,
+      )) {
         if (seen.has(buffId)) continue;
         const row = buffRowAtLevel(buffs, buffId, maxLevel);
         if (!row) continue;
         seen.add(buffId);
+        if (row.PriorityGroup) prioGroups.add(row.PriorityGroup);
+        const shape = effectShape(row);
+        if (choice) shape.choice = true;
+        shapes.push(shape);
+      }
+    }
+    const cid = ownerBySkill.get(id);
+    // Buffs de chaîne par convention (jamais référencés par un niveau) →
+    // rattachés au skill chain_passive du propriétaire.
+    if (s.SkillType === 'SKT_CHAIN_PASSIVE' && cid) {
+      for (const [buffId] of buffs) {
+        if (!buffId.startsWith(`${cid}_chain`) || buffId.endsWith('_old')) continue;
+        if (referencedBuffs.has(buffId) || seen.has(buffId)) continue;
+        const row = buffRowAtLevel(buffs, buffId, maxLevel);
+        if (!row) continue;
+        seen.add(buffId);
         shapes.push(effectShape(row));
+      }
+    }
+    // Buffs « ambiants » du perso conditionnés à un buff posé par CE skill
+    // (Omega Nadja : l'Irregular Infection de l'ultimate — PriorityGroup —
+    // active les `{cid}_buff_*` qui étendent les durées, jamais référencés
+    // par un niveau). Lien : BuffConditionValue = PriorityGroup.
+    if (cid && prioGroups.size) {
+      // Dédup par type+stat : les variantes de palier (`_1_*` vs `_2_*`)
+      // décrivent le même effet — une seule chip.
+      const ambientSeen = new Set(shapes.map((sh) => `${sh.type}|${sh.stat ?? ''}`));
+      for (const [buffId] of buffs) {
+        if (!buffId.startsWith(`${cid}_`) || buffId.endsWith('_old')) continue;
+        if (referencedBuffs.has(buffId) || seen.has(buffId)) continue;
+        const row = buffRowAtLevel(buffs, buffId, maxLevel);
+        if (!row) continue;
+        const cond = row.BuffConditionType ?? '';
+        if (cond !== 'OWNER_HAS_BUFF' && cond !== 'TARGET_HAS_BUFF') continue;
+        if (!prioGroups.has(row.BuffConditionValue ?? '')) continue;
+        for (const { id: xid, choice } of expandBuffIds([buffId], buffs, groups, maxLevel)) {
+          if (seen.has(xid)) continue;
+          const xrow = buffRowAtLevel(buffs, xid, maxLevel);
+          if (!xrow) continue;
+          seen.add(xid);
+          const shape = effectShape(xrow);
+          const key = `${shape.type}|${shape.stat ?? ''}`;
+          if (ambientSeen.has(key)) continue;
+          ambientSeen.add(key);
+          if (choice) shape.choice = true;
+          shapes.push(shape);
+        }
       }
     }
     if (shapes.length) skill.effects = shapes;
@@ -176,6 +328,7 @@ export function buildSkills(): SkillData {
 function buildLevel(
   r: Row,
   buffs: ReturnType<typeof loadBuffIndex>,
+  groups: ReturnType<typeof loadGroupChildren>,
   tskill: Map<string, LangDict>,
   mainOnSkill: boolean,
 ): SkillLevel {
@@ -190,7 +343,7 @@ function buildLevel(
 
   // Valeurs scalantes par buff (chance/valeur/tours), à CE niveau.
   const vars: Record<string, SkillBuffVars> = {};
-  for (const buffId of splitCsv(r.BuffID ?? '')) {
+  for (const { id: buffId } of expandBuffIds(splitCsv(r.BuffID ?? ''), buffs, groups, level)) {
     const v = skillBuffVars(buffs, buffId, level);
     if (v.c || v.v || v.t) vars[buffId] = v;
   }
@@ -201,12 +354,15 @@ function buildLevel(
   if (tooltips.length) out.tooltips = tooltips;
 
   // Notes d'amélioration de niveau : seulement quand la desc principale est sur
-  // le skill (sinon le DescID du niveau EST la desc, déjà captée).
+  // le skill (sinon le DescID du niveau EST la desc du niveau, émise telle quelle).
   if (mainOnSkill && r.DescID) {
     const ups = splitCsv(r.DescID)
       .map((k) => resolveText(tskill, k))
       .filter((d) => d.en);
     if (ups.length) out.upgrades = ups;
+  } else if (!mainOnSkill && r.DescID) {
+    const d = resolveText(tskill, splitCsv(r.DescID)[0]);
+    if (d.en) out.desc = d;
   }
 
   return out;

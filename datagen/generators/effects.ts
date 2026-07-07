@@ -11,8 +11,8 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import {
+  buildEffectGlossary,
   classifyFamily,
-  loadStatusGlossary,
   resolveEffect,
   type EffectFamily,
 } from '../lib/effects';
@@ -29,8 +29,8 @@ function main(): void {
   mkdirSync(OUT, { recursive: true });
   const buffs = loadTable('BuffTemplet');
 
-  // 1) Glossaire des statuts nommés.
-  const glossary = loadStatusGlossary();
+  // 1) Glossaire des effets nommés (variantes fusionnées).
+  const { effects: glossary } = buildEffectGlossary();
   write('glossary.json', Object.fromEntries(glossary));
 
   // 2) Distribution Type → famille (+ comptes), pour valider le mapping d'un coup d'œil.

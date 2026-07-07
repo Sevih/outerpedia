@@ -24,6 +24,8 @@ export interface Item {
   grade: string; // dérivé de ItemGrade   (IG_NORMAL   → normal)
   star: number; // BasicStar
   icon: string; // IconName
+  /** Réservé à UN perso (presents d'affinité dédiés — Veronica, Tio…). */
+  characterLimit?: string;
 }
 
 /** Vrai si au moins une langue du dict est non vide. */
@@ -49,6 +51,7 @@ export function buildItems(): Record<string, Item> {
       star: num(r.BasicStar),
       icon: r.IconName ?? '',
     };
+    if (r.CharacterLimit) item.characterLimit = r.CharacterLimit;
 
     // description : convention de clé `_NAME` → `_DESC`, ajoutée seulement si elle existe
     const descKey = r.NameID?.replace(/_NAME$/, '_DESC');
