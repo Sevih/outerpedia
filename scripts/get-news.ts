@@ -1,10 +1,10 @@
 /**
  * getNews — scrape des notes de patch officielles (WordPress OuterPlane) →
  * `data/patch-notes/posts.json` + `buff-events.json`. Les images sont converties
- * en WebP et stockées CONTENT-ADDRESSED (hash de l'URL) dans le pool
- * `.assets-staging/images/patch-notes/` (poussé sur R2 par `pnpm images`) : une
- * image réutilisée sur N posts n'est stockée et téléchargée qu'UNE fois, jamais
- * re-pull. Port de la V2, autonome.
+ * en WebP et stockées CONTENT-ADDRESSED (hash des OCTETS webp) dans le pool
+ * `.assets-staging/images/patch-notes/` (poussé sur R2 par `pnpm images`) : deux
+ * URLs pointant le même visuel → un seul fichier. Une image déjà sur disque n'est
+ * jamais réécrite. Port de la V2, autonome.
  *
  * Usage :
  *   pnpm getNews                 # fetch incrémental (ancré sur le post le + récent)
@@ -160,15 +160,37 @@ async function fetchJSON<T>(url: string): Promise<T> {
   return res.json() as Promise<T>;
 }
 
-async function downloadImage(url: string, destPath: string): Promise<boolean> {
-  if (existsSync(destPath)) return false;
-  const res = await fetch(url, FETCH_OPTS);
-  if (!res.ok) return false;
-  const input = Buffer.from(await res.arrayBuffer());
-  // Conversion en WebP (allège le stockage). `animated` préserve les GIF animés.
-  const webp = await sharp(input, { animated: true }).webp({ quality: 90 }).toBuffer();
-  writeFileSync(destPath, webp);
-  return true;
+// Cache URL → clé (par run) : une même URL n'est téléchargée/convertie qu'une fois.
+const urlToKey = new Map<string, string>();
+
+/**
+ * Télécharge une image, la convertit en WebP, et renvoie sa clé
+ * CONTENT-ADDRESSED = hash des OCTETS webp. Deux URLs différentes pointant le
+ * MÊME visuel (image ré-uploadée sur WP) produisent le même webp → la même clé
+ * → stockée UNE seule fois. Renvoie null en cas d'échec (fetch/format).
+ */
+async function resolveImage(url: string): Promise<{ key: string; downloaded: boolean } | null> {
+  const cached = urlToKey.get(url);
+  if (cached) return { key: cached, downloaded: false };
+  let webp: Buffer;
+  try {
+    const res = await fetch(url, FETCH_OPTS);
+    if (!res.ok) return null;
+    const input = Buffer.from(await res.arrayBuffer());
+    // `animated` préserve les GIF animés.
+    webp = await sharp(input, { animated: true }).webp({ quality: 90 }).toBuffer();
+  } catch {
+    return null;
+  }
+  const key = createHash('sha1').update(webp).digest('hex').slice(0, 16) + '.webp';
+  const dest = join(IMG_DIR, key);
+  let downloaded = false;
+  if (!existsSync(dest)) {
+    writeFileSync(dest, webp);
+    downloaded = true;
+  }
+  urlToKey.set(url, key);
+  return { key, downloaded };
 }
 
 function resolveType(categoryIds: number[]): string {
@@ -184,28 +206,28 @@ function decodeEntities(text: string): string {
 }
 
 /**
- * Clé CONTENT-ADDRESSED d'une image : hash de son URL source. Une même URL
- * (souvent réutilisée sur des dizaines de posts) donne TOUJOURS la même clé →
- * stockée une seule fois, référencée partout, jamais re-téléchargée. Extension
- * `.webp` car tout est converti à la volée (cf. `downloadImage`).
+ * Nettoie le HTML WP + réécrit les <img> vers le store partagé (télécharge,
+ * convertit, clé de contenu), remplace <video> par un lien, purge les classes
+ * `wp-*`. Renvoie le nombre d'images RÉELLEMENT téléchargées (pour le rate-limit).
  */
-function imageKey(url: string): string {
-  return createHash('sha1').update(url).digest('hex').slice(0, 16) + '.webp';
-}
-
-/** Nettoie le HTML WP : réécrit les <img> vers le store partagé, remplace <video> par un lien, purge les classes wp-*. */
-function sanitizeHTML(html: string): { html: string; images: { url: string; key: string }[] } {
+async function processContent(html: string): Promise<{ html: string; downloads: number }> {
   const $ = cheerio.load(html);
-  const images: { url: string; key: string }[] = [];
-  $('img').each((_i, el) => {
+  let downloads = 0;
+  for (const el of $('img').toArray()) {
     const src = $(el).attr('src');
-    if (!src) return;
-    const key = imageKey(src);
-    images.push({ url: src, key });
-    $(el).attr('src', `/images/patch-notes/${key}`);
+    if (src) {
+      const r = await resolveImage(src);
+      if (r) {
+        $(el).attr('src', `/images/patch-notes/${r.key}`);
+        if (r.downloaded) {
+          downloads++;
+          await sleep(DELAY_IMAGE);
+        }
+      }
+    }
     $(el).removeAttr('loading').removeAttr('decoding').removeAttr('srcset').removeAttr('sizes');
     if ($(el).attr('class')) $(el).removeAttr('class');
-  });
+  }
   $('video').each((_i, el) => {
     const src = $(el).attr('src');
     if (!src) return;
@@ -223,7 +245,7 @@ function sanitizeHTML(html: string): { html: string; images: { url: string; key:
     if (cleaned) $(el).attr('class', cleaned);
     else $(el).removeAttr('class');
   });
-  return { html: $('body').html() || '', images };
+  return { html: $('body').html() || '', downloads };
 }
 
 /** Écrit en JSON indenté seulement si le contenu diffère (évite de churner le fichier committé). */
@@ -254,10 +276,6 @@ async function main(): Promise<void> {
   mkdirSync(OUT_DIR, { recursive: true });
   mkdirSync(IMG_DIR, { recursive: true });
   const outputPath = join(OUT_DIR, 'posts.json');
-  // Clés d'images déjà traitées CE run (dédup inter-posts : une image partagée
-  // par N posts n'est testée/téléchargée qu'une fois). `downloadImage` gère en
-  // plus la dédup inter-runs via `existsSync`.
-  const seenKeys = new Set<string>();
 
   let existing: PatchNotesData = { posts: [] };
   try {
@@ -309,19 +327,8 @@ async function main(): Promise<void> {
         const type = resolveType(post.categories);
         if (type === 'media') continue;
 
-        const { html, images } = sanitizeHTML(post.content.rendered);
-        for (const { url, key } of images) {
-          if (seenKeys.has(key)) continue; // déjà traité ce run
-          seenKeys.add(key);
-          try {
-            if (await downloadImage(url, join(IMG_DIR, key))) {
-              imgCount++;
-              await sleep(DELAY_IMAGE);
-            }
-          } catch {
-            /* image cassée → ignore */
-          }
-        }
+        const { html, downloads } = await processContent(post.content.rendered);
+        imgCount += downloads;
 
         byId.set(post.id, {
           id: post.id,

@@ -27,10 +27,10 @@ de la pipeline V2 (`pipeline/run.ts`, 30 steps) + les JSON data à la main.
 
 - [x] **`patch-notes`** — `pnpm getNews` (`scripts/get-news.ts`, dep `cheerio`) :
       scrape le WP OuterPlane → `data/patch-notes/posts.json` + `buff-events.json`.
-      Images converties **WebP** + stockées **content-addressed** (hash d'URL,
-      flat) dans `.assets-staging/images/patch-notes/` → poussées sur **R2** par
-      `pnpm images`, dédup totale, jamais re-pull. Incrémental (`modified_after`
-      par langue). `--limit=N` / `--force-since=`.
+      Images converties **WebP** + stockées **content-addressed** (hash des
+      OCTETS webp → 2 URLs = même visuel dédupliqué) dans
+      `.assets-staging/images/patch-notes/` → poussées sur **R2** par `pnpm images`.
+      Incrémental (`modified_after` par langue). `--limit=N` / `--force-since=`.
   - ⚠️ Reste à faire quand la PAGE patch-notes sera portée : le `src` stocké est
     relatif (`/images/patch-notes/…webp`). En prod (images sur R2), le composant
     de rendu devra préfixer `NEXT_PUBLIC_IMG_BASE` sur ces chemins (comme `img.*`).
