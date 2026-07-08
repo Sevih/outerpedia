@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import type { Route } from 'next';
 import { ItemCuratedEditor, type ItemBase } from '@/components/admin/ItemCuratedEditor';
-import { getItems } from '@/lib/data/items';
-import { getGoods } from '@/lib/data/goods';
+import { itemBase } from '@/lib/data/item-catalog';
 import { loadItemCurated } from '@/lib/admin/item-curated-store';
 
 export const dynamic = 'force-dynamic';
@@ -11,17 +10,17 @@ const EMPTY = { en: '', jp: '', kr: '', zh: '' };
 
 export default async function EditorItemDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const it = getItems()[id];
-  const g = getGoods()[id];
+  const found = itemBase(id);
   const initial = loadItemCurated()[id] ?? {};
 
-  // Id inconnu de items/goods = CRÉATION (monnaie hors SYS_ASSET_*, item custom…).
-  const base: ItemBase = it
-    ? { kind: 'item', name: it.name, desc: it.desc, icon: it.icon, grade: it.grade }
-    : g
-      ? { kind: 'goods', name: g.name, desc: g.desc, icon: g.icon, grade: g.grade }
-      : { kind: 'custom', name: EMPTY, icon: id.startsWith('TI_') ? id : '', grade: 'normal' };
-  const isNew = !it && !g;
+  // Id inconnu de items/goods/costumes = CRÉATION (monnaie hors SYS_ASSET_*, custom…).
+  const base: ItemBase = found ?? {
+    kind: 'custom',
+    name: EMPTY,
+    icon: id.startsWith('TI_') ? id : '',
+    grade: 'normal',
+  };
+  const isNew = !found;
 
   return (
     <div className="space-y-4">

@@ -21,7 +21,7 @@ const compact = (v: Loc): LangDict | undefined => {
 };
 
 export interface ItemBase {
-  kind: 'item' | 'goods' | 'custom';
+  kind: 'item' | 'goods' | 'costume' | 'custom';
   name: LangDict;
   desc?: LangDict;
   icon: string;

@@ -16,6 +16,7 @@ import { resolve } from 'node:path';
 import { STAT_ICON } from '../../src/lib/stats';
 import { MISSING_ITEM_ICONS as ITEM_ICON_BLACKLIST } from '../../src/lib/data/item-blacklist';
 import { buildGoods } from '../generators/goods';
+import { buildCostumes } from '../generators/costumes';
 
 export type AssetRequest =
   | {
@@ -502,6 +503,16 @@ export function buildAssetManifest(): AssetRequest[] {
         kind: 'image',
         key: `images/items/${g.icon}.webp`,
         candidates: [g.icon],
+        domain: 'items',
+      });
+  // Costumes : icônes (TI_Costume_*, sprites d'un container à part) servies sous
+  // le même namespace `images/items/` — référencées comme rewards / au catalogue.
+  for (const c of Object.values(buildCostumes()))
+    if (c.icon && !ITEM_ICON_BLACKLIST.has(c.icon))
+      push({
+        kind: 'image',
+        key: `images/items/${c.icon}.webp`,
+        candidates: [c.icon],
         domain: 'items',
       });
   // Icônes curées (overrides + créations d'items/monnaies depuis l'admin).

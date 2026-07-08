@@ -50,7 +50,19 @@ export function ItemPicker({
   const matches = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return [];
-    return options.filter((o) => o.name.toLowerCase().includes(q)).slice(0, 20);
+    // Rang : nom exact > commence par > contient ; puis nom le plus court.
+    // Sans ça, une monnaie courte (« Gold ») est noyée sous les coffres qui la
+    // contiennent (« Gold & Stamina Chest »…) et passe sous le plafond.
+    const rank = (name: string) => {
+      const n = name.toLowerCase();
+      if (n === q) return 0;
+      if (n.startsWith(q)) return 1;
+      return 2;
+    };
+    return options
+      .filter((o) => o.name.toLowerCase().includes(q))
+      .sort((a, b) => rank(a.name) - rank(b.name) || a.name.length - b.name.length)
+      .slice(0, 20);
   }, [options, query]);
 
   // Valeur posée (résolue ou non) : aperçu + bouton pour re-chercher.

@@ -12,7 +12,7 @@
     "start": "2026-06-26",
     "end": "2026-08-26",
     "description": {
-      "Free Ether": "1500"
+      "SYS_ASSET_FREE_CRYSTAL": "1500"
     }
   },
   {
@@ -20,7 +20,7 @@
     "start": "2026-06-16",
     "end": "2026-08-31",
     "description": {
-      "Free Ether": "500"
+      "SYS_ASSET_FREE_CRYSTAL": "500"
     }
   },
   {
@@ -36,7 +36,7 @@
     "start": "2026-06-01",
     "end": "2026-06-30",
     "description": {
-      "Free Ether": "500"
+      "SYS_ASSET_FREE_CRYSTAL": "500"
     }
   },
   {
@@ -52,7 +52,7 @@
     "start": "2026-05-19",
     "end": "2026-08-31",
     "description": {
-      "Stamina": "500"
+      "TI_Item_Stamina": "500"
     }
   },
   {
@@ -60,7 +60,7 @@
     "start": "2026-05-18",
     "end": "2026-06-30",
     "description": {
-      "Free Ether": "1500"
+      "SYS_ASSET_FREE_CRYSTAL": "1500"
     }
   },
   {
@@ -76,7 +76,7 @@
     "start": "2026-05-16",
     "end": "2026-06-30",
     "description": {
-      "Gold": "1 000 000"
+      "SYS_ASSET_GOLD": "1 000 000"
     }
   },
   {
@@ -92,7 +92,7 @@
     "start": "2026-05-15",
     "end": "2026-08-30",
     "description": {
-      "Stamina": "500"
+      "TI_Item_Stamina": "500"
     }
   },
   {
@@ -124,7 +124,7 @@
     "start": "2026-04-29",
     "end": "2026-05-31",
     "description": {
-      "Stamina": "500"
+      "TI_Item_Stamina": "500"
     }
   },
   {
@@ -132,7 +132,7 @@
     "start": "2026-04-22",
     "end": "2026-05-31",
     "description": {
-      "Call of the Demiurge": "100"
+      "SYS_ASSET_DEMIURGE": "100"
     }
   },
   {
@@ -156,7 +156,7 @@
     "start": "2026-04-07",
     "end": "2026-04-30",
     "description": {
-      "Call of the Demiurge (Event)": "100"
+      "SYS_ASSET_DEMIURGE_FREE": "100"
     }
   },
   {
@@ -164,7 +164,7 @@
     "start": "2026-04-06",
     "end": "2026-05-31",
     "description": {
-      "Call of the Demiurge": "100"
+      "SYS_ASSET_DEMIURGE": "100"
     }
   },
   {
@@ -172,7 +172,7 @@
     "start": "2026-04-03",
     "end": "2026-05-30",
     "description": {
-      "Stamina": "120"
+      "TI_Item_Stamina": "120"
     }
   },
   {
@@ -180,7 +180,7 @@
     "start": "2026-04-01",
     "end": "2026-05-30",
     "description": {
-      "Call of the Demiurge": "100"
+      "SYS_ASSET_DEMIURGE": "100"
     }
   },
   {
@@ -188,7 +188,7 @@
     "start": "2026-03-18",
     "end": "2026-04-30",
     "description": {
-      "Free Ether": "1500"
+      "SYS_ASSET_FREE_CRYSTAL": "1500"
     }
   },
   {
@@ -196,7 +196,7 @@
     "start": "2026-03-12",
     "end": "2026-03-31",
     "description": {
-      "Free Ether": "1500"
+      "SYS_ASSET_FREE_CRYSTAL": "1500"
     }
   },
   {
@@ -205,8 +205,8 @@
     "end": "2026-06-30",
     "description": {
       "Summer Island Eliza": "1",
-      "Free Ether": "500",
-      "Call of the Demiurge (Event)": "100"
+      "SYS_ASSET_FREE_CRYSTAL": "500",
+      "SYS_ASSET_DEMIURGE_FREE": "100"
     }
   },
   {
@@ -230,7 +230,7 @@
     "start": "2026-02-15",
     "end": "2026-03-31",
     "description": {
-      "Call of the Demiurge (Event)": "100"
+      "SYS_ASSET_DEMIURGE_FREE": "100"
     }
   },
   {
@@ -246,7 +246,7 @@
     "start": "2026-02-13",
     "end": "2026-08-30",
     "description": {
-      "Free Ether": "1500",
+      "SYS_ASSET_FREE_CRYSTAL": "1500",
       "New Year's Revelry Ame": "1"
     }
   },
@@ -255,7 +255,7 @@
     "start": "2026-02-10",
     "end": "2026-03-10",
     "description": {
-      "Free Ether": "500"
+      "SYS_ASSET_FREE_CRYSTAL": "500"
     }
   },
   {
@@ -263,7 +263,7 @@
     "start": "2026-02-03",
     "end": "2026-06-01",
     "description": {
-      "Free Ether": "1500"
+      "SYS_ASSET_FREE_CRYSTAL": "1500"
     }
   },
   {
@@ -271,7 +271,7 @@
     "start": "2026-01-31",
     "end": "2026-06-01",
     "description": {
-      "Free Ether": "1000"
+      "SYS_ASSET_FREE_CRYSTAL": "1000"
     }
   },
   {
@@ -279,7 +279,7 @@
     "start": "2026-01-29",
     "end": "2026-03-01",
     "description": {
-      "Free Ether": "500"
+      "SYS_ASSET_FREE_CRYSTAL": "500"
     }
   },
   {
@@ -287,7 +287,7 @@
     "start": "2026-01-28",
     "end": "2026-05-31",
     "description": {
-      "Free Ether": "1500"
+      "SYS_ASSET_FREE_CRYSTAL": "1500"
     }
   },
   {
@@ -295,7 +295,7 @@
     "start": "2026-01-22",
     "end": "2026-02-28",
     "description": {
-      "Free Ether": "500"
+      "SYS_ASSET_FREE_CRYSTAL": "500"
     }
   },
   {
@@ -303,7 +303,7 @@
     "start": "2026-01-18",
     "end": "2026-03-31",
     "description": {
-      "Call of the Demiurge (Event)": "100"
+      "SYS_ASSET_DEMIURGE_FREE": "100"
     }
   },
   {
@@ -312,8 +312,8 @@
     "end": "2026-05-31",
     "description": {
       "Office Lady Valentine": "1",
-      "Call of the Demiurge": "100",
-      "Free Ether": "500"
+      "SYS_ASSET_DEMIURGE": "100",
+      "SYS_ASSET_FREE_CRYSTAL": "500"
     }
   },
   {
@@ -345,7 +345,7 @@
     "start": "2026-01-09",
     "end": "2026-03-31",
     "description": {
-      "Call of the Demiurge (Event)": "100"
+      "SYS_ASSET_DEMIURGE_FREE": "100"
     }
   },
   {
@@ -361,7 +361,7 @@
     "start": "2025-12-25",
     "end": "2026-03-31",
     "description": {
-      "Free Ether": "1500"
+      "SYS_ASSET_FREE_CRYSTAL": "1500"
     }
   },
   {
@@ -369,7 +369,7 @@
     "start": "2025-12-25",
     "end": "2026-03-31",
     "description": {
-      "Free Ether": "1500"
+      "SYS_ASSET_FREE_CRYSTAL": "1500"
     }
   },
   {
@@ -385,7 +385,7 @@
     "start": "2025-12-25",
     "end": "2026-03-31",
     "description": {
-      "Free Ether": "3000"
+      "SYS_ASSET_FREE_CRYSTAL": "3000"
     }
   },
   {
@@ -393,7 +393,7 @@
     "start": "2025-12-25",
     "end": "2026-03-31",
     "description": {
-      "Call of the Demiurge (Event)": "100"
+      "SYS_ASSET_DEMIURGE_FREE": "100"
     }
   },
   {
@@ -418,7 +418,7 @@
     "end": "2026-03-31",
     "description": {
       "Battle Maid Tamara": "1",
-      "Free Ether": "500"
+      "SYS_ASSET_FREE_CRYSTAL": "500"
     }
   },
   {
@@ -466,7 +466,7 @@
     "start": "2025-11-28",
     "end": "2025-12-28",
     "description": {
-      "Free Ether": "500"
+      "SYS_ASSET_FREE_CRYSTAL": "500"
     }
   },
   {
@@ -483,7 +483,7 @@
     "start": "2025-11-21",
     "end": "2026-03-31",
     "description": {
-      "Call of the Demiurge (Event)": "100"
+      "SYS_ASSET_DEMIURGE_FREE": "100"
     }
   },
   {
@@ -491,7 +491,7 @@
     "start": "2025-11-21",
     "end": "2026-03-31",
     "description": {
-      "Free Ether": "1500"
+      "SYS_ASSET_FREE_CRYSTAL": "1500"
     }
   },
   {
@@ -499,7 +499,7 @@
     "start": "2025-11-12",
     "end": "2025-12-11",
     "description": {
-      "Free Ether": "500"
+      "SYS_ASSET_FREE_CRYSTAL": "500"
     }
   },
   {
@@ -507,7 +507,7 @@
     "start": "2025-11-05",
     "end": "2025-11-11",
     "description": {
-      "Stamina": "120"
+      "TI_Item_Stamina": "120"
     }
   },
   {
@@ -515,9 +515,9 @@
     "start": "2025-11-05",
     "end": "2025-12-05",
     "description": {
-      "Free Ether": "1500",
-      "Stamina": "200",
-      "Gold": "1 000 000"
+      "SYS_ASSET_FREE_CRYSTAL": "1500",
+      "TI_Item_Stamina": "200",
+      "SYS_ASSET_GOLD": "1 000 000"
     }
   },
   {
@@ -533,7 +533,7 @@
     "start": "2025-10-02",
     "end": "2025-12-31",
     "description": {
-      "Call of the Demiurge (Event)": "100"
+      "SYS_ASSET_DEMIURGE_FREE": "100"
     }
   },
   {
@@ -541,7 +541,7 @@
     "start": "2025-09-23",
     "end": "2025-12-31",
     "description": {
-      "Free Ether": "1500"
+      "SYS_ASSET_FREE_CRYSTAL": "1500"
     }
   },
   {
@@ -557,7 +557,7 @@
     "start": "2025-09-23",
     "end": "2025-12-31",
     "description": {
-      "Call of the Demiurge (Event)": "100"
+      "SYS_ASSET_DEMIURGE_FREE": "100"
     }
   },
   {
@@ -565,7 +565,7 @@
     "start": "2025-07-11",
     "end": "2025-08-10",
     "description": {
-      "Free Ether": "500"
+      "SYS_ASSET_FREE_CRYSTAL": "500"
     }
   },
   {
@@ -581,7 +581,7 @@
     "start": "2025-04-30",
     "end": "2025-05-28",
     "description": {
-      "Free Ether": "500"
+      "SYS_ASSET_FREE_CRYSTAL": "500"
     }
   },
   {
@@ -589,7 +589,7 @@
     "start": "2025-04-28",
     "end": "2025-05-05",
     "description": {
-      "Free Ether": "1000"
+      "SYS_ASSET_FREE_CRYSTAL": "1000"
     }
   },
   {
@@ -597,7 +597,7 @@
     "start": "2025-03-19",
     "end": "2025-04-07",
     "description": {
-      "Free Ether": "1500"
+      "SYS_ASSET_FREE_CRYSTAL": "1500"
     }
   },
   {
@@ -605,7 +605,7 @@
     "start": "2025-01-23",
     "end": "2025-02-23",
     "description": {
-      "Free Ether": "500"
+      "SYS_ASSET_FREE_CRYSTAL": "500"
     }
   },
   {
@@ -621,7 +621,7 @@
     "start": "2024-12-13",
     "end": "2025-01-13",
     "description": {
-      "Free Ether": "1000"
+      "SYS_ASSET_FREE_CRYSTAL": "1000"
     }
   },
   {
@@ -661,7 +661,7 @@
     "start": "2024-11-26",
     "end": "2024-12-02",
     "description": {
-      "Free Ether": "500"
+      "SYS_ASSET_FREE_CRYSTAL": "500"
     }
   },
   {
@@ -677,7 +677,7 @@
     "start": "2024-11-14",
     "end": "2024-12-02",
     "description": {
-      "Free Ether": "500"
+      "SYS_ASSET_FREE_CRYSTAL": "500"
     }
   },
   {
@@ -701,7 +701,7 @@
     "start": "2024-11-01",
     "end": "2024-11-29",
     "description": {
-      "Free Ether": "1000"
+      "SYS_ASSET_FREE_CRYSTAL": "1000"
     }
   }
 ]

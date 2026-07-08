@@ -7,12 +7,19 @@
 import type { LangDict } from '@contracts';
 import { getItems, type ItemOption } from './items';
 import { getGoods } from './goods';
+import { getCostumes } from './costumes';
 import { MISSING_ITEM_ICONS } from './item-blacklist';
 import { loadItemCurated, type ItemCurated } from '@/lib/admin/item-curated-store';
 
+/**
+ * Préfixe d'id des costumes dans le catalogue : leur clé de table (`1`, `2`…)
+ * est trop générique pour servir d'id d'item transverse → on la namespace.
+ */
+export const COSTUME_PREFIX = 'COSTUME_';
+
 export interface CatalogItem {
   id: string;
-  kind: 'item' | 'goods' | 'custom';
+  kind: 'item' | 'goods' | 'costume' | 'custom';
   name: LangDict;
   desc?: LangDict;
   icon: string;
@@ -25,7 +32,7 @@ export interface CatalogItem {
 }
 
 interface Base {
-  kind: 'item' | 'goods';
+  kind: 'item' | 'goods' | 'costume';
   name: LangDict;
   desc?: LangDict;
   icon: string;
@@ -65,7 +72,22 @@ function creation(id: string, cur: ItemCurated): CatalogItem {
   };
 }
 
+function costumeBase(id: string): Base | undefined {
+  const c = getCostumes()[id.slice(COSTUME_PREFIX.length)];
+  if (!c) return undefined;
+  return {
+    kind: 'costume',
+    name: c.name,
+    desc: c.desc,
+    icon: c.icon,
+    grade: c.grade,
+    type: 'costume',
+    star: 0,
+  };
+}
+
 function baseOf(id: string): Base | undefined {
+  if (id.startsWith(COSTUME_PREFIX)) return costumeBase(id);
   const it = getItems()[id];
   if (it)
     return {
@@ -134,9 +156,34 @@ export function listItemEntries(): CatalogItem[] {
         cur[id],
       ),
     );
-  // Créations : entrées curées absentes de items/goods.
+  for (const [rawId, c] of Object.entries(getCostumes())) {
+    const id = COSTUME_PREFIX + rawId;
+    out.push(
+      merge(
+        id,
+        {
+          kind: 'costume',
+          name: c.name,
+          desc: c.desc,
+          icon: c.icon,
+          grade: c.grade,
+          type: 'costume',
+          star: 0,
+        },
+        cur[id],
+      ),
+    );
+  }
+  // Créations : entrées curées absentes de items/goods/costumes.
+  const costumes = getCostumes();
   for (const [id, c] of Object.entries(cur))
-    if (!items[id] && !goods[id] && c.name?.en) out.push(creation(id, c));
+    if (
+      !items[id] &&
+      !goods[id] &&
+      !(id.startsWith(COSTUME_PREFIX) && costumes[id.slice(COSTUME_PREFIX.length)]) &&
+      c.name?.en
+    )
+      out.push(creation(id, c));
   return out;
 }
 
@@ -146,6 +193,20 @@ export function getItemEntry(id: string): CatalogItem | undefined {
   if (base) return merge(id, base, cur);
   if (cur && cur.name?.en) return creation(id, cur);
   return undefined;
+}
+
+/**
+ * Base NON curée d'un id (item / monnaie / costume), pour l'éditeur qui
+ * superpose la couche curée par-dessus. `undefined` si l'id n'existe dans
+ * aucune source de jeu (→ création).
+ */
+export function itemBase(
+  id: string,
+):
+  | { kind: CatalogItem['kind']; name: LangDict; desc?: LangDict; icon: string; grade: string }
+  | undefined {
+  const b = baseOf(id);
+  return b && { kind: b.kind, name: b.name, desc: b.desc, icon: b.icon, grade: b.grade };
 }
 
 /** Options compactes (id/nom/icône/grade/desc) pour le picker — hors masqués. */
