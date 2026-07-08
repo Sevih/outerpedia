@@ -9,7 +9,6 @@ import {
   buildUrl,
   buildVideoGameCharacterJsonLd,
   buildBreadcrumbJsonLd,
-  buildVideoObjectJsonLd,
 } from '@/lib/seo';
 import JsonLd from '@/components/seo/JsonLd';
 import { SkillsSection, type SkillPriority } from '@/components/character/SkillsSection';
@@ -256,21 +255,6 @@ export default async function CharacterDetail({
     { name: 'Characters', url: buildUrl(lang, '/characters') },
     { name, url: buildUrl(lang, path) },
   ]);
-  const videoLds = (curated.videos ?? [])
-    .map((v) =>
-      buildVideoObjectJsonLd({
-        platform: v.platform as 'youtube',
-        id: v.id,
-        title: v.title ?? name,
-        author: v.author,
-        uploadDate: v.uploadDate,
-        // Miniature AUTO-HÉBERGÉE (full art du perso) au lieu de la miniature
-        // YouTube : sans URL i.ytimg.com dans la page, les crawlers d'aperçu
-        // (Discord…) ne peuvent plus afficher la vidéo à la place de l'og:image.
-        thumbnail: img.full(char.id),
-      }),
-    )
-    .filter((n): n is NonNullable<typeof n> => n !== null);
 
   // --- Flux éditorial (ordre V2 ; les sections manquantes s'insèreront ici) --
   const statLayers = getStatLayers(char);
@@ -564,9 +548,6 @@ export default async function CharacterDetail({
     <div className="cd-page" style={{ '--cd-el': hex } as React.CSSProperties}>
       <JsonLd data={charLd} />
       <JsonLd data={crumbLd} />
-      {videoLds.map((v, i) => (
-        <JsonLd key={i} data={v} />
-      ))}
 
       <OverviewSection
         hex={hex}
