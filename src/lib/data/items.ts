@@ -1,17 +1,26 @@
-import type { Item } from '@contracts';
+/**
+ * Lecteur du CATALOGUE D'ITEMS UNIFIÉ (`data/generated/items.json`) — items de
+ * jeu + monnaies + costumes + curé (baked au build). Source unique servie ;
+ * l'overlay curé LIVE de l'admin est ajouté par `item-catalog.ts`.
+ */
+import type { CatalogEntry } from '@contracts';
 import itemsData from '@data/generated/items.json';
 
-const ITEMS = itemsData as unknown as Record<string, Item>;
+const CATALOG = itemsData as unknown as Record<string, CatalogEntry>;
 
-export function getItems(): Record<string, Item> {
-  return ITEMS;
+export function getCatalog(): Record<string, CatalogEntry> {
+  return CATALOG;
 }
 
-export function getItem(id: string): Item | undefined {
-  return ITEMS[id];
+export function getCatalogEntry(id: string): CatalogEntry | undefined {
+  return CATALOG[id];
 }
 
-/** Forme compacte pour un picker / affichage inline (sans desc, léger côté client). */
+/** Alias historique (le catalogue EST la donnée items servie). */
+export const getItems = getCatalog;
+export const getItem = getCatalogEntry;
+
+/** Forme compacte pour un picker / affichage inline. */
 export interface ItemOption {
   id: string;
   name: string;
@@ -19,20 +28,4 @@ export interface ItemOption {
   grade: string;
   /** Description EN (tooltip). */
   desc?: string;
-}
-
-export function getItemOptions(): ItemOption[] {
-  return Object.entries(ITEMS)
-    .filter(([, it]) => it.name.en)
-    .map(([id, it]) => ({ id, name: it.name.en, icon: it.icon, grade: it.grade }));
-}
-
-/** Index nom EN (minuscule) → id — pour mapper les rewards V2 (stockés par nom). */
-export function itemIdByName(): Map<string, string> {
-  const m = new Map<string, string>();
-  for (const [id, it] of Object.entries(ITEMS)) {
-    const n = it.name.en?.trim().toLowerCase();
-    if (n && !m.has(n)) m.set(n, id);
-  }
-  return m;
 }

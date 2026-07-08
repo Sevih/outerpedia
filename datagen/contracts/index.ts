@@ -41,6 +41,7 @@ export type { Skill, SkillLevel } from '../generators/skills';
 export type { Item } from '../generators/items';
 export type { Goods } from '../generators/goods';
 export type { Costume as CostumeItem } from '../generators/costumes';
+export type { CatalogEntry } from '../generators/item-catalog';
 export type {
   ArmorItem,
   BreakLimit,
@@ -84,9 +85,7 @@ import type { Effect } from '../lib/effects';
 import type { Character } from '../extractor/specs/character';
 import type { TranscendData } from '../extractor/transcend';
 import type { Skill } from '../generators/skills';
-import type { Item } from '../generators/items';
-import type { Goods } from '../generators/goods';
-import type { Costume as CostumeItem } from '../generators/costumes';
+import type { CatalogEntry } from '../generators/item-catalog';
 import type {
   ArmorItem,
   BreakLimit,
@@ -161,12 +160,11 @@ export type CharactersFile = Record<string, Character>;
 export type TranscendFile = TranscendData;
 /** `data/generated/skills.json` */
 export type SkillsFile = Record<string, Skill>;
-/** `data/generated/items.json` */
-export type ItemsFile = Record<string, Item>;
-/** `data/generated/goods.json` — monnaies/ressources (SYS_ASSET_*). */
-export type GoodsFile = Record<string, Goods>;
-/** `data/generated/costumes.json` — skins (CostumeTemplet), vue plate. */
-export type CostumesFile = Record<string, CostumeItem>;
+/**
+ * `data/generated/items.json` — CATALOGUE UNIFIÉ servi : items de jeu +
+ * monnaies + costumes + curé (overrides & créations), format aligné.
+ */
+export type ItemsFile = Record<string, CatalogEntry>;
 
 /** Fichiers `data/generated/equipment/*` (un par slot + catalogues transverses). */
 export interface EquipmentFiles {

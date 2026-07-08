@@ -15,8 +15,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { STAT_ICON } from '../../src/lib/stats';
 import { MISSING_ITEM_ICONS as ITEM_ICON_BLACKLIST } from '../../src/lib/data/item-blacklist';
-import { buildGoods } from '../generators/goods';
-import { buildCostumes } from '../generators/costumes';
+import { buildItemCatalog } from '../generators/item-catalog';
 
 export type AssetRequest =
   | {
@@ -474,64 +473,22 @@ export function buildAssetManifest(): AssetRequest[] {
     candidates: ['CM_Goods_Gold'],
     domain: 'ui',
   });
-  // Items : TOUTES les icônes déclarées dans items.json. Un item peut être
-  // référencé partout (fiches perso, cadeaux, rappels, mais aussi récompenses
-  // de promo-codes et autres outils admin qui listent l'inventaire complet).
-  // Collecter à la source (items.json = donnée, pas les 11k sprites du jeu)
-  // évite les 404 surprises ; les icônes sans sprite remontent au rapport.
-  {
-    const items = load('items.json') as unknown as Record<string, { icon?: string }>;
-    for (const icon of new Set(
-      Object.values(items)
-        .map((it) => it.icon)
-        .filter((i): i is string => Boolean(i) && !ITEM_ICON_BLACKLIST.has(i as string)),
-    ))
-      push({
-        kind: 'image',
-        key: `images/items/${icon}.webp`,
-        candidates: [icon as string],
-        domain: 'items',
-      });
-  }
-  // Monnaies (goods) : les rewards de codes promo (Ether, tickets…) vivent hors
-  // items.json (clés SYS_ASSET_* de TextSystem). Leurs icônes résolues par
-  // `buildGoods` (cross-ref ItemTemplet + convention vérifiée) sont servies sous
-  // le même namespace `images/items/`.
-  for (const g of Object.values(buildGoods()))
-    if (g.icon && !ITEM_ICON_BLACKLIST.has(g.icon))
-      push({
-        kind: 'image',
-        key: `images/items/${g.icon}.webp`,
-        candidates: [g.icon],
-        domain: 'items',
-      });
-  // Costumes : icônes (TI_Costume_*, sprites d'un container à part) servies sous
-  // le même namespace `images/items/` — référencées comme rewards / au catalogue.
-  for (const c of Object.values(buildCostumes()))
-    if (c.icon && !ITEM_ICON_BLACKLIST.has(c.icon))
-      push({
-        kind: 'image',
-        key: `images/items/${c.icon}.webp`,
-        candidates: [c.icon],
-        domain: 'items',
-      });
-  // Icônes curées (overrides + créations d'items/monnaies depuis l'admin).
-  try {
-    const curated = JSON.parse(readFileSync(resolve('data/curated/items.json'), 'utf8')) as Record<
-      string,
-      { icon?: string }
-    >;
-    for (const c of Object.values(curated))
-      if (c.icon && !ITEM_ICON_BLACKLIST.has(c.icon))
-        push({
-          kind: 'image',
-          key: `images/items/${c.icon}.webp`,
-          candidates: [c.icon],
-          domain: 'items',
-        });
-  } catch {
-    /* pas de curé items */
-  }
+  // Catalogue d'items UNIFIÉ : TOUTES les icônes déclarées (items + monnaies +
+  // costumes + overrides/créations curés) sous le namespace `images/items/`. Un
+  // item est référençable partout (fiches perso, cadeaux, rewards de promo-codes,
+  // outils admin…). Collecter à la source (le catalogue = donnée, pas les 11k
+  // sprites du jeu) évite les 404 ; les icônes sans sprite remontent au rapport.
+  for (const icon of new Set(
+    Object.values(buildItemCatalog())
+      .map((e) => e.icon)
+      .filter((i): i is string => Boolean(i) && !ITEM_ICON_BLACKLIST.has(i)),
+  ))
+    push({
+      kind: 'image',
+      key: `images/items/${icon}.webp`,
+      candidates: [icon],
+      domain: 'items',
+    });
   // TOUS les sprites d'items du jeu (`TI_*`), y compris ceux pas encore
   // rattachés à un item : l'admin (Editor › Item) les liste comme « à rentrer »
   // et doit pouvoir les prévisualiser.

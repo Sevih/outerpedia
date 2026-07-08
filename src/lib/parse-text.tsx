@@ -35,14 +35,15 @@ import { InlineIcon } from '@/components/inline/InlineIcon';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { StatInline } from '@/components/inline/StatInline';
 import { EffectIconTile } from '@/components/character/EffectChips';
-import type { Character, Item, Skill, LangDict } from '@contracts';
+import type { Character, CatalogEntry, Skill, LangDict } from '@contracts';
 import skillsData from '@data/generated/skills.json';
 import eeData from '@data/generated/equipment/ee.json';
 import itemsData from '@data/generated/items.json';
 
 const SKILLS = skillsData as unknown as Record<string, Skill>;
 const EE = eeData as unknown as Record<string, { name: LangDict }>;
-const ITEMS = itemsData as unknown as Record<string, Item>;
+// Catalogue d'items UNIFIÉ (items + monnaies + costumes + curé baked).
+const ITEMS = itemsData as unknown as Record<string, CatalogEntry>;
 
 export interface ParseCtx {
   lang: Lang;
@@ -312,17 +313,30 @@ function equipmentChip(
   );
 }
 
-// Index des items génériques par nom EN (catalogue extrait complet).
-let itemByName: Map<string, Item & { id: string }> | null = null;
+/**
+ * Index des items génériques par nom EN — catalogue SERVI UNIFIÉ (items +
+ * monnaies + costumes + créations curées, bakées au build), même namespace
+ * d'icône `images/items/`. Client-safe : `items.json` est un import statique,
+ * la curation y est déjà fusionnée (pas d'accès `node:fs` requis).
+ */
+type CatalogChip = { id: string; name: LangDict; desc?: LangDict; icon: string; grade: string };
+let itemByName: Map<string, CatalogChip> | null = null;
+function catalogIndex(): Map<string, CatalogChip> {
+  if (itemByName) return itemByName;
+  const m = new Map<string, CatalogChip>();
+  for (const [id, e] of Object.entries(ITEMS)) {
+    if (e.hidden) continue; // masqué : non référençable
+    const key = e.name.en?.trim().toLowerCase();
+    if (key && !m.has(key))
+      m.set(key, { id, name: e.name, desc: e.desc, icon: e.icon, grade: e.grade });
+  }
+  itemByName = m;
+  return m;
+}
+
 /** Chip item générique ({I-I/nom}) : icône + nom + description en tooltip. */
 function itemChip(name: string, ctx: ParseCtx, k: number): ReactNode {
-  if (!itemByName) {
-    itemByName = new Map();
-    for (const [id, it] of Object.entries(ITEMS)) {
-      itemByName.set(it.name.en.trim().toLowerCase(), { ...it, id });
-    }
-  }
-  const it = itemByName.get(name.trim().toLowerCase());
+  const it = catalogIndex().get(name.trim().toLowerCase());
   if (!it)
     return (
       <span key={k} className="text-red-500">
@@ -336,7 +350,7 @@ function itemChip(name: string, ctx: ParseCtx, k: number): ReactNode {
       key={k}
       item={{
         name: label,
-        iconSrc: img.equipment(it.icon),
+        iconSrc: img.item(it.icon),
         grade: it.grade,
         desc: desc || undefined,
       }}
@@ -466,14 +480,10 @@ function checkTag(type: string, value: string): { ok: boolean; reason?: string }
       return findFamily('amulet', v) ? { ok: true } : { ok: false, reason: 'amulette inconnue' };
     case 'I-T':
       return findFamily('talisman', v) ? { ok: true } : { ok: false, reason: 'talisman inconnu' };
-    case 'I-I': {
-      if (!itemByName) {
-        itemByName = new Map();
-        for (const [id, it] of Object.entries(ITEMS))
-          itemByName.set(it.name.en.trim().toLowerCase(), { ...it, id });
-      }
-      return itemByName.has(v.toLowerCase()) ? { ok: true } : { ok: false, reason: 'item inconnu' };
-    }
+    case 'I-I':
+      return catalogIndex().has(v.trim().toLowerCase())
+        ? { ok: true }
+        : { ok: false, reason: 'item inconnu' };
     default:
       return { ok: false, reason: 'type de tag inconnu' };
   }

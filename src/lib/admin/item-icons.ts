@@ -5,8 +5,7 @@
  */
 import { readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { getItems } from '@/lib/data/items';
-import { getGoods } from '@/lib/data/goods';
+import { getCatalog } from '@/lib/data/items';
 import { loadItemCurated } from './item-curated-store';
 
 const SPRITE_DIR = resolve(
@@ -28,8 +27,7 @@ function sprites(): string[] {
 export function unusedItemIcons(): string[] {
   const cur = loadItemCurated();
   const used = new Set<string>();
-  for (const it of Object.values(getItems())) if (it.icon) used.add(it.icon.toLowerCase());
-  for (const g of Object.values(getGoods())) if (g.icon) used.add(g.icon.toLowerCase());
+  for (const e of Object.values(getCatalog())) if (e.icon) used.add(e.icon.toLowerCase());
   for (const c of Object.values(cur)) if (c.icon) used.add(c.icon.toLowerCase());
   // Un sprite dont le nom est déjà un id créé n'est plus « à rentrer ».
   const createdIds = new Set(Object.keys(cur).map((k) => k.toLowerCase()));
