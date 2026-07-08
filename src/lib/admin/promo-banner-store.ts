@@ -6,8 +6,7 @@
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { itemIdByName } from '@/lib/data/items';
-import { goodsIdByName } from '@/lib/data/goods';
+import { catalogIdByName } from '@/lib/data/item-catalog';
 
 export interface PromoCode {
   code: string;
@@ -64,9 +63,8 @@ export const saveBanners = (list: Banner[]): void => writeArray(BANNER_PATH, lis
  */
 export function regenCouponsFromV2(): PromoCode[] {
   const raw = readArrayStrict<PromoCode>(V2_COUPONS);
-  const nameToId = itemIdByName();
-  // Les monnaies (goods) complètent l'index — sans écraser un item homonyme.
-  for (const [n, id] of goodsIdByName()) if (!nameToId.has(n)) nameToId.set(n, id);
+  // Index catalogue complet : items + monnaies + costumes + créations (Stamina…).
+  const nameToId = catalogIdByName();
   const mapped = raw.map((c) => ({
     ...c,
     description: Object.fromEntries(

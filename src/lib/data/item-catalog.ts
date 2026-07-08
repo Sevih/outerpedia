@@ -209,6 +209,21 @@ export function itemBase(
   return b && { kind: b.kind, name: b.name, desc: b.desc, icon: b.icon, grade: b.grade };
 }
 
+/**
+ * Index nom EN (minuscule) → id de catalogue, sur TOUTES les entrées (items +
+ * monnaies + costumes + créations curées comme Stamina). Sert à mapper les
+ * rewards V2 (stockés par nom) vers un id V3. Première occurrence gagnante
+ * (items avant monnaies/costumes/créations, cf. `listItemEntries`).
+ */
+export function catalogIdByName(): Map<string, string> {
+  const m = new Map<string, string>();
+  for (const e of listItemEntries()) {
+    const n = e.name.en.trim().toLowerCase();
+    if (n && !m.has(n)) m.set(n, e.id);
+  }
+  return m;
+}
+
 /** Options compactes (id/nom/icône/grade/desc) pour le picker — hors masqués. */
 export function catalogOptions(): ItemOption[] {
   return listItemEntries()
