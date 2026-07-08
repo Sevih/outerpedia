@@ -42,6 +42,7 @@ export type { Item } from '../generators/items';
 export type { Goods } from '../generators/goods';
 export type { Costume as CostumeItem } from '../generators/costumes';
 export type { CatalogEntry } from '../generators/item-catalog';
+export type { GameVersion } from '../generators/game-version';
 export type {
   ArmorItem,
   BreakLimit,

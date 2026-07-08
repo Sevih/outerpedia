@@ -264,6 +264,10 @@ export default async function CharacterDetail({
         title: v.title ?? name,
         author: v.author,
         uploadDate: v.uploadDate,
+        // Miniature AUTO-HÉBERGÉE (full art du perso) au lieu de la miniature
+        // YouTube : sans URL i.ytimg.com dans la page, les crawlers d'aperçu
+        // (Discord…) ne peuvent plus afficher la vidéo à la place de l'og:image.
+        thumbnail: img.full(char.id),
       }),
     )
     .filter((n): n is NonNullable<typeof n> => n !== null);

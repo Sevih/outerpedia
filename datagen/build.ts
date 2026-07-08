@@ -37,6 +37,7 @@ import { buildItems } from './generators/items';
 import { buildGoods } from './generators/goods';
 import { buildCostumes } from './generators/costumes';
 import { buildItemCatalog } from './generators/item-catalog';
+import { buildGameVersion } from './generators/game-version';
 import { buildSkills } from './generators/skills';
 import { buildEffectGlossary, unknownFamilyTypes } from './lib/effects';
 import {
@@ -115,6 +116,8 @@ function main(): void {
   writeJson('skills.json', skillsFile);
   writeJson('items.json', itemsFile);
   writeJson('glossaries.json', glossaries);
+  const gameVersion = buildGameVersion();
+  if (gameVersion) writeJson('game-version.json', gameVersion);
 
   const equip: EquipmentFiles = equipment;
   const slots: (keyof EquipmentFiles)[] = [
