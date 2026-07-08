@@ -222,6 +222,24 @@
     },
     "keys": ["BT_CP_CHARGE"]
   },
+  "SYS_BUFF_REDUCE_AP": {
+    "name": {
+      "en": "Discharge AP",
+      "jp": "AP減少",
+      "kr": "AP 감소",
+      "zh": "减少AP"
+    },
+    "desc": {
+      "en": "Reduces enemy Action Points",
+      "jp": "敵のAPを減少させる。",
+      "kr": "적의 AP를 감소시킵니다.",
+      "zh": "减少敌方的AP。"
+    },
+    "icon": "SC_Debuff_Effect_AP",
+    "keys": ["BT_AP_CHARGE", "DISCHARGE_AP"],
+    "tag": "utility",
+    "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
+  },
   "SYS_BUFF_STEAL": {
     "desc": {
       "en": "Steal buff from the target.",

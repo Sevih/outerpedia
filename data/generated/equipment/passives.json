@@ -3346,7 +3346,7 @@
     "effects": [
       {
         "family": "stat",
-        "category": "debuff",
+        "category": "neutral",
         "type": "BT_STAT",
         "target": "enemy",
         "buff": "BID_IRREGULAR_UO_ACC_01",
