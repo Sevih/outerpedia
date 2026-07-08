@@ -11,9 +11,11 @@
  *   - `face-icon` : COMPOSÉE depuis le portrait + layout Unity (cf. face-icon.ts) ;
  *   - `editorial` : copie telle quelle depuis le pool V2 (hors jeu).
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { STAT_ICON } from '../../src/lib/stats';
+import { MISSING_ITEM_ICONS as ITEM_ICON_BLACKLIST } from '../../src/lib/data/item-blacklist';
+import { buildGoods } from '../generators/goods';
 
 export type AssetRequest =
   | {
@@ -471,27 +473,73 @@ export function buildAssetManifest(): AssetRequest[] {
     candidates: ['CM_Goods_Gold'],
     domain: 'ui',
   });
-  // Items des fiches perso : cadeaux (gifts) + pièces de rappel (limit break).
+  // Items : TOUTES les icônes déclarées dans items.json. Un item peut être
+  // référencé partout (fiches perso, cadeaux, rappels, mais aussi récompenses
+  // de promo-codes et autres outils admin qui listent l'inventaire complet).
+  // Collecter à la source (items.json = donnée, pas les 11k sprites du jeu)
+  // évite les 404 surprises ; les icônes sans sprite remontent au rapport.
   {
-    const items = load('items.json') as unknown as Record<string, { type: string; icon: string }>;
-    const prog = load('progression.json') as unknown as {
-      limitBreak: Record<string, { recallItemId: string }[]>;
-    };
-    const wanted = new Set<string>();
-    for (const [id, it] of Object.entries(items)) if (it.type === 'present') wanted.add(id);
-    for (const list of Object.values(prog.limitBreak))
-      for (const s of list)
-        if (s.recallItemId && s.recallItemId !== '0') wanted.add(s.recallItemId);
-    for (const id of wanted) {
-      const icon = items[id]?.icon;
-      if (icon)
+    const items = load('items.json') as unknown as Record<string, { icon?: string }>;
+    for (const icon of new Set(
+      Object.values(items)
+        .map((it) => it.icon)
+        .filter((i): i is string => Boolean(i) && !ITEM_ICON_BLACKLIST.has(i as string)),
+    ))
+      push({
+        kind: 'image',
+        key: `images/items/${icon}.webp`,
+        candidates: [icon as string],
+        domain: 'items',
+      });
+  }
+  // Monnaies (goods) : les rewards de codes promo (Ether, tickets…) vivent hors
+  // items.json (clés SYS_ASSET_* de TextSystem). Leurs icônes résolues par
+  // `buildGoods` (cross-ref ItemTemplet + convention vérifiée) sont servies sous
+  // le même namespace `images/items/`.
+  for (const g of Object.values(buildGoods()))
+    if (g.icon && !ITEM_ICON_BLACKLIST.has(g.icon))
+      push({
+        kind: 'image',
+        key: `images/items/${g.icon}.webp`,
+        candidates: [g.icon],
+        domain: 'items',
+      });
+  // Icônes curées (overrides + créations d'items/monnaies depuis l'admin).
+  try {
+    const curated = JSON.parse(readFileSync(resolve('data/curated/items.json'), 'utf8')) as Record<
+      string,
+      { icon?: string }
+    >;
+    for (const c of Object.values(curated))
+      if (c.icon && !ITEM_ICON_BLACKLIST.has(c.icon))
         push({
           kind: 'image',
-          key: `images/items/${icon}.webp`,
-          candidates: [icon],
+          key: `images/items/${c.icon}.webp`,
+          candidates: [c.icon],
           domain: 'items',
         });
+  } catch {
+    /* pas de curé items */
+  }
+  // TOUS les sprites d'items du jeu (`TI_*`), y compris ceux pas encore
+  // rattachés à un item : l'admin (Editor › Item) les liste comme « à rentrer »
+  // et doit pouvoir les prévisualiser.
+  try {
+    const dir = resolve(
+      '.gamedata/extracted/images/assets/editor/resources/sprite/at_thumbnailitemruntime',
+    );
+    for (const f of readdirSync(dir)) {
+      if (!/^TI_.*\.png$/i.test(f)) continue;
+      const icon = f.replace(/\.png$/i, '');
+      push({
+        kind: 'image',
+        key: `images/items/${icon}.webp`,
+        candidates: [icon],
+        domain: 'items',
+      });
     }
+  } catch {
+    /* sprites pas extraits */
   }
 
   // --- Éditorial (n'existe pas en jeu) : drapeaux + OG -----------------------

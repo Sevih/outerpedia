@@ -313,18 +313,36 @@ function setsReport(v2Rows: Row[]): CatalogueReport {
   return { name: 'sets', v3Count: views.length, v2Count: v2Rows.length, missingV3, issues };
 }
 
-/** Contrôle complet des équipements vs l'oracle V2. */
-export function equipmentV2Control(): CatalogueReport[] {
+/** Noms de catalogues disponibles au contrôle (ordre d'affichage). */
+export const EQUIPMENT_CATALOGUES = ['weapons', 'amulets', 'talismans', 'ee', 'sets'] as const;
+export type EquipmentCatalogue = (typeof EQUIPMENT_CATALOGUES)[number];
+
+/**
+ * Contrôle des équipements vs l'oracle V2. `only` restreint à un seul catalogue
+ * (les pages Extractor par famille ne recalculent pas tout).
+ */
+export function equipmentV2Control(only?: EquipmentCatalogue): CatalogueReport[] {
   const out: CatalogueReport[] = [];
-  const weap = readLegacy<Row[]>('weapon.json');
-  if (weap) out.push(familyReport('weapons', weap, getWeaponFamilies()));
-  const acc = readLegacy<Row[]>('accessory.json');
-  if (acc) out.push(familyReport('amulets', acc, getAmuletFamilies()));
-  const tal = readLegacy<Row[]>('talisman.json');
-  if (tal) out.push(familyReport('talismans', tal, getTalismanFamilies()));
-  const ee = readLegacy<Record<string, Row>>('ee.json');
-  if (ee) out.push(eeReport(ee));
-  const sets = readLegacy<Row[]>('sets.json');
-  if (sets) out.push(setsReport(sets));
+  const want = (name: EquipmentCatalogue) => !only || only === name;
+  if (want('weapons')) {
+    const weap = readLegacy<Row[]>('weapon.json');
+    if (weap) out.push(familyReport('weapons', weap, getWeaponFamilies()));
+  }
+  if (want('amulets')) {
+    const acc = readLegacy<Row[]>('accessory.json');
+    if (acc) out.push(familyReport('amulets', acc, getAmuletFamilies()));
+  }
+  if (want('talismans')) {
+    const tal = readLegacy<Row[]>('talisman.json');
+    if (tal) out.push(familyReport('talismans', tal, getTalismanFamilies()));
+  }
+  if (want('ee')) {
+    const ee = readLegacy<Record<string, Row>>('ee.json');
+    if (ee) out.push(eeReport(ee));
+  }
+  if (want('sets')) {
+    const sets = readLegacy<Row[]>('sets.json');
+    if (sets) out.push(setsReport(sets));
+  }
   return out;
 }

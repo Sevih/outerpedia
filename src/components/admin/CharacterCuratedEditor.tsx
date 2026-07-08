@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 import type { CharacterCurated, CuratedRole, SkillPriority, VideoRef } from '@contracts';
-import { cn } from '@/lib/cn';
 import { VideoCurator } from './VideoCurator';
 
 const ROLES: Array<'' | CuratedRole> = ['', 'dps', 'support', 'sustain'];
 const RANKS = ['', 'S', 'A', 'B', 'C', 'D', 'E'];
+/** Paliers de transcendance sélectionnables (transStar). */
+const STARS = ['1', '2', '3', '4', '5', '6'];
 /**
  * Vocabulaire des tags (type d'unité + mécaniques), repris de V2.
  * TODO extraction : premium/seasonal/collab/ignore-defense/core-fusion sont
@@ -19,6 +20,95 @@ const field =
 const label = 'text-xs font-semibold uppercase tracking-wide text-content-subtle';
 
 type Status = { kind: 'idle' | 'ok' | 'err'; msg?: string };
+
+/** Une entrée « palier → valeur » (transStar → tier/rôle). */
+type TransRow = { star: string; value: string };
+
+const toRows = (rec?: Record<string, string>): TransRow[] =>
+  Object.entries(rec ?? {}).map(([star, value]) => ({ star, value }));
+const toMap = (rows: TransRow[]): Record<string, string> =>
+  Object.fromEntries(rows.filter((r) => r.star && r.value).map((r) => [r.star, r.value]));
+
+/**
+ * Éditeur de paliers de transcendance : liste de (palier → valeur), au lieu de
+ * JSON brut. Réutilisé pour le rank (S/A/B…) et le rôle (dps/support/sustain).
+ */
+function TranscendMapEditor({
+  title,
+  rows,
+  valueOptions,
+  onChange,
+}: {
+  title: string;
+  rows: TransRow[];
+  valueOptions: string[];
+  onChange: (rows: TransRow[]) => void;
+}) {
+  const set = (i: number, patch: Partial<TransRow>) =>
+    onChange(rows.map((r, j) => (j === i ? { ...r, ...patch } : r)));
+
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center justify-between">
+        <p className={label}>{title}</p>
+        <button
+          type="button"
+          className="text-accent text-xs hover:underline"
+          onClick={() => onChange([...rows, { star: '', value: valueOptions[0] }])}
+        >
+          + palier
+        </button>
+      </div>
+      {rows.length === 0 ? (
+        <p className="text-content-subtle text-xs">
+          Aucun palier — la valeur de base s&apos;applique.
+        </p>
+      ) : (
+        rows.map((r, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <select
+              className={`${field} w-auto`}
+              value={r.star}
+              onChange={(e) => set(i, { star: e.target.value })}
+            >
+              <option value="">palier ?</option>
+              {/* Valeur héritée hors plage : préservée pour ne pas perdre la donnée. */}
+              {r.star && !STARS.includes(r.star) && <option value={r.star}>Trans {r.star}</option>}
+              {STARS.map((s) => (
+                <option key={s} value={s}>
+                  Trans {s}
+                </option>
+              ))}
+            </select>
+            <span className="text-content-subtle text-xs">→</span>
+            <select
+              className={`${field} w-auto`}
+              value={r.value}
+              onChange={(e) => set(i, { value: e.target.value })}
+            >
+              {r.value && !valueOptions.includes(r.value) && (
+                <option value={r.value}>{r.value}</option>
+              )}
+              {valueOptions.map((v) => (
+                <option key={v} value={v}>
+                  {v}
+                </option>
+              ))}
+            </select>
+            <button
+              type="button"
+              className="text-danger ml-auto text-sm"
+              onClick={() => onChange(rows.filter((_, j) => j !== i))}
+              aria-label="Supprimer le palier"
+            >
+              ✕
+            </button>
+          </div>
+        ))
+      )}
+    </div>
+  );
+}
 
 export function CharacterCuratedEditor({
   id,
@@ -38,15 +128,11 @@ export function CharacterCuratedEditor({
   const [ultimate, setUltimate] = useState(initial.skillPriority?.ultimate?.toString() ?? '');
   const [videos, setVideos] = useState<VideoRef[]>(initial.videos ?? []);
   const [limited, setLimited] = useState(Boolean(initial.limited));
-  const [rankByTranscend, setRankByTranscend] = useState(
-    initial.rankByTranscend ? JSON.stringify(initial.rankByTranscend) : '',
-  );
-  const [roleByTranscend, setRoleByTranscend] = useState(
-    initial.roleByTranscend ? JSON.stringify(initial.roleByTranscend) : '',
-  );
+  const [rankByT, setRankByT] = useState<TransRow[]>(toRows(initial.rankByTranscend));
+  const [roleByT, setRoleByT] = useState<TransRow[]>(toRows(initial.roleByTranscend));
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
 
-  function build(): CharacterCurated | { error: string } {
+  function build(): CharacterCurated {
     const c: CharacterCurated = {};
     // pros/cons pas encore éditable ici : préservé tel quel (évite la perte).
     if (initial.prosCons) c.prosCons = initial.prosCons;
@@ -61,26 +147,19 @@ export function CharacterCuratedEditor({
     if (ultimate.trim()) sp.ultimate = Number(ultimate);
     if (Object.keys(sp).length) c.skillPriority = sp;
     if (limited) c.limited = true;
-    try {
-      if (rankByTranscend.trim()) c.rankByTranscend = JSON.parse(rankByTranscend);
-      if (roleByTranscend.trim()) c.roleByTranscend = JSON.parse(roleByTranscend);
-    } catch {
-      return { error: 'rank/role by transcend : JSON invalide' };
-    }
+    const rankMap = toMap(rankByT);
+    if (Object.keys(rankMap).length) c.rankByTranscend = rankMap;
+    const roleMap = toMap(roleByT);
+    if (Object.keys(roleMap).length) c.roleByTranscend = roleMap;
     return c;
   }
 
   async function save() {
-    const built = build();
-    if ('error' in built) {
-      setStatus({ kind: 'err', msg: built.error });
-      return;
-    }
     setStatus({ kind: 'idle' });
     const res = await fetch(`/api/admin/curated/characters/${id}`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(built),
+      body: JSON.stringify(build()),
     });
     if (res.ok) {
       setStatus({ kind: 'ok', msg: 'Enregistré' });
@@ -180,24 +259,18 @@ export function CharacterCuratedEditor({
       </section>
 
       <section className="grid gap-4 sm:grid-cols-2">
-        <div className="space-y-1">
-          <p className={label}>Rank par transcendance (JSON)</p>
-          <textarea
-            className={cn(field, 'h-16 font-mono text-xs')}
-            value={rankByTranscend}
-            onChange={(e) => setRankByTranscend(e.target.value)}
-            placeholder='{"3":"A","6":"S"}'
-          />
-        </div>
-        <div className="space-y-1">
-          <p className={label}>Rôle par transcendance (JSON)</p>
-          <textarea
-            className={cn(field, 'h-16 font-mono text-xs')}
-            value={roleByTranscend}
-            onChange={(e) => setRoleByTranscend(e.target.value)}
-            placeholder='{"6":"dps"}'
-          />
-        </div>
+        <TranscendMapEditor
+          title="Rank par transcendance"
+          rows={rankByT}
+          valueOptions={RANKS.filter(Boolean)}
+          onChange={setRankByT}
+        />
+        <TranscendMapEditor
+          title="Rôle par transcendance"
+          rows={roleByT}
+          valueOptions={ROLES.filter(Boolean)}
+          onChange={setRoleByT}
+        />
       </section>
 
       <section className="border-line-subtle border-t pt-4">

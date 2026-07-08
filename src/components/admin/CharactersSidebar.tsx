@@ -5,25 +5,21 @@ import Link from 'next/link';
 import type { Route } from 'next';
 import { usePathname } from 'next/navigation';
 import { img } from '@/lib/images';
+import type { SidebarRow } from '@/lib/admin/character-rows';
 
-export interface SidebarRow {
-  id: string;
-  name: string;
-  element: string;
-  class: string;
-  rarity: number;
-  status: 'new' | 'diff' | 'ok';
-  diffCount: number;
-  /** Écarts restants vs V2 (contrôle : valeurs ≠ + kits d'effets ≠). */
-  v2Count: number;
-  curated: boolean;
-}
+export type { SidebarRow };
 
 const FILTERS = ['all', 'diff', 'v2', 'new', 'ok'] as const;
 type Filter = (typeof FILTERS)[number];
 
 /** Liste latérale des persos façon extracteur V2 : stats, recherche, filtres. */
-export function CharactersSidebar({ rows }: { rows: SidebarRow[] }) {
+export function CharactersSidebar({
+  rows,
+  basePath = '/admin/extractor/characters',
+}: {
+  rows: SidebarRow[];
+  basePath?: string;
+}) {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<Filter>('all');
   const pathname = usePathname();
@@ -92,7 +88,7 @@ export function CharactersSidebar({ rows }: { rows: SidebarRow[] }) {
 
       <ul className="divide-line-subtle min-h-0 flex-1 divide-y overflow-y-auto text-sm">
         {filtered.map((r) => {
-          const href = `/admin/characters/${r.id}` as Route;
+          const href = `${basePath}/${r.id}` as Route;
           const active = pathname === href;
           return (
             <li key={r.id}>

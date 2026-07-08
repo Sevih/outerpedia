@@ -22,6 +22,7 @@ import type {
   EquipmentFiles,
   Glossaries,
   ItemsFile,
+  GoodsFile,
   SkillsFile,
   TranscendFile,
 } from './contracts';
@@ -34,6 +35,7 @@ import { buildItemSources } from './generators/sources';
 import { buildEnhanceRules } from './generators/enhance';
 import { buildProgression } from './generators/progression';
 import { buildItems } from './generators/items';
+import { buildGoods } from './generators/goods';
 import { buildSkills } from './generators/skills';
 import { buildEffectGlossary, unknownFamilyTypes } from './lib/effects';
 import {
@@ -64,6 +66,7 @@ function main(): void {
   const { skills } = buildSkills();
   const equipment = buildEquipment();
   const items = buildItems();
+  const goods = buildGoods();
   const { effects, byTooltip, byLabel, byKey, tooltipKinds } = buildEffectGlossary();
   // Types de buff INCONNUS des règles de famille : à classer via
   // data/curated/effect-families.json (pas besoin de toucher au code).
@@ -101,12 +104,14 @@ function main(): void {
   const transcendFile: TranscendFile = transcend;
   const skillsFile: SkillsFile = skills;
   const itemsFile: ItemsFile = items;
+  const goodsFile: GoodsFile = goods;
 
   writeJson('characters.json', charactersFile);
   writeJson('characters-slug-to-id.json', buildSlugMap(Object.values(charactersFile)));
   writeJson('transcend.json', transcendFile);
   writeJson('skills.json', skillsFile);
   writeJson('items.json', itemsFile);
+  writeJson('goods.json', goodsFile);
   writeJson('glossaries.json', glossaries);
 
   const equip: EquipmentFiles = equipment;

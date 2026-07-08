@@ -39,6 +39,7 @@ export type {
 } from '../curated/gear-reco';
 export type { Skill, SkillLevel } from '../generators/skills';
 export type { Item } from '../generators/items';
+export type { Goods } from '../generators/goods';
 export type {
   ArmorItem,
   BreakLimit,
@@ -83,6 +84,7 @@ import type { Character } from '../extractor/specs/character';
 import type { TranscendData } from '../extractor/transcend';
 import type { Skill } from '../generators/skills';
 import type { Item } from '../generators/items';
+import type { Goods } from '../generators/goods';
 import type {
   ArmorItem,
   BreakLimit,
@@ -159,6 +161,8 @@ export type TranscendFile = TranscendData;
 export type SkillsFile = Record<string, Skill>;
 /** `data/generated/items.json` */
 export type ItemsFile = Record<string, Item>;
+/** `data/generated/goods.json` — monnaies/ressources (SYS_ASSET_*). */
+export type GoodsFile = Record<string, Goods>;
 
 /** Fichiers `data/generated/equipment/*` (un par slot + catalogues transverses). */
 export interface EquipmentFiles {

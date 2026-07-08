@@ -75,12 +75,19 @@ export function EditorialEditor({
   id,
   curated,
   charNames,
+  show = 'all',
 }: {
   id: string;
   /** Entrée curée COMPLÈTE (on ne réécrit que prosCons/synergies dessus). */
   curated: CharacterCurated;
   /** id → nom EN (affichage des partenaires + saisie par nom). */
   charNames: Record<string, string>;
+  /**
+   * Sections affichées. Les Tools transverses n'en montrent qu'une ; l'autre
+   * slice reste préservée (état initialisé depuis `curated`, réécrit à
+   * l'identique au save).
+   */
+  show?: 'all' | 'prosCons' | 'synergies';
 }) {
   const [lang, setLang] = useState<L>('en');
   const [pros, setPros] = useState<LocalizedText[]>(curated.prosCons?.pros ?? []);
@@ -144,96 +151,100 @@ export function EditorialEditor({
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <TextListEditor title="Pros" items={pros} lang={lang} onChange={setPros} />
-        <TextListEditor title="Cons" items={cons} lang={lang} onChange={setCons} />
-      </div>
+      {show !== 'synergies' && (
+        <div className="grid gap-6 lg:grid-cols-2">
+          <TextListEditor title="Pros" items={pros} lang={lang} onChange={setPros} />
+          <TextListEditor title="Cons" items={cons} lang={lang} onChange={setCons} />
+        </div>
+      )}
 
       {/* Synergies */}
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <p className="text-content-strong text-sm font-semibold">Synergies</p>
-          <button
-            type="button"
-            className={btn}
-            onClick={() => setSynergies([...synergies, { heroes: [''] }])}
-          >
-            + groupe
-          </button>
-        </div>
-        {synergies.map((g, gi) => (
-          <div key={gi} className="border-line-subtle space-y-2 rounded-lg border p-3">
-            <div className="flex items-start gap-2">
-              <div className="flex-1 space-y-1">
-                <p className="text-content-subtle text-xs uppercase">
-                  Partenaires (id, nom EN exact, ou tag {'{…}'})
-                </p>
-                {g.heroes.map((h, hi) => (
-                  <div key={hi} className="flex items-center gap-2">
-                    <input
-                      className={input}
-                      value={h}
-                      onChange={(e) => {
-                        const next = synergies.slice();
-                        next[gi] = { ...g, heroes: g.heroes.with(hi, e.target.value) };
-                        setSynergies(next);
-                      }}
-                    />
-                    <span className="text-content-subtle w-40 truncate text-xs">
-                      {charNames[resolveHero(h)] ?? (h.startsWith('{') ? 'tag' : '—')}
-                    </span>
-                    <button
-                      type="button"
-                      className={`${btn} text-danger`}
-                      onClick={() => {
-                        const next = synergies.slice();
-                        next[gi] = { ...g, heroes: g.heroes.filter((_, j) => j !== hi) };
-                        setSynergies(next);
-                      }}
-                    >
-                      ✕
-                    </button>
-                  </div>
-                ))}
+      {show !== 'prosCons' && (
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <p className="text-content-strong text-sm font-semibold">Synergies</p>
+            <button
+              type="button"
+              className={btn}
+              onClick={() => setSynergies([...synergies, { heroes: [''] }])}
+            >
+              + groupe
+            </button>
+          </div>
+          {synergies.map((g, gi) => (
+            <div key={gi} className="border-line-subtle space-y-2 rounded-lg border p-3">
+              <div className="flex items-start gap-2">
+                <div className="flex-1 space-y-1">
+                  <p className="text-content-subtle text-xs uppercase">
+                    Partenaires (id, nom EN exact, ou tag {'{…}'})
+                  </p>
+                  {g.heroes.map((h, hi) => (
+                    <div key={hi} className="flex items-center gap-2">
+                      <input
+                        className={input}
+                        value={h}
+                        onChange={(e) => {
+                          const next = synergies.slice();
+                          next[gi] = { ...g, heroes: g.heroes.with(hi, e.target.value) };
+                          setSynergies(next);
+                        }}
+                      />
+                      <span className="text-content-subtle w-40 truncate text-xs">
+                        {charNames[resolveHero(h)] ?? (h.startsWith('{') ? 'tag' : '—')}
+                      </span>
+                      <button
+                        type="button"
+                        className={`${btn} text-danger`}
+                        onClick={() => {
+                          const next = synergies.slice();
+                          next[gi] = { ...g, heroes: g.heroes.filter((_, j) => j !== hi) };
+                          setSynergies(next);
+                        }}
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    className={btn}
+                    onClick={() => {
+                      const next = synergies.slice();
+                      next[gi] = { ...g, heroes: [...g.heroes, ''] };
+                      setSynergies(next);
+                    }}
+                  >
+                    + partenaire
+                  </button>
+                </div>
                 <button
                   type="button"
-                  className={btn}
-                  onClick={() => {
-                    const next = synergies.slice();
-                    next[gi] = { ...g, heroes: [...g.heroes, ''] };
-                    setSynergies(next);
-                  }}
+                  className={`${btn} text-danger`}
+                  onClick={() => setSynergies(synergies.filter((_, j) => j !== gi))}
                 >
-                  + partenaire
+                  Supprimer le groupe
                 </button>
               </div>
-              <button
-                type="button"
-                className={`${btn} text-danger`}
-                onClick={() => setSynergies(synergies.filter((_, j) => j !== gi))}
-              >
-                Supprimer le groupe
-              </button>
+              <div>
+                <p className="text-content-subtle text-xs uppercase">Raison ({lang})</p>
+                <textarea
+                  className={`${input} min-h-9 font-mono text-xs`}
+                  rows={2}
+                  value={g.reason?.[lang] ?? ''}
+                  placeholder={lang === 'en' ? '' : (g.reason?.en ?? '')}
+                  onChange={(e) => {
+                    const next = synergies.slice();
+                    const reason: LocalizedText = { ...(g.reason ?? {}), [lang]: e.target.value };
+                    if (!e.target.value) delete reason[lang];
+                    next[gi] = { ...g, reason: Object.keys(reason).length ? reason : undefined };
+                    setSynergies(next);
+                  }}
+                />
+              </div>
             </div>
-            <div>
-              <p className="text-content-subtle text-xs uppercase">Raison ({lang})</p>
-              <textarea
-                className={`${input} min-h-9 font-mono text-xs`}
-                rows={2}
-                value={g.reason?.[lang] ?? ''}
-                placeholder={lang === 'en' ? '' : (g.reason?.en ?? '')}
-                onChange={(e) => {
-                  const next = synergies.slice();
-                  const reason: LocalizedText = { ...(g.reason ?? {}), [lang]: e.target.value };
-                  if (!e.target.value) delete reason[lang];
-                  next[gi] = { ...g, reason: Object.keys(reason).length ? reason : undefined };
-                  setSynergies(next);
-                }}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       <div className="flex items-center gap-3">
         <button type="button" className={btn} onClick={save} disabled={state === 'saving'}>

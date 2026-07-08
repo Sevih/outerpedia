@@ -9,7 +9,7 @@ import type { Route } from 'next';
  * principale, ex. `UNCOUNTERABLE`) puis on remplit le formulaire vierge
  * sur /admin/effects/[id].
  */
-export function NewEffectForm() {
+export function NewEffectForm({ basePath = '/admin/editor/effects' }: { basePath?: string }) {
   const router = useRouter();
   const [id, setId] = useState('');
   const slug = id.trim().toUpperCase().replace(/\s+/g, '_');
@@ -19,7 +19,7 @@ export function NewEffectForm() {
       className="flex items-center gap-2"
       onSubmit={(e) => {
         e.preventDefault();
-        if (slug) router.push(`/admin/effects/${encodeURIComponent(slug)}` as Route);
+        if (slug) router.push(`${basePath}/${encodeURIComponent(slug)}` as Route);
       }}
     >
       <input

@@ -45,12 +45,14 @@ export function ItemInline({
       <span className="relative inline-block shrink-0" style={{ width: size, height: size }}>
         {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img src={img.slotFrame(item.grade)} alt="" className="absolute inset-0 h-full w-full" />
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-        <img
-          src={item.iconSrc}
-          alt={item.name}
-          className="absolute inset-0 h-full w-full object-contain"
-        />
+        {item.iconSrc && (
+          // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
+          <img
+            src={item.iconSrc}
+            alt={item.name}
+            className="absolute inset-0 h-full w-full object-contain"
+          />
+        )}
       </span>
       {!iconOnly && <span className="underline">{item.name}</span>}
     </span>
