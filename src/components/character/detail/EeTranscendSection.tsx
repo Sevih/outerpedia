@@ -14,6 +14,7 @@ import type { Route } from 'next';
 import { img } from '@/lib/images';
 import { STAT_ICON } from '@/lib/stats';
 import { SkillDescription } from '@/components/character/SkillDescription';
+import { renderGameColors } from '@/components/ui/GameText';
 import {
   EffectChipsRow,
   type ClientEffect,
@@ -212,8 +213,8 @@ function TranscendSlider({
               ),
           )}
           {tier.passives.map((line, i) => (
-            <p key={i} className="text-zinc-300">
-              {line}
+            <p key={i} className="whitespace-pre-line text-zinc-300">
+              {renderGameColors(line.replace(/\\n/g, '\n'))}
             </p>
           ))}
         </div>

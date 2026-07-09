@@ -55,6 +55,12 @@ const NON_CHIP_BUFFS = new Set(['2000096_chain_1_1', '2000059_1_1', '2000094_1_3
 function isTranscendUpgrade(s: Skill, e: RawEffect): boolean {
   const b = e.buff ?? '';
   if (!b.startsWith('trancendent') && !b.startsWith('transcendent')) return false;
+  // Effet RATTACHÉ à un skill principal (`caller`) : il décrit ce que CE skill
+  // fait, même débloqué par la transcendance (Unbuffable du S2 d'E.Tamamo sur
+  // cible Water ; 2e Dual Attack du S1 d'Eva). Il appartient à la carte du
+  // skill — seuls les paliers AUTONOMES (sans caller) restent cantonnés à la
+  // section transcendance.
+  if (e.caller) return false;
   return !s.levels[0]?.vars?.[b];
 }
 

@@ -19,7 +19,7 @@
     "datagen:extract": "tsx datagen/extract/extract.ts",
     "datagen:convert": "tsx datagen/templates/convert.ts",
     "datagen:build": "tsx datagen/build.ts",
-    "datagen:patch": "pnpm datagen:pull && pnpm datagen:extract && pnpm datagen:convert && pnpm datagen:build && pnpm datagen:promote",
+    "datagen:patch": "tsx datagen/refresh.ts",
     "datagen:regen": "pnpm datagen:build && pnpm datagen:promote --apply",
     "datagen:promote": "tsx datagen/promote.ts",
     "getNews": "tsx scripts/get-news.ts",
