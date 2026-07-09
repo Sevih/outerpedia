@@ -110,6 +110,14 @@ function toChipEffect(e: RawEffect): ClientEffect | null {
   if (e.tooltip && (G.effectByTooltip[e.tooltip] ?? getMergedEffect(e.tooltip)))
     return { ...base, tooltip: e.tooltip };
   const isStatLike = e.type === 'BT_STAT' || e.type === 'BT_STAT_PREMIUM' || e.type === 'BT_NONE';
+  // CAS ISOLÉ : `BT_CALL_BACKUP_2` (« double dual », Eva/Luna/Iota…) réutilise le
+  // label GÉNÉRIQUE du dual simple (SYS_BUFF_BACKUP) → sans ça il résout comme le
+  // simple et FUSIONNE avec lui (dédup). On force son identité curée propre
+  // (Dual Attack x2). Ciblé exprès : les autres types à label restent label-first.
+  if (e.type === 'BT_CALL_BACKUP_2') {
+    const cid = curatedCreationFor(e.category === 'buff' ? 'buff' : 'debuff', e.type);
+    if (cid) return { ...base, tooltip: cid };
+  }
   if (e.label && !isStatLike && !WIRING_LABELS.has(e.label) && G.effectByLabel[e.label])
     return { ...base, label: e.label };
   // « Dégâts fixes » (reverse heal) ciblés sur le LANCEUR ou un allié = coût

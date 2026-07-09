@@ -47,6 +47,23 @@ contracts/    Couche 4 — schémas TS des données GÉNÉRÉES (le format uniqu
 run.ts        Couche 5 — orchestrateur (remplace l'ancien pipeline/run.ts).
 ```
 
+### Exception assumée : un (seul) outil Python
+
+`datagen/assets/extract-face-layout.py` (`pnpm datagen:face-layout`) est la **seule
+exception** au « tout-TS ». Il lit les **typetrees RectTransform** d'un prefab Unity
+via **UnityPy** — même domaine spécialisé que l'extracteur .NET de la couche 0, donc
+**délibérément non réécrit en TS**. Il est :
+
+- **local & rare** : relancé à la main seulement quand les face icons changent ;
+- **hors de tout chemin automatisé** : absent du build, de la CI et du flux `refresh`
+  (`pnpm dev` / `datagen:patch`) ;
+- **borné à un JSON committé** : sa sortie `datagen/assets/face-icon-layout.json` est
+  versionnée et c'est ce que lit `datagen/assets/face-icon.ts`. **Le serveur/build ne
+  touche jamais Python** — d'où « aucun python _dans le build_ », qui reste vrai.
+
+Porter ce script en TS reste possible (AssetStudioModCLI a un mode `-m dump`) mais non
+prioritaire : cf. le fork tranché en faveur de l'isolation.
+
 ---
 
 ## Le flux de bout en bout
