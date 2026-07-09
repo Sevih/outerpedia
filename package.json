@@ -1,12 +1,12 @@
 {
   "name": "outerpedia",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": true,
   "engines": {
     "node": ">=24"
   },
   "scripts": {
-    "dev": "pnpm clean:all && next dev",
+    "dev": "pnpm clean:all && tsx scripts/dev-refresh.ts && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -23,6 +23,7 @@
     "datagen:regen": "pnpm datagen:build && pnpm datagen:promote --apply",
     "datagen:promote": "tsx datagen/promote.ts",
     "getNews": "tsx scripts/get-news.ts",
+    "commit": "tsx scripts/commit.ts",
     "prepare": "lefthook install || true",
     "datagen:extract-entity": "tsx datagen/extractor/run.ts",
     "datagen:seed-curated": "tsx datagen/curated/seed.ts",

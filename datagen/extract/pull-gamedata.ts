@@ -21,6 +21,7 @@ import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const ADB = process.env.ADB_PATH ?? 'C:\\LDPlayer\\LDPlayer9\\adb.exe';
 const PKG = 'com.smilegate.outerplane.stove.google';
@@ -124,51 +125,82 @@ function localSignatures(baseDir: string, useHash: boolean): Map<string, string>
   return map;
 }
 
-const subdirs = process.argv.slice(2).length ? process.argv.slice(2) : DEFAULT_SUBDIRS;
+export type PullResult = {
+  /** Au moins un fichier a été tiré ou supprimé (→ il faut re-générer en aval). */
+  changed: boolean;
+  /** Un device adb exploitable a été trouvé (LDPlayer lancé). */
+  devicePresent: boolean;
+};
 
-const serial = pickDevice();
-console.log(`📱 Device : ${serial}`);
-
-// Passage en root (nécessaire pour lire les données du jeu). Idempotent.
-try {
-  stream(['-s', serial, 'root']);
-  stream(['-s', serial, 'wait-for-device']);
-} catch {
-  // déjà root ou root non requis — on continue
-}
-
-for (const sub of subdirs) {
-  const useHash = !CONTENT_ADDRESSED.has(sub);
-  const remoteDir = `${REMOTE}/${sub}`;
-  const localDir = join(LOCAL, sub);
-  mkdirSync(localDir, { recursive: true });
-
-  const remote = remoteSignatures(serial, remoteDir, useHash);
-  const local = localSignatures(localDir, useHash);
-
-  const toPull = [...remote].filter(([rel, sig]) => local.get(rel) !== sig).map(([rel]) => rel);
-  const toDelete = [...local.keys()].filter((rel) => !remote.has(rel));
-
-  if (toPull.length === 0 && toDelete.length === 0) {
-    console.log(`✓ ${sub} : à jour (${remote.size} fichiers${useHash ? ', md5' : ''})`);
-    continue;
+/**
+ * Synchronise `.gamedata/files` depuis le device. Ne lève PAS si aucun device
+ * n'est joignable (LDPlayer éteint, adb absent…) : renvoie
+ * `{ changed: false, devicePresent: false }` pour que l'appelant (ex. `pnpm dev`
+ * hors-ligne) puisse simplement sauter l'étape.
+ */
+export async function pull(subdirs: string[] = DEFAULT_SUBDIRS): Promise<PullResult> {
+  let serial: string;
+  try {
+    serial = pickDevice();
+  } catch {
+    console.log('⚠ Aucun device adb (LDPlayer éteint ?) — pull ignoré.');
+    return { changed: false, devicePresent: false };
   }
-  console.log(`↻ ${sub} : ${toPull.length} à tirer, ${toDelete.length} à supprimer`);
+  console.log(`📱 Device : ${serial}`);
 
-  if (local.size === 0 || toPull.length > FULL_PULL_THRESHOLD) {
-    // Premier pull (ou gros diff) → un seul transfert du dossier entier.
-    stream(['-s', serial, 'pull', remoteDir, LOCAL]);
-  } else {
-    for (const rel of toPull) {
-      const dest = join(localDir, rel);
-      mkdirSync(dirname(dest), { recursive: true });
-      stream(['-s', serial, 'pull', `${remoteDir}/${rel}`, dest]);
+  // Passage en root (nécessaire pour lire les données du jeu). Idempotent.
+  try {
+    stream(['-s', serial, 'root']);
+    stream(['-s', serial, 'wait-for-device']);
+  } catch {
+    // déjà root ou root non requis — on continue
+  }
+
+  let changed = false;
+  for (const sub of subdirs) {
+    const useHash = !CONTENT_ADDRESSED.has(sub);
+    const remoteDir = `${REMOTE}/${sub}`;
+    const localDir = join(LOCAL, sub);
+    mkdirSync(localDir, { recursive: true });
+
+    const remote = remoteSignatures(serial, remoteDir, useHash);
+    const local = localSignatures(localDir, useHash);
+
+    const toPull = [...remote].filter(([rel, sig]) => local.get(rel) !== sig).map(([rel]) => rel);
+    const toDelete = [...local.keys()].filter((rel) => !remote.has(rel));
+
+    if (toPull.length === 0 && toDelete.length === 0) {
+      console.log(`✓ ${sub} : à jour (${remote.size} fichiers${useHash ? ', md5' : ''})`);
+      continue;
+    }
+    changed = true;
+    console.log(`↻ ${sub} : ${toPull.length} à tirer, ${toDelete.length} à supprimer`);
+
+    if (local.size === 0 || toPull.length > FULL_PULL_THRESHOLD) {
+      // Premier pull (ou gros diff) → un seul transfert du dossier entier.
+      stream(['-s', serial, 'pull', remoteDir, LOCAL]);
+    } else {
+      for (const rel of toPull) {
+        const dest = join(localDir, rel);
+        mkdirSync(dirname(dest), { recursive: true });
+        stream(['-s', serial, 'pull', `${remoteDir}/${rel}`, dest]);
+      }
+    }
+
+    for (const rel of toDelete) {
+      rmSync(join(localDir, rel), { force: true });
     }
   }
 
-  for (const rel of toDelete) {
-    rmSync(join(localDir, rel), { force: true });
-  }
+  console.log('✅ Sync terminée.');
+  return { changed, devicePresent: true };
 }
 
-console.log('✅ Sync terminée.');
+// Exécution directe (`pnpm datagen:pull [sous-dossier…]`).
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const subdirs = process.argv.slice(2).length ? process.argv.slice(2) : DEFAULT_SUBDIRS;
+  pull(subdirs).catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}

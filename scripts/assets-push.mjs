@@ -44,6 +44,10 @@ if (spawnSync('rclone', ['version'], { stdio: 'ignore' }).status !== 0) {
 }
 
 // `copy` (jamais de suppression distante) + skip des fichiers identiques.
+// Les assets sont IMMUABLES et ADDITIFS (noms = contenu du jeu, un patch ajoute
+// des fichiers, n'en modifie jamais) → `--ignore-existing` : un nom déjà présent
+// est sauté SANS aucune comparaison checksum/date. `--fast-list` liste R2 en
+// requêtes groupées (moins d'appels API, plus rapide quand le bucket grossit).
 const args = [
   'copy',
   STAGING,
@@ -53,6 +57,12 @@ const args = [
   '--header-upload',
   'Cache-Control: public, max-age=31536000, immutable',
   '--s3-no-check-bucket',
+  '--ignore-existing',
+  '--fast-list',
+  '--checkers',
+  '32',
+  '--transfers',
+  '16',
   '--progress',
 ];
 const res = spawnSync('rclone', args, {
