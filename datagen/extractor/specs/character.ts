@@ -525,10 +525,22 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       if (Object.keys(prof).length) profileById.set(f.ChangeCharID, prof);
     }
 
-    // Apparences : toute ligne CT_PC sans identité propre est un skin de sa cible.
+    // Apparences : ligne CT_PC sans identité propre = skin de sa cible — à
+    // condition qu'un COSTUME la référence (seul marqueur fiable d'un skin
+    // affichable, avec ses CT_/FI_/IG_Turn_ propres). Écarte : les clones de
+    // gameplay (21/23–26X…, ModelID = base, sprites de la base réutilisés),
+    // les formes de combat sans visuel UI propre (Demiurge Luna 2000120 :
+    // seules les icônes de skill changent) et les apparences jamais livrées
+    // (« Sentinel Noa » 2020022, vue uniquement dans la transition du world boss).
+    const costumeModels = new Set<string>();
+    for (const r of loadTable('CostumeTemplet')) {
+      if (r.ModelNameID && r.ModelNameID !== '0') costumeModels.add(r.ModelNameID);
+      if (r.FusionModelNameID && r.FusionModelNameID !== '0')
+        costumeModels.add(r.FusionModelNameID);
+    }
     const appearancesOf = new Map<string, string[]>();
     for (const r of loadTable('CharacterTemplet')) {
-      if (r.Type !== 'CT_PC' || ownIdentity(r)) continue;
+      if (r.Type !== 'CT_PC' || ownIdentity(r) || !costumeModels.has(r.ID)) continue;
       const target = r.NameID.replace(/_Name$/, '');
       const list = appearancesOf.get(target);
       if (list) list.push(r.ID);
