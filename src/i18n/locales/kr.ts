@@ -549,33 +549,8 @@ const kr: Record<TranslationKey, string> = {
   'page.guide.updating_disclaimer':
     '이 가이드는 현재 이 버전에 맞게 업데이트 중입니다. 일부 추천이 변경될 수 있습니다.',
 
-  // Guide categories
-  'guides.category.general-guides': '일반 가이드',
-  'guides.category.adventure': '모험',
-  'guides.category.adventure-license': '모험 라이선스',
-  'guides.category.guild-raid': '길드 레이드',
-  'guides.category.world-boss': '월드 보스',
-  'guides.category.dimensional-singularity': '차원 특이점',
-  'guides.category.joint-challenge': '합동 챌린지',
-  'guides.category.special-request': '특별 의뢰',
-  'guides.category.irregular-extermination': '이레귤러 소탕',
-  'guides.category.monad-gate': '모나드 게이트',
-  'guides.category.skyward-tower': '비천의 탑',
-  'guides.category.other': '기타',
-
-  // Guide category descriptions
-  'guides.category.general-guides.desc':
-    '게임 기초 마스터: 전투 메커닉, 캐릭터 성장, 장비 시스템, 초보자를 위한 필수 팁.',
-  'guides.category.adventure.desc':
-    '모험 모드의 강력한 보스를 공략하기 위한 상세 전략: 추천 팀 구성, 메커닉 설명, 스테이지 팁.',
-  'guides.category.adventure-license.desc':
-    '모험자 라이선스의 모든 전투 공략(승급전을 포함): 적 메커닉, 추천 팀, 각 스테이지별 전략을 안내합니다.',
-  'guides.category.guild-raid.desc':
-    '길드 레이드 완벽 공략: 보스 메커닉, 최적 팀 구성, 최고 점수를 위한 데미지 극대화 전술.',
-  'guides.category.world-boss.desc':
-    '익스트림 리그 월드 보스전에서 SSS 등급을 달성하기 위한 완벽 공략: 최적 팀 구성, 스킬 로테이션, 데미지 극대화.',
-  'guides.category.dimensional-singularity.desc':
-    '매일 바뀌는 특이점 보스 공략: 일정, 메커닉, 랭킹 점수 목표, 특이점 승화 장비 강화.',
+  // Catégories de guides : libellés + descriptions dans guide-categories.ts
+  // (source unique, LocalizedText) — plus de clés de locale par catégorie.
   'guides.singularity.info.intro':
     '차원 특이점은 모나드 게이트에서 「차원 특이점 모드」로 전환하여 접근하는 엔드 콘텐츠입니다. 수요일부터 토요일까지 매일 다른 특이점 보스가 등장하며, 일일 점수에 따라 랭킹과 보상이 결정됩니다.',
   'guides.singularity.info.unlock': '해금 조건: 모나드 게이트 심층 1 진 엔딩 클리어.',
@@ -599,19 +574,6 @@ const kr: Record<TranslationKey, string> = {
   'guides.singularity.library.title': '보스 도감',
   'guides.singularity.library.tagline':
     '보스가 활성화되지 않아도 모든 가이드는 언제든 열람 가능합니다.',
-  'guides.category.joint-challenge.desc':
-    '합동 챌린지에서 높은 점수를 얻기 위한 고급 공략: 최적 팀 구성, 스킬 타이밍, 시너지 활용 팁.',
-  'guides.category.special-request.desc':
-    '특별 의뢰 미션 완벽 공략: 생태 조사 및 정체 규명. 보스 메커닉, 팀 시너지, 성공을 위한 핵심 전술을 소개합니다.',
-  'guides.category.irregular-extermination.desc':
-    '이레귤러 섬멸전 모드의 보스 공략: 보스 패턴, 추천 팀 구성, 각 스테이지별 효율적인 전략.',
-  'guides.category.monad-gate.desc':
-    '모나드 게이트 스테이지 공략: 진 엔딩에 도달하기 위한 경로 선택과 전략을 안내합니다.',
-  'guides.category.skyward-tower.desc':
-    '비천의 탑과 엘레멘탈 타워 공략: 팀 구성, 층별 메커닉, 공략 팁.',
-  'guides.category.other.desc':
-    '다른 카테고리에 해당하지 않거나 더 이상 최신이 아닌 가이드, 뉴스 및 콘텐츠.',
-
   // Guide landing — categories index
   'guides.counter': '가이드 {guides}개 · 카테고리 {categories}개',
   'guides.count.one': '가이드 {count}개',
@@ -1241,6 +1203,10 @@ const kr: Record<TranslationKey, string> = {
   'progress.sweepAll': '도전 컨텐츠 일괄 소탕',
   'progress.craftSettingsDesc': '추적할 제작 아이템을 활성화하거나 비활성화합니다.',
   'progress.shopSettingsDesc': '추적할 상점 구매를 활성화하거나 비활성화합니다.',
+
+  // Guides (système V3)
+  'page.guides.empty_category': '이 카테고리에는 아직 가이드가 없습니다.',
+  'page.guide.versions': '버전',
 };
 
 export default kr;

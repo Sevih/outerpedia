@@ -242,3 +242,59 @@ export function resolveSkillPlaceholders(
     return val ?? '?';
   });
 }
+
+// --- groupes de buffs (BT_GROUP) ----------------------------------------------
+
+/**
+ * Enfants d'un buff conteneur `BT_GROUP` : sa `Value` pointe une ligne
+ * `BuffGroupTemplet` dont les `Child*_BID` sont les buffs réellement appliqués
+ * (ex. les stacks « Regina's World »). Sans expansion, l'effet réel est invisible.
+ * `all=false` avec plusieurs enfants = le jeu en TIRE UN AU HASARD (Dianne :
+ * une stat aléatoire parmi 4).
+ */
+export interface BuffGroup {
+  kids: string[];
+  all: boolean;
+}
+
+/** Index BuffGroupTemplet : id de groupe → enfants + mode de tirage. */
+export function loadBuffGroups(): Map<string, BuffGroup> {
+  const out = new Map<string, BuffGroup>();
+  for (const g of loadTable('BuffGroupTemplet')) {
+    if (!g.ID) continue;
+    const kids: string[] = [];
+    for (let i = 1; i <= 10; i++) {
+      const bid = g[`Child${i}_BID`];
+      if (bid) kids.push(bid);
+    }
+    out.set(g.ID, { kids, all: g.IsAllCreate === 'True' });
+  }
+  return out;
+}
+
+/** Id de buff expansé + provenance (enfant d'un groupe à tirage aléatoire ?). */
+export interface ExpandedBuff {
+  id: string;
+  choice?: boolean;
+}
+
+/** Ids de buffs d'un niveau, groupes `BT_GROUP` expansés en leurs enfants (id parent conservé). */
+export function expandBuffIds(
+  ids: string[],
+  buffsByID: Map<string, Row[]>,
+  groups: Map<string, BuffGroup>,
+  level: number,
+): ExpandedBuff[] {
+  const out: ExpandedBuff[] = [];
+  for (const id of ids) {
+    out.push({ id });
+    const row = buffRowAtLevel(buffsByID, id, level);
+    if (row?.Type === 'BT_GROUP' || row?.Type === 'BT_GROUP_CASTER_TOOLTIP_CHECK') {
+      const g = groups.get(row.Value ?? '');
+      if (!g) continue;
+      const choice = !g.all && g.kids.length > 1;
+      for (const child of g.kids) out.push(choice ? { id: child, choice } : { id: child });
+    }
+  }
+  return out;
+}

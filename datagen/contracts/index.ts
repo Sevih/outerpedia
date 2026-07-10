@@ -20,6 +20,7 @@ export type {
 } from '../lib/effects';
 export type { BuffValues, SkillBuffVars } from '../lib/buff';
 export type { Character, StatRange } from '../extractor/specs/character';
+export type { Monster } from '../extractor/specs/monster';
 export type { TranscendStep, TranscendData } from '../extractor/transcend';
 export type {
   CharacterCurated,
@@ -44,6 +45,14 @@ export type { Costume as CostumeItem } from '../generators/costumes';
 export type { CatalogEntry } from '../generators/item-catalog';
 export type { GameVersion } from '../generators/game-version';
 export type {
+  DungeonAdv,
+  DungeonRank,
+  DungeonRef,
+  EncountersData,
+  MonsterEncounters,
+  MonsterSpawn,
+} from '../generators/encounters';
+export type {
   ArmorItem,
   BreakLimit,
   BuffEffect,
@@ -59,6 +68,11 @@ export type {
   SpecialItem,
 } from '../generators/equipment';
 export type { Boss } from '../generators/bosses';
+export type {
+  UnlockContentData,
+  UnlockEntry,
+  UnlockRequirement,
+} from '../generators/unlock-content';
 export type {
   EvolutionRung,
   LimitBreakStep,
@@ -84,6 +98,8 @@ export type {
 import type { LangDict } from '../lib/lang';
 import type { Effect } from '../lib/effects';
 import type { Character } from '../extractor/specs/character';
+import type { Monster } from '../extractor/specs/monster';
+import type { DungeonRef } from '../generators/encounters';
 import type { TranscendData } from '../extractor/transcend';
 import type { Skill } from '../generators/skills';
 import type { CatalogEntry } from '../generators/item-catalog';
@@ -153,6 +169,12 @@ export interface Glossaries {
    * « Increased Damage Taken »).
    */
   tooltipKinds: Record<string, string[]>;
+  /**
+   * Titres localisés des MODES de contenu (slug de DungeonMode → titre résolu
+   * sans mapping en dur — cf. generators/encounters). Optionnel : absent des
+   * glossaires committés avant la première promotion du domaine monstre.
+   */
+  modes?: Record<string, LangDict>;
 }
 
 /** `data/generated/characters.json` */
@@ -161,6 +183,45 @@ export type CharactersFile = Record<string, Character>;
 export type TranscendFile = TranscendData;
 /** `data/generated/skills.json` */
 export type SkillsFile = Record<string, Skill>;
+/** `data/generated/monsters.json` (mobs, élites, boss — filtrés par `type`) */
+export type MonstersFile = Record<string, Monster>;
+/** `data/generated/monster-skills.json` (même contrat `Skill` que les persos) */
+export type MonsterSkillsFile = Record<string, Skill>;
+/**
+ * `data/generated/encounters.json` — dictionnaire des DONJONS/STAGES référencés
+ * par les `spawns` des monstres : mode (slug, titre dans `glossaries.modes`),
+ * titre localisé du stage (difficulté incluse) et région. La localisation
+ * elle-même (spawns/summonedBy/linkedTo, avec le NIVEAU réel — les stats
+ * s'interpolent min@1 → max@100 comme les persos) vit SUR chaque monstre.
+ */
+export type EncountersFile = Record<string, DungeonRef>;
+/**
+ * `data/generated/monster-archive/<id>@<n>.json` — état FIGÉ d'un boss
+ * (`pnpm datagen:version-boss`, geste humain). Les guides référencent un boss
+ * par `<id>` (live, défaut) ou `<id>@<n>` (épinglé sur cet état). Append-only.
+ */
+export interface MonsterArchiveEntry {
+  id: string;
+  /** Numéro de version d'archive (1, 2, …) — la référence est `<id>@<version>`. */
+  version: number;
+  /** Provenance : sha court du commit source, ou `worktree`. */
+  ref: string;
+  /** Date ISO du commit source (ou de la capture en worktree). */
+  committedAt: string;
+  /** `resVersion` du jeu au moment de la capture, si connue. */
+  gameVersion?: string;
+  /** Note humaine (« avant la maj 1.11 », …). */
+  label?: string;
+  monster: Monster;
+  /** Les skills du monstre TELS QU'ILS ÉTAIENT (sous-ensemble figé du catalogue). */
+  skills: Record<string, Skill>;
+  /**
+   * Snapshot des donjons référencés par `monster.spawns` (+ titres de modes) —
+   * l'archive reste LISIBLE seule, même si le donjon disparaît du live.
+   */
+  dungeons?: Record<string, DungeonRef>;
+  modes?: Record<string, LangDict>;
+}
 /**
  * `data/generated/items.json` — CATALOGUE UNIFIÉ servi : items de jeu +
  * monnaies + costumes + curé (overrides & créations), format aligné.

@@ -575,33 +575,8 @@ const fr: Record<TranslationKey, string> = {
   'page.guide.updating_disclaimer':
     'Ce guide est en cours de mise à jour pour cette version. Certaines recommandations peuvent évoluer.',
 
-  // Guide categories
-  'guides.category.general-guides': 'Guides généraux',
-  'guides.category.adventure': 'Adventure',
-  'guides.category.adventure-license': 'Adventure License',
-  'guides.category.guild-raid': 'Guild Raid',
-  'guides.category.world-boss': 'World Boss',
-  'guides.category.dimensional-singularity': 'Dimensional Singularity',
-  'guides.category.joint-challenge': 'Joint Challenge',
-  'guides.category.special-request': 'Special Request',
-  'guides.category.irregular-extermination': 'Irregular Extermination',
-  'guides.category.monad-gate': 'Monad Gate',
-  'guides.category.skyward-tower': 'Skyward Tower',
-  'guides.category.other': 'Autres guides',
-
-  // Guide category descriptions
-  'guides.category.general-guides.desc':
-    "Maîtrisez les fondamentaux du jeu : mécaniques de combat, progression des personnages, systèmes d'équipement et conseils essentiels pour les nouveaux joueurs.",
-  'guides.category.adventure.desc':
-    "Stratégies détaillées pour vaincre les Boss d'Adventure exigeants : équipes recommandées, explication des mécaniques et conseils par stage.",
-  'guides.category.adventure-license.desc':
-    "Guides pour toutes les batailles d'Adventure License, y compris les Promotion Fights : apprenez les mécaniques ennemies, les équipes recommandées et les stratégies pour chaque stage.",
-  'guides.category.guild-raid.desc':
-    "Stratégies complètes pour les Guild Raid : mécaniques de Boss, configurations d'équipe optimales et tactiques pour maximiser les dégâts et atteindre les meilleurs scores de Raid.",
-  'guides.category.world-boss.desc':
-    "Stratégies complètes pour atteindre le rang SSS dans les batailles World Boss en Extreme League : configurations d'équipe optimales, timing des rotations et maximisation des dégâts.",
-  'guides.category.dimensional-singularity.desc':
-    "Guides quotidiens des Boss de Singularity en rotation : planning, mécaniques, objectifs de score au classement et progression de l'équipement Singularity Ascension.",
+  // Catégories de guides : libellés + descriptions dans guide-categories.ts
+  // (source unique, LocalizedText) — plus de clés de locale par catégorie.
   'guides.singularity.info.intro':
     'Dimensional Singularity est un mode de fin de jeu accessible depuis Monad Gate en passant en Dimensional Singularity Mode. Un Boss Singularity différent est actif chaque jour du mercredi au samedi, et votre score quotidien détermine votre classement et vos récompenses.',
   'guides.singularity.info.unlock':
@@ -627,19 +602,6 @@ const fr: Record<TranslationKey, string> = {
   'guides.singularity.library.title': 'Bibliothèque des boss',
   'guides.singularity.library.tagline':
     "Chaque guide reste accessible même quand son boss n'est pas actif.",
-  'guides.category.joint-challenge.desc':
-    "Obtenez de meilleurs scores en Joint Challenge grâce à des stratégies avancées : meilleures compositions d'équipe, timing des compétences et conseils de synergie pour atteindre le sommet du classement.",
-  'guides.category.special-request.desc':
-    "Stratégies approfondies pour les missions Special Request : Ecology Study et Identification. Apprenez les mécaniques de Boss, les synergies d'équipe et les tactiques clés pour réussir.",
-  'guides.category.irregular-extermination.desc':
-    'Guides des Boss du mode Irregular Extermination Project : apprenez les patterns des Boss, les équipes recommandées et les stratégies efficaces pour chaque stage.',
-  'guides.category.monad-gate.desc':
-    'Guides des stages de Monad Gate : chemins recommandés, choix et stratégies pour atteindre la True Ending du mode.',
-  'guides.category.skyward-tower.desc':
-    "Stratégies pour Skyward Tower et Elemental Towers : compositions d'équipe, mécaniques d'étage et astuces.",
-  'guides.category.other.desc':
-    "Guides, actualités et contenus qui n'entrent dans aucune autre catégorie ou ne sont plus à jour.",
-
   // Guide landing — categories index
   'guides.counter': '{guides} guides · {categories} catégories',
   'guides.count.one': '{count} GUIDE',
@@ -1296,6 +1258,10 @@ const fr: Record<TranslationKey, string> = {
     'Activez ou désactivez les objets de craft que vous souhaitez suivre.',
   'progress.shopSettingsDesc':
     'Activez ou désactivez les achats en boutique que vous souhaitez suivre.',
+
+  // Guides (système V3)
+  'page.guides.empty_category': 'Aucun guide dans cette catégorie pour le moment.',
+  'page.guide.versions': 'Version',
 };
 
 export default fr;

@@ -7,6 +7,7 @@
  * = un fichier + un `build()` pur. Ajouter une entité = ajouter une ligne ici.
  */
 import { buildCharacters } from './specs/character';
+import { buildMonsters } from './specs/monster';
 
 export interface GeneratedTarget {
   /** Identifiant CLI/route : `character`, `weapon`… */
@@ -25,6 +26,12 @@ export const TARGETS: GeneratedTarget[] = [
     label: 'Personnages',
     file: 'characters.json',
     build: () => buildCharacters().characters as unknown as Record<string, unknown>,
+  },
+  {
+    id: 'monster',
+    label: 'Monstres',
+    file: 'monsters.json',
+    build: () => buildMonsters().monsters as unknown as Record<string, unknown>,
   },
 ];
 

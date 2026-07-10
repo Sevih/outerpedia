@@ -563,33 +563,8 @@ const en = {
   'page.guide.updating_disclaimer':
     'This guide is currently being updated for this version. Some recommendations may change.',
 
-  // Guide categories
-  'guides.category.general-guides': 'General Guides',
-  'guides.category.adventure': 'Adventure',
-  'guides.category.adventure-license': 'Adventure License',
-  'guides.category.guild-raid': 'Guild Raid',
-  'guides.category.world-boss': 'World Boss',
-  'guides.category.dimensional-singularity': 'Dimensional Singularity',
-  'guides.category.joint-challenge': 'Joint Challenge',
-  'guides.category.special-request': 'Special Request',
-  'guides.category.irregular-extermination': 'Irregular Extermination',
-  'guides.category.monad-gate': 'Monad Gate',
-  'guides.category.skyward-tower': 'Skyward Tower',
-  'guides.category.other': 'Other Guides',
-
-  // Guide category descriptions
-  'guides.category.general-guides.desc':
-    'Master game fundamentals: combat mechanics, character progression, equipment systems, and essential beginner tips for new players.',
-  'guides.category.adventure.desc':
-    'Detailed strategies to defeat challenging Adventure bosses: recommended teams, mechanics explanation, and stage tips.',
-  'guides.category.adventure-license.desc':
-    'Guides for all Adventure License battles, including Promotion Fights: learn enemy mechanics, team recommendations, and strategies for every stage.',
-  'guides.category.guild-raid.desc':
-    'Comprehensive strategies for Guild Raids: boss mechanics, optimal team setups, and damage-maximizing tactics to achieve the highest raid scores.',
-  'guides.category.world-boss.desc':
-    'Comprehensive strategies to achieve SSS rank in Extreme League World Boss battles: optimal team setups, rotation timing, and damage maximization.',
-  'guides.category.dimensional-singularity.desc':
-    'Daily-rotating Singularity boss guides: schedule, mechanics, ranking score targets, and Singularity Ascension gear progression.',
+  // Catégories de guides : libellés + descriptions dans guide-categories.ts
+  // (source unique, LocalizedText) — plus de clés de locale par catégorie.
   'guides.singularity.info.intro':
     'Dimensional Singularity is an endgame mode accessible from Monad Gate by switching to Dimensional Singularity Mode. A different Singularity boss is active each day from Wednesday to Saturday, and your daily score determines your ranking and rewards.',
   'guides.singularity.info.unlock': 'Unlock condition: clear Monad Gate Depth 1 True Ending.',
@@ -614,19 +589,6 @@ const en = {
   'guides.singularity.library.title': 'Boss library',
   'guides.singularity.library.tagline':
     "Every guide stays accessible even when its boss isn't active.",
-  'guides.category.joint-challenge.desc':
-    'Score higher in Joint Challenge battles with advanced strategies: best team compositions, skill timing, and synergy tips for top rankings.',
-  'guides.category.special-request.desc':
-    'In-depth strategies for Special Request missions: Ecology Study and Identification. Learn boss mechanics, team synergies, and key tactics for success.',
-  'guides.category.irregular-extermination.desc':
-    'Boss guides for the Irregular Extermination Project mode: learn boss patterns, recommended teams, and effective strategies for each stage.',
-  'guides.category.monad-gate.desc':
-    'Stage guides for Monad Gate: recommended paths, choices, and strategies to reach the true ending of the mode.',
-  'guides.category.skyward-tower.desc':
-    'Strategies for Skyward Tower and Elemental Towers: team compositions, floor mechanics, and tips.',
-  'guides.category.other.desc':
-    "Guides, news, and content that doesn't fit into the other categories or is no longer up to date.",
-
   // Guide landing — categories index
   'guides.counter': '{guides} guides · {categories} categories',
   'guides.count.one': '{count} GUIDE',
@@ -1270,6 +1232,10 @@ const en = {
   'progress.sweepAll': 'Challenge Content Sweep All',
   'progress.craftSettingsDesc': 'Enable or disable crafting items you want to track.',
   'progress.shopSettingsDesc': 'Enable or disable shop purchases you want to track.',
+
+  // Guides (système V3)
+  'page.guides.empty_category': 'No guides in this category yet.',
+  'page.guide.versions': 'Version',
 } as const;
 
 export default en;

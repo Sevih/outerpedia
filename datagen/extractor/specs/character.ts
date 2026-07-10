@@ -277,22 +277,27 @@ function resolveVoiceActor(
   return va.en || va.jp || va.kr || va.zh ? va : null;
 }
 
-/** Extrait les stats non nulles (paires _Min/_Max) en valeurs brutes.
+/** Stats de l'écran principal du jeu : toujours émises, même nulles — un boss
+ * à DEF 0 affiche « DEF 0 » en jeu (colonne absente du templet = 0). */
+const CORE_STATS = new Set(['hp', 'atk', 'def', 'speed']);
+
+/** Extrait les stats non nulles (paires _Min/_Max) en valeurs brutes — sauf le
+ * cœur (`CORE_STATS`), toujours émis.
  * La plage couvre les niveaux 1..100 SANS éveils — les paliers affichés
  * (évolutions, dépassement 105/110/120) sont CALCULÉS au runtime par
  * `computeStatSteps` (src/lib/data/char-progression), validé contre l'oracle
  * V2 et in-game. Ne pas cuire les éveils ici : double-compte garanti. */
-function extractStats(r: Row): Record<string, StatRange> {
+export function extractStats(r: Row): Record<string, StatRange> {
   const out: Record<string, StatRange> = {};
   for (const d of STAT_DEFS) {
     const min = num(r[`${d.col}_Min`]);
     const max = num(r[`${d.col}_Max`]);
-    if (min !== 0 || max !== 0) out[d.slug] = { min, max };
+    if (min !== 0 || max !== 0 || CORE_STATS.has(d.slug)) out[d.slug] = { min, max };
   }
   return out;
 }
 
-const statRangeSchema: Schema = {
+export const statRangeSchema: Schema = {
   kind: 'object',
   fields: { min: { kind: 'number' }, max: { kind: 'number' } },
 };

@@ -19,9 +19,12 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import {
   buffRowAtLevel,
+  expandBuffIds,
+  loadBuffGroups,
   loadBuffIndex,
   resolveSkillPlaceholders,
   skillBuffVars,
+  type BuffGroup,
   type SkillBuffVars,
 } from '../lib/buff';
 import { effectShape, type EffectShape } from '../lib/effects';
@@ -33,7 +36,7 @@ import { groupBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
 const OUT = resolve('.gamedata/staging/skills');
 
 /** Sous-type fonctionnel d'un skill. */
-type SkillSubType = 'active' | 'passive' | null;
+export type SkillSubType = 'active' | 'passive' | null;
 
 /** Données d'un niveau de compétence (seules les clés utiles sont émises). */
 export interface SkillLevel {
@@ -106,70 +109,22 @@ export interface SkillData {
 }
 
 /** Valeur d'enum de cible/portée → slug minuscule, `undefined` si NONE/vide/CSV. */
-function slugTeam(v: string | undefined): string | undefined {
+export function slugTeam(v: string | undefined): string | undefined {
   const first = splitCsv(v ?? '')[0];
   if (!first || first === 'NONE') return undefined;
   return first.toLowerCase();
 }
 
 /** Sous-type ACTIVE/PASSIVE → slug, sinon null. */
-function subTypeOf(v: string | undefined): SkillSubType {
+export function subTypeOf(v: string | undefined): SkillSubType {
   if (v === 'ACTIVE') return 'active';
   if (v === 'PASSIVE') return 'passive';
   return null;
 }
 
-/**
- * Enfants d'un buff conteneur `BT_GROUP` : sa `Value` pointe une ligne
- * `BuffGroupTemplet` dont les `Child*_BID` sont les buffs réellement appliqués
- * (ex. les stacks « Regina's World »). Sans expansion, l'effet réel est invisible.
- * `all=false` avec plusieurs enfants = le jeu en TIRE UN AU HASARD (Dianne :
- * une stat aléatoire parmi 4).
- */
-function loadGroupChildren(): Map<string, { kids: string[]; all: boolean }> {
-  const out = new Map<string, { kids: string[]; all: boolean }>();
-  for (const g of loadTable('BuffGroupTemplet')) {
-    if (!g.ID) continue;
-    const kids: string[] = [];
-    for (let i = 1; i <= 10; i++) {
-      const bid = g[`Child${i}_BID`];
-      if (bid) kids.push(bid);
-    }
-    out.set(g.ID, { kids, all: g.IsAllCreate === 'True' });
-  }
-  return out;
-}
-
-/** Id de buff expansé + provenance (enfant d'un groupe à tirage aléatoire ?). */
-interface ExpandedBuff {
-  id: string;
-  choice?: boolean;
-}
-
-/** Ids de buffs d'un niveau, groupes `BT_GROUP` expansés en leurs enfants (id parent conservé). */
-function expandBuffIds(
-  ids: string[],
-  buffs: ReturnType<typeof loadBuffIndex>,
-  groups: ReturnType<typeof loadGroupChildren>,
-  level: number,
-): ExpandedBuff[] {
-  const out: ExpandedBuff[] = [];
-  for (const id of ids) {
-    out.push({ id });
-    const row = buffRowAtLevel(buffs, id, level);
-    if (row?.Type === 'BT_GROUP' || row?.Type === 'BT_GROUP_CASTER_TOOLTIP_CHECK') {
-      const g = groups.get(row.Value ?? '');
-      if (!g) continue;
-      const choice = !g.all && g.kids.length > 1;
-      for (const child of g.kids) out.push(choice ? { id: child, choice } : { id: child });
-    }
-  }
-  return out;
-}
-
 export function buildSkills(): SkillData {
   const buffs = loadBuffIndex();
-  const groups = loadGroupChildren();
+  const groups = loadBuffGroups();
   const tskill = loadTextIndex('TextSkill');
   const skillRows = loadTable('CharacterSkillTemplet');
   const levelsBySkill = groupBy(loadTable('CharacterSkillLevelTemplet'), 'SkillID');
@@ -328,7 +283,7 @@ export function buildSkills(): SkillData {
 function buildLevel(
   r: Row,
   buffs: ReturnType<typeof loadBuffIndex>,
-  groups: ReturnType<typeof loadGroupChildren>,
+  groups: Map<string, BuffGroup>,
   tskill: Map<string, LangDict>,
   mainOnSkill: boolean,
 ): SkillLevel {

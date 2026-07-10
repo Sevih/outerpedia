@@ -1,0 +1,133 @@
+{
+  "4548161": {
+    "id": "4548161",
+    "name": {
+      "en": "Prototype EX-78",
+      "jp": "試作機：EX-78",
+      "kr": "EX-78 시범기",
+      "zh": "EX-78示范机"
+    },
+    "type": "area_boss",
+    "race": "alien",
+    "class": "ranger",
+    "element": "dark",
+    "rarity": 3,
+    "icon": "4048001",
+    "skills": ["113911", "113912", "113913", "113914", "113915", "113916", "113917"],
+    "stats": {
+      "hp": { "min": 2480, "max": 147200 },
+      "atk": { "min": 180, "max": 8977 },
+      "speed": { "min": 125, "max": 229 },
+      "guard": { "min": 20, "max": 54 },
+      "critical_rate": { "min": 100, "max": 100 },
+      "critical_dmg": { "min": 1500, "max": 1500 },
+      "dmg_reduce": { "min": 0, "max": 100 },
+      "buff_chance": { "min": 33, "max": 181 },
+      "buff_resist": { "min": 66, "max": 186 }
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "buffImmune": [
+      "BT_GOLDEN_CURSE",
+      "BT_STUN",
+      "BT_FREEZE",
+      "BT_STONE",
+      "BT_SILENCE",
+      "BT_DOT_CURSE",
+      "BT_STEAL_BUFF",
+      "BT_COOL_CHARGE",
+      "BT_COOL2_CHARGE",
+      "BT_COOL3_CHARGE"
+    ],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "2", "64", "100"],
+    "spawns": [{ "dungeon": "90400000", "level": 25 }]
+  },
+  "4548171": {
+    "id": "4548171",
+    "name": {
+      "en": "Prototype EX-78",
+      "jp": "試作機：EX-78",
+      "kr": "EX-78 시범기",
+      "zh": "EX-78示范机"
+    },
+    "type": "area_boss",
+    "race": "alien",
+    "class": "ranger",
+    "element": "dark",
+    "rarity": 3,
+    "icon": "4048001",
+    "skills": ["113911", "113912", "113913", "113914", "113915", "113916", "113917"],
+    "stats": {
+      "hp": { "min": 2480, "max": 147200 },
+      "atk": { "min": 180, "max": 8977 },
+      "speed": { "min": 125, "max": 229 },
+      "guard": { "min": 20, "max": 54 },
+      "critical_rate": { "min": 100, "max": 100 },
+      "critical_dmg": { "min": 1500, "max": 1500 },
+      "dmg_reduce": { "min": 0, "max": 100 },
+      "buff_chance": { "min": 33, "max": 181 },
+      "buff_resist": { "min": 66, "max": 186 }
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "buffImmune": [
+      "BT_GOLDEN_CURSE",
+      "BT_STUN",
+      "BT_FREEZE",
+      "BT_STONE",
+      "BT_SILENCE",
+      "BT_DOT_CURSE",
+      "BT_STEAL_BUFF",
+      "BT_COOL_CHARGE",
+      "BT_COOL2_CHARGE",
+      "BT_COOL3_CHARGE"
+    ],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "2", "64", "100"],
+    "spawns": [{ "dungeon": "90400100", "level": 80 }]
+  },
+  "4548181": {
+    "id": "4548181",
+    "name": {
+      "en": "Prototype EX-78",
+      "jp": "試作機：EX-78",
+      "kr": "EX-78 시범기",
+      "zh": "EX-78示范机"
+    },
+    "type": "area_boss",
+    "race": "alien",
+    "class": "ranger",
+    "element": "dark",
+    "rarity": 3,
+    "icon": "4048001",
+    "skills": ["113911", "113912", "113913", "113914", "113915", "113916", "113917"],
+    "stats": {
+      "hp": { "min": 2480, "max": 147200 },
+      "atk": { "min": 180, "max": 8977 },
+      "def": { "min": 0, "max": 0 },
+      "speed": { "min": 125, "max": 229 },
+      "guard": { "min": 20, "max": 54 },
+      "critical_rate": { "min": 100, "max": 100 },
+      "critical_dmg": { "min": 1500, "max": 1500 },
+      "dmg_reduce": { "min": 0, "max": 150 },
+      "damage_boost": { "min": 0, "max": 150 },
+      "buff_chance": { "min": 33, "max": 181 },
+      "buff_resist": { "min": 66, "max": 186 }
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "buffImmune": [
+      "BT_GOLDEN_CURSE",
+      "BT_STUN",
+      "BT_FREEZE",
+      "BT_STONE",
+      "BT_SILENCE",
+      "BT_DOT_CURSE",
+      "BT_STEAL_BUFF",
+      "BT_COOL_CHARGE",
+      "BT_COOL2_CHARGE",
+      "BT_COOL3_CHARGE"
+    ],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "2", "64", "100"],
+    "spawns": [{ "dungeon": "90400200", "level": 120 }]
+  }
+}

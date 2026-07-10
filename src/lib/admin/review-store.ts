@@ -16,24 +16,44 @@ import {
 import {
   extractedBundle,
   extractedCharacter,
+  extractedMonsterBundle,
   integrateCharacter,
+  integrateMonster,
+  type IntegrateMonsterReport,
   type IntegrateReport,
 } from '@datagen/extractor/integrate';
+import {
+  monsterArchiveOf,
+  versionMonster,
+  type VersionMonsterReport,
+} from '@datagen/extractor/version-monster';
 import {
   characterV2Control,
   type ControlGlossaries,
   type V2Control,
 } from '@datagen/extractor/v2-control';
 
-export type { EntityReview, TargetReview, IntegrateReport, V2Control, ControlGlossaries };
+export type {
+  EntityReview,
+  TargetReview,
+  IntegrateMonsterReport,
+  IntegrateReport,
+  V2Control,
+  ControlGlossaries,
+  VersionMonsterReport,
+};
 export {
   acceptTarget,
   characterV2Control,
   entityReview,
   extractedBundle,
   extractedCharacter,
+  extractedMonsterBundle,
   integrateCharacter,
+  integrateMonster,
+  monsterArchiveOf,
   reviewAll,
   reviewTarget,
   reviewTotals,
+  versionMonster,
 };

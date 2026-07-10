@@ -1,0 +1,31 @@
+{
+  "90400000": {
+    "mode": "event_boss",
+    "name": {
+      "en": "Defeat Prototype EX-78 Normal",
+      "jp": "試作機：EX-78討伐(ノーマル)",
+      "kr": "EX-78 시범기 처치 일반",
+      "zh": "击杀EX-78示范机普通"
+    }
+  },
+  "90400100": {
+    "mode": "event_boss",
+    "name": {
+      "en": "Defeat Prototype EX-78 Hard",
+      "jp": "試作機：EX-78討伐(ハード)",
+      "kr": "EX-78 시범기 처치 하드",
+      "zh": "击杀EX-78示范机困难"
+    }
+  },
+  "90400200": {
+    "mode": "event_boss",
+    "name": {
+      "en": "Defeat Prototype EX-78 Very Hard",
+      "jp": "試作機：EX-78討伐(ベリーハード)",
+      "kr": "EX-78 시범기 처치 베리 하드",
+      "zh": "击杀EX-78示范机极难"
+    },
+    "adv": { "atk": -535, "hp": -175 },
+    "bossHp": 2000000
+  }
+}

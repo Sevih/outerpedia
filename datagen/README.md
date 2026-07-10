@@ -148,6 +148,51 @@ Chemin de l'adb surchargeable via `ADB_PATH` (défaut : LDPlayer9).
 
 ---
 
+## Versionner un boss (guides vs mises à jour du jeu)
+
+Le jeu peut mettre à jour un boss **en place** (même id, contenu modifié) — un
+guide écrit contre l'ancien état deviendrait silencieusement faux. Trois
+protections, dont deux automatiques :
+
+- **L'identité est l'ID, jamais le nom** : beaucoup de boss distincts partagent
+  un nom (modes/stages/rotations différents) — les guides référencent des ids.
+  Les stats EFFECTIVES d'un add dépendent du niveau du spawn (donjon/stage) ;
+  l'entité extraite porte les valeurs brutes du templet.
+- **Rétention automatique** (`datagen:promote`) : un monstre/skill déjà validé
+  n'est JAMAIS supprimé par la promotion, même si le jeu purge ses lignes
+  (`monsters.json` / `monster-skills.json` / `encounters.json` sont à rétention
+  d'entités — le retrait reste une décision humaine, via git).
+- **Versionnage au clic** (geste humain, à ton jugement — une maj sans impact
+  guide ne se versionne pas) : sur la fiche `/admin/extractor/monsters/<id>`,
+  deux boutons — **Enregistrer** (applique l'extraction fraîche de CE monstre)
+  et **Versionner l'état committé** (fige l'état git HEAD dans
+  `data/generated/monster-archive/<id>@<n>.json`, append-only, committé).
+
+La **localisation** (où affronte-t-on le monstre : `spawns` = donjon + niveau
+réel + barres de vie ; `summonedBy`/`linkedTo` pour les adds jamais spawnés) est
+un champ **de l'entité monstre** : déplacer ou re-niveauter un boss apparaît
+comme un diff, s'enregistre et se versionne comme le reste. Les donjons
+référencés vivent dans `encounters.json` (mode, titre du stage, région — mergés
+par « Enregistrer » avec le monstre), les titres de modes dans
+`glossaries.modes`, et l'archive d'un boss embarque un snapshot des
+donjons/modes référencés pour rester lisible seule.
+
+Flux type : le boss `1` change de façon significative → **Versionner** (fige
+l'ancien sous `1@1`) puis **Enregistrer** (le live prend le nouvel état). La
+version A du guide s'épingle sur `1@1`, la nouvelle version B suit le live.
+
+> Le versionnage fige **HEAD** (dernier état committé — celui contre lequel les
+> guides ont été écrits) car en dev le promote automatique a souvent déjà écrasé
+> le disque avec le nouvel état. Si la maj a été committée il y a longtemps,
+> rattrapage CLI : `pnpm datagen:version-boss <id> --ref <commit>` (retrouver le
+> commit : `git log -- data/generated/monsters.json`).
+>
+> TODO(guides) : quand le domaine guides existera, « Versionner » devra
+> ré-épingler AUTOMATIQUEMENT les guides référençant `<id>` vers `<id>@<n>` —
+> versionner ne doit jamais demander d'éditer la config d'un guide à la main.
+
+---
+
 ## Publier (commit + déploiement)
 
 > Le mécanisme est le MÊME pour tout le repo (code, pages, data) : branche →

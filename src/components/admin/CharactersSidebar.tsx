@@ -94,42 +94,56 @@ export function CharactersSidebar({
             <li key={r.id}>
               <Link
                 href={href}
-                className={`flex flex-col gap-0.5 px-3 py-1.5 ${active ? 'bg-surface-overlay' : 'hover:bg-surface-overlay/50'}`}
+                className={`flex items-center gap-2 px-3 py-1.5 ${active ? 'bg-surface-overlay' : 'hover:bg-surface-overlay/50'}`}
               >
-                <span className="flex items-center justify-between">
-                  <span className="text-content-subtle font-mono text-xs">{r.id}</span>
-                  <span className="flex items-center gap-1">
-                    {r.status === 'new' && (
-                      <span className="bg-accent/15 text-accent rounded px-1 text-[10px]">new</span>
-                    )}
-                    {r.status === 'diff' && (
-                      <span className="bg-warn/15 text-warn rounded px-1 text-[10px]">
-                        {r.diffCount} diff
-                      </span>
-                    )}
-                    {r.status === 'ok' && (
-                      <span className="bg-success/15 text-success rounded px-1 text-[10px]">
-                        ok
-                      </span>
-                    )}
-                    {r.v2Count > 0 && (
-                      <span className="bg-danger/15 text-danger rounded px-1 text-[10px]">
-                        {r.v2Count} v2≠
-                      </span>
-                    )}
-                    {r.curated && <span className="text-accent text-[10px]">✎</span>}
+                {/* eslint-disable-next-line @next/next/no-img-element -- icône dev */}
+                <img
+                  src={img.face(r.id)}
+                  alt=""
+                  loading="lazy"
+                  className="h-9 w-9 shrink-0 rounded object-contain"
+                  onError={(e) => {
+                    e.currentTarget.style.visibility = 'hidden';
+                  }}
+                />
+                <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+                  <span className="flex items-center justify-between">
+                    <span className="text-content-subtle font-mono text-xs">{r.id}</span>
+                    <span className="flex items-center gap-1">
+                      {r.status === 'new' && (
+                        <span className="bg-accent/15 text-accent rounded px-1 text-[10px]">
+                          new
+                        </span>
+                      )}
+                      {r.status === 'diff' && (
+                        <span className="bg-warn/15 text-warn rounded px-1 text-[10px]">
+                          {r.diffCount} diff
+                        </span>
+                      )}
+                      {r.status === 'ok' && (
+                        <span className="bg-success/15 text-success rounded px-1 text-[10px]">
+                          ok
+                        </span>
+                      )}
+                      {r.v2Count > 0 && (
+                        <span className="bg-danger/15 text-danger rounded px-1 text-[10px]">
+                          {r.v2Count} v2≠
+                        </span>
+                      )}
+                      {r.curated && <span className="text-accent text-[10px]">✎</span>}
+                    </span>
                   </span>
+                  <span className="text-content truncate">{r.name}</span>
+                  {r.element && (
+                    <span className="flex items-center gap-1">
+                      {/* eslint-disable-next-line @next/next/no-img-element -- icône prod */}
+                      <img src={img.element(r.element)} alt="" className="h-4 w-4" />
+                      {/* eslint-disable-next-line @next/next/no-img-element -- icône prod */}
+                      <img src={img.klass(r.class)} alt="" className="h-4 w-4" />
+                      <span className="text-light text-xs">{'★'.repeat(r.rarity)}</span>
+                    </span>
+                  )}
                 </span>
-                <span className="text-content truncate">{r.name}</span>
-                {r.element && (
-                  <span className="flex items-center gap-1">
-                    {/* eslint-disable-next-line @next/next/no-img-element -- icône prod */}
-                    <img src={img.element(r.element)} alt="" className="h-4 w-4" />
-                    {/* eslint-disable-next-line @next/next/no-img-element -- icône prod */}
-                    <img src={img.klass(r.class)} alt="" className="h-4 w-4" />
-                    <span className="text-light text-xs">{'★'.repeat(r.rarity)}</span>
-                  </span>
-                )}
               </Link>
             </li>
           );

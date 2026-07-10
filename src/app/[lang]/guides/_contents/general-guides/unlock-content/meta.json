@@ -1,0 +1,20 @@
+{
+  "title": {
+    "en": "Unlocking Content",
+    "jp": "コンテンツのアンロック",
+    "kr": "콘텐츠 잠금 해제",
+    "zh": "解锁内容",
+    "fr": "Déblocage du contenu"
+  },
+  "description": {
+    "en": "List of all game modes and features with their unlock conditions and short explanations.",
+    "jp": "すべてのゲームモードと機能のリスト、そのアンロック条件と簡単な説明。",
+    "kr": "모든 게임 모드 및 기능 목록과 잠금 해제 조건 및 간단한 설명.",
+    "zh": "包含解锁条件和简短说明的所有游戏模式和功能特性的列表，",
+    "fr": "Liste de tous les modes et fonctionnalités du jeu avec leurs conditions de déblocage et brèves explications."
+  },
+  "icon": "CT_Detail_Slot_Lock_Open",
+  "author": "Sevih",
+  "updated": "2025-10-03",
+  "order": 200
+}

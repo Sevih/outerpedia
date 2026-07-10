@@ -21,7 +21,7 @@ import { img, ELEMENT_TEXT, GRADE_TEXT } from '@/lib/images';
 import { STAT_ICON, statDesc, statName } from '@/lib/stats';
 import { SKILL_SHORTHAND } from '@/lib/skills';
 import { resolveEffectKey } from '@/lib/data/effects';
-import { getAllCharacters, characterDisplayName, slugForId } from '@/lib/data/characters';
+import { characterDisplayName, findCharacterByName, slugForId } from '@/lib/data/characters';
 import {
   getAmuletFamilies,
   getSetViews,
@@ -35,7 +35,7 @@ import { InlineIcon } from '@/components/inline/InlineIcon';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { StatInline } from '@/components/inline/StatInline';
 import { EffectIconTile } from '@/components/character/EffectChips';
-import type { Character, CatalogEntry, Skill, LangDict } from '@contracts';
+import type { CatalogEntry, Skill, LangDict } from '@contracts';
 import skillsData from '@data/generated/skills.json';
 import eeData from '@data/generated/equipment/ee.json';
 import itemsData from '@data/generated/items.json';
@@ -50,17 +50,9 @@ export interface ParseCtx {
   t: TFunction;
 }
 
-// Index perso par NOM D'AFFICHAGE EN (clé du contenu éditorial), construit une fois.
-let charByName: Map<string, Character> | null = null;
-function findCharacter(name: string): Character | undefined {
-  if (!charByName) {
-    charByName = new Map();
-    for (const c of getAllCharacters()) {
-      charByName.set(characterDisplayName(c, 'en').toLowerCase(), c);
-    }
-  }
-  return charByName.get(name.trim().toLowerCase());
-}
+// Résolution par NOM D'AFFICHAGE EN (clé du contenu éditorial) : index partagé
+// du data layer (également utilisé par les guides).
+const findCharacter = findCharacterByName;
 
 /** Chip d'effet ({B/…}/{D/…}) : tuile d'icône RECOLORÉE (comme les chips de
  * skill) + libellé + tooltip descriptif. */

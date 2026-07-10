@@ -12,12 +12,35 @@
  * La promotion est GLOBALE (les glossaires/skills/équipement sont transverses
  * et doivent rester cohérents entre eux) ; pour intégrer UN perso sans le
  * reste, passer par l'intégration ciblée de l'admin (`integrateCharacter`).
+ *
+ * Exception : `--only <fichier> [...]` promeut uniquement les fichiers cités
+ * (chemins relatifs à data/extracted). Réservé aux fichiers AUTONOMES (sans
+ * réfs croisées vers glossaires/skills — ex. `unlock-content.json`) quand un
+ * autre domaine est en chantier et ne doit pas partir avec.
  */
-import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 
 const SRC = resolve('data/extracted');
 const DST = resolve('data/generated');
+
+/**
+ * Fichiers à RÉTENTION d'entités : une clé déjà VALIDÉE n'est jamais supprimée
+ * par la promotion, même si le jeu a purgé ses lignes — les guides référencent
+ * des boss par id, parfois anciens, et l'apply est AUTOMATIQUE en dev
+ * (`pnpm dev`). Les clés absentes de la proposition sont réinjectées à
+ * l'apply et signalées ; leur retrait reste une décision humaine (édition git).
+ * `encounters.json` (donjons référencés par les `spawns` des monstres) est
+ * retenu pour la même raison : un monstre retenu garde des réfs résolvables.
+ */
+const RETAIN_ENTITIES = new Set(['monsters.json', 'monster-skills.json', 'encounters.json']);
+
+/**
+ * Sous-dossier des états FIGÉS de boss (`pnpm datagen:version-boss`) : du
+ * validé pur, sans équivalent extrait par construction — hors périmètre du
+ * signalement « orphelin ».
+ */
+const isArchive = (rel: string): boolean => rel.startsWith('monster-archive/');
 
 /** Tous les .json d'un dossier (récursif), chemins relatifs POSIX. */
 function walk(dir: string, base = dir): string[] {
@@ -55,13 +78,32 @@ function entityDiff(a: unknown, b: unknown): string {
 
 function main(): void {
   const apply = process.argv.includes('--apply');
+  // `--only a.json b.json` : promotion ciblée (cf. en-tête).
+  const onlyIdx = process.argv.indexOf('--only');
+  const only =
+    onlyIdx === -1
+      ? null
+      : new Set(process.argv.slice(onlyIdx + 1).filter((a) => !a.startsWith('--')));
+  if (only && !only.size) {
+    console.error('--only : au moins un fichier attendu (relatif à data/extracted).');
+    process.exit(1);
+  }
   if (!existsSync(SRC)) {
     console.error('data/extracted/ absent — lance d’abord `pnpm datagen:build`.');
     process.exit(1);
   }
 
-  const files = walk(SRC);
-  const dstOnly = walk(DST).filter((f) => !files.includes(f));
+  let files = walk(SRC);
+  if (only) {
+    const unknown = [...only].filter((f) => !files.includes(f));
+    if (unknown.length) {
+      console.error(`--only : introuvable(s) dans data/extracted : ${unknown.join(', ')}`);
+      process.exit(1);
+    }
+    files = files.filter((f) => only.has(f));
+  }
+  // En promotion ciblée, le reste du monde est volontairement hors périmètre.
+  const dstOnly = only ? [] : walk(DST).filter((f) => !files.includes(f) && !isArchive(f));
   let identical = 0;
   const diffs: string[] = [];
 
@@ -69,18 +111,35 @@ function main(): void {
     const src = readFileSync(join(SRC, rel), 'utf8');
     const dstPath = join(DST, rel);
     const dst = existsSync(dstPath) ? readFileSync(dstPath, 'utf8') : undefined;
-    if (dst === src) {
+
+    // Rétention : réinjecte dans la proposition les entités validées que
+    // l'extraction ne produit plus (même format que build → diff git minimal).
+    let out = src;
+    let retained: string[] = [];
+    if (dst !== undefined && RETAIN_ENTITIES.has(rel)) {
+      const a = JSON.parse(dst) as Record<string, unknown>;
+      const b = JSON.parse(src) as Record<string, unknown>;
+      retained = Object.keys(a).filter((k) => !(k in b));
+      if (retained.length) {
+        const merged: Record<string, unknown> = { ...b };
+        for (const k of retained) merged[k] = a[k];
+        out = JSON.stringify(merged, null, 2) + '\n';
+      }
+    }
+
+    if (dst === out) {
       identical++;
       continue;
     }
     const label =
       dst === undefined
         ? 'NOUVEAU fichier'
-        : entityDiff(JSON.parse(dst) as unknown, JSON.parse(src) as unknown);
+        : entityDiff(JSON.parse(dst) as unknown, JSON.parse(out) as unknown) +
+          (retained.length ? ` · ${retained.length} retenue(s), jamais supprimées` : '');
     diffs.push(`  ${rel.padEnd(34)} ${label}`);
     if (apply) {
       mkdirSync(dirname(dstPath), { recursive: true });
-      copyFileSync(join(SRC, rel), dstPath);
+      writeFileSync(dstPath, out);
     }
   }
 

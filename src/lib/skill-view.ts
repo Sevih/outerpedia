@@ -16,8 +16,11 @@ import { getMergedEffect, loadCuratedEffects } from '@/lib/data/effects';
 import type { ClientEffect, StatusMap } from '@/components/character/EffectChips';
 import type { ChainLevel } from '@/components/character/ChainDualSection';
 import glossariesData from '@data/generated/glossaries.json';
+import monsterCuratedJson from '@data/curated/monster-skills.json';
 
 const G = glossariesData as unknown as Glossaries;
+/** Curation d'AFFICHAGE des kits monstres (cf. doc dans le fichier). */
+const MONSTER_CURATED = monsterCuratedJson as { chipOwner?: Record<string, string> };
 
 /** Dédoublonne par id (les listes de skills des persos à formes en répètent). */
 export function dedupSkills(skills: Skill[]): Skill[] {
@@ -212,6 +215,169 @@ export function mergeStatusEffects(
     }
   }
   return statuses;
+}
+
+/**
+ * VUE « KIT » DES SKILLS D'UN MONSTRE — corrige deux particularités du câblage
+ * des tables monstres avant l'affichage en cartes (même esprit que
+ * `cardEffects` côté persos, qui réattribue les effets des passifs) :
+ *
+ * 1. RÉATTRIBUTION : les tables groupent parfois tout un bloc de buffs passifs
+ *    sur UN skill porteur (Prototype EX-78 : monster_1 a un BuffID VIDE, tout
+ *    est câblé sur monster_2 ; Irregular Queen : tout le bloc du S2 est câblé
+ *    sur monster_1 qui CONTRE-ATTAQUE avec le S2). Trois signaux, dans l'ordre :
+ *    a. CALLER (`CallerSkillType` → `e.caller`) : l'effet est DUPLIQUÉ sur le
+ *       skill principal déclencheur (le S2 applique le taunt/les removals) ET
+ *       reste sur le passif porteur (sa contre-attaque fait la même chose) ;
+ *    b. CURATION (`data/curated/monster-skills.json` → chipOwner) — pour les
+ *       cas sans AUCUN signal structurel ;
+ *    c. RÉFÉRENCE DE DESC : un effet dont le buff n'est PAS référencé par la
+ *       desc du porteur mais l'est par EXACTEMENT un autre skill du kit
+ *       devient une chip de cet autre skill (id exact du buff dans les
+ *       placeholders `[Buff_…]`, frontière de mot — zéro heuristique texte).
+ * 2. FUSION DE L'ENRAGE : `rage_finishN` (l'attaque de FIN d'enrage) n'a le
+ *    plus souvent ni nom ni desc — le jeu décrit tout l'enrage (déclencheur,
+ *    buffs, attaque de fin) dans la desc de `rage_enterN`. Ses chips sont
+ *    fusionnées dans la carte enter ; la carte finish n'apparaît que si elle a
+ *    un nom propre.
+ * 3. JAUGE DE FAIBLESSE IGNORÉE : les buffs `BT_WG_*` (récupération/dégâts de
+ *    WG) ne font JAMAIS de chips côté monstres (décision 2026-07-10) — c'est
+ *    la mécanique ambiante des boss, décrite par les descs, pas un statut du
+ *    kit. (Les PERSOS gardent leurs chips WG : bonus de burst synthétiques.)
+ */
+export interface MonsterSkillView {
+  skill: Skill;
+  effects?: ClientEffect[];
+}
+
+export function monsterSkillViews(skills: Skill[]): MonsterSkillView[] {
+  // Le buff est-il référencé par la desc (id EXACT, frontière de mot) ?
+  const mentions = (s: Skill, buffId: string): boolean =>
+    Boolean(s.desc?.en) &&
+    new RegExp(`${buffId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w])`).test(s.desc!.en);
+
+  // 1) Réattribution : effets rendus À d'autres skills, indexés par cible.
+  const extraOf = new Map<string, RawEffect[]>();
+  const movedFrom = new Map<string, Set<RawEffect>>();
+  const move = (from: Skill, e: RawEffect, toId: string): void => {
+    (extraOf.get(toId) ?? extraOf.set(toId, []).get(toId)!).push(e);
+    (movedFrom.get(from.id) ?? movedFrom.set(from.id, new Set()).get(from.id)!).add(e);
+  };
+  const isWg = (e: RawEffect): boolean => e.type.startsWith('BT_WG');
+  const curatedOwner = MONSTER_CURATED.chipOwner ?? {};
+  // a. Caller : un effet porté par un PASSIF est DUPLIQUÉ vers le(s) skill(s)
+  // du type déclencheur et conservé sur le porteur ; l'effet est acquis, les
+  // signaux suivants ne le déplacent plus. PASSIFS UNIQUEMENT (même règle que
+  // les persos) : sur un skill actif, le caller décrit le kit D'ORIGINE du
+  // buff — souvent RÉUTILISÉ d'un autre boss (le stun de rage_finish du
+  // Prototype vient du kit de 4044001, caller SKT_ULTIMATE → faux positif).
+  const MONSTER_PASSIVE_TYPES = /^(monster_\d+|class_passive|unique_passive)$/;
+  const callerHandled = new Set<RawEffect>();
+  for (const s of skills) {
+    if (!MONSTER_PASSIVE_TYPES.test(s.type)) continue;
+    for (const e of s.effects ?? []) {
+      if (!e.caller || isWg(e)) continue;
+      const targets = skills.filter((t) => t.id !== s.id && t.type === e.caller);
+      if (!targets.length) continue;
+      for (const t of targets) (extraOf.get(t.id) ?? extraOf.set(t.id, []).get(t.id)!).push(e);
+      callerHandled.add(e);
+    }
+  }
+  for (const s of skills) {
+    for (const e of s.effects ?? []) {
+      if (!e.buff || isWg(e) || callerHandled.has(e)) continue;
+      // b. Curation : porteur imposé (si le skill cible est dans ce kit).
+      const curated = curatedOwner[e.buff];
+      if (curated && curated !== s.id) {
+        if (skills.some((t) => t.id === curated)) move(s, e, curated);
+        continue;
+      }
+      // c. Référence de desc.
+      if (mentions(s, e.buff)) continue;
+      const owners = skills.filter((t) => t.id !== s.id && mentions(t, e.buff!));
+      if (owners.length !== 1) continue;
+      move(s, e, owners[0].id);
+    }
+  }
+
+  const chipsOf = (s: Skill): ClientEffect[] => {
+    const own = (s.effects ?? []).filter((e) => !isWg(e) && !movedFrom.get(s.id)?.has(e));
+    return [...own, ...(extraOf.get(s.id) ?? [])]
+      .map(toChipEffect)
+      .filter((e): e is ClientEffect => Boolean(e));
+  };
+
+  // 2) Fusion rage_finishN → rage_enterN (chips union ; finish sans nom masqué).
+  const views: MonsterSkillView[] = [];
+  for (const s of skills) {
+    const finishMatch = /^rage_finish(\d*)$/.exec(s.type);
+    if (finishMatch) {
+      const enter = skills.find((t) => t.type === `rage_enter${finishMatch[1]}`);
+      if (enter && !s.name.en) continue; // fusionné dans la carte enter
+    }
+    let effects = chipsOf(s);
+    const enterMatch = /^rage_enter(\d*)$/.exec(s.type);
+    if (enterMatch) {
+      const finish = skills.find((t) => t.type === `rage_finish${enterMatch[1]}`);
+      if (finish && !finish.name.en) effects = [...effects, ...chipsOf(finish)];
+    }
+    const deduped = dedupList(effects);
+    // Skill de PUR CÂBLAGE (ni nom, ni desc, ni chips — ex. un class_passive
+    // qui ne porte qu'un check-buff BT_NONE) : rien à montrer.
+    if (!s.name.en && !s.desc?.en && !deduped.length) continue;
+    views.push({ skill: s, effects: deduped.length ? deduped : undefined });
+  }
+  return views;
+}
+
+/**
+ * IMMUNITÉS d'un monstre → chips résolues, sur les trois sources du templet :
+ *   - `immuneTooltips` : réfs glossaire affichées en jeu (résolution directe) ;
+ *   - `buffImmune` : TYPES de mécanique (`BT_STUN`, `BT_COOL_CHARGE`…) résolus
+ *     via `effectByKey` — côté DEBUFF uniquement d'abord (une immunité protège
+ *     d'un debuff), y compris la forme SANS CHIFFRES (`BT_COOL2_CHARGE` est la
+ *     déclinaison « skill 2 » de `BT_COOL_CHARGE` → « Cooldown Increase », PAS
+ *     le buff « Cooldown Reduction ») ; le côté buff n'est qu'un dernier
+ *     recours ;
+ *   - `statBuffImmune` : baisses de stats (`ST_ATK`…) via la clé composite
+ *     `BT_STAT|<ST_X>` du même glossaire.
+ * Dédup par effet CANONIQUE (un tooltip et son type pointent le même statut).
+ * `unresolved` = types sans entrée au glossaire, à afficher bruts.
+ */
+export function immunityChipEffects(m: {
+  buffImmune?: string[];
+  statBuffImmune?: string[];
+  immuneTooltips?: string[];
+}): { effects: ClientEffect[]; unresolved: string[] } {
+  const effects: ClientEffect[] = [];
+  const unresolved: string[] = [];
+  const seen = new Set<string>();
+  const push = (ref: string): boolean => {
+    const canonical = G.effectByTooltip[ref] ?? ref;
+    if (!getMergedEffect(canonical)) return false;
+    if (!seen.has(canonical)) {
+      seen.add(canonical);
+      effects.push({ family: 'immunity', category: 'debuff', tooltip: ref });
+    }
+    return true;
+  };
+  for (const t of m.immuneTooltips ?? []) if (!push(t)) unresolved.push(t);
+  for (const type of m.buffImmune ?? []) {
+    // Déclinaisons numérotées (par slot de skill) → même mécanique de base.
+    const base = type.replace(/\d+/g, '');
+    const id =
+      G.effectByKey.debuff[type] ??
+      G.effectByKey.debuff[base] ??
+      G.effectByKey.buff[type] ??
+      G.effectByKey.buff[base];
+    if (!id || !push(id)) unresolved.push(type);
+  }
+  for (const st of m.statBuffImmune ?? []) {
+    const key = `BT_STAT|${st}`;
+    const id = G.effectByKey.debuff[key] ?? G.effectByKey.buff[key];
+    if (!id || !push(id)) unresolved.push(st);
+  }
+  return { effects, unresolved };
 }
 
 /** Création curée référencée par le bonus WG synthétique (id = clé principale). */

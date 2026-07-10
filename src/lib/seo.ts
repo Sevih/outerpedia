@@ -281,6 +281,36 @@ export function buildVideoObjectJsonLd(opts: {
   return node;
 }
 
+/** Article (guides) : auteur, dates, image — lié au WebSite via isPartOf. */
+export function buildArticleJsonLd(opts: {
+  lang: Lang;
+  path: string;
+  headline: string;
+  description: string;
+  author: string;
+  /** Date ISO `YYYY-MM-DD` de dernière mise à jour éditoriale. */
+  dateModified: string;
+  image?: string;
+}): JsonLdNode {
+  const safeLang = normalizeLang(opts.lang);
+  const url = buildUrl(safeLang, opts.path);
+  const node: JsonLdNode = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: opts.headline,
+    description: opts.description,
+    author: { '@type': 'Person', name: opts.author },
+    publisher: { '@id': PUBLISHER_ID },
+    dateModified: opts.dateModified,
+    inLanguage: LANGUAGES[safeLang].htmlLang,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url, isPartOf: { '@id': WEBSITE_ID } },
+    about: { '@id': VIDEOGAME_ID },
+  };
+  const img = absImage(opts.image);
+  if (img) node.image = img;
+  return node;
+}
+
 /** FAQPage — repris volontiers par les moteurs génératifs et Google (rich-result). */
 export function buildFaqJsonLd(
   items: ReadonlyArray<{ question: string; answer: string }>,

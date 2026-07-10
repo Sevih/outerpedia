@@ -65,6 +65,21 @@ export function getAllCharacters(): Character[] {
   return Object.values(CHARACTERS);
 }
 
+// Index par NOM D'AFFICHAGE EN — la clé du contenu éditorial (parse-text,
+// guides : listes de persos par nom). Construit au premier usage.
+let byDisplayName: Map<string, Character> | undefined;
+
+/** Personnage par nom d'affichage EN (insensible à la casse), undefined sinon. */
+export function findCharacterByName(name: string): Character | undefined {
+  if (!byDisplayName) {
+    byDisplayName = new Map();
+    for (const c of Object.values(CHARACTERS)) {
+      byDisplayName.set(characterDisplayName(c, 'en').toLowerCase(), c);
+    }
+  }
+  return byDisplayName.get(name.trim().toLowerCase());
+}
+
 export function getCharacter(id: string): Character | undefined {
   return CHARACTERS[id];
 }

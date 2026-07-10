@@ -1,5 +1,7 @@
 import { getBaseUrl } from '@/lib/seo';
 import { characterDisplayName, getCharacterListItems, slugForId } from '@/lib/data/characters';
+import { GUIDE_CATEGORIES } from '@/lib/data/guide-categories';
+import { listGuides } from '@/lib/data/guides';
 
 /**
  * `/llms.txt` — convention émergente : un index Markdown à destination des
@@ -20,6 +22,14 @@ export function GET(): Response {
     '',
     '## Personnages',
     ...chars.map((c) => `- [${characterDisplayName(c)}](${base}/characters/${slugForId(c.id)})`),
+    '',
+    '## Guides',
+    ...listGuides()
+      .filter((g) => !g.hidden)
+      .map(
+        (g) =>
+          `- [${GUIDE_CATEGORIES[g.category].label.en} — ${g.title.en}](${base}/guides/${g.category}/${g.slug})`,
+      ),
     '',
   ].join('\n');
 

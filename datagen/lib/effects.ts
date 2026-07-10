@@ -264,9 +264,10 @@ export type EffectSide = 'buff' | 'debuff';
 /**
  * Alias ÉDITORIAUX : clés historiques du wiki (V2) → clé réelle (type de jeu
  * ou nom d'effet en MAJUSCULES_SOULIGNÉES). Même dialecte que les fichiers
- * pros-cons/reco ; vérifiés sur l'inventaire des tags legacy.
+ * pros-cons/reco ; vérifiés sur l'inventaire des tags legacy. Un alias dont le
+ * SENS dépend du côté (`{B/…}` ≠ `{D/…}`) déclare une cible par côté.
  */
-const EDITORIAL_KEY_ALIASES: Record<string, string> = {
+const EDITORIAL_KEY_ALIASES: Record<string, string | Record<EffectSide, string>> = {
   BT_BARRIER: 'BT_SHIELD_BASED_CASTER',
   BT_FIXED_DAMAGE: 'FIXED_DAMAGE', // tooltip nommé « Fixed Damage » (le type reverse-heal n'a pas de tooltip)
   BT_CONTINU_HEAL: 'SUSTAINED_RECOVERY',
@@ -275,6 +276,8 @@ const EDITORIAL_KEY_ALIASES: Record<string, string> = {
   BT_AGILE_RESPONSE: 'AGILE_RESPONSE',
   BT_REVENGE: 'REVENGE',
   BT_WG_REVERSE_HEAL: 'BT_WG_DMG',
+  // V2 : la même clé désignait « Reduced/Increased Damage Taken » selon le côté.
+  BT_DAMAGE_TAKEN: { buff: 'REDUCED_DAMAGE_TAKEN', debuff: 'INCREASED_DAMAGE_TAKEN' },
 };
 
 /** Nom d'effet → clé éditoriale (« Bane's Domain » → `BANES_DOMAIN`). */
@@ -352,6 +355,9 @@ export function buildEffectGlossary(): EffectGlossary {
 
   const effects = new Map<string, Effect>();
   const byTooltip = new Map<string, string>();
+  // Identité (NameID + irremovable + nature) → effet, pour raccrocher les
+  // tooltips orphelins plus bas.
+  const subKeyToEffect = new Map<string, string>();
   for (const members of groups.values()) {
     // Un même NameID couvre la version NORMALE et la version IRREMOVABLE
     // (icône `_Interruption`, cadre spécial ; suffixe `_D` = déclinaison
@@ -380,7 +386,20 @@ export function buildEffectGlossary(): EffectGlossary {
         ...(irremovable ? { irremovable: true } : {}),
       });
       for (const m of sub) byTooltip.set(m.ID, base.ID);
+      const subKey = `${base.NameID}|${irremovable}|${base.IsDebuff === 'True'}`;
+      if (!subKeyToEffect.has(subKey)) subKeyToEffect.set(subKey, base.ID);
     }
+  }
+
+  // Tooltips ORPHELINS (référencés par aucun buff/niveau — typiquement les
+  // affichages d'IMMUNITÉ des boss, `MonsterTemplet.BuffImmuneToolTip`) :
+  // raccrochés à l'effet existant de même identité (NameID + irremovable +
+  // nature) — le tooltip 64 « Cooldown Increase » rejoint l'effet 68.
+  for (const r of loadTable('BuffToolTipTemplet')) {
+    if (!r.ID || byTooltip.has(r.ID) || !nameOf(r.NameID).en) continue;
+    const key = `${r.NameID}|${/_Interruption/i.test(r.IconName ?? '')}|${r.IsDebuff === 'True'}`;
+    const eff = subKeyToEffect.get(key);
+    if (eff) byTooltip.set(r.ID, eff);
   }
 
   // Source 2 : effets mécaniques SANS tooltip, nommés via CreateText.
@@ -432,6 +451,16 @@ export function buildEffectGlossary(): EffectGlossary {
     byName.set(name.en.toLowerCase(), symbol);
   }
 
+  // Seconde passe orphelins : tooltip dont le NameID est un SYMBOLE de
+  // mécanique déjà résolu par label (tooltip 100 « SYS_BUFF_STEAL » → l'effet
+  // « Stealing Buff ») — l'affichage d'immunité des boss référence ces
+  // tooltips-là aussi.
+  for (const r of loadTable('BuffToolTipTemplet')) {
+    if (!r.ID || byTooltip.has(r.ID)) continue;
+    const eff = byLabel.get(r.NameID ?? '');
+    if (eff) byTooltip.set(r.ID, eff);
+  }
+
   // --- Index par CLÉ éditoriale ({B/BT_STAT|ST_ATK}, {D/BT_DOT_BURN}…) --------
   // 1) Clés TYPE : chaque ligne BuffTemplet résoluble vers un effet vote pour
   //    (côté, clé type) → l'effet majoritaire gagne. Clé = `Type` du jeu, ou
@@ -472,6 +501,20 @@ export function buildEffectGlossary(): EffectGlossary {
     const winner = [...m.entries()].sort((a, b) => b[1] - a[1])[0][0];
     byKey[side as EffectSide].set(key, winner);
   }
+  // Déclinaisons NUMÉROTÉES d'un type (`BT_COOL2_CHARGE` = le CD du skill 2,
+  // même mécanique que `BT_COOL_CHARGE`) : le vote ne couvre que l'USAGE réel —
+  // aucun buff DEBUFF de type BT_COOL2_CHARGE n'existe aujourd'hui dans les
+  // tables — mais la mécanique a bien les deux sens (immunités, futurs skills).
+  // Chaque côté hérite de la résolution de sa forme SANS CHIFFRES.
+  const numberedKeys = new Set([...byKey.buff.keys(), ...byKey.debuff.keys()]);
+  for (const key of numberedKeys) {
+    const base = key.replace(/\d+/g, '');
+    if (base === key || !/^BT_[A-Z_]+$/.test(base)) continue;
+    for (const side of ['buff', 'debuff'] as const) {
+      const inherited = byKey[side].get(base);
+      if (inherited && !byKey[side].has(key)) byKey[side].set(key, inherited);
+    }
+  }
   // Nature RÉELLE des effets mécaniques : leur ligne de définition ne porte
   // pas IsDebuff (SYS_BUFF_EXTEND_DEBUFF_UP « Debuff Duration Increase » est
   // un DEBUFF — il allonge les debuffs de l'ennemi) → nature majoritaire des
@@ -491,10 +534,15 @@ export function buildEffectGlossary(): EffectGlossary {
     if (!byKey[side].has(key)) byKey[side].set(key, id);
   }
   // 3) Alias éditoriaux (dialecte V2) → résolus vers la clé réelle, les deux
-  //    côtés (le contenu marque le côté via {B/…}/{D/…}).
+  //    côtés (le contenu marque le côté via {B/…}/{D/…}). Une cible PAR CÔTÉ
+  //    reste sur son côté (pas de repli croisé — le sens en dépend).
   for (const side of ['buff', 'debuff'] as const) {
     for (const [alias, target] of Object.entries(EDITORIAL_KEY_ALIASES)) {
-      const id = byKey[side].get(target) ?? byKey[side === 'buff' ? 'debuff' : 'buff'].get(target);
+      const sided = typeof target !== 'string';
+      const t = sided ? target[side] : target;
+      const id = sided
+        ? byKey[side].get(t)
+        : (byKey[side].get(t) ?? byKey[side === 'buff' ? 'debuff' : 'buff'].get(t));
       if (id && !byKey[side].has(alias)) byKey[side].set(alias, id);
     }
   }

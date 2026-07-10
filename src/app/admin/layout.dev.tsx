@@ -14,10 +14,16 @@ export const dynamic = 'force-dynamic';
  */
 function pendingCounts() {
   let character = 0;
+  let monster = 0;
   let effect = 0;
   const gear: Record<string, number> = {};
   try {
     character = reviewTotals(reviewTarget('character').diff);
+  } catch {
+    /* extraction indisponible */
+  }
+  try {
+    monster = reviewTotals(reviewTarget('monster').diff);
   } catch {
     /* extraction indisponible */
   }
@@ -31,7 +37,7 @@ function pendingCounts() {
   } catch {
     /* oracle équipement indisponible */
   }
-  return { character, effect, gear };
+  return { character, monster, effect, gear };
 }
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -56,7 +62,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           badge: warn(n.gear.talismans ?? 0),
         },
         { label: 'Sets', href: '/admin/extractor/sets', badge: warn(n.gear.sets ?? 0) },
-        { label: 'Monstre', href: '/admin/extractor/monsters', soon: true },
+        { label: 'Monstre', href: '/admin/extractor/monsters', badge: warn(n.monster) },
       ],
     },
     {

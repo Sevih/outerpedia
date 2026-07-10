@@ -79,6 +79,8 @@ export const img = {
   recruitTag: (tag: string) => `${BASE}/images/ui/recruit/${RECRUIT_TAG_SPRITE[tag]}.webp`,
   /** Icône core-fusion (cartes de persos). */
   coreFusionTag: () => `${BASE}/images/ui/tags/CT_Core_Icon.webp`,
+  /** Icône de guide/catégorie de guides (sprite du jeu, namespace unique). */
+  guideIcon: (icon: string) => `${BASE}/images/ui/guides/${icon}.webp`,
 };
 
 /**

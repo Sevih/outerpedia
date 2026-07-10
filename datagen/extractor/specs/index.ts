@@ -7,10 +7,12 @@
  */
 import type { ExtractorSpec } from '../core/spec';
 import { characterSpec } from './character';
+import { monsterSpec } from './monster';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- registre hétérogène (chaque spec a son TOut)
 export const SPECS: Record<string, ExtractorSpec<any, any>> = {
   [characterSpec.id]: characterSpec,
+  [monsterSpec.id]: monsterSpec,
 };
 
 /** Récupère une spec par id, ou `undefined`. */

@@ -23,6 +23,8 @@ export interface CardSkill {
   name: string;
   desc?: string;
   icon?: string;
+  /** URL d'icône explicite (admin : sprites bruts non stagés) — sinon `img.skill(icon)`. */
+  iconSrc?: string;
   /** Skill « burstable » (badge burst sur l'icône). */
   burst?: boolean;
   /** Libellé de cible déjà traduit (« Single Target »…). */
@@ -136,10 +138,10 @@ export function SkillCard({
       <div className="mb-3 flex items-start gap-3">
         <div className="relative h-14 w-14 shrink-0">
           <div className="relative h-full w-full overflow-hidden">
-            {skill.icon && (
+            {(skill.iconSrc || skill.icon) && (
               // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
               <img
-                src={img.skill(skill.icon)}
+                src={skill.iconSrc ?? img.skill(skill.icon!)}
                 alt={skill.name}
                 className="absolute inset-0 h-full w-full object-contain"
               />

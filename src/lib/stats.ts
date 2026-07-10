@@ -46,6 +46,7 @@ export const STAT_ABBR: Record<string, string> = {
   vampiric: 'LS',
   pierce_power: 'PEN',
   pierce_power_rate: 'PEN%',
+  enemy_critical_dmg_reduce: 'CDMG RED%',
   // Stats des pools d'équipement (`ItemOptionTemplet`) non couvertes ci-dessus
   critical_dmg_rate: 'CHD',
   dmg_reduce_rate: 'DMG RED%',

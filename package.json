@@ -1,6 +1,6 @@
 {
   "name": "outerpedia",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "engines": {
     "node": ">=24"
@@ -22,6 +22,7 @@
     "datagen:patch": "tsx datagen/refresh.ts",
     "datagen:regen": "pnpm datagen:build && pnpm datagen:promote --apply",
     "datagen:promote": "tsx datagen/promote.ts",
+    "datagen:version-boss": "tsx datagen/version-boss.ts",
     "getNews": "tsx scripts/get-news.ts",
     "commit": "tsx scripts/commit.ts",
     "prepare": "lefthook install || true",

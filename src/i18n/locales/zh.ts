@@ -538,32 +538,8 @@ const zh: Record<TranslationKey, string> = {
     '注意：这是旧版攻略（{currentVersion}）。虽然核心机制相似，但建议查看最新的{newestVersion}版本以获取最新策略和角色推荐。',
   'page.guide.updating_disclaimer': '本指南正在针对此版本进行更新。部分推荐内容可能会有所变动。',
 
-  // Guide categories
-  'guides.category.general-guides': '综合攻略',
-  'guides.category.adventure': '冒险',
-  'guides.category.adventure-license': '冒险许可证',
-  'guides.category.guild-raid': '公会突袭',
-  'guides.category.world-boss': '世界Boss',
-  'guides.category.dimensional-singularity': '次元奇点',
-  'guides.category.joint-challenge': '联合挑战',
-  'guides.category.special-request': '特别委托',
-  'guides.category.irregular-extermination': '异形怪歼灭战',
-  'guides.category.monad-gate': '单子门',
-  'guides.category.skyward-tower': '飞天之塔',
-  'guides.category.other': '其他',
-
-  // Guide category descriptions
-  'guides.category.general-guides.desc': '掌握游戏基础机制：新玩家需知、角色养成、战斗和装备。',
-  'guides.category.adventure.desc':
-    '击败具有挑战性的主线故事模式首领的详细策略：了解推荐队伍、关卡机制和阶段提示。',
-  'guides.category.adventure-license.desc':
-    '包含"晋升战斗"在内的冒险许可证指南——了解关卡机制、推荐队伍以及战斗策略。',
-  'guides.category.guild-raid.desc':
-    '公会突袭综合策略——学习首领机制、参考最佳队伍以获得最高伤害或是最高分数。',
-  'guides.category.world-boss.desc':
-    '在世界首领战极限联赛中实现SSS排名的综合策略：优化队伍设置、学习轮换技巧和伤害最大化策略。',
-  'guides.category.dimensional-singularity.desc':
-    '每日轮换的奇点Boss攻略：日程、机制、排名分数目标，以及奇点升华装备强化。',
+  // Catégories de guides : libellés + descriptions dans guide-categories.ts
+  // (source unique, LocalizedText) — plus de clés de locale par catégorie.
   'guides.singularity.info.intro':
     '次元奇点是从单子门切换至「次元奇点模式」进入的终局内容。每周三到周六，每天会出现不同的奇点Boss，当日分数将决定排名与奖励。',
   'guides.singularity.info.unlock': '解锁条件：通关单子门深层1的真结局。',
@@ -585,16 +561,6 @@ const zh: Record<TranslationKey, string> = {
   'guides.singularity.day.sat_only': '仅周六',
   'guides.singularity.library.title': 'Boss 图鉴',
   'guides.singularity.library.tagline': '无论Boss是否处于轮换中，每篇攻略都始终可访问。',
-  'guides.category.joint-challenge.desc':
-    '使用高级战略在"联合挑战"中获得更高分：获悉顶尖排名的队伍组合、技能时机安排及协同技巧。',
-  'guides.category.special-request.desc':
-    '深入解析特别委托：生态调查/查清身份。 学习过关所需的首领机制、队伍配合和关键策略。',
-  'guides.category.irregular-extermination.desc':
-    '异形怪歼灭战首领攻略——了解每阶段首领的模式、推荐队伍和有效对策。',
-  'guides.category.monad-gate.desc': '单子门攻略：抵达真结局的策略、选项以及推荐路线。',
-  'guides.category.skyward-tower.desc': '飞天之塔与元素之塔攻略：队伍搭配、楼层机制与攻略建议。',
-  'guides.category.other.desc': '不属于其他分类或已过时的攻略、新闻和内容。',
-
   // Guide landing — categories index
   'guides.counter': '{guides} 个攻略 · {categories} 个分类',
   'guides.count.one': '{count} 攻略',
@@ -1214,6 +1180,10 @@ const zh: Record<TranslationKey, string> = {
   'progress.sweepAll': '批量扫荡副本',
   'progress.craftSettingsDesc': '启用或禁用您要跟踪制作的物品。',
   'progress.shopSettingsDesc': '启用或禁用您要跟踪购买的商店物品。',
+
+  // Guides (système V3)
+  'page.guides.empty_category': '该分类暂无攻略。',
+  'page.guide.versions': '版本',
 };
 
 export default zh;

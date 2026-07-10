@@ -1,0 +1,182 @@
+'use client';
+
+/* eslint-disable @next/next/no-img-element -- sprites dev (staging / .gamedata) */
+import { useMemo, useState } from 'react';
+import Link from 'next/link';
+import type { Route } from 'next';
+import { usePathname } from 'next/navigation';
+
+export interface ExtractorRow {
+  /** Clé de route (`basePath/<id>`) — encodée à l'affichage. */
+  id: string;
+  name: string;
+  /** Ligne secondaire (type/élément/grade…). */
+  meta?: string;
+  /** URL d'icône (FI_/MT_/sprite d'équipement) — masquée si 404. */
+  icon?: string;
+  /** Fond de slot derrière l'icône (rareté d'item, hiérarchie de monstre). */
+  iconFrame?: string;
+  /** Étoiles (rareté), si pertinent. */
+  stars?: number;
+  status?: 'new' | 'diff' | 'ok';
+  /** Compteur d'écarts (diff extraction, issues V2…), affiché sur le badge. */
+  count?: number;
+}
+
+const FILTERS = ['all', 'diff', 'new', 'ok'] as const;
+type Filter = (typeof FILTERS)[number];
+
+/** Au-delà, on demande d'affiner (les monstres = 4382 lignes). */
+const MAX_RENDERED = 250;
+
+/**
+ * Liste latérale GÉNÉRIQUE des extracteurs (même UX que les persos : recherche,
+ * filtres de statut, clic → fiche). Icônes servies par le staging ou par
+ * `/api/admin/sprite/*` (sprites bruts du jeu) — masquées si absentes.
+ */
+export function ExtractorSidebar({ rows, basePath }: { rows: ExtractorRow[]; basePath: string }) {
+  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState<Filter>('all');
+  const pathname = usePathname();
+
+  const hasStatus = rows.some((r) => r.status);
+
+  const stats = useMemo(
+    () => ({
+      total: rows.length,
+      ok: rows.filter((r) => r.status === 'ok').length,
+      diff: rows.filter((r) => r.status === 'diff').length,
+      new: rows.filter((r) => r.status === 'new').length,
+    }),
+    [rows],
+  );
+
+  const filtered = useMemo(() => {
+    const s = search.trim().toLowerCase();
+    return rows
+      .filter((r) => (filter === 'all' ? true : r.status === filter))
+      .filter(
+        (r) =>
+          !s ||
+          r.id.toLowerCase().includes(s) ||
+          r.name.toLowerCase().includes(s) ||
+          (r.meta ?? '').toLowerCase().includes(s),
+      )
+      .sort((a, b) => {
+        const p = (r: ExtractorRow) => (r.status === 'diff' ? 0 : r.status === 'new' ? 1 : 2);
+        if (p(a) !== p(b)) return p(a) - p(b);
+        if ((a.count ?? 0) !== (b.count ?? 0)) return (b.count ?? 0) - (a.count ?? 0);
+        return a.id.localeCompare(b.id, undefined, { numeric: true });
+      });
+  }, [rows, search, filter]);
+
+  return (
+    <aside className="border-line-subtle sticky top-6 flex h-[calc(100dvh-7.5rem)] w-72 shrink-0 flex-col self-start overflow-hidden rounded-lg border">
+      <div className="border-line-subtle space-y-2 border-b p-3">
+        <div className="flex gap-2 text-xs">
+          <span className="text-content-subtle">{stats.total} total</span>
+          {hasStatus && (
+            <>
+              <span className="text-success">{stats.ok} ok</span>
+              <span className="text-warn">{stats.diff} diff</span>
+              <span className="text-accent">{stats.new} new</span>
+            </>
+          )}
+        </div>
+        <input
+          className="border-line bg-surface-base text-content focus:border-accent w-full rounded-md border px-2 py-1 text-sm focus:outline-none"
+          placeholder="Nom ou id…"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        {hasStatus && (
+          <div className="flex gap-1">
+            {FILTERS.map((f) => (
+              <button
+                key={f}
+                type="button"
+                onClick={() => setFilter(f)}
+                className={`rounded px-2 py-0.5 text-xs ${
+                  filter === f
+                    ? 'bg-surface-overlay text-content-strong'
+                    : 'text-content-subtle hover:text-content'
+                }`}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <ul className="divide-line-subtle min-h-0 flex-1 divide-y overflow-y-auto text-sm">
+        {filtered.slice(0, MAX_RENDERED).map((r) => {
+          const href = `${basePath}/${encodeURIComponent(r.id)}` as Route;
+          const active = pathname === href;
+          return (
+            <li key={r.id}>
+              <Link
+                href={href}
+                className={`flex items-center gap-2 px-3 py-1.5 ${active ? 'bg-surface-overlay' : 'hover:bg-surface-overlay/50'}`}
+              >
+                {r.icon && (
+                  <span className="relative h-8 w-8 shrink-0">
+                    {r.iconFrame && (
+                      <img
+                        src={r.iconFrame}
+                        alt=""
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full rounded object-cover"
+                      />
+                    )}
+                    <img
+                      src={r.icon}
+                      alt=""
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full rounded object-contain"
+                      onError={(e) => {
+                        e.currentTarget.style.visibility = 'hidden';
+                      }}
+                    />
+                  </span>
+                )}
+                <span className="min-w-0 flex-1">
+                  <span className="flex items-center justify-between gap-1">
+                    <span className="text-content truncate">{r.name}</span>
+                    <span className="flex shrink-0 items-center gap-1">
+                      {r.status === 'new' && (
+                        <span className="bg-accent/15 text-accent rounded px-1 text-[10px]">
+                          new
+                        </span>
+                      )}
+                      {r.status === 'diff' && (
+                        <span className="bg-warn/15 text-warn rounded px-1 text-[10px]">
+                          {r.count ? `${r.count} ` : ''}diff
+                        </span>
+                      )}
+                      {r.status === 'ok' && (
+                        <span className="bg-success/15 text-success rounded px-1 text-[10px]">
+                          ok
+                        </span>
+                      )}
+                    </span>
+                  </span>
+                  <span className="text-content-subtle flex items-center gap-1 text-xs">
+                    <span className="font-mono">{r.id}</span>
+                    {r.meta && <span className="truncate">· {r.meta}</span>}
+                    {r.stars ? <span className="text-light">{'★'.repeat(r.stars)}</span> : null}
+                  </span>
+                </span>
+              </Link>
+            </li>
+          );
+        })}
+        {filtered.length > MAX_RENDERED && (
+          <li className="text-content-subtle px-3 py-2 text-xs">
+            … {filtered.length - MAX_RENDERED} de plus — affine la recherche.
+          </li>
+        )}
+      </ul>
+    </aside>
+  );
+}

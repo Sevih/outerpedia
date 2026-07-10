@@ -556,33 +556,8 @@ const jp: Record<TranslationKey, string> = {
   'page.guide.updating_disclaimer':
     'このガイドは現在このバージョン向けに更新中です。推奨内容が変更される場合があります。',
 
-  // Guide categories
-  'guides.category.general-guides': '総合ガイド',
-  'guides.category.adventure': '冒険',
-  'guides.category.adventure-license': '冒険者ライセンス',
-  'guides.category.guild-raid': 'ギルドレイド',
-  'guides.category.world-boss': 'ワールドボス',
-  'guides.category.dimensional-singularity': '次元特異点',
-  'guides.category.joint-challenge': '合同チャレンジ',
-  'guides.category.special-request': '特別依頼',
-  'guides.category.irregular-extermination': 'イレギュラー掃討',
-  'guides.category.monad-gate': 'モナドゲート',
-  'guides.category.skyward-tower': '飛天の塔',
-  'guides.category.other': 'その他',
-
-  // Guide category descriptions
-  'guides.category.general-guides.desc':
-    'ゲームの基礎をマスター：戦闘メカニクス、キャラクター育成、装備システム、初心者向け必須ヒント。',
-  'guides.category.adventure.desc':
-    '冒険モードの強敵ボス攻略：おすすめチーム編成、メカニクス解説、ステージ攻略のヒント。',
-  'guides.category.adventure-license.desc':
-    '冒険者ライセンスの全バトル攻略（昇格戦を含む）：敵のメカニクス、推奨チーム、各ステージの攻略法を解説。',
-  'guides.category.guild-raid.desc':
-    'ギルドレイド完全攻略：ボスメカニクス、最適なチーム編成、最高スコアを狙うためのダメージ最大化戦術。',
-  'guides.category.world-boss.desc':
-    'エクストリームリーグのワールドボス戦でSSSランクを達成するための完全攻略：最適なチーム編成、スキルローテーション、ダメージ最大化。',
-  'guides.category.dimensional-singularity.desc':
-    '日替わりで変わる特異点ボスの攻略：スケジュール、メカニクス、ランキングスコア目標、特異点昇華装備強化。',
+  // Catégories de guides : libellés + descriptions dans guide-categories.ts
+  // (source unique, LocalizedText) — plus de clés de locale par catégorie.
   'guides.singularity.info.intro':
     '次元特異点はモナドゲートから「次元特異点モード」に切り替えてアクセスするエンドコンテンツです。水曜から土曜まで、毎日異なる特異点ボスが出現し、その日のスコアによってランキングと報酬が決まります。',
   'guides.singularity.info.unlock': '解放条件：モナドゲート深層1の真エンディングをクリア。',
@@ -606,19 +581,6 @@ const jp: Record<TranslationKey, string> = {
   'guides.singularity.library.title': 'ボス一覧',
   'guides.singularity.library.tagline':
     'ローテーション外でも、各ボスのガイドは常時アクセス可能です。',
-  'guides.category.joint-challenge.desc':
-    '共同作戦で高スコアを狙うための上級攻略：最適なチーム編成、スキルタイミング、シナジー活用のコツ。',
-  'guides.category.special-request.desc':
-    '特別依頼ミッション徹底攻略：生態調査と正体究明。ボスメカニクス、チームシナジー、勝利のための重要戦術を解説。',
-  'guides.category.irregular-extermination.desc':
-    'イレギュラー殲滅戦モードのボス攻略：ボスのパターン、推奨チーム、各ステージの効果的な戦略を紹介。',
-  'guides.category.monad-gate.desc':
-    'モナド・ゲートのステージ攻略：真エンディングに到達するためのルート選択と戦略を紹介。',
-  'guides.category.skyward-tower.desc':
-    '飛天の塔とエレメンタルタワーの攻略：チーム編成、フロアメカニクス、攻略ヒント。',
-  'guides.category.other.desc':
-    '他のカテゴリに該当しない、または最新でなくなったガイド、ニュース、コンテンツ。',
-
   // Guide landing — categories index
   'guides.counter': 'ガイド{guides}件 · カテゴリー{categories}件',
   'guides.count.one': 'ガイド{count}件',
@@ -1256,6 +1218,10 @@ const jp: Record<TranslationKey, string> = {
   'progress.sweepAll': 'まとめてスキップ',
   'progress.craftSettingsDesc': '追跡したい製作アイテムを有効または無効にします。',
   'progress.shopSettingsDesc': '追跡したいショップ購入を有効または無効にします。',
+
+  // Guides (système V3)
+  'page.guides.empty_category': 'このカテゴリにはまだガイドがありません。',
+  'page.guide.versions': 'バージョン',
 };
 
 export default jp;

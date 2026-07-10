@@ -13,6 +13,7 @@ export async function Header() {
   const nav: Array<{ href: Route; label: string }> = [
     { href: localePath(lang, '/characters'), label: t('nav.characters') },
     { href: localePath(lang, '/equipment'), label: t('nav.equipment') },
+    { href: localePath(lang, '/guides'), label: t('nav.guides') },
   ];
 
   return (
@@ -33,6 +34,15 @@ export async function Header() {
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-4">
+          {/* Lien admin : DEV UNIQUEMENT (les pages admin n'existent pas en prod). */}
+          {process.env.NODE_ENV === 'development' && (
+            <Link
+              href={'/admin' as Route}
+              className="bg-warn/15 text-warn rounded px-2 py-0.5 text-xs font-medium"
+            >
+              Admin
+            </Link>
+          )}
           <LanguageSwitcher current={lang} />
         </div>
       </div>

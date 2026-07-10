@@ -1,0 +1,20 @@
+{
+  "title": {
+    "en": "Prototype EX-78",
+    "jp": "試作機：EX-78",
+    "kr": "EX-78 시범기",
+    "zh": "EX-78示范机",
+    "fr": "Prototype EX-78"
+  },
+  "description": {
+    "en": "Joint Challenge boss guide for Prototype EX-78: boss mechanics, recommended characters, team setups and tactical tips.",
+    "jp": "試作機：EX-78 共同作戦ボス攻略：ボスの仕組み、おすすめキャラ、編成、戦術のヒント。",
+    "kr": "EX-78 시범기 합동 챌린지 보스 공략: 보스 메커닉, 추천 캐릭터, 팀 구성, 전술 팁.",
+    "zh": "原型机EX-78联合挑战首领攻略：首领机制、推荐角色、队伍配置与战术提示。",
+    "fr": "Guide du boss Joint Challenge Prototype EX-78 : mécaniques, personnages recommandés, équipes et conseils tactiques."
+  },
+  "icon": "T_Banner_Event_Boss_04",
+  "author": "Sevih",
+  "updated": "2026-03-24",
+  "bossId": "4548181"
+}

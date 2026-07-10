@@ -15,6 +15,8 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { STAT_ICON } from '../../src/lib/stats';
 import { MISSING_ITEM_ICONS as ITEM_ICON_BLACKLIST } from '../../src/lib/data/item-blacklist';
+import { GUIDE_CATEGORIES } from '../../src/lib/data/guide-categories';
+import { listGuides } from '../../src/lib/data/guides';
 import { buildItemCatalog } from '../generators/item-catalog';
 
 export type AssetRequest =
@@ -105,6 +107,32 @@ export function characterAssetRequests(
       candidates: [icon],
       domain: 'skills',
     });
+  }
+  // SKINS/APPARENCES (20X…/27X…) : chacun a ses PROPRES CT_/FI_/IG_Turn_ — et
+  // les boss « personnages » réutilisent souvent le FaceIconID d'un skin
+  // (MonsterTemplet.FaceIconID = 2010004…) : sans ça, FI_<skin> ne serait
+  // jamais produit et l'affichage tape dans le vide.
+  for (const app of (c.appearances as string[] | undefined) ?? []) {
+    out.push(
+      {
+        kind: 'image',
+        key: `images/characters/portrait/CT_${app}.webp`,
+        candidates: [`CT_${app}`],
+        domain: 'characters',
+      },
+      {
+        kind: 'face-icon',
+        key: `images/characters/faceicon/FI_${app}.webp`,
+        id: app,
+        domain: 'characters',
+      },
+      {
+        kind: 'image',
+        key: `images/characters/atb/IG_Turn_${app}.webp`,
+        candidates: [`IG_Turn_${app}`],
+        domain: 'characters',
+      },
+    );
   }
   // Full arts des skins (modèles de costume dont le rendu existe — flag `art`).
   for (const cos of (c.costumes as Record<string, unknown>[] | undefined) ?? []) {
@@ -508,6 +536,62 @@ export function buildAssetManifest(): AssetRequest[] {
     }
   } catch {
     /* sprites pas extraits */
+  }
+
+  // --- Guides : icônes de catégories + icônes des meta.json ------------------
+  // Namespace UNIQUE `images/ui/guides/` (dédoublonné par clé — un sprite
+  // partagé par N guides n'est stocké qu'une fois). Collecte DATA-DRIVEN :
+  // catégories déclarées + scan des guides — jamais de liste manuelle. Les
+  // visuels de boss ne passent PAS ici (référencés par `bossId`, namespace
+  // boss existant) pour ne pas dupliquer un sprite entre namespaces.
+  const guides = listGuides();
+  for (const icon of new Set([
+    ...Object.values(GUIDE_CATEGORIES).map((c) => c.icon),
+    ...guides.map((g) => g.icon),
+  ]))
+    push({
+      kind: 'image',
+      key: `images/ui/guides/${icon}.webp`,
+      candidates: [icon],
+      domain: 'guides',
+      editorialFallback: `guides/${icon}.webp`,
+    });
+  // Boss liés aux guides (`meta.json` → bossId, convention : le boss COURANT) :
+  // portrait sous le namespace boss EXISTANT (même clé que les sources
+  // d'équipement → jamais deux copies) + icônes de ses skills sous le
+  // namespace skills commun aux personnages. Icône commençant par « 2 » =
+  // modèle de perso réutilisé → face icon déjà produite par le domaine perso.
+  {
+    const monsters = load('monsters.json') as Record<
+      string,
+      { icon?: string; skills?: string[] } | undefined
+    >;
+    const monsterSkills = load('monster-skills.json') as Record<
+      string,
+      { icon?: string } | undefined
+    >;
+    for (const g of guides) {
+      if (!g.bossId) continue;
+      const m = monsters[g.bossId];
+      if (!m) continue;
+      if (m.icon && !m.icon.startsWith('2'))
+        push({
+          kind: 'image',
+          key: `images/ui/boss/MT_${m.icon}.webp`,
+          candidates: [`MT_${m.icon}`],
+          domain: 'guides',
+        });
+      for (const sid of m.skills ?? []) {
+        const icon = monsterSkills[sid]?.icon;
+        if (icon)
+          push({
+            kind: 'image',
+            key: `images/characters/skills/${icon}.webp`,
+            candidates: [icon],
+            domain: 'guides',
+          });
+      }
+    }
   }
 
   // --- Éditorial (n'existe pas en jeu) : drapeaux + OG -----------------------

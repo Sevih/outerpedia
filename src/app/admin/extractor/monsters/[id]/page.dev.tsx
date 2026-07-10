@@ -1,0 +1,311 @@
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import type { Route } from 'next';
+import glossariesJson from '@data/generated/glossaries.json';
+import type { Glossaries, Skill } from '@datagen/contracts';
+import { EntityDiffPanel } from '@/components/admin/EntityDiffPanel';
+import { MonsterActions } from '@/components/admin/MonsterActions';
+import { EffectChipsRow, type StatusMap } from '@/components/character/EffectChips';
+import { SkillsSection } from '@/components/character/SkillsSection';
+import type { CardSkill } from '@/components/character/SkillCard';
+import {
+  buildStatusMap,
+  immunityChipEffects,
+  mergeStatusEffects,
+  monsterSkillViews,
+} from '@/lib/skill-view';
+import { lRec } from '@/lib/i18n/localize';
+import { expandRankContexts } from '@/lib/monster-stats';
+import { MonsterStatsCard } from '@/components/admin/MonsterStatsCard';
+import { entityReview, monsterArchiveOf } from '@/lib/admin/review-store';
+import { monsterIconSrc, monsterSlotSrc } from '@/lib/admin/monster-icon';
+import {
+  committedEncounters,
+  committedMonsterSkills,
+  committedMonsters,
+  freshEncounters,
+  freshMonsters,
+} from '@/lib/admin/monster-store';
+import { extractedMonsterBundle } from '@/lib/admin/review-store';
+
+export const dynamic = 'force-dynamic';
+
+const glossaries = glossariesJson as unknown as Glossaries;
+
+/** Fiche extracteur d'un monstre : extraction fraîche, diff, actions — MÊMES
+ * composants que la fiche perso (SkillCard + chips d'effets). */
+export default async function ExtractorMonsterPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const bundle = extractedMonsterBundle(id);
+  const committed = committedMonsters()[id];
+  const m = bundle?.monster ?? committed;
+  if (!m) notFound();
+
+  const review = entityReview('monster', id);
+  const archives = monsterArchiveOf(id);
+  const committedSkills = committedMonsterSkills();
+  const skills = m.skills
+    .map((sid) => (bundle?.skills[sid] ?? committedSkills[sid]) as Skill | undefined)
+    .filter((s): s is Skill => Boolean(s));
+
+  // Skills pré-localisés (EN), MÊME rendu que les persos — vue « kit » monstre
+  // (chips réattribuées par réf de desc, enrage fusionné). Icônes = sprites
+  // bruts (les icônes de skills monstres ne sont pas dans le staging).
+  const cardSkills: CardSkill[] = monsterSkillViews(skills).map(({ skill: s, effects }) => ({
+    id: s.id,
+    name: lRec(s.name, 'en') || s.id,
+    desc: s.desc ? lRec(s.desc, 'en') : undefined,
+    icon: s.icon,
+    iconSrc: s.icon ? `/api/admin/sprite/${encodeURIComponent(s.icon)}` : undefined,
+    typeLabel: s.type,
+    targetLabel: [s.target, s.range].filter(Boolean).join(' · ') || undefined,
+    maxLevel: s.maxLevel,
+    levels: s.levels.map((l) => ({
+      level: l.level,
+      cool: l.cool,
+      wgReduce: l.wgReduce,
+      vars: l.vars,
+    })),
+    effects,
+  }));
+  const skillLabels = { cooldown: 'CD', wgr: 'WGR', level: 'Lv.', enhancement: 'Enhancement' };
+
+  // Statuts des chips : ceux du kit + ceux des IMMUNITÉS — tooltips affichés en
+  // jeu ET types de mécanique (BT_STUN, BT_COOL_CHARGE, ST_ATK…) résolus via le
+  // glossaire d'effets ; seuls les irrésolus restent affichés bruts.
+  const statuses: StatusMap = buildStatusMap(skills, 'en');
+  const { effects: immunityEffects, unresolved: unresolvedImmunities } = immunityChipEffects(m);
+  mergeStatusEffects(statuses, immunityEffects, 'en');
+
+  // Doublons de nom = boss DIFFÉRENTS (modes/stages) : signalés pour lever l'ambiguïté.
+  const allFresh = freshMonsters();
+  const sameName = Object.values(allFresh).filter(
+    (x) => x.id !== m.id && x.name.en && x.name.en === m.name.en,
+  );
+
+  // Rencontres : où (mode/donjon/aire), à quel niveau — champs DE l'entité
+  // (spawns/summonedBy/linkedTo), les donjons résolus via encounters.json
+  // (frais, repli committé pour un monstre retenu dont le donjon a disparu).
+  // Un add jamais spawné est localisé via ses INVOCATEURS ou son kit lié.
+  const enc = freshEncounters();
+  const oldDungeons = committedEncounters();
+  const spawns = (m.spawns ?? [])
+    .map((s) => ({ ...s, ref: enc.dungeons[s.dungeon] ?? oldDungeons[s.dungeon] }))
+    .filter((s) => s.ref)
+    .sort((a, b) => a.level - b.level);
+  const modeLabel = (mode: string) => enc.modes[mode]?.en ?? mode;
+  const summoners = (m.summonedBy ?? []).map((sid) => ({ id: sid, m: allFresh[sid] }));
+  const linked = (m.linkedTo ?? []).map((sid) => ({ id: sid, m: allFresh[sid] }));
+  const summons = Object.values(allFresh)
+    .filter((x) => x.summonedBy?.includes(m.id))
+    .map((x) => ({ id: x.id, m: x }));
+
+  return (
+    <div className="max-w-4xl space-y-5">
+      <div className="space-y-1">
+        <h1 className="text-content-strong flex items-center gap-3 text-xl font-semibold">
+          <span className="relative h-14 w-14 shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element -- sprite dev */}
+            <img
+              src={monsterSlotSrc(m.type)}
+              alt=""
+              className="absolute inset-0 h-full w-full rounded object-cover"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element -- sprite dev */}
+            <img
+              src={monsterIconSrc(m.icon)}
+              alt=""
+              className="absolute inset-0 h-full w-full rounded object-cover"
+            />
+          </span>
+          <span>
+            {m.name.en || '(sans nom)'}
+            {m.nickname?.en && (
+              <span className="text-content-subtle ml-2 text-sm font-normal">{m.nickname.en}</span>
+            )}
+          </span>
+        </h1>
+        <p className="text-content-subtle text-sm">
+          <span className="font-mono">{m.id}</span> · {m.type} · {m.element} · {m.class}
+          {m.subClass ? ` / ${m.subClass}` : ''} · {m.race} · {m.rarity}★
+          {m.aiType ? ` · IA ${m.aiType}` : ''}
+          {review.status === 'removed' && (
+            <span className="text-warn ml-2">absent de l’extraction fraîche (retenu committé)</span>
+          )}
+        </p>
+        {sameName.length > 0 && (
+          <p className="text-content-subtle text-xs">
+            ⚠ {sameName.length} autre(s) monstre(s) distinct(s) portent ce nom :{' '}
+            {sameName.slice(0, 8).map((x, i) => (
+              <span key={x.id}>
+                {i > 0 && ', '}
+                <Link
+                  href={`/admin/extractor/monsters/${x.id}` as Route}
+                  className="font-mono hover:underline"
+                >
+                  {x.id}
+                </Link>{' '}
+                ({x.type}/{x.element})
+              </span>
+            ))}
+            {sameName.length > 8 && ', …'}
+          </p>
+        )}
+      </div>
+
+      {review.status === 'changed' && <EntityDiffPanel fields={review.fields} />}
+
+      <MonsterActions
+        id={m.id}
+        isNew={review.status === 'added'}
+        canVersion={review.status !== 'added'}
+      />
+
+      {archives.length > 0 && (
+        <div className="border-line-subtle rounded-lg border p-3 text-sm">
+          <p className="text-content-strong mb-1 text-xs font-semibold uppercase">
+            Versions figées (épinglables par les guides)
+          </p>
+          <ul className="space-y-0.5">
+            {archives.map((a) => (
+              <li key={a.version} className="text-content-subtle text-xs">
+                <code className="text-content">
+                  {a.id}@{a.version}
+                </code>{' '}
+                — {a.committedAt.slice(0, 10)}, source {a.ref}
+                {a.gameVersion ? `, jeu ${a.gameVersion}` : ''}
+                {a.label ? ` — ${a.label}` : ''} · {Object.keys(a.skills).length} skill(s)
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <section className="space-y-2">
+        <h2 className="text-content-strong text-xs font-semibold uppercase">
+          Rencontres ({spawns.length})
+        </h2>
+        {spawns.length > 0 ? (
+          <ul className="space-y-0.5 text-xs">
+            {spawns.slice(0, 25).map((s, i) => (
+              <li key={i} className="text-content-subtle">
+                <span className="text-content">{modeLabel(s.ref!.mode)}</span>
+                {' · '}
+                {s.ref!.name.en || s.dungeon}
+                {s.ref!.area?.en ? ` (${s.ref!.area.en})` : ''}
+                {' · '}
+                <span className="text-content">Lv {s.level}</span>
+                {s.hpLines ? ` · ${s.hpLines} barres` : ''}
+              </li>
+            ))}
+            {spawns.length > 25 && (
+              <li className="text-content-subtle">… {spawns.length - 25} de plus</li>
+            )}
+          </ul>
+        ) : summoners.length > 0 || linked.length > 0 ? (
+          <p className="text-content-subtle text-xs">
+            Jamais spawné directement —{' '}
+            {summoners.length > 0 && (
+              <>
+                invoqué par :{' '}
+                {summoners.map((s, i) => (
+                  <span key={s.id}>
+                    {i > 0 && ', '}
+                    <Link
+                      href={`/admin/extractor/monsters/${s.id}` as Route}
+                      className="text-content hover:underline"
+                    >
+                      {s.m?.name.en ?? s.id}
+                    </Link>
+                  </span>
+                ))}
+                .{' '}
+              </>
+            )}
+            {linked.length > 0 && (
+              <>
+                lié au kit de :{' '}
+                {linked.map((s, i) => (
+                  <span key={s.id}>
+                    {i > 0 && ', '}
+                    <Link
+                      href={`/admin/extractor/monsters/${s.id}` as Route}
+                      className="text-content hover:underline"
+                    >
+                      {s.m?.name.en ?? s.id}
+                    </Link>
+                  </span>
+                ))}
+                .{' '}
+              </>
+            )}
+            Localisation via ces monstres.
+          </p>
+        ) : (
+          <p className="text-content-subtle text-xs">
+            Aucun spawn ni invocateur trouvé (contenu retiré ou à venir ?).
+          </p>
+        )}
+        {summons.length > 0 && (
+          <p className="text-content-subtle text-xs">
+            Invoque :{' '}
+            {summons.map((s, i) => (
+              <span key={s.id}>
+                {i > 0 && ', '}
+                <Link
+                  href={`/admin/extractor/monsters/${s.id}` as Route}
+                  className="text-content hover:underline"
+                >
+                  {s.m?.name.en ?? s.id}
+                </Link>
+              </span>
+            ))}
+          </p>
+        )}
+      </section>
+
+      <section className="space-y-2">
+        <h2 className="text-content-strong text-xs font-semibold uppercase">
+          Stats à la rencontre (min@1 → max@100 extrapolé, × modificateurs du donjon)
+        </h2>
+        <MonsterStatsCard
+          stats={m.stats}
+          scales={glossaries.statScales}
+          spawns={spawns.flatMap((s) =>
+            expandRankContexts(
+              {
+                level: s.level,
+                label: `${modeLabel(s.ref!.mode)} · ${s.ref!.name.en || s.dungeon}`,
+                adv: s.ref!.adv,
+                bossHp: s.ref!.bossHp,
+                ...(s.hpLines ? { hpLines: s.hpLines } : {}),
+              },
+              s.ref!.ranks,
+            ),
+          )}
+        />
+      </section>
+
+      {(immunityEffects.length > 0 || unresolvedImmunities.length > 0) && (
+        <section className="space-y-2">
+          <h2 className="text-content-strong text-xs font-semibold uppercase">Immunités</h2>
+          {immunityEffects.length > 0 && (
+            <EffectChipsRow effects={immunityEffects} statuses={statuses} />
+          )}
+          {unresolvedImmunities.length > 0 && (
+            <p className="text-content-subtle text-xs">
+              ⚠ sans entrée au glossaire d’effets : {unresolvedImmunities.join(', ')}
+            </p>
+          )}
+        </section>
+      )}
+
+      {/* Skills : MÊME rendu que le site (cartes, chips, niveaux, descs résolues). */}
+      <SkillsSection skills={cardSkills} statuses={statuses} labels={skillLabels} />
+    </div>
+  );
+}

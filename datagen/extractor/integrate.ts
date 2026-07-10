@@ -19,14 +19,26 @@ import { characterAssetRequests, skillIconsOf } from '../assets/manifest';
 import { buildImageIndex } from '../assets/source';
 import { stageAssets, type StageResult } from '../assets/stage';
 import { buildSkills } from '../generators/skills';
+import { buildMonsterSkills } from '../generators/monster-skills';
+import { buildEncounters } from '../generators/encounters';
 import { buildSlugMap } from '../lib/slug';
 import { buildCharacters } from './specs/character';
 import type { Character } from './specs/character';
+import { buildMonsters } from './specs/monster';
+import type { Monster } from './specs/monster';
 
 const GEN = resolve('data/generated');
 
 type Dict = Record<string, unknown>;
 const readJson = (rel: string): Dict => JSON.parse(readFileSync(resolve(GEN, rel), 'utf8')) as Dict;
+/** Comme `readJson`, mais `{}` si le fichier n'existe pas encore (1re intégration). */
+const readJsonOr = (rel: string): Dict => {
+  try {
+    return readJson(rel);
+  } catch {
+    return {};
+  }
+};
 // Écrit au format PRETTIER (celui des fichiers committés) → diffs git minimaux,
 // limités au perso intégré (pas de re-mise en forme parasite).
 const writeJson = async (rel: string, data: unknown): Promise<void> =>
@@ -98,4 +110,61 @@ export async function integrateCharacter(id: string): Promise<IntegrateReport> {
     files: ['characters.json', 'skills.json', 'characters-slug-to-id.json'],
     assets,
   };
+}
+
+// --- monstres ------------------------------------------------------------------
+
+/** Monstre frais + SES skills frais (la vue « extracteur » de l'admin). */
+export function extractedMonsterBundle(
+  id: string,
+): { monster: Monster; skills: Record<string, unknown> } | undefined {
+  const monster = buildMonsters().monsters[id];
+  if (!monster) return undefined;
+  const all = buildMonsterSkills().skills;
+  const skills: Record<string, unknown> = {};
+  for (const sid of monster.skills) if (all[sid]) skills[sid] = all[sid];
+  return { monster, skills };
+}
+
+export interface IntegrateMonsterReport {
+  id: string;
+  files: string[];
+}
+
+/**
+ * Intègre UN monstre (bouton « Enregistrer » de l'admin) : son entrée dans
+ * `monsters.json` (localisation `spawns`/`summonedBy`/`linkedTo` incluse), ses
+ * skills dans `monster-skills.json`, et les DONJONS référencés par ses spawns
+ * dans `encounters.json` (sinon réfs pendantes côté site). Les titres de modes
+ * (`glossaries.modes`) restent du ressort de la revue globale, comme tout
+ * glossaire. Pas d'images ici (les portraits `MT_*` relèvent du manifest
+ * d'assets global).
+ */
+export async function integrateMonster(id: string): Promise<IntegrateMonsterReport> {
+  const monster = buildMonsters().monsters[id];
+  if (!monster) throw new Error(`monstre ${id} absent de l'extraction fraîche`);
+  const freshSkills = buildMonsterSkills().skills;
+
+  const monsters = readJsonOr('monsters.json');
+  monsters[id] = monster;
+  await writeJson('monsters.json', monsters);
+
+  const skills = readJsonOr('monster-skills.json');
+  for (const sid of monster.skills) {
+    if (freshSkills[sid]) skills[sid] = freshSkills[sid];
+  }
+  await writeJson('monster-skills.json', skills);
+
+  const files = ['monsters.json', 'monster-skills.json'];
+  if (monster.spawns?.length) {
+    const freshDungeons = buildEncounters().dungeons;
+    const encounters = readJsonOr('encounters.json');
+    for (const s of monster.spawns) {
+      if (freshDungeons[s.dungeon]) encounters[s.dungeon] = freshDungeons[s.dungeon];
+    }
+    await writeJson('encounters.json', encounters);
+    files.push('encounters.json');
+  }
+
+  return { id, files };
 }

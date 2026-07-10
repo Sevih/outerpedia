@@ -1,0 +1,4 @@
+{
+  "_doc": "Curation d'affichage des skills MONSTRES (lue par monsterSkillViews). chipOwner : buffId → skillId PORTEUR de la chip, pour les cas où les tables câblent un buff sur le mauvais skill du kit SANS aucun signal structurel (pas de réf [Buff_…] dans les descs, pas de CallerSkillType exploitable). N'affecte que la présentation — la donnée extraite reste fidèle aux tables. NB : les buffs BT_WG_* sont ignorés d'office côté monstres (pas de chip), inutile de les curer.",
+  "chipOwner": {}
+}

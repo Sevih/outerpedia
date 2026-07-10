@@ -45,6 +45,14 @@ const nextConfig: NextConfig = {
 
   pageExtensions,
 
+  // Les guides sont SCANNÉS au filesystem (meta.json + versions/*.json) — y
+  // compris au runtime (revalidation ISR). La sortie standalone ne trace pas
+  // ces lectures dynamiques : on les inclut explicitement. Le motif `**`
+  // évite d'écrire `[lang]` (crochets = classe de caractères en glob).
+  outputFileTracingIncludes: {
+    '/**': ['./src/app/**/guides/_contents/**/*.json'],
+  },
+
   env: {
     NEXT_PUBLIC_APP_VERSION: version,
   },
@@ -59,6 +67,29 @@ const nextConfig: NextConfig = {
 
   async headers() {
     return [{ source: '/(.*)', headers: securityHeaders }];
+  },
+
+  // Slugs de guides RENOMMÉS en V2 (301 hérités — contrat d'URL). Chaque entrée
+  // existe en deux formes à cause du routing mixte : sous-domaine en prod (pas
+  // de préfixe) et path `/:lang/…` en dev.
+  async redirects() {
+    const renamed: Array<[string, string]> = [
+      ['urd', 'urd-light'],
+      ['verdandi', 'verdandi-dark'],
+      ['skuld', 'skuld-light'],
+    ];
+    return renamed.flatMap(([from, to]) => [
+      {
+        source: `/guides/dimensional-singularity/${from}`,
+        destination: `/guides/dimensional-singularity/${to}`,
+        permanent: true,
+      },
+      {
+        source: `/:lang/guides/dimensional-singularity/${from}`,
+        destination: `/:lang/guides/dimensional-singularity/${to}`,
+        permanent: true,
+      },
+    ]);
   },
 };
 
