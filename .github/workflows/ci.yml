@@ -73,12 +73,14 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          # SANS CECI, LE DÉPLOIEMENT MENT : par défaut l'action enchaîne toutes
-          # les lignes sans s'arrêter sur une erreur, et ne renvoie que le code
-          # de la DERNIÈRE. Un `compose up` en échec serait masqué par le
-          # `prune` qui suit, et la CI afficherait vert sans avoir rien déployé.
-          script_stop: true
           script: |
+            # SANS `set -e`, LE DÉPLOIEMENT MENT : l'action enchaîne toutes les
+            # lignes sans s'arrêter sur une erreur et ne renvoie que le code de
+            # la DERNIÈRE (`prune -f`, qui réussit toujours). Un `compose up` en
+            # échec serait masqué et la CI afficherait vert sans rien déployer.
+            # (`script_stop:` n'existe PAS dans appleboy/ssh-action@v1 — il est
+            # ignoré avec un simple warning. Vérifié : il ne protégeait rien.)
+            set -e
             # sops vit dans ~/.local/bin (installé sans sudo). Un shell non
             # interactif ne lit pas ~/.profile : sans cette ligne, sops est
             # introuvable et le déchiffrement échoue.
