@@ -35,6 +35,15 @@ const securityHeaders = [
 // Pages/routes suffixées `.dev.*` ne sont reconnues qu'en développement →
 // l'admin local n'est PAS buildé en prod (ni son code, ni le runtime datagen
 // qu'il importe). Voir src/app/admin/*.dev.tsx.
+// PIÈGE, à ne pas réintroduire : ce `pageExtensions` personnalisé CASSE les
+// fichiers de métadonnées statiques de l'app router (`apple-icon.png`,
+// `opengraph-image.png`…). Next les détecte assez pour émettre le
+// `<link rel="apple-touch-icon">` dans le <head>, mais ne génère jamais la route
+// qui les sert : le lien pointait sur un 404, en dev comme en prod. Ajouter
+// « png » à cette liste ne répare rien — ça ne fait que changer la forme de
+// l'URL déclarée, qui reste morte. `favicon.ico` y échappe (Next le traite à
+// part). D'où les icônes servies depuis `public/`, déclarées à la main dans
+// `metadata.icons` (src/app/layout.tsx) : plus aucune convention magique.
 const isDev = process.env.NODE_ENV !== 'production';
 const base = ['tsx', 'ts', 'jsx', 'js'];
 const pageExtensions = isDev ? [...base.map((e) => `dev.${e}`), ...base] : base;

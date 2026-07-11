@@ -21,6 +21,19 @@ export const metadata: Metadata = {
   description: 'Community-driven wiki and database for Outerplane.',
   openGraph: { siteName: 'Outerpedia', type: 'website' },
   twitter: { card: 'summary_large_image' },
+  /*
+   * Icônes DÉCLARÉES, pas devinées.
+   *
+   * La convention de fichier de l'app router (`src/app/apple-icon.png`) émettait
+   * bien son `<link rel="apple-touch-icon">`, mais l'URL renvoyait 404 — en dev
+   * comme en prod. La cause n'est pas Next : c'est notre proxy i18n, qui 404 tout
+   * chemin contenant un point (garde-fou anti-sondes de bots, cf. proxy.ts).
+   * `favicon.ico` n'y survit que parce que le `matcher` du proxy l'exclut nommément.
+   *
+   * D'où `/icons/…` : un préfixe que le proxy laisse déjà passer, et `public/` est
+   * copié tel quel dans l'image Docker. Toute icône ajoutée doit vivre là.
+   */
+  icons: { apple: '/icons/apple-touch-icon.png' },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
