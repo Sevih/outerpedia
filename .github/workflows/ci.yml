@@ -73,8 +73,24 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
+          # SANS CECI, LE DÉPLOIEMENT MENT : par défaut l'action enchaîne toutes
+          # les lignes sans s'arrêter sur une erreur, et ne renvoie que le code
+          # de la DERNIÈRE. Un `compose up` en échec serait masqué par le
+          # `prune` qui suit, et la CI afficherait vert sans avoir rien déployé.
+          script_stop: true
           script: |
-            cd ~/sevih-tool/stack
+            # sops vit dans ~/.local/bin (installé sans sudo). Un shell non
+            # interactif ne lit pas ~/.profile : sans cette ligne, sops est
+            # introuvable et le déchiffrement échoue.
+            export PATH="$HOME/.local/bin:$PATH"
+            cd ~/sevih-tool
+            # Régénère stack/.env depuis le coffre chiffré. Le compose exige des
+            # variables (`${VAR:?}`) ; si l'infra en ajoute une et que .env n'est
+            # pas régénéré, le déploiement du CODE casse à cause d'un changement
+            # d'INFRA. On resynchronise donc à chaque fois. (`git pull` reste
+            # manuel : l'infra ne s'auto-déploie pas, cf. sevih-tool/docs/git-sync.md)
+            ./scripts/secrets-decrypt.sh
+            cd stack
             docker compose pull
             docker compose up -d
             docker image prune -f
