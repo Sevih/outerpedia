@@ -54,8 +54,13 @@ function requirementsOf(entry: GuideEntry): ResolvedReq[] {
     return [{ stage: entry.stage, dungeonName: entry.dungeonName }];
   }
   const auto = getUnlockEntry(entry.contentType);
-  if (!auto || auto.requirements.length === 0) {
-    // Donnée absente : visible en rouge via le « ? » plutôt que silencieux.
+  // ContentType inconnu des données = faute de frappe éditoriale → le build
+  // casse. Une entrée CONNUE sans stage résolvable reste un « ? » légitime
+  // (condition interne du jeu — la customNote porte alors la condition).
+  if (!auto) {
+    throw new Error(`unlock-content : ContentType inconnu « ${entry.contentType} » (notes.ts)`);
+  }
+  if (auto.requirements.length === 0) {
     return [{ stage: '?', dungeonName: { en: '?' } }];
   }
   return auto.requirements.map((r: UnlockRequirement) => ({
@@ -162,7 +167,8 @@ function CategoryTable({
 
 export default async function UnlockContentGuide({ lang }: { lang: Lang }) {
   const t = await getT(lang);
-  const ctx: ParseCtx = { lang, t };
+  // Strict : une référence de contenu inconnue casse le build (pas de rouge).
+  const ctx: ParseCtx = { lang, t, strict: true };
 
   const grouped: Record<Category, GuideEntry[]> = { gamemodes: [], character: [], base: [] };
   for (const e of ENTRIES) grouped[e.category].push(e);

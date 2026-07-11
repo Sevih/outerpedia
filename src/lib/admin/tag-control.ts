@@ -7,11 +7,12 @@
  * (`tag-control.test.ts`) qui rend le contrôle BLOQUANT : un tag sans
  * correspondance fait échouer la suite avant tout build.
  */
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { readFileSync, readdirSync } from 'node:fs';
+import { join, relative, resolve } from 'node:path';
 import { checkText, type TagCheck } from '@/lib/parse-text';
 import { loadCuratedCharacters } from '@/lib/data/curated';
-import { characterDisplayName, getCharacter } from '@/lib/data/characters';
+import { characterDisplayName, findCharacterByName, getCharacter } from '@/lib/data/characters';
+import { listGuides } from '@/lib/data/guides';
 
 /** Une occurrence de tag contrôlée, avec sa provenance. */
 export interface TagOccurrence extends TagCheck {
@@ -88,5 +89,77 @@ export function collectTagOccurrences(): TagOccurrence[] {
     for (const t of texts) scan(`${file.split('/').pop()}${t.path}`, t.text);
   }
 
+  // GUIDES : contenu colocalisé (`_contents/<cat>/<slug>/`). Le rendu est
+  // STRICT (un tag mort casse le build SSG) — ce scan donne le même verdict
+  // PLUS TÔT (vitest) et le diagnostic détaillé (/admin/tags).
+  for (const guide of listGuides()) {
+    const dir = resolve(
+      process.cwd(),
+      'src/app/[lang]/guides/_contents',
+      guide.category,
+      guide.slug,
+    );
+    for (const file of walkFiles(dir)) {
+      const source = `guides · ${guide.category}/${guide.slug} · ${relative(dir, file).replace(/\\/g, '/')}`;
+      if (file.endsWith('.json')) {
+        const data = readJson(file);
+        const texts: { path: string; text: string }[] = [];
+        walkStrings(data, '', texts);
+        for (const t of texts) scan(`${source}${t.path}`, t.text);
+        checkGuideNames(data, '', source, occurrences);
+      } else {
+        // Sources .ts/.tsx : textes éditoriaux inline scannés bruts,
+        // commentaires retirés (ils citent des tags d'exemple).
+        const src = readFileSync(file, 'utf8')
+          .replace(/\/\*[\s\S]*?\*\//g, '')
+          .replace(/^\s*\/\/.*$/gm, '');
+        scan(source, src);
+      }
+    }
+  }
+
   return occurrences;
+}
+
+/** Fichiers de contenu d'un guide (récursif — versions incluses). */
+function walkFiles(dir: string): string[] {
+  const out: string[] = [];
+  for (const e of readdirSync(dir, { withFileTypes: true })) {
+    const full = join(dir, e.name);
+    if (e.isDirectory()) out.push(...walkFiles(full));
+    else if (/\.(json|tsx?)$/.test(e.name)) out.push(full);
+  }
+  return out.sort();
+}
+
+/**
+ * NOMS de persos structurels des guides : par convention, les clés
+ * `characters` (string[]) et `slots` (string[][]) des JSON de versions
+ * référencent des persos par nom d'affichage EN (RecommendedCharacters /
+ * TeamSlots — qui JETTENT au rendu). Contrôlés ici sous le type `PERSO`.
+ */
+function checkGuideNames(node: unknown, path: string, source: string, out: TagOccurrence[]): void {
+  if (!node || typeof node !== 'object') return;
+  if (Array.isArray(node)) {
+    node.forEach((v, i) => checkGuideNames(v, `${path}[${i}]`, source, out));
+    return;
+  }
+  for (const [k, v] of Object.entries(node)) {
+    if ((k === 'characters' || k === 'slots') && Array.isArray(v)) {
+      for (const name of (v as unknown[]).flat()) {
+        if (typeof name !== 'string') continue;
+        out.push({
+          source: `${source}${path}.${k}`,
+          tag: name,
+          type: 'PERSO',
+          value: name,
+          ...(findCharacterByName(name)
+            ? { ok: true as const }
+            : { ok: false as const, reason: 'perso inconnu' }),
+        });
+      }
+    } else {
+      checkGuideNames(v, `${path}.${k}`, source, out);
+    }
+  }
 }

@@ -33,8 +33,15 @@ export interface GuideMeta {
   /** Sprite du jeu (namespace `images/ui/guides/`). */
   icon: string;
   author: string;
-  /** Date ISO `YYYY-MM-DD` de dernière mise à jour éditoriale. */
-  updated: string;
+  /**
+   * Date ISO `YYYY-MM-DD` de dernière mise à jour — MAINTENUE AUTOMATIQUEMENT
+   * par le stamp au commit (`scripts/stamp-guides.ts`) : bumpée quand un fichier
+   * pertinent du guide change (dernière version + fichiers partagés ; les
+   * archives de versions ne comptent pas). Optionnelle : pour un guide
+   * versionné, la date se dérive du dossier `versions/` le plus récent tant
+   * qu'aucun stamp explicite n'existe. Résolue par `guideUpdatedDate`.
+   */
+  updated?: string;
   /** Tri dans la catégorie (croissant ; absent = après les ordonnés). */
   order?: number;
   /** Monstre lié (og:image, futur affichage) — id V3, jamais un chemin. */
@@ -109,7 +116,10 @@ function parseMeta(raw: unknown, at: string, issues: string[]): GuideMeta | null
       ok = false;
     }
   }
-  if (typeof m.updated !== 'string' || !DATE_RE.test(m.updated)) {
+  // `updated` optionnel (dérivé de la version la plus récente sinon) ; validé
+  // seulement s'il est présent. La résolvabilité d'une date est vérifiée au
+  // scan (un guide plat sans `updated` ni version → erreur).
+  if (m.updated !== undefined && (typeof m.updated !== 'string' || !DATE_RE.test(m.updated))) {
     issues.push(`${at} : « updated » doit être une date ISO YYYY-MM-DD`);
     ok = false;
   }
@@ -184,7 +194,17 @@ function scan(): Guide[] {
       }
       const meta = parseMeta(readJson(metaPath, issues), `${at}/meta.json`, issues);
       if (!meta) continue;
-      guides.push({ ...meta, category, slug, versions: scanVersions(guideDir, at, issues) });
+      const versions = scanVersions(guideDir, at, issues);
+      // Une date DOIT être résolvable : `updated` explicite, ou (guide versionné)
+      // dérivée du dossier de version le plus récent. Un guide plat sans date
+      // est une erreur — le stamp au commit la remplit, mais un contenu committé
+      // ne doit jamais partir sans date (SEO/tri).
+      if (!meta.updated && versions.length === 0) {
+        issues.push(
+          `${at}/meta.json : « updated » requis (guide sans version, aucune date à dériver)`,
+        );
+      }
+      guides.push({ ...meta, category, slug, versions });
     }
   }
   if (issues.length) {
@@ -206,6 +226,17 @@ export function listGuides(): Guide[] {
   return allGuides();
 }
 
+/**
+ * Date de dernière mise à jour RÉSOLUE (ISO `YYYY-MM-DD`) : `updated` explicite
+ * (maintenu par le stamp), sinon dérivée du dossier `versions/` le plus récent
+ * (`YYYY-MM` → `YYYY-MM-01`). Le scan garantit qu'au moins l'une existe.
+ */
+export function guideUpdatedDate(guide: Pick<Guide, 'updated' | 'versions'>): string {
+  if (guide.updated) return guide.updated;
+  const newest = guide.versions[0]?.key;
+  return newest ? `${newest}-01` : '';
+}
+
 /** Guides VISIBLES d'une catégorie, triés (order croissant, puis plus récent). */
 export function listGuidesByCategory(category: GuideCategorySlug): Guide[] {
   return allGuides()
@@ -213,7 +244,7 @@ export function listGuidesByCategory(category: GuideCategorySlug): Guide[] {
     .sort(
       (a, b) =>
         (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) ||
-        b.updated.localeCompare(a.updated) ||
+        guideUpdatedDate(b).localeCompare(guideUpdatedDate(a)) ||
         a.slug.localeCompare(b.slug),
     );
 }

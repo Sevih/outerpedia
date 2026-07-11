@@ -18,7 +18,7 @@ import {
   GUIDE_CATEGORY_SLUGS,
   isGuideCategory,
 } from '@/lib/data/guide-categories';
-import { formatGuideDate, listGuidesByCategory } from '@/lib/data/guides';
+import { formatGuideDate, guideUpdatedDate, listGuidesByCategory } from '@/lib/data/guides';
 import { GuideCard } from '@/components/guides/GuideCard';
 
 export function generateStaticParams() {
@@ -67,7 +67,8 @@ export default async function GuideCategoryPage({
     name: label,
     description: lRec(cat.desc, lang),
     url: buildUrl(lang, `/guides/${category}`),
-    itemListOrder: 'Unordered',
+    // Liste réellement ordonnée (order croissant puis date) — pas Unordered.
+    itemListOrder: 'Ascending',
     items: guides.map((g) => ({
       name: lRec(g.title, lang),
       url: buildUrl(lang, `/guides/${category}/${g.slug}`),
@@ -102,7 +103,7 @@ export default async function GuideCategoryPage({
               key={g.slug}
               guide={g}
               lang={lang}
-              updatedText={`${t('page.guide.updated', { date: formatGuideDate(g.updated, lang) })} · ${g.author}`}
+              updatedText={`${t('page.guide.updated', { date: formatGuideDate(guideUpdatedDate(g), lang) })} · ${g.author}`}
             />
           ))}
         </div>

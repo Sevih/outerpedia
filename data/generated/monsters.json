@@ -17,6 +17,7 @@
     "stats": {
       "hp": { "min": 2480, "max": 147200 },
       "atk": { "min": 180, "max": 8977 },
+      "def": { "min": 0, "max": 0 },
       "speed": { "min": 125, "max": 229 },
       "guard": { "min": 20, "max": 54 },
       "critical_rate": { "min": 100, "max": 100 },
@@ -60,6 +61,7 @@
     "stats": {
       "hp": { "min": 2480, "max": 147200 },
       "atk": { "min": 180, "max": 8977 },
+      "def": { "min": 0, "max": 0 },
       "speed": { "min": 125, "max": 229 },
       "guard": { "min": 20, "max": 54 },
       "critical_rate": { "min": 100, "max": 100 },

@@ -64,26 +64,44 @@ async function main(): Promise<void> {
   if (DRY_RUN) console.log('\x1b[33m[DRY RUN]\x1b[0m\n');
 
   // 1) CONTRÔLES — au premier échec, on s'arrête AVANT tout effet de bord.
+  //
+  // Un contrôle avec `fix` est AUTO-RÉPARABLE : on vérifie d'abord (rapide, ne
+  // touche à rien quand tout va bien) et, seulement si ça casse, on applique le
+  // correctif puis on re-vérifie (le `git add -A` plus bas embarque les
+  // corrections). Le format n'est pas un « bug » à faire échouer — juste de
+  // l'enroulement de ligne déterministe. Lint/typecheck/test, eux, restent
+  // BLOQUANTS : pas de fix automatique, ce sont de vrais problèmes.
   if (SKIP_CONTROLS) {
     console.log('\x1b[90m[skip-controls] contrôles sautés.\x1b[0m');
   } else {
-    const controls = [
-      ['format', 'pnpm format:check'],
-      ['lint', 'pnpm lint'],
-      ['typecheck', 'pnpm typecheck'],
-      ['test', 'pnpm test'],
-    ] as const;
-    for (const [label, cmd] of controls) {
+    const controls: { label: string; check: string; fix?: string }[] = [
+      { label: 'format', check: 'pnpm format:check', fix: 'pnpm format' },
+      { label: 'lint', check: 'pnpm lint' },
+      { label: 'typecheck', check: 'pnpm typecheck' },
+      { label: 'test', check: 'pnpm test' },
+    ];
+    for (const { label, check, fix } of controls) {
       console.log(`\n▶ contrôle : ${label}`);
       try {
-        sh(cmd);
+        sh(check);
       } catch {
-        console.error(
-          `\n\x1b[31m✗ Contrôle "${label}" échoué — rien n'a été publié. Corrige puis relance.\x1b[0m`,
-        );
-        if (label === 'format')
-          console.error('  (astuce : `pnpm format` pour corriger le formatage)');
-        process.exit(1);
+        if (fix) {
+          console.log(`\x1b[33m  ⚠ ${label} : corrections appliquées automatiquement.\x1b[0m`);
+          sh(fix);
+          try {
+            sh(check); // re-vérifie : un échec persistant = vrai problème.
+          } catch {
+            console.error(
+              `\n\x1b[31m✗ ${label} : échec persistant après auto-correction — corrige à la main.\x1b[0m`,
+            );
+            process.exit(1);
+          }
+        } else {
+          console.error(
+            `\n\x1b[31m✗ Contrôle "${label}" échoué — rien n'a été publié. Corrige puis relance.\x1b[0m`,
+          );
+          process.exit(1);
+        }
       }
     }
     console.log('\n\x1b[32m✓ Tous les contrôles passent.\x1b[0m');
@@ -131,11 +149,17 @@ async function main(): Promise<void> {
     rl.close();
   }
 
-  // 4) IMAGES → R2 (la prod lit R2 ; doit précéder le push git).
+  // 4) DATES DES GUIDES — bumpe `meta.updated` des guides dont un fichier
+  // pertinent change (le build ne voit pas git ; la date vit committée). AVANT
+  // le git add -A pour que les meta re-datés partent dans CE commit.
+  console.log('\n▶ dates des guides (stamp)');
+  sh('pnpm stamp:guides');
+
+  // 5) IMAGES → R2 (la prod lit R2 ; doit précéder le push git).
   console.log('\n▶ images (collect + push R2)');
   sh('pnpm images');
 
-  // 5) COMMIT.
+  // 6) COMMIT.
   const status = shOut('git status --porcelain');
   if (!status) {
     console.log('\nRien à committer.');
@@ -150,7 +174,7 @@ async function main(): Promise<void> {
   // le commit).
   sh(`git commit --no-verify -m ${JSON.stringify(msg)}`);
 
-  // 6) PUSH.
+  // 7) PUSH.
   if (NO_PUSH) {
     console.log('\x1b[90m[no-push] pas de push.\x1b[0m');
   } else {

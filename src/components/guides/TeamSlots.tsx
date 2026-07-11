@@ -33,12 +33,8 @@ export function TeamSlots({
           >
             {options.map((name) => {
               const c = findCharacterByName(name);
-              if (!c)
-                return (
-                  <span key={name} className="text-sm text-red-500">
-                    {name}
-                  </span>
-                );
+              // Nom inconnu = erreur de contenu → le build SSG CASSE.
+              if (!c) throw new Error(`TeamSlots : personnage inconnu « ${name} »`);
               const slug = slugForId(c.id);
               return (
                 <CharacterPortrait

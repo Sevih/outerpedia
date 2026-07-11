@@ -12,6 +12,7 @@ import { GUIDE_CATEGORIES } from '@/lib/data/guide-categories';
 import {
   formatGuideDate,
   getGuide,
+  guideUpdatedDate,
   listGuideParams,
   type GuideContentProps,
 } from '@/lib/data/guides';
@@ -33,12 +34,15 @@ export async function generateMetadata({
   const lang = (isValidLang(raw) ? raw : 'en') as Lang;
   const guide = getGuide(category, slug);
   if (!guide) return {};
+  const updated = guideUpdatedDate(guide);
   return createPageMetadata({
     lang,
     path: `/guides/${category}/${slug}`,
     title: lRec(guide.title, lang),
     description: lRec(guide.description, lang),
     ...(guide.ogImage ? { ogImage: guide.ogImage } : {}),
+    // og:type=article + dates (published = modified faute de date de création).
+    article: { publishedTime: updated, modifiedTime: updated, authors: [guide.author] },
   });
 }
 
@@ -56,6 +60,7 @@ export default async function GuideDetail({
   const title = lRec(guide.title, lang);
   const catLabel = lRec(GUIDE_CATEGORIES[guide.category].label, lang);
   const path = `/guides/${category}/${slug}`;
+  const updated = guideUpdatedDate(guide);
 
   // Le data layer garantit l'existence d'index.tsx : un échec ici est un vrai
   // bug de contenu et doit CASSER le build, pas produire un 404 silencieux.
@@ -70,7 +75,7 @@ export default async function GuideDetail({
     headline: title,
     description: lRec(guide.description, lang),
     author: guide.author,
-    dateModified: guide.updated,
+    dateModified: updated,
     ...(guide.ogImage ? { image: guide.ogImage } : {}),
   });
   const crumbLd = buildBreadcrumbJsonLd([
@@ -103,7 +108,7 @@ export default async function GuideDetail({
         <div className="text-content-muted flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
           <span>
             {t('page.guide.by', { author: guide.author })} ·{' '}
-            {t('page.guide.updated', { date: formatGuideDate(guide.updated, lang) })}
+            {t('page.guide.updated', { date: formatGuideDate(updated, lang) })}
           </span>
           <ShareButtons title={title} lang={lang} />
         </div>

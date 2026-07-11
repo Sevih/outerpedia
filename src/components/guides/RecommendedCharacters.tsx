@@ -34,13 +34,8 @@ export function RecommendedCharacters({
             <div className="flex flex-wrap gap-2">
               {g.characters.map((name) => {
                 const c = findCharacterByName(name);
-                // Nom inconnu = erreur de contenu → ROUGE (comme parse-text).
-                if (!c)
-                  return (
-                    <span key={name} className="text-sm text-red-500">
-                      {name}
-                    </span>
-                  );
+                // Nom inconnu = erreur de contenu → le build SSG CASSE.
+                if (!c) throw new Error(`RecommendedCharacters : personnage inconnu « ${name} »`);
                 const slug = slugForId(c.id);
                 return (
                   <CharacterPortrait

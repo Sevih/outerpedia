@@ -48,22 +48,33 @@ const ITEMS = itemsData as unknown as Record<string, CatalogEntry>;
 export interface ParseCtx {
   lang: Lang;
   t: TFunction;
+  /**
+   * Mode STRICT (guides) : une référence inconnue lève une exception au lieu
+   * de s'afficher en rouge → le build SSG CASSE sur un tag mort plutôt que de
+   * publier la page. Les pages tolérantes (curé perso legacy) restent en rouge.
+   */
+  strict?: boolean;
 }
 
 // Résolution par NOM D'AFFICHAGE EN (clé du contenu éditorial) : index partagé
 // du data layer (également utilisé par les guides).
 const findCharacter = findCharacterByName;
 
+/** Référence de contenu inconnue : ROUGE en tolérant, EXCEPTION en strict. */
+function unknownRef(display: string, ref: string, ctx: ParseCtx, k: number): ReactNode {
+  if (ctx.strict) throw new Error(`parse-text : référence de contenu inconnue — ${ref}`);
+  return (
+    <span key={k} className="text-red-500">
+      {display}
+    </span>
+  );
+}
+
 /** Chip d'effet ({B/…}/{D/…}) : tuile d'icône RECOLORÉE (comme les chips de
  * skill) + libellé + tooltip descriptif. */
 function effectChip(side: 'buff' | 'debuff', key: string, ctx: ParseCtx, k: number): ReactNode {
   const eff = resolveEffectKey(side, key);
-  if (!eff)
-    return (
-      <span key={k} className="text-red-500">
-        {key}
-      </span>
-    );
+  if (!eff) return unknownRef(key, `{${side === 'buff' ? 'B' : 'D'}/${key}}`, ctx, k);
   const label = lRec(eff.name, ctx.lang) || eff.name.en || key;
   const desc = lRec(eff.desc, ctx.lang) || eff.desc.en;
   const isDebuff = side === 'debuff';
@@ -95,12 +106,7 @@ function effectChip(side: 'buff' | 'debuff', key: string, ctx: ParseCtx, k: numb
 /** Chip perso ({P/…}) : lien + tooltip carte (visage, rareté, élément, classe). */
 function characterChip(name: string, ctx: ParseCtx, k: number): ReactNode {
   const c = findCharacter(name);
-  if (!c)
-    return (
-      <span key={k} className="text-red-500">
-        {name}
-      </span>
-    );
+  if (!c) return unknownRef(name, `{P/${name}}`, ctx, k);
   const display = characterDisplayName(c, ctx.lang);
   const slug = slugForId(c.id);
   const el = ctx.t(`sys.element.${c.element}` as TranslationKey);
@@ -140,12 +146,7 @@ function skillChip(value: string, ctx: ParseCtx, k: number): ReactNode {
   const c = findCharacter(name);
   const type = SKILL_SHORTHAND[shorthand?.trim() ?? ''];
   const skill = c?.skills.map((id) => SKILLS[id]).find((s) => s && s.type === type);
-  if (!c || !skill)
-    return (
-      <span key={k} className="text-red-500">
-        {value}
-      </span>
-    );
+  if (!c || !skill) return unknownRef(value, `{SK/${value}}`, ctx, k);
   const slug = slugForId(c.id);
   const label = lRec(skill.name, ctx.lang) || skill.name.en || shorthand;
   return (
@@ -163,12 +164,7 @@ function skillChip(value: string, ctx: ParseCtx, k: number): ReactNode {
 function eeChip(name: string, ctx: ParseCtx, k: number): ReactNode {
   const c = findCharacter(name);
   const ee = c?.ee ? EE[c.ee] : undefined;
-  if (!c || !ee)
-    return (
-      <span key={k} className="text-red-500">
-        {name}
-      </span>
-    );
+  if (!c || !ee) return unknownRef(name, `{EE/${name}}`, ctx, k);
   const slug = slugForId(c.id);
   return (
     <InlineIcon
@@ -212,12 +208,7 @@ function findSet(name: string, lang: Lang): SetView | undefined {
 function setChip(name: string, ctx: ParseCtx, k: number): ReactNode {
   const set = findSet(name, ctx.lang);
   const icon = set?.pieceIcons.armor ?? Object.values(set?.pieceIcons ?? {})[0];
-  if (!set || !icon)
-    return (
-      <span key={k} className="text-red-500">
-        {name}
-      </span>
-    );
+  if (!set || !icon) return unknownRef(name, `{AS/${name}}`, ctx, k);
   const label = lRec(set.name, ctx.lang) || set.name.en;
   // Effets au palier ENCHANTÉ (dernier), comme la V2.
   const tier = set.tiers[set.tiers.length - 1];
@@ -285,12 +276,7 @@ function equipmentChip(
   k: number,
 ): ReactNode {
   const f = findFamily(kind, name);
-  if (!f)
-    return (
-      <span key={k} className="text-red-500">
-        {name}
-      </span>
-    );
+  if (!f) return unknownRef(name, `{I-${kind[0].toUpperCase()}/${name}}`, ctx, k);
   return (
     <ItemInline
       key={k}
@@ -329,12 +315,7 @@ function catalogIndex(): Map<string, CatalogChip> {
 /** Chip item générique ({I-I/nom}) : icône + nom + description en tooltip. */
 function itemChip(name: string, ctx: ParseCtx, k: number): ReactNode {
   const it = catalogIndex().get(name.trim().toLowerCase());
-  if (!it)
-    return (
-      <span key={k} className="text-red-500">
-        {name}
-      </span>
-    );
+  if (!it) return unknownRef(name, `{I-I/${name}}`, ctx, k);
   const label = lRec(it.name, ctx.lang) || it.name.en;
   const desc = (lRec(it.desc, ctx.lang) || it.desc?.en || '').replace(/\\n/g, '\n');
   return (
@@ -378,12 +359,7 @@ const TAG_MAP: Record<string, TagHandler> = {
   },
   S: (v, ctx, k) => {
     const icon = STAT_ICON[v];
-    if (!icon)
-      return (
-        <span key={k} className="text-red-500">
-          {v}
-        </span>
-      );
+    if (!icon) return unknownRef(v, `{S/${v}}`, ctx, k);
     return (
       <StatInline
         key={k}
@@ -505,6 +481,14 @@ export function checkText(text: string): TagCheck[] {
 export function parseText(text: string, ctx: ParseCtx): ReactNode {
   if (!text) return null;
 
+  // Strict : un TYPE de tag hors liste ne matche pas TAG_REGEX et passerait en
+  // texte brut — le motif générique (celui de checkText) l'attrape et on casse.
+  if (ctx.strict) {
+    for (const m of text.matchAll(/\{([A-Z-]+)\/([^}]+)\}/g)) {
+      if (!TAG_MAP[m[1]]) throw new Error(`parse-text : type de tag inconnu — ${m[0]}`);
+    }
+  }
+
   const parts: ReactNode[] = [];
   let lastIndex = 0;
   let key = 0;
@@ -518,15 +502,7 @@ export function parseText(text: string, ctx: ParseCtx): ReactNode {
     }
     const [, tagType, value] = match;
     const handler = TAG_MAP[tagType];
-    parts.push(
-      handler ? (
-        handler(value, ctx, key++)
-      ) : (
-        <span key={key++} className="text-red-500">
-          {match[0]}
-        </span>
-      ),
-    );
+    parts.push(handler ? handler(value, ctx, key++) : unknownRef(match[0], match[0], ctx, key++));
     lastIndex = TAG_REGEX.lastIndex;
   }
   if (lastIndex < text.length) parts.push(...splitLineBreaks(text.slice(lastIndex), key));

@@ -62,6 +62,12 @@ type PageMetadataOptions = {
   ogImage?: string;
   ogImageSize?: { width: number; height: number };
   noindex?: boolean;
+  /**
+   * Page de type ARTICLE (guides) : bascule `og:type=article` et pose
+   * `article:published_time`/`modified_time`/`author` (dates ISO). Absent =
+   * page `website` classique.
+   */
+  article?: { publishedTime?: string; modifiedTime?: string; authors?: string[] };
 };
 
 /**
@@ -76,6 +82,7 @@ export function createPageMetadata({
   ogImage = DEFAULT_OG_IMAGE,
   ogImageSize,
   noindex = false,
+  article,
 }: PageMetadataOptions): Metadata {
   const url = buildUrl(lang, path);
   const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
@@ -83,19 +90,29 @@ export function createPageMetadata({
   const { width, height } =
     ogImageSize ?? (isDefault ? { width: 1200, height: 630 } : { width: 150, height: 150 });
 
+  const ogBase = {
+    title: fullTitle,
+    description,
+    url,
+    siteName: SITE_NAME,
+    locale: OG_LOCALE[normalizeLang(lang)],
+    images: [{ url: ogImage, width, height }],
+  };
+  const openGraph: Metadata['openGraph'] = article
+    ? {
+        ...ogBase,
+        type: 'article',
+        ...(article.publishedTime ? { publishedTime: article.publishedTime } : {}),
+        ...(article.modifiedTime ? { modifiedTime: article.modifiedTime } : {}),
+        ...(article.authors ? { authors: article.authors } : {}),
+      }
+    : { ...ogBase, type: 'website' };
+
   return {
     title,
     description,
     alternates: { canonical: url, languages: buildAlternates(path) },
-    openGraph: {
-      title: fullTitle,
-      description,
-      url,
-      siteName: SITE_NAME,
-      type: 'website',
-      locale: OG_LOCALE[normalizeLang(lang)],
-      images: [{ url: ogImage, width, height }],
-    },
+    openGraph,
     twitter: {
       card: isDefault || width > height ? 'summary_large_image' : 'summary',
       title: fullTitle,
@@ -290,6 +307,9 @@ export function buildArticleJsonLd(opts: {
   author: string;
   /** Date ISO `YYYY-MM-DD` de dernière mise à jour éditoriale. */
   dateModified: string;
+  /** Date ISO de publication ; à défaut, on retombe sur `dateModified` (on ne
+   * track pas de date de création séparée — un guide neuf a les deux égales). */
+  datePublished?: string;
   image?: string;
 }): JsonLdNode {
   const safeLang = normalizeLang(opts.lang);
@@ -301,6 +321,7 @@ export function buildArticleJsonLd(opts: {
     description: opts.description,
     author: { '@type': 'Person', name: opts.author },
     publisher: { '@id': PUBLISHER_ID },
+    datePublished: opts.datePublished ?? opts.dateModified,
     dateModified: opts.dateModified,
     inLanguage: LANGUAGES[safeLang].htmlLang,
     mainEntityOfPage: { '@type': 'WebPage', '@id': url, isPartOf: { '@id': WEBSITE_ID } },

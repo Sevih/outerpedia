@@ -36,7 +36,8 @@ interface VersionTeams {
 
 export default async function PrototypeEx78Guide({ lang, guide }: GuideContentProps) {
   const t = await getT(lang);
-  const ctx: ParseCtx = { lang, t };
+  // Strict : une référence de contenu inconnue casse le build (pas de rouge).
+  const ctx: ParseCtx = { lang, t, strict: true };
   const newestLabel = guide.versions.length
     ? guideVersionLabel(guide.versions[0], lang)
     : undefined;
