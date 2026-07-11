@@ -1,0 +1,177 @@
+{
+  "intro": {
+    "en": "Water-element Striker boss featured in the Dimensional Singularity rotation. Buff/debuff manipulation mechanics: dispels the leftmost target's buffs, cleanses its own debuffs, and takes +100% damage from targets with Critical Damage Increase.",
+    "jp": "次元特異点ローテーションに登場する水属性ストライカーボス。バフ/デバフ操作のメカニクス：最左の対象の強化効果を解除し、自分の弱体効果を浄化、会心ダメージ増加を保有する対象から受けるダメージが+100%。",
+    "kr": "차원 특이점 로테이션에 등장하는 물속성 스트라이커 보스. 강화/약화 효과 조작 메커닉: 가장 좌측 대상의 강화 효과를 해제하고, 자신의 약화 효과를 정화하며, 치명 피해 증가를 보유한 대상에게 받는 피해가 +100%.",
+    "zh": "出现在次元奇点轮换中的水属性突击型Boss。Buff/Debuff操作机制：解除最左侧目标的强化效果，净化自身弱化效果，受到持有暴击伤害提升的目标的伤害+100%。",
+    "fr": "Boss Striker d'élément Water présent dans la rotation de la Singularité Dimensionnelle. Mécaniques de manipulation de buffs/debuffs : dissipe les buffs de la cible la plus à gauche, purifie ses propres debuffs et subit +100% de dégâts de la part des cibles ayant une Augmentation de Dégâts Critiques."
+  },
+  "tips": [
+    {
+      "preset": "strategy",
+      "items": [
+        {
+          "en": "{B/BT_STAT|ST_CRITICAL_DMG_RATE} on the team at all times. Without it, the boss gains +10% {B/BT_ACTION_GAUGE} every time a target ends its turn.",
+          "jp": "チームに{B/BT_STAT|ST_CRITICAL_DMG_RATE}を常時維持する。保有していない対象の行動終了時、ボスは{B/BT_ACTION_GAUGE}+10%を得る。",
+          "kr": "팀에 {B/BT_STAT|ST_CRITICAL_DMG_RATE}를 항상 유지하세요. 보유하지 않은 대상이 행동을 종료할 때마다 보스가 {B/BT_ACTION_GAUGE}+10%를 얻습니다.",
+          "zh": "队伍始终保持{B/BT_STAT|ST_CRITICAL_DMG_RATE}。未持有时，每当目标行动结束Boss获得+10% {B/BT_ACTION_GAUGE}。",
+          "fr": "{B/BT_STAT|ST_CRITICAL_DMG_RATE} sur l'équipe en permanence. Sans cela, le Boss gagne +10% de {B/BT_ACTION_GAUGE} chaque fois qu'une cible termine son tour."
+        },
+        {
+          "en": "Keep the boss debuffed at all times — without any debuff on it, WG DMG dealt to the boss is reduced by 50%.",
+          "jp": "ボスを常に弱体効果で覆う。弱体効果がない状態だと、ボスへのWGダメージが50%減少する。",
+          "kr": "보스에게 항상 약화 효과를 유지하세요. 약화 효과가 없으면 보스에게 주는 WG 피해가 50% 감소합니다.",
+          "zh": "始终保持Boss身上有弱化效果。若Boss未持有任何弱化效果，对Boss造成的WG伤害减少50%。",
+          "fr": "Maintenez le Boss sous debuff en permanence — sans aucun debuff sur lui, les dégâts de WG infligés au Boss sont réduits de 50%."
+        },
+        {
+          "en": "Place a {C/Defender} on the leftmost slot so the boss won't {B/BT_REMOVE_DEBUFF} on S1.",
+          "jp": "{C/Defender}を最も左側に配置し、ボスがS1で{B/BT_REMOVE_DEBUFF}を発動しないようにする。",
+          "kr": "{C/Defender}를 가장 좌측에 배치해 보스가 S1에서 {B/BT_REMOVE_DEBUFF}를 사용하지 못하게 하세요.",
+          "zh": "在最左侧放置{C/Defender}，避免Boss在S1触发{B/BT_REMOVE_DEBUFF}。",
+          "fr": "Placez un {C/Defender} sur l'emplacement le plus à gauche pour empêcher le Boss d'utiliser {B/BT_REMOVE_DEBUFF} sur son S1."
+        },
+        {
+          "en": "Prevent the boss from self-buffing otherwise it gains 20% {S/PEN%}",
+          "jp": "ボスが自身に強化効果を付与するのを阻止する。保有時、{S/PEN%}+20%を得る。",
+          "kr": "보스가 자신에게 강화 효과를 얻지 못하게 하세요. 보유 시 {S/PEN%} +20%를 얻습니다.",
+          "zh": "阻止Boss给自身附加强化效果，否则将获得+20% {S/PEN%}。",
+          "fr": "Empêchez le Boss de se buffer lui-même, sinon il gagne 20% de {S/PEN%}"
+        }
+      ]
+    }
+  ],
+  "teams": [
+    {
+      "preset": "general",
+      "groups": [
+        {
+          "characters": ["Kappa"],
+          "reason": {
+            "en": "{C/Defender} with teamwide {B/BT_BARRIER} and {D/BT_REMOVE_BUFF} in one slot.",
+            "jp": "{C/Defender}。全体{B/BT_BARRIER}と{D/BT_REMOVE_BUFF}を1枠で兼任。",
+            "kr": "{C/Defender}로 전체 {B/BT_BARRIER}와 {D/BT_REMOVE_BUFF}를 한 슬롯에서 담당.",
+            "zh": "{C/Defender}，一格兼具全队{B/BT_BARRIER}与{D/BT_REMOVE_BUFF}。",
+            "fr": "{C/Defender} apportant {B/BT_BARRIER} à toute l'équipe et {D/BT_REMOVE_BUFF} en un seul emplacement."
+          }
+        },
+        {
+          "characters": [
+            "Summer Knight's Dream Ember",
+            "Omega Nadja",
+            "Luna",
+            "Core Fusion Veronica"
+          ],
+          "reason": {
+            "en": "Other viable defender option.",
+            "jp": "他の{C/Defender}の選択肢。",
+            "kr": "다른 가능한 {C/Defender} 선택지.",
+            "zh": "其他可选的{C/Defender}。",
+            "fr": "Autre option de défenseur viable."
+          }
+        },
+        {
+          "characters": ["Charlotte"],
+          "reason": {
+            "en": "{B/BT_STAT|ST_CRITICAL_DMG_RATE} buffer.",
+            "jp": "{B/BT_STAT|ST_CRITICAL_DMG_RATE}バッファー。",
+            "kr": "{B/BT_STAT|ST_CRITICAL_DMG_RATE} 버퍼.",
+            "zh": "{B/BT_STAT|ST_CRITICAL_DMG_RATE}增益型。",
+            "fr": "Buffeur de {B/BT_STAT|ST_CRITICAL_DMG_RATE}."
+          }
+        },
+        {
+          "characters": ["Monad Eva", "Viella"],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP} and AP battery. {P/Monad Eva} additionally provides {B/BT_REVIVAL}.",
+            "jp": "{B/BT_CALL_BACKUP}とAPバッテリー。{P/Monad Eva}は加えて{B/BT_REVIVAL}を提供する。",
+            "kr": "{B/BT_CALL_BACKUP} 및 AP 배터리. {P/Monad Eva}는 추가로 {B/BT_REVIVAL}를 제공합니다.",
+            "zh": "{B/BT_CALL_BACKUP}与AP电池。{P/Monad Eva}额外提供{B/BT_REVIVAL}。",
+            "fr": "{B/BT_CALL_BACKUP} et batterie d'AP. {P/Monad Eva} apporte en plus {B/BT_REVIVAL}."
+          }
+        },
+        {
+          "characters": ["Ryu Lion", "Ame", "Rey", "Mystic Sage Ame"],
+          "reason": {
+            "en": "Main DPS options.",
+            "jp": "メインDPSの候補。",
+            "kr": "메인 딜러 후보.",
+            "zh": "主C候选。",
+            "fr": "Options de DPS principal."
+          }
+        }
+      ]
+    },
+    {
+      "character": "Midnight Rush Skadi",
+      "groups": [
+        {
+          "characters": ["Midnight Rush Skadi"],
+          "reason": {
+            "en": "Solo DPS — requires some +15 armor pieces and the {AS/Lifesteal Set}.",
+            "jp": "単騎DPS — +15の防具数枚と{AS/Lifesteal Set}が必要。",
+            "kr": "단독 딜러 — +15 방어구 몇 개와 {AS/Lifesteal Set}가 필요합니다.",
+            "zh": "单核主C — 需要数件+15防具与{AS/Lifesteal Set}。",
+            "fr": "DPS solo — nécessite quelques pièces d'armure +15 et le {AS/Lifesteal Set}."
+          }
+        },
+        {
+          "characters": ["Eris"],
+          "reason": {
+            "en": "Pick 3. EE grants {B/BT_STAT|ST_CRITICAL_DMG_RATE} to {C/Striker} allies. Cast S2 once, then let her die.",
+            "jp": "3体から選択。EEで{C/Striker}味方に{B/BT_STAT|ST_CRITICAL_DMG_RATE}を付与する。S2を1回撃ってから倒れさせる。",
+            "kr": "3명 중 선택. EE로 {C/Striker} 아군에게 {B/BT_STAT|ST_CRITICAL_DMG_RATE}을 부여합니다. S2를 한 번 사용한 뒤 사망시키세요.",
+            "zh": "三选一。EE为{C/Striker}盟友提供{B/BT_STAT|ST_CRITICAL_DMG_RATE}。使用一次S2后让她阵亡。",
+            "fr": "À choisir parmi 3. L'EE octroie {B/BT_STAT|ST_CRITICAL_DMG_RATE} aux alliés {C/Striker}. Lancez son S2 une fois puis laissez-la mourir."
+          }
+        },
+        {
+          "characters": ["Tamamo-no-Mae"],
+          "reason": {
+            "en": "Pick 3. Boss damage bonus for {E/Fire}-element allies. Can leave the stage as soon as her buffs are applied.",
+            "jp": "3体から選択。{E/Fire}属性味方のボスダメージボーナス。バフを付与し次第退場可能。",
+            "kr": "3명 중 선택. {E/Fire} 속성 아군의 보스 피해 보너스. 버프 부여 후 바로 퇴장 가능합니다.",
+            "zh": "三选一。为{E/Fire}属性盟友提供Boss伤害加成。附加增益后可立即退场。",
+            "fr": "À choisir parmi 3. Bonus de dégâts au Boss pour les alliés {E/Fire}. Peut quitter la scène dès que ses buffs sont appliqués."
+          }
+        },
+        {
+          "characters": ["Mystic Sage Ame"],
+          "reason": {
+            "en": "Pick 3. EE increases damage to bosses. Stacks {D/BT_STAT|ST_DEF} down and Transcend buffs (6★ damage increase); let her die after reaching 5 stacks.",
+            "jp": "3体から選択。EEでボスへのダメージが増加。{D/BT_STAT|ST_DEF}減少と超越バフ(6★でダメージ増加)を蓄積し、5スタック到達後に倒れさせる。",
+            "kr": "3명 중 선택. EE로 보스 피해 증가. {D/BT_STAT|ST_DEF} 감소와 초월 버프(6★ 피해 증가)를 누적하고, 5중첩에 도달한 뒤 사망시키세요.",
+            "zh": "三选一。EE提升对Boss的伤害。叠加{D/BT_STAT|ST_DEF}降低与超越增益(6★伤害提升)，叠满5层后让她阵亡。",
+            "fr": "À choisir parmi 3. L'EE augmente les dégâts aux Boss. Empile la réduction de {D/BT_STAT|ST_DEF} et des buffs de Transcend (6★ hausse de dégâts) ; laissez-la mourir après avoir atteint 5 stacks."
+          }
+        },
+        {
+          "characters": ["Monad Eva"],
+          "reason": {
+            "en": "Pick 3. +20% Max HP transcend bonus at 4★, {B/BT_CALL_BACKUP} dual attacks while alive. {P/Primine} or another {C/Healer|Reliever} can substitute.",
+            "jp": "3体から選択。4★の超越で+20% 最大HPボーナス、生存中は{B/BT_CALL_BACKUP}の連携攻撃。{P/Primine}や他の{C/Healer|Reliever}で代替可能。",
+            "kr": "3명 중 선택. 4★ 초월로 +20% 최대 체력 보너스, 생존 중 {B/BT_CALL_BACKUP} 연계 공격. {P/Primine} 또는 다른 {C/Healer|Reliever}로 대체 가능.",
+            "zh": "三选一。4★超越提供+20%最大生命值加成，存活时提供{B/BT_CALL_BACKUP}连携攻击。可用{P/Primine}或其他{C/Healer|Reliever}替代。",
+            "fr": "À choisir parmi 3. Bonus de +20% PV max via Transcend à 4★, attaques doubles {B/BT_CALL_BACKUP} tant qu'elle est en vie. {P/Primine} ou un autre {C/Healer|Reliever} peut la remplacer."
+          }
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "platform": "youtube",
+      "id": "z3i9A2EHwZ8",
+      "title": "OUTERPLANE - DELTA TEAM VS SINGULARITY BOSS - DRAGON ",
+      "author": "Zeroceless",
+      "label": "Rank S+"
+    },
+    {
+      "platform": "youtube",
+      "id": "8c3Ftx-y2pA",
+      "title": "OUTERPLANE - RYU TEAM VS SINGULARITY BOSS - DRAGON ",
+      "author": "Zeroceless",
+      "label": "Rank SS+"
+    }
+  ]
+}

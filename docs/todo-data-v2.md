@@ -5,6 +5,21 @@ de la pipeline V2 (`pipeline/run.ts`, 30 steps) + les JSON data à la main.
 
 ---
 
+## ⛔ EN ATTENTE — régénération + promotion de `glossaries.json`
+
+Le build est ROUGE tant que ce fichier n'est pas régénéré et promu. Il apportera
+**trois** choses, toutes déjà écrites côté générateur :
+
+- [ ] **clés `_IR`** (variantes INDISSIPABLES des statuts) — dérivées
+      génériquement (43 paires normal→indissipable, 173 clés). Sans elles, le
+      tag `{D/BT_STAT|ST_CRITICAL_RATE_IR}` du guide `vi-e-11-a` ne résout pas et
+      casse le build SSG. Le dialecte `_IR` est LÉGITIME (la V2 l'utilise 175
+      fois) : ne rien remapper dans les contenus.
+- [ ] **`rankOptions`** — passifs de palier résolus. Sans eux, `BossStats`
+      n'affiche simplement aucun passif (dégradation muette assumée : mieux vaut
+      ne rien dire qu'inventer).
+- [ ] **`bossQuirkMods`** — réductions EFF/RES des quirks de compte.
+
 ## 👾 Monstres à extraire (à la demande — `pnpm datagen:extract-entity`)
 
 `data/generated/monsters.json` ne contient que les monstres réellement portés
@@ -99,6 +114,11 @@ Vues faites :
       en variante **lumière ou ténèbres** — même nom et même sprite, mais élément
       et donjon distincts (`60000010` Urd lumière vs `60000013` Urd ténèbres). Ce
       ne sont donc PAS des doublons ; la bibliothèque les garde séparés.
+      Les **13 guides** de la catégorie sont portés, et le bloc « comment marche
+      ce mode » est devenu une DONNÉE de catégorie (`GUIDE_CATEGORIES[…].info`,
+      rendu par `<ModeInfo>`) : tout mode qui veut le sien remplit un champ. En
+      V2, c'était une fonction non exportée enterrée dans le fichier de liste du
+      seul mode qui en avait un.
 
 Vues encore à faire — ce qui manque pour chacune :
 

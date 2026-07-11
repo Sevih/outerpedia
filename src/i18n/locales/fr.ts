@@ -577,17 +577,6 @@ const fr: Record<TranslationKey, string> = {
 
   // Catégories de guides : libellés + descriptions dans guide-categories.ts
   // (source unique, LocalizedText) — plus de clés de locale par catégorie.
-  'guides.singularity.info.intro':
-    'Dimensional Singularity est un mode de fin de jeu accessible depuis Monad Gate en passant en Dimensional Singularity Mode. Un Boss Singularity différent est actif chaque jour du mercredi au samedi, et votre score quotidien détermine votre classement et vos récompenses.',
-  'guides.singularity.info.unlock':
-    'Condition de déblocage : terminer la True Ending de Monad Gate Depth 1.',
-  'guides.singularity.info.schedule':
-    'Ouvert chaque semaine du mercredi 00:00 UTC au samedi 23:59 UTC. Le Boss cible change chaque jour à 00:00 UTC. 2 entrées par jour.',
-  'guides.singularity.info.feature.repel': 'Singularity Repel : lance le combat de Boss du jour.',
-  'guides.singularity.info.feature.ascension':
-    "Singularity Ascension Device : fait ascensionner un équipement ayant atteint l'Enhancement max et le Reforge max. L'ascension augmente la/les stat(s) principale(s) de l'équipement et octroie 3 tentatives de Reforge supplémentaires ; atteindre Enhancement +15 ajoute alors une stat bonus aléatoire (le type dépend du slot, la valeur est aléatoire).",
-  'guides.singularity.info.feature.ranking':
-    'Ranking Report : récupérez vos récompenses quotidiennes en fonction de votre score de la veille.',
   // Rotation : UN boss par jour (mer→sam), puis 3 jours de récompense.
   // La V2 affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
   'guides.singularity.week.title': 'Actif cette semaine',
@@ -612,6 +601,10 @@ const fr: Record<TranslationKey, string> = {
   'guides.season.last': 'Dernière saison {date}',
 
   'guides.tips.tactical': 'Conseils tactiques',
+  // Gabarits de titre de section : le SUJET (perso / élément / effet) vient de
+  // la donnée localisée, jamais d'un LangMap recopié par guide (cf. V2).
+  'guides.tips.for': 'Stratégie {name}',
+  'guides.team.for': 'Équipe {name}',
   'guides.tips.strategy': 'Stratégie',
   'guides.tips.general': 'Conseils généraux',
   'guides.tips.important': 'Important',
@@ -627,6 +620,12 @@ const fr: Record<TranslationKey, string> = {
   'guides.strategy_guide': 'Guide de stratégie',
   'guides.boss_display.immunities': 'Immunités',
   'guides.boss_display.skills': 'Skills',
+  // Mode à SCORE : le palier est une TRANCHE DE DÉGÂTS, sa « barre » n'est
+  // pas les PV du boss (cf. BossStats).
+  'guides.boss_display.rank': 'Palier',
+  'guides.boss_display.damage': 'Dégâts à infliger',
+  'guides.boss_display.rank_bar': 'Barre du palier',
+  'guides.boss_display.rank_options': 'Passifs du palier',
   'guides.adventure.season': 'Saison {n}',
   'guides.adventure.spoiler_free': 'Sans spoiler',
   'guides.adventure.spoiler': 'Afficher les noms',

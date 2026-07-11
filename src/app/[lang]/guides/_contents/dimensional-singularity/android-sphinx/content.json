@@ -1,0 +1,197 @@
+{
+  "intro": {
+    "en": "{E/Water} {C/Striker} boss featured in the Dimensional Singularity rotation. Poison check: ignores 30% Defense while not {D/BT_DOT_POISON}, and takes +100% damage when {D/BT_DOT_POISON}. Self-extends its own buffs via S1 and hoards {B/BT_INVINCIBLE} on its Ultimate. Immune to {D/BT_REMOVE_BUFF} — counter buff hoarding with {D/BT_SEALED} to tick down durations. Berserk triggers every 7 enemy actions and applies Crit Damage Reduction on all enemies.",
+    "jp": "次元特異点ローテーションに登場する{E/Water}属性{C/Striker}ボス。中毒チェック：{D/BT_DOT_POISON}を保有しない場合、防御力を30%無視。{D/BT_DOT_POISON}保有時は受けるダメージ+100%。S1で自分の強化効果を延長し、必殺技で{B/BT_INVINCIBLE}を抱える。{D/BT_REMOVE_BUFF}に免疫 — {D/BT_SEALED}でバフを徐々に剥がす。狂暴化は敵が7回行動するたびに発動し、敵全体に会心ダメージ減少を付与する。",
+    "kr": "차원 특이점 로테이션에 등장하는 {E/Water} 속성 {C/Striker} 보스. 중독 체크: {D/BT_DOT_POISON}을 보유하지 않으면 방어력 30% 무시, {D/BT_DOT_POISON} 보유 시 받는 피해 +100%. S1으로 자신의 강화 효과를 연장하고 필살기로 {B/BT_INVINCIBLE}을 유지합니다. {D/BT_REMOVE_BUFF}에 면역 — {D/BT_SEALED}로 버프 지속시간을 점차 깎아내세요. 광폭화는 적이 7회 행동할 때마다 발동하며 적 전체에게 치명 피해 감소를 부여합니다.",
+    "zh": "出现在次元奇点轮换中的{E/Water}属性{C/Striker}Boss。中毒检定：未持有{D/BT_DOT_POISON}时无视30%防御力，持有{D/BT_DOT_POISON}时受到伤害+100%。S1自我延长强化效果持续时间，必杀技维持{B/BT_INVINCIBLE}。免疫{D/BT_REMOVE_BUFF} — 使用{D/BT_SEALED}逐回合削减Boss强化效果。狂暴化由敌方每7次行动触发，对全体敌人附加暴击伤害减少效果。",
+    "fr": "Boss {E/Water} {C/Striker} présent dans la rotation de la Singularité Dimensionnelle. Contrôle par poison : ignore 30% de la Défense tant qu'il n'a pas {D/BT_DOT_POISON}, et subit +100% de dégâts lorsqu'il est affecté par {D/BT_DOT_POISON}. Prolonge lui-même ses propres buffs via S1 et accumule {B/BT_INVINCIBLE} avec son Ultime. Immunisé à {D/BT_REMOVE_BUFF} — contrez l'accumulation de buffs avec {D/BT_SEALED} pour faire défiler les durées. Berserk se déclenche toutes les 7 actions ennemies et applique une Réduction de Dégâts Critiques à tous les ennemis."
+  },
+  "tips": [
+    {
+      "preset": "general",
+      "items": [
+        {
+          "en": "{D/BT_DOT_POISON} on the boss = +100% damage taken. Without {D/BT_DOT_POISON}, the boss ignores 30% of Defense on its attacks.",
+          "jp": "ボスに{D/BT_DOT_POISON}を付与すると受けるダメージ+100%。{D/BT_DOT_POISON}保有なし時はボスの全攻撃が防御力を30%無視する。",
+          "kr": "보스에게 {D/BT_DOT_POISON}을 부여하면 받는 피해 +100%. {D/BT_DOT_POISON}이 없으면 보스의 모든 공격이 방어력 30%를 무시합니다.",
+          "zh": "对Boss附加{D/BT_DOT_POISON}使其受到伤害+100%。未持有{D/BT_DOT_POISON}时，Boss所有攻击无视30%防御力。",
+          "fr": "{D/BT_DOT_POISON} sur le Boss = +100% de dégâts subis. Sans {D/BT_DOT_POISON}, le Boss ignore 30% de la Défense sur ses attaques."
+        },
+        {
+          "en": "Boss self-extends its own buffs via S1 and gains {B/BT_INVINCIBLE} on its Ultimate. Immune to {D/BT_REMOVE_BUFF} — counter buff hoarding with {D/BT_SEALED} to tick down durations.",
+          "jp": "ボスはS1で自分の強化効果を延長し、必殺技で{B/BT_INVINCIBLE}を獲得する。{D/BT_REMOVE_BUFF}に免疫 — {D/BT_SEALED}でバフを徐々に剥がす。",
+          "kr": "보스는 S1으로 자신의 강화 효과를 연장하고 필살기로 {B/BT_INVINCIBLE}을 획득합니다. {D/BT_REMOVE_BUFF}에 면역 — {D/BT_SEALED}로 버프 지속시간을 점차 깎아내세요.",
+          "zh": "Boss通过S1自我延长强化效果并在必杀技中获得{B/BT_INVINCIBLE}。免疫{D/BT_REMOVE_BUFF} — 使用{D/BT_SEALED}逐回合削减Boss强化效果。",
+          "fr": "Le Boss prolonge lui-même ses propres buffs via S1 et gagne {B/BT_INVINCIBLE} avec son Ultime. Immunisé à {D/BT_REMOVE_BUFF} — contrez l'accumulation de buffs avec {D/BT_SEALED} pour faire défiler les durées."
+        },
+        {
+          "en": "Berserk triggers every 7 enemy actions and applies Crit Damage Reduction on all enemies — favor non-crit / DoT carries.",
+          "jp": "狂暴化は敵が7回行動するたびに発動し、敵全体に会心ダメージ減少を付与する — 非会心/DoTキャリアが有利。",
+          "kr": "광폭화는 적이 7회 행동할 때마다 발동하며 적 전체에게 치명 피해 감소를 부여합니다 — 비치명/DoT 메인 딜러가 유리합니다.",
+          "zh": "狂暴化由敌方每7次行动触发，对全体敌人附加暴击伤害减少 — 非暴击/DoT主C占优。",
+          "fr": "Berserk se déclenche toutes les 7 actions ennemies et applique une Réduction de Dégâts Critiques à tous les ennemis — privilégiez des carries non-critiques / DoT."
+        }
+      ]
+    },
+    {
+      "character": "Gnosis Beth",
+      "items": [
+        {
+          "en": "{P/Gnosis Beth} carries with {D/ETERNAL_BLEEDING}.",
+          "jp": "{P/Gnosis Beth}を{D/ETERNAL_BLEEDING}でキャリーする。",
+          "kr": "{P/Gnosis Beth}를 {D/ETERNAL_BLEEDING}로 운영하세요.",
+          "zh": "以{P/Gnosis Beth}为主C，使用{D/ETERNAL_BLEEDING}。",
+          "fr": "{P/Gnosis Beth} porte l'équipe avec {D/ETERNAL_BLEEDING}."
+        },
+        {
+          "en": "Embark characters with {D/BT_SEALED} and {D/BT_EXTEND_DEBUFF}. {C/Ranger} with {I-W/Sacreed Edge} can be a source of {D/BT_DOT_POISON}.",
+          "jp": "{D/BT_SEALED}と{D/BT_EXTEND_DEBUFF}を持つキャラクターを編成する。{I-W/Sacreed Edge}を装備した{C/Ranger}は{D/BT_DOT_POISON}の供給源となる。",
+          "kr": "{D/BT_SEALED}과 {D/BT_EXTEND_DEBUFF}을 보유한 캐릭터를 채용하세요. {I-W/Sacreed Edge}를 장착한 {C/Ranger}는 {D/BT_DOT_POISON}의 공급원이 될 수 있습니다.",
+          "zh": "携带具备{D/BT_SEALED}与{D/BT_EXTEND_DEBUFF}的角色。装备{I-W/Sacreed Edge}的{C/Ranger}可作为{D/BT_DOT_POISON}的来源。",
+          "fr": "Emmenez des personnages avec {D/BT_SEALED} et {D/BT_EXTEND_DEBUFF}. Un {C/Ranger} équipé de {I-W/Sacreed Edge} peut être une source de {D/BT_DOT_POISON}."
+        }
+      ]
+    },
+    {
+      "element": "earth",
+      "items": [
+        {
+          "en": "{P/Notia} stacks {D/BT_DOT_POISON} on the boss. Pair her with {E/Earth} dealers to also trigger elemental advantage.",
+          "jp": "{P/Notia}がボスに{D/BT_DOT_POISON}を蓄積する。{E/Earth}属性アタッカーと組ませて属性有利も発動させる。",
+          "kr": "{P/Notia}가 보스에게 {D/BT_DOT_POISON}을 누적시킵니다. {E/Earth} 속성 딜러와 함께 편성하면 속성 우위도 발동합니다.",
+          "zh": "{P/Notia}为Boss叠加{D/BT_DOT_POISON}。与{E/Earth}属性输出搭配可同时触发属性克制。",
+          "fr": "{P/Notia} empile {D/BT_DOT_POISON} sur le Boss. Associez-la à des DPS {E/Earth} pour aussi déclencher l'avantage élémentaire."
+        },
+        {
+          "en": "{P/Alice} and {P/Akari} apply {D/BT_SEALED}. {P/Alice} also increases {E/Earth} damage taken and applies {D/BT_STAT|ST_SPEED} and {D/BT_STAT|ST_BUFF_CHANCE}; {P/Akari} provides {D/BT_EXTEND_DEBUFF} plus {D/BT_STAT|ST_DEF} and {D/BT_STAT|ST_ATK}.",
+          "jp": "{P/Alice}と{P/Akari}は{D/BT_SEALED}を付与する。{P/Alice}はさらに被{E/Earth}ダメージを増加させ、{D/BT_STAT|ST_SPEED}と{D/BT_STAT|ST_BUFF_CHANCE}を付与。{P/Akari}は{D/BT_EXTEND_DEBUFF}に加え{D/BT_STAT|ST_DEF}と{D/BT_STAT|ST_ATK}を付与する。",
+          "kr": "{P/Alice}와 {P/Akari}는 {D/BT_SEALED}을 부여합니다. {P/Alice}는 추가로 받는 {E/Earth} 피해를 증가시키고 {D/BT_STAT|ST_SPEED}과 {D/BT_STAT|ST_BUFF_CHANCE}을 부여하며, {P/Akari}는 {D/BT_EXTEND_DEBUFF}과 함께 {D/BT_STAT|ST_DEF}와 {D/BT_STAT|ST_ATK}을 제공합니다.",
+          "zh": "{P/Alice}与{P/Akari}施加{D/BT_SEALED}。{P/Alice}还能提升Boss受到的{E/Earth}伤害并附加{D/BT_STAT|ST_SPEED}与{D/BT_STAT|ST_BUFF_CHANCE}；{P/Akari}提供{D/BT_EXTEND_DEBUFF}以及{D/BT_STAT|ST_DEF}与{D/BT_STAT|ST_ATK}。",
+          "fr": "{P/Alice} et {P/Akari} appliquent {D/BT_SEALED}. {P/Alice} augmente aussi les dégâts {E/Earth} subis et applique {D/BT_STAT|ST_SPEED} et {D/BT_STAT|ST_BUFF_CHANCE} ; {P/Akari} apporte {D/BT_EXTEND_DEBUFF} ainsi que {D/BT_STAT|ST_DEF} et {D/BT_STAT|ST_ATK}."
+        },
+        {
+          "en": "{P/Ryu Lion}, {P/Ame}, {P/Rey} or {P/Noa} as the {E/Earth} damage dealer. {P/Ryu Lion} is preferred for her {B/BT_STAT|ST_SPEED} buff and as an extra source of {D/BT_SEALED}.",
+          "jp": "{E/Earth}属性アタッカーとして{P/Ryu Lion}、{P/Ame}、{P/Rey}、{P/Noa}を採用する。{P/Ryu Lion}は{B/BT_STAT|ST_SPEED}バフと追加の{D/BT_SEALED}供給源として推奨。",
+          "kr": "{E/Earth} 속성 딜러로 {P/Ryu Lion}, {P/Ame}, {P/Rey}, {P/Noa}를 채용하세요. {P/Ryu Lion}은 {B/BT_STAT|ST_SPEED} 버프와 추가 {D/BT_SEALED} 공급원으로 추천됩니다.",
+          "zh": "以{P/Ryu Lion}、{P/Ame}、{P/Rey}或{P/Noa}作为{E/Earth}属性输出。推荐{P/Ryu Lion}，因其提供{B/BT_STAT|ST_SPEED}增益并作为额外的{D/BT_SEALED}来源。",
+          "fr": "{P/Ryu Lion}, {P/Ame}, {P/Rey} ou {P/Noa} comme DPS {E/Earth}. {P/Ryu Lion} est préférée pour son buff de {B/BT_STAT|ST_SPEED} et comme source supplémentaire de {D/BT_SEALED}."
+        },
+        {
+          "en": "{P/Monad Eva} or {P/Viella} for {B/BT_CALL_BACKUP} dual attacks and healing. {P/Monad Eva} additionally provides {B/BT_REVIVAL}, while {P/Viella} adds more {D/BT_DOT_POISON}.",
+          "jp": "{B/BT_CALL_BACKUP}による連携攻撃と回復のために{P/Monad Eva}または{P/Viella}を編成する。{P/Monad Eva}は加えて{B/BT_REVIVAL}を、{P/Viella}はさらに{D/BT_DOT_POISON}を提供する。",
+          "kr": "{B/BT_CALL_BACKUP} 연계 공격과 회복을 위해 {P/Monad Eva} 또는 {P/Viella}를 편성하세요. {P/Monad Eva}는 추가로 {B/BT_REVIVAL}을, {P/Viella}는 더 많은 {D/BT_DOT_POISON}을 제공합니다.",
+          "zh": "编入{P/Monad Eva}或{P/Viella}以提供{B/BT_CALL_BACKUP}连携攻击与治疗。{P/Monad Eva}额外提供{B/BT_REVIVAL}，{P/Viella}则提供更多{D/BT_DOT_POISON}。",
+          "fr": "{P/Monad Eva} ou {P/Viella} pour les attaques doubles {B/BT_CALL_BACKUP} et les soins. {P/Monad Eva} apporte en plus {B/BT_REVIVAL}, tandis que {P/Viella} ajoute davantage de {D/BT_DOT_POISON}."
+        }
+      ]
+    }
+  ],
+  "teams": [
+    {
+      "character": "Gnosis Beth",
+      "groups": [
+        {
+          "characters": ["Gnosis Beth"],
+          "reason": {
+            "en": "Main DPS for the GBeth team.",
+            "jp": "GBeth編成のメインDPS。",
+            "kr": "GBeth 팀의 메인 딜러.",
+            "zh": "GBeth队伍的主C。",
+            "fr": "DPS principal pour l'équipe GBeth."
+          }
+        },
+        {
+          "characters": ["Akari"],
+          "reason": {
+            "en": "{D/BT_SEALED} and {D/BT_EXTEND_DEBUFF}. Can be a source of {D/BT_DOT_POISON} if equiped with {I-W/Sacreed Edge}.",
+            "jp": "{D/BT_SEALED}と{D/BT_EXTEND_DEBUFF}を提供。{I-W/Sacreed Edge}を装備すれば{D/BT_DOT_POISON}の供給源にもなる。",
+            "kr": "{D/BT_SEALED}과 {D/BT_EXTEND_DEBUFF}을 제공. {I-W/Sacreed Edge}를 장착하면 {D/BT_DOT_POISON}의 공급원이 될 수 있습니다.",
+            "zh": "提供{D/BT_SEALED}与{D/BT_EXTEND_DEBUFF}。装备{I-W/Sacreed Edge}时可作为{D/BT_DOT_POISON}的来源。",
+            "fr": "{D/BT_SEALED} et {D/BT_EXTEND_DEBUFF}. Peut être une source de {D/BT_DOT_POISON} si équipé de {I-W/Sacreed Edge}."
+          }
+        },
+        {
+          "characters": ["Roxie"],
+          "reason": {
+            "en": "Can take many turn thanks to her {B/BT_ACTION_GAUGE} and {I-A/Dies Irae}. Provide {D/BT_EXTEND_DEBUFF}.",
+            "jp": "{B/BT_ACTION_GAUGE}と{I-A/Dies Irae}で多くのターンを取れる。{D/BT_EXTEND_DEBUFF}を提供する。",
+            "kr": "{B/BT_ACTION_GAUGE}과 {I-A/Dies Irae} 덕분에 많은 턴을 가져갈 수 있습니다. {D/BT_EXTEND_DEBUFF}을 제공합니다.",
+            "zh": "凭借{B/BT_ACTION_GAUGE}与{I-A/Dies Irae}可获得大量回合。提供{D/BT_EXTEND_DEBUFF}。",
+            "fr": "Peut jouer de nombreux tours grâce à sa {B/BT_ACTION_GAUGE} et à {I-A/Dies Irae}. Apporte {D/BT_EXTEND_DEBUFF}."
+          }
+        },
+        {
+          "characters": ["Monad Eva", "Viella"],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP} and AP battery. {P/Monad Eva} additionally provides {B/BT_REVIVAL} and {P/Viella} {D/BT_DOT_POISON}.",
+            "jp": "{B/BT_CALL_BACKUP}とAPバッテリー。{P/Monad Eva}は加えて{B/BT_REVIVAL}を、{P/Viella}は{D/BT_DOT_POISON}を提供する。",
+            "kr": "{B/BT_CALL_BACKUP} 및 AP 배터리. {P/Monad Eva}는 추가로 {B/BT_REVIVAL}을, {P/Viella}는 {D/BT_DOT_POISON}을 제공합니다.",
+            "zh": "{B/BT_CALL_BACKUP}与AP电池。{P/Monad Eva}额外提供{B/BT_REVIVAL}，{P/Viella}提供{D/BT_DOT_POISON}。",
+            "fr": "{B/BT_CALL_BACKUP} et batterie d'AP. {P/Monad Eva} apporte en plus {B/BT_REVIVAL} et {P/Viella} {D/BT_DOT_POISON}."
+          }
+        }
+      ]
+    },
+    {
+      "element": "earth",
+      "groups": [
+        {
+          "characters": ["Notia"],
+          "reason": {
+            "en": "Main {D/BT_DOT_POISON} source, stacking it on the boss.",
+            "jp": "主な{D/BT_DOT_POISON}供給源として、ボスに中毒を蓄積する。",
+            "kr": "주요 {D/BT_DOT_POISON} 공급원으로, 보스에게 중독을 누적시킵니다.",
+            "zh": "主要的{D/BT_DOT_POISON}来源，为Boss叠加中毒。",
+            "fr": "Source principale de {D/BT_DOT_POISON}, l'empilant sur le Boss."
+          }
+        },
+        {
+          "characters": ["Alice", "Akari"],
+          "reason": {
+            "en": "{D/BT_SEALED} to tick down boss buffs. {P/Alice} increases {E/Earth} damage taken and applies {D/BT_STAT|ST_SPEED} and {D/BT_STAT|ST_BUFF_CHANCE}; {P/Akari} provides {D/BT_EXTEND_DEBUFF} with {D/BT_STAT|ST_DEF} and {D/BT_STAT|ST_ATK}.",
+            "jp": "{D/BT_SEALED}でボスのバフを削る。{P/Alice}は被{E/Earth}ダメージを増加させ{D/BT_STAT|ST_SPEED}と{D/BT_STAT|ST_BUFF_CHANCE}を付与。{P/Akari}は{D/BT_EXTEND_DEBUFF}と{D/BT_STAT|ST_DEF}・{D/BT_STAT|ST_ATK}を付与する。",
+            "kr": "{D/BT_SEALED}으로 보스 버프를 깎습니다. {P/Alice}는 받는 {E/Earth} 피해를 증가시키고 {D/BT_STAT|ST_SPEED}과 {D/BT_STAT|ST_BUFF_CHANCE}을 부여하며, {P/Akari}는 {D/BT_EXTEND_DEBUFF}과 {D/BT_STAT|ST_DEF}·{D/BT_STAT|ST_ATK}을 제공합니다.",
+            "zh": "以{D/BT_SEALED}削减Boss强化效果。{P/Alice}提升受到的{E/Earth}伤害并附加{D/BT_STAT|ST_SPEED}与{D/BT_STAT|ST_BUFF_CHANCE}；{P/Akari}提供{D/BT_EXTEND_DEBUFF}及{D/BT_STAT|ST_DEF}·{D/BT_STAT|ST_ATK}。",
+            "fr": "{D/BT_SEALED} pour faire défiler les buffs du Boss. {P/Alice} augmente les dégâts {E/Earth} subis et applique {D/BT_STAT|ST_SPEED} et {D/BT_STAT|ST_BUFF_CHANCE} ; {P/Akari} apporte {D/BT_EXTEND_DEBUFF} avec {D/BT_STAT|ST_DEF} et {D/BT_STAT|ST_ATK}."
+          }
+        },
+        {
+          "characters": ["Ryu Lion", "Ame", "Rey", "Noa"],
+          "reason": {
+            "en": "{E/Earth} damage dealers. {P/Ryu Lion} is preferred for her {B/BT_STAT|ST_SPEED} buff and extra {D/BT_SEALED}.",
+            "jp": "{E/Earth}属性アタッカー。{P/Ryu Lion}は{B/BT_STAT|ST_SPEED}バフと追加の{D/BT_SEALED}を持つため推奨。",
+            "kr": "{E/Earth} 속성 딜러. {P/Ryu Lion}은 {B/BT_STAT|ST_SPEED} 버프와 추가 {D/BT_SEALED} 덕분에 추천됩니다.",
+            "zh": "{E/Earth}属性输出。推荐{P/Ryu Lion}，因其提供{B/BT_STAT|ST_SPEED}增益与额外的{D/BT_SEALED}。",
+            "fr": "DPS {E/Earth}. {P/Ryu Lion} est préférée pour son buff de {B/BT_STAT|ST_SPEED} et son {D/BT_SEALED} supplémentaire."
+          }
+        },
+        {
+          "characters": ["Monad Eva", "Viella"],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP} dual attacks and healing. {P/Monad Eva} adds {B/BT_REVIVAL}, {P/Viella} adds more {D/BT_DOT_POISON}.",
+            "jp": "{B/BT_CALL_BACKUP}による連携攻撃と回復。{P/Monad Eva}は{B/BT_REVIVAL}を、{P/Viella}はさらに{D/BT_DOT_POISON}を追加する。",
+            "kr": "{B/BT_CALL_BACKUP} 연계 공격과 회복. {P/Monad Eva}는 {B/BT_REVIVAL}을, {P/Viella}는 더 많은 {D/BT_DOT_POISON}을 추가합니다.",
+            "zh": "{B/BT_CALL_BACKUP}连携攻击与治疗。{P/Monad Eva}追加{B/BT_REVIVAL}，{P/Viella}追加更多{D/BT_DOT_POISON}。",
+            "fr": "Attaques doubles {B/BT_CALL_BACKUP} et soins. {P/Monad Eva} ajoute {B/BT_REVIVAL}, {P/Viella} ajoute davantage de {D/BT_DOT_POISON}."
+          }
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "platform": "youtube",
+      "id": "zT7d1IjcQs4",
+      "title": "Sphinx Guardian — Dimensional Singularity — Rank SSS++",
+      "author": "Sevih",
+      "label": "GBeth Team"
+    },
+    {
+      "platform": "youtube",
+      "id": "j2NwQQxPH6I",
+      "title": "Dimensional Singularity - Rey/Notia Team — Rank SSS++",
+      "author": "Baba Yaga",
+      "label": "Rey/Notia Team"
+    }
+  ]
+}

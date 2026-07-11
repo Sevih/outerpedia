@@ -540,15 +540,6 @@ const zh: Record<TranslationKey, string> = {
 
   // Catégories de guides : libellés + descriptions dans guide-categories.ts
   // (source unique, LocalizedText) — plus de clés de locale par catégorie.
-  'guides.singularity.info.intro':
-    '次元奇点是从单子门切换至「次元奇点模式」进入的终局内容。每周三到周六，每天会出现不同的奇点Boss，当日分数将决定排名与奖励。',
-  'guides.singularity.info.unlock': '解锁条件：通关单子门深层1的真结局。',
-  'guides.singularity.info.schedule':
-    '每周三00:00 UTC至周六23:59 UTC开放。目标Boss每日00:00 UTC更换。每日2次挑战机会。',
-  'guides.singularity.info.feature.repel': '奇点击退：开始当日的Boss战斗。',
-  'guides.singularity.info.feature.ascension':
-    '奇点升华装置：将达到最大强化和最大重铸的装备进行升华。升华会提升装备的主属性数值并获得+3次重铸机会；强化等级达到+15时还会附加一项随机额外属性（类型取决于装备槽位，数值随机）。',
-  'guides.singularity.info.feature.ranking': '排名报告：根据前一日分数领取每日奖励。',
   // Rotation : UN boss par jour (mer→sam), puis 3 jours de récompense.
   // La V2 affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
   'guides.singularity.week.title': '本周开放',
@@ -571,6 +562,10 @@ const zh: Record<TranslationKey, string> = {
   'guides.season.last': '上次开放 {date}',
 
   'guides.tips.tactical': '战术提示',
+  // Gabarits de titre de section : le SUJET (perso / élément / effet) vient de
+  // la donnée localisée, jamais d'un LangMap recopié par guide (cf. V2).
+  'guides.tips.for': '{name} 战术',
+  'guides.team.for': '{name} 队伍',
   'guides.tips.strategy': '策略',
   'guides.tips.general': '通用提示',
   'guides.tips.important': '重要',
@@ -586,6 +581,12 @@ const zh: Record<TranslationKey, string> = {
   'guides.strategy_guide': '攻略指南',
   'guides.boss_display.immunities': '免疫',
   'guides.boss_display.skills': '技能',
+  // Mode à SCORE : le palier est une TRANCHE DE DÉGÂTS, sa « barre » n'est
+  // pas les PV du boss (cf. BossStats).
+  'guides.boss_display.rank': '评级',
+  'guides.boss_display.damage': '所需伤害',
+  'guides.boss_display.rank_bar': '评级血条',
+  'guides.boss_display.rank_options': '评级被动',
   'guides.adventure.season': '第{n}季',
   'guides.adventure.spoiler_free': '无剧透',
   'guides.adventure.spoiler': '显示名称',

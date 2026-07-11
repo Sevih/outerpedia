@@ -6,7 +6,7 @@
  * `SkillsSection` que les fiches personnage. Composant SERVEUR.
  */
 import type { TranslationKey } from '@/i18n';
-import type { Lang } from '@/lib/i18n/config';
+import { LANGUAGES, type Lang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { img } from '@/lib/images';
@@ -26,6 +26,7 @@ import {
   monsterIconSrc,
   getBossQuirkMods,
   monsterSpawnContexts,
+  rankOptionLabels,
 } from '@/lib/data/monsters';
 import { SkillsSection } from '@/components/character/SkillsSection';
 import type { CardSkill } from '@/components/character/SkillCard';
@@ -46,6 +47,7 @@ export async function BossPanel({ monsterId, lang }: { monsterId: string; lang: 
 
   const t = await getT(lang);
   const name = lRec(monster.name, lang);
+  const spawns = monsterSpawnContexts(monster, lang);
   const skills = dedupSkills(getMonsterSkills(monster));
   const statuses = buildStatusMap(skills, lang);
 
@@ -117,9 +119,17 @@ export async function BossPanel({ monsterId, lang }: { monsterId: string; lang: 
       <BossStats
         stats={monster.stats}
         scales={getStatScales()}
-        spawns={monsterSpawnContexts(monster, lang)}
-        levelLabel={t('page.character.skill.level')}
+        spawns={spawns}
         quirkMods={getBossQuirkMods()}
+        locale={LANGUAGES[lang].htmlLang}
+        rankOptionLabels={rankOptionLabels(spawns, lang)}
+        labels={{
+          level: t('page.character.skill.level'),
+          rank: t('guides.boss_display.rank'),
+          damage: t('guides.boss_display.damage'),
+          rankBar: t('guides.boss_display.rank_bar'),
+          options: t('guides.boss_display.rank_options'),
+        }}
       />
 
       {immunities.length > 0 && (

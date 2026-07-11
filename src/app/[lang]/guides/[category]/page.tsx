@@ -16,10 +16,12 @@ import { img } from '@/lib/images';
 import {
   GUIDE_CATEGORIES,
   GUIDE_CATEGORY_SLUGS,
+  categoryInfo,
   isGuideCategory,
 } from '@/lib/data/guide-categories';
 import { listGuidesByCategory } from '@/lib/data/guides';
 import CategoryView from '@/components/guides/category-views';
+import { ModeInfo } from '@/components/guides/ModeInfo';
 
 export function generateStaticParams() {
   return LANGS.flatMap((lang) => GUIDE_CATEGORY_SLUGS.map((category) => ({ lang, category })));
@@ -57,6 +59,7 @@ export default async function GuideCategoryPage({
   const cat = GUIDE_CATEGORIES[category];
   const label = lRec(cat.label, lang);
   const guides = listGuidesByCategory(category);
+  const info = categoryInfo(category);
 
   const crumbLd = buildBreadcrumbJsonLd([
     { name: 'Outerpedia', url: buildUrl(lang, '/') },
@@ -98,6 +101,9 @@ export default async function GuideCategoryPage({
           contenu propre (la rotation de Singularity vaut d'être affichée même
           sans un seul guide). Court-circuiter ici la rendrait morte. */}
       <CategoryView lang={lang} category={category} guides={guides} />
+      {/* « Comment marche ce mode » — rendu ici, donc DISPONIBLE POUR TOUTE
+          catégorie qui déclare son `info`, quelle que soit sa vue. */}
+      {info && <ModeInfo info={info} lang={lang} />}
     </div>
   );
 }

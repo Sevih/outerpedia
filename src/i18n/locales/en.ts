@@ -565,16 +565,6 @@ const en = {
 
   // Catégories de guides : libellés + descriptions dans guide-categories.ts
   // (source unique, LocalizedText) — plus de clés de locale par catégorie.
-  'guides.singularity.info.intro':
-    'Dimensional Singularity is an endgame mode accessible from Monad Gate by switching to Dimensional Singularity Mode. A different Singularity boss is active each day from Wednesday to Saturday, and your daily score determines your ranking and rewards.',
-  'guides.singularity.info.unlock': 'Unlock condition: clear Monad Gate Depth 1 True Ending.',
-  'guides.singularity.info.schedule':
-    'Open every week from Wednesday 00:00 UTC to Saturday 23:59 UTC. The target boss changes daily at 00:00 UTC. 2 entries per day.',
-  'guides.singularity.info.feature.repel': 'Singularity Repel: launch the daily boss battle.',
-  'guides.singularity.info.feature.ascension':
-    "Singularity Ascension Device: ascend gear that has reached max Enhancement and max Reforge. Ascending boosts the gear's main stat(s) and grants 3 extra Reforge attempts; reaching Enhancement +15 then adds a random bonus stat (type depends on the slot, value is random).",
-  'guides.singularity.info.feature.ranking':
-    'Ranking Report: claim daily rewards based on your score the previous day.',
   // Rotation : UN boss par jour (mer→sam), puis 3 jours de récompense.
   // La V2 affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
   'guides.singularity.week.title': 'Active this week',
@@ -599,6 +589,10 @@ const en = {
   'guides.season.last': 'Last season {date}',
 
   'guides.tips.tactical': 'Tactical Tips',
+  // Gabarits de titre de section : le SUJET (perso / élément / effet) vient de
+  // la donnée localisée, jamais d'un LangMap recopié par guide (cf. V2).
+  'guides.tips.for': '{name} strategy',
+  'guides.team.for': '{name} team',
   'guides.tips.strategy': 'Strategy',
   'guides.tips.general': 'General Tips',
   'guides.tips.important': 'Important',
@@ -614,6 +608,12 @@ const en = {
   'guides.strategy_guide': 'Strategy Guide',
   'guides.boss_display.immunities': 'Immunities',
   'guides.boss_display.skills': 'Skills',
+  // Mode à SCORE : le palier est une TRANCHE DE DÉGÂTS, sa « barre » n'est
+  // pas les PV du boss (cf. BossStats).
+  'guides.boss_display.rank': 'Rank',
+  'guides.boss_display.damage': 'Damage to deal',
+  'guides.boss_display.rank_bar': 'Rank bar',
+  'guides.boss_display.rank_options': 'Rank passives',
   'guides.adventure.season': 'Season {n}',
   'guides.adventure.spoiler_free': 'Spoiler-free',
   'guides.adventure.spoiler': 'Show names',

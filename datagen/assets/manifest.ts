@@ -14,6 +14,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { STAT_ICON } from '../../src/lib/stats';
+import { rankBadgeSprite } from '../../src/lib/ranks';
 import { MISSING_ITEM_ICONS as ITEM_ICON_BLACKLIST } from '../../src/lib/data/item-blacklist';
 import { GUIDE_CATEGORIES } from '../../src/lib/data/guide-categories';
 import { listGuides } from '../../src/lib/data/guides';
@@ -607,10 +608,10 @@ export function buildAssetManifest(): AssetRequest[] {
   {
     const monsters = load('monsters.json') as Record<string, { icon?: string } | undefined>;
     const rotation = load('singularity.json') as unknown as {
-      groups: { bosses: { monsters: string[] }[] }[];
+      groups: { bosses: { monsters: string[]; thumbnail?: string; banner?: string }[] }[];
     };
-    const ids = new Set(rotation.groups.flatMap((g) => g.bosses.flatMap((b) => b.monsters)));
-    for (const id of ids) {
+    const bosses = rotation.groups.flatMap((g) => g.bosses);
+    for (const id of new Set(bosses.flatMap((b) => b.monsters))) {
       const icon = monsters[id]?.icon;
       if (icon && !icon.startsWith('2'))
         push({
@@ -619,6 +620,43 @@ export function buildAssetManifest(): AssetRequest[] {
           candidates: [`MT_${icon}`],
           domain: 'guides',
         });
+    }
+    // Art DÉDIÉ du mode (bannière large + avatar rond), nommé par la table
+    // elle-même : on ne fabrique aucun nom de fichier. Sprites distincts du
+    // portrait `MT_<icon>` ci-dessus (cadrages différents), donc pas des
+    // doublons — namespace unique `images/ui/singularity/`.
+    for (const sprite of new Set(
+      bosses.flatMap((b) => [b.thumbnail, b.banner].filter((s): s is string => Boolean(s))),
+    ))
+      push({
+        kind: 'image',
+        key: `images/ui/singularity/${sprite}.webp`,
+        candidates: [sprite],
+        domain: 'guides',
+      });
+  }
+
+  // Badges de PALIER de combat (`CM_Event_Rank_*`) : collectés depuis les
+  // paliers RÉELS des donjons, jamais depuis une liste écrite à la main — un
+  // palier ajouté par un patch amène donc son sprite tout seul.
+  {
+    const encounters = load('encounters.json') as unknown as Record<
+      string,
+      { ranks?: { name?: string }[] }
+    >;
+    const names = new Set(
+      Object.values(encounters).flatMap((d) =>
+        (d.ranks ?? []).map((r) => r.name).filter((n): n is string => Boolean(n)),
+      ),
+    );
+    for (const name of names) {
+      const sprite = rankBadgeSprite(name);
+      push({
+        kind: 'image',
+        key: `images/ui/rank/${sprite}.webp`,
+        candidates: [sprite],
+        domain: 'ui',
+      });
     }
   }
 

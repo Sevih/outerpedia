@@ -81,6 +81,19 @@ export const img = {
   coreFusionTag: () => `${BASE}/images/ui/tags/CT_Core_Icon.webp`,
   /** Icône de guide/catégorie de guides (sprite du jeu, namespace unique). */
   guideIcon: (icon: string) => `${BASE}/images/ui/guides/${icon}.webp`,
+  /**
+   * Badge de palier de combat (`CM_Event_Rank_E_02`…) — sprite dérivé du nom du
+   * palier par `rankBadgeSprite`. Même namespace que les rangs `IG_Event_Rank_*`
+   * (autre famille de sprites, même sujet).
+   */
+  rankBadge: (sprite: string) => `${BASE}/images/ui/rank/${sprite}.webp`,
+  /**
+   * Art du mode Dimensional Singularity, tel que la table le nomme
+   * (`singularity.json` : `banner` = bannière large 680×94, `thumbnail` =
+   * avatar rond 90×90). Ce sont des sprites DISTINCTS du portrait de boss
+   * (`MT_<icon>`, carré) — pas des doublons : cadrages et usages différents.
+   */
+  singularity: (sprite: string) => `${BASE}/images/ui/singularity/${sprite}.webp`,
 };
 
 /**

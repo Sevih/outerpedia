@@ -12,6 +12,7 @@ import type {
   Monster,
   MonsterSkillsFile,
   MonstersFile,
+  RankOption,
   Skill,
 } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
@@ -41,6 +42,40 @@ export function getStatScales(): Record<string, string> {
 /** Quirks de compte réduisant les stats affichées des boss (EFF/RES −10 %). */
 export function getBossQuirkMods(): Record<string, number> {
   return G.bossQuirkMods ?? {};
+}
+
+/**
+ * Passifs de PALIER (`glossaries.rankOptions`) : les buffs que le boss gagne en
+ * montant de palier. Optionnel dans le glossaire — absent = aucun passif
+ * affiché (jamais une valeur inventée).
+ */
+export function getRankOptions(): Record<string, RankOption> {
+  return G.rankOptions ?? {};
+}
+
+/**
+ * Libellés localisés des passifs de palier d'un monstre, prêts pour le rendu
+ * client (id d'option → « Increased Penetration +30% »). Une option inconnue du
+ * glossaire est simplement OMISE : mieux vaut ne rien dire qu'inventer.
+ */
+export function rankOptionLabels(contexts: SpawnContext[], lang: Lang): Record<string, string> {
+  const glossary = getRankOptions();
+  const out: Record<string, string> = {};
+  for (const id of new Set(contexts.flatMap((c) => c.options ?? []))) {
+    const o = glossary[id];
+    if (!o) continue;
+    const name = o.name ? lRec(o.name, lang) : undefined;
+    if (!name) continue;
+    // `value` est un per-mille pour les taux (convention du jeu, cf. statScales).
+    const amount =
+      o.value && o.stat && G.statScales?.[o.stat] === 'percent'
+        ? ` ${o.value > 0 ? '+' : ''}${o.value / 10}%`
+        : o.value
+          ? ` ${o.value > 0 ? '+' : ''}${o.value}`
+          : '';
+    out[id] = `${name}${amount}`;
+  }
+  return out;
 }
 
 /**

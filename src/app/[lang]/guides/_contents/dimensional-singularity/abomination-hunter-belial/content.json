@@ -1,0 +1,224 @@
+{
+  "intro": {
+    "en": "{E/Fire}-element boss featured in the Dimensional Singularity rotation. Burn-detonation mechanics: applies Burn on every hit, deals +50% damage to Burned targets, and detonates all Burn stacks with its Ultimate. Takes +100% damage while Frozen and dispels 1 debuff at the start of each turn.",
+    "jp": "次元特異点ローテーションに登場する{E/Fire}属性ストライカーボス。火傷-破裂のメカニクス：すべての攻撃で火傷を付与し、火傷保有対象への与ダメージ+50%、必殺技で火傷スタックをすべて破裂させる。凍結中は受けるダメージ+100%、ターン開始時に弱体効果を1個解除する。",
+    "kr": "차원 특이점 로테이션에 등장하는 {E/Fire} 속성 스트라이커 보스. 화상-폭발 메커닉: 모든 공격마다 화상을 부여하고 화상 보유 대상에게 +50% 피해를 주며, 필살기로 화상 스택을 모두 폭발시킵니다. 빙결 상태일 때 받는 피해 +100%, 턴 시작 시 약화 효과 1개를 해제합니다.",
+    "zh": "出现在次元奇点轮换中的{E/Fire}属性突击型Boss。烧伤-引爆机制：每次攻击附加烧伤，对持有烧伤的目标造成+50%伤害，必杀技引爆目标身上所有烧伤层数。冰冻状态下受到+100%伤害，每回合开始时解除1个弱化效果。",
+    "fr": "Boss d'élément {E/Fire} présent dans la rotation de la Singularité Dimensionnelle. Mécaniques de détonation de Burn : applique Burn à chaque coup, inflige +50% de dégâts aux cibles affectées par Burn et détonne tous les stacks de Burn avec son Ultime. Subit +100% de dégâts tant qu'il est gelé et dissipe 1 debuff au début de chaque tour."
+  },
+  "tips": [
+    {
+      "preset": "general",
+      "items": [
+        {
+          "en": "Boss applies {D/BT_DOT_BURN} on every hit and detonates all Burn stacks on its Ultimate, dealing AoE burst damage based on accumulated stacks.",
+          "jp": "ボスは攻撃のたびに{D/BT_DOT_BURN}を付与し、必殺技で蓄積した火傷スタックをすべて破裂させて全体に大ダメージを与える。",
+          "kr": "보스는 모든 공격마다 {D/BT_DOT_BURN}을 부여하며, 필살기로 누적된 화상 스택을 모두 폭발시켜 전체에 큰 피해를 입힙니다.",
+          "zh": "Boss每次攻击附加{D/BT_DOT_BURN}，必杀技引爆所有累积的烧伤层数对全体造成爆发伤害。",
+          "fr": "Le Boss applique {D/BT_DOT_BURN} à chaque coup et détonne tous les stacks de Burn avec son Ultime, infligeant des dégâts de burst AoE selon les stacks accumulés."
+        },
+        {
+          "en": "{D/BT_DOT_BURN}d targets take +50% DMG from the boss (Monster Hunter's Crucible) — heal through or cleanse Burn off the carry.",
+          "jp": "{D/BT_DOT_BURN}を保有する対象はボスから受けるダメージ+50%（モンスターハンターの坩堝）。ヒールでカバーするかキャリアの火傷を解除する。",
+          "kr": "{D/BT_DOT_BURN}을 보유한 대상은 보스로부터 받는 피해 +50%(흉물 사냥꾼의 도가니) — 힐로 버티거나 메인 딜러의 화상을 정화하세요.",
+          "zh": "持有{D/BT_DOT_BURN}的目标受到Boss的伤害+50%（怪物猎手的熔炉）——通过治疗硬扛或为主C净化烧伤。",
+          "fr": "Les cibles affectées par {D/BT_DOT_BURN} subissent +50% de dégâts du Boss (Monster Hunter's Crucible) — soignez à travers ou purifiez le Burn du carry."
+        },
+        {
+          "en": "The boss self-cleanses 1 of its own debuffs at the start of each turn (Hunting Time) — long-duration debuffs lose value, prefer reapplying every turn.",
+          "jp": "ボスはターン開始時に自分の弱体効果を1個解除する（狩りの時間）。長時間のデバフは価値が薄いので、毎ターン再付与する構成を優先。",
+          "kr": "보스는 턴 시작 시 자신의 약화 효과 1개를 해제합니다(수렵의 시간) — 장기 디버프는 가치가 떨어지므로 매턴 재부여가 가능한 구성이 좋습니다.",
+          "zh": "Boss每回合开始时解除自身1个弱化效果（狩猎时刻）——长持续时间的弱化效果价值较低，优先选择每回合可重新附加的角色。",
+          "fr": "Le Boss purifie 1 de ses propres debuffs au début de chaque tour (Hunting Time) — les debuffs de longue durée perdent de leur intérêt, préférez les réappliquer chaque tour."
+        }
+      ]
+    },
+    {
+      "element": "water",
+      "items": [
+        {
+          "en": "Apply {D/BT_FREEZE} on the boss to trigger Hunting Time's +100% DMG taken effect.",
+          "jp": "ボスに{D/BT_FREEZE}を付与して、狩りの時間の被ダメージ+100%効果を発動させる。",
+          "kr": "보스에게 {D/BT_FREEZE}를 부여해 수렵의 시간의 피해 +100% 효과를 발동시키세요.",
+          "zh": "对Boss附加{D/BT_FREEZE}以触发狩猎时刻的受到伤害+100%效果。",
+          "fr": "Appliquez {D/BT_FREEZE} sur le Boss pour déclencher l'effet +100% de dégâts subis de Hunting Time."
+        },
+        {
+          "en": "Reapply Freeze every turn since the boss self-cleanses 1 debuff per turn — bring multiple Freeze sources or a frequent reapplier.",
+          "jp": "ボスは毎ターン弱体効果を1個解除するため、毎ターン{D/BT_FREEZE}を再付与する必要がある。複数の凍結源、または頻繁に再付与できるユニットを採用する。",
+          "kr": "보스가 매턴 약화 효과 1개를 해제하므로 {D/BT_FREEZE}를 매턴 재부여해야 합니다. 여러 빙결 소스나 빈번한 재부여 캐릭터를 채용하세요.",
+          "zh": "Boss每回合解除1个弱化效果，因此需要每回合重新附加{D/BT_FREEZE}——携带多个冰冻来源或可频繁重附加的角色。",
+          "fr": "Réappliquez Freeze chaque tour puisque le Boss purifie 1 debuff par tour — emmenez plusieurs sources de Freeze ou un personnage capable de le réappliquer fréquemment."
+        }
+      ]
+    },
+    {
+      "character": "Gnosis Beth",
+      "items": [
+        {
+          "en": "Build the team around {P/Gnosis Beth} : {D/BT_EXTEND_DEBUFF} and {B/BT_CALL_BACKUP}.",
+          "jp": "{P/Gnosis Beth}を中心に編成する：{D/BT_EXTEND_DEBUFF}と{B/BT_CALL_BACKUP}。",
+          "kr": "{P/Gnosis Beth}를 중심으로 구성: {D/BT_EXTEND_DEBUFF}와 {B/BT_CALL_BACKUP}.",
+          "zh": "以{P/Gnosis Beth}为核心组队：{D/BT_EXTEND_DEBUFF}与{B/BT_CALL_BACKUP}。",
+          "fr": "Construisez l'équipe autour de {P/Gnosis Beth} : {D/BT_EXTEND_DEBUFF} et {B/BT_CALL_BACKUP}."
+        }
+      ]
+    }
+  ],
+  "teams": [
+    {
+      "element": "water",
+      "groups": [
+        {
+          "characters": ["Fortuna"],
+          "reason": {
+            "en": "Applies {D/BT_FREEZE} and other debuffs, plus {D/BT_EXTEND_DEBUFF}.",
+            "jp": "{D/BT_FREEZE}や他の弱体効果を付与し、{D/BT_EXTEND_DEBUFF}も持つ。",
+            "kr": "{D/BT_FREEZE}와 기타 약화 효과를 부여하며 {D/BT_EXTEND_DEBUFF}도 제공합니다.",
+            "zh": "附加{D/BT_FREEZE}及其他弱化效果，并提供{D/BT_EXTEND_DEBUFF}。",
+            "fr": "Applique {D/BT_FREEZE} et d'autres debuffs, ainsi que {D/BT_EXTEND_DEBUFF}."
+          }
+        },
+        {
+          "characters": ["Primine", "Monad Eva"],
+          "reason": {
+            "en": "{B/BT_IMMUNE}, {D/BT_FREEZE}, {B/BT_REMOVE_DEBUFF} and {B/BT_CALL_BACKUP}.",
+            "jp": "{B/BT_IMMUNE}、{D/BT_FREEZE}、{B/BT_REMOVE_DEBUFF}、{B/BT_CALL_BACKUP}を提供する。",
+            "kr": "{B/BT_IMMUNE}, {D/BT_FREEZE}, {B/BT_REMOVE_DEBUFF}, {B/BT_CALL_BACKUP}을 제공합니다.",
+            "zh": "提供{B/BT_IMMUNE}、{D/BT_FREEZE}、{B/BT_REMOVE_DEBUFF}与{B/BT_CALL_BACKUP}。",
+            "fr": "{B/BT_IMMUNE}, {D/BT_FREEZE}, {B/BT_REMOVE_DEBUFF} et {B/BT_CALL_BACKUP}."
+          }
+        },
+        {
+          "characters": ["Roxie"],
+          "reason": {
+            "en": "{D/BT_EXTEND_DEBUFF} and {D/BT_DOT_LIGHTNING}.",
+            "jp": "{D/BT_EXTEND_DEBUFF}と{D/BT_DOT_LIGHTNING}を提供する。",
+            "kr": "{D/BT_EXTEND_DEBUFF}과 {D/BT_DOT_LIGHTNING}을 제공합니다.",
+            "zh": "提供{D/BT_EXTEND_DEBUFF}与{D/BT_DOT_LIGHTNING}。",
+            "fr": "{D/BT_EXTEND_DEBUFF} et {D/BT_DOT_LIGHTNING}."
+          }
+        },
+        {
+          "characters": ["Beth"],
+          "reason": {
+            "en": "Damage dealer who benefits well from {P/Fortuna}'s support.",
+            "jp": "{P/Fortuna}のサポートと相性が良いアタッカー。",
+            "kr": "{P/Fortuna}의 지원과 시너지가 좋은 딜러.",
+            "zh": "与{P/Fortuna}的辅助高度契合的输出角色。",
+            "fr": "DPS qui profite bien du support de {P/Fortuna}."
+          }
+        }
+      ]
+    },
+    {
+      "character": "Midnight Rush Skadi",
+      "groups": [
+        {
+          "characters": ["Midnight Rush Skadi"],
+          "reason": {
+            "en": "Solo DPS — requires some +15 armor pieces and the {AS/Lifesteal Set}.",
+            "jp": "単騎DPS — +15の防具数枚と{AS/Lifesteal Set}が必要。",
+            "kr": "단독 딜러 — +15 방어구 몇 개와 {AS/Lifesteal Set}가 필요합니다.",
+            "zh": "单核主C — 需要数件+15防具与{AS/Lifesteal Set}。",
+            "fr": "DPS solo — nécessite quelques pièces d'armure +15 et le {AS/Lifesteal Set}."
+          }
+        },
+        {
+          "characters": ["Eris"],
+          "reason": {
+            "en": "Pick 3. EE grants {B/BT_STAT|ST_CRITICAL_DMG_RATE} to {C/Striker} allies. Cast S2 once, then let her die.",
+            "jp": "3体から選択。EEで{C/Striker}味方に{B/BT_STAT|ST_CRITICAL_DMG_RATE}を付与する。S2を1回撃ってから倒れさせる。",
+            "kr": "3명 중 선택. EE로 {C/Striker} 아군에게 {B/BT_STAT|ST_CRITICAL_DMG_RATE}을 부여합니다. S2를 한 번 사용한 뒤 사망시키세요.",
+            "zh": "三选一。EE为{C/Striker}盟友提供{B/BT_STAT|ST_CRITICAL_DMG_RATE}。使用一次S2后让她阵亡。",
+            "fr": "À choisir parmi 3. L'EE octroie {B/BT_STAT|ST_CRITICAL_DMG_RATE} aux alliés {C/Striker}. Lancez son S2 une fois puis laissez-la mourir."
+          }
+        },
+        {
+          "characters": ["Tamamo-no-Mae"],
+          "reason": {
+            "en": "Pick 3. Boss damage bonus for {E/Fire}-element allies. Can leave the stage as soon as her buffs are applied.",
+            "jp": "3体から選択。{E/Fire}属性味方のボスダメージボーナス。バフを付与し次第退場可能。",
+            "kr": "3명 중 선택. {E/Fire} 속성 아군의 보스 피해 보너스. 버프 부여 후 바로 퇴장 가능합니다.",
+            "zh": "三选一。为{E/Fire}属性盟友提供Boss伤害加成。附加增益后可立即退场。",
+            "fr": "À choisir parmi 3. Bonus de dégâts au Boss pour les alliés {E/Fire}. Peut quitter la scène dès que ses buffs sont appliqués."
+          }
+        },
+        {
+          "characters": ["Mystic Sage Ame"],
+          "reason": {
+            "en": "Pick 3. EE increases damage to bosses. Stacks {D/BT_STAT|ST_DEF} down and Transcend buffs (6★ damage increase); let her die after reaching 5 stacks.",
+            "jp": "3体から選択。EEでボスへのダメージが増加。{D/BT_STAT|ST_DEF}減少と超越バフ(6★でダメージ増加)を蓄積し、5スタック到達後に倒れさせる。",
+            "kr": "3명 중 선택. EE로 보스 피해 증가. {D/BT_STAT|ST_DEF} 감소와 초월 버프(6★ 피해 증가)를 누적하고, 5중첩에 도달한 뒤 사망시키세요.",
+            "zh": "三选一。EE提升对Boss的伤害。叠加{D/BT_STAT|ST_DEF}降低与超越增益(6★伤害提升)，叠满5层后让她阵亡。",
+            "fr": "À choisir parmi 3. L'EE augmente les dégâts aux Boss. Empile la réduction de {D/BT_STAT|ST_DEF} et des buffs de Transcend (6★ hausse de dégâts) ; laissez-la mourir après avoir atteint 5 stacks."
+          }
+        },
+        {
+          "characters": ["Monad Eva"],
+          "reason": {
+            "en": "Pick 3. +20% Max HP transcend bonus at 4★, {B/BT_CALL_BACKUP} dual attacks while alive. {P/Primine} or another {C/Healer|Reliever} can substitute.",
+            "jp": "3体から選択。4★の超越で+20% 最大HPボーナス、生存中は{B/BT_CALL_BACKUP}の連携攻撃。{P/Primine}や他の{C/Healer|Reliever}で代替可能。",
+            "kr": "3명 중 선택. 4★ 초월로 +20% 최대 체력 보너스, 생존 중 {B/BT_CALL_BACKUP} 연계 공격. {P/Primine} 또는 다른 {C/Healer|Reliever}로 대체 가능.",
+            "zh": "三选一。4★超越提供+20%最大生命值加成，存活时提供{B/BT_CALL_BACKUP}连携攻击。可用{P/Primine}或其他{C/Healer|Reliever}替代。",
+            "fr": "À choisir parmi 3. Bonus de +20% PV max via Transcend à 4★, attaques doubles {B/BT_CALL_BACKUP} tant qu'elle est en vie. {P/Primine} ou un autre {C/Healer|Reliever} peut la remplacer."
+          }
+        }
+      ]
+    },
+    {
+      "character": "Gnosis Beth",
+      "groups": [
+        {
+          "characters": ["Gnosis Beth"],
+          "reason": {
+            "en": "Main DPS — carries with {D/ETERNAL_BLEEDING}.",
+            "jp": "メインDPS — {D/ETERNAL_BLEEDING}でキャリーする。",
+            "kr": "메인 딜러 — {D/ETERNAL_BLEEDING}로 운영합니다.",
+            "zh": "主C — 以{D/ETERNAL_BLEEDING}进行输出。",
+            "fr": "DPS principal — porte l'équipe avec {D/ETERNAL_BLEEDING}."
+          }
+        },
+        {
+          "characters": ["Roxie"],
+          "reason": {
+            "en": "{D/BT_EXTEND_DEBUFF} and {D/BT_DOT_LIGHTNING} to cover {D/ETERNAL_BLEEDING} stacks.",
+            "jp": "{D/BT_EXTEND_DEBUFF}と{D/BT_DOT_LIGHTNING}で{D/ETERNAL_BLEEDING}スタックを補う。",
+            "kr": "{D/BT_EXTEND_DEBUFF}과 {D/BT_DOT_LIGHTNING}으로 {D/ETERNAL_BLEEDING} 스택을 보충합니다.",
+            "zh": "以{D/BT_EXTEND_DEBUFF}与{D/BT_DOT_LIGHTNING}补充{D/ETERNAL_BLEEDING}层数。",
+            "fr": "{D/BT_EXTEND_DEBUFF} et {D/BT_DOT_LIGHTNING} pour couvrir les stacks d'{D/ETERNAL_BLEEDING}."
+          }
+        },
+        {
+          "characters": ["Maxie", "Fortuna", "Akari", "Kuro"],
+          "reason": {
+            "en": "{D/BT_EXTEND_DEBUFF} and extra debuffs to cover {D/ETERNAL_BLEEDING} stacks.",
+            "jp": "{D/BT_EXTEND_DEBUFF}と追加の弱体効果で{D/ETERNAL_BLEEDING}スタックを補う。",
+            "kr": "{D/BT_EXTEND_DEBUFF}과 추가 약화 효과로 {D/ETERNAL_BLEEDING} 스택을 보충합니다.",
+            "zh": "以{D/BT_EXTEND_DEBUFF}与额外弱化效果补充{D/ETERNAL_BLEEDING}层数。",
+            "fr": "{D/BT_EXTEND_DEBUFF} et des debuffs supplémentaires pour couvrir les stacks d'{D/ETERNAL_BLEEDING}."
+          }
+        },
+        {
+          "characters": ["Monad Eva", "Primine"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_CALL_BACKUP}, plus {B/BT_IMMUNE} and {D/BT_FREEZE}.",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_CALL_BACKUP}、加えて{B/BT_IMMUNE}と{D/BT_FREEZE}。",
+            "kr": "{B/BT_REMOVE_DEBUFF}과 {B/BT_CALL_BACKUP}, 추가로 {B/BT_IMMUNE}과 {D/BT_FREEZE}.",
+            "zh": "提供{B/BT_REMOVE_DEBUFF}与{B/BT_CALL_BACKUP}，以及{B/BT_IMMUNE}与{D/BT_FREEZE}。",
+            "fr": "{B/BT_REMOVE_DEBUFF} et {B/BT_CALL_BACKUP}, ainsi que {B/BT_IMMUNE} et {D/BT_FREEZE}."
+          }
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "platform": "youtube",
+      "id": "bEcRDPR1q9Y",
+      "title": "Abomination Hunter Belial — Dimensional Singularity — Rank SSS++",
+      "author": "Sevih",
+      "label": "Rank SSS++"
+    }
+  ]
+}

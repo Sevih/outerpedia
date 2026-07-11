@@ -551,16 +551,6 @@ const kr: Record<TranslationKey, string> = {
 
   // Catégories de guides : libellés + descriptions dans guide-categories.ts
   // (source unique, LocalizedText) — plus de clés de locale par catégorie.
-  'guides.singularity.info.intro':
-    '차원 특이점은 모나드 게이트에서 「차원 특이점 모드」로 전환하여 접근하는 엔드 콘텐츠입니다. 수요일부터 토요일까지 매일 다른 특이점 보스가 등장하며, 일일 점수에 따라 랭킹과 보상이 결정됩니다.',
-  'guides.singularity.info.unlock': '해금 조건: 모나드 게이트 심층 1 진 엔딩 클리어.',
-  'guides.singularity.info.schedule':
-    '매주 수요일 00:00 UTC부터 토요일 23:59 UTC까지 개방. 대상 보스는 매일 00:00 UTC에 변경. 1일 2회 도전 가능.',
-  'guides.singularity.info.feature.repel': '특이점 격퇴: 당일 보스전을 시작합니다.',
-  'guides.singularity.info.feature.ascension':
-    '특이점 승화 장치: 강화와 재련이 최대치에 도달한 장비를 승화합니다. 승화 시 장비의 메인 스탯이 상승하고 재련 횟수가 +3되며, 강화 +15에 도달하면 추가 랜덤 스탯이 부여됩니다(종류는 장비 슬롯에 따라 다르며, 수치는 랜덤).',
-  'guides.singularity.info.feature.ranking':
-    '랭킹 보고서: 전일 점수에 따른 일일 보상을 수령합니다.',
   // Rotation : UN boss par jour (mer→sam), puis 3 jours de récompense.
   // La V2 affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
   'guides.singularity.week.title': '이번 주 보스',
@@ -585,6 +575,10 @@ const kr: Record<TranslationKey, string> = {
   'guides.season.last': '지난 시즌 {date}',
 
   'guides.tips.tactical': '전술 팁',
+  // Gabarits de titre de section : le SUJET (perso / élément / effet) vient de
+  // la donnée localisée, jamais d'un LangMap recopié par guide (cf. V2).
+  'guides.tips.for': '{name} 전략',
+  'guides.team.for': '{name} 팀',
   'guides.tips.strategy': '전략',
   'guides.tips.general': '일반 팁',
   'guides.tips.important': '중요',
@@ -600,6 +594,12 @@ const kr: Record<TranslationKey, string> = {
   'guides.strategy_guide': '전략 가이드',
   'guides.boss_display.immunities': '면역',
   'guides.boss_display.skills': '스킬',
+  // Mode à SCORE : le palier est une TRANCHE DE DÉGÂTS, sa « barre » n'est
+  // pas les PV du boss (cf. BossStats).
+  'guides.boss_display.rank': '등급',
+  'guides.boss_display.damage': '필요 피해량',
+  'guides.boss_display.rank_bar': '등급 게이지',
+  'guides.boss_display.rank_options': '등급 패시브',
   'guides.adventure.season': '시즌 {n}',
   'guides.adventure.spoiler_free': '스포일러 없음',
   'guides.adventure.spoiler': '이름 표시',

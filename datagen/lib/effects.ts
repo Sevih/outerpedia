@@ -358,6 +358,9 @@ export function buildEffectGlossary(): EffectGlossary {
   // Identité (NameID + irremovable + nature) → effet, pour raccrocher les
   // tooltips orphelins plus bas.
   const subKeyToEffect = new Map<string, string>();
+  // Effet normal → son frère INDISSIPABLE (même NameID, même nature) — sert
+  // aux clés éditoriales `_IR` plus bas.
+  const irrSibling = new Map<string, string>();
   for (const members of groups.values()) {
     // Un même NameID couvre la version NORMALE et la version IRREMOVABLE
     // (icône `_Interruption`, cadre spécial ; suffixe `_D` = déclinaison
@@ -388,6 +391,11 @@ export function buildEffectGlossary(): EffectGlossary {
       for (const m of sub) byTooltip.set(m.ID, base.ID);
       const subKey = `${base.NameID}|${irremovable}|${base.IsDebuff === 'True'}`;
       if (!subKeyToEffect.has(subKey)) subKeyToEffect.set(subKey, base.ID);
+    }
+    for (const nature of ['True', 'False']) {
+      const normal = subGroups.get(`false|${nature}`);
+      const irr = subGroups.get(`true|${nature}`);
+      if (normal && irr) irrSibling.set(normal[0].ID, irr[0].ID);
     }
   }
 
@@ -544,6 +552,18 @@ export function buildEffectGlossary(): EffectGlossary {
         ? byKey[side].get(t)
         : (byKey[side].get(t) ?? byKey[side === 'buff' ? 'debuff' : 'buff'].get(t));
       if (id && !byKey[side].has(alias)) byKey[side].set(alias, id);
+    }
+  }
+  // 4) Suffixe `_IR` (dialecte V2) : `<clé>_IR` désigne la variante
+  //    INDISSIPABLE du statut (effet DISTINCT, icône `_Interruption` —
+  //    `BT_SEALED_IR`, `BT_STAT|ST_CRITICAL_RATE_IR`…). Chaque clé résolue
+  //    reçoit sa déclinaison via le frère de même NameID/nature ; une clé dont
+  //    la base résout DÉJÀ sur l'effet indissipable (seul utilisé par les
+  //    tables, ex. Debuff Enhancement) porte le même effet sous les deux clés.
+  for (const side of ['buff', 'debuff'] as const) {
+    for (const [key, id] of [...byKey[side]]) {
+      const irr = effects.get(id)?.irremovable ? id : irrSibling.get(id);
+      if (irr && !byKey[side].has(`${key}_IR`)) byKey[side].set(`${key}_IR`, irr);
     }
   }
 

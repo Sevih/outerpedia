@@ -194,6 +194,12 @@
     }
   },
   "elements": {
+    "earth": {
+      "en": "Earth",
+      "jp": "地属性",
+      "kr": "지속성",
+      "zh": "土属性"
+    },
     "fire": {
       "en": "Fire",
       "jp": "火属性",
@@ -212,12 +218,6 @@
       "kr": "수속성",
       "zh": "水属性"
     },
-    "earth": {
-      "en": "Earth",
-      "jp": "地属性",
-      "kr": "지속성",
-      "zh": "土属性"
-    },
     "light": {
       "en": "Light",
       "jp": "光属性",
@@ -226,18 +226,18 @@
     }
   },
   "subClasses": {
-    "sweeper": {
+    "bruiser": {
       "name": {
-        "en": "Sweeper",
-        "jp": "スイーパー",
-        "kr": "스위퍼",
-        "zh": "清道夫"
+        "en": "Bruiser",
+        "jp": "ブルーザー",
+        "kr": "브루저",
+        "zh": "决斗家"
       },
       "desc": {
-        "en": "A combat specialist who waits patiently for an opening.",
-        "jp": "端然と攻撃に耐えつつ、逆転のチャンスを狙う戦闘のプロ。",
-        "kr": "침착하게 공격을 견디며 기회를 엿보는 전투의 프로.",
-        "zh": "沉着应对攻击，并窥视进攻机会。"
+        "en": "A brawler who specializes in prolonged battles with balanced offensive and defensive skills.",
+        "jp": "攻防バランスが良く、長期戦に特化した喧嘩師。",
+        "kr": "공방의 균형이 잘 잡혀 있어, 장기전에 특화된 싸움꾼.",
+        "zh": "攻防实力兼具，擅长持久战。"
       }
     },
     "attacker": {
@@ -254,18 +254,18 @@
         "zh": "拥有强大攻击力，能够迅速粉碎敌人。"
       }
     },
-    "tactician": {
+    "phalanx": {
       "name": {
-        "en": "Tactician",
-        "jp": "タクティシャン",
-        "kr": "택티션",
-        "zh": "战术家"
+        "en": "Phalanx",
+        "jp": "ファランクス",
+        "kr": "팔랑크스",
+        "zh": "盾卫"
       },
       "desc": {
-        "en": "A master strategist who gets the upper hand in battles by granting buffs to allies.",
-        "jp": "味方を強化し、戦況を有利に進める戦略家。",
-        "kr": "아군에게 이로운 효과를 부여해 우위를 점하는 전략가.",
-        "zh": "赋予友军有利效果，使战斗优于我方。"
+        "en": "A defensive specialist who stands their ground to protect their allies.",
+        "jp": "味方の保護に特化した防御のスペシャリスト。",
+        "kr": "아군 보호에 특화된 방어의 스페셜리스트.",
+        "zh": "身为防护专家，善于保护友军。"
       }
     },
     "enchanter": {
@@ -282,32 +282,18 @@
         "zh": "利用多种附加效果，伺机攻击敌人弱点。"
       }
     },
-    "wizard": {
+    "tactician": {
       "name": {
-        "en": "Wizard",
-        "jp": "ウィザード",
-        "kr": "위저드",
-        "zh": "巫师"
+        "en": "Tactician",
+        "jp": "タクティシャン",
+        "kr": "택티션",
+        "zh": "战术家"
       },
       "desc": {
-        "en": "A master of magic who wreaks havoc on the battlefield with powerful spells.",
-        "jp": "強力なスキルで戦場を圧倒する魔法使い。",
-        "kr": "강력한 스킬로 전장을 휩쓸어버리는 마법의 대가.",
-        "zh": "以强力技能横扫战场。"
-      }
-    },
-    "bruiser": {
-      "name": {
-        "en": "Bruiser",
-        "jp": "ブルーザー",
-        "kr": "브루저",
-        "zh": "决斗家"
-      },
-      "desc": {
-        "en": "A brawler who specializes in prolonged battles with balanced offensive and defensive skills.",
-        "jp": "攻防バランスが良く、長期戦に特化した喧嘩師。",
-        "kr": "공방의 균형이 잘 잡혀 있어, 장기전에 특화된 싸움꾼.",
-        "zh": "攻防实力兼具，擅长持久战。"
+        "en": "A master strategist who gets the upper hand in battles by granting buffs to allies.",
+        "jp": "味方を強化し、戦況を有利に進める戦略家。",
+        "kr": "아군에게 이로운 효과를 부여해 우위를 점하는 전략가.",
+        "zh": "赋予友军有利效果，使战斗优于我方。"
       }
     },
     "reliever": {
@@ -324,6 +310,34 @@
         "zh": "能够在危急时刻恢复友军。"
       }
     },
+    "wizard": {
+      "name": {
+        "en": "Wizard",
+        "jp": "ウィザード",
+        "kr": "위저드",
+        "zh": "巫师"
+      },
+      "desc": {
+        "en": "A master of magic who wreaks havoc on the battlefield with powerful spells.",
+        "jp": "強力なスキルで戦場を圧倒する魔法使い。",
+        "kr": "강력한 스킬로 전장을 휩쓸어버리는 마법의 대가.",
+        "zh": "以强力技能横扫战场。"
+      }
+    },
+    "sweeper": {
+      "name": {
+        "en": "Sweeper",
+        "jp": "スイーパー",
+        "kr": "스위퍼",
+        "zh": "清道夫"
+      },
+      "desc": {
+        "en": "A combat specialist who waits patiently for an opening.",
+        "jp": "端然と攻撃に耐えつつ、逆転のチャンスを狙う戦闘のプロ。",
+        "kr": "침착하게 공격을 견디며 기회를 엿보는 전투의 프로.",
+        "zh": "沉着应对攻击，并窥视进攻机会。"
+      }
+    },
     "sage": {
       "name": {
         "en": "Sage",
@@ -336,20 +350,6 @@
         "jp": "あらゆるスキルで敵を妨害する戦闘のサポーター。",
         "kr": "다양한 효과를 부여해 적의 방해를 끊어내는 지원가.",
         "zh": "赋予多种效果，阻断敌人妨碍。"
-      }
-    },
-    "phalanx": {
-      "name": {
-        "en": "Phalanx",
-        "jp": "ファランクス",
-        "kr": "팔랑크스",
-        "zh": "盾卫"
-      },
-      "desc": {
-        "en": "A defensive specialist who stands their ground to protect their allies.",
-        "jp": "味方の保護に特化した防御のスペシャリスト。",
-        "kr": "아군 보호에 특화된 방어의 스페셜리스트.",
-        "zh": "身为防护专家，善于保护友军。"
       }
     },
     "vanguard": {
@@ -4281,7 +4281,9 @@
     "38": "38",
     "39": "39",
     "40": "40",
+    "41": "42",
     "42": "42",
+    "43": "42",
     "44": "44",
     "45": "45",
     "46": "46",
@@ -4290,17 +4292,21 @@
     "49": "49",
     "50": "50",
     "51": "51",
+    "52": "SYS_BUFF_EXTEND_DEBUFF_UP",
     "53": "53",
     "54": "54",
     "55": "55",
     "56": "56",
     "57": "56",
     "58": "56",
+    "59": "56",
     "60": "56",
     "61": "61",
     "62": "62",
     "63": "63",
+    "64": "68",
     "65": "63",
+    "66": "68",
     "67": "63",
     "68": "68",
     "69": "69",
@@ -4325,6 +4331,7 @@
     "96": "96",
     "97": "97",
     "98": "98",
+    "100": "SYS_BUFF_STEAL",
     "102": "102",
     "103": "103",
     "104": "104",
@@ -4438,6 +4445,7 @@
     "40860014": "4086001",
     "40860015": "4086001",
     "40860016": "4086001",
+    "40860017": "4086001",
     "40860018": "4086001",
     "40860019": "4086001",
     "40860131": "4086001",
@@ -4456,6 +4464,7 @@
     "40860147": "40860147",
     "40860191": "4086001",
     "40860192": "4086001",
+    "40860193": "4086001",
     "40860194": "4086001",
     "40860195": "4086001",
     "40860196": "4086001",
@@ -4711,7 +4720,102 @@
       "BT_ADDITIVE_ATTACK": "42",
       "BT_COUNTERATTACK": "45",
       "BT_AGILE_RESPONSE": "47",
-      "BT_REVENGE": "46"
+      "BT_REVENGE": "46",
+      "BT_DAMAGE_TAKEN": "69",
+      "BT_STAT|ST_CRITICAL_DMG_RATE_IR": "1012",
+      "BT_STAT|ST_ATK_IR": "1007",
+      "BT_STAT|ST_DMG_REDUCE_RATE_IR": "1069",
+      "BT_INVINCIBLE_IR": "1027",
+      "BT_STAT|ST_PIERCE_POWER_RATE_IR": "1008",
+      "BT_STAT|ST_SPEED_IR": "1015",
+      "BT_STAT|ST_BUFF_CHANCE_IR": "1009",
+      "BT_NONE_IR": "4086001",
+      "BT_SHIELD_BASED_TARGET_IR": "1029",
+      "BT_STAT_IR": "2000059",
+      "BT_IMMUNE_IR": "1030",
+      "BT_SHARE_DMG_IR": "2000063",
+      "BT_AP_DECREASE_IR": "2000100",
+      "BT_STAT|ST_BUFF_RESIST_IR": "1010",
+      "BT_STAT_BUFF_ENHANCE_IR": "1092",
+      "BT_DMG_REDUCE_FINAL_IR": "2000109",
+      "BT_SHIELD_BASED_CASTER_IR": "1029",
+      "BT_STAT|ST_CRITICAL_RATE_IR": "1011",
+      "BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_IR": "1045",
+      "BT_STAT|ST_DEF_IR": "1006",
+      "BT_HEAL_BASED_TARGET_IR": "1028",
+      "BT_STAT|ST_COUNTER_RATE_IR": "1045",
+      "BT_STAT|ST_GET_GOLD_RATE_IR": "2000056",
+      "BT_2000065_A_IR": "2000065",
+      "BT_2000065_B_IR": "2100065",
+      "BT_STAT|ST_AVOID_IR": "1014",
+      "BT_DMG_REDUCE_IR": "2000067",
+      "BT_STEALTHED_IR": "1098",
+      "BT_2000094_IR": "2000094",
+      "BT_RUN_FIRST_SKILL_ON_TURN_END_DEFENDER_IR": "1045",
+      "BT_DMG_REDUCE_FINAL_WITH_OUT_FIRST_SKILL_IR": "2000112",
+      "BT_HEAL_BASED_CASTER_IR": "1028",
+      "BT_ACTION_GAUGE_ENHANCE_IR": "4086001",
+      "BT_GROUP_IR": "4086001",
+      "BT_DMG_TO_BOSS_IR": "4086001",
+      "BT_STAT_PREMIUM_IR": "1009",
+      "INCREASED_DEFENSE_IR": "1006",
+      "INCREASED_ATTACK_IR": "1007",
+      "INCREASED_PENETRATION_IR": "1008",
+      "INCREASED_EFFECTIVENESS_IR": "1009",
+      "INCREASED_RESILIENCE_IR": "1010",
+      "INCREASED_CRIT_HIT_CHANCE_IR": "1011",
+      "INCREASED_CRITICAL_DAMAGE_IR": "1012",
+      "MISS_RATE_INCREASE_IR": "1014",
+      "INCREASED_SPEED_IR": "1015",
+      "INVULNERABILITY_IR": "1027",
+      "SUSTAINED_RECOVERY_IR": "1028",
+      "BARRIER_IR": "1029",
+      "IMMUNITY_IR": "1030",
+      "COUNTERATTACK_IR": "1045",
+      "REDUCED_DAMAGE_TAKEN_IR": "1069",
+      "THE_CASTAWAY_REAPER_IR": "83",
+      "BUFF_ENHANCEMENT_IR": "1092",
+      "STEALTH_IR": "1098",
+      "FORTIFICATION_IR": "998",
+      "STARVING_DEVIL_IR": "1076",
+      "IRREGULAR_ADVERSARY_IR": "10001",
+      "PUREBLOODS_DOMINION_IR": "2000035",
+      "SELFISH_GOD_IR": "2000053",
+      "FIERCE_OFFENSIVE_IR": "2000056",
+      "DOLL_GARDENS_CARETAKER_IR": "2000059",
+      "SHOW_YOUR_LOYALTY_IR": "2000063",
+      "SAKURA_CHIRU_IR": "2000065",
+      "UME_ICHIRIN_IR": "2100065",
+      "REGINAS_WORLD_IR": "2000067",
+      "A_NINJAS_AFTERIMAGE_IR": "2000072",
+      "DESTROYERS_PUNISHMENT_IR": "2000075",
+      "CHARISMA_IR": "2000076",
+      "HUBRISS_DOMINION_IR": "2000090",
+      "FINAL_BRAND_IR": "2100091",
+      "RETRIBUTIONS_DOMINION_IR": "2000092",
+      "ARIEL_IR": "2000096",
+      "RADIANT_WILL_IR": "2000094",
+      "ETHER_BOOST_IR": "2000100",
+      "BANES_DOMAIN_IR": "2000109",
+      "MANDALA_IR": "2000110",
+      "RUSH_IR": "2000114",
+      "WHITE_NIGHT_IR": "2000119",
+      "POLAR_NIGHT_IR": "2000120",
+      "SPATIAL_DISTORTION_SELF_IR": "2000112",
+      "HARMONY_OF_DESPAIR_IR": "40760092",
+      "COURAGE_AGAINST_DESPAIR_IR": "4086001",
+      "CORE_ENERGY_IR": "4086007",
+      "DEFENSE_SYSTEM_SIGMA_DOME_IR": "401030202",
+      "ENVIRONMENTAL_CHANGE_RESPONSE_IR": "40860136",
+      "WEATHER_VARIABLE_RESPONSE_IR": "40860137",
+      "REMOVE_DETECTION_INTERFERENCE_IR": "40860146",
+      "EXCLUDE_UNKNOWN_VARIABLES_IR": "40860147",
+      "ADAMS_APPLE_IR": "4089001",
+      "OATH_OF_METEOS_IR": "4076102",
+      "BT_BARRIER_IR": "1029",
+      "BT_CONTINU_HEAL_IR": "1028",
+      "BT_COUNTERATTACK_IR": "1045",
+      "BT_DAMAGE_TAKEN_IR": "1069"
     },
     "debuff": {
       "BT_DMG_REDUCE": "1070",
@@ -4765,6 +4869,7 @@
       "BT_STAT|ST_ACCURACY": "24",
       "BT_RESOURCE_USE_SKILL": "1018",
       "BT_SEALED_RESURRECTION": "32",
+      "BT_COOL2_CHARGE": "68",
       "BURNED": "1",
       "CURSED": "2",
       "BLEEDING": "3",
@@ -4828,7 +4933,87 @@
       "BT_ADDITIVE_ATTACK": "42",
       "BT_COUNTERATTACK": "45",
       "BT_AGILE_RESPONSE": "47",
-      "BT_REVENGE": "46"
+      "BT_REVENGE": "46",
+      "BT_DAMAGE_TAKEN": "70",
+      "BT_DMG_REDUCE_IR": "1070",
+      "BT_STAT|ST_AVOID_IR": "1025",
+      "BT_STAT|ST_BUFF_RESIST_IR": "1021",
+      "BT_SEAL_ADDITIVE_ATTACK_IR": "1096",
+      "BT_SILENCE_IR": "1037",
+      "BT_STAT|ST_SPEED_IR": "1026",
+      "BT_STAT|ST_GET_GOLD_RATE_IR": "2100091",
+      "BT_DOT_CURSE_IR": "1002",
+      "BT_STAT|ST_ATK_IR": "1018",
+      "BT_SEALED_IR": "1039",
+      "BT_STAT_IR": "2000102",
+      "BT_DOT_POISON_IR": "1004",
+      "BT_NONE_IR": "4089001",
+      "BT_SEAL_BT_CALL_BACKUP_IR": "1099",
+      "BT_AGGRO_IR": "1032",
+      "BT_FREEZE_IR": "1033",
+      "BT_DOT_BURN_IR": "1001",
+      "BT_STAT|ST_DEF_IR": "1017",
+      "BT_STUN_IR": "1034",
+      "BT_MARKING_IR": "1036",
+      "BT_STAT|ST_CRITICAL_RATE_IR": "1022",
+      "BT_DOT_BLEED_IR": "1003",
+      "BT_DOT_LIGHTNING_IR": "1005",
+      "BT_STAT|ST_BUFF_CHANCE_IR": "1020",
+      "BT_SEALED_RECEIVE_HEAL_IR": "1038",
+      "BT_STONE_IR": "1035",
+      "BT_REDUCE_RECEIVE_HEAL_IR": "2000057",
+      "BT_DEATH_IR": "1085",
+      "BT_UNIQUE_BUFF_IR": "2000102",
+      "BT_STAT|ST_CRITICAL_DMG_RATE_IR": "1023",
+      "BT_STAT|ST_PIERCE_POWER_RATE_IR": "2010112",
+      "BT_STAT_DEBUFF_ENHANCE_IR": "1094",
+      "BT_SEAL_ADDITIVE_TURN_IR": "1101",
+      "BT_ACTION_GAUGE_ENHANCE_REVERSE_IR": "1102",
+      "BT_STAT|ST_ACCURACY_IR": "1024",
+      "BT_RESOURCE_USE_SKILL_IR": "1018",
+      "BT_SEALED_RESURRECTION_IR": "1032",
+      "BURNED_IR": "1001",
+      "CURSED_IR": "1002",
+      "BLEEDING_IR": "1003",
+      "POISONED_IR": "1004",
+      "SHOCKED_IR": "1005",
+      "REDUCED_DEFENSE_IR": "1017",
+      "REDUCED_ATTACK_IR": "1018",
+      "REDUCED_PENETRATION_IR": "1019",
+      "REDUCED_EFFECTIVENESS_IR": "1020",
+      "REDUCED_RESILIENCE_IR": "1021",
+      "REDUCED_CRIT_HIT_CHANCE_IR": "1022",
+      "REDUCED_CRITICAL_DAMAGE_IR": "1023",
+      "REDUCED_ACCURACY_IR": "1024",
+      "MISS_RATE_DECREASE_IR": "1025",
+      "REDUCED_SPEED_IR": "1026",
+      "TAUNTED_IR": "1032",
+      "FROZEN_IR": "1033",
+      "STUNNED_IR": "1034",
+      "PETRIFIED_IR": "1035",
+      "MARKED_IR": "1036",
+      "SILENCED_IR": "1037",
+      "UNHEALABLE_IR": "1038",
+      "UNBUFFABLE_IR": "1039",
+      "INCREASED_DAMAGE_TAKEN_IR": "1070",
+      "SEAL_EXTRA_SKILL_IR": "1096",
+      "PRIORITY_INCREASE_BANNED_IR": "1102",
+      "STARVING_DEVIL_IR": "1077",
+      "MARTYRDOM_IR": "1085",
+      "DEBUFF_ENHANCEMENT_IR": "1094",
+      "DUAL_ATTACK_DISABLED_IR": "1099",
+      "SEAL_EXTRA_TURN_IR": "1101",
+      "EXECUTION_TIME_IR": "2000020",
+      "KERAUNOS_IR": "2000057",
+      "IRREGULAR_INFECTION_IR": "2000102",
+      "BANES_DOMAIN_IR": "2010109",
+      "SPATIAL_DISTORTION_ENEMY_IR": "2010112",
+      "SHICHIFUJAS_CURSE_IR": "5203701",
+      "DRAGON_FEAR_IR": "5204001",
+      "BT_BARRIER_IR": "1029",
+      "BT_CONTINU_HEAL_IR": "1028",
+      "BT_COUNTERATTACK_IR": "1045",
+      "BT_DAMAGE_TAKEN_IR": "1070"
     }
   },
   "tooltipKinds": {
@@ -5115,5 +5300,440 @@
     "401030052": ["BT_STAT"],
     "401030201": ["BT_STAT|avoid_subtract_cap"],
     "401030202": ["BT_STAT|get_gold_rate"]
+  },
+  "modes": {
+    "normal": {
+      "en": "Normal",
+      "jp": "ノーマル",
+      "kr": "일반",
+      "zh": "一般"
+    },
+    "raid_1": {
+      "en": "Special Request: Ecology Study",
+      "jp": "特別依頼：生態調査",
+      "kr": "특별 의뢰 : 생태 조사",
+      "zh": "特别委托：生态调查"
+    },
+    "raid_2": {
+      "en": "Special Request: Identification",
+      "jp": "特別依頼：正体究明",
+      "kr": "특별 의뢰 : 정체 규명",
+      "zh": "特别委托：查清身份"
+    },
+    "tower": {
+      "en": "Skyward Tower",
+      "jp": "飛天の塔",
+      "kr": "비천의 탑",
+      "zh": "飞天之塔"
+    },
+    "tower_hard": {
+      "en": "Skyward Tower",
+      "jp": "飛天の塔",
+      "kr": "비천의 탑",
+      "zh": "飞天之塔"
+    },
+    "tower_very_hard": {
+      "en": "Skyward Tower",
+      "jp": "飛天の塔",
+      "kr": "비천의 탑",
+      "zh": "飞天之塔"
+    },
+    "sidestory": {
+      "en": "Side Story",
+      "jp": "外伝",
+      "kr": "외전",
+      "zh": "外传"
+    },
+    "remains": {
+      "en": "The Archdemon's Ruins",
+      "jp": "魔王の遺跡",
+      "kr": "마왕의 유적",
+      "zh": "魔王遗迹"
+    },
+    "guild_dungeon": {
+      "en": "Guild Security Area",
+      "jp": "ギルド警備エリア",
+      "kr": "길드 경비 구역",
+      "zh": "公会警备区域"
+    },
+    "guild_raid_main_boss": {
+      "en": "Guild Raid",
+      "jp": "ギルド連合戦",
+      "kr": "길드 연합전",
+      "zh": "公会联合战"
+    },
+    "guild_raid_sub_boss": {
+      "en": "Guild Raid",
+      "jp": "ギルド連合戦",
+      "kr": "길드 연합전",
+      "zh": "公会联合战"
+    },
+    "event": {
+      "en": "Event",
+      "jp": "イベント",
+      "kr": "이벤트",
+      "zh": "活动"
+    },
+    "event_challenge": {
+      "en": "Event",
+      "jp": "イベント",
+      "kr": "이벤트",
+      "zh": "活动"
+    },
+    "world_boss": {
+      "en": "World Boss",
+      "jp": "ワールドボス",
+      "kr": "월드 보스",
+      "zh": "世界首领"
+    },
+    "tower_element": {
+      "en": "Elemental Tower",
+      "jp": "エレメンタルタワー",
+      "kr": "엘레멘탈 타워",
+      "zh": "元素之塔"
+    },
+    "char_piece": {
+      "en": "Defeat the Doppelgänger",
+      "jp": "自己像幻視退治",
+      "kr": "도플갱어 퇴치",
+      "zh": "击退二重身"
+    },
+    "event_boss": {
+      "en": "Joint Challenge",
+      "jp": "共同作戦",
+      "kr": "합동 챌린지",
+      "zh": "联合挑战"
+    },
+    "exploration_main_boss": {
+      "en": "Terminus Isle Exploration",
+      "jp": "テルミナス島探査",
+      "kr": "멸망의 섬 탐사",
+      "zh": "探索灭亡之岛"
+    },
+    "exploration_spot_boss": {
+      "en": "Terminus Isle Exploration",
+      "jp": "テルミナス島探査",
+      "kr": "멸망의 섬 탐사",
+      "zh": "探索灭亡之岛"
+    },
+    "exploration_normal": {
+      "en": "Terminus Isle Exploration",
+      "jp": "テルミナス島探査",
+      "kr": "멸망의 섬 탐사",
+      "zh": "探索灭亡之岛"
+    },
+    "adventure_mission": {
+      "en": "Story Normal",
+      "jp": "ストーリーノーマル",
+      "kr": "스토리(노멀)",
+      "zh": "故事普通"
+    },
+    "adventure_challenge": {
+      "en": "Challenge",
+      "jp": "チャレンジ",
+      "kr": "도전",
+      "zh": "挑战"
+    },
+    "irregular_chase": {
+      "en": "Pursuit Operation",
+      "jp": "追撃殲滅戦",
+      "kr": "추격 섬멸전",
+      "zh": "追击歼灭战"
+    },
+    "irregular_infiltrate": {
+      "en": "Infiltration Operation",
+      "jp": "侵入殲滅戦",
+      "kr": "침투 섬멸전",
+      "zh": "渗透歼灭战"
+    },
+    "ivanez_dungeon": {
+      "en": "Mirsha Festival",
+      "jp": "メルシャフェス",
+      "kr": "메르샤 페스티벌",
+      "zh": "弥乐沙节"
+    },
+    "monad_battle_1": {
+      "en": "Monad Gate",
+      "jp": "モナド・ゲート",
+      "kr": "모나드 게이트",
+      "zh": "单子门"
+    },
+    "gold": {
+      "en": "Hypnotic Frog Hall",
+      "jp": "催眠カエルの殿堂",
+      "kr": "최면 개구리의 전당",
+      "zh": "催眠青蛙殿堂"
+    },
+    "farming": {
+      "en": "Ark Raid",
+      "jp": "アーク強襲",
+      "kr": "방주 습격",
+      "zh": "方舟强袭"
+    },
+    "monad_battle_2": {
+      "en": "Dimensional Singularity",
+      "jp": "次元特異点",
+      "kr": "차원 특이점",
+      "zh": "次元奇点"
+    }
+  },
+  "rankOptions": {
+    "guild_boss_fire_1": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "buff_chance",
+      "value": 300,
+      "irremovable": true
+    },
+    "guild_boss_fire_2": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "buff_chance",
+      "value": 600,
+      "irremovable": true
+    },
+    "guild_boss_fire_3": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "buff_chance",
+      "value": 1000,
+      "irremovable": true
+    },
+    "guild_boss_fire_4": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "buff_chance",
+      "value": 1400,
+      "irremovable": true
+    },
+    "guild_boss_fire_5": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "buff_chance",
+      "value": 1800,
+      "irremovable": true
+    },
+    "guild_boss_water_1": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "atk",
+      "value": 100,
+      "irremovable": true
+    },
+    "guild_boss_water_2": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "atk",
+      "value": 200,
+      "irremovable": true
+    },
+    "guild_boss_water_3": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "atk",
+      "value": 330,
+      "irremovable": true
+    },
+    "guild_boss_water_4": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "atk",
+      "value": 460,
+      "irremovable": true
+    },
+    "guild_boss_water_5": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "atk",
+      "value": 600,
+      "irremovable": true
+    },
+    "guild_boss_earth_1": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "speed",
+      "value": 60,
+      "irremovable": true
+    },
+    "guild_boss_earth_2": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "speed",
+      "value": 120,
+      "irremovable": true
+    },
+    "guild_boss_earth_3": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "speed",
+      "value": 200,
+      "irremovable": true
+    },
+    "guild_boss_earth_4": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "speed",
+      "value": 280,
+      "irremovable": true
+    },
+    "guild_boss_earth_5": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "speed",
+      "value": 360,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_up_d": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_boost",
+      "value": 100,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_down_d": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_reduce_rate",
+      "value": 50,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_up_c": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_boost",
+      "value": 300,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_down_c": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_reduce_rate",
+      "value": 150,
+      "irremovable": true
+    },
+    "Singularity_Passive_Normal_1_1": {
+      "type": "BT_DMG_REDUCE_FINAL",
+      "value": 700
+    },
+    "Singularity_Passive_Normal_1_2": {
+      "type": "BT_DMG_REDUCE_FINAL",
+      "value": 700
+    },
+    "Singularity_Passive_Normal_2_1": {
+      "type": "BT_WG_DMG_REDUCE",
+      "value": 500,
+      "irremovable": true
+    },
+    "Singularity_Passive_Normal_2_2": {
+      "type": "BT_WG_DMG_REDUCE",
+      "value": 500,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_up_a": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_boost",
+      "value": 500,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_down_a": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_reduce_rate",
+      "value": 250,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_up_aa": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_boost",
+      "value": 600,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_down_aa": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_reduce_rate",
+      "value": 300,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_up_aaa": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_boost",
+      "value": 800,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_down_aaa": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_reduce_rate",
+      "value": 400,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_up_aaa_2": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_boost",
+      "value": 1000,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_down_aaa_2": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_reduce_rate",
+      "value": 500,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_up_aaa_3": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_boost",
+      "value": 1200,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_down_aaa_3": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_reduce_rate",
+      "value": 700,
+      "irremovable": true
+    },
+    "Singularity_Pasive_S_1": {
+      "type": "BT_STAT",
+      "stat": "pierce_power_rate",
+      "value": 300,
+      "irremovable": true,
+      "tooltip": "1008",
+      "name": {
+        "en": "Increased Penetration",
+        "jp": "貫通力UP",
+        "kr": "관통력 증가",
+        "zh": "穿透力提升"
+      }
+    },
+    "Singularity_Passive_Dmg_up_ss": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_boost",
+      "value": 2000,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_down_ss": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_reduce_rate",
+      "value": 1300,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_up_ss_2": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_boost",
+      "value": 2300,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_down_ss_2": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_reduce_rate",
+      "value": 1500,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_up_ss_3": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_boost",
+      "value": 2600,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_down_ss_3": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_reduce_rate",
+      "value": 1700,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_up_sss": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_boost",
+      "value": 3000,
+      "irremovable": true
+    },
+    "Singularity_Passive_Dmg_down_sss": {
+      "type": "BT_STAT_PREMIUM",
+      "stat": "dmg_reduce_rate",
+      "value": 2000,
+      "irremovable": true
+    }
+  },
+  "bossQuirkMods": {
+    "buff_resist": -200,
+    "buff_chance": -200
   }
 }

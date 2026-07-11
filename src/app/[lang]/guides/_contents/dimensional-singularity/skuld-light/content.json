@@ -1,0 +1,240 @@
+{
+  "intro": {
+    "en": "{E/Light}-element {C/Ranger} boss featured in the Dimensional Singularity rotation. A Speed-relativity puzzle: heroes slower than Skuld deal +50% damage to her, while heroes faster than her take +50% damage — and she ramps your whole team's {S/SPD} by 5% each turn (max +25%). She also takes +50% damage from heroes at 90% HP or less, inflicts {D/BT_SEALED} that ignores {B/BT_IMMUNE}, and caps Curse / Fixed damage at 50000.",
+    "jp": "次元特異点ローテーションに登場する{E/Light}属性{C/Ranger}ボス。スピード相対性のパズル：スクルドより{S/SPD}が遅い味方は彼女に+50%ダメージを与え、速い味方は+50%のダメージを受ける — さらに彼女は毎ターン味方全体の{S/SPD}を5%増加させる（最大+25%）。さらにHP90%以下の味方から受けるダメージが+50%、{B/BT_IMMUNE}を無視する{D/BT_SEALED}を付与し、呪い／固定ダメージは50000で頭打ちとなる。",
+    "kr": "차원 특이점 로테이션에 등장하는 {E/Light} 속성 {C/Ranger} 보스. 속도 상대성 퍼즐: 스쿨드보다 {S/SPD}가 느린 아군은 그녀에게 +50% 피해를 주고, 빠른 아군은 +50% 피해를 받습니다 — 게다가 그녀는 매 턴 아군 전체의 {S/SPD}를 5%씩 증가시킵니다(최대 +25%). 또한 HP 90% 이하인 아군에게 +50% 피해를 받고, {B/BT_IMMUNE}을 무시하는 {D/BT_SEALED}을 부여하며, 저주/고정 피해는 50000으로 제한됩니다.",
+    "zh": "出现在次元奇点轮换中的{E/Light}属性{C/Ranger}Boss。速度相对性谜题：{S/SPD}比斯库尔德慢的友军对她造成+50%伤害，而比她快的友军受到+50%伤害 — 而且她在每回合使全队{S/SPD}增加5%（最多+25%）。此外，她受到生命值90%及以下友军的伤害+50%，施加无视{B/BT_IMMUNE}的{D/BT_SEALED}，且诅咒／固定伤害上限为50000。",
+    "fr": "Boss {E/Light} {C/Ranger} présent dans la rotation de la Singularité Dimensionnelle. Un casse-tête de relativité de vitesse : les héros plus lents que Skuld lui infligent +50% de dégâts, tandis que les héros plus rapides qu'elle subissent +50% de dégâts — et elle augmente la {S/SPD} de toute votre équipe de 5% à chaque tour (max +25%). Elle subit aussi +50% de dégâts des héros à 90% PV ou moins, inflige {D/BT_SEALED} en ignorant {B/BT_IMMUNE}, et plafonne les dégâts de Malédiction / Fixes à 50000."
+  },
+  "tips": [
+    {
+      "preset": "strategy",
+      "items": [
+        {
+          "en": "Be slower than the boss. Heroes with lower {S/SPD} than Skuld deal +50% damage to her, while heroes faster than her take +50% damage. She increases your whole team's {S/SPD} by 5% at the start of every turn (max +25%), so leave a wide speed margin.",
+          "jp": "ボスより遅く保つ。スクルドより{S/SPD}が低い味方は彼女に+50%ダメージを与え、速い味方は+50%のダメージを受ける。彼女は毎ターン開始時に味方全体の{S/SPD}を5%増加させる（最大+25%）ため、十分なスピード差を確保する。",
+          "kr": "보스보다 느리게 유지하세요. 스쿨드보다 {S/SPD}가 낮은 아군은 그녀에게 +50% 피해를 주고, 빠른 아군은 +50% 피해를 받습니다. 그녀는 매 턴 시작 시 아군 전체의 {S/SPD}를 5%씩 증가시키므로(최대 +25%), 충분한 속도 차이를 확보하세요.",
+          "zh": "保持比Boss慢。{S/SPD}低于斯库尔德的友军对她造成+50%伤害，而比她快的友军受到+50%伤害。她在每回合开始时使全队{S/SPD}增加5%（最多+25%），因此要留出足够的速度差。",
+          "fr": "Restez plus lent que le Boss. Les héros dont la {S/SPD} est inférieure à celle de Skuld lui infligent +50% de dégâts, tandis que les héros plus rapides subissent +50% de dégâts. Elle augmente la {S/SPD} de toute l'équipe de 5% au début de chaque tour (max +25%) — gardez une large marge de vitesse."
+        },
+        {
+          "en": "The boss takes +50% damage from heroes at 90% current HP or less — avoid over-healing your damage dealers.",
+          "jp": "ボスは現在HPが90%以下の味方から受けるダメージが+50%増加する — アタッカーを過剰回復しない。",
+          "kr": "보스는 현재 체력이 90% 이하인 아군에게 받는 피해가 +50% 증가합니다 — 딜러를 과도하게 회복하지 마세요.",
+          "zh": "Boss受到当前生命值90%及以下友军的伤害+50% — 不要过度治疗你的输出。",
+          "fr": "Le Boss subit +50% de dégâts des héros à 90% PV actuels ou moins — évitez de sursoigner vos DPS."
+        },
+        {
+          "en": "Her S2 inflicts {D/BT_SEALED} on the whole team for 2 turns and ignores {B/BT_IMMUNE} — buffs applied during that window are blocked, so favor self-sufficient kits over buff-stacking.",
+          "jp": "S2は味方全体に2ターンの{D/BT_SEALED}を付与し、{B/BT_IMMUNE}を無視する — その間に付与したバフは無効化されるため、バフ依存より自己完結型のキットを優先する。",
+          "kr": "S2는 아군 전체에게 2턴 동안 {D/BT_SEALED}을 부여하고 {B/BT_IMMUNE}을 무시합니다 — 그동안 부여한 버프는 차단되므로, 버프 의존보다 자급자족형 캐릭터를 우선하세요.",
+          "zh": "她的S2对全队附加2回合的{D/BT_SEALED}并无视{B/BT_IMMUNE} — 此期间施加的增益会被阻挡，因此优先选择自给自足的角色而非堆叠增益。",
+          "fr": "Son S2 inflige {D/BT_SEALED} à toute l'équipe pendant 2 tours en ignorant {B/BT_IMMUNE} — les buffs appliqués durant cette fenêtre sont bloqués, privilégiez des kits autonomes plutôt que l'empilement de buffs."
+        },
+        {
+          "en": "Curse and Fixed damage dealt to the boss cannot exceed 50000. She is also immune to crowd control (Stun, Freeze, Petrify, Silence, Provoke) and to {B/BT_ACTION_GAUGE} manipulation, and she heavily manipulates priority (S1 +20%, Ultimate +30% to herself / -30% to all enemies).",
+          "jp": "ボスに与える呪い・固定ダメージは50000を超えない。さらに行動妨害（スタン、凍結、石化、沈黙、挑発）と{B/BT_ACTION_GAUGE}操作に免疫で、行動順を大きく操作する（S1で+20%、必殺技で自分+30%／敵全体-30%）。",
+          "kr": "보스에게 주는 저주·고정 피해는 50000을 초과할 수 없습니다. 또한 행동 방해(기절, 빙결, 석화, 침묵, 도발)와 {B/BT_ACTION_GAUGE} 조작에 면역이며, 행동 순서를 크게 조작합니다(S1 +20%, 필살기 자신 +30%/적 전체 -30%).",
+          "zh": "对Boss造成的诅咒及固定伤害不超过50000。她还免疫控制（眩晕、冰冻、石化、沉默、挑衅）与{B/BT_ACTION_GAUGE}操控，并大幅操控行动顺序（S1 +20%，必杀技自身+30%／全体敌人-30%）。",
+          "fr": "Les dégâts de Malédiction et Fixes infligés au Boss ne peuvent pas dépasser 50000. Elle est aussi immunisée au contrôle (Étourdissement, Gel, Pétrification, Silence, Provocation) et à la manipulation de {B/BT_ACTION_GAUGE}, et elle manipule fortement l'ordre d'action (S1 +20%, Ultime +30% pour elle / -30% à tous les ennemis)."
+        }
+      ]
+    }
+  ],
+  "teams": [
+    {
+      "character": "Gnosis Beth",
+      "groups": [
+        {
+          "characters": ["Gnosis Beth"],
+          "reason": {
+            "en": "Main DPS — carries with {D/ETERNAL_BLEEDING}. Equip {I-T/Rogue's Charm}.",
+            "jp": "メインDPS — {D/ETERNAL_BLEEDING}でキャリーする。{I-T/Rogue's Charm}を装備する。",
+            "kr": "메인 딜러 — {D/ETERNAL_BLEEDING}로 운영합니다. {I-T/Rogue's Charm}을 장착합니다.",
+            "zh": "主C — 以{D/ETERNAL_BLEEDING}进行输出。装备{I-T/Rogue's Charm}。",
+            "fr": "DPS principal — porte l'équipe avec {D/ETERNAL_BLEEDING}. Équipez {I-T/Rogue's Charm}."
+          }
+        },
+        {
+          "characters": ["Akari", "Maxie"],
+          "reason": {
+            "en": "{D/BT_EXTEND_DEBUFF} to keep {D/ETERNAL_BLEEDING} stacks alive; {P/Akari} also adds {D/BT_SEALED}. Run {I-T/Rogue's Charm} on {P/Akari} and {I-T/Mage's Charm} on {P/Maxie}.",
+            "jp": "{D/BT_EXTEND_DEBUFF}で{D/ETERNAL_BLEEDING}スタックを維持する。{P/Akari}は加えて{D/BT_SEALED}を付与する。{P/Akari}には{I-T/Rogue's Charm}、{P/Maxie}には{I-T/Mage's Charm}を装備する。",
+            "kr": "{D/BT_EXTEND_DEBUFF}으로 {D/ETERNAL_BLEEDING} 스택을 유지합니다. {P/Akari}는 추가로 {D/BT_SEALED}을 부여합니다. {P/Akari}에게는 {I-T/Rogue's Charm}, {P/Maxie}에게는 {I-T/Mage's Charm}을 장착하세요.",
+            "zh": "以{D/BT_EXTEND_DEBUFF}维持{D/ETERNAL_BLEEDING}层数；{P/Akari}还会附加{D/BT_SEALED}。{P/Akari}装备{I-T/Rogue's Charm}，{P/Maxie}装备{I-T/Mage's Charm}。",
+            "fr": "{D/BT_EXTEND_DEBUFF} pour maintenir les stacks d'{D/ETERNAL_BLEEDING} actifs ; {P/Akari} ajoute aussi {D/BT_SEALED}. Équipez {I-T/Rogue's Charm} sur {P/Akari} et {I-T/Mage's Charm} sur {P/Maxie}."
+          }
+        },
+        {
+          "characters": ["Monad Eva"],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP} dual attacks, AP battery and {B/BT_REVIVAL}. Equip {I-T/Vanguard's Charm}.",
+            "jp": "{B/BT_CALL_BACKUP}による連携攻撃、APバッテリー、{B/BT_REVIVAL}。{I-T/Vanguard's Charm}を装備する。",
+            "kr": "{B/BT_CALL_BACKUP} 연계 공격, AP 배터리, {B/BT_REVIVAL}. {I-T/Vanguard's Charm}을 장착합니다.",
+            "zh": "{B/BT_CALL_BACKUP}连携攻击、AP电池与{B/BT_REVIVAL}。装备{I-T/Vanguard's Charm}。",
+            "fr": "Attaques doubles {B/BT_CALL_BACKUP}, batterie d'AP et {B/BT_REVIVAL}. Équipez {I-T/Vanguard's Charm}."
+          }
+        },
+        {
+          "characters": ["Roxie"],
+          "reason": {
+            "en": "Takes many turns thanks to her {B/BT_ACTION_GAUGE} and {I-A/Dies Irae}, providing {D/BT_EXTEND_DEBUFF}. Equip {I-T/Mage's Charm}.",
+            "jp": "{B/BT_ACTION_GAUGE}と{I-A/Dies Irae}で多くのターンを取り、{D/BT_EXTEND_DEBUFF}を提供する。{I-T/Mage's Charm}を装備する。",
+            "kr": "{B/BT_ACTION_GAUGE}과 {I-A/Dies Irae} 덕분에 많은 턴을 가져가며 {D/BT_EXTEND_DEBUFF}을 제공합니다. {I-T/Mage's Charm}을 장착합니다.",
+            "zh": "凭借{B/BT_ACTION_GAUGE}与{I-A/Dies Irae}获得大量回合，并提供{D/BT_EXTEND_DEBUFF}。装备{I-T/Mage's Charm}。",
+            "fr": "Joue de nombreux tours grâce à sa {B/BT_ACTION_GAUGE} et à {I-A/Dies Irae}, apportant {D/BT_EXTEND_DEBUFF}. Équipez {I-T/Mage's Charm}."
+          }
+        }
+      ]
+    },
+    {
+      "character": "Gnosis Dahlia",
+      "groups": [
+        {
+          "characters": ["Gnosis Dahlia"],
+          "reason": {
+            "en": "Solo carry — the damage limit from {SK/Gnosis Dahlia|S2} lets her survive Berserk burst phases. 6★ strongly recommended; 5★ works by resetting her S3 cooldown but costs many turns.",
+            "jp": "単騎キャリア — {SK/Gnosis Dahlia|S2}によるダメージ制限で狂暴化バーストを耐える。6★を強く推奨。5★でもS3クールダウンをリセットすれば機能するが多くのターンを要する。",
+            "kr": "단독 메인 딜러 — {SK/Gnosis Dahlia|S2}의 피해 제한으로 광폭화 폭딜 페이즈를 버팁니다. 6★를 강력히 권장하며, 5★도 S3 쿨다운 초기화로 가능하지만 많은 턴이 필요합니다.",
+            "zh": "单核主C — {SK/Gnosis Dahlia|S2}提供的伤害上限可应对狂暴化爆发。强烈推荐6★，5★可通过重置S3冷却运作但需消耗大量回合。",
+            "fr": "Carry solo — la limite de dégâts de {SK/Gnosis Dahlia|S2} lui permet de survivre aux phases de burst de Berserk. 6★ fortement recommandée ; la 5★ fonctionne en réinitialisant le cooldown de son S3 mais coûte de nombreux tours."
+          }
+        },
+        {
+          "characters": ["Mystic Sage Ame"],
+          "reason": {
+            "en": "Sacrifice support (pick 3). EE boosts boss damage; she stacks buffs via Transcend (ATK at 5★, damage increase at 6★) and lowers boss {D/BT_STAT|ST_DEF} on S3. Let her die after reaching 4–5 stacks.",
+            "jp": "犠牲サポート（3体から選択）— EEでボスへのダメージが増加。超越でバフを蓄積（5★で攻撃力、6★でダメージ増加）し、S3でボスの{D/BT_STAT|ST_DEF}を減少させる。4〜5スタック貯めてから倒れさせる。",
+            "kr": "희생 서포터(3명 중 선택) — EE로 보스 피해 증가. 초월로 버프를 중첩(5★ 공격력, 6★ 피해 증가)하고 S3로 보스 {D/BT_STAT|ST_DEF}를 감소시킵니다. 4~5중첩에 도달한 뒤 사망시키세요.",
+            "zh": "牺牲型辅助（三选一）— EE提升对Boss伤害；通过超越叠加增益（5★攻击力，6★伤害提升），并以S3降低Boss{D/BT_STAT|ST_DEF}。叠满4~5层后让她阵亡。",
+            "fr": "Support sacrificiel (en choisir 3). L'EE augmente les dégâts subis par le Boss ; elle empile des buffs via Transcend (ATK à 5★, augmentation de dégâts à 6★) et réduit le {D/BT_STAT|ST_DEF} du Boss avec son S3. Laissez-la mourir après avoir atteint 4–5 stacks."
+          }
+        },
+        {
+          "characters": ["Monad Iota"],
+          "reason": {
+            "en": "Sacrifice support (pick 3). EE grants {B/BT_STAT|ST_CRITICAL_DMG_RATE} to {E/Dark} allies. Let her die before her first turn.",
+            "jp": "犠牲サポート（3体から選択）— EEで{E/Dark}属性の味方に{B/BT_STAT|ST_CRITICAL_DMG_RATE}を付与。最初のターン前に犠牲にする。",
+            "kr": "희생 서포터(3명 중 선택) — EE로 {E/Dark} 속성 아군에게 {B/BT_STAT|ST_CRITICAL_DMG_RATE}을 부여. 첫 턴 전에 희생시키세요.",
+            "zh": "牺牲型辅助（三选一）— EE为{E/Dark}属性盟友提供{B/BT_STAT|ST_CRITICAL_DMG_RATE}。首回合前献祭。",
+            "fr": "Support sacrificiel (en choisir 3). L'EE octroie {B/BT_STAT|ST_CRITICAL_DMG_RATE} aux alliés {E/Dark}. Laissez-la mourir avant son premier tour."
+          }
+        },
+        {
+          "characters": ["Demiurge Vlada"],
+          "reason": {
+            "en": "Sacrifice support (pick 3). Transcend grants +20% ATK at 6★ (10% at 4★) — any 6★ Vanguard can substitute. Let her die before her first turn.",
+            "jp": "犠牲サポート（3体から選択）— 超越で6★時+20%攻撃力（4★で10%）。6★ヴァンガードで代替可能。最初のターン前に犠牲にする。",
+            "kr": "희생 서포터(3명 중 선택) — 초월로 6★ 시 +20% 공격력(4★에서 10%). 6★ 뱅가드로 대체 가능. 첫 턴 전에 희생시키세요.",
+            "zh": "牺牲型辅助（三选一）— 超越在6★时提供+20%攻击力（4★时10%），任意6★先锋可替代。首回合前献祭。",
+            "fr": "Support sacrificiel (en choisir 3). Transcend octroie +20% d'ATK à 6★ (10% à 4★) — n'importe quel Vanguard 6★ peut la remplacer. Laissez-la mourir avant son premier tour."
+          }
+        },
+        {
+          "characters": ["Eris"],
+          "reason": {
+            "en": "Sacrifice support (pick 3). EE grants {B/BT_STAT|ST_CRITICAL_DMG_RATE} to {C/Striker} allies. Let her die before her first turn.",
+            "jp": "犠牲サポート（3体から選択）— EEで{C/Striker}味方に{B/BT_STAT|ST_CRITICAL_DMG_RATE}を付与。最初のターン前に犠牲にする。",
+            "kr": "희생 서포터(3명 중 선택) — EE로 {C/Striker} 아군에게 {B/BT_STAT|ST_CRITICAL_DMG_RATE}을 부여. 첫 턴 전에 희생시키세요.",
+            "zh": "牺牲型辅助（三选一）— EE为{C/Striker}盟友提供{B/BT_STAT|ST_CRITICAL_DMG_RATE}。首回合前献祭。",
+            "fr": "Support sacrificiel (en choisir 3). L'EE octroie {B/BT_STAT|ST_CRITICAL_DMG_RATE} aux alliés {C/Striker}. Laissez-la mourir avant son premier tour."
+          }
+        },
+        {
+          "characters": ["Bryn"],
+          "reason": {
+            "en": "Sacrifice support (pick 3). EE grants +30% DMG while holding {B/BT_BARRIER} (60% at EE+10). Let her die before her first turn.",
+            "jp": "犠牲サポート（3体から選択）— EEで{B/BT_BARRIER}保有時+30%ダメージ（EE+10で60%）。最初のターン前に犠牲にする。",
+            "kr": "희생 서포터(3명 중 선택) — EE로 {B/BT_BARRIER} 보유 시 +30% 피해(EE+10에서 60%). 첫 턴 전에 희생시키세요.",
+            "zh": "牺牲型辅助（三选一）— EE在持有{B/BT_BARRIER}时提供+30%伤害（EE+10时60%）。首回合前献祭。",
+            "fr": "Support sacrificiel (en choisir 3). L'EE octroie +30% de dégâts tant qu'elle a {B/BT_BARRIER} (60% à EE+10). Laissez-la mourir avant son premier tour."
+          }
+        }
+      ]
+    },
+    {
+      "element": "dark",
+      "groups": [
+        {
+          "characters": ["Demiurge Vlada"],
+          "reason": {
+            "en": "Decreases the boss's Priority Gain efficiency (20% at 4★, 50% at 5★).",
+            "jp": "ボスの優先度獲得効率を減少させる（4★で20%、5★で50%）。",
+            "kr": "보스의 우선도 획득 효율을 감소시킵니다(4★ 20%, 5★ 50%).",
+            "zh": "降低Boss的行动值获取效率（4★时20%，5★时50%）。",
+            "fr": "Réduit l'efficacité de gain de priorité du Boss (20% à 4★, 50% à 5★)."
+          }
+        },
+        {
+          "characters": ["Gnosis Viella"],
+          "reason": {
+            "en": "Damage option whose {D/CORROSIVE_POISON} also decreases the boss's Priority Gain efficiency.",
+            "jp": "ダメージ選択肢。{D/CORROSIVE_POISON}でボスの優先度獲得効率も減少させる。",
+            "kr": "딜링 선택지. {D/CORROSIVE_POISON}으로 보스의 우선도 획득 효율도 감소시킵니다.",
+            "zh": "输出选项，其{D/CORROSIVE_POISON}还能降低Boss的行动值获取效率。",
+            "fr": "Option de dégâts dont le {D/CORROSIVE_POISON} réduit aussi l'efficacité de gain de priorité du Boss."
+          }
+        },
+        {
+          "characters": ["Gnosis Dahlia", "Gnosis Domine", "Demiurge Astei", "Maxwell"],
+          "reason": {
+            "en": "Damage options.",
+            "jp": "ダメージ選択肢。",
+            "kr": "딜링 선택지.",
+            "zh": "输出选项。",
+            "fr": "Options de dégâts."
+          }
+        },
+        {
+          "characters": ["Monad Iota"],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP} dual attacks and buff support.",
+            "jp": "{B/BT_CALL_BACKUP}による連携攻撃とバフサポート。",
+            "kr": "{B/BT_CALL_BACKUP} 연계 공격과 버프 지원.",
+            "zh": "{B/BT_CALL_BACKUP}连携攻击与增益支援。",
+            "fr": "Attaques doubles {B/BT_CALL_BACKUP} et support de buffs."
+          }
+        },
+        {
+          "characters": ["Monad Eva"],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP} dual attacks, AP battery and {B/BT_REVIVAL} once damage ramps up.",
+            "jp": "{B/BT_CALL_BACKUP}による連携攻撃、APバッテリー、ダメージが上昇してからの{B/BT_REVIVAL}。",
+            "kr": "{B/BT_CALL_BACKUP} 연계 공격, AP 배터리, 피해가 증가할 때의 {B/BT_REVIVAL}.",
+            "zh": "{B/BT_CALL_BACKUP}连携攻击、AP电池，以及伤害递增后的{B/BT_REVIVAL}。",
+            "fr": "Attaques doubles {B/BT_CALL_BACKUP}, batterie d'AP et {B/BT_REVIVAL} une fois que les dégâts montent."
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "AP battery and {B/BT_RESURRECTION}.",
+            "jp": "APバッテリーと{B/BT_RESURRECTION}。",
+            "kr": "AP 배터리와 {B/BT_RESURRECTION}.",
+            "zh": "AP电池与{B/BT_RESURRECTION}。",
+            "fr": "Batterie d'AP et {B/BT_RESURRECTION}."
+          }
+        },
+        {
+          "characters": ["Omega Nadja"],
+          "reason": {
+            "en": "{C/Defender} providing strong teamwide damage mitigation.",
+            "jp": "{C/Defender}。チーム全体に高いダメージ軽減を提供する。",
+            "kr": "{C/Defender}로 팀 전체에 강력한 피해 감소를 제공합니다.",
+            "zh": "{C/Defender}，为全队提供高额伤害减免。",
+            "fr": "{C/Defender} apportant une forte mitigation de dégâts à toute l'équipe."
+          }
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "platform": "youtube",
+      "id": "4_6VLVfIkMI",
+      "title": "Skuld — Dimensional Singularity",
+      "author": "Jaego Sun",
+      "label": "G.Dahlia — Rank SSS++"
+    }
+  ]
+}

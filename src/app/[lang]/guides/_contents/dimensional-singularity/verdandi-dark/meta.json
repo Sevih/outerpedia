@@ -1,0 +1,20 @@
+{
+  "title": {
+    "en": "Verdandi (Dark)",
+    "jp": "ヴェルダンディ (闇)",
+    "kr": "베르단디 (암)",
+    "zh": "贝尔丹迪（暗）",
+    "fr": "Verdandi (Dark)"
+  },
+  "description": {
+    "en": "Dimensional Singularity boss guide — skills, teams & strategies",
+    "jp": "次元特異点ボス攻略 — スキル、チーム編成、攻略法",
+    "kr": "차원 특이점 보스 공략 — 스킬, 팀 편성, 공략법",
+    "zh": "次元奇点Boss攻略 — 技能、队伍编成与策略",
+    "fr": "Guide du Boss Dimensional Singularity — compétences, équipes et stratégies"
+  },
+  "icon": "CM_Gate_Icon_Monad",
+  "author": "Sevih",
+  "updated": "2026-05-16",
+  "bossId": "60000014"
+}

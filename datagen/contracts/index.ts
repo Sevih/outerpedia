@@ -176,6 +176,8 @@ export interface Glossaries {
    * Carte CLÉ ÉDITORIALE → id d'effet, par côté : clés type du jeu
    * (`BT_DOT_BURN`, `BT_STAT|ST_ATK`), noms normalisés (`POLAR_NIGHT`) et
    * alias historiques du wiki (`BT_BARRIER`). Résout les tags `{B/…}`/`{D/…}`.
+   * Suffixe `_IR` = variante INDISSIPABLE du statut (effet distinct, icône
+   * `_Interruption`) : `BT_SEALED_IR`, `BT_STAT|ST_CRITICAL_RATE_IR`…
    */
   effectByKey: Record<'buff' | 'debuff', Record<string, string>>;
   /**

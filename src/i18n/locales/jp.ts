@@ -558,16 +558,6 @@ const jp: Record<TranslationKey, string> = {
 
   // Catégories de guides : libellés + descriptions dans guide-categories.ts
   // (source unique, LocalizedText) — plus de clés de locale par catégorie.
-  'guides.singularity.info.intro':
-    '次元特異点はモナドゲートから「次元特異点モード」に切り替えてアクセスするエンドコンテンツです。水曜から土曜まで、毎日異なる特異点ボスが出現し、その日のスコアによってランキングと報酬が決まります。',
-  'guides.singularity.info.unlock': '解放条件：モナドゲート深層1の真エンディングをクリア。',
-  'guides.singularity.info.schedule':
-    '毎週水曜00:00 UTCから土曜23:59 UTCまで開放。対象ボスは毎日00:00 UTCに変化。1日2回挑戦可能。',
-  'guides.singularity.info.feature.repel': '特異点討伐：その日のボス戦を開始する。',
-  'guides.singularity.info.feature.ascension':
-    '特異点昇華装置：強化と再鍛造が最大に達した装備を昇華する。昇華により装備のメインステータスが上昇し、再鍛造回数が+3される。さらに強化+15に到達するとランダムな追加ステータスが付与される（種類は装備スロットに依存、数値はランダム）。',
-  'guides.singularity.info.feature.ranking':
-    'ランキングレポート：前日のスコアに応じた日次報酬を受け取る。',
   // Rotation : UN boss par jour (mer→sam), puis 3 jours de récompense.
   // La V2 affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
   'guides.singularity.week.title': '今週のボス',
@@ -591,6 +581,10 @@ const jp: Record<TranslationKey, string> = {
   'guides.season.last': '前回開催 {date}',
 
   'guides.tips.tactical': '戦術のヒント',
+  // Gabarits de titre de section : le SUJET (perso / élément / effet) vient de
+  // la donnée localisée, jamais d'un LangMap recopié par guide (cf. V2).
+  'guides.tips.for': '{name}戦略',
+  'guides.team.for': '{name}編成',
   'guides.tips.strategy': '戦略',
   'guides.tips.general': '全般的なヒント',
   'guides.tips.important': '重要',
@@ -606,6 +600,12 @@ const jp: Record<TranslationKey, string> = {
   'guides.strategy_guide': '攻略ガイド',
   'guides.boss_display.immunities': '免疫',
   'guides.boss_display.skills': 'スキル',
+  // Mode à SCORE : le palier est une TRANCHE DE DÉGÂTS, sa « barre » n'est
+  // pas les PV du boss (cf. BossStats).
+  'guides.boss_display.rank': 'ランク',
+  'guides.boss_display.damage': '必要ダメージ',
+  'guides.boss_display.rank_bar': 'ランクのゲージ',
+  'guides.boss_display.rank_options': 'ランクのパッシブ',
   'guides.adventure.season': 'シーズン{n}',
   'guides.adventure.spoiler_free': 'ネタバレなし',
   'guides.adventure.spoiler': '名前を表示',

@@ -1,0 +1,173 @@
+{
+  "intro": {
+    "en": "{E/Earth}-element boss featured in the Dimensional Singularity rotation. Counterattack-focused mechanics: targets without Counterattack take +50% damage and can be inflicted with Petrified.",
+    "jp": "次元特異点ローテーションに登場する{E/Earth}属性ボス。反撃を中心としたメカニクス：反撃を保有しない対象は与ダメージ+50%を受け、石化を付与される。",
+    "kr": "차원 특이점 로테이션에 등장하는 {E/Earth} 속성 보스. 반격 중심 메커닉: 반격을 보유하지 않은 대상은 +50% 피해를 입고 석화가 부여될 수 있습니다.",
+    "zh": "出现在次元奇点轮换中的{E/Earth}属性Boss。以反击为核心的机制：未持有反击的目标受到+50%伤害并可能被石化。",
+    "fr": "Boss d'élément {E/Earth} présent dans la rotation de la Singularité Dimensionnelle. Mécaniques axées sur la contre-attaque : les cibles sans Contre-attaque subissent +50% de dégâts et peuvent être pétrifiées."
+  },
+  "tips": [
+    {
+      "preset": "general",
+      "items": [
+        {
+          "en": "Keep {B/BT_COUNTERATTACK} active on your team to reduce DMG taken and prevent {D/BT_STONE} from the boss's S2.",
+          "jp": "チームに{B/BT_COUNTERATTACK}を維持し、被ダメージ軽減とS2の{D/BT_STONE}を防ぐ。",
+          "kr": "팀에 {B/BT_COUNTERATTACK}를 유지하여 받는 피해를 줄이고 S2의 {D/BT_STONE}를 방지합니다.",
+          "zh": "在队伍上保持{B/BT_COUNTERATTACK}以减少受到的伤害并防止S2的{D/BT_STONE}。",
+          "fr": "Maintenez {B/BT_COUNTERATTACK} actif sur votre équipe pour réduire les dégâts subis et empêcher le {D/BT_STONE} de son S2."
+        },
+        {
+          "en": "Debuffs charge the boss's Ultimate (Grudge resource) — minimize debuff stacking and time bursts before the 5th stack.",
+          "jp": "弱体効果はボスの必殺（恨みリソース）をチャージする — デバフを乱発せず、5スタック到達前にバーストを合わせる。",
+          "kr": "디버프가 보스의 필살기(원한 자원)를 충전합니다 — 디버프 누적을 최소화하고 5스택 도달 전에 버스트를 맞춥니다.",
+          "zh": "弱化效果会为Boss的必杀技充能（怨恨资源）——尽量减少弱化叠加，并在第5层之前打出爆发。",
+          "fr": "Les debuffs chargent son Ultime (ressource Grudge) — limitez l'empilement de debuffs et placez vos bursts avant le 5e stack."
+        },
+        {
+          "en": "Boss takes increased DMG from {B/BT_COUNTERATTACK}, {B/BT_REVENGE} and {B/BT_CALL_BACKUP} (+200%) but flat -50% otherwise — prioritize counterattack/dual-attack damage sources.",
+          "jp": "ボスは{B/BT_COUNTERATTACK}・{B/BT_REVENGE}・{B/BT_CALL_BACKUP}から受けるダメージが+200%、それ以外は-50%。反撃/連携系のダメージソースを優先。",
+          "kr": "보스는 {B/BT_COUNTERATTACK}, {B/BT_REVENGE}, {B/BT_CALL_BACKUP}로부터 +200% 피해를 받고 그 외는 -50% — 반격/협공 데미지 소스를 우선합니다.",
+          "zh": "Boss从{B/BT_COUNTERATTACK}、{B/BT_REVENGE}和{B/BT_CALL_BACKUP}受到+200%伤害，其他情况-50% — 优先选择反击/夹攻伤害来源。",
+          "fr": "Le Boss subit des dégâts accrus des {B/BT_COUNTERATTACK}, {B/BT_REVENGE} et {B/BT_CALL_BACKUP} (+200%) mais -50% fixe sinon — privilégiez les sources de dégâts de contre-attaque/attaque double."
+        },
+        {
+          "en": "Rank scaling (D → SSS): boss gains up to +300% DMG dealt and -200% DMG taken, plus elemental advantage filter from rank B+ and {S/PEN%} swap from rank S.",
+          "jp": "ランクスケーリング（D → SSS）：ボスは与ダメ最大+300%、被ダメ最大-200%。RANK B以上で属性有利フィルター、RANK Sで{S/PEN%}スワップが追加。",
+          "kr": "랭크 스케일링(D → SSS): 보스는 최대 +300% 주는 피해 / -200% 받는 피해, RANK B+에서 속성 상성 필터, RANK S에서 {S/PEN%} 스왑이 추가됩니다.",
+          "zh": "排名缩放(D → SSS)：Boss造成伤害最高+300%/受到伤害最高-200%，RANK B以上启用属性克制过滤，RANK S起新增{S/PEN%}互换。",
+          "fr": "Échelle de rang (D → SSS) : le Boss gagne jusqu'à +300% de dégâts infligés et -200% de dégâts subis, plus un filtre d'avantage élémentaire à partir du rang B+ et un échange de {S/PEN%} à partir du rang S."
+        }
+      ]
+    },
+    {
+      "character": "Mero",
+      "items": [
+        {
+          "en": "The whole strategy revolves around {P/Mero} and her kit. Each time she is healed, her skill cooldowns are reduced by 1.",
+          "jp": "戦略全体が{P/Mero}と彼女のキットを中心に組まれる。回復されるたびに、彼女のスキルクールタイムが1減少する。",
+          "kr": "전략 전체가 {P/Mero}와 그녀의 키트를 중심으로 구성됩니다. 회복될 때마다 그녀의 스킬 쿨타임이 1 감소합니다.",
+          "zh": "整套策略围绕{P/Mero}及其技能组展开。每次她被治疗时，她的技能冷却时间减少1。",
+          "fr": "Toute la stratégie repose sur {P/Mero} et son kit. Chaque fois qu'elle est soignée, les cooldowns de ses compétences sont réduits de 1."
+        },
+        {
+          "en": "Build the team tanky enough to survive the boss's first hit, then buff {P/Mero} and let the team fall on the second hit.",
+          "jp": "ボスの初撃を耐えられる程度にチームをタンキーにし、その後{P/Mero}にバフを乗せて2撃目で倒れさせるのが理想。",
+          "kr": "보스의 첫 번째 타격을 버틸 수 있을 만큼 팀을 탱키하게 만든 뒤, {P/Mero}에게 버프를 주고 두 번째 타격에서 쓰러지도록 하는 것이 이상적입니다.",
+          "zh": "队伍要足够坦克以抵挡Boss的第一击，然后给{P/Mero}增益，并让队伍在第二击时倒下。",
+          "fr": "Construisez une équipe assez résistante pour survivre au premier coup du Boss, puis buffez {P/Mero} et laissez l'équipe tomber au second coup."
+        },
+        {
+          "en": "{AS/Revenge Set} is good but not mandatory. Avoid stacking {S/SPD} to maximize counterattack opportunities.",
+          "jp": "{AS/Revenge Set}は良いが必須ではない。反撃の発動機会を最大化するため、{S/SPD}は重ねすぎない。",
+          "kr": "{AS/Revenge Set}는 좋지만 필수는 아닙니다. 반격 발동 기회를 최대화하기 위해 {S/SPD}는 과하게 쌓지 마세요.",
+          "zh": "{AS/Revenge Set}虽好但非必需。避免堆叠{S/SPD}以最大化反击触发机会。",
+          "fr": "Le {AS/Revenge Set} est bon mais pas obligatoire. Évitez d'empiler la {S/SPD} pour maximiser les opportunités de contre-attaque."
+        }
+      ]
+    },
+    {
+      "effect": "BT_DOT_BURN",
+      "items": [
+        {
+          "en": "Build around {D/BT_DOT_BURN}: {P/Vlada} detonates the stacks while {P/Maxie} and {P/Akari} keep them stacked and extended.",
+          "jp": "{D/BT_DOT_BURN}を中心に編成する：{P/Vlada}がスタックを破裂させ、{P/Maxie}と{P/Akari}が火傷を積み上げ延長する。",
+          "kr": "{D/BT_DOT_BURN}을 중심으로 구성하세요: {P/Vlada}가 스택을 폭발시키고, {P/Maxie}와 {P/Akari}가 화상을 쌓고 연장합니다.",
+          "zh": "以{D/BT_DOT_BURN}为核心组队：{P/Vlada}引爆层数，{P/Maxie}与{P/Akari}负责叠加并延长烧伤。",
+          "fr": "Construisez autour de {D/BT_DOT_BURN} : {P/Vlada} fait exploser les stacks tandis que {P/Maxie} et {P/Akari} les empilent et les prolongent."
+        }
+      ]
+    }
+  ],
+  "teams": [
+    {
+      "character": "Mero",
+      "groups": [
+        {
+          "characters": ["Mero"],
+          "reason": {
+            "en": "Main DPS — self-applies {B/BT_COUNTERATTACK} and {B/BT_UNDEAD}.",
+            "jp": "メインDPS — 自身に{B/BT_COUNTERATTACK}と{B/BT_UNDEAD}を付与する。",
+            "kr": "메인 딜러 — 자신에게 {B/BT_COUNTERATTACK}와 {B/BT_UNDEAD}를 부여합니다.",
+            "zh": "主C — 自身附加{B/BT_COUNTERATTACK}和{B/BT_UNDEAD}。",
+            "fr": "DPS principal — s'applique lui-même {B/BT_COUNTERATTACK} et {B/BT_UNDEAD}."
+          }
+        },
+        {
+          "characters": ["Tamamo-no-Mae", "Dianne", "Lyla"],
+          "reason": {
+            "en": "Sustained {B/BT_CONTINU_HEAL} to ensure {P/Mero} will always have her S2 ready.",
+            "jp": "持続的な{B/BT_CONTINU_HEAL}で{P/Mero}のS2が常に発動可能な状態を維持する。",
+            "kr": "지속적인 {B/BT_CONTINU_HEAL}로 {P/Mero}의 S2가 항상 사용 가능한 상태를 유지합니다.",
+            "zh": "持续的{B/BT_CONTINU_HEAL}以确保{P/Mero}的S2始终就绪。",
+            "fr": "{B/BT_CONTINU_HEAL} soutenu pour garantir que {P/Mero} ait toujours son S2 disponible."
+          }
+        },
+        {
+          "characters": ["Tamara", "Skadi", "Valentine", "Holy Night's Blessing Dianne"],
+          "reason": {
+            "en": "{B/BT_STAT|ST_CRITICAL_RATE} / {B/BT_STAT|ST_CRITICAL_DMG_RATE} buffers.",
+            "jp": "{B/BT_STAT|ST_CRITICAL_RATE} / {B/BT_STAT|ST_CRITICAL_DMG_RATE}バッファー。",
+            "kr": "{B/BT_STAT|ST_CRITICAL_RATE} / {B/BT_STAT|ST_CRITICAL_DMG_RATE} 버퍼.",
+            "zh": "{B/BT_STAT|ST_CRITICAL_RATE} / {B/BT_STAT|ST_CRITICAL_DMG_RATE}增益型。",
+            "fr": "Buffeurs de {B/BT_STAT|ST_CRITICAL_RATE} / {B/BT_STAT|ST_CRITICAL_DMG_RATE}."
+          }
+        },
+        {
+          "characters": ["Summer Knight's Dream Ember", "Demiurge Drakhan"],
+          "reason": {
+            "en": "{S/PEN%} buffers.",
+            "jp": "{S/PEN%}バッファー。",
+            "kr": "{S/PEN%} 버퍼.",
+            "zh": "{S/PEN%}增益型。",
+            "fr": "Buffeurs de {S/PEN%}."
+          }
+        }
+      ]
+    },
+    {
+      "effect": "BT_DOT_BURN",
+      "groups": [
+        {
+          "characters": ["Vlada"],
+          "reason": {
+            "en": "Detonates {D/BT_DOT_BURN} stacks — main DPS of the Burn team.",
+            "jp": "{D/BT_DOT_BURN}スタックを破裂させる — Burn編成のメインDPS。",
+            "kr": "{D/BT_DOT_BURN} 스택을 폭발시키는 Burn 팀의 메인 딜러.",
+            "zh": "引爆{D/BT_DOT_BURN}层数 — Burn队伍的主C。",
+            "fr": "Fait exploser les stacks de {D/BT_DOT_BURN} — DPS principal de l'équipe Burn."
+          }
+        },
+        {
+          "characters": ["Maxie", "Akari"],
+          "reason": {
+            "en": "Add {D/BT_DOT_BURN} stacks and {D/BT_EXTEND_DEBUFF} to keep them ticking.",
+            "jp": "{D/BT_DOT_BURN}スタックと{D/BT_EXTEND_DEBUFF}を追加し、火傷を維持する。",
+            "kr": "{D/BT_DOT_BURN} 스택과 {D/BT_EXTEND_DEBUFF}을 추가해 화상을 유지합니다.",
+            "zh": "追加{D/BT_DOT_BURN}层数与{D/BT_EXTEND_DEBUFF}以维持烧伤。",
+            "fr": "Ajoutent des stacks de {D/BT_DOT_BURN} et {D/BT_EXTEND_DEBUFF} pour les maintenir actifs."
+          }
+        },
+        {
+          "characters": ["Monad Eva"],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP}, AP battery and {B/BT_REVIVAL}.",
+            "jp": "{B/BT_CALL_BACKUP}、APバッテリー、{B/BT_REVIVAL}。",
+            "kr": "{B/BT_CALL_BACKUP}, AP 배터리, {B/BT_REVIVAL}.",
+            "zh": "{B/BT_CALL_BACKUP}、AP电池与{B/BT_REVIVAL}。",
+            "fr": "{B/BT_CALL_BACKUP}, batterie d'AP et {B/BT_REVIVAL}."
+          }
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "platform": "youtube",
+      "id": "yCIh-lHzUoo",
+      "title": "Shichifuja's Shadow — Dimensional Singularity — Rank SSS++",
+      "author": "Sevih",
+      "label": "Sevih"
+    }
+  ]
+}

@@ -5,7 +5,7 @@ import { lRec } from '@/lib/i18n/localize';
 import { localePath } from '@/lib/navigation';
 import { img } from '@/lib/images';
 import { serverNow } from '@/lib/time';
-import { getMonster, monsterIconSrc } from '@/lib/data/monsters';
+import { getMonster } from '@/lib/data/monsters';
 import {
   singularityGroups,
   singularityStateAt,
@@ -16,34 +16,37 @@ import { formatGuideDate, guideUpdatedDate, type Guide } from '@/lib/data/guides
 import type { CategoryViewProps } from './types';
 
 /**
- * Vue DIMENSIONAL SINGULARITY : la rotation d'abord, les guides ensuite.
+ * Vue DIMENSIONAL SINGULARITY : la rotation d'abord, la bibliothèque ensuite.
  *
  * Cette catégorie n'est pas une liste : sa valeur est de dire QUEL BOSS EST
  * ACTIF AUJOURD'HUI. Les guides s'y accrochent par le monstre combattu
- * (`meta.bossId`), comme les cartes de saison — aucun mapping manuel.
+ * (`meta.bossId`) — aucun mapping manuel.
  *
- * Deux écarts assumés avec la V2, tous deux des corrections :
+ * Écarts ASSUMÉS avec la V2, tous des corrections :
  *  - un boss PAR JOUR (mer→sam), pas « trois du mer au ven + un le samedi » ;
- *  - la section ne DISPARAÎT PAS du dimanche au mardi : pendant la phase de
- *    récompense, elle bascule sur la rotation à venir.
+ *  - la section ne DISPARAÎT PAS du dimanche au mardi (elle bascule sur la
+ *    rotation à venir) ;
+ *  - pas de mise en avant « boss du week-end » en ambre : ce concept n'existait
+ *    que parce que le modèle de la V2 était faux. Avec un boss par jour, le
+ *    samedi n'a rien de particulier.
  *
- * Le rendu dépend du jour → la route est purgée chaque nuit (cf.
- * `TIME_SENSITIVE_ROUTES` dans `src/app/api/revalidate/route.ts`). Sans ça,
- * l'ISR de 24 h afficherait le boss d'hier.
+ * Le rendu dépend du JOUR → la route est purgée chaque nuit (`/api/revalidate`).
+ * Sans ça, l'ISR de 24 h servirait le boss d'hier.
  */
 export default async function SingularityRotation({ lang, guides }: CategoryViewProps) {
   const t = await getT(lang);
   const state = singularityStateAt(serverNow());
 
   // Index monstre → guide : c'est la donnée qui relie, pas une table à la main.
-  const guideByMonster = new Map<string, Guide>();
-  for (const g of guides) if (g.bossId) guideByMonster.set(g.bossId, g);
-
-  const attached = new Set(guideByMonster.values());
+  const guideOf = new Map<string, Guide>();
+  for (const g of guides) if (g.bossId) guideOf.set(g.bossId, g);
+  const attached = new Set(guideOf.values());
   const looseGuides = guides.filter((g) => !attached.has(g));
 
-  // Bibliothèque : chaque boss DISTINCT de la rotation (les groupes réutilisent
-  // les mêmes boss — les lister par groupe en afficherait plusieurs fois).
+  // Bibliothèque : chaque boss DISTINCT de la rotation. Attention, Urd /
+  // Verdandi / Skuld existent en DEUX exemplaires (lumière et ténèbres) : même
+  // nom, même sprite, mais élément et donjon différents. Ce ne sont pas des
+  // doublons — on déduplique par MONSTRE, pas par nom.
   const seen = new Set<string>();
   const library: SingularityBoss[] = [];
   for (const group of singularityGroups()) {
@@ -55,61 +58,68 @@ export default async function SingularityRotation({ lang, guides }: CategoryView
     }
   }
 
-  const nextOpen = state.week.days[0]?.date;
+  const [today, ...rest] = [
+    ...state.week.days.filter((d) => d.state === 'today'),
+    ...state.week.days.filter((d) => d.state !== 'today'),
+  ];
+  const opensOn = state.week.days[0]?.date;
 
   return (
-    <div className="flex flex-col gap-10">
-      <section className="flex flex-col gap-4">
-        <header>
-          <h2 className="text-content-strong text-lg font-semibold">
-            {t(
-              state.betweenWeeks
-                ? 'guides.singularity.next_week.title'
-                : 'guides.singularity.week.title',
-            )}
-          </h2>
-          <p className="text-content-muted mt-1 text-sm">
-            {state.betweenWeeks && nextOpen
+    <div className="flex flex-col gap-12">
+      <section className="flex flex-col gap-5">
+        <SectionHeader
+          title={t(
+            state.betweenWeeks
+              ? 'guides.singularity.next_week.title'
+              : 'guides.singularity.week.title',
+          )}
+          tagline={
+            state.betweenWeeks && opensOn
               ? t('guides.singularity.next_week.tagline', {
-                  date: formatGuideDate(nextOpen, lang),
+                  date: formatGuideDate(opensOn, lang),
                 })
-              : t('guides.singularity.week.tagline')}
-          </p>
-        </header>
-
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          {state.week.days.map((day) => (
-            <BossCard
-              key={day.date}
-              boss={day.boss}
-              lang={lang}
-              t={t}
-              guide={guideByMonster.get(day.boss.monsters[0])}
-              dayLabel={weekday(day.date, lang)}
-              dateLabel={formatGuideDate(day.date, lang)}
-              today={day.state === 'today'}
-            />
-          ))}
+              : t('guides.singularity.week.tagline')
+          }
+        />
+        {/* La bannière du jour domine ; les autres jours tiennent dans un rail.
+            Sur mobile, le rail passe SOUS elle au lieu de disparaître (la V2 le
+            masquait — les trois autres boss de la semaine étaient invisibles). */}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-[3fr_2fr]">
+          <BannerCard
+            day={today}
+            lang={lang}
+            t={t}
+            guide={guideOf.get(today.boss.monsters[0])}
+            featured
+          />
+          <div className="flex flex-col gap-3">
+            {rest.map((day) => (
+              <BannerCard
+                key={day.date}
+                day={day}
+                lang={lang}
+                t={t}
+                guide={guideOf.get(day.boss.monsters[0])}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="flex flex-col gap-4">
-        <header>
-          <h2 className="text-content-strong text-lg font-semibold">
-            {t('guides.singularity.library.title')}
-          </h2>
-          <p className="text-content-muted mt-1 text-sm">
-            {t('guides.singularity.library.tagline')}
-          </p>
-        </header>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+      <section className="flex flex-col gap-5">
+        <SectionHeader
+          title={t('guides.singularity.library.title')}
+          tagline={t('guides.singularity.library.tagline')}
+        />
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {library.map((boss) => (
-            <BossCard
+            <LibraryCard
               key={boss.monsters[0]}
               boss={boss}
               lang={lang}
+              guide={guideOf.get(boss.monsters[0])}
+              active={state.today?.monsters[0] === boss.monsters[0]}
               t={t}
-              guide={guideByMonster.get(boss.monsters[0])}
             />
           ))}
         </div>
@@ -133,6 +143,19 @@ export default async function SingularityRotation({ lang, guides }: CategoryView
   );
 }
 
+/** En-tête de section : filet d'accent + titre + accroche. */
+function SectionHeader({ title, tagline }: { title: string; tagline: string }) {
+  return (
+    <header className="border-line-subtle relative flex flex-col gap-2 border-b pb-4">
+      <span className="bg-accent absolute -bottom-px left-0 h-0.5 w-14 rounded-full" aria-hidden />
+      <h2 className="text-content-strong text-xl font-semibold tracking-tight md:text-2xl">
+        {title}
+      </h2>
+      <p className="text-content-muted text-sm">{tagline}</p>
+    </header>
+  );
+}
+
 /** Nom du jour, localisé, dérivé de la DATE — pas d'une liste de libellés figée. */
 function weekday(iso: string, lang: Lang): string {
   return new Date(`${iso}T00:00:00Z`).toLocaleDateString(LANGUAGES[lang].htmlLang, {
@@ -141,74 +164,131 @@ function weekday(iso: string, lang: Lang): string {
   });
 }
 
+type Day = ReturnType<typeof singularityStateAt>['week']['days'][number];
+
 /**
- * Carte d'un boss. Cliquable UNIQUEMENT si un guide le couvre : un lien mort
- * vaudrait moins que pas de lien — le boss reste affiché, la rotation aussi.
+ * Bannière large d'un jour de rotation (`T_Singularity_*`, ratio 680×94 du jeu).
+ * `featured` = le boss du jour : plus grand, mis en avant. Les jours passés sont
+ * atténués. Cliquable seulement si un guide couvre le boss — un lien mort vaut
+ * moins que pas de lien.
  */
-function BossCard({
-  boss,
+function BannerCard({
+  day,
   lang,
   t,
   guide,
-  dayLabel,
-  dateLabel,
-  today = false,
+  featured = false,
 }: {
-  boss: SingularityBoss;
+  day: Day;
   lang: Lang;
   t: TFunction;
   guide?: Guide;
-  dayLabel?: string;
-  dateLabel?: string;
-  today?: boolean;
+  featured?: boolean;
 }) {
-  const monster = getMonster(boss.monsters[0]);
-  if (!monster) return null;
-
+  const monster = getMonster(day.boss.monsters[0]);
+  if (!monster || !day.boss.banner) return null;
   const name = lRec(monster.name, lang);
+  const isToday = day.state === 'today';
+
   const body = (
     <>
-      {dayLabel && (
-        <div className="mb-2 flex items-baseline justify-between gap-2">
-          <span
-            className={`font-mono text-[11px] font-semibold uppercase ${
-              today ? 'text-accent' : 'text-content-muted'
-            }`}
-          >
-            {today ? t('guides.singularity.week.today') : dayLabel}
-          </span>
-          <span className="text-content-subtle text-[10px]">{dateLabel}</span>
-        </div>
-      )}
-      <div className="flex items-center gap-2">
+      <div
+        className={`relative aspect-680/94 w-full overflow-hidden rounded-lg border ${
+          isToday ? 'border-accent ring-accent/40 ring-1' : 'border-line-subtle'
+        }`}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img
-          src={monsterIconSrc(monster)}
+          src={img.singularity(day.boss.banner)}
           alt=""
-          className="h-12 w-12 shrink-0 rounded object-contain"
+          className="absolute inset-0 h-full w-full object-cover"
           loading="lazy"
         />
+        {isToday && <span className="bg-accent absolute inset-y-0 left-0 w-0.75" aria-hidden />}
+      </div>
+      <div className="flex items-start justify-between gap-3 px-0.5">
         <div className="min-w-0">
-          <p className="text-content-strong truncate text-sm font-medium">{name}</p>
-          <span className="mt-0.5 flex items-center gap-1">
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-            <img src={img.element(monster.element)} alt="" className="h-3.5 w-3.5" />
-            <span className="text-content-muted text-xs capitalize">{monster.element}</span>
-          </span>
+          <h3
+            className={`text-content-strong line-clamp-1 font-semibold tracking-tight ${
+              featured ? 'text-base sm:text-lg' : 'text-sm'
+            }`}
+          >
+            {name}
+          </h3>
+          <p className="text-content-muted mt-0.5 text-xs capitalize">{monster.element}</p>
         </div>
+        <span
+          className={`shrink-0 font-mono text-[10px] font-semibold tracking-[0.14em] uppercase ${
+            isToday ? 'text-accent' : 'text-content-subtle'
+          }`}
+        >
+          {isToday ? t('guides.singularity.week.today') : weekday(day.date, lang)}
+        </span>
       </div>
     </>
   );
 
-  const frame = `rounded-lg border p-3 ${
-    today ? 'border-accent bg-accent/5' : 'border-line-subtle bg-surface-raised'
-  }`;
+  const frame = `group flex flex-col gap-2 ${day.state === 'past' ? 'opacity-60 hover:opacity-100' : ''} transition-opacity`;
+  if (!guide) return <div className={frame}>{body}</div>;
+  return (
+    <Link href={localePath(lang, `/guides/${guide.category}/${guide.slug}`)} className={frame}>
+      {body}
+    </Link>
+  );
+}
 
+/** Carte de bibliothèque : avatar rond du mode (`MT_Singularity_*`) + identité. */
+function LibraryCard({
+  boss,
+  lang,
+  guide,
+  active,
+  t,
+}: {
+  boss: SingularityBoss;
+  lang: Lang;
+  guide?: Guide;
+  active: boolean;
+  t: TFunction;
+}) {
+  const monster = getMonster(boss.monsters[0]);
+  if (!monster) return null;
+  const name = lRec(monster.name, lang);
+
+  const body = (
+    <div className="flex items-start gap-3">
+      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
+      <img
+        src={boss.thumbnail ? img.singularity(boss.thumbnail) : img.boss(`MT_${monster.icon}`)}
+        alt=""
+        className="border-line-subtle h-12 w-12 shrink-0 rounded-lg border object-cover"
+        loading="lazy"
+      />
+      <div className="min-w-0 flex-1">
+        <h3 className="text-content-strong line-clamp-2 text-sm font-semibold">{name}</h3>
+        <div className="mt-1 flex items-center gap-1.5">
+          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
+          <img src={img.element(monster.element)} alt="" className="h-4 w-4" />
+          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
+          <img src={img.klass(monster.class)} alt="" className="h-4 w-4" />
+        </div>
+      </div>
+      {active && (
+        <span className="text-accent shrink-0 font-mono text-[9.5px] font-semibold tracking-[0.12em] uppercase">
+          {t('guides.singularity.week.today')}
+        </span>
+      )}
+    </div>
+  );
+
+  const frame = `rounded-xl border p-4 transition-colors ${
+    active ? 'border-accent bg-accent/5' : 'border-line-subtle bg-surface-raised'
+  }`;
   if (!guide) return <div className={frame}>{body}</div>;
   return (
     <Link
       href={localePath(lang, `/guides/${guide.category}/${guide.slug}`)}
-      className={`${frame} hover:border-accent block transition-colors`}
+      className={`${frame} hover:border-accent block`}
     >
       {body}
     </Link>

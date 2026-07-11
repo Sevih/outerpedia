@@ -1,0 +1,214 @@
+{
+  "intro": {
+    "en": "{E/Light}-element {C/Striker} boss featured in the Dimensional Singularity rotation. Curse-themed encounter: it constantly applies {D/BT_DOT_CURSE} to your team, but the Curse damage it deals is halved — it wants you to hold onto those debuffs, since your team deals +10% damage per debuff held. Punishes {B/BT_IMMUNE}: every Immunity holder restores its Weakness Gauge on turn end.",
+    "jp": "次元特異点ローテーションに登場する{E/Light}属性{C/Striker}ボス。呪いテーマのバトル：味方に絶えず{D/BT_DOT_CURSE}を付与するが、自身が与える呪いダメージは半減する — 弱体効果を保有させる設計で、味方は保有する弱体効果1個あたり与ダメージ+10%。{B/BT_IMMUNE}を罰する：免疫保有者は行動終了時にボスのWGを回復させる。",
+    "kr": "차원 특이점 로테이션에 등장하는 {E/Light} 속성 {C/Striker} 보스. 저주 테마 전투: 아군에게 끊임없이 {D/BT_DOT_CURSE}를 부여하지만 자신이 주는 저주 피해는 절반으로 감소합니다 — 약화 효과를 유지하게 만드는 설계로, 아군은 보유한 약화 효과 1개당 주는 피해 +10%. {B/BT_IMMUNE}을 처벌: 면역 보유자는 행동 종료 시 보스의 약점 게이지를 회복시킵니다.",
+    "zh": "出现在次元奇点轮换中的{E/Light}属性{C/Striker}Boss。诅咒主题战斗：持续对我方附加{D/BT_DOT_CURSE}，但自身造成的诅咒伤害减半 — 设计上鼓励你保留弱化效果，因为我方每持有1个弱化效果造成的伤害+10%。惩罚{B/BT_IMMUNE}：持有免疫的单位在行动结束时会恢复Boss的弱点槽。",
+    "fr": "Boss {E/Light} {C/Striker} présent dans la rotation de la Singularité Dimensionnelle. Combat à thème malédiction : il applique sans cesse {D/BT_DOT_CURSE} à votre équipe, mais les dégâts de malédiction qu'il inflige sont réduits de moitié — il veut que vous conserviez ces debuffs, car votre équipe inflige +10% de dégâts par debuff porté. Punit {B/BT_IMMUNE} : chaque porteur d'Immunité restaure sa Weakness Gauge en fin de tour."
+  },
+  "tips": [
+    {
+      "preset": "general",
+      "items": [
+        {
+          "en": "Curse-themed boss: it applies {D/BT_DOT_CURSE} every turn but the Curse damage it deals is halved. Curse is a poor damage source against Verdandi — Curse / Fixed damage it takes is capped at 50,000 and its HP bar is segmented per rank, so even a ~4,250k HP bar only takes ~15k from Curse.",
+          "jp": "呪いテーマのボス：毎ターン{D/BT_DOT_CURSE}を付与するが、自身が与える呪いダメージは半減する。呪いはヴェルダンディへのダメージ源としては不向き — ボスが受ける呪い・固定ダメージは50,000で頭打ちで、HPバーはランクごとに分割されるため、約4,250k HPでも呪いから受けるのは約15kにとどまる。",
+          "kr": "저주 테마 보스: 매 턴 {D/BT_DOT_CURSE}를 부여하지만 자신이 주는 저주 피해는 절반으로 감소합니다. 저주는 베르단디에게 피해 수단으로 부적합합니다 — 보스가 받는 저주 / 고정 피해는 50,000으로 제한되고 HP 바가 랭크별로 분할되어, 약 4,250k HP라도 저주로는 약 15k만 입힙니다.",
+          "zh": "诅咒主题Boss：每回合附加{D/BT_DOT_CURSE}，但自身造成的诅咒伤害减半。诅咒不适合作为对贝尔丹迪的伤害来源 — Boss受到的诅咒/固定伤害上限为50,000，且其血条按评级分段，因此即便约4,250k最大生命值也只受到约15k的诅咒伤害。",
+          "fr": "Boss à thème malédiction : il applique {D/BT_DOT_CURSE} chaque tour mais les dégâts de malédiction qu'il inflige sont réduits de moitié. La malédiction est une mauvaise source de dégâts contre Verdandi — les dégâts de malédiction / fixes qu'il subit sont plafonnés à 50 000 et sa barre de vie est segmentée par rang, si bien que même une barre de ~4 250k PV ne subit que ~15k de la malédiction."
+        },
+        {
+          "en": "Your team deals +10% damage per debuff its members hold — the boss's constant Curse application actually fuels your damage output.",
+          "jp": "味方は保有する弱体効果1個あたり与ダメージ+10% — ボスの絶え間ない呪い付与がむしろ自軍の火力を伸ばす。",
+          "kr": "아군은 보유한 약화 효과 1개당 주는 피해 +10% — 보스의 끊임없는 저주 부여가 오히려 아군의 화력을 높여줍니다.",
+          "zh": "我方每持有1个弱化效果，造成的伤害+10% — Boss不断附加的诅咒反而会提升我方输出。",
+          "fr": "Votre équipe inflige +10% de dégâts par debuff porté par ses membres — l'application constante de malédiction par le Boss alimente en réalité vos dégâts."
+        },
+        {
+          "en": "A target holding {B/BT_IMMUNE} restores 2 WG for the boss on turn end — avoid blanket Immunity.",
+          "jp": "{B/BT_IMMUNE}を保有する対象は行動終了時にボスのWGを2回復させる — 無闇な免疫付与は避ける。",
+          "kr": "{B/BT_IMMUNE}을 보유한 대상은 행동 종료 시 보스의 WG를 2 회복시킵니다 — 무분별한 면역 부여는 피하세요.",
+          "zh": "持有{B/BT_IMMUNE}的目标在行动结束时为Boss恢复2点WG — 避免无差别地附加免疫。",
+          "fr": "Une cible dotée de {B/BT_IMMUNE} restaure 2 de WG au Boss en fin de tour — évitez l'Immunité généralisée."
+        },
+        {
+          "en": "Berserk triggers every 6 enemy actions; before its skill the boss dispels 2 buffs from all enemies.",
+          "jp": "狂暴化は敵が6回行動するたびに発動し、スキル使用前に敵全体の強化効果を2個解除する。",
+          "kr": "광폭화는 적이 6회 행동할 때마다 발동하며, 스킬 사용 전 적 전체의 강화 효과를 2개 해제합니다.",
+          "zh": "狂暴化由敌方每6次行动触发；使用技能前Boss解除全体敌人2个强化效果。",
+          "fr": "Berserk se déclenche toutes les 6 actions ennemies ; avant sa compétence, le Boss retire 2 buffs à tous les ennemis."
+        }
+      ]
+    },
+    {
+      "character": "Gnosis Dahlia",
+      "items": [
+        {
+          "en": "Keep {P/Gnosis Dahlia} above 30% HP before each Berserk — the boss dispels 2 buffs before its skill, which strips her barrier and leaves her exposed to a death blow.",
+          "jp": "狂暴化前に{P/Gnosis Dahlia}のHPを30%以上に保つ — ボスはスキル使用前に強化効果を2個解除するため、彼女のバリアが剥がされ、致命の一撃に晒される。",
+          "kr": "광폭화 전 {P/Gnosis Dahlia}의 HP를 30% 이상으로 유지하세요 — 보스가 스킬 사용 전 강화 효과 2개를 해제하여 보호막이 제거되고, 치명적인 일격에 노출됩니다.",
+          "zh": "在Boss狂暴化前确保{P/Gnosis Dahlia}的HP保持在30%以上 — Boss在使用技能前会解除2个强化效果，剥离其护盾，使她暴露在致命一击之下。",
+          "fr": "Maintenez {P/Gnosis Dahlia} au-dessus de 30% PV avant chaque Berserk — le Boss retire 2 buffs avant sa compétence, ce qui dissipe sa barrière et l'expose à un coup fatal."
+        }
+      ]
+    }
+  ],
+  "teams": [
+    {
+      "character": "Gnosis Dahlia",
+      "groups": [
+        {
+          "characters": ["Gnosis Dahlia"],
+          "reason": {
+            "en": "Solo carry — the damage limit from {SK/Gnosis Dahlia|S2} lets her survive Berserk burst phases. 6★ strongly recommended; 5★ works by resetting her S3 cooldown but costs many turns.",
+            "jp": "単騎キャリア — {SK/Gnosis Dahlia|S2}によるダメージ制限で狂暴化バーストを耐える。6★を強く推奨。5★でもS3クールダウンをリセットすれば機能するが多くのターンを要する。",
+            "kr": "단독 메인 딜러 — {SK/Gnosis Dahlia|S2}의 피해 제한으로 광폭화 폭딜 페이즈를 버팁니다. 6★를 강력히 권장하며, 5★도 S3 쿨다운 초기화로 가능하지만 많은 턴이 필요합니다.",
+            "zh": "单核主C — {SK/Gnosis Dahlia|S2}提供的伤害上限可应对狂暴化爆发。强烈推荐6★，5★可通过重置S3冷却运作但需消耗大量回合。",
+            "fr": "Carry solo — la limite de dégâts de {SK/Gnosis Dahlia|S2} lui permet de survivre aux phases de burst de Berserk. 6★ fortement recommandée ; la 5★ fonctionne en réinitialisant le cooldown de son S3 mais coûte de nombreux tours."
+          }
+        },
+        {
+          "characters": ["Mystic Sage Ame"],
+          "reason": {
+            "en": "Sacrifice support (pick 3). EE boosts boss damage; she stacks buffs via Transcend (ATK at 5★, damage increase at 6★) and lowers boss {D/BT_STAT|ST_DEF} on S3. Let her die after reaching 4–5 stacks.",
+            "jp": "犠牲サポート(3体から選択)— EEでボスへのダメージが増加。超越でバフを蓄積(5★で攻撃力、6★でダメージ増加)し、S3でボスの{D/BT_STAT|ST_DEF}を減少させる。4〜5スタック貯めてから倒れさせる。",
+            "kr": "희생 서포터(3명 중 선택) — EE로 보스 피해 증가. 초월로 버프를 중첩(5★ 공격력, 6★ 피해 증가)하고 S3로 보스 {D/BT_STAT|ST_DEF}를 감소시킵니다. 4~5중첩에 도달한 뒤 사망시키세요.",
+            "zh": "牺牲型辅助(三选一)— EE提升对Boss伤害；通过超越叠加增益(5★攻击力，6★伤害提升)，并以S3降低Boss{D/BT_STAT|ST_DEF}。叠满4~5层后让她阵亡。",
+            "fr": "Support sacrificiel (en choisir 3). L'EE augmente les dégâts subis par le Boss ; elle empile des buffs via Transcend (ATK à 5★, augmentation de dégâts à 6★) et réduit le {D/BT_STAT|ST_DEF} du Boss avec son S3. Laissez-la mourir après avoir atteint 4–5 stacks."
+          }
+        },
+        {
+          "characters": ["Monad Iota"],
+          "reason": {
+            "en": "Sacrifice support (pick 3). EE grants {B/BT_STAT|ST_CRITICAL_DMG_RATE} to {E/Dark} allies. Let her die before her first turn.",
+            "jp": "犠牲サポート(3体から選択)— EEで{E/Dark}属性の味方に{B/BT_STAT|ST_CRITICAL_DMG_RATE}を付与。最初のターン前に犠牲にする。",
+            "kr": "희생 서포터(3명 중 선택) — EE로 {E/Dark} 속성 아군에게 {B/BT_STAT|ST_CRITICAL_DMG_RATE}을 부여. 첫 턴 전에 희생시키세요.",
+            "zh": "牺牲型辅助(三选一)— EE为{E/Dark}属性盟友提供{B/BT_STAT|ST_CRITICAL_DMG_RATE}。首回合前献祭。",
+            "fr": "Support sacrificiel (en choisir 3). L'EE octroie {B/BT_STAT|ST_CRITICAL_DMG_RATE} aux alliés {E/Dark}. Laissez-la mourir avant son premier tour."
+          }
+        },
+        {
+          "characters": ["Demiurge Vlada"],
+          "reason": {
+            "en": "Sacrifice support (pick 3). Transcend grants +20% ATK at 6★ (10% at 4★) — any 6★ {C/Ranger|Vanguard} can substitute. Let her die before her first turn.",
+            "jp": "犠牲サポート(3体から選択)— 超越で6★時+20%攻撃力(4★で10%)。6★ {C/Ranger|Vanguard}で代替可能。最初のターン前に犠牲にする。",
+            "kr": "희생 서포터(3명 중 선택) — 초월로 6★ 시 +20% 공격력(4★에서 10%). 6★ {C/Ranger|Vanguard}로 대체 가능. 첫 턴 전에 희생시키세요.",
+            "zh": "牺牲型辅助(三选一)— 超越在6★时提供+20%攻击力(4★时10%)，任意6★ {C/Ranger|Vanguard}可替代。首回合前献祭。",
+            "fr": "Support sacrificiel (en choisir 3). Transcend octroie +20% d'ATK à 6★ (10% à 4★) — n'importe quel {C/Ranger|Vanguard} 6★ peut la remplacer. Laissez-la mourir avant son premier tour."
+          }
+        },
+        {
+          "characters": ["Eris"],
+          "reason": {
+            "en": "Sacrifice support (pick 3). EE grants {B/BT_STAT|ST_CRITICAL_DMG_RATE} to {C/Striker} allies. Let her die before her first turn.",
+            "jp": "犠牲サポート(3体から選択)— EEで{C/Striker}味方に{B/BT_STAT|ST_CRITICAL_DMG_RATE}を付与。最初のターン前に犠牲にする。",
+            "kr": "희생 서포터(3명 중 선택) — EE로 {C/Striker} 아군에게 {B/BT_STAT|ST_CRITICAL_DMG_RATE}을 부여. 첫 턴 전에 희생시키세요.",
+            "zh": "牺牲型辅助(三选一)— EE为{C/Striker}盟友提供{B/BT_STAT|ST_CRITICAL_DMG_RATE}。首回合前献祭。",
+            "fr": "Support sacrificiel (en choisir 3). L'EE octroie {B/BT_STAT|ST_CRITICAL_DMG_RATE} aux alliés {C/Striker}. Laissez-la mourir avant son premier tour."
+          }
+        },
+        {
+          "characters": ["Bryn"],
+          "reason": {
+            "en": "Sacrifice support (pick 3). EE grants +30% DMG while holding {B/BT_BARRIER} (60% at EE+10). Let her die before her first turn.",
+            "jp": "犠牲サポート(3体から選択)— EEで{B/BT_BARRIER}保有時+30%ダメージ(EE+10で60%)。最初のターン前に犠牲にする。",
+            "kr": "희생 서포터(3명 중 선택) — EE로 {B/BT_BARRIER} 보유 시 +30% 피해(EE+10에서 60%). 첫 턴 전에 희생시키세요.",
+            "zh": "牺牲型辅助(三选一)— EE在持有{B/BT_BARRIER}时提供+30%伤害(EE+10时60%)。首回合前献祭。",
+            "fr": "Support sacrificiel (en choisir 3). L'EE octroie +30% de dégâts tant qu'elle a {B/BT_BARRIER} (60% à EE+10). Laissez-la mourir avant son premier tour."
+          }
+        }
+      ]
+    },
+    {
+      "element": "dark",
+      "groups": [
+        {
+          "characters": [
+            "Gnosis Dahlia",
+            "Core Fusion Epsilon",
+            "Midnight Rush Skadi",
+            "Demiurge Astei",
+            "Maxwell",
+            "Francesca"
+          ],
+          "reason": {
+            "en": "Damage options.",
+            "jp": "ダメージ選択肢。",
+            "kr": "딜링 선택지.",
+            "zh": "输出选项。",
+            "fr": "Options de dégâts."
+          }
+        },
+        {
+          "characters": ["Gnosis Domine"],
+          "reason": {
+            "en": "Damage option that also brings {B/SPATIAL_DISTORTION_SELF} and {D/SPATIAL_DISTORTION_ENEMY}.",
+            "jp": "{B/SPATIAL_DISTORTION_SELF}と{D/SPATIAL_DISTORTION_ENEMY}も持つダメージ選択肢。",
+            "kr": "{B/SPATIAL_DISTORTION_SELF}과 {D/SPATIAL_DISTORTION_ENEMY}도 보유한 딜링 선택지.",
+            "zh": "兼具{B/SPATIAL_DISTORTION_SELF}与{D/SPATIAL_DISTORTION_ENEMY}的输出选项。",
+            "fr": "Option de dégâts qui apporte aussi {B/SPATIAL_DISTORTION_SELF} et {D/SPATIAL_DISTORTION_ENEMY}."
+          }
+        },
+        {
+          "characters": ["Gnosis Viella"],
+          "reason": {
+            "en": "Damage option that also brings {B/BANES_DOMAIN} and {D/BANES_DOMAIN}.",
+            "jp": "{B/BANES_DOMAIN}と{D/BANES_DOMAIN}も持つダメージ選択肢。",
+            "kr": "{B/BANES_DOMAIN}과 {D/BANES_DOMAIN}도 보유한 딜링 선택지.",
+            "zh": "兼具{B/BANES_DOMAIN}与{D/BANES_DOMAIN}的输出选项。",
+            "fr": "Option de dégâts qui apporte aussi {B/BANES_DOMAIN} et {D/BANES_DOMAIN}."
+          }
+        },
+        {
+          "characters": ["Monad Iota"],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP} dual attacks and buff support.",
+            "jp": "{B/BT_CALL_BACKUP}による連携攻撃とバフサポート。",
+            "kr": "{B/BT_CALL_BACKUP} 연계 공격과 버프 지원.",
+            "zh": "{B/BT_CALL_BACKUP}连携攻击与增益支援。",
+            "fr": "Attaques doubles {B/BT_CALL_BACKUP} et support de buffs."
+          }
+        },
+        {
+          "characters": ["Monad Eva"],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP} dual attacks, AP battery and {B/BT_REVIVAL} once damage ramps up.",
+            "jp": "{B/BT_CALL_BACKUP}による連携攻撃、APバッテリー、ダメージが上昇してからの{B/BT_REVIVAL}。",
+            "kr": "{B/BT_CALL_BACKUP} 연계 공격, AP 배터리, 피해가 증가할 때의 {B/BT_REVIVAL}.",
+            "zh": "{B/BT_CALL_BACKUP}连携攻击、AP电池，以及伤害递增后的{B/BT_REVIVAL}。",
+            "fr": "Attaques doubles {B/BT_CALL_BACKUP}, batterie d'AP et {B/BT_REVIVAL} une fois que les dégâts montent."
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "AP battery — avoid using her S3 or burst 3.",
+            "jp": "APバッテリー — S3やバースト3の使用は避ける。",
+            "kr": "AP 배터리 — S3나 버스트 3 사용은 피하세요.",
+            "zh": "AP电池 — 避免使用她的S3或爆发3阶。",
+            "fr": "Batterie d'AP — évitez son S3 et le burst 3."
+          }
+        },
+        {
+          "characters": ["Omega Nadja"],
+          "reason": {
+            "en": "{C/Defender} providing strong teamwide damage mitigation; {D/IRREGULAR_INFECTION} also shortens the boss's buff durations.",
+            "jp": "{C/Defender}。チーム全体に高いダメージ軽減を提供し、{D/IRREGULAR_INFECTION}でボスの強化効果の持続も短縮する。",
+            "kr": "{C/Defender}로 팀 전체에 강력한 피해 감소를 제공하며, {D/IRREGULAR_INFECTION}으로 보스의 강화 효과 지속시간도 단축합니다.",
+            "zh": "{C/Defender}，为全队提供高额伤害减免；{D/IRREGULAR_INFECTION}还能缩短Boss强化效果的持续时间。",
+            "fr": "{C/Defender} apportant une forte mitigation de dégâts à toute l'équipe ; {D/IRREGULAR_INFECTION} raccourcit aussi les durées des buffs du Boss."
+          }
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "platform": "youtube",
+      "id": "JqQpVVv4z5g",
+      "title": "Verdandi (Light) - Dimensional Singularity - Rank SSS++",
+      "author": "Sevih",
+      "label": "G.Dahlia — Rank SSS++"
+    }
+  ]
+}

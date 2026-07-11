@@ -1,0 +1,368 @@
+{
+  "intro": {
+    "en": "{E/Fire} {C/Striker} boss featured in the Dimensional Singularity rotation. Barrier check: takes +100% damage from targets holding {B/BT_BARRIER}. Lethal punisher: if Meteos kills an enemy (excluding counter / additional attacks), strips all buffs and deals lethal AoE — killed targets cannot be revived or resurrected. Stacks Fierce Ember on every hit taken and unleashes a counter at 5 stacks (damage scales inversely with target count). Berserk triggers every 7 enemy actions and applies {D/BT_SEALED} on all enemies for 2 turns.",
+    "jp": "次元特異点ローテーションに登場する{E/Fire}属性{C/Striker}ボス。シールドチェック：{B/BT_BARRIER}を保有する対象から受けるダメージ+100%。致死的なパニッシャー：メテウスが反撃や追加攻撃以外で敵を倒すと、全体の強化効果をすべて解除し致命AoEを与える — その攻撃で倒れた対象は復活・蘇生不可。被弾ごとに「猛烈な火種」を1個獲得し、5個で全体反撃（対象が少ないほどダメージUP）。狂暴化は敵が7回行動するたびに発動し、敵全体に2ターンの間{D/BT_SEALED}を付与する。",
+    "kr": "차원 특이점 로테이션에 등장하는 {E/Fire} 속성 {C/Striker} 보스. 실드 체크: {B/BT_BARRIER}을 보유한 대상에게 받는 피해 +100%. 치명 처벌형: 메테우스가 반격/추가타 외 공격으로 적을 처치하면 전체 강화 효과를 모두 해제하고 치명적인 광역 피해를 입힙니다 — 해당 공격으로 사망한 대상은 부활/소생 불가. 피격마다 '맹렬한 불씨' 1개를 획득하고 5개에서 전체 반격(대상이 적을수록 피해 증가). 광폭화는 적이 7회 행동할 때마다 발동하며 적 전체에게 2턴 동안 {D/BT_SEALED}을 부여합니다.",
+    "zh": "出现在次元奇点轮换中的{E/Fire}属性{C/Striker}Boss。护盾检定：受到持有{B/BT_BARRIER}目标的伤害+100%。致命惩罚型：若梅修斯通过反击/追击以外的攻击击杀敌人，解除全体强化效果并造成致命AoE伤害 — 因该攻击死亡的目标无法复活或苏醒。每次受击获得1个「烈火」，达到5个时对全体使用反击（目标越少伤害越高）。狂暴化由敌方每7次行动触发，对全体敌人附加2回合的{D/BT_SEALED}。",
+    "fr": "Boss {E/Fire} {C/Striker} présent dans la rotation de la Singularité Dimensionnelle. Contrôle par barrière : subit +100% de dégâts de la part des cibles dotées de {B/BT_BARRIER}. Punisseur létal : si Meteos tue un ennemi (hors contre-attaques / attaques additionnelles), il retire tous les buffs et inflige une AoE létale — les cibles ainsi tuées ne peuvent être ni ranimées ni ressuscitées. Empile Fierce Ember à chaque coup subi et déclenche une contre-attaque à 5 stacks (les dégâts évoluent inversement au nombre de cibles). Berserk se déclenche toutes les 7 actions ennemies et applique {D/BT_SEALED} à tous les ennemis pendant 2 tours."
+  },
+  "tips": [
+    {
+      "preset": "general",
+      "items": [
+        {
+          "en": "Boss takes +100% damage from targets holding {B/BT_BARRIER} — keep the whole team barriered at all times.",
+          "jp": "ボスは{B/BT_BARRIER}を保有する対象から受けるダメージ+100% — チーム全員に常にシールドを維持する。",
+          "kr": "보스는 {B/BT_BARRIER}을 보유한 대상에게 받는 피해 +100% — 팀 전원에게 항상 실드를 유지하세요.",
+          "zh": "Boss受到持有{B/BT_BARRIER}目标的伤害+100% — 始终保持全队拥有护盾。",
+          "fr": "Le Boss subit +100% de dégâts de la part des cibles dotées de {B/BT_BARRIER} — gardez toute l'équipe sous barrière en permanence."
+        },
+        {
+          "en": "Never let Meteos kill an ally with a normal skill — he strips all buffs, deals a lethal AoE and blocks revives. Stay healed and barriered.",
+          "jp": "メテウスに通常スキルで味方を倒させてはいけない — 全体の強化効果をすべて解除し、致命AoEを与え、復活を封じる。回復とシールドを切らさない。",
+          "kr": "메테우스가 일반 스킬로 아군을 처치하게 두지 마세요 — 전체 강화 효과를 모두 해제하고 치명적인 광역 피해를 입히며 부활을 봉인합니다. 체력과 실드를 유지하세요.",
+          "zh": "绝不能让梅修斯用普通技能击杀友军 — 他会解除全体强化效果、造成致命AoE并封锁复活。保持治疗与护盾。",
+          "fr": "Ne laissez jamais Meteos tuer un allié avec une compétence normale — il retire tous les buffs, inflige une AoE létale et bloque les réanimations. Restez soignés et sous barrière."
+        },
+        {
+          "en": "Meteos gains 1 Fierce Ember per hit taken; at 5 stacks he counterattacks all enemies (damage scales inversely with the number of living targets).",
+          "jp": "メテウスは被弾ごとに「猛烈な火種」を1個獲得し、5個で全体反撃を行う（生存対象が少ないほどダメージUP）。",
+          "kr": "메테우스는 피격마다 '맹렬한 불씨'를 1개 획득하며, 5개에서 전체 반격을 사용합니다(생존 대상이 적을수록 피해 증가).",
+          "zh": "梅修斯每次受击获得1个「烈火」，达到5个时对全体使用反击（存活目标越少伤害越高）。",
+          "fr": "Meteos gagne 1 Fierce Ember à chaque coup subi ; à 5 stacks, il contre-attaque tous les ennemis (les dégâts augmentent quand il reste moins de cibles vivantes)."
+        },
+        {
+          "en": "Berserk triggers every 7 enemy actions and applies {D/BT_SEALED} on all enemies for 2 turns.",
+          "jp": "狂暴化は敵が7回行動するたびに発動し、敵全体に2ターンの間{D/BT_SEALED}を付与する。",
+          "kr": "광폭화는 적이 7회 행동할 때마다 발동하며 적 전체에게 2턴 동안 {D/BT_SEALED}을 부여합니다.",
+          "zh": "狂暴化由敌方每7次行动触发，对全体敌人附加2回合的{D/BT_SEALED}。",
+          "fr": "Berserk se déclenche toutes les 7 actions ennemies et applique {D/BT_SEALED} à tous les ennemis pendant 2 tours."
+        }
+      ]
+    },
+    {
+      "character": "Gnosis Beth",
+      "items": [
+        {
+          "en": "{P/Gnosis Beth} carries with {D/ETERNAL_BLEEDING}.",
+          "jp": "{P/Gnosis Beth}を{D/ETERNAL_BLEEDING}でキャリーする。",
+          "kr": "{P/Gnosis Beth}를 {D/ETERNAL_BLEEDING}로 운영하세요.",
+          "zh": "以{P/Gnosis Beth}为主C，使用{D/ETERNAL_BLEEDING}。",
+          "fr": "{P/Gnosis Beth} porte l'équipe avec {D/ETERNAL_BLEEDING}."
+        },
+        {
+          "en": "{P/Primine} keeps the team under {B/BT_BARRIER}, enabling the +100% damage and boosting barriered allies' damage; {P/Akari} and {P/Roxie} extend DoTs; {P/Monad Eva} is the lifeline.",
+          "jp": "{P/Primine}でチームに{B/BT_BARRIER}を維持し、被ダメ+100%を発動させつつシールド保有者のダメージを強化する。{P/Akari}と{P/Roxie}でDoTを延長、{P/Monad Eva}が保険役。",
+          "kr": "{P/Primine}으로 팀에 {B/BT_BARRIER}을 유지해 +100% 피해를 발동시키고 실드 보유 아군의 피해를 강화합니다. {P/Akari}와 {P/Roxie}로 DoT를 연장하고, {P/Monad Eva}가 라이프라인입니다.",
+          "zh": "{P/Primine}为全队维持{B/BT_BARRIER}，触发+100%伤害并强化持盾友军的伤害；{P/Akari}与{P/Roxie}延长DoT；{P/Monad Eva}作为保命角色。",
+          "fr": "{P/Primine} maintient l'équipe sous {B/BT_BARRIER}, activant les +100% de dégâts et renforçant les dégâts des alliés sous barrière ; {P/Akari} et {P/Roxie} prolongent les DoTs ; {P/Monad Eva} assure la survie."
+        }
+      ]
+    },
+    {
+      "element": "water",
+      "items": [
+        {
+          "en": "Barrier-focused {E/Water} team: {P/Luna}, {P/Veronica} or {P/Summer Knight's Dream Ember} tank and keep the team under {B/BT_BARRIER} to trigger the +100% damage taken.",
+          "jp": "シールド重視の{E/Water}編成：{P/Luna}・{P/Veronica}・{P/Summer Knight's Dream Ember}がタンクを務め、チームに{B/BT_BARRIER}を維持して被ダメ+100%を発動させる。",
+          "kr": "실드 중심의 {E/Water} 편성: {P/Luna}, {P/Veronica}, {P/Summer Knight's Dream Ember}이 탱커를 맡아 팀에 {B/BT_BARRIER}을 유지해 +100% 피해를 발동시킵니다.",
+          "zh": "以护盾为核心的{E/Water}队伍：{P/Luna}、{P/Veronica}或{P/Summer Knight's Dream Ember}担任坦克并为全队维持{B/BT_BARRIER}以触发+100%受伤。",
+          "fr": "Équipe {E/Water} axée barrière : {P/Luna}, {P/Veronica} ou {P/Summer Knight's Dream Ember} encaissent et gardent l'équipe sous {B/BT_BARRIER} pour activer les +100% de dégâts subis."
+        },
+        {
+          "en": "{P/Poolside Trickster Regina} reduces the boss's resource to stall its counters; {P/Monad Eva} and {P/Primine} provide dual attacks, healing, {B/BT_REVIVAL} and {B/BT_BARRIER} + {B/BT_IMMUNE}. Round it out with one {E/Water} DPS, or {P/Mystic Sage Ame} to cut Regina's cooldown.",
+          "jp": "{P/Poolside Trickster Regina}でボスの固有資源を減らして反撃を遅らせる。{P/Monad Eva}と{P/Primine}は連携攻撃・回復・{B/BT_REVIVAL}・{B/BT_BARRIER}+{B/BT_IMMUNE}を提供。残り1枠は{E/Water}DPS、または{P/Mystic Sage Ame}（Reginaのクールダウン短縮）。",
+          "kr": "{P/Poolside Trickster Regina}으로 보스의 고유 자원을 줄여 반격을 지연시킵니다. {P/Monad Eva}와 {P/Primine}은 협공·회복·{B/BT_REVIVAL}·{B/BT_BARRIER}+{B/BT_IMMUNE}을 제공합니다. 남은 1자리는 {E/Water} 딜러 또는 {P/Mystic Sage Ame}(Regina 쿨다운 단축)로 채우세요.",
+          "zh": "{P/Poolside Trickster Regina}削减Boss的固有资源以拖延其反击；{P/Monad Eva}与{P/Primine}提供夹攻、治疗、{B/BT_REVIVAL}及{B/BT_BARRIER}+{B/BT_IMMUNE}。最后一格用一名{E/Water}输出，或{P/Mystic Sage Ame}（缩短Regina冷却）。",
+          "fr": "{P/Poolside Trickster Regina} réduit la ressource du Boss pour retarder ses contre-attaques ; {P/Monad Eva} et {P/Primine} apportent attaques doubles, soins, {B/BT_REVIVAL} et {B/BT_BARRIER} + {B/BT_IMMUNE}. Complétez avec un DPS {E/Water}, ou {P/Mystic Sage Ame} pour réduire le cooldown de Regina."
+        }
+      ]
+    },
+    {
+      "character": "Mero",
+      "items": [
+        {
+          "en": "This team gets results but is limited by element disadvantage. {P/Mero} carries with {I-W/Heartunder's Blade} for {D/BT_DOT_BURN} — open with S3, then repeat S2 (burst 1) each turn until turns run out.",
+          "jp": "この編成は機能するが属性不利で性能が制限される。{P/Mero}を{I-W/Heartunder's Blade}でキャリーし{D/BT_DOT_BURN}を付与 — S3で開幕後、ターン切れまで毎ターンS2（バースト1）を繰り返す。",
+          "kr": "이 편성은 작동하지만 속성 상성 불리로 성능이 제한됩니다. {P/Mero}를 {I-W/Heartunder's Blade}로 운영해 {D/BT_DOT_BURN}을 부여 — S3로 시작 후 턴이 끝날 때까지 매턴 S2(버스트 1)을 반복하세요.",
+          "zh": "该队伍可行但受属性劣势限制。以{P/Mero}为主C，装备{I-W/Heartunder's Blade}附加{D/BT_DOT_BURN} — 开局S3，然后每回合重复S2（爆发1）直至回合用尽。",
+          "fr": "Cette équipe fonctionne mais reste limitée par le désavantage élémentaire. {P/Mero} porte l'équipe avec {I-W/Heartunder's Blade} pour {D/BT_DOT_BURN} — ouvrez avec le S3, puis répétez le S2 (burst 1) chaque tour jusqu'à épuisement des tours."
+        },
+        {
+          "en": "Pick 3 sacrifice supports or bring no one else — they must die on Meteos' counterattack. Do not give {P/Mystic Sage Ame} an immortality buff.",
+          "jp": "犠牲サポートを3体選ぶか、他を編成しない — 彼女たちはメテウスの反撃で倒れる必要がある。{P/Mystic Sage Ame}には不死/無敵バフを付与しない。",
+          "kr": "희생 서포터를 3명 선택하거나 다른 인원을 데려오지 마세요 — 이들은 메테우스의 반격으로 사망해야 합니다. {P/Mystic Sage Ame}에게는 불사/무적 버프를 부여하지 마세요.",
+          "zh": "选择3名牺牲型辅助，或不带其他人 — 他们必须在梅修斯的反击中阵亡。不要给{P/Mystic Sage Ame}附加不死/无敌效果。",
+          "fr": "Prenez 3 supports sacrificiels ou personne d'autre — ils doivent mourir sur la contre-attaque de Meteos. Ne donnez pas de buff d'immortalité à {P/Mystic Sage Ame}."
+        }
+      ]
+    },
+    {
+      "character": "Gnosis Dahlia",
+      "items": [
+        {
+          "en": "{P/Gnosis Dahlia} solo-carries with Hubris's Dominion for the damage limit. 6★ is strongly recommended; 5★ works by resetting her S3 cooldown but costs many turns and may run out of AP.",
+          "jp": "{P/Gnosis Dahlia}がHubrisのドミニオンによるダメージ制限で単騎キャリーする。6★を強く推奨。5★でもS3クールダウンをリセットすれば機能するが多くのターンを要し、APが枯渇する可能性がある。",
+          "kr": "{P/Gnosis Dahlia}가 Hubris's Dominion의 피해 제한으로 단독 캐리합니다. 6★를 강력히 권장하며, 5★도 S3 쿨다운 초기화로 가능하지만 많은 턴이 필요하고 AP가 부족할 수 있습니다.",
+          "zh": "{P/Gnosis Dahlia}凭借Hubris's Dominion的伤害上限单核通关。强烈推荐6★；5★可通过重置S3冷却运作，但需消耗大量回合且可能耗尽AP。",
+          "fr": "{P/Gnosis Dahlia} porte l'équipe en solo grâce au plafond de dégâts de Hubris's Dominion. 6★ fortement recommandé ; 5★ fonctionne en réinitialisant le cooldown de son S3 mais coûte beaucoup de tours et risque la panne d'AP."
+        },
+        {
+          "en": "Pick 3 sacrifice supports and let them die on Meteos' first attack — they hand off one-time {S/ATK}, crit and boss-damage buffs.",
+          "jp": "犠牲サポートを3体選び、メテウスの最初の攻撃で倒れさせる — 1回限りの{S/ATK}・会心・ボスダメージバフを渡す。",
+          "kr": "희생 서포터를 3명 선택해 메테우스의 첫 공격에 사망시키세요 — 일회성 {S/ATK}, 치명, 보스 피해 버프를 넘깁니다.",
+          "zh": "选择3名牺牲型辅助，让他们在梅修斯的首次攻击中阵亡 — 传递一次性的{S/ATK}、暴击与Boss伤害增益。",
+          "fr": "Prenez 3 supports sacrificiels et laissez-les mourir sur la première attaque de Meteos — ils transmettent des buffs ponctuels d'{S/ATK}, de critique et de dégâts au Boss."
+        }
+      ]
+    }
+  ],
+  "teams": [
+    {
+      "character": "Gnosis Beth",
+      "groups": [
+        {
+          "characters": ["Gnosis Beth"],
+          "reason": {
+            "en": "Main DPS for the GBeth team.",
+            "jp": "GBeth編成のメインDPS。",
+            "kr": "GBeth 팀의 메인 딜러.",
+            "zh": "GBeth队伍的主C。",
+            "fr": "DPS principal pour l'équipe GBeth."
+          }
+        },
+        {
+          "characters": ["Akari", "Maxie"],
+          "reason": {
+            "en": "{D/BT_EXTEND_DEBUFF} to extend the team's DoTs on the boss.",
+            "jp": "{D/BT_EXTEND_DEBUFF}でチームのDoTを延長する。",
+            "kr": "{D/BT_EXTEND_DEBUFF}으로 팀의 DoT를 연장합니다.",
+            "zh": "以{D/BT_EXTEND_DEBUFF}延长全队对Boss的DoT。",
+            "fr": "{D/BT_EXTEND_DEBUFF} pour prolonger les DoTs de l'équipe sur le Boss."
+          }
+        },
+        {
+          "characters": ["Roxie"],
+          "reason": {
+            "en": "Can take many turn thanks to her {B/BT_ACTION_GAUGE} and {I-A/Dies Irae}. Provide {D/BT_EXTEND_DEBUFF}.",
+            "jp": "{B/BT_ACTION_GAUGE}と{I-A/Dies Irae}で多くのターンを取れる。{D/BT_EXTEND_DEBUFF}を提供する。",
+            "kr": "{B/BT_ACTION_GAUGE}과 {I-A/Dies Irae} 덕분에 많은 턴을 가져갈 수 있습니다. {D/BT_EXTEND_DEBUFF}을 제공합니다.",
+            "zh": "凭借{B/BT_ACTION_GAUGE}与{I-A/Dies Irae}可获得大量回合。提供{D/BT_EXTEND_DEBUFF}。",
+            "fr": "Peut jouer de nombreux tours grâce à sa {B/BT_ACTION_GAUGE} et à {I-A/Dies Irae}. Apporte {D/BT_EXTEND_DEBUFF}."
+          }
+        },
+        {
+          "characters": ["Monad Eva", "Primine"],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP} and AP battery. {P/Monad Eva} additionally provides {B/BT_REVIVAL}; {P/Primine} grants teamwide {B/BT_BARRIER} (enabling the +100% damage) and boosts barriered allies' damage.",
+            "jp": "{B/BT_CALL_BACKUP}とAPバッテリー。{P/Monad Eva}は加えて{B/BT_REVIVAL}を提供し、{P/Primine}は全体{B/BT_BARRIER}（被ダメ+100%を発動）とシールド保有者のダメージUPを提供する。",
+            "kr": "{B/BT_CALL_BACKUP} 및 AP 배터리. {P/Monad Eva}는 추가로 {B/BT_REVIVAL}을 제공하고, {P/Primine}은 전체 {B/BT_BARRIER}(+100% 피해 발동)과 실드 보유 아군의 피해 증가를 제공합니다.",
+            "zh": "{B/BT_CALL_BACKUP}与AP电池。{P/Monad Eva}额外提供{B/BT_REVIVAL}；{P/Primine}为全队赋予{B/BT_BARRIER}（触发+100%伤害）并强化持盾友军的伤害。",
+            "fr": "{B/BT_CALL_BACKUP} et batterie d'AP. {P/Monad Eva} apporte en plus {B/BT_REVIVAL} ; {P/Primine} octroie {B/BT_BARRIER} à toute l'équipe (activant les +100% de dégâts) et renforce les dégâts des alliés sous barrière."
+          }
+        }
+      ]
+    },
+    {
+      "element": "water",
+      "groups": [
+        {
+          "characters": ["Luna", "Veronica", "Summer Knight's Dream Ember"],
+          "reason": {
+            "en": "Main tank and teamwide {B/BT_BARRIER} — keeps the +100% damage taken active.",
+            "jp": "メインタンク兼全体{B/BT_BARRIER} — 被ダメ+100%を維持する。",
+            "kr": "메인 탱커이자 전체 {B/BT_BARRIER} — +100% 피해를 유지합니다.",
+            "zh": "主坦克与全队{B/BT_BARRIER} — 维持+100%受伤。",
+            "fr": "Tank principal et {B/BT_BARRIER} pour toute l'équipe — maintient les +100% de dégâts subis."
+          }
+        },
+        {
+          "characters": ["Poolside Trickster Regina"],
+          "reason": {
+            "en": "Resource Reduction to stall the boss's counterattacks.",
+            "jp": "ボスの固有資源を減らして反撃を遅らせる。",
+            "kr": "보스의 고유 자원을 줄여 반격을 지연시킵니다.",
+            "zh": "削减Boss的固有资源以拖延其反击。",
+            "fr": "Réduction de ressource pour retarder les contre-attaques du Boss."
+          }
+        },
+        {
+          "characters": ["Monad Eva", "Primine"],
+          "reason": {
+            "en": "Dual attacks and healing. {P/Monad Eva} provides {B/BT_REVIVAL}; {P/Primine} grants {B/BT_BARRIER} + {B/BT_IMMUNE}.",
+            "jp": "連携攻撃と回復。{P/Monad Eva}は{B/BT_REVIVAL}を、{P/Primine}は{B/BT_BARRIER}+{B/BT_IMMUNE}を提供する。",
+            "kr": "협공과 회복. {P/Monad Eva}는 {B/BT_REVIVAL}을, {P/Primine}은 {B/BT_BARRIER}+{B/BT_IMMUNE}을 제공합니다.",
+            "zh": "夹攻与治疗。{P/Monad Eva}提供{B/BT_REVIVAL}；{P/Primine}提供{B/BT_BARRIER}+{B/BT_IMMUNE}。",
+            "fr": "Attaques doubles et soins. {P/Monad Eva} apporte {B/BT_REVIVAL} ; {P/Primine} octroie {B/BT_BARRIER} + {B/BT_IMMUNE}."
+          }
+        },
+        {
+          "characters": ["Laplace"],
+          "reason": {
+            "en": "Pick one — {E/Water} damage dealer with self {B/BT_BARRIER}.",
+            "jp": "1枠選択 — 自身に{B/BT_BARRIER}を持つ{E/Water}アタッカー。",
+            "kr": "1자리 선택 — 자신에게 {B/BT_BARRIER}을 보유한 {E/Water} 딜러.",
+            "zh": "三选一 — 自带{B/BT_BARRIER}的{E/Water}输出。",
+            "fr": "Au choix — DPS {E/Water} avec {B/BT_BARRIER} sur lui-même."
+          }
+        },
+        {
+          "characters": ["Mystic Sage Ame"],
+          "reason": {
+            "en": "Pick one — reduces {P/Poolside Trickster Regina}'s cooldown.",
+            "jp": "1枠選択 — {P/Poolside Trickster Regina}のクールダウンを短縮する。",
+            "kr": "1자리 선택 — {P/Poolside Trickster Regina}의 쿨다운을 단축합니다.",
+            "zh": "三选一 — 缩短{P/Poolside Trickster Regina}的冷却时间。",
+            "fr": "Au choix — réduit le cooldown de {P/Poolside Trickster Regina}."
+          }
+        },
+        {
+          "characters": ["Beth", "Roxie", "Fatal", "Tamara", "Core Fusion Snow"],
+          "reason": {
+            "en": "Pick one — {E/Water} DPS options.",
+            "jp": "1枠選択 — {E/Water}DPSの選択肢。",
+            "kr": "1자리 선택 — {E/Water} 딜러 선택지.",
+            "zh": "三选一 — {E/Water}输出选项。",
+            "fr": "Au choix — options de DPS {E/Water}."
+          }
+        }
+      ]
+    },
+    {
+      "character": "Mero",
+      "groups": [
+        {
+          "characters": ["Mero"],
+          "reason": {
+            "en": "Main DPS — equips {I-W/Heartunder's Blade} for {D/BT_DOT_BURN}.",
+            "jp": "メインDPS — {I-W/Heartunder's Blade}で{D/BT_DOT_BURN}を付与する。",
+            "kr": "메인 딜러 — {I-W/Heartunder's Blade}로 {D/BT_DOT_BURN}을 부여합니다.",
+            "zh": "主C — 装备{I-W/Heartunder's Blade}附加{D/BT_DOT_BURN}。",
+            "fr": "DPS principal — équipe {I-W/Heartunder's Blade} pour {D/BT_DOT_BURN}."
+          }
+        },
+        {
+          "characters": ["Mystic Sage Ame"],
+          "reason": {
+            "en": "EE increases damage to bosses. Stacks DEF down, ATK up and damage bonus — do not give her an immortality buff.",
+            "jp": "EEでボスへのダメージが増加。防御力減少・攻撃力増加・ダメージボーナスを積み上げる — 不死/無敵バフは付与しない。",
+            "kr": "EE로 보스에게 주는 피해 증가. 방어력 감소·공격력 증가·피해 보너스를 누적 — 불사/무적 버프를 부여하지 마세요.",
+            "zh": "EE提升对Boss的伤害。叠加防御降低、攻击提升与伤害加成 — 不要给她附加不死/无敌效果。",
+            "fr": "L'EE augmente les dégâts aux Boss. Empile réduction de DEF, gain d'ATK et bonus de dégâts — ne lui donnez pas de buff d'immortalité."
+          }
+        },
+        {
+          "characters": ["Demiurge Vlada"],
+          "reason": {
+            "en": "ATK bonus — any 6★ Vanguard can substitute.",
+            "jp": "攻撃力ボーナス — 6★ヴァンガードで代替可能。",
+            "kr": "공격력 보너스 — 6★ 뱅가드로 대체 가능.",
+            "zh": "攻击力加成 — 任意6★先锋可替代。",
+            "fr": "Bonus d'ATK — remplaçable par n'importe quel Vanguard 6★."
+          }
+        },
+        {
+          "characters": ["Tamamo-no-Mae"],
+          "reason": {
+            "en": "Boss damage bonus for {E/Fire}-element allies.",
+            "jp": "{E/Fire}属性味方のボスダメージボーナス。",
+            "kr": "{E/Fire} 속성 아군의 보스 피해 보너스.",
+            "zh": "为{E/Fire}属性盟友提供Boss伤害加成。",
+            "fr": "Bonus de dégâts au Boss pour les alliés {E/Fire}."
+          }
+        },
+        {
+          "characters": ["Tamara", "Skadi", "Valentine", "Holy Night's Blessing Dianne"],
+          "reason": {
+            "en": "{B/BT_STAT|ST_CRITICAL_RATE} / {B/BT_STAT|ST_CRITICAL_DMG_RATE} buffers.",
+            "jp": "{B/BT_STAT|ST_CRITICAL_RATE} / {B/BT_STAT|ST_CRITICAL_DMG_RATE}バッファー。",
+            "kr": "{B/BT_STAT|ST_CRITICAL_RATE} / {B/BT_STAT|ST_CRITICAL_DMG_RATE} 버퍼.",
+            "zh": "{B/BT_STAT|ST_CRITICAL_RATE} / {B/BT_STAT|ST_CRITICAL_DMG_RATE}增益型。",
+            "fr": "Buffeurs de {B/BT_STAT|ST_CRITICAL_RATE} / {B/BT_STAT|ST_CRITICAL_DMG_RATE}."
+          }
+        }
+      ]
+    },
+    {
+      "character": "Gnosis Dahlia",
+      "groups": [
+        {
+          "characters": ["Gnosis Dahlia"],
+          "reason": {
+            "en": "Solo carry — Hubris's Dominion provides the damage limit. 6★ highly recommended; 5★ can work by resetting her S3 cooldown.",
+            "jp": "単騎キャリー — Hubrisのドミニオンによるダメージ制限。6★を強く推奨。5★でもS3クールダウンをリセットすれば機能する。",
+            "kr": "단독 캐리 — Hubris's Dominion의 피해 제한. 6★를 강력히 권장하며, 5★도 S3 쿨다운 초기화로 가능합니다.",
+            "zh": "单核主C — Hubris's Dominion提供伤害上限。强烈推荐6★；5★可通过重置S3冷却运作。",
+            "fr": "Carry solo — Hubris's Dominion fournit le plafond de dégâts. 6★ fortement recommandé ; 5★ possible en réinitialisant le cooldown du S3."
+          }
+        },
+        {
+          "characters": ["Mystic Sage Ame"],
+          "reason": {
+            "en": "EE increases damage to bosses. Stacks DEF down and transcend buffs (5★ ATK, 6★ damage increase).",
+            "jp": "EEでボスへのダメージが増加。防御力減少と超越バフ（5★で攻撃力、6★でダメージ増加）を積み上げる。",
+            "kr": "EE로 보스에게 주는 피해 증가. 방어력 감소와 초월 버프(5★ 공격력, 6★ 피해 증가)를 누적합니다.",
+            "zh": "EE提升对Boss的伤害。叠加防御降低与超越增益（5★攻击力，6★伤害提升）。",
+            "fr": "L'EE augmente les dégâts aux Boss. Empile réduction de DEF et buffs de transcendance (5★ ATK, 6★ hausse de dégâts)."
+          }
+        },
+        {
+          "characters": ["Monad Iota"],
+          "reason": {
+            "en": "EE grants Increased Crit Damage to {E/Dark}-element heroes.",
+            "jp": "EEで{E/Dark}属性ヒーローに会心ダメージ増加を付与する。",
+            "kr": "EE로 {E/Dark} 속성 영웅에게 치명 피해 증가를 부여합니다.",
+            "zh": "EE为{E/Dark}属性英雄提供暴击伤害提升。",
+            "fr": "L'EE octroie une hausse de dégâts critiques aux héros {E/Dark}."
+          }
+        },
+        {
+          "characters": ["Demiurge Vlada"],
+          "reason": {
+            "en": "Transcend grants +20% ATK at 6★ (10% at 4★). Any 6★ Vanguard can substitute.",
+            "jp": "超越で6★時+20%攻撃力（4★で10%）。6★ヴァンガードで代替可能。",
+            "kr": "초월로 6★ 시 +20% 공격력(4★에서 10%). 6★ 뱅가드로 대체 가능.",
+            "zh": "超越在6★时提供+20%攻击力（4★时10%）。任意6★先锋可替代。",
+            "fr": "La transcendance octroie +20% d'ATK à 6★ (10% à 4★). Remplaçable par n'importe quel Vanguard 6★."
+          }
+        },
+        {
+          "characters": ["Eris"],
+          "reason": {
+            "en": "EE grants Increased Crit Damage to {C/Striker} heroes.",
+            "jp": "EEで{C/Striker}ヒーローに会心ダメージ増加を付与する。",
+            "kr": "EE로 {C/Striker} 영웅에게 치명 피해 증가를 부여합니다.",
+            "zh": "EE为{C/Striker}英雄提供暴击伤害提升。",
+            "fr": "L'EE octroie une hausse de dégâts critiques aux héros {C/Striker}."
+          }
+        },
+        {
+          "characters": ["Bryn"],
+          "reason": {
+            "en": "EE grants +30% damage with {B/BT_BARRIER} (60% at EE+10).",
+            "jp": "EEで{B/BT_BARRIER}保有時+30%ダメージ（EE+10で60%）。",
+            "kr": "EE로 {B/BT_BARRIER} 보유 시 +30% 피해(EE+10에서 60%).",
+            "zh": "EE在持有{B/BT_BARRIER}时提供+30%伤害（EE+10时60%）。",
+            "fr": "L'EE octroie +30% de dégâts avec {B/BT_BARRIER} (60% à EE+10)."
+          }
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "platform": "youtube",
+      "id": "WUTVYyPYIq8",
+      "title": "Blazing Knight Meteos — Dimensional Singularity — Rank SSS++",
+      "author": "Sevih",
+      "label": "Rank SSS++"
+    },
+    {
+      "platform": "youtube",
+      "id": "7FrEgI696Ww",
+      "title": "Dimensional Singularity Meteos - M.Skadi Team | Outerplane",
+      "author": "Baba Yaga",
+      "label": "M.Skadi"
+    }
+  ]
+}

@@ -18,6 +18,24 @@ import type { LocalizedText } from '@contracts';
  */
 export type GuideRequirable = 'tier' | 'bossId' | 'order';
 
+/**
+ * Bloc EXPLICATIF d'un mode de jeu (« comment ça marche »), affiché en bas de sa
+ * page de catégorie. C'est de la DONNÉE, pas un composant : en V2, ce bloc était
+ * une fonction `ModeInfo` non exportée, enterrée au fond du fichier de liste du
+ * seul mode qui en avait un — en écrire un deuxième aurait voulu dire écrire un
+ * deuxième composant. Ici, un mode qui veut le sien remplit ce champ.
+ */
+export interface GuideCategoryInfo {
+  /** De quoi parle le mode. */
+  intro: LocalizedText & { en: string };
+  /** Condition de déblocage, si le mode en a une. */
+  unlock?: LocalizedText & { en: string };
+  /** Horaires / cadence, si le mode en a. */
+  schedule?: LocalizedText & { en: string };
+  /** Fonctionnalités clés (liste à puces). */
+  features?: readonly (LocalizedText & { en: string })[];
+}
+
 export interface GuideCategory {
   /** Ordre d'affichage sur la landing (croissant). */
   order: number;
@@ -27,6 +45,8 @@ export interface GuideCategory {
   desc: LocalizedText & { en: string };
   /** Champs de meta exigés par la vue de cette catégorie. */
   requires?: readonly GuideRequirable[];
+  /** Bloc « comment marche ce mode » (optionnel — tous n'en ont pas besoin). */
+  info?: GuideCategoryInfo;
 }
 
 /**
@@ -189,6 +209,52 @@ export const GUIDE_CATEGORIES = {
   'dimensional-singularity': {
     order: 6,
     icon: 'CM_Gate_Icon_Monad',
+    info: {
+      intro: {
+        en: 'Dimensional Singularity is an endgame mode accessible from Monad Gate by switching to Dimensional Singularity Mode. A different Singularity boss is active each day from Wednesday to Saturday, and your daily score determines your ranking and rewards.',
+        jp: '次元特異点はモナドゲートから「次元特異点モード」に切り替えてアクセスするエンドコンテンツです。水曜から土曜まで、毎日異なる特異点ボスが出現し、その日のスコアによってランキングと報酬が決まります。',
+        kr: '차원 특이점은 모나드 게이트에서 「차원 특이점 모드」로 전환하여 접근하는 엔드 콘텐츠입니다. 수요일부터 토요일까지 매일 다른 특이점 보스가 등장하며, 일일 점수에 따라 랭킹과 보상이 결정됩니다.',
+        zh: '次元奇点是从单子门切换至「次元奇点模式」进入的终局内容。每周三到周六，每天会出现不同的奇点Boss，当日分数将决定排名与奖励。',
+        fr: 'Dimensional Singularity est un mode de fin de jeu accessible depuis Monad Gate en passant en Dimensional Singularity Mode. Un Boss Singularity différent est actif chaque jour du mercredi au samedi, et votre score quotidien détermine votre classement et vos récompenses.',
+      },
+      unlock: {
+        en: 'Unlock condition: clear Monad Gate Depth 1 True Ending.',
+        jp: '解放条件：モナドゲート深層1の真エンディングをクリア。',
+        kr: '해금 조건: 모나드 게이트 심층 1 진 엔딩 클리어.',
+        zh: '解锁条件：通关单子门深层1的真结局。',
+        fr: 'Condition de déblocage : terminer la True Ending de Monad Gate Depth 1.',
+      },
+      schedule: {
+        en: 'Open every week from Wednesday 00:00 UTC to Saturday 23:59 UTC. The target boss changes daily at 00:00 UTC. 2 entries per day.',
+        jp: '毎週水曜00:00 UTCから土曜23:59 UTCまで開放。対象ボスは毎日00:00 UTCに変化。1日2回挑戦可能。',
+        kr: '매주 수요일 00:00 UTC부터 토요일 23:59 UTC까지 개방. 대상 보스는 매일 00:00 UTC에 변경. 1일 2회 도전 가능.',
+        zh: '每周三00:00 UTC至周六23:59 UTC开放。目标Boss每日00:00 UTC更换。每日2次挑战机会。',
+        fr: 'Ouvert chaque semaine du mercredi 00:00 UTC au samedi 23:59 UTC. Le Boss cible change chaque jour à 00:00 UTC. 2 entrées par jour.',
+      },
+      features: [
+        {
+          en: 'Singularity Repel: launch the daily boss battle.',
+          jp: '特異点討伐：その日のボス戦を開始する。',
+          kr: '특이점 격퇴: 당일 보스전을 시작합니다.',
+          zh: '奇点击退：开始当日的Boss战斗。',
+          fr: 'Singularity Repel : lance le combat de Boss du jour.',
+        },
+        {
+          en: "Singularity Ascension Device: ascend gear that has reached max Enhancement and max Reforge. Ascending boosts the gear's main stat(s) and grants 3 extra Reforge attempts; reaching Enhancement +15 then adds a random bonus stat (type depends on the slot, value is random).",
+          jp: '特異点昇華装置：強化と再鍛造が最大に達した装備を昇華する。昇華により装備のメインステータスが上昇し、再鍛造回数が+3される。さらに強化+15に到達するとランダムな追加ステータスが付与される（種類は装備スロットに依存、数値はランダム）。',
+          kr: '특이점 승화 장치: 강화와 재련이 최대치에 도달한 장비를 승화합니다. 승화 시 장비의 메인 스탯이 상승하고 재련 횟수가 +3되며, 강화 +15에 도달하면 추가 랜덤 스탯이 부여됩니다(종류는 장비 슬롯에 따라 다르며, 수치는 랜덤).',
+          zh: '奇点升华装置：将达到最大强化和最大重铸的装备进行升华。升华会提升装备的主属性数值并获得+3次重铸机会；强化等级达到+15时还会附加一项随机额外属性（类型取决于装备槽位，数值随机）。',
+          fr: "Singularity Ascension Device : fait ascensionner un équipement ayant atteint l'Enhancement max et le Reforge max. L'ascension augmente la/les stat(s) principale(s) de l'équipement et octroie 3 tentatives de Reforge supplémentaires ; atteindre Enhancement +15 ajoute alors une stat bonus aléatoire (le type dépend du slot, la valeur est aléatoire).",
+        },
+        {
+          en: 'Ranking Report: claim daily rewards based on your score the previous day.',
+          jp: 'ランキングレポート：前日のスコアに応じた日次報酬を受け取る。',
+          kr: '랭킹 보고서: 전일 점수에 따른 일일 보상을 수령합니다.',
+          zh: '排名报告：根据前一日分数领取每日奖励。',
+          fr: 'Ranking Report : récupérez vos récompenses quotidiennes en fonction de votre score de la veille.',
+        },
+      ],
+    },
     label: {
       en: 'Dimensional Singularity',
       jp: '次元特異点',
@@ -334,4 +400,9 @@ export function isGuideCategory(value: string): value is GuideCategorySlug {
  */
 export function categoryRequires(category: GuideCategorySlug): readonly GuideRequirable[] {
   return (GUIDE_CATEGORIES[category] as GuideCategory).requires ?? [];
+}
+
+/** Bloc « comment marche ce mode », si la catégorie en déclare un. */
+export function categoryInfo(category: GuideCategorySlug): GuideCategoryInfo | undefined {
+  return (GUIDE_CATEGORIES[category] as GuideCategory).info;
 }

@@ -1,0 +1,143 @@
+{
+  "intro": {
+    "en": "{E/Dark}-element {C/Ranger} boss featured in the Dimensional Singularity rotation. A Speed-relativity puzzle: heroes slower than Skuld deal +50% damage to her, while heroes faster than her take +50% damage — and she ramps your whole team's {S/SPD} by 5% each turn (max +25%). She also takes +50% damage from heroes at 90% HP or less, inflicts {D/BT_SEALED} that ignores {B/BT_IMMUNE}, and caps Curse / Fixed damage at 50000. As a {E/Dark} boss her Berserk passive heavily mitigates damage from non-advantage targets, so {E/Light} heroes are favored.",
+    "jp": "次元特異点ローテーションに登場する{E/Dark}属性{C/Ranger}ボス。スピード相対性のパズル：スクルドより{S/SPD}が遅い味方は彼女に+50%ダメージを与え、速い味方は+50%のダメージを受ける — さらに彼女は毎ターン味方全体の{S/SPD}を5%増加させる（最大+25%）。さらにHP90%以下の味方から受けるダメージが+50%、{B/BT_IMMUNE}を無視する{D/BT_SEALED}を付与し、呪い／固定ダメージは50000で頭打ちとなる。{E/Dark}属性ボスのため、狂暴化パッシブが有利相性でない対象からのダメージを大きく軽減するため、{E/Light}属性の味方が有利となる。",
+    "kr": "차원 특이점 로테이션에 등장하는 {E/Dark} 속성 {C/Ranger} 보스. 속도 상대성 퍼즐: 스쿨드보다 {S/SPD}가 느린 아군은 그녀에게 +50% 피해를 주고, 빠른 아군은 +50% 피해를 받습니다 — 게다가 그녀는 매 턴 아군 전체의 {S/SPD}를 5%씩 증가시킵니다(최대 +25%). 또한 HP 90% 이하인 아군에게 +50% 피해를 받고, {B/BT_IMMUNE}을 무시하는 {D/BT_SEALED}을 부여하며, 저주/고정 피해는 50000으로 제한됩니다. {E/Dark} 속성 보스이므로 광폭화 패시브가 유리 상성이 아닌 대상의 피해를 크게 감소시켜 {E/Light} 속성 아군이 유리합니다.",
+    "zh": "出现在次元奇点轮换中的{E/Dark}属性{C/Ranger}Boss。速度相对性谜题：{S/SPD}比斯库尔德慢的友军对她造成+50%伤害，而比她快的友军受到+50%伤害 — 而且她在每回合使全队{S/SPD}增加5%（最多+25%）。此外，她受到生命值90%及以下友军的伤害+50%，施加无视{B/BT_IMMUNE}的{D/BT_SEALED}，且诅咒／固定伤害上限为50000。作为{E/Dark}属性Boss，她的狂暴化被动会大幅减免非克制属性目标的伤害，因此{E/Light}属性友军更具优势。",
+    "fr": "Boss {E/Dark} {C/Ranger} présent dans la rotation de la Singularité Dimensionnelle. Un casse-tête de relativité de vitesse : les héros plus lents que Skuld lui infligent +50% de dégâts, tandis que les héros plus rapides qu'elle subissent +50% de dégâts — et elle augmente la {S/SPD} de toute votre équipe de 5% à chaque tour (max +25%). Elle subit aussi +50% de dégâts des héros à 90% PV ou moins, inflige {D/BT_SEALED} en ignorant {B/BT_IMMUNE}, et plafonne les dégâts de Malédiction / Fixes à 50000. En tant que boss {E/Dark}, son passif de Berserk réduit fortement les dégâts des cibles sans avantage élémentaire, ce qui favorise les héros {E/Light}."
+  },
+  "tips": [
+    {
+      "preset": "strategy",
+      "items": [
+        {
+          "en": "Be slower than the boss. Heroes with lower {S/SPD} than Skuld deal +50% damage to her, while heroes faster than her take +50% damage. She increases your whole team's {S/SPD} by 5% at the start of every turn (max +25%), so leave a wide speed margin.",
+          "jp": "ボスより遅く保つ。スクルドより{S/SPD}が低い味方は彼女に+50%ダメージを与え、速い味方は+50%のダメージを受ける。彼女は毎ターン開始時に味方全体の{S/SPD}を5%増加させる（最大+25%）ため、十分なスピード差を確保する。",
+          "kr": "보스보다 느리게 유지하세요. 스쿨드보다 {S/SPD}가 낮은 아군은 그녀에게 +50% 피해를 주고, 빠른 아군은 +50% 피해를 받습니다. 그녀는 매 턴 시작 시 아군 전체의 {S/SPD}를 5%씩 증가시키므로(최대 +25%), 충분한 속도 차이를 확보하세요.",
+          "zh": "保持比Boss慢。{S/SPD}低于斯库尔德的友军对她造成+50%伤害，而比她快的友军受到+50%伤害。她在每回合开始时使全队{S/SPD}增加5%（最多+25%），因此要留出足够的速度差。",
+          "fr": "Restez plus lent que le Boss. Les héros dont la {S/SPD} est inférieure à celle de Skuld lui infligent +50% de dégâts, tandis que les héros plus rapides subissent +50% de dégâts. Elle augmente la {S/SPD} de toute l'équipe de 5% au début de chaque tour (max +25%) — gardez une large marge de vitesse."
+        },
+        {
+          "en": "As a {E/Dark} boss, her Berserk passive reduces Final DMG and WG DMG taken from non-advantage targets by 70% / 50% (from Rank B). Build around {E/Light} heroes for elemental advantage.",
+          "jp": "{E/Dark}属性ボスのため、狂暴化パッシブは有利相性でない対象から受ける最終ダメージとWGダメージをそれぞれ70%／50%減少させる（RANK B から）。属性有利を取れる{E/Light}属性の味方を中心に編成する。",
+          "kr": "{E/Dark} 속성 보스이므로 광폭화 패시브는 유리 상성이 아닌 대상에게 받는 최종 피해와 WG 피해를 각각 70%/50% 감소시킵니다(RANK B 부터). 속성 유리를 가지는 {E/Light} 속성 아군을 중심으로 편성하세요.",
+          "zh": "作为{E/Dark}属性Boss，她的狂暴化被动会使受到非克制属性目标的最终伤害和WG伤害分别减少70%/50%（从RANK B开始）。请以拥有属性克制的{E/Light}属性友军为核心进行编成。",
+          "fr": "En tant que boss {E/Dark}, son passif de Berserk réduit les dégâts finaux et les dégâts de WG subis des cibles sans avantage de 70% / 50% (à partir du Rang B). Construisez autour de héros {E/Light} pour l'avantage élémentaire."
+        },
+        {
+          "en": "The boss takes +50% damage from heroes at 90% current HP or less — avoid over-healing your damage dealers.",
+          "jp": "ボスは現在HPが90%以下の味方から受けるダメージが+50%増加する — アタッカーを過剰回復しない。",
+          "kr": "보스는 현재 체력이 90% 이하인 아군에게 받는 피해가 +50% 증가합니다 — 딜러를 과도하게 회복하지 마세요.",
+          "zh": "Boss受到当前生命值90%及以下友军的伤害+50% — 不要过度治疗你的输出。",
+          "fr": "Le Boss subit +50% de dégâts des héros à 90% PV actuels ou moins — évitez de sursoigner vos DPS."
+        },
+        {
+          "en": "Her S2 inflicts {D/BT_SEALED} on the whole team for 2 turns and ignores {B/BT_IMMUNE} — buffs applied during that window are blocked, so favor self-sufficient kits over buff-stacking.",
+          "jp": "S2は味方全体に2ターンの{D/BT_SEALED}を付与し、{B/BT_IMMUNE}を無視する — その間に付与したバフは無効化されるため、バフ依存より自己完結型のキットを優先する。",
+          "kr": "S2는 아군 전체에게 2턴 동안 {D/BT_SEALED}을 부여하고 {B/BT_IMMUNE}을 무시합니다 — 그동안 부여한 버프는 차단되므로, 버프 의존보다 자급자족형 캐릭터를 우선하세요.",
+          "zh": "她的S2对全队附加2回合的{D/BT_SEALED}并无视{B/BT_IMMUNE} — 此期间施加的增益会被阻挡，因此优先选择自给自足的角色而非堆叠增益。",
+          "fr": "Son S2 inflige {D/BT_SEALED} à toute l'équipe pendant 2 tours en ignorant {B/BT_IMMUNE} — les buffs appliqués durant cette fenêtre sont bloqués, privilégiez des kits autonomes plutôt que l'empilement de buffs."
+        },
+        {
+          "en": "Curse and Fixed damage dealt to the boss cannot exceed 50000. She is also immune to crowd control (Stun, Freeze, Petrify, Silence, Provoke) and to {B/BT_ACTION_GAUGE} manipulation, and she heavily manipulates priority (S1 +20%, Ultimate +30% to herself / -30% to all enemies).",
+          "jp": "ボスに与える呪い・固定ダメージは50000を超えない。さらに行動妨害（スタン、凍結、石化、沈黙、挑発）と{B/BT_ACTION_GAUGE}操作に免疫で、行動順を大きく操作する（S1で+20%、必殺技で自分+30%／敵全体-30%）。",
+          "kr": "보스에게 주는 저주·고정 피해는 50000을 초과할 수 없습니다. 또한 행동 방해(기절, 빙결, 석화, 침묵, 도발)와 {B/BT_ACTION_GAUGE} 조작에 면역이며, 행동 순서를 크게 조작합니다(S1 +20%, 필살기 자신 +30%/적 전체 -30%).",
+          "zh": "对Boss造成的诅咒及固定伤害不超过50000。她还免疫控制（眩晕、冰冻、石化、沉默、挑衅）与{B/BT_ACTION_GAUGE}操控，并大幅操控行动顺序（S1 +20%，必杀技自身+30%／全体敌人-30%）。",
+          "fr": "Les dégâts de Malédiction et Fixes infligés au Boss ne peuvent pas dépasser 50000. Elle est aussi immunisée au contrôle (Étourdissement, Gel, Pétrification, Silence, Provocation) et à la manipulation de {B/BT_ACTION_GAUGE}, et elle manipule fortement l'ordre d'action (S1 +20%, Ultime +30% pour elle / -30% à tous les ennemis)."
+        }
+      ]
+    }
+  ],
+  "teams": [
+    {
+      "character": "Gnosis Beth",
+      "groups": [
+        {
+          "characters": ["Gnosis Beth"],
+          "reason": {
+            "en": "Main DPS — carries with {D/ETERNAL_BLEEDING}. Equip {I-T/Rogue's Charm}.",
+            "jp": "メインDPS — {D/ETERNAL_BLEEDING}でキャリーする。{I-T/Rogue's Charm}を装備する。",
+            "kr": "메인 딜러 — {D/ETERNAL_BLEEDING}로 운영합니다. {I-T/Rogue's Charm}을 장착합니다.",
+            "zh": "主C — 以{D/ETERNAL_BLEEDING}进行输出。装备{I-T/Rogue's Charm}。",
+            "fr": "DPS principal — porte l'équipe avec {D/ETERNAL_BLEEDING}. Équipez {I-T/Rogue's Charm}."
+          }
+        },
+        {
+          "characters": ["Akari", "Maxie"],
+          "reason": {
+            "en": "{D/BT_EXTEND_DEBUFF} to keep {D/ETERNAL_BLEEDING} stacks alive; {P/Akari} also adds {D/BT_SEALED}. Run {I-T/Rogue's Charm} on {P/Akari} and {I-T/Mage's Charm} on {P/Maxie}.",
+            "jp": "{D/BT_EXTEND_DEBUFF}で{D/ETERNAL_BLEEDING}スタックを維持する。{P/Akari}は加えて{D/BT_SEALED}を付与する。{P/Akari}には{I-T/Rogue's Charm}、{P/Maxie}には{I-T/Mage's Charm}を装備する。",
+            "kr": "{D/BT_EXTEND_DEBUFF}으로 {D/ETERNAL_BLEEDING} 스택을 유지합니다. {P/Akari}는 추가로 {D/BT_SEALED}을 부여합니다. {P/Akari}에게는 {I-T/Rogue's Charm}, {P/Maxie}에게는 {I-T/Mage's Charm}을 장착하세요.",
+            "zh": "以{D/BT_EXTEND_DEBUFF}维持{D/ETERNAL_BLEEDING}层数；{P/Akari}还会附加{D/BT_SEALED}。{P/Akari}装备{I-T/Rogue's Charm}，{P/Maxie}装备{I-T/Mage's Charm}。",
+            "fr": "{D/BT_EXTEND_DEBUFF} pour maintenir les stacks d'{D/ETERNAL_BLEEDING} actifs ; {P/Akari} ajoute aussi {D/BT_SEALED}. Équipez {I-T/Rogue's Charm} sur {P/Akari} et {I-T/Mage's Charm} sur {P/Maxie}."
+          }
+        },
+        {
+          "characters": ["Monad Eva"],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP} dual attacks, AP battery and {B/BT_REVIVAL}. Equip {I-T/Vanguard's Charm}.",
+            "jp": "{B/BT_CALL_BACKUP}による連携攻撃、APバッテリー、{B/BT_REVIVAL}。{I-T/Vanguard's Charm}を装備する。",
+            "kr": "{B/BT_CALL_BACKUP} 연계 공격, AP 배터리, {B/BT_REVIVAL}. {I-T/Vanguard's Charm}을 장착합니다.",
+            "zh": "{B/BT_CALL_BACKUP}连携攻击、AP电池与{B/BT_REVIVAL}。装备{I-T/Vanguard's Charm}。",
+            "fr": "Attaques doubles {B/BT_CALL_BACKUP}, batterie d'AP et {B/BT_REVIVAL}. Équipez {I-T/Vanguard's Charm}."
+          }
+        },
+        {
+          "characters": ["Roxie"],
+          "reason": {
+            "en": "Takes many turns thanks to her {B/BT_ACTION_GAUGE} and {I-A/Dies Irae}, providing {D/BT_EXTEND_DEBUFF}. Equip {I-T/Mage's Charm}.",
+            "jp": "{B/BT_ACTION_GAUGE}と{I-A/Dies Irae}で多くのターンを取り、{D/BT_EXTEND_DEBUFF}を提供する。{I-T/Mage's Charm}を装備する。",
+            "kr": "{B/BT_ACTION_GAUGE}과 {I-A/Dies Irae} 덕분에 많은 턴을 가져가며 {D/BT_EXTEND_DEBUFF}을 제공합니다. {I-T/Mage's Charm}을 장착합니다.",
+            "zh": "凭借{B/BT_ACTION_GAUGE}与{I-A/Dies Irae}获得大量回合，并提供{D/BT_EXTEND_DEBUFF}。装备{I-T/Mage's Charm}。",
+            "fr": "Joue de nombreux tours grâce à sa {B/BT_ACTION_GAUGE} et à {I-A/Dies Irae}, apportant {D/BT_EXTEND_DEBUFF}. Équipez {I-T/Mage's Charm}."
+          }
+        }
+      ]
+    },
+    {
+      "element": "light",
+      "groups": [
+        {
+          "characters": ["Demiurge Luna", "Regina"],
+          "reason": {
+            "en": "Main damage dealer with high damage mitigation.",
+            "jp": "高い被ダメージ軽減を持つメインアタッカー。",
+            "kr": "높은 피해 감소를 지닌 메인 딜러.",
+            "zh": "具备高伤害减免的主C。",
+            "fr": "DPS principal doté d'une forte réduction de dégâts."
+          }
+        },
+        {
+          "characters": ["Skadi"],
+          "reason": {
+            "en": "Cooldown reductions, plus buffs to cover for immortality, revival and invincibility.",
+            "jp": "クールダウン短縮に加え、不死・復活・無敵をカバーするバフを提供する。",
+            "kr": "쿨다운 감소와 더불어 불사·부활·무적을 보완하는 버프를 제공합니다.",
+            "zh": "提供冷却缩减，以及保障不死、复活与无敌的增益。",
+            "fr": "Réductions de cooldown, plus des buffs pour assurer immortalité, réanimation et invincibilité."
+          }
+        },
+        {
+          "characters": ["Monad Eva"],
+          "reason": {
+            "en": "Dual attacks, starts the WG-damage chain, and provides {B/BT_REVIVAL} and {B/BT_INVINCIBLE}.",
+            "jp": "連携攻撃、WGダメージチェインの起点、{B/BT_REVIVAL}と{B/BT_INVINCIBLE}を提供する。",
+            "kr": "협공, WG 피해 연계의 시작점, {B/BT_REVIVAL}과 {B/BT_INVINCIBLE}을 제공합니다.",
+            "zh": "夹攻、作为WG伤害连携的起点，并提供{B/BT_REVIVAL}与{B/BT_INVINCIBLE}。",
+            "fr": "Attaques doubles, amorce la chaîne de dégâts de WG et apporte {B/BT_REVIVAL} et {B/BT_INVINCIBLE}."
+          }
+        },
+        {
+          "characters": ["Mystic Sage Ame", "Leo", "Demiurge Drakhan"],
+          "reason": {
+            "en": "Pick one — {P/Mystic Sage Ame} brings cooldown reduction for the main DPS's S3 and high WG damage; {P/Leo} brings a cooldown-reduction chain starter and {B/BT_INVINCIBLE}; {P/Demiurge Drakhan} brings AoE damage reduction, {S/PEN%} buff, {B/BT_BARRIER} and WG-damage support.",
+            "jp": "1枠選択 — {P/Mystic Sage Ame}はメインDPSのS3クールダウン短縮と高いWGダメージを、{P/Leo}はクールダウン短縮のチェイン起点と{B/BT_INVINCIBLE}を、{P/Demiurge Drakhan}はAoEダメージ軽減・{S/PEN%}バフ・{B/BT_BARRIER}・WGダメージ補助を提供する。",
+            "kr": "1자리 선택 — {P/Mystic Sage Ame}는 메인 딜러의 S3 쿨다운 감소와 높은 WG 피해를, {P/Leo}는 쿨다운 감소 연계 시작점과 {B/BT_INVINCIBLE}을, {P/Demiurge Drakhan}은 광역 피해 감소·{S/PEN%} 버프·{B/BT_BARRIER}·WG 피해 보조를 제공합니다.",
+            "zh": "三选一 — {P/Mystic Sage Ame}为主C的S3缩减冷却并提供高WG伤害；{P/Leo}提供冷却缩减连携起点与{B/BT_INVINCIBLE}；{P/Demiurge Drakhan}提供范围伤害减免、{S/PEN%}增益、{B/BT_BARRIER}及WG伤害支援。",
+            "fr": "Au choix — {P/Mystic Sage Ame} apporte une réduction de cooldown du S3 du DPS principal et de gros dégâts de WG ; {P/Leo} apporte une amorce de chaîne de réduction de cooldown et {B/BT_INVINCIBLE} ; {P/Demiurge Drakhan} apporte réduction de dégâts de zone, buff de {S/PEN%}, {B/BT_BARRIER} et soutien aux dégâts de WG."
+          }
+        }
+      ]
+    }
+  ]
+}
