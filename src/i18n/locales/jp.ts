@@ -605,6 +605,8 @@ const jp: Record<TranslationKey, string> = {
   'guides.boss_display.skills': 'スキル',
   'guides.boss_display.rank': 'ランク',
   'guides.boss_display.rank_options': 'ランクのパッシブ',
+  'guides.boss_display.rank_prev': '前のランク',
+  'guides.boss_display.rank_next': '次のランク',
   'guides.adventure.season': 'シーズン{n}',
   'guides.adventure.spoiler_free': 'ネタバレなし',
   'guides.adventure.spoiler': '名前を表示',

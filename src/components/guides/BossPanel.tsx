@@ -33,6 +33,7 @@ import type { CardSkill } from '@/components/character/SkillCard';
 import { EffectIconBadge } from '@/components/character/EffectChips';
 import { statIconSprite, statAbbr, statName } from '@/lib/stats';
 import { MonsterSkills } from './MonsterSkills';
+import { BossRankProvider, BossLevel } from './BossRank';
 import { BossStats, type StatLabel } from './BossStats';
 import type { Skill } from '@contracts';
 
@@ -113,88 +114,95 @@ export async function BossPanel({ monsterId, lang }: { monsterId: string; lang: 
   }
 
   return (
-    <section className="space-y-4">
-      {/* EN-TÊTE : qui est ce boss — icône, nom, élément, classe. */}
-      <div className="flex items-center gap-4">
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-        <img
-          src={monsterIconSrc(monster)}
-          alt={name}
-          className="border-line-subtle h-16 w-16 rounded-lg border object-cover"
-        />
-        <div>
-          <h2 className="text-content-strong text-xl font-bold">{name}</h2>
-          <div className="mt-1 flex items-center gap-2">
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-            <img src={img.element(monster.element)} alt={monster.element} className="h-5 w-5" />
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-            <img src={img.klass(monster.class)} alt={monster.class} className="h-5 w-5" />
+    <BossRankProvider spawns={spawns}>
+      <section className="space-y-4">
+        {/* EN-TÊTE : qui est ce boss — icône, nom, élément, classe, et son NIVEAU
+            au palier courant. Le niveau se lit là parce que c'est là qu'on le
+            cherche (le jeu l'écrit au même endroit) ; il suit la glissière, d'où
+            le contexte partagé. */}
+        <div className="flex items-center gap-4">
+          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
+          <img
+            src={monsterIconSrc(monster)}
+            alt={name}
+            className="border-line-subtle h-16 w-16 rounded-lg border object-cover"
+          />
+          <div>
+            <h2 className="text-content-strong text-xl font-bold">{name}</h2>
+            <div className="mt-1 flex items-center gap-2">
+              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
+              <img src={img.element(monster.element)} alt={monster.element} className="h-5 w-5" />
+              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
+              <img src={img.klass(monster.class)} alt={monster.class} className="h-5 w-5" />
+              <BossLevel label={t('page.character.skill.level')} />
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Juste sous l'en-tête : ce contre quoi le boss est INSENSIBLE. C'est la
+        {/* Juste sous l'en-tête : ce contre quoi le boss est INSENSIBLE. C'est la
           suite de la même question — « à quoi j'ai affaire » — et ça se lit avant
           d'aller regarder ses chiffres.
           ICÔNES SEULES : une immunité se reconnaît à son symbole ; une rangée de
           pastilles nommées mangerait la ligne. Le nom vient au survol, au tap, et
           pour les lecteurs d'écran. Une réf non résolue s'affiche en ROUGE
           (signal d'erreur de contenu, comme parse-text). */}
-      {immunities.length > 0 && (
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-          <h3 className="text-content-subtle font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
-            {t('guides.boss_display.immunities')}
-          </h3>
-          <div className="flex flex-wrap items-center gap-1.5">
-            {immunities.map(({ tid, effect }) =>
-              effect ? (
-                <EffectIconBadge
-                  key={tid}
-                  effect={{
-                    name: lRec(effect.name, lang) || effect.name.en,
-                    icon: effect.icon,
-                    isDebuff: effect.isDebuff,
-                    desc: lRec(effect.desc, lang),
-                  }}
-                />
-              ) : (
-                <span key={tid} className="text-xs text-red-500">
-                  {tid}
-                </span>
-              ),
-            )}
+        {immunities.length > 0 && (
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            <h3 className="text-content font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
+              {t('guides.boss_display.immunities')}
+            </h3>
+            <div className="flex flex-wrap items-center gap-1.5">
+              {immunities.map(({ tid, effect }) =>
+                effect ? (
+                  <EffectIconBadge
+                    key={tid}
+                    effect={{
+                      name: lRec(effect.name, lang) || effect.name.en,
+                      icon: effect.icon,
+                      isDebuff: effect.isDebuff,
+                      desc: lRec(effect.desc, lang),
+                    }}
+                  />
+                ) : (
+                  <span key={tid} className="text-xs text-red-500">
+                    {tid}
+                  </span>
+                ),
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <BossStats
-        stats={panelStats}
-        scales={getStatScales()}
-        spawns={spawns}
-        quirkMods={getBossQuirkMods()}
-        statLabels={statLabels}
-        locale={LANGUAGES[lang].htmlLang}
-        rankOptionLabels={rankOptionLabels(spawns, lang)}
-        labels={{
-          level: t('page.character.skill.level'),
-          rank: t('guides.boss_display.rank'),
-          options: t('guides.boss_display.rank_options'),
-        }}
-      />
+        <BossStats
+          stats={panelStats}
+          scales={getStatScales()}
+          quirkMods={getBossQuirkMods()}
+          statLabels={statLabels}
+          locale={LANGUAGES[lang].htmlLang}
+          rankOptionLabels={rankOptionLabels(spawns, lang)}
+          labels={{
+            level: t('page.character.skill.level'),
+            rank: t('guides.boss_display.rank'),
+            options: t('guides.boss_display.rank_options'),
+            rankPrev: t('guides.boss_display.rank_prev'),
+            rankNext: t('guides.boss_display.rank_next'),
+          }}
+        />
 
-      {cardSkills.length > 0 && (
-        <div className="space-y-1.5">
-          <h3 className="text-content-subtle font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
-            {t('guides.boss_display.skills')}
-          </h3>
-          <MonsterSkills
-            skills={cardSkills}
-            statuses={statuses}
-            lang={lang}
-            labels={{ cooldown: t('page.character.skill.cooldown') }}
-          />
-        </div>
-      )}
-    </section>
+        {cardSkills.length > 0 && (
+          <div className="space-y-1.5">
+            <h3 className="text-content font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
+              {t('guides.boss_display.skills')}
+            </h3>
+            <MonsterSkills
+              skills={cardSkills}
+              statuses={statuses}
+              lang={lang}
+              labels={{ cooldown: t('page.character.skill.cooldown') }}
+            />
+          </div>
+        )}
+      </section>
+    </BossRankProvider>
   );
 }

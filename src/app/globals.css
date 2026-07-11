@@ -69,6 +69,17 @@
   --ax-grade-s: #c13bde;
   --ax-grade-sp: #e02bcd;
   --stat-accent: #fbbf24;
+
+  /* CHALEUR des paliers de combat : froid = le début de l'échelle (E), chaud =
+     le mur (SSS++). Sert de dégradé à la piste du sélecteur de palier et de
+     repère de position — on lit où l'on en est sans rien manipuler.
+     Trois bornes seulement : la rampe est interpolée depuis la POSITION du
+     palier, donc indépendante de leur nombre (un cran ajouté par un patch la
+     réétale tout seul). Lue en `var()` depuis un style inline — jamais une
+     couleur Tailwind en dur. */
+  --rank-heat-lo: oklch(0.7 0.13 240);
+  --rank-heat-mid: oklch(0.82 0.13 90);
+  --rank-heat-hi: oklch(0.64 0.21 25);
   --role-dps: #e11d48;
   --role-support: #0284c7;
   --role-sustain: #059669;

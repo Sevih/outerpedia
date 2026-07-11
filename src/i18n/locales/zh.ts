@@ -586,6 +586,8 @@ const zh: Record<TranslationKey, string> = {
   'guides.boss_display.skills': '技能',
   'guides.boss_display.rank': '评级',
   'guides.boss_display.rank_options': '评级被动',
+  'guides.boss_display.rank_prev': '上一评级',
+  'guides.boss_display.rank_next': '下一评级',
   'guides.adventure.season': '第{n}季',
   'guides.adventure.spoiler_free': '无剧透',
   'guides.adventure.spoiler': '显示名称',

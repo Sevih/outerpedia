@@ -625,6 +625,8 @@ const fr: Record<TranslationKey, string> = {
   'guides.boss_display.skills': 'Skills',
   'guides.boss_display.rank': 'Palier',
   'guides.boss_display.rank_options': 'Passifs du palier',
+  'guides.boss_display.rank_prev': 'Palier précédent',
+  'guides.boss_display.rank_next': 'Palier suivant',
   'guides.adventure.season': 'Saison {n}',
   'guides.adventure.spoiler_free': 'Sans spoiler',
   'guides.adventure.spoiler': 'Afficher les noms',

@@ -1,41 +1,47 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useRef, type PointerEvent as ReactPointerEvent } from 'react';
 import { img } from '@/lib/images';
 import { rankBadgeSprite } from '@/lib/ranks';
 import {
-  dedupSpawnContexts,
   formatMonsterStat,
   orderedStats,
   statAt,
   type SpawnContext,
   type StatRange,
 } from '@/lib/monster-stats';
+import { useBossRank } from './BossRank';
 
 /** Un grade (E, D, C…) et ses crans (E, E+, E++), dans l'ordre des paliers. */
 interface RankGrade {
   name: string;
-  items: { index: number; rank: string; level: number }[];
+  /** Position, sur l'échelle complète, du milieu du grade — 0..1. */
+  mid: number;
+  /** Indices (dans `options`) des crans du grade. */
+  indexes: number[];
 }
 
 /**
  * Groupe les paliers par GRADE — le nom moins ses « + ». Les 30 paliers de
  * Singularity forment 10 grades de 3 crans, mais on ne le suppose pas : le
  * regroupement suit les noms tels qu'ils viennent de la donnée, en conservant
- * l'ordre. Une échelle irrégulière (ou un palier ajouté par un patch) se range
+ * l'ordre. Une échelle irrégulière (ou un cran ajouté par un patch) se range
  * donc toute seule.
  */
 function rankGrades(options: SpawnContext[]): RankGrade[] {
-  const grades: RankGrade[] = [];
+  const last = options.length - 1;
+  const grades: { name: string; indexes: number[] }[] = [];
   options.forEach((s, index) => {
     if (!s.rank) return;
     const name = s.rank.replace(/\+/g, '');
-    const last = grades[grades.length - 1];
-    const item = { index, rank: s.rank, level: s.level };
-    if (last && last.name === name) last.items.push(item);
-    else grades.push({ name, items: [item] });
+    const prev = grades[grades.length - 1];
+    if (prev && prev.name === name) prev.indexes.push(index);
+    else grades.push({ name, indexes: [index] });
   });
-  return grades;
+  return grades.map((g) => {
+    const center = (g.indexes[0] + g.indexes[g.indexes.length - 1]) / 2;
+    return { ...g, mid: last > 0 ? center / last : 0 };
+  });
 }
 
 /** Une stat, prête à afficher : le jeu la nomme, on ne fait que la poser. */
@@ -51,10 +57,14 @@ export interface StatLabel {
 /** Libellés DÉJÀ localisés (composant client : il ne traduit pas). */
 export interface BossStatsLabels {
   level: string;
-  /** « Palier » — titre du sélecteur en mode à score. */
+  /** « Palier » — nom du curseur (lecteurs d'écran). */
   rank: string;
   /** « Passifs du palier ». */
   options: string;
+  /** « Palier précédent » — aria du pas-à-pas. */
+  rankPrev: string;
+  /** « Palier suivant » — aria du pas-à-pas. */
+  rankNext: string;
 }
 
 /**
@@ -69,13 +79,11 @@ export interface BossStatsLabels {
  *    qu'on inflige. Ce que la donnée appelle les « PV » du boss vaut alors
  *    exactement la LARGEUR de cette tranche — ce ne sont pas des PV, et la
  *    valeur n'est même pas monotone (la barre A+ est plus étroite que la barre
- *    A). On ne l'affiche donc pas : sortie de la grille, point. Ce qui compte
- *    pour préparer le combat, ce sont les stats du boss et ses passifs de palier.
+ *    A). On ne l'affiche donc pas : sortie de la grille, point.
  */
 export function BossStats({
   stats,
   scales,
-  spawns,
   quirkMods,
   statLabels,
   labels,
@@ -85,8 +93,6 @@ export function BossStats({
   stats: Record<string, StatRange>;
   /** Échelle d'affichage par slug (`percent` = per-mille → %). */
   scales: Record<string, string>;
-  /** Rencontres réelles du boss (contexte de donjon inclus). */
-  spawns: SpawnContext[];
   /** Quirks de compte réduisant les stats du boss (`glossaries.bossQuirkMods`). */
   quirkMods?: Record<string, number>;
   /** Icône + nom de chaque stat, par slug (préparés côté serveur). */
@@ -97,12 +103,9 @@ export function BossStats({
   /** Passifs de palier DÉJÀ localisés (id d'option → libellé). */
   rankOptionLabels?: Record<string, string>;
 }) {
-  const options = dedupSpawnContexts(spawns);
-  // Par défaut le PREMIER palier : c'est celui qu'on affronte d'abord. Ouvrir sur
-  // SSS++ montrait un boss que presque personne ne combat, et donnait des stats
-  // décourageantes à qui découvre le mode.
-  const [selected, setSelected] = useState(0);
-  const ctx: SpawnContext = options[selected] ?? { level: 100 };
+  // Le palier vit dans le contexte : le NIVEAU qu'il fixe se lit aussi dans
+  // l'en-tête du boss, à l'autre bout du panneau (cf. BossRank).
+  const { options, selected, setSelected, ctx } = useBossRank();
 
   const scoreMode = Boolean(ctx.damage);
   const grid = orderedStats(stats).filter(([slug]) => !(scoreMode && slug === 'hp'));
@@ -119,77 +122,13 @@ export function BossStats({
           stats bouger. Les deux doivent tenir dans un même coup d'œil. */}
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
         {hasRanks && options.length > 1 && (
-          <div className="border-line-subtle bg-surface-raised flex shrink-0 flex-col gap-3 rounded-lg border p-3">
-            {/* Le palier COURANT, en grand : la réponse à « je regarde quoi ? ». */}
-            <div className="flex items-center gap-3">
-              {ctx.rank && (
-                /* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */
-                <img
-                  src={img.rankBadge(rankBadgeSprite(ctx.rank))}
-                  alt=""
-                  className="h-14 w-14 shrink-0 object-contain"
-                />
-              )}
-              <div className="flex flex-col gap-0.5">
-                <span className="text-content-subtle font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
-                  {scoreMode ? labels.rank : labels.level}
-                </span>
-                <span className="text-content-strong text-2xl leading-none font-bold">
-                  {ctx.rank}
-                </span>
-                <span className="text-content-muted text-xs">
-                  {labels.level} {ctx.level}
-                </span>
-              </div>
-            </div>
-
-            {/* SUR ÉCRAN LARGE : toute l'échelle, en badges — une LIGNE par grade
-                (E, E+, E++), donc trois colonnes. Le badge est la langue du jeu ;
-                un menu déroulant ne dit ni où l'on est dans l'échelle, ni ce qui
-                reste. Les grades sont groupés depuis les NOMS, pas depuis une
-                liste figée : un palier ajouté par un patch se range tout seul. */}
-            <div className="hidden flex-col gap-1 sm:flex">
-              {rankGrades(options).map((grade) => (
-                <div key={grade.name} className="flex gap-1">
-                  {grade.items.map(({ index, rank, level }) => (
-                    <button
-                      key={index}
-                      type="button"
-                      onClick={() => setSelected(index)}
-                      aria-pressed={index === selected}
-                      title={`${rank} — ${labels.level} ${level}`}
-                      className={`rounded transition-all ${
-                        index === selected
-                          ? 'ring-accent bg-accent/10 ring-2'
-                          : 'opacity-40 hover:opacity-100'
-                      }`}
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-                      <img
-                        src={img.rankBadge(rankBadgeSprite(rank))}
-                        alt={rank}
-                        className="h-8 w-8 object-contain"
-                      />
-                    </button>
-                  ))}
-                </div>
-              ))}
-            </div>
-
-            {/* AU DOIGT : 30 badges ne tiennent pas, et 32 px n'est pas une cible
-                tactile. Le déroulant reste la bonne réponse ici. */}
-            <select
-              value={selected}
-              onChange={(e) => setSelected(Number(e.target.value))}
-              aria-label={scoreMode ? labels.rank : labels.level}
-              className="border-line bg-surface-base text-content focus:border-accent rounded-md border px-2 py-1.5 text-sm focus:outline-none sm:hidden"
-            >
-              {options.map((s, i) => (
-                <option key={i} value={i}>
-                  {s.rank} — {labels.level} {s.level}
-                </option>
-              ))}
-            </select>
+          <div className="border-line-subtle bg-surface-raised flex flex-col gap-1 rounded-xl border px-3 py-4 lg:w-80 lg:shrink-0">
+            <RankSlider
+              options={options}
+              selected={selected}
+              onSelect={setSelected}
+              labels={labels}
+            />
           </div>
         )}
 
@@ -236,7 +175,7 @@ export function BossStats({
                       className="h-6 w-6 shrink-0 object-contain"
                     />
                   ) : (
-                    <span className="text-content-subtle w-6 shrink-0 text-center text-[10px] font-semibold">
+                    <span className="text-content w-6 shrink-0 text-center text-[10px] font-semibold">
                       {label?.abbr ?? slug}
                     </span>
                   )}
@@ -256,7 +195,7 @@ export function BossStats({
 
       {passives.length > 0 && (
         <div className="space-y-1.5">
-          <h4 className="text-content-subtle font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
+          <h4 className="text-content font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
             {labels.options}
           </h4>
           <div className="flex flex-wrap gap-1.5">
@@ -278,6 +217,208 @@ export function BossStats({
           {ctx.label ? ` — ${ctx.label}` : ''}
         </p>
       )}
+    </div>
+  );
+}
+
+/**
+ * GLISSIÈRE DE PALIER — l'échelle entière, d'un coup d'œil, et RIEN D'AUTRE.
+ *
+ * Le palier ne s'écrit qu'UNE fois : sur le curseur, par son badge. L'en-tête
+ * qui le répétait en image puis en toutes lettres, juste au-dessus de la barre
+ * qui le portait déjà, disait trois fois la même chose. Le NIVEAU, lui, est parti
+ * là où on le cherche : à côté de la classe du boss (cf. `BossRank`).
+ *
+ * La piste est un dégradé de CHALEUR (froid = E, chaud = SSS++, tokens
+ * `--rank-heat-*`) : la position du curseur dit à elle seule où l'on se trouve
+ * sur l'échelle et ce qu'il reste au-dessus. C'est ce que ni un menu déroulant
+ * ni trente vignettes quasi identiques ne savaient dire.
+ *
+ * Les graduations sont posées à leur position RÉELLE et marquées plus fort au
+ * début de chaque grade ; les noms de grade sont ancrés au MILIEU de leur groupe.
+ * Rien n'est supposé de la forme de l'échelle : tout se déduit des noms de
+ * paliers (cf. `rankGrades`), donc un cran ajouté par un patch se place seul.
+ *
+ * `role="slider"` : un vrai curseur, pas une rangée de boutons déguisée — donc
+ * glissable au doigt (`touch-none` + capture du pointeur), cliquable n'importe où
+ * sur la piste, et pilotable au clavier (←/→ un cran, Page↑/↓ trois, Début/Fin).
+ *
+ * Le pas-à-pas est ◀ ▶, PAS ▲ ▼ : sur une barre horizontale, « la flèche du haut »
+ * ne veut rien dire — et c'est précisément comme ça qu'on finit par la brancher
+ * à l'envers. Gauche = on descend l'échelle, droite = on la monte, comme le curseur.
+ */
+function RankSlider({
+  options,
+  selected,
+  onSelect,
+  labels,
+}: {
+  options: SpawnContext[];
+  selected: number;
+  onSelect: (index: number) => void;
+  labels: BossStatsLabels;
+}) {
+  const last = options.length - 1;
+  // DEUX éléments, deux rôles — c'est le cœur du correctif.
+  //  - `hit` ÉCOUTE : c'est toute la zone du sélecteur (rail + pouce + repères de
+  //    grade). Le pouce fait 38 px et son centre se cale sur le cran : à E il
+  //    déborde de 19 px À GAUCHE du rail, à SSS++ de 19 px à droite. Quand le rail
+  //    écoutait lui-même, ces débords tombaient hors de la zone sensible et il ne
+  //    restait, sous le doigt, que ce qui recouvrait encore le rail.
+  //  - `rail` MESURE : la géométrie (0 % → 100 %) se lit sur lui seul, sinon le
+  //    rembourrage de la zone d'écoute décalerait tous les crans.
+  const hit = useRef<HTMLDivElement>(null);
+  const rail = useRef<HTMLDivElement>(null);
+  const dragging = useRef(false);
+  const ctx = options[selected]!;
+  const grades = rankGrades(options);
+  const pos = last > 0 ? selected / last : 0;
+
+  const clamp = useCallback((i: number) => Math.min(last, Math.max(0, i)), [last]);
+
+  /** Cran le plus proche du pointeur — mesuré sur le RAIL, pas sur la zone d'écoute. */
+  const indexAt = useCallback(
+    (clientX: number) => {
+      const box = rail.current?.getBoundingClientRect();
+      if (!box || box.width === 0) return selected;
+      const ratio = Math.min(1, Math.max(0, (clientX - box.left) / box.width));
+      return Math.round(ratio * last);
+    },
+    [last, selected],
+  );
+
+  const onDown = (e: ReactPointerEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    // La capture garde le glissé vivant même quand le doigt sort de la zone.
+    hit.current?.setPointerCapture(e.pointerId);
+    dragging.current = true;
+    onSelect(indexAt(e.clientX));
+  };
+  const onMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (dragging.current) onSelect(indexAt(e.clientX));
+  };
+  const onUp = () => {
+    dragging.current = false;
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    const jump: Record<string, number> = {
+      ArrowRight: 1,
+      ArrowUp: 1,
+      ArrowLeft: -1,
+      ArrowDown: -1,
+      PageUp: 3,
+      PageDown: -3,
+    };
+    let next: number;
+    if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = last;
+    else if (e.key in jump) next = clamp(selected + jump[e.key]!);
+    else return;
+    e.preventDefault();
+    onSelect(next);
+  };
+
+  /** ◀ / ▶ : un cran vers le bas ou vers le haut de l'échelle. */
+  const step = (delta: 1 | -1, aria: string, glyph: string) => (
+    <button
+      type="button"
+      aria-label={aria}
+      disabled={delta < 0 ? selected === 0 : selected === last}
+      onClick={() => onSelect(clamp(selected + delta))}
+      className="border-line bg-surface-base text-content hover:text-content-strong enabled:hover:border-line-strong flex h-7 w-6 shrink-0 items-center justify-center rounded border text-[10px] transition-colors disabled:opacity-30"
+    >
+      {glyph}
+    </button>
+  );
+
+  return (
+    <div className="flex items-center gap-2">
+      {step(-1, labels.rankPrev, '◀')}
+
+      {/* ZONE D'ÉCOUTE : tout le bloc du sélecteur répond au clic et au glissé —
+          le rail, le pouce (y compris ses débords), et jusqu'aux repères de grade.
+          Le rembourrage `px-5` réserve la place des débords du pouce ; il ne
+          fausse rien, la géométrie étant mesurée sur le rail. */}
+      <div
+        ref={hit}
+        role="slider"
+        tabIndex={0}
+        aria-label={labels.rank}
+        aria-valuemin={0}
+        aria-valuemax={last}
+        aria-valuenow={selected}
+        aria-valuetext={`${ctx.rank} — ${labels.level} ${ctx.level}`}
+        onPointerDown={onDown}
+        onPointerMove={onMove}
+        onPointerUp={onUp}
+        onPointerCancel={onUp}
+        onLostPointerCapture={onUp}
+        onKeyDown={onKeyDown}
+        className="focus-visible:ring-ring min-w-0 flex-1 cursor-pointer touch-none rounded px-5 py-0.5 select-none focus-visible:ring-2 focus-visible:outline-none"
+      >
+        <div ref={rail} className="relative h-11">
+          <span
+            aria-hidden
+            className="absolute inset-x-0 top-1/2 h-2.5 -translate-y-1/2 rounded-full"
+            style={{
+              background:
+                'linear-gradient(90deg, var(--rank-heat-lo), var(--rank-heat-mid), var(--rank-heat-hi))',
+            }}
+          />
+
+          {options.map((s, i) => {
+            const gradeStart = !s.rank?.includes('+');
+            return (
+              <span
+                key={i}
+                aria-hidden
+                className="bg-surface-sunken absolute top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+                style={{
+                  left: `${(last > 0 ? i / last : 0) * 100}%`,
+                  width: gradeStart ? 2 : 1,
+                  height: gradeStart ? 12 : 7,
+                  opacity: gradeStart ? 0.55 : 0.3,
+                }}
+              />
+            );
+          })}
+
+          <span
+            aria-hidden
+            className="border-accent bg-surface-base ring-accent/20 pointer-events-none absolute top-1/2 flex h-9.5 w-9.5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[10px] border-2 shadow-lg ring-4 transition-[left] duration-75"
+            style={{ left: `${pos * 100}%` }}
+          >
+            {ctx.rank && (
+              /* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */
+              <img
+                src={img.rankBadge(rankBadgeSprite(ctx.rank))}
+                alt=""
+                draggable={false}
+                className="h-7.5 w-7.5 object-contain"
+              />
+            )}
+          </span>
+        </div>
+
+        {/* Repères de grade, ancrés au milieu de leur groupe : les points d'appui
+            de l'échelle (E … SSS), sans afficher les trente crans. */}
+        <div aria-hidden className="relative h-4">
+          {grades.map((g) => (
+            <span
+              key={g.name}
+              className={`absolute -translate-x-1/2 font-mono text-[10px] font-bold transition-colors ${
+                g.indexes.includes(selected) ? 'text-accent' : 'text-content-strong'
+              }`}
+              style={{ left: `${g.mid * 100}%` }}
+            >
+              {g.name}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {step(1, labels.rankNext, '▶')}
     </div>
   );
 }

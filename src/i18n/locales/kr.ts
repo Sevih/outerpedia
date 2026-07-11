@@ -599,6 +599,8 @@ const kr: Record<TranslationKey, string> = {
   'guides.boss_display.skills': '스킬',
   'guides.boss_display.rank': '등급',
   'guides.boss_display.rank_options': '등급 패시브',
+  'guides.boss_display.rank_prev': '이전 등급',
+  'guides.boss_display.rank_next': '다음 등급',
   'guides.adventure.season': '시즌 {n}',
   'guides.adventure.spoiler_free': '스포일러 없음',
   'guides.adventure.spoiler': '이름 표시',

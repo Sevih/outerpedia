@@ -613,6 +613,8 @@ const en = {
   'guides.boss_display.skills': 'Skills',
   'guides.boss_display.rank': 'Rank',
   'guides.boss_display.rank_options': 'Rank passives',
+  'guides.boss_display.rank_prev': 'Previous rank',
+  'guides.boss_display.rank_next': 'Next rank',
   'guides.adventure.season': 'Season {n}',
   'guides.adventure.spoiler_free': 'Spoiler-free',
   'guides.adventure.spoiler': 'Show names',
