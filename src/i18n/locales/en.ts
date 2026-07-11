@@ -568,6 +568,9 @@ const en = {
   // Rotation : UN boss par jour (mer→sam), puis 3 jours de récompense.
   // La V2 affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
   'guides.singularity.week.title': 'Active this week',
+  'guides.singularity.week.title_mobile': 'Active now',
+  'guides.singularity.week.live': 'Live now · {dow}',
+  'guides.singularity.timer.next': 'Next reset in {time}',
   'guides.singularity.week.tagline':
     'One boss per day, Wednesday to Saturday. The target changes at 00:00 UTC.',
   'guides.singularity.week.today': 'Today',
@@ -608,11 +611,7 @@ const en = {
   'guides.strategy_guide': 'Strategy Guide',
   'guides.boss_display.immunities': 'Immunities',
   'guides.boss_display.skills': 'Skills',
-  // Mode à SCORE : le palier est une TRANCHE DE DÉGÂTS, sa « barre » n'est
-  // pas les PV du boss (cf. BossStats).
   'guides.boss_display.rank': 'Rank',
-  'guides.boss_display.damage': 'Damage to deal',
-  'guides.boss_display.rank_bar': 'Rank bar',
   'guides.boss_display.rank_options': 'Rank passives',
   'guides.adventure.season': 'Season {n}',
   'guides.adventure.spoiler_free': 'Spoiler-free',

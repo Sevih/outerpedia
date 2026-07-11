@@ -88,6 +88,66 @@ function effectLabel(e: ClientEffect, statuses: StatusMap): string {
   return e.family;
 }
 
+/** Un effet nommé, prêt à afficher (icône, nom et description déjà localisés). */
+export interface NamedEffect {
+  name: string;
+  icon?: string;
+  isDebuff: boolean;
+  desc?: string;
+}
+
+/** Corps du tooltip d'un effet : icône + nom + description du jeu. */
+export function EffectTooltipBody({ name, icon, isDebuff, desc }: NamedEffect) {
+  return (
+    <div className="flex flex-col gap-1">
+      <div className="flex items-center gap-1.5">
+        {icon && <EffectIconTile icon={icon} isDebuff={isDebuff} />}
+        <span className="text-sm font-bold text-white">{name}</span>
+      </div>
+      {/* Texte du jeu : \n littéraux + balises <color=#hex> interprétés. */}
+      {desc && (
+        <p className="text-xs whitespace-pre-line text-neutral-200">
+          {renderGameColors(desc.replace(/\\n/g, '\n'))}
+        </p>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Effet en ICÔNE SEULE, son nom au survol (ou au clic, au doigt) — la forme des
+ * immunités : elles se lisent d'un coup d'œil, et une rangée de pastilles
+ * nommées mangerait la moitié du panneau pour dire ce qu'une grille d'icônes dit
+ * mieux. Le nom reste atteignable : `title` pour l'accessibilité, tooltip au
+ * pointeur, tap sur mobile (InlineTooltip).
+ */
+export function EffectIconBadge({
+  effect,
+  className = 'h-7 w-7',
+}: {
+  effect: NamedEffect;
+  className?: string;
+}) {
+  if (!effect.icon) {
+    return (
+      <span className={effect.isDebuff ? 'text-debuff text-xs' : 'text-buff text-xs'}>
+        {effect.name}
+      </span>
+    );
+  }
+  return (
+    <InlineTooltip
+      content={<EffectTooltipBody {...effect} />}
+      bg={effect.isDebuff ? 'bg-debuff-bg' : 'bg-buff-bg'}
+    >
+      <button type="button" className="cursor-default" title={effect.name}>
+        <span className="sr-only">{effect.name}</span>
+        <EffectIconTile icon={effect.icon} isDebuff={effect.isDebuff} className={className} />
+      </button>
+    </InlineTooltip>
+  );
+}
+
 /**
  * Chip d'effet (portage V2 BuffDebuffDisplay) : pill buff/debuff avec icône du
  * jeu recolorée (sauf variantes « Interruption »), NOM SEUL dans la pill — les
@@ -113,16 +173,7 @@ export function EffectChip({ effect, statuses }: { effect: ClientEffect; statuse
   return (
     <InlineTooltip
       content={
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-1.5">
-            {icon && <EffectIconTile icon={icon} isDebuff={isDebuff} />}
-            <span className="text-sm font-bold text-white">{status.name}</span>
-          </div>
-          {/* Texte du jeu : \n littéraux + balises <color=#hex> interprétés. */}
-          <p className="text-xs whitespace-pre-line text-neutral-200">
-            {renderGameColors(status.desc.replace(/\\n/g, '\n'))}
-          </p>
-        </div>
+        <EffectTooltipBody name={status.name} icon={icon} isDebuff={isDebuff} desc={status.desc} />
       }
       bg={bg}
     >

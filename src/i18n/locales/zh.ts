@@ -543,6 +543,9 @@ const zh: Record<TranslationKey, string> = {
   // Rotation : UN boss par jour (mer→sam), puis 3 jours de récompense.
   // La V2 affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
   'guides.singularity.week.title': '本周开放',
+  'guides.singularity.week.title_mobile': '进行中',
+  'guides.singularity.week.live': '进行中 · {dow}',
+  'guides.singularity.timer.next': '距下次重置 {time}',
   'guides.singularity.week.tagline': '周三至周六，每日一个首领。目标于 00:00 UTC 更换。',
   'guides.singularity.week.today': '今日',
   'guides.singularity.next_week.title': '下一轮',
@@ -581,11 +584,7 @@ const zh: Record<TranslationKey, string> = {
   'guides.strategy_guide': '攻略指南',
   'guides.boss_display.immunities': '免疫',
   'guides.boss_display.skills': '技能',
-  // Mode à SCORE : le palier est une TRANCHE DE DÉGÂTS, sa « barre » n'est
-  // pas les PV du boss (cf. BossStats).
   'guides.boss_display.rank': '评级',
-  'guides.boss_display.damage': '所需伤害',
-  'guides.boss_display.rank_bar': '评级血条',
   'guides.boss_display.rank_options': '评级被动',
   'guides.adventure.season': '第{n}季',
   'guides.adventure.spoiler_free': '无剧透',

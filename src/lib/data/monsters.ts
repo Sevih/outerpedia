@@ -29,6 +29,39 @@ export function getMonster(id: string): Monster | undefined {
   return MONSTERS[id];
 }
 
+/**
+ * Noms d'affichage d'un ENSEMBLE de monstres, l'élément entrant dans le nom
+ * quand — et seulement quand — plusieurs monstres de l'ensemble le partagent.
+ *
+ * Urd, Verdandi et Skuld existent chacune en DEUX exemplaires : même nom, même
+ * sprite, seuls l'élément et le donjon diffèrent. Côte à côte dans la rotation,
+ * deux cartes rigoureusement identiques n'apprennent rien — d'où « Urd (Light) »
+ * et « Urd (Dark) », que la V2 écrivait à la main dans le titre de chaque guide.
+ *
+ * Ici c'est une RÈGLE, pas une liste : la collision est constatée sur l'ensemble
+ * passé, dans la langue rendue (les noms JP/KR/ZH peuvent se heurter là où l'EN
+ * ne se heurte pas, et l'inverse). Un futur doublon se désambiguïse tout seul ;
+ * et le jour où le jeu les renomme, on ne colle plus « (Light) » sur des noms
+ * déjà distincts.
+ */
+export function monsterDisplayNames(ids: string[], lang: Lang): Map<string, string> {
+  const names = new Map<string, string>();
+  const count = new Map<string, number>();
+  for (const id of ids) {
+    const m = MONSTERS[id];
+    if (!m) continue;
+    const name = lRec(m.name, lang);
+    names.set(id, name);
+    count.set(name, (count.get(name) ?? 0) + 1);
+  }
+  for (const [id, name] of names) {
+    if ((count.get(name) ?? 0) < 2) continue;
+    const element = lRec(G.elements?.[MONSTERS[id]!.element], lang);
+    if (element) names.set(id, `${name} (${element})`);
+  }
+  return names;
+}
+
 /** Skills d'un monstre (dans l'ordre du kit ; ids inconnus ignorés). */
 export function getMonsterSkills(m: Monster): Skill[] {
   return m.skills.map((id) => SKILLS[id]).filter((s): s is Skill => Boolean(s));

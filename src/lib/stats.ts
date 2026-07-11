@@ -113,6 +113,18 @@ export function statAbbr(slug: string): string {
 }
 
 /**
+ * Sprite d'icône d'un slug de stat, `undefined` si le jeu n'en a pas.
+ *
+ * Il en manque une, et une seule : la WG (`guard`). Le jeu ne lui donne pas de
+ * `CM_Stat_Icon_*` — elle n'apparaît qu'en jauge de combat (`IG_GaugeTitle_WG`),
+ * ce qui n'est pas une icône de stat. On ne lui en invente donc pas : l'appelant
+ * retombe sur l'abréviation.
+ */
+export function statIconSprite(slug: string): string | undefined {
+  return STAT_ICON[statAbbr(slug)];
+}
+
+/**
  * Seules les stats à DOUBLE nature (flat + %) prennent le suffixe « % » sur
  * leur variante rate (ATK/ATK%…) ; les stats intrinsèquement % gardent leur
  * abréviation nue (CHD, CHC…), comme en jeu/V2.

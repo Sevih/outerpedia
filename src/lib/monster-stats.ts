@@ -107,10 +107,45 @@ export function statAt(
   return v;
 }
 
-/** Formate une valeur selon la convention d'AFFICHAGE du jeu. */
-export function formatMonsterStat(slug: string, v: number, scales: Record<string, string>): string {
+/**
+ * Formate une valeur selon la convention d'AFFICHAGE du jeu.
+ *
+ * `locale` groupe les milliers : les PV d'un boss se comptent en dizaines de
+ * millions, et « 47850000 » ne se lit pas. Optionnel — l'admin affiche des
+ * valeurs brutes, qu'on ne veut pas voir bouger avec la langue de l'onglet.
+ */
+export function formatMonsterStat(
+  slug: string,
+  v: number,
+  scales: Record<string, string>,
+  locale?: string,
+): string {
   if (RAW_FLAT.has(slug)) return String(v);
-  return scales[slug] === 'percent' ? `${v / 10}%` : String(v);
+  if (scales[slug] === 'percent') return `${v / 10}%`;
+  return locale ? v.toLocaleString(locale) : String(v);
+}
+
+/**
+ * Lignes que l'écran du jeu affiche pour un monstre SANS que sa table les porte.
+ *
+ * `MonsterTemplet` n'a que 11 colonnes de stats (HP, WG, Speed, Atk, Def,
+ * DamageBoost, DMGReduceRate, CriticalRate, CriticalDMGRate, BuffChance,
+ * BuffResist). Deux lignes du panneau n'y ont AUCUNE colonne — vérifié sur les
+ * 4382 monstres : zéro a `EnemyCriticalDamageReduce`, et `PiercePowerRate`
+ * n'existe que sur 16 d'entre eux. Les omettre laissait un trou dans la grille ;
+ * les afficher à 0 dit quelque chose : ce boss n'a pas de pénétration.
+ *
+ * Ce sont bien des stats de BASE : les paliers de Singularity accordent
+ * « Pénétration +30 % » en PASSIF (un buff irremovable), pas en modification de
+ * la fiche — d'où sa place parmi les pastilles de passifs, pas dans la grille.
+ */
+const PANEL_ONLY_STATS = ['enemy_critical_dmg_reduce', 'pierce_power_rate'];
+
+/** Stats d'un monstre, complétées des lignes que le panneau du jeu montre toujours. */
+export function monsterPanelStats(stats: Record<string, StatRange>): Record<string, StatRange> {
+  const out = { ...stats };
+  for (const slug of PANEL_ONLY_STATS) out[slug] ??= { min: 0, max: 0 };
+  return out;
 }
 
 /** Entrées de stats dans l'ordre de l'écran du jeu. */

@@ -11,6 +11,7 @@ import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { img } from '@/lib/images';
 import { RANGE_TO_TARGET } from '@/lib/skills';
+import { monsterPanelStats } from '@/lib/monster-stats';
 import {
   buildStatusMap,
   dedupSkills,
@@ -28,11 +29,11 @@ import {
   monsterSpawnContexts,
   rankOptionLabels,
 } from '@/lib/data/monsters';
-import { SkillsSection } from '@/components/character/SkillsSection';
 import type { CardSkill } from '@/components/character/SkillCard';
-import { EffectIconTile } from '@/components/character/EffectChips';
-import { InlineIcon } from '@/components/inline/InlineIcon';
-import { BossStats } from './BossStats';
+import { EffectIconBadge } from '@/components/character/EffectChips';
+import { statIconSprite, statAbbr, statName } from '@/lib/stats';
+import { MonsterSkills } from './MonsterSkills';
+import { BossStats, type StatLabel } from './BossStats';
 import type { Skill } from '@contracts';
 
 export async function BossPanel({ monsterId, lang }: { monsterId: string; lang: Lang }) {
@@ -96,8 +97,24 @@ export async function BossPanel({ monsterId, lang }: { monsterId: string; lang: 
     ...unresolved.map((tid) => ({ tid, effect: undefined })),
   ];
 
+  // Le panneau du jeu montre deux lignes que `MonsterTemplet` ne porte pas
+  // (pénétration %, réduction de DGT CRIT subie) — cf. `monsterPanelStats`.
+  const panelStats = monsterPanelStats(monster.stats);
+
+  // Le jeu nomme ses stats : on ne fait que traduire le slug en icône + nom
+  // localisé, une fois, ici — `BossStats` est client, il ne traduit rien.
+  const statLabels: Record<string, StatLabel> = {};
+  for (const slug of Object.keys(panelStats)) {
+    statLabels[slug] = {
+      abbr: statAbbr(slug),
+      name: statName(slug, lang),
+      icon: statIconSprite(slug),
+    };
+  }
+
   return (
     <section className="space-y-4">
+      {/* EN-TÊTE : qui est ce boss — icône, nom, élément, classe. */}
       <div className="flex items-center gap-4">
         {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img
@@ -116,45 +133,32 @@ export async function BossPanel({ monsterId, lang }: { monsterId: string; lang: 
         </div>
       </div>
 
-      <BossStats
-        stats={monster.stats}
-        scales={getStatScales()}
-        spawns={spawns}
-        quirkMods={getBossQuirkMods()}
-        locale={LANGUAGES[lang].htmlLang}
-        rankOptionLabels={rankOptionLabels(spawns, lang)}
-        labels={{
-          level: t('page.character.skill.level'),
-          rank: t('guides.boss_display.rank'),
-          damage: t('guides.boss_display.damage'),
-          rankBar: t('guides.boss_display.rank_bar'),
-          options: t('guides.boss_display.rank_options'),
-        }}
-      />
-
+      {/* Juste sous l'en-tête : ce contre quoi le boss est INSENSIBLE. C'est la
+          suite de la même question — « à quoi j'ai affaire » — et ça se lit avant
+          d'aller regarder ses chiffres.
+          ICÔNES SEULES : une immunité se reconnaît à son symbole ; une rangée de
+          pastilles nommées mangerait la ligne. Le nom vient au survol, au tap, et
+          pour les lecteurs d'écran. Une réf non résolue s'affiche en ROUGE
+          (signal d'erreur de contenu, comme parse-text). */}
       {immunities.length > 0 && (
-        <div className="space-y-1">
-          <h3 className="text-content-strong text-sm font-semibold">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+          <h3 className="text-content-subtle font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
             {t('guides.boss_display.immunities')}
           </h3>
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+          <div className="flex flex-wrap items-center gap-1.5">
             {immunities.map(({ tid, effect }) =>
               effect ? (
-                <InlineIcon
+                <EffectIconBadge
                   key={tid}
-                  iconNode={
-                    <EffectIconTile
-                      icon={effect.icon}
-                      isDebuff={effect.isDebuff}
-                      className="h-4.5 w-4.5"
-                    />
-                  }
-                  label={lRec(effect.name, lang) || effect.name.en}
-                  color={effect.isDebuff ? 'text-debuff' : 'text-buff'}
-                  underline={false}
+                  effect={{
+                    name: lRec(effect.name, lang) || effect.name.en,
+                    icon: effect.icon,
+                    isDebuff: effect.isDebuff,
+                    desc: lRec(effect.desc, lang),
+                  }}
                 />
               ) : (
-                <span key={tid} className="text-red-500">
+                <span key={tid} className="text-xs text-red-500">
                   {tid}
                 </span>
               ),
@@ -163,20 +167,31 @@ export async function BossPanel({ monsterId, lang }: { monsterId: string; lang: 
         </div>
       )}
 
+      <BossStats
+        stats={panelStats}
+        scales={getStatScales()}
+        spawns={spawns}
+        quirkMods={getBossQuirkMods()}
+        statLabels={statLabels}
+        locale={LANGUAGES[lang].htmlLang}
+        rankOptionLabels={rankOptionLabels(spawns, lang)}
+        labels={{
+          level: t('page.character.skill.level'),
+          rank: t('guides.boss_display.rank'),
+          options: t('guides.boss_display.rank_options'),
+        }}
+      />
+
       {cardSkills.length > 0 && (
-        <div className="space-y-2">
-          <h3 className="text-content-strong text-sm font-semibold">
+        <div className="space-y-1.5">
+          <h3 className="text-content-subtle font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
             {t('guides.boss_display.skills')}
           </h3>
-          <SkillsSection
+          <MonsterSkills
             skills={cardSkills}
             statuses={statuses}
-            labels={{
-              cooldown: t('page.character.skill.cooldown'),
-              wgr: t('page.character.skill.wgr'),
-              level: t('page.character.skill.level'),
-              enhancement: t('page.character.skill.enhancement'),
-            }}
+            lang={lang}
+            labels={{ cooldown: t('page.character.skill.cooldown') }}
           />
         </div>
       )}

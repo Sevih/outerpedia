@@ -554,6 +554,9 @@ const kr: Record<TranslationKey, string> = {
   // Rotation : UN boss par jour (mer→sam), puis 3 jours de récompense.
   // La V2 affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
   'guides.singularity.week.title': '이번 주 보스',
+  'guides.singularity.week.title_mobile': '진행 중',
+  'guides.singularity.week.live': '진행 중 · {dow}',
+  'guides.singularity.timer.next': '다음 초기화까지 {time}',
   'guides.singularity.week.tagline':
     '수요일부터 토요일까지 하루에 한 보스. 대상은 00:00 UTC에 바뀝니다.',
   'guides.singularity.week.today': '오늘',
@@ -594,11 +597,7 @@ const kr: Record<TranslationKey, string> = {
   'guides.strategy_guide': '전략 가이드',
   'guides.boss_display.immunities': '면역',
   'guides.boss_display.skills': '스킬',
-  // Mode à SCORE : le palier est une TRANCHE DE DÉGÂTS, sa « barre » n'est
-  // pas les PV du boss (cf. BossStats).
   'guides.boss_display.rank': '등급',
-  'guides.boss_display.damage': '필요 피해량',
-  'guides.boss_display.rank_bar': '등급 게이지',
   'guides.boss_display.rank_options': '등급 패시브',
   'guides.adventure.season': '시즌 {n}',
   'guides.adventure.spoiler_free': '스포일러 없음',

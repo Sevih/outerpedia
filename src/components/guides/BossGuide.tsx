@@ -52,7 +52,10 @@ export async function BossGuide({
 
   return (
     <>
-      <p className="text-content-muted text-sm leading-relaxed">
+      {/* Du contenu éditorial, pas une légende : il se lit à la même encre que
+          le reste du guide. Le gris (`content-muted`) est réservé au chrome —
+          fil d'Ariane, dates, méta. */}
+      <p className="text-content text-sm leading-relaxed">
         {parseText(lRec(content.intro, lang), ctx)}
       </p>
 

@@ -16,6 +16,7 @@ export function CharacterPortrait({
   rarity,
   size = 64,
   href,
+  showName = true,
 }: {
   id: string;
   name: string;
@@ -25,6 +26,12 @@ export function CharacterPortrait({
   rarity?: number;
   size?: number;
   href?: string;
+  /**
+   * Nom sous le portrait. À couper quand l'appelant écrit déjà les noms à côté
+   * (persos recommandés d'un guide) : sinon chaque nom apparaît deux fois.
+   * L'`alt` de l'image le porte de toute façon.
+   */
+  showName?: boolean;
 }) {
   const starSize = Math.round(size * 0.17);
   const content = (
@@ -72,12 +79,14 @@ export function CharacterPortrait({
           </span>
         ) : null}
       </span>
-      <span
-        className="text-content-strong w-full truncate text-center text-xs font-semibold"
-        style={{ maxWidth: size + 24 }}
-      >
-        {name}
-      </span>
+      {showName && (
+        <span
+          className="text-content-strong w-full truncate text-center text-xs font-semibold"
+          style={{ maxWidth: size + 24 }}
+        >
+          {name}
+        </span>
+      )}
     </span>
   );
   if (!href) return content;
