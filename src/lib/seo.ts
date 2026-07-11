@@ -7,6 +7,7 @@
  */
 import type { Metadata } from 'next';
 import { LANGUAGES, LANGS, DEFAULT_LANG, isValidLang, type Lang } from '@/lib/i18n/config';
+import { img } from '@/lib/images';
 
 /** Normalise une langue non fiable (param de route brut) vers une Lang valide. */
 function normalizeLang(lang: string): Lang {
@@ -23,7 +24,14 @@ export function getMonthYear(lang: Lang): string {
 
 const SITE_NAME = 'Outerpedia';
 const BASE_DOMAIN = process.env.NEXT_PUBLIC_BASE_DOMAIN ?? 'outerpedia.com';
-const DEFAULT_OG_IMAGE = '/images/ui/og_default.jpg';
+/**
+ * Carte de partage par défaut — passe par la base R2, comme toute image du site.
+ * Elle était écrite en chemin racine (`/images/…`), donc résolue contre le
+ * domaine du site : ça marchait en dev (une route y sert `.assets-staging/`) et
+ * pointait dans le vide en prod, où `/images/*` n'est servi par personne. Toutes
+ * les pages sans `ogImage` explicite avaient donc une carte cassée.
+ */
+const DEFAULT_OG_IMAGE = img.ogDefault();
 
 /** URL de base selon l'environnement (localhost en dev). */
 export function getBaseUrl(): string {

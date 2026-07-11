@@ -122,6 +122,17 @@ export function monsterIconSrc(m: Pick<Monster, 'icon'>): string {
 }
 
 /**
+ * Même portrait, en PNG : la carte de partage (og:image) d'un guide de boss.
+ * Les aperçus Discord/OG digèrent mal le WebP — les fiches de persos et d'EE
+ * poussent déjà une variante PNG pour la même raison. ~128×128, donc une carte
+ * carrée (`summary`), pas une bannière : c'est la vignette du boss, pas une
+ * illustration — cf. `createPageMetadata`.
+ */
+export function monsterOgImage(m: Pick<Monster, 'icon'>): string {
+  return m.icon.startsWith('2') ? img.facePng(m.icon) : img.bossPng(`MT_${m.icon}`);
+}
+
+/**
  * Rencontres connues d'un monstre, avec les MODIFICATEURS du donjon (adv
  * per-mille, PV réels du mode) et un libellé « Mode · Stage » localisé — prêt
  * pour le calcul de stats effectives (src/lib/monster-stats).

@@ -575,13 +575,24 @@ export function buildAssetManifest(): AssetRequest[] {
       if (!g.bossId) continue;
       const m = monsters[g.bossId];
       if (!m) continue;
-      if (m.icon && !m.icon.startsWith('2'))
+      if (m.icon && !m.icon.startsWith('2')) {
         push({
           kind: 'image',
           key: `images/ui/boss/MT_${m.icon}.webp`,
           candidates: [`MT_${m.icon}`],
           domain: 'guides',
         });
+        // Variante PNG : og:image du guide de boss (aperçus Discord/OG), même
+        // convention que les faceicons de persos et les EE. Tirée UNIQUEMENT ici,
+        // pour les boss qu'un guide couvre — la bibliothèque Singularity affiche
+        // aussi des boss sans guide, qui n'ont donc pas de carte à partager.
+        push({
+          kind: 'image',
+          key: `images/ui/boss/MT_${m.icon}.png`,
+          candidates: [`MT_${m.icon}`],
+          domain: 'guides',
+        });
+      }
       for (const sid of m.skills ?? []) {
         const icon = monsterSkills[sid]?.icon;
         if (icon)

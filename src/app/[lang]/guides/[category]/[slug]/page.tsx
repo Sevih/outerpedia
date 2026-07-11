@@ -16,6 +16,7 @@ import {
   listGuideParams,
   type GuideContentProps,
 } from '@/lib/data/guides';
+import { getMonster, monsterOgImage } from '@/lib/data/monsters';
 
 export function generateStaticParams() {
   return LANGS.flatMap((lang) =>
@@ -35,12 +36,28 @@ export async function generateMetadata({
   const guide = getGuide(category, slug);
   if (!guide) return {};
   const updated = guideUpdatedDate(guide);
+
+  // CARTE DE PARTAGE : le portrait du boss quand le guide en a un — c'est le
+  // visuel qui identifie le guide, et il est déjà dans la donnée (`meta.bossId`),
+  // donc rien à saisir à la main. `meta.ogImage` reste prioritaire : c'est
+  // l'échappatoire pour un guide qui veut son propre visuel.
+  // Les guides SANS boss (general-guides…) gardent la carte par défaut du site :
+  // leur donner un visuel demande une image générée, chantier à part.
+  const boss = guide.bossId ? getMonster(guide.bossId) : undefined;
+  const portrait =
+    boss && !guide.ogImage
+      ? // Les sprites `MT_*` font 128×128 (21 des 24 extraits ; les 3 autres à
+        // quelques pixels près). La taille n'est qu'un indice pour le crawler.
+        { ogImage: monsterOgImage(boss), ogImageSize: { width: 128, height: 128 } }
+      : undefined;
+
   return createPageMetadata({
     lang,
     path: `/guides/${category}/${slug}`,
     title: lRec(guide.title, lang),
     description: lRec(guide.description, lang),
     ...(guide.ogImage ? { ogImage: guide.ogImage } : {}),
+    ...portrait,
     // og:type=article + dates (published = modified faute de date de création).
     article: { publishedTime: updated, modifiedTime: updated, authors: [guide.author] },
   });

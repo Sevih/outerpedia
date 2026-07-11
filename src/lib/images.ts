@@ -60,6 +60,18 @@ export const img = {
     `${BASE}/images/ui/bg/TI_Slot_${SLOT_FRAME[grade] ?? 'Normal'}.webp`,
   /** Portrait d'un boss (`MT_*`, sources d'obtention d'équipement). */
   boss: (icon: string) => `${BASE}/images/ui/boss/${icon}.webp`,
+  /** Variante PNG (og:image des guides de boss — Discord/OG préfèrent le PNG). */
+  bossPng: (icon: string) => `${BASE}/images/ui/boss/${icon}.png`,
+  /**
+   * Carte de partage par DÉFAUT (1200×630), pour les pages sans visuel propre.
+   *
+   * Elle passe par `BASE` comme toute autre image : `/images/*` n'est servi par
+   * le site QU'EN DÉVELOPPEMENT (`src/app/images/[...path]/route.dev.ts`), et
+   * `public/images/` est vide. Un chemin racine ici marchait en local et pointait
+   * dans le vide en production — toutes les cartes de partage des pages sans
+   * `ogImage` explicite étaient donc mortes.
+   */
+  ogDefault: () => `${BASE}/images/ui/og_default.jpg`,
   /** Icône de l'or (coûts d'ascension). */
   gold: () => `${BASE}/images/items/CM_Goods_Gold.webp`,
   /** Icône d'item générique (gifts, pièces de rappel…). */
