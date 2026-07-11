@@ -549,16 +549,15 @@ const zh: Record<TranslationKey, string> = {
   'guides.singularity.info.feature.ascension':
     '奇点升华装置：将达到最大强化和最大重铸的装备进行升华。升华会提升装备的主属性数值并获得+3次重铸机会；强化等级达到+15时还会附加一项随机额外属性（类型取决于装备槽位，数值随机）。',
   'guides.singularity.info.feature.ranking': '排名报告：根据前一日分数领取每日奖励。',
-  'guides.singularity.timer.next': '下次重置 {time}',
+  // Rotation : UN boss par jour (mer→sam), puis 3 jours de récompense.
+  // La V2 affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
   'guides.singularity.week.title': '本周开放',
-  'guides.singularity.week.title_mobile': '当前进行中',
-  'guides.singularity.week.tagline': '周中3只Boss于周三至周五开放。周末Boss仅周六开放。',
-  'guides.singularity.week.live': '进行中 · {dow}',
-  'guides.singularity.weekend.today': '周末Boss · 今日开放',
-  'guides.singularity.weekend.tomorrow': '周末Boss · 明日',
-  'guides.singularity.weekend.in_days': '周末Boss · {n}天后',
-  'guides.singularity.day.weekly': '周三~周五',
-  'guides.singularity.day.sat_only': '仅周六',
+  'guides.singularity.week.tagline': '周三至周六，每日一个首领。目标于 00:00 UTC 更换。',
+  'guides.singularity.week.today': '今日',
+  'guides.singularity.next_week.title': '下一轮',
+  'guides.singularity.next_week.tagline':
+    '奖励阶段 — 当前没有可挑战的首领。下一轮将于 {date} 开始。',
+  'guides.singularity.rotation': '轮换 {n}',
   'guides.singularity.library.title': 'Boss 图鉴',
   'guides.singularity.library.tagline': '无论Boss是否处于轮换中，每篇攻略都始终可访问。',
   // Guide landing — categories index

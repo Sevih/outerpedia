@@ -33,9 +33,11 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { LangDict } from '../lib/lang';
+import { loadBuffIndex } from '../lib/buff';
+import { statSlug } from '../lib/effects';
 import { slugEnum } from '../lib/enums';
 import { loadTextIndex, resolveText } from '../lib/text';
-import { groupBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
+import { groupBy, indexBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
 
 /**
  * Modificateurs de stats du DONJON (per-mille SIGNÉS, colonnes
@@ -52,6 +54,34 @@ export interface DungeonAdv {
 }
 
 /**
+ * Tranche de DÉGÂTS d'un palier — les modes à SCORE (singularity, world boss,
+ * guild dungeon, event challenge) définissent le rang par les dégâts infligés.
+ * `max` absent = dernier rang, tranche OUVERTE (« 4 250 001 et plus »).
+ */
+export interface RankDamage {
+  min?: number;
+  max?: number;
+}
+
+/**
+ * Un passif de PALIER résolu (`OptionID` → buff de BuffTemplet) — glossaire
+ * `rankOptions` : le SITE affiche les rangs sans lire les tables du jeu.
+ */
+export interface RankOption {
+  /** Type de mécanique du buff (clé du jeu, `BT_*`). */
+  type: string;
+  /** Nom localisé du statut (tooltip du buff), quand il en a un. */
+  name?: LangDict;
+  /** Réf tooltip (`BuffToolTipTemplet`) — résoluble en chip (glossaire d'effets). */
+  tooltip?: string;
+  /** Stat visée (slug), pour les buffs de stat sans tooltip. */
+  stat?: string;
+  /** Valeur brute (per-mille pour les taux). */
+  value?: number;
+  irremovable?: boolean;
+}
+
+/**
  * Un PALIER de rencontre d'un mode à progression (guild dungeon, world boss,
  * singularity/Monad Gate, event challenge, adventure, exploration) : ces modes
  * REDÉFINISSENT la rencontre par rang/palier — niveau du boss, PV, advantage
@@ -64,11 +94,20 @@ export interface DungeonRank {
   level?: number;
   /** Niveau de TRANSCENDANCE du boss (colonne TransLevel — barème à part). */
   transLevel?: number;
-  /** PV du boss à ce palier (MaxHP / BossHP). */
+  /**
+   * PV de la BARRE du palier — PAS les PV totaux du boss : dans les modes à
+   * score, la barre = la LARGEUR INCLUSIVE de la tranche (`MaxDamage −
+   * MinDamage + 1` : la colonne MaxHP stocke largeur−1, vérifié in-game rang E
+   * d'Urd dark = 100 000 ; dernier rang ouvert du world boss : barre
+   * arbitraire). Vider la barre = franchir la tranche = rang suivant.
+   * (Adventure émet ici de VRAIS PV de boss — colonne BossHP, sans tranche.)
+   */
   hp?: number;
+  /** Tranche de dégâts du palier (modes à SCORE : le rang = dégâts infligés). */
+  damage?: RankDamage;
   /** Advantage rates PROPRES au palier — remplacent ceux du donjon. */
   adv?: DungeonAdv;
-  /** Passifs ADDITIONNELS du boss (`OptionID` — ids bruts, résolution TODO). */
+  /** Passifs ADDITIONNELS du boss (`OptionID` — résolus dans `rankOptions`). */
   options?: string[];
 }
 
@@ -121,6 +160,15 @@ export interface MonsterEncounters {
 export interface EncountersData {
   /** Libellés localisés des modes de contenu (slug → titre), quand connus. */
   modes: Record<string, LangDict>;
+  /** Passifs de palier résolus (`OptionID` → buff) — rejoint `glossaries`. */
+  rankOptions: Record<string, RankOption>;
+  /**
+   * QUIRKS de compte réduisant les stats des BOSS (arbre Challenge du système
+   * Gift) : slug de stat → per-mille SIGNÉ total, tous nœuds pris. L'écran
+   * d'info du jeu les applique aux stats affichées (constat Sevih) — le site
+   * fait pareil (`stat × (1000 + mod) / 1000`, arrondi bas).
+   */
+  bossQuirkMods: Record<string, number>;
   dungeons: Record<string, DungeonRef>;
   monsters: Record<string, MonsterEncounters>;
 }
@@ -418,7 +466,15 @@ export function buildEncounters(): EncountersData {
     if (r.RankName) rank.name = r.RankName;
     if (num(r.BaseLevel)) rank.level = num(r.BaseLevel);
     if (num(r.TransLevel)) rank.transLevel = num(r.TransLevel);
-    if (num(r.MaxHP)) rank.hp = num(r.MaxHP);
+    // Barre INCLUSIVE : la colonne stocke largeur−1 (cf. doc DungeonRank.hp).
+    if (num(r.MaxHP)) rank.hp = num(r.MaxHP) + 1;
+    const dmgMin = num(r.MinDamage);
+    const dmgMax = num(r.MaxDamage);
+    if (dmgMin || dmgMax) {
+      rank.damage = {};
+      if (dmgMin) rank.damage.min = dmgMin;
+      if (dmgMax) rank.damage.max = dmgMax;
+    }
     const adv = advOf(r);
     if (adv) rank.adv = adv;
     const options = splitCsv(r.OptionID ?? '');
@@ -625,6 +681,62 @@ export function buildEncounters(): EncountersData {
     }
   }
 
-  cache = { modes, dungeons, monsters };
+  // Passifs de PALIER : chaque `OptionID` est un BUFF (BuffTemplet) — résolu
+  // ici une fois pour toutes (nom localisé via le tooltip du buff, stat/type
+  // bruts sinon) pour que le site affiche les rangs sans lire les tables.
+  const rankOptions: Record<string, RankOption> = {};
+  const buffs = loadBuffIndex();
+  const tooltipById = indexBy(loadTable('BuffToolTipTemplet'));
+  for (const d of Object.values(dungeons)) {
+    for (const rk of d.ranks ?? []) {
+      for (const o of rk.options ?? []) {
+        if (rankOptions[o]) continue;
+        const row = buffs.get(o)?.[0];
+        if (!row) continue;
+        const opt: RankOption = { type: row.Type ?? '' };
+        const stat = statSlug(row.StatType);
+        if (stat) opt.stat = stat;
+        const v = num(row.Value);
+        if (v) opt.value = v;
+        if (row.IsIgnoreInterruption === 'True') opt.irremovable = true;
+        if (row.ToolTipID) {
+          opt.tooltip = row.ToolTipID;
+          const nameId = tooltipById.get(row.ToolTipID)?.NameID;
+          if (nameId) {
+            const name = resolveText(tsys, nameId);
+            const named = name.en ? name : resolveText(tskill, nameId);
+            if (named.en) opt.name = named;
+          }
+        }
+        rankOptions[o] = opt;
+      }
+    }
+  }
+
+  // Quirks « boss » (système Gift, tables CharacterAwakening*) : nœud → groupe
+  // de niveaux → BuffID → BuffTemplet. On retient les MALUS inconditionnels
+  // portés par la cible (BT_STAT_PREMIUM, Target=ME, valeur négative) — les
+  // nœuds héros sont des BONUS ou des buffs conditionnels (élémentaires).
+  // Aujourd'hui : Awakening_Boss_{Avoid,Buff_RESIST}_Down_1/2 → EFF −10 %,
+  // RES −10 %.
+  const bossQuirkMods: Record<string, number> = {};
+  const quirkLevels = groupBy(loadTable('CharacterAwakeningLevelTemplet'), 'AwakeningLevelGroupID');
+  for (const n of loadTable('CharacterAwakeningNodeTemplet')) {
+    for (const lv of quirkLevels.get(n.AwakeningLevelGroupID ?? '') ?? []) {
+      for (const bid of splitCsv(lv.BuffID ?? '')) {
+        for (const br of buffs.get(bid) ?? []) {
+          if (br.Type !== 'BT_STAT_PREMIUM' || br.TargetType !== 'ME') continue;
+          if ((br.BuffConditionType ?? 'NONE') !== 'NONE') continue;
+          const v = num(br.Value);
+          if (!v || v >= 0) continue;
+          const slug = statSlug(br.StatType);
+          if (!slug) continue;
+          bossQuirkMods[slug] = (bossQuirkMods[slug] ?? 0) + v;
+        }
+      }
+    }
+  }
+
+  cache = { modes, rankOptions, bossQuirkMods, dungeons, monsters };
   return cache;
 }

@@ -19,6 +19,8 @@ import {
   extractedMonsterBundle,
   integrateCharacter,
   integrateMonster,
+  integrateMonsterMode,
+  type IntegrateModeReport,
   type IntegrateMonsterReport,
   type IntegrateReport,
 } from '@datagen/extractor/integrate';
@@ -36,6 +38,7 @@ import {
 export type {
   EntityReview,
   TargetReview,
+  IntegrateModeReport,
   IntegrateMonsterReport,
   IntegrateReport,
   V2Control,
@@ -51,6 +54,7 @@ export {
   extractedMonsterBundle,
   integrateCharacter,
   integrateMonster,
+  integrateMonsterMode,
   monsterArchiveOf,
   reviewAll,
   reviewTarget,

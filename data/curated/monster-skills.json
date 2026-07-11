@@ -7,5 +7,9 @@
     "Singularity_Passive_OLD_SS_1": ["900065", "900095"],
     "Singularity_Passive_OLD_SS_2": ["900065", "900095"],
     "Singularity_Rage_Action_guage": ["910001"]
+  },
+  "_docChipAdd": "chipAdd : skillId → réfs TOOLTIP du glossaire ajoutées en chips sur la carte — statuts DÉCRITS par la desc du skill mais appliqués hors kit (ex. passifs de PALIER, OptionID des rangs). La carte stats reste la source fidèle rang par rang.",
+  "chipAdd": {
+    "910001": ["1008"]
   }
 }

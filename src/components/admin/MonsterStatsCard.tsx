@@ -23,6 +23,7 @@ export function MonsterStatsCard({
   scales,
   spawns,
   optionLabels = {},
+  quirkMods,
 }: {
   stats: Record<string, StatRange>;
   /** Échelle d'affichage par slug (`percent` = per-mille → %). */
@@ -31,6 +32,8 @@ export function MonsterStatsCard({
   spawns: SpawnContext[];
   /** Libellés résolus des passifs de palier (id OptionID → texte humain). */
   optionLabels?: Record<string, string>;
+  /** Quirks de compte réduisant les stats du boss (per-mille signés). */
+  quirkMods?: Record<string, number>;
 }) {
   const options = dedupSpawnContexts(spawns);
   const [selected, setSelected] = useState<number>(options.length ? options.length - 1 : -1);
@@ -64,7 +67,7 @@ export function MonsterStatsCard({
           <div key={slug} className="border-line-subtle rounded-md border px-3 py-1.5">
             <div className="text-content-subtle text-xs">{statAbbr(slug)}</div>
             <div className="text-content">
-              {formatMonsterStat(slug, statAt(slug, r, ctx), scales)}
+              {formatMonsterStat(slug, statAt(slug, r, ctx, quirkMods), scales)}
               {slug === 'hp' && ctx.hpLines ? (
                 <span className="text-content-subtle ml-1 text-xs">× {ctx.hpLines} barres</span>
               ) : null}
@@ -84,7 +87,19 @@ export function MonsterStatsCard({
                   .map(([k, v]) => `${k} ${v > 0 ? '+' : ''}${v / 10}%`)
                   .join(', ')})`
               : ''}
-            {ctx.bossHp ? ` · PV du mode : ${ctx.bossHp.toLocaleString('en')}` : ''}
+            {ctx.damage
+              ? ` · tranche : ${ctx.damage.min?.toLocaleString('en') ?? '0'} – ${
+                  ctx.damage.max ? ctx.damage.max.toLocaleString('en') : '∞'
+                } dégâts`
+              : ''}
+            {ctx.bossHp
+              ? ` · ${ctx.damage ? 'barre du palier' : 'PV du mode'} : ${ctx.bossHp.toLocaleString('en')}`
+              : ''}
+            {quirkMods && Object.keys(quirkMods).length
+              ? ` · quirks appliqués (${Object.entries(quirkMods)
+                  .map(([s, v]) => `${statAbbr(s)} ${v > 0 ? '+' : ''}${v / 10}%`)
+                  .join(', ')})`
+              : ''}
             {!modified ? ' · valeurs du templet interpolées' : ''}
             {ctx.label ? ` — ${ctx.label}` : ''}
             {ctx.rank ? ` (palier ${ctx.rank})` : ''}

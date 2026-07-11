@@ -50,6 +50,8 @@ export type {
   DungeonRef,
   EncountersData,
   MonsterEncounters,
+  RankDamage,
+  RankOption,
   MonsterSpawn,
 } from '../generators/encounters';
 export type {
@@ -114,7 +116,7 @@ import type { LangDict } from '../lib/lang';
 import type { Effect } from '../lib/effects';
 import type { Character } from '../extractor/specs/character';
 import type { Monster } from '../extractor/specs/monster';
-import type { DungeonRef } from '../generators/encounters';
+import type { DungeonRef, RankOption } from '../generators/encounters';
 import type { TranscendData } from '../extractor/transcend';
 import type { Skill } from '../generators/skills';
 import type { CatalogEntry } from '../generators/item-catalog';
@@ -190,6 +192,18 @@ export interface Glossaries {
    * glossaires committés avant la première promotion du domaine monstre.
    */
   modes?: Record<string, LangDict>;
+  /**
+   * Passifs de PALIER résolus (`DungeonRank.options` → buff : nom localisé,
+   * réf tooltip, stat/valeur) — cf. generators/encounters. Optionnel comme
+   * `modes` (absent avant la première promotion).
+   */
+  rankOptions?: Record<string, RankOption>;
+  /**
+   * Quirks de compte réduisant les stats AFFICHÉES des boss (slug de stat →
+   * per-mille signé, ex. buff_chance/buff_resist −100) — le jeu les applique
+   * à l'écran d'info, le site aussi. Cf. generators/encounters.
+   */
+  bossQuirkMods?: Record<string, number>;
 }
 
 /** `data/generated/characters.json` */

@@ -575,17 +575,16 @@ const en = {
     "Singularity Ascension Device: ascend gear that has reached max Enhancement and max Reforge. Ascending boosts the gear's main stat(s) and grants 3 extra Reforge attempts; reaching Enhancement +15 then adds a random bonus stat (type depends on the slot, value is random).",
   'guides.singularity.info.feature.ranking':
     'Ranking Report: claim daily rewards based on your score the previous day.',
-  'guides.singularity.timer.next': 'Next reset in {time}',
+  // Rotation : UN boss par jour (mer→sam), puis 3 jours de récompense.
+  // La V2 affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
   'guides.singularity.week.title': 'Active this week',
-  'guides.singularity.week.title_mobile': 'Active now',
   'guides.singularity.week.tagline':
-    'Three weekly bosses run Wed–Fri. One weekend boss is up Saturday only.',
-  'guides.singularity.week.live': 'Live now · {dow}',
-  'guides.singularity.weekend.today': 'Weekend boss · today',
-  'guides.singularity.weekend.tomorrow': 'Weekend boss · tomorrow',
-  'guides.singularity.weekend.in_days': 'Weekend boss · in {n} days',
-  'guides.singularity.day.weekly': 'Wed–Fri',
-  'guides.singularity.day.sat_only': 'SAT ONLY',
+    'One boss per day, Wednesday to Saturday. The target changes at 00:00 UTC.',
+  'guides.singularity.week.today': 'Today',
+  'guides.singularity.next_week.title': 'Next rotation',
+  'guides.singularity.next_week.tagline':
+    'Reward phase — no boss is active. The next rotation opens {date}.',
+  'guides.singularity.rotation': 'Rotation {n}',
   'guides.singularity.library.title': 'Boss library',
   'guides.singularity.library.tagline':
     "Every guide stays accessible even when its boss isn't active.",

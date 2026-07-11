@@ -126,6 +126,11 @@ function main(): void {
     // Titres des modes de contenu (résolus sans mapping en dur) — glossaire
     // comme les éléments/classes ; les donjons vivent dans encounters.json.
     modes: encounters.modes,
+    // Passifs de PALIER résolus (`DungeonRank.options` → buff) — le site
+    // affiche les rangs (singularity…) sans lire les tables du jeu.
+    rankOptions: encounters.rankOptions,
+    // Quirks de compte réduisant les stats affichées des boss (EFF/RES −10 %).
+    bossQuirkMods: encounters.bossQuirkMods,
   };
 
   // 3) Écriture (types vérifiés contre les contrats).

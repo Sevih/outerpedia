@@ -1,6 +1,7 @@
 import { getT } from '@/i18n';
 import { formatGuideDate, guideUpdatedDate } from '@/lib/data/guides';
 import { GuideCard } from '@/components/guides/GuideCard';
+import { EmptyCategory } from './EmptyCategory';
 import type { CategoryViewProps } from './types';
 
 /**
@@ -10,6 +11,7 @@ import type { CategoryViewProps } from './types';
  */
 export default async function DefaultGrid({ lang, guides }: CategoryViewProps) {
   const t = await getT(lang);
+  if (guides.length === 0) return <EmptyCategory lang={lang} />;
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {guides.map((g) => (

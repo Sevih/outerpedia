@@ -38,6 +38,11 @@ export function getStatScales(): Record<string, string> {
   return G.statScales;
 }
 
+/** Quirks de compte réduisant les stats affichées des boss (EFF/RES −10 %). */
+export function getBossQuirkMods(): Record<string, number> {
+  return G.bossQuirkMods ?? {};
+}
+
 /**
  * Icône d'un monstre (convention du jeu) : `icon` commençant par « 2 » =
  * modèle de PERSONNAGE réutilisé en boss → face icon composée ; sinon vignette

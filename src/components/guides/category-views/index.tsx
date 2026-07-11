@@ -16,12 +16,18 @@
 import DefaultGrid from './DefaultGrid';
 import BannerGrid from './BannerGrid';
 import TieredList from './TieredList';
+import SingularityRotation from './SingularityRotation';
 import type { CategoryViewProps } from './types';
 
 export default function CategoryView(props: CategoryViewProps) {
   switch (props.category) {
     case 'general-guides':
       return <TieredList {...props} />;
+
+    // Rotation quotidienne : la vue affiche le boss du jour, donc la page PÉRIME
+    // chaque nuit — sa route est purgée par `/api/revalidate`.
+    case 'dimensional-singularity':
+      return <SingularityRotation {...props} />;
 
     // Modes à bannière : une seule vue, trois catégories. La V2 avait TROIS
     // fichiers strictement identiques (GuildRaidList / WorldBossList /

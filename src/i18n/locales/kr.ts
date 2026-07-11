@@ -561,16 +561,16 @@ const kr: Record<TranslationKey, string> = {
     '특이점 승화 장치: 강화와 재련이 최대치에 도달한 장비를 승화합니다. 승화 시 장비의 메인 스탯이 상승하고 재련 횟수가 +3되며, 강화 +15에 도달하면 추가 랜덤 스탯이 부여됩니다(종류는 장비 슬롯에 따라 다르며, 수치는 랜덤).',
   'guides.singularity.info.feature.ranking':
     '랭킹 보고서: 전일 점수에 따른 일일 보상을 수령합니다.',
-  'guides.singularity.timer.next': '다음 초기화까지 {time}',
-  'guides.singularity.week.title': '이번 주 활성',
-  'guides.singularity.week.title_mobile': '오늘 진행 중',
-  'guides.singularity.week.tagline': '주중 보스 3종은 수~금에 등장. 주말 보스는 토요일에만 등장.',
-  'guides.singularity.week.live': '진행 중 · {dow}',
-  'guides.singularity.weekend.today': '주말 보스 · 오늘 등장',
-  'guides.singularity.weekend.tomorrow': '주말 보스 · 내일',
-  'guides.singularity.weekend.in_days': '주말 보스 · {n}일 후',
-  'guides.singularity.day.weekly': '수~금',
-  'guides.singularity.day.sat_only': '토요일 전용',
+  // Rotation : UN boss par jour (mer→sam), puis 3 jours de récompense.
+  // La V2 affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
+  'guides.singularity.week.title': '이번 주 보스',
+  'guides.singularity.week.tagline':
+    '수요일부터 토요일까지 하루에 한 보스. 대상은 00:00 UTC에 바뀝니다.',
+  'guides.singularity.week.today': '오늘',
+  'guides.singularity.next_week.title': '다음 로테이션',
+  'guides.singularity.next_week.tagline':
+    '보상 기간 — 진행 중인 보스가 없습니다. 다음 로테이션은 {date}에 시작합니다.',
+  'guides.singularity.rotation': '로테이션 {n}',
   'guides.singularity.library.title': '보스 도감',
   'guides.singularity.library.tagline':
     '보스가 활성화되지 않아도 모든 가이드는 언제든 열람 가능합니다.',

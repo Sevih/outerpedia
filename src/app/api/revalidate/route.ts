@@ -24,6 +24,8 @@ import { NextResponse } from 'next/server';
  */
 const TIME_SENSITIVE_ROUTES = [
   // Cartes de saison (JC / WB / GR) : « en cours jusqu'au… ».
+  // ET rotation Dimensional Singularity : le BOSS DU JOUR change à 00:00 UTC —
+  // sans cette purge, la page servirait le boss d'hier pendant des heures.
   '/[lang]/guides/[category]',
   '/[lang]/guides/[category]/[slug]',
 ] as const;

@@ -15,6 +15,7 @@ import {
   buildStatusMap,
   dedupSkills,
   immunityChipEffects,
+  mergeStatusEffects,
   monsterSkillViews,
 } from '@/lib/skill-view';
 import { effectForTooltip, getMergedEffect } from '@/lib/data/effects';
@@ -23,6 +24,7 @@ import {
   getMonsterSkills,
   getStatScales,
   monsterIconSrc,
+  getBossQuirkMods,
   monsterSpawnContexts,
 } from '@/lib/data/monsters';
 import { SkillsSection } from '@/components/character/SkillsSection';
@@ -71,6 +73,13 @@ export async function BossPanel({ monsterId, lang }: { monsterId: string; lang: 
       })),
       effects,
     }));
+  // Chips curées en plus (chipAdd) : leur statut n'est pas porté par les
+  // skills eux-mêmes — résolu depuis les chips des cartes.
+  mergeStatusEffects(
+    statuses,
+    cardSkills.flatMap((c) => c.effects ?? []),
+    lang,
+  );
 
   // Immunités : tooltips affichés en jeu + TYPES de mécanique (BT_STUN,
   // BT_COOL_CHARGE, ST_ATK…), résolus vers les effets canoniques
@@ -110,6 +119,7 @@ export async function BossPanel({ monsterId, lang }: { monsterId: string; lang: 
         scales={getStatScales()}
         spawns={monsterSpawnContexts(monster, lang)}
         levelLabel={t('page.character.skill.level')}
+        quirkMods={getBossQuirkMods()}
       />
 
       {immunities.length > 0 && (

@@ -168,3 +168,55 @@ export async function integrateMonster(id: string): Promise<IntegrateMonsterRepo
 
   return { id, files };
 }
+
+export interface IntegrateModeReport {
+  mode: string;
+  /** Ids intégrés (spawnés dans le mode + adds rattachés). */
+  ids: string[];
+  files: string[];
+}
+
+/**
+ * Intègre TOUS les monstres d'un MODE DE JEU (bouton « Enregistrer le mode »
+ * du listing admin) : ceux qui SPAWNENT dans un donjon du mode, plus leurs
+ * ADDS rattachés (`summonedBy`/`linkedTo` vers un monstre du lot — un boss
+ * sans ses adds casse la vue kit côté site). Mêmes effets que
+ * `integrateMonster`, en UNE lecture/écriture par fichier.
+ */
+export async function integrateMonsterMode(mode: string): Promise<IntegrateModeReport> {
+  const fresh = buildMonsters().monsters;
+  const freshSkills = buildMonsterSkills().skills;
+  const enc = buildEncounters();
+
+  const ids = new Set<string>();
+  for (const m of Object.values(fresh)) {
+    if ((m.spawns ?? []).some((s) => enc.dungeons[s.dungeon]?.mode === mode)) ids.add(m.id);
+  }
+  if (!ids.size) throw new Error(`aucun monstre ne spawne dans le mode « ${mode} »`);
+  for (const m of Object.values(fresh)) {
+    if (ids.has(m.id)) continue;
+    const anchors = [...(m.summonedBy ?? []), ...(m.linkedTo ?? [])];
+    if (anchors.some((a) => ids.has(a))) ids.add(m.id);
+  }
+
+  const monsters = readJsonOr('monsters.json');
+  const skills = readJsonOr('monster-skills.json');
+  const encounters = readJsonOr('encounters.json');
+  for (const id of ids) {
+    const m = fresh[id];
+    monsters[id] = m;
+    for (const sid of m.skills) if (freshSkills[sid]) skills[sid] = freshSkills[sid];
+    for (const s of m.spawns ?? []) {
+      if (enc.dungeons[s.dungeon]) encounters[s.dungeon] = enc.dungeons[s.dungeon];
+    }
+  }
+  await writeJson('monsters.json', monsters);
+  await writeJson('monster-skills.json', skills);
+  await writeJson('encounters.json', encounters);
+
+  return {
+    mode,
+    ids: [...ids].sort(),
+    files: ['monsters.json', 'monster-skills.json', 'encounters.json'],
+  };
+}

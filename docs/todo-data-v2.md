@@ -10,10 +10,10 @@ de la pipeline V2 (`pipeline/run.ts`, 30 steps) + les JSON data à la main.
 `data/generated/monsters.json` ne contient que les monstres réellement portés
 (3 aujourd'hui). Ce qui bloque une vue de guide :
 
-- [ ] **Boss de Dimensional Singularity** — 13 ids : `60000001` à `60000015`,
-      SAUF `60000004` et `60000007` (absents de la rotation).
-      Sans eux, pas de NOM ni d'icône de boss : la vue de rotation
-      (`singularity.json` est prête, ancre comprise) reste inconstruisible.
+- [x] **Boss de Dimensional Singularity** — 13 ids : `60000001` à `60000015`,
+      SAUF `60000004` et `60000007` (absents de la rotation). Extraits ; les 13
+      vignettes `MT_*` sont collectées sous le namespace boss EXISTANT (aucun
+      doublon — 4 étaient déjà tirées par les sources d'équipement).
 - [ ] **Boss des guides à porter** — au fil du portage, chaque `meta.bossId`
       doit exister dans `monsters.json` (le rendu JETTE sinon).
 
@@ -29,9 +29,7 @@ de la pipeline V2 (`pipeline/run.ts`, 30 steps) + les JSON data à la main.
       `SingularityTemplet`/`SingularityDungeonGroupTemplet`, boss = entités
       `600000xx` via la chaîne spawn). L'ancre calendaire — irréductible, non
       dérivable des tables — vit dans `data/curated/singularity.json`
-      (constatée en jeu ; le calcul « groupe actif » = app).
-      ⚠️ La VUE de catégorie reste bloquée tant que les 13 boss `600000xx` ne
-      sont pas extraits (cf. section Monstres).
+      (constatée en jeu ; le calcul « groupe actif » = app → `src/lib/data/singularity.ts`).
 - [x] **`towers`** ← `datagen/generators/towers.ts` → `data/generated/towers.json` :
       compositions par étage (niveaux réels, puissance/niveau reco) des 8 tours
       (normale 100 / hard 40 / very hard 20 / 5 élémentaires 100), jours
@@ -86,16 +84,24 @@ Vues faites :
 - [x] **`guild-raid` · `world-boss` · `joint-challenge`** → `BannerGrid`. UNE vue
       pour les trois : en V2 c'étaient trois fichiers strictement identiques.
 - [x] **`other`** → `DefaultGrid` (rien de spécifique à faire).
+- [x] **`dimensional-singularity`** → `SingularityRotation` : le boss du JOUR,
+      puis la bibliothèque des boss. Rotation calculée par une fonction PURE
+      (`src/lib/data/singularity.ts`, `now` injecté) depuis `singularity.json` +
+      l'ancre curée. Deux CORRECTIONS contre la V2, pas des reprises : **un boss
+      par jour** (mer→sam, colonne `order`) et non « trois du mer au ven + un le
+      samedi » — la V2 figeait la semaine en dur (`slice(0,3)`, `dayInfo[3]`)
+      alors que ses propres textes disaient l'inverse (« the target boss changes
+      daily ») ; et la section **ne disparaît plus du dimanche au mardi** (en
+      phase de récompense elle bascule sur la rotation à venir). Les clés i18n
+      `weekend.*`, `day.weekly`, `day.sat_only` encodaient le faux modèle →
+      supprimées des 5 locales.
+      À SAVOIR : le 4e boss de chaque semaine est toujours une des trois Nornes,
+      en variante **lumière ou ténèbres** — même nom et même sprite, mais élément
+      et donjon distincts (`60000010` Urd lumière vs `60000013` Urd ténèbres). Ce
+      ne sont donc PAS des doublons ; la bibliothèque les garde séparés.
 
 Vues encore à faire — ce qui manque pour chacune :
 
-- [ ] **`dimensional-singularity`** — bloqué par les **13 monstres `600000xx`**
-      (cf. section Monstres). Le reste est prêt : `singularity.json` porte les
-      groupes ET la cadence, `data/curated/singularity.json` l'ancre. La vue
-      « boss actif aujourd'hui » se calcule dès que les boss ont un nom.
-      Ne PAS reprendre la V2, qui figeait la forme de la semaine en dur
-      (`slice(0,3)`, `dayInfo[3]`) en ignorant sa propre donnée, et dont la
-      section « actif » disparaissait du dimanche au mardi.
 - [ ] **`skyward-tower`** — 0 guide porté (8 en V2). `towers.json` est là mais
       les monstres des étages ne le sont pas. La vue V2 ne fait que grouper les
       guides (Difficulté / Élémentaires) → il faudra 2 champs de meta

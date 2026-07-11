@@ -21,6 +21,7 @@ export function BossStats({
   scales,
   spawns,
   levelLabel,
+  quirkMods,
 }: {
   stats: Record<string, StatRange>;
   /** Échelle d'affichage par slug (`percent` = per-mille → %). */
@@ -29,6 +30,8 @@ export function BossStats({
   spawns: SpawnContext[];
   /** Libellé « Level » déjà localisé. */
   levelLabel: string;
+  /** Quirks de compte réduisant les stats du boss (`glossaries.bossQuirkMods`). */
+  quirkMods?: Record<string, number>;
 }) {
   const options = dedupSpawnContexts(spawns);
   const [selected, setSelected] = useState<number>(options.length ? options.length - 1 : -1);
@@ -65,7 +68,7 @@ export function BossStats({
           >
             <div className="text-content-muted text-xs">{statAbbr(slug)}</div>
             <div className="text-content-strong">
-              {formatMonsterStat(slug, statAt(slug, r, ctx), scales)}
+              {formatMonsterStat(slug, statAt(slug, r, ctx, quirkMods), scales)}
               {slug === 'hp' && ctx.hpLines ? (
                 <span className="text-content-muted ml-1 text-xs">× {ctx.hpLines}</span>
               ) : null}

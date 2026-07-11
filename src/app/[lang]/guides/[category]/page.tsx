@@ -94,11 +94,10 @@ export default async function GuideCategoryPage({
           <p className="text-content-muted text-sm">{lRec(cat.desc, lang)}</p>
         </div>
       </div>
-      {guides.length === 0 ? (
-        <p className="text-content-muted text-sm">{t('page.guides.empty_category')}</p>
-      ) : (
-        <CategoryView lang={lang} category={category} guides={guides} />
-      )}
+      {/* L'état vide appartient à la VUE, pas à la page : une vue peut avoir du
+          contenu propre (la rotation de Singularity vaut d'être affichée même
+          sans un seul guide). Court-circuiter ici la rendrait morte. */}
+      <CategoryView lang={lang} category={category} guides={guides} />
     </div>
   );
 }

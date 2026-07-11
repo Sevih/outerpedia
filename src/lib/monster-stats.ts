@@ -10,7 +10,7 @@
  *   - `bossHp` (`EventBossDungeonTemplet.BossMonsterHP`) : PV réels du boss,
  *     REMPLACE l'interpolation (2 000 000 en very hard).
  */
-import type { DungeonAdv, DungeonRank } from '@contracts';
+import type { DungeonAdv, DungeonRank, RankDamage } from '@contracts';
 
 export interface StatRange {
   min: number;
@@ -25,11 +25,14 @@ export interface SpawnContext {
   /** Nom du palier (« SSS », « E+ »…) quand la rencontre en a un. */
   rank?: string;
   adv?: DungeonAdv;
+  /** PV du mode — pour un PALIER à tranche, c'est la BARRE du rang (cf. DungeonRank.hp). */
   bossHp?: number;
   hpLines?: number;
   /** Niveau de transcendance du boss au palier (barème à part, non appliqué). */
   transLevel?: number;
-  /** Passifs additionnels du palier (ids bruts — résolution TODO). */
+  /** Tranche de dégâts du palier (modes à score). */
+  damage?: RankDamage;
+  /** Passifs additionnels du palier (résolus via `glossaries.rankOptions`). */
   options?: string[];
 }
 
@@ -48,6 +51,7 @@ export function expandRankContexts(base: SpawnContext, ranks?: DungeonRank[]): S
     adv: r.adv,
     bossHp: r.hp ?? base.bossHp,
     ...(r.transLevel ? { transLevel: r.transLevel } : {}),
+    ...(r.damage ? { damage: r.damage } : {}),
     ...(r.options ? { options: r.options } : {}),
   }));
 }
@@ -82,12 +86,24 @@ const ADV_OF: Record<string, keyof DungeonAdv> = {
   speed: 'spd',
 };
 
-/** Valeur EFFECTIVE d'une stat dans le contexte d'une rencontre. */
-export function statAt(slug: string, r: StatRange, ctx: SpawnContext): number {
+/**
+ * Valeur EFFECTIVE d'une stat dans le contexte d'une rencontre. `quirkMods` =
+ * réductions PERMANENTES des quirks de compte (`glossaries.bossQuirkMods`,
+ * per-mille signés — EFF/RES −10 %) : le jeu les applique aux stats affichées
+ * du boss, nous aussi.
+ */
+export function statAt(
+  slug: string,
+  r: StatRange,
+  ctx: SpawnContext,
+  quirkMods?: Record<string, number>,
+): number {
   let v = r.min + Math.floor(((r.max - r.min) * (ctx.level - 1)) / 99);
   const adv = ctx.adv?.[ADV_OF[slug]];
   if (adv) v = Math.floor((v * (1000 + adv)) / 1000);
   if (slug === 'hp' && ctx.bossHp) v = ctx.bossHp;
+  const q = quirkMods?.[slug];
+  if (q) v = Math.floor((v * (1000 + q)) / 1000);
   return v;
 }
 

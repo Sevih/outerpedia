@@ -462,5 +462,5259 @@
         "tooltip": "1011"
       }
     ]
+  },
+  "130501": {
+    "id": "130501",
+    "name": { "en": "Help Me", "jp": "助けて", "kr": "도와줘", "zh": "帮帮我" },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [{ "level": 1, "damageFactor": 1100 }],
+    "desc": {
+      "en": "Attacks 2 enemies.",
+      "jp": "敵2体にダメージを与える。",
+      "kr": "적 2인을 공격합니다.",
+      "zh": "攻击2名敌人。"
+    },
+    "target": "enemy",
+    "range": "double",
+    "icon": "Skill_First_4034002"
+  },
+  "130502": {
+    "id": "130502",
+    "name": {
+      "en": "I'm Fading",
+      "jp": "私が消えていく",
+      "kr": "내가 사라져가",
+      "zh": "我要消失了"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1400,
+        "cool": 2,
+        "vars": { "4134002_2_1": { "c": "30%", "v": "50%", "t": "2" } },
+        "tooltips": ["1"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and has a <color=#28d9ed>[Buff_C_4134002_2_1]</color> chance to inflict <color=#28d9ed>Burned</color> on the target for <color=#28d9ed>[Buff_T_4134002_2_1] turn(s)</color>.",
+      "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_4134002_2_1]</color>の確率で<color=#28d9ed>火傷</color>を<color=#28d9ed>[Buff_T_4134002_2_1]ターン</color>の間付与する。",
+      "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_C_4134002_2_1]</color> 확률로 대상을 <color=#28d9ed>[Buff_T_4134002_2_1]턴</color> 동안 <color=#28d9ed>화상</color> 상태로 만듭니다.",
+      "zh": "攻击全体敌人，并有<color=#28d9ed>[Buff_C_4134002_2_1]</color>的几率使目标陷入<color=#28d9ed>烧伤</color>状态，持续<color=#28d9ed>[Buff_T_4134002_2_1]回合</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Second_4034002",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_BURN",
+        "target": "enemy_team",
+        "buff": "4134002_2_1",
+        "tooltip": "1"
+      }
+    ]
+  },
+  "130503": {
+    "id": "130503",
+    "name": {
+      "en": "Itchy Tasty",
+      "jp": "かゆイ、オいしイ",
+      "kr": "가려워맛있어",
+      "zh": "好痒，真好吃"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1800,
+        "cool": 4,
+        "startCool": 1,
+        "vars": { "4134002_3_1": { "c": "100%", "v": "2" } }
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and recovers the caster's <color=#28d9ed>Weakness Gauge</color> by <color=#28d9ed>[Buff_V_4134002_3_1]</color>.",
+      "jp": "敵全体にダメージを与え、自分の<color=#28d9ed>WG</color>を<color=#28d9ed>[Buff_V_4134002_3_1]</color>回復する。",
+      "kr": "적 전체를 공격하고 자신의 <color=#28d9ed>WG</color>를 <color=#28d9ed>[Buff_V_4134002_3_1]</color> 회복합니다.",
+      "zh": "攻击全体敌人，并使自身的<color=#28d9ed>WG</color>恢复<color=#28d9ed>[Buff_V_4134002_3_1]</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_4034002",
+    "effects": [
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "4134002_3_1",
+        "label": "SYS_BUFF_WG_CHARGE"
+      }
+    ]
+  },
+  "130521": {
+    "id": "130521",
+    "name": { "en": "Enraged", "jp": "狂暴化", "kr": "광폭화", "zh": "狂暴化" },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1200,
+        "vars": {
+          "Common_Rage_Buff_2": { "c": "100%", "v": "30%", "t": "3" },
+          "Common_Rage_Buff_3": { "c": "100%", "v": "40%", "t": "3" },
+          "common_monster_passive_wg2": { "c": "100%", "v": "30%" },
+          "common_rage_buff_speed_hp": { "c": "100%", "v": "15%" },
+          "common_rage_buff_atk_hp": { "c": "100%", "v": "15%" },
+          "4034002_12_1": { "c": "100%", "v": "50%", "t": "2" },
+          "4034002_12_2": { "c": "100%", "v": "50%", "t": "2" }
+        },
+        "tooltips": ["1069", "1007", "1"]
+      }
+    ],
+    "desc": {
+      "en": "Becomes <color=#28d9ed>Enraged</color> when Health drops to <color=#28d9ed>60%</color> of Max Health or lower. Increases Attack and Speed by <color=#28d9ed>[Buff_V_common_rage_buff_atk_hp]</color>. This effect lasts until the caster is inflicted with Break.\\n\\n<color=#28d9ed>Enraged</color>: Grants an irremovable effect to the caster that increases Attack and reduces damage taken for 3 turns. Recovers [Buff_V_common_monster_passive_wg2] Weakness Gauge. Enraged lasts for 3 turns.\\n\\n<color=#28d9ed>Tried It, Bad Taste</color>: Used when Enraged ends.\\nAttacks all enemies and has a <color=#28d9ed>[Buff_C_4034002_12_1]</color> chance to inflict <color=#28d9ed>Burned</color> on the target for <color=#28d9ed>[Buff_T_4034002_12_2] turn(s)</color>.\\nThis attack ignores the target's <color=#28d9ed>Resilience</color>. \\n\\n<color=#ffd732>If Enraged within 3 turns or fewer, grants 40 Chain Points.</color>",
+      "jp": "最大HPの<color=#28d9ed>60%</color>以下になると<color=#28d9ed>【狂暴化】</color>状態に切り替わり、攻撃力とスピードが<color=#28d9ed>[Buff_V_common_rage_buff_atk_hp]</color>UPする。この効果はブレイクすると解除される。\\n\\n<color=#28d9ed>【狂暴化】</color>：自分に解除不可能な攻撃力UP/ダメージDOWN効果を3ターンの間付与し、WGを[Buff_V_common_monster_passive_wg2]回復する。【狂暴化】は3ターンの間持続する。\\n\\n<color=#28d9ed>【食った、マズイ】</color>：【狂暴化】終了時に発動する。\\n敵全体にダメージを与え、対象に<color=#28d9ed>[Buff_C_4034002_12_1]</color>の確率で<color=#28d9ed>火傷</color>を<color=#28d9ed>[Buff_T_4034002_12_2]ターン</color>の間付与する。\\nこの攻撃は対象の<color=#28d9ed>効果抵抗</color>を無視する。\\n\\n<color=#ffd732>戦闘開始時から3ターン以内に【狂暴化】した場合、敵にCPを40獲得させる。</color>",
+      "kr": "최대 체력의 <color=#28d9ed>60%</color> 이하가 되면 <color=#28d9ed>광폭화</color> 상태로 전환하고, 공격력과 속도가 <color=#28d9ed>[Buff_V_common_rage_buff_atk_hp]</color> 증가합니다. 브레이크 되기 전까지 효과가 유지됩니다.\\n\\n<color=#28d9ed>광폭화 돌입</color> : 자신에게 해제되지 않는 공격력 증가/피해 감소 효과를 3턴 동안 부여하고, WG [Buff_V_common_monster_passive_wg2]를 회복합니다. 광폭화는 3턴 동안 유지됩니다.\\n\\n<color=#28d9ed>먹었는데 맛없어</color> : 광폭화 종료 시 사용.\\n적 전체를 공격하고 <color=#28d9ed>[Buff_C_4034002_12_1]</color> 확률로 대상을 <color=#28d9ed>[Buff_T_4034002_12_2]턴</color> 동안 <color=#28d9ed>화상</color> 상태로 만듭니다.\\n이 공격은 대상의 <color=#28d9ed>효과 저항</color>을 무시합니다.\\n\\n<color=#ffd732>3턴 안에 광폭화할 시 40의 CP를 회복시킵니다.</color>",
+      "zh": "若生命值降至上限的<color=#28d9ed>60%</color>以下，则转换为<color=#28d9ed>狂暴化</color>状态，并使攻击力和速度提升<color=#28d9ed>[Buff_V_common_rage_buff_atk_hp]</color>。该效果将持续至进入力竭状态为止。\\n\\n<color=#28d9ed>陷入狂暴化</color>：使自身获得无法被解除的攻击力提升/伤害降低效果，持续3回合，并使WG恢复\\n[Buff_V_common_monster_passive_wg2]。狂暴化持续3回合。\\n\\n<color=#28d9ed>食之无味</color>：狂暴化结束时发动。\\n攻击全体敌人，并有<color=#28d9ed>[Buff_C_4034002_12_1]</color>的几率使目标陷入<color=#28d9ed>烧伤</color>状态，持续<color=#28d9ed>[Buff_T_4034002_12_2]回合</color>。\\n该攻击无视目标的<color=#28d9ed>效果抵抗</color>。\\n\\n<color=#ffd732>在3回合内陷入狂暴化状态时，使CP恢复40。</color>"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_2",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "1007"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_3",
+        "stat": "dmg_reduce_rate",
+        "mode": "up",
+        "tooltip": "1069"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "common_monster_passive_wg2",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "common_rage_buff_speed_hp",
+        "stat": "speed",
+        "mode": "up"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "common_rage_buff_atk_hp",
+        "stat": "atk",
+        "mode": "up"
+      }
+    ]
+  },
+  "130522": {
+    "id": "130522",
+    "name": { "en": "", "jp": "", "kr": "", "zh": "" },
+    "type": "rage_finish1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 4500,
+        "vars": {
+          "4034002_12_1": { "c": "100%", "v": "50%", "t": "2" },
+          "4034002_12_2": { "c": "100%", "v": "50%", "t": "2" }
+        }
+      }
+    ],
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_BURN",
+        "target": "enemy_team",
+        "buff": "4034002_12_1",
+        "tooltip": "1"
+      },
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_BURN",
+        "target": "enemy_team",
+        "buff": "4034002_12_2",
+        "tooltip": "1"
+      }
+    ]
+  },
+  "130712": {
+    "id": "130712",
+    "name": {
+      "en": "You Must be the Enemy...",
+      "jp": "オマエが敵か…",
+      "kr": "네가 적인가…",
+      "zh": "敌人就是你吗……"
+    },
+    "type": "monster_2",
+    "subType": "passive",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1200,
+        "vars": {
+          "4076002_15_1": { "c": "100%", "v": "1000" },
+          "4076002_15_2": { "c": "100%", "v": "1" },
+          "4076002_15_3": { "c": "100%", "v": "5" },
+          "4076002_18_1": { "c": "100%", "v": "500%" },
+          "4076002_15_4": { "c": "100%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "(Triggered Effect) When Blazing Knight Meteos is hit, gains [Buff_V_4076002_15_2] <color=#28d9ed>Fierce Ember (Unique Resource)</color>.\\nAfter being hit, if <color=#28d9ed>Fierce Ember (Unique Resource)</color> owned is [Buff_V_4076002_15_3], <color=#28d9ed>counterattacks</color> all enemies. Damage dealt increases inversely proportional to the number of targets.",
+      "jp": "(発動効果)【火炎の騎士 メテウス】はダメージを受けた場合、<color=#28d9ed>【固有資源：猛烈な火種】</color>を[Buff_V_4076002_15_2]個獲得する。\\nダメージを受けた後、<color=#28d9ed>【固有資源：猛烈な火種】</color>が[Buff_V_4076002_15_3]個ある場合、敵全体に<color=#28d9ed>反撃</color>を使用する。対象が少ないほどダメージがUPする。",
+      "kr": "(발동 효과) 화염기사 메테우스는 피격 시 <color=#28d9ed>고유 자원 : 맹렬한 불씨</color>를 [Buff_V_4076002_15_2]개 획득합니다.\\n피격 후 <color=#28d9ed>고유 자원 : 맹렬한 불씨</color> 보유 수량이 [Buff_V_4076002_15_3]개라면, 적 전체에게 <color=#28d9ed>반격</color>을 사용합니다. 대상의 수가 적을수록 피해가 증가합니다.",
+      "zh": "(触发效果)火焰骑士梅修斯受到攻击时，获得[Buff_V_4076002_15_2]个<color=#28d9ed>固有资源：烈火</color>。\\n受到攻击后<color=#28d9ed>固有资源：烈火</color>持有数量如为[Buff_V_4076002_15_3]个，则对全体敌人使用<color=#28d9ed>反击</color>。目标数量越少，则该技能的伤害越高。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Second_4076002",
+    "effects": [
+      {
+        "family": "trigger",
+        "category": "buff",
+        "type": "BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER",
+        "target": "me",
+        "buff": "4076002_15_1",
+        "label": "SYS_BUFF_COUNTER"
+      },
+      {
+        "family": "resource",
+        "category": "buff",
+        "type": "BT_RESOURCE_CHARGE",
+        "target": "me",
+        "buff": "4076002_15_2"
+      },
+      {
+        "family": "resource",
+        "category": "buff",
+        "type": "BT_RESOURCE_USE_SKILL",
+        "target": "me",
+        "buff": "4076002_15_3"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG_ENEMY_TEAM_DECREASE",
+        "target": "me",
+        "buff": "4076002_18_1"
+      },
+      {
+        "family": "revive",
+        "category": "neutral",
+        "type": "BT_SEALED_RESURRECTION",
+        "target": "enemy_team",
+        "buff": "4076002_15_4",
+        "caller": "second"
+      }
+    ]
+  },
+  "130716": {
+    "id": "130716",
+    "name": {
+      "en": "Protect the Royal Family...",
+      "jp": "王家を守る…",
+      "kr": "왕가를 지킨다…",
+      "zh": "必须守护王室……"
+    },
+    "type": "second",
+    "subType": "passive",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 8000,
+        "vars": {
+          "4076002_16_3": { "c": "100%", "v": "99" },
+          "4076002_16_1": { "c": "100%", "v": "1000" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "(Triggered Effect) If Blazing Knight Meteos <color=#28d9ed>kills an enemy</color> (except by a Counterattack or an additional attack), he removes all <color=#28d9ed>buffs</color> from all enemies and deals lethal damage to all enemies. Targets killed by this attack cannot be Resurrected or Revived.",
+      "jp": "(発動効果)【火炎の騎士メテウス】が反撃、追加攻撃以外のスキルで<color=#28d9ed>敵を倒した時</color>、敵全体の<color=#28d9ed>強化効果</color>をすべて解除し、敵全体に致命的なダメージを与える。この攻撃で倒れた敵は復活と蘇生ができなくなる。",
+      "kr": "(발동 효과) 화염기사 메테우스가 반격, 추가타를 제외한 공격으로 <color=#28d9ed>적을 처치 시</color>, 적 전체의 <color=#28d9ed>강화 효과</color>를 모두 해제하고 적 전체에게 치명적인 피해를 입힙니다. 해당 공격에 피해를 받아 사망 시 부활 및 소생 효과가 발생하지 않습니다.",
+      "zh": "(触发效果)火焰骑士梅修斯使用除反击、额外攻击以外的攻击<color=#28d9ed>击杀敌人时</color>，解除全体敌人的所有<color=#28d9ed>强化效果</color>，并对全体敌人造成致命伤害。因该攻击死亡时，将无法触发复活与苏醒效果。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_4076002",
+    "effects": [
+      {
+        "family": "cleanse",
+        "category": "debuff",
+        "type": "BT_REMOVE_BUFF",
+        "target": "enemy_team",
+        "buff": "4076002_16_3",
+        "label": "SYS_BUFF_REMOVE_BUFF",
+        "caller": "second"
+      },
+      {
+        "family": "trigger",
+        "category": "buff",
+        "type": "BT_RUN_PASSIVE_SKILL_ON_TURN_END",
+        "target": "me",
+        "buff": "4076002_16_1",
+        "label": "SYS_BUFF_ADDITIVE_ATTACK"
+      }
+    ]
+  },
+  "131301": {
+    "id": "131301",
+    "name": {
+      "en": "Primordial Intimidation",
+      "jp": "古代種の脅威",
+      "kr": "고대종의 위협",
+      "zh": "古代种族的威胁"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1000,
+        "vars": { "4076005_1_1": { "c": "100%", "v": "5%" } }
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and heals the caster by <color=#28d9ed>[Buff_V_4076005_1_1]</color> of Max Health after using this skill.",
+      "jp": "敵全体にダメージを与え、自分の最大HPの<color=#28d9ed>[Buff_V_4076005_1_1]</color>を回復する。",
+      "kr": "적 전체를 공격하고 자신 최대 체력의 <color=#28d9ed>[Buff_V_4076005_1_1]</color>를 회복합니다.",
+      "zh": "攻击全体敌人，并使自身恢复生命值上限的<color=#28d9ed>[Buff_V_4076005_1_1]</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_First_4014002_Water",
+    "effects": [
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_HEAL_BASED_TARGET",
+        "target": "me",
+        "buff": "4076005_1_1",
+        "stat": "hp",
+        "mode": "up"
+      }
+    ]
+  },
+  "131302": {
+    "id": "131302",
+    "name": {
+      "en": "Tremor of Despair",
+      "jp": "絶望の地鳴り",
+      "kr": "절망의 땅울림",
+      "zh": "绝望的地鸣"
+    },
+    "type": "second",
+    "subType": "passive",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1200,
+        "vars": {
+          "4076005_2_1": { "c": "100%", "v": "1000" },
+          "4076005_2_2": { "c": "100%", "v": "2" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "(Triggered Effect) Attacks all enemies when an ally is inflicted with a debuff. Reduces the duration of all <color=#28d9ed>debuffs</color> on the caster by 2 turns.",
+      "jp": "(発動効果)味方に弱体効果が付与された時、敵全体にダメージを与え、自分のすべての<color=#28d9ed>弱体効果</color>の持続ターンを2ターン減少する。",
+      "kr": "(발동 효과) 아군이 약화 효과 피격 시 적 전체를 공격하고, 자신에게 걸려 있는 모든 <color=#28d9ed>약화 효과</color>의 지속 턴을 2턴 감소시킵니다.",
+      "zh": "(触发效果)友军受到弱化效果攻击时，攻击全体敌人，并使自身附带的所有<color=#28d9ed>弱化效果</color>持续时间减少2回合。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Second_4014002_Water",
+    "effects": [
+      {
+        "family": "trigger",
+        "category": "buff",
+        "type": "BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER",
+        "target": "me",
+        "buff": "4076005_2_1",
+        "label": "SYS_BUFF_COUNTER"
+      },
+      {
+        "family": "cleanse",
+        "category": "buff",
+        "type": "BT_EXTEND_DEBUFF",
+        "target": "me",
+        "buff": "4076005_2_2",
+        "label": "SYS_BUFF_EXTEND_DEBUFF_UP",
+        "caller": "second"
+      }
+    ]
+  },
+  "131304": {
+    "id": "131304",
+    "name": {
+      "en": "Breath of Destruction",
+      "jp": "破滅の息吹",
+      "kr": "파멸의 숨결",
+      "zh": "破灭的吐息"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1800,
+        "cool": 5,
+        "startCool": 1,
+        "vars": { "4076005_3_1": { "c": "100%", "v": "30%", "t": "2" } },
+        "tooltips": ["7"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and increases the caster's <color=#28d9ed>Attack</color> for <color=#28d9ed>[Buff_T_4076005_3_1] turn(s)</color> after using the skill.",
+      "jp": "敵全体にダメージを与え、自分の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>[Buff_T_4076005_3_1]ターン</color>の間UPさせる。",
+      "kr": "적 전체를 공격하고 자신의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>[Buff_T_4076005_3_1]턴</color> 동안 증가시킵니다.",
+      "zh": "攻击全体敌人，并使自身的<color=#28d9ed>攻击力</color>提升，持续<color=#28d9ed>[Buff_T_4076005_3_1]回合</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_4014002_Water",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "4076005_3_1",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "7",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "131322": {
+    "id": "131322",
+    "name": {
+      "en": "Descent of the Tyrant",
+      "jp": "暴君、降臨",
+      "kr": "폭군, 강림",
+      "zh": "暴君，降临"
+    },
+    "type": "rage_finish1",
+    "subType": "active",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [{ "level": 1 }],
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1"
+  },
+  "131323": {
+    "id": "131323",
+    "name": { "en": "Enraged", "jp": "狂暴化", "kr": "광폭화", "zh": "狂暴化" },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 6500,
+        "vars": {
+          "4076005_11_1": { "c": "100%", "v": "5" },
+          "common_monster_passive_wg2": { "c": "100%", "v": "30%" },
+          "4076005_14_1": { "c": "100%", "v": "20%" },
+          "4076005_13_1_old": { "c": "100%", "v": "68.5%", "t": "3" },
+          "4076005_13_2": { "c": "100%", "v": "75.5%", "t": "3" },
+          "4076005_13_3": { "c": "100%", "v": "72.5%", "t": "3" },
+          "4076005_13_1_2": { "c": "100%", "v": "68.5%", "t": "3" },
+          "4076005_13_2_2": { "c": "100%", "v": "75.5%", "t": "3" },
+          "4076005_13_3_2": { "c": "100%", "v": "72.5%", "t": "3" },
+          "4076005_14_2": { "c": "100%", "v": "100%", "t": "1" },
+          "common_rage_buff_speed_turn": { "c": "100%", "v": "5%" },
+          "common_rage_buff_atk_turn": { "c": "100%", "v": "5%" }
+        },
+        "tooltips": ["1005", "1003", "1004"]
+      }
+    ],
+    "desc": {
+      "en": "Becomes <color=#28d9ed>Enraged</color> every 5 turns and increases Attack and Speed by <color=#28d9ed>[Buff_V_common_rage_buff_atk_turn]</color>. This effect stacks up to 3 times and lasts until the caster is inflicted with Break.\\n\\n<color=#28d9ed>Enraged Ultimate Skill</color>: Deals a large amount of damage to all enemies upon becoming Enraged, but receives damage equal to <color=#28d9ed>[Buff_V_4076005_14_1]</color> of Max Health.\\nInflicts irremovable <color=#28d9ed>Shocked</color>, <color=#28d9ed>Bleeding</color>, and <color=#28d9ed>Poisoned</color> for <color=#28d9ed>[Buff_T_4076005_13_2] turns</color> on non-Earth enemies and recovers [Buff_V_common_monster_passive_wg2] Weakness Gauge. Penetrates the enemy's Defense. This Enraged has no duration.",
+      "jp": "5ターンごとに<color=#28d9ed>【狂暴化】</color>状態に切り替わり、攻撃力とスピードが<color=#28d9ed>[Buff_V_common_rage_buff_atk_turn]</color>UPする。この効果は最大3回まで累積し、ブレイクすると解除される。\\n\\n<color=#28d9ed>【狂暴化】と【必殺スキル】</color>：【狂暴化】状態になる際、敵全体に大ダメージを与えるが、最大HPの<color=#28d9ed>[Buff_V_4076005_14_1]</color>のダメージを受ける。地属性以外の敵に解除不可能な<color=#28d9ed>感電</color>、<color=#28d9ed>出血</color>、<color=#28d9ed>中毒</color>を<color=#28d9ed>[Buff_T_4076005_13_2]ターン</color>の間付与し、WGを[Buff_V_common_monster_passive_wg2]回復する。この攻撃は敵の防御力を貫通する。【狂暴化】の持続ターンはない。",
+      "kr": "5턴마다 <color=#28d9ed>광폭화</color> 상태로 전환하고, 공격력과 속도가 <color=#28d9ed>[Buff_V_common_rage_buff_atk_turn]</color> 증가합니다. 해당 효과는 최대 3회 누적되며, 브레이크 되기 전까지 효과가 유지됩니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> : 광폭화 돌입과 함께 적 전체에게 큰 피해를 입히지만, 최대 체력의 <color=#28d9ed>[Buff_V_4076005_14_1]</color>의 피해를 입습니다.\\n지속성이 아닌 적에게 해제 불가능한 <color=#28d9ed>감전</color>, <color=#28d9ed>출혈</color>, <color=#28d9ed>중독</color>을 <color=#28d9ed>[Buff_T_4076005_13_2]턴</color>동안 부여하고, WG [Buff_V_common_monster_passive_wg2]를 회복합니다. 이 공격은 적의 방어력을 관통합니다. 광폭화 유지 시간은 없습니다.",
+      "zh": "每5回合转化为<color=#28d9ed>狂暴化</color>状态，并使攻击力和速度提升<color=#28d9ed>[Buff_V_common_rage_buff_atk_turn]</color>。该效果最多可叠加3次，且该效果将持续至进入力竭状态为止。\\n\\n<color=#28d9ed>陷入狂暴化和必杀技</color>：陷入狂暴化时，对全体敌人造成巨额伤害，使自身受到相当于生命值上限<color=#28d9ed>[Buff_V_4076005_14_1]</color>的伤害。\\n对不是土属性的敌人赋予无法解除的<color=#28d9ed>触电</color>、<color=#28d9ed>出血</color>、<color=#28d9ed>中毒</color>，持续<color=#28d9ed>[Buff_T_4076005_13_2]回合</color>，并使WG恢复[Buff_V_common_monster_passive_wg2]。该攻击可穿透敌人的防御力。狂暴化状态立即解除。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "cleanse",
+        "category": "buff",
+        "type": "BT_EXTEND_DEBUFF",
+        "target": "me",
+        "buff": "4076005_11_1",
+        "label": "SYS_BUFF_EXTEND_DEBUFF_DOWN",
+        "caller": "second"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "common_monster_passive_wg2",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "anti_heal",
+        "category": "neutral",
+        "type": "BT_REVERSE_HEAL_BASED_TARGET",
+        "target": "me",
+        "buff": "4076005_14_1",
+        "stat": "hp",
+        "mode": "up"
+      },
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_LIGHTNING",
+        "target": "enemy_team",
+        "buff": "4076005_13_1_old",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "1005"
+      },
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_BLEED",
+        "target": "enemy_team",
+        "buff": "4076005_13_2",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "1003"
+      },
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_POISON",
+        "target": "enemy_team",
+        "buff": "4076005_13_3",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "1004"
+      },
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_LIGHTNING",
+        "target": "enemy_team",
+        "buff": "4076005_13_1_2",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "1005"
+      },
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_BLEED",
+        "target": "enemy_team",
+        "buff": "4076005_13_2_2",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "1003"
+      },
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_POISON",
+        "target": "enemy_team",
+        "buff": "4076005_13_3_2",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "1004"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "4076005_14_2",
+        "stat": "pierce_power_rate",
+        "mode": "up"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "common_rage_buff_speed_turn",
+        "stat": "speed",
+        "mode": "up"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "common_rage_buff_atk_turn",
+        "stat": "atk",
+        "mode": "up"
+      }
+    ]
+  },
+  "900001": {
+    "id": "900001",
+    "name": {
+      "en": "Flame Shock",
+      "jp": "炎砲衝撃",
+      "kr": "염포 충격",
+      "zh": "火焰冲击"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1260,
+        "vars": { "4014005_1_1": { "c": "100%", "v": "50%", "t": "2" } },
+        "tooltips": ["1"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy, and grants <color=#28d9ed>Burned</color> for <color=#28d9ed>[Buff_T_4014005_1_1]</color> turns.",
+      "jp": "敵単体にダメージを与え、<color=#28d9ed>[Buff_T_4014005_1_1]ターン</color>の間、対象に<color=#28d9ed>火傷</color>を付与する。",
+      "kr": "적을 공격하고 <color=#28d9ed>[Buff_T_4014005_1_1]턴</color> 동안 대상에게 <color=#28d9ed>화상</color>을 부여합니다.",
+      "zh": "攻击敌人，并赋予目标<color=#28d9ed>[Buff_T_4014005_1_1]回合</color>的<color=#28d9ed>烧伤</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_4014005",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_BURN",
+        "target": "enemy_skill_target",
+        "buff": "4014005_1_1",
+        "tooltip": "1"
+      }
+    ]
+  },
+  "900002": {
+    "id": "900002",
+    "name": {
+      "en": "Heavy Slash",
+      "jp": "ずっしりとした乱撃",
+      "kr": "육중한 난격",
+      "zh": "沉重猛击"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1365,
+        "cool": 4,
+        "startCool": 2,
+        "vars": { "4014005_2_1": { "c": "100%", "v": "50%", "t": "3" } },
+        "tooltips": ["1"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies, and grants <color=#28d9ed>Burned</color> for <color=#28d9ed>[Buff_T_4014005_2_1]</color> turns.",
+      "jp": "敵全体にダメージを与え、<color=#28d9ed>[Buff_T_4014005_2_1]ターン</color>の間、対象に<color=#28d9ed>火傷</color>を付与する。",
+      "kr": "적 전체를 공격하고 <color=#28d9ed>[Buff_T_4014005_2_1]턴</color> 동안 대상에게 <color=#28d9ed>화상</color>을 부여합니다.",
+      "zh": "攻击全体敌人，并赋予目标<color=#28d9ed>[Buff_T_4014005_2_1]回合</color>的<color=#28d9ed>烧伤</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Second_4014005",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_BURN",
+        "target": "enemy_skill_target",
+        "buff": "4014005_2_1",
+        "tooltip": "1"
+      }
+    ]
+  },
+  "900003": {
+    "id": "900003",
+    "name": {
+      "en": "Furnace of Madness",
+      "jp": "狂気の炎",
+      "kr": "광기의 불구덩이",
+      "zh": "疯狂火狱"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1680,
+        "cool": 5,
+        "startCool": 2,
+        "vars": { "4014005_3_1": { "c": "100%" } },
+        "tooltips": ["56"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies, and <color=#28d9ed>detonates</color> all Burned stacks on the target.",
+      "jp": "敵全体にダメージを与え、対象の火傷をすべて<color=#28d9ed>破裂</color>させる。",
+      "kr": "적 전체를 공격하고 대상의 화상을 모두 <color=#28d9ed>폭발</color>시킵니다.",
+      "zh": "解除全体敌人的<color=#28d9ed>所有</color><color=#28d9ed>强化效果</color>，攻击全体敌人。并引爆目标身上的烧伤效果。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_4014005",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "neutral",
+        "type": "BT_IMMEDIATELY_BURN",
+        "target": "enemy_skill_target",
+        "buff": "4014005_3_1",
+        "label": "SYS_BUFF_DOT_IMMEDIATELY"
+      }
+    ]
+  },
+  "900004": {
+    "id": "900004",
+    "name": {
+      "en": "Monster Hunter's Crucible",
+      "jp": "モンスターハンターの坩堝",
+      "kr": "흉물 사냥꾼의 도가니",
+      "zh": "怪物猎手的熔炉"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_Bel_SS_1": { "c": "100%", "v": "100%" },
+          "Singularity_Passive_Bel_SS_2": { "c": "100%", "v": "1" },
+          "Singularity_Passive_AntiCurse": { "c": "100%", "v": "50000" },
+          "Singularity_Passive_AntiTureDmg": { "c": "100%", "v": "50000" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Upon entering battle, inflicts <color=#28d9ed>Burned</color> on all enemies for <color=#28d9ed>2 turns</color>.\\nDMG against targets with Burned increases by <color=#28d9ed>50%</color>.",
+      "jp": "戦闘入場時、敵全体に<color=#28d9ed>2ターン</color>の間<color=#28d9ed>火傷</color>を付与し、\\n火傷を保有する対象への与ダメージが<color=#28d9ed>50%</color>増加する。",
+      "kr": "전투 입장 시 적 전체에게 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>화상</color>을 부여하고\\n화상을 보유한 대상에 대한 피해가 <color=#28d9ed>50%</color> 증가합니다.",
+      "zh": "进入战斗时对全体敌人附加<color=#28d9ed>2回合</color>的<color=#28d9ed>烧伤</color>，\\n对持有烧伤的目标造成的伤害增加<color=#28d9ed>50%</color>。"
+    },
+    "icon": "MT_Passive_1_Fire",
+    "effects": [
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "Singularity_Passive_Bel_SS_1"
+      },
+      {
+        "family": "cleanse",
+        "category": "buff",
+        "type": "BT_REMOVE_DEBUFF",
+        "target": "me",
+        "buff": "Singularity_Passive_Bel_SS_2",
+        "label": "SYS_BUFF_REMOVE_DEBUFF"
+      },
+      {
+        "family": "dot",
+        "category": "buff",
+        "type": "BT_DOT_CURSE_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiCurse"
+      },
+      {
+        "family": "anti_heal",
+        "category": "buff",
+        "type": "BT_REVERSE_HEAL_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiTureDmg"
+      }
+    ]
+  },
+  "900005": {
+    "id": "900005",
+    "name": {
+      "en": "Hunting Time",
+      "jp": "狩りの時間",
+      "kr": "수렵의 시간",
+      "zh": "狩猎时刻"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_Bel_B_1": { "c": "100%", "v": "50%", "t": "2" },
+          "Singularity_Passive_Bel_B_2": { "c": "100%", "v": "50%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "If self is inflicted with <color=#28d9ed>Frozen</color>, DMG taken increases by <color=#28d9ed>100%</color>.\\nAt the start of each turn, dispels <color=#28d9ed>1</color> <color=#28d9ed>debuff</color>.",
+      "jp": "自分に<color=#28d9ed>凍結</color>が付与されている場合、受けるダメージが<color=#28d9ed>100%</color>増加する。\\nターン開始時、<color=#28d9ed>弱体効果</color>を<color=#28d9ed>1個</color>解除する。",
+      "kr": "자신에게 <color=#28d9ed>빙결</color>이 부여되었다면 받는 피해가 <color=#28d9ed>100%</color> 증가합니다.\\n턴 시작 시 <color=#28d9ed>약화 효과</color>를 <color=#28d9ed>1개</color> 해제합니다.",
+      "zh": "若自身被附加<color=#28d9ed>冰冻</color>，受到的伤害增加<color=#28d9ed>100%</color>。\\n每回合开始时解除<color=#28d9ed>1个</color><color=#28d9ed>弱化效果</color>。"
+    },
+    "icon": "MT_Passive_1_Fire",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_BURN",
+        "target": "enemy_team",
+        "buff": "Singularity_Passive_Bel_B_1",
+        "tooltip": "1"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "Singularity_Passive_Bel_B_2"
+      }
+    ]
+  },
+  "900006": {
+    "id": "900006",
+    "name": { "en": "Enraged", "jp": "狂暴化", "kr": "광폭화", "zh": "狂暴化" },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1650,
+        "vars": {
+          "Common_Rage_Buff_101": { "c": "100%", "v": "40%", "t": "1" },
+          "Common_Rage_Buff_102": { "c": "100%", "v": "30%", "t": "1" },
+          "common_monster_passive_wg1": { "c": "100%", "v": "10%" },
+          "Singularity_Rage_Action_guage": { "c": "100%", "v": "20%" },
+          "Singularity_RAGE_BEL": { "c": "100%", "v": "50%", "t": "2" }
+        },
+        "tooltips": ["1069", "1015", "1"]
+      }
+    ],
+    "desc": {
+      "en": "Enters <color=#28d9ed>Berserk</color> state every time enemies take 7 actions.\\n\\n<color=#28d9ed>Berserk Entry & Ultimate Skill</color>: Attacks all enemies, then grants the caster an irremovable Speed Increase/DMG Reduction effect for 1 turn and recovers WG by 10%.\\nInflicts Burned on all enemies for 2 turns.",
+      "jp": "敵が7回行動するたびに<color=#28d9ed>狂暴化</color>状態に移行する。\\n\\n<color=#28d9ed>狂暴化突入と必殺スキル</color>：敵全体を攻撃後、自分に解除されないスピードUP/被ダメDOWN効果を1ターン付与し、WGを10%回復する。\\n敵全体に2ターンの間<color=#28d9ed>火傷</color>を付与する。",
+      "kr": "적이 7회 행동할 때 마다 <color=#28d9ed>광폭화</color> 상태로 전환합니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> : 적 전체를 공격 후 자신에게 해제되지 않는 속도 증가/피해 감소 효과를 1턴 동안 부여하고 WG를 10% 회복합니다.\\n적 전체에게 2턴 동안 화상을 부여합니다.",
+      "zh": "敌人每行动7次进入<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>狂暴化冲入与必杀技</color>：攻击全体敌人后，为自身附加无法解除的速度提升/受伤害降低效果持续1回合，并恢复10% WG。\\n为全体敌人附加<color=#28d9ed>烧伤</color>持续2回合。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_101",
+        "stat": "dmg_reduce_rate",
+        "mode": "up",
+        "tooltip": "1069"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_102",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "1015"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "common_monster_passive_wg1",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Rage_Action_guage",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_BURN",
+        "target": "enemy_team",
+        "buff": "Singularity_RAGE_BEL",
+        "tooltip": "1"
+      }
+    ]
+  },
+  "900011": {
+    "id": "900011",
+    "name": {
+      "en": "Lead Me to the Enemy...",
+      "jp": "敵はどこだ…",
+      "kr": "적은 어디냐…",
+      "zh": "敌人在哪里……"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 2100,
+        "vars": { "Singularity_Mette_SKILL01_1": { "c": "100%", "v": "10%" } }
+      }
+    ],
+    "desc": {
+      "en": "Prioritizes attacking the leftmost enemy.\\nAfter attacking, increases own <color=#28d9ed>Speed</color> by <color=#28d9ed>10%</color>. (Max 5 stacks)",
+      "jp": "最も左側にいる敵を優先的に攻撃する。\\n攻撃後、自分の<color=#28d9ed>スピード</color>を<color=#28d9ed>10%</color>増加させる。（最大5回累積）",
+      "kr": "가장 좌측에 있는 적을 우선적으로 공격합니다. \\n공격 후 자신의 <color=#28d9ed>속도</color>를 <color=#28d9ed>10%</color> 증가시킵니다. (최대 5회 누적)",
+      "zh": "优先攻击最左侧的敌人。\\n攻击后使自身<color=#28d9ed>速度</color>增加<color=#28d9ed>10%</color>。（最多叠加5次）"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_4076002",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_Mette_SKILL01_1",
+        "stat": "speed",
+        "mode": "up",
+        "label": "SYS_BUFF_ACTION_SPEED_UP",
+        "caller": "first"
+      }
+    ]
+  },
+  "900013": {
+    "id": "900013",
+    "name": {
+      "en": "Are You the Enemy?",
+      "jp": "お前が敵か？",
+      "kr": "네가 적인가?",
+      "zh": "你是敌人吗？"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": { "Singularity_Passive_Mete_A_1": { "c": "100%", "v": "100%" } }
+      }
+    ],
+    "desc": {
+      "en": "DMG taken from targets with <color=#28d9ed>Barrier</color> increases by <color=#28d9ed>100%</color>.\\nCurse and Fixed DMG taken by the boss cannot exceed <color=#28d9ed>50000</color>.",
+      "jp": "<color=#28d9ed>シールド</color>が付与された対象から受けるダメージが<color=#28d9ed>100%</color>増加する。\\nボスが受ける呪いおよび固定ダメージは<color=#28d9ed>50000</color>を超えない。",
+      "kr": "<color=#28d9ed>실드</color>가 부여된 대상에게 받는 피해가 <color=#28d9ed>100%</color> 증가합니다.\\n보스가 받는 저주 및 고정 피해의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.",
+      "zh": "受到持有<color=#28d9ed>护盾</color>目标的伤害增加<color=#28d9ed>100%</color>。\\n首领受到的诅咒及固定伤害不超过<color=#28d9ed>50000</color>。"
+    },
+    "icon": "MT_Passive_1_Fire",
+    "effects": [
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "Singularity_Passive_Mete_A_1"
+      }
+    ]
+  },
+  "900015": {
+    "id": "900015",
+    "name": { "en": "Enraged", "jp": "狂暴化", "kr": "광폭화", "zh": "狂暴化" },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1650,
+        "vars": {
+          "Common_Rage_Buff_101": { "c": "100%", "v": "40%", "t": "1" },
+          "Common_Rage_Buff_102": { "c": "100%", "v": "30%", "t": "1" },
+          "common_monster_passive_wg1": { "c": "100%", "v": "10%" },
+          "Singularity_Rage_Action_guage": { "c": "100%", "v": "20%" },
+          "Singularity_RAGE_METTE": { "c": "100%", "t": "2" }
+        },
+        "tooltips": ["1069", "1015", "39"]
+      }
+    ],
+    "desc": {
+      "en": "Enters <color=#28d9ed>Berserk</color> state every time enemies take 7 actions.\\n\\n<color=#28d9ed>Berserk Entry & Ultimate Skill</color> : Deals DMG to all enemies, then grants self an undispellable Speed UP/DMG Reduction effect for 1 turn and recovers WG by 10%.\\nInflicts Unbuffable on all enemies for 2 turns.",
+      "jp": "敵が7回行動するたびに<color=#28d9ed>狂暴化</color>状態に移行する。\\n\\n<color=#28d9ed>狂暴化突入と必殺スキル</color>：敵全体にダメージを与えた後、自分に解除されないスピードUP/ダメージ減少効果を1ターンの間付与し、WGを10%回復する。\\n敵全体に強化不可を2ターン付与する。",
+      "kr": "적이 7회 행동할 때 마다 <color=#28d9ed>광폭화</color> 상태로 전환합니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> : 적 전체에게 피해를 입힌 후 자신에게 해제되지 않는 속도 증가/피해 감소 효과를 1턴 동안 부여하고 WG를 10% 회복합니다.\\n적 전체에게 강화 불가를 2턴 부여합니다.",
+      "zh": "敌人每行动7次进入<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>狂暴化突入与必杀技</color>：对全体敌人造成伤害后，对自身附加无法解除的速度提升/伤害减少效果1回合，并恢复WG10%。\\n对全体敌人附加2回合的强化不可。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_101",
+        "stat": "dmg_reduce_rate",
+        "mode": "up",
+        "tooltip": "1069"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_102",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "1015"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "common_monster_passive_wg1",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Rage_Action_guage",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "cc",
+        "category": "debuff",
+        "type": "BT_SEALED",
+        "target": "enemy_team",
+        "buff": "Singularity_RAGE_METTE",
+        "tooltip": "39",
+        "label": "SYS_BUFF_SEALED"
+      }
+    ]
+  },
+  "900021": {
+    "id": "900021",
+    "name": {
+      "en": "Relentless Destruction",
+      "jp": "迷いなき破壊",
+      "kr": "거침없는 파괴",
+      "zh": "无尽破坏"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1365,
+        "vars": {
+          "Singularity_HS_SKILL01_1_1": { "c": "100%", "v": "2" },
+          "Singularity_HS_SKILL01_1_2": { "c": "100%", "v": "2" },
+          "Singularity_HS_SKILL01_1_3": { "c": "100%", "v": "2" },
+          "Singularity_HS_SKILL01_1_4": { "c": "100%", "v": "2" }
+        },
+        "tooltips": ["49"]
+      }
+    ],
+    "desc": {
+      "en": "Prioritizes attacking the leftmost enemy.\\nIf the target is not a <color=#28d9ed>Defender</color>, dispels <color=#28d9ed>2</color> of own <color=#28d9ed>debuffs</color>.",
+      "jp": "最も左側にいる敵を優先的に攻撃する。\\n対象が<color=#28d9ed>防御型</color>でない場合、自分の<color=#28d9ed>弱体効果</color>を<color=#28d9ed>2個</color>解除する。",
+      "kr": "가장 좌측에 있는 적을 우선적으로 공격합니다. \\n대상이 <color=#28d9ed>방어형</color>이 아니라면 자신의 <color=#28d9ed>약화 효과</color>를 <color=#28d9ed>2개</color> 해제합니다.",
+      "zh": "优先攻击最左侧的敌人。\\n若目标非<color=#28d9ed>防御型</color>，解除自身<color=#28d9ed>2个</color><color=#28d9ed>弱化效果</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_4086026",
+    "effects": [
+      {
+        "family": "cleanse",
+        "category": "buff",
+        "type": "BT_REMOVE_DEBUFF",
+        "target": "me",
+        "buff": "Singularity_HS_SKILL01_1_1",
+        "label": "SYS_BUFF_REMOVE_DEBUFF",
+        "caller": "first"
+      },
+      {
+        "family": "cleanse",
+        "category": "buff",
+        "type": "BT_REMOVE_DEBUFF",
+        "target": "me",
+        "buff": "Singularity_HS_SKILL01_1_2",
+        "label": "SYS_BUFF_REMOVE_DEBUFF",
+        "caller": "first"
+      },
+      {
+        "family": "cleanse",
+        "category": "buff",
+        "type": "BT_REMOVE_DEBUFF",
+        "target": "me",
+        "buff": "Singularity_HS_SKILL01_1_3",
+        "label": "SYS_BUFF_REMOVE_DEBUFF",
+        "caller": "first"
+      },
+      {
+        "family": "cleanse",
+        "category": "buff",
+        "type": "BT_REMOVE_DEBUFF",
+        "target": "me",
+        "buff": "Singularity_HS_SKILL01_1_4",
+        "label": "SYS_BUFF_REMOVE_DEBUFF",
+        "caller": "first"
+      }
+    ]
+  },
+  "900022": {
+    "id": "900022",
+    "name": {
+      "en": "Slaughtering Flutter",
+      "jp": "虐殺の羽ばたき",
+      "kr": "학살의 날개짓",
+      "zh": "屠杀振翅"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1575,
+        "cool": 3,
+        "startCool": 1,
+        "vars": {
+          "Singularity_HS_SKILL02_1": { "c": "100%", "v": "2" },
+          "Singularity_HS_SKILL02_2": { "c": "100%", "v": "2" }
+        },
+        "tooltips": ["48", "49"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and dispels <color=#28d9ed>2</color> of own <color=#28d9ed>debuffs</color> and <color=#28d9ed>2</color> of the targets' <color=#28d9ed>buffs</color> respectively.",
+      "jp": "敵全体にダメージを与え、自分の<color=#28d9ed>弱体効果</color>と対象の<color=#28d9ed>強化効果</color>をそれぞれ<color=#28d9ed>2個</color>解除する。",
+      "kr": "적 전체를 공격하고 자신의 <color=#28d9ed>약화 효과</color>와 대상 <color=#28d9ed>강화 효과</color>를 각각 <color=#28d9ed>2개</color> 해제합니다.",
+      "zh": "攻击全体敌人，分别解除自身<color=#28d9ed>2个</color><color=#28d9ed>弱化效果</color>和目标<color=#28d9ed>2个</color><color=#28d9ed>强化效果</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Second_4086026",
+    "effects": [
+      {
+        "family": "cleanse",
+        "category": "buff",
+        "type": "BT_REMOVE_DEBUFF",
+        "target": "me",
+        "buff": "Singularity_HS_SKILL02_1",
+        "label": "SYS_BUFF_REMOVE_DEBUFF",
+        "caller": "second"
+      },
+      {
+        "family": "cleanse",
+        "category": "debuff",
+        "type": "BT_REMOVE_BUFF",
+        "target": "enemy_team",
+        "buff": "Singularity_HS_SKILL02_2",
+        "label": "SYS_BUFF_REMOVE_BUFF",
+        "caller": "second"
+      }
+    ]
+  },
+  "900023": {
+    "id": "900023",
+    "name": {
+      "en": "Advent of Ruin",
+      "jp": "没落の降臨",
+      "kr": "몰락의 강림",
+      "zh": "覆灭降临"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1890,
+        "cool": 5,
+        "startCool": 5,
+        "vars": {
+          "Singularity_HS_SKILL03_1": { "c": "100%", "v": "50%", "t": "4" },
+          "Singularity_HS_SKILL03_2": { "c": "100%", "v": "20%" }
+        },
+        "tooltips": ["11", "61"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies.\\nIncreases own <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color> and increases <color=#28d9ed>Critical Hit Chance</color> for <color=#28d9ed>4 turns</color>.",
+      "jp": "敵全体にダメージを与える。\\n自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>増加させ、<color=#28d9ed>会心率</color>を<color=#28d9ed>4ターン</color>の間増加させる。",
+      "kr": "적 전체를 공격합니다.\\n자신의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>20%</color>증가시키고 <color=#28d9ed>치명 확률</color>이 <color=#28d9ed>4턴</color> 증가합니다.",
+      "zh": "攻击全体敌人。\\n使自身<color=#28d9ed>行动值</color>增加<color=#28d9ed>20%</color>，并使<color=#28d9ed>暴击率</color>在<color=#28d9ed>4回合</color>内提升。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_4086026",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_HS_SKILL03_1",
+        "stat": "critical_rate",
+        "mode": "up",
+        "tooltip": "11",
+        "caller": "ultimate"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_HS_SKILL03_2",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "900024": {
+    "id": "900024",
+    "name": {
+      "en": "Death Denial",
+      "jp": "死の拒絶",
+      "kr": "죽음 거부",
+      "zh": "拒绝死亡"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_HS_A_1": { "c": "100%", "v": "20%" },
+          "Singularity_Passive_HS_A_2": { "c": "100%", "v": "100%" },
+          "Singularity_Passive_AntiCurse": { "c": "100%", "v": "50000" },
+          "Singularity_Passive_AntiTureDmg": { "c": "100%", "v": "50000" },
+          "singularity_passive_dmg_earth4": { "c": "100%", "v": "150%" },
+          "singularity_passive_dmg_earth3": { "c": "100%", "v": "70%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "If the caster does not have any <color=#28d9ed>debuffs</color>, WG DMG taken decreases by <color=#28d9ed>50%</color>.\\nIf the caster has a <color=#28d9ed>buff</color>, Penetration increases by <color=#28d9ed>20%</color>.\\nDamage from Cursed and Fixed DMG taken by Bosses cannot exceed <color=#28d9ed>50,000</color>.\\n\\nDepending on the number of <color=#28d9ed>Earth</color> members on the enemy team, all enemies' DMG increases as follows.\\n3 members: <color=#28d9ed>70%</color>/4 members: <color=#28d9ed>150%</color>",
+      "jp": "自分が<color=#28d9ed>弱体効果</color>を保有していない場合、WGダメージが<color=#28d9ed>50%</color>DOWNする\\n自分が<color=#28d9ed>強化効果</color>を保有している場合、貫通力が<color=#28d9ed>20%</color>UPする。\\nボスが受ける呪いおよび固定ダメージのダメージは<color=#28d9ed>50,000</color>を超えない。\\n\\n敵の<color=#28d9ed>持続型</color>メンバー数に応じて、敵全体のダメージがそれぞれ増加する。\\n3人：<color=#28d9ed>70%</color>／4人：<color=#28d9ed>150%</color>",
+      "kr": "자신이 <color=#28d9ed>약화 효과</color>를 보유하지 않은 경우 WG 피해가 <color=#28d9ed>50%</color> 감소합니다\\n자신이 <color=#28d9ed>강화 효과</color>를 보유한 경우 관통력이 <color=#28d9ed>20%</color> 증가합니다.\\n보스가 받는 저주 및 고정 피해의 피해는 <color=#28d9ed>50,000</color>을 초과하지 않습니다.\\n\\n적의 <color=#28d9ed>지속성</color> 구성원 수에 따라 적 전체의 피해가 각각 증가합니다.\\n3명: <color=#28d9ed>70%</color>/4명: <color=#28d9ed>150%</color>",
+      "zh": "若自身未持有<color=#28d9ed>弱化效果</color>，则WG伤害减少<color=#28d9ed>50%</color>\\n若自身持有<color=#28d9ed>强化效果</color>，则穿透力增加<color=#28d9ed>20%</color>。\\n首领受到的诅咒及固定伤害的伤害不超过<color=#28d9ed>50,000</color>。\\n\\n根据敌方<color=#28d9ed>持续型</color>成员数量，敌方全体伤害分别增加。\\n3名：<color=#28d9ed>70%</color>/4名：<color=#28d9ed>150%</color>"
+    },
+    "icon": "MT_Passive_1_Water",
+    "effects": [
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Passive_HS_A_1",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "Singularity_Passive_HS_A_2"
+      },
+      {
+        "family": "dot",
+        "category": "buff",
+        "type": "BT_DOT_CURSE_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiCurse"
+      },
+      {
+        "family": "anti_heal",
+        "category": "buff",
+        "type": "BT_REVERSE_HEAL_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiTureDmg"
+      },
+      {
+        "family": "stat",
+        "category": "neutral",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "singularity_passive_dmg_earth4",
+        "stat": "dmg_boost",
+        "mode": "up",
+        "label": "SYS_BUFF_DMG"
+      },
+      {
+        "family": "stat",
+        "category": "neutral",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "singularity_passive_dmg_earth3",
+        "stat": "dmg_boost",
+        "mode": "up",
+        "label": "SYS_BUFF_DMG"
+      }
+    ]
+  },
+  "900025": {
+    "id": "900025",
+    "name": {
+      "en": "Extreme Scales",
+      "jp": "極限の鱗",
+      "kr": "극한의 비늘",
+      "zh": "极限鳞甲"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_HS_B_1": { "c": "100%", "v": "50%" },
+          "Singularity_Passive_HS_B_2": { "c": "100%", "v": "20%", "t": "1" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "When a target without <color=#28d9ed>Critical Damage</color> increase ends their turn, own <color=#28d9ed>Priority</color> increases by <color=#28d9ed>10%</color>.\\nDMG taken from targets with <color=#28d9ed>Critical Damage Increase</color> increases by <color=#28d9ed>100%</color>.",
+      "jp": "<color=#28d9ed>会心ダメージ</color>増加効果を保有しない対象の行動終了時、自分の<color=#28d9ed>行動ゲージ</color>が<color=#28d9ed>10%</color>増加し、\\n<color=#28d9ed>会心ダメージ増加</color>を保有する対象から受けるダメージが<color=#28d9ed>100%</color>増加する。",
+      "kr": "<color=#28d9ed>치명 피해</color> 증가 효과를 보유하지 않는 대상 행동 종료 시 자신의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>10%</color> 증가하고\\n<color=#28d9ed>치명 피해</color> 증가 효과를 보유한 대상에게 받는 피해가 <color=#28d9ed>100%</color> 증가합니다.",
+      "zh": "持有<color=#28d9ed>暴击伤害</color>提升效果的目标行动结束时，自身<color=#28d9ed>行动值</color>增加<color=#28d9ed>10%</color>，\\n受到持有<color=#28d9ed>暴击伤害提升</color>目标的伤害增加<color=#28d9ed>100%</color>。"
+    },
+    "icon": "MT_Passive_1_Water",
+    "effects": [
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_WG_DMG_REDUCE",
+        "target": "me",
+        "buff": "Singularity_Passive_HS_B_1"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_Passive_HS_B_2",
+        "stat": "pierce_power_rate",
+        "mode": "up"
+      }
+    ]
+  },
+  "900026": {
+    "id": "900026",
+    "name": { "en": "Enraged", "jp": "狂暴化", "kr": "광폭화", "zh": "狂暴化" },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1650,
+        "vars": {
+          "Common_Rage_Buff_101": { "c": "100%", "v": "40%", "t": "1" },
+          "Common_Rage_Buff_102": { "c": "100%", "v": "30%", "t": "1" },
+          "common_monster_passive_wg2": { "c": "100%", "v": "30%" },
+          "Singularity_Rage_Action_guage": { "c": "100%", "v": "20%" },
+          "Singularity_RAGE_HS": { "c": "100%", "t": "2" },
+          "singularity_rage_common": { "c": "100%", "v": "1" }
+        },
+        "tooltips": ["1069", "1015", "30"]
+      }
+    ],
+    "desc": {
+      "en": "Enters <color=#28d9ed>Berserk</color> state every time enemies take 7 actions.\\n\\n<color=#28d9ed>Berserk Entry & Ultimate Skill</color>: Deals DMG to all enemies, then grants the caster an irremovable Speed Increase/DMG Reduction effect for 1 turn and recovers WG by 30%.\\nGrants the caster Immunity for 2 turns.",
+      "jp": "敵が7回行動するたびに<color=#28d9ed>狂暴化</color>状態に移行する。\\n\\n<color=#28d9ed>狂暴化突入と必殺スキル</color>：敵全体にダメージを与えた後、自分に解除されないスピードUP/被ダメDOWN効果を1ターン付与し、WGを30%回復する。\\n自分に免疫効果を2ターン付与する。",
+      "kr": "적이 7회 행동할 때 마다 <color=#28d9ed>광폭화</color> 상태로 전환합니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> : 적 전체에게 피해를 입힌 후 자신에게 해제되지 않는 속도 증가/피해 감소 효과를 1턴 동안 부여 후, WG를 30% 회복합니다.\\n자신에게 면역 효과를 2턴 동안 부여합니다.",
+      "zh": "敌人每行动7次进入<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>狂暴化冲入与必杀技</color>：对全体敌人造成伤害后，为自身附加无法解除的速度提升/受伤害降低效果持续1回合，并恢复30% WG。\\n为自身附加免疫效果持续2回合。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_101",
+        "stat": "dmg_reduce_rate",
+        "mode": "up",
+        "tooltip": "1069"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_102",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "1015"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "common_monster_passive_wg2",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Rage_Action_guage",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "protect",
+        "category": "buff",
+        "type": "BT_IMMUNE",
+        "target": "me",
+        "buff": "Singularity_RAGE_HS",
+        "tooltip": "30",
+        "label": "SYS_BUFF_IMMUNE"
+      },
+      {
+        "family": "cleanse",
+        "category": "buff",
+        "type": "BT_EXTEND_DEBUFF",
+        "target": "me",
+        "buff": "singularity_rage_common",
+        "label": "SYS_BUFF_EXTEND_DEBUFF_DOWN"
+      }
+    ]
+  },
+  "900031": {
+    "id": "900031",
+    "name": {
+      "en": "Sharp Question",
+      "jp": "穿つ問答",
+      "kr": "날카로운 질문",
+      "zh": "锐利质问"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1470,
+        "vars": { "Singularity_SP_SKILL01_1": { "c": "100%", "v": "1" } },
+        "tooltips": ["50"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy and increases the duration of own <color=#28d9ed>buffs</color> by <color=#28d9ed>1 turn</color>.",
+      "jp": "敵にダメージを与え、保有する<color=#28d9ed>強化効果</color>の持続ターンを<color=#28d9ed>1ターン</color>増加させる。",
+      "kr": "적을 공격하고 보유한 <color=#28d9ed>강화 효과</color>의 지속시간을 <color=#28d9ed>1턴</color>를 증가시킵니다.",
+      "zh": "攻击敌人，使自身持有的<color=#28d9ed>强化效果</color>持续时间增加<color=#28d9ed>1回合</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_4044008",
+    "effects": [
+      {
+        "family": "cleanse",
+        "category": "buff",
+        "type": "BT_EXTEND_BUFF",
+        "target": "me",
+        "buff": "Singularity_SP_SKILL01_1",
+        "label": "SYS_BUFF_EXTEND_BUFF_UP",
+        "caller": "first"
+      }
+    ]
+  },
+  "900032": {
+    "id": "900032",
+    "name": {
+      "en": "Crushing Doubt",
+      "jp": "圧迫の疑念",
+      "kr": "짓누르는 의구심",
+      "zh": "沉重疑虑"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1785,
+        "cool": 3,
+        "startCool": 1,
+        "vars": {
+          "Singularity_SP_SKILL02_1": { "c": "100%", "v": "30%", "t": "2" },
+          "Singularity_SP_SKILL02_2": { "c": "100%", "v": "30%", "t": "2" }
+        },
+        "tooltips": ["53", "15", "7"]
+      }
+    ],
+    "desc": {
+      "en": "(Passive Effect) If self is inflicted with <color=#28d9ed>Unbuffable</color>, the duration of <color=#28d9ed>buffs</color> decreases by <color=#28d9ed>1 turn</color> at the start of each turn.\\n\\n(Active Effect) Attacks all enemies. After attacking, increases own <color=#28d9ed>Attack</color> and <color=#28d9ed>Speed</color> for <color=#28d9ed>2 turns</color>.",
+      "jp": "(パッシブ効果) 自分に<color=#28d9ed>強化不可</color>が付与されている場合、ターン開始時に<color=#28d9ed>強化効果</color>の持続ターンが<color=#28d9ed>1ターン</color>減少する。\\n\\n(アクティブ効果) 敵全体にダメージを与える。攻撃後、自分の<color=#28d9ed>攻撃力</color>と<color=#28d9ed>スピード</color>を<color=#28d9ed>2ターン</color>の間UPさせる。",
+      "kr": "(패시브 효과) 자신에게 <color=#28d9ed>강화 불가</color>가 부여되었다면 턴 시작 시 <color=#28d9ed>강화 효과</color>의 지속 시간이 <color=#28d9ed>1턴</color> 감소합니다.\\n\\n(액티브 효과) 적 전체를 공격합니다. 공격 후 <color=#28d9ed>2턴</color> 동안 자신의 <color=#28d9ed>공격력</color>과 <color=#28d9ed>속도</color>를 증가시킵니다.",
+      "zh": "(被动效果) 若自身被附加<color=#28d9ed>强化不可</color>，每回合开始时<color=#28d9ed>强化效果</color>持续时间减少<color=#28d9ed>1回合</color>。\\n\\n(主动效果) 攻击全体敌人。攻击后使自身<color=#28d9ed>攻击力</color>和<color=#28d9ed>速度</color>在<color=#28d9ed>2回合</color>内提升。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Second_4044008",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_SP_SKILL02_1",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "7",
+        "caller": "second"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_SP_SKILL02_2",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "15",
+        "caller": "second"
+      }
+    ]
+  },
+  "900033": {
+    "id": "900033",
+    "name": {
+      "en": "Time Like an Arrow",
+      "jp": "刹那の矢",
+      "kr": "쏜살같은 시간",
+      "zh": "疾速时光"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1890,
+        "cool": 5,
+        "startCool": 2,
+        "vars": { "Singularity_SP_SKILL03_1": { "c": "100%", "t": "2" } },
+        "tooltips": ["27"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and grants self <color=#28d9ed>Invincibility</color> for <color=#28d9ed>2 turns</color>.",
+      "jp": "敵全体にダメージを与え、自分に<color=#28d9ed>2ターン</color>の間<color=#28d9ed>無敵</color>を付与する。",
+      "kr": "적 전체를 공격하고 자신에게 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>무적</color>을 부여합니다.",
+      "zh": "攻击全体敌人，对自身附加<color=#28d9ed>2回合</color>的<color=#28d9ed>无敌</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_4044008",
+    "effects": [
+      {
+        "family": "protect",
+        "category": "buff",
+        "type": "BT_INVINCIBLE",
+        "target": "me",
+        "buff": "Singularity_SP_SKILL03_1",
+        "tooltip": "27",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "900034": {
+    "id": "900034",
+    "name": {
+      "en": "Price of a Wrong Answer",
+      "jp": "誤答の代価",
+      "kr": "오답의 대가",
+      "zh": "错误答案的代价"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_SP_A_2": { "c": "100%", "v": "20%" },
+          "Singularity_SP_SKILL02_3": { "c": "100%", "v": "1" },
+          "Singularity_Passive_AntiCurse": { "c": "100%", "v": "50000" },
+          "Singularity_Passive_AntiTureDmg": { "c": "100%", "v": "50000" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "If self holds no <color=#28d9ed>Poisoned</color>, all attacks ignore <color=#28d9ed>30%</color> of <color=#28d9ed>Defense</color>.\\nIf <color=#28d9ed>Poisoned</color>, DMG taken increases by <color=#28d9ed>100%</color>.\\nCurse and Fixed DMG taken by the boss cannot exceed <color=#28d9ed>50000</color>.",
+      "jp": "自分が<color=#28d9ed>中毒</color>を保有しない場合、すべての攻撃が<color=#28d9ed>防御力</color>を<color=#28d9ed>30%</color>無視し、\\n<color=#28d9ed>中毒</color>保有時、受けるダメージが<color=#28d9ed>100%</color>増加する。\\nボスが受ける呪いおよび固定ダメージは<color=#28d9ed>50000</color>を超えない。",
+      "kr": "자신이 <color=#28d9ed>중독</color>를 보유하지 않은 경우 모든 공격이 <color=#28d9ed>방어력</color>을 <color=#28d9ed>30%</color> 무시하고\\n<color=#28d9ed>중독</color> 보유 시, 받는 피해가 <color=#28d9ed>100%</color> 증가합니다.\\n보스가 받는 저주 및 고정 피해의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.",
+      "zh": "若自身未持有<color=#28d9ed>中毒</color>，所有攻击无视<color=#28d9ed>30%</color>的<color=#28d9ed>防御力</color>。\\n持有<color=#28d9ed>中毒</color>时，受到的伤害增加<color=#28d9ed>100%</color>。\\n首领受到的诅咒及固定伤害不超过<color=#28d9ed>50000</color>。"
+    },
+    "icon": "MT_Passive_1_Water",
+    "effects": [
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Passive_SP_A_2",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "cleanse",
+        "category": "buff",
+        "type": "BT_EXTEND_BUFF",
+        "target": "me",
+        "buff": "Singularity_SP_SKILL02_3",
+        "label": "SYS_BUFF_EXTEND_BUFF_DOWN"
+      },
+      {
+        "family": "dot",
+        "category": "buff",
+        "type": "BT_DOT_CURSE_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiCurse"
+      },
+      {
+        "family": "anti_heal",
+        "category": "buff",
+        "type": "BT_REVERSE_HEAL_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiTureDmg"
+      }
+    ]
+  },
+  "900035": {
+    "id": "900035",
+    "name": {
+      "en": "Time Flies",
+      "jp": "矢のような時間",
+      "kr": "쏜살같은 시간",
+      "zh": "飞逝的时间"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_SP_B_1": { "c": "100%", "v": "30%", "t": "1" },
+          "Singularity_Passive_SP_B_2": { "c": "100%", "v": "100%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "If own <color=#28d9ed>Speed</color> has increased, after attacking, own <color=#28d9ed>Priority</color> increases by <color=#28d9ed>20%</color>.",
+      "jp": "自分の<color=#28d9ed>スピード</color>が増加している場合、攻撃後に自分の<color=#28d9ed>行動ゲージ</color>が<color=#28d9ed>20%</color>増加する。",
+      "kr": "자신의 <color=#28d9ed>속도</color>가 증가했다면 공격 후 자신 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>20%</color> 증가합니다.",
+      "zh": "若自身<color=#28d9ed>速度</color>已提升，攻击后自身<color=#28d9ed>行动值</color>增加<color=#28d9ed>20%</color>。"
+    },
+    "icon": "MT_Passive_1_Water",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_Passive_SP_B_1",
+        "stat": "pierce_power_rate",
+        "mode": "up"
+      },
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "Singularity_Passive_SP_B_2"
+      }
+    ]
+  },
+  "900036": {
+    "id": "900036",
+    "name": { "en": "Enraged", "jp": "狂暴化", "kr": "광폭화", "zh": "狂暴化" },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1650,
+        "vars": {
+          "Common_Rage_Buff_101": { "c": "100%", "v": "40%", "t": "1" },
+          "Common_Rage_Buff_102": { "c": "100%", "v": "30%", "t": "1" },
+          "common_monster_passive_wg1": { "c": "100%", "v": "10%" },
+          "Singularity_Rage_Action_guage": { "c": "100%", "v": "20%" },
+          "Singularity_RAGE_SP": { "c": "100%", "v": "50%", "t": "2" }
+        },
+        "tooltips": ["1069", "1015", "23"]
+      }
+    ],
+    "desc": {
+      "en": "Enters <color=#28d9ed>Berserk</color> state every time enemies take 7 actions.\\n\\n<color=#28d9ed>Berserk Entry & Ultimate Skill</color> : Attacks all enemies, then grants self an undispellable Speed UP/DMG Reduction effect for 1 turn and recovers WG by 10%.\\nInflicts Critical Damage Reduction on all enemies for 2 turns.",
+      "jp": "敵が7回行動するたびに<color=#28d9ed>狂暴化</color>状態に移行する。\\n\\n<color=#28d9ed>狂暴化突入と必殺スキル</color>：敵全体にダメージを与えた後、自分に解除されないスピードUP/ダメージ減少効果を1ターンの間付与し、WGを10%回復する。\\n敵全体に会心ダメージ減少効果を2ターンの間付与する。",
+      "kr": "적이 7회 행동할 때마다 <color=#28d9ed>광폭화</color> 상태로 전환합니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> : 적 전체를 공격 후 자신에게 해제되지 않는 속도 증가/피해 감소 효과를 1턴 동안 부여하고 WG를 10% 회복합니다.\\n적 전체에게 치명 피해 감소 효과를 2턴 동안 부여합니다.",
+      "zh": "敌人每行动7次进入<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>狂暴化突入与必杀技</color>：攻击全体敌人后，对自身附加无法解除的速度提升/伤害减少效果1回合，并恢复WG10%。\\n对全体敌人附加2回合的暴击伤害减少效果。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_101",
+        "stat": "dmg_reduce_rate",
+        "mode": "up",
+        "tooltip": "1069"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_102",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "1015"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "common_monster_passive_wg1",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Rage_Action_guage",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "stat",
+        "category": "debuff",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "Singularity_RAGE_SP",
+        "stat": "critical_dmg_rate",
+        "mode": "down",
+        "tooltip": "23"
+      }
+    ]
+  },
+  "900041": {
+    "id": "900041",
+    "name": {
+      "en": "Creeping Toxin",
+      "jp": "急襲猛毒",
+      "kr": "엄습하는 맹독",
+      "zh": "剧毒来袭"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1470,
+        "vars": { "Singularity_SHA_SKILL01_1": { "c": "100%", "v": "50%" } }
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and DMG against targets without <color=#28d9ed>Counterattack</color> increases by <color=#28d9ed>50%</color>.",
+      "jp": "敵全体にダメージを与え、<color=#28d9ed>反撃</color>を保有しない対象への与ダメージが<color=#28d9ed>50%</color>増加する。",
+      "kr": "적 전체를 공격하고 <color=#28d9ed>반격</color>을 보유하지 않은 대상에 대한 피해가 <color=#28d9ed>50%</color> 증가합니다.",
+      "zh": "攻击全体敌人，对未持有<color=#28d9ed>反击</color>目标造成的伤害增加<color=#28d9ed>50%</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Attack_Smash_1_Earth",
+    "effects": [
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "Singularity_SHA_SKILL01_1",
+        "caller": "first"
+      }
+    ]
+  },
+  "900042": {
+    "id": "900042",
+    "name": {
+      "en": "Higashiyama's Master",
+      "jp": "東山ノ主",
+      "kr": "히가시야마의 주인",
+      "zh": "东山的主人"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1575,
+        "cool": 3,
+        "startCool": 1,
+        "vars": { "Singularity_SHA_SKILL02_1": { "c": "100%", "t": "1" } },
+        "tooltips": ["35"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and inflicts <color=#28d9ed>Petrified</color> on targets that do not hold <color=#28d9ed>Counterattack</color> for <color=#28d9ed>1 turn</color>.",
+      "jp": "敵全体にダメージを与えた後、<color=#28d9ed>反撃</color>を保有しない対象に<color=#28d9ed>1ターン</color>の間<color=#28d9ed>石化</color>を付与する。",
+      "kr": "적 전체를 공격 후 <color=#28d9ed>반격</color>을 보유하지 않은 대상에게 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>석화</color>를 부여합니다.",
+      "zh": "攻击全体敌人后，对未持有<color=#28d9ed>反击</color>的目标附加<color=#28d9ed>1回合</color>的<color=#28d9ed>石化</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Attack_Hammer_1_Earth",
+    "effects": [
+      {
+        "family": "cc",
+        "category": "cc",
+        "type": "BT_STONE",
+        "target": "enemy_team",
+        "buff": "Singularity_SHA_SKILL02_1",
+        "tooltip": "35",
+        "caller": "second"
+      }
+    ]
+  },
+  "900043": {
+    "id": "900043",
+    "name": {
+      "en": "Miasmic Restriction",
+      "jp": "毒霧結界",
+      "kr": "독안개의 결계",
+      "zh": "毒雾的结界"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 2100,
+        "vars": {
+          "Singularity_SHA_SKILL03_1_1": { "c": "100%" },
+          "Singularity_SHA_SKILL03_1_2": { "c": "100%", "v": "5" },
+          "Singularity_SHA_SKILL03_2": { "c": "100%", "v": "50%" },
+          "Singularity_SHA_SKILL03_3": { "c": "100%", "v": "25%" },
+          "Singularity_SHA_SKILL03_4": { "c": "100%", "v": "100%" }
+        },
+        "tooltips": ["45"]
+      }
+    ],
+    "desc": {
+      "en": "Can be used when holding <color=#28d9ed>5</color> <color=#28d9ed>Unique Resource: Grudge</color>.\\n\\nAttacks all enemies. After attacking, Priority increases by <color=#28d9ed>25%</color>.\\nDMG dealt to targets with <color=#28d9ed>80%</color> or more current HP increases by <color=#28d9ed>50%</color>.\\nImmediately after this skill, enemies' Counterattack, Revenge, and Agile Response will not activate.",
+      "jp": "<color=#28d9ed>固有リソース：恨み</color>を<color=#28d9ed>5個</color>保有している場合に使用可能。\\n\\n敵全体にダメージを与える。攻撃後、行動ゲージが<color=#28d9ed>25%</color>増加する。\\n現在HPが<color=#28d9ed>80%</color>以上の対象への与ダメージが<color=#28d9ed>50%</color>増加する。\\nこのスキル直後は敵の反撃、復讐、迅速対応が発動しない。",
+      "kr": "<color=#28d9ed>고유 자원 : 원한</color>을 <color=#28d9ed>5개</color> 보유한 경우 사용 가능합니다.\\n\\n적 전체를 공격합니다. 공격 후 행동 게이지가 <color=#28d9ed>25%</color> 증가합니다. \\n현재 체력이 <color=#28d9ed>80%</color> 이상인 대상에게 입히는 피해가 <color=#28d9ed>50%</color> 증가합니다.\\n이 스킬 직후에는 적의 반격, 복수, 신속 대응이 발동하지 않습니다.",
+      "zh": "持有<color=#28d9ed>5个</color><color=#28d9ed>固有资源：怨恨</color>时可使用。\\n\\n攻击全体敌人。攻击后行动值增加<color=#28d9ed>25%</color>。\\n对当前生命值在<color=#28d9ed>80%</color>以上的目标造成的伤害增加<color=#28d9ed>50%</color>。\\n该技能使用后，敌方的反击、复仇、迅速应对将不会发动。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Attack_Claw_1_Earth",
+    "effects": [
+      {
+        "family": "special",
+        "category": "buff",
+        "type": "BT_SKILL_USING_CONDITION",
+        "target": "me",
+        "buff": "Singularity_SHA_SKILL03_1_1",
+        "caller": "ultimate"
+      },
+      {
+        "family": "resource",
+        "category": "buff",
+        "type": "BT_RESOURCE_USE_SKILL",
+        "target": "me",
+        "buff": "Singularity_SHA_SKILL03_1_2",
+        "caller": "ultimate"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "Singularity_SHA_SKILL03_2",
+        "caller": "ultimate"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_SHA_SKILL03_3",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "trigger",
+        "category": "buff",
+        "type": "BT_SEAL_COUNTER",
+        "target": "me",
+        "buff": "Singularity_SHA_SKILL03_4",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "900044": {
+    "id": "900044",
+    "name": {
+      "en": "Archdemon's Guard Dog",
+      "jp": "魔王の番犬",
+      "kr": "마왕의 번견",
+      "zh": "魔王的看门犬"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_SHA_A_1": { "c": "100%", "v": "50%" },
+          "Singularity_Passive_SHA_A_2": { "c": "100%", "v": "200%" },
+          "Singularity_Passive_SHA_A_3": { "c": "100%", "v": "200%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "When self is inflicted with a debuff, gains <color=#28d9ed>1</color> <color=#28d9ed>Unique Resource: Grudge</color>.\\nAfter attacking, own <color=#28d9ed>Priority</color> increases by <color=#28d9ed>20%</color>.\\nCurse and Fixed DMG taken by the boss cannot exceed <color=#28d9ed>50000</color>.",
+      "jp": "自分に弱体効果が付与された時、<color=#28d9ed>固有リソース：恨み</color>を<color=#28d9ed>1個</color>獲得する。\\n攻撃後、自分の<color=#28d9ed>行動ゲージ</color>が<color=#28d9ed>20%</color>増加する。\\nボスが受ける呪いおよび固定ダメージは<color=#28d9ed>50000</color>を超えない。",
+      "kr": "자신에게 약화 효과가 부여될 때 <color=#28d9ed>고유 자원 : 원한</color>을 <color=#28d9ed>1개</color> 획득합니다.\\n공격 후 자신의 <color=#28d9ed>행동 게이지</color>가 <color=#28d9ed>20%</color> 증가합니다.\\n보스가 받는 저주 및 고정 피해의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.",
+      "zh": "自身被附加弱化效果时，获得<color=#28d9ed>1个</color><color=#28d9ed>固有资源：怨恨</color>。\\n攻击后自身<color=#28d9ed>行动值</color>增加<color=#28d9ed>20%</color>。\\n首领受到的诅咒及固定伤害不超过<color=#28d9ed>50000</color>。"
+    },
+    "icon": "MT_Passive_1_Earth",
+    "effects": [
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "Singularity_Passive_SHA_A_1"
+      },
+      {
+        "family": "damage",
+        "category": "neutral",
+        "type": "BT_DMG",
+        "target": "enemy_team",
+        "buff": "Singularity_Passive_SHA_A_2"
+      },
+      {
+        "family": "damage",
+        "category": "neutral",
+        "type": "BT_DMG",
+        "target": "enemy_team",
+        "buff": "Singularity_Passive_SHA_A_3"
+      }
+    ]
+  },
+  "900045": {
+    "id": "900045",
+    "name": {
+      "en": "Great Demon's Henchman",
+      "jp": "大妖怪の腹心",
+      "kr": "대요괴의 심복",
+      "zh": "大妖怪的心腹"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_SHA_B_1": { "c": "100%", "v": "1" },
+          "Singularity_Passive_SHA_B_2": { "c": "100%", "v": "20%" },
+          "Singularity_Passive_AntiCurse": { "c": "100%", "v": "50000" },
+          "Singularity_Passive_AntiTureDmg": { "c": "100%", "v": "50000" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "DMG taken decreases by <color=#28d9ed>50%</color>, but DMG taken from <color=#28d9ed>Counterattack</color>, <color=#28d9ed>Revenge</color>, and <color=#28d9ed>Dual Attack</color> increases by <color=#28d9ed>200%</color>.",
+      "jp": "受けるダメージが<color=#28d9ed>50%</color>減少するが、<color=#28d9ed>反撃</color>、<color=#28d9ed>復讐</color>、<color=#28d9ed>連携攻撃</color>で受けるダメージが<color=#28d9ed>200%</color>増加する。",
+      "kr": "받는 피해가 <color=#28d9ed>50%</color> 감소하지만 .<color=#28d9ed>반격</color>,<color=#28d9ed>복수</color>,<color=#28d9ed>협공</color>으로 입는 피해가 <color=#28d9ed>200%</color> 증가합니다.",
+      "zh": "受到的伤害减少<color=#28d9ed>50%</color>，但受到<color=#28d9ed>反击</color>、<color=#28d9ed>复仇</color>、<color=#28d9ed>夹攻</color>造成的伤害增加<color=#28d9ed>200%</color>。"
+    },
+    "icon": "MT_Passive_1_Earth",
+    "effects": [
+      {
+        "family": "resource",
+        "category": "buff",
+        "type": "BT_RESOURCE_CHARGE",
+        "target": "me",
+        "buff": "Singularity_Passive_SHA_B_1"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Passive_SHA_B_2",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "dot",
+        "category": "buff",
+        "type": "BT_DOT_CURSE_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiCurse"
+      },
+      {
+        "family": "anti_heal",
+        "category": "buff",
+        "type": "BT_REVERSE_HEAL_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiTureDmg"
+      }
+    ]
+  },
+  "900046": {
+    "id": "900046",
+    "name": { "en": "Enraged", "jp": "狂暴化", "kr": "광폭화", "zh": "狂暴化" },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1650,
+        "vars": {
+          "Common_Rage_Buff_101": { "c": "100%", "v": "40%", "t": "1" },
+          "Common_Rage_Buff_102": { "c": "100%", "v": "30%", "t": "1" },
+          "common_monster_passive_wg2": { "c": "100%", "v": "30%" },
+          "Singularity_Rage_Action_guage": { "c": "100%", "v": "20%" },
+          "Singularity_RAGE_SHA": { "c": "100%", "v": "100%", "t": "2" }
+        },
+        "tooltips": ["1069", "1015", "45"]
+      }
+    ],
+    "desc": {
+      "en": "Enters <color=#28d9ed>Berserk</color> state every time enemies take 7 actions.\\n\\n<color=#28d9ed>Berserk Entry & Ultimate Skill</color> : Attacks all enemies, then grants self an undispellable Speed UP/DMG Reduction effect for 1 turn and recovers WG by 30%.\\nGrants self Counterattack for 2 turns.",
+      "jp": "敵が7回行動するたびに<color=#28d9ed>狂暴化</color>状態に移行する。\\n\\n<color=#28d9ed>狂暴化突入と必殺スキル</color>：敵全体にダメージを与えた後、自分に解除されないスピードUP/ダメージ減少効果を1ターンの間付与し、WGを30%回復する。\\n自分に反撃効果を2ターンの間付与する。",
+      "kr": "적이 7회 행동할 때마다 <color=#28d9ed>광폭화</color> 상태로 전환합니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> :적 전체를 공격 후 자신에게 해제되지 않는 속도 증가/피해 감소 효과를 1턴 동안 부여하고 WG를 30% 회복합니다.\\n자신에게 반격 효과를 2턴 동안 부여합니다.",
+      "zh": "敌人每行动7次进入<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>狂暴化突入与必杀技</color>：攻击全体敌人后，对自身附加无法解除的速度提升/伤害减少效果1回合，并恢复WG30%。\\n对自身附加2回合的反击效果。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_101",
+        "stat": "dmg_reduce_rate",
+        "mode": "up",
+        "tooltip": "1069"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_102",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "1015"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "common_monster_passive_wg2",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Rage_Action_guage",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_RAGE_SHA",
+        "stat": "counter_rate",
+        "mode": "up",
+        "tooltip": "45",
+        "label": "SYS_BUFF_COUNTER_UP"
+      }
+    ]
+  },
+  "900051": {
+    "id": "900051",
+    "name": {
+      "en": "Harvest Sickle",
+      "jp": "収穫の鉤爪",
+      "kr": "수확의 갈고리",
+      "zh": "收割之镰"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1417,
+        "vars": {
+          "Singularity_SPIDER_SKILL01_1_1": { "c": "100%", "v": "100%" },
+          "Singularity_SPIDER_SKILL01_1_2": { "c": "100%", "v": "100%" },
+          "Singularity_SPIDER_SKILL01_1_3": { "c": "100%", "v": "100%" },
+          "Singularity_SPIDER_SKILL01_1_4": { "c": "100%", "v": "100%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Prioritizes attacking the leftmost enemy.\\nIf the target is not a <color=#28d9ed>Defender</color>, recovers <color=#28d9ed>all</color> of own WG.",
+      "jp": "最も左側にいる敵を優先的に攻撃する。\\n対象が<color=#28d9ed>防御型</color>でない場合、自分のWGを<color=#28d9ed>すべて</color>回復する。",
+      "kr": "가장 좌측에 있는 적을 우선적으로 공격합니다. \\n대상이 <color=#28d9ed>방어형</color>이 아니라면 자신의 WG를 <color=#28d9ed>모두</color> 회복합니다.",
+      "zh": "优先攻击最左侧的敌人。\\n若目标非<color=#28d9ed>防御型</color>，回复自身<color=#28d9ed>所有</color>WG。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_4024002",
+    "effects": [
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "Singularity_SPIDER_SKILL01_1_1",
+        "label": "SYS_BUFF_WG_CHARGE",
+        "caller": "first"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "Singularity_SPIDER_SKILL01_1_2",
+        "label": "SYS_BUFF_WG_CHARGE",
+        "caller": "first"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "Singularity_SPIDER_SKILL01_1_3",
+        "label": "SYS_BUFF_WG_CHARGE",
+        "caller": "first"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "Singularity_SPIDER_SKILL01_1_4",
+        "label": "SYS_BUFF_WG_CHARGE",
+        "caller": "first"
+      }
+    ]
+  },
+  "900052": {
+    "id": "900052",
+    "name": {
+      "en": "Radiant Beam",
+      "jp": "放射熱線",
+      "kr": "방사열선",
+      "zh": "放射热缐"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1522,
+        "cool": 4,
+        "startCool": 3,
+        "vars": { "Singularity_SPIDER_SKILL02_1": { "c": "100%", "v": "50%" } },
+        "tooltips": ["4"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy. If the target holds <color=#28d9ed>Poisoned</color>, DMG increases by <color=#28d9ed>50%</color>.",
+      "jp": "敵にダメージを与える。対象が<color=#28d9ed>中毒</color>を保有する場合、ダメージが<color=#28d9ed>50%</color>増加する。",
+      "kr": "적을 공격합니다. 대상이 <color=#28d9ed>중독</color> 보유 시 피해가 <color=#28d9ed>50%</color> 증가합니다.",
+      "zh": "攻击敌人。若目标持有<color=#28d9ed>中毒</color>，伤害增加<color=#28d9ed>50%</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_Second_4024002",
+    "effects": [
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "Singularity_SPIDER_SKILL02_1",
+        "caller": "second"
+      }
+    ]
+  },
+  "900053": {
+    "id": "900053",
+    "name": {
+      "en": "I Shall Bestow Grace",
+      "jp": "恩を授けよう",
+      "kr": "은혜를 내리리라",
+      "zh": "降下恩典"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1575,
+        "cool": 5,
+        "startCool": 3,
+        "vars": {
+          "Singularity_SPIDER_SKILL03_1": {
+            "c": "100%",
+            "v": "72.5%",
+            "t": "3"
+          }
+        },
+        "tooltips": ["4"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and inflicts <color=#28d9ed>Poisoned</color> on targets for <color=#28d9ed>3 turns</color>.",
+      "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>3ターン</color>の間<color=#28d9ed>中毒</color>を付与する。",
+      "kr": "적 전체를 공격하고 대상에게 <color=#28d9ed>3턴</color> 동안 <color=#28d9ed>중독</color>을 부여합니다.",
+      "zh": "攻击全体敌人，对目标附加<color=#28d9ed>3回合</color>的<color=#28d9ed>中毒</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_4024002",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_POISON",
+        "target": "enemy_team",
+        "buff": "Singularity_SPIDER_SKILL03_1",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "4",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "900054": {
+    "id": "900054",
+    "name": {
+      "en": "Incomplete Synchronization",
+      "jp": "不完全な同期",
+      "kr": "불완전 동기화",
+      "zh": "不完全同步"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_SPIDER_A_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "9"
+          },
+          "Singularity_Passive_SPIDER_A_2": { "c": "100%", "v": "100%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "At the end of every turn, inflicts <color=#28d9ed>Poisoned</color> on the <color=#28d9ed>enemy with the highest Attack</color> and the <color=#28d9ed>fastest enemy</color> for <color=#28d9ed>1 turn</color>.",
+      "jp": "毎ターン終了時、<color=#28d9ed>攻撃力が最も高い敵</color>と<color=#28d9ed>スピードが最も速い敵</color>に<color=#28d9ed>1ターン</color>の間<color=#28d9ed>中毒</color>を付与する。",
+      "kr": "매 턴 종료 시 <color=#28d9ed>공격력이 가장 높은 적</color>과 <color=#28d9ed>속도가 가장 빠른 적</color>에게 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>중독</color>을 부여합니다.",
+      "zh": "每回合结束时，对<color=#28d9ed>攻击力最高的敌人</color>和<color=#28d9ed>速度最快的敌人</color>附加<color=#28d9ed>1回合</color>的<color=#28d9ed>中毒</color>。"
+    },
+    "icon": "MT_Passive_1_Earth",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "debuff",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "Singularity_Passive_SPIDER_A_1",
+        "stat": "critical_rate",
+        "mode": "down",
+        "tooltip": "1022"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_Passive_SPIDER_A_2",
+        "stat": "e_cri_dmg_reduce",
+        "mode": "up"
+      }
+    ]
+  },
+  "900055": {
+    "id": "900055",
+    "name": {
+      "en": "Domain of Lethal Poison",
+      "jp": "猛毒の領域",
+      "kr": "극독의 영지",
+      "zh": "剧毒领域"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_SPIDER_B_1": {
+            "c": "100%",
+            "v": "72.5%",
+            "t": "1"
+          },
+          "Singularity_Passive_SPIDER_B_2": {
+            "c": "100%",
+            "v": "72.5%",
+            "t": "1"
+          },
+          "Singularity_Passive_SPIDER_A_3_1": { "c": "100%", "v": "150%" },
+          "singularity_passive_spider_a_3_2": { "c": "100%", "v": "150%" },
+          "Singularity_Passive_SPIDER_A_3_2": { "c": "100%", "v": "150%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Upon entering battle, decreases all enemies' <color=#28d9ed>Critical Hit Chance</color> for <color=#28d9ed>9 turns</color>. (Ignores Resilience)\\nCritical Damage taken by self decreases by <color=#28d9ed>100%</color>.\\nAll <color=#28d9ed>DoT</color> taken by self increases by <color=#28d9ed>[Buff_V_Singularity_Passive_SPIDER_A_3_2]</color>. (Excluding Curse)",
+      "jp": "戦闘入場時、敵全体の<color=#28d9ed>会心率</color>を<color=#28d9ed>9ターン</color>の間減少させる。（効果抵抗無視）\\n自分が受ける会心ダメージが<color=#28d9ed>100%</color>DOWNする。\\n自分が受けるすべての<color=#28d9ed>継続ダメージ</color>が<color=#28d9ed>[Buff_V_Singularity_Passive_SPIDER_A_3_2]</color>UPする。（呪いを除く）",
+      "kr": "전투 입장 시 적 전체의 <color=#28d9ed>치명 확률</color>을 <color=#28d9ed>9턴</color> 동안 감소시킵니다.(효과 저항 무시 및 해제 불가)\\n자신이 받는 치명 피해가 <color=#28d9ed>100%</color> 감소합니다.\\n자신이 받는 모든 <color=#28d9ed>지속 피해</color>가 <color=#28d9ed>[Buff_V_Singularity_Passive_SPIDER_A_3_2]</color> 증가합니다. (저주 제외)",
+      "zh": "进入战斗时，使全体敌人的<color=#28d9ed>暴击率</color>降低<color=#28d9ed>9回合</color>。（无视效果抵抗）\\n自身受到的暴击伤害减少<color=#28d9ed>100%</color>。\\n自身受到的所有<color=#28d9ed>持续伤害</color>增加<color=#28d9ed>[Buff_V_Singularity_Passive_SPIDER_A_3_2]</color>。（诅咒除外）"
+    },
+    "icon": "MT_Passive_1_Earth",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_POISON",
+        "target": "enemy_team_highest_atk",
+        "buff": "Singularity_Passive_SPIDER_B_1",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "4"
+      },
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_POISON",
+        "target": "enemy_team_highest_spd",
+        "buff": "Singularity_Passive_SPIDER_B_2",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "4"
+      },
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_CURSE_ENHANCE",
+        "target": "me",
+        "buff": "Singularity_Passive_SPIDER_A_3_1"
+      },
+      {
+        "family": "stat",
+        "category": "debuff",
+        "type": "BT_ENHANCE_ALL",
+        "target": "me",
+        "buff": "singularity_passive_spider_a_3_2"
+      }
+    ]
+  },
+  "900056": {
+    "id": "900056",
+    "name": { "en": "Enraged", "jp": "狂暴化", "kr": "광폭화", "zh": "狂暴化" },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1650,
+        "vars": {
+          "Common_Rage_Buff_101": { "c": "100%", "v": "40%", "t": "1" },
+          "Common_Rage_Buff_102": { "c": "100%", "v": "30%", "t": "1" },
+          "common_monster_passive_wg1": { "c": "100%", "v": "10%" },
+          "Singularity_Rage_Action_guage": { "c": "100%", "v": "20%" },
+          "Singularity_RAGE_SPIDER": { "c": "100%", "v": "75.5%", "t": "2" }
+        },
+        "tooltips": ["1069", "1015", "4"]
+      }
+    ],
+    "desc": {
+      "en": "Enters <color=#28d9ed>Berserk</color> state when enemies take 7 actions.\\n\\n<color=#28d9ed>Berserk Entry & Ultimate Skill</color> : Attacks all enemies, then grants self an undispellable Speed UP/DMG Reduction effect for 1 turn and recovers WG by 10%.\\nInflicts Poisoned on all enemies for 2 turns.",
+      "jp": "敵が7回行動すると<color=#28d9ed>狂暴化</color>状態に移行する。\\n\\n<color=#28d9ed>狂暴化突入と必殺スキル</color>：敵全体にダメージを与えた後、自分に解除されないスピードUP/ダメージ減少効果を1ターンの間付与し、WGを10%回復する。\\n敵全体に中毒効果を2ターンの間付与する。",
+      "kr": "적이 7회 행동하면 <color=#28d9ed>광폭화</color> 상태로 전환합니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> : 적 전체를 공격 후,자신에게 해제되지 않는 속도 증가/피해 감소 효과를 1턴 동안 부여하고 WG를 10% 회복합니다.\\n적 전체에게 중독 효과를 2턴 동안 부여합니다.",
+      "zh": "敌人行动7次时进入<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>狂暴化突入与必杀技</color>：攻击全体敌人后，对自身附加无法解除的速度提升/伤害减少效果1回合，并恢复WG10%。\\n对全体敌人附加2回合的中毒效果。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_101",
+        "stat": "dmg_reduce_rate",
+        "mode": "up",
+        "tooltip": "1069"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_102",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "1015"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "common_monster_passive_wg1",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Rage_Action_guage",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_POISON",
+        "target": "enemy_team",
+        "buff": "Singularity_RAGE_SPIDER",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "4"
+      }
+    ]
+  },
+  "900061": {
+    "id": "900061",
+    "name": {
+      "en": "Establish : Fate Compulsion",
+      "jp": "策定：運命の強要",
+      "kr": "수립 : 운명 강요",
+      "zh": "制定：命运强迫"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1470,
+        "vars": {
+          "Singularity_OLD_SKILL01_1_1": { "c": "100%", "v": "1" },
+          "Singularity_OLD_SKILL01_1_2_1": { "c": "100%", "v": "20%" },
+          "Singularity_OLD_SKILL01_1_2_2": { "c": "100%", "v": "20%" },
+          "Singularity_OLD_SKILL01_1_2_3": { "c": "100%", "v": "20%" },
+          "Singularity_OLD_SKILL01_1_2_4": { "c": "100%", "v": "20%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Prioritizes attacking the frontmost enemy.\\nIf the target is not a <color=#28d9ed>Defender</color>, deals <color=#28d9ed>Fixed DMG</color> equal to <color=#28d9ed>20%</color> of the target's Max Health.",
+      "jp": "最も前列にいる敵を優先的に攻撃する。\\n対象が<color=#28d9ed>防御型</color>でない場合、対象の最大HPの<color=#28d9ed>20%</color>分の<color=#28d9ed>固定ダメージ</color>を与える。",
+      "kr": "가장 전열의 적을 우선적으로 공격합니다. \\n대상이 <color=#28d9ed>방어형</color>이 아니라면 대상 최대 체력의 <color=#28d9ed>20%</color> 만큼 <color=#28d9ed>고정 피해</color>을 입힙니다.",
+      "zh": "优先攻击最前排的敌人。\\n若目标非<color=#28d9ed>防御型</color>，对目标造成相当于其最大生命值<color=#28d9ed>20%</color>的<color=#28d9ed>固定伤害</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_4004006_L",
+    "effects": [
+      {
+        "family": "cleanse",
+        "category": "buff",
+        "type": "BT_EXTEND_BUFF",
+        "target": "me",
+        "buff": "Singularity_OLD_SKILL01_1_1",
+        "label": "SYS_BUFF_EXTEND_BUFF_UP",
+        "caller": "first"
+      },
+      {
+        "family": "anti_heal",
+        "category": "neutral",
+        "type": "BT_REVERSE_HEAL_BASED_TARGET",
+        "target": "enemy",
+        "buff": "Singularity_OLD_SKILL01_1_2_1",
+        "stat": "hp",
+        "mode": "up",
+        "caller": "first"
+      },
+      {
+        "family": "anti_heal",
+        "category": "neutral",
+        "type": "BT_REVERSE_HEAL_BASED_TARGET",
+        "target": "enemy",
+        "buff": "Singularity_OLD_SKILL01_1_2_2",
+        "stat": "hp",
+        "mode": "up",
+        "caller": "first"
+      },
+      {
+        "family": "anti_heal",
+        "category": "neutral",
+        "type": "BT_REVERSE_HEAL_BASED_TARGET",
+        "target": "enemy",
+        "buff": "Singularity_OLD_SKILL01_1_2_3",
+        "stat": "hp",
+        "mode": "up",
+        "caller": "first"
+      },
+      {
+        "family": "anti_heal",
+        "category": "neutral",
+        "type": "BT_REVERSE_HEAL_BASED_TARGET",
+        "target": "enemy",
+        "buff": "Singularity_OLD_SKILL01_1_2_4",
+        "stat": "hp",
+        "mode": "up",
+        "caller": "first"
+      }
+    ]
+  },
+  "900062": {
+    "id": "900062",
+    "name": {
+      "en": "Measure : Control Logic Reinforcement",
+      "jp": "措置：制御論理強化",
+      "kr": "조치 : 통제 논리 강화",
+      "zh": "措施：控制逻辑强化"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1575,
+        "cool": 4,
+        "startCool": 2,
+        "vars": {
+          "Singularity_OLD_SKILL02_1": { "c": "100%", "v": "50%", "t": "2" }
+        },
+        "tooltips": ["6"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and increases own <color=#28d9ed>Defense</color> for <color=#28d9ed>2 turns</color>.",
+      "jp": "敵全体にダメージを与え、自分の<color=#28d9ed>防御力</color>を<color=#28d9ed>2ターン</color>の間増加させる。",
+      "kr": "적 전체를 공격하고 자신의 <color=#28d9ed>방어력</color>을 <color=#28d9ed>2턴</color> 동안 증가시킵니다.",
+      "zh": "攻击全体敌人，使自身<color=#28d9ed>防御力</color>在<color=#28d9ed>2回合</color>内提升。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Second_4004006_L",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_OLD_SKILL02_1",
+        "stat": "def",
+        "mode": "up",
+        "tooltip": "6",
+        "caller": "second"
+      }
+    ]
+  },
+  "900063": {
+    "id": "900063",
+    "name": {
+      "en": "Execute : Causality Secured",
+      "jp": "執行：因果律確保",
+      "kr": "집행 : 인과율 확보",
+      "zh": "执行：因果律确保"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1890,
+        "cool": 5,
+        "startCool": 5,
+        "vars": {
+          "Singularity_OLD_SKILL03_1": { "c": "100%", "v": "50%", "t": "4" },
+          "Singularity_OLD_SKILL03_2": { "c": "100%", "v": "50%", "t": "4" },
+          "Singularity_OLD_SKILL03_3": { "c": "100%", "v": "30%", "t": "4" }
+        },
+        "tooltips": ["15", "11", "12"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and increases own <color=#28d9ed>Speed</color>, <color=#28d9ed>Critical Hit Chance</color>, and <color=#28d9ed>Critical Damage</color> for <color=#28d9ed>4 turns</color>.",
+      "jp": "敵全体にダメージを与え、自分の<color=#28d9ed>スピード</color>、<color=#28d9ed>会心率</color>、<color=#28d9ed>会心ダメージ</color>を<color=#28d9ed>4ターン</color>の間増加させる。",
+      "kr": "적 전체를 공격하고 자신의 <color=#28d9ed>속도</color>,<color=#28d9ed>치명 확률</color>,<color=#28d9ed>치명 피해</color>를 <color=#28d9ed>4턴</color> 동안 증가시킵니다.",
+      "zh": "攻击全体敌人，使自身<color=#28d9ed>速度</color>、<color=#28d9ed>暴击率</color>、<color=#28d9ed>暴击伤害</color>在<color=#28d9ed>4回合</color>内提升。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_4004006_L",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_OLD_SKILL03_1",
+        "stat": "critical_dmg_rate",
+        "mode": "up",
+        "tooltip": "12",
+        "caller": "ultimate"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_OLD_SKILL03_2",
+        "stat": "critical_rate",
+        "mode": "up",
+        "tooltip": "11",
+        "caller": "ultimate"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_OLD_SKILL03_3",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "15",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "900064": {
+    "id": "900064",
+    "name": {
+      "en": "Objective : Past Protection",
+      "jp": "目標：過去の保護",
+      "kr": "목표 : 과거 보호",
+      "zh": "目标：保护过去"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_OLD_SS_1": { "c": "100%", "v": "15%" },
+          "Singularity_Passive_OLD_SS_2": { "c": "100%", "v": "30%" },
+          "Singularity_Passive_OLD_SS_3": { "c": "100%", "v": "10%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "If self has a <color=#28d9ed>Defense</color> increase effect, ignores <color=#28d9ed>30%</color> of the target's <color=#28d9ed>Defense</color>.\\nDMG increases by <color=#28d9ed>5%</color> per <color=#28d9ed>debuff</color> inflicted on self.\\nCurse and Fixed DMG taken by the boss cannot exceed <color=#28d9ed>50000</color>.",
+      "jp": "自分に<color=#28d9ed>防御力</color>増加効果がある場合、対象の<color=#28d9ed>防御力</color>を<color=#28d9ed>30%</color>無視し、\\n自分に付与された<color=#28d9ed>弱体効果</color>1個あたりダメージが<color=#28d9ed>5%</color>増加する。\\nボスが受ける呪いおよび固定ダメージは<color=#28d9ed>50000</color>を超えない。",
+      "kr": "자신에게 <color=#28d9ed>방어력</color> 증가 효과가 있다면 대상의 <color=#28d9ed>방어력</color>을 <color=#28d9ed>30%</color> 무시하고\\n자신에게 부여된 <color=#28d9ed>약화 효과</color> 1개 마다 피해가 <color=#28d9ed>5%</color> 증가합니다.\\n보스가 받는 저주 및 고정 피해의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.",
+      "zh": "若自身拥有<color=#28d9ed>防御力</color>提升效果，无视目标<color=#28d9ed>30%</color>的<color=#28d9ed>防御力</color>，\\n自身每持有1个<color=#28d9ed>弱化效果</color>，伤害增加<color=#28d9ed>5%</color>。\\n首领受到的诅咒及固定伤害不超过<color=#28d9ed>50000</color>。"
+    },
+    "icon": "MT_Passive_1_Light",
+    "effects": [
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Passive_OLD_SS_1",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Passive_OLD_SS_2",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG_OWNER_DEBUFF",
+        "target": "me",
+        "buff": "Singularity_Passive_OLD_SS_3"
+      }
+    ]
+  },
+  "900065": {
+    "id": "900065",
+    "name": {
+      "en": "Factor : Absolute Fate",
+      "jp": "要因：運命の絶対性",
+      "kr": "요인 : 운명의 절대성",
+      "zh": "要因：命运的绝对性"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_OLD_A_2": { "c": "100%", "v": "30%", "t": "1" },
+          "Singularity_Passive_OLD_A_1": { "c": "100%", "v": "10%" },
+          "Singularity_Passive_AntiCurse": { "c": "100%", "v": "50000" },
+          "Singularity_Passive_AntiTureDmg": { "c": "100%", "v": "50000" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "After attacking, <color=#28d9ed>Priority</color> increases by <color=#28d9ed>15%</color>. (Effect doubles when Increased Defense is active.)\\nDMG dealt to the boss increases by <color=#28d9ed>10%</color> per own <color=#28d9ed>buff</color>.",
+      "jp": "攻撃後、<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>15%</color>増加させる。（貫通力増加保有時は効果2倍）\\n自分の<color=#28d9ed>強化効果</color>1個あたり、敵全体への与ダメージが<color=#28d9ed>10%</color>増加する。",
+      "kr": "공격 후 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>15%</color> 증가시킵니다.(방어력 증가 보유 시 효과 2배)\\n적 전체는 자신의 <color=#28d9ed>강화 효과</color> 1개 마다 보스에게 주는 피해가 <color=#28d9ed>10%</color> 증가합니다.",
+      "zh": "攻击后使<color=#28d9ed>行动值</color>增加<color=#28d9ed>15%</color>。（持有穿透力提升时效果翻倍）\\n自身每持有1个<color=#28d9ed>强化效果</color>，对全体敌人造成的伤害增加<color=#28d9ed>10%</color>。"
+    },
+    "icon": "MT_Passive_1_Light",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_Passive_OLD_A_2",
+        "stat": "pierce_power_rate",
+        "mode": "up",
+        "label": "SYS_BUFF_PIERCE_POWER_RATE_UP"
+      },
+      {
+        "family": "damage",
+        "category": "neutral",
+        "type": "BT_DMG_OWNER_BUFF",
+        "target": "enemy_team",
+        "buff": "Singularity_Passive_OLD_A_1"
+      },
+      {
+        "family": "dot",
+        "category": "buff",
+        "type": "BT_DOT_CURSE_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiCurse"
+      },
+      {
+        "family": "anti_heal",
+        "category": "buff",
+        "type": "BT_REVERSE_HEAL_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiTureDmg"
+      }
+    ]
+  },
+  "900066": {
+    "id": "900066",
+    "name": { "en": "Enraged", "jp": "狂暴化", "kr": "광폭화", "zh": "狂暴化" },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1650,
+        "vars": {
+          "common_monster_passive_wg1": { "c": "100%", "v": "10%" },
+          "Singularity_Rage_Action_guage": { "c": "100%", "v": "20%" },
+          "Singularity_RAGE_OLD": { "c": "100%", "v": "30%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Enters <color=#28d9ed>Berserk</color> state every time enemies take 6 actions.\\n\\n<color=#28d9ed>Berserk Entry & Ultimate Skill</color>: Deals DMG to all enemies and recovers WG by 10%.\\nSkill DMG increases by 30% after attacking.",
+      "jp": "敵が6回行動するたびに<color=#28d9ed>狂暴化</color>状態に移行する。\\n\\n<color=#28d9ed>狂暴化突入と必殺スキル</color>：敵全体にダメージを与え、WGを10%回復する。\\n攻撃後、スキルのダメージが30%UPする。",
+      "kr": "적이 6회 행동할 때 마다 <color=#28d9ed>광폭화</color> 상태로 전환합니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> : 적 전체에게 피해를 입히고 WG를 10% 회복시킵니다.\\n공격 후 스킬의 피해량이 30% 증가합니다.",
+      "zh": "敌人每行动6次进入<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>狂暴化冲入与必杀技</color>：对全体敌人造成伤害，并恢复10% WG。\\n攻击后技能伤害提升30%。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "common_monster_passive_wg1",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Rage_Action_guage",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "Singularity_RAGE_OLD"
+      }
+    ]
+  },
+  "900067": {
+    "id": "900067",
+    "name": { "en": "", "jp": "", "kr": "", "zh": "" },
+    "type": "rage_finish1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [{ "level": 1, "damageFactor": 3150 }],
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1"
+  },
+  "900071": {
+    "id": "900071",
+    "name": {
+      "en": "Establish : Incineration Plan",
+      "jp": "策定：焼却計画",
+      "kr": "수립 : 소각 계획",
+      "zh": "制定：焚烧计划"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1470,
+        "vars": {
+          "Singularity_VER_SKILL01_1": { "c": "100%", "v": "3%", "t": "3" }
+        },
+        "tooltips": ["2"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy and inflicts <color=#28d9ed>Curse</color> for <color=#28d9ed>3 turns</color>.",
+      "jp": "敵にダメージを与え、<color=#28d9ed>3ターン</color>の間<color=#28d9ed>呪い</color>を付与する。",
+      "kr": "적을 공격하고 <color=#28d9ed>3턴</color> 동안 <color=#28d9ed>저주</color>를 부여합니다.",
+      "zh": "攻击敌人，附加<color=#28d9ed>3回合</color>的<color=#28d9ed>诅咒</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_4004008_L",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_CURSE",
+        "target": "enemy",
+        "buff": "Singularity_VER_SKILL01_1",
+        "tooltip": "2",
+        "caller": "first"
+      }
+    ]
+  },
+  "900072": {
+    "id": "900072",
+    "name": {
+      "en": "Measure : Variant Elimination",
+      "jp": "措置：変種の除去",
+      "kr": "조치 : 변종 제거",
+      "zh": "措施：变种清除"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1575,
+        "cool": 4,
+        "startCool": 2,
+        "vars": { "Singularity_VER_SKILL02_1": { "c": "100%", "v": "100%" } }
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy and deals <color=#28d9ed>50%</color> bonus DMG if the target does not hold <color=#28d9ed>Curse</color>.",
+      "jp": "敵にダメージを与え、対象に<color=#28d9ed>呪い</color>が付与されていない場合、<color=#28d9ed>50%</color>の追加ダメージを与える。",
+      "kr": "적을 공격하고 대상에게 <color=#28d9ed>저주</color>가 부여되지 않은 경우 <color=#28d9ed>50%</color>추가 피해를 줍니다.",
+      "zh": "攻击敌人，若目标未持有<color=#28d9ed>诅咒</color>，则造成<color=#28d9ed>50%</color>额外伤害。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_Second_4004008_L",
+    "effects": [
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "Singularity_VER_SKILL02_1",
+        "caller": "second"
+      }
+    ]
+  },
+  "900073": {
+    "id": "900073",
+    "name": {
+      "en": "Execute : Dimensional Incineration",
+      "jp": "執行：次元焼却",
+      "kr": "집행 : 차원 소각",
+      "zh": "执行：次元焚烧"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1890,
+        "cool": 5,
+        "startCool": 5,
+        "vars": {
+          "Singularity_VER_SKILL03_1": { "c": "100%", "v": "3%", "t": "3" },
+          "Singularity_VER_SKILL03_2": { "c": "100%", "v": "100%" }
+        },
+        "tooltips": ["2"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and inflicts <color=#28d9ed>Curse</color> on targets for <color=#28d9ed>3 turns</color>.\\nGains an <color=#28d9ed>Extra Turn</color> when an enemy is defeated.",
+      "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>3ターン</color>の間<color=#28d9ed>呪い</color>を付与する。\\n敵を撃破すると<color=#28d9ed>追加ターン</color>を獲得する。",
+      "kr": "적 전체를 공격하고 대상에게 <color=#28d9ed>3턴</color> 동안 <color=#28d9ed>저주</color>를 부여합니다.\\n적 처치 시 <color=#28d9ed>추가 턴</color>을 획득합니다.",
+      "zh": "攻击全体敌人，对目标附加<color=#28d9ed>3回合</color>的<color=#28d9ed>诅咒</color>。\\n击败敌人时获得<color=#28d9ed>额外回合</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_4004008_L",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_CURSE",
+        "target": "enemy_team",
+        "buff": "Singularity_VER_SKILL03_1",
+        "tooltip": "2",
+        "caller": "ultimate"
+      },
+      {
+        "family": "trigger",
+        "category": "buff",
+        "type": "BT_ADDITIVE_TURN",
+        "target": "me",
+        "buff": "Singularity_VER_SKILL03_2",
+        "label": "SYS_BUFF_ADDITIVE_TURN",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "900074": {
+    "id": "900074",
+    "name": {
+      "en": "Objective : Present Collapse",
+      "jp": "目標：現在の崩壊",
+      "kr": "목표 : 현재 붕괴",
+      "zh": "目标：现在崩塌"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_VER_A_1": { "c": "100%", "v": "2" },
+          "Singularity_Passive_AntiCurse": { "c": "100%", "v": "50000" },
+          "Singularity_Passive_AntiTureDmg": { "c": "100%", "v": "50000" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "At the start of every turn, inflicts <color=#28d9ed>Curse</color> on all enemies for <color=#28d9ed>2 turns</color>.\\nCurse DMG dealt to enemies decreases by <color=#28d9ed>50%</color>.",
+      "jp": "毎ターン開始時、敵全体に<color=#28d9ed>呪い</color>を<color=#28d9ed>2ターン</color>付与する。\\n敵に与える呪いダメージが<color=#28d9ed>50%</color>減少する。",
+      "kr": "매 턴 시작 시 적 전체에게 <color=#28d9ed>저주</color>를 <color=#28d9ed>2턴</color> 부여합니다.\\n적에게 입히는 저주 피해가 <color=#28d9ed>50%</color> 감소합니다.",
+      "zh": "每回合开始时对全体敌人附加<color=#28d9ed>2回合</color>的<color=#28d9ed>诅咒</color>。\\n对敌人造成的诅咒伤害减少<color=#28d9ed>50%</color>。"
+    },
+    "icon": "MT_Passive_1_Light",
+    "effects": [
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "Singularity_Passive_VER_A_1",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "dot",
+        "category": "buff",
+        "type": "BT_DOT_CURSE_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiCurse"
+      },
+      {
+        "family": "anti_heal",
+        "category": "buff",
+        "type": "BT_REVERSE_HEAL_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiTureDmg"
+      }
+    ]
+  },
+  "900075": {
+    "id": "900075",
+    "name": {
+      "en": "Factor : Event Overlap",
+      "jp": "要因：事象の重畳",
+      "kr": "요인 : 사건의 중첩",
+      "zh": "要因：事件的叠加"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_VER_SS_1": { "c": "100%", "v": "3%", "t": "2" },
+          "Singularity_Passive_VER_SS_2": { "c": "100%", "v": "50%" },
+          "Singularity_Passive_VER_SS_3": { "c": "100%", "v": "10%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "DMG dealt by all enemies increases by <color=#28d9ed>10%</color> per <color=#28d9ed>debuff</color> they hold.\\n(The more debuffs held, the more DMG dealt to Verdandi increases.)\\nWhen a target with <color=#28d9ed>Immunity</color> ends their turn, recovers WG by <color=#28d9ed>2</color>.\\nCurse and Fixed DMG taken by the boss cannot exceed <color=#28d9ed>50000</color>.",
+      "jp": "敵全体は自分が保有する<color=#28d9ed>弱体効果1個</color>あたり、ダメージが<color=#28d9ed>10%</color>増加する。\\n（弱体効果を多く保有するほど、ヴェルダンディへの与ダメージが増加する）\\n<color=#28d9ed>免疫</color>を保有する対象の行動終了時、WGを<color=#28d9ed>2</color>回復する。\\nボスが受ける呪いおよび固定ダメージは<color=#28d9ed>50000</color>を超えない。",
+      "kr": "적 전체는 자신이 보유한 <color=#28d9ed>약화 효과 1개</color> 마다 피해가 <color=#28d9ed>10%</color> 증가합니다.\\n(약화 효과를 많이 보유할 수록 베르단디에게 입히는 피해가 증가합니다)\\n<color=#28d9ed>면역</color> 보유 대상 행동 종료 시 WG를 <color=#28d9ed>2</color> 회복합니다.\\n보스가 받는 저주 및 고정 피해의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.",
+      "zh": "全体敌人每持有1个<color=#28d9ed>弱化效果</color>，造成的伤害增加<color=#28d9ed>10%</color>。\\n（持有的弱化效果越多，对贝尔丹迪造成的伤害越高）\\n持有<color=#28d9ed>免疫</color>的目标行动结束时，恢复WG<color=#28d9ed>2</color>点。\\n首领受到的诅咒及固定伤害不超过<color=#28d9ed>50000</color>。"
+    },
+    "icon": "MT_Passive_1_Light",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_CURSE",
+        "target": "enemy_team",
+        "buff": "Singularity_Passive_VER_SS_1",
+        "tooltip": "2"
+      },
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_CURSE_ENHANCE",
+        "target": "enemy_team",
+        "buff": "Singularity_Passive_VER_SS_2"
+      },
+      {
+        "family": "damage",
+        "category": "neutral",
+        "type": "BT_DMG_OWNER_DEBUFF",
+        "target": "enemy_team",
+        "buff": "Singularity_Passive_VER_SS_3"
+      }
+    ]
+  },
+  "900076": {
+    "id": "900076",
+    "name": { "en": "Enraged", "jp": "狂暴化", "kr": "광폭화", "zh": "狂暴化" },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1650,
+        "vars": {
+          "Common_Rage_Buff_101": { "c": "100%", "v": "40%", "t": "1" },
+          "Common_Rage_Buff_102": { "c": "100%", "v": "30%", "t": "1" },
+          "common_monster_passive_wg1": { "c": "100%", "v": "10%" },
+          "Singularity_Rage_Action_guage": { "c": "100%", "v": "20%" },
+          "Singularity_RAGE_VER": { "c": "100%", "v": "2" }
+        },
+        "tooltips": ["1069", "1015", "49"]
+      }
+    ],
+    "desc": {
+      "en": "Enters <color=#28d9ed>Berserk</color> state every time enemies take 6 actions.\\n\\n<color=#28d9ed>Berserk Entry & Ultimate Skill</color> : Attacks all enemies, then grants self an irremovable Speed Increase/DMG Reduction effect for 1 turn and recovers WG by 10%.\\nBefore using the skill, dispels <color=#28d9ed>2</color> of all enemies' <color=#28d9ed>buffs</color>.",
+      "jp": "敵が6回行動するたびに<color=#28d9ed>狂暴化</color>状態に移行する。\\n\\n<color=#28d9ed>狂暴化突入と必殺スキル</color>：敵全体にダメージを与えた後、自分に解除されないスピードUP/ダメージ減少効果を1ターンの間付与し、WGを10%回復する。\\nスキル使用前、敵全体の<color=#28d9ed>強化効果</color>を<color=#28d9ed>2個</color>解除する。",
+      "kr": "적이 6회 행동할 때 마다 <color=#28d9ed>광폭화</color> 상태로 전환합니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> :적 전체를 공격 후 자신에게 해제되지 않는 속도 증가/피해 감소 효과를 1턴 동안 부여하고 WG를 10% 회복합니다.\\n스킬 사용 전 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>2개</color> 해제합니다.",
+      "zh": "敌人每行动6次进入<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>狂暴化突入与必杀技</color>：攻击全体敌人后，对自身附加无法解除的速度提升/伤害减少效果1回合，并恢复WG10%。\\n使用技能前解除全体敌人<color=#28d9ed>2个</color><color=#28d9ed>强化效果</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_101",
+        "stat": "dmg_reduce_rate",
+        "mode": "up",
+        "tooltip": "1069"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_102",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "1015"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "common_monster_passive_wg1",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Rage_Action_guage",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "cleanse",
+        "category": "debuff",
+        "type": "BT_REMOVE_BUFF",
+        "target": "enemy_team",
+        "buff": "Singularity_RAGE_VER",
+        "label": "SYS_BUFF_REMOVE_BUFF"
+      }
+    ]
+  },
+  "900077": {
+    "id": "900077",
+    "name": { "en": "", "jp": "", "kr": "", "zh": "" },
+    "type": "rage_finish1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [{ "level": 1, "damageFactor": 1575 }],
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1"
+  },
+  "900081": {
+    "id": "900081",
+    "name": {
+      "en": "Establish : Future Plan",
+      "jp": "策定：未来計画",
+      "kr": "수립 : 미래 계획",
+      "zh": "制定：未来计划"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1470,
+        "vars": { "Singularity_SKD_SKILL01_1": { "c": "100%", "v": "20%" } },
+        "tooltips": ["61"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy and increases own <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>.",
+      "jp": "敵にダメージを与え、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>増加させる。",
+      "kr": "적을 공격하고 자신의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>20%</color> 증가시킵니다.",
+      "zh": "攻击敌人，使自身<color=#28d9ed>行动值</color>增加<color=#28d9ed>20%</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_4004007_L",
+    "effects": [
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_SKD_SKILL01_1",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP",
+        "caller": "first"
+      }
+    ]
+  },
+  "900082": {
+    "id": "900082",
+    "name": {
+      "en": "Measure : Variant Suppression",
+      "jp": "措置：変種の抑制",
+      "kr": "조치 : 변종 억제",
+      "zh": "措施：变种抑制"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1575,
+        "cool": 4,
+        "startCool": 2,
+        "vars": { "Singularity_SKD_SKILL02_1": { "c": "100%", "t": "2" } }
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies. Inflicts <color=#28d9ed>Unbuffable</color> on all enemies for <color=#28d9ed>2 turns</color>. (Ignores Immunity)",
+      "jp": "敵全体にダメージを与える。敵全体に<color=#28d9ed>2ターン</color>の間<color=#28d9ed>強化不可</color>を付与する。（免疫無視）",
+      "kr": "적 전체를 공격합니다. 적 전체에게 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>강화 불가</color>를 부여합니다. (면역 무시)",
+      "zh": "攻击全体敌人。对全体敌人附加<color=#28d9ed>2回合</color>的<color=#28d9ed>强化不可</color>。（无视免疫）"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Second_4004007_L",
+    "effects": [
+      {
+        "family": "cc",
+        "category": "debuff",
+        "type": "BT_SEALED",
+        "target": "enemy_team",
+        "buff": "Singularity_SKD_SKILL02_1",
+        "tooltip": "39",
+        "label": "SYS_BUFF_SEALED",
+        "caller": "second"
+      }
+    ]
+  },
+  "900083": {
+    "id": "900083",
+    "name": {
+      "en": "Execute : Timeline Readjustment",
+      "jp": "執行：時間軸再調整",
+      "kr": "집행 : 시간축 재조정",
+      "zh": "执行：时间轴重新调整"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1890,
+        "cool": 5,
+        "startCool": 5,
+        "vars": {
+          "Singularity_SKD_SKILL03_1": { "c": "100%", "v": "30%" },
+          "Singularity_SKD_SKILL03_2": { "c": "100%", "v": "30%" }
+        },
+        "tooltips": ["60", "61"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies.\\nIncreases own <color=#28d9ed>Priority</color> by <color=#28d9ed>30%</color> and decreases all enemies' <color=#28d9ed>Priority</color> by <color=#28d9ed>30%</color>.",
+      "jp": "敵全体にダメージを与える。\\n自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>30%</color>増加させ、敵全体の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>30%</color>減少させる。",
+      "kr": "적 전체를 공격합니다. \\n자신의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>30%</color> 증가시키고 적 전체의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>30%</color> 감소시킵니다.",
+      "zh": "攻击全体敌人。\\n使自身<color=#28d9ed>行动值</color>增加<color=#28d9ed>30%</color>，使全体敌人<color=#28d9ed>行动值</color>减少<color=#28d9ed>30%</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_4004007_L",
+    "effects": [
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_SKD_SKILL03_1",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP",
+        "caller": "ultimate"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "enemy_team",
+        "buff": "Singularity_SKD_SKILL03_2",
+        "label": "SYS_BUFF_ACTION_GAUGE_DOWN",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "900084": {
+    "id": "900084",
+    "name": {
+      "en": "Objective : Future Confirmation",
+      "jp": "目標：未来の確定",
+      "kr": "목표 : 미래 확정",
+      "zh": "目标：确定未来"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_SKD_SS_1": { "c": "100%", "v": "5" },
+          "Singularity_Passive_SKD_SS_3": { "c": "100%", "v": "50%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "DMG taken from enemies with <color=#28d9ed>90%</color> or less current HP increases by <color=#28d9ed>50%</color>.\\nDeals <color=#28d9ed>50%</color> bonus DMG to enemies with higher <color=#28d9ed>Speed</color> than self.\\nCurse and Fixed DMG taken by the boss cannot exceed <color=#28d9ed>50000</color>.",
+      "jp": "現在HPが<color=#28d9ed>90%</color>以下の敵から受けるダメージが<color=#28d9ed>50%</color>増加する。\\n自分より<color=#28d9ed>スピード</color>が速い敵に<color=#28d9ed>50%</color>の追加ダメージを与える。\\nボスが受ける呪いおよび固定ダメージは<color=#28d9ed>50000</color>を超えない。",
+      "kr": "현재 체력이 <color=#28d9ed>90%</color> 이하인 적에게 입는 피해가 <color=#28d9ed>50%</color> 증가합니다.\\n자신보다 <color=#28d9ed>속도</color>가 빠른 적에게 <color=#28d9ed>50%</color> 추가 피해를 입힙니다.\\n보스가 받는 저주 및 고정 피해의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.",
+      "zh": "受到当前生命值在<color=#28d9ed>90%</color>以下敌人的伤害增加<color=#28d9ed>50%</color>。\\n对速度比自身快的敌人造成<color=#28d9ed>50%</color>额外伤害。\\n首领受到的诅咒及固定伤害不超过<color=#28d9ed>50000</color>。"
+    },
+    "icon": "MT_Passive_1_Light",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "debuff",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "Singularity_Passive_SKD_SS_1",
+        "stat": "speed",
+        "mode": "up",
+        "label": "SYS_BUFF_ACTION_SPEED_UP"
+      },
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "Singularity_Passive_SKD_SS_3"
+      }
+    ]
+  },
+  "900085": {
+    "id": "900085",
+    "name": {
+      "en": "Factor : Relativity of Time",
+      "jp": "要因：時間の相対性",
+      "kr": "요인 : 시간의 상대성",
+      "zh": "要因：时间的相对性"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_SKD_A_1": { "c": "100%", "v": "50%" },
+          "Singularity_Passive_SKD_A_2": { "c": "100%", "v": "50%" },
+          "Singularity_Passive_AntiCurse": { "c": "100%", "v": "50000" },
+          "Singularity_Passive_AntiTureDmg": { "c": "100%", "v": "50000" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "At the start of every turn, increases all enemies' Speed by <color=#28d9ed>5%</color>. (Max 5 stacks)\\nDMG taken from enemies slower than self increases by <color=#28d9ed>50%</color>.",
+      "jp": "毎ターン開始時、敵全体のスピードを<color=#28d9ed>5%</color>増加させる。（最大5回累積）\\n自分より<color=#28d9ed>スピード</color>が遅い敵から受けるダメージが<color=#28d9ed>50%</color>増加する。",
+      "kr": "매 턴 시작 시 적 전체의 속도를 <color=#28d9ed>5%</color> 증가시킵니다. (최대 5회 누적)\\n자신보다 <color=#28d9ed>속도</color>가 느린 적에게 입는 피해가 <color=#28d9ed>50%</color> 증가합니다.",
+      "zh": "每回合开始时使全体敌人速度增加<color=#28d9ed>5%</color>。（最多叠加5次）\\n受到比自身速度慢的敌人的伤害增加<color=#28d9ed>50%</color>。"
+    },
+    "icon": "MT_Passive_1_Light",
+    "effects": [
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "Singularity_Passive_SKD_A_1"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "Singularity_Passive_SKD_A_2",
+        "caller": "second"
+      },
+      {
+        "family": "dot",
+        "category": "buff",
+        "type": "BT_DOT_CURSE_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiCurse"
+      },
+      {
+        "family": "anti_heal",
+        "category": "buff",
+        "type": "BT_REVERSE_HEAL_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiTureDmg"
+      }
+    ]
+  },
+  "900086": {
+    "id": "900086",
+    "name": { "en": "Enraged", "jp": "狂暴化", "kr": "광폭화", "zh": "狂暴化" },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 2100,
+        "vars": {
+          "Common_Rage_Buff_101": { "c": "100%", "v": "40%", "t": "1" },
+          "Common_Rage_Buff_102": { "c": "100%", "v": "30%", "t": "1" },
+          "common_monster_passive_wg1": { "c": "100%", "v": "10%" },
+          "Singularity_Rage_Action_guage": { "c": "100%", "v": "20%" },
+          "Singularity_RAGE_SKD": { "c": "100%", "v": "30%", "t": "2" }
+        },
+        "tooltips": ["1069", "1015", "11"]
+      }
+    ],
+    "desc": {
+      "en": "Enters <color=#28d9ed>Berserk</color> state every time enemies take 6 actions.\\n\\n<color=#28d9ed>Berserk Entry & Ultimate Skill</color> : Grants self an undispellable Speed UP/DMG Reduction effect for 1 turn and recovers WG by 10%.\\nIncreases own Critical Hit Chance for 2 turns.",
+      "jp": "敵が6回行動するたびに<color=#28d9ed>狂暴化</color>状態に移行する。\\n\\n<color=#28d9ed>狂暴化突入と必殺スキル</color>：自分に解除されないスピードUP/ダメージ減少効果を1ターンの間付与し、WGを10%回復する。\\n自分の会心率を2ターンの間増加させる。",
+      "kr": "적이 6회 행동할 때 마다 <color=#28d9ed>광폭화</color> 상태로 전환합니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> : 자신에게 해제되지 않는 속도 증가/피해 감소 효과를 1턴 동안 부여하고 WG를 10% 회복합니다.\\n자신의 치명 확률을 2턴 증가시킵니다.",
+      "zh": "敌人每行动6次进入<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>狂暴化突入与必杀技</color>：对自身附加无法解除的速度提升/伤害减少效果1回合，并恢复WG10%。\\n使自身暴击率在2回合内提升。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_101",
+        "stat": "dmg_reduce_rate",
+        "mode": "up",
+        "tooltip": "1069"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_102",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "1015"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "common_monster_passive_wg1",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Rage_Action_guage",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_RAGE_SKD",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "1015"
+      }
+    ]
+  },
+  "900087": {
+    "id": "900087",
+    "name": { "en": "", "jp": "", "kr": "", "zh": "" },
+    "type": "rage_finish1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [{ "level": 1, "damageFactor": 3150 }],
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1"
+  },
+  "900091": {
+    "id": "900091",
+    "name": {
+      "en": "Establish : Fate Compulsion",
+      "jp": "策定：運命の強要",
+      "kr": "수립 : 운명 강요",
+      "zh": "制定：命运强迫"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1470,
+        "vars": {
+          "Singularity_OLD_SKILL01_1_1": { "c": "100%", "v": "1" },
+          "Singularity_OLD_SKILL01_1_2_1": { "c": "100%", "v": "20%" },
+          "Singularity_OLD_SKILL01_1_2_2": { "c": "100%", "v": "20%" },
+          "Singularity_OLD_SKILL01_1_2_3": { "c": "100%", "v": "20%" },
+          "Singularity_OLD_SKILL01_1_2_4": { "c": "100%", "v": "20%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Prioritizes attacking the frontmost enemy.\\nIf the target is not a <color=#28d9ed>Defender</color>, deals <color=#28d9ed>Fixed DMG</color> equal to <color=#28d9ed>20%</color> of the target's Max Health.",
+      "jp": "最も前列にいる敵を優先的に攻撃する。\\n対象が<color=#28d9ed>防御型</color>でない場合、対象の最大HPの<color=#28d9ed>20%</color>分の<color=#28d9ed>固定ダメージ</color>を与える。",
+      "kr": "가장 전열의 적을 우선적으로 공격합니다. \\n대상이 <color=#28d9ed>방어형</color>이 아니라면 대상 최대 체력의 <color=#28d9ed>20%</color> 만큼 <color=#28d9ed>고정 피해</color>을 입힙니다.",
+      "zh": "优先攻击最前排的敌人。\\n若目标非<color=#28d9ed>防御型</color>，对目标造成相当于其最大生命值<color=#28d9ed>20%</color>的<color=#28d9ed>固定伤害</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_4004006_D",
+    "effects": [
+      {
+        "family": "cleanse",
+        "category": "buff",
+        "type": "BT_EXTEND_BUFF",
+        "target": "me",
+        "buff": "Singularity_OLD_SKILL01_1_1",
+        "label": "SYS_BUFF_EXTEND_BUFF_UP",
+        "caller": "first"
+      },
+      {
+        "family": "anti_heal",
+        "category": "neutral",
+        "type": "BT_REVERSE_HEAL_BASED_TARGET",
+        "target": "enemy",
+        "buff": "Singularity_OLD_SKILL01_1_2_1",
+        "stat": "hp",
+        "mode": "up",
+        "caller": "first"
+      },
+      {
+        "family": "anti_heal",
+        "category": "neutral",
+        "type": "BT_REVERSE_HEAL_BASED_TARGET",
+        "target": "enemy",
+        "buff": "Singularity_OLD_SKILL01_1_2_2",
+        "stat": "hp",
+        "mode": "up",
+        "caller": "first"
+      },
+      {
+        "family": "anti_heal",
+        "category": "neutral",
+        "type": "BT_REVERSE_HEAL_BASED_TARGET",
+        "target": "enemy",
+        "buff": "Singularity_OLD_SKILL01_1_2_3",
+        "stat": "hp",
+        "mode": "up",
+        "caller": "first"
+      },
+      {
+        "family": "anti_heal",
+        "category": "neutral",
+        "type": "BT_REVERSE_HEAL_BASED_TARGET",
+        "target": "enemy",
+        "buff": "Singularity_OLD_SKILL01_1_2_4",
+        "stat": "hp",
+        "mode": "up",
+        "caller": "first"
+      }
+    ]
+  },
+  "900092": {
+    "id": "900092",
+    "name": {
+      "en": "Measure : Control Logic Reinforcement",
+      "jp": "措置：制御論理強化",
+      "kr": "조치 : 통제 논리 강화",
+      "zh": "措施：控制逻辑强化"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1575,
+        "cool": 4,
+        "startCool": 2,
+        "vars": {
+          "Singularity_OLD_SKILL02_1": { "c": "100%", "v": "50%", "t": "2" }
+        },
+        "tooltips": ["6"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and increases own <color=#28d9ed>Defense</color> for <color=#28d9ed>2 turns</color>.",
+      "jp": "敵全体にダメージを与え、自分の<color=#28d9ed>防御力</color>を<color=#28d9ed>2ターン</color>の間増加させる。",
+      "kr": "적 전체를 공격하고 자신의 <color=#28d9ed>방어력</color>을 <color=#28d9ed>2턴</color> 동안 증가시킵니다.",
+      "zh": "攻击全体敌人，使自身<color=#28d9ed>防御力</color>在<color=#28d9ed>2回合</color>内提升。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Second_4004006_D",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_OLD_SKILL02_1",
+        "stat": "def",
+        "mode": "up",
+        "tooltip": "6",
+        "caller": "second"
+      }
+    ]
+  },
+  "900093": {
+    "id": "900093",
+    "name": {
+      "en": "Execute : Causality Secured",
+      "jp": "執行：因果律確保",
+      "kr": "집행 : 인과율 확보",
+      "zh": "执行：因果律确保"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1890,
+        "cool": 5,
+        "startCool": 5,
+        "vars": {
+          "Singularity_OLD_SKILL03_1": { "c": "100%", "v": "50%", "t": "4" },
+          "Singularity_OLD_SKILL03_2": { "c": "100%", "v": "50%", "t": "4" },
+          "Singularity_OLD_SKILL03_3": { "c": "100%", "v": "30%", "t": "4" }
+        },
+        "tooltips": ["15", "11", "12"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and increases own <color=#28d9ed>Speed</color>, <color=#28d9ed>Critical Hit Chance</color>, and <color=#28d9ed>Critical Damage</color> for <color=#28d9ed>4 turns</color>.",
+      "jp": "敵全体にダメージを与え、自分の<color=#28d9ed>スピード</color>、<color=#28d9ed>会心率</color>、<color=#28d9ed>会心ダメージ</color>を<color=#28d9ed>4ターン</color>の間増加させる。",
+      "kr": "적 전체를 공격하고 자신의 <color=#28d9ed>속도</color>,<color=#28d9ed>치명 확률</color>,<color=#28d9ed>치명 피해</color>를 <color=#28d9ed>4턴</color> 동안 증가시킵니다.",
+      "zh": "攻击全体敌人，使自身<color=#28d9ed>速度</color>、<color=#28d9ed>暴击率</color>、<color=#28d9ed>暴击伤害</color>在<color=#28d9ed>4回合</color>内提升。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_4004006_D",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_OLD_SKILL03_1",
+        "stat": "critical_dmg_rate",
+        "mode": "up",
+        "tooltip": "12",
+        "caller": "ultimate"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_OLD_SKILL03_2",
+        "stat": "critical_rate",
+        "mode": "up",
+        "tooltip": "11",
+        "caller": "ultimate"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_OLD_SKILL03_3",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "15",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "900094": {
+    "id": "900094",
+    "name": {
+      "en": "Objective : Past Protection",
+      "jp": "目標：過去の保護",
+      "kr": "목표 : 과거 보호",
+      "zh": "目标：保护过去"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_OLD_SS_1": { "c": "100%", "v": "15%" },
+          "Singularity_Passive_OLD_SS_2": { "c": "100%", "v": "30%" },
+          "Singularity_Passive_OLD_SS_3": { "c": "100%", "v": "10%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "If self has a <color=#28d9ed>Defense</color> increase effect, ignores <color=#28d9ed>30%</color> of the target's <color=#28d9ed>Defense</color>.\\nDMG increases by <color=#28d9ed>5%</color> per <color=#28d9ed>debuff</color> inflicted on self.\\nCurse and Fixed DMG taken by the boss cannot exceed <color=#28d9ed>50000</color>.",
+      "jp": "自分に<color=#28d9ed>防御力</color>増加効果がある場合、対象の<color=#28d9ed>防御力</color>を<color=#28d9ed>30%</color>無視し、\\n自分に付与された<color=#28d9ed>弱体効果</color>1個あたりダメージが<color=#28d9ed>5%</color>増加する。\\nボスが受ける呪いおよび固定ダメージは<color=#28d9ed>50000</color>を超えない。",
+      "kr": "자신에게 <color=#28d9ed>방어력</color> 증가 효과가 있다면 대상의 <color=#28d9ed>방어력</color>을 <color=#28d9ed>30%</color> 무시하고\\n자신에게 부여된 <color=#28d9ed>약화 효과</color> 1개 마다 피해가 <color=#28d9ed>5%</color> 증가합니다.\\n보스가 받는 저주 및 고정 피해의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.",
+      "zh": "若自身拥有<color=#28d9ed>防御力</color>提升效果，无视目标<color=#28d9ed>30%</color>的<color=#28d9ed>防御力</color>，\\n自身每持有1个<color=#28d9ed>弱化效果</color>，伤害增加<color=#28d9ed>5%</color>。\\n首领受到的诅咒及固定伤害不超过<color=#28d9ed>50000</color>。"
+    },
+    "icon": "MT_Passive_1_Dark",
+    "effects": [
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Passive_OLD_SS_1",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Passive_OLD_SS_2",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG_OWNER_DEBUFF",
+        "target": "me",
+        "buff": "Singularity_Passive_OLD_SS_3"
+      }
+    ]
+  },
+  "900095": {
+    "id": "900095",
+    "name": {
+      "en": "Factor : Absolute Fate",
+      "jp": "要因：運命の絶対性",
+      "kr": "요인 : 운명의 절대성",
+      "zh": "要因：命运的绝对性"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_OLD_A_2": { "c": "100%", "v": "30%", "t": "1" },
+          "Singularity_Passive_OLD_A_1": { "c": "100%", "v": "10%" },
+          "Singularity_Passive_AntiCurse": { "c": "100%", "v": "50000" },
+          "Singularity_Passive_AntiTureDmg": { "c": "100%", "v": "50000" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "After attacking, <color=#28d9ed>Priority</color> increases by <color=#28d9ed>15%</color>. (Effect doubles when Increased Defense is active.)\\nDMG dealt to the boss increases by <color=#28d9ed>10%</color> per own <color=#28d9ed>buff</color>.",
+      "jp": "攻撃後、<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>15%</color>増加させる。（貫通力増加保有時は効果2倍）\\n自分の<color=#28d9ed>強化効果</color>1個あたり、敵全体への与ダメージが<color=#28d9ed>10%</color>増加する。",
+      "kr": "공격 후 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>15%</color> 증가시킵니다.(방어력 증가 보유 시 효과 2배)\\n적 전체는 자신의 <color=#28d9ed>강화 효과</color> 1개 마다 보스에게 주는 피해가 <color=#28d9ed>10%</color> 증가합니다.",
+      "zh": "攻击后使<color=#28d9ed>行动值</color>增加<color=#28d9ed>15%</color>。（持有穿透力提升时效果翻倍）\\n自身每持有1个<color=#28d9ed>强化效果</color>，对全体敌人造成的伤害增加<color=#28d9ed>10%</color>。"
+    },
+    "icon": "MT_Passive_1_Dark",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_Passive_OLD_A_2",
+        "stat": "pierce_power_rate",
+        "mode": "up",
+        "label": "SYS_BUFF_PIERCE_POWER_RATE_UP"
+      },
+      {
+        "family": "damage",
+        "category": "neutral",
+        "type": "BT_DMG_OWNER_BUFF",
+        "target": "enemy_team",
+        "buff": "Singularity_Passive_OLD_A_1"
+      },
+      {
+        "family": "dot",
+        "category": "buff",
+        "type": "BT_DOT_CURSE_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiCurse"
+      },
+      {
+        "family": "anti_heal",
+        "category": "buff",
+        "type": "BT_REVERSE_HEAL_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiTureDmg"
+      }
+    ]
+  },
+  "900096": {
+    "id": "900096",
+    "name": { "en": "Enraged", "jp": "狂暴化", "kr": "광폭화", "zh": "狂暴化" },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1650,
+        "vars": {
+          "common_monster_passive_wg1": { "c": "100%", "v": "10%" },
+          "Singularity_Rage_Action_guage": { "c": "100%", "v": "20%" },
+          "Singularity_RAGE_OLD": { "c": "100%", "v": "30%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Enters <color=#28d9ed>Berserk</color> state every time enemies take 6 actions.\\n\\n<color=#28d9ed>Berserk Entry & Ultimate Skill</color>: Deals DMG to all enemies and recovers WG by 10%.\\nSkill DMG increases by 30% after attacking.",
+      "jp": "敵が6回行動するたびに<color=#28d9ed>狂暴化</color>状態に移行する。\\n\\n<color=#28d9ed>狂暴化突入と必殺スキル</color>：敵全体にダメージを与え、WGを10%回復する。\\n攻撃後、スキルのダメージが30%UPする。",
+      "kr": "적이 6회 행동할 때 마다 <color=#28d9ed>광폭화</color> 상태로 전환합니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> : 적 전체에게 피해를 입히고 WG를 10% 회복시킵니다.\\n공격 후 스킬의 피해량이 30% 증가합니다.",
+      "zh": "敌人每行动6次进入<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>狂暴化冲入与必杀技</color>：对全体敌人造成伤害，并恢复10% WG。\\n攻击后技能伤害提升30%。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "common_monster_passive_wg1",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Rage_Action_guage",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "Singularity_RAGE_OLD"
+      }
+    ]
+  },
+  "900097": {
+    "id": "900097",
+    "name": { "en": "", "jp": "", "kr": "", "zh": "" },
+    "type": "rage_finish1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [{ "level": 1, "damageFactor": 3150 }],
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1"
+  },
+  "900101": {
+    "id": "900101",
+    "name": {
+      "en": "Establish : Incineration Plan",
+      "jp": "策定：焼却計画",
+      "kr": "수립 : 소각 계획",
+      "zh": "制定：焚烧计划"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1470,
+        "vars": {
+          "Singularity_VER_SKILL01_1": { "c": "100%", "v": "3%", "t": "3" }
+        },
+        "tooltips": ["2"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy and inflicts <color=#28d9ed>Curse</color> for <color=#28d9ed>3 turns</color>.",
+      "jp": "敵にダメージを与え、<color=#28d9ed>3ターン</color>の間<color=#28d9ed>呪い</color>を付与する。",
+      "kr": "적을 공격하고 <color=#28d9ed>3턴</color> 동안 <color=#28d9ed>저주</color>를 부여합니다.",
+      "zh": "攻击敌人，附加<color=#28d9ed>3回合</color>的<color=#28d9ed>诅咒</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_4004008_D",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_CURSE",
+        "target": "enemy",
+        "buff": "Singularity_VER_SKILL01_1",
+        "tooltip": "2",
+        "caller": "first"
+      }
+    ]
+  },
+  "900102": {
+    "id": "900102",
+    "name": {
+      "en": "Measure : Variant Elimination",
+      "jp": "措置：変種の除去",
+      "kr": "조치 : 변종 제거",
+      "zh": "措施：变种清除"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1575,
+        "cool": 4,
+        "startCool": 2,
+        "vars": { "Singularity_VER_SKILL02_1": { "c": "100%", "v": "100%" } }
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy and deals <color=#28d9ed>50%</color> bonus DMG if the target does not hold <color=#28d9ed>Curse</color>.",
+      "jp": "敵にダメージを与え、対象に<color=#28d9ed>呪い</color>が付与されていない場合、<color=#28d9ed>50%</color>の追加ダメージを与える。",
+      "kr": "적을 공격하고 대상에게 <color=#28d9ed>저주</color>가 부여되지 않은 경우 <color=#28d9ed>50%</color>추가 피해를 줍니다.",
+      "zh": "攻击敌人，若目标未持有<color=#28d9ed>诅咒</color>，则造成<color=#28d9ed>50%</color>额外伤害。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_Second_4004008_D",
+    "effects": [
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "Singularity_VER_SKILL02_1",
+        "caller": "second"
+      }
+    ]
+  },
+  "900103": {
+    "id": "900103",
+    "name": {
+      "en": "Execute : Dimensional Incineration",
+      "jp": "執行：次元焼却",
+      "kr": "집행 : 차원 소각",
+      "zh": "执行：次元焚烧"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1890,
+        "cool": 5,
+        "startCool": 5,
+        "vars": {
+          "Singularity_VER_SKILL03_1": { "c": "100%", "v": "3%", "t": "3" },
+          "Singularity_VER_SKILL03_2": { "c": "100%", "v": "100%" }
+        },
+        "tooltips": ["2"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and inflicts <color=#28d9ed>Curse</color> on targets for <color=#28d9ed>3 turns</color>.\\nGains an <color=#28d9ed>Extra Turn</color> when an enemy is defeated.",
+      "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>3ターン</color>の間<color=#28d9ed>呪い</color>を付与する。\\n敵を撃破すると<color=#28d9ed>追加ターン</color>を獲得する。",
+      "kr": "적 전체를 공격하고 대상에게 <color=#28d9ed>3턴</color> 동안 <color=#28d9ed>저주</color>를 부여합니다.\\n적 처치 시 <color=#28d9ed>추가 턴</color>을 획득합니다.",
+      "zh": "攻击全体敌人，对目标附加<color=#28d9ed>3回合</color>的<color=#28d9ed>诅咒</color>。\\n击败敌人时获得<color=#28d9ed>额外回合</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_4004008_D",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_CURSE",
+        "target": "enemy_team",
+        "buff": "Singularity_VER_SKILL03_1",
+        "tooltip": "2",
+        "caller": "ultimate"
+      },
+      {
+        "family": "trigger",
+        "category": "buff",
+        "type": "BT_ADDITIVE_TURN",
+        "target": "me",
+        "buff": "Singularity_VER_SKILL03_2",
+        "label": "SYS_BUFF_ADDITIVE_TURN",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "900104": {
+    "id": "900104",
+    "name": {
+      "en": "Objective : Present Collapse",
+      "jp": "目標：現在の崩壊",
+      "kr": "목표 : 현재 붕괴",
+      "zh": "目标：现在崩塌"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_VER_A_1": { "c": "100%", "v": "2" },
+          "Singularity_Passive_AntiCurse": { "c": "100%", "v": "50000" },
+          "Singularity_Passive_AntiTureDmg": { "c": "100%", "v": "50000" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "At the start of every turn, inflicts <color=#28d9ed>Curse</color> on all enemies for <color=#28d9ed>2 turns</color>.\\nCurse DMG dealt to enemies decreases by <color=#28d9ed>50%</color>.",
+      "jp": "毎ターン開始時、敵全体に<color=#28d9ed>呪い</color>を<color=#28d9ed>2ターン</color>付与する。\\n敵に与える呪いダメージが<color=#28d9ed>50%</color>減少する。",
+      "kr": "매 턴 시작 시 적 전체에게 <color=#28d9ed>저주</color>를 <color=#28d9ed>2턴</color> 부여합니다.\\n적에게 입히는 저주 피해가 <color=#28d9ed>50%</color> 감소합니다.",
+      "zh": "每回合开始时对全体敌人附加<color=#28d9ed>2回合</color>的<color=#28d9ed>诅咒</color>。\\n对敌人造成的诅咒伤害减少<color=#28d9ed>50%</color>。"
+    },
+    "icon": "MT_Passive_1_Dark",
+    "effects": [
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "Singularity_Passive_VER_A_1",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "dot",
+        "category": "buff",
+        "type": "BT_DOT_CURSE_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiCurse"
+      },
+      {
+        "family": "anti_heal",
+        "category": "buff",
+        "type": "BT_REVERSE_HEAL_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiTureDmg"
+      }
+    ]
+  },
+  "900105": {
+    "id": "900105",
+    "name": {
+      "en": "Factor : Event Overlap",
+      "jp": "要因：事象の重畳",
+      "kr": "요인 : 사건의 중첩",
+      "zh": "要因：事件的叠加"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_VER_SS_1": { "c": "100%", "v": "3%", "t": "2" },
+          "Singularity_Passive_VER_SS_2": { "c": "100%", "v": "50%" },
+          "Singularity_Passive_VER_SS_3": { "c": "100%", "v": "10%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "DMG dealt by all enemies increases by <color=#28d9ed>10%</color> per <color=#28d9ed>debuff</color> they hold.\\n(The more debuffs held, the more DMG dealt to Verdandi increases.)\\nWhen a target with <color=#28d9ed>Immunity</color> ends their turn, recovers WG by <color=#28d9ed>2</color>.\\nCurse and Fixed DMG taken by the boss cannot exceed <color=#28d9ed>50000</color>.",
+      "jp": "敵全体は自分が保有する<color=#28d9ed>弱体効果1個</color>あたり、ダメージが<color=#28d9ed>10%</color>増加する。\\n（弱体効果を多く保有するほど、ヴェルダンディへの与ダメージが増加する）\\n<color=#28d9ed>免疫</color>を保有する対象の行動終了時、WGを<color=#28d9ed>2</color>回復する。\\nボスが受ける呪いおよび固定ダメージは<color=#28d9ed>50000</color>を超えない。",
+      "kr": "적 전체는 자신이 보유한 <color=#28d9ed>약화 효과 1개</color> 마다 피해가 <color=#28d9ed>10%</color> 증가합니다.\\n(약화 효과를 많이 보유할 수록 베르단디에게 입히는 피해가 증가합니다)\\n<color=#28d9ed>면역</color> 보유 대상 행동 종료 시 WG를 <color=#28d9ed>2</color> 회복합니다.\\n보스가 받는 저주 및 고정 피해의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.",
+      "zh": "全体敌人每持有1个<color=#28d9ed>弱化效果</color>，造成的伤害增加<color=#28d9ed>10%</color>。\\n（持有的弱化效果越多，对贝尔丹迪造成的伤害越高）\\n持有<color=#28d9ed>免疫</color>的目标行动结束时，恢复WG<color=#28d9ed>2</color>点。\\n首领受到的诅咒及固定伤害不超过<color=#28d9ed>50000</color>。"
+    },
+    "icon": "MT_Passive_1_Dark",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_CURSE",
+        "target": "enemy_team",
+        "buff": "Singularity_Passive_VER_SS_1",
+        "tooltip": "2"
+      },
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_CURSE_ENHANCE",
+        "target": "enemy_team",
+        "buff": "Singularity_Passive_VER_SS_2"
+      },
+      {
+        "family": "damage",
+        "category": "neutral",
+        "type": "BT_DMG_OWNER_DEBUFF",
+        "target": "enemy_team",
+        "buff": "Singularity_Passive_VER_SS_3"
+      }
+    ]
+  },
+  "900106": {
+    "id": "900106",
+    "name": { "en": "Enraged", "jp": "狂暴化", "kr": "광폭화", "zh": "狂暴化" },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1650,
+        "vars": {
+          "Common_Rage_Buff_101": { "c": "100%", "v": "40%", "t": "1" },
+          "Common_Rage_Buff_102": { "c": "100%", "v": "30%", "t": "1" },
+          "common_monster_passive_wg1": { "c": "100%", "v": "10%" },
+          "Singularity_Rage_Action_guage": { "c": "100%", "v": "20%" },
+          "Singularity_RAGE_VER": { "c": "100%", "v": "2" }
+        },
+        "tooltips": ["1069", "1015", "49"]
+      }
+    ],
+    "desc": {
+      "en": "Enters <color=#28d9ed>Berserk</color> state every time enemies take 6 actions.\\n\\n<color=#28d9ed>Berserk Entry & Ultimate Skill</color> : Attacks all enemies, then grants self an irremovable Speed Increase/DMG Reduction effect for 1 turn and recovers WG by 10%.\\nBefore using the skill, dispels <color=#28d9ed>2</color> of all enemies' <color=#28d9ed>buffs</color>.",
+      "jp": "敵が6回行動するたびに<color=#28d9ed>狂暴化</color>状態に移行する。\\n\\n<color=#28d9ed>狂暴化突入と必殺スキル</color>：敵全体にダメージを与えた後、自分に解除されないスピードUP/ダメージ減少効果を1ターンの間付与し、WGを10%回復する。\\nスキル使用前、敵全体の<color=#28d9ed>強化効果</color>を<color=#28d9ed>2個</color>解除する。",
+      "kr": "적이 6회 행동할 때 마다 <color=#28d9ed>광폭화</color> 상태로 전환합니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> :적 전체를 공격 후 자신에게 해제되지 않는 속도 증가/피해 감소 효과를 1턴 동안 부여하고 WG를 10% 회복합니다.\\n스킬 사용 전 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>2개</color> 해제합니다.",
+      "zh": "敌人每行动6次进入<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>狂暴化突入与必杀技</color>：攻击全体敌人后，对自身附加无法解除的速度提升/伤害减少效果1回合，并恢复WG10%。\\n使用技能前解除全体敌人<color=#28d9ed>2个</color><color=#28d9ed>强化效果</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_101",
+        "stat": "dmg_reduce_rate",
+        "mode": "up",
+        "tooltip": "1069"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_102",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "1015"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "common_monster_passive_wg1",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Rage_Action_guage",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "cleanse",
+        "category": "debuff",
+        "type": "BT_REMOVE_BUFF",
+        "target": "enemy_team",
+        "buff": "Singularity_RAGE_VER",
+        "label": "SYS_BUFF_REMOVE_BUFF"
+      }
+    ]
+  },
+  "900107": {
+    "id": "900107",
+    "name": { "en": "", "jp": "", "kr": "", "zh": "" },
+    "type": "rage_finish1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [{ "level": 1, "damageFactor": 1575 }],
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1"
+  },
+  "900111": {
+    "id": "900111",
+    "name": {
+      "en": "Establish : Future Plan",
+      "jp": "策定：未来計画",
+      "kr": "수립 : 미래 계획",
+      "zh": "制定：未来计划"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1470,
+        "vars": { "Singularity_SKD_SKILL01_1": { "c": "100%", "v": "20%" } },
+        "tooltips": ["61"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy and increases own <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>.",
+      "jp": "敵にダメージを与え、自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>増加させる。",
+      "kr": "적을 공격하고 자신의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>20%</color> 증가시킵니다.",
+      "zh": "攻击敌人，使自身<color=#28d9ed>行动值</color>增加<color=#28d9ed>20%</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_4004007_D",
+    "effects": [
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_SKD_SKILL01_1",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP",
+        "caller": "first"
+      }
+    ]
+  },
+  "900112": {
+    "id": "900112",
+    "name": {
+      "en": "Measure : Variant Suppression",
+      "jp": "措置：変種の抑制",
+      "kr": "조치 : 변종 억제",
+      "zh": "措施：变种抑制"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1575,
+        "cool": 4,
+        "startCool": 2,
+        "vars": { "Singularity_SKD_SKILL02_1": { "c": "100%", "t": "2" } }
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies. Inflicts <color=#28d9ed>Unbuffable</color> on all enemies for <color=#28d9ed>2 turns</color>. (Ignores Immunity)",
+      "jp": "敵全体にダメージを与える。敵全体に<color=#28d9ed>2ターン</color>の間<color=#28d9ed>強化不可</color>を付与する。（免疫無視）",
+      "kr": "적 전체를 공격합니다. 적 전체에게 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>강화 불가</color>를 부여합니다. (면역 무시)",
+      "zh": "攻击全体敌人。对全体敌人附加<color=#28d9ed>2回合</color>的<color=#28d9ed>强化不可</color>。（无视免疫）"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Second_4004007_D",
+    "effects": [
+      {
+        "family": "cc",
+        "category": "debuff",
+        "type": "BT_SEALED",
+        "target": "enemy_team",
+        "buff": "Singularity_SKD_SKILL02_1",
+        "tooltip": "39",
+        "label": "SYS_BUFF_SEALED",
+        "caller": "second"
+      }
+    ]
+  },
+  "900113": {
+    "id": "900113",
+    "name": {
+      "en": "Execute : Timeline Readjustment",
+      "jp": "執行：時間軸再調整",
+      "kr": "집행 : 시간축 재조정",
+      "zh": "执行：时间轴重新调整"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1890,
+        "cool": 5,
+        "startCool": 5,
+        "vars": {
+          "Singularity_SKD_SKILL03_1": { "c": "100%", "v": "30%" },
+          "Singularity_SKD_SKILL03_2": { "c": "100%", "v": "30%" }
+        },
+        "tooltips": ["60", "61"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies.\\nIncreases own <color=#28d9ed>Priority</color> by <color=#28d9ed>30%</color> and decreases all enemies' <color=#28d9ed>Priority</color> by <color=#28d9ed>30%</color>.",
+      "jp": "敵全体にダメージを与える。\\n自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>30%</color>増加させ、敵全体の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>30%</color>減少させる。",
+      "kr": "적 전체를 공격합니다. \\n자신의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>30%</color> 증가시키고 적 전체의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>30%</color> 감소시킵니다.",
+      "zh": "攻击全体敌人。\\n使自身<color=#28d9ed>行动值</color>增加<color=#28d9ed>30%</color>，使全体敌人<color=#28d9ed>行动值</color>减少<color=#28d9ed>30%</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_4004007_D",
+    "effects": [
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_SKD_SKILL03_1",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP",
+        "caller": "ultimate"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "enemy_team",
+        "buff": "Singularity_SKD_SKILL03_2",
+        "label": "SYS_BUFF_ACTION_GAUGE_DOWN",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "900114": {
+    "id": "900114",
+    "name": {
+      "en": "Objective : Future Confirmation",
+      "jp": "目標：未来の確定",
+      "kr": "목표 : 미래 확정",
+      "zh": "目标：确定未来"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_SKD_SS_1": { "c": "100%", "v": "5" },
+          "Singularity_Passive_SKD_SS_3": { "c": "100%", "v": "50%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "DMG taken from enemies with <color=#28d9ed>90%</color> or less current HP increases by <color=#28d9ed>50%</color>.\\nDeals <color=#28d9ed>50%</color> bonus DMG to enemies with higher <color=#28d9ed>Speed</color> than self.\\nCurse and Fixed DMG taken by the boss cannot exceed <color=#28d9ed>50000</color>.",
+      "jp": "現在HPが<color=#28d9ed>90%</color>以下の敵から受けるダメージが<color=#28d9ed>50%</color>増加する。\\n自分より<color=#28d9ed>スピード</color>が速い敵に<color=#28d9ed>50%</color>の追加ダメージを与える。\\nボスが受ける呪いおよび固定ダメージは<color=#28d9ed>50000</color>を超えない。",
+      "kr": "현재 체력이 <color=#28d9ed>90%</color> 이하인 적에게 입는 피해가 <color=#28d9ed>50%</color> 증가합니다.\\n자신보다 <color=#28d9ed>속도</color>가 빠른 적에게 <color=#28d9ed>50%</color> 추가 피해를 입힙니다.\\n보스가 받는 저주 및 고정 피해의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.",
+      "zh": "受到当前生命值在<color=#28d9ed>90%</color>以下敌人的伤害增加<color=#28d9ed>50%</color>。\\n对速度比自身快的敌人造成<color=#28d9ed>50%</color>额外伤害。\\n首领受到的诅咒及固定伤害不超过<color=#28d9ed>50000</color>。"
+    },
+    "icon": "MT_Passive_1_Light",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "debuff",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "Singularity_Passive_SKD_SS_1",
+        "stat": "speed",
+        "mode": "up",
+        "label": "SYS_BUFF_ACTION_SPEED_UP"
+      },
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "Singularity_Passive_SKD_SS_3"
+      }
+    ]
+  },
+  "900115": {
+    "id": "900115",
+    "name": {
+      "en": "Factor : Relativity of Time",
+      "jp": "要因：時間の相対性",
+      "kr": "요인 : 시간의 상대성",
+      "zh": "要因：时间的相对性"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_SKD_A_1": { "c": "100%", "v": "50%" },
+          "Singularity_Passive_SKD_A_2": { "c": "100%", "v": "50%" },
+          "Singularity_Passive_AntiCurse": { "c": "100%", "v": "50000" },
+          "Singularity_Passive_AntiTureDmg": { "c": "100%", "v": "50000" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "At the start of every turn, increases all enemies' Speed by <color=#28d9ed>5%</color>. (Max 5 stacks)\\nDMG taken from enemies slower than self increases by <color=#28d9ed>50%</color>.",
+      "jp": "毎ターン開始時、敵全体のスピードを<color=#28d9ed>5%</color>増加させる。（最大5回累積）\\n自分より<color=#28d9ed>スピード</color>が遅い敵から受けるダメージが<color=#28d9ed>50%</color>増加する。",
+      "kr": "매 턴 시작 시 적 전체의 속도를 <color=#28d9ed>5%</color> 증가시킵니다. (최대 5회 누적)\\n자신보다 <color=#28d9ed>속도</color>가 느린 적에게 입는 피해가 <color=#28d9ed>50%</color> 증가합니다.",
+      "zh": "每回合开始时使全体敌人速度增加<color=#28d9ed>5%</color>。（最多叠加5次）\\n受到比自身速度慢的敌人的伤害增加<color=#28d9ed>50%</color>。"
+    },
+    "icon": "MT_Passive_1_Dark",
+    "effects": [
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "Singularity_Passive_SKD_A_1"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "Singularity_Passive_SKD_A_2",
+        "caller": "second"
+      },
+      {
+        "family": "dot",
+        "category": "buff",
+        "type": "BT_DOT_CURSE_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiCurse"
+      },
+      {
+        "family": "anti_heal",
+        "category": "buff",
+        "type": "BT_REVERSE_HEAL_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiTureDmg"
+      }
+    ]
+  },
+  "900116": {
+    "id": "900116",
+    "name": { "en": "Enraged", "jp": "狂暴化", "kr": "광폭화", "zh": "狂暴化" },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1650,
+        "vars": {
+          "Common_Rage_Buff_101": { "c": "100%", "v": "40%", "t": "1" },
+          "Common_Rage_Buff_102": { "c": "100%", "v": "30%", "t": "1" },
+          "common_monster_passive_wg1": { "c": "100%", "v": "10%" },
+          "Singularity_Rage_Action_guage": { "c": "100%", "v": "20%" },
+          "Singularity_RAGE_SKD": { "c": "100%", "v": "30%", "t": "2" }
+        },
+        "tooltips": ["1069", "1015", "11"]
+      }
+    ],
+    "desc": {
+      "en": "Enters <color=#28d9ed>Berserk</color> state every time enemies take 6 actions.\\n\\n<color=#28d9ed>Berserk Entry & Ultimate Skill</color> : Grants self an undispellable Speed UP/DMG Reduction effect for 1 turn and recovers WG by 10%.\\nIncreases own Critical Hit Chance for 2 turns.",
+      "jp": "敵が6回行動するたびに<color=#28d9ed>狂暴化</color>状態に移行する。\\n\\n<color=#28d9ed>狂暴化突入と必殺スキル</color>：自分に解除されないスピードUP/ダメージ減少効果を1ターンの間付与し、WGを10%回復する。\\n自分の会心率を2ターンの間増加させる。",
+      "kr": "적이 6회 행동할 때 마다 <color=#28d9ed>광폭화</color> 상태로 전환합니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> : 자신에게 해제되지 않는 속도 증가/피해 감소 효과를 1턴 동안 부여하고 WG를 10% 회복합니다.\\n자신의 치명 확률을 2턴 증가시킵니다.",
+      "zh": "敌人每行动6次进入<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>狂暴化突入与必杀技</color>：对自身附加无法解除的速度提升/伤害减少效果1回合，并恢复WG10%。\\n使自身暴击率在2回合内提升。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_101",
+        "stat": "dmg_reduce_rate",
+        "mode": "up",
+        "tooltip": "1069"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_102",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "1015"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "common_monster_passive_wg1",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Rage_Action_guage",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_RAGE_SKD",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "1015"
+      }
+    ]
+  },
+  "900117": {
+    "id": "900117",
+    "name": { "en": "", "jp": "", "kr": "", "zh": "" },
+    "type": "rage_finish1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [{ "level": 1, "damageFactor": 3150 }],
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1"
+  },
+  "900131": {
+    "id": "900131",
+    "name": {
+      "en": "Command: Restrain",
+      "jp": "命令：制圧",
+      "kr": "명령 : 제압",
+      "zh": "命令：压制"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1470,
+        "vars": {
+          "singularity_ks_skill01_1": { "c": "100%", "v": "2" },
+          "singularity_ks_skill01_2": { "c": "100%", "v": "2" },
+          "singularity_ks_skill01_3": { "c": "100%", "v": "2" },
+          "singularity_ks_skill01_4": { "c": "100%", "v": "2" },
+          "singularity_ks_skill01_6": { "c": "100%", "v": "1000" },
+          "Singularity_KS_SKILL01_1": { "c": "100%", "v": "2" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Prioritizes attacking the leftmost enemy.\\nIf the target is not a Defender, removes <color=#28d9ed>[Buff_V_Singularity_KS_SKILL01_1]</color> <color=#28d9ed>buff(s)</color> from the target.",
+      "jp": "最も左にいる敵を優先して攻撃する。\\n対象が防御型でなければ、対象の<color=#28d9ed>強化効果</color>を<color=#28d9ed>[Buff_V_Singularity_KS_SKILL01_1]</color>個解除する。",
+      "kr": "가장 좌측에 있는 적을 우선적으로 공격합니다.\\n대상이 방어형이 아니라면 대상의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>[Buff_V_Singularity_KS_SKILL01_1]</color>개 해제합니다.",
+      "zh": "优先攻击最左侧的敌人。\\n若目标不是防禦型，则解除目标的<color=#28d9ed>[Buff_V_Singularity_KS_SKILL01_1]</color>个<color=#28d9ed>强化效果</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_4054001",
+    "effects": [
+      {
+        "family": "cleanse",
+        "category": "debuff",
+        "type": "BT_REMOVE_BUFF",
+        "target": "enemy_skill_target",
+        "buff": "singularity_ks_skill01_1",
+        "label": "SYS_BUFF_REMOVE_BUFF",
+        "caller": "first"
+      },
+      {
+        "family": "cleanse",
+        "category": "debuff",
+        "type": "BT_REMOVE_BUFF",
+        "target": "enemy_skill_target",
+        "buff": "singularity_ks_skill01_2",
+        "label": "SYS_BUFF_REMOVE_BUFF",
+        "caller": "first"
+      },
+      {
+        "family": "cleanse",
+        "category": "debuff",
+        "type": "BT_REMOVE_BUFF",
+        "target": "enemy_skill_target",
+        "buff": "singularity_ks_skill01_3",
+        "label": "SYS_BUFF_REMOVE_BUFF",
+        "caller": "first"
+      },
+      {
+        "family": "cleanse",
+        "category": "debuff",
+        "type": "BT_REMOVE_BUFF",
+        "target": "enemy_skill_target",
+        "buff": "singularity_ks_skill01_4",
+        "label": "SYS_BUFF_REMOVE_BUFF",
+        "caller": "first"
+      },
+      {
+        "family": "trigger",
+        "category": "buff",
+        "type": "BT_RUN_PASSIVE_SKILL_ON_TURN_END",
+        "target": "me",
+        "buff": "singularity_ks_skill01_6",
+        "label": "SYS_BUFF_ADDITIVE_ATTACK",
+        "caller": "first"
+      }
+    ]
+  },
+  "900132": {
+    "id": "900132",
+    "name": {
+      "en": "Command: Incapacitate",
+      "jp": "命令：無力化",
+      "kr": "명령 : 무력화",
+      "zh": "命令：无效化"
+    },
+    "type": "second",
+    "subType": "passive",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [{ "level": 1, "damageFactor": 1575, "tooltips": ["7"] }],
+    "desc": {
+      "en": "(Triggered Effect)\\nAfter using <color=#28d9ed>Command: Restrain</color>, if the caster's <color=#28d9ed>Attack</color> is increased, activates an additional attack on all enemies.",
+      "jp": "（発動効果）\\n<color=#28d9ed>命令：制圧</color>使用後、自分の<color=#28d9ed>攻撃力</color>が上昇した状態なら敵全体に追加攻撃を与える。",
+      "kr": "(발동 효과)\\n<color=#28d9ed>명령:제압</color> 사용 후 자신의 <color=#28d9ed>공격력</color>이 증가한 상태라면 적 전체에게 추가 공격을 입힙니다.",
+      "zh": "（触发效果）\\n使用<color=#28d9ed>命令：压制</color>后，若自身<color=#28d9ed>攻击力</color>处于提升状态，则对全体敌人造成追加攻击。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Second_4054001"
+  },
+  "900133": {
+    "id": "900133",
+    "name": {
+      "en": "Command: Destroy",
+      "jp": "命令：破壊",
+      "kr": "명령 : 파괴",
+      "zh": "命令：破坏"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1650,
+        "cool": 5,
+        "startCool": 3,
+        "vars": {
+          "singularity_ks_skill03_1": { "c": "100%", "v": "30%", "t": "5" },
+          "Singularity_KS_SKILL03_1": { "c": "100%", "v": "30%", "t": "5" }
+        },
+        "tooltips": ["7"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and increases the caster's <color=#28d9ed>Attack</color> for <color=#28d9ed>[Buff_T_Singularity_KS_SKILL03_1] turns</color>.",
+      "jp": "敵全体を攻撃し、自分の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>[Buff_T_Singularity_KS_SKILL03_1]ターン</color>増加させる。",
+      "kr": "적 전체를 공격하고, 자신의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>[Buff_T_Singularity_KS_SKILL03_1]턴</color> 동안 증가시킵니다.",
+      "zh": "攻击全体敌人，并使自身<color=#28d9ed>攻击力</color>提升<color=#28d9ed>[Buff_T_Singularity_KS_SKILL03_1]回合</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_4054001",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "singularity_ks_skill03_1",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "7",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "900134": {
+    "id": "900134",
+    "name": {
+      "en": "Terminal: Protect Weakness",
+      "jp": "端末：弱点保護",
+      "kr": "단말 : 약점 보호",
+      "zh": "终端：保护弱点"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "singularity_passive_ks_a_1": { "c": "100%", "v": "50%" },
+          "singularity_passive_ks_a_2": { "c": "100%", "v": "25%" },
+          "singularity_passive_ks_a_3": { "c": "100%", "v": "50%" },
+          "singularity_passive_ks_a_4": { "c": "100%", "v": "75%" },
+          "singularity_passive_ks_a_5": { "c": "100%", "v": "100%" },
+          "singularity_passive_ks_a_20": { "c": "100%" },
+          "singularity_passive_ks_a_19": { "c": "100%", "t": "1" },
+          "singularity_passive_ks_a_18": { "c": "100%", "v": "100" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "DMG taken from Strikers increases by <color=#28d9ed>[Buff_V_singularity_passive_ks_a_1]</color>, and DMG taken increases by <color=#28d9ed>25%</color> for each Water enemy.\\nIf there are no Defenders on the enemy team, all skills deal Fixed DMG equal to <color=#28d9ed>10%</color> of the target's Max Health before attacking.\\nDamage from Cursed and Fixed DMG taken by Bosses cannot exceed <color=#28d9ed>50,000</color>.",
+      "jp": "攻撃型から受けるダメージが<color=#28d9ed>[Buff_V_singularity_passive_ks_a_1]</color>増加し、水属性の敵1人につき受けるダメージが<color=#28d9ed>25%</color>増加する。\\n敵チームに防御型がいない場合、すべてのスキルが攻撃前に対象の最大HPの<color=#28d9ed>10%</color>分の固定ダメージを与える。\\nボスが受ける呪いおよび固定ダメージのダメージは<color=#28d9ed>50,000</color>を超えない。",
+      "kr": "공격형에게 받는 피해가 <color=#28d9ed>[Buff_V_singularity_passive_ks_a_1]</color>증가하고 수속성 적 1명당 받는 피해가 <color=#28d9ed>25%</color> 증가합니다.\\n적 팀에 방어형이 없다면 모든 스킬이 공격 전 대상 최대 체력의 <color=#28d9ed>10%</color> 만큼 고정 피해를 입힙니다.\\n보스가 받는 저주 및 고정 피해의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.",
+      "zh": "受到战士型造成的伤害增加<color=#28d9ed>[Buff_V_singularity_passive_ks_a_1]</color>，每有1名水属性敌人，受到的伤害增加<color=#28d9ed>25%</color>。\\n若敌方队伍中没有坦克型，所有技能在攻击前会造成相当于目标最大生命值<color=#28d9ed>10%</color>的固定伤害。\\n首领受到的诅咒及固定伤害的伤害不超过<color=#28d9ed>50,000</color>。"
+    },
+    "icon": "MT_Passive_1_Fire",
+    "effects": [
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "singularity_passive_ks_a_1"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "singularity_passive_ks_a_2",
+        "stat": "dmg_boost",
+        "mode": "up"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "singularity_passive_ks_a_3",
+        "stat": "dmg_boost",
+        "mode": "up"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "singularity_passive_ks_a_4",
+        "stat": "dmg_boost",
+        "mode": "up"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "singularity_passive_ks_a_5",
+        "stat": "dmg_boost",
+        "mode": "up"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "enemy_team_defender",
+        "buff": "singularity_passive_ks_a_20",
+        "tooltip": "11010"
+      },
+      {
+        "family": "special",
+        "category": "buff",
+        "type": "BT_NONE",
+        "target": "me",
+        "buff": "singularity_passive_ks_a_19",
+        "tooltip": "11010"
+      },
+      {
+        "family": "anti_heal",
+        "category": "neutral",
+        "type": "BT_REVERSE_HEAL_BASED_TARGET",
+        "target": "enemy_skill_target",
+        "buff": "singularity_passive_ks_a_18",
+        "stat": "hp",
+        "mode": "up"
+      }
+    ]
+  },
+  "900135": {
+    "id": "900135",
+    "name": {
+      "en": "Terminal: Reinitiate",
+      "jp": "端末：再稼働",
+      "kr": "단말 : 재가동",
+      "zh": "终端：重启"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "singularity_passive_ks_b_1": { "c": "100%", "v": "100%" },
+          "singularity_passive_ks_b_2": { "c": "100%", "v": "10%" },
+          "singularity_passive_ks_b_3": { "c": "100%", "v": "10%" },
+          "singularity_passive_ks_b_4": { "c": "100%", "v": "10%" },
+          "singularity_passive_ks_b_5": { "c": "100%", "v": "10%" },
+          "singularity_passive_ks_b_6": { "c": "100%", "v": "10%" },
+          "Singularity_Passive_AntiCurse": { "c": "100%", "v": "50000" },
+          "Singularity_Passive_AntiTureDmg": { "c": "100%", "v": "50000" },
+          "common_check_buff_cct_defender": { "c": "100%" }
+        },
+        "tooltips": ["1092"]
+      }
+    ],
+    "desc": {
+      "en": "Always gains <color=#28d9ed>Buff Enhancement</color>. This effect cannot be removed.\\nAfter an enemy acts, if the caster's <color=#28d9ed>Attack</color> is increased, increases the caster's <color=#28d9ed>Priority</color> by <color=#28d9ed>[Buff_V_singularity_passive_ks_b_2]</color>.\\nAfter the caster's turn ends, decreases the <color=#28d9ed>Priority</color> of non-Water targets by <color=#28d9ed>[Buff_V_singularity_passive_ks_b_3]</color>.",
+      "jp": "常に<color=#28d9ed>強化促進</color>を得る。この効果は解除されない。\\n敵行動後、自分の<color=#28d9ed>攻撃力</color>が上昇した状態なら自分の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>[Buff_V_singularity_passive_ks_b_2]</color>増加させる。\\n自分の行動終了後、水属性でない対象の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>[Buff_V_singularity_passive_ks_b_3]</color>減少させる。",
+      "kr": "항상 <color=#28d9ed>강화 촉진</color>을 얻습니다. 이 효과는 해제되지 않습니다.\\n적 행동 후 자신의 <color=#28d9ed>공격력</color>이 증가한 상태라면 자신의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>[Buff_V_singularity_passive_ks_b_2]</color> 증가시킵니다.\\n자신 행동 종료 후 수속성이 아닌 대상의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>[Buff_V_singularity_passive_ks_b_3]</color> 감소시킵니다.",
+      "zh": "始终获得<color=#28d9ed>强化促进</color>。此效果无法被解除。\\n敌人行动后，若自身<color=#28d9ed>攻击力</color>处于提升状态，则使自身<color=#28d9ed>行动值</color>提升<color=#28d9ed>[Buff_V_singularity_passive_ks_b_2]</color>。\\n自身行动结束后，使非水属性目标的<color=#28d9ed>行动值</color>降低<color=#28d9ed>[Buff_V_singularity_passive_ks_b_3]</color>。"
+    },
+    "icon": "MT_Passive_1_Fire",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT_BUFF_ENHANCE",
+        "target": "me",
+        "buff": "singularity_passive_ks_b_1",
+        "tooltip": "1092"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "singularity_passive_ks_b_2",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "gauge",
+        "category": "debuff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "enemy_team",
+        "buff": "singularity_passive_ks_b_3",
+        "label": "SYS_BUFF_ACTION_GAUGE_DOWN"
+      },
+      {
+        "family": "gauge",
+        "category": "debuff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "enemy_team",
+        "buff": "singularity_passive_ks_b_4",
+        "label": "SYS_BUFF_ACTION_GAUGE_DOWN"
+      },
+      {
+        "family": "gauge",
+        "category": "debuff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "enemy_team",
+        "buff": "singularity_passive_ks_b_5",
+        "label": "SYS_BUFF_ACTION_GAUGE_DOWN"
+      },
+      {
+        "family": "gauge",
+        "category": "debuff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "enemy_team",
+        "buff": "singularity_passive_ks_b_6",
+        "label": "SYS_BUFF_ACTION_GAUGE_DOWN"
+      },
+      {
+        "family": "dot",
+        "category": "buff",
+        "type": "BT_DOT_CURSE_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiCurse"
+      },
+      {
+        "family": "anti_heal",
+        "category": "buff",
+        "type": "BT_REVERSE_HEAL_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiTureDmg"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "enemy_team_defender",
+        "buff": "common_check_buff_cct_defender",
+        "tooltip": "11010"
+      }
+    ]
+  },
+  "900136": {
+    "id": "900136",
+    "name": { "en": "Enraged", "jp": "狂暴化", "kr": "광폭화", "zh": "狂暴化" },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1650,
+        "vars": {
+          "Common_Rage_Buff_101": { "c": "100%", "v": "40%", "t": "1" },
+          "Common_Rage_Buff_102": { "c": "100%", "v": "30%", "t": "1" },
+          "common_monster_passive_wg1": { "c": "100%", "v": "10%" },
+          "Singularity_Rage_Action_guage": { "c": "100%", "v": "20%" },
+          "singularity_rage_ks": { "c": "100%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Enters <color=#28d9ed>Berserk</color> state every time enemies take 7 actions.\\n\\n<color=#28d9ed>Berserk Entry & Ultimate Skill</color>: Deals DMG to all enemies, then grants self an irremovable Speed Increase/DMG Reduction effect for 1 turn and recovers WG by 10%.\\nEnemies killed by this skill cannot be Resurrected or Revived.",
+      "jp": "敵が7回行動するたびに<color=#28d9ed>狂暴化</color>状態に移行する。\\n\\n<color=#28d9ed>狂暴化突入と必殺スキル</color>：敵全体にダメージを与えた後、自分に解除されないスピードUP/被ダメDOWN効果を1ターン付与し、WGを10%回復する。\\nこのスキルで倒れた敵は復活と蘇生ができなくなる。",
+      "kr": "적이 7회 행동할 때 마다 <color=#28d9ed>광폭화</color> 상태로 전환합니다.\\n\\n<color=#28d9ed>광폭화 돌입과 필살기</color> : 적 전체에게 피해를 입힌 후 자신에게 해제되지 않는 속도 증가/피해 감소 효과를 1턴 동안 부여하고 WG를 10% 회복합니다.\\n이 스킬로 사망한 적은 부활 및 소생이 불가능합니다.",
+      "zh": "敌人每行动7次进入<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>狂暴化冲入与必杀技</color>：对全体敌人造成伤害后，为自身附加无法解除的速度提升/受伤害降低效果持续1回合，并恢复10% WG。\\n被此技能击杀的敌人无法复活及复苏。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_101",
+        "stat": "dmg_reduce_rate",
+        "mode": "up",
+        "tooltip": "1069"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_102",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "1015"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "common_monster_passive_wg1",
+        "label": "SYS_BUFF_WG_CHARGE"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Rage_Action_guage",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "revive",
+        "category": "neutral",
+        "type": "BT_SEALED_RESURRECTION",
+        "target": "enemy_team",
+        "buff": "singularity_rage_ks"
+      }
+    ]
+  },
+  "900137": {
+    "id": "900137",
+    "name": { "en": "", "jp": "", "kr": "", "zh": "" },
+    "type": "rage_finish1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [{ "level": 1, "damageFactor": 3150 }],
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1"
+  },
+  "910001": {
+    "id": "910001",
+    "name": {
+      "en": "Dimensional Rift",
+      "jp": "次元の亀裂",
+      "kr": "차원의 균열",
+      "zh": "次元裂缝"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_check": { "c": "100%" },
+          "singularity_passive_enemy_1_attacker": { "c": "100%", "v": "8%" },
+          "singularity_passive_enemy_1_priest": { "c": "100%", "v": "8%" },
+          "singularity_passive_enemy_1_deffender": { "c": "100%", "v": "2%" },
+          "singularity_passive_enemy_1_ranger": { "c": "100%", "v": "1%" },
+          "singularity_passive_enemy_1_mage": { "c": "100%", "v": "8%" }
+        }
+      }
+    ],
+    "desc": {
+      "en": "(Passive Effect) The boss monster's Priority increases after entering Berserk state. The following effects are added depending on rank.\\n\\n<color=#ffd732>Applies from RANK D:</color> DMG dealt by all attacks increases and DMG taken decreases. The values increase as rank rises, reaching their maximum at SSS. (Up to 300%/200% respectively)\\n\\n<color=#ffd732>Applies from RANK B:</color> Final DMG taken and WG DMG taken from targets without elemental advantage decrease by <color=#28d9ed>70%/50%</color> respectively.\\n\\n<color=#ffd732>Applies from RANK S:</color> Increases the caster's <color=#28d9ed>Penetration</color> by <color=#28d9ed>30%</color>.\\n\\n<color=#ffd732>Class Synergy</color>: After an enemy acts, if there is exactly 1 enemy team member of the corresponding class, gains a special effect.\\n\\nMage: Enemy Striker DMG increases by 8% (Max 10 stacks)\\nStriker: Enemy Mage DMG increases by 8% (Max 10 stacks)\\nHealer: All enemies' DMG taken decreases by 8% (Max 10 stacks)\\nDefender: Boss Attack decreases by 2% (Max 5 stacks)\\nRanger: The boss takes Fixed DMG equal to 1% of its Max Health",
+      "jp": "(パッシブ効果) ボスモンスターは狂暴化突入後、行動ゲージが増加する。ランクに応じて以下の効果が追加される。\\n\\n<color=#ffd732>RANK Dから適用：</color> すべての攻撃に対する与ダメージが増加し、受けるダメージが減少する。ランクが上がるほど数値が増加し、SSSで最大になる。（それぞれ最大300%／200%）\\n\\n<color=#ffd732>RANK Bから適用：</color> 有利属性ではない対象から受ける最終ダメージとWGダメージがそれぞれ<color=#28d9ed>70%／50%</color>減少する。\\n\\n<color=#ffd732>RANK Sから適用：</color> 自分の<color=#28d9ed>貫通力</color>を<color=#28d9ed>30%</color>増加させる。\\n\\n<color=#ffd732>職業シナジー</color>：敵の行動後、敵チームの該当職業が1人の場合、特別な効果を得る。\\n\\n魔法型：敵攻撃型ダメージ8%増加（最大10回累積）\\n攻撃型：敵魔法型ダメージ8%増加（最大10回累積）\\n回復型：敵全体が受けるダメージ8%減少（最大10回累積）\\n防御型：ボス攻撃力2%減少（最大5回累積）\\nスピード型：ボス最大HPの1%固定ダメージ",
+      "kr": "(패시브 효과) 보스 몬스터는 광폭화 진입 후 행동 게이지가 증가합니다. 랭크에 따라 아래 효과가 추가됩니다.\\n\\n<color=#ffd732>RANK D 부터 적용:</color> 모든 공격에 대해 주는 피해가 증가하고 받는 피해가 감소합니다. 랭크가 오를수록 수치가 증가하여 SSS에서 최대가 됩니다.(각각 최대 300%/200%)\\n\\n<color=#ffd732>RANK B 부터 적용:</color> 유리한 상성이 아닌 대상에게 받는 최종 피해와 WG 피해가 각각 <color=#28d9ed>70%/50%</color> 감소합니다.\\n\\n<color=#ffd732>RANK S 부터 적용:</color> 자신의 <color=#28d9ed>관통력</color>을 <color=#28d9ed>30%</color> 증가시킵니다.\\n\\n<color=#ffd732>직업 시너지</color>: 적 행동 후, 적 팀의 해당 직업이 1명일 때 특별한 효과를 얻습니다.\\n\\n마법형: 적 공격형 피해 8% 증가 (최대 10회 누적)\\n공격형: 적 마법형 피해 8%증가 (최대 10회 누적)\\n회복형: 적 전체 받는 피해 감소 8% (최대 10회 누적)\\n방어형: 보스 공격력 감소 2% (최대 5회 누적)\\n속도형: 보스 최대 체력 1% 고정 피해",
+      "zh": "(被动效果) 首领怪物进入狂暴化后行动值增加。根据等级将追加以下效果。\\n\\n<color=#ffd732>从RANK D开始适用：</color> 所有攻击造成的伤害增加，受到的伤害减少。等级越高数值越大，在SSS时达到最大值。（分别最大300%/200%）\\n\\n<color=#ffd732>从RANK B开始适用：</color> 从无克制属性的目标处受到的最终伤害和WG伤害分别减少<color=#28d9ed>70%/50%</color>。\\n\\n<color=#ffd732>从RANK S开始适用：</color> 使自身<color=#28d9ed>穿透力</color>增加<color=#28d9ed>30%</color>。\\n\\n<color=#ffd732>职业增效</color>：敌方行动后，若敌方队伍中对应职业仅有1名，则获得特殊效果。\\n\\n法师型：敌方战士型伤害增加8%（最多叠加10次）\\n战士型：敌方法师型伤害增加8%（最多叠加10次）\\n辅助型：敌方全体受到的伤害减少8%（最多叠加10次）\\n坦克型：首领攻击力减少2%（最多叠加5次）\\n敏捷型：首领最大生命值1%固定伤害"
+    },
+    "icon": "MT_Passive_1_Singularity",
+    "effects": [
+      {
+        "family": "special",
+        "category": "buff",
+        "type": "BT_NONE",
+        "target": "me",
+        "buff": "Singularity_check",
+        "tooltip": "4089003"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "enemy_team_mage",
+        "buff": "singularity_passive_enemy_1_attacker",
+        "stat": "dmg_boost",
+        "mode": "up",
+        "label": "SYS_BUFF_DMG"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "singularity_passive_enemy_1_priest",
+        "stat": "dmg_reduce_rate",
+        "mode": "up",
+        "label": "SYS_BUFF_DMG_REDUCE_RATE_UP"
+      },
+      {
+        "family": "stat",
+        "category": "neutral",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "singularity_passive_enemy_1_deffender",
+        "stat": "atk",
+        "mode": "down",
+        "label": "SYS_BUFF_ATTACK_DOWN"
+      },
+      {
+        "family": "anti_heal",
+        "category": "neutral",
+        "type": "BT_REVERSE_HEAL_BASED_TARGET",
+        "target": "me",
+        "buff": "singularity_passive_enemy_1_ranger",
+        "stat": "hp",
+        "mode": "up"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "enemy_team_attacker",
+        "buff": "singularity_passive_enemy_1_mage",
+        "stat": "dmg_boost",
+        "mode": "up",
+        "label": "SYS_BUFF_DMG"
+      }
+    ]
   }
 }

@@ -5,6 +5,7 @@ import { localePath } from '@/lib/navigation';
 import { img } from '@/lib/images';
 import { formatGuideDate, guideUpdatedDate } from '@/lib/data/guides';
 import { SeasonBadge } from '@/components/guides/SeasonBadge';
+import { EmptyCategory } from './EmptyCategory';
 import type { CategoryViewProps } from './types';
 
 /**
@@ -19,6 +20,7 @@ import type { CategoryViewProps } from './types';
  */
 export default async function BannerGrid({ lang, guides }: CategoryViewProps) {
   const t = await getT(lang);
+  if (guides.length === 0) return <EmptyCategory lang={lang} />;
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {guides.map((guide) => (

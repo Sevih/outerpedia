@@ -6,6 +6,7 @@ import { img } from '@/lib/images';
 import { GUIDE_TIERS, GUIDE_TIER_KEYS } from '@/lib/data/guide-categories';
 import { formatGuideDate, guideUpdatedDate, type Guide } from '@/lib/data/guides';
 import type { Lang } from '@/lib/i18n/config';
+import { EmptyCategory } from './EmptyCategory';
 import type { CategoryViewProps } from './types';
 
 /**
@@ -19,6 +20,7 @@ import type { CategoryViewProps } from './types';
  */
 export default async function TieredList({ lang, guides }: CategoryViewProps) {
   const t = await getT(lang);
+  if (guides.length === 0) return <EmptyCategory lang={lang} />;
   const tiers = GUIDE_TIER_KEYS.map((key) => ({
     key,
     label: lRec(GUIDE_TIERS[key].label, lang),

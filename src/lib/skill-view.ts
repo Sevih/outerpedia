@@ -21,9 +21,13 @@ import monsterCuratedJson from '@data/curated/monster-skills.json';
 const G = glossariesData as unknown as Glossaries;
 /** Curation d'AFFICHAGE des kits monstres (cf. doc dans le fichier). Un buff
  * PARTAGÉ entre kits jumeaux peut lister plusieurs porteurs candidats — le
- * premier présent dans le kit l'emporte. */
+ * premier présent dans le kit l'emporte. `chipAdd` AJOUTE des chips (réfs
+ * tooltip du glossaire) à une carte : statuts décrits par la desc du skill
+ * mais appliqués hors kit (passifs de PALIER — l'Increased Penetration
+ * rang S+ décrite par Dimensional Rift vit dans les OptionID des rangs). */
 const MONSTER_CURATED = monsterCuratedJson as {
   chipOwner?: Record<string, string | string[]>;
+  chipAdd?: Record<string, string[]>;
 };
 
 /** Dédoublonne par id (les listes de skills des persos à formes en répètent). */
@@ -348,6 +352,12 @@ export function monsterSkillViews(skills: Skill[]): MonsterSkillView[] {
     if (enterMatch) {
       const finish = skills.find((t) => t.type === `rage_finish${enterMatch[1]}`);
       if (finish && !finish.name.en) effects = [...effects, ...chipsOf(finish)];
+    }
+    // Chips CURÉES en plus (chipAdd) : statuts décrits par la desc mais
+    // appliqués hors kit — seules les réfs résolubles passent.
+    for (const t of MONSTER_CURATED.chipAdd?.[s.id] ?? []) {
+      if (!getMergedEffect(G.effectByTooltip[t] ?? t)) continue;
+      effects = [...effects, { family: 'stat', category: 'buff', tooltip: t }];
     }
     const deduped = dedupList(effects);
     // Skill de PUR CÂBLAGE (ni nom, ni desc, ni chips — ex. un class_passive

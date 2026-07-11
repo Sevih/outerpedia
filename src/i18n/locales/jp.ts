@@ -568,16 +568,15 @@ const jp: Record<TranslationKey, string> = {
     '特異点昇華装置：強化と再鍛造が最大に達した装備を昇華する。昇華により装備のメインステータスが上昇し、再鍛造回数が+3される。さらに強化+15に到達するとランダムな追加ステータスが付与される（種類は装備スロットに依存、数値はランダム）。',
   'guides.singularity.info.feature.ranking':
     'ランキングレポート：前日のスコアに応じた日次報酬を受け取る。',
-  'guides.singularity.timer.next': '次のリセットまで {time}',
-  'guides.singularity.week.title': '今週の対象',
-  'guides.singularity.week.title_mobile': '本日の対象',
-  'guides.singularity.week.tagline': '週中ボス3体が水〜金に出現。週末ボスは土曜のみ。',
-  'guides.singularity.week.live': '開催中 · {dow}',
-  'guides.singularity.weekend.today': '週末ボス · 本日開催',
-  'guides.singularity.weekend.tomorrow': '週末ボス · 明日',
-  'guides.singularity.weekend.in_days': '週末ボス · あと{n}日',
-  'guides.singularity.day.weekly': '水〜金',
-  'guides.singularity.day.sat_only': '土曜のみ',
+  // Rotation : UN boss par jour (mer→sam), puis 3 jours de récompense.
+  // La V2 affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
+  'guides.singularity.week.title': '今週のボス',
+  'guides.singularity.week.tagline': '水曜から土曜まで、1日1体。対象は00:00 UTCに切り替わります。',
+  'guides.singularity.week.today': '本日',
+  'guides.singularity.next_week.title': '次のローテーション',
+  'guides.singularity.next_week.tagline':
+    '報酬期間 — 挑戦可能なボスはいません。次のローテーションは{date}に開始します。',
+  'guides.singularity.rotation': 'ローテーション{n}',
   'guides.singularity.library.title': 'ボス一覧',
   'guides.singularity.library.tagline':
     'ローテーション外でも、各ボスのガイドは常時アクセス可能です。',

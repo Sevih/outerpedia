@@ -1,4 +1,6 @@
 import { AcceptTargetButton } from '@/components/admin/AcceptTargetButton';
+import { IntegrateModeButton } from '@/components/admin/IntegrateModeButton';
+import { buildMonsterRows } from '@/lib/admin/monster-rows';
 import { reviewTarget, reviewTotals } from '@/lib/admin/review-store';
 
 export const dynamic = 'force-dynamic';
@@ -11,6 +13,7 @@ export const dynamic = 'force-dynamic';
 export default function ExtractorMonstersIndex() {
   const review = reviewTarget('monster');
   const total = reviewTotals(review.diff);
+  const { modeOptions } = buildMonsterRows();
 
   return (
     <div className="space-y-4">
@@ -51,6 +54,18 @@ export default function ExtractorMonstersIndex() {
           </p>
         </div>
       )}
+
+      <div className="border-line-subtle bg-surface-raised space-y-2 rounded-lg border p-4">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="text-content-strong text-sm font-medium">Enregistrer tout un mode</span>
+          <IntegrateModeButton modes={modeOptions} />
+        </div>
+        <p className="text-content-subtle text-xs">
+          Enregistre chaque monstre spawnant dans un donjon du mode (+ ses adds invoqués/liés) dans{' '}
+          <code>data/generated/</code> — même geste que « Enregistrer » d&apos;une fiche, en lot. À
+          committer via git.
+        </p>
+      </div>
 
       <p className="text-content-subtle text-sm">
         Sélectionne un monstre à gauche pour contrôler son extraction, l&apos;enregistrer ou le

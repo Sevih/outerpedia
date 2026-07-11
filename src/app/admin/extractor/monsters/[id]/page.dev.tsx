@@ -95,10 +95,16 @@ export default async function ExtractorMonsterPage({
   }));
   const skillLabels = { cooldown: 'CD', wgr: 'WGR', level: 'Lv.', enhancement: 'Enhancement' };
 
-  // Statuts des chips : ceux du kit + ceux des IMMUNITÉS — tooltips affichés en
-  // jeu ET types de mécanique (BT_STUN, BT_COOL_CHARGE, ST_ATK…) résolus via le
-  // glossaire d'effets ; seuls les irrésolus restent affichés bruts.
+  // Statuts des chips : ceux du kit + ceux des CARTES (chips curées en plus,
+  // ex. chipAdd) + ceux des IMMUNITÉS — tooltips affichés en jeu ET types de
+  // mécanique (BT_STUN, BT_COOL_CHARGE, ST_ATK…) résolus via le glossaire
+  // d'effets ; seuls les irrésolus restent affichés bruts.
   const statuses: StatusMap = buildStatusMap(skills, 'en');
+  mergeStatusEffects(
+    statuses,
+    cardSkills.flatMap((c) => c.effects ?? []),
+    'en',
+  );
   const { effects: immunityEffects, unresolved: unresolvedImmunities } = immunityChipEffects(m);
   mergeStatusEffects(statuses, immunityEffects, 'en');
 
@@ -289,6 +295,7 @@ export default async function ExtractorMonsterPage({
           scales={glossaries.statScales}
           spawns={statContexts}
           optionLabels={rankOptionLabels(statContexts.flatMap((c) => c.options ?? []))}
+          quirkMods={enc.bossQuirkMods}
         />
       </section>
 

@@ -594,6 +594,34 @@ export function buildAssetManifest(): AssetRequest[] {
     }
   }
 
+  // Boss de la ROTATION Dimensional Singularity : la vue de catégorie les
+  // affiche tous (bibliothèque), y compris ceux qu'aucun guide ne couvre encore
+  // — ils ne seraient donc jamais collectés par le bloc `bossId` ci-dessus.
+  // Collecte DATA-DRIVEN depuis `singularity.json`, sous le namespace boss
+  // EXISTANT et avec la même clé (`MT_<icon>`) : un boss déjà tiré par un guide
+  // ou par une source d'équipement n'est PAS stocké une seconde fois.
+  //
+  // On ne collecte PAS les sprites `MT_/T_Singularity_*` que porte la table :
+  // ce sont d'autres visuels du MÊME boss. La vignette de boss suffit, et un
+  // second visuel par boss serait exactement le doublon qu'on refuse.
+  {
+    const monsters = load('monsters.json') as Record<string, { icon?: string } | undefined>;
+    const rotation = load('singularity.json') as unknown as {
+      groups: { bosses: { monsters: string[] }[] }[];
+    };
+    const ids = new Set(rotation.groups.flatMap((g) => g.bosses.flatMap((b) => b.monsters)));
+    for (const id of ids) {
+      const icon = monsters[id]?.icon;
+      if (icon && !icon.startsWith('2'))
+        push({
+          kind: 'image',
+          key: `images/ui/boss/MT_${icon}.webp`,
+          candidates: [`MT_${icon}`],
+          domain: 'guides',
+        });
+    }
+  }
+
   // --- Éditorial (n'existe pas en jeu) : drapeaux + OG -----------------------
   for (const flag of ['gb', 'jp', 'kr', 'cn', 'fr'])
     push({
