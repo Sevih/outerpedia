@@ -5,9 +5,15 @@ export const dynamic = 'force-dynamic';
 
 /** Master-detail Extractor monstres : même UX que les personnages. */
 export default function ExtractorMonstersLayout({ children }: { children: React.ReactNode }) {
+  const { rows, modeOptions } = buildMonsterRows();
   return (
     <div className="flex gap-6">
-      <ExtractorSidebar rows={buildMonsterRows()} basePath="/admin/extractor/monsters" />
+      <ExtractorSidebar
+        rows={rows}
+        basePath="/admin/extractor/monsters"
+        toggles={[{ flag: 'site', label: 'Utilisés par le site', defaultOn: true }]}
+        tagFilter={{ allLabel: 'tous les modes', options: modeOptions }}
+      />
       <div className="min-w-0 flex-1">{children}</div>
     </div>
   );

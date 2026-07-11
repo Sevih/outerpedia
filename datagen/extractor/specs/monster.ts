@@ -21,7 +21,13 @@
  *     embarquée sur l'entité — un boss déplacé/re-niveauté = diff d'entité,
  *     donc revu, enregistré et versionné par les mêmes gestes que le reste ;
  *     les donjons référencés vivent dans `encounters.json`, les titres de
- *     modes dans `glossaries.modes`.
+ *     modes dans `glossaries.modes` ;
+ *   - `rage` : déclencheurs d'enrage RÉELS (`RageTemplet`, indexé par monstre) —
+ *     les descs des skills rage_enterN sont écrites pour UNE variante et
+ *     mentent sur les autres (422400671 : descs « 50 000 PV »/« 30 % » mais
+ *     déclencheurs réels 70 % puis 30 %). Le palier i correspond au jeu de
+ *     skills rage_enter/finish(i+1). Colonnes moteur ignorées : BreakBuffID,
+ *     ServiceTurnLimit*, ServiceChargeCp*.
  */
 import type { LangDict } from '../../lib/lang';
 import { resolveClass } from '../../lib/class';
@@ -37,6 +43,20 @@ import { runSpec } from '../core/runner';
 import type { ExtractorSpec } from '../core/spec';
 import type { Schema } from '../core/validate';
 import { extractStats, statRangeSchema, type StatRange } from './character';
+
+/** Un palier d'enrage : seuil (sens donné par `trigger`) + durée en tours. */
+export interface RageStep {
+  value: number;
+  duration?: number;
+}
+
+/** Enrage d'un boss (RageTemplet) — déclencheurs réels, par palier. */
+export interface MonsterRage {
+  /** hp_rate (‰ des PV max), lose_hp_value (PV perdus cumulés), turn_count. */
+  trigger: string;
+  /** Palier i ↔ skills rage_enter/finish(i+1). */
+  steps: RageStep[];
+}
 
 /** Un monstre (mob, élite, boss…) — source unique, skills référencés par id. */
 export interface Monster {
@@ -81,6 +101,8 @@ export interface Monster {
   summonedBy?: string[];
   /** Jamais spawné : lié au kit de ces monstres (réfs BuffToolTip structurelles). */
   linkedTo?: string[];
+  /** Déclencheurs d'enrage réels (RageTemplet) — cf. en-tête du fichier. */
+  rage?: MonsterRage;
 }
 
 /** Glossaire générique slug → libellé localisé. */
@@ -100,6 +122,8 @@ interface MonsterAux {
   glossaries: MonsterGlossaries;
   /** Rencontres (spawns/summonedBy/linkedTo par monstre) — mémoïsées. */
   enc: EncountersData;
+  /** Enrage par id de monstre (RageTemplet — même espace d'ids). */
+  rageById: Map<string, MonsterRage>;
 }
 
 /**
@@ -156,6 +180,24 @@ const monsterSchema: Schema = {
     },
     summonedBy: { kind: 'array', of: { kind: 'string' }, minItems: 1, optional: true },
     linkedTo: { kind: 'array', of: { kind: 'string' }, minItems: 1, optional: true },
+    rage: {
+      kind: 'object',
+      optional: true,
+      fields: {
+        trigger: { kind: 'string' },
+        steps: {
+          kind: 'array',
+          minItems: 1,
+          of: {
+            kind: 'object',
+            fields: {
+              value: { kind: 'number', min: 0 },
+              duration: { kind: 'number', int: true, min: 0, optional: true },
+            },
+          },
+        },
+      },
+    },
   },
 };
 
@@ -195,11 +237,29 @@ export const monsterSpec: ExtractorSpec<Monster, MonsterAux> = {
       }
     }
 
+    // Enrage : RageTemplet est indexé par id de monstre ; jusqu'à 2 paliers
+    // (TriggerValue1/2), chacun avec sa durée.
+    const rageById = new Map<string, MonsterRage>();
+    for (const r of loadTable('RageTemplet')) {
+      if (!r.ID || !r.TriggerType) continue;
+      const steps: RageStep[] = [];
+      for (const i of [1, 2] as const) {
+        const value = num(r[`TriggerValue${i}`]);
+        if (!value) continue;
+        const step: RageStep = { value };
+        const duration = num(r[`RageDuration${i}`]);
+        if (duration) step.duration = duration;
+        steps.push(step);
+      }
+      if (steps.length) rageById.set(r.ID, { trigger: slugEnum(r.TriggerType, 0), steps });
+    }
+
     return {
       tchar,
       classOf,
       glossaries: { elements, classes, subClasses },
       enc: buildEncounters(),
+      rageById,
     };
   },
 
@@ -239,6 +299,9 @@ export const monsterSpec: ExtractorSpec<Monster, MonsterAux> = {
     if (enc?.spawns.length) monster.spawns = enc.spawns;
     if (enc?.summonedBy?.length) monster.summonedBy = enc.summonedBy;
     if (enc?.linkedTo?.length) monster.linkedTo = enc.linkedTo;
+
+    const rage = aux.rageById.get(r.ID);
+    if (rage) monster.rage = rage;
 
     return monster;
   },

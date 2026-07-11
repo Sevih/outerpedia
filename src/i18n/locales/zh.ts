@@ -566,11 +566,10 @@ const zh: Record<TranslationKey, string> = {
   'guides.count.one': '{count} 攻略',
   'guides.count.many': '{count} 攻略',
 
-  // /guides/general-guides — 阶段式学习路径
-  'guides.general.tier.first-steps.label': '入门',
-  'guides.general.tier.pulls.label': '卡池 & 抽卡',
-  'guides.general.tier.economy.label': '资源 & 日常',
-  'guides.general.tier.heroes-gear.label': '角色 & 装备',
+  // Statut de saison d'un boss (cartes JC/WB/GR)
+  'guides.season.live': '进行中，至 {date}',
+  'guides.season.next': '{date} 回归',
+  'guides.season.last': '上次开放 {date}',
 
   'guides.tips.tactical': '战术提示',
   'guides.tips.strategy': '策略',

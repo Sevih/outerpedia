@@ -1,4 +1,11 @@
 {
-  "_doc": "Curation d'affichage des skills MONSTRES (lue par monsterSkillViews). chipOwner : buffId → skillId PORTEUR de la chip, pour les cas où les tables câblent un buff sur le mauvais skill du kit SANS aucun signal structurel (pas de réf [Buff_…] dans les descs, pas de CallerSkillType exploitable). N'affecte que la présentation — la donnée extraite reste fidèle aux tables. NB : les buffs BT_WG_* sont ignorés d'office côté monstres (pas de chip), inutile de les curer.",
-  "chipOwner": {}
+  "_doc": "Curation d'affichage des skills MONSTRES (lue par monsterSkillViews). chipOwner : buffId → skillId (ou LISTE de skillIds candidats — un buff partagé entre kits jumeaux liste les porteurs de chaque génération, le premier présent dans le kit l'emporte) PORTEUR de la chip, pour les cas où les tables câblent un buff sur le mauvais skill du kit SANS aucun signal structurel (pas de réf [Buff_…] dans les descs, pas de CallerSkillType exploitable). N'affecte que la présentation — la donnée extraite reste fidèle aux tables. NB : les buffs BT_WG_* sont ignorés d'office côté monstres (pas de chip), inutile de les curer.",
+  "_notes": {
+    "singularity": "Trio Urd/Verdandi/Skuld : les buffs de priorité (« After attacking, Priority increases by 15% », doublé sous Increased Defense) sont câblés sur monster_1 « Objective : Past Protection » mais décrits par « Factor : Absolute Fate » (900065 kits OLD, 900095 kit 60000013). La priorité post-berserk (Singularity_Rage_Action_guage, portée par tous les rage_enter du mode) est documentée par le passif partagé 910001 « Dimensional Rift » (« The boss monster's Priority increases after entering Berserk state »)."
+  },
+  "chipOwner": {
+    "Singularity_Passive_OLD_SS_1": ["900065", "900095"],
+    "Singularity_Passive_OLD_SS_2": ["900065", "900095"],
+    "Singularity_Rage_Action_guage": ["910001"]
+  }
 }

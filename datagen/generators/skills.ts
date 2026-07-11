@@ -211,8 +211,10 @@ export function buildSkills(): SkillData {
     // Groupes de priorité des buffs posés par ce skill (lien vers les buffs
     // « ambiants » conditionnés, cf. plus bas).
     const prioGroups = new Set<string>();
+    // Statuts que le jeu AFFICHE lui-même sur le skill (colonne BuffToolTip).
+    const levelTooltips = new Set(lvlRows.flatMap((r) => splitCsv(r.BuffToolTip ?? '')));
     for (const r of lvlRows) {
-      for (const { id: buffId, choice } of expandBuffIds(
+      for (const { id: buffId, choice, child } of expandBuffIds(
         splitCsv(r.BuffID ?? ''),
         buffs,
         groups,
@@ -221,6 +223,10 @@ export function buildSkills(): SkillData {
         if (seen.has(buffId)) continue;
         const row = buffRowAtLevel(buffs, buffId, maxLevel);
         if (!row) continue;
+        // Marqueur MOTEUR : `BT_NONE` enfant de groupe non listé par le jeu
+        // sur le skill — câblage pur, ToolTipID parfois recyclé d'un autre
+        // kit (même règle que monster-skills).
+        if (child && row.Type === 'BT_NONE' && !levelTooltips.has(row.ToolTipID ?? '')) continue;
         seen.add(buffId);
         if (row.PriorityGroup) prioGroups.add(row.PriorityGroup);
         const shape = effectShape(row);
@@ -257,10 +263,13 @@ export function buildSkills(): SkillData {
         const cond = row.BuffConditionType ?? '';
         if (cond !== 'OWNER_HAS_BUFF' && cond !== 'TARGET_HAS_BUFF') continue;
         if (!prioGroups.has(row.BuffConditionValue ?? '')) continue;
-        for (const { id: xid, choice } of expandBuffIds([buffId], buffs, groups, maxLevel)) {
+        for (const { id: xid, choice, child } of expandBuffIds([buffId], buffs, groups, maxLevel)) {
           if (seen.has(xid)) continue;
           const xrow = buffRowAtLevel(buffs, xid, maxLevel);
           if (!xrow) continue;
+          // Même filtre des marqueurs moteur que la boucle principale.
+          if (child && xrow.Type === 'BT_NONE' && !levelTooltips.has(xrow.ToolTipID ?? ''))
+            continue;
           seen.add(xid);
           const shape = effectShape(xrow);
           const key = `${shape.type}|${shape.stat ?? ''}`;

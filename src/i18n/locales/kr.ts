@@ -579,11 +579,10 @@ const kr: Record<TranslationKey, string> = {
   'guides.count.one': '가이드 {count}개',
   'guides.count.many': '가이드 {count}개',
 
-  // /guides/general-guides — 단계별 학습 코스
-  'guides.general.tier.first-steps.label': '첫 걸음',
-  'guides.general.tier.pulls.label': '배너 & 뽑기',
-  'guides.general.tier.economy.label': '자원 & 데일리 루틴',
-  'guides.general.tier.heroes-gear.label': '영웅 & 장비',
+  // Statut de saison d'un boss (cartes JC/WB/GR)
+  'guides.season.live': '{date}까지 진행 중',
+  'guides.season.next': '{date} 재개',
+  'guides.season.last': '지난 시즌 {date}',
 
   'guides.tips.tactical': '전술 팁',
   'guides.tips.strategy': '전략',

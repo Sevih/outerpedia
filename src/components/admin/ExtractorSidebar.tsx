@@ -21,6 +21,24 @@ export interface ExtractorRow {
   status?: 'new' | 'diff' | 'ok';
   /** Compteur d'écarts (diff extraction, issues V2…), affiché sur le badge. */
   count?: number;
+  /** Marqueurs booléens filtrables par `toggles` (« site »…). */
+  flags?: string[];
+  /** Étiquettes filtrables par `tagFilter` (slugs de mode de jeu…). */
+  tags?: string[];
+}
+
+/** Case à cocher de filtre : ne garde que les lignes portant `flag`. */
+export interface ToggleFilter {
+  flag: string;
+  label: string;
+  defaultOn?: boolean;
+}
+
+/** Filtre par étiquette (select) : ne garde que les lignes portant le tag choisi. */
+export interface TagFilter {
+  /** Libellé de l'option « toutes » (« tous les modes »). */
+  allLabel: string;
+  options: Array<{ value: string; label: string }>;
 }
 
 const FILTERS = ['all', 'diff', 'new', 'ok'] as const;
@@ -34,9 +52,25 @@ const MAX_RENDERED = 250;
  * filtres de statut, clic → fiche). Icônes servies par le staging ou par
  * `/api/admin/sprite/*` (sprites bruts du jeu) — masquées si absentes.
  */
-export function ExtractorSidebar({ rows, basePath }: { rows: ExtractorRow[]; basePath: string }) {
+export function ExtractorSidebar({
+  rows,
+  basePath,
+  toggles,
+  tagFilter,
+}: {
+  rows: ExtractorRow[];
+  basePath: string;
+  /** Cases à cocher de filtre par flag (« Utilisés par le site »…). */
+  toggles?: ToggleFilter[];
+  /** Filtre par étiquette (mode de jeu…). */
+  tagFilter?: TagFilter;
+}) {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<Filter>('all');
+  const [activeToggles, setActiveToggles] = useState<Set<string>>(
+    () => new Set((toggles ?? []).filter((t) => t.defaultOn).map((t) => t.flag)),
+  );
+  const [tag, setTag] = useState('');
   const pathname = usePathname();
 
   const hasStatus = rows.some((r) => r.status);
@@ -55,6 +89,8 @@ export function ExtractorSidebar({ rows, basePath }: { rows: ExtractorRow[]; bas
     const s = search.trim().toLowerCase();
     return rows
       .filter((r) => (filter === 'all' ? true : r.status === filter))
+      .filter((r) => [...activeToggles].every((f) => r.flags?.includes(f)))
+      .filter((r) => !tag || r.tags?.includes(tag))
       .filter(
         (r) =>
           !s ||
@@ -68,7 +104,7 @@ export function ExtractorSidebar({ rows, basePath }: { rows: ExtractorRow[]; bas
         if ((a.count ?? 0) !== (b.count ?? 0)) return (b.count ?? 0) - (a.count ?? 0);
         return a.id.localeCompare(b.id, undefined, { numeric: true });
       });
-  }, [rows, search, filter]);
+  }, [rows, search, filter, activeToggles, tag]);
 
   return (
     <aside className="border-line-subtle sticky top-6 flex h-[calc(100dvh-7.5rem)] w-72 shrink-0 flex-col self-start overflow-hidden rounded-lg border">
@@ -105,6 +141,39 @@ export function ExtractorSidebar({ rows, basePath }: { rows: ExtractorRow[]; bas
                 {f}
               </button>
             ))}
+          </div>
+        )}
+        {(toggles?.length || tagFilter) && (
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+            {(toggles ?? []).map((t) => (
+              <label key={t.flag} className="text-content-subtle flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  checked={activeToggles.has(t.flag)}
+                  onChange={(e) => {
+                    const next = new Set(activeToggles);
+                    if (e.target.checked) next.add(t.flag);
+                    else next.delete(t.flag);
+                    setActiveToggles(next);
+                  }}
+                />
+                {t.label}
+              </label>
+            ))}
+            {tagFilter && (
+              <select
+                value={tag}
+                onChange={(e) => setTag(e.target.value)}
+                className="border-line bg-surface-base text-content max-w-full rounded-md border px-1 py-0.5"
+              >
+                <option value="">{tagFilter.allLabel}</option>
+                {tagFilter.options.map((o) => (
+                  <option key={o.value} value={o.value}>
+                    {o.label}
+                  </option>
+                ))}
+              </select>
+            )}
           </div>
         )}
       </div>

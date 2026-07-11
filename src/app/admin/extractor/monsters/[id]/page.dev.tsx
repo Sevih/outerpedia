@@ -25,6 +25,8 @@ import {
   committedMonsters,
   freshEncounters,
   freshMonsters,
+  rankOptionLabels,
+  tooltipName,
 } from '@/lib/admin/monster-store';
 import { extractedMonsterBundle } from '@/lib/admin/review-store';
 
@@ -52,6 +54,25 @@ export default async function ExtractorMonsterPage({
     .map((sid) => (bundle?.skills[sid] ?? committedSkills[sid]) as Skill | undefined)
     .filter((s): s is Skill => Boolean(s));
 
+  // Déclencheur d'enrage RÉEL (`Monster.rage`, extrait de RageTemplet) : les
+  // descs des skills rage_enterN sont écrites pour UNE variante du boss et
+  // mentent sur les autres (422400671 : desc « 50 000 PV », réel 70 % PV) —
+  // le palier i correspond à rage_enter(i+1).
+  const rageLabel = (type: string): string | undefined => {
+    const n = /^rage_enter(\d*)$/.exec(type);
+    const step = n && m.rage?.steps[Number(n[1] || '1') - 1];
+    if (!step) return undefined;
+    const at =
+      m.rage!.trigger === 'hp_rate'
+        ? `à ${step.value / 10}% PV`
+        : m.rage!.trigger === 'lose_hp_value'
+          ? `tous les ${step.value.toLocaleString('en-US')} PV perdus`
+          : m.rage!.trigger === 'turn_count'
+            ? `au tour ${step.value}`
+            : `${m.rage!.trigger} ${step.value}`;
+    return step.duration ? `${at} · ${step.duration} tours` : at;
+  };
+
   // Skills pré-localisés (EN), MÊME rendu que les persos — vue « kit » monstre
   // (chips réattribuées par réf de desc, enrage fusionné). Icônes = sprites
   // bruts (les icônes de skills monstres ne sont pas dans le staging).
@@ -61,7 +82,7 @@ export default async function ExtractorMonsterPage({
     desc: s.desc ? lRec(s.desc, 'en') : undefined,
     icon: s.icon,
     iconSrc: s.icon ? `/api/admin/sprite/${encodeURIComponent(s.icon)}` : undefined,
-    typeLabel: s.type,
+    typeLabel: [s.type, rageLabel(s.type)].filter(Boolean).join(' — '),
     targetLabel: [s.target, s.range].filter(Boolean).join(' · ') || undefined,
     maxLevel: s.maxLevel,
     levels: s.levels.map((l) => ({
@@ -81,11 +102,7 @@ export default async function ExtractorMonsterPage({
   const { effects: immunityEffects, unresolved: unresolvedImmunities } = immunityChipEffects(m);
   mergeStatusEffects(statuses, immunityEffects, 'en');
 
-  // Doublons de nom = boss DIFFÉRENTS (modes/stages) : signalés pour lever l'ambiguïté.
   const allFresh = freshMonsters();
-  const sameName = Object.values(allFresh).filter(
-    (x) => x.id !== m.id && x.name.en && x.name.en === m.name.en,
-  );
 
   // Rencontres : où (mode/donjon/aire), à quel niveau — champs DE l'entité
   // (spawns/summonedBy/linkedTo), les donjons résolus via encounters.json
@@ -98,6 +115,19 @@ export default async function ExtractorMonsterPage({
     .filter((s) => s.ref)
     .sort((a, b) => a.level - b.level);
   const modeLabel = (mode: string) => enc.modes[mode]?.en ?? mode;
+  // Contextes de stats : une rencontre réelle par spawn, dépliée par palier.
+  const statContexts = spawns.flatMap((s) =>
+    expandRankContexts(
+      {
+        level: s.level,
+        label: `${modeLabel(s.ref!.mode)} · ${s.ref!.name.en || s.dungeon}`,
+        adv: s.ref!.adv,
+        bossHp: s.ref!.bossHp,
+        ...(s.hpLines ? { hpLines: s.hpLines } : {}),
+      },
+      s.ref!.ranks,
+    ),
+  );
   const summoners = (m.summonedBy ?? []).map((sid) => ({ id: sid, m: allFresh[sid] }));
   const linked = (m.linkedTo ?? []).map((sid) => ({ id: sid, m: allFresh[sid] }));
   const summons = Object.values(allFresh)
@@ -137,24 +167,6 @@ export default async function ExtractorMonsterPage({
             <span className="text-warn ml-2">absent de l’extraction fraîche (retenu committé)</span>
           )}
         </p>
-        {sameName.length > 0 && (
-          <p className="text-content-subtle text-xs">
-            ⚠ {sameName.length} autre(s) monstre(s) distinct(s) portent ce nom :{' '}
-            {sameName.slice(0, 8).map((x, i) => (
-              <span key={x.id}>
-                {i > 0 && ', '}
-                <Link
-                  href={`/admin/extractor/monsters/${x.id}` as Route}
-                  className="font-mono hover:underline"
-                >
-                  {x.id}
-                </Link>{' '}
-                ({x.type}/{x.element})
-              </span>
-            ))}
-            {sameName.length > 8 && ', …'}
-          </p>
-        )}
       </div>
 
       {review.status === 'changed' && <EntityDiffPanel fields={review.fields} />}
@@ -270,23 +282,13 @@ export default async function ExtractorMonsterPage({
 
       <section className="space-y-2">
         <h2 className="text-content-strong text-xs font-semibold uppercase">
-          Stats à la rencontre (min@1 → max@100 extrapolé, × modificateurs du donjon)
+          Stats à la rencontre
         </h2>
         <MonsterStatsCard
           stats={m.stats}
           scales={glossaries.statScales}
-          spawns={spawns.flatMap((s) =>
-            expandRankContexts(
-              {
-                level: s.level,
-                label: `${modeLabel(s.ref!.mode)} · ${s.ref!.name.en || s.dungeon}`,
-                adv: s.ref!.adv,
-                bossHp: s.ref!.bossHp,
-                ...(s.hpLines ? { hpLines: s.hpLines } : {}),
-              },
-              s.ref!.ranks,
-            ),
-          )}
+          spawns={statContexts}
+          optionLabels={rankOptionLabels(statContexts.flatMap((c) => c.options ?? []))}
         />
       </section>
 
@@ -298,7 +300,13 @@ export default async function ExtractorMonsterPage({
           )}
           {unresolvedImmunities.length > 0 && (
             <p className="text-content-subtle text-xs">
-              ⚠ sans entrée au glossaire d’effets : {unresolvedImmunities.join(', ')}
+              ⚠ sans entrée au glossaire d’effets :{' '}
+              {unresolvedImmunities
+                .map((ref) => {
+                  const name = /^\d+$/.test(ref) ? tooltipName(ref) : undefined;
+                  return name ? `${ref} « ${name} »` : ref;
+                })
+                .join(', ')}
             </p>
           )}
         </section>

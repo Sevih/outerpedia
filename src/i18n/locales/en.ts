@@ -594,11 +594,10 @@ const en = {
   'guides.count.one': '{count} GUIDE',
   'guides.count.many': '{count} GUIDES',
 
-  // /guides/general-guides — tiered curriculum
-  'guides.general.tier.first-steps.label': 'First Steps',
-  'guides.general.tier.pulls.label': 'Banners & Pulls',
-  'guides.general.tier.economy.label': 'Resources & Daily Loop',
-  'guides.general.tier.heroes-gear.label': 'Heroes & Gear',
+  // Statut de saison d'un boss (cartes JC/WB/GR) — jointure par monstre combattu
+  'guides.season.live': 'Live until {date}',
+  'guides.season.next': 'Returns {date}',
+  'guides.season.last': 'Last season {date}',
 
   'guides.tips.tactical': 'Tactical Tips',
   'guides.tips.strategy': 'Strategy',

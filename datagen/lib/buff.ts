@@ -272,10 +272,12 @@ export function loadBuffGroups(): Map<string, BuffGroup> {
   return out;
 }
 
-/** Id de buff expansé + provenance (enfant d'un groupe à tirage aléatoire ?). */
+/** Id de buff expansé + provenance (enfant d'un groupe ? à tirage aléatoire ?). */
 export interface ExpandedBuff {
   id: string;
   choice?: boolean;
+  /** Enfant d'un groupe (vs buff câblé directement sur le skill). */
+  child?: boolean;
 }
 
 /** Ids de buffs d'un niveau, groupes `BT_GROUP` expansés en leurs enfants (id parent conservé). */
@@ -293,7 +295,11 @@ export function expandBuffIds(
       const g = groups.get(row.Value ?? '');
       if (!g) continue;
       const choice = !g.all && g.kids.length > 1;
-      for (const child of g.kids) out.push(choice ? { id: child, choice } : { id: child });
+      for (const kid of g.kids) {
+        const x: ExpandedBuff = { id: kid, child: true };
+        if (choice) x.choice = true;
+        out.push(x);
+      }
     }
   }
   return out;

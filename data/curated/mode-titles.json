@@ -1,0 +1,7 @@
+{
+  "_doc": "Titres de modes CURÉS : slug de DungeonMode → CLÉ TextSystem du titre officiel (jamais de texte écrit main — la localisation vient du jeu). Ne curer que les échecs du résolveur automatique de generators/encounters (il ne peut pas deviner que DM_MONAD_BATTLE_2 = la Singularité).",
+  "titles": {
+    "monad_battle_1": "SYS_MONAD_GATE",
+    "monad_battle_2": "SYS_SINGULARITY_MAIN_TITLE"
+  }
+}

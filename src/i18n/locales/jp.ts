@@ -586,11 +586,10 @@ const jp: Record<TranslationKey, string> = {
   'guides.count.one': 'ガイド{count}件',
   'guides.count.many': 'ガイド{count}件',
 
-  // /guides/general-guides — 段階別カリキュラム
-  'guides.general.tier.first-steps.label': '最初のステップ',
-  'guides.general.tier.pulls.label': 'バナー & ガチャ',
-  'guides.general.tier.economy.label': 'リソース & デイリー',
-  'guides.general.tier.heroes-gear.label': 'ヒーロー & 装備',
+  // Statut de saison d'un boss (cartes JC/WB/GR)
+  'guides.season.live': '{date}まで開催中',
+  'guides.season.next': '{date}に再開催',
+  'guides.season.last': '前回開催 {date}',
 
   'guides.tips.tactical': '戦術のヒント',
   'guides.tips.strategy': '戦略',

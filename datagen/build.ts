@@ -29,6 +29,9 @@ import type {
   TranscendFile,
 } from './contracts';
 import { buildEncounters } from './generators/encounters';
+import { buildSingularity } from './generators/singularity';
+import { buildTowers } from './generators/towers';
+import { buildContentSchedule } from './generators/content-schedule';
 import { buildCharacters } from './extractor/specs/character';
 import { buildMonsters } from './extractor/specs/monster';
 import { buildMonsterSkills } from './generators/monster-skills';
@@ -146,6 +149,11 @@ function main(): void {
   writeJson('glossaries.json', glossaries);
   // Conditions de déblocage des contenus (guide « Unlocking Content »).
   writeJson('unlock-content.json', buildUnlockContent());
+  // Rotation Monad Gate (groupes + cadence ; ancre curée), compositions des
+  // tours et calendrier des contenus saisonniers — cf. en-têtes des générateurs.
+  writeJson('singularity.json', buildSingularity());
+  writeJson('towers.json', buildTowers());
+  writeJson('content-schedule.json', buildContentSchedule());
   const gameVersion = buildGameVersion();
   if (gameVersion) writeJson('game-version.json', gameVersion);
 

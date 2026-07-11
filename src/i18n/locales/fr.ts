@@ -607,11 +607,10 @@ const fr: Record<TranslationKey, string> = {
   'guides.count.one': '{count} GUIDE',
   'guides.count.many': '{count} GUIDES',
 
-  // /guides/general-guides — parcours pédagogique en paliers
-  'guides.general.tier.first-steps.label': 'Premiers pas',
-  'guides.general.tier.pulls.label': 'Bannières & pulls',
-  'guides.general.tier.economy.label': 'Ressources & routine quotidienne',
-  'guides.general.tier.heroes-gear.label': 'Héros & gear',
+  // Statut de saison d'un boss (cartes JC/WB/GR)
+  'guides.season.live': 'En cours jusqu’au {date}',
+  'guides.season.next': 'Retour le {date}',
+  'guides.season.last': 'Dernière saison {date}',
 
   'guides.tips.tactical': 'Conseils tactiques',
   'guides.tips.strategy': 'Stratégie',

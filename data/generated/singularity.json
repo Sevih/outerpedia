@@ -1,0 +1,283 @@
+{
+  "schedule": {
+    "startDow": "wed",
+    "battleDays": 4,
+    "rewardDays": 3,
+    "anchor": {
+      "date": "2026-05-20",
+      "group": 3
+    }
+  },
+  "groups": [
+    {
+      "id": 1,
+      "name": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点"
+      },
+      "desc": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点"
+      },
+      "bosses": [
+        {
+          "order": 0,
+          "dungeon": "75000108",
+          "monsters": ["60000008"],
+          "thumbnail": "MT_Singularity_4038004",
+          "banner": "T_Singularity_4038004"
+        },
+        {
+          "order": 1,
+          "dungeon": "75000105",
+          "monsters": ["60000005"],
+          "thumbnail": "MT_Singularity_4086020",
+          "banner": "T_Singularity_4086020"
+        },
+        {
+          "order": 2,
+          "dungeon": "75000102",
+          "monsters": ["60000002"],
+          "thumbnail": "MT_Singularity_4076011",
+          "banner": "T_Singularity_4076011"
+        },
+        {
+          "order": 3,
+          "dungeon": "75000110",
+          "monsters": ["60000010"],
+          "thumbnail": "MT_Singularity_4004006",
+          "banner": "T_Singularity_4004006"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点"
+      },
+      "desc": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点"
+      },
+      "bosses": [
+        {
+          "order": 0,
+          "dungeon": "75000109",
+          "monsters": ["60000009"],
+          "thumbnail": "MT_Singularity_4024002",
+          "banner": "T_Singularity_4024002"
+        },
+        {
+          "order": 1,
+          "dungeon": "75000106",
+          "monsters": ["60000006"],
+          "thumbnail": "MT_Singularity_4044008",
+          "banner": "T_Singularity_4044008"
+        },
+        {
+          "order": 2,
+          "dungeon": "75000103",
+          "monsters": ["60000003"],
+          "thumbnail": "MT_Singularity_4076002",
+          "banner": "T_Singularity_4076002"
+        },
+        {
+          "order": 3,
+          "dungeon": "75000114",
+          "monsters": ["60000014"],
+          "thumbnail": "MT_Singularity_4004008",
+          "banner": "T_Singularity_4004008"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点"
+      },
+      "desc": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点"
+      },
+      "bosses": [
+        {
+          "order": 0,
+          "dungeon": "75000108",
+          "monsters": ["60000008"],
+          "thumbnail": "MT_Singularity_4038004",
+          "banner": "T_Singularity_4038004"
+        },
+        {
+          "order": 1,
+          "dungeon": "75000105",
+          "monsters": ["60000005"],
+          "thumbnail": "MT_Singularity_4086020",
+          "banner": "T_Singularity_4086020"
+        },
+        {
+          "order": 2,
+          "dungeon": "75000101",
+          "monsters": ["60000001"],
+          "thumbnail": "MT_Singularity_4014005",
+          "banner": "T_Singularity_4014005"
+        },
+        {
+          "order": 3,
+          "dungeon": "75000112",
+          "monsters": ["60000012"],
+          "thumbnail": "MT_Singularity_4004007",
+          "banner": "T_Singularity_4004007"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点"
+      },
+      "desc": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点"
+      },
+      "bosses": [
+        {
+          "order": 0,
+          "dungeon": "75000109",
+          "monsters": ["60000009"],
+          "thumbnail": "MT_Singularity_4024002",
+          "banner": "T_Singularity_4024002"
+        },
+        {
+          "order": 1,
+          "dungeon": "75000106",
+          "monsters": ["60000006"],
+          "thumbnail": "MT_Singularity_4044008",
+          "banner": "T_Singularity_4044008"
+        },
+        {
+          "order": 2,
+          "dungeon": "75000102",
+          "monsters": ["60000002"],
+          "thumbnail": "MT_Singularity_4076011",
+          "banner": "T_Singularity_4076011"
+        },
+        {
+          "order": 3,
+          "dungeon": "75000113",
+          "monsters": ["60000013"],
+          "thumbnail": "MT_Singularity_4004006",
+          "banner": "T_Singularity_4004006"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点"
+      },
+      "desc": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点"
+      },
+      "bosses": [
+        {
+          "order": 0,
+          "dungeon": "75000108",
+          "monsters": ["60000008"],
+          "thumbnail": "MT_Singularity_4038004",
+          "banner": "T_Singularity_4038004"
+        },
+        {
+          "order": 1,
+          "dungeon": "75000105",
+          "monsters": ["60000005"],
+          "thumbnail": "MT_Singularity_4086020",
+          "banner": "T_Singularity_4086020"
+        },
+        {
+          "order": 2,
+          "dungeon": "75000101",
+          "monsters": ["60000001"],
+          "thumbnail": "MT_Singularity_4014005",
+          "banner": "T_Singularity_4014005"
+        },
+        {
+          "order": 3,
+          "dungeon": "75000111",
+          "monsters": ["60000011"],
+          "thumbnail": "MT_Singularity_4004008",
+          "banner": "T_Singularity_4004008"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点"
+      },
+      "desc": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点"
+      },
+      "bosses": [
+        {
+          "order": 0,
+          "dungeon": "75000109",
+          "monsters": ["60000009"],
+          "thumbnail": "MT_Singularity_4024002",
+          "banner": "T_Singularity_4024002"
+        },
+        {
+          "order": 1,
+          "dungeon": "75000106",
+          "monsters": ["60000006"],
+          "thumbnail": "MT_Singularity_4044008",
+          "banner": "T_Singularity_4044008"
+        },
+        {
+          "order": 2,
+          "dungeon": "75000103",
+          "monsters": ["60000003"],
+          "thumbnail": "MT_Singularity_4076002",
+          "banner": "T_Singularity_4076002"
+        },
+        {
+          "order": 3,
+          "dungeon": "75000115",
+          "monsters": ["60000015"],
+          "thumbnail": "MT_Singularity_4004007",
+          "banner": "T_Singularity_4004007"
+        }
+      ]
+    }
+  ]
+}

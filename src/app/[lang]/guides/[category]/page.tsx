@@ -18,8 +18,8 @@ import {
   GUIDE_CATEGORY_SLUGS,
   isGuideCategory,
 } from '@/lib/data/guide-categories';
-import { formatGuideDate, guideUpdatedDate, listGuidesByCategory } from '@/lib/data/guides';
-import { GuideCard } from '@/components/guides/GuideCard';
+import { listGuidesByCategory } from '@/lib/data/guides';
+import CategoryView from '@/components/guides/category-views';
 
 export function generateStaticParams() {
   return LANGS.flatMap((lang) => GUIDE_CATEGORY_SLUGS.map((category) => ({ lang, category })));
@@ -97,16 +97,7 @@ export default async function GuideCategoryPage({
       {guides.length === 0 ? (
         <p className="text-content-muted text-sm">{t('page.guides.empty_category')}</p>
       ) : (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {guides.map((g) => (
-            <GuideCard
-              key={g.slug}
-              guide={g}
-              lang={lang}
-              updatedText={`${t('page.guide.updated', { date: formatGuideDate(guideUpdatedDate(g), lang) })} · ${g.author}`}
-            />
-          ))}
-        </div>
+        <CategoryView lang={lang} category={category} guides={guides} />
       )}
     </div>
   );

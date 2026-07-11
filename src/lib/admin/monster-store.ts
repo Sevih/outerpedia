@@ -13,7 +13,17 @@ import {
   type DungeonRef,
   type EncountersData,
 } from '@datagen/generators/encounters';
+import { buildContentSchedule } from '@datagen/generators/content-schedule';
+import { buildSingularity } from '@datagen/generators/singularity';
+import { buildTowers } from '@datagen/generators/towers';
+import { buildItemSources } from '@datagen/generators/sources';
+import { curatedBossIds, loadEquipmentCurated } from '@datagen/curated/equipment';
+import { loadBuffIndex } from '@datagen/lib/buff';
+import { statSlug } from '@datagen/lib/effects';
+import { loadTable, num } from '@datagen/lib/tables';
+import { loadTextIndex, resolveText } from '@datagen/lib/text';
 import type { Skill } from '@datagen/generators/skills';
+import { statAbbr } from '@/lib/stats';
 
 export type { DungeonRef, EncountersData, Monster, Skill };
 
@@ -47,4 +57,144 @@ export function committedMonsterSkills(): Record<string, Skill> {
  */
 export function committedEncounters(): Record<string, DungeonRef> {
   return readGenerated<Record<string, DungeonRef>>('encounters.json') ?? {};
+}
+
+let siteIdsCache: Set<string> | undefined;
+
+/**
+ * Modes de contenu que le SITE ne documente pas par monstre : le narratif
+ * (story/side/tutoriel) et l'événementiel rotatif sans page dédiée — leur
+ * bruit (3 000+ mobs) est exclu du filtre « Utilisés par le site ». Décision
+ * ÉDITORIALE (pas une donnée du jeu) ; tout NOUVEAU mode est inclus d'office.
+ */
+const NON_SITE_MODES = new Set([
+  'normal', // story principale
+  'adventure_mission', // missions de story
+  'sidestory',
+  'tutorial',
+  'event', // stages d'événements rotatifs
+  'event_challenge', // rank challenge d'événements rotatifs
+  'ivanez_dungeon', // Mirsha Festival (événement)
+]);
+
+/**
+ * Monstres UTILISÉS PAR LE SITE :
+ *   - réfs directes des données servies — content-schedule (world boss, guild
+ *     raid main+sub, joint challenge), singularity, towers, boss d'obtention
+ *     d'équipement (sources + curé) — et leurs donjons ;
+ *   - tout monstre spawnant dans un mode NON exclu (cf. `NON_SITE_MODES`) ;
+ *   - les ADDS rattachés (`summonedBy`/`linkedTo` vers un monstre utilisé).
+ */
+export function siteMonsterIds(): Set<string> {
+  if (siteIdsCache) return siteIdsCache;
+  const ids = new Set<string>();
+  const dungeons = new Set<string>();
+
+  const schedule = buildContentSchedule();
+  for (const s of schedule.worldBoss) {
+    if (s.boss) ids.add(s.boss);
+    for (const m of s.monsters) ids.add(m);
+    for (const d of s.dungeons) dungeons.add(d);
+  }
+  for (const s of schedule.guildRaid) {
+    for (const b of s.bosses) {
+      for (const m of b.monsters) ids.add(m);
+      for (const d of b.dungeons) dungeons.add(d);
+    }
+  }
+  for (const s of schedule.jointChallenge) {
+    if (s.boss) ids.add(s.boss);
+    for (const d of s.dungeons) dungeons.add(d);
+  }
+  for (const g of buildSingularity().groups) {
+    for (const b of g.bosses) {
+      for (const m of b.monsters) ids.add(m);
+      dungeons.add(b.dungeon);
+    }
+  }
+  for (const t of Object.values(buildTowers())) {
+    for (const f of t.floors) {
+      dungeons.add(f.dungeon);
+      // `waves` (successives) ou `encounters` (pool aléatoire de la very hard).
+      for (const w of [...(f.waves ?? []), ...(f.encounters ?? [])])
+        for (const u of w) ids.add(u.id);
+    }
+  }
+
+  // Boss d'obtention d'équipement (equipment/bosses.json : sources extraites
+  // + complément curé) — donjons quotidiens, Special Request, licences…
+  for (const s of Object.values(buildItemSources().items)) for (const b of s.bosses) ids.add(b);
+  for (const b of curatedBossIds(loadEquipmentCurated())) ids.add(b);
+
+  const monsters = freshMonsters();
+  const enc = buildEncounters();
+  for (const m of Object.values(monsters)) {
+    const spawns = m.spawns ?? [];
+    if (spawns.some((s) => dungeons.has(s.dungeon))) ids.add(m.id);
+    if (spawns.some((s) => !NON_SITE_MODES.has(enc.dungeons[s.dungeon]?.mode ?? ''))) {
+      ids.add(m.id);
+    }
+  }
+  // Adds : rattachés à un monstre utilisé (invocateur ou boss lié).
+  for (const m of Object.values(monsters)) {
+    if (ids.has(m.id)) continue;
+    const anchors = [...(m.summonedBy ?? []), ...(m.linkedTo ?? [])];
+    if (anchors.some((a) => ids.has(a))) ids.add(m.id);
+  }
+
+  siteIdsCache = ids;
+  return ids;
+}
+
+/**
+ * Libellés HUMAINS des passifs de palier (`DungeonRank.options` — OptionID des
+ * modes à rangs, ex. Singularity) : chaque id est un BUFF de BuffTemplet.
+ * Résolution structurelle, dans l'ordre : nom du tooltip du buff (« Increased
+ * Penetration », + marque irremovable via IsIgnoreInterruption) → abréviation
+ * de la stat visée (« DMG UP ») → slug du type (« dmg reduce final »). Valeur
+ * per-mille affichée en % (signe porté par le libellé/le mode down).
+ */
+export function rankOptionLabels(ids: Iterable<string>): Record<string, string> {
+  const buffs = loadBuffIndex();
+  const out: Record<string, string> = {};
+  for (const id of ids) {
+    if (out[id]) continue;
+    const r = buffs.get(id)?.[0];
+    if (!r) continue;
+    const name = r.ToolTipID ? tooltipName(r.ToolTipID) : undefined;
+    const stat = statSlug(r.StatType);
+    const label =
+      name ??
+      (stat
+        ? statAbbr(stat).replace(/%$/, '')
+        : (r.Type ?? '').replace(/^BT_/, '').replaceAll('_', ' ').toLowerCase());
+    const irremovable = r.IsIgnoreInterruption === 'True' && name ? ' (irremovable)' : '';
+    const v = num(r.Value);
+    // Signe seulement quand le libellé ne porte pas le sens (stat/tooltip) ;
+    // les types « … reduce … » disent déjà la direction.
+    const signed = Boolean(name || stat);
+    const value = v ? ` ${signed && v > 0 ? '+' : ''}${v / 10}%` : '';
+    out[id] = `${label}${irremovable}${value}`;
+  }
+  return out;
+}
+
+let tooltipNamesCache: Map<string, string> | undefined;
+
+/**
+ * Nom EN d'un tooltip du jeu (`BuffToolTipTemplet`) — pour rendre LISIBLE une
+ * réf d'immunité sans entrée au glossaire d'effets (« 64 » seul ne dit rien).
+ */
+export function tooltipName(id: string): string | undefined {
+  if (!tooltipNamesCache) {
+    const sys = loadTextIndex('TextSystem');
+    const skill = loadTextIndex('TextSkill');
+    tooltipNamesCache = new Map();
+    for (const r of loadTable('BuffToolTipTemplet')) {
+      if (!r.ID || !r.NameID) continue;
+      const name = resolveText(sys, r.NameID).en || resolveText(skill, r.NameID).en;
+      if (name) tooltipNamesCache.set(r.ID, name);
+    }
+  }
+  return tooltipNamesCache.get(id);
 }

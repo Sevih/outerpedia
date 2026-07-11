@@ -11,7 +11,8 @@
  * Chaîne de jointure UNIVERSELLE (vaut pour tous les modes — vérifiée sur
  * guild raid / story / joint challenge, cf. investigation 2026-07-10) :
  *
- *   DungeonTemplet.SpawnID_Pos0..2  (= GroupID)
+ *   DungeonTemplet.SpawnID_Pos0..2  (= GroupID — CSV possible, courant dans
+ *     les tours : « 401010011, 401010012 »)
  *     → DungeonSpawnTemplet.ID0..ID3 (ids de monstres, CSV possible)
  *       + Level0..3 (LE niveau réel du monstre — jamais RecommandLevel)
  *   DungeonTemplet.DungeonMode (type de contenu) · NameID (titre du stage,
@@ -29,10 +30,12 @@
  * premier mot — « Deformed Inferior Core » ↔ « summons an Inferior Core »).
  * Sa localisation affichable = celle de ses invocateurs.
  */
+import { existsSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import type { LangDict } from '../lib/lang';
 import { slugEnum } from '../lib/enums';
 import { loadTextIndex, resolveText } from '../lib/text';
-import { groupBy, loadTable, num, splitCsv } from '../lib/tables';
+import { groupBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
 
 /**
  * Modificateurs de stats du DONJON (per-mille SIGNÉS, colonnes
@@ -249,6 +252,38 @@ function resolveModeTitle(
 }
 
 /**
+ * Groupes de spawn d'un donjon (colonnes `SpawnID_Pos0..2`). Chaque position
+ * peut porter un CSV de GroupID (« 401010011, 401010012 » — 95 donjons, dont
+ * 30 étages de tours) : toujours passer par ici, jamais lire les colonnes
+ * brutes, sinon ces groupes sont silencieusement perdus.
+ */
+export function spawnGroupIds(d: Row): string[] {
+  return [d.SpawnID_Pos0, d.SpawnID_Pos1, d.SpawnID_Pos2].flatMap((v) => splitCsv(v));
+}
+
+/** Remplit le placeholder `{0}` d'un titre, dans toutes les langues. */
+function fillPlaceholder(dict: LangDict, v: number | string): LangDict {
+  const out = { ...dict };
+  for (const lang of Object.keys(out) as Array<keyof LangDict>) {
+    out[lang] = (out[lang] ?? '').replaceAll('{0}', String(v));
+  }
+  return out;
+}
+
+/**
+ * Retire le segment parenthésé d'un `{0}` jamais rempli — donjons annexes du
+ * guild raid (70501011/12 : entraînement) SANS ligne de grade : le jeu n'a
+ * aucun numéro à y mettre, « Guardian… (Stage {0}) » → « Guardian… ».
+ */
+function stripUnfilledPlaceholder(dict: LangDict): LangDict {
+  const out = { ...dict };
+  for (const lang of Object.keys(out) as Array<keyof LangDict>) {
+    out[lang] = (out[lang] ?? '').replace(/\s*[(（][^()（）]*\{0\}[^()（）]*[)）]/g, '').trim();
+  }
+  return out;
+}
+
+/**
  * Mémoïsé : appelé par la spec monstre (chaque monstre embarque ses spawns),
  * l'orchestrateur (dictionnaires modes/donjons) et l'admin — même processus,
  * mêmes tables (elles-mêmes cachées par `loadTable`).
@@ -267,19 +302,45 @@ export function buildEncounters(): EncountersData {
   const dungeons: Record<string, DungeonRef> = {};
   const monsters: Record<string, MonsterEncounters> = {};
 
-  // Index des clés TextSystem en forme normalisée + titres de ContentLock.
+  // Index des clés TextSystem en forme normalisée + titres de ContentLock
+  // (débarrassés d'éventuels crochets décoratifs : « [Monad Gate] »).
   const keysByNorm = new Map<string, string>();
   for (const k of tsys.keys()) if (!keysByNorm.has(normKey(k))) keysByNorm.set(normKey(k), k);
+  const stripBrackets = (t: LangDict): LangDict => {
+    const out = { ...t };
+    for (const lang of Object.keys(out) as Array<keyof LangDict>) {
+      const m = /^\[(.+)\]$/.exec(out[lang] ?? '');
+      if (m) out[lang] = m[1];
+    }
+    return out;
+  };
   const contentTitles: Array<{ norm: string; tokens: string[]; text: LangDict }> = [];
   for (const c of loadTable('ContentLockTemplet')) {
     if (!c.ContentType || !c.TextID || c.TextID === '0') continue;
     const text = resolveText(tsys, c.TextID);
     if (!text.en) continue;
-    contentTitles.push({ norm: normKey(c.ContentType), tokens: c.ContentType.split('_'), text });
+    contentTitles.push({
+      norm: normKey(c.ContentType),
+      tokens: c.ContentType.split('_'),
+      text: stripBrackets(text),
+    });
+  }
+
+  // Titres CURÉS (slug → clé TextSystem, cf. data/curated/mode-titles.json) :
+  // prioritaires — décision humaine pour les échecs du résolveur automatique
+  // (rien ne relie DM_MONAD_BATTLE_2 à « Dimensional Singularity » dans les
+  // tables). Les textes restent ceux du jeu (clé, jamais de texte main).
+  const curatedTitles: Record<string, string> = {};
+  const curatedPath = resolve('data/curated/mode-titles.json');
+  if (existsSync(curatedPath)) {
+    const curated = JSON.parse(readFileSync(curatedPath, 'utf8')) as {
+      titles?: Record<string, string>;
+    };
+    Object.assign(curatedTitles, curated.titles ?? {});
   }
 
   for (const d of loadTable('DungeonTemplet')) {
-    const groupIds = [d.SpawnID_Pos0, d.SpawnID_Pos1, d.SpawnID_Pos2].filter(Boolean);
+    const groupIds = spawnGroupIds(d);
     if (!groupIds.length) continue;
 
     // Monstres du donjon, dédupliqués par (monstre, niveau) — plusieurs waves
@@ -304,7 +365,11 @@ export function buildEncounters(): EncountersData {
 
     const mode = slugEnum(d.DungeonMode);
     if (!(mode in modes)) {
-      const title = resolveModeTitle(d.DungeonMode, tsys, keysByNorm, contentTitles);
+      const curatedKey = curatedTitles[mode];
+      const curated = curatedKey ? resolveText(tsys, curatedKey) : undefined;
+      const title = curated?.en
+        ? curated
+        : resolveModeTitle(d.DungeonMode, tsys, keysByNorm, contentTitles);
       if (title) modes[mode] = title;
     }
     const ref: DungeonRef = { mode, name: resolveText(tsys, d.NameID) };
@@ -376,9 +441,13 @@ export function buildEncounters(): EncountersData {
   }
 
   // 2) Guild raid saisonnier : un donjon PAR grade, PV réels sur la ligne.
+  // Le titre du donjon est un TEMPLATE (« … (Stage {0}) ») que le jeu formate
+  // avec le grade — on le remplit pareil, dans toutes les langues.
   for (const r of loadTable('GuildRaidGradeTemplet')) {
     const d = dungeons[r.BossDungeonID ?? ''];
-    if (d && num(r.BossMonsterHP)) d.bossHp = num(r.BossMonsterHP);
+    if (!d) continue;
+    if (num(r.BossMonsterHP)) d.bossHp = num(r.BossMonsterHP);
+    if (num(r.Grade)) d.name = fillPlaceholder(d.name, num(r.Grade));
   }
 
   // 3) Challenge d'événement : la saison (EventDungeonTemplet) porte le donjon
@@ -545,6 +614,15 @@ export function buildEncounters(): EncountersData {
   // produire de faux diff.
   for (const e of Object.values(monsters)) {
     e.spawns.sort((a, b) => a.dungeon.localeCompare(b.dungeon) || a.level - b.level);
+  }
+
+  // Placeholders `{0}` restés sans valeur (aucune surcharge par mode n'a de
+  // numéro pour ce donjon) : on retire le segment plutôt que d'afficher le
+  // template brut.
+  for (const d of Object.values(dungeons)) {
+    if (Object.values(d.name).some((s) => s.includes('{0}'))) {
+      d.name = stripUnfilledPlaceholder(d.name);
+    }
   }
 
   cache = { modes, dungeons, monsters };

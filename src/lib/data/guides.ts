@@ -20,8 +20,12 @@ import type { LocalizedText } from '@contracts';
 import { LANGUAGES, type Lang } from '@/lib/i18n/config';
 import {
   GUIDE_CATEGORIES,
+  GUIDE_TIERS,
+  categoryRequires,
   isGuideCategory,
+  isGuideTier,
   type GuideCategorySlug,
+  type GuideTierKey,
 } from '@/lib/data/guide-categories';
 
 const CONTENTS_DIR = resolve(process.cwd(), 'src/app/[lang]/guides/_contents');
@@ -46,6 +50,12 @@ export interface GuideMeta {
   order?: number;
   /** Monstre lié (og:image, futur affichage) — id V3, jamais un chemin. */
   bossId?: string;
+  /**
+   * Palier pédagogique (`general-guides` uniquement, où il est OBLIGATOIRE —
+   * cf. `requires` de la catégorie). Remplace la map `TIER_BY_SLUG` que la V2
+   * tenait à la main dans son composant de liste.
+   */
+  tier?: GuideTierKey;
   /** og:image explicite (chemin `/images/...`, PNG/JPG par convention). */
   ogImage?: string;
   /** Exclu des listes/compteurs mais accessible en URL directe (comme V2). */
@@ -77,6 +87,7 @@ const META_KEYS = new Set([
   'bossId',
   'ogImage',
   'hidden',
+  'tier',
 ]);
 const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const VERSION_DIR_RE = /^\d{4}-(0[1-9]|1[0-2])$/;
@@ -125,6 +136,13 @@ function parseMeta(raw: unknown, at: string, issues: string[]): GuideMeta | null
   }
   if (m.order !== undefined && typeof m.order !== 'number') {
     issues.push(`${at} : « order » doit être un nombre`);
+    ok = false;
+  }
+  if (m.tier !== undefined && (typeof m.tier !== 'string' || !isGuideTier(m.tier))) {
+    issues.push(
+      `${at} : « tier » inconnu — attendu l'un de ${Object.keys(GUIDE_TIERS).join(', ')}` +
+        ` (déclarés dans guide-categories.ts)`,
+    );
     ok = false;
   }
   return ok ? (m as unknown as GuideMeta) : null;
@@ -194,6 +212,17 @@ function scan(): Guide[] {
       }
       const meta = parseMeta(readJson(metaPath, issues), `${at}/meta.json`, issues);
       if (!meta) continue;
+      // Champs exigés par la VUE de la catégorie (ex. `tier` pour general-guides).
+      // Sans ça, un guide non classé disparaîtrait de la page sans un bruit —
+      // c'est exactement le trou de la V2 (map `TIER_BY_SLUG` dans le composant).
+      for (const field of categoryRequires(category)) {
+        if (meta[field] === undefined) {
+          issues.push(
+            `${at}/meta.json : « ${field} » est requis dans la catégorie « ${category} »` +
+              ` (sa vue en dépend — cf. requires dans guide-categories.ts)`,
+          );
+        }
+      }
       const versions = scanVersions(guideDir, at, issues);
       // Une date DOIT être résolvable : `updated` explicite, ou (guide versionné)
       // dérivée du dossier de version le plus récent. Un guide plat sans date

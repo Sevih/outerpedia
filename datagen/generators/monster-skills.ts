@@ -100,8 +100,10 @@ export function buildMonsterSkills(): SkillData {
     // d'apparition), forme invariante prise au niveau max.
     const shapes: EffectShape[] = [];
     const seen = new Set<string>();
+    // Statuts que le jeu AFFICHE lui-même sur le skill (colonne BuffToolTip).
+    const levelTooltips = new Set(lvlRows.flatMap((r) => splitCsv(r.BuffToolTip ?? '')));
     for (const r of lvlRows) {
-      for (const { id: buffId, choice } of expandBuffIds(
+      for (const { id: buffId, choice, child } of expandBuffIds(
         splitCsv(r.BuffID ?? ''),
         buffs,
         groups,
@@ -110,6 +112,11 @@ export function buildMonsterSkills(): SkillData {
         if (seen.has(buffId)) continue;
         const row = buffRowAtLevel(buffs, buffId, maxLevel);
         if (!row) continue;
+        // Marqueur MOTEUR : un `BT_NONE` enfant de groupe n'applique rien — si
+        // le jeu ne le liste pas lui-même sur le skill (BuffToolTip), son
+        // ToolTipID est du câblage, souvent RECYCLÉ d'un autre kit (l'ultimate
+        // du Guardian 131644 pointait « Random Debuff » du kit 4044xxx).
+        if (child && row.Type === 'BT_NONE' && !levelTooltips.has(row.ToolTipID ?? '')) continue;
         seen.add(buffId);
         const shape = effectShape(row);
         if (choice) shape.choice = true;

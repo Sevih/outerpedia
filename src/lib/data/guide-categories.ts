@@ -11,6 +11,13 @@
  */
 import type { LocalizedText } from '@contracts';
 
+/**
+ * Champs de `meta.json` normalement OPTIONNELS qu'une catégorie peut rendre
+ * OBLIGATOIRES (sa vue en dépend). Vérifié au scan : le build casse au lieu de
+ * laisser un guide disparaître d'une vue qui ne sait pas où le ranger.
+ */
+export type GuideRequirable = 'tier' | 'bossId' | 'order';
+
 export interface GuideCategory {
   /** Ordre d'affichage sur la landing (croissant). */
   order: number;
@@ -18,12 +25,80 @@ export interface GuideCategory {
   icon: string;
   label: LocalizedText & { en: string };
   desc: LocalizedText & { en: string };
+  /** Champs de meta exigés par la vue de cette catégorie. */
+  requires?: readonly GuideRequirable[];
+}
+
+/**
+ * PALIERS pédagogiques de `general-guides` (ordre de lecture conseillé).
+ *
+ * En V2 c'était une map `TIER_BY_SLUG` écrite À LA MAIN *dans le composant
+ * React* : un guide absent de la map recevait `tier: null` et disparaissait
+ * SILENCIEUSEMENT de la page. Ici le palier est une DONNÉE (`tier` du meta),
+ * validée au scan — un guide sans palier casse le build.
+ */
+export const GUIDE_TIERS = {
+  'first-steps': {
+    order: 1,
+    label: {
+      en: 'First Steps',
+      jp: '最初のステップ',
+      kr: '첫 걸음',
+      zh: '入门',
+      fr: 'Premiers pas',
+    },
+  },
+  pulls: {
+    order: 2,
+    label: {
+      en: 'Banners & Pulls',
+      jp: 'バナー & ガチャ',
+      kr: '배너 & 뽑기',
+      zh: '卡池 & 抽卡',
+      fr: 'Bannières & pulls',
+    },
+  },
+  economy: {
+    order: 3,
+    label: {
+      en: 'Resources & Daily Loop',
+      jp: 'リソース & デイリー',
+      kr: '자원 & 데일리 루틴',
+      zh: '资源 & 日常',
+      fr: 'Ressources & routine quotidienne',
+    },
+  },
+  'heroes-gear': {
+    order: 4,
+    label: {
+      en: 'Heroes & Gear',
+      jp: 'ヒーロー & 装備',
+      kr: '영웅 & 장비',
+      zh: '角色 & 装备',
+      fr: 'Héros & gear',
+    },
+  },
+} as const satisfies Record<string, { order: number; label: LocalizedText & { en: string } }>;
+
+/** Clé de palier (`tier` du meta d'un guide `general-guides`). */
+export type GuideTierKey = keyof typeof GUIDE_TIERS;
+
+/** Paliers dans l'ordre de lecture. */
+export const GUIDE_TIER_KEYS = (Object.keys(GUIDE_TIERS) as GuideTierKey[]).sort(
+  (a, b) => GUIDE_TIERS[a].order - GUIDE_TIERS[b].order,
+);
+
+/** Garde de type. */
+export function isGuideTier(value: string): value is GuideTierKey {
+  return value in GUIDE_TIERS;
 }
 
 export const GUIDE_CATEGORIES = {
   'general-guides': {
     order: 1,
     icon: 'CM_EtcMenu_Side_Story',
+    /** La vue en paliers exige un `tier` sur chaque guide (validé au scan). */
+    requires: ['tier'],
     label: {
       en: 'General Guides',
       jp: '総合ガイド',
@@ -250,4 +325,13 @@ export const GUIDE_CATEGORY_SLUGS = (Object.keys(GUIDE_CATEGORIES) as GuideCateg
 /** Garde de type. */
 export function isGuideCategory(value: string): value is GuideCategorySlug {
   return value in GUIDE_CATEGORIES;
+}
+
+/**
+ * Champs de meta exigés par la vue d'une catégorie (vide par défaut).
+ * Accesseur typé : `GUIDE_CATEGORIES[c].requires` est inaccessible directement,
+ * le `as const` ne donnant la propriété qu'aux catégories qui la déclarent.
+ */
+export function categoryRequires(category: GuideCategorySlug): readonly GuideRequirable[] {
+  return (GUIDE_CATEGORIES[category] as GuideCategory).requires ?? [];
 }

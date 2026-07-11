@@ -74,6 +74,21 @@ export type {
   UnlockRequirement,
 } from '../generators/unlock-content';
 export type {
+  SingularityAnchor,
+  SingularityBoss,
+  SingularityData,
+  SingularityGroup,
+  SingularitySchedule,
+} from '../generators/singularity';
+export type { Tower, TowerDebuff, TowerFloor, TowersData, TowerUnit } from '../generators/towers';
+export type {
+  ContentScheduleData,
+  GuildRaidBoss,
+  GuildRaidSeason,
+  JointChallengeSeason,
+  WorldBossSeason,
+} from '../generators/content-schedule';
+export type {
   EvolutionRung,
   LimitBreakStep,
   PremiumInfo,

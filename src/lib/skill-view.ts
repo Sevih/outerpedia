@@ -19,8 +19,12 @@ import glossariesData from '@data/generated/glossaries.json';
 import monsterCuratedJson from '@data/curated/monster-skills.json';
 
 const G = glossariesData as unknown as Glossaries;
-/** Curation d'AFFICHAGE des kits monstres (cf. doc dans le fichier). */
-const MONSTER_CURATED = monsterCuratedJson as { chipOwner?: Record<string, string> };
+/** Curation d'AFFICHAGE des kits monstres (cf. doc dans le fichier). Un buff
+ * PARTAGÉ entre kits jumeaux peut lister plusieurs porteurs candidats — le
+ * premier présent dans le kit l'emporte. */
+const MONSTER_CURATED = monsterCuratedJson as {
+  chipOwner?: Record<string, string | string[]>;
+};
 
 /** Dédoublonne par id (les listes de skills des persos à formes en répètent). */
 export function dedupSkills(skills: Skill[]): Skill[] {
@@ -244,6 +248,10 @@ export function mergeStatusEffects(
  *    WG) ne font JAMAIS de chips côté monstres (décision 2026-07-10) — c'est
  *    la mécanique ambiante des boss, décrite par les descs, pas un statut du
  *    kit. (Les PERSOS gardent leurs chips WG : bonus de burst synthétiques.)
+ * 4. VARIANTE TECHNIQUE MASQUÉE : un skill sans nom NI desc dont chaque effet
+ *    est déjà porté par un skill documenté du kit est une déclinaison de
+ *    câblage (backup_aerial/backup_ground du boss de guild raid 440600010 =
+ *    copies de son S1) — sa carte n'apporterait que des chips en double.
  */
 export interface MonsterSkillView {
   skill: Skill;
@@ -286,11 +294,15 @@ export function monsterSkillViews(skills: Skill[]): MonsterSkillView[] {
   for (const s of skills) {
     for (const e of s.effects ?? []) {
       if (!e.buff || isWg(e) || callerHandled.has(e)) continue;
-      // b. Curation : porteur imposé (si le skill cible est dans ce kit).
+      // b. Curation : porteur imposé (le premier candidat présent dans ce kit).
       const curated = curatedOwner[e.buff];
-      if (curated && curated !== s.id) {
-        if (skills.some((t) => t.id === curated)) move(s, e, curated);
-        continue;
+      if (curated) {
+        const candidates = Array.isArray(curated) ? curated : [curated];
+        if (!candidates.includes(s.id)) {
+          const target = candidates.find((cid) => skills.some((t) => t.id === cid));
+          if (target) move(s, e, target);
+        }
+        continue; // décision curée — les règles suivantes ne s'appliquent plus
       }
       // c. Référence de desc.
       if (mentions(s, e.buff)) continue;
@@ -307,6 +319,14 @@ export function monsterSkillViews(skills: Skill[]): MonsterSkillView[] {
       .filter((e): e is ClientEffect => Boolean(e));
   };
 
+  // Buffs portés par les skills DOCUMENTÉS (nom ou desc) — référence de la
+  // règle 4 (variantes techniques).
+  const namedKitBuffs = new Set<string>();
+  for (const t of skills) {
+    if (!t.name.en && !t.desc?.en) continue;
+    for (const e of t.effects ?? []) if (e.buff) namedKitBuffs.add(e.buff);
+  }
+
   // 2) Fusion rage_finishN → rage_enterN (chips union ; finish sans nom masqué).
   const views: MonsterSkillView[] = [];
   for (const s of skills) {
@@ -315,6 +335,14 @@ export function monsterSkillViews(skills: Skill[]): MonsterSkillView[] {
       const enter = skills.find((t) => t.type === `rage_enter${finishMatch[1]}`);
       if (enter && !s.name.en) continue; // fusionné dans la carte enter
     }
+    // 4) Variante technique : ni nom ni desc, effets tous en double ailleurs.
+    if (
+      !s.name.en &&
+      !s.desc?.en &&
+      (s.effects?.length ?? 0) > 0 &&
+      s.effects!.every((e) => e.buff && namedKitBuffs.has(e.buff))
+    )
+      continue;
     let effects = chipsOf(s);
     const enterMatch = /^rage_enter(\d*)$/.exec(s.type);
     if (enterMatch) {
