@@ -137,6 +137,8 @@ async function main(): Promise<void> {
     // Tables de récompense résolues — référencées par `DungeonRef.reward`,
     // `rewardWin`, `rewardLose` (encounters.json).
     rewardTables: encounters.rewardTables,
+    // Geas du guild raid (phase 2) — référencés par `DungeonRef.geasRewards`.
+    geas: encounters.geas,
     // Quirks de compte réduisant les stats affichées des boss (EFF/RES −10 %).
     bossQuirkMods: encounters.bossQuirkMods,
   };

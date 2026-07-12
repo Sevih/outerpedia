@@ -51,6 +51,7 @@ export type {
   DungeonRank,
   DungeonRef,
   EncountersData,
+  GuildRaidGeas,
   MonsterEncounters,
   RankDamage,
   RankOption,
@@ -120,7 +121,7 @@ import type { LangDict } from '../lib/lang';
 import type { Effect } from '../lib/effects';
 import type { Character } from '../extractor/specs/character';
 import type { Monster } from '../extractor/specs/monster';
-import type { DungeonRef, RankOption, RewardTable } from '../generators/encounters';
+import type { DungeonRef, GuildRaidGeas, RankOption, RewardTable } from '../generators/encounters';
 import type { TranscendData } from '../extractor/transcend';
 import type { Skill } from '../generators/skills';
 import type { CatalogEntry } from '../generators/item-catalog';
@@ -210,6 +211,11 @@ export interface Glossaries {
    * donjons. Optionnel comme `modes` (absent avant la première promotion).
    */
   rewardTables?: Record<string, RewardTable>;
+  /**
+   * Geas du guild raid (phase 2 — contenu pas encore ouvert in-game),
+   * référencés par `DungeonRef.geasRewards`. Optionnel comme `modes`.
+   */
+  geas?: Record<string, GuildRaidGeas>;
   /**
    * Quirks de compte réduisant les stats AFFICHÉES des boss (slug de stat →
    * per-mille signé, ex. buff_chance/buff_resist −100) — le jeu les applique

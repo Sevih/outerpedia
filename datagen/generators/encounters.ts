@@ -33,7 +33,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { LangDict } from '../lib/lang';
-import { loadBuffIndex } from '../lib/buff';
+import { loadBuffIndex, skillBuffVars } from '../lib/buff';
 import { statSlug } from '../lib/effects';
 import { slugEnum } from '../lib/enums';
 import { loadTextIndex, resolveText } from '../lib/text';
@@ -142,7 +142,8 @@ export interface DungeonMonster {
  *   - event_boss (joint challenge) : `normal`/`hard`/`very_hard` (suffixe de
  *     la CLÉ TextSystem du nom du donjon — SYS_EVENT_BOSS_DUNGEON_0001_HARD),
  *     name = libellé générique du jeu (clés curées `difficulties`) ;
- *   - guild_raid_main/sub_boss : `stage_1..3` (GuildRaidGradeTemplet.Grade) ;
+ *   - guild_raid_main/sub_boss : `stage_<N>` (GuildRaidGradeTemplet.Grade —
+ *     3 stages en main, jusqu'à 5 en sub selon la saison) ;
  *   - irregular_chase : `normal`/`hard`/`very_hard` (DungeonDifficult 1..3,
  *     correspondance curée — vérifiée sur les titres « (Normal) »…) ;
  *   - story/tours/adventure : PAS de champ — la difficulté EST le mode
@@ -181,6 +182,43 @@ export interface RewardTable {
   entries?: RewardEntry[];
 }
 
+/**
+ * Un GEAS du guild raid (`GuildRaidGeisTemplet` — phase 2 du raid, contenu
+ * pas encore ouvert in-game) : contrainte ou aide activable sur la rencontre,
+ * contre un ajustement de points. Glossaire `geas` (les 107 sortent, le jeu
+ * n'en câble que 103), référencé par `DungeonRef.geasRewards`.
+ */
+export interface GuildRaidGeas {
+  /**
+   * Description du jeu (NameID = DescID dans la table), placeholders
+   * `[buff_c/v/t_<id>]` RÉSOLUS (valeurs niveau 1 — les buffs geis n'ont pas
+   * de niveaux).
+   */
+  desc: LangDict;
+  /** Icône (`GD_Geis_*`). */
+  icon?: string;
+  /**
+   * true = geas FAVORABLE aux joueurs (facilite le combat, points en moins) ;
+   * false = handicap (points en plus). `IsPositive` de la table.
+   */
+  positive: boolean;
+  /** Palier d'intensité (1..3). */
+  grade: number;
+  /**
+   * Mécanique (slug de GeisType) : `buff_boss` (buffe/débuffe le boss),
+   * `buff_character` (buffe des héros), `boss_change`, `sealed_element` /
+   * `sealed_class` (interdit des éléments/classes de héros).
+   */
+  type: string;
+  /**
+   * Ajustement de points (`GuildRaidPointIncrease`, per-mille signé présumé :
+   * +400 = +40 % — sémantique à confirmer à l'ouverture du contenu).
+   */
+  points: number;
+  /** Valeurs BRUTES selon `type` : ids BuffTemplet, `CET_*`, classes, ids. */
+  values?: string[];
+}
+
 /** Un donjon/stage où spawne au moins un monstre. */
 export interface DungeonRef {
   /** Mode de contenu (slug de DungeonMode : normal/guild_raid_main_boss/…). */
@@ -209,6 +247,12 @@ export interface DungeonRef {
   /** Poursuite (irregular_chase) : butin de victoire/défaite. */
   rewardWin?: string;
   rewardLose?: string;
+  /**
+   * Guild raid (sub-boss) : geas OBTENUS en récompense de ce donjon
+   * (`GuildRaidGradeTemplet.BossGeisReward`, 2 par grade) — réfs vers le
+   * glossaire `geas`. Contenu phase 2, pas encore ouvert in-game.
+   */
+  geasRewards?: string[];
   /** STORY (`normal`/`normal_hard`) : saison et épisode (AreaTemplet). */
   season?: number;
   episode?: number;
@@ -268,6 +312,8 @@ export interface EncountersData {
    * centaines de donjons partagent les mêmes tables.
    */
   rewardTables: Record<string, RewardTable>;
+  /** Geas du guild raid (réfs `DungeonRef.geasRewards`, cf. `GuildRaidGeas`). */
+  geas: Record<string, GuildRaidGeas>;
   dungeons: Record<string, DungeonRef>;
   monsters: Record<string, MonsterEncounters>;
 }
@@ -797,6 +843,9 @@ export function buildEncounters(): EncountersData {
       const nameId = nameIdOf.get(r.BossDungeonID ?? '');
       if (nameId) d.group = `guild_raid:${nameId.replace(/_\d+$/, '')}`;
     }
+    // Geas offerts par ce donjon (phase 2 — réfs vers le glossaire `geas`).
+    const geasIds = splitCsv(r.BossGeisReward ?? '');
+    if (geasIds.length) d.geasRewards = geasIds;
   }
 
   // 2bis) Poursuite (irregular_chase) : la ligne porte les PV réels du boss,
@@ -1030,6 +1079,42 @@ export function buildEncounters(): EncountersData {
     }
   }
 
+  // GEAS du guild raid (phase 2, pas encore ouvert in-game) : tout le
+  // catalogue sort (107 — le jeu n'en câble que 103 via BossGeisReward), la
+  // description du jeu est ÉMISE RÉSOLUE : les placeholders `[buff_c/v/t_
+  // <id>]` (minuscules, format des skills) sont remplis avec les valeurs des
+  // buffs geis au niveau 1 — pas de niveaux sur ces buffs, donc pas de vars
+  // par palier à transporter.
+  const geas: Record<string, GuildRaidGeas> = {};
+  const fillGeasPlaceholders = (dict: LangDict): LangDict => {
+    const out = { ...dict };
+    for (const lang of Object.keys(out) as Array<keyof LangDict>) {
+      out[lang] = (out[lang] ?? '').replace(
+        /\[buff_([cvt])_(.+?)\]/gi,
+        (_m, kind: string, bid: string) => {
+          const vars = skillBuffVars(buffs, bid, 1);
+          const k = kind.toLowerCase();
+          return (k === 'c' ? vars.c : k === 't' ? vars.t : vars.v) ?? '?';
+        },
+      );
+    }
+    return out;
+  };
+  for (const r of loadTable('GuildRaidGeisTemplet')) {
+    if (!r.ID) continue;
+    const desc = fillGeasPlaceholders(resolveText(tskill, r.NameID));
+    const values = splitCsv(r.Value ?? '');
+    geas[r.ID] = {
+      desc,
+      ...(r.IconName ? { icon: r.IconName } : {}),
+      positive: r.IsPositive === '1',
+      grade: num(r.Grade),
+      type: slugEnum(r.GeisType, 0),
+      points: num(r.GuildRaidPointIncrease),
+      ...(values.length ? { values } : {}),
+    };
+  }
+
   // Quirks « boss » (système Gift, tables CharacterAwakening*) : nœud → groupe
   // de niveaux → BuffID → BuffTemplet. On retient les MALUS inconditionnels
   // portés par la cible (BT_STAT_PREMIUM, Target=ME, valeur négative) — les
@@ -1054,6 +1139,6 @@ export function buildEncounters(): EncountersData {
     }
   }
 
-  cache = { modes, rankOptions, bossQuirkMods, rewardTables, dungeons, monsters };
+  cache = { modes, rankOptions, bossQuirkMods, rewardTables, geas, dungeons, monsters };
   return cache;
 }
