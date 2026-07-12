@@ -99,3 +99,47 @@ describe('singularityStateAt — semaine et boss du jour', () => {
     }
   });
 });
+
+/**
+ * `nextChange` est ce que le compte à rebours de la page affiche. Il visait le
+ * prochain minuit UTC EN DUR — vrai en jours de combat (le boss du jour tourne),
+ * FAUX en phase de récompense, où il ne se passe rien à minuit : la page
+ * annonçait « prochaine rotation » et décomptait vers une échéance imaginaire.
+ * L'erreur est indolore (des chiffres défilent, ils ont l'air justes), donc elle
+ * se grave ici.
+ */
+describe('singularityStateAt — nextChange, la seule échéance qu’on ait le droit d’afficher', () => {
+  const ms = (iso: string) => Date.parse(`${iso}T00:00:00Z`);
+
+  it('en jours de combat : le minuit UTC suivant (le boss du jour change)', () => {
+    expect(at('2026-05-20').nextChange).toBe(ms('2026-05-21'));
+    expect(at('2026-05-22').nextChange).toBe(ms('2026-05-23'));
+  });
+
+  it('le SAMEDI vise minuit aussi — c’est la bascule vers la phase de récompense', () => {
+    expect(at('2026-05-23').nextChange).toBe(ms('2026-05-24'));
+  });
+
+  it('en phase de récompense : l’OUVERTURE de la rotation, pas minuit', () => {
+    for (const iso of ['2026-05-24', '2026-05-25', '2026-05-26'] as const) {
+      const s = at(iso);
+      expect(s.betweenWeeks, iso).toBe(true);
+      // Le mercredi d'ouverture — celui-là même que la vue annonce.
+      expect(s.nextChange, iso).toBe(ms('2026-05-27'));
+      expect(s.nextChange, iso).toBe(ms(s.week.start));
+    }
+  });
+
+  it('le dimanche, l’échéance est à PLUS de 24 h (donc pas minuit)', () => {
+    const dimanche = new Date('2026-05-24T12:00:00Z');
+    const restant = singularityStateAt(dimanche).nextChange - dimanche.getTime();
+    expect(restant).toBeGreaterThan(24 * 3_600_000);
+  });
+
+  it('est toujours dans le FUTUR, tous les jours de la semaine', () => {
+    for (let i = 0; i < 14; i++) {
+      const now = new Date(Date.UTC(2026, 4, 20 + i, 12));
+      expect(singularityStateAt(now).nextChange, now.toISOString()).toBeGreaterThan(now.getTime());
+    }
+  });
+});

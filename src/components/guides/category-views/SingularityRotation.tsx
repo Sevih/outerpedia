@@ -112,11 +112,23 @@ export default async function SingularityRotation({ lang, guides }: CategoryView
                 <span className="text-content-subtle">·</span>
               </>
             )}
-            {/* Sans variables, `t` rend le gabarit tel quel : le `{time}` reste
+            {/* La CIBLE et le MOT vont ensemble. En jours de combat, l'échéance
+                est le minuit UTC qui fait tourner le boss du jour — « prochain
+                reset ». En phase de récompense, non : rien ne se passe à minuit,
+                la seule échéance est l'OUVERTURE de la rotation, jusqu'à trois
+                jours plus loin — « ouvre dans ». Décompter vers minuit sous un
+                titre « Prochaine rotation » annonçait une échéance qui n'existait
+                pas.
+                Sans variables, `t` rend le gabarit tel quel : le `{time}` reste
                 à substituer côté client, à chaque seconde. */}
             <SingularityCountdown
-              template={t('guides.singularity.timer.next')}
-              className="text-content-muted tabular-nums"
+              target={state.nextChange}
+              template={t(
+                state.betweenWeeks
+                  ? 'guides.singularity.timer.opens'
+                  : 'guides.singularity.timer.next',
+              )}
+              className="text-content tabular-nums"
             />
           </div>
 

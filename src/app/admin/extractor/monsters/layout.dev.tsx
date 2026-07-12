@@ -13,6 +13,7 @@ export default function ExtractorMonstersLayout({ children }: { children: React.
         basePath="/admin/extractor/monsters"
         toggles={[{ flag: 'site', label: 'Utilisés par le site', defaultOn: true }]}
         tagFilter={{ allLabel: 'tous les modes', options: modeOptions }}
+        iconSize={48}
       />
       <div className="min-w-0 flex-1">{children}</div>
     </div>

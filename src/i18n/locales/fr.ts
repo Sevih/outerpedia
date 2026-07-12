@@ -583,6 +583,7 @@ const fr: Record<TranslationKey, string> = {
   'guides.singularity.week.title_mobile': 'Actif maintenant',
   'guides.singularity.week.live': 'En cours · {dow}',
   'guides.singularity.timer.next': 'Prochain reset dans {time}',
+  'guides.singularity.timer.opens': 'Ouvre dans {time}',
   'guides.singularity.week.tagline':
     'Un boss par jour, du mercredi au samedi. La cible change à 00:00 UTC.',
   'guides.singularity.week.today': 'Aujourd’hui',

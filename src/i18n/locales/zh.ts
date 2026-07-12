@@ -546,6 +546,7 @@ const zh: Record<TranslationKey, string> = {
   'guides.singularity.week.title_mobile': '进行中',
   'guides.singularity.week.live': '进行中 · {dow}',
   'guides.singularity.timer.next': '距下次重置 {time}',
+  'guides.singularity.timer.opens': '{time} 后开启',
   'guides.singularity.week.tagline': '周三至周六，每日一个首领。目标于 00:00 UTC 更换。',
   'guides.singularity.week.today': '今日',
   'guides.singularity.next_week.title': '下一轮',

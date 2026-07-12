@@ -111,6 +111,16 @@ export interface SingularityState {
    * `week` est donc la semaine À VENIR, pas celle en cours.
    */
   betweenWeeks: boolean;
+  /**
+   * Instant (epoch ms, UTC) du PROCHAIN CHANGEMENT réel — la seule échéance
+   * qu'un compte à rebours ait le droit d'afficher.
+   *
+   * En jours de combat, c'est le minuit UTC suivant : le boss du jour change.
+   * En phase de récompense, NON — rien ne se passe au minuit suivant, et un
+   * compte à rebours vers minuit y racontait une échéance qui n'existe pas.
+   * C'est l'OUVERTURE de la rotation (le mercredi), parfois trois jours plus loin.
+   */
+  nextChange: number;
 }
 
 /** Date ISO (UTC) d'un numéro de jour. */
@@ -159,12 +169,18 @@ export function singularityStateAt(now: Date): SingularityState {
   const inBattle = dayInWeek < SCHEDULE.battleDays;
   // En phase de récompense, on montre la semaine SUIVANTE : c'est la seule
   // information encore utile au joueur.
-  const week = buildWeek(inBattle ? weekIndex : weekIndex + 1, today);
+  const shownWeek = inBattle ? weekIndex : weekIndex + 1;
+  const week = buildWeek(shownWeek, today);
+
+  // En combat : minuit UTC (le boss du jour tourne). En récompense : l'ouverture
+  // de la semaine affichée — pas minuit, où il ne se passe rien.
+  const nextChangeDay = inBattle ? today + 1 : ANCHOR_DAY + shownWeek * 7;
 
   return {
     week,
     today: inBattle ? week.days[dayInWeek]?.boss : undefined,
     betweenWeeks: !inBattle,
+    nextChange: nextChangeDay * DAY_MS,
   };
 }
 

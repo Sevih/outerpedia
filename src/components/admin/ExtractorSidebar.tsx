@@ -16,6 +16,13 @@ export interface ExtractorRow {
   icon?: string;
   /** Fond de slot derrière l'icône (rareté d'item, hiérarchie de monstre). */
   iconFrame?: string;
+  /** Icône posée en RETRAIT du cadre (slots à bordure intégrée, GD_Slot_Bg_*). */
+  iconInset?: boolean;
+  /** Surimpressions du portrait (géométrie CharacterPortrait) : élément en
+   * haut à droite, classe à droite au milieu, badge (BOSS) en haut à gauche. */
+  elementIcon?: string;
+  classIcon?: string;
+  badgeIcon?: string;
   /** Étoiles (rareté), si pertinent. */
   stars?: number;
   status?: 'new' | 'diff' | 'ok';
@@ -57,6 +64,7 @@ export function ExtractorSidebar({
   basePath,
   toggles,
   tagFilter,
+  iconSize = 32,
 }: {
   rows: ExtractorRow[];
   basePath: string;
@@ -64,6 +72,9 @@ export function ExtractorSidebar({
   toggles?: ToggleFilter[];
   /** Filtre par étiquette (mode de jeu…). */
   tagFilter?: TagFilter;
+  /** Côté du portrait en px (les overlays élément/classe suivent, le badge
+   * BOSS garde sa taille). */
+  iconSize?: number;
 }) {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<Filter>('all');
@@ -189,7 +200,7 @@ export function ExtractorSidebar({
                 className={`flex items-center gap-2 px-3 py-1.5 ${active ? 'bg-surface-overlay' : 'hover:bg-surface-overlay/50'}`}
               >
                 {r.icon && (
-                  <span className="relative h-8 w-8 shrink-0">
+                  <span className="relative shrink-0" style={{ width: iconSize, height: iconSize }}>
                     {r.iconFrame && (
                       <img
                         src={r.iconFrame}
@@ -202,11 +213,35 @@ export function ExtractorSidebar({
                       src={r.icon}
                       alt=""
                       loading="lazy"
-                      className="absolute inset-0 h-full w-full rounded object-contain"
+                      className={`absolute rounded object-contain ${r.iconInset ? 'inset-[7%]' : 'inset-0 h-full w-full'}`}
                       onError={(e) => {
                         e.currentTarget.style.visibility = 'hidden';
                       }}
                     />
+                    {r.elementIcon && (
+                      <img
+                        src={r.elementIcon}
+                        alt=""
+                        loading="lazy"
+                        className="absolute -top-1 -right-1 h-[42%] w-[42%] drop-shadow-md"
+                      />
+                    )}
+                    {r.classIcon && (
+                      <img
+                        src={r.classIcon}
+                        alt=""
+                        loading="lazy"
+                        className="absolute top-[42%] -right-0.5 h-[32%] w-[32%] drop-shadow-md"
+                      />
+                    )}
+                    {r.badgeIcon && (
+                      <img
+                        src={r.badgeIcon}
+                        alt="boss"
+                        loading="lazy"
+                        className="absolute -top-1 -left-1 h-3 w-auto drop-shadow-md"
+                      />
+                    )}
                   </span>
                 )}
                 <span className="min-w-0 flex-1">

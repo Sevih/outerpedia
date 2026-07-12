@@ -18,7 +18,8 @@ import { lRec } from '@/lib/i18n/localize';
 import { expandRankContexts } from '@/lib/monster-stats';
 import { MonsterStatsCard } from '@/components/admin/MonsterStatsCard';
 import { entityReview, monsterArchiveOf } from '@/lib/admin/review-store';
-import { monsterIconSrc, monsterSlotSrc } from '@/lib/admin/monster-icon';
+import { monsterBossBadgeSrc, monsterIconSrc, monsterSlotSrc } from '@/lib/admin/monster-icon';
+import { img } from '@/lib/images';
 import {
   committedEncounters,
   committedMonsterSkills,
@@ -155,8 +156,16 @@ export default async function ExtractorMonsterPage({
             <img
               src={monsterIconSrc(m.icon)}
               alt=""
-              className="absolute inset-0 h-full w-full rounded object-cover"
+              className="absolute inset-[7%] rounded object-cover"
             />
+            {monsterBossBadgeSrc(m.type) && (
+              // eslint-disable-next-line @next/next/no-img-element -- sprite dev
+              <img
+                src={monsterBossBadgeSrc(m.type)}
+                alt="boss"
+                className="absolute -top-1 -left-1 h-[30%] w-auto drop-shadow-md"
+              />
+            )}
           </span>
           <span>
             {m.name.en || '(sans nom)'}
@@ -165,9 +174,18 @@ export default async function ExtractorMonsterPage({
             )}
           </span>
         </h1>
-        <p className="text-content-subtle text-sm">
-          <span className="font-mono">{m.id}</span> · {m.type} · {m.element} · {m.class}
-          {m.subClass ? ` / ${m.subClass}` : ''} · {m.race} · {m.rarity}★
+        <p className="text-content-subtle flex flex-wrap items-center gap-x-1.5 text-sm">
+          <span className="font-mono">{m.id}</span> · {m.type} ·
+          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
+          <img
+            src={img.element(m.element)}
+            alt={m.element}
+            title={m.element}
+            className="h-4.5 w-4.5"
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
+          <img src={img.klass(m.class)} alt={m.class} title={m.class} className="h-4.5 w-4.5" />
+          {m.subClass ? `/ ${m.subClass}` : ''} · {m.race} · {m.rarity}★
           {m.aiType ? ` · IA ${m.aiType}` : ''}
           {review.status === 'removed' && (
             <span className="text-warn ml-2">absent de l’extraction fraîche (retenu committé)</span>

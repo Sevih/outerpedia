@@ -16,7 +16,8 @@ import {
   siteMonsterIds,
   type Monster,
 } from '@/lib/admin/monster-store';
-import { monsterIconSrc, monsterSlotSrc } from '@/lib/admin/monster-icon';
+import { monsterBossBadgeSrc, monsterIconSrc, monsterSlotSrc } from '@/lib/admin/monster-icon';
+import { img } from '@/lib/images';
 import type { ExtractorRow } from '@/components/admin/ExtractorSidebar';
 
 export interface MonsterRowsResult {
@@ -56,6 +57,10 @@ export function buildMonsterRows(): MonsterRowsResult {
         .join(' · '),
       icon: monsterIconSrc(m.icon),
       iconFrame: monsterSlotSrc(m.type),
+      iconInset: true,
+      elementIcon: img.element(m.element),
+      classIcon: img.klass(m.class),
+      badgeIcon: monsterBossBadgeSrc(m.type),
       stars: m.rarity,
       status: added.has(m.id) ? 'new' : diffCounts.has(m.id) ? 'diff' : 'ok',
       count: diffCounts.get(m.id) ?? 0,

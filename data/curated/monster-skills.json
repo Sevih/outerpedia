@@ -1,15 +1,42 @@
 {
   "_doc": "Curation d'affichage des skills MONSTRES (lue par monsterSkillViews). chipOwner : buffId → skillId (ou LISTE de skillIds candidats — un buff partagé entre kits jumeaux liste les porteurs de chaque génération, le premier présent dans le kit l'emporte) PORTEUR de la chip, pour les cas où les tables câblent un buff sur le mauvais skill du kit SANS aucun signal structurel (pas de réf [Buff_…] dans les descs, pas de CallerSkillType exploitable). N'affecte que la présentation — la donnée extraite reste fidèle aux tables. NB : les buffs BT_WG_* sont ignorés d'office côté monstres (pas de chip), inutile de les curer.",
   "_notes": {
-    "singularity": "Trio Urd/Verdandi/Skuld : les buffs de priorité (« After attacking, Priority increases by 15% », doublé sous Increased Defense) sont câblés sur monster_1 « Objective : Past Protection » mais décrits par « Factor : Absolute Fate » (900065 kits OLD, 900095 kit 60000013). La priorité post-berserk (Singularity_Rage_Action_guage, portée par tous les rage_enter du mode) est documentée par le passif partagé 910001 « Dimensional Rift » (« The boss monster's Priority increases after entering Berserk state »)."
+    "singularity": "Trio Urd/Verdandi/Skuld : les buffs de priorité (« After attacking, Priority increases by 15% », doublé sous Increased Defense) sont câblés sur monster_1 « Objective : Past Protection » mais décrits par « Factor : Absolute Fate » (900065 kits OLD, 900095 kit 60000013). La priorité post-berserk (Singularity_Rage_Action_guage, portée par tous les rage_enter du mode) est documentée par le passif partagé 910001 « Dimensional Rift » (« The boss monster's Priority increases after entering Berserk state »).",
+    "singularity-swaps": "Boss Dimensional Singularity (vérifiés in-game 2026-07-12) : les tables câblent systématiquement les blocs de buffs passifs _A_/_SS_ et _B_ sur le MAUVAIS des deux monster_1 (chaque bloc est décrit par la desc de l'autre). Sphinx (60000006) en plus : la réduction de durée SP_SKILL02_3 appartient au volet passif du S2 « Crushing Doubt », la priorité SP_A_2 à « Time Flies »."
   },
   "chipOwner": {
     "Singularity_Passive_OLD_SS_1": ["900065", "900095"],
     "Singularity_Passive_OLD_SS_2": ["900065", "900095"],
-    "Singularity_Rage_Action_guage": ["910001"]
+    "Singularity_Rage_Action_guage": ["910001"],
+    "Singularity_SP_SKILL02_3": "900032",
+    "Singularity_Passive_SP_A_2": "900035",
+    "Singularity_Passive_SPIDER_A_1": "900055",
+    "Singularity_Passive_SPIDER_A_2": "900055",
+    "Singularity_Passive_SPIDER_B_1": "900054",
+    "Singularity_Passive_SPIDER_B_2": "900054",
+    "Singularity_Passive_Bel_SS_1": "900005",
+    "Singularity_Passive_Bel_SS_2": "900005",
+    "Singularity_Passive_Bel_B_1": "900004",
+    "Singularity_Passive_Bel_B_2": "900004",
+    "Singularity_Passive_HS_A_1": "900025",
+    "Singularity_Passive_HS_A_2": "900025",
+    "Singularity_Passive_HS_B_2": "900024",
+    "Singularity_Passive_SHA_A_1": "900045",
+    "Singularity_Passive_SHA_A_2": "900045",
+    "Singularity_Passive_SHA_A_3": "900045",
+    "Singularity_Passive_SHA_B_1": "900044",
+    "Singularity_Passive_SHA_B_2": "900044"
   },
-  "_docChipAdd": "chipAdd : skillId → réfs TOOLTIP du glossaire ajoutées en chips sur la carte — statuts DÉCRITS par la desc du skill mais appliqués hors kit (ex. passifs de PALIER, OptionID des rangs). La carte stats reste la source fidèle rang par rang.",
+  "_docChipAdd": "chipAdd : skillId → réfs TOOLTIP du glossaire ajoutées en chips sur la carte — statuts DÉCRITS par la desc du skill mais appliqués hors kit (ex. passifs de PALIER, OptionID des rangs), ou affichés par le NIVEAU (colonne BuffToolTip) sans qu'aucun buff du kit ne les porte (bug de table : le rage Skuld décrit « Increases own Critical Hit Chance », le niveau affiche le tooltip 11, mais le buff Singularity_RAGE_SKD porte ST_SPEED/1015). La carte stats reste la source fidèle rang par rang.",
   "chipAdd": {
-    "910001": ["1008"]
+    "910001": ["1008"],
+    "900086": ["11"],
+    "900116": ["11"]
+  },
+  "_docChipHide": "chipHide : skillId → buffIds dont la chip est MASQUÉE sur cette carte. Deux cas : (1) buff de câblage que la desc ne décrit pas et que le jeu n'affiche pas (colonne BuffToolTip du niveau vide) — l'extend-buff Singularity_OLD_SKILL01_1_1 du S1 d'Urd (900061 kits 60000010/40040060, 900091 kit 60000013) ; (2) copie du PORTEUR quand la duplication caller a déjà rendu la chip au skill qui la décrit — l'Extinction 4076002_15_4 du monster_2 de Meteos (130712) appartient à l'affichage du S2 « Protect the Royal Family... » (« Targets killed by this attack cannot be Resurrected or Revived »).",
+  "chipHide": {
+    "900061": ["Singularity_OLD_SKILL01_1_1"],
+    "900091": ["Singularity_OLD_SKILL01_1_1"],
+    "130712": ["4076002_15_4"]
   }
 }

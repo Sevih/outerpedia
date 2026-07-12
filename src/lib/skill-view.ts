@@ -24,10 +24,15 @@ const G = glossariesData as unknown as Glossaries;
  * premier présent dans le kit l'emporte. `chipAdd` AJOUTE des chips (réfs
  * tooltip du glossaire) à une carte : statuts décrits par la desc du skill
  * mais appliqués hors kit (passifs de PALIER — l'Increased Penetration
- * rang S+ décrite par Dimensional Rift vit dans les OptionID des rangs). */
+ * rang S+ décrite par Dimensional Rift vit dans les OptionID des rangs).
+ * `chipHide` (skillId → buffIds) MASQUE des chips sur une carte : buff de
+ * câblage que la desc ne décrit pas et que le jeu n'affiche pas (colonne
+ * BuffToolTip du niveau vide), ou copie du porteur quand la duplication
+ * caller a déjà rendu la chip au skill qui la décrit. */
 const MONSTER_CURATED = monsterCuratedJson as {
   chipOwner?: Record<string, string | string[]>;
   chipAdd?: Record<string, string[]>;
+  chipHide?: Record<string, string[]>;
 };
 
 /** Dédoublonne par id (les listes de skills des persos à formes en répètent). */
@@ -317,8 +322,10 @@ export function monsterSkillViews(skills: Skill[]): MonsterSkillView[] {
   }
 
   const chipsOf = (s: Skill): ClientEffect[] => {
+    const hidden = new Set(MONSTER_CURATED.chipHide?.[s.id] ?? []);
     const own = (s.effects ?? []).filter((e) => !isWg(e) && !movedFrom.get(s.id)?.has(e));
     return [...own, ...(extraOf.get(s.id) ?? [])]
+      .filter((e) => !e.buff || !hidden.has(e.buff))
       .map(toChipEffect)
       .filter((e): e is ClientEffect => Boolean(e));
   };

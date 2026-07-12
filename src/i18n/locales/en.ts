@@ -571,6 +571,7 @@ const en = {
   'guides.singularity.week.title_mobile': 'Active now',
   'guides.singularity.week.live': 'Live now · {dow}',
   'guides.singularity.timer.next': 'Next reset in {time}',
+  'guides.singularity.timer.opens': 'Opens in {time}',
   'guides.singularity.week.tagline':
     'One boss per day, Wednesday to Saturday. The target changes at 00:00 UTC.',
   'guides.singularity.week.today': 'Today',

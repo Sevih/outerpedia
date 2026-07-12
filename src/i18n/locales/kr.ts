@@ -557,6 +557,7 @@ const kr: Record<TranslationKey, string> = {
   'guides.singularity.week.title_mobile': '진행 중',
   'guides.singularity.week.live': '진행 중 · {dow}',
   'guides.singularity.timer.next': '다음 초기화까지 {time}',
+  'guides.singularity.timer.opens': '{time} 후 시작',
   'guides.singularity.week.tagline':
     '수요일부터 토요일까지 하루에 한 보스. 대상은 00:00 UTC에 바뀝니다.',
   'guides.singularity.week.today': '오늘',
