@@ -23565,10 +23565,10 @@
       "zh": "世界首领拉格纳修斯"
     },
     "difficulty": {
-      "en": "Beginner League",
-      "jp": "ビギナーリーグ",
-      "kr": "비기너 리그",
-      "zh": "新手联赛"
+      "en": "Normal League",
+      "jp": "ノーマルリーグ",
+      "kr": "노멀 리그",
+      "zh": "普通联赛"
     },
     "adv": {
       "atk": -697,
@@ -23675,10 +23675,10 @@
       "zh": "世界首领拉格纳修斯"
     },
     "difficulty": {
-      "en": "Junior League",
-      "jp": "ジュニアリーグ",
-      "kr": "주니어 리그",
-      "zh": "初级联赛"
+      "en": "Hard League",
+      "jp": "ハードリーグ",
+      "kr": "하드 리그",
+      "zh": "困难联赛"
     },
     "adv": {
       "atk": -613,
@@ -23785,10 +23785,10 @@
       "zh": "世界首领拉格纳修斯"
     },
     "difficulty": {
-      "en": "Senior League",
-      "jp": "シニアリーグ",
-      "kr": "시니어 리그",
-      "zh": "高级联赛"
+      "en": "Very Hard League",
+      "jp": "ベリーハードリーグ",
+      "kr": "베리 하드 리그",
+      "zh": "极难联赛"
     },
     "adv": {
       "atk": -535,
@@ -24003,10 +24003,10 @@
       "zh": "世界首领远古哨兵"
     },
     "difficulty": {
-      "en": "Beginner League",
-      "jp": "ビギナーリーグ",
-      "kr": "비기너 리그",
-      "zh": "新手联赛"
+      "en": "Normal League",
+      "jp": "ノーマルリーグ",
+      "kr": "노멀 리그",
+      "zh": "普通联赛"
     },
     "adv": {
       "atk": -697,
@@ -24113,10 +24113,10 @@
       "zh": "世界首领远古哨兵"
     },
     "difficulty": {
-      "en": "Junior League",
-      "jp": "ジュニアリーグ",
-      "kr": "주니어 리그",
-      "zh": "初级联赛"
+      "en": "Hard League",
+      "jp": "ハードリーグ",
+      "kr": "하드 리그",
+      "zh": "困难联赛"
     },
     "adv": {
       "atk": -613,
@@ -24223,10 +24223,10 @@
       "zh": "世界首领远古哨兵"
     },
     "difficulty": {
-      "en": "Senior League",
-      "jp": "シニアリーグ",
-      "kr": "시니어 리그",
-      "zh": "高级联赛"
+      "en": "Very Hard League",
+      "jp": "ベリーハードリーグ",
+      "kr": "베리 하드 리그",
+      "zh": "极难联赛"
     },
     "adv": {
       "atk": -535,
@@ -24336,333 +24336,6 @@
       "jp": "エクストリームリーグ",
       "kr": "익스트림 리그",
       "zh": "极限联赛"
-    },
-    "adv": {
-      "atk": -535,
-      "hp": -175
-    },
-    "ranks": [
-      {
-        "name": "D",
-        "level": 80,
-        "transLevel": 85,
-        "hp": 70001,
-        "damage": {
-          "max": 70000
-        },
-        "adv": {
-          "atk": -613
-        }
-      },
-      {
-        "name": "C",
-        "level": 85,
-        "transLevel": 90,
-        "hp": 80000,
-        "damage": {
-          "min": 70001,
-          "max": 150000
-        },
-        "adv": {
-          "atk": -608
-        }
-      },
-      {
-        "name": "B",
-        "level": 90,
-        "transLevel": 100,
-        "hp": 300000,
-        "damage": {
-          "min": 150001,
-          "max": 450000
-        },
-        "adv": {
-          "atk": -588
-        }
-      },
-      {
-        "name": "A",
-        "level": 100,
-        "transLevel": 110,
-        "hp": 750000,
-        "damage": {
-          "min": 450001,
-          "max": 1200000
-        },
-        "adv": {
-          "atk": -535
-        }
-      },
-      {
-        "name": "S",
-        "level": 110,
-        "transLevel": 140,
-        "hp": 800000,
-        "damage": {
-          "min": 1200001,
-          "max": 2000000
-        },
-        "adv": {
-          "atk": -535
-        }
-      },
-      {
-        "name": "SS",
-        "level": 140,
-        "transLevel": 170,
-        "hp": 4000000,
-        "damage": {
-          "min": 2000001,
-          "max": 6000000
-        },
-        "adv": {
-          "atk": -535
-        }
-      },
-      {
-        "name": "SSS",
-        "level": 170,
-        "hp": 4000000,
-        "damage": {
-          "min": 6000001
-        },
-        "adv": {
-          "atk": -535
-        }
-      }
-    ]
-  },
-  "55200001": {
-    "mode": "world_boss",
-    "name": {
-      "en": "World Boss Vault Venion",
-      "jp": "ワールドボスバルトベニオン",
-      "kr": "월드 보스 발트베니온",
-      "zh": "世界首领瓦尔特贝尼翁"
-    },
-    "difficulty": {
-      "en": "Beginner League",
-      "jp": "ビギナーリーグ",
-      "kr": "비기너 리그",
-      "zh": "新手联赛"
-    },
-    "adv": {
-      "atk": -697,
-      "hp": -520
-    },
-    "ranks": [
-      {
-        "name": "D",
-        "level": 40,
-        "transLevel": 45,
-        "hp": 20001,
-        "damage": {
-          "max": 20000
-        },
-        "adv": {
-          "atk": -715
-        }
-      },
-      {
-        "name": "C",
-        "level": 45,
-        "transLevel": 50,
-        "hp": 30000,
-        "damage": {
-          "min": 20001,
-          "max": 50000
-        },
-        "adv": {
-          "atk": -684
-        }
-      },
-      {
-        "name": "B",
-        "level": 50,
-        "transLevel": 60,
-        "hp": 100000,
-        "damage": {
-          "min": 50001,
-          "max": 150000
-        },
-        "adv": {
-          "atk": -697
-        }
-      },
-      {
-        "name": "A",
-        "level": 60,
-        "transLevel": 70,
-        "hp": 150000,
-        "damage": {
-          "min": 150001,
-          "max": 300000
-        },
-        "adv": {
-          "atk": -704
-        }
-      },
-      {
-        "name": "S",
-        "level": 70,
-        "transLevel": 100,
-        "hp": 200000,
-        "damage": {
-          "min": 300001,
-          "max": 500000
-        },
-        "adv": {
-          "atk": -635
-        }
-      },
-      {
-        "name": "SS",
-        "level": 100,
-        "transLevel": 130,
-        "hp": 1000000,
-        "damage": {
-          "min": 500001,
-          "max": 1500000
-        },
-        "adv": {
-          "atk": -535
-        }
-      },
-      {
-        "name": "SSS",
-        "level": 130,
-        "hp": 1000000,
-        "damage": {
-          "min": 1500001
-        },
-        "adv": {
-          "atk": -535
-        }
-      }
-    ]
-  },
-  "55200002": {
-    "mode": "world_boss",
-    "name": {
-      "en": "World Boss Vault Venion",
-      "jp": "ワールドボスバルトベニオン",
-      "kr": "월드 보스 발트베니온",
-      "zh": "世界首领瓦尔特贝尼翁"
-    },
-    "difficulty": {
-      "en": "Junior League",
-      "jp": "ジュニアリーグ",
-      "kr": "주니어 리그",
-      "zh": "初级联赛"
-    },
-    "adv": {
-      "atk": -613,
-      "hp": -270
-    },
-    "ranks": [
-      {
-        "name": "D",
-        "level": 60,
-        "transLevel": 65,
-        "hp": 45001,
-        "damage": {
-          "max": 45000
-        },
-        "adv": {
-          "atk": -704
-        }
-      },
-      {
-        "name": "C",
-        "level": 65,
-        "transLevel": 70,
-        "hp": 55000,
-        "damage": {
-          "min": 45001,
-          "max": 100000
-        },
-        "adv": {
-          "atk": -625
-        }
-      },
-      {
-        "name": "B",
-        "level": 70,
-        "transLevel": 80,
-        "hp": 200000,
-        "damage": {
-          "min": 100001,
-          "max": 300000
-        },
-        "adv": {
-          "atk": -635
-        }
-      },
-      {
-        "name": "A",
-        "level": 80,
-        "transLevel": 90,
-        "hp": 300000,
-        "damage": {
-          "min": 300001,
-          "max": 600000
-        },
-        "adv": {
-          "atk": -613
-        }
-      },
-      {
-        "name": "S",
-        "level": 90,
-        "transLevel": 120,
-        "hp": 400000,
-        "damage": {
-          "min": 600001,
-          "max": 1000000
-        },
-        "adv": {
-          "atk": -588
-        }
-      },
-      {
-        "name": "SS",
-        "level": 120,
-        "transLevel": 150,
-        "hp": 2000000,
-        "damage": {
-          "min": 1000001,
-          "max": 3000000
-        },
-        "adv": {
-          "atk": -535
-        }
-      },
-      {
-        "name": "SSS",
-        "level": 150,
-        "hp": 2000000,
-        "damage": {
-          "min": 3000001
-        },
-        "adv": {
-          "atk": -535
-        }
-      }
-    ]
-  },
-  "55200003": {
-    "mode": "world_boss",
-    "name": {
-      "en": "World Boss Vault Venion",
-      "jp": "ワールドボスバルトベニオン",
-      "kr": "월드 보스 발트베니온",
-      "zh": "世界首领瓦尔特贝尼翁"
-    },
-    "difficulty": {
-      "en": "Senior League",
-      "jp": "シニアリーグ",
-      "kr": "시니어 리그",
-      "zh": "高级联赛"
     },
     "adv": {
       "atk": -535,
@@ -25206,10 +24879,10 @@
       "zh": "世界首领达利娅"
     },
     "difficulty": {
-      "en": "Beginner League",
-      "jp": "ビギナーリーグ",
-      "kr": "비기너 리그",
-      "zh": "新手联赛"
+      "en": "Normal League",
+      "jp": "ノーマルリーグ",
+      "kr": "노멀 리그",
+      "zh": "普通联赛"
     },
     "adv": {
       "atk": -697,
@@ -25316,10 +24989,10 @@
       "zh": "世界首领达利娅"
     },
     "difficulty": {
-      "en": "Junior League",
-      "jp": "ジュニアリーグ",
-      "kr": "주니어 리그",
-      "zh": "初级联赛"
+      "en": "Hard League",
+      "jp": "ハードリーグ",
+      "kr": "하드 리그",
+      "zh": "困难联赛"
     },
     "adv": {
       "atk": -613,
@@ -25426,10 +25099,10 @@
       "zh": "世界首领达利娅"
     },
     "difficulty": {
-      "en": "Senior League",
-      "jp": "シニアリーグ",
-      "kr": "시니어 리그",
-      "zh": "高级联赛"
+      "en": "Very Hard League",
+      "jp": "ベリーハードリーグ",
+      "kr": "베리 하드 리그",
+      "zh": "极难联赛"
     },
     "adv": {
       "atk": -535,
@@ -25722,10 +25395,10 @@
       "zh": "世界首领德雷坎"
     },
     "difficulty": {
-      "en": "Beginner League",
-      "jp": "ビギナーリーグ",
-      "kr": "비기너 리그",
-      "zh": "新手联赛"
+      "en": "Normal League",
+      "jp": "ノーマルリーグ",
+      "kr": "노멀 리그",
+      "zh": "普通联赛"
     },
     "adv": {
       "atk": -697,
@@ -25832,10 +25505,10 @@
       "zh": "世界首领德雷坎"
     },
     "difficulty": {
-      "en": "Junior League",
-      "jp": "ジュニアリーグ",
-      "kr": "주니어 리그",
-      "zh": "初级联赛"
+      "en": "Hard League",
+      "jp": "ハードリーグ",
+      "kr": "하드 리그",
+      "zh": "困难联赛"
     },
     "adv": {
       "atk": -613,
@@ -25942,10 +25615,10 @@
       "zh": "世界首领德雷坎"
     },
     "difficulty": {
-      "en": "Senior League",
-      "jp": "シニアリーグ",
-      "kr": "시니어 리그",
-      "zh": "高级联赛"
+      "en": "Very Hard League",
+      "jp": "ベリーハードリーグ",
+      "kr": "베리 하드 리그",
+      "zh": "极难联赛"
     },
     "adv": {
       "atk": -535,
