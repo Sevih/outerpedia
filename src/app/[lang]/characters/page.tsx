@@ -7,16 +7,10 @@ import { CharactersBrowser, type CharacterRow } from '@/components/character/Cha
 import {
   characterDisplayName,
   characterNamePrefix,
-  getCharacter,
   getCharacterListItems,
   slugForId,
 } from '@/lib/data/characters';
-import { loadCuratedCharacters } from '@/lib/data/curated';
-import { hasIgnoreDefense } from '@/lib/skill-view';
-import type { Skill } from '@contracts';
-import skillsData from '@data/generated/skills.json';
-
-const SKILLS = skillsData as unknown as Record<string, Skill>;
+import { characterTags, loadCuratedCharacters } from '@/lib/data/curated';
 
 export const revalidate = 86400;
 
@@ -38,26 +32,21 @@ export async function generateMetadata({
 
 function buildRows(lang: Lang): CharacterRow[] {
   const curated = loadCuratedCharacters();
-  return getCharacterListItems().map((c) => {
-    const skills = (getCharacter(c.id)?.skills ?? []).map((sid) => SKILLS[sid]).filter(Boolean);
-    return {
-      id: c.id,
-      slug: slugForId(c.id) ?? c.id,
-      name: characterDisplayName(c, lang),
-      prefix: characterNamePrefix(c, lang),
-      element: c.element,
-      class: c.class,
-      rarity: c.rarity,
-      isFusion: c.isFusion,
-      tags: [
-        ...(curated[c.id]?.tags ?? []),
-        ...(c.isFusion ? ['core-fusion'] : []),
-        ...(hasIgnoreDefense(skills) ? ['ignore-defense'] : []),
-      ],
-      rank: curated[c.id]?.rank,
-      role: curated[c.id]?.role,
-    };
-  });
+  return getCharacterListItems().map((c) => ({
+    id: c.id,
+    slug: slugForId(c.id) ?? c.id,
+    name: characterDisplayName(c, lang),
+    prefix: characterNamePrefix(c, lang),
+    element: c.element,
+    class: c.class,
+    rarity: c.rarity,
+    isFusion: c.isFusion,
+    // Tags DÉRIVÉS DU JEU (extraction) + le seul tag humain (`free`, curé).
+    // La map curée est passée explicitement : une seule lecture pour le roster.
+    tags: characterTags(c, curated),
+    rank: curated[c.id]?.rank,
+    role: curated[c.id]?.role,
+  }));
 }
 
 export default async function CharactersPage({ params }: { params: Promise<{ lang: string }> }) {

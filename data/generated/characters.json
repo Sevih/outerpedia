@@ -498,6 +498,8 @@
     },
     "ee": "2000005",
     "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit", "ee"],
+    "tags": ["ignore-defense"],
     "appearances": ["2010005"],
     "costumes": [
       {
@@ -810,7 +812,9 @@
       }
     },
     "ee": "2000008",
-    "recommendedSets": ["1", "3", "7"]
+    "recommendedSets": ["1", "3", "7"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"]
   },
   "2000009": {
     "id": "2000009",
@@ -1521,7 +1525,9 @@
       }
     },
     "ee": "2000015",
-    "recommendedSets": ["1", "12", "13"]
+    "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["ee"],
+    "tags": ["ignore-defense"]
   },
   "2000016": {
     "id": "2000016",
@@ -2214,6 +2220,8 @@
     },
     "ee": "2000022",
     "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["ee"],
+    "tags": ["ignore-defense"],
     "appearances": ["2010022"],
     "costumes": [
       {
@@ -2542,6 +2550,8 @@
     },
     "ee": "2000025",
     "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"],
     "appearances": ["2010025", "2020025"],
     "costumes": [
       {
@@ -2849,7 +2859,9 @@
       }
     },
     "ee": "2000028",
-    "recommendedSets": ["1", "12", "13"]
+    "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit", "ee"],
+    "tags": ["ignore-defense"]
   },
   "2000029": {
     "id": "2000029",
@@ -3304,7 +3316,9 @@
       }
     },
     "ee": "2000033",
-    "recommendedSets": ["1", "12", "13"]
+    "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit", "ee"],
+    "tags": ["ignore-defense"]
   },
   "2000034": {
     "id": "2000034",
@@ -3395,7 +3409,9 @@
       }
     },
     "ee": "2000034",
-    "recommendedSets": ["1", "3", "7"]
+    "recommendedSets": ["1", "3", "7"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"]
   },
   "2000035": {
     "id": "2000035",
@@ -3926,6 +3942,8 @@
     },
     "ee": "2000039",
     "recommendedSets": ["13", "1", "7"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"],
     "appearances": ["2010039", "2020039"],
     "costumes": [
       {
@@ -4911,7 +4929,9 @@
       }
     },
     "ee": "2000049",
-    "recommendedSets": ["1", "12", "13"]
+    "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"]
   },
   "2000050": {
     "id": "2000050",
@@ -5093,7 +5113,9 @@
       }
     },
     "ee": "2000051",
-    "recommendedSets": ["1", "3", "7"]
+    "recommendedSets": ["1", "3", "7"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"]
   },
   "2000052": {
     "id": "2000052",
@@ -5185,7 +5207,9 @@
       }
     },
     "ee": "2000052",
-    "recommendedSets": ["13", "1", "7"]
+    "recommendedSets": ["13", "1", "7"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"]
   },
   "2000053": {
     "id": "2000053",
@@ -5278,6 +5302,8 @@
     },
     "ee": "2000053",
     "recommendedSets": ["1", "3", "7"],
+    "ignoreDefense": ["kit"],
+    "tags": ["premium", "ignore-defense"],
     "appearances": ["2010053"],
     "costumes": [
       {
@@ -5497,6 +5523,8 @@
     },
     "ee": "2000055",
     "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["ee"],
+    "tags": ["ignore-defense"],
     "appearances": ["2010055"],
     "costumes": [
       {
@@ -5934,6 +5962,8 @@
     },
     "ee": "2000059",
     "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit"],
+    "tags": ["premium", "ignore-defense"],
     "appearances": ["2020059"],
     "costumes": [
       {
@@ -6422,6 +6452,8 @@
     },
     "ee": "2000063",
     "recommendedSets": ["3", "2", "7"],
+    "ignoreDefense": ["kit"],
+    "tags": ["premium", "ignore-defense"],
     "appearances": ["2010063"],
     "costumes": [
       {
@@ -6659,6 +6691,8 @@
     },
     "ee": "2000065",
     "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit", "ee"],
+    "tags": ["ignore-defense"],
     "appearances": ["2010065", "2020065", "2030065", "2040065", "2050065"],
     "costumes": [
       {
@@ -6976,7 +7010,9 @@
       }
     },
     "ee": "2000067",
-    "recommendedSets": ["1", "12", "13"]
+    "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"]
   },
   "2000068": {
     "id": "2000068",
@@ -7554,6 +7590,8 @@
     },
     "ee": "2000072",
     "recommendedSets": ["13", "3", "5"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"],
     "appearances": ["2010072"],
     "costumes": [
       {
@@ -7896,6 +7934,8 @@
     },
     "ee": "2000075",
     "recommendedSets": ["13", "1", "7"],
+    "ignoreDefense": ["transcend"],
+    "tags": ["premium", "ignore-defense"],
     "appearances": ["2010075", "2020075"],
     "costumes": [
       {
@@ -8022,6 +8062,8 @@
     },
     "ee": "2000076",
     "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"],
     "appearances": ["2010076", "2020076"],
     "costumes": [
       {
@@ -8148,6 +8190,8 @@
     },
     "ee": "2000077",
     "recommendedSets": ["3", "2", "7"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"],
     "appearances": ["2010077", "2020077"],
     "costumes": [
       {
@@ -8274,7 +8318,9 @@
       }
     },
     "ee": "2000078",
-    "recommendedSets": ["13", "1", "7"]
+    "recommendedSets": ["13", "1", "7"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"]
   },
   "2000079": {
     "id": "2000079",
@@ -8934,6 +8980,7 @@
     },
     "ee": "2000084",
     "recommendedSets": ["3", "13", "9"],
+    "tags": ["premium"],
     "appearances": ["2010084", "2030084", "2020084"],
     "costumes": [
       {
@@ -9076,7 +9123,9 @@
       }
     },
     "ee": "2000085",
-    "recommendedSets": ["1", "12", "13"]
+    "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit", "transcend"],
+    "tags": ["seasonal", "ignore-defense"]
   },
   "2000086": {
     "id": "2000086",
@@ -9168,7 +9217,9 @@
       }
     },
     "ee": "2000086",
-    "recommendedSets": ["1", "5", "13"]
+    "recommendedSets": ["1", "5", "13"],
+    "ignoreDefense": ["kit"],
+    "tags": ["seasonal", "ignore-defense"]
   },
   "2000087": {
     "id": "2000087",
@@ -9260,6 +9311,8 @@
     },
     "ee": "2000087",
     "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"],
     "appearances": ["2010087", "2030087", "2020087"],
     "costumes": [
       {
@@ -9401,6 +9454,8 @@
     },
     "ee": "2000088",
     "recommendedSets": ["3", "2", "13"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"],
     "appearances": ["2010088"],
     "costumes": [
       {
@@ -9511,6 +9566,8 @@
     },
     "ee": "2000089",
     "recommendedSets": ["1", "3", "7"],
+    "ignoreDefense": ["kit", "ee"],
+    "tags": ["ignore-defense"],
     "appearances": ["2010089"],
     "costumes": [
       {
@@ -9623,6 +9680,8 @@
     },
     "ee": "2000090",
     "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit"],
+    "tags": ["limited", "ignore-defense"],
     "appearances": ["2010090"],
     "costumes": [
       {
@@ -9734,6 +9793,8 @@
     },
     "ee": "2000091",
     "recommendedSets": ["5", "13", "1"],
+    "ignoreDefense": ["kit"],
+    "tags": ["limited", "ignore-defense"],
     "appearances": ["2010091"],
     "costumes": [
       {
@@ -9844,7 +9905,8 @@
       }
     },
     "ee": "2000092",
-    "recommendedSets": ["13", "5", "20"]
+    "recommendedSets": ["13", "5", "20"],
+    "tags": ["premium"]
   },
   "2000093": {
     "id": "2000093",
@@ -9936,7 +9998,9 @@
       }
     },
     "ee": "2000093",
-    "recommendedSets": ["13", "1", "7"]
+    "recommendedSets": ["13", "1", "7"],
+    "ignoreDefense": ["transcend"],
+    "tags": ["seasonal", "ignore-defense"]
   },
   "2000094": {
     "id": "2000094",
@@ -10138,7 +10202,8 @@
       }
     },
     "ee": "2000095",
-    "recommendedSets": ["1", "12", "13"]
+    "recommendedSets": ["1", "12", "13"],
+    "tags": ["collab"]
   },
   "2000096": {
     "id": "2000096",
@@ -10229,7 +10294,9 @@
       }
     },
     "ee": "2000096",
-    "recommendedSets": ["1", "12", "13"]
+    "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit"],
+    "tags": ["collab", "ignore-defense"]
   },
   "2000097": {
     "id": "2000097",
@@ -10321,7 +10388,9 @@
       }
     },
     "ee": "2000097",
-    "recommendedSets": ["13", "1", "7"]
+    "recommendedSets": ["13", "1", "7"],
+    "ignoreDefense": ["kit", "ee"],
+    "tags": ["collab", "ignore-defense"]
   },
   "2000098": {
     "id": "2000098",
@@ -10522,7 +10591,9 @@
       }
     },
     "ee": "2000099",
-    "recommendedSets": ["1", "3", "7"]
+    "recommendedSets": ["1", "3", "7"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"]
   },
   "2000100": {
     "id": "2000100",
@@ -10614,7 +10685,8 @@
       }
     },
     "ee": "2000100",
-    "recommendedSets": ["3", "13", "9"]
+    "recommendedSets": ["3", "13", "9"],
+    "tags": ["premium"]
   },
   "2000101": {
     "id": "2000101",
@@ -10817,7 +10889,8 @@
       }
     },
     "ee": "2000102",
-    "recommendedSets": ["3", "2", "13"]
+    "recommendedSets": ["3", "2", "13"],
+    "tags": ["limited"]
   },
   "2000103": {
     "id": "2000103",
@@ -11111,7 +11184,8 @@
       }
     },
     "ee": "2000106",
-    "recommendedSets": ["3", "2", "7"]
+    "recommendedSets": ["3", "2", "7"],
+    "tags": ["seasonal"]
   },
   "2000107": {
     "id": "2000107",
@@ -11424,6 +11498,8 @@
     },
     "ee": "2000109",
     "recommendedSets": ["3", "1", "11"],
+    "ignoreDefense": ["ee"],
+    "tags": ["premium", "ignore-defense"],
     "appearances": ["2010109"],
     "costumes": [
       {
@@ -11535,7 +11611,9 @@
       }
     },
     "ee": "2000110",
-    "recommendedSets": ["13", "1", "11"]
+    "recommendedSets": ["13", "1", "11"],
+    "ignoreDefense": ["kit"],
+    "tags": ["seasonal", "ignore-defense"]
   },
   "2000111": {
     "id": "2000111",
@@ -11628,6 +11706,8 @@
     },
     "ee": "2000111",
     "recommendedSets": ["13", "3", "5"],
+    "ignoreDefense": ["kit"],
+    "tags": ["premium", "ignore-defense"],
     "appearances": ["2010111"],
     "costumes": [
       {
@@ -11739,6 +11819,8 @@
     },
     "ee": "2000112",
     "recommendedSets": ["2", "11", "7"],
+    "ignoreDefense": ["kit"],
+    "tags": ["premium", "ignore-defense"],
     "appearances": ["2010112", "2020112"],
     "costumes": [
       {
@@ -11975,6 +12057,8 @@
     },
     "ee": "2000114",
     "recommendedSets": ["3", "11", "10"],
+    "ignoreDefense": ["kit", "transcend"],
+    "tags": ["limited", "ignore-defense"],
     "appearances": ["2010114"],
     "costumes": [
       {
@@ -12085,6 +12169,8 @@
     },
     "ee": "2000116",
     "recommendedSets": ["2", "3", "7"],
+    "ignoreDefense": ["kit", "ee"],
+    "tags": ["ignore-defense"],
     "appearances": ["2010116"],
     "costumes": [
       {
@@ -12195,6 +12281,8 @@
     },
     "ee": "2000117",
     "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"],
     "appearances": ["2010117", "2020117"],
     "costumes": [
       {
@@ -12332,7 +12420,9 @@
       }
     },
     "ee": "2000119",
-    "recommendedSets": ["1", "12", "13"]
+    "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit", "transcend"],
+    "tags": ["premium", "ignore-defense"]
   },
   "2700003": {
     "id": "2700003",
@@ -12425,6 +12515,8 @@
     },
     "ee": "2700003",
     "recommendedSets": ["13", "3", "5"],
+    "ignoreDefense": ["ee", "transcend"],
+    "tags": ["ignore-defense", "core-fusion"],
     "originalCharacter": "2000003",
     "fusion": {
       "group": "3",
@@ -12584,6 +12676,8 @@
     },
     "ee": "2700005",
     "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense", "core-fusion"],
     "appearances": ["2710005"],
     "originalCharacter": "2000005",
     "fusion": {
@@ -12745,6 +12839,8 @@
     },
     "ee": "2700037",
     "recommendedSets": ["3", "2", "7"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense", "core-fusion"],
     "appearances": ["2710037", "2720037", "2730037"],
     "originalCharacter": "2000037",
     "fusion": {
@@ -12905,6 +13001,7 @@
     },
     "ee": "2700043",
     "recommendedSets": ["5", "13", "1"],
+    "tags": ["core-fusion"],
     "appearances": ["2710043"],
     "originalCharacter": "2000043",
     "fusion": {
@@ -13065,6 +13162,7 @@
     },
     "ee": "2700056",
     "recommendedSets": ["13", "1", "7"],
+    "tags": ["core-fusion"],
     "appearances": ["2710056", "2720056"],
     "originalCharacter": "2000056",
     "fusion": {
@@ -13225,6 +13323,8 @@
     },
     "ee": "2700070",
     "recommendedSets": ["1", "3", "7"],
+    "ignoreDefense": ["transcend"],
+    "tags": ["ignore-defense", "core-fusion"],
     "originalCharacter": "2000070",
     "fusion": {
       "group": "6",

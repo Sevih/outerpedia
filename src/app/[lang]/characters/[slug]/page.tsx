@@ -48,9 +48,9 @@ import {
 } from '@/components/character/detail/SynergiesSection';
 import { MultiVideoEmbed, type VideoItem } from '@/components/ui/MultiVideoEmbed';
 import { TranscendTierProvider } from '@/components/character/detail/TranscendTierContext';
-import { getCharacterCurated } from '@/lib/data/curated';
+import { characterTags, getCharacterCurated } from '@/lib/data/curated';
 import { getCharacterProsCons } from '@/lib/data/pros-cons';
-import { tagLabel } from '@/lib/data/tags';
+import { firstTagOfKind, tagLabel } from '@/lib/data/tags';
 import { parseText } from '@/lib/parse-text';
 import {
   computeStatSteps,
@@ -81,9 +81,6 @@ import eeData from '@data/generated/equipment/ee.json';
 const G = charactersMeta as unknown as Glossaries;
 const SKILLS = skillsData as unknown as Record<string, Skill>;
 const EE = eeData as unknown as Record<string, { name: LangDict; grade: string }>;
-
-/** Ordre V2 des tags « type d'unité » (le premier trouvé fait le badge). */
-const UNIT_TYPE_ORDER = ['premium', 'limited', 'seasonal', 'collab', 'free'] as const;
 
 export function generateStaticParams() {
   const slugs = listCharacterSlugs();
@@ -165,7 +162,9 @@ export default async function CharacterDetail({
       fullArts.push({ src: img.full(model), alt: `${name} — ${label}`, label });
     }
   }
-  const unitTagSlug = UNIT_TYPE_ORDER.find((k) => (curated.tags ?? []).includes(k));
+  // Badge « type d'unité » : le tag de recrutement du perso (extraction) ou
+  // `free` (curé) — un seul badge, choisi par l'ordre canonique du vocabulaire.
+  const unitTagSlug = firstTagOfKind(characterTags(char), 'recruit');
   const meta: Array<[string, string]> = [];
   if (va) meta.push([t('page.character.voice_actor'), va]);
   if (char.profile?.birthday) meta.push([t('page.character.birthday'), char.profile.birthday]);

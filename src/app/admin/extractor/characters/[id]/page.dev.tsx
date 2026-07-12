@@ -147,10 +147,34 @@ export default async function ExtractorCharacterDetail({
         </p>
       ) : null}
 
-      <CharacterVisual
-        char={char}
-        tags={[...(curated.tags ?? []), ...(char.originalCharacter ? ['core-fusion'] : [])]}
-      />
+      <CharacterVisual char={char} tags={[...(char.tags ?? []), ...(curated.tags ?? [])]} />
+
+      {/* Ce que la DÉTECTION a produit — la partie « tags » de l'extraction. */}
+      <section className="space-y-2">
+        <h2 className="text-content-strong text-xs font-semibold uppercase">Tags (détectés)</h2>
+        {char.tags?.length ? (
+          <div className="flex flex-wrap items-center gap-1.5">
+            {char.tags.map((t) => (
+              <span
+                key={t}
+                className="border-line-subtle text-content rounded border px-2 py-0.5 text-xs"
+              >
+                {t}
+                {t === 'ignore-defense' && char.ignoreDefense && (
+                  <span className="text-content-subtle"> · {char.ignoreDefense.join(' + ')}</span>
+                )}
+              </span>
+            ))}
+          </div>
+        ) : (
+          <p className="text-content-subtle text-sm">Aucun tag dérivé de la donnée de jeu.</p>
+        )}
+        <p className="text-content-subtle text-xs">
+          Acquisition ← bannière (RecruitGroupTemplet) · ignore-defense ← buffs de pénétration
+          (kit/EE/transcendance) · core-fusion ← lignée. Le seul tag humain (<code>free</code>) vit
+          côté Editor.
+        </p>
+      </section>
 
       {/* Contrôle vs V2 : valeurs + reste à intégrer */}
       <V2ControlPanel control={control} />

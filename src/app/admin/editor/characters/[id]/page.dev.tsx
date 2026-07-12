@@ -59,6 +59,7 @@ export default async function EditorCharacterDetail({
           id={id}
           characterName={characterDisplayName(char)}
           initial={curated}
+          derivedTags={char.tags ?? []}
         />
       </section>
     </div>

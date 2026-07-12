@@ -1,0 +1,128 @@
+{
+  "premium": {
+    "kind": "recruit",
+    "sort": 1,
+    "name": {
+      "en": "Premium Units",
+      "jp": "プレミアムユニット",
+      "kr": "프리미엄 유닛",
+      "zh": "高级单位",
+      "fr": "Unités Premium"
+    },
+    "desc": {
+      "en": "These characters can only be obtained through special events or Premium banners.",
+      "jp": "特別イベントまたはプレミアムバナーでのみ入手可能なキャラクター。",
+      "kr": "특별 이벤트 또는 프리미엄 배너에서만 획득할 수 있는 캐릭터입니다.",
+      "zh": "这些角色只能通过特殊活动或高级卡池获得。",
+      "fr": "Ces personnages ne s'obtiennent que via des événements spéciaux ou les bannières Premium."
+    }
+  },
+  "limited": {
+    "kind": "recruit",
+    "sort": 2,
+    "name": {
+      "en": "Festival Units",
+      "jp": "フェスユニット",
+      "kr": "페스티벌 유닛",
+      "zh": "限定单位",
+      "fr": "Unités Festival"
+    },
+    "desc": {
+      "en": "These characters are time-limited and only available during specific banners.",
+      "jp": "期間限定で、特定のバナー期間中のみ入手可能なキャラクター。",
+      "kr": "기간 한정으로 특정 배너 기간에만 획득할 수 있는 캐릭터입니다.",
+      "zh": "这些角色为限时角色，仅在特定卡池期间可获得。",
+      "fr": "Ces personnages sont limités dans le temps et ne sont disponibles que sur certaines bannières."
+    }
+  },
+  "seasonal": {
+    "kind": "recruit",
+    "sort": 3,
+    "name": {
+      "en": "Seasonal Units",
+      "jp": "季節限定ユニット",
+      "kr": "시즌 유닛",
+      "zh": "季节单位",
+      "fr": "Unités Saisonnières"
+    },
+    "desc": {
+      "en": "These characters are limited and tied to seasonal events like Halloween or Christmas.",
+      "jp": "ハロウィンやクリスマスなどの季節イベントに関連した限定キャラクター。",
+      "kr": "할로윈이나 크리스마스 같은 시즌 이벤트와 연결된 한정 캐릭터입니다.",
+      "zh": "这些角色为限定角色，与万圣节或圣诞节等季节活动相关。",
+      "fr": "Ces personnages sont limités et liés à des événements saisonniers comme Halloween ou Noël."
+    }
+  },
+  "collab": {
+    "kind": "recruit",
+    "sort": 4,
+    "name": {
+      "en": "Collab Units",
+      "jp": "コラボユニット",
+      "kr": "콜라보 유닛",
+      "zh": "联动单位",
+      "fr": "Unités Collaboration"
+    },
+    "desc": {
+      "en": "These characters are limited to crossovers events with other franchises. They are the least likely to return.",
+      "jp": "他作品とのコラボイベント限定のキャラクター。復刻の可能性が最も低いです。",
+      "kr": "다른 프랜차이즈와의 크로스오버 이벤트에 한정된 캐릭터입니다. 복각 가능성이 가장 낮습니다.",
+      "zh": "这些角色限定于与其他作品的联动活动。复刻可能性最低。",
+      "fr": "Ces personnages sont limités aux collaborations avec d'autres licences. Ce sont ceux qui ont le moins de chances de revenir."
+    }
+  },
+  "free": {
+    "kind": "recruit",
+    "sort": 5,
+    "name": {
+      "en": "Free Units",
+      "jp": "無料ユニット",
+      "kr": "무료 유닛",
+      "zh": "免费单位",
+      "fr": "Unités Gratuites"
+    },
+    "desc": {
+      "en": "These characters can be obtained for free. You can check where to obtain them under Guides > General Guides > Free Heroes & Starter Banners.",
+      "jp": "無料で入手可能なキャラクター。入手方法はガイド > 一般ガイド > 無料ヒーロー＆初心者バナーで確認できます。",
+      "kr": "무료로 획득할 수 있는 캐릭터입니다. 획득 방법은 가이드 > 일반 가이드 > 무료 영웅 & 초보자 배너에서 확인할 수 있습니다.",
+      "zh": "这些角色可以免费获得。获取方式请查看指南 > 通用指南 > 免费英雄与新手卡池。",
+      "fr": "Ces personnages s'obtiennent gratuitement. Voir Guides > Guides généraux > Héros gratuits & bannières de départ."
+    }
+  },
+  "ignore-defense": {
+    "kind": "mechanic",
+    "sort": 6,
+    "name": {
+      "en": "Ignores Defense",
+      "jp": "防御無視",
+      "kr": "방어 무시",
+      "zh": "无视防御",
+      "fr": "Ignore la Défense"
+    },
+    "desc": {
+      "en": "These characters have an inherent effect that ignores part of the target's Defense — unconditionally, without needing a Penetration buff first. It can come from skills, Exclusive Equipment, or Transcendence upgrades.",
+      "jp": "対象の防御力の一部を無視する固有効果を持つキャラクター。貫通バフを必要とせず、無条件に発揮されます。スキル、専用装備、または超越アップグレードから得られます。",
+      "kr": "대상의 방어력 일부를 무시하는 고유 효과를 가진 캐릭터입니다. 관통 버프 없이 무조건 발동합니다. 스킬, 전용 장비, 또는 초월 업그레이드에서 얻을 수 있습니다.",
+      "zh": "这些角色拥有无视目标部分防御的固有效果，无需先获得穿透增益即可无条件生效。可来自技能、专属装备或超越升级。",
+      "fr": "Ces personnages disposent d'un effet qui ignore une partie de la Défense de la cible, sans condition — sans avoir besoin d'un buff de Pénétration au préalable. Il peut venir des compétences, de l'Équipement Exclusif ou de la Transcendance."
+    }
+  },
+  "core-fusion": {
+    "kind": "lineage",
+    "sort": 7,
+    "name": {
+      "en": "Core Fusion",
+      "jp": "コアフュージョン",
+      "kr": "코어 퓨전",
+      "zh": "核心融合",
+      "fr": "Core Fusion"
+    },
+    "desc": {
+      "en": "Core Fusion units are upgraded versions of existing characters, obtained through the Core Fusion system.",
+      "jp": "コアフュージョンユニットは、コアフュージョンシステムを通じて入手できる既存キャラクターの強化版です。",
+      "kr": "코어 퓨전 유닛은 코어 퓨전 시스템을 통해 획득할 수 있는 기존 캐릭터의 강화 버전입니다.",
+      "zh": "核心融合单位是通过核心融合系统获得的现有角色的升级版本。",
+      "fr": "Les unités Core Fusion sont des versions améliorées de personnages existants, obtenues via le système de Core Fusion."
+    }
+  }
+}

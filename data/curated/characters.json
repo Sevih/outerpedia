@@ -63,7 +63,7 @@
   "2000005": {
     "rank": "C",
     "role": "dps",
-    "tags": ["ignore-defense", "free"],
+    "tags": ["free"],
     "skillPriority": {
       "first": 3,
       "second": 1,
@@ -101,7 +101,7 @@
     "rank": "B",
     "rankPvp": "B",
     "role": "dps",
-    "tags": ["ignore-defense", "free"],
+    "tags": ["free"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -238,7 +238,7 @@
     "rank": "C",
     "rankPvp": "D",
     "role": "dps",
-    "tags": ["ignore-defense", "free"],
+    "tags": ["free"],
     "skillPriority": {
       "first": 3,
       "second": 1,
@@ -548,7 +548,7 @@
     "rank": "C",
     "rankPvp": "C",
     "role": "dps",
-    "tags": ["ignore-defense", "free"],
+    "tags": ["free"],
     "skillPriority": {
       "first": 2,
       "second": 1,
@@ -707,7 +707,7 @@
     "rank": "S",
     "rankPvp": "C",
     "role": "dps",
-    "tags": ["ignore-defense", "free"],
+    "tags": ["free"],
     "skillPriority": {
       "first": 2,
       "second": 1,
@@ -808,7 +808,6 @@
   "2000033": {
     "rank": "D",
     "role": "dps",
-    "tags": ["ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -866,7 +865,6 @@
   "2000034": {
     "rank": "E",
     "role": "dps",
-    "tags": ["ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -1017,7 +1015,7 @@
     "rank": "A",
     "rankPvp": "B",
     "role": "support",
-    "tags": ["ignore-defense", "free"],
+    "tags": ["free"],
     "skillPriority": {
       "first": 3,
       "second": 1,
@@ -1278,7 +1276,6 @@
   "2000049": {
     "rank": "E",
     "role": "dps",
-    "tags": ["ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -1338,7 +1335,6 @@
   "2000051": {
     "rank": "E",
     "role": "dps",
-    "tags": ["ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -1349,7 +1345,7 @@
     "rank": "D",
     "rankPvp": "D",
     "role": "support",
-    "tags": ["ignore-defense", "free"],
+    "tags": ["free"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -1398,7 +1394,6 @@
     "rank": "A",
     "rankPvp": "A",
     "role": "dps",
-    "tags": ["premium", "ignore-defense"],
     "skillPriority": {
       "first": 2,
       "second": 1,
@@ -1476,7 +1471,7 @@
     "rank": "S",
     "rankPvp": "C",
     "role": "dps",
-    "tags": ["ignore-defense", "free"],
+    "tags": ["free"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -1711,7 +1706,6 @@
     "rank": "S",
     "rankPvp": "S",
     "role": "dps",
-    "tags": ["premium", "ignore-defense"],
     "skillPriority": {
       "first": 2,
       "second": 3,
@@ -1938,7 +1932,6 @@
     "rank": "S",
     "rankPvp": "A",
     "role": "sustain",
-    "tags": ["premium", "ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 1,
@@ -2123,7 +2116,7 @@
     "rank": "S",
     "rankPvp": "B",
     "role": "dps",
-    "tags": ["ignore-defense", "free"],
+    "tags": ["free"],
     "skillPriority": {
       "first": 2,
       "second": 3,
@@ -2239,7 +2232,6 @@
     "rank": "A",
     "rankPvp": "A",
     "role": "dps",
-    "tags": ["ignore-defense"],
     "skillPriority": {
       "first": 2,
       "second": 3,
@@ -2476,7 +2468,6 @@
     "rank": "B",
     "rankPvp": "C",
     "role": "sustain",
-    "tags": ["ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -2609,7 +2600,6 @@
     "rank": "A",
     "rankPvp": "S",
     "role": "support",
-    "tags": ["premium"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -2646,7 +2636,6 @@
     "rank": "B",
     "rankPvp": "C",
     "role": "dps",
-    "tags": ["ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 1,
@@ -2742,7 +2731,7 @@
     "rank": "B",
     "rankPvp": "B",
     "role": "support",
-    "tags": ["ignore-defense", "free"],
+    "tags": ["free"],
     "skillPriority": {
       "first": 2,
       "second": 3,
@@ -2789,7 +2778,7 @@
     "rank": "B",
     "rankPvp": "D",
     "role": "dps",
-    "tags": ["ignore-defense", "free"],
+    "tags": ["free"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -2993,7 +2982,6 @@
     "rank": "S",
     "rankPvp": "S",
     "role": "sustain",
-    "tags": ["premium"],
     "skillPriority": {
       "first": 3,
       "second": 1,
@@ -3053,13 +3041,11 @@
     "rank": "S",
     "rankPvp": "A",
     "role": "dps",
-    "tags": ["seasonal", "ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 1,
       "ultimate": 2
     },
-    "limited": true,
     "videos": [
       {
         "platform": "youtube",
@@ -3074,13 +3060,11 @@
     "rank": "S",
     "rankPvp": "B",
     "role": "dps",
-    "tags": ["seasonal", "ignore-defense"],
     "skillPriority": {
       "first": 2,
       "second": 1,
       "ultimate": 3
     },
-    "limited": true,
     "videos": [
       {
         "platform": "youtube",
@@ -3112,7 +3096,7 @@
     "rank": "A",
     "rankPvp": "A",
     "role": "dps",
-    "tags": ["ignore-defense", "free"],
+    "tags": ["free"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -3166,7 +3150,7 @@
     "rank": "A",
     "rankPvp": "A",
     "role": "sustain",
-    "tags": ["ignore-defense", "free"],
+    "tags": ["free"],
     "skillPriority": {
       "first": 3,
       "second": 1,
@@ -3248,7 +3232,6 @@
     "rank": "A",
     "rankPvp": "A",
     "role": "dps",
-    "tags": ["ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -3279,7 +3262,6 @@
     "rank": "A",
     "rankPvp": "S",
     "role": "dps",
-    "tags": ["limited", "ignore-defense"],
     "skillPriority": {
       "first": 2,
       "second": 3,
@@ -3291,7 +3273,6 @@
       "5": "A",
       "6": "A"
     },
-    "limited": true,
     "prosCons": {
       "pros": [
         {
@@ -3354,13 +3335,11 @@
     "rank": "S",
     "rankPvp": "S",
     "role": "support",
-    "tags": ["limited", "ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 2,
       "ultimate": 1
     },
-    "limited": true,
     "videos": [
       {
         "platform": "youtube",
@@ -3375,7 +3354,6 @@
     "rank": "A",
     "rankPvp": "S",
     "role": "dps",
-    "tags": ["premium"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -3409,7 +3387,6 @@
     "rank": "S",
     "rankPvp": "A",
     "role": "dps",
-    "tags": ["seasonal"],
     "skillPriority": {
       "first": 3,
       "second": 1,
@@ -3427,7 +3404,6 @@
       "5": "support",
       "6": "dps"
     },
-    "limited": true,
     "videos": [
       {
         "platform": "youtube",
@@ -3534,13 +3510,11 @@
     "rank": "S",
     "rankPvp": "B",
     "role": "dps",
-    "tags": ["collab"],
     "skillPriority": {
       "first": 3,
       "second": 2,
       "ultimate": 1
     },
-    "limited": true,
     "prosCons": {
       "pros": [
         {
@@ -3605,7 +3579,6 @@
     "rank": "B",
     "rankPvp": "B",
     "role": "dps",
-    "tags": ["collab", "ignore-defense"],
     "skillPriority": {
       "first": 2,
       "second": 3,
@@ -3617,7 +3590,6 @@
       "5": "C",
       "6": "B"
     },
-    "limited": true,
     "prosCons": {
       "pros": [
         {
@@ -3674,13 +3646,11 @@
     "rank": "S",
     "rankPvp": "S",
     "role": "dps",
-    "tags": ["collab", "ignore-defense"],
     "skillPriority": {
       "first": 1,
       "second": 2,
       "ultimate": 3
-    },
-    "limited": true
+    }
   },
   "2000098": {
     "rank": "A",
@@ -3696,7 +3666,6 @@
     "rank": "D",
     "rankPvp": "C",
     "role": "dps",
-    "tags": ["ignore-defense"],
     "skillPriority": {
       "first": 2,
       "second": 3,
@@ -3727,7 +3696,6 @@
     "rank": "A",
     "rankPvp": "S",
     "role": "sustain",
-    "tags": ["premium"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -3799,7 +3767,6 @@
     "rank": "A",
     "rankPvp": "S",
     "role": "sustain",
-    "tags": ["limited"],
     "skillPriority": {
       "first": 3,
       "second": 1,
@@ -3811,7 +3778,6 @@
       "5": "A",
       "6": "A"
     },
-    "limited": true,
     "videos": [
       {
         "platform": "youtube",
@@ -3855,13 +3821,11 @@
     "rank": "A",
     "rankPvp": "S",
     "role": "support",
-    "tags": ["seasonal"],
     "skillPriority": {
       "first": 3,
       "second": 2,
       "ultimate": 1
     },
-    "limited": true,
     "videos": [
       {
         "platform": "youtube",
@@ -3914,7 +3878,6 @@
     "rank": "A",
     "rankPvp": "S",
     "role": "dps",
-    "tags": ["premium", "ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -3946,7 +3909,6 @@
     "rank": "S",
     "rankPvp": "S",
     "role": "dps",
-    "tags": ["seasonal", "ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 1,
@@ -3958,7 +3920,6 @@
       "5": "S",
       "6": "S"
     },
-    "limited": true,
     "videos": [
       {
         "platform": "youtube",
@@ -3973,7 +3934,6 @@
     "rank": "A",
     "rankPvp": "S",
     "role": "support",
-    "tags": ["premium", "ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -3996,7 +3956,6 @@
     "rank": "A",
     "rankPvp": "S",
     "role": "dps",
-    "tags": ["premium", "ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -4184,7 +4143,6 @@
     "rank": "S",
     "rankPvp": "S",
     "role": "dps",
-    "tags": ["limited", "ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -4196,7 +4154,6 @@
       "5": "S",
       "6": "S"
     },
-    "limited": true,
     "prosCons": {
       "pros": [
         {
@@ -4266,7 +4223,6 @@
     "rank": "A",
     "rankPvp": "A",
     "role": "sustain",
-    "tags": ["ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -4286,7 +4242,6 @@
     "rank": "A",
     "rankPvp": "B",
     "role": "dps",
-    "tags": ["ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -4375,7 +4330,6 @@
     "rank": "S",
     "rankPvp": "S",
     "role": "dps",
-    "tags": ["premium", "ignore-defense"],
     "skillPriority": {
       "first": 3,
       "second": 1,
@@ -4471,7 +4425,6 @@
   "2700003": {
     "rank": "C",
     "role": "support",
-    "tags": ["ignore-defense", "core-fusion"],
     "skillPriority": {
       "first": 0,
       "second": 0,
@@ -4481,7 +4434,7 @@
   "2700005": {
     "rank": "B",
     "role": "dps",
-    "tags": ["ignore-defense", "core-fusion", "free"],
+    "tags": ["free"],
     "skillPriority": {
       "first": 0,
       "second": 0,
@@ -4592,7 +4545,7 @@
     "rank": "A",
     "rankPvp": "A",
     "role": "sustain",
-    "tags": ["ignore-defense", "core-fusion", "free"],
+    "tags": ["free"],
     "skillPriority": {
       "first": 0,
       "second": 0,
@@ -4603,7 +4556,6 @@
     "rank": "A",
     "rankPvp": "B",
     "role": "support",
-    "tags": ["core-fusion"],
     "prosCons": {
       "pros": [
         {
@@ -4671,7 +4623,6 @@
     "rank": "A",
     "rankPvp": "A",
     "role": "dps",
-    "tags": ["core-fusion"],
     "skillPriority": {
       "first": 1,
       "second": 2,
@@ -4690,7 +4641,6 @@
     "rank": "A",
     "rankPvp": "A",
     "role": "dps",
-    "tags": ["core-fusion"],
     "skillPriority": {
       "first": 3,
       "second": 2,

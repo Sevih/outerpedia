@@ -12,6 +12,7 @@
  */
 import type { LangDict } from '../../lib/lang';
 import { resolveClass } from '../../lib/class';
+import { expandBuffIds, loadBuffGroups, loadBuffIndex } from '../../lib/buff';
 import { loadTextIndex, resolveText } from '../../lib/text';
 import { loadTable, num, splitCsv, type Row } from '../../lib/tables';
 import { buildImageIndex } from '../../assets/source';
@@ -31,6 +32,82 @@ const CHAIN_ROLE: Record<string, ChainType> = {
   STRIKER: 'join',
   FINISHER: 'finish',
 };
+
+/**
+ * Vocabulaire FERMÉ des étiquettes DÉRIVÉES DU JEU. Les libellés et
+ * descriptions vivent dans `data/curated/tags.json` (le jeu n'a AUCUN texte
+ * pour ces catégories) ; ici on ne produit que la classification.
+ * `free` n'y figure pas : c'est la seule étiquette purement humaine (aucun
+ * marqueur d'obtention gratuite dans les tables) → couche curée.
+ */
+export type CharacterTag =
+  'premium' | 'limited' | 'seasonal' | 'collab' | 'ignore-defense' | 'core-fusion';
+
+/** Ordre canonique d'affichage (le 1er tag trouvé fait le badge de carte). */
+const TAG_ORDER: readonly CharacterTag[] = [
+  'premium',
+  'limited',
+  'seasonal',
+  'collab',
+  'ignore-defense',
+  'core-fusion',
+];
+
+/**
+ * D'où vient la pénétration de DEF. Toutes ne se valent PAS pour le joueur :
+ * `kit` est acquis d'office, `ee` suppose l'équipement exclusif forgé et
+ * équipé, `transcend` suppose le palier de transcendance atteint. On garde la
+ * provenance pour que le front puisse nuancer (« Ignore DEF · via EE ») au
+ * lieu de promettre la même chose dans les trois cas.
+ */
+export type IgnoreDefenseSource = 'kit' | 'ee' | 'transcend';
+
+/** Ordre canonique des provenances (sortie déterministe). */
+const IGNORE_DEFENSE_SOURCES: readonly IgnoreDefenseSource[] = ['kit', 'ee', 'transcend'];
+
+/** `RibbonType` de la bannière de recrutement → étiquette d'acquisition. */
+const RIBBON_TAG: Record<string, CharacterTag> = {
+  PREMIUM: 'premium',
+  OUTER_FES: 'limited',
+  SEASONAL: 'seasonal',
+};
+
+/**
+ * Une pénétration INNÉE — le perso perce DE LUI-MÊME.
+ *
+ * LA distinction du tag, et le piège de tout le sujet : « ignore-defense » ne
+ * veut PAS dire « touche à la pénétration », mais « perce sans condition ».
+ * Trois formes du jeu à ne surtout pas confondre :
+ *
+ *   1. BUFF de pénétration (`ON_TURN_END`) — le perso GAGNE le statut nommé
+ *      « Increased Penetration », qui DURE et s'affiche dans sa barre de buffs.
+ *      Ce n'est pas de l'inné : sans le buff, il ne perce pas. Beth (S1), Maxie,
+ *      Tamara, Ember, Fortuna sont dans ce cas → ILS NE SONT PAS TAGGÉS.
+ *   2. Dégâts CONDITIONNÉS à ce buff (`BT_DMG` + `BuffConditionType=OWNER_HAS_BUFF`)
+ *      — la ligne porte bien `ST_PIERCE_POWER_RATE`, mais elle ne l'APPLIQUE pas :
+ *      elle module des dégâts SI le buff est là (Beth S2/S3). Piège classique :
+ *      la stat est présente, la pénétration non.
+ *   3. Pénétration INNÉE — la seule qui compte :
+ *      - `ON_SKILL_FINISH` / `ON_SKILL_CHAIN_FINISH` : appliquée le TEMPS que le
+ *        skill (ou la chaîne) se résolve, puis retirée → c'est la frappe qui
+ *        perce, pas le perso qui porte un statut. La chaîne de Beth est ainsi la
+ *        SEULE vraie pénétration de son kit ;
+ *      - `NONE` : passif permanent (transcendance, équipement exclusif).
+ *
+ * Cible : `ME`, ou `MY_TEAM` qui INCLUT le lanceur ; `MY_TEAM_WITHOUT_ME` non,
+ * d'où la liste explicite plutôt qu'un `startsWith('MY_TEAM')`.
+ * Valeur POSITIVE : un `ST_PIERCE_POWER_RATE` NÉGATIF sur `ENEMY_TEAM` RÉDUIT la
+ * pénétration adverse (Domine, Anarky) — l'exact inverse d'un ignore-DEF.
+ */
+function isInnatePierce(b: Row): boolean {
+  return (
+    (b.StatType ?? '').startsWith('ST_PIERCE_POWER') &&
+    num(b.Value) > 0 &&
+    (b.TargetType === 'ME' || b.TargetType === 'MY_TEAM') &&
+    b.Type !== 'BT_DMG' &&
+    (b.BuffRemoveType ?? 'NONE') !== 'ON_TURN_END'
+  );
+}
 
 /**
  * Colonnes de stats de CharacterTemplet (paires _Min/_Max) → slug + échelle.
@@ -144,6 +221,13 @@ export interface Character {
   race: string;
   /** Position dans l'attaque en chaîne (BuffTemplet `<id>_chain*`.BuffCreateType). */
   chainType?: ChainType;
+  /**
+   * Étiquettes dérivées du jeu (acquisition, mécanique, lignée), ordre canonique.
+   * Le curé n'ajoute que `free` par-dessus — cf. `data/curated/characters.json`.
+   */
+  tags?: CharacterTag[];
+  /** Provenances de la pénétration de DEF, si le perso porte `ignore-defense`. */
+  ignoreDefense?: IgnoreDefenseSource[];
   /** Type de cadeau préféré (slug ; libellé dans le glossaire `gifts`). */
   gift?: string;
   /** Icône de portrait (FaceIconID). */
@@ -216,6 +300,12 @@ interface CharacterAux {
   formSkillsByBase: Map<string, string[]>;
   /** slug d'enum de classe brut (`attacker`) → slug canonique (`striker`). */
   classOf: Map<string, string>;
+  /** id perso → étiquette d'acquisition (RecruitGroupTemplet), si le jeu en donne une. */
+  recruitTagById: Map<string, CharacterTag>;
+  /** id de skill → provenances de pénétration qu'il apporte (`kit` et/ou `transcend`). */
+  pierceBySkill: Map<string, Set<IgnoreDefenseSource>>;
+  /** ids des persos dont l'ÉQUIPEMENT EXCLUSIF accorde une pénétration. */
+  eePierceIds: Set<string>;
   glossaries: CharacterGlossaries;
 }
 
@@ -315,6 +405,16 @@ const characterSchema: Schema = {
     subClass: { kind: 'string', optional: true },
     race: { kind: 'string' },
     chainType: { kind: 'string', enum: ['start', 'join', 'finish'], optional: true },
+    tags: {
+      kind: 'array',
+      optional: true,
+      of: { kind: 'string', enum: TAG_ORDER },
+    },
+    ignoreDefense: {
+      kind: 'array',
+      optional: true,
+      of: { kind: 'string', enum: IGNORE_DEFENSE_SOURCES },
+    },
     gift: { kind: 'string', optional: true },
     icon: { kind: 'string' },
     skills: { kind: 'array', of: { kind: 'string' }, minItems: 1 },
@@ -567,6 +667,70 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       formSkillsByBase.set(base.ID, [...(formSkillsByBase.get(base.ID) ?? []), ...skills]);
     }
 
+    // ACQUISITION (premium/limited/seasonal/collab) : la BANNIÈRE fait foi.
+    // `RecruitGroupTemplet` liste chaque bannière avec le perso mis en avant
+    // (`PickupID`) et son ruban (`RibbonType`). Un perso peut revenir dans
+    // plusieurs bannières (rerun, sélection) → on prend l'UNION de ses rubans
+    // et on tranche par ordre de priorité.
+    // Le collab n'a PAS de ruban propre (il emprunte `SEASONAL`) : il se lit sur
+    // le nom de l'image de bannière (« Collabo ») ou, pour les persos jamais
+    // remis en bannière, sur l'effet de vignette du roster (CharacterExtraTemplet
+    // `FX_UI_Character_List_Dungeon`).
+    const collabIds = new Set(
+      loadTable('CharacterExtraTemplet')
+        .filter((r) => r.ThumbnailEffect === 'FX_UI_Character_List_Dungeon')
+        .map((r) => r.CharacterID),
+    );
+    const ribbonsByChar = new Map<string, Set<string>>();
+    for (const r of loadTable('RecruitGroupTemplet')) {
+      const id = r.PickupID;
+      if (!id || id === '0') continue;
+      if (/Collabo/i.test(`${r.RollingBannerImage ?? ''} ${r.BannerImageName ?? ''}`))
+        collabIds.add(id);
+      const set = ribbonsByChar.get(id);
+      if (set) set.add(r.RibbonType);
+      else ribbonsByChar.set(id, new Set([r.RibbonType]));
+    }
+    const recruitTagById = new Map<string, CharacterTag>();
+    for (const [id, ribbons] of ribbonsByChar) {
+      // Priorité : le collab l'emporte (il se déguise en SEASONAL), puis le
+      // ruban le plus « fort » — un perso premium peut ressortir en PICKUP.
+      const tag = collabIds.has(id)
+        ? 'collab'
+        : (['PREMIUM', 'OUTER_FES', 'SEASONAL'].find((rt) => ribbons.has(rt)) ?? '');
+      if (tag) recruitTagById.set(id, RIBBON_TAG[tag] ?? (tag as CharacterTag));
+    }
+    for (const id of collabIds) recruitTagById.set(id, 'collab');
+
+    // PÉNÉTRATION DE DÉFENSE (`ignore-defense`) — trois provenances distinctes.
+    //
+    // Le kit : on part des skills du perso et on suit les buffs qu'ils posent,
+    // groupes `BT_GROUP` EXPANSÉS (`expandBuffIds`). L'expansion n'est pas un
+    // détail : Delta ne perce QUE via un enfant de groupe (`2000099_child`),
+    // invisible si on s'arrête aux buffs câblés directement sur le skill.
+    // La transcendance : le jeu nomme ces buffs `trancendent_*` (sic) — le perso
+    // ne perce qu'une fois le palier atteint, on ne le confond pas avec le kit.
+    // L'EE : buffs `BID_CEQUIP_<id>*`, hors du graphe des skills.
+    const buffsByID = loadBuffIndex();
+    const buffGroups = loadBuffGroups();
+    const pierceBySkill = new Map<string, Set<IgnoreDefenseSource>>();
+    for (const lvl of loadTable('CharacterSkillLevelTemplet')) {
+      const ids = splitCsv(lvl.BuffID ?? '').filter((b) => b && b !== '0');
+      if (!ids.length) continue;
+      for (const b of expandBuffIds(ids, buffsByID, buffGroups, num(lvl.SkillLevel))) {
+        if (!(buffsByID.get(b.id) ?? []).some(isInnatePierce)) continue;
+        const src: IgnoreDefenseSource = b.id.startsWith('trancendent_') ? 'transcend' : 'kit';
+        const set = pierceBySkill.get(lvl.SkillID);
+        if (set) set.add(src);
+        else pierceBySkill.set(lvl.SkillID, new Set([src]));
+      }
+    }
+    const eePierceIds = new Set<string>();
+    for (const b of loadTable('BuffTemplet')) {
+      const m = /^BID_CEQUIP_(\d+)/.exec(b.BuffID ?? '');
+      if (m && isInnatePierce(b)) eePierceIds.add(m[1]);
+    }
+
     return {
       tchar,
       tsys,
@@ -583,6 +747,9 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       appearancesOf,
       formSkillsByBase,
       classOf,
+      recruitTagById,
+      pierceBySkill,
+      eePierceIds,
       glossaries: {
         elements,
         classes,
@@ -634,6 +801,21 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     if (ee) char.ee = ee;
     const sets = splitCsv(r.RecommandSetOptionID ?? '');
     if (sets.length) char.recommendedSets = sets;
+
+    // ÉTIQUETTES : acquisition (bannière) + mécanique (pénétration) + lignée.
+    // `skills` inclut déjà les FORMES de combat → une forme qui perce compte.
+    const tags = new Set<CharacterTag>();
+    const recruitTag = aux.recruitTagById.get(r.ID);
+    if (recruitTag) tags.add(recruitTag);
+    const pierce = new Set<IgnoreDefenseSource>();
+    for (const s of skills) for (const src of aux.pierceBySkill.get(s) ?? []) pierce.add(src);
+    if (aux.eePierceIds.has(r.ID)) pierce.add('ee');
+    if (pierce.size) {
+      char.ignoreDefense = IGNORE_DEFENSE_SOURCES.filter((s) => pierce.has(s));
+      tags.add('ignore-defense');
+    }
+    if (aux.baseByFusion.has(r.ID)) tags.add('core-fusion');
+    if (tags.size) char.tags = TAG_ORDER.filter((t) => tags.has(t));
 
     const appearances = aux.appearancesOf.get(r.ID);
     if (appearances?.length) char.appearances = appearances;
@@ -697,16 +879,21 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       hasCoreFusion: 'extracted', // dérivable de coreFusion
       coreFusionId: 'extracted', // = coreFusion (sur la base)
       originalCharacter: 'extracted', // = originalCharacter (sur la fusion)
+      // Étiquettes : tout est extrait du jeu SAUF `free` (aucun marqueur
+      // d'obtention gratuite dans les tables) → l'oracle V2 mélangeait les deux.
+      // Acquisition ← RecruitGroupTemplet.RibbonType ; ignore-defense ← BuffTemplet
+      // (kit/EE/transcendance, cf. `ignoreDefense`) ; core-fusion ← originalCharacter.
+      tags: 'extracted',
+      // Dérivable de `tags` (limited|seasonal|collab) — plus stocké.
+      limited: 'ignore',
       // Connaissance humaine → data/curated, pas l'extraction.
       rank: 'curated',
       role: 'curated',
-      tags: 'curated',
       skill_priority: 'curated',
       video: 'curated',
       rank_pvp: 'curated',
       rank_by_transcend: 'curated',
       role_by_transcend: 'curated',
-      limited: 'curated',
       // Extrait dans un dataset partagé (transcend.json), pas par perso.
       transcend: 'extracted', // CharacterTranscendentTemplet → byStar + overrides
       // Détail core-fusion porté par l'entité fusion (champ `fusion`).

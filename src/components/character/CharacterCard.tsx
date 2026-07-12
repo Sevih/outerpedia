@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Route } from 'next';
 import type { ReactNode } from 'react';
-import { img } from '@/lib/images';
+import { img, RECRUIT_TAG_SPRITE } from '@/lib/images';
 import { FitText } from '@/components/ui/FitText';
 
 /**
@@ -73,9 +73,6 @@ const SIZES = {
   },
 } as const;
 
-/** Ordre V2 des badges de recrutement : le premier tag trouvé fait le badge. */
-const RECRUIT_ORDER = ['collab', 'seasonal', 'premium', 'free', 'limited'] as const;
-
 export type CharacterCardSize = keyof typeof SIZES;
 
 export interface CharacterCardProps {
@@ -87,6 +84,7 @@ export interface CharacterCardProps {
   element?: string;
   classType?: string;
   rarity?: number;
+  /** Tags du perso, DÉJÀ TRIÉS par `sortTags` (le 1er badgeable fait le badge). */
   tags?: string[];
   size?: CharacterCardSize;
   href?: string;
@@ -120,8 +118,11 @@ export function CharacterCard({
   children,
 }: CharacterCardProps) {
   const s = SIZES[size];
+  // Un seul badge : le premier tag QUI EN A UN. Les `tags` arrivent déjà dans
+  // l'ordre canonique du vocabulaire (`sortTags`, data/curated/tags.json) — pas
+  // d'ordre redéclaré ici, ce composant est client et ne lit pas le disque.
   const badgeTag =
-    showBadge && s.badgeClass && tags ? RECRUIT_ORDER.find((tg) => tags.includes(tg)) : undefined;
+    showBadge && s.badgeClass && tags ? tags.find((tg) => tg in RECRUIT_TAG_SPRITE) : undefined;
   const renderElement = (showElement ?? showIcons) && element;
   const renderClass = (showClass ?? showIcons) && classType;
   const baseName = prefix ? name.replace(prefix, '').trim() : name;

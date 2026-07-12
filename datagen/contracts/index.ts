@@ -19,7 +19,12 @@ export type {
   ResolvedEffect,
 } from '../lib/effects';
 export type { BuffValues, SkillBuffVars } from '../lib/buff';
-export type { Character, StatRange } from '../extractor/specs/character';
+export type {
+  Character,
+  CharacterTag,
+  IgnoreDefenseSource,
+  StatRange,
+} from '../extractor/specs/character';
 export type { Monster } from '../extractor/specs/monster';
 export type { TranscendStep, TranscendData } from '../extractor/transcend';
 export type {
@@ -31,6 +36,7 @@ export type {
   LocalizedText,
 } from '../curated/character';
 export type { EffectCurated } from '../curated/effects';
+export type { TagDef, TagGlossary, TagKind } from '../curated/tags';
 export type {
   GearBuild,
   GearPick,

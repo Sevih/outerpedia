@@ -7,7 +7,7 @@
 import charactersData from '@data/generated/characters.json';
 import slugToIdData from '@data/generated/characters-slug-to-id.json';
 import glossariesData from '@data/generated/glossaries.json';
-import type { Character, CharactersFile, Glossaries, LangDict } from '@contracts';
+import type { Character, CharactersFile, CharacterTag, Glossaries, LangDict } from '@contracts';
 
 const CHARACTERS = charactersData as unknown as CharactersFile;
 const FUSION_TITLE = (glossariesData as unknown as Glossaries).fusionTitle;
@@ -59,6 +59,8 @@ export interface CharacterListItem {
   originalCharacter?: string;
   /** Entité de type core-fusion (a une base d'origine). */
   isFusion: boolean;
+  /** Étiquettes dérivées du jeu (le curé — `free` — se fusionne à la lecture). */
+  tags?: CharacterTag[];
 }
 
 export function getAllCharacters(): Character[] {
@@ -125,6 +127,7 @@ export function getCharacterListItems(): CharacterListItem[] {
       icon: c.icon,
       originalCharacter: c.originalCharacter,
       isFusion: Boolean(c.originalCharacter),
+      tags: c.tags,
     }))
     .sort((a, b) => b.rarity - a.rarity || a.name.en.localeCompare(b.name.en));
 }

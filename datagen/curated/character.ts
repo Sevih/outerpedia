@@ -62,7 +62,16 @@ export interface CharacterCurated {
   rankPvp?: string;
   /** Rôle de combat. */
   role?: CuratedRole;
-  /** Étiquettes éditoriales (« free », « limited »…). */
+  /**
+   * Étiquettes purement HUMAINES — aujourd'hui `free` seul.
+   *
+   * Tout le reste du vocabulaire (premium/limited/seasonal/collab, ignore-defense,
+   * core-fusion) est DÉRIVÉ DU JEU par l'extraction (`Character.tags`) : ne pas
+   * le recopier ici, il serait dupliqué et divergerait à la première régénération.
+   * `free` n'a aucun marqueur dans les tables (les persos offerts sont malgré
+   * tout présents dans les pools de tirage) → il reste curé.
+   * Le vocabulaire et son sens vivent dans `data/curated/tags.json`.
+   */
   tags?: string[];
   /** Priorité de montée des compétences. */
   skillPriority?: SkillPriority;
@@ -70,8 +79,6 @@ export interface CharacterCurated {
   rankByTranscend?: Record<string, string>;
   /** Rôle selon le palier de transcendance (transStar → rôle). */
   roleByTranscend?: Record<string, string>;
-  /** Personnage à obtention limitée. */
-  limited?: boolean;
   /** Vidéos (liste curée, riche : titre/auteur). */
   videos?: VideoRef[];
   /** Points forts / faibles. */
@@ -98,7 +105,6 @@ export const characterCuratedSchema: Schema = {
     },
     rankByTranscend: { kind: 'record', of: { kind: 'string' }, optional: true },
     roleByTranscend: { kind: 'record', of: { kind: 'string' }, optional: true },
-    limited: { kind: 'boolean', optional: true },
     videos: {
       kind: 'array',
       optional: true,
@@ -147,12 +153,27 @@ function compact(c: CharacterCurated): CharacterCurated {
     out.rankByTranscend = c.rankByTranscend;
   if (c.roleByTranscend && Object.keys(c.roleByTranscend).length)
     out.roleByTranscend = c.roleByTranscend;
-  if (c.limited) out.limited = c.limited;
   if (c.videos?.length) out.videos = c.videos;
   if (c.prosCons && (c.prosCons.pros?.length || c.prosCons.cons?.length)) out.prosCons = c.prosCons;
   if (c.synergies?.length) out.synergies = c.synergies;
   return out;
 }
+
+/**
+ * Étiquettes que l'oracle V2 mélangeait mais que l'extraction sait maintenant
+ * dériver (bannière, buffs de pénétration, lignée) : le seed les IGNORE, sinon
+ * elles seraient figées en curé et divergeraient à la première régénération.
+ * Ne reste que l'humain — `free`.
+ */
+const DERIVED_TAGS = new Set([
+  'premium',
+  'limited',
+  'seasonal',
+  'collab',
+  'ignore-defense',
+  'core-fusion',
+]);
+const isHumanTag = (t: string): boolean => !DERIVED_TAGS.has(t);
 
 /** Normalise `skill_priority` V2 ({First:{prio}}) → {first,second,ultimate}. */
 function normSkillPriority(sp: unknown): SkillPriority | undefined {
@@ -187,11 +208,12 @@ export function seedFromLegacy(
       rank: (d.rank as string) || undefined,
       rankPvp: (d.rank_pvp as string) || undefined,
       role: (d.role as CuratedRole) || undefined,
-      tags: (d.tags as string[]) || undefined,
+      // Seuls les tags HUMAINS sont repris : le reste du vocabulaire est
+      // (re)dérivé du jeu par l'extraction — le seeder ne doit pas le figer.
+      tags: ((d.tags as string[]) ?? []).filter(isHumanTag),
       skillPriority: normSkillPriority(d.skill_priority),
       rankByTranscend: (d.rank_by_transcend as Record<string, string>) || undefined,
       roleByTranscend: (d.role_by_transcend as Record<string, string>) || undefined,
-      limited: d.limited === true || undefined,
       videos: legacyVideo ? [{ platform: 'youtube', id: legacyVideo }] : undefined,
     });
     const issues = validate(curated, characterCuratedSchema, `curated[${id}]`);

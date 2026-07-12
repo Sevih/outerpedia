@@ -9,11 +9,15 @@ const RANKS = ['', 'S', 'A', 'B', 'C', 'D', 'E'];
 /** Paliers de transcendance sélectionnables (transStar). */
 const STARS = ['1', '2', '3', '4', '5', '6'];
 /**
- * Vocabulaire des tags (type d'unité + mécaniques), repris de V2.
- * TODO extraction : premium/seasonal/collab/ignore-defense/core-fusion sont
- * détectables depuis la donnée de jeu (V2 le faisait) — seul `free` est humain.
+ * Tags ÉDITABLES ici = les tags HUMAINS. Il n'y en a qu'un.
+ *
+ * premium/limited/seasonal/collab (bannière), ignore-defense (buffs de
+ * pénétration) et core-fusion (lignée) sont désormais DÉRIVÉS DU JEU par
+ * l'extraction (`Character.tags`) : ils s'affichent en lecture seule ci-dessous.
+ * Les cocher ici les figerait en curé et ils divergeraient à la régénération.
+ * `free` reste humain : aucune table ne marque un perso comme offert.
  */
-const TAGS = ['premium', 'limited', 'seasonal', 'collab', 'free', 'ignore-defense', 'core-fusion'];
+const HUMAN_TAGS = ['free'];
 
 const field =
   'w-full rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm text-content focus:border-accent focus:outline-none';
@@ -114,10 +118,13 @@ export function CharacterCuratedEditor({
   id,
   characterName,
   initial,
+  derivedTags = [],
 }: {
   id: string;
   characterName: string;
   initial: CharacterCurated;
+  /** Tags dérivés du jeu (`Character.tags`) — affichés, jamais écrits ici. */
+  derivedTags?: string[];
 }) {
   const [rank, setRank] = useState(initial.rank ?? '');
   const [rankPvp, setRankPvp] = useState(initial.rankPvp ?? '');
@@ -127,7 +134,6 @@ export function CharacterCuratedEditor({
   const [second, setSecond] = useState(initial.skillPriority?.second?.toString() ?? '');
   const [ultimate, setUltimate] = useState(initial.skillPriority?.ultimate?.toString() ?? '');
   const [videos, setVideos] = useState<VideoRef[]>(initial.videos ?? []);
-  const [limited, setLimited] = useState(Boolean(initial.limited));
   const [rankByT, setRankByT] = useState<TransRow[]>(toRows(initial.rankByTranscend));
   const [roleByT, setRoleByT] = useState<TransRow[]>(toRows(initial.roleByTranscend));
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
@@ -146,7 +152,6 @@ export function CharacterCuratedEditor({
     if (second.trim()) sp.second = Number(second);
     if (ultimate.trim()) sp.ultimate = Number(ultimate);
     if (Object.keys(sp).length) c.skillPriority = sp;
-    if (limited) c.limited = true;
     const rankMap = toMap(rankByT);
     if (Object.keys(rankMap).length) c.rankByTranscend = rankMap;
     const roleMap = toMap(roleByT);
@@ -236,9 +241,9 @@ export function CharacterCuratedEditor({
 
       <section className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1">
-          <p className={label}>Tags (type d&apos;unité / mécaniques)</p>
+          <p className={label}>Tags humains</p>
           <div className="flex flex-wrap gap-x-4 gap-y-1.5 pt-1">
-            {TAGS.map((t) => (
+            {HUMAN_TAGS.map((t) => (
               <label key={t} className="text-content flex items-center gap-1.5 text-sm">
                 <input
                   type="checkbox"
@@ -252,10 +257,26 @@ export function CharacterCuratedEditor({
             ))}
           </div>
         </div>
-        <label className="text-content flex items-center gap-2 self-end pb-2 text-sm">
-          <input type="checkbox" checked={limited} onChange={(e) => setLimited(e.target.checked)} />
-          Personnage limité
-        </label>
+        <div className="space-y-1">
+          <p className={label}>Tags dérivés du jeu (lecture seule)</p>
+          {derivedTags.length === 0 ? (
+            <p className="text-content-subtle pt-1 text-xs">Aucun.</p>
+          ) : (
+            <div className="flex flex-wrap gap-1.5 pt-1">
+              {derivedTags.map((t) => (
+                <span
+                  key={t}
+                  className="border-line-subtle text-content-muted rounded border px-1.5 py-0.5 font-mono text-xs"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          )}
+          <p className="text-content-subtle text-xs">
+            Extraits de la donnée de jeu (bannière, buffs, lignée) — non éditables.
+          </p>
+        </div>
       </section>
 
       <section className="grid gap-4 sm:grid-cols-2">

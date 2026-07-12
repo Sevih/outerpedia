@@ -615,17 +615,6 @@ export function cardEffects(skills: Skill[], s: Skill): ClientEffect[] | undefin
   return merged.length ? merged : undefined;
 }
 
-/**
- * AUTO-TAG « ignore-defense » : un skill porte un bonus de pénétration PASSIF
- * (effet technique sans nom, stat pierce_power*) — pas un buff côté joueur,
- * mais le marqueur du perso qui ignore une partie de la DEF.
- */
-export function hasIgnoreDefense(skills: Skill[]): boolean {
-  return skills.some((s) =>
-    s.effects?.some((e) => !e.tooltip && !e.label && e.stat?.startsWith('pierce_power')),
-  );
-}
-
 /** Une carte de burst, données prêtes à rendre (texte résolu par le caller). */
 export interface BurstView {
   level: 1 | 2 | 3;
