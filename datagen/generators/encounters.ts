@@ -356,16 +356,46 @@ export function buildEncounters(): EncountersData {
   const spawnsByGroup = groupBy(loadTable('DungeonSpawnTemplet'), 'GroupID');
   const areaById = indexBy(loadTable('AreaTemplet'));
 
-  // Chaîne des WORLD BOSS : chaque ligue liste la SÉQUENCE des groupes de
-  // spawn de son donjon (`ChangeSpawnGroupID` — tuer un boss fait apparaître
-  // le suivant : 1 normal, 1 hard, 2 very hard, 2 extreme), alors que le
-  // donjon ne référence que le PREMIER (SpawnID_Pos0). On complète.
-  const wbChainGroups = new Map<string, string[]>();
-  for (const r of loadTable('WorldBossLeagueTemplet')) {
+  // Ligues des WORLD BOSS : chaque ligne (une par donjon d'une ROTATION —
+  // `WorldBossID` → `WorldBossTemplet`, planning daté) liste la SÉQUENCE des
+  // groupes de spawn de son donjon (`ChangeSpawnGroupID` — tuer un boss fait
+  // apparaître le suivant), alors que le donjon ne référence que le PREMIER
+  // (SpawnID_Pos0), et porte le NOM DE LIGUE (seule « difficulté » des WB —
+  // les donjons d'une rotation partagent le même nom). Les systèmes de ligue
+  // se succèdent (Beginner/Junior/Senior legacy → Normal/Hard/Very Hard/
+  // Extreme actuel) en réutilisant PARFOIS les mêmes donjons (Ragnakeus),
+  // parfois non (Venion 552000xx → 552001xx) : la DERNIÈRE rotation de
+  // chaque boss fait foi — ses donjons prennent sa chaîne et ses noms de
+  // ligue, les donjons des rotations antérieures qui n'y figurent plus sont
+  // du contenu MORT (exclus, comme les modes ignorés). Les donjons WB hors
+  // de toute ligue (event Ragnakeus 2024, 554xxxxx) restent tels quels.
+  const leagueRows = [...loadTable('WorldBossLeagueTemplet')].sort((a, b) => num(a.ID) - num(b.ID));
+  const wbBossOf = new Map<string, string>();
+  for (const r of loadTable('WorldBossTemplet')) if (r.ID && r.BossID) wbBossOf.set(r.ID, r.BossID);
+  const wbCurrent = new Map<string, { rot: number; dungeons: Set<string> }>();
+  for (const r of leagueRows) {
     if (!r.DungeonID) continue;
-    const list = wbChainGroups.get(r.DungeonID) ?? [];
-    list.push(...splitCsv(r.ChangeSpawnGroupID ?? ''));
-    wbChainGroups.set(r.DungeonID, list);
+    const boss = wbBossOf.get(r.WorldBossID ?? '') ?? r.WorldBossID ?? '';
+    const rot = num(r.WorldBossID);
+    const cur = wbCurrent.get(boss);
+    if (!cur || rot > cur.rot) wbCurrent.set(boss, { rot, dungeons: new Set([r.DungeonID]) });
+    else if (rot === cur.rot) cur.dungeons.add(r.DungeonID);
+  }
+  const currentWbDungeons = new Set<string>();
+  for (const c of wbCurrent.values()) for (const d of c.dungeons) currentWbDungeons.add(d);
+  const deadWbDungeons = new Set<string>();
+  const wbLeague = new Map<string, { chain: string[]; league?: string }>();
+  for (const r of leagueRows) {
+    if (!r.DungeonID) continue;
+    if (!currentWbDungeons.has(r.DungeonID)) {
+      deadWbDungeons.add(r.DungeonID);
+      continue;
+    }
+    // Lignes croissantes → la rotation la plus récente l'emporte.
+    wbLeague.set(r.DungeonID, {
+      chain: splitCsv(r.ChangeSpawnGroupID ?? ''),
+      ...(r.LeagueName ? { league: r.LeagueName } : {}),
+    });
   }
 
   const modes: Record<string, LangDict> = {};
@@ -414,16 +444,9 @@ export function buildEncounters(): EncountersData {
     for (const m of curated.ignore ?? []) ignoredModes.add(m);
   }
 
-  // Difficulté des donjons WORLD BOSS : les 4 donjons d'un groupe partagent le
-  // même nom — seule la LIGUE les distingue (Beginner/Junior/Senior…).
-  const wbLeagueName = new Map<string, string>();
-  for (const r of loadTable('WorldBossLeagueTemplet')) {
-    if (r.DungeonID && r.LeagueName && !wbLeagueName.has(r.DungeonID))
-      wbLeagueName.set(r.DungeonID, r.LeagueName);
-  }
-
   for (const d of loadTable('DungeonTemplet')) {
-    const groupIds = [...new Set([...spawnGroupIds(d), ...(wbChainGroups.get(d.ID) ?? [])])];
+    if (deadWbDungeons.has(d.ID)) continue;
+    const groupIds = [...new Set([...spawnGroupIds(d), ...(wbLeague.get(d.ID)?.chain ?? [])])];
     if (!groupIds.length) continue;
 
     // Monstres du donjon, dédupliqués par (monstre, niveau) — plusieurs waves
@@ -471,7 +494,7 @@ export function buildEncounters(): EncountersData {
       if (num(areaRow?.SeasonID)) ref.season = num(areaRow!.SeasonID);
       if (num(areaRow?.EpisodeNum)) ref.episode = num(areaRow!.EpisodeNum);
     }
-    const leagueKey = wbLeagueName.get(d.ID);
+    const leagueKey = wbLeague.get(d.ID)?.league;
     if (leagueKey) {
       const league = resolveText(tsys, leagueKey);
       if (league.en) ref.difficulty = league;

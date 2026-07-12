@@ -47,8 +47,9 @@ export function buildMonsterRows(): MonsterRowsResult {
     return [...modes];
   };
   // Stage/zone d'une rencontre : story → saison/épisode/zone/stage ; world
-  // boss → nom + ligue (les 4 donjons d'un groupe partagent le nom) ; sinon
-  // le nom du donjon (JC/poursuite/guild raid y portent leur difficulté).
+  // boss → LIGUE SEULE (les 4 donjons d'un groupe partagent le nom, et en
+  // queue de ligne la difficulté sortait de l'écran) ; sinon le nom du
+  // donjon (JC/poursuite/guild raid y portent leur difficulté).
   const zoneLabel = (dungeon: string): string | undefined => {
     const d = enc.dungeons[dungeon];
     if (!d?.name.en) return undefined;
@@ -58,7 +59,7 @@ export function buildMonsterRows(): MonsterRowsResult {
         .join(' ');
       return [se, d.area?.en, d.name.en].filter(Boolean).join(' · ');
     }
-    return d.difficulty?.en ? `${d.name.en} · ${d.difficulty.en}` : d.name.en;
+    return d.difficulty?.en ? d.difficulty.en : d.name.en;
   };
   const zonesOf = (m: Monster): string[] => {
     const zones = new Set<string>();
