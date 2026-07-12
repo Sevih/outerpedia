@@ -61635,7 +61635,8 @@
       "key": "stage_1",
       "order": 1
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1",
+    "geasRewards": ["2", "10"]
   },
   "70101102": {
     "mode": "guild_raid_sub_boss",
@@ -61662,7 +61663,8 @@
       "key": "stage_2",
       "order": 2
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1",
+    "geasRewards": ["3", "5"]
   },
   "70101103": {
     "mode": "guild_raid_sub_boss",
@@ -61689,7 +61691,8 @@
       "key": "stage_3",
       "order": 3
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1",
+    "geasRewards": ["6", "7"]
   },
   "70101104": {
     "mode": "guild_raid_sub_boss",
@@ -61716,7 +61719,8 @@
       "key": "stage_4",
       "order": 4
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1",
+    "geasRewards": ["1", "8"]
   },
   "70101105": {
     "mode": "guild_raid_sub_boss",
@@ -61743,7 +61747,8 @@
       "key": "stage_5",
       "order": 5
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1",
+    "geasRewards": ["4", "9"]
   },
   "70101201": {
     "mode": "guild_raid_sub_boss",
@@ -61770,7 +61775,8 @@
       "key": "stage_1",
       "order": 1
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2",
+    "geasRewards": ["12", "16"]
   },
   "70101202": {
     "mode": "guild_raid_sub_boss",
@@ -61797,7 +61803,8 @@
       "key": "stage_2",
       "order": 2
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2",
+    "geasRewards": ["14", "19"]
   },
   "70101203": {
     "mode": "guild_raid_sub_boss",
@@ -61824,7 +61831,8 @@
       "key": "stage_3",
       "order": 3
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2",
+    "geasRewards": ["15", "18"]
   },
   "70101204": {
     "mode": "guild_raid_sub_boss",
@@ -61851,7 +61859,8 @@
       "key": "stage_4",
       "order": 4
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2",
+    "geasRewards": ["11", "17"]
   },
   "70101205": {
     "mode": "guild_raid_sub_boss",
@@ -61878,7 +61887,8 @@
       "key": "stage_5",
       "order": 5
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2",
+    "geasRewards": ["13", "20"]
   },
   "70201001": {
     "mode": "guild_raid_main_boss",
@@ -61998,7 +62008,8 @@
       "key": "stage_1",
       "order": 1
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1",
+    "geasRewards": ["5", "2"]
   },
   "70201102": {
     "mode": "guild_raid_sub_boss",
@@ -62025,7 +62036,8 @@
       "key": "stage_2",
       "order": 2
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1",
+    "geasRewards": ["21", "26"]
   },
   "70201103": {
     "mode": "guild_raid_sub_boss",
@@ -62052,7 +62064,8 @@
       "key": "stage_3",
       "order": 3
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1",
+    "geasRewards": ["23", "11"]
   },
   "70201104": {
     "mode": "guild_raid_sub_boss",
@@ -62079,7 +62092,8 @@
       "key": "stage_4",
       "order": 4
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1",
+    "geasRewards": ["24", "1"]
   },
   "70201105": {
     "mode": "guild_raid_sub_boss",
@@ -62106,7 +62120,8 @@
       "key": "stage_5",
       "order": 5
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1",
+    "geasRewards": ["22", "25"]
   },
   "70201201": {
     "mode": "guild_raid_sub_boss",
@@ -62133,7 +62148,8 @@
       "key": "stage_1",
       "order": 1
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2",
+    "geasRewards": ["31", "12"]
   },
   "70201202": {
     "mode": "guild_raid_sub_boss",
@@ -62160,7 +62176,8 @@
       "key": "stage_2",
       "order": 2
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2",
+    "geasRewards": ["30", "28"]
   },
   "70201203": {
     "mode": "guild_raid_sub_boss",
@@ -62187,7 +62204,8 @@
       "key": "stage_3",
       "order": 3
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2",
+    "geasRewards": ["29", "16"]
   },
   "70201204": {
     "mode": "guild_raid_sub_boss",
@@ -62214,7 +62232,8 @@
       "key": "stage_4",
       "order": 4
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2",
+    "geasRewards": ["27", "18"]
   },
   "70201205": {
     "mode": "guild_raid_sub_boss",
@@ -62241,7 +62260,8 @@
       "key": "stage_5",
       "order": 5
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2",
+    "geasRewards": ["33", "32"]
   },
   "70301001": {
     "mode": "guild_raid_main_boss",
@@ -62351,7 +62371,8 @@
       "key": "stage_1",
       "order": 1
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1",
+    "geasRewards": ["5", "2"]
   },
   "70301102": {
     "mode": "guild_raid_sub_boss",
@@ -62383,7 +62404,8 @@
       "key": "stage_2",
       "order": 2
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1",
+    "geasRewards": ["44", "34"]
   },
   "70301103": {
     "mode": "guild_raid_sub_boss",
@@ -62415,7 +62437,8 @@
       "key": "stage_3",
       "order": 3
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1",
+    "geasRewards": ["35", "36"]
   },
   "70301104": {
     "mode": "guild_raid_sub_boss",
@@ -62447,7 +62470,8 @@
       "key": "stage_4",
       "order": 4
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1",
+    "geasRewards": ["17", "14"]
   },
   "70301105": {
     "mode": "guild_raid_sub_boss",
@@ -62479,7 +62503,8 @@
       "key": "stage_5",
       "order": 5
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1",
+    "geasRewards": ["37", "38"]
   },
   "70301201": {
     "mode": "guild_raid_sub_boss",
@@ -62506,7 +62531,8 @@
       "key": "stage_1",
       "order": 1
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2",
+    "geasRewards": ["45", "12"]
   },
   "70301202": {
     "mode": "guild_raid_sub_boss",
@@ -62533,7 +62559,8 @@
       "key": "stage_2",
       "order": 2
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2",
+    "geasRewards": ["26", "39"]
   },
   "70301203": {
     "mode": "guild_raid_sub_boss",
@@ -62560,7 +62587,8 @@
       "key": "stage_3",
       "order": 3
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2",
+    "geasRewards": ["16", "6"]
   },
   "70301204": {
     "mode": "guild_raid_sub_boss",
@@ -62587,7 +62615,8 @@
       "key": "stage_4",
       "order": 4
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2",
+    "geasRewards": ["40", "41"]
   },
   "70301205": {
     "mode": "guild_raid_sub_boss",
@@ -62614,7 +62643,8 @@
       "key": "stage_5",
       "order": 5
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2",
+    "geasRewards": ["42", "43"]
   },
   "70401001": {
     "mode": "guild_raid_main_boss",
@@ -62911,7 +62941,8 @@
       "key": "stage_1",
       "order": 1
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB1",
+    "geasRewards": ["51", "61"]
   },
   "70401102": {
     "mode": "guild_raid_sub_boss",
@@ -62938,7 +62969,8 @@
       "key": "stage_2",
       "order": 2
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB1",
+    "geasRewards": ["64", "60"]
   },
   "70401103": {
     "mode": "guild_raid_sub_boss",
@@ -62965,7 +62997,8 @@
       "key": "stage_3",
       "order": 3
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB1",
+    "geasRewards": ["49", "63"]
   },
   "70401104": {
     "mode": "guild_raid_sub_boss",
@@ -62992,7 +63025,8 @@
       "key": "stage_4",
       "order": 4
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB1",
+    "geasRewards": ["52", "57"]
   },
   "70401105": {
     "mode": "guild_raid_sub_boss",
@@ -63019,7 +63053,8 @@
       "key": "stage_5",
       "order": 5
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB1",
+    "geasRewards": ["53", "59"]
   },
   "70401201": {
     "mode": "guild_raid_sub_boss",
@@ -63046,7 +63081,8 @@
       "key": "stage_1",
       "order": 1
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB2",
+    "geasRewards": ["94", "65"]
   },
   "70401202": {
     "mode": "guild_raid_sub_boss",
@@ -63073,7 +63109,8 @@
       "key": "stage_2",
       "order": 2
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB2",
+    "geasRewards": ["46", "55"]
   },
   "70401203": {
     "mode": "guild_raid_sub_boss",
@@ -63100,7 +63137,8 @@
       "key": "stage_3",
       "order": 3
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB2",
+    "geasRewards": ["50", "96"]
   },
   "70401204": {
     "mode": "guild_raid_sub_boss",
@@ -63127,7 +63165,8 @@
       "key": "stage_4",
       "order": 4
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB2",
+    "geasRewards": ["95", "58"]
   },
   "70401205": {
     "mode": "guild_raid_sub_boss",
@@ -63154,7 +63193,8 @@
       "key": "stage_5",
       "order": 5
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB2",
+    "geasRewards": ["99", "20"]
   },
   "70501001": {
     "mode": "guild_raid_main_boss",
@@ -63451,7 +63491,8 @@
       "key": "stage_1",
       "order": 1
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB1",
+    "geasRewards": ["76", "16"]
   },
   "70501102": {
     "mode": "guild_raid_sub_boss",
@@ -63478,7 +63519,8 @@
       "key": "stage_2",
       "order": 2
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB1",
+    "geasRewards": ["47", "38"]
   },
   "70501103": {
     "mode": "guild_raid_sub_boss",
@@ -63505,7 +63547,8 @@
       "key": "stage_3",
       "order": 3
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB1",
+    "geasRewards": ["49", "103"]
   },
   "70501104": {
     "mode": "guild_raid_sub_boss",
@@ -63532,7 +63575,8 @@
       "key": "stage_4",
       "order": 4
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB1",
+    "geasRewards": ["72", "57"]
   },
   "70501105": {
     "mode": "guild_raid_sub_boss",
@@ -63559,7 +63603,8 @@
       "key": "stage_5",
       "order": 5
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB1",
+    "geasRewards": ["54", "71"]
   },
   "70501201": {
     "mode": "guild_raid_sub_boss",
@@ -63586,7 +63631,8 @@
       "key": "stage_1",
       "order": 1
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB2",
+    "geasRewards": ["68", "15"]
   },
   "70501202": {
     "mode": "guild_raid_sub_boss",
@@ -63613,7 +63659,8 @@
       "key": "stage_2",
       "order": 2
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB2",
+    "geasRewards": ["69", "70"]
   },
   "70501203": {
     "mode": "guild_raid_sub_boss",
@@ -63640,7 +63687,8 @@
       "key": "stage_3",
       "order": 3
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB2",
+    "geasRewards": ["50", "56"]
   },
   "70501204": {
     "mode": "guild_raid_sub_boss",
@@ -63667,7 +63715,8 @@
       "key": "stage_4",
       "order": 4
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB2",
+    "geasRewards": ["104", "67"]
   },
   "70501205": {
     "mode": "guild_raid_sub_boss",
@@ -63694,7 +63743,8 @@
       "key": "stage_5",
       "order": 5
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_SUB2",
+    "geasRewards": ["53", "20"]
   },
   "70600000": {
     "mode": "adventure_mission",
@@ -66623,7 +66673,8 @@
       "key": "stage_1",
       "order": 1
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1",
+    "geasRewards": ["21", "5"]
   },
   "70601102": {
     "mode": "guild_raid_sub_boss",
@@ -66650,7 +66701,8 @@
       "key": "stage_2",
       "order": 2
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1",
+    "geasRewards": ["2", "25"]
   },
   "70601103": {
     "mode": "guild_raid_sub_boss",
@@ -66677,7 +66729,8 @@
       "key": "stage_3",
       "order": 3
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1",
+    "geasRewards": ["100", "102"]
   },
   "70601104": {
     "mode": "guild_raid_sub_boss",
@@ -66704,7 +66757,8 @@
       "key": "stage_4",
       "order": 4
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1",
+    "geasRewards": ["73", "77"]
   },
   "70601105": {
     "mode": "guild_raid_sub_boss",
@@ -66731,7 +66785,8 @@
       "key": "stage_5",
       "order": 5
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB1",
+    "geasRewards": ["74", "67"]
   },
   "70601201": {
     "mode": "guild_raid_sub_boss",
@@ -66758,7 +66813,8 @@
       "key": "stage_1",
       "order": 1
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2",
+    "geasRewards": ["12", "78"]
   },
   "70601202": {
     "mode": "guild_raid_sub_boss",
@@ -66785,7 +66841,8 @@
       "key": "stage_2",
       "order": 2
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2",
+    "geasRewards": ["101", "20"]
   },
   "70601203": {
     "mode": "guild_raid_sub_boss",
@@ -66812,7 +66869,8 @@
       "key": "stage_3",
       "order": 3
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2",
+    "geasRewards": ["75", "29"]
   },
   "70601204": {
     "mode": "guild_raid_sub_boss",
@@ -66839,7 +66897,8 @@
       "key": "stage_4",
       "order": 4
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2",
+    "geasRewards": ["76", "58"]
   },
   "70601205": {
     "mode": "guild_raid_sub_boss",
@@ -66866,7 +66925,8 @@
       "key": "stage_5",
       "order": 5
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_SUB2",
+    "geasRewards": ["66", "31"]
   },
   "70701001": {
     "mode": "guild_raid_main_boss",
@@ -67163,7 +67223,8 @@
       "key": "stage_1",
       "order": 1
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1",
+    "geasRewards": ["79", "5"]
   },
   "70701102": {
     "mode": "guild_raid_sub_boss",
@@ -67190,7 +67251,8 @@
       "key": "stage_2",
       "order": 2
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1",
+    "geasRewards": ["2", "81"]
   },
   "70701103": {
     "mode": "guild_raid_sub_boss",
@@ -67217,7 +67279,8 @@
       "key": "stage_3",
       "order": 3
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1",
+    "geasRewards": ["44", "105"]
   },
   "70701104": {
     "mode": "guild_raid_sub_boss",
@@ -67244,7 +67307,8 @@
       "key": "stage_4",
       "order": 4
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1",
+    "geasRewards": ["107", "57"]
   },
   "70701105": {
     "mode": "guild_raid_sub_boss",
@@ -67271,7 +67335,8 @@
       "key": "stage_5",
       "order": 5
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB1",
+    "geasRewards": ["49", "106"]
   },
   "70701201": {
     "mode": "guild_raid_sub_boss",
@@ -67298,7 +67363,8 @@
       "key": "stage_1",
       "order": 1
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2",
+    "geasRewards": ["85", "86"]
   },
   "70701202": {
     "mode": "guild_raid_sub_boss",
@@ -67325,7 +67391,8 @@
       "key": "stage_2",
       "order": 2
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2",
+    "geasRewards": ["54", "20"]
   },
   "70701203": {
     "mode": "guild_raid_sub_boss",
@@ -67352,7 +67419,8 @@
       "key": "stage_3",
       "order": 3
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2",
+    "geasRewards": ["50", "87"]
   },
   "70701204": {
     "mode": "guild_raid_sub_boss",
@@ -67379,7 +67447,8 @@
       "key": "stage_4",
       "order": 4
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2",
+    "geasRewards": ["76", "58"]
   },
   "70701205": {
     "mode": "guild_raid_sub_boss",
@@ -67406,7 +67475,8 @@
       "key": "stage_5",
       "order": 5
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_SUB2",
+    "geasRewards": ["66", "45"]
   },
   "70801001": {
     "mode": "guild_raid_main_boss",
@@ -67703,7 +67773,8 @@
       "key": "stage_1",
       "order": 1
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1",
+    "geasRewards": ["88", "5"]
   },
   "70801102": {
     "mode": "guild_raid_sub_boss",
@@ -67730,7 +67801,8 @@
       "key": "stage_2",
       "order": 2
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1",
+    "geasRewards": ["2", "38"]
   },
   "70801103": {
     "mode": "guild_raid_sub_boss",
@@ -67757,7 +67829,8 @@
       "key": "stage_3",
       "order": 3
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1",
+    "geasRewards": ["3", "18"]
   },
   "70801104": {
     "mode": "guild_raid_sub_boss",
@@ -67784,7 +67857,8 @@
       "key": "stage_4",
       "order": 4
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1",
+    "geasRewards": ["89", "20"]
   },
   "70801105": {
     "mode": "guild_raid_sub_boss",
@@ -67811,7 +67885,8 @@
       "key": "stage_5",
       "order": 5
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB1",
+    "geasRewards": ["49", "90"]
   },
   "70801201": {
     "mode": "guild_raid_sub_boss",
@@ -67838,7 +67913,8 @@
       "key": "stage_1",
       "order": 1
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2",
+    "geasRewards": ["91", "86"]
   },
   "70801202": {
     "mode": "guild_raid_sub_boss",
@@ -67865,7 +67941,8 @@
       "key": "stage_2",
       "order": 2
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2",
+    "geasRewards": ["54", "57"]
   },
   "70801203": {
     "mode": "guild_raid_sub_boss",
@@ -67892,7 +67969,8 @@
       "key": "stage_3",
       "order": 3
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2",
+    "geasRewards": ["53", "60"]
   },
   "70801204": {
     "mode": "guild_raid_sub_boss",
@@ -67919,7 +67997,8 @@
       "key": "stage_4",
       "order": 4
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2",
+    "geasRewards": ["76", "58"]
   },
   "70801205": {
     "mode": "guild_raid_sub_boss",
@@ -67946,7 +68025,8 @@
       "key": "stage_5",
       "order": 5
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_SUB2",
+    "geasRewards": ["92", "10"]
   },
   "72000001": {
     "mode": "irregular_chase",
