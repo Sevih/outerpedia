@@ -9,6 +9,13 @@
  *     `stat × (1000 + adv) / 1000` arrondi bas (10754 × 0,465 = 5000 exact) ;
  *   - `bossHp` (`EventBossDungeonTemplet.BossMonsterHP`) : PV réels du boss,
  *     REMPLACE l'interpolation (2 000 000 en very hard).
+ *
+ * PIÈGE — `DungeonRank.hp` a DEUX sens selon le mode, et les confondre ment :
+ * dans un mode à SCORE, ce n'est PAS les PV du boss mais la LARGEUR de la
+ * tranche de dégâts du palier (`max − min + 1`). Vérifié sur toute l'échelle :
+ * Singularity SSS++ `hp` = 750 000 = 5 000 000 − 4 250 001 + 1. L'afficher en
+ * PV mentait d'un facteur 7,5. Le discriminant est `damage` : avec tranche, la
+ * valeur est une barre (`bar`) ; sans tranche (adventure), de vrais PV.
  */
 import type { DungeonAdv, DungeonRank, RankDamage } from '@contracts';
 
@@ -25,8 +32,10 @@ export interface SpawnContext {
   /** Nom du palier (« SSS », « E+ »…) quand la rencontre en a un. */
   rank?: string;
   adv?: DungeonAdv;
-  /** PV du mode — pour un PALIER à tranche, c'est la BARRE du rang (cf. DungeonRank.hp). */
+  /** PV RÉELS du boss dans ce mode — remplacent l'interpolation du templet. */
   bossHp?: number;
+  /** BARRE d'un palier à score : largeur de la tranche de dégâts, PAS des PV. */
+  bar?: number;
   hpLines?: number;
   /** Niveau de transcendance du boss au palier (barème à part, non appliqué). */
   transLevel?: number;
@@ -44,16 +53,21 @@ export interface SpawnContext {
  */
 export function expandRankContexts(base: SpawnContext, ranks?: DungeonRank[]): SpawnContext[] {
   if (!ranks?.length) return [base];
-  return ranks.map((r, i) => ({
-    ...base,
-    level: r.level ?? base.level,
-    rank: r.name ?? `#${i + 1}`,
-    adv: r.adv,
-    bossHp: r.hp ?? base.bossHp,
-    ...(r.transLevel ? { transLevel: r.transLevel } : {}),
-    ...(r.damage ? { damage: r.damage } : {}),
-    ...(r.options ? { options: r.options } : {}),
-  }));
+  return ranks.map((r, i) => {
+    // Une tranche de dégâts = mode à SCORE = `r.hp` est une BARRE, pas des PV.
+    const scored = r.damage !== undefined;
+    return {
+      ...base,
+      level: r.level ?? base.level,
+      rank: r.name ?? `#${i + 1}`,
+      adv: r.adv,
+      bossHp: scored ? base.bossHp : (r.hp ?? base.bossHp),
+      ...(scored && r.hp !== undefined ? { bar: r.hp } : {}),
+      ...(r.transLevel ? { transLevel: r.transLevel } : {}),
+      ...(r.damage ? { damage: r.damage } : {}),
+      ...(r.options ? { options: r.options } : {}),
+    };
+  });
 }
 
 /** Ordre de l'écran de stats du jeu (le reste suit, dans l'ordre d'extraction). */
@@ -130,16 +144,21 @@ export function formatMonsterStat(
  *
  * `MonsterTemplet` n'a que 11 colonnes de stats (HP, WG, Speed, Atk, Def,
  * DamageBoost, DMGReduceRate, CriticalRate, CriticalDMGRate, BuffChance,
- * BuffResist). Deux lignes du panneau n'y ont AUCUNE colonne — vérifié sur les
- * 4382 monstres : zéro a `EnemyCriticalDamageReduce`, et `PiercePowerRate`
- * n'existe que sur 16 d'entre eux. Les omettre laissait un trou dans la grille ;
- * les afficher à 0 dit quelque chose : ce boss n'a pas de pénétration.
+ * BuffResist), et n'en remplit pas toujours 11. Le panneau du jeu, lui, a des
+ * lignes FIXES. Les omettre laissait un trou dans la grille ; les afficher à 0
+ * dit quelque chose : ce boss n'a pas de pénétration.
+ *
+ * Le cas qui l'impose : les trois difficultés d'un Joint Challenge sont trois
+ * MONSTRES distincts, et seul celui du Very Hard porte `DamageBoost`. Sans ce
+ * remplissage, la grille passait de 11 à 12 cases en changeant d'onglet — une
+ * grille qui change de forme sous le clic a l'air cassée, et le lecteur perdait
+ * la ligne qu'il comparait. Avec, tout boss du jeu affiche les mêmes 12 lignes.
  *
  * Ce sont bien des stats de BASE : les paliers de Singularity accordent
  * « Pénétration +30 % » en PASSIF (un buff irremovable), pas en modification de
  * la fiche — d'où sa place parmi les pastilles de passifs, pas dans la grille.
  */
-const PANEL_ONLY_STATS = ['enemy_critical_dmg_reduce', 'pierce_power_rate'];
+const PANEL_ONLY_STATS = ['enemy_critical_dmg_reduce', 'pierce_power_rate', 'damage_boost'];
 
 /** Stats d'un monstre, complétées des lignes que le panneau du jeu montre toujours. */
 export function monsterPanelStats(stats: Record<string, StatRange>): Record<string, StatRange> {
@@ -162,7 +181,7 @@ export function dedupSpawnContexts(spawns: SpawnContext[]): SpawnContext[] {
   const seen = new Set<string>();
   return spawns
     .filter((s) => {
-      const key = `${s.level}|${s.rank ?? ''}|${JSON.stringify(s.adv ?? {})}|${s.bossHp ?? ''}`;
+      const key = `${s.level}|${s.rank ?? ''}|${JSON.stringify(s.adv ?? {})}|${s.bossHp ?? ''}|${s.bar ?? ''}`;
       if (seen.has(key)) return false;
       seen.add(key);
       return true;

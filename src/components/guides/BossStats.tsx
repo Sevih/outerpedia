@@ -107,6 +107,15 @@ export function BossStats({
   // l'en-tête du boss, à l'autre bout du panneau (cf. BossRank).
   const { options, selected, setSelected, ctx } = useBossRank();
 
+  // PAS DE LIGNE « PV » DANS UN MODE À SCORE — et ce n'est pas un oubli.
+  //
+  // Là où le rang se gagne aux DÉGÂTS (Singularity, World Boss), la barre que le
+  // joueur vide n'est pas la vie du boss : c'est la TRANCHE de son palier
+  // (`DungeonRank.hp` = max − min + 1, cf. `monster-stats`). Le monstre a bien
+  // des PV au templet — 100 000 tout plat pour Belial — mais ils ne correspondent
+  // à rien de ce que le jeu montre. Les afficher inventerait une stat.
+  // Les modes SANS score (joint challenge, guild raid) ont, eux, un vrai
+  // `bossHp` : ils affichent leurs PV, et c'est la même grille qui s'en charge.
   const scoreMode = Boolean(ctx.damage);
   const grid = orderedStats(stats).filter(([slug]) => !(scoreMode && slug === 'hp'));
   const passives = (ctx.options ?? [])

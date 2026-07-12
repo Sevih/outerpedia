@@ -38,7 +38,7 @@ export function MonsterStatsCard({
   const options = dedupSpawnContexts(spawns);
   const [selected, setSelected] = useState<number>(options.length ? options.length - 1 : -1);
   const ctx: SpawnContext = options[selected] ?? { level: 100 };
-  const modified = Boolean(ctx.adv || ctx.bossHp);
+  const modified = Boolean(ctx.adv || ctx.bossHp || ctx.bar);
 
   return (
     <div className="space-y-2">
@@ -92,9 +92,8 @@ export function MonsterStatsCard({
                   ctx.damage.max ? ctx.damage.max.toLocaleString('en') : '∞'
                 } dégâts`
               : ''}
-            {ctx.bossHp
-              ? ` · ${ctx.damage ? 'barre du palier' : 'PV du mode'} : ${ctx.bossHp.toLocaleString('en')}`
-              : ''}
+            {ctx.bar ? ` · barre du palier : ${ctx.bar.toLocaleString('en')}` : ''}
+            {ctx.bossHp ? ` · PV du mode : ${ctx.bossHp.toLocaleString('en')}` : ''}
             {quirkMods && Object.keys(quirkMods).length
               ? ` · quirks appliqués (${Object.entries(quirkMods)
                   .map(([s, v]) => `${statAbbr(s)} ${v > 0 ? '+' : ''}${v / 10}%`)
