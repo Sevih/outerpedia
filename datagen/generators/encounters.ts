@@ -143,7 +143,8 @@ export interface DungeonMonster {
  *     la CLÉ TextSystem du nom du donjon — SYS_EVENT_BOSS_DUNGEON_0001_HARD),
  *     name = libellé générique du jeu (clés curées `difficulties`) ;
  *   - guild_raid_main/sub_boss : `stage_<N>` (GuildRaidGradeTemplet.Grade —
- *     3 stages en main, jusqu'à 5 en sub selon la saison) ;
+ *     GABARIT, pas une énumération : 10 stages en main, 5 en sub au format
+ *     actuel) ;
  *   - irregular_chase : `normal`/`hard`/`very_hard` (DungeonDifficult 1..3,
  *     correspondance curée — vérifiée sur les titres « (Normal) »…) ;
  *   - story/tours/adventure : PAS de champ — la difficulté EST le mode
@@ -540,13 +541,30 @@ export function buildEncounters(): EncountersData {
     });
   }
 
-  // Donjons PRACTICE du guild raid : chaque saison duplique ses donjons de
-  // boss en copies d'entraînement aux MÊMES NameID, jamais référencées par
-  // GuildRaidGradeTemplet (70101004-006, Gornolf/Guardian ×10…) — mêmes
-  // combats sans enjeu, exclus comme les rotations WB mortes.
-  const grReferenced = new Set<string>();
-  for (const r of loadTable('GuildRaidGradeTemplet'))
-    if (r.BossDungeonID) grReferenced.add(r.BossDungeonID);
+  // Donjons du GUILD RAID : deux causes de contenu mort, exclues comme les
+  // rotations WB. (1) Les copies PRACTICE — mêmes NameID, jamais référencées
+  // par GuildRaidGradeTemplet (70101004-006, Gornolf/Guardian ×10…). (2) Les
+  // ÉCHELLES REFONDUES : les boss des saisons 1-3 ont eu une échelle 2023
+  // (main 3 stages Lv50-100) PUIS une refonte 2025 (10 stages Lv125-200,
+  // nouvelle famille d'ids) sous le MÊME NameID — deux « Stage 1 » pour le
+  // même combat. Seul le set de donjons de la DERNIÈRE saison (StartDate de
+  // GuildRaidTemplet) référençant un combat (base du NameID) fait foi.
+  const grRaidDates = new Map<string, string>();
+  for (const r of loadTable('GuildRaidTemplet')) if (r.ID) grRaidDates.set(r.ID, r.StartDate ?? '');
+  const grNameId = new Map<string, string>();
+  for (const d of loadTable('DungeonTemplet'))
+    if ((d.DungeonMode ?? '').startsWith('DM_GUILD_RAID') && d.NameID) grNameId.set(d.ID, d.NameID);
+  const grLatest = new Map<string, { date: string; dungeons: Set<string> }>();
+  for (const r of loadTable('GuildRaidGradeTemplet')) {
+    if (!r.BossDungeonID) continue;
+    const base = (grNameId.get(r.BossDungeonID) ?? '').replace(/_\d+$/, '');
+    const date = grRaidDates.get(r.GuildRaidID ?? '') ?? '';
+    const cur = grLatest.get(base);
+    if (!cur || date > cur.date) grLatest.set(base, { date, dungeons: new Set([r.BossDungeonID]) });
+    else if (date === cur.date) cur.dungeons.add(r.BossDungeonID);
+  }
+  const grCurrent = new Set<string>();
+  for (const e of grLatest.values()) for (const d of e.dungeons) grCurrent.add(d);
 
   const modes: Record<string, LangDict> = {};
   const dungeons: Record<string, DungeonRef> = {};
@@ -657,7 +675,7 @@ export function buildEncounters(): EncountersData {
 
   for (const d of loadTable('DungeonTemplet')) {
     if (deadWbDungeons.has(d.ID)) continue;
-    if ((d.DungeonMode ?? '').startsWith('DM_GUILD_RAID') && !grReferenced.has(d.ID)) continue;
+    if ((d.DungeonMode ?? '').startsWith('DM_GUILD_RAID') && !grCurrent.has(d.ID)) continue;
     const groupIds = [...new Set([...spawnGroupIds(d), ...(wbLeague.get(d.ID)?.chain ?? [])])];
     if (!groupIds.length) continue;
 
