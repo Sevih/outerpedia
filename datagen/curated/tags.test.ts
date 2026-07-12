@@ -27,7 +27,9 @@ const curated = curatedData as Record<string, CharacterCurated>;
 const glossary = tagsData as unknown as TagGlossary;
 
 const all = Object.values(characters);
-const withTag = (tag: string) => all.filter((c) => (c.tags ?? []).includes(tag));
+// `some` et non `includes` : `tags` est un `CharacterTag[]`, et `includes`
+// refuserait un `string` élargi (les tests interrogent aussi le curé, non typé).
+const withTag = (tag: string) => all.filter((c) => (c.tags ?? []).some((t) => t === tag));
 const byId = (id: string) => characters[id];
 
 /** Le seul tag que l'extraction ne peut PAS dériver (aucun marqueur en table). */
