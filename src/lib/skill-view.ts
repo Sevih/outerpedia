@@ -272,10 +272,11 @@ export function mergeStatusEffects(
  *       devient une chip de cet autre skill (id exact du buff dans les
  *       placeholders `[Buff_…]`, frontière de mot — zéro heuristique texte).
  * 2. FUSION DE L'ENRAGE : `rage_finishN` (l'attaque de FIN d'enrage) n'a le
- *    plus souvent ni nom ni desc — le jeu décrit tout l'enrage (déclencheur,
- *    buffs, attaque de fin) dans la desc de `rage_enterN`. Ses chips sont
- *    fusionnées dans la carte enter ; la carte finish n'apparaît que si elle a
- *    un nom propre.
+ *    plus souvent pas de DESC propre — le jeu décrit tout l'enrage
+ *    (déclencheur, buffs, attaque de fin) dans la desc de `rage_enterN`,
+ *    parfois en NOMMANT l'attaque dedans (« I Offer My Life...: Used when
+ *    Enraged ends. »). Ses chips sont fusionnées dans la carte enter ; la
+ *    carte finish n'apparaît que si elle a nom ET desc propres.
  * 3. JAUGE DE FAIBLESSE IGNORÉE : les buffs `BT_WG_*` (récupération/dégâts de
  *    WG) ne font JAMAIS de chips côté monstres (décision 2026-07-10) — c'est
  *    la mécanique ambiante des boss, décrite par les descs, pas un statut du
@@ -375,13 +376,19 @@ export function monsterSkillViews(
     for (const e of t.effects ?? []) if (e.buff) namedKitBuffs.add(e.buff);
   }
 
-  // 2) Fusion rage_finishN → rage_enterN (chips union ; finish sans nom masqué).
+  // 2) Fusion rage_finishN → rage_enterN (chips union). La carte finish ne
+  // vit que si elle a nom ET desc PROPRES : un nom seul ne suffit pas — le
+  // jeu décrit l'attaque de fin dans la desc d'enter (« I Offer My Life...:
+  // Used when Enraged ends. » — Meteos JC 130738, Ice Nine, Quasar
+  // Bombardment…), la carte serait un titre sans corps et ses chips
+  // manqueraient à « Enraged ».
+  const ownCard = (t: Skill): boolean => Boolean(t.name.en && t.desc?.en);
   const views: MonsterSkillView[] = [];
   for (const s of skills) {
     const finishMatch = /^rage_finish(\d*)$/.exec(s.type);
     if (finishMatch) {
       const enter = skills.find((t) => t.type === `rage_enter${finishMatch[1]}`);
-      if (enter && !s.name.en) continue; // fusionné dans la carte enter
+      if (enter && !ownCard(s)) continue; // fusionné dans la carte enter
     }
     // 4) Variante technique : ni nom ni desc, effets tous en double ailleurs.
     if (
@@ -395,7 +402,7 @@ export function monsterSkillViews(
     const enterMatch = /^rage_enter(\d*)$/.exec(s.type);
     if (enterMatch) {
       const finish = skills.find((t) => t.type === `rage_finish${enterMatch[1]}`);
-      if (finish && !finish.name.en) effects = [...effects, ...chipsOf(finish)];
+      if (finish && !ownCard(finish)) effects = [...effects, ...chipsOf(finish)];
     }
     // Chips CURÉES en plus (chipAdd) : statuts décrits par la desc mais
     // appliqués hors kit — seules les réfs résolubles passent.
