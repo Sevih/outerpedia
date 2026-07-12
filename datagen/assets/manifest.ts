@@ -38,6 +38,23 @@ const load = (p: string): Dict =>
 
 const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 
+/**
+ * Icônes de catégorie dont le JEU a réutilisé le nom pour autre chose.
+ *
+ * Ce ne sont pas des sprites manquants — ils sont bien dans l'extraction, mais
+ * ils y désignent désormais des VIGNETTES DE DÉCOR (224×140) là où c'étaient des
+ * icônes de menu (~80 px). On les prend donc au pool V2, seule copie survivante.
+ *
+ * Liste FERMÉE et vérifiée par comparaison d'images : les neuf autres icônes de
+ * catégorie sont identiques des deux côtés (écart < 0,01). N'ajouter une entrée
+ * qu'après avoir constaté le même écart — sinon on se prive d'un sprite à jour.
+ */
+const RENAMED_BY_THE_GAME = new Set([
+  'CM_Adventure_Cooperation', // joint-challenge
+  'CM_Adventure_WorldBoss', // world-boss
+  'CM_Adventure_MonadGate', // monad-gate
+]);
+
 /** Besoins d'UN personnage (réutilisé par le manifest global ET l'intégration). */
 export function characterAssetRequests(
   c: Record<string, unknown>,
@@ -545,18 +562,41 @@ export function buildAssetManifest(): AssetRequest[] {
   // catégories déclarées + scan des guides — jamais de liste manuelle. Les
   // visuels de boss ne passent PAS ici (référencés par `bossId`, namespace
   // boss existant) pour ne pas dupliquer un sprite entre namespaces.
+  //
+  // `editorialFallback` ne suffit pas pour ces TROIS-LÀ : il ne se déclenche que
+  // si le sprite est ABSENT de l'extraction. Or ils y sont — le jeu a simplement
+  // RÉUTILISÉ leurs noms pour tout autre chose. `CM_Adventure_Cooperation` est
+  // aujourd'hui un décor de ruines de 224×140 là où c'était une icône de 76 px.
+  // Extraits tels quels, ils donnent des paysages en guise d'icônes de menu.
+  //
+  // Constaté par comparaison d'IMAGES, pas de noms : sur les 12 086 sprites de
+  // l'extraction, l'ancienne icône ne ressemble à rien (l'icône Monad, elle, se
+  // retrouve à l'identique — le contrôle est bon). Elle n'existe donc plus que
+  // dans le pool V2, qui date d'une extraction antérieure. Pour re-vérifier,
+  // comparer `.assets-staging/images/ui/guides/<nom>.webp` au fichier de même
+  // nom dans `outerpedia-v2/public/images/guides/` : un écart de forme franc
+  // (> 0,25) trahit un renommage, les autres icônes tombent sous 0,01.
   const guides = listGuides();
   for (const icon of new Set([
     ...Object.values(GUIDE_CATEGORIES).map((c) => c.icon),
     ...guides.map((g) => g.icon),
   ]))
-    push({
-      kind: 'image',
-      key: `images/ui/guides/${icon}.webp`,
-      candidates: [icon],
-      domain: 'guides',
-      editorialFallback: `guides/${icon}.webp`,
-    });
+    push(
+      RENAMED_BY_THE_GAME.has(icon)
+        ? {
+            kind: 'editorial',
+            key: `images/ui/guides/${icon}.webp`,
+            source: `guides/${icon}.webp`,
+            domain: 'guides',
+          }
+        : {
+            kind: 'image',
+            key: `images/ui/guides/${icon}.webp`,
+            candidates: [icon],
+            domain: 'guides',
+            editorialFallback: `guides/${icon}.webp`,
+          },
+    );
   // Boss liés aux guides (`meta.json` → bossId, convention : le boss COURANT) :
   // portrait sous le namespace boss EXISTANT (même clé que les sources
   // d'équipement → jamais deux copies) + icônes de ses skills sous le
