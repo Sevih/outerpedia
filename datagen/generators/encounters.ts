@@ -119,6 +119,16 @@ export interface DungeonRef {
   name: LangDict;
   /** Région/chapitre (AreaTemplet), si résolue. */
   area?: LangDict;
+  /**
+   * Difficulté du donjon quand elle ne vit PAS dans le nom : world boss
+   * (les 4 donjons d'un groupe partagent le même nom, la ligue tranche —
+   * `WorldBossLeagueTemplet.LeagueName`, « Beginner/Junior/Senior League »…).
+   * JC/poursuite/guild raid portent la leur dans `name`.
+   */
+  difficulty?: LangDict;
+  /** STORY (`normal`/`normal_hard`) : saison et épisode (AreaTemplet). */
+  season?: number;
+  episode?: number;
   /** Modificateurs de stats du donjon (cf. `DungeonAdv`). */
   adv?: DungeonAdv;
   /**
@@ -344,7 +354,19 @@ export function buildEncounters(): EncountersData {
   const tchar = loadTextIndex('TextCharacter');
   const tskill = loadTextIndex('TextSkill');
   const spawnsByGroup = groupBy(loadTable('DungeonSpawnTemplet'), 'GroupID');
-  const areaNameById = new Map(loadTable('AreaTemplet').map((r) => [r.ID, r.NameID]));
+  const areaById = indexBy(loadTable('AreaTemplet'));
+
+  // Chaîne des WORLD BOSS : chaque ligue liste la SÉQUENCE des groupes de
+  // spawn de son donjon (`ChangeSpawnGroupID` — tuer un boss fait apparaître
+  // le suivant : 1 normal, 1 hard, 2 very hard, 2 extreme), alors que le
+  // donjon ne référence que le PREMIER (SpawnID_Pos0). On complète.
+  const wbChainGroups = new Map<string, string[]>();
+  for (const r of loadTable('WorldBossLeagueTemplet')) {
+    if (!r.DungeonID) continue;
+    const list = wbChainGroups.get(r.DungeonID) ?? [];
+    list.push(...splitCsv(r.ChangeSpawnGroupID ?? ''));
+    wbChainGroups.set(r.DungeonID, list);
+  }
 
   const modes: Record<string, LangDict> = {};
   const dungeons: Record<string, DungeonRef> = {};
@@ -379,16 +401,29 @@ export function buildEncounters(): EncountersData {
   // (rien ne relie DM_MONAD_BATTLE_2 à « Dimensional Singularity » dans les
   // tables). Les textes restent ceux du jeu (clé, jamais de texte main).
   const curatedTitles: Record<string, string> = {};
+  // Modes IGNORÉS (décision humaine, cf. _docIgnore du fichier curé) : leurs
+  // donjons/spawns ne sortent pas — ni rencontres, ni mode dans la sidebar.
+  const ignoredModes = new Set<string>();
   const curatedPath = resolve('data/curated/mode-titles.json');
   if (existsSync(curatedPath)) {
     const curated = JSON.parse(readFileSync(curatedPath, 'utf8')) as {
       titles?: Record<string, string>;
+      ignore?: string[];
     };
     Object.assign(curatedTitles, curated.titles ?? {});
+    for (const m of curated.ignore ?? []) ignoredModes.add(m);
+  }
+
+  // Difficulté des donjons WORLD BOSS : les 4 donjons d'un groupe partagent le
+  // même nom — seule la LIGUE les distingue (Beginner/Junior/Senior…).
+  const wbLeagueName = new Map<string, string>();
+  for (const r of loadTable('WorldBossLeagueTemplet')) {
+    if (r.DungeonID && r.LeagueName && !wbLeagueName.has(r.DungeonID))
+      wbLeagueName.set(r.DungeonID, r.LeagueName);
   }
 
   for (const d of loadTable('DungeonTemplet')) {
-    const groupIds = spawnGroupIds(d);
+    const groupIds = [...new Set([...spawnGroupIds(d), ...(wbChainGroups.get(d.ID) ?? [])])];
     if (!groupIds.length) continue;
 
     // Monstres du donjon, dédupliqués par (monstre, niveau) — plusieurs waves
@@ -411,7 +446,13 @@ export function buildEncounters(): EncountersData {
     }
     if (!found.length) continue;
 
-    const mode = slugEnum(d.DungeonMode);
+    // STORY : DM_NORMAL couvre les deux difficultés — la zone tranche
+    // (AreaTemplet.AreaGroupType, AGT_NORMAL/AGT_HARD). Slug synthétique
+    // `normal_hard`, titres curés (mode-titles.json : Story Normal/Hard).
+    let mode = slugEnum(d.DungeonMode);
+    const areaRow = areaById.get(d.AreaID ?? '');
+    if (mode === 'normal' && areaRow?.AreaGroupType === 'AGT_HARD') mode = 'normal_hard';
+    if (ignoredModes.has(mode)) continue;
     if (!(mode in modes)) {
       const curatedKey = curatedTitles[mode];
       const curated = curatedKey ? resolveText(tsys, curatedKey) : undefined;
@@ -421,10 +462,19 @@ export function buildEncounters(): EncountersData {
       if (title) modes[mode] = title;
     }
     const ref: DungeonRef = { mode, name: resolveText(tsys, d.NameID) };
-    const areaKey = areaNameById.get(d.AreaID ?? '');
-    if (areaKey) {
-      const area = resolveText(tsys, areaKey);
+    if (areaRow?.NameID) {
+      const area = resolveText(tsys, areaRow.NameID);
       if (area.en) ref.area = area;
+    }
+    // Story : saison/épisode de la zone (AreaTemplet) — la sidebar les affiche.
+    if (mode === 'normal' || mode === 'normal_hard') {
+      if (num(areaRow?.SeasonID)) ref.season = num(areaRow!.SeasonID);
+      if (num(areaRow?.EpisodeNum)) ref.episode = num(areaRow!.EpisodeNum);
+    }
+    const leagueKey = wbLeagueName.get(d.ID);
+    if (leagueKey) {
+      const league = resolveText(tsys, leagueKey);
+      if (league.en) ref.difficulty = league;
     }
     const adv: DungeonAdv = {};
     if (num(d.SpawnAdvantageRate_Atk)) adv.atk = num(d.SpawnAdvantageRate_Atk);
