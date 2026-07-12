@@ -46,12 +46,16 @@ export type { CatalogEntry } from '../generators/item-catalog';
 export type { GameVersion } from '../generators/game-version';
 export type {
   DungeonAdv,
+  DungeonDifficulty,
+  DungeonMonster,
   DungeonRank,
   DungeonRef,
   EncountersData,
   MonsterEncounters,
   RankDamage,
   RankOption,
+  RewardEntry,
+  RewardTable,
   MonsterSpawn,
 } from '../generators/encounters';
 export type {
@@ -116,7 +120,7 @@ import type { LangDict } from '../lib/lang';
 import type { Effect } from '../lib/effects';
 import type { Character } from '../extractor/specs/character';
 import type { Monster } from '../extractor/specs/monster';
-import type { DungeonRef, RankOption } from '../generators/encounters';
+import type { DungeonRef, RankOption, RewardTable } from '../generators/encounters';
 import type { TranscendData } from '../extractor/transcend';
 import type { Skill } from '../generators/skills';
 import type { CatalogEntry } from '../generators/item-catalog';
@@ -200,6 +204,12 @@ export interface Glossaries {
    * `modes` (absent avant la première promotion).
    */
   rankOptions?: Record<string, RankOption>;
+  /**
+   * Tables de récompense résolues (`RewardTemplet` + groupes), référencées
+   * par `DungeonRef.reward`/`rewardWin`/`rewardLose` — mutualisées entre
+   * donjons. Optionnel comme `modes` (absent avant la première promotion).
+   */
+  rewardTables?: Record<string, RewardTable>;
   /**
    * Quirks de compte réduisant les stats AFFICHÉES des boss (slug de stat →
    * per-mille signé, ex. buff_chance/buff_resist −100) — le jeu les applique

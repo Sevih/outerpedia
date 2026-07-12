@@ -8,6 +8,18 @@
     "adventure_mission": "SYS_ADVENTURE_LICENSE_MISSION",
     "adventure_challenge": "SYS_ADVENTURE_LICENSE_RANK_CHALLENGE"
   },
+  "_docDifficulties": "Libellés GÉNÉRIQUES de difficulté (slug stable → clé TextSystem) pour DungeonRef.difficulty.name — le jeu n'a pas de jeu de clés unifié : SYS_DIFFICULTY_* couvre normal/hard, la clé tour couvre very_hard (texte « Very Hard » nu). Le slug reste la référence stable côté site (le français vient du site, jamais du jeu).",
+  "difficulties": {
+    "normal": "SYS_DIFFICULTY_NORMAL",
+    "hard": "SYS_DIFFICULTY_HARD",
+    "very_hard": "SYS_TOWER_VERY_HARD_DIFFICULTY"
+  },
+  "_docChaseDifficulties": "Poursuite (irregular_chase) : IrregularChaseTemplet.DungeonDifficult est un ORDINAL sans clé — correspondance ordinale → slug fixée ici (décision humaine), vérifiée sur les titres du jeu « Iron Stretcher (Normal)/(Hard)/(Very Hard) ».",
+  "chaseDifficulties": {
+    "1": "normal",
+    "2": "hard",
+    "3": "very_hard"
+  },
   "_docIgnore": "Modes IGNORÉS à l'extraction (décision Sevih 2026-07-12) : leurs donjons et spawns ne sortent PAS dans encounters — ni rencontres sur les fiches, ni monstres listés s'ils ne spawnent que là (farm/événementiel générique/contenu narratif sans intérêt d'extraction).",
   "ignore": [
     "event",

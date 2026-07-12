@@ -111,6 +111,76 @@ export interface DungeonRank {
   options?: string[];
 }
 
+/**
+ * Un monstre d'une rencontre, DANS L'ORDRE DU JEU (groupes de spawn dans
+ * l'ordre du donjon — chaîne des world boss incluse — puis waves) : le premier
+ * `boss` est le combat mis en avant ; deux `boss` successifs = enchaînement de
+ * phases (world boss very hard/extreme : tuer le premier fait apparaître le
+ * second).
+ */
+export interface DungeonMonster {
+  id: string;
+  /** Niveau RÉEL à cette rencontre (DungeonSpawnTemplet.LevelN). */
+  level: number;
+  /** Barres de vie (HPLineCount), si > 1. */
+  hpLines?: number;
+  /**
+   * Catégorie du monstre (MonsterTemplet.Type) : `boss` pour toute catégorie
+   * boss/élite (CT_BOSS/CT_AREA_BOSS/CT_SEASON_BOSS/CT_NAMED_MONSTER), `add`
+   * pour les mobs de base (CT_MONSTER) — guild raid : Planet Purification
+   * Unit = boss, Spare Core = add.
+   */
+  role: 'boss' | 'add';
+}
+
+/**
+ * Difficulté STRUCTURÉE d'un donjon. `key` est une clé STABLE non traduite
+ * (le site peut y accrocher ses propres libellés — le jeu ne fournit jamais
+ * de français), portée par mode :
+ *   - world_boss : `league_1..4` (WorldBossLeagueTemplet.Level), name = nom
+ *     de la ligue (« Normal/Hard/Very Hard/Extreme League ») ;
+ *   - event_boss (joint challenge) : `normal`/`hard`/`very_hard` (suffixe de
+ *     la CLÉ TextSystem du nom du donjon — SYS_EVENT_BOSS_DUNGEON_0001_HARD),
+ *     name = libellé générique du jeu (clés curées `difficulties`) ;
+ *   - guild_raid_main/sub_boss : `stage_1..3` (GuildRaidGradeTemplet.Grade) ;
+ *   - irregular_chase : `normal`/`hard`/`very_hard` (DungeonDifficult 1..3,
+ *     correspondance curée — vérifiée sur les titres « (Normal) »…) ;
+ *   - story/tours/adventure : PAS de champ — la difficulté EST le mode
+ *     (normal vs normal_hard, tower/_hard/_very_hard).
+ */
+export interface DungeonDifficulty {
+  key: string;
+  /** Ordre croissant d'affichage (1 = plus facile). */
+  order: number;
+  /** Libellé localisé du jeu, quand il en a un. */
+  name?: LangDict;
+}
+
+/** Une ligne de butin d'une table de récompense (`RewardGroupTemplet`). */
+export interface RewardEntry {
+  /** Nature (slug de RIT_* : item/character/asset/piece/ticket/costume/…). */
+  kind: string;
+  id: string;
+  min: number;
+  max: number;
+  /** Tirage ALÉATOIRE dans le groupe (RandomGroupID) ; absent = garanti. */
+  random?: boolean;
+}
+
+/**
+ * Table de récompense résolue (`RewardTemplet` + groupes) — glossaire
+ * `rewardTables`, référencée par `DungeonRef.reward[Win|Lose]`. AUCUN taux de
+ * chance dans les tables du client : la pondération des groupes aléatoires est
+ * côté serveur.
+ */
+export interface RewardTable {
+  crystal?: number;
+  credit?: { min: number; max: number };
+  charExp?: number;
+  accountExp?: number;
+  entries?: RewardEntry[];
+}
+
 /** Un donjon/stage où spawne au moins un monstre. */
 export interface DungeonRef {
   /** Mode de contenu (slug de DungeonMode : normal/guild_raid_main_boss/…). */
@@ -119,13 +189,26 @@ export interface DungeonRef {
   name: LangDict;
   /** Région/chapitre (AreaTemplet), si résolue. */
   area?: LangDict;
+  /** Monstres de la rencontre, dans l'ordre du jeu (cf. `DungeonMonster`). */
+  monsters?: DungeonMonster[];
+  /** Difficulté structurée, sur les modes où elle ne vit pas dans `mode`. */
+  difficulty?: DungeonDifficulty;
   /**
-   * Difficulté du donjon quand elle ne vit PAS dans le nom : world boss
-   * (les 4 donjons d'un groupe partagent le même nom, la ligue tranche —
-   * `WorldBossLeagueTemplet.LeagueName`, « Beginner/Junior/Senior League »…).
-   * JC/poursuite/guild raid portent la leur dans `name`.
+   * Identifiant OPAQUE de combat : les donjons partageant le même `group`
+   * sont LE MÊME COMBAT à des difficultés/paliers différents. Stable —
+   * `world_boss:<BossID>`, `event_boss:<base de clé TextSystem>`,
+   * `guild_raid:<base>`, `irregular_chase:<GroupID>`.
    */
-  difficulty?: LangDict;
+  group?: string;
+  /** Tours : numéro d'étage (suffixe de la clé TextSystem du nom). */
+  floor?: number;
+  /** Tours élémentaires : élément de la tour (fire/water/earth/light/dark). */
+  element?: string;
+  /** Butin répétable (`DungeonTemplet.RewardID`) — réf `rewardTables`. */
+  reward?: string;
+  /** Poursuite (irregular_chase) : butin de victoire/défaite. */
+  rewardWin?: string;
+  rewardLose?: string;
   /** STORY (`normal`/`normal_hard`) : saison et épisode (AreaTemplet). */
   season?: number;
   episode?: number;
@@ -179,6 +262,12 @@ export interface EncountersData {
    * fait pareil (`stat × (1000 + mod) / 1000`, arrondi bas).
    */
   bossQuirkMods: Record<string, number>;
+  /**
+   * Tables de récompense résolues, RÉFÉRENCÉES par les donjons
+   * (`DungeonRef.reward`/`rewardWin`/`rewardLose`) — mutualisées : des
+   * centaines de donjons partagent les mêmes tables.
+   */
+  rewardTables: Record<string, RewardTable>;
   dungeons: Record<string, DungeonRef>;
   monsters: Record<string, MonsterEncounters>;
 }
@@ -382,9 +471,15 @@ export function buildEncounters(): EncountersData {
     else if (rot === cur.rot) cur.dungeons.add(r.DungeonID);
   }
   const currentWbDungeons = new Set<string>();
-  for (const c of wbCurrent.values()) for (const d of c.dungeons) currentWbDungeons.add(d);
+  const wbBossByDungeon = new Map<string, string>();
+  for (const [boss, c] of wbCurrent) {
+    for (const d of c.dungeons) {
+      currentWbDungeons.add(d);
+      wbBossByDungeon.set(d, boss);
+    }
+  }
   const deadWbDungeons = new Set<string>();
-  const wbLeague = new Map<string, { chain: string[]; league?: string }>();
+  const wbLeague = new Map<string, { chain: string[]; league?: string; level: number }>();
   for (const r of leagueRows) {
     if (!r.DungeonID) continue;
     if (!currentWbDungeons.has(r.DungeonID)) {
@@ -394,9 +489,18 @@ export function buildEncounters(): EncountersData {
     // Lignes croissantes → la rotation la plus récente l'emporte.
     wbLeague.set(r.DungeonID, {
       chain: splitCsv(r.ChangeSpawnGroupID ?? ''),
+      level: num(r.Level),
       ...(r.LeagueName ? { league: r.LeagueName } : {}),
     });
   }
+
+  // Donjons PRACTICE du guild raid : chaque saison duplique ses donjons de
+  // boss en copies d'entraînement aux MÊMES NameID, jamais référencées par
+  // GuildRaidGradeTemplet (70101004-006, Gornolf/Guardian ×10…) — mêmes
+  // combats sans enjeu, exclus comme les rotations WB mortes.
+  const grReferenced = new Set<string>();
+  for (const r of loadTable('GuildRaidGradeTemplet'))
+    if (r.BossDungeonID) grReferenced.add(r.BossDungeonID);
 
   const modes: Record<string, LangDict> = {};
   const dungeons: Record<string, DungeonRef> = {};
@@ -434,18 +538,80 @@ export function buildEncounters(): EncountersData {
   // Modes IGNORÉS (décision humaine, cf. _docIgnore du fichier curé) : leurs
   // donjons/spawns ne sortent pas — ni rencontres, ni mode dans la sidebar.
   const ignoredModes = new Set<string>();
+  // Libellés génériques de difficulté (slug → clé TextSystem) + correspondance
+  // ordre → slug de la poursuite (aucune clé structurelle, décision curée).
+  const difficultyNames: Record<string, string> = {};
+  const chaseDifficulties: Record<string, string> = {};
   const curatedPath = resolve('data/curated/mode-titles.json');
   if (existsSync(curatedPath)) {
     const curated = JSON.parse(readFileSync(curatedPath, 'utf8')) as {
       titles?: Record<string, string>;
       ignore?: string[];
+      difficulties?: Record<string, string>;
+      chaseDifficulties?: Record<string, string>;
     };
     Object.assign(curatedTitles, curated.titles ?? {});
     for (const m of curated.ignore ?? []) ignoredModes.add(m);
+    Object.assign(difficultyNames, curated.difficulties ?? {});
+    Object.assign(chaseDifficulties, curated.chaseDifficulties ?? {});
   }
+  /** Difficulté structurée : libellé générique curé (absent = pas de name). */
+  const difficultyOf = (key: string, order: number): DungeonDifficulty => {
+    const nameKey = difficultyNames[key];
+    const name = nameKey ? resolveText(tsys, nameKey) : undefined;
+    return { key, order, ...(name?.en ? { name } : {}) };
+  };
+
+  // Catégorie des monstres (rôle boss/add des rencontres).
+  const monsterTypeById = new Map<string, string>();
+  for (const r of loadTable('MonsterTemplet')) monsterTypeById.set(r.ID, r.Type ?? '');
+
+  // Tables de récompense : résolues À LA DEMANDE (seuls les RewardID
+  // effectivement référencés par un donjon extrait sortent), mutualisées.
+  const rewardById = indexBy(loadTable('RewardTemplet'));
+  const rewardGroups = groupBy(loadTable('RewardGroupTemplet'), 'GroupID');
+  const rewardTables: Record<string, RewardTable> = {};
+  const resolveReward = (id: string | undefined): string | undefined => {
+    if (!id) return undefined;
+    if (rewardTables[id]) return id;
+    const r = rewardById.get(id);
+    if (!r) return undefined;
+    const table: RewardTable = {};
+    if (num(r.Crystal)) table.crystal = num(r.Crystal);
+    if (num(r.CreditMin) || num(r.CreditMax))
+      table.credit = { min: num(r.CreditMin), max: num(r.CreditMax) };
+    if (num(r.CharacterEXP)) table.charExp = num(r.CharacterEXP);
+    if (num(r.AccountEXP)) table.accountExp = num(r.AccountEXP);
+    const entries: RewardEntry[] = [];
+    const collect = (groupCsv: string | undefined, random: boolean) => {
+      for (const gid of splitCsv(groupCsv ?? '')) {
+        for (const g of rewardGroups.get(gid) ?? []) {
+          if (!g.TypeID) continue;
+          entries.push({
+            kind: slugEnum(g.Type),
+            id: g.TypeID,
+            min: num(g.MinCount),
+            max: num(g.MaxCount),
+            ...(random ? { random: true } : {}),
+          });
+        }
+      }
+    };
+    collect(r.StaticGroupID, false);
+    collect(r.RandomGroupID, true);
+    if (entries.length) table.entries = entries;
+    if (!Object.keys(table).length) return undefined;
+    rewardTables[id] = table;
+    return id;
+  };
+
+  // NameID brut par donjon extrait — les passes par mode dérivent difficulté
+  // et groupe de combat du SUFFIXE de la clé (structurel, jamais du texte).
+  const nameIdOf = new Map<string, string>();
 
   for (const d of loadTable('DungeonTemplet')) {
     if (deadWbDungeons.has(d.ID)) continue;
+    if ((d.DungeonMode ?? '').startsWith('DM_GUILD_RAID') && !grReferenced.has(d.ID)) continue;
     const groupIds = [...new Set([...spawnGroupIds(d), ...(wbLeague.get(d.ID)?.chain ?? [])])];
     if (!groupIds.length) continue;
 
@@ -485,20 +651,54 @@ export function buildEncounters(): EncountersData {
       if (title) modes[mode] = title;
     }
     const ref: DungeonRef = { mode, name: resolveText(tsys, d.NameID) };
+    if (d.NameID) nameIdOf.set(d.ID, d.NameID);
     if (areaRow?.NameID) {
       const area = resolveText(tsys, areaRow.NameID);
       if (area.en) ref.area = area;
     }
+    // Index inverse rencontre → monstres, dans l'ordre du jeu ; rôle dérivé de
+    // la catégorie (cf. DungeonMonster).
+    ref.monsters = found.map((f) => ({
+      id: f.id,
+      level: f.level,
+      ...(f.hpLines ? { hpLines: f.hpLines } : {}),
+      role: monsterTypeById.get(f.id) === 'CT_MONSTER' ? ('add' as const) : ('boss' as const),
+    }));
     // Story : saison/épisode de la zone (AreaTemplet) — la sidebar les affiche.
     if (mode === 'normal' || mode === 'normal_hard') {
       if (num(areaRow?.SeasonID)) ref.season = num(areaRow!.SeasonID);
       if (num(areaRow?.EpisodeNum)) ref.episode = num(areaRow!.EpisodeNum);
     }
-    const leagueKey = wbLeague.get(d.ID)?.league;
-    if (leagueKey) {
-      const league = resolveText(tsys, leagueKey);
-      if (league.en) ref.difficulty = league;
+    // World boss : la ligue est la difficulté (nom + niveau structurel), le
+    // boss de la rotation courante est le groupe de combat.
+    const wb = wbLeague.get(d.ID);
+    if (wb?.league) {
+      const league = resolveText(tsys, wb.league);
+      ref.difficulty = {
+        key: `league_${wb.level}`,
+        order: wb.level,
+        ...(league.en ? { name: league } : {}),
+      };
     }
+    const wbBoss = wbBossByDungeon.get(d.ID);
+    if (wbBoss) ref.group = `world_boss:${wbBoss}`;
+    // Tours : étage et élément vivent dans la CLÉ du nom
+    // (SYS_INFINITE_DUNGEON[_FIRE][_HARD|_V_HARD]_<étage> — espaces parasites
+    // possibles dans les clés du jeu).
+    if (mode.startsWith('tower')) {
+      const key = (d.NameID ?? '').replace(/\s+/g, '');
+      const m =
+        /^SYS_INFINITE_DUNGEON_(?:(FIRE|WATER|EARTH|LIGHT|DARK)_)?(?:V_HARD_|HARD_)?(\d+)$/.exec(
+          key,
+        );
+      if (m) {
+        ref.floor = Number(m[2]);
+        if (m[1]) ref.element = m[1].toLowerCase();
+      }
+    }
+    // Butin répétable du donjon (table mutualisée, cf. rewardTables).
+    const reward = resolveReward(d.RewardID);
+    if (reward) ref.reward = reward;
     const adv: DungeonAdv = {};
     if (num(d.SpawnAdvantageRate_Atk)) adv.atk = num(d.SpawnAdvantageRate_Atk);
     if (num(d.SpawnAdvantageRate_Def)) adv.def = num(d.SpawnAdvantageRate_Def);
@@ -557,6 +757,9 @@ export function buildEncounters(): EncountersData {
 
   // 1) Event boss (joint challenge…) : `BossMonsterHP` CSV aligné au CSV
   // `DungeonID`. Saisons triées par StartDate, la plus récente l'emporte.
+  // Difficulté : suffixe de la clé du nom (SYS_EVENT_BOSS_DUNGEON_0001_HARD),
+  // ordre = position dans le CSV ; groupe de combat = base de la clé (les
+  // relances d'un boss réutilisent les mêmes donjons).
   const eventBossRows = [...loadTable('EventBossDungeonTemplet')].sort((a, b) =>
     (a.StartDate ?? '').localeCompare(b.StartDate ?? ''),
   );
@@ -564,19 +767,54 @@ export function buildEncounters(): EncountersData {
     const dids = splitCsv(r.DungeonID);
     const hps = splitCsv(r.BossMonsterHP);
     dids.forEach((did, i) => {
+      const d = dungeons[did];
+      if (!d) return;
       const hp = num(hps[i]);
-      if (hp && dungeons[did]) dungeons[did].bossHp = hp;
+      if (hp) d.bossHp = hp;
+      const nameId = nameIdOf.get(did) ?? '';
+      const m = /^(.*?)_(NORMAL|HARD|VERY_HARD)$/.exec(nameId);
+      if (m) {
+        d.difficulty = difficultyOf(m[2].toLowerCase(), i + 1);
+        d.group = `event_boss:${m[1]}`;
+      }
     });
   }
 
   // 2) Guild raid saisonnier : un donjon PAR grade, PV réels sur la ligne.
   // Le titre du donjon est un TEMPLATE (« … (Stage {0}) ») que le jeu formate
-  // avec le grade — on le remplit pareil, dans toutes les langues.
+  // avec le grade — on le remplit pareil, dans toutes les langues. Difficulté
+  // structurée = stage (Grade) ; groupe de combat = base de la clé du nom
+  // (SYS_TITLE_GUILD_RAID_SEASON1_MAIN_1 → …_MAIN — les saisons templetées
+  // n'ont pas de suffixe, la clé nue est déjà la base).
   for (const r of loadTable('GuildRaidGradeTemplet')) {
     const d = dungeons[r.BossDungeonID ?? ''];
     if (!d) continue;
     if (num(r.BossMonsterHP)) d.bossHp = num(r.BossMonsterHP);
-    if (num(r.Grade)) d.name = fillPlaceholder(d.name, num(r.Grade));
+    const grade = num(r.Grade);
+    if (grade) {
+      d.name = fillPlaceholder(d.name, grade);
+      d.difficulty = { key: `stage_${grade}`, order: grade };
+      const nameId = nameIdOf.get(r.BossDungeonID ?? '');
+      if (nameId) d.group = `guild_raid:${nameId.replace(/_\d+$/, '')}`;
+    }
+  }
+
+  // 2bis) Poursuite (irregular_chase) : la ligne porte les PV réels du boss,
+  // la difficulté (DungeonDifficult 1..3 — slugs curés, les titres du jeu
+  // « (Normal)/(Hard)/(Very Hard) » fixent la correspondance), le groupe de
+  // combat (GroupID : un boss = 3 difficultés) et le butin victoire/défaite.
+  for (const r of loadTable('IrregularChaseTemplet')) {
+    const d = dungeons[r.DungeonID ?? ''];
+    if (!d) continue;
+    if (num(r.BossHP)) d.bossHp = num(r.BossHP);
+    const order = num(r.DungeonDifficult);
+    if (order)
+      d.difficulty = difficultyOf(chaseDifficulties[String(order)] ?? String(order), order);
+    if (r.GroupID) d.group = `irregular_chase:${r.GroupID}`;
+    const win = resolveReward(r.Reward_Win);
+    if (win) d.rewardWin = win;
+    const lose = resolveReward(r.Reward_Lose);
+    if (lose) d.rewardLose = lose;
   }
 
   // 3) Challenge d'événement : la saison (EventDungeonTemplet) porte le donjon
@@ -765,7 +1003,13 @@ export function buildEncounters(): EncountersData {
       for (const o of rk.options ?? []) {
         if (rankOptions[o]) continue;
         const row = buffs.get(o)?.[0];
-        if (!row) continue;
+        // GARANTIE : toute clé citée par un `ranks[].options` existe ici —
+        // un OptionID sans buff résoluble sort en stub `unknown` plutôt que
+        // de manquer silencieusement au glossaire.
+        if (!row) {
+          rankOptions[o] = { type: 'unknown' };
+          continue;
+        }
         const opt: RankOption = { type: row.Type ?? '' };
         const stat = statSlug(row.StatType);
         if (stat) opt.stat = stat;
@@ -810,6 +1054,6 @@ export function buildEncounters(): EncountersData {
     }
   }
 
-  cache = { modes, rankOptions, bossQuirkMods, dungeons, monsters };
+  cache = { modes, rankOptions, bossQuirkMods, rewardTables, dungeons, monsters };
   return cache;
 }

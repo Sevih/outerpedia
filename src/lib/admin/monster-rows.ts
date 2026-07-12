@@ -59,7 +59,8 @@ export function buildMonsterRows(): MonsterRowsResult {
         .join(' ');
       return [se, d.area?.en, d.name.en].filter(Boolean).join(' · ');
     }
-    return d.difficulty?.en ? d.difficulty.en : d.name.en;
+    if (d.mode === 'world_boss' && d.difficulty?.name?.en) return d.difficulty.name.en;
+    return d.name.en;
   };
   const zonesOf = (m: Monster): string[] => {
     const zones = new Set<string>();

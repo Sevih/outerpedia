@@ -134,6 +134,9 @@ async function main(): Promise<void> {
     // Passifs de PALIER résolus (`DungeonRank.options` → buff) — le site
     // affiche les rangs (singularity…) sans lire les tables du jeu.
     rankOptions: encounters.rankOptions,
+    // Tables de récompense résolues — référencées par `DungeonRef.reward`,
+    // `rewardWin`, `rewardLose` (encounters.json).
+    rewardTables: encounters.rewardTables,
     // Quirks de compte réduisant les stats affichées des boss (EFF/RES −10 %).
     bossQuirkMods: encounters.bossQuirkMods,
   };
