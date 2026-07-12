@@ -5303,10 +5303,16 @@
   },
   "modes": {
     "normal": {
-      "en": "Normal",
-      "jp": "ノーマル",
-      "kr": "일반",
-      "zh": "一般"
+      "en": "Story Normal",
+      "jp": "ストーリーノーマル",
+      "kr": "스토리(노멀)",
+      "zh": "故事普通"
+    },
+    "normal_hard": {
+      "en": "Story Hard",
+      "jp": "ストーリーハード",
+      "kr": "스토리 하드",
+      "zh": "故事困难"
     },
     "raid_1": {
       "en": "Special Request: Ecology Study",
@@ -5338,24 +5344,6 @@
       "kr": "비천의 탑",
       "zh": "飞天之塔"
     },
-    "sidestory": {
-      "en": "Side Story",
-      "jp": "外伝",
-      "kr": "외전",
-      "zh": "外传"
-    },
-    "remains": {
-      "en": "The Archdemon's Ruins",
-      "jp": "魔王の遺跡",
-      "kr": "마왕의 유적",
-      "zh": "魔王遗迹"
-    },
-    "guild_dungeon": {
-      "en": "Guild Security Area",
-      "jp": "ギルド警備エリア",
-      "kr": "길드 경비 구역",
-      "zh": "公会警备区域"
-    },
     "guild_raid_main_boss": {
       "en": "Guild Raid",
       "jp": "ギルド連合戦",
@@ -5367,18 +5355,6 @@
       "jp": "ギルド連合戦",
       "kr": "길드 연합전",
       "zh": "公会联合战"
-    },
-    "event": {
-      "en": "Event",
-      "jp": "イベント",
-      "kr": "이벤트",
-      "zh": "活动"
-    },
-    "event_challenge": {
-      "en": "Event",
-      "jp": "イベント",
-      "kr": "이벤트",
-      "zh": "活动"
     },
     "world_boss": {
       "en": "World Boss",
@@ -5392,47 +5368,23 @@
       "kr": "엘레멘탈 타워",
       "zh": "元素之塔"
     },
-    "char_piece": {
-      "en": "Defeat the Doppelgänger",
-      "jp": "自己像幻視退治",
-      "kr": "도플갱어 퇴치",
-      "zh": "击退二重身"
-    },
     "event_boss": {
       "en": "Joint Challenge",
       "jp": "共同作戦",
       "kr": "합동 챌린지",
       "zh": "联合挑战"
     },
-    "exploration_main_boss": {
-      "en": "Terminus Isle Exploration",
-      "jp": "テルミナス島探査",
-      "kr": "멸망의 섬 탐사",
-      "zh": "探索灭亡之岛"
-    },
-    "exploration_spot_boss": {
-      "en": "Terminus Isle Exploration",
-      "jp": "テルミナス島探査",
-      "kr": "멸망의 섬 탐사",
-      "zh": "探索灭亡之岛"
-    },
-    "exploration_normal": {
-      "en": "Terminus Isle Exploration",
-      "jp": "テルミナス島探査",
-      "kr": "멸망의 섬 탐사",
-      "zh": "探索灭亡之岛"
-    },
     "adventure_mission": {
-      "en": "Story Normal",
-      "jp": "ストーリーノーマル",
-      "kr": "스토리(노멀)",
-      "zh": "故事普通"
+      "en": "Weekly Conquest Mission",
+      "jp": "ウィークリー討伐",
+      "kr": "주간 토벌 미션",
+      "zh": "每周讨伐任务"
     },
     "adventure_challenge": {
-      "en": "Challenge",
-      "jp": "チャレンジ",
-      "kr": "도전",
-      "zh": "挑战"
+      "en": "Promotion Challenge",
+      "jp": "昇級チャレンジ",
+      "kr": "승급 챌린지",
+      "zh": "晋升挑战"
     },
     "irregular_chase": {
       "en": "Pursuit Operation",
@@ -5446,29 +5398,11 @@
       "kr": "침투 섬멸전",
       "zh": "渗透歼灭战"
     },
-    "ivanez_dungeon": {
-      "en": "Mirsha Festival",
-      "jp": "メルシャフェス",
-      "kr": "메르샤 페스티벌",
-      "zh": "弥乐沙节"
-    },
     "monad_battle_1": {
       "en": "Monad Gate",
       "jp": "モナド・ゲート",
       "kr": "모나드 게이트",
       "zh": "单子门"
-    },
-    "gold": {
-      "en": "Hypnotic Frog Hall",
-      "jp": "催眠カエルの殿堂",
-      "kr": "최면 개구리의 전당",
-      "zh": "催眠青蛙殿堂"
-    },
-    "farming": {
-      "en": "Ark Raid",
-      "jp": "アーク強襲",
-      "kr": "방주 습격",
-      "zh": "方舟强袭"
     },
     "monad_battle_2": {
       "en": "Dimensional Singularity",
@@ -5478,96 +5412,6 @@
     }
   },
   "rankOptions": {
-    "guild_boss_fire_1": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "buff_chance",
-      "value": 300,
-      "irremovable": true
-    },
-    "guild_boss_fire_2": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "buff_chance",
-      "value": 600,
-      "irremovable": true
-    },
-    "guild_boss_fire_3": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "buff_chance",
-      "value": 1000,
-      "irremovable": true
-    },
-    "guild_boss_fire_4": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "buff_chance",
-      "value": 1400,
-      "irremovable": true
-    },
-    "guild_boss_fire_5": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "buff_chance",
-      "value": 1800,
-      "irremovable": true
-    },
-    "guild_boss_water_1": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "atk",
-      "value": 100,
-      "irremovable": true
-    },
-    "guild_boss_water_2": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "atk",
-      "value": 200,
-      "irremovable": true
-    },
-    "guild_boss_water_3": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "atk",
-      "value": 330,
-      "irremovable": true
-    },
-    "guild_boss_water_4": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "atk",
-      "value": 460,
-      "irremovable": true
-    },
-    "guild_boss_water_5": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "atk",
-      "value": 600,
-      "irremovable": true
-    },
-    "guild_boss_earth_1": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "speed",
-      "value": 60,
-      "irremovable": true
-    },
-    "guild_boss_earth_2": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "speed",
-      "value": 120,
-      "irremovable": true
-    },
-    "guild_boss_earth_3": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "speed",
-      "value": 200,
-      "irremovable": true
-    },
-    "guild_boss_earth_4": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "speed",
-      "value": 280,
-      "irremovable": true
-    },
-    "guild_boss_earth_5": {
-      "type": "BT_STAT_PREMIUM",
-      "stat": "speed",
-      "value": 360,
-      "irremovable": true
-    },
     "Singularity_Passive_Dmg_up_d": {
       "type": "BT_STAT_PREMIUM",
       "stat": "dmg_boost",
