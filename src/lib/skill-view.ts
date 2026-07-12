@@ -35,6 +35,29 @@ const MONSTER_CURATED = monsterCuratedJson as {
   chipHide?: Record<string, string[]>;
 };
 
+/**
+ * Méta d'affichage de la CHIP qu'un effet monstre produirait (null si l'effet
+ * ne produit pas de chip : WG, câblage, réf irrésoluble). ADMIN : pills de
+ * l'éditeur de câblage — même résolution que le rendu des chips.
+ */
+export function monsterChipMeta(
+  e: NonNullable<Skill['effects']>[number],
+): { name: string; icon?: string; isDebuff: boolean } | null {
+  if (e.type.startsWith('BT_WG')) return null;
+  const chip = toChipEffect(e);
+  if (!chip) return null;
+  const key = chip.tooltip ?? chip.label;
+  if (!key) return null;
+  const eff = chip.tooltip
+    ? getMergedEffect(G.effectByTooltip[chip.tooltip] ?? chip.tooltip)
+    : getMergedEffect(G.effectByLabel[chip.label!] ?? chip.label!);
+  return {
+    name: eff?.name.en ?? key,
+    ...(eff?.icon ? { icon: eff.icon } : {}),
+    isDebuff: eff?.isDebuff ?? e.category !== 'buff',
+  };
+}
+
 /** Dédoublonne par id (les listes de skills des persos à formes en répètent). */
 export function dedupSkills(skills: Skill[]): Skill[] {
   const seen = new Set<string>();
@@ -267,7 +290,19 @@ export interface MonsterSkillView {
   effects?: ClientEffect[];
 }
 
-export function monsterSkillViews(skills: Skill[]): MonsterSkillView[] {
+/** Forme de la curation d'affichage monstres (fichier curé ou override). */
+export interface MonsterKitCuration {
+  chipOwner?: Record<string, string | string[]>;
+  chipAdd?: Record<string, string[]>;
+  chipHide?: Record<string, string[]>;
+}
+
+export function monsterSkillViews(
+  skills: Skill[],
+  // Curation substituable (ADMIN : l'éditeur de câblage passe `{}` pour
+  // obtenir les positions « règles pures », et sa propre copie en prévisualisation).
+  curated: MonsterKitCuration = MONSTER_CURATED,
+): MonsterSkillView[] {
   // Le buff est-il référencé par la desc (id EXACT, frontière de mot) ?
   const mentions = (s: Skill, buffId: string): boolean =>
     Boolean(s.desc?.en) &&
@@ -281,7 +316,7 @@ export function monsterSkillViews(skills: Skill[]): MonsterSkillView[] {
     (movedFrom.get(from.id) ?? movedFrom.set(from.id, new Set()).get(from.id)!).add(e);
   };
   const isWg = (e: RawEffect): boolean => e.type.startsWith('BT_WG');
-  const curatedOwner = MONSTER_CURATED.chipOwner ?? {};
+  const curatedOwner = curated.chipOwner ?? {};
   // a. Caller : un effet porté par un PASSIF est DUPLIQUÉ vers le(s) skill(s)
   // du type déclencheur et conservé sur le porteur ; l'effet est acquis, les
   // signaux suivants ne le déplacent plus. PASSIFS UNIQUEMENT (même règle que
@@ -293,7 +328,9 @@ export function monsterSkillViews(skills: Skill[]): MonsterSkillView[] {
   for (const s of skills) {
     if (!MONSTER_PASSIVE_TYPES.test(s.type)) continue;
     for (const e of s.effects ?? []) {
-      if (!e.caller || isWg(e)) continue;
+      // Un buff CURÉ (chipOwner) échappe à la duplication caller : la décision
+      // humaine désigne UN porteur, elle prime sur le signal des tables.
+      if (!e.caller || isWg(e) || (e.buff && curatedOwner[e.buff])) continue;
       const targets = skills.filter((t) => t.id !== s.id && t.type === e.caller);
       if (!targets.length) continue;
       for (const t of targets) (extraOf.get(t.id) ?? extraOf.set(t.id, []).get(t.id)!).push(e);
@@ -322,7 +359,7 @@ export function monsterSkillViews(skills: Skill[]): MonsterSkillView[] {
   }
 
   const chipsOf = (s: Skill): ClientEffect[] => {
-    const hidden = new Set(MONSTER_CURATED.chipHide?.[s.id] ?? []);
+    const hidden = new Set(curated.chipHide?.[s.id] ?? []);
     const own = (s.effects ?? []).filter((e) => !isWg(e) && !movedFrom.get(s.id)?.has(e));
     return [...own, ...(extraOf.get(s.id) ?? [])]
       .filter((e) => !e.buff || !hidden.has(e.buff))
@@ -362,7 +399,7 @@ export function monsterSkillViews(skills: Skill[]): MonsterSkillView[] {
     }
     // Chips CURÉES en plus (chipAdd) : statuts décrits par la desc mais
     // appliqués hors kit — seules les réfs résolubles passent.
-    for (const t of MONSTER_CURATED.chipAdd?.[s.id] ?? []) {
+    for (const t of curated.chipAdd?.[s.id] ?? []) {
       if (!getMergedEffect(G.effectByTooltip[t] ?? t)) continue;
       effects = [...effects, { family: 'stat', category: 'buff', tooltip: t }];
     }

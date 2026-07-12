@@ -35,6 +35,9 @@ export function buildMonsterRows(): MonsterRowsResult {
   const diffCounts = new Map(review.diff.changed.map((c) => [c.key, c.fields.length]));
 
   const modeLabel = (mode: string): string => enc.modes[mode]?.en ?? mode;
+  // NB : les modes sans intérêt d'extraction (event, remains, sidestory…)
+  // sont ignorés PAR LE GÉNÉRATEUR (mode-titles.json `ignore`) — leurs
+  // donjons/spawns n'existent plus dans encounters.
   const modesOf = (m: Monster): string[] => {
     const modes = new Set<string>();
     for (const s of m.spawns ?? []) {
@@ -43,30 +46,58 @@ export function buildMonsterRows(): MonsterRowsResult {
     }
     return [...modes];
   };
+  // Stage/zone d'une rencontre : story → saison/épisode/zone/stage ; world
+  // boss → nom + ligue (les 4 donjons d'un groupe partagent le nom) ; sinon
+  // le nom du donjon (JC/poursuite/guild raid y portent leur difficulté).
+  const zoneLabel = (dungeon: string): string | undefined => {
+    const d = enc.dungeons[dungeon];
+    if (!d?.name.en) return undefined;
+    if (d.season || d.episode) {
+      const se = [d.season ? `S${d.season}` : '', d.episode ? `Ep${d.episode}` : '']
+        .filter(Boolean)
+        .join(' ');
+      return [se, d.area?.en, d.name.en].filter(Boolean).join(' · ');
+    }
+    return d.difficulty?.en ? `${d.name.en} · ${d.difficulty.en}` : d.name.en;
+  };
+  const zonesOf = (m: Monster): string[] => {
+    const zones = new Set<string>();
+    for (const s of m.spawns ?? []) {
+      const z = zoneLabel(s.dungeon);
+      if (z) zones.add(z);
+    }
+    return [...zones];
+  };
 
   const seenModes = new Set<string>();
-  const rows: ExtractorRow[] = Object.values(fresh).map((m) => {
+  const rows: ExtractorRow[] = Object.values(fresh).flatMap((m) => {
+    // Un monstre sans AUCUNE rencontre restante (ni spawn, ni add rattaché)
+    // n'a rien à faire dans la liste — les modes ignorés tombent ici.
+    if (!m.spawns?.length && !m.summonedBy?.length && !m.linkedTo?.length) return [];
     const modes = modesOf(m);
     for (const mode of modes) seenModes.add(mode);
-    return {
-      id: m.id,
-      name: m.name.en || '(sans nom)',
-      // Le(s) mode(s) dans le meta : c'est CE qui distingue les boss homonymes.
-      meta: [`${m.type} · ${m.element}`, modes.slice(0, 2).map(modeLabel).join(', ')]
-        .filter(Boolean)
-        .join(' · '),
-      icon: monsterIconSrc(m.icon),
-      iconFrame: monsterSlotSrc(m.type),
-      iconInset: true,
-      elementIcon: img.element(m.element),
-      classIcon: img.klass(m.class),
-      badgeIcon: monsterBossBadgeSrc(m.type),
-      stars: m.rarity,
-      status: added.has(m.id) ? 'new' : diffCounts.has(m.id) ? 'diff' : 'ok',
-      count: diffCounts.get(m.id) ?? 0,
-      flags: site.has(m.id) ? ['site'] : [],
-      tags: modes,
-    };
+    return [
+      {
+        id: m.id,
+        name: m.name.en || '(sans nom)',
+        // Le(s) mode(s) dans le meta : c'est CE qui distingue les boss
+        // homonymes. Type = badge BOSS sur le portrait, élément/classe =
+        // overlays — pas de doublon texte. Ligne 3 (sub) : stage/zone.
+        meta: modes.slice(0, 2).map(modeLabel).join(', '),
+        sub: zonesOf(m).slice(0, 2).join(', '),
+        icon: monsterIconSrc(m.icon),
+        iconFrame: monsterSlotSrc(m.type),
+        iconInset: true,
+        elementIcon: img.element(m.element),
+        classIcon: img.klass(m.class),
+        badgeIcon: monsterBossBadgeSrc(m.type),
+        stars: m.rarity,
+        status: added.has(m.id) ? 'new' : diffCounts.has(m.id) ? 'diff' : 'ok',
+        count: diffCounts.get(m.id) ?? 0,
+        flags: site.has(m.id) ? ['site'] : [],
+        tags: modes,
+      } satisfies ExtractorRow,
+    ];
   });
 
   // Labels dupliqués (guild_raid_main/sub → « Guild Raid ») : suffixe le slug.

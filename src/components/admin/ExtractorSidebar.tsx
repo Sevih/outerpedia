@@ -10,8 +10,10 @@ export interface ExtractorRow {
   /** Clé de route (`basePath/<id>`) — encodée à l'affichage. */
   id: string;
   name: string;
-  /** Ligne secondaire (type/élément/grade…). */
+  /** Ligne secondaire, après l'id (mode de jeu, grade…). */
   meta?: string;
+  /** Troisième ligne (stage/zone, détail de contexte). */
+  sub?: string;
   /** URL d'icône (FI_/MT_/sprite d'équipement) — masquée si 404. */
   icon?: string;
   /** Fond de slot derrière l'icône (rareté d'item, hiérarchie de monstre). */
@@ -107,7 +109,8 @@ export function ExtractorSidebar({
           !s ||
           r.id.toLowerCase().includes(s) ||
           r.name.toLowerCase().includes(s) ||
-          (r.meta ?? '').toLowerCase().includes(s),
+          (r.meta ?? '').toLowerCase().includes(s) ||
+          (r.sub ?? '').toLowerCase().includes(s),
       )
       .sort((a, b) => {
         const p = (r: ExtractorRow) => (r.status === 'diff' ? 0 : r.status === 'new' ? 1 : 2);
@@ -213,7 +216,7 @@ export function ExtractorSidebar({
                       src={r.icon}
                       alt=""
                       loading="lazy"
-                      className={`absolute rounded object-contain ${r.iconInset ? 'inset-[7%]' : 'inset-0 h-full w-full'}`}
+                      className={`absolute rounded object-contain ${r.iconInset ? 'inset-[7%] h-[86%] w-[86%]' : 'inset-0 h-full w-full'}`}
                       onError={(e) => {
                         e.currentTarget.style.visibility = 'hidden';
                       }}
@@ -270,6 +273,9 @@ export function ExtractorSidebar({
                     {r.meta && <span className="truncate">· {r.meta}</span>}
                     {r.stars ? <span className="text-light">{'★'.repeat(r.stars)}</span> : null}
                   </span>
+                  {r.sub && (
+                    <span className="text-content-subtle block truncate text-xs">{r.sub}</span>
+                  )}
                 </span>
               </Link>
             </li>

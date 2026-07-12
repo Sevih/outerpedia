@@ -149,6 +149,36 @@ export function EffectIconBadge({
 }
 
 /**
+ * Pill NUE d'effet (icône + nom) avec emplacement d'ACTIONS en enfants —
+ * même visuel qu'EffectChip, pour les surfaces interactives (éditeur de
+ * câblage admin : croix, poignée de drag). Les couleurs restent ici, sous
+ * l'exception V2 confinée à ce dossier.
+ */
+export function EffectPillShell({
+  icon,
+  name,
+  isDebuff,
+  children,
+}: {
+  icon?: string;
+  name: string;
+  isDebuff: boolean;
+  children?: React.ReactNode;
+}) {
+  return (
+    <span
+      className={`flex items-center gap-1 rounded-md py-0.5 pr-1 pl-0.5 [&_button]:text-white ${
+        isDebuff ? 'bg-debuff-bg' : 'bg-buff-bg'
+      }`}
+    >
+      {icon && <EffectIconTile icon={icon} isDebuff={isDebuff} className="h-5 w-5" />}
+      <span className="text-[11px] font-semibold text-white">{name}</span>
+      {children}
+    </span>
+  );
+}
+
+/**
  * Chip d'effet (portage V2 BuffDebuffDisplay) : pill buff/debuff avec icône du
  * jeu recolorée (sauf variantes « Interruption »), NOM SEUL dans la pill — les
  * montants/durées vivent dans la description du skill, comme en V2 — et
@@ -199,8 +229,11 @@ export function EffectChipsRow({
   statuses: StatusMap;
 }) {
   // Dédup par libellé affiché (un skill peut appliquer 2 buffs du même statut,
-  // ex. double « Cooldown Reduction ») — SAUF les variantes irremovable, qui
-  // coexistent avec leur version de base (icônes différentes), comme en V2.
+  // ex. double « Cooldown Reduction »). La variante irremovable COEXISTE avec
+  // sa version de base (icônes différentes, comme en V2) mais se dédoublonne
+  // AUSSI entre elles : le flag entre dans la clé (les passifs world boss
+  // appliquent 5 stacks du même « Courage Against Despair » irremovable —
+  // une seule chip).
   const seen = new Set<string>();
   const visible = effects.filter((e) => {
     const key = e.tooltip ?? e.label;
@@ -208,8 +241,8 @@ export function EffectChipsRow({
     const status = statuses[key];
     if (status?.hidden) return false;
     const isIrremovable = Boolean(status?.icon?.includes('Interruption'));
-    const displayKey = status?.name ?? key;
-    if (!isIrremovable && seen.has(displayKey)) return false;
+    const displayKey = `${isIrremovable ? 'IR|' : ''}${status?.name ?? key}`;
+    if (seen.has(displayKey)) return false;
     seen.add(displayKey);
     return true;
   });

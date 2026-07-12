@@ -76,7 +76,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         { label: 'Amulet', href: '/admin/editor/amulets', soon: true },
         { label: 'Armor', href: '/admin/editor/armors', soon: true },
         { label: 'Talisman', href: '/admin/editor/talismans', soon: true },
-        { label: 'Monstre', href: '/admin/editor/monsters', soon: true },
+        { label: 'Monstre', href: '/admin/editor/monsters' },
       ],
     },
     {

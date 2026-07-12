@@ -5,6 +5,7 @@ import glossariesJson from '@data/generated/glossaries.json';
 import type { Glossaries, Skill } from '@datagen/contracts';
 import { EntityDiffPanel } from '@/components/admin/EntityDiffPanel';
 import { MonsterActions } from '@/components/admin/MonsterActions';
+import { MonsterSwitch } from '@/components/admin/MonsterSwitch';
 import { EffectChipsRow, type StatusMap } from '@/components/character/EffectChips';
 import { SkillsSection } from '@/components/character/SkillsSection';
 import type { CardSkill } from '@/components/character/SkillCard';
@@ -156,7 +157,7 @@ export default async function ExtractorMonsterPage({
             <img
               src={monsterIconSrc(m.icon)}
               alt=""
-              className="absolute inset-[7%] rounded object-cover"
+              className="absolute inset-[7%] h-[86%] w-[86%] rounded object-cover"
             />
             {monsterBossBadgeSrc(m.type) && (
               // eslint-disable-next-line @next/next/no-img-element -- sprite dev
@@ -192,6 +193,8 @@ export default async function ExtractorMonsterPage({
           )}
         </p>
       </div>
+
+      <MonsterSwitch id={m.id} mode="extractor" />
 
       {review.status === 'changed' && <EntityDiffPanel fields={review.fields} />}
 
