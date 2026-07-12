@@ -13,7 +13,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
   const { id } = await params;
   const body = (await req.json().catch(() => ({}))) as { label?: string };
   try {
-    const report = versionMonster(id, { label: body.label?.trim() || undefined });
+    const report = await versionMonster(id, { label: body.label?.trim() || undefined });
     return NextResponse.json({ ok: true, report });
   } catch (e) {
     return NextResponse.json({ error: (e as Error).message }, { status: 400 });

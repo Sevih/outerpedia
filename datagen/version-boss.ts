@@ -22,15 +22,17 @@ if (!id) {
   process.exit(1);
 }
 
-try {
-  const r = versionMonster(id, { ref: flag('--ref'), label: flag('--label') });
+async function main(monsterId: string): Promise<void> {
+  const r = await versionMonster(monsterId, { ref: flag('--ref'), label: flag('--label') });
   console.log(
     `✔ ${r.key}${r.name ? ` (${r.name})` : ''} figé — ${r.skills} skill(s), source ${r.ref}` +
       (r.gameVersion ? `, jeu ${r.gameVersion}` : ''),
   );
   console.log(`  → ${r.file}`);
   console.log(`  Les guides épinglent cet état via \`${r.key}\` — committe le fichier.`);
-} catch (e) {
+}
+
+main(id).catch((e) => {
   console.error(`✗ ${(e as Error).message}`);
   process.exit(1);
-}
+});

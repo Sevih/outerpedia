@@ -18,8 +18,9 @@
  * versionner ne doit JAMAIS demander d'éditer la config d'un guide à la main.
  */
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { writeJson } from '../lib/json';
 import type { Glossaries, MonsterArchiveEntry } from '../contracts';
 import type { Monster } from './specs/monster';
 import type { DungeonRef } from '../generators/encounters';
@@ -95,7 +96,10 @@ export function monsterArchiveOf(id: string): MonsterArchiveEntry[] {
 }
 
 /** Fige l'état de `id` à la source demandée. Lève si introuvable. */
-export function versionMonster(id: string, opts: VersionMonsterOptions = {}): VersionMonsterReport {
+export async function versionMonster(
+  id: string,
+  opts: VersionMonsterOptions = {},
+): Promise<VersionMonsterReport> {
   const ref = opts.ref ?? 'HEAD';
 
   const monstersRaw = readAt(ref, MONSTERS);
@@ -163,7 +167,7 @@ export function versionMonster(id: string, opts: VersionMonsterOptions = {}): Ve
     ...(Object.keys(modes).length ? { modes } : {}),
   };
   const file = `data/generated/monster-archive/${id}@${n}.json`;
-  writeFileSync(resolve(file), JSON.stringify(entry, null, 2) + '\n');
+  await writeJson(resolve(file), entry);
 
   return {
     key: `${id}@${n}`,

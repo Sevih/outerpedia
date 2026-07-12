@@ -14,8 +14,9 @@
  *
  * Usage : pnpm exec tsx datagen/import-equipment.ts
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { writeJson } from './lib/json';
 import type { LangDict } from './lib/lang';
 import {
   validateEquipmentCurated,
@@ -121,7 +122,7 @@ function importSection(
   return { out, missed };
 }
 
-function main(): void {
+async function main(): Promise<void> {
   console.log('import-equipment → data/curated/equipment.json');
 
   const families =
@@ -195,8 +196,11 @@ function main(): void {
     process.exitCode = 1;
     return;
   }
-  writeFileSync(resolve('data/curated/equipment.json'), JSON.stringify(curated, null, 2) + '\n');
+  await writeJson(resolve('data/curated/equipment.json'), curated);
   console.log('OK — data/curated/equipment.json écrit.');
 }
 
-main();
+main().catch((e) => {
+  console.error(`\n\x1b[31mErreur : ${e?.message ?? e}\x1b[0m`);
+  process.exit(1);
+});

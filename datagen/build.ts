@@ -15,8 +15,9 @@
  *
  * Les types de sortie sont vérifiés contre les CONTRATS (couche 4).
  */
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { writeJson as writeCanonicalJson } from './lib/json';
 import type {
   CharactersFile,
   EncountersFile,
@@ -58,15 +59,19 @@ import {
 
 const OUT = resolve('data/extracted');
 
-/** Écrit un JSON indenté (diff-friendly) + newline final. */
-function writeJson(relPath: string, data: unknown): void {
-  const full = resolve(OUT, relPath);
-  writeFileSync(full, JSON.stringify(data, null, 2) + '\n');
+/**
+ * Écrit un JSON au format CANONIQUE (cf. `lib/json`) — le même que celui des
+ * fichiers committés dans `data/generated/`. La proposition est donc comparable
+ * OCTET À OCTET à la donnée validée : `promote` ne voit que de vrais
+ * changements de contenu, jamais du reformatage.
+ */
+async function writeJson(relPath: string, data: unknown): Promise<void> {
+  await writeCanonicalJson(resolve(OUT, relPath), data);
   const bytes = JSON.stringify(data).length;
   console.log(`  ${relPath.padEnd(28)} ${(bytes / 1024).toFixed(0).padStart(6)} Ko`);
 }
 
-function main(): void {
+async function main(): Promise<void> {
   mkdirSync(resolve(OUT, 'equipment'), { recursive: true });
   console.log(
     'datagen:build → data/extracted/ (proposition — `pnpm datagen:promote` pour valider)',
@@ -140,27 +145,27 @@ function main(): void {
   const skillsFile: SkillsFile = skills;
   const monsterSkillsFile: MonsterSkillsFile = monsterSkills;
   const itemsFile: ItemsFile = catalog;
-  writeJson('characters.json', charactersFile);
-  writeJson('characters-slug-to-id.json', buildSlugMap(Object.values(charactersFile)));
-  writeJson('monsters.json', monstersFile);
-  writeJson('transcend.json', transcendFile);
-  writeJson('skills.json', skillsFile);
-  writeJson('monster-skills.json', monsterSkillsFile);
+  await writeJson('characters.json', charactersFile);
+  await writeJson('characters-slug-to-id.json', buildSlugMap(Object.values(charactersFile)));
+  await writeJson('monsters.json', monstersFile);
+  await writeJson('transcend.json', transcendFile);
+  await writeJson('skills.json', skillsFile);
+  await writeJson('monster-skills.json', monsterSkillsFile);
   // Dictionnaire des donjons référencés par les `spawns` des monstres (la
   // localisation elle-même vit sur chaque entité monstre).
   const encountersFile: EncountersFile = encounters.dungeons;
-  writeJson('encounters.json', encountersFile);
-  writeJson('items.json', itemsFile);
-  writeJson('glossaries.json', glossaries);
+  await writeJson('encounters.json', encountersFile);
+  await writeJson('items.json', itemsFile);
+  await writeJson('glossaries.json', glossaries);
   // Conditions de déblocage des contenus (guide « Unlocking Content »).
-  writeJson('unlock-content.json', buildUnlockContent());
+  await writeJson('unlock-content.json', buildUnlockContent());
   // Rotation Monad Gate (groupes + cadence ; ancre curée), compositions des
   // tours et calendrier des contenus saisonniers — cf. en-têtes des générateurs.
-  writeJson('singularity.json', buildSingularity());
-  writeJson('towers.json', buildTowers());
-  writeJson('content-schedule.json', buildContentSchedule());
+  await writeJson('singularity.json', buildSingularity());
+  await writeJson('towers.json', buildTowers());
+  await writeJson('content-schedule.json', buildContentSchedule());
   const gameVersion = buildGameVersion();
-  if (gameVersion) writeJson('game-version.json', gameVersion);
+  if (gameVersion) await writeJson('game-version.json', gameVersion);
 
   const equip: EquipmentFiles = equipment;
   const slots: (keyof EquipmentFiles)[] = [
@@ -178,15 +183,15 @@ function main(): void {
     'breakLimits',
     'sets',
   ];
-  for (const key of slots) writeJson(`equipment/${key}.json`, equip[key]);
+  for (const key of slots) await writeJson(`equipment/${key}.json`, equip[key]);
 
   // 4) Sources d'obtention : EXTRAITES (ExpectReward des donjons) + complément
   // curé (modes événementiels/boutiques, absents du client). Les boss résolus
   // couvrent l'union des deux.
   const { items: sources, bossTitleKeys } = buildItemSources();
-  writeJson('equipment/sources.json', sources);
-  writeJson('equipment/enhance.json', buildEnhanceRules());
-  writeJson('progression.json', buildProgression());
+  await writeJson('equipment/sources.json', sources);
+  await writeJson('equipment/enhance.json', buildEnhanceRules());
+  await writeJson('progression.json', buildProgression());
   const equipCurated = loadEquipmentCurated();
   const curatedIssues = validateEquipmentCurated(equipCurated);
   if (curatedIssues.length) {
@@ -194,7 +199,7 @@ function main(): void {
   }
   const bossIds = new Set(curatedBossIds(equipCurated));
   for (const s of Object.values(sources)) for (const b of s.bosses) bossIds.add(b);
-  writeJson('equipment/bosses.json', buildBosses([...bossIds].sort(), bossTitleKeys));
+  await writeJson('equipment/bosses.json', buildBosses([...bossIds].sort(), bossTitleKeys));
 
   console.log(
     `\nOK — ${Object.keys(charactersFile).length} persos, ${Object.keys(skillsFile).length} skills, ` +
@@ -203,4 +208,7 @@ function main(): void {
   );
 }
 
-main();
+main().catch((e) => {
+  console.error(`\n\x1b[31mErreur : ${e?.message ?? e}\x1b[0m`);
+  process.exit(1);
+});

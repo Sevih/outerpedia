@@ -20,6 +20,7 @@
  */
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
+import { formatJson } from './lib/json';
 
 const SRC = resolve('data/extracted');
 const DST = resolve('data/generated');
@@ -76,7 +77,7 @@ function entityDiff(a: unknown, b: unknown): string {
   return parts.join(' · ') || 'reformatage seul';
 }
 
-function main(): void {
+async function main(): Promise<void> {
   const apply = process.argv.includes('--apply');
   // `--only a.json b.json` : promotion ciblée (cf. en-tête).
   const onlyIdx = process.argv.indexOf('--only');
@@ -113,7 +114,8 @@ function main(): void {
     const dst = existsSync(dstPath) ? readFileSync(dstPath, 'utf8') : undefined;
 
     // Rétention : réinjecte dans la proposition les entités validées que
-    // l'extraction ne produit plus (même format que build → diff git minimal).
+    // l'extraction ne produit plus (format CANONIQUE, comme build → la
+    // comparaison octet à octet ci-dessous ne voit que du contenu).
     let out = src;
     let retained: string[] = [];
     if (dst !== undefined && RETAIN_ENTITIES.has(rel)) {
@@ -123,7 +125,7 @@ function main(): void {
       if (retained.length) {
         const merged: Record<string, unknown> = { ...b };
         for (const k of retained) merged[k] = a[k];
-        out = JSON.stringify(merged, null, 2) + '\n';
+        out = await formatJson(merged);
       }
     }
 
@@ -160,4 +162,7 @@ function main(): void {
   );
 }
 
-main();
+main().catch((e) => {
+  console.error(`\n\x1b[31mErreur : ${e?.message ?? e}\x1b[0m`);
+  process.exit(1);
+});

@@ -8,8 +8,9 @@
  *
  * Un seul moteur pour toutes les entités (≠ V2 : une route de diff par entité).
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { writeJson } from '../lib/json';
 import { diffEntity, diffRecords, type FieldDiff, type RecordDiff } from './core/changes';
 import { getTarget, TARGETS, type GeneratedTarget } from './targets';
 
@@ -87,13 +88,13 @@ function runReview(target: GeneratedTarget): TargetReview {
 
 /**
  * VALIDE une cible : écrit l'extraction fraîche dans `data/generated/<file>`,
- * au format exact de `build.ts` (indent 2 + newline). L'utilisateur committe
+ * au format CANONIQUE de `build.ts` (cf. `lib/json`). L'utilisateur committe
  * ensuite via git. NB : les sorties transverses (glossaires, relations) restent
  * du ressort de `pnpm datagen:build`.
  */
-export function acceptTarget(id: string): void {
+export async function acceptTarget(id: string): Promise<void> {
   const target = getTarget(id);
   if (!target) throw new Error(`cible inconnue : ${id}`);
   const fresh = target.build();
-  writeFileSync(resolve(GENERATED, target.file), JSON.stringify(fresh, null, 2) + '\n');
+  await writeJson(resolve(GENERATED, target.file), fresh);
 }

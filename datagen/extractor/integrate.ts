@@ -12,9 +12,9 @@
  * git minimaux. Les sorties transverses (glossaires, transcend) restent du
  * ressort de la revue globale.
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { format } from 'prettier';
+import { writeJson as writeCanonicalJson } from '../lib/json';
 import { characterAssetRequests, skillIconsOf } from '../assets/manifest';
 import { buildImageIndex } from '../assets/source';
 import { stageAssets, type StageResult } from '../assets/stage';
@@ -39,13 +39,11 @@ const readJsonOr = (rel: string): Dict => {
     return {};
   }
 };
-// Écrit au format PRETTIER (celui des fichiers committés) → diffs git minimaux,
-// limités au perso intégré (pas de re-mise en forme parasite).
+// Écrit au format CANONIQUE (`lib/json`) — celui de `datagen:build` et des
+// fichiers committés → le diff git se limite au perso intégré, sans re-mise en
+// forme parasite du reste du fichier.
 const writeJson = async (rel: string, data: unknown): Promise<void> =>
-  writeFileSync(
-    resolve(GEN, rel),
-    await format(JSON.stringify(data), { parser: 'json', filepath: rel }),
-  );
+  writeCanonicalJson(resolve(GEN, rel), data);
 
 export interface IntegrateReport {
   id: string;

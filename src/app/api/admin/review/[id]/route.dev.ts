@@ -8,7 +8,7 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
 
   const { id } = await params;
   try {
-    acceptTarget(id);
+    await acceptTarget(id);
   } catch (e) {
     return NextResponse.json({ error: (e as Error).message }, { status: 400 });
   }

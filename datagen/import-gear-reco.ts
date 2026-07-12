@@ -8,8 +8,9 @@
  *
  * Relançable : écrase les deux fichiers de sortie (pas de fusion).
  */
-import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { writeJson } from './lib/json';
 import type {
   GearBuild,
   GearPick,
@@ -184,27 +185,24 @@ const sortNum = (o: Record<string, unknown>) =>
   Object.fromEntries(
     Object.entries(o).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true })),
   );
-writeFileSync(
-  resolve(ROOT, 'data/curated/gear-reco.json'),
-  JSON.stringify(sortNum(reco), null, 2) + '\n',
-);
-writeFileSync(
-  resolve(ROOT, 'data/curated/gear-presets.json'),
-  JSON.stringify(
-    {
-      talismans: sortNum(presets.talismans),
-      sets: sortNum(presets.sets),
-      substats: sortNum(presets.substats),
-    },
-    null,
-    2,
-  ) + '\n',
-);
+async function write(): Promise<void> {
+  await writeJson(resolve(ROOT, 'data/curated/gear-reco.json'), sortNum(reco));
+  await writeJson(resolve(ROOT, 'data/curated/gear-presets.json'), {
+    talismans: sortNum(presets.talismans),
+    sets: sortNum(presets.sets),
+    substats: sortNum(presets.substats),
+  });
 
-console.log(
-  `✓ ${Object.keys(reco).length} persos, ${Object.values(reco).reduce((n, b) => n + b.length, 0)} builds, presets: ${Object.keys(presets.talismans).length} talismans / ${Object.keys(presets.sets).length} sets / ${Object.keys(presets.substats).length} substats`,
-);
-if (unresolved.size) {
-  console.log(`\n⚠ ${unresolved.size} référence(s) irrésolue(s) (conservées préfixées «!») :`);
-  for (const [k, ctxs] of unresolved) console.log(`  ${k} — ${[...new Set(ctxs)].join(', ')}`);
+  console.log(
+    `✓ ${Object.keys(reco).length} persos, ${Object.values(reco).reduce((n, b) => n + b.length, 0)} builds, presets: ${Object.keys(presets.talismans).length} talismans / ${Object.keys(presets.sets).length} sets / ${Object.keys(presets.substats).length} substats`,
+  );
+  if (unresolved.size) {
+    console.log(`\n⚠ ${unresolved.size} référence(s) irrésolue(s) (conservées préfixées «!») :`);
+    for (const [k, ctxs] of unresolved) console.log(`  ${k} — ${[...new Set(ctxs)].join(', ')}`);
+  }
 }
+
+write().catch((e) => {
+  console.error(`\n\x1b[31mErreur : ${e?.message ?? e}\x1b[0m`);
+  process.exit(1);
+});
