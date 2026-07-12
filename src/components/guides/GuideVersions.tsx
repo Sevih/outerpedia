@@ -22,10 +22,19 @@ export interface GuideVersionEntry {
 export function GuideVersions({
   versions,
   label,
+  shared,
 }: {
   versions: GuideVersionEntry[];
   /** Libellé du sélecteur, déjà localisé (« Versions du guide »). */
   label: string;
+  /**
+   * Ce qui NE DÉPEND PAS de la version — le panneau du boss d'un guide récurrent :
+   * les saisons rejouent le même combat, seule la tactique date. Rendu une fois,
+   * sous le sélecteur (qui reste le premier contrôle de la page) et au-dessus du
+   * contenu de la saison choisie. Le mettre DANS chaque version le rendait autant
+   * de fois qu'il y a de saisons, pour un résultat identique.
+   */
+  shared?: ReactNode;
 }) {
   const [active, setActive] = useState(versions[0]?.key);
 
@@ -66,6 +75,7 @@ export function GuideVersions({
         </label>
       )}
       {current.warning && <div className="panel-warning px-4 py-3 text-sm">{current.warning}</div>}
+      {shared}
       <div key={current.key} className="space-y-6">
         {current.content}
       </div>

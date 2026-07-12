@@ -1,9 +1,17 @@
 /**
- * Panneau BOSS d'un guide — construit depuis les données monstres VALIDÉES
+ * La CARTE d'un boss — construite depuis les données monstres VALIDÉES
  * (`data/generated/monsters.json` + `monster-skills.json`) : en-tête (icône,
  * nom, élément/classe), stats interpolées au niveau de rencontre, immunités
- * (tooltips du jeu → encyclopédie des effets) et skills rendus par la MÊME
- * `SkillsSection` que les fiches personnage. Composant SERVEUR.
+ * (tooltips du jeu → encyclopédie des effets) et compétences en lignes.
+ * Composant SERVEUR.
+ *
+ * Elle ne connaît QU'UN monstre et QUE ses rencontres — c'est une primitive.
+ * Qui les choisit ne la regarde pas :
+ *   - la Singularity lui donne les 30 paliers d'un boss unique (`BossPanel`) ;
+ *   - le Joint Challenge en pose TROIS, une par difficulté (`BossEncounters`) ;
+ *   - le World Boss en pose deux côte à côte dans ses ligues hautes.
+ * Aucun `if (mode === …)` ici, et il n'y en aura jamais : les modes composent,
+ * ils ne configurent pas.
  */
 import type { TranslationKey } from '@/i18n';
 import { LANGUAGES, type Lang } from '@/lib/i18n/config';
@@ -11,7 +19,7 @@ import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { img } from '@/lib/images';
 import { RANGE_TO_TARGET } from '@/lib/skills';
-import { monsterPanelStats } from '@/lib/monster-stats';
+import { monsterPanelStats, type SpawnContext } from '@/lib/monster-stats';
 import {
   buildStatusMap,
   dedupSkills,
@@ -37,19 +45,27 @@ import { BossRankProvider, BossLevel } from './BossRank';
 import { BossStats, type StatLabel } from './BossStats';
 import type { Skill } from '@contracts';
 
-export async function BossPanel({ monsterId, lang }: { monsterId: string; lang: Lang }) {
+export async function BossCard({
+  monsterId,
+  spawns,
+  lang,
+}: {
+  monsterId: string;
+  /** Les rencontres à parcourir — imposées par le mode, jamais devinées ici. */
+  spawns: SpawnContext[];
+  lang: Lang;
+}) {
   const monster = getMonster(monsterId);
   // Réf de contenu cassée = bug de guide : on casse le build, pas de repli muet.
   if (!monster) {
     throw new Error(
-      `BossPanel : monstre « ${monsterId} » absent de data/generated/monsters.json — ` +
+      `BossCard : monstre « ${monsterId} » absent de data/generated/monsters.json — ` +
         `à extraire/valider via l'admin (Extractor › Monsters).`,
     );
   }
 
   const t = await getT(lang);
   const name = lRec(monster.name, lang);
-  const spawns = monsterSpawnContexts(monster, lang);
   const skills = dedupSkills(getMonsterSkills(monster));
   const statuses = buildStatusMap(skills, lang);
 
@@ -204,5 +220,23 @@ export async function BossPanel({ monsterId, lang }: { monsterId: string; lang: 
         )}
       </section>
     </BossRankProvider>
+  );
+}
+
+/**
+ * Un boss SANS choix de difficulté — le mode n'en a qu'une, et les rencontres du
+ * monstre suffisent à le décrire (Dimensional Singularity : un boss, trente
+ * paliers). Reste le point d'entrée des guides qui ne désignent qu'un monstre.
+ */
+export async function BossPanel({ monsterId, lang }: { monsterId: string; lang: Lang }) {
+  const monster = getMonster(monsterId);
+  if (!monster) {
+    throw new Error(
+      `BossPanel : monstre « ${monsterId} » absent de data/generated/monsters.json — ` +
+        `à extraire/valider via l'admin (Extractor › Monsters).`,
+    );
+  }
+  return (
+    <BossCard monsterId={monsterId} spawns={monsterSpawnContexts(monster, lang)} lang={lang} />
   );
 }

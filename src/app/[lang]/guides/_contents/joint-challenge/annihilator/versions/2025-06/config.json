@@ -1,0 +1,26 @@
+{
+  "group": "event_boss:SYS_EVENT_BOSS_DUNGEON_0001",
+  "videos": [
+    {
+      "platform": "youtube",
+      "id": "5r3gji7y6E0",
+      "title": "Annihilator — Very Hard — 1 run clear",
+      "author": "Sevih",
+      "label": "Sevih"
+    },
+    {
+      "platform": "youtube",
+      "id": "S_17kI3NbdM",
+      "title": "Annihilator — Very Hard — 1 run clear",
+      "author": "ダイス",
+      "label": "ダイス"
+    },
+    {
+      "platform": "youtube",
+      "id": "kC10KWfRY9I",
+      "title": "Annihilator — Max single hit damage challenge",
+      "author": "ダイス",
+      "label": "ダイス (Max DMG)"
+    }
+  ]
+}

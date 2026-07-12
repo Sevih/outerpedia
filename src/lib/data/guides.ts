@@ -309,6 +309,23 @@ export function readGuideVersionFile<T>(
   return JSON.parse(readFileSync(p, 'utf8')) as T;
 }
 
+/**
+ * Lit un fichier de données à la RACINE d'un guide
+ * (`_contents/<cat>/<slug>/<fichier>`). `undefined` si absent.
+ *
+ * Pendant de `readGuideVersionFile` : c'est ce qui permet à un rendu PARTAGÉ
+ * (VersionedBossGuide…) d'aller chercher lui-même le contenu du guide qu'il rend,
+ * sans que chaque `index.tsx` ait à l'importer et à le lui passer.
+ */
+export function readGuideFile<T>(
+  guide: Pick<Guide, 'category' | 'slug'>,
+  file: string,
+): T | undefined {
+  const p = resolve(CONTENTS_DIR, guide.category, guide.slug, file);
+  if (!existsSync(p)) return undefined;
+  return JSON.parse(readFileSync(p, 'utf8')) as T;
+}
+
 /** Props reçues par le composant de contenu d'un guide (`index.tsx`). */
 export interface GuideContentProps {
   lang: Lang;

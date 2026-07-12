@@ -1,0 +1,20 @@
+{
+  "title": {
+    "en": "Knight of Hope Meteos Joint Challenge Guide",
+    "jp": "光明の騎士・メテウス 共同作戦ガイド",
+    "kr": "광명의 기사 메테우스 합동 챌린지 가이드",
+    "zh": "希望骑士梅特乌斯联合挑战攻略",
+    "fr": "Guide Joint Challenge Knight of Hope Meteos"
+  },
+  "description": {
+    "en": "Joint Challenge boss guide for Knight of Hope Meteos Joint Challenge Guide: boss mechanics, recommended characters, team setups and tactical tips.",
+    "jp": "光明の騎士・メテウス 共同作戦ガイド 共同作戦ボス攻略：ボスの仕組み、おすすめキャラ、編成、戦術のヒント。",
+    "kr": "광명의 기사 메테우스 합동 챌린지 가이드 합동 챌린지 보스 공략: 보스 메커닉, 추천 캐릭터, 팀 구성, 전술 팁.",
+    "zh": "希望骑士梅特乌斯联合挑战攻略联合挑战首领攻略：首领机制、推荐角色、队伍配置与战术提示。",
+    "fr": "Guide du boss Joint Challenge Guide Joint Challenge Knight of Hope Meteos : mécaniques, personnages recommandés, équipes et conseils tactiques."
+  },
+  "icon": "T_Banner_Event_Boss_05",
+  "author": "Arabyss / Sevih / Shiraen",
+  "updated": "2026-04-21",
+  "bossId": "4176152"
+}

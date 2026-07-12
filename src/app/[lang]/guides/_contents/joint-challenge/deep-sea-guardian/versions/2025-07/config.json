@@ -1,0 +1,26 @@
+{
+  "group": "event_boss:SYS_EVENT_BOSS_DUNGEON_0002",
+  "videos": [
+    {
+      "platform": "youtube",
+      "id": "ScFXrrOeVNk",
+      "title": "Deep Sea Guardian — Very Hard — 1 run clear",
+      "author": "Sevih",
+      "label": "Sevih"
+    },
+    {
+      "platform": "youtube",
+      "id": "65GWPELsbk8",
+      "title": "Deep Sea Guardian — Very Hard — 1 run clear",
+      "author": "ダイス",
+      "label": "ダイス"
+    },
+    {
+      "platform": "youtube",
+      "id": "phzS6t9JqbE",
+      "title": "Deep Sea Guardian — Max single hit damage challenge",
+      "author": "ダイス",
+      "label": "ダイス (Max DMG)"
+    }
+  ]
+}

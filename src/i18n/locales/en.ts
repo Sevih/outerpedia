@@ -609,6 +609,8 @@ const en = {
   'guides.recommended.phase2': 'Phase 2 — Recommended Characters',
   'guides.combat_footage': 'Combat Footage',
   'guides.team_selector': 'Suggested Teams',
+  'guides.team.prev_option': 'Previous option',
+  'guides.team.next_option': 'Next option',
   'guides.strategy_guide': 'Strategy Guide',
   'guides.boss_display.immunities': 'Immunities',
   'guides.boss_display.skills': 'Skills',
@@ -616,6 +618,19 @@ const en = {
   'guides.boss_display.rank_options': 'Rank passives',
   'guides.boss_display.rank_prev': 'Previous rank',
   'guides.boss_display.rank_next': 'Next rank',
+  // DIFFICULTÉS — accrochées aux CLÉS stables du jeu (`difficulty.key`). Le jeu
+  // fournit son propre libellé en en/jp/kr/zh et JAMAIS en français : ces
+  // entrées sont le repli, et la seule source possible côté FR.
+  'guides.difficulty.title': 'Difficulty',
+  'guides.difficulty.stage': 'Stage {n}',
+  'guides.difficulty.normal': 'Normal',
+  'guides.difficulty.hard': 'Hard',
+  'guides.difficulty.very_hard': 'Very Hard',
+  'guides.difficulty.league_1': 'Normal League',
+  'guides.difficulty.league_2': 'Hard League',
+  'guides.difficulty.league_3': 'Very Hard League',
+  'guides.difficulty.league_4': 'Extreme League',
+  'guides.difficulty.tips_for': 'Tips and teams below are written for {difficulty}.',
   'guides.adventure.season': 'Season {n}',
   'guides.adventure.spoiler_free': 'Spoiler-free',
   'guides.adventure.spoiler': 'Show names',
