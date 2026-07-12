@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { seasonStandingAt, seasonsForBoss, type Season } from '@/lib/data/content-schedule';
+import {
+  compareBySeason,
+  seasonStandingAt,
+  seasonsForBoss,
+  type Season,
+  type SeasonStanding,
+} from '@/lib/data/content-schedule';
 
 /**
  * La règle de jointure guide → saison. Les deux ids existent et se ressemblent,
@@ -115,5 +121,75 @@ describe('seasonStandingAt — saison à annoncer à un instant donné', () => {
 
   it('rend `undefined` sans aucune saison (boss jamais programmé)', () => {
     expect(seasonStandingAt([], new Date('2026-06-05T00:00:00Z'))).toBeUndefined();
+  });
+});
+
+/**
+ * L'ORDRE D'AFFICHAGE d'une catégorie à saisons.
+ *
+ * Le chemin qui compte — « le boss en cours passe devant » — est INVISIBLE la
+ * plupart du temps : un mode ne fait tourner qu'un boss à la fois, et entre deux
+ * saisons il n'y en a aucun. Rien à l'écran ne dirait qu'il est cassé. D'où ces
+ * tests, qui figent l'instant plutôt que d'attendre la prochaine rotation.
+ *
+ * Le tri précédent classait par date de mise à jour du GUIDE : corriger une
+ * coquille dans un guide dont la saison remontait à mars le propulsait devant
+ * celui qui tournait le mois dernier — constaté en vrai sur les 5 guides JC.
+ */
+describe('compareBySeason — l’ordre suit le jeu, pas l’éditeur', () => {
+  const st = (state: 'live' | 'upcoming' | 'past', start: string): SeasonStanding => ({
+    state,
+    season: {
+      mode: 'joint-challenge',
+      id: start,
+      name: { en: start },
+      start,
+      battleEnd: start,
+      end: start,
+    },
+  });
+
+  it('le boss combattable MAINTENANT passe devant, même si sa saison est ancienne', () => {
+    const live = st('live', '2026-01-01T00:00:00Z');
+    const recentButOver = st('past', '2026-06-16T00:00:00Z');
+    expect(compareBySeason(live, recentButOver)).toBeLessThan(0);
+  });
+
+  it('à égalité d’état, la saison la plus RÉCENTE passe devant', () => {
+    const june = st('past', '2026-06-16T00:00:00Z');
+    const march = st('past', '2026-03-24T00:00:00Z');
+    expect(compareBySeason(june, march)).toBeLessThan(0);
+    expect(compareBySeason(march, june)).toBeGreaterThan(0);
+  });
+
+  it('le prochain boss passe devant les boss révolus', () => {
+    expect(
+      compareBySeason(st('upcoming', '2026-08-01T00:00:00Z'), st('past', '2026-06-16T00:00:00Z')),
+    ).toBeLessThan(0);
+  });
+
+  it('un guide hors calendrier ne prend pas la tête (traité comme révolu)', () => {
+    expect(compareBySeason(undefined, st('live', '2026-01-01T00:00:00Z'))).toBeGreaterThan(0);
+    expect(compareBySeason(undefined, undefined)).toBe(0);
+  });
+
+  it('trie les 5 guides JC dans l’ordre des saisons, pas des retouches', () => {
+    const order = [
+      st('past', '2026-02-24T00:00:00Z'),
+      st('past', '2026-06-16T00:00:00Z'),
+      st('past', '2026-03-24T00:00:00Z'),
+      st('live', '2026-01-05T00:00:00Z'),
+      st('past', '2026-05-19T00:00:00Z'),
+    ]
+      .sort(compareBySeason)
+      .map((s) => s.season.start.slice(0, 10));
+
+    expect(order).toEqual([
+      '2026-01-05', // en cours — devant, malgré la saison la plus ancienne
+      '2026-06-16',
+      '2026-05-19',
+      '2026-03-24',
+      '2026-02-24',
+    ]);
   });
 });

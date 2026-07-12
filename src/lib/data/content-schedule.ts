@@ -159,3 +159,25 @@ export function seasonStandingAt(seasons: Season[], now: Date): SeasonStanding |
   const last = seasons.at(-1);
   return last ? { state: 'past', season: last } : undefined;
 }
+
+/** Combattable maintenant d'abord, puis le prochain, puis le passé. */
+const STATE_RANK: Record<SeasonStanding['state'], number> = { live: 0, upcoming: 1, past: 2 };
+
+/**
+ * Ordre « ACTUALITÉ DU JEU » entre deux boss : le combattable maintenant passe
+ * devant, ensuite la saison la plus récente.
+ *
+ * À opposer au tri par date de mise à jour du guide, qui classe par activité de
+ * CELUI QUI ÉCRIT : corriger une coquille dans un guide dont la saison remonte à
+ * mars le propulsait devant celui qui tournait le mois dernier. Un lecteur
+ * cherche le boss du moment, pas le dernier fichier touché.
+ *
+ * Renvoie 0 quand les deux sont à égalité — à l'appelant de départager (la date
+ * de mise à jour reste un bon dernier recours pour les guides hors calendrier).
+ */
+export function compareBySeason(a?: SeasonStanding, b?: SeasonStanding): number {
+  return (
+    STATE_RANK[a?.state ?? 'past'] - STATE_RANK[b?.state ?? 'past'] ||
+    (b?.season.start ?? '').localeCompare(a?.season.start ?? '')
+  );
+}
