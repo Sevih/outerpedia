@@ -131,6 +131,18 @@ export interface DungeonMonster {
    * Unit = boss, Spare Core = add.
    */
   role: 'boss' | 'add';
+  /**
+   * VAGUE d'engagement (1-based) : rang du groupe de spawn du monstre dans la
+   * séquence du donjon — `SpawnID_Pos0 → Pos1 → Pos2` (CSV dans l'ordre au
+   * sein d'une position), puis la chaîne `ChangeSpawnGroupID` (world boss :
+   * tuer un boss fait apparaître le suivant). C'est l'ordre où le jeu envoie
+   * les groupes : au Special Request « Masterless Guardian », les
+   * Spear-Wielders (vague 1) précèdent le boss (vague 2). ÉMIS SEULEMENT si
+   * le donjon a plusieurs groupes — absent = combat en une vague. Un monstre
+   * répété à même niveau sur plusieurs vagues porte sa PREMIÈRE vague (la
+   * dédup garde la première occurrence).
+   */
+  wave?: number;
 }
 
 /**
@@ -681,12 +693,18 @@ export function buildEncounters(): EncountersData {
     const groupIds = [...new Set([...spawnGroupIds(d), ...(wbLeague.get(d.ID)?.chain ?? [])])];
     if (!groupIds.length) continue;
 
-    // Monstres du donjon, dédupliqués par (monstre, niveau) — plusieurs waves
-    // peuvent répéter le même mob au même niveau.
+    // Monstres du donjon, dédupliqués par (monstre, niveau) — plusieurs vagues
+    // peuvent répéter le même mob au même niveau (il garde sa PREMIÈRE vague).
+    // Une VAGUE = un groupe de spawn qui engage (a des lignes), dans l'ordre de
+    // `groupIds` (positions puis chaîne) — cf. doc de `DungeonMonster.wave`.
     const seen = new Set<string>();
-    const found: Array<{ id: string; level: number; hpLines?: number }> = [];
+    const found: Array<{ id: string; level: number; hpLines?: number; wave: number }> = [];
+    let wave = 0;
     for (const g of groupIds) {
-      for (const w of spawnsByGroup.get(g) ?? []) {
+      const rows = spawnsByGroup.get(g) ?? [];
+      if (!rows.length) continue; // groupe sans spawn : n'engage rien, ne compte pas
+      wave++;
+      for (const w of rows) {
         for (let i = 0; i < 4; i++) {
           for (const mid of splitCsv(w[`ID${i}`] ?? '')) {
             const level = num(w[`Level${i}`]);
@@ -694,12 +712,13 @@ export function buildEncounters(): EncountersData {
             if (seen.has(key)) continue;
             seen.add(key);
             const hpLines = num(w.HPLineCount);
-            found.push({ id: mid, level, ...(hpLines > 1 ? { hpLines } : {}) });
+            found.push({ id: mid, level, wave, ...(hpLines > 1 ? { hpLines } : {}) });
           }
         }
       }
     }
     if (!found.length) continue;
+    const waveCount = wave;
 
     // STORY : DM_NORMAL couvre les deux difficultés — la zone tranche
     // (AreaTemplet.AreaGroupType, AGT_NORMAL/AGT_HARD). Slug synthétique
@@ -723,12 +742,14 @@ export function buildEncounters(): EncountersData {
       if (area.en) ref.area = area;
     }
     // Index inverse rencontre → monstres, dans l'ordre du jeu ; rôle dérivé de
-    // la catégorie (cf. DungeonMonster).
+    // la catégorie (cf. DungeonMonster). La vague n'est émise que si le combat
+    // en a plusieurs (absente = une seule vague, rien à raconter).
     ref.monsters = found.map((f) => ({
       id: f.id,
       level: f.level,
       ...(f.hpLines ? { hpLines: f.hpLines } : {}),
       role: monsterTypeById.get(f.id) === 'CT_MONSTER' ? ('add' as const) : ('boss' as const),
+      ...(waveCount > 1 ? { wave: f.wave } : {}),
     }));
     // Story : saison/épisode de la zone (AreaTemplet) — la sidebar les affiche.
     if (mode === 'normal' || mode === 'normal_hard') {
