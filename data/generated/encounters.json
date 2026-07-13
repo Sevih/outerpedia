@@ -54752,6 +54752,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_1",
+      "order": 1
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_E",
     "reward": "50101001"
   },
   "50101002": {
@@ -54780,6 +54785,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_2",
+      "order": 2
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_E",
     "reward": "50101002"
   },
   "50101003": {
@@ -54808,6 +54818,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_3",
+      "order": 3
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_E",
     "reward": "50101003"
   },
   "50101004": {
@@ -54836,6 +54851,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_4",
+      "order": 4
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_E",
     "reward": "50101004"
   },
   "50101005": {
@@ -54864,6 +54884,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_5",
+      "order": 5
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_E",
     "reward": "50101005"
   },
   "50101006": {
@@ -54892,6 +54917,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_6",
+      "order": 6
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_E",
     "reward": "50101006"
   },
   "50101007": {
@@ -54920,6 +54950,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_7",
+      "order": 7
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_E",
     "reward": "50101007"
   },
   "50101008": {
@@ -54948,6 +54983,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_8",
+      "order": 8
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_E",
     "reward": "50101008"
   },
   "50101009": {
@@ -54976,6 +55016,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_9",
+      "order": 9
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_E",
     "reward": "50101009"
   },
   "50101010": {
@@ -55004,6 +55049,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_10",
+      "order": 10
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_E",
     "reward": "50101010"
   },
   "50101011": {
@@ -55032,6 +55082,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_11",
+      "order": 11
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_E",
     "reward": "50101011"
   },
   "50101012": {
@@ -55060,6 +55115,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_12",
+      "order": 12
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_E",
     "reward": "50101012"
   },
   "50101013": {
@@ -55088,6 +55148,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_13",
+      "order": 13
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_E",
     "reward": "50101013"
   },
   "50102001": {
@@ -55122,6 +55187,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_1",
+      "order": 1
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_W",
     "reward": "50102001",
     "adv": {
       "atk": -767,
@@ -55160,6 +55230,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_2",
+      "order": 2
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_W",
     "reward": "50102002",
     "adv": {
       "atk": -737,
@@ -55199,6 +55274,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_3",
+      "order": 3
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_W",
     "reward": "50102003",
     "adv": {
       "atk": -701,
@@ -55237,6 +55317,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_4",
+      "order": 4
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_W",
     "reward": "50102004",
     "adv": {
       "atk": -709,
@@ -55275,6 +55360,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_5",
+      "order": 5
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_W",
     "reward": "50102005",
     "adv": {
       "atk": -715,
@@ -55313,6 +55403,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_6",
+      "order": 6
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_W",
     "reward": "50102006",
     "adv": {
       "atk": -697,
@@ -55351,6 +55446,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_7",
+      "order": 7
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_W",
     "reward": "50102007",
     "adv": {
       "atk": -704,
@@ -55389,6 +55489,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_8",
+      "order": 8
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_W",
     "reward": "50102008",
     "adv": {
       "atk": -635,
@@ -55427,6 +55532,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_9",
+      "order": 9
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_W",
     "reward": "50102009",
     "adv": {
       "atk": -613,
@@ -55465,6 +55575,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_10",
+      "order": 10
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_W",
     "reward": "50102010",
     "adv": {
       "atk": -588,
@@ -55504,6 +55619,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_11",
+      "order": 11
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_W",
     "reward": "50102011",
     "adv": {
       "atk": -535,
@@ -55542,6 +55662,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_12",
+      "order": 12
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_W",
     "reward": "50102012",
     "adv": {
       "atk": -535,
@@ -55580,6 +55705,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_13",
+      "order": 13
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_W",
     "reward": "50102013",
     "adv": {
       "atk": -535,
@@ -55612,6 +55742,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_1",
+      "order": 1
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_F",
     "reward": "50103001",
     "adv": {
       "atk": -767,
@@ -55644,6 +55779,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_2",
+      "order": 2
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_F",
     "reward": "50103002",
     "adv": {
       "atk": -737,
@@ -55677,6 +55817,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_3",
+      "order": 3
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_F",
     "reward": "50103003",
     "adv": {
       "atk": -701,
@@ -55709,6 +55854,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_4",
+      "order": 4
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_F",
     "reward": "50103004",
     "adv": {
       "atk": -709,
@@ -55741,6 +55891,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_5",
+      "order": 5
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_F",
     "reward": "50103005",
     "adv": {
       "atk": -715,
@@ -55773,6 +55928,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_6",
+      "order": 6
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_F",
     "reward": "50103006",
     "adv": {
       "atk": -697,
@@ -55805,6 +55965,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_7",
+      "order": 7
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_F",
     "reward": "50103007",
     "adv": {
       "atk": -704,
@@ -55837,6 +56002,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_8",
+      "order": 8
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_F",
     "reward": "50103008",
     "adv": {
       "atk": -635,
@@ -55869,6 +56039,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_9",
+      "order": 9
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_F",
     "reward": "50103009",
     "adv": {
       "atk": -613,
@@ -55901,6 +56076,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_10",
+      "order": 10
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_F",
     "reward": "50103010",
     "adv": {
       "atk": -588,
@@ -55934,6 +56114,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_11",
+      "order": 11
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_F",
     "reward": "50103011",
     "adv": {
       "atk": -535,
@@ -55966,6 +56151,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_12",
+      "order": 12
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_F",
     "reward": "50103012",
     "adv": {
       "atk": -535,
@@ -55998,6 +56188,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_13",
+      "order": 13
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_F",
     "reward": "50103013",
     "adv": {
       "atk": -535,
@@ -56036,6 +56231,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_1",
+      "order": 1
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_L",
     "reward": "50104001",
     "adv": {
       "atk": -767,
@@ -56074,6 +56274,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_2",
+      "order": 2
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_L",
     "reward": "50104002",
     "adv": {
       "atk": -737,
@@ -56113,6 +56318,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_3",
+      "order": 3
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_L",
     "reward": "50104003",
     "adv": {
       "atk": -701,
@@ -56151,6 +56361,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_4",
+      "order": 4
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_L",
     "reward": "50104004",
     "adv": {
       "atk": -709,
@@ -56189,6 +56404,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_5",
+      "order": 5
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_L",
     "reward": "50104005",
     "adv": {
       "atk": -715,
@@ -56227,6 +56447,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_6",
+      "order": 6
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_L",
     "reward": "50104006",
     "adv": {
       "atk": -697,
@@ -56265,6 +56490,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_7",
+      "order": 7
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_L",
     "reward": "50104007",
     "adv": {
       "atk": -704,
@@ -56303,6 +56533,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_8",
+      "order": 8
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_L",
     "reward": "50104008",
     "adv": {
       "atk": -635,
@@ -56341,6 +56576,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_9",
+      "order": 9
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_L",
     "reward": "50104009",
     "adv": {
       "atk": -613,
@@ -56379,6 +56619,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_10",
+      "order": 10
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_L",
     "reward": "50104010",
     "adv": {
       "atk": -588,
@@ -56418,6 +56663,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_11",
+      "order": 11
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_L",
     "reward": "50104011",
     "adv": {
       "atk": -535,
@@ -56456,6 +56706,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_12",
+      "order": 12
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_L",
     "reward": "50104012",
     "adv": {
       "atk": -535,
@@ -56494,6 +56749,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_13",
+      "order": 13
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_L",
     "reward": "50104013",
     "adv": {
       "atk": -535,
@@ -56526,6 +56786,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_1",
+      "order": 1
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_D",
     "reward": "50105001",
     "adv": {
       "atk": -767,
@@ -56558,6 +56823,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_2",
+      "order": 2
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_D",
     "reward": "50105002",
     "adv": {
       "atk": -737,
@@ -56591,6 +56861,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_3",
+      "order": 3
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_D",
     "reward": "50105003",
     "adv": {
       "atk": -701,
@@ -56623,6 +56898,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_4",
+      "order": 4
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_D",
     "reward": "50105004",
     "adv": {
       "atk": -709,
@@ -56655,6 +56935,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_5",
+      "order": 5
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_D",
     "reward": "50105005",
     "adv": {
       "atk": -715,
@@ -56687,6 +56972,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_6",
+      "order": 6
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_D",
     "reward": "50105006",
     "adv": {
       "atk": -697,
@@ -56719,6 +57009,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_7",
+      "order": 7
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_D",
     "reward": "50105007",
     "adv": {
       "atk": -704,
@@ -56751,6 +57046,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_8",
+      "order": 8
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_D",
     "reward": "50105008",
     "adv": {
       "atk": -635,
@@ -56783,6 +57083,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_9",
+      "order": 9
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_D",
     "reward": "50105009",
     "adv": {
       "atk": -613,
@@ -56815,6 +57120,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_10",
+      "order": 10
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_D",
     "reward": "50105010",
     "adv": {
       "atk": -588,
@@ -56848,6 +57158,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_11",
+      "order": 11
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_D",
     "reward": "50105011",
     "adv": {
       "atk": -535,
@@ -56880,6 +57195,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_12",
+      "order": 12
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_D",
     "reward": "50105012",
     "adv": {
       "atk": -535,
@@ -56912,6 +57232,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_13",
+      "order": 13
+    },
+    "group": "raid_1:SYS_RAID_1_DUNGEON_D",
     "reward": "50105013",
     "adv": {
       "atk": -535,
@@ -56940,6 +57265,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_1",
+      "order": 1
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_E",
     "reward": "50201001",
     "adv": {
       "atk": -737,
@@ -56969,6 +57299,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_2",
+      "order": 2
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_E",
     "reward": "50201002",
     "adv": {
       "atk": -701,
@@ -56997,6 +57332,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_3",
+      "order": 3
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_E",
     "reward": "50201003",
     "adv": {
       "atk": -709,
@@ -57025,6 +57365,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_4",
+      "order": 4
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_E",
     "reward": "50201004",
     "adv": {
       "atk": -715,
@@ -57053,6 +57398,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_5",
+      "order": 5
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_E",
     "reward": "50201005",
     "adv": {
       "atk": -697,
@@ -57081,6 +57431,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_6",
+      "order": 6
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_E",
     "reward": "50201006",
     "adv": {
       "atk": -704,
@@ -57109,6 +57464,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_7",
+      "order": 7
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_E",
     "reward": "50201007",
     "adv": {
       "atk": -635,
@@ -57137,6 +57497,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_8",
+      "order": 8
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_E",
     "reward": "50201008",
     "adv": {
       "atk": -613,
@@ -57165,6 +57530,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_9",
+      "order": 9
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_E",
     "reward": "50201009",
     "adv": {
       "atk": -588,
@@ -57194,6 +57564,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_10",
+      "order": 10
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_E",
     "reward": "50201010",
     "adv": {
       "atk": -535,
@@ -57222,6 +57597,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_11",
+      "order": 11
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_E",
     "reward": "50201011",
     "adv": {
       "atk": -535,
@@ -57250,6 +57630,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_12",
+      "order": 12
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_E",
     "reward": "50201012",
     "adv": {
       "atk": -535,
@@ -57278,6 +57663,11 @@
         "role": "add"
       }
     ],
+    "difficulty": {
+      "key": "stage_13",
+      "order": 13
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_E",
     "reward": "50201013",
     "adv": {
       "atk": -535,
@@ -57300,6 +57690,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_1",
+      "order": 1
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_W",
     "reward": "50202001",
     "adv": {
       "atk": -737,
@@ -57323,6 +57718,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_2",
+      "order": 2
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_W",
     "reward": "50202002",
     "adv": {
       "atk": -701,
@@ -57345,6 +57745,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_3",
+      "order": 3
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_W",
     "reward": "50202003",
     "adv": {
       "atk": -709,
@@ -57367,6 +57772,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_4",
+      "order": 4
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_W",
     "reward": "50202004",
     "adv": {
       "atk": -715,
@@ -57389,6 +57799,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_5",
+      "order": 5
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_W",
     "reward": "50202005",
     "adv": {
       "atk": -697,
@@ -57411,6 +57826,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_6",
+      "order": 6
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_W",
     "reward": "50202006",
     "adv": {
       "atk": -704,
@@ -57433,6 +57853,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_7",
+      "order": 7
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_W",
     "reward": "50202007",
     "adv": {
       "atk": -635,
@@ -57455,6 +57880,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_8",
+      "order": 8
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_W",
     "reward": "50202008",
     "adv": {
       "atk": -613,
@@ -57477,6 +57907,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_9",
+      "order": 9
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_W",
     "reward": "50202009",
     "adv": {
       "atk": -588,
@@ -57500,6 +57935,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_10",
+      "order": 10
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_W",
     "reward": "50202010",
     "adv": {
       "atk": -535,
@@ -57522,6 +57962,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_11",
+      "order": 11
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_W",
     "reward": "50202011",
     "adv": {
       "atk": -535,
@@ -57544,6 +57989,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_12",
+      "order": 12
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_W",
     "reward": "50202012",
     "adv": {
       "atk": -535,
@@ -57566,6 +58016,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_13",
+      "order": 13
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_W",
     "reward": "50202013",
     "adv": {
       "atk": -535,
@@ -57588,6 +58043,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_1",
+      "order": 1
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_F",
     "reward": "50203001",
     "adv": {
       "atk": -737,
@@ -57611,6 +58071,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_2",
+      "order": 2
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_F",
     "reward": "50203002",
     "adv": {
       "atk": -701,
@@ -57633,6 +58098,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_3",
+      "order": 3
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_F",
     "reward": "50203003",
     "adv": {
       "atk": -709,
@@ -57655,6 +58125,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_4",
+      "order": 4
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_F",
     "reward": "50203004",
     "adv": {
       "atk": -715,
@@ -57677,6 +58152,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_5",
+      "order": 5
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_F",
     "reward": "50203005",
     "adv": {
       "atk": -697,
@@ -57699,6 +58179,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_6",
+      "order": 6
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_F",
     "reward": "50203006",
     "adv": {
       "atk": -704,
@@ -57721,6 +58206,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_7",
+      "order": 7
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_F",
     "reward": "50203007",
     "adv": {
       "atk": -635,
@@ -57743,6 +58233,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_8",
+      "order": 8
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_F",
     "reward": "50203008",
     "adv": {
       "atk": -613,
@@ -57765,6 +58260,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_9",
+      "order": 9
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_F",
     "reward": "50203009",
     "adv": {
       "atk": -588,
@@ -57788,6 +58288,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_10",
+      "order": 10
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_F",
     "reward": "50203010",
     "adv": {
       "atk": -535,
@@ -57810,6 +58315,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_11",
+      "order": 11
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_F",
     "reward": "50203011",
     "adv": {
       "atk": -535,
@@ -57832,6 +58342,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_12",
+      "order": 12
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_F",
     "reward": "50203012",
     "adv": {
       "atk": -535,
@@ -57854,6 +58369,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_13",
+      "order": 13
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_F",
     "reward": "50203013",
     "adv": {
       "atk": -535,
@@ -57876,6 +58396,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_1",
+      "order": 1
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_L",
     "reward": "50204001",
     "adv": {
       "atk": -737,
@@ -57899,6 +58424,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_2",
+      "order": 2
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_L",
     "reward": "50204002",
     "adv": {
       "atk": -701,
@@ -57921,6 +58451,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_3",
+      "order": 3
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_L",
     "reward": "50204003",
     "adv": {
       "atk": -709,
@@ -57943,6 +58478,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_4",
+      "order": 4
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_L",
     "reward": "50204004",
     "adv": {
       "atk": -715,
@@ -57965,6 +58505,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_5",
+      "order": 5
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_L",
     "reward": "50204005",
     "adv": {
       "atk": -697,
@@ -57987,6 +58532,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_6",
+      "order": 6
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_L",
     "reward": "50204006",
     "adv": {
       "atk": -704,
@@ -58009,6 +58559,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_7",
+      "order": 7
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_L",
     "reward": "50204007",
     "adv": {
       "atk": -635,
@@ -58031,6 +58586,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_8",
+      "order": 8
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_L",
     "reward": "50204008",
     "adv": {
       "atk": -613,
@@ -58053,6 +58613,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_9",
+      "order": 9
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_L",
     "reward": "50204009",
     "adv": {
       "atk": -588,
@@ -58076,6 +58641,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_10",
+      "order": 10
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_L",
     "reward": "50204010",
     "adv": {
       "atk": -535,
@@ -58098,6 +58668,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_11",
+      "order": 11
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_L",
     "reward": "50204011",
     "adv": {
       "atk": -535,
@@ -58120,6 +58695,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_12",
+      "order": 12
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_L",
     "reward": "50204012",
     "adv": {
       "atk": -535,
@@ -58142,6 +58722,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_13",
+      "order": 13
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_L",
     "reward": "50204013",
     "adv": {
       "atk": -535,
@@ -58164,6 +58749,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_1",
+      "order": 1
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_D",
     "reward": "50205001",
     "adv": {
       "atk": -737,
@@ -58187,6 +58777,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_2",
+      "order": 2
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_D",
     "reward": "50205002",
     "adv": {
       "atk": -701,
@@ -58209,6 +58804,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_3",
+      "order": 3
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_D",
     "reward": "50205003",
     "adv": {
       "atk": -709,
@@ -58231,6 +58831,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_4",
+      "order": 4
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_D",
     "reward": "50205004",
     "adv": {
       "atk": -715,
@@ -58253,6 +58858,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_5",
+      "order": 5
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_D",
     "reward": "50205005",
     "adv": {
       "atk": -697,
@@ -58275,6 +58885,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_6",
+      "order": 6
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_D",
     "reward": "50205006",
     "adv": {
       "atk": -704,
@@ -58297,6 +58912,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_7",
+      "order": 7
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_D",
     "reward": "50205007",
     "adv": {
       "atk": -635,
@@ -58319,6 +58939,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_8",
+      "order": 8
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_D",
     "reward": "50205008",
     "adv": {
       "atk": -613,
@@ -58341,6 +58966,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_9",
+      "order": 9
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_D",
     "reward": "50205009",
     "adv": {
       "atk": -588,
@@ -58364,6 +58994,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_10",
+      "order": 10
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_D",
     "reward": "50205020",
     "adv": {
       "atk": -535,
@@ -58386,6 +59021,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_11",
+      "order": 11
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_D",
     "reward": "50205011",
     "adv": {
       "atk": -535,
@@ -58408,6 +59048,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_12",
+      "order": 12
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_D",
     "reward": "50205012",
     "adv": {
       "atk": -535,
@@ -58430,6 +59075,11 @@
         "role": "boss"
       }
     ],
+    "difficulty": {
+      "key": "stage_13",
+      "order": 13
+    },
+    "group": "raid_2:SYS_RAID_2_DUNGEON_D",
     "reward": "50205013",
     "adv": {
       "atk": -535,
