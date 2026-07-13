@@ -388,7 +388,13 @@ export function monsterSkillViews(
     const finishMatch = /^rage_finish(\d*)$/.exec(s.type);
     if (finishMatch) {
       const enter = skills.find((t) => t.type === `rage_enter${finishMatch[1]}`);
-      if (enter && !ownCard(s)) continue; // fusionné dans la carte enter
+      // Sans enter jumeau, l'enrage N'EXISTE PAS : câblage mort cloné sur
+      // tout le roster world boss (73 monstres, tous sans donnée RageTemplet
+      // — le « Quasar Bombardment » de Venion fuit jusque chez Dahlia et
+      // Drakhan, icône comprise ; vérifié : aucun monstre légitime n'a de
+      // finish sans son enter). Carte et chips disparaissent.
+      if (!enter) continue;
+      if (!ownCard(s)) continue; // fusionné dans la carte enter
     }
     // 4) Variante technique : ni nom ni desc, effets tous en double ailleurs.
     if (
