@@ -39,7 +39,7 @@ import {
   slugForId,
 } from '@/lib/data/characters';
 import { loadCuratedCharacters } from '@/lib/data/curated';
-import { mergeStatusEffects } from '@/lib/skill-view';
+import { mergeStatusEffects } from '@/lib/data/effects';
 import type { StatusMap } from '@/components/character/EffectChips';
 import weaponData from '@data/generated/equipment/weapon.json';
 import accessoryData from '@data/generated/equipment/accessory.json';

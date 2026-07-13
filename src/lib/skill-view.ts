@@ -12,13 +12,16 @@ import type { Glossaries, Skill } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { MAIN_SKILL_TYPES, levelAt, splitChainDual } from '@/lib/skills';
-import { getMergedEffect, loadCuratedEffects } from '@/lib/data/effects';
+import { getMergedEffect, loadCuratedEffects, mergeStatusEffects } from '@/lib/data/effects';
+import { loadDataJson } from '@/lib/data/disk';
 import type { ClientEffect, StatusMap } from '@/components/character/EffectChips';
 import type { ChainLevel } from '@/components/character/ChainDualSection';
-import glossariesData from '@data/generated/glossaries.json';
-import monsterCuratedJson from '@data/curated/monster-skills.json';
 
-const G = glossariesData as unknown as Glossaries;
+// Glossaire et curation lus au DISQUE (cache mtime), pas importés : ces
+// fichiers sont réécrits par l'admin en cours de session — un import statique
+// les mettrait dans le graphe de modules et chaque save recompilerait le site
+// (cf. src/lib/data/disk.ts). Ce module est donc SERVEUR uniquement.
+const G = (): Glossaries => loadDataJson<Glossaries>('generated/glossaries.json');
 /** Curation d'AFFICHAGE des kits monstres (cf. doc dans le fichier). Un buff
  * PARTAGÉ entre kits jumeaux peut lister plusieurs porteurs candidats — le
  * premier présent dans le kit l'emporte. `chipAdd` AJOUTE des chips (réfs
@@ -29,11 +32,8 @@ const G = glossariesData as unknown as Glossaries;
  * câblage que la desc ne décrit pas et que le jeu n'affiche pas (colonne
  * BuffToolTip du niveau vide), ou copie du porteur quand la duplication
  * caller a déjà rendu la chip au skill qui la décrit. */
-const MONSTER_CURATED = monsterCuratedJson as {
-  chipOwner?: Record<string, string | string[]>;
-  chipAdd?: Record<string, string[]>;
-  chipHide?: Record<string, string[]>;
-};
+const monsterCurated = (): MonsterKitCuration =>
+  loadDataJson<MonsterKitCuration>('curated/monster-skills.json');
 
 /**
  * Méta d'affichage de la CHIP qu'un effet monstre produirait (null si l'effet
@@ -48,9 +48,10 @@ export function monsterChipMeta(
   if (!chip) return null;
   const key = chip.tooltip ?? chip.label;
   if (!key) return null;
+  const g = G();
   const eff = chip.tooltip
-    ? getMergedEffect(G.effectByTooltip[chip.tooltip] ?? chip.tooltip)
-    : getMergedEffect(G.effectByLabel[chip.label!] ?? chip.label!);
+    ? getMergedEffect(g.effectByTooltip[chip.tooltip] ?? chip.tooltip)
+    : getMergedEffect(g.effectByLabel[chip.label!] ?? chip.label!);
   return {
     name: eff?.name.en ?? key,
     ...(eff?.icon ? { icon: eff.icon } : {}),
@@ -139,6 +140,7 @@ function curatedCreationFor(side: 'buff' | 'debuff', type: string): string | und
 function toChipEffect(e: RawEffect): ClientEffect | null {
   if (e.choice) return null;
   if (e.buff && NON_CHIP_BUFFS.has(e.buff)) return null;
+  const g = G();
   const base = {
     family: e.family,
     category: e.category,
@@ -146,7 +148,7 @@ function toChipEffect(e: RawEffect): ClientEffect | null {
     stat: e.stat,
     mode: e.mode,
   };
-  if (e.tooltip && (G.effectByTooltip[e.tooltip] ?? getMergedEffect(e.tooltip)))
+  if (e.tooltip && (g.effectByTooltip[e.tooltip] ?? getMergedEffect(e.tooltip)))
     return { ...base, tooltip: e.tooltip };
   const isStatLike = e.type === 'BT_STAT' || e.type === 'BT_STAT_PREMIUM' || e.type === 'BT_NONE';
   // CAS ISOLÉ : `BT_CALL_BACKUP_2` (« double dual », Eva/Luna/Iota…) réutilise le
@@ -157,7 +159,7 @@ function toChipEffect(e: RawEffect): ClientEffect | null {
     const cid = curatedCreationFor(e.category === 'buff' ? 'buff' : 'debuff', e.type);
     if (cid) return { ...base, tooltip: cid };
   }
-  if (e.label && !isStatLike && !WIRING_LABELS.has(e.label) && G.effectByLabel[e.label])
+  if (e.label && !isStatLike && !WIRING_LABELS.has(e.label) && g.effectByLabel[e.label])
     return { ...base, label: e.label };
   // « Dégâts fixes » (reverse heal) ciblés sur le LANCEUR ou un allié = coût
   // en HP du kit, pas des dégâts infligés — jamais une chip.
@@ -222,37 +224,6 @@ export function buildStatusMap(skills: Skill[], lang: Lang): StatusMap {
   return statuses;
 }
 
-/** Ajoute au StatusMap les statuts référencés par des effets SUPPLÉMENTAIRES
- * (passifs d'EE/talisman…) — même résolution que les skills. */
-export function mergeStatusEffects(
-  statuses: StatusMap,
-  effects: ClientEffect[],
-  lang: Lang,
-): StatusMap {
-  for (const e of effects) {
-    const key = e.tooltip ?? e.label;
-    if (!key || statuses[key]) continue;
-    // Tooltip du jeu → effet canonique ; sinon le tooltip EST un id d'effet
-    // (créations curées des effets synthétiques).
-    const effId = e.tooltip
-      ? (G.effectByTooltip[e.tooltip] ?? e.tooltip)
-      : G.effectByLabel[e.label!];
-    const eff = effId ? getMergedEffect(effId) : undefined;
-    if (eff) {
-      // Les variantes irremovable sont des EFFETS distincts (icône à cadre
-      // spécial portée par l'effet lui-même — jamais recolorée à l'affichage).
-      statuses[key] = {
-        name: lRec(eff.name, lang),
-        isDebuff: eff.isDebuff,
-        icon: eff.icon || undefined,
-        desc: lRec(eff.desc, lang) || eff.desc.en || undefined,
-        hidden: eff.hidden || undefined,
-      };
-    }
-  }
-  return statuses;
-}
-
 /**
  * VUE « KIT » DES SKILLS D'UN MONSTRE — corrige deux particularités du câblage
  * des tables monstres avant l'affichage en cartes (même esprit que
@@ -302,7 +273,7 @@ export function monsterSkillViews(
   skills: Skill[],
   // Curation substituable (ADMIN : l'éditeur de câblage passe `{}` pour
   // obtenir les positions « règles pures », et sa propre copie en prévisualisation).
-  curated: MonsterKitCuration = MONSTER_CURATED,
+  curated: MonsterKitCuration = monsterCurated(),
 ): MonsterSkillView[] {
   // Le buff est-il référencé par la desc (id EXACT, frontière de mot) ?
   const mentions = (s: Skill, buffId: string): boolean =>
@@ -413,7 +384,7 @@ export function monsterSkillViews(
     // Chips CURÉES en plus (chipAdd) : statuts décrits par la desc mais
     // appliqués hors kit — seules les réfs résolubles passent.
     for (const t of curated.chipAdd?.[s.id] ?? []) {
-      if (!getMergedEffect(G.effectByTooltip[t] ?? t)) continue;
+      if (!getMergedEffect(G().effectByTooltip[t] ?? t)) continue;
       effects = [...effects, { family: 'stat', category: 'buff', tooltip: t }];
     }
     const deduped = dedupList(effects);
@@ -447,8 +418,9 @@ export function immunityChipEffects(m: {
   const effects: ClientEffect[] = [];
   const unresolved: string[] = [];
   const seen = new Set<string>();
+  const g = G();
   const push = (ref: string): boolean => {
-    const canonical = G.effectByTooltip[ref] ?? ref;
+    const canonical = g.effectByTooltip[ref] ?? ref;
     if (!getMergedEffect(canonical)) return false;
     if (!seen.has(canonical)) {
       seen.add(canonical);
@@ -461,15 +433,15 @@ export function immunityChipEffects(m: {
     // Déclinaisons numérotées (par slot de skill) → même mécanique de base.
     const base = type.replace(/\d+/g, '');
     const id =
-      G.effectByKey.debuff[type] ??
-      G.effectByKey.debuff[base] ??
-      G.effectByKey.buff[type] ??
-      G.effectByKey.buff[base];
+      g.effectByKey.debuff[type] ??
+      g.effectByKey.debuff[base] ??
+      g.effectByKey.buff[type] ??
+      g.effectByKey.buff[base];
     if (!id || !push(id)) unresolved.push(type);
   }
   for (const st of m.statBuffImmune ?? []) {
     const key = `BT_STAT|${st}`;
-    const id = G.effectByKey.debuff[key] ?? G.effectByKey.buff[key];
+    const id = g.effectByKey.debuff[key] ?? g.effectByKey.buff[key];
     if (!id || !push(id)) unresolved.push(st);
   }
   return { effects, unresolved };
@@ -527,16 +499,17 @@ function levelTooltipEffects(
       `(?:if|when)[^.]*\\bha(?:s|ve)\\b[^.]*${name!.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`,
       'i',
     ).test(desc);
+  const g = G();
   return [...ids]
     .filter((t) => {
       // Déjà représenté par une chip du kit : même réf (chips de passifs
       // attribués — Pureblood's Dominion, 2000035)…
       if (present.has(t) || ctx?.refs.has(t)) return false;
-      const eff = getMergedEffect(G.effectByTooltip[t] ?? t);
+      const eff = getMergedEffect(g.effectByTooltip[t] ?? t);
       if (!eff?.icon) return false;
       // …ou même TYPE de mécanique sous un statut custom : le générique est
       // une redite (« Execution time! » ⊃ « Increased Damage Taken », 2000020).
-      if (ctx && (G.tooltipKinds?.[t] ?? []).some((k) => ctx.kinds.has(k))) return false;
+      if (ctx && (g.tooltipKinds?.[t] ?? []).some((k) => ctx.kinds.has(k))) return false;
       if (isCondition(eff.name?.en)) return false;
       return true;
     })

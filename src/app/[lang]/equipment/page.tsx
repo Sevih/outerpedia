@@ -20,7 +20,7 @@ import {
 } from '@/lib/data/equipment';
 import type { PassiveRef } from '@contracts';
 import { characterDisplayName, getCharacter, slugForId } from '@/lib/data/characters';
-import { mergeStatusEffects } from '@/lib/skill-view';
+import { mergeStatusEffects } from '@/lib/data/effects';
 
 export const revalidate = 86400;
 

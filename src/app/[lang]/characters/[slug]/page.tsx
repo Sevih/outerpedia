@@ -24,8 +24,8 @@ import {
   cardEffects,
   dedupSkills,
   mainSkills,
-  mergeStatusEffects,
 } from '@/lib/skill-view';
+import { mergeStatusEffects } from '@/lib/data/effects';
 import { GearRecoSection } from '@/components/character/GearRecoSection';
 import { getCharacterGearReco } from '@/lib/data/gear-reco';
 import { img, ELEMENT_TEXT, ROLE_BG } from '@/lib/images';

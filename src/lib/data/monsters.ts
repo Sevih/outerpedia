@@ -2,10 +2,6 @@
  * Accès lecture aux MONSTRES validés (donnée d'extraction committée) — côté
  * public (guides). L'admin a son propre store (`src/lib/admin/monster-store`).
  */
-import monstersData from '@data/generated/monsters.json';
-import monsterSkillsData from '@data/generated/monster-skills.json';
-import encountersData from '@data/generated/encounters.json';
-import glossariesData from '@data/generated/glossaries.json';
 import type {
   EncountersFile,
   Glossaries,
@@ -17,16 +13,21 @@ import type {
 } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
+import { loadDataJson } from '@/lib/data/disk';
 import { expandRankContexts, type SpawnContext } from '@/lib/monster-stats';
 import { img } from '@/lib/images';
 
-const MONSTERS = monstersData as unknown as MonstersFile;
-const SKILLS = monsterSkillsData as unknown as MonsterSkillsFile;
-const DUNGEONS = encountersData as unknown as EncountersFile;
-const G = glossariesData as unknown as Glossaries;
+// Lus au DISQUE (cache mtime), pas importés : l'admin réécrit ces fichiers à
+// chaque « Enregistrer » — un import statique les mettrait dans le graphe de
+// modules et chaque save recompilerait les routes (cf. src/lib/data/disk.ts).
+const MONSTERS = (): MonstersFile => loadDataJson<MonstersFile>('generated/monsters.json');
+const SKILLS = (): MonsterSkillsFile =>
+  loadDataJson<MonsterSkillsFile>('generated/monster-skills.json');
+const DUNGEONS = (): EncountersFile => loadDataJson<EncountersFile>('generated/encounters.json');
+const G = (): Glossaries => loadDataJson<Glossaries>('generated/glossaries.json');
 
 export function getMonster(id: string): Monster | undefined {
-  return MONSTERS[id];
+  return MONSTERS()[id];
 }
 
 /**
@@ -45,10 +46,11 @@ export function getMonster(id: string): Monster | undefined {
  * déjà distincts.
  */
 export function monsterDisplayNames(ids: string[], lang: Lang): Map<string, string> {
+  const monsters = MONSTERS();
   const names = new Map<string, string>();
   const count = new Map<string, number>();
   for (const id of ids) {
-    const m = MONSTERS[id];
+    const m = monsters[id];
     if (!m) continue;
     const name = lRec(m.name, lang);
     names.set(id, name);
@@ -56,7 +58,7 @@ export function monsterDisplayNames(ids: string[], lang: Lang): Map<string, stri
   }
   for (const [id, name] of names) {
     if ((count.get(name) ?? 0) < 2) continue;
-    const element = lRec(G.elements?.[MONSTERS[id]!.element], lang);
+    const element = lRec(G().elements?.[monsters[id]!.element], lang);
     if (element) names.set(id, `${name} (${element})`);
   }
   return names;
@@ -64,17 +66,18 @@ export function monsterDisplayNames(ids: string[], lang: Lang): Map<string, stri
 
 /** Skills d'un monstre (dans l'ordre du kit ; ids inconnus ignorés). */
 export function getMonsterSkills(m: Monster): Skill[] {
-  return m.skills.map((id) => SKILLS[id]).filter((s): s is Skill => Boolean(s));
+  const skills = SKILLS();
+  return m.skills.map((id) => skills[id]).filter((s): s is Skill => Boolean(s));
 }
 
 /** Échelle d'affichage des stats (per-mille → % ou brut) — glossaire global. */
 export function getStatScales(): Record<string, string> {
-  return G.statScales;
+  return G().statScales;
 }
 
 /** Quirks de compte réduisant les stats affichées des boss (EFF/RES −10 %). */
 export function getBossQuirkMods(): Record<string, number> {
-  return G.bossQuirkMods ?? {};
+  return G().bossQuirkMods ?? {};
 }
 
 /**
@@ -83,7 +86,7 @@ export function getBossQuirkMods(): Record<string, number> {
  * affiché (jamais une valeur inventée).
  */
 export function getRankOptions(): Record<string, RankOption> {
-  return G.rankOptions ?? {};
+  return G().rankOptions ?? {};
 }
 
 /**
@@ -101,7 +104,7 @@ export function rankOptionLabels(contexts: SpawnContext[], lang: Lang): Record<s
     if (!name) continue;
     // `value` est un per-mille pour les taux (convention du jeu, cf. statScales).
     const amount =
-      o.value && o.stat && G.statScales?.[o.stat] === 'percent'
+      o.value && o.stat && G().statScales?.[o.stat] === 'percent'
         ? ` ${o.value > 0 ? '+' : ''}${o.value / 10}%`
         : o.value
           ? ` ${o.value > 0 ? '+' : ''}${o.value}`
@@ -138,10 +141,12 @@ export function monsterOgImage(m: Pick<Monster, 'icon'>): string {
  * pour le calcul de stats effectives (src/lib/monster-stats).
  */
 export function monsterSpawnContexts(m: Monster, lang: Lang): SpawnContext[] {
+  const dungeons = DUNGEONS();
+  const g = G();
   return (m.spawns ?? []).flatMap((s) => {
-    const d = DUNGEONS[s.dungeon];
+    const d = dungeons[s.dungeon];
     if (!d) return [];
-    const mode = G.modes?.[d.mode] ? lRec(G.modes[d.mode], lang) : d.mode;
+    const mode = g.modes?.[d.mode] ? lRec(g.modes[d.mode], lang) : d.mode;
     return expandRankContexts(
       {
         level: s.level,

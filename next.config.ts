@@ -58,8 +58,15 @@ const nextConfig: NextConfig = {
   // compris au runtime (revalidation ISR). La sortie standalone ne trace pas
   // ces lectures dynamiques : on les inclut explicitement. Le motif `**`
   // évite d'écrire `[lang]` (crochets = classe de caractères en glob).
+  // Même régime pour data/ : les JSON générés/curés que l'admin réécrit sont
+  // lus au filesystem (src/lib/data/disk.ts) et non plus importés — le tracing
+  // ne voit pas ces lectures dynamiques non plus.
   outputFileTracingIncludes: {
-    '/**': ['./src/app/**/guides/_contents/**/*.json'],
+    '/**': [
+      './src/app/**/guides/_contents/**/*.json',
+      './data/generated/**/*.json',
+      './data/curated/**/*.json',
+    ],
   },
 
   env: {

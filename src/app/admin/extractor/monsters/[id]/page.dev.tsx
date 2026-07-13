@@ -9,12 +9,8 @@ import { MonsterSwitch } from '@/components/admin/MonsterSwitch';
 import { EffectChipsRow, type StatusMap } from '@/components/character/EffectChips';
 import { SkillsSection } from '@/components/character/SkillsSection';
 import type { CardSkill } from '@/components/character/SkillCard';
-import {
-  buildStatusMap,
-  immunityChipEffects,
-  mergeStatusEffects,
-  monsterSkillViews,
-} from '@/lib/skill-view';
+import { buildStatusMap, immunityChipEffects, monsterSkillViews } from '@/lib/skill-view';
+import { mergeStatusEffects } from '@/lib/data/effects';
 import { lRec } from '@/lib/i18n/localize';
 import { expandRankContexts } from '@/lib/monster-stats';
 import { MonsterStatsCard } from '@/components/admin/MonsterStatsCard';
