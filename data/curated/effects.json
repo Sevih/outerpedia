@@ -240,7 +240,7 @@
     "tag": "utility",
     "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
   },
-  "SYS_BUFF_STEAL": {
+  "100": {
     "desc": {
       "en": "Steal buff from the target.",
       "jp": "対象の強化効果を奪う。",

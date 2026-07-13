@@ -1511,8 +1511,8 @@
       "origin": "tooltip",
       "tooltips": ["63", "65", "67"]
     },
-    "68": {
-      "id": "68",
+    "64": {
+      "id": "64",
       "name": {
         "en": "Cooldown Increase",
         "jp": "スキルターン増加",
@@ -1528,7 +1528,7 @@
       "icon": "IG_Buff_Cool_Charge",
       "isDebuff": true,
       "origin": "tooltip",
-      "tooltips": ["68"]
+      "tooltips": ["64", "68"]
     },
     "69": {
       "id": "69",
@@ -1817,6 +1817,25 @@
       "origin": "tooltip",
       "tooltips": ["90"]
     },
+    "91": {
+      "id": "91",
+      "name": {
+        "en": "Damage over Time",
+        "jp": "継続ダメージ",
+        "kr": "지속 피해",
+        "zh": "持续伤害"
+      },
+      "desc": {
+        "en": "Burned, Cursed, Bleeding, Poisoned, Shocked",
+        "jp": "火傷、呪い、出血、中毒、感電",
+        "kr": "화상, 저주, 출혈, 중독, 감전",
+        "zh": "烧伤、诅咒、出血、中毒、触电"
+      },
+      "icon": "IG_Buff_Dot_All",
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["91"]
+    },
     "92": {
       "id": "92",
       "name": {
@@ -1911,6 +1930,26 @@
       "isDebuff": false,
       "origin": "tooltip",
       "tooltips": ["98"]
+    },
+    "100": {
+      "id": "100",
+      "name": {
+        "en": "Stealing Buff",
+        "jp": "強化効果強奪",
+        "kr": "강화 효과 강탈",
+        "zh": "夺取强化效果"
+      },
+      "desc": {
+        "en": "",
+        "jp": "",
+        "kr": "",
+        "zh": ""
+      },
+      "icon": "SC_Buff_Steal",
+      "isDebuff": true,
+      "origin": "tooltip",
+      "tooltips": ["100"],
+      "iconEditorial": true
     },
     "102": {
       "id": "102",
@@ -4048,26 +4087,6 @@
       "origin": "type",
       "tooltips": []
     },
-    "SYS_BUFF_STEAL": {
-      "id": "SYS_BUFF_STEAL",
-      "name": {
-        "en": "Stealing Buff",
-        "jp": "強化効果強奪",
-        "kr": "강화 효과 강탈",
-        "zh": "夺取强化效果"
-      },
-      "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
-      },
-      "icon": "SC_Buff_Steal",
-      "isDebuff": true,
-      "origin": "type",
-      "tooltips": [],
-      "iconEditorial": true
-    },
     "SYS_BUFF_ADDITIVE_SKILL": {
       "id": "SYS_BUFF_ADDITIVE_SKILL",
       "name": {
@@ -4304,11 +4323,11 @@
     "61": "61",
     "62": "62",
     "63": "63",
-    "64": "68",
+    "64": "64",
     "65": "63",
-    "66": "68",
+    "66": "64",
     "67": "63",
-    "68": "68",
+    "68": "64",
     "69": "69",
     "70": "70",
     "72": "72",
@@ -4326,12 +4345,13 @@
     "87": "87",
     "88": "88",
     "90": "90",
+    "91": "91",
     "92": "92",
     "93": "93",
     "96": "96",
     "97": "97",
     "98": "98",
-    "100": "SYS_BUFF_STEAL",
+    "100": "100",
     "102": "102",
     "103": "103",
     "104": "104",
@@ -4516,8 +4536,8 @@
     "SYS_BUFF_REVENGE_HEAL": "47",
     "SYS_BUFF_REVENGE": "46",
     "SYS_BUFF_EXTEND_DEBUFF_DOWN": "53",
-    "SYS_BUFF_STEAL": "SYS_BUFF_STEAL",
-    "SYS_BUFF_COOLTIME_INCREASE": "68",
+    "SYS_BUFF_STEAL": "100",
+    "SYS_BUFF_COOLTIME_INCREASE": "64",
     "SYS_BUFF_KILL_UNDER_HP_RATE": "54",
     "SYS_BUFF_RESURRECTION": "55",
     "SYS_BUFF_ADDITIVE_SKILL": "SYS_BUFF_ADDITIVE_SKILL",
@@ -4847,13 +4867,13 @@
       "BT_DOT_LIGHTNING": "5",
       "BT_STAT|ST_BUFF_CHANCE": "20",
       "BT_EXTEND_BUFF": "51",
-      "BT_STEAL_BUFF": "SYS_BUFF_STEAL",
+      "BT_STEAL_BUFF": "100",
       "BT_SEALED_RECEIVE_HEAL": "38",
-      "BT_COOL3_CHARGE": "68",
+      "BT_COOL3_CHARGE": "64",
       "BT_STONE": "35",
       "BT_REDUCE_RECEIVE_HEAL": "2000057",
       "BT_DEATH": "1085",
-      "BT_COOL_CHARGE": "68",
+      "BT_COOL_CHARGE": "64",
       "BT_EXTEND_DEBUFF": "SYS_BUFF_EXTEND_DEBUFF_UP",
       "BT_STATBUFF_CONVERT_TO_STATDEBUFF": "97",
       "BT_UNIQUE_BUFF": "2000102",
@@ -4869,7 +4889,7 @@
       "BT_STAT|ST_ACCURACY": "24",
       "BT_RESOURCE_USE_SKILL": "1018",
       "BT_SEALED_RESURRECTION": "32",
-      "BT_COOL2_CHARGE": "68",
+      "BT_COOL2_CHARGE": "64",
       "BURNED": "1",
       "CURSED": "2",
       "BLEEDING": "3",
@@ -4898,12 +4918,14 @@
       "INSTANT_DEATH": "54",
       "DETONATE": "56",
       "PRIORITY_DECREASE": "62",
-      "COOLDOWN_INCREASE": "68",
+      "COOLDOWN_INCREASE": "64",
       "INCREASED_DAMAGE_TAKEN": "70",
       "FIXED_DAMAGE": "75",
+      "DAMAGE_OVER_TIME": "91",
       "BUFF_IMPAIRMENT": "93",
       "SEAL_EXTRA_SKILL": "96",
       "BUFF_REVERSAL": "97",
+      "STEALING_BUFF": "100",
       "PRIORITY_INCREASE_BANNED": "102",
       "CORROSIVE_POISON": "103",
       "GOLDEN_CURSE": "104",
@@ -4923,7 +4945,6 @@
       "RANDOM_DAMAGE_OVER_TIME": "4079002",
       "SHICHIFUJAS_CURSE": "5203701",
       "DRAGON_FEAR": "5204001",
-      "STEALING_BUFF": "SYS_BUFF_STEAL",
       "DEBUFF_DURATION_INCREASE": "SYS_BUFF_EXTEND_DEBUFF_UP",
       "AP_DECREASE": "SYS_BUFF_REDUCE_AP",
       "DISCONNECTED_FROM_CORE": "SYS_BUFF_LOST_CORE",

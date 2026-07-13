@@ -343,6 +343,20 @@ export function buildEffectGlossary(): EffectGlossary {
       }
     }
   }
+  // …OU affiché comme IMMUNITÉ d'un monstre (`MonsterTemplet.BuffImmuneToolTip`) :
+  // l'immunité-parapluie « Damage over Time » (SYS_BUFF_DOT_ALL) n'est appliquée
+  // par AUCUN buff — elle n'existe qu'en immunité de boss, le panneau la rend.
+  // La sentinelle « No Immunities » (SYS_IMMUNE_EMPTY, panneau vide) n'est pas
+  // un statut : écartée ici, et purgée des monstres à l'extraction.
+  for (const r of loadTable('MonsterTemplet')) {
+    for (const t of (r.BuffImmuneToolTip ?? '').split(',')) {
+      const id = t.trim();
+      if (id && id !== '0') referenced.add(id);
+    }
+  }
+  for (const r of loadTable('BuffToolTipTemplet')) {
+    if (r.NameID === 'SYS_IMMUNE_EMPTY' && r.ID) referenced.delete(r.ID);
+  }
 
   // Filtre : nommé ET référencé, puis regroupement par NameID.
   const groups = new Map<string, Row[]>();
