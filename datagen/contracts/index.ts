@@ -223,6 +223,14 @@ export interface Glossaries {
    */
   geas?: Record<string, GuildRaidGeas>;
   /**
+   * MONNAIES par id numérique : id d'`ASSET_TYPE` (celui que portent les
+   * lignes `kind: 'asset'` des `rewardTables`) → clé du catalogue d'items
+   * (`SYS_ASSET_*`). LU de l'enum du client (dump il2cpp), jamais déduit d'une
+   * arithmétique — seules les correspondances qui existent VRAIMENT dans le
+   * catalogue sortent. Optionnel comme `modes`.
+   */
+  assetTypes?: Record<string, string>;
+  /**
    * Quirks de compte réduisant les stats AFFICHÉES des boss (slug de stat →
    * per-mille signé, ex. buff_chance/buff_resist −100) — le jeu les applique
    * à l'écran d'info, le site aussi. Cf. generators/encounters.

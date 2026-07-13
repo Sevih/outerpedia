@@ -15,7 +15,7 @@
  * NB : une icône n'est SERVIE en dev qu'une fois collectée (`pnpm assets:collect`),
  * comme tous les autres assets.
  */
-import { readdirSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { loadTable } from '../lib/tables';
 import { GAME_LANGS, LANG_COLUMNS, type LangDict } from '../lib/lang';
@@ -132,5 +132,33 @@ export function buildGoods(): Record<string, Goods> {
 
   // Les monnaies hors `SYS_ASSET_*` (Stamina…) s'ajoutent via la couche curée
   // (création depuis l'admin Editor › Item), pas en dur ici.
+  return out;
+}
+
+const DUMP_PATH = resolve(process.cwd(), '.gamedata/apk/dumped/dump.cs');
+
+/**
+ * Glossaire `assetTypes` : id NUMÉRIQUE de monnaie → clé du catalogue.
+ *
+ * Les tables de récompense référencent les monnaies par un id d'enum
+ * (`RIT_ASSET` + TypeID 33), mais AUCUNE table du client ne porte ce mapping :
+ * il vit dans le code (`enum ASSET_TYPE { AT_IRREGULAR_CHASE_1 = 33, … }`),
+ * que l'extraction a déjà dumpé. On le LIT là — la convention `AT_<X>` ↔
+ * `SYS_ASSET_<X>` est ensuite vérifiée contre le catalogue réel : seules les
+ * correspondances qui existent sortent (l'enum a ses fantômes, comme
+ * `AT_CRYSTAL` face à la clé texte `SYS_ASSET_CRISTAL`).
+ */
+export function buildAssetTypes(goods: Record<string, Goods>): Record<string, string> {
+  const dump = readFileSync(DUMP_PATH, 'utf8');
+  const out: Record<string, string> = {};
+  for (const m of dump.matchAll(/public const ASSET_TYPE AT_([A-Z0-9_]+) = (\d+);/g)) {
+    const [, name, id] = m;
+    if (name === 'MAX') continue; // sentinelle de l'enum, pas une monnaie
+    const key = `SYS_ASSET_${name}`;
+    if (goods[key]) out[id] = key;
+  }
+  if (!Object.keys(out).length) {
+    throw new Error(`buildAssetTypes : aucun ASSET_TYPE résolu depuis ${DUMP_PATH}`);
+  }
   return out;
 }

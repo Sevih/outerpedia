@@ -44,7 +44,7 @@ import { buildItemSources } from './generators/sources';
 import { buildEnhanceRules } from './generators/enhance';
 import { buildProgression } from './generators/progression';
 import { buildItems } from './generators/items';
-import { buildGoods } from './generators/goods';
+import { buildAssetTypes, buildGoods } from './generators/goods';
 import { buildCostumes } from './generators/costumes';
 import { buildItemCatalog } from './generators/item-catalog';
 import { buildGameVersion } from './generators/game-version';
@@ -87,9 +87,10 @@ async function main(): Promise<void> {
   const { skills: monsterSkills } = buildMonsterSkills();
   const equipment = buildEquipment();
   // Catalogue d'items UNIFIÉ (items + monnaies + costumes + curé baked).
+  const goods = buildGoods();
   const catalog = buildItemCatalog({
     items: buildItems(),
-    goods: buildGoods(),
+    goods,
     costumes: buildCostumes(),
   });
   const { effects, byTooltip, byLabel, byKey, tooltipKinds } = buildEffectGlossary();
@@ -139,6 +140,9 @@ async function main(): Promise<void> {
     rewardTables: encounters.rewardTables,
     // Geas du guild raid (phase 2) — référencés par `DungeonRef.geasRewards`.
     geas: encounters.geas,
+    // Monnaies par id numérique (lignes `asset` des rewardTables) — lu de
+    // l'enum ASSET_TYPE du client, vérifié contre le catalogue goods.
+    assetTypes: buildAssetTypes(goods),
     // Quirks de compte réduisant les stats affichées des boss (EFF/RES −10 %).
     bossQuirkMods: encounters.bossQuirkMods,
   };

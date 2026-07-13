@@ -77,6 +77,34 @@ function armorPieces(data: unknown): Record<string, ArmorItem> {
 
 const GRADE_RANK: Record<string, number> = { normal: 0, magic: 1, rare: 2, unique: 3 };
 
+/** L'identité affichable d'une PIÈCE d'équipement, quel que soit son slot. */
+export interface GearIdentity {
+  name: LangDict;
+  grade: string;
+  star: number;
+  icon: string;
+}
+
+/**
+ * Résolution d'une pièce par id BRUT, tous slots confondus — pour les
+ * références venues d'un autre domaine (les tables de récompense de donjons
+ * mêlent items et équipement sous les mêmes entrées). `undefined` si l'id
+ * n'est pas une pièce d'équipement : l'appelant essaie alors le catalogue
+ * d'items, et SIGNALE s'il ne trouve toujours pas.
+ */
+export function gearById(id: string): GearIdentity | undefined {
+  return (
+    WEAPONS[id] ??
+    AMULETS[id] ??
+    TALISMANS[id] ??
+    EE[id] ??
+    ARMOR_SLOTS.helmet[id] ??
+    ARMOR_SLOTS.armor[id] ??
+    ARMOR_SLOTS.gloves[id] ??
+    ARMOR_SLOTS.shoes[id]
+  );
+}
+
 const CURATED_PATH = resolve(process.cwd(), 'data/curated/equipment.json');
 const EMPTY: EquipmentCurated = { weapons: {}, amulets: {}, talismans: {}, sets: {}, ee: {} };
 
@@ -202,6 +230,47 @@ function mainStatsOf(main: string[], excludeFlatBase = false): string[] {
       if (label && !out.includes(label)) out.push(label);
     }
   return out;
+}
+
+/**
+ * Le SET d'une pièce d'armure, par id BRUT — pour les pools de récompense de
+ * donjon (l'Ecology Study droppe des pièces par slot ; leur set est LA raison
+ * d'y farmer). `undefined` si l'id n'est pas une pièce d'armure ou si la pièce
+ * ne référence aucun set.
+ */
+export function armorPieceSet(id: string): GameSet | undefined {
+  for (const table of Object.values(ARMOR_SLOTS)) {
+    const piece = table[id];
+    if (piece) return piece.set ? SETS[piece.set] : undefined;
+  }
+  return undefined;
+}
+
+/**
+ * VARIANTE d'équipement par id BRUT + son slot — pour rendre un pool de
+ * récompenses variante PAR variante (icône par classe), là où `gearById` perd
+ * le slot et où les familles écraseraient les déclinaisons sous une seule
+ * icône. `undefined` si l'id n'est ni arme, ni amulette, ni talisman.
+ */
+export function gearVariant(
+  id: string,
+): { slot: 'weapon' | 'amulet' | 'talisman'; item: GearIdentity } | undefined {
+  if (WEAPONS[id]) return { slot: 'weapon', item: WEAPONS[id] };
+  if (AMULETS[id]) return { slot: 'amulet', item: AMULETS[id] };
+  if (TALISMANS[id]) return { slot: 'talisman', item: TALISMANS[id] };
+  return undefined;
+}
+
+/**
+ * Mains possibles d'un accessoire/talisman par id BRUT (+ grade, pour que
+ * l'appelant ne retienne que les uniques) — même dérivation que les familles.
+ * `undefined` si l'id n'est ni une amulette ni un talisman.
+ */
+export function accessoryMainStats(id: string): { grade: string; stats: string[] } | undefined {
+  const it: GearItem | SpecialItem | undefined = AMULETS[id] ?? TALISMANS[id];
+  if (!it) return undefined;
+  const groups = 'options' in it ? (it as SpecialItem).options : (it as GearItem).main;
+  return { grade: it.grade, stats: mainStatsOf(groups) };
 }
 
 // --- Familles d'items (armes / amulettes / talismans) --------------------------
