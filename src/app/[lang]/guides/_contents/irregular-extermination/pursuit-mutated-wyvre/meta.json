@@ -1,0 +1,23 @@
+{
+  "title": {
+    "en": "Pursuit : Mutated Wyvre",
+    "jp": "追撃 : 変異したワイブル",
+    "kr": "추격 : 변이된 와이브르",
+    "zh": "追击：变异双足飞龙",
+    "fr": "Pursuit : Mutated Wyvre"
+  },
+  "description": {
+    "en": "Boss strategy guide",
+    "jp": "ボス攻略ガイド",
+    "kr": "보스 전략 가이드",
+    "zh": "首领攻略指南",
+    "fr": "Guide de stratégie pour le Boss."
+  },
+  "icon": "CM_Irregular_Infiltrate",
+  "author": "Shiraen",
+  "updated": "2025-11-30",
+  "order": 3,
+  "bossId": "51202003",
+  "mapPos": { "top": 59, "left": 53, "mobileTop": 64 },
+  "group": "irregular_chase:3"
+}

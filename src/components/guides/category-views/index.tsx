@@ -15,6 +15,7 @@
  */
 import DefaultGrid from './DefaultGrid';
 import BannerGrid from './BannerGrid';
+import IrregularChaseMap from './IrregularChaseMap';
 import TieredList from './TieredList';
 import SingularityRotation from './SingularityRotation';
 import SpecialRequestSplit from './SpecialRequestSplit';
@@ -42,6 +43,12 @@ export default function CategoryView(props: CategoryViewProps) {
     // du jeu lu sur les combats désignés (meta.group — requis au scan).
     case 'special-request':
       return <SpecialRequestSplit {...props} />;
+
+    // Quatre poursuites permanentes : la CARTE du mode (art de la catégorie),
+    // un pin par poursuite placé par meta.mapPos — requis au scan, comme
+    // bossId (nom + portrait du pin) et group (butin dérivé du donjon).
+    case 'irregular-extermination':
+      return <IrregularChaseMap {...props} />;
 
     default:
       return <DefaultGrid {...props} />;

@@ -1,0 +1,28 @@
+[
+  {
+    "title": {
+      "title": {
+        "en": "One Run Kill",
+        "jp": "1回クリア",
+        "kr": "1회 클리어",
+        "zh": "1次通关",
+        "fr": "One run kill"
+      }
+    },
+    "slots": [
+      ["Dianne"],
+      ["Skadi"],
+      ["Maxwell", "Regina", "Caren", "Gnosis Dahlia"],
+      ["Demiurge Luna", "Ame", "Holy Night's Blessing Dianne", "Demiurge Astei"]
+    ],
+    "note": [
+      {
+        "en": "Use any strong DPS that doesn't rely on debuffs.",
+        "jp": "弱体効果に依存しない強力なDPSを使用してください。",
+        "kr": "약화 효과에 의존하지 않는 강력한 DPS를 사용하세요.",
+        "zh": "使用不依赖弱化效果的强力DPS。",
+        "fr": "Utilisez n'importe quel bon DPS qui ne dépend pas des debuffs."
+      }
+    ]
+  }
+]

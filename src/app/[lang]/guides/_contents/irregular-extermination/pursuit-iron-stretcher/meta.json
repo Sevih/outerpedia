@@ -1,0 +1,23 @@
+{
+  "title": {
+    "en": "Pursuit : Iron Stretcher",
+    "jp": "追撃 : アイアンストレッチャー",
+    "kr": "추격 : 아이언 스트레쳐",
+    "zh": "追击：铁血伸张者",
+    "fr": "Pursuit : Iron Stretcher"
+  },
+  "description": {
+    "en": "Boss strategy guide",
+    "jp": "ボス攻略ガイド",
+    "kr": "보스 전략 가이드",
+    "zh": "首领攻略指南",
+    "fr": "Guide de stratégie pour le Boss."
+  },
+  "icon": "CM_Irregular_Infiltrate",
+  "author": "Shiraen",
+  "updated": "2025-11-30",
+  "order": 1,
+  "bossId": "51202001",
+  "mapPos": { "top": 43, "left": 24 },
+  "group": "irregular_chase:1"
+}

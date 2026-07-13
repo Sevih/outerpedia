@@ -64,6 +64,13 @@ export interface GuideMeta {
    * tenait à la main dans son composant de liste.
    */
   tier?: GuideTierKey;
+  /**
+   * Position (%) du pin du guide sur l'ART de sa catégorie (`art` de
+   * guide-categories) — la vue CARTE d'irregular-extermination, où elle est
+   * obligatoire (cf. `requires`). `mobileTop` décale verticalement quand le
+   * cadrage mobile l'exige (le libellé du pin passe alors sous la vignette).
+   */
+  mapPos?: { top: number; left: number; mobileTop?: number };
   /** og:image explicite (chemin `/images/...`, PNG/JPG par convention). */
   ogImage?: string;
   /** Exclu des listes/compteurs mais accessible en URL directe (comme V2). */
@@ -93,6 +100,7 @@ const META_KEYS = new Set([
   'updated',
   'order',
   'bossId',
+  'mapPos',
   'ogImage',
   'hidden',
   'tier',
@@ -150,6 +158,23 @@ function parseMeta(raw: unknown, at: string, issues: string[]): GuideMeta | null
   if (m.group !== undefined && (typeof m.group !== 'string' || !m.group)) {
     issues.push(`${at} : « group » doit être une chaîne non vide (DungeonRef.group)`);
     ok = false;
+  }
+  if (m.mapPos !== undefined) {
+    const p = m.mapPos as Record<string, unknown> | null;
+    const pct = (v: unknown) => typeof v === 'number' && v >= 0 && v <= 100;
+    const known = ['top', 'left', 'mobileTop'];
+    if (
+      !p ||
+      typeof p !== 'object' ||
+      Array.isArray(p) ||
+      !pct(p.top) ||
+      !pct(p.left) ||
+      (p.mobileTop !== undefined && !pct(p.mobileTop)) ||
+      Object.keys(p).some((k) => !known.includes(k))
+    ) {
+      issues.push(`${at} : « mapPos » attendu { top, left, mobileTop? } en pourcentages (0-100)`);
+      ok = false;
+    }
   }
   if (m.tier !== undefined && (typeof m.tier !== 'string' || !isGuideTier(m.tier))) {
     issues.push(

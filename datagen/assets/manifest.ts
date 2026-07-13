@@ -11,12 +11,16 @@
  *   - `face-icon` : COMPOSÉE depuis le portrait + layout Unity (cf. face-icon.ts) ;
  *   - `editorial` : copie telle quelle depuis le pool V2 (hors jeu).
  */
-import { readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { STAT_ICON } from '../../src/lib/stats';
 import { rankBadgeSprite } from '../../src/lib/ranks';
 import { MISSING_ITEM_ICONS as ITEM_ICON_BLACKLIST } from '../../src/lib/data/item-blacklist';
-import { GUIDE_CATEGORIES } from '../../src/lib/data/guide-categories';
+import {
+  GUIDE_CATEGORIES,
+  categoryArt,
+  type GuideCategorySlug,
+} from '../../src/lib/data/guide-categories';
 import { listGuides } from '../../src/lib/data/guides';
 import { buildItemCatalog } from '../generators/item-catalog';
 
@@ -560,10 +564,13 @@ export function buildAssetManifest(): AssetRequest[] {
   // toutes — c'est notre chrome de navigation, pas de la donnée de jeu, et il n'a
   // aucune raison de suivre les refontes d'UI de l'éditeur.
   //
-  // Les icônes des GUIDES eux-mêmes (bannières `T_Banner_*` du meta.json) restent
-  // extraites du jeu : celles-là SONT du contenu, et doivent suivre ses mises à
-  // jour.
+  // Même règle pour les BANNIÈRES des guides (`T_Banner_*` du meta.json) : toute
+  // icône que le pool V2 possède vient de lui — de l'UI déjà validée à l'écran,
+  // pas une clé de sprite qu'on espère encore intacte côté jeu. L'extraction ne
+  // sert que pour ce qu'un pool figé ne PEUT pas avoir : les bannières du
+  // contenu sorti après la V2.
   const guides = listGuides();
+  const v2Pool = resolve(process.env.V2_IMAGES_DIR ?? '../outerpedia-v2/public/images');
   for (const icon of new Set(Object.values(GUIDE_CATEGORIES).map((c) => c.icon)))
     push({
       kind: 'editorial',
@@ -571,14 +578,29 @@ export function buildAssetManifest(): AssetRequest[] {
       source: `guides/${icon}.webp`,
       domain: 'guides',
     });
-  for (const icon of new Set(guides.map((g) => g.icon)))
-    push({
-      kind: 'image',
-      key: `images/ui/guides/${icon}.webp`,
-      candidates: [icon],
-      domain: 'guides',
-      editorialFallback: `guides/${icon}.webp`,
-    });
+  // L'ART de vue d'une catégorie (fond de carte irregular…) suit la même règle
+  // que les icônes de meta : le pool V2 s'il l'a, l'extraction pour l'inédit.
+  const categoryArts = Object.keys(GUIDE_CATEGORIES).flatMap(
+    (slug) => categoryArt(slug as GuideCategorySlug) ?? [],
+  );
+  for (const icon of new Set([...guides.map((g) => g.icon), ...categoryArts])) {
+    const pooled = existsSync(resolve(v2Pool, `guides/${icon}.webp`));
+    push(
+      pooled
+        ? {
+            kind: 'editorial',
+            key: `images/ui/guides/${icon}.webp`,
+            source: `guides/${icon}.webp`,
+            domain: 'guides',
+          }
+        : {
+            kind: 'image',
+            key: `images/ui/guides/${icon}.webp`,
+            candidates: [icon],
+            domain: 'guides',
+          },
+    );
+  }
   // Boss liés aux guides (`meta.json` → bossId, convention : le boss COURANT) :
   // portrait sous le namespace boss EXISTANT (même clé que les sources
   // d'équipement → jamais deux copies) + icônes de ses skills sous le

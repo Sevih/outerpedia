@@ -1,0 +1,46 @@
+[
+  {
+    "title": { "effect": "HEAVY_STRIKE", "side": "buff" },
+    "slots": [
+      ["Monad Eva", "Viella"],
+      ["Gnosis Nella"],
+      ["Rhona"],
+      ["Kitsune of Eternity Tamamo-no-Mae"]
+    ],
+    "note": [
+      {
+        "en": "Use {B/HEAVY_STRIKE} DPS characters to avoid triggering the boss's crit penalty.",
+        "jp": "{B/HEAVY_STRIKE} DPSキャラクターを使用して、ボスの会心ペナルティを回避。",
+        "kr": "{B/HEAVY_STRIKE} DPS 캐릭터를 사용하여 보스의 치명 페널티를 회피.",
+        "zh": "使用{B/HEAVY_STRIKE} DPS角色来避免触发Boss的暴击惩罚。",
+        "fr": "Utilisez des DPS avec {B/HEAVY_STRIKE} pour éviter de déclencher la pénalité de coup critique du boss."
+      }
+    ]
+  },
+  {
+    "title": {
+      "title": {
+        "en": "Classic Team",
+        "jp": "クラシック編成",
+        "kr": "클래식 팀",
+        "zh": "常规队伍",
+        "fr": "Équipe classique"
+      }
+    },
+    "slots": [
+      ["Monad Eva", "Viella"],
+      ["Alice", "Akari", "Gnosis Nella", "Luna"],
+      ["Demiurge Luna", "Ame", "Maxwell", "Demiurge Astei", "Poolside Trickster Regina"],
+      ["Regina", "Caren", "Gnosis Dahlia", "Holy Night's Blessing Dianne"]
+    ],
+    "note": [
+      {
+        "en": "Feel free to use any strong DPS character. With enough damage, the WG recovery mechanic can be ignored.",
+        "jp": "強力なDPSキャラクターを自由に使用可能。十分なダメージがあれば、WG回復メカニズムを無視できる。",
+        "kr": "강력한 DPS 캐릭터를 자유롭게 사용 가능. 충분한 피해량이 있으면 WG 회복 메커니즘을 무시할 수 있다.",
+        "zh": "可自由使用任何强力DPS角色。伤害足够高的话可以无视WG恢复机制。",
+        "fr": "Utilisez n'importe quel bon DPS. Avec assez de dégâts, le mécanisme de regen WG peut être ignoré."
+      }
+    ]
+  }
+]

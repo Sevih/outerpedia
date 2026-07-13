@@ -16,7 +16,7 @@ import type { LocalizedText } from '@contracts';
  * OBLIGATOIRES (sa vue en dépend). Vérifié au scan : le build casse au lieu de
  * laisser un guide disparaître d'une vue qui ne sait pas où le ranger.
  */
-export type GuideRequirable = 'tier' | 'bossId' | 'order' | 'group';
+export type GuideRequirable = 'tier' | 'bossId' | 'order' | 'group' | 'mapPos';
 
 /**
  * Bloc EXPLICATIF d'un mode de jeu (« comment ça marche »), affiché en bas de sa
@@ -41,6 +41,12 @@ export interface GuideCategory {
   order: number;
   /** Sprite du jeu (collecté par le manifest d'assets sous `images/ui/guides/`). */
   icon: string;
+  /**
+   * ART de la vue de catégorie (fond de carte d'irregular-extermination…) —
+   * même namespace et même collecte que les icônes (`images/ui/guides/`).
+   * Déclaré ICI pour que le manifest d'assets et la vue lisent la même source.
+   */
+  art?: string;
   label: LocalizedText & { en: string };
   desc: LocalizedText & { en: string };
   /** Champs de meta exigés par la vue de cette catégorie. */
@@ -318,6 +324,18 @@ export const GUIDE_CATEGORIES = {
   'irregular-extermination': {
     order: 9,
     icon: 'CM_Irregular_Infiltrate',
+    /** Fond de la vue carte : l'écran Irregular Chase du jeu (pins posés dessus). */
+    art: 'T_Irregular_Chase_Bg',
+    /**
+     * Mode PERMANENT à combats désignés : `group` = la poursuite que le guide
+     * couvre (rendu + butin en découlent), `bossId` = le nom et le portrait du
+     * pin (namespace boss existant — jamais une 2e copie du sprite), `order` =
+     * le GroupID du jeu (1..4), qui est aussi l'ordre croissant de difficulté,
+     * `mapPos` = la position du pin sur l'art de la catégorie (visuel V2 :
+     * la vue est une CARTE, pas une grille). Pas de calendrier : rien à trier
+     * par saison.
+     */
+    requires: ['group', 'bossId', 'order', 'mapPos'],
     label: {
       en: 'Irregular Extermination',
       jp: 'イレギュラー掃討',
@@ -414,4 +432,9 @@ export function categoryRequires(category: GuideCategorySlug): readonly GuideReq
 /** Bloc « comment marche ce mode », si la catégorie en déclare un. */
 export function categoryInfo(category: GuideCategorySlug): GuideCategoryInfo | undefined {
   return (GUIDE_CATEGORIES[category] as GuideCategory).info;
+}
+
+/** Art de la vue de catégorie (fond de carte), si la catégorie en déclare un. */
+export function categoryArt(category: GuideCategorySlug): string | undefined {
+  return (GUIDE_CATEGORIES[category] as GuideCategory).art;
 }

@@ -1,0 +1,23 @@
+{
+  "title": {
+    "en": "Pursuit : Irregular Queen",
+    "jp": "追撃 : イレギュラークイーン",
+    "kr": "추격 : 이레귤러 퀸",
+    "zh": "追击：异形怪女王",
+    "fr": "Pursuit : Irregular Queen"
+  },
+  "description": {
+    "en": "Boss strategy guide",
+    "jp": "ボス攻略ガイド",
+    "kr": "보스 전략 가이드",
+    "zh": "首领攻略指南",
+    "fr": "Guide de stratégie pour le Boss."
+  },
+  "icon": "CM_Irregular_Infiltrate",
+  "author": "Sevih / Shiraen",
+  "updated": "2025-11-30",
+  "order": 4,
+  "bossId": "51202004",
+  "mapPos": { "top": 23, "left": 47 },
+  "group": "irregular_chase:4"
+}
