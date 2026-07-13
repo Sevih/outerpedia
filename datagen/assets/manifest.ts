@@ -628,6 +628,66 @@ export function buildAssetManifest(): AssetRequest[] {
     }
   }
 
+  // VARIANTES DE DIFFICULTÉ des boss de guides : les panneaux de rencontre
+  // affichent TOUT le groupe de combat (ligues du world boss, stages…), et
+  // chaque variante a son PROPRE kit — souvent avec des icônes qui
+  // n'appartiennent à aucun personnage (Skill_Second_2100090 : le S2 de la
+  // Dahlia de ligue Hard, 4086020). Collecte data-driven : bossId du guide →
+  // groupes de combat de ses donjons (`encounters.group`) → monstres du
+  // groupe → portrait + icônes de skills (dédup par clé via `push`).
+  {
+    const monsters = load('monsters.json') as Record<
+      string,
+      { icon?: string; skills?: string[]; spawns?: Array<{ dungeon: string }> } | undefined
+    >;
+    const monsterSkills = load('monster-skills.json') as Record<
+      string,
+      { icon?: string } | undefined
+    >;
+    const encounters = load('encounters.json') as Record<
+      string,
+      { group?: string; monsters?: Array<{ id: string }> } | undefined
+    >;
+    const groupMonsters = new Map<string, Set<string>>();
+    const groupOf = new Map<string, string>();
+    for (const [did, d] of Object.entries(encounters)) {
+      if (!d?.group) continue;
+      groupOf.set(did, d.group);
+      const set = groupMonsters.get(d.group) ?? new Set<string>();
+      for (const dm of d.monsters ?? []) set.add(dm.id);
+      groupMonsters.set(d.group, set);
+    }
+    for (const g of guides) {
+      if (!g.bossId) continue;
+      const variants = new Set<string>();
+      for (const s of monsters[g.bossId]?.spawns ?? []) {
+        const grp = groupOf.get(s.dungeon);
+        if (grp) for (const id of groupMonsters.get(grp) ?? []) variants.add(id);
+      }
+      for (const id of variants) {
+        const m = monsters[id];
+        if (!m) continue;
+        if (m.icon && !m.icon.startsWith('2'))
+          push({
+            kind: 'image',
+            key: `images/ui/boss/MT_${m.icon}.webp`,
+            candidates: [`MT_${m.icon}`],
+            domain: 'guides',
+          });
+        for (const sid of m.skills ?? []) {
+          const icon = monsterSkills[sid]?.icon;
+          if (icon)
+            push({
+              kind: 'image',
+              key: `images/characters/skills/${icon}.webp`,
+              candidates: [icon],
+              domain: 'guides',
+            });
+        }
+      }
+    }
+  }
+
   // Boss de la ROTATION Dimensional Singularity : la vue de catégorie les
   // affiche tous (bibliothèque), y compris ceux qu'aucun guide ne couvre encore
   // — ils ne seraient donc jamais collectés par le bloc `bossId` ci-dessus.
