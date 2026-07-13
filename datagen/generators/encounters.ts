@@ -147,6 +147,8 @@ export interface DungeonMonster {
  *     actuel) ;
  *   - irregular_chase : `normal`/`hard`/`very_hard` (DungeonDifficult 1..3,
  *     correspondance curée — vérifiée sur les titres « (Normal) »…) ;
+ *   - raid_1/raid_2 (Special Request) : `stage_1..13` (chiffres de la clé
+ *     du nom — SYS_RAID_1_DUNGEON_E01), 5 échelles de boss par mode ;
  *   - story/tours/adventure : PAS de champ — la difficulté EST le mode
  *     (normal vs normal_hard, tower/_hard/_very_hard).
  */
@@ -746,6 +748,19 @@ export function buildEncounters(): EncountersData {
     }
     const wbBoss = wbBossByDungeon.get(d.ID);
     if (wbBoss) ref.group = `world_boss:${wbBoss}`;
+    // Special Request (raid_1/raid_2) : 5 échelles de boss par mode, 13
+    // stages chacune — tout vit dans la CLÉ du nom
+    // (SYS_RAID_1_DUNGEON_E01 : base = échelle, chiffres = stage ; la chaîne
+    // NextOpenDungeonID confirme le découpage). Pas de `name` de difficulté :
+    // le nom du donjon porte déjà « (Stage N) ».
+    if (mode === 'raid_1' || mode === 'raid_2') {
+      const m = /^(SYS_RAID_\d+_DUNGEON_[A-Z]+)(\d+)$/.exec(d.NameID ?? '');
+      if (m) {
+        const stage = Number(m[2]);
+        ref.difficulty = { key: `stage_${stage}`, order: stage };
+        ref.group = `${mode}:${m[1]}`;
+      }
+    }
     // Tours : étage et élément vivent dans la CLÉ du nom
     // (SYS_INFINITE_DUNGEON[_FIRE][_HARD|_V_HARD]_<étage> — espaces parasites
     // possibles dans les clés du jeu).
