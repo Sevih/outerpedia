@@ -233,7 +233,10 @@ export function EffectChipsRow({
   // sa version de base (icônes différentes, comme en V2) mais se dédoublonne
   // AUSSI entre elles : le flag entre dans la clé (les passifs world boss
   // appliquent 5 stacks du même « Courage Against Despair » irremovable —
-  // une seule chip).
+  // une seule chip). La NATURE entre aussi dans la clé : deux statuts
+  // homonymes de natures OPPOSÉES sont des statuts distincts côté joueur —
+  // la Chimère du Special Request porte « Starving Devil » en buff (1076,
+  // sur elle) ET en debuff (1077, sur l'équipe) : deux chips.
   const seen = new Set<string>();
   const visible = effects.filter((e) => {
     const key = e.tooltip ?? e.label;
@@ -241,7 +244,8 @@ export function EffectChipsRow({
     const status = statuses[key];
     if (status?.hidden) return false;
     const isIrremovable = Boolean(status?.icon?.includes('Interruption'));
-    const displayKey = `${isIrremovable ? 'IR|' : ''}${status?.name ?? key}`;
+    const nature = (status?.isDebuff ?? e.category === 'debuff') ? 'D' : 'B';
+    const displayKey = `${isIrremovable ? 'IR|' : ''}${nature}|${status?.name ?? key}`;
     if (seen.has(displayKey)) return false;
     seen.add(displayKey);
     return true;
