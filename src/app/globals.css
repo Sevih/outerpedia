@@ -306,6 +306,22 @@ body::before {
 }
 
 @layer components {
+  /* Titre héro des landings (portage V2) : bandeau d'UI du jeu en fond, liseré
+     « victoire » en pied. À poser sur un h1 — écrase le trait de titre de base
+     (le ::after garde son image --hr-h1, seule la géométrie change). */
+  .h1-page {
+    padding: 1rem 2rem;
+    text-align: center;
+    color: white;
+    background: var(--bg-h1-page) center / cover no-repeat;
+    border-radius: 8px;
+    overflow: hidden;
+    &::after {
+      height: 12px;
+      background-size: contain;
+    }
+  }
+
   /* Cartes (fiches) — thémées via --card-* (valeurs V2 exactes en sombre). */
   .card {
     border-radius: 0.5rem;

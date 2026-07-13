@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { isValidLang, type Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { getT } from '@/i18n';
@@ -10,8 +9,7 @@ import {
   buildItemListJsonLd,
 } from '@/lib/seo';
 import JsonLd from '@/components/seo/JsonLd';
-import { localePath } from '@/lib/navigation';
-import { img } from '@/lib/images';
+import { CategoryCard } from '@/components/guides/CategoryCard';
 import { GUIDE_CATEGORIES, GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
 import { countGuides } from '@/lib/data/guides';
 
@@ -56,45 +54,44 @@ export default async function GuidesLanding({ params }: { params: Promise<{ lang
     })),
   });
 
+  const totalGuides = visibleCategories.reduce((sum, slug) => sum + countGuides(slug), 0);
+  const counterLabel = t('guides.counter', {
+    guides: totalGuides,
+    categories: visibleCategories.length,
+  });
+
   return (
-    <div className="mx-auto max-w-7xl space-y-5 px-4 py-6">
+    <div className="mx-auto max-w-6xl px-4 py-6 md:px-6">
       <JsonLd data={crumbLd} />
       <JsonLd data={listLd} />
-      <div>
-        <h1 className="text-content-strong text-2xl font-bold">{t('page.guides.title')}</h1>
-        <p className="text-content-muted text-sm">{t('page.guides.description')}</p>
+
+      {/* Héro (visuel V2) : titre-bandeau, description, compteur. */}
+      <div className="flex flex-col items-center text-center">
+        <h1 className="h1-page">{t('page.guides.title')}</h1>
+        <p className="text-content-muted mx-auto mt-2 max-w-2xl text-sm">
+          {t('page.guides.description')}
+        </p>
+        <div className="text-content-subtle mt-3 flex items-center gap-2 font-mono text-[10px] tracking-[0.14em] uppercase">
+          <span
+            className="inline-block size-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.6)]"
+            aria-hidden
+          />
+          <span>{counterLabel}</span>
+        </div>
       </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+      <h2 className="sr-only">{t('page.guides.list')}</h2>
+
+      <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {visibleCategories.map((slug) => {
-          const cat = GUIDE_CATEGORIES[slug];
           const count = countGuides(slug);
           return (
-            <Link
+            <CategoryCard
               key={slug}
-              href={localePath(lang, `/guides/${slug}`)}
-              className="border-line-subtle bg-surface-raised hover:border-line group flex gap-4 rounded-lg border p-4 shadow-sm transition-colors"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-              <img
-                src={img.guideIcon(cat.icon)}
-                alt=""
-                className="h-12 w-12 shrink-0 object-contain"
-                loading="lazy"
-              />
-              <div className="min-w-0">
-                <div className="flex items-baseline gap-2">
-                  <h2 className="text-content-strong group-hover:text-accent font-semibold transition-colors">
-                    {lRec(cat.label, lang)}
-                  </h2>
-                  <span className="text-content-muted text-xs whitespace-nowrap">
-                    {t(count === 1 ? 'guides.count.one' : 'guides.count.many', { count })}
-                  </span>
-                </div>
-                <p className="text-content-muted mt-1 line-clamp-3 text-sm">
-                  {lRec(cat.desc, lang)}
-                </p>
-              </div>
-            </Link>
+              slug={slug}
+              lang={lang}
+              countLabel={t(count === 1 ? 'guides.count.one' : 'guides.count.many', { count })}
+            />
           );
         })}
       </div>

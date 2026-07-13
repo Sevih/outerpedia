@@ -118,6 +118,7 @@ export const img = {
 export const cssBackgroundVars: Record<`--${string}`, string> = {
   '--bg-page': `url('${BASE}/images/background_compressed.webp')`,
   '--bg-page-portrait': `url('${BASE}/images/background_compressed_portrait.webp')`,
+  '--bg-h1-page': `url('${BASE}/images/ui/common/CM_Desc_Bg.webp')`,
   '--hr-h1': `url('${BASE}/images/ui/common/CM_Result_Victory_Bg.webp')`,
   '--hr-h2': `url('${BASE}/images/ui/common/CM_Result_Victory_Line.webp')`,
   '--hr-h3': `url('${BASE}/images/ui/common/CM_Gradation_Bg.webp')`,
