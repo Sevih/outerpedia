@@ -50,7 +50,7 @@
     "@types/react-dom": "^19",
     "cheerio": "^1.2.0",
     "eslint": "^9",
-    "eslint-config-next": "16.1.7",
+    "eslint-config-next": "16.2.10",
     "lefthook": "^2.1.9",
     "prettier": "^3",
     "prettier-plugin-tailwindcss": "^0.8",
