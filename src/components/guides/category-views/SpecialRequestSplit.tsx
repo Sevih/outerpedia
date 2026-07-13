@@ -4,6 +4,7 @@ import { lRec } from '@/lib/i18n/localize';
 import { localePath } from '@/lib/navigation';
 import { img } from '@/lib/images';
 import type { Guide } from '@/lib/data/guides';
+import { getMonster } from '@/lib/data/monsters';
 import { encountersOfGroup, modeLabel } from '@/lib/data/encounters';
 import { lootSignature, type LootBadge } from '@/lib/data/rewards';
 import { EmptyCategory } from './EmptyCategory';
@@ -78,7 +79,23 @@ export default async function SpecialRequestSplit({ lang, guides }: CategoryView
  * à droite sur deux rangées.
  */
 function BannerCard({ guide, lang, sig }: { guide: Guide; lang: Lang; sig: LootSig }) {
-  const name = lRec(guide.title, lang);
+  // Le NOM DU BOSS, pas le titre du guide (huit metas portent le générique
+  // « Strategy Guide ») : le monstre que `bossId` désigne — pas les boss du
+  // combat, dont la liste est bruitée (le jumeau de Dek'Ril est un renfort,
+  // la Chimère aligne un Ratman en rôle boss).
+  if (!guide.bossId) {
+    throw new Error(
+      `SpecialRequestSplit : « ${guide.category}/${guide.slug} » sans bossId dans son meta.`,
+    );
+  }
+  const monster = getMonster(guide.bossId);
+  if (!monster) {
+    throw new Error(
+      `SpecialRequestSplit : monstre « ${guide.bossId} » (${guide.slug}) absent de ` +
+        `data/generated/monsters.json — à extraire/valider via l'admin (Extractor › Monsters).`,
+    );
+  }
+  const name = lRec(monster.name, lang) || monster.name.en;
   // Un pool ne porte qu'UNE nature de signature (sets OU stats) ; les stats
   // (icônes blanches du jeu) prennent une pastille ronde sombre pour se lire
   // sur l'art, comme en V2.

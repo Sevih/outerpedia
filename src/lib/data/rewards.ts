@@ -24,10 +24,13 @@ import {
   accessoryMainStats,
   armorPieceSet,
   gearById as gearPieceById,
+  gearPassiveRefs,
   gearVariant,
   getAmuletFamilies,
   getTalismanFamilies,
   getWeaponFamilies,
+  passiveTextAt,
+  setEffectText,
   type GearFamily,
 } from '@/lib/data/equipment';
 
@@ -209,6 +212,11 @@ export function resolveRewardTable(id: string, lang: Lang): ResolvedReward[] {
 export interface LootBadge {
   name: string;
   iconSrc: string;
+  /**
+   * Bonus du set par NOMBRE DE PIÈCES (tooltip) — les deux quand le set a les
+   * deux, celui qu'il a sinon (certains sets n'ont que le 2 pièces).
+   */
+  effects?: Array<{ pieces: 2 | 4; text: string }>;
 }
 
 /**
@@ -253,6 +261,71 @@ export function lootSignature(
     }
   }
   return { sets: [...sets.values()], stats: [...stats.values()] };
+}
+
+/** Une pièce de butin LÉGENDAIRE d'un stage, cliquable vers sa page détail. */
+export interface StageLootGear {
+  name: string;
+  iconSrc: string;
+  grade: string;
+  href: string;
+  /** Texte du passif au palier 4 (tooltip). */
+  desc?: string;
+}
+
+/**
+ * Le butin LÉGENDAIRE d'un stage — ce qui vaut la peine d'être farmé, et RIEN
+ * d'autre : pas d'or, pas d'exp, pas de filler magic/rare.
+ *  - `sets` : les sets dont le pool droppe des pièces d'armure UNIQUES
+ *    (Ecology Study — la pièce ne compte pas, son set si) ;
+ *  - `gear` : les familles d'armes/accessoires UNIQUES du pool
+ *    (Identification — cinq armes et cinq accessoires nommés par échelle).
+ * Un stage bas qui ne droppe aucun unique rend deux listes vides : c'est la
+ * réponse honnête à « qu'est-ce que je viens farmer ici ? » — rien encore.
+ */
+export function stageLoot(
+  tableId: string,
+  lang: Lang,
+): { sets: LootBadge[]; gear: StageLootGear[] } {
+  const sets = new Map<string, LootBadge>();
+  const gear = new Map<string, StageLootGear>();
+  for (const e of getRewardTable(tableId).entries ?? []) {
+    if (!e.random || e.kind !== 'item') continue;
+    const set = armorPieceSet(e.id);
+    if (set) {
+      if (gearPieceById(e.id)?.grade !== 'unique') continue;
+      if (!sets.has(set.icon)) {
+        // Les bonus qu'on farme : 2 ET 4 pièces (palier de base) — chacun
+        // seulement si le set le porte (certains n'ont que le 2 pièces).
+        const tier = set.tiers[0];
+        const effects: NonNullable<LootBadge['effects']> = [];
+        for (const pieces of [2, 4] as const) {
+          const text = setEffectText(tier?.[`${pieces}p`] ?? null, lang);
+          if (text) effects.push({ pieces, text });
+        }
+        sets.set(set.icon, {
+          name: lRec(set.name, lang) || set.name.en,
+          iconSrc: img.equipment(set.icon),
+          ...(effects.length ? { effects } : {}),
+        });
+      }
+      continue;
+    }
+    const f = gearById(e.id);
+    if (f?.grade === 'unique' && !gear.has(f.slug)) {
+      // Le passif au 5e PALIER de breakthrough — le « tier 4 » du vocabulaire
+      // joueur (T0..T4), celui que la communauté cite.
+      const desc = passiveTextAt(gearPassiveRefs(e.id) ?? [], 5, lang);
+      gear.set(f.slug, {
+        name: lRec(f.name, lang) || f.name.en,
+        iconSrc: img.equipment(f.icon),
+        grade: f.grade,
+        href: localePath(lang, `/equipment/${f.slug}`),
+        ...(desc ? { desc } : {}),
+      });
+    }
+  }
+  return { sets: [...sets.values()], gear: [...gear.values()] };
 }
 
 /** Une variante d'équipement d'un pool, prête à afficher en vignette. */

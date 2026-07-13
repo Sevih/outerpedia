@@ -48,11 +48,24 @@ export async function BossCard({
   monsterId,
   spawns,
   lang,
+  role,
+  followStages,
+  afterStats,
 }: {
   monsterId: string;
   /** Les rencontres à parcourir — imposées par le mode, jamais devinées ici. */
   spawns: SpawnContext[];
   lang: Lang;
+  /** Rôle dans la rencontre (`DungeonMonster.role`) — badge sur les renforts. */
+  role?: 'boss' | 'add';
+  /** Mode SUIVEUR : sélection de rencontre → index dans `spawns` (cf. BossRank). */
+  followStages?: Record<number, number>;
+  /**
+   * Bloc du MODE inséré entre les stats et les compétences — là où le Special
+   * Request pose sa glissière de stage et le butin du stage. La carte ne sait
+   * pas ce que c'est : les modes composent, ils ne configurent pas.
+   */
+  afterStats?: React.ReactNode;
 }) {
   const monster = getMonster(monsterId);
   // Réf de contenu cassée = bug de guide : on casse le build, pas de repli muet.
@@ -129,7 +142,7 @@ export async function BossCard({
   }
 
   return (
-    <BossRankProvider spawns={spawns}>
+    <BossRankProvider spawns={spawns} followStages={followStages}>
       <section className="space-y-4">
         {/* EN-TÊTE : qui est ce boss — icône, nom, élément, classe, et son NIVEAU
             au palier courant. Le niveau se lit là parce que c'est là qu'on le
@@ -143,7 +156,17 @@ export async function BossCard({
             className="border-line-subtle h-16 w-16 rounded-lg border object-cover"
           />
           <div>
-            <h2 className="text-content-strong text-xl font-bold">{name}</h2>
+            <div className="flex flex-wrap items-center gap-2">
+              <h2 className="text-content-strong text-xl font-bold">{name}</h2>
+              {/* Un renfort se bat AVEC le boss, pas à sa place : sa carte le
+                  dit d'un badge, sinon deux cartes empilées se lisent comme
+                  deux boss — et le lecteur cherche lequel il affronte. */}
+              {role === 'add' && (
+                <span className="border-line-subtle bg-surface-sunken text-content rounded-full border px-2 py-0.5 font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
+                  {t('guides.boss_display.add')}
+                </span>
+              )}
+            </div>
             <div className="mt-1 flex items-center gap-2">
               {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
               <img src={img.element(monster.element)} alt={monster.element} className="h-5 w-5" />
@@ -171,6 +194,9 @@ export async function BossCard({
                 effect ? (
                   <EffectIconBadge
                     key={tid}
+                    // Plus discret que les chips de skill (h-7) : une rangée
+                    // d'immunités est un rappel, pas le sujet de la carte.
+                    className="h-5 w-5"
                     effect={{
                       name: lRec(effect.name, lang) || effect.name.en,
                       icon: effect.icon,
@@ -203,6 +229,8 @@ export async function BossCard({
             rankNext: t('guides.boss_display.rank_next'),
           }}
         />
+
+        {afterStats}
 
         {cardSkills.length > 0 && (
           <div className="space-y-1.5">

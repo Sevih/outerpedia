@@ -15,10 +15,18 @@
  */
 import encountersData from '@data/generated/encounters.json';
 import glossariesData from '@data/generated/glossaries.json';
-import type { DungeonMonster, DungeonRef, EncountersFile, Glossaries } from '@contracts';
+import type {
+  DungeonMonster,
+  DungeonRank,
+  DungeonRef,
+  EncountersFile,
+  Glossaries,
+  Monster,
+} from '@contracts';
 import type { TFunction, TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
+import { getMonster } from '@/lib/data/monsters';
 import { expandRankContexts, type SpawnContext } from '@/lib/monster-stats';
 
 const DUNGEONS = encountersData as unknown as EncountersFile;
@@ -111,11 +119,167 @@ export function modeLabel(d: DungeonRef, lang: Lang): string {
 }
 
 /**
+ * Un COMBATTANT d'une échelle de stages — l'unité de carte des modes à N stages.
+ *
+ * Le Special Request rejoue le même combat sur 13 stages, mais chaque stage
+ * référence des VARIANTS de monstres aux identifiants distincts (la Chimère du
+ * stage 13 n'est pas celle du stage 1 : autre id, autre kit aux stages hauts).
+ * Rendre une carte par apparition enverrait jusqu'à 52 cartes complètes dans la
+ * page. Or beaucoup de variants sont IDENTIQUES en contenu — même nom, même
+ * kit, mêmes stats, seuls l'id et le niveau de rencontre changent. On fusionne
+ * donc par CONTENU : une carte par combattant réellement distinct (7 à 13 par
+ * échelle), qui porte les stages où il apparaît et son contexte de stats à
+ * chacun. La fusion se CONSTATE dans la donnée, variant par variant — jamais
+ * déduite d'une arithmétique d'ids.
+ */
+export interface GroupCombatant {
+  /** Variant représentatif : celui du stage le plus HAUT où ce contenu apparaît. */
+  monsterId: string;
+  role: DungeonMonster['role'];
+  /**
+   * Le boss PRINCIPAL du combat — celui qui porte des barres de vie. C'est sa
+   * carte qui ancre les contrôles du mode (glissière de stage, butin) : à
+   * chaque stage, exactement un variant principal est visible.
+   */
+  main: boolean;
+  /** Contextes de stats, une entrée par apparition, dans l'ordre des stages. */
+  spawns: SpawnContext[];
+  /** Index de stage (dans `encountersOfGroup`) → index dans `spawns`. */
+  spawnByStage: Record<number, number>;
+  /** Stages où il apparaît (indexes croissants) — pilote la visibilité. */
+  stageIndexes: number[];
+}
+
+/**
+ * Ce que la carte REND, et rien d'autre : ni l'id ni les rencontres du monstre
+ * (qui varient par définition d'un variant à l'autre), ni son surnom interne
+ * (jamais affiché). La stabilité de la sérialisation tient au générateur, qui
+ * écrit tous les monstres avec le même ordre de champs.
+ */
+function contentSignature(monster: Monster): string {
+  const rendered: Partial<Monster> = { ...monster };
+  delete rendered.id;
+  delete rendered.spawns;
+  delete rendered.nickname;
+  return JSON.stringify(rendered);
+}
+
+/** Les combattants distincts d'un combat — boss d'abord (le principal en tête). */
+export function groupCombatants(group: string, lang: Lang): GroupCombatant[] {
+  const encounters = encountersOfGroup(group);
+  // Groupe inconnu = guide qui pointe dans le vide : on casse le build plutôt
+  // que de rendre une page sans boss que personne ne remarquerait.
+  if (!encounters.length) {
+    throw new Error(
+      `groupCombatants : aucun donjon pour le combat « ${group} » — ` +
+        `vérifier le champ \`group\` du guide contre data/generated/encounters.json.`,
+    );
+  }
+
+  interface Draft extends GroupCombatant {
+    /** Porte des barres de vie quelque part = le boss PRINCIPAL du combat. */
+    main: boolean;
+    /** (stage, position dans le donjon) de la première apparition — tri stable. */
+    first: [number, number];
+  }
+  const byContent = new Map<string, Draft>();
+
+  encounters.forEach((e, stageIndex) => {
+    // SEULE LA VAGUE DU BOSS compte : le Special Request ouvre sur une vague
+    // d'escorte (les Spear-Wielders du Masterless Guardian) que le guide n'a
+    // pas à documenter — le combat qu'on vient préparer est celui du boss et
+    // de ceux qui se battent À CÔTÉ de lui (le core de Sacreed, Mek'Ril).
+    // `wave` n'est émis que sur les donjons multi-vagues : absent, tout passe.
+    const mainWave = e.monsters.find((m) => m.role === 'boss' && m.hpLines)?.wave;
+    e.monsters.forEach((m, slot) => {
+      if (m.wave !== mainWave) return;
+      const monster = getMonster(m.id);
+      if (!monster) {
+        throw new Error(
+          `groupCombatants : monstre « ${m.id} » absent de data/generated/monsters.json — ` +
+            `à extraire/valider via l'admin (Extractor › Monsters).`,
+        );
+      }
+      const key = `${m.role}|${contentSignature(monster)}`;
+      let c = byContent.get(key);
+      if (!c) {
+        c = {
+          monsterId: m.id,
+          role: m.role,
+          spawns: [],
+          spawnByStage: {},
+          stageIndexes: [],
+          main: false,
+          first: [stageIndex, slot],
+        };
+        byContent.set(key, c);
+      }
+      // Les stages arrivent en ordre croissant : le dernier variant vu est le
+      // plus haut — c'est lui qui représente la carte (celui que le guide vise).
+      c.monsterId = m.id;
+      c.spawnByStage[stageIndex] = c.spawns.length;
+      c.spawns.push(...encounterSpawnContexts(e, m, lang));
+      c.stageIndexes.push(stageIndex);
+      // Un ADD peut porter des barres de vie (le core de Sacreed) : le
+      // PRINCIPAL est le boss qui en porte, pas n'importe quel porteur.
+      if (m.role === 'boss' && m.hpLines) c.main = true;
+    });
+  });
+
+  // Boss avant renforts (décision d'affichage), le PRINCIPAL (barres de vie) en
+  // tête des boss ; à rôle égal, l'ordre du jeu (stage puis position) tranche.
+  return [...byContent.values()]
+    .sort(
+      (a, b) =>
+        Number(a.role === 'add') - Number(b.role === 'add') ||
+        Number(b.main) - Number(a.main) ||
+        a.first[0] - b.first[0] ||
+        a.first[1] - b.first[1],
+    )
+    .map(({ monsterId, role, main, spawns, spawnByStage, stageIndexes }) => ({
+      monsterId,
+      role,
+      main,
+      spawns,
+      spawnByStage,
+      stageIndexes,
+    }));
+}
+
+/**
+ * Les paliers qui appartiennent À CE MONSTRE.
+ *
+ * Quand un donjon à échelle de rangs aligne PLUSIEURS boss, l'échelle les
+ * ENJAMBE au lieu de se répéter : au world boss, le boss 1 se joue de D à A,
+ * et ATTEINDRE S (le seuil de dégâts du palier) le fait transitionner en
+ * boss 2, qui porte S→SSS. Donner les sept rangs aux deux cartes mentirait
+ * deux fois — chaque boss afficherait des rangs où il n'existe pas.
+ *
+ * Le découpage se LIT dans la donnée, il ne se décrète pas : le niveau de base
+ * de chaque boss est exactement le niveau de son premier palier (vérifié sur
+ * les six world boss — 60 = rang D, 90 = rang S en ligue 3). Si les niveaux ne
+ * dessinent pas cette partition (autre mode, autre convention), l'échelle
+ * entière reste à chacun — le comportement d'avant.
+ */
+function ranksOfMonster(e: Encounter, m: DungeonMonster): DungeonRank[] | undefined {
+  const ranks = e.ref.ranks;
+  const bosses = e.monsters.filter((x) => x.role !== 'add');
+  if (!ranks?.length || bosses.length < 2 || m.role === 'add') return ranks;
+
+  const starts = bosses.map((b) => ranks.findIndex((r) => r.level === b.level));
+  const partitioned = starts.every((s, i) => (i === 0 ? s === 0 : s > starts[i - 1]));
+  const k = bosses.findIndex((b) => b.id === m.id);
+  if (!partitioned || k < 0) return ranks;
+  return ranks.slice(starts[k], k + 1 < starts.length ? starts[k + 1] : undefined);
+}
+
+/**
  * Contextes de calcul de stats d'un MONSTRE dans UN donjon donné.
  *
  * Variante « je sais dans quel combat je suis » de `monsterSpawnContexts`, qui
  * lui part du monstre et ramasse TOUTES ses rencontres. Ici le donjon est
- * connu : ses `adv`, ses `bossHp` et ses paliers s'appliquent, et rien d'autre.
+ * connu : ses `adv`, ses `bossHp` et SES paliers s'appliquent — ceux du
+ * monstre, pas ceux du donjon entier (cf. `ranksOfMonster`).
  */
 export function encounterSpawnContexts(
   e: Encounter,
@@ -131,6 +295,6 @@ export function encounterSpawnContexts(
       ...(d.bossHp ? { bossHp: d.bossHp } : {}),
       ...(m.hpLines ? { hpLines: m.hpLines } : {}),
     },
-    d.ranks,
+    ranksOfMonster(e, m),
   );
 }

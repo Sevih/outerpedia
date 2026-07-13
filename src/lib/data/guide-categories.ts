@@ -51,6 +51,13 @@ export interface GuideCategory {
   desc: LocalizedText & { en: string };
   /** Champs de meta exigés par la vue de cette catégorie. */
   requires?: readonly GuideRequirable[];
+  /**
+   * La page détail TITRE SUR LE BOSS : H1 centré au nom du monstre
+   * (`meta.bossId`), sous-titre « Strategy Guide », partage aligné à droite.
+   * Pour les modes où un guide EST la fiche d'un boss (Special Request) — le
+   * titre du meta reste celui du SEO et des cartes de liste.
+   */
+  bossTitle?: boolean;
   /** Bloc « comment marche ce mode » (optionnel — tous n'en ont pas besoin). */
   info?: GuideCategoryInfo;
 }
@@ -303,9 +310,12 @@ export const GUIDE_CATEGORIES = {
      * en dépend pour ranger les guides par mode (Identification / Ecology
      * Study) sans table slug→élément en dur. `order` porte l'ordre ÉDITORIAL
      * des colonnes et des cartes (Identification d'abord, comme en V2 — les
-     * ids de donjons du jeu mettraient Ecology en tête).
+     * ids de donjons du jeu mettraient Ecology en tête). `bossId` nomme la
+     * carte : le nom du BOSS, pas le titre du guide (souvent générique).
      */
-    requires: ['group', 'order'],
+    requires: ['group', 'order', 'bossId'],
+    /** La page détail titre sur le boss — un guide SR est la fiche d'un boss. */
+    bossTitle: true,
     label: {
       en: 'Special Request',
       jp: '特別依頼',

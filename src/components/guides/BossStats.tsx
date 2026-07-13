@@ -104,8 +104,11 @@ export function BossStats({
   rankOptionLabels?: Record<string, string>;
 }) {
   // Le palier vit dans le contexte : le NIVEAU qu'il fixe se lit aussi dans
-  // l'en-tête du boss, à l'autre bout du panneau (cf. BossRank).
-  const { options, selected, setSelected, ctx } = useBossRank();
+  // l'en-tête du boss, à l'autre bout du panneau (cf. BossRank). En mode
+  // SUIVEUR (`controlled`), le sélecteur de rencontre du haut de page pilote
+  // déjà cet axe : la grille rend les stats du stage choisi et n'affiche AUCUN
+  // sélecteur à elle.
+  const { options, selected, setSelected, ctx, controlled } = useBossRank();
 
   // PAS DE LIGNE « PV » DANS UN MODE À SCORE — et ce n'est pas un oubli.
   //
@@ -130,7 +133,7 @@ export function BossStats({
           pousse en haut de page et qu'on oublie : on le change POUR regarder les
           stats bouger. Les deux doivent tenir dans un même coup d'œil. */}
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
-        {hasRanks && options.length > 1 && (
+        {!controlled && hasRanks && options.length > 1 && (
           <div className="border-line-subtle bg-surface-raised flex flex-col gap-1 rounded-xl border px-3 py-4 lg:w-80 lg:shrink-0">
             <RankSlider
               options={options}
@@ -143,7 +146,7 @@ export function BossStats({
 
         <div className="min-w-0 flex-1 space-y-3">
           {/* Rencontres sans palier (difficultés nommées) : quelques boutons suffisent. */}
-          {!hasRanks && options.length > 1 && (
+          {!controlled && !hasRanks && options.length > 1 && (
             <div className="flex flex-wrap items-center gap-1 text-xs">
               <span className="text-content-muted mr-1">{labels.level}</span>
               {options.map((s, i) => (
@@ -167,24 +170,24 @@ export function BossStats({
           {/* Icône + valeur, comme l'écran du jeu. Le nom complet reste atteignable
               (survol, lecteur d'écran) : l'abréviation était une convention de wiki,
               l'icône est la langue du jeu. Faute d'icône (WG), l'abréviation revient. */}
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4">
             {grid.map(([slug, r]) => {
               const label = statLabels[slug];
               return (
                 <div
                   key={slug}
                   title={label?.name}
-                  className="border-line-subtle bg-surface-raised flex items-center gap-2 rounded-md border px-2.5 py-2"
+                  className="border-line-subtle bg-surface-raised flex items-center gap-1.5 rounded-md border px-2 py-1"
                 >
                   {label?.icon ? (
                     // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
                     <img
                       src={img.statIcon(label.icon)}
                       alt=""
-                      className="h-6 w-6 shrink-0 object-contain"
+                      className="h-5 w-5 shrink-0 object-contain"
                     />
                   ) : (
-                    <span className="text-content w-6 shrink-0 text-center text-[10px] font-semibold">
+                    <span className="text-content w-5 shrink-0 text-center text-[10px] font-semibold">
                       {label?.abbr ?? slug}
                     </span>
                   )}
@@ -220,7 +223,9 @@ export function BossStats({
         </div>
       )}
 
-      {options.length === 1 && (
+      {/* En mode SUIVEUR, rien : la glissière de stage porte déjà stage, niveau
+          et mode — cette ligne ne ferait que les répéter sous chaque carte. */}
+      {!controlled && options.length === 1 && (
         <p className="text-content-muted text-xs">
           {labels.level} {ctx.level}
           {ctx.label ? ` — ${ctx.label}` : ''}

@@ -8,7 +8,7 @@ import { createPageMetadata, buildUrl, buildBreadcrumbJsonLd, buildArticleJsonLd
 import JsonLd from '@/components/seo/JsonLd';
 import { localePath } from '@/lib/navigation';
 import { ShareButtons } from '@/components/ui/ShareButtons';
-import { GUIDE_CATEGORIES } from '@/lib/data/guide-categories';
+import { GUIDE_CATEGORIES, type GuideCategory } from '@/lib/data/guide-categories';
 import {
   formatGuideDate,
   getGuide,
@@ -51,11 +51,23 @@ export async function generateMetadata({
         { ogImage: monsterOgImage(boss), ogImageSize: { width: 128, height: 128 } }
       : undefined;
 
+  // Catégorie `bossTitle` : le SEO titre sur le boss, comme la page —
+  // « Nom du boss — Special Request » et la description préfixée de son nom
+  // (le reste de la phrase vient du meta, déjà localisé par mode).
+  const bossName =
+    (GUIDE_CATEGORIES[guide.category] as GuideCategory).bossTitle && boss
+      ? lRec(boss.name, lang) || boss.name.en
+      : undefined;
+
   return createPageMetadata({
     lang,
     path: `/guides/${category}/${slug}`,
-    title: lRec(guide.title, lang),
-    description: lRec(guide.description, lang),
+    title: bossName
+      ? `${bossName} — ${lRec(GUIDE_CATEGORIES[guide.category].label, lang)}`
+      : lRec(guide.title, lang),
+    description: bossName
+      ? `${bossName} — ${lRec(guide.description, lang)}`
+      : lRec(guide.description, lang),
     ...(guide.ogImage ? { ogImage: guide.ogImage } : {}),
     ...portrait,
     // og:type=article + dates (published = modified faute de date de création).
@@ -78,6 +90,11 @@ export default async function GuideDetail({
   const catLabel = lRec(GUIDE_CATEGORIES[guide.category].label, lang);
   const path = `/guides/${category}/${slug}`;
   const updated = guideUpdatedDate(guide);
+  // Catégorie qui titre sur le BOSS (cf. `bossTitle`, guide-categories.ts).
+  const boss =
+    (GUIDE_CATEGORIES[guide.category] as GuideCategory).bossTitle && guide.bossId
+      ? getMonster(guide.bossId)
+      : undefined;
 
   // Le data layer garantit l'existence d'index.tsx : un échec ici est un vrai
   // bug de contenu et doit CASSER le build, pas produire un 404 silencieux.
@@ -120,16 +137,37 @@ export default async function GuideDetail({
         <span className="mx-2">/</span>
         <span className="text-content-strong">{title}</span>
       </nav>
-      <header className="space-y-2">
-        <h1 className="text-content-strong text-3xl font-bold">{title}</h1>
-        <div className="text-content-muted flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
-          <span>
-            {t('page.guide.by', { author: guide.author })} ·{' '}
-            {t('page.guide.updated', { date: formatGuideDate(updated, lang) })}
-          </span>
-          <ShareButtons title={title} lang={lang} />
-        </div>
-      </header>
+      {boss ? (
+        /* Catégorie `bossTitle` : le guide EST la fiche d'un boss — H1 centré à
+           son NOM (le titre du meta, générique, reste au SEO et aux listes),
+           partage à droite, et le sous-titre annonce ce qu'on va lire. */
+        <header className="space-y-2">
+          {/* Les headings sont en `width: fit-content` (globals.css, trait de
+              titre du jeu) : centrer le TEXTE ne fait rien, on centre le bloc. */}
+          <h1 className="text-content-strong mx-auto text-3xl font-bold">
+            {lRec(boss.name, lang) || boss.name.en}
+          </h1>
+          <div className="text-content-muted flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-sm">
+            <span>
+              {t('page.guide.by', { author: guide.author })} ·{' '}
+              {t('page.guide.updated', { date: formatGuideDate(updated, lang) })}
+            </span>
+            <ShareButtons title={title} lang={lang} />
+          </div>
+          <h2 className="text-content-strong text-xl font-bold">{t('guides.strategy_guide')}</h2>
+        </header>
+      ) : (
+        <header className="space-y-2">
+          <h1 className="text-content-strong text-3xl font-bold">{title}</h1>
+          <div className="text-content-muted flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+            <span>
+              {t('page.guide.by', { author: guide.author })} ·{' '}
+              {t('page.guide.updated', { date: formatGuideDate(updated, lang) })}
+            </span>
+            <ShareButtons title={title} lang={lang} />
+          </div>
+        </header>
+      )}
       <article className="space-y-6">
         <GuideContent lang={lang} guide={guide} />
       </article>

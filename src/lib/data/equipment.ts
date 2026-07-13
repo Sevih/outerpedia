@@ -180,6 +180,25 @@ export function passiveEffects(refs: PassiveRef[]): EffectShape[] {
   return refs.flatMap((ref) => PASSIVES[ref.id]?.effects ?? []);
 }
 
+/** Réfs de passif d'une arme / amulette / talisman / EE, par id BRUT. */
+export function gearPassiveRefs(id: string): PassiveRef[] | undefined {
+  return (WEAPONS[id] ?? AMULETS[id] ?? TALISMANS[id] ?? EE[id])?.passives;
+}
+
+/**
+ * Texte du PREMIER passif d'un item à un PALIER donné (1-based — gear : un
+ * palier par breakthrough, 1..5). Au-delà des paliers connus, le dernier fait
+ * foi. Texte BRUT (sans balises couleur) : c'est la forme des tooltips.
+ */
+export function passiveTextAt(refs: PassiveRef[], tier: number, lang: Lang): string | undefined {
+  const ref = refs[0];
+  const p = ref ? PASSIVES[ref.id] : undefined;
+  if (!p) return undefined;
+  const desc = lRec(p.desc, lang) || p.desc.en;
+  const v = p.values[Math.min(tier, p.values.length) - 1];
+  return v ? fillPlaceholders(desc, v, false) : desc;
+}
+
 /** Paliers de passif d'un item, résolus (textes remplis, localisés). */
 export function resolvePassives(refs: PassiveRef[], lang: Lang): ResolvedPassive[] {
   const out: ResolvedPassive[] = [];

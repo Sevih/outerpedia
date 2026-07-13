@@ -77,8 +77,8 @@ const en = {
   'equip.items.box': 'Boxes',
   'equip.source.event_shop': 'Event Shop',
   'equip.source.adventure_license': 'Adventure License',
-  'equip.set.2piece': '2 set',
-  'equip.set.4piece': '4 set',
+  'equip.set.2piece': '2 pieces',
+  'equip.set.4piece': '4 pieces',
   'equip.filter.source': 'Source',
   'equip.filter.level': 'Level',
   'equip.filter.class': 'Class',
@@ -611,6 +611,12 @@ const en = {
   'guides.team_selector': 'Suggested Teams',
   'guides.team.prev_option': 'Previous option',
   'guides.team.next_option': 'Next option',
+  // RÉCOMPENSES d'un donjon (tables `rewardTables` — poursuite irregular…).
+  'guides.rewards.title': 'Rewards',
+  'guides.rewards.win': 'Victory',
+  'guides.rewards.lose': 'Defeat',
+  'guides.rewards.battle': 'Each battle',
+  'guides.rewards.random': 'Random drop',
   'guides.strategy_guide': 'Strategy Guide',
   'guides.boss_display.immunities': 'Immunities',
   'guides.boss_display.skills': 'Skills',
@@ -618,6 +624,7 @@ const en = {
   'guides.boss_display.rank_options': 'Rank passives',
   'guides.boss_display.rank_prev': 'Previous rank',
   'guides.boss_display.rank_next': 'Next rank',
+  'guides.boss_display.add': 'Add',
   // DIFFICULTÉS — accrochées aux CLÉS stables du jeu (`difficulty.key`). Le jeu
   // fournit son propre libellé en en/jp/kr/zh et JAMAIS en français : ces
   // entrées sont le repli, et la seule source possible côté FR.
@@ -631,6 +638,8 @@ const en = {
   'guides.difficulty.league_3': 'Very Hard League',
   'guides.difficulty.league_4': 'Extreme League',
   'guides.difficulty.tips_for': 'Tips and teams below are written for {difficulty}.',
+  'guides.difficulty.stage_prev': 'Previous stage',
+  'guides.difficulty.stage_next': 'Next stage',
   'guides.adventure.season': 'Season {n}',
   'guides.adventure.spoiler_free': 'Spoiler-free',
   'guides.adventure.spoiler': 'Show names',
