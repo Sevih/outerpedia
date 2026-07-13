@@ -32,6 +32,18 @@
   "SYS_ASSET_GOLD": {
     "icon": "CM_TopMenu_Gold"
   },
+  "SYS_ASSET_IRREGULAR_CHASE_1": {
+    "icon": "TI_Item_Irregular_01"
+  },
+  "SYS_ASSET_IRREGULAR_CHASE_2": {
+    "icon": "TI_Item_Irregular_02"
+  },
+  "SYS_ASSET_IRREGULAR_CHASE_3": {
+    "icon": "TI_Item_Irregular_03"
+  },
+  "SYS_ASSET_IRREGULAR_CHASE_4": {
+    "icon": "TI_Item_Irregular_04"
+  },
   "SYS_ASSET_MEMORY_STAR": {
     "icon": "TI_Item_Memory_Of_Star"
   },

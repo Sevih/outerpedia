@@ -1,6 +1,6 @@
 {
   "51": {
-    "icon": "IG_Buff_BuffdurationIncrease"
+    "icon": "IG_Buff_BuffdurationReduce"
   },
   "61": {
     "icon": "IG_Buff_Action_Gauge_Up",
@@ -22,6 +22,14 @@
   "75": {
     "keys": ["BT_FIXED_DAMAGE", "BT_REVERSE_HEAL_BASED_TARGET", "BT_REVERSE_HEAL_BASED_CASTER"],
     "note": "dégats FIXES : encodés en reverse-heal (aucun texte/tooltip sur les buffs) — clés type → statut « Fixed Damage », dialecte V2 BT_FIXED_DAMAGE inclus"
+  },
+  "100": {
+    "desc": {
+      "en": "Steal buff from the target.",
+      "jp": "対象の強化効果を奪う。",
+      "kr": "대상의 강화 효과를 빼앗습니다.",
+      "zh": "夺取目标的强化效果。"
+    }
   },
   "1002": {
     "icon": "IG_Buff_Dot_Curse_Interruption_D"
@@ -222,6 +230,16 @@
     },
     "keys": ["BT_CP_CHARGE"]
   },
+  "SYS_BUFF_EXTEND_DEBUFF_UP": {
+    "desc": {
+      "en": "Increased duration of detrimental effects granted on target.",
+      "jp": "対象に付与された弱体効果の持続時間が増加する。",
+      "kr": "대상에게 부여된 약화 효과의 지속 시간이 증가합니다.",
+      "zh": "使目标身上的弱化效果持续时间增加。"
+    },
+    "icon": "IG_Buff_BuffdurationIncrease",
+    "keys": ["BT_EXTEND_DEBUFF", "INCREASE_DEBUFF_DURATION"]
+  },
   "SYS_BUFF_REDUCE_AP": {
     "name": {
       "en": "Discharge AP",
@@ -239,14 +257,6 @@
     "keys": ["BT_AP_CHARGE", "DISCHARGE_AP"],
     "tag": "utility",
     "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
-  },
-  "100": {
-    "desc": {
-      "en": "Steal buff from the target.",
-      "jp": "対象の強化効果を奪う。",
-      "kr": "대상의 강화 효과를 빼앗습니다.",
-      "zh": "夺取目标的强化效果。"
-    }
   },
   "UNCOUNTERABLE": {
     "name": {

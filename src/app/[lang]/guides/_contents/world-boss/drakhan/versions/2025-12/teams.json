@@ -1,0 +1,34 @@
+{
+  "sections": [
+    {
+      "title": {
+        "en": "Phase 1",
+        "jp": "フェーズ1",
+        "kr": "페이즈 1",
+        "zh": "阶段1",
+        "fr": "Phase 1"
+      },
+      "slots": [
+        ["Viella", "Gnosis Viella"],
+        ["Core Fusion Veronica", "Tamamo-no-Mae", "Regina"],
+        ["Gnosis Dahlia", "Delta", "Demiurge Stella"],
+        ["Hilde", "Omega Nadja"]
+      ]
+    },
+    {
+      "title": {
+        "en": "Phase 2",
+        "jp": "フェーズ2",
+        "kr": "페이즈 2",
+        "zh": "阶段2",
+        "fr": "Phase 2"
+      },
+      "slots": [
+        ["Monad Eva"],
+        ["Valentine", "Luna", "Core Fusion Veronica", "Laine", "Viella"],
+        ["Demiurge Vlada", "Tamara", "Ryu Lion"],
+        ["Notia", "Mystic Sage Ame", "Holy Night's Blessing Dianne"]
+      ]
+    }
+  ]
+}

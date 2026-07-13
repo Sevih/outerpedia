@@ -1,0 +1,20 @@
+{
+  "title": {
+    "en": "Primordial Sentinel",
+    "jp": "太古の番兵",
+    "kr": "태고의 파수병",
+    "zh": "远古哨兵",
+    "fr": "Primordial Sentinel"
+  },
+  "description": {
+    "en": "Complete guide from Normal to Extreme League — skills, teams & strategies",
+    "jp": "ノーマルからエクストリームリーグまでの完全ガイド — スキル、チーム編成、攻略法",
+    "kr": "노멀부터 익스트림 리그까지 완전 가이드 — 스킬, 팀 편성, 공략법",
+    "zh": "从普通到极限联赛的完整攻略 — 技能、队伍编成与策略",
+    "fr": "Guide complet de Normal à Extreme League — compétences, équipes et stratégies"
+  },
+  "icon": "T_Banner_World_Boss_02",
+  "author": "Sevih",
+  "updated": "2026-03-13",
+  "bossId": "4086011"
+}

@@ -96,7 +96,7 @@ export function TeamSlotCarousel({
    * 1,4 de la V2. Le terme en `count` recule un peu la roue quand les options se
    * pressent, pour qu'à huit cartes elles ne se traversent pas.
    */
-  const radius = Math.round(scene.width) + Math.max(0, count - 5) * 10;
+  const radius = Math.round(scene.width * 1.4) + Math.max(0, count - 5) * 10;
   const active = ((index % count) + count) % count;
 
   /** Va vers l'option `i` par le PLUS COURT chemin — jamais un tour complet. */
@@ -174,7 +174,15 @@ export function TeamSlotCarousel({
                 } ${i === active && !dragging ? '' : 'pointer-events-none'}`}
                 style={{ transform: `rotateY(${step * i}deg) translateZ(${radius}px)` }}
               >
-                {child}
+                {/* Le flou vit sur un div INTÉRIEUR, jamais sur le wrapper
+                    transformé : un `filter` y créerait un contexte d'empilement
+                    qui aplatit le `preserve-3d` — même piège que l'opacité du
+                    hover (cf. NO_HOVER_FADE). */}
+                <div
+                  className={`transition-[filter] duration-300 ${i === active ? '' : 'blur-[3px] grayscale-75'}`}
+                >
+                  {child}
+                </div>
               </div>
             );
           })}

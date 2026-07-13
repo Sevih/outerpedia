@@ -1,0 +1,34 @@
+{
+  "sections": [
+    {
+      "title": {
+        "en": "Phase 1",
+        "jp": "フェーズ1",
+        "kr": "페이즈 1",
+        "zh": "阶段1",
+        "fr": "Phase 1"
+      },
+      "slots": [
+        ["Viella", "Saeran", "Veronica"],
+        ["Notia", "Laine"],
+        ["Valentine", "Fran", "Tamamo-no-Mae", "Caren", "Poolside Trickster Regina"],
+        ["Tamara", "Ryu Lion", "Laplace", "Luna", "Ame", "Christina", "Noa"]
+      ]
+    },
+    {
+      "title": {
+        "en": "Phase 2",
+        "jp": "フェーズ2",
+        "kr": "페이즈 2",
+        "zh": "阶段2",
+        "fr": "Phase 2"
+      },
+      "slots": [
+        ["Monad Eva", "Demiurge Delta"],
+        ["Demiurge Vlada", "Gnosis Viella", "Francesca", "Regina"],
+        ["Demiurge Stella", "Iota", "Stella"],
+        ["Gnosis Nella", "Gnosis Beth", "Akari", "Demiurge Drakhan"]
+      ]
+    }
+  ]
+}

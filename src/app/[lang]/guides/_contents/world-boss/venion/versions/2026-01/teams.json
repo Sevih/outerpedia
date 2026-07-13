@@ -1,0 +1,42 @@
+{
+  "sections": [
+    {
+      "title": {
+        "en": "Light and Dark",
+        "jp": "光・闇属性",
+        "kr": "명·암속성",
+        "zh": "光与暗属性",
+        "fr": "Light et Dark"
+      },
+      "slots": [
+        ["Gnosis Dahlia", "Regina"],
+        ["Drakhan", "Demiurge Stella", "Demiurge Astei"],
+        ["Demiurge Luna", "Maxwell", "Demiurge Astei"],
+        [
+          "Monad Eva",
+          "Demiurge Drakhan",
+          "Drakhan",
+          "Demiurge Stella",
+          "Demiurge Astei",
+          "Demiurge Luna",
+          "Maxwell"
+        ]
+      ]
+    },
+    {
+      "title": {
+        "en": "Fire, Water & Earth",
+        "jp": "火・水・地属性",
+        "kr": "화·수·지속성",
+        "zh": "火、水、土属性",
+        "fr": "Fire, Water et Earth"
+      },
+      "slots": [
+        ["Tamara", "Tamamo-no-Mae"],
+        ["Veronica", "Mene"],
+        ["Caren", "Kanon"],
+        ["Lyla", "Mene", "Laplace"]
+      ]
+    }
+  ]
+}

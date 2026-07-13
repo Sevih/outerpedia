@@ -10,11 +10,18 @@ export function GuideCard({
   guide,
   lang,
   updatedText,
+  iconSrc,
 }: {
   guide: Guide;
   lang: Lang;
   /** Ligne méta déjà localisée (« Updated Mar 24, 2026 · Sevih »). */
   updatedText: string;
+  /**
+   * Vignette de REMPLACEMENT (URL complète) — pour une vue qui montre autre
+   * chose que l'icône du meta (le portrait du boss, déjà servi sous son
+   * namespace : on ne recopie pas un sprite pour changer de cadrage).
+   */
+  iconSrc?: string;
 }) {
   return (
     <Link
@@ -23,7 +30,7 @@ export function GuideCard({
     >
       {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img
-        src={img.guideIcon(guide.icon)}
+        src={iconSrc ?? img.guideIcon(guide.icon)}
         alt=""
         className="h-12 w-12 shrink-0 object-contain"
         loading="lazy"

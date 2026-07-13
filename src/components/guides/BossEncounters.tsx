@@ -18,6 +18,7 @@ import type { Lang } from '@/lib/i18n/config';
 import { difficultyLabel, encounterSpawnContexts, encountersOfGroup } from '@/lib/data/encounters';
 import { BossCard } from './BossPanel';
 import { EncounterPane, EncounterSelection, EncounterTabs } from './EncounterSelection';
+import { EncounterRewards } from './EncounterRewards';
 
 export async function BossEncounters({
   group,
@@ -27,10 +28,17 @@ export async function BossEncounters({
    * pour laquelle les guides sont écrits (la V2 ne montrait même que celle-là).
    */
   defaultIndex,
+  /**
+   * Affiche le BUTIN de chaque difficulté sous ses cartes (OPT-IN : la
+   * poursuite irregular vit de ses tables win/lose, le joint challenge n'a
+   * rien d'intéressant à montrer là).
+   */
+  rewards = false,
 }: {
   group: string;
   lang: Lang;
   defaultIndex?: number;
+  rewards?: boolean;
 }) {
   const t = await getT(lang);
   const encounters = encountersOfGroup(group);
@@ -73,6 +81,7 @@ export async function BossEncounters({
                   lang={lang}
                 />
               ))}
+              {rewards && <EncounterRewards encounter={e} lang={lang} />}
             </div>
           </EncounterPane>
         ))}

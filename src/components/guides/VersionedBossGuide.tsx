@@ -21,6 +21,8 @@ interface GuideStrings {
   intro: LocalizedText & { en: string };
 }
 
+type LText = LocalizedText & { en: string };
+
 /** `versions/<clé>/config.json` — ce que la version combat, et avec quelles vidéos. */
 interface VersionConfig {
   /**
@@ -30,29 +32,72 @@ interface VersionConfig {
    * les deux autres n'existaient nulle part.
    */
   group?: string;
+  /**
+   * Paragraphes libres de la version (parseText) — le format d'avant les
+   * sections structurées : certaines archives ne sont QUE ça, un texte et une
+   * vidéo. Rendus entre les conseils et les persos.
+   */
+  notes?: LText[];
   videos?: VideoItem[];
 }
 
+/**
+ * SECTIONS TITRÉES — la forme générique des trois fichiers de contenu.
+ *
+ * Le Joint Challenge n'a qu'une liste de conseils, une liste de persos, une
+ * équipe : ses fichiers gardent leur forme COURTE (`{ tactical }`, `[...]`,
+ * `{ slots }`), lue comme une section unique sans titre. Le World Boss, lui,
+ * découpe TOUT par phase ou par archétype d'équipe — et les titres sont du
+ * CONTENU (« Phase 2 », « No Debuff Team », « Light and Dark »), pas une
+ * énumération connue d'avance : ils voyagent donc localisés dans le JSON,
+ * jamais dans une liste de clés codée en dur ici.
+ */
+interface TipsSection {
+  title?: LText;
+  tips: LText[];
+}
 /** `versions/<clé>/tips.json` */
 interface VersionTips {
-  tactical: (LocalizedText & { en: string })[];
+  tactical?: LText[];
+  sections?: TipsSection[];
 }
 
-/** `versions/<clé>/recommended.json` */
-type VersionRecommended = Array<{
+interface RecommendedGroup {
   characters: string[];
-  reason?: LocalizedText & { en: string };
-}>;
+  reason?: LText;
+}
+interface RecommendedSection {
+  title?: LText;
+  groups: RecommendedGroup[];
+}
+/** `versions/<clé>/recommended.json` */
+type VersionRecommended = RecommendedGroup[] | { sections: RecommendedSection[] };
 
+interface TeamSection {
+  title?: LText;
+  slots: string[][];
+  note?: LText;
+}
 /** `versions/<clé>/teams.json` */
 interface VersionTeams {
-  slots: string[][];
-  note?: LocalizedText & { en: string };
+  slots?: string[][];
+  note?: LText;
+  sections?: TeamSection[];
 }
+
+const tipsSections = (tips: VersionTips | undefined): TipsSection[] =>
+  tips?.sections ?? (tips?.tactical ? [{ tips: tips.tactical }] : []);
+
+const recommendedSections = (reco: VersionRecommended | undefined): RecommendedSection[] =>
+  reco === undefined ? [] : Array.isArray(reco) ? [{ groups: reco }] : reco.sections;
+
+const teamSections = (teams: VersionTeams | undefined): TeamSection[] =>
+  teams?.sections ??
+  (teams?.slots ? [{ slots: teams.slots, ...(teams.note ? { note: teams.note } : {}) }] : []);
 
 /**
  * RENDU PARTAGÉ d'un guide de boss VERSIONNÉ — un mode qui rejoue le même boss
- * saison après saison (joint challenge, et demain guild raid / world boss).
+ * saison après saison (joint challenge, world boss, et demain guild raid).
  *
  * Les 5 guides Joint Challenge de la V2 sont ISOMORPHES : chaque version enchaîne
  * panneau du boss → conseils → persos → équipe → vidéos, plus une version
@@ -110,9 +155,11 @@ export async function VersionedBossGuide({ lang, guide }: GuideContentProps) {
   const versions: GuideVersionEntry[] = guide.versions.map((v, i) => {
     const cfg = readGuideVersionFile<VersionConfig>(guide, v.key, 'config.json');
     const target = cfg?.group ? hardestDifficultyLabel(cfg.group, lang, t) : undefined;
-    const tips = readGuideVersionFile<VersionTips>(guide, v.key, 'tips.json');
-    const recommended = readGuideVersionFile<VersionRecommended>(guide, v.key, 'recommended.json');
-    const teams = readGuideVersionFile<VersionTeams>(guide, v.key, 'teams.json');
+    const tips = tipsSections(readGuideVersionFile<VersionTips>(guide, v.key, 'tips.json'));
+    const recommended = recommendedSections(
+      readGuideVersionFile<VersionRecommended>(guide, v.key, 'recommended.json'),
+    );
+    const teams = teamSections(readGuideVersionFile<VersionTeams>(guide, v.key, 'teams.json'));
     const label = guideVersionLabel(v, lang);
 
     return {
@@ -136,42 +183,62 @@ export async function VersionedBossGuide({ lang, guide }: GuideContentProps) {
               fait viser (la plus dure). Le dire, plutôt que de laisser croire
               qu'ils valent pour les trois : le lecteur qui bascule sur Normal
               doit savoir que ce qu'il lit dessous ne parle pas de son combat. */}
-          {tips && target && (
+          {tips.length > 0 && target && (
             <p className="text-content text-xs italic">
               {t('guides.difficulty.tips_for', { difficulty: target })}
             </p>
           )}
 
-          {tips && (
+          {tips.map((s, j) => (
             <TacticalTips
-              title={t('guides.tips.tactical')}
-              tips={tips.tactical.map((tip) => parseText(lRec(tip, lang), ctx))}
+              key={j}
+              title={s.title ? lRec(s.title, lang) || s.title.en : t('guides.tips.tactical')}
+              tips={s.tips.map((tip) => parseText(lRec(tip, lang), ctx))}
             />
-          )}
+          ))}
 
-          {recommended && (
+          {cfg?.notes?.map((note, j) => (
+            <p key={j} className="text-content text-sm leading-relaxed">
+              {parseText(lRec(note, lang), ctx)}
+            </p>
+          ))}
+
+          {recommended.map((s, j) => (
             <RecommendedCharacters
-              title={t('guides.recommended.title')}
+              key={j}
+              // Le titre de section QUALIFIE l'en-tête générique (« Phase 2 —
+              // Personnages recommandés »), il ne le remplace pas : hors
+              // contexte, « Phase 2 » seul n'annonce pas une liste de persos.
+              title={
+                s.title
+                  ? `${lRec(s.title, lang) || s.title.en} — ${t('guides.recommended.title')}`
+                  : t('guides.recommended.title')
+              }
               lang={lang}
-              groups={recommended.map((g) => ({
+              groups={s.groups.map((g) => ({
                 characters: g.characters,
                 reason: g.reason ? parseText(lRec(g.reason, lang), ctx) : undefined,
               }))}
             />
-          )}
+          ))}
 
-          {teams && (
+          {teams.map((s, j) => (
             <TeamSlots
-              title={t('guides.team_selector')}
+              key={j}
+              title={
+                s.title
+                  ? `${t('guides.team_selector')} — ${lRec(s.title, lang) || s.title.en}`
+                  : t('guides.team_selector')
+              }
               lang={lang}
-              slots={teams.slots}
-              note={teams.note ? parseText(lRec(teams.note, lang), ctx) : undefined}
+              slots={s.slots}
+              note={s.note ? parseText(lRec(s.note, lang), ctx) : undefined}
               labels={{
                 prev: t('guides.team.prev_option'),
                 next: t('guides.team.next_option'),
               }}
             />
-          )}
+          ))}
 
           {cfg?.videos?.length ? (
             <section className="space-y-2">

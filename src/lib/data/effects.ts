@@ -163,16 +163,27 @@ export function getExtractedEffect(id: string): Effect | undefined {
   return EFFECTS[id];
 }
 
-/** Effet canonique pour un id de tooltip (résout une variante). */
-export function effectForTooltip(tooltipId: string): Effect | undefined {
+/**
+ * Effet canonique pour un id de tooltip (résout une variante) — FUSIONNÉ.
+ *
+ * Fusionné, pas extrait brut : ces résolveurs servent l'AFFICHAGE (immunités
+ * des cartes de boss, chips d'équipement), et l'affichage doit voir la
+ * curation. Le bug qu'on a payé : l'effet 61 « Priority Increase » a un
+ * override d'icône curé (`IG_Buff_Action_Gauge_Up`, l'icône de combat) — la
+ * variante brute (`SC_Buff_Effect_Increase_Priority`, l'icône d'encyclopédie
+ * du jeu) repartait à l'écran parce que la résolution par tooltip
+ * court-circuitait la fusion. Le brut reste accessible via
+ * `getExtractedEffect` (admin).
+ */
+export function effectForTooltip(tooltipId: string): MergedEffect | undefined {
   const id = BY_TOOLTIP[tooltipId];
-  return id ? EFFECTS[id] : undefined;
+  return id ? getMergedEffect(id) : undefined;
 }
 
-/** Effet canonique pour un label (symbole CreateText d'un effet mécanique). */
-export function effectForLabel(label: string): Effect | undefined {
+/** Effet canonique pour un label (symbole CreateText) — FUSIONNÉ, même règle. */
+export function effectForLabel(label: string): MergedEffect | undefined {
   const id = BY_LABEL[label];
-  return id ? EFFECTS[id] : undefined;
+  return id ? getMergedEffect(id) : undefined;
 }
 
 // --- Référence V2 (oracle legacy), pour l'admin uniquement -------------------

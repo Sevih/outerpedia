@@ -50,7 +50,7 @@ export function MonsterSkills({
               <img
                 src={skill.iconSrc ?? img.skill(skill.icon!)}
                 alt=""
-                className="h-10 w-10 shrink-0 object-contain"
+                className="h-8 w-8 shrink-0 object-contain"
                 loading="lazy"
               />
             )}
@@ -76,7 +76,7 @@ export function MonsterSkills({
                   desc={skill.desc}
                   vars={lv?.vars}
                   lang={lang}
-                  className="text-content text-sm leading-relaxed whitespace-pre-line"
+                  className="text-content text-xs leading-relaxed whitespace-pre-line"
                 />
               )}
             </div>

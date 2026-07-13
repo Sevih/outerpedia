@@ -1,0 +1,34 @@
+{
+  "sections": [
+    {
+      "title": {
+        "en": "No Debuff Team",
+        "jp": "デバフなし編成",
+        "kr": "디버프 없는 팀",
+        "zh": "无减益队伍",
+        "fr": "Équipe sans debuff"
+      },
+      "slots": [
+        ["Dianne", "Demiurge Drakhan", "Leo", "Kappa"],
+        ["Gnosis Dahlia", "Rey", "Ame", "Ryu Lion"],
+        ["Valentine", "Fran", "Charlotte", "Nella", "Astei"],
+        ["Gnosis Domine", "Demiurge Luna", "Maxwell", "Regina", "Demiurge Astei"]
+      ]
+    },
+    {
+      "title": {
+        "en": "Ranger Team",
+        "jp": "スピード型編成",
+        "kr": "속도형 팀",
+        "zh": "速度型队伍",
+        "fr": "Équipe Ranger"
+      },
+      "slots": [
+        ["Gnosis Beth", "Bell Cranel", "Vlada"],
+        ["Mystic Sage Ame", "Notia", "Akari", "Tamara"],
+        ["Maxie", "Roxie", "Ember", "Fran"],
+        ["Monad Eva"]
+      ]
+    }
+  ]
+}
