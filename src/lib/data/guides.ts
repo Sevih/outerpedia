@@ -51,6 +51,14 @@ export interface GuideMeta {
   /** Monstre lié (og:image, futur affichage) — id V3, jamais un chemin. */
   bossId?: string;
   /**
+   * Le COMBAT que le guide traite (`DungeonRef.group`) — pour un mode PERMANENT
+   * (Special Request…), où il n'y a pas de saison qui le porterait dans un
+   * `versions/<clé>/config.json`. Opaque : il se lit dans
+   * `data/generated/encounters.json`, il ne se fabrique jamais. Un group inconnu
+   * casse le build au rendu (`BossEncounters`/`groupCombatants` jettent).
+   */
+  group?: string;
+  /**
    * Palier pédagogique (`general-guides` uniquement, où il est OBLIGATOIRE —
    * cf. `requires` de la catégorie). Remplace la map `TIER_BY_SLUG` que la V2
    * tenait à la main dans son composant de liste.
@@ -88,6 +96,7 @@ const META_KEYS = new Set([
   'ogImage',
   'hidden',
   'tier',
+  'group',
 ]);
 const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const VERSION_DIR_RE = /^\d{4}-(0[1-9]|1[0-2])$/;
@@ -136,6 +145,10 @@ function parseMeta(raw: unknown, at: string, issues: string[]): GuideMeta | null
   }
   if (m.order !== undefined && typeof m.order !== 'number') {
     issues.push(`${at} : « order » doit être un nombre`);
+    ok = false;
+  }
+  if (m.group !== undefined && (typeof m.group !== 'string' || !m.group)) {
+    issues.push(`${at} : « group » doit être une chaîne non vide (DungeonRef.group)`);
     ok = false;
   }
   if (m.tier !== undefined && (typeof m.tier !== 'string' || !isGuideTier(m.tier))) {

@@ -1,0 +1,22 @@
+{
+  "buckets": [
+    {
+      "stages": [1, 10],
+      "slots": [
+        ["Akari", "Gnosis Nella", "Alice", "Edelweiss"],
+        ["Kuro", "Stella", "Edelweiss"],
+        ["Drakhan", "Gnosis Beth", "Regina", "Demiurge Luna", "Demiurge Stella"],
+        ["Monad Eva", "Dianne"]
+      ]
+    },
+    {
+      "stages": [11, 13],
+      "slots": [
+        ["Akari", "Gnosis Nella", "Alice", "Edelweiss"],
+        ["Kuro", "Stella", "Edelweiss"],
+        ["Drakhan", "Gnosis Beth", "Regina", "Demiurge Luna", "Demiurge Stella"],
+        ["Monad Eva", "Dianne"]
+      ]
+    }
+  ]
+}

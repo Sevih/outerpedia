@@ -1,0 +1,22 @@
+{
+  "title": {
+    "en": "Strategy Guide",
+    "jp": "攻略ガイド",
+    "kr": "공략 가이드",
+    "zh": "攻略指南",
+    "fr": "Guide de stratégie"
+  },
+  "description": {
+    "en": "Strategy guide for Special Request: Ecology Study mission",
+    "jp": "特別依頼：生態調査ミッションの攻略ガイド",
+    "kr": "특별 의뢰: 생태 조사 미션 공략 가이드",
+    "zh": "特殊委托：生态调查任务攻略指南",
+    "fr": "Guide de stratégie pour la mission Special Request : Ecology Study"
+  },
+  "icon": "CLG_Raid_Armor_Fire",
+  "author": "Ducky",
+  "updated": "2024-09-19",
+  "order": 6,
+  "bossId": "404400162",
+  "group": "raid_1:SYS_RAID_1_DUNGEON_F"
+}

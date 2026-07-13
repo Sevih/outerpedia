@@ -1,0 +1,22 @@
+{
+  "buckets": [
+    {
+      "stages": [1, 10],
+      "slots": [
+        ["Nella", "Demiurge Delta"],
+        ["Demiurge Vlada", "Eliza", "Sterope"],
+        ["Demiurge Astei", "Francesca"],
+        ["Maxwell", "Gnosis Viella", "Gnosis Dahlia"]
+      ]
+    },
+    {
+      "stages": [11, 13],
+      "slots": [
+        ["Nella", "Demiurge Delta"],
+        ["Demiurge Vlada", "Eliza", "Sterope"],
+        ["Demiurge Astei", "Francesca"],
+        ["Maxwell", "Gnosis Viella", "Gnosis Dahlia"]
+      ]
+    }
+  ]
+}

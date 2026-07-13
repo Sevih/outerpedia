@@ -1,0 +1,22 @@
+{
+  "title": {
+    "en": "Dek'Ril & Mek'Ril Special Request Guide",
+    "jp": "デクリル＆メクリル特殊依頼攻略ガイド",
+    "kr": "데크릴 & 메크릴 특수의뢰 공략 가이드",
+    "zh": "德克里尔&梅克里尔特殊委托攻略指南",
+    "fr": "Guide de la Requête spéciale Dek'Ril & Mek'Ril"
+  },
+  "description": {
+    "en": "Twin beetle bosses strategy for Special Request: Identification mission",
+    "jp": "特別依頼：正体究明ミッションの双子カブトムシボス攻略",
+    "kr": "특별 의뢰: 정체 규명 미션 쌍둥이 딱정벌레 보스 공략",
+    "zh": "特殊委托：身份确认任务的双子甲虫首领攻略",
+    "fr": "Stratégie pour les Boss scarabées jumeaux de la mission Special Request : Identification"
+  },
+  "icon": "CLG_Raid_Weapon_Earth",
+  "author": "Arabyss & Kilvanoshei",
+  "updated": "2025-04-08",
+  "order": 1,
+  "bossId": "407600362",
+  "group": "raid_2:SYS_RAID_2_DUNGEON_E"
+}

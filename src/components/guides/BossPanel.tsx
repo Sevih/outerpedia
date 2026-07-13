@@ -24,10 +24,9 @@ import {
   buildStatusMap,
   dedupSkills,
   immunityChipEffects,
-  mergeStatusEffects,
   monsterSkillViews,
 } from '@/lib/skill-view';
-import { effectForTooltip, getMergedEffect } from '@/lib/data/effects';
+import { effectForTooltip, getMergedEffect, mergeStatusEffects } from '@/lib/data/effects';
 import {
   getMonster,
   getMonsterSkills,

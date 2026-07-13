@@ -1,0 +1,36 @@
+{
+  "buckets": [
+    {
+      "stages": [1, 10],
+      "slots": [
+        ["Kappa", "Monad Eva", "Saeran", "Viella"],
+        ["Charlotte", "Rhona", "Fran"],
+        ["Rey", "Ryu Lion", "Delta"],
+        ["Ame", "Noa", "Kitsune of Eternity Tamamo-no-Mae"]
+      ],
+      "note": {
+        "en": "Don't forget you can use your friends' units to help you beat those stages.",
+        "jp": "フレンドのユニットを使ってステージをクリアすることもできます。",
+        "kr": "친구의 유닛을 사용하여 스테이지를 클리어할 수 있다는 것을 잊지 마세요.",
+        "zh": "别忘了可以使用好友的角色来帮助通关。",
+        "fr": "N'oubliez pas que vous pouvez utiliser les unités de vos amis pour vous aider à passer ces stages."
+      }
+    },
+    {
+      "stages": [11, 13],
+      "slots": [
+        ["Kappa", "Monad Eva", "Saeran", "Viella"],
+        ["Charlotte", "Rhona", "Fran"],
+        ["Rey", "Ryu Lion", "Delta"],
+        ["Ame", "Noa", "Kitsune of Eternity Tamamo-no-Mae"]
+      ],
+      "note": {
+        "en": "Manage summoned adds carefully and avoid triggering freeze mechanics.",
+        "jp": "召喚された雑魚を慎重に管理し、凍結メカニズムの発動を避けましょう。",
+        "kr": "소환된 쫄을 신중하게 관리하고 빙결 메커니즘 발동을 피하세요.",
+        "zh": "谨慎管理召唤的小怪，避免触发冻结机制。",
+        "fr": "Gérez soigneusement les adds invoqués et évitez de déclencher les mécaniques de freeze."
+      }
+    }
+  ]
+}

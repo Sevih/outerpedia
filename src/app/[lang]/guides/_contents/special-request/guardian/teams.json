@@ -1,0 +1,128 @@
+{
+  "buckets": [
+    {
+      "stages": [1, 10],
+      "slots": [
+        [
+          "Veronica",
+          "Christina",
+          "Ember",
+          "Tio",
+          "Lyla",
+          "Monad Eva",
+          "Ritri",
+          "Mene",
+          "Liselotte",
+          "Luna",
+          "Sterope",
+          "Laplace"
+        ],
+        [
+          "Tamara",
+          "Valentine",
+          "Skadi",
+          "Akari",
+          "Eternal",
+          "Edelweiss",
+          "Maxie",
+          "Caren",
+          "Adelie",
+          "Bryn",
+          "Beth",
+          "Holy Night's Blessing Dianne"
+        ],
+        [
+          "Rin",
+          "Roxie",
+          "Maxwell",
+          "Demiurge Astei",
+          "Gnosis Dahlia",
+          "Poolside Trickster Regina",
+          "Summer Knight's Dream Ember"
+        ],
+        [
+          "Fortuna",
+          "Marian",
+          "Vlada",
+          "Eliza",
+          "Sigma",
+          "Demiurge Luna",
+          "Demiurge Stella",
+          "Demiurge Vlada",
+          "Gnosis Beth",
+          "Gnosis Viella",
+          "Bell Cranel"
+        ]
+      ],
+      "note": {
+        "en": "Don't forget you can use your friends' units to help you beat those stages.",
+        "jp": "フレンドのユニットを使ってステージをクリアすることもできます。",
+        "kr": "친구의 유닛을 사용하여 스테이지를 클리어할 수 있다는 것을 잊지 마세요.",
+        "zh": "别忘了可以使用好友的角色来帮助通关。",
+        "fr": "N'oubliez pas que vous pouvez utiliser les unités de vos amis pour vous aider à passer ces stages."
+      }
+    },
+    {
+      "stages": [11, 13],
+      "slots": [
+        [
+          "Veronica",
+          "Christina",
+          "Ember",
+          "Tio",
+          "Lyla",
+          "Monad Eva",
+          "Ritri",
+          "Mene",
+          "Liselotte",
+          "Luna",
+          "Sterope",
+          "Laplace"
+        ],
+        [
+          "Tamara",
+          "Valentine",
+          "Skadi",
+          "Akari",
+          "Eternal",
+          "Edelweiss",
+          "Maxie",
+          "Caren",
+          "Adelie",
+          "Bryn",
+          "Beth",
+          "Holy Night's Blessing Dianne"
+        ],
+        [
+          "Rin",
+          "Roxie",
+          "Maxwell",
+          "Demiurge Astei",
+          "Gnosis Dahlia",
+          "Poolside Trickster Regina",
+          "Summer Knight's Dream Ember"
+        ],
+        [
+          "Fortuna",
+          "Marian",
+          "Vlada",
+          "Eliza",
+          "Sigma",
+          "Demiurge Luna",
+          "Demiurge Stella",
+          "Demiurge Vlada",
+          "Gnosis Beth",
+          "Gnosis Viella",
+          "Bell Cranel"
+        ]
+      ],
+      "note": {
+        "en": "Focus on units with strong debuff application and AoE to handle minions.",
+        "jp": "強力なデバフ付与とAoEを持つユニットでミニオンを処理しましょう。",
+        "kr": "강력한 디버프 부여와 AoE를 가진 유닛으로 미니언을 처리하세요.",
+        "zh": "专注于拥有强力减益施加和AoE的角色来处理小兵。",
+        "fr": "Privilégiez les unités avec une forte application de debuffs et de l'AoE pour gérer les minions."
+      }
+    }
+  ]
+}

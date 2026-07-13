@@ -1,0 +1,36 @@
+{
+  "buckets": [
+    {
+      "stages": [1, 10],
+      "slots": [
+        ["Luna", "Veronica", "Caren"],
+        ["Tamara", "Fortuna"],
+        ["Laplace", "Rin"],
+        ["Poolside Trickster Regina", "Roxie"]
+      ],
+      "note": {
+        "en": "Don't forget you can use your friends' units to help you beat those stages.",
+        "jp": "フレンドのユニットを使ってステージをクリアすることもできます。",
+        "kr": "친구의 유닛을 사용하여 스테이지를 클리어할 수 있다는 것을 잊지 마세요.",
+        "zh": "别忘了可以使用好友的角色来帮助通关。",
+        "fr": "N'oubliez pas que vous pouvez utiliser les unités de vos amis pour vous aider à passer ces stages."
+      }
+    },
+    {
+      "stages": [11, 13],
+      "slots": [
+        ["Luna", "Veronica", "Caren"],
+        ["Tamara", "Fortuna"],
+        ["Laplace", "Rin"],
+        ["Poolside Trickster Regina", "Roxie"]
+      ],
+      "note": {
+        "en": "Focus on {B/BT_BARRIER} units and avoid letting teammates die.",
+        "jp": "{B/BT_BARRIER}ユニットに集中し、味方が倒れないようにしましょう。",
+        "kr": "{B/BT_BARRIER} 유닛에 집중하고 팀원이 쓰러지지 않도록 하세요.",
+        "zh": "专注于{B/BT_BARRIER}角色，避免队友阵亡。",
+        "fr": "Privilégiez les unités {B/BT_BARRIER} et évitez de laisser vos alliés mourir."
+      }
+    }
+  ]
+}

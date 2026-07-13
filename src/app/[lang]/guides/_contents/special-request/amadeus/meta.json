@@ -1,0 +1,22 @@
+{
+  "title": {
+    "en": "Strategy Guide",
+    "jp": "攻略ガイド",
+    "kr": "공략 가이드",
+    "zh": "攻略指南",
+    "fr": "Guide de stratégie"
+  },
+  "description": {
+    "en": "Strategy guide for Special Request: Identification mission",
+    "jp": "特別依頼：正体究明ミッションの攻略ガイド",
+    "kr": "특별 의뢰: 정체 규명 미션 공략 가이드",
+    "zh": "特殊委托：身份确认任务攻略指南",
+    "fr": "Guide de stratégie pour la mission Special Request : Identification"
+  },
+  "icon": "CLG_Raid_Weapon_Dark",
+  "author": "SADtherobot",
+  "updated": "2025-04-11",
+  "order": 5,
+  "bossId": "407600962",
+  "group": "raid_2:SYS_RAID_2_DUNGEON_D"
+}

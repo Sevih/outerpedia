@@ -16,7 +16,7 @@ import type { LocalizedText } from '@contracts';
  * OBLIGATOIRES (sa vue en dépend). Vérifié au scan : le build casse au lieu de
  * laisser un guide disparaître d'une vue qui ne sait pas où le ranger.
  */
-export type GuideRequirable = 'tier' | 'bossId' | 'order';
+export type GuideRequirable = 'tier' | 'bossId' | 'order' | 'group';
 
 /**
  * Bloc EXPLICATIF d'un mode de jeu (« comment ça marche »), affiché en bas de sa
@@ -291,6 +291,15 @@ export const GUIDE_CATEGORIES = {
   'special-request': {
     order: 8,
     icon: 'CM_EtcMenu_Challenge',
+    /**
+     * Mode PERMANENT à combats désignés : chaque guide porte le `group` de son
+     * échelle de stages dans son meta (validé au scan) — la vue de catégorie
+     * en dépend pour ranger les guides par mode (Identification / Ecology
+     * Study) sans table slug→élément en dur. `order` porte l'ordre ÉDITORIAL
+     * des colonnes et des cartes (Identification d'abord, comme en V2 — les
+     * ids de donjons du jeu mettraient Ecology en tête).
+     */
+    requires: ['group', 'order'],
     label: {
       en: 'Special Request',
       jp: '特別依頼',

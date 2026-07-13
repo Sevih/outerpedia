@@ -1,0 +1,22 @@
+{
+  "buckets": [
+    {
+      "stages": [1, 10],
+      "slots": [
+        ["Viella", "Dianne", "Saeran"],
+        ["Kappa", "Fran"],
+        ["Ame", "Noa", "Ryu Lion"],
+        ["Rey", "Kitsune of Eternity Tamamo-no-Mae"]
+      ]
+    },
+    {
+      "stages": [11, 13],
+      "slots": [
+        ["Viella", "Dianne", "Saeran"],
+        ["Kappa", "Fran"],
+        ["Ame", "Noa", "Ryu Lion"],
+        ["Rey", "Kitsune of Eternity Tamamo-no-Mae"]
+      ]
+    }
+  ]
+}

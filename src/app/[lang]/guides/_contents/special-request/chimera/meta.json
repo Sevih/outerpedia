@@ -1,0 +1,22 @@
+{
+  "title": {
+    "en": "Unidentified Chimera Special Request Guide",
+    "jp": "未確認キメラ特殊依頼攻略ガイド",
+    "kr": "미확인 키메라 특수의뢰 공략 가이드",
+    "zh": "未确认嵌合体特殊委托攻略指南",
+    "fr": "Guide de la Requête spéciale Unidentified Chimera"
+  },
+  "description": {
+    "en": "Strategy guide for Special Request: Ecology Study mission",
+    "jp": "特別依頼：生態調査ミッションの攻略ガイド",
+    "kr": "특별 의뢰: 생태 조사 미션 공략 가이드",
+    "zh": "特殊委托：生态调查任务攻略指南",
+    "fr": "Guide de stratégie pour la mission Special Request : Ecology Study"
+  },
+  "icon": "CLG_Raid_Armor_Earth",
+  "author": "Shiraen",
+  "updated": "2025-10-31",
+  "order": 8,
+  "bossId": "403400262",
+  "group": "raid_1:SYS_RAID_1_DUNGEON_E"
+}

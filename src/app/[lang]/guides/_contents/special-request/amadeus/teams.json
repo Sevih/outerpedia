@@ -1,0 +1,22 @@
+{
+  "buckets": [
+    {
+      "stages": [1, 10],
+      "slots": [
+        ["Stella", "Dianne"],
+        ["Demiurge Stella", "Skadi", "Akari"],
+        ["Drakhan", "Gnosis Beth"],
+        ["Demiurge Luna", "Regina", "Kuro", "Ais Wallenstein"]
+      ]
+    },
+    {
+      "stages": [11, 13],
+      "slots": [
+        ["Stella", "Dianne"],
+        ["Demiurge Stella", "Skadi", "Akari"],
+        ["Drakhan", "Gnosis Beth"],
+        ["Demiurge Luna", "Regina", "Kuro", "Ais Wallenstein"]
+      ]
+    }
+  ]
+}

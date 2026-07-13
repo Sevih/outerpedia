@@ -17,6 +17,7 @@ import DefaultGrid from './DefaultGrid';
 import BannerGrid from './BannerGrid';
 import TieredList from './TieredList';
 import SingularityRotation from './SingularityRotation';
+import SpecialRequestSplit from './SpecialRequestSplit';
 import type { CategoryViewProps } from './types';
 
 export default function CategoryView(props: CategoryViewProps) {
@@ -36,6 +37,11 @@ export default function CategoryView(props: CategoryViewProps) {
     case 'world-boss':
     case 'joint-challenge':
       return <BannerGrid {...props} />;
+
+    // Deux modes permanents sous une même catégorie : sections par mode, ordre
+    // du jeu lu sur les combats désignés (meta.group — requis au scan).
+    case 'special-request':
+      return <SpecialRequestSplit {...props} />;
 
     default:
       return <DefaultGrid {...props} />;

@@ -10,6 +10,9 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import glossariesData from '@data/generated/glossaries.json';
 import type { Effect, EffectCurated, Glossaries, LangDict } from '@contracts';
+import type { ClientEffect, StatusMap } from '@/components/character/EffectChips';
+import type { Lang } from '@/lib/i18n/config';
+import { lRec } from '@/lib/i18n/localize';
 
 const G = glossariesData as unknown as Glossaries;
 const EFFECTS = G.effects as Record<string, Effect>;
@@ -104,6 +107,37 @@ export function getMergedEffect(id: string): MergedEffect | undefined {
   const curated = loadCuratedEffects();
   if (e) return merge(e, curated[id]);
   return curated[id] ? fromCreation(id, curated[id]) : undefined;
+}
+
+/** Ajoute au StatusMap les statuts référencés par des effets (chips de skills,
+ * passifs d'EE/talisman…) — résolution FUSIONNÉE, comme tout l'affichage.
+ * (Historiquement dans skill-view ; vit ici pour rester importable du graphe
+ * client sans entraîner skill-view, devenu serveur — lectures disque.) */
+export function mergeStatusEffects(
+  statuses: StatusMap,
+  effects: ClientEffect[],
+  lang: Lang,
+): StatusMap {
+  for (const e of effects) {
+    const key = e.tooltip ?? e.label;
+    if (!key || statuses[key]) continue;
+    // Tooltip du jeu → effet canonique ; sinon le tooltip EST un id d'effet
+    // (créations curées des effets synthétiques).
+    const effId = e.tooltip ? (BY_TOOLTIP[e.tooltip] ?? e.tooltip) : BY_LABEL[e.label!];
+    const eff = effId ? getMergedEffect(effId) : undefined;
+    if (eff) {
+      // Les variantes irremovable sont des EFFETS distincts (icône à cadre
+      // spécial portée par l'effet lui-même — jamais recolorée à l'affichage).
+      statuses[key] = {
+        name: lRec(eff.name, lang),
+        isDebuff: eff.isDebuff,
+        icon: eff.icon || undefined,
+        desc: lRec(eff.desc, lang) || eff.desc.en || undefined,
+        hidden: eff.hidden || undefined,
+      };
+    }
+  }
+  return statuses;
 }
 
 // --- Résolution par CLÉ éditoriale ({B/…}/{D/…}) ------------------------------
