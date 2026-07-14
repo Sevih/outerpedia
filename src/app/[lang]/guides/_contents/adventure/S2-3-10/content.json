@@ -1,0 +1,108 @@
+{
+  "intro": {
+    "en": "Sacreed Guardian is a deadly boss that executes the highest-attack hero with its S3 and enrages every 5 turns. The boss only takes weakness damage while enraged, making timing and crowd control crucial.",
+    "jp": "聖域の守護者はS3で攻撃力が最も高いヒーローを即死させ、5ターンごとに激怒する危険なボスです。激怒中は弱点ダメージのみ有効なため、タイミングとCC管理が重要です。",
+    "kr": "신성한 수호자는 S3로 공격력이 가장 높은 영웅을 즉사시키고 5턴마다 격노하는 위험한 보스입니다. 격노 중에는 약점 피해만 유효하므로 타이밍과 군중 제어가 중요합니다.",
+    "zh": "神圣守护者是一个危险的Boss，会用S3处决攻击力最高的英雄，并每5回合进入狂暴状态。Boss在狂暴时只受弱点伤害，因此时机和控制至关重要。",
+    "fr": "Sacreed Guardian est un Boss mortel qui exécute le héros à plus haute ATK avec son S3 et enrage tous les 5 tours. Le Boss ne prend que des dégâts de weakness pendant l'enrage : le timing et le crowd control sont cruciaux."
+  },
+  "tips": [
+    {
+      "en": "The boss has no immunities so bring hard CC like {D/BT_STUN} {D/BT_FREEZE} {D/BT_STONE} {D/BT_COOL_CHARGE} {D/BT_SILENCE}.",
+      "jp": "ボスは免疫がないため、{D/BT_STUN} {D/BT_FREEZE} {D/BT_STONE} {D/BT_COOL_CHARGE} {D/BT_SILENCE}などのハードCCを持参しましょう。",
+      "kr": "보스는 면역이 없으므로 {D/BT_STUN} {D/BT_FREEZE} {D/BT_STONE} {D/BT_COOL_CHARGE} {D/BT_SILENCE} 같은 하드 CC를 가져가세요.",
+      "zh": "Boss没有免疫，所以携带硬控如{D/BT_STUN} {D/BT_FREEZE} {D/BT_STONE} {D/BT_COOL_CHARGE} {D/BT_SILENCE}。",
+      "fr": "Le Boss n'a aucune immunité : emmenez du hard CC comme {D/BT_STUN} {D/BT_FREEZE} {D/BT_STONE} {D/BT_COOL_CHARGE} {D/BT_SILENCE}."
+    },
+    {
+      "en": "Bringing {B/BT_RESURRECTION} can help too.",
+      "jp": "{B/BT_RESURRECTION}を持参すると役立ちます。",
+      "kr": "{B/BT_RESURRECTION}를 가져가면 도움이 됩니다.",
+      "zh": "携带{B/BT_RESURRECTION}也有帮助。",
+      "fr": "Emmener {B/BT_RESURRECTION} peut aussi aider."
+    },
+    {
+      "en": "{D/BT_ACTION_GAUGE} {B/BT_ACTION_GAUGE} {D/BT_STAT|ST_SPEED} {B/BT_STAT|ST_SPEED} can prevent the boss taking too many turns and enraging.",
+      "jp": "{D/BT_ACTION_GAUGE} {B/BT_ACTION_GAUGE} {D/BT_STAT|ST_SPEED} {B/BT_STAT|ST_SPEED}でボスのターン数を抑え、激怒を遅らせることができます。",
+      "kr": "{D/BT_ACTION_GAUGE} {B/BT_ACTION_GAUGE} {D/BT_STAT|ST_SPEED} {B/BT_STAT|ST_SPEED}로 보스의 턴을 줄이고 격노를 지연시킬 수 있습니다.",
+      "zh": "{D/BT_ACTION_GAUGE} {B/BT_ACTION_GAUGE} {D/BT_STAT|ST_SPEED} {B/BT_STAT|ST_SPEED}可以阻止Boss行动过多次并进入狂暴。",
+      "fr": "{D/BT_ACTION_GAUGE} {B/BT_ACTION_GAUGE} {D/BT_STAT|ST_SPEED} {B/BT_STAT|ST_SPEED} permettent d'empêcher le Boss de prendre trop de tours et d'enrage."
+    },
+    {
+      "en": "Save chains until the boss enrages.",
+      "jp": "ボスが激怒するまでチェインを温存しましょう。",
+      "kr": "보스가 격노할 때까지 체인을 아껴두세요.",
+      "zh": "在Boss狂暴前保留连锁点数。",
+      "fr": "Gardez les chains jusqu'à ce que le Boss enrage."
+    },
+    {
+      "en": "You can try to burn it down with {D/BT_FIXED_DAMAGE} chain attack.",
+      "jp": "{D/BT_FIXED_DAMAGE}チェイン攻撃で一気に倒すこともできます。",
+      "kr": "{D/BT_FIXED_DAMAGE} 체인 공격으로 한 번에 처치할 수도 있습니다.",
+      "zh": "你可以尝试用{D/BT_FIXED_DAMAGE}连锁攻击快速击杀。",
+      "fr": "Vous pouvez tenter de le burn down avec un chain attack en {D/BT_FIXED_DAMAGE}."
+    }
+  ],
+  "recommended": [
+    {
+      "characters": ["Mene", "Nella"],
+      "reason": {
+        "en": "For {B/BT_RESURRECTION}.",
+        "jp": "{B/BT_RESURRECTION}持ち。",
+        "kr": "{B/BT_RESURRECTION} 보유.",
+        "zh": "拥有{B/BT_RESURRECTION}。",
+        "fr": "Pour {B/BT_RESURRECTION}."
+      }
+    },
+    {
+      "characters": ["Tamara"],
+      "reason": {
+        "en": "Has {D/BT_SILENCE} and {D/BT_COOL_CHARGE}.",
+        "jp": "{D/BT_SILENCE}と{D/BT_COOL_CHARGE}持ち。",
+        "kr": "{D/BT_SILENCE}와 {D/BT_COOL_CHARGE} 보유.",
+        "zh": "拥有{D/BT_SILENCE}和{D/BT_COOL_CHARGE}。",
+        "fr": "A {D/BT_SILENCE} et {D/BT_COOL_CHARGE}."
+      }
+    },
+    {
+      "characters": ["Dahlia"],
+      "reason": {
+        "en": "Has {D/BT_FREEZE} and {D/BT_STAT|ST_SPEED}.",
+        "jp": "{D/BT_FREEZE}と{D/BT_STAT|ST_SPEED}持ち。",
+        "kr": "{D/BT_FREEZE}와 {D/BT_STAT|ST_SPEED} 보유.",
+        "zh": "拥有{D/BT_FREEZE}和{D/BT_STAT|ST_SPEED}。",
+        "fr": "A {D/BT_FREEZE} et {D/BT_STAT|ST_SPEED}."
+      }
+    },
+    {
+      "characters": ["Iota"],
+      "reason": {
+        "en": "Has {D/BT_STUN}, {D/BT_ACTION_GAUGE} and {B/BT_STAT|ST_SPEED}.",
+        "jp": "{D/BT_STUN}、{D/BT_ACTION_GAUGE}、{B/BT_STAT|ST_SPEED}持ち。",
+        "kr": "{D/BT_STUN}, {D/BT_ACTION_GAUGE}, {B/BT_STAT|ST_SPEED} 보유.",
+        "zh": "拥有{D/BT_STUN}、{D/BT_ACTION_GAUGE}和{B/BT_STAT|ST_SPEED}。",
+        "fr": "A {D/BT_STUN}, {D/BT_ACTION_GAUGE} et {B/BT_STAT|ST_SPEED}."
+      }
+    },
+    {
+      "characters": ["Gnosis Nella", "Tamamo-no-Mae"],
+      "reason": {
+        "en": "{D/BT_FIXED_DAMAGE} Starters.",
+        "jp": "{D/BT_FIXED_DAMAGE}スターター。",
+        "kr": "{D/BT_FIXED_DAMAGE} 스타터.",
+        "zh": "{D/BT_FIXED_DAMAGE}先手。",
+        "fr": "Starters {D/BT_FIXED_DAMAGE}."
+      }
+    },
+    {
+      "characters": ["Demiurge Stella", "Iota", "Laplace", "Ryu Lion"],
+      "reason": {
+        "en": "{D/BT_FIXED_DAMAGE} Finishers.",
+        "jp": "{D/BT_FIXED_DAMAGE}フィニッシャー。",
+        "kr": "{D/BT_FIXED_DAMAGE} 피니셔.",
+        "zh": "{D/BT_FIXED_DAMAGE}终结者。",
+        "fr": "Finishers {D/BT_FIXED_DAMAGE}."
+      }
+    }
+  ]
+}

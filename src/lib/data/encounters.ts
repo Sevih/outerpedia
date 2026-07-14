@@ -65,6 +65,54 @@ export function encountersOfGroup(group: string): Encounter[] {
 }
 
 /**
+ * Les donjons qu'un guide désigne NOMMÉMENT, dans l'ordre où il les a écrits.
+ *
+ * L'HISTOIRE n'a pas de `group` : ses stages ne portent ni `group` ni
+ * `difficulty` dans la donnée du jeu, et rien ne relie le donjon Normal à son
+ * jumeau Hard — ni le nom, ni l'arithmétique des ids (S2 5-10 = `120513` en
+ * Normal, `121511` en Hard). Le lien est donc DÉCLARÉ par le guide
+ * (`meta.dungeons`), du plus facile au plus dur. Il reste opaque au même titre
+ * qu'un `group` : il se lit dans `encounters.json`, il ne se fabrique jamais.
+ *
+ * Un id inconnu (ou un donjon vide) JETTE : un guide qui pointe dans le vide
+ * casse le build, il ne rend pas un onglet muet.
+ */
+export function encountersOfIds(ids: readonly string[]): Encounter[] {
+  return ids.map((id) => {
+    const ref = DUNGEONS[id];
+    if (!ref?.monsters?.length) {
+      throw new Error(
+        `encountersOfIds : donjon « ${id} » inconnu ou sans monstre — ` +
+          `vérifier le champ \`dungeons\` du guide contre data/generated/encounters.json.`,
+      );
+    }
+    return { id, ref, monsters: ref.monsters };
+  });
+}
+
+/**
+ * LA VAGUE DU BOSS — les monstres qu'on vient réellement préparer.
+ *
+ * Un stage d'histoire s'ouvre sur des vagues d'escorte (les gobelins avant le
+ * Grand Calamari) : les documenter noierait le boss sous cinq cartes de piétaille.
+ * On garde la DERNIÈRE vague où un boss apparaît — c'est là que se joue le
+ * combat, et c'est là que se trouvent les comparses que la V2 câblait à la main
+ * dans chaque guide (Sterope aux côtés d'Astei, Maxie et Roxie aux côtés de
+ * Hilde). Ils reviennent donc de la donnée, pas d'une liste écrite deux fois.
+ *
+ * Le boss d'abord, ses renforts ensuite (décision d'affichage : la donnée du jeu
+ * liste parfois l'add en premier). `wave` n'est émis que sur les donjons
+ * multi-vagues : absent, tout le donjon est la vague du boss.
+ */
+export function bossWaveMonsters(e: Encounter): DungeonMonster[] {
+  const waves = e.monsters.filter((m) => m.role === 'boss').map((m) => m.wave);
+  const last = waves[waves.length - 1];
+  return e.monsters
+    .filter((m) => m.wave === last)
+    .sort((a, b) => Number(a.role === 'add') - Number(b.role === 'add'));
+}
+
+/**
  * Libellé d'une difficulté.
  *
  * Le jeu ne parle QUE en/jp/kr/zh : il n'existe pas, et il n'existera jamais,
@@ -96,6 +144,16 @@ export function difficultyLabel(d: DungeonRef, lang: Lang, t: TFunction): string
   const label = t(key);
   if (label !== key) return label;
   return diff.name ? lRec(diff.name, lang) || diff.name.en : diff.key;
+}
+
+/**
+ * Ce qui NOMME un onglet de rencontre : sa difficulté quand le mode en déclare
+ * une (Normal / Hard / Very Hard, League 4…), sinon son MODE — l'histoire ne
+ * range pas ses stages par difficulté mais par mode (« Story Normal » /
+ * « Story Hard »), et c'est bien la même distinction pour le lecteur.
+ */
+export function encounterLabel(d: DungeonRef, lang: Lang, t: TFunction): string {
+  return difficultyLabel(d, lang, t) ?? modeLabel(d, lang);
 }
 
 /**

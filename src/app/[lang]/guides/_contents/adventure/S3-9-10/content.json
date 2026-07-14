@@ -1,0 +1,45 @@
+{
+  "intro": {
+    "en": "Nella is an extremely challenging boss that requires high penetration to damage. It applies irremovable debuff enhancement and sealed interruption effects, and executes the entire team during enrage every 30 actions.",
+    "jp": "ネラはダメージを与えるために高い貫通力が必要な非常に難しいボスです。解除不可のデバフ強化と封印中断効果を付与し、30回の行動ごとに激怒してチーム全体を処刑します。",
+    "kr": "넬라는 피해를 주기 위해 높은 관통력이 필요한 매우 어려운 보스입니다. 해제 불가 디버프 강화와 봉인 중단 효과를 부여하며, 30회 행동마다 격노하여 팀 전체를 처형합니다.",
+    "zh": "妮拉是一个极具挑战性的Boss，需要高穿透才能造成伤害。她会施加不可移除的减益增强和封印中断效果，每30次行动进入狂暴并处决整个队伍。",
+    "fr": "Nella est une Boss extrêmement exigeante qui demande une forte penetration pour être endommagée. Elle applique une amplification de debuff irretirable et des effets de sealed interruption, et exécute toute l'équipe pendant l'enrage toutes les 30 actions."
+  },
+  "tips": [
+    {
+      "en": "Units with innate Penetration and Penetration-based builds are required.",
+      "jp": "固有の貫通力を持つユニットと貫通力ベースのビルドが必要です。",
+      "kr": "고유 관통력을 가진 유닛과 관통력 기반 빌드가 필요합니다.",
+      "zh": "需要自带穿透的角色和穿透配装。",
+      "fr": "Les unités avec Penetration innée et les builds basés sur la Penetration sont obligatoires."
+    },
+    {
+      "en": "Also {B/BT_REMOVE_DEBUFF} will be needed to get rid of {D/BT_STAT|ST_PIERCE_POWER_RATE} right when the boss is on the verge of breaking.",
+      "jp": "ボスがブレイク寸前の時に{D/BT_STAT|ST_PIERCE_POWER_RATE}を解除するために{B/BT_REMOVE_DEBUFF}も必要です。",
+      "kr": "보스가 브레이크 직전일 때 {D/BT_STAT|ST_PIERCE_POWER_RATE}를 제거하기 위해 {B/BT_REMOVE_DEBUFF}도 필요합니다.",
+      "zh": "在Boss即将破防时，还需要{B/BT_REMOVE_DEBUFF}来移除{D/BT_STAT|ST_PIERCE_POWER_RATE}。",
+      "fr": "{B/BT_REMOVE_DEBUFF} sera aussi nécessaire pour retirer {D/BT_STAT|ST_PIERCE_POWER_RATE} juste au moment où le Boss est sur le point de break."
+    }
+  ],
+  "recommended": [
+    {
+      "characters": [
+        "Maxwell",
+        "Regina",
+        "Gnosis Beth",
+        "Demiurge Luna",
+        "Gnosis Dahlia",
+        "Demiurge Astei",
+        "Ame"
+      ],
+      "reason": {
+        "en": "As DPS unit.",
+        "jp": "アタッカーとして。",
+        "kr": "딜러로 사용.",
+        "zh": "作为输出角色。",
+        "fr": "Comme unité DPS."
+      }
+    }
+  ]
+}

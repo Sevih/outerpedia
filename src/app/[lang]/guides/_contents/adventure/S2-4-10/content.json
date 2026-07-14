@@ -1,0 +1,54 @@
+{
+  "intro": {
+    "en": "Astei is a formidable support boss who heals allies, boosts attack, and resurrects her team upon enraging. Her companion Sterope punishes non-offensive skills by recovering the boss team's resources.",
+    "jp": "アステイは味方を回復し、攻撃力を上げ、激怒時にチームを蘇生させる強力なサポートボスです。相棒のステロペは非攻撃スキルを使用するとボスチームのリソースを回復させます。",
+    "kr": "아스테이는 아군을 치유하고, 공격력을 높이며, 격노 시 팀을 부활시키는 강력한 서포트 보스입니다. 동료 스테로페는 비공격 스킬 사용 시 보스 팀의 자원을 회복시킵니다.",
+    "zh": "阿斯忒是一个强大的辅助型Boss，会治疗队友、提升攻击力，并在狂暴时复活队伍。她的同伴斯忒洛佩会在玩家使用非攻击技能时恢复Boss队伍的资源。",
+    "fr": "Astei est un Boss de support redoutable qui soigne ses alliés, boost l'ATK et ressuscite son équipe lors de l'enrage. Sa partenaire Sterope punit les skills non-offensifs en régénérant les ressources de l'équipe du Boss."
+  },
+  "note": {
+    "en": "This guide also applies to stage S2 Hard 5-9.",
+    "jp": "このガイドはS2 Hard 5-9にも適用されます。",
+    "kr": "이 가이드는 S2 Hard 5-9에도 적용됩니다.",
+    "zh": "本攻略同样适用于S2 Hard 5-9关卡。",
+    "fr": "Ce guide s'applique aussi au stage S2 Hard 5-9."
+  },
+  "tips": [
+    {
+      "en": "The boss has no immunities, so bring {D/BT_SEALED_RECEIVE_HEAL}.",
+      "jp": "ボスは免疫がないため、{D/BT_SEALED_RECEIVE_HEAL}を持参しましょう。",
+      "kr": "보스는 면역이 없으므로 {D/BT_SEALED_RECEIVE_HEAL}를 가져가세요.",
+      "zh": "Boss没有免疫，所以携带{D/BT_SEALED_RECEIVE_HEAL}。",
+      "fr": "Le Boss n'a aucune immunité : emmenez du {D/BT_SEALED_RECEIVE_HEAL}."
+    },
+    {
+      "en": "Try to avoid using characters with non-offensive skills.",
+      "jp": "非攻撃スキルを持つキャラクターの使用は避けましょう。",
+      "kr": "비공격 스킬을 가진 캐릭터 사용을 피하세요.",
+      "zh": "尽量避免使用带有非攻击技能的角色。",
+      "fr": "Essayez d'éviter les personnages avec des skills non-offensifs."
+    }
+  ],
+  "recommended": [
+    {
+      "characters": ["Demiurge Vlada", "Sterope", "Eternal"],
+      "reason": {
+        "en": "For {D/BT_SEALED_RECEIVE_HEAL}.",
+        "jp": "{D/BT_SEALED_RECEIVE_HEAL}持ち。",
+        "kr": "{D/BT_SEALED_RECEIVE_HEAL} 보유.",
+        "zh": "拥有{D/BT_SEALED_RECEIVE_HEAL}。",
+        "fr": "Pour {D/BT_SEALED_RECEIVE_HEAL}."
+      }
+    },
+    {
+      "characters": ["Monad Eva", "Dianne"],
+      "reason": {
+        "en": "Can heal without using non-offensive skills.",
+        "jp": "非攻撃スキルを使わずに回復できる。",
+        "kr": "비공격 스킬 없이 힐 가능.",
+        "zh": "可以不使用非攻击技能进行治疗。",
+        "fr": "Peuvent heal sans utiliser de skill non-offensif."
+      }
+    }
+  ]
+}

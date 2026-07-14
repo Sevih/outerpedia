@@ -1,0 +1,81 @@
+{
+  "intro": {
+    "en": "Fatal is a deadly assassin boss who becomes nearly invincible while stealthed, dealing massive damage and resurrecting allies. She silences Fire heroes and extends all ally buffs after each action.",
+    "jp": "フェイタルはステルス中にほぼ無敵となり、大ダメージを与えて味方を蘇生させる致命的なアサシンボスです。火属性ヒーローを沈黙させ、行動ごとにすべての味方バフを延長します。",
+    "kr": "페이탈은 은신 중 거의 무적이 되어 막대한 피해를 주고 아군을 부활시키는 치명적인 암살자 보스입니다. 화염 영웅을 침묵시키고 매 행동 후 모든 아군 버프를 연장합니다.",
+    "zh": "菲塔尔是一个致命的刺客Boss，在隐身时几乎无敌，造成大量伤害并复活队友。她会沉默火属性英雄，并在每次行动后延长所有队友增益效果。",
+    "fr": "Fatal est une assassin redoutable qui devient quasi invincible quand elle est stealth, inflige des dégâts massifs et ressuscite ses alliés. Elle silence les héros Fire et prolonge tous les buffs alliés après chaque action."
+  },
+  "tips": [
+    {
+      "en": "Avoid using {E/Fire} heroes.",
+      "jp": "{E/Fire}ヒーローの使用を避けましょう。",
+      "kr": "{E/Fire} 영웅 사용을 피하세요.",
+      "zh": "避免使用{E/Fire}英雄。",
+      "fr": "Évitez les héros {E/Fire}."
+    },
+    {
+      "en": "Bring a speedy hero to apply {D/BT_SEALED} on foes before Fatal moves (around 270 speed).",
+      "jp": "フェイタルが行動する前に敵に{D/BT_SEALED}を付与できる素早いヒーローを連れて行きましょう（約270スピード）。",
+      "kr": "페이탈이 행동하기 전에 적에게 {D/BT_SEALED}를 부여할 수 있는 빠른 영웅을 데려가세요 (약 270 스피드).",
+      "zh": "带一个快速英雄在菲塔尔行动前对敌人施加{D/BT_SEALED}（约270速度）。",
+      "fr": "Emmenez un héros rapide pour appliquer {D/BT_SEALED} sur les ennemis avant que Fatal ne joue (autour de 270 speed)."
+    },
+    {
+      "en": "Bring a hero with either {D/BT_STEAL_BUFF} or {D/BT_REMOVE_BUFF} to remove {B/BT_STEALTHED}.",
+      "jp": "{B/BT_STEALTHED}を解除するために{D/BT_STEAL_BUFF}または{D/BT_REMOVE_BUFF}を持つヒーローを連れて行きましょう。",
+      "kr": "{B/BT_STEALTHED}를 제거하기 위해 {D/BT_STEAL_BUFF} 또는 {D/BT_REMOVE_BUFF}를 가진 영웅을 데려가세요.",
+      "zh": "带一个拥有{D/BT_STEAL_BUFF}或{D/BT_REMOVE_BUFF}的英雄来移除{B/BT_STEALTHED}。",
+      "fr": "Emmenez un héros avec {D/BT_STEAL_BUFF} ou {D/BT_REMOVE_BUFF} pour retirer {B/BT_STEALTHED}."
+    },
+    {
+      "en": "{P/Caren} is the MVP here since her S2 will still target Fatal while {B/BT_STEALTHED}.",
+      "jp": "{P/Caren}はS2が{B/BT_STEALTHED}中でもフェイタルをターゲットできるため、ここでのMVPです。",
+      "kr": "{P/Caren}은 S2가 {B/BT_STEALTHED} 상태에서도 페이탈을 타겟할 수 있어 여기서 MVP입니다.",
+      "zh": "{P/Caren}是这里的MVP，因为她的S2在{B/BT_STEALTHED}状态下仍能锁定菲塔尔。",
+      "fr": "{P/Caren} est la MVP ici car son S2 cible Fatal même quand elle est {B/BT_STEALTHED}."
+    }
+  ],
+  "recommended": [
+    {
+      "characters": ["Kappa", "Regina"],
+      "reason": {
+        "en": "For {D/BT_REMOVE_BUFF}.",
+        "jp": "{D/BT_REMOVE_BUFF}持ち。",
+        "kr": "{D/BT_REMOVE_BUFF} 보유.",
+        "zh": "拥有{D/BT_REMOVE_BUFF}。",
+        "fr": "Pour {D/BT_REMOVE_BUFF}."
+      }
+    },
+    {
+      "characters": ["Dahlia", "Demiurge Vlada", "Veronica", "Alice", "Gnosis Nella"],
+      "reason": {
+        "en": "For AoE {D/BT_REMOVE_BUFF}.",
+        "jp": "AoE {D/BT_REMOVE_BUFF}持ち。",
+        "kr": "광역 {D/BT_REMOVE_BUFF} 보유.",
+        "zh": "拥有范围{D/BT_REMOVE_BUFF}。",
+        "fr": "Pour le {D/BT_REMOVE_BUFF} AoE."
+      }
+    },
+    {
+      "characters": ["Akari", "Alice", "Gnosis Nella"],
+      "reason": {
+        "en": "For {D/BT_SEALED}.",
+        "jp": "{D/BT_SEALED}持ち。",
+        "kr": "{D/BT_SEALED} 보유.",
+        "zh": "拥有{D/BT_SEALED}。",
+        "fr": "Pour {D/BT_SEALED}."
+      }
+    },
+    {
+      "characters": ["Caren", "Stella"],
+      "reason": {
+        "en": "For {D/BT_STEAL_BUFF}.",
+        "jp": "{D/BT_STEAL_BUFF}持ち。",
+        "kr": "{D/BT_STEAL_BUFF} 보유.",
+        "zh": "拥有{D/BT_STEAL_BUFF}。",
+        "fr": "Pour {D/BT_STEAL_BUFF}."
+      }
+    }
+  ]
+}

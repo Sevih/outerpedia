@@ -1,0 +1,22 @@
+{
+  "title": {
+    "en": "S2 Hard : Grand Calamari",
+    "jp": "シーズン2(ハード) : グラン・カラマリー",
+    "kr": "시즌 2 Part1 하드 : 그랑 칼라마리",
+    "zh": "S2 困难：巨型鱿鱼",
+    "fr": "S2 Hard : Grand Calamari"
+  },
+  "description": {
+    "en": "Boss strategy guide.",
+    "jp": "ボス攻略ガイド。",
+    "kr": "보스 전략 가이드.",
+    "zh": "首领攻略指南",
+    "fr": "Guide de stratégie pour le Boss."
+  },
+  "icon": "T_DungeonArea_11",
+  "author": "Sevih",
+  "updated": "2025-05-25",
+  "order": 201,
+  "bossId": "4134003",
+  "dungeons": ["120111", "121111"]
+}

@@ -1,0 +1,74 @@
+{
+  "intro": {
+    "en": "Sphinx Guardian is a challenging boss that requires at least one Ranger in your team to take turns. It executes Rangers with its S1 and punishes teams without Rangers by reducing speed to 0.",
+    "jp": "スフィンクスガーディアンはチームに少なくとも1人のレンジャーが必要な難しいボスです。S1でレンジャーを処刑し、レンジャーがいないチームは速度を0にされます。",
+    "kr": "스핑크스 가디언은 턴을 얻으려면 팀에 최소 한 명의 레인저가 필요한 도전적인 보스입니다. S1으로 레인저를 처형하고, 레인저가 없는 팀은 속도가 0이 됩니다.",
+    "zh": "狮身人面守护者是一个需要队伍中至少有一名游侠才能行动的挑战性Boss。它会用S1处决游侠，没有游侠的队伍会被速度降为0。",
+    "fr": "Sphinx Guardian est un Boss exigeant qui demande au moins un Ranger dans votre équipe pour pouvoir prendre des tours. Il exécute les Rangers avec son S1 et punit les équipes sans Ranger en réduisant leur speed à 0."
+  },
+  "tips": [
+    {
+      "en": "Use at least one {C/Ranger}.",
+      "jp": "少なくとも1人の{C/Ranger}を使用しましょう。",
+      "kr": "최소 한 명의 {C/Ranger}를 사용하세요.",
+      "zh": "至少使用一名{C/Ranger}。",
+      "fr": "Utilisez au moins un {C/Ranger}."
+    },
+    {
+      "en": "Avoid using {D/BT_COOL_CHARGE}.",
+      "jp": "{D/BT_COOL_CHARGE}の使用は避けましょう。",
+      "kr": "{D/BT_COOL_CHARGE} 사용을 피하세요.",
+      "zh": "避免使用{D/BT_COOL_CHARGE}。",
+      "fr": "Évitez d'utiliser {D/BT_COOL_CHARGE}."
+    },
+    {
+      "en": "The boss is vulnerable to {D/BT_AGGRO}.",
+      "jp": "ボスは{D/BT_AGGRO}に弱いです。",
+      "kr": "보스는 {D/BT_AGGRO}에 취약합니다.",
+      "zh": "Boss对{D/BT_AGGRO}有弱点。",
+      "fr": "Le Boss est vulnérable à {D/BT_AGGRO}."
+    }
+  ],
+  "recommended": [
+    {
+      "characters": ["Ember"],
+      "reason": {
+        "en": "Self inflicts {D/BT_MARKING} or inflicts {D/BT_AGGRO}.",
+        "jp": "自身に{D/BT_MARKING}を付与、または{D/BT_AGGRO}を付与。",
+        "kr": "자신에게 {D/BT_MARKING} 부여 또는 {D/BT_AGGRO} 부여.",
+        "zh": "自我施加{D/BT_MARKING}或施加{D/BT_AGGRO}。",
+        "fr": "S'auto-applique {D/BT_MARKING} ou inflige {D/BT_AGGRO}."
+      }
+    },
+    {
+      "characters": ["Veronica"],
+      "reason": {
+        "en": "{D/BT_AGGRO}.",
+        "jp": "{D/BT_AGGRO}持ち。",
+        "kr": "{D/BT_AGGRO} 보유.",
+        "zh": "拥有{D/BT_AGGRO}。",
+        "fr": "{D/BT_AGGRO}."
+      }
+    },
+    {
+      "characters": ["Fatal"],
+      "reason": {
+        "en": "{B/BT_STEALTHED}.",
+        "jp": "{B/BT_STEALTHED}持ち。",
+        "kr": "{B/BT_STEALTHED} 보유.",
+        "zh": "拥有{B/BT_STEALTHED}。",
+        "fr": "{B/BT_STEALTHED}."
+      }
+    },
+    {
+      "characters": ["Nella", "Mene"],
+      "reason": {
+        "en": "For {B/BT_RESURRECTION}.",
+        "jp": "{B/BT_RESURRECTION}持ち。",
+        "kr": "{B/BT_RESURRECTION} 보유.",
+        "zh": "拥有{B/BT_RESURRECTION}。",
+        "fr": "Pour {B/BT_RESURRECTION}."
+      }
+    }
+  ]
+}

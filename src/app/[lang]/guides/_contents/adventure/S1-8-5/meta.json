@@ -1,0 +1,22 @@
+{
+  "title": {
+    "en": "S1 Normal 8-5 : Maxwell",
+    "jp": "S1 ノーマル 8-5 : マクスウェル",
+    "kr": "S1 노말 8-5 : 맥스웰",
+    "zh": "S1 普通 8-5：麦克斯韦",
+    "fr": "S1 Normal 8-5 : Maxwell"
+  },
+  "description": {
+    "en": "Boss strategy guide.",
+    "jp": "ボス攻略ガイド。",
+    "kr": "보스 전략 가이드.",
+    "zh": "首领攻略指南",
+    "fr": "Guide de stratégie pour le Boss."
+  },
+  "icon": "T_DungeonArea_08",
+  "author": "Sevih",
+  "updated": "2025-05-25",
+  "order": 108,
+  "bossId": "4104007",
+  "dungeons": ["100805"]
+}

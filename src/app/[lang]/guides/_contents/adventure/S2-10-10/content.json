@@ -1,0 +1,37 @@
+{
+  "intro": {
+    "en": "Demiurge Drakhan is an extremely powerful boss who deals percentage-based fixed damage and can instantly kill low-health targets. During enrage, she becomes immune to weakness gauge damage and upgrades her execute skill to AoE.",
+    "jp": "デミウルゴス・ドラカンは割合ベースの固定ダメージを与え、低HP対象を即死させる極めて強力なボスです。激怒中は弱点ゲージダメージ免疫になり、処刑スキルがAoEにアップグレードされます。",
+    "kr": "데미우르고스 드라칸은 비율 기반 고정 피해를 주고 저체력 대상을 즉사시킬 수 있는 매우 강력한 보스입니다. 격노 시 약점 게이지 피해 면역이 되고 처형 스킬이 광역으로 업그레이드됩니다.",
+    "zh": "造物主德拉罕是一个极其强大的Boss，会造成百分比固定伤害并能即死低血量目标。狂暴时免疫弱点槽伤害，处决技能升级为范围伤害。",
+    "fr": "Demiurge Drakhan est un Boss extrêmement puissant qui inflige des dégâts fixes en pourcentage et peut one-shot les cibles à faible HP. Pendant l'enrage, elle devient immunisée aux dégâts de weakness gauge et upgrade son skill d'exécution en AoE."
+  },
+  "tips": [
+    {
+      "en": "Use characters with strong AoE healing skills.",
+      "jp": "強力なAoE回復スキルを持つキャラクターを使用しましょう。",
+      "kr": "강력한 광역 힐 스킬을 가진 캐릭터를 사용하세요.",
+      "zh": "使用拥有强力范围治疗技能的角色。",
+      "fr": "Utilisez des personnages avec de bons skills de heal AoE."
+    },
+    {
+      "en": "Take out Demiurge Vlada quickly so the speed debuff doesn't stack too high.",
+      "jp": "速度デバフが積み重なる前にデミウルゴス・ヴラダを素早く倒しましょう。",
+      "kr": "속도 디버프가 너무 쌓이기 전에 데미우르고스 블라다를 빠르게 처치하세요.",
+      "zh": "快速击败造物主弗拉达，避免速度减益叠加过高。",
+      "fr": "Éliminez rapidement Demiurge Vlada pour éviter que le debuff de speed ne s'empile trop."
+    }
+  ],
+  "recommended": [
+    {
+      "characters": ["Mene", "Astei", "Monad Eva", "Nella", "Dianne"],
+      "reason": {
+        "en": "For healing.",
+        "jp": "回復役として。",
+        "kr": "힐러로 사용.",
+        "zh": "用于治疗。",
+        "fr": "Pour le heal."
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "intro": {
+    "en": "Regina is a boss that deals significantly more damage when she lands critical hits. She enrages every 10 enemy actions, gaining powerful buffs.",
+    "jp": "レジーナはクリティカル発動時に大ダメージを与えるボスです。敵の行動10回ごとに激怒し、強力なバフを獲得します。",
+    "kr": "레지나는 치명타 시 큰 피해를 주는 보스입니다. 적의 행동 10회마다 격노하여 강력한 버프를 얻습니다.",
+    "zh": "蕾吉娜是一个暴击时造成巨大伤害的Boss。每10次敌方行动后进入狂暴状态，获得强力增益。",
+    "fr": "Regina est une Boss qui inflige beaucoup plus de dégâts sur ses coups critiques. Elle enrage toutes les 10 actions ennemies, gagnant de puissants buffs."
+  },
+  "tips": [
+    {
+      "en": "Bring {B/BT_STAT|ST_BUFF_CHANCE} to counter {B/REGINAS_WORLD}.",
+      "jp": "{B/REGINAS_WORLD}に対抗するために{B/BT_STAT|ST_BUFF_CHANCE}を持っていきましょう。",
+      "kr": "{B/REGINAS_WORLD}에 대응하기 위해 {B/BT_STAT|ST_BUFF_CHANCE}를 가져가세요.",
+      "zh": "带{B/BT_STAT|ST_BUFF_CHANCE}来对抗{B/REGINAS_WORLD}。",
+      "fr": "Emmenez du {B/BT_STAT|ST_BUFF_CHANCE} pour contrer {B/REGINAS_WORLD}."
+    }
+  ],
+  "recommended": [
+    {
+      "characters": ["Maxwell", "Demiurge Astei"],
+      "reason": {
+        "en": "{E/Dark} DPS with high penetration.",
+        "jp": "高貫通の{E/Dark}アタッカー。",
+        "kr": "높은 관통력의 {E/Dark} 딜러.",
+        "zh": "高穿透的{E/Dark}输出。",
+        "fr": "DPS {E/Dark} avec une forte penetration."
+      }
+    },
+    {
+      "characters": ["Fran", "Skadi", "Sterope", "Hilde"],
+      "reason": {
+        "en": "For {B/BT_STAT|ST_BUFF_CHANCE}.",
+        "jp": "{B/BT_STAT|ST_BUFF_CHANCE}持ち。",
+        "kr": "{B/BT_STAT|ST_BUFF_CHANCE} 보유.",
+        "zh": "拥有{B/BT_STAT|ST_BUFF_CHANCE}。",
+        "fr": "Pour {B/BT_STAT|ST_BUFF_CHANCE}."
+      }
+    }
+  ]
+}
