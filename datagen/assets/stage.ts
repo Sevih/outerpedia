@@ -15,6 +15,28 @@ import { findImage, type ImageIndex } from './source';
 
 export const STAGING_DIR = resolve('.assets-staging');
 const V2_POOL = () => resolve(process.env.V2_IMAGES_DIR ?? '../outerpedia-v2/public/images');
+/**
+ * Pool éditorial de la V3 — assets qui n'existent PAS dans le jeu et que le
+ * wiki produit lui-même (icône corrigée d'un effet que les tables affublent du
+ * sprite d'un autre…). Mêmes chemins relatifs que le pool V2, mais VERSIONNÉ
+ * dans le repo : la V2 est la prod, on n'y écrit pas, et un asset qui ne vit
+ * que sur une machine finit par manquer à la collecte suivante.
+ *
+ * Consulté AVANT la V2 : la V3 corrige, la V2 n'est qu'un héritage.
+ * Fichier SOURCE, jamais servi — `assets:collect` le dépose dans le staging,
+ * `assets:push` l'envoie au R2 (le build CI ne le lit pas et l'image Docker ne
+ * l'embarque pas : elle ne copie que .next + public).
+ */
+const V3_EDITORIAL = () => resolve('data/editorial');
+
+/** Premier pool contenant `rel` (V3 d'abord, V2 en héritage) — undefined sinon. */
+function editorialSource(rel: string): string | undefined {
+  for (const pool of [V3_EDITORIAL(), V2_POOL()]) {
+    const p = resolve(pool, rel);
+    if (existsSync(p)) return p;
+  }
+  return undefined;
+}
 
 export interface StageResult {
   staged: number;
@@ -38,8 +60,8 @@ export async function stageAssets(
 
     try {
       if (req.kind === 'editorial') {
-        const src = resolve(V2_POOL(), req.source);
-        if (!existsSync(src)) {
+        const src = editorialSource(req.source);
+        if (!src) {
           result.missing.push({ key: req.key, reason: `éditorial absent du pool : ${req.source}` });
           continue;
         }
@@ -69,10 +91,11 @@ export async function stageAssets(
       const src = findImage(index, req.candidates);
       if (!src) {
         // Repli éditorial : sprite absent de l'extraction mais existant comme
-        // asset wiki V2 (icônes retravaillées/composées à la main).
+        // asset wiki (pool V3 d'abord, pool V2 en héritage — icônes
+        // retravaillées/composées à la main).
         if (req.editorialFallback) {
-          const fb = resolve(V2_POOL(), req.editorialFallback);
-          if (existsSync(fb)) {
+          const fb = editorialSource(req.editorialFallback);
+          if (fb) {
             mkdirSync(dirname(dest), { recursive: true });
             copyFileSync(fb, dest);
             result.staged++;
