@@ -169,7 +169,8 @@ function loadFamilyOverrides(): Map<string, EffectFamily> {
       const raw = JSON.parse(
         readFileSync(resolve('data/curated/effect-families.json'), 'utf8'),
       ) as Record<string, EffectFamily>;
-      for (const [t, f] of Object.entries(raw)) familyOverrides.set(t, f);
+      // Clés `_*` = documentation embarquée (convention des curés), pas des types.
+      for (const [t, f] of Object.entries(raw)) if (!t.startsWith('_')) familyOverrides.set(t, f);
     } catch {
       /* pas d'overrides — les règles suffisent */
     }

@@ -1,1 +1,11 @@
-{}
+{
+  "_doc": "Familles CURÉES des types de buff que les règles de datagen/lib/effects.ts ne classent pas (format : {\"BT_TYPE\": \"famille\"}, le fichier prime sur les règles). Les 8 entrées ci-dessous sont les résidents ASSUMÉS du fourre-tout 'special' (mécaniques singulières, pas des stat/dot/cc) — les acter ici fait taire le warning du build, qui ne signale plus que les VRAIS nouveaux types.",
+  "BT_2000065_A": "special",
+  "BT_2000065_B": "special",
+  "BT_2000094": "special",
+  "BT_NONE": "special",
+  "BT_SKILL_RANGE_ALL": "special",
+  "BT_SKILL_RANGE_SINGLE": "special",
+  "BT_SKILL_USING_CONDITION": "special",
+  "BT_UNIQUE_BUFF": "special"
+}
