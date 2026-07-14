@@ -26,3 +26,8 @@ coverage
 *.log
 Dockerfile
 .dockerignore
+
+# Oracle V2 figé (jamais lu par l'app) et données locales du jeu
+data/legacy
+.gamedata
+.assets-staging
