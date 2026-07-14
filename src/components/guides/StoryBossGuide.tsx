@@ -3,7 +3,12 @@ import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import type { GuideContentProps } from '@/lib/data/guides';
-import { bossWaveMonsters, encounterLabel, encountersOfIds } from '@/lib/data/encounters';
+import {
+  bossWaveMonsters,
+  encounterLabel,
+  encountersOfIds,
+  pickMonsters,
+} from '@/lib/data/encounters';
 import { BossEncounters } from '@/components/guides/BossEncounters';
 import { TacticalTips } from '@/components/guides/TacticalTips';
 import { RecommendedCharacters } from '@/components/guides/RecommendedCharacters';
@@ -36,7 +41,9 @@ export interface StoryGuideContent {
  * version, avec deux API concurrentes selon le guide. Ici, les comparses sont
  * simplement les autres monstres de la VAGUE DU BOSS (`bossWaveMonsters`) : ils
  * viennent de la donnée, ils suivent le mode tout seuls, et un guide n'est plus
- * que `meta.json` + `content.json`.
+ * que `meta.json` + `content.json`. Les deux stages que cette règle ne sert pas
+ * (Alpha combat une vague avant Leo ; Maxwell traîne un clone et un orbe muets)
+ * désignent leurs monstres dans le meta — une DONNÉE, pas un cas dans le code.
  *
  * Le combat vient des `dungeons` du META : l'histoire n'a pas de `group` (cf.
  * `encountersOfIds`). Le mode le plus dur ouvre par défaut — c'est pour lui que
@@ -64,6 +71,21 @@ export async function StoryBossGuide({
   const encounters = encountersOfIds(guide.dungeons);
   const target = encounterLabel(encounters[encounters.length - 1].ref, lang, t);
 
+  // Le guide peut DÉSIGNER ses monstres quand la vague du boss ne dit pas le
+  // combat (cf. `GuideMeta.monsters`). Un id qui ne tombe dans AUCUN donjon est
+  // une carte qui disparaîtrait sans un bruit : on casse le build à la place.
+  const chosen = guide.monsters;
+  if (chosen) {
+    for (const id of chosen) {
+      if (!encounters.some((e) => e.monsters.some((m) => m.id === id))) {
+        throw new Error(
+          `${at} : monstre « ${id} » (meta.monsters) absent des donjons du guide ` +
+            `(${guide.dungeons.join(', ')}).`,
+        );
+      }
+    }
+  }
+
   return (
     <>
       {/* Du contenu éditorial, pas une légende : même encre que le reste du guide. */}
@@ -77,7 +99,11 @@ export async function StoryBossGuide({
         </p>
       )}
 
-      <BossEncounters dungeons={guide.dungeons} lang={lang} monsters={bossWaveMonsters} />
+      <BossEncounters
+        dungeons={guide.dungeons}
+        lang={lang}
+        monsters={chosen ? (e) => pickMonsters(e, chosen) : bossWaveMonsters}
+      />
 
       {content.tips?.length ? (
         <>

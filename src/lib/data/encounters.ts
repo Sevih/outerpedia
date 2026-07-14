@@ -113,6 +113,25 @@ export function bossWaveMonsters(e: Encounter): DungeonMonster[] {
 }
 
 /**
+ * Les monstres qu'un guide DÉSIGNE, dans l'ordre où il les a écrits.
+ *
+ * La vague du boss (`bossWaveMonsters`) est le bon défaut partout sauf aux
+ * marges, et ces marges existent : le stage 9-5 fait combattre Alpha à la vague
+ * 2 et Leo à la 3 — c'est bien un combat en deux temps que le guide documente
+ * (« Leo & Alpha »), pas une escorte à ignorer. À l'inverse, le 8-5 aligne à
+ * côté de Maxwell un clone et un orbe qui n'apprennent rien à personne. Quand la
+ * donnée seule ne sait pas trancher, l'auteur tranche — explicitement, dans le
+ * meta, et pas dans le composant comme le faisait la V2.
+ *
+ * Un id absent du donjon est ignoré ICI (un même guide couvre plusieurs donjons
+ * aux monstres distincts) ; c'est à l'appelant de vérifier qu'aucun id ne tombe
+ * dans le vide sur TOUS ses donjons — sinon la carte disparaîtrait en silence.
+ */
+export function pickMonsters(e: Encounter, ids: readonly string[]): DungeonMonster[] {
+  return ids.flatMap((id) => e.monsters.filter((m) => m.id === id));
+}
+
+/**
  * Libellé d'une difficulté.
  *
  * Le jeu ne parle QUE en/jp/kr/zh : il n'existe pas, et il n'existera jamais,

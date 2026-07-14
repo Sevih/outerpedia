@@ -18,5 +18,6 @@
   "updated": "2025-05-25",
   "order": 108,
   "bossId": "4104007",
-  "dungeons": ["100805"]
+  "dungeons": ["100805"],
+  "monsters": ["4104007"]
 }
