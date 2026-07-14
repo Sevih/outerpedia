@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Anubis Guardian",
+    "jp": "アヌビスガーディアン",
+    "kr": "아누비스 가디언",
+    "zh": "阿努比斯守护者",
+    "fr": "Anubis Guardian"
+  },
+  "description": {
+    "en": "Guide and advice to clear the Weekly Conquest - Anubis Guardian",
+    "jp": "ウィークリー討伐 - アヌビスガーディアン クリアガイドとアドバイス",
+    "kr": "주간토벌 - 아누비스 가디언 클리어 가이드 및 조언",
+    "zh": "周常征服 - 阿努比斯守护者通关指南和建议",
+    "fr": "Guide et conseils pour réussir le Weekly Conquest — Anubis Guardian"
+  },
+  "icon": "T_Licence_4044007",
+  "author": "Shiraen",
+  "updated": "2025-11-29",
+  "bossId": "51000031",
+  "group": "adventure_mission:70600018"
+}

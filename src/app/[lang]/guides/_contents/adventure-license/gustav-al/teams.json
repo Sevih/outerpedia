@@ -1,0 +1,54 @@
+[
+  {
+    "slots": [
+      ["Monad Eva", "Nella", "Astei", "Viella"],
+      ["Francesca", "Aer", "Ryu Lion"],
+      ["Demiurge Astei", "Gnosis Dahlia", "Laplace"],
+      ["Gnosis Viella", "Demiurge Luna", "Regina"]
+    ],
+    "note": [
+      {
+        "en": "1 to 2 attempts. Verified up to stage 10.",
+        "jp": "1〜2回の試行。ステージ10まで検証済み。",
+        "kr": "1~2회 시도. 스테이지 10까지 검증됨.",
+        "zh": "1至2次尝试。已验证至第10关。",
+        "fr": "1 à 2 tentatives. Vérifié jusqu'au stage 10."
+      }
+    ]
+  },
+  {
+    "title": {
+      "effect": "BT_DOT_CURSE"
+    },
+    "slots": [
+      ["Monad Eva", "Viella"],
+      ["Drakhan"],
+      ["Marian"],
+      ["Kitsune of Eternity Tamamo-no-Mae"]
+    ],
+    "note": [
+      {
+        "en": "1 to 2 attempts. Verified up to stage 10.",
+        "jp": "1〜2回の試行。ステージ10まで検証済み。",
+        "kr": "1~2회 시도. 스테이지 10까지 검증됨.",
+        "zh": "1至2次尝试。已验证至第10关。",
+        "fr": "1 à 2 tentatives. Vérifié jusqu'au stage 10."
+      }
+    ]
+  },
+  {
+    "title": {
+      "effect": "BT_DOT_BURN"
+    },
+    "slots": [["Astei"], ["Maxie"], ["Vlada"], ["Roxie"]],
+    "note": [
+      {
+        "en": "1 to 2 attempts. Verified up to stage 10.",
+        "jp": "1〜2回の試行。ステージ10まで検証済み。",
+        "kr": "1~2회 시도. 스테이지 10까지 검증됨.",
+        "zh": "1至2次尝试。已验证至第10关。",
+        "fr": "1 à 2 tentatives. Vérifié jusqu'au stage 10."
+      }
+    ]
+  }
+]

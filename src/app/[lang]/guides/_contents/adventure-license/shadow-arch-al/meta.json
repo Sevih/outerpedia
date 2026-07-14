@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Shadow of the Archdemon",
+    "jp": "魔王の隻影",
+    "kr": "마왕의 그림자",
+    "zh": "魔王之影",
+    "fr": "Shadow of the Archdemon"
+  },
+  "description": {
+    "en": "Guide and advice to clear the Weekly Conquest - Shadow of the Archdemon",
+    "jp": "ウィークリー討伐 - 魔王の影 クリアガイドとアドバイス",
+    "kr": "주간토벌 - 마왕의 그림자 클리어 가이드 및 조언",
+    "zh": "周常征服 - 大魔王之影通关指南和建议",
+    "fr": "Guide et conseils pour réussir le Weekly Conquest — Shadow of the Archdemon"
+  },
+  "icon": "T_Licence_4004004",
+  "author": "Shiraen",
+  "updated": "2025-11-29",
+  "bossId": "51000027",
+  "group": "adventure_mission:70600014"
+}

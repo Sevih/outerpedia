@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Promotion : Monad Eva",
+    "jp": "昇級チャレンジ : モナド エヴァ",
+    "kr": "승급 챌린지 : 모나드 에바",
+    "zh": "晋升挑战：单子 艾娃",
+    "fr": "Promotion : Monad Eva"
+  },
+  "description": {
+    "en": "Tips and advice to succeed against Monad Eva",
+    "jp": "モナド エヴァを成功させるためのヒントとアドバイス",
+    "kr": "모나드 에바를 성공시키기 위한 팁과 조언",
+    "zh": "成功挑战单子 艾娃的提示和建议",
+    "fr": "Conseils et astuces pour réussir contre Monad Eva"
+  },
+  "icon": "T_Licence_2000084_Lock",
+  "author": "Sevih",
+  "updated": "2025-11-29",
+  "bossId": "50000008",
+  "group": "adventure_challenge:70600104"
+}

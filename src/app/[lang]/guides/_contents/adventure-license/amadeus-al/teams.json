@@ -1,0 +1,19 @@
+[
+  {
+    "slots": [
+      ["Stella", "Dianne"],
+      ["Demiurge Stella", "Skadi", "Akari"],
+      ["Drakhan", "Gnosis Beth"],
+      ["Demiurge Luna", "Regina", "Kuro", "Ais Wallenstein"]
+    ],
+    "note": [
+      {
+        "en": "Typically cleared in 1 to 2 attempts. Verified up to stage 10.",
+        "jp": "通常1〜2回の挑戦でクリア可能。ステージ10まで検証済み。",
+        "kr": "보통 1~2회 시도로 클리어 가능. 스테이지 10까지 검증됨.",
+        "zh": "通常1-2次尝试即可通关。已验证至第10阶段。",
+        "fr": "Généralement clear en 1 à 2 tentatives. Vérifié jusqu'au stage 10."
+      }
+    ]
+  }
+]

@@ -1050,6 +1050,26 @@ export function buildEncounters(): EncountersData {
     if (lose) d.rewardLose = lose;
   }
 
+  // 2ter) Adventure License (`adventure_mission` = Weekly Conquest,
+  // `adventure_challenge` = Promotion Challenge) : le jeu ne groupe RIEN ici, et
+  // c'est fidèle au mode — un donjon EST le combat, seul contre lui-même. Son
+  // échelle vit dans ses `ranks` (les 15 stages de la V2), pas dans des donjons
+  // frères comme la poursuite ou le guild raid.
+  //
+  // On lui donne quand même son `group` : c'est le SEUL pointeur qu'un guide a
+  // vers un combat (`meta.group`), et sans lui la catégorie ne pourrait pas
+  // afficher son boss. Un groupe d'une seule rencontre est le cas dégénéré
+  // normal — `BossEncounters` masque alors ses onglets de difficulté.
+  //
+  // À NE PAS FAIRE : regrouper les Promotion Challenge « boostés » (Supreme 4-6)
+  // avec leur combat d'origine. Ils rejouent les mêmes kits de boss à des stats
+  // plus hautes, mais les PAIRES de monstres diffèrent — ce sont d'autres
+  // combats, et la scène partagée (SceneID) est l'arène, pas le combat.
+  for (const [id, d] of Object.entries(dungeons)) {
+    if (d.mode === 'adventure_mission' || d.mode === 'adventure_challenge')
+      d.group = `${d.mode}:${id}`;
+  }
+
   // 3) Challenge d'événement : la saison (EventDungeonTemplet) porte le donjon
   // (`ChallengeDungeonID`) + BossHP, ses paliers vivent dans
   // EventRankChallengeTemplet (GroupID = GroupID de la saison).

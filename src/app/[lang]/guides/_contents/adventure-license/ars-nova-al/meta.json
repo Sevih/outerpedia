@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Ars Nova",
+    "jp": "アルス・ノーヴァ",
+    "kr": "아르스 노바",
+    "zh": "阿勒斯新星",
+    "fr": "Ars Nova"
+  },
+  "description": {
+    "en": "Guide and advice to clear the Weekly Conquest - Ars Nova",
+    "jp": "ウィークリー討伐 - アルス・ノーヴァ クリアガイドとアドバイス",
+    "kr": "주간토벌 - 아르스 노바 클리어 가이드 및 조언",
+    "zh": "周常征服 - 新艺术通关指南和建议",
+    "fr": "Guide et conseils pour réussir le Weekly Conquest — Ars Nova"
+  },
+  "icon": "T_Licence_4076008",
+  "author": "Shiraen",
+  "updated": "2025-11-29",
+  "bossId": "51000024",
+  "group": "adventure_mission:70600012"
+}

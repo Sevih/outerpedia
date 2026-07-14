@@ -116,10 +116,18 @@ Vues encore à faire — ce qui manque pour chacune :
       `route`, variante. La V2 les décodait par regex sur le slug
       (`depth3-route2`) et affichait « Depth N » et « Variant A/B » NON TRADUITS
       alors que la clé i18n existe.
-- [ ] **`adventure-license`** — 0 guide porté (26 en V2). Meta à définir :
-      `promotion` (booléen). La V2 le déduisait de `slug.startsWith('promote-')`,
-      INVENTAIT le nom de l'asset déverrouillé par `icon.replace(/_Lock$/,'_Open')`
-      (404 silencieux) et triait toujours sur le titre anglais.
+- [x] **`adventure-license`** — 26/26 guides portés (`AdventureLicense` +
+      `LicenseTabs`). Pas de champ `promotion` : le partage Weekly/Promotion se lit
+      sur l'ICÔNE (`*_Lock`), le même signal qui fournit la paire de faces — et le
+      manifest collecte les DEUX (fini le `_Open` inventé à 404 silencieux). Le
+      donjon confirme le rangement (test : `_Lock` ⟺ `adventure_challenge`). Tri
+      alphabétique gardé (choix produit : ni saison ni calendrier à suivre).
+      `meta.group` dérivé en datagen (`adventure_mission|adventure_challenge:<id>`) :
+      un donjon EST le combat, son échelle vit dans ses rangs.
+      RESTE : les 3 Promotion Challenge « boostés » (Supreme 4-6, donjons
+      70600106/107/108) n'ont aucun guide — la V2 n'en avait pas. Mêmes kits de boss
+      que les combats d'origine, à des stats plus hautes, mais d'AUTRES paires de
+      monstres : ce sont des combats à part, pas une difficulté des guides existants.
 - [ ] **`adventure`** — bloqué par `area_name`. Meta à définir : `season`,
       `episode`, `stage` — la V2 les décodait par regex sur le slug (`S2-13-40`).
       Son drapeau `spoilerFree` est INVERSÉ et elle rend les noms « surname name »

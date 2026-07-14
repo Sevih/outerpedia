@@ -1,0 +1,38 @@
+[
+  {
+    "title": {
+      "effect": "BT_DOT_CURSE"
+    },
+    "slots": [
+      ["Monad Eva"],
+      ["Viella", "Dianne"],
+      ["Marian"],
+      ["Kitsune of Eternity Tamamo-no-Mae", "Drakhan"]
+    ],
+    "note": [
+      {
+        "en": "Typically cleared in 1 attempt. Verified up to stage 10.",
+        "jp": "通常1回でクリア可能。ステージ10まで検証済み。",
+        "kr": "일반적으로 1회 시도로 클리어됩니다. 스테이지 10까지 검증되었습니다.",
+        "zh": "通常一次通关。已验证至第10关。",
+        "fr": "Généralement clear en 1 tentative. Vérifié jusqu'au stage 10."
+      }
+    ]
+  },
+  {
+    "title": {
+      "effect": "BT_COUNTERATTACK",
+      "side": "buff"
+    },
+    "slots": [["Viella", "Delta", "Idith"], ["Fran"], ["Rey", "Rhona"], ["Ame", "Noa", "Ryu Lion"]],
+    "note": [
+      {
+        "en": "Alternative approach using Counter and Revenge mechanics.",
+        "jp": "反撃とリベンジメカニックを使用する別のアプローチ。",
+        "kr": "반격과 복수 메커니즘을 사용하는 대안적 접근법입니다.",
+        "zh": "使用反击和复仇机制的替代方法。",
+        "fr": "Approche alternative exploitant les mécaniques Counter et Revenge."
+      }
+    ]
+  }
+]

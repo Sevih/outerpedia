@@ -1,0 +1,42 @@
+[
+  {
+    "title": {
+      "effect": "BT_DOT_CURSE"
+    },
+    "slots": [
+      ["Sterope", "Demiurge Vlada", "Eternal"],
+      ["Monad Eva", "Viella"],
+      ["Marian"],
+      ["Kitsune of Eternity Tamamo-no-Mae", "Drakhan"]
+    ],
+    "note": [
+      {
+        "en": "Typically requires 1-2 attempts.",
+        "jp": "通常1〜2回の挑戦が必要です。",
+        "kr": "보통 1~2회 시도가 필요합니다.",
+        "zh": "通常需要1-2次尝试。",
+        "fr": "Nécessite généralement 1 à 2 tentatives."
+      }
+    ]
+  },
+  {
+    "title": {
+      "effect": "BT_FIXED_DAMAGE"
+    },
+    "slots": [
+      ["Sterope", "Demiurge Vlada", "Eternal"],
+      ["Monad Eva", "Viella"],
+      ["Demiurge Stella", "Ryu Lion", "Laplace", "Iota"],
+      ["Tamamo-no-Mae", "Gnosis Nella", "Fran"]
+    ],
+    "note": [
+      {
+        "en": "Typically requires 1-2 attempts.",
+        "jp": "通常1〜2回の挑戦が必要です。",
+        "kr": "보통 1~2회 시도가 필요합니다.",
+        "zh": "通常需要1-2次尝试。",
+        "fr": "Nécessite généralement 1 à 2 tentatives."
+      }
+    ]
+  }
+]

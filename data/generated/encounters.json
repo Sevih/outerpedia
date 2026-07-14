@@ -66422,6 +66422,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_mission:70600000",
     "ranks": [
       {
         "level": 100,
@@ -66562,6 +66563,7 @@
         "role": "add"
       }
     ],
+    "group": "adventure_mission:70600001",
     "ranks": [
       {
         "level": 100,
@@ -66696,6 +66698,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_mission:70600002",
     "ranks": [
       {
         "level": 100,
@@ -66836,6 +66839,7 @@
         "role": "add"
       }
     ],
+    "group": "adventure_mission:70600003",
     "ranks": [
       {
         "level": 100,
@@ -66970,6 +66974,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_mission:70600004",
     "ranks": [
       {
         "level": 100,
@@ -67104,6 +67109,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_mission:70600005",
     "ranks": [
       {
         "level": 100,
@@ -67244,6 +67250,7 @@
         "role": "add"
       }
     ],
+    "group": "adventure_mission:70600006",
     "ranks": [
       {
         "level": 100,
@@ -67384,6 +67391,7 @@
         "role": "add"
       }
     ],
+    "group": "adventure_mission:70600007",
     "ranks": [
       {
         "level": 100,
@@ -67524,6 +67532,7 @@
         "role": "add"
       }
     ],
+    "group": "adventure_mission:70600008",
     "ranks": [
       {
         "level": 100,
@@ -67658,6 +67667,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_mission:70600009",
     "ranks": [
       {
         "level": 100,
@@ -67798,6 +67808,7 @@
         "role": "add"
       }
     ],
+    "group": "adventure_mission:70600010",
     "ranks": [
       {
         "level": 105,
@@ -67916,6 +67927,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_mission:70600011",
     "ranks": [
       {
         "level": 105,
@@ -68040,6 +68052,7 @@
         "role": "add"
       }
     ],
+    "group": "adventure_mission:70600012",
     "ranks": [
       {
         "level": 105,
@@ -68158,6 +68171,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_mission:70600013",
     "ranks": [
       {
         "level": 105,
@@ -68276,6 +68290,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_mission:70600014",
     "ranks": [
       {
         "level": 115,
@@ -68374,6 +68389,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_mission:70600015",
     "ranks": [
       {
         "level": 115,
@@ -68472,6 +68488,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_mission:70600016",
     "ranks": [
       {
         "level": 130,
@@ -68545,6 +68562,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_mission:70600017",
     "ranks": [
       {
         "level": 130,
@@ -68630,6 +68648,7 @@
         "role": "add"
       }
     ],
+    "group": "adventure_mission:70600018",
     "ranks": [
       {
         "level": 160,
@@ -68676,6 +68695,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_mission:70600019",
     "ranks": [
       {
         "level": 160,
@@ -68722,6 +68742,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_challenge:70600100",
     "ranks": [
       {
         "level": 100,
@@ -68751,6 +68772,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_challenge:70600101",
     "ranks": [
       {
         "level": 120,
@@ -68784,6 +68806,7 @@
         "role": "add"
       }
     ],
+    "group": "adventure_challenge:70600102",
     "ranks": [
       {
         "level": 150,
@@ -68818,6 +68841,7 @@
         "role": "add"
       }
     ],
+    "group": "adventure_challenge:70600103",
     "ranks": [
       {
         "level": 180,
@@ -68852,6 +68876,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_challenge:70600104",
     "ranks": [
       {
         "level": 200,
@@ -68880,6 +68905,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_challenge:70600105",
     "ranks": [
       {
         "level": 220,
@@ -68908,6 +68934,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_challenge:70600106",
     "ranks": [
       {
         "level": 230,
@@ -68942,6 +68969,7 @@
         "role": "boss"
       }
     ],
+    "group": "adventure_challenge:70600107",
     "ranks": [
       {
         "level": 240,
@@ -68976,6 +69004,7 @@
         "role": "add"
       }
     ],
+    "group": "adventure_challenge:70600108",
     "ranks": [
       {
         "level": 250,

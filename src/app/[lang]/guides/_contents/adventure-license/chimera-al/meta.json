@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Unidentified Chimera",
+    "jp": "未確認キメラ",
+    "kr": "미확인 키메라",
+    "zh": "未知的奇美拉",
+    "fr": "Unidentified Chimera"
+  },
+  "description": {
+    "en": "Guide and advice to clear the Weekly Conquest - Unidentified Chimera",
+    "jp": "ウィークリー討伐 - 未確認キメラ クリアガイドとアドバイス",
+    "kr": "주간토벌 - 미확인 키메라 클리어 가이드 및 조언",
+    "zh": "周常征服 - 未确认奇美拉通关指南和建议",
+    "fr": "Guide et conseils pour réussir le Weekly Conquest — Unidentified Chimera"
+  },
+  "icon": "T_Licence_4034002",
+  "author": "Shiraen",
+  "updated": "2025-11-29",
+  "bossId": "51000006",
+  "group": "adventure_mission:70600002"
+}
