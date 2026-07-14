@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useSyncExternalStore, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
+import { useUrlSlice, writeUrl } from '@/hooks/useUrlSlice';
 
 export interface GuideVersionEntry {
   /** Clé stable (dossier `versions/YYYY-MM`) — sert d'ancre `#version=`. */
@@ -11,14 +12,8 @@ export interface GuideVersionEntry {
   warning?: string;
 }
 
-// Le hash comme STORE EXTERNE (pattern AdminSidebar/localStorage) : le HTML
-// statique ne le connaît pas (snapshot serveur null), le client se resynchronise
-// à l'hydratation — sans setState dans un effet. `hashchange` couvre en prime
-// une édition manuelle du hash (avant : restauration au montage uniquement).
-const subscribeHash = (onChange: () => void) => {
-  window.addEventListener('hashchange', onChange);
-  return () => window.removeEventListener('hashchange', onChange);
-};
+// Le hash est la SOURCE DE VÉRITÉ de la version affichée (cf. useUrlSlice) :
+// lien partageable, Back/Forward et édition manuelle du hash pilotent l'UI.
 const readVersionHash = () => {
   const m = window.location.hash.match(/^#version=(.+)$/);
   return m ? decodeURIComponent(m[1]) : null;
@@ -49,17 +44,12 @@ export function GuideVersions({
    */
   shared?: ReactNode;
 }) {
-  // Sélection UTILISATEUR (prioritaire) ; à défaut le hash, puis la 1re entrée.
-  const [selected, setSelected] = useState<string | null>(null);
-  const hashKey = useSyncExternalStore(subscribeHash, readVersionHash, () => null);
-  const active =
-    selected ?? (hashKey && versions.some((v) => v.key === hashKey) ? hashKey : versions[0]?.key);
+  const hashKey = useUrlSlice('hashchange', readVersionHash);
+  const active = hashKey && versions.some((v) => v.key === hashKey) ? hashKey : versions[0]?.key;
 
   const select = (key: string) => {
-    setSelected(key);
-    // replaceState ne déclenche pas `hashchange` — sans importance : `selected`
-    // prime désormais sur le snapshot du hash.
-    window.history.replaceState(null, '', `#version=${encodeURIComponent(key)}`);
+    // replaceState ne déclenche pas `hashchange` — writeUrl notifie le store.
+    writeUrl(() => window.history.replaceState(null, '', `#version=${encodeURIComponent(key)}`));
   };
 
   const current = versions.find((v) => v.key === active) ?? versions[0];

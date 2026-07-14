@@ -7,7 +7,7 @@
  * voie ses écritures immédiatement (en dev, Next invalide le module à la
  * recompilation — le cache module ci-dessous ne survit pas à une écriture).
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import glossariesData from '@data/generated/glossaries.json';
 import type { Effect, EffectCurated, Glossaries, LangDict } from '@contracts';
@@ -43,25 +43,33 @@ export interface MergedEffect {
   overridden: boolean;
 }
 
-// Cache module (même pattern que v2Entries plus bas) : le fichier curé ne
-// change pas pendant un rendu, et chaque page parse-text déclenchait sinon des
-// dizaines de relectures/parses du même JSON. En dev, l'admin voit ses
-// écritures via l'invalidation de module de Next (recompilation à la requête).
-let curatedCache: Record<string, EffectCurated> | null = null;
+// Cache module CLÉ SUR LE MTIME : le contrat de ce fichier est que l'admin
+// voie ses écritures immédiatement (l'éditeur d'effets écrit ce JSON au
+// runtime — un memo pur survivrait à l'écriture jusqu'au redémarrage, le
+// fichier est lu par fs, pas importé, donc Next ne recompile rien). Le
+// statSync par appel remplace la relecture/parse complète qu'on faisait avant
+// — c'est lui qui rend le cache correct, pas seulement rapide.
+let curatedCache: { data: Record<string, EffectCurated>; mtimeMs: number } | null = null;
 
-/** Charge tous les overrides curés (clé = id d'effet) — mémoïsé au module. */
+/** Charge tous les overrides curés (clé = id d'effet) — mémoïsé sur le mtime. */
 export function loadCuratedEffects(): Record<string, EffectCurated> {
-  if (!curatedCache) {
+  let mtimeMs = -1;
+  try {
+    mtimeMs = statSync(CURATED_PATH).mtimeMs;
+  } catch {
+    /* fichier absent → catalogue vide (mtime sentinelle -1) */
+  }
+  if (curatedCache && curatedCache.mtimeMs === mtimeMs) return curatedCache.data;
+  let data: Record<string, EffectCurated> = {};
+  if (mtimeMs !== -1) {
     try {
-      curatedCache = JSON.parse(readFileSync(CURATED_PATH, 'utf8')) as Record<
-        string,
-        EffectCurated
-      >;
+      data = JSON.parse(readFileSync(CURATED_PATH, 'utf8')) as Record<string, EffectCurated>;
     } catch {
-      curatedCache = {};
+      data = {};
     }
   }
-  return curatedCache;
+  curatedCache = { data, mtimeMs };
+  return data;
 }
 
 function merge(effect: Effect, c?: EffectCurated): MergedEffect {

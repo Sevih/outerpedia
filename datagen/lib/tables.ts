@@ -31,12 +31,62 @@ function load(name: string): ParsedTable {
   // parsés changent sur disque et un cache purement mémoire servirait de la
   // donnée périmée jusqu'au redémarrage. Un `statSync` au hit (aucune lecture
   // de contenu) suffit à détecter le refresh et à recharger.
-  const mtimeMs = statSync(path).mtimeMs;
   const hit = tableCache.get(name);
+  let mtimeMs: number;
+  try {
+    mtimeMs = statSync(path).mtimeMs;
+  } catch (e) {
+    // Un refresh concurrent RÉÉCRIT les fichiers parsés : pendant la fenêtre
+    // où le fichier est absent/renommé, on sert la copie en cache plutôt que
+    // de faire planter une requête admin en vol (avant l'invalidation mtime,
+    // ce cas ne touchait jamais le disque). Sans copie → vraie erreur.
+    if (hit) return hit.parsed;
+    throw e;
+  }
   if (hit && hit.mtimeMs === mtimeMs) return hit.parsed;
   const parsed = JSON.parse(readFileSync(path, 'utf8')) as ParsedTable;
   tableCache.set(name, { parsed, mtimeMs });
   return parsed;
+}
+
+/**
+ * Empreinte de FRAÎCHEUR d'un jeu de tables (mtime concaténés) — pour les
+ * caches DÉRIVÉS (glossaire d'effets, encounters) : un memo module survivrait
+ * au refresh alors que `loadTable`, lui, recharge — le dérivé compare
+ * l'empreinte de ses sources et se reconstruit quand elle a bougé.
+ *
+ * Ces vérifications arrivent en BOUCLE CHAUDE (une par résolution d'effet) →
+ * re-stat au plus toutes les `ttlMs` : le refresh est un événement rare, 2 s
+ * de staleness sont invisibles pour l'admin, et les hits restent sans syscall.
+ * Un refresh réécrit TOUTES les tables d'un coup → une table sentinelle
+ * (`TextSystem`) suffit à le détecter. Fichier absent → jeton stable.
+ */
+const stampCache = new Map<string, { stamp: string; at: number }>();
+export function tablesStamp(names: string[], ttlMs = 2000): string {
+  const key = names.join(',');
+  const hit = stampCache.get(key);
+  const now = Date.now();
+  if (hit && now - hit.at < ttlMs) return hit.stamp;
+  const stamp = names
+    .map((n) => {
+      try {
+        return String(statSync(resolve(PARSED_DIR, `${n}.json`)).mtimeMs);
+      } catch {
+        return 'absent';
+      }
+    })
+    .join('|');
+  stampCache.set(key, { stamp, at: now });
+  return stamp;
+}
+
+/** Empreinte mtime d'un fichier HORS tables (curé éditable seul) — même usage. */
+export function fileStamp(path: string): string {
+  try {
+    return String(statSync(resolve(path)).mtimeMs);
+  } catch {
+    return 'absent';
+  }
 }
 
 /** Charge les lignes d'une table parsée (`CharacterTemplet`, `TextSystem`, …), avec cache. */

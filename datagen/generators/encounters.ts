@@ -37,7 +37,28 @@ import { loadBuffIndex, skillBuffVars } from '../lib/buff';
 import { statSlug } from '../lib/effects';
 import { slugEnum } from '../lib/enums';
 import { loadTextIndex, resolveText } from '../lib/text';
-import { groupBy, indexBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
+import {
+  fileStamp,
+  groupBy,
+  indexBy,
+  loadTable,
+  num,
+  splitCsv,
+  tablesStamp,
+  type Row,
+} from '../lib/tables';
+
+/**
+ * Empreinte de fraîcheur du domaine encounters : la sentinelle `TextSystem`
+ * détecte un refresh (qui réécrit toutes les tables d'un coup), et
+ * `mode-titles.json` est stampé à part — la curation s'édite SEULE (admin),
+ * sans refresh. Sans ça, l'invalidation mtime de loadTable est à moitié
+ * efficace : les tables rechargent mais les memos dérivés serviraient
+ * l'ancien monde jusqu'au redémarrage.
+ */
+function encountersStamp(): string {
+  return tablesStamp(['TextSystem']) + '|' + fileStamp('data/curated/mode-titles.json');
+}
 
 /**
  * Modificateurs de stats du DONJON (per-mille SIGNÉS, colonnes
@@ -534,10 +555,11 @@ interface ModeTitleContext {
   chaseDifficulties: Record<string, string>;
 }
 
-let titleCtxCache: ModeTitleContext | undefined;
+let titleCtxCache: { ctx: ModeTitleContext; stamp: string } | undefined;
 
 function titleContext(): ModeTitleContext {
-  if (titleCtxCache) return titleCtxCache;
+  const stamp = encountersStamp();
+  if (titleCtxCache && titleCtxCache.stamp === stamp) return titleCtxCache.ctx;
   const tsys = loadTextIndex('TextSystem');
 
   // Index des clés TextSystem en forme normalisée + titres de ContentLock
@@ -592,15 +614,18 @@ function titleContext(): ModeTitleContext {
   }
 
   titleCtxCache = {
-    tsys,
-    keysByNorm,
-    contentTitles,
-    curatedTitles,
-    ignoredModes,
-    difficultyNames,
-    chaseDifficulties,
+    ctx: {
+      tsys,
+      keysByNorm,
+      contentTitles,
+      curatedTitles,
+      ignoredModes,
+      difficultyNames,
+      chaseDifficulties,
+    },
+    stamp,
   };
-  return titleCtxCache;
+  return titleCtxCache.ctx;
 }
 
 /**
@@ -624,10 +649,11 @@ export function modeTitleKey(rawMode: string): string | undefined {
  * l'orchestrateur (dictionnaires modes/donjons) et l'admin — même processus,
  * mêmes tables (elles-mêmes cachées par `loadTable`).
  */
-let cache: EncountersData | undefined;
+let cache: { data: EncountersData; stamp: string } | undefined;
 
 export function buildEncounters(): EncountersData {
-  if (cache) return cache;
+  const stamp = encountersStamp();
+  if (cache && cache.stamp === stamp) return cache.data;
   const tsys = loadTextIndex('TextSystem');
   const tchar = loadTextIndex('TextCharacter');
   const tskill = loadTextIndex('TextSkill');
@@ -1300,6 +1326,9 @@ export function buildEncounters(): EncountersData {
     }
   }
 
-  cache = { modes, rankOptions, bossQuirkMods, rewardTables, geas, dungeons, monsters };
-  return cache;
+  cache = {
+    data: { modes, rankOptions, bossQuirkMods, rewardTables, geas, dungeons, monsters },
+    stamp,
+  };
+  return cache.data;
 }

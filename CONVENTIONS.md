@@ -3,7 +3,7 @@
 ## Langue
 
 - **Documentation** (README, roadmap, issues...) : français.
-- **Code et commentaires** : anglais.
+- **Code** (identifiants, noms de fichiers) : anglais. **Commentaires** : français — c'est la pratique de tout le codebase ; la règle « commentaires en anglais » ne l'a jamais été (alignée le 2026-07-14).
 
 ## Commits — Conventional Commits
 

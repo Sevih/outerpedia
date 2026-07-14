@@ -110,34 +110,30 @@ export interface SkillData {
 }
 
 /** Valeur d'enum de cible/portée → slug minuscule, `undefined` si NONE/vide/CSV. */
-export function slugTeam(v: string | undefined): string | undefined {
+function slugTeam(v: string | undefined): string | undefined {
   const first = splitCsv(v ?? '')[0];
   if (!first || first === 'NONE') return undefined;
   return first.toLowerCase();
 }
 
 /** Sous-type ACTIVE/PASSIVE → slug, sinon null. */
-export function subTypeOf(v: string | undefined): SkillSubType {
+function subTypeOf(v: string | undefined): SkillSubType {
   if (v === 'ACTIVE') return 'active';
   if (v === 'PASSIVE') return 'passive';
   return null;
 }
 
 /**
- * Options du CŒUR D'ASSEMBLAGE partagé persos/monstres (`assembleSkill`) —
- * les seules différences RÉELLES entre les deux tables :
- *   - persos : les lignes de niveau portent GainAP/GainCP (jauge joueur) et un
- *     DescID (repli de desc principale + notes d'amélioration par niveau) ;
- *   - monstres : rien de tout ça (pas de jauge, pas de DescID de niveau).
- * RequireAP/burstAP, buffs de chaîne et buffs « ambiants » PriorityGroup sont
- * aussi propres aux persos — gérés par l'appelant, pas ici.
+ * Variante du CŒUR D'ASSEMBLAGE partagé (`assembleSkill`) — UN SEUL axe de
+ * variation réel entre les deux tables :
+ *   - `character` : les lignes de niveau portent GainAP/GainCP (jauge joueur)
+ *     et un DescID (repli de desc principale + notes d'amélioration) ;
+ *   - `monster` : rien de tout ça (pas de jauge, pas de DescID de niveau).
+ * Un seul discriminant (pas deux flags) : les combinaisons incohérentes sont
+ * irreprésentables. RequireAP/burstAP, buffs de chaîne et buffs « ambiants »
+ * PriorityGroup sont aussi propres aux persos — gérés par l'appelant, pas ici.
  */
-export interface AssembleOptions {
-  /** Ressources joueur des lignes de niveau (GainAP/GainCP) — persos. */
-  playerResources?: boolean;
-  /** DescID des lignes de niveau : repli de desc + upgrades/desc — persos. */
-  levelDescs?: boolean;
-}
+export type AssembleVariant = 'character' | 'monster';
 
 /** Sortie du cœur d'assemblage : le skill SANS `effects` (finalisé par
  * l'appelant, qui peut d'abord enrichir `shapes` — chaîne/ambiants persos). */
@@ -165,8 +161,9 @@ export function assembleSkill(
   buffs: ReturnType<typeof loadBuffIndex>,
   groups: Map<string, BuffGroup>,
   tskill: Map<string, LangDict>,
-  opts: AssembleOptions = {},
+  variant: AssembleVariant = 'monster',
 ): AssembledSkill {
+  const forCharacter = variant === 'character';
   const lvlRows = rawLvlRows.slice().sort((a, b) => num(a.SkillLevel) - num(b.SkillLevel));
   const lvl1 = lvlRows[0];
 
@@ -174,13 +171,15 @@ export function assembleSkill(
   // niveau 1 — cas des passifs uniques dont la desc vit sur la ligne de niveau.
   const mainOnSkill = !!s.DescID;
   const descKey =
-    splitCsv(s.DescID ?? '')[0] || (opts.levelDescs ? splitCsv(lvl1?.DescID ?? '')[0] : '') || '';
+    splitCsv(s.DescID ?? '')[0] || (forCharacter ? splitCsv(lvl1?.DescID ?? '')[0] : '') || '';
   const desc = descKey ? resolveText(tskill, descKey) : undefined;
 
   const maxLevel = num(lvlRows[lvlRows.length - 1]?.SkillLevel) || lvlRows.length || 1;
 
   const type = slugEnum(s.SkillType ?? '');
-  const levels = lvlRows.map((r) => buildLevel(r, buffs, groups, tskill, mainOnSkill, opts));
+  const levels = lvlRows.map((r) =>
+    buildLevel(r, buffs, groups, tskill, mainOnSkill, forCharacter),
+  );
   const skill: Skill = {
     id: s.ID,
     name: resolveText(tskill, s.NameID),
@@ -286,7 +285,7 @@ export function buildSkills(): SkillData {
       buffs,
       groups,
       tskill,
-      { playerResources: true, levelDescs: true },
+      'character',
     );
     const maxLevel = skill.maxLevel;
     if (num(s.RequireAP) > 0) {
@@ -350,21 +349,21 @@ export function buildSkills(): SkillData {
 }
 
 /** Construit un niveau de skill : valeurs scalantes + vars (par buff) + réfs.
- * Les options coupent les champs propres aux persos (cf. `AssembleOptions`). */
+ * `forCharacter` active les champs propres aux persos (cf. `AssembleVariant`). */
 function buildLevel(
   r: Row,
   buffs: ReturnType<typeof loadBuffIndex>,
   groups: Map<string, BuffGroup>,
   tskill: Map<string, LangDict>,
   mainOnSkill: boolean,
-  opts: AssembleOptions,
+  forCharacter: boolean,
 ): SkillLevel {
   const level = num(r.SkillLevel) || 1;
   const out: SkillLevel = { level };
   if (num(r.DamageFactor) > 0) out.damageFactor = num(r.DamageFactor);
   if (num(r.Cool) > 0) out.cool = num(r.Cool);
   if (num(r.StartCool) > 0) out.startCool = num(r.StartCool);
-  if (opts.playerResources) {
+  if (forCharacter) {
     if (num(r.GainAP) > 0) out.gainAP = num(r.GainAP);
     if (num(r.GainCP) > 0) out.gainCP = num(r.GainCP);
   }
@@ -384,7 +383,7 @@ function buildLevel(
 
   // Notes d'amélioration de niveau : seulement quand la desc principale est sur
   // le skill (sinon le DescID du niveau EST la desc du niveau, émise telle quelle).
-  if (opts.levelDescs) {
+  if (forCharacter) {
     if (mainOnSkill && r.DescID) {
       const ups = splitCsv(r.DescID)
         .map((k) => resolveText(tskill, k))

@@ -4,7 +4,7 @@ Jeu : **Outerplane**. Wiki communautaire. Reconstruction propre de la V2.
 
 ## Règles critiques
 
-- Répondre en **français** ; **code et commentaires en anglais**.
+- Répondre en **français** ; identifiants de code en **anglais**, **commentaires en français** (pratique constatée de tout le codebase, règle alignée le 2026-07-14).
 - Ne pas créer de fichiers sans nécessité — préférer éditer l'existant.
 - Penser **responsive desktop + mobile** dès le départ.
 - Respecter [CONVENTIONS.md](./CONVENTIONS.md) (commits, i18n, style, données).

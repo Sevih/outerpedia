@@ -33,7 +33,7 @@ import { resolve } from 'node:path';
 import { formatRowValue } from './buff';
 import type { LangDict } from './lang';
 import { loadTextIndex, resolveText } from './text';
-import { loadTable, num, type Row } from './tables';
+import { loadTable, num, tablesStamp, type Row } from './tables';
 import { buildImageIndex, findImage } from '../assets/source';
 
 /** Nature d'un effet, dérivée des champs fiables du jeu. */
@@ -302,10 +302,14 @@ interface EffectGlossary {
    * custom (« Execution time! » ⊃ « Increased Damage Taken »). */
   tooltipKinds: Map<string, string[]>;
 }
-let glossaryCache: EffectGlossary | undefined;
+// Cache DÉRIVÉ clé sur l'empreinte des tables : sans elle, l'invalidation
+// mtime de loadTable est à moitié efficace — après un refresh, les tables
+// rechargent mais le glossaire mémoïsé continuerait de servir l'ancien monde.
+let glossaryCache: { data: EffectGlossary; stamp: string } | undefined;
 
 export function buildEffectGlossary(): EffectGlossary {
-  if (glossaryCache) return glossaryCache;
+  const stamp = tablesStamp(['TextSystem']);
+  if (glossaryCache && glossaryCache.stamp === stamp) return glossaryCache.data;
   const sys = loadTextIndex('TextSystem');
   const skill = loadTextIndex('TextSkill');
   const nameOf = (key: string): LangDict => {
@@ -619,8 +623,8 @@ export function buildEffectGlossary(): EffectGlossary {
   }
 
   const tooltipKinds = new Map([...tooltipKindSets].map(([t, s]) => [t, [...s].sort()]));
-  glossaryCache = { effects, byTooltip, byLabel, byKey, tooltipKinds };
-  return glossaryCache;
+  glossaryCache = { data: { effects, byTooltip, byLabel, byKey, tooltipKinds }, stamp };
+  return glossaryCache.data;
 }
 
 /** Préfixe symbole d'un CreateText (`[DEBUFF]SYS_...` → `SYS_...`). */
@@ -628,7 +632,8 @@ function stripTextSymbol(key: string): string {
   return key.replace(/^\[[^\]]+\]/, '');
 }
 
-let mechanicLabelCache: Map<string, string> | undefined;
+// Même régime d'empreinte que glossaryCache (dérivé de BuffTemplet + glossaire).
+let mechanicLabelCache: { data: Map<string, string>; stamp: string } | undefined;
 
 /**
  * Symbole `SYS_*` MAJORITAIRE par (nature, type de buff) — pont pour NOMMER
@@ -641,7 +646,8 @@ let mechanicLabelCache: Map<string, string> | undefined;
  * donc sans chip, comme dans la curation V2.
  */
 export function mechanicLabelIndex(): Map<string, string> {
-  if (mechanicLabelCache) return mechanicLabelCache;
+  const stamp = tablesStamp(['TextSystem']);
+  if (mechanicLabelCache && mechanicLabelCache.stamp === stamp) return mechanicLabelCache.data;
   const { byLabel } = buildEffectGlossary();
   const tally = new Map<string, Map<string, number>>();
   for (const b of loadTable('BuffTemplet')) {
@@ -659,12 +665,13 @@ export function mechanicLabelIndex(): Map<string, string> {
     m.set(sym, (m.get(sym) ?? 0) + 1);
     tally.set(key, m);
   }
-  mechanicLabelCache = new Map();
+  const idx = new Map<string, string>();
   for (const [key, m] of tally) {
     const winner = [...m.entries()].sort((a, b) => b[1] - a[1])[0][0];
-    if (byLabel.has(winner)) mechanicLabelCache.set(key, winner);
+    if (byLabel.has(winner)) idx.set(key, winner);
   }
-  return mechanicLabelCache;
+  mechanicLabelCache = { data: idx, stamp };
+  return idx;
 }
 
 /** L'instance concrète d'un effet appliqué par une compétence/un passif. */
