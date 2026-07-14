@@ -32,7 +32,13 @@ function rankGrades(options: SpawnContext[]): RankGrade[] {
   const last = options.length - 1;
   const grades: { name: string; indexes: number[] }[] = [];
   options.forEach((s, index) => {
-    if (!s.rank) return;
+    // Échelle de STAGES : le repère est le numéro du stage — et il vaut d'être
+    // écrit, car il ne commence pas toujours à 1 (Anubis entre en rotation au
+    // stage 8 : ses repères se lisent 8, 9, 10).
+    if (!s.rank) {
+      if (s.stage) grades.push({ name: String(s.stage), indexes: [index] });
+      return;
+    }
     const name = s.rank.replace(/\+/g, '');
     const prev = grades[grades.length - 1];
     if (prev && prev.name === name) prev.indexes.push(index);
@@ -125,7 +131,10 @@ export function BossStats({
     .map((id) => rankOptionLabels?.[id])
     .filter((l): l is string => Boolean(l));
 
-  const hasRanks = Boolean(options[0]?.rank);
+  // Une échelle graduée — par GRADES (badges E…SSS) ou par STAGES (numéros).
+  // Les deux se parcourent à la glissière ; ce qui les sépare est ce qu'on pose
+  // sur le pouce (cf. `RankSlider`).
+  const hasRanks = Boolean(options[0]?.rank ?? options[0]?.stage);
 
   return (
     <div className="space-y-4">
@@ -362,7 +371,7 @@ function RankSlider({
         aria-valuemin={0}
         aria-valuemax={last}
         aria-valuenow={selected}
-        aria-valuetext={`${ctx.rank} — ${labels.level} ${ctx.level}`}
+        aria-valuetext={`${ctx.rank ?? ctx.stageLabel ?? ''} — ${labels.level} ${ctx.level}`}
         onPointerDown={onDown}
         onPointerMove={onMove}
         onPointerUp={onUp}
@@ -403,7 +412,11 @@ function RankSlider({
             className="border-accent bg-surface-base ring-accent/20 pointer-events-none absolute top-1/2 flex h-9.5 w-9.5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[10px] border-2 shadow-lg ring-4 transition-[left] duration-75"
             style={{ left: `${pos * 100}%` }}
           >
-            {ctx.rank && (
+            {/* Un GRADE se reconnaît à son badge ; un STAGE n'en a pas — il porte
+                son numéro (le jeu ne dessine rien d'autre pour l'Adventure
+                License). Le libellé complet (« Stage 8 ») reste dit au lecteur
+                d'écran, sous le pouce. */}
+            {ctx.rank ? (
               /* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */
               <img
                 src={img.rankBadge(rankBadgeSprite(ctx.rank))}
@@ -411,6 +424,10 @@ function RankSlider({
                 draggable={false}
                 className="h-7.5 w-7.5 object-contain"
               />
+            ) : (
+              ctx.stage && (
+                <span className="text-content-strong font-mono text-sm font-bold">{ctx.stage}</span>
+              )
             )}
           </span>
         </div>

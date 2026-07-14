@@ -111,6 +111,16 @@ export interface RankOption {
 export interface DungeonRank {
   /** Nom du rang quand le jeu en a un (« D »…« SSS », « E+ »…). */
   name?: string;
+  /**
+   * STAGE numéroté du palier (Adventure License : « Mission Stage 1-10 »).
+   *
+   * Ce n'est PAS un `name` : un grade se lit sur un badge (`CM_Event_Rank_D`),
+   * un stage se DIT (« Stage 8 ») — il n'a pas de sprite, et lui en fabriquer un
+   * depuis son numéro donnerait une image morte. Il ne se déduit pas non plus du
+   * rang de la ligne : un boss n'entre en rotation qu'à partir d'un certain stage
+   * (le premier palier d'Anubis est le stage 8, pas le stage 1).
+   */
+  stage?: number;
   /** Niveau RÉEL du boss à ce palier (remplace celui du spawn). */
   level?: number;
   /** Niveau de TRANSCENDANCE du boss (colonne TransLevel — barème à part). */
@@ -1116,16 +1126,38 @@ export function buildEncounters(): EncountersData {
   // donjon — niveau réel, PV du boss, adv propres (vérifié : BossHP 518000 =
   // interpolation pure à Lv100, sans adv → les adv du palier remplacent bien
   // ceux du donjon).
+  //
+  // Le palier EST le STAGE (colonne `Level`, 1-10), et surtout PAS le rang de la
+  // ligne : un boss n'entre dans la rotation qu'à partir d'un certain stage
+  // (Ziggsaron et Anubis n'existent qu'aux stages 8-9-10 ; Amadeus à partir du 2)
+  // et ses stats sont celles de CE stage. Sans le dire, le sélecteur numérote les
+  // paliers dans l'ordre et le stage 8 d'Anubis s'affiche « 1 » — ses stats
+  // rangées sous un stage où il n'existe même pas.
+  //
+  // La table REDÉCLARE le même stage sous chaque palier de licence qui le
+  // contient (`GroupID`) : 243 lignes pour 175 stages réels, 68 doublons — tous
+  // strictement identiques (vérifié : niveau, PV, adv, tour limite). On garde le
+  // premier ; sans ça, Masterless afficherait 15 paliers pour 10 stages.
+  const seenStage = new Set<string>();
   for (const r of loadTable('AdventureDungeonTemplet')) {
     const d = dungeons[r.DungeonID ?? ''];
     if (!d) continue;
+    const stage = num(r.Level);
+    const key = `${r.DungeonID}|${stage}`;
+    if (seenStage.has(key)) continue;
+    seenStage.add(key);
     const rank: DungeonRank = {};
+    if (stage) rank.stage = stage;
     if (num(r.DungeonLevel)) rank.level = num(r.DungeonLevel);
     if (num(r.BossHP)) rank.hp = num(r.BossHP);
     const adv = advOf(r);
     if (adv) rank.adv = adv;
     (d.ranks ??= []).push(rank);
   }
+  // Du stage le plus BAS au plus HAUT — l'ordre des lignes suit les paliers de
+  // licence, pas les stages (Masterless : 1,2,3,2,3,4…).
+  for (const id of new Set([...seenStage].map((k) => k.split('|')[0])))
+    dungeons[id].ranks?.sort((a, b) => (a.stage ?? 0) - (b.stage ?? 0));
 
   // 8) Exploration : niveau du stage + adv propres par spot de combat.
   const seenExpl = new Set<string>();

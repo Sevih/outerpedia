@@ -141,8 +141,15 @@ export async function BossCard({
     };
   }
 
+  // Un STAGE n'a pas de badge : il se dit. Le gabarit est déjà traduit dans les
+  // cinq langues (`guides.difficulty.stage` — celui du guild raid), et seul le
+  // serveur a le `t` : on l'appose ici, la glissière est cliente.
+  const scale = spawns.map((s) =>
+    s.stage ? { ...s, stageLabel: t('guides.difficulty.stage', { n: s.stage }) } : s,
+  );
+
   return (
-    <BossRankProvider spawns={spawns} followStages={followStages}>
+    <BossRankProvider spawns={scale} followStages={followStages}>
       <section className="space-y-4">
         {/* EN-TÊTE : qui est ce boss — icône, nom, élément, classe, et son NIVEAU
             au palier courant. Le niveau se lit là parce que c'est là qu'on le
