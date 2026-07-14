@@ -354,6 +354,16 @@ export function monsterSkillViews(
   // Bombardment…), la carte serait un titre sans corps et ses chips
   // manqueraient à « Enraged ».
   const ownCard = (t: Skill): boolean => Boolean(t.name.en && t.desc?.en);
+  // Un finish nommé ET décrit peut encore être un COPIÉ-COLLÉ de son enter
+  // (Grand Calamari, Sacreed Guardian, Beast of Karma, Iota : mêmes nom et
+  // desc « Enraged » sur les deux skills) : deux cartes identiques, chips
+  // éclatées entre elles. Nom ET desc ÉGAUX à ceux de l'enter = pas une carte
+  // propre → fusion. Vérifié sur le catalogue : 4 copies, 4 cartes légitimes
+  // (noms distincts — « Descent of the Tyrant », « I Offer My Life... »),
+  // aucun cas intermédiaire (même nom, desc différente).
+  const standsAlone = (finish: Skill, enter: Skill): boolean =>
+    ownCard(finish) &&
+    !(finish.name.en === enter.name.en && (finish.desc?.en ?? '') === (enter.desc?.en ?? ''));
   const views: MonsterSkillView[] = [];
   for (const s of skills) {
     const finishMatch = /^rage_finish(\d*)$/.exec(s.type);
@@ -365,7 +375,7 @@ export function monsterSkillViews(
       // Drakhan, icône comprise ; vérifié : aucun monstre légitime n'a de
       // finish sans son enter). Carte et chips disparaissent.
       if (!enter) continue;
-      if (!ownCard(s)) continue; // fusionné dans la carte enter
+      if (!standsAlone(s, enter)) continue; // fusionné dans la carte enter
     }
     // 4) Variante technique : ni nom ni desc, effets tous en double ailleurs.
     if (
@@ -379,7 +389,7 @@ export function monsterSkillViews(
     const enterMatch = /^rage_enter(\d*)$/.exec(s.type);
     if (enterMatch) {
       const finish = skills.find((t) => t.type === `rage_finish${enterMatch[1]}`);
-      if (finish && !ownCard(finish)) effects = [...effects, ...chipsOf(finish)];
+      if (finish && !standsAlone(finish, s)) effects = [...effects, ...chipsOf(finish)];
     }
     // Chips CURÉES en plus (chipAdd) : statuts décrits par la desc mais
     // appliqués hors kit — seules les réfs résolubles passent.
