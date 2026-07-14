@@ -28,7 +28,7 @@ Suivi détaillé : GitHub **Issues + Milestones** (un milestone par phase).
 
 - [x] Scaffold Next.js (App Router) + React 19 + TS + Tailwind 4
 - [x] Config de base : `output: standalone`, headers de sécurité (portés de V2)
-- [ ] Config i18n portée (en, fr, jp, kr, zh — 4 officielles + fr communautaire)
+- [x] Config i18n portée (en, fr, jp, kr, zh — 4 officielles + fr communautaire)
 - [x] Dockerfile multi-stage + `.dockerignore`
 - [x] CI : lint + typecheck + build sur PR
 - [x] CD : build → GHCR → **déploiement auto** sur le VPS via SSH (push → en ligne)
@@ -43,28 +43,32 @@ Suivi détaillé : GitHub **Issues + Milestones** (un milestone par phase).
 - [x] **Pull** auto des données du jeu depuis LDPlayer (adb, incrémental, `datagen:pull`)
 - [x] **Extract** des `.bytes` via AssetStudioModCLI wrappé (`datagen:extract`)
 - [x] **Convert** `.bytes → JSON` en TS (parser testé, remplace python, `datagen:convert`)
-- [ ] Couche 1 : templates **typés** (types TS + coercition sur le JSON parsé)
-- [ ] Couche 2 : **primitives partagées** (résolution Text\*, ID↔nom↔slug, normalisation, stats)
-- [ ] Couche 3 : **générateurs** (porter les ~30 scripts py/ts → TS, factorisés)
-- [ ] Couche 4 : **contrats de sortie** typés · Couche 5 : **orchestrateur**
-- [ ] Données générées **committées** comme artefacts (le build les consomme, **sans python**)
+- [x] Couche 1 : templates **typés** (types TS + coercition sur le JSON parsé)
+- [x] Couche 2 : **primitives partagées** (résolution Text\*, ID↔nom↔slug, normalisation, stats)
+- [x] Couche 3 : **générateurs** (18 générateurs TS dans `datagen/generators/`, factorisés)
+- [x] Couche 4 : **contrats de sortie** typés · Couche 5 : **orchestration** (`build.ts` + `refresh.ts` + `promote.ts`)
+- [x] Données générées **committées** comme artefacts (le build les consomme, **sans python**)
 
 ## Phase 3 — Assets (images)
 
 > Alléger le repo définitivement.
 
-- [ ] Sortir les ~20k images du repo → **Cloudflare R2 + CDN**
-- [ ] Couche d'accès aux images (URLs CDN)
-- [ ] Repo allégé (de ~4 Go à quasi rien)
+- [x] Images hors repo → **Cloudflare R2 + CDN** (collecte `datagen/assets/collect.ts`,
+      push `scripts/assets-push.mjs`, `pnpm images`)
+- [x] Couche d'accès aux images (`src/lib/images.ts`, URLs CDN via `NEXT_PUBLIC_IMG_BASE`)
+- [x] Repo allégé (aucune image committée — `public/images/` vide)
 
 ## Phase 4 — Portage de l'application
 
 > Amener le code, domaine par domaine, en nettoyant.
 
-- [ ] Personnages / data access layer
-- [ ] Guides
+- [x] Personnages / data access layer (`/characters`, curated + generated)
+- [x] Équipement (`/equipment` : armes, armures, amulettes, talismans, EE, sets)
+- [x] Guides — en cours : moteur porté (`/guides`, catégories, vues dédiées,
+      versions de guides), portage du contenu au fil de l'eau
+- [x] Panneau admin — **dev-only** (exclu du build prod) : extractor, editor,
+      guides, tags, gear-presets, tools
 - [ ] Tier-list (+ feature de partage / MySQL)
-- [ ] Panneau admin
 - [ ] Reste des pages + i18n complet
 - [ ] Tests sur les flux critiques (calc de dégâts, etc.)
 - [ ] Suppression du code mort au passage

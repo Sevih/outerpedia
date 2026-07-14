@@ -12,17 +12,21 @@ Wiki communautaire pour le jeu **Outerplane** — refonte « V3 ».
 - **Tailwind CSS 4**
 - **Node 24** (voir `.nvmrc`)
 - Déploiement : **Docker** → GHCR → VPS, **Cloudflare** en frontal
-- Données : **MySQL** (features dynamiques, ex. partage de tier-list)
+- Données : JSON généré et committé (`data/generated/`), images sur **R2/CDN**.
+  MySQL prévu en **Phase 5** pour les features dynamiques (ex. partage de
+  tier-list) — rien en base aujourd'hui.
 
 ## Démarrage (dev)
 
-> Sera complété en Phase 1 (scaffold de l'app).
-
 ```bash
 nvm use         # Node 24
-npm install
-npm run dev
+pnpm install
+pnpm dev        # clean:all → refresh des données (datagen) → next dev
 ```
+
+- `pnpm test` — la suite Vitest (app + datagen).
+- `pnpm commit` — publication guidée : contrôles (format/lint/typecheck/test)
+  → bump de version → images R2 → commit + push. Voir `scripts/commit.ts`.
 
 ## Documentation
 
@@ -30,6 +34,10 @@ npm run dev
 - [CHANGELOG.md](./CHANGELOG.md) — journal des changements
 - [CONVENTIONS.md](./CONVENTIONS.md) — commits, branches, style, process
 - [CLAUDE.md](./CLAUDE.md) — règles pour le dev assisté par IA
+- [datagen/README.md](./datagen/README.md) — l'atelier de données (architecture, flux patch)
+- [docs/procedure/newPatch.md](./docs/procedure/newPatch.md) — la procédure « patch du jeu »
+- [docs/todo-data-v2.md](./docs/todo-data-v2.md) — suivi des données V2 restant à porter
+- [docs/todo-audit-2026-07-13.md](./docs/todo-audit-2026-07-13.md) — TODO issu de l'audit du 13/07
 
 ## Statut
 

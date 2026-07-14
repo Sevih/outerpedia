@@ -44,8 +44,28 @@ generators/   Couche 3 — un générateur par artefact (characters, items, towe
 contracts/    Couche 4 — schémas TS des données GÉNÉRÉES (le format unique).
               La cohérence est garantie PAR LES TYPES, partagés avec l'app.
 
-run.ts        Couche 5 — orchestrateur (remplace l'ancien pipeline/run.ts).
+build.ts      Couche 5 — orchestration en 3 fichiers :
+refresh.ts      build.ts   lance les générateurs → data/extracted/ ;
+promote.ts      refresh.ts définition UNIQUE du flux « rafraîchir depuis le
+                           jeu » (pull → extract → convert → build → promote),
+                           partagé par `pnpm dev` (apply) et `datagen:patch` (dry) ;
+                promote.ts diff entité par entité + `--apply` → data/generated/.
 ```
+
+### Modules à côté des couches
+
+- **`extractor/`** — extracteur **déclaratif** par entité : `specs/`
+  (character, monster — la description de QUOI extraire), `integrate.ts`
+  (intégration ciblée d'une entité dans `data/generated/`, utilisé par
+  l'admin), `version-monster.ts` (figer l'état committé d'un monstre),
+  `v2-control.ts` (contrôle contre l'oracle V2), `coherence.ts`
+  (`pnpm datagen:coherence`). Point d'entrée CLI : `pnpm datagen:extract-entity`.
+- **`curated/`** — outillage de la couche curée : `seed.ts`
+  (`pnpm datagen:seed-curated`, amorce `data/curated/` depuis l'oracle V2)
+  - validations (tags, effets…).
+- **`import-equipment.ts` / `import-gear-reco.ts`** — imports **one-shot**
+  depuis la V2 (équipement curé, recommandations de gear). Gardés pour
+  traçabilité, pas dans le flux courant.
 
 ### Exception assumée : un (seul) outil Python
 
@@ -246,5 +266,15 @@ Règles d'or :
 
 ## État
 
-🚧 Structure posée. Prochaines étapes : wrapper d'extraction, puis le parser
-`.bytes → templates` (couche 1), puis migration des générateurs un par un.
+✅ **Opérationnel de bout en bout.** Tout ce qui est décrit ci-dessus existe :
+
+- couche 0 (pull LDPlayer + extraction AssetStudio) ;
+- couche 1 (`templates/`, parser `.bytes → JSON` typé, TS) ;
+- couche 2 (`lib/`, primitives partagées) ;
+- couche 3 (`generators/`, 18 générateurs) ;
+- couche 4 (`contracts/`) et couche 5 (`build.ts` + `refresh.ts` + `promote.ts`) ;
+- extracteur déclaratif (`extractor/`), couche curée (`curated/` + seed),
+  pipeline images R2 (`assets/` + `pnpm images`), versionnage de boss.
+
+`data/generated/` est committé et consommé par l'app ; le build CI ne lance
+aucune génération.

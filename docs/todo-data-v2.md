@@ -5,21 +5,6 @@ de la pipeline V2 (`pipeline/run.ts`, 30 steps) + les JSON data à la main.
 
 ---
 
-## ⛔ EN ATTENTE — régénération + promotion de `glossaries.json`
-
-Le build est ROUGE tant que ce fichier n'est pas régénéré et promu. Il apportera
-**trois** choses, toutes déjà écrites côté générateur :
-
-- [ ] **clés `_IR`** (variantes INDISSIPABLES des statuts) — dérivées
-      génériquement (43 paires normal→indissipable, 173 clés). Sans elles, le
-      tag `{D/BT_STAT|ST_CRITICAL_RATE_IR}` du guide `vi-e-11-a` ne résout pas et
-      casse le build SSG. Le dialecte `_IR` est LÉGITIME (la V2 l'utilise 175
-      fois) : ne rien remapper dans les contenus.
-- [ ] **`rankOptions`** — passifs de palier résolus. Sans eux, `BossStats`
-      n'affiche simplement aucun passif (dégradation muette assumée : mieux vaut
-      ne rien dire qu'inventer).
-- [ ] **`bossQuirkMods`** — réductions EFF/RES des quirks de compte.
-
 ## 👾 Monstres à extraire (à la demande — `pnpm datagen:extract-entity`)
 
 `data/generated/monsters.json` ne contient que les monstres réellement portés
@@ -36,7 +21,8 @@ Le build est ROUGE tant que ce fichier n'est pas régénéré et promu. Il appor
 
 - [ ] **`area_name`** ← `AreaTemplet` (167 zones). `NameID` (`SYS_AREA_NAME_*`) +
       `ShortName` via TextSystem. Bloque la catégorie de guides `adventure`.
-- [ ] **`geas`** ← `GuildRaidGeisTemplet` (107). NameID/DescID/icon/value/grade.
+- [x] **`geas`** ← `GuildRaidGeisTemplet` → `glossaries.geas` (définitions) +
+      réfs par donjon sub-boss dans `encounters.json`.
 - [x] **`unlock-content`** ← `datagen/generators/unlock-content.ts` →
       `data/generated/unlock-content.json`.
 - [x] **`singularity-rotation`** ← `datagen/generators/singularity.ts` →
@@ -72,18 +58,12 @@ Le build est ROUGE tant que ce fichier n'est pas régénéré et promu. Il appor
 - [x] **`game-version`** ← `resVersion` (256 derniers octets de `manifest.dat`).
       Générateur `datagen/generators/game-version.ts`, baked dans le build →
       `data/generated/game-version.json`. Reader `src/lib/data/game-version.ts`.
-- [ ] **`special-request`** ← butin par boss du mode Special Request. En V2 le
-      composant `SpecialRequestList` hardcode DEUX ordres d'éléments différents
-      et des codes de set bruts (« 15 », « 22 » → alt d'image illisible) ; le
-      `special_request.json` V2 a un champ `slug` mort et faux (`calamari` au
-      lieu de `grand-calamari`) → tout regénérer depuis les tables (table
-      source à identifier ; ne PAS copier le layout V2).
-- [ ] **`irregular-extermination`** ← `IrregularChaseTemplet` (12 lignes :
-      DungeonID/BossID/BossHP/tickets…). Le BUTIN est dérivable de l'équipement
-      (chaque pièce porte déjà son boss — ne jamais recopier des noms EN à la
-      main comme la table `LOOT` de V2, lookups par nom qui rendent null en
-      silence). Les COORDONNÉES DES PINS de la carte n'ont jamais été une
-      donnée : à créer en curé (`data/curated/`), pas en dur dans un composant.
+- [x] **`special-request`** ← régénéré depuis les tables : group + difficulty
+      sur les 130 donjons (`encounters.json`), échelles de stats promues
+      (10 groupes × 13 stages). Rien du layout V2 repris.
+- [x] **`irregular-extermination`** ← donjons `irregular_chase` /
+      `irregular_infiltrate` dans `encounters.json`, butin dérivé de
+      l'équipement. Carte du mode rendue par `IrregularChaseMap`.
 
 ## 🧭 Vues de catégorie de guides — état
 
@@ -99,6 +79,11 @@ Vues faites :
 - [x] **`guild-raid` · `world-boss` · `joint-challenge`** → `BannerGrid`. UNE vue
       pour les trois : en V2 c'étaient trois fichiers strictement identiques.
 - [x] **`other`** → `DefaultGrid` (rien de spécifique à faire).
+- [x] **`special-request`** → `SpecialRequestSplit` (une colonne par mode,
+      Ecology Study / Identification, jointure par `meta.group` ↔
+      `encounters.json`).
+- [x] **`irregular-extermination`** → `IrregularChaseMap` (la carte du mode au
+      visuel V2).
 - [x] **`dimensional-singularity`** → `SingularityRotation` : le boss du JOUR,
       puis la bibliothèque des boss. Rotation calculée par une fonction PURE
       (`src/lib/data/singularity.ts`, `now` injecté) depuis `singularity.json` +
@@ -139,11 +124,6 @@ Vues encore à faire — ce qui manque pour chacune :
       `episode`, `stage` — la V2 les décodait par regex sur le slug (`S2-13-40`).
       Son drapeau `spoilerFree` est INVERSÉ et elle rend les noms « surname name »
       (ordre faux en JP/KR/ZH).
-- [ ] **`special-request`** — bloqué par `special-request` (cf. plus haut). La V2
-      déduisait **l'élément du boss du nom de fichier de son icône**
-      (`icon.split('_').pop()`).
-- [ ] **`irregular-extermination`** — bloqué par `irregular-extermination` +
-      les coordonnées des pins (cf. plus haut).
 
 **Jointure guide ↔ saison (`content-schedule.json`) — RÉSOLUE, aucun mapping
 manuel.** Un guide se relie à ses saisons par le **monstre réellement combattu**
@@ -183,8 +163,10 @@ résolus par la chaîne spawn comme pour le WB et le GR.
 ## À faire à la main (curé / éditorial, non extractible)
 
 - [ ] **`name-aliases.json`** — alias de recherche par perso (EN/JP/KR/ZH).
-- [ ] **`tags.json`** — glossaire libellés + desc des tags (la classif par perso
-      est déjà en `data/curated/characters.json` → `tags`).
+- [x] **`tags.json`** — glossaire libellés + desc des tags →
+      `data/curated/tags.json` (vocabulaire fermé, validé par un test bloquant
+      contre l'extraction — `datagen/curated/tags.ts`). La classif par perso
+      est dérivée des tables du jeu (`Character.tags`).
 - [ ] **Premium** — `premium_limited_data.json` (reviews) **+**
       `premium-priorities.json` (ordre de pull `PREMIUM_ORDER_*`). De paire.
 - [ ] **Core Fusion** — `core_fusion_data.json` (reviews CF) **+**

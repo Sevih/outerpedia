@@ -18,14 +18,26 @@ Jeu : **Outerplane**. Wiki communautaire. Reconstruction propre de la V2.
 
 ## Shell
 
-- **Git Bash** sous Windows — pas de syntaxe CMD (`>nul`, `chcp`).
-- Python = `python`.
+- **PowerShell** sous Windows (Bash disponible en secondaire) — pas de syntaxe
+  CMD (`>nul`, `chcp`).
+- Python = `python` (une seule utilisation, cf. ci-dessous).
+
+## Les 3 verbes
+
+- `pnpm dev` — clean:all → refresh des données (`scripts/dev-refresh.ts`) →
+  `next dev`.
+- `pnpm commit` — publication guidée : contrôles (format/lint/typecheck/test) →
+  bump de version → images R2 → commit + push (`scripts/commit.ts`).
+- `pnpm build` — le build prod, **réservé à la CI** (un build local casse les
+  types du dev, cf. datagen/README).
 
 ## Build & données
 
 - Le **build ne doit jamais dépendre de python** : il consomme des données déjà
-  générées et committées. La génération (python + datamine) est une étape
-  **locale et manuelle**, séparée du build.
+  générées et committées. La génération est du **TypeScript** (`datagen/`,
+  locale, séparée du build) — voir [datagen/README.md](./datagen/README.md).
+  Unique exception python : `datagen/assets/extract-face-layout.py` (local,
+  hors build).
 - Ne jamais éditer `data/generated/` à la main.
 
 ## Architecture
