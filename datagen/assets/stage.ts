@@ -4,12 +4,31 @@
  * bucket). Réutilisé par la CLI globale (`assets:collect`) ET par l'intégration
  * par entité dans l'admin.
  *
- * Idempotent : une cible déjà présente n'est pas refaite.
+ * Incrémental : une cible n'est REFAITE que si ses sources ont changé.
+ *
+ * « Changé » ne peut PAS se juger sur la date seule : AssetStudio réécrit les
+ * ~14 000 images à chaque `datagen:extract`, ce qui périmerait tout le staging
+ * sans qu'un pixel ait bougé (et relancerait 4 600 conversions sharp). Ni sur la
+ * simple existence de la cible, comme avant : une image corrigée en gardant son
+ * nom n'était alors jamais reconstruite, et la correction n'atteignait même pas
+ * le push. On tient donc un état (`.assets-staging/.stage-state.json`), sur le
+ * modèle du stat-cache de git :
+ *   - `sig`  = taille+mtime des sources → chemin RAPIDE, aucune lecture disque ;
+ *   - `hash` = empreinte du CONTENU des sources (+ recette de conversion) →
+ *     arbitre quand la `sig` a bougé, et absout une ré-extraction à l'identique.
  */
-import { copyFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  statSync,
+  writeFileSync,
+} from 'node:fs';
+import { createHash } from 'node:crypto';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
-import { makeFaceIcon } from './face-icon';
+import { FACE_ICON_LAYOUT, makeFaceIcon } from './face-icon';
 import type { AssetRequest } from './manifest';
 import { findImage, type ImageIndex } from './source';
 
@@ -38,8 +57,94 @@ function editorialSource(rel: string): string | undefined {
   return undefined;
 }
 
+// --- état de fraîcheur ----------------------------------------------------------
+
+interface StageEntry {
+  /** `taille:mtime` de chaque source, jointes par `|`. */
+  sig: string;
+  /** sha1 du contenu des sources + de la recette. */
+  hash: string;
+}
+const STATE_FILE = resolve(STAGING_DIR, '.stage-state.json');
+let stateCache: Record<string, StageEntry> | null = null;
+
+function state(): Record<string, StageEntry> {
+  if (!stateCache) {
+    try {
+      stateCache = JSON.parse(readFileSync(STATE_FILE, 'utf8')) as Record<string, StageEntry>;
+    } catch {
+      stateCache = {}; // absent ou illisible : on repart d'un état vide (cf. `check`)
+    }
+  }
+  return stateCache;
+}
+
+/** Grave l'état sur disque. Appelé en fin de `stageAssets` — jamais aux appelants d'y penser. */
+function saveState(): void {
+  if (!stateCache) return;
+  const sorted = Object.fromEntries(
+    Object.entries(stateCache).sort(([a], [b]) => a.localeCompare(b)),
+  );
+  mkdirSync(STAGING_DIR, { recursive: true });
+  writeFileSync(STATE_FILE, JSON.stringify(sorted, null, 2) + '\n');
+}
+
+/** Signature taille+mtime : comparable sans rien lire. */
+function sigOf(sources: string[]): string {
+  return sources
+    .map((s) => {
+      const st = statSync(s);
+      return `${st.size}:${Math.floor(st.mtimeMs)}`;
+    })
+    .join('|');
+}
+
+/** Empreinte du CONTENU des sources, salée par la recette (change de format → refait). */
+function hashOf(sources: string[], recipe: string): string {
+  const h = createHash('sha1').update(recipe);
+  for (const s of sources) h.update(readFileSync(s));
+  return h.digest('hex');
+}
+
+interface Freshness {
+  /** La cible est à jour : rien à refaire. */
+  fresh: boolean;
+  /** À appeler UNIQUEMENT après une production réussie (sinon un échec sharp
+   *  graverait « à jour » sur une cible restée vieille). */
+  commit: () => void;
+}
+
+function check(key: string, dest: string, sources: string[], recipe: string): Freshness {
+  const noop = () => {};
+  if (!existsSync(dest)) {
+    // Pas de cible : à produire, et on ne peut pas encore graver l'état.
+    const sig = sigOf(sources);
+    const hash = hashOf(sources, recipe);
+    return { fresh: false, commit: () => void (state()[key] = { sig, hash }) };
+  }
+
+  const prev = state()[key];
+  const sig = sigOf(sources);
+  if (prev?.sig === sig) return { fresh: true, commit: noop }; // chemin rapide : zéro lecture
+
+  const hash = hashOf(sources, recipe);
+  // Cible présente mais inconnue de l'état (staging antérieur à ce mécanisme) :
+  // on l'ADOPTE au lieu de reconstruire les 4 600 fichiers d'un coup. Le premier
+  // run enregistre, les suivants détectent les vraies modifications.
+  const fresh = prev ? prev.hash === hash : true;
+  const commit = () => void (state()[key] = { sig, hash });
+  if (fresh) commit(); // ré-extraction à l'identique : on rafraîchit juste la `sig`
+  return { fresh, commit };
+}
+
+// --- staging --------------------------------------------------------------------
+
 export interface StageResult {
+  /** Produites (cible absente). */
   staged: number;
+  /** REFAITES (cible présente mais périmée — une source a changé). */
+  restaged: number;
+  /** Déjà à jour. */
   present: number;
   missing: Array<{ key: string; reason: string }>;
 }
@@ -49,14 +154,13 @@ export async function stageAssets(
   requests: AssetRequest[],
   index: ImageIndex,
 ): Promise<StageResult> {
-  const result: StageResult = { staged: 0, present: 0, missing: [] };
+  const result: StageResult = { staged: 0, restaged: 0, present: 0, missing: [] };
 
   for (const req of requests) {
     const dest = resolve(STAGING_DIR, req.key);
-    if (existsSync(dest)) {
-      result.present++;
-      continue;
-    }
+    // Cible déjà là ET périmée = correction d'un asset existant, pas un ajout.
+    const existed = existsSync(dest);
+    const produced = () => (existed ? result.restaged++ : result.staged++);
 
     try {
       if (req.kind === 'editorial') {
@@ -65,9 +169,15 @@ export async function stageAssets(
           result.missing.push({ key: req.key, reason: `éditorial absent du pool : ${req.source}` });
           continue;
         }
+        const { fresh, commit } = check(req.key, dest, [src], 'copy');
+        if (fresh) {
+          result.present++;
+          continue;
+        }
         mkdirSync(dirname(dest), { recursive: true });
         copyFileSync(src, dest);
-        result.staged++;
+        commit();
+        produced();
         continue;
       }
 
@@ -77,14 +187,27 @@ export async function stageAssets(
           result.missing.push({ key: req.key, reason: `portrait CT_${req.id} introuvable` });
           continue;
         }
-        const buf = await makeFaceIcon(req.id, portrait, req.key.endsWith('.png') ? 'png' : 'webp');
+        const format = req.key.endsWith('.png') ? 'png' : 'webp';
+        // Le layout est une source à part entière : un cadrage corrigé doit refaire l'icône.
+        const { fresh, commit } = check(
+          req.key,
+          dest,
+          [portrait, FACE_ICON_LAYOUT],
+          `face-icon:${format}`,
+        );
+        if (fresh) {
+          result.present++;
+          continue;
+        }
+        const buf = await makeFaceIcon(req.id, portrait, format);
         if (!buf) {
           result.missing.push({ key: req.key, reason: `layout FaceIcon absent pour ${req.id}` });
           continue;
         }
         mkdirSync(dirname(dest), { recursive: true });
         writeFileSync(dest, buf);
-        result.staged++;
+        commit();
+        produced();
         continue;
       }
 
@@ -96,24 +219,39 @@ export async function stageAssets(
         if (req.editorialFallback) {
           const fb = editorialSource(req.editorialFallback);
           if (fb) {
+            const { fresh, commit } = check(req.key, dest, [fb], 'copy');
+            if (fresh) {
+              result.present++;
+              continue;
+            }
             mkdirSync(dirname(dest), { recursive: true });
             copyFileSync(fb, dest);
-            result.staged++;
+            commit();
+            produced();
             continue;
           }
         }
         result.missing.push({ key: req.key, reason: `sprite introuvable : ${req.candidates[0]}` });
         continue;
       }
-      mkdirSync(dirname(dest), { recursive: true });
+
       // PNG : variantes og:image (aperçus Discord/OG) ; webp partout ailleurs.
-      if (req.key.endsWith('.png')) await sharp(src).png().toFile(dest);
+      const png = req.key.endsWith('.png');
+      const { fresh, commit } = check(req.key, dest, [src], png ? 'png' : 'webp:90');
+      if (fresh) {
+        result.present++;
+        continue;
+      }
+      mkdirSync(dirname(dest), { recursive: true });
+      if (png) await sharp(src).png().toFile(dest);
       else await sharp(src).webp({ quality: 90 }).toFile(dest);
-      result.staged++;
+      commit();
+      produced();
     } catch (e) {
       result.missing.push({ key: req.key, reason: `erreur : ${(e as Error).message}` });
     }
   }
 
+  saveState();
   return result;
 }

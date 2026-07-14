@@ -6,7 +6,7 @@
  * Écrit `manifest-report.json` (affiché par l'admin) : requis / présents /
  * manquants par domaine. `pnpm assets:push` pousse ensuite vers R2.
  */
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, statSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { buildAssetManifest } from './manifest';
@@ -39,16 +39,24 @@ async function main(): Promise<void> {
     report[domain] = { required: requests.length, ...res, missing: res.missing.length };
     allMissing.push(...res.missing);
     const flag = res.missing.length ? ` ⚠ ${res.missing.length} manquant(s)` : ' ✓';
+    // Les REFAITS sont l'information neuve : ce sont les assets corrigés en
+    // place, ceux que l'ancien staging (« la cible existe → on passe ») ratait.
+    const redone = res.restaged ? ` · ${res.restaged} refaits` : '';
     console.log(
-      `  ${domain.padEnd(12)} ${String(requests.length).padStart(5)} requis · ${res.present} déjà là · ${res.staged} produits${flag}`,
+      `  ${domain.padEnd(12)} ${String(requests.length).padStart(5)} requis · ${res.present} déjà là · ${res.staged} produits${redone}${flag}`,
     );
   }
 
   // DÉRIVÉ : variante PORTRAIT du fond de page (l'artwork est paysage —
   // pivoté 90° pour couvrir les écrans verticaux sans zoom excessif).
+  // Refait aussi quand le fond paysage a changé : sa seule EXISTENCE ne prouve
+  // pas qu'il dérive du fond actuel.
   const bg = resolve(STAGING_DIR, 'images/background_compressed.webp');
   const bgPortrait = resolve(STAGING_DIR, 'images/background_compressed_portrait.webp');
-  if (existsSync(bg) && !existsSync(bgPortrait)) {
+  if (
+    existsSync(bg) &&
+    (!existsSync(bgPortrait) || statSync(bgPortrait).mtimeMs < statSync(bg).mtimeMs)
+  ) {
     await sharp(bg).rotate(90).webp({ quality: 90 }).toFile(bgPortrait);
     console.log('  fond portrait généré (rotation 90°)');
   }

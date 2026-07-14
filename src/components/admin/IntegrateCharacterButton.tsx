@@ -5,7 +5,13 @@ import { useRouter } from 'next/navigation';
 
 interface Report {
   files: string[];
-  assets: { staged: number; present: number; missing: Array<{ key: string; reason: string }> };
+  assets: {
+    staged: number;
+    /** Images REFAITES : elles existaient déjà, mais leur source a changé. */
+    restaged: number;
+    present: number;
+    missing: Array<{ key: string; reason: string }>;
+  };
 }
 
 type Status =
@@ -50,8 +56,10 @@ export function IntegrateCharacterButton({ id, isNew }: { id: string; isNew: boo
         <div className="border-success/40 bg-success/5 space-y-1 rounded-md border p-3 text-sm">
           <p className="text-success">
             ✓ Intégré — {status.report.files.join(', ')} · images : {status.report.assets.staged}{' '}
-            produites, {status.report.assets.present} déjà là. Committe via git, puis{' '}
-            <code>pnpm assets:push</code>.
+            produites
+            {status.report.assets.restaged > 0 &&
+              `, ${status.report.assets.restaged} refaites`}, {status.report.assets.present} déjà
+            là. Committe via git, puis <code>pnpm assets:push</code>.
           </p>
           {status.report.assets.missing.length > 0 && (
             <ul className="text-warn text-xs">

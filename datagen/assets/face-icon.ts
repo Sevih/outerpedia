@@ -19,12 +19,17 @@ interface FaceIconVariant {
 }
 type FaceIconLayout = Record<string, Record<string, FaceIconVariant>>;
 
+/**
+ * Le layout est une SOURCE de l'icône, au même titre que le portrait : le
+ * staging le hache pour savoir s'il doit recomposer (voir `stage.ts`). Corriger
+ * un cadrage ici doit refaire les FI, sans quoi la correction reste invisible.
+ */
+export const FACE_ICON_LAYOUT = resolve('datagen/assets/face-icon-layout.json');
+
 let layoutCache: FaceIconLayout | null = null;
 function layout(): FaceIconLayout {
   if (!layoutCache) {
-    layoutCache = JSON.parse(
-      readFileSync(resolve('datagen/assets/face-icon-layout.json'), 'utf8'),
-    ) as FaceIconLayout;
+    layoutCache = JSON.parse(readFileSync(FACE_ICON_LAYOUT, 'utf8')) as FaceIconLayout;
   }
   return layoutCache;
 }
