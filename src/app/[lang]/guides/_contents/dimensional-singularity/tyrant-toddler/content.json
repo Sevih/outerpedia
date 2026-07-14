@@ -1,0 +1,108 @@
+{
+  "intro": {
+    "en": "Water-element Striker boss featured in the Dimensional Singularity rotation. Speed manipulation mechanics: takes +100% damage from faster targets, deals +50% damage to targets with Reduced Speed, and freezes them with its Ultimate.",
+    "jp": "次元特異点ローテーションに登場する水属性ストライカーボス。スピード操作のメカニクス：自分より速い対象から受けるダメージ+100%、スピードDOWNを保有する対象への与ダメージ+50%、さらに必殺技でその対象を凍結させる。",
+    "kr": "차원 특이점 로테이션에 등장하는 물속성 스트라이커 보스. 속도 조작 메커닉: 자신보다 빠른 대상에게 받는 피해 +100%, 속도 감소를 보유한 대상에게 주는 피해 +50%, 필살기로 해당 대상을 빙결시킵니다.",
+    "zh": "出现在次元奇点轮换中的水属性突击型Boss。速度操作机制：受到速度快于自身的目标的伤害+100%，对持有速度降低的目标造成的伤害+50%，并以必杀技将其冰冻。",
+    "fr": "Boss Striker d'élément Water présent dans la rotation de la Singularité Dimensionnelle. Mécaniques de manipulation de la Vitesse : subit +100% de dégâts des cibles plus rapides, inflige +50% de dégâts aux cibles ayant une Vitesse Réduite et les gèle avec son Ultime."
+  },
+  "tips": [
+    {
+      "preset": "strategy",
+      "items": [
+        {
+          "en": "Keep the whole team faster than the boss — it takes +100% damage from faster targets.",
+          "jp": "チーム全員をボスより速く保つ — ボスは自分より速い対象から受けるダメージが+100%になる。",
+          "kr": "팀 전원을 보스보다 빠르게 유지하세요 — 보스는 자신보다 빠른 대상에게 받는 피해가 +100%입니다.",
+          "zh": "保持全队速度快于Boss — Boss受到速度更快目标的伤害+100%。",
+          "fr": "Gardez toute l'équipe plus rapide que le Boss — il subit +100% de dégâts des cibles plus rapides."
+        },
+        {
+          "en": "Clear {D/BT_STAT|ST_SPEED} before the boss's Ultimate: it inflicts {D/BT_FREEZE} on every target carrying it. Its S2 applies it to all, ignoring Resilience — bring {B/BT_REMOVE_DEBUFF} or {B/BT_IMMUNE}.",
+          "jp": "ボスの必殺技の前に{D/BT_STAT|ST_SPEED}を解除する：保有している対象すべてに{D/BT_FREEZE}を付与する。S2は効果抵抗を無視して全体に付与するため、{B/BT_REMOVE_DEBUFF}か{B/BT_IMMUNE}を用意する。",
+          "kr": "보스의 필살기 전에 {D/BT_STAT|ST_SPEED}을 해제하세요: 이를 보유한 모든 대상에게 {D/BT_FREEZE}을 부여합니다. S2는 효과 저항을 무시하고 전체에 부여하므로 {B/BT_REMOVE_DEBUFF} 또는 {B/BT_IMMUNE}이 필요합니다.",
+          "zh": "在Boss必杀技之前解除{D/BT_STAT|ST_SPEED}：它会对所有持有该效果的目标附加{D/BT_FREEZE}。其S2无视效果抵抗对全体附加，请携带{B/BT_REMOVE_DEBUFF}或{B/BT_IMMUNE}。",
+          "fr": "Nettoyez {D/BT_STAT|ST_SPEED} avant l'Ultime du Boss : il inflige {D/BT_FREEZE} à toute cible qui le porte. Son S2 l'applique à tous en ignorant la Résilience — prévoyez {B/BT_REMOVE_DEBUFF} ou {B/BT_IMMUNE}."
+        },
+        {
+          "en": "Bring exactly one character per class. A lone {C/Ranger} makes the boss self-inflict {D/BT_STAT|ST_DEF_IR}, and every Class Synergy requires exactly 1 member of that class.",
+          "jp": "各職業をちょうど1人ずつ編成する。{C/Ranger}が1人だけならボスは自分に{D/BT_STAT|ST_DEF_IR}を付与し、職業シナジーは各職業1人のときのみ発動する。",
+          "kr": "각 직업을 정확히 1명씩 편성하세요. {C/Ranger}가 1명뿐이면 보스가 자신에게 {D/BT_STAT|ST_DEF_IR}을 부여하며, 직업 시너지는 해당 직업이 정확히 1명일 때만 발동합니다.",
+          "zh": "每个职业恰好编入1名。仅有1名{C/Ranger}时Boss会对自身附加{D/BT_STAT|ST_DEF_IR}，且各职业增效均需该职业恰好1名才会触发。",
+          "fr": "Emmenez exactement un personnage par classe. Un {C/Ranger} unique force le Boss à s'infliger {D/BT_STAT|ST_DEF_IR}, et chaque Synergie de classe exige exactement 1 membre de cette classe."
+        },
+        {
+          "en": "Go mono-{E/Earth}: every non-{E/Earth} target gives the boss +20% {B/BT_ACTION_GAUGE} at the start of its turn.",
+          "jp": "{E/Earth}属性で統一する：{E/Earth}属性でない対象はターン開始時にボスの{B/BT_ACTION_GAUGE}を+20%増加させる。",
+          "kr": "{E/Earth} 속성으로 통일하세요: {E/Earth} 속성이 아닌 대상은 턴 시작 시 보스의 {B/BT_ACTION_GAUGE}을 +20% 증가시킵니다.",
+          "zh": "组建纯{E/Earth}队伍：非{E/Earth}属性目标在回合开始时会使Boss的{B/BT_ACTION_GAUGE}+20%。",
+          "fr": "Jouez mono-{E/Earth} : chaque cible non-{E/Earth} donne +20% de {B/BT_ACTION_GAUGE} au Boss au début de son tour."
+        },
+        {
+          "en": "Skip {D/BT_DOT_CURSE} carries — Curse and fixed damage on the boss are capped at 50,000.",
+          "jp": "{D/BT_DOT_CURSE}軸のキャリアは避ける — ボスへの呪いと固定ダメージは50,000が上限。",
+          "kr": "{D/BT_DOT_CURSE} 기반 딜러는 피하세요 — 보스에게 주는 저주 및 고정 피해는 50,000이 상한입니다.",
+          "zh": "避免{D/BT_DOT_CURSE}型主C — 对Boss的诅咒与固定伤害上限为50,000。",
+          "fr": "Évitez les carries {D/BT_DOT_CURSE} — Malédiction et dégâts fixes sur le Boss sont plafonnés à 50 000."
+        }
+      ]
+    }
+  ],
+  "teams": [
+    {
+      "element": "earth",
+      "groups": [
+        {
+          "characters": ["Rey", "Noa"],
+          "reason": {
+            "en": "Main DPS. {P/Rey} preferred.",
+            "jp": "メインDPS。{P/Rey}推奨。",
+            "kr": "메인 딜러. {P/Rey} 추천.",
+            "zh": "主C。推荐{P/Rey}。",
+            "fr": "DPS principal. {P/Rey} préféré."
+          }
+        },
+        {
+          "characters": ["Alice", "Kitsune of Eternity Tamamo-no-Mae"],
+          "reason": {
+            "en": "{D/BT_SEALED} and increased damage taken. {P/Alice} additionally provides {D/BT_REMOVE_BUFF} and {D/BT_STAT|ST_SPEED}.",
+            "jp": "{D/BT_SEALED}と被ダメージ増加。{P/Alice}は加えて{D/BT_REMOVE_BUFF}と{D/BT_STAT|ST_SPEED}を提供する。",
+            "kr": "{D/BT_SEALED}과 받는 피해 증가. {P/Alice}는 추가로 {D/BT_REMOVE_BUFF}와 {D/BT_STAT|ST_SPEED}을 제공합니다.",
+            "zh": "{D/BT_SEALED}与受到伤害提升。{P/Alice}额外提供{D/BT_REMOVE_BUFF}与{D/BT_STAT|ST_SPEED}。",
+            "fr": "{D/BT_SEALED} et hausse des dégâts subis. {P/Alice} apporte en plus {D/BT_REMOVE_BUFF} et {D/BT_STAT|ST_SPEED}."
+          }
+        },
+        {
+          "characters": ["Ame"],
+          "reason": {
+            "en": "Brings a second DPS to the {C/Mage} slot.",
+            "jp": "{C/Mage}枠に2人目のDPSを持ち込む。",
+            "kr": "{C/Mage} 자리에 두 번째 딜러를 제공합니다.",
+            "zh": "为{C/Mage}位带来第二个输出。",
+            "fr": "Apporte un second DPS sur le poste de {C/Mage}."
+          }
+        },
+        {
+          "characters": ["Heatwave Cop Delta", "Ryu Lion"],
+          "reason": {
+            "en": "Same kit — run only one to get the free {D/BT_STAT|ST_DEF_IR} on the boss. {P/Heatwave Cop Delta} preferred: +30% damage to all allies just by being there, an Attack buff for {E/Earth} allies and companion fixed damage instead of a finisher.",
+            "jp": "同じ性能 — 1人だけ編成することでボスへの{D/BT_STAT|ST_DEF_IR}が無償で入る。{P/Heatwave Cop Delta}推奨：編成しているだけで味方全体のダメージ+30%、{E/Earth}属性味方への攻撃力バフ、フィニッシャーの代わりにコンパニオンの固定ダメージ。",
+            "kr": "동일한 성능 — 1명만 편성해야 보스에게 {D/BT_STAT|ST_DEF_IR}이 무료로 들어갑니다. {P/Heatwave Cop Delta} 추천: 편성만으로 아군 전체 피해 +30%, {E/Earth} 속성 아군 공격력 버프, 피니셔 대신 컴패니언 고정 피해.",
+            "zh": "两者性能相同 — 只编入1名才能免费为Boss挂上{D/BT_STAT|ST_DEF_IR}。推荐{P/Heatwave Cop Delta}：仅在队中即为全体盟友提供+30%伤害，为{E/Earth}属性盟友提供攻击力增益，并以同伴固定伤害取代终结技。",
+            "fr": "Même kit — n'en jouez qu'un seul pour obtenir le {D/BT_STAT|ST_DEF_IR} gratuit sur le Boss. {P/Heatwave Cop Delta} préféré : +30% de dégâts à toute l'équipe rien que par sa présence, un buff d'Attaque pour les alliés {E/Earth} et des dégâts fixes de compagnon à la place d'un finisher."
+          }
+        },
+        {
+          "characters": ["Viella", "Monad Eva"],
+          "reason": {
+            "en": "Both provide the {B/BT_REMOVE_DEBUFF} that clears the {D/BT_STAT|ST_SPEED}. {P/Viella} adds {D/BT_DOT_POISON} and {B/BT_IMMUNE}; {P/Monad Eva} adds {B/BT_REVIVAL}, {B/BT_INVINCIBLE} and a {B/BT_STAT|ST_SPEED} buff.",
+            "jp": "どちらも{D/BT_STAT|ST_SPEED}を解除する{B/BT_REMOVE_DEBUFF}を持つ。{P/Viella}は{D/BT_DOT_POISON}と{B/BT_IMMUNE}を、{P/Monad Eva}は{B/BT_REVIVAL}、{B/BT_INVINCIBLE}、{B/BT_STAT|ST_SPEED}バフを追加する。",
+            "kr": "둘 다 {D/BT_STAT|ST_SPEED}을 해제하는 {B/BT_REMOVE_DEBUFF}을 보유합니다. {P/Viella}는 {D/BT_DOT_POISON}과 {B/BT_IMMUNE}을, {P/Monad Eva}는 {B/BT_REVIVAL}, {B/BT_INVINCIBLE}, {B/BT_STAT|ST_SPEED} 버프를 더합니다.",
+            "zh": "两者都具备可解除{D/BT_STAT|ST_SPEED}的{B/BT_REMOVE_DEBUFF}。{P/Viella}额外提供{D/BT_DOT_POISON}与{B/BT_IMMUNE}；{P/Monad Eva}额外提供{B/BT_REVIVAL}、{B/BT_INVINCIBLE}以及{B/BT_STAT|ST_SPEED}增益。",
+            "fr": "Les deux apportent le {B/BT_REMOVE_DEBUFF} qui nettoie le {D/BT_STAT|ST_SPEED}. {P/Viella} ajoute {D/BT_DOT_POISON} et {B/BT_IMMUNE} ; {P/Monad Eva} ajoute {B/BT_REVIVAL}, {B/BT_INVINCIBLE} et un buff de {B/BT_STAT|ST_SPEED}."
+          }
+        }
+      ]
+    }
+  ]
+}

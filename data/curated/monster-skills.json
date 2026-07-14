@@ -31,6 +31,8 @@
   },
   "_docChipAdd": "chipAdd : skillId → réfs TOOLTIP du glossaire ajoutées en chips sur la carte — statuts DÉCRITS par la desc du skill mais appliqués hors kit (ex. passifs de PALIER, OptionID des rangs), ou affichés par le NIVEAU (colonne BuffToolTip) sans qu'aucun buff du kit ne les porte (bug de table : le rage Skuld décrit « Increases own Critical Hit Chance », le niveau affiche le tooltip 11, mais le buff Singularity_RAGE_SKD porte ST_SPEED/1015). La carte stats reste la source fidèle rang par rang.",
   "chipAdd": {
+    "110738": ["48"],
+    "110741": ["39"],
     "130726": ["SYS_BUFF_CHARGE_CP"],
     "130821": ["SYS_BUFF_CHARGE_CP"],
     "130823": ["SYS_BUFF_CHARGE_CP"],
@@ -48,6 +50,7 @@
   },
   "_docChipHide": "chipHide : skillId → buffIds dont la chip est MASQUÉE sur cette carte. Deux cas : (1) buff de câblage que la desc ne décrit pas et que le jeu n'affiche pas (colonne BuffToolTip du niveau vide) — l'extend-buff Singularity_OLD_SKILL01_1_1 du S1 d'Urd (900061 kits 60000010/40040060, 900091 kit 60000013) ; (2) copie du PORTEUR quand la duplication caller a déjà rendu la chip au skill qui la décrit — l'Extinction 4076002_15_4 du monster_2 de Meteos (130712) appartient à l'affichage du S2 « Protect the Royal Family... » (« Targets killed by this attack cannot be Resurrected or Revived »).",
   "chipHide": {
+    "110738": ["irregular_1"],
     "113589": ["event_monster_buff_47"],
     "113641": ["event_monster_buff_496"],
     "130710": ["4076002_15_4"],
