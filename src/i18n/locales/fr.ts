@@ -932,6 +932,11 @@ const fr: Record<TranslationKey, string> = {
   'filters.roles.sustain': 'Sustain',
 
   // Characters filters
+  'characters.filters.search': 'Rechercher…',
+  'characters.filters.element': 'Élément',
+  'characters.filters.class': 'Classe',
+  'characters.filters.role': 'Rôle',
+  'characters.filters.count': '{count} persos',
   'characters.filters.chains': 'Chaînes',
   'characters.filters.roles': 'Rôles',
   'characters.filters.gifts': 'Cadeaux',

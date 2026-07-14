@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { cn } from '@/lib/cn';
 
 export interface Tab {
@@ -8,6 +8,16 @@ export interface Tab {
   label: string;
   content: React.ReactNode;
 }
+
+// La query string comme STORE EXTERNE (pattern AdminSidebar) : le HTML statique
+// ne la connaît pas (snapshot serveur vide), le client se resynchronise à
+// l'hydratation — sans setState dans un effet. `popstate` couvre en prime la
+// navigation historique (avant : restauration au montage uniquement).
+const subscribeSearch = (onChange: () => void) => {
+  window.addEventListener('popstate', onChange);
+  return () => window.removeEventListener('popstate', onChange);
+};
+const readSearch = () => window.location.search;
 
 /**
  * Onglets théminés (soulignement de l'onglet actif via la couleur d'accent).
@@ -26,21 +36,17 @@ export function Tabs({
   className?: string;
   urlParam?: string;
 }) {
-  const [active, setActive] = useState(tabs[0]?.id);
+  // Sélection UTILISATEUR (prioritaire) ; à défaut la query, puis le 1er onglet.
+  const [selected, setSelected] = useState<string | null>(null);
+  const search = useSyncExternalStore(subscribeSearch, readSearch, () => '');
+  const urlTab = urlParam ? new URLSearchParams(search).get(urlParam) : null;
+  const active = selected ?? (urlTab && tabs.some((t) => t.id === urlTab) ? urlTab : tabs[0]?.id);
   const current = tabs.find((t) => t.id === active) ?? tabs[0];
 
-  useEffect(() => {
-    if (!urlParam) return;
-    const v = new URLSearchParams(window.location.search).get(urlParam);
-    // Restauration au MONTAGE uniquement : le HTML statique ne connaît pas la
-    // query — la resynchronisation post-hydratation est le comportement voulu.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (v && tabs.some((t) => t.id === v)) setActive(v);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const select = (id: string) => {
-    setActive(id);
+    setSelected(id);
+    // replaceState ne déclenche pas `popstate` — sans importance : `selected`
+    // prime désormais sur le snapshot de la query.
     if (urlParam) {
       const url = new URL(window.location.href);
       url.searchParams.set(urlParam, id);

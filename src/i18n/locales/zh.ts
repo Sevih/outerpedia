@@ -871,6 +871,11 @@ const zh: Record<TranslationKey, string> = {
   'filters.roles.sustain': '奶/坦',
 
   // Characters filters
+  'characters.filters.search': '搜索…',
+  'characters.filters.element': '属性',
+  'characters.filters.class': '职业',
+  'characters.filters.role': '定位',
+  'characters.filters.count': '{count}个角色',
   'characters.filters.chains': '连携技能类型',
   'characters.filters.roles': '角色定位',
   'characters.filters.gifts': '礼物类型',

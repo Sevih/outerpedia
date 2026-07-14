@@ -86,10 +86,6 @@ export function getCharacter(id: string): Character | undefined {
   return CHARACTERS[id];
 }
 
-export function listCharacterIds(): string[] {
-  return Object.keys(CHARACTERS);
-}
-
 /** Tous les slugs connus (pour `generateStaticParams`). */
 export function listCharacterSlugs(): string[] {
   return Object.keys(SLUG_TO_ID);

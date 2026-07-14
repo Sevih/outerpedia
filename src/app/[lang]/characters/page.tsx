@@ -1,9 +1,13 @@
 import type { Metadata } from 'next';
 import { isValidLang, type Lang } from '@/lib/i18n/config';
-import { getT } from '@/i18n';
+import { getT, type TFunction, type TranslationKey } from '@/i18n';
 import { createPageMetadata, buildItemListJsonLd, buildUrl } from '@/lib/seo';
 import JsonLd from '@/components/seo/JsonLd';
-import { CharactersBrowser, type CharacterRow } from '@/components/character/CharactersBrowser';
+import {
+  CharactersBrowser,
+  type CharacterRow,
+  type CharactersBrowserLabels,
+} from '@/components/character/CharactersBrowser';
 import {
   characterDisplayName,
   characterNamePrefix,
@@ -49,6 +53,45 @@ function buildRows(lang: Lang): CharacterRow[] {
   }));
 }
 
+/**
+ * Libellés du browser (client) pré-traduits côté serveur — même pattern que
+ * la page équipement : les slugs des options passent par les clés système
+ * (sys.element.* / sys.class.* / filters.roles.*), jamais de slug brut à
+ * l'écran. Les maps sont dérivées des valeurs réellement présentes.
+ */
+function buildLabels(rows: CharacterRow[], t: TFunction): CharactersBrowserLabels {
+  const optionMap = (values: Array<string | undefined>, prefix: string) =>
+    Object.fromEntries(
+      [...new Set(values.filter((v): v is string => Boolean(v)))].map((v) => [
+        v,
+        t(`${prefix}.${v}` as TranslationKey),
+      ]),
+    );
+  return {
+    search: t('characters.filters.search'),
+    element: t('characters.filters.element'),
+    class: t('characters.filters.class'),
+    role: t('characters.filters.role'),
+    // Gabarit brut (sans vars, t() rend le message tel quel) — le compte est
+    // substitué côté client, il change à chaque frappe dans les filtres.
+    count: t('characters.filters.count'),
+    options: {
+      element: optionMap(
+        rows.map((r) => r.element),
+        'sys.element',
+      ),
+      class: optionMap(
+        rows.map((r) => r.class),
+        'sys.class',
+      ),
+      role: optionMap(
+        rows.map((r) => r.role),
+        'filters.roles',
+      ),
+    },
+  };
+}
+
 export default async function CharactersPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang: raw } = await params;
   const lang = (isValidLang(raw) ? raw : 'en') as Lang;
@@ -71,7 +114,7 @@ export default async function CharactersPage({ params }: { params: Promise<{ lan
         <h1 className="text-content-strong text-2xl font-bold">{t('page.characters.title')}</h1>
         <p className="text-content-muted text-sm">{t('page.characters.description')}</p>
       </div>
-      <CharactersBrowser rows={rows} />
+      <CharactersBrowser rows={rows} labels={buildLabels(rows, t)} />
     </div>
   );
 }

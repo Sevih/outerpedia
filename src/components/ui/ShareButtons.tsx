@@ -129,7 +129,7 @@ export function ShareButtons({ title, lang }: { title: string; lang: Lang }) {
             href={links[p]}
             target="_blank"
             rel="nofollow noopener noreferrer"
-            className={`flex h-8 w-8 items-center justify-center rounded-md bg-zinc-800 text-zinc-400 ${cfg.color} transition-colors hover:bg-zinc-700`}
+            className={`bg-surface-overlay text-content-muted flex h-8 w-8 items-center justify-center rounded-md ${cfg.color} hover:bg-line transition-colors`}
             aria-label={`Share on ${cfg.label}`}
             title={`Share on ${cfg.label}`}
           >
@@ -142,7 +142,7 @@ export function ShareButtons({ title, lang }: { title: string; lang: Lang }) {
 
       <button
         onClick={handleCopy}
-        className="relative flex h-8 w-8 items-center justify-center rounded-md bg-zinc-800 text-zinc-400 transition-colors hover:bg-zinc-700 hover:text-zinc-100"
+        className="bg-surface-overlay text-content-muted hover:bg-line hover:text-content-strong relative flex h-8 w-8 items-center justify-center rounded-md transition-colors"
         aria-label="Copy link"
         title="Copy link"
         type="button"
@@ -150,7 +150,7 @@ export function ShareButtons({ title, lang }: { title: string; lang: Lang }) {
         {copied ? (
           <>
             <svg
-              className="h-3.5 w-3.5 text-green-400"
+              className="text-success h-3.5 w-3.5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -163,7 +163,8 @@ export function ShareButtons({ title, lang }: { title: string; lang: Lang }) {
                 d="M5 13l4 4L19 7"
               />
             </svg>
-            <span className="pointer-events-none absolute -top-7 left-1/2 -translate-x-1/2 rounded bg-green-600 px-2 py-0.5 text-xs whitespace-nowrap text-white">
+            {/* Texte sombre sur le vert clair du token success (contraste). */}
+            <span className="bg-success text-accent-fg pointer-events-none absolute -top-7 left-1/2 -translate-x-1/2 rounded px-2 py-0.5 text-xs font-medium whitespace-nowrap">
               Copied!
             </span>
           </>

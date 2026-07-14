@@ -34,8 +34,9 @@ export function StatInline({
     <InlineTooltip
       content={
         <div className="flex max-w-64 flex-col gap-1">
-          <span className="text-sm font-bold text-white">{name}</span>
-          <p className="text-xs whitespace-pre-line text-neutral-200">{desc}</p>
+          {/* Tooltip sur surface sombre (thème unique) : tokens contenu. */}
+          <span className="text-content-strong text-sm font-bold">{name}</span>
+          <p className="text-content text-xs whitespace-pre-line">{desc}</p>
         </div>
       }
     >

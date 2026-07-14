@@ -918,6 +918,11 @@ const en = {
   'filters.roles.sustain': 'Sustain',
 
   // Characters filters
+  'characters.filters.search': 'Search…',
+  'characters.filters.element': 'Element',
+  'characters.filters.class': 'Class',
+  'characters.filters.role': 'Role',
+  'characters.filters.count': '{count} characters',
   'characters.filters.chains': 'Chains',
   'characters.filters.roles': 'Roles',
   'characters.filters.gifts': 'Gifts',

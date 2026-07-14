@@ -82,9 +82,10 @@ function effectChip(side: 'buff' | 'debuff', key: string, ctx: ParseCtx, k: numb
     <div className="flex flex-col gap-1">
       <div className="flex items-center gap-1.5">
         {eff.icon && <EffectIconTile icon={eff.icon} isDebuff={isDebuff} className="h-6 w-6" />}
-        <span className="text-sm font-bold text-white">{label}</span>
+        {/* Texte de tooltip sur surface sombre : tokens contenu (thème unique sombre). */}
+        <span className="text-content-strong text-sm font-bold">{label}</span>
       </div>
-      {desc && <p className="text-xs text-neutral-200">{desc}</p>}
+      {desc && <p className="text-content text-xs">{desc}</p>}
     </div>
   );
   return (
@@ -116,8 +117,8 @@ function characterChip(name: string, ctx: ParseCtx, k: number): ReactNode {
       {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img src={img.face(c.id)} alt={display} className="h-14 w-14 shrink-0 rounded" />
       <div className="flex flex-col gap-0.5">
-        <span className="text-sm font-bold text-white">{display}</span>
-        <span className="text-xs text-neutral-300">{'★'.repeat(c.rarity)}</span>
+        <span className="text-content-strong text-sm font-bold">{display}</span>
+        <span className="text-content text-xs">{'★'.repeat(c.rarity)}</span>
         <span className={`flex items-center gap-1 text-xs ${ELEMENT_TEXT[c.element] ?? ''}`}>
           {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img src={img.element(c.element)} alt="" className="h-4 w-4" /> {el}
@@ -223,13 +224,13 @@ function setChip(name: string, ctx: ParseCtx, k: number): ReactNode {
         {tier?.p2 && (
           <p className="text-xs">
             <span className="text-buff">{ctx.t('equip.set.2piece')}: </span>
-            <span className="text-neutral-200">{tier.p2}</span>
+            <span className="text-content">{tier.p2}</span>
           </p>
         )}
         {tier?.p4 && (
           <p className="text-xs">
             <span className="text-buff">{ctx.t('equip.set.4piece')}: </span>
-            <span className="text-neutral-200">{tier.p4}</span>
+            <span className="text-content">{tier.p4}</span>
           </p>
         )}
       </div>

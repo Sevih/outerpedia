@@ -11,7 +11,7 @@ export function InlineIcon({
   icon,
   iconNode,
   label,
-  color = 'text-white',
+  color = 'text-content-strong',
   underline = true,
   imageClassName,
   tooltip,

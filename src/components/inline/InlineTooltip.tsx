@@ -10,7 +10,9 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 export function InlineTooltip({
   children,
   content,
-  bg = 'bg-neutral-800',
+  // Fond volontairement SOMBRE (lisibilité au survol) : la surface overlay est
+  // le token le plus proche du neutral-800 historique de la V2.
+  bg = 'bg-surface-overlay',
 }: {
   children: React.ReactNode;
   content: React.ReactNode;
@@ -49,7 +51,7 @@ export function InlineTooltip({
           side="top"
           align="center"
           sideOffset={6}
-          className={`z-80 max-w-70 rounded border border-white/10 px-3 py-2 shadow-lg ${bg}`}
+          className={`border-line z-80 max-w-70 rounded border px-3 py-2 shadow-lg ${bg}`}
         >
           {content}
           <HoverCard.Arrow className={arrowClass(bg)} />
@@ -63,5 +65,5 @@ export function InlineTooltip({
 function arrowClass(bg: string): string {
   if (bg.includes('buff-bg')) return 'fill-buff-bg';
   if (bg.includes('debuff-bg')) return 'fill-debuff-bg';
-  return 'fill-neutral-800';
+  return 'fill-surface-overlay';
 }

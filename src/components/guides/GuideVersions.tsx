@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, type ReactNode } from 'react';
+import { useState, useSyncExternalStore, type ReactNode } from 'react';
 
 export interface GuideVersionEntry {
   /** Clé stable (dossier `versions/YYYY-MM`) — sert d'ancre `#version=`. */
@@ -10,6 +10,19 @@ export interface GuideVersionEntry {
   /** Bandeau « ancienne version » (déjà localisé) — absent sur la plus récente. */
   warning?: string;
 }
+
+// Le hash comme STORE EXTERNE (pattern AdminSidebar/localStorage) : le HTML
+// statique ne le connaît pas (snapshot serveur null), le client se resynchronise
+// à l'hydratation — sans setState dans un effet. `hashchange` couvre en prime
+// une édition manuelle du hash (avant : restauration au montage uniquement).
+const subscribeHash = (onChange: () => void) => {
+  window.addEventListener('hashchange', onChange);
+  return () => window.removeEventListener('hashchange', onChange);
+};
+const readVersionHash = () => {
+  const m = window.location.hash.match(/^#version=(.+)$/);
+  return m ? decodeURIComponent(m[1]) : null;
+};
 
 /**
  * Sélecteur de versions d'un guide : un MENU DÉROULANT compact (un guide
@@ -36,20 +49,16 @@ export function GuideVersions({
    */
   shared?: ReactNode;
 }) {
-  const [active, setActive] = useState(versions[0]?.key);
-
-  useEffect(() => {
-    // Restauration au montage uniquement : le HTML statique ne connaît pas le
-    // hash — la resynchronisation post-hydratation est le comportement voulu.
-    const m = window.location.hash.match(/^#version=(.+)$/);
-    const key = m ? decodeURIComponent(m[1]) : null;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (key && versions.some((v) => v.key === key)) setActive(key);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // Sélection UTILISATEUR (prioritaire) ; à défaut le hash, puis la 1re entrée.
+  const [selected, setSelected] = useState<string | null>(null);
+  const hashKey = useSyncExternalStore(subscribeHash, readVersionHash, () => null);
+  const active =
+    selected ?? (hashKey && versions.some((v) => v.key === hashKey) ? hashKey : versions[0]?.key);
 
   const select = (key: string) => {
-    setActive(key);
+    setSelected(key);
+    // replaceState ne déclenche pas `hashchange` — sans importance : `selected`
+    // prime désormais sur le snapshot du hash.
     window.history.replaceState(null, '', `#version=${encodeURIComponent(key)}`);
   };
 

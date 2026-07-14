@@ -133,7 +133,7 @@ export function slugifyEquipment(name: string): string {
 /**
  * Remplit un template de passif (`[Value]`, `[Rate]`, `[Turn]` + variantes)
  * avec les valeurs d'un palier. `color` enrobe chaque valeur de
- * `<color=#28d9ed>` (rendue par parse-text/renderColored).
+ * `<color=#28d9ed>` (rendue par `renderGameColors`, src/components/ui/GameText.tsx).
  */
 export function fillPlaceholders(template: string, v: BuffValues, color = true): string {
   const w = (s: string) => (color ? `<color=#28d9ed>${s}</color>` : s);

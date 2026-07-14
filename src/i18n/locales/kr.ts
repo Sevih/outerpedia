@@ -889,6 +889,11 @@ const kr: Record<TranslationKey, string> = {
   'filters.roles.sustain': '탱커',
 
   // Characters filters
+  'characters.filters.search': '검색…',
+  'characters.filters.element': '속성',
+  'characters.filters.class': '클래스',
+  'characters.filters.role': '역할',
+  'characters.filters.count': '캐릭터 {count}명',
   'characters.filters.chains': '체인',
   'characters.filters.roles': '역할',
   'characters.filters.gifts': '선물',

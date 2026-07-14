@@ -4,7 +4,8 @@
  * comparaison dans l'admin.
  *
  * Le curé est lu au système de fichiers (pas un import figé) pour que l'admin
- * voie ses écritures immédiatement.
+ * voie ses écritures immédiatement (en dev, Next invalide le module à la
+ * recompilation — le cache module ci-dessous ne survit pas à une écriture).
  */
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -42,13 +43,25 @@ export interface MergedEffect {
   overridden: boolean;
 }
 
-/** Charge tous les overrides curés (clé = id d'effet). */
+// Cache module (même pattern que v2Entries plus bas) : le fichier curé ne
+// change pas pendant un rendu, et chaque page parse-text déclenchait sinon des
+// dizaines de relectures/parses du même JSON. En dev, l'admin voit ses
+// écritures via l'invalidation de module de Next (recompilation à la requête).
+let curatedCache: Record<string, EffectCurated> | null = null;
+
+/** Charge tous les overrides curés (clé = id d'effet) — mémoïsé au module. */
 export function loadCuratedEffects(): Record<string, EffectCurated> {
-  try {
-    return JSON.parse(readFileSync(CURATED_PATH, 'utf8')) as Record<string, EffectCurated>;
-  } catch {
-    return {};
+  if (!curatedCache) {
+    try {
+      curatedCache = JSON.parse(readFileSync(CURATED_PATH, 'utf8')) as Record<
+        string,
+        EffectCurated
+      >;
+    } catch {
+      curatedCache = {};
+    }
   }
+  return curatedCache;
 }
 
 function merge(effect: Effect, c?: EffectCurated): MergedEffect {
@@ -150,12 +163,13 @@ const BY_KEY = G.effectByKey as Record<'buff' | 'debuff', Record<string, string>
  * contenu porte le côté via {B}/{D}) puis créations curées (`keys`).
  */
 export function resolveEffectKey(side: 'buff' | 'debuff', key: string): MergedEffect | undefined {
-  const id = BY_KEY[side]?.[key] ?? BY_KEY[side === 'buff' ? 'debuff' : 'buff']?.[key];
-  if (id) return getMergedEffect(id);
-  for (const [cid, c] of Object.entries(loadCuratedEffects())) {
-    if (c.keys?.includes(key)) return getMergedEffect(cid);
-  }
-  return undefined;
+  // Une seule résolution : on détermine l'id (index généré, puis créations
+  // curées) et on ne fusionne qu'une fois en sortie.
+  const id =
+    BY_KEY[side]?.[key] ??
+    BY_KEY[side === 'buff' ? 'debuff' : 'buff']?.[key] ??
+    Object.entries(loadCuratedEffects()).find(([, c]) => c.keys?.includes(key))?.[0];
+  return id ? getMergedEffect(id) : undefined;
 }
 
 /** Effet EXTRAIT brut par id (sans override), pour l'admin. */

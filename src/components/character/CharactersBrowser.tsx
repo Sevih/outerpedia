@@ -21,6 +21,25 @@ export interface CharacterRow {
   role?: string;
 }
 
+/**
+ * Libellés pré-traduits (la page serveur passe le dictionnaire — même pattern
+ * que EquipmentBrowser : le composant client ne connaît pas t()).
+ */
+export interface CharactersBrowserLabels {
+  search: string;
+  element: string;
+  class: string;
+  role: string;
+  /** Gabarit `{count} …` — substitué côté client (le compte est dynamique). */
+  count: string;
+  /** Libellés localisés des valeurs d'options (slug → libellé). */
+  options: {
+    element: Record<string, string>;
+    class: Record<string, string>;
+    role: Record<string, string>;
+  };
+}
+
 const field =
   'rounded-md border border-line bg-surface-base px-2 py-1.5 text-sm text-content focus:border-accent focus:outline-none';
 
@@ -29,7 +48,13 @@ function distinct(rows: CharacterRow[], key: keyof CharacterRow): string[] {
   return [...new Set(rows.map((r) => r[key]).filter(Boolean) as string[])].sort();
 }
 
-export function CharactersBrowser({ rows }: { rows: CharacterRow[] }) {
+export function CharactersBrowser({
+  rows,
+  labels,
+}: {
+  rows: CharacterRow[];
+  labels: CharactersBrowserLabels;
+}) {
   const [element, setElement] = useState('');
   const [klass, setKlass] = useState('');
   const [role, setRole] = useState('');
@@ -61,31 +86,31 @@ export function CharactersBrowser({ rows }: { rows: CharacterRow[] }) {
       <div className="flex flex-wrap items-center gap-2">
         <input
           className={`${field} w-44`}
-          placeholder="Rechercher…"
+          placeholder={labels.search}
           value={q}
           onChange={(e) => setQ(e.target.value)}
         />
         <select className={field} value={element} onChange={(e) => setElement(e.target.value)}>
-          <option value="">Élément</option>
+          <option value="">{labels.element}</option>
           {elements.map((el) => (
             <option key={el} value={el}>
-              {el}
+              {labels.options.element[el] ?? el}
             </option>
           ))}
         </select>
         <select className={field} value={klass} onChange={(e) => setKlass(e.target.value)}>
-          <option value="">Classe</option>
+          <option value="">{labels.class}</option>
           {classes.map((cl) => (
             <option key={cl} value={cl}>
-              {cl}
+              {labels.options.class[cl] ?? cl}
             </option>
           ))}
         </select>
         <select className={field} value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="">Rôle</option>
+          <option value="">{labels.role}</option>
           {roles.map((ro) => (
             <option key={ro} value={ro}>
-              {ro}
+              {labels.options.role[ro] ?? ro}
             </option>
           ))}
         </select>
@@ -105,7 +130,9 @@ export function CharactersBrowser({ rows }: { rows: CharacterRow[] }) {
             </button>
           ))}
         </div>
-        <span className="text-content-subtle ml-auto text-xs">{filtered.length} persos</span>
+        <span className="text-content-subtle ml-auto text-xs">
+          {labels.count.replace('{count}', String(filtered.length))}
+        </span>
       </div>
 
       <div className="flex flex-wrap justify-center gap-4 lg:gap-6">

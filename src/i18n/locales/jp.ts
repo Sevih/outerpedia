@@ -903,6 +903,11 @@ const jp: Record<TranslationKey, string> = {
   'filters.roles.sustain': '耐久',
 
   // Characters filters
+  'characters.filters.search': '検索…',
+  'characters.filters.element': '属性',
+  'characters.filters.class': 'クラス',
+  'characters.filters.role': '役割',
+  'characters.filters.count': 'キャラクター{count}体',
   'characters.filters.chains': 'チェイン',
   'characters.filters.roles': '役割',
   'characters.filters.gifts': '贈り物',

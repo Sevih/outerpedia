@@ -71,10 +71,9 @@ export function ItemInline({
       content={
         tooltip ?? (
           <div className="flex max-w-64 flex-col gap-1">
-            <span className="text-sm font-bold text-white">{item.name}</span>
-            {item.desc && (
-              <p className="text-xs whitespace-pre-line text-neutral-200">{item.desc}</p>
-            )}
+            {/* Tooltip sur surface sombre (thème unique) : tokens contenu. */}
+            <span className="text-content-strong text-sm font-bold">{item.name}</span>
+            {item.desc && <p className="text-content text-xs whitespace-pre-line">{item.desc}</p>}
           </div>
         )
       }
