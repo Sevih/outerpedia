@@ -578,7 +578,6 @@ const jp: Record<TranslationKey, string> = {
   'guides.counter': 'ガイド{guides}件 · カテゴリー{categories}件',
   'guides.count.one': 'ガイド{count}件',
   'guides.count.many': 'ガイド{count}件',
-  'guides.collection': '{name}コレクション',
 
   // Statut de saison d'un boss (cartes JC/WB/GR)
   'guides.season.live': '{date}まで開催中',
@@ -604,12 +603,9 @@ const jp: Record<TranslationKey, string> = {
   'guides.team_selector': 'おすすめチーム',
   'guides.team.prev_option': '前の候補',
   'guides.team.next_option': '次の候補',
-  // RÉCOMPENSES d'un donjon (tables `rewardTables` — poursuite irregular…).
+  'guides.collection': '{name}コレクション',
   'guides.rewards.title': '報酬',
-  'guides.rewards.win': '勝利',
-  'guides.rewards.lose': '敗北',
-  'guides.rewards.battle': '毎戦闘',
-  'guides.rewards.random': 'ランダムドロップ',
+  'guides.rewards.details': '詳細',
   'guides.strategy_guide': '攻略ガイド',
   'guides.boss_display.immunities': '免疫',
   'guides.boss_display.skills': 'スキル',

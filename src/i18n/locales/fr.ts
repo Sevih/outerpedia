@@ -598,7 +598,6 @@ const fr: Record<TranslationKey, string> = {
   'guides.counter': '{guides} guides · {categories} catégories',
   'guides.count.one': '{count} GUIDE',
   'guides.count.many': '{count} GUIDES',
-  'guides.collection': 'Collection {name}',
 
   // Statut de saison d'un boss (cartes JC/WB/GR)
   'guides.season.live': 'En cours jusqu’au {date}',
@@ -624,12 +623,9 @@ const fr: Record<TranslationKey, string> = {
   'guides.team_selector': 'Équipes suggérées',
   'guides.team.prev_option': 'Option précédente',
   'guides.team.next_option': 'Option suivante',
-  // RÉCOMPENSES d'un donjon (tables `rewardTables` — poursuite irregular…).
+  'guides.collection': 'Collection {name}',
   'guides.rewards.title': 'Récompenses',
-  'guides.rewards.win': 'Victoire',
-  'guides.rewards.lose': 'Défaite',
-  'guides.rewards.battle': 'Chaque combat',
-  'guides.rewards.random': 'Drop aléatoire',
+  'guides.rewards.details': 'Détails',
   'guides.strategy_guide': 'Guide de stratégie',
   'guides.boss_display.immunities': 'Immunités',
   'guides.boss_display.skills': 'Skills',

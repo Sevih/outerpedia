@@ -186,8 +186,11 @@ function mainStatMaxOf(entry: EquipEntry | undefined, mainStat?: string): Record
 }
 
 /** Textes du passif à l'état MAX (T4 gear / Lv10 talisman) : add cumule, replace écrase. */
-function effectAtMax(f: GearFamily, lang: Lang): { name?: string; icon?: string; texts: string[] } {
-  const refs = resolvePassives(f.passives, lang);
+function effectAtMaxOf(
+  passives: GearFamily['passives'],
+  lang: Lang,
+): { name?: string; icon?: string; texts: string[] } {
+  const refs = resolvePassives(passives, lang);
   if (!refs.length) return { texts: [] };
   let texts: string[] = [];
   for (const r of refs) {
@@ -196,6 +199,10 @@ function effectAtMax(f: GearFamily, lang: Lang): { name?: string; icon?: string;
     else texts = [text];
   }
   return { name: refs[0].name, icon: refs[0].icon, texts };
+}
+
+function effectAtMax(f: GearFamily, lang: Lang): { name?: string; icon?: string; texts: string[] } {
+  return effectAtMaxOf(f.passives, lang);
 }
 
 function toItemSource(s: ResolvedSource | undefined, lang: Lang): ResolvedItemSource | undefined {
@@ -325,4 +332,99 @@ export function getCharacterGearReco(charId: string, lang: Lang): ResolvedBuild[
       note: b.note ? lRec(b.note, lang) : undefined,
     };
   });
+}
+
+// --- Butin d'un donjon : la même MiniCard, alimentée par les tables du jeu -----
+//
+// Les guides de boss montrent le pool d'un donjon (cf. `lootDetails` dans
+// lib/data/rewards). C'est le MÊME objet à l'écran que dans un build recommandé
+// — donc la même résolution, pas une deuxième : tuile du jeu, mains possibles et
+// leurs valeurs max, passif au palier max, lien détail.
+
+/** Slot d'une pièce, déduit des tables (une pièce n'appartient qu'à une). */
+function slotOf(id: string): Slot | undefined {
+  if (WEAPONS[id]) return 'weapons';
+  if (AMULETS[id]) return 'amulets';
+  if (TALISMANS[id]) return 'talismans';
+  return undefined;
+}
+
+const TABLES: Record<Slot, Record<string, EquipEntry>> = {
+  weapons: WEAPONS,
+  amulets: AMULETS,
+  talismans: TALISMANS,
+};
+
+/**
+ * Une pièce de BUTIN matérialisée pour la MiniCard — la VARIANTE telle que la
+ * table la droppe (sa tuile, sa classe), pas le haut de sa famille : le jeu
+ * décline Briareos en cinq armes, une par classe, et c'est bien cinq objets
+ * distincts qui tombent. Le reste vient de la famille : mains possibles et
+ * valeurs max, lien détail, et le passif de CETTE classe quand les variantes en
+ * ont chacune un (`classPassives` — Briareos, Gorgon).
+ *
+ * `undefined` si l'id n'est pas une pièce d'équipement : l'appelant sait alors
+ * que c'est un item de catalogue (coffre, matériau) et le traite comme tel.
+ */
+export function resolveLootGear(id: string, lang: Lang): ResolvedGearItem | undefined {
+  const slot = slotOf(id);
+  if (!slot) return undefined;
+  const table = TABLES[slot];
+  const e = table[id];
+  const f = familyOf(slot, id);
+  // Les mains POSSIBLES de la famille (pool roulé) : le loot n'en fixe aucune,
+  // contrairement à un build curé qui recommande la sienne.
+  const mainStat = f?.mainStats.length ? f.mainStats.join('/') : undefined;
+  const passives =
+    f?.classPassives?.find((cp) => cp.classLimit === e.classLimit)?.passives ?? f?.passives ?? [];
+  const eff = effectAtMaxOf(passives, lang);
+  const maxes = slot === 'talismans' ? {} : mainStatMaxOf(f ? topEntry(table, f) : e, mainStat);
+  return {
+    id,
+    name: lRec(e.name, lang),
+    icon: e.icon,
+    grade: e.grade,
+    star: e.star,
+    mainStat,
+    slug: f?.slug,
+    overlayIcon: eff.icon || undefined,
+    classType: e.classLimit ?? undefined,
+    ...(Object.keys(maxes).length ? { mainStatMax: maxes } : {}),
+    ...(eff.name ? { effectName: eff.name, effectIcon: eff.icon } : {}),
+    ...(eff.texts.length ? { effectTexts: eff.texts } : {}),
+  };
+}
+
+/**
+ * Le SET d'une pièce d'armure du butin (les pools d'Ecology Study droppent des
+ * pièces, pas des sets) : ses quatre tuiles et ses bonus 2p/4p au palier de
+ * base — celui qu'on obtient en le farmant.
+ */
+export function resolveLootSet(
+  setId: string,
+  lang: Lang,
+): { piece: ResolvedSetPiece; effect: ResolvedSetEffect } | undefined {
+  const entry = SETS[setId];
+  const view = getSetViews(lang).find((v) => v.id === setId);
+  if (!entry || !view) return undefined;
+  return {
+    piece: {
+      id: setId,
+      name: lRec(entry.name, lang),
+      slug: view.slug,
+      icon: entry.icon,
+      pieceIcons: PIECE_ORDER.map((p) => view.pieceIcons[p]).filter((i): i is string => Boolean(i)),
+      // Le pool droppe les quatre pièces : le set est montré entier.
+      count: 4,
+    },
+    effect: {
+      id: setId,
+      name: lRec(entry.name, lang),
+      slug: view.slug,
+      icon: entry.icon,
+      maxCount: 4,
+      effect2: setBonus(entry, '2p', lang),
+      effect4: setBonus(entry, '4p', lang),
+    },
+  };
 }

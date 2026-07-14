@@ -15,7 +15,7 @@ import {
   hardestDifficultyLabel,
 } from '@/lib/data/encounters';
 import { getMonster } from '@/lib/data/monsters';
-import { resolveRewardTable, stageLoot } from '@/lib/data/rewards';
+import { lootDetails, pursuitLoot, resolveRewardTable, stageLoot } from '@/lib/data/rewards';
 import { monsterPanelStats, orderedStats } from '@/lib/monster-stats';
 
 /**
@@ -72,8 +72,17 @@ describe('encountersOfGroup — un combat, ses difficultés', () => {
 
 describe('difficultyLabel — le jeu ne parle pas français', () => {
   it('résout toute difficulté dans les 5 langues, sans jamais laisser fuir une clé', () => {
+    // On n'exige un libellé que là où il s'AFFICHE : un combat à plusieurs
+    // rencontres, dont `BossEncounters` pose les onglets. Un combat SOLITAIRE
+    // n'a pas de difficulté — pas parce qu'elle manquerait, mais parce qu'il n'y
+    // a rien à départager : l'Adventure License tient son échelle dans les RANGS
+    // d'un donjon unique (la glissière de la carte de boss), pas dans des donjons
+    // frères. Lui inventer un « Normal » serait un libellé qui ne veut rien dire,
+    // et l'onglet ne serait de toute façon jamais rendu.
     for (const g of GROUPS) {
-      for (const e of encountersOfGroup(g)) {
+      const encounters = encountersOfGroup(g);
+      if (encounters.length < 2) continue;
+      for (const e of encounters) {
         for (const lang of LANGS) {
           const label = difficultyLabel(e.ref, lang, makeT(MSG[lang]));
           expect(label, `${e.id} [${lang}]`).toBeTruthy();
@@ -344,34 +353,111 @@ describe('poursuite irregular — quatre combats permanents, du butin par issue'
     }
   });
 
-  it('la victoire rapporte la monnaie du mode (asset résolu) et le gear lié à sa famille', () => {
+  /**
+   * Ce que la carte du boss affiche (cf. `pursuitLoot`, comme le Special
+   * Request affiche `stageLoot`) : la monnaie du mode — dont la QUANTITÉ monte
+   * avec la difficulté, c'est tout l'intérêt de la montrer par onglet — et les
+   * variantes d'équipement du pool, qui n'arrivent qu'en haut d'échelle.
+   */
+  it('la monnaie du mode monte avec la difficulté ; l’équipement ne tombe qu’en Very Hard', () => {
     for (const g of CHASE_GROUPS) {
       const encounters = encountersOfGroup(g);
-      const top = encounters[encounters.length - 1];
-      const rows = resolveRewardTable(top.ref.rewardWin!, 'en');
-      // La monnaie d'échange du mode, nommée par le jeu (jamais par nous).
-      expect(
-        rows.some((r) => r.name.startsWith('Irregular Cell Type ')),
-        `${g} : monnaie du mode absente de la victoire`,
-      ).toBe(true);
-      // Le pool aléatoire du Very Hard porte l'équipement Irregular, LIÉ à sa
-      // page famille — c'est lui que la V2 listait à la main dans sa vue.
-      const gear = rows.filter((r) => r.random && r.href);
-      expect(gear.length, `${g} : pas d'équipement lié dans le pool`).toBeGreaterThan(0);
+      const loots = encounters.map((e) => pursuitLoot(e.ref.rewardWin!, 'en'));
+
+      for (const [i, loot] of loots.entries()) {
+        // La monnaie d'échange du mode, nommée par le jeu (jamais par nous).
+        expect(
+          loot.currencies.some((c) => c.name.startsWith('Irregular Cell Type ')),
+          `${encounters[i].id} : monnaie du mode absente de la victoire`,
+        ).toBe(true);
+      }
+
+      // Strictement croissante : Normal < Hard < Very Hard.
+      const amounts = loots.map((l) => Math.max(...l.currencies.map((c) => c.max)));
+      expect(amounts, `${g} : quantités de cellules`).toEqual([...amounts].sort((a, b) => a - b));
+      expect(new Set(amounts).size, `${g} : quantités de cellules identiques`).toBe(amounts.length);
+
+      // L'équipement n'est PAS un butin de tous les jours : seul le Very Hard
+      // le droppe (c'est ce qui fait monter le joueur). La V2 le listait à la
+      // main dans sa vue de catégorie, sans dire d'où il tombait.
+      const gearCount = loots.map((l) => l.weapons.length + l.amulets.length);
+      expect(gearCount.slice(0, -1), `${g} : gear hors Very Hard`).toEqual([0, 0]);
+      expect(gearCount[gearCount.length - 1], `${g} : pas de gear en Very Hard`).toBeGreaterThan(0);
     }
   });
 
-  it('les libellés du panneau de butin existent dans les cinq langues', () => {
+  it('le libellé du butin existe dans les cinq langues', () => {
     for (const lang of LANGS) {
       const t = makeT(MSG[lang]);
-      for (const key of [
-        'guides.rewards.title',
-        'guides.rewards.win',
-        'guides.rewards.lose',
-        'guides.rewards.battle',
-        'guides.rewards.random',
-      ] as const) {
+      for (const key of ['guides.rewards.title', 'guides.rewards.details'] as const) {
         expect(t(key), `${key} [${lang}]`).not.toBe(key);
+      }
+    }
+  });
+});
+
+/**
+ * Le DÉTAIL derrière « Details » — les MiniCards du pool, les mêmes que dans un
+ * build de perso (`resolveLootGear`). Ce qu'elles promettent doit tenir : une
+ * tuile, un grade, des mains possibles, un lien détail. Une carte muette (nom
+ * seul, sans stats ni passif) serait un panneau qui ne dit rien de plus que la
+ * ligne d'icônes qu'il déplie.
+ */
+describe('lootDetails — le pool d’un donjon, en cartes d’équipement', () => {
+  const CHASE_GROUPS = GROUPS.filter((g) => g.startsWith('irregular_chase:'));
+  const SR_GROUPS = GROUPS.filter((g) => g.startsWith('raid_1:') || g.startsWith('raid_2:'));
+
+  it('la poursuite détaille ses variantes PAR CLASSE (le jeu en droppe cinq, pas une)', () => {
+    for (const g of CHASE_GROUPS) {
+      const encs = encountersOfGroup(g);
+      const top = encs[encs.length - 1];
+      const d = lootDetails(top.ref.rewardWin!, 'en');
+
+      // Cinq armes, cinq amulettes : une par classe, chacune sa tuile.
+      expect(d.weapons.length, `${g} : armes`).toBe(5);
+      expect(d.amulets.length, `${g} : amulettes`).toBe(5);
+      expect(new Set(d.weapons.map((w) => w.classType)).size, `${g} : classes d'armes`).toBe(5);
+      expect(new Set(d.weapons.map((w) => w.icon)).size, `${g} : tuiles d'armes`).toBe(5);
+
+      for (const item of [...d.weapons, ...d.amulets]) {
+        expect(item.grade, `${g} : ${item.name} sans grade`).toBe('unique');
+        expect(item.slug, `${g} : ${item.name} sans lien détail`).toBeTruthy();
+        expect(item.mainStat, `${g} : ${item.name} sans main stat`).toBeTruthy();
+        // Le passif de SA classe (les variantes en portent chacune un).
+        expect(item.effectTexts?.length, `${g} : ${item.name} sans passif`).toBeGreaterThan(0);
+      }
+    }
+
+    // Les difficultés basses ne droppent pas d'équipement : le bouton ne
+    // s'affiche pas, plutôt qu'un panneau vide.
+    for (const g of CHASE_GROUPS) {
+      const [normal] = encountersOfGroup(g);
+      const d = lootDetails(normal.ref.rewardWin!, 'en');
+      expect(
+        d.weapons.length + d.amulets.length + d.talismans.length + d.sets.length,
+        `${g} : Normal ne devrait rien détailler`,
+      ).toBe(0);
+    }
+  });
+
+  it('le Special Request détaille ses sets (Ecology) ou ses familles uniques (Identification)', () => {
+    for (const g of SR_GROUPS) {
+      const encs = encountersOfGroup(g);
+      const top = encs[encs.length - 1];
+      const d = lootDetails(top.ref.reward!, 'en');
+      const count = d.weapons.length + d.amulets.length + d.talismans.length + d.sets.length;
+      expect(count, `${g} : rien à détailler au stage max`).toBeGreaterThan(0);
+
+      for (const { piece, effect } of d.sets) {
+        expect(piece.pieceIcons?.length, `${g} : ${piece.name} sans tuiles`).toBe(4);
+        expect(
+          effect.effect2 ?? effect.effect4,
+          `${g} : ${effect.name} sans bonus de set`,
+        ).toBeTruthy();
+      }
+      for (const item of [...d.weapons, ...d.amulets, ...d.talismans]) {
+        expect(item.grade, `${g} : ${item.name} sans grade`).toBe('unique');
+        expect(item.slug, `${g} : ${item.name} sans lien détail`).toBeTruthy();
       }
     }
   });

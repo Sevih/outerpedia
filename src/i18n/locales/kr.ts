@@ -572,7 +572,6 @@ const kr: Record<TranslationKey, string> = {
   'guides.counter': '가이드 {guides}개 · 카테고리 {categories}개',
   'guides.count.one': '가이드 {count}개',
   'guides.count.many': '가이드 {count}개',
-  'guides.collection': '{name} 컬렉션',
 
   // Statut de saison d'un boss (cartes JC/WB/GR)
   'guides.season.live': '{date}까지 진행 중',
@@ -598,12 +597,9 @@ const kr: Record<TranslationKey, string> = {
   'guides.team_selector': '추천 팀',
   'guides.team.prev_option': '이전 후보',
   'guides.team.next_option': '다음 후보',
-  // RÉCOMPENSES d'un donjon (tables `rewardTables` — poursuite irregular…).
+  'guides.collection': '{name} 컬렉션',
   'guides.rewards.title': '보상',
-  'guides.rewards.win': '승리',
-  'guides.rewards.lose': '패배',
-  'guides.rewards.battle': '전투당',
-  'guides.rewards.random': '랜덤 드롭',
+  'guides.rewards.details': '상세',
   'guides.strategy_guide': '전략 가이드',
   'guides.boss_display.immunities': '면역',
   'guides.boss_display.skills': '스킬',

@@ -559,7 +559,6 @@ const zh: Record<TranslationKey, string> = {
   'guides.counter': '{guides} 个攻略 · {categories} 个分类',
   'guides.count.one': '{count} 攻略',
   'guides.count.many': '{count} 攻略',
-  'guides.collection': '{name}系列',
 
   // Statut de saison d'un boss (cartes JC/WB/GR)
   'guides.season.live': '进行中，至 {date}',
@@ -585,12 +584,9 @@ const zh: Record<TranslationKey, string> = {
   'guides.team_selector': '推荐队伍',
   'guides.team.prev_option': '上一个候选',
   'guides.team.next_option': '下一个候选',
-  // RÉCOMPENSES d'un donjon (tables `rewardTables` — poursuite irregular…).
+  'guides.collection': '{name}系列',
   'guides.rewards.title': '奖励',
-  'guides.rewards.win': '胜利',
-  'guides.rewards.lose': '失败',
-  'guides.rewards.battle': '每场战斗',
-  'guides.rewards.random': '随机掉落',
+  'guides.rewards.details': '详情',
   'guides.strategy_guide': '攻略指南',
   'guides.boss_display.immunities': '免疫',
   'guides.boss_display.skills': '技能',

@@ -6,6 +6,8 @@
  * Le guide désigne un `group` — un COMBAT — et tout le reste en découle : les
  * difficultés dans l'ordre, leurs libellés, leurs monstres, leurs niveaux, leurs
  * modificateurs. Rien n'est écrit à la main, rien ne se déduit d'un identifiant.
+ * Les modes dont la donnée ne porte AUCUN group (l'histoire) désignent leurs
+ * donjons nommément (`dungeons`) : même rendu, même onglets, autre clé d'entrée.
  *
  * Ce composant ne fait QUE choisir : il pose les onglets et empile des
  * `BossCard`. Toute la connaissance du boss vit dans la carte, tout le choix de
@@ -13,15 +15,23 @@
  * endroit. Composant SERVEUR : les monstres changent d'une difficulté à l'autre
  * (icône, compétences, immunités), donc c'est le serveur qui les rend tous.
  */
+import type { ReactNode } from 'react';
 import { getT } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
-import { difficultyLabel, encounterSpawnContexts, encountersOfGroup } from '@/lib/data/encounters';
+import type { DungeonMonster } from '@contracts';
+import {
+  encounterLabel,
+  encounterSpawnContexts,
+  encountersOfGroup,
+  encountersOfIds,
+  type Encounter,
+} from '@/lib/data/encounters';
 import { BossCard } from './BossPanel';
 import { EncounterPane, EncounterSelection, EncounterTabs } from './EncounterSelection';
-import { EncounterRewards } from './EncounterRewards';
 
 export async function BossEncounters({
   group,
+  dungeons,
   lang,
   /**
    * Difficulté ouverte au premier rendu. Par défaut la PLUS DURE : c'est celle
@@ -29,22 +39,44 @@ export async function BossEncounters({
    */
   defaultIndex,
   /**
-   * Affiche le BUTIN de chaque difficulté sous ses cartes (OPT-IN : la
-   * poursuite irregular vit de ses tables win/lose, le joint challenge n'a
-   * rien d'intéressant à montrer là).
+   * Encart posé DANS la carte du boss, sous ses stats — ce que le mode a de
+   * particulier à dire sur CETTE difficulté (la poursuite irregular y met son
+   * butin : le pool change d'une difficulté à l'autre, l'équipement ne tombe
+   * qu'en Very Hard). Un render-prop plutôt qu'un drapeau : le composant est
+   * partagé avec le Joint Challenge et le World Boss, et il n'a aucune raison
+   * de connaître le butin de qui que ce soit.
    */
-  rewards = false,
+  afterStats,
+  /**
+   * Les monstres à rendre pour une rencontre. Par défaut TOUT le donjon : au
+   * joint challenge ou au guild raid, ce qui est dans le donjon est le combat.
+   * L'histoire, elle, empile des vagues d'escorte devant son boss et ne garde
+   * que la sienne (`bossWaveMonsters`) — d'où le choix laissé à l'appelant,
+   * plutôt qu'un drapeau `story` que ce composant n'a aucune raison de porter.
+   */
+  monsters = (e) => e.monsters,
 }: {
-  group: string;
+  /** Le COMBAT — pour les modes qui en déclarent un (`DungeonRef.group`). */
+  group?: string;
+  /**
+   * Les donjons désignés NOMMÉMENT, du plus facile au plus dur — pour les modes
+   * qui n'ont pas de `group` (l'histoire : cf. `encountersOfIds`). Exclusif de
+   * `group`.
+   */
+  dungeons?: readonly string[];
   lang: Lang;
   defaultIndex?: number;
-  rewards?: boolean;
+  afterStats?: (encounter: Encounter) => ReactNode;
+  monsters?: (encounter: Encounter) => DungeonMonster[];
 }) {
   const t = await getT(lang);
-  const encounters = encountersOfGroup(group);
 
-  // Groupe inconnu = guide qui pointe dans le vide : on casse le build plutôt
+  if (!group === !dungeons) {
+    throw new Error('BossEncounters : exactement un de « group » / « dungeons » est attendu.');
+  }
+  // Un combat inconnu = guide qui pointe dans le vide : on casse le build plutôt
   // que de rendre un panneau muet que personne ne remarquerait.
+  const encounters = group ? encountersOfGroup(group) : encountersOfIds(dungeons!);
   if (!encounters.length) {
     throw new Error(
       `BossEncounters : aucun donjon pour le combat « ${group} » — ` +
@@ -52,9 +84,7 @@ export async function BossEncounters({
     );
   }
 
-  const labels = encounters.map(
-    (e, i) => difficultyLabel(e.ref, lang, t) ?? `${t('guides.difficulty.title')} ${i + 1}`,
-  );
+  const labels = encounters.map((e) => encounterLabel(e.ref, lang, t));
 
   return (
     <EncounterSelection
@@ -73,15 +103,17 @@ export async function BossEncounters({
                 add. On les empile — ils se battent ensemble, ils se lisent
                 ensemble. */}
             <div className="space-y-6">
-              {e.monsters.map((m) => (
+              {monsters(e).map((m, slot) => (
                 <BossCard
                   key={m.id}
                   monsterId={m.id}
                   spawns={encounterSpawnContexts(e, m, lang)}
                   lang={lang}
+                  // L'encart du mode va dans la carte du BOSS (le premier
+                  // monstre du donjon), pas sous celle de l'add qui l'escorte.
+                  afterStats={slot === 0 ? afterStats?.(e) : undefined}
                 />
               ))}
-              {rewards && <EncounterRewards encounter={e} lang={lang} />}
             </div>
           </EncounterPane>
         ))}

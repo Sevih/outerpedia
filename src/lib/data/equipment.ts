@@ -258,9 +258,19 @@ function mainStatsOf(main: string[], excludeFlatBase = false): string[] {
  * ne référence aucun set.
  */
 export function armorPieceSet(id: string): GameSet | undefined {
+  const setId = armorPieceSetId(id);
+  return setId ? SETS[setId] : undefined;
+}
+
+/**
+ * L'ID du set d'une pièce d'armure — ce que `armorPieceSet` ne peut pas rendre
+ * (un `GameSet` ne porte pas sa propre clé). C'est LUI qui sert de référence
+ * partout ailleurs (vues de set, tuiles, bonus par palier).
+ */
+export function armorPieceSetId(id: string): string | undefined {
   for (const table of Object.values(ARMOR_SLOTS)) {
     const piece = table[id];
-    if (piece) return piece.set ? SETS[piece.set] : undefined;
+    if (piece) return piece.set || undefined;
   }
   return undefined;
 }

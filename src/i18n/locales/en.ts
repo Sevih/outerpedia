@@ -586,7 +586,6 @@ const en = {
   'guides.counter': '{guides} guides · {categories} categories',
   'guides.count.one': '{count} GUIDE',
   'guides.count.many': '{count} GUIDES',
-  'guides.collection': '{name} Collection',
 
   // Statut de saison d'un boss (cartes JC/WB/GR) — jointure par monstre combattu
   'guides.season.live': 'Live until {date}',
@@ -612,12 +611,9 @@ const en = {
   'guides.team_selector': 'Suggested Teams',
   'guides.team.prev_option': 'Previous option',
   'guides.team.next_option': 'Next option',
-  // RÉCOMPENSES d'un donjon (tables `rewardTables` — poursuite irregular…).
+  'guides.collection': '{name} Collection',
   'guides.rewards.title': 'Rewards',
-  'guides.rewards.win': 'Victory',
-  'guides.rewards.lose': 'Defeat',
-  'guides.rewards.battle': 'Each battle',
-  'guides.rewards.random': 'Random drop',
+  'guides.rewards.details': 'Details',
   'guides.strategy_guide': 'Strategy Guide',
   'guides.boss_display.immunities': 'Immunities',
   'guides.boss_display.skills': 'Skills',

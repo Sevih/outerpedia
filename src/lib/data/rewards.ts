@@ -23,6 +23,7 @@ import { getCatalogEntry } from '@/lib/data/items';
 import {
   accessoryMainStats,
   armorPieceSet,
+  armorPieceSetId,
   gearById as gearPieceById,
   gearPassiveRefs,
   gearVariant,
@@ -33,6 +34,13 @@ import {
   setEffectText,
   type GearFamily,
 } from '@/lib/data/equipment';
+import {
+  resolveLootGear,
+  resolveLootSet,
+  type ResolvedGearItem,
+  type ResolvedSetEffect,
+  type ResolvedSetPiece,
+} from '@/lib/data/gear-reco';
 
 const G = glossariesData as unknown as Glossaries;
 
@@ -370,4 +378,64 @@ export function pursuitLoot(
     else amulets.push(row);
   }
   return { currencies, weapons, amulets };
+}
+
+/**
+ * Le POOL d'équipement d'une table, matérialisé pour les MiniCards — le même
+ * objet à l'écran que dans un build recommandé de perso (cf. `resolveLootGear`).
+ *
+ * C'est le DÉTAIL derrière la ligne d'icônes des guides : ce que le donjon
+ * droppe vraiment, avec ses mains possibles, ses valeurs max et son passif au
+ * palier max. Les deux modes à butin y passent :
+ *  - la poursuite irregular droppe des VARIANTES par classe (cinq armes, cinq
+ *    amulettes — chacune sa tuile, sa classe et son passif) ;
+ *  - le Special Request droppe des familles uniques (Identification) ou des
+ *    pièces d'armure, dont on remonte le SET (Ecology Study).
+ * Le filler (or, exp, coffres, matériaux) n'en fait pas partie : ce n'est pas
+ * de l'équipement, et ce n'est pas ce qu'on vient chercher.
+ */
+export interface LootDetails {
+  weapons: ResolvedGearItem[];
+  amulets: ResolvedGearItem[];
+  talismans: ResolvedGearItem[];
+  /** Sets dont le pool droppe des pièces (tuiles + bonus 2p/4p). */
+  sets: Array<{ piece: ResolvedSetPiece; effect: ResolvedSetEffect }>;
+}
+
+export function lootDetails(tableId: string, lang: Lang): LootDetails {
+  const out: LootDetails = { weapons: [], amulets: [], talismans: [], sets: [] };
+  const seenGear = new Set<string>();
+  const seenSet = new Set<string>();
+
+  for (const e of getRewardTable(tableId).entries ?? []) {
+    // Le pool ALÉATOIRE seul : les lignes garanties d'un donjon sont du
+    // consommable (coffres, matériaux), jamais l'équipement qu'on farme.
+    if (!e.random || e.kind !== 'item') continue;
+
+    // Une pièce d'armure ne vaut que par son SET (le jeu droppe la pièce, le
+    // joueur cherche le bonus) — et seulement si elle est unique, comme
+    // `stageLoot` : le filler magic/rare n'apprend rien.
+    const setId = armorPieceSetId(e.id);
+    if (setId) {
+      if (gearPieceById(e.id)?.grade !== 'unique' || seenSet.has(setId)) continue;
+      const resolved = resolveLootSet(setId, lang);
+      if (resolved) {
+        seenSet.add(setId);
+        out.sets.push(resolved);
+      }
+      continue;
+    }
+
+    if (seenGear.has(e.id)) continue;
+    const item = resolveLootGear(e.id, lang);
+    // Grade unique seulement : les pools bas traînent du filler magic/rare que
+    // personne ne vient chercher (même règle que `stageLoot`).
+    if (!item || item.grade !== 'unique') continue;
+    seenGear.add(e.id);
+    const slot = gearVariant(e.id)?.slot;
+    if (slot === 'weapon') out.weapons.push(item);
+    else if (slot === 'amulet') out.amulets.push(item);
+    else out.talismans.push(item);
+  }
+  return out;
 }
