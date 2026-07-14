@@ -46,7 +46,16 @@ export interface GuideMeta {
    * qu'aucun stamp explicite n'existe. Résolue par `guideUpdatedDate`.
    */
   updated?: string;
-  /** Tri dans la catégorie (croissant ; absent = après les ordonnés). */
+  /**
+   * Tri dans la catégorie (croissant ; absent = après les ordonnés).
+   *
+   * `adventure` lui donne un SENS en plus, et il est obligatoire pour elle :
+   * `saison × 100 + épisode` (304 = S3, ép. 4). C'est la SEULE source de la
+   * saison et de l'épisode AFFICHÉS — `encounters.season` découpe l'histoire en
+   * blocs qui ne sont pas les saisons du jeu (la S2 y vaut 2 pour les épisodes
+   * 1-5 et 3 pour les 6-10). Changer un `order` d'adventure déplace donc une
+   * carte de section, ce n'est pas qu'un tri.
+   */
   order?: number;
   /** Monstre lié (og:image, futur affichage) — id V3, jamais un chemin. */
   bossId?: string;
@@ -58,6 +67,19 @@ export interface GuideMeta {
    * casse le build au rendu (`BossEncounters`/`groupCombatants` jettent).
    */
   group?: string;
+  /**
+   * Les DONJONS que le guide couvre, du plus facile au plus dur — pour un mode
+   * où le jeu ne relie RIEN entre eux. Les stages d'histoire (`adventure`, où
+   * ce champ est obligatoire) n'ont ni `group` ni `difficulty` dans la donnée :
+   * le Normal et le Hard d'un même stage sont deux donjons distincts, peuplés de
+   * monstres distincts (Hilde 4500277 en Normal, 4500283 en Hard). Le lien doit
+   * donc être DÉCLARÉ, là où les autres modes le lisent (`group`).
+   *
+   * Ids OPAQUES, lus dans `data/generated/encounters.json` — jamais fabriqués
+   * par arithmétique (S2-5-10 = 120513 + 121511 : aucune règle ne les relie).
+   * La vue en dérive tout le reste : mode (Normal/Hard), zone, nom du stage.
+   */
+  dungeons?: string[];
   /**
    * Palier pédagogique (`general-guides` uniquement, où il est OBLIGATOIRE —
    * cf. `requires` de la catégorie). Remplace la map `TIER_BY_SLUG` que la V2
@@ -105,8 +127,19 @@ const META_KEYS = new Set([
   'hidden',
   'tier',
   'group',
+  'dungeons',
 ]);
 const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+/**
+ * Le slug est un SEGMENT D'URL, et une URL V2 ne se renomme pas.
+ *
+ * Les stages d'histoire sont publiés depuis toujours en majuscules
+ * (`/guides/adventure/S3-4-10`) : la casse fait partie du contrat, la briser
+ * coûterait 20 redirections pour rien. On tolère donc EXACTEMENT cette forme —
+ * pas la casse en général : tout nouveau slug reste en kebab-case minuscule, et
+ * un `S3-4-10` inventé dans une autre catégorie n'aurait aucune raison d'exister.
+ */
+const LEGACY_STAGE_SLUG_RE = /^S\d+-\d+-\d+$/;
 const VERSION_DIR_RE = /^\d{4}-(0[1-9]|1[0-2])$/;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -158,6 +191,16 @@ function parseMeta(raw: unknown, at: string, issues: string[]): GuideMeta | null
   if (m.group !== undefined && (typeof m.group !== 'string' || !m.group)) {
     issues.push(`${at} : « group » doit être une chaîne non vide (DungeonRef.group)`);
     ok = false;
+  }
+  if (m.dungeons !== undefined) {
+    const d = m.dungeons;
+    if (!Array.isArray(d) || !d.length || d.some((id) => typeof id !== 'string' || !id)) {
+      issues.push(
+        `${at} : « dungeons » doit être un tableau NON VIDE d'ids de donjons` +
+          ` (data/generated/encounters.json), du plus facile au plus dur`,
+      );
+      ok = false;
+    }
   }
   if (m.mapPos !== undefined) {
     const p = m.mapPos as Record<string, unknown> | null;
@@ -234,7 +277,7 @@ function scan(): Guide[] {
       if (!slugEntry.isDirectory()) continue;
       const slug = slugEntry.name;
       const at = `_contents/${category}/${slug}`;
-      if (!SLUG_RE.test(slug)) {
+      if (!SLUG_RE.test(slug) && !LEGACY_STAGE_SLUG_RE.test(slug)) {
         issues.push(`${at} : slug non kebab-case`);
         continue;
       }

@@ -631,6 +631,7 @@ const jp: Record<TranslationKey, string> = {
   'guides.difficulty.stage_prev': '前の段階',
   'guides.difficulty.stage_next': '次の段階',
   'guides.adventure.season': 'シーズン{n}',
+  'guides.adventure.episode': '第{n}話',
   'guides.adventure.spoiler_free': 'ネタバレなし',
   'guides.adventure.spoiler': '名前を表示',
   'guides.adventure_license.weekly': 'ウィークリー',

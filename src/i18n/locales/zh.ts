@@ -612,6 +612,7 @@ const zh: Record<TranslationKey, string> = {
   'guides.difficulty.stage_prev': '上一阶段',
   'guides.difficulty.stage_next': '下一阶段',
   'guides.adventure.season': '第{n}季',
+  'guides.adventure.episode': '第{n}集',
   'guides.adventure.spoiler_free': '无剧透',
   'guides.adventure.spoiler': '显示名称',
   'guides.adventure_license.weekly': '周常',

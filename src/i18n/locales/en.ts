@@ -642,6 +642,7 @@ const en = {
   'guides.difficulty.stage_prev': 'Previous stage',
   'guides.difficulty.stage_next': 'Next stage',
   'guides.adventure.season': 'Season {n}',
+  'guides.adventure.episode': 'Ep. {n}',
   'guides.adventure.spoiler_free': 'Spoiler-free',
   'guides.adventure.spoiler': 'Show names',
   'guides.adventure_license.weekly': 'Weekly',

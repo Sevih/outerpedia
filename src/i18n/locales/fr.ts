@@ -652,6 +652,7 @@ const fr: Record<TranslationKey, string> = {
   'guides.difficulty.stage_prev': 'Étape précédente',
   'guides.difficulty.stage_next': 'Étape suivante',
   'guides.adventure.season': 'Saison {n}',
+  'guides.adventure.episode': 'Ép. {n}',
   'guides.adventure.spoiler_free': 'Sans spoiler',
   'guides.adventure.spoiler': 'Afficher les noms',
   'guides.adventure_license.weekly': 'Hebdomadaire',

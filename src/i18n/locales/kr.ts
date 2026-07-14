@@ -625,6 +625,7 @@ const kr: Record<TranslationKey, string> = {
   'guides.difficulty.stage_prev': '이전 단계',
   'guides.difficulty.stage_next': '다음 단계',
   'guides.adventure.season': '시즌 {n}',
+  'guides.adventure.episode': '{n}화',
   'guides.adventure.spoiler_free': '스포일러 없음',
   'guides.adventure.spoiler': '이름 표시',
   'guides.adventure_license.weekly': '주간',
