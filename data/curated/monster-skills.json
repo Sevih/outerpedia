@@ -5,6 +5,7 @@
     "singularity-swaps": "Boss Dimensional Singularity (vérifiés in-game 2026-07-12) : les tables câblent systématiquement les blocs de buffs passifs _A_/_SS_ et _B_ sur le MAUVAIS des deux monster_1 (chaque bloc est décrit par la desc de l'autre). Sphinx (60000006) en plus : la réduction de durée SP_SKILL02_3 appartient au volet passif du S2 « Crushing Doubt », la priorité SP_A_2 à « Time Flies »."
   },
   "chipOwner": {
+    "4044008_4_6": "131563",
     "event_monster_buff_288": "130738",
     "event_monster_buff_289": "130738",
     "Singularity_Passive_Bel_B_1": "900004",
@@ -33,17 +34,26 @@
   "chipAdd": {
     "110738": ["48"],
     "110741": ["39"],
+    "121721": ["SYS_BUFF_CHARGE_CP"],
     "130726": ["SYS_BUFF_CHARGE_CP"],
     "130821": ["SYS_BUFF_CHARGE_CP"],
     "130823": ["SYS_BUFF_CHARGE_CP"],
     "130921": ["SYS_BUFF_CHARGE_CP"],
     "130923": ["SYS_BUFF_CHARGE_CP"],
+    "131562": ["UNCOUNTERABLE"],
+    "131563": ["DISCHARGE_AP"],
+    "131589": ["54"],
+    "131600": ["32"],
+    "131703": ["EXTINCTION"],
+    "131705": ["EXTINCTION"],
     "132321": ["SYS_BUFF_CHARGE_CP"],
     "132421": ["SYS_BUFF_CHARGE_CP"],
     "132423": ["SYS_BUFF_CHARGE_CP"],
     "132427": ["SYS_BUFF_CHARGE_CP"],
+    "132621": ["DISCHARGE_AP", "DISCHARGE_CP"],
     "133105": ["4086001"],
     "133205": ["4086001"],
+    "150495": ["SYS_BUFF_CHARGE_CP"],
     "900086": ["11"],
     "900116": ["11"],
     "910001": ["1008"]
@@ -64,7 +74,14 @@
     "131109": ["4076007_11_3"],
     "131110": ["4076007_11_3"],
     "131111": ["4076007_11_3"],
+    "131563": ["4044008_3_1"],
+    "131600": ["4500277_5_3"],
+    "131667": ["4500350_4_4", "4500350_4_5"],
+    "131674": ["4500350_4_4", "4500350_4_5"],
+    "131703": ["404400301_3_1"],
+    "131705": ["404400301_3_3"],
     "132115": ["4044003_4_5"],
+    "132621": ["4044004_5_1", "4044004_5_2"],
     "133104": [
       "4086007_4_10",
       "4086001_5_1",
@@ -93,6 +110,7 @@
     "135111": ["4086026_6_1"],
     "135114": ["4086026_6_1"],
     "135116": ["4086026_6_1"],
+    "152142": ["2000081_2_3", "2000081_2_4"],
     "900061": ["Singularity_OLD_SKILL01_1_1"],
     "900091": ["Singularity_OLD_SKILL01_1_1"]
   }
