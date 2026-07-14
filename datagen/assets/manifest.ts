@@ -621,7 +621,13 @@ export function buildAssetManifest(): AssetRequest[] {
   const categoryArts = Object.keys(GUIDE_CATEGORIES).flatMap(
     (slug) => categoryArt(slug as GuideCategorySlug) ?? [],
   );
-  for (const icon of new Set([...guides.map((g) => g.icon), ...categoryArts])) {
+  // Cartes promotion (adventure-license) : l'icône du meta est la face
+  // VERROUILLÉE (`*_Lock`) ; la face révélée (`*_Open`) s'en dérive et se
+  // collecte avec — la vue retourne la carte, il lui faut les deux sprites.
+  const guideIcons = guides
+    .map((g) => g.icon)
+    .flatMap((icon) => (icon.endsWith('_Lock') ? [icon, icon.replace(/_Lock$/, '_Open')] : [icon]));
+  for (const icon of new Set([...guideIcons, ...categoryArts])) {
     const pooled = existsSync(resolve(v2Pool, `guides/${icon}.webp`));
     push(
       pooled
