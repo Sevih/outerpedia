@@ -2,6 +2,7 @@
   "name": "outerpedia",
   "version": "0.1.19",
   "private": true,
+  "packageManager": "pnpm@11.13.0",
   "engines": {
     "node": ">=24"
   },

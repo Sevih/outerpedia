@@ -10,7 +10,12 @@
 FROM node:24-bookworm-slim AS base
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm install -g pnpm@10
+# DOIT rester aligné sur le champ "packageManager" de package.json. Le pin est
+# répété ici (et pas lu depuis le manifeste) parce que pnpm s'installe AVANT le
+# COPY de package.json, pour garder le cache Docker de cette couche. Une dérive
+# entre les deux se paie au `pnpm install --frozen-lockfile` ci-dessous, donc au
+# build de PROD et non en dev.
+RUN npm install -g pnpm@11.13.0
 
 # ---- Étape 1 : dépendances ----
 FROM base AS deps
