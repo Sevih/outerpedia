@@ -11,6 +11,12 @@
  * L'ordre des clés existantes est préservé (nouvelle entrée en fin) → diffs
  * git minimaux. Les sorties transverses (glossaires, transcend) restent du
  * ressort de la revue globale.
+ *
+ * Les écritures sont isolées dans des cœurs à chemin injectable
+ * (`integrateCharacterData`, `integrateMonsterData`) : c'est la partie
+ * destructive (merge dans les fichiers committés), donc la partie testée
+ * (`integrate.test.ts`) — les wrappers publics ne font qu'y brancher
+ * l'extraction fraîche et le staging d'images.
  */
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -30,11 +36,14 @@ import type { Monster } from './specs/monster';
 const GEN = resolve('data/generated');
 
 type Dict = Record<string, unknown>;
-const readJson = (rel: string): Dict => JSON.parse(readFileSync(resolve(GEN, rel), 'utf8')) as Dict;
+// `dir` injectable : les tests travaillent sur un dossier temporaire, jamais
+// sur le vrai `data/generated`.
+const readJson = (dir: string, rel: string): Dict =>
+  JSON.parse(readFileSync(resolve(dir, rel), 'utf8')) as Dict;
 /** Comme `readJson`, mais `{}` si le fichier n'existe pas encore (1re intégration). */
-const readJsonOr = (rel: string): Dict => {
+const readJsonOr = (dir: string, rel: string): Dict => {
   try {
-    return readJson(rel);
+    return readJson(dir, rel);
   } catch {
     return {};
   }
@@ -42,8 +51,8 @@ const readJsonOr = (rel: string): Dict => {
 // Écrit au format CANONIQUE (`lib/json`) — celui de `datagen:build` et des
 // fichiers committés → le diff git se limite au perso intégré, sans re-mise en
 // forme parasite du reste du fichier.
-const writeJson = async (rel: string, data: unknown): Promise<void> =>
-  writeCanonicalJson(resolve(GEN, rel), data);
+const writeJson = async (dir: string, rel: string, data: unknown): Promise<void> =>
+  writeCanonicalJson(resolve(dir, rel), data);
 
 export interface IntegrateReport {
   id: string;
@@ -70,6 +79,39 @@ export function extractedBundle(
   return { char, skills };
 }
 
+/**
+ * Cœur DONNÉES de l'intégration perso (étapes 1–3) : merge de l'entité, de
+ * ses skills et régénération des slugs dans `dir`. Séparé du wrapper pour
+ * être testable sur un dossier temporaire (les écritures sont destructives).
+ * Retourne les fichiers écrits.
+ */
+export async function integrateCharacterData(
+  dir: string,
+  char: Character,
+  freshSkills: Record<string, unknown>,
+): Promise<string[]> {
+  // 1) Donnée du perso.
+  const characters = readJson(dir, 'characters.json');
+  characters[char.id] = char;
+  await writeJson(dir, 'characters.json', characters);
+
+  // 2) Ses skills (référencés par id).
+  const skills = readJson(dir, 'skills.json');
+  for (const sid of char.skills) {
+    if (freshSkills[sid]) skills[sid] = freshSkills[sid];
+  }
+  await writeJson(dir, 'skills.json', skills);
+
+  // 3) Slugs, dérivés du committé à jour.
+  await writeJson(
+    dir,
+    'characters-slug-to-id.json',
+    buildSlugMap(Object.values(characters) as unknown as Character[]),
+  );
+
+  return ['characters.json', 'skills.json', 'characters-slug-to-id.json'];
+}
+
 /** Intègre UN personnage : données + images. Déclenché par l'admin uniquement. */
 export async function integrateCharacter(id: string): Promise<IntegrateReport> {
   const fresh = buildCharacters();
@@ -77,23 +119,8 @@ export async function integrateCharacter(id: string): Promise<IntegrateReport> {
   if (!char) throw new Error(`perso ${id} absent de l'extraction fraîche`);
   const freshSkills = buildSkills().skills;
 
-  // 1) Donnée du perso.
-  const characters = readJson('characters.json');
-  characters[id] = char;
-  await writeJson('characters.json', characters);
-
-  // 2) Ses skills (référencés par id).
-  const skills = readJson('skills.json');
-  for (const sid of char.skills) {
-    if (freshSkills[sid]) skills[sid] = freshSkills[sid];
-  }
-  await writeJson('skills.json', skills);
-
-  // 3) Slugs, dérivés du committé à jour.
-  await writeJson(
-    'characters-slug-to-id.json',
-    buildSlugMap(Object.values(characters) as unknown as Character[]),
-  );
+  // 1–3) Données (entité + skills + slugs).
+  const files = await integrateCharacterData(GEN, char, freshSkills);
 
   // 4) Ses images, depuis les assets extraits du jeu.
   const index = buildImageIndex();
@@ -103,11 +130,7 @@ export async function integrateCharacter(id: string): Promise<IntegrateReport> {
   );
   const assets = await stageAssets(requests, index);
 
-  return {
-    id,
-    files: ['characters.json', 'skills.json', 'characters-slug-to-id.json'],
-    assets,
-  };
+  return { id, files, assets };
 }
 
 // --- monstres ------------------------------------------------------------------
@@ -143,28 +166,50 @@ export async function integrateMonster(id: string): Promise<IntegrateMonsterRepo
   if (!monster) throw new Error(`monstre ${id} absent de l'extraction fraîche`);
   const freshSkills = buildMonsterSkills().skills;
 
-  const monsters = readJsonOr('monsters.json');
-  monsters[id] = monster;
-  await writeJson('monsters.json', monsters);
+  const files = await integrateMonsterData(
+    GEN,
+    monster,
+    freshSkills,
+    () => buildEncounters().dungeons,
+  );
+  return { id, files };
+}
 
-  const skills = readJsonOr('monster-skills.json');
+/**
+ * Cœur DONNÉES de l'intégration monstre : merge de l'entité, de ses skills et
+ * des donjons de ses spawns dans `dir`. `freshDungeons` est PARESSEUX : les
+ * encounters ne sont construits (et `encounters.json` touché) que si le
+ * monstre spawne quelque part — même contrat que l'original. Retourne les
+ * fichiers écrits.
+ */
+export async function integrateMonsterData(
+  dir: string,
+  monster: Monster,
+  freshSkills: Record<string, unknown>,
+  freshDungeons: () => Record<string, unknown>,
+): Promise<string[]> {
+  const monsters = readJsonOr(dir, 'monsters.json');
+  monsters[monster.id] = monster;
+  await writeJson(dir, 'monsters.json', monsters);
+
+  const skills = readJsonOr(dir, 'monster-skills.json');
   for (const sid of monster.skills) {
     if (freshSkills[sid]) skills[sid] = freshSkills[sid];
   }
-  await writeJson('monster-skills.json', skills);
+  await writeJson(dir, 'monster-skills.json', skills);
 
   const files = ['monsters.json', 'monster-skills.json'];
   if (monster.spawns?.length) {
-    const freshDungeons = buildEncounters().dungeons;
-    const encounters = readJsonOr('encounters.json');
+    const dungeons = freshDungeons();
+    const encounters = readJsonOr(dir, 'encounters.json');
     for (const s of monster.spawns) {
-      if (freshDungeons[s.dungeon]) encounters[s.dungeon] = freshDungeons[s.dungeon];
+      if (dungeons[s.dungeon]) encounters[s.dungeon] = dungeons[s.dungeon];
     }
-    await writeJson('encounters.json', encounters);
+    await writeJson(dir, 'encounters.json', encounters);
     files.push('encounters.json');
   }
 
-  return { id, files };
+  return files;
 }
 
 export interface IntegrateModeReport {
@@ -197,9 +242,9 @@ export async function integrateMonsterMode(mode: string): Promise<IntegrateModeR
     if (anchors.some((a) => ids.has(a))) ids.add(m.id);
   }
 
-  const monsters = readJsonOr('monsters.json');
-  const skills = readJsonOr('monster-skills.json');
-  const encounters = readJsonOr('encounters.json');
+  const monsters = readJsonOr(GEN, 'monsters.json');
+  const skills = readJsonOr(GEN, 'monster-skills.json');
+  const encounters = readJsonOr(GEN, 'encounters.json');
   for (const id of ids) {
     const m = fresh[id];
     monsters[id] = m;
@@ -208,9 +253,9 @@ export async function integrateMonsterMode(mode: string): Promise<IntegrateModeR
       if (enc.dungeons[s.dungeon]) encounters[s.dungeon] = enc.dungeons[s.dungeon];
     }
   }
-  await writeJson('monsters.json', monsters);
-  await writeJson('monster-skills.json', skills);
-  await writeJson('encounters.json', encounters);
+  await writeJson(GEN, 'monsters.json', monsters);
+  await writeJson(GEN, 'monster-skills.json', skills);
+  await writeJson(GEN, 'encounters.json', encounters);
 
   return {
     mode,

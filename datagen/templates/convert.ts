@@ -5,6 +5,10 @@
  *
  * Remplace l'ancien scripts/convert_bytes.py (100% TS désormais).
  *
+ * Toutes les tables sont tentées, les erreurs COLLECTÉES puis listées en fin
+ * de run ; s'il y en a au moins une, le process sort en code 1 (une table
+ * illisible rendrait la génération aval incomplète en silence).
+ *
  * Usage : pnpm datagen:convert
  */
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -37,4 +41,12 @@ console.log(`✅ Converti : ${ok}/${files.length} → ${OUT}`);
 if (errors.length) {
   console.log(`⚠️  Erreurs (${errors.length}) :`);
   for (const e of errors) console.log(`  ${e}`);
+  // Une table illisible = donnée générée incomplète en aval (build tournerait
+  // sur un corpus troué, promote proposerait des RETRAITS fantômes). On sort
+  // donc en échec — mais seulement APRÈS avoir tout converti et tout listé,
+  // pour que le rapport couvre l'ensemble des tables en un run. Côté
+  // `refresh.ts`, `step()` (execFileSync) propage l'échec : la chaîne s'arrête
+  // avant build/promote et le stamp n'est pas écrit → auto-réparation au
+  // prochain run, comme pour tout step planté.
+  process.exitCode = 1;
 }
