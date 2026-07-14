@@ -4,7 +4,8 @@
  * Passe 1 : `DungeonPVEGroupTemplet.ExpectReward` (la liste « récompenses
  * possibles » affichée en jeu) → items ; boss via `DungeonID` →
  * `DungeonTemplet` (SpawnID_Pos0..2, réf par GROUPE de spawn) →
- * `DungeonSpawnTemplet.ID0` → `MonsterTemplet`.
+ * `DungeonSpawnTemplet.ID0..ID3` (helpers partagés d'encounters) →
+ * `MonsterTemplet`.
  *
  * Passe 2 — IRREGULAR CHASE : pas d'ExpectReward, mais chaque combat
  * (`IrregularChaseTemplet`) porte un `Reward_Win` par difficulté ; seule la
@@ -21,7 +22,8 @@
  * LIMITE : les achats aux monnaies génériques (cristaux…) ne nomment pas une
  * « source » utile → non extraits, complétés par la couche curée.
  */
-import { loadTable, splitCsv } from '../lib/tables';
+import { groupBy, loadTable, splitCsv } from '../lib/tables';
+import { modeTitleKey, spawnGroupIds, spawnUnits } from './encounters';
 
 export type ItemSources = Record<string, { bosses: string[]; shops?: string[] }>;
 
@@ -30,13 +32,6 @@ export interface ItemSourcesResult {
   /** Boss id → clé `TextSystem` du titre du contenu où il apparaît. */
   bossTitleKeys: Map<string, string>;
 }
-
-/** DungeonMode → clé de titre du contenu (extraite de `TextSystem`). */
-const MODE_TITLE_KEY: Record<string, string> = {
-  DM_RAID_1: 'SYS_RAID_1_TITLE',
-  DM_RAID_2: 'SYS_RAID_2_TITLE',
-  // DM_IVANEZ_DUNGEON : donjon one-off sans clé de titre → pas de libellé.
-};
 
 /** Titre du contenu Irregular Chase (« Irregular Extermination Project »). */
 const CHASE_TITLE_KEY = 'SYS_IRREGULAR_EXTERMINATION';
@@ -52,14 +47,9 @@ function shopSlug(buyType: string | undefined): string | null {
 export function buildItemSources(): ItemSourcesResult {
   const bossTitleKeys = new Map<string, string>();
   const dungeons = new Map(loadTable('DungeonTemplet').map((r) => [r.ID, r]));
-  // Les donjons référencent un GROUPE de spawn (plusieurs lignes possibles).
-  const spawnsByGroup = new Map<string, string[]>();
-  for (const s of loadTable('DungeonSpawnTemplet')) {
-    if (!s.GroupID) continue;
-    const list = spawnsByGroup.get(s.GroupID) ?? [];
-    list.push(...splitCsv(s.ID0));
-    spawnsByGroup.set(s.GroupID, list);
-  }
+  // Les donjons référencent un GROUPE de spawn (plusieurs lignes possibles) —
+  // traversée via les helpers d'encounters (positions CSV, colonnes ID0..ID3).
+  const spawnsByGroup = groupBy(loadTable('DungeonSpawnTemplet'), 'GroupID');
   const monsters = new Map(loadTable('MonsterTemplet').map((r) => [r.ID, r]));
 
   /** Boss d'un donjon : NameID → id de monstre (variante la plus élevée). */
@@ -67,8 +57,8 @@ export function buildItemSources(): ItemSourcesResult {
     const bosses = new Map<string, string>();
     const d = dungeons.get(dungeonId);
     if (!d) return bosses;
-    for (const pos of ['SpawnID_Pos0', 'SpawnID_Pos1', 'SpawnID_Pos2']) {
-      for (const mid of d[pos] ? (spawnsByGroup.get(d[pos]) ?? []) : []) {
+    for (const gid of spawnGroupIds(d)) {
+      for (const mid of spawnUnits(spawnsByGroup.get(gid) ?? [])) {
         const m = monsters.get(mid);
         if (m?.Type !== 'CT_AREA_BOSS_MONSTER' || !m.NameID) continue;
         const prev = bosses.get(m.NameID);
@@ -88,12 +78,18 @@ export function buildItemSources(): ItemSourcesResult {
     byItem.set(itemId, entry);
   };
 
-  // Passe 1 : drops déclarés des donjons (raids, requêtes…).
+  // Passe 1 : drops déclarés des donjons (raids, requêtes…). Le titre du
+  // contenu est RÉSOLU par mode (règle partagée d'encounters : curation puis
+  // résolveur structurel — DM_RAID_1 → SYS_RAID_1_TITLE, plus de mapping en
+  // dur ; les modes ignorés par la curation, ex. ivanez, restent sans titre).
+  const titleKeyByMode = new Map<string, string | undefined>();
   for (const g of loadTable('DungeonPVEGroupTemplet')) {
     if (!g.ExpectReward) continue;
     const bosses = bossesOfDungeon(g.DungeonID);
     if (!bosses.size) continue;
-    const titleKey = MODE_TITLE_KEY[g.DungeonMode];
+    if (!titleKeyByMode.has(g.DungeonMode))
+      titleKeyByMode.set(g.DungeonMode, modeTitleKey(g.DungeonMode));
+    const titleKey = titleKeyByMode.get(g.DungeonMode);
     if (titleKey) for (const mid of bosses.values()) bossTitleKeys.set(mid, titleKey);
     for (const itemId of splitCsv(g.ExpectReward)) credit(itemId, bosses);
   }

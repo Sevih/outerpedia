@@ -32,6 +32,11 @@ export function langDict(row: Row | undefined): LangDict {
   return getLangTexts(row) ?? emptyDict();
 }
 
+/** Vrai si au moins une langue du dict est non vide (donnée présente). */
+export function hasText(d: LangDict): boolean {
+  return GAME_LANGS.some((l) => d[l] !== '');
+}
+
 /**
  * Construit l'index d'une table de textes :
  *   clé (colonne `keyCol`, défaut `ID`)  →  `{ en, jp, kr, zh }`

@@ -16,6 +16,7 @@ import { expandBuffIds, loadBuffGroups, loadBuffIndex } from '../../lib/buff';
 import { loadTextIndex, resolveText } from '../../lib/text';
 import { loadTable, num, splitCsv, type Row } from '../../lib/tables';
 import { buildImageIndex } from '../../assets/source';
+import { costumeCore } from '../../generators/costumes';
 import { runSpec } from '../core/runner';
 import type { ExtractorSpec } from '../core/spec';
 import type { Schema } from '../core/validate';
@@ -579,16 +580,19 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     const imageIndex = buildImageIndex();
     const costumesByChar = new Map<string, Costume[]>();
     for (const r of loadTable('CostumeTemplet')) {
+      // Champs communs (nom/icône/grade/source) : extraction PARTAGÉE avec la
+      // vue plate du catalogue d'items (`costumeCore` — une seule règle, repli
+      // d'icône RewardCostumeIcon inclus).
+      const { name, icon, grade, source } = costumeCore(r, tchar);
       const cos: Costume = {
         id: r.ID,
         model: r.ModelNameID,
-        name: resolveText(tchar, r.CostumeName),
-        icon: r.SpriteCostumeIcon,
-        grade: slugAfter(r.ItemGrade, 'IG_'),
+        name,
+        icon,
+        grade,
         sort: num(r.Sort),
       };
-      const source = slugAfter(r.CostumePurchaseType, 'CPT_');
-      if (source && source !== 'none') cos.source = source;
+      if (source) cos.source = source;
       if (r.FusionModelNameID) cos.fusionModel = r.FusionModelNameID;
       if (imageIndex.has(`img_${cos.model}`.toLowerCase())) cos.art = true;
       if (cos.fusionModel && imageIndex.has(`img_${cos.fusionModel}`.toLowerCase()))

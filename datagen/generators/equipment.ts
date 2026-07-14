@@ -19,9 +19,10 @@
  */
 import { readFileSync } from 'node:fs';
 import { resolve as resolvePath } from 'node:path';
-import { bool, groupBy, indexBy, loadTable, num, numf, splitCsv } from '../lib/tables';
+import { bool, groupBy, indexBy, loadTable, num, numf, splitCsv, type Row } from '../lib/tables';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { slugEnum } from '../lib/enums';
+import { isMain } from '../lib/is-main';
 import { resolveClass } from '../lib/class';
 import {
   buffRowAtLevel,
@@ -38,8 +39,6 @@ import {
 } from '../lib/effects';
 import { formatStatValue } from '../lib/stats';
 import { GAME_LANGS, type LangDict } from '../lib/lang';
-
-type Row = ReturnType<typeof loadTable>[number];
 
 /** Une option résolue (stat ou buff) avec son poids de tirage. */
 export interface Option {
@@ -834,7 +833,7 @@ export function buildEquipment(): EquipmentData {
 }
 
 // Exécution directe : tailles par slot/catalogue + échantillons.
-if (process.argv[1] && process.argv[1].endsWith('equipment.ts')) {
+if (isMain(import.meta.url)) {
   const d = buildEquipment();
   for (const k of Object.keys(d) as (keyof EquipmentData)[]) {
     console.log(k.padEnd(12), Object.keys(d[k]).length);

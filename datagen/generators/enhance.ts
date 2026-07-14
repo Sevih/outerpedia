@@ -142,6 +142,16 @@ export function buildEnhanceRules(): EnhanceRules {
       const descEn = resolveText(textSkill, r.DescID).en;
       const g = GRADE_TAG.exec(descEn);
       const v = VALUE_TAG.exec(descEn);
+      // ÉCHEC BRUYANT : la ligne a bien une desc mais le motif valeur n'y est
+      // plus — le jeu a probablement changé la couleur du tag (`#0D99DA`).
+      // Émettre une plage vide en silence fausserait la page d'amélioration ;
+      // on préfère casser le build pour forcer l'adaptation de VALUE_TAG.
+      if (descEn && !v) {
+        throw new Error(
+          `enhance : valeur introuvable dans la desc de ${r.DescID} ` +
+            `(« ${descEn.slice(0, 80)} ») — couleur du tag <color=#0D99DA> changée ?`,
+        );
+      }
       const cur = byName.get(r.NameID) ?? {
         name: resolveText(textSkill, r.NameID),
         icon: r.IconName ?? '',

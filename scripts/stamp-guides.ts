@@ -46,10 +46,20 @@ if ((ALL ?? TODAY) && !DATE_RE.test(TODAY)) {
 function gitChangedFiles(): Set<string> {
   const out = execFileSync('git', ['status', '--porcelain', '-z'], { encoding: 'utf8' });
   const files = new Set<string>();
-  // Format -z : « XY <path>\0 » (renommage : « R  old\0new\0 »).
-  for (const rec of out.split('\0')) {
+  // Format -z : « XY <chemin>\0 ». Renommage/copie (X ou Y ∈ {R,C}) : DEUX
+  // enregistrements — « R  <nouveau>\0<ancien>\0 » — et le second est un chemin
+  // NU, sans préfixe « XY  » : lui appliquer slice(3) tronquerait son début.
+  // On consomme donc les enregistrements par paires dans ce cas, et les deux
+  // chemins comptent comme « modifiés » (un guide renommé a bien changé).
+  const recs = out.split('\0');
+  for (let i = 0; i < recs.length; i++) {
+    const rec = recs[i];
     if (rec.length < 4) continue;
     files.add(rec.slice(3).replace(/\\/g, '/'));
+    if (/[RC]/.test(rec.slice(0, 2))) {
+      const orig = recs[++i];
+      if (orig) files.add(orig.replace(/\\/g, '/'));
+    }
   }
   return files;
 }

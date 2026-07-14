@@ -39,9 +39,10 @@
  * `encounters.json` — ce fichier ne porte que l'axe TEMPS + les identités.
  */
 import type { LangDict } from '../lib/lang';
+import { isMain } from '../lib/is-main';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { groupBy, indexBy, loadTable, num, splitCsv } from '../lib/tables';
-import { spawnGroupIds } from './encounters';
+import { spawnGroupIds, spawnUnits } from './encounters';
 
 /** Une saison de World Boss. */
 export interface WorldBossSeason {
@@ -139,10 +140,8 @@ export function buildContentSchedule(): ContentScheduleData {
     const d = dungeonById.get(dungeonId);
     if (!d) return into;
     for (const g of spawnGroupIds(d)) {
-      for (const w of spawnsByGroup.get(g) ?? []) {
-        for (let i = 0; i < 4; i++) {
-          for (const mid of splitCsv(w[`ID${i}`] ?? '')) if (!into.includes(mid)) into.push(mid);
-        }
+      for (const mid of spawnUnits(spawnsByGroup.get(g) ?? [])) {
+        if (!into.includes(mid)) into.push(mid);
       }
     }
     return into;
@@ -237,6 +236,6 @@ export function buildContentSchedule(): ContentScheduleData {
 }
 
 // Exécution directe.
-if (process.argv[1] && process.argv[1].endsWith('content-schedule.ts')) {
+if (isMain(import.meta.url)) {
   console.log(JSON.stringify(buildContentSchedule(), null, 2));
 }

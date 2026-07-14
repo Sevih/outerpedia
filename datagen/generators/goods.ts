@@ -18,7 +18,8 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { loadTable } from '../lib/tables';
-import { GAME_LANGS, LANG_COLUMNS, type LangDict } from '../lib/lang';
+import { hasText, langDict } from '../lib/text';
+import type { LangDict } from '../lib/lang';
 import { slugEnum } from '../lib/enums';
 
 export interface Goods {
@@ -27,11 +28,6 @@ export interface Goods {
   icon: string;
   grade: string;
 }
-
-type Row = Record<string, string>;
-const langDict = (r: Row): LangDict =>
-  Object.fromEntries(GAME_LANGS.map((l) => [l, (r[LANG_COLUMNS[l]] ?? '').trim()])) as LangDict;
-const hasText = (d: LangDict): boolean => GAME_LANGS.some((l) => d[l]);
 
 const NON_ASSET = /(TOOLTIP|TITLE|DESC|POPUP|BTN|GUIDE|NOTICE|MSG|CHANGE)/;
 
@@ -120,6 +116,10 @@ export function buildGoods(): Record<string, Goods> {
     const id = r.ID;
     if (!id?.startsWith('SYS_ASSET_') || NON_ASSET.test(id)) continue;
     const en = (r.English ?? '').trim();
+    // HEURISTIQUE « ceci est un NOM de monnaie, pas une phrase d'UI » : les
+    // clés SYS_ASSET_* mélangent noms et textes d'interface que NON_ASSET ne
+    // filtre pas tous. Un nom est court (≤ 40 car.), tient sur une ligne
+    // (pas de \n) et ne se termine pas par un point (une phrase, si).
     if (!en || en.length > 40 || en.includes('\\n') || en.endsWith('.')) continue;
     const rest = id.slice('SYS_ASSET_'.length);
     const g = make(id, rest, [

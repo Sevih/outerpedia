@@ -21,7 +21,7 @@ import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { isMain } from '../lib/is-main';
 
 const ADB = process.env.ADB_PATH ?? 'C:\\LDPlayer\\LDPlayer9\\adb.exe';
 const PKG = 'com.smilegate.outerplane.stove.google';
@@ -197,7 +197,7 @@ export async function pull(subdirs: string[] = DEFAULT_SUBDIRS): Promise<PullRes
 }
 
 // Exécution directe (`pnpm datagen:pull [sous-dossier…]`).
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (isMain(import.meta.url)) {
   const subdirs = process.argv.slice(2).length ? process.argv.slice(2) : DEFAULT_SUBDIRS;
   pull(subdirs).catch((e) => {
     console.error(e);

@@ -19,6 +19,7 @@
  * patchs) : toujours passer par AreaID, jamais parser l'ID.
  */
 import type { LangDict } from '../lib/lang';
+import { isMain } from '../lib/is-main';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { indexBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
 
@@ -158,6 +159,6 @@ export function buildUnlockContent(): UnlockContentData {
 }
 
 // Exécution directe.
-if (process.argv[1] && process.argv[1].endsWith('unlock-content.ts')) {
+if (isMain(import.meta.url)) {
   console.log(JSON.stringify(buildUnlockContent(), null, 2));
 }

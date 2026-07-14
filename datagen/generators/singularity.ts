@@ -31,9 +31,10 @@ import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { LangDict } from '../lib/lang';
 import { slugEnum } from '../lib/enums';
+import { isMain } from '../lib/is-main';
 import { loadTextIndex, resolveText } from '../lib/text';
-import { groupBy, indexBy, loadTable, num, splitCsv } from '../lib/tables';
-import { spawnGroupIds } from './encounters';
+import { groupBy, indexBy, loadTable, num } from '../lib/tables';
+import { spawnGroupIds, spawnUnits } from './encounters';
 
 /** Un combat de boss d'un groupe de rotation. */
 export interface SingularityBoss {
@@ -127,10 +128,8 @@ export function buildSingularity(): SingularityData {
     if (!d) return [];
     const out: string[] = [];
     for (const g of spawnGroupIds(d)) {
-      for (const w of spawnsByGroup.get(g) ?? []) {
-        for (let i = 0; i < 4; i++) {
-          for (const mid of splitCsv(w[`ID${i}`] ?? '')) if (!out.includes(mid)) out.push(mid);
-        }
+      for (const mid of spawnUnits(spawnsByGroup.get(g) ?? [])) {
+        if (!out.includes(mid)) out.push(mid);
       }
     }
     return out;
@@ -182,6 +181,6 @@ export function buildSingularity(): SingularityData {
 }
 
 // Exécution directe.
-if (process.argv[1] && process.argv[1].endsWith('singularity.ts')) {
+if (isMain(import.meta.url)) {
   console.log(JSON.stringify(buildSingularity(), null, 2));
 }

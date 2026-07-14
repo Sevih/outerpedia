@@ -372,13 +372,22 @@ function trailingQualifiers(tokens: string[]): number {
   return n;
 }
 
-/** Titre localisé d'un mode `DM_X`, ou `undefined` (le slug reste affichable). */
+/** Un titre de ContentLock candidat au repli (clé TextSystem incluse). */
+interface ContentTitle {
+  norm: string;
+  tokens: string[];
+  text: LangDict;
+  key: string;
+}
+
+/** Titre localisé d'un mode `DM_X` (+ sa clé TextSystem), ou `undefined`
+ * (le slug reste affichable). */
 function resolveModeTitle(
   rawMode: string,
   tsys: Map<string, LangDict>,
   keysByNorm: Map<string, string>,
-  contentTitles: Array<{ norm: string; tokens: string[]; text: LangDict }>,
-): LangDict | undefined {
+  contentTitles: ContentTitle[],
+): { key: string; text: LangDict } | undefined {
   const tokens = rawMode.replace(/^DM_/, '').split('_');
 
   // 1) Conventions : toutes les troncatures de fin, tous les motifs, puis choix
@@ -440,23 +449,24 @@ function resolveModeTitle(
       if (best.isTitle) {
         const plainKey = keysByNorm.get(normKey(`SYS_${best.base}`));
         const plain = plainKey ? resolveText(tsys, plainKey) : undefined;
-        if (plain?.en && title.en.startsWith(plain.en) && title.en !== plain.en) return plain;
+        if (plain?.en && title.en.startsWith(plain.en) && title.en !== plain.en)
+          return { key: plainKey!, text: plain };
       }
-      return title;
+      return { key: best.key, text: title };
     }
   }
 
   // 2) ContentLockTemplet : meilleur recoupement de tokens distinctifs.
-  let best: { score: number; text: LangDict } | undefined;
+  let best: { score: number; text: LangDict; key: string } | undefined;
   for (const c of contentTitles) {
     let score = 0;
     for (const t of tokens) {
       if (MODE_STOP_TOKENS.has(t)) continue;
       if (c.tokens.includes(t) || (t.length >= 5 && c.norm.includes(t))) score += t.length;
     }
-    if (score > 0 && (!best || score > best.score)) best = { score, text: c.text };
+    if (score > 0 && (!best || score > best.score)) best = { score, text: c.text, key: c.key };
   }
-  return best?.text;
+  return best ? { key: best.key, text: best.text } : undefined;
 }
 
 /**
@@ -467,6 +477,22 @@ function resolveModeTitle(
  */
 export function spawnGroupIds(d: Row): string[] {
   return [d.SpawnID_Pos0, d.SpawnID_Pos1, d.SpawnID_Pos2].flatMap((v) => splitCsv(v));
+}
+
+/**
+ * Monstres d'un GROUPE de spawn (lignes `DungeonSpawnTemplet` du groupe) :
+ * colonnes `ID0..ID3` (CSV possible), dédupliqués dans l'ordre des tables.
+ * Toujours passer par ici, jamais lire `ID0` seul — les monstres des slots
+ * 1..3 seraient silencieusement perdus (bug historique de sources.ts).
+ */
+export function spawnUnits(rows: Row[]): string[] {
+  const out: string[] = [];
+  for (const w of rows) {
+    for (let i = 0; i < 4; i++) {
+      for (const mid of splitCsv(w[`ID${i}`] ?? '')) if (!out.includes(mid)) out.push(mid);
+    }
+  }
+  return out;
 }
 
 /** Remplit le placeholder `{0}` d'un titre, dans toutes les langues. */
@@ -489,6 +515,108 @@ function stripUnfilledPlaceholder(dict: LangDict): LangDict {
     out[lang] = (out[lang] ?? '').replace(/\s*[(（][^()（）]*\{0\}[^()（）]*[)）]/g, '').trim();
   }
   return out;
+}
+
+/** Contexte de résolution des TITRES de mode (index TextSystem normalisé,
+ * titres ContentLock, curation mode-titles.json) — partagé entre le glossaire
+ * `modes` de buildEncounters et `modeTitleKey` (sources.ts). */
+interface ModeTitleContext {
+  tsys: Map<string, LangDict>;
+  keysByNorm: Map<string, string>;
+  contentTitles: ContentTitle[];
+  /** Slug de mode → clé TextSystem curée (décision humaine prioritaire). */
+  curatedTitles: Record<string, string>;
+  /** Modes ignorés à l'extraction (décision humaine, `_docIgnore`). */
+  ignoredModes: Set<string>;
+  /** Libellés génériques de difficulté (slug → clé TextSystem). */
+  difficultyNames: Record<string, string>;
+  /** Ordre de la poursuite → slug de difficulté (correspondance curée). */
+  chaseDifficulties: Record<string, string>;
+}
+
+let titleCtxCache: ModeTitleContext | undefined;
+
+function titleContext(): ModeTitleContext {
+  if (titleCtxCache) return titleCtxCache;
+  const tsys = loadTextIndex('TextSystem');
+
+  // Index des clés TextSystem en forme normalisée + titres de ContentLock
+  // (débarrassés d'éventuels crochets décoratifs : « [Monad Gate] »).
+  const keysByNorm = new Map<string, string>();
+  for (const k of tsys.keys()) if (!keysByNorm.has(normKey(k))) keysByNorm.set(normKey(k), k);
+  const stripBrackets = (t: LangDict): LangDict => {
+    const out = { ...t };
+    for (const lang of Object.keys(out) as Array<keyof LangDict>) {
+      const m = /^\[(.+)\]$/.exec(out[lang] ?? '');
+      if (m) out[lang] = m[1];
+    }
+    return out;
+  };
+  const contentTitles: ContentTitle[] = [];
+  for (const c of loadTable('ContentLockTemplet')) {
+    if (!c.ContentType || !c.TextID || c.TextID === '0') continue;
+    const text = resolveText(tsys, c.TextID);
+    if (!text.en) continue;
+    contentTitles.push({
+      norm: normKey(c.ContentType),
+      tokens: c.ContentType.split('_'),
+      text: stripBrackets(text),
+      key: c.TextID,
+    });
+  }
+
+  // Titres CURÉS (slug → clé TextSystem, cf. data/curated/mode-titles.json) :
+  // prioritaires — décision humaine pour les échecs du résolveur automatique
+  // (rien ne relie DM_MONAD_BATTLE_2 à « Dimensional Singularity » dans les
+  // tables). Les textes restent ceux du jeu (clé, jamais de texte main).
+  const curatedTitles: Record<string, string> = {};
+  // Modes IGNORÉS (décision humaine, cf. _docIgnore du fichier curé) : leurs
+  // donjons/spawns ne sortent pas — ni rencontres, ni mode dans la sidebar.
+  const ignoredModes = new Set<string>();
+  // Libellés génériques de difficulté (slug → clé TextSystem) + correspondance
+  // ordre → slug de la poursuite (aucune clé structurelle, décision curée).
+  const difficultyNames: Record<string, string> = {};
+  const chaseDifficulties: Record<string, string> = {};
+  const curatedPath = resolve('data/curated/mode-titles.json');
+  if (existsSync(curatedPath)) {
+    const curated = JSON.parse(readFileSync(curatedPath, 'utf8')) as {
+      titles?: Record<string, string>;
+      ignore?: string[];
+      difficulties?: Record<string, string>;
+      chaseDifficulties?: Record<string, string>;
+    };
+    Object.assign(curatedTitles, curated.titles ?? {});
+    for (const m of curated.ignore ?? []) ignoredModes.add(m);
+    Object.assign(difficultyNames, curated.difficulties ?? {});
+    Object.assign(chaseDifficulties, curated.chaseDifficulties ?? {});
+  }
+
+  titleCtxCache = {
+    tsys,
+    keysByNorm,
+    contentTitles,
+    curatedTitles,
+    ignoredModes,
+    difficultyNames,
+    chaseDifficulties,
+  };
+  return titleCtxCache;
+}
+
+/**
+ * Clé TextSystem du TITRE d'un mode `DM_X` — même règle que le glossaire
+ * `modes` (curation prioritaire, résolveur structurel ensuite), mais expose la
+ * CLÉ : sources.ts étiquette les boss par clé de titre, résolue par bosses.ts.
+ * Les modes IGNORÉS par la curation ne sortent pas d'encounters → pas de
+ * titre non plus ici (ex. `ivanez_dungeon`, one-off mort).
+ */
+export function modeTitleKey(rawMode: string): string | undefined {
+  const ctx = titleContext();
+  const slug = slugEnum(rawMode);
+  if (ctx.ignoredModes.has(slug)) return undefined;
+  const curatedKey = ctx.curatedTitles[slug];
+  if (curatedKey && resolveText(ctx.tsys, curatedKey).en) return curatedKey;
+  return resolveModeTitle(rawMode, ctx.tsys, ctx.keysByNorm, ctx.contentTitles)?.key;
 }
 
 /**
@@ -584,55 +712,16 @@ export function buildEncounters(): EncountersData {
   const dungeons: Record<string, DungeonRef> = {};
   const monsters: Record<string, MonsterEncounters> = {};
 
-  // Index des clés TextSystem en forme normalisée + titres de ContentLock
-  // (débarrassés d'éventuels crochets décoratifs : « [Monad Gate] »).
-  const keysByNorm = new Map<string, string>();
-  for (const k of tsys.keys()) if (!keysByNorm.has(normKey(k))) keysByNorm.set(normKey(k), k);
-  const stripBrackets = (t: LangDict): LangDict => {
-    const out = { ...t };
-    for (const lang of Object.keys(out) as Array<keyof LangDict>) {
-      const m = /^\[(.+)\]$/.exec(out[lang] ?? '');
-      if (m) out[lang] = m[1];
-    }
-    return out;
-  };
-  const contentTitles: Array<{ norm: string; tokens: string[]; text: LangDict }> = [];
-  for (const c of loadTable('ContentLockTemplet')) {
-    if (!c.ContentType || !c.TextID || c.TextID === '0') continue;
-    const text = resolveText(tsys, c.TextID);
-    if (!text.en) continue;
-    contentTitles.push({
-      norm: normKey(c.ContentType),
-      tokens: c.ContentType.split('_'),
-      text: stripBrackets(text),
-    });
-  }
-
-  // Titres CURÉS (slug → clé TextSystem, cf. data/curated/mode-titles.json) :
-  // prioritaires — décision humaine pour les échecs du résolveur automatique
-  // (rien ne relie DM_MONAD_BATTLE_2 à « Dimensional Singularity » dans les
-  // tables). Les textes restent ceux du jeu (clé, jamais de texte main).
-  const curatedTitles: Record<string, string> = {};
-  // Modes IGNORÉS (décision humaine, cf. _docIgnore du fichier curé) : leurs
-  // donjons/spawns ne sortent pas — ni rencontres, ni mode dans la sidebar.
-  const ignoredModes = new Set<string>();
-  // Libellés génériques de difficulté (slug → clé TextSystem) + correspondance
-  // ordre → slug de la poursuite (aucune clé structurelle, décision curée).
-  const difficultyNames: Record<string, string> = {};
-  const chaseDifficulties: Record<string, string> = {};
-  const curatedPath = resolve('data/curated/mode-titles.json');
-  if (existsSync(curatedPath)) {
-    const curated = JSON.parse(readFileSync(curatedPath, 'utf8')) as {
-      titles?: Record<string, string>;
-      ignore?: string[];
-      difficulties?: Record<string, string>;
-      chaseDifficulties?: Record<string, string>;
-    };
-    Object.assign(curatedTitles, curated.titles ?? {});
-    for (const m of curated.ignore ?? []) ignoredModes.add(m);
-    Object.assign(difficultyNames, curated.difficulties ?? {});
-    Object.assign(chaseDifficulties, curated.chaseDifficulties ?? {});
-  }
+  // Contexte de titres partagé (index normalisé, ContentLock, curation) —
+  // cf. `titleContext` : la même règle sert aussi `modeTitleKey` (sources.ts).
+  const {
+    keysByNorm,
+    contentTitles,
+    curatedTitles,
+    ignoredModes,
+    difficultyNames,
+    chaseDifficulties,
+  } = titleContext();
   /** Difficulté structurée : libellé générique curé (absent = pas de name). */
   const difficultyOf = (key: string, order: number): DungeonDifficulty => {
     const nameKey = difficultyNames[key];
@@ -649,11 +738,23 @@ export function buildEncounters(): EncountersData {
   const rewardById = indexBy(loadTable('RewardTemplet'));
   const rewardGroups = groupBy(loadTable('RewardGroupTemplet'), 'GroupID');
   const rewardTables: Record<string, RewardTable> = {};
+  // Récompenses non résolues : SIGNALÉES (une fois par id) plutôt que tues —
+  // mais jamais de throw : la donnée réelle peut être lacunaire (RewardID
+  // orphelin, ligne de groupe incomplète) sans invalider le reste du build.
+  const warnedRewards = new Set<string>();
+  const warnRewardOnce = (key: string, msg: string): void => {
+    if (warnedRewards.has(key)) return;
+    warnedRewards.add(key);
+    console.warn(`⚠ encounters : ${msg}`);
+  };
   const resolveReward = (id: string | undefined): string | undefined => {
     if (!id) return undefined;
     if (rewardTables[id]) return id;
     const r = rewardById.get(id);
-    if (!r) return undefined;
+    if (!r) {
+      warnRewardOnce(id, `RewardID ${id} absent de RewardTemplet — récompense ignorée.`);
+      return undefined;
+    }
     const table: RewardTable = {};
     if (num(r.Crystal)) table.crystal = num(r.Crystal);
     if (num(r.CreditMin) || num(r.CreditMax))
@@ -664,7 +765,13 @@ export function buildEncounters(): EncountersData {
     const collect = (groupCsv: string | undefined, random: boolean) => {
       for (const gid of splitCsv(groupCsv ?? '')) {
         for (const g of rewardGroups.get(gid) ?? []) {
-          if (!g.TypeID) continue;
+          if (!g.TypeID) {
+            warnRewardOnce(
+              `group:${gid}`,
+              `ligne de RewardGroup ${gid} sans TypeID — entrée de butin ignorée.`,
+            );
+            continue;
+          }
           entries.push({
             kind: slugEnum(g.Type),
             id: g.TypeID,
@@ -732,7 +839,7 @@ export function buildEncounters(): EncountersData {
       const curated = curatedKey ? resolveText(tsys, curatedKey) : undefined;
       const title = curated?.en
         ? curated
-        : resolveModeTitle(d.DungeonMode, tsys, keysByNorm, contentTitles);
+        : resolveModeTitle(d.DungeonMode, tsys, keysByNorm, contentTitles)?.text;
       if (title) modes[mode] = title;
     }
     const ref: DungeonRef = { mode, name: resolveText(tsys, d.NameID) };

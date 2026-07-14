@@ -7,6 +7,7 @@
  */
 import { openSync, readSync, closeSync, statSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { isMain } from '../lib/is-main';
 
 const MANIFEST = resolve('.gamedata/files/bundles/manifest.dat');
 
@@ -31,6 +32,6 @@ export function buildGameVersion(): GameVersion | null {
 }
 
 // Exécution directe.
-if (process.argv[1] && process.argv[1].endsWith('game-version.ts')) {
+if (isMain(import.meta.url)) {
   console.log(JSON.stringify(buildGameVersion()));
 }

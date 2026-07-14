@@ -10,12 +10,15 @@
  * Entrées (tables du jeu) : CostumeTemplet, TextCharacter (noms), TextSystem
  * (descriptions). Sortie : data/costumes.json (id → entité).  [PROPOSITION]
  */
-import { loadTable, num } from '../lib/tables';
-import { loadTextIndex, resolveText } from '../lib/text';
+import { isMain } from '../lib/is-main';
+import { loadTable, num, type Row } from '../lib/tables';
+import { hasText, loadTextIndex, resolveText } from '../lib/text';
 import { slugEnum } from '../lib/enums';
-import { GAME_LANGS, type LangDict } from '../lib/lang';
+import type { LangDict } from '../lib/lang';
 
-export interface Costume {
+/** Un costume de la vue PLATE (catalogue d'items) — cf. `Costume` de la spec
+ * perso pour la vue imbriquée (modèles/full arts en plus). */
+export interface CostumeEntry {
   name: LangDict;
   desc?: LangDict;
   icon: string; // SpriteCostumeIcon (TI_Costume_*)
@@ -26,28 +29,46 @@ export interface Costume {
   source?: string;
 }
 
-const hasText = (d: LangDict): boolean => GAME_LANGS.some((l) => d[l]);
+/** Champs communs d'une ligne `CostumeTemplet` (cf. `costumeCore`). */
+export interface CostumeCore {
+  name: LangDict;
+  icon: string;
+  grade: string;
+  source?: string;
+}
 
-export function buildCostumes(): Record<string, Costume> {
+/**
+ * Extraction COMMUNE d'une ligne `CostumeTemplet` — source unique partagée par
+ * la vue plate (ici) et la spec perso (costumes imbriqués de characters.json).
+ * Icône : `SpriteCostumeIcon` avec repli `RewardCostumeIcon` (filet — toutes
+ * les lignes actuelles ont un sprite, mais le jeu ne le garantit pas).
+ */
+export function costumeCore(r: Row, names: Map<string, LangDict>): CostumeCore {
+  const core: CostumeCore = {
+    name: resolveText(names, r.CostumeName),
+    icon: r.SpriteCostumeIcon ?? r.RewardCostumeIcon ?? '',
+    grade: slugEnum(r.ItemGrade),
+  };
+  const source = slugEnum(r.CostumePurchaseType);
+  if (source && source !== 'none') core.source = source;
+  return core;
+}
+
+export function buildCostumes(): Record<string, CostumeEntry> {
   const rows = loadTable('CostumeTemplet');
   const names = loadTextIndex('TextCharacter');
   const descs = loadTextIndex('TextSystem');
 
-  const out: Record<string, Costume> = {};
+  const out: Record<string, CostumeEntry> = {};
   for (const r of rows) {
     const id = r.ID;
     if (!id) continue;
 
-    const c: Costume = {
-      name: resolveText(names, r.CostumeName),
-      icon: r.SpriteCostumeIcon ?? r.RewardCostumeIcon ?? '',
-      grade: slugEnum(r.ItemGrade),
-      characterId: r.CharacterID ?? '',
-    };
+    const { name, icon, grade, source } = costumeCore(r, names);
+    const c: CostumeEntry = { name, icon, grade, characterId: r.CharacterID ?? '' };
     const desc = resolveText(descs, r.DescID);
     if (hasText(desc)) c.desc = desc;
-    const source = slugEnum(r.CostumePurchaseType);
-    if (source && source !== 'none') c.source = source;
+    if (source) c.source = source;
 
     out[id] = c;
   }
@@ -58,7 +79,7 @@ export function buildCostumes(): Record<string, Costume> {
 }
 
 // Exécution directe : échantillon pour revue.
-if (process.argv[1] && process.argv[1].endsWith('costumes.ts')) {
+if (isMain(import.meta.url)) {
   const c = buildCostumes();
   const ids = Object.keys(c);
   console.log(`costumes: ${ids.length}`);

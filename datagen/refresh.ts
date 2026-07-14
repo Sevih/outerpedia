@@ -15,8 +15,8 @@
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
 import { join, resolve } from 'node:path';
+import { isMain } from './lib/is-main';
 import { pull } from './extract/pull-gamedata';
 
 const TSX_CLI = resolve('node_modules/tsx/dist/cli.mjs');
@@ -132,7 +132,7 @@ export async function refresh(opts: RefreshOptions = {}): Promise<void> {
 
 // Exécution directe = `pnpm datagen:patch` : refresh headless, promote en DRY
 // (revue du diff) sauf `--apply`. Flags : --force / --no-pull / --apply / --collect.
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (isMain(import.meta.url)) {
   const a = process.argv.slice(2);
   refresh({
     force: a.includes('--force'),

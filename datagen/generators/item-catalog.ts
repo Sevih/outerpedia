@@ -17,12 +17,13 @@
  */
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { isMain } from '../lib/is-main';
 import { num } from '../lib/tables';
 import type { LangDict } from '../lib/lang';
 import { MISSING_ITEM_ICONS } from '../../src/lib/data/item-blacklist';
 import { buildItems, type Item } from './items';
 import { buildGoods, type Goods } from './goods';
-import { buildCostumes, type Costume } from './costumes';
+import { buildCostumes, type CostumeEntry } from './costumes';
 
 /** Préfixe d'id des costumes dans le catalogue unifié. */
 export const COSTUME_PREFIX = 'COSTUME_';
@@ -85,7 +86,7 @@ function applyCurated(e: CatalogEntry, cur: ItemCurated | undefined): CatalogEnt
 export function buildItemCatalog(inputs?: {
   items?: Record<string, Item>;
   goods?: Record<string, Goods>;
-  costumes?: Record<string, Costume>;
+  costumes?: Record<string, CostumeEntry>;
 }): Record<string, CatalogEntry> {
   const items = inputs?.items ?? buildItems();
   const goods = inputs?.goods ?? buildGoods();
@@ -171,7 +172,7 @@ export function buildItemCatalog(inputs?: {
 }
 
 // Exécution directe : échantillon pour revue.
-if (process.argv[1] && process.argv[1].endsWith('item-catalog.ts')) {
+if (isMain(import.meta.url)) {
   const cat = buildItemCatalog();
   const ids = Object.keys(cat);
   const byKind: Record<string, number> = {};

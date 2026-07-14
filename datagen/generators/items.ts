@@ -11,8 +11,9 @@
  * Entrées (tables du jeu) : ItemTemplet, TextItem.
  * Sortie : data/items.json (id → entité).  [PROPOSITION — forme à valider]
  */
+import { isMain } from '../lib/is-main';
 import { loadTable, num } from '../lib/tables';
-import { loadTextIndex, resolveText } from '../lib/text';
+import { hasText, loadTextIndex, resolveText } from '../lib/text';
 import { slugEnum } from '../lib/enums';
 import type { LangDict } from '../lib/lang';
 
@@ -26,11 +27,6 @@ export interface Item {
   icon: string; // IconName
   /** Réservé à UN perso (presents d'affinité dédiés — Veronica, Tio…). */
   characterLimit?: string;
-}
-
-/** Vrai si au moins une langue du dict est non vide. */
-function hasText(d: LangDict): boolean {
-  return d.en !== '' || d.jp !== '' || d.kr !== '' || d.zh !== '';
 }
 
 export function buildItems(): Record<string, Item> {
@@ -67,7 +63,7 @@ export function buildItems(): Record<string, Item> {
 }
 
 // Exécution directe : écrit un échantillon en staging (hors git) pour revue.
-if (process.argv[1] && process.argv[1].endsWith('items.ts')) {
+if (isMain(import.meta.url)) {
   const items = buildItems();
   const ids = Object.keys(items);
   console.log(`items: ${ids.length}`);

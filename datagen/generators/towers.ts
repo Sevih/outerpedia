@@ -31,6 +31,7 @@
  */
 import type { LangDict } from '../lib/lang';
 import { slugEnum } from '../lib/enums';
+import { isMain } from '../lib/is-main';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { groupBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
 import { spawnGroupIds } from './encounters';
@@ -192,7 +193,7 @@ export function buildTowers(): TowersData {
 }
 
 // Exécution directe.
-if (process.argv[1] && process.argv[1].endsWith('towers.ts')) {
+if (isMain(import.meta.url)) {
   const towers = buildTowers();
   for (const [k, t] of Object.entries(towers)) {
     console.log(`${k}: ${t.floors.length} étages${t.days ? ` — jours ${t.days.join(',')}` : ''}`);

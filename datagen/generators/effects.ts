@@ -16,6 +16,7 @@ import {
   resolveEffect,
   type EffectFamily,
 } from '../lib/effects';
+import { isMain } from '../lib/is-main';
 import { loadTable } from '../lib/tables';
 
 const OUT = resolve('.gamedata/staging/effects');
@@ -71,4 +72,4 @@ function main(): void {
 }
 
 // Exécution directe uniquement (importable sans effet de bord par l'orchestrateur).
-if (process.argv[1] && process.argv[1].endsWith('effects.ts')) main();
+if (isMain(import.meta.url)) main();

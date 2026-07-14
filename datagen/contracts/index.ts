@@ -24,6 +24,7 @@ export type {
   CharacterTag,
   IgnoreDefenseSource,
   StatRange,
+  StatScale,
 } from '../extractor/specs/character';
 export type { Monster } from '../extractor/specs/monster';
 export type { TranscendStep, TranscendData } from '../extractor/transcend';
@@ -47,7 +48,7 @@ export type {
 export type { Skill, SkillLevel } from '../generators/skills';
 export type { Item } from '../generators/items';
 export type { Goods } from '../generators/goods';
-export type { Costume as CostumeItem } from '../generators/costumes';
+export type { CostumeEntry as CostumeItem } from '../generators/costumes';
 export type { CatalogEntry } from '../generators/item-catalog';
 export type { GameVersion } from '../generators/game-version';
 export type {
@@ -125,7 +126,7 @@ export type {
 
 import type { LangDict } from '../lib/lang';
 import type { Effect } from '../lib/effects';
-import type { Character } from '../extractor/specs/character';
+import type { Character, StatScale } from '../extractor/specs/character';
 import type { Monster } from '../extractor/specs/monster';
 import type { DungeonRef, GuildRaidGeas, RankOption, RewardTable } from '../generators/encounters';
 import type { TranscendData } from '../extractor/transcend';
@@ -151,8 +152,8 @@ export interface SubClassEntry {
   desc?: LangDict;
 }
 
-/** Échelle d'affichage d'une stat (per-mille → % ou entier brut). */
-export type StatScale = 'flat' | 'percent';
+// (StatScale — échelle d'affichage d'une stat — est DÉFINI par la spec perso
+// et ré-exporté plus haut : une seule définition, pas de doublon à dériver.)
 
 /**
  * Glossaires GLOBAUX (slug → libellé), définis une seule fois et partagés par

@@ -23,6 +23,10 @@ import {
 } from '../../src/lib/data/guide-categories';
 import { listGuides } from '../../src/lib/data/guides';
 import { buildItemCatalog } from '../generators/item-catalog';
+import { resolveClass } from '../lib/class';
+import { slugEnum } from '../lib/enums';
+import { loadTable } from '../lib/tables';
+import { loadTextIndex } from '../lib/text';
 
 export type AssetRequest =
   | {
@@ -200,14 +204,26 @@ export function buildAssetManifest(): AssetRequest[] {
     });
   // Le slug canonique diffère de l'enum du jeu (striker↔Attacker, healer↔Priest) ;
   // les sprites portent le nom d'ENUM → la clé reste au slug, candidats = enum.
-  const CLASS_ENUM: Record<string, string> = { striker: 'Attacker', healer: 'Priest' };
+  // L'inverse est DÉRIVÉ de `resolveClass` (même règle que persos/équipement)
+  // sur les enums réellement présents dans les tables — pas de paire en dur.
+  const classEnum: Record<string, string> = {};
+  {
+    const tsys = loadTextIndex('TextSystem');
+    for (const r of loadTable('CharacterTemplet')) {
+      const raw = slugEnum(r.Class); // CCT_ATTACKER → attacker
+      if (!raw || raw === 'none') continue;
+      const { slug } = resolveClass(raw, tsys);
+      // Seuls les slugs canoniques ≠ enum ont besoin d'un candidat d'enum.
+      if (slug !== raw && !(slug in classEnum)) classEnum[slug] = cap(raw);
+    }
+  }
   for (const cl of Object.keys(glossaries.classes))
     push({
       kind: 'image',
       key: `images/ui/class/IG_Turn_Class_${cap(cl)}.webp`,
       candidates: [
         `IG_Turn_Class_${cap(cl)}`,
-        ...(CLASS_ENUM[cl] ? [`IG_Turn_Class_${CLASS_ENUM[cl]}`] : []),
+        ...(classEnum[cl] ? [`IG_Turn_Class_${classEnum[cl]}`] : []),
       ],
       domain: 'ui',
     });

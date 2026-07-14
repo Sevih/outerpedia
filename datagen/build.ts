@@ -17,7 +17,8 @@
  */
 import { mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { writeJson as writeCanonicalJson } from './lib/json';
+import { writeFileSync } from 'node:fs';
+import { formatJson } from './lib/json';
 import type {
   CharactersFile,
   EncountersFile,
@@ -66,9 +67,11 @@ const OUT = resolve('data/extracted');
  * changements de contenu, jamais du reformatage.
  */
 async function writeJson(relPath: string, data: unknown): Promise<void> {
-  await writeCanonicalJson(resolve(OUT, relPath), data);
-  const bytes = JSON.stringify(data).length;
-  console.log(`  ${relPath.padEnd(28)} ${(bytes / 1024).toFixed(0).padStart(6)} Ko`);
+  const text = await formatJson(data);
+  writeFileSync(resolve(OUT, relPath), text);
+  // Taille RÉELLE écrite (le canonique est indenté) — pas celle d'un
+  // `JSON.stringify` compact qui sous-estimait d'un facteur ~2.
+  console.log(`  ${relPath.padEnd(28)} ${(text.length / 1024).toFixed(0).padStart(6)} Ko`);
 }
 
 async function main(): Promise<void> {

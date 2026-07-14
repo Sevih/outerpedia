@@ -29,6 +29,7 @@ import {
 } from '../lib/buff';
 import { effectShape, type EffectShape } from '../lib/effects';
 import { slugEnum } from '../lib/enums';
+import { isMain } from '../lib/is-main';
 import type { LangDict } from '../lib/lang';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { groupBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
@@ -122,6 +123,130 @@ export function subTypeOf(v: string | undefined): SkillSubType {
   return null;
 }
 
+/**
+ * Options du CŒUR D'ASSEMBLAGE partagé persos/monstres (`assembleSkill`) —
+ * les seules différences RÉELLES entre les deux tables :
+ *   - persos : les lignes de niveau portent GainAP/GainCP (jauge joueur) et un
+ *     DescID (repli de desc principale + notes d'amélioration par niveau) ;
+ *   - monstres : rien de tout ça (pas de jauge, pas de DescID de niveau).
+ * RequireAP/burstAP, buffs de chaîne et buffs « ambiants » PriorityGroup sont
+ * aussi propres aux persos — gérés par l'appelant, pas ici.
+ */
+export interface AssembleOptions {
+  /** Ressources joueur des lignes de niveau (GainAP/GainCP) — persos. */
+  playerResources?: boolean;
+  /** DescID des lignes de niveau : repli de desc + upgrades/desc — persos. */
+  levelDescs?: boolean;
+}
+
+/** Sortie du cœur d'assemblage : le skill SANS `effects` (finalisé par
+ * l'appelant, qui peut d'abord enrichir `shapes` — chaîne/ambiants persos). */
+export interface AssembledSkill {
+  skill: Skill;
+  /** Effets structurés collectés (union des niveaux) — à poser sur `effects`. */
+  shapes: EffectShape[];
+  /** Buffs déjà émis dans `shapes` (dédup des enrichissements appelant). */
+  seen: Set<string>;
+  /** PriorityGroups des buffs posés (lien vers les buffs ambiants persos). */
+  prioGroups: Set<string>;
+  /** Statuts que le jeu AFFICHE lui-même sur le skill (BuffToolTip). */
+  levelTooltips: Set<string>;
+}
+
+/**
+ * Assemble un skill depuis sa ligne de table + ses lignes de niveau : desc
+ * template, niveaux (vars scalantes par buff), backfill des vars cités par la
+ * desc, target/range/icône, union des effets structurés. MÊME CONTRAT de
+ * sortie pour CharacterSkill* et MonsterSkill* (cf. monster-skills).
+ */
+export function assembleSkill(
+  s: Row,
+  rawLvlRows: Row[],
+  buffs: ReturnType<typeof loadBuffIndex>,
+  groups: Map<string, BuffGroup>,
+  tskill: Map<string, LangDict>,
+  opts: AssembleOptions = {},
+): AssembledSkill {
+  const lvlRows = rawLvlRows.slice().sort((a, b) => num(a.SkillLevel) - num(b.SkillLevel));
+  const lvl1 = lvlRows[0];
+
+  // Desc principale = DescID du skill (template), sinon (persos) DescID du
+  // niveau 1 — cas des passifs uniques dont la desc vit sur la ligne de niveau.
+  const mainOnSkill = !!s.DescID;
+  const descKey =
+    splitCsv(s.DescID ?? '')[0] || (opts.levelDescs ? splitCsv(lvl1?.DescID ?? '')[0] : '') || '';
+  const desc = descKey ? resolveText(tskill, descKey) : undefined;
+
+  const maxLevel = num(lvlRows[lvlRows.length - 1]?.SkillLevel) || lvlRows.length || 1;
+
+  const type = slugEnum(s.SkillType ?? '');
+  const levels = lvlRows.map((r) => buildLevel(r, buffs, groups, tskill, mainOnSkill, opts));
+  const skill: Skill = {
+    id: s.ID,
+    name: resolveText(tskill, s.NameID),
+    type,
+    subType: subTypeOf(s.SkillSubType),
+    // Offensif = inflige des dégâts, ou attaque en chaîne (toujours offensive).
+    offensive: levels.some((l) => (l.damageFactor ?? 0) > 0) || type === 'chain_passive',
+    maxLevel,
+    levels,
+  };
+  if (desc && desc.en) skill.desc = desc;
+
+  // Vars des buffs référencés par la DESC mais portés par un AUTRE skill
+  // (formes de combat : le S1 de Demiurge Luna cite `[Buff_T_2000120_1_1]`,
+  // buff du kit jumeau) — résolution GLOBALE par id de buff, niveau à niveau.
+  if (skill.desc) {
+    const refIds = new Set([...skill.desc.en.matchAll(/\[Buff_[CVT]_(.+?)\]/g)].map((m) => m[1]));
+    for (const lv of skill.levels) {
+      for (const refId of refIds) {
+        if (lv.vars?.[refId]) continue;
+        const v = skillBuffVars(buffs, refId, lv.level);
+        if (v.c || v.v || v.t) (lv.vars ??= {})[refId] = v;
+      }
+    }
+  }
+  const target = slugTeam(s.TargetTeamType);
+  if (target) skill.target = target;
+  const range = slugTeam(s.RangeType);
+  if (range) skill.range = range;
+  if (s.IconName) skill.icon = s.IconName;
+
+  // Structure des effets : union des buffs vus sur tous les niveaux (ordre
+  // d'apparition), forme invariante prise au niveau max.
+  const shapes: EffectShape[] = [];
+  const seen = new Set<string>();
+  // Groupes de priorité des buffs posés par ce skill (buffs « ambiants »
+  // conditionnés — exploités par l'appelant persos).
+  const prioGroups = new Set<string>();
+  // Statuts que le jeu AFFICHE lui-même sur le skill (colonne BuffToolTip).
+  const levelTooltips = new Set(lvlRows.flatMap((r) => splitCsv(r.BuffToolTip ?? '')));
+  for (const r of lvlRows) {
+    for (const { id: buffId, choice, child } of expandBuffIds(
+      splitCsv(r.BuffID ?? ''),
+      buffs,
+      groups,
+      maxLevel,
+    )) {
+      if (seen.has(buffId)) continue;
+      const row = buffRowAtLevel(buffs, buffId, maxLevel);
+      if (!row) continue;
+      // Marqueur MOTEUR : un `BT_NONE` enfant de groupe n'applique rien — si
+      // le jeu ne le liste pas lui-même sur le skill (BuffToolTip), son
+      // ToolTipID est du câblage, souvent RECYCLÉ d'un autre kit (l'ultimate
+      // du Guardian 131644 pointait « Random Debuff » du kit 4044xxx).
+      if (child && row.Type === 'BT_NONE' && !levelTooltips.has(row.ToolTipID ?? '')) continue;
+      seen.add(buffId);
+      if (row.PriorityGroup) prioGroups.add(row.PriorityGroup);
+      const shape = effectShape(row);
+      if (choice) shape.choice = true;
+      shapes.push(shape);
+    }
+  }
+
+  return { skill, shapes, seen, prioGroups, levelTooltips };
+}
+
 export function buildSkills(): SkillData {
   const buffs = loadBuffIndex();
   const groups = loadBuffGroups();
@@ -153,87 +278,23 @@ export function buildSkills(): SkillData {
   for (const s of skillRows) {
     const id = s.ID;
     if (!id) continue;
-    const lvlRows = (levelsBySkill.get(id) ?? [])
-      .slice()
-      .sort((a, b) => num(a.SkillLevel) - num(b.SkillLevel));
-    const lvl1 = lvlRows[0];
-
-    // Desc principale = DescID du skill (template), sinon DescID du niveau 1
-    // (cas des passifs uniques dont la desc vit sur la ligne de niveau).
-    const mainOnSkill = !!s.DescID;
-    const descKey = splitCsv(s.DescID ?? '')[0] || splitCsv(lvl1?.DescID ?? '')[0] || '';
-    const desc = descKey ? resolveText(tskill, descKey) : undefined;
-
-    const maxLevel = num(lvlRows[lvlRows.length - 1]?.SkillLevel) || lvlRows.length || 1;
-
-    const type = slugEnum(s.SkillType ?? '');
-    const levels = lvlRows.map((r) => buildLevel(r, buffs, groups, tskill, mainOnSkill));
-    const skill: Skill = {
-      id,
-      name: resolveText(tskill, s.NameID),
-      type,
-      subType: subTypeOf(s.SkillSubType),
-      // Offensif = inflige des dégâts, ou attaque en chaîne (toujours offensive).
-      offensive: levels.some((l) => (l.damageFactor ?? 0) > 0) || type === 'chain_passive',
-      maxLevel,
-      levels,
-    };
-    if (desc && desc.en) skill.desc = desc;
-
-    // Vars des buffs référencés par la DESC mais portés par un AUTRE skill
-    // (formes de combat : le S1 de Demiurge Luna cite `[Buff_T_2000120_1_1]`,
-    // buff du kit jumeau) — résolution GLOBALE par id de buff, niveau à niveau.
-    if (skill.desc) {
-      const refIds = new Set([...skill.desc.en.matchAll(/\[Buff_[CVT]_(.+?)\]/g)].map((m) => m[1]));
-      for (const lv of skill.levels) {
-        for (const refId of refIds) {
-          if (lv.vars?.[refId]) continue;
-          const v = skillBuffVars(buffs, refId, lv.level);
-          if (v.c || v.v || v.t) (lv.vars ??= {})[refId] = v;
-        }
-      }
-    }
-    const target = slugTeam(s.TargetTeamType);
-    if (target) skill.target = target;
-    const range = slugTeam(s.RangeType);
-    if (range) skill.range = range;
-    if (s.IconName) skill.icon = s.IconName;
+    // Cœur partagé persos/monstres ; les options activent les spécificités
+    // des lignes de niveau perso (GainAP/GainCP, DescID de niveau).
+    const { skill, shapes, seen, prioGroups, levelTooltips } = assembleSkill(
+      s,
+      levelsBySkill.get(id) ?? [],
+      buffs,
+      groups,
+      tskill,
+      { playerResources: true, levelDescs: true },
+    );
+    const maxLevel = skill.maxLevel;
     if (num(s.RequireAP) > 0) {
       skill.requireAP = num(s.RequireAP);
       const costs = splitCsv(s.RequireAP ?? '').map(num);
       if (costs.length > 1) skill.burstAP = costs;
     }
 
-    // Structure des effets : union des buffs vus sur tous les niveaux (ordre
-    // d'apparition), forme invariante prise au niveau max.
-    const shapes: EffectShape[] = [];
-    const seen = new Set<string>();
-    // Groupes de priorité des buffs posés par ce skill (lien vers les buffs
-    // « ambiants » conditionnés, cf. plus bas).
-    const prioGroups = new Set<string>();
-    // Statuts que le jeu AFFICHE lui-même sur le skill (colonne BuffToolTip).
-    const levelTooltips = new Set(lvlRows.flatMap((r) => splitCsv(r.BuffToolTip ?? '')));
-    for (const r of lvlRows) {
-      for (const { id: buffId, choice, child } of expandBuffIds(
-        splitCsv(r.BuffID ?? ''),
-        buffs,
-        groups,
-        maxLevel,
-      )) {
-        if (seen.has(buffId)) continue;
-        const row = buffRowAtLevel(buffs, buffId, maxLevel);
-        if (!row) continue;
-        // Marqueur MOTEUR : `BT_NONE` enfant de groupe non listé par le jeu
-        // sur le skill — câblage pur, ToolTipID parfois recyclé d'un autre
-        // kit (même règle que monster-skills).
-        if (child && row.Type === 'BT_NONE' && !levelTooltips.has(row.ToolTipID ?? '')) continue;
-        seen.add(buffId);
-        if (row.PriorityGroup) prioGroups.add(row.PriorityGroup);
-        const shape = effectShape(row);
-        if (choice) shape.choice = true;
-        shapes.push(shape);
-      }
-    }
     const cid = ownerBySkill.get(id);
     // Buffs de chaîne par convention (jamais référencés par un niveau) →
     // rattachés au skill chain_passive du propriétaire.
@@ -288,21 +349,25 @@ export function buildSkills(): SkillData {
   return { skills };
 }
 
-/** Construit un niveau de skill : valeurs scalantes + vars (par buff) + réfs. */
+/** Construit un niveau de skill : valeurs scalantes + vars (par buff) + réfs.
+ * Les options coupent les champs propres aux persos (cf. `AssembleOptions`). */
 function buildLevel(
   r: Row,
   buffs: ReturnType<typeof loadBuffIndex>,
   groups: Map<string, BuffGroup>,
   tskill: Map<string, LangDict>,
   mainOnSkill: boolean,
+  opts: AssembleOptions,
 ): SkillLevel {
   const level = num(r.SkillLevel) || 1;
   const out: SkillLevel = { level };
   if (num(r.DamageFactor) > 0) out.damageFactor = num(r.DamageFactor);
   if (num(r.Cool) > 0) out.cool = num(r.Cool);
   if (num(r.StartCool) > 0) out.startCool = num(r.StartCool);
-  if (num(r.GainAP) > 0) out.gainAP = num(r.GainAP);
-  if (num(r.GainCP) > 0) out.gainCP = num(r.GainCP);
+  if (opts.playerResources) {
+    if (num(r.GainAP) > 0) out.gainAP = num(r.GainAP);
+    if (num(r.GainCP) > 0) out.gainCP = num(r.GainCP);
+  }
   if (num(r.WGReduce) > 0) out.wgReduce = num(r.WGReduce);
 
   // Valeurs scalantes par buff (chance/valeur/tours), à CE niveau.
@@ -319,14 +384,16 @@ function buildLevel(
 
   // Notes d'amélioration de niveau : seulement quand la desc principale est sur
   // le skill (sinon le DescID du niveau EST la desc du niveau, émise telle quelle).
-  if (mainOnSkill && r.DescID) {
-    const ups = splitCsv(r.DescID)
-      .map((k) => resolveText(tskill, k))
-      .filter((d) => d.en);
-    if (ups.length) out.upgrades = ups;
-  } else if (!mainOnSkill && r.DescID) {
-    const d = resolveText(tskill, splitCsv(r.DescID)[0]);
-    if (d.en) out.desc = d;
+  if (opts.levelDescs) {
+    if (mainOnSkill && r.DescID) {
+      const ups = splitCsv(r.DescID)
+        .map((k) => resolveText(tskill, k))
+        .filter((d) => d.en);
+      if (ups.length) out.upgrades = ups;
+    } else if (!mainOnSkill && r.DescID) {
+      const d = resolveText(tskill, splitCsv(r.DescID)[0]);
+      if (d.en) out.desc = d;
+    }
   }
 
   return out;
@@ -379,4 +446,4 @@ function main(): void {
 }
 
 // Exécution directe uniquement (importable sans effet de bord par l'orchestrateur).
-if (process.argv[1] && process.argv[1].endsWith('skills.ts')) main();
+if (isMain(import.meta.url)) main();

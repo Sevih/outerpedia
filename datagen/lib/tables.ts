@@ -6,7 +6,7 @@
  * Ce module centralise leur chargement (avec cache) et les helpers d'indexation
  * réécrits une dizaine de fois dans la V2 (cf. audit de factorisation).
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 /** Une ligne de table : colonnes → valeurs (toujours des chaînes au sortir du parser). */
@@ -22,15 +22,21 @@ export interface ParsedTable {
 /** Répertoire des tables parsées (sortie de `datagen:convert`). Surchargable pour les tests. */
 const PARSED_DIR = resolve(process.env.DATAGEN_PARSED_DIR ?? '.gamedata/parsed');
 
-const tableCache = new Map<string, ParsedTable>();
+const tableCache = new Map<string, { parsed: ParsedTable; mtimeMs: number }>();
 
 function load(name: string): ParsedTable {
-  let p = tableCache.get(name);
-  if (!p) {
-    p = JSON.parse(readFileSync(resolve(PARSED_DIR, `${name}.json`), 'utf8')) as ParsedTable;
-    tableCache.set(name, p);
-  }
-  return p;
+  const path = resolve(PARSED_DIR, `${name}.json`);
+  // INVALIDATION PAR MTIME : l'admin Next est un processus long-running qui
+  // lit les tables via ce cache — après un `datagen:refresh`, les fichiers
+  // parsés changent sur disque et un cache purement mémoire servirait de la
+  // donnée périmée jusqu'au redémarrage. Un `statSync` au hit (aucune lecture
+  // de contenu) suffit à détecter le refresh et à recharger.
+  const mtimeMs = statSync(path).mtimeMs;
+  const hit = tableCache.get(name);
+  if (hit && hit.mtimeMs === mtimeMs) return hit.parsed;
+  const parsed = JSON.parse(readFileSync(path, 'utf8')) as ParsedTable;
+  tableCache.set(name, { parsed, mtimeMs });
+  return parsed;
 }
 
 /** Charge les lignes d'une table parsée (`CharacterTemplet`, `TextSystem`, …), avec cache. */
@@ -41,11 +47,6 @@ export function loadTable(name: string): Row[] {
 /** Schéma COMPLET d'une table (toutes les colonnes, même celles toujours vides). */
 export function loadColumns(name: string): string[] {
   return load(name).columns;
-}
-
-/** Vide le cache de tables (utile entre deux générations ou en test). */
-export function clearTableCache(): void {
-  tableCache.clear();
 }
 
 /**
