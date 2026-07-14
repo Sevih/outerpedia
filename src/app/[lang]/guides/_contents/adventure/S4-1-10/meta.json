@@ -1,0 +1,22 @@
+{
+  "title": {
+    "en": "S4 Hard : Three Cries",
+    "jp": "シーズン4(ハード) : 三つの鳴き声",
+    "kr": "시즌 4 하드 : 세 울음소리",
+    "zh": "S4 困难：三声啼哭",
+    "fr": "S4 Hard : Three Cries"
+  },
+  "description": {
+    "en": "Boss strategy guide.",
+    "jp": "ボス攻略ガイド。",
+    "kr": "보스 전략 가이드.",
+    "zh": "首领攻略指南",
+    "fr": "Guide de stratégie pour le Boss."
+  },
+  "icon": "T_DungeonArea_30",
+  "author": "Sevih",
+  "updated": "2026-01-13",
+  "order": 401,
+  "bossId": "4114006",
+  "dungeons": ["140113", "141110"]
+}

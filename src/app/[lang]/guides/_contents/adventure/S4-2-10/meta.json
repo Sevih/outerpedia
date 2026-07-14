@@ -1,0 +1,22 @@
+{
+  "title": {
+    "en": "S4 Hard : Sanctuary Defense",
+    "jp": "シーズン4(ハード) : 聖所防衛戦",
+    "kr": "시즌 4 하드 : 성소 방어전",
+    "zh": "S4 困难：圣所防御战",
+    "fr": "S4 Hard : Sanctuary Defense"
+  },
+  "description": {
+    "en": "Boss strategy guide.",
+    "jp": "ボス攻略ガイド。",
+    "kr": "보스 전략 가이드.",
+    "zh": "首领攻略指南",
+    "fr": "Guide de stratégie pour le Boss."
+  },
+  "icon": "T_DungeonArea_31",
+  "author": "Sevih",
+  "updated": "2026-01-13",
+  "order": 402,
+  "bossId": "4314003",
+  "dungeons": ["140214", "141210"]
+}

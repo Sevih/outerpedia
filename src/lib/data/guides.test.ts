@@ -4,9 +4,10 @@ import {
   listGuides,
   listGuidesByCategory,
   readGuideFile,
+  readGuideVersionFile,
 } from '@/lib/data/guides';
 import { GUIDE_TIER_KEYS, categoryRequires } from '@/lib/data/guide-categories';
-import { encountersOfGroup } from '@/lib/data/encounters';
+import { bossWaveMonsters, encountersOfGroup, encountersOfIds } from '@/lib/data/encounters';
 import { findCharacterByName } from '@/lib/data/characters';
 import { checkText } from '@/lib/parse-text';
 
@@ -123,47 +124,265 @@ describe('irregular-extermination — les guides désignent des combats réels',
       expect(g.group, g.slug).toBe(`irregular_chase:${g.order}`);
     }
   });
+});
+
+/**
+ * ADVENTURE LICENSE — 26 combats DÉSIGNÉS, chacun seul dans son groupe : ici
+ * l'échelle n'est pas faite de donjons frères (poursuite, guild raid) mais des
+ * RANGS d'un donjon unique (les stages 1-15 de la V2, rendus par la glissière de
+ * la carte de boss). Le groupe reste le pointeur du guide vers son combat.
+ *
+ * Le contrôle qui compte vraiment ici est celui de l'ICÔNE : la vue range une
+ * carte dans l'onglet Weekly ou Promotion selon que son icône finit par `_Lock`,
+ * et elle en dérive la face révélée (`_Open`). Une icône incohérente avec le mode
+ * du donjon ne casserait rien — elle rangerait juste la carte dans le mauvais
+ * onglet, en silence. C'est exactement le trou que la V2 avait (elle lisait le
+ * préfixe du slug) et qu'on refuse de rouvrir.
+ */
+describe('adventure-license — les guides désignent des combats réels', () => {
+  const guides = listGuidesByCategory('adventure-license');
+
+  it('les 26 licences portées, chacune sur un combat solitaire et peuplé', () => {
+    expect(guides).toHaveLength(26);
+    for (const g of guides) {
+      const encounters = encountersOfGroup(g.group!);
+      expect(encounters, `${g.slug} : ${g.group}`).toHaveLength(1);
+      expect(encounters[0].monsters.length, g.slug).toBeGreaterThan(0);
+    }
+  });
+
+  it('le boss du meta (og:image) est bien le boss du donjon', () => {
+    for (const g of guides) {
+      const [encounter] = encountersOfGroup(g.group!);
+      const boss = encounter.monsters.find((m) => m.role === 'boss');
+      expect(g.bossId, g.slug).toBe(boss?.id);
+    }
+  });
+
+  it("l'icône verrouillée (`_Lock`) désigne exactement les Promotion Challenge", () => {
+    for (const g of guides) {
+      const [encounter] = encountersOfGroup(g.group!);
+      expect(g.icon.endsWith('_Lock'), `${g.slug} : ${g.icon} / ${encounter.ref.mode}`).toBe(
+        encounter.ref.mode === 'adventure_challenge',
+      );
+    }
+  });
+});
+
+/**
+ * ADVENTURE — les stages d'histoire. Le mode n'a AUCUN `group` dans la donnée :
+ * chaque guide déclare ses donjons (`meta.dungeons`), et c'est le seul endroit
+ * où le Normal et le Hard d'un stage sont reliés. Un id faux ne se verrait nulle
+ * part ailleurs qu'au build de prod — d'où ces contrôles.
+ */
+describe('adventure — les guides désignent des donjons réels', () => {
+  const guides = listGuidesByCategory('adventure');
+
+  it('les vingt stages portés, chacun sur des donjons peuplés', () => {
+    expect(guides).toHaveLength(20);
+    for (const g of guides) {
+      const encounters = encountersOfIds(g.dungeons!);
+      expect(encounters.length, g.slug).toBeGreaterThan(0);
+      for (const e of encounters) expect(e.monsters.length, `${g.slug}/${e.id}`).toBeGreaterThan(0);
+    }
+  });
+
+  it('les donjons vont du plus facile au plus dur (Story Normal puis Story Hard)', () => {
+    for (const g of guides) {
+      const modes = encountersOfIds(g.dungeons!).map((e) => e.ref.mode);
+      expect(modes, g.slug).toEqual([...modes].sort()); // 'normal' < 'normal_hard'
+    }
+  });
+
+  it('le boss du meta (og:image) est bien celui de la vague du boss, au mode le plus dur', () => {
+    for (const g of guides) {
+      const encounters = encountersOfIds(g.dungeons!);
+      const hardest = encounters[encounters.length - 1];
+      expect(bossWaveMonsters(hardest)[0].id, g.slug).toBe(g.bossId);
+    }
+  });
 
   /**
-   * Le rendu est STRICT (un nom de perso ou un tag inconnu jette au SSG), mais
-   * la gate de dev ne fait pas de build : on vérifie ICI que le contenu porté
-   * résout — noms de personnages des sections, et tous les tags `{X/…}` de tous
-   * les textes (le dialecte `_IR` de la V2 compris, porté tel quel).
+   * `order` n'est pas qu'un tri en adventure : c'est la SEULE source de la saison
+   * et de l'épisode affichés (cf. `GuideMeta.order`) — `encounters.season` découpe
+   * l'histoire autrement. Un `order` qui ne colle pas au slug déplacerait donc la
+   * carte dans une autre saison, sans rien casser d'autre.
    */
-  it('tous les personnages cités existent (recommended + teams)', () => {
+  it('order = saison × 100 + épisode, cohérent avec le slug (contrat de la vue)', () => {
     for (const g of guides) {
-      const recommended =
-        readGuideFile<Array<{ characters: string[] }>>(g, 'recommended.json') ?? [];
-      const teams = readGuideFile<Array<{ slots: string[][] }>>(g, 'teams.json') ?? [];
-      const names = [
-        ...recommended.flatMap((r) => r.characters),
-        ...teams.flatMap((t) => t.slots.flat()),
-      ];
-      expect(names.length, g.slug).toBeGreaterThan(0);
-      for (const name of names) {
-        expect(findCharacterByName(name), `${g.slug} : « ${name} » introuvable`).toBeDefined();
+      const [, season, episode] = /^S(\d+)-(\d+)-\d+$/.exec(g.slug) ?? [];
+      expect(season, `${g.slug} : slug de stage attendu`).toBeDefined();
+      expect(g.order, g.slug).toBe(Number(season) * 100 + Number(episode));
+    }
+  });
+
+  it('chaque guide porte son content.json (le rendu en dépend)', () => {
+    for (const g of guides) {
+      expect(readGuideFile(g, 'content.json'), `${g.slug} : content.json manquant`).toBeDefined();
+    }
+  });
+
+  /**
+   * `monsters` désigne les cartes quand la vague du boss ne dit pas le combat
+   * (Alpha se bat une vague avant Leo). Un id qui ne tombe dans aucun donjon du
+   * guide ne casserait rien à l'écran : la carte manquerait, simplement — c'est
+   * exactement le genre de trou silencieux qu'on refuse ici.
+   */
+  it('les monstres désignés appartiennent aux donjons du guide, le boss en tête', () => {
+    for (const g of guides.filter((x) => x.monsters)) {
+      const encounters = encountersOfIds(g.dungeons!);
+      for (const id of g.monsters!) {
+        const found = encounters.some((e) => e.monsters.some((m) => m.id === id));
+        expect(found, `${g.slug} : monstre « ${id} » absent de ses donjons`).toBe(true);
+      }
+      expect(g.monsters![0], `${g.slug} : le boss ouvre la liste`).toBe(g.bossId);
+    }
+  });
+});
+
+/** Fichiers de contenu d'un guide (à la racine ou dans une version). */
+const CONTENT_FILES = [
+  'strings.json',
+  'tips.json',
+  'recommended.json',
+  'teams.json',
+  'content.json',
+] as const;
+
+/** Toutes les chaînes d'un JSON de contenu, récursivement. */
+function strings(v: unknown): string[] {
+  if (typeof v === 'string') return [v];
+  if (Array.isArray(v)) return v.flatMap(strings);
+  if (v && typeof v === 'object') return Object.values(v).flatMap(strings);
+  return [];
+}
+
+/**
+ * Tous les NOMS DE PERSONNAGES d'un JSON de contenu, quelle que soit sa forme.
+ *
+ * Les modes rangent leurs personnages différemment (`recommended[].characters`,
+ * `teams[].slots`, les `buckets` du Special Request, les `sections` du World
+ * Boss, les `groups` d'un `content.json`), et une liste de formes finirait par
+ * en oublier une — c'est ce qui laissait le Special Request SANS contrôle de
+ * noms. On cherche donc les deux CLÉS qui portent des personnages, partout où
+ * elles sont : le contrat est la clé, pas la profondeur.
+ */
+function characterNames(v: unknown): string[] {
+  if (Array.isArray(v)) return v.flatMap(characterNames);
+  if (!v || typeof v !== 'object') return [];
+  const o = v as Record<string, unknown>;
+  const here: string[] = [];
+  if (Array.isArray(o.characters)) here.push(...o.characters.filter((c) => typeof c === 'string'));
+  if (Array.isArray(o.slots)) here.push(...(o.slots as string[][]).flat());
+  return [...here, ...Object.values(o).flatMap(characterNames)];
+}
+
+/**
+ * Le rendu des guides est STRICT : un nom de perso ou un tag `{X/…}` inconnu
+ * JETTE au SSG. Mais la gate de dev ne fait pas de build — sans ce contrôle,
+ * l'erreur d'un portage n'apparaît qu'au build de prod.
+ *
+ * Il vaut pour TOUT guide plat, quelle que soit sa catégorie : c'était écrit une
+ * fois par catégorie portée (et donc absent des suivantes — le Special Request
+ * n'avait aucun contrôle de noms). Le contenu versionné a le sien, plus bas.
+ */
+describe('contenu des guides — tout perso et tout tag inline résolvent', () => {
+  const flat = listGuides().filter((g) => g.versions.length === 0);
+
+  it('il existe des guides plats (le filtre ne masque pas un scan vide)', () => {
+    expect(flat.length).toBeGreaterThan(0);
+  });
+
+  it('tous les personnages cités existent', () => {
+    for (const g of flat) {
+      for (const file of CONTENT_FILES) {
+        for (const name of characterNames(readGuideFile(g, file))) {
+          expect(
+            findCharacterByName(name),
+            `${g.category}/${g.slug}/${file} : « ${name} » introuvable`,
+          ).toBeDefined();
+        }
       }
     }
   });
 
-  it('tous les tags inline du contenu résolvent (effets, persos, équipement)', () => {
-    /** Toutes les chaînes d'un JSON de contenu, récursivement. */
-    const strings = (v: unknown): string[] => {
-      if (typeof v === 'string') return [v];
-      if (Array.isArray(v)) return v.flatMap(strings);
-      if (v && typeof v === 'object') return Object.values(v).flatMap(strings);
-      return [];
-    };
-    for (const g of guides) {
-      for (const file of ['tips.json', 'recommended.json', 'teams.json']) {
+  it('tous les tags inline résolvent (effets, persos, équipement)', () => {
+    for (const g of flat) {
+      for (const file of CONTENT_FILES) {
         const data = readGuideFile<unknown>(g, file);
         if (!data) continue;
         for (const s of strings(data)) {
           for (const check of checkText(s)) {
             expect(
               check.ok,
-              `${g.slug}/${file} : tag {${check.type}/${check.value}} — ${check.reason ?? ''}`,
+              `${g.category}/${g.slug}/${file} : tag {${check.type}/${check.value}} — ${check.reason ?? ''}`,
             ).toBe(true);
+          }
+        }
+      }
+    }
+  });
+});
+
+/**
+ * Guides VERSIONNÉS (joint challenge, world boss…) : leur contenu vit dans
+ * `versions/<clé>/`, que les contrôles ci-dessus — écrits pour les guides plats
+ * — ne lisaient pas. Or c'est là que le contenu ARRIVE : porter une saison de la
+ * V2, c'est déposer quatre JSON dont le rendu STRICT jette au SSG si un nom de
+ * perso ou un tag est faux. Sans ce garde-fou, l'erreur n'apparaissait qu'au
+ * build de prod.
+ */
+describe('guides versionnés — le contenu de CHAQUE version résout', () => {
+  const versioned = listGuides().filter((g) => g.versions.length > 0);
+
+  it('il existe des guides versionnés (le filtre ne masque pas un scan vide)', () => {
+    expect(versioned.length).toBeGreaterThan(0);
+  });
+
+  it('tous les personnages cités existent (recommended + teams de chaque version)', () => {
+    // Les deux fichiers ont une forme COURTE (une section implicite) et une forme
+    // à `sections` (world boss : par phase / par archétype) — cf. VersionedBossGuide.
+    type Reco = Array<{ characters: string[] }> | { sections: Array<{ groups: RecoGroup[] }> };
+    type RecoGroup = { characters: string[] };
+    type Teams = { slots?: string[][]; sections?: Array<{ slots: string[][] }> };
+
+    for (const g of versioned) {
+      for (const v of g.versions) {
+        const reco = readGuideVersionFile<Reco>(g, v.key, 'recommended.json');
+        const groups: RecoGroup[] = !reco
+          ? []
+          : Array.isArray(reco)
+            ? reco
+            : reco.sections.flatMap((s) => s.groups);
+        const teams = readGuideVersionFile<Teams>(g, v.key, 'teams.json');
+        const slots: string[][] = [
+          ...(teams?.slots ?? []),
+          ...(teams?.sections ?? []).flatMap((s) => s.slots),
+        ];
+        const names = [...groups.flatMap((r) => r.characters), ...slots.flat()];
+        for (const name of names) {
+          expect(
+            findCharacterByName(name),
+            `${g.slug}/${v.key} : « ${name} » introuvable`,
+          ).toBeDefined();
+        }
+      }
+    }
+  });
+
+  it('tous les tags inline résolvent, version par version', () => {
+    for (const g of versioned) {
+      for (const v of g.versions) {
+        for (const file of CONTENT_FILES) {
+          const data = readGuideVersionFile<unknown>(g, v.key, file);
+          if (!data) continue;
+          for (const s of strings(data)) {
+            for (const check of checkText(s)) {
+              expect(
+                check.ok,
+                `${g.slug}/${v.key}/${file} : tag {${check.type}/${check.value}} — ${check.reason ?? ''}`,
+              ).toBe(true);
+            }
           }
         }
       }

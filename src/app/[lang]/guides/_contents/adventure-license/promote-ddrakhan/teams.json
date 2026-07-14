@@ -1,0 +1,36 @@
+[
+  {
+    "slots": [
+      ["Monad Eva", "Leo", "Omega Nadja", "Hilde"],
+      ["Nella", "Mene", "Gnosis Viella", "Summer Knight's Dream Ember"],
+      ["Gnosis Nella", "Tamamo-no-Mae", "Fran"],
+      ["Iota", "Laplace", "Demiurge Stella", "Ryu Lion"]
+    ],
+    "note": [
+      {
+        "en": "Fixed damage chain team. Use {I-T/Sage's Charm} to accumulate CP during {B/BT_INVINCIBLE_IR} phases. Typically requires 2 attempts.",
+        "jp": "固定ダメージチェーンチーム。{B/BT_INVINCIBLE_IR}フェーズ中にCPを溜めるために{I-T/Sage's Charm}を使用。通常2回の挑戦が必要。",
+        "kr": "고정 피해 체인 팀. {B/BT_INVINCIBLE_IR} 페이즈 동안 CP를 축적하기 위해 {I-T/Sage's Charm}을 사용하세요. 보통 2회 시도가 필요합니다.",
+        "zh": "固定伤害连携队伍。使用{I-T/Sage's Charm}在{B/BT_INVINCIBLE_IR}阶段积累CP。通常需要2次尝试。",
+        "fr": "Équipe chain en dégâts fixes. Utilisez {I-T/Sage's Charm} pour accumuler du CP pendant les phases {B/BT_INVINCIBLE_IR}. Nécessite généralement 2 tentatives."
+      }
+    ]
+  },
+  {
+    "title": {
+      "title": {
+        "en": "Safe Team"
+      }
+    },
+    "slots": [["Monad Eva"], ["Nella"], ["Gnosis Viella"], ["Summer Knight's Dream Ember"]],
+    "note": [
+      {
+        "en": "Safer team with revival and resurrection options to survive Vlada's burn detonation.",
+        "jp": "復活と蘇生オプションでヴラダの火傷爆発を生き残るための安全チーム。",
+        "kr": "블라다의 화상 폭발에서 생존하기 위한 부활 및 소생 옵션이 있는 안전한 팀.",
+        "zh": "拥有复活和重生选项的安全队伍，用于生存布拉达的烧伤引爆。",
+        "fr": "Équipe plus sûre avec des options de revival et de résurrection pour survivre à la détonation de burn de Vlada."
+      }
+    ]
+  }
+]

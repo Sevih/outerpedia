@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Heavy Fixed Vladi Max",
+    "jp": "固定砲台ブラッディマックス",
+    "kr": "고정 포대 블라디 맥스",
+    "zh": "重型固定炮台弗拉迪麦克斯",
+    "fr": "Heavy Fixed Vladi Max"
+  },
+  "description": {
+    "en": "Guide and advice to clear the Weekly Conquest - Heavy Fixed Vladi Max",
+    "jp": "ウィークリー討伐 - 固定砲台ブラッディマックス クリアガイドとアドバイス",
+    "kr": "주간토벌 - 고정 포대 블라디 맥스 클리어 가이드 및 조언",
+    "zh": "周常征服 - 重型固定炮台弗拉迪麦克斯通关指南和建议",
+    "fr": "Guide et conseils pour réussir le Weekly Conquest — Heavy Fixed Vladi Max"
+  },
+  "icon": "T_Licence_4044004",
+  "author": "Shiraen",
+  "updated": "2025-11-29",
+  "bossId": "51000030",
+  "group": "adventure_mission:70600017"
+}

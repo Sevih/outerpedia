@@ -23,6 +23,9 @@
     "keys": ["BT_FIXED_DAMAGE", "BT_REVERSE_HEAL_BASED_TARGET", "BT_REVERSE_HEAL_BASED_CASTER"],
     "note": "dégats FIXES : encodés en reverse-heal (aucun texte/tooltip sur les buffs) — clés type → statut « Fixed Damage », dialecte V2 BT_FIXED_DAMAGE inclus"
   },
+  "97": {
+    "icon": "IG_Buff_Effect_Reversal_Buff"
+  },
   "100": {
     "desc": {
       "en": "Steal buff from the target.",

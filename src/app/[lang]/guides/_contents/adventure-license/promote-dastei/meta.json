@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Promotion : Demiurge Astei",
+    "jp": "昇級チャレンジ : デミウルゴス アステ",
+    "kr": "승급 챌린지 : 데미우르고스 아스테",
+    "zh": "晋升挑战：创世之神 奥斯黛",
+    "fr": "Promotion : Demiurge Astei"
+  },
+  "description": {
+    "en": "Tips and advice to succeed against Demiurge Astei",
+    "jp": "デミウルゴス アステを成功させるためのヒントとアドバイス",
+    "kr": "데미우르고스 아스테를 성공시키기 위한 팁과 조언",
+    "zh": "成功挑战创世之神 奥斯黛的提示和建议",
+    "fr": "Conseils et astuces pour réussir contre Demiurge Astei"
+  },
+  "icon": "T_Licence_2000059_Lock",
+  "author": "Shiraen",
+  "updated": "2025-11-29",
+  "bossId": "50000002",
+  "group": "adventure_challenge:70600101"
+}

@@ -6,7 +6,7 @@
  * Ce module centralise leur chargement (avec cache) et les helpers d'indexation
  * réécrits une dizaine de fois dans la V2 (cf. audit de factorisation).
  */
-import { readFileSync, statSync } from 'node:fs';
+import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 /** Une ligne de table : colonnes → valeurs (toujours des chaînes au sortir du parser). */
@@ -21,6 +21,27 @@ export interface ParsedTable {
 
 /** Répertoire des tables parsées (sortie de `datagen:convert`). Surchargable pour les tests. */
 const PARSED_DIR = resolve(process.env.DATAGEN_PARSED_DIR ?? '.gamedata/parsed');
+
+/** Chemin sur disque d'une table parsée (pour `statSync` & co — pas pour lire soi-même). */
+export function tablePath(name: string): string {
+  return resolve(PARSED_DIR, `${name}.json`);
+}
+
+/**
+ * Noms des tables disponibles sur disque (sans `.json`). Ne lit AUCUN contenu :
+ * le catalogue reste bon marché même si les tables pèsent 140 Mo au total.
+ * Répertoire absent (extraction jamais lancée) → liste vide.
+ */
+export function listTableNames(): string[] {
+  try {
+    return readdirSync(PARSED_DIR)
+      .filter((f) => f.endsWith('.json'))
+      .map((f) => f.slice(0, -5))
+      .sort((a, b) => a.localeCompare(b));
+  } catch {
+    return [];
+  }
+}
 
 const tableCache = new Map<string, { parsed: ParsedTable; mtimeMs: number }>();
 

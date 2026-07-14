@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getT, type TFunction } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { localePath } from '@/lib/navigation';
@@ -24,6 +25,7 @@ import type { CategoryViewProps } from './types';
  * items, familles et classes en dur dans le composant).
  */
 export default async function IrregularChaseMap({ lang, category, guides }: CategoryViewProps) {
+  const t = await getT(lang);
   if (guides.length === 0) return <EmptyCategory lang={lang} />;
   const art = categoryArt(category);
   if (!art) {
@@ -42,14 +44,32 @@ export default async function IrregularChaseMap({ lang, category, guides }: Cate
         className="absolute inset-0 h-full w-full object-cover"
       />
       {guides.map((g) => (
-        <BossPin key={g.slug} guide={g} lang={lang} />
+        <BossPin key={g.slug} guide={g} lang={lang} t={t} />
       ))}
     </div>
   );
 }
 
+/**
+ * Nom de la COLLECTION d'une poursuite, dérivé du butin : le préfixe commun
+ * aux noms des équipements du pool (« Gorgon's Wrath » / « Gorgon's Vanity »
+ * → « Gorgon »), débarrassé du possessif ou de la particule finale ('s, の,
+ * 의, 的, 之). `undefined` si les noms n'ont rien en commun — la ligne ne
+ * s'affiche alors pas.
+ */
+function collectionName(pieces: LootVariant[]): string | undefined {
+  const names = [...new Set(pieces.map((p) => p.name).filter(Boolean))];
+  if (names.length < 2) return undefined;
+  let prefix = names[0];
+  for (const n of names.slice(1)) {
+    while (prefix && !n.startsWith(prefix)) prefix = prefix.slice(0, -1);
+  }
+  const cleaned = prefix.replace(/(?:['’]s?|の|의|的|之)?\s*$/u, '').trim();
+  return cleaned || undefined;
+}
+
 /** Pin d'une poursuite : libellé + vignette du boss, butin dessous (desktop). */
-function BossPin({ guide, lang }: { guide: Guide; lang: Lang }) {
+function BossPin({ guide, lang, t }: { guide: Guide; lang: Lang; t: TFunction }) {
   const at = `${guide.category}/${guide.slug}`;
   // `requires` de la catégorie au scan — les gardes restent pour un appel hors catégorie.
   if (!guide.mapPos || !guide.bossId || !guide.group) {
@@ -80,6 +100,7 @@ function BossPin({ guide, lang }: { guide: Guide; lang: Lang }) {
   const top = ladder[ladder.length - 1];
   const tableId = top.ref.rewardWin ?? top.ref.reward;
   const loot = tableId ? pursuitLoot(tableId, lang) : undefined;
+  const collection = loot ? collectionName([...loot.weapons, ...loot.amulets]) : undefined;
   const pos = guide.mapPos;
 
   return (
@@ -130,6 +151,11 @@ function BossPin({ guide, lang }: { guide: Guide; lang: Lang }) {
               color={GRADE_TEXT[c.grade] ?? 'text-content'}
             />
           ))}
+          {collection && (
+            <span className="text-equipment font-bold">
+              {t('guides.collection', { name: collection })}
+            </span>
+          )}
           <div className="flex gap-0.5">
             {loot.weapons.map((v) => (
               <VariantIcon key={v.iconSrc} variant={v} />

@@ -85,8 +85,15 @@ export interface GearRecoLabels {
   source: string;
 }
 
-/** Tuile d'un slot : label, puis N lignes séparées par des filets. */
-function SlotCard({
+/**
+ * Tuile d'un slot : label, puis N lignes séparées par des filets.
+ *
+ * EXPORTÉE avec `ItemRow` / `SetPieceGroup` / `Row` : les guides de boss
+ * affichent le POOL d'un donjon (butin détaillé) et c'est le MÊME objet à
+ * l'écran qu'ici — même tuile, même tooltip, même lien détail. Une deuxième
+ * implémentation aurait divergé au premier changement.
+ */
+export function SlotCard({
   label,
   accentBg = false,
   children,
@@ -114,7 +121,7 @@ function SlotCard({
   );
 }
 
-function Row({ children }: { children: ReactNode }) {
+export function Row({ children }: { children: ReactNode }) {
   return (
     <div className="border-b border-white/6 py-2.5 first:pt-1 last:border-0 last:pb-0">
       {children}
@@ -141,7 +148,15 @@ function StatChip({ abbr, value }: { abbr: string; value?: string }) {
  * nom cliquable vers la page détail, chips de main stats ; tooltip riche
  * (stats max, passif au palier max, source).
  */
-function ItemRow({ item, labels }: { item: GearItem; labels: GearRecoLabels }) {
+export function ItemRow({
+  item,
+  labels,
+}: {
+  item: GearItem;
+  // Ce que la carte utilise VRAIMENT — un appelant qui n'a pas de build (le
+  // butin d'un donjon) n'a pas à fabriquer des libellés qu'elle ignore.
+  labels: Pick<GearRecoLabels, 'source'>;
+}) {
   if (item.unresolved) return <p className="text-sm text-red-400">{item.name}</p>;
   const chips = (item.mainStat ?? '')
     .split('/')
@@ -248,7 +263,7 @@ function ItemRow({ item, labels }: { item: GearItem; labels: GearRecoLabels }) {
  * → les 4 pièces ; combo 2+2 → Helmet+Armor pour le premier set, Gloves+Shoes
  * pour le second. Icône du set en overlay, nom cliquable, tooltip 2P/4P + source.
  */
-function SetPieceGroup({
+export function SetPieceGroup({
   piece,
   idx,
   effects,
@@ -257,7 +272,7 @@ function SetPieceGroup({
   piece: GearSetPiece;
   idx: number;
   effects: GearSetEffect[];
-  labels: GearRecoLabels;
+  labels: Pick<GearRecoLabels, 'piece2' | 'piece4'>;
 }) {
   const icons = piece.pieceIcons ?? [];
   const shown = piece.count >= 4 ? icons : idx === 0 ? icons.slice(0, 2) : icons.slice(2, 4);

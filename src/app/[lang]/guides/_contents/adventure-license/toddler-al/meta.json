@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Tyrant Toddler",
+    "jp": "タイラントの幼生",
+    "kr": "타일런트 유생체",
+    "zh": "幼体泰兰特",
+    "fr": "Tyrant Toddler"
+  },
+  "description": {
+    "en": "Guide and advice to clear the Weekly Conquest - Tyrant Toddler",
+    "jp": "ウィークリー討伐 - タイラントの幼生 クリアガイドとアドバイス",
+    "kr": "주간토벌 - 타일런트 유생체 클리어 가이드 및 조언",
+    "zh": "周常征服 - 暴君幼体通关指南和建议",
+    "fr": "Guide et conseils pour réussir le Weekly Conquest — Tyrant Toddler"
+  },
+  "icon": "T_Licence_4076005",
+  "author": "Shiraen",
+  "updated": "2025-11-29",
+  "bossId": "51000004",
+  "group": "adventure_mission:70600001"
+}

@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Ksai",
+    "jp": "ザイ",
+    "kr": "크사이",
+    "zh": "科赛",
+    "fr": "Ksai"
+  },
+  "description": {
+    "en": "Guide and advice to clear the Weekly Conquest - Ksai",
+    "jp": "ウィークリー討伐 - ザイ クリアガイドとアドバイス",
+    "kr": "주간토벌 - 크사이 클리어 가이드 및 조언",
+    "zh": "周常征服 - 科赛通关指南和建议",
+    "fr": "Guide et conseils pour réussir le Weekly Conquest — Ksai"
+  },
+  "icon": "T_Licence_4054001",
+  "author": "Shiraen",
+  "updated": "2025-11-29",
+  "bossId": "51000028",
+  "group": "adventure_mission:70600015"
+}

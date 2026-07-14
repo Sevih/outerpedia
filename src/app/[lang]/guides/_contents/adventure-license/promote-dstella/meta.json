@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Promotion : Demiurge Stella",
+    "jp": "昇級チャレンジ : デミウルゴス ステラ",
+    "kr": "승급 챌린지 : 데미우르고스 스텔라",
+    "zh": "晋升挑战：创世之神 斯黛拉",
+    "fr": "Promotion : Demiurge Stella"
+  },
+  "description": {
+    "en": "Tips and advice to succeed against Demiurge Stella",
+    "jp": "デミウルゴス ステラを成功させるためのヒントとアドバイス",
+    "kr": "데미우르고스 스텔라를 성공시키기 위한 팁과 조언",
+    "zh": "成功挑战创世之神 斯黛拉的提示和建议",
+    "fr": "Conseils et astuces pour réussir contre Demiurge Stella"
+  },
+  "icon": "T_Licence_2000053_Lock",
+  "author": "Shiraen",
+  "updated": "2025-11-29",
+  "bossId": "50000001",
+  "group": "adventure_challenge:70600100"
+}

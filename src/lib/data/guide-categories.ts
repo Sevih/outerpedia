@@ -16,7 +16,7 @@ import type { LocalizedText } from '@contracts';
  * OBLIGATOIRES (sa vue en dépend). Vérifié au scan : le build casse au lieu de
  * laisser un guide disparaître d'une vue qui ne sait pas où le ranger.
  */
-export type GuideRequirable = 'tier' | 'bossId' | 'order' | 'group' | 'mapPos';
+export type GuideRequirable = 'tier' | 'bossId' | 'order' | 'group' | 'mapPos' | 'dungeons';
 
 /**
  * Bloc EXPLICATIF d'un mode de jeu (« comment ça marche »), affiché en bas de sa
@@ -150,6 +150,20 @@ export const GUIDE_CATEGORIES = {
   adventure: {
     order: 2,
     icon: 'CM_EtcMenu_Adventure',
+    /**
+     * Le SCÉNARIO, découpé en saisons : la vue en fait une section par saison et
+     * une carte par stage guidé — l'art de la zone en fond, le boss dessous
+     * quand le lecteur accepte le spoiler.
+     *
+     * Rien de tout ça ne se devine, d'où les trois champs exigés. `dungeons` =
+     * la paire [Normal, Hard] du stage (le jeu ne relie PAS les deux : ni group
+     * ni difficulty sur les donjons d'histoire — cf. `GuideMeta.dungeons`), d'où
+     * la vue tire la zone, le nom du stage et le badge de difficulté. `bossId` =
+     * le boss du guide, révélé par le toggle spoiler. `order` = saison × 100 +
+     * épisode : la SECTION dans laquelle la carte tombe, parce que la saison de
+     * la donnée n'est pas celle du jeu (cf. `GuideMeta.order`).
+     */
+    requires: ['dungeons', 'bossId', 'order'],
     label: {
       en: 'Adventure',
       jp: '冒険',
@@ -168,6 +182,17 @@ export const GUIDE_CATEGORIES = {
   'adventure-license': {
     order: 3,
     icon: 'CM_Adventure_License',
+    /**
+     * Mode PERMANENT à combats désignés : `group` = le combat que le guide
+     * couvre (un donjon Weekly Conquest ou Promotion Challenge, seul dans son
+     * groupe — son échelle de stages vit dans ses rangs), `bossId` = le boss du
+     * donjon (og:image de la page détail — la V2 n'en avait aucune).
+     *
+     * Pas d'`order` : le mode n'a ni saison ni calendrier qui l'ordonnerait, et
+     * les licences se lisent comme une galerie. La vue trie donc sur le titre,
+     * comme la V2.
+     */
+    requires: ['group', 'bossId'],
     label: {
       en: 'Adventure License',
       jp: '冒険者ライセンス',

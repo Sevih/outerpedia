@@ -1,0 +1,22 @@
+{
+  "title": {
+    "en": "S2 Hard : Vladi Max",
+    "jp": "シーズン2(ハード) : ブラッディマックス",
+    "kr": "시즌 2 Part1 하드 : 블라디 맥스",
+    "zh": "S2 困难：弗拉迪麦克斯",
+    "fr": "S2 Hard : Vladi Max"
+  },
+  "description": {
+    "en": "Boss strategy guide.",
+    "jp": "ボス攻略ガイド。",
+    "kr": "보스 전략 가이드.",
+    "zh": "首领攻略指南",
+    "fr": "Guide de stratégie pour le Boss."
+  },
+  "icon": "T_DungeonArea_19",
+  "author": "Sevih",
+  "updated": "2025-05-26",
+  "order": 209,
+  "bossId": "4144004",
+  "dungeons": ["120911", "121910"]
+}

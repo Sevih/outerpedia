@@ -1,0 +1,22 @@
+{
+  "title": {
+    "en": "S3 Hard : Regina & Hilde",
+    "jp": "シーズン3(ハード) : レジーナ&ヒルデ",
+    "kr": "시즌 3 하드 : 레지나&자매",
+    "zh": "S3 困难：蕾吉娜&希尔德",
+    "fr": "S3 Hard : Regina & Hilde"
+  },
+  "description": {
+    "en": "Boss strategy guide.",
+    "jp": "ボス攻略ガイド。",
+    "kr": "보스 전략 가이드.",
+    "zh": "首领攻略指南",
+    "fr": "Guide de stratégie pour le Boss."
+  },
+  "icon": "T_DungeonArea_25",
+  "author": "Sevih",
+  "updated": "2025-05-26",
+  "order": 305,
+  "bossId": "4500293",
+  "dungeons": ["130513", "131510"]
+}

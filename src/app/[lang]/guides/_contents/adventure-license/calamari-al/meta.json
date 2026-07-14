@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Grand Calamari",
+    "jp": "グラン・カラマリー",
+    "kr": "그랑 칼라마리",
+    "zh": "五爪怪",
+    "fr": "Grand Calamari"
+  },
+  "description": {
+    "en": "Guide and advice to clear the Weekly Conquest - Grand Calamari",
+    "jp": "ウィークリー討伐 - グラン・カラマリー クリアガイドとアドバイス",
+    "kr": "주간토벌 - 그랑 칼라마리 클리어 가이드 및 조언",
+    "zh": "周常征服 - 巨型鱿鱼通关指南和建议",
+    "fr": "Guide et conseils pour réussir le Weekly Conquest — Grand Calamari"
+  },
+  "icon": "T_Licence_4034003",
+  "author": "Shiraen",
+  "updated": "2025-11-29",
+  "bossId": "51000023",
+  "group": "adventure_mission:70600011"
+}

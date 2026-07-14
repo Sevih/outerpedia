@@ -63,6 +63,9 @@ et le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
   équipement (armes/armures/amulettes/talismans/EE/sets), effets.
 - Editor : contenu curé (personnages, monstres, effets, items, équipement),
   éditeur de câblage des chips monstres, gestion guides / tags / gear-presets.
+- Tools · Données du jeu : lecteur des 257 tables brutes de `.gamedata/parsed`
+  (recherche et pagination au serveur, colonnes vides masquées, clés de texte
+  résolues en anglais, liens vers les tables référencées, JSON brut d'une ligne).
 
 **Assets & images**
 

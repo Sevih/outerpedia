@@ -1,0 +1,22 @@
+{
+  "title": {
+    "en": "S3 Hard : Ancient Foe",
+    "jp": "シーズン3(ハード) : 古代の宿敵",
+    "kr": "시즌 3 하드 : 고대의 숙적",
+    "zh": "S3 困难：远古宿敌",
+    "fr": "S3 Hard : Ancient Foe"
+  },
+  "description": {
+    "en": "Boss strategy guide.",
+    "jp": "ボス攻略ガイド。",
+    "kr": "보스 전략 가이드.",
+    "zh": "首领攻略指南",
+    "fr": "Guide de stratégie pour le Boss."
+  },
+  "icon": "T_DungeonArea_26",
+  "author": "Sevih",
+  "updated": "2025-05-26",
+  "order": 306,
+  "bossId": "4286026",
+  "dungeons": ["130615", "131610"]
+}

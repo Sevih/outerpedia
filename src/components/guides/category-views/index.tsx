@@ -14,6 +14,8 @@
  * STATIQUES : React interdit de fabriquer un composant pendant le rendu.
  */
 import DefaultGrid from './DefaultGrid';
+import AdventureSeasons from './AdventureSeasons';
+import AdventureLicense from './AdventureLicense';
 import BannerGrid from './BannerGrid';
 import IrregularChaseMap from './IrregularChaseMap';
 import TieredList from './TieredList';
@@ -38,6 +40,16 @@ export default function CategoryView(props: CategoryViewProps) {
     case 'world-boss':
     case 'joint-challenge':
       return <BannerGrid {...props} />;
+
+    // L'histoire : une section par saison (meta.order = saison × 100 + épisode),
+    // une carte par stage guidé — les boss restent derrière un toggle spoiler.
+    case 'adventure':
+      return <AdventureSeasons {...props} />;
+
+    // Galerie de cartes de licence en deux onglets (Weekly / Promotion) —
+    // les promotions sont des cartes-spoiler à retourner (icônes *_Lock/_Open).
+    case 'adventure-license':
+      return <AdventureLicense {...props} />;
 
     // Deux modes permanents sous une même catégorie : sections par mode, ordre
     // du jeu lu sur les combats désignés (meta.group — requis au scan).

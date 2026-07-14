@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Glicys",
+    "jp": "グリシス",
+    "kr": "글리시스",
+    "zh": "克里希丝",
+    "fr": "Glicys"
+  },
+  "description": {
+    "en": "Guide and advice to clear the Weekly Conquest - Glicys",
+    "jp": "ウィークリー討伐 - 氷の女王グリシス クリアガイドとアドバイス",
+    "kr": "주간토벌 - 얼음여왕 글리시스 클리어 가이드 및 조언",
+    "zh": "周常征服 - 冰雪女王格利西丝通关指南和建议",
+    "fr": "Guide et conseils pour réussir le Weekly Conquest — Glicys"
+  },
+  "icon": "T_Licence_4076001",
+  "author": "Shiraen",
+  "updated": "2025-11-29",
+  "bossId": "51000009",
+  "group": "adventure_mission:70600004"
+}

@@ -96,6 +96,7 @@ export default async function EditorMonsterPage({ params }: { params: Promise<{ 
           name: e.name.en,
           ...(e.icon ? { icon: e.icon } : {}),
           isDebuff: e.isDebuff,
+          ...(e.irremovable ? { irremovable: true } : {}),
         },
       ]),
   );

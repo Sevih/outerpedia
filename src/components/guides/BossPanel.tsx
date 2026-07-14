@@ -141,9 +141,22 @@ export async function BossCard({
     };
   }
 
+  // Un STAGE n'a pas de badge : il se dit. Le gabarit est déjà traduit dans les
+  // cinq langues (`guides.difficulty.stage` — celui du guild raid), et seul le
+  // serveur a le `t` : on l'appose ici, la glissière est cliente.
+  const scale = spawns.map((s) =>
+    s.stage ? { ...s, stageLabel: t('guides.difficulty.stage', { n: s.stage }) } : s,
+  );
+
   return (
-    <BossRankProvider spawns={spawns} followStages={followStages}>
-      <section className="space-y-4">
+    <BossRankProvider spawns={scale} followStages={followStages}>
+      {/* CONTENEUR de requêtes : la carte s'adapte à la place QU'ELLE A, pas à la
+          taille de l'écran. C'est la seule façon honnête de la rendre posable
+          n'importe où — `MonsterLineup` la met en pleine largeur, ou en demi
+          quand deux monstres se comparent côte à côte, et sur un grand écran un
+          `lg:` (qui mesure le VIEWPORT) laisserait la demi-carte étaler ses stats
+          sur une ligne prévue pour le double : elles s'écrasaient. */}
+      <section className="@container space-y-4">
         {/* EN-TÊTE : qui est ce boss — icône, nom, élément, classe, et son NIVEAU
             au palier courant. Le niveau se lit là parce que c'est là qu'on le
             cherche (le jeu l'écrit au même endroit) ; il suit la glissière, d'où

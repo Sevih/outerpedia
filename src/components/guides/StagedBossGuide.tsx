@@ -9,10 +9,14 @@ import {
   groupCombatants,
   type Encounter,
 } from '@/lib/data/encounters';
-import { stageLoot, type LootBadge, type StageLootGear } from '@/lib/data/rewards';
+import { lootDetails, stageLoot, type LootBadge, type StageLootGear } from '@/lib/data/rewards';
+import { getMonster, monsterDisplayNames, monsterIconSrc } from '@/lib/data/monsters';
 import { BossCard } from '@/components/guides/BossPanel';
+import { MonsterLineup } from '@/components/guides/MonsterLineup';
 import { InlineTooltip } from '@/components/inline/InlineTooltip';
 import { ItemInline } from '@/components/inline/ItemInline';
+import { LootPanel } from '@/components/guides/LootPanel';
+import { lootPanelLabels } from '@/components/guides/loot-labels';
 import {
   EncounterPane,
   EncounterSelection,
@@ -68,63 +72,54 @@ function stageIndexesIn(encounters: Encounter[], [from, to]: [number, number]): 
 }
 
 /**
- * Le butin LÉGENDAIRE du stage, en icônes — sets d'armure et familles d'armes /
- * accessoires uniques (cf. `stageLoot`), nom au survol, lien détail pour les
- * familles. Rien d'autre : l'or, l'exp et le filler sont du bruit, et un stage
- * qui ne droppe aucun unique n'affiche RIEN — c'est la réponse honnête.
+ * Le RÉSUMÉ du butin LÉGENDAIRE du stage, en icônes — sets d'armure et familles
+ * d'armes / accessoires uniques (cf. `stageLoot`), nom au survol, lien détail
+ * pour les familles. Rien d'autre : l'or, l'exp et le filler sont du bruit, et
+ * un stage qui ne droppe aucun unique n'affiche RIEN — c'est la réponse
+ * honnête. Le DÉTAIL de ces objets se déplie derrière « Details » (`LootPanel`).
  */
-function StageLootRow({
-  label,
+function StageLootIcons({
   pieceLabels,
   loot,
 }: {
-  label: string;
   /** Libellés « 2 set » / « 4 set » (localisés par l'appelant). */
   pieceLabels: Record<2 | 4, string>;
   loot: { sets: LootBadge[]; gear: StageLootGear[] };
 }) {
-  if (!loot.sets.length && !loot.gear.length) return null;
   return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-      <h3 className="text-content font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
-        {label}
-      </h3>
-      <div className="flex flex-wrap items-center gap-1.5">
-        {loot.sets.map((s) => (
-          <InlineTooltip
-            key={s.iconSrc}
-            content={
-              <div className="flex max-w-64 flex-col gap-1">
-                <span className="text-content-strong text-sm font-bold">{s.name}</span>
-                {/* Les bonus qu'on vient farmer — 2 et 4 pièces quand le set a
+    <div className="flex flex-wrap items-center gap-1.5">
+      {loot.sets.map((s) => (
+        <InlineTooltip
+          key={s.iconSrc}
+          content={
+            <div className="flex max-w-64 flex-col gap-1">
+              <span className="text-content-strong text-sm font-bold">{s.name}</span>
+              {/* Les bonus qu'on vient farmer — 2 et 4 pièces quand le set a
                     les deux, celui qu'il a sinon. */}
-                {s.effects?.map((e) => (
-                  <p key={e.pieces} className="text-content text-xs">
-                    <span className="text-content-strong font-semibold">
-                      {pieceLabels[e.pieces]}
-                    </span>{' '}
-                    {e.text}
-                  </p>
-                ))}
-              </div>
-            }
-          >
-            <button type="button" className="cursor-default align-middle">
-              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-              <img src={s.iconSrc} alt={s.name} className="h-8 w-8 object-contain" loading="lazy" />
-            </button>
-          </InlineTooltip>
-        ))}
-        {loot.gear.map((g) => (
-          <ItemInline
-            key={g.href}
-            iconOnly
-            size={28}
-            href={g.href}
-            item={{ name: g.name, iconSrc: g.iconSrc, grade: g.grade, desc: g.desc }}
-          />
-        ))}
-      </div>
+              {s.effects?.map((e) => (
+                <p key={e.pieces} className="text-content text-xs">
+                  <span className="text-content-strong font-semibold">{pieceLabels[e.pieces]}</span>{' '}
+                  {e.text}
+                </p>
+              ))}
+            </div>
+          }
+        >
+          <button type="button" className="cursor-default align-middle">
+            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
+            <img src={s.iconSrc} alt={s.name} className="h-8 w-8 object-contain" loading="lazy" />
+          </button>
+        </InlineTooltip>
+      ))}
+      {loot.gear.map((g) => (
+        <ItemInline
+          key={g.href}
+          iconOnly
+          size={28}
+          href={g.href}
+          item={{ name: g.name, iconSrc: g.iconSrc, grade: g.grade, desc: g.desc }}
+        />
+      ))}
     </div>
   );
 }
@@ -186,6 +181,24 @@ export async function StagedBossGuide({ lang, guide }: GuideContentProps) {
   // du bruit qu'on ne montre pas.
   const topReward = encounters[encounters.length - 1].ref.reward;
   const loot = topReward ? stageLoot(topReward, lang) : undefined;
+  // Le DÉTAIL du même pool : les MiniCards de l'équipement (cf. `lootDetails`),
+  // dépliées à la demande — les mêmes cartes que dans un build de perso.
+  const details = topReward ? lootDetails(topReward, lang) : undefined;
+  const lootLabels = lootPanelLabels(t);
+
+  // Noms et portraits des vignettes — désambiguïsés sur l'ENSEMBLE des
+  // combattants du combat (deux renforts homonymes donneraient deux vignettes
+  // identiques). La carte, elle, reste seule maîtresse de son propre en-tête.
+  const combatantNames = monsterDisplayNames(
+    combatants.map((c) => c.monsterId),
+    lang,
+  );
+  const combatantIcons = new Map(
+    combatants.map((c) => {
+      const m = getMonster(c.monsterId);
+      return [c.monsterId, m ? monsterIconSrc(m) : ''];
+    }),
+  );
 
   const levelWord = t('page.character.skill.level');
   const ticks = encounters.map((e, i) => String(e.ref.difficulty?.order ?? i + 1));
@@ -211,9 +224,20 @@ export async function StagedBossGuide({ lang, guide }: GuideContentProps) {
               La glissière de stage et le butin légendaire du stage vivent DANS
               la carte du boss PRINCIPAL, entre ses stats et ses compétences —
               exactement un principal est visible à chaque stage. */}
-          <div className="space-y-6">
-            {combatants.map((c) => (
-              <EncounterPane key={c.monsterId} indexes={c.stageIndexes}>
+          {/* La MÊME règle de rangement que partout ailleurs (`MonsterLineup`) :
+              boss d'abord, renforts ensuite, côte à côte à deux, en vignettes à
+              trois et plus. Ici la composition CHANGE d'un stage à l'autre — une
+              carte fusionnée ne vaut que pour les stages où son variant apparaît
+              (`stageIndexes`) : la rangée lit cette présence, elle ne décide de
+              rien. Le stage, lui, reste piloté par la glissière, et elle seule. */}
+          <MonsterLineup
+            addsLabel={t('guides.boss_display.add')}
+            items={combatants.map((c) => ({
+              role: c.role === 'add' ? ('add' as const) : ('boss' as const),
+              name: combatantNames.get(c.monsterId) ?? c.monsterId,
+              iconSrc: combatantIcons.get(c.monsterId) ?? '',
+              indexes: c.stageIndexes,
+              card: (
                 <BossCard
                   monsterId={c.monsterId}
                   spawns={c.spawns}
@@ -230,15 +254,20 @@ export async function StagedBossGuide({ lang, guide }: GuideContentProps) {
                           prevLabel={t('guides.difficulty.stage_prev')}
                           nextLabel={t('guides.difficulty.stage_next')}
                         />
-                        {loot && (
+                        {loot && details && (
                           <div className="min-w-0 flex-1">
-                            <StageLootRow
-                              label={t('guides.rewards.title')}
-                              pieceLabels={{
-                                2: t('equip.set.2piece'),
-                                4: t('equip.set.4piece'),
-                              }}
-                              loot={loot}
+                            <LootPanel
+                              icons={
+                                <StageLootIcons
+                                  pieceLabels={{
+                                    2: lootLabels.piece2,
+                                    4: lootLabels.piece4,
+                                  }}
+                                  loot={loot}
+                                />
+                              }
+                              details={details}
+                              labels={lootLabels}
                             />
                           </div>
                         )}
@@ -246,9 +275,9 @@ export async function StagedBossGuide({ lang, guide }: GuideContentProps) {
                     ) : undefined
                   }
                 />
-              </EncounterPane>
-            ))}
-          </div>
+              ),
+            }))}
+          />
 
           {tips && (
             <TacticalTips

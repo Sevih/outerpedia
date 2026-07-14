@@ -36,6 +36,8 @@ export interface EffectOption {
   name: string;
   icon?: string;
   isDebuff: boolean;
+  /** Variante indissipable (effet DISTINCT de la version normale). */
+  irremovable?: boolean;
 }
 
 /**
@@ -84,9 +86,36 @@ export function MonsterKitEditor({
   const displayCards = (c: KitChip): string[] =>
     (c.owner ? [c.owner] : c.defaultCards).filter((id) => !c.hiddenOn.includes(id));
 
+  // Libellés de recherche UNIQUES : des effets DISTINCTS partagent un nom —
+  // variante irremovable (Unbuffable 39/1039) ou natures opposées (Starving
+  // Devil buff/debuff). Une map nom→id nue laisserait le dernier homonyme
+  // écraser les autres (le + insérait toujours l'irremovable) et la datalist
+  // montrait deux options identiques. Les homonymes sont suffixés
+  // (« Unbuffable (irremovable, debuff) ») ; un reliquat de collision (même
+  // nom, même nature, même flag) porte son id.
+  const options = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const o of Object.values(catalog)) {
+      const k = o.name.toLowerCase();
+      counts.set(k, (counts.get(k) ?? 0) + 1);
+    }
+    const seen = new Set<string>();
+    return Object.values(catalog).map((o) => {
+      let label = o.name;
+      if ((counts.get(o.name.toLowerCase()) ?? 0) > 1) {
+        const tags = [o.irremovable ? 'irremovable' : null, o.isDebuff ? 'debuff' : 'buff'].filter(
+          (t): t is string => Boolean(t),
+        );
+        label = `${o.name} (${tags.join(', ')})`;
+      }
+      if (seen.has(label.toLowerCase())) label = `${label} [${o.id}]`;
+      seen.add(label.toLowerCase());
+      return { id: o.id, label };
+    });
+  }, [catalog]);
   const byName = useMemo(
-    () => new Map(Object.values(catalog).map((o) => [o.name.toLowerCase(), o.id])),
-    [catalog],
+    () => new Map(options.map((o) => [o.label.toLowerCase(), o.id])),
+    [options],
   );
 
   const moveChip = (buff: string, to: string) =>
@@ -180,8 +209,8 @@ export function MonsterKitEditor({
       </p>
 
       <datalist id="kit-editor-effects">
-        {Object.values(catalog).map((o) => (
-          <option key={o.id} value={o.name} />
+        {options.map((o) => (
+          <option key={o.id} value={o.label} />
         ))}
       </datalist>
 

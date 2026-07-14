@@ -1,0 +1,19 @@
+[
+  {
+    "slots": [
+      ["Kanon", "Holy Night's Blessing Dianne", "Vlada"],
+      ["Tamamo-no-Mae", "Eternal", "Christina"],
+      ["Maxie", "Bell Cranel"],
+      ["Aer", "Bryn"]
+    ],
+    "note": [
+      {
+        "en": "You can break the boss before enrage if you avoid applying debuffs between chains. But it works just fine while ignoring the WG.",
+        "jp": "チェーン間で弱体効果を付与しなければ、狂暴化前にブレイク可能。WGを無視しても問題なくクリアできます。",
+        "kr": "체인 사이에 약화 효과를 부여하지 않으면 광폭화 전에 브레이크 가능. WG를 무시해도 문제없이 클리어됩니다.",
+        "zh": "如果在连携之间不施加弱化效果，可以在狂暴化前击破。但无视WG也能顺利通关。",
+        "fr": "Vous pouvez le break avant l'enrage si vous évitez d'appliquer des debuffs entre les chains. Mais ça marche très bien aussi en ignorant la WG."
+      }
+    ]
+  }
+]

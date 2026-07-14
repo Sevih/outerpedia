@@ -1,0 +1,64 @@
+[
+  {
+    "title": {
+      "effect": "BT_DOT_CURSE"
+    },
+    "slots": [
+      ["Monad Eva"],
+      ["Kitsune of Eternity Tamamo-no-Mae", "Drakhan"],
+      ["Marian"],
+      ["Tamara"]
+    ],
+    "note": [
+      {
+        "en": "1 attempt. Verified up to stage 10.",
+        "jp": "1回の挑戦。ステージ10まで検証済み。",
+        "kr": "1회 도전. 스테이지 10까지 검증됨.",
+        "zh": "1次尝试。已验证至第10关。",
+        "fr": "1 tentative. Vérifié jusqu'au stage 10."
+      }
+    ]
+  },
+  {
+    "title": {
+      "effect": "BT_AGGRO"
+    },
+    "slots": [
+      ["Ember"],
+      ["Caren", "Roxie", "Beth", "Fatal"],
+      ["Rin", "Laplace", "Poolside Trickster Regina"],
+      ["Tamara"]
+    ],
+    "note": [
+      {
+        "en": "{P/Ember}'s self-inflicted {D/BT_MARKING} keeps S1 focused on her. {P/Tamara} should prevent S3 usage – S2 is harmless.",
+        "jp": "{P/Ember}の自己付与{D/BT_MARKING}でS1を自分に集中させる。{P/Tamara}でS3の使用を防ぐ – S2は無害。",
+        "kr": "{P/Ember}의 자가 부여 {D/BT_MARKING}로 S1을 자신에게 집중시킴. {P/Tamara}로 S3 사용을 방지 – S2는 무해함.",
+        "zh": "{P/Ember}的自我施加{D/BT_MARKING}将S1集中在自己身上。{P/Tamara}应阻止S3使用 – S2无害。",
+        "fr": "Le {D/BT_MARKING} auto-infligé de {P/Ember} garde le S1 focus sur elle. {P/Tamara} doit empêcher l'utilisation du S3 – le S2 est inoffensif."
+      }
+    ]
+  },
+  {
+    "title": {
+      "title": {
+        "en": "No Ranger"
+      }
+    },
+    "slots": [
+      ["Luna", "Summer Knight's Dream Ember", "Veronica"],
+      ["Fortuna"],
+      ["Rin", "Laplace", "Poolside Trickster Regina"],
+      ["Caren", "Roxie", "Beth", "Fatal"]
+    ],
+    "note": [
+      {
+        "en": "1-2 attempts. Verified up to stage 10.",
+        "jp": "1-2回の挑戦。ステージ10まで検証済み。",
+        "kr": "1-2회 도전. 스테이지 10까지 검증됨.",
+        "zh": "1-2次尝试。已验证至第10关。",
+        "fr": "1 à 2 tentatives. Vérifié jusqu'au stage 10."
+      }
+    ]
+  }
+]

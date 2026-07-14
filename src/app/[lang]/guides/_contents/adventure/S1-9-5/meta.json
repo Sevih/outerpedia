@@ -1,0 +1,23 @@
+{
+  "title": {
+    "en": "S1 Hard : Leo & Alpha",
+    "jp": "シーズン1(ハード) : レオ & アルファ",
+    "kr": "시즌 1 하드 : 레오 & 알파",
+    "zh": "S1 困难：雷欧 & 阿尔法",
+    "fr": "S1 Hard : Leo & Alpha"
+  },
+  "description": {
+    "en": "Boss strategy guide.",
+    "jp": "ボス攻略ガイド。",
+    "kr": "보스 전략 가이드.",
+    "zh": "首领攻略指南",
+    "fr": "Guide de stratégie pour le Boss."
+  },
+  "icon": "T_DungeonArea_09",
+  "author": "Sevih",
+  "updated": "2025-05-25",
+  "order": 109,
+  "bossId": "400401111",
+  "dungeons": ["110905"],
+  "monsters": ["400401111", "400401011"]
+}

@@ -1,0 +1,22 @@
+{
+  "title": {
+    "en": "S2 Hard : Demiurge Drakhan & Demiurge Vlada",
+    "jp": "シーズン2(ハード) : デミウルゴス ドレイカーン & デミウルゴス ヴラダ",
+    "kr": "시즌 2 Part1 하드 : 데미우르고스 드레이칸 & 데미우르고스 블라다",
+    "zh": "S2 困难：造物主德雷坎 & 造物主弗拉达",
+    "fr": "S2 Hard : Demiurge Drakhan & Demiurge Vlada"
+  },
+  "description": {
+    "en": "Boss strategy guide.",
+    "jp": "ボス攻略ガイド。",
+    "kr": "보스 전략 가이드.",
+    "zh": "首领攻略指南",
+    "fr": "Guide de stratégie pour le Boss."
+  },
+  "icon": "T_DungeonArea_20",
+  "author": "Sevih",
+  "updated": "2025-05-26",
+  "order": 210,
+  "bossId": "4500182",
+  "dungeons": ["121012", "122010"]
+}

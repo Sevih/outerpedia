@@ -1,0 +1,40 @@
+{
+  "intro": {
+    "en": "Betrayed Deshret punishes teams that use AoE skills. Bring single-target Fire DPS to overcome this challenge.",
+    "jp": "裏切られたデシュレトはAoEスキルを使うチームを罰するボスです。単体攻撃の火属性DPSで挑みましょう。",
+    "kr": "배신당한 데쉬렛은 광역 스킬을 사용하는 팀을 처벌하는 보스입니다. 단일 대상 화염 속성 딜러로 도전하세요.",
+    "zh": "被背叛的德舍雷特会惩罚使用群体技能的队伍。带上单体火属性输出角色来应对挑战。",
+    "fr": "Betrayed Deshret punit les équipes qui utilisent des skills AoE. Emmenez des DPS Fire en monocible pour relever le défi."
+  },
+  "tips": [
+    {
+      "en": "Use {E/Fire} characters and/or characters with non-AoE attacks.",
+      "jp": "{E/Fire}キャラクターや非AoE攻撃を持つキャラクターを使用しましょう。",
+      "kr": "{E/Fire} 캐릭터와/또는 비광역 공격을 가진 캐릭터를 사용하세요.",
+      "zh": "使用{E/Fire}角色和/或拥有非范围攻击的角色。",
+      "fr": "Utilisez des personnages {E/Fire} et/ou des personnages avec des attaques non-AoE."
+    }
+  ],
+  "recommended": [
+    {
+      "characters": ["Valentine"],
+      "reason": {
+        "en": "Strong {E/Fire} support (just avoid using S3).",
+        "jp": "強力な{E/Fire}サポート（S3の使用は避けましょう）。",
+        "kr": "강력한 {E/Fire} 서포터 (S3 사용은 피하세요).",
+        "zh": "强力{E/Fire}辅助（避免使用S3）。",
+        "fr": "Solide support {E/Fire} (évitez juste son S3)."
+      }
+    },
+    {
+      "characters": ["Aer", "Kanon"],
+      "reason": {
+        "en": "{E/Fire} DPS options.",
+        "jp": "{E/Fire}DPSオプション。",
+        "kr": "{E/Fire} 딜러 옵션.",
+        "zh": "{E/Fire}输出选择。",
+        "fr": "Options de DPS {E/Fire}."
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Planet Purification Unit Epsilon",
+    "jp": "イプシロン",
+    "kr": "엡실론",
+    "zh": "行星净化装置埃普西隆",
+    "fr": "Planet Purification Unit Epsilon"
+  },
+  "description": {
+    "en": "Guide and advice to clear the Weekly Conquest - Planet Purification Unit Epsilon",
+    "jp": "ウィークリー討伐 - イプシロン クリアガイドとアドバイス",
+    "kr": "주간토벌 - 엡실론 클리어 가이드 및 조언",
+    "zh": "周常征服 - 行星净化装置埃普西隆通关指南和建议",
+    "fr": "Guide et conseils pour réussir le Weekly Conquest — Planet Purification Unit Epsilon"
+  },
+  "icon": "T_Licence_4076015",
+  "author": "Shiraen",
+  "updated": "2025-11-29",
+  "bossId": "51000015",
+  "group": "adventure_mission:70600007"
+}

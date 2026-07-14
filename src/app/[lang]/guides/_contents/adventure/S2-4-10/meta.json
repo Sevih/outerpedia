@@ -1,0 +1,22 @@
+{
+  "title": {
+    "en": "S2 Hard : Astei & Sterope",
+    "jp": "シーズン2(ハード) : アステ&ステロペ",
+    "kr": "시즌 2 Part1 하드 : 아스테&스테로페",
+    "zh": "S2 困难：阿斯特&斯特洛佩",
+    "fr": "S2 Hard : Astei & Sterope"
+  },
+  "description": {
+    "en": "Boss strategy guide.",
+    "jp": "ボス攻略ガイド。",
+    "kr": "보스 전략 가이드.",
+    "zh": "首领攻略指南",
+    "fr": "Guide de stratégie pour le Boss."
+  },
+  "icon": "T_DungeonArea_14",
+  "author": "Sevih",
+  "updated": "2025-05-26",
+  "order": 204,
+  "bossId": "4500045",
+  "dungeons": ["120411", "121411"]
+}

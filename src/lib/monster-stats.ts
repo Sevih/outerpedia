@@ -31,6 +31,14 @@ export interface SpawnContext {
   label?: string;
   /** Nom du palier (« SSS », « E+ »…) quand la rencontre en a un. */
   rank?: string;
+  /**
+   * STAGE numéroté du palier (Adventure License) — l'autre façon dont un mode
+   * gradue son échelle. Un grade porte un badge, un stage porte un NUMÉRO : les
+   * deux s'excluent, et confondre les deux fabriquait un sprite qui n'existe pas.
+   */
+  stage?: number;
+  /** Le stage, LOCALISÉ (« Stage 8 ») — posé par le rendu, seul à avoir le `t`. */
+  stageLabel?: string;
   adv?: DungeonAdv;
   /** PV RÉELS du boss dans ce mode — remplacent l'interpolation du templet. */
   bossHp?: number;
@@ -53,13 +61,19 @@ export interface SpawnContext {
  */
 export function expandRankContexts(base: SpawnContext, ranks?: DungeonRank[]): SpawnContext[] {
   if (!ranks?.length) return [base];
-  return ranks.map((r, i) => {
+  return ranks.map((r) => {
     // Une tranche de dégâts = mode à SCORE = `r.hp` est une BARRE, pas des PV.
     const scored = r.damage !== undefined;
     return {
       ...base,
       level: r.level ?? base.level,
-      rank: r.name ?? `#${i + 1}`,
+      // Le palier porte le nom que le JEU lui donne — ou rien. Un « #3 » de
+      // repli était un faux grade : il partait dans le sprite du badge
+      // (`CM_Event_Rank_#3`, image morte) et NUMÉROTAIT l'échelle à la place de
+      // la donnée — le stage 8 d'Anubis s'affichait « #1 ». Une échelle sans
+      // grade se gradue par ses stages (`stage`), pas par un compteur.
+      rank: r.name,
+      ...(r.stage ? { stage: r.stage } : {}),
       adv: r.adv,
       bossHp: scored ? base.bossHp : (r.hp ?? base.bossHp),
       ...(scored && r.hp !== undefined ? { bar: r.hp } : {}),
@@ -181,7 +195,7 @@ export function dedupSpawnContexts(spawns: SpawnContext[]): SpawnContext[] {
   const seen = new Set<string>();
   return spawns
     .filter((s) => {
-      const key = `${s.level}|${s.rank ?? ''}|${JSON.stringify(s.adv ?? {})}|${s.bossHp ?? ''}|${s.bar ?? ''}`;
+      const key = `${s.level}|${s.rank ?? ''}|${s.stage ?? ''}|${JSON.stringify(s.adv ?? {})}|${s.bossHp ?? ''}|${s.bar ?? ''}`;
       if (seen.has(key)) return false;
       seen.add(key);
       return true;

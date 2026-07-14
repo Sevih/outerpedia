@@ -79,7 +79,10 @@ export default async function GuideCategoryPage({
   });
 
   return (
-    <div className="mx-auto max-w-7xl space-y-5 px-4 py-6">
+    // Même largeur que la V2 (max-w-6xl) : les vues de catégorie dimensionnent
+    // leurs cartes en % du conteneur (7 licences par rangée…) — l'élargir les
+    // grossit toutes d'autant.
+    <div className="mx-auto max-w-6xl space-y-5 px-4 py-6 md:px-6">
       <JsonLd data={crumbLd} />
       <JsonLd data={listLd} />
       <nav className="text-content-muted text-sm">

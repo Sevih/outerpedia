@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Ravenous Wolf King, Ziggsaron",
+    "jp": "餓狼王ジグサロン",
+    "kr": "아랑왕 지그사론",
+    "zh": "亚朗王吉葛萨隆",
+    "fr": "Ravenous Wolf King, Ziggsaron"
+  },
+  "description": {
+    "en": "Guide and advice to clear the Weekly Conquest - Ravenous Wolf King, Ziggsaron",
+    "jp": "ウィークリー討伐 - 餓狼王ジグサロン クリアガイドとアドバイス",
+    "kr": "주간토벌 - 아랑왕 지그사론 클리어 가이드 및 조언",
+    "zh": "周常征服 - 饿狼王吉格萨隆通关指南和建议",
+    "fr": "Guide et conseils pour réussir le Weekly Conquest — Ravenous Wolf King, Ziggsaron"
+  },
+  "icon": "T_Licence_4079001",
+  "author": "Shiraen",
+  "updated": "2025-11-29",
+  "bossId": "51000034",
+  "group": "adventure_mission:70600019"
+}

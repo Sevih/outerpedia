@@ -1,0 +1,39 @@
+[
+  {
+    "title": {
+      "character": "Kitsune of Eternity Tamamo-no-Mae"
+    },
+    "slots": [["Kitsune of Eternity Tamamo-no-Mae"], ["Dianne"]],
+    "note": [
+      {
+        "en": "6★ ETamamo required.",
+        "jp": "6★ ETamamo必須。",
+        "kr": "6★ ETamamo 필수.",
+        "zh": "需要6★ ETamamo。",
+        "fr": "ETamamo 6★ requise."
+      }
+    ]
+  },
+  {
+    "title": {
+      "title": {
+        "en": "Rhona Chain Strategy"
+      }
+    },
+    "slots": [
+      ["Rhona", "Gnosis Nella", "Kitsune of Eternity Tamamo-no-Mae"],
+      ["Kappa", "Fran"],
+      ["Ame", "Noa"],
+      ["Rey", "Ryu Lion"]
+    ],
+    "note": [
+      {
+        "en": "Make the unit with {B/HEAVY_STRIKE} just a bit faster than the boss.",
+        "jp": "{B/HEAVY_STRIKE}持ちのユニットをボスより少し速くする。",
+        "kr": "{B/HEAVY_STRIKE}를 가진 유닛을 보스보다 약간 빠르게 만드세요.",
+        "zh": "让拥有{B/HEAVY_STRIKE}的单位比首领稍快一点。",
+        "fr": "Rendez l'unité avec {B/HEAVY_STRIKE} juste un peu plus rapide que le boss."
+      }
+    ]
+  }
+]
