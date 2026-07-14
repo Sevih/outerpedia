@@ -40,7 +40,7 @@
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.18",
     "next": "16.2.10",
-    "react": "19.2.3",
+    "react": "19.2.7",
     "react-dom": "19.2.3"
   },
   "devDependencies": {
