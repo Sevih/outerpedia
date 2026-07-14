@@ -5,7 +5,8 @@
  * du nouveau (ou `--force`). Sinon on saute toute la chaîne.
  *
  *   pull (si LDPlayer + diff)
- *     └─ si tiré : extract → convert → build → promote[ --apply] → [collect]
+ *     └─ si tiré : extract → convert → face-layout(py) → build →
+ *        promote[ --apply] → [collect]
  *   [getNews]  ← optionnel (fetch web, indépendant du datamine)
  *
  * Deux points d'entrée partagent ce module (plus de logique dupliquée) :
@@ -31,6 +32,19 @@ const STAMP = resolve('.gamedata/.refresh-stamp');
 function step(label: string, file: string, args: string[] = []): void {
   console.log(`\n▶ ${label}`);
   execFileSync(process.execPath, [TSX_CLI, resolve(file), ...args], { stdio: 'inherit' });
+}
+
+/**
+ * Étape PYTHON — la seule du projet (extract-face-layout, cf. datagen/README) :
+ * lit les prefabs FaceIcon des bundles pullés → face-icon-layout.json
+ * (committé). Sans elle, collect ne peut pas produire les FI_ des nouveaux
+ * persos/skins, et il fallait relancer dev à la main après l'avoir jouée.
+ * Locale par construction : ce code ne s'exécute que si `.gamedata` existe
+ * (la machine de datamine), jamais en CI.
+ */
+function pyStep(label: string, file: string): void {
+  console.log(`\n▶ ${label}`);
+  execFileSync('python', [resolve(file)], { stdio: 'inherit' });
 }
 
 /**
@@ -109,6 +123,10 @@ export async function refresh(opts: RefreshOptions = {}): Promise<void> {
     }
     step('extract  (.bytes + images)', 'datagen/extract/extract.ts');
     step('convert  (.bytes → templates)', 'datagen/templates/convert.ts');
+    pyStep(
+      'face-layout (prefabs → face-icon-layout.json)',
+      'datagen/assets/extract-face-layout.py',
+    );
     step('build    (générateurs → data/extracted)', 'datagen/build.ts');
     step(
       apply ? 'promote  (extracted → generated)' : 'promote  (revue du diff — dry-run)',

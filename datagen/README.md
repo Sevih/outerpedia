@@ -74,9 +74,12 @@ exception** au « tout-TS ». Il lit les **typetrees RectTransform** d'un prefab
 via **UnityPy** — même domaine spécialisé que l'extracteur .NET de la couche 0, donc
 **délibérément non réécrit en TS**. Il est :
 
-- **local & rare** : relancé à la main seulement quand les face icons changent ;
-- **hors de tout chemin automatisé** : absent du build, de la CI et du flux `refresh`
-  (`pnpm dev` / `datagen:patch`) ;
+- **local** : joué automatiquement par le flux `refresh` (`pnpm dev` /
+  `datagen:patch`) entre convert et build — uniquement sur la machine de
+  datamine (le refresh ne génère que si `.gamedata` existe) ; relançable seul
+  via `pnpm datagen:face-layout`. Depuis le 2026-07-14 : avant, il fallait le
+  jouer à la main puis relancer dev pour produire les FI_ des nouveaux persos ;
+- **absent du build et de la CI** ;
 - **borné à un JSON committé** : sa sortie `datagen/assets/face-icon-layout.json` est
   versionnée et c'est ce que lit `datagen/assets/face-icon.ts`. **Le serveur/build ne
   touche jamais Python** — d'où « aucun python _dans le build_ », qui reste vrai.

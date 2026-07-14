@@ -650,6 +650,9 @@ export function modeTitleKey(rawMode: string): string | undefined {
  * mêmes tables (elles-mêmes cachées par `loadTable`).
  */
 let cache: { data: EncountersData; stamp: string } | undefined;
+// Signature des lacunes de butin au dernier signalement : un rebuild du cache
+// (fréquent dans l'admin) ne re-signale que si la LISTE a changé.
+let lastRewardGapsSig: string | undefined;
 
 export function buildEncounters(): EncountersData {
   const stamp = encountersStamp();
@@ -764,21 +767,18 @@ export function buildEncounters(): EncountersData {
   const rewardById = indexBy(loadTable('RewardTemplet'));
   const rewardGroups = groupBy(loadTable('RewardGroupTemplet'), 'GroupID');
   const rewardTables: Record<string, RewardTable> = {};
-  // Récompenses non résolues : SIGNALÉES (une fois par id) plutôt que tues —
-  // mais jamais de throw : la donnée réelle peut être lacunaire (RewardID
-  // orphelin, ligne de groupe incomplète) sans invalider le reste du build.
-  const warnedRewards = new Set<string>();
-  const warnRewardOnce = (key: string, msg: string): void => {
-    if (warnedRewards.has(key)) return;
-    warnedRewards.add(key);
-    console.warn(`⚠ encounters : ${msg}`);
-  };
+  // Récompenses non résolues : SIGNALÉES en UNE ligne agrégée en fin de build
+  // (38 lignes par rebuild spammaient chaque requête admin) — mais jamais de
+  // throw : la donnée réelle peut être lacunaire (RewardID orphelin, ligne de
+  // groupe incomplète) sans invalider le reste du build.
+  const missingRewardIds = new Set<string>();
+  const typelessGroups = new Set<string>();
   const resolveReward = (id: string | undefined): string | undefined => {
     if (!id) return undefined;
     if (rewardTables[id]) return id;
     const r = rewardById.get(id);
     if (!r) {
-      warnRewardOnce(id, `RewardID ${id} absent de RewardTemplet — récompense ignorée.`);
+      missingRewardIds.add(id);
       return undefined;
     }
     const table: RewardTable = {};
@@ -792,10 +792,7 @@ export function buildEncounters(): EncountersData {
       for (const gid of splitCsv(groupCsv ?? '')) {
         for (const g of rewardGroups.get(gid) ?? []) {
           if (!g.TypeID) {
-            warnRewardOnce(
-              `group:${gid}`,
-              `ligne de RewardGroup ${gid} sans TypeID — entrée de butin ignorée.`,
-            );
+            typelessGroups.add(gid);
             continue;
           }
           entries.push({
@@ -1325,6 +1322,27 @@ export function buildEncounters(): EncountersData {
       }
     }
   }
+
+  // Lacunes de butin : UNE ligne agrégée, seulement quand la liste change.
+  const gapsSig =
+    [...missingRewardIds].sort().join(',') + '§' + [...typelessGroups].sort().join(',');
+  if (gapsSig !== '§' && gapsSig !== lastRewardGapsSig) {
+    const span = (s: Set<string>) => {
+      const ids = [...s].sort();
+      return ids.length > 3 ? `${ids[0]}…${ids[ids.length - 1]}` : ids.join(', ');
+    };
+    const parts: string[] = [];
+    if (typelessGroups.size)
+      parts.push(
+        `${typelessGroups.size} ligne(s) de RewardGroup sans TypeID (${span(typelessGroups)})`,
+      );
+    if (missingRewardIds.size)
+      parts.push(
+        `${missingRewardIds.size} RewardID absent(s) de RewardTemplet (${span(missingRewardIds)})`,
+      );
+    console.warn(`⚠ encounters : butin partiellement ignoré — ${parts.join(' ; ')}.`);
+  }
+  lastRewardGapsSig = gapsSig;
 
   cache = {
     data: { modes, rankOptions, bossQuirkMods, rewardTables, geas, dungeons, monsters },
