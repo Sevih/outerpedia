@@ -330,8 +330,13 @@ export function monsterSkillViews(
     }
   }
 
-  const chipsOf = (s: Skill): ClientEffect[] => {
-    const hidden = new Set(curated.chipHide?.[s.id] ?? []);
+  // `cardId` = la carte où ces chips S'AFFICHENT, et donc celle dont le
+  // `chipHide` s'applique. Il diffère du skill porteur quand les chips d'un
+  // rage_finish sont fusionnées dans la carte de son enter : le curateur pose
+  // le masquage là où il VOIT la chip (l'enter — Vladi Max 4044004 y masque
+  // ses gains d'AP/CP), pas sur le skill technique qui la porte.
+  const chipsOf = (s: Skill, cardId: string = s.id): ClientEffect[] => {
+    const hidden = new Set(curated.chipHide?.[cardId] ?? []);
     const own = (s.effects ?? []).filter((e) => !isWg(e) && !movedFrom.get(s.id)?.has(e));
     return [...own, ...(extraOf.get(s.id) ?? [])]
       .filter((e) => !e.buff || !hidden.has(e.buff))
@@ -389,7 +394,9 @@ export function monsterSkillViews(
     const enterMatch = /^rage_enter(\d*)$/.exec(s.type);
     if (enterMatch) {
       const finish = skills.find((t) => t.type === `rage_finish${enterMatch[1]}`);
-      if (finish && !standsAlone(finish, s)) effects = [...effects, ...chipsOf(finish)];
+      // Chips du finish rendues SUR la carte enter → le chipHide de l'enter
+      // (la carte visible) les gouverne.
+      if (finish && !standsAlone(finish, s)) effects = [...effects, ...chipsOf(finish, s.id)];
     }
     // Chips CURÉES en plus (chipAdd) : statuts décrits par la desc mais
     // appliqués hors kit — seules les réfs résolubles passent.
