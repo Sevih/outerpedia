@@ -1330,6 +1330,113 @@
         "materials": 150,
         "price": 10000
       }
+    ],
+    "2000121": [
+      {
+        "star": 3,
+        "hp": 100,
+        "atk": 100,
+        "def": 100,
+        "skillLevel": 1,
+        "burst2": true,
+        "burst3": false,
+        "wgDmg": false,
+        "starPlus": 0,
+        "showStar": 3,
+        "starColor": "yellow",
+        "materials": 250,
+        "price": 0
+      },
+      {
+        "star": 4,
+        "hp": 160,
+        "atk": 160,
+        "def": 160,
+        "skillLevel": 2,
+        "burst2": true,
+        "burst3": false,
+        "wgDmg": true,
+        "starPlus": 0,
+        "showStar": 4,
+        "starColor": "yellow",
+        "materials": 150,
+        "price": 10000
+      },
+      {
+        "star": 5,
+        "hp": 190,
+        "atk": 190,
+        "def": 190,
+        "skillLevel": 2,
+        "burst2": true,
+        "burst3": false,
+        "wgDmg": true,
+        "starPlus": 1,
+        "showStar": 4,
+        "starColor": "orange",
+        "materials": 150,
+        "price": 10000
+      },
+      {
+        "star": 6,
+        "hp": 220,
+        "atk": 220,
+        "def": 220,
+        "skillLevel": 3,
+        "burst2": true,
+        "burst3": true,
+        "wgDmg": true,
+        "starPlus": 0,
+        "showStar": 5,
+        "starColor": "yellow",
+        "materials": 150,
+        "price": 10000
+      },
+      {
+        "star": 7,
+        "hp": 250,
+        "atk": 250,
+        "def": 250,
+        "skillLevel": 3,
+        "burst2": true,
+        "burst3": true,
+        "wgDmg": true,
+        "starPlus": 1,
+        "showStar": 5,
+        "starColor": "red",
+        "materials": 150,
+        "price": 10000
+      },
+      {
+        "star": 8,
+        "hp": 280,
+        "atk": 280,
+        "def": 280,
+        "skillLevel": 3,
+        "burst2": true,
+        "burst3": true,
+        "wgDmg": true,
+        "starPlus": 2,
+        "showStar": 5,
+        "starColor": "violet",
+        "materials": 150,
+        "price": 10000
+      },
+      {
+        "star": 9,
+        "hp": 300,
+        "atk": 300,
+        "def": 300,
+        "skillLevel": 4,
+        "burst2": true,
+        "burst3": true,
+        "wgDmg": true,
+        "starPlus": 0,
+        "showStar": 6,
+        "starColor": "yellow",
+        "materials": 150,
+        "price": 10000
+      }
     ]
   }
 }

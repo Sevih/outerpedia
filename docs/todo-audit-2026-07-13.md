@@ -27,7 +27,7 @@ Passe de fix massive (4 chantiers parallèles). **Fait** — les items ci-dessou
 - [ ] `LOCK_SCREEN_OVERRIDES` (unlock-content) : trier vrai-override vs motif dérivable → décision Sevih.
 - [ ] `CHASE_TITLE_KEY` (sources.ts) reste en dur : le résolveur donnerait `SYS_IRR_CHASE_NAME_01` ≠ choix éditorial actuel `SYS_IRREGULAR_EXTERMINATION` → soit assumer en curation mode-titles, soit garder.
 - [ ] Convention `_doc` des curés : vérifier d'abord que chaque lecteur tolère la clé.
-- [ ] `effect-families.json` vide : seed réel ou suppression.
+- [x] `effect-families.json` — seedé le 14/07 : les 8 résidents assumés de `special` actés (le warning du build ne signale plus que les vrais nouveaux types).
 - [ ] `loadColumns`/`getMaxLevel`/`resolvePlaceholders` : API de lib gardées volontairement (documentées, testées) malgré zéro appelant prod.
 - [ ] Boucle « collecter les skills d'une entité » encore répétée dans integrate.ts (atténuée par le refactor testable).
 - [x] Caches dérivés (glossaryCache/mechanicLabelCache/titleCtx/encounters/curated effects) — réglé le 14/07 soir : empreinte mtime (`tablesStamp`/`fileStamp`, sentinelle TextSystem + mode-titles.json, TTL 2 s en boucle chaude) ; `loadTable` sert la copie en cache si le fichier disparaît pendant un refresh concurrent.

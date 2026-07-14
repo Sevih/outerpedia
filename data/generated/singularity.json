@@ -78,10 +78,10 @@
         },
         {
           "order": 1,
-          "dungeon": "75000106",
-          "monsters": ["60000006"],
-          "thumbnail": "MT_Singularity_4044008",
-          "banner": "T_Singularity_4044008"
+          "dungeon": "75000104",
+          "monsters": ["60000004"],
+          "thumbnail": "MT_Singularity_4076005",
+          "banner": "T_Singularity_4076005"
         },
         {
           "order": 2,
@@ -213,10 +213,10 @@
         },
         {
           "order": 1,
-          "dungeon": "75000105",
-          "monsters": ["60000005"],
-          "thumbnail": "MT_Singularity_4086020",
-          "banner": "T_Singularity_4086020"
+          "dungeon": "75000104",
+          "monsters": ["60000004"],
+          "thumbnail": "MT_Singularity_4076005",
+          "banner": "T_Singularity_4076005"
         },
         {
           "order": 2,

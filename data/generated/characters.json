@@ -9568,7 +9568,7 @@
     "recommendedSets": ["1", "3", "7"],
     "ignoreDefense": ["kit", "ee"],
     "tags": ["ignore-defense"],
-    "appearances": ["2010089"],
+    "appearances": ["2010089", "2020089"],
     "costumes": [
       {
         "id": "57",
@@ -9583,6 +9583,22 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
+        "fusionModel": "0",
+        "art": true
+      },
+      {
+        "id": "100",
+        "model": "2020089",
+        "name": {
+          "en": "First Summer Vacation Caren",
+          "jp": "人生初のバカンス・カレン",
+          "kr": "생애 첫 휴가 카렌",
+          "zh": "人生首次假期 卡伦"
+        },
+        "icon": "TI_Costume_Clothes_2000089_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "battlepass",
         "fusionModel": "0",
         "art": true
       }
@@ -11387,7 +11403,7 @@
     },
     "ee": "2000108",
     "recommendedSets": ["3", "13", "9"],
-    "appearances": ["2010108"],
+    "appearances": ["2010108", "2020108"],
     "costumes": [
       {
         "id": "75",
@@ -11402,6 +11418,22 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
+        "fusionModel": "0",
+        "art": true
+      },
+      {
+        "id": "99",
+        "model": "2020108",
+        "name": {
+          "en": "Beachside Poisonflower Viella",
+          "jp": "海辺の猛毒草・ビエラ",
+          "kr": "해변가의 맹독초 비엘라",
+          "zh": "海滩毒草 比埃拉"
+        },
+        "icon": "TI_Costume_Clothes_2000108_03",
+        "grade": "rare",
+        "sort": 2,
+        "source": "event_shop",
         "fusionModel": "0",
         "art": true
       }
@@ -11708,7 +11740,7 @@
     "recommendedSets": ["13", "3", "5"],
     "ignoreDefense": ["kit"],
     "tags": ["premium", "ignore-defense"],
-    "appearances": ["2010111"],
+    "appearances": ["2010111", "2020111"],
     "costumes": [
       {
         "id": "84",
@@ -11723,6 +11755,21 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
+        "fusionModel": "0",
+        "art": true
+      },
+      {
+        "id": "101",
+        "model": "2020111",
+        "name": {
+          "en": "Never-Ending Summer Iota",
+          "jp": "沈まない夏・イオータ",
+          "kr": "저물지 않는 여름 요타",
+          "zh": "不落的夏日 佑妲"
+        },
+        "icon": "TI_Costume_Clothes_2000111_03",
+        "grade": "rare",
+        "sort": 2,
         "fusionModel": "0",
         "art": true
       }
@@ -12185,7 +12232,7 @@
         "icon": "TI_Costume_Clothes_2000116_02",
         "grade": "rare",
         "sort": 1,
-        "source": "battlepass",
+        "source": "shop",
         "fusionModel": "0",
         "art": true
       }
@@ -12422,7 +12469,118 @@
     "ee": "2000119",
     "recommendedSets": ["1", "12", "13"],
     "ignoreDefense": ["kit", "transcend"],
-    "tags": ["premium", "ignore-defense"]
+    "tags": ["premium", "ignore-defense"],
+    "appearances": ["2010119", "2010120"],
+    "costumes": [
+      {
+        "id": "96",
+        "model": "2010119",
+        "name": {
+          "en": "Round-the-Clock Tourist Luna",
+          "jp": "昼夜なき観光客・ルナ",
+          "kr": "밤낮 없는 관광객  루나",
+          "zh": "不分昼夜的游客 露娜"
+        },
+        "icon": "TI_Costume_Clothes_2000119_02",
+        "grade": "rare",
+        "sort": 1,
+        "fusionModel": "0",
+        "art": true
+      }
+    ]
+  },
+  "2000121": {
+    "id": "2000121",
+    "name": {
+      "en": "Delta",
+      "jp": "デルタ",
+      "kr": "델타",
+      "zh": "德尔塔"
+    },
+    "rarity": 3,
+    "element": "earth",
+    "class": "ranger",
+    "race": "demon",
+    "icon": "2000121",
+    "skills": [
+      "12101",
+      "12102",
+      "12103",
+      "12104",
+      "12105",
+      "12106",
+      "12108",
+      "12109",
+      "12110",
+      "12119",
+      "12120",
+      "12121",
+      "3"
+    ],
+    "stats": {
+      "hp": {
+        "min": 476,
+        "max": 3251
+      },
+      "atk": {
+        "min": 74,
+        "max": 744
+      },
+      "def": {
+        "min": 27,
+        "max": 278
+      },
+      "speed": {
+        "min": 138,
+        "max": 138
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 50
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "buff_chance": {
+        "min": 10,
+        "max": 10
+      },
+      "buff_resist": {
+        "min": 11,
+        "max": 110
+      }
+    },
+    "nickname": {
+      "en": "Heatwave Cop",
+      "jp": "真夏のポリス",
+      "kr": "히트 웨이브 캅",
+      "zh": "热浪警官"
+    },
+    "showNickName": true,
+    "subClass": "vanguard",
+    "chainType": "join",
+    "gift": "present_02",
+    "voiceActor": {
+      "en": "Risa Mei",
+      "jp": "井上ほの花",
+      "kr": "김채린",
+      "zh": ""
+    },
+    "profile": {
+      "birthday": "05/30",
+      "height": 166,
+      "story": {
+        "en": "What exactly happened in Neo Iota City?\\n<Color=#FFBF00>Delta</Color> has always had a habit of doing odd things, but lately, she seems completely absorbed in pretending to be a police officer from fiction.\\nIt can be rather troublesome when she starts firing water guns at the Ark's facilities, but thanks to her, the atmosphere aboard the Ark has grown much brighter. So much so that even I, unable to step outside, can feel the heat of summer on my skin.\\n\\nSo, just this once, I'll let it slide. That [artificial beach] you and Delta secretly created, I mean. Hehe… hehehe……",
+        "jp": "一体、ネオ・イオータシティで何があったのでしょうか?\\n普段から突拍子もない行動が多い<Color=#FFBF00>デルタ</Color>ですが、最近は創作物に出てくる警察の真似事にすっかりハマっているようですね。\\nたまに設備に水鉄砲を撃ってくるので困ってはいるのですが……それでも彼女のおかげでアークの雰囲気がとても明るくなりました。外に出られない私でさえ、夏の熱気を肌で感じられるほどに、です。\\n\\nですから、今回だけは大目に見てあげますよ。あなたとデルタがこっそり作ったという、【人工ビーチ】の件は。 フフ、フフフ……",
+        "kr": "대체, 네오 요타시티에서 무슨 일이 있었던 걸까요?\\n평소에도 엉뚱한 행동을 자주 하는 <Color=#FFBF00>델타</Color>입니다만, 요즘에는 창작물 속 경찰 흉내에 푹 빠진 것 같네요. \\n가끔 설비에 물총을 쏴서 곤란하긴 하지만...... 그래도 그녀 덕분에 방주의 분위기가 크게 밝아졌답니다. 밖을 나가지 못하는 저도 여름의 열기를 피부로 느낄 정도로 말이죠.\\n\\n그러니 이번 한 번만 봐드릴게요. 당신과 델타가 몰래 만든 그, [인공 해변] 말이에요. 후후, 후후후......",
+        "zh": "到底，尼奥佑妲市发生了什么事呢？\\n平时就经常做出离谱行为的<Color=#FFBF00>德尔塔</Color>，最近似乎迷上了模仿作品中的警察。\\n虽然偶尔会用水枪喷设备，有点让人头疼……但多亏了她，方舟的氛围确实变得明亮了许多。连无法外出的我，都能切身感受到夏日的炎热。\\n\\n所以这次就破例睁一只眼闭一只眼吧。就是你和德尔塔偷偷搞的那个——[人工海滩]。呵呵，呵呵呵……"
+      }
+    },
+    "ee": "2000121",
+    "recommendedSets": ["13", "1", "7"],
+    "ignoreDefense": ["kit", "ee"],
+    "tags": ["seasonal", "ignore-defense"]
   },
   "2700003": {
     "id": "2700003",

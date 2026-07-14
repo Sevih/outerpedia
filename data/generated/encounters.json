@@ -81307,7 +81307,642 @@
       "atk": -280,
       "def": 500,
       "spd": 300
-    }
+    },
+    "ranks": [
+      {
+        "name": "E",
+        "level": 100,
+        "transLevel": 100,
+        "hp": 100000,
+        "damage": {
+          "min": 1,
+          "max": 100000
+        },
+        "adv": {
+          "atk": -280,
+          "def": 500,
+          "spd": 300
+        }
+      },
+      {
+        "name": "E+",
+        "level": 103,
+        "transLevel": 103,
+        "hp": 50000,
+        "damage": {
+          "min": 100001,
+          "max": 150000
+        },
+        "adv": {
+          "atk": -278,
+          "def": 490,
+          "spd": 295
+        }
+      },
+      {
+        "name": "E++",
+        "level": 106,
+        "transLevel": 106,
+        "hp": 50000,
+        "damage": {
+          "min": 150001,
+          "max": 200000
+        },
+        "adv": {
+          "atk": -276,
+          "def": 480,
+          "spd": 290
+        }
+      },
+      {
+        "name": "D",
+        "level": 109,
+        "transLevel": 109,
+        "hp": 50000,
+        "damage": {
+          "min": 200001,
+          "max": 250000
+        },
+        "adv": {
+          "atk": -274,
+          "def": 470,
+          "spd": 285
+        },
+        "options": ["Singularity_Passive_Dmg_up_d", "Singularity_Passive_Dmg_down_d"]
+      },
+      {
+        "name": "D+",
+        "level": 112,
+        "transLevel": 112,
+        "hp": 50000,
+        "damage": {
+          "min": 250001,
+          "max": 300000
+        },
+        "adv": {
+          "atk": -272,
+          "def": 460,
+          "spd": 280
+        },
+        "options": ["Singularity_Passive_Dmg_up_d", "Singularity_Passive_Dmg_down_d"]
+      },
+      {
+        "name": "D++",
+        "level": 115,
+        "transLevel": 115,
+        "hp": 50000,
+        "damage": {
+          "min": 300001,
+          "max": 350000
+        },
+        "adv": {
+          "atk": -270,
+          "def": 450,
+          "spd": 275
+        },
+        "options": ["Singularity_Passive_Dmg_up_d", "Singularity_Passive_Dmg_down_d"]
+      },
+      {
+        "name": "C",
+        "level": 118,
+        "transLevel": 118,
+        "hp": 50000,
+        "damage": {
+          "min": 350001,
+          "max": 400000
+        },
+        "adv": {
+          "atk": -268,
+          "def": 440,
+          "spd": 270
+        },
+        "options": ["Singularity_Passive_Dmg_up_c", "Singularity_Passive_Dmg_down_c"]
+      },
+      {
+        "name": "C+",
+        "level": 121,
+        "transLevel": 121,
+        "hp": 50000,
+        "damage": {
+          "min": 400001,
+          "max": 450000
+        },
+        "adv": {
+          "atk": -266,
+          "def": 430,
+          "spd": 265
+        },
+        "options": ["Singularity_Passive_Dmg_up_c", "Singularity_Passive_Dmg_down_c"]
+      },
+      {
+        "name": "C++",
+        "level": 124,
+        "transLevel": 124,
+        "hp": 50000,
+        "damage": {
+          "min": 450001,
+          "max": 500000
+        },
+        "adv": {
+          "atk": -264,
+          "def": 420,
+          "spd": 260
+        },
+        "options": ["Singularity_Passive_Dmg_up_c", "Singularity_Passive_Dmg_down_c"]
+      },
+      {
+        "name": "B",
+        "level": 127,
+        "transLevel": 127,
+        "hp": 50000,
+        "damage": {
+          "min": 500001,
+          "max": 550000
+        },
+        "adv": {
+          "atk": -262,
+          "def": 410,
+          "spd": 255
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_c",
+          "Singularity_Passive_Dmg_down_c"
+        ]
+      },
+      {
+        "name": "B+",
+        "level": 130,
+        "transLevel": 130,
+        "hp": 50000,
+        "damage": {
+          "min": 550001,
+          "max": 600000
+        },
+        "adv": {
+          "atk": -260,
+          "def": 400,
+          "spd": 250
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_c",
+          "Singularity_Passive_Dmg_down_c"
+        ]
+      },
+      {
+        "name": "B++",
+        "level": 133,
+        "transLevel": 133,
+        "hp": 50000,
+        "damage": {
+          "min": 600001,
+          "max": 650000
+        },
+        "adv": {
+          "atk": -258,
+          "def": 390,
+          "spd": 245
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_c",
+          "Singularity_Passive_Dmg_down_c"
+        ]
+      },
+      {
+        "name": "A",
+        "level": 136,
+        "transLevel": 136,
+        "hp": 50000,
+        "damage": {
+          "min": 650001,
+          "max": 700000
+        },
+        "adv": {
+          "atk": -256,
+          "def": 380,
+          "spd": 240
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_a",
+          "Singularity_Passive_Dmg_down_a"
+        ]
+      },
+      {
+        "name": "A+",
+        "level": 139,
+        "transLevel": 139,
+        "hp": 100000,
+        "damage": {
+          "min": 700001,
+          "max": 800000
+        },
+        "adv": {
+          "atk": -254,
+          "def": 370,
+          "spd": 235
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_a",
+          "Singularity_Passive_Dmg_down_a"
+        ]
+      },
+      {
+        "name": "A++",
+        "level": 142,
+        "transLevel": 142,
+        "hp": 100000,
+        "damage": {
+          "min": 800001,
+          "max": 900000
+        },
+        "adv": {
+          "atk": -252,
+          "def": 360,
+          "spd": 230
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_a",
+          "Singularity_Passive_Dmg_down_a"
+        ]
+      },
+      {
+        "name": "AA",
+        "level": 145,
+        "transLevel": 145,
+        "hp": 100000,
+        "damage": {
+          "min": 900001,
+          "max": 1000000
+        },
+        "adv": {
+          "atk": -250,
+          "def": 350,
+          "spd": 225
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_aa",
+          "Singularity_Passive_Dmg_down_aa"
+        ]
+      },
+      {
+        "name": "AA+",
+        "level": 148,
+        "transLevel": 148,
+        "hp": 150000,
+        "damage": {
+          "min": 1000001,
+          "max": 1150000
+        },
+        "adv": {
+          "atk": -248,
+          "def": 340,
+          "spd": 220
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_aa",
+          "Singularity_Passive_Dmg_down_aa"
+        ]
+      },
+      {
+        "name": "AA++",
+        "level": 151,
+        "transLevel": 151,
+        "hp": 150000,
+        "damage": {
+          "min": 1150001,
+          "max": 1300000
+        },
+        "adv": {
+          "atk": -246,
+          "def": 330,
+          "spd": 215
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_aa",
+          "Singularity_Passive_Dmg_down_aa"
+        ]
+      },
+      {
+        "name": "AAA",
+        "level": 154,
+        "transLevel": 154,
+        "hp": 150000,
+        "damage": {
+          "min": 1300001,
+          "max": 1450000
+        },
+        "adv": {
+          "atk": -244,
+          "def": 320,
+          "spd": 210
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_aaa",
+          "Singularity_Passive_Dmg_down_aaa"
+        ]
+      },
+      {
+        "name": "AAA+",
+        "level": 157,
+        "transLevel": 157,
+        "hp": 200000,
+        "damage": {
+          "min": 1450001,
+          "max": 1650000
+        },
+        "adv": {
+          "atk": -242,
+          "def": 310,
+          "spd": 205
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_aaa_2",
+          "Singularity_Passive_Dmg_down_aaa_2"
+        ]
+      },
+      {
+        "name": "AAA++",
+        "level": 160,
+        "transLevel": 160,
+        "hp": 200000,
+        "damage": {
+          "min": 1650001,
+          "max": 1850000
+        },
+        "adv": {
+          "atk": -240,
+          "def": 300,
+          "spd": 200
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_aaa_3",
+          "Singularity_Passive_Dmg_down_aaa_3"
+        ]
+      },
+      {
+        "name": "S",
+        "level": 163,
+        "transLevel": 163,
+        "hp": 150000,
+        "damage": {
+          "min": 1850001,
+          "max": 2000000
+        },
+        "adv": {
+          "atk": -238,
+          "def": 290,
+          "spd": 195
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_aaa_3",
+          "Singularity_Passive_Dmg_down_aaa_3"
+        ]
+      },
+      {
+        "name": "S+",
+        "level": 166,
+        "transLevel": 166,
+        "hp": 150000,
+        "damage": {
+          "min": 2000001,
+          "max": 2150000
+        },
+        "adv": {
+          "atk": -236,
+          "def": 280,
+          "spd": 190
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_aaa_3",
+          "Singularity_Passive_Dmg_down_aaa_3"
+        ]
+      },
+      {
+        "name": "S++",
+        "level": 169,
+        "transLevel": 169,
+        "hp": 150000,
+        "damage": {
+          "min": 2150001,
+          "max": 2300000
+        },
+        "adv": {
+          "atk": -234,
+          "def": 270,
+          "spd": 185
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_aaa_3",
+          "Singularity_Passive_Dmg_down_aaa_3"
+        ]
+      },
+      {
+        "name": "SS",
+        "level": 172,
+        "transLevel": 172,
+        "hp": 200000,
+        "damage": {
+          "min": 2300001,
+          "max": 2500000
+        },
+        "adv": {
+          "atk": -232,
+          "def": 260,
+          "spd": 180
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_ss",
+          "Singularity_Passive_Dmg_down_ss"
+        ]
+      },
+      {
+        "name": "SS+",
+        "level": 175,
+        "transLevel": 175,
+        "hp": 250000,
+        "damage": {
+          "min": 2500001,
+          "max": 2750000
+        },
+        "adv": {
+          "atk": -230,
+          "def": 250,
+          "spd": 175
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_ss_2",
+          "Singularity_Passive_Dmg_down_ss_2"
+        ]
+      },
+      {
+        "name": "SS++",
+        "level": 180,
+        "transLevel": 180,
+        "hp": 500000,
+        "damage": {
+          "min": 2750001,
+          "max": 3250000
+        },
+        "adv": {
+          "atk": -228,
+          "def": 240,
+          "spd": 170
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_ss_3",
+          "Singularity_Passive_Dmg_down_ss_3"
+        ]
+      },
+      {
+        "name": "SSS",
+        "level": 185,
+        "transLevel": 185,
+        "hp": 500000,
+        "damage": {
+          "min": 3250001,
+          "max": 3750000
+        },
+        "adv": {
+          "atk": -226,
+          "def": 230,
+          "spd": 165
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_sss",
+          "Singularity_Passive_Dmg_down_sss"
+        ]
+      },
+      {
+        "name": "SSS+",
+        "level": 190,
+        "transLevel": 190,
+        "hp": 500000,
+        "damage": {
+          "min": 3750001,
+          "max": 4250000
+        },
+        "adv": {
+          "atk": -224,
+          "def": 220,
+          "spd": 160
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_sss",
+          "Singularity_Passive_Dmg_down_sss"
+        ]
+      },
+      {
+        "name": "SSS++",
+        "level": 200,
+        "transLevel": 200,
+        "hp": 750000,
+        "damage": {
+          "min": 4250001,
+          "max": 5000000
+        },
+        "adv": {
+          "atk": -222,
+          "def": 210,
+          "spd": 155
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_sss",
+          "Singularity_Passive_Dmg_down_sss"
+        ]
+      }
+    ]
   },
   "75000105": {
     "mode": "monad_battle_2",

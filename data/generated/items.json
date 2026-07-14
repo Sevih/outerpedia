@@ -3980,6 +3980,27 @@
     "star": 0,
     "characterLimit": "2000116"
   },
+  "23042": {
+    "kind": "item",
+    "name": {
+      "en": "Oath with Caren",
+      "jp": "カレンとの誓約",
+      "kr": "카렌과의 서약",
+      "zh": "与凯伦的誓约"
+    },
+    "desc": {
+      "en": "A token that allows you to forge an eternal bond of Affinity with [Caren].\\nWhen used, provides enough EXP (170,000) to grow [Caren]'s Affinity to Level 10 at once.\\nIf Affinity is already maxed, this item can be sold for 300 Free Ether.",
+      "jp": "【カレン】と永遠の親密な関係を築くことができる証。\\n使用時、【カレン】の親密度を一度に10LVまで成長させられる分の経験値（170,000）を提供する。\\nすでに完璧な親密関係が構築されている場合、このアイテムを300無償エーテルで売却できます。",
+      "kr": "[카렌]과 영원한 애정 관계를 구축할 수 있는 증표.\\n사용 시 [카렌]의 애정도를 한번에 10LV까지 성장 시킬 수 있는 분량의 경험치 (170,000) 를 제공합니다.\\n이미 완벽한 애정 관계가 구축되신 경우, 해당 아이템을 300 무료 에테르로 판매하실 수 있습니다.",
+      "zh": "可与【卡伦】建立永恒亲密关系的证明。\\n使用时，提供可将【卡伦】的亲密度一次提升至10LV的经验值（170,000）。\\n若已建立完美的亲密关系，可将该道具以300免费以太出售。"
+    },
+    "icon": "TI_present_Max_Public",
+    "grade": "unique",
+    "type": "present",
+    "subType": "present_max",
+    "star": 0,
+    "characterLimit": "2000089"
+  },
   "24001": {
     "kind": "item",
     "name": {
@@ -14408,6 +14429,26 @@
     "subType": "box_type_choice_item",
     "star": 0
   },
+  "30536": {
+    "kind": "item",
+    "name": {
+      "en": "Lobby - Romantic Summer",
+      "jp": "ロビー - ロマンティックサマー",
+      "kr": "로비 - 로맨틱 서머",
+      "zh": "大厅 - 浪漫夏日"
+    },
+    "desc": {
+      "en": "Obtain an exclusive lobby with a [Romantic Summer] concept.\\nAfter using the lobby item in [Inventory], you can change it under [Lobby Settings] - [Exclusive Background].",
+      "jp": "【ロマンティックサマー】コンセプトの交換用専用ロビーを獲得する。\\n専用ロビーは【バッグ】内でロビーアイテムを使用した後、【ロビー設定】 - 【専用背景】項目で変更できます。",
+      "kr": "[로맨틱 서머] 컨셉의 교체용 전용 로비를 얻습니다.\\n전용 로비는 [소지품] 내에서 로비 아이템을 사용하신 후, [로비 설정] - [전용 배경] 항목에서 변경하실 수 있습니다.",
+      "zh": "获得【浪漫夏日】概念的替换专属大厅。\\n在【背包】内使用大厅道具后，可在【大厅设置】 - 【专属背景】项目中进行更换。"
+    },
+    "icon": "TI_BOX_LOBBY_SEASONAL_07",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_random",
+    "star": 0
+  },
   "30537": {
     "kind": "item",
     "name": {
@@ -14566,6 +14607,66 @@
     "grade": "unique",
     "type": "box",
     "subType": "box_type_choice_char",
+    "star": 0
+  },
+  "30545": {
+    "kind": "item",
+    "name": {
+      "en": "Lobby Mascot - SD Heatwave Cop Delta",
+      "jp": "ロビーマスコット - SD真夏のポリス・デルタ",
+      "kr": "로비 마스코트 - SD 히트 웨이브 캅 델타",
+      "zh": "大厅吉祥物 - SD热浪警官 德尔塔"
+    },
+    "desc": {
+      "en": "Obtain the [SD Heatwave Cop Delta] mascot that can be placed in the lobby.",
+      "jp": "ロビーに配置可能な【SD真夏のポリス・デルタ】のマスコットを獲得する。",
+      "kr": "로비에 배치 가능한 [SD 히트 웨이브 캅 델타]의 마스코트를 얻습니다.",
+      "zh": "获得可放置于大厅的【SD热浪警官 德尔塔】吉祥物。"
+    },
+    "icon": "TI_BOX_FIGURE_20",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_random",
+    "star": 0
+  },
+  "30546": {
+    "kind": "item",
+    "name": {
+      "en": "3★ Hero Selection Ticket",
+      "jp": "★3仲間選択チケット",
+      "kr": "3성 동료 선택권",
+      "zh": "3星同伴选择券"
+    },
+    "desc": {
+      "en": "Select and obtain a 3★ Hero of your choice. If you select a Hero you already own, you will obtain 150 Pieces of that Hero. If you have completed Transcendence for all Heroes, you can sell the selection ticket for 1,000 Free Ether.",
+      "jp": "希望する★3仲間を選択して獲得する。すでに保有している仲間を選択した場合、その仲間のピース150個を獲得する。すべての仲間の超越が完了している場合、選択チケットを1,000無償エーテルで売却できます。",
+      "kr": "원하시는 3성 동료를 선택하여 얻습니다. 이미 보유하신 동료를 선택하실 경우, 해당 동료의 조각 150개를 얻습니다. 모든 동료의 초월이 완료되신 경우, 선택권을 1,000 무료 에테르로 판매하실 수 있습니다.",
+      "zh": "选择并获得心仪的3★同伴。若选择已拥有的同伴，将获得该同伴的碎片150个。若所有同伴的超越均已完成，可将选择券以1,000免费以太出售。"
+    },
+    "icon": "TI_CharacterCard_05",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_choice_char",
+    "star": 0
+  },
+  "30547": {
+    "kind": "item",
+    "name": {
+      "en": "Heatwave Cop Delta Equipment Full Set",
+      "jp": "真夏のポリス・デルタ装備フルセット",
+      "kr": "히트 웨이브 캅 델타 장비 풀 세트",
+      "zh": "热浪警官 德尔塔装备全套"
+    },
+    "desc": {
+      "en": "Obtain a full Weapon / Accessory / Armor gear set suitable for Heatwave Cop Delta.",
+      "jp": "真夏のポリス・デルタが使用するのに適した武器／アクセサリー／防具セットをすべて獲得する。",
+      "kr": "히트 웨이브 캅 델타가 사용하기 알맞은 무기 / 악세서리 / 방어구 세트를 모두 얻습니다.",
+      "zh": "获得所有适合热浪警官 德尔塔使用的武器/饰品/防具套装。"
+    },
+    "icon": "TI_Equipment_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_random",
     "star": 0
   },
   "40001": {
@@ -20084,6 +20185,61 @@
     "characterId": "2000044",
     "source": "shop"
   },
+  "COSTUME_100": {
+    "kind": "costume",
+    "name": {
+      "en": "First Summer Vacation Caren",
+      "jp": "人生初のバカンス・カレン",
+      "kr": "생애 첫 휴가 카렌",
+      "zh": "人生首次假期 卡伦"
+    },
+    "desc": {
+      "en": "A costume that [Caren] can equip.",
+      "jp": "【カレン】のスキンです。\\nスキンは【仲間】→【スキン】で装備できます。",
+      "kr": "[카렌]이 착용할 수 있는 코스튬입니다.",
+      "zh": "【卡伦】可穿戴的皮肤。"
+    },
+    "icon": "TI_Costume_Clothes_2000089_03",
+    "grade": "rare",
+    "type": "costume",
+    "star": 0,
+    "characterId": "2000089",
+    "source": "battlepass"
+  },
+  "COSTUME_101": {
+    "kind": "costume",
+    "name": {
+      "en": "Never-Ending Summer Iota",
+      "jp": "沈まない夏・イオータ",
+      "kr": "저물지 않는 여름 요타",
+      "zh": "不落的夏日 佑妲"
+    },
+    "desc": {
+      "en": "A costume that [Monad Iota] can equip.",
+      "jp": "【モナド・イオータ】のスキンです。\\nスキンは【仲間】→【スキン】で装備できます。",
+      "kr": "[모나드 요타]가 착용할 수 있는 코스튬입니다.",
+      "zh": "【单子・佑妲】可穿戴的时装。"
+    },
+    "icon": "TI_Costume_Clothes_2000111_03",
+    "grade": "rare",
+    "type": "costume",
+    "star": 0,
+    "characterId": "2000111"
+  },
+  "COSTUME_102": {
+    "kind": "costume",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "icon": "TI_Costume_Clothes_2000118_02",
+    "grade": "rare",
+    "type": "costume",
+    "star": 0,
+    "characterId": "2000118"
+  },
   "COSTUME_11": {
     "kind": "costume",
     "name": {
@@ -22024,6 +22180,46 @@
     "characterId": "2000114",
     "source": "shop"
   },
+  "COSTUME_96": {
+    "kind": "costume",
+    "name": {
+      "en": "Round-the-Clock Tourist Luna",
+      "jp": "昼夜なき観光客・ルナ",
+      "kr": "밤낮 없는 관광객  루나",
+      "zh": "不分昼夜的游客 露娜"
+    },
+    "desc": {
+      "en": "A costume that [Demiurge Luna] can equip.",
+      "jp": "【デミウルゴス・ルナ】のスキンです。\\nスキンは【仲間】→【スキン】で装備できます。",
+      "kr": "[데미우르고스 루나]가 착용할 수 있는 코스튬입니다.",
+      "zh": "【創世之神·露娜】可穿戴的皮肤。"
+    },
+    "icon": "TI_Costume_Clothes_2000119_02",
+    "grade": "rare",
+    "type": "costume",
+    "star": 0,
+    "characterId": "2000119"
+  },
+  "COSTUME_97": {
+    "kind": "costume",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "desc": {
+      "en": "A costume that [Demiurge Luna] can equip.",
+      "jp": "【デミウルゴス・ルナ】のスキンです。\\nスキンは【仲間】→【スキン】で装備できます。",
+      "kr": "[데미우르고스 루나]가 착용할 수 있는 코스튬입니다.",
+      "zh": "【創世之神·露娜】可穿戴的皮肤。"
+    },
+    "icon": "TI_Costume_Clothes_2000120_02",
+    "grade": "rare",
+    "type": "costume",
+    "star": 0,
+    "characterId": "2000120"
+  },
   "COSTUME_98": {
     "kind": "costume",
     "name": {
@@ -22043,7 +22239,28 @@
     "type": "costume",
     "star": 0,
     "characterId": "2000116",
-    "source": "battlepass"
+    "source": "shop"
+  },
+  "COSTUME_99": {
+    "kind": "costume",
+    "name": {
+      "en": "Beachside Poisonflower Viella",
+      "jp": "海辺の猛毒草・ビエラ",
+      "kr": "해변가의 맹독초 비엘라",
+      "zh": "海滩毒草 比埃拉"
+    },
+    "desc": {
+      "en": "A costume that [Viella] can equip.",
+      "jp": "【ビエラ】のスキンです。\\nスキンは【仲間】→【スキン】で装備でき【スキン】ボタンは仲間のスキンがある場合のみ表示されます。",
+      "kr": "[비엘라]가 착용할 수 있는 코스튬입니다.",
+      "zh": "【比埃拉】可穿戴的皮肤。"
+    },
+    "icon": "TI_Costume_Clothes_2000108_03",
+    "grade": "rare",
+    "type": "costume",
+    "star": 0,
+    "characterId": "2000108",
+    "source": "event_shop"
   },
   "SYS_ASSET_ACC_EXP": {
     "kind": "goods",
@@ -22403,16 +22620,16 @@
   "SYS_ASSET_EVENT_COIN_5": {
     "kind": "goods",
     "name": {
-      "en": "3rd Anniversary Medal",
-      "jp": "3周年記念メダル",
-      "kr": "3주년 기념 메달",
-      "zh": "3周年纪念勋章"
+      "en": "Neo Iota City Currency",
+      "jp": "ネオ・イオータシティ紙幣",
+      "kr": "네오 요타시티 화폐",
+      "zh": "新约塔市货币"
     },
     "desc": {
-      "en": "A medal commemorating the 3rd Anniversary of Outerplane. Can be exchanged for various items in the Festival Shop tab.",
-      "jp": "アウタープレインの3周年を祝うメダルです。フェスショップタブでさまざまな商品と交換できます。",
-      "kr": "아우터 플레인의 3주년을 축하하는 메달입니다. 페스티벌 상점 탭에서 다양한 상품과 교환할 수 있습니다.",
-      "zh": "庆祝异界战士3周年的勋章。可在节庆活动商店标签中兑换各种商品。"
+      "en": "A crisp, golden new banknote. Can be exchanged for various items in the Event Shop.",
+      "jp": "金色のパリパリとした新札。イベントショップでさまざまなアイテムと交換できます。",
+      "kr": "금색의 빳빳한 신권 지폐. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
+      "zh": "金色崭新的新钞票。可在活动商店兑换各种商品。"
     },
     "icon": "TI_Item_Event_Coin_05",
     "grade": "normal",
@@ -22422,16 +22639,16 @@
   "SYS_ASSET_EVENT_COIN_6": {
     "kind": "goods",
     "name": {
-      "en": "Filming Tool",
-      "jp": "撮影機材",
-      "kr": "촬영 도구",
-      "zh": "摄影道具"
+      "en": "Sunset Droplet",
+      "jp": "夕焼け雫",
+      "kr": "노을빛 물방울",
+      "zh": "落日水滴"
     },
     "desc": {
-      "en": "Mero's Filming Tool. You can exchange it for a variety of items in the Event Shop.",
-      "jp": "映画の撮影に使われる道具。イベントショップでアイテムと交換できる。",
-      "kr": "메로의 영화 촬영용 도구. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
-      "zh": "电影摄影道具。可于活动商店兑换各种商品。"
+      "en": "A droplet-shaped [Potential] that seems to hold the sunset within. The lingering echo of summer, distorted by the Singularity Core. Can be exchanged for various items in the Event Shop.",
+      "jp": "落日を宿しているかのような雫の形をした【可能性】。特異点コアによって歪められた夏の残響。イベントショップでさまざまなアイテムと交換できます。",
+      "kr": "노을을 담은 것 같은 물방울 형상의 [가능성]. 특이점 코어에 의해 왜곡된 여름의 잔향. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
+      "zh": "形如水滴、仿佛蕴含落日的【可能性】。被特异点核心所扭曲的夏日余韵。可在活动商店兑换各种商品。"
     },
     "icon": "TI_Item_Event_Coin_06",
     "grade": "normal",
@@ -22656,7 +22873,7 @@
       "zh": "异型怪样本"
     },
     "desc": {
-      "en": "A sample reagent extracted from an Irregular’s body. Exchange it at Caren’s Supply Shop for supplies that are useful in the Infiltration Operation.",
+      "en": "A sample reagent extracted from an Irregular's body. Exchange it at Caren's Supply Shop for supplies that are useful in the Infiltration Operation.",
       "jp": "イレギュラーの体内から抽出したサンプル試薬。カレンの補給ショップで侵入殲滅戦に有用な補給品と交換できる。",
       "kr": "이레귤러의 체내에서 추출한 샘플 시약. 카렌의 보급 상점을 통해 침투 섬멸에 유용하게 활용할 수 있는 보급품과 교환할 수 있습니다.",
       "zh": "从异型怪体内提取的样本试剂。可通过卡伦的补给商店兑换渗透歼灭战所需的补给品。"
@@ -22898,13 +23115,13 @@
   "SYS_ASSET_REMAINS": {
     "kind": "goods",
     "name": {
-      "en": "Archdemon’s Trace",
+      "en": "Archdemon's Trace",
       "jp": "魔王の痕跡",
       "kr": "마왕의 흔적",
       "zh": "魔王痕迹"
     },
     "desc": {
-      "en": "A mysterious trace found within the Archdemon’s Ruins. It seems to possess significant power.",
+      "en": "A mysterious trace found within the Archdemon's Ruins. It seems to possess significant power.",
       "jp": "魔王の遺跡で見つけたまか不思議な痕跡。痕跡の中から相当な力を感じる。",
       "kr": "마왕의 유적에서 발견한 수수께끼의 흔적. 상당한 힘이 깃든 것 같다.",
       "zh": "在魔王遗迹中发现的机关。似乎蕴含着巨大力量。"

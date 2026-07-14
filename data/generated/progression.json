@@ -5017,6 +5017,48 @@
         "hp": 105,
         "def": 35
       }
+    },
+    "2000121": {
+      "2": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 20,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 28,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 28,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 394,
+        "def": 73,
+        "dmg_reduce_rate": 24
+      },
+      "7": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "8": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "speed": 4
+      },
+      "9": {
+        "atk": 28,
+        "dmg_boost": 20,
+        "buff_chance": 20
+      }
     }
   },
   "limitBreak": {
@@ -5902,6 +5944,11 @@
       "mode": "flat",
       "value": 50
     },
+    "2000118": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
     "2000119": {
       "stat": "atk",
       "mode": "rate",
@@ -6142,6 +6189,21 @@
       "mode": "flat",
       "value": 50
     },
+    "2010118": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010119": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2010120": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
     "2020019": {
       "stat": "critical_rate",
       "mode": "flat",
@@ -6226,6 +6288,16 @@
       "stat": "critical_rate",
       "mode": "flat",
       "value": 50
+    },
+    "2020089": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
+    "2020108": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
     },
     "2020112": {
       "stat": "atk",
@@ -9877,6 +9949,15 @@
           "stat": "pierce_power_rate",
           "applying": "add",
           "value": 300
+        }
+      ]
+    },
+    "12108": {
+      "4": [
+        {
+          "stat": "dmg_boost",
+          "applying": "add",
+          "value": 50
         }
       ]
     }

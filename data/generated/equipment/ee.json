@@ -3131,6 +3131,33 @@
       }
     ]
   },
+  "2000121": {
+    "name": {
+      "en": "Gleipnir: Summer Edition",
+      "jp": "グレイプニル：夏仕様",
+      "kr": "글레이프니르 : 여름 사양",
+      "zh": "葛莱普尼尔：夏日规格"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000121",
+    "craftable": false,
+    "character": "2000121",
+    "trustLevel": 10,
+    "options": ["2000121"],
+    "passives": [
+      {
+        "id": "2000121",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100121",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
+  },
   "2700003": {
     "name": {
       "en": "Frost Nova",

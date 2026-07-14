@@ -10715,6 +10715,35 @@
       }
     ]
   },
+  "2000121": {
+    "name": {
+      "en": "Heatwave Cop Delta's Exclusive Equipment",
+      "jp": "真夏のポリス・デルタの専用装備",
+      "kr": "히트 웨이브 캅 델타의 전용 장비",
+      "zh": "热浪警官 德尔塔的专属装备"
+    },
+    "desc": {
+      "en": "All attack DMG increases (proportional to target's Max Health)",
+      "jp": "すべての攻撃のダメージUP(対象の最大HPに比例)",
+      "kr": "모든 공격 피해 증가 (대상 최대 체력 비례)",
+      "zh": "所有攻击伤害增加（按目标最大生命值比例）"
+    },
+    "values": [{}],
+    "levels": [1],
+    "icon": "TI_Icon_UO_EXCLUSIVE",
+    "buff": "BID_CEQUIP_2000121",
+    "effects": [
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG_TARGET_STAT",
+        "target": "me",
+        "buff": "BID_CEQUIP_2000121",
+        "stat": "hp",
+        "mode": "up"
+      }
+    ]
+  },
   "2100001": {
     "name": {
       "en": "K's Exclusive Equipment",
@@ -14462,6 +14491,36 @@
         "buff": "BID_CEQUIP_2000119_ADD",
         "caller": "ultimate",
         "tooltip": "UNCOUNTERABLE"
+      }
+    ]
+  },
+  "2100121": {
+    "name": {
+      "en": "Heatwave Cop Delta's Exclusive Equipment",
+      "jp": "真夏のポリス・デルタの専用装備",
+      "kr": "히트 웨이브 캅 델타의 전용 장비",
+      "zh": "热浪警官 德尔塔的专属装备"
+    },
+    "desc": {
+      "en": "When <color=#28d9ed>Freeze!</color> activates, ignores <color=#28d9ed>30%</color> of the target's Defense",
+      "jp": "<color=#28d9ed>【フリーズ！】</color>発動時、対象の防御力を<color=#28d9ed>30%</color>無視",
+      "kr": "<color=#28d9ed>Freeze!</color> 발동 시 대상 방어력 <color=#28d9ed>30%</color> 무시",
+      "zh": "发动<color=#28d9ed>Freeze！</color>时，无视目标<color=#28d9ed>30%</color>防御力"
+    },
+    "values": [{}],
+    "levels": [1],
+    "icon": "TI_Icon_UO_EXCLUSIVE",
+    "buff": "BID_CEQUIP_2000121_ADD",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "BID_CEQUIP_2000121_ADD",
+        "stat": "pierce_power_rate",
+        "mode": "up",
+        "caller": "second"
       }
     ]
   },
