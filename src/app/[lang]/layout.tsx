@@ -5,6 +5,7 @@ import { getT } from '@/i18n';
 import { buildSiteJsonLd } from '@/lib/seo';
 import JsonLd from '@/components/seo/JsonLd';
 import { Header } from '@/components/layout/Header';
+import { HtmlLang } from '@/components/layout/HtmlLang';
 import { Footer } from '@/components/layout/Footer';
 
 /** SSG : une variante par langue. */
@@ -27,11 +28,7 @@ export default async function LangLayout({
   return (
     <>
       {/* Aligne <html lang> côté client (le root layout est global, hors [lang]). */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `document.documentElement.lang=${JSON.stringify(lang)}`,
-        }}
-      />
+      <HtmlLang lang={lang as Lang} />
       <JsonLd id="ld-site" data={buildSiteJsonLd(lang as Lang, t('page.home.description'))} />
       <Header />
       {/* Pas de conteneur global : chaque page pose le sien (la fiche perso est
