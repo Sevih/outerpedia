@@ -83,7 +83,8 @@ describe('détection des tags d’acquisition (RecruitGroupTemplet)', () => {
   it('les effectifs par catégorie sont ceux du jeu', () => {
     expect(withTag('premium')).toHaveLength(11);
     expect(withTag('limited')).toHaveLength(4);
-    expect(withTag('seasonal')).toHaveLength(5);
+    // 6e seasonal : Heatwave Cop Delta (2000121), patch du 2026-07-14.
+    expect(withTag('seasonal')).toHaveLength(6);
     expect(withTag('collab')).toHaveLength(3);
   });
 
@@ -97,8 +98,10 @@ describe('détection des tags d’acquisition (RecruitGroupTemplet)', () => {
 });
 
 describe('détection de ignore-defense (pénétration INNÉE)', () => {
-  it('46 personnages percent la DEF par eux-mêmes', () => {
-    expect(withTag('ignore-defense')).toHaveLength(46);
+  it('47 personnages percent la DEF par eux-mêmes', () => {
+    // 47e : Heatwave Cop Delta (2000121) — même famille que le cas épinglé
+    // Delta (pénétration derrière une indirection BT_GROUP), patch 2026-07-14.
+    expect(withTag('ignore-defense')).toHaveLength(47);
   });
 
   it('tout perso taggé porte au moins une provenance, et inversement', () => {

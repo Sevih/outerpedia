@@ -46,6 +46,21 @@ const load = (p: string): Dict =>
 
 const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 
+/**
+ * FaceIconID d'une ligne CharacterTemplet (paresseux, une passe) — certains
+ * skins pointent le visage d'un frère au lieu du leur (cf. boucle apparences).
+ */
+let faceIconIndex: Map<string, string> | undefined;
+function faceIconOf(id: string): string | undefined {
+  if (!faceIconIndex) {
+    faceIconIndex = new Map();
+    for (const r of loadTable('CharacterTemplet')) {
+      if (r.ID && r.FaceIconID) faceIconIndex.set(r.ID, r.FaceIconID);
+    }
+  }
+  return faceIconIndex.get(id);
+}
+
 /** Besoins d'UN personnage (réutilisé par le manifest global ET l'intégration). */
 export function characterAssetRequests(
   c: Record<string, unknown>,
@@ -121,18 +136,25 @@ export function characterAssetRequests(
   // les boss « personnages » réutilisent souvent le FaceIconID d'un skin
   // (MonsterTemplet.FaceIconID = 2010004…) : sans ça, FI_<skin> ne serait
   // jamais produit et l'affichage tape dans le vide.
+  // SAUF que certains skins n'ont PAS leurs propres sprites de visage : la
+  // table les fait pointer vers ceux d'un frère (2010120 → FaceIconID 2010119,
+  // aucun CT_/FI_2010120 dans les bundles). On suit donc l'indirection
+  // FaceIconID pour CT_/FI_ — comme le jeu — au lieu de la convention `_<id>` ;
+  // le dédup par clé fusionne les requêtes des jumeaux. IG_Turn_<id> reste
+  // par id : ces sprites-là existent bien par skin.
   for (const app of (c.appearances as string[] | undefined) ?? []) {
+    const face = faceIconOf(app) ?? app;
     out.push(
       {
         kind: 'image',
-        key: `images/characters/portrait/CT_${app}.webp`,
-        candidates: [`CT_${app}`],
+        key: `images/characters/portrait/CT_${face}.webp`,
+        candidates: [`CT_${face}`],
         domain: 'characters',
       },
       {
         kind: 'face-icon',
-        key: `images/characters/faceicon/FI_${app}.webp`,
-        id: app,
+        key: `images/characters/faceicon/FI_${face}.webp`,
+        id: face,
         domain: 'characters',
       },
       {
