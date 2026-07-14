@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import encountersData from '@data/generated/encounters.json';
+import type { DungeonRef } from '@contracts';
 import { makeT } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import en from '@/i18n/locales/en';
@@ -110,6 +111,57 @@ describe('difficultyLabel — le jeu ne parle pas français', () => {
 
   it('la difficulté la plus dure est celle que le guide cible', () => {
     expect(hardestDifficultyLabel(JC_ANNIHILATOR, 'fr', makeT(MSG.fr))).toBe('Très difficile');
+  });
+});
+
+/**
+ * ADVENTURE LICENSE — une échelle de STAGES, pas de grades.
+ *
+ * Trois pièges, tous invisibles à l'écran s'ils passent :
+ *  - le stage est la colonne `Level` du jeu, pas le rang de la ligne : un boss
+ *    n'entre en rotation qu'à partir d'un certain stage (Anubis au 8) et ses
+ *    stats sont celles de CE stage ;
+ *  - la table redéclare le même stage sous chaque palier de licence qui le
+ *    contient (68 doublons sur 243 lignes) — sans dédup, Masterless afficherait
+ *    15 paliers pour 10 stages ;
+ *  - un stage n'est pas un grade : lui donner un `name` le ferait passer pour
+ *    tel, et le badge (`CM_Event_Rank_<name>`) serait une image morte.
+ */
+describe('adventure license — des stages numérotés, dédupliqués, croissants', () => {
+  const AL = Object.values(encountersData as Record<string, DungeonRef>).filter(
+    (d) => d.mode === 'adventure_mission' || d.mode === 'adventure_challenge',
+  );
+
+  it('tout palier porte un STAGE et aucun nom de grade (pas de badge à inventer)', () => {
+    expect(AL).toHaveLength(29);
+    for (const d of AL) {
+      expect(d.ranks?.length, d.name.en).toBeGreaterThan(0);
+      for (const r of d.ranks!) {
+        expect(r.stage, d.name.en).toBeGreaterThan(0);
+        expect(r.name, d.name.en).toBeUndefined();
+      }
+    }
+  });
+
+  it('les stages sont uniques et croissants, et ne commencent pas tous à 1', () => {
+    for (const d of AL) {
+      const stages = d.ranks!.map((r) => r.stage!);
+      expect(new Set(stages).size, `${d.name.en} : doublons`).toBe(stages.length);
+      expect(stages, `${d.name.en} : ordre`).toEqual([...stages].sort((a, b) => a - b));
+    }
+    // Anubis (70600018) n'existe qu'en fin d'échelle : 8, 9, 10.
+    const anubis = (encountersData as Record<string, DungeonRef>)['70600018'];
+    expect(anubis.ranks!.map((r) => r.stage)).toEqual([8, 9, 10]);
+    // Masterless (70600000), lui, est là dès le premier stage.
+    const masterless = (encountersData as Record<string, DungeonRef>)['70600000'];
+    expect(masterless.ranks!.map((r) => r.stage)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  });
+
+  it('le stage fixe le niveau du boss — plus le stage est haut, plus il est fort', () => {
+    for (const d of AL) {
+      const levels = d.ranks!.map((r) => r.level!);
+      expect(levels, `${d.name.en} : niveaux`).toEqual([...levels].sort((a, b) => a - b));
+    }
   });
 });
 
