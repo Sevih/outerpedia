@@ -81,6 +81,19 @@ export interface GuideMeta {
    */
   dungeons?: string[];
   /**
+   * Les monstres à AFFICHER, dans cet ordre — quand ceux que le guide documente
+   * ne sont pas ceux que la donnée désignerait toute seule.
+   *
+   * Par défaut, un guide de stage montre la VAGUE DU BOSS (`bossWaveMonsters`) :
+   * juste, partout sauf aux marges. Le stage 9-5 fait combattre Alpha à la vague
+   * 2 et Leo à la 3 — le guide s'appelle « Leo & Alpha », les deux comptent. Le
+   * 8-5 aligne à côté de Maxwell un clone et un orbe qui n'apprennent rien.
+   * Quand la donnée ne sait pas trancher, l'auteur tranche — ici, pas dans le
+   * composant. Ids lus dans `data/generated/encounters.json` ; un id qui n'est
+   * dans AUCUN donjon du guide casse le build au rendu.
+   */
+  monsters?: string[];
+  /**
    * Palier pédagogique (`general-guides` uniquement, où il est OBLIGATOIRE —
    * cf. `requires` de la catégorie). Remplace la map `TIER_BY_SLUG` que la V2
    * tenait à la main dans son composant de liste.
@@ -128,6 +141,7 @@ const META_KEYS = new Set([
   'tier',
   'group',
   'dungeons',
+  'monsters',
 ]);
 const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 /**
@@ -198,6 +212,16 @@ function parseMeta(raw: unknown, at: string, issues: string[]): GuideMeta | null
       issues.push(
         `${at} : « dungeons » doit être un tableau NON VIDE d'ids de donjons` +
           ` (data/generated/encounters.json), du plus facile au plus dur`,
+      );
+      ok = false;
+    }
+  }
+  if (m.monsters !== undefined) {
+    const ms = m.monsters;
+    if (!Array.isArray(ms) || !ms.length || ms.some((id) => typeof id !== 'string' || !id)) {
+      issues.push(
+        `${at} : « monsters » doit être un tableau NON VIDE d'ids de monstres` +
+          ` (data/generated/encounters.json), dans l'ordre d'affichage`,
       );
       ok = false;
     }

@@ -221,6 +221,23 @@ describe('adventure — les guides désignent des donjons réels', () => {
       expect(readGuideFile(g, 'content.json'), `${g.slug} : content.json manquant`).toBeDefined();
     }
   });
+
+  /**
+   * `monsters` désigne les cartes quand la vague du boss ne dit pas le combat
+   * (Alpha se bat une vague avant Leo). Un id qui ne tombe dans aucun donjon du
+   * guide ne casserait rien à l'écran : la carte manquerait, simplement — c'est
+   * exactement le genre de trou silencieux qu'on refuse ici.
+   */
+  it('les monstres désignés appartiennent aux donjons du guide, le boss en tête', () => {
+    for (const g of guides.filter((x) => x.monsters)) {
+      const encounters = encountersOfIds(g.dungeons!);
+      for (const id of g.monsters!) {
+        const found = encounters.some((e) => e.monsters.some((m) => m.id === id));
+        expect(found, `${g.slug} : monstre « ${id} » absent de ses donjons`).toBe(true);
+      }
+      expect(g.monsters![0], `${g.slug} : le boss ouvre la liste`).toBe(g.bossId);
+    }
+  });
 });
 
 /** Fichiers de contenu d'un guide (à la racine ou dans une version). */
