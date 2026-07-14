@@ -90,6 +90,8 @@
   --chain-finish: #f87171;
   --stat: #fbbf24;
   --highlight: #22d3ee;
+  /* Texte « équipement » (noms d'items dans la prose) — teinte V2 exacte. */
+  --equipment: #fbbf24;
 
   /* Voile du fond de page */
   --page-veil: rgba(0, 0, 0, 0.4);
@@ -162,6 +164,7 @@
   --color-chain-finish: var(--chain-finish);
   --color-stat: var(--stat);
   --color-highlight: var(--highlight);
+  --color-equipment: var(--equipment);
 }
 
 /*

@@ -578,6 +578,7 @@ const jp: Record<TranslationKey, string> = {
   'guides.counter': 'ガイド{guides}件 · カテゴリー{categories}件',
   'guides.count.one': 'ガイド{count}件',
   'guides.count.many': 'ガイド{count}件',
+  'guides.collection': '{name}コレクション',
 
   // Statut de saison d'un boss (cartes JC/WB/GR)
   'guides.season.live': '{date}まで開催中',

@@ -586,6 +586,7 @@ const en = {
   'guides.counter': '{guides} guides · {categories} categories',
   'guides.count.one': '{count} GUIDE',
   'guides.count.many': '{count} GUIDES',
+  'guides.collection': '{name} Collection',
 
   // Statut de saison d'un boss (cartes JC/WB/GR) — jointure par monstre combattu
   'guides.season.live': 'Live until {date}',

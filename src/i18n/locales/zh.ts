@@ -559,6 +559,7 @@ const zh: Record<TranslationKey, string> = {
   'guides.counter': '{guides} 个攻略 · {categories} 个分类',
   'guides.count.one': '{count} 攻略',
   'guides.count.many': '{count} 攻略',
+  'guides.collection': '{name}系列',
 
   // Statut de saison d'un boss (cartes JC/WB/GR)
   'guides.season.live': '进行中，至 {date}',

@@ -598,6 +598,7 @@ const fr: Record<TranslationKey, string> = {
   'guides.counter': '{guides} guides · {categories} catégories',
   'guides.count.one': '{count} GUIDE',
   'guides.count.many': '{count} GUIDES',
+  'guides.collection': 'Collection {name}',
 
   // Statut de saison d'un boss (cartes JC/WB/GR)
   'guides.season.live': 'En cours jusqu’au {date}',

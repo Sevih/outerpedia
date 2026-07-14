@@ -572,6 +572,7 @@ const kr: Record<TranslationKey, string> = {
   'guides.counter': '가이드 {guides}개 · 카테고리 {categories}개',
   'guides.count.one': '가이드 {count}개',
   'guides.count.many': '가이드 {count}개',
+  'guides.collection': '{name} 컬렉션',
 
   // Statut de saison d'un boss (cartes JC/WB/GR)
   'guides.season.live': '{date}까지 진행 중',
