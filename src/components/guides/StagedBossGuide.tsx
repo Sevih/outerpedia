@@ -10,7 +10,9 @@ import {
   type Encounter,
 } from '@/lib/data/encounters';
 import { lootDetails, stageLoot, type LootBadge, type StageLootGear } from '@/lib/data/rewards';
+import { getMonster, monsterDisplayNames, monsterIconSrc } from '@/lib/data/monsters';
 import { BossCard } from '@/components/guides/BossPanel';
+import { MonsterLineup } from '@/components/guides/MonsterLineup';
 import { InlineTooltip } from '@/components/inline/InlineTooltip';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { LootPanel } from '@/components/guides/LootPanel';
@@ -184,6 +186,20 @@ export async function StagedBossGuide({ lang, guide }: GuideContentProps) {
   const details = topReward ? lootDetails(topReward, lang) : undefined;
   const lootLabels = lootPanelLabels(t);
 
+  // Noms et portraits des vignettes — désambiguïsés sur l'ENSEMBLE des
+  // combattants du combat (deux renforts homonymes donneraient deux vignettes
+  // identiques). La carte, elle, reste seule maîtresse de son propre en-tête.
+  const combatantNames = monsterDisplayNames(
+    combatants.map((c) => c.monsterId),
+    lang,
+  );
+  const combatantIcons = new Map(
+    combatants.map((c) => {
+      const m = getMonster(c.monsterId);
+      return [c.monsterId, m ? monsterIconSrc(m) : ''];
+    }),
+  );
+
   const levelWord = t('page.character.skill.level');
   const ticks = encounters.map((e, i) => String(e.ref.difficulty?.order ?? i + 1));
   const titles = encounters.map((e, i) => {
@@ -208,9 +224,20 @@ export async function StagedBossGuide({ lang, guide }: GuideContentProps) {
               La glissière de stage et le butin légendaire du stage vivent DANS
               la carte du boss PRINCIPAL, entre ses stats et ses compétences —
               exactement un principal est visible à chaque stage. */}
-          <div className="space-y-6">
-            {combatants.map((c) => (
-              <EncounterPane key={c.monsterId} indexes={c.stageIndexes}>
+          {/* La MÊME règle de rangement que partout ailleurs (`MonsterLineup`) :
+              boss d'abord, renforts ensuite, côte à côte à deux, en vignettes à
+              trois et plus. Ici la composition CHANGE d'un stage à l'autre — une
+              carte fusionnée ne vaut que pour les stages où son variant apparaît
+              (`stageIndexes`) : la rangée lit cette présence, elle ne décide de
+              rien. Le stage, lui, reste piloté par la glissière, et elle seule. */}
+          <MonsterLineup
+            addsLabel={t('guides.boss_display.add')}
+            items={combatants.map((c) => ({
+              role: c.role === 'add' ? ('add' as const) : ('boss' as const),
+              name: combatantNames.get(c.monsterId) ?? c.monsterId,
+              iconSrc: combatantIcons.get(c.monsterId) ?? '',
+              indexes: c.stageIndexes,
+              card: (
                 <BossCard
                   monsterId={c.monsterId}
                   spawns={c.spawns}
@@ -248,9 +275,9 @@ export async function StagedBossGuide({ lang, guide }: GuideContentProps) {
                     ) : undefined
                   }
                 />
-              </EncounterPane>
-            ))}
-          </div>
+              ),
+            }))}
+          />
 
           {tips && (
             <TacticalTips

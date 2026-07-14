@@ -150,7 +150,13 @@ export async function BossCard({
 
   return (
     <BossRankProvider spawns={scale} followStages={followStages}>
-      <section className="space-y-4">
+      {/* CONTENEUR de requêtes : la carte s'adapte à la place QU'ELLE A, pas à la
+          taille de l'écran. C'est la seule façon honnête de la rendre posable
+          n'importe où — `MonsterLineup` la met en pleine largeur, ou en demi
+          quand deux monstres se comparent côte à côte, et sur un grand écran un
+          `lg:` (qui mesure le VIEWPORT) laisserait la demi-carte étaler ses stats
+          sur une ligne prévue pour le double : elles s'écrasaient. */}
+      <section className="@container space-y-4">
         {/* EN-TÊTE : qui est ce boss — icône, nom, élément, classe, et son NIVEAU
             au palier courant. Le niveau se lit là parce que c'est là qu'on le
             cherche (le jeu l'écrit au même endroit) ; il suit la glissière, d'où

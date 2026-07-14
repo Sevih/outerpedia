@@ -138,12 +138,20 @@ export function BossStats({
 
   return (
     <div className="space-y-4">
-      {/* PALIERS À GAUCHE, STATS À DROITE. Le palier n'est pas un réglage qu'on
-          pousse en haut de page et qu'on oublie : on le change POUR regarder les
-          stats bouger. Les deux doivent tenir dans un même coup d'œil. */}
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
+      {/* PALIERS À GAUCHE, STATS À DROITE — TANT QUE LA CARTE EST LARGE. Le palier
+          n'est pas un réglage qu'on pousse en haut de page et qu'on oublie : on le
+          change POUR regarder les stats bouger, et les deux doivent tenir dans un
+          même coup d'œil.
+
+          Mais la carte n'est pas toujours seule : `MonsterLineup` la pose en DEMI
+          largeur quand deux monstres se comparent (les deux phases d'un world
+          boss). Là, cette même ligne écrase la grille contre la glissière. Le
+          seuil est donc celui du CONTENEUR (`@3xl` ≈ 48 rem), pas du viewport :
+          en dessous, la glissière passe au-dessus et les stats retombent juste
+          au-dessus des compétences — là où on les lit. */}
+      <div className="flex flex-col gap-4 @3xl:flex-row @3xl:items-start">
         {!controlled && hasRanks && options.length > 1 && (
-          <div className="border-line-subtle bg-surface-raised flex flex-col gap-1 rounded-xl border px-3 py-4 lg:w-80 lg:shrink-0">
+          <div className="border-line-subtle bg-surface-raised flex flex-col gap-1 rounded-xl border px-3 py-4 @3xl:w-80 @3xl:shrink-0">
             <RankSlider
               options={options}
               selected={selected}
@@ -179,7 +187,10 @@ export function BossStats({
           {/* Icône + valeur, comme l'écran du jeu. Le nom complet reste atteignable
               (survol, lecteur d'écran) : l'abréviation était une convention de wiki,
               l'icône est la langue du jeu. Faute d'icône (WG), l'abréviation revient. */}
-          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4">
+          {/* Le nombre de colonnes suit la LARGEUR DE LA CARTE, pas celle de
+              l'écran : une demi-carte garde des cases lisibles au lieu d'en
+              tasser quatre dans la place de deux. */}
+          <div className="grid grid-cols-2 gap-1.5 @md:grid-cols-3 @2xl:grid-cols-4">
             {grid.map(([slug, r]) => {
               const label = statLabels[slug];
               return (
@@ -200,11 +211,13 @@ export function BossStats({
                       {label?.abbr ?? slug}
                     </span>
                   )}
+                  {/* PAS DE NOMBRE DE BARRES ICI. Le montant de vie suffit à qui
+                      prépare un combat ; le « × 50 » du Special Request ne faisait
+                      qu'encombrer la case. `hpLines` reste dans la donnée — c'est
+                      lui qui désigne le boss PRINCIPAL d'un combat — et la carte
+                      admin continue de l'afficher, là où il sert à contrôler. */}
                   <span className="text-content-strong min-w-0 truncate text-sm font-semibold tabular-nums">
                     {formatMonsterStat(slug, statAt(slug, r, ctx, quirkMods), scales, locale)}
-                    {slug === 'hp' && ctx.hpLines ? (
-                      <span className="text-content-muted ml-1 text-xs">× {ctx.hpLines}</span>
-                    ) : null}
                   </span>
                   <span className="sr-only">{label?.name ?? slug}</span>
                 </div>
