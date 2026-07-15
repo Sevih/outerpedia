@@ -1,0 +1,138 @@
+{
+  "teams": [
+    {
+      "title": {
+        "en": "Full Earth Team"
+      },
+      "element": "earth",
+      "slots": [
+        ["Ryu Lion", "Rhona", "Ame", "Rey"],
+        ["Notia", "Laine"],
+        ["Charlotte", "Viella", "Fran"],
+        ["Kappa", "Hanbyul Lee"]
+      ],
+      "geasActive": {
+        "bonus": ["49", "53", "92", "91", "89"],
+        "malus": ["5", "38", "18", "20", "90", "86", "60", "58", "10"]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "Remove the ranger geas if needed.",
+            "jp": "必要に応じてレンジャーのギアスを外してください。",
+            "kr": "필요시 레인저 기어스를 제거하세요.",
+            "zh": "如有需要，移除游侠誓约。",
+            "fr": "Retirez le geas ranger si nécessaire."
+          }
+        }
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "rfWf4ytqWW8",
+        "title": "Outerplane - The Madman's Laboratory - 11.4M Points",
+        "author": "Sevih"
+      }
+    },
+    {
+      "title": {
+        "en": "Mage Team"
+      },
+      "element": "dark",
+      "slots": [
+        ["Maxwell", "Ame", "Demiurge Luna", "Demiurge Astei"],
+        ["Laine", "Notia", "Viella"],
+        ["Alice", "Eternal", "Kuro", "Dahlia", "Omega Nadja"],
+        ["Skadi", "Tamara"]
+      ],
+      "geasActive": {
+        "bonus": ["53", "76", "91", "49", "89"],
+        "malus": ["86", "60", "5", "38", "18", "20", "53", "90"]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "Speed Tuning : {P/Maxwell} > {P/Laine} > {P/Skadi} > {P/Alice}",
+            "jp": "速度調整 : {P/Maxwell} > {P/Laine} > {P/Skadi} > {P/Alice}",
+            "kr": "속도 튜닝 : {P/Maxwell} > {P/Laine} > {P/Skadi} > {P/Alice}",
+            "zh": "速度调整 : {P/Maxwell} > {P/Laine} > {P/Skadi} > {P/Alice}",
+            "fr": "Réglage de vitesse : {P/Maxwell} > {P/Laine} > {P/Skadi} > {P/Alice}"
+          }
+        },
+        {
+          "p": {
+            "en": "Chain Order : {P/Alice} > {P/Laine} > {P/Maxwell} > {P/Skadi}",
+            "jp": "チェイン順序 : {P/Alice} > {P/Laine} > {P/Maxwell} > {P/Skadi}",
+            "kr": "체인 순서 : {P/Alice} > {P/Laine} > {P/Maxwell} > {P/Skadi}",
+            "zh": "连锁顺序 : {P/Alice} > {P/Laine} > {P/Maxwell} > {P/Skadi}",
+            "fr": "Ordre de chaîne : {P/Alice} > {P/Laine} > {P/Maxwell} > {P/Skadi}"
+          }
+        },
+        {
+          "p": {
+            "en": "{P/Maxwell} S1 + {P/Laine} S3 + {P/Skadi} S2 musn't exceed 50K damage (you don't want the boss to strike you with his enrage move)",
+            "jp": "{P/Maxwell} S1 + {P/Laine} S3 + {P/Skadi} S2のダメージは5万を超えてはいけません（ボスの激怒攻撃を受けたくない）",
+            "kr": "{P/Maxwell} S1 + {P/Laine} S3 + {P/Skadi} S2의 데미지가 5만을 초과하면 안 됩니다 (보스의 격노 공격을 받고 싶지 않음)",
+            "zh": "{P/Maxwell} S1 + {P/Laine} S3 + {P/Skadi} S2的伤害不能超过5万（你不想让Boss使用狂暴技能）",
+            "fr": "{P/Maxwell} S1 + {P/Laine} S3 + {P/Skadi} S2 ne doivent pas dépasser 50K de dégâts (vous ne voulez pas que le Boss vous frappe avec sa compétence d'enrage)"
+          }
+        },
+        {
+          "p": {
+            "en": "If playing her remove {P/Eternal} EE : you don't want her to get an extra turn",
+            "jp": "{P/Eternal}を使う場合はEEを外してください：追加ターンを得させたくない",
+            "kr": "{P/Eternal}을 사용한다면 EE를 해제하세요: 추가 턴을 얻게 하고 싶지 않음",
+            "zh": "如果使用{P/Eternal}，请移除她的EE：你不想让她获得额外回合",
+            "fr": "Si vous la jouez, retirez l'EE de {P/Eternal} : vous ne voulez pas qu'elle obtienne un tour supplémentaire"
+          }
+        },
+        {
+          "p": {
+            "en": "Break rotation",
+            "jp": "ブレイクローテーション",
+            "kr": "브레이크 로테이션",
+            "zh": "破坏轮换",
+            "fr": "Rotation de break"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "{P/Maxwell} prio : S3 > S2 Burn Lv 2 > S1",
+              "jp": "{P/Maxwell}優先 : S3 > S2バーンLv2 > S1",
+              "kr": "{P/Maxwell} 우선순위 : S3 > S2 번 Lv 2 > S1",
+              "zh": "{P/Maxwell}优先级 : S3 > S2燃烧Lv2 > S1",
+              "fr": "{P/Maxwell} priorité : S3 > S2 Burn Niv 2 > S1"
+            },
+            {
+              "en": "{P/Laine} : Only S1 for getting priority",
+              "jp": "{P/Laine} : 優先権獲得のためS1のみ",
+              "kr": "{P/Laine} : 우선권 획득을 위해 S1만 사용",
+              "zh": "{P/Laine} : 只用S1获取优先权",
+              "fr": "{P/Laine} : uniquement S1 pour gagner de la priorité"
+            },
+            {
+              "en": "{P/Skadi} : Only S1 Burn Lv 1 exept for first break when she will use Chain attack",
+              "jp": "{P/Skadi} : 最初のブレイク時のチェイン攻撃以外はS1バーンLv1のみ",
+              "kr": "{P/Skadi} : 첫 브레이크 체인 공격 외에는 S1 번 Lv 1만 사용",
+              "zh": "{P/Skadi} : 除了第一次破坏时的连锁攻击外，只用S1燃烧Lv1",
+              "fr": "{P/Skadi} : uniquement S1 Burn Niv 1 sauf pour le premier break où elle utilisera la Chain attack"
+            },
+            {
+              "en": "{P/Alice} : Use S2 once to speed down the boss then use Chain attack on the other break",
+              "jp": "{P/Alice} : S2を一度使ってボスの速度を下げ、他のブレイク時にチェイン攻撃",
+              "kr": "{P/Alice} : S2를 한 번 사용해 보스 속도를 낮추고 다른 브레이크 시 체인 공격",
+              "zh": "{P/Alice} : 使用一次S2降低Boss速度，然后在其他破坏时使用连锁攻击",
+              "fr": "{P/Alice} : utilisez S2 une fois pour ralentir le Boss puis utilisez la Chain attack sur l'autre break"
+            }
+          ]
+        }
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "Szgkhaza1jI",
+        "title": "Maxwell Guild Raid with Maxwell DPS",
+        "author": "XITangoIX"
+      }
+    }
+  ]
+}

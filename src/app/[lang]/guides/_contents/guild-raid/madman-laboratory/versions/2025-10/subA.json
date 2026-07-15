@@ -1,0 +1,52 @@
+{
+  "recommended": [
+    {
+      "characters": ["Rey"],
+      "reason": {
+        "en": "{C/Striker} dps {E/Earth}.",
+        "jp": "{C/Striker} {E/Earth}アタッカー。",
+        "kr": "{C/Striker} {E/Earth} 딜러.",
+        "zh": "{C/Striker} {E/Earth}输出。",
+        "fr": "DPS {C/Striker} {E/Earth}."
+      }
+    },
+    {
+      "characters": ["Noa"],
+      "reason": {
+        "en": "{C/Striker} dps {E/Earth}.",
+        "jp": "{C/Striker} {E/Earth}アタッカー。",
+        "kr": "{C/Striker} {E/Earth} 딜러.",
+        "zh": "{C/Striker} {E/Earth}输出。",
+        "fr": "DPS {C/Striker} {E/Earth}."
+      }
+    },
+    {
+      "characters": ["Delta"],
+      "reason": {
+        "en": "{C/Striker} dps {E/Earth}.",
+        "jp": "{C/Striker} {E/Earth}アタッカー。",
+        "kr": "{C/Striker} {E/Earth} 딜러.",
+        "zh": "{C/Striker} {E/Earth}输出。",
+        "fr": "DPS {C/Striker} {E/Earth}."
+      }
+    },
+    {
+      "characters": ["Rhona"],
+      "reason": {
+        "en": "{C/Striker} dps {E/Earth}.",
+        "jp": "{C/Striker} {E/Earth}アタッカー。",
+        "kr": "{C/Striker} {E/Earth} 딜러.",
+        "zh": "{C/Striker} {E/Earth}输出。",
+        "fr": "DPS {C/Striker} {E/Earth}."
+      }
+    }
+  ],
+  "team": {
+    "slots": [
+      ["Viella", "Saeran", "Monad Eva"],
+      ["Rey", "Noa"],
+      ["Rhona", "Delta", "Drakhan"],
+      ["Kappa", "Tamara", "Skadi", "Hanbyul Lee"]
+    ]
+  }
+}

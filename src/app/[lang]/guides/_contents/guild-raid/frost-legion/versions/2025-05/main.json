@@ -1,0 +1,237 @@
+{
+  "teams": [
+    {
+      "title": {
+        "en": "Full Dark"
+      },
+      "element": "dark",
+      "slots": [["Omega Nadja"], ["Maxwell"], ["Demiurge Astei"], ["Sterope"]],
+      "geasActive": {
+        "bonus": ["49", "52", "53", "94", "46"],
+        "malus": ["61", "60", "63", "57", "59", "65", "55", "96", "20"]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "Speed tune : {P/Sterope} > {P/Maxwell} > {P/Demiurge Astei} > {P/Omega Nadja}",
+            "jp": "速度調整 : {P/Sterope} > {P/Maxwell} > {P/Demiurge Astei} > {P/Omega Nadja}",
+            "kr": "속도 튜닝 : {P/Sterope} > {P/Maxwell} > {P/Demiurge Astei} > {P/Omega Nadja}",
+            "zh": "速度调整 : {P/Sterope} > {P/Maxwell} > {P/Demiurge Astei} > {P/Omega Nadja}",
+            "fr": "Réglage de vitesse : {P/Sterope} > {P/Maxwell} > {P/Demiurge Astei} > {P/Omega Nadja}"
+          }
+        },
+        {
+          "p": {
+            "en": "Role :",
+            "jp": "役割 :",
+            "kr": "역할 :",
+            "zh": "角色分工 :",
+            "fr": "Rôle :"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "{P/Sterope} : S3 and Skill Chain with her first",
+              "jp": "{P/Sterope} : S3を使い、最初にスキルチェイン",
+              "kr": "{P/Sterope} : S3 사용 후 먼저 스킬 체인",
+              "zh": "{P/Sterope} : 使用S3，首先进行技能连锁",
+              "fr": "{P/Sterope} : S3 et lancez le Skill Chain avec elle en premier"
+            },
+            {
+              "en": "{P/Omega Nadja} : S1B3 > S3 > S1",
+              "jp": "{P/Omega Nadja} : S1B3 > S3 > S1",
+              "kr": "{P/Omega Nadja} : S1B3 > S3 > S1",
+              "zh": "{P/Omega Nadja} : S1B3 > S3 > S1",
+              "fr": "{P/Omega Nadja} : S1B3 > S3 > S1"
+            },
+            {
+              "en": "{P/Demiurge Astei} : S1B2 > S3 > S1",
+              "jp": "{P/Demiurge Astei} : S1B2 > S3 > S1",
+              "kr": "{P/Demiurge Astei} : S1B2 > S3 > S1",
+              "zh": "{P/Demiurge Astei} : S1B2 > S3 > S1",
+              "fr": "{P/Demiurge Astei} : S1B2 > S3 > S1"
+            },
+            {
+              "en": "{P/Maxwell} : S3 > S2B2 > S2 > S1",
+              "jp": "{P/Maxwell} : S3 > S2B2 > S2 > S1",
+              "kr": "{P/Maxwell} : S3 > S2B2 > S2 > S1",
+              "zh": "{P/Maxwell} : S3 > S2B2 > S2 > S1",
+              "fr": "{P/Maxwell} : S3 > S2B2 > S2 > S1"
+            }
+          ]
+        },
+        {
+          "p": {
+            "en": "Use Rogue's Charm / Sage's Charm depending of your critical chance",
+            "jp": "クリティカル率に応じてローグのチャームまたはセージのチャームを使用",
+            "kr": "치명타 확률에 따라 로그의 부적 / 현자의 부적 사용",
+            "zh": "根据暴击率选择使用盗贼护符或贤者护符",
+            "fr": "Utilisez le Rogue's Charm / Sage's Charm selon votre taux de critique"
+          }
+        }
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "zpnej0kGURA",
+        "title": "Vladi Max Stage 15 - Dark Team",
+        "author": "Sevih"
+      }
+    },
+    {
+      "title": {
+        "en": "Classic G.Beth"
+      },
+      "element": "light",
+      "slots": [["Monad Eva"], ["Gnosis Beth"]],
+      "geasActive": {
+        "bonus": ["64"],
+        "malus": ["61", "60", "63", "65", "96", "58", "20"]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "Nothing special just do S2-S3-S1B3 with {P/Gnosis Beth}",
+            "jp": "特別なことはなく、{P/Gnosis Beth}でS2-S3-S1B3を使うだけ",
+            "kr": "특별한 건 없고 {P/Gnosis Beth}로 S2-S3-S1B3 사용",
+            "zh": "没什么特别的，{P/Gnosis Beth}使用S2-S3-S1B3即可",
+            "fr": "Rien de spécial, faites simplement S2-S3-S1B3 avec {P/Gnosis Beth}"
+          }
+        },
+        {
+          "p": {
+            "en": "Use {P/Monad Eva} S1B3 before boss enrage skill (even if it won't kill you)",
+            "jp": "ボスの激怒スキル前に{P/Monad Eva} S1B3を使用（死なない場合でも）",
+            "kr": "보스 격노 스킬 전에 {P/Monad Eva} S1B3 사용 (죽지 않더라도)",
+            "zh": "在Boss狂暴技能前使用{P/Monad Eva} S1B3（即使不会死也要用）",
+            "fr": "Utilisez le S1B3 de {P/Monad Eva} avant la compétence d'enrage du Boss (même si elle ne vous tuera pas)"
+          }
+        }
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "rUKAQnQmiZc",
+        "title": "Vladi Max Stage 7 - G.Beth Team",
+        "author": "Sevih"
+      }
+    },
+    {
+      "title": {
+        "en": "Burn Team"
+      },
+      "element": "fire",
+      "slots": [["Monad Eva"], ["Maxie"], ["Vlada", "Parti"], ["Ember", "Bell Cranel"]],
+      "geasActive": {
+        "bonus": ["64"],
+        "malus": ["61", "60", "63", "65", "55", "96", "58"]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "Speed tune : {P/Roxie} > {P/Monad Eva} > {P/Ember} > {P/Vlada}",
+            "jp": "速度調整 : {P/Roxie} > {P/Monad Eva} > {P/Ember} > {P/Vlada}",
+            "kr": "속도 튜닝 : {P/Roxie} > {P/Monad Eva} > {P/Ember} > {P/Vlada}",
+            "zh": "速度调整 : {P/Roxie} > {P/Monad Eva} > {P/Ember} > {P/Vlada}",
+            "fr": "Réglage de vitesse : {P/Roxie} > {P/Monad Eva} > {P/Ember} > {P/Vlada}"
+          }
+        },
+        {
+          "p": {
+            "en": "If you got {P/Ember} 5 star you want her with 20/30 more speed than {P/Vlada} in order to extend {D/BT_DOT_BURN} duration",
+            "jp": "{P/Ember}が5つ星の場合、{D/BT_DOT_BURN}の持続時間を延長するために{P/Vlada}より20/30速度を高くする",
+            "kr": "{P/Ember}가 5성이면 {D/BT_DOT_BURN} 지속시간 연장을 위해 {P/Vlada}보다 20/30 빠르게",
+            "zh": "如果{P/Ember}是5星，让她比{P/Vlada}快20/30速度以延长{D/BT_DOT_BURN}持续时间",
+            "fr": "Si vous avez {P/Ember} 5 étoiles, vous voulez qu'elle ait 20/30 de vitesse de plus que {P/Vlada} afin de prolonger la durée de {D/BT_DOT_BURN}"
+          }
+        },
+        {
+          "p": {
+            "en": "Role :",
+            "jp": "役割 :",
+            "kr": "역할 :",
+            "zh": "角色分工 :",
+            "fr": "Rôle :"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "{P/Monad Eva} : S1B2 to refill AP",
+              "jp": "{P/Monad Eva} : AP回復のためS1B2",
+              "kr": "{P/Monad Eva} : AP 충전용 S1B2",
+              "zh": "{P/Monad Eva} : 用S1B2回复AP",
+              "fr": "{P/Monad Eva} : S1B2 pour recharger l'AP"
+            },
+            {
+              "en": "{P/Roxie} : Only S1B3 then S3 at her than turn",
+              "jp": "{P/Roxie} : S1B3のみ、その後のターンでS3",
+              "kr": "{P/Roxie} : S1B3만 사용 후 다음 턴에 S3",
+              "zh": "{P/Roxie} : 只用S1B3，下一回合用S3",
+              "fr": "{P/Roxie} : uniquement S1B3 puis S3 lors de son tour"
+            },
+            {
+              "en": "{P/Ember} : S1B3 > S3",
+              "jp": "{P/Ember} : S1B3 > S3",
+              "kr": "{P/Ember} : S1B3 > S3",
+              "zh": "{P/Ember} : S1B3 > S3",
+              "fr": "{P/Ember} : S1B3 > S3"
+            },
+            {
+              "en": "{P/Vlada} : S3 then only S1 until she got her last turn (ideally 19th turn) and S2B2",
+              "jp": "{P/Vlada} : S3を使い、最後のターン（理想的には19ターン目）までS1のみ、そしてS2B2",
+              "kr": "{P/Vlada} : S3 사용 후 마지막 턴(이상적으로 19턴)까지 S1만, 그 후 S2B2",
+              "zh": "{P/Vlada} : 先用S3，然后只用S1直到最后一回合（理想是第19回合），再用S2B2",
+              "fr": "{P/Vlada} : S3 puis uniquement S1 jusqu'à son dernier tour (idéalement le 19e tour) et S2B2"
+            }
+          ]
+        }
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "zetrz8-fqZg",
+        "title": "Vladi Max Stage 13 - Burn Team",
+        "author": "Sevih"
+      }
+    },
+    {
+      "title": {
+        "en": "Solo Ember"
+      },
+      "element": "fire",
+      "slots": [["Ember"]],
+      "geasActive": {
+        "bonus": ["64"],
+        "malus": ["61", "60", "63", "57", "65", "55", "96", "58", "20"]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "You want : Revenge Set, Vanguard Charm, Token of the Supreme Witch weapon and an effectiveness Accessory",
+            "jp": "必要装備：リベンジセット、ヴァンガードチャーム、至高の魔女のトークン武器、効果命中アクセサリー",
+            "kr": "필요 장비: 복수 세트, 뱅가드 부적, 지고의 마녀의 토큰 무기, 효과적중 악세서리",
+            "zh": "需要装备：复仇套装、先锋护符、至高女巫徽记武器、效果命中饰品",
+            "fr": "Vous voulez : set Revenge, Vanguard Charm, l'arme Token of the Supreme Witch et un accessoire d'efficacité"
+          }
+        },
+        {
+          "p": {
+            "en": "Stats needed : Eff > Atk > All and low speed (around 120-130)",
+            "jp": "必要ステータス：効果命中 > 攻撃力 > その他、低速度（120-130程度）",
+            "kr": "필요 스탯: 효과적중 > 공격력 > 기타, 낮은 속도(120-130 정도)",
+            "zh": "需要属性：效果命中 > 攻击力 > 其他，低速度（120-130左右）",
+            "fr": "Stats nécessaires : Eff > Atk > Tout le reste et vitesse faible (environ 120-130)"
+          }
+        },
+        {
+          "p": {
+            "en": "Whenever you play just S1B3 to extend your {D/BT_DOT_BURN} duration",
+            "jp": "プレイ時は{D/BT_DOT_BURN}の持続時間を延長するためS1B3のみ使用",
+            "kr": "플레이 시 {D/BT_DOT_BURN} 지속시간 연장을 위해 S1B3만 사용",
+            "zh": "游戏时只用S1B3延长{D/BT_DOT_BURN}持续时间",
+            "fr": "À chaque fois que vous jouez, faites simplement S1B3 pour prolonger la durée de votre {D/BT_DOT_BURN}"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "notes": [
+    {
+      "en": "If you can chain break the boss, replace the {C/Defender} with another DPS. In the footage, {P/Kuro} was chosen because she is a {E/Light} character, with decent damage, {B/BT_CP_CHARGE}, and {D/BT_MARKING}.",
+      "jp": "チェインブレイクができる場合、{C/Defender}を別のDPSに変えてください。映像では{P/Kuro}が選ばれています。{E/Light}キャラクターで、まともなダメージ、{B/BT_CP_CHARGE}、{D/BT_MARKING}を持っています。",
+      "kr": "체인 브레이크가 가능하다면 {C/Defender}를 다른 DPS로 교체하세요. 영상에서는 {P/Kuro}가 선택되었습니다. {E/Light} 캐릭터이며 적절한 데미지, {B/BT_CP_CHARGE}, {D/BT_MARKING}을 가지고 있습니다.",
+      "zh": "如果你能进行连锁破坏，把{C/Defender}换成另一个DPS。视频中选择了{P/Kuro}，因为她是{E/Light}角色，伤害不错，还有{B/BT_CP_CHARGE}和{D/BT_MARKING}。",
+      "fr": "Si vous parvenez à le briser en chaîne, remplacez le {C/Defender} par un autre DPS. Dans la vidéo, {P/Kuro} a été choisie car c'est un personnage {E/Light}, avec des dégâts corrects, du {B/BT_CP_CHARGE} et du {D/BT_MARKING}."
+    }
+  ],
+  "recommended": [
+    {
+      "characters": ["Dianne"],
+      "reason": {
+        "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}",
+        "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}",
+        "kr": "{B/BT_REMOVE_DEBUFF} 및 {B/BT_IMMUNE}",
+        "zh": "{B/BT_REMOVE_DEBUFF}和{B/BT_IMMUNE}",
+        "fr": "{B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+      }
+    },
+    {
+      "characters": ["Monad Eva"],
+      "reason": {
+        "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_CALL_BACKUP}",
+        "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_CALL_BACKUP}",
+        "kr": "{B/BT_REMOVE_DEBUFF} 및 {B/BT_CALL_BACKUP}",
+        "zh": "{B/BT_REMOVE_DEBUFF}和{B/BT_CALL_BACKUP}",
+        "fr": "{B/BT_REMOVE_DEBUFF} et {B/BT_CALL_BACKUP}"
+      }
+    },
+    {
+      "characters": ["Luna"],
+      "reason": {
+        "en": "{B/BT_REMOVE_DEBUFF}, {B/BT_CALL_BACKUP} and she is a {C/Defender}",
+        "jp": "{B/BT_REMOVE_DEBUFF}、{B/BT_CALL_BACKUP}、そして{C/Defender}",
+        "kr": "{B/BT_REMOVE_DEBUFF}, {B/BT_CALL_BACKUP}, {C/Defender}",
+        "zh": "{B/BT_REMOVE_DEBUFF}、{B/BT_CALL_BACKUP}，且是{C/Defender}",
+        "fr": "{B/BT_REMOVE_DEBUFF}, {B/BT_CALL_BACKUP} et c'est une {C/Defender}"
+      }
+    }
+  ],
+  "team": {
+    "slots": [
+      ["Luna", "Demiurge Drakhan", "Omega Nadja", "Kuro"],
+      ["Dianne", "Monad Eva"],
+      ["Tamara", "Ryu Lion", "Akari"],
+      ["Demiurge Luna", "Ame", "Drakhan"]
+    ]
+  },
+  "video": {
+    "platform": "youtube",
+    "id": "eQRbxgOoL9k",
+    "title": "Geas Boss Prototype EX-78 (Stage 5)",
+    "author": "Sevih"
+  }
+}

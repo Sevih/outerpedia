@@ -1,0 +1,77 @@
+{
+  "recommended": [
+    {
+      "characters": ["Astei"],
+      "reason": {
+        "en": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+        "jp": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+        "kr": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+        "zh": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+        "fr": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+      }
+    },
+    {
+      "characters": ["Dianne"],
+      "reason": {
+        "en": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+        "jp": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+        "kr": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+        "zh": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+        "fr": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+      }
+    },
+    {
+      "characters": ["Maxwell"],
+      "reason": {
+        "en": "Standard {E/Dark} dps",
+        "jp": "標準的な{E/Dark}アタッカー",
+        "kr": "기본 {E/Dark} 딜러",
+        "zh": "标准{E/Dark}输出",
+        "fr": "DPS {E/Dark} standard"
+      }
+    },
+    {
+      "characters": ["Demiurge Astei"],
+      "reason": {
+        "en": "Standard {E/Dark} dps",
+        "jp": "標準的な{E/Dark}アタッカー",
+        "kr": "기본 {E/Dark} 딜러",
+        "zh": "标准{E/Dark}输出",
+        "fr": "DPS {E/Dark} standard"
+      }
+    },
+    {
+      "characters": ["Aer"],
+      "reason": {
+        "en": "Standard {E/Fire} dps",
+        "jp": "標準的な{E/Fire}アタッカー",
+        "kr": "기본 {E/Fire} 딜러",
+        "zh": "标准{E/Fire}输出",
+        "fr": "DPS {E/Fire} standard"
+      }
+    },
+    {
+      "characters": ["Bryn"],
+      "reason": {
+        "en": "Standard {E/Fire} dps",
+        "jp": "標準的な{E/Fire}アタッカー",
+        "kr": "기본 {E/Fire} 딜러",
+        "zh": "标准{E/Fire}输出",
+        "fr": "DPS {E/Fire} standard"
+      }
+    }
+  ],
+  "team": {
+    "slots": [
+      ["Astei", "Dianne", "Liselotte"],
+      ["Maxwell", "Bryn", "Francesca"],
+      ["Demiurge Astei", "Demiurge Luna", "Aer"],
+      ["Luna", "Ember"]
+    ]
+  },
+  "video": {
+    "platform": "youtube",
+    "id": "-JAndQY3BUY",
+    "title": "Planetary Control Unit - Geas Boss Self-Styled Automaton (Stage 5)"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "teams": [
+    {
+      "title": {
+        "en": "Light"
+      },
+      "element": "light",
+      "slots": [
+        ["Demiurge Drakhan"],
+        ["Demiurge Luna", "Regina"],
+        ["Drakhan", "Demiurge Stella"],
+        ["Monad Eva"]
+      ],
+      "geasActive": {
+        "bonus": ["47", "49", "53"],
+        "malus": ["16", "38", "103", "57", "71", "15", "70", "56"]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "Mind the No Extra Turn for {P/Demiurge Luna} S2",
+            "jp": "{P/Demiurge Luna} S2の追加ターン無効に注意",
+            "kr": "{P/Demiurge Luna} S2의 추가 턴 불가에 주의",
+            "zh": "注意{P/Demiurge Luna} S2的无额外回合",
+            "fr": "Attention au No Extra Turn pour le S2 de {P/Demiurge Luna}"
+          }
+        }
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "",
+        "title": ""
+      }
+    },
+    {
+      "title": {
+        "en": "Ember"
+      },
+      "element": "fire",
+      "slots": [["Ember"]],
+      "geasActive": {
+        "bonus": ["69"],
+        "malus": ["16", "38", "103", "57", "15", "70", "56", "30", "20"]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "{P/Ember} is all you need.",
+            "jp": "{P/Ember}だけで十分です。",
+            "kr": "{P/Ember}만 있으면 됩니다.",
+            "zh": "只需要{P/Ember}即可。",
+            "fr": "{P/Ember} suffit à elle seule."
+          }
+        }
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "",
+        "title": ""
+      }
+    },
+    {
+      "title": {
+        "en": "GBeth"
+      },
+      "icon": "IG_Buff_2100092",
+      "slots": [["Kuro"], ["Akari"], ["Gnosis Beth"], ["Monad Eva"]],
+      "geasActive": {
+        "bonus": ["68", "69"],
+        "malus": ["16", "38", "103", "71", "15", "70", "56", "20"]
+      },
+      "video": {
+        "platform": "youtube",
+        "id": "",
+        "title": ""
+      }
+    }
+  ]
+}

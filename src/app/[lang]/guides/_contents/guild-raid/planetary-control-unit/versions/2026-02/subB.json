@@ -1,0 +1,47 @@
+{
+  "recommended": [
+    {
+      "characters": ["Monad Eva"],
+      "reason": {
+        "en": "{B/BT_CALL_BACKUP} and {B/BT_REMOVE_DEBUFF}",
+        "jp": "{B/BT_CALL_BACKUP}と{B/BT_REMOVE_DEBUFF}",
+        "kr": "{B/BT_CALL_BACKUP} 및 {B/BT_REMOVE_DEBUFF}",
+        "zh": "{B/BT_CALL_BACKUP}和{B/BT_REMOVE_DEBUFF}",
+        "fr": "{B/BT_CALL_BACKUP} et {B/BT_REMOVE_DEBUFF}"
+      }
+    },
+    {
+      "characters": ["Dianne"],
+      "reason": {
+        "en": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+        "jp": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+        "kr": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+        "zh": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+        "fr": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+      }
+    },
+    {
+      "characters": ["Luna"],
+      "reason": {
+        "en": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}",
+        "jp": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}",
+        "kr": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}",
+        "zh": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}",
+        "fr": "{B/BT_CALL_BACKUP} {B/BT_REMOVE_DEBUFF} {C/Defender}"
+      }
+    }
+  ],
+  "team": {
+    "slots": [
+      ["Luna"],
+      ["Drakhan", "Demiurge Stella"],
+      ["Regina", "Demiurge Luna"],
+      ["Monad Eva", "Dianne"]
+    ]
+  },
+  "video": {
+    "platform": "youtube",
+    "id": "cfA5D0NQc5Y",
+    "title": "Planetary Control Unit - Geas Boss Astral Guardian (Stage 4)"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "recommended": [
+    {
+      "characters": ["Ryu Lion", "Notia", "Core Fusion Notia"],
+      "reason": {
+        "en": "{C/Ranger} dps {E/Earth}.",
+        "jp": "{C/Ranger} {E/Earth}アタッカー。",
+        "kr": "{C/Ranger} {E/Earth} 딜러.",
+        "zh": "{C/Ranger} {E/Earth}输出。",
+        "fr": "DPS {C/Ranger} {E/Earth}."
+      }
+    },
+    {
+      "characters": ["Mystic Sage Ame"],
+      "reason": {
+        "en": "One of the strongest {C/Ranger}.",
+        "jp": "最強クラスの{C/Ranger}。",
+        "kr": "최강급 {C/Ranger}.",
+        "zh": "最强{C/Ranger}之一。",
+        "fr": "L'un des meilleurs {C/Ranger}."
+      }
+    }
+  ],
+  "team": {
+    "slots": [
+      ["Viella", "Saeran", "Monad Eva"],
+      ["Ryu Lion", "Demiurge Luna", "Ame", "Kitsune of Eternity Tamamo-no-Mae"],
+      ["Mystic Sage Ame", "Notia", "Core Fusion Notia"],
+      ["Kappa", "Tamara", "Hanbyul Lee"]
+    ]
+  }
+}

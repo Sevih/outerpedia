@@ -1,0 +1,38 @@
+{
+  "recommended": [
+    {
+      "characters": ["Dianne"],
+      "reason": {
+        "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}",
+        "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}",
+        "kr": "{B/BT_REMOVE_DEBUFF} 및 {B/BT_IMMUNE}",
+        "zh": "{B/BT_REMOVE_DEBUFF}和{B/BT_IMMUNE}",
+        "fr": "{B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+      }
+    },
+    {
+      "characters": ["Monad Eva"],
+      "reason": {
+        "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_CALL_BACKUP}",
+        "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_CALL_BACKUP}",
+        "kr": "{B/BT_REMOVE_DEBUFF} 및 {B/BT_CALL_BACKUP}",
+        "zh": "{B/BT_REMOVE_DEBUFF}和{B/BT_CALL_BACKUP}",
+        "fr": "{B/BT_REMOVE_DEBUFF} et {B/BT_CALL_BACKUP}"
+      }
+    }
+  ],
+  "team": {
+    "slots": [
+      ["Tamara", "Skadi"],
+      ["Dianne", "Monad Eva"],
+      ["Demiurge Luna", "Maxwell", "Ryu Lion"],
+      ["Demiurge Astei", "Gnosis Dahlia"]
+    ]
+  },
+  "video": {
+    "platform": "youtube",
+    "id": "-z3VlH16dA4",
+    "title": "Geas Boss Vlada Assault Suit (Stage 4)",
+    "author": "Sevih"
+  }
+}

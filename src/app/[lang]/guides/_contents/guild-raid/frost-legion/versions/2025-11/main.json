@@ -1,0 +1,750 @@
+{
+  "teams": [
+    {
+      "title": {
+        "en": "Full Dark"
+      },
+      "element": "dark",
+      "slots": [["Omega Nadja"], ["Maxwell"], ["Demiurge Astei"], ["Sterope"]],
+      "geasActive": {
+        "bonus": ["49", "52", "53", "94", "46"],
+        "malus": ["61", "60", "63", "57", "59", "65", "55", "96", "20"]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "Speed tune : {P/Sterope} > {P/Maxwell} > {P/Demiurge Astei} > {P/Omega Nadja}",
+            "jp": "速度調整 : {P/Sterope} > {P/Maxwell} > {P/Demiurge Astei} > {P/Omega Nadja}",
+            "kr": "속도 튜닝 : {P/Sterope} > {P/Maxwell} > {P/Demiurge Astei} > {P/Omega Nadja}",
+            "zh": "速度调整 : {P/Sterope} > {P/Maxwell} > {P/Demiurge Astei} > {P/Omega Nadja}",
+            "fr": "Réglage de vitesse : {P/Sterope} > {P/Maxwell} > {P/Demiurge Astei} > {P/Omega Nadja}"
+          }
+        },
+        {
+          "p": {
+            "en": "Role :",
+            "jp": "役割 :",
+            "kr": "역할 :",
+            "zh": "角色分工 :",
+            "fr": "Rôle :"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "{P/Sterope} : S3 and Skill Chain with her first",
+              "jp": "{P/Sterope} : S3を使い、最初にスキルチェイン",
+              "kr": "{P/Sterope} : S3 사용 후 먼저 스킬 체인",
+              "zh": "{P/Sterope} : 使用S3，首先进行技能连锁",
+              "fr": "{P/Sterope} : S3 et lancez le Skill Chain avec elle en premier"
+            },
+            {
+              "en": "{P/Omega Nadja} : S1B3 > S3 > S1",
+              "jp": "{P/Omega Nadja} : S1B3 > S3 > S1",
+              "kr": "{P/Omega Nadja} : S1B3 > S3 > S1",
+              "zh": "{P/Omega Nadja} : S1B3 > S3 > S1",
+              "fr": "{P/Omega Nadja} : S1B3 > S3 > S1"
+            },
+            {
+              "en": "{P/Demiurge Astei} : S1B2 > S3 > S1",
+              "jp": "{P/Demiurge Astei} : S1B2 > S3 > S1",
+              "kr": "{P/Demiurge Astei} : S1B2 > S3 > S1",
+              "zh": "{P/Demiurge Astei} : S1B2 > S3 > S1",
+              "fr": "{P/Demiurge Astei} : S1B2 > S3 > S1"
+            },
+            {
+              "en": "{P/Maxwell} : S3 > S2B2 > S2 > S1",
+              "jp": "{P/Maxwell} : S3 > S2B2 > S2 > S1",
+              "kr": "{P/Maxwell} : S3 > S2B2 > S2 > S1",
+              "zh": "{P/Maxwell} : S3 > S2B2 > S2 > S1",
+              "fr": "{P/Maxwell} : S3 > S2B2 > S2 > S1"
+            }
+          ]
+        },
+        {
+          "p": {
+            "en": "Use Rogue's Charm / Sage's Charm depending of your critical chance",
+            "jp": "クリティカル率に応じてローグのチャームまたはセージのチャームを使用",
+            "kr": "치명타 확률에 따라 로그의 부적 / 현자의 부적 사용",
+            "zh": "根据暴击率选择使用盗贼护符或贤者护符",
+            "fr": "Utilisez le Rogue's Charm / Sage's Charm selon votre taux de critique"
+          }
+        }
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "zpnej0kGURA",
+        "title": "Vladi Max Stage 15 - Dark Team",
+        "author": "Sevih"
+      }
+    },
+    {
+      "title": {
+        "en": "Classic G.Beth"
+      },
+      "element": "light",
+      "slots": [["Monad Eva"], ["Gnosis Beth"]],
+      "geasActive": {
+        "bonus": ["64"],
+        "malus": ["61", "60", "63", "65", "96", "58", "20"]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "Nothing special just do S2-S3-S1B3 with {P/Gnosis Beth}",
+            "jp": "特別なことはなく、{P/Gnosis Beth}でS2-S3-S1B3を使うだけ",
+            "kr": "특별한 건 없고 {P/Gnosis Beth}로 S2-S3-S1B3 사용",
+            "zh": "没什么特别的，{P/Gnosis Beth}使用S2-S3-S1B3即可",
+            "fr": "Rien de spécial, faites simplement S2-S3-S1B3 avec {P/Gnosis Beth}"
+          }
+        },
+        {
+          "p": {
+            "en": "Use {P/Monad Eva} S1B3 before boss enrage skill (even if it won't kill you)",
+            "jp": "ボスの激怒スキル前に{P/Monad Eva} S1B3を使用（死なない場合でも）",
+            "kr": "보스 격노 스킬 전에 {P/Monad Eva} S1B3 사용 (죽지 않더라도)",
+            "zh": "在Boss狂暴技能前使用{P/Monad Eva} S1B3（即使不会死也要用）",
+            "fr": "Utilisez le S1B3 de {P/Monad Eva} avant la compétence d'enrage du Boss (même si elle ne vous tuera pas)"
+          }
+        }
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "rUKAQnQmiZc",
+        "title": "Vladi Max Stage 7 - G.Beth Team",
+        "author": "Sevih"
+      }
+    },
+    {
+      "title": {
+        "en": "Burn Team"
+      },
+      "element": "fire",
+      "slots": [["Monad Eva"], ["Maxie"], ["Vlada", "Parti"], ["Ember", "Bell Cranel"]],
+      "geasActive": {
+        "bonus": ["64"],
+        "malus": ["61", "60", "63", "65", "55", "96", "58"]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "Speed tune : {P/Roxie} > {P/Monad Eva} > {P/Ember} > {P/Vlada}",
+            "jp": "速度調整 : {P/Roxie} > {P/Monad Eva} > {P/Ember} > {P/Vlada}",
+            "kr": "속도 튜닝 : {P/Roxie} > {P/Monad Eva} > {P/Ember} > {P/Vlada}",
+            "zh": "速度调整 : {P/Roxie} > {P/Monad Eva} > {P/Ember} > {P/Vlada}",
+            "fr": "Réglage de vitesse : {P/Roxie} > {P/Monad Eva} > {P/Ember} > {P/Vlada}"
+          }
+        },
+        {
+          "p": {
+            "en": "If you got {P/Ember} 5 star you want her with 20/30 more speed than {P/Vlada} in order to extend {D/BT_DOT_BURN} duration",
+            "jp": "{P/Ember}が5つ星の場合、{D/BT_DOT_BURN}の持続時間を延長するために{P/Vlada}より20/30速度を高くする",
+            "kr": "{P/Ember}가 5성이면 {D/BT_DOT_BURN} 지속시간 연장을 위해 {P/Vlada}보다 20/30 빠르게",
+            "zh": "如果{P/Ember}是5星，让她比{P/Vlada}快20/30速度以延长{D/BT_DOT_BURN}持续时间",
+            "fr": "Si vous avez {P/Ember} 5 étoiles, vous voulez qu'elle ait 20/30 de vitesse de plus que {P/Vlada} afin de prolonger la durée de {D/BT_DOT_BURN}"
+          }
+        },
+        {
+          "p": {
+            "en": "Role :",
+            "jp": "役割 :",
+            "kr": "역할 :",
+            "zh": "角色分工 :",
+            "fr": "Rôle :"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "{P/Monad Eva} : S1B2 to refill AP",
+              "jp": "{P/Monad Eva} : AP回復のためS1B2",
+              "kr": "{P/Monad Eva} : AP 충전용 S1B2",
+              "zh": "{P/Monad Eva} : 用S1B2回复AP",
+              "fr": "{P/Monad Eva} : S1B2 pour recharger l'AP"
+            },
+            {
+              "en": "{P/Roxie} : Only S1B3 then S3 at her than turn",
+              "jp": "{P/Roxie} : S1B3のみ、その後のターンでS3",
+              "kr": "{P/Roxie} : S1B3만 사용 후 다음 턴에 S3",
+              "zh": "{P/Roxie} : 只用S1B3，下一回合用S3",
+              "fr": "{P/Roxie} : uniquement S1B3 puis S3 lors de son tour"
+            },
+            {
+              "en": "{P/Ember} : S1B3 > S3",
+              "jp": "{P/Ember} : S1B3 > S3",
+              "kr": "{P/Ember} : S1B3 > S3",
+              "zh": "{P/Ember} : S1B3 > S3",
+              "fr": "{P/Ember} : S1B3 > S3"
+            },
+            {
+              "en": "{P/Vlada} : S3 then only S1 until she got her last turn (ideally 19th turn) and S2B2",
+              "jp": "{P/Vlada} : S3を使い、最後のターン（理想的には19ターン目）までS1のみ、そしてS2B2",
+              "kr": "{P/Vlada} : S3 사용 후 마지막 턴(이상적으로 19턴)까지 S1만, 그 후 S2B2",
+              "zh": "{P/Vlada} : 先用S3，然后只用S1直到最后一回合（理想是第19回合），再用S2B2",
+              "fr": "{P/Vlada} : S3 puis uniquement S1 jusqu'à son dernier tour (idéalement le 19e tour) et S2B2"
+            }
+          ]
+        }
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "zetrz8-fqZg",
+        "title": "Vladi Max Stage 13 - Burn Team",
+        "author": "Sevih"
+      }
+    },
+    {
+      "title": {
+        "en": "Solo Ember"
+      },
+      "element": "fire",
+      "slots": [["Ember"], ["Liselotte", "Ritri"], ["Omega Nadja"], ["Demiurge Drakhan"]],
+      "geasActive": {
+        "bonus": ["64"],
+        "malus": ["61", "60", "63", "57", "65", "55", "96", "58", "20"]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "NOTE: This guide is aimed at stage 10+. Boss has different stats at lower stages.",
+            "jp": "注意：このガイドはステージ10以上向けです。低ステージではボスのステータスが異なります。",
+            "kr": "참고: 이 가이드는 스테이지 10 이상을 위한 것입니다. 낮은 스테이지에서는 보스 스탯이 다릅니다.",
+            "zh": "注意：本指南针对10层及以上。低层Boss数据不同。",
+            "fr": "NOTE : ce guide vise le stage 10+. Le Boss a des stats différentes aux stages inférieurs."
+          }
+        },
+        {
+          "p": {
+            "en": "{P/Ember} Build:",
+            "jp": "{P/Ember}ビルド：",
+            "kr": "{P/Ember} 빌드:",
+            "zh": "{P/Ember}配装：",
+            "fr": "Build de {P/Ember} :"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "T4 Revenge Set (mandatory at higher stages for bigger shield), Vanguard Charm, Token of the Supreme Witch weapon",
+              "jp": "T4リベンジセット（高ステージでは大きなシールドのため必須）、ヴァンガードチャーム、至高の魔女のトークン武器",
+              "kr": "T4 복수 세트(높은 스테이지에서 큰 실드를 위해 필수), 뱅가드 부적, 지고의 마녀의 토큰 무기",
+              "zh": "T4复仇套装（高层必须，需要大盾），先锋护符，至高女巫徽记武器",
+              "fr": "Set Revenge T4 (obligatoire aux stages élevés pour un plus grand bouclier), Vanguard Charm, arme Token of the Supreme Witch"
+            },
+            {
+              "en": "Accessory: ATK% preferred. Effectiveness accessory if you can't reach required effectiveness. {I-A/Gorgon's Vanity [Defender]} as last resort (doesn't help effectiveness on Burst 3 and you have 1 turn without the buff)",
+              "jp": "アクセサリー：攻撃力%優先。必要な効果命中に達しない場合は効果命中アクセサリー。最終手段として{I-A/Gorgon's Vanity [Defender]}（バースト3では効果命中の恩恵がなく、1ターンバフなしになる）",
+              "kr": "악세서리: 공격력% 우선. 필요한 효과적중에 도달 못하면 효과적중 악세서리. 최후의 수단으로 {I-A/Gorgon's Vanity [Defender]}(버스트 3에서 효과적중 도움 안 되고 1턴 버프 없음)",
+              "zh": "饰品：攻击力%优先。效果命中饰品如果达不到需要的效果命中。{I-A/Gorgon's Vanity [Defender]}作为最后手段（爆发3不提供效果命中且有1回合没有buff）",
+              "fr": "Accessoire : ATK% de préférence. Accessoire d'efficacité si vous ne pouvez pas atteindre l'efficacité requise. {I-A/Gorgon's Vanity [Defender]} en dernier recours (n'aide pas l'efficacité sur le Burst 3 et vous avez 1 tour sans le buff)"
+            },
+            {
+              "en": "Stats priority: Eff > Atk > HP > Def > Crit Rate (optional) and low speed (around 120-130, ideally +6-10 speed to refresh shield just before stun)",
+              "jp": "ステータス優先度：効果命中 > 攻撃力 > HP > 防御 > クリ率（任意）、低速度（120-130程度、理想的にはスタン直前にシールド更新のため+6-10速度）",
+              "kr": "스탯 우선순위: 효과적중 > 공격력 > HP > 방어력 > 치명타(선택), 낮은 속도(120-130 정도, 이상적으로 스턴 직전 실드 갱신을 위해 +6-10 속도)",
+              "zh": "属性优先级：效果命中 > 攻击 > 生命 > 防御 > 暴击率（可选），低速度（120-130左右，理想情况下+6-10速度以便在晕眩前刷新盾）",
+              "fr": "Priorité des stats : Eff > Atk > HP > Def > Taux Critique (optionnel) et vitesse faible (environ 120-130, idéalement +6-10 de vitesse pour rafraîchir le bouclier juste avant l'étourdissement)"
+            },
+            {
+              "en": "Crit Rate lets the boss counter to apply more burns to himself which is good as long as your shield can hold up",
+              "jp": "クリ率はボスのカウンターで自分にバーンを付与させる（シールドが持つ限り有効）",
+              "kr": "치명타는 보스가 카운터로 자신에게 화상을 더 적용하게 함(실드가 버틸 수 있다면 좋음)",
+              "zh": "暴击率让Boss反击时给自己上更多燃烧（只要盾能撑住就好）",
+              "fr": "Le Taux Critique permet au Boss de contre-attaquer pour s'appliquer plus de burns, ce qui est bon tant que votre bouclier tient"
+            },
+            {
+              "en": "AVOID Resilience - You're relying on the burn to go into revenge range. Ember has 160 resilience naturally while boss has 167 effectiveness.",
+              "jp": "根性を避ける - リベンジ範囲に入るためにバーンに依存。Emberは自然に160の根性、ボスは167の効果命中",
+              "kr": "효과저항 피하기 - 복수 범위에 들어가기 위해 화상에 의존. Ember는 자연적으로 160 효과저항, 보스는 167 효과적중",
+              "zh": "避免效果抵抗 - 依靠燃烧进入复仇范围。Ember自带160效果抵抗，Boss有167效果命中",
+              "fr": "ÉVITEZ la Résilience — vous comptez sur le burn pour entrer en portée de revenge. Ember a 160 de résilience naturellement tandis que le Boss a 167 d'efficacité."
+            },
+            {
+              "en": "If dying past the initial few turns: Trade other stats (including effectiveness) for more ATK to get a bigger shield",
+              "jp": "最初の数ターン後に死ぬ場合：より大きなシールドのため他のステータス（効果命中含む）を攻撃力に交換",
+              "kr": "초반 몇 턴 후 죽으면: 더 큰 실드를 위해 다른 스탯(효과적중 포함)을 공격력으로 교환",
+              "zh": "如果前几回合后死亡：用其他属性（包括效果命中）换取更多攻击力获得更大的盾",
+              "fr": "Si vous mourez après les premiers tours : échangez d'autres stats (y compris l'efficacité) contre plus d'ATK pour obtenir un plus grand bouclier"
+            },
+            {
+              "en": "Gameplay: Only use S1B3 to extend your {D/BT_DOT_BURN} duration",
+              "jp": "プレイ方法：{D/BT_DOT_BURN}の持続時間を延長するためS1B3のみ使用",
+              "kr": "플레이: {D/BT_DOT_BURN} 지속시간 연장을 위해 S1B3만 사용",
+              "zh": "玩法：只用S1B3延长{D/BT_DOT_BURN}持续时间",
+              "fr": "Gameplay : utilisez uniquement S1B3 pour prolonger la durée de votre {D/BT_DOT_BURN}"
+            }
+          ]
+        },
+        {
+          "p": {
+            "en": "Sacrifice Characters (to hold charms):",
+            "jp": "犠牲キャラクター（チャーム保持用）：",
+            "kr": "희생 캐릭터(부적 보유용):",
+            "zh": "牺牲角色（持有护符）：",
+            "fr": "Personnages sacrifiés (pour porter les charms) :"
+          }
+        },
+        {
+          "p": {
+            "en": "Ideal sacrifices with passive damage reduction (persists after death):",
+            "jp": "パッシブダメージ軽減持ちの理想的な犠牲（死後も持続）：",
+            "kr": "패시브 피해 감소가 있는 이상적인 희생(사망 후에도 지속):",
+            "zh": "理想的牺牲角色需有被动减伤（死后持续）：",
+            "fr": "Sacrifices idéaux avec réduction de dégâts passive (persiste après la mort) :"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "{P/Omega Nadja} - Passive damage reduction with shield. DO NOT use her EE (gives unwanted dmg reduction vs light and effectiveness which can cause counter into speed debuff). Might need to reset her level at lower stages.",
+              "jp": "{P/Omega Nadja} - シールド付きパッシブダメージ軽減。EEは使わない（光への不要なダメージ軽減と効果命中を与え、速度デバフへのカウンターを引き起こす可能性）。低ステージではレベルリセットが必要かも",
+              "kr": "{P/Omega Nadja} - 실드와 함께 패시브 피해 감소. EE 사용 금지(원치 않는 빛 속성 피해 감소와 효과적중을 주어 속도 디버프로 카운터 유발 가능). 낮은 스테이지에서 레벨 리셋 필요할 수 있음",
+              "zh": "{P/Omega Nadja} - 护盾被动减伤。不要用她的EE（会给予不需要的光属性减伤和效果命中，可能导致反击触发速度debuff）。低层可能需要重置等级",
+              "fr": "{P/Omega Nadja} — Réduction de dégâts passive avec bouclier. N'utilisez PAS son EE (donne une réduction de dégâts indésirable contre Light et de l'efficacité, ce qui peut provoquer une contre-attaque infligeant un debuff de vitesse). Il peut être nécessaire de réinitialiser son niveau aux stages inférieurs."
+            },
+            {
+              "en": "{P/Demiurge Drakhan} - Passive damage reduction (AoE only)",
+              "jp": "{P/Demiurge Drakhan} - パッシブダメージ軽減（AoEのみ）",
+              "kr": "{P/Demiurge Drakhan} - 패시브 피해 감소(광역만)",
+              "zh": "{P/Demiurge Drakhan} - 被动减伤（仅群攻）",
+              "fr": "{P/Demiurge Drakhan} — Réduction de dégâts passive (AoE uniquement)"
+            },
+            {
+              "en": "{P/Hilde} - 15% damage reduction (AoE only) with inbuilt Charmer's Golden Chalice passive",
+              "jp": "{P/Hilde} - 15%ダメージ軽減（AoEのみ）、内蔵チャーマーズネックレスパッシブ付き",
+              "kr": "{P/Hilde} - 15% 피해 감소(광역만), 내장 챠머즈 넥클레스 패시브",
+              "zh": "{P/Hilde} - 15%减伤（仅群攻），内置魅惑者项链被动",
+              "fr": "{P/Hilde} — 15% de réduction de dégâts (AoE uniquement) avec la passive Charmer's Golden Chalice intégrée"
+            },
+            {
+              "en": "{P/Ritri} - Passive damage reduction",
+              "jp": "{P/Ritri} - パッシブダメージ軽減",
+              "kr": "{P/Ritri} - 패시브 피해 감소",
+              "zh": "{P/Ritri} - 被动减伤",
+              "fr": "{P/Ritri} — Réduction de dégâts passive"
+            },
+            {
+              "en": "{P/Liselotte} with EE - Passive damage reduction with shield. Her passive speed boost (+5 at 4★ or +10 at 6★) only reduces damage if the boost puts Ember above desired speed. If you build some speed on Ember anyway, she won't reduce your damage.",
+              "jp": "EE付き{P/Liselotte} - シールド付きパッシブダメージ軽減。パッシブ速度ブースト（4★で+5、6★で+10）は{P/Ember}が望む速度を超える場合のみダメージを減らす",
+              "kr": "EE 장착 {P/Liselotte} - 실드와 패시브 피해 감소. 패시브 속도 부스트(4★에서 +5, 6★에서 +10)는 부스트가 {P/Ember}를 원하는 속도 이상으로 올릴 때만 피해 감소",
+              "zh": "带EE的{P/Liselotte} - 护盾被动减伤。被动速度加成（4★时+5，6★时+10）只有在加成使{P/Ember}超过期望速度时才会减少伤害",
+              "fr": "{P/Liselotte} avec EE — Réduction de dégâts passive avec bouclier. Son boost de vitesse passif (+5 à 4★ ou +10 à 6★) ne réduit les dégâts que si le boost place Ember au-dessus de la vitesse souhaitée. Si vous mettez de toute façon de la vitesse sur Ember, elle ne réduira pas vos dégâts."
+            }
+          ]
+        },
+        {
+          "p": {
+            "en": "Best combination: {P/Omega Nadja} + {P/Demiurge Drakhan} + {P/Liselotte} makes boss non-crits do less than 100 DMG overall, even on its enrage ultimate, making it far easier to survive.",
+            "jp": "最高の組み合わせ：{P/Omega Nadja} + {P/Demiurge Drakhan} + {P/Liselotte}でボスの非クリダメージを100以下に抑え、激怒アルティメットでも生存が容易に。",
+            "kr": "최고의 조합: {P/Omega Nadja} + {P/Demiurge Drakhan} + {P/Liselotte}로 보스 비치명타 피해를 100 이하로, 격노 궁극기에서도 생존이 훨씬 쉬워짐.",
+            "zh": "最佳组合：{P/Omega Nadja} + {P/Demiurge Drakhan} + {P/Liselotte}让Boss非暴击伤害低于100，即使是狂暴大招也能轻松生存。",
+            "fr": "Meilleure combinaison : {P/Omega Nadja} + {P/Demiurge Drakhan} + {P/Liselotte} fait que les coups non-critiques du Boss infligent moins de 100 de dégâts au total, même sur son ultime d'enrage, ce qui rend la survie bien plus facile."
+          }
+        },
+        {
+          "p": {
+            "en": "Charm holders:",
+            "jp": "チャーム保持者：",
+            "kr": "부적 보유자:",
+            "zh": "护符持有者：",
+            "fr": "Porteurs de charms :"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "Charmer's Golden Chalice: Any defender can hold it to help them die faster. Give enough tankiness to survive first hit but NOT second hit, so Charmer's activates on first + second hit.",
+              "jp": "チャーマーズネックレス：任意のディフェンダーが持てる。最初の攻撃は生き残り、2回目は生き残らない程度の耐久で、1回目と2回目でチャーマーズが発動",
+              "kr": "챠머즈 넥클레스: 모든 디펜더가 보유 가능. 첫 번째 공격은 생존하고 두 번째는 못하는 정도의 탱킹으로 1번째+2번째 공격에서 챠머즈 발동",
+              "zh": "魅惑者项链：任何防御者都可以持有。给足够的坦度让他们能撑过第一击但撑不过第二击，这样魅惑者在第一和第二击都能触发",
+              "fr": "Charmer's Golden Chalice : n'importe quel défenseur peut le porter pour mourir plus vite. Donnez assez de résistance pour survivre au premier coup mais PAS au second, afin que le Charmer's s'active au premier + second coup."
+            },
+            {
+              "en": "Defenders can also hold Unholy Exulset",
+              "jp": "ディフェンダーはUnholy Exulsetも持てる",
+              "kr": "디펜더는 Unholy Exulset도 보유 가능",
+              "zh": "防御者也可以持有Unholy Exulset",
+              "fr": "Les défenseurs peuvent aussi porter l'Unholy Exulset"
+            },
+            {
+              "en": "Healers can hold Starlight Road",
+              "jp": "ヒーラーはStarlight Roadを持てる",
+              "kr": "힐러는 Starlight Road 보유 가능",
+              "zh": "治疗者可以持有Starlight Road",
+              "fr": "Les soigneurs peuvent porter le Starlight Road"
+            }
+          ]
+        },
+        {
+          "p": {
+            "en": "Turn 1 Strategy with {P/Liselotte} (only if you can't survive turn 1 consistently, as it lowers your damage by 1 turn):",
+            "jp": "{P/Liselotte}を使ったターン1戦略（ターン1を安定して生き残れない場合のみ、1ターン分ダメージが減る）：",
+            "kr": "{P/Liselotte}를 사용한 1턴 전략(1턴을 안정적으로 생존 못할 때만, 1턴 데미지 감소):",
+            "zh": "{P/Liselotte}第1回合策略（仅当无法稳定度过第1回合时使用，会减少1回合伤害）：",
+            "fr": "Stratégie du tour 1 avec {P/Liselotte} (uniquement si vous ne survivez pas au tour 1 de manière fiable, car cela réduit vos dégâts d'1 tour) :"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "Put {P/Liselotte} in front row (first slot) to reduce turn 1 RNG - If both hit 100% priority at the same time, it will always give Liselotte first turn",
+              "jp": "{P/Liselotte}を前列（最初のスロット）に配置してターン1のRNGを減らす - 両方が同時に100%優先度に達した場合、常に{P/Liselotte}が先に行動",
+              "kr": "{P/Liselotte}를 앞줄(첫 번째 슬롯)에 배치해 1턴 RNG 감소 - 둘 다 동시에 100% 우선도에 도달하면 항상 {P/Liselotte}가 먼저 행동",
+              "zh": "把{P/Liselotte}放在前排（第一个位置）以减少第1回合RNG - 如果两者同时达到100%优先级，总是{P/Liselotte}先行动",
+              "fr": "Placez {P/Liselotte} en première ligne (premier emplacement) pour réduire le RNG du tour 1 — si les deux atteignent 100% de priorité en même temps, Liselotte jouera toujours en premier"
+            },
+            {
+              "en": "Low speed but faster than Ember (130ish speed at max)",
+              "jp": "低速度だが{P/Ember}より速い（最大130程度）",
+              "kr": "낮은 속도지만 {P/Ember}보다 빠르게(최대 130 정도)",
+              "zh": "低速度但比{P/Ember}快（最高130左右）",
+              "fr": "Vitesse faible mais plus rapide qu'Ember (environ 130 de vitesse au maximum)"
+            },
+            {
+              "en": "0 crit, 0 accuracy, 0 resilience",
+              "jp": "クリ0、命中0、根性0",
+              "kr": "치명타 0, 명중률 0, 효과저항 0",
+              "zh": "0暴击，0命中，0效果抵抗",
+              "fr": "0 critique, 0 précision, 0 résilience"
+            },
+            {
+              "en": "Enough tankiness to survive the first 2 hits (including crit) + burn damage",
+              "jp": "最初の2回の攻撃（クリ含む）+ バーンダメージを生き残る程度の耐久",
+              "kr": "첫 2번의 공격(치명타 포함) + 화상 피해를 생존할 정도의 탱킹",
+              "zh": "足够的坦度撑过前2次攻击（包括暴击）+ 燃烧伤害",
+              "fr": "Assez de résistance pour survivre aux 2 premiers coups (critique compris) + les dégâts de burn"
+            },
+            {
+              "en": "Use Vanguard Charm",
+              "jp": "ヴァンガードチャームを使用",
+              "kr": "뱅가드 부적 사용",
+              "zh": "使用先锋护符",
+              "fr": "Utilisez le Vanguard Charm"
+            },
+            {
+              "en": "On her turn: Use Burst S3 or Burst 2 to top up Ember's health before the burn damage so you survive",
+              "jp": "ターン時：バーンダメージ前にバーストS3またはバースト2で{P/Ember}のHPを回復",
+              "kr": "자기 턴: 화상 피해 전에 버스트 S3 또는 버스트 2로 {P/Ember} HP 회복",
+              "zh": "轮到她时：在燃烧伤害前用爆发S3或爆发2回复{P/Ember}的血量",
+              "fr": "À son tour : utilisez le Burst S3 ou le Burst 2 pour remonter les HP d'Ember avant les dégâts de burn afin de survivre"
+            },
+            {
+              "en": "She'll die before her second turn",
+              "jp": "2ターン目前に死ぬ",
+              "kr": "두 번째 턴 전에 사망",
+              "zh": "第二回合前会死",
+              "fr": "Elle mourra avant son second tour"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": {
+        "en": "Safe Burn Team"
+      },
+      "element": "fire",
+      "slots": [["Monad Eva"], ["Maxie"], ["Akari"], ["Vlada"]],
+      "geasActive": {
+        "bonus": ["64"],
+        "malus": ["60", "63", "61", "65", "58"]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "Much safer at higher stages with more damage but only a 115% multiplier. Speed tuning is very important - try to follow the speeds as closely as possible.",
+            "jp": "高ステージでより安全でダメージも高いが、倍率は115%のみ。速度調整が非常に重要 - できるだけ指定の速度に近づけてください。",
+            "kr": "높은 스테이지에서 더 안전하고 데미지도 높지만 배율은 115%뿐. 속도 튜닝이 매우 중요 - 가능한 한 지정된 속도에 맞추세요.",
+            "zh": "在高层更安全且伤害更高，但只有115%倍率。速度调整非常重要 - 尽量按照指定速度来。",
+            "fr": "Bien plus sûr aux stages élevés avec plus de dégâts mais seulement un multiplicateur de 115%. Le réglage de vitesse est très important — essayez de suivre les vitesses le plus précisément possible."
+          }
+        },
+        {
+          "p": {
+            "en": "IMPORTANT: If you have a 6★ {P/Monad Eva}, her starting seal extra skill debuff prevents {P/Akari} from placing resilience down. Use an effectiveness accessory on {P/Maxie} instead.",
+            "jp": "重要：6★ {P/Monad Eva}がいる場合、開始時の封印追加スキルデバフにより{P/Akari}が根性ダウンを付与できません。代わりに{P/Maxie}に効果命中アクセサリーを使用。",
+            "kr": "중요: 6★ {P/Monad Eva}가 있다면, 시작 시 봉인 추가 스킬 디버프로 {P/Akari}가 효과저항 감소를 부여 못함. 대신 {P/Maxie}에 효과적중 악세서리 사용.",
+            "zh": "重要：如果有6★ {P/Monad Eva}，她开始时的封印额外技能debuff会阻止{P/Akari}施加效果抵抗降低。改为给{P/Maxie}使用效果命中饰品。",
+            "fr": "IMPORTANT : si vous avez une {P/Monad Eva} 6★, son debuff de seal de compétence supplémentaire en début de combat empêche {P/Akari} de placer la réduction de résilience. Utilisez plutôt un accessoire d'efficacité sur {P/Maxie}."
+          }
+        },
+        {
+          "p": {
+            "en": "Speed Order and Turn Counts:",
+            "jp": "速度順とターン数：",
+            "kr": "속도 순서와 턴 수:",
+            "zh": "速度顺序和回合数：",
+            "fr": "Ordre de vitesse et nombre de tours :"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "{P/Akari}: 292 speed (6 turns total) - There's wiggle room to go faster as long as you're faster than the boss to apply resilience down. If running a 6★ {P/Monad Eva}, you can't apply resilience down.",
+              "jp": "{P/Akari}：速度292（計6ターン）- 根性ダウン付与のためボスより速ければ余裕あり。6★ {P/Monad Eva}の場合、根性ダウンは付与できない",
+              "kr": "{P/Akari}: 속도 292 (총 6턴) - 효과저항 감소 부여를 위해 보스보다 빠르면 여유 있음. 6★ {P/Monad Eva}면 효과저항 감소 부여 불가",
+              "zh": "{P/Akari}：速度292（共6回合）- 只要比Boss快能施加效果抵抗降低就有余地。6★ {P/Monad Eva}时无法施加效果抵抗降低",
+              "fr": "{P/Akari} : 292 de vitesse (6 tours au total) — il y a de la marge pour aller plus vite tant que vous êtes plus rapide que le Boss pour appliquer la réduction de résilience. Avec une {P/Monad Eva} 6★, vous ne pouvez pas appliquer la réduction de résilience."
+            },
+            {
+              "en": "{P/Monad Eva}: 164 speed (3 turns total) - Her turn 2 must come before {P/Maxie}'s turn 3. Her last turn must be just before the boss uses its enrage ultimate to use Burst 3. If this isn't happening, make her faster.",
+              "jp": "{P/Monad Eva}：速度164（計3ターン）- 2ターン目は{P/Maxie}の3ターン目より前。最後のターンはボスの激怒アルティメット直前にバースト3を使う。そうなっていなければ速くする",
+              "kr": "{P/Monad Eva}: 속도 164 (총 3턴) - 2턴째는 {P/Maxie}의 3턴째보다 먼저. 마지막 턴은 보스 격노 궁극기 직전에 버스트 3 사용. 안 되면 더 빠르게",
+              "zh": "{P/Monad Eva}：速度164（共3回合）- 第2回合必须在{P/Maxie}第3回合之前。最后一回合必须在Boss狂暴大招前使用爆发3。如果不是这样就加速",
+              "fr": "{P/Monad Eva} : 164 de vitesse (3 tours au total) — son tour 2 doit arriver avant le tour 3 de {P/Maxie}. Son dernier tour doit être juste avant que le Boss n'utilise son ultime d'enrage pour utiliser le Burst 3. Si ce n'est pas le cas, rendez-la plus rapide."
+            },
+            {
+              "en": "{P/Maxie}: 178 speed (8 turns total) - If she has more than 8 turns, make her slower or {P/Vlada} faster.",
+              "jp": "{P/Maxie}：速度178（計8ターン）- 8ターン以上ある場合、遅くするか{P/Vlada}を速くする",
+              "kr": "{P/Maxie}: 속도 178 (총 8턴) - 8턴 이상이면 느리게 하거나 {P/Vlada}를 빠르게",
+              "zh": "{P/Maxie}：速度178（共8回合）- 如果超过8回合，减速或让{P/Vlada}加速",
+              "fr": "{P/Maxie} : 178 de vitesse (8 tours au total) — si elle a plus de 8 tours, ralentissez-la ou accélérez {P/Vlada}."
+            },
+            {
+              "en": "{P/Vlada}: 124 speed (3 turns total) - Must move on the last turn. If that's not happening, make {P/Vlada} faster or {P/Maxie}/{P/Monad Eva} slower.",
+              "jp": "{P/Vlada}：速度124（計3ターン）- 最後のターンに動く必要あり。そうでなければ{P/Vlada}を速くするか{P/Maxie}/{P/Monad Eva}を遅くする",
+              "kr": "{P/Vlada}: 속도 124 (총 3턴) - 마지막 턴에 움직여야 함. 안 되면 {P/Vlada}를 빠르게 하거나 {P/Maxie}/{P/Monad Eva}를 느리게",
+              "zh": "{P/Vlada}：速度124（共3回合）- 必须在最后一回合行动。如果不是，让{P/Vlada}加速或{P/Maxie}/{P/Monad Eva}减速",
+              "fr": "{P/Vlada} : 124 de vitesse (3 tours au total) — doit jouer au dernier tour. Si ce n'est pas le cas, accélérez {P/Vlada} ou ralentissez {P/Maxie}/{P/Monad Eva}."
+            }
+          ]
+        },
+        {
+          "p": {
+            "en": "Character Builds:",
+            "jp": "キャラクタービルド：",
+            "kr": "캐릭터 빌드:",
+            "zh": "角色配装：",
+            "fr": "Builds des personnages :"
+          }
+        },
+        {
+          "p": {
+            "en": "{P/Monad Eva}:",
+            "jp": "{P/Monad Eva}：",
+            "kr": "{P/Monad Eva}:",
+            "zh": "{P/Monad Eva}：",
+            "fr": "{P/Monad Eva} :"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "Must be 5★ minimum (6★ is Pay to Lose unless using effectiveness on {P/Maxie})",
+              "jp": "最低5★必須（6★は{P/Maxie}に効果命中使わないと損）",
+              "kr": "최소 5★ 필수 (6★은 {P/Maxie}에 효과적중 안 쓰면 손해)",
+              "zh": "最低5★必须（6★如果不给{P/Maxie}用效果命中就是亏）",
+              "fr": "Doit être 5★ minimum (la 6★ est un Pay to Lose sauf si vous utilisez de l'efficacité sur {P/Maxie})"
+            },
+            {
+              "en": "EE fully maxed",
+              "jp": "EE完凸",
+              "kr": "EE 풀강",
+              "zh": "EE满级",
+              "fr": "EE entièrement maximisée"
+            },
+            {
+              "en": "2-set Burst + 6★ +10 Vanguard Charm",
+              "jp": "2セットバースト + 6★ +10 ヴァンガードチャーム",
+              "kr": "2세트 버스트 + 6★ +10 뱅가드 부적",
+              "zh": "2件套爆发 + 6★ +10 先锋护符",
+              "fr": "Set Burst 2 pièces + Vanguard Charm 6★ +10"
+            },
+            {
+              "en": "Royal Stinger weapon for more healing",
+              "jp": "回復量増加のためRoyal Stinger武器",
+              "kr": "힐량 증가를 위해 Royal Stinger 무기",
+              "zh": "Royal Stinger武器增加治疗",
+              "fr": "Arme Royal Stinger pour plus de soins"
+            },
+            {
+              "en": "Stack HP once you reach required speed for more healing",
+              "jp": "必要速度に達したらHP積み",
+              "kr": "필요 속도 도달 후 HP 스택",
+              "zh": "达到所需速度后堆HP",
+              "fr": "Empilez les HP une fois la vitesse requise atteinte pour plus de soins"
+            },
+            {
+              "en": "MUST dual attack with {P/Maxie} and {P/Vlada} - If your {P/Akari} has more ATK than {P/Maxie}, it will mess things up",
+              "jp": "{P/Maxie}と{P/Vlada}とデュアルアタック必須 - {P/Akari}が{P/Maxie}より攻撃力高いと崩れる",
+              "kr": "{P/Maxie}와 {P/Vlada}와 듀얼 어택 필수 - {P/Akari}가 {P/Maxie}보다 공격력 높으면 망함",
+              "zh": "必须与{P/Maxie}和{P/Vlada}协同攻击 - 如果{P/Akari}攻击力比{P/Maxie}高会出问题",
+              "fr": "DOIT faire une attaque double avec {P/Maxie} et {P/Vlada} — si votre {P/Akari} a plus d'ATK que {P/Maxie}, cela faussera tout"
+            },
+            {
+              "en": "Move order: Burst 2 - Burst 1 - Burst 3",
+              "jp": "行動順：バースト2 - バースト1 - バースト3",
+              "kr": "행동 순서: 버스트 2 - 버스트 1 - 버스트 3",
+              "zh": "行动顺序：爆发2 - 爆发1 - 爆发3",
+              "fr": "Ordre des actions : Burst 2 - Burst 1 - Burst 3"
+            }
+          ]
+        },
+        {
+          "p": {
+            "en": "{P/Akari}:",
+            "jp": "{P/Akari}：",
+            "kr": "{P/Akari}:",
+            "zh": "{P/Akari}：",
+            "fr": "{P/Akari} :"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "Rogue Charm with 100% crit or Executioner's Charm",
+              "jp": "クリ100%のローグチャームまたはエクセキューショナーズチャーム",
+              "kr": "치명타 100% 로그 부적 또는 처형자의 부적",
+              "zh": "100%暴击的盗贼护符或处刑者护符",
+              "fr": "Rogue Charm avec 100% de critique ou Executioner's Charm"
+            },
+            {
+              "en": "2-set Burst (6★ transcendence optional for turn 1 Burst 1 but not needed)",
+              "jp": "2セットバースト（ターン1バースト1に6★超越は任意だが不要）",
+              "kr": "2세트 버스트 (1턴 버스트 1에 6★ 초월은 선택이지만 불필요)",
+              "zh": "2件套爆发（6★超越用于第1回合爆发1可选但不需要）",
+              "fr": "Set Burst 2 pièces (transcendance 6★ optionnelle pour le Burst 1 au tour 1 mais pas nécessaire)"
+            },
+            {
+              "en": "134 effectiveness with Briareos's Recklessness weapon, or 268 without it",
+              "jp": "Briareos's Recklessness武器で効果命中134、なしで268",
+              "kr": "Briareos's Recklessness 무기로 효과적중 134, 없으면 268",
+              "zh": "用Briareos's Recklessness武器时效果命中134，没有时268",
+              "fr": "134 d'efficacité avec l'arme Briareos's Recklessness, ou 268 sans elle"
+            },
+            {
+              "en": "Go tanky if you want to lessen the healing burden",
+              "jp": "回復負担を減らすならタンキーに",
+              "kr": "힐 부담 줄이려면 탱키하게",
+              "zh": "想减少治疗压力就堆坦",
+              "fr": "Optez pour un build résistant si vous voulez alléger la charge de soins"
+            },
+            {
+              "en": "ATK must be lower than {P/Maxie} (so {P/Monad Eva} dual attacks with {P/Maxie}, not {P/Akari})",
+              "jp": "攻撃力は{P/Maxie}より低く（{P/Monad Eva}が{P/Maxie}とデュアルアタックするため）",
+              "kr": "공격력은 {P/Maxie}보다 낮게 ({P/Monad Eva}가 {P/Maxie}와 듀얼 어택하도록)",
+              "zh": "攻击力必须比{P/Maxie}低（让{P/Monad Eva}与{P/Maxie}协同攻击）",
+              "fr": "L'ATK doit être inférieure à celle de {P/Maxie} (pour que {P/Monad Eva} fasse son attaque double avec {P/Maxie}, pas {P/Akari})"
+            },
+            {
+              "en": "Move order if applying resilience down: S2 - S3 - S1 - Chain - Burst 3 S2 - S3",
+              "jp": "根性ダウン付与時の行動順：S2 - S3 - S1 - チェイン - バースト3 S2 - S3",
+              "kr": "효과저항 감소 부여 시 행동 순서: S2 - S3 - S1 - 체인 - 버스트 3 S2 - S3",
+              "zh": "施加效果抵抗降低时行动顺序：S2 - S3 - S1 - 连锁 - 爆发3 S2 - S3",
+              "fr": "Ordre des actions si vous appliquez la réduction de résilience : S2 - S3 - S1 - Chain - Burst 3 S2 - S3"
+            },
+            {
+              "en": "Move order if NOT applying resilience down ({P/Maxie} has 268 effectiveness): S1 - S1 - Burst 3 S2 - Chain - S3 - S2",
+              "jp": "根性ダウン付与なし時の行動順（{P/Maxie}効果命中268）：S1 - S1 - バースト3 S2 - チェイン - S3 - S2",
+              "kr": "효과저항 감소 부여 안 할 때 행동 순서 ({P/Maxie} 효과적중 268): S1 - S1 - 버스트 3 S2 - 체인 - S3 - S2",
+              "zh": "不施加效果抵抗降低时行动顺序（{P/Maxie}效果命中268）：S1 - S1 - 爆发3 S2 - 连锁 - S3 - S2",
+              "fr": "Ordre des actions si vous N'appliquez PAS la réduction de résilience ({P/Maxie} a 268 d'efficacité) : S1 - S1 - Burst 3 S2 - Chain - S3 - S2"
+            }
+          ]
+        },
+        {
+          "p": {
+            "en": "{P/Maxie}:",
+            "jp": "{P/Maxie}：",
+            "kr": "{P/Maxie}:",
+            "zh": "{P/Maxie}：",
+            "fr": "{P/Maxie} :"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "T4 Revenge set preferred",
+              "jp": "T4リベンジセット推奨",
+              "kr": "T4 복수 세트 추천",
+              "zh": "推荐T4复仇套装",
+              "fr": "Set Revenge T4 de préférence"
+            },
+            {
+              "en": "Heartrender's Blade weapon",
+              "jp": "Heartrender's Blade武器",
+              "kr": "Heartrender's Blade 무기",
+              "zh": "Heartrender's Blade武器",
+              "fr": "Arme Heartrender's Blade"
+            },
+            {
+              "en": "6★ transcendence needed for +25 AP on battle start (or use 2-set Burst)",
+              "jp": "戦闘開始時+25 APのため6★超越必須（または2セットバースト）",
+              "kr": "전투 시작 시 +25 AP를 위해 6★ 초월 필수 (또는 2세트 버스트)",
+              "zh": "战斗开始+25 AP需要6★超越（或用2件套爆发）",
+              "fr": "Transcendance 6★ nécessaire pour +25 AP en début de combat (ou utilisez un set Burst 2 pièces)"
+            },
+            {
+              "en": "134 effectiveness or 268 with 6★ {P/Monad Eva}",
+              "jp": "効果命中134、6★ {P/Monad Eva}なら268",
+              "kr": "효과적중 134, 6★ {P/Monad Eva}면 268",
+              "zh": "效果命中134，6★ {P/Monad Eva}时268",
+              "fr": "134 d'efficacité ou 268 avec une {P/Monad Eva} 6★"
+            },
+            {
+              "en": "ATK must be higher than {P/Akari} (so {P/Monad Eva} dual attacks with {P/Maxie})",
+              "jp": "攻撃力は{P/Akari}より高く（{P/Monad Eva}が{P/Maxie}とデュアルアタックするため）",
+              "kr": "공격력은 {P/Akari}보다 높게 ({P/Monad Eva}가 {P/Maxie}와 듀얼 어택하도록)",
+              "zh": "攻击力必须比{P/Akari}高（让{P/Monad Eva}与{P/Maxie}协同攻击）",
+              "fr": "L'ATK doit être supérieure à celle de {P/Akari} (pour que {P/Monad Eva} fasse son attaque double avec {P/Maxie})"
+            },
+            {
+              "en": "Move order: S3 - Burst 3 x7",
+              "jp": "行動順：S3 - バースト3 x7",
+              "kr": "행동 순서: S3 - 버스트 3 x7",
+              "zh": "行动顺序：S3 - 爆发3 x7",
+              "fr": "Ordre des actions : S3 - Burst 3 x7"
+            }
+          ]
+        },
+        {
+          "p": {
+            "en": "{P/Vlada}:",
+            "jp": "{P/Vlada}：",
+            "kr": "{P/Vlada}:",
+            "zh": "{P/Vlada}：",
+            "fr": "{P/Vlada} :"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "T4 Revenge set preferred",
+              "jp": "T4リベンジセット推奨",
+              "kr": "T4 복수 세트 추천",
+              "zh": "推荐T4复仇套装",
+              "fr": "Set Revenge T4 de préférence"
+            },
+            {
+              "en": "Phantom Necrosis weapon to lower your speed",
+              "jp": "速度を下げるためPhantom Necrosis武器",
+              "kr": "속도 낮추기 위해 Phantom Necrosis 무기",
+              "zh": "Phantom Necrosis武器降低速度",
+              "fr": "Arme Phantom Necrosis pour réduire votre vitesse"
+            },
+            {
+              "en": "Executioner's Charm or Rogue Charm with 100% crit",
+              "jp": "クリ100%のエクセキューショナーズチャームまたはローグチャーム",
+              "kr": "치명타 100% 처형자의 부적 또는 로그 부적",
+              "zh": "100%暴击的处刑者护符或盗贼护符",
+              "fr": "Executioner's Charm ou Rogue Charm avec 100% de critique"
+            },
+            {
+              "en": "Move order: S3 - Chain - S2",
+              "jp": "行動順：S3 - チェイン - S2",
+              "kr": "행동 순서: S3 - 체인 - S2",
+              "zh": "行动顺序：S3 - 连锁 - S2",
+              "fr": "Ordre des actions : S3 - Chain - S2"
+            }
+          ]
+        }
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "6_Gt1jU0f4k",
+        "title": "Gornolf Guild Raid Stage 23 - Maxie Burn Team - 21.9m Dmg - (47m score, 115% score multiplier)",
+        "author": "Tango"
+      }
+    }
+  ]
+}
