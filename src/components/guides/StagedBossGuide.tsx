@@ -17,14 +17,11 @@ import { InlineTooltip } from '@/components/inline/InlineTooltip';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { LootPanel } from '@/components/guides/LootPanel';
 import { lootPanelLabels } from '@/components/guides/loot-labels';
-import {
-  EncounterPane,
-  EncounterSelection,
-  EncounterSlider,
-} from '@/components/guides/EncounterSelection';
+import { EncounterSelection, EncounterSlider } from '@/components/guides/EncounterSelection';
 import { TacticalTips } from '@/components/guides/TacticalTips';
 import { RecommendedCharacters } from '@/components/guides/RecommendedCharacters';
 import { TeamSlots } from '@/components/guides/TeamSlots';
+import { Tabs } from '@/components/ui/Tabs';
 import { MultiVideoEmbed, type VideoItem } from '@/components/ui/MultiVideoEmbed';
 
 /** `strings.json` — le texte du guide. */
@@ -47,9 +44,9 @@ type GuideRecommended = Array<{
  * `teams.json` — les équipes par PLAGE de stages. Le mode ne change pas de
  * boss à mi-échelle, mais il change de règles (immunités et passifs des stages
  * hauts) : l'équipe des stages 1-10 n'est pas celle des stages 11-13. La plage
- * se lit sur `difficulty.order` (donnée du jeu), et l'équipe suit la glissière
- * comme les cartes — on ne montre jamais une équipe pour un stage qu'elle ne
- * couvre pas.
+ * se lit sur `difficulty.order` (donnée du jeu). Ces équipes ont leur PROPRE
+ * sélecteur à onglets (une plage par onglet) — deux compositions à comparer,
+ * indépendantes de la glissière de stage : c'est le comportement V2.
  */
 interface GuideTeams {
   buckets: Array<{
@@ -297,23 +294,55 @@ export async function StagedBossGuide({ lang, guide }: GuideContentProps) {
             />
           )}
 
-          {teams?.buckets.map((bucket) => (
-            <EncounterPane
-              key={bucket.stages.join('-')}
-              indexes={stageIndexesIn(encounters, bucket.stages)}
-            >
-              <TeamSlots
-                title={t('guides.team_selector')}
-                lang={lang}
-                slots={bucket.slots}
-                note={bucket.note ? parseText(lRec(bucket.note, lang), ctx) : undefined}
-                labels={{
-                  prev: t('guides.team.prev_option'),
-                  next: t('guides.team.next_option'),
-                }}
-              />
-            </EncounterPane>
-          ))}
+          {/* ÉQUIPES par PLAGE de stages — leur PROPRE sélecteur, comme en V2.
+              Deux compositions à COMPARER (early game vs stages durs) : les
+              accrocher à la glissière de stage n'en montrerait qu'une à la fois
+              et forcerait à déplacer tout le reste (boss, loot) pour voir
+              l'autre. Onglets indépendants, un par plage. */}
+          {teams && teams.buckets.length > 0 && (
+            <section className="space-y-3">
+              <h2 className="text-content-strong text-xl font-bold">{t('guides.team_selector')}</h2>
+              {teams.buckets.length === 1 ? (
+                <TeamSlots
+                  lang={lang}
+                  slots={teams.buckets[0].slots}
+                  note={
+                    teams.buckets[0].note
+                      ? parseText(lRec(teams.buckets[0].note, lang), ctx)
+                      : undefined
+                  }
+                  labels={{
+                    prev: t('guides.team.prev_option'),
+                    next: t('guides.team.next_option'),
+                  }}
+                />
+              ) : (
+                <Tabs
+                  tabs={teams.buckets.map((bucket) => {
+                    const [from, to] = bucket.stages;
+                    return {
+                      id: bucket.stages.join('-'),
+                      label:
+                        from === to
+                          ? t('guides.difficulty.stage', { n: from })
+                          : t('guides.difficulty.stage_range', { from, to }),
+                      content: (
+                        <TeamSlots
+                          lang={lang}
+                          slots={bucket.slots}
+                          note={bucket.note ? parseText(lRec(bucket.note, lang), ctx) : undefined}
+                          labels={{
+                            prev: t('guides.team.prev_option'),
+                            next: t('guides.team.next_option'),
+                          }}
+                        />
+                      ),
+                    };
+                  })}
+                />
+              )}
+            </section>
+          )}
         </div>
       </EncounterSelection>
 

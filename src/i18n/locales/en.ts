@@ -627,6 +627,7 @@ const en = {
   // entrées sont le repli, et la seule source possible côté FR.
   'guides.difficulty.title': 'Difficulty',
   'guides.difficulty.stage': 'Stage {n}',
+  'guides.difficulty.stage_range': 'Stage {from}–{to}',
   'guides.difficulty.normal': 'Normal',
   'guides.difficulty.hard': 'Hard',
   'guides.difficulty.very_hard': 'Very Hard',
@@ -677,6 +678,7 @@ const en = {
   'guildraid.geas.level': 'Level {n}',
   'guildraid.total_multiplier': 'Total Score Multiplier',
   'guildraid.active_geas': 'Active Geas',
+  'guildraid.sub_boss': 'Boss {n}',
   'requirements.title': 'Requirements',
   'requirements.prio': 'Priority',
 
@@ -1263,6 +1265,16 @@ const en = {
   // Guides (système V3)
   'page.guides.empty_category': 'No guides in this category yet.',
   'page.guide.versions': 'Version',
+
+  // Skyward Tower
+  'tower.floor': 'Floor {n}',
+  'tower.search': 'Search a floor',
+  'tower.restrictions': 'Restrictions',
+  'tower.strategy': 'Strategy',
+  'tower.level': 'Lv. {n}',
+  'tower.power': 'Power {n}',
+  'tower.random_floor': 'Randomized floor',
+  'tower.pool': 'Possible bosses',
 } as const;
 
 export default en;

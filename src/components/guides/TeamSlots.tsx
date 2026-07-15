@@ -25,12 +25,16 @@ import { TeamSlotCarousel } from './TeamSlotCarousel';
  */
 export function TeamSlots({
   title,
+  badge,
   slots,
   note,
   lang,
   labels,
 }: {
-  title: string;
+  /** Titre de section — omis quand un conteneur (onglets…) le porte déjà. */
+  title?: string;
+  /** Pastille optionnelle avant le titre (badge d'élément/effet d'une équipe). */
+  badge?: ReactNode;
   /** Un tableau par poste : noms d'affichage EN des options. */
   slots: string[][];
   /** Note déjà localisée/parseText côté appelant. */
@@ -46,7 +50,12 @@ export function TeamSlots({
 
   return (
     <section className="space-y-3">
-      <h2 className="text-content-strong text-xl font-bold">{title}</h2>
+      {(title || badge) && (
+        <h2 className="text-content-strong flex items-center gap-2 text-xl font-bold">
+          {badge}
+          {title}
+        </h2>
+      )}
       {/* Les postes RESPIRENT : chaque carte est le nez d'un cylindre dont les
           voisines débordent sur les côtés. Collées, deux roues voisines se
           marchent dessus et on ne sait plus quelle carte appartient à quel

@@ -597,6 +597,7 @@ const zh: Record<TranslationKey, string> = {
   'guides.boss_display.add': '随从',
   'guides.difficulty.title': '难度',
   'guides.difficulty.stage': '第{n}阶段',
+  'guides.difficulty.stage_range': '第{from}–{to}阶段',
   'guides.difficulty.normal': '普通',
   'guides.difficulty.hard': '困难',
   'guides.difficulty.very_hard': '极难',
@@ -646,6 +647,7 @@ const zh: Record<TranslationKey, string> = {
   'guildraid.geas.level': '等级{n}',
   'guildraid.total_multiplier': '总分数倍率',
   'guildraid.active_geas': '激活的誓约',
+  'guildraid.sub_boss': '首领{n}',
   'requirements.title': '需求',
   'requirements.prio': '优先',
 
@@ -1209,6 +1211,16 @@ const zh: Record<TranslationKey, string> = {
   // Guides (système V3)
   'page.guides.empty_category': '该分类暂无攻略。',
   'page.guide.versions': '版本',
+
+  // Skyward Tower
+  'tower.floor': '第{n}层',
+  'tower.search': '搜索楼层',
+  'tower.restrictions': '编成限制',
+  'tower.strategy': '攻略',
+  'tower.level': '等级{n}',
+  'tower.power': '战力{n}',
+  'tower.random_floor': '随机楼层',
+  'tower.pool': '可能出现的Boss',
 };
 
 export default zh;

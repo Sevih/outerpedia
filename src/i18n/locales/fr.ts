@@ -636,6 +636,7 @@ const fr: Record<TranslationKey, string> = {
   'guides.boss_display.add': 'Renfort',
   'guides.difficulty.title': 'Difficulté',
   'guides.difficulty.stage': 'Étape {n}',
+  'guides.difficulty.stage_range': 'Étapes {from}–{to}',
   'guides.difficulty.normal': 'Normal',
   'guides.difficulty.hard': 'Difficile',
   'guides.difficulty.very_hard': 'Très difficile',
@@ -687,6 +688,7 @@ const fr: Record<TranslationKey, string> = {
   'guildraid.geas.level': 'Niveau {n}',
   'guildraid.total_multiplier': 'Multiplicateur de score total',
   'guildraid.active_geas': 'Geas actifs',
+  'guildraid.sub_boss': 'Boss {n}',
   'requirements.title': 'Prérequis',
   'requirements.prio': 'Priorité',
 
@@ -1286,6 +1288,16 @@ const fr: Record<TranslationKey, string> = {
   // Guides (système V3)
   'page.guides.empty_category': 'Aucun guide dans cette catégorie pour le moment.',
   'page.guide.versions': 'Version',
+
+  // Skyward Tower
+  'tower.floor': 'Étage {n}',
+  'tower.search': 'Rechercher un étage',
+  'tower.restrictions': 'Restrictions',
+  'tower.strategy': 'Stratégie',
+  'tower.level': 'Niv. {n}',
+  'tower.power': 'Puissance {n}',
+  'tower.random_floor': 'Étage aléatoire',
+  'tower.pool': 'Boss possibles',
 };
 
 export default fr;

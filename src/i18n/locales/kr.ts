@@ -610,6 +610,7 @@ const kr: Record<TranslationKey, string> = {
   'guides.boss_display.add': '부하 몬스터',
   'guides.difficulty.title': '난이도',
   'guides.difficulty.stage': '{n}단계',
+  'guides.difficulty.stage_range': '{from}~{to}단계',
   'guides.difficulty.normal': '일반',
   'guides.difficulty.hard': '하드',
   'guides.difficulty.very_hard': '베리 하드',
@@ -660,6 +661,7 @@ const kr: Record<TranslationKey, string> = {
   'guildraid.geas.level': '레벨 {n}',
   'guildraid.total_multiplier': '총 점수 배율',
   'guildraid.active_geas': '활성 게아스',
+  'guildraid.sub_boss': '보스 {n}',
   'requirements.title': '요구사항',
   'requirements.prio': '우선순위',
 
@@ -1232,6 +1234,16 @@ const kr: Record<TranslationKey, string> = {
   // Guides (système V3)
   'page.guides.empty_category': '이 카테고리에는 아직 가이드가 없습니다.',
   'page.guide.versions': '버전',
+
+  // Skyward Tower
+  'tower.floor': '{n}층',
+  'tower.search': '층 검색',
+  'tower.restrictions': '편성 제한',
+  'tower.strategy': '공략',
+  'tower.level': 'Lv.{n}',
+  'tower.power': '전투력 {n}',
+  'tower.random_floor': '무작위 층',
+  'tower.pool': '등장 가능 보스',
 };
 
 export default kr;

@@ -616,6 +616,7 @@ const jp: Record<TranslationKey, string> = {
   'guides.boss_display.add': '取り巻き',
   'guides.difficulty.title': '難易度',
   'guides.difficulty.stage': '{n}段階',
+  'guides.difficulty.stage_range': '{from}〜{to}段階',
   'guides.difficulty.normal': 'ノーマル',
   'guides.difficulty.hard': 'ハード',
   'guides.difficulty.very_hard': 'ベリーハード',
@@ -666,6 +667,7 @@ const jp: Record<TranslationKey, string> = {
   'guildraid.geas.level': 'レベル{n}',
   'guildraid.total_multiplier': 'スコア倍率合計',
   'guildraid.active_geas': '有効なゲアス',
+  'guildraid.sub_boss': 'ボス{n}',
   'requirements.title': '必要条件',
   'requirements.prio': '優先度',
 
@@ -1246,6 +1248,16 @@ const jp: Record<TranslationKey, string> = {
   // Guides (système V3)
   'page.guides.empty_category': 'このカテゴリにはまだガイドがありません。',
   'page.guide.versions': 'バージョン',
+
+  // Skyward Tower
+  'tower.floor': '{n}階',
+  'tower.search': '階を検索',
+  'tower.restrictions': '編成制限',
+  'tower.strategy': '攻略',
+  'tower.level': 'Lv.{n}',
+  'tower.power': '戦闘力{n}',
+  'tower.random_floor': 'ランダム階',
+  'tower.pool': '出現しうるボス',
 };
 
 export default jp;
