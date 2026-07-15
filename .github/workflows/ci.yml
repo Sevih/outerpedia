@@ -32,7 +32,13 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
       - run: pnpm typecheck
+      # Le build (~7 min) ne tourne QUE sur les PR. Sur push main, le job
+      # `docker` refait exactement ce `next build` dans l'image — le jouer aussi
+      # ici, c'est payer deux fois le meme build en serie. Sur une PR en
+      # revanche `docker` ne tourne pas : ce build est alors la seule preuve que
+      # la compilation passe avant merge, donc on le garde.
       - run: pnpm build
+        if: github.event_name == 'pull_request'
 
   # Build de l'image Docker + publication sur GHCR (uniquement sur push main).
   docker:
