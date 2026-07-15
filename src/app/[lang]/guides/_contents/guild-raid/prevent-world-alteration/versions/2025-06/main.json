@@ -1,0 +1,53 @@
+{
+  "teams": [
+    {
+      "title": {
+        "en": "Water Striker"
+      },
+      "element": "water",
+      "slots": [
+        ["Tamara", "Edelweiss", "Fatal"],
+        ["Caren", "Beth", "Rin", "Poolside Trickster Regina"],
+        ["Poolside Trickster Regina", "Caren", "Beth", "Rin"],
+        ["Lyla", "Monad Eva", "Mene", "Luna"]
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "5ieNf4f0xfg",
+        "title": "Planet Purification Unit Stage 5 - Water Striker Team",
+        "author": "Sevih"
+      }
+    },
+    {
+      "title": {
+        "en": "Water Mage"
+      },
+      "element": "water",
+      "slots": [
+        ["Tamara", "Edelweiss", "Fatal"],
+        ["Roxie"],
+        ["Laplace"],
+        ["Lyla", "Monad Eva", "Mene", "Luna"]
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "vV2faY6DzHw",
+        "title": "Planet Purification Unit Stage 6 - Water Mage Team",
+        "author": "Sevih"
+      }
+    },
+    {
+      "title": {
+        "en": "GBeth"
+      },
+      "icon": "IG_Buff_2100092",
+      "slots": [["Gnosis Beth"], ["Maxie"], ["Monad Eva"], ["Akari"]],
+      "video": {
+        "platform": "youtube",
+        "id": "PBTKXTwFuBg",
+        "title": "Planet Purification Unit Stage 11 - G.Beth Team",
+        "author": "Sevih"
+      }
+    }
+  ]
+}

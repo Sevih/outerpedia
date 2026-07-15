@@ -95,6 +95,7 @@ export function BossStats({
   labels,
   locale,
   rankOptionLabels,
+  hideContextLabel,
 }: {
   stats: Record<string, StatRange>;
   /** Échelle d'affichage par slug (`percent` = per-mille → %). */
@@ -108,6 +109,12 @@ export function BossStats({
   locale: string;
   /** Passifs de palier DÉJÀ localisés (id d'option → libellé). */
   rankOptionLabels?: Record<string, string>;
+  /**
+   * Masque le suffixe « — <mode · donjon> » de la ligne de niveau. Vrai quand un
+   * conteneur porte DÉJÀ ce contexte (onglets de sous-boss/difficulté du guild
+   * raid) : le répéter sous les stats n'apprend rien.
+   */
+  hideContextLabel?: boolean;
 }) {
   // Le palier vit dans le contexte : le NIVEAU qu'il fixe se lit aussi dans
   // l'en-tête du boss, à l'autre bout du panneau (cf. BossRank). En mode
@@ -250,7 +257,7 @@ export function BossStats({
       {!controlled && options.length === 1 && (
         <p className="text-content-muted text-xs">
           {labels.level} {ctx.level}
-          {ctx.label ? ` — ${ctx.label}` : ''}
+          {!hideContextLabel && ctx.label ? ` — ${ctx.label}` : ''}
         </p>
       )}
     </div>

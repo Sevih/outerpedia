@@ -629,6 +629,7 @@ const fr: Record<TranslationKey, string> = {
   'guides.strategy_guide': 'Guide de stratégie',
   'guides.boss_display.immunities': 'Immunités',
   'guides.boss_display.skills': 'Skills',
+  'guides.boss_display.stats': 'Stats',
   'guides.boss_display.rank': 'Palier',
   'guides.boss_display.rank_options': 'Passifs du palier',
   'guides.boss_display.rank_prev': 'Palier précédent',
@@ -1294,6 +1295,19 @@ const fr: Record<TranslationKey, string> = {
   'tower.level': 'Niv. {n}',
   'tower.power': 'Puissance {n}',
   'tower.pool': 'Boss possibles',
+  'tower.adds': 'Renforts',
+  'tower.restriction_label': 'Restriction',
+  'tower.restriction_none': 'Aucune',
+  'tower.restr_element': 'Élément',
+  'tower.restr_class': 'Classe',
+  'tower.restr_star': 'Rareté de base',
+  'tower.roster_empty': 'Tous les personnages recommandés sont exclus par cette restriction.',
+  'tower.group_floor20': 'Étage 20',
+  'tower.group_demiurge': 'Étages 5 / 10 / 15',
+  'tower.group_random': 'Étages aléatoires',
+  'tower.restr_ban': 'Interdit',
+  'tower.restr_force': 'Requis',
+  'tower.restr_clear': 'Réinitialiser',
 };
 
 export default fr;

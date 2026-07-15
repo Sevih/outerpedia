@@ -39,9 +39,11 @@ import {
 import type { CardSkill } from '@/components/character/SkillCard';
 import { EffectIconBadge } from '@/components/character/EffectChips';
 import { statIconSprite, statAbbr, statName } from '@/lib/stats';
-import { MonsterSkills } from './MonsterSkills';
+import { MonsterSkills, MonsterSkillBody } from './MonsterSkills';
+import { SegmentedTabs, type TabItem } from './SegmentedTabs';
 import { BossRankProvider, BossLevel } from './BossRank';
 import { BossStats, type StatLabel } from './BossStats';
+import { Disclosure } from '@/components/ui/Disclosure';
 import type { Skill } from '@contracts';
 
 export async function BossCard({
@@ -51,6 +53,8 @@ export async function BossCard({
   role,
   followStages,
   afterStats,
+  hideSpawnLabel,
+  compact,
 }: {
   monsterId: string;
   /** Les rencontres à parcourir — imposées par le mode, jamais devinées ici. */
@@ -60,6 +64,14 @@ export async function BossCard({
   role?: 'boss' | 'add';
   /** Mode SUIVEUR : sélection de rencontre → index dans `spawns` (cf. BossRank). */
   followStages?: Record<number, number>;
+  /** Masque le suffixe « — <mode · donjon> » des stats (cf. `BossStats`). */
+  hideSpawnLabel?: boolean;
+  /**
+   * Mode COMPACT (guild raid) : les stats sont repliées derrière un bouton et les
+   * compétences deviennent des onglets (une icône par skill, une seule description
+   * à la fois) — de quoi poser trois boss sur une page sans la noyer.
+   */
+  compact?: boolean;
   /**
    * Bloc du MODE inséré entre les stats et les compétences — là où le Special
    * Request pose sa glissière de stage et le butin du stage. La carte ne sait
@@ -227,21 +239,32 @@ export async function BossCard({
           </div>
         )}
 
-        <BossStats
-          stats={panelStats}
-          scales={getStatScales()}
-          quirkMods={getBossQuirkMods()}
-          statLabels={statLabels}
-          locale={LANGUAGES[lang].htmlLang}
-          rankOptionLabels={rankOptionLabels(spawns, lang)}
-          labels={{
-            level: t('page.character.skill.level'),
-            rank: t('guides.boss_display.rank'),
-            options: t('guides.boss_display.rank_options'),
-            rankPrev: t('guides.boss_display.rank_prev'),
-            rankNext: t('guides.boss_display.rank_next'),
-          }}
-        />
+        {(() => {
+          const stats = (
+            <BossStats
+              stats={panelStats}
+              scales={getStatScales()}
+              quirkMods={getBossQuirkMods()}
+              statLabels={statLabels}
+              locale={LANGUAGES[lang].htmlLang}
+              rankOptionLabels={rankOptionLabels(spawns, lang)}
+              hideContextLabel={hideSpawnLabel}
+              labels={{
+                level: t('page.character.skill.level'),
+                rank: t('guides.boss_display.rank'),
+                options: t('guides.boss_display.rank_options'),
+                rankPrev: t('guides.boss_display.rank_prev'),
+                rankNext: t('guides.boss_display.rank_next'),
+              }}
+            />
+          );
+          // Compact : stats repliées derrière un bouton.
+          return compact ? (
+            <Disclosure label={t('guides.boss_display.stats')}>{stats}</Disclosure>
+          ) : (
+            stats
+          );
+        })()}
 
         {afterStats}
 
@@ -250,12 +273,43 @@ export async function BossCard({
             <h3 className="text-content font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
               {t('guides.boss_display.skills')}
             </h3>
-            <MonsterSkills
-              skills={cardSkills}
-              statuses={statuses}
-              lang={lang}
-              labels={{ cooldown: t('page.character.skill.cooldown') }}
-            />
+            {compact ? (
+              // Compact : un onglet par skill (son icône), une seule description
+              // à la fois — reprend le corps de ligne dans un cadre unique.
+              <SegmentedTabs
+                ariaLabel={t('guides.boss_display.skills')}
+                variant="icon"
+                tabs={cardSkills.map<TabItem>((skill) => ({
+                  key: skill.id,
+                  label:
+                    skill.iconSrc || skill.icon ? (
+                      // eslint-disable-next-line @next/next/no-img-element -- icône de skill
+                      <img
+                        src={skill.iconSrc ?? img.skill(skill.icon!)}
+                        alt={skill.name}
+                        className="h-9 w-9 rounded object-contain"
+                      />
+                    ) : (
+                      skill.name
+                    ),
+                  content: (
+                    <MonsterSkillBody
+                      skill={skill}
+                      statuses={statuses}
+                      lang={lang}
+                      labels={{ cooldown: t('page.character.skill.cooldown') }}
+                    />
+                  ),
+                }))}
+              />
+            ) : (
+              <MonsterSkills
+                skills={cardSkills}
+                statuses={statuses}
+                lang={lang}
+                labels={{ cooldown: t('page.character.skill.cooldown') }}
+              />
+            )}
           </div>
         )}
       </section>

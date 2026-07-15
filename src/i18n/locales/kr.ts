@@ -603,6 +603,7 @@ const kr: Record<TranslationKey, string> = {
   'guides.strategy_guide': '전략 가이드',
   'guides.boss_display.immunities': '면역',
   'guides.boss_display.skills': '스킬',
+  'guides.boss_display.stats': '스탯',
   'guides.boss_display.rank': '등급',
   'guides.boss_display.rank_options': '등급 패시브',
   'guides.boss_display.rank_prev': '이전 등급',
@@ -1240,6 +1241,19 @@ const kr: Record<TranslationKey, string> = {
   'tower.level': 'Lv.{n}',
   'tower.power': '전투력 {n}',
   'tower.pool': '등장 가능 보스',
+  'tower.adds': '쫄',
+  'tower.restriction_label': '제한',
+  'tower.restriction_none': '없음',
+  'tower.restr_element': '속성',
+  'tower.restr_class': '클래스',
+  'tower.restr_star': '태생 등급',
+  'tower.roster_empty': '이 제한에서는 추천 캐릭터가 모두 편성 불가입니다.',
+  'tower.group_floor20': '20층',
+  'tower.group_demiurge': '5 / 10 / 15층',
+  'tower.group_random': '무작위 층',
+  'tower.restr_ban': '편성 불가',
+  'tower.restr_force': '편성 필수',
+  'tower.restr_clear': '초기화',
 };
 
 export default kr;

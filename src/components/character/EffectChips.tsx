@@ -37,17 +37,23 @@ export type StatusMap = Record<
  * (un filtre CSS teinte chaque pixel selon sa clarté → nuances disparates), et
  * le noir (fond opaque de certains sprites) devient transparent.
  */
-export function EffectIconTile({
-  icon,
+/**
+ * ICÔNE TEINTÉE en buff/debuff — un aplat de couleur masqué par la LUMINANCE de
+ * l'art (le noir devient transparent). Empilé ×3 : l'alpha cumulé (1-(1-a)³)
+ * relève les arts gris sans cramer les contours. Le `className` porte la TAILLE ;
+ * pour un placement absolu, envelopper dans un conteneur positionné.
+ *
+ * Réutilisé par les chips d'effet (skills de monstres) ET les geas du guild raid.
+ */
+export function TintedIcon({
+  src,
   isDebuff,
   className = 'h-6 w-6',
 }: {
-  icon: string;
+  src: string;
   isDebuff: boolean;
   className?: string;
 }) {
-  const src = img.effect(icon);
-  const recolor = !icon.includes('Interruption');
   const mask: React.CSSProperties = {
     maskImage: `url(${src})`,
     maskMode: 'luminance',
@@ -60,18 +66,34 @@ export function EffectIconTile({
     WebkitMaskPosition: 'center',
   };
   return (
+    <span className={`relative inline-block shrink-0 ${className}`}>
+      {[0, 1, 2].map((i) => (
+        <span
+          key={i}
+          className={`absolute inset-0 ${isDebuff ? 'bg-debuff-tint' : 'bg-buff-tint'}`}
+          style={mask}
+        />
+      ))}
+    </span>
+  );
+}
+
+export function EffectIconTile({
+  icon,
+  isDebuff,
+  className = 'h-6 w-6',
+}: {
+  icon: string;
+  isDebuff: boolean;
+  className?: string;
+}) {
+  const src = img.effect(icon);
+  // Exception : les icônes « Interruption » gardent leurs couleurs natives.
+  const recolor = !icon.includes('Interruption');
+  return (
     <span className={`relative inline-block shrink-0 rounded bg-black align-middle ${className}`}>
       {recolor ? (
-        // Calque EMPILÉ ×3 : l'alpha du masque suit la luminance de l'art —
-        // les arts gris ressortiraient éteints. L'empilement cumule l'alpha
-        // (1-(1-a)³) et égalise la luminosité sans cramer les contours.
-        [0, 1, 2].map((i) => (
-          <span
-            key={i}
-            className={`absolute inset-0 ${isDebuff ? 'bg-debuff-tint' : 'bg-buff-tint'}`}
-            style={mask}
-          />
-        ))
+        <TintedIcon src={src} isDebuff={isDebuff} className="h-full w-full" />
       ) : (
         // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
         <img src={src} alt="" className="absolute inset-0 h-full w-full object-contain" />

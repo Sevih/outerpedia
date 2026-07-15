@@ -609,6 +609,7 @@ const jp: Record<TranslationKey, string> = {
   'guides.strategy_guide': '攻略ガイド',
   'guides.boss_display.immunities': '免疫',
   'guides.boss_display.skills': 'スキル',
+  'guides.boss_display.stats': 'ステータス',
   'guides.boss_display.rank': 'ランク',
   'guides.boss_display.rank_options': 'ランクのパッシブ',
   'guides.boss_display.rank_prev': '前のランク',
@@ -1254,6 +1255,19 @@ const jp: Record<TranslationKey, string> = {
   'tower.level': 'Lv.{n}',
   'tower.power': '戦闘力{n}',
   'tower.pool': '出現しうるボス',
+  'tower.adds': '雑魚',
+  'tower.restriction_label': '制限',
+  'tower.restriction_none': 'なし',
+  'tower.restr_element': '属性',
+  'tower.restr_class': 'クラス',
+  'tower.restr_star': '初期レア度',
+  'tower.roster_empty': 'この制限ではおすすめキャラが全員編成不可です。',
+  'tower.group_floor20': '20階',
+  'tower.group_demiurge': '5 / 10 / 15階',
+  'tower.group_random': 'ランダム階',
+  'tower.restr_ban': '編成不可',
+  'tower.restr_force': '編成必須',
+  'tower.restr_clear': 'クリア',
 };
 
 export default jp;

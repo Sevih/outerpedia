@@ -1,0 +1,369 @@
+{
+  "teams": [
+    {
+      "title": {
+        "en": "Water Striker"
+      },
+      "element": "water",
+      "slots": [
+        ["Tamara"],
+        ["Poolside Trickster Regina"],
+        ["Summer Knight's Dream Ember"],
+        ["Caren"]
+      ],
+      "geasActive": {
+        "bonus": ["21", "100", "66"],
+        "malus": ["5", "102", "67", "78", "29", "58", "31"]
+      },
+      "notes": [
+        {
+          "turnOrder": [
+            {
+              "character": "Tamara",
+              "speed": 309
+            },
+            {
+              "character": "Poolside Trickster Regina",
+              "speed": 238
+            },
+            {
+              "character": "Summer Knight's Dream Ember",
+              "speed": 236
+            },
+            {
+              "character": "Caren",
+              "speed": 123
+            }
+          ]
+        },
+        {
+          "p": {
+            "en": "There is some wiggle room to go slightly faster or slower than the speeds listed, as long as it results in the same move order throughout the entire fight as shown in the video."
+          }
+        },
+        {
+          "p": {
+            "en": "Run uses a 5★ Poolside Trickster Regina and a 6★ Summer Knight's Dream Ember. Results may vary with different transcendence levels."
+          }
+        },
+        {
+          "p": {
+            "en": "Poolside Trickster Regina may not proc Enrage on the boss even when dealing over 50k damage — this seems to happen when her S1 AoE hits the orbs, so target the boss with her S1 instead."
+          }
+        }
+      ],
+      "requirements": {
+        "entries": [
+          {
+            "character": "Tamara",
+            "stats": {
+              "spd": "309",
+              "eff": "134"
+            },
+            "equipment": {
+              "weapon": ["{I-W/Briareos's Recklessness [Ranger]}"],
+              "talisman": ["{I-T/Rogue's Charm}", "{I-T/Sage's Charm}"]
+            },
+            "notes": [
+              {
+                "en": "268 effectiveness without {I-W/Briareos's Recklessness [Ranger]}"
+              },
+              {
+                "en": "Alternatively you can Burst 3 before her S3 for the effectiveness buff, but you'll then have to skip S2 or S1 on {P/Poolside Trickster Regina} when the boss is broken"
+              }
+            ]
+          },
+          {
+            "character": "Poolside Trickster Regina",
+            "stats": {
+              "spd": "238",
+              "trans": "5-6"
+            },
+            "equipment": {
+              "talisman": ["{I-T/Rogue's Charm}", "{I-T/Sage's Charm}"],
+              "set": ["{AS/Revenge}"]
+            },
+            "notes": [
+              {
+                "en": "If 5★ or higher, level her EE a few levels at minimum until you can use Burst 3 on her last turn"
+              },
+              {
+                "en": "{AS/Revenge} is best, even if you have to use a {S/SPD} accessory over a Penetration accessory"
+              },
+              {
+                "en": "With very fast gear, {AS/Revenge} with a Penetration accessory is possible while still hitting the minimum {S/SPD} to outspeed the boss on turn 1"
+              },
+              {
+                "en": "If using {AS/Revenge}, try to stay below 160 resilience to always get burned."
+              }
+            ]
+          },
+          {
+            "character": "Summer Knight's Dream Ember",
+            "stats": {
+              "spd": "236",
+              "trans": "5-6"
+            },
+            "equipment": {
+              "amulet": ["{I-A/Chalice of Longing}"],
+              "talisman": ["{I-T/Sage's Charm}"],
+              "set": ["{AS/Bursting}"]
+            },
+            "notes": [
+              {
+                "en": "2-set {AS/Bursting} with 5★ transcendence minimum to Burst 1 on turn 1"
+              },
+              {
+                "en": "Use {I-T/Sage's Charm}. {I-T/Rogue's Charm} will not proc on targets with invulnerability."
+              },
+              {
+                "en": "Use the {I-A/Chalice of Longing} {S/SPD} accessory"
+              }
+            ]
+          },
+          {
+            "character": "Caren",
+            "stats": {
+              "spd": "123"
+            },
+            "equipment": {
+              "talisman": ["{I-T/Rogue's Charm}", "{I-T/Sage's Charm}"],
+              "set": ["{AS/Patience}", "{AS/Defense}"]
+            },
+            "notes": [
+              {
+                "en": "{AS/Patience} or {AS/Defense} set"
+              },
+              {
+                "en": "If using {AS/Patience}, there's still a chance you resist the burn"
+              },
+              {
+                "en": "{AS/Defense} set has more consistent results but lower potential than {AS/Patience}"
+              },
+              {
+                "en": "Use {I-T/Rogue's Charm} or {I-T/Sage's Charm}"
+              }
+            ]
+          }
+        ]
+      },
+      "video": {
+        "platform": "youtube",
+        "id": "fjldefzYnds",
+        "title": "Ksai Guild Raid - Stage 27 - Striker Team - 15.7m Dmg, 90% multiplier",
+        "author": "Tango"
+      }
+    },
+    {
+      "title": {
+        "en": "Water Mage"
+      },
+      "element": "water",
+      "slots": [["Edelweiss"], ["Roxie"], ["Fortuna"], ["Core Fusion Veronica"]],
+      "geasActive": {
+        "bonus": ["21", "100", "76"],
+        "malus": ["25", "67", "78", "29", "31", "20", "5"]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "General Requirements:",
+            "jp": "必要条件:",
+            "kr": "필수 조건:",
+            "zh": "基本要求:",
+            "fr": "Prérequis généraux :"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "Minimum 4★ transcendence with max level chain skill for 6 WG damage on chain",
+              "jp": "最低4★超越、チェインスキル最大レベルでチェイン時6 WGダメージ",
+              "kr": "최소 4★ 초월, 체인 스킬 최대 레벨로 체인 시 6 WG 데미지",
+              "zh": "最低4★超越，连携技能满级在连携时获得6 WG伤害",
+              "fr": "Transcendance 4★ minimum avec chain skill au niveau max pour 6 de dégâts de WG sur la chaîne"
+            }
+          ]
+        },
+        {
+          "turnOrder": [
+            {
+              "character": "Edelweiss",
+              "speed": 288
+            },
+            {
+              "character": "Core Fusion Veronica",
+              "speed": 261
+            },
+            {
+              "character": "Fortuna",
+              "speed": 230
+            },
+            {
+              "character": "Roxie",
+              "speed": 160
+            }
+          ]
+        },
+        {
+          "p": {
+            "en": "IMPORTANT: Use the exact speeds listed above and don't deviate from them. The speed tuning is incredibly precise - even small variations can cause the run to fail due to turn order issues.",
+            "jp": "重要: 上記の速度を正確に使用し、逸脱しないこと。速度調整は非常に精密で、小さな変動でもターン順の問題で失敗する可能性あり。",
+            "kr": "중요: 위에 나열된 정확한 속도를 사용하고 벗어나지 마세요. 속도 튜닝이 매우 정밀해서 작은 변동도 턴 순서 문제로 실패할 수 있습니다.",
+            "zh": "重要：使用上面列出的精确速度，不要偏离。速度调整非常精确 - 即使微小的变化也可能因回合顺序问题导致失败。",
+            "fr": "IMPORTANT : utilisez exactement les vitesses listées ci-dessus et ne vous en écartez pas. Le réglage de vitesse est extrêmement précis — même de petites variations peuvent faire échouer la run à cause de problèmes d'ordre de jeu."
+          }
+        },
+        {
+          "p": {
+            "en": "TIP: Killing both orbs at the same time only counts as killing ONE orb for the Geas power boost on unit dying. It's better to kill each orb one by one whenever possible for maximum damage boost.",
+            "jp": "ヒント: 両方のオーブを同時に倒すと、ギアスのユニット死亡パワーブーストでは1体分としかカウントされない。最大ダメージブーストのため、可能な限りオーブを1体ずつ倒す方が良い。",
+            "kr": "팁: 두 오브를 동시에 처치하면 기어스의 유닛 사망 파워 부스트에서 1개로만 카운트됩니다. 최대 데미지 부스트를 위해 가능하면 오브를 하나씩 처치하는 것이 좋습니다.",
+            "zh": "提示：同时击杀两个球只算击杀一个球的Geas单位死亡能量提升。为了最大伤害提升，尽可能一个一个击杀球。",
+            "fr": "ASTUCE : tuer les deux orbs en même temps ne compte que comme la destruction d'UN seul orb pour le bonus de puissance du Geas à la mort d'une unité. Il vaut mieux tuer chaque orb un par un dès que possible pour un boost de dégâts maximal."
+          }
+        },
+        {
+          "p": {
+            "en": "TIP: On turn 1, target the boss (not the orbs) with Edelweiss's and Core Fusion Veronica's S3. These AoE skills deal less damage to the orbs when aimed directly at them, so the damage to the orbs may not be enough otherwise.",
+            "fr": "ASTUCE : au tour 1, ciblez le boss (et non les orbs) avec le S3 d'Edelweiss et de Core Fusion Veronica. Ces compétences de zone infligent moins de dégâts aux orbs lorsqu'elles les visent directement, sinon les dégâts sur les orbs risquent d'être insuffisants."
+          }
+        }
+      ],
+      "requirements": {
+        "entries": [
+          {
+            "character": "Roxie",
+            "stats": {
+              "spd": "160",
+              "eff": "134",
+              "trans": "5-6"
+            },
+            "equipment": {
+              "amulet": ["{I-A/Gorgon's Vanity [Mage]}"],
+              "talisman": ["{I-T/Executioner's Charm} +10"],
+              "set": ["{AS/Revenge}"],
+              "ee": ["+10"]
+            },
+            "notes": [
+              {
+                "en": "5★ still works but you can't use Burst 3 on her last turn unless by using {AS/Bursting}",
+                "jp": "5★でも動作するが、{AS/Bursting}を使わない限り最後のターンでバースト3が使えない",
+                "kr": "5★도 작동하지만 {AS/Bursting} 없이는 마지막 턴에 버스트 3 사용 불가",
+                "zh": "5★也能用但除非使用{AS/Bursting}否则最后一回合无法使用爆发3",
+                "fr": "La 5★ fonctionne encore mais vous ne pouvez pas utiliser le Burst 3 à son dernier tour sauf en utilisant {AS/Bursting}"
+              },
+              {
+                "en": "If you don't have {I-A/Gorgon's Vanity [Mage]}, you'll probably have to run with {AS/Speed} over {AS/Revenge}",
+                "jp": "{I-A/Gorgon's Vanity [Mage]}がない場合、{AS/Revenge}ではなく{AS/Speed}で運用する必要あり",
+                "kr": "{I-A/Gorgon's Vanity [Mage]}가 없으면 {AS/Revenge} 대신 {AS/Speed}로 운용 필요",
+                "zh": "如果没有{I-A/Gorgon's Vanity [Mage]}，需要用{AS/Speed}而非{AS/Revenge}",
+                "fr": "Si vous n'avez pas {I-A/Gorgon's Vanity [Mage]}, vous devrez probablement jouer avec {AS/Speed} plutôt que {AS/Revenge}"
+              }
+            ]
+          },
+          {
+            "character": "Edelweiss",
+            "stats": {
+              "spd": "288",
+              "eff": "134",
+              "trans": "5-6"
+            },
+            "equipment": {
+              "weapon": ["{I-W/Rampaging Caracal}"],
+              "amulet": ["{I-A/Burning Soul} PEN%"],
+              "talisman": ["{I-T/Sage's Charm}", "{I-T/Rogue's Charm}"]
+            },
+            "notes": [
+              {
+                "en": "288 {S/SPD} exactly otherwise turn order will be messed up.",
+                "jp": "{S/SPD}は正確に288、そうでないとターン順が崩れる",
+                "kr": "{S/SPD} 정확히 288, 그렇지 않으면 턴 순서가 틀어짐",
+                "zh": "{S/SPD}必须正好288，否则回合顺序会乱",
+                "fr": "Exactement 288 {S/SPD}, sinon l'ordre de jeu sera faussé."
+              },
+              {
+                "en": "Ideally 6★ for extra AP on battle start",
+                "jp": "6★が理想（戦闘開始時に追加AP）",
+                "kr": "6★ 이상적 (전투 시작 시 추가 AP)",
+                "zh": "理想6★（战斗开始时额外AP）",
+                "fr": "Idéalement 6★ pour de l'AP supplémentaire en début de combat"
+              }
+            ]
+          },
+          {
+            "character": "Fortuna",
+            "stats": {
+              "spd": "230",
+              "eff": "134"
+            },
+            "equipment": {
+              "amulet": ["{I-A/Queen of Prism}"],
+              "talisman": ["{I-T/Sage's Charm}", "{I-T/Rogue's Charm}"]
+            },
+            "notes": [
+              {
+                "en": "Needs enough HP to survive two 2-turn burns with {I-A/Queen of Prism}",
+                "jp": "{I-A/Queen of Prism}のシールドで2ターン燃焼を2回耐えられるHP必要",
+                "kr": "{I-A/Queen of Prism}의 실드로 2턴 화상 2번을 버틸 HP 필요",
+                "zh": "需要足够HP用{I-A/Queen of Prism}的护盾扛住两次2回合燃烧",
+                "fr": "A besoin d'assez de HP pour survivre à deux burns de 2 tours avec {I-A/Queen of Prism}"
+              },
+              {
+                "en": "Without {I-A/Queen of Prism} have her max HP be lower than {P/Roxie} so she gets a shield from {P/Core Fusion Veronica} later (meaning you only tank 1-turn burns)",
+                "jp": "{I-A/Queen of Prism}なしの場合、最大HPを{P/Roxie}より低くして{P/Core Fusion Veronica}から後でシールドを受ける（1ターン燃焼だけ耐える）",
+                "kr": "{I-A/Queen of Prism} 없으면 최대 HP를 {P/Roxie}보다 낮게 해서 나중에 {P/Core Fusion Veronica}에게서 실드 받기 (1턴 화상만 버팀)",
+                "zh": "没有{I-A/Queen of Prism}时让最大HP低于{P/Roxie}以便之后从{P/Core Fusion Veronica}获得护盾（只需扛1回合燃烧）",
+                "fr": "Sans {I-A/Queen of Prism}, faites en sorte que ses HP max soient inférieurs à ceux de {P/Roxie} pour qu'elle reçoive un bouclier de {P/Core Fusion Veronica} plus tard (ce qui veut dire que vous n'encaissez que des burns de 1 tour)"
+              }
+            ]
+          },
+          {
+            "character": "Core Fusion Veronica",
+            "stats": {
+              "spd": "261"
+            },
+            "equipment": {
+              "talisman": ["{I-T/Sage's Charm}", "{I-T/Rogue's Charm}"]
+            },
+            "notes": [
+              {
+                "en": "EE+10 not required, but if you have it, don't use {I-A/Chalice of Longing} accessory otherwise turn order will be messed up.",
+                "jp": "EE+10は必須ではないが、持っている場合は{I-A/Chalice of Longing}アクセサリーを使わない（ターン順が崩れる）",
+                "kr": "EE+10 필수 아님, 있으면 {I-A/Chalice of Longing} 악세서리 사용 금지 (턴 순서가 틀어짐)",
+                "zh": "EE+10非必需，但如果有就不要用{I-A/Chalice of Longing}饰品（否则回合顺序会乱）",
+                "fr": "EE+10 non requise, mais si vous l'avez, n'utilisez pas l'accessoire {I-A/Chalice of Longing} sinon l'ordre de jeu sera faussé."
+              },
+              {
+                "en": "{I-A/Chalice of Longing} is fine without EE+10",
+                "jp": "EE+10なしなら{I-A/Chalice of Longing}は使用可",
+                "kr": "EE+10 없으면 {I-A/Chalice of Longing} 사용 가능",
+                "zh": "没有EE+10时可以用{I-A/Chalice of Longing}",
+                "fr": "{I-A/Chalice of Longing} convient sans EE+10"
+              }
+            ]
+          }
+        ]
+      },
+      "video": {
+        "platform": "youtube",
+        "id": "a69ltnKOfiI",
+        "title": "Stage 14 - Mage Team - 9.35m dmg, 150% multiplier",
+        "author": "Tango"
+      }
+    },
+    {
+      "title": {
+        "en": "GBeth"
+      },
+      "icon": "IG_Buff_2100092",
+      "slots": [["Gnosis Beth"], ["Maxie"], ["Monad Eva"], ["Akari"]],
+      "video": {
+        "platform": "youtube",
+        "id": "PBTKXTwFuBg",
+        "title": "Planet Purification Unit Stage 11 - G.Beth Team",
+        "author": "Sevih"
+      }
+    }
+  ]
+}

@@ -8,6 +8,8 @@ import charactersData from '@data/generated/characters.json';
 import slugToIdData from '@data/generated/characters-slug-to-id.json';
 import glossariesData from '@data/generated/glossaries.json';
 import type { Character, CharactersFile, CharacterTag, Glossaries, LangDict } from '@contracts';
+import type { Lang } from '@/lib/i18n/config';
+import { localePath } from '@/lib/navigation';
 
 const CHARACTERS = charactersData as unknown as CharactersFile;
 const FUSION_TITLE = (glossariesData as unknown as Glossaries).fusionTitle;
@@ -84,6 +86,34 @@ export function findCharacterByName(name: string): Character | undefined {
 
 export function getCharacter(id: string): Character | undefined {
   return CHARACTERS[id];
+}
+
+/** Un perso de guide RÉSOLU : le record, son nom d'affichage, son lien de fiche. */
+export interface GuideCharacter {
+  character: Character;
+  name: string;
+  /** Lien vers la fiche (absent si le perso n'a pas de slug public). */
+  href?: string;
+}
+
+/**
+ * Résout un perso désigné par son NOM ÉDITORIAL EN vers son identité d'affichage
+ * et son lien de fiche — ou JETTE (build SSG cassé) si le nom est inconnu. `where`
+ * nomme le composant appelant dans le message d'erreur.
+ *
+ * Source UNIQUE du bloc « findCharacterByName → throw → slug → name → href » que
+ * recopiaient tous les composants de guide listant des persos (TurnOrder,
+ * BuildRequirements, RecommendedCharacters).
+ */
+export function resolveGuideCharacter(name: string, lang: Lang, where: string): GuideCharacter {
+  const c = findCharacterByName(name);
+  if (!c) throw new Error(`${where} : personnage inconnu « ${name} »`);
+  const slug = slugForId(c.id);
+  return {
+    character: c,
+    name: characterDisplayName(c, lang),
+    href: slug ? localePath(lang, `/characters/${slug}`) : undefined,
+  };
 }
 
 /** Tous les slugs connus (pour `generateStaticParams`). */

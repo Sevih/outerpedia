@@ -1,0 +1,58 @@
+{
+  "recommended": [
+    {
+      "characters": ["Demiurge Luna"],
+      "reason": {
+        "en": "Strong damage unit",
+        "jp": "高火力ユニット",
+        "kr": "강력한 딜러",
+        "zh": "高伤害单位",
+        "fr": "Unité à forts dégâts"
+      }
+    },
+    {
+      "characters": ["Poolside Trickster Regina"],
+      "reason": {
+        "en": "Strong damage unit",
+        "jp": "高火力ユニット",
+        "kr": "강력한 딜러",
+        "zh": "高伤害单位",
+        "fr": "Unité à forts dégâts"
+      }
+    },
+    {
+      "characters": ["Veronica"],
+      "reason": {
+        "en": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}",
+        "jp": "{B/BT_CALL_BACKUP}、{D/BT_AGGRO}",
+        "kr": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}",
+        "zh": "{B/BT_CALL_BACKUP}、{D/BT_AGGRO}",
+        "fr": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}"
+      }
+    },
+    {
+      "characters": ["Fatal"],
+      "reason": {
+        "en": "{C/Ranger} {E/Water}",
+        "jp": "{C/Ranger} {E/Water}",
+        "kr": "{C/Ranger} {E/Water}",
+        "zh": "{C/Ranger} {E/Water}",
+        "fr": "{C/Ranger} {E/Water}"
+      }
+    }
+  ],
+  "team": {
+    "slots": [
+      ["Fatal", "Ryu Lion", "Holy Night's Blessing Dianne", "Regina"],
+      ["Veronica", "Luna"],
+      ["Tamara", "Laplace", "Caren"],
+      ["Poolside Trickster Regina", "Demiurge Luna", "Roxie", "Beth"]
+    ]
+  },
+  "video": {
+    "platform": "youtube",
+    "id": "HxYVQy9puEE",
+    "title": "Geas Boss - Strategic Defense Automaton (Stage 4)",
+    "author": "Sevih"
+  }
+}

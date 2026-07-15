@@ -590,6 +590,7 @@ const zh: Record<TranslationKey, string> = {
   'guides.strategy_guide': '攻略指南',
   'guides.boss_display.immunities': '免疫',
   'guides.boss_display.skills': '技能',
+  'guides.boss_display.stats': '属性',
   'guides.boss_display.rank': '评级',
   'guides.boss_display.rank_options': '评级被动',
   'guides.boss_display.rank_prev': '上一评级',
@@ -1217,6 +1218,19 @@ const zh: Record<TranslationKey, string> = {
   'tower.level': '等级{n}',
   'tower.power': '战力{n}',
   'tower.pool': '可能出现的Boss',
+  'tower.adds': '小怪',
+  'tower.restriction_label': '限制',
+  'tower.restriction_none': '无',
+  'tower.restr_element': '属性',
+  'tower.restr_class': '职业',
+  'tower.restr_star': '初始稀有度',
+  'tower.roster_empty': '该限制下所有推荐角色均无法上场。',
+  'tower.group_floor20': '第20层',
+  'tower.group_demiurge': '第5 / 10 / 15层',
+  'tower.group_random': '随机楼层',
+  'tower.restr_ban': '禁止',
+  'tower.restr_force': '必须',
+  'tower.restr_clear': '清除',
 };
 
 export default zh;

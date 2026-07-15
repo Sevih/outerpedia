@@ -1,7 +1,8 @@
 'use client';
 
 import { type ReactNode } from 'react';
-import { useUrlSlice, writeUrl } from '@/hooks/useUrlSlice';
+import { useUrlSlice } from '@/hooks/useUrlSlice';
+import { readHashParam, writeHashParam } from '@/lib/url-hash';
 
 export interface GuideVersionEntry {
   /** Clé stable (dossier `versions/YYYY-MM`) — sert d'ancre `#version=`. */
@@ -13,11 +14,9 @@ export interface GuideVersionEntry {
 }
 
 // Le hash est la SOURCE DE VÉRITÉ de la version affichée (cf. useUrlSlice) :
-// lien partageable, Back/Forward et édition manuelle du hash pilotent l'UI.
-const readVersionHash = () => {
-  const m = window.location.hash.match(/^#version=(.+)$/);
-  return m ? decodeURIComponent(m[1]) : null;
-};
+// lien partageable, Back/Forward et édition manuelle du hash pilotent l'UI. Le
+// paramètre `version` cohabite avec les autres sélecteurs (phase/équipe) — cf.
+// `url-hash`.
 
 /**
  * Sélecteur de versions d'un guide : un MENU DÉROULANT compact (un guide
@@ -44,13 +43,10 @@ export function GuideVersions({
    */
   shared?: ReactNode;
 }) {
-  const hashKey = useUrlSlice('hashchange', readVersionHash);
+  const hashKey = useUrlSlice('hashchange', () => readHashParam('version'));
   const active = hashKey && versions.some((v) => v.key === hashKey) ? hashKey : versions[0]?.key;
 
-  const select = (key: string) => {
-    // replaceState ne déclenche pas `hashchange` — writeUrl notifie le store.
-    writeUrl(() => window.history.replaceState(null, '', `#version=${encodeURIComponent(key)}`));
-  };
+  const select = (key: string) => writeHashParam('version', key);
 
   const current = versions.find((v) => v.key === active) ?? versions[0];
   if (!current) return null;

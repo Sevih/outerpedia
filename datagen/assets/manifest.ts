@@ -21,7 +21,7 @@ import {
   categoryArt,
   type GuideCategorySlug,
 } from '../../src/lib/data/guide-categories';
-import { listGuides } from '../../src/lib/data/guides';
+import { listGuides, readGuideVersionFile, type Guide } from '../../src/lib/data/guides';
 import { buildItemCatalog } from '../generators/item-catalog';
 import { resolveClass } from '../lib/class';
 import { slugEnum } from '../lib/enums';
@@ -198,6 +198,7 @@ export function buildAssetManifest(): AssetRequest[] {
     classes: Record<string, unknown>;
     subClasses: Record<string, unknown>;
     effects: Record<string, { icon?: string }>;
+    geas?: Record<string, { icon?: string }>;
   };
 
   const out: AssetRequest[] = [];
@@ -279,6 +280,28 @@ export function buildAssetManifest(): AssetRequest[] {
       candidates: [sc(e.icon), e.icon],
       domain: 'effects',
       editorialFallback: `ui/effect/${e.icon}.webp`,
+    });
+  }
+
+  // --- Geas du guild raid : une icône par famille (glossaire `geas`) ----------
+  // Sprites `GD_Geis_*` (dossier `at_guildruntime`), collectés data-driven depuis
+  // le pool — un seul namespace `ui/geas`, jamais de sprite recopié à la main.
+  for (const g of Object.values(glossaries.geas ?? {})) {
+    if (!g.icon) continue;
+    push({
+      kind: 'image',
+      key: `images/ui/geas/${g.icon}.webp`,
+      candidates: [g.icon],
+      domain: 'ui',
+    });
+  }
+  // Cadres de fond par grade (1..3) — la bordure d'intensité d'un geas.
+  for (const grade of [1, 2, 3]) {
+    push({
+      kind: 'image',
+      key: `images/ui/geas/GD_Slot_Bg_0${grade}.webp`,
+      candidates: [`GD_Slot_Bg_0${grade}`],
+      domain: 'ui',
     });
   }
 
@@ -698,9 +721,17 @@ export function buildAssetManifest(): AssetRequest[] {
   // affichent TOUT le groupe de combat (ligues du world boss, stages…), et
   // chaque variante a son PROPRE kit — souvent avec des icônes qui
   // n'appartiennent à aucun personnage (Skill_Second_2100090 : le S2 de la
-  // Dahlia de ligue Hard, 4086020). Collecte data-driven : bossId du guide →
-  // groupes de combat de ses donjons (`encounters.group`) → monstres du
-  // groupe → portrait + icônes de skills (dédup par clé via `push`).
+  // Dahlia de ligue Hard, 4086020). Collecte data-driven, DEUX sources de
+  // groupes de combat (`encounters.group`) → monstres → portrait + skills :
+  //   - les groupes atteints par les SPAWNS du bossId du guide ;
+  //   - les groupes que le guide DÉCLARE lui-même et qu'aucun spawn du bossId
+  //     n'atteint : `meta.group` (modes permanents) et les groupes des
+  //     `config.json` de version (guild raid : subA/subB/main). Le boss
+  //     principal d'un guild raid ne spawne QUE dans `main` — sans cette source,
+  //     les SOUS-BOSS (leurs vignettes `MT_` + icônes de skills) tombent en 404.
+  // On ne retient d'un config.json que les chaînes qui SONT des groupes connus
+  // d'encounters — jamais un nom de champ en dur (les `videos` et autres valeurs
+  // passent au travers du filtre).
   {
     const monsters = load('monsters.json') as Record<
       string,
@@ -723,13 +754,27 @@ export function buildAssetManifest(): AssetRequest[] {
       for (const dm of d.monsters ?? []) set.add(dm.id);
       groupMonsters.set(d.group, set);
     }
+    // Groupes DÉCLARÉS par un guide (hors spawns du bossId) : `meta.group` +
+    // valeurs des `config.json` de version qui sont de vrais groupes connus.
+    const declaredGroups = (g: Guide): string[] => {
+      const found = new Set<string>();
+      if (g.group && groupMonsters.has(g.group)) found.add(g.group);
+      for (const v of g.versions) {
+        const cfg = readGuideVersionFile<Record<string, unknown>>(g, v.key, 'config.json');
+        if (!cfg) continue;
+        for (const val of Object.values(cfg))
+          if (typeof val === 'string' && groupMonsters.has(val)) found.add(val);
+      }
+      return [...found];
+    };
     for (const g of guides) {
-      if (!g.bossId) continue;
       const variants = new Set<string>();
-      for (const s of monsters[g.bossId]?.spawns ?? []) {
+      for (const s of g.bossId ? (monsters[g.bossId]?.spawns ?? []) : []) {
         const grp = groupOf.get(s.dungeon);
         if (grp) for (const id of groupMonsters.get(grp) ?? []) variants.add(id);
       }
+      for (const grp of declaredGroups(g))
+        for (const id of groupMonsters.get(grp) ?? []) variants.add(id);
       for (const id of variants) {
         const m = monsters[id];
         if (!m) continue;

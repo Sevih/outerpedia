@@ -2,8 +2,7 @@ import { Fragment, type ReactNode } from 'react';
 import Link from 'next/link';
 import type { Route } from 'next';
 import type { Lang } from '@/lib/i18n/config';
-import { characterDisplayName, findCharacterByName, slugForId } from '@/lib/data/characters';
-import { localePath } from '@/lib/navigation';
+import { resolveGuideCharacter } from '@/lib/data/characters';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 
 export interface RecommendedGroup {
@@ -36,16 +35,14 @@ export function RecommendedCharacters({
       <h2 className="text-content-strong text-xl font-bold">{title}</h2>
       <div className="space-y-3">
         {groups.map((g, i) => {
+          // Nom inconnu = erreur de contenu → le build SSG CASSE (dans le résolveur).
           const chars = g.characters.map((name) => {
-            const c = findCharacterByName(name);
-            // Nom inconnu = erreur de contenu → le build SSG CASSE.
-            if (!c) throw new Error(`RecommendedCharacters : personnage inconnu « ${name} »`);
-            const slug = slugForId(c.id);
-            return {
-              c,
-              name: characterDisplayName(c, lang),
-              href: slug ? localePath(lang, `/characters/${slug}`) : undefined,
-            };
+            const {
+              character: c,
+              name: display,
+              href,
+            } = resolveGuideCharacter(name, lang, 'RecommendedCharacters');
+            return { c, name: display, href };
           });
 
           return (

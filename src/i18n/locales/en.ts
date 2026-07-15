@@ -617,6 +617,7 @@ const en = {
   'guides.strategy_guide': 'Strategy Guide',
   'guides.boss_display.immunities': 'Immunities',
   'guides.boss_display.skills': 'Skills',
+  'guides.boss_display.stats': 'Stats',
   'guides.boss_display.rank': 'Rank',
   'guides.boss_display.rank_options': 'Rank passives',
   'guides.boss_display.rank_prev': 'Previous rank',
@@ -1271,6 +1272,19 @@ const en = {
   'tower.level': 'Lv. {n}',
   'tower.power': 'Power {n}',
   'tower.pool': 'Possible bosses',
+  'tower.adds': 'Adds',
+  'tower.restriction_label': 'Restriction',
+  'tower.restriction_none': 'No restriction',
+  'tower.restr_element': 'Element',
+  'tower.restr_class': 'Class',
+  'tower.restr_star': 'Base rarity',
+  'tower.roster_empty': 'Every recommended character is excluded by this restriction.',
+  'tower.group_floor20': 'Floor 20',
+  'tower.group_demiurge': 'Floors 5 / 10 / 15',
+  'tower.group_random': 'Random floors',
+  'tower.restr_ban': 'Banned',
+  'tower.restr_force': 'Required',
+  'tower.restr_clear': 'Clear',
 } as const;
 
 export default en;

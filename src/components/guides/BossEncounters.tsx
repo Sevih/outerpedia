@@ -45,6 +45,8 @@ function lineup(
   monsters: DungeonMonster[],
   lang: Lang,
   afterStats: ReactNode,
+  hideSpawnLabel: boolean,
+  compact: boolean,
 ): LineupItem[] {
   const ordered = [...monsters].sort((a, b) => Number(a.role === 'add') - Number(b.role === 'add'));
   const names = monsterDisplayNames(
@@ -70,6 +72,8 @@ function lineup(
           spawns={encounterSpawnContexts(e, m, lang)}
           lang={lang}
           role={m.role}
+          hideSpawnLabel={hideSpawnLabel}
+          compact={compact}
           // L'encart du mode va sous la carte du BOSS (le premier après tri),
           // jamais sous celle d'un renfort.
           afterStats={slot === 0 ? afterStats : undefined}
@@ -105,6 +109,14 @@ export async function BossEncounters({
    * plutôt qu'un drapeau `story` que ce composant n'a aucune raison de porter.
    */
   monsters = (e) => e.monsters,
+  /**
+   * Masque le suffixe « — <mode · donjon> » des stats de chaque carte : le
+   * guild raid porte déjà ce contexte dans ses onglets (sous-boss + difficulté),
+   * le répéter sous les stats n'apprend rien.
+   */
+  hideSpawnLabel = false,
+  /** Mode COMPACT des cartes de boss (cf. `BossCard`) — stats repliées, skills en onglets. */
+  compact = false,
 }: {
   /** Le COMBAT — pour les modes qui en déclarent un (`DungeonRef.group`). */
   group?: string;
@@ -118,6 +130,8 @@ export async function BossEncounters({
   defaultIndex?: number;
   afterStats?: (encounter: Encounter) => ReactNode;
   monsters?: (encounter: Encounter) => DungeonMonster[];
+  hideSpawnLabel?: boolean;
+  compact?: boolean;
 }) {
   const t = await getT(lang);
 
@@ -162,7 +176,7 @@ export async function BossEncounters({
                 BOSS, jamais sous celle d'un renfort. */}
             <MonsterLineup
               addsLabel={t('guides.boss_display.add')}
-              items={lineup(e, monsters(e), lang, afterStats?.(e))}
+              items={lineup(e, monsters(e), lang, afterStats?.(e), hideSpawnLabel, compact)}
             />
           </EncounterPane>
         ))}

@@ -43,6 +43,10 @@ export const img = {
   tag: (slug: string) => `${BASE}/images/ui/tags/${slug}.webp`,
   /** Icône d'effet (nom d'icône du glossaire). */
   effect: (icon: string) => `${BASE}/images/ui/effect/${icon}.webp`,
+  /** Icône de geas du guild raid (`GD_Geis_*`, glossaire `geas`). */
+  geas: (icon: string) => `${BASE}/images/ui/geas/${icon}.webp`,
+  /** Cadre de fond d'un geas par grade d'intensité (1..3). */
+  geasFrame: (grade: number) => `${BASE}/images/ui/geas/GD_Slot_Bg_0${grade}.webp`,
   /** Carte de burst 1..3 (fond du jeu). */
   burstCard: (level: 1 | 2 | 3) => `${BASE}/images/ui/skills/IG_Button_Burst_0${level}.webp`,
   /** Badge burst posé sur l'icône du skill burstable. */
