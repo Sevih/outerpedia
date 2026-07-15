@@ -217,7 +217,7 @@ function setChip(name: string, ctx: ParseCtx, k: number): ReactNode {
     <div className="flex gap-2">
       <span className="relative h-10 w-10 shrink-0">
         {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-        <img src={img.effect(set.icon)} alt={label} className="h-full w-full object-contain" />
+        <img src={img.equipment(set.icon)} alt={label} className="h-full w-full object-contain" />
       </span>
       <div className="flex flex-col gap-0.5">
         <span className="text-equipment text-sm font-bold">{label}</span>
