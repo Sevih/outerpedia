@@ -20,6 +20,16 @@
     }
   },
   {
+    "characters": ["Mystic Sage Ame"],
+    "reason": {
+      "en": "At 6-star, can't be countered and can apply debuffs freely.",
+      "jp": "6覚醒で反撃されず、弱体効果を自由に付与できる。",
+      "kr": "6성에서 반격당하지 않고 약화 효과를 자유롭게 부여할 수 있다.",
+      "zh": "6星时不会被反击，可自由施加弱化效果。",
+      "fr": "À 6 étoiles, ne peut pas être countered et applique des debuffs librement."
+    }
+  },
+  {
     "characters": ["Gnosis Nella", "Iota", "Gnosis Viella"],
     "reason": {
       "en": "Can {D/BT_STUN} the boss.",
@@ -60,7 +70,9 @@
       "Ame",
       "Maxwell",
       "Demiurge Stella",
-      "Fatal"
+      "Fatal",
+      "Heatwave Cop Delta",
+      "Ryu Lion"
     ],
     "reason": {
       "en": "High damage dealers without relying on debuffs.",
