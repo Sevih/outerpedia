@@ -1,42 +1,26 @@
 /**
  * UN ÉTAGE d'un guide de tour — la sous-route qui rend UN étage côté serveur en
  * restant STATIQUE (un `?floor=` déopterait toute la route guide en dynamique).
- * Seuls les guides `skyward-tower` peuplent cette route : `generateStaticParams`
- * énumère leurs étages, les autres guides n'ont simplement pas de segment
- * `[floor]`. Le cadre (en-tête, fil d'Ariane…) est mutualisé avec la route de
- * base (`GuideDetail`) ; ici on ne fait que résoudre l'étage et canonicaliser
- * sur lui.
+ * Seuls les guides `skyward-tower` peuplent cette route ; les autres guides
+ * n'ont simplement pas de segment `[floor]`. Le cadre (en-tête, fil d'Ariane…)
+ * est mutualisé avec la route de base (`GuideDetail`) ; ici on ne fait que
+ * résoudre l'étage et canonicaliser sur lui.
+ *
+ * Pas de `generateStaticParams` : les ~3297 étages (× 5 langues) dominaient le
+ * build. On les rend À LA DEMANDE puis on les cache 24 h (`revalidate`), comme
+ * les pages d'équipement. `dynamicParams` restant à `true`, un étage jamais
+ * visité se génère au premier hit au lieu de peser sur le build.
  */
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { LANGS, isValidLang, type Lang } from '@/lib/i18n/config';
+import { isValidLang, type Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { getT } from '@/i18n';
 import { createPageMetadata } from '@/lib/seo';
-import { getGuide, listGuideParams } from '@/lib/data/guides';
+import { getGuide } from '@/lib/data/guides';
 import { getTower } from '@/lib/data/towers';
+import { getMonster } from '@/lib/data/monsters';
 import { GuideDetail } from '../guide-detail';
-
-/** Les étages de la tour d'un guide (`[]` si le guide n'est pas une tour). */
-function towerFloors(category: string, slug: string): number[] {
-  const guide = getGuide(category, slug);
-  const tower = guide?.tower ? getTower(guide.tower) : undefined;
-  return tower ? tower.floors.map((f) => f.floor) : [];
-}
-
-export function generateStaticParams() {
-  const towerGuides = listGuideParams().filter(({ category }) => category === 'skyward-tower');
-  return LANGS.flatMap((lang) =>
-    towerGuides.flatMap(({ category, slug }) =>
-      towerFloors(category, slug).map((floor) => ({
-        lang,
-        category,
-        slug,
-        floor: String(floor),
-      })),
-    ),
-  );
-}
 
 export const revalidate = 86400;
 
@@ -51,15 +35,18 @@ export async function generateMetadata({
   const n = Number(floor);
   if (!guide || !Number.isInteger(n)) return {};
   const t = await getT(lang);
-  const floorLabel = t('tower.floor', { n });
+  // Very hard : le segment est un id de boss (nav par combat) → on titre au NOM
+  // du boss ; standard : c'est un n° d'étage.
+  const tower = guide.tower ? getTower(guide.tower) : undefined;
+  const boss = tower?.mode === 'tower_very_hard' ? getMonster(floor) : undefined;
+  const label = boss ? lRec(boss.name, lang) || boss.name.en : t('tower.floor', { n });
 
   return createPageMetadata({
     lang,
-    // Chaque étage se canonicalise sur LUI-MÊME (contenu propre : boss et
-    // conditions de l'étage).
+    // Chaque étage/combat se canonicalise sur LUI-MÊME (contenu propre).
     path: `/guides/${category}/${slug}/${floor}`,
-    title: `${lRec(guide.title, lang)} — ${floorLabel}`,
-    description: `${floorLabel} — ${lRec(guide.description, lang)}`,
+    title: `${lRec(guide.title, lang)} — ${label}`,
+    description: `${label} — ${lRec(guide.description, lang)}`,
     ...(guide.ogImage ? { ogImage: guide.ogImage } : {}),
   });
 }
