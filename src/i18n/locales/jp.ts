@@ -667,6 +667,7 @@ const jp: Record<TranslationKey, string> = {
     'ゲアスのオン/オフを切り替えてスコア倍率を計算しましょう。マルスゲアスを有効化すると難易度が上がりますがスコアが増加します。',
   'guildraid.geas.level': 'レベル{n}',
   'guildraid.total_multiplier': 'スコア倍率合計',
+  'guildraid.geas_table_full': '解放テーブル全体を表示',
   'guildraid.active_geas': '有効なゲアス',
   'guildraid.sub_boss': 'ボス{n}',
   'requirements.title': '必要条件',

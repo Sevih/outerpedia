@@ -678,6 +678,7 @@ const en = {
     'Toggle geas on/off to calculate your score multiplier. Activating malus geas increases difficulty but boosts your score.',
   'guildraid.geas.level': 'Level {n}',
   'guildraid.total_multiplier': 'Total Score Multiplier',
+  'guildraid.geas_table_full': 'View full unlock table',
   'guildraid.active_geas': 'Active Geas',
   'guildraid.sub_boss': 'Boss {n}',
   'requirements.title': 'Requirements',

@@ -1,12 +1,16 @@
 /**
- * LES BUILDS D'UNE ÉQUIPE — une carte par personnage : stats visées, priorité
- * de stats, équipement et notes.
+ * LE PLAN DE JEU D'UNE ÉQUIPE — une SÉQUENCE ordonnée, une ligne par personnage,
+ * triée par VITESSE décroissante = l'ordre de jeu.
  *
- * C'est la partie « contrainte » d'une compo de guild raid de haut stage : la run
- * ne passe qu'à des vitesses et des sets précis. Chaque valeur d'équipement ou de
- * priorité est un token éditorial ({I-W/}, {AS/}, {S/}…) résolu par `parseText`
- * contre les données — un item inconnu JETTE (STRICT). Les cartes sont triées par
- * vitesse décroissante (l'ordre de jeu).
+ * Fusionne ce qui était deux blocs (la file ATB de `TurnOrder` + le tableau de
+ * builds) : le tri par SPD PORTAIT déjà l'ordre de jeu, la file ATB le répétait.
+ * Ici l'ordre se lit d'un coup d'œil — un NUMÉRO d'ordre (1→n) sur le rail, le
+ * filet qui sépare les lignes fait la « chaîne » — et la VITESSE est le pivot de
+ * chaque ligne : l'icône de stat porte le sens « vitesse », la valeur reste en
+ * gras neutre (aucun token dédié, `text-accent` est réservé aux noms/liens).
+ *
+ * Chaque valeur d'équipement/priorité est un token éditorial ({I-W/}, {AS/}, {S/}…)
+ * résolu par `parseText` contre les données — un item inconnu JETTE (STRICT).
  *
  * Composant SERVEUR.
  */
@@ -47,9 +51,10 @@ export interface RequirementsData {
   note?: LText;
 }
 
-/** Ordre + abréviation des stats ; `trans` n'a pas d'icône (libellé texte). */
+/** Ordre + abréviation des stats ; `trans` n'a pas d'icône (libellé texte).
+ *  `spd` en est SORTIE : la vitesse est le pivot de la ligne, pas une puce parmi
+ *  d'autres. */
 const STAT_ROWS: { key: string; abbr?: string; label?: TranslationKey }[] = [
-  { key: 'spd', abbr: 'SPD' },
   { key: 'eff', abbr: 'EFF' },
   { key: 'atk', abbr: 'ATK' },
   { key: 'def', abbr: 'DEF' },
@@ -77,7 +82,8 @@ function spdOf(entry: RequirementEntry): number | null {
   return m ? Number(m[0]) : null;
 }
 
-function EntryCard({ entry, ctx }: { entry: RequirementEntry; ctx: ParseCtx }) {
+/** Une ligne du plan de jeu : rang, portrait, VITESSE (pivot), build. */
+function EntryRow({ entry, step, ctx }: { entry: RequirementEntry; step: number; ctx: ParseCtx }) {
   const { lang, t } = ctx;
   const {
     character: c,
@@ -85,19 +91,27 @@ function EntryCard({ entry, ctx }: { entry: RequirementEntry; ctx: ParseCtx }) {
     href,
   } = resolveGuideCharacter(entry.character, lang, 'BuildRequirements');
 
+  const spd = entry.stats?.spd;
   const stats = STAT_ROWS.filter((s) => entry.stats?.[s.key] !== undefined);
   const equip = EQUIP_ROWS.filter((e) => entry.equipment?.[e.key]?.length);
 
   return (
-    <div className="flex items-start gap-3 p-3">
-      <div className="flex w-16 shrink-0 flex-col items-center gap-1">
+    <li className="flex items-start gap-3 p-3">
+      {/* Rang dans l'ordre de jeu : le n° + le filet (divide-y) disent la séquence
+          « qui joue avant qui » que la file ATB donnait d'un coup d'œil. */}
+      <span className="bg-surface text-content-strong ring-line-subtle mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold ring-1">
+        {step}
+      </span>
+
+      {/* Portrait + nom (seul endroit avec le nom en accent/lien). */}
+      <div className="flex w-14 shrink-0 flex-col items-center gap-1">
         <CharacterPortrait
           id={c.id}
           name={name}
           element={c.element}
           classType={c.class}
           rarity={c.rarity}
-          size={56}
+          size={52}
           href={href}
           showName={false}
         />
@@ -106,6 +120,24 @@ function EntryCard({ entry, ctx }: { entry: RequirementEntry; ctx: ParseCtx }) {
         </span>
       </div>
 
+      {/* VITESSE — pivot de la ligne. L'icône de stat porte le sens ; la valeur
+          reste NEUTRE forte (pas de nouveau token, pas de text-accent). */}
+      {spd !== undefined && (
+        <div className="flex w-14 shrink-0 flex-col items-center justify-center gap-0.5 self-center">
+          {STAT_ICON['SPD'] && (
+            // eslint-disable-next-line @next/next/no-img-element -- icône de stat
+            <img src={img.statIcon(STAT_ICON['SPD'])} alt="" className="h-5 w-5" />
+          )}
+          <span className="text-content-strong text-xl leading-none font-bold tabular-nums">
+            {parseText(spd, ctx)}
+          </span>
+          <span className="text-content-muted text-[10px] font-semibold tracking-wide uppercase">
+            SPD
+          </span>
+        </div>
+      )}
+
+      {/* Le build (stats hors SPD · priorité · équipement · notes). */}
       <div className="min-w-0 flex-1 space-y-1.5">
         {stats.length > 0 && (
           <div className="flex flex-wrap gap-x-3 gap-y-1">
@@ -170,7 +202,7 @@ function EntryCard({ entry, ctx }: { entry: RequirementEntry; ctx: ParseCtx }) {
           </ul>
         ) : null}
       </div>
-    </div>
+    </li>
   );
 }
 
@@ -193,11 +225,12 @@ export function BuildRequirements({ data, ctx }: { data: RequirementsData; ctx: 
           {t('requirements.title')}
         </span>
       </div>
-      <div className="divide-line-subtle grid divide-y sm:grid-cols-2 sm:divide-y-0">
-        {entries.map((entry) => (
-          <EntryCard key={entry.character} entry={entry} ctx={ctx} />
+      {/* <ol> : l'ordre du DOM EST l'ordre de jeu ; le filet fait la séquence. */}
+      <ol className="divide-line-subtle divide-y">
+        {entries.map((entry, i) => (
+          <EntryRow key={entry.character} entry={entry} step={i + 1} ctx={ctx} />
         ))}
-      </div>
+      </ol>
       {data.note && (
         <div className="border-line-subtle bg-surface-raised border-t px-4 py-2 text-center">
           <p className="text-content-muted text-sm">{parseText(lRec(data.note, lang), ctx)}</p>

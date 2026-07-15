@@ -131,10 +131,19 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
     next: t('guides.team.next_option'),
   };
 
-  /** Rend une suite de blocs p/ul/turn-order (notes d'équipe), tokens résolus. */
-  const renderNotes = (notes: NoteBlock[] | undefined) =>
+  /** Rend une suite de blocs p/ul/turn-order (notes d'équipe), tokens résolus.
+   *  `dropTurnOrder` : l'ordre de jeu est déjà porté par le tableau de builds
+   *  (trié par SPD) → on saute le bloc file ATB, en gardant sa note libre. */
+  const renderNotes = (notes: NoteBlock[] | undefined, opts?: { dropTurnOrder?: boolean }) =>
     notes?.map((block, i) => {
       if ('turnOrder' in block) {
+        if (opts?.dropTurnOrder) {
+          return block.note ? (
+            <p key={i} className="text-content-muted text-center text-sm">
+              {parseText(lRec(block.note, lang), ctx)}
+            </p>
+          ) : null;
+        }
         return (
           <TurnOrder
             key={i}
@@ -271,6 +280,9 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
    */
   const renderTeam = (team: MainTeam, geas?: { left: GeasColumn; right: GeasColumn }) => {
     const activeIds = [...(team.geasActive?.bonus ?? []), ...(team.geasActive?.malus ?? [])];
+    // Ordre de jeu déjà porté par le plan de builds (trié SPD) → l'ordre ATB des
+    // notes fait doublon : on le retire quand des builds existent.
+    const hasBuilds = Boolean(team.requirements?.entries?.length);
     return (
       <div className="space-y-3">
         <TeamSlots lang={lang} slots={team.slots} labels={teamLabels} />
@@ -279,8 +291,8 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
         ) : (
           <ActiveGeasRow geas={resolveGeas(activeIds)} lang={lang} t={t} />
         )}
-        {renderNotes(team.notes)}
         {team.requirements && <BuildRequirements data={team.requirements} ctx={ctx} />}
+        {renderNotes(team.notes, { dropTurnOrder: hasBuilds })}
         {team.video && <MultiVideoEmbed videos={[team.video]} />}
       </div>
     );

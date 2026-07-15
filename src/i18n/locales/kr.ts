@@ -661,6 +661,7 @@ const kr: Record<TranslationKey, string> = {
     '게아스를 켜고 끄며 점수 배율을 계산하세요. 말루스 게아스를 활성화하면 난이도가 올라가지만 점수가 증가합니다.',
   'guildraid.geas.level': '레벨 {n}',
   'guildraid.total_multiplier': '총 점수 배율',
+  'guildraid.geas_table_full': '전체 해금 표 보기',
   'guildraid.active_geas': '활성 게아스',
   'guildraid.sub_boss': '보스 {n}',
   'requirements.title': '요구사항',

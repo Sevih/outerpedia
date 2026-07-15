@@ -688,6 +688,7 @@ const fr: Record<TranslationKey, string> = {
     'Activez/désactivez les Geas pour calculer votre multiplicateur de score. Activer les Geas malus augmente la difficulté mais booste votre score.',
   'guildraid.geas.level': 'Niveau {n}',
   'guildraid.total_multiplier': 'Multiplicateur de score total',
+  'guildraid.geas_table_full': 'Voir la table complète des paliers',
   'guildraid.active_geas': 'Geas actifs',
   'guildraid.sub_boss': 'Boss {n}',
   'requirements.title': 'Prérequis',

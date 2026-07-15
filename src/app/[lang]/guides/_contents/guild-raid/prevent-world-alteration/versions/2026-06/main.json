@@ -17,26 +17,6 @@
       },
       "notes": [
         {
-          "turnOrder": [
-            {
-              "character": "Tamara",
-              "speed": 309
-            },
-            {
-              "character": "Poolside Trickster Regina",
-              "speed": 238
-            },
-            {
-              "character": "Summer Knight's Dream Ember",
-              "speed": 236
-            },
-            {
-              "character": "Caren",
-              "speed": 123
-            }
-          ]
-        },
-        {
           "p": {
             "en": "There is some wiggle room to go slightly faster or slower than the speeds listed, as long as it results in the same move order throughout the entire fight as shown in the video."
           }
@@ -182,26 +162,6 @@
               "kr": "최소 4★ 초월, 체인 스킬 최대 레벨로 체인 시 6 WG 데미지",
               "zh": "最低4★超越，连携技能满级在连携时获得6 WG伤害",
               "fr": "Transcendance 4★ minimum avec chain skill au niveau max pour 6 de dégâts de WG sur la chaîne"
-            }
-          ]
-        },
-        {
-          "turnOrder": [
-            {
-              "character": "Edelweiss",
-              "speed": 288
-            },
-            {
-              "character": "Core Fusion Veronica",
-              "speed": 261
-            },
-            {
-              "character": "Fortuna",
-              "speed": 230
-            },
-            {
-              "character": "Roxie",
-              "speed": 160
             }
           ]
         },

@@ -220,12 +220,18 @@ function BossHead({ col }: { col: GeasColumn }) {
 }
 
 /**
- * LA TABLE DE GEAS COMPLÈTE — disposition du JEU : les deux sous-boss côte à côte,
- * l'échelle de paliers (losanges reliés) au milieu. Par sous-boss, deux geas par
- * palier — MALUS à gauche, BONUS à droite.
+ * LA TABLE DE GEAS D'UNE ÉQUIPE (phase 2) — RÉSUMÉ visible + DÉTAIL repliable.
  *
- * En phase 2, on passe les ids ACTIFS d'une équipe : ses geas sont COCHÉS (check
- * bleu), les autres grisés — on lit d'un coup ce que l'équipe s'impose.
+ * Le résumé (toujours là) : le MULTIPLICATEUR de score en tête + une rangée de
+ * pastilles des geas actifs. C'est ce qu'on lit à chaque coup d'œil.
+ *
+ * Le détail (dans un `<details>` natif, replié par défaut — donc SANS JS, on reste
+ * server-side) : la table complète des paliers, disposition du JEU — les deux
+ * sous-boss côte à côte, l'échelle de paliers (losanges reliés) au milieu, MALUS
+ * à gauche / BONUS à droite par sous-boss. Les geas de l'équipe y sont COCHÉS
+ * (check bleu), les autres grisés. Cette grille est IDENTIQUE d'une équipe à
+ * l'autre (seuls les checks changent) : la déplier sous chaque équipe serait du
+ * bruit — d'où le repli.
  */
 export function GeasTable({
   left,
@@ -272,8 +278,8 @@ export function GeasTable({
     </div>
   );
 
-  // Résumé (phase 2) : les geas ACTIFS, listés comme en phase 1 (desc + ratio),
-  // triés par PALIER DE DÉBLOCAGE et séparés bonus / malus.
+  // Geas ACTIFS, listés (desc + ratio), triés par PALIER DE DÉBLOCAGE et séparés
+  // bonus / malus — le détail lisible sous la grille.
   const unlockLevel = new Map<string, number>();
   for (const u of [...left.unlocks, ...right.unlocks]) {
     if (u.bonus) unlockLevel.set(u.bonus.id, u.kill);
@@ -287,59 +293,112 @@ export function GeasTable({
   // Multiplicateur de score : somme des points actifs (per-mille /10), départ à 0.
   const multiplier = activeGeas.reduce((s, r) => s + r.geas.points, 0) / 10;
 
-  return (
-    <section className="space-y-2">
-      <h4 className="text-content-strong text-sm font-semibold">{t('guildraid.active_geas')}</h4>
-      <div className="flex flex-wrap items-start gap-6">
-        {/* La table complète, à gauche — pas de fond ni de bordure, jamais tronquée. */}
-        <div className="flex gap-3">
-          {bossColumn(leftByKill, left)}
+  // La grille + la liste desc — le contenu « lourd », rendu une fois, réutilisé
+  // ouvert (table de référence) ou dans le <details> (équipe).
+  const fullTable = (
+    <div className="flex flex-wrap items-start gap-6">
+      {/* La table complète — pas de fond ni de bordure, jamais tronquée. */}
+      <div className="flex gap-3">
+        {bossColumn(leftByKill, left)}
 
-          {/* Échelle centrale : losanges numérotés reliés par une ligne verticale. */}
-          <div className="flex flex-col gap-2">
-            <div className="h-14" aria-hidden />
-            <div className="relative flex flex-col gap-2">
-              <span
-                className="bg-line-subtle absolute inset-y-2 left-1/2 w-px -translate-x-1/2"
-                aria-hidden
-              />
-              {levels.map((k) => (
-                <span key={k} className="relative z-10 flex h-12 items-center justify-center">
-                  <span className="bg-surface border-line-strong flex h-6 w-6 rotate-45 items-center justify-center border">
-                    <span className="text-content-strong -rotate-45 text-xs font-bold">{k}</span>
-                  </span>
+        {/* Échelle centrale : losanges numérotés reliés par une ligne verticale. */}
+        <div className="flex flex-col gap-2">
+          <div className="h-14" aria-hidden />
+          <div className="relative flex flex-col gap-2">
+            <span
+              className="bg-line-subtle absolute inset-y-2 left-1/2 w-px -translate-x-1/2"
+              aria-hidden
+            />
+            {levels.map((k) => (
+              <span key={k} className="relative z-10 flex h-12 items-center justify-center">
+                <span className="bg-surface border-line-strong flex h-6 w-6 rotate-45 items-center justify-center border">
+                  <span className="text-content-strong -rotate-45 text-xs font-bold">{k}</span>
                 </span>
-              ))}
-            </div>
+              </span>
+            ))}
           </div>
-
-          {bossColumn(rightByKill, right)}
         </div>
 
-        {/* Résumé des geas actifs (liste desc + ratio) + multiplicateur, à droite. */}
-        {mark && activeGeas.length > 0 && (
-          <div className="min-w-64 flex-1 space-y-3">
-            {activeBonuses.length > 0 && (
-              <div className="space-y-1.5">
-                {activeBonuses.map((r) => (
-                  <GeasCell key={r.id} entry={r} lang={lang} />
-                ))}
-              </div>
-            )}
-            {activeMaluses.length > 0 && (
-              <div className="border-line-subtle space-y-1.5 border-t pt-3">
-                {activeMaluses.map((r) => (
-                  <GeasCell key={r.id} entry={r} lang={lang} />
-                ))}
-              </div>
-            )}
-            <div className="border-line-subtle flex items-baseline justify-between gap-2 border-t pt-2">
-              <span className="text-content-muted text-xs">{t('guildraid.total_multiplier')}</span>
-              <span className="text-content-strong text-lg font-bold">{multiplier}%</span>
+        {bossColumn(rightByKill, right)}
+      </div>
+
+      {/* Résumé détaillé des geas actifs (liste desc + ratio), à droite. */}
+      {mark && activeGeas.length > 0 && (
+        <div className="min-w-64 flex-1 space-y-3">
+          {activeBonuses.length > 0 && (
+            <div className="space-y-1.5">
+              {activeBonuses.map((r) => (
+                <GeasCell key={r.id} entry={r} lang={lang} />
+              ))}
             </div>
-          </div>
+          )}
+          {activeMaluses.length > 0 && (
+            <div className="border-line-subtle space-y-1.5 border-t pt-3">
+              {activeMaluses.map((r) => (
+                <GeasCell key={r.id} entry={r} lang={lang} />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+
+  // Table de RÉFÉRENCE (pas d'ensemble actif) : rien à résumer, on l'ouvre direct.
+  if (!mark) {
+    return (
+      <section className="space-y-2">
+        <h4 className="text-content-strong text-sm font-semibold">{t('guildraid.active_geas')}</h4>
+        {fullTable}
+      </section>
+    );
+  }
+
+  return (
+    <section className="space-y-2">
+      {/* RÉSUMÉ — toujours visible : titre + multiplicateur, puis les pastilles. */}
+      <div className="flex items-center justify-between gap-2">
+        <h4 className="text-content-strong text-sm font-semibold">{t('guildraid.active_geas')}</h4>
+        {activeGeas.length > 0 && (
+          <span className="flex items-baseline gap-1.5">
+            <span className="text-content-muted text-xs">{t('guildraid.total_multiplier')}</span>
+            <span className="text-content-strong text-lg font-bold tabular-nums">
+              {multiplier}%
+            </span>
+          </span>
         )}
       </div>
+      {activeGeas.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {[...activeBonuses, ...activeMaluses].map((r) => {
+            const bonus = isBonusGeas(r.geas);
+            return (
+              <span
+                key={r.id}
+                title={(lRec(r.geas.desc, lang) || r.geas.desc.en).replace(/\\n/g, ' ')}
+                className="border-line-subtle bg-surface-raised inline-flex items-center gap-1 rounded-full border py-0.5 pr-2 pl-0.5"
+              >
+                <GeasIcon geas={r.geas} size={24} />
+                <span className={`text-[11px] font-bold ${bonus ? 'text-buff' : 'text-debuff'}`}>
+                  {formatPoints(r.geas.points)}
+                </span>
+              </span>
+            );
+          })}
+        </div>
+      )}
+
+      {/* DÉTAIL — repliable, natif (aucun JS). La grille est identique d'une équipe
+          à l'autre, donc repliée par défaut. */}
+      <details className="group">
+        <summary className="text-content-muted hover:text-content flex w-fit cursor-pointer list-none items-center gap-1 text-xs font-medium select-none [&::-webkit-details-marker]:hidden">
+          <span aria-hidden className="inline-block transition-transform group-open:rotate-90">
+            ▸
+          </span>
+          {t('guildraid.geas_table_full')}
+        </summary>
+        <div className="mt-3">{fullTable}</div>
+      </details>
     </section>
   );
 }

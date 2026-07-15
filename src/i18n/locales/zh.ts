@@ -647,6 +647,7 @@ const zh: Record<TranslationKey, string> = {
   'guildraid.geas.desc': '切换誓约来计算你的分数倍率。激活惩罚誓约会增加难度但提高分数。',
   'guildraid.geas.level': '等级{n}',
   'guildraid.total_multiplier': '总分数倍率',
+  'guildraid.geas_table_full': '查看完整解锁表',
   'guildraid.active_geas': '激活的誓约',
   'guildraid.sub_boss': '首领{n}',
   'requirements.title': '需求',
