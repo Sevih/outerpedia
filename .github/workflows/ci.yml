@@ -84,7 +84,13 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           cache-from: type=gha
-          cache-to: type=gha,mode=max
+          # `min` (et pas `max`) : `max` exportait AUSSI la couche `builder`
+          # (node_modules + .next de ~4500 pages + tout le source) a chaque
+          # build — ~4 min d'export pour une couche qui ne re-sert jamais,
+          # puisque le source change a chaque commit. `min` n'exporte que les
+          # couches de l'image finale. On perd le cache du `pnpm install`
+          # (~40 s au build suivant), on gagne ~4 min d'export : large positif.
+          cache-to: type=gha,mode=min
 
   # Déploiement automatique sur le VPS (après build de l'image).
   deploy:
