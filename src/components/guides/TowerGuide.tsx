@@ -1,22 +1,26 @@
 /**
  * RENDU PARTAGÉ d'une tour (Skyward Tower) — les 8 guides `skyward-tower`.
  *
- * DEUX familles, deux façons de naviguer, un composant :
+ * DEUX familles, deux façons de naviguer, UN rendu :
  *
  *   - STANDARD (normal / hard / élémentaires) : une suite d'ÉTAGES fixes. Le
- *     menu liste les étages, le détail montre le combat de l'étage
- *     (`BossEncounters`) + sa restriction fixe + l'éditorial de l'étage. On ne
- *     montre qu'un étage à la fois (sous-route `[floor]` statique).
+ *     menu liste les étages ; le détail montre le combat de l'étage (boss +
+ *     adds en cartes COMPACTES), sa restriction FIXE, puis l'éditorial. On ne
+ *     montre qu'un étage à la fois (sous-route `[floor]`).
  *
  *   - VERY HARD : la restriction ET le boss sont TIRÉS AU HASARD à chaque
  *     tentative — la notion d'étage n'a plus de sens. On navigue donc par
- *     COMBAT (les formations : un boss `type:boss` + ses adds), groupés comme le
- *     menu du jeu (Floor 20 / Demiurges / Random). Le détail montre Boss + adds
- *     (skills), les conseils, puis la ROSTER recommandée — écrite une seule fois
- *     et filtrée en direct par la restriction choisie (cf. `TowerCombatRoster`).
+ *     COMBAT (les formations : un boss + ses adds), groupés comme le menu du
+ *     jeu (Floor 20 / Demiurges / Random), et la roster se filtre en direct par
+ *     la restriction choisie (cf. `TowerCombatRoster`).
+ *
+ * La SEULE différence de rendu est là : le very hard filtre sa roster (aléa des
+ * restrictions), le standard l'affiche telle quelle (restriction fixe). Tout le
+ * reste — menu, boss/adds compacts, dico de raisons, advice, roster — est
+ * COMMUN et factorisé ci-dessous.
  *
  * La MÉCANIQUE (étages, combats, restrictions) vient de `towers.json` ;
- * l'ÉDITORIAL (conseils, recommandations, pool de raisons, disclaimer) de
+ * l'ÉDITORIAL (advice, recommandations, dico de raisons, disclaimer) de
  * `content.json`. Aucun identifiant ne se fabrique.
  */
 import { notFound } from 'next/navigation';
@@ -35,12 +39,11 @@ import {
   TOWER_ELEMENT_MODE,
   type TowerCombatGroup,
 } from '@/lib/data/towers';
-import { getEncounter } from '@/lib/data/encounters';
+import { getEncounter, bossWaveMonsters } from '@/lib/data/encounters';
 import { getMonster, monsterIconSrc } from '@/lib/data/monsters';
 import { findCharacterByName, characterDisplayName, slugForId } from '@/lib/data/characters';
-import { BossEncounters } from './BossEncounters';
+import { renderGameText } from '@/components/inline/GameTokens';
 import { BossCard } from './BossPanel';
-import { RecommendedCharacters } from './RecommendedCharacters';
 import { TowerFloorMenu, type TowerMenuSection } from './TowerFloorMenu';
 import { TowerAddsSelector } from './TowerAddsSelector';
 import { TowerCombatRoster, type RosterGroup } from './TowerCombatRoster';
@@ -48,27 +51,36 @@ import { TowerCombatRoster, type RosterGroup } from './TowerCombatRoster';
 type Lang = GuideContentProps['lang'];
 type LText = LocalizedText & { en: string };
 
-/** Éditorial d'un étage standard (hard) — raisons INLINE (fichier petit). */
-interface StandardEditorial {
-  reason?: LText[];
-  recommended?: { characters: string[]; reason?: LText }[];
+/** Un groupe recommandé : des persos + la CLÉ de sa raison (dico `reasons`). */
+interface RecommendedGroup {
+  characters: string[];
+  reason?: string;
 }
 
-/** Éditorial d'un combat very hard — raisons par CLÉ du dico `reasons`. */
-interface VeryHardCombat {
+/**
+ * Éditorial d'un étage (standard) OU d'un combat (very hard) — MÊME forme : des
+ * conseils et des groupes recommandés, tous exprimés par CLÉ du dico `reasons`.
+ */
+interface TowerEditorial {
   advice?: string[];
-  recommended?: { characters: string[]; reason?: string }[];
+  recommended?: RecommendedGroup[];
 }
 
 /** `content.json` — l'éditorial, jamais la mécanique. */
 interface TowerContent {
   disclaimer?: LText;
-  /** Dico de raisons (very hard) : clé → texte localisé. */
+  /** Dico de raisons : clé → texte localisé (partagé par tous les étages/combats). */
   reasons?: Record<string, LText>;
   /** Éditorial par étage (standard), indexé par numéro d'étage. */
-  floors?: Record<string, StandardEditorial>;
+  floors?: Record<string, TowerEditorial>;
   /** Éditorial par combat (very hard), indexé par id de boss. */
-  combats?: Record<string, VeryHardCombat>;
+  combats?: Record<string, TowerEditorial>;
+}
+
+/** Une unité affichable en carte compacte : de quoi la nommer et la calculer. */
+interface CombatUnit {
+  id: string;
+  level: number;
 }
 
 /** Nom d'affichage d'un monstre (repli EN). */
@@ -77,7 +89,7 @@ function monsterName(id: string, lang: Lang): string {
   return m ? lRec(m.name, lang) || m.name.en : id;
 }
 
-/** Le boss d'un donjon standard (rôle `boss`, sinon premier monstre). */
+/** Le boss d'un donjon standard (rôle `boss`, sinon premier monstre) — pour le menu. */
 function dungeonBossName(dungeon: string, lang: Lang): string | undefined {
   const monsters = getEncounter(dungeon)?.monsters;
   if (!monsters?.length) return undefined;
@@ -100,6 +112,8 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
   const detailHref = (key: string | number) =>
     localePath(lang, `/guides/${guide.category}/${guide.slug}/${key}`);
 
+  /* ── Briques COMMUNES aux deux familles ── */
+
   const menu = (sections: TowerMenuSection[], currentKey: string) => (
     <div className="w-full shrink-0 md:w-72">
       <TowerFloorMenu
@@ -110,7 +124,104 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
     </div>
   );
 
-  /* ── VERY HARD : navigation par combats ── */
+  /** Une raison, résolue depuis le dico et parsée (tokens `{P/…}`, `{B/…}`…). */
+  const reason = (key: string): ReactNode => {
+    const lt = content?.reasons?.[key];
+    return lt ? parseText(lRec(lt, lang), ctx) : null;
+  };
+
+  /** Un `recommended` éditorial → groupes de roster (persos résolus par nom). */
+  const buildRoster = (recommended: readonly RecommendedGroup[] = []): RosterGroup[] =>
+    recommended.map((g) => ({
+      characters: g.characters.map((name) => {
+        const c = findCharacterByName(name);
+        if (!c) {
+          throw new Error(
+            `TowerGuide : personnage inconnu « ${name} » (${guide.category}/${guide.slug}).`,
+          );
+        }
+        const slug = slugForId(c.id);
+        return {
+          id: c.id,
+          name: characterDisplayName(c, lang),
+          element: c.element,
+          classType: c.class,
+          rarity: c.rarity,
+          href: slug ? localePath(lang, `/characters/${slug}`) : undefined,
+        };
+      }),
+      reason: g.reason ? reason(g.reason) : undefined,
+    }));
+
+  /** La vue d'un combat : le boss en carte compacte, puis ses adds au sélecteur. */
+  const combatView = (boss: CombatUnit, adds: readonly CombatUnit[]) => (
+    <>
+      <section className="space-y-3">
+        <h2 className="text-content-strong text-2xl font-bold">{monsterName(boss.id, lang)}</h2>
+        <BossCard
+          monsterId={boss.id}
+          spawns={[{ level: boss.level }]}
+          lang={lang}
+          role="boss"
+          compact
+        />
+      </section>
+
+      {adds.length > 0 && (
+        <section className="space-y-3">
+          <h3 className="text-content-strong text-lg font-bold">{t('tower.adds')}</h3>
+          <TowerAddsSelector
+            adds={adds
+              // Une formation peut aligner plusieurs exemplaires du MÊME add
+              // (« Maxwell ×3 ») : un seul suffit au guide (carte identique).
+              .filter((a, i, arr) => arr.findIndex((x) => x.id === a.id) === i)
+              .map((a) => {
+                const m = getMonster(a.id);
+                return {
+                  id: a.id,
+                  name: monsterName(a.id, lang),
+                  iconSrc: m ? monsterIconSrc(m) : undefined,
+                  card: (
+                    <BossCard
+                      monsterId={a.id}
+                      spawns={[{ level: a.level }]}
+                      lang={lang}
+                      role="add"
+                      compact
+                    />
+                  ),
+                };
+              })}
+          />
+        </section>
+      )}
+    </>
+  );
+
+  /** Le bloc « stratégie » (advice = liste de clés de raisons). */
+  const adviceSection = (editorial: TowerEditorial | undefined) =>
+    editorial?.advice?.length ? (
+      <section className="space-y-2">
+        <h3 className="text-content-strong text-lg font-bold">{t('tower.strategy')}</h3>
+        {editorial.advice.map((key, i) => (
+          <p key={i} className="text-content text-sm leading-relaxed">
+            {reason(key)}
+          </p>
+        ))}
+      </section>
+    ) : null;
+
+  const rosterLabels = {
+    title: t('guides.recommended.title'),
+    ban: t('tower.restr_ban'),
+    force: t('tower.restr_force'),
+    clear: t('tower.restr_clear'),
+    element: t('tower.restr_element'),
+    class: t('tower.restr_class'),
+    star: t('tower.restr_star'),
+  };
+
+  /* ── VERY HARD : navigation par combats, roster FILTRABLE (aléa) ── */
   if (tower.mode === 'tower_very_hard') {
     const combats = getTowerCombats(tower);
     const current = combats.find((c) => c.boss.id === String(floor ?? '')) ?? combats[0];
@@ -140,28 +251,7 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
       }))
       .filter((s) => s.entries.length > 0);
 
-    const combatEditorial = content?.combats?.[current.boss.id];
-    const reason = (key: string): ReactNode => {
-      const lt = content?.reasons?.[key];
-      return lt ? parseText(lRec(lt, lang), ctx) : null;
-    };
-
-    const rosterGroups: RosterGroup[] = (combatEditorial?.recommended ?? []).map((g) => ({
-      characters: g.characters.map((name) => {
-        const c = findCharacterByName(name);
-        if (!c) throw new Error(`TowerGuide (very hard) : personnage inconnu « ${name} ».`);
-        const slug = slugForId(c.id);
-        return {
-          id: c.id,
-          name: characterDisplayName(c, lang),
-          element: c.element,
-          classType: c.class,
-          rarity: c.rarity,
-          href: slug ? localePath(lang, `/characters/${slug}`) : undefined,
-        };
-      }),
-      reason: g.reason ? reason(g.reason) : undefined,
-    }));
+    const editorial = content?.combats?.[current.boss.id];
 
     return (
       <div className="flex flex-col gap-6 md:flex-row md:items-start">
@@ -173,78 +263,22 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
             </p>
           )}
 
-          <section className="space-y-3">
-            <h2 className="text-content-strong text-2xl font-bold">
-              {monsterName(current.boss.id, lang)}
-            </h2>
-            <BossCard
-              monsterId={current.boss.id}
-              spawns={[{ level: current.boss.level }]}
-              lang={lang}
-              role="boss"
-              compact
-            />
-          </section>
-
-          {current.adds.length > 0 && (
-            <section className="space-y-3">
-              <h3 className="text-content-strong text-lg font-bold">{t('tower.adds')}</h3>
-              <TowerAddsSelector
-                adds={current.adds
-                  // Une formation peut aligner plusieurs exemplaires du MÊME add
-                  // (« Maxwell ×3 ») : un seul suffit au guide (carte identique).
-                  .filter((a, i, arr) => arr.findIndex((x) => x.id === a.id) === i)
-                  .map((a) => {
-                    const m = getMonster(a.id);
-                    return {
-                      id: a.id,
-                      name: monsterName(a.id, lang),
-                      iconSrc: m ? monsterIconSrc(m) : undefined,
-                      card: (
-                        <BossCard
-                          monsterId={a.id}
-                          spawns={[{ level: a.level }]}
-                          lang={lang}
-                          role="add"
-                          compact
-                        />
-                      ),
-                    };
-                  })}
-              />
-            </section>
-          )}
-
-          {combatEditorial?.advice?.length ? (
-            <section className="space-y-2">
-              <h3 className="text-content-strong text-lg font-bold">{t('tower.strategy')}</h3>
-              {combatEditorial.advice.map((key, i) => (
-                <p key={i} className="text-content text-sm leading-relaxed">
-                  {reason(key)}
-                </p>
-              ))}
-            </section>
-          ) : null}
+          {combatView(current.boss, current.adds)}
+          {adviceSection(editorial)}
 
           <TowerCombatRoster
-            groups={rosterGroups}
+            groups={buildRoster(editorial?.recommended)}
+            // Seul le pool aléatoire porte l'incertitude de restriction : c'est
+            // là que le filtre a du sens (Floor 20 / Demiurges sont fixes).
             restrictable={current.group === 'random'}
-            labels={{
-              title: t('guides.recommended.title'),
-              ban: t('tower.restr_ban'),
-              force: t('tower.restr_force'),
-              clear: t('tower.restr_clear'),
-              element: t('tower.restr_element'),
-              class: t('tower.restr_class'),
-              star: t('tower.restr_star'),
-            }}
+            labels={rosterLabels}
           />
         </div>
       </div>
     );
   }
 
-  /* ── STANDARD : navigation par étages ── */
+  /* ── STANDARD : navigation par étages, restriction FIXE (roster non filtré) ── */
   const isElement = tower.mode === TOWER_ELEMENT_MODE;
   const current = floor ?? tower.floors[0]?.floor ?? 1;
   const floorData = getTowerFloor(tower, current);
@@ -262,7 +296,16 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
     },
   ];
 
+  // Boss + adds de l'étage : la vague du boss de son donjon (boss d'abord).
+  const ref = getEncounter(floorData.dungeon);
+  const wave = ref?.monsters?.length
+    ? bossWaveMonsters({ id: floorData.dungeon, ref, monsters: ref.monsters })
+    : [];
+  const boss = wave.find((m) => m.role === 'boss') ?? wave[0];
+  const adds = boss ? wave.filter((m) => m !== boss) : [];
+
   const editorial = content?.floors?.[String(current)];
+  const roster = buildRoster(editorial?.recommended);
 
   return (
     <div className="flex flex-col gap-6 md:flex-row md:items-start">
@@ -286,13 +329,23 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
             <h3 className="text-content-strong text-sm font-bold">
               {lRec(tower.debuff.title, lang) || tower.debuff.title.en}
             </h3>
-            <p className="text-content-muted text-sm">
-              {lRec(tower.debuff.desc, lang) || tower.debuff.desc.en}
+            {/* `desc` est du TEXTE DE JEU brut : `\n` littéraux, mentions
+                d'élément/classe (enrichies en icônes) et balises `<color=…>`.
+                On garde l'enrichissement mais on RETIRE la couleur du jeu — son
+                bleu (`#0e7ecc`) suppose le fond du jeu et tombe illisible sur
+                notre surface marine ; le texte reprend notre couleur lisible. */}
+            <p className="text-content-muted text-sm whitespace-pre-line">
+              {renderGameText(
+                (lRec(tower.debuff.desc, lang) || tower.debuff.desc.en)
+                  .replace(/\\n/g, '\n')
+                  .replace(/<\/?color[^>]*>/gi, ''),
+                lang,
+              )}
             </p>
           </section>
         )}
 
-        <BossEncounters dungeons={[floorData.dungeon]} lang={lang} />
+        {boss && combatView(boss, adds)}
 
         {floorData.restrictions.length > 0 && (
           <section className="space-y-2">
@@ -308,27 +361,11 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
           </section>
         )}
 
-        {editorial?.reason?.length ? (
-          <section className="space-y-2">
-            <h3 className="text-content-strong text-lg font-bold">{t('tower.strategy')}</h3>
-            {editorial.reason.map((p, i) => (
-              <p key={i} className="text-content text-sm leading-relaxed">
-                {parseText(lRec(p, lang), ctx)}
-              </p>
-            ))}
-          </section>
-        ) : null}
+        {adviceSection(editorial)}
 
-        {editorial?.recommended?.length ? (
-          <RecommendedCharacters
-            title={t('guides.recommended.title')}
-            lang={lang}
-            groups={editorial.recommended.map((g) => ({
-              characters: g.characters,
-              reason: g.reason ? parseText(lRec(g.reason, lang), ctx) : undefined,
-            }))}
-          />
-        ) : null}
+        {roster.length > 0 && (
+          <TowerCombatRoster groups={roster} restrictable={false} labels={rosterLabels} />
+        )}
       </div>
     </div>
   );
