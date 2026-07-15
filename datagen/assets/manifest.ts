@@ -799,6 +799,56 @@ export function buildAssetManifest(): AssetRequest[] {
     }
   }
 
+  // MONSTRES DES TOURS (Skyward Tower) : le guide de tour rend un panneau de
+  // boss (`BossCard` → portrait + kit) par étage, et n'importe quel étage est
+  // atteignable (sous-route `[floor]`). Ces monstres n'ont PAS de `group`
+  // d'encounters (`towers.json` porte sa propre mécanique étages/vagues) : ni le
+  // bloc `bossId` ni le bloc variantes ne les voit — d'où les 404 de portraits
+  // (`MT_4151015`, Deformed Inferior Core du very hard). Collecte DATA-DRIVEN :
+  // tous les ids de monstres cités dans les vagues des étages → portrait + icônes
+  // de skills, mêmes namespaces/dédup que les blocs de boss ci-dessus.
+  {
+    const monsters = load('monsters.json') as Record<
+      string,
+      { icon?: string; skills?: string[] } | undefined
+    >;
+    const monsterSkills = load('monster-skills.json') as Record<
+      string,
+      { icon?: string } | undefined
+    >;
+    const towers = load('towers.json') as unknown as Record<
+      string,
+      { floors?: Array<{ waves?: Array<Array<{ id: string }>> }> } | undefined
+    >;
+    const ids = new Set<string>();
+    for (const tower of Object.values(towers))
+      for (const floor of tower?.floors ?? [])
+        for (const wave of floor.waves ?? []) for (const unit of wave) ids.add(unit.id);
+    for (const id of ids) {
+      const m = monsters[id];
+      if (!m) continue;
+      // Icône commençant par « 2 » = modèle de perso réutilisé → face icon déjà
+      // produite par le domaine perso (même règle que les blocs de boss).
+      if (m.icon && !m.icon.startsWith('2'))
+        push({
+          kind: 'image',
+          key: `images/ui/boss/MT_${m.icon}.webp`,
+          candidates: [`MT_${m.icon}`],
+          domain: 'guides',
+        });
+      for (const sid of m.skills ?? []) {
+        const icon = monsterSkills[sid]?.icon;
+        if (icon)
+          push({
+            kind: 'image',
+            key: `images/characters/skills/${icon}.webp`,
+            candidates: [icon],
+            domain: 'guides',
+          });
+      }
+    }
+  }
+
   // Boss de la ROTATION Dimensional Singularity : la vue de catégorie les
   // affiche tous (bibliothèque), y compris ceux qu'aucun guide ne couvre encore
   // — ils ne seraient donc jamais collectés par le bloc `bossId` ci-dessus.
