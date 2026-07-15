@@ -28,18 +28,47 @@
  *
  * Noms de stages, région et advantage rates vivent déjà dans
  * `encounters.json` (mêmes DungeonID) — pas dupliqués ici.
+ *
+ * RESTRICTIONS D'ÉQUIPE (bans/quotas d'élément, de classe, d'étoile) :
+ * `DungeonPVEGroupTemplet` relie chaque `DungeonID` (= étage) à un
+ * `TeamConditionGroupID` (CSV de GROUPES), chaque groupe étant l'ensemble des
+ * lignes de `DungeonTeamConditionTemplet` partageant la même clé `_unknown_0`.
+ *   - groupe SINGLETON (`_unknown_0 == ID`) → restriction FIXE de l'étage
+ *     (hard, élémentaires — l'élémentaire porte ainsi son CONTRE-ÉLÉMENT requis,
+ *     source de vérité du jeu, aucune map dérivée à maintenir) ;
+ *   - groupe MULTI (`1001` = les 23 bans/quotas possibles) → MENU dans lequel le
+ *     jeu tire UNE contrainte au hasard à chaque tentative (very hard) : propre
+ *     au joueur, donc NON figé par étage → l'étage garde `restrictions: []` et
+ *     `randomized: true`, le menu dédupliqué vit dans `Tower.restrictionsPool`.
+ * `Count` : `-1` = interdiction (ban) ; `N` > 0 = quota requis. `ConditionDesc`
+ * est déjà localisé (5 langues) → résolu par la primitive de texte partagée.
  */
 import type { LangDict } from '../lib/lang';
 import { slugEnum } from '../lib/enums';
 import { isMain } from '../lib/is-main';
 import { loadTextIndex, resolveText } from '../lib/text';
-import { groupBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
+import { groupBy, indexBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
 import { spawnGroupIds } from './encounters';
 
 /** Un monstre d'une vague (niveau RÉEL de la rencontre). */
 export interface TowerUnit {
   id: string;
   level: number;
+}
+
+/**
+ * Restriction d'équipe (source : `DungeonTeamConditionTemplet`), telle quelle,
+ * sans jugement éditorial.
+ */
+export interface TowerRestriction {
+  /** Nature de la contrainte : `element` | `class` | `star`. */
+  type: string;
+  /** Cible : élément (`fire`…), classe (`attacker`…) ou niveau d'étoile (`1`..`3`). */
+  subType: string;
+  /** `-1` = interdiction (ban) ; `N` > 0 = quota requis. */
+  count: number;
+  /** Libellé localisé fourni par le jeu (5 langues). */
+  desc: LangDict;
 }
 
 /** Un étage de tour. */
@@ -56,6 +85,18 @@ export interface TowerFloor {
   waves?: TowerUnit[][];
   /** Formations ALTERNATIVES — le jeu en tire UNE au hasard (very hard). */
   encounters?: TowerUnit[][];
+  /**
+   * Restrictions d'équipe FIXES de l'étage. TOUJOURS présent (`[]` explicite si
+   * rien : tour normale, paliers boss). Les tours élémentaires y portent leur
+   * contre-élément requis.
+   */
+  restrictions: TowerRestriction[];
+  /**
+   * Vrai si la restriction est TIRÉE AU HASARD dans `Tower.restrictionsPool`
+   * (very hard) : `restrictions` reste `[]` (rien de figé). Absent (≡ false)
+   * sinon.
+   */
+  randomized?: boolean;
 }
 
 /** Debuff des tours élémentaires (TowerElementalConfigTemplet). */
@@ -77,6 +118,13 @@ export interface Tower {
   days?: string[];
   /** Debuff de tour, tours élémentaires uniquement. */
   debuff?: TowerDebuff;
+  /**
+   * VERY HARD uniquement — MENU de restrictions dans lequel le jeu tire UNE
+   * contrainte au hasard à chaque tentative (propre au joueur, NON figé par
+   * étage : cf. `TowerFloor.randomized`). Dédupliqué sur toute la tour. Usage
+   * éditorial/disclaimer, jamais comme une restriction garantie.
+   */
+  restrictionsPool?: TowerRestriction[];
   floors: TowerFloor[];
 }
 
@@ -89,6 +137,53 @@ export type TowersData = Record<string, Tower>;
 export function buildTowers(): TowersData {
   const tsys = loadTextIndex('TextSystem');
   const spawnsByGroup = groupBy(loadTable('DungeonSpawnTemplet'), 'GroupID');
+
+  // Restrictions d'équipe : DungeonID → groupe(s) de conditions, chaque groupe =
+  // lignes partageant `_unknown_0` (singleton = fixe, multi = pool randomisé).
+  const pveByDungeon = indexBy(loadTable('DungeonPVEGroupTemplet'), 'DungeonID');
+  const condByGroup = groupBy(loadTable('DungeonTeamConditionTemplet'), '_unknown_0');
+
+  /** Une ligne de condition → restriction typée. */
+  const restrictionOf = (r: Row): TowerRestriction => ({
+    type: slugEnum(r.ConditionType), // ELEMENT→element, CLASS→class, BASIC_STAR→star
+    subType: slugEnum(r.ConditionSubType), // CET_FIRE→fire, CCT_ATTACKER→attacker, '2'→'2'
+    count: num(r.Count),
+    desc: resolveText(tsys, r.ConditionDesc),
+  });
+
+  // Pool de restrictions par tour (very hard), dédupliqué par type|subType|count.
+  const poolByTower = new Map<string, Map<string, TowerRestriction>>();
+
+  /** Restrictions FIXES d'un étage + drapeau `randomized` (alimente le pool). */
+  const restrictionsOf = (
+    dungeonId: string,
+    key: string,
+  ): Pick<TowerFloor, 'restrictions' | 'randomized'> => {
+    const pve = pveByDungeon.get(dungeonId);
+    const fixed: TowerRestriction[] = [];
+    let randomized = false;
+    for (const gid of splitCsv(pve?.TeamConditionGroupID ?? '')) {
+      const rows = condByGroup.get(gid);
+      if (!rows?.length) {
+        console.warn(`⚠ towers : groupe de condition ${gid} introuvable (étage ${dungeonId}).`);
+        continue;
+      }
+      if (rows.length > 1) {
+        // Groupe multi = menu randomisé → au pool de la tour, pas à l'étage.
+        randomized = true;
+        let pool = poolByTower.get(key);
+        if (!pool) poolByTower.set(key, (pool = new Map()));
+        for (const r of rows) {
+          const res = restrictionOf(r);
+          const rk = `${res.type}|${res.subType}|${res.count}`;
+          if (!pool.has(rk)) pool.set(rk, res);
+        }
+      } else {
+        fixed.push(restrictionOf(rows[0]));
+      }
+    }
+    return randomized ? { restrictions: fixed, randomized: true } : { restrictions: fixed };
+  };
 
   // Config élémentaire : élément (DSM_*) → jours + debuff.
   const elemConfig = new Map<string, { days: string[]; debuff: TowerDebuff }>();
@@ -175,6 +270,7 @@ export function buildTowers(): TowersData {
       floor: floorMatch ? num(floorMatch[1]) : tower.floors.length + 1,
       dungeon: d.ID,
       ...compositionOf(d),
+      ...restrictionsOf(d.ID, key),
     };
     if (num(d.RecommendBattlePower)) floor.power = num(d.RecommendBattlePower);
     if (num(d.RecommandLevel)) floor.level = num(d.RecommandLevel);
@@ -188,6 +284,9 @@ export function buildTowers(): TowersData {
     // Étages en double ou manquants = signal de dérive du parsing des NameID.
     const nums = tower.floors.map((f) => f.floor);
     if (new Set(nums).size !== nums.length) console.warn(`⚠ towers : étages en double (${key}).`);
+    // Menu de restrictions randomisées (very hard) — dédupliqué.
+    const pool = poolByTower.get(key);
+    if (pool?.size) tower.restrictionsPool = [...pool.values()];
   }
   return towers;
 }
@@ -196,6 +295,12 @@ export function buildTowers(): TowersData {
 if (isMain(import.meta.url)) {
   const towers = buildTowers();
   for (const [k, t] of Object.entries(towers)) {
-    console.log(`${k}: ${t.floors.length} étages${t.days ? ` — jours ${t.days.join(',')}` : ''}`);
+    const restricted = t.floors.filter((f) => f.restrictions.length).length;
+    const random = t.floors.filter((f) => f.randomized).length;
+    const bits = [`${t.floors.length} étages`];
+    if (t.days) bits.push(`jours ${t.days.join(',')}`);
+    if (restricted) bits.push(`${restricted} avec restriction fixe`);
+    if (random) bits.push(`${random} randomisés (pool ${t.restrictionsPool?.length ?? 0})`);
+    console.log(`${k}: ${bits.join(' — ')}`);
   }
 }
