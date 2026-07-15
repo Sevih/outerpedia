@@ -152,6 +152,9 @@ export const GRADE_TEXT: Record<string, string> = {
   unique: 'text-item-legendary',
 };
 
+/** Ordre canonique des éléments (menus du jeu) — tri des vues élémentaires. */
+export const ELEMENT_ORDER = ['fire', 'water', 'earth', 'light', 'dark'] as const;
+
 /** Couleur de texte par élément (tokens sémantiques, pas de couleur en dur). */
 export const ELEMENT_TEXT: Record<string, string> = {
   fire: 'text-fire',
@@ -159,6 +162,15 @@ export const ELEMENT_TEXT: Record<string, string> = {
   earth: 'text-earth',
   light: 'text-light',
   dark: 'text-dark-elem',
+};
+
+/** Anneau (au survol) par élément — teinte l'accent d'une carte élémentaire. */
+export const ELEMENT_RING: Record<string, string> = {
+  fire: 'hover:ring-fire',
+  water: 'hover:ring-water',
+  earth: 'hover:ring-earth',
+  light: 'hover:ring-light',
+  dark: 'hover:ring-dark-elem',
 };
 
 /** Pastille (bg+texte) par type de chaîne. */

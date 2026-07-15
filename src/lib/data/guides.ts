@@ -27,6 +27,7 @@ import {
   type GuideCategorySlug,
   type GuideTierKey,
 } from '@/lib/data/guide-categories';
+import { isTowerKey, TOWER_KEYS } from '@/lib/data/towers';
 
 const CONTENTS_DIR = resolve(process.cwd(), 'src/app/[lang]/guides/_contents');
 
@@ -94,6 +95,14 @@ export interface GuideMeta {
    */
   monsters?: string[];
   /**
+   * La TOUR que le guide couvre (`skyward-tower`, où ce champ est obligatoire) —
+   * une clé de `data/generated/towers.json` (`tower`, `tower_hard`,
+   * `tower_very_hard`, `tower_element_fire`…). La vue en tire la SECTION
+   * (difficulté / élémentaire), l'élément (icône + accent) et l'ordre, là où la
+   * V2 lisait tout ça dans le slug du guide. Clé inconnue = build cassé au scan.
+   */
+  tower?: string;
+  /**
    * Palier pédagogique (`general-guides` uniquement, où il est OBLIGATOIRE —
    * cf. `requires` de la catégorie). Remplace la map `TIER_BY_SLUG` que la V2
    * tenait à la main dans son composant de liste.
@@ -142,6 +151,7 @@ const META_KEYS = new Set([
   'group',
   'dungeons',
   'monsters',
+  'tower',
 ]);
 const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 /**
@@ -242,6 +252,13 @@ function parseMeta(raw: unknown, at: string, issues: string[]): GuideMeta | null
       issues.push(`${at} : « mapPos » attendu { top, left, mobileTop? } en pourcentages (0-100)`);
       ok = false;
     }
+  }
+  if (m.tower !== undefined && (typeof m.tower !== 'string' || !isTowerKey(m.tower))) {
+    issues.push(
+      `${at} : « tower » inconnu — attendu une clé de data/generated/towers.json` +
+        ` (${TOWER_KEYS.join(', ')})`,
+    );
+    ok = false;
   }
   if (m.tier !== undefined && (typeof m.tier !== 'string' || !isGuideTier(m.tier))) {
     issues.push(

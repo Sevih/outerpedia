@@ -21,6 +21,7 @@ import IrregularChaseMap from './IrregularChaseMap';
 import TieredList from './TieredList';
 import SingularityRotation from './SingularityRotation';
 import SpecialRequestSplit from './SpecialRequestSplit';
+import SkywardTowerView from './SkywardTowerView';
 import type { CategoryViewProps } from './types';
 
 export default function CategoryView(props: CategoryViewProps) {
@@ -61,6 +62,11 @@ export default function CategoryView(props: CategoryViewProps) {
     // bossId (nom + portrait du pin) et group (butin dérivé du donjon).
     case 'irregular-extermination':
       return <IrregularChaseMap {...props} />;
+
+    // Deux familles de tours : difficulté (bannières) et élémentaire (cartes
+    // hautes) — section, élément et ordre lus sur meta.tower (clé towers.json).
+    case 'skyward-tower':
+      return <SkywardTowerView {...props} />;
 
     default:
       return <DefaultGrid {...props} />;

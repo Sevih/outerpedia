@@ -16,7 +16,8 @@ import type { LocalizedText } from '@contracts';
  * OBLIGATOIRES (sa vue en dépend). Vérifié au scan : le build casse au lieu de
  * laisser un guide disparaître d'une vue qui ne sait pas où le ranger.
  */
-export type GuideRequirable = 'tier' | 'bossId' | 'order' | 'group' | 'mapPos' | 'dungeons';
+export type GuideRequirable =
+  'tier' | 'bossId' | 'order' | 'group' | 'mapPos' | 'dungeons' | 'tower';
 
 /**
  * Bloc EXPLICATIF d'un mode de jeu (« comment ça marche »), affiché en bas de sa
@@ -407,6 +408,14 @@ export const GUIDE_CATEGORIES = {
   'skyward-tower': {
     order: 11,
     icon: 'CT_Symbol_Automaton',
+    /**
+     * Deux familles de tours sous une même catégorie : difficulté (Normal /
+     * Hard / Very Hard) et élémentaire (Fire…Dark). Chaque guide DÉSIGNE sa tour
+     * par `meta.tower` (clé de `data/generated/towers.json`, requis au scan) —
+     * la vue en tire la section, l'élément et l'ordre, sans lire le slug comme
+     * en V2.
+     */
+    requires: ['tower'],
     label: {
       en: 'Skyward Tower',
       jp: '飛天の塔',
