@@ -103,6 +103,26 @@ export interface GuideMeta {
    */
   tower?: string;
   /**
+   * La PROFONDEUR de Monad Gate que le guide couvre (`monad-gate`, où ce champ
+   * est obligatoire) — 1 à 10. La vue en tire la SECTION (1-5 Story / 6-10
+   * Endless), le label « Depth N », le sélecteur de profondeur et l'ordre. La V2
+   * lisait ce nombre dans le slug (`depth6-route2`) ; ici il est déclaré.
+   */
+  depth?: number;
+  /**
+   * La ROUTE dans la profondeur (`monad-gate`, obligatoire) — 1..N. Ordonne les
+   * routes d'une même profondeur ; quand une profondeur Story en a plusieurs
+   * (Depth 4 : deux parts), leurs cartes se rangent dans cet ordre.
+   */
+  route?: number;
+  /**
+   * Nombre de LAYOUTS de map que la page du guide expose via `?v=0…`
+   * (`monad-gate`, optionnel, défaut 1). >1 → la carte de la liste affiche
+   * autant de segments cliquables (Depth 10 : deux variantes A/B). Remplace le
+   * `VARIANT_DEPTHS = [10]` écrit en dur dans le composant V2.
+   */
+  variants?: number;
+  /**
    * Palier pédagogique (`general-guides` uniquement, où il est OBLIGATOIRE —
    * cf. `requires` de la catégorie). Remplace la map `TIER_BY_SLUG` que la V2
    * tenait à la main dans son composant de liste.
@@ -152,6 +172,9 @@ const META_KEYS = new Set([
   'dungeons',
   'monsters',
   'tower',
+  'depth',
+  'route',
+  'variants',
 ]);
 const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 /**
@@ -259,6 +282,14 @@ function parseMeta(raw: unknown, at: string, issues: string[]): GuideMeta | null
         ` (${TOWER_KEYS.join(', ')})`,
     );
     ok = false;
+  }
+  // Entier positif (profondeur/route de Monad Gate, nombre de variantes de map).
+  const posInt = (v: unknown) => typeof v === 'number' && Number.isInteger(v) && v > 0;
+  for (const k of ['depth', 'route', 'variants'] as const) {
+    if (m[k] !== undefined && !posInt(m[k])) {
+      issues.push(`${at} : « ${k} » doit être un entier positif`);
+      ok = false;
+    }
   }
   if (m.tier !== undefined && (typeof m.tier !== 'string' || !isGuideTier(m.tier))) {
     issues.push(

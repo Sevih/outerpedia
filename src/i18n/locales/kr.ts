@@ -631,6 +631,7 @@ const kr: Record<TranslationKey, string> = {
   'guides.adventure_license.reveal': '공개하기',
   'guides.special_request.identification': '정체 규명',
   'guides.special_request.ecology_study': '생태 조사',
+  'guides.monad_gate.variant': '변형 {v}',
   'guides.monad_gate.depth': '깊이 {n}',
   'guides.skyward_tower.difficulty': '난이도 탑',
   'guides.skyward_tower.elemental': '속성 탑',

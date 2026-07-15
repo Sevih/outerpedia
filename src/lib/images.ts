@@ -97,6 +97,8 @@ export const img = {
   coreFusionTag: () => `${BASE}/images/ui/tags/CT_Core_Icon.webp`,
   /** Icône de guide/catégorie de guides (sprite du jeu, namespace unique). */
   guideIcon: (icon: string) => `${BASE}/images/ui/guides/${icon}.webp`,
+  /** Sprite de la carte Monad Gate (icônes de nœud, trait de liaison, anneau). */
+  monad: (sprite: string) => `${BASE}/images/ui/monad/${sprite}.webp`,
   /**
    * Badge de palier de combat (`CM_Event_Rank_E_02`…) — sprite dérivé du nom du
    * palier par `rankBadgeSprite`. Même namespace que les rangs `IG_Event_Rank_*`

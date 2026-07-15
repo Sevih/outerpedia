@@ -1,0 +1,22 @@
+{
+  "title": {
+    "en": "Sacred Archipelago",
+    "fr": "Archipel sacré",
+    "jp": "聖なる群島",
+    "kr": "신성한 군도",
+    "zh": "神圣群岛"
+  },
+  "description": {
+    "en": "Monad Gate Endless Depth 10 — Sacred Archipelago: interactive map, path choices, key items and rewards.",
+    "fr": "Monad Gate Endless Depth 10 — Archipel sacré : carte interactive, choix de chemin, objets-clés et récompenses.",
+    "jp": "モナドゲート 深層10 — 聖なる群島：インタラクティブマップ、ルート選択、イベント選択、報酬。",
+    "kr": "모나드 게이트 심층 10 — 신성한 군도: 인터랙티브 맵, 경로 선택, 이벤트 선택, 보상.",
+    "zh": "单子门 深层10 — 神圣群岛：交互式地图、路线选择、事件选项与奖励。"
+  },
+  "icon": "T_DungeonArea_11",
+  "author": "Sevih",
+  "updated": "2026-07-15",
+  "depth": 10,
+  "route": 2,
+  "variants": 2
+}

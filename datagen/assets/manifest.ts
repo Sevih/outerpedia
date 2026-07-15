@@ -515,6 +515,19 @@ export function buildAssetManifest(): AssetRequest[] {
     ],
     ['nav', ['IG_Chain_Arrow']],
     [
+      // Sprites de la carte Monad Gate : 11 icônes de nœud + le trait de liaison
+      // et l'anneau de nœud (rendu des cartes de route, `img.monad`).
+      'monad',
+      [
+        ...Array.from(
+          { length: 11 },
+          (_, i) => `CM_Monad_Node_Icon_${String(i + 1).padStart(2, '0')}`,
+        ),
+        'CM_Monad_Box_Line',
+        'CM_Monad_Node_Circle',
+      ],
+    ],
+    [
       'effect',
       [
         'CM_Stat_Icon_ATK',

@@ -637,6 +637,7 @@ const jp: Record<TranslationKey, string> = {
   'guides.adventure_license.reveal': '公開する',
   'guides.special_request.identification': '正体究明',
   'guides.special_request.ecology_study': '生態調査',
+  'guides.monad_gate.variant': 'バリアント{v}',
   'guides.monad_gate.depth': '深度{n}',
   'guides.skyward_tower.difficulty': '難易度の塔',
   'guides.skyward_tower.elemental': '属性の塔',

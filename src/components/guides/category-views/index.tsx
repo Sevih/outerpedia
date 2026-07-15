@@ -22,6 +22,7 @@ import TieredList from './TieredList';
 import SingularityRotation from './SingularityRotation';
 import SpecialRequestSplit from './SpecialRequestSplit';
 import SkywardTowerView from './SkywardTowerView';
+import MonadGateView from './MonadGateView';
 import type { CategoryViewProps } from './types';
 
 export default function CategoryView(props: CategoryViewProps) {
@@ -67,6 +68,11 @@ export default function CategoryView(props: CategoryViewProps) {
     // hautes) — section, élément et ordre lus sur meta.tower (clé towers.json).
     case 'skyward-tower':
       return <SkywardTowerView {...props} />;
+
+    // Deux sections : profondeurs Story (1-5, cartes fixes) et Endless (6-10,
+    // sélecteur) — depth/route lus sur le meta, variantes de map via meta.variants.
+    case 'monad-gate':
+      return <MonadGateView {...props} />;
 
     default:
       return <DefaultGrid {...props} />;

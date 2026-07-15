@@ -658,6 +658,7 @@ const fr: Record<TranslationKey, string> = {
   'guides.adventure_license.reveal': 'Révéler',
   'guides.special_request.identification': 'Identification',
   'guides.special_request.ecology_study': 'Ecology Study',
+  'guides.monad_gate.variant': 'Variante {v}',
   'guides.monad_gate.depth': 'Depth {n}',
   'guides.skyward_tower.difficulty': 'Difficulty Towers',
   'guides.skyward_tower.elemental': 'Elemental Towers',

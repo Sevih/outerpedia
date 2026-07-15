@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Sacred Archipelago",
+    "fr": "Archipel sacré",
+    "jp": "聖なる群島",
+    "kr": "신성한 군도",
+    "zh": "神圣群岛"
+  },
+  "description": {
+    "en": "Monad Gate Depth 2 — Sacred Archipelago: interactive map, recommended path, event choices and rewards to reach the True Ending.",
+    "fr": "Monad Gate Depth 2 — Archipel sacré : carte interactive, chemin recommandé, choix d'événements et récompenses pour atteindre la True Ending.",
+    "jp": "モナドゲート 深層2 — 聖なる群島：インタラクティブマップ、ルート選択、イベント選択、報酬。",
+    "kr": "모나드 게이트 심층 2 — 신성한 군도: 인터랙티브 맵, 경로 선택, 이벤트 선택, 보상.",
+    "zh": "单子门 深层2 — 神圣群岛：交互式地图、路线选择、事件选项与奖励。"
+  },
+  "icon": "T_DungeonArea_11",
+  "author": "Sevih",
+  "updated": "2026-07-15",
+  "depth": 2,
+  "route": 1
+}

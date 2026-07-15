@@ -1,0 +1,1293 @@
+{
+  "themeId": "1",
+  "name": {
+    "en": "Hope is a thing with feathers",
+    "jp": "希望は翼あるもの",
+    "kr": "희망은 날개 달린 것",
+    "zh": "希望长有翅膀"
+  },
+  "gauge": {
+    "perMove": 20,
+    "cap": 1000
+  },
+  "rewards": {
+    "7000001": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 10,
+          "max": 10
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 5,
+          "max": 5
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "20002",
+          "min": 3,
+          "max": 3
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "20003",
+          "min": 3,
+          "max": 3
+        }
+      ],
+      "gold": {
+        "min": 1000,
+        "max": 1000
+      }
+    },
+    "7000002": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 20,
+          "max": 20
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 20,
+          "max": 20
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "20003",
+          "min": 3,
+          "max": 3
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "20004",
+          "min": 3,
+          "max": 3
+        }
+      ],
+      "gold": {
+        "min": 5000,
+        "max": 5000
+      }
+    },
+    "7000003": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 50,
+          "max": 50
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 50,
+          "max": 50
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "20004",
+          "min": 3,
+          "max": 3
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30437",
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "gold": {
+        "min": 10000,
+        "max": 10000
+      }
+    },
+    "7000006": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 10,
+          "max": 10
+        }
+      ]
+    },
+    "7001001": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 10,
+          "max": 10
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 5,
+          "max": 5
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30204",
+          "min": 2,
+          "max": 2
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30205",
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "gold": {
+        "min": 1000,
+        "max": 1000
+      }
+    },
+    "7001002": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 20,
+          "max": 20
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 20,
+          "max": 20
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30205",
+          "min": 1,
+          "max": 1
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30206",
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "gold": {
+        "min": 5000,
+        "max": 5000
+      }
+    },
+    "7001003": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 50,
+          "max": 50
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 50,
+          "max": 50
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30206",
+          "min": 1,
+          "max": 1
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30437",
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "gold": {
+        "min": 10000,
+        "max": 10000
+      }
+    },
+    "7001006": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 10,
+          "max": 10
+        }
+      ]
+    },
+    "7002001": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 10,
+          "max": 10
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 5,
+          "max": 5
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30204",
+          "min": 5,
+          "max": 5
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30205",
+          "min": 3,
+          "max": 3
+        }
+      ],
+      "gold": {
+        "min": 1000,
+        "max": 1000
+      }
+    },
+    "7002002": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 20,
+          "max": 20
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 20,
+          "max": 20
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30205",
+          "min": 5,
+          "max": 5
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30206",
+          "min": 3,
+          "max": 3
+        }
+      ],
+      "gold": {
+        "min": 5000,
+        "max": 5000
+      }
+    },
+    "7002003": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 50,
+          "max": 50
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 50,
+          "max": 50
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30206",
+          "min": 3,
+          "max": 3
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30437",
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "gold": {
+        "min": 10000,
+        "max": 10000
+      }
+    },
+    "7002006": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 10,
+          "max": 10
+        }
+      ]
+    },
+    "7003001": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 10,
+          "max": 10
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 5,
+          "max": 5
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "21002",
+          "min": 5,
+          "max": 5
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "21003",
+          "min": 3,
+          "max": 3
+        }
+      ],
+      "gold": {
+        "min": 1000,
+        "max": 1000
+      }
+    },
+    "7003002": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 20,
+          "max": 20
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 20,
+          "max": 20
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "21003",
+          "min": 5,
+          "max": 5
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "21004",
+          "min": 3,
+          "max": 3
+        }
+      ],
+      "gold": {
+        "min": 5000,
+        "max": 5000
+      }
+    },
+    "7003003": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 50,
+          "max": 50
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 50,
+          "max": 50
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "21004",
+          "min": 3,
+          "max": 3
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30437",
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "gold": {
+        "min": 10000,
+        "max": 10000
+      }
+    },
+    "7003006": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 10,
+          "max": 10
+        }
+      ]
+    },
+    "7004001": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 10,
+          "max": 10
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 5,
+          "max": 5
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "21102",
+          "min": 20,
+          "max": 20
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "21103",
+          "min": 15,
+          "max": 15
+        }
+      ],
+      "gold": {
+        "min": 1000,
+        "max": 1000
+      }
+    },
+    "7004002": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 20,
+          "max": 20
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 20,
+          "max": 20
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "21103",
+          "min": 20,
+          "max": 20
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "21104",
+          "min": 10,
+          "max": 10
+        }
+      ],
+      "gold": {
+        "min": 5000,
+        "max": 5000
+      }
+    },
+    "7004003": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 50,
+          "max": 50
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 50,
+          "max": 50
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "21104",
+          "min": 15,
+          "max": 15
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30437",
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "gold": {
+        "min": 10000,
+        "max": 10000
+      }
+    },
+    "7004006": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 10,
+          "max": 10
+        }
+      ]
+    },
+    "7120001": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 300,
+          "max": 300
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 250,
+          "max": 250
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "60001",
+          "min": 75,
+          "max": 75
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "20004",
+          "min": 5,
+          "max": 5
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30437",
+          "min": 2,
+          "max": 2
+        }
+      ],
+      "gold": {
+        "min": 50000,
+        "max": 50000
+      }
+    },
+    "7120002": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 300,
+          "max": 300
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 250,
+          "max": 250
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "60001",
+          "min": 80,
+          "max": 80
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "20004",
+          "min": 5,
+          "max": 5
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30437",
+          "min": 2,
+          "max": 2
+        }
+      ],
+      "gold": {
+        "min": 50000,
+        "max": 50000
+      }
+    },
+    "7120003": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 300,
+          "max": 300
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 250,
+          "max": 250
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "60001",
+          "min": 85,
+          "max": 85
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "20004",
+          "min": 5,
+          "max": 5
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30437",
+          "min": 2,
+          "max": 2
+        }
+      ],
+      "gold": {
+        "min": 50000,
+        "max": 50000
+      }
+    },
+    "7120004": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 300,
+          "max": 300
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 250,
+          "max": 250
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "60001",
+          "min": 90,
+          "max": 90
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "20004",
+          "min": 5,
+          "max": 5
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30437",
+          "min": 2,
+          "max": 2
+        }
+      ],
+      "gold": {
+        "min": 50000,
+        "max": 50000
+      }
+    },
+    "7120005": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 300,
+          "max": 300
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 250,
+          "max": 250
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "60001",
+          "min": 95,
+          "max": 95
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "20004",
+          "min": 5,
+          "max": 5
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30437",
+          "min": 2,
+          "max": 2
+        }
+      ],
+      "gold": {
+        "min": 50000,
+        "max": 50000
+      }
+    },
+    "7120008": {
+      "items": [
+        {
+          "type": "RIT_ASSET",
+          "typeId": "38",
+          "min": 300,
+          "max": 300
+        },
+        {
+          "type": "RIT_ASSET",
+          "typeId": "39",
+          "min": 250,
+          "max": 250
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "60001",
+          "min": 150,
+          "max": 150
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "20004",
+          "min": 5,
+          "max": 5
+        },
+        {
+          "type": "RIT_ITEM",
+          "typeId": "30437",
+          "min": 2,
+          "max": 2
+        }
+      ],
+      "gold": {
+        "min": 50000,
+        "max": 50000
+      }
+    },
+    "7130001": {
+      "items": [],
+      "crystal": {
+        "min": 150,
+        "max": 150
+      }
+    },
+    "7130003": {
+      "items": [],
+      "crystal": {
+        "min": 200,
+        "max": 200
+      }
+    }
+  },
+  "routes": [
+    {
+      "groupId": "101",
+      "depth": 1,
+      "route": 1,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_04",
+      "name": {
+        "en": "Route 1: Land of the White Falcon",
+        "jp": "ルート1：白い鷹の国",
+        "kr": "루트 1 : 하얀 매의 나라",
+        "zh": "路缐 1：白鹰之国"
+      }
+    },
+    {
+      "groupId": "102",
+      "depth": 2,
+      "route": 1,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_11",
+      "name": {
+        "en": "Route 2: Sacred Archipelago",
+        "jp": "ルート2：聖なる群島",
+        "kr": "루트 2 : 신성한 군도",
+        "zh": "路缐 2：神圣群岛"
+      }
+    },
+    {
+      "groupId": "103",
+      "depth": 3,
+      "route": 1,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_16",
+      "name": {
+        "en": "Route 3: Land of Snow and Steel",
+        "jp": "ルート3：白い雪と鋼の国",
+        "kr": "루트 3 : 하얀 눈과 강철의 나라",
+        "zh": "路缐 3：白雪与钢铁之国"
+      }
+    },
+    {
+      "groupId": "104",
+      "depth": 4,
+      "route": 1,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_22",
+      "name": {
+        "en": "Route 4: Land of Sandstorms [1st Part]",
+        "jp": "ルート4：砂風の国【前編】",
+        "kr": "루트 4 : 모래바람의 나라 [전편]",
+        "zh": "路线4：风沙之国【前篇】"
+      }
+    },
+    {
+      "groupId": "105",
+      "depth": 4,
+      "route": 2,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_22",
+      "name": {
+        "en": "Route 4: Land of Sandstorms [2nd Part]",
+        "jp": "ルート4：砂風の国【後編】",
+        "kr": "루트 4 : 모래바람의 나라 [후편]",
+        "zh": "路线4：风沙之国【后篇】"
+      }
+    },
+    {
+      "groupId": "106",
+      "depth": 5,
+      "route": 1,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_27",
+      "name": {
+        "en": "Route 5: Realm of Bane",
+        "jp": "ルート5：劇毒の領域",
+        "kr": "루트 5 : 극독의 영역",
+        "zh": "路缐 5：剧毒领域"
+      }
+    },
+    {
+      "groupId": "107",
+      "depth": 6,
+      "route": 1,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_04",
+      "name": {
+        "en": "Route 1: Land of the White Falcon",
+        "jp": "ルート1：白い鷹の国",
+        "kr": "루트 1 : 하얀 매의 나라",
+        "zh": "路缐 1：白鹰之国"
+      }
+    },
+    {
+      "groupId": "113",
+      "depth": 6,
+      "route": 2,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_11",
+      "name": {
+        "en": "Route 2: Sacred Archipelago",
+        "jp": "ルート2：聖なる群島",
+        "kr": "루트 2 : 신성한 군도",
+        "zh": "路缐 2：神圣群岛"
+      }
+    },
+    {
+      "groupId": "119",
+      "depth": 6,
+      "route": 3,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_16",
+      "name": {
+        "en": "Route 3: Land of Snow and Steel",
+        "jp": "ルート3：白い雪と鋼の国",
+        "kr": "루트 3 : 하얀 눈과 강철의 나라",
+        "zh": "路缐 3：白雪与钢铁之国"
+      }
+    },
+    {
+      "groupId": "125",
+      "depth": 6,
+      "route": 4,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_22",
+      "name": {
+        "en": "Route 4: Land of Sandstorms",
+        "jp": "ルート4：砂風の国",
+        "kr": "루트 4 : 모래바람의 나라",
+        "zh": "路缐 4：风沙之国"
+      }
+    },
+    {
+      "groupId": "131",
+      "depth": 6,
+      "route": 5,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_27",
+      "name": {
+        "en": "Route 5: Realm of Bane",
+        "jp": "ルート5：劇毒の領域",
+        "kr": "루트 5 : 극독의 영역",
+        "zh": "路缐 5：剧毒领域"
+      }
+    },
+    {
+      "groupId": "108",
+      "depth": 7,
+      "route": 1,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_04",
+      "name": {
+        "en": "Route 1: Land of the White Falcon",
+        "jp": "ルート1：白い鷹の国",
+        "kr": "루트 1 : 하얀 매의 나라",
+        "zh": "路缐 1：白鹰之国"
+      }
+    },
+    {
+      "groupId": "114",
+      "depth": 7,
+      "route": 2,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_11",
+      "name": {
+        "en": "Route 2: Sacred Archipelago",
+        "jp": "ルート2：聖なる群島",
+        "kr": "루트 2 : 신성한 군도",
+        "zh": "路缐 2：神圣群岛"
+      }
+    },
+    {
+      "groupId": "120",
+      "depth": 7,
+      "route": 3,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_16",
+      "name": {
+        "en": "Route 3: Land of Snow and Steel",
+        "jp": "ルート3：白い雪と鋼の国",
+        "kr": "루트 3 : 하얀 눈과 강철의 나라",
+        "zh": "路缐 3：白雪与钢铁之国"
+      }
+    },
+    {
+      "groupId": "126",
+      "depth": 7,
+      "route": 4,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_22",
+      "name": {
+        "en": "Route 4: Land of Sandstorms",
+        "jp": "ルート4：砂風の国",
+        "kr": "루트 4 : 모래바람의 나라",
+        "zh": "路缐 4：风沙之国"
+      }
+    },
+    {
+      "groupId": "132",
+      "depth": 7,
+      "route": 5,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_27",
+      "name": {
+        "en": "Route 5: Realm of Bane",
+        "jp": "ルート5：劇毒の領域",
+        "kr": "루트 5 : 극독의 영역",
+        "zh": "路缐 5：剧毒领域"
+      }
+    },
+    {
+      "groupId": "109",
+      "depth": 8,
+      "route": 1,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_04",
+      "name": {
+        "en": "Route 1: Land of the White Falcon",
+        "jp": "ルート1：白い鷹の国",
+        "kr": "루트 1 : 하얀 매의 나라",
+        "zh": "路缐 1：白鹰之国"
+      }
+    },
+    {
+      "groupId": "115",
+      "depth": 8,
+      "route": 2,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_11",
+      "name": {
+        "en": "Route 2: Sacred Archipelago",
+        "jp": "ルート2：聖なる群島",
+        "kr": "루트 2 : 신성한 군도",
+        "zh": "路缐 2：神圣群岛"
+      }
+    },
+    {
+      "groupId": "121",
+      "depth": 8,
+      "route": 3,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_16",
+      "name": {
+        "en": "Route 3: Land of Snow and Steel",
+        "jp": "ルート3：白い雪と鋼の国",
+        "kr": "루트 3 : 하얀 눈과 강철의 나라",
+        "zh": "路缐 3：白雪与钢铁之国"
+      }
+    },
+    {
+      "groupId": "127",
+      "depth": 8,
+      "route": 4,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_22",
+      "name": {
+        "en": "Route 4: Land of Sandstorms",
+        "jp": "ルート4：砂風の国",
+        "kr": "루트 4 : 모래바람의 나라",
+        "zh": "路缐 4：风沙之国"
+      }
+    },
+    {
+      "groupId": "133",
+      "depth": 8,
+      "route": 5,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_27",
+      "name": {
+        "en": "Route 5: Realm of Bane",
+        "jp": "ルート5：劇毒の領域",
+        "kr": "루트 5 : 극독의 영역",
+        "zh": "路缐 5：剧毒领域"
+      }
+    },
+    {
+      "groupId": "110",
+      "depth": 9,
+      "route": 1,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_04",
+      "name": {
+        "en": "Route 1: Land of the White Falcon",
+        "jp": "ルート1：白い鷹の国",
+        "kr": "루트 1 : 하얀 매의 나라",
+        "zh": "路缐 1：白鹰之国"
+      }
+    },
+    {
+      "groupId": "116",
+      "depth": 9,
+      "route": 2,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_11",
+      "name": {
+        "en": "Route 2: Sacred Archipelago",
+        "jp": "ルート2：聖なる群島",
+        "kr": "루트 2 : 신성한 군도",
+        "zh": "路缐 2：神圣群岛"
+      }
+    },
+    {
+      "groupId": "122",
+      "depth": 9,
+      "route": 3,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_16",
+      "name": {
+        "en": "Route 3: Land of Snow and Steel",
+        "jp": "ルート3：白い雪と鋼の国",
+        "kr": "루트 3 : 하얀 눈과 강철의 나라",
+        "zh": "路缐 3：白雪与钢铁之国"
+      }
+    },
+    {
+      "groupId": "128",
+      "depth": 9,
+      "route": 4,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_22",
+      "name": {
+        "en": "Route 4: Land of Sandstorms",
+        "jp": "ルート4：砂風の国",
+        "kr": "루트 4 : 모래바람의 나라",
+        "zh": "路缐 4：风沙之国"
+      }
+    },
+    {
+      "groupId": "134",
+      "depth": 9,
+      "route": 5,
+      "variant": 0,
+      "variantCount": 1,
+      "routeImage": "T_DungeonArea_27",
+      "name": {
+        "en": "Route 5: Realm of Bane",
+        "jp": "ルート5：劇毒の領域",
+        "kr": "루트 5 : 극독의 영역",
+        "zh": "路缐 5：剧毒领域"
+      }
+    },
+    {
+      "groupId": "111",
+      "depth": 10,
+      "route": 1,
+      "variant": 0,
+      "variantCount": 2,
+      "routeImage": "T_DungeonArea_04",
+      "name": {
+        "en": "Route 1: Land of the White Falcon",
+        "jp": "ルート1：白い鷹の国",
+        "kr": "루트 1 : 하얀 매의 나라",
+        "zh": "路缐 1：白鹰之国"
+      }
+    },
+    {
+      "groupId": "112",
+      "depth": 10,
+      "route": 1,
+      "variant": 1,
+      "variantCount": 2,
+      "routeImage": "T_DungeonArea_04",
+      "name": {
+        "en": "Route 1: Land of the White Falcon",
+        "jp": "ルート1：白い鷹の国",
+        "kr": "루트 1 : 하얀 매의 나라",
+        "zh": "路缐 1：白鹰之国"
+      }
+    },
+    {
+      "groupId": "117",
+      "depth": 10,
+      "route": 2,
+      "variant": 0,
+      "variantCount": 2,
+      "routeImage": "T_DungeonArea_11",
+      "name": {
+        "en": "Route 2: Sacred Archipelago",
+        "jp": "ルート2：聖なる群島",
+        "kr": "루트 2 : 신성한 군도",
+        "zh": "路缐 2：神圣群岛"
+      }
+    },
+    {
+      "groupId": "118",
+      "depth": 10,
+      "route": 2,
+      "variant": 1,
+      "variantCount": 2,
+      "routeImage": "T_DungeonArea_11",
+      "name": {
+        "en": "Route 2: Sacred Archipelago",
+        "jp": "ルート2：聖なる群島",
+        "kr": "루트 2 : 신성한 군도",
+        "zh": "路缐 2：神圣群岛"
+      }
+    },
+    {
+      "groupId": "123",
+      "depth": 10,
+      "route": 3,
+      "variant": 0,
+      "variantCount": 2,
+      "routeImage": "T_DungeonArea_16",
+      "name": {
+        "en": "Route 3: Land of Snow and Steel",
+        "jp": "ルート3：白い雪と鋼の国",
+        "kr": "루트 3 : 하얀 눈과 강철의 나라",
+        "zh": "路缐 3：白雪与钢铁之国"
+      }
+    },
+    {
+      "groupId": "124",
+      "depth": 10,
+      "route": 3,
+      "variant": 1,
+      "variantCount": 2,
+      "routeImage": "T_DungeonArea_16",
+      "name": {
+        "en": "Route 3: Land of Snow and Steel",
+        "jp": "ルート3：白い雪と鋼の国",
+        "kr": "루트 3 : 하얀 눈과 강철의 나라",
+        "zh": "路缐 3：白雪与钢铁之国"
+      }
+    },
+    {
+      "groupId": "129",
+      "depth": 10,
+      "route": 4,
+      "variant": 0,
+      "variantCount": 2,
+      "routeImage": "T_DungeonArea_22",
+      "name": {
+        "en": "Route 4: Land of Sandstorms",
+        "jp": "ルート4：砂風の国",
+        "kr": "루트 4 : 모래바람의 나라",
+        "zh": "路缐 4：风沙之国"
+      }
+    },
+    {
+      "groupId": "130",
+      "depth": 10,
+      "route": 4,
+      "variant": 1,
+      "variantCount": 2,
+      "routeImage": "T_DungeonArea_22",
+      "name": {
+        "en": "Route 4: Land of Sandstorms",
+        "jp": "ルート4：砂風の国",
+        "kr": "루트 4 : 모래바람의 나라",
+        "zh": "路缐 4：风沙之国"
+      }
+    },
+    {
+      "groupId": "135",
+      "depth": 10,
+      "route": 5,
+      "variant": 0,
+      "variantCount": 2,
+      "routeImage": "T_DungeonArea_27",
+      "name": {
+        "en": "Route 5: Realm of Bane",
+        "jp": "ルート5：劇毒の領域",
+        "kr": "루트 5 : 극독의 영역",
+        "zh": "路缐 5：剧毒领域"
+      }
+    },
+    {
+      "groupId": "136",
+      "depth": 10,
+      "route": 5,
+      "variant": 1,
+      "variantCount": 2,
+      "routeImage": "T_DungeonArea_27",
+      "name": {
+        "en": "Route 5: Realm of Bane",
+        "jp": "ルート5：劇毒の領域",
+        "kr": "루트 5 : 극독의 영역",
+        "zh": "路缐 5：剧毒领域"
+      }
+    }
+  ]
+}

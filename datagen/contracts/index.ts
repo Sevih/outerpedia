@@ -119,6 +119,15 @@ export type {
 } from '../generators/progression';
 export type { ItemSources } from '../generators/sources';
 export type {
+  MonadNode,
+  MonadNodeType,
+  MonadEdge,
+  MonadReward,
+  MonadRouteRef,
+  MonadRouteFile,
+  MonadThemeFile,
+} from '../generators/monad';
+export type {
   AscensionBonus,
   AscensionGrade,
   AscensionMaterial,

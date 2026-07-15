@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Land of Sandstorms [1st Part]",
+    "fr": "Terre des tempêtes de sable [1re Partie]",
+    "jp": "砂風の国【前編】",
+    "kr": "모래바람의 나라 [전편]",
+    "zh": "风沙之国【前篇】"
+  },
+  "description": {
+    "en": "Monad Gate Depth 4 — Land of Sandstorms [1st Part]: interactive map, recommended path, event choices and rewards to reach the True Ending.",
+    "fr": "Monad Gate Depth 4 — Terre des tempêtes de sable [1re Partie] : carte interactive, chemin recommandé, choix d'événements et récompenses pour atteindre la True Ending.",
+    "jp": "モナドゲート 深層4 — 砂風の国【前編】：インタラクティブマップ、ルート選択、イベント選択、報酬。",
+    "kr": "모나드 게이트 심층 4 — 모래바람의 나라 [전편]: 인터랙티브 맵, 경로 선택, 이벤트 선택, 보상.",
+    "zh": "单子门 深层4 — 风沙之国【前篇】：交互式地图、路线选择、事件选项与奖励。"
+  },
+  "icon": "T_DungeonArea_22",
+  "author": "Sevih",
+  "updated": "2026-07-15",
+  "depth": 4,
+  "route": 1
+}

@@ -33,6 +33,7 @@ import type {
 import { buildEncounters } from './generators/encounters';
 import { buildSingularity } from './generators/singularity';
 import { buildTowers } from './generators/towers';
+import { buildMonad } from './generators/monad';
 import { buildContentSchedule } from './generators/content-schedule';
 import { buildCharacters } from './extractor/specs/character';
 import { buildMonsters } from './extractor/specs/monster';
@@ -176,6 +177,14 @@ async function main(): Promise<void> {
   await writeJson('singularity.json', buildSingularity());
   await writeJson('towers.json', buildTowers());
   await writeJson('content-schedule.json', buildContentSchedule());
+  // Monad Gate : un thème partagé (récompenses, jauge, index des routes) + les
+  // routes prêtes à rendre (libellés résolus au build — cf. header du
+  // générateur), indexées par groupId dans UN fichier (lu côté serveur ; les
+  // ~1,5 Mo ne partent jamais au client — cf. src/lib/data/monad.ts).
+  const monad = buildMonad();
+  mkdirSync(resolve(OUT, 'monad'), { recursive: true });
+  await writeJson(`monad/theme-${monad.theme.themeId}.json`, monad.theme);
+  await writeJson('monad/routes.json', Object.fromEntries(monad.routes.map((r) => [r.groupId, r])));
   const gameVersion = buildGameVersion();
   if (gameVersion) await writeJson('game-version.json', gameVersion);
 

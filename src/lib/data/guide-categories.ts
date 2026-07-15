@@ -17,7 +17,7 @@ import type { LocalizedText } from '@contracts';
  * laisser un guide disparaître d'une vue qui ne sait pas où le ranger.
  */
 export type GuideRequirable =
-  'tier' | 'bossId' | 'order' | 'group' | 'mapPos' | 'dungeons' | 'tower';
+  'tier' | 'bossId' | 'order' | 'group' | 'mapPos' | 'dungeons' | 'tower' | 'depth' | 'route';
 
 /**
  * Bloc EXPLICATIF d'un mode de jeu (« comment ça marche »), affiché en bas de sa
@@ -390,6 +390,14 @@ export const GUIDE_CATEGORIES = {
   'monad-gate': {
     order: 10,
     icon: 'CM_Adventure_MonadGate',
+    /**
+     * Les PROFONDEURS et leurs routes : la vue en fait deux sections (Story 1-5,
+     * Endless 6-10 avec sélecteur de profondeur) et une carte par route. `depth`
+     * et `route` sont DÉCLARÉS (requis au scan) — la V2 les lisait dans le slug
+     * (`depth6-route2`) ; `variants` (optionnel) porte le nombre de layouts de
+     * map d'une route, à la place du `VARIANT_DEPTHS` en dur du composant V2.
+     */
+    requires: ['depth', 'route'],
     label: {
       en: 'Monad Gate',
       jp: 'モナドゲート',

@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Realm of Bane",
+    "fr": "Royaume du Fléau",
+    "jp": "劇毒の領域",
+    "kr": "극독의 영역",
+    "zh": "剧毒领域"
+  },
+  "description": {
+    "en": "Monad Gate Endless Depth 8 — Realm of Bane: interactive map, path choices, key items and rewards.",
+    "fr": "Monad Gate Endless Depth 8 — Royaume du Fléau : carte interactive, choix de chemin, objets-clés et récompenses.",
+    "jp": "モナドゲート 深層8 — 劇毒の領域：インタラクティブマップ、ルート選択、イベント選択、報酬。",
+    "kr": "모나드 게이트 심층 8 — 극독의 영역: 인터랙티브 맵, 경로 선택, 이벤트 선택, 보상.",
+    "zh": "单子门 深层8 — 剧毒领域：交互式地图、路线选择、事件选项与奖励。"
+  },
+  "icon": "T_DungeonArea_27",
+  "author": "Sevih",
+  "updated": "2026-07-15",
+  "depth": 8,
+  "route": 5
+}
