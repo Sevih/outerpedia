@@ -1,0 +1,3117 @@
+{
+  "disclaimer": {
+    "en": "Very Hard mode features randomized floors and conditions with varying boss encounters. Floor and conditions are random (chosen between 3-4 sets for every player). Floors 5, 10, and 15 have fixed bosses: Demiurge Stella, Demiurge Drakhan, and Demiurge Vlada (positions randomized). Floor 20 can alternate between 2 sets of bosses.",
+    "jp": "ベリーハードモードではフロアと条件がランダム化され、ボスの組み合わせが変わります。各プレイヤーに対して3〜4セットからランダムに選ばれます。5階、10階、15階は固定ボス：デミウルゴス・ステラ、デミウルゴス・ドラカン、デミウルゴス・ヴラダ（位置はランダム）。20階は2セットのボスが交互に登場します。",
+    "kr": "매우 어려움 모드에서는 층과 조건이 랜덤으로 변경되며 보스 조합이 달라집니다. 각 플레이어에게 3~4세트 중 랜덤으로 선택됩니다. 5층, 10층, 15층은 고정 보스: 데미우르고스 스텔라, 데미우르고스 드라칸, 데미우르고스 블라다 (위치는 랜덤). 20층은 2세트의 보스가 교대로 등장합니다.",
+    "zh": "极难模式的楼层和条件会随机变化，Boss组合也会不同。每位玩家从3-4个方案中随机选择。第5、10、15层为固定Boss：造物主斯特拉、造物主德拉坎、造物主弗拉达（位置随机）。第20层可在3组Boss之间交替。",
+    "fr": "Le mode Very Hard propose des étages et conditions aléatoires avec des combinaisons de Boss variables. Les étages et conditions sont aléatoires (choisis parmi 3 à 4 sets pour chaque joueur). Les étages 5, 10 et 15 ont des Boss fixes : Demiurge Stella, Demiurge Drakhan et Demiurge Vlada (positions aléatoires). L'étage 20 peut alterner entre 2 sets de Boss."
+  },
+  "pool": [
+    {
+      "boss": "40103002",
+      "reason": [
+        {
+          "en": "Just focus {P/Mero}.",
+          "jp": "{P/Mero}を集中攻撃するだけです。",
+          "kr": "{P/Mero}만 집중 공격하세요.",
+          "zh": "集火{P/Mero}即可。",
+          "fr": "Focus simplement {P/Mero}."
+        }
+      ]
+    },
+    {
+      "boss": "40103003",
+      "reason": [
+        {
+          "en": "{D/BT_STEAL_BUFF} and {D/BT_REDISTRIBUTE_BUFF} is the key here.",
+          "jp": "ここでは{D/BT_STEAL_BUFF}と{D/BT_REDISTRIBUTE_BUFF}が鍵となります。",
+          "kr": "여기서는 {D/BT_STEAL_BUFF}와 {D/BT_REDISTRIBUTE_BUFF}가 핵심입니다.",
+          "zh": "此处的关键是{D/BT_STEAL_BUFF}和{D/BT_REDISTRIBUTE_BUFF}。",
+          "fr": "{D/BT_STEAL_BUFF} et {D/BT_REDISTRIBUTE_BUFF} sont la clé ici."
+        }
+      ],
+      "recommended": [
+        {
+          "characters": ["Caren", "Poolside Trickster Regina"],
+          "reason": {
+            "en": "{D/BT_STEAL_BUFF} options",
+            "jp": "{D/BT_STEAL_BUFF}オプション",
+            "kr": "{D/BT_STEAL_BUFF} 옵션",
+            "zh": "{D/BT_STEAL_BUFF}选项",
+            "fr": "Options {D/BT_STEAL_BUFF}"
+          }
+        },
+        {
+          "characters": ["Gnosis Domine"],
+          "reason": {
+            "en": "{D/BT_REDISTRIBUTE_BUFF} options",
+            "jp": "{D/BT_REDISTRIBUTE_BUFF}オプション",
+            "kr": "{D/BT_REDISTRIBUTE_BUFF} 옵션",
+            "zh": "{D/BT_REDISTRIBUTE_BUFF}选项",
+            "fr": "Options {D/BT_REDISTRIBUTE_BUFF}"
+          }
+        },
+        {
+          "characters": ["Caren", "Poolside Trickster Regina", "Pesketh", "Stella"],
+          "reason": {
+            "en": "{D/BT_STEAL_BUFF} options",
+            "jp": "{D/BT_STEAL_BUFF}オプション",
+            "kr": "{D/BT_STEAL_BUFF} 옵션",
+            "zh": "{D/BT_STEAL_BUFF}选项",
+            "fr": "Options {D/BT_STEAL_BUFF}"
+          }
+        },
+        {
+          "characters": ["Caren", "Poolside Trickster Regina", "Pesketh", "Stella"],
+          "reason": {
+            "en": "{D/BT_STEAL_BUFF} options",
+            "jp": "{D/BT_STEAL_BUFF}オプション",
+            "kr": "{D/BT_STEAL_BUFF} 옵션",
+            "zh": "{D/BT_STEAL_BUFF}选项",
+            "fr": "Options {D/BT_STEAL_BUFF}"
+          }
+        },
+        {
+          "characters": ["Gnosis Domine"],
+          "reason": {
+            "en": "{D/BT_REDISTRIBUTE_BUFF} options",
+            "jp": "{D/BT_REDISTRIBUTE_BUFF}オプション",
+            "kr": "{D/BT_REDISTRIBUTE_BUFF} 옵션",
+            "zh": "{D/BT_REDISTRIBUTE_BUFF}选项",
+            "fr": "Options {D/BT_REDISTRIBUTE_BUFF}"
+          }
+        },
+        {
+          "characters": ["Caren", "Poolside Trickster Regina", "Pesketh"],
+          "reason": {
+            "en": "{D/BT_STEAL_BUFF} options",
+            "jp": "{D/BT_STEAL_BUFF}オプション",
+            "kr": "{D/BT_STEAL_BUFF} 옵션",
+            "zh": "{D/BT_STEAL_BUFF}选项",
+            "fr": "Options {D/BT_STEAL_BUFF}"
+          }
+        },
+        {
+          "characters": ["Stella"],
+          "reason": {
+            "en": "{D/BT_STEAL_BUFF} options and validate the restriction.",
+            "jp": "{D/BT_STEAL_BUFF}オプションで制限を満たすこと。",
+            "kr": "{D/BT_STEAL_BUFF} 옵션으로 제한 충족.",
+            "zh": "{D/BT_STEAL_BUFF}选项并满足限制。",
+            "fr": "Options {D/BT_STEAL_BUFF} et valide la restriction."
+          }
+        },
+        {
+          "characters": ["Gnosis Domine"],
+          "reason": {
+            "en": "{D/BT_REDISTRIBUTE_BUFF} options",
+            "jp": "{D/BT_REDISTRIBUTE_BUFF}オプション",
+            "kr": "{D/BT_REDISTRIBUTE_BUFF} 옵션",
+            "zh": "{D/BT_REDISTRIBUTE_BUFF}选项",
+            "fr": "Options {D/BT_REDISTRIBUTE_BUFF}"
+          }
+        },
+        {
+          "characters": ["Pesketh", "Stella"],
+          "reason": {
+            "en": "{D/BT_STEAL_BUFF} options",
+            "jp": "{D/BT_STEAL_BUFF}オプション",
+            "kr": "{D/BT_STEAL_BUFF} 옵션",
+            "zh": "{D/BT_STEAL_BUFF}选项",
+            "fr": "Options {D/BT_STEAL_BUFF}"
+          }
+        },
+        {
+          "characters": ["Caren", "Poolside Trickster Regina"],
+          "reason": {
+            "en": "{D/BT_STEAL_BUFF} options and validate the restriction.",
+            "jp": "{D/BT_STEAL_BUFF}オプションで制限を満たすこと。",
+            "kr": "{D/BT_STEAL_BUFF} 옵션으로 제한 충족.",
+            "zh": "{D/BT_STEAL_BUFF}选项并满足限制。",
+            "fr": "Options {D/BT_STEAL_BUFF} et valide la restriction."
+          }
+        },
+        {
+          "characters": ["Gnosis Domine"],
+          "reason": {
+            "en": "{D/BT_REDISTRIBUTE_BUFF} options",
+            "jp": "{D/BT_REDISTRIBUTE_BUFF}オプション",
+            "kr": "{D/BT_REDISTRIBUTE_BUFF} 옵션",
+            "zh": "{D/BT_REDISTRIBUTE_BUFF}选项",
+            "fr": "Options {D/BT_REDISTRIBUTE_BUFF}"
+          }
+        },
+        {
+          "characters": ["Caren", "Poolside Trickster Regina", "Stella"],
+          "reason": {
+            "en": "{D/BT_STEAL_BUFF} options",
+            "jp": "{D/BT_STEAL_BUFF}オプション",
+            "kr": "{D/BT_STEAL_BUFF} 옵션",
+            "zh": "{D/BT_STEAL_BUFF}选项",
+            "fr": "Options {D/BT_STEAL_BUFF}"
+          }
+        },
+        {
+          "characters": ["Pesketh"],
+          "reason": {
+            "en": "{D/BT_STEAL_BUFF} options and validate the restriction.",
+            "jp": "{D/BT_STEAL_BUFF}オプションで制限を満たすこと。",
+            "kr": "{D/BT_STEAL_BUFF} 옵션으로 제한 충족.",
+            "zh": "{D/BT_STEAL_BUFF}选项并满足限制。",
+            "fr": "Options {D/BT_STEAL_BUFF} et valide la restriction."
+          }
+        },
+        {
+          "characters": ["Gnosis Domine"],
+          "reason": {
+            "en": "{D/BT_REDISTRIBUTE_BUFF} options",
+            "jp": "{D/BT_REDISTRIBUTE_BUFF}オプション",
+            "kr": "{D/BT_REDISTRIBUTE_BUFF} 옵션",
+            "zh": "{D/BT_REDISTRIBUTE_BUFF}选项",
+            "fr": "Options {D/BT_REDISTRIBUTE_BUFF}"
+          }
+        },
+        {
+          "characters": ["Gnosis Domine"],
+          "reason": {
+            "en": "{D/BT_REDISTRIBUTE_BUFF} options",
+            "jp": "{D/BT_REDISTRIBUTE_BUFF}オプション",
+            "kr": "{D/BT_REDISTRIBUTE_BUFF} 옵션",
+            "zh": "{D/BT_REDISTRIBUTE_BUFF}选项",
+            "fr": "Options {D/BT_REDISTRIBUTE_BUFF}"
+          }
+        },
+        {
+          "characters": ["Poolside Trickster Regina", "Caren"],
+          "reason": {
+            "en": "{D/BT_STEAL_BUFF} options and validate the restriction.",
+            "jp": "{D/BT_STEAL_BUFF}オプションで制限を満たすこと。",
+            "kr": "{D/BT_STEAL_BUFF} 옵션으로 제한 충족.",
+            "zh": "{D/BT_STEAL_BUFF}选项并满足限制。",
+            "fr": "Options {D/BT_STEAL_BUFF} et valide la restriction."
+          }
+        },
+        {
+          "characters": ["Stella", "Pesketh"],
+          "reason": {
+            "en": "{D/BT_STEAL_BUFF} options",
+            "jp": "{D/BT_STEAL_BUFF}オプション",
+            "kr": "{D/BT_STEAL_BUFF} 옵션",
+            "zh": "{D/BT_STEAL_BUFF}选项",
+            "fr": "Options {D/BT_STEAL_BUFF}"
+          }
+        },
+        {
+          "characters": ["Pesketh", "Stella"],
+          "reason": {
+            "en": "{D/BT_STEAL_BUFF} options and validate the restriction.",
+            "jp": "{D/BT_STEAL_BUFF}オプションで制限を満たすこと。",
+            "kr": "{D/BT_STEAL_BUFF} 옵션으로 제한 충족.",
+            "zh": "{D/BT_STEAL_BUFF}选项并满足限制。",
+            "fr": "Options {D/BT_STEAL_BUFF} et valide la restriction."
+          }
+        },
+        {
+          "characters": ["Caren", "Poolside Trickster Regina"],
+          "reason": {
+            "en": "{D/BT_STEAL_BUFF} options",
+            "jp": "{D/BT_STEAL_BUFF}オプション",
+            "kr": "{D/BT_STEAL_BUFF} 옵션",
+            "zh": "{D/BT_STEAL_BUFF}选项",
+            "fr": "Options {D/BT_STEAL_BUFF}"
+          }
+        },
+        {
+          "characters": ["Gnosis Domine"],
+          "reason": {
+            "en": "{D/BT_REDISTRIBUTE_BUFF} options",
+            "jp": "{D/BT_REDISTRIBUTE_BUFF}オプション",
+            "kr": "{D/BT_REDISTRIBUTE_BUFF} 옵션",
+            "zh": "{D/BT_REDISTRIBUTE_BUFF}选项",
+            "fr": "Options {D/BT_REDISTRIBUTE_BUFF}"
+          }
+        }
+      ]
+    },
+    {
+      "boss": "40103004",
+      "reason": [
+        {
+          "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}.",
+          "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}。",
+          "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE}.",
+          "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}。",
+          "fr": "{B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}."
+        }
+      ],
+      "recommended": [
+        {
+          "characters": ["Dianne", "Astei", "Primine", "Viella"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Liselotte", "Monad Eva", "Tio"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Viella"],
+          "reason": {
+            "en": "Validate restriction plus she has both {B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}.",
+            "jp": "制限を満たし、さらに{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}の両方を持っています。",
+            "kr": "제한을 충족하며, {B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE}을 모두 보유.",
+            "zh": "满足限制,并同时拥有{B/BT_REMOVE_DEBUFF}和{B/BT_IMMUNE}。",
+            "fr": "Valide la restriction et possède à la fois {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}."
+          }
+        },
+        {
+          "characters": ["Dianne", "Astei", "Primine"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Liselotte", "Monad Eva", "Tio"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Primine"],
+          "reason": {
+            "en": "Validate restriction plus she has both {B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}.",
+            "jp": "制限を満たし、さらに{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}の両方を持っています。",
+            "kr": "제한을 충족하며, {B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE}을 모두 보유.",
+            "zh": "满足限制,并同时拥有{B/BT_REMOVE_DEBUFF}和{B/BT_IMMUNE}。",
+            "fr": "Valide la restriction et possède à la fois {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}."
+          }
+        },
+        {
+          "characters": ["Dianne", "Astei", "Viella"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Liselotte", "Monad Eva", "Tio"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Viella", "Astei", "Primine"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Liselotte", "Tio"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Claire", "Shu", "Yuri"],
+          "reason": {
+            "en": "1★ with {B/BT_REMOVE_DEBUFF}.",
+            "jp": "{B/BT_REMOVE_DEBUFF}を持つ1★キャラ。",
+            "kr": "{B/BT_REMOVE_DEBUFF}을 가진 1★ 캐릭터.",
+            "zh": "拥有{B/BT_REMOVE_DEBUFF}的1★角色。",
+            "fr": "1★ avec {B/BT_REMOVE_DEBUFF}."
+          }
+        },
+        {
+          "characters": ["Dianne", "Astei", "Primine", "Viella"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Liselotte", "Monad Eva", "Tio"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Core Fusion Veronica", "Veronica", "Luna"],
+          "reason": {
+            "en": "Validate restriction and have {B/BT_REMOVE_DEBUFF}.",
+            "jp": "制限を満たし、{B/BT_REMOVE_DEBUFF}を持つこと。",
+            "kr": "제한을 충족하고 {B/BT_REMOVE_DEBUFF}을 보유.",
+            "zh": "满足限制并拥有{B/BT_REMOVE_DEBUFF}。",
+            "fr": "Valide la restriction et possède {B/BT_REMOVE_DEBUFF}."
+          }
+        },
+        {
+          "characters": ["Dianne", "Astei", "Primine", "Viella"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Liselotte", "Monad Eva", "Tio"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Nella"],
+          "reason": {
+            "en": "Validate restriction and have {B/BT_REMOVE_DEBUFF} or {B/BT_IMMUNE}.",
+            "jp": "制限を満たし、{B/BT_REMOVE_DEBUFF}を持つこと。",
+            "kr": "제한을 충족하고 {B/BT_REMOVE_DEBUFF}을 보유.",
+            "zh": "满足限制并拥有{B/BT_REMOVE_DEBUFF}。",
+            "fr": "Valide la restriction et possède {B/BT_REMOVE_DEBUFF} ou {B/BT_IMMUNE}."
+          }
+        },
+        {
+          "characters": ["Claire", "Shu", "Yuri", "Liselotte", "Monad Eva"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Dianne", "Astei", "Primine", "Viella"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        }
+      ]
+    },
+    {
+      "boss": "40103005",
+      "reason": [
+        {
+          "en": "{B/BT_REMOVE_DEBUFF}, {B/BT_IMMUNE} and {B/BT_REVENGE} will do the job.",
+          "jp": "{B/BT_REMOVE_DEBUFF}、{B/BT_IMMUNE}、{B/BT_REVENGE}で対処できます。",
+          "kr": "{B/BT_REMOVE_DEBUFF}, {B/BT_IMMUNE}, {B/BT_REVENGE}로 충분합니다.",
+          "zh": "{B/BT_REMOVE_DEBUFF}、{B/BT_IMMUNE}和{B/BT_REVENGE}就足够应对。",
+          "fr": "{B/BT_REMOVE_DEBUFF}, {B/BT_IMMUNE} et {B/BT_REVENGE} feront l'affaire."
+        }
+      ],
+      "recommended": [
+        {
+          "characters": ["Dianne", "Astei", "Primine", "Viella"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Liselotte", "Monad Eva", "Tio"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Stella"],
+          "reason": {
+            "en": "DPS with {B/BT_REMOVE_DEBUFF} on {B/BT_REVENGE}.",
+            "jp": "{B/BT_REVENGE}時に{B/BT_REMOVE_DEBUFF}を持つDPS。",
+            "kr": "{B/BT_REVENGE} 시 {B/BT_REMOVE_DEBUFF}를 가진 DPS.",
+            "zh": "具有{B/BT_REVENGE}时触发{B/BT_REMOVE_DEBUFF}的 DPS。",
+            "fr": "DPS avec {B/BT_REMOVE_DEBUFF} sur {B/BT_REVENGE}."
+          }
+        },
+        {
+          "characters": ["Demiurge Stella", "Delta"],
+          "reason": {
+            "en": "DPS with {B/BT_REVENGE}.",
+            "jp": "{B/BT_REVENGE}を持つDPS。",
+            "kr": "{B/BT_REVENGE}를 가진 DPS.",
+            "zh": "拥有{B/BT_REVENGE}的 DPS。",
+            "fr": "DPS avec {B/BT_REVENGE}."
+          }
+        },
+        {
+          "characters": ["Dianne", "Primine", "Viella"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Monad Eva"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Stella"],
+          "reason": {
+            "en": "DPS with {B/BT_REMOVE_DEBUFF} on {B/BT_REVENGE}.",
+            "jp": "{B/BT_REVENGE}時に{B/BT_REMOVE_DEBUFF}を持つDPS。",
+            "kr": "{B/BT_REVENGE} 시 {B/BT_REMOVE_DEBUFF}를 가진 DPS.",
+            "zh": "具有{B/BT_REVENGE}时触发{B/BT_REMOVE_DEBUFF}的 DPS。",
+            "fr": "DPS avec {B/BT_REMOVE_DEBUFF} sur {B/BT_REVENGE}."
+          }
+        },
+        {
+          "characters": ["Demiurge Stella", "Delta"],
+          "reason": {
+            "en": "DPS with {B/BT_REVENGE}.",
+            "jp": "{B/BT_REVENGE}を持つDPS。",
+            "kr": "{B/BT_REVENGE}를 가진 DPS.",
+            "zh": "拥有{B/BT_REVENGE}的 DPS。",
+            "fr": "DPS avec {B/BT_REVENGE}."
+          }
+        },
+        {
+          "characters": ["Stella", "Dianne", "Monad Eva"],
+          "reason": {
+            "en": "Validate restriction and have {B/BT_REMOVE_DEBUFF} and/or {B/BT_IMMUNE}.",
+            "jp": "制限を満たし、{B/BT_REMOVE_DEBUFF}および/または{B/BT_IMMUNE}を持つこと。",
+            "kr": "제한을 충족하고 {B/BT_REMOVE_DEBUFF} 또는 {B/BT_IMMUNE}(또는 둘 다)을 보유.",
+            "zh": "满足限制并拥有{B/BT_REMOVE_DEBUFF}和/或{B/BT_IMMUNE}。",
+            "fr": "Valide la restriction et possède {B/BT_REMOVE_DEBUFF} et/ou {B/BT_IMMUNE}."
+          }
+        },
+        {
+          "characters": ["Astei", "Primine", "Viella"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Liselotte", "Tio"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Stella", "Delta"],
+          "reason": {
+            "en": "DPS with {B/BT_REVENGE}.",
+            "jp": "{B/BT_REVENGE}を持つDPS。",
+            "kr": "{B/BT_REVENGE}를 가진 DPS.",
+            "zh": "拥有{B/BT_REVENGE}的 DPS。",
+            "fr": "DPS avec {B/BT_REVENGE}."
+          }
+        },
+        {
+          "characters": ["Astei", "Primine", "Viella", "Dianne"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Liselotte", "Tio", "Stella", "Monad Eva"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Stella", "Delta"],
+          "reason": {
+            "en": "DPS with {B/BT_REVENGE}.",
+            "jp": "{B/BT_REVENGE}を持つDPS。",
+            "kr": "{B/BT_REVENGE}를 가진 DPS.",
+            "zh": "拥有{B/BT_REVENGE}的 DPS。",
+            "fr": "DPS avec {B/BT_REVENGE}."
+          }
+        },
+        {
+          "characters": ["Dianne", "Astei", "Primine", "Viella"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Liselotte", "Monad Eva", "Tio"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Stella"],
+          "reason": {
+            "en": "DPS with {B/BT_REMOVE_DEBUFF} on {B/BT_REVENGE}.",
+            "jp": "{B/BT_REVENGE}時に{B/BT_REMOVE_DEBUFF}を持つDPS。",
+            "kr": "{B/BT_REVENGE} 시 {B/BT_REMOVE_DEBUFF}를 가진 DPS.",
+            "zh": "具有{B/BT_REVENGE}时触发{B/BT_REMOVE_DEBUFF}的 DPS。",
+            "fr": "DPS avec {B/BT_REMOVE_DEBUFF} sur {B/BT_REVENGE}."
+          }
+        },
+        {
+          "characters": ["Dianne", "Astei", "Primine", "Viella"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Liselotte", "Monad Eva", "Tio"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Stella", "Demiurge Stella"],
+          "reason": {
+            "en": "DPS with {B/BT_REMOVE_DEBUFF} on {B/BT_REVENGE}.",
+            "jp": "{B/BT_REVENGE}時に{B/BT_REMOVE_DEBUFF}を持つDPS。",
+            "kr": "{B/BT_REVENGE} 시 {B/BT_REMOVE_DEBUFF}를 가진 DPS.",
+            "zh": "具有{B/BT_REVENGE}时触发{B/BT_REMOVE_DEBUFF}的 DPS。",
+            "fr": "DPS avec {B/BT_REMOVE_DEBUFF} sur {B/BT_REVENGE}."
+          }
+        },
+        {
+          "characters": ["Luna", "Veronica"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF}, {B/BT_BARRIER} and validate restriction",
+            "jp": "",
+            "kr": "",
+            "zh": "",
+            "fr": "{B/BT_REMOVE_DEBUFF}, {B/BT_BARRIER} et valide la restriction"
+          }
+        },
+        {
+          "characters": ["Dianne", "Astei", "Primine", "Viella"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Liselotte", "Monad Eva", "Tio"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Stella", "Stella"],
+          "reason": {
+            "en": "DPS with {B/BT_REMOVE_DEBUFF} on {B/BT_REVENGE}.",
+            "jp": "{B/BT_REVENGE}時に{B/BT_REMOVE_DEBUFF}を持つDPS。",
+            "kr": "{B/BT_REVENGE} 시 {B/BT_REMOVE_DEBUFF}를 가진 DPS.",
+            "zh": "具有{B/BT_REVENGE}时触发{B/BT_REMOVE_DEBUFF}的 DPS。",
+            "fr": "DPS avec {B/BT_REMOVE_DEBUFF} sur {B/BT_REVENGE}."
+          }
+        }
+      ]
+    },
+    {
+      "boss": "40103006",
+      "reason": [
+        {
+          "en": "One of the best ways to counter it is to utilize {B/BT_STAT|ST_COUNTER_RATE} to accumulate chain points faster.",
+          "jp": "最善の対策の一つは、{B/BT_STAT|ST_COUNTER_RATE}を活用してチェインポイントを早く貯めることです。",
+          "kr": "가장 좋은 대처법 중 하나는 {B/BT_STAT|ST_COUNTER_RATE}를 활용해 체인 포인트를 빠르게 쌓는 것입니다.",
+          "zh": "应对此 Boss 的最佳方式之一是利用{B/BT_STAT|ST_COUNTER_RATE}更快地累积连锁点数。",
+          "fr": "L'une des meilleures façons de la contrer est d'utiliser {B/BT_STAT|ST_COUNTER_RATE} pour accumuler des chain points plus vite."
+        },
+        {
+          "en": "Another way to counter it is by using {P/Ember} with enough {S/EFF} to inflict {D/BT_DOT_BURN}.",
+          "jp": "もう一つの対策は、{S/EFF}を十分に積んだ{P/Ember}で{D/BT_DOT_BURN}を付与することです。",
+          "kr": "또 다른 대처법은 충분한 {S/EFF}를 갖춘 {P/Ember}로 {D/BT_DOT_BURN}을 부여하는 것입니다.",
+          "zh": "另一种应对方式是使用携带足够{S/EFF}的{P/Ember}来施加{D/BT_DOT_BURN}。",
+          "fr": "Une autre façon de la contrer est d'utiliser {P/Ember} avec assez d'{S/EFF} pour infliger {D/BT_DOT_BURN}."
+        },
+        {
+          "en": "{P/Delta} can go in tandem with {P/Cindy}, {P/Dianne} and/or {P/Fran} (EE+10).",
+          "jp": "{P/Delta}は{P/Cindy}、{P/Dianne}、{P/Fran}（EE+10）と連携できます。",
+          "kr": "{P/Delta}는 {P/Cindy}, {P/Dianne}, {P/Fran}(EE+10)과 연계할 수 있습니다.",
+          "zh": "{P/Delta}可以与{P/Cindy}、{P/Dianne}和/或{P/Fran}(EE+10) 协同。",
+          "fr": "{P/Delta} peut jouer en tandem avec {P/Cindy}, {P/Dianne} et/ou {P/Fran} (EE+10)."
+        }
+      ],
+      "recommended": [
+        {
+          "characters": ["Demiurge Stella"],
+          "reason": {
+            "en": "Validate restriction and have {B/BT_STAT|ST_COUNTER_RATE} in her kit.",
+            "jp": "制限を満たし、スキルに{B/BT_STAT|ST_COUNTER_RATE}を持つこと。",
+            "kr": "제한을 충족하고 스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 보유.",
+            "zh": "满足限制,且技能组中带有{B/BT_STAT|ST_COUNTER_RATE}。",
+            "fr": "Valide la restriction et possède {B/BT_STAT|ST_COUNTER_RATE} dans son kit."
+          }
+        },
+        {
+          "characters": ["Kanon", "Delta", "Fran", "Mero"],
+          "reason": {
+            "en": "{B/BT_STAT|ST_COUNTER_RATE} in her kit.",
+            "jp": "スキルに{B/BT_STAT|ST_COUNTER_RATE}を持っています。",
+            "kr": "스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 보유.",
+            "zh": "技能组中带有{B/BT_STAT|ST_COUNTER_RATE}。",
+            "fr": "{B/BT_STAT|ST_COUNTER_RATE} dans son kit."
+          }
+        },
+        {
+          "characters": ["Ember"],
+          "reason": {
+            "en": "Inflicts {D/BT_DOT_BURN} when taking a hit.",
+            "jp": "被弾時に{D/BT_DOT_BURN}を付与します。",
+            "kr": "피격 시 {D/BT_DOT_BURN}을 부여합니다.",
+            "zh": "受击时施加{D/BT_DOT_BURN}。",
+            "fr": "Inflige {D/BT_DOT_BURN} quand elle est touchée."
+          }
+        },
+        {
+          "characters": ["Demiurge Drakhan", "Leo", "Hilde"],
+          "reason": {
+            "en": "Will help your team to survive.",
+            "jp": "チームの生存に役立ちます。",
+            "kr": "팀의 생존에 도움이 됩니다.",
+            "zh": "有助于队伍生存。",
+            "fr": "Aidera votre équipe à survivre."
+          }
+        },
+        {
+          "characters": ["Kanon", "Delta", "Fran", "Mero", "Demiurge Stella"],
+          "reason": {
+            "en": "{B/BT_STAT|ST_COUNTER_RATE} in her kit.",
+            "jp": "スキルに{B/BT_STAT|ST_COUNTER_RATE}を持っています。",
+            "kr": "스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 보유.",
+            "zh": "技能组中带有{B/BT_STAT|ST_COUNTER_RATE}。",
+            "fr": "{B/BT_STAT|ST_COUNTER_RATE} dans son kit."
+          }
+        },
+        {
+          "characters": ["Ember"],
+          "reason": {
+            "en": "Inflicts {D/BT_DOT_BURN} when taking a hit.",
+            "jp": "被弾時に{D/BT_DOT_BURN}を付与します。",
+            "kr": "피격 시 {D/BT_DOT_BURN}을 부여합니다.",
+            "zh": "受击时施加{D/BT_DOT_BURN}。",
+            "fr": "Inflige {D/BT_DOT_BURN} quand elle est touchée."
+          }
+        },
+        {
+          "characters": ["Fran", "Delta"],
+          "reason": {
+            "en": "Validate restriction and have {B/BT_STAT|ST_COUNTER_RATE} in her kit.",
+            "jp": "制限を満たし、スキルに{B/BT_STAT|ST_COUNTER_RATE}を持つこと。",
+            "kr": "제한을 충족하고 스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 보유.",
+            "zh": "满足限制,且技能组中带有{B/BT_STAT|ST_COUNTER_RATE}。",
+            "fr": "Valide la restriction et possède {B/BT_STAT|ST_COUNTER_RATE} dans son kit."
+          }
+        },
+        {
+          "characters": ["Kanon", "Mero", "Demiurge Stella"],
+          "reason": {
+            "en": "{B/BT_STAT|ST_COUNTER_RATE} in her kit.",
+            "jp": "スキルに{B/BT_STAT|ST_COUNTER_RATE}を持っています。",
+            "kr": "스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 보유.",
+            "zh": "技能组中带有{B/BT_STAT|ST_COUNTER_RATE}。",
+            "fr": "{B/BT_STAT|ST_COUNTER_RATE} dans son kit."
+          }
+        },
+        {
+          "characters": ["Ember"],
+          "reason": {
+            "en": "Inflicts {D/BT_DOT_BURN} when taking a hit.",
+            "jp": "被弾時に{D/BT_DOT_BURN}を付与します。",
+            "kr": "피격 시 {D/BT_DOT_BURN}을 부여합니다.",
+            "zh": "受击时施加{D/BT_DOT_BURN}。",
+            "fr": "Inflige {D/BT_DOT_BURN} quand elle est touchée."
+          }
+        },
+        {
+          "characters": ["Kanon", "Mero", "Demiurge Stella"],
+          "reason": {
+            "en": "{B/BT_STAT|ST_COUNTER_RATE} in her kit.",
+            "jp": "スキルに{B/BT_STAT|ST_COUNTER_RATE}を持っています。",
+            "kr": "스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 보유.",
+            "zh": "技能组中带有{B/BT_STAT|ST_COUNTER_RATE}。",
+            "fr": "{B/BT_STAT|ST_COUNTER_RATE} dans son kit."
+          }
+        },
+        {
+          "characters": ["Ember"],
+          "reason": {
+            "en": "Inflicts {D/BT_DOT_BURN} when taking a hit.",
+            "jp": "被弾時に{D/BT_DOT_BURN}を付与します。",
+            "kr": "피격 시 {D/BT_DOT_BURN}을 부여합니다.",
+            "zh": "受击时施加{D/BT_DOT_BURN}。",
+            "fr": "Inflige {D/BT_DOT_BURN} quand elle est touchée."
+          }
+        },
+        {
+          "characters": ["Kanon", "Delta", "Demiurge Stella"],
+          "reason": {
+            "en": "Validate restriction and have {B/BT_STAT|ST_COUNTER_RATE} in her kit.",
+            "jp": "制限を満たし、スキルに{B/BT_STAT|ST_COUNTER_RATE}を持つこと。",
+            "kr": "제한을 충족하고 스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 보유.",
+            "zh": "满足限制,且技能组中带有{B/BT_STAT|ST_COUNTER_RATE}。",
+            "fr": "Valide la restriction et possède {B/BT_STAT|ST_COUNTER_RATE} dans son kit."
+          }
+        },
+        {
+          "characters": ["Fran", "Mero"],
+          "reason": {
+            "en": "{B/BT_STAT|ST_COUNTER_RATE} in her kit.",
+            "jp": "スキルに{B/BT_STAT|ST_COUNTER_RATE}を持っています。",
+            "kr": "스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 보유.",
+            "zh": "技能组中带有{B/BT_STAT|ST_COUNTER_RATE}。",
+            "fr": "{B/BT_STAT|ST_COUNTER_RATE} dans son kit."
+          }
+        },
+        {
+          "characters": ["Ember"],
+          "reason": {
+            "en": "Inflicts {D/BT_DOT_BURN} when taking a hit.",
+            "jp": "被弾時に{D/BT_DOT_BURN}を付与します。",
+            "kr": "피격 시 {D/BT_DOT_BURN}을 부여합니다.",
+            "zh": "受击时施加{D/BT_DOT_BURN}。",
+            "fr": "Inflige {D/BT_DOT_BURN} quand elle est touchée."
+          }
+        },
+        {
+          "characters": ["Kanon", "Delta", "Fran", "Mero", "Demiurge Stella"],
+          "reason": {
+            "en": "{B/BT_STAT|ST_COUNTER_RATE} in her kit.",
+            "jp": "スキルに{B/BT_STAT|ST_COUNTER_RATE}を持っています。",
+            "kr": "스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 보유.",
+            "zh": "技能组中带有{B/BT_STAT|ST_COUNTER_RATE}。",
+            "fr": "{B/BT_STAT|ST_COUNTER_RATE} dans son kit."
+          }
+        },
+        {
+          "characters": ["Ember"],
+          "reason": {
+            "en": "Inflicts {D/BT_DOT_BURN} when taking a hit.",
+            "jp": "被弾時に{D/BT_DOT_BURN}を付与します。",
+            "kr": "피격 시 {D/BT_DOT_BURN}을 부여합니다.",
+            "zh": "受击时施加{D/BT_DOT_BURN}。",
+            "fr": "Inflige {D/BT_DOT_BURN} quand elle est touchée."
+          }
+        },
+        {
+          "characters": ["Demiurge Drakhan", "Leo", "Hilde"],
+          "reason": {
+            "en": "Will help your team to survive.",
+            "jp": "チームの生存に役立ちます。",
+            "kr": "팀의 생존에 도움이 됩니다.",
+            "zh": "有助于队伍生存。",
+            "fr": "Aidera votre équipe à survivre."
+          }
+        }
+      ]
+    },
+    {
+      "boss": "40103009",
+      "reason": [
+        {
+          "en": "Control and focus the core to prevent {P/Poolside Trickster Regina} to play. Both priority reductions and stun.",
+          "jp": "{P/Poolside Trickster Regina}に行動させないよう、コアを制圧・集中攻撃しましょう。行動順低下と{D/BT_STUN}の両方を使います。",
+          "kr": "{P/Poolside Trickster Regina}이(가) 행동하지 못하도록 코어를 제압하고 집중 공격하세요. 행동 순서 감소와 스턴 모두 활용합니다.",
+          "zh": "控制并集火核心,避免{P/Poolside Trickster Regina}行动。行动顺序降低和{D/BT_STUN}都要使用。",
+          "fr": "Contrôlez et focus le core pour empêcher {P/Poolside Trickster Regina} de jouer. À la fois réduction de priority et stun."
+        },
+        {
+          "en": "Best way is by using {B/BT_ACTION_GAUGE}, {D/BT_ACTION_GAUGE} and hard CC like {D/BT_STUN}, {D/BT_FREEZE} and {D/BT_GOLDEN_CURSE}.",
+          "jp": "最善策は{B/BT_ACTION_GAUGE}、{D/BT_ACTION_GAUGE}、そして{D/BT_STUN}、{D/BT_FREEZE}、{D/BT_GOLDEN_CURSE}のような強力なCCを活用することです。",
+          "kr": "가장 좋은 방법은 {B/BT_ACTION_GAUGE}, {D/BT_ACTION_GAUGE}, 그리고 {D/BT_STUN}, {D/BT_FREEZE}, {D/BT_GOLDEN_CURSE} 같은 강력한 CC를 활용하는 것입니다.",
+          "zh": "最佳方式是使用{B/BT_ACTION_GAUGE}、{D/BT_ACTION_GAUGE}以及{D/BT_STUN}、{D/BT_FREEZE}和{D/BT_GOLDEN_CURSE}等强控。",
+          "fr": "Le mieux est d'utiliser {B/BT_ACTION_GAUGE}, {D/BT_ACTION_GAUGE} et du hard CC comme {D/BT_STUN}, {D/BT_FREEZE} et {D/BT_GOLDEN_CURSE}."
+        }
+      ],
+      "recommended": [
+        {
+          "characters": ["Stella", "Valentine", "Core Fusion Snow", "Monad Iota"],
+          "reason": {
+            "en": "Validate restriction and have either hard CC or good priority manipulation.",
+            "jp": "制限を満たし、強力なCCか優れた行動順操作のいずれかを持つこと。",
+            "kr": "제한을 충족하고 강력한 CC 또는 뛰어난 행동 우선도 조작 중 하나를 보유.",
+            "zh": "满足限制,并拥有强控或出色的行动顺序操控。",
+            "fr": "Valide la restriction et possède soit du hard CC, soit une bonne manipulation de priority."
+          }
+        },
+        {
+          "characters": ["Iota"],
+          "reason": {
+            "en": "Have both 1 hard CC and {D/BT_ACTION_GAUGE}.",
+            "jp": "強力なCCを1つと{D/BT_ACTION_GAUGE}の両方を持つこと。",
+            "kr": "강력한 CC 1개와 {D/BT_ACTION_GAUGE}를 모두 보유.",
+            "zh": "同时拥有 1 个强控和{D/BT_ACTION_GAUGE}。",
+            "fr": "Possède à la fois 1 hard CC et {D/BT_ACTION_GAUGE}."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Gnosis Viella"],
+          "reason": {
+            "en": "Hard CC options.",
+            "jp": "強力なCCオプション。",
+            "kr": "강력한 CC 옵션.",
+            "zh": "强控选项。",
+            "fr": "Options de hard CC."
+          }
+        },
+        {
+          "characters": ["Monad Eva", "Primine", "Viella"],
+          "reason": {
+            "en": "Validate restriction and have {B/BT_CALL_BACKUP}.",
+            "jp": "制限を満たし、{B/BT_CALL_BACKUP}を持つこと。",
+            "kr": "제한을 충족하고 {B/BT_CALL_BACKUP}을 보유.",
+            "zh": "满足限制并拥有{B/BT_CALL_BACKUP}。",
+            "fr": "Valide la restriction et possède {B/BT_CALL_BACKUP}."
+          }
+        },
+        {
+          "characters": ["Core Fusion Snow", "Iota"],
+          "reason": {
+            "en": "Have both 1 hard CC and {D/BT_ACTION_GAUGE}.",
+            "jp": "強力なCCを1つと{D/BT_ACTION_GAUGE}の両方を持つこと。",
+            "kr": "강력한 CC 1개와 {D/BT_ACTION_GAUGE}를 모두 보유.",
+            "zh": "同时拥有 1 个强控和{D/BT_ACTION_GAUGE}。",
+            "fr": "Possède à la fois 1 hard CC et {D/BT_ACTION_GAUGE}."
+          }
+        },
+        {
+          "characters": ["Stella", "Valentine"],
+          "reason": {
+            "en": "Priority war machines.",
+            "jp": "行動順操作の要となるキャラ。",
+            "kr": "행동 우선도 조작 핵심 유닛.",
+            "zh": "行动顺序操控核心角色。",
+            "fr": "Machines de guerre à priority."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Gnosis Viella", "Monad Iota"],
+          "reason": {
+            "en": "Hard CC options.",
+            "jp": "強力なCCオプション。",
+            "kr": "강력한 CC 옵션.",
+            "zh": "强控选项。",
+            "fr": "Options de hard CC."
+          }
+        },
+        {
+          "characters": ["Core Fusion Snow", "Iota"],
+          "reason": {
+            "en": "Have both 1 hard CC and {D/BT_ACTION_GAUGE}.",
+            "jp": "強力なCCを1つと{D/BT_ACTION_GAUGE}の両方を持つこと。",
+            "kr": "강력한 CC 1개와 {D/BT_ACTION_GAUGE}를 모두 보유.",
+            "zh": "同时拥有 1 个强控和{D/BT_ACTION_GAUGE}。",
+            "fr": "Possède à la fois 1 hard CC et {D/BT_ACTION_GAUGE}."
+          }
+        },
+        {
+          "characters": ["Stella", "Valentine"],
+          "reason": {
+            "en": "Priority war machines.",
+            "jp": "行動順操作の要となるキャラ。",
+            "kr": "행동 우선도 조작 핵심 유닛.",
+            "zh": "行动顺序操控核心角色。",
+            "fr": "Machines de guerre à priority."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Gnosis Viella", "Monad Iota"],
+          "reason": {
+            "en": "Hard CC options.",
+            "jp": "強力なCCオプション。",
+            "kr": "강력한 CC 옵션.",
+            "zh": "强控选项。",
+            "fr": "Options de hard CC."
+          }
+        },
+        {
+          "characters": ["Omega Nadja", "Luna", "Summer Knight's Dream Ember"],
+          "reason": {
+            "en": "Validate restriction and have either {D/BT_ACTION_GAUGE} or {B/BT_ACTION_GAUGE}.",
+            "jp": "制限を満たし、{D/BT_ACTION_GAUGE}か{B/BT_ACTION_GAUGE}のいずれかを持つこと。",
+            "kr": "제한을 충족하고 {D/BT_ACTION_GAUGE} 또는 {B/BT_ACTION_GAUGE} 중 하나를 보유.",
+            "zh": "满足限制,并拥有{D/BT_ACTION_GAUGE}或{B/BT_ACTION_GAUGE}。",
+            "fr": "Valide la restriction et possède soit {D/BT_ACTION_GAUGE}, soit {B/BT_ACTION_GAUGE}."
+          }
+        },
+        {
+          "characters": ["Core Fusion Snow", "Iota"],
+          "reason": {
+            "en": "Have both 1 hard CC and {D/BT_ACTION_GAUGE}.",
+            "jp": "強力なCCを1つと{D/BT_ACTION_GAUGE}の両方を持つこと。",
+            "kr": "강력한 CC 1개와 {D/BT_ACTION_GAUGE}를 모두 보유.",
+            "zh": "同时拥有 1 个强控和{D/BT_ACTION_GAUGE}。",
+            "fr": "Possède à la fois 1 hard CC et {D/BT_ACTION_GAUGE}."
+          }
+        },
+        {
+          "characters": ["Stella", "Valentine"],
+          "reason": {
+            "en": "Priority war machines.",
+            "jp": "行動順操作の要となるキャラ。",
+            "kr": "행동 우선도 조작 핵심 유닛.",
+            "zh": "行动顺序操控核心角色。",
+            "fr": "Machines de guerre à priority."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Gnosis Viella", "Monad Iota"],
+          "reason": {
+            "en": "Hard CC options.",
+            "jp": "強力なCCオプション。",
+            "kr": "강력한 CC 옵션.",
+            "zh": "强控选项。",
+            "fr": "Options de hard CC."
+          }
+        },
+        {
+          "characters": ["Omega Nadja", "Iota", "Monad Iota", "Gnosis Viella"],
+          "reason": {
+            "en": "Validate restriction and have either hard CC or good priority manipulation.",
+            "jp": "制限を満たし、強力なCCか優れた行動順操作のいずれかを持つこと。",
+            "kr": "제한을 충족하고 강력한 CC 또는 뛰어난 행동 우선도 조작 중 하나를 보유.",
+            "zh": "满足限制,并拥有强控或出色的行动顺序操控。",
+            "fr": "Valide la restriction et possède soit du hard CC, soit une bonne manipulation de priority."
+          }
+        },
+        {
+          "characters": ["Core Fusion Snow"],
+          "reason": {
+            "en": "Have both 1 hard CC and {D/BT_ACTION_GAUGE}.",
+            "jp": "強力なCCを1つと{D/BT_ACTION_GAUGE}の両方を持つこと。",
+            "kr": "강력한 CC 1개와 {D/BT_ACTION_GAUGE}를 모두 보유.",
+            "zh": "同时拥有 1 个强控和{D/BT_ACTION_GAUGE}。",
+            "fr": "Possède à la fois 1 hard CC et {D/BT_ACTION_GAUGE}."
+          }
+        },
+        {
+          "characters": ["Stella", "Valentine"],
+          "reason": {
+            "en": "Priority war machines.",
+            "jp": "行動順操作の要となるキャラ。",
+            "kr": "행동 우선도 조작 핵심 유닛.",
+            "zh": "行动顺序操控核心角色。",
+            "fr": "Machines de guerre à priority."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella"],
+          "reason": {
+            "en": "Hard CC options.",
+            "jp": "強力なCCオプション。",
+            "kr": "강력한 CC 옵션.",
+            "zh": "强控选项。",
+            "fr": "Options de hard CC."
+          }
+        },
+        {
+          "characters": ["Core Fusion Snow", "Iota"],
+          "reason": {
+            "en": "Have both 1 hard CC and {D/BT_ACTION_GAUGE}.",
+            "jp": "強力なCCを1つと{D/BT_ACTION_GAUGE}の両方を持つこと。",
+            "kr": "강력한 CC 1개와 {D/BT_ACTION_GAUGE}를 모두 보유.",
+            "zh": "同时拥有 1 个强控和{D/BT_ACTION_GAUGE}。",
+            "fr": "Possède à la fois 1 hard CC et {D/BT_ACTION_GAUGE}."
+          }
+        },
+        {
+          "characters": ["Stella", "Valentine"],
+          "reason": {
+            "en": "Priority war machines.",
+            "jp": "行動順操作の要となるキャラ。",
+            "kr": "행동 우선도 조작 핵심 유닛.",
+            "zh": "行动顺序操控核心角色。",
+            "fr": "Machines de guerre à priority."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Gnosis Viella", "Monad Iota"],
+          "reason": {
+            "en": "Hard CC options.",
+            "jp": "強力なCCオプション。",
+            "kr": "강력한 CC 옵션.",
+            "zh": "强控选项。",
+            "fr": "Options de hard CC."
+          }
+        },
+        {
+          "characters": ["Rico"],
+          "reason": {
+            "en": "Validate restriction and have either hard CC or good priority manipulation.",
+            "jp": "制限を満たし、強力なCCか優れた行動順操作のいずれかを持つこと。",
+            "kr": "제한을 충족하고 강력한 CC 또는 뛰어난 행동 우선도 조작 중 하나를 보유.",
+            "zh": "满足限制,并拥有强控或出色的行动顺序操控。",
+            "fr": "Valide la restriction et possède soit du hard CC, soit une bonne manipulation de priority."
+          }
+        },
+        {
+          "characters": ["Stella", "Valentine"],
+          "reason": {
+            "en": "Priority war machines.",
+            "jp": "行動順操作の要となるキャラ。",
+            "kr": "행동 우선도 조작 핵심 유닛.",
+            "zh": "行动顺序操控核心角色。",
+            "fr": "Machines de guerre à priority."
+          }
+        },
+        {
+          "characters": ["Iota", "Gnosis Viella", "Gnosis Nella", "Monad Iota", "Core Fusion Snow"],
+          "reason": {
+            "en": "Hard CC options.",
+            "jp": "強力なCCオプション。",
+            "kr": "강력한 CC 옵션.",
+            "zh": "强控选项。",
+            "fr": "Options de hard CC."
+          }
+        }
+      ]
+    },
+    {
+      "boss": "40103010",
+      "reason": [
+        {
+          "en": "Bring {B/BT_REMOVE_DEBUFF} and you'll be fine.",
+          "jp": "{B/BT_REMOVE_DEBUFF}を編成すれば問題ありません。",
+          "kr": "{B/BT_REMOVE_DEBUFF}을 데려가면 괜찮습니다.",
+          "zh": "带上{B/BT_REMOVE_DEBUFF}就没问题。",
+          "fr": "Emmenez {B/BT_REMOVE_DEBUFF} et tout ira bien."
+        }
+      ],
+      "recommended": [
+        {
+          "characters": ["Primine"],
+          "reason": {
+            "en": "Validate restriction and have {B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}.",
+            "jp": "制限を満たし、{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}を持つこと。",
+            "kr": "제한을 충족하고 {B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE}을 보유.",
+            "zh": "满足限制并拥有{B/BT_REMOVE_DEBUFF}和{B/BT_IMMUNE}。",
+            "fr": "Valide la restriction et possède {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}."
+          }
+        },
+        {
+          "characters": ["Dianne", "Astei", "Viella"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Liselotte", "Monad Eva", "Tio"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Nella"],
+          "reason": {
+            "en": "Validate restriction and have {B/BT_REMOVE_DEBUFF} or {B/BT_IMMUNE}.",
+            "jp": "制限を満たし、{B/BT_REMOVE_DEBUFF}か{B/BT_IMMUNE}を持つこと。",
+            "kr": "제한을 충족하고 {B/BT_REMOVE_DEBUFF} 또는 {B/BT_IMMUNE}을 보유.",
+            "zh": "满足限制并拥有{B/BT_REMOVE_DEBUFF}或{B/BT_IMMUNE}。",
+            "fr": "Valide la restriction et possède {B/BT_REMOVE_DEBUFF} ou {B/BT_IMMUNE}."
+          }
+        },
+        {
+          "characters": ["Dianne", "Astei", "Primine", "Viella"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Liselotte", "Monad Eva", "Tio"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Astei", "Liselotte", "Tio"],
+          "reason": {
+            "en": "Validate restriction and have {B/BT_REMOVE_DEBUFF} and/or {B/BT_IMMUNE}.",
+            "jp": "制限を満たし、{B/BT_REMOVE_DEBUFF}および/または{B/BT_IMMUNE}を持つこと。",
+            "kr": "제한을 충족하고 {B/BT_REMOVE_DEBUFF} 또는 {B/BT_IMMUNE}(또는 둘 다)을 보유.",
+            "zh": "满足限制并拥有{B/BT_REMOVE_DEBUFF}和/或{B/BT_IMMUNE}。",
+            "fr": "Valide la restriction et possède {B/BT_REMOVE_DEBUFF} et/ou {B/BT_IMMUNE}."
+          }
+        },
+        {
+          "characters": ["Dianne", "Primine", "Viella"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Monad Eva"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Monad Eva", "Dianne"],
+          "reason": {
+            "en": "Validate restriction and have {B/BT_REMOVE_DEBUFF} and/or {B/BT_IMMUNE}.",
+            "jp": "制限を満たし、{B/BT_REMOVE_DEBUFF}および/または{B/BT_IMMUNE}を持つこと。",
+            "kr": "제한을 충족하고 {B/BT_REMOVE_DEBUFF} 또는 {B/BT_IMMUNE}(또는 둘 다)을 보유.",
+            "zh": "满足限制并拥有{B/BT_REMOVE_DEBUFF}和/或{B/BT_IMMUNE}。",
+            "fr": "Valide la restriction et possède {B/BT_REMOVE_DEBUFF} et/ou {B/BT_IMMUNE}."
+          }
+        },
+        {
+          "characters": ["Primine", "Viella", "Astei"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Liselotte", "Tio"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Dianne", "Primine", "Viella", "Astei"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Monad Eva", "Tio", "Liselotte"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Shu"],
+          "reason": {
+            "en": "Validate restriction and have {B/BT_REMOVE_DEBUFF} or {B/BT_IMMUNE}.",
+            "jp": "制限を満たし、{B/BT_REMOVE_DEBUFF}か{B/BT_IMMUNE}を持つこと。",
+            "kr": "제한을 충족하고 {B/BT_REMOVE_DEBUFF} 또는 {B/BT_IMMUNE}을 보유.",
+            "zh": "满足限制并拥有{B/BT_REMOVE_DEBUFF}或{B/BT_IMMUNE}。",
+            "fr": "Valide la restriction et possède {B/BT_REMOVE_DEBUFF} ou {B/BT_IMMUNE}."
+          }
+        },
+        {
+          "characters": ["Demiurge Delta", "Liselotte", "Monad Eva", "Tio"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}オプション",
+            "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF}"
+          }
+        },
+        {
+          "characters": ["Dianne", "Astei", "Viella", "Primine"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
+            "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
+            "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+          }
+        },
+        {
+          "characters": ["Nella"],
+          "reason": {
+            "en": "{B/BT_IMMUNE} options",
+            "jp": "{B/BT_IMMUNE}オプション",
+            "kr": "{B/BT_IMMUNE} 옵션",
+            "zh": "{B/BT_IMMUNE}选项",
+            "fr": "Options {B/BT_IMMUNE}"
+          }
+        }
+      ]
+    },
+    {
+      "boss": "40103012",
+      "reason": [
+        {
+          "en": "Single target {P/Edelweiss} then {P/Fatal}.",
+          "jp": "単体攻撃で{P/Edelweiss}を倒してから{P/Fatal}を狙いましょう。",
+          "kr": "단일 공격으로 {P/Edelweiss}를 먼저 처치한 후 {P/Fatal}을 공격하세요.",
+          "zh": "用单体攻击先击杀{P/Edelweiss},然后击杀{P/Fatal}。",
+          "fr": "Ciblez {P/Edelweiss} en monocible puis {P/Fatal}."
+        }
+      ],
+      "recommended": [
+        {
+          "characters": ["Caren"],
+          "reason": {
+            "en": "{SK/Caren|S2} will automatically target {P/Fatal} and {SK/Caren|S1} will hit both target.",
+            "jp": "{SK/Caren|S2}は自動で{P/Fatal}を狙い、{SK/Caren|S1}は両方の敵にヒットします。",
+            "kr": "{SK/Caren|S2}는 자동으로 {P/Fatal}을 노리고, {SK/Caren|S1}은 두 대상 모두에게 명중합니다.",
+            "zh": "{SK/Caren|S2}会自动锁定{P/Fatal},{SK/Caren|S1}会同时命中两个目标。",
+            "fr": "{SK/Caren|S2} ciblera automatiquement {P/Fatal} et {SK/Caren|S1} touchera les deux cibles."
+          }
+        },
+        {
+          "characters": ["Caren"],
+          "reason": {
+            "en": "{SK/Caren|S2} will automatically target {P/Fatal} and {SK/Caren|S1} will hit both target.",
+            "jp": "{SK/Caren|S2}は自動で{P/Fatal}を狙い、{SK/Caren|S1}は両方の敵にヒットします。",
+            "kr": "{SK/Caren|S2}는 자동으로 {P/Fatal}을 노리고, {SK/Caren|S1}은 두 대상 모두에게 명중합니다.",
+            "zh": "{SK/Caren|S2}会自动锁定{P/Fatal},{SK/Caren|S1}会同时命中两个目标。",
+            "fr": "{SK/Caren|S2} ciblera automatiquement {P/Fatal} et {SK/Caren|S1} touchera les deux cibles."
+          }
+        },
+        {
+          "characters": ["Mystic Sage Ame"],
+          "reason": {
+            "en": "Same reason as {P/Caren}, her {SK/Mystic Sage Ame|S2} will automatically target {P/Fatal}.",
+            "jp": "{P/Caren}と同じ理由で、彼女の{SK/Mystic Sage Ame|S2}は自動で{P/Fatal}を狙います。",
+            "kr": "{P/Caren}과 같은 이유로, 그녀의 {SK/Mystic Sage Ame|S2}는 자동으로 {P/Fatal}을 노립니다.",
+            "zh": "与{P/Caren}相同的原因,她的{SK/Mystic Sage Ame|S2}会自动锁定{P/Fatal}。",
+            "fr": "Même raison que {P/Caren} : son {SK/Mystic Sage Ame|S2} ciblera automatiquement {P/Fatal}."
+          }
+        },
+        {
+          "characters": ["Caren"],
+          "reason": {
+            "en": "{SK/Caren|S2} will automatically target {P/Fatal} and {SK/Caren|S1} will hit both target.",
+            "jp": "{SK/Caren|S2}は自動で{P/Fatal}を狙い、{SK/Caren|S1}は両方の敵にヒットします。",
+            "kr": "{SK/Caren|S2}는 자동으로 {P/Fatal}을 노리고, {SK/Caren|S1}은 두 대상 모두에게 명중합니다.",
+            "zh": "{SK/Caren|S2}会自动锁定{P/Fatal},{SK/Caren|S1}会同时命中两个目标。",
+            "fr": "{SK/Caren|S2} ciblera automatiquement {P/Fatal} et {SK/Caren|S1} touchera les deux cibles."
+          }
+        },
+        {
+          "characters": ["Caren"],
+          "reason": {
+            "en": "{SK/Caren|S2} will automatically target {P/Fatal} and {SK/Caren|S1} will hit both target.",
+            "jp": "{SK/Caren|S2}は自動で{P/Fatal}を狙い、{SK/Caren|S1}は両方の敵にヒットします。",
+            "kr": "{SK/Caren|S2}는 자동으로 {P/Fatal}을 노리고, {SK/Caren|S1}은 두 대상 모두에게 명중합니다.",
+            "zh": "{SK/Caren|S2}会自动锁定{P/Fatal},{SK/Caren|S1}会同时命中两个目标。",
+            "fr": "{SK/Caren|S2} ciblera automatiquement {P/Fatal} et {SK/Caren|S1} touchera les deux cibles."
+          }
+        },
+        {
+          "characters": ["Mystic Sage Ame"],
+          "reason": {
+            "en": "Same reason as {P/Caren}, her {SK/Mystic Sage Ame|S2} will automatically target {P/Fatal}.",
+            "jp": "{P/Caren}と同じ理由で、彼女の{SK/Mystic Sage Ame|S2}は自動で{P/Fatal}を狙います。",
+            "kr": "{P/Caren}과 같은 이유로, 그녀의 {SK/Mystic Sage Ame|S2}는 자동으로 {P/Fatal}을 노립니다.",
+            "zh": "与{P/Caren}相同的原因,她的{SK/Mystic Sage Ame|S2}会自动锁定{P/Fatal}。",
+            "fr": "Même raison que {P/Caren} : son {SK/Mystic Sage Ame|S2} ciblera automatiquement {P/Fatal}."
+          }
+        },
+        {
+          "characters": ["Caren"],
+          "reason": {
+            "en": "Validate restriction and {SK/Caren|S2} will automatically target {P/Fatal} and {SK/Caren|S1} will hit both target.",
+            "jp": "制限を満たせば、{SK/Caren|S2}は自動で{P/Fatal}を狙い、{SK/Caren|S1}は両方の敵にヒットします。",
+            "kr": "제한을 충족하면 {SK/Caren|S2}는 자동으로 {P/Fatal}을 노리고, {SK/Caren|S1}은 두 대상 모두에게 명중합니다.",
+            "zh": "满足限制后,{SK/Caren|S2}会自动锁定{P/Fatal},{SK/Caren|S1}会同时命中两个目标。",
+            "fr": "Valide la restriction et {SK/Caren|S2} ciblera automatiquement {P/Fatal} et {SK/Caren|S1} touchera les deux cibles."
+          }
+        },
+        {
+          "characters": ["Mystic Sage Ame"],
+          "reason": {
+            "en": "Same reason as {P/Caren}, her {SK/Mystic Sage Ame|S2} will automatically target {P/Fatal}.",
+            "jp": "{P/Caren}と同じ理由で、彼女の{SK/Mystic Sage Ame|S2}は自動で{P/Fatal}を狙います。",
+            "kr": "{P/Caren}과 같은 이유로, 그녀의 {SK/Mystic Sage Ame|S2}는 자동으로 {P/Fatal}을 노립니다.",
+            "zh": "与{P/Caren}相同的原因,她的{SK/Mystic Sage Ame|S2}会自动锁定{P/Fatal}。",
+            "fr": "Même raison que {P/Caren} : son {SK/Mystic Sage Ame|S2} ciblera automatiquement {P/Fatal}."
+          }
+        },
+        {
+          "characters": ["Caren"],
+          "reason": {
+            "en": "{SK/Caren|S2} will automatically target {P/Fatal} and {SK/Caren|S1} will hit both target.",
+            "jp": "{SK/Caren|S2}は自動で{P/Fatal}を狙い、{SK/Caren|S1}は両方の敵にヒットします。",
+            "kr": "{SK/Caren|S2}는 자동으로 {P/Fatal}을 노리고, {SK/Caren|S1}은 두 대상 모두에게 명중합니다.",
+            "zh": "{SK/Caren|S2}会自动锁定{P/Fatal},{SK/Caren|S1}会同时命中两个目标。",
+            "fr": "{SK/Caren|S2} ciblera automatiquement {P/Fatal} et {SK/Caren|S1} touchera les deux cibles."
+          }
+        },
+        {
+          "characters": ["Mystic Sage Ame"],
+          "reason": {
+            "en": "Same reason as {P/Caren}, her {SK/Mystic Sage Ame|S2} will automatically target {P/Fatal}.",
+            "jp": "{P/Caren}と同じ理由で、彼女の{SK/Mystic Sage Ame|S2}は自動で{P/Fatal}を狙います。",
+            "kr": "{P/Caren}과 같은 이유로, 그녀의 {SK/Mystic Sage Ame|S2}는 자동으로 {P/Fatal}을 노립니다.",
+            "zh": "与{P/Caren}相同的原因,她的{SK/Mystic Sage Ame|S2}会自动锁定{P/Fatal}。",
+            "fr": "Même raison que {P/Caren} : son {SK/Mystic Sage Ame|S2} ciblera automatiquement {P/Fatal}."
+          }
+        },
+        {
+          "characters": ["Ame", "Rey", "Viella"],
+          "reason": {
+            "en": "Any {E/Earth} hero can do the job and validate the restriction.",
+            "jp": "どの{E/Earth}属性のヒーローでも役目を果たし、制限を満たすことができます。",
+            "kr": "어떤 {E/Earth} 속성 영웅이든 역할을 수행하며 제한을 충족할 수 있습니다.",
+            "zh": "任何{E/Earth}属性英雄都能胜任并满足限制。",
+            "fr": "N'importe quel héros {E/Earth} peut faire le travail et valider la restriction."
+          }
+        }
+      ]
+    },
+    {
+      "boss": "40103013",
+      "reason": [
+        {
+          "en": "2 ways to handle the fight :",
+          "jp": "この戦闘を攻略する2つの方法：",
+          "kr": "이 전투를 공략하는 2가지 방법:",
+          "zh": "应对此战斗的 2 种方法：",
+          "fr": "2 façons d'aborder le combat :"
+        },
+        {
+          "en": "Either brute force with your strongest DPS units",
+          "jp": "あるいは最強のDPSユニットで力押しする方法",
+          "kr": "또는 가장 강력한 DPS 유닛으로 힘으로 밀어붙이기",
+          "zh": "或者用你最强的 DPS 角色强行击破",
+          "fr": "Soit en force brute avec vos unités DPS les plus puissantes"
+        },
+        {
+          "en": "Control since she lack of immunity towards any stun.",
+          "jp": "{D/BT_STUN}に対する耐性がないので、行動制御しましょう。",
+          "kr": "어떤 스턴에도 면역이 없으므로 행동을 제어하세요.",
+          "zh": "她对任何{D/BT_STUN}都没有免疫,进行控制即可。",
+          "fr": "Soit en contrôle, car elle n'a aucune immunité face au stun."
+        }
+      ],
+      "recommended": [
+        {
+          "characters": ["Gnosis Viella", "Gnosis Nella", "Iota", "Rico"],
+          "reason": {
+            "en": "{D/BT_STUN} options",
+            "jp": "{D/BT_STUN}オプション",
+            "kr": "{D/BT_STUN} 옵션",
+            "zh": "{D/BT_STUN}选项",
+            "fr": "Options {D/BT_STUN}"
+          }
+        },
+        {
+          "characters": ["Monad Iota"],
+          "reason": {
+            "en": "{D/BT_GOLDEN_CURSE} options",
+            "jp": "{D/BT_GOLDEN_CURSE}オプション",
+            "kr": "{D/BT_GOLDEN_CURSE} 옵션",
+            "zh": "{D/BT_GOLDEN_CURSE}选项",
+            "fr": "Options {D/BT_GOLDEN_CURSE}"
+          }
+        },
+        {
+          "characters": ["Gnosis Viella"],
+          "reason": {
+            "en": "Validate restriction and have a hard CC",
+            "jp": "制限を満たし、強力なCCを持つこと",
+            "kr": "제한을 충족하고 강력한 CC를 보유",
+            "zh": "满足限制并拥有强控",
+            "fr": "Valide la restriction et possède du hard CC"
+          }
+        },
+        {
+          "characters": ["Primine", "Dahlia", "Core Fusion Snow", "Fortuna"],
+          "reason": {
+            "en": "{D/BT_FREEZE} options",
+            "jp": "{D/BT_FREEZE}オプション",
+            "kr": "{D/BT_FREEZE} 옵션",
+            "zh": "{D/BT_FREEZE}选项",
+            "fr": "Options {D/BT_FREEZE}"
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Rico", "Iota"],
+          "reason": {
+            "en": "{D/BT_STUN} options",
+            "jp": "{D/BT_STUN}オプション",
+            "kr": "{D/BT_STUN} 옵션",
+            "zh": "{D/BT_STUN}选项",
+            "fr": "Options {D/BT_STUN}"
+          }
+        },
+        {
+          "characters": ["Monad Iota"],
+          "reason": {
+            "en": "{D/BT_GOLDEN_CURSE} options",
+            "jp": "{D/BT_GOLDEN_CURSE}オプション",
+            "kr": "{D/BT_GOLDEN_CURSE} 옵션",
+            "zh": "{D/BT_GOLDEN_CURSE}选项",
+            "fr": "Options {D/BT_GOLDEN_CURSE}"
+          }
+        },
+        {
+          "characters": ["Rico"],
+          "reason": {
+            "en": "Validate restriction and have a hard CC",
+            "jp": "制限を満たし、強力なCCを持つこと",
+            "kr": "제한을 충족하고 강력한 CC를 보유",
+            "zh": "满足限制并拥有强控",
+            "fr": "Valide la restriction et possède du hard CC"
+          }
+        },
+        {
+          "characters": ["Primine", "Core Fusion Snow", "Fortuna", "Dahlia"],
+          "reason": {
+            "en": "{D/BT_FREEZE} options",
+            "jp": "{D/BT_FREEZE}オプション",
+            "kr": "{D/BT_FREEZE} 옵션",
+            "zh": "{D/BT_FREEZE}选项",
+            "fr": "Options {D/BT_FREEZE}"
+          }
+        },
+        {
+          "characters": ["Gnosis Viella", "Gnosis Nella", "Iota"],
+          "reason": {
+            "en": "{D/BT_STUN} options",
+            "jp": "{D/BT_STUN}オプション",
+            "kr": "{D/BT_STUN} 옵션",
+            "zh": "{D/BT_STUN}选项",
+            "fr": "Options {D/BT_STUN}"
+          }
+        },
+        {
+          "characters": ["Monad Iota"],
+          "reason": {
+            "en": "{D/BT_GOLDEN_CURSE} options",
+            "jp": "{D/BT_GOLDEN_CURSE}オプション",
+            "kr": "{D/BT_GOLDEN_CURSE} 옵션",
+            "zh": "{D/BT_GOLDEN_CURSE}选项",
+            "fr": "Options {D/BT_GOLDEN_CURSE}"
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Fortuna", "Iota", "Dahlia"],
+          "reason": {
+            "en": "Validate restriction and have a hard CC",
+            "jp": "制限を満たし、強力なCCを持つこと",
+            "kr": "제한을 충족하고 강력한 CC를 보유",
+            "zh": "满足限制并拥有强控",
+            "fr": "Valide la restriction et possède du hard CC"
+          }
+        },
+        {
+          "characters": ["Primine", "Core Fusion Snow"],
+          "reason": {
+            "en": "{D/BT_FREEZE} options",
+            "jp": "{D/BT_FREEZE}オプション",
+            "kr": "{D/BT_FREEZE} 옵션",
+            "zh": "{D/BT_FREEZE}选项",
+            "fr": "Options {D/BT_FREEZE}"
+          }
+        },
+        {
+          "characters": ["Gnosis Viella", "Rico"],
+          "reason": {
+            "en": "{D/BT_STUN} options",
+            "jp": "{D/BT_STUN}オプション",
+            "kr": "{D/BT_STUN} 옵션",
+            "zh": "{D/BT_STUN}选项",
+            "fr": "Options {D/BT_STUN}"
+          }
+        },
+        {
+          "characters": ["Monad Iota"],
+          "reason": {
+            "en": "{D/BT_GOLDEN_CURSE} options",
+            "jp": "{D/BT_GOLDEN_CURSE}オプション",
+            "kr": "{D/BT_GOLDEN_CURSE} 옵션",
+            "zh": "{D/BT_GOLDEN_CURSE}选项",
+            "fr": "Options {D/BT_GOLDEN_CURSE}"
+          }
+        },
+        {
+          "characters": ["Primine", "Core Fusion Snow", "Fortuna", "Dahlia"],
+          "reason": {
+            "en": "{D/BT_FREEZE} options",
+            "jp": "{D/BT_FREEZE}オプション",
+            "kr": "{D/BT_FREEZE} 옵션",
+            "zh": "{D/BT_FREEZE}选项",
+            "fr": "Options {D/BT_FREEZE}"
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Iota"],
+          "reason": {
+            "en": "{D/BT_STUN} options",
+            "jp": "{D/BT_STUN}オプション",
+            "kr": "{D/BT_STUN} 옵션",
+            "zh": "{D/BT_STUN}选项",
+            "fr": "Options {D/BT_STUN}"
+          }
+        },
+        {
+          "characters": ["Monad Iota"],
+          "reason": {
+            "en": "{D/BT_GOLDEN_CURSE} options",
+            "jp": "{D/BT_GOLDEN_CURSE}オプション",
+            "kr": "{D/BT_GOLDEN_CURSE} 옵션",
+            "zh": "{D/BT_GOLDEN_CURSE}选项",
+            "fr": "Options {D/BT_GOLDEN_CURSE}"
+          }
+        },
+        {
+          "characters": ["Primine", "Core Fusion Snow", "Fortuna", "Dahlia"],
+          "reason": {
+            "en": "{D/BT_FREEZE} options",
+            "jp": "{D/BT_FREEZE}オプション",
+            "kr": "{D/BT_FREEZE} 옵션",
+            "zh": "{D/BT_FREEZE}选项",
+            "fr": "Options {D/BT_FREEZE}"
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Iota"],
+          "reason": {
+            "en": "{D/BT_STUN} options",
+            "jp": "{D/BT_STUN}オプション",
+            "kr": "{D/BT_STUN} 옵션",
+            "zh": "{D/BT_STUN}选项",
+            "fr": "Options {D/BT_STUN}"
+          }
+        },
+        {
+          "characters": ["Monad Iota"],
+          "reason": {
+            "en": "{D/BT_GOLDEN_CURSE} options",
+            "jp": "{D/BT_GOLDEN_CURSE}オプション",
+            "kr": "{D/BT_GOLDEN_CURSE} 옵션",
+            "zh": "{D/BT_GOLDEN_CURSE}选项",
+            "fr": "Options {D/BT_GOLDEN_CURSE}"
+          }
+        },
+        {
+          "characters": ["Primine", "Dahlia", "Core Fusion Snow", "Fortuna"],
+          "reason": {
+            "en": "{D/BT_FREEZE} options",
+            "jp": "{D/BT_FREEZE}オプション",
+            "kr": "{D/BT_FREEZE} 옵션",
+            "zh": "{D/BT_FREEZE}选项",
+            "fr": "Options {D/BT_FREEZE}"
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Rico"],
+          "reason": {
+            "en": "{D/BT_STUN} options",
+            "jp": "{D/BT_STUN}オプション",
+            "kr": "{D/BT_STUN} 옵션",
+            "zh": "{D/BT_STUN}选项",
+            "fr": "Options {D/BT_STUN}"
+          }
+        }
+      ]
+    },
+    {
+      "boss": "40103014",
+      "reason": [
+        {
+          "en": "High survivability units is recommended.",
+          "jp": "生存力の高いユニットが推奨されます。",
+          "kr": "생존력이 높은 유닛을 추천합니다.",
+          "zh": "推荐使用高生存力角色。",
+          "fr": "Des unités à haute survie sont recommandées."
+        },
+        {
+          "en": "{B/BT_STAT|ST_COUNTER_RATE} units are very useful here.",
+          "jp": "{B/BT_STAT|ST_COUNTER_RATE}ユニットが非常に有効です。",
+          "kr": "{B/BT_STAT|ST_COUNTER_RATE} 유닛이 매우 유용합니다.",
+          "zh": "{B/BT_STAT|ST_COUNTER_RATE}角色在此非常有用。",
+          "fr": "Les unités {B/BT_STAT|ST_COUNTER_RATE} sont très utiles ici."
+        }
+      ],
+      "recommended": [
+        {
+          "characters": ["Fran", "Stella", "Mero"],
+          "reason": {
+            "en": "Validate restriction and have {B/BT_STAT|ST_COUNTER_RATE} in their kits",
+            "jp": "制限を満たし、スキルに{B/BT_STAT|ST_COUNTER_RATE}を持つこと",
+            "kr": "제한을 충족하고 스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 보유",
+            "zh": "满足限制,且技能组中带有{B/BT_STAT|ST_COUNTER_RATE}",
+            "fr": "Valide la restriction et possède {B/BT_STAT|ST_COUNTER_RATE} dans son kit"
+          }
+        },
+        {
+          "characters": ["Delta", "Tamamo-no-Mae", "Viella", "Midnight Rush Skadi"],
+          "reason": {
+            "en": "Units with {B/BT_STAT|ST_COUNTER_RATE} in their kits",
+            "jp": "スキルに{B/BT_STAT|ST_COUNTER_RATE}を持つユニット",
+            "kr": "스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 가진 유닛",
+            "zh": "技能组中带有{B/BT_STAT|ST_COUNTER_RATE}的角色",
+            "fr": "Unités avec {B/BT_STAT|ST_COUNTER_RATE} dans leur kit"
+          }
+        },
+        {
+          "characters": ["Demiurge Stella", "Caren", "Kanon", "Demiurge Luna"],
+          "reason": {
+            "en": "Sturdy DPS units",
+            "jp": "耐久力のあるDPSユニット",
+            "kr": "내구성 있는 DPS 유닛",
+            "zh": "坚韧的 DPS 角色",
+            "fr": "Unités DPS résistantes"
+          }
+        },
+        {
+          "characters": ["Christina", "Demiurge Drakhan", "Hilde"],
+          "reason": {
+            "en": "Units that will help your team to survive",
+            "jp": "チームの生存に役立つユニット",
+            "kr": "팀의 생존에 도움이 되는 유닛",
+            "zh": "有助于队伍生存的角色",
+            "fr": "Unités qui aideront votre équipe à survivre"
+          }
+        },
+        {
+          "characters": ["Delta", "Tamamo-no-Mae", "Viella", "Midnight Rush Skadi"],
+          "reason": {
+            "en": "Units with {B/BT_STAT|ST_COUNTER_RATE} in their kits",
+            "jp": "スキルに{B/BT_STAT|ST_COUNTER_RATE}を持つユニット",
+            "kr": "스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 가진 유닛",
+            "zh": "技能组中带有{B/BT_STAT|ST_COUNTER_RATE}的角色",
+            "fr": "Unités avec {B/BT_STAT|ST_COUNTER_RATE} dans leur kit"
+          }
+        },
+        {
+          "characters": ["Demiurge Stella", "Caren", "Kanon", "Demiurge Luna"],
+          "reason": {
+            "en": "Sturdy DPS units",
+            "jp": "耐久力のあるDPSユニット",
+            "kr": "내구성 있는 DPS 유닛",
+            "zh": "坚韧的 DPS 角色",
+            "fr": "Unités DPS résistantes"
+          }
+        },
+        {
+          "characters": ["Christina", "Demiurge Drakhan", "Hilde"],
+          "reason": {
+            "en": "Units that will help your team to survive",
+            "jp": "チームの生存に役立つユニット",
+            "kr": "팀의 생존에 도움이 되는 유닛",
+            "zh": "有助于队伍生存的角色",
+            "fr": "Unités qui aideront votre équipe à survivre"
+          }
+        },
+        {
+          "characters": ["Stella", "Demiurge Stella", "Demiurge Luna", "Demiurge Drakhan"],
+          "reason": {
+            "en": "Validate restriction.",
+            "jp": "制限を満たすこと。",
+            "kr": "제한 충족.",
+            "zh": "满足限制。",
+            "fr": "Valide la restriction."
+          }
+        },
+        {
+          "characters": ["Fran", "Delta", "Tamamo-no-Mae", "Viella", "Mero", "Midnight Rush Skadi"],
+          "reason": {
+            "en": "Units with {B/BT_STAT|ST_COUNTER_RATE} in their kits",
+            "jp": "スキルに{B/BT_STAT|ST_COUNTER_RATE}を持つユニット",
+            "kr": "스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 가진 유닛",
+            "zh": "技能组中带有{B/BT_STAT|ST_COUNTER_RATE}的角色",
+            "fr": "Unités avec {B/BT_STAT|ST_COUNTER_RATE} dans leur kit"
+          }
+        },
+        {
+          "characters": ["Caren", "Kanon"],
+          "reason": {
+            "en": "Sturdy DPS units",
+            "jp": "耐久力のあるDPSユニット",
+            "kr": "내구성 있는 DPS 유닛",
+            "zh": "坚韧的 DPS 角色",
+            "fr": "Unités DPS résistantes"
+          }
+        },
+        {
+          "characters": ["Christina", "Hilde"],
+          "reason": {
+            "en": "Units that will help your team to survive",
+            "jp": "チームの生存に役立つユニット",
+            "kr": "팀의 생존에 도움이 되는 유닛",
+            "zh": "有助于队伍生存的角色",
+            "fr": "Unités qui aideront votre équipe à survivre"
+          }
+        },
+        {
+          "characters": ["Christina", "Demiurge Drakhan", "Hilde"],
+          "reason": {
+            "en": "Validate restriction and will help your team to survive",
+            "jp": "制限を満たし、チームの生存に役立つこと",
+            "kr": "제한을 충족하고 팀의 생존에 도움이 되는 유닛",
+            "zh": "满足限制,且有助于队伍生存",
+            "fr": "Valide la restriction et aidera votre équipe à survivre"
+          }
+        },
+        {
+          "characters": [
+            "Delta",
+            "Tamamo-no-Mae",
+            "Viella",
+            "Fran",
+            "Stella",
+            "Mero",
+            "Midnight Rush Skadi"
+          ],
+          "reason": {
+            "en": "Units with {B/BT_STAT|ST_COUNTER_RATE} in their kits",
+            "jp": "スキルに{B/BT_STAT|ST_COUNTER_RATE}を持つユニット",
+            "kr": "스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 가진 유닛",
+            "zh": "技能组中带有{B/BT_STAT|ST_COUNTER_RATE}的角色",
+            "fr": "Unités avec {B/BT_STAT|ST_COUNTER_RATE} dans leur kit"
+          }
+        },
+        {
+          "characters": ["Demiurge Stella", "Caren", "Kanon", "Demiurge Luna"],
+          "reason": {
+            "en": "Sturdy DPS units",
+            "jp": "耐久力のあるDPSユニット",
+            "kr": "내구성 있는 DPS 유닛",
+            "zh": "坚韧的 DPS 角色",
+            "fr": "Unités DPS résistantes"
+          }
+        },
+        {
+          "characters": ["Viella", "Delta", "Fran"],
+          "reason": {
+            "en": "Validate restriction and {B/BT_STAT|ST_COUNTER_RATE} in their kits",
+            "jp": "制限を満たし、スキルに{B/BT_STAT|ST_COUNTER_RATE}を持つこと",
+            "kr": "제한을 충족하고 스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 보유",
+            "zh": "满足限制,且技能组中带有{B/BT_STAT|ST_COUNTER_RATE}",
+            "fr": "Valide la restriction et possède {B/BT_STAT|ST_COUNTER_RATE} dans son kit"
+          }
+        },
+        {
+          "characters": ["Tamamo-no-Mae", "Stella", "Mero", "Midnight Rush Skadi"],
+          "reason": {
+            "en": "Units with {B/BT_STAT|ST_COUNTER_RATE} in their kits",
+            "jp": "スキルに{B/BT_STAT|ST_COUNTER_RATE}を持つユニット",
+            "kr": "스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 가진 유닛",
+            "zh": "技能组中带有{B/BT_STAT|ST_COUNTER_RATE}的角色",
+            "fr": "Unités avec {B/BT_STAT|ST_COUNTER_RATE} dans leur kit"
+          }
+        },
+        {
+          "characters": ["Demiurge Stella", "Caren", "Kanon", "Demiurge Luna"],
+          "reason": {
+            "en": "Sturdy DPS units",
+            "jp": "耐久力のあるDPSユニット",
+            "kr": "내구성 있는 DPS 유닛",
+            "zh": "坚韧的 DPS 角色",
+            "fr": "Unités DPS résistantes"
+          }
+        },
+        {
+          "characters": ["Christina", "Demiurge Drakhan", "Hilde"],
+          "reason": {
+            "en": "Units that will help your team to survive",
+            "jp": "チームの生存に役立つユニット",
+            "kr": "팀의 생존에 도움이 되는 유닛",
+            "zh": "有助于队伍生存的角色",
+            "fr": "Unités qui aideront votre équipe à survivre"
+          }
+        },
+        {
+          "characters": [
+            "Tamamo-no-Mae",
+            "Stella",
+            "Mero",
+            "Viella",
+            "Delta",
+            "Fran",
+            "Midnight Rush Skadi"
+          ],
+          "reason": {
+            "en": "Units with {B/BT_STAT|ST_COUNTER_RATE} in their kits",
+            "jp": "スキルに{B/BT_STAT|ST_COUNTER_RATE}を持つユニット",
+            "kr": "스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 가진 유닛",
+            "zh": "技能组中带有{B/BT_STAT|ST_COUNTER_RATE}的角色",
+            "fr": "Unités avec {B/BT_STAT|ST_COUNTER_RATE} dans leur kit"
+          }
+        },
+        {
+          "characters": ["Demiurge Stella", "Caren", "Kanon", "Demiurge Luna"],
+          "reason": {
+            "en": "Sturdy DPS units",
+            "jp": "耐久力のあるDPSユニット",
+            "kr": "내구성 있는 DPS 유닛",
+            "zh": "坚韧的 DPS 角色",
+            "fr": "Unités DPS résistantes"
+          }
+        },
+        {
+          "characters": ["Christina", "Demiurge Drakhan", "Hilde"],
+          "reason": {
+            "en": "Units that will help your team to survive",
+            "jp": "チームの生存に役立つユニット",
+            "kr": "팀의 생존에 도움이 되는 유닛",
+            "zh": "有助于队伍生存的角色",
+            "fr": "Unités qui aideront votre équipe à survivre"
+          }
+        },
+        {
+          "characters": [
+            "Tamamo-no-Mae",
+            "Stella",
+            "Mero",
+            "Viella",
+            "Delta",
+            "Fran",
+            "Midnight Rush Skadi"
+          ],
+          "reason": {
+            "en": "Units with {B/BT_STAT|ST_COUNTER_RATE} in their kits",
+            "jp": "スキルに{B/BT_STAT|ST_COUNTER_RATE}を持つユニット",
+            "kr": "스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 가진 유닛",
+            "zh": "技能组中带有{B/BT_STAT|ST_COUNTER_RATE}的角色",
+            "fr": "Unités avec {B/BT_STAT|ST_COUNTER_RATE} dans leur kit"
+          }
+        },
+        {
+          "characters": ["Demiurge Stella", "Kanon", "Demiurge Luna"],
+          "reason": {
+            "en": "Sturdy DPS units",
+            "jp": "耐久力のあるDPSユニット",
+            "kr": "내구성 있는 DPS 유닛",
+            "zh": "坚韧的 DPS 角色",
+            "fr": "Unités DPS résistantes"
+          }
+        },
+        {
+          "characters": ["Christina", "Demiurge Drakhan", "Hilde"],
+          "reason": {
+            "en": "Units that will help your team to survive",
+            "jp": "チームの生存に役立つユニット",
+            "kr": "팀의 생존에 도움이 되는 유닛",
+            "zh": "有助于队伍生存的角色",
+            "fr": "Unités qui aideront votre équipe à survivre"
+          }
+        }
+      ]
+    },
+    {
+      "boss": "40103016",
+      "reason": [
+        {
+          "en": "Just focus main {P/Maxwell} with single target.",
+          "jp": "単体攻撃で本体の{P/Maxwell}を集中攻撃するだけです。",
+          "kr": "단일 공격으로 본체 {P/Maxwell}만 집중 공격하세요.",
+          "zh": "用单体攻击集火本体{P/Maxwell}即可。",
+          "fr": "Focus simplement le {P/Maxwell} principal en monocible."
+        }
+      ],
+      "recommended": [
+        {
+          "characters": ["Demiurge Drakhan"],
+          "reason": {
+            "en": "Validate restriction and hit hard.",
+            "jp": "制限を満たし、強力な火力で殴ること。",
+            "kr": "제한을 충족하고 강력한 화력으로 공격.",
+            "zh": "满足限制并全力输出。",
+            "fr": "Valide la restriction et tape fort."
+          }
+        },
+        {
+          "characters": ["Demiurge Astei", "Francesca"],
+          "reason": {
+            "en": "Validate restriction.",
+            "jp": "制限を満たすこと。",
+            "kr": "제한 충족.",
+            "zh": "满足限制。",
+            "fr": "Valide la restriction."
+          }
+        },
+        {
+          "characters": ["Aer"],
+          "reason": {
+            "en": "Validate restriction and hit hard.",
+            "jp": "制限を満たし、強力な火力で殴ること。",
+            "kr": "제한을 충족하고 강력한 화력으로 공격.",
+            "zh": "满足限制并全力输出。",
+            "fr": "Valide la restriction et tape fort."
+          }
+        }
+      ]
+    },
+    {
+      "boss": "40103001",
+      "reason": [
+        {
+          "en": "{B/BT_STAT|ST_BUFF_CHANCE} buffer is recommended.",
+          "jp": "{B/BT_STAT|ST_BUFF_CHANCE}バッファーが推奨されます。",
+          "kr": "{B/BT_STAT|ST_BUFF_CHANCE} 버퍼를 추천합니다.",
+          "zh": "推荐使用{B/BT_STAT|ST_BUFF_CHANCE}辅助。",
+          "fr": "Un buffer {B/BT_STAT|ST_BUFF_CHANCE} est recommandé."
+        }
+      ],
+      "recommended": [
+        {
+          "characters": ["Skadi", "Tamara", "Fran"],
+          "reason": {
+            "en": "Validate restriction and team wide {B/BT_STAT|ST_BUFF_CHANCE} buff",
+            "jp": "制限を満たし、全体への{B/BT_STAT|ST_BUFF_CHANCE}バフを持つこと",
+            "kr": "제한을 충족하고 전체 {B/BT_STAT|ST_BUFF_CHANCE} 버프 보유",
+            "zh": "满足限制并拥有全队{B/BT_STAT|ST_BUFF_CHANCE}增益",
+            "fr": "Valide la restriction et buff {B/BT_STAT|ST_BUFF_CHANCE} pour toute l'équipe"
+          }
+        },
+        {
+          "characters": ["Sterope", "Kate", "Hilde"],
+          "reason": {
+            "en": "Team wide {B/BT_STAT|ST_BUFF_CHANCE} buff",
+            "jp": "全体への{B/BT_STAT|ST_BUFF_CHANCE}バフ",
+            "kr": "전체 {B/BT_STAT|ST_BUFF_CHANCE} 버프",
+            "zh": "全队{B/BT_STAT|ST_BUFF_CHANCE}增益",
+            "fr": "Buff {B/BT_STAT|ST_BUFF_CHANCE} pour toute l'équipe"
+          }
+        },
+        {
+          "characters": ["Skadi", "Sterope", "Tamara", "Kate", "Hilde", "Fran"],
+          "reason": {
+            "en": "Team wide {B/BT_STAT|ST_BUFF_CHANCE} buff",
+            "jp": "全体への{B/BT_STAT|ST_BUFF_CHANCE}バフ",
+            "kr": "전체 {B/BT_STAT|ST_BUFF_CHANCE} 버프",
+            "zh": "全队{B/BT_STAT|ST_BUFF_CHANCE}增益",
+            "fr": "Buff {B/BT_STAT|ST_BUFF_CHANCE} pour toute l'équipe"
+          }
+        },
+        {
+          "characters": ["Kate"],
+          "reason": {
+            "en": "Validate restriction and team wide {B/BT_STAT|ST_BUFF_CHANCE} buff",
+            "jp": "制限を満たし、全体への{B/BT_STAT|ST_BUFF_CHANCE}バフを持つこと",
+            "kr": "제한을 충족하고 전체 {B/BT_STAT|ST_BUFF_CHANCE} 버프 보유",
+            "zh": "满足限制并拥有全队{B/BT_STAT|ST_BUFF_CHANCE}增益",
+            "fr": "Valide la restriction et buff {B/BT_STAT|ST_BUFF_CHANCE} pour toute l'équipe"
+          }
+        },
+        {
+          "characters": ["Skadi", "Sterope", "Tamara", "Hilde", "Fran"],
+          "reason": {
+            "en": "Team wide {B/BT_STAT|ST_BUFF_CHANCE} buff",
+            "jp": "全体への{B/BT_STAT|ST_BUFF_CHANCE}バフ",
+            "kr": "전체 {B/BT_STAT|ST_BUFF_CHANCE} 버프",
+            "zh": "全队{B/BT_STAT|ST_BUFF_CHANCE}增益",
+            "fr": "Buff {B/BT_STAT|ST_BUFF_CHANCE} pour toute l'équipe"
+          }
+        },
+        {
+          "characters": ["Skadi", "Sterope", "Tamara", "Hilde", "Fran"],
+          "reason": {
+            "en": "Team wide {B/BT_STAT|ST_BUFF_CHANCE} buff",
+            "jp": "全体への{B/BT_STAT|ST_BUFF_CHANCE}バフ",
+            "kr": "전체 {B/BT_STAT|ST_BUFF_CHANCE} 버프",
+            "zh": "全队{B/BT_STAT|ST_BUFF_CHANCE}增益",
+            "fr": "Buff {B/BT_STAT|ST_BUFF_CHANCE} pour toute l'équipe"
+          }
+        },
+        {
+          "characters": ["Skadi", "Sterope", "Tamara", "Kate", "Hilde", "Fran"],
+          "reason": {
+            "en": "Team wide {B/BT_STAT|ST_BUFF_CHANCE} buff",
+            "jp": "全体への{B/BT_STAT|ST_BUFF_CHANCE}バフ",
+            "kr": "전체 {B/BT_STAT|ST_BUFF_CHANCE} 버프",
+            "zh": "全队{B/BT_STAT|ST_BUFF_CHANCE}增益",
+            "fr": "Buff {B/BT_STAT|ST_BUFF_CHANCE} pour toute l'équipe"
+          }
+        },
+        {
+          "characters": ["Skadi", "Sterope", "Tamara", "Kate", "Hilde", "Fran"],
+          "reason": {
+            "en": "Team wide {B/BT_STAT|ST_BUFF_CHANCE} buff",
+            "jp": "全体への{B/BT_STAT|ST_BUFF_CHANCE}バフ",
+            "kr": "전체 {B/BT_STAT|ST_BUFF_CHANCE} 버프",
+            "zh": "全队{B/BT_STAT|ST_BUFF_CHANCE}增益",
+            "fr": "Buff {B/BT_STAT|ST_BUFF_CHANCE} pour toute l'équipe"
+          }
+        },
+        {
+          "characters": ["Kate"],
+          "reason": {
+            "en": "Validate restriction and team wide {B/BT_STAT|ST_BUFF_CHANCE} buff",
+            "jp": "制限を満たし、全体への{B/BT_STAT|ST_BUFF_CHANCE}バフを持つこと",
+            "kr": "제한을 충족하고 전체 {B/BT_STAT|ST_BUFF_CHANCE} 버프 보유",
+            "zh": "满足限制并拥有全队{B/BT_STAT|ST_BUFF_CHANCE}增益",
+            "fr": "Valide la restriction et buff {B/BT_STAT|ST_BUFF_CHANCE} pour toute l'équipe"
+          }
+        },
+        {
+          "characters": ["Skadi", "Sterope", "Tamara", "Hilde", "Fran"],
+          "reason": {
+            "en": "Team wide {B/BT_STAT|ST_BUFF_CHANCE} buff",
+            "jp": "全体への{B/BT_STAT|ST_BUFF_CHANCE}バフ",
+            "kr": "전체 {B/BT_STAT|ST_BUFF_CHANCE} 버프",
+            "zh": "全队{B/BT_STAT|ST_BUFF_CHANCE}增益",
+            "fr": "Buff {B/BT_STAT|ST_BUFF_CHANCE} pour toute l'équipe"
+          }
+        },
+        {
+          "characters": ["Skadi", "Sterope", "Tamara", "Kate", "Hilde", "Fran"],
+          "reason": {
+            "en": "Team wide {B/BT_STAT|ST_BUFF_CHANCE} buff",
+            "jp": "全体への{B/BT_STAT|ST_BUFF_CHANCE}バフ",
+            "kr": "전체 {B/BT_STAT|ST_BUFF_CHANCE} 버프",
+            "zh": "全队{B/BT_STAT|ST_BUFF_CHANCE}增益",
+            "fr": "Buff {B/BT_STAT|ST_BUFF_CHANCE} pour toute l'équipe"
+          }
+        },
+        {
+          "characters": ["Sterope", "Kate", "Hilde", "Tamara", "Fran"],
+          "reason": {
+            "en": "Team wide {B/BT_STAT|ST_BUFF_CHANCE} buff",
+            "jp": "全体への{B/BT_STAT|ST_BUFF_CHANCE}バフ",
+            "kr": "전체 {B/BT_STAT|ST_BUFF_CHANCE} 버프",
+            "zh": "全队{B/BT_STAT|ST_BUFF_CHANCE}增益",
+            "fr": "Buff {B/BT_STAT|ST_BUFF_CHANCE} pour toute l'équipe"
+          }
+        }
+      ]
+    },
+    {
+      "boss": "40103015",
+      "reason": [
+        {
+          "en": "No crit builds or {B/HEAVY_STRIKE} unless you can endure the passive and brute force it.",
+          "jp": "パッシブに耐えて力押しできない限り、クリティカルビルドや{B/HEAVY_STRIKE}は避けましょう。",
+          "kr": "패시브를 견디고 힘으로 밀어붙일 수 있는 게 아니라면 치명타 빌드나 {B/HEAVY_STRIKE}는 피하세요.",
+          "zh": "除非你能扛住被动并强行通关,否则不要使用暴击流或{B/HEAVY_STRIKE}。",
+          "fr": "Pas de builds crit ni de {B/HEAVY_STRIKE}, sauf si vous pouvez encaisser la passive et la passer en force brute."
+        },
+        {
+          "en": "{D/BT_SEALED_RECEIVE_HEAL} is your friend.",
+          "jp": "{D/BT_SEALED_RECEIVE_HEAL}が頼りになります。",
+          "kr": "{D/BT_SEALED_RECEIVE_HEAL}이 큰 도움이 됩니다.",
+          "zh": "{D/BT_SEALED_RECEIVE_HEAL}是你的好帮手。",
+          "fr": "{D/BT_SEALED_RECEIVE_HEAL} est votre ami."
+        }
+      ],
+      "recommended": [
+        {
+          "characters": ["Gnosis Nella", "Kitsune of Eternity Tamamo-no-Mae", "Rhona"],
+          "reason": {
+            "en": "{B/HEAVY_STRIKE} units.",
+            "jp": "{B/HEAVY_STRIKE}ユニット。",
+            "kr": "{B/HEAVY_STRIKE} 유닛.",
+            "zh": "{B/HEAVY_STRIKE}角色。",
+            "fr": "Unités {B/HEAVY_STRIKE}."
+          }
+        },
+        {
+          "characters": ["Edelweiss", "Eternal", "Fortuna"],
+          "reason": {
+            "en": "{D/BT_SEALED_RECEIVE_HEAL} options.",
+            "jp": "{D/BT_SEALED_RECEIVE_HEAL}オプション。",
+            "kr": "{D/BT_SEALED_RECEIVE_HEAL} 옵션.",
+            "zh": "{D/BT_SEALED_RECEIVE_HEAL}选项。",
+            "fr": "Options {D/BT_SEALED_RECEIVE_HEAL}."
+          }
+        },
+        {
+          "characters": ["Demiurge Vlada", "Sterope"],
+          "reason": {
+            "en": "Validate restriction and have {D/BT_SEALED_RECEIVE_HEAL}.",
+            "jp": "制限を満たし、{D/BT_SEALED_RECEIVE_HEAL}を持つこと。",
+            "kr": "제한을 충족하고 {D/BT_SEALED_RECEIVE_HEAL}을 보유.",
+            "zh": "满足限制并拥有{D/BT_SEALED_RECEIVE_HEAL}。",
+            "fr": "Valide la restriction et possède {D/BT_SEALED_RECEIVE_HEAL}."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Kitsune of Eternity Tamamo-no-Mae", "Rhona"],
+          "reason": {
+            "en": "{B/HEAVY_STRIKE} units.",
+            "jp": "{B/HEAVY_STRIKE}ユニット。",
+            "kr": "{B/HEAVY_STRIKE} 유닛.",
+            "zh": "{B/HEAVY_STRIKE}角色。",
+            "fr": "Unités {B/HEAVY_STRIKE}."
+          }
+        },
+        {
+          "characters": ["Edelweiss", "Eternal", "Fortuna"],
+          "reason": {
+            "en": "{D/BT_SEALED_RECEIVE_HEAL} options.",
+            "jp": "{D/BT_SEALED_RECEIVE_HEAL}オプション。",
+            "kr": "{D/BT_SEALED_RECEIVE_HEAL} 옵션.",
+            "zh": "{D/BT_SEALED_RECEIVE_HEAL}选项。",
+            "fr": "Options {D/BT_SEALED_RECEIVE_HEAL}."
+          }
+        },
+        {
+          "characters": ["Rhona"],
+          "reason": {
+            "en": "{B/HEAVY_STRIKE} units.",
+            "jp": "{B/HEAVY_STRIKE}ユニット。",
+            "kr": "{B/HEAVY_STRIKE} 유닛.",
+            "zh": "{B/HEAVY_STRIKE}角色。",
+            "fr": "Unités {B/HEAVY_STRIKE}."
+          }
+        },
+        {
+          "characters": ["Demiurge Vlada", "Edelweiss", "Sterope"],
+          "reason": {
+            "en": "{D/BT_SEALED_RECEIVE_HEAL} options.",
+            "jp": "{D/BT_SEALED_RECEIVE_HEAL}オプション。",
+            "kr": "{D/BT_SEALED_RECEIVE_HEAL} 옵션.",
+            "zh": "{D/BT_SEALED_RECEIVE_HEAL}选项。",
+            "fr": "Options {D/BT_SEALED_RECEIVE_HEAL}."
+          }
+        },
+        {
+          "characters": ["Edelweiss", "Fortuna"],
+          "reason": {
+            "en": "Validate restriction and have {D/BT_SEALED_RECEIVE_HEAL}.",
+            "jp": "制限を満たし、{D/BT_SEALED_RECEIVE_HEAL}を持つこと。",
+            "kr": "제한을 충족하고 {D/BT_SEALED_RECEIVE_HEAL}을 보유.",
+            "zh": "满足限制并拥有{D/BT_SEALED_RECEIVE_HEAL}。",
+            "fr": "Valide la restriction et possède {D/BT_SEALED_RECEIVE_HEAL}."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Kitsune of Eternity Tamamo-no-Mae", "Rhona"],
+          "reason": {
+            "en": "{B/HEAVY_STRIKE} units.",
+            "jp": "{B/HEAVY_STRIKE}ユニット。",
+            "kr": "{B/HEAVY_STRIKE} 유닛.",
+            "zh": "{B/HEAVY_STRIKE}角色。",
+            "fr": "Unités {B/HEAVY_STRIKE}."
+          }
+        },
+        {
+          "characters": ["Demiurge Vlada", "Eternal", "Sterope"],
+          "reason": {
+            "en": "{D/BT_SEALED_RECEIVE_HEAL} options.",
+            "jp": "{D/BT_SEALED_RECEIVE_HEAL}オプション。",
+            "kr": "{D/BT_SEALED_RECEIVE_HEAL} 옵션.",
+            "zh": "{D/BT_SEALED_RECEIVE_HEAL}选项。",
+            "fr": "Options {D/BT_SEALED_RECEIVE_HEAL}."
+          }
+        },
+        {
+          "characters": ["Rhona"],
+          "reason": {
+            "en": "{B/HEAVY_STRIKE} unit and validate restriction.",
+            "jp": "{B/HEAVY_STRIKE}ユニットで制限を満たすこと。",
+            "kr": "{B/HEAVY_STRIKE} 유닛으로 제한 충족.",
+            "zh": "{B/HEAVY_STRIKE}角色并满足限制。",
+            "fr": "Unité {B/HEAVY_STRIKE} et valide la restriction."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Kitsune of Eternity Tamamo-no-Mae"],
+          "reason": {
+            "en": "{B/HEAVY_STRIKE} units.",
+            "jp": "{B/HEAVY_STRIKE}ユニット。",
+            "kr": "{B/HEAVY_STRIKE} 유닛.",
+            "zh": "{B/HEAVY_STRIKE}角色。",
+            "fr": "Unités {B/HEAVY_STRIKE}."
+          }
+        },
+        {
+          "characters": ["Edelweiss", "Eternal", "Fortuna", "Demiurge Vlada", "Sterope"],
+          "reason": {
+            "en": "{D/BT_SEALED_RECEIVE_HEAL} options.",
+            "jp": "{D/BT_SEALED_RECEIVE_HEAL}オプション。",
+            "kr": "{D/BT_SEALED_RECEIVE_HEAL} 옵션.",
+            "zh": "{D/BT_SEALED_RECEIVE_HEAL}选项。",
+            "fr": "Options {D/BT_SEALED_RECEIVE_HEAL}."
+          }
+        },
+        {
+          "characters": ["Kitsune of Eternity Tamamo-no-Mae", "Gnosis Nella"],
+          "reason": {
+            "en": "{B/HEAVY_STRIKE} unit and validate restriction.",
+            "jp": "{B/HEAVY_STRIKE}ユニットで制限を満たすこと。",
+            "kr": "{B/HEAVY_STRIKE} 유닛으로 제한 충족.",
+            "zh": "{B/HEAVY_STRIKE}角色并满足限制。",
+            "fr": "Unité {B/HEAVY_STRIKE} et valide la restriction."
+          }
+        },
+        {
+          "characters": ["Fortuna", "Eternal"],
+          "reason": {
+            "en": "Validate restriction and have {D/BT_SEALED_RECEIVE_HEAL}.",
+            "jp": "制限を満たし、{D/BT_SEALED_RECEIVE_HEAL}を持つこと。",
+            "kr": "제한을 충족하고 {D/BT_SEALED_RECEIVE_HEAL}을 보유.",
+            "zh": "满足限制并拥有{D/BT_SEALED_RECEIVE_HEAL}。",
+            "fr": "Valide la restriction et possède {D/BT_SEALED_RECEIVE_HEAL}."
+          }
+        },
+        {
+          "characters": ["Rhona"],
+          "reason": {
+            "en": "{B/HEAVY_STRIKE} units.",
+            "jp": "{B/HEAVY_STRIKE}ユニット。",
+            "kr": "{B/HEAVY_STRIKE} 유닛.",
+            "zh": "{B/HEAVY_STRIKE}角色。",
+            "fr": "Unités {B/HEAVY_STRIKE}."
+          }
+        },
+        {
+          "characters": ["Demiurge Vlada", "Edelweiss", "Sterope"],
+          "reason": {
+            "en": "{D/BT_SEALED_RECEIVE_HEAL} options.",
+            "jp": "{D/BT_SEALED_RECEIVE_HEAL}オプション。",
+            "kr": "{D/BT_SEALED_RECEIVE_HEAL} 옵션.",
+            "zh": "{D/BT_SEALED_RECEIVE_HEAL}选项。",
+            "fr": "Options {D/BT_SEALED_RECEIVE_HEAL}."
+          }
+        },
+        {
+          "characters": ["K"],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP}, {D/BT_REMOVE_BUFF} and validate the restriction.",
+            "jp": "",
+            "kr": "",
+            "zh": "",
+            "fr": "{B/BT_CALL_BACKUP}, {D/BT_REMOVE_BUFF} et valide la restriction."
+          }
+        },
+        {
+          "characters": ["Edelweiss", "Eternal", "Fortuna", "Demiurge Vlada", "Sterope"],
+          "reason": {
+            "en": "{D/BT_SEALED_RECEIVE_HEAL} options.",
+            "jp": "{D/BT_SEALED_RECEIVE_HEAL}オプション。",
+            "kr": "{D/BT_SEALED_RECEIVE_HEAL} 옵션.",
+            "zh": "{D/BT_SEALED_RECEIVE_HEAL}选项。",
+            "fr": "Options {D/BT_SEALED_RECEIVE_HEAL}."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Kitsune of Eternity Tamamo-no-Mae", "Rhona"],
+          "reason": {
+            "en": "{B/HEAVY_STRIKE} units.",
+            "jp": "{B/HEAVY_STRIKE}ユニット。",
+            "kr": "{B/HEAVY_STRIKE} 유닛.",
+            "zh": "{B/HEAVY_STRIKE}角色。",
+            "fr": "Unités {B/HEAVY_STRIKE}."
+          }
+        }
+      ]
+    },
+    {
+      "boss": "40103011",
+      "reason": [
+        {
+          "en": "{D/BT_SILENCE} or {D/BT_SEALED_RESURRECTION} {P/Kuro} in order to prevent her from reviving.",
+          "jp": "{P/Kuro}の復活を防ぐため、{D/BT_SILENCE}または{D/BT_SEALED_RESURRECTION}を付与しましょう。",
+          "kr": "{P/Kuro}의 부활을 막기 위해 {D/BT_SILENCE} 또는 {D/BT_SEALED_RESURRECTION}을 부여하세요.",
+          "zh": "对{P/Kuro}施加{D/BT_SILENCE}或{D/BT_SEALED_RESURRECTION}以阻止其复活。",
+          "fr": "{D/BT_SILENCE} ou {D/BT_SEALED_RESURRECTION} sur {P/Kuro} pour l'empêcher de ressusciter."
+        }
+      ],
+      "recommended": [
+        {
+          "characters": ["Primine", "Tamara", "Fatal"],
+          "reason": {
+            "en": "Validate restriction and have either {D/BT_SILENCE} or {D/BT_SEALED_RESURRECTION}",
+            "jp": "制限を満たし、{D/BT_SILENCE}か{D/BT_SEALED_RESURRECTION}のいずれかを持つこと",
+            "kr": "제한을 충족하고 {D/BT_SILENCE} 또는 {D/BT_SEALED_RESURRECTION} 중 하나를 보유",
+            "zh": "满足限制,并拥有{D/BT_SILENCE}或{D/BT_SEALED_RESURRECTION}",
+            "fr": "Valide la restriction et possède soit {D/BT_SILENCE}, soit {D/BT_SEALED_RESURRECTION}"
+          }
+        },
+        {
+          "characters": ["Dolly"],
+          "reason": {
+            "en": "{D/BT_SILENCE} options.",
+            "jp": "{D/BT_SILENCE}オプション。",
+            "kr": "{D/BT_SILENCE} 옵션.",
+            "zh": "{D/BT_SILENCE}选项。",
+            "fr": "Options {D/BT_SILENCE}."
+          }
+        },
+        {
+          "characters": ["Demiurge Drakhan"],
+          "reason": {
+            "en": "{D/BT_SEALED_RESURRECTION} options.",
+            "jp": "{D/BT_SEALED_RESURRECTION}オプション。",
+            "kr": "{D/BT_SEALED_RESURRECTION} 옵션.",
+            "zh": "{D/BT_SEALED_RESURRECTION}选项。",
+            "fr": "Options {D/BT_SEALED_RESURRECTION}."
+          }
+        },
+        {
+          "characters": ["Primine", "Tamara"],
+          "reason": {
+            "en": "{D/BT_SILENCE} options.",
+            "jp": "{D/BT_SILENCE}オプション。",
+            "kr": "{D/BT_SILENCE} 옵션.",
+            "zh": "{D/BT_SILENCE}选项。",
+            "fr": "Options {D/BT_SILENCE}."
+          }
+        },
+        {
+          "characters": ["Demiurge Drakhan", "Fatal"],
+          "reason": {
+            "en": "{D/BT_SEALED_RESURRECTION} options.",
+            "jp": "{D/BT_SEALED_RESURRECTION}オプション。",
+            "kr": "{D/BT_SEALED_RESURRECTION} 옵션.",
+            "zh": "{D/BT_SEALED_RESURRECTION}选项。",
+            "fr": "Options {D/BT_SEALED_RESURRECTION}."
+          }
+        },
+        {
+          "characters": ["Primine", "Tamara"],
+          "reason": {
+            "en": "{D/BT_SILENCE} options.",
+            "jp": "{D/BT_SILENCE}オプション。",
+            "kr": "{D/BT_SILENCE} 옵션.",
+            "zh": "{D/BT_SILENCE}选项。",
+            "fr": "Options {D/BT_SILENCE}."
+          }
+        },
+        {
+          "characters": ["Demiurge Drakhan", "Fatal"],
+          "reason": {
+            "en": "{D/BT_SEALED_RESURRECTION} options.",
+            "jp": "{D/BT_SEALED_RESURRECTION}オプション。",
+            "kr": "{D/BT_SEALED_RESURRECTION} 옵션.",
+            "zh": "{D/BT_SEALED_RESURRECTION}选项。",
+            "fr": "Options {D/BT_SEALED_RESURRECTION}."
+          }
+        },
+        {
+          "characters": ["Demiurge Drakhan"],
+          "reason": {
+            "en": "Validate restriction and have {D/BT_SEALED_RESURRECTION}",
+            "jp": "制限を満たし、{D/BT_SEALED_RESURRECTION}を持つこと",
+            "kr": "제한을 충족하고 {D/BT_SEALED_RESURRECTION}을 보유",
+            "zh": "满足限制并拥有{D/BT_SEALED_RESURRECTION}",
+            "fr": "Valide la restriction et possède {D/BT_SEALED_RESURRECTION}"
+          }
+        },
+        {
+          "characters": ["Dolly", "Primine", "Tamara"],
+          "reason": {
+            "en": "{D/BT_SILENCE} options.",
+            "jp": "{D/BT_SILENCE}オプション。",
+            "kr": "{D/BT_SILENCE} 옵션.",
+            "zh": "{D/BT_SILENCE}选项。",
+            "fr": "Options {D/BT_SILENCE}."
+          }
+        },
+        {
+          "characters": ["Fatal"],
+          "reason": {
+            "en": "{D/BT_SEALED_RESURRECTION} options.",
+            "jp": "{D/BT_SEALED_RESURRECTION}オプション。",
+            "kr": "{D/BT_SEALED_RESURRECTION} 옵션.",
+            "zh": "{D/BT_SEALED_RESURRECTION}选项。",
+            "fr": "Options {D/BT_SEALED_RESURRECTION}."
+          }
+        },
+        {
+          "characters": ["Dolly", "Primine", "Tamara"],
+          "reason": {
+            "en": "{D/BT_SILENCE} options.",
+            "jp": "{D/BT_SILENCE}オプション。",
+            "kr": "{D/BT_SILENCE} 옵션.",
+            "zh": "{D/BT_SILENCE}选项。",
+            "fr": "Options {D/BT_SILENCE}."
+          }
+        },
+        {
+          "characters": ["Demiurge Drakhan", "Fatal"],
+          "reason": {
+            "en": "{D/BT_SEALED_RESURRECTION} options.",
+            "jp": "{D/BT_SEALED_RESURRECTION}オプション。",
+            "kr": "{D/BT_SEALED_RESURRECTION} 옵션.",
+            "zh": "{D/BT_SEALED_RESURRECTION}选项。",
+            "fr": "Options {D/BT_SEALED_RESURRECTION}."
+          }
+        },
+        {
+          "characters": ["Dolly"],
+          "reason": {
+            "en": "Validate restriction and have {D/BT_SILENCE}",
+            "jp": "制限を満たし、{D/BT_SILENCE}を持つこと",
+            "kr": "제한을 충족하고 {D/BT_SILENCE}을 보유",
+            "zh": "满足限制,并拥有{D/BT_SILENCE}",
+            "fr": "Valide la restriction et possède {D/BT_SILENCE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Drakhan", "Fatal"],
+          "reason": {
+            "en": "{D/BT_SEALED_RESURRECTION} options.",
+            "jp": "{D/BT_SEALED_RESURRECTION}オプション。",
+            "kr": "{D/BT_SEALED_RESURRECTION} 옵션.",
+            "zh": "{D/BT_SEALED_RESURRECTION}选项。",
+            "fr": "Options {D/BT_SEALED_RESURRECTION}."
+          }
+        },
+        {
+          "characters": ["Primine", "Tamara"],
+          "reason": {
+            "en": "{D/BT_SILENCE} options.",
+            "jp": "{D/BT_SILENCE}オプション。",
+            "kr": "{D/BT_SILENCE} 옵션.",
+            "zh": "{D/BT_SILENCE}选项。",
+            "fr": "Options {D/BT_SILENCE}."
+          }
+        }
+      ]
+    },
+    {
+      "boss": "40103008",
+      "reason": [
+        {
+          "en": "Two way to handle the fight :",
+          "jp": "この戦闘を攻略する2つの方法：",
+          "kr": "이 전투를 공략하는 2가지 방법:",
+          "zh": "应对此战斗的 2 种方法：",
+          "fr": "Deux façons d'aborder le combat :"
+        },
+        {
+          "en": "Max speed {C/Ranger} to {D/BT_SILENCE} or {D/BT_SEALED}.",
+          "jp": "最大速度の{C/Ranger}で{D/BT_SILENCE}または{D/BT_SEALED}を付与。",
+          "kr": "최대 속도의 {C/Ranger}로 {D/BT_SILENCE} 또는 {D/BT_SEALED}를 부여.",
+          "zh": "最大速度的{C/Ranger}施加{D/BT_SILENCE}或{D/BT_SEALED}。",
+          "fr": "{C/Ranger} en speed max pour {D/BT_SILENCE} ou {D/BT_SEALED}."
+        },
+        {
+          "en": "Hard CC lock.",
+          "jp": "強力なCCでロック。",
+          "kr": "강력한 CC 락.",
+          "zh": "强控锁定。",
+          "fr": "Verrouillage en hard CC."
+        }
+      ],
+      "recommended": [
+        {
+          "characters": ["Akari", "Tamara"],
+          "reason": {
+            "en": "{C/Ranger} with {D/BT_SEALED} or {D/BT_SILENCE}.",
+            "jp": "{D/BT_SEALED}または{D/BT_SILENCE}を持つ{C/Ranger}。",
+            "kr": "{D/BT_SEALED} 또는 {D/BT_SILENCE}을 가진 {C/Ranger}.",
+            "zh": "拥有{D/BT_SEALED}或{D/BT_SILENCE}的{C/Ranger}。",
+            "fr": "{C/Ranger} avec {D/BT_SEALED} ou {D/BT_SILENCE}."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Gnosis Viella", "Iota", "Rico"],
+          "reason": {
+            "en": "100% {D/BT_STUN} options",
+            "jp": "100% {D/BT_STUN}オプション",
+            "kr": "100% {D/BT_STUN} 옵션",
+            "zh": "100% {D/BT_STUN}选项",
+            "fr": "Options {D/BT_STUN} 100%"
+          }
+        },
+        {
+          "characters": ["Monad Iota", "Core Fusion Snow", "Dahlia", "Fortuna"],
+          "reason": {
+            "en": "Other hard CC options",
+            "jp": "その他の強力なCCオプション",
+            "kr": "기타 강력한 CC 옵션",
+            "zh": "其他强控选项",
+            "fr": "Autres options de hard CC"
+          }
+        },
+        {
+          "characters": ["Akari", "Tamara"],
+          "reason": {
+            "en": "{C/Ranger} with {D/BT_SEALED} or {D/BT_SILENCE}.",
+            "jp": "{D/BT_SEALED}または{D/BT_SILENCE}を持つ{C/Ranger}。",
+            "kr": "{D/BT_SEALED} 또는 {D/BT_SILENCE}을 가진 {C/Ranger}.",
+            "zh": "拥有{D/BT_SEALED}或{D/BT_SILENCE}的{C/Ranger}。",
+            "fr": "{C/Ranger} avec {D/BT_SEALED} ou {D/BT_SILENCE}."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Gnosis Viella", "Iota", "Rico"],
+          "reason": {
+            "en": "100% {D/BT_STUN} options",
+            "jp": "100% {D/BT_STUN}オプション",
+            "kr": "100% {D/BT_STUN} 옵션",
+            "zh": "100% {D/BT_STUN}选项",
+            "fr": "Options {D/BT_STUN} 100%"
+          }
+        },
+        {
+          "characters": ["Monad Iota", "Core Fusion Snow", "Dahlia", "Fortuna", "Primine"],
+          "reason": {
+            "en": "Other hard CC options",
+            "jp": "その他の強力なCCオプション",
+            "kr": "기타 강력한 CC 옵션",
+            "zh": "其他强控选项",
+            "fr": "Autres options de hard CC"
+          }
+        },
+        {
+          "characters": ["Akari", "Tamara"],
+          "reason": {
+            "en": "{C/Ranger} with {D/BT_SEALED} or {D/BT_SILENCE}.",
+            "jp": "{D/BT_SEALED}または{D/BT_SILENCE}を持つ{C/Ranger}。",
+            "kr": "{D/BT_SEALED} 또는 {D/BT_SILENCE}을 가진 {C/Ranger}.",
+            "zh": "拥有{D/BT_SEALED}或{D/BT_SILENCE}的{C/Ranger}。",
+            "fr": "{C/Ranger} avec {D/BT_SEALED} ou {D/BT_SILENCE}."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Gnosis Viella", "Iota", "Rico"],
+          "reason": {
+            "en": "100% {D/BT_STUN} options",
+            "jp": "100% {D/BT_STUN}オプション",
+            "kr": "100% {D/BT_STUN} 옵션",
+            "zh": "100% {D/BT_STUN}选项",
+            "fr": "Options {D/BT_STUN} 100%"
+          }
+        },
+        {
+          "characters": ["Monad Iota", "Core Fusion Snow", "Dahlia", "Fortuna", "Primine"],
+          "reason": {
+            "en": "Other hard CC options",
+            "jp": "その他の強力なCCオプション",
+            "kr": "기타 강력한 CC 옵션",
+            "zh": "其他强控选项",
+            "fr": "Autres options de hard CC"
+          }
+        },
+        {
+          "characters": ["Akari", "Tamara"],
+          "reason": {
+            "en": "{C/Ranger} with {D/BT_SEALED} or {D/BT_SILENCE}.",
+            "jp": "{D/BT_SEALED}または{D/BT_SILENCE}を持つ{C/Ranger}。",
+            "kr": "{D/BT_SEALED} 또는 {D/BT_SILENCE}을 가진 {C/Ranger}.",
+            "zh": "拥有{D/BT_SEALED}或{D/BT_SILENCE}的{C/Ranger}。",
+            "fr": "{C/Ranger} avec {D/BT_SEALED} ou {D/BT_SILENCE}."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Gnosis Viella", "Iota", "Rico"],
+          "reason": {
+            "en": "100% {D/BT_STUN} options",
+            "jp": "100% {D/BT_STUN}オプション",
+            "kr": "100% {D/BT_STUN} 옵션",
+            "zh": "100% {D/BT_STUN}选项",
+            "fr": "Options {D/BT_STUN} 100%"
+          }
+        },
+        {
+          "characters": ["Monad Iota", "Core Fusion Snow", "Dahlia", "Fortuna", "Primine"],
+          "reason": {
+            "en": "Other hard CC options",
+            "jp": "その他の強力なCCオプション",
+            "kr": "기타 강력한 CC 옵션",
+            "zh": "其他强控选项",
+            "fr": "Autres options de hard CC"
+          }
+        },
+        {
+          "characters": ["Akari", "Tamara"],
+          "reason": {
+            "en": "{C/Ranger} with {D/BT_SEALED} or {D/BT_SILENCE}.",
+            "jp": "{D/BT_SEALED}または{D/BT_SILENCE}を持つ{C/Ranger}。",
+            "kr": "{D/BT_SEALED} 또는 {D/BT_SILENCE}을 가진 {C/Ranger}.",
+            "zh": "拥有{D/BT_SEALED}或{D/BT_SILENCE}的{C/Ranger}。",
+            "fr": "{C/Ranger} avec {D/BT_SEALED} ou {D/BT_SILENCE}."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Gnosis Viella", "Iota", "Rico"],
+          "reason": {
+            "en": "100% {D/BT_STUN} options",
+            "jp": "100% {D/BT_STUN}オプション",
+            "kr": "100% {D/BT_STUN} 옵션",
+            "zh": "100% {D/BT_STUN}选项",
+            "fr": "Options {D/BT_STUN} 100%"
+          }
+        },
+        {
+          "characters": ["Monad Iota", "Core Fusion Snow", "Dahlia", "Fortuna", "Primine"],
+          "reason": {
+            "en": "Other hard CC options",
+            "jp": "その他の強力なCCオプション",
+            "kr": "기타 강력한 CC 옵션",
+            "zh": "其他强控选项",
+            "fr": "Autres options de hard CC"
+          }
+        },
+        {
+          "characters": ["Akari", "Tamara", "Monad Iota", "Core Fusion Snow", "Rico"],
+          "reason": {
+            "en": "Validate restriction.",
+            "jp": "制限を満たすこと。",
+            "kr": "제한 충족.",
+            "zh": "满足限制。",
+            "fr": "Valide la restriction."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Gnosis Viella", "Iota"],
+          "reason": {
+            "en": "100% {D/BT_STUN} options",
+            "jp": "100% {D/BT_STUN}オプション",
+            "kr": "100% {D/BT_STUN} 옵션",
+            "zh": "100% {D/BT_STUN}选项",
+            "fr": "Options {D/BT_STUN} 100%"
+          }
+        },
+        {
+          "characters": ["Dahlia", "Fortuna", "Primine"],
+          "reason": {
+            "en": "Other hard CC options",
+            "jp": "その他の強力なCCオプション",
+            "kr": "기타 강력한 CC 옵션",
+            "zh": "其他强控选项",
+            "fr": "Autres options de hard CC"
+          }
+        },
+        {
+          "characters": ["Tamara"],
+          "reason": {
+            "en": "{C/Ranger} with {D/BT_SEALED} or {D/BT_SILENCE}.",
+            "jp": "{D/BT_SEALED}または{D/BT_SILENCE}を持つ{C/Ranger}。",
+            "kr": "{D/BT_SEALED} 또는 {D/BT_SILENCE}을 가진 {C/Ranger}.",
+            "zh": "拥有{D/BT_SEALED}或{D/BT_SILENCE}的{C/Ranger}。",
+            "fr": "{C/Ranger} avec {D/BT_SEALED} ou {D/BT_SILENCE}."
+          }
+        },
+        {
+          "characters": ["Gnosis Viella", "Iota", "Rico"],
+          "reason": {
+            "en": "100% {D/BT_STUN} options",
+            "jp": "100% {D/BT_STUN}オプション",
+            "kr": "100% {D/BT_STUN} 옵션",
+            "zh": "100% {D/BT_STUN}选项",
+            "fr": "Options {D/BT_STUN} 100%"
+          }
+        },
+        {
+          "characters": ["Monad Iota", "Core Fusion Snow", "Dahlia", "Fortuna", "Primine"],
+          "reason": {
+            "en": "Other hard CC options",
+            "jp": "その他の強力なCCオプション",
+            "kr": "기타 강력한 CC 옵션",
+            "zh": "其他强控选项",
+            "fr": "Autres options de hard CC"
+          }
+        },
+        {
+          "characters": ["Akari", "Tamara"],
+          "reason": {
+            "en": "{C/Ranger} with {D/BT_SEALED} or {D/BT_SILENCE}.",
+            "jp": "{D/BT_SEALED}または{D/BT_SILENCE}を持つ{C/Ranger}。",
+            "kr": "{D/BT_SEALED} 또는 {D/BT_SILENCE}을 가진 {C/Ranger}.",
+            "zh": "拥有{D/BT_SEALED}或{D/BT_SILENCE}的{C/Ranger}。",
+            "fr": "{C/Ranger} avec {D/BT_SEALED} ou {D/BT_SILENCE}."
+          }
+        },
+        {
+          "characters": ["Gnosis Nella", "Iota", "Rico"],
+          "reason": {
+            "en": "100% {D/BT_STUN} options",
+            "jp": "100% {D/BT_STUN}オプション",
+            "kr": "100% {D/BT_STUN} 옵션",
+            "zh": "100% {D/BT_STUN}选项",
+            "fr": "Options {D/BT_STUN} 100%"
+          }
+        },
+        {
+          "characters": ["Monad Iota", "Core Fusion Snow", "Dahlia", "Fortuna", "Primine"],
+          "reason": {
+            "en": "Other hard CC options",
+            "jp": "その他の強力なCCオプション",
+            "kr": "기타 강력한 CC 옵션",
+            "zh": "其他强控选项",
+            "fr": "Autres options de hard CC"
+          }
+        },
+        {
+          "characters": ["Gnosis Viella"],
+          "reason": {
+            "en": "Validate restriction.",
+            "jp": "制限を満たすこと。",
+            "kr": "제한 충족.",
+            "zh": "满足限制。",
+            "fr": "Valide la restriction."
+          }
+        }
+      ]
+    },
+    {
+      "boss": "40103007",
+      "reason": [
+        {
+          "en": "Just go nuclear on her and bring your strongest DPS units.",
+          "jp": "最強のDPSユニットで一気に叩きましょう。",
+          "kr": "가장 강력한 DPS 유닛으로 한 번에 폭딜하세요.",
+          "zh": "带上最强的 DPS 角色全力轰杀她。",
+          "fr": "Lâchez tout sur elle et emmenez vos unités DPS les plus puissantes."
+        },
+        {
+          "en": "If she manages to heal herself too much you can utilize {D/BT_DOT_BLEED}.",
+          "jp": "彼女の自己回復が多すぎる場合は、{D/BT_DOT_BLEED}を活用できます。",
+          "kr": "그녀가 자가 회복을 너무 많이 하면 {D/BT_DOT_BLEED}를 활용할 수 있습니다.",
+          "zh": "如果她自我治疗过多,可以使用{D/BT_DOT_BLEED}。",
+          "fr": "Si elle parvient à trop se soigner, vous pouvez utiliser {D/BT_DOT_BLEED}."
+        }
+      ],
+      "recommended": [
+        {
+          "characters": ["Eliza"],
+          "reason": {
+            "en": "Validate restriction and have {D/BT_DOT_BLEED}.",
+            "jp": "制限を満たし、{D/BT_DOT_BLEED}を持つこと。",
+            "kr": "제한을 충족하고 {D/BT_DOT_BLEED}을 보유.",
+            "zh": "满足限制并拥有{D/BT_DOT_BLEED}。",
+            "fr": "Valide la restriction et possède {D/BT_DOT_BLEED}."
+          }
+        },
+        {
+          "characters": ["Francesca", "Fortuna"],
+          "reason": {
+            "en": "{D/BT_DOT_BLEED} options.",
+            "jp": "{D/BT_DOT_BLEED}オプション。",
+            "kr": "{D/BT_DOT_BLEED} 옵션.",
+            "zh": "{D/BT_DOT_BLEED}选项。",
+            "fr": "Options {D/BT_DOT_BLEED}."
+          }
+        },
+        {
+          "characters": ["Francesca", "Fortuna"],
+          "reason": {
+            "en": "{D/BT_DOT_BLEED} options.",
+            "jp": "{D/BT_DOT_BLEED}オプション。",
+            "kr": "{D/BT_DOT_BLEED} 옵션.",
+            "zh": "{D/BT_DOT_BLEED}选项。",
+            "fr": "Options {D/BT_DOT_BLEED}."
+          }
+        },
+        {
+          "characters": ["Eliza", "Francesca", "Fortuna"],
+          "reason": {
+            "en": "{D/BT_DOT_BLEED} options.",
+            "jp": "{D/BT_DOT_BLEED}オプション。",
+            "kr": "{D/BT_DOT_BLEED} 옵션.",
+            "zh": "{D/BT_DOT_BLEED}选项。",
+            "fr": "Options {D/BT_DOT_BLEED}."
+          }
+        },
+        {
+          "characters": ["Eliza", "Francesca", "Fortuna"],
+          "reason": {
+            "en": "{D/BT_DOT_BLEED} options.",
+            "jp": "{D/BT_DOT_BLEED}オプション。",
+            "kr": "{D/BT_DOT_BLEED} 옵션.",
+            "zh": "{D/BT_DOT_BLEED}选项。",
+            "fr": "Options {D/BT_DOT_BLEED}."
+          }
+        },
+        {
+          "characters": ["Francesca"],
+          "reason": {
+            "en": "Validate restriction and have {D/BT_DOT_BLEED}.",
+            "jp": "制限を満たし、{D/BT_DOT_BLEED}を持つこと。",
+            "kr": "제한을 충족하고 {D/BT_DOT_BLEED}을 보유.",
+            "zh": "满足限制并拥有{D/BT_DOT_BLEED}。",
+            "fr": "Valide la restriction et possède {D/BT_DOT_BLEED}."
+          }
+        },
+        {
+          "characters": ["Eliza", "Fortuna"],
+          "reason": {
+            "en": "{D/BT_DOT_BLEED} options.",
+            "jp": "{D/BT_DOT_BLEED}オプション。",
+            "kr": "{D/BT_DOT_BLEED} 옵션.",
+            "zh": "{D/BT_DOT_BLEED}选项。",
+            "fr": "Options {D/BT_DOT_BLEED}."
+          }
+        },
+        {
+          "characters": ["Fortuna"],
+          "reason": {
+            "en": "{D/BT_DOT_BLEED} options.",
+            "jp": "{D/BT_DOT_BLEED}オプション。",
+            "kr": "{D/BT_DOT_BLEED} 옵션.",
+            "zh": "{D/BT_DOT_BLEED}选项。",
+            "fr": "Options {D/BT_DOT_BLEED}."
+          }
+        }
+      ]
+    }
+  ]
+}

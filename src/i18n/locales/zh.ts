@@ -1212,14 +1212,10 @@ const zh: Record<TranslationKey, string> = {
   'page.guides.empty_category': '该分类暂无攻略。',
   'page.guide.versions': '版本',
 
-  // Skyward Tower
-  'tower.floor': '第{n}层',
-  'tower.search': '搜索楼层',
-  'tower.restrictions': '编成限制',
+  // Skyward Tower (compléments guide)
   'tower.strategy': '攻略',
   'tower.level': '等级{n}',
   'tower.power': '战力{n}',
-  'tower.random_floor': '随机楼层',
   'tower.pool': '可能出现的Boss',
 };
 

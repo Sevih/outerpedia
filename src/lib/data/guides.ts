@@ -453,6 +453,12 @@ export interface GuideContentProps {
   lang: Lang;
   /** L'enregistrement du guide (meta + versions découvertes). */
   guide: Guide;
+  /**
+   * Étage courant — UNIQUEMENT les guides `skyward-tower`, alimentés par la
+   * sous-route statique `[floor]`. Une tour ne montre qu'un étage à la fois
+   * (cf. `TowerGuide`) ; `undefined` = premier étage (route de base sans étage).
+   */
+  floor?: number;
 }
 
 /** Date éditoriale formatée pour l'affichage (`2026-03-24` → « Mar 24, 2026 »). */

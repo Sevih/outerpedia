@@ -1235,14 +1235,10 @@ const kr: Record<TranslationKey, string> = {
   'page.guides.empty_category': '이 카테고리에는 아직 가이드가 없습니다.',
   'page.guide.versions': '버전',
 
-  // Skyward Tower
-  'tower.floor': '{n}층',
-  'tower.search': '층 검색',
-  'tower.restrictions': '편성 제한',
+  // Skyward Tower (compléments guide)
   'tower.strategy': '공략',
   'tower.level': 'Lv.{n}',
   'tower.power': '전투력 {n}',
-  'tower.random_floor': '무작위 층',
   'tower.pool': '등장 가능 보스',
 };
 

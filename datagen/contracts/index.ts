@@ -94,7 +94,14 @@ export type {
   SingularityGroup,
   SingularitySchedule,
 } from '../generators/singularity';
-export type { Tower, TowerDebuff, TowerFloor, TowersData, TowerUnit } from '../generators/towers';
+export type {
+  Tower,
+  TowerDebuff,
+  TowerFloor,
+  TowerRestriction,
+  TowersData,
+  TowerUnit,
+} from '../generators/towers';
 export type {
   ContentScheduleData,
   GuildRaidBoss,

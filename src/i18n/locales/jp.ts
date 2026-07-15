@@ -1249,14 +1249,10 @@ const jp: Record<TranslationKey, string> = {
   'page.guides.empty_category': 'このカテゴリにはまだガイドがありません。',
   'page.guide.versions': 'バージョン',
 
-  // Skyward Tower
-  'tower.floor': '{n}階',
-  'tower.search': '階を検索',
-  'tower.restrictions': '編成制限',
+  // Skyward Tower (compléments guide)
   'tower.strategy': '攻略',
   'tower.level': 'Lv.{n}',
   'tower.power': '戦闘力{n}',
-  'tower.random_floor': 'ランダム階',
   'tower.pool': '出現しうるボス',
 };
 

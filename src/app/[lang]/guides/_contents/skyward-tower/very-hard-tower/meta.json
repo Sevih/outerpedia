@@ -1,0 +1,20 @@
+{
+  "title": {
+    "en": "Skyward Tower: Very Hard",
+    "fr": "Skyward Tower : Very Hard",
+    "jp": "飛天の塔：ベリーハード",
+    "kr": "비천의 탑: 매우 어려움",
+    "zh": "飞天之塔：极难"
+  },
+  "description": {
+    "en": "Very Hard Skyward Tower: the randomized boss pool, fixed Demiurge floors and strategy for the mode.",
+    "fr": "Skyward Tower Very Hard : le pool de boss aléatoire, les étages fixes Demiurge et la stratégie du mode.",
+    "jp": "飛天の塔ベリーハード：ランダムなボスプール、固定のデミウルゴス階、モード攻略。",
+    "kr": "비천의 탑 매우 어려움: 무작위 보스 풀, 고정 데미우르고스 층, 모드 공략.",
+    "zh": "飞天之塔极难：随机Boss池、固定造物主楼层与模式攻略。"
+  },
+  "icon": "T_Tower_VeryHard_Bg",
+  "author": "Sevih",
+  "updated": "2026-07-15",
+  "tower": "tower_very_hard"
+}

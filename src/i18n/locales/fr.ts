@@ -1289,14 +1289,10 @@ const fr: Record<TranslationKey, string> = {
   'page.guides.empty_category': 'Aucun guide dans cette catégorie pour le moment.',
   'page.guide.versions': 'Version',
 
-  // Skyward Tower
-  'tower.floor': 'Étage {n}',
-  'tower.search': 'Rechercher un étage',
-  'tower.restrictions': 'Restrictions',
+  // Skyward Tower (compléments guide)
   'tower.strategy': 'Stratégie',
   'tower.level': 'Niv. {n}',
   'tower.power': 'Puissance {n}',
-  'tower.random_floor': 'Étage aléatoire',
   'tower.pool': 'Boss possibles',
 };
 

@@ -1266,14 +1266,10 @@ const en = {
   'page.guides.empty_category': 'No guides in this category yet.',
   'page.guide.versions': 'Version',
 
-  // Skyward Tower
-  'tower.floor': 'Floor {n}',
-  'tower.search': 'Search a floor',
-  'tower.restrictions': 'Restrictions',
+  // Skyward Tower (compléments guide)
   'tower.strategy': 'Strategy',
   'tower.level': 'Lv. {n}',
   'tower.power': 'Power {n}',
-  'tower.random_floor': 'Randomized floor',
   'tower.pool': 'Possible bosses',
 } as const;
 

@@ -1,0 +1,20 @@
+{
+  "title": {
+    "en": "Skyward Tower",
+    "fr": "Skyward Tower",
+    "jp": "飛天の塔",
+    "kr": "비천의 탑",
+    "zh": "飞天之塔"
+  },
+  "description": {
+    "en": "Floor-by-floor guide to the Skyward Tower: bosses, minions and recommended teams for all 100 floors.",
+    "fr": "Guide étage par étage de la Skyward Tower : boss, sbires et équipes recommandées pour les 100 étages.",
+    "jp": "飛天の塔の攻略：全100階のボス、雑魚、おすすめ編成を階ごとに紹介。",
+    "kr": "비천의 탑 공략: 전 100층의 보스, 쫄, 추천 편성을 층별로 안내.",
+    "zh": "飞天之塔逐层攻略：全100层的Boss、小怪与推荐队伍。"
+  },
+  "icon": "T_Tower_Bg",
+  "author": "Sevih",
+  "updated": "2026-07-15",
+  "tower": "tower"
+}

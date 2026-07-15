@@ -1,0 +1,20 @@
+{
+  "title": {
+    "en": "Elemental Tower: Water",
+    "fr": "Tour élémentaire : Water",
+    "jp": "エレメンタルタワー：水",
+    "kr": "엘레멘탈 타워: 수",
+    "zh": "元素之塔：水"
+  },
+  "description": {
+    "en": "Floor-by-floor guide to the Water Elemental Tower: bosses, minions, the required counter-element and recommended teams.",
+    "fr": "Guide étage par étage de la Tour élémentaire Water : boss, sbires, contre-élément requis et équipes recommandées.",
+    "jp": "水属性のエレメンタルタワー攻略：各階のボス、雑魚、必要な対属性、おすすめ編成。",
+    "kr": "수속성 엘레멘탈 타워 공략: 층별 보스, 쫄, 필요한 상성 속성, 추천 편성.",
+    "zh": "水属性元素之塔逐层攻略：各层Boss、小怪、所需克制属性与推荐队伍。"
+  },
+  "icon": "T_Tower_Elemental_Water",
+  "author": "Sevih",
+  "updated": "2026-07-15",
+  "tower": "tower_element_water"
+}
