@@ -519,6 +519,36 @@ export function buildEffectGlossary(): EffectGlossary {
     m.set(effId, (m.get(effId) ?? 0) + 1);
     votes.set(slot, m);
   }
+  // FOYER dominant d'un effet = le slot où il récolte le PLUS de votes. Un
+  // effet qui gagne un slot dont ce n'est pas le foyer est un vote CROISÉ : un
+  // buff COMPOSITE a fait fuiter son tooltip dans un Type qui n'est pas le sien
+  // (le buff de boss Q18, typé BT_SEALED_RESURRECTION, porte le tooltip
+  // « Taunted » → clé BT_SEALED_RESURRECTION résolue en Taunted). Quand ce Type
+  // est par ailleurs réclamé par UNE SEULE création curée (mécanique sans texte,
+  // via `keys`), c'est ELLE l'intention : on réassigne la clé à la création (on
+  // ne se contente pas de retirer le vote — resolveEffectKey basculerait sinon
+  // sur le côté opposé avant d'atteindre la création, cf. BT_COOL_CHARGE).
+  const effVotes = new Map<string, Array<[string, number]>>();
+  for (const [slot, m] of votes)
+    for (const [eff, n] of m)
+      (effVotes.get(eff) ?? effVotes.set(eff, []).get(eff)!).push([slot, n]);
+  const dominantSlot = (eff: string): string | undefined =>
+    [...(effVotes.get(eff) ?? [])].sort((a, b) => b[1] - a[1])[0]?.[0];
+  const soleCuratedClaimant = new Map<string, string>();
+  try {
+    const cur = JSON.parse(readFileSync(resolve('data/curated/effects.json'), 'utf8')) as Record<
+      string,
+      { keys?: string[] }
+    >;
+    const claimCount = new Map<string, number>();
+    for (const c of Object.values(cur))
+      for (const k of c.keys ?? []) claimCount.set(k, (claimCount.get(k) ?? 0) + 1);
+    for (const [id, c] of Object.entries(cur))
+      for (const k of c.keys ?? []) if (claimCount.get(k) === 1) soleCuratedClaimant.set(k, id);
+  } catch {
+    /* pas de curé — la règle ne s'applique pas */
+  }
+
   const byKey: Record<EffectSide, Map<string, string>> = {
     buff: new Map(),
     debuff: new Map(),
@@ -526,7 +556,9 @@ export function buildEffectGlossary(): EffectGlossary {
   for (const [slot, m] of votes) {
     const [side, key] = [slot.slice(0, slot.indexOf('|')), slot.slice(slot.indexOf('|') + 1)];
     const winner = [...m.entries()].sort((a, b) => b[1] - a[1])[0][0];
-    byKey[side as EffectSide].set(key, winner);
+    const claimant = soleCuratedClaimant.get(key);
+    const crossVote = dominantSlot(winner) !== slot;
+    byKey[side as EffectSide].set(key, claimant && crossVote ? claimant : winner);
   }
   // Déclinaisons NUMÉROTÉES d'un type (`BT_COOL2_CHARGE` = le CD du skill 2,
   // même mécanique que `BT_COOL_CHARGE`) : le vote ne couvre que l'USAGE réel —
