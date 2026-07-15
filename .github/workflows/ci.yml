@@ -43,6 +43,23 @@ jobs:
       contents: read
       packages: write
     steps:
+      # Le build genere ~4500 pages statiques et la sortie standalone de Next
+      # DUPLIQUE node_modules dans l'image : le disque ~14 Go du runner sature
+      # au COPY final (`no space left on device`). On retire les toolchains
+      # preinstalles dont ce build ne se sert pas (Android ~9 Go, .NET ~2 Go,
+      # GHC, CodeQL, Swift) -> ~25 Go regagnes. Pas d'action tierce : un rm
+      # transparent, verifie par le `df -h` avant/apres dans les logs.
+      - name: Liberer de l'espace disque sur le runner
+        run: |
+          echo "Avant :" && df -h / | tail -1
+          sudo rm -rf /usr/local/lib/android \
+                      /usr/share/dotnet \
+                      /opt/ghc \
+                      /opt/hostedtoolcache/CodeQL \
+                      /usr/local/share/powershell \
+                      /usr/share/swift
+          echo "Apres :" && df -h / | tail -1
+
       - uses: actions/checkout@v7
 
       - uses: docker/setup-buildx-action@v4
