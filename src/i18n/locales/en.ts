@@ -1094,6 +1094,7 @@ const en = {
   'monad.ui.unnamedPath': '(Unnamed path)',
   'monad.ui.clickToReveal': 'Click to reveal (spoiler)',
   'monad.ui.choiceDoesntMatter': 'Either choice works',
+  'monad.ui.or': 'or',
   // Node types
   'monad.node.start': 'Exploration Starting Point',
   'monad.node.tending': 'True Ending',

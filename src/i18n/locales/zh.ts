@@ -1046,6 +1046,7 @@ const zh: Record<TranslationKey, string> = {
   'monad.ui.unnamedPath': '(未命名路线)',
   'monad.ui.clickToReveal': '点击显示（剧透）',
   'monad.ui.choiceDoesntMatter': '任选一项即可',
+  'monad.ui.or': '或',
   // Node types
   'monad.node.start': '探查起点',
   'monad.node.tending': '真结局',

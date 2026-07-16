@@ -26,6 +26,8 @@ import MonadRouteClient, { type RouteVariant } from './MonadRouteClient';
 
 /** Free Ether (récompense `crystal` d'une route) — id d'asset du catalogue. */
 const FREE_ETHER_ID = 'SYS_ASSET_FREE_CRYSTAL';
+/** Or (récompense `gold`) — le nom localisé vit dans le catalogue, pas ici. */
+const GOLD_ID = 'SYS_ASSET_GOLD';
 
 function qty(min: number, max: number): string {
   return min === max ? String(min) : `${min}-${max}`;
@@ -79,7 +81,13 @@ function resolveRewards(route: MonadRouteFile, lang: Lang): RewardDisplay {
         });
     }
     if (gold > 0) {
-      lines.push({ name: 'Gold', iconSrc: img.gold(), grade: 'normal', qty: qty(gold, gold) });
+      const g = getCatalogEntry(GOLD_ID);
+      lines.push({
+        name: g ? lRec(g.name, lang) : 'Gold',
+        iconSrc: img.gold(),
+        grade: g?.grade ?? 'normal',
+        qty: qty(gold, gold),
+      });
     }
     return lines;
   };
@@ -127,6 +135,7 @@ export default async function MonadGateGuide({ lang, guide }: GuideContentProps)
     clickToReveal: t('monad.ui.clickToReveal'),
     choiceDoesntMatter: t('monad.ui.choiceDoesntMatter'),
     trueEndingChoices: t('monad.trueEndingChoices'),
+    or: t('monad.ui.or'),
     nodeLabels,
   };
 

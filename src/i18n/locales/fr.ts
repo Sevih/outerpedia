@@ -1109,6 +1109,7 @@ const fr: Record<TranslationKey, string> = {
   'monad.ui.unnamedPath': '(Chemin sans nom)',
   'monad.ui.clickToReveal': 'Cliquez pour révéler (spoiler)',
   'monad.ui.choiceDoesntMatter': 'Les deux choix fonctionnent',
+  'monad.ui.or': 'ou',
   // Node types
   'monad.node.start': "Point de départ d'exploration",
   'monad.node.tending': 'True Ending',

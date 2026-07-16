@@ -1078,6 +1078,7 @@ const jp: Record<TranslationKey, string> = {
   'monad.ui.unnamedPath': '(名前なしルート)',
   'monad.ui.clickToReveal': 'クリックして表示（ネタバレ）',
   'monad.ui.choiceDoesntMatter': 'どちらの選択肢でも問題ありません',
+  'monad.ui.or': 'または',
   // Node types
   'monad.node.start': '探索開始ポイント',
   'monad.node.tending': 'TRUE END',

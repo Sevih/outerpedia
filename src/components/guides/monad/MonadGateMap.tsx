@@ -29,6 +29,8 @@ export interface MonadStrings {
   clickToReveal: string;
   choiceDoesntMatter: string;
   trueEndingChoices: string;
+  /** Séparateur des chemins alternatifs d'un même palier (« or »/« ou »…). */
+  or: string;
   /** Libellé localisé de chaque type de nœud (`monad.node.<type>`). */
   nodeLabels: Record<MonadNodeType, string>;
 }
@@ -690,7 +692,9 @@ function TrueEndingChoices({
               {group.map((edge, i) => (
                 <Fragment key={i}>
                   {i > 0 && (
-                    <span className="text-content-subtle text-xs tracking-wide uppercase">or</span>
+                    <span className="text-content-subtle text-xs tracking-wide uppercase">
+                      {strings.or}
+                    </span>
                   )}
                   <span className="inline-flex items-center rounded-md border border-green-600/60 bg-green-700/30 px-2.5 py-1 text-sm text-green-100">
                     {lRec(edge.label, lang)}
