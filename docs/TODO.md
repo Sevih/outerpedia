@@ -59,43 +59,36 @@ prouvé identique — + 5 tests synthétiques).
 
 ## 🧹 Dette code
 
-- [ ] **Couleurs vives hors garde-fou dans les vues guides** : la règle eslint
-      RAW_COLOR ne bannit que les gris (+white/black) en `.tsx` → passent :
-      `monad/MonadGateMap.tsx` (yellow/green/red/emerald), `MonadRouteClient/
-Reward`, `TurnOrder.tsx:61`, `TowerCombatRoster.tsx:141` (rouge dur alors
-      qu'un token danger existe), `BossPanel.tsx:233`, `guides/page.tsx:76`,
-      `hover:ring-yellow-400/50` (SkywardTowerView/MonadGateGallery). Et les
-      palettes en `.ts` échappent totalement (`guide-accents.ts`,
-      `nodeStyles.ts:49` = `text-white`, `ELEMENT_RING` d'images.ts).
-      → décision : tokeniser vs étendre l'exemption « port pixel-perfect V2 »
-      (+ étendre la règle aux `.ts`).
-- [ ] Resserrer l'exemption couleurs d'`eslint.config.mjs:34-42` :
-      parse-text/inline/ShareButtons n'ont plus AUCUNE couleur brute — seule
-      `characters/**` en a encore besoin.
-- [ ] Hex/rgb en dur à trier : `GeasUnlockList.tsx:57,186,212` (`#4cc2ff` =
-      doublon de `.bg-buff-tint`), `TowerCombatRoster.tsx:215,224`,
-      `MonadGateMap.tsx:352,376` (certains justifiés par commentaire).
-- [ ] Quasi-clones : `RecommendedCharacters.tsx:48-88` (serveur) vs bloc roster
-      de `TowerCombatRoster.tsx:168-253` (client) → partager le rendu
-      « groupe de persos + raison ».
-- [ ] `TowerGuide.tsx:134-154` et `TeamSlots.tsx:65-70` réimplémentent
-      « nom éditorial → perso » alors que `resolveGuideCharacter`
-      (lib/data/characters.ts:108) existe.
-- [ ] Carte-art de landing dupliquée : `SkywardTowerView.tsx:90-145` vs
-      `MonadGateGallery.tsx:34-100`.
-- [ ] Deux systèmes d'onglets concurrents : `ui/Tabs` (?param, useUrlSlice) vs
-      `guides/SegmentedTabs` (#hash, url-hash) — SR et guild-raid choisissent
-      différemment pour la même notion d'équipe.
-- [ ] 4 lectures ad-hoc de `data/curated/effects.json` (lib/effects.ts:539,
-      equipment.ts:520, manifest.ts:267, v2-control.ts:417) → loader partagé
-      dans datagen/curated/effects.ts.
-- [ ] Texte en dur non localisé (public) : `MonadGateMap.tsx:693` (`"or"`),
-      `MonadGateGuide.tsx:82` (`'Gold'` — `SYS_ASSET_GOLD` localisé existe).
-- [ ] Code mort : `getTowerCombat` (towers.ts:121), `getMonadRoute` (monad.ts:25),
-      `monadRouteVariants`+`monadRouteRefs` (monad.ts:50-60),
-      `Object.assign(meta, {})` (stamp-guides.ts:149).
-- [ ] Boucle « collecter les skills d'une entité » encore répétée dans
-      `integrate.ts` (atténuée par le refactor testable du 14/07).
+**TRAITÉ le 2026-07-16** (un commit par chantier — détail dans git) : code
+mort (accès monad/towers, no-op stamp-guides), loader partagé du curé
+effects.json (les 4 lectures ad-hoc), « or »/« Gold » de Monad Gate
+localisés, `#4cc2ff` tokenisé (`--buff-tint`/`--debuff-tint`, une source),
+TowerGuide + TeamSlots sur `resolveGuideCharacter`, `pickSkills`
+(integrate.ts, 5 boucles → 1), `GuideCardArt` (carte-art de landing
+partagée), `RosterGroupCard` (carte « groupe de persos + raison » partagée,
+habillage very hard via `decorate`), équipe de StagedBossGuide sur
+SegmentedTabs `#team=` — **règle actée : état interne d'un guide = hash
+(SegmentedTabs) ; ui/Tabs (?param) = hors guides**, gravée dans les deux
+docstrings. Règle eslint RAW_COLOR **étendue aux `.ts`** + exemption
+resserrée à `characters/**` seul (token `--on-vivid` pour le `text-white`
+légitime de nodeStyles).
+
+- [ ] **Tokeniser les couleurs vives des vues guides** (décision Sevih
+      2026-07-16 — la moitié eslint est faite, reste la PASSE DE FOND).
+      Inventaire (grep vives sur guides) : ~40 classes distinctes — top :
+      `text-sky-400` ×16, `text-amber-400` ×14, `bg-blue-600` ×8,
+      famille yellow-400 (~20 : sélection active/or), green/emerald (~15 :
+      gains/chemins), red (~10 : danger/bans, dont les SVG
+      `rgb(239 68 68)` de TowerCombatRoster et `#facc15`/`#fde047` de
+      MonadGateMap), violet/rose/pink épars. Palettes `.ts` :
+      `guide-accents.ts`, `nodeStyles.ts` (textColor), `ELEMENT_RING`
+      (images.ts). MÉTHODE actée : tokens sémantiques PAR RÔLE aux valeurs
+      EXACTES actuelles (zéro dérive visuelle — modèle `--buff-tint`), puis
+      étendre RAW_COLOR aux couleurs vives pour verrouiller.
+- [ ] (à la charge du chantier guides éditoriaux) `BannerTabs` (?banner=) et
+      le `?tab=` de free-heroes-start-banner sont des états internes de
+      guide → SegmentedTabs/#hash quand ces guides atterrissent (cf. règle
+      ci-dessus).
 
 ## ⚙️ Config / infra
 
