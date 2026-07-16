@@ -109,10 +109,13 @@ export function collectTagOccurrences(): TagOccurrence[] {
         checkGuideNames(data, '', source, occurrences);
       } else {
         // Sources .ts/.tsx : textes éditoriaux inline scannés bruts,
-        // commentaires retirés (ils citent des tags d'exemple).
+        // commentaires retirés (ils citent des tags d'exemple), tags à
+        // INTERPOLATION retirés (`{E/${data.element}}` — valeur dynamique,
+        // invérifiable statiquement ; le rendu STRICT la valide au build).
         const src = readFileSync(file, 'utf8')
           .replace(/\/\*[\s\S]*?\*\//g, '')
-          .replace(/^\s*\/\/.*$/gm, '');
+          .replace(/^\s*\/\/.*$/gm, '')
+          .replace(/\{[A-Z-]+\/[^}]*\$\{[^}]*\}\}/g, '');
         scan(source, src);
       }
     }

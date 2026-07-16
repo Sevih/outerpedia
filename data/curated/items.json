@@ -1,4 +1,19 @@
 {
+  "Hero%20Piece": {
+    "name": {
+      "en": "Hero Piece",
+      "jp": "仲間のピース",
+      "kr": "동료 조각",
+      "zh": "同伴碎片"
+    },
+    "desc": {
+      "en": "A piece that contains the power of a unit. Collect 250 to unlock the unit or 150 to transcend them.",
+      "jp": "ユニットの力が宿った欠片。250個集めるとそのユニットを解放でき、150個で超越できます。",
+      "kr": "유닛의 힘이 담긴 조각입니다. 250개를 모으면 해당 유닛을 해금하고, 150개로 초월할 수 있습니다.",
+      "zh": "蕴含单位力量的碎片。收集250个可解锁该单位，或收集150个使其超越。"
+    },
+    "icon": "CM_Piece_Frame"
+  },
   "SYS_ASSET_ADVENTURE_LICENSE": {
     "icon": "TI_Licence"
   },
@@ -10,6 +25,9 @@
       "zh": "在弥乐沙全域较为稀有的珍贵货币。\\n可用于特殊用途。"
     },
     "icon": "TI_Item_Cristal_Cash"
+  },
+  "SYS_ASSET_CHAR_EXP": {
+    "icon": "TI_Item_Character_EXP"
   },
   "SYS_ASSET_DEMIURGE": {
     "icon": "TI_Item_Recruit_Special_001"

@@ -22262,6 +22262,25 @@
     "characterId": "2000108",
     "source": "event_shop"
   },
+  "Hero%20Piece": {
+    "kind": "custom",
+    "name": {
+      "en": "Hero Piece",
+      "jp": "仲間のピース",
+      "kr": "동료 조각",
+      "zh": "同伴碎片"
+    },
+    "desc": {
+      "en": "A piece that contains the power of a unit. Collect 250 to unlock the unit or 150 to transcend them.",
+      "jp": "ユニットの力が宿った欠片。250個集めるとそのユニットを解放でき、150個で超越できます。",
+      "kr": "유닛의 힘이 담긴 조각입니다. 250개를 모으면 해당 유닛을 해금하고, 150개로 초월할 수 있습니다.",
+      "zh": "蕴含单位力量的碎片。收集250个可解锁该单位，或收集150个使其超越。"
+    },
+    "icon": "CM_Piece_Frame",
+    "grade": "normal",
+    "type": "custom",
+    "star": 0
+  },
   "SYS_ASSET_ACC_EXP": {
     "kind": "goods",
     "name": {
@@ -22409,7 +22428,7 @@
       "kr": "동료의 레벨업을 위한 경험치.",
       "zh": "用于提高同伴等级的经验值。"
     },
-    "icon": "",
+    "icon": "TI_Item_Character_EXP",
     "grade": "normal",
     "type": "goods",
     "star": 0

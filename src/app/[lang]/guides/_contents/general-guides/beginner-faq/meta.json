@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Beginner FAQ",
+    "jp": "初心者向けFAQ",
+    "kr": "초보자 FAQ",
+    "zh": "新手常见问题",
+    "fr": "FAQ débutant"
+  },
+  "description": {
+    "en": "Common questions asked by new players — covers heroes, gear, progression, and resource management",
+    "jp": "新規プレイヤーからよく寄せられる質問 — ヒーロー、装備、進行、リソース管理について",
+    "kr": "신규 플레이어가 자주 묻는 질문 — 영웅, 장비, 진행 및 리소스 관리에 대해",
+    "zh": "新玩家常见问题 — 同伴、装备、进度和资源管理等",
+    "fr": "Questions fréquentes des nouveaux joueurs — héros, équipement, progression et gestion des ressources."
+  },
+  "icon": "T_Chat_Emoticon_08",
+  "author": "Shiraen",
+  "updated": "2026-07-16",
+  "order": 2,
+  "tier": "first-steps"
+}
