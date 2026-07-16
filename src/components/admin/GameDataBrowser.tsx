@@ -14,6 +14,19 @@ function crossLink(target: string, value: string): Route {
 }
 
 /**
+ * Colonnes de LANGUE masquées du TABLEAU (tables Text*) : seule la colonne
+ * anglaise se lit — les autres ne font qu'écraser la largeur. La ligne brute
+ * (panneau de droite) garde toutes les langues, et la recherche par colonne
+ * aussi (le sélecteur liste les colonnes complètes).
+ */
+const HIDDEN_LANG_COLUMNS = new Set([
+  'Korean',
+  'Japanese',
+  'China_Simplified',
+  'China_Traditional',
+]);
+
+/**
  * Grille d'une table brute du jeu : recherche (serveur), pagination, résolution
  * des clés de texte, liens vers les tables référencées, JSON brut d'une ligne.
  *
@@ -78,7 +91,9 @@ export function GameDataBrowser({
     };
   }, [name, q, col, exact, page, resolve]);
 
-  const columns = hideEmpty ? data.filled : data.columns;
+  const columns = (hideEmpty ? data.filled : data.columns).filter(
+    (c) => !HIDDEN_LANG_COLUMNS.has(c),
+  );
   const pages = Math.max(1, Math.ceil(data.matched / data.pageSize));
 
   return (
