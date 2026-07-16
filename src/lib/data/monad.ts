@@ -10,7 +10,7 @@
  */
 import themeData from '@data/generated/monad/theme.json';
 import routesData from '@data/generated/monad/routes.json';
-import type { MonadReward, MonadRouteFile, MonadRouteRef, MonadThemeFile } from '@contracts';
+import type { MonadReward, MonadRouteFile, MonadThemeFile } from '@contracts';
 
 export type { MonadEdge, MonadNode, MonadNodeType, MonadReward, MonadRouteFile } from '@contracts';
 
@@ -19,11 +19,6 @@ const THEME = themeData as unknown as MonadThemeFile;
 // Components (l'orchestrateur `MonadGateGuide`) ; le client ne reçoit que les
 // nœuds/arêtes de SA route, jamais ce dictionnaire.
 const ROUTES = routesData as unknown as Record<string, MonadRouteFile>;
-
-/** Une route par son groupId (`undefined` si inconnue). */
-export function getMonadRoute(groupId: string): MonadRouteFile | undefined {
-  return ROUTES[groupId];
-}
 
 /**
  * Les routes d'un couple (profondeur, slot), une par variante de map (depth 10
@@ -35,29 +30,7 @@ export function getMonadRoutesFor(depth: number, route: number): MonadRouteFile[
     .sort((a, b) => a.variant - b.variant);
 }
 
-/** Le thème Monad Gate (jauge, récompenses, index des routes). */
-export function monadTheme(): MonadThemeFile {
-  return THEME;
-}
-
 /** Une récompense résolue par id (`node.rewardId` / `firstClearRewardId`). */
 export function monadReward(id: string | undefined): MonadReward | undefined {
   return id ? THEME.rewards[id] : undefined;
-}
-
-/** Toutes les références de route, triées par (profondeur, slot, variante). */
-export function monadRouteRefs(): MonadRouteRef[] {
-  return [...THEME.routes].sort(
-    (a, b) => a.depth - b.depth || a.route - b.route || a.variant - b.variant,
-  );
-}
-
-/**
- * Références de route d'un couple (profondeur, slot) — une par variante de map
- * (depth 10 en a deux). Vide si le couple n'existe pas.
- */
-export function monadRouteVariants(depth: number, route: number): MonadRouteRef[] {
-  return monadRouteRefs()
-    .filter((r) => r.depth === depth && r.route === route)
-    .sort((a, b) => a.variant - b.variant);
 }

@@ -146,7 +146,6 @@ function stampMeta(metaPath: string, date: string): boolean {
       if (k === 'author') rebuilt.updated = date;
     }
     if (!('updated' in rebuilt)) rebuilt.updated = date;
-    Object.assign(meta, {});
     writeFileSync(metaPath, JSON.stringify(rebuilt, null, 2) + '\n');
     return true;
   }

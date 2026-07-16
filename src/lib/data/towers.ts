@@ -116,8 +116,3 @@ export function getTowerCombats(tower: Tower): TowerCombat[] {
     (a, b) => COMBAT_GROUP_ORDER.indexOf(a.group) - COMBAT_GROUP_ORDER.indexOf(b.group),
   );
 }
-
-/** Un combat very hard par l'id de son boss (`undefined` si inconnu). */
-export function getTowerCombat(tower: Tower, bossId: string): TowerCombat | undefined {
-  return getTowerCombats(tower).find((c) => c.boss.id === bossId);
-}
