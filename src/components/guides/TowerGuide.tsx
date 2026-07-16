@@ -41,7 +41,7 @@ import {
 } from '@/lib/data/towers';
 import { getEncounter, bossWaveMonsters } from '@/lib/data/encounters';
 import { getMonster, monsterIconSrc } from '@/lib/data/monsters';
-import { findCharacterByName, characterDisplayName, slugForId } from '@/lib/data/characters';
+import { resolveGuideCharacter } from '@/lib/data/characters';
 import { renderGameText } from '@/components/inline/GameTokens';
 import { BossCard } from './BossPanel';
 import { TowerFloorMenu, type TowerMenuSection } from './TowerFloorMenu';
@@ -130,24 +130,23 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
     return lt ? parseText(lRec(lt, lang), ctx) : null;
   };
 
-  /** Un `recommended` éditorial → groupes de roster (persos résolus par nom). */
+  /** Un `recommended` éditorial → groupes de roster (persos résolus par nom,
+   * via le résolveur partagé — nom inconnu = le build SSG casse). */
   const buildRoster = (recommended: readonly RecommendedGroup[] = []): RosterGroup[] =>
     recommended.map((g) => ({
-      characters: g.characters.map((name) => {
-        const c = findCharacterByName(name);
-        if (!c) {
-          throw new Error(
-            `TowerGuide : personnage inconnu « ${name} » (${guide.category}/${guide.slug}).`,
-          );
-        }
-        const slug = slugForId(c.id);
+      characters: g.characters.map((raw) => {
+        const {
+          character: c,
+          name,
+          href,
+        } = resolveGuideCharacter(raw, lang, `TowerGuide (${guide.category}/${guide.slug})`);
         return {
           id: c.id,
-          name: characterDisplayName(c, lang),
+          name,
           element: c.element,
           classType: c.class,
           rarity: c.rarity,
-          href: slug ? localePath(lang, `/characters/${slug}`) : undefined,
+          href,
         };
       }),
       reason: g.reason ? reason(g.reason) : undefined,
