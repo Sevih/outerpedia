@@ -6,6 +6,7 @@ import { localePath } from '@/lib/navigation';
 import { ELEMENT_ORDER, ELEMENT_RING, img } from '@/lib/images';
 import type { Guide } from '@/lib/data/guides';
 import { getTower, TOWER_DIFFICULTY_MODES, TOWER_ELEMENT_MODE } from '@/lib/data/towers';
+import { ART_TILE, GuideCardArt } from './CardArt';
 import { EmptyCategory } from './EmptyCategory';
 import type { CategoryViewProps } from './types';
 
@@ -94,14 +95,7 @@ function DifficultyCard({ guide, lang }: { guide: Guide; lang: Lang }) {
       href={localePath(lang, `/guides/${guide.category}/${guide.slug}`)}
       className="group ring-line-subtle relative h-32 w-full overflow-hidden rounded-lg ring-1 transition-all hover:ring-yellow-400/50 sm:w-75"
     >
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-      <img
-        src={img.guideIcon(guide.icon)}
-        alt={name}
-        loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-      />
-      <div className="from-surface-sunken/80 via-surface-sunken/20 absolute inset-0 bg-linear-to-t to-transparent" />
+      <GuideCardArt icon={guide.icon} alt={name} hoverScale />
       <div className="absolute inset-0 flex flex-col justify-between p-3">
         <p className="text-content-strong text-lg font-bold drop-shadow-lg">{name}</p>
         <p className="text-content-muted line-clamp-3 text-[10px] drop-shadow-lg sm:text-xs">
@@ -119,17 +113,9 @@ function ElementalCard({ guide, lang, element }: { guide: Guide; lang: Lang; ele
   return (
     <Link
       href={localePath(lang, `/guides/${guide.category}/${guide.slug}`)}
-      className={`group ring-line-subtle relative h-40 w-[calc((100%-1.5rem)/3)] overflow-hidden rounded-lg ring-1 transition-all sm:h-72 sm:w-36 ${ring}`}
+      className={`group ring-line-subtle ${ART_TILE} ring-1 transition-all ${ring}`}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-      <img
-        src={img.guideIcon(guide.icon)}
-        alt={name}
-        loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-      />
-      <div className="from-surface-sunken/60 absolute inset-0 bg-linear-to-b to-transparent" />
-      <div className="from-surface-sunken/80 via-surface-sunken/20 absolute inset-0 bg-linear-to-t to-transparent" />
+      <GuideCardArt icon={guide.icon} alt={name} topVeil hoverScale />
       <div className="absolute inset-x-0 top-0 flex items-center gap-1 p-2">
         {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img src={img.element(element)} alt="" loading="lazy" className="h-4 w-4 drop-shadow-lg" />
