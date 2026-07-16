@@ -33,7 +33,7 @@ import { resolve } from 'node:path';
 import { formatRowValue } from './buff';
 import type { LangDict } from './lang';
 import { loadTextIndex, resolveText } from './text';
-import { loadTable, num, tablesStamp, type Row } from './tables';
+import { fileStamp, loadTable, num, tablesStamp, type Row } from './tables';
 import { buildImageIndex, findImage } from '../assets/source';
 
 /** Nature d'un effet, dérivée des champs fiables du jeu. */
@@ -161,21 +161,25 @@ const FAMILY_RULES: FamilyRule[] = [
  * `{"BT_NOUVEAU_TYPE": "dot"}`) : un nouveau type de buff se classe SANS
  * toucher au code — le fichier prime sur les règles.
  */
-let familyOverrides: Map<string, EffectFamily> | null = null;
+// Cache clé sur le mtime du curé : une édition (admin ou à la main) doit se
+// voir sans redémarrage — même contrat que le glossaire plus bas. fileStamp
+// est TTLisé (2 s) : appelable depuis classifyFamily sans syscall par hit.
+let familyOverrides: { data: Map<string, EffectFamily>; stamp: string } | null = null;
 function loadFamilyOverrides(): Map<string, EffectFamily> {
-  if (!familyOverrides) {
-    familyOverrides = new Map();
-    try {
-      const raw = JSON.parse(
-        readFileSync(resolve('data/curated/effect-families.json'), 'utf8'),
-      ) as Record<string, EffectFamily>;
-      // Clés `_*` = documentation embarquée (convention des curés), pas des types.
-      for (const [t, f] of Object.entries(raw)) if (!t.startsWith('_')) familyOverrides.set(t, f);
-    } catch {
-      /* pas d'overrides — les règles suffisent */
-    }
+  const stamp = fileStamp('data/curated/effect-families.json');
+  if (familyOverrides && familyOverrides.stamp === stamp) return familyOverrides.data;
+  const map = new Map<string, EffectFamily>();
+  try {
+    const raw = JSON.parse(
+      readFileSync(resolve('data/curated/effect-families.json'), 'utf8'),
+    ) as Record<string, EffectFamily>;
+    // Clés `_*` = documentation embarquée (convention des curés), pas des types.
+    for (const [t, f] of Object.entries(raw)) if (!t.startsWith('_')) map.set(t, f);
+  } catch {
+    /* pas d'overrides — les règles suffisent */
   }
-  return familyOverrides;
+  familyOverrides = { data: map, stamp };
+  return map;
 }
 
 /** Types tombés en `special` (inconnus des règles ET des overrides). */
@@ -306,10 +310,12 @@ interface EffectGlossary {
 // Cache DÉRIVÉ clé sur l'empreinte des tables : sans elle, l'invalidation
 // mtime de loadTable est à moitié efficace — après un refresh, les tables
 // rechargent mais le glossaire mémoïsé continuerait de servir l'ancien monde.
+// Salé du mtime du curé `effects.json` (lu par la règle du vote croisé plus
+// bas) : une édition curée doit se voir sans redémarrage, comme les tables.
 let glossaryCache: { data: EffectGlossary; stamp: string } | undefined;
 
 export function buildEffectGlossary(): EffectGlossary {
-  const stamp = tablesStamp(['TextSystem']);
+  const stamp = `${tablesStamp(['TextSystem'])}|${fileStamp('data/curated/effects.json')}`;
   if (glossaryCache && glossaryCache.stamp === stamp) return glossaryCache.data;
   const sys = loadTextIndex('TextSystem');
   const skill = loadTextIndex('TextSkill');
@@ -679,7 +685,7 @@ let mechanicLabelCache: { data: Map<string, string>; stamp: string } | undefined
  * donc sans chip, comme dans la curation V2.
  */
 export function mechanicLabelIndex(): Map<string, string> {
-  const stamp = tablesStamp(['TextSystem']);
+  const stamp = `${tablesStamp(['TextSystem'])}|${fileStamp('data/curated/effects.json')}`;
   if (mechanicLabelCache && mechanicLabelCache.stamp === stamp) return mechanicLabelCache.data;
   const { byLabel } = buildEffectGlossary();
   const tally = new Map<string, Map<string, number>>();

@@ -101,13 +101,21 @@ export function tablesStamp(names: string[], ttlMs = 2000): string {
   return stamp;
 }
 
-/** Empreinte mtime d'un fichier HORS tables (curé éditable seul) — même usage. */
-export function fileStamp(path: string): string {
+/** Empreinte mtime d'un fichier HORS tables (curé éditable seul) — même usage,
+ * même TTL : appelable en boucle chaude (classifyFamily) sans syscall par hit. */
+export function fileStamp(path: string, ttlMs = 2000): string {
+  const key = `file:${path}`;
+  const hit = stampCache.get(key);
+  const now = Date.now();
+  if (hit && now - hit.at < ttlMs) return hit.stamp;
+  let stamp: string;
   try {
-    return String(statSync(resolve(path)).mtimeMs);
+    stamp = String(statSync(resolve(path)).mtimeMs);
   } catch {
-    return 'absent';
+    stamp = 'absent';
   }
+  stampCache.set(key, { stamp, at: now });
+  return stamp;
 }
 
 /** Charge les lignes d'une table parsée (`CharacterTemplet`, `TextSystem`, …), avec cache. */
