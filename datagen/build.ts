@@ -183,7 +183,10 @@ async function main(): Promise<void> {
   // ~1,5 Mo ne partent jamais au client — cf. src/lib/data/monad.ts).
   const monad = buildMonad();
   mkdirSync(resolve(OUT, 'monad'), { recursive: true });
-  await writeJson(`monad/theme-${monad.theme.themeId}.json`, monad.theme);
+  // Nom STABLE (pas `theme-${id}`) : le lecteur l'importe statiquement — un nom
+  // variable casserait l'import en silence au premier changement de thème ; le
+  // `themeId` vit dans le fichier.
+  await writeJson('monad/theme.json', monad.theme);
   await writeJson('monad/routes.json', Object.fromEntries(monad.routes.map((r) => [r.groupId, r])));
   const gameVersion = buildGameVersion();
   if (gameVersion) await writeJson('game-version.json', gameVersion);

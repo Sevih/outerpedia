@@ -1,15 +1,14 @@
 /**
  * MONAD GATE — accès à `data/generated/monad/`.
  *
- * Le THÈME (`theme-1.json`) est partagé : jauge, index des routes et registre
- * de récompenses (référencé par `node.rewardId`). Il est petit → importé
- * statiquement ici. Les ROUTES (`routes/{groupId}.json`) sont volumineuses et
- * propres à une page : chaque `index.tsx` de guide importe la sienne
- * statiquement (SSG), comme la V2 — la donnée est déjà prête à rendre (libellés
- * résolus au build, cf. `datagen/generators/monad.ts`), il n'y a plus de couche
- * `loadRoute`.
+ * Le THÈME (`theme.json` — nom stable, le `themeId` vit dedans) est partagé :
+ * jauge, index des routes et registre de récompenses (référencé par
+ * `node.rewardId`). Il est petit → importé statiquement ici. Les ROUTES vivent
+ * toutes dans UN `routes.json` indexé par groupId — la donnée est déjà prête à
+ * rendre (libellés résolus au build, cf. `datagen/generators/monad.ts`), il n'y
+ * a plus de couche `loadRoute`.
  */
-import themeData from '@data/generated/monad/theme-1.json';
+import themeData from '@data/generated/monad/theme.json';
 import routesData from '@data/generated/monad/routes.json';
 import type { MonadReward, MonadRouteFile, MonadRouteRef, MonadThemeFile } from '@contracts';
 
