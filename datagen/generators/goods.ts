@@ -116,11 +116,15 @@ export function buildGoods(): Record<string, Goods> {
     const id = r.ID;
     if (!id?.startsWith('SYS_ASSET_') || NON_ASSET.test(id)) continue;
     const en = (r.English ?? '').trim();
+    if (!en) continue;
     // HEURISTIQUE « ceci est un NOM de monnaie, pas une phrase d'UI » : les
     // clés SYS_ASSET_* mélangent noms et textes d'interface que NON_ASSET ne
     // filtre pas tous. Un nom est court (≤ 40 car.), tient sur une ligne
     // (pas de \n) et ne se termine pas par un point (une phrase, si).
-    if (!en || en.length > 40 || en.includes('\\n') || en.endsWith('.')) continue;
+    // Les clés ADOSSÉES à une ligne item y échappent : l'évidence table prime
+    // sur la forme du texte. Vérifié 2026-07-16 : l'heuristique n'écarte
+    // aujourd'hui AUCUNE clé réelle — garde-fou purement prophylactique.
+    if (!backed.has(id) && (en.length > 40 || en.includes('\\n') || en.endsWith('.'))) continue;
     const rest = id.slice('SYS_ASSET_'.length);
     const g = make(id, rest, [
       backed.get(id)?.descId,

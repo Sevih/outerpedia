@@ -93,7 +93,13 @@ export interface ProgressionData {
   skill8: Record<string, Record<string, StatBonus[]>>;
 }
 
-/** Index des enums d'éveil → slugs maison (mêmes valeurs que le client). */
+/**
+ * Index des enums d'éveil → slugs maison. VÉRIFIÉ contre les tables
+ * (2026-07-16, via les `NodeNameID` des nœuds principaux qui NOMMENT leur
+ * cible) : AAT_ELEMENTAL est 0-based (0=Earth…4=Dark) ; AAT_CLASS et
+ * AAT_SUBCLASS sont 1-based (1=Defender…5=Healer ; 1=Attacker…10=Sage) —
+ * d'où le `''` en tête de ces deux tableaux.
+ */
 const AWAKENING_ELEMENTS = ['earth', 'water', 'fire', 'light', 'dark'];
 const AWAKENING_CLASSES = ['', 'defender', 'striker', 'ranger', 'mage', 'healer'];
 const AWAKENING_SUBCLASSES = [

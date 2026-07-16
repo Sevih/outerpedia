@@ -122,8 +122,19 @@ export interface ContentScheduleData {
 
 /** « 2026-07-02 0:00:00 » → « 2026-07-02T00:00:00Z » (fuseau UTC, cf. en-tête). */
 function isoUtc(v: string | undefined): string {
-  const m = /^(\d{4}-\d{2}-\d{2})\s+(\d{1,2}):(\d{2}):(\d{2})$/.exec((v ?? '').trim());
-  if (!m) return (v ?? '').trim();
+  const raw = (v ?? '').trim();
+  const m = /^(\d{4}-\d{2}-\d{2})\s+(\d{1,2}):(\d{2}):(\d{2})$/.exec(raw);
+  if (!m) {
+    // Format inattendu → valeur rendue telle quelle, mais SIGNALÉE : le tri
+    // (localeCompare) et le statut « en saison » (SeasonBadge) deviendraient
+    // silencieusement faux. Jamais de throw — une ligne lacunaire n'invalide
+    // pas le calendrier entier.
+    if (raw)
+      console.warn(
+        `⚠ content-schedule : date inattendue « ${raw} » (attendu « AAAA-MM-JJ H:MM:SS »).`,
+      );
+    return raw;
+  }
   return `${m[1]}T${m[2].padStart(2, '0')}:${m[3]}:${m[4]}Z`;
 }
 
