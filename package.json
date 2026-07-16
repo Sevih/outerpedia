@@ -11,7 +11,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
