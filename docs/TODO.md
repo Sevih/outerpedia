@@ -92,14 +92,16 @@ légitime de nodeStyles).
 
 ## ⚙️ Config / infra
 
-- [ ] `scripts/*.ts` hors de tout typecheck (tsconfig = src, datagen = datagen ;
-      tsx = transpile-only) → les inclure.
-- [ ] `.dockerignore` : ajouter `data/extracted/`.
-- [ ] `.git` : 4647 objets loose / 0 packé → `git gc`.
-- [ ] Branche `backup/site-rebuild` à trancher (dernière restante).
-- [ ] Hygiène commits : « import MG », « guild raid & tower », « push apres
-      reffacto + clean » (simple bump de version) — messages non conventionnels
-      qui creusent le trou du CHANGELOG.
+**TRAITÉ le 2026-07-16** (un commit par item — détail dans git) :
+`scripts/*.ts` sous typecheck (3ᵉ projet tsc `scripts/tsconfig.json`, zéro
+erreur au premier passage), `data/extracted/` exclu du contexte Docker
+(~30 Mo jamais lus par `next build`), `git gc` (5017 objets loose → tout
+packé), branche `backup/site-rebuild` SUPPRIMÉE (décision Sevih — esquisse
+Phases A→D du 30/06 au matin, resservie en mieux par main le jour même).
+Hygiène commits : les 3 messages hors format sont POUSSÉS donc irréparables
+(le resync CHANGELOG ci-dessous comblera le trou) ; pour l'avenir,
+`pnpm commit` refuse désormais tout message non conventionnel (re-prompt,
+`--msg` invalide = refus sec).
 
 ## 📚 Docs à resynchroniser
 
