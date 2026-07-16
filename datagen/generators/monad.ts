@@ -1,5 +1,6 @@
 /**
- * Générateur — MONAD GATE (`monad/theme-{id}.json` + `monad/routes/{groupId}.json`).
+ * Générateur — MONAD GATE (`monad/theme.json` + `monad/routes.json`, routes
+ * indexées par groupId dans UN fichier).
  *
  * Porté de l'extracteur admin V2 (`api/admin/extractor-v3/monad-gate/route.ts`),
  * en ne gardant QUE la logique pure (graphe + solveur) et en la branchant sur

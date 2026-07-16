@@ -30,39 +30,15 @@
 
 ## 🐛 Bugs (audit du 16/07)
 
-- [ ] **HAUTE — `datagen/assets/manifest.ts:832-839` : monstres des tours VERY
-      HARD jamais collectés.** Le collecteur ne lit que `floor.waves`, or les 20
-      étages VH ne stockent leurs monstres que dans `floor.encounters` (0 waves /
-      20 encounters, vérifié). 57 monstres ignorés → 10 portraits `MT_` + ~237
-      icônes de skills manquants, dont `MT_4151015` — le 404 que b9d951c visait.
-      Fix : itérer `[...(floor.waves ?? []), ...(floor.encounters ?? [])]` + le type local.
-- [ ] **HAUTE — la CI et les hooks ne lancent jamais `pnpm test`** (`ci.yml` job
-      check = lint/typecheck/build ; lefthook = format/lint/typecheck). Les 278
-      tests ne gardent rien. → une ligne dans le job check (2,8 s).
-- [ ] **MOYENNE — `src/components/guides/monad/MonadRouteClient.tsx:32-45`** :
-      port V2 avec son défaut — `?v=` lu une fois en effet + `useState` → l'état
-      masque l'URL (Back/Forward mort) ET seul `eslint-disable
-  react-hooks/set-state-in-effect` du repo réintroduit (contre
-      `eslint.config.mjs:14`). → passer sur `useUrlSlice`/`Tabs(urlParam)`.
-- [ ] **MOYENNE — `datagen/lib/effects.ts:312/:539`** : `buildEffectGlossary`
-      lit `data/curated/effects.json` (fix vote-croisé c9ce852) mais le stamp
-      reste `tablesStamp(['TextSystem'])` → l'admin ne voit pas une édition
-      curée sans redémarrage. Même trou pour `effect-families.json` (l.170).
-      → saler avec `fileStamp()` des deux curés.
-- [ ] BASSE — `datagen/generators/monad.ts:699-729` : `resolveReward` silencieux
-      (réf `rewardId` pendante) — instrumenter comme celui d'encounters (ligne agrégée).
-- [ ] BASSE — `monad.ts:743-746` : libellé de stage sans filtre `hasText` (dict
-      vide possible), contrairement au `resolveOrNull` du reste du fichier.
-- [ ] BASSE — `src/lib/data/monad.ts:12` importe `theme-1.json` en dur alors que
-      `build.ts:186` écrit `theme-${themeId}.json` — casserait en silence.
-- [ ] BASSE — `content-schedule.ts:124-128` : `isoUtc` laisse passer une date
-      malformée sans warning.
-- [ ] BASSE — `datagen/generators/progression.ts:97-99` : enums d'éveil 0-based
-      (éléments) vs 1-based (classes) — à VÉRIFIER contre les tables (risque
-      d'off-by-one sur les quirks).
-- [ ] BASSE — `datagen/generators/goods.ts:123` : heuristique
-      `en.length > 40 || endsWith('.')` pour discriminer les monnaies —
-      documenter ou fiabiliser.
+**TRAITÉ le 2026-07-16** (commits `7d858d8`…, un par fix — détail dans git) :
+collecte tours VH (waves + encounters), `pnpm test` en CI, MonadRouteClient
+sur `useUrlSlice`, caches d'effects salés du mtime des curés (`fileStamp`
+TTLisé), butin monad instrumenté (ligne agrégée) + label via `resolveOrNull`,
+nom stable `monad/theme.json` (rename committé), warning `isoUtc`, heuristique
+goods contournée pour les clés adossées à une ligne item. Enums d'éveil
+VÉRIFIÉS contre les `NodeNameID` des tables : aucun off-by-one (méthode gravée
+en commentaire dans progression.ts). Sortie monad prouvée identique octet à
+octet avant/après.
 
 ## 🧪 Tests à écrire
 
@@ -78,7 +54,7 @@
 - [ ] **Couleurs vives hors garde-fou dans les vues guides** : la règle eslint
       RAW_COLOR ne bannit que les gris (+white/black) en `.tsx` → passent :
       `monad/MonadGateMap.tsx` (yellow/green/red/emerald), `MonadRouteClient/
-  Reward`, `TurnOrder.tsx:61`, `TowerCombatRoster.tsx:141` (rouge dur alors
+Reward`, `TurnOrder.tsx:61`, `TowerCombatRoster.tsx:141` (rouge dur alors
       qu'un token danger existe), `BossPanel.tsx:233`, `guides/page.tsx:76`,
       `hover:ring-yellow-400/50` (SkywardTowerView/MonadGateGallery). Et les
       palettes en `.ts` échappent totalement (`guide-accents.ts`,
@@ -110,9 +86,6 @@
 - [ ] Code mort : `getTowerCombat` (towers.ts:121), `getMonadRoute` (monad.ts:25),
       `monadRouteVariants`+`monadRouteRefs` (monad.ts:50-60),
       `Object.assign(meta, {})` (stamp-guides.ts:149).
-- [ ] Docstrings périmées : `datagen/generators/monad.ts:2` et
-      `src/lib/data/monad.ts:6-8` décrivent le modèle « un fichier par route »
-      abandonné (réel : `routes.json` unique).
 - [ ] Boucle « collecter les skills d'une entité » encore répétée dans
       `integrate.ts` (atténuée par le refactor testable du 14/07).
 
