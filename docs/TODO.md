@@ -42,12 +42,20 @@ octet avant/après.
 
 ## 🧪 Tests à écrire
 
-- [ ] Restrictions de tours (`generators/towers.ts` +109 l., data +7579 l.) : zéro test.
-- [ ] `src/lib/data/geas.ts` (déblocages guild-raid) et `url-hash.ts` : zéro test.
-- [ ] Non-régression du fix vote-croisé (c9ce852) dans `effects.test.ts`.
+**TRAITÉ le 2026-07-16** (suite à 319 tests) : restrictions/compositions de
+tours (`towers.test.ts`, invariants sur la donnée committée), geas guild-raid
+(`geas.test.ts`), hash-params (`url-hash.test.ts`, window stubbé), vote-croisé
+c9ce852 (`resolveKeyWinners` extrait PUR de buildEffectGlossary — glossaire
+prouvé identique — + 5 tests synthétiques).
+
 - [ ] `src/lib/admin/gamedata-store.ts` (dev-only, priorité moindre).
 - [ ] Les 19 générateurs `datagen/generators/*` + `build.ts`/`refresh.ts`
       (gros chantier — prioriser encounters/singularity/content-schedule).
+      CONTRAINTE actée : la suite tourne SANS `.gamedata` (CI) → deux
+      patterns seulement : extraire les cœurs PURS et les tester en
+      synthétique (cf. `resolveKeyWinners`, prouver l'iso-sortie à
+      l'extraction), ou ancrer des invariants sur `data/generated/` committé
+      (cf. `towers.test.ts`).
 
 ## 🧹 Dette code
 
