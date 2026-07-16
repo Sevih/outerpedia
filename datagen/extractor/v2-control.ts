@@ -11,6 +11,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { characterSpec } from './specs/character';
+import { loadCuratedEffects } from '../curated/effects';
 import type { FieldStatus } from './core/spec';
 
 type Dict = Record<string, unknown>;
@@ -402,31 +403,13 @@ const V2_NAME_ALIASES: Record<string, string[]> = {
   WG_REVERSE_HEAL: ['WEAKNESS_GAUGE_DAMAGE'],
 };
 
-/** Curated effects (`data/curated/effects.json`) : créations nommées adressées
- * par type (`keys`) — même pont que l'affichage (skill-view / équipement). */
-interface CuratedFx {
-  name?: { en?: string };
-  isDebuff?: boolean;
-  keys?: string[];
-}
-let curatedFxCache: Record<string, CuratedFx> | undefined;
-function curatedFx(): Record<string, CuratedFx> {
-  if (!curatedFxCache) {
-    try {
-      curatedFxCache = JSON.parse(
-        readFileSync(resolve(process.cwd(), 'data/curated/effects.json'), 'utf8'),
-      ) as Record<string, CuratedFx>;
-    } catch {
-      curatedFxCache = {};
-    }
-  }
-  return curatedFxCache;
-}
+// Créations curées adressées par type (`keys`) — même pont que l'affichage
+// (skill-view / équipement), lues via le loader partagé du curé.
 let curatedKeySides: Map<string, string> | undefined;
 function curatedCreationFor(side: 'buff' | 'debuff', type: string): string | undefined {
   if (!curatedKeySides) {
     curatedKeySides = new Map();
-    for (const [id, c] of Object.entries(curatedFx())) {
+    for (const [id, c] of Object.entries(loadCuratedEffects())) {
       const s = c.isDebuff ? 'debuff' : 'buff';
       for (const k of c.keys ?? []) {
         const key = `${s}|${k}`;
@@ -543,7 +526,7 @@ function skillEffectChecks(
         const side = e.category === 'buff' ? 'buff' : 'debuff';
         const cid = curatedCreationFor(side, e.type);
         if (cid) {
-          const c = curatedFx()[cid];
+          const c = loadCuratedEffects()[cid];
           const eff = (
             glossaries as unknown as { effects?: Record<string, { name?: { en?: string } }> }
           ).effects?.[cid];

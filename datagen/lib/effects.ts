@@ -34,6 +34,7 @@ import { formatRowValue } from './buff';
 import type { LangDict } from './lang';
 import { loadTextIndex, resolveText } from './text';
 import { fileStamp, loadTable, num, tablesStamp, type Row } from './tables';
+import { loadCuratedEffects } from '../curated/effects';
 import { buildImageIndex, findImage } from '../assets/source';
 
 /** Nature d'un effet, dérivée des champs fiables du jeu. */
@@ -580,20 +581,15 @@ export function buildEffectGlossary(): EffectGlossary {
   }
   // Réclamations curées : clé type → l'UNIQUE création curée qui la réclame
   // (via `keys`). La règle de résolution vit dans `resolveKeyWinners` (pure,
-  // testée sans tables) — seule la LECTURE du curé reste ici.
+  // testée sans tables) ; la lecture passe par le loader partagé du curé.
   const soleCuratedClaimant = new Map<string, string>();
-  try {
-    const cur = JSON.parse(readFileSync(resolve('data/curated/effects.json'), 'utf8')) as Record<
-      string,
-      { keys?: string[] }
-    >;
+  {
+    const cur = loadCuratedEffects();
     const claimCount = new Map<string, number>();
     for (const c of Object.values(cur))
       for (const k of c.keys ?? []) claimCount.set(k, (claimCount.get(k) ?? 0) + 1);
     for (const [id, c] of Object.entries(cur))
       for (const k of c.keys ?? []) if (claimCount.get(k) === 1) soleCuratedClaimant.set(k, id);
-  } catch {
-    /* pas de curé — la règle ne s'applique pas */
   }
   const byKey = resolveKeyWinners(votes, soleCuratedClaimant);
   // Nature RÉELLE des effets mécaniques : leur ligne de définition ne porte

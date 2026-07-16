@@ -23,6 +23,7 @@ import {
 } from '../../src/lib/data/guide-categories';
 import { listGuides, readGuideVersionFile, type Guide } from '../../src/lib/data/guides';
 import { buildItemCatalog } from '../generators/item-catalog';
+import { loadCuratedEffects } from '../curated/effects';
 import { resolveClass } from '../lib/class';
 import { slugEnum } from '../lib/enums';
 import { loadTable } from '../lib/tables';
@@ -260,19 +261,11 @@ export function buildAssetManifest(): AssetRequest[] {
 
   // --- Effets : icône de base + replis de nommage ----------------------------
   // Extraits (glossaire) + CRÉATIONS curées (mécaniques sans texte en jeu —
-  // leurs icônes sont de vrais sprites du jeu).
-  let curatedEffects: Record<string, { icon?: string }> = {};
-  try {
-    curatedEffects = JSON.parse(
-      readFileSync(resolve('data/curated/effects.json'), 'utf8'),
-    ) as Record<string, { icon?: string }>;
-  } catch {
-    /* pas de curé — rien à ajouter */
-  }
+  // leurs icônes sont de vrais sprites du jeu), via le loader partagé du curé.
   // Priorité aux sprites SC_* (icône nue) — les IG_* portent un cadre noir
   // opaque et ne servent qu'en repli.
   const sc = (n: string) => n.replace(/^IG_/, 'SC_');
-  for (const e of [...Object.values(glossaries.effects), ...Object.values(curatedEffects)]) {
+  for (const e of [...Object.values(glossaries.effects), ...Object.values(loadCuratedEffects())]) {
     if (!e.icon) continue;
     push({
       kind: 'image',

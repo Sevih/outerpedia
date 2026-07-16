@@ -17,9 +17,19 @@
  * NOTE : `Rate` en base-10000 → poids de tirage = Rate/100 (%). Valeurs stat des
  * pools laissées brutes (OAT_RATE = /10 confirmé, décodage à appliquer ensuite).
  */
-import { readFileSync } from 'node:fs';
-import { resolve as resolvePath } from 'node:path';
-import { bool, groupBy, indexBy, loadTable, num, numf, splitCsv, type Row } from '../lib/tables';
+import {
+  bool,
+  fileStamp,
+  groupBy,
+  indexBy,
+  loadTable,
+  num,
+  numf,
+  splitCsv,
+  tablesStamp,
+  type Row,
+} from '../lib/tables';
+import { loadCuratedEffects } from '../curated/effects';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { slugEnum } from '../lib/enums';
 import { isMain } from '../lib/is-main';
@@ -507,31 +517,27 @@ function refineEquipShape(sh: EffectShape): EffectShape {
   return sh;
 }
 
-let curatedKeyCache: Map<string, string> | undefined;
+// Dérivé du curé ET du glossaire → même régime d'empreinte que le glossaire
+// (un memo nu survivrait aux éditions admin du curé comme au refresh).
+let curatedKeyCache: { data: Map<string, string>; stamp: string } | undefined;
 
 /** `nature|type` → id de CRÉATION curée (`keys` de data/curated/effects.json) —
  * mécaniques sans texte dans les tables, nommées par la curation (héritée V2).
  * La nature vient de l'entrée (`isDebuff`, repli sur l'effet du glossaire). */
 function curatedKeyMap(): Map<string, string> {
-  if (!curatedKeyCache) {
-    curatedKeyCache = new Map();
-    try {
-      const cur = JSON.parse(
-        readFileSync(resolvePath('data/curated/effects.json'), 'utf8'),
-      ) as Record<string, { keys?: string[]; isDebuff?: boolean }>;
-      const { effects } = buildEffectGlossary();
-      for (const [id, c] of Object.entries(cur)) {
-        const side = (c.isDebuff ?? effects.get(id)?.isDebuff) ? 'debuff' : 'buff';
-        for (const k of c.keys ?? []) {
-          const key = `${side}|${k}`;
-          if (!curatedKeyCache.has(key)) curatedKeyCache.set(key, id);
-        }
-      }
-    } catch {
-      /* pas de curated — les mécaniques concernées restent innommées */
+  const stamp = `${tablesStamp(['TextSystem'])}|${fileStamp('data/curated/effects.json')}`;
+  if (curatedKeyCache && curatedKeyCache.stamp === stamp) return curatedKeyCache.data;
+  const map = new Map<string, string>();
+  const { effects } = buildEffectGlossary();
+  for (const [id, c] of Object.entries(loadCuratedEffects())) {
+    const side = (c.isDebuff ?? effects.get(id)?.isDebuff) ? 'debuff' : 'buff';
+    for (const k of c.keys ?? []) {
+      const key = `${side}|${k}`;
+      if (!map.has(key)) map.set(key, id);
     }
   }
-  return curatedKeyCache;
+  curatedKeyCache = { data: map, stamp };
+  return map;
 }
 
 function sortByNumericKey<T>(obj: Record<string, T>): Record<string, T> {
