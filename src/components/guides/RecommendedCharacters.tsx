@@ -1,9 +1,7 @@
-import { Fragment, type ReactNode } from 'react';
-import Link from 'next/link';
-import type { Route } from 'next';
+import type { ReactNode } from 'react';
 import type { Lang } from '@/lib/i18n/config';
 import { resolveGuideCharacter } from '@/lib/data/characters';
-import { CharacterPortrait } from '@/components/character/CharacterPortrait';
+import { RosterGroupCard } from './RosterGroupCard';
 
 export interface RecommendedGroup {
   /** Noms d'affichage EN (clé du contenu éditorial). */
@@ -14,7 +12,8 @@ export interface RecommendedGroup {
 
 /**
  * Personnages recommandés d'un guide : les portraits à GAUCHE (3 par rangée),
- * les noms puis la raison à DROITE.
+ * les noms puis la raison à DROITE — le rendu vit dans `RosterGroupCard`
+ * (partagé avec le roster very hard des tours).
  *
  * Le portrait ne porte pas son nom ici : les noms sont écrits à côté, en LIENS —
  * c'est par eux qu'on saute à la fiche du perso, et les répéter sous les vignettes
@@ -34,58 +33,28 @@ export function RecommendedCharacters({
     <section className="space-y-3">
       <h2 className="text-content-strong text-xl font-bold">{title}</h2>
       <div className="space-y-3">
-        {groups.map((g, i) => {
-          // Nom inconnu = erreur de contenu → le build SSG CASSE (dans le résolveur).
-          const chars = g.characters.map((name) => {
-            const {
-              character: c,
-              name: display,
-              href,
-            } = resolveGuideCharacter(name, lang, 'RecommendedCharacters');
-            return { c, name: display, href };
-          });
-
-          return (
-            <div
-              key={i}
-              className="border-line-subtle bg-surface-raised grid grid-cols-[auto_1fr] items-center gap-4 rounded-lg border p-3"
-            >
-              <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3">
-                {chars.map(({ c, name, href }) => (
-                  <CharacterPortrait
-                    key={c.id}
-                    id={c.id}
-                    name={name}
-                    element={c.element}
-                    classType={c.class}
-                    rarity={c.rarity}
-                    size={56}
-                    href={href}
-                    showName={false}
-                  />
-                ))}
-              </div>
-
-              <div className="min-w-0 space-y-1">
-                <p className="text-accent text-sm font-semibold">
-                  {chars.map(({ c, name, href }, ci) => (
-                    <Fragment key={c.id}>
-                      {ci > 0 && ', '}
-                      {href ? (
-                        <Link href={href as Route} className="hover:underline">
-                          {name}
-                        </Link>
-                      ) : (
-                        name
-                      )}
-                    </Fragment>
-                  ))}
-                </p>
-                {g.reason && <p className="text-content text-sm leading-relaxed">{g.reason}</p>}
-              </div>
-            </div>
-          );
-        })}
+        {groups.map((g, i) => (
+          <RosterGroupCard
+            key={i}
+            // Nom inconnu = erreur de contenu → le build SSG CASSE (dans le résolveur).
+            characters={g.characters.map((raw) => {
+              const {
+                character: c,
+                name,
+                href,
+              } = resolveGuideCharacter(raw, lang, 'RecommendedCharacters');
+              return {
+                id: c.id,
+                name,
+                element: c.element,
+                classType: c.class,
+                rarity: c.rarity,
+                href,
+              };
+            })}
+            reason={g.reason}
+          />
+        ))}
       </div>
     </section>
   );

@@ -18,21 +18,12 @@
  * `CharacterPortrait` est un composant PUR : on le rend côté client à partir des
  * métadonnées résolues au build. `img` est un simple constructeur de chemins.
  */
-import { Fragment, useState, type ReactNode } from 'react';
-import Link from 'next/link';
-import type { Route } from 'next';
+import { useState, type ReactNode } from 'react';
 import { img } from '@/lib/images';
-import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import { restrictionState, type RestrictionRule } from '@/lib/tower-restrictions';
+import { RosterGroupCard, type RosterGroupCardCharacter } from './RosterGroupCard';
 
-export interface RosterCharacter {
-  id: string;
-  name: string;
-  element?: string;
-  classType?: string;
-  rarity?: number;
-  href?: string;
-}
+export type RosterCharacter = RosterGroupCardCharacter;
 
 export interface RosterGroup {
   characters: RosterCharacter[];
@@ -165,90 +156,60 @@ export function TowerCombatRoster({
         </div>
       )}
 
-      {/* Roster : tous les persos, état dérivé de la restriction active */}
+      {/* Roster : la carte partagée, chaque portrait habillé de l'état dérivé
+          de la restriction active (halo quota / grisé + croix de ban). */}
       <div className="space-y-3">
         {groups.map((g, gi) => (
-          <div
+          <RosterGroupCard
             key={gi}
-            className="border-line-subtle bg-surface-raised grid grid-cols-[auto_1fr] items-center gap-4 rounded-lg border p-3"
-          >
-            <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3">
-              {g.characters.map((c) => {
-                const state = restrictionState(
-                  { element: c.element, class: c.classType, rarity: c.rarity },
-                  rules,
-                );
-                const excluded = state === 'excluded';
-                return (
-                  <div
-                    key={c.id}
-                    className={[
-                      'relative rounded-lg',
-                      state === 'match'
-                        ? 'ring-accent ring-2 ring-offset-1 ring-offset-transparent'
-                        : '',
-                    ].join(' ')}
-                  >
-                    <div className={excluded ? 'opacity-40 grayscale' : undefined}>
-                      <CharacterPortrait
-                        id={c.id}
-                        name={c.name}
-                        element={c.element}
-                        classType={c.classType}
-                        rarity={c.rarity}
-                        size={56}
-                        href={c.href}
-                        showName={false}
+            characters={g.characters}
+            reason={g.reason}
+            decorate={(portrait, c) => {
+              const state = restrictionState(
+                { element: c.element, class: c.classType, rarity: c.rarity },
+                rules,
+              );
+              const excluded = state === 'excluded';
+              return (
+                <div
+                  className={[
+                    'relative rounded-lg',
+                    state === 'match'
+                      ? 'ring-accent ring-2 ring-offset-1 ring-offset-transparent'
+                      : '',
+                  ].join(' ')}
+                >
+                  <div className={excluded ? 'opacity-40 grayscale' : undefined}>{portrait}</div>
+                  {excluded && (
+                    <svg
+                      viewBox="0 0 100 100"
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0 h-full w-full"
+                    >
+                      <line
+                        x1="12"
+                        y1="12"
+                        x2="88"
+                        y2="88"
+                        stroke="rgb(239 68 68)"
+                        strokeWidth="9"
+                        strokeLinecap="round"
                       />
-                    </div>
-                    {excluded && (
-                      <svg
-                        viewBox="0 0 100 100"
-                        aria-hidden
-                        className="pointer-events-none absolute inset-0 h-full w-full"
-                      >
-                        <line
-                          x1="12"
-                          y1="12"
-                          x2="88"
-                          y2="88"
-                          stroke="rgb(239 68 68)"
-                          strokeWidth="9"
-                          strokeLinecap="round"
-                        />
-                        <line
-                          x1="88"
-                          y1="12"
-                          x2="12"
-                          y2="88"
-                          stroke="rgb(239 68 68)"
-                          strokeWidth="9"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-            <div className="min-w-0 space-y-1">
-              <p className="text-accent text-sm font-semibold">
-                {g.characters.map((c, ci) => (
-                  <Fragment key={c.id}>
-                    {ci > 0 && ', '}
-                    {c.href ? (
-                      <Link href={c.href as Route} className="hover:underline">
-                        {c.name}
-                      </Link>
-                    ) : (
-                      c.name
-                    )}
-                  </Fragment>
-                ))}
-              </p>
-              {g.reason && <p className="text-content text-sm leading-relaxed">{g.reason}</p>}
-            </div>
-          </div>
+                      <line
+                        x1="88"
+                        y1="12"
+                        x2="12"
+                        y2="88"
+                        stroke="rgb(239 68 68)"
+                        strokeWidth="9"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  )}
+                </div>
+              );
+            }}
+          />
         ))}
       </div>
     </section>
