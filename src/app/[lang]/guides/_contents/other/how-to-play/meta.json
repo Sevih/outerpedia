@@ -1,0 +1,20 @@
+{
+  "title": {
+    "en": "How to Play",
+    "jp": "プレイ方法",
+    "kr": "플레이 방법",
+    "zh": "进行方法",
+    "fr": "Comment jouer"
+  },
+  "description": {
+    "en": "Download guide and getting started tips for OUTERPLANE on mobile and PC.",
+    "jp": "モバイルとPCでのOUTERPLANEのダウンロードガイドと始め方のヒント。",
+    "kr": "모바일 및 PC에서 OUTERPLANE 다운로드 가이드 및 시작 팁.",
+    "zh": "OUTERPLANE 移动端和 PC 端下载指南及新手入门提示。",
+    "fr": "Guide de téléchargement et conseils pour bien débuter Outerplane sur mobile et PC."
+  },
+  "icon": "CM_EtcMenu_Azit",
+  "author": "Sevih",
+  "updated": "2025-05-25",
+  "order": 1
+}

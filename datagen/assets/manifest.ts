@@ -681,6 +681,26 @@ export function buildAssetManifest(): AssetRequest[] {
           },
     );
   }
+  // SCREENSHOTS ÉDITORIAUX des guides (`data/editorial/guides/<slug>/…`) —
+  // visuels qui n'existent pas dans le jeu (captures de roadmap, schémas…).
+  // Collecte par SCAN du pool : déposer un fichier suffit, aucune liste à
+  // tenir. Clé publique = `images/guides/<slug>/<fichier>` (cf. `img.guideShot`).
+  {
+    const pool = resolve('data/editorial/guides');
+    if (existsSync(pool)) {
+      for (const dir of readdirSync(pool, { withFileTypes: true })) {
+        if (!dir.isDirectory()) continue;
+        for (const f of readdirSync(resolve(pool, dir.name))) {
+          push({
+            kind: 'editorial',
+            key: `images/guides/${dir.name}/${f}`,
+            source: `guides/${dir.name}/${f}`,
+            domain: 'guides',
+          });
+        }
+      }
+    }
+  }
   // Boss liés aux guides (`meta.json` → bossId, convention : le boss COURANT) :
   // portrait sous le namespace boss EXISTANT (même clé que les sources
   // d'équipement → jamais deux copies) + icônes de ses skills sous le

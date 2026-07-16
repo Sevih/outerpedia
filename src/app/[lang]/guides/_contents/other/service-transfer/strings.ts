@@ -1,0 +1,1039 @@
+/**
+ * Textes du guide « Service Transfer » (V2 : strings.json + HTML inline rendu
+ * en dangerouslySetInnerHTML). Ici : `satisfies` typé, et le balisage réduit à
+ * `**gras**` / `[label](url)` interprétés par ./rich.tsx. Les alts des
+ * screenshots V2 ont disparu avec les screenshots (les pages sources VAGAMES
+ * et Smilegate ont été détruites — images perdues).
+ */
+import type { LocalizedText } from '@contracts';
+
+type Text = LocalizedText & { en: string };
+
+export type FaqBlock = { kind: 'p'; text: Text } | { kind: 'ul' | 'ol'; items: Text[] };
+
+export interface FaqEntry {
+  key: string;
+  title: Text;
+  blocks: FaqBlock[];
+}
+
+export const S = {
+  heroTitle: {
+    en: 'OUTERPLANE Service Transfer to VAGAMES',
+    jp: 'OUTERPLANEのVAGAMESへのサービス移行',
+    kr: 'OUTERPLANE VAGAMES 서비스 이전',
+    zh: 'OUTERPLANE 迁移至 VAGAMES',
+    fr: 'Transfert du service OUTERPLANE vers VAGAMES',
+  },
+  heroSubtitle: {
+    en: 'Keep your account, data, and rewards by following this updated guide.',
+    jp: '最新ガイドに従って、アカウント・データ・報酬を引き継ぎましょう。',
+    kr: '업데이트된 가이드를 따라 계정, 데이터, 보상을 유지하세요.',
+    zh: '按照本指南操作，保留您的账号、数据和奖励。',
+    fr: 'Conservez votre compte, vos données et vos récompenses en suivant ce guide mis à jour.',
+  },
+  applyLabel: {
+    en: 'Apply:',
+    jp: '申請期間：',
+    kr: '신청 기간：',
+    zh: '申请期间：',
+    fr: 'Candidature :',
+  },
+  applyDates: {
+    en: 'Aug 12 → Sep 23, 2025',
+    jp: '8月12日 → 9月23日, 2025',
+    kr: '8월 12일 → 9월 23일, 2025',
+    zh: '8月12日 → 9月23日, 2025',
+    fr: '12 août → 23 sept. 2025',
+  },
+  transferLabel: {
+    en: 'Transfer:',
+    jp: '移行日：',
+    kr: '이전일：',
+    zh: '迁移日期：',
+    fr: 'Transfert :',
+  },
+  transferDate: { en: 'Oct 1', jp: '10月1日', kr: '10월 1일', zh: '10月1日', fr: '1er oct.' },
+  overviewTitle: { en: 'Overview', jp: '概要', kr: '개요', zh: '概述', fr: 'Aperçu' },
+  overviewText: {
+    en: 'OUTERPLANE will be transferred to **VAGAMES**. The exact date will be announced this week. Apply between **August 12** and **September 23** to receive your transfer code. **A separate code is required for each account on each server.**',
+    jp: 'OUTERPLANEは**VAGAMES**に移行されます。正確な日程は今週中に発表される予定です。**8月12日**から**9月23日**の間に申請して引き継ぎコードを受け取ってください。**各サーバーのアカウントごとに別のコードが必要です。**',
+    kr: 'OUTERPLANE은 **VAGAMES**로 서비스가 이전됩니다. 정확한 날짜는 이번 주 내에 발표될 예정입니다. **8월 12일**부터 **9월 23일** 사이에 신청하여 이전 코드를 받으세요. **각 서버의 계정마다 별도의 코드가 필요합니다.**',
+    zh: 'OUTERPLANE将迁移至**VAGAMES**。具体日期将于本周公布。请在**8月12日**至**9月23日**期间申请，以获取迁移码。**每个服务器的每个账号都需要单独的迁移码。**',
+    fr: 'OUTERPLANE sera transféré vers **VAGAMES**. La date exacte sera annoncée cette semaine. Faites votre demande entre le **12 août** et le **23 septembre** pour recevoir votre code de transfert. **Un code distinct est requis pour chaque compte sur chaque serveur.**',
+  },
+  overviewMissedWindow: {
+    en: 'Missed the window or lost your code? You can still recover your account. See [Recovery Help](#recovery) below.',
+    jp: '申請期間を逃した、またはコードを紛失した場合でも、アカウントの回復が可能です。下記の[回復サポート](#recovery)をご覧ください。',
+    kr: '신청 기간을 놓쳤거나 코드를 잃어버렸나요? 계정을 복구할 수 있습니다. 아래 [복구 도움말](#recovery)을 확인하세요.',
+    zh: '错过申请期间或丢失迁移码？您仍可以恢复账号。请查看下方的[恢复帮助](#recovery)。',
+    fr: "Vous avez manqué la période ou perdu votre code ? Vous pouvez toujours récupérer votre compte. Consultez l'[aide à la récupération](#recovery) ci-dessous.",
+  },
+  howtoTitle: {
+    en: 'How to Transfer Your Account',
+    jp: 'アカウントの引き継ぎ方法',
+    kr: '계정 이전 방법',
+    zh: '如何迁移您的账号',
+    fr: 'Comment transférer votre compte',
+  },
+  howtoStep1: {
+    en: 'Log into the game.',
+    jp: 'ゲームにログインします。',
+    kr: '게임에 로그인합니다.',
+    zh: '登录游戏。',
+    fr: 'Connectez-vous au jeu.',
+  },
+  howtoStep2: {
+    en: 'Tap [Service Transfer] on the main screen or go to [Settings] → [Service Transfer].',
+    jp: 'メイン画面の[サービス移行]をタップ、または[設定]→[サービス移行]へ進みます。',
+    kr: '메인 화면에서 [서비스 이전]을 탭하거나 [설정] → [서비스 이전]으로 이동합니다.',
+    zh: '点击主界面的[服务迁移]，或进入[设置] → [服务迁移]。',
+    fr: "Appuyez sur [Service Transfer] sur l'écran principal ou allez dans [Paramètres] → [Service Transfer].",
+  },
+  howtoStep3: {
+    en: 'Review the notes and agree to the terms.',
+    jp: '注意事項を確認し、規約に同意します。',
+    kr: '안내 사항을 확인하고 약관에 동의합니다.',
+    zh: '阅读注意事项并同意条款。',
+    fr: 'Lisez les remarques et acceptez les conditions.',
+  },
+  howtoStep4: {
+    en: 'Receive a unique transfer code per account/server. Save it safely as a screenshot or send it to your email once issued.',
+    jp: 'アカウント/サーバーごとに固有の引き継ぎコードを受け取ります。発行後はスクリーンショットを撮るかメールに送信して安全に保管してください。',
+    kr: '계정/서버마다 고유한 이전 코드를 받습니다. 발급 후 스크린샷을 찍거나 이메일로 전송하여 안전하게 보관하세요.',
+    zh: '每个账号/服务器都会获得唯一的迁移码。发放后，请截图保存或发送至您的邮箱妥善保管。',
+    fr: "Recevez un code de transfert unique par compte/serveur. Conservez-le précieusement sous forme de capture d'écran ou envoyez-le par e-mail une fois émis.",
+  },
+  howtoStep5: {
+    en: 'After the transfer maintenance Oct 1, create a VAGAMES account (Email/Google/Apple) and enter the code on the corresponding server.',
+    jp: '10月1日の移行メンテナンス後、VAGAMESアカウント（メール/Google/Apple）を作成し、対応するサーバーでコードを入力します。',
+    kr: '10월 1일 이전 점검 후, VAGAMES 계정(이메일/Google/Apple)을 생성하고 해당 서버에서 코드를 입력합니다.',
+    zh: '10月1日迁移维护结束后，创建VAGAMES账号（邮箱/Google/Apple），并在对应服务器输入迁移码。',
+    fr: 'Après la maintenance de transfert du 1er octobre, créez un compte VAGAMES (E-mail/Google/Apple) et saisissez le code sur le serveur correspondant.',
+  },
+  mergeTitle: {
+    en: 'Server Merge',
+    jp: 'サーバー統合',
+    kr: '서버 합병',
+    zh: '服务器合并',
+    fr: 'Fusion des serveurs',
+  },
+  mergeLine1: {
+    en: 'Korea, Asia I, Asia II → merged into Global 2',
+    jp: '韓国・アジアI・アジアII → グローバル2に統合',
+    kr: '한국, 아시아 I, 아시아 II → 글로벌 2로 통합',
+    zh: '韩国、亚洲I、亚洲II → 合并至Global 2',
+    fr: 'Korea, Asia I, Asia II → fusionnés dans Global 2',
+  },
+  mergeLine2: {
+    en: 'Global → renamed to Global 1',
+    jp: 'グローバル → グローバル1に改名',
+    kr: '글로벌 → 글로벌 1로 이름 변경',
+    zh: 'Global → 更名为 Global 1',
+    fr: 'Global → renommé Global 1',
+  },
+  mergeLine3: {
+    en: 'Japan → unchanged',
+    jp: '日本 → 変更なし',
+    kr: '일본 → 변동 없음',
+    zh: '日本 → 不变',
+    fr: 'Japan → inchangé',
+  },
+  mergeLine4: {
+    en: 'Separate code needed for each account/server you have characters on',
+    jp: 'キャラクターが存在する各アカウント/サーバーごとに別コードが必要',
+    kr: '캐릭터가 있는 각 계정/서버마다 별도의 코드 필요',
+    zh: '每个有角色的账号/服务器都需要单独的迁移码',
+    fr: 'Un code distinct est nécessaire pour chaque compte/serveur sur lequel vous avez des personnages',
+  },
+  rewardsTitle: {
+    en: 'Transfer Completion Rewards',
+    jp: '移行完了報酬',
+    kr: '이전 완료 보상',
+    zh: '迁移完成奖励',
+    fr: 'Récompenses de fin de transfert',
+  },
+  important: {
+    en: 'Important Notes',
+    jp: '重要事項',
+    kr: '중요 사항',
+    zh: '重要注意事项',
+    fr: 'Remarques importantes',
+  },
+  importantNote1: {
+    en: 'Transfer is irreversible once agreed.',
+    jp: '一度同意すると、移行は取り消せません。',
+    kr: '동의하면 이전을 취소할 수 없습니다.',
+    zh: '一旦同意，迁移不可撤销。',
+    fr: 'Le transfert est irréversible une fois accepté.',
+  },
+  importantNote2: {
+    en: 'Guest accounts must be linked to receive a code.',
+    jp: 'ゲストアカウントはコードを受け取るためにリンクが必要です。',
+    kr: '게스트 계정은 코드를 받기 위해 연동이 필요합니다.',
+    zh: '访客账号需要关联后才能获取迁移码。',
+    fr: 'Les comptes invités doivent être liés pour recevoir un code.',
+  },
+  importantNote3: {
+    en: 'Inactive accounts (no 1-4 clear + no login since Nov 5, 2024) will be deleted on the transfer maintenance date Oct 1.',
+    jp: '非アクティブアカウント（ステージ1-4未クリア＋2024年11月5日以降ログインなし）は10月1日の移行メンテナンス時に削除されます。',
+    kr: '비활성 계정(1-4 스테이지 미클리어 + 2024년 11월 5일 이후 미로그인)은 10월 1일 이전 점검 시 삭제됩니다.',
+    zh: '不活跃账号（未通关1-4且2024年11月5日后未登录）将在10月1日迁移维护时被删除。',
+    fr: 'Les comptes inactifs (chapitre 1-4 non terminé + aucune connexion depuis le 5 novembre 2024) seront supprimés à la date de maintenance de transfert du 1er octobre.',
+  },
+  importantNote4: {
+    en: 'Mail claim periods are not extended — claim before Sep 23.',
+    jp: 'メールの受取期限は延長されません — 9月23日までに受け取ってください。',
+    kr: '메일 수령 기간은 연장되지 않습니다 — 9월 23일 전에 수령하세요.',
+    zh: '邮件领取期限不会延长 — 请在9月23日前领取。',
+    fr: 'Les périodes de réclamation du courrier ne sont pas prolongées — réclamez avant le 23 septembre.',
+  },
+  importantNote5: {
+    en: "Recovery may not be possible for guest accounts or accounts without purchase history (ownership can't be verified).",
+    jp: 'ゲストアカウントや購入履歴のないアカウントは、所有権確認ができないため回復できない場合があります。',
+    kr: '게스트 계정이나 구매 내역이 없는 계정은 소유권 확인이 불가하여 복구가 어려울 수 있습니다.',
+    zh: '访客账号或无购买记录的账号可能无法恢复，因为无法验证所有权。',
+    fr: "La récupération peut être impossible pour les comptes invités ou les comptes sans historique d'achat (la propriété ne peut pas être vérifiée).",
+  },
+  recoveryTitle: {
+    en: 'Recovery Help (No Code / Lost Code)',
+    jp: '回復サポート（コードなし / 紛失）',
+    kr: '복구 도움말 (코드 없음 / 분실)',
+    zh: '恢复帮助（无迁移码/丢失迁移码）',
+    fr: 'Aide à la récupération (pas de code / code perdu)',
+  },
+  recoveryStep1Title: {
+    en: 'Step 1 — Check / issue your code',
+    jp: 'ステップ1 — コードの確認/発行',
+    kr: '1단계 — 코드 확인/발급',
+    zh: '第1步 — 查看/领取迁移码',
+    fr: 'Étape 1 — Vérifiez / émettez votre code',
+  },
+  recoveryStep1Text: {
+    en: 'Use the official page: [STOVE Transfer Code Confirmation](https://outerplane.game.onstove.com/transfer)',
+    jp: '公式ページをご利用ください：[STOVE引き継ぎコード確認](https://outerplane.game.onstove.com/transfer)',
+    kr: '공식 페이지를 이용하세요：[STOVE 이전 코드 확인](https://outerplane.game.onstove.com/transfer)',
+    zh: '请访问官方页面：[STOVE迁移码确认页](https://outerplane.game.onstove.com/transfer)',
+    fr: 'Utilisez la page officielle : [Confirmation du code de transfert STOVE](https://outerplane.game.onstove.com/transfer)',
+  },
+  recoveryStep1Note: {
+    en: "If you didn't receive a code before, you can still get one after agreeing to the transfer agreement.",
+    jp: '以前にコードを受け取っていない場合でも、移行契約に同意後に発行できます。',
+    kr: '이전에 코드를 받지 못한 경우에도 이전 동의 후 발급받을 수 있습니다.',
+    zh: '即使之前未收到迁移码，同意迁移协议后仍可获取。',
+    fr: "Si vous n'avez pas reçu de code auparavant, vous pouvez toujours en obtenir un après avoir accepté l'accord de transfert.",
+  },
+  recoveryStep2Title: {
+    en: "Step 2 — Can't verify your STOVE account?",
+    jp: 'ステップ2 — STOVEアカウントを確認できない場合',
+    kr: '2단계 — STOVE 계정 확인이 불가한 경우',
+    zh: '第2步 — 无法验证STOVE账号？',
+    fr: 'Étape 2 — Impossible de vérifier votre compte STOVE ?',
+  },
+  recoveryStep2Text: {
+    en: 'If you have **purchase history**, contact support. Provide as much info as possible for a faster review:',
+    jp: '**購入履歴**がある場合はサポートに連絡してください。迅速な審査のため、できるだけ多くの情報を提供してください：',
+    kr: '**구매 내역**이 있는 경우 지원팀에 문의하세요. 빠른 검토를 위해 최대한 많은 정보를 제공해 주세요：',
+    zh: '如有**购买记录**，请联系客服。提供尽可能多的信息以加快审核：',
+    fr: "Si vous avez un **historique d'achat**, contactez le support. Fournissez autant d'informations que possible pour un traitement plus rapide :",
+  },
+  recoveryStep2Item1: { en: 'Server', jp: 'サーバー', kr: '서버', zh: '服务器', fr: 'Serveur' },
+  recoveryStep2Item2: {
+    en: 'Nickname',
+    jp: 'ニックネーム',
+    kr: '닉네임',
+    zh: '昵称',
+    fr: 'Pseudo',
+  },
+  recoveryStep2Item3: { en: 'UID', jp: 'UID', kr: 'UID', zh: 'UID', fr: 'UID' },
+  recoveryStep2Item4: {
+    en: 'Device & OS (e.g., iPhone 14 / iOS 17)',
+    jp: 'デバイス & OS（例：iPhone 14 / iOS 17）',
+    kr: '기기 및 OS(예: iPhone 14 / iOS 17)',
+    zh: '设备 & 系统（如 iPhone 14 / iOS 17）',
+    fr: 'Appareil & OS (ex. : iPhone 14 / iOS 17)',
+  },
+  recoveryStep2Item5: {
+    en: 'Service Transfer Code (if available)',
+    jp: 'サービス移行コード（あれば）',
+    kr: '서비스 이전 코드(있는 경우)',
+    zh: '服务迁移码（如有）',
+    fr: 'Code de Service Transfer (si disponible)',
+  },
+  recoveryStep2Item6: {
+    en: 'App Store / Google Play receipt (screenshot)',
+    jp: 'App Store / Google Playの領収書（スクリーンショット）',
+    kr: '앱스토어 / 구글 플레이 영수증(스크린샷)',
+    zh: 'App Store / Google Play收据（截图）',
+    fr: "Reçu App Store / Google Play (capture d'écran)",
+  },
+  recoveryStep2Email: {
+    en: 'Email:',
+    jp: 'メール：',
+    kr: '이메일：',
+    zh: '邮箱：',
+    fr: 'E-mail :',
+  },
+  recoveryStep2HelpCenter: {
+    en: 'Help Center:',
+    jp: 'ヘルプセンター：',
+    kr: '도움말 센터：',
+    zh: '帮助中心：',
+    fr: "Centre d'aide :",
+  },
+  recoveryStep2Note: {
+    en: 'Provide info based on data **prior to the transfer maintenance date**. Typical response time is 3–5 business days (may vary).',
+    jp: '**移行メンテナンス日以前**のデータに基づいた情報を提供してください。通常の回答時間は3〜5営業日です（変動する場合あり）。',
+    kr: '**이전 점검일 이전** 데이터를 기준으로 정보를 제공해 주세요. 일반적인 응답 시간은 영업일 기준 3~5일입니다(변동 가능).',
+    zh: '请提供**迁移维护日期之前**的数据信息。通常回复时间为3-5个工作日（可能有所变动）。',
+    fr: 'Fournissez des informations basées sur les données **antérieures à la date de maintenance de transfert**. Le délai de réponse habituel est de 3 à 5 jours ouvrés (peut varier).',
+  },
+  recoveryGuestNote: {
+    en: "Note: Accounts created as **Guest** or **without purchase history** may not be eligible for recovery, as ownership can't be verified.",
+    jp: '注意：**ゲスト**として作成されたアカウントや**購入履歴のない**アカウントは、所有権確認ができないため回復の対象外となる場合があります。',
+    kr: '참고: **게스트**로 생성된 계정이나 **구매 내역이 없는** 계정은 소유권 확인이 불가하여 복구 대상에서 제외될 수 있습니다.',
+    zh: '注意：以**访客**身份创建或**无购买记录**的账号可能不符合恢复条件，因为无法验证所有权。',
+    fr: "Note : les comptes créés en tant qu'**invité** ou **sans historique d'achat** peuvent ne pas être éligibles à la récupération, la propriété ne pouvant être vérifiée.",
+  },
+  refundTitle: {
+    en: 'Refund Requests',
+    jp: '払い戻し申請',
+    kr: '환불 신청',
+    zh: '退款申请',
+    fr: 'Demandes de remboursement',
+  },
+  refundText: {
+    en: 'Available post-transfer Oct 1 → Dec 21, 2025, for Paid Ether purchased in last 90 days, if you did not transfer. Apply via STOVE Customer Center with proof of purchase.',
+    jp: '移行後の10月1日〜2025年12月21日に、移行しなかった場合の過去90日以内に購入した有料エーテルの払い戻しが申請可能です。購入証明書と共にSTOVEカスタマーセンターへ申請してください。',
+    kr: '이전하지 않은 경우 10월 1일 ~ 2025년 12월 21일까지 최근 90일 내 구매한 유료 에테르에 대한 환불을 신청할 수 있습니다. 구매 증빙서류와 함께 STOVE 고객센터에 신청하세요.',
+    zh: '如未完成迁移，可在10月1日至2025年12月21日期间，对90天内购买的付费以太申请退款。请通过STOVE客服中心并附上购买凭证申请。',
+    fr: "Disponible après le transfert, du 1er octobre au 21 décembre 2025, pour l'Ether payant acheté lors des 90 derniers jours, si vous n'avez pas effectué le transfert. Faites votre demande via le Service client STOVE avec une preuve d'achat.",
+  },
+  shopTitle: {
+    en: 'Shop Suspension',
+    jp: 'ショップ停止',
+    kr: '상점 중단',
+    zh: '商店暂停',
+    fr: 'Suspension de la boutique',
+  },
+  shopText: {
+    en: 'Shop closed Sep 4 → until transfer maintenance Oct 1. One new hero + Battle Pass delayed. Event dungeon rerun during downtime.',
+    jp: 'ショップは9月4日から10月1日の移行メンテナンスまで閉鎖。新ヒーロー1体+バトルパスが延期。停止期間中にイベントダンジョンが再開催。',
+    kr: '상점은 9월 4일부터 10월 1일 이전 점검까지 폐쇄. 신규 영웅 1명 + 배틀 패스 지연. 중단 기간 동안 이벤트 던전 재실행.',
+    zh: '商店从9月4日关闭至10月1日迁移维护。一名新英雄+战令延期。停机期间活动副本重新开启。',
+    fr: "Boutique fermée du 4 septembre jusqu'à la maintenance de transfert du 1er octobre. Un nouveau héros + le Battle Pass sont reportés. Rediffusion du donjon d'événement pendant l'interruption.",
+  },
+  faqTitle: {
+    en: 'Service Transfer FAQ',
+    jp: 'サービス移行FAQ',
+    kr: '서비스 이전 FAQ',
+    zh: '服务迁移FAQ',
+    fr: 'FAQ du Service Transfer',
+  },
+  checklistTitle: {
+    en: 'Quick Checklist',
+    jp: 'クイックチェックリスト',
+    kr: '빠른 체크리스트',
+    zh: '快速清单',
+    fr: 'Aide-mémoire rapide',
+  },
+  checklistItem1: {
+    en: '✅ Apply Aug 12 → Sep 23',
+    jp: '✅ 8月12日〜9月23日に申請',
+    kr: '✅ 8월 12일 ~ 9월 23일 신청',
+    zh: '✅ 8月12日至9月23日申请',
+    fr: '✅ Faites votre demande du 12 août au 23 sept.',
+  },
+  checklistItem2: {
+    en: '✅ Get code for EACH account/server',
+    jp: '✅ 各アカウント/サーバーのコードを取得',
+    kr: '✅ 각 계정/서버별 코드 받기',
+    zh: '✅ 为每个账号/服务器获取迁移码',
+    fr: '✅ Obtenez un code pour CHAQUE compte/serveur',
+  },
+  checklistItem3: {
+    en: '✅ Save the code (screenshot or email)',
+    jp: '✅ コードを保存（スクリーンショットまたはメール）',
+    kr: '✅ 코드 저장 (스크린샷 또는 이메일)',
+    zh: '✅ 保存迁移码（截图或发送至邮箱）',
+    fr: "✅ Sauvegardez le code (capture d'écran ou e-mail)",
+  },
+  checklistItem4: {
+    en: '✅ Enter after Oct 1',
+    jp: '✅ 10月1日以降に入力',
+    kr: '✅ 10월 1일 이후 입력',
+    zh: '✅ 10月1日后输入',
+    fr: '✅ Saisissez-le après le 1er octobre',
+  },
+  checklistItem5: {
+    en: '✅ Link guest accounts',
+    jp: '✅ ゲストアカウントをリンク',
+    kr: '✅ 게스트 계정 연동',
+    zh: '✅ 关联访客账号',
+    fr: '✅ Liez les comptes invités',
+  },
+  officialTitle: {
+    en: 'Official Announcements',
+    jp: '公式お知らせ',
+    kr: '공식 공지',
+    zh: '官方公告',
+    fr: 'Annonces officielles',
+  },
+  officialBtn1: {
+    en: 'View Stove Notice',
+    jp: 'STOVE公告を見る',
+    kr: 'STOVE 공지 보기',
+    zh: '查看STOVE公告',
+    fr: "Voir l'avis Stove",
+  },
+  officialBtn2: {
+    en: 'Update Notice — Code issuance started',
+    jp: '更新お知らせ — コード発行開始',
+    kr: '업데이트 공지 — 코드 발급 시작',
+    zh: '更新公告 — 迁移码领取开始',
+    fr: 'Avis de mise à jour — émission des codes lancée',
+  },
+  officialBtn3: {
+    en: 'OUTERPLANE Service Transfer FAQ',
+    jp: 'OUTERPLANEサービス移行FAQ',
+    kr: 'OUTERPLANE 서비스 이전 FAQ',
+    zh: 'OUTERPLANE服务迁移FAQ',
+    fr: 'FAQ du transfert de service OUTERPLANE',
+  },
+  sidebarRecoveryTitle: {
+    en: 'Need Recovery?',
+    jp: '回復が必要ですか？',
+    kr: '복구가 필요한가요?',
+    zh: '需要恢复账号？',
+    fr: 'Besoin de récupérer votre compte ?',
+  },
+  sidebarRecoveryLink1: {
+    en: 'Check / Issue Transfer Code (STOVE)',
+    jp: '引き継ぎコードを確認/発行する（STOVE）',
+    kr: '이전 코드 확인/발급 (STOVE)',
+    zh: '查看/领取迁移码（STOVE）',
+    fr: 'Vérifier / émettre le code de transfert (STOVE)',
+  },
+  sidebarRecoveryLink3: {
+    en: 'Help Center',
+    jp: 'ヘルプセンター',
+    kr: '도움말 센터',
+    zh: '帮助中心',
+    fr: "Centre d'aide",
+  },
+} as const satisfies Record<string, Text>;
+
+/**
+ * Récompenses de transfert : nom d'item (gras) + effet. La V2 passait par
+ * ItemInline ; ces items d'événement ne sont plus dans le catalogue — du
+ * texte fort suffit pour une archive.
+ */
+export const REWARDS: Array<{ name: string; desc?: Text }> = [
+  {
+    name: '"New Beginning" Title',
+    desc: {
+      en: '– 1 less Stamina in Adventure / Special Request / Skyward Tower',
+      jp: '– 冒険/特別依頼/スカイウォードタワーのスタミナ消費1軽減',
+      kr: '– 모험/특별 의뢰/스카이워드 타워 스태미나 1 감소',
+      zh: '– 冒险/特别委托/空塔减少1体力消耗',
+      fr: '– 1 Stamina de moins dans Adventure / Special Request / Skyward Tower',
+    },
+  },
+  { name: '"New Beginning" Profile Frame' },
+  {
+    name: '1 Oath of Determination',
+    desc: {
+      en: '– set Affinity Level to 10',
+      jp: '– 親密度レベルを10に設定',
+      kr: '– 친밀도 레벨을 10으로 설정',
+      zh: '– 将羁绊等级设置为10',
+      fr: "– règle le niveau d'Affinité à 10",
+    },
+  },
+  {
+    name: '1 Book of Evolution',
+    desc: {
+      en: '– set Upgrade Stage to 6',
+      jp: '– 強化段階を6に設定',
+      kr: '– 업그레이드 단계를 6으로 설정',
+      zh: '– 将升级阶段设置为6',
+      fr: "– règle le palier d'Amélioration à 6",
+    },
+  },
+  {
+    name: '1 Unlimited Restaurant Voucher',
+    desc: {
+      en: '– level hero to 100',
+      jp: '– ヒーローをレベル100にする',
+      kr: '– 영웅을 레벨 100으로 올리기',
+      zh: '– 将英雄提升至100级',
+      fr: '– monte le héros au niveau 100',
+    },
+  },
+  {
+    name: '1 Demiurge Selection Ticket',
+    desc: {
+      en: '– choose Stella, Astei, Drakhan, Vlada, or Monad Eva',
+      jp: '– ステラ、アスティ、ドラカン、ヴラダ、またはモナド・エヴァを選択',
+      kr: '– 스텔라, 아스테이, 드라칸, 블라다, 또는 모나드 에바 선택',
+      zh: '– 选择 Stella、Astei、Drakhan、Vlada 或 Monad Eva',
+      fr: '– au choix Stella, Astei, Drakhan, Vlada ou Monad Eva',
+    },
+  },
+  { name: '1,500 Ether' },
+];
+
+export const FAQ_ITEMS: FaqEntry[] = [
+  {
+    key: 'faq-0',
+    title: {
+      en: "I didn't issue / lost my Service Transfer Code. Can I still recover my account?",
+      jp: '引き継ぎコードを発行しなかった/紛失した場合、アカウントを回復できますか？',
+      kr: '서비스 이전 코드를 발급받지 않았거나/분실했습니다. 계정을 복구할 수 있나요?',
+      zh: '我未领取/丢失了服务迁移码，还能恢复账号吗？',
+      fr: "Je n'ai pas émis / j'ai perdu mon code de Service Transfer. Puis-je quand même récupérer mon compte ?",
+    },
+    blocks: [
+      {
+        kind: 'p',
+        text: {
+          en: 'Yes. First try checking/issuing your code on the official page: [STOVE Transfer Code Confirmation](https://outerplane.game.onstove.com/transfer).',
+          jp: 'はい。まず公式ページでコードの確認/発行をお試しください：[STOVE引き継ぎコード確認](https://outerplane.game.onstove.com/transfer)。',
+          kr: '네. 먼저 공식 페이지에서 코드를 확인/발급해 보세요: [STOVE 이전 코드 확인](https://outerplane.game.onstove.com/transfer).',
+          zh: '可以。请先尝试在官方页面查看/领取迁移码：[STOVE迁移码确认页](https://outerplane.game.onstove.com/transfer)。',
+          fr: "Oui. Essayez d'abord de vérifier/émettre votre code sur la page officielle : [Confirmation du code de transfert STOVE](https://outerplane.game.onstove.com/transfer).",
+        },
+      },
+      {
+        kind: 'p',
+        text: {
+          en: 'If you can\'t verify your STOVE account but you have **purchase history**, email support with as much info as you can (see the "Recovery Help" section below). They will review your data and assist with recovery.',
+          jp: 'STOVEアカウントの確認ができなくても**購入履歴**がある場合は、できるだけ多くの情報を添えてサポートにメールしてください（下記「回復サポート」参照）。データを確認した上で復旧をサポートします。',
+          kr: 'STOVE 계정을 확인할 수 없지만 **구매 내역**이 있는 경우, 가능한 많은 정보를 첨부하여 지원팀에 이메일을 보내세요(아래 「복구 도움말」 참조). 데이터를 검토하여 복구를 지원합니다.',
+          zh: '如果无法验证STOVE账号但有**购买记录**，请携带尽可能多的信息发邮件联系客服（参见下方「恢复帮助」）。他们将审核您的数据并协助恢复。',
+          fr: "Si vous ne parvenez pas à vérifier votre compte STOVE mais que vous avez un **historique d'achat**, contactez le support par e-mail avec le maximum d'informations possible (voir la section « Aide à la récupération » ci-dessous). Ils examineront vos données et vous aideront à récupérer votre compte.",
+        },
+      },
+    ],
+  },
+  {
+    key: 'faq-1',
+    title: {
+      en: 'Will I be able to continue using my existing account after the service transfer?',
+      jp: 'サービス移行後、既存のアカウントを引き続き使用できますか？',
+      kr: '서비스 이전 후 기존 계정을 계속 사용할 수 있나요?',
+      zh: '服务迁移后我还能继续使用原来的账号吗？',
+      fr: 'Pourrai-je continuer à utiliser mon compte existant après le transfert de service ?',
+    },
+    blocks: [
+      {
+        kind: 'p',
+        text: {
+          en: 'Yes. Once you enter the transfer code and the data transfer completes, you can keep playing with your existing account.',
+          jp: 'はい。引き継ぎコードを入力してデータ移行が完了すれば、既存のアカウントで引き続きプレイできます。',
+          kr: '네. 이전 코드를 입력하고 데이터 이전이 완료되면 기존 계정으로 계속 플레이할 수 있습니다.',
+          zh: '可以。输入迁移码并完成数据迁移后，您即可继续使用原账号游戏。',
+          fr: 'Oui. Une fois le code de transfert saisi et le transfert des données terminé, vous pouvez continuer à jouer avec votre compte existant.',
+        },
+      },
+      {
+        kind: 'ul',
+        items: [
+          {
+            en: 'You need a separate transfer code for **each account and each server**.',
+            jp: '**各アカウントおよび各サーバー**ごとに別の引き継ぎコードが必要です。',
+            kr: '**각 계정 및 각 서버**마다 별도의 이전 코드가 필요합니다.',
+            zh: '**每个账号及每个服务器**都需要单独的迁移码。',
+            fr: "Vous avez besoin d'un code de transfert distinct pour **chaque compte et chaque serveur**.",
+          },
+          {
+            en: 'Codes must be used on the corresponding server. Server changes are not allowed.',
+            jp: 'コードは対応するサーバーでのみ使用可能です。サーバー変更は許可されていません。',
+            kr: '코드는 해당 서버에서만 사용 가능합니다. 서버 변경은 허용되지 않습니다.',
+            zh: '迁移码只能在对应服务器上使用，不允许更换服务器。',
+            fr: 'Les codes doivent être utilisés sur le serveur correspondant. Les changements de serveur ne sont pas autorisés.',
+          },
+          {
+            en: 'Ex: A Korea server code **cannot** be used on the Japan server.',
+            jp: '例：韓国サーバーのコードは日本サーバーでは**使用できません**。',
+            kr: '예: 한국 서버 코드는 일본 서버에서 **사용할 수 없습니다**.',
+            zh: '例：韩服迁移码**不能**用于日服。',
+            fr: 'Ex. : un code du serveur Korea **ne peut pas** être utilisé sur le serveur Japan.',
+          },
+          {
+            en: 'Ex: A Korea server code **can** be used on the Global 2 server (post-merge).',
+            jp: '例：韓国サーバーのコードはグローバル2サーバー（統合後）では**使用できます**。',
+            kr: '예: 한국 서버 코드는 글로벌 2 서버(합병 후)에서 **사용할 수 있습니다**.',
+            zh: '例：韩服迁移码**可以**用于Global 2服务器（合并后）。',
+            fr: 'Ex. : un code du serveur Korea **peut** être utilisé sur le serveur Global 2 (après la fusion).',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    key: 'faq-2',
+    title: {
+      en: 'How do I get the service transfer code?',
+      jp: 'サービス移行コードはどうやって取得しますか？',
+      kr: '서비스 이전 코드는 어떻게 받나요?',
+      zh: '如何获取服务迁移码？',
+      fr: 'Comment obtenir le code de transfert de service ?',
+    },
+    blocks: [
+      {
+        kind: 'ol',
+        items: [
+          {
+            en: 'After the Aug 12 (Tue) maintenance, log in → tap **Service Transfer** notice → open transfer screen.',
+            jp: '8月12日（火）のメンテナンス後、ログイン → **サービス移行**のお知らせをタップ → 移行画面を開きます。',
+            kr: '8월 12일(화) 점검 후, 로그인 → **서비스 이전** 공지 탭 → 이전 화면 오픈.',
+            zh: '8月12日（周二）维护后，登录 → 点击**服务迁移**公告 → 打开迁移界面。',
+            fr: "Après la maintenance du 12 août (mar.), connectez-vous → appuyez sur l'avis **Service Transfer** → ouvrez l'écran de transfert.",
+          },
+          {
+            en: 'Review the notes and agree to the terms to apply.',
+            jp: '注意事項を確認し、規約に同意して申請します。',
+            kr: '안내 사항을 확인하고 약관에 동의하여 신청합니다.',
+            zh: '阅读注意事项并同意条款申请。',
+            fr: 'Lisez les remarques et acceptez les conditions pour faire votre demande.',
+          },
+          {
+            en: 'Proceed to **Service Transfer Code issuance**.',
+            jp: '**サービス移行コード発行**に進みます。',
+            kr: '**서비스 이전 코드 발급**으로 진행합니다.',
+            zh: '进行**服务迁移码领取**。',
+            fr: "Procédez à l'**émission du code de Service Transfer**.",
+          },
+        ],
+      },
+      {
+        kind: 'p',
+        text: {
+          en: 'If an account has characters on multiple servers, issue a separate code **for each server**.',
+          jp: '複数のサーバーにキャラクターがいる場合は、**サーバーごとに**別のコードを発行してください。',
+          kr: '여러 서버에 캐릭터가 있는 경우, **서버마다** 별도의 코드를 발급받으세요.',
+          zh: '若账号在多个服务器上有角色，请**为每个服务器**单独领取迁移码。',
+          fr: 'Si un compte possède des personnages sur plusieurs serveurs, émettez un code distinct **pour chaque serveur**.',
+        },
+      },
+    ],
+  },
+  {
+    key: 'faq-3',
+    title: {
+      en: 'Can guest accounts also be transferred?',
+      jp: 'ゲストアカウントも移行できますか？',
+      kr: '게스트 계정도 이전할 수 있나요?',
+      zh: '访客账号也可以迁移吗？',
+      fr: 'Les comptes invités peuvent-ils aussi être transférés ?',
+    },
+    blocks: [
+      {
+        kind: 'p',
+        text: {
+          en: 'Transfer codes are **not** issued for guest IDs. Link your account first:',
+          jp: 'ゲストIDには引き継ぎコードは**発行されません**。まずアカウントをリンクしてください：',
+          kr: '게스트 ID에는 이전 코드가 **발급되지 않습니다**. 먼저 계정을 연동하세요:',
+          zh: '访客账号**不会**发放迁移码。请先关联账号：',
+          fr: "Les codes de transfert **ne sont pas** émis pour les identifiants invités. Liez d'abord votre compte :",
+        },
+      },
+      {
+        kind: 'p',
+        text: {
+          en: 'Settings → Account → Manage Account → Link Account → then issue the code.',
+          jp: '設定 → アカウント → アカウント管理 → アカウント連携 → その後コードを発行。',
+          kr: '설정 → 계정 → 계정 관리 → 계정 연동 → 이후 코드 발급.',
+          zh: '设置 → 账号 → 账号管理 → 关联账号 → 然后领取迁移码。',
+          fr: 'Paramètres → Compte → Gérer le compte → Lier le compte → puis émettez le code.',
+        },
+      },
+    ],
+  },
+  {
+    key: 'faq-4',
+    title: {
+      en: 'What types of new accounts can be created after the transfer?',
+      jp: '移行後、どのような新しいアカウントを作成できますか？',
+      kr: '이전 후 어떤 유형의 새 계정을 만들 수 있나요?',
+      zh: '迁移后可以创建哪些类型的新账号？',
+      fr: 'Quels types de nouveaux comptes peuvent être créés après le transfert ?',
+    },
+    blocks: [
+      {
+        kind: 'p',
+        text: {
+          en: 'You can create/link a VAGAMES account via **Email / Google / Apple**.',
+          jp: '**メール / Google / Apple**でVAGAMESアカウントを作成/リンクできます。',
+          kr: '**이메일 / Google / Apple**로 VAGAMES 계정을 만들거나 연동할 수 있습니다.',
+          zh: '您可以通过**邮箱 / Google / Apple**创建或关联VAGAMES账号。',
+          fr: 'Vous pouvez créer/lier un compte VAGAMES via **E-mail / Google / Apple**.',
+        },
+      },
+    ],
+  },
+  {
+    key: 'faq-5',
+    title: {
+      en: 'If I have multiple characters, can all of them be transferred?',
+      jp: '複数のキャラクターがある場合、全員移行できますか？',
+      kr: '여러 캐릭터가 있는 경우 모두 이전할 수 있나요?',
+      zh: '如果我有多个角色，它们都可以迁移吗？',
+      fr: "Si j'ai plusieurs personnages, peuvent-ils tous être transférés ?",
+    },
+    blocks: [
+      {
+        kind: 'p',
+        text: {
+          en: 'Yes. But if you have characters on multiple servers, you must issue a **separate** code for each server.',
+          jp: 'はい。ただし複数のサーバーにキャラクターがいる場合、各サーバーごとに**別の**コードを発行する必要があります。',
+          kr: '네. 하지만 여러 서버에 캐릭터가 있는 경우, 각 서버마다 **별도의** 코드를 발급받아야 합니다.',
+          zh: '可以。但如果您在多个服务器上有角色，则需要为每个服务器单独领取迁移码。',
+          fr: 'Oui. Mais si vous avez des personnages sur plusieurs serveurs, vous devez émettre un code **distinct** pour chaque serveur.',
+        },
+      },
+      {
+        kind: 'p',
+        text: {
+          en: 'Ex: Accounts on Korea and Global → get one code per server.',
+          jp: '例：韓国とグローバルにアカウントがある場合 → サーバーごとに1つのコードを取得。',
+          kr: '예: 한국 서버와 글로벌 서버에 계정이 있는 경우 → 서버당 코드 1개씩 받기.',
+          zh: '例：同时在韩服和Global服有账号 → 每个服务器各获取一个迁移码。',
+          fr: 'Ex. : comptes sur Korea et Global → obtenez un code par serveur.',
+        },
+      },
+    ],
+  },
+  {
+    key: 'faq-6',
+    title: {
+      en: 'I applied for the transfer. Can I change or cancel it?',
+      jp: '移行を申請しました。変更またはキャンセルできますか？',
+      kr: '이전을 신청했습니다. 변경하거나 취소할 수 있나요?',
+      zh: '我已申请迁移，可以更改或取消吗？',
+      fr: "J'ai fait ma demande de transfert. Puis-je la modifier ou l'annuler ?",
+    },
+    blocks: [
+      {
+        kind: 'p',
+        text: {
+          en: 'No. Once you agree to the Service Transfer, it **cannot** be reversed.',
+          jp: 'いいえ。一度サービス移行に同意すると、**取り消すことはできません**。',
+          kr: '아니요. 서비스 이전에 동의하면 **취소할 수 없습니다**.',
+          zh: '不可以。一旦同意服务迁移，**不可**撤销。',
+          fr: 'Non. Une fois que vous avez accepté le Service Transfer, il **ne peut pas** être annulé.',
+        },
+      },
+    ],
+  },
+  {
+    key: 'faq-7',
+    title: {
+      en: 'If I withdraw my account during the application period, can I still play after transfer?',
+      jp: '申請期間中にアカウントを退会した場合、移行後もプレイできますか？',
+      kr: '신청 기간 중 계정을 탈퇴하면 이전 후에도 플레이할 수 있나요?',
+      zh: '申请期间注销账号的话，迁移后还能继续游戏吗？',
+      fr: 'Si je supprime mon compte pendant la période de candidature, puis-je encore jouer après le transfert ?',
+    },
+    blocks: [
+      {
+        kind: 'p',
+        text: {
+          en: 'No. If you withdraw before transfer, the account is erased and transfer is impossible, even if you already have a code.',
+          jp: 'いいえ。移行前に退会すると、アカウントは削除され、コードを持っていても移行は不可能になります。',
+          kr: '아니요. 이전 전에 탈퇴하면 계정이 삭제되며, 코드가 있더라도 이전이 불가능합니다.',
+          zh: '不能。迁移前注销账号，账号将被删除，即使已有迁移码也无法迁移。',
+          fr: 'Non. Si vous supprimez votre compte avant le transfert, le compte est effacé et le transfert devient impossible, même si vous avez déjà un code.',
+        },
+      },
+    ],
+  },
+  {
+    key: 'faq-8',
+    title: {
+      en: 'Will all game data, including guild info, be retained?',
+      jp: 'ギルド情報を含む全ゲームデータは保持されますか？',
+      kr: '길드 정보를 포함한 모든 게임 데이터가 유지되나요?',
+      zh: '包括公会信息在内的所有游戏数据会保留吗？',
+      fr: 'Toutes les données de jeu, y compris les informations de guilde, seront-elles conservées ?',
+    },
+    blocks: [
+      {
+        kind: 'p',
+        text: {
+          en: 'Most data is retained. However:',
+          jp: 'ほとんどのデータは保持されます。ただし：',
+          kr: '대부분의 데이터는 유지됩니다. 단:',
+          zh: '大部分数据会保留。但是：',
+          fr: 'La plupart des données sont conservées. Cependant :',
+        },
+      },
+      {
+        kind: 'ul',
+        items: [
+          {
+            en: '**Names changed** (Ether for rename sent after Sep 26 maintenance):\n– Account nickname → current nickname_number\n– Guild name → OuterplaneGuild_number',
+            jp: '**名前が変更されます**（改名用エーテルは9月26日のメンテナンス後に送付）：\n– アカウントニックネーム → 現在のニックネーム_番号\n– ギルド名 → OuterplaneGuild_番号',
+            kr: '**이름이 변경됩니다**(개명용 에테르는 9월 26일 점검 후 발송):\n– 계정 닉네임 → 현재 닉네임_번호\n– 길드명 → OuterplaneGuild_번호',
+            zh: '**名称将更改**（更名用以太将在9月26日维护后发送）：\n– 账号昵称 → 当前昵称_编号\n– 公会名 → OuterplaneGuild_编号',
+            fr: "**Noms modifiés** (l'Ether de renommage est envoyé après la maintenance du 26 septembre) :\n– Pseudo du compte → pseudo actuel_numéro\n– Nom de guilde → OuterplaneGuild_numéro",
+          },
+          {
+            en: 'For Korea/ASIA/ASIA II servers, rankings will be **merged and recalculated**:\n– Guild Raid Hall of Fame\n– Arena League Hall of Fame',
+            jp: '韓国/アジア/アジアIIサーバーのランキングは**統合・再計算**されます：\n– ギルドレイド 殿堂\n– アリーナリーグ 殿堂',
+            kr: '한국/아시아/아시아 II 서버의 랭킹은 **통합 및 재산정**됩니다:\n– 길드 레이드 명예의 전당\n– 아레나 리그 명예의 전당',
+            zh: '韩国/亚洲/亚洲II服务器的排名将**合并重新计算**：\n– 公会Raid荣耀殿堂\n– 竞技场联赛荣耀殿堂',
+            fr: "Pour les serveurs Korea/ASIA/ASIA II, les classements seront **fusionnés et recalculés** :\n– Temple de la renommée du Guild Raid\n– Temple de la renommée de l'Arena League",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    key: 'faq-9',
+    title: {
+      en: "Will the guild remain if the Guild Leader doesn't complete the transfer?",
+      jp: 'ギルドリーダーが移行を完了しない場合、ギルドは存続しますか？',
+      kr: '길드장이 이전을 완료하지 않아도 길드가 유지되나요?',
+      zh: '如果会长未完成迁移，公会还会存在吗？',
+      fr: 'La guilde subsiste-t-elle si le chef de guilde ne termine pas le transfert ?',
+    },
+    blocks: [
+      {
+        kind: 'p',
+        text: {
+          en: 'Yes, the guild remains. Leader is reassigned based on:',
+          jp: 'はい、ギルドは存続します。リーダーは以下の基準で再割り当てされます：',
+          kr: '네, 길드는 유지됩니다. 길드장은 다음 기준으로 재지정됩니다:',
+          zh: '是的，公会保留。会长按以下顺序重新指定：',
+          fr: 'Oui, la guilde subsiste. Le chef est réassigné selon :',
+        },
+      },
+      {
+        kind: 'ol',
+        items: [
+          {
+            en: 'Guild Officer with the highest contribution',
+            jp: '最も貢献度の高いギルド役員',
+            kr: '기여도가 가장 높은 길드 부길드장',
+            zh: '贡献值最高的副会长',
+            fr: "L'officier de guilde ayant la plus forte contribution",
+          },
+          {
+            en: 'Most recently active among top 10 contributors',
+            jp: '上位10名の貢献者のうち最近アクティブなメンバー',
+            kr: '상위 10명 기여자 중 가장 최근에 활동한 멤버',
+            zh: '贡献排名前10名中最近活跃的成员',
+            fr: 'Le membre le plus récemment actif parmi les 10 meilleurs contributeurs',
+          },
+          {
+            en: 'Most recently active member otherwise',
+            jp: 'それ以外の場合は最近アクティブなメンバー',
+            kr: '그 외의 경우 가장 최근에 활동한 멤버',
+            zh: '其他情况取最近活跃的成员',
+            fr: 'Sinon, le membre le plus récemment actif',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    key: 'faq-10',
+    title: {
+      en: 'What happens to items/products in my mailbox?',
+      jp: 'メールボックス内のアイテム/商品はどうなりますか？',
+      kr: '메일함에 있는 아이템/상품은 어떻게 되나요?',
+      zh: '邮箱中的物品/商品会怎样？',
+      fr: "Qu'advient-il des objets/produits dans ma boîte aux lettres ?",
+    },
+    blocks: [
+      {
+        kind: 'p',
+        text: {
+          en: "Items/products are retained, but claim history for mail before the transfer won't be shown afterward.",
+          jp: 'アイテム/商品は保持されますが、移行前のメールの受取履歴は表示されなくなります。',
+          kr: '아이템/상품은 유지되지만, 이전 전의 메일 수령 내역은 표시되지 않습니다.',
+          zh: '物品/商品会保留，但迁移前的邮件领取记录之后将不再显示。',
+          fr: "Les objets/produits sont conservés, mais l'historique de réclamation du courrier antérieur au transfert ne sera plus affiché par la suite.",
+        },
+      },
+      {
+        kind: 'p',
+        text: {
+          en: "Mail with expired claim periods won't be extended — claim before Sep 23.",
+          jp: '受取期限が切れたメールは延長されません — 9月23日までに受け取ってください。',
+          kr: '수령 기간이 만료된 메일은 연장되지 않습니다 — 9월 23일 전에 수령하세요.',
+          zh: '已过领取期限的邮件不会延期 — 请在9月23日前领取。',
+          fr: 'Le courrier dont la période de réclamation est expirée ne sera pas prolongé — réclamez avant le 23 septembre.',
+        },
+      },
+    ],
+  },
+  {
+    key: 'faq-11',
+    title: {
+      en: 'What will happen to Monthly Subscription products?',
+      jp: '月間サブスクリプション商品はどうなりますか？',
+      kr: '월정액 상품은 어떻게 되나요?',
+      zh: '月度订阅商品会怎样？',
+      fr: "Qu'adviendra-t-il des produits d'abonnement mensuel ?",
+    },
+    blocks: [
+      {
+        kind: 'p',
+        text: {
+          en: 'Remaining duration will be **automatically extended** by the maintenance period after Sep 23 (Tue).',
+          jp: '残余期間は9月23日（火）のメンテナンス期間分**自動的に延長**されます。',
+          kr: '잔여 기간은 9월 23일(화) 점검 기간만큼 **자동 연장**됩니다.',
+          zh: '剩余时长将在9月23日（周二）维护期间**自动延长**相应时间。',
+          fr: 'La durée restante sera **automatiquement prolongée** de la durée de la maintenance après le 23 septembre (mar.).',
+        },
+      },
+      {
+        kind: 'p',
+        text: {
+          en: 'For a smooth transfer, claim them from your mailbox before Sep 23, 2025.',
+          jp: 'スムーズな移行のため、2025年9月23日前にメールボックスから受け取ってください。',
+          kr: '원활한 이전을 위해 2025년 9월 23일 전에 메일함에서 수령하세요.',
+          zh: '为顺利完成迁移，请在2025年9月23日前从邮箱领取。',
+          fr: 'Pour un transfert sans accroc, réclamez-les depuis votre boîte aux lettres avant le 23 septembre 2025.',
+        },
+      },
+    ],
+  },
+  {
+    key: 'faq-12',
+    title: {
+      en: 'If operation policy changes after transfer, are previous restrictions removed?',
+      jp: '移行後に運営方針が変わった場合、以前の制限は解除されますか？',
+      kr: '이전 후 운영 정책이 변경되더라도 이전 제재는 해제되나요?',
+      zh: '迁移后运营政策变更，之前的限制会被解除吗？',
+      fr: "Si la politique d'exploitation change après le transfert, les restrictions antérieures sont-elles levées ?",
+    },
+    blocks: [
+      {
+        kind: 'p',
+        text: {
+          en: "No. Accounts already under restriction remain inaccessible, won't receive a code, and cannot be transferred.",
+          jp: 'いいえ。すでに制限を受けているアカウントはアクセスできず、コードも受け取れず、移行もできません。',
+          kr: '아니요. 이미 제재를 받은 계정은 접근이 불가하고, 코드도 받을 수 없으며, 이전도 불가합니다.',
+          zh: '不会。已被限制的账号仍无法访问，不会获得迁移码，也无法进行迁移。',
+          fr: 'Non. Les comptes déjà sous restriction restent inaccessibles, ne recevront pas de code et ne peuvent pas être transférés.',
+        },
+      },
+    ],
+  },
+  {
+    key: 'faq-13',
+    title: {
+      en: 'Will I still be able to use the official STOVE community?',
+      jp: '公式STOVEコミュニティは引き続き使用できますか？',
+      kr: '공식 STOVE 커뮤니티를 계속 이용할 수 있나요?',
+      zh: '迁移后还能使用STOVE官方社区吗？',
+      fr: 'Pourrai-je encore utiliser la communauté officielle STOVE ?',
+    },
+    blocks: [
+      {
+        kind: 'p',
+        text: {
+          en: 'Available only for a limited time. All posts/content will be deleted on **Oct 27, 2025 (Mon)**. Back up anything you need per the schedule.',
+          jp: '期間限定で使用可能です。全投稿/コンテンツは**2025年10月27日（月）**に削除されます。スケジュールに従って必要なものをバックアップしてください。',
+          kr: '제한적으로만 이용 가능합니다. 모든 게시글/콘텐츠는 **2025년 10월 27일(월)**에 삭제됩니다. 일정에 따라 필요한 것을 백업해 두세요.',
+          zh: '仅限时可用。所有帖子/内容将在**2025年10月27日（周一）**删除。请按计划备份所需内容。',
+          fr: 'Disponible uniquement pour une durée limitée. Tous les messages/contenus seront supprimés le **27 octobre 2025 (lun.)**. Sauvegardez tout ce dont vous avez besoin selon le calendrier.',
+        },
+      },
+      {
+        kind: 'p',
+        text: {
+          en: '**Official Community Schedule**',
+          jp: '**公式コミュニティスケジュール**',
+          kr: '**공식 커뮤니티 일정**',
+          zh: '**官方社区日程**',
+          fr: '**Calendrier de la communauté officielle**',
+        },
+      },
+      {
+        kind: 'ul',
+        items: [
+          {
+            en: 'Sep 22: Restriction on Posting/Commenting',
+            jp: '9月22日：投稿/コメントの制限',
+            kr: '9월 22일: 게시글/댓글 작성 제한',
+            zh: '9月22日：限制发帖/评论',
+            fr: '22 sept. : restriction de publication/commentaire',
+          },
+          {
+            en: 'Sep 23: Closure of all boards except Notices/Updates',
+            jp: '9月23日：お知らせ/アップデート以外の全掲示板閉鎖',
+            kr: '9월 23일: 공지/업데이트 외 모든 게시판 폐쇄',
+            zh: '9月23日：关闭除公告/更新外的所有版块',
+            fr: '23 sept. : fermeture de tous les forums sauf Avis/Mises à jour',
+          },
+          {
+            en: 'Oct 27: Complete closure of the STOVE community',
+            jp: '10月27日：STOVEコミュニティの完全閉鎖',
+            kr: '10월 27일: STOVE 커뮤니티 완전 폐쇄',
+            zh: '10月27日：STOVE社区完全关闭',
+            fr: '27 oct. : fermeture complète de la communauté STOVE',
+          },
+        ],
+      },
+      {
+        kind: 'p',
+        text: {
+          en: 'Address for the official VAGAMES community will be announced later.',
+          jp: '公式VAGAMESコミュニティのアドレスは後日発表されます。',
+          kr: '공식 VAGAMES 커뮤니티 주소는 추후 공지 예정입니다.',
+          zh: '官方VAGAMES社区地址将稍后公布。',
+          fr: "L'adresse de la communauté officielle VAGAMES sera annoncée ultérieurement.",
+        },
+      },
+    ],
+  },
+  {
+    key: 'faq-14',
+    title: {
+      en: 'Will official social media channels remain after the transfer?',
+      jp: '移行後も公式SNSチャンネルは継続しますか？',
+      kr: '이전 후에도 공식 소셜 미디어 채널이 유지되나요?',
+      zh: '迁移后官方社交媒体账号还会保留吗？',
+      fr: 'Les réseaux sociaux officiels subsisteront-ils après le transfert ?',
+    },
+    blocks: [
+      {
+        kind: 'p',
+        text: {
+          en: 'The official **X** and **Discord** will continue to operate.',
+          jp: '公式**X**と**Discord**は引き続き運営されます。',
+          kr: '공식 **X**와 **Discord**는 계속 운영됩니다.',
+          zh: '官方**X**和**Discord**将继续运营。',
+          fr: 'Le **X** et le **Discord** officiels continueront de fonctionner.',
+        },
+      },
+      {
+        kind: 'p',
+        text: {
+          en: 'The **Facebook** page will be deleted on **Sep 22**. Save any content you want.',
+          jp: '**Facebook**ページは**9月22日**に削除されます。必要なコンテンツは保存してください。',
+          kr: '**Facebook** 페이지는 **9월 22일**에 삭제됩니다. 필요한 콘텐츠를 저장하세요.',
+          zh: '**Facebook**主页将于**9月22日**删除。请保存您需要的内容。',
+          fr: 'La page **Facebook** sera supprimée le **22 septembre**. Sauvegardez tout contenu que vous souhaitez conserver.',
+        },
+      },
+    ],
+  },
+];
+
+export const OFFICIAL_LINKS = [
+  { key: 'officialBtn1', href: 'https://page.onstove.com/outerplane/en/view/10859677' },
+  { key: 'officialBtn2', href: 'https://page.onstove.com/outerplane/en/view/10965877' },
+  { key: 'officialBtn3', href: 'https://page.onstove.com/outerplane/en/view/10965889' },
+] as const;
+
+export const RECOVERY_LINKS = {
+  stove: 'https://outerplane.game.onstove.com/transfer',
+  email: 'outerplane_contact@vagames.kr',
+  helpshift: 'https://outerplane.helpshift.com/hc/en/4-outerplane/',
+} as const;

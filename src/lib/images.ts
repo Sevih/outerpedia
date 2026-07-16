@@ -97,6 +97,12 @@ export const img = {
   coreFusionTag: () => `${BASE}/images/ui/tags/CT_Core_Icon.webp`,
   /** Icône de guide/catégorie de guides (sprite du jeu, namespace unique). */
   guideIcon: (icon: string) => `${BASE}/images/ui/guides/${icon}.webp`,
+  /**
+   * Screenshot ÉDITORIAL d'un guide (capture, schéma — rien qui existe en jeu).
+   * Source : `data/editorial/guides/<slug>/<fichier>`, collecté par scan
+   * (cf. manifest d'assets) sous la même arborescence publique.
+   */
+  guideShot: (slug: string, file: string) => `${BASE}/images/guides/${slug}/${file}`,
   /** Sprite de la carte Monad Gate (icônes de nœud, trait de liaison, anneau). */
   monad: (sprite: string) => `${BASE}/images/ui/monad/${sprite}.webp`,
   /**
