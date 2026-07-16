@@ -838,8 +838,10 @@ export function buildAssetManifest(): AssetRequest[] {
   // d'encounters (`towers.json` porte sa propre mécanique étages/vagues) : ni le
   // bloc `bossId` ni le bloc variantes ne les voit — d'où les 404 de portraits
   // (`MT_4151015`, Deformed Inferior Core du very hard). Collecte DATA-DRIVEN :
-  // tous les ids de monstres cités dans les vagues des étages → portrait + icônes
-  // de skills, mêmes namespaces/dédup que les blocs de boss ci-dessus.
+  // tous les ids de monstres cités dans les compositions d'étages — `waves`
+  // (formations successives) ET `encounters` (pools alternatifs : les 20 étages
+  // very hard ne stockent leurs monstres QUE là) → portrait + icônes de skills,
+  // mêmes namespaces/dédup que les blocs de boss ci-dessus.
   {
     const monsters = load('monsters.json') as Record<
       string,
@@ -849,14 +851,16 @@ export function buildAssetManifest(): AssetRequest[] {
       string,
       { icon?: string } | undefined
     >;
+    type TowerFormations = Array<Array<{ id: string }>>;
     const towers = load('towers.json') as unknown as Record<
       string,
-      { floors?: Array<{ waves?: Array<Array<{ id: string }>> }> } | undefined
+      { floors?: Array<{ waves?: TowerFormations; encounters?: TowerFormations }> } | undefined
     >;
     const ids = new Set<string>();
     for (const tower of Object.values(towers))
       for (const floor of tower?.floors ?? [])
-        for (const wave of floor.waves ?? []) for (const unit of wave) ids.add(unit.id);
+        for (const wave of [...(floor.waves ?? []), ...(floor.encounters ?? [])])
+          for (const unit of wave) ids.add(unit.id);
     for (const id of ids) {
       const m = monsters[id];
       if (!m) continue;
