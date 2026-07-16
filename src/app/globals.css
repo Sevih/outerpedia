@@ -85,6 +85,11 @@
   --role-sustain: #059669;
   --buff: #38bdf8;
   --debuff: #f87171;
+  /* Teinte des ICÔNES d'effets recolorées (EffectIconTile, masque de
+     luminance) et du ✓ de GeasUnlockList — teintes V2 exactes, la seule
+     source de ces deux valeurs. */
+  --buff-tint: #4cc2ff;
+  --debuff-tint: #ff5a4e;
   --chain-start: #4ade80;
   --chain-join: #facc15;
   --chain-finish: #f87171;
@@ -131,6 +136,8 @@
   --color-success: var(--success);
   --color-warn: var(--warn);
   --color-danger: var(--danger);
+  --color-buff-tint: var(--buff-tint);
+  --color-debuff-tint: var(--debuff-tint);
 
   --color-fire: var(--fire);
   --color-water: var(--water);
@@ -422,13 +429,6 @@ body::before {
   scroll-margin-top: 5rem;
 }
 
-/* Recoloration des icônes blanches du jeu en buff/debuff (portage V2).
-   Exception : les icônes « Interruption » gardent leurs couleurs natives. */
-/*
- * Recoloration des icônes d'effets (EffectIconTile) : aplat de couleur masqué
- * par la LUMINANCE de l'image — teinte uniforme, le noir devient transparent.
- * Les tokens ci-dessous sont LA couleur des icônes buff/debuff.
- */
 /* Nom d'item ascendé (Singularity) : dégradé du jeu. */
 .singularity-text {
   background: linear-gradient(180deg, #16ebf1 0%, #9d51ff 50%, #e02bcd 100%);
@@ -437,10 +437,6 @@ body::before {
   color: transparent;
 }
 
-.bg-buff-tint {
-  background-color: #4cc2ff;
-}
-
-.bg-debuff-tint {
-  background-color: #ff5a4e;
-}
+/* Les ex-classes .bg-buff-tint/.bg-debuff-tint sont devenues des tokens
+   (--buff-tint/--debuff-tint, exposés via @theme inline) : mêmes utilitaires
+   générés par Tailwind, une seule source de vérité pour la valeur. */

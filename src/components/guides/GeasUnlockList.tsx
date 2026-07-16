@@ -183,8 +183,8 @@ function GeasTableCell({
       {mark && active && (
         <span className="absolute inset-0 flex items-center justify-center">
           <span
-            style={{ color: '#4cc2ff', textShadow: '0 1px 3px #000' }}
-            className="text-2xl leading-none font-black"
+            style={{ textShadow: '0 1px 3px #000' }}
+            className="text-buff-tint text-2xl leading-none font-black"
           >
             ✓
           </span>
