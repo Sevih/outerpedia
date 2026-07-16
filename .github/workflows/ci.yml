@@ -32,6 +32,10 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
       - run: pnpm typecheck
+      # La suite Vitest (~3 s) : sans elle, les 278 tests ne gardent RIEN —
+      # lefthook ne joue que format/lint/typecheck, et personne d'autre ne les
+      # lance. C'est ici la seule barrière automatique.
+      - run: pnpm test
       # Le build (~7 min) ne tourne QUE sur les PR. Sur push main, le job
       # `docker` refait exactement ce `next build` dans l'image — le jouer aussi
       # ici, c'est payer deux fois le meme build en serie. Sur une PR en
