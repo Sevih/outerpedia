@@ -32,7 +32,7 @@ Passe de fix massive (4 chantiers parallèles). **Fait** — les items ci-dessou
 - [ ] `loadColumns`/`getMaxLevel`/`resolvePlaceholders` : API de lib gardées volontairement (documentées, testées) malgré zéro appelant prod.
 - [ ] Boucle « collecter les skills d'une entité » encore répétée dans integrate.ts (atténuée par le refactor testable).
 - [x] Caches dérivés (glossaryCache/mechanicLabelCache/titleCtx/encounters/curated effects) — réglé le 14/07 soir : empreinte mtime (`tablesStamp`/`fileStamp`, sentinelle TextSystem + mode-titles.json, TTL 2 s en boucle chaude) ; `loadTable` sert la copie en cache si le fichier disparaît pendant un refresh concurrent.
-- [ ] 4 branches locales à trancher (backup/site-rebuild, feat/character-tags, feat/datagen-equipment, feat/site-foundations).
+- [ ] Branches locales : 3 des 4 élaguées (vérifié 16/07) — reste `backup/site-rebuild` à trancher.
 - [ ] Resserrer l'exemption eslint couleurs (inline/parse-text/ShareButtons sont désormais 100 % tokens).
 
 ---
