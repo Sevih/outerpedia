@@ -87,7 +87,13 @@ export type {
   UnlockEntry,
   UnlockRequirement,
 } from '../generators/unlock-content';
-export type { RecruitPoolsData } from '../generators/recruit-pools';
+export type {
+  RecruitBanner,
+  RecruitData,
+  RecruitKind,
+  RecruitKindInfo,
+  RecruitRate,
+} from '../generators/recruit';
 export type {
   SingularityAnchor,
   SingularityBoss,

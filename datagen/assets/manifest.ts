@@ -567,6 +567,21 @@ export function buildAssetManifest(): AssetRequest[] {
     domain: 'ui',
     editorialFallback: 'ui/tags/CT_Core_Icon.webp',
   });
+  // Boutons de bannière du guide « Banners & Mileage » — DATA-DRIVEN : les
+  // sprites (BannerImageName) sortent de recruit.json, même namespace que les
+  // badges (un sprite de recrutement = ui/recruit, jamais de copie éditoriale).
+  // Repli pool V2 : le dossier banner du guide V2 porte les mêmes sprites.
+  const recruit = load('recruit.json') as unknown as { kinds: Array<{ bannerImage?: string }> };
+  for (const { bannerImage } of recruit.kinds) {
+    if (!bannerImage) continue;
+    push({
+      kind: 'image',
+      key: `images/ui/recruit/${bannerImage}.webp`,
+      candidates: [bannerImage],
+      domain: 'ui',
+      editorialFallback: `guides/general-guides/banner/${bannerImage}.webp`,
+    });
+  }
   push({
     kind: 'image',
     key: 'images/items/CM_Goods_Gold.webp',

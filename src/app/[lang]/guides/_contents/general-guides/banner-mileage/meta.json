@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Banners & Mileage System",
+    "jp": "バナー&マイレージシステム",
+    "kr": "배너 & 마일리지 시스템",
+    "zh": "卡池和指定招募",
+    "fr": "Banners & système de Mileage"
+  },
+  "description": {
+    "en": "Understand the banner types and the mileage system in Outerplane to optimize your summons.",
+    "jp": "Outerplaneのバナータイプとマイレージシステムを理解して、召喚を最適化しましょう。",
+    "kr": "Outerplane의 배너 유형과 마일리지 시스템을 이해하고 소환을 최적화하세요.",
+    "zh": "了解异域战记中的卡池类型和指定招募系统以优化您的抽取",
+    "fr": "Comprenez les types de banner et le système de Mileage dans Outerplane pour optimiser vos invocations."
+  },
+  "icon": "TI_Item_Ticket_Recruit_05",
+  "author": "Sevih",
+  "updated": "2026-07-16",
+  "order": 10,
+  "tier": "pulls"
+}

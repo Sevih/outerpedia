@@ -52,7 +52,7 @@ import { buildItemCatalog } from './generators/item-catalog';
 import { buildGameVersion } from './generators/game-version';
 import { buildSkills } from './generators/skills';
 import { buildUnlockContent } from './generators/unlock-content';
-import { buildRecruitPools } from './generators/recruit-pools';
+import { buildRecruit } from './generators/recruit';
 import { buildEffectGlossary, unknownFamilyTypes } from './lib/effects';
 import {
   curatedBossIds,
@@ -173,8 +173,9 @@ async function main(): Promise<void> {
   await writeJson('glossaries.json', glossaries);
   // Conditions de déblocage des contenus (guide « Unlocking Content »).
   await writeJson('unlock-content.json', buildUnlockContent());
-  // Pool du Custom Recruit (guide « Free Heroes & Start Banner »).
-  await writeJson('recruit-pools.json', buildRecruitPools());
+  // Domaine recrutement : pool custom, taux/coûts par type de bannière,
+  // apparitions bannière des limited (guides general-guides).
+  await writeJson('recruit.json', buildRecruit());
   // Rotation Monad Gate (groupes + cadence ; ancre curée), compositions des
   // tours et calendrier des contenus saisonniers — cf. en-têtes des générateurs.
   await writeJson('singularity.json', buildSingularity());

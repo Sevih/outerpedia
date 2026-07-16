@@ -93,6 +93,8 @@ export const img = {
   starSlot: () => `${BASE}/images/ui/star/CM_Character_Thumbnail_Star_Slot.webp`,
   /** Badge de recrutement (premium/limited/…) sur les cartes. */
   recruitTag: (tag: string) => `${BASE}/images/ui/recruit/${RECRUIT_TAG_SPRITE[tag]}.webp`,
+  /** Sprite de recrutement par NOM (boutons/rubans de bannière — recruit.json). */
+  recruitSprite: (name: string) => `${BASE}/images/ui/recruit/${name}.webp`,
   /** Icône core-fusion (cartes de persos). */
   coreFusionTag: () => `${BASE}/images/ui/tags/CT_Core_Icon.webp`,
   /** Icône de guide/catégorie de guides (sprite du jeu, namespace unique). */

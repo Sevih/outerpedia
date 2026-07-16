@@ -22967,7 +22967,13 @@
       "kr": "거짓된 신의 증명",
       "zh": "伪神的证明"
     },
-    "icon": "",
+    "desc": {
+      "en": "You can obtain False God's Proof through Demiurge recruitment and they are used to select and recruit specific heroes.",
+      "jp": "デミウルゴススカウトで【偽りの神の証】を獲得し、仲間交換ができます。",
+      "kr": "데미우르고스 영입을 통해 거짓된 신의 증명을 획득하여 선택 영입을 할 수 있습니다.",
+      "zh": "可通过创世之神招募获得伪神的证明，并以此进行指定招募。"
+    },
+    "icon": "CM_Icon_Recruit_Mileage_Special_001",
     "grade": "normal",
     "type": "goods",
     "star": 0
@@ -22999,7 +23005,13 @@
       "kr": "리미티드 마일리지",
       "zh": "限定积分"
     },
-    "icon": "",
+    "desc": {
+      "en": "You can earn Limited Mileage through Seasonal Recruitment and use it for Mileage Recruit.\\n<color=#cc5656>Limited Mileage is retained even after the recruitment period ends.</color>",
+      "jp": "限定スカウトでリミテッド交換ptを獲得し、仲間交換に使用できます。\\n<color=#cc5656>リミテッド交換ptはスカウト期間が終了しても保持されます。</color>",
+      "kr": "시즈널 영입을 통해 리미티드 마일리지를 획득하여 선택 영입을 할 수 있습니다.\\n<color=#cc5656>리미티드 마일리지는 영입 기간이 종료되어도 유지됩니다.</color>",
+      "zh": "可通过季节招募获取<color=#cc5656>限定积分</color>，并用于指定招募。\\n<color=#cc5656>限定积分在招募期结束后仍会保留。</color>"
+    },
+    "icon": "TI_Item_Mileage_Seasonal",
     "grade": "normal",
     "type": "goods",
     "star": 0
@@ -23412,6 +23424,25 @@
       "zh": "活动所需能量的单位。\\n可用于各种需要战斗的地方。"
     },
     "icon": "TI_Item_Stamina",
+    "grade": "normal",
+    "type": "custom",
+    "star": 0
+  },
+  "Wildcard%20Pieces": {
+    "kind": "custom",
+    "name": {
+      "en": "Wildcard Pieces",
+      "jp": "ピース",
+      "kr": "공용 조각",
+      "zh": "通用碎片"
+    },
+    "desc": {
+      "en": "[Wildcard Pieces] can be exchanged for Hero Pieces in the Pieces tab at the shop.\\nYou cannot exchange them for pieces of Heroes that you have not recruited yet. You can exchange them for pieces of heroes you own, limited to the number of pieces necessary to make them 6 Star via [Transcend Hero].\\nPieces obtained through other methods will also be calculated in the purchase limit.",
+      "jp": "【ピース】はピースショップで、獲得した仲間のピースを\\n購入できます。\\nまだ獲得していない仲間のピースは購入できません。仲間のピースは、★6までの育成に必要な数量まで購入できます。\\nスカウト以外で獲得したピースがある場合は、その数を\\n引いた分のピースを購入できます。",
+      "kr": "획득한 [공용 조각]은 상점에 비치된 조각 탭에서 보유한 동료의 조각으로 교환이 가능합니다.\\n아직 영입하지 못한 동료의 조각은 교환할 수 없으며, 보유한 동료는 [동료 초월]로 6성까지 성장하는데 필요한 수량까지 교환이 가능합니다.\\n다른 경로를 통해 획득한 조각도 체크되어 구매 제한이 이루어집니다.",
+      "zh": "获得的【通用碎片】可于商店中的碎片栏，与持有的同伴碎片进行交换。\\n无法与尚未招募的同伴碎片进行交换，且最多可交换至通过【同伴超越】将持有的同伴升至6星所需的数量。\\n通过其他方式获得的碎片也会被计入数量上限。"
+    },
+    "icon": "GC_Item_Piece",
     "grade": "normal",
     "type": "custom",
     "star": 0

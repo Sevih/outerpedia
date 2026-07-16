@@ -167,9 +167,11 @@ export default async function BeginnerFaqGuide({ lang }: { lang: Lang }) {
                   {L(LABELS.periodSeeGuide)}
                 </MiniPanel>
                 <MiniPanel accent="emerald" title={L(LABELS.regular)}>
-                  {P(LABELS.regularHeroesDesc)}
+                  {/* parseText rend un TABLEAU (clés internes 0..n) : chaque
+                      appel frère doit vivre dans son propre parent. */}
+                  <span>{P(LABELS.regularHeroesDesc)}</span>
                   <br />
-                  {P(LABELS.customRecruitGoal)}
+                  <span>{P(LABELS.customRecruitGoal)}</span>
                   <div className="mt-2">
                     {parseText('{P/Valentine} {P/Tamara} {P/Skadi} {P/Charlotte}', ctx)}
                   </div>

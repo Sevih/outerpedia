@@ -1,0 +1,499 @@
+{
+  "customPool": [
+    "2000002",
+    "2000004",
+    "2000006",
+    "2000007",
+    "2000008",
+    "2000010",
+    "2000011",
+    "2000012",
+    "2000013",
+    "2000014",
+    "2000015",
+    "2000016",
+    "2000017",
+    "2000018",
+    "2000019",
+    "2000020",
+    "2000021",
+    "2000022",
+    "2000023",
+    "2000024",
+    "2000025",
+    "2000026",
+    "2000027",
+    "2000028",
+    "2000029",
+    "2000030",
+    "2000031",
+    "2000032",
+    "2000033",
+    "2000034",
+    "2000035",
+    "2000036",
+    "2000037",
+    "2000038",
+    "2000039",
+    "2000040",
+    "2000041",
+    "2000042",
+    "2000043",
+    "2000044",
+    "2000045",
+    "2000046",
+    "2000047",
+    "2000048",
+    "2000049",
+    "2000050",
+    "2000051",
+    "2000052",
+    "2000054",
+    "2000055",
+    "2000056",
+    "2000057",
+    "2000058",
+    "2000060",
+    "2000061",
+    "2000062",
+    "2000064",
+    "2000065",
+    "2000066",
+    "2000067",
+    "2000068",
+    "2000069",
+    "2000070",
+    "2000071",
+    "2000072",
+    "2000073",
+    "2000074",
+    "2000076",
+    "2000077",
+    "2000078",
+    "2000079",
+    "2000080",
+    "2000081",
+    "2000082",
+    "2000083",
+    "2000087",
+    "2000088",
+    "2000089",
+    "2000094",
+    "2000098",
+    "2000099",
+    "2000101",
+    "2000103",
+    "2000105",
+    "2000107",
+    "2000108",
+    "2000113",
+    "2000117"
+  ],
+  "kinds": [
+    {
+      "kind": "custom",
+      "groupId": "20009",
+      "rates": [
+        {
+          "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_03",
+          "title": {
+            "en": "3 Star Recruit Chance",
+            "jp": "★3確率",
+            "kr": "3성 영입 확률",
+            "zh": "3星招募几率"
+          },
+          "percent": 2.5,
+          "confirmPercent": 2.5
+        },
+        {
+          "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_02",
+          "title": {
+            "en": "2 Star Recruit Chance",
+            "jp": "★2確率",
+            "kr": "2성 영입 확률",
+            "zh": "2星招募几率"
+          },
+          "percent": 19,
+          "confirmPercent": 97.5
+        },
+        {
+          "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_01",
+          "title": {
+            "en": "1 Star Recruit Chance",
+            "jp": "★1確率",
+            "kr": "1성 영입 확률",
+            "zh": "1星招募几率"
+          },
+          "percent": 78.5,
+          "confirmPercent": 0
+        }
+      ],
+      "price1": 150,
+      "price10": 1500,
+      "ticketId": "1000002",
+      "ticketCost": 1,
+      "freeCount": 1,
+      "bannerImage": "CM_Btn_Recruit_Custom",
+      "mileageCost": 200
+    },
+    {
+      "kind": "pickup",
+      "groupId": "120",
+      "rates": [
+        {
+          "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_05",
+          "title": {
+            "en": "Chance Increase",
+            "jp": "ピックアップ確率",
+            "kr": "픽업 확률",
+            "zh": "PICKUP几率"
+          },
+          "percent": 1.25,
+          "confirmPercent": 1.25
+        },
+        {
+          "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_03",
+          "title": {
+            "en": "3 Star Recruit Chance",
+            "jp": "★3確率",
+            "kr": "3성 영입 확률",
+            "zh": "3星招募几率"
+          },
+          "percent": 1.25,
+          "confirmPercent": 1.25
+        },
+        {
+          "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_02",
+          "title": {
+            "en": "2 Star Recruit Chance",
+            "jp": "★2確率",
+            "kr": "2성 영입 확률",
+            "zh": "2星招募几率"
+          },
+          "percent": 19,
+          "confirmPercent": 97.5
+        },
+        {
+          "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_01",
+          "title": {
+            "en": "1 Star Recruit Chance",
+            "jp": "★1確率",
+            "kr": "1성 영입 확률",
+            "zh": "1星招募几率"
+          },
+          "percent": 78.5,
+          "confirmPercent": 0
+        }
+      ],
+      "price1": 150,
+      "price10": 1500,
+      "ticketId": "1000002",
+      "ticketCost": 1,
+      "freeCount": 0,
+      "bannerImage": "CM_Btn_Recruit_PickUp_03",
+      "mileageCost": 200
+    },
+    {
+      "kind": "premium",
+      "groupId": "10016",
+      "rates": [
+        {
+          "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_05",
+          "title": {
+            "en": "Chance Increase",
+            "jp": "ピックアップ確率",
+            "kr": "픽업 확률",
+            "zh": "PICKUP几率"
+          },
+          "percent": 1.25,
+          "confirmPercent": 1.25
+        },
+        {
+          "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_03",
+          "title": {
+            "en": "3 Star Recruit Chance",
+            "jp": "★3確率",
+            "kr": "3성 영입 확률",
+            "zh": "3星招募几率"
+          },
+          "percent": 2.5,
+          "confirmPercent": 2.5
+        },
+        {
+          "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_02",
+          "title": {
+            "en": "2 Star Recruit Chance",
+            "jp": "★2確率",
+            "kr": "2성 영입 확률",
+            "zh": "2星招募几率"
+          },
+          "percent": 19,
+          "confirmPercent": 19
+        },
+        {
+          "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_01",
+          "title": {
+            "en": "1 Star Recruit Chance",
+            "jp": "★1確率",
+            "kr": "1성 영입 확률",
+            "zh": "1星招募几率"
+          },
+          "percent": 77.25,
+          "confirmPercent": 77.25
+        }
+      ],
+      "price1": 225,
+      "price10": 2250,
+      "ticketId": "SYS_ASSET_DEMIURGE",
+      "ticketCost": 10,
+      "freeCount": 1,
+      "bannerImage": "CM_Btn_Recruit_Special_11",
+      "mileageCost": 200
+    },
+    {
+      "kind": "limited",
+      "groupId": "5014",
+      "rates": [
+        {
+          "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_05",
+          "title": {
+            "en": "Chance Increase",
+            "jp": "ピックアップ確率",
+            "kr": "픽업 확률",
+            "zh": "PICKUP几率"
+          },
+          "percent": 1.25,
+          "confirmPercent": 1.25
+        },
+        {
+          "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_03",
+          "title": {
+            "en": "3 Star Recruit Chance",
+            "jp": "★3確率",
+            "kr": "3성 영입 확률",
+            "zh": "3星招募几率"
+          },
+          "percent": 1.25,
+          "confirmPercent": 1.25
+        },
+        {
+          "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_02",
+          "title": {
+            "en": "2 Star Recruit Chance",
+            "jp": "★2確率",
+            "kr": "2성 영입 확률",
+            "zh": "2星招募几率"
+          },
+          "percent": 19,
+          "confirmPercent": 97.5
+        },
+        {
+          "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_01",
+          "title": {
+            "en": "1 Star Recruit Chance",
+            "jp": "★1確率",
+            "kr": "1성 영입 확률",
+            "zh": "1星招募几率"
+          },
+          "percent": 78.5,
+          "confirmPercent": 0
+        }
+      ],
+      "price1": 150,
+      "price10": 1500,
+      "ticketId": "1000005",
+      "ticketCost": 1,
+      "freeCount": 0,
+      "bannerImage": "CM_Btn_Recruit_Seasonal_Select_07",
+      "mileageCost": 150
+    }
+  ],
+  "banners": [
+    {
+      "characterId": "2000090",
+      "kind": "fes",
+      "start": "2024-07-30",
+      "end": "2024-08-27"
+    },
+    {
+      "characterId": "2000086",
+      "kind": "seasonal",
+      "start": "2024-10-22",
+      "end": "2024-11-05"
+    },
+    {
+      "characterId": "2000091",
+      "kind": "fes",
+      "start": "2024-11-05",
+      "end": "2024-12-03"
+    },
+    {
+      "characterId": "2000093",
+      "kind": "seasonal",
+      "start": "2024-12-17",
+      "end": "2024-12-31"
+    },
+    {
+      "characterId": "2000090",
+      "kind": "fes",
+      "start": "2025-01-24",
+      "end": "2025-02-11"
+    },
+    {
+      "characterId": "2000095",
+      "kind": "seasonal",
+      "start": "2025-03-25",
+      "end": "2025-04-08"
+    },
+    {
+      "characterId": "2000097",
+      "kind": "seasonal",
+      "start": "2025-03-25",
+      "end": "2025-04-08"
+    },
+    {
+      "characterId": "2000102",
+      "kind": "fes",
+      "start": "2025-05-07",
+      "end": "2025-06-17"
+    },
+    {
+      "characterId": "2000085",
+      "kind": "seasonal",
+      "start": "2025-07-01",
+      "end": "2025-07-29"
+    },
+    {
+      "characterId": "2000091",
+      "kind": "fes",
+      "start": "2025-08-12",
+      "end": "2025-09-23"
+    },
+    {
+      "characterId": "2000106",
+      "kind": "seasonal",
+      "start": "2025-10-01",
+      "end": "2025-10-23"
+    },
+    {
+      "characterId": "2000086",
+      "kind": "seasonal",
+      "start": "2025-10-23",
+      "end": "2025-11-04"
+    },
+    {
+      "characterId": "2000090",
+      "kind": "fes-selection",
+      "start": "2025-11-18",
+      "end": "2025-12-02"
+    },
+    {
+      "characterId": "2000091",
+      "kind": "fes-selection",
+      "start": "2025-11-18",
+      "end": "2025-12-02"
+    },
+    {
+      "characterId": "2000102",
+      "kind": "fes-selection",
+      "start": "2025-11-18",
+      "end": "2025-12-02"
+    },
+    {
+      "characterId": "2000093",
+      "kind": "seasonal",
+      "start": "2025-12-02",
+      "end": "2025-12-16"
+    },
+    {
+      "characterId": "2000090",
+      "kind": "fes",
+      "start": "2025-12-16",
+      "end": "2026-01-13"
+    },
+    {
+      "characterId": "2000110",
+      "kind": "seasonal",
+      "start": "2025-12-16",
+      "end": "2026-01-13"
+    },
+    {
+      "characterId": "2000085",
+      "kind": "seasonal-selection",
+      "start": "2026-02-24",
+      "end": "0"
+    },
+    {
+      "characterId": "2000086",
+      "kind": "seasonal-selection",
+      "start": "2026-02-24",
+      "end": "0"
+    },
+    {
+      "characterId": "2000093",
+      "kind": "seasonal-selection",
+      "start": "2026-02-24",
+      "end": "0"
+    },
+    {
+      "characterId": "2000106",
+      "kind": "seasonal-selection",
+      "start": "2026-02-24",
+      "end": "0"
+    },
+    {
+      "characterId": "2000110",
+      "kind": "seasonal-selection",
+      "start": "2026-02-24",
+      "end": "0"
+    },
+    {
+      "characterId": "2000090",
+      "kind": "fes",
+      "start": "2026-05-06",
+      "end": "2026-06-16"
+    },
+    {
+      "characterId": "2000091",
+      "kind": "fes",
+      "start": "2026-05-06",
+      "end": "2026-06-16"
+    },
+    {
+      "characterId": "2000102",
+      "kind": "fes",
+      "start": "2026-05-06",
+      "end": "2026-06-16"
+    },
+    {
+      "characterId": "2000114",
+      "kind": "seasonal",
+      "start": "2026-05-19",
+      "end": "2026-06-16"
+    },
+    {
+      "characterId": "2000086",
+      "kind": "seasonal",
+      "start": "2026-06-02",
+      "end": "2026-08-11"
+    },
+    {
+      "characterId": "2000085",
+      "kind": "seasonal",
+      "start": "2026-06-16",
+      "end": "2026-08-11"
+    },
+    {
+      "characterId": "2000106",
+      "kind": "seasonal",
+      "start": "2026-06-16",
+      "end": "2026-08-11"
+    },
+    {
+      "characterId": "2000121",
+      "kind": "seasonal",
+      "start": "2026-07-14",
+      "end": "2026-08-11"
+    }
+  ]
+}
