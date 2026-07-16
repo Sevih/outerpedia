@@ -7,9 +7,9 @@
  * l'en-tête récompense + la carte. Tout le contenu est déjà résolu côté serveur
  * (strings, nodeLabels, rewards) — ce composant n'orchestre que la sélection.
  */
-import { useEffect, useState } from 'react';
 import type { MonadRouteFile } from '@/lib/data/monad';
 import type { Lang } from '@/lib/i18n/config';
+import { useUrlSlice, writeUrl } from '@/hooks/useUrlSlice';
 import MonadGateMap, { type MonadStrings } from './MonadGateMap';
 import MonadRouteReward, { type RewardDisplay } from './MonadRouteReward';
 
@@ -29,22 +29,23 @@ interface Props {
 }
 
 export default function MonadRouteClient({ variants, lang, strings, rewardLabels, title }: Props) {
-  const [active, setActive] = useState(0);
-
-  // Onglet initial depuis `?v=<index>` — lu de window pour éviter useSearchParams
-  // (qui forcerait une frontière Suspense sur la page).
-  useEffect(() => {
-    if (variants.length < 2) return;
-    const raw = new URLSearchParams(window.location.search).get('v');
-    if (raw === null) return;
-    const idx = parseInt(raw, 10);
-    // Lecture ONE-SHOT du deep-link : pas un état externe qui re-render, et
-    // useSearchParams forcerait un Suspense sur la page (cf. commentaire ci-dessus).
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (Number.isInteger(idx) && idx >= 0 && idx < variants.length) setActive(idx);
-  }, [variants.length]);
-
+  // `?v=<index>` : l'URL est la SOURCE DE VÉRITÉ de la variante active (deep-link
+  // partageable, Back/Forward pilote l'UI — cf. useUrlSlice). Lecture par
+  // `window.location` et non `useSearchParams`, qui forcerait une frontière
+  // Suspense sur la page.
+  const raw = useUrlSlice('popstate', () => new URLSearchParams(window.location.search).get('v'));
+  const idx = raw === null ? NaN : parseInt(raw, 10);
+  const active = Number.isInteger(idx) && idx >= 0 && idx < variants.length ? idx : 0;
   const current = variants[active] ?? variants[0];
+
+  const select = (i: number) =>
+    writeUrl(() => {
+      const url = new URL(window.location.href);
+      // Variante par défaut → paramètre retiré (URL canonique propre).
+      if (i === 0) url.searchParams.delete('v');
+      else url.searchParams.set('v', String(i));
+      window.history.replaceState(null, '', url);
+    });
 
   return (
     <div className="space-y-4">
@@ -55,7 +56,7 @@ export default function MonadRouteClient({ variants, lang, strings, rewardLabels
             <button
               key={i}
               type="button"
-              onClick={() => setActive(i)}
+              onClick={() => select(i)}
               className={`rounded border px-3 py-1.5 text-sm font-medium transition ${
                 active === i
                   ? 'text-surface-base border-yellow-400 bg-yellow-400'
