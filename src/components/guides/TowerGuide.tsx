@@ -90,11 +90,11 @@ function monsterName(id: string, lang: Lang): string {
 }
 
 /** Le boss d'un donjon standard (rôle `boss`, sinon premier monstre) — pour le menu. */
-function dungeonBossName(dungeon: string, lang: Lang): string | undefined {
+function dungeonBoss(dungeon: string) {
   const monsters = getEncounter(dungeon)?.monsters;
   if (!monsters?.length) return undefined;
   const boss = monsters.find((m) => m.role === 'boss') ?? monsters[0];
-  return monsterName(boss.id, lang);
+  return getMonster(boss.id);
 }
 
 export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { floor?: number }) {
@@ -284,15 +284,22 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
   const floorData = getTowerFloor(tower, current);
   if (!floorData) notFound();
 
+  // Entrées COMME le very hard (n° + portrait + nom + classe/élément à droite).
   const sections: TowerMenuSection[] = [
     {
-      entries: tower.floors.map((f) => ({
-        key: String(f.floor),
-        href: detailHref(f.floor),
-        label: dungeonBossName(f.dungeon, lang) ?? '',
-        number: f.floor,
-        flag: f.restrictions.length > 0,
-      })),
+      entries: tower.floors.map((f) => {
+        const b = dungeonBoss(f.dungeon);
+        return {
+          key: String(f.floor),
+          href: detailHref(f.floor),
+          label: b ? lRec(b.name, lang) || b.name.en : '',
+          number: f.floor,
+          portraitSrc: b ? monsterIconSrc(b) : undefined,
+          element: b?.element,
+          classType: b?.class,
+          flag: f.restrictions.length > 0,
+        };
+      }),
     },
   ];
 

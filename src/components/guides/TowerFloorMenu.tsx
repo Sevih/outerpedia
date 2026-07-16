@@ -66,7 +66,11 @@ export function TowerFloorMenu({
         placeholder={searchPlaceholder}
         className="border-line-subtle bg-surface-raised text-content-strong placeholder:text-content-muted focus:border-accent mb-3 w-full rounded-md border px-3 py-2 text-sm outline-none"
       />
-      <div className="border-line-subtle bg-surface-raised max-h-[45vh] space-y-1 overflow-y-auto rounded-lg border p-1.5 md:max-h-[calc(100vh-9rem)]">
+      {/* Hauteur PLAFONNÉE : la liste défile en interne. `100vh-9rem` supposait
+          le menu déjà collé en haut — avant scroll, l'en-tête de page le
+          poussait bien sous le viewport. Un cap franc en vh reste correct dans
+          les deux états. */}
+      <div className="border-line-subtle bg-surface-raised max-h-[45vh] space-y-1 overflow-y-auto rounded-lg border p-1.5 md:max-h-[60vh]">
         {visible.map((section, si) => (
           <div key={si} className="space-y-0.5">
             {section.title && (
@@ -88,7 +92,14 @@ export function TowerFloorMenu({
                       : 'text-content hover:bg-surface-hover',
                   ].join(' ')}
                 >
-                  {e.portraitSrc ? (
+                  {/* Numéro ET portrait coexistent (tours standard) ; le very
+                      hard n'a pas de numéro, les archives pas de portrait. */}
+                  {e.number != null && (
+                    <span className="text-content-muted w-6 shrink-0 text-right tabular-nums">
+                      {e.number}
+                    </span>
+                  )}
+                  {e.portraitSrc && (
                     // eslint-disable-next-line @next/next/no-img-element -- sprite R2/staging
                     <img
                       src={e.portraitSrc}
@@ -96,10 +107,6 @@ export function TowerFloorMenu({
                       className="border-line-subtle h-8 w-8 shrink-0 rounded-full border object-cover"
                       loading="lazy"
                     />
-                  ) : (
-                    <span className="text-content-muted w-8 shrink-0 text-right tabular-nums">
-                      {e.number}
-                    </span>
                   )}
                   <span className="min-w-0 flex-1 truncate">{e.label}</span>
                   {(e.element || e.classType) && (
