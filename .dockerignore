@@ -28,6 +28,8 @@ Dockerfile
 .dockerignore
 
 # Oracle V2 figé (jamais lu par l'app) et données locales du jeu
+# (data/extracted = extraction brute pour datagen, ~30 Mo, jamais lue par next build)
 data/legacy
+data/extracted
 .gamedata
 .assets-staging
