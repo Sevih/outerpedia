@@ -4,6 +4,7 @@ import {
   classifyFamily,
   effectShape,
   resolveEffect,
+  resolveKeyWinners,
   statSlug,
   type EffectFamily,
 } from './effects';
@@ -189,5 +190,68 @@ describe('effectShape', () => {
     expect('value' in shape).toBe(false);
     expect('rate' in shape).toBe(false);
     expect('turn' in shape).toBe(false);
+  });
+});
+
+describe('resolveKeyWinners — vote croisé (non-régression c9ce852)', () => {
+  /** Vote synthétique : slot `side|clé` → effet → nombre de voix. */
+  const votesOf = (entries: Array<[string, Array<[string, number]>]>) =>
+    new Map(entries.map(([slot, m]) => [slot, new Map(m)]));
+
+  it('le scénario Q18 : la clé volée par un tooltip fuité revient à la création curée', () => {
+    // « Taunted » a son foyer en BT_AGGRO (10 voix) ; le buff composite du boss
+    // Q18 fait fuiter son tooltip dans BT_SEALED_RESURRECTION (1 voix, seule).
+    const votes = votesOf([
+      ['debuff|BT_AGGRO', [['taunted', 10]]],
+      ['debuff|BT_SEALED_RESURRECTION', [['taunted', 1]]],
+    ]);
+    const claims = new Map([['BT_SEALED_RESURRECTION', 'EXTINCTION']]);
+    const byKey = resolveKeyWinners(votes, claims);
+    // La clé volée est RÉASSIGNÉE à la création ; le foyer réel ne bouge pas.
+    expect(byKey.debuff.get('BT_SEALED_RESURRECTION')).toBe('EXTINCTION');
+    expect(byKey.debuff.get('BT_AGGRO')).toBe('taunted');
+  });
+
+  it('sans réclamation curée, le gagnant croisé reste (pas de trou dans byKey)', () => {
+    const votes = votesOf([
+      ['debuff|BT_AGGRO', [['taunted', 10]]],
+      ['debuff|BT_SEALED_RESURRECTION', [['taunted', 1]]],
+    ]);
+    const byKey = resolveKeyWinners(votes, new Map());
+    expect(byKey.debuff.get('BT_SEALED_RESURRECTION')).toBe('taunted');
+  });
+
+  it('pas de vol quand le vote n’est PAS croisé : la clé est le foyer du gagnant', () => {
+    // L'effet gagne SON propre foyer — la création curée ne prime pas.
+    const votes = votesOf([['buff|BT_COOL_CHARGE', [['cooldown_up', 3]]]]);
+    const claims = new Map([['BT_COOL_CHARGE', 'CREATION_CUREE']]);
+    const byKey = resolveKeyWinners(votes, claims);
+    expect(byKey.buff.get('BT_COOL_CHARGE')).toBe('cooldown_up');
+  });
+
+  it('le gagnant d’un slot est l’effet MAJORITAIRE', () => {
+    const votes = votesOf([
+      [
+        'buff|BT_STAT|ST_ATK',
+        [
+          ['atk_up', 7],
+          ['autre', 2],
+        ],
+      ],
+    ]);
+    expect(resolveKeyWinners(votes, new Map()).buff.get('BT_STAT|ST_ATK')).toBe('atk_up');
+  });
+
+  it('déclinaison numérotée : BT_COOL2_CHARGE hérite de BT_COOL_CHARGE côté par côté', () => {
+    const votes = votesOf([
+      ['buff|BT_COOL_CHARGE', [['cool_buff', 5]]],
+      ['debuff|BT_COOL_CHARGE', [['cool_debuff', 2]]],
+      ['buff|BT_COOL2_CHARGE', [['cool2_specifique', 1]]],
+    ]);
+    const byKey = resolveKeyWinners(votes, new Map());
+    // Côté buff : la résolution PROPRE de la clé numérotée n'est pas écrasée.
+    expect(byKey.buff.get('BT_COOL2_CHARGE')).toBe('cool2_specifique');
+    // Côté debuff : aucun vote → hérite de la forme sans chiffres.
+    expect(byKey.debuff.get('BT_COOL2_CHARGE')).toBe('cool_debuff');
   });
 });

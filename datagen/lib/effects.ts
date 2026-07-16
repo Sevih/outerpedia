@@ -307,6 +307,59 @@ interface EffectGlossary {
    * custom (« Execution time! » ⊃ « Increased Damage Taken »). */
   tooltipKinds: Map<string, string[]>;
 }
+/**
+ * Résolution des GAGNANTS par clé type (`side|BT_X`) à partir des votes des
+ * buffs — PURE, exportée pour le test (non-régression du vote croisé, c9ce852).
+ *
+ * FOYER dominant d'un effet = le slot où il récolte le PLUS de votes. Un effet
+ * qui gagne un slot dont ce n'est pas le foyer est un vote CROISÉ : un buff
+ * COMPOSITE a fait fuiter son tooltip dans un Type qui n'est pas le sien (le
+ * buff de boss Q18, typé BT_SEALED_RESURRECTION, porte le tooltip « Taunted »
+ * → clé BT_SEALED_RESURRECTION résolue en Taunted). Quand ce Type est par
+ * ailleurs réclamé par UNE SEULE création curée (mécanique sans texte, via
+ * `keys`), c'est ELLE l'intention : on réassigne la clé à la création (on ne
+ * se contente pas de retirer le vote — resolveEffectKey basculerait sinon sur
+ * le côté opposé avant d'atteindre la création, cf. BT_COOL_CHARGE).
+ *
+ * Puis : les déclinaisons NUMÉROTÉES d'un type (`BT_COOL2_CHARGE` = le CD du
+ * skill 2, même mécanique que `BT_COOL_CHARGE`) héritent, côté par côté, de la
+ * résolution de leur forme SANS CHIFFRES — le vote ne couvre que l'USAGE réel,
+ * mais la mécanique a bien les deux sens (immunités, futurs skills).
+ */
+export function resolveKeyWinners(
+  votes: Map<string, Map<string, number>>,
+  soleCuratedClaimant: Map<string, string>,
+): Record<EffectSide, Map<string, string>> {
+  const effVotes = new Map<string, Array<[string, number]>>();
+  for (const [slot, m] of votes)
+    for (const [eff, n] of m)
+      (effVotes.get(eff) ?? effVotes.set(eff, []).get(eff)!).push([slot, n]);
+  const dominantSlot = (eff: string): string | undefined =>
+    [...(effVotes.get(eff) ?? [])].sort((a, b) => b[1] - a[1])[0]?.[0];
+
+  const byKey: Record<EffectSide, Map<string, string>> = {
+    buff: new Map(),
+    debuff: new Map(),
+  };
+  for (const [slot, m] of votes) {
+    const [side, key] = [slot.slice(0, slot.indexOf('|')), slot.slice(slot.indexOf('|') + 1)];
+    const winner = [...m.entries()].sort((a, b) => b[1] - a[1])[0][0];
+    const claimant = soleCuratedClaimant.get(key);
+    const crossVote = dominantSlot(winner) !== slot;
+    byKey[side as EffectSide].set(key, claimant && crossVote ? claimant : winner);
+  }
+  const numberedKeys = new Set([...byKey.buff.keys(), ...byKey.debuff.keys()]);
+  for (const key of numberedKeys) {
+    const base = key.replace(/\d+/g, '');
+    if (base === key || !/^BT_[A-Z_]+$/.test(base)) continue;
+    for (const side of ['buff', 'debuff'] as const) {
+      const inherited = byKey[side].get(base);
+      if (inherited && !byKey[side].has(key)) byKey[side].set(key, inherited);
+    }
+  }
+  return byKey;
+}
+
 // Cache DÉRIVÉ clé sur l'empreinte des tables : sans elle, l'invalidation
 // mtime de loadTable est à moitié efficace — après un refresh, les tables
 // rechargent mais le glossaire mémoïsé continuerait de servir l'ancien monde.
@@ -525,21 +578,9 @@ export function buildEffectGlossary(): EffectGlossary {
     m.set(effId, (m.get(effId) ?? 0) + 1);
     votes.set(slot, m);
   }
-  // FOYER dominant d'un effet = le slot où il récolte le PLUS de votes. Un
-  // effet qui gagne un slot dont ce n'est pas le foyer est un vote CROISÉ : un
-  // buff COMPOSITE a fait fuiter son tooltip dans un Type qui n'est pas le sien
-  // (le buff de boss Q18, typé BT_SEALED_RESURRECTION, porte le tooltip
-  // « Taunted » → clé BT_SEALED_RESURRECTION résolue en Taunted). Quand ce Type
-  // est par ailleurs réclamé par UNE SEULE création curée (mécanique sans texte,
-  // via `keys`), c'est ELLE l'intention : on réassigne la clé à la création (on
-  // ne se contente pas de retirer le vote — resolveEffectKey basculerait sinon
-  // sur le côté opposé avant d'atteindre la création, cf. BT_COOL_CHARGE).
-  const effVotes = new Map<string, Array<[string, number]>>();
-  for (const [slot, m] of votes)
-    for (const [eff, n] of m)
-      (effVotes.get(eff) ?? effVotes.set(eff, []).get(eff)!).push([slot, n]);
-  const dominantSlot = (eff: string): string | undefined =>
-    [...(effVotes.get(eff) ?? [])].sort((a, b) => b[1] - a[1])[0]?.[0];
+  // Réclamations curées : clé type → l'UNIQUE création curée qui la réclame
+  // (via `keys`). La règle de résolution vit dans `resolveKeyWinners` (pure,
+  // testée sans tables) — seule la LECTURE du curé reste ici.
   const soleCuratedClaimant = new Map<string, string>();
   try {
     const cur = JSON.parse(readFileSync(resolve('data/curated/effects.json'), 'utf8')) as Record<
@@ -554,32 +595,7 @@ export function buildEffectGlossary(): EffectGlossary {
   } catch {
     /* pas de curé — la règle ne s'applique pas */
   }
-
-  const byKey: Record<EffectSide, Map<string, string>> = {
-    buff: new Map(),
-    debuff: new Map(),
-  };
-  for (const [slot, m] of votes) {
-    const [side, key] = [slot.slice(0, slot.indexOf('|')), slot.slice(slot.indexOf('|') + 1)];
-    const winner = [...m.entries()].sort((a, b) => b[1] - a[1])[0][0];
-    const claimant = soleCuratedClaimant.get(key);
-    const crossVote = dominantSlot(winner) !== slot;
-    byKey[side as EffectSide].set(key, claimant && crossVote ? claimant : winner);
-  }
-  // Déclinaisons NUMÉROTÉES d'un type (`BT_COOL2_CHARGE` = le CD du skill 2,
-  // même mécanique que `BT_COOL_CHARGE`) : le vote ne couvre que l'USAGE réel —
-  // aucun buff DEBUFF de type BT_COOL2_CHARGE n'existe aujourd'hui dans les
-  // tables — mais la mécanique a bien les deux sens (immunités, futurs skills).
-  // Chaque côté hérite de la résolution de sa forme SANS CHIFFRES.
-  const numberedKeys = new Set([...byKey.buff.keys(), ...byKey.debuff.keys()]);
-  for (const key of numberedKeys) {
-    const base = key.replace(/\d+/g, '');
-    if (base === key || !/^BT_[A-Z_]+$/.test(base)) continue;
-    for (const side of ['buff', 'debuff'] as const) {
-      const inherited = byKey[side].get(base);
-      if (inherited && !byKey[side].has(key)) byKey[side].set(key, inherited);
-    }
-  }
+  const byKey = resolveKeyWinners(votes, soleCuratedClaimant);
   // Nature RÉELLE des effets mécaniques : leur ligne de définition ne porte
   // pas IsDebuff (SYS_BUFF_EXTEND_DEBUFF_UP « Debuff Duration Increase » est
   // un DEBUFF — il allonge les debuffs de l'ennemi) → nature majoritaire des
