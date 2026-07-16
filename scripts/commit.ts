@@ -42,6 +42,17 @@ const FORCE_MSG = val('--msg');
 
 const PKG = resolve('package.json');
 
+/**
+ * Format de message exigé (conventional commits, garde-fou 2026-07-16) : le
+ * CHANGELOG se reconstruit du log git — « import MG », « guild raid & tower »
+ * y ont creusé des trous impossibles à combler après coup (commits poussés).
+ */
+const CONVENTIONAL =
+  /^(feat|fix|docs|chore|refactor|perf|test|style|ci|build|revert)(\([^)]+\))?!?: .+/;
+const CONVENTIONAL_HELP =
+  'Format attendu : type(portée): description — ex. « feat(guides): carte Monad Gate ».\n' +
+  'Types : feat fix docs chore refactor perf test style ci build revert.';
+
 /** Exécute une commande shell (stdout/stderr hérités). Lève si code ≠ 0. */
 function sh(cmd: string): void {
   if (DRY_RUN) {
@@ -138,7 +149,18 @@ async function main(): Promise<void> {
     }
 
     // 3) MESSAGE (avant le push R2 : abandon ici = rien de publié).
+    if (FORCE_MSG && !CONVENTIONAL.test(FORCE_MSG)) {
+      console.error(
+        `\x1b[31mMessage --msg non conventionnel — refusé.\x1b[0m\n${CONVENTIONAL_HELP}`,
+      );
+      process.exit(1);
+    }
     msg = FORCE_MSG ?? (await ask(rl, '\nMessage de commit : '));
+    // Re-demande tant que le format n'est pas bon (vide = abandon, comme avant).
+    while (msg && !CONVENTIONAL.test(msg)) {
+      console.log(`\x1b[33mMessage non conventionnel.\x1b[0m ${CONVENTIONAL_HELP}`);
+      msg = await ask(rl, 'Message de commit : ');
+    }
     if (!msg) {
       console.log('Message vide — abandon.');
       process.exit(0);
