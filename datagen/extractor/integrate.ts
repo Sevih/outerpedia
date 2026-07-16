@@ -53,6 +53,13 @@ const readJsonOr = (dir: string, rel: string): Dict => {
 // forme parasite du reste du fichier.
 const writeJson = async (dir: string, rel: string, data: unknown): Promise<void> =>
   writeCanonicalJson(resolve(dir, rel), data);
+/** Copie dans `into` les skills d'une entité présents dans `from` (référencés
+ * par id) — LA boucle de collecte partagée par les bundles et les merges
+ * d'intégration (perso, monstre, lot d'encounter). */
+const pickSkills = (ids: readonly string[], from: Dict, into: Dict = {}): Dict => {
+  for (const sid of ids) if (from[sid]) into[sid] = from[sid];
+  return into;
+};
 
 export interface IntegrateReport {
   id: string;
@@ -73,10 +80,7 @@ export function extractedBundle(
 ): { char: Character; skills: Record<string, unknown> } | undefined {
   const char = buildCharacters().characters[id];
   if (!char) return undefined;
-  const all = buildSkills().skills;
-  const skills: Record<string, unknown> = {};
-  for (const sid of char.skills) if (all[sid]) skills[sid] = all[sid];
-  return { char, skills };
+  return { char, skills: pickSkills(char.skills, buildSkills().skills) };
 }
 
 /**
@@ -96,10 +100,7 @@ export async function integrateCharacterData(
   await writeJson(dir, 'characters.json', characters);
 
   // 2) Ses skills (référencés par id).
-  const skills = readJson(dir, 'skills.json');
-  for (const sid of char.skills) {
-    if (freshSkills[sid]) skills[sid] = freshSkills[sid];
-  }
+  const skills = pickSkills(char.skills, freshSkills, readJson(dir, 'skills.json'));
   await writeJson(dir, 'skills.json', skills);
 
   // 3) Slugs, dérivés du committé à jour.
@@ -141,10 +142,7 @@ export function extractedMonsterBundle(
 ): { monster: Monster; skills: Record<string, unknown> } | undefined {
   const monster = buildMonsters().monsters[id];
   if (!monster) return undefined;
-  const all = buildMonsterSkills().skills;
-  const skills: Record<string, unknown> = {};
-  for (const sid of monster.skills) if (all[sid]) skills[sid] = all[sid];
-  return { monster, skills };
+  return { monster, skills: pickSkills(monster.skills, buildMonsterSkills().skills) };
 }
 
 export interface IntegrateMonsterReport {
@@ -192,10 +190,7 @@ export async function integrateMonsterData(
   monsters[monster.id] = monster;
   await writeJson(dir, 'monsters.json', monsters);
 
-  const skills = readJsonOr(dir, 'monster-skills.json');
-  for (const sid of monster.skills) {
-    if (freshSkills[sid]) skills[sid] = freshSkills[sid];
-  }
+  const skills = pickSkills(monster.skills, freshSkills, readJsonOr(dir, 'monster-skills.json'));
   await writeJson(dir, 'monster-skills.json', skills);
 
   const files = ['monsters.json', 'monster-skills.json'];
@@ -248,7 +243,7 @@ export async function integrateMonsterMode(mode: string): Promise<IntegrateModeR
   for (const id of ids) {
     const m = fresh[id];
     monsters[id] = m;
-    for (const sid of m.skills) if (freshSkills[sid]) skills[sid] = freshSkills[sid];
+    pickSkills(m.skills, freshSkills, skills);
     for (const s of m.spawns ?? []) {
       if (enc.dungeons[s.dungeon]) encounters[s.dungeon] = enc.dungeons[s.dungeon];
     }
