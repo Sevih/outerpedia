@@ -17,6 +17,16 @@
       coupons/banner se GARDE jusqu'à la bascule prod V2→V3** (la V2 reste la
       source vivante de ces données éditoriales). Une fois fait : `data/legacy/`
       (248 fichiers) devient supprimable.
+- [ ] **Retravailler le rôle des Extractors/Editors du panneau admin** (corollaire
+      du point précédent — demande Sevih 2026-07-16) : certaines pages Extractor
+      n'existent AUJOURD'HUI que pour la comparaison V2 (Extractor Effect = pur
+      contrôle de régression ; Extractor gear = `EquipmentReport`/diff par nom ;
+      badges/statuts « à traiter » de la sidebar alimentés par le contrôle V2).
+      Quand la comp V2 saute, ces écrans perdent leur raison d'être → redéfinir
+      la matrice fonction × entité : que devient un « Extractor » sans oracle
+      (revue committé↔frais ? intégration ciblée ? rien ?), quelles lignes
+      fusionnent avec l'Editor, lesquelles disparaissent. À trancher AVANT de
+      retirer les contrôles, pour ne pas laisser des pages mortes.
 
 ## 🐛 Bugs (audit du 16/07)
 
@@ -32,7 +42,7 @@
 - [ ] **MOYENNE — `src/components/guides/monad/MonadRouteClient.tsx:32-45`** :
       port V2 avec son défaut — `?v=` lu une fois en effet + `useState` → l'état
       masque l'URL (Back/Forward mort) ET seul `eslint-disable
-    react-hooks/set-state-in-effect` du repo réintroduit (contre
+  react-hooks/set-state-in-effect` du repo réintroduit (contre
       `eslint.config.mjs:14`). → passer sur `useUrlSlice`/`Tabs(urlParam)`.
 - [ ] **MOYENNE — `datagen/lib/effects.ts:312/:539`** : `buildEffectGlossary`
       lit `data/curated/effects.json` (fix vote-croisé c9ce852) mais le stamp
@@ -68,7 +78,7 @@
 - [ ] **Couleurs vives hors garde-fou dans les vues guides** : la règle eslint
       RAW_COLOR ne bannit que les gris (+white/black) en `.tsx` → passent :
       `monad/MonadGateMap.tsx` (yellow/green/red/emerald), `MonadRouteClient/
-    Reward`, `TurnOrder.tsx:61`, `TowerCombatRoster.tsx:141` (rouge dur alors
+  Reward`, `TurnOrder.tsx:61`, `TowerCombatRoster.tsx:141` (rouge dur alors
       qu'un token danger existe), `BossPanel.tsx:233`, `guides/page.tsx:76`,
       `hover:ring-yellow-400/50` (SkywardTowerView/MonadGateGallery). Et les
       palettes en `.ts` échappent totalement (`guide-accents.ts`,
