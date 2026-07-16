@@ -83,6 +83,21 @@ function applyCurated(e: CatalogEntry, cur: ItemCurated | undefined): CatalogEnt
   };
 }
 
+/**
+ * Ordre canonique du catalogue : items (id numérique) d'abord, puis monnaies/
+ * costumes/créations (id texte). Exporté pour le rebake ciblé de l'admin
+ * (`bakeItemCatalogEntry`) — une entrée insérée hors build doit retomber à la
+ * même place que le prochain `datagen:regen`, sinon diff git parasite.
+ */
+export function catalogCompare(a: string, b: string): number {
+  const na = num(a);
+  const nb = num(b);
+  if (na && nb) return na - nb;
+  if (na) return -1;
+  if (nb) return 1;
+  return a.localeCompare(b);
+}
+
 export function buildItemCatalog(inputs?: {
   items?: Record<string, Item>;
   goods?: Record<string, Goods>;
@@ -159,15 +174,7 @@ export function buildItemCatalog(inputs?: {
     };
   }
 
-  // Tri stable : items (id numérique) d'abord, puis monnaies/costumes/créations (id texte).
-  const sorted = Object.entries(out).sort(([a], [b]) => {
-    const na = num(a);
-    const nb = num(b);
-    if (na && nb) return na - nb;
-    if (na) return -1;
-    if (nb) return 1;
-    return a.localeCompare(b);
-  });
+  const sorted = Object.entries(out).sort(([a], [b]) => catalogCompare(a, b));
   return Object.fromEntries(sorted);
 }
 
