@@ -696,13 +696,25 @@ function markTruePaths(
 // Récompenses
 // ─────────────────────────────────────────────────────────────────────────────
 
+/** Lacunes de butin rencontrées pendant un build — signalées en UNE ligne
+ * agrégée à la fin (même régime qu'encounters) ; jamais de throw : la donnée
+ * réelle peut être lacunaire sans invalider le reste du build. */
+interface RewardGaps {
+  rewards: Set<string>;
+  groups: Set<string>;
+}
+
 function resolveReward(
   rewardId: string,
   rewardIndex: Map<string, Row>,
   groupByGroupId: Map<string, Row[]>,
+  gaps: RewardGaps,
 ): MonadReward | null {
   const reward = rewardIndex.get(rewardId);
-  if (!reward) return null;
+  if (!reward) {
+    gaps.rewards.add(rewardId);
+    return null;
+  }
   const out: MonadReward = { items: [] };
   if (reward.CreditMin) {
     out.gold = { min: num(reward.CreditMin), max: num(reward.CreditMax || reward.CreditMin) };
@@ -713,10 +725,18 @@ function resolveReward(
   }
   const addGroup = (raw: string | undefined) => {
     for (const gid of splitCsv(raw)) {
-      for (const r of groupByGroupId.get(gid) ?? []) {
+      const rows = groupByGroupId.get(gid) ?? [];
+      if (!rows.length) gaps.groups.add(gid);
+      for (const r of rows) {
+        // Ligne sans TypeID = inexploitable (icône/lien impossibles) : écartée
+        // et signalée, comme dans encounters.
+        if (!r.TypeID) {
+          gaps.groups.add(gid);
+          continue;
+        }
         out.items.push({
           type: r.Type ?? '',
-          typeId: r.TypeID ?? '',
+          typeId: r.TypeID,
           min: num(r.MinCount),
           max: num(r.MaxCount),
         });
@@ -740,8 +760,10 @@ function toNode(
 ): MonadNode {
   const out: MonadNode = { id: n.id, col: n.col, row: n.row, type: n.type };
   // Libellé spécifique au stage, seulement quand il ajoute de l'info au type.
+  // `resolveOrNull` (pas un .get brut) : un dict aux langues toutes vides ne
+  // doit pas produire de label — même filtre que le reste du fichier.
   if (n.stageNameKey && TYPES_WITH_SPECIFIC_LABEL.has(n.type)) {
-    const label = stageLabels.get(n.stageNameKey);
+    const label = resolveOrNull(stageLabels, n.stageNameKey);
     if (label) out.label = label;
   }
   if (n.givesItem) out.givesItem = n.givesItem;
@@ -847,9 +869,27 @@ export function buildMonad(): { theme: MonadThemeFile; routes: MonadRouteFile[] 
   }
 
   const rewards: Record<string, MonadReward> = {};
+  const gaps: RewardGaps = { rewards: new Set(), groups: new Set() };
   for (const id of referencedRewardIds) {
-    const r = resolveReward(id, rewardIndex, rewardGroupByGroupId);
+    const r = resolveReward(id, rewardIndex, rewardGroupByGroupId, gaps);
     if (r) rewards[id] = r;
+  }
+  // Lacunes de butin : UNE ligne agrégée par build (cf. RewardGaps).
+  if (gaps.rewards.size || gaps.groups.size) {
+    const span = (s: Set<string>) => {
+      const ids = [...s].sort();
+      return ids.length > 3 ? `${ids[0]}…${ids[ids.length - 1]}` : ids.join(', ');
+    };
+    const parts: string[] = [];
+    if (gaps.rewards.size)
+      parts.push(
+        `${gaps.rewards.size} RewardID absent(s) de RewardTemplet (${span(gaps.rewards)})`,
+      );
+    if (gaps.groups.size)
+      parts.push(
+        `${gaps.groups.size} groupe(s) de RewardGroup vide(s) ou sans TypeID (${span(gaps.groups)})`,
+      );
+    console.warn(`⚠ monad : butin partiellement ignoré — ${parts.join(' ; ')}.`);
   }
 
   const themeFile: MonadThemeFile = {
