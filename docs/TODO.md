@@ -121,9 +121,10 @@ Règle permanente : chaque `meta.bossId` d'un guide porté doit exister dans
 `monsters.json` (le rendu JETTE sinon) — extraction à la demande
 (`pnpm datagen:extract-entity`).
 
-- [ ] **`area_name`** ← `AreaTemplet` (167 zones, NameID + ShortName). Ne bloque
-      plus la catégorie `adventure` (portée sans), mais reste utile pour nommer
-      les zones.
+- [x] **`area_name`** — DÉJÀ COUVERT (constat Sevih 2026-07-16) : `AreaTemplet`
+      est consommé par `encounters.ts` (champ `area` localisé par donjon +
+      saison/épisode story) et `unlock-content.ts` — pas de fichier dédié à
+      porter.
 - [ ] **`bgm-mapping`** ← `LobbyCustomResourceTemplet` + TextSystem (fichier /
       nom localisé / durée).
 - [ ] **`cf-skill-names`** — renommage skills Core Fusion. À VÉRIFIER : sans
