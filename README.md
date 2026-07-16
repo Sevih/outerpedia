@@ -36,8 +36,7 @@ pnpm dev        # clean:all → refresh des données (datagen) → next dev
 - [CLAUDE.md](./CLAUDE.md) — règles pour le dev assisté par IA
 - [datagen/README.md](./datagen/README.md) — l'atelier de données (architecture, flux patch)
 - [docs/procedure/newPatch.md](./docs/procedure/newPatch.md) — la procédure « patch du jeu »
-- [docs/todo-data-v2.md](./docs/todo-data-v2.md) — suivi des données V2 restant à porter
-- [docs/todo-audit-2026-07-13.md](./docs/todo-audit-2026-07-13.md) — TODO issu de l'audit du 13/07
+- [docs/TODO.md](./docs/TODO.md) — le suivi unique (bugs, dette, data à porter, décisions)
 
 ## Statut
 
