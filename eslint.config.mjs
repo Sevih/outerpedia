@@ -17,7 +17,10 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   {
-    files: ['src/**/*.tsx'],
+    // `.ts` inclus (2026-07-16) : les palettes hors JSX (nodeStyles,
+    // guide-accents, ELEMENT_RING…) portaient des classes de couleur que la
+    // règle ne voyait pas.
+    files: ['src/**/*.{ts,tsx}'],
     rules: {
       'no-restricted-syntax': [
         'error',
@@ -30,15 +33,14 @@ const eslintConfig = defineConfig([
     // FICHE PERSO — portage pixel-perfect de la V2 (layout éditorial sombre,
     // markup V2 copié à l'identique, zinc/white compris). Exception ASSUMÉE et
     // CONFINÉE : tout le reste du site reste sous le garde-fou tokens.
+    // (Resserrée le 2026-07-16 : parse-text/inline/ShareButtons n'ont plus
+    // aucune couleur brute — seule la fiche perso en a encore besoin.)
     // À tokeniser le jour où la fiche devra suivre le thème clair.
     files: [
-      'src/components/character/**/*.tsx',
-      'src/components/inline/**/*.tsx',
-      'src/components/ui/ShareButtons.tsx',
-      'src/lib/parse-text.tsx',
+      'src/components/character/**/*.{ts,tsx}',
       // NB: `**` couvre les segments littéraux `[lang]`/`[slug]` (crochets =
       // classe de caractères en glob, non échappables proprement ici).
-      'src/app/**/characters/**/*.tsx',
+      'src/app/**/characters/**/*.{ts,tsx}',
     ],
     rules: {
       'no-restricted-syntax': 'off',

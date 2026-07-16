@@ -46,5 +46,5 @@ export const NODE_STYLES: Record<MonadNodeType, NodeStyle> = {
   eldritch: { icon: 'CM_Monad_Node_Icon_09', filter: BLUE, textColor: 'text-sky-400' },
   saga: { icon: 'CM_Monad_Node_Icon_10', filter: BLUE, textColor: 'text-sky-400' },
   cube: { icon: 'CM_Monad_Node_Icon_05', filter: BLUE, textColor: 'text-sky-400' },
-  unknown: { icon: 'CM_Monad_Node_Icon_11', filter: NONE, textColor: 'text-white' },
+  unknown: { icon: 'CM_Monad_Node_Icon_11', filter: NONE, textColor: 'text-on-vivid' },
 };

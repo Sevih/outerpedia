@@ -90,6 +90,9 @@
      source de ces deux valeurs. */
   --buff-tint: #4cc2ff;
   --debuff-tint: #ff5a4e;
+  /* Texte posé sur un aplat/sprite VIF (nœuds de map, chips colorées) : blanc
+     pur quel que soit le thème — un token de contenu s'inverserait. */
+  --on-vivid: #ffffff;
   --chain-start: #4ade80;
   --chain-join: #facc15;
   --chain-finish: #f87171;
@@ -138,6 +141,7 @@
   --color-danger: var(--danger);
   --color-buff-tint: var(--buff-tint);
   --color-debuff-tint: var(--debuff-tint);
+  --color-on-vivid: var(--on-vivid);
 
   --color-fire: var(--fire);
   --color-water: var(--water);
