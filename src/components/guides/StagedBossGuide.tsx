@@ -21,7 +21,7 @@ import { EncounterSelection, EncounterSlider } from '@/components/guides/Encount
 import { TacticalTips } from '@/components/guides/TacticalTips';
 import { RecommendedCharacters } from '@/components/guides/RecommendedCharacters';
 import { TeamSlots } from '@/components/guides/TeamSlots';
-import { Tabs } from '@/components/ui/Tabs';
+import { SegmentedTabs } from '@/components/guides/SegmentedTabs';
 import { MultiVideoEmbed, type VideoItem } from '@/components/ui/MultiVideoEmbed';
 
 /** `strings.json` — le texte du guide. */
@@ -317,11 +317,16 @@ export async function StagedBossGuide({ lang, guide }: GuideContentProps) {
                   }}
                 />
               ) : (
-                <Tabs
+                /* Le standard des guides pour un choix d'équipe : SegmentedTabs
+                   + hash `#team=` (deep-link, cf. url-hash) — même système que
+                   le guild-raid, décision 2026-07-16. */
+                <SegmentedTabs
+                  ariaLabel={t('guides.team_selector')}
+                  urlKey="team"
                   tabs={teams.buckets.map((bucket) => {
                     const [from, to] = bucket.stages;
                     return {
-                      id: bucket.stages.join('-'),
+                      key: bucket.stages.join('-'),
                       label:
                         from === to
                           ? t('guides.difficulty.stage', { n: from })

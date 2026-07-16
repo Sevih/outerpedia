@@ -18,6 +18,10 @@ export interface Tab {
  * `history.replaceState` (pas de rechargement serveur). Lecture par
  * `window.location` et non `useSearchParams` : la page reste statiquement
  * rendable (pas de bailout CSR ni de Suspense imposé).
+ *
+ * RÈGLE D'USAGE (décision 2026-07-16) : ce composant sert les pages HORS
+ * guides (browsers, admin…). L'état INTERNE d'un guide (version, phase,
+ * équipe) vit dans le HASH multi-params → `guides/SegmentedTabs` + url-hash.
  */
 export function Tabs({
   tabs,
