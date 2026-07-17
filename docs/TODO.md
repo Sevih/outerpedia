@@ -244,10 +244,6 @@
 
 - [ ] **CHANGELOG.md** : le retard a grossi — 216 commits au 17/07 (~174 au
       16/07, « ~130 » écrit). Resync ou assouplir la règle PR qui l'exige.
-- [ ] **« 18 générateurs » périmé partout** : ROADMAP.md:48, datagen/README.md:277,
-      CHANGELOG.md:28 — il y a 20 fichiers dans `datagen/generators/`
-      (recompter selon la règle « characters/monsters n'en sont plus » et
-      graver le décompte à UN seul endroit).
 - [ ] **`data/editorial/` non documenté nulle part** → CONVENTIONS.md
       « Données » + tableau des zones de datagen/README.
 - [ ] **Locales : documenter le pré-seed** — ~818 des 1098 clés (tools._,

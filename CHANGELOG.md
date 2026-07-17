@@ -25,11 +25,13 @@ et le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 - Pull incrémental depuis LDPlayer (adb, détection md5/hash), extraction
   AssetStudioModCLI, parser `.bytes → JSON` en TS (remplace les scripts python).
 - Les 5 couches : templates typés, primitives partagées (`datagen/lib/`),
-  18 générateurs (`datagen/generators/` : characters, skills, effects, items,
-  equipment, enhance, monsters/bosses, monster-skills, encounters, towers,
-  singularity, content-schedule, unlock-content, progression, sources, goods,
-  item-catalog, game-version), contrats typés (`datagen/contracts/`),
-  orchestration `build.ts` + `refresh.ts` + `promote.ts`.
+  les générateurs (`datagen/generators/` — skills, effects, items, equipment,
+  enhance, bosses, monster-skills, encounters, towers, singularity,
+  content-schedule, unlock-content, progression, sources, goods, item-catalog,
+  game-version… ; décompte de référence dans datagen/README ; characters et
+  monsters vivent, eux, dans l'extracteur déclaratif), contrats typés
+  (`datagen/contracts/`), orchestration `build.ts` + `refresh.ts` +
+  `promote.ts`.
 - Extracteur **déclaratif** (`datagen/extractor/` : specs character/monster,
   intégration ciblée, oracle de cohérence `datagen:coherence`, contrôle V2).
 - Promotion avec **rétention d'entités** (un monstre/skill validé n'est jamais

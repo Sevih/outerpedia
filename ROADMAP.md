@@ -45,7 +45,7 @@ Suivi détaillé : GitHub **Issues + Milestones** (un milestone par phase).
 - [x] **Convert** `.bytes → JSON` en TS (parser testé, remplace python, `datagen:convert`)
 - [x] Couche 1 : templates **typés** (types TS + coercition sur le JSON parsé)
 - [x] Couche 2 : **primitives partagées** (résolution Text\*, ID↔nom↔slug, normalisation, stats)
-- [x] Couche 3 : **générateurs** (18 générateurs TS dans `datagen/generators/`, factorisés)
+- [x] Couche 3 : **générateurs** (TS dans `datagen/generators/`, factorisés — décompte de référence dans datagen/README)
 - [x] Couche 4 : **contrats de sortie** typés · Couche 5 : **orchestration** (`build.ts` + `refresh.ts` + `promote.ts`)
 - [x] Données générées **committées** comme artefacts (le build les consomme, **sans python**)
 

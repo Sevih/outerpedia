@@ -274,7 +274,9 @@ Règles d'or :
 - couche 0 (pull LDPlayer + extraction AssetStudio) ;
 - couche 1 (`templates/`, parser `.bytes → JSON` typé, TS) ;
 - couche 2 (`lib/`, primitives partagées) ;
-- couche 3 (`generators/`, 18 générateurs) ;
+- couche 3 (`generators/`, 20 générateurs — DÉCOMPTE DE RÉFÉRENCE : les
+  autres docs renvoient ici au lieu de citer un nombre qui périme ;
+  characters/monsters n'en sont plus, ils vivent dans l'extracteur) ;
 - couche 4 (`contracts/`) et couche 5 (`build.ts` + `refresh.ts` + `promote.ts`) ;
 - extracteur déclaratif (`extractor/`), couche curée (`curated/` + seed),
   pipeline images R2 (`assets/` + `pnpm images`), versionnage de boss.

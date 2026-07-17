@@ -11,6 +11,11 @@
   starting now ») en exception → émulateur déclaré absent à tort au premier
   lancement, pipeline data sauté. EAP local `Continue` (portée fonction) ;
   bug et remède reproduits sur PS 5.1 réel.
+- **« 18 générateurs » soldé** : le décompte de référence (20, characters/
+  monsters exclus — ils vivent dans l'extracteur) est gravé à UN seul endroit
+  (datagen/README couche 3) ; ROADMAP et CHANGELOG y renvoient au lieu de
+  citer un nombre qui périme (l'énumération du CHANGELOG citait encore
+  characters/monsters).
 - **Spec monstre : `spawns`/`summonedBy`/`linkedTo` COPIÉS à l'embarquement**
   — ils aliasaient les tableaux du cache mémoïsé partagé de `buildEncounters` :
   une mutation d'entité aurait corrompu le cache pour tous les consommateurs.
