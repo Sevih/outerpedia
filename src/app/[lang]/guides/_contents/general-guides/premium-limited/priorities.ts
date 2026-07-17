@@ -1,0 +1,67 @@
+/**
+ * Priorités de pull/transcendance — VERBATIM V2 (premium-priorities.json).
+ * `stars` = étoile CIBLE affichée sous le portrait (pas la rareté).
+ */
+export interface PriorityPick {
+  name: string;
+  stars: number;
+}
+
+export interface PriorityOrder {
+  first: PriorityPick[];
+  second: PriorityPick[];
+  third: PriorityPick[];
+  transcend: PriorityPick[];
+}
+
+export const premiumOrder: PriorityOrder = {
+  first: [
+    { name: 'Monad Eva', stars: 3 },
+    { name: 'Demiurge Luna', stars: 3 },
+  ],
+  second: [
+    { name: 'Demiurge Stella', stars: 3 },
+    { name: 'Demiurge Astei', stars: 3 },
+    { name: 'Gnosis Beth', stars: 3 },
+    { name: 'Gnosis Domine', stars: 3 },
+    { name: 'Gnosis Viella', stars: 3 },
+    { name: 'Demiurge Vlada', stars: 3 },
+  ],
+  third: [
+    { name: 'Demiurge Drakhan', stars: 3 },
+    { name: 'Demiurge Delta', stars: 3 },
+    { name: 'Monad Iota', stars: 3 },
+  ],
+  transcend: [
+    { name: 'Monad Eva', stars: 5 },
+    { name: 'Gnosis Beth', stars: 4 },
+    { name: 'Demiurge Vlada', stars: 5 },
+    { name: 'Demiurge Luna', stars: 6 },
+  ],
+};
+
+export const limitedOrder: PriorityOrder = {
+  first: [
+    { name: 'Mystic Sage Ame', stars: 3 },
+    { name: 'Gnosis Nella', stars: 3 },
+    { name: 'Midnight Rush Skadi', stars: 3 },
+    { name: 'Kitsune of Eternity Tamamo-no-Mae', stars: 3 },
+  ],
+  second: [
+    { name: 'Ryu Lion', stars: 3 },
+    { name: 'Gnosis Dahlia', stars: 3 },
+    { name: 'Omega Nadja', stars: 3 },
+    { name: "Summer Knight's Dream Ember", stars: 3 },
+    { name: "Holy Night's Blessing Dianne", stars: 3 },
+  ],
+  third: [
+    { name: 'Bell Cranel', stars: 3 },
+    { name: 'Ais Wallenstein', stars: 3 },
+    { name: 'Poolside Trickster Regina', stars: 3 },
+  ],
+  transcend: [
+    { name: 'Mystic Sage Ame', stars: 4 },
+    { name: 'Kitsune of Eternity Tamamo-no-Mae', stars: 4 },
+    { name: 'Omega Nadja', stars: 4 },
+  ],
+};

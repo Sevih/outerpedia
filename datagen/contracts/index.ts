@@ -22,6 +22,8 @@ export type { BuffValues, SkillBuffVars } from '../lib/buff';
 export type {
   Character,
   CharacterTag,
+  FusionInfo,
+  FusionLevel,
   IgnoreDefenseSource,
   StatRange,
   StatScale,

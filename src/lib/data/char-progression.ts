@@ -328,6 +328,53 @@ export function getTranscendTiers(char: Character, lang: Lang): TranscendTierVie
   return steps.map((s) => toTier(s, unique, lang));
 }
 
+/** Un « sweetspot » de transcendance : ce que le palier APPORTE (delta). */
+export interface TranscendSweetspotView {
+  /** Étoile UI du palier (4/5/6…, paliers jaunes uniquement). */
+  star: number;
+  /** Rangée de 6 étoiles (mêmes sprites que le slider de la fiche). */
+  stars: string[];
+  /** Lignes officielles GAGNÉES à ce palier (deltas du passif unique —
+   *  « Burst Level 3 Unlocked », « +10% Ally Team Defense »…). */
+  lines: string[];
+}
+
+/**
+ * Deltas de transcendance aux étoiles JAUNES demandées — le format des guides
+ * (« pourquoi s'arrêter à 4★ ? ») : la V2 stockait ces textes par perso dans
+ * ses JSON et les rechargeait côté client ; ici ils dérivent des paliers
+ * officiels (mêmes sources que le slider de la fiche perso), stats exclues
+ * (elles montent à CHAQUE palier — aucun intérêt de sweetspot).
+ */
+export function getTranscendSweetspots(
+  char: Character,
+  lang: Lang,
+  stars: number[],
+): TranscendSweetspotView[] {
+  const steps = TRANSCEND.overrides[char.id] ?? TRANSCEND.byStar[String(char.rarity)] ?? [];
+  const unique = char.skills.map((id) => SKILLS[id]).find((s) => s?.type === 'unique_passive');
+  const out: TranscendSweetspotView[] = [];
+  let prevSkillLevel = 0;
+  for (const s of steps) {
+    const wanted =
+      s.starColor === 'yellow' && stars.includes(s.showStar) && s.skillLevel > prevSkillLevel;
+    if (wanted) {
+      const lines: string[] = [];
+      for (const lv of unique?.levels ?? []) {
+        if (lv.level <= prevSkillLevel || lv.level > s.skillLevel || !lv.desc) continue;
+        const text = (lRec(lv.desc, lang) || lv.desc.en).replace(/\\n/g, '\n');
+        for (const raw of text.split('\n')) {
+          const line = raw.trim();
+          if (line && !lines.includes(line)) lines.push(line);
+        }
+      }
+      if (lines.length) out.push({ star: s.showStar, stars: toTier(s, unique, lang).stars, lines });
+    }
+    prevSkillLevel = Math.max(prevSkillLevel, s.skillLevel);
+  }
+  return out;
+}
+
 // --- Gifts ---------------------------------------------------------------------------
 
 export interface GiftView {

@@ -53,6 +53,8 @@ export const img = {
   burstBadge: () => `${BASE}/images/ui/skills/CM_Skill_Icon_Burst.webp`,
   /** Flèche de priorité de skills. */
   chainArrow: () => `${BASE}/images/ui/nav/IG_Chain_Arrow.webp`,
+  /** Icône de navigation éditoriale (pve/pvp — cibles des guides de reviews). */
+  navIcon: (name: string) => `${BASE}/images/ui/nav/${name}.webp`,
   /** Icône de rang (SSS..D). */
   rank: (rank: string) => `${BASE}/images/ui/rank/IG_Event_Rank_${rank}.webp`,
   /** Icône d'équipement (arme/amulette/talisman, nom de sprite du jeu). */

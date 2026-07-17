@@ -468,13 +468,16 @@ export default async function BeginnerFaqGuide({ lang }: { lang: Lang }) {
         </section>
 
         {/* ═══ Related Guides ═══ */}
-        {/* TODO(portage general-guides) : rajouter premium-limited, gear et
-            heroes-growth ici au fur et à mesure de leur portage (RelatedGuides
-            casse le build sur une référence inconnue — c'est voulu). */}
+        {/* TODO(portage general-guides) : rajouter gear et heroes-growth ici au
+            fur et à mesure de leur portage (RelatedGuides casse le build sur
+            une référence inconnue — c'est voulu). */}
         <RelatedGuides
           lang={lang}
           title={L(LABELS.sectionRelatedGuides)}
-          items={[{ category: 'general-guides', slug: 'free-heroes-start-banner', accent: 'sky' }]}
+          items={[
+            { category: 'general-guides', slug: 'free-heroes-start-banner', accent: 'sky' },
+            { category: 'general-guides', slug: 'premium-limited', accent: 'violet' },
+          ]}
         />
       </div>
     </>

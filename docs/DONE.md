@@ -6,6 +6,32 @@
 
 ## 2026-07-17
 
+- **Guides « Premium & Limited » (ordre 2) et « Core Fusion » (ordre 3)
+  portés** (tier pulls) : reviews/priorités/labels transplantés VERBATIM
+  (script) ; tout le reste DÉRIVE du jeu — sweetspots de transcendance
+  (`getTranscendSweetspots`, paliers officiels — la V2 rechargeait ses textes
+  côté client), coûts de fusion (`CharacterFusionLevelTemplet`, plus de
+  `[300,150…]` en dur), paires base↔CF (plus de `replace('2700','2000')`),
+  renommages de skills dérivés de skills.json (24/24 identiques au
+  `cf-skill-names.json` V2 — item TODO soldé par vérification), EE base↔CF
+  (données équipement V3). Primitives partagées
+  `components/guides/editorial/reviews/` (HeroReviewCard, PriorityTiers, blocs
+  premium/fusion). beginner-faq : carte RelatedGuides premium-limited
+  réactivée (les 3 liens 404 de la section Bugs haute sont résorbés ; le
+  garde-fou `{L}` reste en TODO). Icônes pve/pvp (éditorial) + icônes des 2
+  guides collectées.
+- **Archive des bannières purgées** — `data/curated/recruit-banners.json`
+  (seed : release 2023 de Regina, purgée des tables du jeu) + garde anti-purge
+  dans le générateur recruit : toute bannière du recruit.json promu qui
+  disparaît des tables sans être archivée (ou assumée via `dropped`) casse la
+  génération. Constat : le banner.json V2 était saisi À LA MAIN (éditeur admin
+  dev-only) — dates à ±1 j et bannière d'Ais fabriquée, non reprises.
+- **Écarts V2 résorbés** (audit 4 guides du 17/07, 4 agents, textes 5 langues
+  comparés octet à octet) : intro de free-heroes restaurée (seule vraie perte
+  de contenu rendue), description PIECE_DUNGEON d'unlock-content revenue au
+  verbatim `{I-I/Hero Piece}` (l'item curé existe désormais). Reste ouvert :
+  pattern « titres en page V2 » (H1 meta seul en V3) et mileage du Custom Rate
+  Up (Elemental vs Custom) — décisions Sevih.
 - **Texte en dur des 5 langues éradiqué** (2 commits — le site est servi en
   EN par défaut, le FR en dur fuyait chez tout le monde) : home
   (`characters.filters.count`), meta description fiche perso

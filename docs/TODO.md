@@ -36,13 +36,12 @@
 
 ## 🐛 Bugs — sévérité haute (audit 17/07, tous vérifiés)
 
-- [ ] **Liens 404 publics** : `beginner-faq` pointe 3× vers
-      `/guides/general-guides/premium-limited` qui n'existe pas (index.tsx:107 +
-      content.ts:88-92 et 110-114) → 404 dans les 5 langues. Le garde-fou build
-      ne couvre que `RelatedGuides` : `parse-text.tsx:440-441` valide `ok: true`
-      inconditionnellement pour les tags `{L}`. Deux actions : neutraliser ces
-      liens en attendant le portage du guide premium, ET faire valider les
-      cibles internes `/guides/...` des tags `{L}` dans `checkTag`.
+- [ ] **Valider les cibles internes des tags `{L}`** : `parse-text.tsx:440-441`
+      valide `ok: true` inconditionnellement — un lien `/guides/...` mort passe
+      le contrôle au build (seul `RelatedGuides` jette). Les 404 concrets de
+      `beginner-faq` → premium-limited sont résorbés par le portage du 17/07,
+      mais le garde-fou manque toujours : faire valider les cibles internes
+      `/guides/...` dans `checkTag`.
 
 ## 🐛 Bugs — sévérité moyenne
 
@@ -258,17 +257,9 @@ Règle permanente : chaque `meta.bossId` d'un guide porté doit exister dans
 `monsters.json` (le rendu JETTE sinon) — extraction à la demande
 (`pnpm datagen:extract-entity`).
 
-- [ ] **Premium** (curé, de paire) — `premium_limited_data.json` (reviews) +
-      `premium-priorities.json` (ordre de pull). ⚠️ Remonté en visibilité :
-      `beginner-faq` publie DÉJÀ 3 liens vers ce futur guide (= les 404 de la
-      section Bugs haute) — ce portage les résorbe.
 - [ ] **`bgm-mapping`** ← `LobbyCustomResourceTemplet` + TextSystem (fichier /
       nom localisé / durée).
-- [ ] **`cf-skill-names`** — renommage skills Core Fusion. À VÉRIFIER : sans
-      doute déjà couvert (chaque CF = id perso à part, skills extraits).
 - [ ] **`name-aliases.json`** (curé) — alias de recherche par perso.
-- [ ] **Core Fusion** (curé, de paire) — `core_fusion_data.json` +
-      `core-fusion-priorities.json`.
 - [ ] **`contributors.json`** (curé) — contributeurs du site.
 - [ ] Patch-notes : quand la PAGE sera portée, préfixer `NEXT_PUBLIC_IMG_BASE`
       sur les `src` relatifs stockés (`/images/patch-notes/…webp`).

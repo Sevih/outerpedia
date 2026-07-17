@@ -997,6 +997,15 @@ export function buildAssetManifest(): AssetRequest[] {
       source: `ui/tags/${tag}.webp`,
       domain: 'editorial',
     });
+  // Icônes de nav éditoriales PvE/PvP — cibles recommandées des guides de
+  // reviews (« Premium & Limited »).
+  for (const nav of ['pve', 'pvp'])
+    push({
+      kind: 'editorial',
+      key: `images/ui/nav/${nav}.webp`,
+      source: `ui/nav/${nav}.webp`,
+      domain: 'editorial',
+    });
 
   return out;
 }

@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Premium & Limited Guide",
+    "jp": "プレミアム&期間限定ガイド",
+    "kr": "프리미엄 & 한정 가이드",
+    "zh": "创世之神和限定指南",
+    "fr": "Guide Premium & Limited"
+  },
+  "description": {
+    "en": "Pull priorities, PvE/PvP recommendations, and key transcendence sweetspots (3★→6★) for Premium and Limited heroes in Outerplane.",
+    "jp": "Outerplaneのプレミアムと期間限定ヒーローの召喚優先順位、PvE/PvP推奨、重要な超越スイートスポット（3★→6★）。",
+    "kr": "Outerplane의 프리미엄 및 한정 영웅에 대한 뽑기 우선순위, PvE/PvP 추천, 주요 초월 스위트스팟 (3★→6★).",
+    "zh": "异域战记创世之神和限定同伴的抽取优先级、PVE/PVP推荐以及超越等级关键点（3★→6★）",
+    "fr": "Priorités de pull, recommandations PvE/PvP et sweetspots de transcendance (3★→6★) pour les héros Premium et Limited dans Outerplane."
+  },
+  "icon": "TI_Item_Recruit_Special_001",
+  "author": "Shiraen",
+  "updated": "2026-07-17",
+  "order": 2,
+  "tier": "pulls"
+}
