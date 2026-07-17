@@ -286,14 +286,12 @@ export const ENTRIES: GuideEntry[] = [
     category: 'gamemodes',
     contentType: 'PIECE_DUNGEON',
     // lockScreenName: "Doppelgänger Hunt"
-    // « Hero Piece » n'est pas un item du catalogue V3 (monnaie de progression,
-    // SYS_PGT_CHARACTER_PIECE) → termes officiels en clair, pas de tag {I-I/…}.
     description: {
-      en: 'Obtain Hero Pieces to transcend heroes',
-      jp: '仲間のピースを入手してヒーローを超越',
-      kr: '동료 조각을 획득하여 영웅 초월',
-      zh: '获取同伴碎片来超越英雄',
-      fr: 'Obtenez des Hero Pieces pour transcender les Héros',
+      en: 'Obtain {I-I/Hero Piece} to transcend heroes',
+      jp: '{I-I/Hero Piece}を入手してヒーローを超越',
+      kr: '{I-I/Hero Piece}를 획득하여 영웅 초월',
+      zh: '获取{I-I/Hero Piece}来超越英雄',
+      fr: 'Obtenez des {I-I/Hero Piece} pour transcender les Héros',
     },
   },
   {

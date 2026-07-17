@@ -6,7 +6,7 @@
  * Les personnages sont désignés par NOM D'AFFICHAGE EN (clé du contenu
  * éditorial) : un nom inconnu casse le build à la résolution. La section « pas
  * encore dans la Custom Banner » ne vit PAS ici : elle se dérive du pool réel
- * (data/generated/recruit-pools.json) dans index.tsx.
+ * (data/generated/recruit.json) dans index.tsx.
  */
 import type { LocalizedText } from '@contracts';
 type FreeHeroEntry = {

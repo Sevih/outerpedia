@@ -6,6 +6,14 @@
 import type { LocalizedText } from '@contracts';
 
 export const LABELS = {
+  intro: {
+    en: 'A comprehensive guide on all the free heroes you can obtain and the best pulling strategy for the Custom Banner.',
+    jp: '入手可能な無料キャラとカスタムバナーの最適なガチャ戦略についての総合ガイド。',
+    kr: '획득 가능한 무료 영웅과 커스텀 배너의 최적 가챠 전략에 대한 종합 가이드.',
+    zh: '关于可获取的免费英雄和自选池最佳抽卡策略的综合指南。',
+    fr: 'Guide complet sur tous les Héros gratuits que vous pouvez obtenir et la meilleure stratégie de pull pour la Custom Banner.',
+  },
+
   warning: {
     en: 'Avoid picking duplicates — always choose characters you do not already own. If your in-game recommendations look different, it is because we have already excluded heroes available from guaranteed sources (missions, story progression).',
     jp: '重複を避けよう — まだ持っていないキャラを選ぼう。ゲーム内のおすすめと違う場合は、確定入手可能なキャラ（ミッション、ストーリー進行）を除外しているため。',

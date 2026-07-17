@@ -4,7 +4,7 @@
  *
  * Server Component (les onglets Tabs sont clients, leur CONTENU est rendu
  * serveur). La section « pas encore dans la Custom Banner » se DÉRIVE du pool
- * réel du jeu (data/generated/recruit-pools.json) : réguliers 3★ absents du
+ * réel du jeu (data/generated/recruit.json) : réguliers 3★ absents du
  * pool — plus de liste éditoriale par exclusion comme en V2.
  */
 import { Fragment, type ReactNode } from 'react';
@@ -174,6 +174,7 @@ export default async function FreeHeroesStartBannerGuide({ lang }: { lang: Lang 
 
   return (
     <>
+      <Prose>{L(LABELS.intro)}</Prose>
       <Callout accent="amber">{L(LABELS.warning)}</Callout>
       <Tabs
         urlParam="tab"
