@@ -44,8 +44,6 @@
 
 ## 🐛 Bugs — sévérité moyenne
 
-### Pipeline & scripts
-
 ### Caches périmés (process admin long-running)
 
 - [ ] Caches module qui contournent le régime mtime/TTL pourtant établi
