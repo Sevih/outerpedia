@@ -50,9 +50,6 @@
       images/commit — tout abandon laisse package.json bumpé non committé, une
       relance re-bumpe (versions sautées). Différer l'écriture juste avant
       `git add -A` (le commentaire l.151 « abandon = rien de publié » est faux).
-- [ ] `datagen/extract/dump.ts:147-152` : si `IL2CPP_SO` custom existe mais que
-      `global-metadata.dat` manque, l'extraction **écrase le `.so` fourni** par
-      celui de l'émulateur. Ne rediriger vers `SO` que si `IL2CPP_SO` absent.
 
 ### Erreurs avalées sur les curés (JSON cassé = données vides silencieuses)
 

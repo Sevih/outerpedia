@@ -17,7 +17,7 @@
  *
  * Sortie : `.gamedata/apk/dumped/` (dump.cs + il2cpp.h + script.json + DummyDll).
  * Prérequis : LDPlayer lancé + jeu installé, runtime .NET 6 (Il2CppDumper).
- * ADB surchargeable via ADB_PATH ; .so local imposable via IL2CPP_SO.
+ * ADB surchargeable via ADB_PATH.
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
@@ -34,7 +34,7 @@ const SO_ENTRY = 'lib/arm64-v8a/libil2cpp.so';
 
 const APK_DIR = resolve('.gamedata/apk');
 const META = resolve(APK_DIR, 'global-metadata.dat');
-const SO = process.env.IL2CPP_SO ?? resolve(APK_DIR, 'libil2cpp.so');
+const SO = resolve(APK_DIR, 'libil2cpp.so');
 const OUT = resolve(APK_DIR, 'dumped');
 const REMOTE_TMP = '/data/local/tmp';
 
@@ -142,14 +142,11 @@ function disablePrompt(bin: string): void {
 }
 
 export function dump(): void {
-  // Paire assortie depuis l'émulateur. Si IL2CPP_SO est imposé ET que la metadata
-  // assortie existe déjà, on saute l'extraction (mode avancé / hors-ligne).
-  const preset = process.env.IL2CPP_SO && existsSync(SO) && existsSync(META);
-  if (preset) {
-    console.log('↳ IL2CPP_SO imposé + metadata présente → extraction APK sautée.');
-  } else {
-    pullMatchedPair();
-  }
+  // Paire assortie ré-extraite de l'émulateur À CHAQUE dump : c'est la seule
+  // garantie d'assortiment .so/metadata. (L'ex-IL2CPP_SO « mode avancé » a été
+  // supprimée — décision Sevih 2026-07-17 : jamais utilisée, et elle faisait
+  // écraser le .so fourni quand la metadata manquait.)
+  pullMatchedPair();
 
   const bin = process.env.IL2CPP_DUMPER ?? ensureTool(IL2CPPDUMPER);
   disablePrompt(bin);

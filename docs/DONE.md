@@ -11,6 +11,11 @@
   starting now ») en exception → émulateur déclaré absent à tort au premier
   lancement, pipeline data sauté. EAP local `Continue` (portée fonction) ;
   bug et remède reproduits sur PS 5.1 réel.
+- **`IL2CPP_SO` supprimée de `dump.ts`** (décision Sevih) : la paire
+  .so/metadata se ré-extrait de l'émulateur à chaque dump — un `.so` imposé
+  n'avait aucun cas d'usage (variable jamais documentée ni posée), et
+  metadata absente → l'extraction écrasait silencieusement le fichier fourni
+  par celui de l'émulateur.
 - **Alerte « 93 assets guides refaits depuis le pool V2 » levée** : vérifié —
   `../outerpedia` à jour avec origin, 0 clé nouvelle, 92/93 fichiers identiques
   octet à octet à l'état R2 (`pushed.json`) ; l'unique diff
