@@ -11,6 +11,11 @@
   starting now ») en exception → émulateur déclaré absent à tort au premier
   lancement, pipeline data sauté. EAP local `Continue` (portée fonction) ;
   bug et remède reproduits sur PS 5.1 réel.
+- **`LanguageSwitcher` conserve query + hash** : l'état des guides vit dans
+  l'URL (`?…` + `#version=`/`#team=`) et le switch de langue le perdait.
+  Search/hash lus AU CLIC (le hash n'existe pas côté serveur et ses
+  `replaceState` n'émettent aucun événement) → clic simple intercepté vers
+  `router.push(path + search + hash)`, clic modifié/molette garde le href nu.
 - **`commit.ts` : bump de version différé** — le choix reste à l'étape 2 mais
   l'écriture de package.json attend l'étape commit (avant le `git status`,
   pour qu'un commit « bump seul » reste possible) : tout abandon (bump,
