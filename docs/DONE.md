@@ -11,6 +11,10 @@
   starting now ») en exception → émulateur déclaré absent à tort au premier
   lancement, pipeline data sauté. EAP local `Continue` (portée fonction) ;
   bug et remède reproduits sur PS 5.1 réel.
+- **`convert.ts` purge les tables fantômes** : les `.json` de
+  `.gamedata/parsed/` sans `.bytes` source (table retirée du jeu) sont
+  supprimés en début de run — ils restaient servis à vie par `loadTable`.
+  Testé e2e : fantôme planté → purgé, 257/257 tables converties.
 - **`BuildRequirements` : ordre SPD déterministe** — l'ancien comparateur
   renvoyait 0 face à une entrée sans SPD (non transitif → ordre indéfini).
   Désormais : les entrées à SPD connue se trient entre elles (décroissant),

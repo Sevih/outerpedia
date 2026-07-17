@@ -11,7 +11,7 @@
  *
  * Usage : pnpm datagen:convert
  */
-import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
 import { parseBytes } from './bytes-parser';
 
@@ -20,6 +20,17 @@ const OUT = resolve('.gamedata/parsed');
 
 mkdirSync(OUT, { recursive: true });
 const files = readdirSync(IN).filter((f) => f.endsWith('.bytes'));
+
+// PURGE des tables FANTÔMES avant conversion : un .json dont le .bytes source
+// a disparu (table retirée du jeu) resterait sinon servi À VIE par `loadTable`.
+// Après ce run, `parsed/` reflète exactement le corpus extrait.
+const live = new Set(files.map((f) => basename(f, '.bytes')));
+const ghosts = readdirSync(OUT).filter(
+  (f) => f.endsWith('.json') && !live.has(basename(f, '.json')),
+);
+for (const f of ghosts) unlinkSync(join(OUT, f));
+if (ghosts.length)
+  console.log(`🧹 Tables fantômes purgées (${ghosts.length}) : ${ghosts.join(', ')}`);
 
 let ok = 0;
 const errors: string[] = [];

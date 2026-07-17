@@ -56,9 +56,6 @@
       contredit l'en-tête du fichier), `src/lib/data/rewards.ts:83`,
       `src/lib/admin/monster-store.ts:60,176`. Stamper chacun (modèle
       `fileStamp`/`tablesStamp`) ou documenter la limite.
-- [ ] `datagen/templates/convert.ts` : rien ne purge `.gamedata/parsed/` — une
-      table retirée du jeu reste servie à vie par `loadTable` (tables
-      fantômes). Supprimer en début de convert les .json sans .bytes.
 - [ ] `datagen/generators/encounters.ts:667` + `extractor/specs/monster.ts:315` :
       la spec monstre aliasse `enc.spawns` du cache mémoïsé partagé — une
       mutation d'entité corromprait le cache pour tous les consommateurs.
