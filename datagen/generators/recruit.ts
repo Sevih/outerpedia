@@ -25,9 +25,8 @@
  *
  * Un PickupID de bannière inconnu de CharacterTemplet casse la génération.
  */
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
 import type { LangDict } from '../lib/lang';
+import { readDump } from '../lib/dump';
 import { isMain } from '../lib/is-main';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { loadTable, num, type Row } from '../lib/tables';
@@ -153,13 +152,12 @@ function ticketIdOf(group: Row): string | undefined {
   return id;
 }
 
-const DUMP_PATH = resolve(process.cwd(), '.gamedata/apk/dumped/dump.cs');
 let assetEnum: Map<string, string> | undefined;
 /** Id numérique de monnaie → clé `SYS_ASSET_*` (via l'enum dumpée). */
 function assetKeyOf(id: string): string {
   if (!assetEnum) {
     assetEnum = new Map();
-    const dump = readFileSync(DUMP_PATH, 'utf8');
+    const dump = readDump();
     for (const m of dump.matchAll(/public const ASSET_TYPE AT_([A-Z0-9_]+) = (\d+);/g)) {
       assetEnum.set(m[2], `SYS_ASSET_${m[1]}`);
     }

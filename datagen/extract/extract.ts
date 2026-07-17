@@ -17,16 +17,19 @@ import { execFileSync } from 'node:child_process';
 import { mkdirSync } from 'node:fs';
 import { cpus } from 'node:os';
 import { resolve } from 'node:path';
+import { ASSETSTUDIO, ensureTool } from './tools';
 
 const ROOT = resolve('.gamedata');
-const CLI =
-  process.env.ASTUDIO_CLI ?? resolve(ROOT, 'tools/AssetStudioModCLI/AssetStudioModCLI.exe');
+// Surcharge explicite via ASTUDIO_CLI ; sinon `ensureTool` le résout (et le tire
+// de R2 s'il manque) au premier appel.
+const CLI_OVERRIDE = process.env.ASTUDIO_CLI;
 const BUNDLES = resolve(ROOT, 'files/bundles');
 const OUT_BYTES = resolve(ROOT, 'extracted/bytes');
 const OUT_IMAGES = resolve(ROOT, 'extracted/images');
 
 function cli(args: string[]): void {
-  execFileSync(CLI, args, { stdio: 'inherit' });
+  const bin = CLI_OVERRIDE ?? ensureTool(ASSETSTUDIO);
+  execFileSync(bin, args, { stdio: 'inherit' });
 }
 
 /** .bytes = templates (Templet) + textes (Text*), à plat. */
@@ -75,7 +78,7 @@ function extractImages(): void {
     '--filter-by-container',
     'assets/editor/resources/(sprite|texture|prefabs/ui)|assets/art/ui/',
     '--filter-by-name',
-    '^(?!T_FX_)',
+    '^(?!T_FX_|Font Texture)',
     '--filter-with-regex',
   ]);
 }

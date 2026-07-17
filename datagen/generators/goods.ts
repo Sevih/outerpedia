@@ -15,8 +15,9 @@
  * NB : une icône n'est SERVIE en dev qu'une fois collectée (`pnpm assets:collect`),
  * comme tous les autres assets.
  */
-import { readFileSync, readdirSync } from 'node:fs';
+import { readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { DUMP_PATH, readDump } from '../lib/dump';
 import { loadTable } from '../lib/tables';
 import { hasText, langDict } from '../lib/text';
 import type { LangDict } from '../lib/lang';
@@ -139,8 +140,6 @@ export function buildGoods(): Record<string, Goods> {
   return out;
 }
 
-const DUMP_PATH = resolve(process.cwd(), '.gamedata/apk/dumped/dump.cs');
-
 /**
  * Glossaire `assetTypes` : id NUMÉRIQUE de monnaie → clé du catalogue.
  *
@@ -153,7 +152,7 @@ const DUMP_PATH = resolve(process.cwd(), '.gamedata/apk/dumped/dump.cs');
  * `AT_CRYSTAL` face à la clé texte `SYS_ASSET_CRISTAL`).
  */
 export function buildAssetTypes(goods: Record<string, Goods>): Record<string, string> {
-  const dump = readFileSync(DUMP_PATH, 'utf8');
+  const dump = readDump();
   const out: Record<string, string> = {};
   for (const m of dump.matchAll(/public const ASSET_TYPE AT_([A-Z0-9_]+) = (\d+);/g)) {
     const [, name, id] = m;

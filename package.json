@@ -17,7 +17,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "datagen:pull": "tsx datagen/extract/pull-gamedata.ts",
+    "datagen:tools": "tsx datagen/extract/tools.ts",
     "datagen:extract": "tsx datagen/extract/extract.ts",
+    "datagen:dump": "tsx datagen/extract/dump.ts",
     "datagen:convert": "tsx datagen/templates/convert.ts",
     "datagen:build": "tsx datagen/build.ts",
     "datagen:patch": "tsx datagen/refresh.ts",
@@ -34,6 +36,7 @@
     "clean:all": "node -e \"for(const f of ['.next','node_modules'])require('fs').rmSync(f,{recursive:true,force:true})\" && pnpm install",
     "datagen:coherence": "tsx datagen/extractor/coherence.ts",
     "assets:collect": "tsx datagen/assets/collect.ts",
+    "assets:pull": "tsx datagen/assets/pull.ts",
     "assets:push": "node scripts/assets-push.mjs",
     "images": "pnpm assets:collect && pnpm assets:push",
     "datagen:face-layout": "python datagen/assets/extract-face-layout.py"
