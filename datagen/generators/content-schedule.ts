@@ -187,7 +187,19 @@ export function buildContentSchedule(): ContentScheduleData {
   // --- Guild Raid : BossID logiques → lignes de grade → donjons → spawns. ---
   const gradeById = indexBy(loadTable('GuildRaidGradeTemplet'));
   const gradesByRaid = groupBy(loadTable('GuildRaidGradeTemplet'), 'GuildRaidID');
-  const guildRaid: GuildRaidSeason[] = loadTable('GuildRaidTemplet').map((r) => {
+  // GARDE : le main boss dépend d'une colonne SANS EN-TÊTE (`_unknown_0`, nom
+  // donné par le parseur bytes — ABSENTE du schéma déclaré, précisément parce
+  // qu'elle n'a pas d'en-tête ; vérifié : 17/36 lignes la portent, les saisons
+  // récentes). Si le jeu la nomme ou la déplace, `splitCsv(undefined)`
+  // émettrait des saisons SANS main boss, sans un bruit — on le dit au build.
+  const raidRows = loadTable('GuildRaidTemplet');
+  if (!raidRows.some((r) => r._unknown_0)) {
+    console.warn(
+      '⚠ content-schedule : plus AUCUNE ligne de GuildRaidTemplet ne porte _unknown_0 — le ' +
+        'MAIN BOSS des saisons guild raid ne sera pas émis (colonne renommée ? à re-vérifier).',
+    );
+  }
+  const guildRaid: GuildRaidSeason[] = raidRows.map((r) => {
     const bosses: GuildRaidBoss[] = [];
     // Le boss PRINCIPAL vit dans une colonne SANS EN-TÊTE de la table (le
     // parseur bytes la nomme `_unknown_0`) — vérifié : sa ligne de grade

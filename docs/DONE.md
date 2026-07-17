@@ -11,6 +11,12 @@
   starting now ») en exception → émulateur déclaré absent à tort au premier
   lancement, pipeline data sauté. EAP local `Continue` (portée fonction) ;
   bug et remède reproduits sur PS 5.1 réel.
+- **`content-schedule` : garde sur `_unknown_0`** — le main boss guild raid
+  vit dans une colonne sans en-tête que seul le parseur nomme (absente du
+  schéma déclaré, 17/36 lignes la portent) : si plus aucune ligne ne la porte
+  (colonne renommée par le jeu), warn explicite au build au lieu de saisons
+  sans main boss en silence. Iso-sortie prouvée IDENTIQUE, garde muette
+  aujourd'hui.
 - **`convert.ts` purge les tables fantômes** : les `.json` de
   `.gamedata/parsed/` sans `.bytes` source (table retirée du jeu) sont
   supprimés en début de run — ils restaient servis à vie par `loadTable`.

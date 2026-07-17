@@ -100,10 +100,6 @@
       une normalisation côté jeu viderait le roster en silence. Généraliser
       `bool()` de `lib/tables` à tous les booléens de table (3 idiomes
       coexistent : `bool()`, `boolCol()`, comparaisons exactes).
-- [ ] `datagen/generators/content-schedule.ts:196` : le main boss guild raid
-      dépend de la colonne sans en-tête `_unknown_0` — si elle disparaît,
-      `splitCsv(undefined)` → boss absent SANS warn. Vérifier la colonne et
-      signaler.
 - [ ] `datagen/assets/extract-face-layout.py:193-195` : le mode sans argument
       (joué par `refresh.ts`) écrase le cache au lieu de fusionner — un prefab
       retiré du bundle perd son entrée committée (perte de rétention, à rebours
