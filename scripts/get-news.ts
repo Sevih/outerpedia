@@ -156,7 +156,13 @@ const FETCH_OPTS: RequestInit = { headers: { 'User-Agent': USER_AGENT } };
 
 async function fetchJSON<T>(url: string): Promise<T> {
   const res = await fetch(url, FETCH_OPTS);
-  if (!res.ok) throw new Error(`Fetch failed: ${res.status} ${url}`);
+  if (!res.ok) {
+    // Statut porté par l'erreur : la pagination s'arrête sur le 400 de WP,
+    // toute autre erreur doit remonter (cf. boucle de scrape).
+    const err = new Error(`Fetch failed: ${res.status} ${url}`) as Error & { status?: number };
+    err.status = res.status;
+    throw err;
+  }
   return res.json() as Promise<T>;
 }
 
@@ -317,8 +323,13 @@ async function main(): Promise<void> {
       try {
         if (page > 1 || lang !== 'en') await sleep(DELAY_API);
         posts = await fetchJSON<WPPost[]>(url);
-      } catch {
-        break; // 400 sur page vide
+      } catch (e) {
+        // Le 400 de WP = page au-delà de la dernière : fin de pagination
+        // normale, langue suivante. TOUT le reste (réseau coupé, 500, DNS)
+        // doit faire échouer le run — un exit 0 avec « 0 new » ferait croire
+        // à dev-refresh que les news sont à jour.
+        if ((e as { status?: number }).status === 400) break;
+        throw e;
       }
 
       for (const post of posts) {

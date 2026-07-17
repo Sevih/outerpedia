@@ -14737,12 +14737,6 @@
       "kr": "애정의 방주 1단계 보상",
       "zh": "爱情的方舟第1阶段奖励"
     },
-    "desc": {
-      "en": "Affinity Ark Stage 1 Reward",
-      "jp": "愛情のアーク1段階報酬",
-      "kr": "애정의 방주 1단계 보상",
-      "zh": "爱情的方舟第1阶段奖励"
-    },
     "icon": "TI_Gift_Box03",
     "grade": "normal",
     "type": "box",
@@ -14752,12 +14746,6 @@
   "50005": {
     "kind": "item",
     "name": {
-      "en": "Affinity Ark Stage 2 Reward",
-      "jp": "愛情のアーク2段階報酬",
-      "kr": "애정의 방주 2단계 보상",
-      "zh": "爱情的方舟第2阶段奖励"
-    },
-    "desc": {
       "en": "Affinity Ark Stage 2 Reward",
       "jp": "愛情のアーク2段階報酬",
       "kr": "애정의 방주 2단계 보상",
@@ -14777,12 +14765,6 @@
       "kr": "애정의 방주 3단계 보상",
       "zh": "爱情的方舟第3阶段奖励"
     },
-    "desc": {
-      "en": "Affinity Ark Stage 3 Reward",
-      "jp": "愛情のアーク3段階報酬",
-      "kr": "애정의 방주 3단계 보상",
-      "zh": "爱情的方舟第3阶段奖励"
-    },
     "icon": "TI_Gift_Box03",
     "grade": "normal",
     "type": "box",
@@ -14792,12 +14774,6 @@
   "50007": {
     "kind": "item",
     "name": {
-      "en": "Affinity Ark Stage 4 Reward",
-      "jp": "愛情のアーク4段階報酬",
-      "kr": "애정의 방주 4단계 보상",
-      "zh": "爱情的方舟第4阶段奖励"
-    },
-    "desc": {
       "en": "Affinity Ark Stage 4 Reward",
       "jp": "愛情のアーク4段階報酬",
       "kr": "애정의 방주 4단계 보상",
@@ -14817,12 +14793,6 @@
       "kr": "애정의 방주 5단계 보상",
       "zh": "爱情的方舟第5阶段奖励"
     },
-    "desc": {
-      "en": "Affinity Ark Stage 5 Reward",
-      "jp": "愛情のアーク5段階報酬",
-      "kr": "애정의 방주 5단계 보상",
-      "zh": "爱情的方舟第5阶段奖励"
-    },
     "icon": "TI_Gift_Box03",
     "grade": "magic",
     "type": "box",
@@ -14832,12 +14802,6 @@
   "50009": {
     "kind": "item",
     "name": {
-      "en": "Affinity Ark Stage 6 Reward",
-      "jp": "愛情のアーク6段階報酬",
-      "kr": "애정의 방주 6단계 보상",
-      "zh": "爱情的方舟第6阶段奖励"
-    },
-    "desc": {
       "en": "Affinity Ark Stage 6 Reward",
       "jp": "愛情のアーク6段階報酬",
       "kr": "애정의 방주 6단계 보상",
@@ -14857,12 +14821,6 @@
       "kr": "애정의 방주 7단계 보상",
       "zh": "爱情的方舟第7阶段奖励"
     },
-    "desc": {
-      "en": "Affinity Ark Stage 7 Reward",
-      "jp": "愛情のアーク7段階報酬",
-      "kr": "애정의 방주 7단계 보상",
-      "zh": "爱情的方舟第7阶段奖励"
-    },
     "icon": "TI_Gift_Box03",
     "grade": "magic",
     "type": "box",
@@ -14872,12 +14830,6 @@
   "50011": {
     "kind": "item",
     "name": {
-      "en": "Affinity Ark Stage 8 Reward",
-      "jp": "愛情のアーク8段階報酬",
-      "kr": "애정의 방주 8단계 보상",
-      "zh": "爱情的方舟第8阶段奖励"
-    },
-    "desc": {
       "en": "Affinity Ark Stage 8 Reward",
       "jp": "愛情のアーク8段階報酬",
       "kr": "애정의 방주 8단계 보상",
@@ -14897,12 +14849,6 @@
       "kr": "애정의 방주 9단계 보상",
       "zh": "爱情的方舟第9阶段奖励"
     },
-    "desc": {
-      "en": "Affinity Ark Stage 9 Reward",
-      "jp": "愛情のアーク9段階報酬",
-      "kr": "애정의 방주 9단계 보상",
-      "zh": "爱情的方舟第9阶段奖励"
-    },
     "icon": "TI_Gift_Box03",
     "grade": "rare",
     "type": "box",
@@ -14912,12 +14858,6 @@
   "50013": {
     "kind": "item",
     "name": {
-      "en": "Affinity Ark Stage 10 Reward",
-      "jp": "愛情のアーク10段階報酬",
-      "kr": "애정의 방주 10단계 보상",
-      "zh": "爱情的方舟第10阶段奖励"
-    },
-    "desc": {
       "en": "Affinity Ark Stage 10 Reward",
       "jp": "愛情のアーク10段階報酬",
       "kr": "애정의 방주 10단계 보상",
@@ -14937,12 +14877,6 @@
       "kr": "애정의 방주 11단계 보상",
       "zh": "爱情的方舟第11阶段奖励"
     },
-    "desc": {
-      "en": "Affinity Ark Stage 11 Reward",
-      "jp": "愛情のアーク11段階報酬",
-      "kr": "애정의 방주 11단계 보상",
-      "zh": "爱情的方舟第11阶段奖励"
-    },
     "icon": "TI_Gift_Box03",
     "grade": "rare",
     "type": "box",
@@ -14952,12 +14886,6 @@
   "50015": {
     "kind": "item",
     "name": {
-      "en": "Affinity Ark Stage 12 Reward",
-      "jp": "愛情のアーク12段階報酬",
-      "kr": "애정의 방주 12단계 보상",
-      "zh": "爱情的方舟第12阶段奖励"
-    },
-    "desc": {
       "en": "Affinity Ark Stage 12 Reward",
       "jp": "愛情のアーク12段階報酬",
       "kr": "애정의 방주 12단계 보상",
@@ -14977,12 +14905,6 @@
       "kr": "애정의 방주 1단계 일일 추가 보상",
       "zh": "爱情的方舟第1阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Affinity Ark Stage 1 Daily Bonus Reward",
-      "jp": "愛情のアーク1段階日別追加報酬",
-      "kr": "애정의 방주 1단계 일일 추가 보상",
-      "zh": "爱情的方舟第1阶段每日追加奖励"
-    },
     "icon": "TI_Gift_Box03",
     "grade": "magic",
     "type": "box",
@@ -14992,12 +14914,6 @@
   "50017": {
     "kind": "item",
     "name": {
-      "en": "Affinity Ark Stage 2 Daily Bonus Reward",
-      "jp": "愛情のアーク2段階日別追加報酬",
-      "kr": "애정의 방주 2단계 일일 추가 보상",
-      "zh": "爱情的方舟第2阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Affinity Ark Stage 2 Daily Bonus Reward",
       "jp": "愛情のアーク2段階日別追加報酬",
       "kr": "애정의 방주 2단계 일일 추가 보상",
@@ -15017,12 +14933,6 @@
       "kr": "애정의 방주 3단계 일일 추가 보상",
       "zh": "爱情的方舟第3阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Affinity Ark Stage 3 Daily Bonus Reward",
-      "jp": "愛情のアーク3段階日別追加報酬",
-      "kr": "애정의 방주 3단계 일일 추가 보상",
-      "zh": "爱情的方舟第3阶段每日追加奖励"
-    },
     "icon": "TI_Gift_Box03",
     "grade": "magic",
     "type": "box",
@@ -15032,12 +14942,6 @@
   "50019": {
     "kind": "item",
     "name": {
-      "en": "Affinity Ark Stage 4 Daily Bonus Reward",
-      "jp": "愛情のアーク4段階日別追加報酬",
-      "kr": "애정의 방주 4단계 일일 추가 보상",
-      "zh": "爱情的方舟第4阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Affinity Ark Stage 4 Daily Bonus Reward",
       "jp": "愛情のアーク4段階日別追加報酬",
       "kr": "애정의 방주 4단계 일일 추가 보상",
@@ -15057,12 +14961,6 @@
       "kr": "애정의 방주 5단계 일일 추가 보상",
       "zh": "爱情的方舟第5阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Affinity Ark Stage 5 Daily Bonus Reward",
-      "jp": "愛情のアーク5段階日別追加報酬",
-      "kr": "애정의 방주 5단계 일일 추가 보상",
-      "zh": "爱情的方舟第5阶段每日追加奖励"
-    },
     "icon": "TI_Gift_Box03",
     "grade": "rare",
     "type": "box",
@@ -15072,12 +14970,6 @@
   "50021": {
     "kind": "item",
     "name": {
-      "en": "Affinity Ark Stage 6 Daily Bonus Reward",
-      "jp": "愛情のアーク6段階日別追加報酬",
-      "kr": "애정의 방주 6단계 일일 추가 보상",
-      "zh": "爱情的方舟第6阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Affinity Ark Stage 6 Daily Bonus Reward",
       "jp": "愛情のアーク6段階日別追加報酬",
       "kr": "애정의 방주 6단계 일일 추가 보상",
@@ -15097,12 +14989,6 @@
       "kr": "애정의 방주 7단계 일일 추가 보상",
       "zh": "爱情的方舟第7阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Affinity Ark Stage 7 Daily Bonus Reward",
-      "jp": "愛情のアーク7段階日別追加報酬",
-      "kr": "애정의 방주 7단계 일일 추가 보상",
-      "zh": "爱情的方舟第7阶段每日追加奖励"
-    },
     "icon": "TI_Gift_Box03",
     "grade": "rare",
     "type": "box",
@@ -15112,12 +14998,6 @@
   "50023": {
     "kind": "item",
     "name": {
-      "en": "Affinity Ark Stage 8 Daily Bonus Reward",
-      "jp": "愛情のアーク8段階日別追加報酬",
-      "kr": "애정의 방주 8단계 일일 추가 보상",
-      "zh": "爱情的方舟第8阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Affinity Ark Stage 8 Daily Bonus Reward",
       "jp": "愛情のアーク8段階日別追加報酬",
       "kr": "애정의 방주 8단계 일일 추가 보상",
@@ -15137,12 +15017,6 @@
       "kr": "애정의 방주 9단계 일일 추가 보상",
       "zh": "爱情的方舟第9阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Affinity Ark Stage 9 Daily Bonus Reward",
-      "jp": "愛情のアーク9段階日別追加報酬",
-      "kr": "애정의 방주 9단계 일일 추가 보상",
-      "zh": "爱情的方舟第9阶段每日追加奖励"
-    },
     "icon": "TI_Gift_Box03",
     "grade": "unique",
     "type": "box",
@@ -15152,12 +15026,6 @@
   "50025": {
     "kind": "item",
     "name": {
-      "en": "Affinity Ark Stage 10 Daily Bonus Reward",
-      "jp": "愛情のアーク10段階日別追加報酬",
-      "kr": "애정의 방주 10단계 일일 추가 보상",
-      "zh": "爱情的方舟第10阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Affinity Ark Stage 10 Daily Bonus Reward",
       "jp": "愛情のアーク10段階日別追加報酬",
       "kr": "애정의 방주 10단계 일일 추가 보상",
@@ -15177,12 +15045,6 @@
       "kr": "애정의 방주 11단계 일일 추가 보상",
       "zh": "爱情的方舟第11阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Affinity Ark Stage 11 Daily Bonus Reward",
-      "jp": "愛情のアーク11段階日別追加報酬",
-      "kr": "애정의 방주 11단계 일일 추가 보상",
-      "zh": "爱情的方舟第11阶段每日追加奖励"
-    },
     "icon": "TI_Gift_Box03",
     "grade": "unique",
     "type": "box",
@@ -15192,12 +15054,6 @@
   "50027": {
     "kind": "item",
     "name": {
-      "en": "Affinity Ark Stage 12 Daily Bonus Reward",
-      "jp": "愛情のアーク12段階日別追加報酬",
-      "kr": "애정의 방주 12단계 일일 추가 보상",
-      "zh": "爱情的方舟第12阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Affinity Ark Stage 12 Daily Bonus Reward",
       "jp": "愛情のアーク12段階日別追加報酬",
       "kr": "애정의 방주 12단계 일일 추가 보상",
@@ -15217,12 +15073,6 @@
       "kr": "보석의 방주 1단계 일일 추가 보상",
       "zh": "宝石的方舟第1阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Gem Ark Stage 1 Daily Bonus Reward",
-      "jp": "ジェムのアーク1段階日別追加報酬",
-      "kr": "보석의 방주 1단계 일일 추가 보상",
-      "zh": "宝石的方舟第1阶段每日追加奖励"
-    },
     "icon": "TI_GEM_Box_01",
     "grade": "magic",
     "type": "box",
@@ -15232,12 +15082,6 @@
   "50029": {
     "kind": "item",
     "name": {
-      "en": "Gem Ark Stage 2 Daily Bonus Reward",
-      "jp": "ジェムのアーク2段階日別追加報酬",
-      "kr": "보석의 방주 2단계 일일 추가 보상",
-      "zh": "宝石的方舟第2阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Gem Ark Stage 2 Daily Bonus Reward",
       "jp": "ジェムのアーク2段階日別追加報酬",
       "kr": "보석의 방주 2단계 일일 추가 보상",
@@ -15257,12 +15101,6 @@
       "kr": "보석의 방주 3단계 일일 추가 보상",
       "zh": "宝石的方舟第3阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Gem Ark Stage 3 Daily Bonus Reward",
-      "jp": "ジェムのアーク3段階日別追加報酬",
-      "kr": "보석의 방주 3단계 일일 추가 보상",
-      "zh": "宝石的方舟第3阶段每日追加奖励"
-    },
     "icon": "TI_GEM_Box_01",
     "grade": "magic",
     "type": "box",
@@ -15272,12 +15110,6 @@
   "50031": {
     "kind": "item",
     "name": {
-      "en": "Gem Ark Stage 4 Daily Bonus Reward",
-      "jp": "ジェムのアーク4段階日別追加報酬",
-      "kr": "보석의 방주 4단계 일일 추가 보상",
-      "zh": "宝石的方舟第4阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Gem Ark Stage 4 Daily Bonus Reward",
       "jp": "ジェムのアーク4段階日別追加報酬",
       "kr": "보석의 방주 4단계 일일 추가 보상",
@@ -15297,12 +15129,6 @@
       "kr": "보석의 방주 5단계 일일 추가 보상",
       "zh": "宝石的方舟第5阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Gem Ark Stage 5 Daily Bonus Reward",
-      "jp": "ジェムのアーク5段階日別追加報酬",
-      "kr": "보석의 방주 5단계 일일 추가 보상",
-      "zh": "宝石的方舟第5阶段每日追加奖励"
-    },
     "icon": "TI_GEM_Box_01",
     "grade": "magic",
     "type": "box",
@@ -15312,12 +15138,6 @@
   "50033": {
     "kind": "item",
     "name": {
-      "en": "Gem Ark Stage 6 Daily Bonus Reward",
-      "jp": "ジェムのアーク6段階日別追加報酬",
-      "kr": "보석의 방주 6단계 일일 추가 보상",
-      "zh": "宝石的方舟第6阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Gem Ark Stage 6 Daily Bonus Reward",
       "jp": "ジェムのアーク6段階日別追加報酬",
       "kr": "보석의 방주 6단계 일일 추가 보상",
@@ -15337,12 +15157,6 @@
       "kr": "보석의 방주 7단계 일일 추가 보상",
       "zh": "宝石的方舟第7阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Gem Ark Stage 7 Daily Bonus Reward",
-      "jp": "ジェムのアーク7段階日別追加報酬",
-      "kr": "보석의 방주 7단계 일일 추가 보상",
-      "zh": "宝石的方舟第7阶段每日追加奖励"
-    },
     "icon": "TI_GEM_Box_01",
     "grade": "rare",
     "type": "box",
@@ -15352,12 +15166,6 @@
   "50035": {
     "kind": "item",
     "name": {
-      "en": "Gem Ark Stage 8 Daily Bonus Reward",
-      "jp": "ジェムのアーク8段階日別追加報酬",
-      "kr": "보석의 방주 8단계 일일 추가 보상",
-      "zh": "宝石的方舟第8阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Gem Ark Stage 8 Daily Bonus Reward",
       "jp": "ジェムのアーク8段階日別追加報酬",
       "kr": "보석의 방주 8단계 일일 추가 보상",
@@ -15377,12 +15185,6 @@
       "kr": "보석의 방주 9단계 일일 추가 보상",
       "zh": "宝石的方舟第9阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Gem Ark Stage 9 Daily Bonus Reward",
-      "jp": "ジェムのアーク9段階日別追加報酬",
-      "kr": "보석의 방주 9단계 일일 추가 보상",
-      "zh": "宝石的方舟第9阶段每日追加奖励"
-    },
     "icon": "TI_GEM_Box_01",
     "grade": "rare",
     "type": "box",
@@ -15392,12 +15194,6 @@
   "50037": {
     "kind": "item",
     "name": {
-      "en": "Gem Ark Stage 10 Daily Bonus Reward",
-      "jp": "ジェムのアーク10段階日別追加報酬",
-      "kr": "보석의 방주 10단계 일일 추가 보상",
-      "zh": "宝石的方舟第10阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Gem Ark Stage 10 Daily Bonus Reward",
       "jp": "ジェムのアーク10段階日別追加報酬",
       "kr": "보석의 방주 10단계 일일 추가 보상",
@@ -15417,12 +15213,6 @@
       "kr": "보석의 방주 11단계 일일 추가 보상",
       "zh": "宝石的方舟第11阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Gem Ark Stage 11 Daily Bonus Reward",
-      "jp": "ジェムのアーク11段階日別追加報酬",
-      "kr": "보석의 방주 11단계 일일 추가 보상",
-      "zh": "宝石的方舟第11阶段每日追加奖励"
-    },
     "icon": "TI_GEM_Box_01",
     "grade": "rare",
     "type": "box",
@@ -15432,12 +15222,6 @@
   "50039": {
     "kind": "item",
     "name": {
-      "en": "Gem Ark Stage 12 Daily Bonus Reward",
-      "jp": "ジェムのアーク12段階日別追加報酬",
-      "kr": "보석의 방주 12단계 일일 추가 보상",
-      "zh": "宝石的方舟第12阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Gem Ark Stage 12 Daily Bonus Reward",
       "jp": "ジェムのアーク12段階日別追加報酬",
       "kr": "보석의 방주 12단계 일일 추가 보상",
@@ -15457,12 +15241,6 @@
       "kr": "기술의 방주 1단계 보상",
       "zh": "技术的方舟第1阶段奖励"
     },
-    "desc": {
-      "en": "Skill Ark Stage 1 Reward",
-      "jp": "技術のアーク1段階報酬",
-      "kr": "기술의 방주 1단계 보상",
-      "zh": "技术的方舟第1阶段奖励"
-    },
     "icon": "TI_Item_Growth_Book_02",
     "grade": "rare",
     "type": "box",
@@ -15472,12 +15250,6 @@
   "50041": {
     "kind": "item",
     "name": {
-      "en": "Skill Ark Stage 2 Reward",
-      "jp": "技術のアーク2段階報酬",
-      "kr": "기술의 방주 2단계 보상",
-      "zh": "技术的方舟第2阶段奖励"
-    },
-    "desc": {
       "en": "Skill Ark Stage 2 Reward",
       "jp": "技術のアーク2段階報酬",
       "kr": "기술의 방주 2단계 보상",
@@ -15497,12 +15269,6 @@
       "kr": "기술의 방주 3단계 보상",
       "zh": "技术的方舟第3阶段奖励"
     },
-    "desc": {
-      "en": "Skill Ark Stage 3 Reward",
-      "jp": "技術のアーク3段階報酬",
-      "kr": "기술의 방주 3단계 보상",
-      "zh": "技术的方舟第3阶段奖励"
-    },
     "icon": "TI_Item_Growth_Book_02",
     "grade": "rare",
     "type": "box",
@@ -15512,12 +15278,6 @@
   "50043": {
     "kind": "item",
     "name": {
-      "en": "Skill Ark Stage 4 Reward",
-      "jp": "技術のアーク4段階報酬",
-      "kr": "기술의 방주 4단계 보상",
-      "zh": "技术的方舟第4阶段奖励"
-    },
-    "desc": {
       "en": "Skill Ark Stage 4 Reward",
       "jp": "技術のアーク4段階報酬",
       "kr": "기술의 방주 4단계 보상",
@@ -15537,12 +15297,6 @@
       "kr": "기술의 방주 5단계 보상",
       "zh": "技术的方舟第5阶段奖励"
     },
-    "desc": {
-      "en": "Skill Ark Stage 5 Reward",
-      "jp": "技術のアーク5段階報酬",
-      "kr": "기술의 방주 5단계 보상",
-      "zh": "技术的方舟第5阶段奖励"
-    },
     "icon": "TI_Item_Growth_Book_02",
     "grade": "rare",
     "type": "box",
@@ -15552,12 +15306,6 @@
   "50045": {
     "kind": "item",
     "name": {
-      "en": "Skill Ark Stage 6 Reward",
-      "jp": "技術のアーク6段階報酬",
-      "kr": "기술의 방주 6단계 보상",
-      "zh": "技术的方舟第6阶段奖励"
-    },
-    "desc": {
       "en": "Skill Ark Stage 6 Reward",
       "jp": "技術のアーク6段階報酬",
       "kr": "기술의 방주 6단계 보상",
@@ -15577,12 +15325,6 @@
       "kr": "기술의 방주 7단계 보상",
       "zh": "技术的方舟第7阶段奖励"
     },
-    "desc": {
-      "en": "Skill Ark Stage 7 Reward",
-      "jp": "技術のアーク7段階報酬",
-      "kr": "기술의 방주 7단계 보상",
-      "zh": "技术的方舟第7阶段奖励"
-    },
     "icon": "TI_Item_Growth_Book_03",
     "grade": "unique",
     "type": "box",
@@ -15592,12 +15334,6 @@
   "50047": {
     "kind": "item",
     "name": {
-      "en": "Skill Ark Stage 8 Reward",
-      "jp": "技術のアーク8段階報酬",
-      "kr": "기술의 방주 8단계 보상",
-      "zh": "技术的方舟第8阶段奖励"
-    },
-    "desc": {
       "en": "Skill Ark Stage 8 Reward",
       "jp": "技術のアーク8段階報酬",
       "kr": "기술의 방주 8단계 보상",
@@ -15617,12 +15353,6 @@
       "kr": "기술의 방주 9단계 보상",
       "zh": "技术的方舟第9阶段奖励"
     },
-    "desc": {
-      "en": "Skill Ark Stage 9 Reward",
-      "jp": "技術のアーク9段階報酬",
-      "kr": "기술의 방주 9단계 보상",
-      "zh": "技术的方舟第9阶段奖励"
-    },
     "icon": "TI_Item_Growth_Book_03",
     "grade": "unique",
     "type": "box",
@@ -15632,12 +15362,6 @@
   "50049": {
     "kind": "item",
     "name": {
-      "en": "Skill Ark Stage 10 Reward",
-      "jp": "技術のアーク10段階報酬",
-      "kr": "기술의 방주 10단계 보상",
-      "zh": "技术的方舟第10阶段奖励"
-    },
-    "desc": {
       "en": "Skill Ark Stage 10 Reward",
       "jp": "技術のアーク10段階報酬",
       "kr": "기술의 방주 10단계 보상",
@@ -15657,12 +15381,6 @@
       "kr": "기술의 방주 11단계 보상",
       "zh": "技术的方舟第11阶段奖励"
     },
-    "desc": {
-      "en": "Skill Ark Stage 11 Reward",
-      "jp": "技術のアーク11段階報酬",
-      "kr": "기술의 방주 11단계 보상",
-      "zh": "技术的方舟第11阶段奖励"
-    },
     "icon": "TI_Item_Growth_Book_03",
     "grade": "unique",
     "type": "box",
@@ -15672,12 +15390,6 @@
   "50051": {
     "kind": "item",
     "name": {
-      "en": "Skill Ark Stage 12 Reward",
-      "jp": "技術のアーク12段階報酬",
-      "kr": "기술의 방주 12단계 보상",
-      "zh": "技术的方舟第12阶段奖励"
-    },
-    "desc": {
       "en": "Skill Ark Stage 12 Reward",
       "jp": "技術のアーク12段階報酬",
       "kr": "기술의 방주 12단계 보상",
@@ -15697,12 +15409,6 @@
       "kr": "기술의 방주 1단계 일일 추가 보상",
       "zh": "技术的方舟第1阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Skill Ark Stage 1 Daily Bonus Reward",
-      "jp": "技術のアーク1段階日別追加報酬",
-      "kr": "기술의 방주 1단계 일일 추가 보상",
-      "zh": "技术的方舟第1阶段每日追加奖励"
-    },
     "icon": "TI_Item_Growth_Book_02",
     "grade": "rare",
     "type": "box",
@@ -15712,12 +15418,6 @@
   "50053": {
     "kind": "item",
     "name": {
-      "en": "Skill Ark Stage 2 Daily Bonus Reward",
-      "jp": "技術のアーク2段階日別追加報酬",
-      "kr": "기술의 방주 2단계 일일 추가 보상",
-      "zh": "技术的方舟第2阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Skill Ark Stage 2 Daily Bonus Reward",
       "jp": "技術のアーク2段階日別追加報酬",
       "kr": "기술의 방주 2단계 일일 추가 보상",
@@ -15737,12 +15437,6 @@
       "kr": "기술의 방주 3단계 일일 추가 보상",
       "zh": "技术的方舟第3阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Skill Ark Stage 3 Daily Bonus Reward",
-      "jp": "技術のアーク3段階日別追加報酬",
-      "kr": "기술의 방주 3단계 일일 추가 보상",
-      "zh": "技术的方舟第3阶段每日追加奖励"
-    },
     "icon": "TI_Item_Growth_Book_02",
     "grade": "rare",
     "type": "box",
@@ -15752,12 +15446,6 @@
   "50055": {
     "kind": "item",
     "name": {
-      "en": "Skill Ark Stage 4 Daily Bonus Reward",
-      "jp": "技術のアーク4段階日別追加報酬",
-      "kr": "기술의 방주 4단계 일일 추가 보상",
-      "zh": "技术的方舟第4阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Skill Ark Stage 4 Daily Bonus Reward",
       "jp": "技術のアーク4段階日別追加報酬",
       "kr": "기술의 방주 4단계 일일 추가 보상",
@@ -15777,12 +15465,6 @@
       "kr": "기술의 방주 5단계 일일 추가 보상",
       "zh": "技术的方舟第5阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Skill Ark Stage 5 Daily Bonus Reward",
-      "jp": "技術のアーク5段階日別追加報酬",
-      "kr": "기술의 방주 5단계 일일 추가 보상",
-      "zh": "技术的方舟第5阶段每日追加奖励"
-    },
     "icon": "TI_Item_Growth_Book_02",
     "grade": "rare",
     "type": "box",
@@ -15792,12 +15474,6 @@
   "50057": {
     "kind": "item",
     "name": {
-      "en": "Skill Ark Stage 6 Daily Bonus Reward",
-      "jp": "技術のアーク6段階日別追加報酬",
-      "kr": "기술의 방주 6단계 일일 추가 보상",
-      "zh": "技术的方舟第6阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Skill Ark Stage 6 Daily Bonus Reward",
       "jp": "技術のアーク6段階日別追加報酬",
       "kr": "기술의 방주 6단계 일일 추가 보상",
@@ -15817,12 +15493,6 @@
       "kr": "기술의 방주 7단계 일일 추가 보상",
       "zh": "技术的方舟第7阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Skill Ark Stage 7 Daily Bonus Reward",
-      "jp": "技術のアーク7段階日別追加報酬",
-      "kr": "기술의 방주 7단계 일일 추가 보상",
-      "zh": "技术的方舟第7阶段每日追加奖励"
-    },
     "icon": "TI_Item_Growth_Book_03",
     "grade": "unique",
     "type": "box",
@@ -15832,12 +15502,6 @@
   "50059": {
     "kind": "item",
     "name": {
-      "en": "Skill Ark Stage 8 Daily Bonus Reward",
-      "jp": "技術のアーク8段階日別追加報酬",
-      "kr": "기술의 방주 8단계 일일 추가 보상",
-      "zh": "技术的方舟第8阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Skill Ark Stage 8 Daily Bonus Reward",
       "jp": "技術のアーク8段階日別追加報酬",
       "kr": "기술의 방주 8단계 일일 추가 보상",
@@ -15857,12 +15521,6 @@
       "kr": "기술의 방주 9단계 일일 추가 보상",
       "zh": "技术的方舟第9阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Skill Ark Stage 9 Daily Bonus Reward",
-      "jp": "技術のアーク9段階日別追加報酬",
-      "kr": "기술의 방주 9단계 일일 추가 보상",
-      "zh": "技术的方舟第9阶段每日追加奖励"
-    },
     "icon": "TI_Item_Growth_Book_03",
     "grade": "unique",
     "type": "box",
@@ -15872,12 +15530,6 @@
   "50061": {
     "kind": "item",
     "name": {
-      "en": "Skill Ark Stage 10 Daily Bonus Reward",
-      "jp": "技術のアーク10段階日別追加報酬",
-      "kr": "기술의 방주 10단계 일일 추가 보상",
-      "zh": "技术的方舟第10阶段每日追加奖励"
-    },
-    "desc": {
       "en": "Skill Ark Stage 10 Daily Bonus Reward",
       "jp": "技術のアーク10段階日別追加報酬",
       "kr": "기술의 방주 10단계 일일 추가 보상",
@@ -15897,12 +15549,6 @@
       "kr": "기술의 방주 11단계 일일 추가 보상",
       "zh": "技术的方舟第11阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Skill Ark Stage 11 Daily Bonus Reward",
-      "jp": "技術のアーク11段階日別追加報酬",
-      "kr": "기술의 방주 11단계 일일 추가 보상",
-      "zh": "技术的方舟第11阶段每日追加奖励"
-    },
     "icon": "TI_Item_Growth_Book_03",
     "grade": "unique",
     "type": "box",
@@ -15917,12 +15563,6 @@
       "kr": "기술의 방주 12단계 일일 추가 보상",
       "zh": "技术的方舟第12阶段每日追加奖励"
     },
-    "desc": {
-      "en": "Skill Ark Stage 12 Daily Bonus Reward",
-      "jp": "技術のアーク12段階日別追加報酬",
-      "kr": "기술의 방주 12단계 일일 추가 보상",
-      "zh": "技术的方舟第12阶段每日追加奖励"
-    },
     "icon": "TI_Item_Growth_Book_03",
     "grade": "unique",
     "type": "box",
@@ -15932,12 +15572,6 @@
   "60001": {
     "kind": "item",
     "name": {
-      "en": "Fusion-Type Core",
-      "jp": "フュージョン型コア",
-      "kr": "융합형 코어",
-      "zh": "融合型核心"
-    },
-    "desc": {
       "en": "Fusion-Type Core",
       "jp": "フュージョン型コア",
       "kr": "융합형 코어",
@@ -19097,12 +18731,6 @@
       "kr": "테스트 상자 - 1번 [보석]",
       "zh": "0"
     },
-    "desc": {
-      "en": "Test Box 1st[Gem]",
-      "jp": "0",
-      "kr": "테스트 상자 - 1번 [보석]",
-      "zh": "0"
-    },
     "icon": "GD_Item_GoldMask",
     "grade": "unique",
     "type": "box",
@@ -19112,12 +18740,6 @@
   "9900002": {
     "kind": "item",
     "name": {
-      "en": "Test Box 2nd[Consumeble]",
-      "jp": "0",
-      "kr": "테스트 상자 - 2번 [소모품]",
-      "zh": "0"
-    },
-    "desc": {
       "en": "Test Box 2nd[Consumeble]",
       "jp": "0",
       "kr": "테스트 상자 - 2번 [소모품]",
@@ -19137,12 +18759,6 @@
       "kr": "테스트 상자 - 3번 [제작재료]",
       "zh": "0"
     },
-    "desc": {
-      "en": "Test Box 3rd[Crafting Material]",
-      "jp": "0",
-      "kr": "테스트 상자 - 3번 [제작재료]",
-      "zh": "0"
-    },
     "icon": "GD_Item_GoldMask",
     "grade": "unique",
     "type": "box",
@@ -19152,12 +18768,6 @@
   "9900004": {
     "kind": "item",
     "name": {
-      "en": "Test Box 4th[Gift]",
-      "jp": "0",
-      "kr": "테스트 상자 - 4번 [선물]",
-      "zh": "0"
-    },
-    "desc": {
       "en": "Test Box 4th[Gift]",
       "jp": "0",
       "kr": "테스트 상자 - 4번 [선물]",
@@ -19177,12 +18787,6 @@
       "kr": "테스트 상자 - 5번 [상자A]",
       "zh": "0"
     },
-    "desc": {
-      "en": "Test Box 5th[Chest Box A]",
-      "jp": "0",
-      "kr": "테스트 상자 - 5번 [상자A]",
-      "zh": "0"
-    },
     "icon": "GD_Item_GoldMask",
     "grade": "unique",
     "type": "box",
@@ -19192,12 +18796,6 @@
   "9900006": {
     "kind": "item",
     "name": {
-      "en": "Test Box 6th[Chest Box B]",
-      "jp": "0",
-      "kr": "테스트 상자 - 6번 [상자B]",
-      "zh": "0"
-    },
-    "desc": {
       "en": "Test Box 6th[Chest Box B]",
       "jp": "0",
       "kr": "테스트 상자 - 6번 [상자B]",
@@ -19217,12 +18815,6 @@
       "kr": "테스트 상자 - 7번 [상자C]",
       "zh": "0"
     },
-    "desc": {
-      "en": "Test Box 7th[Chest Box C]",
-      "jp": "0",
-      "kr": "테스트 상자 - 7번 [상자C]",
-      "zh": "0"
-    },
     "icon": "GD_Item_GoldMask",
     "grade": "unique",
     "type": "box",
@@ -19232,12 +18824,6 @@
   "9900008": {
     "kind": "item",
     "name": {
-      "en": "Test Box 8th[Chest Box D]",
-      "jp": "0",
-      "kr": "테스트 상자 - 8번 [상자D]",
-      "zh": "0"
-    },
-    "desc": {
       "en": "Test Box 8th[Chest Box D]",
       "jp": "0",
       "kr": "테스트 상자 - 8번 [상자D]",
@@ -19257,12 +18843,6 @@
       "kr": "테스트 상자 - 9번 [방어구세트A]",
       "zh": "0"
     },
-    "desc": {
-      "en": "Test Box 9th[Armor Set A]",
-      "jp": "0",
-      "kr": "테스트 상자 - 9번 [방어구세트A]",
-      "zh": "0"
-    },
     "icon": "GD_Item_GoldMask",
     "grade": "unique",
     "type": "box",
@@ -19272,12 +18852,6 @@
   "9900010": {
     "kind": "item",
     "name": {
-      "en": "Test Box 10th[Armor Set B]",
-      "jp": "0",
-      "kr": "테스트 상자 - 10번 [방어구세트B]",
-      "zh": "0"
-    },
-    "desc": {
       "en": "Test Box 10th[Armor Set B]",
       "jp": "0",
       "kr": "테스트 상자 - 10번 [방어구세트B]",
@@ -19311,12 +18885,6 @@
       "kr": "푸른 별의 폭죽",
       "zh": "蓝星烟花"
     },
-    "desc": {
-      "en": "Firework of the Azure Star",
-      "jp": "青い星の花火",
-      "kr": "푸른 별의 폭죽",
-      "zh": "蓝星烟花"
-    },
     "icon": "TI_Item_Fireworks_01",
     "grade": "unique",
     "type": "material",
@@ -19326,12 +18894,6 @@
   "9910002": {
     "kind": "item",
     "name": {
-      "en": "Firework of the Five-Parted Sun",
-      "jp": "五つ太陽の花火",
-      "kr": "다섯 갈래 태양의 폭죽",
-      "zh": "五道太阳烟花"
-    },
-    "desc": {
       "en": "Firework of the Five-Parted Sun",
       "jp": "五つ太陽の花火",
       "kr": "다섯 갈래 태양의 폭죽",
@@ -19351,12 +18913,6 @@
       "kr": "흐드러지는 벚꽃잎의 폭죽",
       "zh": "樱花盛开烟花"
     },
-    "desc": {
-      "en": "Firework of the Cascading Cherry Blossom",
-      "jp": "咲き乱れる桜の花びら花火",
-      "kr": "흐드러지는 벚꽃잎의 폭죽",
-      "zh": "樱花盛开烟花"
-    },
     "icon": "TI_Item_Fireworks_03",
     "grade": "unique",
     "type": "material",
@@ -19371,12 +18927,6 @@
       "kr": "인류 최강의 폭죽",
       "zh": "人类最强的烟花"
     },
-    "desc": {
-      "en": "The Strongest Fireworks of Mankind",
-      "jp": "人類最強の花火",
-      "kr": "인류 최강의 폭죽",
-      "zh": "人类最强的烟花"
-    },
     "icon": "TI_Item_Fireworks_04",
     "grade": "unique",
     "type": "material",
@@ -19386,12 +18936,6 @@
   "9910005": {
     "kind": "item",
     "name": {
-      "en": "Firework of OUTERPLANE",
-      "jp": "アウタープレーン花火",
-      "kr": "아우터플레인 폭죽",
-      "zh": "异域战记烟花"
-    },
-    "desc": {
       "en": "Firework of OUTERPLANE",
       "jp": "アウタープレーン花火",
       "kr": "아우터플레인 폭죽",
@@ -19451,12 +18995,6 @@
       "kr": "위조 신분증",
       "zh": "伪造身分证"
     },
-    "desc": {
-      "en": "Forged ID Card",
-      "jp": "偽造身分証",
-      "kr": "위조 신분증",
-      "zh": "伪造身分证"
-    },
     "icon": "TI_Entry_Ticket_06",
     "grade": "unique",
     "type": "material",
@@ -19466,12 +19004,6 @@
   "9940002": {
     "kind": "item",
     "name": {
-      "en": "Code A1",
-      "jp": "コードA1",
-      "kr": "코드 A1",
-      "zh": "代号A1"
-    },
-    "desc": {
       "en": "Code A1",
       "jp": "コードA1",
       "kr": "코드 A1",
@@ -19491,12 +19023,6 @@
       "kr": "연합의 증표",
       "zh": "联盟的信物"
     },
-    "desc": {
-      "en": "Union Emblem",
-      "jp": "連合の証",
-      "kr": "연합의 증표",
-      "zh": "联盟的信物"
-    },
     "icon": "TI_Entry_Ticket_02",
     "grade": "unique",
     "type": "material",
@@ -19506,12 +19032,6 @@
   "9940004": {
     "kind": "item",
     "name": {
-      "en": "Key to the Stone Chamber",
-      "jp": "石室の鍵",
-      "kr": "석실의 열쇠",
-      "zh": "石室钥匙"
-    },
-    "desc": {
       "en": "Key to the Stone Chamber",
       "jp": "石室の鍵",
       "kr": "석실의 열쇠",
@@ -19531,12 +19051,6 @@
       "kr": "엘리제의 로자리오",
       "zh": "伊莉莎的十字架"
     },
-    "desc": {
-      "en": "Eliza's Rosary",
-      "jp": "エリーゼのロザリオ",
-      "kr": "엘리제의 로자리오",
-      "zh": "伊莉莎的十字架"
-    },
     "icon": "TI_Equipment_Growth_Event03",
     "grade": "unique",
     "type": "material",
@@ -19546,12 +19060,6 @@
   "9940006": {
     "kind": "item",
     "name": {
-      "en": "New Weapon Secret Code",
-      "jp": "新兵器の秘密コード",
-      "kr": "신병기 비밀 코드",
-      "zh": "新兵器秘密代号"
-    },
-    "desc": {
       "en": "New Weapon Secret Code",
       "jp": "新兵器の秘密コード",
       "kr": "신병기 비밀 코드",
@@ -19571,12 +19079,6 @@
       "kr": "극독의 정수",
       "zh": "剧毒精髓"
     },
-    "desc": {
-      "en": "Essence of Bane",
-      "jp": "劇毒の神髄",
-      "kr": "극독의 정수",
-      "zh": "剧毒精髓"
-    },
     "icon": "TI_Craft_Material_EX_Equip_Growth_01",
     "grade": "unique",
     "type": "material",
@@ -19586,12 +19088,6 @@
   "9940008": {
     "kind": "item",
     "name": {
-      "en": "Sleeping Gas",
-      "jp": "睡眠ガス",
-      "kr": "수면 가스",
-      "zh": "催眠瓦斯"
-    },
-    "desc": {
       "en": "Sleeping Gas",
       "jp": "睡眠ガス",
       "kr": "수면 가스",
@@ -19611,12 +19107,6 @@
       "kr": "환각 가스",
       "zh": "幻觉瓦斯"
     },
-    "desc": {
-      "en": "Hallucinogenic Gas",
-      "jp": "幻覚ガス",
-      "kr": "환각 가스",
-      "zh": "幻觉瓦斯"
-    },
     "icon": "TI_Talisman_Growth_Enhance_02",
     "grade": "unique",
     "type": "material",
@@ -19626,12 +19116,6 @@
   "9940010": {
     "kind": "item",
     "name": {
-      "en": "Largissimo",
-      "jp": "ラルギッシモ",
-      "kr": "라르기시모",
-      "zh": "Largissimo"
-    },
-    "desc": {
       "en": "Largissimo",
       "jp": "ラルギッシモ",
       "kr": "라르기시모",
@@ -19651,12 +19135,6 @@
       "kr": "신뢰의 증표",
       "zh": "信赖的信物"
     },
-    "desc": {
-      "en": "Token of Trust",
-      "jp": "信頼の証",
-      "kr": "신뢰의 증표",
-      "zh": "信赖的信物"
-    },
     "icon": "TI_Entry_Ticket_05",
     "grade": "unique",
     "type": "material",
@@ -19666,12 +19144,6 @@
   "9940012": {
     "kind": "item",
     "name": {
-      "en": "Officer Felix's Core",
-      "jp": "看守ニャンのコア",
-      "kr": "간수냥이의 코어",
-      "zh": "看守喵的核心"
-    },
-    "desc": {
       "en": "Officer Felix's Core",
       "jp": "看守ニャンのコア",
       "kr": "간수냥이의 코어",
@@ -19691,12 +19163,6 @@
       "kr": "용사의 유품",
       "zh": "勇士的遗物"
     },
-    "desc": {
-      "en": "Hero's Heirloom",
-      "jp": "勇者の形見",
-      "kr": "용사의 유품",
-      "zh": "勇士的遗物"
-    },
     "icon": "TI_Present_02_04",
     "grade": "unique",
     "type": "material",
@@ -19706,12 +19172,6 @@
   "9940014": {
     "kind": "item",
     "name": {
-      "en": "Transparent Chess Piece",
-      "jp": "透明なチェスアイテム",
-      "kr": "투명한 체스 기물",
-      "zh": "透明的西洋棋棋子"
-    },
-    "desc": {
       "en": "Transparent Chess Piece",
       "jp": "透明なチェスアイテム",
       "kr": "투명한 체스 기물",
@@ -19731,12 +19191,6 @@
       "kr": "눈먼자의 기도",
       "zh": "盲者的祈祷"
     },
-    "desc": {
-      "en": "Prayer of the Blind",
-      "jp": "盲者の祈り",
-      "kr": "눈먼자의 기도",
-      "zh": "盲者的祈祷"
-    },
     "icon": "TI_Equipment_EX_2000027",
     "grade": "unique",
     "type": "material",
@@ -19746,12 +19200,6 @@
   "9990001": {
     "kind": "item",
     "name": {
-      "en": "Beach Towel Raffle Ticket",
-      "jp": "ビーチタオル応募券",
-      "kr": "비치타월 응모권",
-      "zh": "沙滩毛巾应募券"
-    },
-    "desc": {
       "en": "Beach Towel Raffle Ticket",
       "jp": "ビーチタオル応募券",
       "kr": "비치타월 응모권",
@@ -19771,12 +19219,6 @@
       "kr": "마우스패드 응모권",
       "zh": "鼠标垫应募券"
     },
-    "desc": {
-      "en": "Mouse Pad Raffle Ticket",
-      "jp": "マウスパッド応募券",
-      "kr": "마우스패드 응모권",
-      "zh": "鼠标垫应募券"
-    },
     "icon": "TI_Birthday_Cake",
     "grade": "unique",
     "type": "box",
@@ -19786,12 +19228,6 @@
   "9990003": {
     "kind": "item",
     "name": {
-      "en": "Mat Raffle Ticket",
-      "jp": "マット応募券",
-      "kr": "매트 응모권",
-      "zh": "地垫应募券"
-    },
-    "desc": {
       "en": "Mat Raffle Ticket",
       "jp": "マット応募券",
       "kr": "매트 응모권",
@@ -19811,12 +19247,6 @@
       "kr": "우산 응모권",
       "zh": "雨伞应募券"
     },
-    "desc": {
-      "en": "Umbrella Raffle Ticket",
-      "jp": "折りたたみ傘応募券",
-      "kr": "우산 응모권",
-      "zh": "雨伞应募券"
-    },
     "icon": "TI_Birthday_Cake",
     "grade": "unique",
     "type": "box",
@@ -19831,12 +19261,6 @@
       "kr": "렌티큘러 카드&키링 세트 응모권",
       "zh": "光栅卡&挂件组合应募券"
     },
-    "desc": {
-      "en": "Lenticular Card & Keyring Set Raffle Ticket",
-      "jp": "レンチキュラーカード＆キーリングセット応募券",
-      "kr": "렌티큘러 카드&키링 세트 응모권",
-      "zh": "光栅卡&挂件组合应募券"
-    },
     "icon": "TI_Birthday_Cake",
     "grade": "unique",
     "type": "box",
@@ -19846,12 +19270,6 @@
   "9990006": {
     "kind": "item",
     "name": {
-      "en": "Dolly Pack Raffle Ticket",
-      "jp": "ドーリーパック応募券",
-      "kr": "돌리 패키지 응모권",
-      "zh": "多莉礼包应募券"
-    },
-    "desc": {
       "en": "Dolly Pack Raffle Ticket",
       "jp": "ドーリーパック応募券",
       "kr": "돌리 패키지 응모권",

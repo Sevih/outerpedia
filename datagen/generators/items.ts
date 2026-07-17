@@ -49,9 +49,11 @@ export function buildItems(): Record<string, Item> {
     };
     if (r.CharacterLimit) item.characterLimit = r.CharacterLimit;
 
-    // description : convention de clé `_NAME` → `_DESC`, ajoutée seulement si elle existe
+    // description : convention de clé `_NAME` → `_DESC`, ajoutée seulement si elle
+    // existe. Si NameID ne finit pas par `_NAME` (ex. SYS_REWARD_FARMING_GIFT_1),
+    // le replace ne change rien : descKey === NameID et la « desc » serait le nom.
     const descKey = r.NameID?.replace(/_NAME$/, '_DESC');
-    const desc = descKey ? resolveText(text, descKey) : null;
+    const desc = descKey && descKey !== r.NameID ? resolveText(text, descKey) : null;
     if (desc && hasText(desc)) item.desc = desc;
 
     out[id] = item;

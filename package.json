@@ -1,6 +1,6 @@
 {
   "name": "outerpedia",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "private": true,
   "packageManager": "pnpm@11.13.0",
   "engines": {
@@ -29,7 +29,7 @@
     "getNews": "tsx scripts/get-news.ts",
     "stamp:guides": "tsx scripts/stamp-guides.ts",
     "commit": "tsx scripts/commit.ts",
-    "prepare": "lefthook install || true",
+    "prepare": "lefthook install || echo skip",
     "datagen:extract-entity": "tsx datagen/extractor/run.ts",
     "datagen:seed-curated": "tsx datagen/curated/seed.ts",
     "clean": "node -e \"for(const f of ['.next'])require('fs').rmSync(f,{recursive:true,force:true})\"",

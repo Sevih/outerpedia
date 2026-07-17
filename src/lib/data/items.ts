@@ -16,10 +16,6 @@ export function getCatalogEntry(id: string): CatalogEntry | undefined {
   return CATALOG[id];
 }
 
-/** Alias historique (le catalogue EST la donnée items servie). */
-export const getItems = getCatalog;
-export const getItem = getCatalogEntry;
-
 /** Forme compacte pour un picker / affichage inline. */
 export interface ItemOption {
   id: string;

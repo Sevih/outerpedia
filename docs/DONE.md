@@ -1,0 +1,69 @@
+# DONE — journal du suivi interne
+
+> Pendant « fait » de [TODO.md](./TODO.md) (décision Sevih 2026-07-17 : le TODO
+> ne garde que le « à faire »). Un item traité migre ici avec sa date ; le
+> détail vit dans git. Ne pas confondre avec le `CHANGELOG.md` racine (public).
+
+## 2026-07-17
+
+- **Bug `_NAME`→`_DESC` (items.ts + enhance.ts)** : quand `NameID` ne suivait
+  pas la convention, le `replace` ne changeait rien et la « description » émise
+  était le nom — 97 entrées de `items.json` contaminées. Garde
+  `descKey !== NameID` posée aux deux endroits, regen + promote appliqués
+  (~97 entrées corrigées, 0 restante), cohérence et tests verts.
+- **Code mort supprimé** (aucun consommateur, vérifié par grep + typecheck
+  complet) : kit `src/components/ui/` jamais importé (`Badge.tsx`, `Card.tsx`,
+  `Pill.tsx`, `Surface.tsx`), alias historiques `getItems`/`getItem`
+  (items.ts), alias `CostumeItem` des contrats (CostumeEntry reste interne à
+  datagen).
+- **Audit complet du site** (7 passes par zone : app, components ×2, lib/i18n,
+  datagen ×2, scripts/config — findings versés dans TODO.md, sévérités hautes
+  contre-vérifiées). État au moment de l'audit : typecheck/lint OK,
+  319/319 tests verts, commit `7d30203`, v0.1.21.
+- **`assets-push.mjs --purge-only`** : l'état `pushed.json` était écrit AVANT le
+  `exit(0)` du mode purge — des assets jamais uploadés étaient marqués
+  « poussés » et sautés à jamais. Sortie déplacée avant l'écriture d'état.
+- **`get-news.ts`** : le `catch { break }` de pagination avalait TOUTE erreur
+  (réseau, 500, DNS) → exit 0 avec « 0 new ». Le statut HTTP est porté par
+  l'erreur ; seul le 400 (fin de pagination WP) « break », le reste remonte.
+- **CI** : `node-version-file: .nvmrc` (au lieu de `24` en dur) +
+  `pnpm format:check` ajouté au job check (le formatage n'était vérifié nulle
+  part côté serveur, lefthook étant sautable).
+- **`package.json`** : `prepare` — `|| true` (inexistant sous cmd.exe) →
+  `|| echo skip`.
+- **`src/__tests__/smoke.test.ts` supprimé** (placeholder 1+1 ; la stack est
+  prouvée par les 27 fichiers de tests co-localisés). Dossier `__tests__` vide
+  supprimé avec.
+- **`.env.example`** : bloc `R2_*` (4 variables requises par chaque
+  `pnpm commit`) + `V2_DIR` ajoutés commentés (`V2_DIR` documentée mais pas
+  encore lue par le code — cf. chantier prio du TODO).
+- **`area_name`** — constat : DÉJÀ COUVERT, `AreaTemplet` est consommé par
+  `encounters.ts` (champ `area` localisé + saison/épisode story) et
+  `unlock-content.ts` — pas de fichier dédié à porter.
+
+## 2026-07-16 (avant la réécriture du TODO — détail dans git)
+
+- **Bugs** (commits `7d858d8`…, un par fix) : collecte tours VH (waves +
+  encounters), `pnpm test` en CI, MonadRouteClient sur `useUrlSlice`, caches
+  d'effects salés du mtime des curés (`fileStamp` TTLisé), butin monad
+  instrumenté + label via `resolveOrNull`, nom stable `monad/theme.json`,
+  warning `isoUtc`, heuristique goods contournée pour les clés adossées à une
+  ligne item. Enums d'éveil VÉRIFIÉS contre les `NodeNameID` : aucun
+  off-by-one (méthode gravée en commentaire dans progression.ts). Sortie monad
+  prouvée identique octet à octet avant/après.
+- **Tests** (suite à 319) : restrictions/compositions de tours
+  (`towers.test.ts`), geas guild-raid (`geas.test.ts`), hash-params
+  (`url-hash.test.ts`), vote-croisé c9ce852 (`resolveKeyWinners` extrait PUR —
+  glossaire prouvé identique — + 5 tests synthétiques).
+- **Dette code** (un commit par chantier) : code mort (accès monad/towers,
+  no-op stamp-guides), loader partagé du curé effects.json, « or »/« Gold » de
+  Monad Gate localisés, `#4cc2ff` tokenisé (`--buff-tint`/`--debuff-tint`),
+  TowerGuide + TeamSlots sur `resolveGuideCharacter`, `pickSkills`
+  (5 boucles → 1), `GuideCardArt`, `RosterGroupCard` (habillage very hard via
+  `decorate`), équipe de StagedBossGuide sur SegmentedTabs `#team=` — règle
+  hash/`?param` gravée dans les docstrings. Règle eslint RAW_COLOR étendue aux
+  `.ts` + exemption resserrée à `characters/**`.
+- **Config/infra** : `scripts/*.ts` sous typecheck (3ᵉ projet tsc),
+  `data/extracted/` exclu du contexte Docker, `git gc` (5017 objets loose),
+  branche `backup/site-rebuild` supprimée. Hygiène commits : `pnpm commit`
+  refuse tout message non conventionnel.

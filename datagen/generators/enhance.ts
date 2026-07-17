@@ -104,8 +104,10 @@ export function buildEnhanceRules(): EnhanceRules {
       if (!id || id === '0' || !count) continue;
       const it = items.get(id);
       // Description : convention `_NAME` → `_DESC` (comme le catalogue items).
+      // Garde descKey !== NameID : sans elle, un NameID hors convention donnerait
+      // le nom en guise de description.
       const descKey = it?.NameID?.replace(/_NAME$/, '_DESC');
-      const desc = descKey ? resolveText(textItem, descKey) : null;
+      const desc = descKey && descKey !== it?.NameID ? resolveText(textItem, descKey) : null;
       out.push({
         id,
         count,

@@ -48,7 +48,6 @@ export type {
 export type { Skill, SkillLevel } from '../generators/skills';
 export type { Item } from '../generators/items';
 export type { Goods } from '../generators/goods';
-export type { CostumeEntry as CostumeItem } from '../generators/costumes';
 export type { CatalogEntry } from '../generators/item-catalog';
 export type { GameVersion } from '../generators/game-version';
 export type {

@@ -228,17 +228,20 @@ if (!CLOUDFLARE_API_TOKEN || !CLOUDFLARE_ZONE_ID) {
 
 // --- état -----------------------------------------------------------------------
 
+if (PURGE_ONLY) {
+  // Pas d'écriture d'état : rien n'a été uploadé. Fusionner les hash du staging
+  // marquerait « poussé » un asset modifié localement mais jamais envoyé — les
+  // push suivants le sauteraient et R2 servirait l'ancienne version en silence.
+  console.log(`\n✅ ${toPush.length} URL(s) purgée(s) de l'edge. Aucun upload, R2 inchangé.`);
+  process.exit(0);
+}
+
 // Écrit APRÈS upload ET purge : l'état ne décrit que ce qui est réellement servi.
 const merged = { ...pushed };
 for (const [key, hash] of current) merged[key] = hash;
 const sorted = Object.fromEntries(Object.entries(merged).sort(([a], [b]) => a.localeCompare(b)));
 mkdirSync(dirname(STATE_FILE), { recursive: true });
 writeFileSync(STATE_FILE, JSON.stringify(sorted, null, 2) + '\n');
-
-if (PURGE_ONLY) {
-  console.log(`\n✅ ${toPush.length} URL(s) purgée(s) de l'edge. Aucun upload, R2 inchangé.`);
-  process.exit(0);
-}
 
 console.log(`\n✅ ${toPush.length} asset(s) poussé(s). Commite datagen/assets/pushed.json.`);
 if (changed.length && !bootstrap && !FULL) {

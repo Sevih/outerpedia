@@ -26,10 +26,15 @@ jobs:
 
       - uses: actions/setup-node@v6
         with:
-          node-version: 24
+          # .nvmrc = seule source de vérité de la version Node (comme
+          # packageManager pour pnpm juste au-dessus).
+          node-version-file: .nvmrc
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
+      # lefthook ne formate que les fichiers stagés et se saute (--no-verify) :
+      # sans ce contrôle, rien côté serveur ne garantit le formatage.
+      - run: pnpm format:check
       - run: pnpm lint
       - run: pnpm typecheck
       # La suite Vitest (~3 s) : sans elle, les 278 tests ne gardent RIEN —
