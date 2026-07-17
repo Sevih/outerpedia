@@ -211,11 +211,18 @@ export function BuildRequirements({ data, ctx }: { data: RequirementsData; ctx: 
   if (!data.entries.length) return null;
 
   // Tri par vitesse décroissante = l'ordre de jeu, quand les vitesses existent.
-  const entries = [...data.entries].sort((a, b) => {
-    const sa = spdOf(a);
-    const sb = spdOf(b);
-    if (sa === null || sb === null) return 0;
-    return sb - sa;
+  // Les entrées SANS vitesse gardent leur POSITION d'écriture (l'auteur fait
+  // foi) : seules les entrées à SPD connue sont triées ENTRE ELLES, dans leurs
+  // emplacements. (L'ancien comparateur renvoyait 0 face à un « sans SPD » —
+  // non transitif, donc ordre final indéfini : la promesse « ordre DOM = ordre
+  // de jeu » du <ol> ci-dessous n'était pas tenue.)
+  const entries = [...data.entries];
+  const slots = entries
+    .map((e, i) => ({ i, spd: spdOf(e) }))
+    .filter((s): s is { i: number; spd: number } => s.spd !== null);
+  const bySpd = [...slots].sort((a, b) => b.spd - a.spd);
+  slots.forEach((slot, k) => {
+    entries[slot.i] = data.entries[bySpd[k].i];
   });
 
   return (

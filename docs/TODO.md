@@ -73,10 +73,6 @@
       Passer en CSS responsive (variantes masquées) ou remonter le breakpoint.
       En passant : `src/hooks/useMediaQuery.ts:8-12` — mémoïser `subscribe`
       (`useCallback`), sinon désabo/réabo à chaque rendu.
-- [ ] `src/components/guides/BuildRequirements.tsx:214-219` : comparateur SPD
-      non transitif (renvoie 0 dès qu'une entrée n'a pas de SPD) → ordre
-      indéfini, casse la promesse « ordre DOM = ordre de jeu ». Partitionner
-      puis trier.
 - [ ] `src/components/character/EffectChips.tsx:269` : clé de dédup
       `category === 'debuff'` vs affichage `category !== 'buff'` (or `neutral`
       ×715 et `cc` ×389 existent en données) — deux chips de natures opposées

@@ -11,6 +11,11 @@
   starting now ») en exception → émulateur déclaré absent à tort au premier
   lancement, pipeline data sauté. EAP local `Continue` (portée fonction) ;
   bug et remède reproduits sur PS 5.1 réel.
+- **`BuildRequirements` : ordre SPD déterministe** — l'ancien comparateur
+  renvoyait 0 face à une entrée sans SPD (non transitif → ordre indéfini).
+  Désormais : les entrées à SPD connue se trient entre elles (décroissant),
+  celles sans SPD gardent leur position d'écriture — l'auteur fait foi, et la
+  promesse « ordre DOM = ordre de jeu » redevient vraie.
 - **`LanguageSwitcher` conserve query + hash** : l'état des guides vit dans
   l'URL (`?…` + `#version=`/`#team=`) et le switch de langue le perdait.
   Search/hash lus AU CLIC (le hash n'existe pas côté serveur et ses
