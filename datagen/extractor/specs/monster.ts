@@ -311,10 +311,14 @@ export const monsterSpec: ExtractorSpec<Monster, MonsterAux> = {
     );
     if (immuneTooltips.length) monster.immuneTooltips = immuneTooltips;
 
+    // COPIES à l'embarquement : `enc` sort du cache mémoïsé PARTAGÉ de
+    // buildEncounters — aliasser ses tableaux ferait qu'une mutation de
+    // l'entité monstre corromprait le cache pour tous les consommateurs
+    // (MonsterSpawn est plat : la copie à un niveau suffit).
     const enc = aux.enc.monsters[r.ID];
-    if (enc?.spawns.length) monster.spawns = enc.spawns;
-    if (enc?.summonedBy?.length) monster.summonedBy = enc.summonedBy;
-    if (enc?.linkedTo?.length) monster.linkedTo = enc.linkedTo;
+    if (enc?.spawns.length) monster.spawns = enc.spawns.map((s) => ({ ...s }));
+    if (enc?.summonedBy?.length) monster.summonedBy = [...enc.summonedBy];
+    if (enc?.linkedTo?.length) monster.linkedTo = [...enc.linkedTo];
 
     const rage = aux.rageById.get(r.ID);
     if (rage) monster.rage = rage;
