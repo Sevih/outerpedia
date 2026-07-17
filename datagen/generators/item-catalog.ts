@@ -15,9 +15,8 @@
  * Ids : items = id ItemTemplet ; monnaies = clé `SYS_ASSET_*` ; costumes =
  * `COSTUME_<id>` (la PK brute `1`/`2`… est trop générique pour un id transverse).
  */
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
 import { isMain } from '../lib/is-main';
+import { readCuratedJson } from '../lib/json';
 import { num } from '../lib/tables';
 import type { LangDict } from '../lib/lang';
 import { MISSING_ITEM_ICONS } from '../../src/lib/data/item-blacklist';
@@ -61,14 +60,8 @@ interface ItemCurated {
 const EMPTY: LangDict = { en: '', jp: '', kr: '', zh: '' };
 
 function loadCurated(): Record<string, ItemCurated> {
-  try {
-    return JSON.parse(readFileSync(resolve('data/curated/items.json'), 'utf8')) as Record<
-      string,
-      ItemCurated
-    >;
-  } catch {
-    return {};
-  }
+  // Absent = pas de curation ; JSON cassé = throw nommé (readCuratedJson).
+  return readCuratedJson<Record<string, ItemCurated>>('data/curated/items.json') ?? {};
 }
 
 /** Applique un override curé (nom/desc/icône/masquage) sur une entrée de base. */

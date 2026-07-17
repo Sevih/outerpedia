@@ -31,6 +31,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { formatRowValue } from './buff';
+import { readCuratedJson } from './json';
 import type { LangDict } from './lang';
 import { loadTextIndex, resolveText } from './text';
 import { fileStamp, loadTable, num, tablesStamp, type Row } from './tables';
@@ -170,15 +171,11 @@ function loadFamilyOverrides(): Map<string, EffectFamily> {
   const stamp = fileStamp('data/curated/effect-families.json');
   if (familyOverrides && familyOverrides.stamp === stamp) return familyOverrides.data;
   const map = new Map<string, EffectFamily>();
-  try {
-    const raw = JSON.parse(
-      readFileSync(resolve('data/curated/effect-families.json'), 'utf8'),
-    ) as Record<string, EffectFamily>;
-    // Clés `_*` = documentation embarquée (convention des curés), pas des types.
-    for (const [t, f] of Object.entries(raw)) if (!t.startsWith('_')) map.set(t, f);
-  } catch {
-    /* pas d'overrides — les règles suffisent */
-  }
+  // Absent = pas d'overrides, les règles suffisent ; cassé = throw nommé.
+  const raw =
+    readCuratedJson<Record<string, EffectFamily>>('data/curated/effect-families.json') ?? {};
+  // Clés `_*` = documentation embarquée (convention des curés), pas des types.
+  for (const [t, f] of Object.entries(raw)) if (!t.startsWith('_')) map.set(t, f);
   familyOverrides = { data: map, stamp };
   return map;
 }

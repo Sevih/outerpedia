@@ -16,8 +16,39 @@
  * `prettier --check`. On retient l'indenté : un champ par ligne → le diff git
  * d'une entité se lit ligne à ligne, ce que la revue de `promote` demande.
  */
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { format, resolveConfig, type Options } from 'prettier';
+
+/**
+ * LECTEUR des JSON curés/éditoriaux (`data/curated/*`, `data/editorial/*`) —
+ * pendant lecture de `writeJson`, et seul idiome autorisé pour ces fichiers.
+ *
+ * Deux cas que les anciens `try { parse } catch { vide }` confondaient :
+ *   - fichier ABSENT (ENOENT) → `undefined` : pas de curation, cas normal,
+ *     l'appelant continue avec son défaut ;
+ *   - JSON CASSÉ (virgule traînante d'une édition main, conflit git, fichier
+ *     tronqué) → THROW nommant le fichier : c'est une erreur humaine à corriger
+ *     sur-le-champ — jamais un état « sans curation » à servir en silence
+ *     (`pnpm dev` auto-applique le promote : la donnée décurée partait en
+ *     `data/generated/` sans un mot).
+ *
+ * `path` relatif à la racine du repo (cwd) — il sert tel quel dans le message.
+ */
+export function readCuratedJson<T>(path: string): T | undefined {
+  let raw: string;
+  try {
+    raw = readFileSync(resolve(path), 'utf8');
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code === 'ENOENT') return undefined;
+    throw e;
+  }
+  try {
+    return JSON.parse(raw) as T;
+  } catch (e) {
+    throw new Error(`${path} : JSON invalide — ${(e as Error).message}`);
+  }
+}
 
 /** Config prettier du projet, résolue une fois (I/O disque sinon par fichier). */
 let cached: Options | null | undefined;

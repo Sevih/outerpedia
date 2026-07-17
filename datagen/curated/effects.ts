@@ -10,8 +10,7 @@
  *      éditoriales (`{B/…}`/`{D/…}`) ; id conseillé = la clé principale.
  * Survit aux régénérations ; fusionné à la lecture.
  */
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { readCuratedJson } from '../lib/json';
 import { fileStamp } from '../lib/tables';
 import { validate, type Schema } from '../extractor/core/validate';
 import type { LocalizedText } from './character';
@@ -76,21 +75,13 @@ export function validateEffectCurated(id: string, c: EffectCurated): string[] {
  * equipment, manifest, v2-control). Cache clé sur le mtime du fichier
  * (`fileStamp`, TTL 2 s) : une édition admin se voit sans redémarrage, même
  * contrat que les caches dérivés de lib/effects. Fichier absent → `{}`
- * (le curé est optionnel).
+ * (le curé est optionnel) ; JSON cassé → throw nommé (readCuratedJson).
  */
 let loaded: { data: Record<string, EffectCurated>; stamp: string } | undefined;
 export function loadCuratedEffects(): Record<string, EffectCurated> {
   const stamp = fileStamp('data/curated/effects.json');
   if (loaded && loaded.stamp === stamp) return loaded.data;
-  let data: Record<string, EffectCurated> = {};
-  try {
-    data = JSON.parse(readFileSync(resolve('data/curated/effects.json'), 'utf8')) as Record<
-      string,
-      EffectCurated
-    >;
-  } catch {
-    /* pas de curé */
-  }
+  const data = readCuratedJson<Record<string, EffectCurated>>('data/curated/effects.json') ?? {};
   loaded = { data, stamp };
   return data;
 }

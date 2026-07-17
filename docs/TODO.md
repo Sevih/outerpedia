@@ -51,18 +51,6 @@
       relance re-bumpe (versions sautées). Différer l'écriture juste avant
       `git add -A` (le commentaire l.151 « abandon = rien de publié » est faux).
 
-### Erreurs avalées sur les curés (JSON cassé = données vides silencieuses)
-
-- [ ] Même classe de bug à 4 endroits : `datagen/curated/equipment.ts:91-102`,
-      `datagen/curated/effects.ts:91-93`, `datagen/lib/effects.ts:179-181`
-      (overrides familles), `datagen/generators/item-catalog.ts:63-72`.
-      Un `data/curated/*.json` syntaxiquement cassé → build « réussi » sans
-      curation, et `pnpm dev` auto-applique le promote. Distinguer ENOENT
-      (OK, vide) d'une erreur de parse (throw/warn bruyant). À l'inverse,
-      `generators/encounters.ts:614` et `singularity.ts:103` parsent sans
-      catch ni message contextualisé — wrapper de parse commun nommant le
-      fichier fautif.
-
 ### Caches périmés (process admin long-running)
 
 - [ ] Caches module qui contournent le régime mtime/TTL pourtant établi

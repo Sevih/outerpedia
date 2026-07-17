@@ -27,11 +27,10 @@
  * Les paliers E…SSS (SingularityGradeTemplet) vivent déjà sur
  * `encounters.json` (`DungeonRef.ranks`) — pas dupliqués ici.
  */
-import { existsSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
 import type { LangDict } from '../lib/lang';
 import { slugEnum } from '../lib/enums';
 import { isMain } from '../lib/is-main';
+import { readCuratedJson } from '../lib/json';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { groupBy, indexBy, loadTable, num } from '../lib/tables';
 import { spawnGroupIds, spawnUnits } from './encounters';
@@ -90,17 +89,20 @@ const CURATED_PATH = 'data/curated/singularity.json';
 /** Slugs JS des jours (index `Date.getUTCDay()`) — calendrier, pas du jeu. */
 const JS_DOW = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
-/** Lit et valide l'ancre curée ; problèmes signalés, jamais bloquants. */
+/**
+ * Lit et valide l'ancre curée ; problèmes SÉMANTIQUES signalés, jamais
+ * bloquants (absent/invalide = sortie sans ancre). Un JSON CASSÉ, lui, jette
+ * (readCuratedJson) : erreur de syntaxe = erreur humaine à corriger.
+ */
 function loadAnchor(groupIds: Set<number>, startDow: string): SingularityAnchor | undefined {
-  const path = resolve(CURATED_PATH);
-  if (!existsSync(path)) {
+  const raw = readCuratedJson<{ anchor?: SingularityAnchor }>(CURATED_PATH);
+  if (!raw) {
     console.warn(
       `⚠ ${CURATED_PATH} absent — singularity.json sortira SANS ancre ` +
         '(le calcul du groupe actif sera impossible côté app).',
     );
     return undefined;
   }
-  const raw = JSON.parse(readFileSync(path, 'utf8')) as { anchor?: SingularityAnchor };
   const anchor = raw.anchor;
   if (!anchor || !/^\d{4}-\d{2}-\d{2}$/.test(anchor.date) || !groupIds.has(anchor.group)) {
     console.warn(`⚠ ${CURATED_PATH} : ancre invalide (date AAAA-MM-JJ + groupe existant).`);

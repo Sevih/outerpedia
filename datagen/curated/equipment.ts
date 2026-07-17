@@ -17,8 +17,7 @@
  * Les boss sont référencés par id `MonsterTemplet` : le build les résout en
  * `equipment/bosses.json` (nom localisé + icône ATB) — zéro texte écrit main.
  */
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { readCuratedJson } from '../lib/json';
 import { validate, type Schema } from '../extractor/core/validate';
 
 /** Source d'obtention d'un item (boss droppant et/ou libellé hors combat). */
@@ -87,18 +86,12 @@ export function validateEquipmentCurated(c: EquipmentCurated): string[] {
   return validate(c, fileSchema, 'equipmentCurated').map((i) => `${i.path} — ${i.message}`);
 }
 
-/** Charge le fichier curé (fichier absent = tout vide). */
+/** Charge le fichier curé (absent = tout vide ; JSON cassé = throw nommé). */
 export function loadEquipmentCurated(): EquipmentCurated {
-  try {
-    return {
-      ...EMPTY_EQUIPMENT_CURATED,
-      ...(JSON.parse(
-        readFileSync(resolve('data/curated/equipment.json'), 'utf8'),
-      ) as EquipmentCurated),
-    };
-  } catch {
-    return EMPTY_EQUIPMENT_CURATED;
-  }
+  return {
+    ...EMPTY_EQUIPMENT_CURATED,
+    ...(readCuratedJson<EquipmentCurated>('data/curated/equipment.json') ?? {}),
+  };
 }
 
 /** Tous les ids de boss référencés par les sources curées. */

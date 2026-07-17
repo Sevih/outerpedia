@@ -11,6 +11,16 @@
   starting now ») en exception → émulateur déclaré absent à tort au premier
   lancement, pipeline data sauté. EAP local `Continue` (portée fonction) ;
   bug et remède reproduits sur PS 5.1 réel.
+- **Erreurs avalées sur les curés éradiquées** : `readCuratedJson` dans
+  `datagen/lib/json.ts` (pendant lecture de `writeJson`) — fichier absent =
+  `undefined` (pas de curation, cas normal), JSON cassé = **throw nommant le
+  fichier** (un curé cassé décurait silencieusement la donnée servie,
+  `pnpm dev` auto-appliquant le promote). Les 4 avaleurs convertis
+  (curated/equipment, curated/effects, overrides familles de lib/effects,
+  item-catalog) + les 2 parsers nus contextualisés (mode-titles d'encounters,
+  ancre de singularity — leurs warns sémantiques inchangés). 5 tests
+  synthétiques CI-safe (`json.test.ts`, tmpdir) ; iso-sortie prouvée sur
+  items.json (IDENTIQUE).
 - **`IL2CPP_SO` supprimée de `dump.ts`** (décision Sevih) : la paire
   .so/metadata se ré-extrait de l'émulateur à chaque dump — un `.so` imposé
   n'avait aucun cas d'usage (variable jamais documentée ni posée), et

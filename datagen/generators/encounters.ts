@@ -30,10 +30,9 @@
  * premier mot — « Deformed Inferior Core » ↔ « summons an Inferior Core »).
  * Sa localisation affichable = celle de ses invocateurs.
  */
-import { existsSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
 import type { LangDict } from '../lib/lang';
 import { loadBuffIndex, skillBuffVars } from '../lib/buff';
+import { readCuratedJson } from '../lib/json';
 import { statSlug } from '../lib/effects';
 import { slugEnum } from '../lib/enums';
 import { loadTextIndex, resolveText } from '../lib/text';
@@ -609,14 +608,14 @@ function titleContext(): ModeTitleContext {
   // ordre → slug de la poursuite (aucune clé structurelle, décision curée).
   const difficultyNames: Record<string, string> = {};
   const chaseDifficulties: Record<string, string> = {};
-  const curatedPath = resolve('data/curated/mode-titles.json');
-  if (existsSync(curatedPath)) {
-    const curated = JSON.parse(readFileSync(curatedPath, 'utf8')) as {
-      titles?: Record<string, string>;
-      ignore?: string[];
-      difficulties?: Record<string, string>;
-      chaseDifficulties?: Record<string, string>;
-    };
+  // Absent = pas de décisions curées ; JSON cassé = throw nommé (readCuratedJson).
+  const curated = readCuratedJson<{
+    titles?: Record<string, string>;
+    ignore?: string[];
+    difficulties?: Record<string, string>;
+    chaseDifficulties?: Record<string, string>;
+  }>('data/curated/mode-titles.json');
+  if (curated) {
     Object.assign(curatedTitles, curated.titles ?? {});
     for (const m of curated.ignore ?? []) ignoredModes.add(m);
     Object.assign(difficultyNames, curated.difficulties ?? {});
