@@ -92,7 +92,15 @@ export async function GuideDetail({
           {t('page.guide.by', { author: guide.author })} ·{' '}
           {t('page.guide.updated', { date: formatGuideDate(updated, lang) })}
         </span>
-        <ShareButtons title={title} lang={lang} />
+        <ShareButtons
+          title={title}
+          lang={lang}
+          strings={{
+            shareOn: t('share.on'),
+            copyLink: t('share.copy_link'),
+            copied: t('common.copied'),
+          }}
+        />
       </div>
       <h2 className="text-content-strong text-xl font-bold">{t('guides.strategy_guide')}</h2>
     </header>
@@ -104,7 +112,15 @@ export async function GuideDetail({
           {t('page.guide.by', { author: guide.author })} ·{' '}
           {t('page.guide.updated', { date: formatGuideDate(updated, lang) })}
         </span>
-        <ShareButtons title={title} lang={lang} />
+        <ShareButtons
+          title={title}
+          lang={lang}
+          strings={{
+            shareOn: t('share.on'),
+            copyLink: t('share.copy_link'),
+            copied: t('common.copied'),
+          }}
+        />
       </div>
     </header>
   );

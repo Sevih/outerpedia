@@ -24,6 +24,8 @@ const jp: Record<TranslationKey, string> = {
   'common.back_to_top': 'トップへ戻る',
   'common.language': '言語',
   'common.copied': 'コピー済み！',
+  'share.on': '{platform}で共有',
+  'share.copy_link': 'リンクをコピー',
   'common.sort': '並べ替え',
   'common.sort.order': 'デフォルト',
   'common.sort.date_desc': '新しい順',
@@ -982,6 +984,7 @@ const jp: Record<TranslationKey, string> = {
   'page.character.meta_title': '{name} — ビルド & ティア',
   'page.character.meta_description':
     '{name}（{element} {classType}）— スキル詳細、専用装備、推奨装備ビルド、ティアランキング。',
+  'page.character.sr_suffix': ' — Outerplane {element}{classType}ガイド',
   'page.character.toc.overview': '概要',
   'page.character.toc.on_this_page': 'このページ',
   'page.character.toc.ee': '専用装備',

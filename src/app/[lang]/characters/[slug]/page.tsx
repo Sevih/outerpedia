@@ -101,11 +101,12 @@ export async function generateMetadata({
   const name = characterDisplayName(char, lang);
   const el = lRec(G.elements[char.element], lang);
   const cl = lRec(G.classes[char.class], lang);
+  const t = await getT(lang);
   return createPageMetadata({
     lang,
     path: `/characters/${slug}`,
     title: name,
-    description: `${name} — ${char.rarity}★ ${el}/${cl} (Outerplane). Stats, compétences, équipement exclusif et profil.`,
+    description: t('page.character.meta_description', { name, element: el, classType: cl }),
     // FI en PNG (aperçus Discord/OG) — mêmes propriété et taille que la V2.
     ogImage: img.facePng(char.id),
     ogImageSize: { width: 150, height: 150 },
@@ -251,7 +252,7 @@ export default async function CharacterDetail({
   });
   const crumbLd = buildBreadcrumbJsonLd([
     { name: 'Outerpedia', url: buildUrl(lang, '/') },
-    { name: 'Characters', url: buildUrl(lang, '/characters') },
+    { name: t('nav.characters'), url: buildUrl(lang, '/characters') },
     { name, url: buildUrl(lang, path) },
   ]);
 
@@ -564,7 +565,7 @@ export default async function CharacterDetail({
         }
         prefix={prefix}
         name={baseName}
-        srSuffix={` — Outerplane ${el} ${cl} Guide`}
+        srSuffix={t('page.character.sr_suffix', { element: el, classType: cl })}
         rarity={char.rarity}
         element={{
           label: el,

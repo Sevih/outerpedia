@@ -1,4 +1,5 @@
 import type { Lang } from '@/lib/i18n/config';
+import { getT } from '@/i18n';
 import { ShareButtons } from '@/components/ui/ShareButtons';
 import { GameText } from '@/components/ui/GameText';
 import { FullArtCarousel, type FullArt } from './FullArtCarousel';
@@ -39,7 +40,8 @@ export interface OverviewProps {
  * monumental (dernière lettre à l'accent élément) + rareté/élément/classe +
  * méta profil + histoire.
  */
-export function OverviewSection(p: OverviewProps) {
+export async function OverviewSection(p: OverviewProps) {
+  const t = await getT(p.lang);
   return (
     <section
       id="overview"
@@ -71,7 +73,15 @@ export function OverviewSection(p: OverviewProps) {
               </span>
             )}
             <span className="ml-auto">
-              <ShareButtons title={p.prefix ? `${p.prefix} ${p.name}` : p.name} lang={p.lang} />
+              <ShareButtons
+                title={p.prefix ? `${p.prefix} ${p.name}` : p.name}
+                lang={p.lang}
+                strings={{
+                  shareOn: t('share.on'),
+                  copyLink: t('share.copy_link'),
+                  copied: t('common.copied'),
+                }}
+              />
             </span>
           </div>
 

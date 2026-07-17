@@ -24,6 +24,8 @@ const zh: Record<TranslationKey, string> = {
   'common.back_to_top': '返回顶部',
   'common.language': '语言',
   'common.copied': '已复制！',
+  'share.on': '分享到 {platform}',
+  'share.copy_link': '复制链接',
   'common.sort': '排序',
   'common.sort.order': '默认',
   'common.sort.date_desc': '最新',
@@ -950,6 +952,7 @@ const zh: Record<TranslationKey, string> = {
   'page.character.meta_title': '{name} — 配装 & 节奏榜',
   'page.character.meta_description':
     '{name}（{element} {classType}）— 技能详解、专属装备、推荐配装、节奏榜排名。',
+  'page.character.sr_suffix': ' — Outerplane {element} {classType} 攻略',
   'page.character.toc.overview': '概览',
   'page.character.toc.on_this_page': '本页内容',
   'page.character.toc.ee': '专属装备',

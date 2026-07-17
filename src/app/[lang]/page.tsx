@@ -44,7 +44,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         className="border-line bg-surface-raised hover:border-accent block max-w-sm rounded-lg border p-4 transition"
       >
         <div className="text-content-strong font-medium">{t('nav.characters')}</div>
-        <div className="text-content-subtle text-sm">{count} personnages</div>
+        <div className="text-content-subtle text-sm">
+          {t('characters.filters.count', { count })}
+        </div>
       </Link>
     </div>
   );

@@ -24,6 +24,8 @@ const fr: Record<TranslationKey, string> = {
   'common.back_to_top': 'Retour en haut',
   'common.language': 'Langue',
   'common.copied': 'Copié !',
+  'share.on': 'Partager sur {platform}',
+  'share.copy_link': 'Copier le lien',
   'common.sort': 'Trier',
   'common.sort.order': 'Par défaut',
   'common.sort.date_desc': 'Plus récent',
@@ -1012,6 +1014,7 @@ const fr: Record<TranslationKey, string> = {
   'page.character.meta_title': '{name} — Builds et tier',
   'page.character.meta_description':
     "{name} ({element} {classType}) — détail des skills, Exclusive Equipment, builds d'équipement recommandés et classement tier sur Outerpedia.",
+  'page.character.sr_suffix': ' — Guide Outerplane {element} {classType}',
   'page.character.toc.overview': "Vue d'ensemble",
   'page.character.toc.on_this_page': 'Sur cette page',
   'page.character.toc.ee': 'Exclusive Equipment',

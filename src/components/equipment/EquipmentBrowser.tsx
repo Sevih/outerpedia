@@ -15,6 +15,9 @@ export interface BrowserLabels {
   mainStat: string;
   unlock: string;
   upgrade: string;
+  /** Libellés localisés des VALEURS d'options (slug → libellé), comme
+   * CharactersBrowser — sinon les selects affichent `fire`/`striker` bruts. */
+  options: { element: Record<string, string>; class: Record<string, string> };
 }
 
 const field =
@@ -84,7 +87,7 @@ function GearTab({
           <option value="">{labels.class}</option>
           {classes.map((c) => (
             <option key={c} value={c}>
-              {c}
+              {labels.options.class[c] ?? c}
             </option>
           ))}
         </select>
@@ -245,7 +248,7 @@ function EETab({ rows, labels }: { rows: EERow[]; labels: BrowserLabels }) {
           <option value="">{labels.element}</option>
           {elements.map((el) => (
             <option key={el} value={el}>
-              {el}
+              {labels.options.element[el] ?? el}
             </option>
           ))}
         </select>
@@ -253,7 +256,7 @@ function EETab({ rows, labels }: { rows: EERow[]; labels: BrowserLabels }) {
           <option value="">{labels.class}</option>
           {classes.map((c) => (
             <option key={c} value={c}>
-              {c}
+              {labels.options.class[c] ?? c}
             </option>
           ))}
         </select>

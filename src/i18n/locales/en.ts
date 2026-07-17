@@ -24,6 +24,8 @@ const en = {
   'common.back_to_top': 'Back to top',
   'common.language': 'Language',
   'common.copied': 'Copied!',
+  'share.on': 'Share on {platform}',
+  'share.copy_link': 'Copy link',
   'common.sort': 'Sort',
   'common.sort.order': 'Default',
   'common.sort.date_desc': 'Newest',
@@ -998,6 +1000,7 @@ const en = {
   'page.character.meta_title': '{name} — Builds & Tier',
   'page.character.meta_description':
     '{name} ({element} {classType}) — skills breakdown, exclusive equipment, recommended gear builds, and tier ranking on Outerpedia.',
+  'page.character.sr_suffix': ' — Outerplane {element} {classType} Guide',
   'page.character.toc.overview': 'Overview',
   'page.character.toc.on_this_page': 'On this page',
   'page.character.toc.ee': 'Exclusive Equipment',

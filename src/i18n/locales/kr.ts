@@ -24,6 +24,8 @@ const kr: Record<TranslationKey, string> = {
   'common.back_to_top': '맨 위로',
   'common.language': '언어',
   'common.copied': '복사됨!',
+  'share.on': '{platform}에 공유',
+  'share.copy_link': '링크 복사',
   'common.sort': '정렬',
   'common.sort.order': '기본',
   'common.sort.date_desc': '최신순',
@@ -968,6 +970,7 @@ const kr: Record<TranslationKey, string> = {
   'page.character.meta_title': '{name} — 빌드 & 티어',
   'page.character.meta_description':
     '{name} ({element} {classType}) — 스킬 분석, 전용 장비, 추천 장비 빌드, 티어 랭킹.',
+  'page.character.sr_suffix': ' — Outerplane {element} {classType} 가이드',
   'page.character.toc.overview': '개요',
   'page.character.toc.on_this_page': '이 페이지',
   'page.character.toc.ee': '전용 장비',

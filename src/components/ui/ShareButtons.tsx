@@ -95,8 +95,24 @@ function getShareLinks(title: string, url: string): Record<Platform, string> {
 
 const noopSubscribe = () => () => {};
 
+/** Chaînes localisées (composant client : traduites par l'appelant serveur). */
+export interface ShareStrings {
+  /** Gabarit avec `{platform}` (ex. « Share on {platform} »). */
+  shareOn: string;
+  copyLink: string;
+  copied: string;
+}
+
 /** Boutons de partage par langue (portage V2). */
-export function ShareButtons({ title, lang }: { title: string; lang: Lang }) {
+export function ShareButtons({
+  title,
+  lang,
+  strings,
+}: {
+  title: string;
+  lang: Lang;
+  strings: ShareStrings;
+}) {
   const [copied, setCopied] = useState(false);
   // URL courante côté client, '' au SSR (pas de setState dans un effet).
   const url = useSyncExternalStore(
@@ -130,8 +146,8 @@ export function ShareButtons({ title, lang }: { title: string; lang: Lang }) {
             target="_blank"
             rel="nofollow noopener noreferrer"
             className={`bg-surface-overlay text-content-muted flex h-8 w-8 items-center justify-center rounded-md ${cfg.color} hover:bg-line transition-colors`}
-            aria-label={`Share on ${cfg.label}`}
-            title={`Share on ${cfg.label}`}
+            aria-label={strings.shareOn.replace('{platform}', cfg.label)}
+            title={strings.shareOn.replace('{platform}', cfg.label)}
           >
             <svg className="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
               <path d={cfg.icon} />
@@ -143,8 +159,8 @@ export function ShareButtons({ title, lang }: { title: string; lang: Lang }) {
       <button
         onClick={handleCopy}
         className="bg-surface-overlay text-content-muted hover:bg-line hover:text-content-strong relative flex h-8 w-8 items-center justify-center rounded-md transition-colors"
-        aria-label="Copy link"
-        title="Copy link"
+        aria-label={strings.copyLink}
+        title={strings.copyLink}
         type="button"
       >
         {copied ? (
@@ -165,7 +181,7 @@ export function ShareButtons({ title, lang }: { title: string; lang: Lang }) {
             </svg>
             {/* Texte sombre sur le vert clair du token success (contraste). */}
             <span className="bg-success text-accent-fg pointer-events-none absolute -top-7 left-1/2 -translate-x-1/2 rounded px-2 py-0.5 text-xs font-medium whitespace-nowrap">
-              Copied!
+              {strings.copied}
             </span>
           </>
         ) : (

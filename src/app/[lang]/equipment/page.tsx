@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { isValidLang, type Lang } from '@/lib/i18n/config';
-import { getT } from '@/i18n';
+import { getT, type TranslationKey } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { createPageMetadata, buildItemListJsonLd, buildUrl } from '@/lib/seo';
 import JsonLd from '@/components/seo/JsonLd';
@@ -188,6 +188,15 @@ export default async function EquipmentPage({ params }: { params: Promise<{ lang
     .filter((r): r is EERow => Boolean(r))
     .sort((a, b) => a.charName.localeCompare(b.charName));
 
+  // Slug → libellé via les clés `sys.*` (même helper que characters/page.tsx).
+  const optionMap = (values: Array<string | undefined>, prefix: string) =>
+    Object.fromEntries(
+      [...new Set(values.filter((v): v is string => Boolean(v)))].map((v) => [
+        v,
+        t(`${prefix}.${v}` as TranslationKey),
+      ]),
+    );
+
   const labels: BrowserLabels = {
     tabs: {
       weapons: t('equip.tab.weapons'),
@@ -203,6 +212,21 @@ export default async function EquipmentPage({ params }: { params: Promise<{ lang
     mainStat: t('equip.detail.mainstat'),
     unlock: t('equip.ee.unlock'),
     upgrade: t('equip.ee.upgrade'),
+    // Slug → libellé localisé pour les VALEURS des selects (même pattern que
+    // CharactersBrowser) — construit sur les valeurs réellement présentes.
+    options: {
+      element: optionMap(
+        ee.map((r) => r.element),
+        'sys.element',
+      ),
+      class: optionMap(
+        [
+          ...[...weapons, ...amulets, ...talismans].flatMap((r) => r.classLimits),
+          ...ee.map((r) => r.classType),
+        ],
+        'sys.class',
+      ),
+    },
   };
 
   const itemList = buildItemListJsonLd({
