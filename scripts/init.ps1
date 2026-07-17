@@ -187,6 +187,12 @@ function Get-AdbExe {
 function Test-Emulator {
   $adb = Get-AdbExe
   if (-not $adb) { return $false }
+  # PS 5.1 : `2>$null` sur un exe natif enveloppe chaque ligne stderr en
+  # ErrorRecord — avec l'EAP global 'Stop', le stderr BÉNIN d'adb (« daemon
+  # not running; starting now ») devenait une exception → émulateur déclaré
+  # absent à tort au premier lancement, pipeline data sauté. EAP local
+  # 'Continue' (portée fonction) : l'enveloppe reste non-terminante.
+  $ErrorActionPreference = 'Continue'
   try {
     $out = & $adb devices 2>$null
     return @($out | Where-Object { $_ -match 'device$' -and $_ -notmatch 'List of devices' }).Count -gt 0

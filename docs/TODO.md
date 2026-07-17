@@ -50,10 +50,6 @@
       images/commit — tout abandon laisse package.json bumpé non committé, une
       relance re-bumpe (versions sautées). Différer l'écriture juste avant
       `git add -A` (le commentaire l.151 « abandon = rien de publié » est faux).
-- [ ] `scripts/init.ps1:191` : `& $adb devices 2>$null` sous PS 5.1 avec
-      `$ErrorActionPreference='Stop'` — le stderr bénin d'adb (« daemon
-      starting ») devient une exception → émulateur détecté absent à tort,
-      pipeline data sauté. Passer par `cmd /c` ou EAP local `Continue`.
 - [ ] `datagen/extract/dump.ts:147-152` : si `IL2CPP_SO` custom existe mais que
       `global-metadata.dat` manque, l'extraction **écrase le `.so` fourni** par
       celui de l'émulateur. Ne rediriger vers `SO` que si `IL2CPP_SO` absent.

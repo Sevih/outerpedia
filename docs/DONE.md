@@ -6,6 +6,11 @@
 
 ## 2026-07-17
 
+- **Détection émulateur d'`init.ps1` fiabilisée** : sous PS 5.1, `2>$null` sur
+  adb + EAP global `Stop` transformait le stderr bénin (« daemon not running;
+  starting now ») en exception → émulateur déclaré absent à tort au premier
+  lancement, pipeline data sauté. EAP local `Continue` (portée fonction) ;
+  bug et remède reproduits sur PS 5.1 réel.
 - **Alerte « 93 assets guides refaits depuis le pool V2 » levée** : vérifié —
   `../outerpedia` à jour avec origin, 0 clé nouvelle, 92/93 fichiers identiques
   octet à octet à l'état R2 (`pushed.json`) ; l'unique diff
