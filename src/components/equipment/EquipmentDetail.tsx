@@ -58,6 +58,10 @@ export interface DetailLabels {
   andMore: string;
   activationCost: string;
   stepRates: string;
+  /** Légende de la plage des substats (« min → max »). */
+  substatsRange: string;
+  /** En-tête de colonne du tableau des taux par étape. */
+  step: string;
   grade: string;
   pieces: Record<string, string>;
 }
@@ -659,7 +663,7 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
         {subPool ? (
           <Module title={labels.substats}>
             <div className="flex flex-col gap-2">
-              <p className="text-content-subtle text-[11px]">min → max</p>
+              <p className="text-content-subtle text-[11px]">{labels.substatsRange}</p>
               <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
                 {effectivePool.map((s) => (
                   <div
@@ -827,7 +831,7 @@ function AxStepsCard({ asc, labels }: { asc: AscView; labels: DetailLabels }) {
         <thead>
           <tr>
             <th className="text-content-subtle pb-1.5 text-left text-[10px] font-semibold tracking-wider uppercase">
-              Step
+              {labels.step}
             </th>
             <th className="pb-1.5 pl-2 text-right text-xs whitespace-nowrap">
               {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}

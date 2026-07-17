@@ -93,6 +93,8 @@ export interface CharacterCardProps {
   showElement?: boolean;
   showClass?: boolean;
   showStars?: boolean;
+  /** Gabarit a11y localisé des étoiles (`{rarity}`) — défaut EN. */
+  starAriaLabel?: string;
   showBadge?: boolean;
   priority?: boolean;
   children?: ReactNode;
@@ -113,6 +115,7 @@ export function CharacterCard({
   showElement,
   showClass,
   showStars = true,
+  starAriaLabel = '{rarity} star rarity',
   showBadge = true,
   priority = false,
   children,
@@ -152,7 +155,7 @@ export function CharacterCard({
         <div
           className={`absolute ${s.starPos} z-10`}
           role="img"
-          aria-label={`${rarity} star rarity`}
+          aria-label={starAriaLabel.replace('{rarity}', String(rarity))}
         >
           <div className="relative" style={{ width: s.slotWidth, height: s.slotHeight }}>
             {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}

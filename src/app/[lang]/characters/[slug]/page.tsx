@@ -340,6 +340,7 @@ export default async function CharacterDetail({
             transcend: t('page.character.toc.transcend'),
             codex: t('page.character.stats.codex'),
             quirks: t('page.character.stats.quirks'),
+            cpTitle: t('page.character.cp_title'),
           }}
         />
       ),
@@ -520,6 +521,7 @@ export default async function CharacterDetail({
       title: t('page.character.toc.video'),
       body: (
         <MultiVideoEmbed
+          byLabel={t('video.by')}
           videos={curated.videos.map((v) => ({
             platform: (v.platform as VideoItem['platform']) ?? 'youtube',
             id: v.id,

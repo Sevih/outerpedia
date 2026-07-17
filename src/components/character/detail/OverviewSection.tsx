@@ -51,7 +51,15 @@ export async function OverviewSection(p: OverviewProps) {
       }}
     >
       <div className="mx-auto grid max-w-330 grid-cols-1 gap-8 px-4 py-8 md:px-6 lg:grid-cols-[360px_1fr] lg:gap-14 lg:px-8 lg:py-14">
-        <FullArtCarousel items={p.fullArts} hex={p.hex} />
+        <FullArtCarousel
+          items={p.fullArts}
+          hex={p.hex}
+          strings={{
+            prev: t('aria.prev_art'),
+            next: t('aria.next_art'),
+            show: t('aria.show_art'),
+          }}
+        />
 
         {/* Colonne méta */}
         <div className="flex min-w-0 flex-col gap-5 lg:pt-3">

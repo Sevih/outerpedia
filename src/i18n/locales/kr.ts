@@ -35,6 +35,13 @@ const kr: Record<TranslationKey, string> = {
   'common.sort.author_asc': '작성자 A→Z',
   'common.sort.author_desc': '작성자 Z→A',
   'aria.toggle_menu': '메뉴 전환',
+  'aria.prev_art': '이전 일러스트',
+  'aria.next_art': '다음 일러스트',
+  'aria.show_art': '일러스트 {n} 표시',
+  'aria.star_rarity': '희귀도 {rarity}성',
+  'aria.zoom': '확대: {alt}',
+  'aria.close': '닫기',
+  'video.by': '제작: {author}',
 
   // Contributors
   'contributors.title': '기여자',
@@ -113,6 +120,8 @@ const kr: Record<TranslationKey, string> = {
   'equip.detail.step_rates': '단계별 성공률',
   'equip.detail.grade': '등급',
   'equip.detail.mainstat': '메인 스탯',
+  'equip.detail.minmax': 'min → max',
+  'equip.detail.step': '단계',
   'equip.detail.back': '전체 장비',
   'equip.detail.piece.helmet': '헬멧',
   'equip.detail.piece.armor': '갑옷',
@@ -971,6 +980,7 @@ const kr: Record<TranslationKey, string> = {
   'page.character.meta_description':
     '{name} ({element} {classType}) — 스킬 분석, 전용 장비, 추천 장비 빌드, 티어 랭킹.',
   'page.character.sr_suffix': ' — Outerplane {element} {classType} 가이드',
+  'page.character.cp_title': '전투력 (장비 없음, 스킬 Lv5)',
   'page.character.toc.overview': '개요',
   'page.character.toc.on_this_page': '이 페이지',
   'page.character.toc.ee': '전용 장비',

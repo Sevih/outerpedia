@@ -221,7 +221,7 @@ export async function EncounterBossGuide({ lang, guide }: GuideContentProps) {
       {videos?.length ? (
         <section className="space-y-2">
           <h2 className="text-content-strong text-xl font-bold">{t('guides.combat_footage')}</h2>
-          <MultiVideoEmbed videos={videos} />
+          <MultiVideoEmbed byLabel={t('video.by')} videos={videos} />
         </section>
       ) : null}
     </>

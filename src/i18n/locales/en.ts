@@ -35,6 +35,13 @@ const en = {
   'common.sort.author_asc': 'Author A→Z',
   'common.sort.author_desc': 'Author Z→A',
   'aria.toggle_menu': 'Toggle menu',
+  'aria.prev_art': 'Previous art',
+  'aria.next_art': 'Next art',
+  'aria.show_art': 'Show art {n}',
+  'aria.star_rarity': '{rarity} star rarity',
+  'aria.zoom': 'Zoom: {alt}',
+  'aria.close': 'Close',
+  'video.by': 'by {author}',
 
   // Contributors
   'contributors.title': 'Outerpedia Contributors',
@@ -114,6 +121,8 @@ const en = {
   'equip.detail.step_rates': 'Step success rates',
   'equip.detail.grade': 'Grade',
   'equip.detail.mainstat': 'Main Stat',
+  'equip.detail.minmax': 'min → max',
+  'equip.detail.step': 'Step',
   'equip.detail.back': 'All Equipment',
   'equip.detail.piece.helmet': 'Helmet',
   'equip.detail.piece.armor': 'Armor',
@@ -1001,6 +1010,7 @@ const en = {
   'page.character.meta_description':
     '{name} ({element} {classType}) — skills breakdown, exclusive equipment, recommended gear builds, and tier ranking on Outerpedia.',
   'page.character.sr_suffix': ' — Outerplane {element} {classType} Guide',
+  'page.character.cp_title': 'Combat Power (no gear, skills Lv5)',
   'page.character.toc.overview': 'Overview',
   'page.character.toc.on_this_page': 'On this page',
   'page.character.toc.ee': 'Exclusive Equipment',

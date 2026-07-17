@@ -32,6 +32,8 @@ export interface CharactersBrowserLabels {
   role: string;
   /** Gabarit `{count} …` — substitué côté client (le compte est dynamique). */
   count: string;
+  /** Gabarit a11y des étoiles (`{rarity}`). */
+  starAria: string;
   /** Libellés localisés des valeurs d'options (slug → libellé). */
   options: {
     element: Record<string, string>;
@@ -139,6 +141,7 @@ export function CharactersBrowser({
         {filtered.map((row, i) => (
           <ResponsiveCharacterCard
             key={row.id}
+            starAriaLabel={labels.starAria}
             id={row.id}
             name={row.name}
             prefix={row.prefix}

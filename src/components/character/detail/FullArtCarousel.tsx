@@ -13,7 +13,16 @@ export interface FullArt {
  * Visionneuse d'art en pied (portage V2) : image simple s'il n'y a qu'un art,
  * carrousel swipe (flèches + points + légende) dès qu'il y a des skins.
  */
-export function FullArtCarousel({ items, hex }: { items: FullArt[]; hex: string }) {
+export function FullArtCarousel({
+  items,
+  hex,
+  strings,
+}: {
+  items: FullArt[];
+  hex: string;
+  /** Libellés a11y localisés (composant client) — `show` : gabarit `{n}`. */
+  strings: { prev: string; next: string; show: string };
+}) {
   const [active, setActive] = useState(0);
   const touchStartX = useRef<number | null>(null);
   const length = items.length;
@@ -64,7 +73,7 @@ export function FullArtCarousel({ items, hex }: { items: FullArt[]; hex: string 
         <button
           type="button"
           onClick={() => go(active - 1)}
-          aria-label="Previous art"
+          aria-label={strings.prev}
           className="absolute top-1/2 left-0 -translate-y-1/2 rounded-full border border-white/10 bg-slate-950/55 p-1.5 text-zinc-200 backdrop-blur transition hover:bg-slate-950/80 hover:text-white"
         >
           <svg
@@ -84,7 +93,7 @@ export function FullArtCarousel({ items, hex }: { items: FullArt[]; hex: string 
         <button
           type="button"
           onClick={() => go(active + 1)}
-          aria-label="Next art"
+          aria-label={strings.next}
           className="absolute top-1/2 right-0 -translate-y-1/2 rounded-full border border-white/10 bg-slate-950/55 p-1.5 text-zinc-200 backdrop-blur transition hover:bg-slate-950/80 hover:text-white"
         >
           <svg
@@ -112,7 +121,7 @@ export function FullArtCarousel({ items, hex }: { items: FullArt[]; hex: string 
             key={art.src}
             type="button"
             onClick={() => setActive(i)}
-            aria-label={`Show art ${i + 1}`}
+            aria-label={strings.show.replace('{n}', String(i + 1))}
             aria-current={i === active ? 'true' : undefined}
             style={i === active ? { backgroundColor: hex, width: '1.5rem' } : undefined}
             className={`h-2 rounded-full transition-all ${i === active ? '' : 'w-2 bg-zinc-700 hover:bg-zinc-500'}`}

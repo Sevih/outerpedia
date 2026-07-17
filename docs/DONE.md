@@ -6,6 +6,19 @@
 
 ## 2026-07-17
 
+- **Texte en dur des 5 langues éradiqué** (2 commits — le site est servi en
+  EN par défaut, le FR en dur fuyait chez tout le monde) : home
+  (`characters.filters.count`), meta description fiche perso
+  (`page.character.meta_description`, clé V2 pré-seedée), Footer
+  (`footer.tagline`), ShareButtons (strings en props), selects
+  d'EquipmentBrowser (options slug→libellé via `sys.*`, pattern
+  CharactersBrowser), breadcrumb JSON-LD, srSuffix ; puis les aria/titres
+  épars : FullArtCarousel, étoiles de CharacterCard (gabarit `{rarity}`),
+  ImageLightbox, « by {author} » des vidéos (`video.by`, 6 sites câblés),
+  tooltip CP (`page.character.cp_title`), « min → max »/« Step »
+  d'EquipmentDetail. +13 clés ×5 langues. NB : ImageLightbox garde des
+  défauts EN pour les appels du guide roadmap-2026 (à câbler quand ce guide
+  repassera en chantier).
 - **Détection émulateur d'`init.ps1` fiabilisée** : sous PS 5.1, `2>$null` sur
   adb + EAP global `Stop` transformait le stderr bénin (« daemon not running;
   starting now ») en exception → émulateur déclaré absent à tort au premier

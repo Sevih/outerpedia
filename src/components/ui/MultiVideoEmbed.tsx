@@ -33,13 +33,13 @@ function embedUrl(v: VideoItem): string {
   }
 }
 
-function VideoPane({ video }: { video: VideoItem }) {
+function VideoPane({ video, byLabel }: { video: VideoItem; byLabel: string }) {
   return (
     <div className="space-y-2">
       {(video.author || video.title) && (
         <div className="text-content-muted flex flex-wrap items-center gap-3 text-xs">
           <span className="text-content-strong font-medium">{video.title}</span>
-          {video.author && <span>by {video.author}</span>}
+          {video.author && <span>{byLabel.replace('{author}', video.author)}</span>}
         </div>
       )}
       <div className="border-line-subtle aspect-video w-full overflow-hidden rounded-xl border">
@@ -56,15 +56,22 @@ function VideoPane({ video }: { video: VideoItem }) {
   );
 }
 
-export function MultiVideoEmbed({ videos }: { videos: VideoItem[] }) {
+export function MultiVideoEmbed({
+  videos,
+  byLabel = 'by {author}',
+}: {
+  videos: VideoItem[];
+  /** Gabarit localisé « by {author} » — défaut EN (appelant serveur : video.by). */
+  byLabel?: string;
+}) {
   if (videos.length === 0) return null;
-  if (videos.length === 1) return <VideoPane video={videos[0]} />;
+  if (videos.length === 1) return <VideoPane video={videos[0]} byLabel={byLabel} />;
   return (
     <Tabs
       tabs={videos.map((v) => ({
         id: `${v.platform}-${v.id}`,
         label: v.label ?? v.title,
-        content: <VideoPane video={v} />,
+        content: <VideoPane video={v} byLabel={byLabel} />,
       }))}
     />
   );

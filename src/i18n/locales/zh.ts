@@ -35,6 +35,13 @@ const zh: Record<TranslationKey, string> = {
   'common.sort.author_asc': '作者 A→Z',
   'common.sort.author_desc': '作者 Z→A',
   'aria.toggle_menu': '切换菜单',
+  'aria.prev_art': '上一张立绘',
+  'aria.next_art': '下一张立绘',
+  'aria.show_art': '显示立绘 {n}',
+  'aria.star_rarity': '{rarity}星稀有度',
+  'aria.zoom': '缩放：{alt}',
+  'aria.close': '关闭',
+  'video.by': '作者：{author}',
 
   // Contributors
   'contributors.title': '贡献者',
@@ -113,6 +120,8 @@ const zh: Record<TranslationKey, string> = {
   'equip.detail.step_rates': '各阶段成功率',
   'equip.detail.grade': '等级',
   'equip.detail.mainstat': '主属性',
+  'equip.detail.minmax': 'min → max',
+  'equip.detail.step': '阶段',
   'equip.detail.back': '全部装备',
   'equip.detail.piece.helmet': '头盔',
   'equip.detail.piece.armor': '铠甲',
@@ -953,6 +962,7 @@ const zh: Record<TranslationKey, string> = {
   'page.character.meta_description':
     '{name}（{element} {classType}）— 技能详解、专属装备、推荐配装、节奏榜排名。',
   'page.character.sr_suffix': ' — Outerplane {element} {classType} 攻略',
+  'page.character.cp_title': '战斗力（无装备，技能Lv5）',
   'page.character.toc.overview': '概览',
   'page.character.toc.on_this_page': '本页内容',
   'page.character.toc.ee': '专属装备',

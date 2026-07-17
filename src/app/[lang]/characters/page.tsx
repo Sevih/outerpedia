@@ -75,6 +75,7 @@ function buildLabels(rows: CharacterRow[], t: TFunction): CharactersBrowserLabel
     // Gabarit brut (sans vars, t() rend le message tel quel) — le compte est
     // substitué côté client, il change à chaque frappe dans les filtres.
     count: t('characters.filters.count'),
+    starAria: t('aria.star_rarity'),
     options: {
       element: optionMap(
         rows.map((r) => r.element),

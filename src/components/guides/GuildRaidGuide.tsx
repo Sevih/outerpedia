@@ -269,7 +269,7 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
           labels={teamLabels}
         />
       )}
-      {data?.video && <MultiVideoEmbed videos={[data.video]} />}
+      {data?.video && <MultiVideoEmbed byLabel={t('video.by')} videos={[data.video]} />}
     </div>
   );
 
@@ -293,7 +293,7 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
         )}
         {team.requirements && <BuildRequirements data={team.requirements} ctx={ctx} />}
         {renderNotes(team.notes, { dropTurnOrder: hasBuilds })}
-        {team.video && <MultiVideoEmbed videos={[team.video]} />}
+        {team.video && <MultiVideoEmbed byLabel={t('video.by')} videos={[team.video]} />}
       </div>
     );
   };
@@ -393,7 +393,7 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
               <h2 className="text-content-strong text-xl font-bold">
                 {t('guides.combat_footage')}
               </h2>
-              <MultiVideoEmbed videos={cfg.videos} />
+              <MultiVideoEmbed byLabel={t('video.by')} videos={cfg.videos} />
             </section>
           ) : null}
         </div>

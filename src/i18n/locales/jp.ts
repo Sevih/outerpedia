@@ -35,6 +35,13 @@ const jp: Record<TranslationKey, string> = {
   'common.sort.author_asc': '著者 A→Z',
   'common.sort.author_desc': '著者 Z→A',
   'aria.toggle_menu': 'メニュー切替',
+  'aria.prev_art': '前のイラスト',
+  'aria.next_art': '次のイラスト',
+  'aria.show_art': 'イラスト{n}を表示',
+  'aria.star_rarity': '星{rarity}のレアリティ',
+  'aria.zoom': 'ズーム：{alt}',
+  'aria.close': '閉じる',
+  'video.by': '投稿者：{author}',
 
   // Contributors
   'contributors.title': 'コントリビューター',
@@ -114,6 +121,8 @@ const jp: Record<TranslationKey, string> = {
   'equip.detail.step_rates': '段階別成功率',
   'equip.detail.grade': 'グレード',
   'equip.detail.mainstat': 'メインステータス',
+  'equip.detail.minmax': 'min → max',
+  'equip.detail.step': 'ステップ',
   'equip.detail.back': '全装備',
   'equip.detail.piece.helmet': 'ヘルメット',
   'equip.detail.piece.armor': 'アーマー',
@@ -985,6 +994,7 @@ const jp: Record<TranslationKey, string> = {
   'page.character.meta_description':
     '{name}（{element} {classType}）— スキル詳細、専用装備、推奨装備ビルド、ティアランキング。',
   'page.character.sr_suffix': ' — Outerplane {element}{classType}ガイド',
+  'page.character.cp_title': '戦闘力（装備なし・スキルLv5）',
   'page.character.toc.overview': '概要',
   'page.character.toc.on_this_page': 'このページ',
   'page.character.toc.ee': '専用装備',

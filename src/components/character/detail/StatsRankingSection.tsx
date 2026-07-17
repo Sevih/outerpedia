@@ -38,6 +38,8 @@ export interface StatsRankingLabels {
   transcend: string;
   codex: string;
   quirks: string;
+  /** Tooltip du CP (l'infobulle explique le contexte du calcul). */
+  cpTitle: string;
 }
 
 export interface TierEntry {
@@ -117,7 +119,7 @@ export function StatsRankingSection({
             {cp !== undefined && (
               <span
                 className="flex items-center gap-1 font-mono text-sm text-zinc-100 tabular-nums"
-                title="Combat Power (no gear, skills Lv5)"
+                title={labels.cpTitle}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                 <img src={img.power()} alt="CP" className="h-4 w-4 object-contain" />

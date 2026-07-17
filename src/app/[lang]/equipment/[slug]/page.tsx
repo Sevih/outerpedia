@@ -90,6 +90,8 @@ export default async function EquipmentDetailPage({
     andMore: t('equip.detail.and_more'),
     activationCost: t('equip.detail.activation_cost'),
     stepRates: t('equip.detail.step_rates'),
+    substatsRange: t('equip.detail.minmax'),
+    step: t('equip.detail.step'),
     grade: t('equip.detail.grade'),
     pieces: {
       helmet: t('equip.detail.piece.helmet'),

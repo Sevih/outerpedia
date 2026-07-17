@@ -35,6 +35,13 @@ const fr: Record<TranslationKey, string> = {
   'common.sort.author_asc': 'Auteur A→Z',
   'common.sort.author_desc': 'Auteur Z→A',
   'aria.toggle_menu': 'Basculer le menu',
+  'aria.prev_art': 'Illustration précédente',
+  'aria.next_art': 'Illustration suivante',
+  'aria.show_art': "Afficher l'illustration {n}",
+  'aria.star_rarity': 'Rareté {rarity} étoiles',
+  'aria.zoom': 'Zoom : {alt}',
+  'aria.close': 'Fermer',
+  'video.by': 'par {author}',
 
   // Contributors
   'contributors.title': 'Contributeurs Outerpedia',
@@ -114,6 +121,8 @@ const fr: Record<TranslationKey, string> = {
   'equip.detail.step_rates': 'Taux de réussite par palier',
   'equip.detail.grade': 'Grade',
   'equip.detail.mainstat': 'Stat principale',
+  'equip.detail.minmax': 'min → max',
+  'equip.detail.step': 'Palier',
   'equip.detail.back': 'Tous les équipements',
   'equip.detail.piece.helmet': 'Casque',
   'equip.detail.piece.armor': 'Armure',
@@ -1015,6 +1024,7 @@ const fr: Record<TranslationKey, string> = {
   'page.character.meta_description':
     "{name} ({element} {classType}) — détail des skills, Exclusive Equipment, builds d'équipement recommandés et classement tier sur Outerpedia.",
   'page.character.sr_suffix': ' — Guide Outerplane {element} {classType}',
+  'page.character.cp_title': 'Puissance de combat (sans équipement, compétences niv. 5)',
   'page.character.toc.overview': "Vue d'ensemble",
   'page.character.toc.on_this_page': 'Sur cette page',
   'page.character.toc.ee': 'Exclusive Equipment',

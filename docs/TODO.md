@@ -11,6 +11,8 @@
 
 ## 🎯 PRIO (décision Sevih)
 
+- [ ] Terminer le layout et l'architecture : le menu le header le footer les item
+      de nav (quitte a pointer vers des 404 le temps de tout brancher) => en profiter pour inventorier et poser en todo toutes les pages/elements manquants
 - [ ] **Retirer les comparaisons V2 des extracteurs** — l'oracle a joué son rôle.
       Périmètre : `datagen/extractor/v2-control.ts` + contrôle de cohérence,
       `equipmentV2Control`/`EquipmentReport` (Extractor gear), l'Extractor Effect
@@ -97,15 +99,6 @@
 
 ## 🌍 i18n / SEO / a11y (audit 17/07)
 
-- [ ] **Texte en dur qui fuit dans les 5 langues** :
-      `src/app/[lang]/page.tsx:47` (« {count} personnages » en FRANÇAIS sur la
-      home), `characters/[slug]/page.tsx:108` (meta description FR pour toutes
-      les langues), `src/components/layout/Footer.tsx:8` (FR),
-      `ShareButtons.tsx:133-168` (« Share on X », « Copied! » EN),
-      `EquipmentBrowser.tsx:85-89,246-257` (slugs bruts `fire`/`striker` dans
-      les selects, alors que CharactersBrowser reçoit des options localisées), + aria-labels EN épars (FullArtCarousel, CharacterCard:155,
-      ImageLightbox:46,77, MultiVideoEmbed:42, StatsRankingSection:121,
-      EquipmentDetail:662,830, breadcrumb JSON-LD et srSuffix de la fiche perso).
 - [ ] **Équipement citoyen de seconde zone SEO** : `/equipment` et les fiches
       absents de `sitemap.ts` ET `llms.txt` ; pas de `generateStaticParams` ;
       meta description identique sur tout le catalogue ; title

@@ -15,6 +15,7 @@ export function ImageLightbox({
   caption,
   className,
   thumbnailClassName,
+  strings,
 }: {
   src: string;
   alt: string;
@@ -23,6 +24,8 @@ export function ImageLightbox({
   className?: string;
   /** Classes de la miniature (défaut : max-h-48 w-auto). */
   thumbnailClassName?: string;
+  /** Libellés a11y localisés — `zoom` : gabarit `{alt}`. Défauts EN. */
+  strings?: { zoom?: string; close?: string };
 }) {
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
@@ -43,7 +46,7 @@ export function ImageLightbox({
           type="button"
           onClick={() => setOpen(true)}
           className="cursor-zoom-in focus:outline-none"
-          aria-label={`Zoom: ${alt}`}
+          aria-label={(strings?.zoom ?? 'Zoom: {alt}').replace('{alt}', alt)}
         >
           {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
@@ -74,7 +77,7 @@ export function ImageLightbox({
               type="button"
               onClick={close}
               className="bg-surface-overlay text-content-strong hover:bg-surface-raised absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full transition"
-              aria-label="Close"
+              aria-label={strings?.close ?? 'Close'}
             >
               ✕
             </button>
