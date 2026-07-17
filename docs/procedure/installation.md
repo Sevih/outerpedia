@@ -29,11 +29,14 @@ avoir le script), le `.env.local` (§2.1), et un **émulateur LDPlayer lancé av
 le jeu installé + connecté** (source des données ; sinon le pipeline data est
 sauté proprement, à relancer une fois l'émulateur prêt).
 
-> **Depuis une machine vierge, lance-le dans un PowerShell _Administrateur_** :
-> `nvm use` crée un lien symbolique qui exige l'élévation. Le script le détecte
-> et le signale, mais autant partir élevé. Il est **idempotent** : en cas de
-> pépin (ex. PATH pas encore rafraîchi après une install), rouvrir un terminal
-> et relancer reprend là où il en était.
+> **Lance-le en utilisateur NORMAL (pas administrateur).** Un `git clone` ou un
+> `init.ps1` exécuté en admin rend `.git` et les fichiers générés possédés par
+> « Administrateurs » → git en usage normal les refuse (« dubious ownership »),
+> et VS Code tague le dépôt comme non sûr. Seule exception : sur une machine
+> **sans Node**, le tout premier `nvm use` exige l'admin (lien symbolique) — fais
+> uniquement CETTE commande dans un terminal élevé, puis reviens en normal. Le
+> script est **idempotent** : en cas de pépin (PATH pas rafraîchi après une
+> install), rouvrir un terminal et relancer reprend où il en était.
 
 > Le fichier `.ps1` est encodé **UTF-8 avec BOM** : PowerShell 5.1 lirait sinon
 > les accents dans la codepage ANSI et casserait le parsing. Ne pas le ré-enregistrer
@@ -134,18 +137,22 @@ Rien n'est committé côté data locale : il faut la construire une fois.
 pnpm datagen:pull        # bundles + il2cpp depuis l'émulateur (adb).  ~15 Go
 pnpm datagen:dump        # dump.cs depuis l'APK installé (paire assortie, auto)
 pnpm datagen:extract     # .bytes + images → .gamedata/extracted/ (via AssetStudioModCLI)
-pnpm datagen:regen       # build + promote --apply → data/extracted (lit dump.cs)
-pnpm assets:collect      # images extraites → .assets-staging/images (webp)
+pnpm datagen:convert     # .bytes → tables parsées (.gamedata/parsed/*.json)
+pnpm datagen:regen       # build + promote --apply → data/extracted (lit parsed + dump.cs)
+pnpm assets:pull         # ensemble d'images PUBLIÉ sur R2 → .assets-staging/images
 ```
 
 > `datagen:dump` a besoin de l'émulateur **lancé** avec le jeu **installé** (il lit
 > l'APK via adb). Il ne change qu'aux MAJ de code du jeu — inutile de le rejouer à
 > chaque patch de données.
 
-> **`assets:collect` est indispensable en dev** : la route dev
-> [`/images/[...path]`](../../src/app/images/[...path]/route.dev.ts) sert les
-> images depuis `.assets-staging/images`. Sans ce step → tous les
-> `/images/*.webp` renvoient **404**.
+> **Remplir `.assets-staging/images` est indispensable en dev** : la route dev
+> [`/images/[...path]`](../../src/app/images/[...path]/route.dev.ts) y lit les
+> images (sinon tous les `/images/*.webp` renvoient **404**). On utilise
+> **`assets:pull`** (ensemble PUBLIÉ sur R2 = ce que sert le site, curés/manuels
+> inclus). `assets:collect` ne régénère QUE les sprites extraits du jeu et rate
+> les assets curés — il sert au flux de **publication** (collect + push) quand on
+> datamine du nouveau contenu, pas à l'onboarding.
 
 `pnpm dev` enchaîne déjà `clean:all → dev-refresh (pull→extract→convert→build→
 promote+collect news)` en tête, mais **pas** `assets:collect` — d'où le step

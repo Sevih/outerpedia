@@ -11,7 +11,9 @@ Explications : [installation.md](installation.md).
 ## Depuis zéro
 
 ```powershell
-# PowerShell EN ADMIN
+# PowerShell UTILISATEUR NORMAL (surtout PAS admin → sinon .git possédé par
+# Administrateurs et git cassé). Exception : machine sans Node → faire le tout
+# premier `nvm use 24` dans un terminal admin, puis revenir en normal.
 git clone https://github.com/Sevih/outerpedia.git outerpedia-v3
 cd outerpedia-v3
 # → déposer .env.local à la racine

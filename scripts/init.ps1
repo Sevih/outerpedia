@@ -121,8 +121,8 @@ if (-not (Test-Path (Join-Path $RepoRoot 'package.json'))) {
 # .NET (Il2CppDumper) et rclone (fetch R2) sont installés s'ils manquent.
 
 Say 'Outils système (winget)'
-if (-not (Test-Admin)) {
-  Warn "Session NON élevée. Si nvm-windows doit être installé puis activé, 'nvm use' échouera (lien symbolique = admin requis). Depuis une machine vierge, lance ce script dans un PowerShell Administrateur."
+if (Test-Admin) {
+  Warn "Session ADMINISTRATEUR détectée — À ÉVITER. Les fichiers créés (dont .git au clone) seront possédés par « Administrateurs » et git en utilisateur normal les refusera (« dubious ownership »). Lance plutôt clone + init en utilisateur NORMAL. Seul le tout premier 'nvm use' sur une machine SANS Node exige l'admin (à faire à part)."
 }
 Install-Tool 'git'    'Git.Git'                    'git'
 Install-Tool 'nvm'    'CoreyButler.NVMforWindows'  'nvm-windows'
@@ -141,10 +141,12 @@ if ($SkipToolchain) {
     Info "Node $(node -v) OK."
   } elseif (Have 'nvm') {
     Run 'nvm' @('install', '24')
-    # 'nvm use' crée un lien symbolique (NVM_SYMLINK) → requiert l'admin.
+    # 'nvm use' crée un lien symbolique (NVM_SYMLINK) → requiert l'admin sur une
+    # machine neuve. On isole CE besoin d'élévation : surtout ne pas relancer TOUT
+    # le script en admin (ça casserait la propriété git des fichiers créés).
     & nvm use 24
     if ($LASTEXITCODE -ne 0) {
-      Die "'nvm use 24' a échoué. Cause probable : PowerShell non élevé (le lien symbolique nvm exige l'admin). Relance ce script dans un terminal Administrateur."
+      Die "'nvm use 24' a échoué (lien symbolique nvm = admin requis sur machine neuve). Fais UNE fois, dans un terminal ADMIN : ``nvm use 24`` — PUIS relance CE script en utilisateur NORMAL. N'exécute pas le clone / init entier en admin."
     }
     Update-SessionEnv
     if (-not (Have 'node')) { Die "Node introuvable après 'nvm use 24'. Ouvre un nouveau terminal et relance." }
@@ -191,7 +193,11 @@ function Test-Emulator {
   } catch { return $false }
 }
 
-$dataCmds = @('datagen:pull', 'datagen:dump', 'datagen:extract', 'datagen:regen', 'assets:collect')
+# assets:pull (pas assets:collect) : on récupère l'ensemble d'images PUBLIÉ sur R2
+# — ce que le site sert réellement, curés/manuels inclus. assets:collect ne
+# régénère QUE les sprites extraits du jeu et rate ces assets-là. (collect+push
+# reste le flux de PUBLICATION quand on datamine du nouveau, cf. newPatch.md.)
+$dataCmds = @('datagen:pull', 'datagen:dump', 'datagen:extract', 'datagen:convert', 'datagen:regen', 'assets:pull')
 
 if ($SkipData) {
   Say 'Données (sauté : -SkipData)'
