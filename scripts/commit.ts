@@ -3,7 +3,8 @@
  *
  * Enchaîne, dans l'ordre, avec ARRÊT au premier problème :
  *   1. CONTRÔLES : format:check → lint → typecheck → test  (STOP si ça casse)
- *   2. bump de version (patch/minor/major) → package.json
+ *   2. CHOIX du bump de version (patch/minor/major) — l'écriture dans
+ *      package.json est différée à l'étape 5 : abandonner ne modifie rien
  *      (la version est lue de là par next.config.ts → NEXT_PUBLIC_APP_VERSION ;
  *       pas de sw.js à synchroniser en V3)
  *   3. message de commit (prompt)
@@ -119,10 +120,14 @@ async function main(): Promise<void> {
   }
 
   let newVersion = '';
+  /** Contenu du package.json bumpé — écrit en DIFFÉRÉ à l'étape commit. */
+  let bumpedPkg: string | null = null;
   let msg = '';
   const rl = readline.createInterface({ input, output });
   try {
-    // 2) BUMP DE VERSION.
+    // 2) BUMP DE VERSION (choix seulement — l'ÉCRITURE attend l'étape 6 :
+    // un abandon ici ou au message laissait un package.json bumpé non
+    // committé, et la relance re-bumpait par-dessus → versions sautées).
     const pkg = JSON.parse(readFileSync(PKG, 'utf-8')) as { version: string };
     const m = pkg.version.match(/^(\d+)\.(\d+)\.(\d+)$/);
     if (!m) throw new Error(`Version invalide dans package.json : "${pkg.version}"`);
@@ -142,13 +147,14 @@ async function main(): Promise<void> {
     newVersion = `${maj}.${min}.${pat}`;
     if (newVersion !== pkg.version) {
       pkg.version = newVersion;
-      if (!DRY_RUN) writeFileSync(PKG, JSON.stringify(pkg, null, 2) + '\n');
-      console.log(`Nouvelle version : \x1b[32m${newVersion}\x1b[0m`);
+      bumpedPkg = JSON.stringify(pkg, null, 2) + '\n';
+      console.log(`Nouvelle version : \x1b[32m${newVersion}\x1b[0m (écrite au commit)`);
     } else {
       console.log('Version inchangée.');
     }
 
-    // 3) MESSAGE (avant le push R2 : abandon ici = rien de publié).
+    // 3) MESSAGE (avant le push R2 ET l'écriture du bump : abandon ici =
+    // rien de publié, rien de modifié).
     if (FORCE_MSG && !CONVENTIONAL.test(FORCE_MSG)) {
       console.error(
         `\x1b[31mMessage --msg non conventionnel — refusé.\x1b[0m\n${CONVENTIONAL_HELP}`,
@@ -181,7 +187,12 @@ async function main(): Promise<void> {
   console.log('\n▶ images (collect + push R2)');
   sh('pnpm images');
 
-  // 6) COMMIT.
+  // 6) COMMIT. L'écriture du bump arrive ICI (plus d'abandon possible), et
+  // AVANT le status : un commit « bump seul » reste possible.
+  if (bumpedPkg) {
+    if (!DRY_RUN) writeFileSync(PKG, bumpedPkg);
+    console.log(`package.json → ${newVersion}`);
+  }
   const status = shOut('git status --porcelain');
   if (!status) {
     console.log('\nRien à committer.');

@@ -11,6 +11,12 @@
   starting now ») en exception → émulateur déclaré absent à tort au premier
   lancement, pipeline data sauté. EAP local `Continue` (portée fonction) ;
   bug et remède reproduits sur PS 5.1 réel.
+- **`commit.ts` : bump de version différé** — le choix reste à l'étape 2 mais
+  l'écriture de package.json attend l'étape commit (avant le `git status`,
+  pour qu'un commit « bump seul » reste possible) : tout abandon (bump,
+  message vide, Ctrl-C) ne modifie plus rien, fini les versions sautées.
+  Prouvé : bump choisi puis abandon → md5 de package.json inchangé (l'ancien
+  code l'avait déjà écrit à ce stade).
 - **Erreurs avalées sur les curés éradiquées** : `readCuratedJson` dans
   `datagen/lib/json.ts` (pendant lecture de `writeJson`) — fichier absent =
   `undefined` (pas de curation, cas normal), JSON cassé = **throw nommant le

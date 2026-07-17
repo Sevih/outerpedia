@@ -46,11 +46,6 @@
 
 ### Pipeline & scripts
 
-- [ ] `scripts/commit.ts:143-145` : bump de version écrit AVANT message/stamp/
-      images/commit — tout abandon laisse package.json bumpé non committé, une
-      relance re-bumpe (versions sautées). Différer l'écriture juste avant
-      `git add -A` (le commentaire l.151 « abandon = rien de publié » est faux).
-
 ### Caches périmés (process admin long-running)
 
 - [ ] Caches module qui contournent le régime mtime/TTL pourtant établi
