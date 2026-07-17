@@ -36,7 +36,15 @@ export async function Header() {
       nav={nav}
       appVersion={process.env.NEXT_PUBLIC_APP_VERSION || 'dev'}
       gameVersion={getGameVersion()}
-      strings={{ toggleMenu: t('aria.toggle_menu') }}
+      strings={{
+        toggleMenu: t('aria.toggle_menu'),
+        lang: {
+          language: t('common.language'),
+          official: t('header.lang.official'),
+          community: t('header.lang.community'),
+          communityNote: t('header.lang.community_note'),
+        },
+      }}
     />
   );
 }

@@ -55,6 +55,11 @@ export const img = {
   chainArrow: () => `${BASE}/images/ui/nav/IG_Chain_Arrow.webp`,
   /** Icône de navigation éditoriale (pve/pvp — cibles des guides de reviews). */
   navIcon: (name: string) => `${BASE}/images/ui/nav/${name}.webp`,
+  /**
+   * Drapeau d'une langue (SVG éditorial — les emojis drapeaux ne rendent pas
+   * sur Chrome/Windows, même règle que la V2). `code` = LANGUAGES[lang].flag.
+   */
+  flag: (code: string) => `${BASE}/images/ui/flags/${code}.svg`,
   /** Icône de rang (SSS..D). */
   rank: (rank: string) => `${BASE}/images/ui/rank/IG_Event_Rank_${rank}.webp`,
   /** Icône d'équipement (arme/amulette/talisman, nom de sprite du jeu). */

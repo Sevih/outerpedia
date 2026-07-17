@@ -61,12 +61,6 @@
       l'emplacement dans HeaderClient est réservé (commentaire).
 - [ ] **Home riche** — sections bannières actives / codes promo / guides
       débutants (clés `home.*`, structure V2).
-- [ ] **Drapeaux de langues** — la V2 affiche des drapeaux SVG
-      (`ui/flags/{gb,jp,kr,cn,fr}.svg`) dans ses chips de langues ; les chips
-      V3 (footer) sont en texte en attendant leur pool (editorial ?).
-- [ ] **Icônes de marque** (Discord/GitHub/Reddit/YouTube/X/RSS) — la V2 use
-      react-icons ; V3 sans dépendance icône : chips texte en attendant une
-      décision (react-icons ? sprites ? SVG inline maison ?).
 
 ## 🐛 Bugs — sévérité haute (audit 17/07, tous vérifiés)
 

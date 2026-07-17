@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import type { Route } from 'next';
 import { useEffect, useState } from 'react';
-import { LanguageSwitcher } from './LanguageSwitcher';
+import { LanguageSwitcher, type LanguageSwitcherStrings } from './LanguageSwitcher';
 import type { Lang } from '@/lib/i18n/config';
 
 /** Item de nav pré-localisé côté serveur (icône = URL R2 résolue). */
@@ -18,6 +18,7 @@ export interface HeaderNavItem {
 
 export interface HeaderStrings {
   toggleMenu: string;
+  lang: LanguageSwitcherStrings;
 }
 
 function NavIcon({ src, alt, size }: { src: string; alt: string; size: number }) {
@@ -156,7 +157,7 @@ export function HeaderClient({
               Admin
             </Link>
           )}
-          <LanguageSwitcher current={lang} />
+          <LanguageSwitcher current={lang} strings={strings.lang} />
         </div>
 
         {/* Droite mobile : burger */}
@@ -240,7 +241,7 @@ export function HeaderClient({
               ))}
             </nav>
             <div className="border-line-subtle border-t pt-3">
-              <LanguageSwitcher current={lang} />
+              <LanguageSwitcher current={lang} strings={strings.lang} variant="mobile-chips" />
             </div>
           </div>
         </div>

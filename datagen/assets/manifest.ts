@@ -515,7 +515,7 @@ export function buildAssetManifest(): AssetRequest[] {
         'IG_Chain_Arrow',
         'CM_EtcMenu_Colleague',
         'CM_EtcMenu_Inventory',
-        'CM_Mission_Icon_Weekly',
+        'CM_Mission_Icon_Daily',
         'CM_EtcMenu_Setting',
         'CM_EtcMenu_Character_Book',
       ],

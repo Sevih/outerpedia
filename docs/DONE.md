@@ -32,6 +32,20 @@
   verbatim `{I-I/Hero Piece}` (l'item curé existe désormais). Reste ouvert :
   pattern « titres en page V2 » (H1 meta seul en V3) et mileage du Custom Rate
   Up (Elemental vs Custom) — décisions Sevih.
+- **Layout, passe de fidélité 2 (retours Sevih)** — icône tierlist basculée
+  sur `CM_Mission_Icon_Daily` (manifest + collecte, ui 190 ✓) ;
+  LanguageSwitcher refait à l'identique V2 : dropdown drapeau + abréviation,
+  liste avec badges officiel/communautaire et note de repli, variante
+  `mobile-chips` dans le drawer (libellés passés en props — pas de contexte
+  i18n client), navigation V3 conservée (préfixe de path + ?query/#hash) ;
+  drapeaux SVG branchés partout via `img.flag` (ils étaient DÉJÀ collectés
+  par le bloc éditorial du manifest) ; icônes de marque tranchées :
+  react-icons comme la V2 (social rapide Discord/GitHub/RSS + bandeau
+  officiel Reddit/YouTube/X…) ; chips de langues du footer alignées
+  (drapeau + abréviation + pastille communautaire). Deux items « Pages
+  manquantes » soldés (drapeaux, icônes de marque). GV : lue depuis
+  `data/generated/game-version.json` (resVersion du jeu extrait), plus de
+  variable d'env comme en V2.
 - **Layout terminé : header/nav/footer, FIDÈLES à la V2 sur tokens V3**
   (PRIO Sevih ; « pas le même du tout » corrigé après premier jet minimal) —
   contrat `src/lib/nav.ts` (5 items V2 + EXTRA_PAGES pour la future

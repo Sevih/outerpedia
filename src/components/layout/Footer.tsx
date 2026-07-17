@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import type { Route } from 'next';
 import type { ReactNode } from 'react';
+import { FaDiscord, FaGithub, FaReddit, FaRss, FaTwitter, FaYoutube } from 'react-icons/fa';
+import type { IconType } from 'react-icons';
+import { img } from '@/lib/images';
 import { getRequestLang } from '@/lib/i18n/server';
 import { getT, type TranslationKey, type TFunction } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
@@ -15,8 +18,8 @@ import { getGameVersion } from '@/lib/data/game-version';
  * Community — repliables en mobile via <details>, zéro JS), bandeau des liens
  * officiels Outerplane, disclaimer, barre légale. Les cibles pas encore
  * portées (/tierlist, /coupons, /tools, /contributors, /changelog, /legal,
- * /feed) sont ASSUMÉES 404 — cf. TODO « Pages manquantes » (idem les icônes
- * de marque Discord/GitHub…, en attente d'une stratégie d'icônes).
+ * /feed) sont ASSUMÉES 404 — cf. TODO « Pages manquantes ». Icônes de marque
+ * (Discord/GitHub/…) : react-icons, comme la V2.
  */
 
 /** Les 6 outils mis en avant (mêmes que la V2 ; libellés `tools.*` pré-seedés). */
@@ -137,7 +140,10 @@ function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) 
   );
 }
 
-/** Chips de langues (racine de chaque langue — même sémantique que la V2). */
+/**
+ * Chips de langues (racine de chaque langue — même sémantique que la V2) :
+ * drapeau + abréviation + pastille pour les traductions communautaires.
+ */
 function FooterLanguages({ lang, label }: { lang: Lang; label: string }) {
   return (
     <div>
@@ -160,8 +166,17 @@ function FooterLanguages({ lang, label }: { lang: Lang; label: string }) {
               aria-current={isCurrent ? 'true' : undefined}
               hrefLang={cfg.htmlLang}
             >
+              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
+              <img
+                src={img.flag(cfg.flag)}
+                alt=""
+                aria-hidden
+                width={18}
+                height={13}
+                className="h-3 w-4.5 shrink-0 rounded-xs object-cover"
+              />
               <span className="font-mono">{cfg.abbrev}</span>
-              {cfg.label}
+              {!cfg.isOfficial && <span className="bg-warn size-1 rounded-full" aria-hidden />}
             </Link>
           );
         })}
@@ -177,19 +192,25 @@ export async function Footer() {
   const gameVersion = getGameVersion();
   const columns = buildColumns(lang, t);
 
-  const officialLinks: FooterLink[] = [
-    { label: t('footer.official_website'), href: t('link.officialwebsite') },
-    { label: t('footer.social.official_discord'), href: 'https://discord.com/invite/77mVJcJByq' },
-    { label: t('footer.social.reddit'), href: 'https://www.reddit.com/r/OUTERPLANE_Publisher/' },
-    { label: t('footer.social.youtube'), href: 'https://www.youtube.com/@OUTERPLANE_OFFICIAL' },
-    { label: t('footer.social.official_x'), href: 'https://x.com/outerplane' },
-    { label: t('footer.social.publisher_x'), href: 'https://x.com/M9_outerplane' },
-  ];
-
-  const quickSocial: FooterLink[] = [
-    { label: 'Discord', href: 'https://discord.com/invite/PNMd5mkAV8' },
-    { label: 'GitHub', href: 'https://github.com/Sevih/outerpediaV2' },
-    { label: 'RSS', href: '/feed' },
+  const officialLinks: Array<FooterLink & { icon: IconType | null }> = [
+    { label: t('footer.official_website'), href: t('link.officialwebsite'), icon: null },
+    {
+      label: t('footer.social.official_discord'),
+      href: 'https://discord.com/invite/77mVJcJByq',
+      icon: FaDiscord,
+    },
+    {
+      label: t('footer.social.reddit'),
+      href: 'https://www.reddit.com/r/OUTERPLANE_Publisher/',
+      icon: FaReddit,
+    },
+    {
+      label: t('footer.social.youtube'),
+      href: 'https://www.youtube.com/@OUTERPLANE_OFFICIAL',
+      icon: FaYoutube,
+    },
+    { label: t('footer.social.official_x'), href: 'https://x.com/outerplane', icon: FaTwitter },
+    { label: t('footer.social.publisher_x'), href: 'https://x.com/M9_outerplane', icon: FaTwitter },
   ];
 
   return (
@@ -217,16 +238,38 @@ export async function Footer() {
             <p className="text-content-muted mb-5 max-w-sm text-sm leading-relaxed">
               {t('footer.tagline')}
             </p>
-            {/* Rangée sociale rapide */}
+            {/* Rangée sociale rapide (icônes de marque, comme la V2) */}
             <div className="mb-6 flex gap-2">
-              {quickSocial.map((link) => (
-                <span key={link.href}>
-                  {renderLink(
-                    link,
-                    'inline-flex items-center gap-2 rounded-md border border-line bg-surface-base px-3 py-1.5 text-xs text-content transition hover:border-accent/50 hover:bg-surface-overlay',
-                  )}
-                </span>
-              ))}
+              <a
+                href="https://discord.com/invite/PNMd5mkAV8"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t('footer.social.evamains_discord')}
+                className="border-line bg-surface-base text-content hover:border-accent/50 hover:bg-surface-overlay inline-flex items-center gap-2 rounded-md border px-3 py-1.5 text-xs transition"
+              >
+                <FaDiscord className="text-accent" />
+                Discord
+              </a>
+              <a
+                href="https://github.com/Sevih/outerpediaV2"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t('footer.social.github')}
+                className="border-line bg-surface-base text-content hover:bg-surface-overlay inline-flex items-center gap-2 rounded-md border px-3 py-1.5 text-xs transition"
+              >
+                <FaGithub />
+                GitHub
+              </a>
+              <a
+                href="/feed"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t('footer.social.rss')}
+                className="border-line bg-surface-base text-content hover:border-warn/50 hover:bg-surface-overlay inline-flex items-center gap-2 rounded-md border px-3 py-1.5 text-xs transition"
+              >
+                <FaRss className="text-warn" />
+                RSS
+              </a>
             </div>
             <FooterLanguages lang={lang} label={t('common.language')} />
           </div>
@@ -242,14 +285,21 @@ export async function Footer() {
             {t('footer.col.official')} · Outerplane
           </p>
           <div className="flex flex-wrap gap-2">
-            {officialLinks.map((link) => (
-              <span key={link.href}>
-                {renderLink(
-                  link,
-                  'inline-flex items-center gap-1.5 rounded-md border border-line bg-surface-base/50 px-2.5 py-1 text-xs text-content-subtle transition hover:bg-surface-overlay hover:text-content',
-                )}
-              </span>
-            ))}
+            {officialLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border-line bg-surface-base/50 text-content-subtle hover:bg-surface-overlay hover:text-content inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs transition"
+                >
+                  {Icon ? <Icon className="text-[13px]" /> : null}
+                  <span>{link.label}</span>
+                </a>
+              );
+            })}
           </div>
         </div>
 
