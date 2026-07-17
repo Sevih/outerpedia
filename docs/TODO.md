@@ -17,16 +17,12 @@
       (pur contrôle de régression V2), les statuts « diff » de la sidebar,
       `core/diff`, les lectures `../outerpedia-v2`. **EXCEPTION : le regen
       coupons/banner se GARDE jusqu'à la bascule prod V2→V3.**
-      ⚠️ CONSTAT AUDIT 17/07 (précisé par Sevih) : le chemin `../outerpedia-v2`
-      en dur est **dépendant de la machine** — valable sur le PC fixe, mais sur
-      le portable le repo V2 s'appelle `../outerpedia` → ENOENT sur
-      regenCoupons/BannersFromV2 (`src/lib/admin/promo-banner-store.ts:30-31`).
-      Correction : UNE variable d'env pour la racine du repo V2 (ex. `V2_DIR`,
-      défaut `../outerpedia-v2`), consommée par promo-banner-store ET par
-      `datagen/assets/stage.ts:36` / `manifest.ts:655` (qui ont déjà
-      `V2_IMAGES_DIR`, défini deux fois — le dériver de `V2_DIR`) ; l'ajouter
-      commentée dans `.env.example`. Une fois la dépose faite : `data/legacy/`
-      (248 fichiers) devient supprimable.
+      ✅ Préalable RÉGLÉ le 17/07 : le chemin `../outerpedia-v2` en dur était
+      dépendant de la machine (fixe : `outerpedia-v2`, portable : `outerpedia`)
+      → `V2_DIR` câblée (`datagen/lib/env.ts` : v2Dir/v2ImagesDir, consommée
+      par promo-banner-store, stage.ts et manifest.ts ; documentée dans
+      .env.example, posée dans le .env.local des machines). Une fois la dépose
+      faite : `data/legacy/` (248 fichiers) devient supprimable.
 - [ ] **Retravailler le rôle des Extractors/Editors du panneau admin** (corollaire
       du point précédent — demande Sevih 2026-07-16) : certaines pages Extractor
       n'existent que pour la comparaison V2. Quand la comp V2 saute, redéfinir la

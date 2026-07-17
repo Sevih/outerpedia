@@ -26,9 +26,12 @@ export interface Banner {
 
 const COUPONS_PATH = resolve(process.cwd(), 'data/curated/coupons.json');
 const BANNER_PATH = resolve(process.cwd(), 'data/curated/banner.json');
-// Repo V2 voisin (sibling de `outerpedia`). Lecture seule, dev only.
-const V2_COUPONS = resolve(process.cwd(), '..', 'outerpedia-v2', 'data', 'coupons.json');
-const V2_BANNER = resolve(process.cwd(), '..', 'outerpedia-v2', 'data', 'banner.json');
+// Repo V2 voisin. Lecture seule, dev only. Nom du dossier dépendant de la
+// machine (fixe : outerpedia-v2, portable : outerpedia) → V2_DIR de .env.local
+// (chargé par Next au démarrage, cf. .env.example).
+const V2_ROOT = resolve(process.cwd(), process.env.V2_DIR ?? '../outerpedia-v2');
+const V2_COUPONS = resolve(V2_ROOT, 'data', 'coupons.json');
+const V2_BANNER = resolve(V2_ROOT, 'data', 'banner.json');
 
 function readArray<T>(path: string): T[] {
   try {

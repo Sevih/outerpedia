@@ -19644,20 +19644,6 @@
     "star": 0,
     "characterId": "2000111"
   },
-  "COSTUME_102": {
-    "kind": "costume",
-    "name": {
-      "en": "",
-      "jp": "",
-      "kr": "",
-      "zh": ""
-    },
-    "icon": "TI_Costume_Clothes_2000118_02",
-    "grade": "rare",
-    "type": "costume",
-    "star": 0,
-    "characterId": "2000118"
-  },
   "COSTUME_11": {
     "kind": "costume",
     "name": {
@@ -21617,26 +21603,6 @@
     "type": "costume",
     "star": 0,
     "characterId": "2000119"
-  },
-  "COSTUME_97": {
-    "kind": "costume",
-    "name": {
-      "en": "",
-      "jp": "",
-      "kr": "",
-      "zh": ""
-    },
-    "desc": {
-      "en": "A costume that [Demiurge Luna] can equip.",
-      "jp": "【デミウルゴス・ルナ】のスキンです。\\nスキンは【仲間】→【スキン】で装備できます。",
-      "kr": "[데미우르고스 루나]가 착용할 수 있는 코스튬입니다.",
-      "zh": "【創世之神·露娜】可穿戴的皮肤。"
-    },
-    "icon": "TI_Costume_Clothes_2000120_02",
-    "grade": "rare",
-    "type": "costume",
-    "star": 0,
-    "characterId": "2000120"
   },
   "COSTUME_98": {
     "kind": "costume",

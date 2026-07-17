@@ -9,8 +9,7 @@
  * Prérequis : rclone (winget install Rclone.Rclone).
  */
 import { spawnSync } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { loadEnvLocal } from './env';
 
 export type R2Env = {
   R2_ENDPOINT: string;
@@ -18,18 +17,6 @@ export type R2Env = {
   R2_ACCESS_KEY_ID: string;
   R2_SECRET_ACCESS_KEY: string;
 };
-
-/** Parse minimal `.env.local` (KEY=VALUE) — même approche qu'assets-push. */
-function loadEnvLocal(): Record<string, string> {
-  const out: Record<string, string> = {};
-  const path = resolve('.env.local');
-  if (!existsSync(path)) return out;
-  for (const line of readFileSync(path, 'utf8').split('\n')) {
-    const m = line.match(/^([A-Z0-9_]+)=(.*)$/);
-    if (m) out[m[1]] = m[2].trim();
-  }
-  return out;
-}
 
 /** Identifiants R2 requis, ou lève avec un message explicite. */
 export function r2Env(): R2Env {

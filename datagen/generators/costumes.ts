@@ -65,6 +65,10 @@ export function buildCostumes(): Record<string, CostumeEntry> {
     if (!id) continue;
 
     const { name, icon, grade, source } = costumeCore(r, names);
+    // Costume d'un contenu PAS ENCORE SORTI : nom absent de TextCharacter (et
+    // sprite souvent pas encore livré dans les bundles). Pas d'entrée fantôme
+    // au catalogue — elle revient d'elle-même quand le jeu publie le contenu.
+    if (!hasText(name)) continue;
     const c: CostumeEntry = { name, icon, grade, characterId: r.CharacterID ?? '' };
     const desc = resolveText(descs, r.DescID);
     if (hasText(desc)) c.desc = desc;

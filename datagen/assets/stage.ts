@@ -28,12 +28,14 @@ import {
 import { createHash } from 'node:crypto';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
+import { v2ImagesDir } from '../lib/env';
 import { FACE_ICON_LAYOUT, makeFaceIcon } from './face-icon';
 import type { AssetRequest } from './manifest';
 import { findImage, type ImageIndex } from './source';
 
 export const STAGING_DIR = resolve('.assets-staging');
-const V2_POOL = () => resolve(process.env.V2_IMAGES_DIR ?? '../outerpedia-v2/public/images');
+// Racine machine-dépendante → V2_DIR/.env.local (cf. datagen/lib/env).
+const V2_POOL = () => v2ImagesDir();
 /**
  * Pool éditorial de la V3 — assets qui n'existent PAS dans le jeu et que le
  * wiki produit lui-même (icône corrigée d'un effet que les tables affublent du

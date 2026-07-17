@@ -6,6 +6,28 @@
 
 ## 2026-07-17
 
+- **Alerte « 93 assets guides refaits depuis le pool V2 » levée** : vérifié —
+  `../outerpedia` à jour avec origin, 0 clé nouvelle, 92/93 fichiers identiques
+  octet à octet à l'état R2 (`pushed.json`) ; l'unique diff
+  (`CT_Detail_Slot_Lock_Open.webp`) est la face dérivée localement des cartes
+  promotion, ré-encodée à l'identique visuel — poussée légitime au prochain
+  commit.
+- **Collecte d'assets soldée à 0 manquant** (après V2_DIR) : les 2 icônes
+  `IG_Buff_Action_Gauge_Up/Down` (overrides curés dont le sprite source a
+  disparu des bundles du jeu) copiées du staging vers `data/editorial/ui/effect/`
+  (pool V3 versionné — même pattern que Reversal_Buff) ; le générateur
+  costumes filtre désormais les entrées sans nom résolu (contenu pas encore
+  sorti : COSTUME_97/102 des persos 2000118/2000120 retirés d'items.json, ils
+  reviendront à la sortie du contenu).
+- **Config fixe/portable `V2_DIR`** : le chemin `../outerpedia-v2` en dur
+  cassait le pool V2 et le regen coupons/banner sur les machines où le repo
+  s'appelle `../outerpedia`. Nouveau `datagen/lib/env.ts` (parse `.env.local`
+  mémoïsé — repris par r2.ts — + `v2Dir()`/`v2ImagesDir()`), consommé par
+  `promo-banner-store` (Next lit V2_DIR nativement), `stage.ts` et
+  `manifest.ts` (la double définition du pool est morte). Documenté dans
+  `.env.example`, `V2_DIR=../outerpedia` posé dans le `.env.local` local.
+  Résultat mesuré : `assets:collect` passe de 55 à 4 manquants (editorial
+  14/14, ui 185/185, guides ✓).
 - **Bug `_NAME`→`_DESC` (items.ts + enhance.ts)** : quand `NameID` ne suivait
   pas la convention, le `replace` ne changeait rien et la « description » émise
   était le nom — 97 entrées de `items.json` contaminées. Garde

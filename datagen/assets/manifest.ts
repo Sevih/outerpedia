@@ -26,6 +26,7 @@ import { buildItemCatalog } from '../generators/item-catalog';
 import { loadCuratedEffects } from '../curated/effects';
 import { resolveClass } from '../lib/class';
 import { slugEnum } from '../lib/enums';
+import { v2ImagesDir } from '../lib/env';
 import { loadTable } from '../lib/tables';
 import { loadTextIndex } from '../lib/text';
 
@@ -652,7 +653,7 @@ export function buildAssetManifest(): AssetRequest[] {
   // sert que pour ce qu'un pool figé ne PEUT pas avoir : les bannières du
   // contenu sorti après la V2.
   const guides = listGuides();
-  const v2Pool = resolve(process.env.V2_IMAGES_DIR ?? '../outerpedia-v2/public/images');
+  const v2Pool = v2ImagesDir();
   for (const icon of new Set(Object.values(GUIDE_CATEGORIES).map((c) => c.icon)))
     push({
       kind: 'editorial',
