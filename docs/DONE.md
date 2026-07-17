@@ -32,6 +32,21 @@
   verbatim `{I-I/Hero Piece}` (l'item curé existe désormais). Reste ouvert :
   pattern « titres en page V2 » (H1 meta seul en V3) et mileage du Custom Rate
   Up (Elemental vs Custom) — décisions Sevih.
+- **Layout terminé : header/nav/footer, FIDÈLES à la V2 sur tokens V3**
+  (PRIO Sevih ; « pas le même du tout » corrigé après premier jet minimal) —
+  contrat `src/lib/nav.ts` (5 items V2 + EXTRA_PAGES pour la future
+  recherche, sprites de jeu déclarés). Header = structure V2 complète :
+  logo + badges v/GV, nav à icônes (libellé court < xl, long ≥ xl),
+  DROPDOWN Guides (catégories de `GUIDE_CATEGORIES`), collapse au scroll
+  (hystérésis V2), drawer mobile (icônes, chevrons, sous-menu guides,
+  langues) ; l'emplacement recherche est réservé. Footer = structure V2 :
+  marque + tagline + chips sociaux + CHIPS DE LANGUES, 4 colonnes
+  repliables en mobile (`<details>`, zéro JS), bandeau officiel Outerplane,
+  disclaimer, barre légale avec point de version. `game-version.ts` SORT du
+  code mort (consommé header + footer). Les 5 sprites de nav ajoutés au
+  manifest et COLLECTÉS (ui 185→190 ✓ — push R2 au prochain commit).
+  Cibles 404 assumées — inventaire complet en section TODO
+  « Pages manquantes ».
 - **Texte en dur des 5 langues éradiqué** (2 commits — le site est servi en
   EN par défaut, le FR en dur fuyait chez tout le monde) : home
   (`characters.filters.count`), meta description fiche perso

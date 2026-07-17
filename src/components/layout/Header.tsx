@@ -1,51 +1,42 @@
-﻿import Link from 'next/link';
-import type { Route } from 'next';
 import { getRequestLang } from '@/lib/i18n/server';
 import { getT } from '@/i18n';
+import { lRec } from '@/lib/i18n/localize';
 import { localePath } from '@/lib/navigation';
-import { LanguageSwitcher } from './LanguageSwitcher';
+import { NAV_ITEMS } from '@/lib/nav';
+import { img } from '@/lib/images';
+import { getGameVersion } from '@/lib/data/game-version';
+import { GUIDE_CATEGORIES, GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
+import { HeaderClient, type HeaderNavItem } from './HeaderClient';
 
-/** En-tête global (portage minimal : logo + nav + langue). */
+/**
+ * En-tête global — wrapper serveur : localise le contrat `lib/nav.ts`
+ * (cibles 404 assumées le temps du portage), résout les icônes R2 et les
+ * catégories de guides (sous-menu), puis délègue l'interactif à HeaderClient.
+ */
 export async function Header() {
   const lang = getRequestLang();
   const t = await getT(lang);
 
-  const nav: Array<{ href: Route; label: string }> = [
-    { href: localePath(lang, '/characters'), label: t('nav.characters') },
-    { href: localePath(lang, '/equipment'), label: t('nav.equipment') },
-    { href: localePath(lang, '/guides'), label: t('nav.guides') },
-  ];
+  const guideChildren = GUIDE_CATEGORY_SLUGS.map((slug) => ({
+    href: localePath(lang, `/guides/${slug}`) as string,
+    label: lRec(GUIDE_CATEGORIES[slug].label, lang) || GUIDE_CATEGORIES[slug].label.en,
+  }));
+
+  const nav: HeaderNavItem[] = NAV_ITEMS.map((item) => ({
+    href: localePath(lang, item.href) as string,
+    label: t(item.key),
+    short: t(item.shortKey),
+    iconSrc: img.navIcon(item.icon),
+    children: item.href === '/guides' ? guideChildren : undefined,
+  }));
 
   return (
-    <header className="border-line-subtle bg-surface-raised sticky top-0 z-40 border-b">
-      <div className="mx-auto flex max-w-7xl items-center gap-6 px-4 py-3">
-        <Link href={localePath(lang, '/')} className="text-content-strong font-semibold">
-          Outerpedia
-        </Link>
-        <nav className="flex items-center gap-4 text-sm">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-content-muted hover:text-content-strong"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="ml-auto flex items-center gap-4">
-          {/* Lien admin : DEV UNIQUEMENT (les pages admin n'existent pas en prod). */}
-          {process.env.NODE_ENV === 'development' && (
-            <Link
-              href={'/admin' as Route}
-              className="bg-warn/15 text-warn rounded px-2 py-0.5 text-xs font-medium"
-            >
-              Admin
-            </Link>
-          )}
-          <LanguageSwitcher current={lang} />
-        </div>
-      </div>
-    </header>
+    <HeaderClient
+      lang={lang}
+      nav={nav}
+      appVersion={process.env.NEXT_PUBLIC_APP_VERSION || 'dev'}
+      gameVersion={getGameVersion()}
+      strings={{ toggleMenu: t('aria.toggle_menu') }}
+    />
   );
 }

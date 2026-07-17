@@ -507,7 +507,19 @@ export function buildAssetManifest(): AssetRequest[] {
       'skills',
       ['CM_Skill_Icon_Burst', 'IG_Button_Burst_01', 'IG_Button_Burst_02', 'IG_Button_Burst_03'],
     ],
-    ['nav', ['IG_Chain_Arrow']],
+    [
+      // Chaîne (fiche perso) + les 5 icônes du menu principal (contrat
+      // src/lib/nav.ts — mêmes sprites que la V2).
+      'nav',
+      [
+        'IG_Chain_Arrow',
+        'CM_EtcMenu_Colleague',
+        'CM_EtcMenu_Inventory',
+        'CM_Mission_Icon_Weekly',
+        'CM_EtcMenu_Setting',
+        'CM_EtcMenu_Character_Book',
+      ],
+    ],
     [
       // Sprites de la carte Monad Gate : 11 icônes de nœud + le trait de liaison
       // et l'anneau de nœud (rendu des cartes de route, `img.monad`).

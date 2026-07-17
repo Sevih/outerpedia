@@ -11,8 +11,6 @@
 
 ## 🎯 PRIO (décision Sevih)
 
-- [ ] Terminer le layout et l'architecture : le menu le header le footer les item
-      de nav (quitte a pointer vers des 404 le temps de tout brancher) => en profiter pour inventorier et poser en todo toutes les pages/elements manquants
 - [ ] **Retirer les comparaisons V2 des extracteurs** — l'oracle a joué son rôle.
       Périmètre : `datagen/extractor/v2-control.ts` + contrôle de cohérence,
       `equipmentV2Control`/`EquipmentReport` (Extractor gear), l'Extractor Effect
@@ -33,6 +31,42 @@
       `CharactersSidebar` vs `ExtractorSidebar` sont quasi identiques (fusionner
       sur ExtractorSidebar, 9 usages), `CharacterSwitch`/`MonsterSwitch`
       identiques au chemin près, `CharacterPicker`/`ItemPicker` à factoriser.
+
+## 📄 Pages manquantes (inventaire layout du 2026-07-17)
+
+> Cibles du header/footer posés le 17/07 (contrat `src/lib/nav.ts`) — 404
+> ASSUMÉES le temps du portage. Chaque page arrive avec ses clés de locale
+> DÉJÀ pré-seedées ×5 (cf. item « pré-seed » de la section Docs).
+
+- [ ] **`/tierlist`** — clés `tierlist.*` ; consommera les helpers seo.ts
+      gardés (`getMonthYear` → `serverNow`, `buildVideoObjectJsonLd`,
+      `buildFaqJsonLd`).
+- [ ] **`/tools`** (landing par catégories rankings/equipment/simulators/
+      info/media) + les **18 outils V2** : most-used-units, tierlistpve,
+      tierlistpvp, ee-priority-base, ee-priority-plus10,
+      gear-usage-statistics, gear-usage-finder, damage-calculator,
+      pull-simulator, progress-tracker, team-planner, tier-list-maker,
+      patch-history, coupon-codes, event, wallpapers, 4-comics, ost —
+      namespaces `tools.*`/`progress.*`. Le footer met les 6 premiers en
+      avant (`/tools#slug`).
+- [ ] **`/coupons`** — clés `coupons.*` ; lié à l'EXCEPTION PRIO (le regen
+      coupons V2 reste la source jusqu'à la bascule prod).
+- [ ] **`/contributors`** — dépend du portage `contributors.json` (item 📦).
+- [ ] **`/changelog`** — clés `changelog.*` ; lié au resync CHANGELOG.md
+      (item 📚).
+- [ ] **`/legal`** — mentions légales (lien de la barre basse du footer).
+- [ ] **`/feed`** — flux RSS (route handler ; lié par le footer).
+- [ ] **Recherche globale** (SearchModal + trigger + Ctrl+K du header V2) —
+      clés `search.*` ; lira `NAV_ITEMS`/`EXTRA_PAGES` de `src/lib/nav.ts` ;
+      l'emplacement dans HeaderClient est réservé (commentaire).
+- [ ] **Home riche** — sections bannières actives / codes promo / guides
+      débutants (clés `home.*`, structure V2).
+- [ ] **Drapeaux de langues** — la V2 affiche des drapeaux SVG
+      (`ui/flags/{gb,jp,kr,cn,fr}.svg`) dans ses chips de langues ; les chips
+      V3 (footer) sont en texte en attendant leur pool (editorial ?).
+- [ ] **Icônes de marque** (Discord/GitHub/Reddit/YouTube/X/RSS) — la V2 use
+      react-icons ; V3 sans dépendance icône : chips texte en attendant une
+      décision (react-icons ? sprites ? SVG inline maison ?).
 
 ## 🐛 Bugs — sévérité haute (audit 17/07, tous vérifiés)
 
@@ -136,11 +170,12 @@
 
 ### Code mort (vérifié par grep repo entier, audit 17/07)
 
-- [ ] Exports src sans consommateur : module `game-version.ts` entier,
-      `elementName`/`className`
+- [ ] Exports src sans consommateur (`game-version.ts` SORTI de la liste le
+      17/07 : consommé par le Footer riche) : `elementName`/`className`
       (game-tokens.ts:44), `getMonthYear`/`buildVideoObjectJsonLd`/
-      `buildFaqJsonLd` (seo.ts — si gardés pour le portage tools/tierlist,
-      passer getMonthYear par `serverNow`), `tagDesc` (tags.ts:48),
+      `buildFaqJsonLd` (seo.ts — GARDÉS : /tierlist et /tools sont
+      inventoriés dans « Pages manquantes » ; passer getMonthYear par
+      `serverNow` au portage), `tagDesc` (tags.ts:48),
       `SuffixLang`/`getLangConfig`/`GameLang`/`GAME_LANGS`/`isGameLang`
       (i18n/config.ts), repli inopérant de `guide-sections.ts:69-72`,
       exports superflus `gearIssueCounts`/`resolveRewardEntry`/
@@ -237,13 +272,14 @@
 - [ ] **`data/editorial/` non documenté nulle part** → CONVENTIONS.md
       « Données » + tableau des zones de datagen/README.
 - [ ] **Locales : documenter le pré-seed** — ~818 des 1098 clés (tools._,
-      progress._, coupons._, tierlist._, home._, changelog._, footer._,
-      search._…) n'ont aucun consommateur : ce sont les pages V2 pas encore
-      portées, en 5 langues (~75 % du poids des fichiers). Soit l'assumer en
-      tête de fichier, soit parquer les namespaces non portés dans un fichier
-      d'attente pour que « clé inutilisée » redevienne un signal. (Cohérence
-      structurelle inter-langues : parfaite — 1098 clés identiques ×5, zéro
-      manquante.)
+      progress._, coupons._, tierlist._, home._, changelog._, search._…)
+      n'ont aucun consommateur : ce sont les pages V2 pas encore portées,
+      en 5 langues (~75 % du poids des fichiers) — chacune est maintenant
+      TRACÉE dans « Pages manquantes » (le layout du 17/07 consomme déjà
+      footer._ et nav._). Soit l'assumer en tête de fichier, soit parquer
+      les namespaces non portés dans un fichier d'attente pour que « clé
+      inutilisée » redevienne un signal. (Cohérence structurelle
+      inter-langues : parfaite — clés identiques ×5, zéro manquante.)
 - [ ] Doc ↔ code : en-tête de `geas.ts:14` (dit l'inverse du code sur
       `positive`), commentaires périmés de `face-icon.ts:5-7,37` (« à
       re-porter » — c'est automatisé depuis le 14/07), doc de `slugTeam`
