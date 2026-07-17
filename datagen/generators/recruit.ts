@@ -21,13 +21,18 @@
  *                 (SEASONAL/OUTER_FES + leurs SELECTION) : release/rerun des
  *                 limited se DÉRIVENT (la V2 maintenait data/banner.json à la
  *                 main). Le tri éditorial (qui est « limited ») reste à la vue,
- *                 via les tags des persos.
+ *                 via les tags des persos. Les tables ne sont PAS un historique
+ *                 fiable : VAGames purge les vieilles lignes →
+ *                 data/curated/recruit-banners.json archive les bannières
+ *                 disparues, et toute disparition non archivée/assumée casse
+ *                 la génération (cf. mergeArchivedBanners).
  *
  * Un PickupID de bannière inconnu de CharacterTemplet casse la génération.
  */
 import type { LangDict } from '../lib/lang';
 import { readDump } from '../lib/dump';
 import { isMain } from '../lib/is-main';
+import { readCuratedJson } from '../lib/json';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { loadTable, num, type Row } from '../lib/tables';
 
@@ -104,6 +109,62 @@ const BANNER_KIND: Record<string, RecruitBanner['kind']> = {
 
 /** `2026-07-14  00:00:00` → `2026-07-14`. */
 const isoDate = (raw: string): string => (raw ?? '').trim().slice(0, 10);
+
+/** `data/curated/recruit-banners.json` — mémoire des purges de tables. */
+interface RecruitBannersCurated {
+  /** Bannières disparues des tables, réinjectées dans `banners`. */
+  banners?: RecruitBanner[];
+  /** Disparitions assumées SANS réinjection (ex. date corrigée en table). */
+  dropped?: Array<Pick<RecruitBanner, 'characterId' | 'start'>>;
+}
+
+const ARCHIVE_PATH = 'data/curated/recruit-banners.json';
+const bannerKey = (b: { characterId: string; start: string }): string =>
+  `${b.characterId} @ ${b.start}`;
+
+/**
+ * Réinjecte l'archive curée dans `banners` (in place), puis vérifie qu'aucune
+ * bannière du `recruit.json` déjà promu n'a disparu du résultat : les tables
+ * du jeu sont périodiquement purgées, et une purge non archivée serait une
+ * perte d'historique silencieuse (release/rerun des limited). Résolution au
+ * choix du réviseur : archiver l'entrée dans `banners` de l'archive, ou
+ * l'assumer dans `dropped` (fausse donnée corrigée côté jeu).
+ */
+function mergeArchivedBanners(banners: RecruitBanner[], knownChars: Set<string>): void {
+  const archive = readCuratedJson<RecruitBannersCurated>(ARCHIVE_PATH);
+  const validKinds = new Set<string>(Object.values(BANNER_KIND));
+  const fromTables = new Set(banners.map(bannerKey));
+  for (const b of archive?.banners ?? []) {
+    if (!knownChars.has(b.characterId)) {
+      throw new Error(`recruit : archive — characterId inconnu « ${b.characterId} »`);
+    }
+    if (!validKinds.has(b.kind)) {
+      throw new Error(`recruit : archive — kind inconnu « ${b.kind} » (${bannerKey(b)})`);
+    }
+    if (fromTables.has(bannerKey(b))) {
+      throw new Error(
+        `recruit : archive — ${bannerKey(b)} est revenu dans les tables, retirer l'entrée`,
+      );
+    }
+    banners.push({ characterId: b.characterId, kind: b.kind, start: b.start, end: b.end });
+  }
+
+  // Garde anti-purge. Lecture volontairement optionnelle (premier build : pas
+  // encore de generated) — readCuratedJson rend exactement ce contrat.
+  const previous = readCuratedJson<RecruitData>('data/generated/recruit.json');
+  const dropped = new Set((archive?.dropped ?? []).map(bannerKey));
+  const current = new Set(banners.map(bannerKey));
+  const lost = (previous?.banners ?? []).filter(
+    (b) => !current.has(bannerKey(b)) && !dropped.has(bannerKey(b)),
+  );
+  if (lost.length) {
+    throw new Error(
+      `recruit : bannières purgées des tables — archiver (ou assumer via dropped) dans ${ARCHIVE_PATH} : ${lost
+        .map(bannerKey)
+        .join(', ')}`,
+    );
+  }
+}
 
 function buildCustomPool(groups: Row[], gradeRecipes: Row[]): string[] {
   const customGroups = new Set(groups.filter((g) => g.RecruitType === 'CUSTOM').map((g) => g.ID));
@@ -196,6 +257,7 @@ export function buildRecruit(): RecruitData {
     }
     banners.push({ characterId, kind, start: isoDate(g.StartDate), end: isoDate(g.EndDate) });
   }
+  mergeArchivedBanners(banners, knownChars);
   banners.sort(
     (a, b) => a.start.localeCompare(b.start) || a.characterId.localeCompare(b.characterId),
   );

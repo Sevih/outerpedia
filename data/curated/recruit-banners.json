@@ -1,0 +1,7 @@
+{
+  "_doc": "Apparitions bannière PURGÉES de RecruitGroupTemplet (VAGames nettoie les vieilles lignes — la release 2023 de Regina avait disparu). `banners` : archive fusionnée dans le champ banners de recruit.json ; y déplacer toute bannière qui disparaît des tables (le générateur casse sinon). `dropped` : disparitions ASSUMÉES sans archivage (ex. date corrigée dans les tables : l'ancienne entrée était fausse), clés characterId+start.",
+  "banners": [
+    { "characterId": "2000085", "kind": "seasonal", "start": "2023-07-15", "end": "2023-08-05" }
+  ],
+  "dropped": []
+}

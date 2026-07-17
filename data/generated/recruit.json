@@ -310,6 +310,12 @@
   ],
   "banners": [
     {
+      "characterId": "2000085",
+      "kind": "seasonal",
+      "start": "2023-07-15",
+      "end": "2023-08-05"
+    },
+    {
       "characterId": "2000090",
       "kind": "fes",
       "start": "2024-07-30",
