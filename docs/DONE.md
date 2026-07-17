@@ -11,6 +11,11 @@
   starting now ») en exception → émulateur déclaré absent à tort au premier
   lancement, pipeline data sauté. EAP local `Continue` (portée fonction) ;
   bug et remède reproduits sur PS 5.1 réel.
+- **`extract-face-layout.py` : le re-scan complet FUSIONNE** (`cache.update`)
+  au lieu d'écraser — un prefab retiré du bundle garde son entrée committée
+  (rétention, comme le reste du pipeline ; ce mode est joué par `refresh.ts`).
+  Au passage : le nom de fichier faux du docstring d'usage corrigé (item
+  Doc ↔ code de l'audit).
 - **`content-schedule` : garde sur `_unknown_0`** — le main boss guild raid
   vit dans une colonne sans en-tête que seul le parseur nomme (absente du
   schéma déclaré, 17/36 lignes la portent) : si plus aucune ligne ne la porte

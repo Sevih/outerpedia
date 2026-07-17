@@ -182,17 +182,22 @@ def main() -> None:
     """CLI entry point.
 
     Usage:
-        python extract_face_icons.py                  # rebuild the entire cache
-        python extract_face_icons.py 2000001 2000099  # refresh just these ids
+        python extract-face-layout.py                  # re-scan complet (fusionné)
+        python extract-face-layout.py 2000001 2000099  # refresh just these ids
     """
     args = sys.argv[1:]
     if args:
         cache = ensure_chars(args)
         print(f'Refreshed {len(args)} char(s); cache holds {len(cache)} total.')
     else:
-        layout = extract_layout()
-        save_cached(layout)
-        print(f'Wrote {len(layout)} characters to {OUT.relative_to(ROOT)}')
+        # FUSION, jamais écrasement : un prefab retiré du bundle courant garde
+        # son entrée committée — rétention, comme le reste du pipeline (ce mode
+        # est joué par refresh.ts, un écrasement perdait ces entrées).
+        cache = load_cached()
+        fresh = extract_layout()
+        cache.update(fresh)
+        save_cached(cache)
+        print(f'Merged {len(fresh)} fresh char(s); cache holds {len(cache)} total.')
 
 
 if __name__ == '__main__':

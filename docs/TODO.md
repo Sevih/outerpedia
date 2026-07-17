@@ -100,10 +100,6 @@
       une normalisation côté jeu viderait le roster en silence. Généraliser
       `bool()` de `lib/tables` à tous les booléens de table (3 idiomes
       coexistent : `bool()`, `boolCol()`, comparaisons exactes).
-- [ ] `datagen/assets/extract-face-layout.py:193-195` : le mode sans argument
-      (joué par `refresh.ts`) écrase le cache au lieu de fusionner — un prefab
-      retiré du bundle perd son entrée committée (perte de rétention, à rebours
-      du reste du pipeline). `cache.update(fresh)`.
 
 ## 🌍 i18n / SEO / a11y (audit 17/07)
 
@@ -268,8 +264,7 @@
       manquante.)
 - [ ] Doc ↔ code : en-tête de `geas.ts:14` (dit l'inverse du code sur
       `positive`), commentaires périmés de `face-icon.ts:5-7,37` (« à
-      re-porter » — c'est automatisé depuis le 14/07), docstring de
-      `extract-face-layout.py:184` (mauvais nom de fichier), doc de `slugTeam`
+      re-porter » — c'est automatisé depuis le 14/07), doc de `slugTeam`
       (skills.ts:113 — dit « undefined si CSV », le code prend le 1er token),
       exception `stageLabel` non documentée (unlock-content.ts:112 contredit
       son propre en-tête « jamais parser l'ID »).
