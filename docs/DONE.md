@@ -6,6 +6,16 @@
 
 ## 2026-07-18
 
+- **`useMediaQuery` mémoïsé** (perf UI publique, « en passant » de l'item
+  ResponsiveCharacterCard). `subscribe` et `getSnapshot` étaient recréés à chaque
+  rendu → `useSyncExternalStore` se désabonnait/réabonnait à `window.matchMedia`
+  à CHAQUE rendu ; multiplié par les ~200 cartes de `/characters` (2 requêtes
+  chacune), du churn pur. Passés en `useCallback([query])`. Zéro changement de
+  comportement. Bénéficie aussi à TeamSlotCarousel. Typecheck OK. RESTE (décision
+  Sevih) : le layout-shift sm→lg à l'hydratation de la carte elle-même — fix
+  structurel non trivial (les 3 tailles ont des DOM différents + FitText mesure
+  en JS), à trancher avec lui.
+
 - **Caches périmés (partie src) STAMPÉS sur le mtime du curé** (bug moyen —
   process admin long-running). `gear-reco.ts` (`famByMember`) et `rewards.ts`
   (`gearIndex`) indexaient membre→famille d'équipement dans un cache module

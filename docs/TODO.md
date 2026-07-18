@@ -79,8 +79,13 @@
       l'hydratation sur `/characters` (page la plus visitée), images `priority`
       peintes en 66px d'abord, et 2 abonnements matchMedia × ~200 cartes.
       Passer en CSS responsive (variantes masquées) ou remonter le breakpoint.
-      En passant : `src/hooks/useMediaQuery.ts:8-12` — mémoïser `subscribe`
-      (`useCallback`), sinon désabo/réabo à chaque rendu.
+      ⚠️ EN ATTENTE décision Sevih : les 3 tailles diffèrent STRUCTURELLEMENT
+      (sm = nom sous la carte, md/lg = nom en surimpression) + FitText mesure en
+      JS → une approche « variantes masquées » triple le DOM et casse FitText sur
+      le caché. Choix à trancher (CSS-variants / breakpoint SSR par défaut / rester).
+      ✅ FAIT (18/07) : `useMediaQuery` mémoïsé (`subscribe`/`getSnapshot` en
+      `useCallback` sur `query`) — fin du désabo/réabo par rendu, bénéficie aussi
+      à TeamSlotCarousel. → DONE.
 
 ### Datagen — divers
 
