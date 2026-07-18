@@ -93,11 +93,16 @@
 
 ## 🧪 Tests à écrire
 
-- [ ] **`src/lib/skill-view.ts` en priorité 1** (741 lignes, zéro test) : le
-      module aux règles les plus fines du repo (réattribution caller/curation,
-      fusion enrage, variantes techniques, immunités), chaque règle justifiée
-      par un cas réel en commentaire (Prototype EX-78, Irregular Queen,
-      rage_finish orphelins) mais aucune verrouillée.
+- [~] **`src/lib/skill-view.ts`** (18/07 → DONE partiel) : 18 tests posés
+  (`skill-view.test.ts`) verrouillant les RÈGLES FINES en synthétique + ancre
+  sur le glossaire committé — exclusions de câblage (choice, NON_CHIP_BUFFS
+  Ais/Astei/Ember, BT_STAT label-seul, SYS_BUFF_DMG, reverse-heal sur soi,
+  tooltip mort), upgrades de transcendance (caller vs palier autonome vs
+  niveau 1), `monsterChipMeta` (WG→null), `buildBurstViews`, `dedupSkills`,
+  `mainSkills`, + smoke sur 400 skills réels. RESTE à approfondir : les VUES
+  MONSTRE (`monsterSkillViews` réattribution caller/enrage — Prototype EX-78,
+  Irregular Queen), `immunityChipEffects`, `buildChainView`, la curation de
+  `cardEffects`.
 - [ ] Ensuite : `stats.ts` (STAT_ABBR/statOptionView), `guide-sections.ts`,
       `tower-restrictions.ts`, `game-tokens.ts` (frontières latin/CJK),
       `seo.ts` (`buildUrl` dev/prod/sous-domaines, hreflang), `i18n/index.ts`

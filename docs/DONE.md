@@ -6,6 +6,22 @@
 
 ## 2026-07-18
 
+- **Tests `skill-view.ts` (prio 1 du TODO)** — le module aux règles les plus
+  fines du repo (741 lignes) n'avait AUCUN test. 18 tests posés
+  (`skill-view.test.ts`), stratégie endossée par le TODO : règles DÉTERMINISTES
+  en synthétique + ancrage sur le glossaire committé (une clé tooltip réelle
+  calculée à l'exécution, pas de `.gamedata` requis). Couvert : les exclusions de
+  câblage de `toChipEffect`/`toClientEffects` (enfant `choice`, `NON_CHIP_BUFFS`
+  Ais/Astei/Ember, `BT_STAT` à label seul, `SYS_BUFF_DMG`, reverse-heal ciblé
+  soi/allié = coût HP, tooltip irrésoluble) et le cas positif (tooltip du
+  glossaire → chip) ; `isTranscendUpgrade` via ses 3 branches (palier autonome
+  cantonné / rattaché par `caller` gardé / accordé au niveau 1 gardé) ;
+  `monsterChipMeta` (WG→null, résolution nom+nature) ; `buildBurstViews`
+  (numérotation 1..3, coût AP du burstable, variante la plus complète) ;
+  `dedupSkills`, `mainSkills` ; smoke sur 400 skills réels (aucun throw,
+  `buildStatusMap` rend des statuts). 353 → 371 tests. RESTE (TODO) : vues
+  monstre (réattribution caller/enrage), immunités, chaîne, curation cardEffects.
+
 - **Props / branches mortes retirées** (dette code, chaque prop RE-VÉRIFIÉE contre
   tous ses call sites). `CharacterCard` : 6 props d'affichage jamais passées
   (showName/showIcons/showElement/showClass/showStars/showBadge) + `children` +
