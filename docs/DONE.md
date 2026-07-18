@@ -6,6 +6,27 @@
 
 ## 2026-07-18
 
+- **Éditeur EE — suivi (menu, colonne Curé, descriptions, portrait, passifs)**
+  (raffinements de l'éditeur EE livré le même jour). (1) Menu Editor : retrait
+  des entrées « à venir » armes/amulettes/armures/talismans + pages placeholder
+  (seul l'EE a une curation à éditer). (2) Liste `editor/ee` : colonne « Curé »
+  (✓/—, TOUTE curation posée — rang ou chips). (3) Fiche `editor/ee/[id]` :
+  descriptions des effets (légende chips + ajouts, `EeChipMeta`/`EffectOption`
+  gagnent `desc`) et section « Passifs (référence) » (paliers résolus déblocage
+  Lv.1 + Lv.10 via `eeModelForView().passives`, textes remplis) — on ne voyait
+  pas les passifs de stats sans chip. (4) Portrait EE (`img.ee`) au lieu de la
+  face du perso sur les deux pages. Lint + 353 tests OK.
+
+- **Exports src sans consommateur RETIRÉS** (dette code / code mort). RETIRÉS :
+  `elementName`/`className` (game-tokens), `tagDesc` (tags), `SuffixLang`/
+  `getLangConfig`/`GameLang`/`GAME_LANGS`/`isGameLang` (i18n/config — copie site
+  self-référentielle, la vraie vit en datagen), repli inopérant de
+  `guide-sections.ts:69-72` (`resolveEffectKey` teste déjà les 2 côtés).
+  DÉ-EXPORTÉS (usage interne conservé) : `resolveRewardEntry`, `EffectTooltipBody`,
+  `ELEMENT_HEX`. GARDÉS volontairement : `getMonthYear`/`buildVideoObjectJsonLd`/
+  `buildFaqJsonLd` (seo.ts — /tierlist et /tools à venir ; `getMonthYear`→
+  `serverNow` au portage).
+
 - **Tests `skill-view.ts` — APPROFONDISSEMENT (vues monstre / immunités /
   chaîne)** (suite du prio 1). +12 tests (18 → 30). VUES MONSTRE
   (`monsterSkillViews`, le cœur commenté « cas payé ») : duplication d'un effet

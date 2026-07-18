@@ -4,7 +4,7 @@
 > (décision Sevih 2026-07-17). Réécrit le **2026-07-17** après audit complet du
 > code (7 passes par zone, chaque finding vérifié, sévérités contre-vérifiées),
 > **nettoyé le 18/07** (le « fait » de la journée migré dans DONE.md).
-> État de référence : **18/07**, **351 tests verts**, typecheck et lint OK,
+> État de référence : **18/07**, **353 tests verts**, typecheck et lint OK,
 > v0.1.23.
 > Re-vérifier chaque item contre le code au moment de le traiter.
 
@@ -73,16 +73,6 @@
       sur le mtime du curé équipement, `skill-view` `curatedKeyCache` mutualisé →
       DONE ; `monster-store.ts` traité le 18/07 — cf. DONE.)
 
-### UI publique
-
-- [x] `ResponsiveCharacterCard` layout-shift (18/07 → DONE). Décision Sevih :
-      DÉFAUT SSR = `md` (au lieu de `sm`) — `/characters` est surtout desktop, le
-      shift passe de sm→lg (66→120px) à md→lg au pire, mobile se recale md→sm.
-      `useMediaQuery(query, serverDefault=false)` gagne un `getServerSnapshot`
-      paramétrable ; la carte passe `true` pour le breakpoint md. En passant :
-      `useMediaQuery` mémoïsé (`subscribe`/`getSnapshot` en `useCallback`) — fin
-      du désabo/réabo par rendu, bénéficie aussi à TeamSlotCarousel.
-
 ### Datagen — divers
 
 - [ ] `datagen/extractor/specs/character.ts:492` : `ShowMainPage === 'true'`
@@ -93,19 +83,9 @@
 
 ## 🧪 Tests à écrire
 
-- [x] **`src/lib/skill-view.ts`** (18/07 → DONE). 30 tests (`skill-view.test.ts`),
-      règles déterministes en synthétique + ancrage sur le glossaire committé (sans
-      `.gamedata`). Couvert : exclusions de câblage (choice, NON_CHIP_BUFFS, BT_STAT
-      label-seul, SYS_BUFF_DMG, reverse-heal sur soi, tooltip mort), transcendance
-      (caller/palier autonome/niveau 1), `monsterChipMeta`, `buildBurstViews`,
-      `dedupSkills`, `mainSkills` ; VUES MONSTRE (`monsterSkillViews` : duplication
-      caller + caller-actif ignoré, réattribution par desc, fusion rage_finish→enter,
-      finish orphelin supprimé, variante technique masquée, WG jamais chip, chipOwner
-      curé — les cas Prototype EX-78 / Irregular Queen) ; `immunityChipEffects`
-      (tooltips/types/stats + repli numéroté→base + réfs mortes) ; `buildChainView`
-      (null sans chain_passive, répartition strike→chaîne / backup→duo) ; smoke sur
-      400 skills réels. RESTE éventuel (non bloquant) : `levelTooltipEffects`
-      conditions de desc, `cardEffects` héritage burst.
+- [ ] `skill-view.ts` : compléments non bloquants (le gros est FAIT le 18/07 →
+      DONE, 30 tests) — `levelTooltipEffects` conditions de desc, `cardEffects`
+      héritage burst + curation perso/EE.
 - [ ] Ensuite : `stats.ts` (STAT_ABBR/statOptionView), `guide-sections.ts`,
       `tower-restrictions.ts`, `game-tokens.ts` (frontières latin/CJK),
       `seo.ts` (`buildUrl` dev/prod/sous-domaines, hreflang), `i18n/index.ts`
@@ -121,15 +101,6 @@
 
 ### Code mort (vérifié par grep repo entier, audit 17/07)
 
-- [x] Exports src sans consommateur (18/07 → DONE). RETIRÉS : `elementName`/
-      `className` (game-tokens), `tagDesc` (tags), `SuffixLang`/`getLangConfig`/
-      `GameLang`/`GAME_LANGS`/`isGameLang` (i18n/config — copie site
-      self-référentielle, la vraie vit en datagen), repli inopérant de
-      `guide-sections.ts:69-72` (`resolveEffectKey` teste déjà les 2 côtés).
-      DÉ-EXPORTÉS : `resolveRewardEntry`, `EffectTooltipBody`, `ELEMENT_HEX`
-      (usage interne). `gearIssueCounts` déjà absent. GARDÉS volontairement :
-      `getMonthYear`/`buildVideoObjectJsonLd`/`buildFaqJsonLd` (seo.ts —
-      /tierlist et /tools à venir ; `getMonthYear`→`serverNow` au portage).
 - [ ] Datagen : `hasFaceIconLayout` (face-icon.ts:38), `r2Push` (lib/r2.ts:89 —
       doublonne assets-push.mjs en plus), `getMaxLevel`/`resolvePlaceholders`
       (buff.ts, testés mais jamais appelés en prod), export `isPermilleRow`,
