@@ -55,6 +55,8 @@ export const img = {
   chainArrow: () => `${BASE}/images/ui/nav/IG_Chain_Arrow.webp`,
   /** Icône de navigation éditoriale (pve/pvp — cibles des guides de reviews). */
   navIcon: (name: string) => `${BASE}/images/ui/nav/${name}.webp`,
+  /** Icône d'onglet de shop (guide shop-purchase-priorities ; clé = shop). */
+  shopIcon: (key: string) => `${BASE}/images/ui/shop/${key}.webp`,
   /**
    * Drapeau d'une langue (SVG éditorial — les emojis drapeaux ne rendent pas
    * sur Chrome/Windows, même règle que la V2). `code` = LANGUAGES[lang].flag.

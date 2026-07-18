@@ -98,7 +98,12 @@ export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang
     item: (
       <span className="inline-flex items-center gap-1">
         {e.icon ? (
-          <InlineIcon icon={img.item(e.icon)} label={L(e.name)} size={22} underline={false} />
+          <InlineIcon
+            icon={e.iconKind === 'equipment' ? img.equipment(e.icon) : img.item(e.icon)}
+            label={L(e.name)}
+            size={22}
+            underline={false}
+          />
         ) : (
           <span>{L(e.name)}</span>
         )}
@@ -281,28 +286,17 @@ export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang
     throw new Error(`${WHERE} : shop « ${key} » sans panneau`);
   };
 
-  const tabs: TabItem[] = SHOP_TABS.map(({ key, label }) => {
-    const shop = derivedByKey.get(key);
-    return {
-      key,
-      label: (
-        <span className="inline-flex items-center gap-1.5">
-          {shop?.currency.icon && (
-            // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
-            <img
-              src={img.item(shop.currency.icon)}
-              alt=""
-              width={16}
-              height={16}
-              className="inline-block"
-            />
-          )}
-          <span>{L(label)}</span>
-        </span>
-      ),
-      content: panelFor(key),
-    };
-  });
+  const tabs: TabItem[] = SHOP_TABS.map(({ key, label }) => ({
+    key,
+    label: (
+      <span className="inline-flex items-center gap-1.5">
+        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
+        <img src={img.shopIcon(key)} alt="" width={16} height={16} className="inline-block" />
+        <span>{L(label)}</span>
+      </span>
+    ),
+    content: panelFor(key),
+  }));
 
   return (
     <>

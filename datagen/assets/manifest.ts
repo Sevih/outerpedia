@@ -1019,5 +1019,29 @@ export function buildAssetManifest(): AssetRequest[] {
       domain: 'editorial',
     });
 
+  // Icônes d'onglets de shop (guide « Shop Purchase Priorities ») : une par
+  // shop, y compris les non dérivés (supply/rico/event/resource) et les monnaies
+  // sans icône en table (world boss, joint challenge). Sprites éditoriaux V2.
+  for (const shop of [
+    'guild',
+    'supply',
+    'rico',
+    'event',
+    'joint',
+    'friend',
+    'arena',
+    'stars',
+    'worldboss',
+    'al',
+    'survey',
+    'resource',
+  ])
+    push({
+      kind: 'editorial',
+      key: `images/ui/shop/${shop}.webp`,
+      source: `ui/shop_${shop}.webp`,
+      domain: 'editorial',
+    });
+
   return out;
 }

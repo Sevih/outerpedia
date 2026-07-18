@@ -24,9 +24,17 @@
   (72/126 produits ; le reste = items V2 périmés rotationnés out, ou produits
   nouveaux jamais notés — à compléter à l'admin). Shops variables (Event,
   General/Resource) ou texte (Supply, Rico) restent éditoriaux (transplant
-  verbatim, `editorial.ts`). Guide V3 : `SegmentedTabs` 12 onglets (icône monnaie
-  - label), table unifiée dérivé/éditorial sur primitives, textes supply/rico.
-    Icône meta `TI_Web_Event_Coin` (collecte au prochain push d'assets).
+  verbatim, `editorial.ts`). Guide V3 : `SegmentedTabs` 12 onglets, table unifiée
+  dérivé/éditorial sur primitives, textes supply/rico. Icône meta
+  `TI_Web_Event_Coin` (collecte au prochain push d'assets).
+  - _Retours icônes Sevih_ : (1) les 37 items sans icône résolus — équipement
+    (arena/al) via le domaine gear (`buildEquipment`, namespace
+    `images/equipment`, d'où `iconKind` sur chaque entrée) ; tickets PGT_TICKET
+    (Stamina, Arena Ticket) via asset du catalogue ; seul « Title [Tycoon] »
+    reste sans sprite. (2) Onglets : 12 icônes de shop dédiées (`shop_*.webp`
+    V2 → `images/ui/shop/`, manifest + `img.shopIcon`) plutôt que l'icône de
+    monnaie (vide pour world boss / joint challenge, absente pour les shops
+    éditoriaux supply/rico/event/resource).
 - **Éditeur EE — suivi (menu, colonne Curé, descriptions, portrait, passifs)**
   (raffinements de l'éditeur EE livré le même jour). (1) Menu Editor : retrait
   des entrées « à venir » armes/amulettes/armures/talismans + pages placeholder

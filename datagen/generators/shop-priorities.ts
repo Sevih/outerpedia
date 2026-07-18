@@ -30,6 +30,7 @@ import { loadTextIndex, resolveText, hasText } from '../lib/text';
 import { loadTable, num, type Row } from '../lib/tables';
 import { readCuratedJson } from '../lib/json';
 import { buildItemCatalog, COSTUME_PREFIX, type CatalogEntry } from './item-catalog';
+import { buildEquipment } from './equipment';
 
 /** Les 8 shops permanents dérivables : monnaie d'achat → clé de shop + asset monnaie. */
 const SHOPS: { key: string; buyType: string; currencyId: string }[] = [
@@ -58,6 +59,16 @@ const GOODS_ICON_ASSET: Record<string, string> = {
   PGT_CHARACTER_PIECE: 'Hero%20Piece',
 };
 
+/**
+ * PGT_TICKET : le `ProductGoodsID` est un TYPE de ticket (pas un item). Vide =
+ * stamina (la valeur = quantité de stamina), `4` = ticket d'arène. Asset du
+ * catalogue résolu pour l'icône ; type inconnu → pas d'icône (nom seul).
+ */
+const TICKET_ASSET: Record<string, string> = {
+  '': 'TI_Item_Stamina',
+  '4': 'SYS_ASSET_TICKET_PVP',
+};
+
 export type ShopPriority = 'S' | 'A' | 'B' | 'C';
 export type ShopPeriod = 'daily' | 'weekly' | 'monthly' | 'one-time';
 
@@ -71,6 +82,8 @@ export interface ShopEntry {
   name: LangDict;
   /** Icône du gain (vide si non résoluble — rendu nom seul). */
   icon: string;
+  /** Namespace de l'icône : `item` (images/items) ou `equipment` (images/equipment). */
+  iconKind: 'item' | 'equipment';
   /** Quantité obtenue par achat (ProductGoodsValue). */
   gives: number;
   /** Coût unitaire dans la monnaie du shop. */
@@ -154,19 +167,62 @@ function goodsSlug(r: Row): string {
   return `p-${(r.ProductNameID ?? r.ID).toLowerCase()}`;
 }
 
-/** Icône du gain via le catalogue unifié (vide si non résoluble → nom seul). */
-function iconOf(r: Row, catalog: Record<string, CatalogEntry>): string {
+type Icon = { icon: string; iconKind: 'item' | 'equipment' };
+const ITEM_ICON = (icon: string): Icon => ({ icon, iconKind: 'item' });
+
+/**
+ * Icône + namespace du gain. Le `ProductGoodsID` d'un PGT_ITEM peut être un
+ * item du catalogue (materials/goods, `images/items`) OU une pièce d'équipement
+ * (`images/equipment`) — d'où le namespace explicite. Tickets et gains à asset
+ * (gold/ether/pièce) passent par le catalogue. Non résoluble → icône vide.
+ */
+function iconOf(
+  r: Row,
+  catalog: Record<string, CatalogEntry>,
+  gearIcons: Map<string, string>,
+): Icon {
   const type = r.ProductGoodsType ?? '';
   const id = r.ProductGoodsID ?? '';
-  if (type === 'PGT_ITEM') return catalog[id]?.icon ?? '';
-  if (type === 'PGT_COSTUME') return catalog[COSTUME_PREFIX + id]?.icon ?? '';
-  return catalog[GOODS_ICON_ASSET[type] ?? '']?.icon ?? '';
+  if (type === 'PGT_ITEM') {
+    const item = catalog[id]?.icon;
+    if (item) return ITEM_ICON(item);
+    const gear = gearIcons.get(id); // équipement (weapon/armor/accessory/talisman)
+    if (gear) return { icon: gear, iconKind: 'equipment' };
+    return ITEM_ICON('');
+  }
+  if (type === 'PGT_COSTUME') return ITEM_ICON(catalog[COSTUME_PREFIX + id]?.icon ?? '');
+  if (type === 'PGT_TICKET') {
+    const asset = TICKET_ASSET[id];
+    return ITEM_ICON(asset ? (catalog[asset]?.icon ?? '') : '');
+  }
+  return ITEM_ICON(catalog[GOODS_ICON_ASSET[type] ?? '']?.icon ?? '');
+}
+
+/** Index id d'équipement → icône, tous slots confondus (namespace images/equipment). */
+function buildGearIcons(): Map<string, string> {
+  const eq = buildEquipment();
+  const slots = [
+    eq.weapon,
+    eq.accessory,
+    eq.helmet,
+    eq.armor,
+    eq.gloves,
+    eq.shoes,
+    eq.talisman,
+    eq.ee,
+  ];
+  const out = new Map<string, string>();
+  for (const slot of slots) {
+    for (const [id, it] of Object.entries(slot)) if (it.icon) out.set(id, it.icon);
+  }
+  return out;
 }
 
 export function buildShopPriorities(): ShopPrioritiesData {
   const products = loadTable('ProductTemplet');
   const titems = loadTextIndex('TextItem');
   const catalog = buildItemCatalog();
+  const gearIcons = buildGearIcons();
   const curated =
     readCuratedJson<Record<string, ShopCurated>>('data/curated/shop-priorities.json') ?? {};
 
@@ -201,11 +257,13 @@ export function buildShopPriorities(): ShopPrioritiesData {
       seen.add(slug);
 
       const ed = curated[slug];
+      const { icon, iconKind } = iconOf(r, catalog, gearIcons);
       entries.push({
         key: slug,
         productId: r.ID,
         name,
-        icon: iconOf(r, catalog),
+        icon,
+        iconKind,
         gives: num(r.ProductGoodsValue),
         cost: num(r.PriceValue),
         limit: { count: num(r.MaxBuyCount), period },
