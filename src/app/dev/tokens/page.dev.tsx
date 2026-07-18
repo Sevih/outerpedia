@@ -141,7 +141,14 @@ export default function TokensGallery() {
         {/* Statut : info / succès / warn / danger (encarts de guide) */}
         <Demo
           title="Statut (encarts, liens)"
-          tokens={['--color-accent', '--color-success', '--color-warn', '--color-danger']}
+          tokens={[
+            '--color-accent',
+            '--color-success',
+            '--color-warn',
+            '--color-danger',
+            '--color-danger-strong',
+            '--color-danger-deep',
+          ]}
         >
           <div className="space-y-1.5 text-sm">
             <a className="text-accent hover:underline" href="#">
@@ -164,6 +171,13 @@ export default function TokensGallery() {
                 {txt}
               </div>
             ))}
+            {/* Rampe danger : danger (repli/survol) → strong (alerte, ban) → deep (cadre) */}
+            <div className="flex items-center gap-1.5 pt-1">
+              {['--color-danger', '--color-danger-strong', '--color-danger-deep'].map((t) => (
+                <span key={t} className="h-5 w-10 rounded" style={{ background: `var(${t})` }} />
+              ))}
+              <span className="text-content-subtle text-[11px]">rampe danger</span>
+            </div>
           </div>
         </Demo>
 

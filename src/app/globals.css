@@ -46,6 +46,10 @@
   --success: #4ade80;
   --warn: #fbbf24;
   --danger: #f87171;
+  /* Rampe danger plus soutenue (valeurs OKLCH exactes rouge-500/600) : alerte
+     marquée (ban, id non résolu) et cadre au repos (survol → --danger). */
+  --danger-strong: oklch(63.7% 0.237 25.331);
+  --danger-deep: oklch(57.7% 0.245 27.325);
 
   /* Tokens métier — teintes V2 */
   --fire: #ff6b6b;
@@ -210,6 +214,8 @@
   --color-success: var(--success);
   --color-warn: var(--warn);
   --color-danger: var(--danger);
+  --color-danger-strong: var(--danger-strong);
+  --color-danger-deep: var(--danger-deep);
   --color-buff-tint: var(--buff-tint);
   --color-debuff-tint: var(--debuff-tint);
   --color-on-vivid: var(--on-vivid);

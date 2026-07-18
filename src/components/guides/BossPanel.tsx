@@ -230,7 +230,7 @@ export async function BossCard({
                     }}
                   />
                 ) : (
-                  <span key={tid} className="text-xs text-red-500">
+                  <span key={tid} className="text-danger-strong text-xs">
                     {tid}
                   </span>
                 ),

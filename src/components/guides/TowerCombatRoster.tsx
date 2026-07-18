@@ -129,7 +129,7 @@ export function TowerCombatRoster({
                               'flex h-9 w-9 items-center justify-center rounded-md border transition-colors',
                               on
                                 ? dir.ban
-                                  ? 'border-red-500 bg-red-500/15'
+                                  ? 'border-danger-strong bg-danger-strong/15'
                                   : 'border-accent bg-accent/15'
                                 : 'border-line-subtle hover:border-line',
                             ].join(' ')}

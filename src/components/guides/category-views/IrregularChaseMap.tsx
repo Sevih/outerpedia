@@ -127,7 +127,7 @@ function BossPin({ guide, lang, t }: { guide: Guide; lang: Lang; t: TFunction })
         >
           {name}
         </span>
-        <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-md border border-red-600 transition-all group-hover:border-red-400 lg:h-16 lg:w-16">
+        <span className="border-danger-deep group-hover:border-danger relative h-12 w-12 shrink-0 overflow-hidden rounded-md border transition-all lg:h-16 lg:w-16">
           {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={img.slotFrame('unique')}

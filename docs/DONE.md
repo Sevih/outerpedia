@@ -74,9 +74,16 @@
   survol, hex V2 verbatim) en var brute dans le `shadow-[…]`. fg/bd = OKLCH EXACTES
   de Tailwind v4. `other` (fourre-tout) reste neutre-tokenisé. Galerie : bloc
   « Accents de catégorie » appliquant la vraie map `GUIDE_ACCENT`. Lint + 423 tests
-  OK. RESTE : 3 rouges stragglers (BossPanel repli d'erreur, IrregularChaseMap
-  cadre, TowerCombatRoster « ban » — sémantiques distinctes, arbitrage) ; `editorial/
-accents.ts` (même schéma, phase 2) ; extension RAW_COLOR ; phase 2 éditoriale.
+  OK. (9) 3 rouges stragglers → rampe danger cohérente : 2 tokens `--danger-strong`
+  (rouge-500) / `--danger-deep` (rouge-600), valeurs OKLCH exactes, au-dessus de
+  `--danger` (rouge-400). BossPanel `text-red-500` (id non résolu) → `text-danger-strong` ;
+  TowerCombatRoster `border-red-500 bg-red-500/15` (ban) → `border/bg-danger-strong` ;
+  IrregularChaseMap `border-red-600 hover:border-red-400` (cadre) → `border-danger-deep
+group-hover:border-danger`. Galerie : rampe danger ajoutée au bloc Statut.
+  ★ Les composants guides NON-ÉDITORIAUX sont désormais 100 % sans classe vive
+  (vérifié). Lint + 423 tests OK. RESTE (phase 2) : 6 fichiers `editorial/` (reviews,
+  banner, `accents.ts`) ; extension RAW_COLOR (à scoper hors éditorial) ; puis
+  phase 2 éditoriale elle-même.
 
 - **Lot de tests « petits modules purs »** (suite de la campagne tests, +40).
   Six fichiers co-localisés : `stats.test.ts` (statAbbr connu/repli,
