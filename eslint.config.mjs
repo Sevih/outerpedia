@@ -72,7 +72,10 @@ const eslintConfig = defineConfig([
       'no-restricted-syntax': 'off',
     },
   },
-  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']),
+  // `.unlighthouse/**` : rapports d'audit générés (`pnpm seo:audit`), bundles JS
+  // minifiés — gitignorés, mais ESLint flat ne lit pas `.gitignore` (n'ignore que
+  // node_modules/.git), il les linterait sinon (des milliers de faux warnings).
+  globalIgnores(['.next/**', 'out/**', 'build/**', '.unlighthouse/**', 'next-env.d.ts']),
 ]);
 
 export default eslintConfig;
