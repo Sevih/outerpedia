@@ -637,15 +637,20 @@ export function eeModelForView(view: EEView, lang: Lang): DetailModel {
 
 // --- résolution par slug -------------------------------------------------------------
 
-/** Tous les slugs (pour le sitemap / static params éventuels). */
-export function allEquipmentSlugs(): string[] {
+/** Toutes les fiches (slug + nom EN) — sitemap, static params, index llms.txt. */
+export function allEquipmentEntries(): { slug: string; name: string }[] {
   return [
-    ...getWeaponFamilies().map((f) => f.slug),
-    ...getAmuletFamilies().map((f) => f.slug),
-    ...getTalismanFamilies().map((f) => f.slug),
-    ...getSetViews('en').map((s) => s.slug),
-    ...getEEViews().map((e) => slugifyEquipment(e.name.en)),
+    ...getWeaponFamilies().map((f) => ({ slug: f.slug, name: f.name.en })),
+    ...getAmuletFamilies().map((f) => ({ slug: f.slug, name: f.name.en })),
+    ...getTalismanFamilies().map((f) => ({ slug: f.slug, name: f.name.en })),
+    ...getSetViews('en').map((s) => ({ slug: s.slug, name: s.name.en })),
+    ...getEEViews().map((e) => ({ slug: slugifyEquipment(e.name.en), name: e.name.en })),
   ];
+}
+
+/** Tous les slugs (pour le sitemap / static params). */
+export function allEquipmentSlugs(): string[] {
+  return allEquipmentEntries().map((e) => e.slug);
 }
 
 /** Modèle complet d'une page détail, ou null (ordre de balayage V2). */

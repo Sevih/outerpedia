@@ -13,6 +13,10 @@ import {
 } from '@/components/equipment/EquipmentDetail';
 import { getEquipmentDetail } from '@/lib/data/equipment-detail';
 
+// Pas de `generateStaticParams` : les fiches se rendent À LA DEMANDE puis sont
+// cachées 24 h (`revalidate`, `dynamicParams` à true) — choix de build assumé,
+// c'est le modèle qu'ont suivi les étages de tour (commit c38561f). Le sitemap
+// et /llms.txt les listent quand même : le crawl déclenche la 1re génération.
 export const revalidate = 86400;
 
 export async function generateMetadata({
@@ -28,8 +32,8 @@ export async function generateMetadata({
   return createPageMetadata({
     lang,
     path: `/equipment/${slug}`,
-    title: `${model.name} – Outerplane`,
-    description: t('page.equipments.description'),
+    title: model.name,
+    description: t('page.equipment.meta_description', { name: model.name }),
     // Icône de l'item en PNG (aperçus Discord/OG) — propriété et taille V2.
     ogImage: model.eeCharacterId ? img.eePng(model.eeCharacterId) : img.equipmentPng(model.icon),
     ogImageSize: { width: 150, height: 150 },

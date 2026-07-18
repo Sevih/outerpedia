@@ -4,6 +4,7 @@ import { buildUrl } from '@/lib/seo';
 import { listCharacterSlugs } from '@/lib/data/characters';
 import { GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
 import { countGuides, guideUpdatedDate, listGuides } from '@/lib/data/guides';
+import { allEquipmentSlugs } from '@/lib/data/equipment-detail';
 
 /**
  * Sitemap multilingue avec alternates hreflang. Énumère home + liste persos +
@@ -17,6 +18,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/',
     '/characters',
     ...listCharacterSlugs().map((s) => `/characters/${s}`),
+    '/equipment',
+    ...allEquipmentSlugs().map((s) => `/equipment/${s}`),
     '/guides',
     ...GUIDE_CATEGORY_SLUGS.filter((c) => countGuides(c) > 0).map((c) => `/guides/${c}`),
   ];

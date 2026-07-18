@@ -6,6 +6,23 @@
 
 ## 2026-07-18
 
+- **Équipement remis dans le circuit SEO** (fiches `/equipment/*`) — elles
+  étaient absentes de `sitemap.ts` ET de `/llms.txt`, avec une meta description
+  identique sur tout le catalogue et un titre `« X – Outerplane » | Outerpedia`
+  incohérent (les persos font `X | Outerpedia`). `allEquipmentSlugs()` existait
+  pour ça mais était mort. Câblé : (1) sitemap + `/llms.txt` listent les 272
+  fiches (58 armes + 55 accessoires + 15 talismans + 21 sets + 123 EE) via un
+  nouveau `allEquipmentEntries()` (slug + nom EN, dont `allEquipmentSlugs`
+  dérive maintenant) ; (2) titre = `model.name` seul (aligné sur les persos) ;
+  (3) description UNIQUE par item : nouvelle clé `page.equipment.meta_description`
+  templée `{name}`, ajoutée aux 5 langues (cohérence inter-langues préservée,
+  `Record<TranslationKey>` l'impose). **`generateStaticParams` volontairement
+  PAS ajouté** : le point d'audit était un faux problème — l'équipement se rend
+  à la demande puis se cache 24 h (`revalidate` + `dynamicParams`), une page ISR
+  reste indexable et le sitemap déclenche le 1er crawl. C'est le modèle EXACT
+  qu'ont suivi les étages de tour quand on a retiré leur `generateStaticParams`
+  (commit c38561f : +1360 pages au build évitées, décision assumée en commentaire
+  de la route).
 - **Dédup de chips d'effet alignée sur l'affichage (`EffectChips`)** — la clé de
   dédoublonnage clivait la nature en `category === 'debuff'` alors que
   l'affichage (couleur de la pill) la clive en `category !== 'buff'` : un effet

@@ -71,6 +71,8 @@ const zh: Record<TranslationKey, string> = {
   'page.equipments.meta_title': '异域战记 装备数据库 – {monthYear}',
   'page.equipments.description':
     '异域战记全部装备：武器、饰品、护身符、套装\n探索对比数值、技能，找到适用角色。{monthYear}更新。',
+  'page.equipment.meta_description':
+    '{name} — 属性、主属性与副属性、被动效果、觉醒及获取途径。Outerpedia 装备详解。',
   'equip.tab.weapons': '武器',
   'equip.tab.accessories': '饰品',
   'equip.tab.sets': '套装',

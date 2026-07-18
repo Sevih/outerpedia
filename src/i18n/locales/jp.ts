@@ -72,6 +72,8 @@ const jp: Record<TranslationKey, string> = {
   'page.equipments.meta_title': 'アウタープレーン 装備データベース – {monthYear}',
   'page.equipments.description':
     'アウタープレーンの全装備を探索。武器、アクセサリー、タリスマン、セット効果のステータス比較。{monthYear}更新。',
+  'page.equipment.meta_description':
+    '{name} — ステータス、メイン/サブステータス、パッシブ効果、覚醒、入手方法。Outerpediaの装備詳細。',
   'equip.tab.weapons': '武器',
   'equip.tab.accessories': 'アクセサリー',
   'equip.tab.sets': 'セット',

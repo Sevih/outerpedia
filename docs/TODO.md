@@ -121,12 +121,6 @@
 
 ## 🌍 i18n / SEO / a11y (audit 17/07)
 
-- [ ] **Équipement citoyen de seconde zone SEO** : `/equipment` et les fiches
-      absents de `sitemap.ts` ET `llms.txt` ; pas de `generateStaticParams` ;
-      meta description identique sur tout le catalogue ; title
-      `« X – Outerplane » | Outerpedia` incohérent. `allEquipmentSlugs()`
-      (`equipment-detail.ts:630`) existe précisément pour ça et est mort —
-      le câbler règle sitemap + SSG d'un coup.
 - [ ] **A11y tablists** : 4 implémentations `role="tablist"` sans navigation
       clavier ←/→ ni `aria-controls`/`id` (ui/Tabs, SegmentedTabs,
       EncounterSelection, MonsterLineup) — mutualiser un helper accessible

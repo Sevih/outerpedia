@@ -72,6 +72,8 @@ const en = {
   'page.equipments.meta_title': 'Outerplane Equipment Database – {monthYear}',
   'page.equipments.description':
     'Explore all Outerplane weapons, accessories, talismans, and armor sets. Compare stats and find the best gear for your characters. Updated {monthYear}.',
+  'page.equipment.meta_description':
+    '{name} — stats, main and substats, passive effects, ascension, and where to get it in Outerplane. Full equipment breakdown on Outerpedia.',
   'equip.tab.weapons': 'Weapons',
   'equip.tab.accessories': 'Accessories',
   'equip.tab.sets': 'Armor Sets',

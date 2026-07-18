@@ -71,6 +71,8 @@ const kr: Record<TranslationKey, string> = {
   'page.equipments.meta_title': '아우터플레인 장비 데이터베이스 – {monthYear}',
   'page.equipments.description':
     '아우터플레인의 모든 장비를 탐색하세요. 무기, 악세서리, 탈리스만, 세트 효과 비교. {monthYear} 업데이트.',
+  'page.equipment.meta_description':
+    '{name} — 스탯, 메인/서브 스탯, 패시브 효과, 각성, 획득 경로. Outerpedia 장비 상세 정보.',
   'equip.tab.weapons': '무기',
   'equip.tab.accessories': '악세서리',
   'equip.tab.sets': '세트',
