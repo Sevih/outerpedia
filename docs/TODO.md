@@ -63,13 +63,14 @@
 ### Caches périmés (process admin long-running)
 
 - [ ] Caches module qui contournent le régime mtime/TTL pourtant établi
-      partout ailleurs : `datagen/extractor/v2-control.ts:408-424`
+      partout ailleurs. RESTE (datagen → worker) : `datagen/extractor/v2-control.ts:408-424`
       (`curatedKeySides`), `datagen/assets/manifest.ts:54-63` (`faceIconIndex`),
       `datagen/generators/equipment.ts:444` (`groupKidsCache` — contraste avec
-      `curatedKeyCache` l.522 du même fichier), `datagen/generators/goods.ts:40` + `recruit.ts:155`, `src/lib/data/gear-reco.ts:142-157` (`famByMember`,
-      contredit l'en-tête du fichier), `src/lib/data/rewards.ts:83`. Stamper
-      chacun (modèle `fileStamp`/`tablesStamp`) ou documenter la limite.
-      (`src/lib/admin/monster-store.ts` traité le 18/07 — cf. DONE.)
+      `curatedKeyCache` l.522 du même fichier), `datagen/generators/goods.ts:40` + `recruit.ts:155`. Stamper chacun (modèle `fileStamp`/`tablesStamp`) ou
+      documenter la limite.
+      (SRC FAIT : `gear-reco.ts` `famByMember` + `rewards.ts` `gearIndex` stampés
+      sur le mtime du curé équipement, `skill-view` `curatedKeyCache` mutualisé →
+      DONE ; `monster-store.ts` traité le 18/07 — cf. DONE.)
 
 ### UI publique
 

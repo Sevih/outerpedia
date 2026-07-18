@@ -12,6 +12,7 @@ import { lRec } from '@/lib/i18n/localize';
 import { statOptionView } from '@/lib/stats';
 import { PIECE_ORDER } from '@/lib/data/gear-order';
 import {
+  equipmentEditorialStamp,
   getAmuletFamilies,
   getSetViews,
   getTalismanFamilies,
@@ -138,23 +139,29 @@ export interface ResolvedBuild {
   note?: string;
 }
 
-// Index id de membre → famille, par slot (les familles portent slug/passifs/source).
+// Index id de membre → famille, par slot (les familles portent slug/passifs/
+// source, DÉRIVÉS de l'éditorial curé → mutables : cache STAMPÉ sur le mtime du
+// curé, sinon il se périmerait dans le process admin, à rebours de l'en-tête.
 type Slot = 'weapons' | 'amulets' | 'talismans';
-let famByMember: Record<Slot, Map<string, GearFamily>> | null = null;
+let famByMember: { stamp: number; index: Record<Slot, Map<string, GearFamily>> } | null = null;
 function familyOf(slot: Slot, id: string): GearFamily | undefined {
-  if (!famByMember) {
+  const stamp = equipmentEditorialStamp();
+  if (!famByMember || famByMember.stamp !== stamp) {
     const index = (fams: GearFamily[]) => {
       const m = new Map<string, GearFamily>();
       for (const f of fams) for (const mid of f.ids) m.set(mid, f);
       return m;
     };
     famByMember = {
-      weapons: index(getWeaponFamilies()),
-      amulets: index(getAmuletFamilies()),
-      talismans: index(getTalismanFamilies()),
+      stamp,
+      index: {
+        weapons: index(getWeaponFamilies()),
+        amulets: index(getAmuletFamilies()),
+        talismans: index(getTalismanFamilies()),
+      },
     };
   }
-  return famByMember[slot].get(id);
+  return famByMember.index[slot].get(id);
 }
 
 /** Membre le plus étoilé d'une famille (porte les pools de main stats). */

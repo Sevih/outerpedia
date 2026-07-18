@@ -24,6 +24,7 @@ import {
   accessoryMainStats,
   armorPieceSet,
   armorPieceSetId,
+  equipmentEditorialStamp,
   gearById as gearPieceById,
   gearPassiveRefs,
   gearVariant,
@@ -80,17 +81,21 @@ export interface ResolvedReward {
 // Index id d'item → famille d'équipement. Les tables de récompense référencent
 // les VARIANTES (781…785 : une par classe), les familles les regroupent — on
 // résout la variante vers sa famille pour hériter nom/icône/grade/lien détail.
-let gearIndex: Map<string, GearFamily> | null = null;
+// Champs matérialisés depuis le curé → cache STAMPÉ sur son mtime (comme
+// gear-reco.ts), sinon périmé dès que l'admin réédite l'éditorial équipement.
+let gearIndex: { stamp: number; map: Map<string, GearFamily> } | null = null;
 function gearFamilyById(id: string): GearFamily | undefined {
-  if (!gearIndex) {
-    gearIndex = new Map();
+  const stamp = equipmentEditorialStamp();
+  if (!gearIndex || gearIndex.stamp !== stamp) {
+    const map = new Map<string, GearFamily>();
     for (const f of [...getWeaponFamilies(), ...getAmuletFamilies(), ...getTalismanFamilies()]) {
       for (const memberId of f.ids) {
-        if (!gearIndex.has(memberId)) gearIndex.set(memberId, f);
+        if (!map.has(memberId)) map.set(memberId, f);
       }
     }
+    gearIndex = { stamp, map };
   }
-  return gearIndex.get(id);
+  return gearIndex.map.get(id);
 }
 
 /** Résout une entrée du catalogue (item ou monnaie) en ligne affichable. */

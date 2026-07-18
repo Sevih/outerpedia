@@ -11,7 +11,7 @@
  *
  * Le curé est lu au FS (l'admin voit ses écritures immédiatement).
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type {
   ArmorItem,
@@ -114,6 +114,20 @@ export function loadEquipmentEditorial(): EquipmentCurated {
     return { ...EMPTY, ...(JSON.parse(readFileSync(CURATED_PATH, 'utf8')) as EquipmentCurated) };
   } catch {
     return EMPTY;
+  }
+}
+
+/**
+ * mtime de l'éditorial curé (`-1` si absent) — CLÉ DE FRAÎCHEUR pour les caches
+ * qui matérialisent des familles (nom/icône/slug/source dérivés du curé, donc
+ * mutables au runtime via l'admin). Les stamper là-dessus les garde alignés sur
+ * le contrat FS de ce module (l'admin voit ses écritures immédiatement).
+ */
+export function equipmentEditorialStamp(): number {
+  try {
+    return statSync(CURATED_PATH).mtimeMs;
+  } catch {
+    return -1;
   }
 }
 

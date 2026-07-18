@@ -6,6 +6,20 @@
 
 ## 2026-07-18
 
+- **Caches périmés (partie src) STAMPÉS sur le mtime du curé** (bug moyen —
+  process admin long-running). `gear-reco.ts` (`famByMember`) et `rewards.ts`
+  (`gearIndex`) indexaient membre→famille d'équipement dans un cache module
+  PERMANENT. Or les familles sont matérialisées depuis `data/curated/equipment.json`
+  (nom/icône/slug/source/passifs) — mutable via l'admin, `loadEquipmentEditorial`
+  le relit à chaque appel. Les deux caches contredisaient donc l'en-tête « l'admin
+  voit ses écritures immédiatement » : une réédition de l'éditorial n'apparaissait
+  qu'au redémarrage. Fix : `equipmentEditorialStamp()` exporté d'equipment.ts
+  (source unique du chemin curé, `statSync` → mtime, `-1` si absent) ; les deux
+  caches se re-bâtissent quand le stamp bouge (même patron que `loadCuratedEffects`
+  et monster-store). Structure d'index inchangée. Typecheck + 353 tests OK. RESTE
+  (worker) : les caches DATAGEN équivalents (v2-control, manifest faceIconIndex,
+  equipment groupKidsCache, goods/recruit).
+
 - **Index des clés curées MUTUALISÉ (`resolveEffectKey` ↔ skill-view)** (dette
   code / duplication + cache périmé, d'une pierre deux coups). `resolveEffectKey`
   (effects.ts) faisait un scan linéaire `Object.entries(loadCuratedEffects())
