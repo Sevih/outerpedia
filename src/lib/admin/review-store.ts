@@ -34,6 +34,7 @@ import {
   integrateEquipment,
   type EquipmentEntityKind,
 } from '@datagen/extractor/integrate-equipment';
+import { integrateItem } from '@datagen/extractor/integrate-item';
 import {
   monsterArchiveOf,
   versionMonster,
@@ -60,6 +61,7 @@ export {
   extractedMonsterBundle,
   integrateCharacter,
   integrateEquipment,
+  integrateItem,
   integrateMonster,
   integrateMonsterMode,
   monsterArchiveOf,

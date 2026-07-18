@@ -1,15 +1,8 @@
 'use client';
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useRef,
-  useState,
-  type PointerEvent as ReactPointerEvent,
-  type ReactNode,
-} from 'react';
+import { createContext, useContext, useState, type ReactNode } from 'react';
 import { onTabListKeyDown } from '@/lib/tablist';
+import { HeatSlider } from './HeatSlider';
 
 /**
  * LA DIFFICULTÉ COURANTE — l'axe AU-DESSUS du palier.
@@ -167,67 +160,6 @@ export function EncounterSlider({
 }) {
   const { count, selected, setSelected } = useEncounter();
   const last = count - 1;
-  // Même partition que RankSlider : `hit` ÉCOUTE (toute la zone, débords du
-  // pouce compris), `rail` MESURE (la géométrie 0 % → 100 % se lit sur lui seul).
-  const hit = useRef<HTMLDivElement>(null);
-  const rail = useRef<HTMLDivElement>(null);
-  const dragging = useRef(false);
-  const pos = last > 0 ? selected / last : 0;
-
-  const clamp = useCallback((i: number) => Math.min(last, Math.max(0, i)), [last]);
-
-  const indexAt = useCallback(
-    (clientX: number) => {
-      const box = rail.current?.getBoundingClientRect();
-      if (!box || box.width === 0) return selected;
-      const ratio = Math.min(1, Math.max(0, (clientX - box.left) / box.width));
-      return Math.round(ratio * last);
-    },
-    [last, selected],
-  );
-
-  const onDown = (e: ReactPointerEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    hit.current?.setPointerCapture(e.pointerId);
-    dragging.current = true;
-    setSelected(indexAt(e.clientX));
-  };
-  const onMove = (e: ReactPointerEvent<HTMLDivElement>) => {
-    if (dragging.current) setSelected(indexAt(e.clientX));
-  };
-  const onUp = () => {
-    dragging.current = false;
-  };
-
-  const onKeyDown = (e: React.KeyboardEvent) => {
-    const jump: Record<string, number> = {
-      ArrowRight: 1,
-      ArrowUp: 1,
-      ArrowLeft: -1,
-      ArrowDown: -1,
-      PageUp: 3,
-      PageDown: -3,
-    };
-    let next: number;
-    if (e.key === 'Home') next = 0;
-    else if (e.key === 'End') next = last;
-    else if (e.key in jump) next = clamp(selected + jump[e.key]!);
-    else return;
-    e.preventDefault();
-    setSelected(next);
-  };
-
-  const step = (delta: 1 | -1, aria: string, glyph: string) => (
-    <button
-      type="button"
-      aria-label={aria}
-      disabled={delta < 0 ? selected === 0 : selected === last}
-      onClick={() => setSelected(clamp(selected + delta))}
-      className="border-line bg-surface-base text-content hover:text-content-strong enabled:hover:border-line-strong flex h-7 w-6 shrink-0 items-center justify-center rounded border text-[10px] transition-colors disabled:opacity-30"
-    >
-      {glyph}
-    </button>
-  );
 
   return (
     <div className="border-line-subtle bg-surface-raised flex flex-col gap-1 rounded-xl border px-3 py-3 lg:max-w-xl lg:flex-1">
@@ -238,75 +170,42 @@ export function EncounterSlider({
         <span className="text-content-strong text-sm font-semibold">{titles[selected]}</span>
       </div>
 
-      <div className="flex items-center gap-2">
-        {step(-1, prevLabel, '◀')}
-
-        <div
-          ref={hit}
-          role="slider"
-          tabIndex={0}
-          aria-label={label}
-          aria-valuemin={0}
-          aria-valuemax={last}
-          aria-valuenow={selected}
-          aria-valuetext={titles[selected]}
-          onPointerDown={onDown}
-          onPointerMove={onMove}
-          onPointerUp={onUp}
-          onPointerCancel={onUp}
-          onLostPointerCapture={onUp}
-          onKeyDown={onKeyDown}
-          className="focus-visible:ring-ring min-w-0 flex-1 cursor-pointer touch-none rounded px-4 py-0.5 select-none focus-visible:ring-2 focus-visible:outline-none"
-        >
-          <div ref={rail} className="relative h-8">
-            <span
-              aria-hidden
-              className="absolute inset-x-0 top-1/2 h-2.5 -translate-y-1/2 rounded-full"
-              style={{
-                background:
-                  'linear-gradient(90deg, var(--rank-heat-lo), var(--rank-heat-mid), var(--rank-heat-hi))',
-              }}
-            />
-
-            {ticks.map((_, i) => (
-              <span
-                key={i}
-                aria-hidden
-                className="bg-surface-sunken absolute top-1/2 h-2 w-px -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40"
-                style={{ left: `${(last > 0 ? i / last : 0) * 100}%` }}
-              />
-            ))}
-
-            <span
-              aria-hidden
-              className="border-accent bg-surface-base ring-accent/20 pointer-events-none absolute top-1/2 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-lg border-2 shadow-lg ring-4 transition-[left] duration-75"
-              style={{ left: `${pos * 100}%` }}
-            >
-              <span className="text-content-strong font-mono text-xs font-bold">
-                {ticks[selected]}
-              </span>
-            </span>
-          </div>
-
-          {/* Chaque cran garde son numéro : treize repères courts tiennent la
-              ligne, et l'échelle se lit d'un coup d'œil — c'est sa raison d'être. */}
-          <div aria-hidden className="relative h-4">
-            {ticks.map((tick, i) => (
-              <span
-                key={i}
-                className={`absolute -translate-x-1/2 font-mono text-[10px] font-bold transition-colors ${
-                  i === selected ? 'text-accent' : 'text-content-muted'
-                }`}
-                style={{ left: `${(last > 0 ? i / last : 0) * 100}%` }}
-              >
-                {tick}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {step(1, nextLabel, '▶')}
-      </div>
+      <HeatSlider
+        count={count}
+        selected={selected}
+        onSelect={setSelected}
+        ariaLabel={label}
+        valueText={titles[selected]}
+        prevLabel={prevLabel}
+        nextLabel={nextLabel}
+        railClass="h-8"
+        padClass="px-4"
+        thumbClass="h-7 w-7 rounded-lg"
+        marks={ticks.map((_, i) => (
+          <span
+            key={i}
+            aria-hidden
+            className="bg-surface-sunken absolute top-1/2 h-2 w-px -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40"
+            style={{ left: `${(last > 0 ? i / last : 0) * 100}%` }}
+          />
+        ))}
+        thumb={
+          <span className="text-content-strong font-mono text-xs font-bold">{ticks[selected]}</span>
+        }
+        // Chaque cran garde son numéro : treize repères courts tiennent la ligne,
+        // l'échelle se lit d'un coup d'œil — c'est sa raison d'être.
+        labels={ticks.map((tick, i) => (
+          <span
+            key={i}
+            className={`absolute -translate-x-1/2 font-mono text-[10px] font-bold transition-colors ${
+              i === selected ? 'text-accent' : 'text-content-muted'
+            }`}
+            style={{ left: `${(last > 0 ? i / last : 0) * 100}%` }}
+          >
+            {tick}
+          </span>
+        ))}
+      />
     </div>
   );
 }

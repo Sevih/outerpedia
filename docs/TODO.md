@@ -55,11 +55,12 @@
       ✅ FAIT (18/07) : EXTRACTEUR D'ITEMS — cible review `item`
       (`buildItemCatalog`, mémoïsée) + page `/admin/extractor/items` (diff
       jeu↔site via `ExtractorReview`) + entrée de menu + ligne de la matrice
-      d'accueil (couverture curée depuis `data/curated/items.json`).
-      RESTE : intégration PAR ENTITÉ pour l'item (le bouton, comme gear/perso —
-      le « valider toute l'extraction » global marche déjà) ; éditeurs manquants
-      (Monstre, gear) ; factos `CharacterSwitch`/`MonsterSwitch`,
-      `CharacterPicker`/`ItemPicker` ; fusion `CharactersSidebar`↔`ExtractorSidebar`.
+      d'accueil (couverture curée depuis `data/curated/items.json`) + bouton
+      d'intégration PAR LIGNE (`integrateItem` : entrée `items.json` + icône ;
+      cœur `integrateItemData` partagé avec le rebake de l'éditeur).
+      RESTE : éditeurs manquants (Monstre, gear) ; factos `CharacterSwitch`/
+      `MonsterSwitch`, `CharacterPicker`/`ItemPicker` ; fusion
+      `CharactersSidebar`↔`ExtractorSidebar`.
 - [ ] **Éditeur de recos (gear-reco) : rendre l'UI d'édition fidèle au rendu
       public** (demande Sevih 2026-07-18) — l'édition actuelle liste des ids
       bruts ; la faire ressembler au rendu personnage/slug (icônes d'armes/
@@ -186,9 +187,6 @@
 
 ### Duplication (les 2 gros d'abord)
 
-- [ ] **`RankSlider` vs `EncounterSlider`** (BossStats.tsx:293-475 vs
-      EncounterSelection.tsx:149-309) : ~120 lignes quasi identiques (géométrie,
-      gestes, clavier) — extraire une primitive `HeatSlider`.
 - [ ] **Helpers adb** dupliqués entre `datagen/extract/dump.ts` et
       `pull-gamedata.ts` (ADB, PKG, capture, stream, pickDevice, bloc root) —
       extraire `extract/adb.ts`.

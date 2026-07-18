@@ -6,6 +6,19 @@
 
 ## 2026-07-18
 
+- **Intégration PAR ENTITÉ pour l'item** (complète l'extracteur d'items) — bouton
+  « Intégrer » (ou « Retirer » si l'id a disparu du frais) sur chaque ligne du
+  diff de `/admin/extractor/items`. Cœur `integrateItemData(dir, id)` EXTRAIT
+  dans `item-catalog.ts` : reporte la seule entrée fraîche dans `items.json`
+  (tri `catalogCompare`, canonique) — désormais PARTAGÉ entre le rebake de
+  l'éditeur curé (`bakeItemCatalogEntry`, réduit à une façade) et la revue
+  d'extraction (`integrateItem`), plus de logique dupliquée. Wrapper
+  `integrateItem` : entrée + staging de l'icône (`images/items/…`, sautée si
+  placeholder blacklisté). Route `POST /api/admin/integrate/item/[id]`,
+  `ExtractorReview` reçoit un prop `integrateKind` optionnel (bouton par ligne,
+  générique). Vérifié : ré-intégration idempotente (0 diff `items.json`), 351
+  tests verts, typecheck + lint OK.
+
 - **Stores d'édition curée : écriture au format CANONIQUE** — les 6 stores admin
   (`curated-store` persos, `effects-store`, `item-curated-store`, `gear-reco-store`,
   `monster-skill-curated-store`, `promo-banner-store` coupons/banner) écrivaient

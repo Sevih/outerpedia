@@ -32,16 +32,50 @@ export function ExtractorReview({
   file,
   entities,
   buckets,
+  integrateKind,
 }: {
   id: string;
   file: string;
   entities: NamedReviewEntity[];
   buckets: DiffBuckets;
+  /**
+   * Active un bouton « Intégrer » PAR ligne, postant à
+   * `/api/admin/integrate/<kind>/<key>` (comme la fiche gear/perso). Absent =
+   * pas d'intégration par entité (seul le « valider tout » global).
+   */
+  integrateKind?: string;
 }) {
   const router = useRouter();
   const [filter, setFilter] = useState<Filter>('all');
   const [busy, setBusy] = useState<null | 'all' | 'typos'>(null);
   const [msg, setMsg] = useState<{ tone: 'ok' | 'err'; text: string } | null>(null);
+  const [rowBusy, setRowBusy] = useState<string | null>(null);
+  const [rowMsg, setRowMsg] = useState<Record<string, { tone: 'ok' | 'err'; text: string }>>({});
+
+  async function integrateRow(key: string) {
+    setRowBusy(key);
+    setRowMsg((m) => ({ ...m, [key]: { tone: 'ok', text: '…' } }));
+    try {
+      const data = await postJson<{ report?: { files: string[]; assets: { staged: number } } }>(
+        `/api/admin/integrate/${integrateKind}/${encodeURIComponent(key)}`,
+      );
+      const r = data.report;
+      setRowMsg((m) => ({
+        ...m,
+        [key]: {
+          tone: 'ok',
+          text: r
+            ? `✓ ${r.files.join(', ')} · ${r.assets.staged} image(s) — committe via git.`
+            : '✓ intégré',
+        },
+      }));
+      router.refresh();
+    } catch (e) {
+      setRowMsg((m) => ({ ...m, [key]: { tone: 'err', text: (e as Error).message } }));
+    } finally {
+      setRowBusy(null);
+    }
+  }
 
   const counts: Record<Filter, number> = {
     all: entities.length,
@@ -150,7 +184,24 @@ export function ExtractorReview({
               </span>
               <span className="text-content-strong text-sm font-medium">{e.name}</span>
               <span className="text-content-subtle font-mono text-xs">{e.key}</span>
+              {integrateKind && (
+                <button
+                  type="button"
+                  onClick={() => integrateRow(e.key)}
+                  disabled={rowBusy !== null}
+                  className="border-line hover:border-accent ml-auto rounded-md border px-2 py-0.5 text-xs disabled:opacity-50"
+                >
+                  {rowBusy === e.key ? '…' : e.status === 'removed' ? 'Retirer' : 'Intégrer'}
+                </button>
+              )}
             </div>
+            {rowMsg[e.key] && (
+              <p
+                className={`mt-1 text-xs ${rowMsg[e.key].tone === 'ok' ? 'text-success' : 'text-danger'}`}
+              >
+                {rowMsg[e.key].text}
+              </p>
+            )}
             {e.fields.length > 0 && (
               <div className="mt-2">
                 <EntityDiffPanel fields={e.fields} bare />

@@ -9,8 +9,8 @@
  */
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import type { CatalogEntry, LangDict } from '@contracts';
-import { buildItemCatalog, catalogCompare } from '@datagen/generators/item-catalog';
+import type { LangDict } from '@contracts';
+import { integrateItemData } from '@datagen/generators/item-catalog';
 import { writeJson } from '@datagen/lib/json';
 
 export interface ItemCurated {
@@ -40,24 +40,14 @@ export async function upsertItemCurated(id: string, curated: ItemCurated): Promi
   await writeJson(PATH, sorted);
 }
 
-const SERVED = resolve(process.cwd(), 'data/generated/items.json');
+const GEN = resolve(process.cwd(), 'data/generated');
 
 /**
  * Rebake UNE entrée du catalogue SERVI (`data/generated/items.json`) après une
- * édition curée. Le générateur est rejoué (base jeu + curé frais) mais SEULE
- * l'entrée éditée est reportée dans le fichier committé : un `.gamedata` plus
- * récent que la dernière promotion ne fuite pas sur le reste du catalogue —
- * la revue de `datagen:promote` garde son sens. Entrée absente du frais
- * (création retirée, item sans nom, icône placeholder) = suppression. Tri via
- * `catalogCompare` pour retomber octet à octet sur le prochain regen.
+ * édition curée : l'édition vaut validation (la donnée jeu sous-jacente n'a pas
+ * bougé), rien à promouvoir pour la voir. Simple façade sur `integrateItemData`
+ * — le même geste que la revue d'extraction (`integrateItem`), sans images.
  */
 export async function bakeItemCatalogEntry(id: string): Promise<void> {
-  const fresh = buildItemCatalog();
-  const served = JSON.parse(readFileSync(SERVED, 'utf8')) as Record<string, CatalogEntry>;
-  if (fresh[id]) served[id] = fresh[id];
-  else delete served[id];
-  const sorted = Object.fromEntries(
-    Object.entries(served).sort(([a], [b]) => catalogCompare(a, b)),
-  );
-  await writeJson(SERVED, sorted);
+  await integrateItemData(GEN, id);
 }

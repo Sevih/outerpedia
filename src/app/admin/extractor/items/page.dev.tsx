@@ -18,7 +18,7 @@ export default function Page() {
           écart / typo.
         </p>
       </div>
-      <ExtractorReview {...itemReviewProps()} />
+      <ExtractorReview {...itemReviewProps()} integrateKind="item" />
     </div>
   );
 }

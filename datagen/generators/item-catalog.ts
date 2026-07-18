@@ -15,8 +15,10 @@
  * Ids : items = id ItemTemplet ; monnaies = clé `SYS_ASSET_*` ; costumes =
  * `COSTUME_<id>` (la PK brute `1`/`2`… est trop générique pour un id transverse).
  */
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { isMain } from '../lib/is-main';
-import { readCuratedJson } from '../lib/json';
+import { readCuratedJson, writeJson } from '../lib/json';
 import { num } from '../lib/tables';
 import type { LangDict } from '../lib/lang';
 import { MISSING_ITEM_ICONS } from '../../src/lib/data/item-blacklist';
@@ -169,6 +171,34 @@ export function buildItemCatalog(inputs?: {
 
   const sorted = Object.entries(out).sort(([a], [b]) => catalogCompare(a, b));
   return Object.fromEntries(sorted);
+}
+
+/**
+ * Intègre UNE entrée du catalogue servi (`<dir>/items.json`) depuis l'extraction
+ * FRAÎCHE — le geste d'intégration ciblé, partagé par l'édition curée
+ * (`bakeItemCatalogEntry`) ET la revue d'extraction (`integrateItem`). SEULE
+ * l'entrée `id` est reportée : un `.gamedata` plus récent que la dernière
+ * promotion ne fuite pas sur le reste du catalogue (la revue de `datagen:promote`
+ * garde son sens). Entrée absente du frais (création retirée, item sans nom,
+ * icône placeholder) = suppression. Tri `catalogCompare` pour retomber octet à
+ * octet au prochain regen. Retourne les fichiers écrits + l'entrée écrite
+ * (`undefined` si supprimée), pour le staging d'images en aval.
+ */
+export async function integrateItemData(
+  dir: string,
+  id: string,
+): Promise<{ files: string[]; entry: CatalogEntry | undefined }> {
+  const fresh = buildItemCatalog();
+  const path = resolve(dir, 'items.json');
+  const served = JSON.parse(readFileSync(path, 'utf8')) as Record<string, CatalogEntry>;
+  const entry = fresh[id];
+  if (entry) served[id] = entry;
+  else delete served[id];
+  const sorted = Object.fromEntries(
+    Object.entries(served).sort(([a], [b]) => catalogCompare(a, b)),
+  );
+  await writeJson(path, sorted);
+  return { files: ['items.json'], entry };
 }
 
 // Exécution directe : échantillon pour revue.

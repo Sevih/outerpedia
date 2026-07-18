@@ -1,8 +1,8 @@
 'use client';
 
-import { useCallback, useRef, type PointerEvent as ReactPointerEvent } from 'react';
 import { img } from '@/lib/images';
 import { rankBadgeSprite } from '@/lib/ranks';
+import { HeatSlider } from './HeatSlider';
 import {
   formatMonsterStat,
   orderedStats,
@@ -302,174 +302,70 @@ function RankSlider({
   labels: BossStatsLabels;
 }) {
   const last = options.length - 1;
-  // DEUX éléments, deux rôles — c'est le cœur du correctif.
-  //  - `hit` ÉCOUTE : c'est toute la zone du sélecteur (rail + pouce + repères de
-  //    grade). Le pouce fait 38 px et son centre se cale sur le cran : à E il
-  //    déborde de 19 px À GAUCHE du rail, à SSS++ de 19 px à droite. Quand le rail
-  //    écoutait lui-même, ces débords tombaient hors de la zone sensible et il ne
-  //    restait, sous le doigt, que ce qui recouvrait encore le rail.
-  //  - `rail` MESURE : la géométrie (0 % → 100 %) se lit sur lui seul, sinon le
-  //    rembourrage de la zone d'écoute décalerait tous les crans.
-  const hit = useRef<HTMLDivElement>(null);
-  const rail = useRef<HTMLDivElement>(null);
-  const dragging = useRef(false);
   const ctx = options[selected]!;
   const grades = rankGrades(options);
-  const pos = last > 0 ? selected / last : 0;
-
-  const clamp = useCallback((i: number) => Math.min(last, Math.max(0, i)), [last]);
-
-  /** Cran le plus proche du pointeur — mesuré sur le RAIL, pas sur la zone d'écoute. */
-  const indexAt = useCallback(
-    (clientX: number) => {
-      const box = rail.current?.getBoundingClientRect();
-      if (!box || box.width === 0) return selected;
-      const ratio = Math.min(1, Math.max(0, (clientX - box.left) / box.width));
-      return Math.round(ratio * last);
-    },
-    [last, selected],
-  );
-
-  const onDown = (e: ReactPointerEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    // La capture garde le glissé vivant même quand le doigt sort de la zone.
-    hit.current?.setPointerCapture(e.pointerId);
-    dragging.current = true;
-    onSelect(indexAt(e.clientX));
-  };
-  const onMove = (e: ReactPointerEvent<HTMLDivElement>) => {
-    if (dragging.current) onSelect(indexAt(e.clientX));
-  };
-  const onUp = () => {
-    dragging.current = false;
-  };
-
-  const onKeyDown = (e: React.KeyboardEvent) => {
-    const jump: Record<string, number> = {
-      ArrowRight: 1,
-      ArrowUp: 1,
-      ArrowLeft: -1,
-      ArrowDown: -1,
-      PageUp: 3,
-      PageDown: -3,
-    };
-    let next: number;
-    if (e.key === 'Home') next = 0;
-    else if (e.key === 'End') next = last;
-    else if (e.key in jump) next = clamp(selected + jump[e.key]!);
-    else return;
-    e.preventDefault();
-    onSelect(next);
-  };
-
-  /** ◀ / ▶ : un cran vers le bas ou vers le haut de l'échelle. */
-  const step = (delta: 1 | -1, aria: string, glyph: string) => (
-    <button
-      type="button"
-      aria-label={aria}
-      disabled={delta < 0 ? selected === 0 : selected === last}
-      onClick={() => onSelect(clamp(selected + delta))}
-      className="border-line bg-surface-base text-content hover:text-content-strong enabled:hover:border-line-strong flex h-7 w-6 shrink-0 items-center justify-center rounded border text-[10px] transition-colors disabled:opacity-30"
-    >
-      {glyph}
-    </button>
-  );
 
   return (
-    <div className="flex items-center gap-2">
-      {step(-1, labels.rankPrev, '◀')}
-
-      {/* ZONE D'ÉCOUTE : tout le bloc du sélecteur répond au clic et au glissé —
-          le rail, le pouce (y compris ses débords), et jusqu'aux repères de grade.
-          Le rembourrage `px-5` réserve la place des débords du pouce ; il ne
-          fausse rien, la géométrie étant mesurée sur le rail. */}
-      <div
-        ref={hit}
-        role="slider"
-        tabIndex={0}
-        aria-label={labels.rank}
-        aria-valuemin={0}
-        aria-valuemax={last}
-        aria-valuenow={selected}
-        aria-valuetext={`${ctx.rank ?? ctx.stageLabel ?? ''} — ${labels.level} ${ctx.level}`}
-        onPointerDown={onDown}
-        onPointerMove={onMove}
-        onPointerUp={onUp}
-        onPointerCancel={onUp}
-        onLostPointerCapture={onUp}
-        onKeyDown={onKeyDown}
-        className="focus-visible:ring-ring min-w-0 flex-1 cursor-pointer touch-none rounded px-5 py-0.5 select-none focus-visible:ring-2 focus-visible:outline-none"
-      >
-        <div ref={rail} className="relative h-11">
+    <HeatSlider
+      count={options.length}
+      selected={selected}
+      onSelect={onSelect}
+      ariaLabel={labels.rank}
+      valueText={`${ctx.rank ?? ctx.stageLabel ?? ''} — ${labels.level} ${ctx.level}`}
+      prevLabel={labels.rankPrev}
+      nextLabel={labels.rankNext}
+      railClass="h-11"
+      padClass="px-5"
+      thumbClass="h-9.5 w-9.5 rounded-[10px]"
+      // Graduations posées à leur position réelle, marquées plus fort au début
+      // de chaque grade (un cran de grade n'a pas de « + » dans son rang).
+      marks={options.map((s, i) => {
+        const gradeStart = !s.rank?.includes('+');
+        return (
           <span
+            key={i}
             aria-hidden
-            className="absolute inset-x-0 top-1/2 h-2.5 -translate-y-1/2 rounded-full"
+            className="bg-surface-sunken absolute top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
             style={{
-              background:
-                'linear-gradient(90deg, var(--rank-heat-lo), var(--rank-heat-mid), var(--rank-heat-hi))',
+              left: `${(last > 0 ? i / last : 0) * 100}%`,
+              width: gradeStart ? 2 : 1,
+              height: gradeStart ? 12 : 7,
+              opacity: gradeStart ? 0.55 : 0.3,
             }}
           />
-
-          {options.map((s, i) => {
-            const gradeStart = !s.rank?.includes('+');
-            return (
-              <span
-                key={i}
-                aria-hidden
-                className="bg-surface-sunken absolute top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
-                style={{
-                  left: `${(last > 0 ? i / last : 0) * 100}%`,
-                  width: gradeStart ? 2 : 1,
-                  height: gradeStart ? 12 : 7,
-                  opacity: gradeStart ? 0.55 : 0.3,
-                }}
-              />
-            );
-          })}
-
-          <span
-            aria-hidden
-            className="border-accent bg-surface-base ring-accent/20 pointer-events-none absolute top-1/2 flex h-9.5 w-9.5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[10px] border-2 shadow-lg ring-4 transition-[left] duration-75"
-            style={{ left: `${pos * 100}%` }}
-          >
-            {/* Un GRADE se reconnaît à son badge ; un STAGE n'en a pas — il porte
-                son numéro (le jeu ne dessine rien d'autre pour l'Adventure
-                License). Le libellé complet (« Stage 8 ») reste dit au lecteur
-                d'écran, sous le pouce. */}
-            {ctx.rank ? (
-              /* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */
-              <img
-                src={img.rankBadge(rankBadgeSprite(ctx.rank))}
-                alt=""
-                draggable={false}
-                className="h-7.5 w-7.5 object-contain"
-              />
-            ) : (
-              ctx.stage && (
-                <span className="text-content-strong font-mono text-sm font-bold">{ctx.stage}</span>
-              )
-            )}
-          </span>
-        </div>
-
-        {/* Repères de grade, ancrés au milieu de leur groupe : les points d'appui
-            de l'échelle (E … SSS), sans afficher les trente crans. */}
-        <div aria-hidden className="relative h-4">
-          {grades.map((g) => (
-            <span
-              key={g.name}
-              className={`absolute -translate-x-1/2 font-mono text-[10px] font-bold transition-colors ${
-                g.indexes.includes(selected) ? 'text-accent' : 'text-content-strong'
-              }`}
-              style={{ left: `${g.mid * 100}%` }}
-            >
-              {g.name}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {step(1, labels.rankNext, '▶')}
-    </div>
+        );
+      })}
+      // Un GRADE se reconnaît à son badge ; un STAGE n'en a pas — il porte son
+      // numéro (le jeu ne dessine rien d'autre pour l'Adventure License). Le
+      // libellé complet reste dit au lecteur d'écran (aria-valuetext).
+      thumb={
+        ctx.rank ? (
+          // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
+          <img
+            src={img.rankBadge(rankBadgeSprite(ctx.rank))}
+            alt=""
+            draggable={false}
+            className="h-7.5 w-7.5 object-contain"
+          />
+        ) : (
+          ctx.stage && (
+            <span className="text-content-strong font-mono text-sm font-bold">{ctx.stage}</span>
+          )
+        )
+      }
+      // Repères de grade, ancrés au milieu de leur groupe (E … SSS), sans
+      // afficher les trente crans.
+      labels={grades.map((g) => (
+        <span
+          key={g.name}
+          className={`absolute -translate-x-1/2 font-mono text-[10px] font-bold transition-colors ${
+            g.indexes.includes(selected) ? 'text-accent' : 'text-content-strong'
+          }`}
+          style={{ left: `${g.mid * 100}%` }}
+        >
+          {g.name}
+        </span>
+      ))}
+    />
   );
 }
