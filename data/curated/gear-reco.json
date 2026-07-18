@@ -4841,7 +4841,11 @@
       ],
       "substats": "CHC>ATK>SPD=CHD>DMG UP%",
       "note": {
-        "en": "{I-T/Executioner's Charm} at +10."
+        "en": "{I-T/Executioner's Charm} at +10.",
+        "jp": "{I-T/Executioner's Charm} +10で。",
+        "kr": "{I-T/Executioner's Charm} +10에서.",
+        "zh": "{I-T/Executioner's Charm} 在 +10 处。",
+        "fr": "{I-T/Executioner's Charm} à +10."
       }
     },
     {
