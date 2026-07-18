@@ -2,6 +2,7 @@
 
 import { useState, type ReactNode } from 'react';
 import { lineupRows, type LineupEntry, type LineupRow } from '@/lib/lineup';
+import { onTabListKeyDown } from '@/lib/tablist';
 import { useEncounterSelectionMaybe } from './EncounterSelection';
 
 /**
@@ -86,13 +87,19 @@ function CompactRoster({ items, label }: { items: LineupItem[]; label: string })
 
   return (
     <div className="space-y-3">
-      <div role="tablist" aria-label={label} className="flex flex-wrap items-center gap-1.5">
+      <div
+        role="tablist"
+        aria-label={label}
+        className="flex flex-wrap items-center gap-1.5"
+        onKeyDown={(e) => onTabListKeyDown(e, items.length, selected, setActive)}
+      >
         {items.map((item, i) => (
           <button
             key={i}
             type="button"
             role="tab"
             aria-selected={i === selected}
+            tabIndex={i === selected ? 0 : -1}
             onClick={() => setActive(i)}
             className={`flex cursor-pointer items-center gap-1.5 rounded-md border px-2 py-1 text-xs transition-colors ${
               i === selected

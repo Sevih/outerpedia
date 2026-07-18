@@ -6,6 +6,25 @@
 
 ## 2026-07-18
 
+- **A11y des barres d'onglets (roving tabindex) + micro-fixes** — les 5
+  implémentations `role="tablist"` du site (ui/Tabs, guides/SegmentedTabs,
+  EncounterSelection, MonsterLineup, TeamSlotCarousel — l'audit en citait 4)
+  n'avaient AUCUNE navigation clavier ni liaison onglet↔panneau. Helper unique
+  `src/lib/tablist.ts` (`onTabListKeyDown`) : ←/↑ recule, →/↓ avance (cyclique),
+  Home/End aux extrémités, sélectionne ET déplace le focus. Roving tabindex
+  posé partout (`tabIndex` 0 sur l'actif, −1 sinon → Tab entre/sort de la barre,
+  les flèches naviguent dedans). Les deux primitives à panneau unique (ui/Tabs,
+  SegmentedTabs) gagnent en plus `id`/`aria-controls` sur les onglets et un
+  panneau `role="tabpanel"` lié (`aria-labelledby`, focusable) — sémantique
+  d'onglet conditionnée à « >1 onglet » dans SegmentedTabs (sinon aria-labelledby
+  pointerait dans le vide). Micro-fixes du même audit : LicenseTabs — face avant
+  nommée (`revealLabel`) et seule la face VISIBLE focusable/exposée (backface-
+  hidden ne masque qu'au visuel) ; TowerFloorMenu — `aria-label` sur la
+  recherche (placeholder ≠ label) ; EeTranscendSection — boutons +/- redondants
+  (le slider est la commande accessible) sortis de l'arbre a11y + du focus au
+  lieu d'`aria-label="-"/"+"` ; GearRecoSection — `aria-pressed` sur le sélecteur
+  de build. Aucun changement visuel. 351 tests verts, typecheck propre (mon
+  périmètre).
 - **Extracteur d'ITEMS** (PRIO Sevih — l'entité manquante de la matrice) —
   nouvelle cible de revue `item` (`buildItemCatalog` : items + goods + costumes
   - overlay curé baké, exactement la forme d'`items.json`), mémoïsée sur les

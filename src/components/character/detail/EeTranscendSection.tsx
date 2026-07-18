@@ -156,11 +156,15 @@ function TranscendSlider({
 
         {/* Slider + boutons */}
         <div className="flex items-center gap-2">
+          {/* Commodité SOURIS, redondante avec le slider (lui focusable + piloté
+              aux flèches + `aria-valuetext`) : hors arbre a11y et hors focus,
+              plutôt qu'un `aria-label="-"` illisible. */}
           <button
             type="button"
             onClick={() => setIdx((i) => Math.max(0, i - 1))}
             className="h-7 w-7 rounded border border-white/10 text-zinc-300 hover:bg-white/5"
-            aria-label="-"
+            aria-hidden
+            tabIndex={-1}
           >
             –
           </button>
@@ -189,7 +193,8 @@ function TranscendSlider({
             type="button"
             onClick={() => setIdx((i) => Math.min(tiers.length - 1, i + 1))}
             className="h-7 w-7 rounded border border-white/10 text-zinc-300 hover:bg-white/5"
-            aria-label="+"
+            aria-hidden
+            tabIndex={-1}
           >
             +
           </button>

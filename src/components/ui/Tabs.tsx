@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { cn } from '@/lib/cn';
+import { onTabListKeyDown } from '@/lib/tablist';
 import { useUrlSlice, writeUrl } from '@/hooks/useUrlSlice';
 
 export interface Tab {
@@ -40,6 +41,16 @@ export function Tabs({
   const fromUrl = urlTab && tabs.some((t) => t.id === urlTab) ? urlTab : null;
   const active = (urlParam ? fromUrl : localTab) ?? tabs[0]?.id;
   const current = tabs.find((t) => t.id === active) ?? tabs[0];
+  const activeIndex = Math.max(
+    0,
+    tabs.findIndex((t) => t.id === active),
+  );
+
+  // Ids stables pour lier chaque onglet à l'unique panneau (aria-controls) et le
+  // panneau à l'onglet actif (aria-labelledby).
+  const baseId = useId();
+  const tabId = (id: string) => `${baseId}-tab-${id}`;
+  const panelId = `${baseId}-panel`;
 
   const select = (id: string) => {
     if (!urlParam) {
@@ -55,14 +66,21 @@ export function Tabs({
 
   return (
     <div className={className}>
-      <div role="tablist" className="border-line-subtle flex gap-1 border-b">
+      <div
+        role="tablist"
+        className="border-line-subtle flex gap-1 border-b"
+        onKeyDown={(e) => onTabListKeyDown(e, tabs.length, activeIndex, (i) => select(tabs[i].id))}
+      >
         {tabs.map((t) => {
           const on = t.id === active;
           return (
             <button
               key={t.id}
+              id={tabId(t.id)}
               role="tab"
               aria-selected={on}
+              aria-controls={panelId}
+              tabIndex={on ? 0 : -1}
               onClick={() => select(t.id)}
               className={cn(
                 '-mb-px border-b-2 px-4 py-2 text-sm font-medium transition-colors',
@@ -76,7 +94,13 @@ export function Tabs({
           );
         })}
       </div>
-      <div role="tabpanel" className="pt-4">
+      <div
+        role="tabpanel"
+        id={panelId}
+        aria-labelledby={current ? tabId(current.id) : undefined}
+        tabIndex={0}
+        className="pt-4"
+      >
         {current?.content}
       </div>
     </div>

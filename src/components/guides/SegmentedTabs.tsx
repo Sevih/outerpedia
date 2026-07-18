@@ -13,9 +13,10 @@
  * le hash (`#<urlKey>=<clé d'onglet>`, cf. `url-hash`) — lien partageable, comme
  * la version. Sans clé, c'est de l'état local (navigation de confort).
  */
-import { useState, type ReactNode } from 'react';
+import { useId, useState, type ReactNode } from 'react';
 import { useUrlSlice } from '@/hooks/useUrlSlice';
 import { readHashParam, writeHashParam } from '@/lib/url-hash';
+import { onTabListKeyDown } from '@/lib/tablist';
 
 export interface TabItem {
   key: string;
@@ -49,6 +50,7 @@ export function SegmentedTabs({
   // Lecture inconditionnelle (règle des hooks) ; ignorée sans `urlKey`. Snapshot
   // serveur `null` → premier rendu sur `defaultIndex`, resync après hydratation.
   const hashValue = useUrlSlice('hashchange', () => (urlKey ? readHashParam(urlKey) : null));
+  const baseId = useId();
 
   if (!tabs.length) return null;
 
@@ -63,7 +65,12 @@ export function SegmentedTabs({
     else setLocalSelected(i);
   };
 
-  const active = tabs[Math.min(selected, tabs.length - 1)];
+  const activeIndex = Math.min(selected, tabs.length - 1);
+  const active = tabs[activeIndex];
+
+  // Ids stables : onglet ↔ panneau unique (aria-controls / aria-labelledby).
+  const tabId = (i: number) => `${baseId}-tab-${i}`;
+  const panelId = `${baseId}-panel`;
 
   // Conteneur de la barre d'onglets + boutons, selon la variante.
   const listClass =
@@ -93,13 +100,21 @@ export function SegmentedTabs({
   return (
     <div className="space-y-4">
       {tabs.length > 1 && (
-        <div role="tablist" aria-label={ariaLabel} className={listClass}>
+        <div
+          role="tablist"
+          aria-label={ariaLabel}
+          className={listClass}
+          onKeyDown={(e) => onTabListKeyDown(e, tabs.length, activeIndex, select)}
+        >
           {tabs.map((tab, i) => (
             <button
               key={tab.key}
+              id={tabId(i)}
               type="button"
               role="tab"
               aria-selected={i === selected}
+              aria-controls={panelId}
+              tabIndex={i === selected ? 0 : -1}
               onClick={() => select(i)}
               className={buttonClass(i === selected)}
             >
@@ -108,7 +123,15 @@ export function SegmentedTabs({
           ))}
         </div>
       )}
-      <div>{active.content}</div>
+      {/* Sémantique d'onglet seulement s'il Y A une barre (>1 onglet) : sinon
+          aria-labelledby pointerait vers un onglet absent du DOM. */}
+      {tabs.length > 1 ? (
+        <div role="tabpanel" id={panelId} aria-labelledby={tabId(activeIndex)} tabIndex={0}>
+          {active.content}
+        </div>
+      ) : (
+        <div>{active.content}</div>
+      )}
     </div>
   );
 }

@@ -9,6 +9,7 @@ import {
   type PointerEvent as ReactPointerEvent,
   type ReactNode,
 } from 'react';
+import { onTabListKeyDown } from '@/lib/tablist';
 
 /**
  * LA DIFFICULTÉ COURANTE — l'axe AU-DESSUS du palier.
@@ -85,6 +86,7 @@ export function EncounterTabs({ label, tabs }: { label: string; tabs: string[] }
         role="tablist"
         aria-label={label}
         className="border-line-subtle bg-surface-sunken inline-flex rounded-lg border p-0.5"
+        onKeyDown={(e) => onTabListKeyDown(e, tabs.length, selected, setSelected)}
       >
         {tabs.map((tab, i) => (
           <button
@@ -92,6 +94,7 @@ export function EncounterTabs({ label, tabs }: { label: string; tabs: string[] }
             type="button"
             role="tab"
             aria-selected={i === selected}
+            tabIndex={i === selected ? 0 : -1}
             onClick={() => setSelected(i)}
             className={`rounded-md px-3 py-1 text-sm font-semibold transition-colors ${
               i === selected

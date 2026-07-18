@@ -2,6 +2,7 @@
 
 import { useRef, useState, type ReactNode } from 'react';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { onTabListKeyDown } from '@/lib/tablist';
 
 /**
  * UN POSTE D'ÉQUIPE, ET SES REMPLAÇANTS.
@@ -200,7 +201,12 @@ export function TeamSlotCarousel({
         </button>
         {/* Les points disent COMBIEN d'options existent — ce que la colonne
             donnait gratuitement et que le cylindre cache. */}
-        <div className="flex items-center gap-1" role="tablist" aria-label={labels.join(', ')}>
+        <div
+          className="flex items-center gap-1"
+          role="tablist"
+          aria-label={labels.join(', ')}
+          onKeyDown={(e) => onTabListKeyDown(e, labels.length, active, goTo)}
+        >
           {labels.map((label, i) => (
             <button
               key={label}
@@ -208,6 +214,7 @@ export function TeamSlotCarousel({
               role="tab"
               aria-selected={i === active}
               aria-label={label}
+              tabIndex={i === active ? 0 : -1}
               onClick={() => goTo(i)}
               className={`h-1.5 cursor-pointer rounded-full transition-all ${
                 i === active ? 'bg-accent w-3' : 'bg-line hover:bg-line-strong w-1.5'

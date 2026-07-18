@@ -148,14 +148,6 @@
 
 ## 🌍 i18n / SEO / a11y (audit 17/07)
 
-- [ ] **A11y tablists** : 4 implémentations `role="tablist"` sans navigation
-      clavier ←/→ ni `aria-controls`/`id` (ui/Tabs, SegmentedTabs,
-      EncounterSelection, MonsterLineup) — mutualiser un helper accessible
-      (roving tabindex). Aussi : LicenseTabs:127-139 (bouton face verrouillée
-      sans nom accessible, focusable une fois retourné), TowerFloorMenu:62
-      (input recherche sans label), EeTranscendSection:163,192
-      (`aria-label="-"/"+"`), GearRecoSection:424 (onglets sans aria-pressed).
-
 ## 🧪 Tests à écrire
 
 - [ ] **`src/lib/skill-view.ts` en priorité 1** (741 lignes, zéro test) : le

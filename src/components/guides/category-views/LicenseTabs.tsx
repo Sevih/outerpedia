@@ -123,10 +123,15 @@ function PromotionCard({
             revealed ? 'transform-[rotateY(180deg)]' : ''
           }`}
         >
-          {/* Face avant — verrouillée (clic = révéler). */}
+          {/* Face avant — verrouillée (clic = révéler). `backface-hidden` ne
+              masque qu'au VISUEL : on sort la face cachée du focus + des
+              lecteurs d'écran (sinon les deux faces sont tabulables/annoncées). */}
           <button
             type="button"
             onClick={onReveal}
+            aria-label={revealLabel}
+            aria-hidden={revealed}
+            tabIndex={revealed ? -1 : 0}
             className="absolute inset-0 cursor-pointer overflow-hidden rounded-lg backface-hidden"
           >
             {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
@@ -138,9 +143,12 @@ function PromotionCard({
             />
           </button>
 
-          {/* Face arrière — révélée (lien vers le guide). */}
+          {/* Face arrière — révélée (lien vers le guide). Hors focus/lecteurs
+              tant que la carte n'est pas retournée. */}
           <Link
             href={card.href}
+            aria-hidden={!revealed}
+            tabIndex={revealed ? 0 : -1}
             className="group absolute inset-0 transform-[rotateY(180deg)] overflow-hidden rounded-lg transition-all backface-hidden hover:ring-1 hover:ring-yellow-400/50"
           >
             {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}

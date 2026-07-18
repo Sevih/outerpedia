@@ -64,6 +64,7 @@ export function TowerFloorMenu({
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder={searchPlaceholder}
+        aria-label={searchPlaceholder}
         className="border-line-subtle bg-surface-raised text-content-strong placeholder:text-content-muted focus:border-accent mb-3 w-full rounded-md border px-3 py-2 text-sm outline-none"
       />
       {/* Hauteur PLAFONNÉE : la liste défile en interne. `100vh-9rem` supposait

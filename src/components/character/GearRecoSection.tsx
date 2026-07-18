@@ -425,6 +425,7 @@ export function GearRecoSection({
               key={i}
               type="button"
               onClick={() => setActive(i)}
+              aria-pressed={on}
               style={
                 on
                   ? {
