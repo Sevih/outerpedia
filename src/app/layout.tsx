@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import localFont from 'next/font/local';
 import { getBaseUrl } from '@/lib/seo';
+import { SITE_INDEXABLE } from '@/lib/site';
 import { cssBackgroundVars } from '@/lib/images';
 import './globals.css';
 
@@ -21,6 +22,12 @@ export const metadata: Metadata = {
   description: 'Community-driven wiki and database for Outerplane.',
   openGraph: { siteName: 'Outerpedia', type: 'website' },
   twitter: { card: 'summary_large_image' },
+  // Hors index par défaut sur un build de production (staging VPS) ; la prod
+  // finale l'active via NEXT_PUBLIC_SITE_INDEXABLE=true (cf. src/lib/site.ts).
+  // `follow: true` : crawlers et Googlebot parcourent le site (et VOIENT donc le
+  // noindex) — d'où AUCUN `Disallow` dans robots.ts, qui les aveuglerait.
+  // Hérité par toutes les pages ; une page peut le surcharger (createPageMetadata).
+  ...(SITE_INDEXABLE ? {} : { robots: { index: false, follow: true } }),
   /*
    * Icônes DÉCLARÉES, pas devinées.
    *

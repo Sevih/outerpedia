@@ -8,6 +8,12 @@
 import type { Metadata } from 'next';
 import { LANGUAGES, LANGS, DEFAULT_LANG, normalizeLang, type Lang } from '@/lib/i18n/config';
 import { img } from '@/lib/images';
+import { getBaseUrl, buildUrl, CANONICAL_ORIGIN } from '@/lib/site';
+
+// URL / domaine : le profil de déploiement (origine, routage, index) vit dans
+// src/lib/site.ts — source UNIQUE. Réexporté ici pour préserver les imports
+// historiques `@/lib/seo` (robots, sitemap, llms.txt, layout).
+export { getBaseUrl, buildUrl };
 
 /** « Month Year » localisé pour les titres SEO dynamiques (tier lists…). */
 export function getMonthYear(lang: Lang): string {
@@ -18,7 +24,6 @@ export function getMonthYear(lang: Lang): string {
 }
 
 const SITE_NAME = 'Outerpedia';
-const BASE_DOMAIN = process.env.NEXT_PUBLIC_BASE_DOMAIN ?? 'outerpedia.com';
 /**
  * Carte de partage par défaut — passe par la base R2, comme toute image du site.
  * Elle était écrite en chemin racine (`/images/…`), donc résolue contre le
@@ -27,23 +32,6 @@ const BASE_DOMAIN = process.env.NEXT_PUBLIC_BASE_DOMAIN ?? 'outerpedia.com';
  * les pages sans `ogImage` explicite avaient donc une carte cassée.
  */
 const DEFAULT_OG_IMAGE = img.ogDefault();
-
-/** URL de base selon l'environnement (localhost en dev). */
-export function getBaseUrl(): string {
-  if (process.env.NODE_ENV === 'development')
-    return `http://localhost:${process.env.PORT ?? '3000'}`;
-  return `https://${BASE_DOMAIN}`;
-}
-
-/** URL complète pour une langue + un path (path-based en dev, sous-domaine en prod). */
-export function buildUrl(lang: Lang, path = ''): string {
-  const segment = path === '/' ? '' : path;
-  const base = getBaseUrl();
-  const safeLang = normalizeLang(lang);
-  if (process.env.NODE_ENV === 'development') return `${base}/${safeLang}${segment}`;
-  const sub = LANGUAGES[safeLang].subdomain;
-  return sub ? `https://${sub}.${BASE_DOMAIN}${segment}` : `${base}${segment}`;
-}
 
 /** Alternates hreflang pour un path (toutes les langues + x-default). */
 function buildAlternates(path: string): Record<string, string> {
@@ -127,8 +115,8 @@ export function createPageMetadata({
 }
 
 // ─── Builders JSON-LD ────────────────────────────────────────────────────────
-// @id stables (origine canonique) pour que les cross-refs survivent aux sous-domaines.
-const CANONICAL_ORIGIN = `https://${BASE_DOMAIN}`;
+// @id stables (origine canonique, cf. src/lib/site.ts) pour que les cross-refs
+// survivent aux sous-domaines de langue d'un même déploiement.
 const WEBSITE_ID = `${CANONICAL_ORIGIN}/#website`;
 const VIDEOGAME_ID = `${CANONICAL_ORIGIN}/#videogame`;
 const ORGANIZATION_ID = `${CANONICAL_ORIGIN}/#organization`;

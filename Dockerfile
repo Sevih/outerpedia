@@ -25,11 +25,23 @@ RUN pnpm install --frozen-lockfile
 
 # ---- Étape 2 : build ----
 FROM base AS builder
-# Domaines bakés dans le bundle client AU BUILD (NEXT_PUBLIC_* = build-time) :
-# sans IMG_BASE, les URLs d'images deviennent relatives → servies (404) par le
-# VPS au lieu du bucket R2.
-ARG NEXT_PUBLIC_BASE_DOMAIN=outerpedia.com
-ENV NEXT_PUBLIC_BASE_DOMAIN=${NEXT_PUBLIC_BASE_DOMAIN}
+# NEXT_PUBLIC_* = BAKÉS dans le bundle AU BUILD (build-time). La génération
+# statique fige les URLs à la compilation : ces valeurs ne sont PAS ajustables au
+# runtime du conteneur.
+#
+# Profil de déploiement (cf. src/lib/site.ts). Défauts = STAGING (VPS OVH) : la CI
+# builde sans build-args, l'image sert donc d'emblée le bon profil staging
+# (canonicals/hreflang vers le vrai hôte + noindex).
+# BASCULE prod (outerpedia.com) = changer ces 3 défauts, ou passer des
+# --build-arg. Détail : docs/procedure/bascule-domaine.md
+ARG NEXT_PUBLIC_SITE_ORIGIN=https://vps-7b703196.vps.ovh.net
+ENV NEXT_PUBLIC_SITE_ORIGIN=${NEXT_PUBLIC_SITE_ORIGIN}
+ARG NEXT_PUBLIC_LANG_ROUTING=path
+ENV NEXT_PUBLIC_LANG_ROUTING=${NEXT_PUBLIC_LANG_ROUTING}
+ARG NEXT_PUBLIC_SITE_INDEXABLE=false
+ENV NEXT_PUBLIC_SITE_INDEXABLE=${NEXT_PUBLIC_SITE_INDEXABLE}
+# Base des assets images : sans elle, les URLs d'images deviennent relatives →
+# servies (404) par le VPS au lieu du bucket R2. Indépendante du domaine du site.
 ARG NEXT_PUBLIC_IMG_BASE=https://img.outerpedia.com
 ENV NEXT_PUBLIC_IMG_BASE=${NEXT_PUBLIC_IMG_BASE}
 ENV NODE_ENV=production

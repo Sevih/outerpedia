@@ -68,12 +68,16 @@ cd outerpedia-v3
 
 Seul `.env.example` est dans git. Recréer `.env.local` avec les vraies valeurs :
 
-| Variable                                      | Rôle                                                                                                         |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `R2_*` (endpoint, bucket, access key, secret) | accès Cloudflare R2 (images)                                                                                 |
-| `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ZONE_ID`  | purge CDN / API Cloudflare                                                                                   |
-| `YOUTUBE_API_KEY`                             | récup des vidéos (news)                                                                                      |
-| `NEXT_PUBLIC_BASE_DOMAIN`                     | présent dans `.env.example` — **à ne pas oublier**, souvent manquant sur les vieilles copies de `.env.local` |
+| Variable                                      | Rôle                         |
+| --------------------------------------------- | ---------------------------- |
+| `R2_*` (endpoint, bucket, access key, secret) | accès Cloudflare R2 (images) |
+| `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ZONE_ID`  | purge CDN / API Cloudflare   |
+| `YOUTUBE_API_KEY`                             | récup des vidéos (news)      |
+
+> Profil de déploiement (`NEXT_PUBLIC_SITE_ORIGIN` / `_LANG_ROUTING` / `_SITE_INDEXABLE`) :
+> **rien à poser en dev**, les défauts donnent `localhost + path + indexable` (cf.
+> [src/lib/site.ts](../../src/lib/site.ts)). Ils ne servent qu'au build prod — voir
+> [bascule-domaine.md](bascule-domaine.md).
 
 ### 2.2 Outillage — dans `.gamedata/` (hors git)
 
