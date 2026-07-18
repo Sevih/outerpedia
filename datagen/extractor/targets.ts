@@ -25,11 +25,13 @@ export interface GeneratedTarget {
   /** Reconstruit la donnée fraîche (clé d'entité → objet), comme `build.ts`. */
   build(): Record<string, unknown>;
   /**
-   * Sous-ensemble du fichier committé à comparer (défaut : le fichier entier).
-   * Sert quand plusieurs entités partagent un fichier — les effets vivent sous
-   * `glossaries.json`.effects.
+   * Clé du sous-objet dans un fichier PARTAGÉ (défaut : le fichier entier est la
+   * cible). Sert à la fois à la LECTURE (comparer ce sous-objet) et à l'ÉCRITURE
+   * (n'écraser QUE ce sous-objet, pas le reste du fichier) — les effets vivent
+   * sous `glossaries.json`.effects, les autres clés du glossaire (classes,
+   * éléments…) ne doivent pas être touchées par un accept.
    */
-  select?(raw: Record<string, unknown>): Record<string, unknown>;
+  subKey?: string;
 }
 
 /**
@@ -68,10 +70,11 @@ export const TARGETS: GeneratedTarget[] = [
     id: 'effect',
     label: 'Effets',
     // Les effets ne sont pas un fichier dédié : ils vivent sous `.effects` du
-    // glossaire partagé (cf. build.ts) → on cible ce sous-objet.
+    // glossaire partagé (cf. build.ts) → on cible ce sous-objet (lecture ET
+    // écriture ne touchent que `.effects`).
     file: 'glossaries.json',
+    subKey: 'effects',
     build: () => Object.fromEntries(buildEffectGlossary().effects),
-    select: (raw) => (raw.effects as Record<string, unknown>) ?? {},
   },
   equipTarget('ee', 'EE', 'ee'),
   equipTarget('weapon', 'Armes', 'weapon'),

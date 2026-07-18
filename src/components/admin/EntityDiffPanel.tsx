@@ -39,8 +39,19 @@ function FieldRow({ d }: { d: FieldDiff }) {
  * intervient). La validation reste globale (accueil) car l'extraction est
  * déterministe : on accepte le fichier entier, pas une entité isolée.
  */
-export function EntityDiffPanel({ fields }: { fields: FieldDiff[] }) {
+export function EntityDiffPanel({ fields, bare = false }: { fields: FieldDiff[]; bare?: boolean }) {
   if (!fields.length) return null;
+  // `bare` : feuilles seules (l'appelant fournit son propre cadre / son propre
+  // libellé) — utilisé par la revue d'extraction générique (ExtractorReview).
+  if (bare) {
+    return (
+      <div className="space-y-3">
+        {fields.map((d) => (
+          <FieldRow key={d.path} d={d} />
+        ))}
+      </div>
+    );
+  }
   return (
     <div className="border-warn/40 bg-warn/5 space-y-3 rounded-lg border p-3">
       <p className="text-warn text-xs font-semibold uppercase">
