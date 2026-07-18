@@ -43,6 +43,16 @@ export function isValidLang(value: string): value is Lang {
 }
 
 /**
+ * Normalise un param de route BRUT (non fiable) vers une `Lang` valide, repli
+ * sur la langue par défaut. Remplace le motif copié dans chaque page
+ * (`(isValidLang(raw) ? raw : 'en') as Lang`) — plus de littéral `'en'` en dur
+ * ni de cast.
+ */
+export function normalizeLang(raw: string): Lang {
+  return isValidLang(raw) ? raw : DEFAULT_LANG;
+}
+
+/**
  * GameLang = langues officiellement fournies par le jeu (données extraites).
  * Sous-ensemble de `Lang` ; les traductions communautaires (fr) n'en font pas
  * partie. Doit correspondre à `GAME_LANGS` de `datagen/lib/lang.ts`.

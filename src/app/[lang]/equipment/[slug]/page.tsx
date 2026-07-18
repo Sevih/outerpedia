@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { isValidLang, type Lang } from '@/lib/i18n/config';
+import { normalizeLang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
 import { createPageMetadata, buildUrl } from '@/lib/seo';
 import { img } from '@/lib/images';
@@ -26,7 +26,7 @@ export async function generateMetadata({
   params: Promise<{ lang: string; slug: string }>;
 }): Promise<Metadata> {
   const { lang: raw, slug } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   const t = await getT(lang);
   const model = getEquipmentDetail(slug, lang);
   if (!model) return {};
@@ -47,7 +47,7 @@ export default async function EquipmentDetailPage({
   params: Promise<{ lang: string; slug: string }>;
 }) {
   const { lang: raw, slug } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   const t = await getT(lang);
   const model = getEquipmentDetail(slug, lang);
   if (!model) notFound();

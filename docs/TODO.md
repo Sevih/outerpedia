@@ -179,8 +179,6 @@
 - [ ] **Helpers adb** dupliqués entre `datagen/extract/dump.ts` et
       `pull-gamedata.ts` (ADB, PKG, capture, stream, pickDevice, bloc root) —
       extraire `extract/adb.ts`.
-- [ ] Boilerplate `lang` (18 occurrences du bloc await params + isValidLang) →
-      helper `normalizeLangParam` dans src/lib/i18n.
 - [ ] Logique « URL source de vérité » copiée entre ui/Tabs:35-54 et
       BannerTabs:23-41 → hook `useUrlTab` (fusionner avec la migration
       BannerTabs → hash, cf. règle actée ci-dessous).

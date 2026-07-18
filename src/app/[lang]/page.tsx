@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import type { Route } from 'next';
-import { isValidLang, type Lang } from '@/lib/i18n/config';
+import { normalizeLang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
 import { createPageMetadata } from '@/lib/seo';
 import { localePath } from '@/lib/navigation';
@@ -15,7 +15,7 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const { lang: raw } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   const t = await getT(lang);
   const meta = createPageMetadata({
     lang,
@@ -28,7 +28,7 @@ export async function generateMetadata({
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const { lang: raw } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   const t = await getT(lang);
   const count = getCharacterListItems().length;
 

@@ -6,6 +6,17 @@
 
 ## 2026-07-18
 
+- **Helper `normalizeLang` — fin du boilerplate lang (18 occurrences)** — chaque
+  page répétait le bloc « await params » suivi de la normalisation
+  copiée-collée du param de langue (garde de type puis repli sur un littéral en
+  dur, avec un cast). Un seul helper exporté par la config i18n remplace les 18
+  occurrences dans 9 pages, plus la copie privée du module SEO (dédupliquée).
+  Le repli passe du littéral en dur à la langue par défaut de la config (même
+  valeur aujourd'hui : l'anglais est la langue par défaut) — comportement
+  identique, un seul endroit à changer si le défaut bouge. Le cast disparaît :
+  le helper renvoie directement le bon type. Nettoyage induit : l'import du type
+  Lang, devenu inutile là où le cast était sa seule référence, retiré des 7
+  pages concernées. La garde `layout.tsx` (qui rejette une langue invalide en 404) garde volontairement la garde de type brute — sémantique différente.
 - **`shopSourceLabel` : fin des trois `shopLabel` divergents** — le libellé d'un
   slug de boutique (source d'équipement) était calculé en trois copies : les
   pages liste/fiche équipement repliaient sur le slug brut pour un slug hors

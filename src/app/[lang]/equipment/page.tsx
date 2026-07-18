@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { isValidLang, type Lang } from '@/lib/i18n/config';
+import { normalizeLang, type Lang } from '@/lib/i18n/config';
 import { getT, type TranslationKey } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { createPageMetadata, buildItemListJsonLd, buildUrl } from '@/lib/seo';
@@ -31,7 +31,7 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const { lang: raw } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   const t = await getT(lang);
   return createPageMetadata({
     lang,
@@ -133,7 +133,7 @@ function toGearRow(
 
 export default async function EquipmentPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang: raw } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   const t = await getT(lang);
 
   const weapons = getWeaponFamilies().map((f) => toGearRow(f, lang, 'gear', t));

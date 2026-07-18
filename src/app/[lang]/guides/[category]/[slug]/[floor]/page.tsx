@@ -13,7 +13,7 @@
  */
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { isValidLang, type Lang } from '@/lib/i18n/config';
+import { normalizeLang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { getT } from '@/i18n';
 import { createPageMetadata } from '@/lib/seo';
@@ -30,7 +30,7 @@ export async function generateMetadata({
   params: Promise<{ lang: string; category: string; slug: string; floor: string }>;
 }): Promise<Metadata> {
   const { lang: raw, category, slug, floor } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   const guide = getGuide(category, slug);
   const n = Number(floor);
   if (!guide || !Number.isInteger(n)) return {};
@@ -57,7 +57,7 @@ export default async function GuideFloorPage({
   params: Promise<{ lang: string; category: string; slug: string; floor: string }>;
 }) {
   const { lang: raw, category, slug, floor } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   const n = Number(floor);
   // Étage non numérique = URL fabriquée → 404 (le composant valide l'existence).
   if (!Number.isInteger(n) || n < 1) notFound();

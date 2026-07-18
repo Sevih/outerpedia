@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { LANGS, isValidLang, type Lang } from '@/lib/i18n/config';
+import { LANGS, normalizeLang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { getT } from '@/i18n';
 import {
@@ -35,7 +35,7 @@ export async function generateMetadata({
   params: Promise<{ lang: string; category: string }>;
 }): Promise<Metadata> {
   const { lang: raw, category } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   if (!isGuideCategory(category)) return {};
   const cat = GUIDE_CATEGORIES[category];
   return createPageMetadata({
@@ -52,7 +52,7 @@ export default async function GuideCategoryPage({
   params: Promise<{ lang: string; category: string }>;
 }) {
   const { lang: raw, category } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   if (!isGuideCategory(category)) notFound();
 
   const t = await getT(lang);

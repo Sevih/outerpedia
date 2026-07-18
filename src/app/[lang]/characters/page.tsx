@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { isValidLang, type Lang } from '@/lib/i18n/config';
+import { normalizeLang, type Lang } from '@/lib/i18n/config';
 import { getT, type TFunction, type TranslationKey } from '@/i18n';
 import { createPageMetadata, buildItemListJsonLd, buildUrl } from '@/lib/seo';
 import JsonLd from '@/components/seo/JsonLd';
@@ -24,7 +24,7 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const { lang: raw } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   const t = await getT(lang);
   return createPageMetadata({
     lang,
@@ -95,7 +95,7 @@ function buildLabels(rows: CharacterRow[], t: TFunction): CharactersBrowserLabel
 
 export default async function CharactersPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang: raw } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   const t = await getT(lang);
   const rows = buildRows(lang);
 

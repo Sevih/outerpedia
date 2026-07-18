@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { LANGS, isValidLang, type Lang } from '@/lib/i18n/config';
+import { LANGS, normalizeLang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { createPageMetadata } from '@/lib/seo';
 import { GUIDE_CATEGORIES, type GuideCategory } from '@/lib/data/guide-categories';
@@ -21,7 +21,7 @@ export async function generateMetadata({
   params: Promise<{ lang: string; category: string; slug: string }>;
 }): Promise<Metadata> {
   const { lang: raw, category, slug } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   const guide = getGuide(category, slug);
   if (!guide) return {};
   const updated = guideUpdatedDate(guide);
@@ -70,6 +70,6 @@ export default async function GuideDetailPage({
   params: Promise<{ lang: string; category: string; slug: string }>;
 }) {
   const { lang: raw, category, slug } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   return <GuideDetail lang={lang} category={category} slug={slug} />;
 }

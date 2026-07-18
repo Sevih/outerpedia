@@ -6,13 +6,8 @@
  * redupliquer la logique d'URL/langue. Porté de la V2, adapté à la config V3.
  */
 import type { Metadata } from 'next';
-import { LANGUAGES, LANGS, DEFAULT_LANG, isValidLang, type Lang } from '@/lib/i18n/config';
+import { LANGUAGES, LANGS, DEFAULT_LANG, normalizeLang, type Lang } from '@/lib/i18n/config';
 import { img } from '@/lib/images';
-
-/** Normalise une langue non fiable (param de route brut) vers une Lang valide. */
-function normalizeLang(lang: string): Lang {
-  return isValidLang(lang) ? lang : DEFAULT_LANG;
-}
 
 /** « Month Year » localisé pour les titres SEO dynamiques (tier lists…). */
 export function getMonthYear(lang: Lang): string {

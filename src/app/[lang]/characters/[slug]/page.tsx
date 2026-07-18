@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
-import { LANGS, isValidLang, type Lang } from '@/lib/i18n/config';
+import { LANGS, normalizeLang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { getT } from '@/i18n';
 import {
@@ -95,7 +95,7 @@ export async function generateMetadata({
   params: Promise<{ lang: string; slug: string }>;
 }): Promise<Metadata> {
   const { lang: raw, slug } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   const char = getCharacterBySlug(slug);
   if (!char) return {};
   const name = characterDisplayName(char, lang);
@@ -130,7 +130,7 @@ export default async function CharacterDetail({
   params: Promise<{ lang: string; slug: string }>;
 }) {
   const { lang: raw, slug } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   const char = getCharacterBySlug(slug);
   if (!char) notFound();
 

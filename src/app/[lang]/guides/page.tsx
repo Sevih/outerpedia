@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { isValidLang, type Lang } from '@/lib/i18n/config';
+import { normalizeLang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { getT } from '@/i18n';
 import {
@@ -21,7 +21,7 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const { lang: raw } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   const t = await getT(lang);
   return createPageMetadata({
     lang,
@@ -33,7 +33,7 @@ export async function generateMetadata({
 
 export default async function GuidesLanding({ params }: { params: Promise<{ lang: string }> }) {
   const { lang: raw } = await params;
-  const lang = (isValidLang(raw) ? raw : 'en') as Lang;
+  const lang = normalizeLang(raw);
   const t = await getT(lang);
 
   // Catégories non vides, dans l'ordre d'affichage (mêmes que la grille).
