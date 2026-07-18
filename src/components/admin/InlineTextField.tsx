@@ -12,6 +12,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { InlineRefs, RefItem } from '@/lib/admin/inline-refs';
 import type { TagCheck } from '@/lib/parse-text';
+import { InlinePreview } from '@/components/admin/InlinePreview';
 
 /** Un bouton de la barre : type de tag + libellé + source de refs. */
 interface TokenDef {
@@ -45,7 +46,6 @@ export function InlineTextField({
   value,
   onChange,
   refs,
-  lang,
   placeholder,
   rows = 2,
   layout = 'split',
@@ -53,8 +53,6 @@ export function InlineTextField({
   value: string;
   onChange: (v: string) => void;
   refs: InlineRefs;
-  /** Langue courante (pour l'aperçu localisé). */
-  lang: string;
   placeholder?: string;
   rows?: number;
   /** `split` = saisie/aperçu côte à côte (md+) ; `stacked` = aperçu dessous. */
@@ -64,11 +62,11 @@ export function InlineTextField({
   const [picker, setPicker] = useState<TokenDef | null>(null);
   const [query, setQuery] = useState('');
   const [skSlot, setSkSlot] = useState('S2');
-  const [html, setHtml] = useState('');
   const [checks, setChecks] = useState<TagCheck[]>([]);
   const [focused, setFocused] = useState(false);
 
-  // Aperçu + validation : aller-retour serveur debouncé (parseText/checkText).
+  // Validation précise (raison par tag) : aller-retour serveur debouncé
+  // (`checkText` contre les données du site). L'aperçu, lui, est client (instantané).
   useEffect(() => {
     let cancelled = false;
     const h = setTimeout(async () => {
@@ -76,22 +74,19 @@ export function InlineTextField({
         const res = await fetch('/api/admin/preview-text', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text: value, lang }),
+          body: JSON.stringify({ text: value }),
         });
-        const json = (await res.json()) as { html?: string; checks?: TagCheck[] };
-        if (!cancelled) {
-          setHtml(json.html ?? '');
-          setChecks(json.checks ?? []);
-        }
+        const json = (await res.json()) as { checks?: TagCheck[] };
+        if (!cancelled) setChecks(json.checks ?? []);
       } catch {
-        /* aperçu indisponible — silencieux */
+        /* validation indisponible — silencieux */
       }
-    }, 250);
+    }, 300);
     return () => {
       cancelled = true;
       clearTimeout(h);
     };
-  }, [value, lang]);
+  }, [value]);
 
   /** Insère un tag `{type/val}` à la position du curseur. */
   const insert = (type: string, val: string) => {
@@ -220,12 +215,8 @@ export function InlineTextField({
           }`}
           aria-label="Aperçu"
         >
-          {value.trim() ? (
-            // Rendu fidèle (parseText → HTML) — tooltips statiques dans l'aperçu.
-            <span dangerouslySetInnerHTML={{ __html: html }} />
-          ) : (
-            <span className="text-content-subtle text-xs">Aperçu…</span>
-          )}
+          {/* Aperçu client : libellés colorés résolus, refs inconnues en rouge. */}
+          <InlinePreview text={value} refs={refs} />
         </div>
       </div>
 

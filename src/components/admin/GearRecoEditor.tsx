@@ -376,7 +376,6 @@ export function GearRecoEditor({
               </div>
               <InlineTextField
                 value={b.note?.[noteLang] ?? ''}
-                lang={noteLang}
                 refs={refs}
                 placeholder={noteLang === 'en' ? '' : (b.note?.en ?? '')}
                 onChange={(v) => {

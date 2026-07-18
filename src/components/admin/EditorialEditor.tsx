@@ -60,7 +60,6 @@ function TextListEditor({
           <div className="flex-1">
             <InlineTextField
               value={item[lang] ?? ''}
-              lang={lang}
               refs={refs}
               layout="stacked"
               placeholder={lang === 'en' ? '' : (item.en ?? '')}
@@ -255,7 +254,6 @@ export function EditorialEditor({
                 <p className="text-content-subtle text-xs uppercase">Raison ({lang})</p>
                 <InlineTextField
                   value={g.reason?.[lang] ?? ''}
-                  lang={lang}
                   refs={refs}
                   placeholder={lang === 'en' ? '' : (g.reason?.en ?? '')}
                   onChange={(v) => {
