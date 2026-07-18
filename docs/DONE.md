@@ -36,10 +36,12 @@
   teinte le sprite reste une chaîne `filter` à part. `ELEMENT_RING` déjà
   tokenisé. (2) `TurnOrder` : amber SPD → `text-stat` (le point précis du TODO ;
   look inchangé, l'unification SPD amber-vs-neutre reste un choix visuel).
-  (3) `/dev/tokens` (`page.dev.tsx`, dev-only) : GALERIE de tous les tokens de
-  couleur en pastilles + valeur résolue au runtime (lue via `useSyncExternalStore`
-  pour respecter `set-state-in-effect`), groupée par famille — permet de VOIR et
-  d'ajuster. Typecheck + lint + 423 tests OK. RESTE : ~17 composants (MonadGateMap
+  (3) `/dev/tokens` (`page.dev.tsx`, dev-only) : GALERIE des tokens EN CONTEXTE —
+  chaque token appliqué dans une mini-maquette du composant qui l'emploie (carte
+  neutre surfaces/contenu, encarts de statut, nœuds Monad, chips buff/debuff,
+  valeurs de stat, chaîne, éléments, raretés/grades, rôles d'équipe, rampe de
+  chaleur) + sa valeur résolue au runtime (lue via `useSyncExternalStore` pour
+  respecter `set-state-in-effect`) — pour voir OÙ et COMMENT ça rend, et ajuster. Typecheck + lint + 423 tests OK. RESTE : ~17 composants (MonadGateMap
   a beaucoup de nuances/opacités bespoke → à arbitrer via la galerie), palettes
   de catégorie, extension RAW_COLOR, phase 2 éditoriale.
 
