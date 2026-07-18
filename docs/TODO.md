@@ -231,8 +231,9 @@
       par aucun des 3 tsc (include racine = src only) ; `assets-push.mjs` et
       `r2-cors.mjs` (maillon R2 du commit) jamais typecheckés — les convertir
       en `.ts` ou activer allowJs+checkJs.
-- [ ] CSP (`next.config.ts:19`) : retirer au moins `unsafe-eval` de script-src
-      en prod ; viser nonce/strict-dynamic à terme.
+- [ ] CSP (`next.config.ts`) : `unsafe-eval` RETIRÉ de script-src en prod le
+      18/07 (gardé en dev pour le HMR — cf. DONE). RESTE : viser nonce +
+      strict-dynamic pour retirer aussi `unsafe-inline` (script ET style).
 - [ ] Datagen, hygiène CLI : garde `isMain` manquante sur extract.ts,
       templates/convert.ts, coherence.ts, extractor/run.ts, import-gear-reco ;
       `main()` sans `.catch` dans assets/collect.ts ; parsing des flags

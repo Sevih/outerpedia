@@ -4,6 +4,19 @@ import { readFileSync } from 'fs';
 // Version from package.json — single source of truth, exposed to the client.
 const { version } = JSON.parse(readFileSync('./package.json', 'utf-8'));
 
+const isDev = process.env.NODE_ENV !== 'production';
+
+// `'unsafe-eval'` n'est requis QU'EN DEV (le HMR / React Fast Refresh de Next
+// s'appuie sur eval) ; un build de prod n'en a pas besoin — on le retire du
+// script-src en prod pour resserrer la CSP. Reste `'unsafe-inline'` (objectif
+// ultérieur : nonce + strict-dynamic).
+const scriptSrc = [
+  "'self'",
+  "'unsafe-inline'",
+  ...(isDev ? ["'unsafe-eval'"] : []),
+  'https://static.cloudflareinsights.com',
+].join(' ');
+
 // Security headers (ported from V2 — proven config).
 const securityHeaders = [
   { key: 'X-DNS-Prefetch-Control', value: 'on' },
@@ -16,7 +29,7 @@ const securityHeaders = [
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://static.cloudflareinsights.com",
+      `script-src ${scriptSrc}`,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: https: blob:",
       "font-src 'self' data:",
@@ -44,7 +57,6 @@ const securityHeaders = [
 // l'URL déclarée, qui reste morte. `favicon.ico` y échappe (Next le traite à
 // part). D'où les icônes servies depuis `public/`, déclarées à la main dans
 // `metadata.icons` (src/app/layout.tsx) : plus aucune convention magique.
-const isDev = process.env.NODE_ENV !== 'production';
 const base = ['tsx', 'ts', 'jsx', 'js'];
 const pageExtensions = isDev ? [...base.map((e) => `dev.${e}`), ...base] : base;
 

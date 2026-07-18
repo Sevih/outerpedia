@@ -6,6 +6,17 @@
 
 ## 2026-07-18
 
+- **CSP resserrée : `unsafe-eval` retiré du script-src en PROD** — il n'est
+  requis QU'EN DEV (le HMR / React Fast Refresh de Next s'appuie sur eval) ; un
+  build de prod n'en a pas besoin. `script-src` construit dynamiquement :
+  `unsafe-eval` n'entre que si `NODE_ENV !== 'production'`. Vérifié — prod →
+  `script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com`
+  (sans eval), dev → avec eval. Prérequis vérifié avant : aucun `eval`/`new
+Function` dans `src/`, aucune dépendance cliente eval-suspecte. Au passage, le
+  `isDev` du fichier était dupliqué (défini deux fois) — dédupliqué en tête.
+  RESTE (TODO) : nonce + strict-dynamic pour retirer `unsafe-inline`. NB : la CSP
+  ne prend effet qu'au prochain déploiement — un smoke-test du build prod reste
+  la confirmation ultime avant bascule.
 - **Factorisations admin (switches / pickers / sidebars)** — trois paires quasi
   dupliquées fusionnées. (1) `EntitySwitch({id, mode, entity})` générique remplace
   CharacterSwitch + MonsterSwitch (identiques au segment de route près), 4 call
