@@ -27,6 +27,23 @@
   `buildFaqJsonLd` (seo.ts — /tierlist et /tools à venir ; `getMonthYear`→
   `serverNow` au portage).
 
+- **Lot de tests « petits modules purs »** (suite de la campagne tests, +40).
+  Six fichiers co-localisés : `stats.test.ts` (statAbbr connu/repli,
+  `statOptionView` sur les 4 régimes flat/rate/%/RAW_FLAT — EFF flat brut, ATK
+  rate suffixé, CHC % sans suffixe —, `statIconSprite` WG=undefined, `statName`
+  glossaire+repli) ; `game-tokens.test.ts` (reconnaissance élément/classe +
+  slug/nature, FRONTIÈRE LATINE « Fire »∉« Firefly », reconstruction fidèle,
+  mention CJK sans frontière de mot) ; `tower-restrictions.test.ts` (ban prime
+  sur quota, alias attacker→striker/priest→healer, star numérique, neutral) ;
+  `site.test.ts` (`buildUrl` en routage PATH et SUBDOMAIN via `vi.stubEnv` +
+  import dynamique — le module fige son profil au chargement —, apex vs
+  sous-domaine, normalizeLang, racine sans slash) ; `i18n/index.test.ts` (`makeT`
+  interpolation, clé brute si absente, `{k}` littéral, pluriels ICU one/other/#,
+  combiné) ; `guide-sections.test.ts` (`resolveSectionTitle` title/preset/sujet
+  avec `t` factice + jets sur preset/élément/perso inconnus). Stratégie : pur en
+  synthétique, ancrage glossaire committé pour le reste. 383 → 423 tests, typecheck
+  OK. RESTE mineur : builders JSON-LD de seo.ts + hreflang `buildAlternates`.
+
 - **Tests `skill-view.ts` — APPROFONDISSEMENT (vues monstre / immunités /
   chaîne)** (suite du prio 1). +12 tests (18 → 30). VUES MONSTRE
   (`monsterSkillViews`, le cœur commenté « cas payé ») : duplication d'un effet

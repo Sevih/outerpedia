@@ -86,10 +86,15 @@
 - [ ] `skill-view.ts` : compléments non bloquants (le gros est FAIT le 18/07 →
       DONE, 30 tests) — `levelTooltipEffects` conditions de desc, `cardEffects`
       héritage burst + curation perso/EE.
-- [ ] Ensuite : `stats.ts` (STAT_ABBR/statOptionView), `guide-sections.ts`,
-      `tower-restrictions.ts`, `game-tokens.ts` (frontières latin/CJK),
-      `seo.ts` (`buildUrl` dev/prod/sous-domaines, hreflang), `i18n/index.ts`
-      (`makeT`/plurals).
+- [x] Lot de tests « petits modules » (18/07 → DONE, +40 tests) : `stats.ts`
+      (statAbbr/statOptionView flat-rate-%, statIconSprite WG=undefined, statName
+      repli), `game-tokens.ts` (frontière latine « Fire »∉« Firefly » + mention
+      CJK sans frontière), `tower-restrictions.ts` (ban>quota, alias de classe,
+      star), `site.ts` `buildUrl` (routage path ET subdomain via env stubbé +
+      import dynamique, normalizeLang), `i18n/index.ts` (`makeT` interpolation +
+      pluriels ICU), `guide-sections.ts` (`resolveSectionTitle` : title/preset/
+      sujet, jets sur preset/élément/perso inconnus). RESTE mineur : `seo.ts`
+      builders JSON-LD + `buildAlternates` hreflang (buildUrl couvert).
 - [ ] Les générateurs `datagen/generators/*` + `build.ts`/`refresh.ts`
       (gros chantier — prioriser encounters/singularity/content-schedule).
       CONTRAINTE actée : la suite tourne SANS `.gamedata` (CI) → extraire les
