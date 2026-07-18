@@ -176,6 +176,35 @@
   --cat-cyan-bd: oklch(71.5% 0.143 215.221);
   --cat-cyan-glow: #22d3ee;
 
+  /* ACCENTS ÉDITORIAUX (primitives QACard/Callout/TocBar, bannières, reviews).
+     Palette LOCALE à 6 teintes (portage FAQ V2) : chaque encart prend la teinte
+     qui code son propos, plusieurs cohabitent dans une page. Base = -400 (à
+     opacités côté classe), -glow = halo des puces (rgba V2 = -400 à 0.6). Crans
+     annexes des bannières/reviews : -soft (-200, texte clair sur callout),
+     -faint (-100, anneau au survol), -deep (-500, anneaux PvE/PvP), purple/pink.
+     Valeurs OKLCH EXACTES de Tailwind v4 ; glows = rgba V2 verbatim. */
+  --ed-sky: oklch(74.6% 0.16 232.661);
+  --ed-violet: oklch(70.2% 0.183 293.541);
+  --ed-emerald: oklch(76.5% 0.177 163.223);
+  --ed-amber: oklch(82.8% 0.189 84.429);
+  --ed-rose: oklch(71.2% 0.194 13.428);
+  --ed-cyan: oklch(78.9% 0.154 211.53);
+  --ed-sky-glow: rgba(56, 189, 248, 0.6);
+  --ed-violet-glow: rgba(167, 139, 250, 0.6);
+  --ed-emerald-glow: rgba(52, 211, 153, 0.6);
+  --ed-amber-glow: rgba(251, 191, 36, 0.6);
+  --ed-rose-glow: rgba(251, 113, 133, 0.6);
+  --ed-cyan-glow: rgba(34, 211, 238, 0.6);
+  --ed-amber-soft: oklch(92.4% 0.12 95.746); /* amber-200 : texte clair sur callout */
+  --ed-emerald-soft: oklch(90.5% 0.093 164.15); /* emerald-200 */
+  --ed-sky-soft: oklch(90.1% 0.058 230.902); /* sky-200 */
+  --ed-amber-faint: oklch(96.2% 0.059 95.617); /* amber-100 : anneau d'onglet au survol */
+  --ed-sky-deep: oklch(68.5% 0.169 237.323); /* sky-500 : anneau PvE (review premium) */
+  --ed-rose-deep: oklch(64.5% 0.246 16.439); /* rose-500 : anneau PvP */
+  --ed-pink: oklch(71.8% 0.202 349.761); /* pink-400 : héros « limited » */
+  --ed-purple-fg: oklch(82.7% 0.119 306.383); /* purple-300 : texte review fusion */
+  --ed-purple-bd: oklch(62.7% 0.265 303.9); /* purple-500 : bord/fond review fusion */
+
   /* Voile du fond de page */
   --page-veil: rgba(0, 0, 0, 0.4);
 
@@ -294,6 +323,21 @@
   --color-cat-fuchsia-bd: var(--cat-fuchsia-bd);
   --color-cat-cyan-fg: var(--cat-cyan-fg);
   --color-cat-cyan-bd: var(--cat-cyan-bd);
+  --color-ed-sky: var(--ed-sky);
+  --color-ed-violet: var(--ed-violet);
+  --color-ed-emerald: var(--ed-emerald);
+  --color-ed-amber: var(--ed-amber);
+  --color-ed-rose: var(--ed-rose);
+  --color-ed-cyan: var(--ed-cyan);
+  --color-ed-amber-soft: var(--ed-amber-soft);
+  --color-ed-emerald-soft: var(--ed-emerald-soft);
+  --color-ed-sky-soft: var(--ed-sky-soft);
+  --color-ed-amber-faint: var(--ed-amber-faint);
+  --color-ed-sky-deep: var(--ed-sky-deep);
+  --color-ed-rose-deep: var(--ed-rose-deep);
+  --color-ed-pink: var(--ed-pink);
+  --color-ed-purple-fg: var(--ed-purple-fg);
+  --color-ed-purple-bd: var(--ed-purple-bd);
 }
 
 /*

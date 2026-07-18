@@ -69,9 +69,9 @@ const BADGE_LABEL: Record<LimitedTag, LocalizedText> = {
 };
 
 const BADGE_TEXT: Record<LimitedTag, string> = {
-  limited: 'text-pink-400',
-  seasonal: 'text-emerald-400',
-  collab: 'text-rose-400',
+  limited: 'text-ed-pink',
+  seasonal: 'text-ed-emerald',
+  collab: 'text-ed-rose',
 };
 
 function formatDate(iso: string, lang: Lang): string {

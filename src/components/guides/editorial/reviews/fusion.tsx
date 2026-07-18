@@ -50,7 +50,7 @@ export function FusionCostPills({
           <span key={lv} className="flex items-center gap-4">
             {i > 0 && <span className="text-content-subtle text-sm">{orLabel}</span>}
             <span className="flex items-center gap-3">
-              <span className="text-xl font-bold text-purple-300">Lv {lv}</span>
+              <span className="text-ed-purple-fg text-xl font-bold">Lv {lv}</span>
               <span className="flex items-center gap-1">
                 {core.iconSrc && (
                   // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
@@ -90,7 +90,7 @@ export function SkillChangeRows({ rows }: { rows: SkillChangeRowData[] }) {
           key={i}
           className="border-line-subtle bg-surface-overlay/50 flex gap-3 rounded-md border p-3"
         >
-          <span className="shrink-0 pt-0.5 text-xs font-bold text-purple-300">{row.label}</span>
+          <span className="text-ed-purple-fg shrink-0 pt-0.5 text-xs font-bold">{row.label}</span>
           <div className="min-w-0 space-y-1 text-sm">
             {row.rename && (
               <p className="text-content-subtle text-xs">
@@ -156,7 +156,7 @@ function EeMiniCard({
       className={cn(
         'flex gap-3 rounded-md border p-3',
         accent === 'purple'
-          ? 'border-purple-500/20 bg-purple-500/5'
+          ? 'border-ed-purple-bd/20 bg-ed-purple-bd/5'
           : 'border-line-subtle bg-surface-overlay/50',
       )}
     >
@@ -216,7 +216,7 @@ export function EeComparison({
   if (!base && !fusion) return null;
   return (
     <div className="space-y-2">
-      <h4 className="text-sm font-semibold text-purple-300">{labels.title}</h4>
+      <h4 className="text-ed-purple-fg text-sm font-semibold">{labels.title}</h4>
       <div className="grid gap-2 sm:grid-cols-2">
         {base && (
           <EeMiniCard

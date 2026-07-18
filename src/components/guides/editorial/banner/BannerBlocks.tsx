@@ -142,7 +142,7 @@ export function BannerRates({
             <div key={i} className="border-line-subtle bg-surface-overlay/50 rounded-lg border p-3">
               <div className="flex items-center justify-between gap-2">
                 <span className="text-content-muted text-sm">{lRec(title, lang) || title.en}</span>
-                <span className="text-lg font-bold text-amber-400">{rate.percent}%</span>
+                <span className="text-ed-amber text-lg font-bold">{rate.percent}%</span>
               </div>
             </div>
           );
@@ -151,16 +151,18 @@ export function BannerRates({
       {subtext && <p className="text-content-subtle text-xs">{subtext}</p>}
       <div className="flex flex-col gap-2">
         {hasGuarantee && (
-          <div className="rounded-lg border border-amber-400/25 bg-amber-400/5 p-2.5">
-            <p className="text-sm text-amber-200">
+          <div className="border-ed-amber/25 bg-ed-amber/5 rounded-lg border p-2.5">
+            <p className="text-ed-amber-soft text-sm">
               <span className="font-semibold">{lRec(LABELS.specialFeature, lang)}</span>{' '}
               {starText(lRec(LABELS.guarantee2Star, lang))}
             </p>
           </div>
         )}
         {info.freeCount > 0 && (
-          <div className="rounded-lg border border-emerald-400/25 bg-emerald-400/5 p-2.5">
-            <p className="text-sm font-semibold text-emerald-200">{lRec(LABELS.freePull, lang)}</p>
+          <div className="border-ed-emerald/25 bg-ed-emerald/5 rounded-lg border p-2.5">
+            <p className="text-ed-emerald-soft text-sm font-semibold">
+              {lRec(LABELS.freePull, lang)}
+            </p>
           </div>
         )}
       </div>
@@ -256,11 +258,11 @@ export function BannerResources({
               </div>
               <div className="flex flex-col gap-1 sm:items-end">
                 <div className="text-content text-sm">
-                  <span className="font-semibold text-amber-400">{row.cost}</span>{' '}
+                  <span className="text-ed-amber font-semibold">{row.cost}</span>{' '}
                   {lRec(LABELS.perRecruit, lang)}
                 </div>
                 {row.mileage ? (
-                  <div className="flex items-center gap-1 text-xs text-emerald-400">
+                  <div className="text-ed-emerald flex items-center gap-1 text-xs">
                     {lRec(LABELS.grants, lang)} 1 <ItemInline item={row.mileage} />
                   </div>
                 ) : (
@@ -297,8 +299,8 @@ export function MileageInfo({
   lang: Lang;
 }) {
   return (
-    <div className="mx-auto max-w-xl space-y-3 rounded-lg border border-sky-400/25 bg-sky-400/5 p-4">
-      <p className="text-sm text-sky-200">
+    <div className="border-ed-sky/25 bg-ed-sky/5 mx-auto max-w-xl space-y-3 rounded-lg border p-4">
+      <p className="text-ed-sky-soft text-sm">
         <ItemInline item={mileage} /> {lRec(LABELS.keptUntilUse, lang)}
       </p>
       <div className="border-line-subtle bg-surface-overlay/50 rounded-lg border p-3">
@@ -308,7 +310,7 @@ export function MileageInfo({
         <div className="space-y-2">
           <div className="flex items-center justify-between gap-2">
             <span className="text-content-muted text-sm">{lRec(LABELS.featuredHero, lang)}</span>
-            <span className="flex items-center gap-1 font-semibold text-amber-400">
+            <span className="text-ed-amber flex items-center gap-1 font-semibold">
               {cost} <ItemInline item={mileage} />
             </span>
           </div>
@@ -316,7 +318,7 @@ export function MileageInfo({
             <span className="text-content-muted flex items-center gap-1 text-sm">
               150 <ItemInline item={itemChipByName('Hero Piece', lang)} />
             </span>
-            <span className="flex items-center gap-1 font-semibold text-amber-400">
+            <span className="text-ed-amber flex items-center gap-1 font-semibold">
               {cost} <ItemInline item={mileage} />
             </span>
           </div>

@@ -11,6 +11,7 @@
  */
 import { useSyncExternalStore } from 'react';
 import { GUIDE_ACCENT } from '@/components/guides/guide-accents';
+import { EDITORIAL_ACCENT } from '@/components/guides/editorial/accents';
 
 // Valeur résolue d'une CSS var sur `:root` — lecture SANS setState (règle
 // react-hooks/set-state-in-effect gardée active) : subscribe no-op, la valeur
@@ -445,6 +446,45 @@ export default function TokensGallery() {
           <p className="text-content-subtle mt-3 text-[11px]">
             Chaque catégorie : <code>-fg</code> (texte) + <code>-bd</code> (fond/bord à opacités) +{' '}
             <code>-glow</code> (ombre au survol). <code>other</code> = neutre.
+          </p>
+        </section>
+
+        {/* Accents éditoriaux — la vraie map EDITORIAL_ACCENT (callout + puce
+            lumineuse) + les crans annexes des bannières/reviews. */}
+        <section className="border-line-subtle bg-surface-raised rounded-xl border p-4 lg:col-span-2">
+          <h2 className="text-content-strong mb-3 text-sm font-semibold tracking-wide uppercase">
+            Accents éditoriaux (EDITORIAL_ACCENT)
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {Object.entries(EDITORIAL_ACCENT).map(([hue, a]) => (
+              <div
+                key={hue}
+                className={`flex items-center gap-2 rounded-lg border px-3 py-1.5 ${a.calloutBg} ${a.calloutBorder}`}
+              >
+                <span className={`h-2 w-2 rounded-full ${a.dot}`} />
+                <span className={`text-sm font-semibold ${a.text}`}>{hue}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-3 flex flex-wrap items-center gap-1.5">
+            {[
+              '--color-ed-amber-soft',
+              '--color-ed-emerald-soft',
+              '--color-ed-sky-soft',
+              '--color-ed-amber-faint',
+              '--color-ed-sky-deep',
+              '--color-ed-rose-deep',
+              '--color-ed-pink',
+              '--color-ed-purple-fg',
+              '--color-ed-purple-bd',
+            ].map((t) => (
+              <TokenTag key={t} v={t} />
+            ))}
+          </div>
+          <p className="text-content-subtle mt-2 text-[11px]">
+            Base <code>-400</code> + <code>-glow</code> (puce) ; annexes : <code>-soft</code> (-200,
+            texte de callout), <code>-faint</code> (-100), <code>-deep</code> (-500, anneaux
+            PvE/PvP), purple/pink.
           </p>
         </section>
       </div>

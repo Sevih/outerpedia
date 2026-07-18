@@ -52,8 +52,8 @@ function TargetDisplay({ value }: { value: string }) {
 /** Cibles recommandées PvE / PvP (deux colonnes, icônes de nav du jeu). */
 export function RecoTargets({ pve, pvp }: { pve: string; pvp: string }) {
   const cols = [
-    { title: 'PvE', icon: img.navIcon('pve'), ring: 'border-sky-500/40', value: pve },
-    { title: 'PvP', icon: img.navIcon('pvp'), ring: 'border-rose-500/40', value: pvp },
+    { title: 'PvE', icon: img.navIcon('pve'), ring: 'border-ed-sky-deep/40', value: pve },
+    { title: 'PvP', icon: img.navIcon('pvp'), ring: 'border-ed-rose-deep/40', value: pvp },
   ];
   return (
     <div className="divide-line-subtle grid grid-cols-2 divide-x">

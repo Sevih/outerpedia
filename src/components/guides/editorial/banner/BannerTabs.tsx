@@ -56,8 +56,8 @@ export function BannerTabs({ tabs, urlParam }: { tabs: BannerTabDef[]; urlParam?
               className={cn(
                 'group relative w-full overflow-visible rounded-xl ring-2 transition-all duration-300',
                 on
-                  ? 'shadow-[0_0_8px_rgba(251,191,36,0.6)] ring-amber-400'
-                  : 'ring-transparent hover:ring-amber-100/60',
+                  ? 'ring-ed-amber shadow-[0_0_8px_var(--ed-amber-glow)]'
+                  : 'hover:ring-ed-amber-faint/60 ring-transparent',
               )}
             >
               <span className="relative block h-23.5 w-51.5 overflow-hidden rounded-xl">

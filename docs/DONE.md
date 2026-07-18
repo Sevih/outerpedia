@@ -81,9 +81,26 @@
   IrregularChaseMap `border-red-600 hover:border-red-400` (cadre) → `border-danger-deep
 group-hover:border-danger`. Galerie : rampe danger ajoutée au bloc Statut.
   ★ Les composants guides NON-ÉDITORIAUX sont désormais 100 % sans classe vive
-  (vérifié). Lint + 423 tests OK. RESTE (phase 2) : 6 fichiers `editorial/` (reviews,
-  banner, `accents.ts`) ; extension RAW_COLOR (à scoper hors éditorial) ; puis
-  phase 2 éditoriale elle-même.
+  (vérifié). Lint + 423 tests OK. RESTE : extension RAW_COLOR aux couleurs vives
+  (gros chantier séparé qui touche TOUT le repo, pas que les guides).
+
+- **Tokenisation couleurs guides — Phase 2 (composants ÉDITORIAUX)** (suite du
+  chantier, périmètre phase 2). Même méthode : tokens PAR RÔLE aux valeurs EXACTES
+  (OKLCH Tailwind v4 / rgba V2 verbatim), rendu inchangé. Famille `--ed-*` (21
+  tokens) : (1) palette canonique à 6 teintes de `editorial/accents.ts` (QACard/
+  Callout/TocBar…) — base `-400` (`--ed-sky/violet/emerald/amber/rose/cyan`, à
+  opacités côté classe) + `-glow` (halo des puces, rgba V2 en var brute dans le
+  `shadow-[…]`) ; fichier réécrit dessus (text/stripe/chip/callout/borderL/borderT/
+  dot/from). (2) crans annexes des bannières/reviews : `-soft` (-200, texte de
+  callout : BannerBlocks amber/emerald/sky), `-faint` (-100, anneau d'onglet au
+  survol : BannerTabs), `-deep` (-500, anneaux PvE/PvP : review premium sky/rose),
+  `--ed-pink` (héros « limited »), `--ed-purple-fg/-bd` (review fusion). 5 fichiers
+  routés (BannerBlocks, BannerTabs, LimitedHeroesList, reviews/premium, reviews/
+  fusion). Galerie `/dev/tokens` : bloc « Accents éditoriaux » (vraie map
+  `EDITORIAL_ACCENT` : callout + puce lumineuse + crans annexes). ★ Toute
+  l'arborescence `components/guides/**` est maintenant sans classe vive. Lint +
+  423 tests OK. RESTE : extension RAW_COLOR (repo entier) ; prose `_contents` (hors
+  périmètre, éditorial local à laisser en Tailwind direct — décision à confirmer).
 
 - **Lot de tests « petits modules purs »** (suite de la campagne tests, +40).
   Six fichiers co-localisés : `stats.test.ts` (statAbbr connu/repli,
