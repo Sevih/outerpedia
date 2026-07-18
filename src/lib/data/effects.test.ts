@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { effectForTooltip, getMergedEffect, loadCuratedEffects } from '@/lib/data/effects';
+import {
+  curatedKeyIndex,
+  effectForTooltip,
+  getMergedEffect,
+  loadCuratedEffects,
+  resolveEffectKey,
+} from '@/lib/data/effects';
 
 /**
  * La résolution par tooltip sert l'AFFICHAGE (immunités des cartes de boss,
@@ -27,5 +33,33 @@ describe('résolution par tooltip — la curation gagne', () => {
     // à l'écran sur les immunités des world boss, à la place de l'icône de
     // combat curée — celle que le joueur voit sous la barre du boss.
     expect(effectForTooltip('61')?.icon).toBe('IG_Buff_Action_Gauge_Up');
+  });
+});
+
+/**
+ * L'index des clés curées est PARTAGÉ par `resolveEffectKey` (côté effects) et
+ * `curatedCreationFor` (côté skill-view) : on verrouille qu'il reste fidèle à un
+ * scan linéaire de `loadCuratedEffects` — la raison d'être de l'extraction.
+ */
+describe('index des clés curées — fidèle au scan linéaire', () => {
+  it("byKey = premier gagnant, exactement comme le .find() qu'il remplace", () => {
+    const { byKey } = curatedKeyIndex();
+    const entries = Object.entries(loadCuratedEffects());
+    const allKeys = new Set(entries.flatMap(([, c]) => c.keys ?? []));
+    for (const key of allKeys) {
+      const expected = entries.find(([, c]) => c.keys?.includes(key))?.[0];
+      expect(byKey.get(key), `clé ${key}`).toBe(expected);
+    }
+  });
+
+  it("resolveEffectKey trouve toute création curée par n'importe quelle clé", () => {
+    for (const [id, c] of Object.entries(loadCuratedEffects())) {
+      for (const key of c.keys ?? []) {
+        // La clé ne peut être détournée par l'index généré (BY_KEY) : on vérifie
+        // seulement que la clé résout bien vers UN effet (le sien ou un homonyme
+        // généré prioritaire), jamais undefined.
+        expect(resolveEffectKey('debuff', key), `clé ${key} (curé ${id})`).toBeDefined();
+      }
+    }
   });
 });

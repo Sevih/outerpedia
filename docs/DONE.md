@@ -6,6 +6,20 @@
 
 ## 2026-07-18
 
+- **Index des clés curées MUTUALISÉ (`resolveEffectKey` ↔ skill-view)** (dette
+  code / duplication + cache périmé, d'une pierre deux coups). `resolveEffectKey`
+  (effects.ts) faisait un scan linéaire `Object.entries(loadCuratedEffects())
+.find(c.keys.includes(key))` à CHAQUE résolution de titre de section ; skill-view
+  maintenait en parallèle un index `curatedKeyCache` (`nature|clé`→id) mais dans
+  un cache module PERMANENT (jamais invalidé → périmé dès que l'admin réécrit le
+  curé). Fusionnés en `curatedKeyIndex()` (effects.ts) : deux vues (`byKey` pour
+  resolveEffectKey, `bySideKey` pour skill-view), mémoïsé sur l'IDENTITÉ de
+  l'objet renvoyé par `loadCuratedEffects` (qui bascule au mtime) — donc frais
+  dans le process admin, contrairement à l'ancien cache permanent. Sémantique
+  préservée à l'octet (premier-gagnant dans l'ordre du fichier). +2 tests
+  d'invariant (index fidèle au scan linéaire ; toute clé curée reste résoluble).
+  Typecheck + 353 tests OK.
+
 - **Câblage buff/debuff des PERSOS dans l'éditeur** (matrice admin — parité
   partielle avec l'éditeur de monstre). Constat Sevih : l'éditeur perso ne
   touchait qu'aux champs curés (rank/rôle/prio/tags/vidéos), jamais au câblage

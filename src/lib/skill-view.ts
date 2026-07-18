@@ -12,7 +12,7 @@ import type { Glossaries, Skill } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { MAIN_SKILL_TYPES, levelAt, splitChainDual } from '@/lib/skills';
-import { getMergedEffect, loadCuratedEffects, mergeStatusEffects } from '@/lib/data/effects';
+import { curatedKeyIndex, getMergedEffect, mergeStatusEffects } from '@/lib/data/effects';
 import { loadDataJson } from '@/lib/data/disk';
 import { isDebuffEffect } from '@/components/character/EffectChips';
 import type { ClientEffect, StatusMap } from '@/components/character/EffectChips';
@@ -153,25 +153,17 @@ function isTranscendUpgrade(s: Skill, e: RawEffect): boolean {
   return !s.levels[0]?.vars?.[b];
 }
 
-let curatedKeyCache: Map<string, string> | undefined;
-
 /** `nature|type` → id de CRÉATION curée (`keys` de data/curated/effects.json) —
  * mécaniques sans texte dans les tables, nommées par la curation (« Extinction »
- * pour BT_SEALED_RESURRECTION…). Même pont que les passifs d'équipement. */
+ * pour BT_SEALED_RESURRECTION…). Même pont que les passifs d'équipement. L'index
+ * (`bySideKey`) est PARTAGÉ avec `resolveEffectKey`, mémoïsé sur le mtime du
+ * fichier curé (cf. `curatedKeyIndex` d'effects.ts) — plus de cache local qui se
+ * périmerait dans le process admin long-running. */
 function curatedCreationFor(side: 'buff' | 'debuff', type: string): string | undefined {
-  if (!curatedKeyCache) {
-    curatedKeyCache = new Map();
-    for (const [id, c] of Object.entries(loadCuratedEffects())) {
-      const s = (c.isDebuff ?? getMergedEffect(id)?.isDebuff) ? 'debuff' : 'buff';
-      for (const k of c.keys ?? []) {
-        const key = `${s}|${k}`;
-        if (!curatedKeyCache.has(key)) curatedKeyCache.set(key, id);
-      }
-    }
-  }
+  const { bySideKey } = curatedKeyIndex();
   return (
-    curatedKeyCache.get(`${side}|${type}`) ??
-    curatedKeyCache.get(`${side === 'buff' ? 'debuff' : 'buff'}|${type}`)
+    bySideKey.get(`${side}|${type}`) ??
+    bySideKey.get(`${side === 'buff' ? 'debuff' : 'buff'}|${type}`)
   );
 }
 

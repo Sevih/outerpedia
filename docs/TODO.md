@@ -144,10 +144,8 @@
 - [ ] `rankOptionLabels` homonymes divergents (data/monsters.ts:97 vs
       admin/monster-store.ts:154) ; `BOSS_TYPES` homonymes DIVERGENTS
       (monster-icon.ts:32 vs towers.ts:92 — sets volontairement différents :
-      renommer plutôt que mutualiser) ; `resolveEffectKey` scan linéaire vs
-      index `curatedKeyCache` de skill-view (mutualiser l'index).
-      (`GRADE_RANK`/`PIECE_ORDER` centralisés + `gearById`→`gearFamilyById`
-      faits le 18/07 → DONE.)
+      renommer plutôt que mutualiser). [ces deux-là touchent l'admin → worker]
+      (`resolveEffectKey` index mutualisé + `GRADE_RANK`/`PIECE_ORDER` centralisés + `gearById`→`gearFamilyById` faits le 18/07 → DONE.)
 - [ ] Datagen : helper « monstres spawnés d'un donjon » ×3 (singularity,
       content-schedule, sources), expansion BuffGroup Child1..10 ×3 (dont 2 dans
       equipment.ts vs lib/buff), résolution RewardTemplet ×2 (encounters vs

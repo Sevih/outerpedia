@@ -71,6 +71,41 @@ export function loadCuratedEffects(): Record<string, EffectCurated> {
   return data;
 }
 
+/**
+ * INDEX des clés éditoriales curées (`keys` de data/curated/effects.json) vers
+ * l'id de création. Deux vues : `byKey` (clé seule — ce dont `resolveEffectKey`
+ * a besoin) et `bySideKey` (`${nature}|${clé}` — résolution orientée côté de
+ * skill-view). Premier gagnant dans l'ordre du fichier, à IDENTITÉ de vue égale.
+ *
+ * Mémoïsé sur l'IDENTITÉ de l'objet curé renvoyé par `loadCuratedEffects` (qui
+ * change quand le mtime change) : l'index suit donc la fraîcheur du fichier —
+ * pas un cache permanent à part qui se périmerait dans le process admin.
+ */
+interface CuratedKeyIndex {
+  byKey: Map<string, string>;
+  bySideKey: Map<string, string>;
+}
+let curatedKeyIndexCache: { ref: Record<string, EffectCurated>; index: CuratedKeyIndex } | null =
+  null;
+
+export function curatedKeyIndex(): CuratedKeyIndex {
+  const data = loadCuratedEffects();
+  if (curatedKeyIndexCache && curatedKeyIndexCache.ref === data) return curatedKeyIndexCache.index;
+  const byKey = new Map<string, string>();
+  const bySideKey = new Map<string, string>();
+  for (const [id, c] of Object.entries(data)) {
+    const side = (c.isDebuff ?? getMergedEffect(id)?.isDebuff) ? 'debuff' : 'buff';
+    for (const k of c.keys ?? []) {
+      if (!byKey.has(k)) byKey.set(k, id);
+      const sk = `${side}|${k}`;
+      if (!bySideKey.has(sk)) bySideKey.set(sk, id);
+    }
+  }
+  const index = { byKey, bySideKey };
+  curatedKeyIndexCache = { ref: data, index };
+  return index;
+}
+
 function merge(effect: Effect, c?: EffectCurated): MergedEffect {
   return {
     id: effect.id,
@@ -175,7 +210,7 @@ export function resolveEffectKey(side: 'buff' | 'debuff', key: string): MergedEf
   const id =
     BY_KEY[side]?.[key] ??
     BY_KEY[side === 'buff' ? 'debuff' : 'buff']?.[key] ??
-    Object.entries(loadCuratedEffects()).find(([, c]) => c.keys?.includes(key))?.[0];
+    curatedKeyIndex().byKey.get(key);
   return id ? getMergedEffect(id) : undefined;
 }
 
