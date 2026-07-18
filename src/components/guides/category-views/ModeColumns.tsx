@@ -26,7 +26,7 @@ export function ModeColumns({
             onClick={() => setActive(i)}
             className={`rounded-lg border px-3 py-1.5 text-sm transition-colors ${
               i === active
-                ? 'border-yellow-400/50 bg-yellow-400/10 text-yellow-300'
+                ? 'border-select/50 bg-select/10 text-select-fg'
                 : 'border-line bg-surface-overlay text-content hover:bg-line'
             }`}
           >

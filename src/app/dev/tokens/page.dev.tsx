@@ -235,6 +235,31 @@ export default function TokensGallery() {
           </div>
         </Demo>
 
+        {/* Sélection jaune-or — onglets/cartes actifs des category-views */}
+        <Demo
+          title="Sélection (onglet · carte active)"
+          tokens={['--color-select', '--color-select-fg', '--color-select-fg-hover']}
+        >
+          <div className="flex flex-wrap items-center gap-3 text-sm">
+            {/* Onglet sélectionné partiel (bord/fond translucides + texte) */}
+            <span className="border-select/50 bg-select/10 text-select-fg rounded-md border px-3 py-1">
+              Onglet actif
+            </span>
+            {/* Pastille pleinement sélectionnée (texte sombre sur aplat) */}
+            <span className="text-surface-base border-select bg-select rounded-md border px-3 py-1 font-semibold">
+              Sélection pleine
+            </span>
+            {/* Vignette au survol : anneau jaune */}
+            <span className="ring-line hover:ring-select/50 rounded-md px-3 py-1 ring-1 transition-all">
+              Vignette (survol)
+            </span>
+            {/* Lien révélateur */}
+            <button type="button" className="text-select-fg hover:text-select-fg-hover underline">
+              Lien (survol)
+            </button>
+          </div>
+        </Demo>
+
         {/* Chips d'effet (buff / debuff) */}
         <Demo
           title="Chips d’effet (buff / debuff)"

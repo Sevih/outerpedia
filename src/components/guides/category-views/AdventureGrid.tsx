@@ -53,7 +53,7 @@ export function AdventureGrid({
           aria-pressed={spoilers}
           className={`cursor-pointer rounded-lg border px-3 py-1.5 text-sm transition-colors ${
             spoilers
-              ? 'border-yellow-400/50 bg-yellow-400/10 text-yellow-300'
+              ? 'border-select/50 bg-select/10 text-select-fg'
               : 'border-line bg-surface-overlay text-content hover:bg-line'
           }`}
         >
@@ -85,7 +85,7 @@ function StageTile({ stage, spoilers }: { stage: StageCard; spoilers: boolean })
   return (
     <Link
       href={stage.href}
-      className="ring-line group relative h-40 w-20 overflow-hidden rounded-lg ring-1 transition-all hover:ring-yellow-400/50 sm:h-64 sm:w-32"
+      className="ring-line group hover:ring-select/50 relative h-40 w-20 overflow-hidden rounded-lg ring-1 transition-all sm:h-64 sm:w-32"
     >
       {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img

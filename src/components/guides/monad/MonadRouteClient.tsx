@@ -58,7 +58,7 @@ export default function MonadRouteClient({ variants, lang, strings, rewardLabels
               onClick={() => select(i)}
               className={`rounded border px-3 py-1.5 text-sm font-medium transition ${
                 active === i
-                  ? 'text-surface-base border-yellow-400 bg-yellow-400'
+                  ? 'text-surface-base border-select bg-select'
                   : 'border-line bg-surface-raised text-content hover:border-line-strong'
               }`}
             >

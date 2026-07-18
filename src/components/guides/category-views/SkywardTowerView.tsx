@@ -93,7 +93,7 @@ function DifficultyCard({ guide, lang }: { guide: Guide; lang: Lang }) {
   return (
     <Link
       href={localePath(lang, `/guides/${guide.category}/${guide.slug}`)}
-      className="group ring-line-subtle relative h-32 w-full overflow-hidden rounded-lg ring-1 transition-all hover:ring-yellow-400/50 sm:w-75"
+      className="group ring-line-subtle hover:ring-select/50 relative h-32 w-full overflow-hidden rounded-lg ring-1 transition-all sm:w-75"
     >
       <GuideCardArt icon={guide.icon} alt={name} hoverScale />
       <div className="absolute inset-0 flex flex-col justify-between p-3">
@@ -109,7 +109,7 @@ function DifficultyCard({ guide, lang }: { guide: Guide; lang: Lang }) {
 /** Tour élémentaire : carte haute, icône + nom d'élément en tête, accent coloré. */
 function ElementalCard({ guide, lang, element }: { guide: Guide; lang: Lang; element: string }) {
   const name = lRec(guide.title, lang);
-  const ring = ELEMENT_RING[element] ?? 'hover:ring-yellow-400/50';
+  const ring = ELEMENT_RING[element] ?? 'hover:ring-select/50';
   return (
     <Link
       href={localePath(lang, `/guides/${guide.category}/${guide.slug}`)}

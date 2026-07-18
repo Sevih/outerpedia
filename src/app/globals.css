@@ -122,6 +122,12 @@
   --monad-void-text: oklch(88.5% 0.062 18.334); /* rouge clair : texte du même encart */
   --monad-quest-bd: oklch(79.5% 0.184 86.047); /* jaune : bord de la pastille numérotée */
   --monad-quest-text: oklch(90.5% 0.182 98.111); /* jaune clair : numéro de la pastille */
+  /* SÉLECTION jaune-or — rôle fonctionnel partagé des category-views : onglet/
+     carte actif, anneau de survol des vignettes. Valeurs Tailwind v4 EXACTES
+     (OKLCH) de yellow-400/300/200. Opacités gardées côté classe (`/50`, `/10`…). */
+  --select: oklch(85.2% 0.199 91.936); /* jaune-400 : bord/fond/anneau de l'élément actif */
+  --select-fg: oklch(90.5% 0.182 98.111); /* jaune-300 : texte sur sélection partielle */
+  --select-fg-hover: oklch(94.5% 0.129 101.54); /* jaune-200 : texte au survol */
   --stat: #fbbf24;
   --highlight: #22d3ee;
   /* Texte « équipement » (noms d'items dans la prose) — teinte V2 exacte. */
@@ -215,6 +221,9 @@
   --color-monad-void-text: var(--monad-void-text);
   --color-monad-quest-bd: var(--monad-quest-bd);
   --color-monad-quest-text: var(--monad-quest-text);
+  --color-select: var(--select);
+  --color-select-fg: var(--select-fg);
+  --color-select-fg-hover: var(--select-fg-hover);
   --color-stat: var(--stat);
   --color-highlight: var(--highlight);
   --color-equipment: var(--equipment);

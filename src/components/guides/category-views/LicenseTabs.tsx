@@ -50,7 +50,7 @@ export function LicenseTabs({
               onClick={() => setTab(key)}
               className={`rounded-lg border px-3 py-1.5 text-sm transition-colors ${
                 tab === key
-                  ? 'border-yellow-400/50 bg-yellow-400/10 text-yellow-300'
+                  ? 'border-select/50 bg-select/10 text-select-fg'
                   : 'border-line bg-surface-overlay text-content hover:bg-line'
               }`}
             >
@@ -83,7 +83,7 @@ export function LicenseTabs({
 function WeeklyCard({ card }: { card: LicenseCard }) {
   return (
     <Link href={card.href} className={`group flex flex-col items-center gap-1.5 ${CARD_W}`}>
-      <div className="relative aspect-150/260 w-full overflow-hidden rounded-lg transition-all group-hover:ring-1 group-hover:ring-yellow-400/50">
+      <div className="group-hover:ring-select/50 relative aspect-150/260 w-full overflow-hidden rounded-lg transition-all group-hover:ring-1">
         {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img
           src={card.src}
@@ -149,7 +149,7 @@ function PromotionCard({
             href={card.href}
             aria-hidden={!revealed}
             tabIndex={revealed ? 0 : -1}
-            className="group absolute inset-0 transform-[rotateY(180deg)] overflow-hidden rounded-lg transition-all backface-hidden hover:ring-1 hover:ring-yellow-400/50"
+            className="group hover:ring-select/50 absolute inset-0 transform-[rotateY(180deg)] overflow-hidden rounded-lg transition-all backface-hidden hover:ring-1"
           >
             {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img
@@ -169,7 +169,7 @@ function PromotionCard({
       ) : (
         <button
           onClick={onReveal}
-          className="w-full cursor-pointer text-center text-xs font-medium text-yellow-300 transition-colors hover:text-yellow-200"
+          className="text-select-fg hover:text-select-fg-hover w-full cursor-pointer text-center text-xs font-medium transition-colors"
         >
           {revealLabel}
         </button>

@@ -58,9 +58,18 @@
   gardée côté classe (`/30`…). Restent en littéraux SVG (attributs de présentation,
   `var()` non résolu) : `fill="white"`, `stroke="black"`, `#facc15`, `#fde047` —
   hors cible de l'eslint (classes). Galerie `/dev/tokens` : bloc « Encarts Monad
-  Gate » ajouté (reproduit les usages réels). Typecheck + lint + 423 tests OK.
-  RESTE : ~16 autres composants ; palettes de catégorie ; extension RAW_COLOR ;
-  phase 2 éditoriale.
+  Gate » ajouté (reproduit les usages réels). (7) Famille SÉLECTION jaune-or —
+  rôle fonctionnel partagé des category-views (onglet/carte actif, anneau de
+  survol). 3 tokens sémantiques `--select`/`--select-fg`/`--select-fg-hover`
+  (yellow-400/300/200, valeurs OKLCH exactes) ; ~10 usages routés dessus sur 7
+  composants (ModeColumns, AdventureGrid, LicenseTabs, MonadGateGallery,
+  MonadRouteClient, SpecialRequestSplit, SkywardTowerView) ; opacités gardées
+  côté classe. MonadRouteReward `text-emerald-300` (titre First Clear) réutilise
+  `--monad-key-soft` (valeur exacte, 0 nouveau token). Galerie : bloc « Sélection »
+  ajouté. Typecheck + lint + 423 tests OK. RESTE : 3 rouges stragglers (BossPanel
+  repli d'erreur, IrregularChaseMap cadre, TowerCombatRoster « ban » — sémantiques
+  distinctes, arbitrage) ; fork palette `guide-accents.ts` (tokeniser 22 vs
+  exempter le fichier d'identité) ; extension RAW_COLOR ; phase 2 éditoriale.
 
 - **Lot de tests « petits modules purs »** (suite de la campagne tests, +40).
   Six fichiers co-localisés : `stats.test.ts` (statAbbr connu/repli,

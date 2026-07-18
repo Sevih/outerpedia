@@ -49,7 +49,7 @@ export function Tile({ tile }: { tile: RouteTile }) {
     return (
       <Link
         href={tile.href as Route}
-        className={`group ring-line-subtle ${ART_TILE} ring-1 transition-all hover:ring-yellow-400/50`}
+        className={`group ring-line-subtle ${ART_TILE} hover:ring-select/50 ring-1 transition-all`}
       >
         <span className="absolute inset-0 transition-transform duration-300 group-hover:scale-105">
           {bg}
@@ -100,7 +100,7 @@ export function MonadEndless({ title, depths }: { title: string; depths: Endless
             onClick={() => setActive(d.depth)}
             className={`rounded border px-3 py-1.5 text-sm font-medium transition ${
               d.depth === active
-                ? 'text-surface-base border-yellow-400 bg-yellow-400'
+                ? 'text-surface-base border-select bg-select'
                 : 'border-line bg-surface-overlay text-content hover:border-line-strong'
             }`}
           >

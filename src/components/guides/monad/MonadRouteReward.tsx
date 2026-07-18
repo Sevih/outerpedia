@@ -52,7 +52,7 @@ export default function MonadRouteReward({ reward, labels }: Props) {
       )}
       {reward.firstClear.length > 0 && (
         <div>
-          <h3 className="mb-2 text-sm font-semibold text-emerald-300">{labels.firstClear}</h3>
+          <h3 className="text-monad-key-soft mb-2 text-sm font-semibold">{labels.firstClear}</h3>
           <Row lines={reward.firstClear} />
         </div>
       )}

@@ -107,7 +107,7 @@ function BannerCard({ guide, lang, sig }: { guide: Guide; lang: Lang; sig: LootS
   return (
     <Link
       href={localePath(lang, `/guides/${guide.category}/${guide.slug}`)}
-      className="group ring-line-subtle relative mx-auto block aspect-27/5 w-full max-w-135 overflow-hidden rounded-lg ring-1 transition-all hover:ring-yellow-400/50"
+      className="group ring-line-subtle hover:ring-select/50 relative mx-auto block aspect-27/5 w-full max-w-135 overflow-hidden rounded-lg ring-1 transition-all"
     >
       {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img
