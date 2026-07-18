@@ -152,9 +152,10 @@ group-hover:border-danger`. Galerie : rampe danger ajoutée au bloc Statut.
   source (`source()` : une source qui jette — ex. guide transitoirement malformé
   pendant un portage — est ignorée avec `console.warn`, la palette ne 500 pas ;
   l'erreur reste levée bruyamment par les pages qui lisent la donnée en direct).
-  Test `search-index.test.ts` (6) sur la donnée committée. Lint + tsc OK ; mes
-  tests verts. NB build : intégration non buildée ici (arbre transitoirement cassé
-  par un guide WIP du worker sans meta.json — hors de mes fichiers).
+  Test `search-index.test.ts` (7) sur la donnée committée. Lint + tsc OK, suite
+  464 verts (arbre guides redevenu sain). Fix : les pages de CATÉGORIE de guides
+  affichaient un carré vide → icône `img.guideIcon(cat.icon)` ajoutée (garde-fou
+  de test).
 
 - **Tests `seo.ts` + compléments `skill-view`** (suite de la campagne tests,
   +35 → 458). `seo.test.ts` (26) : `createPageMetadata` (canonical, hreflang ×5

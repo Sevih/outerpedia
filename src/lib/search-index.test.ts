@@ -47,6 +47,12 @@ describe('buildSearchIndex', () => {
     expect(pageHrefs.has('/guides')).toBe(true);
   });
 
+  it('les pages de catégorie de guides (/guides/<slug>) portent une vignette', () => {
+    const cats = INDEX.filter((e) => e.kind === 'page' && /^\/guides\/[^/]+$/.test(e.href));
+    expect(cats.length).toBeGreaterThan(0);
+    for (const c of cats) expect(c.icon).toBeTruthy();
+  });
+
   it('aucun doublon d’href par nature', () => {
     for (const kind of ['character', 'guide'] as const) {
       const hrefs = INDEX.filter((e) => e.kind === kind).map((e) => e.href);

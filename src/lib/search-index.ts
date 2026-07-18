@@ -63,6 +63,7 @@ export function buildSearchIndex(lang: Lang, t: (key: TranslationKey) => string)
       label: lRec(GUIDE_CATEGORIES[slug].label, lang) || GUIDE_CATEGORIES[slug].label.en,
       href: localePath(lang, `/guides/${slug}`),
       kind: 'page',
+      icon: img.guideIcon(GUIDE_CATEGORIES[slug].icon),
     })),
     ...EXTRA_PAGES.map((p): SearchEntry => ({
       label: t(p.key),
