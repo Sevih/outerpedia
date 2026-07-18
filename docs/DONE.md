@@ -6,6 +6,20 @@
 
 ## 2026-07-18
 
+- **Primitive `HeatSlider` — dédup RankSlider ↔ EncounterSlider** — les deux
+  glissières d'échelle longue (palier de boss dans BossStats, stage dans
+  EncounterSelection) partageaient ~90 lignes quasi identiques : le double-ref
+  `hit`/`rail` (zone d'écoute vs mesure — le geste tactile correct), `pos`,
+  `clamp`, `indexAt`, capture de pointeur, clavier (←/→ un cran, Page↑/↓ trois,
+  Début/Fin), boutons ◀▶, rail + dégradé de chaleur + pouce. Extrait en composant
+  `src/components/guides/HeatSlider.tsx` qui rend le CHÂSSIS et prend en props ce
+  qui diffère : graduations (`marks`), contenu du pouce (`thumb`), libellés du
+  bas (`labels`), et les dimensions (`railClass`/`padClass`/`thumbClass`). Les
+  deux appelants deviennent de simples adaptateurs (RankSlider = badges de grade
+  - repères E…SSS ; EncounterSlider = numéros de stage, dans sa carte). Classes
+    Tailwind reprises À L'IDENTIQUE par appelant → rendu et gestes inchangés (à
+    confirmer d'un coup d'œil). Imports react devenus inutiles retirés des deux
+    fichiers. typecheck + lint + 351 tests OK.
 - **Intégration PAR ENTITÉ pour l'item** (complète l'extracteur d'items) — bouton
   « Intégrer » (ou « Retirer » si l'id a disparu du frais) sur chaque ligne du
   diff de `/admin/extractor/items`. Cœur `integrateItemData(dir, id)` EXTRAIT
