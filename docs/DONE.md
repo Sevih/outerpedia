@@ -99,8 +99,21 @@ group-hover:border-danger`. Galerie : rampe danger ajoutée au bloc Statut.
   fusion). Galerie `/dev/tokens` : bloc « Accents éditoriaux » (vraie map
   `EDITORIAL_ACCENT` : callout + puce lumineuse + crans annexes). ★ Toute
   l'arborescence `components/guides/**` est maintenant sans classe vive. Lint +
-  423 tests OK. RESTE : extension RAW_COLOR (repo entier) ; prose `_contents` (hors
-  périmètre, éditorial local à laisser en Tailwind direct — décision à confirmer).
+  423 tests OK.
+
+- **Verrou eslint — couleurs vives interdites sous `components/guides/**`**
+  (lock-in de la tokenisation). Nouvelle règle `no-restricted-syntax` scopée à
+  `src/components/guides/**` : interdit EN PLUS des gris/white/black (RAW_COLOR)
+  les classes vives numérotées (`red/sky/emerald/…-100…900`, préfixes bg/text/
+  border(-lrtbxy)/ring/fill/stroke/from/via/to/divide/outline/decoration) —
+  regex `VIVID_COLOR`, message dédié pointant vers les tokens + `/dev/tokens`. Le
+  bloc RÉ-INCLUT les sélecteurs RAW_COLOR (un bloc flat-config redéfinit la règle
+  pour ses fichiers). Périmètre volontairement CONFINÉ aux guides (arbo tokenisée) :
+  le reste du site (fiche perso exemptée, tools/landing) n'est pas prêt. Prose
+  `_contents` hors périmètre (vit dans `app/**/guides/_contents/**`). Vérifié :
+  lint vert sur tout le repo + test négatif (une vive injectée = erreur, message
+  correct). RESTE (hors chantier guides) : tokeniser tools/landing puis étendre le
+  garde-fou ; prose `_contents` éditoriale (à laisser en Tailwind direct, à confirmer).
 
 - **Lot de tests « petits modules purs »** (suite de la campagne tests, +40).
   Six fichiers co-localisés : `stats.test.ts` (statAbbr connu/repli,

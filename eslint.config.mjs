@@ -11,6 +11,16 @@ const RAW_COLOR =
 const RAW_COLOR_MSG =
   'Couleur en dur interdite (gris/white/black Tailwind). Utilise un token sémantique : bg-surface-*, text-content-*, border-line(-subtle|-strong), accent… (cf. src/app/globals.css).';
 
+// Couleurs VIVES numérotées (red/sky/emerald…-100…900) — interdites en PLUS des
+// gris, mais UNIQUEMENT sous `src/components/guides/**` : toute l'arbo y a été
+// tokenisée (--cat-*/--ed-*/--monad-*/--select/--danger-*…), ce garde-fou
+// verrouille l'acquis. Le reste du site n'est PAS encore prêt (fiche perso
+// exemptée, tools/landing à tokeniser un jour) → hors périmètre pour l'instant.
+const VIVID_COLOR =
+  '(bg|text|border|border-[lrtbxy]|ring|ring-offset|fill|stroke|from|via|to|divide|outline|decoration)-(red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-[0-9]{2,3}';
+const VIVID_COLOR_MSG =
+  'Couleur vive en dur interdite dans les guides (déjà tokenisés). Utilise un token : --cat-*/--ed-*/--monad-*/--select/--danger-*/--stat… (cf. src/app/globals.css & /dev/tokens).';
+
 // Note vs V2: on NE désactive PAS react-hooks/set-state-in-effect — on garde la
 // règle active et on corrige les vrais cas au portage (faire BIEN).
 const eslintConfig = defineConfig([
@@ -26,6 +36,22 @@ const eslintConfig = defineConfig([
         'error',
         { selector: `Literal[value=/${RAW_COLOR}/]`, message: RAW_COLOR_MSG },
         { selector: `TemplateElement[value.raw=/${RAW_COLOR}/]`, message: RAW_COLOR_MSG },
+      ],
+    },
+  },
+  {
+    // GUIDES — arbo entièrement tokenisée : on interdit EN PLUS les couleurs
+    // vives (redéfinit `no-restricted-syntax` pour ces fichiers, donc on RÉ-INCLUT
+    // les sélecteurs RAW_COLOR de base). La prose éditoriale des guides vit dans
+    // `src/app/**/guides/_contents/**`, hors de ce périmètre — non concernée.
+    files: ['src/components/guides/**/*.{ts,tsx}'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        { selector: `Literal[value=/${RAW_COLOR}/]`, message: RAW_COLOR_MSG },
+        { selector: `TemplateElement[value.raw=/${RAW_COLOR}/]`, message: RAW_COLOR_MSG },
+        { selector: `Literal[value=/${VIVID_COLOR}/]`, message: VIVID_COLOR_MSG },
+        { selector: `TemplateElement[value.raw=/${VIVID_COLOR}/]`, message: VIVID_COLOR_MSG },
       ],
     },
   },
