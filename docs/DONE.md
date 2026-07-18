@@ -115,6 +115,21 @@ group-hover:border-danger`. Galerie : rampe danger ajoutée au bloc Statut.
   correct). RESTE (hors chantier guides) : tokeniser tools/landing puis étendre le
   garde-fou ; prose `_contents` éditoriale (à laisser en Tailwind direct, à confirmer).
 
+- **Tests `seo.ts` + compléments `skill-view`** (suite de la campagne tests,
+  +35 → 458). `seo.test.ts` (26) : `createPageMetadata` (canonical, hreflang ×5
+  - x-default dérivés de `buildUrl`, suffixe titre, tailles/carte OG-Twitter
+    défaut vs custom carré/paysage, robots noindex, locale, og:type article vs
+    website), et tous les builders JSON-LD (`buildSiteJsonLd` graphe connecté,
+    breadcrumb positions, `VideoGameCharacter`/`Article` image absolutisée +
+    `datePublished` repli, `ItemList` ordres schema.org, `VideoObject` youtube/
+    twitch/bilibili + null si champ Google manquant, FAQ, `getMonthYear`).
+    Assertions dérivées des mêmes helpers (`buildUrl`/`CANONICAL_ORIGIN`) → indép.
+    de l'env. `skill-view.test.ts` (+9 → 39) : `cardEffects` (effets propres,
+    union variantes, héritage burst_1..3 du burstable, passif rattaché par caller,
+    curation chipHide/chipAdd substituable, vide→undefined) + `levelTooltipEffects`
+    (tooltip de niveau à icône → chip ; statut cité comme CONDITION par la desc
+    exclu) — ancrés sur un tooltip réel à icône CALCULÉ du glossaire committé.
+
 - **Lot de tests « petits modules purs »** (suite de la campagne tests, +40).
   Six fichiers co-localisés : `stats.test.ts` (statAbbr connu/repli,
   `statOptionView` sur les 4 régimes flat/rate/%/RAW_FLAT — EFF flat brut, ATK

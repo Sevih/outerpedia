@@ -6,6 +6,7 @@ import {
   buildBurstViews,
   buildChainView,
   buildStatusMap,
+  cardEffects,
   dedupSkills,
   immunityChipEffects,
   mainSkills,
@@ -353,5 +354,102 @@ describe('smoke — tourne sur la donnée committée', () => {
     expect(map).toBeTypeOf('object');
     // Au moins un statut résolu sur 400 skills réels — sinon le pont est cassé.
     expect(Object.keys(map).length).toBeGreaterThan(0);
+  });
+});
+
+/** Refs des chips de carte (tooltip ou label), curation substituable. */
+const cardRefs = (skills: Skill[], s: Skill, cur = {}) =>
+  (cardEffects(skills, s, cur) ?? []).map((c) => c.tooltip ?? c.label);
+
+describe('cardEffects — composition de la carte perso', () => {
+  it('agrège les effets propres du skill', () => {
+    const s = skill({ id: 'first1', type: 'first', effects: [eff({ tooltip: REAL_TOOLTIP })] });
+    expect(cardRefs([s], s)).toContain(REAL_TOOLTIP);
+  });
+
+  it('unit les VARIANTES du même type (formes / copies)', () => {
+    const a = skill({ id: 'a', type: 'first', effects: [eff({ tooltip: REAL_TOOLTIP })] });
+    const b = skill({ id: 'b', type: 'first', effects: [eff({ tooltip: REAL_TOOLTIP2 })] });
+    expect(cardRefs([a, b], a)).toEqual(expect.arrayContaining([REAL_TOOLTIP, REAL_TOOLTIP2]));
+  });
+
+  it('un skill BURSTABLE hérite des effets de ses burst_1..3 ; un non-burstable non', () => {
+    const burst = skill({ id: 'b1', type: 'burst_1', effects: [eff({ tooltip: REAL_TOOLTIP2 })] });
+    const burstable = skill({
+      id: 'u',
+      type: 'ultimate',
+      burstAP: [10],
+      effects: [eff({ tooltip: REAL_TOOLTIP })],
+    });
+    expect(cardRefs([burstable, burst], burstable)).toEqual(
+      expect.arrayContaining([REAL_TOOLTIP, REAL_TOOLTIP2]),
+    );
+
+    const plain = skill({ id: 'u2', type: 'ultimate', effects: [eff({ tooltip: REAL_TOOLTIP })] });
+    expect(cardRefs([plain, burst], plain)).not.toContain(REAL_TOOLTIP2);
+  });
+
+  it('un effet de PASSIF rattaché au kit (caller) devient une chip du skill', () => {
+    const first = skill({ id: 'f', type: 'first' });
+    const passive = skill({
+      id: 'p',
+      type: 'class_passive',
+      effects: [eff({ caller: 'first', tooltip: REAL_TOOLTIP2 })],
+    });
+    expect(cardRefs([first, passive], first)).toContain(REAL_TOOLTIP2);
+  });
+
+  it('curation chipHide masque une chip de LA carte (par cardId)', () => {
+    const s = skill({ id: 'first1', type: 'first', effects: [eff({ tooltip: REAL_TOOLTIP })] });
+    expect(cardRefs([s], s, { chipHide: { first1: [REAL_TOOLTIP] } })).not.toContain(REAL_TOOLTIP);
+  });
+
+  it('curation chipAdd ajoute une réf résoluble ; ignore une réf morte', () => {
+    const s = skill({ id: 'first1', type: 'first', effects: [eff({ tooltip: REAL_TOOLTIP })] });
+    expect(cardRefs([s], s, { chipAdd: { first1: [REAL_TOOLTIP2] } })).toContain(REAL_TOOLTIP2);
+    expect(cardRefs([s], s, { chipAdd: { first1: ['__mort__'] } })).not.toContain('__mort__');
+  });
+
+  it('aucune chip → undefined (pas de carte vide)', () => {
+    const s = skill({ id: 'x', type: 'first' });
+    expect(cardEffects([s], s, {})).toBeUndefined();
+  });
+});
+
+// Un tooltip RÉEL du glossaire dont l'effet résolu porte une icône ET un vrai nom
+// (nom ≠ clé = pas un repli) — requis pour driver `levelTooltipEffects` sur la
+// donnée committée. Calculé, jamais codé en dur.
+const ICON = (() => {
+  for (const t of Object.keys(G.effectByTooltip)) {
+    const meta = monsterChipMeta(eff({ tooltip: t }));
+    if (meta?.icon && meta.name && meta.name !== t) return { tooltip: t, name: meta.name };
+  }
+  return undefined;
+})();
+
+describe('cardEffects — statuts de NIVEAU (levelTooltipEffects)', () => {
+  it.skipIf(!ICON)('un tooltip de niveau à icône devient une chip', () => {
+    const s = skill({
+      id: 'first1',
+      type: 'first',
+      levels: [{ level: 1, tooltips: [ICON!.tooltip] }],
+    });
+    expect(cardRefs([s], s)).toContain(ICON!.tooltip);
+  });
+
+  it.skipIf(!ICON)('un statut cité comme CONDITION par la desc n’est PAS une chip', () => {
+    const s = skill({
+      id: 'first1',
+      type: 'first',
+      desc: {
+        en: `Deals damage. If the caster has ${ICON!.name}, deal more.`,
+        jp: '',
+        kr: '',
+        zh: '',
+      },
+      levels: [{ level: 1, tooltips: [ICON!.tooltip] }],
+    });
+    expect(cardRefs([s], s)).not.toContain(ICON!.tooltip);
+    expect(cardEffects([s], s, {})).toBeUndefined();
   });
 });

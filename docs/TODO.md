@@ -130,11 +130,6 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
 
 ## 🧪 Tests à écrire
 
-- [ ] `skill-view.ts` : compléments non bloquants (le gros est FAIT le 18/07 →
-      DONE, 30 tests) — `levelTooltipEffects` conditions de desc, `cardEffects`
-      héritage burst + curation perso/EE.
-- [ ] `seo.ts` : builders JSON-LD + `buildAlternates` hreflang (reste mineur du
-      lot « petits modules » FAIT le 18/07 → DONE, +40 tests ; `buildUrl` couvert).
 - [ ] Les générateurs `datagen/generators/*` + `build.ts`/`refresh.ts`
       (gros chantier — prioriser encounters/singularity/content-schedule).
       CONTRAINTE actée : la suite tourne SANS `.gamedata` (CI) → extraire les
@@ -175,22 +170,6 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
 
 ### Chantiers actés (16/07, inchangés)
 
-- [~] **Tokeniser les couleurs vives des vues guides** (décision Sevih
-  2026-07-16). MÉTHODE actée : tokens sémantiques PAR RÔLE aux valeurs
-  EXACTES actuelles, puis étendre RAW_COLOR. PÉRIMÈTRE (choix Sevih 18/07) :
-  palettes `.ts` + composants d'abord, éditorial `_contents` en phase 2.
-  🔶 EN COURS (18/07) : (1) `nodeStyles.ts` → tokens `--monad-milestone/
-  explore/combat/story` (valeurs exactes) → DONE ; `ELEMENT_RING` déjà
-  tokenisé (rien à faire). (2) `TurnOrder` amber SPD → `text-stat` → DONE.
-  (3) GALERIE DEV `/dev/tokens` (`page.dev.tsx`) : toutes les CSS vars en
-  pastilles + valeur résolue, groupées — pour voir/ajuster. RESTE : les ~17
-  composants guides restants (dont `MonadGateMap` = nombreuses NUANCES bespoke
-  avec opacités → soit tokens fins, soit micro-unifications à valider avec
-  toi via la galerie), `guide-accents.ts`/`editorial/accents.ts` (palettes par
-  catégorie), puis étendre RAW_COLOR aux vives (hors `_contents`), enfin la
-  phase 2 éditoriale. NB : décider aussi « SPD amber (stat) vs neutre » —
-  TurnOrder est tokenisé sans changer son look, l'unification avec
-  BuildRequirements reste un choix visuel à trancher.
 - [ ] (chantier guides éditoriaux) `BannerTabs` (?banner=) et le `?tab=` de
       free-heroes-start-banner → SegmentedTabs/#hash quand ces guides
       atterrissent. **Règle actée : état interne d'un guide = hash
