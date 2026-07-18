@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { CharacterVisual } from '@/components/admin/CharacterVisual';
-import { CharacterSwitch } from '@/components/admin/CharacterSwitch';
+import { EntitySwitch } from '@/components/admin/EntitySwitch';
 import { CharacterCuratedEditor } from '@/components/admin/CharacterCuratedEditor';
 import { GearRecoEditor, type GearRecoOptions } from '@/components/admin/GearRecoEditor';
 import { gearSelectOptions } from '@/lib/admin/gear-options';
@@ -50,7 +50,7 @@ export default async function EditorCharacterDetail({
 
   return (
     <div className="space-y-5">
-      <CharacterSwitch id={id} mode="editor" />
+      <EntitySwitch id={id} mode="editor" entity="characters" />
 
       <CharacterVisual
         char={char}

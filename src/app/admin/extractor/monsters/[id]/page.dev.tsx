@@ -5,7 +5,7 @@ import glossariesJson from '@data/generated/glossaries.json';
 import type { Glossaries, Skill } from '@datagen/contracts';
 import { EntityDiffPanel } from '@/components/admin/EntityDiffPanel';
 import { MonsterActions } from '@/components/admin/MonsterActions';
-import { MonsterSwitch } from '@/components/admin/MonsterSwitch';
+import { EntitySwitch } from '@/components/admin/EntitySwitch';
 import { EffectChipsRow, type StatusMap } from '@/components/character/EffectChips';
 import { SkillsSection } from '@/components/character/SkillsSection';
 import type { CardSkill } from '@/components/character/SkillCard';
@@ -190,7 +190,7 @@ export default async function ExtractorMonsterPage({
         </p>
       </div>
 
-      <MonsterSwitch id={m.id} mode="extractor" />
+      <EntitySwitch id={m.id} mode="extractor" entity="monsters" />
 
       {review.status === 'changed' && <EntityDiffPanel fields={review.fields} />}
 

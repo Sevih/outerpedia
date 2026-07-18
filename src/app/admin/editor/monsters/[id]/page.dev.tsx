@@ -6,7 +6,7 @@ import {
   type KitChip,
   type KitEditorSkill,
 } from '@/components/admin/MonsterKitEditor';
-import { MonsterSwitch } from '@/components/admin/MonsterSwitch';
+import { EntitySwitch } from '@/components/admin/EntitySwitch';
 import { monsterChipMeta, monsterSkillViews } from '@/lib/skill-view';
 import { getMergedEffects } from '@/lib/data/effects';
 import { monsterBossBadgeSrc, monsterIconSrc, monsterSlotSrc } from '@/lib/admin/monster-icon';
@@ -107,7 +107,7 @@ export default async function EditorMonsterPage({ params }: { params: Promise<{ 
 
   return (
     <div className="max-w-4xl space-y-5">
-      <MonsterSwitch id={m.id} mode="editor" />
+      <EntitySwitch id={m.id} mode="editor" entity="monsters" />
 
       <div className="flex items-center gap-3">
         <span className="relative h-14 w-14 shrink-0">

@@ -1,9 +1,9 @@
 'use client';
 
-import { useMemo, useState } from 'react';
 import { img } from '@/lib/images';
 import { ItemInline } from '@/components/inline/ItemInline';
 import type { ItemOption } from '@/lib/data/items';
+import { SearchPicker } from './SearchPicker';
 
 const inline = (o: ItemOption) => ({
   name: o.name,
@@ -30,10 +30,26 @@ function Tile({ o }: { o: ItemOption }) {
   );
 }
 
+/** Rang : nom exact > commence par > contient ; puis nom le plus court. Sans ça,
+ * une monnaie courte (« Gold ») est noyée sous les coffres qui la contiennent. */
+function searchItems(options: ItemOption[], query: string): ItemOption[] {
+  const q = query.toLowerCase();
+  const rank = (name: string) => {
+    const n = name.toLowerCase();
+    if (n === q) return 0;
+    if (n.startsWith(q)) return 1;
+    return 2;
+  };
+  return options
+    .filter((o) => o.name.toLowerCase().includes(q))
+    .sort((a, b) => rank(a.name) - rank(b.name) || a.name.length - b.name.length)
+    .slice(0, 20);
+}
+
 /**
  * Sélecteur d'item : recherche par nom dans la data items (id stocké), aperçu
  * `ItemInline`. Une valeur non résolue (id inconnu / reste d'un import V2 par
- * nom) reste éditable et re-cherchable.
+ * nom) reste éditable et re-cherchable. Adaptateur de `SearchPicker`.
  */
 export function ItemPicker({
   options,
@@ -44,76 +60,26 @@ export function ItemPicker({
   value: string;
   onChange: (id: string) => void;
 }) {
-  const [query, setQuery] = useState('');
-  const selected = useMemo(() => options.find((o) => o.id === value), [options, value]);
-
-  const matches = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return [];
-    // Rang : nom exact > commence par > contient ; puis nom le plus court.
-    // Sans ça, une monnaie courte (« Gold ») est noyée sous les coffres qui la
-    // contiennent (« Gold & Stamina Chest »…) et passe sous le plafond.
-    const rank = (name: string) => {
-      const n = name.toLowerCase();
-      if (n === q) return 0;
-      if (n.startsWith(q)) return 1;
-      return 2;
-    };
-    return options
-      .filter((o) => o.name.toLowerCase().includes(q))
-      .sort((a, b) => rank(a.name) - rank(b.name) || a.name.length - b.name.length)
-      .slice(0, 20);
-  }, [options, query]);
-
-  // Valeur posée (résolue ou non) : aperçu + bouton pour re-chercher.
-  if (value) {
-    return (
-      <div className="flex items-center gap-2">
-        {selected ? (
-          <ItemInline item={inline(selected)} size={18} />
+  return (
+    <SearchPicker
+      options={options}
+      value={value}
+      idOf={(o) => o.id}
+      nameOf={(o) => o.name}
+      search={searchItems}
+      className="min-w-56 flex-1"
+      renderIcon={(o) => (o.icon ? <Tile o={o} /> : <span aria-hidden>🪙</span>)}
+      renderSelected={(o) =>
+        o ? (
+          <ItemInline item={inline(o)} size={18} />
         ) : (
           <span className="text-warn text-xs italic">{value} (non résolu)</span>
-        )}
-        <button
-          type="button"
-          className="text-content-subtle text-xs hover:underline"
-          onClick={() => onChange('')}
-          title="Changer d'item"
-        >
-          changer
-        </button>
-      </div>
-    );
-  }
-
-  return (
-    <div className="relative min-w-56 flex-1">
-      <input
-        className="border-line bg-surface-base text-content focus:border-accent w-full rounded-md border px-2 py-1 text-sm focus:outline-none"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Chercher un item…"
-      />
-      {matches.length > 0 && (
-        <ul className="border-line bg-surface-raised absolute z-20 mt-1 max-h-64 w-full overflow-y-auto rounded-md border shadow-lg">
-          {matches.map((o) => (
-            <li key={o.id}>
-              <button
-                type="button"
-                className="hover:bg-surface-overlay flex w-full items-center gap-2 px-2 py-1 text-left text-sm"
-                onClick={() => {
-                  onChange(o.id);
-                  setQuery('');
-                }}
-              >
-                {o.icon ? <Tile o={o} /> : <span aria-hidden>🪙</span>}
-                <span className="text-content min-w-0 flex-1 truncate">{o.name}</span>
-                <span className="text-content-subtle font-mono text-[10px]">{o.id}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+        )
+      }
+      onPick={(o) => onChange(o.id)}
+      onClear={() => onChange('')}
+      placeholder="Chercher un item…"
+      changeTitle="Changer d'item"
+    />
   );
 }

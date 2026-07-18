@@ -1,6 +1,8 @@
 import { characterDisplayName, getCharacterListItems } from '@/lib/data/characters';
 import { loadCuratedCharacters } from '@/lib/data/curated';
 import { extractedCharacter, reviewTarget } from '@/lib/admin/review-store';
+import { img } from '@/lib/images';
+import type { ExtractorRow } from '@/components/admin/ExtractorSidebar';
 
 export interface SidebarRow {
   id: string;
@@ -52,4 +54,23 @@ export function buildCharacterRows(): SidebarRow[] {
       curated: Boolean(curated[c.id] && Object.keys(curated[c.id]).length),
     })),
   ];
+}
+
+/**
+ * Lignes perso au format GÉNÉRIQUE `ExtractorRow` (pour `ExtractorSidebar`) :
+ * face `FI_<id>`, élément/classe en surimpression du portrait, rareté en
+ * étoiles, ✎ = perso curé. Remplace l'ex-`CharactersSidebar` spécialisée.
+ */
+export function characterExtractorRows(): ExtractorRow[] {
+  return buildCharacterRows().map((r): ExtractorRow => ({
+    id: r.id,
+    name: r.name,
+    icon: img.face(r.id),
+    elementIcon: r.element ? img.element(r.element) : undefined,
+    classIcon: r.class ? img.klass(r.class) : undefined,
+    stars: r.rarity || undefined,
+    status: r.status,
+    count: r.diffCount,
+    marker: r.curated ? '✎' : undefined,
+  }));
 }

@@ -5,7 +5,7 @@ import { EffectHiddenToggle } from '@/components/admin/EffectHiddenToggle';
 import { EffectIconTile } from '@/components/character/EffectChips';
 import { getMergedEffect, loadCuratedEffects } from '@/lib/data/effects';
 import { CharacterVisual } from '@/components/admin/CharacterVisual';
-import { CharacterSwitch } from '@/components/admin/CharacterSwitch';
+import { EntitySwitch } from '@/components/admin/EntitySwitch';
 import { EntityDiffPanel } from '@/components/admin/EntityDiffPanel';
 import { IntegrateCharacterButton } from '@/components/admin/IntegrateCharacterButton';
 import { SkillsSection } from '@/components/character/SkillsSection';
@@ -119,7 +119,7 @@ export default async function ExtractorCharacterDetail({
 
   return (
     <div className="space-y-5">
-      <CharacterSwitch id={id} mode="extractor" />
+      <EntitySwitch id={id} mode="extractor" entity="characters" />
 
       {/* Statut d'intégration */}
       {isNew ? (

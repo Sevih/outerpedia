@@ -6,6 +6,19 @@
 
 ## 2026-07-18
 
+- **Factorisations admin (switches / pickers / sidebars)** — trois paires quasi
+  dupliquées fusionnées. (1) `EntitySwitch({id, mode, entity})` générique remplace
+  CharacterSwitch + MonsterSwitch (identiques au segment de route près), 4 call
+  sites. (2) `SearchPicker<T>` : châssis de sélecteur cherchable (recherche →
+  dropdown → aperçu + « changer »), CharacterPicker et ItemPicker deviennent des
+  adaptateurs minces passant leur filtre/classement, icône de ligne et aperçu du
+  sélectionné en callbacks. (3) `CharactersSidebar` (spécialisée) fusionnée dans
+  `ExtractorSidebar` (générique, superset) : adaptateur `characterExtractorRows`
+  mappe `SidebarRow`→`ExtractorRow` (face `FI_<id>`, élément/classe en overlays
+  du portrait, rareté en étoiles), un champ `marker` générique porte le ✎ « curé ».
+  3 composants supprimés. Vérifié : typecheck + lint + 351 tests OK. La sidebar
+  perso adopte l'UX générique (nom d'abord, overlays) — à confirmer d'un coup d'œil.
+
 - **Homonymes dédupliqués (partie non-admin)** — deux pièges levés. (1) Les
   constantes d'ordre d'équipement vivaient en copies : `GRADE_RANK`/`GRADE_ORDER`
   ×3 (equipment.ts, equipment-detail.ts, char-progression.ts — la 3ᵉ sous un nom

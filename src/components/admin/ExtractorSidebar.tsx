@@ -30,6 +30,8 @@ export interface ExtractorRow {
   status?: 'new' | 'diff' | 'ok';
   /** Compteur d'écarts (diff extraction, issues V2…), affiché sur le badge. */
   count?: number;
+  /** Petit glyphe accent après le statut (ex. « ✎ » = entité curée). */
+  marker?: string;
   /** Marqueurs booléens filtrables par `toggles` (« site »…). */
   flags?: string[];
   /** Étiquettes filtrables par `tagFilter` (slugs de mode de jeu…). */
@@ -266,6 +268,7 @@ export function ExtractorSidebar({
                           ok
                         </span>
                       )}
+                      {r.marker && <span className="text-accent text-[10px]">{r.marker}</span>}
                     </span>
                   </span>
                   <span className="text-content-subtle flex items-center gap-1 text-xs">

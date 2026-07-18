@@ -58,9 +58,11 @@
       d'accueil (couverture curée depuis `data/curated/items.json`) + bouton
       d'intégration PAR LIGNE (`integrateItem` : entrée `items.json` + icône ;
       cœur `integrateItemData` partagé avec le rebake de l'éditeur).
-      RESTE : éditeurs manquants (Monstre, gear) ; factos `CharacterSwitch`/
-      `MonsterSwitch`, `CharacterPicker`/`ItemPicker` ; fusion
-      `CharactersSidebar`↔`ExtractorSidebar`.
+      ✅ FAIT (18/07) : factorisations admin — `EntitySwitch` générique
+      (ex-CharacterSwitch/MonsterSwitch), `SearchPicker<T>` (ex-CharacterPicker/
+      ItemPicker, adaptateurs minces), fusion `CharactersSidebar`→`ExtractorSidebar`
+      (adaptateur `characterExtractorRows`, marqueur ✎ curé générique).
+      RESTE : éditeurs manquants (Monstre, gear).
 - [ ] prevoir les editeurs pour update les guides
 
 ## 📄 Pages manquantes (inventaire layout du 2026-07-17)
