@@ -9,10 +9,10 @@ import type { SidebarRow } from '@/lib/admin/character-rows';
 
 export type { SidebarRow };
 
-const FILTERS = ['all', 'diff', 'v2', 'new', 'ok'] as const;
+const FILTERS = ['all', 'diff', 'new', 'ok'] as const;
 type Filter = (typeof FILTERS)[number];
 
-/** Liste latérale des persos façon extracteur V2 : stats, recherche, filtres. */
+/** Liste latérale des persos de l'extracteur : stats, recherche, filtres. */
 export function CharactersSidebar({
   rows,
   basePath = '/admin/extractor/characters',
@@ -29,7 +29,6 @@ export function CharactersSidebar({
       total: rows.length,
       ok: rows.filter((r) => r.status === 'ok').length,
       diff: rows.filter((r) => r.status === 'diff').length,
-      v2: rows.filter((r) => r.v2Count > 0).length,
       new: rows.filter((r) => r.status === 'new').length,
     }),
     [rows],
@@ -38,9 +37,7 @@ export function CharactersSidebar({
   const filtered = useMemo(() => {
     const s = search.trim().toLowerCase();
     return rows
-      .filter((r) =>
-        filter === 'all' ? true : filter === 'v2' ? r.v2Count > 0 : r.status === filter,
-      )
+      .filter((r) => (filter === 'all' ? true : r.status === filter))
       .filter((r) => !s || r.id.includes(s) || r.name.toLowerCase().includes(s))
       .sort((a, b) => {
         // diffs d'abord (plus gros en tête), puis new, puis par id.
@@ -59,7 +56,6 @@ export function CharactersSidebar({
           <span className="text-content-subtle">{stats.total} total</span>
           <span className="text-success">{stats.ok} ok</span>
           <span className="text-warn">{stats.diff} diff</span>
-          <span className="text-danger">{stats.v2} v2≠</span>
           <span className="text-accent">{stats.new} new</span>
         </div>
         <input
@@ -123,11 +119,6 @@ export function CharactersSidebar({
                       {r.status === 'ok' && (
                         <span className="bg-success/15 text-success rounded px-1 text-[10px]">
                           ok
-                        </span>
-                      )}
-                      {r.v2Count > 0 && (
-                        <span className="bg-danger/15 text-danger rounded px-1 text-[10px]">
-                          {r.v2Count} v2≠
                         </span>
                       )}
                       {r.curated && <span className="text-accent text-[10px]">✎</span>}

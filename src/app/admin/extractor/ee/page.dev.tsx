@@ -1,8 +1,18 @@
-import { EquipmentReport } from '@/components/admin/EquipmentReport';
-import { equipmentV2Control } from '@/lib/admin/equipment-control';
+import { ExtractorReview } from '@/components/admin/ExtractorReview';
+import { equipmentReviewProps } from '@/lib/admin/equipment-review';
 
 export const dynamic = 'force-dynamic';
 
 export default function Page() {
-  return <EquipmentReport title="Extractor · EE" report={equipmentV2Control('ee')[0] ?? null} />;
+  return (
+    <div className="space-y-5">
+      <div>
+        <h1 className="text-content-strong text-xl font-semibold">Extractor · EE</h1>
+        <p className="text-content-muted text-sm">
+          Diff « data du jeu ↔ data du site » — nouveau / vrai écart / typo.
+        </p>
+      </div>
+      <ExtractorReview {...equipmentReviewProps('ee')} />
+    </div>
+  );
 }

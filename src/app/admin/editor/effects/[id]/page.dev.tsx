@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Route } from 'next';
 import { EffectCuratedEditor } from '@/components/admin/EffectCuratedEditor';
-import { getExtractedEffect, loadCuratedEffects, v2Reference } from '@/lib/data/effects';
+import { getExtractedEffect, loadCuratedEffects } from '@/lib/data/effects';
 import { EffectIconTile } from '@/components/character/EffectChips';
 
 export const dynamic = 'force-dynamic';
@@ -18,7 +18,6 @@ export default async function EditorEffectEdit({ params }: { params: Promise<{ i
   const initial = loadCuratedEffects()[id] ?? {};
   const isCreation = !eff;
   const isNew = isCreation && Object.keys(initial).length === 0;
-  const v2 = eff ? v2Reference(eff.icon) : undefined;
 
   return (
     <div className="space-y-5">
@@ -64,11 +63,6 @@ export default async function EditorEffectEdit({ params }: { params: Promise<{ i
           <p className="text-content-subtle text-xs">
             Tooltips fusionnés : {eff.tooltips.join(', ')}
           </p>
-          {v2?.label && (
-            <p className="text-content-subtle text-xs">
-              Référence V2 : «{v2.label}» {v2.category ? `(${v2.category})` : ''}
-            </p>
-          )}
         </section>
       ) : (
         <section className="border-accent/40 bg-accent/5 space-y-1 rounded-lg border p-4">

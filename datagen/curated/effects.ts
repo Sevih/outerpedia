@@ -72,7 +72,7 @@ export function validateEffectCurated(id: string, c: EffectCurated): string[] {
 
 /**
  * LE lecteur partagé du curé — remplace les parses ad-hoc (lib/effects,
- * equipment, manifest, v2-control). Cache clé sur le mtime du fichier
+ * equipment, manifest). Cache clé sur le mtime du fichier
  * (`fileStamp`, TTL 2 s) : une édition admin se voit sans redémarrage, même
  * contrat que les caches dérivés de lib/effects. Fichier absent → `{}`
  * (le curé est optionnel) ; JSON cassé → throw nommé (readCuratedJson).

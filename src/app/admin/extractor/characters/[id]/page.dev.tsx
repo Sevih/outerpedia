@@ -8,7 +8,6 @@ import { CharacterVisual } from '@/components/admin/CharacterVisual';
 import { CharacterSwitch } from '@/components/admin/CharacterSwitch';
 import { EntityDiffPanel } from '@/components/admin/EntityDiffPanel';
 import { IntegrateCharacterButton } from '@/components/admin/IntegrateCharacterButton';
-import { V2ControlPanel } from '@/components/admin/V2ControlPanel';
 import { SkillsSection } from '@/components/character/SkillsSection';
 import { BurstSection, type BurstCard } from '@/components/character/BurstSection';
 import { ChainDualSection } from '@/components/character/ChainDualSection';
@@ -25,15 +24,9 @@ import {
 import { img } from '@/lib/images';
 import { lRec } from '@/lib/i18n/localize';
 import { statAbbr } from '@/lib/stats';
-import { computeStatSteps } from '@/lib/data/char-progression';
 import { getCharacter } from '@/lib/data/characters';
 import { getCharacterCurated } from '@/lib/data/curated';
-import {
-  characterV2Control,
-  entityReview,
-  extractedBundle,
-  type ControlGlossaries,
-} from '@/lib/admin/review-store';
+import { entityReview, extractedBundle } from '@/lib/admin/review-store';
 import type { Glossaries, Skill } from '@contracts';
 import glossariesData from '@data/generated/glossaries.json';
 
@@ -60,14 +53,6 @@ export default async function ExtractorCharacterDetail({
   const isNew = !committed;
   const review = entityReview('character', id);
   const hasChanges = isNew || review.fields.length > 0;
-  const control = characterV2Control(
-    char as unknown as Record<string, unknown>,
-    G as unknown as ControlGlossaries,
-    skills,
-    // Paliers de stats AFFICHÉS (même calcul que la fiche publique) — comparés
-    // aux paliers de l'oracle V2 (character-stats.json).
-    computeStatSteps(char).steps,
-  );
   const curated = getCharacterCurated(id);
 
   // Skills pré-localisés (EN), MÊME rendu que le site. En cartes : les 3 mains
@@ -175,9 +160,6 @@ export default async function ExtractorCharacterDetail({
           côté Editor.
         </p>
       </section>
-
-      {/* Contrôle vs V2 : valeurs + reste à intégrer */}
-      <V2ControlPanel control={control} />
 
       {/* Diff extraction ↔ committé */}
       <EntityDiffPanel fields={review.fields} />

@@ -578,9 +578,8 @@ function eeModel(slug: string, lang: Lang): DetailModel | null {
 /**
  * Modèle de page EE à partir d'une vue DÉJÀ résolue — évite le `.find` par slug
  * (et surtout la re-matérialisation de toutes les familles de `getEquipmentDetail`)
- * quand l'appelant tient déjà la vue. Utilisé par le contrôle V2 des EE, qui
- * itère les ~90 vues : le construire par vue rend le rapport O(n) au lieu de
- * O(n²) (cf. audit 2026-07-17).
+ * quand l'appelant tient déjà la vue. Utile quand on itère les ~90 vues EE :
+ * construire par vue reste O(n) au lieu de O(n²).
  */
 export function eeModelForView(view: EEView, lang: Lang): DetailModel {
   const slug = slugifyEquipment(view.name.en);

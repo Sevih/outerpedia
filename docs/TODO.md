@@ -23,12 +23,16 @@
       par promo-banner-store, stage.ts et manifest.ts ; documentée dans
       .env.example, posée dans le .env.local des machines). Une fois la dépose
       faite : `data/legacy/` (248 fichiers) devient supprimable.
-      🔶 EN COURS (18/07) : le **panneau d'accueil** ne compare PLUS la V2 — il
-      passe sur le moteur `review` (diff jeu ↔ site : new/diff/typo). RESTE :
-      refondre les **pages extracteur PAR ENTITÉ** (effects/gear/… : encore
-      `v2-control`/`equipmentV2Control`/`v2MissingInV3`/`EquipmentReport`) sur
-      les mêmes buckets + filtre + « corriger toutes les typos », PUIS supprimer
-      `v2-control` et `data/legacy`.
+      ✅ FAIT (18/07) : comparaisons V2 RETIRÉES de l'admin (extracteur +
+      éditeur). Supprimés : `v2-control.ts`, `coherence.ts`, `equipment-control.ts`,
+      `V2ControlPanel`, `EquipmentReport`, `v2MissingInV3`, `v2Reference`, script
+      `datagen:coherence`. Toutes les pages extracteur (persos, effets, EE, armes,
+      amulettes, armures, talismans, sets) tournent sur le moteur `review` (diff
+      jeu↔site new/diff/typo + « corriger les typos »), sidebars sans colonne
+      `v2≠`, badges du menu sur les buckets review. RESTE : (1) supprimer
+      `data/legacy/` (248 fichiers) — encore lu par les specs datagen (oracle de
+      couverture) + outils d'import one-shot, à déposer séparément ; (2) le regen
+      coupons/banner reste (EXCEPTION jusqu'à bascule prod).
 - [ ] **Retravailler le rôle des Extractors/Editors du panneau admin** (corollaire
       du point précédent — demande Sevih 2026-07-16) : certaines pages Extractor
       n'existent que pour la comparaison V2. Quand la comp V2 saute, redéfinir la
@@ -38,10 +42,16 @@
       sur ExtractorSidebar, 9 usages), `CharacterSwitch`/`MonsterSwitch`
       identiques au chemin près, `CharacterPicker`/`ItemPicker` à factoriser.
       🔶 EN COURS (18/07) : matrice d'accueil REDÉFINIE (Extract = diff jeu↔site
-      new/diff/typo sur 9 entités ; Édition = couverture curée X/N). Modèle acté
-      Sevih : extracteur = data du jeu (inclusion via promote) ; éditeur =
-      committé + curé, effectif à chaud. RESTE : pages extracteur par entité,
-      éditeurs manquants (Monstre, gear), factos sidebar/switch/picker.
+      new/diff/typo sur 9 entités ; Édition = couverture curée X/N) ; pages
+      extracteur par entité FAITES (composant générique `ExtractorReview`) ;
+      ordre du side-menu Extractor/Editor aligné ; extraction perso montre TOUT
+      (Lambda intégrable), dev sans auto-promote (intégration = seule porte).
+      Modèle acté Sevih : extracteur = data du jeu (inclusion via bouton
+      d'intégration par entité) ; éditeur = committé + curé, effectif à chaud.
+      RESTE : intégration par entité pour l'ÉQUIPEMENT (bouton, comme perso/
+      monstre) ; EXTRACTEUR D'ITEMS (à créer) ; éditeurs manquants (Monstre,
+      gear) ; factos `CharacterSwitch`/`MonsterSwitch`, `CharacterPicker`/
+      `ItemPicker` ; fusion `CharactersSidebar`↔`ExtractorSidebar`.
 - [ ] prevoir les editeurs pour update les guides
 
 ## 📄 Pages manquantes (inventaire layout du 2026-07-17)

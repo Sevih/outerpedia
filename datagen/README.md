@@ -59,9 +59,8 @@ promote.ts      refresh.ts définition UNIQUE du flux « rafraîchir depuis le
 - **`extractor/`** — extracteur **déclaratif** par entité : `specs/`
   (character, monster — la description de QUOI extraire), `integrate.ts`
   (intégration ciblée d'une entité dans `data/generated/`, utilisé par
-  l'admin), `version-monster.ts` (figer l'état committé d'un monstre),
-  `v2-control.ts` (contrôle contre l'oracle V2), `coherence.ts`
-  (`pnpm datagen:coherence`). Point d'entrée CLI : `pnpm datagen:extract-entity`.
+  l'admin), `version-monster.ts` (figer l'état committé d'un monstre).
+  Point d'entrée CLI : `pnpm datagen:extract-entity`.
 - **`curated/`** — outillage de la couche curée : `seed.ts`
   (`pnpm datagen:seed-curated`, amorce `data/curated/` depuis l'oracle V2)
   - validations (tags, effets…).

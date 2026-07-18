@@ -1,13 +1,12 @@
 /* eslint-disable @next/next/no-img-element -- sprites dev */
 /**
  * Fiche INFO d'une entrée d'équipement (extracteur) : identité multilingue,
- * sprites, stats, passifs résolus (palier 1 → max), chips d'effets, provenance,
- * et les issues du contrôle V2 propres à CETTE entrée. Serveur, dev only.
+ * sprites, stats, passifs résolus (palier 1 → max), chips d'effets, provenance.
+ * Serveur, dev only.
  */
 import { notFound } from 'next/navigation';
 import type { LangDict } from '@contracts';
 import { img } from '@/lib/images';
-import { equipmentV2Control, type EquipIssue } from '@/lib/admin/equipment-control';
 import type { GearKind } from '@/lib/admin/gear-rows';
 import {
   getAmuletFamilies,
@@ -43,24 +42,6 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-function Issues({ issues }: { issues: EquipIssue[] }) {
-  if (!issues.length) return null;
-  return (
-    <div className="border-warn/40 bg-warn/5 space-y-2 rounded-lg border p-3">
-      <p className="text-warn text-xs font-semibold uppercase">
-        Contrôle V2 — {issues.length} écart(s)
-      </p>
-      {issues.map((i, n) => (
-        <div key={n} className="text-xs">
-          <p className="text-content-strong">{i.field}</p>
-          <p className="text-content-subtle whitespace-pre-line">V2 : {plain(i.v2)}</p>
-          <p className="text-content whitespace-pre-line">V3 : {plain(i.v3)}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function PassiveList({ passives }: { passives: ReturnType<typeof resolvePassives> }) {
   return (
     <ul className="space-y-2">
@@ -84,17 +65,6 @@ function PassiveList({ passives }: { passives: ReturnType<typeof resolvePassives
       ))}
     </ul>
   );
-}
-
-function issuesOf(kind: GearKind, name: string): EquipIssue[] {
-  try {
-    const n = name.toLowerCase();
-    return equipmentV2Control(kind).flatMap((r) =>
-      r.issues.filter((i) => i.item.toLowerCase() === n),
-    );
-  } catch {
-    return [];
-  }
 }
 
 function Header({
@@ -134,7 +104,7 @@ function Header({
   );
 }
 
-function FamilyDetail({ kind, f }: { kind: GearKind; f: GearFamily }) {
+function FamilyDetail({ f }: { f: GearFamily }) {
   const passives = resolvePassives(f.passives, 'en');
   const effects = passiveEffects(f.passives);
   return (
@@ -151,7 +121,6 @@ function FamilyDetail({ kind, f }: { kind: GearKind; f: GearFamily }) {
           </>
         }
       />
-      <Issues issues={issuesOf(kind, f.name.en)} />
       {f.mainStats.length > 0 && (
         <Section title="Main stats">
           <p className="flex flex-wrap gap-1.5 text-xs">
@@ -215,7 +184,7 @@ export function GearDetail({ kind, id }: { kind: GearKind; id: string }) {
           : getTalismanFamilies();
     const f = fams.find((x) => x.id === id);
     if (!f) notFound();
-    return <FamilyDetail kind={kind} f={f} />;
+    return <FamilyDetail f={f} />;
   }
 
   if (kind === 'ee') {
@@ -239,7 +208,6 @@ export function GearDetail({ kind, id }: { kind: GearKind; id: string }) {
             </>
           }
         />
-        <Issues issues={issuesOf('ee', e.name.en)} />
         {e.mainStats.length > 0 && (
           <Section title="Main stats">
             <p className="flex flex-wrap gap-1.5 text-xs">
@@ -289,7 +257,6 @@ export function GearDetail({ kind, id }: { kind: GearKind; id: string }) {
           </>
         }
       />
-      <Issues issues={issuesOf('sets', s.name.en)} />
       <Section title="Pièces (6★)">
         <p className="flex gap-2">
           {Object.entries(s.pieceIcons).map(([slot, icon]) => (

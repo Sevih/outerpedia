@@ -6,6 +6,22 @@
 
 ## 2026-07-18
 
+- **Comparaisons V2 RETIRÉES de l'admin** (PRIO Sevih #1) — l'oracle a joué son
+  rôle. Supprimés : `datagen/extractor/v2-control.ts`, `coherence.ts`,
+  `src/lib/admin/equipment-control.ts`, `V2ControlPanel`, `EquipmentReport`,
+  `v2MissingInV3` + `v2Reference` (effects.ts), script `datagen:coherence`.
+  Toutes les pages extracteur (persos, effets, EE, armes, amulettes, armures,
+  talismans, sets) tournent désormais sur le moteur `review` (diff jeu↔site
+  new/diff/typo) via le composant générique `ExtractorReview` — index des
+  équipements refaits à partir d'un helper `equipmentReviewProps(kind)` (noms
+  résolus par famille/vue). Fiche perso extracteur : panneau V2 retiré (garde le
+  diff extraction↔committé + intégration). GearDetail : bloc « Contrôle V2 »
+  retiré (garde l'affichage info). Sidebars sans colonne `v2≠` ; badges du menu
+  admin sur les buckets review (plus `equipmentV2Control`/`v2MissingInV3`).
+  Éditeur d'effets : référence V2 retirée. Ordre du side-menu Extractor/Editor
+  ALIGNÉ (demande Sevih). Vérifié : 0 code de comparaison V2 restant, 334 tests
+  verts, extraction équipement sans faux positif. RESTE (cf. TODO) : déposer
+  `data/legacy/` (encore lu par les specs datagen + imports one-shot).
 - **Helper `normalizeLang` — fin du boilerplate lang (18 occurrences)** — chaque
   page répétait le bloc « await params » suivi de la normalisation
   copiée-collée du param de langue (garde de type puis repli sur un littéral en

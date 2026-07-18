@@ -34,7 +34,6 @@
     "datagen:seed-curated": "tsx datagen/curated/seed.ts",
     "clean": "node -e \"for(const f of ['.next'])require('fs').rmSync(f,{recursive:true,force:true})\"",
     "clean:all": "node -e \"for(const f of ['.next','node_modules'])require('fs').rmSync(f,{recursive:true,force:true})\" && pnpm install",
-    "datagen:coherence": "tsx datagen/extractor/coherence.ts",
     "assets:collect": "tsx datagen/assets/collect.ts",
     "assets:pull": "tsx datagen/assets/pull.ts",
     "assets:push": "node scripts/assets-push.mjs",

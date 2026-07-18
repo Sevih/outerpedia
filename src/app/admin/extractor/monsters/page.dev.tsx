@@ -49,8 +49,7 @@ export default function ExtractorMonstersIndex() {
           </div>
           <p className="text-content-subtle text-xs">
             Écrit l&apos;extraction fraîche dans <code>data/generated/{review.file}</code> — à
-            committer via git. Sinon, enregistre monstre par monstre depuis sa fiche. Pas de
-            contrôle V2 sur ce domaine (choix assumé).
+            committer via git. Sinon, enregistre monstre par monstre depuis sa fiche.
           </p>
         </div>
       )}
