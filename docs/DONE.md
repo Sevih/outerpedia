@@ -6,6 +6,16 @@
 
 ## 2026-07-18
 
+- **`shopSourceLabel` : fin des trois `shopLabel` divergents** — le libellé d'un
+  slug de boutique (source d'équipement) était calculé en trois copies : les
+  pages liste/fiche équipement repliaient sur le slug brut pour un slug hors
+  `adventure_license`/`event_shop`, tandis que la fiche perso traduisait via un
+  cast `t(\`equip.source.${s}\`)`— rendant la CLÉ brute pour un slug inconnu.
+Un nouveau slug se serait donc affiché différemment selon la page. Source
+unique`shopSourceLabel(slug, t)`dans`data/equipment.ts` (map slug→clé +
+REPLI ASSUMÉ sur le slug brut), branchée aux 3 sites. Data actuelle : 2 slugs
+seulement (`event_shop`, `adventure_license`, tous deux traduits), donc rendu
+  visible inchangé — c'est le risque futur qui est fermé.
 - **Modèle admin « intégration = seule porte »** (PRIO Sevih) — deux volets :
   - _Extraction montre TOUT_ : la spec perso ne filtre plus sur `ShowMainPage`
     (elle gardait de fait les non-« sortis » invisibles). On garde exactement

@@ -12,6 +12,7 @@ import {
   type DetailLabels,
 } from '@/components/equipment/EquipmentDetail';
 import { getEquipmentDetail } from '@/lib/data/equipment-detail';
+import { shopSourceLabel } from '@/lib/data/equipment';
 
 // Pas de `generateStaticParams` : les fiches se rendent À LA DEMANDE puis sont
 // cachées 24 h (`revalidate`, `dynamicParams` à true) — choix de build assumé,
@@ -40,13 +41,6 @@ export async function generateMetadata({
   });
 }
 
-/** Slugs de boutique extraits → libellés localisés. */
-function shopLabel(slug: string, t: Awaited<ReturnType<typeof getT>>): string {
-  if (slug === 'adventure_license') return t('equip.source.adventure_license');
-  if (slug === 'event_shop') return t('equip.source.event_shop');
-  return slug;
-}
-
 export default async function EquipmentDetailPage({
   params,
 }: {
@@ -61,7 +55,7 @@ export default async function EquipmentDetailPage({
   // Libellés de boutique traduits (le modèle porte les slugs bruts).
   if (model.source) {
     const parts = [
-      ...(model.source.shops ?? []).map((s) => shopLabel(s, t)),
+      ...(model.source.shops ?? []).map((s) => shopSourceLabel(s, t)),
       ...(model.source.label ? [model.source.label] : []),
     ];
     model.source.label = parts.length ? parts.join(' · ') : undefined;

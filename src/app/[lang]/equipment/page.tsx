@@ -15,6 +15,7 @@ import {
   getWeaponFamilies,
   passiveEffects,
   resolvePassives,
+  shopSourceLabel,
   type GearFamily,
   type ResolvedSource,
 } from '@/lib/data/equipment';
@@ -40,13 +41,6 @@ export async function generateMetadata({
   });
 }
 
-/** Slugs de boutique extraits → libellés localisés (clés equip.source.*). */
-function shopLabel(slug: string, t: Awaited<ReturnType<typeof getT>>): string {
-  if (slug === 'adventure_license') return t('equip.source.adventure_license');
-  if (slug === 'event_shop') return t('equip.source.event_shop');
-  return slug;
-}
-
 function toRowSource(
   source: ResolvedSource | undefined,
   lang: Lang,
@@ -54,7 +48,7 @@ function toRowSource(
 ): RowSource | undefined {
   if (!source) return undefined;
   const labels = [
-    ...source.shops.map((s) => shopLabel(s, t)),
+    ...source.shops.map((s) => shopSourceLabel(s, t)),
     ...(source.label ? [source.label] : []),
   ];
   return {

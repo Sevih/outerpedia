@@ -63,7 +63,7 @@ import {
 import { STEP_STAT_KEYS, type StepStatKey } from '@/lib/stat-compose';
 import { statDesc, statName } from '@/lib/stats';
 import { getEquipmentDetail } from '@/lib/data/equipment-detail';
-import { slugifyEquipment } from '@/lib/data/equipment';
+import { shopSourceLabel, slugifyEquipment } from '@/lib/data/equipment';
 import {
   StatsRankingSection,
   type TierEntry,
@@ -452,9 +452,7 @@ export default async function CharacterDetail({
             ): T => {
               if (!it.source) return it;
               const parts = [
-                ...(it.source.shops ?? []).map((s) =>
-                  t(`equip.source.${s}` as Parameters<typeof t>[0]),
-                ),
+                ...(it.source.shops ?? []).map((s) => shopSourceLabel(s, t)),
                 ...(it.source.label ? [it.source.label] : []),
               ];
               return {

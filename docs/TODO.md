@@ -179,10 +179,6 @@
 - [ ] **Helpers adb** dupliqués entre `datagen/extract/dump.ts` et
       `pull-gamedata.ts` (ADB, PKG, capture, stream, pickDevice, bloc root) —
       extraire `extract/adb.ts`.
-- [ ] `shopLabel` ×3 DIVERGENTS (equipment/page.tsx:44, equipment/[slug]/
-      page.tsx:40, variante inline characters/[slug]/page.tsx:452) : un nouveau
-      slug de boutique s'affichera différemment selon la page — factoriser dans
-      src/lib avec repli assumé.
 - [ ] Boilerplate `lang` (18 occurrences du bloc await params + isValidLang) →
       helper `normalizeLangParam` dans src/lib/i18n.
 - [ ] Logique « URL source de vérité » copiée entre ui/Tabs:35-54 et

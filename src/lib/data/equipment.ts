@@ -33,6 +33,7 @@ import type {
   SpecialItem,
 } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
+import type { TFunction } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { statAbbr, statName } from '@/lib/stats';
 import weaponData from '@data/generated/equipment/weapon.json';
@@ -311,6 +312,24 @@ export interface ResolvedSource {
   shops: string[];
   /** Libellé curé (texte libre, complément non extractible). */
   label?: string;
+}
+
+/** Slugs de boutique connus → clé de libellé localisé. */
+const SHOP_SOURCE_KEYS = {
+  adventure_license: 'equip.source.adventure_license',
+  event_shop: 'equip.source.event_shop',
+} as const;
+
+/**
+ * Libellé localisé d'un slug de boutique (source d'équipement), avec REPLI
+ * ASSUMÉ sur le slug brut pour un slug sans clé `equip.source.*`. Source unique
+ * des trois copies qui divergeaient : les pages équipement repliaient sur le
+ * slug, la fiche perso traduisait via un cast (rendant la clé brute pour un
+ * slug inconnu) — un nouveau slug s'affichait donc différemment selon la page.
+ */
+export function shopSourceLabel(slug: string, t: TFunction): string {
+  const key = SHOP_SOURCE_KEYS[slug as keyof typeof SHOP_SOURCE_KEYS];
+  return key ? t(key) : slug;
 }
 
 export interface GearFamily {
