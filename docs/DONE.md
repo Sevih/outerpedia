@@ -6,6 +6,34 @@
 
 ## 2026-07-18
 
+- **Câblage buff/debuff des PERSOS dans l'éditeur** (matrice admin — parité
+  partielle avec l'éditeur de monstre). Constat Sevih : l'éditeur perso ne
+  touchait qu'aux champs curés (rank/rôle/prio/tags/vidéos), jamais au câblage
+  d'affichage des chips de skills, alors que le monstre l'a (MonsterKitEditor).
+  Périmètre ACTÉ (le rendu perso est déterministe, contrairement au monstre où
+  tout s'empile sur un porteur) : **masquer + ajouter uniquement**, PAS de
+  déplacement inter-cartes (`chipOwner`) — question posée, réponse « Masquer +
+  Ajouter ». Livré :
+  • Couche curée `data/curated/character-skills.json` — `chipHide` (cardId →
+  refs `tooltip/label` masquées) + `chipAdd` (cardId → réfs tooltip du
+  glossaire ajoutées). cardId = id du skill (mains/fusion_passive/extra), id
+  du chain_passive pour la chaîne, `…::dual` pour le duo.
+  • Moteur : `CharacterKitCuration` + `characterCurated()` (lecture disque
+  tolérante au fichier absent) + `applyCardCuration()` (filtre LOCAL) threadés
+  dans `cardEffects(skills, s, curated?)` et `buildChainView(skills, lang,
+  curated?)` — l'admin passe `{}` pour les positions « règles pures ».
+  • Store `character-skill-curated-store.ts` (patch card-scoped, `writeJson`
+  canonique, `_doc` préservé, clés triées) + route `POST
+  /api/admin/curated/character-skills` (403 hors dev).
+  • Composant `CharacterKitEditor` (× masque / + ajoute, identité par
+  carte+ref, datalist du glossaire) branché dans l'éditeur perso.
+  • 2e passe `mergeStatusEffects` sur la fiche publique ET l'extractor pour
+  résoudre le statut des `chipAdd` (nom/icône/nature) — même patron que
+  BossPanel. Fichier curé vide au départ → rendu public byte-identique tant
+  qu'aucune curation n'est posée. Typecheck + lint (fichiers propres) + 351
+  tests verts. NB : `skill-view.ts` reste sans test unitaire (chantier TODO
+  priorité 1 séparé).
+
 - **Wrappers de guides uniformisés sur le re-export 1 ligne** (dette code /
   duplication). 64 `index.tsx` qui ne faisaient que forwarder `{...props}` à un
   composant de rendu partagé (EncounterBossGuide ×30, VersionedBossGuide ×11,

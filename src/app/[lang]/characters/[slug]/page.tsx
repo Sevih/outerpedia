@@ -240,6 +240,16 @@ export default async function CharacterDetail({
   }));
   const chainView = buildChainView(skills, lang);
   const statuses = buildStatusMap(skills, lang);
+  // Chips CURÉES en plus (chipAdd) : leur statut n'est pas porté par les skills
+  // eux-mêmes — résolu depuis les chips des cartes (même passe que BossPanel).
+  mergeStatusEffects(
+    statuses,
+    [
+      ...cardSkills.flatMap((c) => c.effects ?? []),
+      ...(chainView ? [...chainView.chainEffects, ...chainView.dualEffects] : []),
+    ],
+    lang,
+  );
 
   // --- JSON-LD --------------------------------------------------------------
   const path = `/characters/${slug}`;

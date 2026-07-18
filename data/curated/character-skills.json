@@ -1,0 +1,5 @@
+{
+  "_doc": "Curation d'affichage des skills PERSOS (lue par cardEffects/buildChainView). Deux gestes, LOCAUX à une carte (le routage auto d'un perso est déjà déterministe — convention de slot {charId}_1|2|3, caller — donc pas de déplacement inter-cartes comme chez les monstres). chipHide : cardId → refs (tooltip/label) de chips à MASQUER sur cette carte (parasite que le jeu n'affiche pas). chipAdd : cardId → réfs tooltip du glossaire à AJOUTER (statut décrit par la desc mais appliqué hors kit). cardId = id du skill (mains, fusion_passive, extra) ; pour la chaîne : id du chain_passive ; pour le duo : {chainPassiveId}::dual. N'affecte que la présentation — la donnée extraite reste fidèle aux tables.",
+  "chipHide": {},
+  "chipAdd": {}
+}

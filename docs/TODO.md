@@ -66,7 +66,16 @@
       (ex-CharacterSwitch/MonsterSwitch), `SearchPicker<T>` (ex-CharacterPicker/
       ItemPicker, adaptateurs minces), fusion `CharactersSidebar`→`ExtractorSidebar`
       (adaptateur `characterExtractorRows`, marqueur ✎ curé générique).
-      RESTE : éditeurs manquants (Monstre, gear).
+      ✅ FAIT (18/07) : CÂBLAGE buff/debuff des PERSOS dans l'éditeur (parité
+      partielle avec le monstre, périmètre acté Sevih = masquer + ajouter, PAS
+      de déplacement inter-cartes car le routage perso est déterministe). Couche
+      curée `data/curated/character-skills.json` (`chipHide`/`chipAdd` par
+      cardId) lue par `cardEffects`/`buildChainView` (filtre local
+      `applyCardCuration`), store + route `curated/character-skills`, composant
+      `CharacterKitEditor` (cartes mains/fusion/extra + chaîne + duo). 2e passe
+      `mergeStatusEffects` (chipAdd) sur fiche publique + extractor, comme
+      BossPanel. Fichier curé vide au départ → rendu public inchangé.
+      RESTE : éditeur gear manquant.
 - [ ] prevoir les editeurs pour update les guides
 
 ## 📄 Pages manquantes (inventaire layout du 2026-07-17)

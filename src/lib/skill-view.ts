@@ -37,6 +37,54 @@ const monsterCurated = (): MonsterKitCuration =>
   loadDataJson<MonsterKitCuration>('curated/monster-skills.json');
 
 /**
+ * Curation d'affichage des kits PERSOS (cf. doc dans le fichier curé). Deux
+ * gestes LOCAUX à une carte — le routage auto d'un perso est déjà déterministe
+ * (convention de slot `{charId}_1|2|3`, `caller`), donc pas de déplacement
+ * inter-cartes (`chipOwner`) comme chez les monstres :
+ *   - `chipHide` (cardId → refs) MASQUE des chips sur une carte (parasite que
+ *     le jeu n'affiche pas) ; la ref est le `tooltip ?? label` de la chip ;
+ *   - `chipAdd` (cardId → réfs tooltip) AJOUTE des chips du glossaire (statut
+ *     décrit par la desc mais appliqué hors kit).
+ * cardId = id du skill (mains/fusion_passive/extra), id du chain_passive pour
+ * la chaîne, `{chainPassiveId}::dual` pour le duo.
+ */
+export interface CharacterKitCuration {
+  chipHide?: Record<string, string[]>;
+  chipAdd?: Record<string, string[]>;
+}
+
+/** Suffixe de cardId du DUO (partage la carte du chain_passive, chips à part). */
+export const DUAL_CARD_SUFFIX = '::dual';
+
+const characterCurated = (): CharacterKitCuration => {
+  // Fichier absent (checkout sans curation perso) → aucune curation.
+  try {
+    return loadDataJson<CharacterKitCuration>('curated/character-skills.json');
+  } catch {
+    return {};
+  }
+};
+
+/**
+ * Applique la curation LOCALE d'une carte perso : masque les refs `chipHide`
+ * puis ajoute les refs `chipAdd` résolubles du glossaire (mêmes règles que le
+ * `chipAdd` monstre — seules les réfs qui résolvent un effet passent).
+ */
+function applyCardCuration(
+  effects: ClientEffect[],
+  cardId: string,
+  cur: CharacterKitCuration,
+): ClientEffect[] {
+  const hidden = new Set(cur.chipHide?.[cardId] ?? []);
+  let out = hidden.size ? effects.filter((e) => !hidden.has(e.tooltip ?? e.label ?? '')) : effects;
+  for (const ref of cur.chipAdd?.[cardId] ?? []) {
+    if (!getMergedEffect(G().effectByTooltip[ref] ?? ref)) continue;
+    out = [...out, { family: 'stat', category: 'buff', tooltip: ref }];
+  }
+  return out;
+}
+
+/**
  * Méta d'affichage de la CHIP qu'un effet monstre produirait (null si l'effet
  * ne produit pas de chip : WG, câblage, réf irrésoluble). ADMIN : pills de
  * l'éditeur de câblage — même résolution que le rendu des chips.
@@ -587,7 +635,13 @@ function passiveKitEffects(skills: Skill[], kit: string, kitSkills: Skill[]): Cl
  * « burstable » hérite en plus des buffs/debuffs de ses déclinaisons
  * burst_1..3 (même skill côté joueur) et des effets synthétiques (bonus WG).
  */
-export function cardEffects(skills: Skill[], s: Skill): ClientEffect[] | undefined {
+export function cardEffects(
+  skills: Skill[],
+  s: Skill,
+  // Curation substituable (ADMIN : l'éditeur passe `{}` pour les positions
+  // « règles pures », et sa propre copie en prévisualisation).
+  curated: CharacterKitCuration = characterCurated(),
+): ClientEffect[] | undefined {
   // VARIANTES du même type (formes/copies — Luna 2000119/120 : White Night ET
   // Polar Night) : l'union de leurs effets = ce que le kit fait, quelle que
   // soit la forme. La carte affichée reste la variante choisie par mainSkills.
@@ -611,11 +665,15 @@ export function cardEffects(skills: Skill[], s: Skill): ClientEffect[] | undefin
     refs: new Set(chips.map((c) => c.tooltip)),
     kinds: new Set(rawChipped.map(kindOf)),
   };
-  const merged = [
-    ...chips,
-    ...levelTooltipEffects(s, ctx),
-    ...(s.burstAP?.length ? syntheticBurstEffects(skills) : []),
-  ];
+  const merged = applyCardCuration(
+    [
+      ...chips,
+      ...levelTooltipEffects(s, ctx),
+      ...(s.burstAP?.length ? syntheticBurstEffects(skills) : []),
+    ],
+    s.id,
+    curated,
+  );
   return merged.length ? merged : undefined;
 }
 
@@ -679,7 +737,11 @@ function dedupEffects(list: Skill[]): ClientEffect[] {
   return dedupList(list.flatMap((s) => toClientEffects(s) ?? []));
 }
 
-export function buildChainView(skills: Skill[], lang: Lang): ChainView | null {
+export function buildChainView(
+  skills: Skill[],
+  lang: Lang,
+  curated: CharacterKitCuration = characterCurated(),
+): ChainView | null {
   const cp = skills.find((s) => s.type === 'chain_passive');
   if (!cp) return null;
   const strikes = skills.filter((s) => s.type.startsWith('strike_'));
@@ -736,7 +798,9 @@ export function buildChainView(skills: Skill[], lang: Lang): ChainView | null {
     levels,
     chainDesc: chain,
     dualDesc: dual,
-    chainEffects: [...chainChips, ...levelChips],
-    dualEffects: dualChips,
+    // Curation locale : la chaîne porte l'id du chain_passive, le duo son
+    // suffixe dédié (même carte affichée, deux groupes de chips distincts).
+    chainEffects: applyCardCuration([...chainChips, ...levelChips], cp.id, curated),
+    dualEffects: applyCardCuration(dualChips, cp.id + DUAL_CARD_SUFFIX, curated),
   };
 }

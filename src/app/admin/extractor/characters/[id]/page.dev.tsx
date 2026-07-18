@@ -3,7 +3,7 @@ import type { Route } from 'next';
 import { notFound } from 'next/navigation';
 import { EffectHiddenToggle } from '@/components/admin/EffectHiddenToggle';
 import { EffectIconTile } from '@/components/character/EffectChips';
-import { getMergedEffect, loadCuratedEffects } from '@/lib/data/effects';
+import { getMergedEffect, loadCuratedEffects, mergeStatusEffects } from '@/lib/data/effects';
 import { CharacterVisual } from '@/components/admin/CharacterVisual';
 import { EntitySwitch } from '@/components/admin/EntitySwitch';
 import { EntityDiffPanel } from '@/components/admin/EntityDiffPanel';
@@ -96,6 +96,16 @@ export default async function ExtractorCharacterDetail({
   }));
   const chainView = buildChainView(uniqueSkills, 'en');
   const statuses = buildStatusMap(uniqueSkills, 'en');
+  // Chips CURÉES en plus (chipAdd) : statut résolu depuis les chips des cartes
+  // (même passe que la fiche publique et BossPanel).
+  mergeStatusEffects(
+    statuses,
+    [
+      ...cardSkills.flatMap((c) => c.effects ?? []),
+      ...(chainView ? [...chainView.chainEffects, ...chainView.dualEffects] : []),
+    ],
+    'en',
+  );
 
   // Statuts référencés par le kit : lien encyclopédie + bascule « ignoré du live ».
   const curatedEffects = loadCuratedEffects();
