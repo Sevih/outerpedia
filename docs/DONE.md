@@ -6,6 +6,26 @@
 
 ## 2026-07-18
 
+- **`stamp-guides` : deux défauts corrigés (dates de guides auto)** — le stamp
+  maintient `meta.updated` au commit (le build ne voit pas git). Défaut 1
+  (diff parasite) : le stamp réécrivait le meta en `JSON.stringify(…,2)`, qui
+  ÉCLATE en multiligne les tableaux courts que prettier garde inline (ex.
+  `"dungeons": ["100805"]`). Comme le commit maison saute les hooks
+  (`--no-verify`), le meta partait non-prettier et rebondissait en diff au
+  `format:check` suivant. Piège latent (aucun des 141 metas re-stampé depuis la
+  baseline, donc jamais déclenché) mais réel : prouvé qu'un bump aurait éclaté
+  les tableaux. Fix : sérialisation via l'API Node de prettier (le CLI aurait
+  interprété les `[lang]` du chemin comme un glob), qui reprend le `printWidth`
+  du repo — sortie byte-identique à prettier, vérifiée sur un meta à tableaux +
+  bump e2e réel. Défaut 2 : `--all` SANS date suivante dégradait silencieusement
+  en mode normal (bump des seuls guides modifiés) au lieu de la baseline —
+  désormais refus explicite. Au passage : le contrôle « le stamp attrape-t-il
+  tout le pertinent ? » a été refait — tout le contenu d'un guide vit dans son
+  dossier (zéro contenu partagé hors dossier, zéro import remontant), archives
+  de versions exclues sauf la plus récente (même regex/tri que `guides.ts`).
+  Limites ASSUMÉES : le contenu dérivé de `data/generated` ne bump pas (dérive
+  de data ≠ édition) et les images (`public/images/guides/…`, hors `_contents`)
+  non plus.
 - **Recos (gear-reco) de Ryu Lion (2000097) + Delta (2000121) mises à jour
   depuis V2** — le snapshot legacy était figé ; sync des fichiers V2 à jour
   (`reco/2000097.json`, `reco/2000121.json` — nouveau, `reco/_presets.json`

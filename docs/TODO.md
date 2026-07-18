@@ -237,11 +237,6 @@
       par aucun des 3 tsc (include racine = src only) ; `assets-push.mjs` et
       `r2-cors.mjs` (maillon R2 du commit) jamais typecheckés — les convertir
       en `.ts` ou activer allowJs+checkJs.
-- [ ] `scripts/stamp-guides.ts` : (1) le stamp réécrit meta.json APRÈS
-      `format:check` et le commit passe en `--no-verify` → JSON non-prettier
-      committé, diff parasite au commit suivant — prettier-iser les meta
-      stampés ; (2) `--all` sans DATE dégrade silencieusement en mode normal —
-      refuser.
 - [ ] CSP (`next.config.ts:19`) : retirer au moins `unsafe-eval` de script-src
       en prod ; viser nonce/strict-dynamic à terme.
 - [ ] Datagen, hygiène CLI : garde `isMain` manquante sur extract.ts,

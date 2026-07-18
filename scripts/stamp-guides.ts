@@ -23,6 +23,7 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
+import { format as prettierFormat, resolveConfig } from 'prettier';
 
 const CONTENTS = resolve(process.cwd(), 'src/app/[lang]/guides/_contents');
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -35,9 +36,15 @@ const flag = (f: string): string | null => {
 };
 const CHECK = argv.includes('--check');
 const ALL = flag('--all');
+// `--all` SANS date suivante dégradait SILENCIEUSEMENT en mode normal (bump des
+// seuls guides modifiés) au lieu de la baseline attendue → refus explicite.
+if (argv.includes('--all') && !ALL) {
+  console.error('`--all` exige une DATE de baseline (ex. `--all 2026-07-01`).');
+  process.exit(1);
+}
 const TODAY = flag('--date') ?? ALL ?? new Date().toISOString().slice(0, 10);
 
-if ((ALL ?? TODAY) && !DATE_RE.test(TODAY)) {
+if (!DATE_RE.test(TODAY)) {
   console.error(`Date invalide : "${TODAY}" (attendu YYYY-MM-DD).`);
   process.exit(1);
 }
@@ -130,30 +137,43 @@ function onlyUpdatedChanged(metaPath: string): boolean {
   }
 }
 
+/**
+ * Sérialise un objet EXACTEMENT comme prettier — via l'API, pas le CLI (qui
+ * traiterait les `[lang]` du chemin comme un motif glob et ne matcherait pas le
+ * fichier). Nécessaire : le stamp écrivait du `JSON.stringify`, qui ÉCLATE les
+ * tableaux courts que prettier garde INLINE (`"dungeons": ["100805"]`) → meta
+ * committé non-prettier (le commit maison saute les hooks via `--no-verify`) et
+ * diff parasite au `format:check` du commit suivant. `resolveConfig` reprend le
+ * `printWidth` du repo (seuil d'inline des tableaux).
+ */
+async function toPrettierJson(obj: unknown, filepath: string): Promise<string> {
+  const config = await resolveConfig(filepath);
+  return prettierFormat(JSON.stringify(obj, null, 2), { ...config, filepath, parser: 'json' });
+}
+
 /** Lit/écrit meta.json en préservant l'ordre des clés (updated déjà présent
- * reste à sa place ; sinon inséré après `author`). */
-function stampMeta(metaPath: string, date: string): boolean {
+ * reste à sa place ; sinon inséré après `author`). Sortie prettier-canonique. */
+async function stampMeta(metaPath: string, date: string): Promise<boolean> {
   const raw = readFileSync(metaPath, 'utf8');
   const meta = JSON.parse(raw) as Record<string, unknown>;
   if (meta.updated === date) return false;
+  let out: Record<string, unknown> = meta;
   if ('updated' in meta) {
     meta.updated = date;
   } else {
     // Insère `updated` juste après `author` (lisibilité des diffs).
-    const rebuilt: Record<string, unknown> = {};
+    out = {};
     for (const [k, v] of Object.entries(meta)) {
-      rebuilt[k] = v;
-      if (k === 'author') rebuilt.updated = date;
+      out[k] = v;
+      if (k === 'author') out.updated = date;
     }
-    if (!('updated' in rebuilt)) rebuilt.updated = date;
-    writeFileSync(metaPath, JSON.stringify(rebuilt, null, 2) + '\n');
-    return true;
+    if (!('updated' in out)) out.updated = date;
   }
-  writeFileSync(metaPath, JSON.stringify(meta, null, 2) + '\n');
+  writeFileSync(metaPath, await toPrettierJson(out, metaPath));
   return true;
 }
 
-function main(): void {
+async function main(): Promise<void> {
   const guides = listGuideDirs();
   const changed = ALL ? null : gitChangedFiles();
   const bumped: string[] = [];
@@ -176,7 +196,7 @@ function main(): void {
       wouldBump.push(label);
       continue;
     }
-    if (stampMeta(g.metaPath, target)) {
+    if (await stampMeta(g.metaPath, target)) {
       bumped.push(label);
       // Ré-indexe le meta stampé pour qu'il parte dans LE MÊME commit.
       try {
@@ -206,4 +226,7 @@ function main(): void {
   else console.log('stamp:guides : aucun guide à re-dater.');
 }
 
-main();
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
