@@ -20,7 +20,7 @@
  * n'expose pas de point d'entrée module (ERR_PACKAGE_PATH_NOT_EXPORTED). Le
  * loader de config (c12) lit simplement ce `default export`.
  */
-export default {
+const config = {
   site: 'http://localhost:3000',
   scanner: {
     // Une seule langue suffit pour le signal SEO/JSON-LD (mêmes gabarits pour
@@ -28,3 +28,5 @@ export default {
     exclude: ['/fr(/.*)?$', '/jp(/.*)?$', '/kr(/.*)?$', '/zh(/.*)?$'],
   },
 };
+
+export default config;
