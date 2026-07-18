@@ -106,14 +106,19 @@ Policy` est cantonné au bloc test-IP HTTP), donc le header arrive intact.
   engrenage de singularité, limit break) : d'où on les récolte par semaine/mois
   et combien. Frontière dérivé/curé tranchée SOURCE PAR SOURCE (règle Sevih :
   dérivable → on dérive, sinon → on cure) — vérifiée dans la donnée de jeu :
-  - _Dérivé_ (`timegate-resources.json`, générateur) : toute source de SHOP,
-    càd tout `ProductBuyType` permanent vendant l'item avec un reset RÉCURRENT
-    et un produit COURANT (helpers `computeAsOf`/`isCurrent`/`PERIOD`/`iconOf`
-    EXPORTÉS de `shop-priorities` → une seule règle « produit courant »).
-    Quantité = `MaxBuyCount` × période, auto-corrigée. La dérivation débusque
-    même des shops que la hand-list V2 avait ratés : **Skyward Tower** (25/15/5
-    manuels/mois), **Real-Time Arena**, **Remains** ; et retire ce qui a expiré
-    (arena/survey Basic Manual, fin 04-2026) — impossible à tenir à la main.
+  - _Dérivé_ (`timegate-resources.json`, générateur) : les sources de SHOP.
+    **UN SHOP = UN ONGLET d'échange RÉEL** du jeu (`ProductCategory` →
+    `ShopTabType` de `ProductShopTabGroupTemplet`), PAS une monnaie — correction
+    Sevih 19/07 : grouper par `ProductBuyType` scindait l'onglet **Arena**
+    (`PC_PVP`) en deux faux shops (points d'arène `PBT_PVP` hebdo + arène temps
+    réel `PBT_PVP_REAL` mensuel) → désormais une seule ligne Arena hebdo+mensuel.
+    On EXCLUT les catégories sans onglet d'échange (`PC_TOWER`/Automaton Coin,
+    `PC_REMAINS`) que la V2 n'avait pas listées non plus. Résultat = les 7 shops
+    canoniques V2 (general, guild, arena, stars, survey, worldboss, joint), mais
+    DÉRIVÉS. Produit COURANT via les helpers `computeAsOf`/`isCurrent`/`PERIOD`
+    EXPORTÉS de `shop-priorities` (une seule règle) ; quantité = `MaxBuyCount` ×
+    période, auto-corrigée (retire l'arena/survey Basic Manual expiré fin 04-2026,
+    impossible à tenir à la main).
   - _Curé_ (`data/curated/timegate-resources.json`) : le panel d'items + leur
     regroupement en onglets (choix éditorial), ET les sources NON-SHOP dont la
     quantité est une estimation joueur ABSENTE de la donnée — vérifié : drops

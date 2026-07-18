@@ -6,9 +6,10 @@
  * dérivé (shops) / curé (non-shop). Ici ne vivent que la présentation (intro,
  * en-têtes, badges, onglets) et les NOMS de source en 5 langues, mappés par clé.
  *
- * Les libellés de source ≤ V2 sont transplantés verbatim ; ceux des shops que la
- * dérivation a révélés (general/tower/remains/pvp-real, absents de la hand-list
- * V2) sont ajoutés dans le même style.
+ * Les libellés de source ≤ V2 sont transplantés verbatim. UN SHOP = UN ONGLET
+ * d'échange réel (cf. le générateur) : les 7 shops canoniques V2, Arena unifié
+ * (points d'arène + temps réel = même onglet). Tower/Remains sont écartés
+ * (aucun onglet d'échange — décision Sevih 19/07).
  */
 import type { LocalizedText } from '@contracts';
 import type { SourceType } from '@contracts';
@@ -114,13 +115,6 @@ export const LABELS = {
       zh: '竞技场商店',
       fr: 'Arena Shop',
     },
-    'pvp-real': {
-      en: 'Real-Time Arena Shop',
-      jp: 'リアルタイムアリーナショップ',
-      kr: '실시간 결투장 상점',
-      zh: '实时竞技场商店',
-      fr: "Boutique d'arène en temps réel",
-    },
     stars: {
       en: "Star's Memory Shop",
       jp: 'スターピースショップ',
@@ -141,20 +135,6 @@ export const LABELS = {
       kr: '월드 보스 상점',
       zh: '世界首领商店',
       fr: 'World Boss Shop',
-    },
-    tower: {
-      en: 'Skyward Tower Shop',
-      jp: 'スカイワードタワーショップ',
-      kr: '스카이워드 타워 상점',
-      zh: '天空之塔商店',
-      fr: 'Boutique de la Tour céleste',
-    },
-    remains: {
-      en: 'Remains Shop',
-      jp: 'レムナントショップ',
-      kr: '잔재 상점',
-      zh: '遗迹商店',
-      fr: 'Boutique des Vestiges',
     },
     joint: {
       en: 'Joint Challenge Shop',

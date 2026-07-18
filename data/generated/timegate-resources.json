@@ -45,18 +45,12 @@
               "origin": "shop",
               "type": "shop",
               "weekly": 5
-            },
-            {
-              "sourceKey": "tower",
-              "origin": "shop",
-              "type": "shop",
-              "monthly": 25
             }
           ],
           "totals": {
             "weekly": 14,
-            "monthly": 53,
-            "grandMonthly": 109
+            "monthly": 28,
+            "grandMonthly": 84
           }
         },
         {
@@ -106,18 +100,12 @@
               "origin": "shop",
               "type": "shop",
               "weekly": 2
-            },
-            {
-              "sourceKey": "tower",
-              "origin": "shop",
-              "type": "shop",
-              "monthly": 15
             }
           ],
           "totals": {
             "weekly": 10,
-            "monthly": 32,
-            "grandMonthly": 72
+            "monthly": 17,
+            "grandMonthly": 57
           }
         },
         {
@@ -154,12 +142,7 @@
               "sourceKey": "arena",
               "origin": "shop",
               "type": "shop",
-              "weekly": 1
-            },
-            {
-              "sourceKey": "pvp-real",
-              "origin": "shop",
-              "type": "shop",
+              "weekly": 1,
               "monthly": 5
             },
             {
@@ -173,18 +156,12 @@
               "origin": "shop",
               "type": "shop",
               "monthly": 5
-            },
-            {
-              "sourceKey": "tower",
-              "origin": "shop",
-              "type": "shop",
-              "monthly": 5
             }
           ],
           "totals": {
             "weekly": 4,
-            "monthly": 18,
-            "grandMonthly": 34
+            "monthly": 13,
+            "grandMonthly": 29
           }
         }
       ]
@@ -217,7 +194,7 @@
               "monthly": 9
             },
             {
-              "sourceKey": "pvp-real",
+              "sourceKey": "arena",
               "origin": "shop",
               "type": "shop",
               "monthly": 5
@@ -241,12 +218,6 @@
               "monthly": 2
             },
             {
-              "sourceKey": "tower",
-              "origin": "shop",
-              "type": "shop",
-              "monthly": 1
-            },
-            {
               "sourceKey": "joint",
               "origin": "shop",
               "type": "shop",
@@ -261,8 +232,8 @@
           ],
           "totals": {
             "weekly": 4,
-            "monthly": 35,
-            "grandMonthly": 51
+            "monthly": 34,
+            "grandMonthly": 50
           }
         },
         {
@@ -290,7 +261,7 @@
               "monthly": 9
             },
             {
-              "sourceKey": "pvp-real",
+              "sourceKey": "arena",
               "origin": "shop",
               "type": "shop",
               "monthly": 3
@@ -314,12 +285,6 @@
               "monthly": 2
             },
             {
-              "sourceKey": "tower",
-              "origin": "shop",
-              "type": "shop",
-              "monthly": 1
-            },
-            {
               "sourceKey": "joint",
               "origin": "shop",
               "type": "shop",
@@ -334,8 +299,8 @@
           ],
           "totals": {
             "weekly": 0,
-            "monthly": 37,
-            "grandMonthly": 37
+            "monthly": 36,
+            "grandMonthly": 36
           }
         }
       ]

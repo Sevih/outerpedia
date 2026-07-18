@@ -38,23 +38,27 @@ import { buildItemCatalog, type CatalogEntry } from './item-catalog';
 import { computeAsOf, isCurrent, PERIOD, buildGearIcons, type ShopPeriod } from './shop-priorities';
 
 /**
- * Shops permanents « à monnaie » retenus comme sources timegatées régulières :
- * `ProductBuyType` → clé de shop (le libellé 5 langues vit dans le guide). On
- * écarte sciemment l'événementiel (`PBT_EVENT_COIN_*`, transient), le premium
- * one-time (crystal/cash/facility, filtrés de toute façon par le reset), et les
- * monnaies sans reset récurrent. Ordre = ordre d'affichage.
+ * Shops retenus comme sources timegatées régulières. UN SHOP = UN ONGLET
+ * d'échange RÉEL du jeu (`ProductCategory` → `ShopTabType` de
+ * `ProductShopTabGroupTemplet`), PAS une monnaie : un même onglet peut mélanger
+ * plusieurs `ProductBuyType`. Cas décisif : l'onglet **Arena** (`PC_PVP`) vend à
+ * la fois en points d'arène (`PBT_PVP`, hebdo) ET en points d'arène temps réel
+ * (`PBT_PVP_REAL`, mensuel) — grouper par monnaie le scindait en deux faux shops.
+ *
+ * On EXCLUT sciemment les catégories SANS onglet d'échange (`PC_TOWER`/Automaton
+ * Coin, `PC_REMAINS`) : ce ne sont pas des shops d'échange listables, et la V2
+ * curée à la main ne les listait pas (décision Sevih 19/07). Le Guild Shop est
+ * gardé bien qu'il ait son propre écran (hall de guilde) — vrai shop, listé par
+ * V2. Ordre = ordre d'affichage. Résultat = les 7 shops canoniques de la V2.
  */
-const SHOPS: { key: string; buyType: string }[] = [
-  { key: 'general', buyType: 'PBT_GOLD' },
-  { key: 'guild', buyType: 'PBT_GUILD_COIN' },
-  { key: 'arena', buyType: 'PBT_PVP' },
-  { key: 'pvp-real', buyType: 'PBT_PVP_REAL' },
-  { key: 'stars', buyType: 'PBT_MEMORY_STAR' },
-  { key: 'survey', buyType: 'PBT_RESEARCH' },
-  { key: 'worldboss', buyType: 'PBT_WORLD_BOSS_COIN' },
-  { key: 'tower', buyType: 'PBT_TOWER_COIN' },
-  { key: 'remains', buyType: 'PBT_REMAINS' },
-  { key: 'joint', buyType: 'PBT_EVENT_BOSS_COIN' },
+const SHOPS: { key: string; buyTypes: string[] }[] = [
+  { key: 'general', buyTypes: ['PBT_GOLD'] },
+  { key: 'guild', buyTypes: ['PBT_GUILD_COIN'] },
+  { key: 'arena', buyTypes: ['PBT_PVP', 'PBT_PVP_REAL'] },
+  { key: 'stars', buyTypes: ['PBT_MEMORY_STAR'] },
+  { key: 'survey', buyTypes: ['PBT_RESEARCH'] },
+  { key: 'worldboss', buyTypes: ['PBT_WORLD_BOSS_COIN'] },
+  { key: 'joint', buyTypes: ['PBT_EVENT_BOSS_COIN'] },
 ];
 
 /** Type de source dérivée d'un shop → badge du guide. */
@@ -156,48 +160,37 @@ function itemIcon(
   throw new Error(`timegate : item ${id} introuvable au catalogue`);
 }
 
-/** Période → clé de total (daily converti en hebdo ×7). */
-function addToTotals(
-  totals: { weekly: number; monthly: number },
-  period: ShopPeriod,
-  count: number,
-): { weekly?: number; monthly?: number } {
-  if (period === 'monthly') {
-    totals.monthly += count;
-    return { monthly: count };
-  }
-  const weekly = period === 'daily' ? count * 7 : count;
-  totals.weekly += weekly;
-  return { weekly };
-}
-
-/** Lignes de shop dérivées pour un item : par (shop, période), produit courant le + récent. */
+/**
+ * UNE source de shop par shop qui vend l'item (jamais deux lignes du même shop).
+ * Un shop peut mêler plusieurs monnaies/périodes : on garde par période le
+ * plafond le plus élevé, puis on fond hebdo + mensuel sur UNE ligne (les deux
+ * colonnes de la table les portent). Le daily est ramené en hebdo (×7).
+ */
 function shopSourcesFor(
   itemId: string,
   byShop: Map<string, Row[]>,
   asOf: string,
   maxYear: number,
-): { source: TimegateSource; period: ShopPeriod; count: number }[] {
-  const out: { source: TimegateSource; period: ShopPeriod; count: number }[] = [];
+): TimegateSource[] {
+  const out: TimegateSource[] = [];
   for (const { key } of SHOPS) {
     const rows = byShop.get(key) ?? [];
-    // (période → meilleure ligne courante) : dédoublonne les offres superposées.
-    const best = new Map<ShopPeriod, Row>();
+    const best = new Map<ShopPeriod, number>();
     for (const r of rows) {
       if (r.ProductGoodsID !== itemId || r.ProductGoodsType !== 'PGT_ITEM') continue;
       if (!isCurrent(r, asOf, maxYear)) continue;
       const period = PERIOD[r.ProductResetType ?? ''];
       if (!period || period === 'one-time') continue; // récurrent seulement
-      const prev = best.get(period);
-      if (!prev || (r.StartDate ?? '') > (prev.StartDate ?? '')) best.set(period, r);
+      const c = num(r.MaxBuyCount);
+      if (c > (best.get(period) ?? 0)) best.set(period, c);
     }
-    for (const [period, r] of best) {
-      out.push({
-        source: { sourceKey: key, origin: 'shop', type: shopBadge(key) },
-        period,
-        count: num(r.MaxBuyCount),
-      });
-    }
+    if (!best.size) continue;
+    const weekly = (best.get('weekly') ?? 0) + (best.get('daily') ?? 0) * 7;
+    const monthly = best.get('monthly') ?? 0;
+    const src: TimegateSource = { sourceKey: key, origin: 'shop', type: shopBadge(key) };
+    if (weekly) src.weekly = weekly;
+    if (monthly) src.monthly = monthly;
+    out.push(src);
   }
   return out;
 }
@@ -213,7 +206,8 @@ export function buildTimegateResources(): TimegateResourcesData {
 
   // Pré-indexe les produits par shop retenu (une seule passe sur ProductTemplet).
   const byShop = new Map<string, Row[]>(SHOPS.map((s) => [s.key, []]));
-  const buyTypeToShop = new Map(SHOPS.map((s) => [s.buyType, s.key]));
+  const buyTypeToShop = new Map<string, string>();
+  for (const s of SHOPS) for (const bt of s.buyTypes) buyTypeToShop.set(bt, s.key);
   for (const r of products) {
     const key = buyTypeToShop.get(r.ProductBuyType ?? '');
     if (key) byShop.get(key)!.push(r);
@@ -224,10 +218,11 @@ export function buildTimegateResources(): TimegateResourcesData {
     const totals = { weekly: 0, monthly: 0 };
     const sources: TimegateSource[] = [];
 
-    // 1. Sources de shop dérivées.
-    for (const { source, period, count } of shopSourcesFor(id, byShop, asOf, maxYear)) {
-      const q = addToTotals(totals, period, count);
-      sources.push({ ...source, ...q });
+    // 1. Sources de shop dérivées (une ligne par shop, hebdo+mensuel fondus).
+    for (const src of shopSourcesFor(id, byShop, asOf, maxYear)) {
+      if (src.weekly) totals.weekly += src.weekly;
+      if (src.monthly) totals.monthly += src.monthly;
+      sources.push(src);
     }
 
     // 2. Sources non-shop curées.
