@@ -4,10 +4,13 @@ import glossariesData from '@data/generated/glossaries.json';
 import skillsData from '@data/generated/skills.json';
 import {
   buildBurstViews,
+  buildChainView,
   buildStatusMap,
   dedupSkills,
+  immunityChipEffects,
   mainSkills,
   monsterChipMeta,
+  monsterSkillViews,
   toClientEffects,
 } from '@/lib/skill-view';
 
@@ -20,9 +23,10 @@ import {
  */
 const G = glossariesData as unknown as Glossaries;
 const SKILLS = skillsData as unknown as Record<string, Skill>;
-// Un tooltip du glossaire committé : n'importe lequel produit une chip (la
-// résolution ne teste que l'appartenance à l'index). Calculé, pas codé en dur.
+// Deux tooltips du glossaire committé : n'importe lequel produit une chip (la
+// résolution ne teste que l'appartenance à l'index). Calculés, pas codés en dur.
 const REAL_TOOLTIP = Object.keys(G.effectByTooltip)[0];
+const REAL_TOOLTIP2 = Object.keys(G.effectByTooltip)[1];
 
 type Effect = NonNullable<Skill['effects']>[number];
 const NAME = { en: 'x', jp: '', kr: '', zh: '' };
@@ -160,6 +164,180 @@ describe('buildBurstViews', () => {
     expect(views.map((v) => v.cost)).toEqual([3, 4, 5]);
     // burst_2 : la variante à 2 niveaux l’emporte sur celle à 1.
     expect(views[1].vars).toBeUndefined(); // dernier niveau sans vars dans le fixture
+  });
+});
+
+/** Skill de monstre : nom VIDE par défaut (opt-in via `over.name`) — le nom
+ * décide si une carte s'affiche. */
+const mon = (id: string, type: string, over: Partial<Skill> = {}): Skill =>
+  skill({ id, type, name: { en: '', jp: '', kr: '', zh: '' }, ...over });
+/** La vue d'un skill donné dans une liste de vues monstre. */
+type MView = ReturnType<typeof monsterSkillViews>[number];
+const viewOf = (views: MView[], id: string) => views.find((v) => v.skill.id === id);
+const refsOf = (v?: MView) => (v?.effects ?? []).map((e) => e.tooltip ?? e.label);
+
+describe('monsterSkillViews — réattribution du câblage', () => {
+  it('DUPLIQUE un effet de passif vers son skill déclencheur (caller) ET le garde', () => {
+    // Prototype EX-78 / Irregular Queen : le bloc de buffs est câblé sur un
+    // passif qui pointe le skill principal via CallerSkillType.
+    const trigger = mon('m', 'first', {
+      name: NAME,
+      desc: { en: 'triggers', jp: '', kr: '', zh: '' },
+    });
+    const passive = mon('p', 'monster_2', {
+      name: NAME,
+      effects: [eff({ buff: 'b1', tooltip: REAL_TOOLTIP, type: 'BT_STUN', caller: 'first' })],
+    });
+    const views = monsterSkillViews([trigger, passive], {});
+    expect(refsOf(viewOf(views, 'm'))).toContain(REAL_TOOLTIP); // dupliqué
+    expect(refsOf(viewOf(views, 'p'))).toContain(REAL_TOOLTIP); // conservé
+  });
+
+  it('IGNORE le caller sur un skill ACTIF (le buff y est réutilisé d’un autre kit)', () => {
+    const active = mon('a', 'first', {
+      name: NAME,
+      effects: [eff({ buff: 'b1', tooltip: REAL_TOOLTIP, type: 'BT_STUN', caller: 'second' })],
+    });
+    const other = mon('o', 'second', { name: NAME });
+    const views = monsterSkillViews([active, other], {});
+    expect(refsOf(viewOf(views, 'o'))).toEqual([]); // pas de duplication
+    expect(refsOf(viewOf(views, 'a'))).toContain(REAL_TOOLTIP); // reste sur le sien
+  });
+
+  it('DÉPLACE un effet vers le seul skill dont la desc nomme son buff', () => {
+    const carrier = mon('a', 'monster_1', {
+      name: NAME,
+      desc: { en: 'does nothing special', jp: '', kr: '', zh: '' },
+      effects: [eff({ buff: 'bx', tooltip: REAL_TOOLTIP, type: 'BT_STUN' })],
+    });
+    const owner = mon('b', 'first', {
+      name: NAME,
+      desc: { en: 'applies bx to enemies', jp: '', kr: '', zh: '' },
+    });
+    const views = monsterSkillViews([carrier, owner], {});
+    expect(refsOf(viewOf(views, 'a'))).toEqual([]); // parti
+    expect(refsOf(viewOf(views, 'b'))).toContain(REAL_TOOLTIP); // arrivé
+  });
+
+  it('FUSIONNE les chips d’un rage_finish sans nom/desc dans sa carte rage_enter', () => {
+    const enter = mon('e', 'rage_enter1', {
+      name: NAME,
+      desc: { en: 'enrage begins', jp: '', kr: '', zh: '' },
+      effects: [eff({ buff: 'be', tooltip: REAL_TOOLTIP, type: 'BT_STUN' })],
+    });
+    const finish = mon('f', 'rage_finish1', {
+      effects: [eff({ buff: 'bf', tooltip: REAL_TOOLTIP2, type: 'BT_STUN' })],
+    });
+    const views = monsterSkillViews([enter, finish], {});
+    expect(viewOf(views, 'f')).toBeUndefined(); // pas de carte finish
+    expect(refsOf(viewOf(views, 'e'))).toEqual(
+      expect.arrayContaining([REAL_TOOLTIP, REAL_TOOLTIP2]),
+    );
+  });
+
+  it('SUPPRIME un rage_finish sans son rage_enter jumeau (câblage mort cloné)', () => {
+    const finish = mon('f', 'rage_finish1', {
+      name: NAME,
+      desc: { en: 'orphan', jp: '', kr: '', zh: '' },
+      effects: [eff({ tooltip: REAL_TOOLTIP, type: 'BT_STUN' })],
+    });
+    expect(monsterSkillViews([finish], {})).toEqual([]);
+  });
+
+  it('MASQUE une variante technique (ni nom ni desc, effets déjà portés ailleurs)', () => {
+    const documented = mon('d', 'first', {
+      name: NAME,
+      effects: [eff({ buff: 'bv', tooltip: REAL_TOOLTIP, type: 'BT_STUN' })],
+    });
+    const variant = mon('v', 'backup_aerial', {
+      effects: [eff({ buff: 'bv', tooltip: REAL_TOOLTIP, type: 'BT_STUN' })],
+    });
+    const views = monsterSkillViews([documented, variant], {});
+    expect(viewOf(views, 'v')).toBeUndefined();
+    expect(viewOf(views, 'd')).toBeDefined();
+  });
+
+  it('ne fait JAMAIS de chip d’un buff WG côté monstre', () => {
+    const s = mon('w', 'first', {
+      name: NAME,
+      effects: [eff({ buff: 'bw', tooltip: REAL_TOOLTIP, type: 'BT_WG_RECOVER' })],
+    });
+    const views = monsterSkillViews([s], {});
+    expect(refsOf(viewOf(views, 'w'))).toEqual([]);
+  });
+
+  it('respecte un porteur imposé par la curation (chipOwner)', () => {
+    const carrier = mon('a', 'monster_1', {
+      name: NAME,
+      desc: { en: 'applies bz', jp: '', kr: '', zh: '' },
+      effects: [eff({ buff: 'bz', tooltip: REAL_TOOLTIP, type: 'BT_STUN' })],
+    });
+    const target = mon('b', 'second', { name: NAME });
+    // La desc du porteur nomme `bz` (règle c → resterait), mais chipOwner impose 'b'.
+    const views = monsterSkillViews([carrier, target], { chipOwner: { bz: ['b'] } });
+    expect(refsOf(viewOf(views, 'a'))).toEqual([]);
+    expect(refsOf(viewOf(views, 'b'))).toContain(REAL_TOOLTIP);
+  });
+});
+
+describe('immunityChipEffects', () => {
+  const plainType = Object.keys(G.effectByKey.debuff).find(
+    (k) => !k.includes('|') && !/\d/.test(k),
+  )!;
+  const statKey = Object.keys(G.effectByKey.debuff).find((k) => k.startsWith('BT_STAT|'))!;
+  const st = statKey.split('|')[1];
+
+  it('résout tooltips, types de mécanique et baisses de stat ; renvoie les réfs mortes', () => {
+    const { effects, unresolved } = immunityChipEffects({
+      immuneTooltips: [REAL_TOOLTIP],
+      buffImmune: [plainType, 'BT_TOTALEMENT_BIDON'],
+      statBuffImmune: [st],
+    });
+    expect(unresolved).toContain('BT_TOTALEMENT_BIDON');
+    expect(effects.length).toBeGreaterThan(0);
+    expect(effects.every((e) => e.family === 'immunity' && e.category === 'debuff')).toBe(true);
+  });
+
+  it('déréférence les déclinaisons numérotées vers la mécanique de base', () => {
+    // `BT_COOL2_CHARGE` → base `BT_COOL_CHARGE` si la forme exacte manque : on
+    // fabrique une forme numérotée dont le retrait des chiffres redonne un type
+    // connu, et on vérifie qu'elle résout quand même (pas dans `unresolved`).
+    const numbered = `${plainType.slice(0, 3)}9${plainType.slice(3)}`;
+    expect(numbered.replace(/\d+/g, '')).toBe(plainType); // forme bien dérivée
+    const { unresolved } = immunityChipEffects({ buffImmune: [numbered] });
+    expect(unresolved).not.toContain(numbered);
+  });
+});
+
+describe('buildChainView', () => {
+  it('rend null sans chain_passive', () => {
+    expect(buildChainView([skill({ id: 'x', type: 'first' })], 'en')).toBeNull();
+  });
+
+  it('répartit les chips strike→chaîne et backup→duo, un niveau par palier', () => {
+    const cp = skill({
+      id: 'cp',
+      type: 'chain_passive',
+      name: NAME,
+      maxLevel: 2,
+      levels: [{ level: 1 }, { level: 2 }],
+    });
+    const strike = skill({
+      id: 'st',
+      type: 'strike_1',
+      effects: [eff({ buff: 'bc', tooltip: REAL_TOOLTIP, type: 'BT_STUN' })],
+    });
+    const backup = skill({
+      id: 'bk',
+      type: 'backup_1',
+      effects: [eff({ buff: 'bd', tooltip: REAL_TOOLTIP2, type: 'BT_STUN' })],
+    });
+    const view = buildChainView([cp, strike, backup], 'en', {})!;
+    expect(view).not.toBeNull();
+    expect(view.maxLevel).toBe(2);
+    expect(view.levels).toHaveLength(2);
+    expect(view.chainEffects.map((e) => e.tooltip)).toContain(REAL_TOOLTIP);
+    expect(view.dualEffects.map((e) => e.tooltip)).toContain(REAL_TOOLTIP2);
   });
 });
 

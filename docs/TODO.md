@@ -93,16 +93,19 @@
 
 ## 🧪 Tests à écrire
 
-- [~] **`src/lib/skill-view.ts`** (18/07 → DONE partiel) : 18 tests posés
-  (`skill-view.test.ts`) verrouillant les RÈGLES FINES en synthétique + ancre
-  sur le glossaire committé — exclusions de câblage (choice, NON_CHIP_BUFFS
-  Ais/Astei/Ember, BT_STAT label-seul, SYS_BUFF_DMG, reverse-heal sur soi,
-  tooltip mort), upgrades de transcendance (caller vs palier autonome vs
-  niveau 1), `monsterChipMeta` (WG→null), `buildBurstViews`, `dedupSkills`,
-  `mainSkills`, + smoke sur 400 skills réels. RESTE à approfondir : les VUES
-  MONSTRE (`monsterSkillViews` réattribution caller/enrage — Prototype EX-78,
-  Irregular Queen), `immunityChipEffects`, `buildChainView`, la curation de
-  `cardEffects`.
+- [x] **`src/lib/skill-view.ts`** (18/07 → DONE). 30 tests (`skill-view.test.ts`),
+      règles déterministes en synthétique + ancrage sur le glossaire committé (sans
+      `.gamedata`). Couvert : exclusions de câblage (choice, NON_CHIP_BUFFS, BT_STAT
+      label-seul, SYS_BUFF_DMG, reverse-heal sur soi, tooltip mort), transcendance
+      (caller/palier autonome/niveau 1), `monsterChipMeta`, `buildBurstViews`,
+      `dedupSkills`, `mainSkills` ; VUES MONSTRE (`monsterSkillViews` : duplication
+      caller + caller-actif ignoré, réattribution par desc, fusion rage_finish→enter,
+      finish orphelin supprimé, variante technique masquée, WG jamais chip, chipOwner
+      curé — les cas Prototype EX-78 / Irregular Queen) ; `immunityChipEffects`
+      (tooltips/types/stats + repli numéroté→base + réfs mortes) ; `buildChainView`
+      (null sans chain_passive, répartition strike→chaîne / backup→duo) ; smoke sur
+      400 skills réels. RESTE éventuel (non bloquant) : `levelTooltipEffects`
+      conditions de desc, `cardEffects` héritage burst.
 - [ ] Ensuite : `stats.ts` (STAT_ABBR/statOptionView), `guide-sections.ts`,
       `tower-restrictions.ts`, `game-tokens.ts` (frontières latin/CJK),
       `seo.ts` (`buildUrl` dev/prod/sous-domaines, hreflang), `i18n/index.ts`

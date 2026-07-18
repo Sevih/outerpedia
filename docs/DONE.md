@@ -6,6 +6,20 @@
 
 ## 2026-07-18
 
+- **Tests `skill-view.ts` — APPROFONDISSEMENT (vues monstre / immunités /
+  chaîne)** (suite du prio 1). +12 tests (18 → 30). VUES MONSTRE
+  (`monsterSkillViews`, le cœur commenté « cas payé ») : duplication d'un effet
+  de passif vers son skill déclencheur `caller` (ET conservation) — les cas
+  Prototype EX-78 / Irregular Queen ; caller IGNORÉ sur skill actif (faux positif
+  de kit réutilisé) ; réattribution vers le seul skill dont la desc nomme le buff ;
+  fusion `rage_finish`→`rage_enter` (finish sans nom/desc absorbé) ; finish
+  orphelin (sans enter) supprimé ; variante technique masquée ; WG jamais une chip
+  côté monstre ; `chipOwner` curé prioritaire sur les signaux de tables.
+  `immunityChipEffects` : résolution tooltips + types (`effectByKey` côté debuff)
+  - baisses de stat (`BT_STAT|ST_*`), repli déclinaison-numérotée→base, réfs
+    mortes rendues en `unresolved`. `buildChainView` : null sans chain_passive,
+    répartition strike→chaîne / backup→duo, un niveau par palier. 371 → 383 tests.
+
 - **Tests `skill-view.ts` (prio 1 du TODO)** — le module aux règles les plus
   fines du repo (741 lignes) n'avait AUCUN test. 18 tests posés
   (`skill-view.test.ts`), stratégie endossée par le TODO : règles DÉTERMINISTES
