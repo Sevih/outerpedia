@@ -18,8 +18,9 @@
 > switches/pickers/sidebars, câblage buff/debuff perso. Détail dans DONE.md.
 > Ne restent ci-dessous que les reliquats.
 
-- [ ] **Éditeurs admin manquants** — reliquat du chantier matrice ci-dessus :
-      éditeur **gear**, et des éditeurs pour mettre à jour les **guides**.
+- [ ] **Éditeurs pour mettre à jour les guides** — dernier éditeur manquant de
+      la matrice admin (l'éditeur gear s'est réduit à l'EE, FAIT le 18/07 → DONE :
+      armes/amulettes/talismans/sets n'ont pas de curation à éditer).
 - [ ] **Regen coupons/banner V2 = EXCEPTION assumée** — la source V2 reste la
       référence jusqu'à la bascule prod V2→V3 (liée à la page `/coupons`). Rien
       à faire d'ici là.

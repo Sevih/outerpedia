@@ -14,8 +14,8 @@ export function EntitySwitch({
 }: {
   id: string;
   mode: 'extractor' | 'editor';
-  /** Segment de route de l'entité (`characters`, `monsters`…). */
-  entity: 'characters' | 'monsters';
+  /** Segment de route de l'entité (`characters`, `monsters`, `ee`…). */
+  entity: 'characters' | 'monsters' | 'ee';
 }) {
   const tabs = [
     { key: 'extractor', label: 'Extractor', href: `/admin/extractor/${entity}/${id}` },

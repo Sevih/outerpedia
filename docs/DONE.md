@@ -6,6 +6,29 @@
 
 ## 2026-07-18
 
+- **Éditeur admin EE** (dernier éditeur d'équipement — les autres pièces n'ont
+  pas de curation à éditer, décision Sevih). L'`editor/ee` était un placeholder ;
+  la couche curée EE (`rank`/`rank10`, tier list V2 ee-priority-base/plus10)
+  existait dans `equipment.json` et s'affichait déjà mais était éditée MAIN.
+  Livré, en DEUX volets dans un seul formulaire :
+  • **Priorité** : sélecteurs `rank` (déblocage) / `rank10` (+10) avec aperçu
+  image (`IG_Event_Rank_*`).
+  • **Câblage buff/debuff des passifs** (demande Sevih) : masquer/ajouter les
+  chips des passifs de l'EE (carte UNIQUE — un EE n'a qu'un jeu de passifs).
+  Modèle : `EquipmentCuratedEntry` gagne `chipHide?`/`chipAdd?` (EE-only) ;
+  `buildEeDetail` applique la curation aux `effectChips` (helper `eeChipEffects`
+  partagé avec l'export `eeEditorChips` des chips AUTO résolues). `effectChips`
+  passe de `EffectShape[]` à `ClientEffect[]` (contrat réel d'EffectChipsRow).
+  Store `equipment-curated-store.ts` (upsert de l'entrée `ee`, préserve les
+  autres sections + un éventuel `source`, section `ee` triée, `writeJson`
+  canonique, validation `validateEquipmentCurated`) + route `POST
+/api/admin/curated/ee/[id]`. Pages : liste `editor/ee` (rangs + lien) +
+  `editor/ee/[id]` (form `EeCuratedEditor`), `EntitySwitch` élargi à `ee`. Nav :
+  `soon` retiré, cellule Édition de la matrice d'accueil branchée (couverture
+  X/N). Vérifié : `equipment.json` déjà canonique (0 reformatage à la 1re
+  écriture), rendu public EE byte-identique (aucune curation chip posée),
+  typecheck + lint (fichiers propres) + 353 tests OK.
+
 - **`ResponsiveCharacterCard` : layout-shift réduit (défaut SSR = md) + hook
   mémoïsé** (perf UI publique, page la plus visitée). Deux volets :
   (1) `useMediaQuery` mémoïsé — `subscribe`/`getSnapshot` étaient recréés à chaque

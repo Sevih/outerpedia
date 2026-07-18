@@ -5,6 +5,7 @@ import { resolve } from 'node:path';
 import { getCharacterListItems } from '@/lib/data/characters';
 import { loadCuratedCharacters } from '@/lib/data/curated';
 import { getMergedEffects, loadCuratedEffects } from '@/lib/data/effects';
+import { getEEViews, loadEquipmentEditorial } from '@/lib/data/equipment';
 import { reviewAll, reviewBuckets, type DiffBuckets } from '@/lib/admin/review-store';
 
 // Accueil = tableau de bord, extraction fraîche, jamais prérendu.
@@ -93,6 +94,12 @@ export default function AdminHome() {
   ).length;
   const effTotal = getMergedEffects().length;
   const effCurated = Object.keys(loadCuratedEffects()).length;
+  const eeViews = getEEViews();
+  const eeCur = loadEquipmentEditorial().ee;
+  const eeCurated = eeViews.filter((v) => {
+    const e = eeCur[v.characterId];
+    return e && Object.keys(e).length > 0;
+  }).length;
 
   const rows: {
     label: string;
@@ -110,7 +117,11 @@ export default function AdminHome() {
       edition: { href: '/admin/editor/effects', done: effCurated, total: effTotal },
     },
     { label: 'Monstre', extract: ex('monster', '/admin/extractor/monsters'), edition: null },
-    { label: 'EE', extract: ex('ee', '/admin/extractor/ee'), edition: null },
+    {
+      label: 'EE',
+      extract: ex('ee', '/admin/extractor/ee'),
+      edition: { href: '/admin/editor/ee', done: eeCurated, total: eeViews.length },
+    },
     { label: 'Armes', extract: ex('weapon', '/admin/extractor/weapons'), edition: null },
     { label: 'Amulet', extract: ex('amulet', '/admin/extractor/amulets'), edition: null },
     { label: 'Armor', extract: ex('armor', '/admin/extractor/armors'), edition: null },

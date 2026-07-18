@@ -25,6 +25,7 @@ import {
   getTalismanFamilies,
   getWeaponFamilies,
   fillPlaceholders,
+  loadEquipmentEditorial,
   resolvePassives,
   slugifyEquipment,
   type EEView,
@@ -41,8 +42,12 @@ import {
   slugForId,
 } from '@/lib/data/characters';
 import { loadCuratedCharacters } from '@/lib/data/curated';
-import { mergeStatusEffects } from '@/lib/data/effects';
-import type { StatusMap } from '@/components/character/EffectChips';
+import { effectForTooltip, getMergedEffect, mergeStatusEffects } from '@/lib/data/effects';
+import {
+  isDebuffEffect,
+  type ClientEffect,
+  type StatusMap,
+} from '@/components/character/EffectChips';
 import weaponData from '@data/generated/equipment/weapon.json';
 import accessoryData from '@data/generated/equipment/accessory.json';
 import talismanData from '@data/generated/equipment/talisman.json';
@@ -181,7 +186,7 @@ export interface DetailModel {
   };
   recommended: RecommendedChar[];
   /** EE : buffs/debuffs des passifs (chips comme les skills) + statuts. */
-  effectChips?: { effects: EffectShape[]; statuses: StatusMap };
+  effectChips?: { effects: ClientEffect[]; statuses: StatusMap };
   /** EE : rangs éditoriaux + porteur (+ pendant core-fusion éventuel). */
   rank?: string;
   rank10?: string;
@@ -574,6 +579,63 @@ function eeModel(slug: string, lang: Lang): DetailModel | null {
 }
 
 /**
+ * Effets des passifs d'un EE → chips, curation d'AFFICHAGE appliquée : `chipHide`
+ * masque par ref (`tooltip`/`label`), `chipAdd` ajoute une réf résoluble du
+ * glossaire (mêmes règles que le `chipAdd` perso/monstre). `cur` = entrée curée
+ * de l'EE (`equipment.json` → `ee[charId]`, `{}` pour les positions règles pures).
+ */
+function eeChipEffects(
+  passives: { id: string }[],
+  cur: { chipHide?: string[]; chipAdd?: string[] },
+): ClientEffect[] {
+  const raw = passives.flatMap((ref) => PASSIVES[ref.id]?.effects ?? []);
+  const hidden = new Set(cur.chipHide ?? []);
+  let effects: ClientEffect[] = hidden.size
+    ? raw.filter((e) => !hidden.has(e.tooltip ?? e.label ?? ''))
+    : raw;
+  for (const ref of cur.chipAdd ?? []) {
+    if (!effectForTooltip(ref) && !getMergedEffect(ref)) continue;
+    effects = [...effects, { family: 'stat', category: 'buff', tooltip: ref }];
+  }
+  return effects;
+}
+
+/** Une chip AUTO d'un EE, résolue pour l'éditeur admin (méta d'affichage). */
+export interface EeChipMeta {
+  ref: string;
+  name: string;
+  icon?: string;
+  isDebuff: boolean;
+}
+
+/**
+ * Chips AUTO d'un EE (curation IGNORÉE — positions « règles pures »), résolues
+ * nom/icône/nature via la statusMap, dédoublonnées par ref. Pour l'éditeur de
+ * câblage : liste des chips masquables de la carte EE.
+ */
+export function eeEditorChips(characterId: string, lang: Lang): EeChipMeta[] {
+  const view = getEEViews().find((v) => v.characterId === characterId);
+  if (!view) return [];
+  const effects = eeChipEffects(view.passives, {});
+  const statuses = mergeStatusEffects({}, effects, lang);
+  const seen = new Set<string>();
+  const out: EeChipMeta[] = [];
+  for (const e of effects) {
+    const ref = e.tooltip ?? e.label;
+    if (!ref || seen.has(ref)) continue;
+    seen.add(ref);
+    const st = statuses[ref];
+    out.push({
+      ref,
+      name: st?.name ?? ref,
+      ...(st?.icon ? { icon: st.icon } : {}),
+      isDebuff: isDebuffEffect(e.category, st?.isDebuff),
+    });
+  }
+  return out;
+}
+
+/**
  * Modèle de page EE à partir d'une vue DÉJÀ résolue — évite le `.find` par slug
  * (et surtout la re-matérialisation de toutes les familles de `getEquipmentDetail`)
  * quand l'appelant tient déjà la vue. Utile quand on itère les ~90 vues EE :
@@ -612,8 +674,10 @@ export function eeModelForView(view: EEView, lang: Lang): DetailModel {
       view.passives,
     ),
     ...(() => {
-      // Chips buff/debuff des passifs (comme les skills), statuts résolus.
-      const effects = view.passives.flatMap((ref) => PASSIVES[ref.id]?.effects ?? []);
+      // Chips buff/debuff des passifs (comme les skills), curation d'affichage
+      // appliquée (chipHide/chipAdd de l'EE), statuts résolus.
+      const cur = loadEquipmentEditorial().ee[view.characterId] ?? {};
+      const effects = eeChipEffects(view.passives, cur);
       return effects.length
         ? { effectChips: { effects, statuses: mergeStatusEffects({}, effects, lang) } }
         : {};

@@ -35,6 +35,13 @@ export interface EquipmentCuratedEntry {
   rank?: string;
   /** EE : rang éditorial au +10. */
   rank10?: string;
+  /**
+   * EE : câblage d'affichage des chips de passifs (comme les skills). Refs
+   * (`tooltip`/`label`) à MASQUER — parasite que le jeu n'affiche pas.
+   */
+  chipHide?: string[];
+  /** EE : réfs tooltip du glossaire à AJOUTER en chips (statut décrit hors kit). */
+  chipAdd?: string[];
 }
 
 /** Fichier complet, sectionné par table (pas de collision d'ids possible). */
@@ -67,6 +74,8 @@ const entrySchema: Schema = {
     },
     rank: { kind: 'string', optional: true },
     rank10: { kind: 'string', optional: true },
+    chipHide: { kind: 'array', of: { kind: 'string' }, optional: true },
+    chipAdd: { kind: 'array', of: { kind: 'string' }, optional: true },
   },
 };
 

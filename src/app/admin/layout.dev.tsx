@@ -52,7 +52,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       items: [
         { label: 'Personnage', href: '/admin/editor/characters' },
         { label: 'Effect', href: '/admin/editor/effects' },
-        { label: 'EE', href: '/admin/editor/ee', soon: true },
+        { label: 'EE', href: '/admin/editor/ee' },
         { label: 'Armes', href: '/admin/editor/weapons', soon: true },
         { label: 'Amulet', href: '/admin/editor/amulets', soon: true },
         { label: 'Armor', href: '/admin/editor/armors', soon: true },
