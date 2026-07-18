@@ -8,6 +8,6 @@ export async function POST(req: Request) {
   const body = (await req.json()) as PromoCode[];
   if (!Array.isArray(body))
     return NextResponse.json({ ok: false, errors: ['tableau attendu'] }, { status: 400 });
-  saveCoupons(body);
+  await saveCoupons(body);
   return NextResponse.json({ ok: true });
 }

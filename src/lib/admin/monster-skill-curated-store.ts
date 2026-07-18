@@ -12,8 +12,9 @@
  *   - `chipHide`/`chipAdd` sont par skill : la liste envoyée REMPLACE celle du
  *     skill (vide = suppression de la clé).
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { writeJson } from '@datagen/lib/json';
 
 const CURATED_PATH = resolve(process.cwd(), 'data/curated/monster-skills.json');
 
@@ -55,7 +56,7 @@ const sorted = <T>(rec: Record<string, T>): Record<string, T> =>
   Object.fromEntries(Object.entries(rec).sort(([a], [b]) => a.localeCompare(b)));
 
 /** Applique un patch de kit. Renvoie les erreurs de validation (vide = OK). */
-export function applyKitCuration(patch: KitCurationPatch): string[] {
+export async function applyKitCuration(patch: KitCurationPatch): Promise<string[]> {
   const errors: string[] = [];
   const kit = new Set(patch.kitSkillIds ?? []);
   if (!kit.size) errors.push('kitSkillIds manquant');
@@ -97,6 +98,7 @@ export function applyKitCuration(patch: KitCurationPatch): string[] {
     file[section] = sorted(rec);
   }
 
-  writeFileSync(CURATED_PATH, JSON.stringify(file, null, 2) + '\n');
+  // Format CANONIQUE (`writeJson`) — sinon chaque édition reformate tout le fichier.
+  await writeJson(CURATED_PATH, file);
   return [];
 }

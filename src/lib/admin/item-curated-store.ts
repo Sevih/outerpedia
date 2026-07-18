@@ -7,7 +7,7 @@
  * (`bakeItemCatalogEntry`) : pas de `datagen:regen` à rejouer pour la voir
  * sur le site — même esprit que l'intégration ciblée d'un perso.
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { CatalogEntry, LangDict } from '@contracts';
 import { buildItemCatalog, catalogCompare } from '@datagen/generators/item-catalog';
@@ -31,12 +31,13 @@ export function loadItemCurated(): Record<string, ItemCurated> {
   }
 }
 
-export function upsertItemCurated(id: string, curated: ItemCurated): void {
+export async function upsertItemCurated(id: string, curated: ItemCurated): Promise<void> {
   const all = loadItemCurated();
   if (!curated || Object.keys(curated).length === 0) delete all[id];
   else all[id] = curated;
   const sorted = Object.fromEntries(Object.entries(all).sort(([a], [b]) => a.localeCompare(b)));
-  writeFileSync(PATH, JSON.stringify(sorted, null, 2) + '\n');
+  // Format CANONIQUE (`writeJson`) — cohérent avec `bakeItemCatalogEntry` ci-dessous.
+  await writeJson(PATH, sorted);
 }
 
 const SERVED = resolve(process.cwd(), 'data/generated/items.json');

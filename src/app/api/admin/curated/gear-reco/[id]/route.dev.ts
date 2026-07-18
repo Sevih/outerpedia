@@ -9,7 +9,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
 
   const { id } = await params;
   const body = (await req.json()) as GearBuild[];
-  const errors = upsertGearReco(id, body);
+  const errors = await upsertGearReco(id, body);
   if (errors.length) return NextResponse.json({ ok: false, errors }, { status: 400 });
   return NextResponse.json({ ok: true });
 }

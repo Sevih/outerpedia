@@ -9,7 +9,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
 
   const { id } = await params;
   const body = (await req.json()) as CharacterCurated;
-  const errors = upsertCharacterCurated(id, body);
+  const errors = await upsertCharacterCurated(id, body);
   if (errors.length) return NextResponse.json({ ok: false, errors }, { status: 400 });
   return NextResponse.json({ ok: true });
 }

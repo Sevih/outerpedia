@@ -6,6 +6,18 @@
 
 ## 2026-07-18
 
+- **Stores d'édition curée : écriture au format CANONIQUE** — les 6 stores admin
+  (`curated-store` persos, `effects-store`, `item-curated-store`, `gear-reco-store`,
+  `monster-skill-curated-store`, `promo-banner-store` coupons/banner) écrivaient
+  en `JSON.stringify(sorted, null, 2)` au lieu du sérialiseur canonique
+  (`writeJson`/`formatJson` de `datagen/lib/json`). Conséquence : les tableaux
+  courts (`tags`, `videos`…) s'éclataient en multiligne, donc chaque édition d'UNE
+  entité via l'admin reformatait TOUT le fichier (diff git géant — vu en direct
+  quand Delta a été ajouté au curé). Tous passés en `writeJson` ; les mutateurs
+  (`upsert*`, `apply*`, `save*`, `regen*`) et leurs 8 routes deviennent async
+  (`await`). Vérifié : les 8 fichiers `data/curated/*` sont déjà canoniques (rien
+  à reformater — le fix est purement code), 351 tests verts, typecheck + lint OK.
+  Piège documenté dans l'en-tête de `lib/json.ts`, désormais fermé côté admin.
 - **A11y des barres d'onglets (roving tabindex) + micro-fixes** — les 5
   implémentations `role="tablist"` du site (ui/Tabs, guides/SegmentedTabs,
   EncounterSelection, MonsterLineup, TeamSlotCarousel — l'audit en citait 4)

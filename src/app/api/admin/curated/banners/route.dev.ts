@@ -8,6 +8,6 @@ export async function POST(req: Request) {
   const body = (await req.json()) as Banner[];
   if (!Array.isArray(body))
     return NextResponse.json({ ok: false, errors: ['tableau attendu'] }, { status: 400 });
-  saveBanners(body);
+  await saveBanners(body);
   return NextResponse.json({ ok: true });
 }

@@ -4,8 +4,9 @@
  * copie du repo V2 voisin — une seule donnée à maintenir. V3 = source de vérité
  * une fois seedé ; le regen n'est qu'un import ponctuel (écrase).
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { writeJson } from '@datagen/lib/json';
 import { catalogIdByName } from '@/lib/data/item-catalog';
 
 export interface PromoCode {
@@ -49,22 +50,23 @@ function readArrayStrict<T>(path: string): T[] {
   return data as T[];
 }
 
-function writeArray(path: string, data: unknown): void {
-  writeFileSync(path, JSON.stringify(data, null, 2) + '\n');
+// Format CANONIQUE (`writeJson`) — sinon chaque édition reformate tout le fichier.
+function writeArray(path: string, data: unknown): Promise<void> {
+  return writeJson(path, data);
 }
 
 export const loadCoupons = (): PromoCode[] => readArray<PromoCode>(COUPONS_PATH);
 export const loadBanners = (): Banner[] => readArray<Banner>(BANNER_PATH);
 
-export const saveCoupons = (list: PromoCode[]): void => writeArray(COUPONS_PATH, list);
-export const saveBanners = (list: Banner[]): void => writeArray(BANNER_PATH, list);
+export const saveCoupons = (list: PromoCode[]): Promise<void> => writeArray(COUPONS_PATH, list);
+export const saveBanners = (list: Banner[]): Promise<void> => writeArray(BANNER_PATH, list);
 
 /**
  * Import des codes promo depuis V2 (écrase la copie V3). V2 stocke les rewards
  * par NOM ; on mappe vers l'id d'item (best-effort — nom non trouvé = gardé tel
  * quel, éditable ensuite dans le picker).
  */
-export function regenCouponsFromV2(): PromoCode[] {
+export async function regenCouponsFromV2(): Promise<PromoCode[]> {
   const raw = readArrayStrict<PromoCode>(V2_COUPONS);
   // Index catalogue complet : items + monnaies + costumes + créations (Stamina…).
   const nameToId = catalogIdByName();
@@ -77,11 +79,11 @@ export function regenCouponsFromV2(): PromoCode[] {
       ]),
     ),
   }));
-  writeArray(COUPONS_PATH, mapped);
+  await writeArray(COUPONS_PATH, mapped);
   return mapped;
 }
-export function regenBannersFromV2(): Banner[] {
+export async function regenBannersFromV2(): Promise<Banner[]> {
   const data = readArrayStrict<Banner>(V2_BANNER);
-  writeArray(BANNER_PATH, data);
+  await writeArray(BANNER_PATH, data);
   return data;
 }

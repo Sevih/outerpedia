@@ -11,7 +11,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
   if (!IS_DEV) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
   const { id } = await params;
   const body = (await req.json()) as ItemCurated;
-  upsertItemCurated(id, body);
+  await upsertItemCurated(id, body);
   // Rebake immédiat de l'entrée servie : l'édition curée vaut validation (la
   // donnée jeu sous-jacente n'a pas bougé) — rien à promouvoir pour la voir.
   try {

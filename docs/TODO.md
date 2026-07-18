@@ -129,15 +129,6 @@
 > Les 3 items traités le 18/07 (helper `postJson`, keying stable, `eeReport`
 > O(n)) — cf. DONE.
 
-- [ ] `src/lib/admin/curated-store.ts:25` écrit `data/curated/characters.json`
-      en `JSON.stringify(sorted, null, 2)` au lieu du sérialiseur CANONIQUE
-      (`formatJson` de `datagen/lib/json`) — les tableaux courts (`tags`,
-      `videos`…) s'éclatent en multiligne, donc chaque édition d'un perso via
-      l'admin produit un diff git géant (tout le fichier reformaté) au lieu du
-      seul perso touché. Piège documenté dans l'en-tête de `lib/json.ts`.
-      Passer l'écriture (et son appelant) en async + `formatJson`. Même vérif à
-      faire sur les autres stores d'édition curée (gear-reco, effects…).
-
 ### Datagen — divers
 
 - [ ] `datagen/extractor/specs/character.ts:492` : `ShowMainPage === 'true'`
