@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { cn } from '@/lib/cn';
-import { useUrlSlice, writeUrl } from '@/hooks/useUrlSlice';
+import { useUrlTab } from '@/hooks/useUrlTab';
 
 export interface BannerTabDef {
   id: string;
@@ -16,29 +16,12 @@ export interface BannerTabDef {
 /**
  * Onglets à CARTES-IMAGES (colonne de vignettes de bannières, contenu à
  * droite) — le sélecteur du guide « Banners & Mileage » (portage V2). Même
- * politique d'URL que `Tabs` : `?<urlParam>=<id>` via replaceState, l'URL est
- * la source de vérité, la page reste statiquement rendable.
+ * politique d'URL que `Tabs` (hook `useUrlTab`) : `?<urlParam>=<id>` via
+ * replaceState, l'URL est la source de vérité, la page reste statiquement
+ * rendable.
  */
 export function BannerTabs({ tabs, urlParam }: { tabs: BannerTabDef[]; urlParam?: string }) {
-  const urlTab = useUrlSlice('popstate', () =>
-    urlParam ? new URLSearchParams(window.location.search).get(urlParam) : null,
-  );
-  const [localTab, setLocalTab] = useState<string | null>(null);
-  const fromUrl = urlTab && tabs.some((t) => t.id === urlTab) ? urlTab : null;
-  const active = (urlParam ? fromUrl : localTab) ?? tabs[0]?.id;
-  const current = tabs.find((t) => t.id === active) ?? tabs[0];
-
-  const select = (id: string) => {
-    if (!urlParam) {
-      setLocalTab(id);
-      return;
-    }
-    writeUrl(() => {
-      const url = new URL(window.location.href);
-      url.searchParams.set(urlParam, id);
-      window.history.replaceState(null, '', url);
-    });
-  };
+  const { active, current, select } = useUrlTab(tabs, urlParam);
 
   return (
     <div className="flex flex-col gap-6 md:flex-row">

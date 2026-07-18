@@ -6,6 +6,15 @@
 
 ## 2026-07-19
 
+- **`useUrlTab` — dédup de la logique « URL source de vérité »** — le bloc
+  identique de `ui/Tabs` et `guides/.../BannerTabs` (lecture de la tranche
+  `?<param>=<id>` via useUrlSlice → Back/Forward pilote l'UI, écriture par
+  `replaceState`, validation de l'id lu, repli local sans `urlParam`) extrait
+  dans un hook générique `src/hooks/useUrlTab.ts` (`<T extends { id: string }>`,
+  retourne `{ active, current, select }`). Les deux composants n'en gardent que
+  leur rendu propre (soulignement thémé / cartes-images). Aucun changement de
+  comportement. RESTE hors périmètre : migrer `BannerTabs` vers le hash (règle
+  « état interne d'un guide = hash »), tracé en TODO.
 - **CSP durcissement, PASSE 1 (Report-Only, observation)** — préparation du
   passage à une CSP à nonce sans casser la prod (build indisponible en local :
   on valide sur le trafic RÉEL). Une politique **stricte** (`script-src 'self'

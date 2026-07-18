@@ -1,9 +1,9 @@
 'use client';
 
-import { useId, useState } from 'react';
+import { useId } from 'react';
 import { cn } from '@/lib/cn';
 import { onTabListKeyDown } from '@/lib/tablist';
-import { useUrlSlice, writeUrl } from '@/hooks/useUrlSlice';
+import { useUrlTab } from '@/hooks/useUrlTab';
 
 export interface Tab {
   id: string;
@@ -15,10 +15,9 @@ export interface Tab {
  * Onglets théminés (soulignement de l'onglet actif via la couleur d'accent).
  *
  * `urlParam` : mémorise l'onglet actif dans l'URL (`?<param>=<id>`) — l'URL est
- * la SOURCE DE VÉRITÉ (cf. useUrlSlice : Back/Forward pilote l'UI), écrite via
- * `history.replaceState` (pas de rechargement serveur). Lecture par
- * `window.location` et non `useSearchParams` : la page reste statiquement
- * rendable (pas de bailout CSR ni de Suspense imposé).
+ * la SOURCE DE VÉRITÉ (cf. useUrlTab/useUrlSlice : Back/Forward pilote l'UI),
+ * écrite via `history.replaceState` (pas de rechargement serveur). La page reste
+ * statiquement rendable (pas de bailout CSR ni de Suspense imposé).
  *
  * RÈGLE D'USAGE (décision 2026-07-16) : ce composant sert les pages HORS
  * guides (browsers, admin…). L'état INTERNE d'un guide (version, phase,
@@ -33,14 +32,7 @@ export function Tabs({
   className?: string;
   urlParam?: string;
 }) {
-  const urlTab = useUrlSlice('popstate', () =>
-    urlParam ? new URLSearchParams(window.location.search).get(urlParam) : null,
-  );
-  // Sans `urlParam`, pas de tranche d'URL : la sélection est un état local.
-  const [localTab, setLocalTab] = useState<string | null>(null);
-  const fromUrl = urlTab && tabs.some((t) => t.id === urlTab) ? urlTab : null;
-  const active = (urlParam ? fromUrl : localTab) ?? tabs[0]?.id;
-  const current = tabs.find((t) => t.id === active) ?? tabs[0];
+  const { active, current, select } = useUrlTab(tabs, urlParam);
   const activeIndex = Math.max(
     0,
     tabs.findIndex((t) => t.id === active),
@@ -51,18 +43,6 @@ export function Tabs({
   const baseId = useId();
   const tabId = (id: string) => `${baseId}-tab-${id}`;
   const panelId = `${baseId}-panel`;
-
-  const select = (id: string) => {
-    if (!urlParam) {
-      setLocalTab(id);
-      return;
-    }
-    writeUrl(() => {
-      const url = new URL(window.location.href);
-      url.searchParams.set(urlParam, id);
-      window.history.replaceState(null, '', url);
-    });
-  };
 
   return (
     <div className={className}>

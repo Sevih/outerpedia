@@ -151,9 +151,10 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
 - [ ] **Helpers adb** dupliqués entre `datagen/extract/dump.ts` et
       `pull-gamedata.ts` (ADB, PKG, capture, stream, pickDevice, bloc root) —
       extraire `extract/adb.ts`.
-- [ ] Logique « URL source de vérité » copiée entre ui/Tabs:35-54 et
-      BannerTabs:23-41 → hook `useUrlTab` (fusionner avec la migration
-      BannerTabs → hash, cf. règle actée ci-dessous).
+- [x] ~~Logique « URL source de vérité » copiée entre ui/Tabs et BannerTabs →
+      hook `useUrlTab`~~ FAIT le 19/07 (cf. DONE). RESTE la migration
+      `BannerTabs` → hash (état interne de guide), tracée dans « Chantiers actés »
+      ci-dessous.
 - [ ] `rankOptionLabels` homonymes divergents (data/monsters.ts:97 vs
       admin/monster-store.ts:154) ; `BOSS_TYPES` homonymes DIVERGENTS
       (monster-icon.ts:32 vs towers.ts:92 — sets volontairement différents :
