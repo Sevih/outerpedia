@@ -174,9 +174,14 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
 
 ## ⚙️ Config / infra
 
-- [ ] CSP (`next.config.ts`) : `unsafe-eval` RETIRÉ de script-src en prod le
-      18/07 (gardé en dev pour le HMR — cf. DONE). RESTE : viser nonce +
-      strict-dynamic pour retirer aussi `unsafe-inline` (script ET style).
+- [ ] CSP durcissement — PASSE 1 livrée le 19/07 (cf. DONE) : politique stricte
+      nonce + strict-dynamic servie en **Report-Only** via `proxy.ts`, collecteur
+      `/api/csp-report`. Ne bloque rien encore. **RESTE** : (a) déployer en prod,
+      (b) laisser les rapports s'accumuler quelques jours, `grep [csp-report]`
+      dans les logs du conteneur, (c) traiter les vraies violations (CF Insights
+      non-noncé attendu), (d) **PASSE 3** : basculer la politique réelle de
+      `next.config.ts` sur le nonce et retirer `'unsafe-inline'` des scripts.
+      (`style-src` garde `'unsafe-inline'` : styles inline React, non prioritaire.)
 - [ ] Datagen, hygiène CLI : garde `isMain` manquante sur extract.ts,
       templates/convert.ts, coherence.ts, extractor/run.ts, import-gear-reco ;
       `main()` sans `.catch` dans assets/collect.ts ; parsing des flags

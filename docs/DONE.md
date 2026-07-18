@@ -4,6 +4,28 @@
 > ne garde que le « à faire »). Un item traité migre ici avec sa date ; le
 > détail vit dans git. Ne pas confondre avec le `CHANGELOG.md` racine (public).
 
+## 2026-07-19
+
+- **CSP durcissement, PASSE 1 (Report-Only, observation)** — préparation du
+  passage à une CSP à nonce sans casser la prod (build indisponible en local :
+  on valide sur le trafic RÉEL). Une politique **stricte** (`script-src 'self'
+'nonce-…' 'strict-dynamic'`, sans `'unsafe-inline'`) est servie via
+  `proxy.ts` (Next 16 : la convention est `proxy.ts`, pas `middleware.ts`) sous
+  l'en-tête **`Content-Security-Policy-Report-Only`** : le navigateur l'évalue
+  et REMONTE ce qu'elle casserait, sans jamais bloquer. La politique réelle
+  (`next.config.ts`, avec `'unsafe-inline'`) est **inchangée** → zéro risque.
+  Le nonce est glissé sur les en-têtes de REQUÊTE (`Content-Security-Policy`
+  interne, jamais renvoyé) pour que Next le pose sur SES `<script>` — sinon ils
+  pollueraient les rapports. Collecte automatique sur tous les visiteurs :
+  `report-uri` (Firefox/Safari) + `report-to`/`Reporting-Endpoints` (Chrome)
+  → nouvel endpoint **`/api/csp-report`** qui normalise les deux formats, filtre
+  le bruit d'extensions (`chrome-extension://`…), dédupe en mémoire et loggue en
+  `console.warn` structuré (→ logs conteneur, `grep`). Vérifié : Caddy prod
+  (`vps-…ovh.net`) ne strippe PAS la CSP (le `header_down -Content-Security-
+Policy` est cantonné au bloc test-IP HTTP), donc le header arrive intact.
+  `style-src` garde `'unsafe-inline'` (styles inline React, hors périmètre XSS).
+  À DÉPLOYER puis observer avant la bascule réelle (PASSE 3, cf. TODO).
+
 ## 2026-07-18
 
 - **Éditeur reco d'équipement UNIFIÉ sur tuiles** — l'aperçu EST l'éditeur : rend

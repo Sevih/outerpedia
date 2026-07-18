@@ -2,6 +2,62 @@ import { NextRequest, NextResponse } from 'next/server';
 import { DEFAULT_LANG, isValidLang } from '@/lib/i18n/config';
 
 /**
+ * CSP stricte (nonce + strict-dynamic) servie en REPORT-ONLY — PASSE 1. Elle ne
+ * bloque RIEN : la politique réelle reste celle de `next.config.ts` (avec
+ * `'unsafe-inline'`), inchangée. Le navigateur évalue celle-ci EN PLUS et remonte
+ * ce qu'elle casserait à `/api/csp-report`, sur le trafic réel. On bascule en
+ * réel (PASSE 3) quand les rapports ne montrent plus que du bruit d'extensions.
+ * `style-src` garde `'unsafe-inline'` même en cible : React pose des styles
+ * inline sans nonce, et les styles ne sont pas un vecteur XSS majeur — on durcit
+ * les SCRIPTS. Voir aussi src/app/api/csp-report/route.ts.
+ */
+function buildCsp(nonce: string): string {
+  return [
+    "default-src 'self'",
+    // strict-dynamic : seuls les scripts porteurs du nonce (et leur cascade)
+    // s'exécutent ; les listes de hosts sont alors ignorées par le navigateur.
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: https: blob:",
+    "font-src 'self' data:",
+    "connect-src 'self' https://cloudflareinsights.com",
+    "media-src 'self' https://*.youtube.com https://cdn.discordapp.com",
+    "frame-src 'self' https://*.youtube.com",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'self'",
+    'upgrade-insecure-requests',
+    // report-uri : Firefox/Safari (format historique) ; report-to : Chrome (API
+    // moderne, nomme l'endpoint déclaré par l'en-tête `Reporting-Endpoints`).
+    'report-uri /api/csp-report',
+    'report-to csp-endpoint',
+  ].join('; ');
+}
+
+/**
+ * Sert une page en posant la CSP Report-Only. Le nonce doit se retrouver sur NOS
+ * <script> (ceux de Next), sinon ils seraient signalés comme violations : Next
+ * le pose tout seul dès qu'il lit une CSP sur les en-têtes de REQUÊTE — d'où le
+ * `Content-Security-Policy` glissé côté requête (interne, jamais renvoyé au
+ * navigateur, qui ne voit que le `-Report-Only`).
+ */
+function withCsp(request: NextRequest, rewriteTo?: URL): NextResponse {
+  const nonce = btoa(crypto.randomUUID());
+  const csp = buildCsp(nonce);
+
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-nonce', nonce);
+  requestHeaders.set('Content-Security-Policy', csp);
+  const init = { request: { headers: requestHeaders } };
+
+  const res = rewriteTo ? NextResponse.rewrite(rewriteTo, init) : NextResponse.next(init);
+  res.headers.set('Content-Security-Policy-Report-Only', csp);
+  res.headers.set('Reporting-Endpoints', 'csp-endpoint="/api/csp-report"');
+  return res;
+}
+
+/**
  * Proxy i18n par SOUS-DOMAINE :
  *   jp.outerpedia.com/characters → réécrit vers /jp/characters
  *   outerpedia.com/characters    → réécrit vers /en/characters
@@ -51,10 +107,10 @@ export function proxy(request: NextRequest) {
 
   if (subdomain && isValidLang(subdomain)) {
     const firstSegment = pathname.split('/')[1];
-    if (isValidLang(firstSegment)) return NextResponse.next();
+    if (isValidLang(firstSegment)) return withCsp(request);
     const url = request.nextUrl.clone();
     url.pathname = `/${subdomain}${pathname}`;
-    return NextResponse.rewrite(url);
+    return withCsp(request, url);
   }
 
   // --- Domaine racine (pas de sous-domaine) = langue par défaut ---
@@ -68,12 +124,12 @@ export function proxy(request: NextRequest) {
   }
 
   // Préfixe d'une autre langue (dev path-based) → laisse passer.
-  if (isValidLang(firstSegment)) return NextResponse.next();
+  if (isValidLang(firstSegment)) return withCsp(request);
 
   // Pas de préfixe → réécriture interne avec la langue par défaut.
   const url = request.nextUrl.clone();
   url.pathname = `/${DEFAULT_LANG}${pathname}`;
-  return NextResponse.rewrite(url);
+  return withCsp(request, url);
 }
 
 /** Extrait le sous-domaine de l'hôte (« jp.outerpedia.com » → « jp »). */
