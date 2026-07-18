@@ -10,6 +10,7 @@ import type { GearBuild, GearPresets, LangDict, Option, SetComboPiece } from '@c
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { statOptionView } from '@/lib/stats';
+import { PIECE_ORDER } from '@/lib/data/gear-order';
 import {
   getAmuletFamilies,
   getSetViews,
@@ -249,9 +250,6 @@ function resolveItem(
     source: toItemSource(f?.source, lang),
   };
 }
-
-/** Ordre fixe des pièces d'armure (tuiles des sets). */
-const PIECE_ORDER = ['helmet', 'armor', 'gloves', 'shoes'] as const;
 
 /**
  * Texte d'un bonus de set, dernier palier connu : nom OFFICIEL de la stat

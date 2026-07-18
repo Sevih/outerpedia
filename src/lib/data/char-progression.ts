@@ -23,6 +23,7 @@ import type {
 } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
+import { GRADE_RANK } from '@/lib/data/gear-order';
 import {
   STEP_STAT_KEYS,
   PERCENT_STEP_KEYS,
@@ -398,7 +399,6 @@ function toItemView(id: string, it: Item, lang: Lang): GiftView {
 }
 
 /** Les cadeaux préférés du perso (items `present` de sa catégorie, par grade). */
-const GRADE_ORDER: Record<string, number> = { normal: 0, magic: 1, rare: 2, unique: 3 };
 export function getGiftItems(char: Character, lang: Lang): GiftView[] {
   if (!char.gift) return [];
   return Object.entries(ITEMS)
@@ -411,7 +411,7 @@ export function getGiftItems(char: Character, lang: Lang): GiftView[] {
         (!it.characterLimit || it.characterLimit === char.id),
     )
     .map(([id, it]) => toItemView(id, it, lang))
-    .sort((a, b) => (GRADE_ORDER[a.grade] ?? 0) - (GRADE_ORDER[b.grade] ?? 0));
+    .sort((a, b) => (GRADE_RANK[a.grade] ?? 0) - (GRADE_RANK[b.grade] ?? 0));
 }
 
 /** Item de rappel d'un limit break (icône + nom + desc localisés). */

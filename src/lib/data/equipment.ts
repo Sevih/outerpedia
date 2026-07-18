@@ -36,6 +36,7 @@ import type { Lang } from '@/lib/i18n/config';
 import type { TFunction } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { statAbbr, statName } from '@/lib/stats';
+import { GRADE_RANK } from '@/lib/data/gear-order';
 import weaponData from '@data/generated/equipment/weapon.json';
 import accessoryData from '@data/generated/equipment/accessory.json';
 import helmetData from '@data/generated/equipment/helmet.json';
@@ -75,8 +76,6 @@ const ARMOR_SLOTS = {
 function armorPieces(data: unknown): Record<string, ArmorItem> {
   return data as Record<string, ArmorItem>;
 }
-
-const GRADE_RANK: Record<string, number> = { normal: 0, magic: 1, rare: 2, unique: 3 };
 
 /** L'identité affichable d'une PIÈCE d'équipement, quel que soit son slot. */
 export interface GearIdentity {

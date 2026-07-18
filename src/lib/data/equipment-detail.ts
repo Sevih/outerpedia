@@ -33,6 +33,7 @@ import {
   type ResolvedSource,
 } from '@/lib/data/equipment';
 import { loadGearReco, loadGearPresets } from '@/lib/data/gear-reco';
+import { GRADE_RANK, PIECE_ORDER } from '@/lib/data/gear-order';
 import {
   characterDisplayName,
   characterNamePrefix,
@@ -375,11 +376,8 @@ function toSourceView(source: ResolvedSource | undefined, lang: Lang) {
   };
 }
 
-const GRADE_RANK: Record<string, number> = { normal: 0, magic: 1, rare: 2, unique: 3 };
 const betterPiece = (a: { grade: string; star: number }, b: { grade: string; star: number }) =>
   (GRADE_RANK[a.grade] ?? 0) - (GRADE_RANK[b.grade] ?? 0) || a.star - b.star;
-
-const PIECE_ORDER = ['helmet', 'armor', 'gloves', 'shoes'] as const;
 
 /** Un bonus +15 localisé : effet + répartition par grades (couleurs du jeu). */
 export interface AscensionBonusView {

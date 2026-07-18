@@ -81,7 +81,7 @@ export interface ResolvedReward {
 // les VARIANTES (781…785 : une par classe), les familles les regroupent — on
 // résout la variante vers sa famille pour hériter nom/icône/grade/lien détail.
 let gearIndex: Map<string, GearFamily> | null = null;
-function gearById(id: string): GearFamily | undefined {
+function gearFamilyById(id: string): GearFamily | undefined {
   if (!gearIndex) {
     gearIndex = new Map();
     for (const f of [...getWeaponFamilies(), ...getAmuletFamilies(), ...getTalismanFamilies()]) {
@@ -134,7 +134,7 @@ export function resolveRewardEntry(e: RewardEntry, lang: Lang): ResolvedReward {
     // matériaux…), soit une VARIANTE d'équipement (les tables droppent la
     // déclinaison par classe).
     if (getCatalogEntry(e.id)) return fromCatalog(e.id, lang, base, `item ${e.id}`);
-    const f = gearById(e.id);
+    const f = gearFamilyById(e.id);
     if (f) {
       return {
         name: lRec(f.name, lang) || f.name.en,
@@ -319,7 +319,7 @@ export function stageLoot(
       }
       continue;
     }
-    const f = gearById(e.id);
+    const f = gearFamilyById(e.id);
     if (f?.grade === 'unique' && !gear.has(f.slug)) {
       // Le passif au 5e PALIER de breakthrough — le « tier 4 » du vocabulaire
       // joueur (T0..T4), celui que la communauté cite.

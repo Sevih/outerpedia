@@ -6,6 +6,19 @@
 
 ## 2026-07-18
 
+- **Homonymes dédupliqués (partie non-admin)** — deux pièges levés. (1) Les
+  constantes d'ordre d'équipement vivaient en copies : `GRADE_RANK`/`GRADE_ORDER`
+  ×3 (equipment.ts, equipment-detail.ts, char-progression.ts — la 3ᵉ sous un nom
+  DIFFÉRENT pour la même table) et `PIECE_ORDER` ×2 (equipment-detail, gear-reco)
+  → source unique `src/lib/data/gear-order.ts` (module feuille, zéro import → pas
+  de cycle), branchée aux 4 fichiers, nom uniformisé `GRADE_RANK`. Un grade ou
+  une pièce ajoutés par le jeu se changent désormais à UN endroit. (2) `gearById`
+  homonyme piégeux : rewards.ts définissait une fonction LOCALE `gearById`
+  (résout une FAMILLE) tout en important `gearById` d'equipment.ts aliasé en
+  `gearPieceById` (résout une PIÈCE) — deux « gearById » de retours différents
+  dans le même fichier. La locale renommée `gearFamilyById` (+ 2 appels). RESTE
+  (cf. TODO) : `rankOptionLabels` et `BOSS_TYPES` (touchent l'admin, zone du
+  worker) + l'index `resolveEffectKey`. Typecheck + 351 tests OK.
 - **Éditeur de recos : aperçu iconographique « à vue »** (demande Sevih) —
   l'éditeur `GearRecoEditor` listait des ids bruts dans des `<select>`. Un
   `<option>` HTML ne peut pas porter d'image → à côté de chaque sélecteur, un
