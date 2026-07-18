@@ -9,6 +9,8 @@
 import { useState } from 'react';
 import type { CharacterCurated } from '@contracts';
 import { type Keyed, stripKey, withKey } from '@/lib/admin/keyed';
+import { InlineTextField } from '@/components/admin/InlineTextField';
+import type { InlineRefs } from '@/lib/admin/inline-refs';
 
 type LocalizedText = Partial<Record<'en' | 'jp' | 'kr' | 'zh' | 'fr', string>>;
 interface SynergyGroup {
@@ -29,15 +31,17 @@ function TextListEditor({
   title,
   items,
   lang,
+  refs,
   onChange,
 }: {
   title: string;
   items: Keyed<LocalizedText>[];
   lang: L;
+  refs: InlineRefs;
   onChange: (next: Keyed<LocalizedText>[]) => void;
 }) {
   return (
-    <div className="space-y-2">
+    <div className="space-y-3">
       <div className="flex items-center justify-between">
         <p className="text-content-strong text-sm font-semibold">{title}</p>
         <button
@@ -49,19 +53,25 @@ function TextListEditor({
         </button>
       </div>
       {items.map((item, i) => (
-        <div key={item._key} className="flex items-start gap-2">
-          <textarea
-            className={`${input} min-h-9 font-mono text-xs`}
-            rows={2}
-            value={item[lang] ?? ''}
-            placeholder={lang === 'en' ? '' : (item.en ?? '')}
-            onChange={(e) => {
-              const next = items.slice();
-              next[i] = { ...item, [lang]: e.target.value };
-              if (!e.target.value) delete next[i][lang];
-              onChange(next);
-            }}
-          />
+        <div
+          key={item._key}
+          className="border-line-subtle flex items-start gap-2 rounded-lg border p-2"
+        >
+          <div className="flex-1">
+            <InlineTextField
+              value={item[lang] ?? ''}
+              lang={lang}
+              refs={refs}
+              layout="stacked"
+              placeholder={lang === 'en' ? '' : (item.en ?? '')}
+              onChange={(v) => {
+                const next = items.slice();
+                next[i] = { ...item, [lang]: v };
+                if (!v) delete next[i][lang];
+                onChange(next);
+              }}
+            />
+          </div>
           <button
             type="button"
             className={`${btn} text-danger`}
@@ -80,6 +90,7 @@ export function EditorialEditor({
   id,
   curated,
   charNames,
+  refs,
   show = 'all',
 }: {
   id: string;
@@ -87,6 +98,8 @@ export function EditorialEditor({
   curated: CharacterCurated;
   /** id → nom EN (affichage des partenaires + saisie par nom). */
   charNames: Record<string, string>;
+  /** Refs d'autocomplétion des tags inline. */
+  refs: InlineRefs;
   /**
    * Sections affichées. Les Tools transverses n'en montrent qu'une ; l'autre
    * slice reste préservée (état initialisé depuis `curated`, réécrit à
@@ -166,8 +179,8 @@ export function EditorialEditor({
 
       {show !== 'synergies' && (
         <div className="grid gap-6 lg:grid-cols-2">
-          <TextListEditor title="Pros" items={pros} lang={lang} onChange={setPros} />
-          <TextListEditor title="Cons" items={cons} lang={lang} onChange={setCons} />
+          <TextListEditor title="Pros" items={pros} lang={lang} refs={refs} onChange={setPros} />
+          <TextListEditor title="Cons" items={cons} lang={lang} refs={refs} onChange={setCons} />
         </div>
       )}
 
@@ -240,15 +253,15 @@ export function EditorialEditor({
               </div>
               <div>
                 <p className="text-content-subtle text-xs uppercase">Raison ({lang})</p>
-                <textarea
-                  className={`${input} min-h-9 font-mono text-xs`}
-                  rows={2}
+                <InlineTextField
                   value={g.reason?.[lang] ?? ''}
+                  lang={lang}
+                  refs={refs}
                   placeholder={lang === 'en' ? '' : (g.reason?.en ?? '')}
-                  onChange={(e) => {
+                  onChange={(v) => {
                     const next = synergies.slice();
-                    const reason: LocalizedText = { ...(g.reason ?? {}), [lang]: e.target.value };
-                    if (!e.target.value) delete reason[lang];
+                    const reason: LocalizedText = { ...(g.reason ?? {}), [lang]: v };
+                    if (!v) delete reason[lang];
                     next[gi] = { ...g, reason: Object.keys(reason).length ? reason : undefined };
                     setSynergies(next);
                   }}

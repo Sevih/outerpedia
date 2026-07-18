@@ -28,6 +28,7 @@ import { img } from '@/lib/images';
 import { lRec } from '@/lib/i18n/localize';
 import { resolveSkillText } from '@/lib/skills';
 import { loadCharacterKitSections } from '@/lib/admin/character-skill-curated-store';
+import { buildInlineRefs } from '@/lib/admin/inline-refs';
 import { extractedBundle } from '@/lib/admin/review-store';
 
 /**
@@ -165,7 +166,12 @@ export default async function EditorCharacterDetail({
       />
 
       {/* Recos d'équipement (format curé, sélecteurs par id) */}
-      <GearRecoEditor charId={id} initial={gearInitial} options={gearOptions} />
+      <GearRecoEditor
+        charId={id}
+        initial={gearInitial}
+        options={gearOptions}
+        refs={buildInlineRefs()}
+      />
 
       {/* Champs manuels (curé) */}
       <section className="border-line-subtle border-t pt-4">

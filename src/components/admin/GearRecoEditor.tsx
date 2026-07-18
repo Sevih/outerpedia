@@ -6,6 +6,11 @@ import type { GearBuild, GearPick, SetCombo } from '@contracts';
 import type { GearOption } from '@/lib/admin/gear-options';
 import { postJson } from '@/lib/admin/post-json';
 import { type Keyed, rowKey, stripKey, withKey } from '@/lib/admin/keyed';
+import { InlineTextField } from '@/components/admin/InlineTextField';
+import type { InlineRefs } from '@/lib/admin/inline-refs';
+
+const NOTE_LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
+type NoteLang = (typeof NOTE_LANGS)[number];
 
 const field =
   'w-full rounded-md border border-line bg-surface-base px-2 py-1 text-sm text-content focus:border-accent focus:outline-none';
@@ -174,12 +179,16 @@ export function GearRecoEditor({
   charId,
   initial,
   options,
+  refs,
 }: {
   charId: string;
   initial: GearBuild[];
   options: GearRecoOptions;
+  /** Refs d'autocomplétion des tags inline de la note. */
+  refs: InlineRefs;
 }) {
   const [builds, setBuilds] = useState<Keyed<GearBuild>[]>(() => initial.map(withKey));
+  const [noteLang, setNoteLang] = useState<NoteLang>('en');
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
 
   const patch = (i: number, b: Partial<GearBuild>) =>
@@ -350,15 +359,31 @@ export function GearRecoEditor({
               </datalist>
             </div>
             <div className="space-y-1">
-              <p className={label}>Note (EN, tags parse-text OK)</p>
-              <textarea
-                className={`${field} h-14`}
-                value={b.note?.en ?? ''}
-                onChange={(e) =>
-                  patch(i, {
-                    note: e.target.value ? { ...b.note, en: e.target.value } : undefined,
-                  })
-                }
+              <div className="flex items-center justify-between">
+                <p className={label}>Note ({noteLang})</p>
+                <div className="border-line flex overflow-hidden rounded-md border">
+                  {NOTE_LANGS.map((l) => (
+                    <button
+                      key={l}
+                      type="button"
+                      onClick={() => setNoteLang(l)}
+                      className={`px-2 py-0.5 text-[11px] ${l === noteLang ? 'bg-accent/20 text-accent' : 'text-content-muted hover:bg-surface-overlay'}`}
+                    >
+                      {l}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <InlineTextField
+                value={b.note?.[noteLang] ?? ''}
+                lang={noteLang}
+                refs={refs}
+                placeholder={noteLang === 'en' ? '' : (b.note?.en ?? '')}
+                onChange={(v) => {
+                  const note = { ...(b.note ?? {}), [noteLang]: v };
+                  if (!v) delete note[noteLang];
+                  patch(i, { note: Object.keys(note).length ? note : undefined });
+                }}
               />
             </div>
           </div>

@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { characterDisplayName, getAllCharacters, getCharacter } from '@/lib/data/characters';
 import { getCharacterCurated } from '@/lib/data/curated';
 import { EditorialEditor } from '@/components/admin/EditorialEditor';
+import { buildInlineRefs } from '@/lib/admin/inline-refs';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,7 +25,13 @@ export default async function ToolProsConsCharacter({
         {characterDisplayName(char)}{' '}
         <span className="text-content-subtle text-sm">· pros / cons</span>
       </h1>
-      <EditorialEditor id={id} curated={curated} charNames={charNames} show="prosCons" />
+      <EditorialEditor
+        id={id}
+        curated={curated}
+        charNames={charNames}
+        refs={buildInlineRefs()}
+        show="prosCons"
+      />
     </div>
   );
 }
