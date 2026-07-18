@@ -404,8 +404,27 @@ export interface TagCheck {
   reason?: string;
 }
 
+/**
+ * Options de `checkText` — le validateur de cibles internes est INJECTÉ par
+ * l'appelant (test des guides, contrôle admin). `parse-text` ne peut pas
+ * importer `data/guides` (node:fs → casserait le bundle client) : il reçoit
+ * donc un prédicat plutôt qu'un accès disque.
+ */
+export interface CheckOptions {
+  /**
+   * Existence d'une cible interne `/guides/...` (landing de catégorie ou fiche).
+   * Absent = liens NON validés (le rendu runtime n'en passe pas ; seuls le test
+   * et l'admin, qui ont les données, l'injectent).
+   */
+  guideHrefExists?: (href: string) => boolean;
+}
+
 /** Vérifie qu'UN tag a une correspondance dans la donnée (même résolution que le rendu). */
-function checkTag(type: string, value: string): { ok: boolean; reason?: string } {
+function checkTag(
+  type: string,
+  value: string,
+  opts?: CheckOptions,
+): { ok: boolean; reason?: string } {
   const v = value.trim();
   switch (type) {
     case 'B':
@@ -437,8 +456,19 @@ function checkTag(type: string, value: string): { ok: boolean; reason?: string }
       if (!c) return { ok: false, reason: 'perso inconnu' };
       return c.ee && EE[c.ee] ? { ok: true } : { ok: false, reason: 'pas d’EE' };
     }
-    case 'L':
+    case 'L': {
+      const sep = v.indexOf('|');
+      const href = sep === -1 ? '' : v.slice(sep + 1).trim();
+      // Seules les cibles INTERNES `/guides/...` sont contrôlées, et seulement
+      // si un validateur est fourni. Externes, ancres, autres domaines internes
+      // et liens sans href (label seul) passent — hors périmètre.
+      if (opts?.guideHrefExists && /^\/guides(\/|$)/.test(href)) {
+        return opts.guideHrefExists(href)
+          ? { ok: true }
+          : { ok: false, reason: 'guide lié introuvable' };
+      }
       return { ok: true };
+    }
     case 'AS':
       return findSet(v, 'en') ? { ok: true } : { ok: false, reason: 'set inconnu' };
     case 'SKB':
@@ -463,12 +493,12 @@ function checkTag(type: string, value: string): { ok: boolean; reason?: string }
  * avec leur statut de correspondance — y compris les tags MALFORMÉS que le
  * moteur de rendu ignorerait silencieusement (type hors liste).
  */
-export function checkText(text: string): TagCheck[] {
+export function checkText(text: string, opts?: CheckOptions): TagCheck[] {
   const out: TagCheck[] = [];
   for (const m of text.matchAll(/\{([A-Z-]+)\/([^}]+)\}/g)) {
     const [tag, type, value] = m;
     const res = TAG_MAP[type]
-      ? checkTag(type, value)
+      ? checkTag(type, value, opts)
       : { ok: false, reason: 'type de tag inconnu' };
     out.push({ tag, type, value, ...res });
   }

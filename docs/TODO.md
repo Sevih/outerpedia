@@ -76,12 +76,7 @@
 
 ## 🐛 Bugs — sévérité haute (audit 17/07, tous vérifiés)
 
-- [ ] **Valider les cibles internes des tags `{L}`** : `parse-text.tsx:440-441`
-      valide `ok: true` inconditionnellement — un lien `/guides/...` mort passe
-      le contrôle au build (seul `RelatedGuides` jette). Les 404 concrets de
-      `beginner-faq` → premium-limited sont résorbés par le portage du 17/07,
-      mais le garde-fou manque toujours : faire valider les cibles internes
-      `/guides/...` dans `checkTag`.
+- _(vide — le seul item, validation des cibles `{L}`, traité le 18/07 → DONE)_
 
 ## 🐛 Bugs — sévérité moyenne
 

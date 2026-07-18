@@ -6,6 +6,18 @@
 
 ## 2026-07-18
 
+- **Garde-fou des cibles internes `{L}`** (bug sévérité HAUTE) — `checkTag`
+  validait `{L/…|/guides/…}` en `ok: true` inconditionnel : un lien de guide
+  MORT passait le contrôle CI (seul `RelatedGuides` jetait, au render). Comme
+  `parse-text` ne peut pas importer `data/guides` (node:fs → casse le bundle
+  client), la validation est INJECTÉE : `checkText(text, { guideHrefExists })`
+  reçoit un prédicat, le cas `L` contrôle les hrefs `/guides/...` (landing racine,
+  landing de catégorie, ou fiche `catégorie/slug`) et ignore externes/ancres/
+  label-seul. Le prédicat est câblé dans `guides.test.ts` (les 2 scans, plats +
+  versionnés) sur `getGuide` + `GUIDE_CATEGORY_SLUGS` : un lien éditorial mort
+  casse désormais le test. Vérifié : les 25 `{L}` internes existants valident
+  tous. +4 tests (`parse-text.test.ts`) verrouillant le garde-fou (mort→échec,
+  vivant→ok, sans validateur→ok, externe/ancre→ok).
 - **Équipement remis dans le circuit SEO** (fiches `/equipment/*`) — elles
   étaient absentes de `sitemap.ts` ET de `/llms.txt`, avec une meta description
   identique sur tout le catalogue et un titre `« X – Outerplane » | Outerpedia`

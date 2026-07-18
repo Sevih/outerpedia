@@ -1,15 +1,37 @@
 import { describe, expect, it } from 'vitest';
 import {
+  getGuide,
   guideUpdatedDate,
   listGuides,
   listGuidesByCategory,
   readGuideFile,
   readGuideVersionFile,
 } from '@/lib/data/guides';
-import { GUIDE_TIER_KEYS, categoryRequires } from '@/lib/data/guide-categories';
+import {
+  GUIDE_CATEGORY_SLUGS,
+  GUIDE_TIER_KEYS,
+  categoryRequires,
+} from '@/lib/data/guide-categories';
 import { bossWaveMonsters, encountersOfGroup, encountersOfIds } from '@/lib/data/encounters';
 import { findCharacterByName } from '@/lib/data/characters';
 import { checkText } from '@/lib/parse-text';
+
+/**
+ * Existence d'une cible interne `{L/…|/guides/…}` — injecté dans `checkText`
+ * pour que les liens éditoriaux morts CASSENT le test (auparavant `checkTag`
+ * validait `{L}` sans condition ; seul `RelatedGuides` jetait). Les hrefs sont
+ * SANS préfixe de langue (le rendu les passe bruts). Formes acceptées :
+ * `/guides`, `/guides/<catégorie>`, `/guides/<catégorie>/<slug>[/<étage>…]`.
+ */
+const guideHrefExists = (href: string): boolean => {
+  const path = href.split(/[?#]/)[0].replace(/\/+$/, '');
+  const parts = path.split('/').filter(Boolean);
+  if (parts[0] !== 'guides') return true; // hors domaine guides → non concerné
+  if (parts.length === 1) return true; // /guides (landing racine)
+  if (!(GUIDE_CATEGORY_SLUGS as readonly string[]).includes(parts[1])) return false;
+  if (parts.length === 2) return true; // /guides/<catégorie> (landing de catégorie)
+  return Boolean(getGuide(parts[1], parts[2])); // /guides/<catégorie>/<slug>
+};
 
 describe('guideUpdatedDate — résolution de la date de mise à jour', () => {
   it('privilégie le `updated` explicite du meta', () => {
@@ -312,7 +334,7 @@ describe('contenu des guides — tout perso et tout tag inline résolvent', () =
         const data = readGuideFile<unknown>(g, file);
         if (!data) continue;
         for (const s of strings(data)) {
-          for (const check of checkText(s)) {
+          for (const check of checkText(s, { guideHrefExists })) {
             expect(
               check.ok,
               `${g.category}/${g.slug}/${file} : tag {${check.type}/${check.value}} — ${check.reason ?? ''}`,
@@ -377,7 +399,7 @@ describe('guides versionnés — le contenu de CHAQUE version résout', () => {
           const data = readGuideVersionFile<unknown>(g, v.key, file);
           if (!data) continue;
           for (const s of strings(data)) {
-            for (const check of checkText(s)) {
+            for (const check of checkText(s, { guideHrefExists })) {
               expect(
                 check.ok,
                 `${g.slug}/${v.key}/${file} : tag {${check.type}/${check.value}} — ${check.reason ?? ''}`,
