@@ -105,11 +105,6 @@
       Passer en CSS responsive (variantes masquées) ou remonter le breakpoint.
       En passant : `src/hooks/useMediaQuery.ts:8-12` — mémoïser `subscribe`
       (`useCallback`), sinon désabo/réabo à chaque rendu.
-- [ ] `src/components/character/EffectChips.tsx:269` : clé de dédup
-      `category === 'debuff'` vs affichage `category !== 'buff'` (or `neutral`
-      ×715 et `cc` ×389 existent en données) — deux chips de natures opposées
-      peuvent se dédoublonner. Helper unique `isDebuffOf` aux 3 endroits
-      (aussi `skill-view.ts:58`).
 
 ### Admin (dev-only mais irritant)
 

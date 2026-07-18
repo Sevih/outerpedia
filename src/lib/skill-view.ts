@@ -14,6 +14,7 @@ import { lRec } from '@/lib/i18n/localize';
 import { MAIN_SKILL_TYPES, levelAt, splitChainDual } from '@/lib/skills';
 import { getMergedEffect, loadCuratedEffects, mergeStatusEffects } from '@/lib/data/effects';
 import { loadDataJson } from '@/lib/data/disk';
+import { isDebuffEffect } from '@/components/character/EffectChips';
 import type { ClientEffect, StatusMap } from '@/components/character/EffectChips';
 import type { ChainLevel } from '@/components/character/ChainDualSection';
 
@@ -55,7 +56,7 @@ export function monsterChipMeta(
   return {
     name: eff?.name.en ?? key,
     ...(eff?.icon ? { icon: eff.icon } : {}),
-    isDebuff: eff?.isDebuff ?? e.category !== 'buff',
+    isDebuff: isDebuffEffect(e.category, eff?.isDebuff),
   };
 }
 

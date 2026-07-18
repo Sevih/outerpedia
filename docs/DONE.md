@@ -6,6 +6,19 @@
 
 ## 2026-07-18
 
+- **Dédup de chips d'effet alignée sur l'affichage (`EffectChips`)** — la clé de
+  dédoublonnage clivait la nature en `category === 'debuff'` alors que
+  l'affichage (couleur de la pill) la clive en `category !== 'buff'` : un effet
+  `neutral`/`cc` sans statut nommé était PEINT en debuff (rouge) mais KEYÉ en
+  buff, si bien qu'un chip rouge et un chip vert de même nom pouvaient fusionner
+  (données : `neutral` ×715, `cc` ×389). Règle unique extraite en helper exporté
+  `isDebuffEffect(category, statusIsDebuff?)` (`statusIsDebuff ?? category !==
+'buff'`), branché aux 3 sites : affichage `EffectChip`, clé de dédup
+  `EffectChipsRow`, et pills admin `monsterChipMeta` (`skill-view.ts:58`, déjà
+  correct — passé par le helper pour verrouiller). Les statuts homonymes de
+  natures OPPOSÉES documentés (Starving Devil buff 1076 / debuff 1077) restent
+  distincts : ils portent un `isDebuff` curé, inchangé. +2 tests
+  (`EffectChips.test.ts`) gravant le contrat.
 - **`LOCK_SCREEN_OVERRIDES` trié (unlock-content.ts)** — les 11 overrides
   passés au crible (override forcé vs convention `SYS_CONTENS_LOCK_<CT>` vs
   `TextID` de la ligne vs nom du donjon). Constat de fond : le nom primaire est

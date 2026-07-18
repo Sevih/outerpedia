@@ -102,6 +102,18 @@ export function EffectIconTile({
   );
 }
 
+/**
+ * Nature d'un effet, RÈGLE UNIQUE partagée affichage ↔ dédup ↔ pills admin : le
+ * statut nommé fait foi (`isDebuff` curé) ; à défaut, tout ce qui n'est pas
+ * explicitement `buff` (donc `neutral`, `cc`, `debuff`) est traité en DEBUFF.
+ * Les deux usages DOIVENT passer par ici : une dédup qui clive autrement que
+ * l'affichage (ex. `category === 'debuff'`) fait fusionner deux chips de
+ * couleurs opposées (un `neutral` peint en rouge et un `buff` peint en vert).
+ */
+export function isDebuffEffect(category: string, statusIsDebuff?: boolean): boolean {
+  return statusIsDebuff ?? category !== 'buff';
+}
+
 /** Libellé d'un effet : statut/mécanique nommé, sinon stat, sinon famille. */
 function effectLabel(e: ClientEffect, statuses: StatusMap): string {
   const key = e.tooltip ?? e.label;
@@ -210,7 +222,7 @@ export function EffectChip({ effect, statuses }: { effect: ClientEffect; statuse
   const key = effect.tooltip ?? effect.label;
   const status = key ? statuses[key] : undefined;
   const label = effectLabel(effect, statuses);
-  const isDebuff = status ? status.isDebuff : effect.category !== 'buff';
+  const isDebuff = isDebuffEffect(effect.category, status?.isDebuff);
   const bg = isDebuff ? 'bg-debuff-bg' : 'bg-buff-bg';
   const icon = status?.icon;
 
@@ -266,7 +278,7 @@ export function EffectChipsRow({
     const status = statuses[key];
     if (status?.hidden) return false;
     const isIrremovable = Boolean(status?.icon?.includes('Interruption'));
-    const nature = (status?.isDebuff ?? e.category === 'debuff') ? 'D' : 'B';
+    const nature = isDebuffEffect(e.category, status?.isDebuff) ? 'D' : 'B';
     const displayKey = `${isIrremovable ? 'IR|' : ''}${nature}|${status?.name ?? key}`;
     if (seen.has(displayKey)) return false;
     seen.add(displayKey);
