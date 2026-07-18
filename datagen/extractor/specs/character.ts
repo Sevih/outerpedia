@@ -863,54 +863,6 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
   schema: characterSchema,
 
   finalize: (_items, aux) => ({ ...aux.glossaries }),
-
-  coverage: {
-    dir: 'data/legacy/character',
-    fields: {
-      // Donnée de jeu qu'on extrait.
-      ID: 'extracted',
-      Fullname: 'extracted',
-      Fullname_jp: 'extracted',
-      Fullname_kr: 'extracted',
-      Fullname_zh: 'extracted',
-      Rarity: 'extracted',
-      Element: 'extracted',
-      Class: 'extracted',
-      SubClass: 'extracted',
-      skills: 'extracted', // réf vers le catalogue skills (généré à part)
-      Chain_Type: 'extracted', // BuffTemplet <id>_chain*.BuffCreateType (CHAIN_role)
-      gift: 'extracted', // TrustTemplet.PresentTypeLike
-      VoiceActor: 'extracted', // CVNameID
-      VoiceActor_jp: 'extracted',
-      VoiceActor_kr: 'extracted',
-      VoiceActor_zh: 'extracted',
-      // Core-fusion : lien base ↔ évolution (CharacterFusionTemplet).
-      hasCoreFusion: 'extracted', // dérivable de coreFusion
-      coreFusionId: 'extracted', // = coreFusion (sur la base)
-      originalCharacter: 'extracted', // = originalCharacter (sur la fusion)
-      // Étiquettes : tout est extrait du jeu SAUF `free` (aucun marqueur
-      // d'obtention gratuite dans les tables) → l'oracle V2 mélangeait les deux.
-      // Acquisition ← RecruitGroupTemplet.RibbonType ; ignore-defense ← BuffTemplet
-      // (kit/EE/transcendance, cf. `ignoreDefense`) ; core-fusion ← originalCharacter.
-      tags: 'extracted',
-      // Dérivable de `tags` (limited|seasonal|collab) — plus stocké.
-      limited: 'ignore',
-      // Connaissance humaine → data/curated, pas l'extraction.
-      rank: 'curated',
-      role: 'curated',
-      skill_priority: 'curated',
-      video: 'curated',
-      rank_pvp: 'curated',
-      rank_by_transcend: 'curated',
-      role_by_transcend: 'curated',
-      // Extrait dans un dataset partagé (transcend.json), pas par perso.
-      transcend: 'extracted', // CharacterTranscendentTemplet → byStar + overrides
-      // Détail core-fusion porté par l'entité fusion (champ `fusion`).
-      fusionType: 'extracted', // = l'entité est une fusion (originalCharacter présent)
-      fusionRequirements: 'extracted', // fusion.transStar + somme des coûts
-      costPerLevel: 'extracted', // fusion.levels[].cost
-    },
-  },
 };
 
 /** Sortie du domaine perso (personnages + glossaires transverses). */

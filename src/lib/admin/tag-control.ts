@@ -55,17 +55,7 @@ export function collectTagOccurrences(): TagOccurrence[] {
     for (const c of checkText(text)) occurrences.push({ source, ...c });
   };
 
-  // Pros/cons legacy (repli transitoire, clé = id de perso).
-  const prosCons = readJson('data/legacy/pros-cons.json') as Record<string, unknown> | null;
-  if (prosCons) {
-    for (const [id, entry] of Object.entries(prosCons)) {
-      const texts: { path: string; text: string }[] = [];
-      walkStrings(entry, '', texts);
-      for (const t of texts) scan(`pros-cons · ${charLabel(id)}${t.path}`, t.text);
-    }
-  }
-
-  // Curated persos : pros/cons migrés + synergies (réfs libres `{…}` + raisons).
+  // Curated persos : pros/cons + synergies (réfs libres `{…}` + raisons).
   for (const [id, entry] of Object.entries(loadCuratedCharacters())) {
     if (entry.prosCons) {
       const texts: { path: string; text: string }[] = [];

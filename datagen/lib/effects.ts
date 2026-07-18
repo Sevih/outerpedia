@@ -634,26 +634,23 @@ export function buildEffectGlossary(): EffectGlossary {
   }
 
   // ÉDITORIAL : les effets SANS icône en jeu (mécaniques `origin: type`
-  // surtout) reprennent l'icône du glossaire V2 écrit main (correspondance par
-  // nom EN). Le manifest les rapatriera du pool V2 (`editorialFallback`) —
-  // seule exception à la règle « images = extraction du jeu » : cet éditorial
-  // n'existe pas dans les tables.
+  // surtout) reprennent une icône écrite main (map label EN → sprite, héritée
+  // du glossaire V2 puis VERSIONNÉE en V3 : `data/editorial/effect-icons.json`).
+  // Le manifest les rapatriera du pool éditorial (`editorialFallback`) — seule
+  // exception à la règle « images = extraction du jeu » : cet éditorial n'existe
+  // pas dans les tables.
   try {
-    const legacy = ['buffs.json', 'debuffs.json'].flatMap(
-      (f) =>
-        JSON.parse(readFileSync(resolve('data/legacy/effects', f), 'utf8')) as {
-          label?: string;
-          icon?: string;
-        }[],
-    );
+    const iconByLabelRaw = JSON.parse(
+      readFileSync(resolve('data/editorial/effect-icons.json'), 'utf8'),
+    ) as Record<string, string>;
     const iconByLabel = new Map(
-      legacy.filter((e) => e.label && e.icon).map((e) => [e.label!.toLowerCase(), e.icon!]),
+      Object.entries(iconByLabelRaw).map(([label, icon]) => [label.toLowerCase(), icon]),
     );
     for (const e of effects.values()) {
       if (!e.icon) e.icon = iconByLabel.get((e.name.en ?? '').toLowerCase()) ?? '';
     }
   } catch {
-    /* legacy absent — les effets sans icône restent sans icône */
+    /* map éditoriale absente — les effets sans icône restent sans icône */
   }
 
   // Officiel ou communautaire ? Une icône introuvable dans les sprites

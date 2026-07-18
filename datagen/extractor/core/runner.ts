@@ -1,13 +1,11 @@
 /**
  * RUNNER générique — exécute n'importe quelle `ExtractorSpec`.
  *
- * Pipeline pur, sans I/O disque ni HTTP (sauf lecture de l'oracle pour le diff,
- * qui est en lecture seule) :
- *   select() → prepare() → map() par ligne → validate() → finalize() → complétude
+ * Pipeline pur, sans I/O disque ni HTTP :
+ *   select() → prepare() → map() par ligne → validate() → finalize()
  *
  * Le runner ne connaît aucune entité en dur : c'est la spec qui porte le savoir.
  */
-import { checkCompleteness, type CompletenessReport } from './diff';
 import type { ExtractorSpec } from './spec';
 import { validate, type Issue } from './validate';
 
@@ -19,8 +17,6 @@ export interface ExtractResult<TOut> {
   extra?: Record<string, unknown>;
   /** Écarts de schéma (chemin préfixé par la clé d'entité). Vide = conforme. */
   issues: Issue[];
-  /** Rapport de complétude vs oracle, si la spec déclare une couverture. */
-  completeness?: CompletenessReport;
 }
 
 export function runSpec<TOut, TAux>(spec: ExtractorSpec<TOut, TAux>): ExtractResult<TOut> {
@@ -41,7 +37,6 @@ export function runSpec<TOut, TAux>(spec: ExtractorSpec<TOut, TAux>): ExtractRes
   const result: ExtractResult<TOut> = { id: spec.id, items, issues };
 
   if (spec.finalize) result.extra = spec.finalize(Object.values(items), aux);
-  if (spec.coverage) result.completeness = checkCompleteness(Object.keys(items), spec.coverage);
 
   return result;
 }

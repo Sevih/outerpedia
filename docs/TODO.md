@@ -29,10 +29,14 @@
       `datagen:coherence`. Toutes les pages extracteur (persos, effets, EE, armes,
       amulettes, armures, talismans, sets) tournent sur le moteur `review` (diff
       jeu↔site new/diff/typo + « corriger les typos »), sidebars sans colonne
-      `v2≠`, badges du menu sur les buckets review. RESTE : (1) supprimer
-      `data/legacy/` (248 fichiers) — encore lu par les specs datagen (oracle de
-      couverture) + outils d'import one-shot, à déposer séparément ; (2) le regen
-      coupons/banner reste (EXCEPTION jusqu'à bascule prod).
+      `v2≠`, badges du menu sur les buckets review.
+      ✅ FAIT (18/07) : `data/legacy/` (249 fichiers) SUPPRIMÉ. Coupé : outils
+      d'import one-shot (`import-equipment`, `import-gear-reco`, `seedFromLegacy`/
+      `seed-curated`), oracle de couverture (`core/spec`+`core/diff`, bloc
+      `coverage:`, CLI `extract-entity`), replis runtime (pros-cons legacy = code
+      mort ; icônes d'effets rapatriées dans `data/editorial/effect-icons.json`).
+      Vérifié : glossaire d'effets identique sans legacy, 351 tests.
+      RESTE : le regen coupons/banner (EXCEPTION jusqu'à bascule prod).
 - [ ] **Retravailler le rôle des Extractors/Editors du panneau admin** (corollaire
       du point précédent — demande Sevih 2026-07-16) : certaines pages Extractor
       n'existent que pour la comparaison V2. Quand la comp V2 saute, redéfinir la

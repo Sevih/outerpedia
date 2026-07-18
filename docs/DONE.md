@@ -6,6 +6,24 @@
 
 ## 2026-07-18
 
+- **`data/legacy/` SUPPRIMÉ (249 fichiers) — l'oracle V2 déposé** (fin du PRIO #1).
+  Trois familles de lecteurs coupées : (1) OUTILS ONE-SHOT obsolètes (migration
+  finie) — `import-equipment`, `import-gear-reco`, `seedFromLegacy` +
+  `datagen/curated/seed.ts`, scripts `datagen:seed-curated`/`extract-entity`.
+  (2) ORACLE DE COUVERTURE (« qu'a-t-on zappé vs V2 ? ») — `core/diff.ts`,
+  `extractor/run.ts`, `specs/index.ts` supprimés ; `coverage`/`FieldStatus`/
+  `CoverageSpec` retirés de `core/spec.ts` + `core/runner.ts`, bloc `coverage:`
+  de `specs/character.ts` retiré (le moteur `runSpec` et `characterSpec` RESTENT :
+  `buildCharacters` s'en sert). (3) REPLIS RUNTIME — pros-cons legacy était du
+  CODE MORT (keyé par slug, appelé par id V3 ; les 46 persos 100 % en curé) →
+  repli retiré de `pros-cons.ts` + scan legacy de `tag-control.ts` ; icônes
+  d'effets (105/193 effets sans icône de jeu) RAPATRIÉES du glossaire V2 vers
+  `data/editorial/effect-icons.json` (versionné V3), `datagen/lib/effects.ts`
+  repointé. Vérifié : `buildEffectGlossary()` produit un glossaire d'effets
+  BYTE-IDENTIQUE au committé, legacy absent (l'éditorial couvre tout) ; typecheck
+  - lint + 351 tests OK. RESTE hors legacy : le regen coupons/banner (EXCEPTION
+    jusqu'à bascule prod, cf. TODO).
+
 - **CSP resserrée : `unsafe-eval` retiré du script-src en PROD** — il n'est
   requis QU'EN DEV (le HMR / React Fast Refresh de Next s'appuie sur eval) ; un
   build de prod n'en a pas besoin. `script-src` construit dynamiquement :

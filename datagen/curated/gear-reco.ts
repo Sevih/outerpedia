@@ -1,7 +1,7 @@
 /**
  * Couche CURÉE — recommandations d'équipement (gear reco).
  *
- * REFONTE du legacy `data/legacy/reco/*` (écrit main, référencé par noms EN) :
+ * Format V3, refonte de l'ancien reco V2 (écrit main, référencé par noms EN) :
  *   - les équipements sont référencés par ID V3 (`data/generated/equipment/*`),
  *     plus de correspondance par nom d'affichage fragile ;
  *   - les presets partagés vivent dans `data/curated/gear-presets.json` et se

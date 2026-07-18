@@ -1,7 +1,6 @@
 /**
  * Lecture des EFFETS : glossaire extrait (`data/generated`) + overrides curés
- * (`data/curated/effects.json`) fusionnés, + référence V2 (oracle legacy) pour
- * comparaison dans l'admin.
+ * (`data/curated/effects.json`) fusionnés.
  *
  * Le curé est lu au système de fichiers (pas un import figé) pour que l'admin
  * voie ses écritures immédiatement (en dev, Next invalide le module à la
