@@ -481,7 +481,12 @@ export const ENTRIES: GuideEntry[] = [
     source: 'auto',
     category: 'base',
     contentType: 'AGIT_CUSTOM_CRAFT',
-    // lockScreenName via l'override SYS_CRAFT_DETAILS_TITLE du générateur
+    // Nom du mode = CHOIX ÉDITORIAL, pas une correction de donnée : le jeu
+    // hésite entre « Precise Craft » (SYS_CRAFT_DETAILS_TITLE) et « Precision
+    // Crafting » (l'écran de lock) ; tout le site dit « Precise Craft »
+    // (beginner-faq, labels progress.preciseCraft), on s'y aligne ici plutôt
+    // que via une exception du générateur (qui, lui, ne fait que de la donnée).
+    modeName: { en: 'Precise Craft', jp: '精密作成', kr: '정밀 제작', zh: '精密制作' },
     description: {
       en: 'Craft equipment and reroll substats until satisfied',
       jp: '装備を作成し、満足するまでサブステータスをリロール',

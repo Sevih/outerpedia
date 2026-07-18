@@ -301,8 +301,6 @@ Règle permanente : chaque `meta.bossId` d'un guide porté doit exister dans
 
 - [ ] Icône `bosses.ts` (`MT_` baké) vs spec monstre (id brut) — unifier impose
       une régénération de `bosses.json` + revue des consommateurs.
-- [ ] `LOCK_SCREEN_OVERRIDES` (unlock-content.ts) : trier vrai-override vs motif
-      dérivable.
 - [ ] `CHASE_TITLE_KEY` (sources.ts:37) reste en dur : le résolveur donnerait
       `SYS_IRR_CHASE_NAME_01` ≠ choix éditorial `SYS_IRREGULAR_EXTERMINATION`
       → assumer en curation mode-titles, ou garder tel quel.

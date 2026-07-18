@@ -50,25 +50,36 @@ export interface UnlockContentData {
 }
 
 /**
- * Overrides de clé TextSystem pour le nom lock-screen : par défaut on lit
- * `SYS_CONTENS_LOCK_<CT>`, mais quelques ContentTypes n'ont pas cette entrée
- * ou pointent un libellé PÉRIMÉ (ancien nom du mode). Corrections de source de
- * données — pas de l'éditorial (qui vit dans le guide).
+ * Overrides de clé TextSystem pour le nom lock-screen. Le nom PRIMAIRE est lu
+ * par CONVENTION à `SYS_CONTENS_LOCK_<CT>` — une convention qui ROUILLE : elle
+ * garde l'ancien libellé à chaque renommage de mode. Ces overrides ne corrigent
+ * QUE de la donnée périmée ou absente ; les choix ÉDITORIAUX (un nom valide
+ * préféré à un autre) vivent dans le guide (`notes.ts`, champ `modeName`), pas
+ * ici — c'est pourquoi AGIT_CUSTOM_CRAFT n'y est plus (« Precise Craft » y est
+ * un alignement de site, la convention donne « Precision Crafting », les deux
+ * sont valides et à jour).
+ *
+ * Deux familles :
+ *  1. Pas d'entrée `SYS_CONTENS_LOCK_*` exploitable → clé de titre dédiée.
+ *  2. Convention PÉRIMÉE (ancien nom) → clé du nom actuel.
+ * Les deux IRREGULAR_* sont un cas limite : la convention donne DÉJÀ le bon
+ * texte, on épingle juste la clé source explicitement (retirer la ligne ne
+ * changerait rien à la sortie — gardé pour la lisibilité, deux modes distincts).
  */
 const LOCK_SCREEN_OVERRIDES: Record<string, string> = {
-  // Pas d'entrée SYS_CONTENS_LOCK_* ; clés de titre dédiées.
-  SINGULARITY: 'SYS_SINGULARITY_MAIN_TITLE',
-  CHARACTER_FUSION: 'SYS_CHARACTER_FUSION_TITLE',
-  // SYS_CONTENS_LOCK_* périmé / faux / plus rare en jeu — la clé actuelle :
+  // 1. Pas d'entrée SYS_CONTENS_LOCK_* exploitable — clés de titre dédiées.
+  SINGULARITY: 'SYS_SINGULARITY_MAIN_TITLE', // convention absente, TextID vide
+  CHARACTER_FUSION: 'SYS_CHARACTER_FUSION_TITLE', // convention absente, TextID = clé morte
+  // 2. Convention SYS_CONTENS_LOCK_* PÉRIMÉE — clé du nom actuel :
   PVE_EXP_DUNGEON: 'SYS_GOLD_DUNGEON', // « Bandit Pursuit » → « Hypnotic Frog Hall »
-  PVE_REMAINS: 'SYS_SHORTCUT_REMAINS_TYPE_01',
-  PVE_REMAINS_LOOP: 'SYS_SHORTCUT_REMAINS_TYPE_02',
-  PVE_EXPLORATION: 'SYS_RUIN_ISLAND', // → « Terminus Isle »
-  PIECE_DUNGEON: 'SYS_PIECE_DUNGEON',
-  IRREGULAR_INFILTRATE: 'SYS_IRR_INFILTREATE_NAME_01',
-  IRREGULAR_CHASE: 'SYS_IRR_CHASE_NAME_01',
-  AGIT_CUSTOM_CRAFT: 'SYS_CRAFT_DETAILS_TITLE', // → « Precise Craft »
-  EVENT_DUNGEON: 'SYS_MENU_EVENT_DUNGEON', // « Event Story » → « Event Dungeon »
+  PVE_REMAINS: 'SYS_SHORTCUT_REMAINS_TYPE_01', // « Demon King's Ruins » → « Archdemon's Ruins: The Deeps »
+  PVE_REMAINS_LOOP: 'SYS_SHORTCUT_REMAINS_TYPE_02', // « Endless Corridor » → …: The Infinite Corridor » (= TextID de la ligne)
+  PVE_EXPLORATION: 'SYS_RUIN_ISLAND', // « Isle of Ruin Exploration » → « Terminus Isle » (TextID a le suffixe « Exploration »)
+  PIECE_DUNGEON: 'SYS_PIECE_DUNGEON', // « Doppelgänger Hunt » → « Defeat the Doppelgänger » (= TextID de la ligne)
+  EVENT_DUNGEON: 'SYS_MENU_EVENT_DUNGEON', // « Event Story » → « Event Dungeon » (TextID vaut « Survey Hub »)
+  // Épinglage explicite (la convention donne déjà le même texte) :
+  IRREGULAR_INFILTRATE: 'SYS_IRR_INFILTREATE_NAME_01', // « Infiltration Operation »
+  IRREGULAR_CHASE: 'SYS_IRR_CHASE_NAME_01', // « Pursuit Operation »
 };
 
 /** Dict tout-vide → undefined (donnée absente, pas une valeur). */

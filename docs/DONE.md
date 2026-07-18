@@ -6,6 +6,20 @@
 
 ## 2026-07-18
 
+- **`LOCK_SCREEN_OVERRIDES` trié (unlock-content.ts)** — les 11 overrides
+  passés au crible (override forcé vs convention `SYS_CONTENS_LOCK_<CT>` vs
+  `TextID` de la ligne vs nom du donjon). Constat de fond : le nom primaire est
+  bâti sur une CONVENTION qui rouille (6 valeurs conventionnelles périmées), les
+  overrides sont des rustines par-dessus. Tri : 7 vraies corrections (donnée
+  absente/périmée, gardées), 2 « épinglage explicite » IRREGULAR_INFILTRATE /
+  IRREGULAR_CHASE (la convention donne déjà le même texte — gardées, documentées
+  comme telles), 2 alignées sur le `TextID` de la ligne (PVE_REMAINS_LOOP,
+  PIECE_DUNGEON — annotées). AGIT_CUSTOM_CRAFT n'était PAS une correction mais un
+  choix éditorial (« Precise Craft », terme du site entier, vs « Precision
+  Crafting » de la convention, les deux valides/à jour) : sorti du générateur
+  (qui ne fait que de la donnée) et déplacé en `modeName` éditorial dans
+  `notes.ts` où il a sa place. Rendu visible du guide INCHANGÉ (« Precise
+  Craft » via l'éditorial), commentaire de tête du générateur reformulé.
 - **Panneau admin : matrice repensée + moteur de diff jeu↔site généralisé**
   (PRIO Sevih, 1re moitié). Le panneau d'accueil (`/admin`) ne compare plus la
   V2 : chaque entité montre le diff **committé (`data/generated`) vs extraction
