@@ -362,7 +362,7 @@ function SetEffectLines({ eff, labels }: { eff: GearSetEffect; labels: GearRecoL
 }
 
 /** Barre de priorité des substats (portage V2 SubstatPrioBar). */
-function SubstatPrioBar({ prio }: { prio: string }) {
+export function SubstatPrioBar({ prio }: { prio: string }) {
   const tiers: { stats: string[]; filled: number }[] = [];
   let level = 0;
   for (const token of prio.split('>')) {

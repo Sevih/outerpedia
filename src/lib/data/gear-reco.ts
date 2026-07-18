@@ -272,8 +272,19 @@ function setBonus(entry: SetEntry, piece: '2p' | '4p', lang: Lang): string | und
 export function getCharacterGearReco(charId: string, lang: Lang): ResolvedBuild[] | null {
   const builds = loadGearReco()[charId];
   if (!builds?.length) return null;
-  const presets = loadGearPresets();
+  return resolveGearBuilds(builds, loadGearPresets(), lang);
+}
 
+/**
+ * Matérialise une liste de builds BRUTS (presets `$` résolus, équipements +
+ * sets + passifs) — même sortie que la fiche perso. Séparé de la lecture disque
+ * pour que l'aperçu admin puisse résoudre l'état EN COURS d'édition.
+ */
+export function resolveGearBuilds(
+  builds: GearBuild[],
+  presets: GearPresets,
+  lang: Lang,
+): ResolvedBuild[] {
   const setViews = new Map(getSetViews(lang).map((v) => [v.id, v]));
 
   return builds.map((b): ResolvedBuild => {

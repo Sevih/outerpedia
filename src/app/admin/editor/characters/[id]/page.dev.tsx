@@ -13,6 +13,7 @@ import { GearRecoEditor, type GearRecoOptions } from '@/components/admin/GearRec
 import { isDebuffEffect, type ClientEffect } from '@/components/character/EffectChips';
 import { gearSelectOptions } from '@/lib/admin/gear-options';
 import { loadGearReco, loadGearPresets } from '@/lib/data/gear-reco';
+import { expandBuild } from '@/lib/admin/gear-preset-resolve';
 import { characterDisplayName } from '@/lib/data/characters';
 import { getCharacterCurated } from '@/lib/data/curated';
 import { getMergedEffects } from '@/lib/data/effects';
@@ -68,7 +69,8 @@ export default async function EditorCharacterDetail({
     },
     setPresetIcons,
   };
-  const gearInitial = loadGearReco()[id] ?? [];
+  // Presets DÉPLIÉS → l'éditeur travaille en pièces (recompressé au save).
+  const gearInitial = (loadGearReco()[id] ?? []).map((b) => expandBuild(b, presets));
 
   // --- Câblage des chips (curé) : cartes + chips AUTO (règles pures = curation
   // vide) résolues comme le rendu, curation actuelle filtrée sur ce perso. -----
@@ -168,6 +170,7 @@ export default async function EditorCharacterDetail({
       {/* Recos d'équipement (format curé, sélecteurs par id) */}
       <GearRecoEditor
         charId={id}
+        charClass={char.class}
         initial={gearInitial}
         options={gearOptions}
         refs={buildInlineRefs()}

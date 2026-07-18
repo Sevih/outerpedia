@@ -1,13 +1,33 @@
-/* eslint-disable @next/next/no-img-element -- sprites dev (aperçu éditeur) */
 'use client';
 
-import { useState } from 'react';
+/**
+ * Éditeur des recos d'équipement d'un perso — SURFACE UNIFIÉE : le rendu est le
+ * VRAI `GearRecoSection` (tuiles 6★, onglets), et chaque tuile est cliquable pour
+ * ouvrir son éditeur inline. On travaille en PIÈCES (presets dépliés côté page,
+ * recompressés côté save) → mapping 1:1 tuile ↔ pick. La résolution (icônes,
+ * noms) vient d'une server action debouncée ; l'édition mute le brut.
+ */
+import { useEffect, useMemo, useState } from 'react';
 import type { GearBuild, GearPick, SetCombo } from '@contracts';
 import type { GearOption } from '@/lib/admin/gear-options';
 import { postJson } from '@/lib/admin/post-json';
 import { type Keyed, rowKey, stripKey, withKey } from '@/lib/admin/keyed';
 import { InlineTextField } from '@/components/admin/InlineTextField';
+import {
+  SlotCard,
+  Row,
+  ItemRow,
+  SubstatPrioBar,
+  type GearItem,
+} from '@/components/character/GearRecoSection';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
+import { autoTranslate } from '@/lib/admin/translate-actions';
+import {
+  previewGearReco,
+  listImportableBuilds,
+  type PreviewBuild,
+  type ImportableChar,
+} from '@/lib/admin/gear-preview-actions';
 
 const NOTE_LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
 type NoteLang = (typeof NOTE_LANGS)[number];
@@ -17,98 +37,41 @@ const field =
 const label = 'text-xs font-semibold uppercase tracking-wide text-content-subtle';
 const btn = 'rounded border border-line px-2 py-0.5 text-xs text-content-subtle hover:text-content';
 
-const sprite = (name: string) => `/api/admin/sprite/${encodeURIComponent(name)}`;
-
-/**
- * Aperçu « à vue » de l'item sélectionné : sprite du jeu, badge `$` pour un
- * preset, ⚠ pour un id irrésolu, sinon un carré vide (rien de sélectionné).
- */
-function IconChip({ id, options }: { id: string; options: GearOption[] }) {
-  const box = 'h-8 w-8 shrink-0 rounded';
-  if (id.startsWith('$'))
-    return (
-      <span
-        className={`${box} bg-surface-raised text-content-subtle flex items-center justify-center text-xs font-semibold`}
-      >
-        $
-      </span>
-    );
-  if (id.startsWith('!'))
-    return (
-      <span
-        className={`${box} text-danger flex items-center justify-center text-xs`}
-        title={id.slice(1)}
-      >
-        ⚠
-      </span>
-    );
-  const icon = id ? options.find((o) => o.id === id)?.icon : undefined;
-  if (!icon)
-    return (
-      <span className={`${box} bg-surface-raised/40 border-line-subtle border border-dashed`} />
-    );
-  return <img src={sprite(icon)} alt="" className={`${box} object-contain`} />;
-}
-
-/** Aperçu des sets d'un preset (une icône par set du combo). */
-function SetPresetIcons({ icons }: { icons?: string[] }) {
-  if (!icons?.length)
-    return (
-      <span className="bg-surface-raised/40 border-line-subtle h-8 w-8 shrink-0 rounded border border-dashed" />
-    );
-  return (
-    <span className="flex shrink-0 items-center gap-0.5">
-      {icons.map((icon, i) => (
-        <img key={i} src={sprite(icon)} alt="" className="h-8 w-8 object-contain" />
-      ))}
-    </span>
-  );
-}
-
 /** Options des sélecteurs (générées serveur : plus de fautes de frappe possibles). */
 export interface GearRecoOptions {
   weapons: GearOption[];
   amulets: GearOption[];
   talismans: GearOption[];
   sets: GearOption[];
-  /** Talismans avec leur CONTENU (pour convertir une saisie manuelle en preset). */
+  /** Contenu des presets (dépliage déjà fait côté page ; ici pour info/labels). */
   presets: { talismans: Record<string, string[]>; sets: string[]; substats: string[] };
-  /** Icônes des sets composant chaque preset de sets (aperçu « à vue »). */
   setPresetIcons?: Record<string, string[]>;
 }
 
-/** Si la liste manuelle d'ids égale un preset (même multiset), le référence. */
-function toTalismanPreset(ids: string[], presets: Record<string, string[]>): string[] {
-  if (!ids.length || ids.some((tl) => tl.startsWith('$'))) return ids;
-  const key = [...ids].sort().join('|');
-  for (const [slug, pIds] of Object.entries(presets)) {
-    if ([...pIds].sort().join('|') === key) return [`$${slug}`];
-  }
-  return ids;
-}
-
 type Status = { kind: 'idle' | 'ok' | 'err'; msg?: string };
+type EditKey = { slot: 'weapons' | 'amulets' | 'talismans'; index: number } | null;
 
+/** Select d'un équipement (option filtrée + valeur hors-classe réinjectée). */
 function ItemSelect({
   value,
   onChange,
   options,
-  presets,
+  allOptions,
 }: {
   value: string;
   onChange: (v: string) => void;
   options: GearOption[];
-  presets?: string[];
+  allOptions?: GearOption[];
 }) {
+  const missing =
+    value && !value.startsWith('!') && !options.some((o) => o.id === value)
+      ? (allOptions ?? options).find((o) => o.id === value)
+      : undefined;
   return (
     <select className={field} value={value} onChange={(e) => onChange(e.target.value)}>
       <option value="">—</option>
       {value.startsWith('!') && <option value={value}>⚠ {value.slice(1)} (irrésolu)</option>}
-      {presets?.map((p) => (
-        <option key={`$${p}`} value={`$${p}`}>
-          $ {p}
-        </option>
-      ))}
+      {missing && <option value={missing.id}>{missing.label} (hors classe)</option>}
       {options.map((o) => (
         <option key={o.id} value={o.id}>
           {o.label}
@@ -118,102 +81,308 @@ function ItemSelect({
   );
 }
 
-/** Éditeur des PICKS d'un slot (arme/amulette) : équipement + main stat. */
-function PickList({
-  title,
-  picks,
+/** Multi-select de main stats (puces) — stocké joint par « / ». */
+function MainStatPicker({
+  value,
+  available,
   onChange,
-  options,
 }: {
-  title: string;
-  picks: GearPick[];
-  onChange: (p: GearPick[]) => void;
-  options: GearOption[];
+  value?: string;
+  available: string[];
+  onChange: (v: string | undefined) => void;
 }) {
+  const selected = value
+    ? value
+        .split('/')
+        .map((s) => s.trim())
+        .filter(Boolean)
+    : [];
+  const set = (next: string[]) => onChange(next.length ? next.join('/') : undefined);
+  const toggle = (s: string) =>
+    set(selected.includes(s) ? selected.filter((x) => x !== s) : [...selected, s]);
+  const extras = selected.filter((s) => !available.includes(s));
+  if (!available.length && !selected.length)
+    return <span className="text-content-subtle px-1 text-[11px]">choisir l’équipement</span>;
   return (
-    <div className="space-y-1">
-      <p className={label}>{title}</p>
-      {picks.map((p, i) => (
-        <div key={i} className="flex items-center gap-1">
-          <IconChip id={p.id} options={options} />
-          <ItemSelect
-            value={p.id}
-            onChange={(id) => onChange(picks.map((x, j) => (j === i ? { ...x, id } : x)))}
-            options={options}
-          />
-          <input
-            className={`${field} w-28`}
-            value={p.mainStat ?? ''}
-            placeholder="main stat"
-            onChange={(e) =>
-              onChange(
-                picks.map((x, j) =>
-                  j === i ? { ...x, mainStat: e.target.value || undefined } : x,
-                ),
-              )
-            }
-          />
-          <button
-            type="button"
-            className={btn}
-            onClick={() => onChange(picks.filter((_, j) => j !== i))}
-          >
-            ✕
-          </button>
-        </div>
+    <div className="flex flex-wrap items-center gap-1">
+      {available.map((s) => (
+        <button
+          key={s}
+          type="button"
+          onClick={() => toggle(s)}
+          className={`rounded border px-1.5 py-0.5 text-[11px] ${
+            selected.includes(s)
+              ? 'border-accent text-accent'
+              : 'border-line-subtle text-content-subtle hover:text-content'
+          }`}
+        >
+          {s}
+        </button>
       ))}
-      <button type="button" className={btn} onClick={() => onChange([...picks, { id: '' }])}>
-        + ajouter
-      </button>
+      {extras.map((s) => (
+        <button
+          key={s}
+          type="button"
+          onClick={() => toggle(s)}
+          title="Valeur hors pool — cliquer pour retirer"
+          className="border-danger/50 text-danger rounded border px-1.5 py-0.5 text-[11px]"
+        >
+          {s} ✕
+        </button>
+      ))}
     </div>
   );
 }
 
-/**
- * Éditeur des recos d'équipement d'un perso (NOUVEAU format curé) :
- * builds nommés, équipements choisis par SÉLECTEUR (ids V3), presets `$slug`,
- * substats (`$preset` ou chaîne « ATK>CHC=CHD »), note EN/FR (parse-text).
- * Zéro build + enregistrer = supprime l'entrée du perso.
- */
+/** Tuile placeholder (pick vide / non résolu) — invite à choisir. */
+function EmptyTile({ text = '＋ choisir' }: { text?: string }) {
+  return (
+    <div className="border-line-subtle text-content-subtle flex h-13 items-center gap-2 rounded border border-dashed px-3 text-xs">
+      {text}
+    </div>
+  );
+}
+
 export function GearRecoEditor({
   charId,
+  charClass,
   initial,
   options,
   refs,
 }: {
   charId: string;
+  charClass: string;
   initial: GearBuild[];
   options: GearRecoOptions;
-  /** Refs d'autocomplétion des tags inline de la note. */
   refs: InlineRefs;
 }) {
   const [builds, setBuilds] = useState<Keyed<GearBuild>[]>(() => initial.map(withKey));
+  const [active, setActive] = useState(0);
+  const [editing, setEditing] = useState<EditKey>(null);
   const [noteLang, setNoteLang] = useState<NoteLang>('en');
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
+  const [trans, setTrans] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
+  const [transMsg, setTransMsg] = useState<string | null>(null);
+  const [resolved, setResolved] = useState<{
+    builds: PreviewBuild[];
+    labels: import('@/components/character/GearRecoSection').GearRecoLabels;
+  } | null>(null);
+  const [importOpen, setImportOpen] = useState(false);
+  const [importList, setImportList] = useState<ImportableChar[] | null>(null);
+  const [importChar, setImportChar] = useState('');
 
-  const patch = (i: number, b: Partial<GearBuild>) =>
-    setBuilds((all) => all.map((x, j) => (j === i ? { ...x, ...b } : x)));
+  const inClass = (o: GearOption) => !o.classLimits?.length || o.classLimits.includes(charClass);
+  const weaponOpts = options.weapons.filter(inClass);
+  const amuletOpts = options.amulets.filter(inClass);
+  const mainStatsOf = (all: GearOption[], id: string) =>
+    all.find((o) => o.id === id)?.mainStats ?? [];
+
+  const ai = Math.min(active, Math.max(0, builds.length - 1));
+  const patch = (b: Partial<GearBuild>) =>
+    setBuilds((all) => all.map((x, j) => (j === ai ? { ...x, ...b } : x)));
+
+  // Brut aligné pour la RÉSOLUTION (pas de filtrage → indices 1:1 avec les tuiles).
+  const forPreview = useMemo<GearBuild[]>(() => builds.map((b) => stripKey(b)), [builds]);
+  // Brut nettoyé pour l'ENREGISTREMENT (picks vides et combos vides écartés).
+  const forSave = useMemo<GearBuild[]>(
+    () =>
+      builds.map((b) => ({
+        ...stripKey(b),
+        weapons: b.weapons?.filter((p) => p.id),
+        amulets: b.amulets?.filter((p) => p.id),
+        talismans: b.talismans?.filter(Boolean),
+        sets: b.sets?.filter((c) => c.preset || c.pieces?.length),
+      })),
+    [builds],
+  );
+
+  // Résolution debouncée (icônes/noms via la vraie donnée) pour l'affichage.
+  useEffect(() => {
+    let cancelled = false;
+    const h = setTimeout(async () => {
+      try {
+        const res = await previewGearReco(forPreview, noteLang);
+        if (!cancelled) setResolved(res);
+      } catch {
+        /* silencieux */
+      }
+    }, 250);
+    return () => {
+      cancelled = true;
+      clearTimeout(h);
+    };
+  }, [forPreview, noteLang]);
+
+  const build = builds[ai] as Keyed<GearBuild> | undefined;
+  const rb = resolved?.builds[ai];
+  const labels = resolved?.labels;
+  const srcLabel = { source: labels?.source ?? '' };
+  const resItem = (slot: 'weapons' | 'amulets' | 'talismans', i: number): GearItem | undefined =>
+    rb?.[slot]?.[i];
+
+  // --- Mutations d'un slot de picks (armes/amulettes) --------------------------
+  const setPicks = (slot: 'weapons' | 'amulets', next: GearPick[]) => patch({ [slot]: next });
+  const setTalismans = (next: string[]) => patch({ talismans: next });
+  const setSets = (next: SetCombo[]) => patch({ sets: next });
+
+  const isEditing = (
+    slot: EditKey extends null ? never : NonNullable<EditKey>['slot'],
+    i: number,
+  ) => editing?.slot === slot && editing.index === i;
+  const toggleEdit = (slot: NonNullable<EditKey>['slot'], i: number) =>
+    setEditing((cur) => (cur && cur.slot === slot && cur.index === i ? null : { slot, index: i }));
+
+  // --- Import ------------------------------------------------------------------
+  async function openImport() {
+    setImportOpen(true);
+    if (!importList) {
+      try {
+        setImportList(await listImportableBuilds(charId));
+      } catch {
+        setImportList([]);
+      }
+    }
+  }
+  function importBuild(b: GearBuild) {
+    setBuilds((all) => [...all, withKey(structuredClone(b))]);
+    setActive(builds.length);
+    setImportOpen(false);
+  }
+
+  // --- Traduction des notes ----------------------------------------------------
+  async function translateNotes() {
+    setTrans('loading');
+    setTransMsg(null);
+    const tgt = NOTE_LANGS.filter((l) => l !== 'en');
+    const jobs: { i: number; en: string }[] = [];
+    builds.forEach((b, i) => b.note?.en?.trim() && jobs.push({ i, en: b.note.en }));
+    if (!jobs.length) {
+      setTrans('done');
+      setTransMsg('Rien à traduire (aucune note EN).');
+      return;
+    }
+    try {
+      const { results, provider } = await autoTranslate(
+        jobs.map((j) => j.en),
+        tgt,
+      );
+      const next = builds.slice();
+      let filled = 0;
+      jobs.forEach((job, k) => {
+        const tr = results[k] ?? {};
+        const note: NonNullable<GearBuild['note']> = { ...(next[job.i].note ?? {}) };
+        for (const l of tgt) {
+          if (tr[l] && !note[l]?.trim()) {
+            note[l] = tr[l];
+            filled++;
+          }
+        }
+        next[job.i] = { ...next[job.i], note };
+      });
+      setBuilds(next);
+      setTrans('done');
+      setTransMsg(
+        filled
+          ? `${filled} note(s) via ${provider === 'haiku' ? 'Haiku (quota DeepL atteint)' : 'DeepL'} — à revoir.`
+          : 'Notes déjà remplies.',
+      );
+    } catch (e) {
+      setTrans('error');
+      setTransMsg((e as Error).message);
+    }
+  }
 
   async function save() {
     setStatus({ kind: 'idle' });
-    // Nettoyage : picks sans id et combos vides écartés ; une liste manuelle de
-    // talismans identique à un preset est convertie en `$preset`.
-    const clean = builds.map((b) => ({
-      // `_key` est présentationnel : retiré avant sérialisation (spread `...b`).
-      ...stripKey(b),
-      weapons: b.weapons?.filter((p) => p.id),
-      amulets: b.amulets?.filter((p) => p.id),
-      talismans: b.talismans
-        ? toTalismanPreset(b.talismans.filter(Boolean), options.presets.talismans)
-        : undefined,
-      sets: b.sets?.filter((c) => c.preset || c.pieces?.length),
-    }));
     try {
-      await postJson(`/api/admin/curated/gear-reco/${charId}`, clean);
+      await postJson(`/api/admin/curated/gear-reco/${charId}`, forSave);
       setStatus({ kind: 'ok', msg: 'Enregistré' });
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });
     }
+  }
+
+  // --- Rendu d'un slot de picks (armes/amulettes) ------------------------------
+  function pickSlot(
+    slot: 'weapons' | 'amulets',
+    title: string,
+    picks: GearPick[],
+    opts: GearOption[],
+    allOpts: GearOption[],
+  ) {
+    return (
+      <SlotCard label={title}>
+        {picks.map((p, i) => {
+          const it = resItem(slot, i);
+          return (
+            <Row key={i}>
+              <div className="flex items-start gap-1">
+                <button
+                  type="button"
+                  onClick={() => toggleEdit(slot, i)}
+                  className="flex-1 cursor-pointer text-left"
+                >
+                  {p.id && it && !it.unresolved ? (
+                    <ItemRow item={it} labels={srcLabel} />
+                  ) : (
+                    <EmptyTile />
+                  )}
+                </button>
+                <button
+                  type="button"
+                  className={`${btn} text-danger`}
+                  title="Retirer"
+                  onClick={() => {
+                    setPicks(
+                      slot,
+                      picks.filter((_, j) => j !== i),
+                    );
+                    setEditing(null);
+                  }}
+                >
+                  ✕
+                </button>
+              </div>
+              {isEditing(slot, i) && (
+                <div className="border-line-subtle mt-2 space-y-2 rounded border p-2">
+                  <ItemSelect
+                    value={p.id}
+                    onChange={(id) =>
+                      setPicks(
+                        slot,
+                        picks.map((x, j) => (j === i ? { ...x, id } : x)),
+                      )
+                    }
+                    options={opts}
+                    allOptions={allOpts}
+                  />
+                  <MainStatPicker
+                    value={p.mainStat}
+                    available={mainStatsOf(allOpts, p.id)}
+                    onChange={(mainStat) =>
+                      setPicks(
+                        slot,
+                        picks.map((x, j) => (j === i ? { ...x, mainStat } : x)),
+                      )
+                    }
+                  />
+                </div>
+              )}
+            </Row>
+          );
+        })}
+        <button
+          type="button"
+          className={`${btn} mt-1`}
+          onClick={() => {
+            setPicks(slot, [...picks, { id: '' }]);
+            setEditing({ slot, index: picks.length });
+          }}
+        >
+          ＋ ajouter
+        </button>
+      </SlotCard>
+    );
   }
 
   return (
@@ -222,24 +391,97 @@ export function GearRecoEditor({
         Équipement recommandé (curé)
       </h2>
 
-      {builds.map((b, i) => (
-        <div key={b._key} className="border-line-subtle space-y-3 rounded-lg border p-3">
+      {/* Onglets de builds + actions */}
+      <div className="flex flex-wrap items-center gap-2">
+        <div className="border-line flex flex-wrap gap-1 rounded-lg border p-1">
+          {builds.map((b, i) => (
+            <button
+              key={b._key}
+              type="button"
+              onClick={() => {
+                setActive(i);
+                setEditing(null);
+              }}
+              className={`rounded-md px-3 py-1 text-sm ${
+                i === ai
+                  ? 'bg-accent/20 text-accent font-semibold'
+                  : 'text-content-muted hover:bg-surface-overlay'
+              }`}
+            >
+              {b.name || `Build ${i + 1}`}
+            </button>
+          ))}
+        </div>
+        <button
+          type="button"
+          className={btn}
+          onClick={() => {
+            setBuilds((all) => [...all, withKey({ name: `Build ${all.length + 1}` })]);
+            setActive(builds.length);
+          }}
+        >
+          ＋ build
+        </button>
+        <button type="button" className={btn} onClick={openImport}>
+          Importer…
+        </button>
+      </div>
+
+      {/* Popover d'import */}
+      {importOpen && (
+        <div className="border-line bg-surface-raised space-y-2 rounded-md border p-3">
           <div className="flex items-center gap-2">
+            <select
+              className={`${field} max-w-60`}
+              value={importChar}
+              onChange={(e) => setImportChar(e.target.value)}
+            >
+              <option value="">{importList ? 'Choisir un perso…' : 'Chargement…'}</option>
+              {importList?.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+            <button type="button" className={btn} onClick={() => setImportOpen(false)}>
+              Fermer
+            </button>
+          </div>
+          {importChar &&
+            importList
+              ?.find((c) => c.id === importChar)
+              ?.builds.map((b, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="text-content text-sm">{b.name || `Build ${i + 1}`}</span>
+                  <button type="button" className={btn} onClick={() => importBuild(b)}>
+                    Importer ce build
+                  </button>
+                </div>
+              ))}
+        </div>
+      )}
+
+      {!build ? (
+        <p className="text-content-subtle text-sm">Aucun build. Ajoute-en un.</p>
+      ) : (
+        <div className="border-line-subtle space-y-4 rounded-lg border p-3">
+          {/* Nom + actions du build actif */}
+          <div className="flex flex-wrap items-center gap-2">
             <input
               className={`${field} max-w-60 font-semibold`}
-              value={b.name}
+              value={build.name}
               placeholder="Nom du build (Speed, PvP…)"
-              onChange={(e) => patch(i, { name: e.target.value })}
+              onChange={(e) => patch({ name: e.target.value })}
             />
             <button
               type="button"
               className={btn}
               onClick={() =>
                 setBuilds((all) => {
-                  const copy = structuredClone(all[i]);
+                  const copy = structuredClone(all[ai]);
                   copy.name = `${copy.name} (copie)`;
-                  copy._key = rowKey(); // clé neuve — sinon collision avec l'original
-                  return [...all.slice(0, i + 1), copy, ...all.slice(i + 1)];
+                  copy._key = rowKey();
+                  return [...all.slice(0, ai + 1), copy, ...all.slice(ai + 1)];
                 })
               }
             >
@@ -247,155 +489,242 @@ export function GearRecoEditor({
             </button>
             <button
               type="button"
-              className={btn}
-              onClick={() => setBuilds((all) => all.filter((_, j) => j !== i))}
+              className={`${btn} text-danger`}
+              onClick={() => {
+                setBuilds((all) => all.filter((_, j) => j !== ai));
+                setActive(0);
+                setEditing(null);
+              }}
             >
               Supprimer le build
             </button>
           </div>
 
-          <div className="grid gap-3 lg:grid-cols-2">
-            <PickList
-              title="Armes"
-              picks={b.weapons ?? []}
-              onChange={(weapons) => patch(i, { weapons })}
-              options={options.weapons}
-            />
-            <PickList
-              title="Amulettes"
-              picks={b.amulets ?? []}
-              onChange={(amulets) => patch(i, { amulets })}
-              options={options.amulets}
-            />
+          {/* Grille de slots — tuiles cliquables */}
+          <div className="grid gap-3 sm:grid-cols-2">
+            {pickSlot('weapons', 'Armes', build.weapons ?? [], weaponOpts, options.weapons)}
+            {pickSlot('amulets', 'Amulettes', build.amulets ?? [], amuletOpts, options.amulets)}
 
-            <div className="space-y-1">
-              <p className={label}>Talismans (ou preset $)</p>
-              {(b.talismans ?? []).map((tl, ti) => (
-                <div key={ti} className="flex items-center gap-1">
-                  <IconChip id={tl} options={options.talismans} />
-                  <ItemSelect
-                    value={tl}
-                    onChange={(v) =>
-                      patch(i, { talismans: b.talismans!.map((x, j) => (j === ti ? v : x)) })
-                    }
-                    options={options.talismans}
-                    presets={Object.keys(options.presets.talismans)}
-                  />
-                  <button
-                    type="button"
-                    className={btn}
-                    onClick={() => patch(i, { talismans: b.talismans!.filter((_, j) => j !== ti) })}
-                  >
-                    ✕
-                  </button>
-                </div>
-              ))}
+            {/* Talismans */}
+            <SlotCard label="Talismans">
+              {(build.talismans ?? []).map((tl, i) => {
+                const it = resItem('talismans', i);
+                return (
+                  <Row key={i}>
+                    <div className="flex items-start gap-1">
+                      <button
+                        type="button"
+                        onClick={() => toggleEdit('talismans', i)}
+                        className="flex-1 cursor-pointer text-left"
+                      >
+                        {tl && it && !it.unresolved ? (
+                          <ItemRow item={it} labels={srcLabel} />
+                        ) : (
+                          <EmptyTile />
+                        )}
+                      </button>
+                      <button
+                        type="button"
+                        className={`${btn} text-danger`}
+                        title="Retirer"
+                        onClick={() => {
+                          setTalismans((build.talismans ?? []).filter((_, j) => j !== i));
+                          setEditing(null);
+                        }}
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    {isEditing('talismans', i) && (
+                      <div className="border-line-subtle mt-2 space-y-2 rounded border p-2">
+                        <ItemSelect
+                          value={tl}
+                          onChange={(v) =>
+                            setTalismans((build.talismans ?? []).map((x, j) => (j === i ? v : x)))
+                          }
+                          options={options.talismans}
+                        />
+                      </div>
+                    )}
+                  </Row>
+                );
+              })}
               <button
                 type="button"
-                className={btn}
-                onClick={() => patch(i, { talismans: [...(b.talismans ?? []), ''] })}
+                className={`${btn} mt-1`}
+                onClick={() => {
+                  setTalismans([...(build.talismans ?? []), '']);
+                  setEditing({ slot: 'talismans', index: (build.talismans ?? []).length });
+                }}
               >
-                + ajouter
+                ＋ ajouter
               </button>
-            </div>
+            </SlotCard>
 
-            <div className="space-y-1">
-              <p className={label}>Combos de sets (preset $ ou pièces)</p>
-              {(b.sets ?? []).map((c, ci) => (
-                <div key={ci} className="flex items-center gap-1">
-                  <SetPresetIcons
-                    icons={c.preset ? options.setPresetIcons?.[c.preset] : undefined}
-                  />
-                  <select
-                    className={`${field} w-32`}
-                    value={c.preset ?? ''}
-                    onChange={(e) =>
-                      patch(i, {
-                        sets: b.sets!.map((x, j): SetCombo =>
-                          j === ci ? { preset: e.target.value || undefined, pieces: x.pieces } : x,
-                        ),
-                      })
-                    }
-                  >
-                    <option value="">preset…</option>
-                    {options.presets.sets.map((p) => (
-                      <option key={p} value={p}>
-                        $ {p}
-                      </option>
+            {/* Sets — combos de pièces {set, count} */}
+            <SlotCard label="Sets" accentBg>
+              {(build.sets ?? []).map((combo, ci) => (
+                <Row key={ci}>
+                  <div className="space-y-1.5">
+                    {(combo.pieces ?? []).map((pc, pi) => (
+                      <div key={pi} className="flex items-center gap-1">
+                        <select
+                          className={field}
+                          value={pc.set}
+                          onChange={(e) =>
+                            setSets(
+                              (build.sets ?? []).map((c, j) =>
+                                j === ci
+                                  ? {
+                                      pieces: (c.pieces ?? []).map((x, k) =>
+                                        k === pi ? { ...x, set: e.target.value } : x,
+                                      ),
+                                    }
+                                  : c,
+                              ),
+                            )
+                          }
+                        >
+                          <option value="">set…</option>
+                          {options.sets.map((o) => (
+                            <option key={o.id} value={o.id}>
+                              {o.label}
+                            </option>
+                          ))}
+                        </select>
+                        <select
+                          className={`${field} w-16`}
+                          value={pc.count}
+                          onChange={(e) =>
+                            setSets(
+                              (build.sets ?? []).map((c, j) =>
+                                j === ci
+                                  ? {
+                                      pieces: (c.pieces ?? []).map((x, k) =>
+                                        k === pi ? { ...x, count: Number(e.target.value) } : x,
+                                      ),
+                                    }
+                                  : c,
+                              ),
+                            )
+                          }
+                        >
+                          {[2, 4].map((n) => (
+                            <option key={n} value={n}>
+                              {n}p
+                            </option>
+                          ))}
+                        </select>
+                        <button
+                          type="button"
+                          className={`${btn} text-danger`}
+                          onClick={() =>
+                            setSets(
+                              (build.sets ?? []).map((c, j) =>
+                                j === ci
+                                  ? { pieces: (c.pieces ?? []).filter((_, k) => k !== pi) }
+                                  : c,
+                              ),
+                            )
+                          }
+                        >
+                          ✕
+                        </button>
+                      </div>
                     ))}
-                  </select>
-                  <button
-                    type="button"
-                    className={btn}
-                    onClick={() => patch(i, { sets: b.sets!.filter((_, j) => j !== ci) })}
-                  >
-                    ✕
-                  </button>
-                </div>
+                    <div className="flex gap-1">
+                      <button
+                        type="button"
+                        className={btn}
+                        onClick={() =>
+                          setSets(
+                            (build.sets ?? []).map((c, j) =>
+                              j === ci
+                                ? { pieces: [...(c.pieces ?? []), { set: '', count: 2 }] }
+                                : c,
+                            ),
+                          )
+                        }
+                      >
+                        ＋ pièce
+                      </button>
+                      <button
+                        type="button"
+                        className={`${btn} text-danger`}
+                        onClick={() => setSets((build.sets ?? []).filter((_, j) => j !== ci))}
+                      >
+                        Retirer le combo
+                      </button>
+                    </div>
+                  </div>
+                </Row>
               ))}
               <button
                 type="button"
-                className={btn}
-                onClick={() => patch(i, { sets: [...(b.sets ?? []), {}] })}
+                className={`${btn} mt-1`}
+                onClick={() =>
+                  setSets([...(build.sets ?? []), { pieces: [{ set: '', count: 2 }] }])
+                }
               >
-                + ajouter
+                ＋ combo
               </button>
-            </div>
+            </SlotCard>
           </div>
 
-          <div className="grid gap-3 lg:grid-cols-2">
-            <div className="space-y-1">
-              <p className={label}>Substats ($preset ou « ATK&gt;CHC=CHD »)</p>
-              <input
-                className={field}
-                list={`substat-presets-${charId}`}
-                value={b.substats ?? ''}
-                onChange={(e) => patch(i, { substats: e.target.value || undefined })}
-              />
-              <datalist id={`substat-presets-${charId}`}>
-                {options.presets.substats.map((p) => (
-                  <option key={p} value={`$${p}`} />
+          {/* Substats */}
+          <div className="space-y-1">
+            <p className={label}>Substats (priorité « ATK&gt;CHC=CHD&gt;SPD »)</p>
+            {build.substats && <SubstatPrioBar prio={build.substats} />}
+            <input
+              className={field}
+              value={build.substats ?? ''}
+              placeholder="ATK>CHC=CHD>SPD"
+              onChange={(e) => patch({ substats: e.target.value || undefined })}
+            />
+          </div>
+
+          {/* Note */}
+          <div className="space-y-1">
+            <div className="flex items-center justify-between">
+              <p className={label}>Note ({noteLang})</p>
+              <div className="border-line flex overflow-hidden rounded-md border">
+                {NOTE_LANGS.map((l) => (
+                  <button
+                    key={l}
+                    type="button"
+                    onClick={() => setNoteLang(l)}
+                    className={`px-2 py-0.5 text-[11px] ${l === noteLang ? 'bg-accent/20 text-accent' : 'text-content-muted hover:bg-surface-overlay'}`}
+                  >
+                    {l}
+                  </button>
                 ))}
-              </datalist>
-            </div>
-            <div className="space-y-1">
-              <div className="flex items-center justify-between">
-                <p className={label}>Note ({noteLang})</p>
-                <div className="border-line flex overflow-hidden rounded-md border">
-                  {NOTE_LANGS.map((l) => (
-                    <button
-                      key={l}
-                      type="button"
-                      onClick={() => setNoteLang(l)}
-                      className={`px-2 py-0.5 text-[11px] ${l === noteLang ? 'bg-accent/20 text-accent' : 'text-content-muted hover:bg-surface-overlay'}`}
-                    >
-                      {l}
-                    </button>
-                  ))}
-                </div>
               </div>
-              <InlineTextField
-                value={b.note?.[noteLang] ?? ''}
-                refs={refs}
-                placeholder={noteLang === 'en' ? '' : (b.note?.en ?? '')}
-                onChange={(v) => {
-                  const note = { ...(b.note ?? {}), [noteLang]: v };
-                  if (!v) delete note[noteLang];
-                  patch(i, { note: Object.keys(note).length ? note : undefined });
-                }}
-              />
             </div>
+            <InlineTextField
+              value={build.note?.[noteLang] ?? ''}
+              refs={refs}
+              lang={noteLang}
+              placeholder={noteLang === 'en' ? '' : (build.note?.en ?? '')}
+              onChange={(v) => {
+                const note = { ...(build.note ?? {}), [noteLang]: v };
+                if (!v) delete note[noteLang];
+                patch({ note: Object.keys(note).length ? note : undefined });
+              }}
+            />
           </div>
         </div>
-      ))}
+      )}
 
-      <div className="flex items-center gap-3">
+      {/* Actions globales */}
+      <div className="flex flex-wrap items-center gap-3">
         <button
           type="button"
           className={btn}
-          onClick={() => setBuilds((all) => [...all, withKey({ name: `Build ${all.length + 1}` })])}
+          onClick={translateNotes}
+          disabled={trans === 'loading'}
+          title="Traduit les notes EN vers les langues encore vides"
         >
-          + Nouveau build
+          {trans === 'loading' ? 'Traduction…' : 'Traduire notes (EN → vides)'}
         </button>
         <button
           type="button"
@@ -404,6 +733,11 @@ export function GearRecoEditor({
         >
           Enregistrer
         </button>
+        {transMsg && (
+          <span className={`text-sm ${trans === 'error' ? 'text-danger' : 'text-content-subtle'}`}>
+            {transMsg}
+          </span>
+        )}
         {status.kind === 'ok' && <span className="text-success text-sm">{status.msg}</span>}
         {status.kind === 'err' && <span className="text-danger text-sm">{status.msg}</span>}
       </div>
