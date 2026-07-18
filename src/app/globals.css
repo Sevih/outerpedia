@@ -96,6 +96,14 @@
   --chain-start: #4ade80;
   --chain-join: #facc15;
   --chain-finish: #f87171;
+  /* Couleur de TEXTE des nœuds de la carte Monad Gate (popups/résumé), PAR
+     RÔLE du nœud — mêmes valeurs V2 que le reste de la palette guides, tokenisées
+     pour sortir les couleurs vives de nodeStyles.ts. Le filtre CSS qui teinte le
+     sprite reste à part (chaîne `filter`, pas un utilitaire de couleur). */
+  --monad-milestone: #facc15; /* jaune — jalons / chemin (start/path…) */
+  --monad-explore: #4ade80; /* vert — exploration bénéfique (relic/moment) */
+  --monad-combat: #f87171; /* rouge — combat (elite/pinnacle/final) */
+  --monad-story: #38bdf8; /* bleu — narratif / spécial (saga/cube) */
   --stat: #fbbf24;
   --highlight: #22d3ee;
   /* Texte « équipement » (noms d'items dans la prose) — teinte V2 exacte. */
@@ -173,6 +181,10 @@
   --color-chain-start: var(--chain-start);
   --color-chain-join: var(--chain-join);
   --color-chain-finish: var(--chain-finish);
+  --color-monad-milestone: var(--monad-milestone);
+  --color-monad-explore: var(--monad-explore);
+  --color-monad-combat: var(--monad-combat);
+  --color-monad-story: var(--monad-story);
   --color-stat: var(--stat);
   --color-highlight: var(--highlight);
   --color-equipment: var(--equipment);
