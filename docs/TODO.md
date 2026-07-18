@@ -48,8 +48,11 @@
       (Lambda intégrable), dev sans auto-promote (intégration = seule porte).
       Modèle acté Sevih : extracteur = data du jeu (inclusion via bouton
       d'intégration par entité) ; éditeur = committé + curé, effectif à chaud.
-      RESTE : intégration par entité pour l'ÉQUIPEMENT (bouton, comme perso/
-      monstre) ; EXTRACTEUR D'ITEMS (à créer) ; éditeurs manquants (Monstre,
+      ✅ FAIT (18/07) : intégration par entité pour l'ÉQUIPEMENT — bouton sur
+      les fiches extracteur (armes/amulettes/talismans/EE/sets) qui merge la
+      famille + ses records partagés (pools/passifs/paliers) + `families.json`
+      et stage les images (`integrateEquipment`, cœur testé).
+      RESTE : EXTRACTEUR D'ITEMS (à créer) ; éditeurs manquants (Monstre,
       gear) ; factos `CharacterSwitch`/`MonsterSwitch`, `CharacterPicker`/
       `ItemPicker` ; fusion `CharactersSidebar`↔`ExtractorSidebar`.
 - [ ] **Éditeur de recos (gear-reco) : rendre l'UI d'édition fidèle au rendu
@@ -121,6 +124,15 @@
 > Les 3 items traités le 18/07 (helper `postJson`, keying stable, `eeReport`
 > O(n)) — cf. DONE.
 
+- [ ] `src/lib/admin/curated-store.ts:25` écrit `data/curated/characters.json`
+      en `JSON.stringify(sorted, null, 2)` au lieu du sérialiseur CANONIQUE
+      (`formatJson` de `datagen/lib/json`) — les tableaux courts (`tags`,
+      `videos`…) s'éclatent en multiligne, donc chaque édition d'un perso via
+      l'admin produit un diff git géant (tout le fichier reformaté) au lieu du
+      seul perso touché. Piège documenté dans l'en-tête de `lib/json.ts`.
+      Passer l'écriture (et son appelant) en async + `formatJson`. Même vérif à
+      faire sur les autres stores d'édition curée (gear-reco, effects…).
+
 ### Datagen — divers
 
 - [ ] `datagen/extractor/specs/character.ts:492` : `ShowMainPage === 'true'`
@@ -146,8 +158,6 @@
       fusion enrage, variantes techniques, immunités), chaque règle justifiée
       par un cas réel en commentaire (Prototype EX-78, Irregular Queen,
       rage_finish orphelins) mais aucune verrouillée.
-- [ ] **`src/lib/combat-power.ts`** : formule reverse-engineered « validée
-      0-diff par le gear-solver » — committer un oracle (5 persos suffisent).
 - [ ] Ensuite : `stats.ts` (STAT_ABBR/statOptionView), `guide-sections.ts`,
       `tower-restrictions.ts`, `game-tokens.ts` (frontières latin/CJK),
       `seo.ts` (`buildUrl` dev/prod/sous-domaines, hreflang), `i18n/index.ts`

@@ -17,3 +17,4 @@ export type {
   ReviewEntityStatus,
   TargetReview,
 } from '@datagen/extractor/review';
+export type { EquipmentEntityKind } from '@datagen/extractor/integrate-equipment';

@@ -4422,6 +4422,25 @@
       }
     ]
   },
+  "2000121": {
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "Zl0nStWT9Ts",
+        "title": "[OUTERPLANE] Heatwave Cop Delta (VA. Risa Mei)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2026-07-13T06:06:18Z"
+      }
+    ],
+    "rank": "S",
+    "rankPvp": "S",
+    "role": "dps",
+    "skillPriority": {
+      "first": 3,
+      "second": 1,
+      "ultimate": 2
+    }
+  },
   "2700003": {
     "rank": "C",
     "role": "support",

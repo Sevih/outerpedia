@@ -6,6 +6,32 @@
 
 ## 2026-07-18
 
+- **Intégration par entité pour l'ÉQUIPEMENT** (PRIO Sevih — pendant gear de
+  `integrateCharacter`) — bouton « Intégrer » sur les fiches extracteur (armes,
+  amulettes, talismans, EE, sets) qui valide CETTE entité sans passer par le
+  promote global. Cœur `integrateEquipmentData` (datagen, testable, injecté sur
+  dossier temp) : merge toutes les lignes de la FAMILLE (plusieurs paliers
+  d'étoiles) dans son fichier de slot + son entrée dans `families.json` + les
+  records PARTAGÉS qu'elle référence (pools/passifs/paliers de casse) — comme
+  `integrateCharacter` embarque les skills, sinon réfs pendantes côté site pour
+  une famille neuve ; seuls les records référencés entrent (pas les voisins).
+  Wrapper `integrateEquipment` : extraction fraîche + staging des images
+  (icônes d'items + de passifs, + PNG og de l'icône représentative). Glossaires
+  transverses laissés à `datagen:build` (une famille neuve réutilise des grades/
+  classes déjà committés). Route `POST /api/admin/integrate/equipment/[kind]/[id]`,
+  bouton `IntegrateGearButton` (rapport fichiers + images), câblé dans
+  `GearDetail`. +6 tests (merge non destructif, refs ciblées, idempotence,
+  upsert de famille, entité inconnue). 340 tests verts, typecheck + lint OK.
+
+- **Oracle de test `combat-power`** — la formule de Combat Power sans équipement
+  (reverse-engineered, « validée 0-diff in-game par le gear-solver ») n'avait
+  aucun test. Verrouillée par 11 cas en deux familles : (1) invariants hand-
+  dérivés du modèle, exacts et indépendants du cœur stat-dépendant — +500 par
+  étoile UI, +120 par « +1 », +100 par niveau de skill au-dessus de 1, +5000 en
+  Core Fusion, cap du crit rate à 100 % (130 ≡ 100), sortie entière ; (2) quatre
+  snapshots de régression sur des profils réalistes (DPS crit, tank HP/DEF,
+  support fusionné, crit cappé + coude du facteur crit) figés à l'état validé.
+  Une modif du cœur fait bouger les snapshots → revue explicite.
 - **`stamp-guides` : deux défauts corrigés (dates de guides auto)** — le stamp
   maintient `meta.updated` au commit (le build ne voit pas git). Défaut 1
   (diff parasite) : le stamp réécrivait le meta en `JSON.stringify(…,2)`, qui

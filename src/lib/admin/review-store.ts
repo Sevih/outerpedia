@@ -30,6 +30,10 @@ import {
   type IntegrateReport,
 } from '@datagen/extractor/integrate';
 import {
+  integrateEquipment,
+  type EquipmentEntityKind,
+} from '@datagen/extractor/integrate-equipment';
+import {
   monsterArchiveOf,
   versionMonster,
   type VersionMonsterReport,
@@ -38,6 +42,7 @@ import {
 export type {
   DiffBuckets,
   EntityReview,
+  EquipmentEntityKind,
   ReviewEntity,
   TargetReview,
   IntegrateModeReport,
@@ -53,6 +58,7 @@ export {
   extractedCharacter,
   extractedMonsterBundle,
   integrateCharacter,
+  integrateEquipment,
   integrateMonster,
   integrateMonsterMode,
   monsterArchiveOf,

@@ -8,6 +8,8 @@ import { notFound } from 'next/navigation';
 import type { LangDict } from '@contracts';
 import { img } from '@/lib/images';
 import type { GearKind } from '@/lib/admin/gear-rows';
+import { entityReview, type EquipmentEntityKind } from '@/lib/admin/review-store';
+import { IntegrateGearButton } from './IntegrateGearButton';
 import {
   getAmuletFamilies,
   getEEViews,
@@ -18,6 +20,33 @@ import {
   resolvePassives,
   type GearFamily,
 } from '@/lib/data/equipment';
+
+/** GearKind d'affichage → kind d'intégration datagen + cible de revue (id ≠ nom). */
+const INTEGRATE: Record<GearKind, { kind: EquipmentEntityKind; reviewId: string }> = {
+  weapons: { kind: 'weapon', reviewId: 'weapon' },
+  amulets: { kind: 'accessory', reviewId: 'amulet' },
+  talismans: { kind: 'talisman', reviewId: 'talisman' },
+  ee: { kind: 'ee', reviewId: 'ee' },
+  sets: { kind: 'set', reviewId: 'set' },
+};
+
+/**
+ * Bloc d'intégration par entité (bouton « valider ce que l'extracteur sort »).
+ * Le statut de revue décide du libellé : entité absente du committé = « new ».
+ */
+function IntegrateSection({ gearKind, id }: { gearKind: GearKind; id: string }) {
+  const { kind, reviewId } = INTEGRATE[gearKind];
+  const isNew = entityReview(reviewId, id).status === 'added';
+  return (
+    <div className="border-line-subtle bg-surface-raised space-y-2 rounded-lg border p-4">
+      <IntegrateGearButton kind={kind} id={id} isNew={isNew} />
+      <p className="text-content-subtle text-xs">
+        Écrit cette entité (lignes de la famille + pools/passifs/paliers référencés) dans{' '}
+        <code>data/generated/equipment/</code> et stage ses images — à committer via git.
+      </p>
+    </div>
+  );
+}
 
 const sprite = (name: string) => `/api/admin/sprite/${encodeURIComponent(name)}`;
 
@@ -184,7 +213,12 @@ export function GearDetail({ kind, id }: { kind: GearKind; id: string }) {
           : getTalismanFamilies();
     const f = fams.find((x) => x.id === id);
     if (!f) notFound();
-    return <FamilyDetail f={f} />;
+    return (
+      <div className="space-y-5">
+        <IntegrateSection gearKind={kind} id={id} />
+        <FamilyDetail f={f} />
+      </div>
+    );
   }
 
   if (kind === 'ee') {
@@ -194,6 +228,7 @@ export function GearDetail({ kind, id }: { kind: GearKind; id: string }) {
     const effects = passiveEffects(e.passives);
     return (
       <div className="max-w-3xl space-y-5">
+        <IntegrateSection gearKind={kind} id={id} />
         <Header
           icon={`TI_Equipment_EX_${e.characterId}`}
           frame={img.slotFrame(e.grade)}
@@ -247,6 +282,7 @@ export function GearDetail({ kind, id }: { kind: GearKind; id: string }) {
   if (!s) notFound();
   return (
     <div className="max-w-3xl space-y-5">
+      <IntegrateSection gearKind={kind} id={id} />
       <Header
         icon={s.icon}
         frame={img.slotFrame('unique')}
