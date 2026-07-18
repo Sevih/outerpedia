@@ -3,7 +3,8 @@
 /* eslint-disable @next/next/no-img-element -- sprites/rangs dev */
 import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { EffectPillShell } from '@/components/character/EffectChips';
+import { EffectIconTile, EffectPillShell } from '@/components/character/EffectChips';
+import { renderGameColors } from '@/components/ui/GameText';
 import type { EeChipMeta } from '@/lib/data/equipment-detail';
 import type { EffectOption } from '@/components/admin/CharacterKitEditor';
 import { img } from '@/lib/images';
@@ -292,6 +293,60 @@ export function EeCuratedEditor({
             </button>
           )}
         </div>
+
+        {/* Aide-mémoire : descriptions des effets affichés (chips + ajouts). */}
+        {(() => {
+          const items = [
+            ...chips
+              .filter((c) => !isHidden(c.ref))
+              .map((c) => ({
+                key: c.ref,
+                name: c.name,
+                icon: c.icon,
+                isDebuff: c.isDebuff,
+                desc: c.desc,
+              })),
+            ...adds
+              .map((ref) => catalog[ref])
+              .filter((o): o is EffectOption => Boolean(o))
+              .map((o) => ({
+                key: o.id,
+                name: o.name,
+                icon: o.icon,
+                isDebuff: o.isDebuff,
+                desc: o.desc,
+              })),
+          ].filter((e) => e.desc);
+          if (!items.length) return null;
+          return (
+            <div className="border-line-subtle space-y-1.5 rounded-lg border p-3">
+              {items.map((e) => (
+                <div key={e.key} className="flex items-start gap-2">
+                  {e.icon && (
+                    <EffectIconTile
+                      icon={e.icon}
+                      isDebuff={e.isDebuff}
+                      className="h-5 w-5 shrink-0"
+                    />
+                  )}
+                  <p className="min-w-0 text-xs">
+                    <span
+                      className={
+                        e.isDebuff ? 'text-debuff font-semibold' : 'text-buff font-semibold'
+                      }
+                    >
+                      {e.name}
+                    </span>
+                    <span className="text-content-subtle whitespace-pre-line">
+                      {' — '}
+                      {renderGameColors((e.desc ?? '').replace(/\\n/g, '\n'))}
+                    </span>
+                  </p>
+                </div>
+              ))}
+            </div>
+          );
+        })()}
       </section>
     </section>
   );

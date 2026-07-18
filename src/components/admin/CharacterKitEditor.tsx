@@ -34,6 +34,8 @@ export interface EffectOption {
   isDebuff: boolean;
   /** Variante indissipable (effet DISTINCT de la version normale). */
   irremovable?: boolean;
+  /** Description du jeu (aide-mémoire de curation). */
+  desc?: string;
 }
 
 /**

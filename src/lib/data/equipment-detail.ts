@@ -606,6 +606,8 @@ export interface EeChipMeta {
   name: string;
   icon?: string;
   isDebuff: boolean;
+  /** Description du jeu (aide-mémoire de curation). */
+  desc?: string;
 }
 
 /**
@@ -630,6 +632,7 @@ export function eeEditorChips(characterId: string, lang: Lang): EeChipMeta[] {
       name: st?.name ?? ref,
       ...(st?.icon ? { icon: st.icon } : {}),
       isDebuff: isDebuffEffect(e.category, st?.isDebuff),
+      ...(st?.desc ? { desc: st.desc } : {}),
     });
   }
   return out;

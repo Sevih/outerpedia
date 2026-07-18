@@ -27,7 +27,8 @@ export default async function EditorEeDetail({ params }: { params: Promise<{ id:
   const initial = loadEeCuratedEntry(id);
   const owner = getCharacter(id);
 
-  // Catalogue du glossaire pour le bouton + (effets non masqués, nommés).
+  // Catalogue du glossaire pour le bouton + (effets non masqués, nommés) —
+  // desc incluse (aide-mémoire quand on ajoute une chip).
   const catalog: Record<string, EffectOption> = Object.fromEntries(
     getMergedEffects()
       .filter((e) => !e.hidden && e.name.en)
@@ -39,6 +40,7 @@ export default async function EditorEeDetail({ params }: { params: Promise<{ id:
           ...(e.icon ? { icon: e.icon } : {}),
           isDebuff: e.isDebuff,
           ...(e.irremovable ? { irremovable: true } : {}),
+          ...(e.desc.en ? { desc: e.desc.en } : {}),
         },
       ]),
   );
@@ -49,7 +51,7 @@ export default async function EditorEeDetail({ params }: { params: Promise<{ id:
 
       <div className="flex items-center gap-3">
         {/* eslint-disable-next-line @next/next/no-img-element -- asset R2 */}
-        <img src={img.face(id)} alt="" className="h-12 w-12 shrink-0 rounded object-cover" />
+        <img src={img.ee(id)} alt="" className="h-14 w-14 shrink-0 rounded object-cover" />
         <div>
           <h1 className="text-content-strong text-xl font-semibold">
             {lRec(view.name, 'en') || view.name.en}
