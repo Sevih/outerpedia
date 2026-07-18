@@ -41,7 +41,11 @@
   neutre surfaces/contenu, encarts de statut, nœuds Monad, chips buff/debuff,
   valeurs de stat, chaîne, éléments, raretés/grades, rôles d'équipe, rampe de
   chaleur) + sa valeur résolue au runtime (lue via `useSyncExternalStore` pour
-  respecter `set-state-in-effect`) — pour voir OÙ et COMMENT ça rend, et ajuster. Typecheck + lint + 423 tests OK. RESTE : ~17 composants (MonadGateMap
+  respecter `set-state-in-effect`) — pour voir OÙ et COMMENT ça rend, et ajuster.
+  (4) 1er ajustement piloté par la galerie : `--content-subtle` #64748b→#808ea6
+  (les légendes discrètes tombaient à ~3:1 de contraste sur `surface-overlay`, sous
+  le seuil AA en `text-xs` ; remonté à ~4.4:1, reste le cran le plus faible sous
+  `content-muted`). Typecheck + lint + 423 tests OK. RESTE : ~17 composants (MonadGateMap
   a beaucoup de nuances/opacités bespoke → à arbitrer via la galerie), palettes
   de catégorie, extension RAW_COLOR, phase 2 éditoriale.
 
