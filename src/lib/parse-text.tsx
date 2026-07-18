@@ -543,6 +543,197 @@ export function parseText(text: string, ctx: ParseCtx): ReactNode {
   return parts;
 }
 
+// --- Descripteurs d'aperçu (outil admin) ---------------------------------------
+//
+// L'éditeur inline (admin) ne peut pas rendre `parseText` dans le navigateur :
+// ses résolveurs d'effets/équipement lisent la couche curée sur disque. On
+// expose donc la RÉSOLUTION (server) sous forme de DONNÉES pures — mêmes
+// résolveurs, mêmes icônes/couleurs/liens — que le composant client rend avec
+// les VRAIS composants inline. Aucune dérive : les lookups sont partagés avec
+// les handlers ci-dessus ; seule la mise en forme (déjà triviale) est projetée.
+
+/** Un segment d'un texte éditorial résolu, en données sérialisables. */
+export type InlineSegment =
+  | { t: 'text'; s: string }
+  | { t: 'br' }
+  | { t: 'unknown'; s: string }
+  | { t: 'icon'; label: string; color: string; icon?: string; href?: string; underline: boolean }
+  | { t: 'effect'; label: string; color: string; icon?: string; isDebuff: boolean; desc?: string }
+  | { t: 'item'; name: string; iconSrc: string; grade: string; color: string; href?: string; desc?: string } // prettier-ignore
+  | { t: 'stat'; name: string; iconSrc?: string; desc?: string };
+
+/** Résout UN tag en descripteur (ou `unknown` = rouge), miroir de `TAG_MAP`. */
+function resolveSegment(type: string, value: string, lang: Lang, t: TFunction): InlineSegment {
+  const unknown = (): InlineSegment => ({ t: 'unknown', s: `{${type}/${value}}` });
+  switch (type) {
+    case 'B':
+    case 'D': {
+      const side = type === 'B' ? 'buff' : 'debuff';
+      const eff = resolveEffectKey(side, value);
+      if (!eff) return unknown();
+      return {
+        t: 'effect',
+        label: lRec(eff.name, lang) || eff.name.en || value,
+        color: side === 'buff' ? 'text-buff' : 'text-debuff',
+        icon: eff.icon,
+        isDebuff: side === 'debuff',
+        desc: lRec(eff.desc, lang) || eff.desc.en || undefined,
+      };
+    }
+    case 'E': {
+      const slug = value.trim().toLowerCase();
+      return {
+        t: 'icon',
+        label: t(`sys.element.${slug}` as TranslationKey),
+        color: ELEMENT_TEXT[slug] ?? '',
+        icon: img.element(slug),
+        underline: false,
+      };
+    }
+    case 'C': {
+      const [name, subclass] = value.split('|');
+      const label = subclass
+        ? t(`sys.subclass.${subclass.trim().toLowerCase()}` as TranslationKey)
+        : t(`sys.class.${name.trim().toLowerCase()}` as TranslationKey);
+      const icon = subclass
+        ? img.subClass(subclass.trim().toLowerCase())
+        : img.klass(name.trim().toLowerCase());
+      return { t: 'icon', label, color: 'text-class', icon, underline: false };
+    }
+    case 'S': {
+      const icon = STAT_ICON[value];
+      if (!icon) return unknown();
+      return { t: 'stat', name: statName(value, lang), iconSrc: img.statIcon(icon), desc: statDesc(value, lang) }; // prettier-ignore
+    }
+    case 'P': {
+      const c = findCharacter(value);
+      if (!c) return unknown();
+      const slug = slugForId(c.id);
+      return {
+        t: 'icon',
+        label: characterDisplayName(c, lang),
+        color: 'text-buff',
+        href: slug ? localePath(lang, `/characters/${slug}`) : undefined,
+        underline: true,
+      };
+    }
+    case 'SK': {
+      const [name, shorthand] = value.split('|');
+      const c = findCharacter(name);
+      const skType = SKILL_SHORTHAND[shorthand?.trim() ?? ''];
+      const skill = c?.skills.map((id) => SKILLS[id]).find((s) => s && s.type === skType);
+      if (!c || !skill) return unknown();
+      const slug = slugForId(c.id);
+      return {
+        t: 'icon',
+        label: lRec(skill.name, lang) || skill.name.en || (shorthand ?? ''),
+        color: 'text-highlight',
+        icon: skill.icon ? img.skill(skill.icon) : undefined,
+        href: slug ? `${localePath(lang, `/characters/${slug}`)}#skills` : undefined,
+        underline: true,
+      };
+    }
+    case 'EE': {
+      const c = findCharacter(value);
+      const ee = c?.ee ? EE[c.ee] : undefined;
+      if (!c || !ee) return unknown();
+      const slug = slugForId(c.id);
+      return {
+        t: 'icon',
+        label: lRec(ee.name, lang) || ee.name.en,
+        color: 'text-item-legendary',
+        icon: img.ee(c.id),
+        href: slug ? `${localePath(lang, `/characters/${slug}`)}#ee` : undefined,
+        underline: true,
+      };
+    }
+    case 'L': {
+      const sep = value.indexOf('|');
+      const label = sep === -1 ? value : value.slice(0, sep);
+      const href = sep === -1 ? '' : value.slice(sep + 1);
+      return {
+        t: 'icon',
+        label,
+        color: 'text-highlight',
+        href: href || undefined,
+        underline: true,
+      };
+    }
+    case 'I-W':
+    case 'I-A':
+    case 'I-T': {
+      const kind = type === 'I-W' ? 'weapon' : type === 'I-A' ? 'amulet' : 'talisman';
+      const f = findFamily(kind, value);
+      if (!f) return unknown();
+      return {
+        t: 'item',
+        name: lRec(f.name, lang) || f.name.en,
+        iconSrc: img.equipment(f.icon),
+        grade: f.grade,
+        color: GRADE_TEXT[f.grade] ?? 'text-equipment',
+        href: localePath(lang, `/equipment/${f.slug}`),
+      };
+    }
+    case 'I-I': {
+      const it = catalogIndex().get(value.trim().toLowerCase());
+      if (!it) return unknown();
+      return {
+        t: 'item',
+        name: lRec(it.name, lang) || it.name.en,
+        iconSrc: img.item(it.icon),
+        grade: it.grade,
+        color: 'text-equipment',
+        desc: (lRec(it.desc, lang) || it.desc?.en || '').replace(/\\n/g, '\n') || undefined,
+      };
+    }
+    case 'AS': {
+      const set = findSet(value, lang);
+      const icon = set?.pieceIcons.armor ?? Object.values(set?.pieceIcons ?? {})[0];
+      if (!set || !icon) return unknown();
+      return {
+        t: 'item',
+        name: lRec(set.name, lang) || set.name.en,
+        iconSrc: img.equipment(icon),
+        grade: 'legendary',
+        color: 'text-equipment',
+        href: localePath(lang, `/equipment/${set.slug}`),
+      };
+    }
+    case 'SKB':
+      // Différé (skills de boss) : rendu neutre stylé, comme `pendingChip`.
+      return { t: 'icon', label: value.split('|')[0], color: 'text-equipment', underline: true };
+    default:
+      return unknown();
+  }
+}
+
+/**
+ * Résout un texte éditorial en SEGMENTS de données (aperçu admin) : mêmes tags
+ * et mêmes résolveurs que `parseText`, mais projetés en descripteurs purs
+ * (sérialisables), rendus côté client par les vrais composants inline. Tolérant
+ * (un tag mort devient un segment `unknown` = rouge) — c'est un aperçu, pas un build.
+ */
+export function resolveInlineSegments(text: string, ctx: ParseCtx): InlineSegment[] {
+  if (!text) return [];
+  const segments: InlineSegment[] = [];
+  const pushText = (raw: string) => {
+    const lines = raw.split(/\\n|\r?\n/);
+    lines.forEach((line, i) => {
+      if (i > 0) segments.push({ t: 'br' });
+      if (line) segments.push({ t: 'text', s: line });
+    });
+  };
+  let last = 0;
+  for (const m of text.matchAll(/\{((?:[BDSCEPL])|EE|AS|SKB|SK|I-(?:W|A|T|I))\/([^}]+)\}/g)) {
+    const at = m.index ?? 0;
+    if (at > last) pushText(text.slice(last, at));
+    segments.push(resolveSegment(m[1], m[2], ctx.lang, ctx.t));
+    last = at + m[0].length;
+  }
+  if (last < text.length) pushText(text.slice(last));
+  return segments;
+}
+
 /** Coupe sur les sauts de ligne (littéraux `\n` inclus) et insère des <br/>. */
 function splitLineBreaks(text: string, startKey: number): ReactNode[] {
   const lines = text.split(/\\n|\r?\n/);

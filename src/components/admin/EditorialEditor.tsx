@@ -11,6 +11,7 @@ import type { CharacterCurated } from '@contracts';
 import { type Keyed, stripKey, withKey } from '@/lib/admin/keyed';
 import { InlineTextField } from '@/components/admin/InlineTextField';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
+import { autoTranslate } from '@/lib/admin/translate-actions';
 
 type LocalizedText = Partial<Record<'en' | 'jp' | 'kr' | 'zh' | 'fr', string>>;
 interface SynergyGroup {
@@ -61,6 +62,7 @@ function TextListEditor({
             <InlineTextField
               value={item[lang] ?? ''}
               refs={refs}
+              lang={lang}
               layout="stacked"
               placeholder={lang === 'en' ? '' : (item.en ?? '')}
               onChange={(v) => {
@@ -118,6 +120,73 @@ export function EditorialEditor({
   );
   const [state, setState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
+  const [trans, setTrans] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
+  const [transMsg, setTransMsg] = useState<string | null>(null);
+
+  /**
+   * Auto-traduit l'EN vers les langues VIDES (pros, cons, raisons de synergie) en
+   * un seul appel. Ne réécrase jamais une trad existante ; les champs remplis
+   * sont à REVOIR avant enregistrement.
+   */
+  async function translateEmpty() {
+    setTrans('loading');
+    setTransMsg(null);
+    const tgt = LANGS.filter((l) => l !== 'en');
+    const jobs: { en: string; kind: 'pros' | 'cons' | 'reason'; i: number }[] = [];
+    pros.forEach((p, i) => p.en?.trim() && jobs.push({ en: p.en, kind: 'pros', i }));
+    cons.forEach((p, i) => p.en?.trim() && jobs.push({ en: p.en, kind: 'cons', i }));
+    synergies.forEach((g, i) => g.reason?.en?.trim() && jobs.push({ en: g.reason.en, kind: 'reason', i })); // prettier-ignore
+    if (!jobs.length) {
+      setTrans('done');
+      setTransMsg('Rien à traduire (aucun texte EN).');
+      return;
+    }
+    try {
+      const { results, provider } = await autoTranslate(
+        jobs.map((j) => j.en),
+        tgt,
+      );
+      const nextPros = pros.slice();
+      const nextCons = cons.slice();
+      const nextSyn = synergies.slice();
+      let filled = 0;
+      // Remplit uniquement les langues VIDES (préserve les trads manuelles).
+      const fillInto = (rec: LocalizedText, tr: Partial<LocalizedText>) => {
+        for (const l of tgt) {
+          if (tr[l] && !rec[l]?.trim()) {
+            rec[l] = tr[l];
+            filled++;
+          }
+        }
+      };
+      jobs.forEach((job, k) => {
+        const tr = results[k] ?? {};
+        if (job.kind === 'reason') {
+          const g = nextSyn[job.i];
+          const reason: LocalizedText = { ...(g.reason ?? {}) };
+          fillInto(reason, tr);
+          nextSyn[job.i] = { ...g, reason };
+        } else {
+          const arr = job.kind === 'pros' ? nextPros : nextCons;
+          const rec: LocalizedText = { ...arr[job.i] };
+          fillInto(rec, tr);
+          arr[job.i] = { ...arr[job.i], ...rec };
+        }
+      });
+      setPros(nextPros);
+      setCons(nextCons);
+      setSynergies(nextSyn);
+      setTrans('done');
+      setTransMsg(
+        filled
+          ? `${filled} champ(s) traduit(s) via ${provider === 'haiku' ? 'Haiku (quota DeepL atteint)' : 'DeepL'} — à revoir avant d’enregistrer.`
+          : 'Toutes les langues cibles étaient déjà remplies.',
+      );
+    } catch (e) {
+      setTrans('error');
+      setTransMsg((e as Error).message);
+    }
+  }
 
   const nameToId = new Map(Object.entries(charNames).map(([cid, n]) => [n.toLowerCase(), cid]));
   const resolveHero = (raw: string): string => {
@@ -160,7 +229,7 @@ export function EditorialEditor({
   return (
     <div className="space-y-6">
       {/* Langue éditée (les autres langues sont préservées) */}
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         <span className="text-content-subtle text-xs uppercase">Langue</span>
         <div className="border-line flex overflow-hidden rounded-md border">
           {LANGS.map((l) => (
@@ -174,6 +243,20 @@ export function EditorialEditor({
             </button>
           ))}
         </div>
+        <button
+          type="button"
+          className={btn}
+          onClick={translateEmpty}
+          disabled={trans === 'loading'}
+          title="Traduit l'EN vers les langues encore vides (Claude Haiku)"
+        >
+          {trans === 'loading' ? 'Traduction…' : 'Traduire (EN → vides)'}
+        </button>
+        {transMsg && (
+          <span className={`text-xs ${trans === 'error' ? 'text-danger' : 'text-content-subtle'}`}>
+            {transMsg}
+          </span>
+        )}
       </div>
 
       {show !== 'synergies' && (
@@ -255,6 +338,7 @@ export function EditorialEditor({
                 <InlineTextField
                   value={g.reason?.[lang] ?? ''}
                   refs={refs}
+                  lang={lang}
                   placeholder={lang === 'en' ? '' : (g.reason?.en ?? '')}
                   onChange={(v) => {
                     const next = synergies.slice();

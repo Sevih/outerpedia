@@ -6,7 +6,7 @@
  * label (affichage) }.
  *
  * La VALIDATION et l'APERÇU fidèle restent côté serveur (`checkText`/`parseText`
- * via `/api/admin/preview-text`) ; ici on ne sert que la saisie assistée.
+ * via la server action `renderInlinePreview`) ; ici on ne sert que la saisie assistée.
  */
 import type { Glossaries } from '@contracts';
 import { loadDataJson } from '@/lib/data/disk';

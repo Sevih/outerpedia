@@ -6,12 +6,15 @@
  * autocomplétion des refs, APERÇU rendu tel quel et VALIDATION en direct.
  *
  * Mono-langue : le parent gère la langue courante (préservation des autres
- * langues côté parent). L'aperçu et la validation passent par
- * `/api/admin/preview-text` (réutilise `parseText`/`checkText` à l'octet).
+ * langues côté parent). L'aperçu ET la validation passent par la server action
+ * `renderInlinePreview` : rendu par le VRAI `parseText` (icônes, tooltips, liens
+ * — identique au site), pas une ré-implémentation client qui dériverait.
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
+import type { Lang } from '@/lib/i18n/config';
 import type { InlineRefs, RefItem } from '@/lib/admin/inline-refs';
-import type { TagCheck } from '@/lib/parse-text';
+import type { InlineSegment, TagCheck } from '@/lib/parse-text';
+import { renderInlinePreview } from '@/lib/admin/inline-preview-actions';
 import { InlinePreview } from '@/components/admin/InlinePreview';
 
 /** Un bouton de la barre : type de tag + libellé + source de refs. */
@@ -46,6 +49,7 @@ export function InlineTextField({
   value,
   onChange,
   refs,
+  lang,
   placeholder,
   rows = 2,
   layout = 'split',
@@ -53,6 +57,8 @@ export function InlineTextField({
   value: string;
   onChange: (v: string) => void;
   refs: InlineRefs;
+  /** Langue rendue par l'aperçu (le parent préserve les autres langues). */
+  lang: Lang;
   placeholder?: string;
   rows?: number;
   /** `split` = saisie/aperçu côte à côte (md+) ; `stacked` = aperçu dessous. */
@@ -62,31 +68,32 @@ export function InlineTextField({
   const [picker, setPicker] = useState<TokenDef | null>(null);
   const [query, setQuery] = useState('');
   const [skSlot, setSkSlot] = useState('S2');
+  const [segments, setSegments] = useState<InlineSegment[]>([]);
   const [checks, setChecks] = useState<TagCheck[]>([]);
   const [focused, setFocused] = useState(false);
 
-  // Validation précise (raison par tag) : aller-retour serveur debouncé
-  // (`checkText` contre les données du site). L'aperçu, lui, est client (instantané).
+  // Aperçu FIDÈLE + validation en un seul aller-retour debouncé : la server
+  // action résout via les vrais résolveurs de `parse-text` (server-only) et
+  // renvoie des descripteurs + les diagnostics. On garde l'aperçu précédent
+  // pendant la frappe (pas de flash).
   useEffect(() => {
     let cancelled = false;
     const h = setTimeout(async () => {
       try {
-        const res = await fetch('/api/admin/preview-text', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text: value }),
-        });
-        const json = (await res.json()) as { checks?: TagCheck[] };
-        if (!cancelled) setChecks(json.checks ?? []);
+        const { segments: segs, checks: c } = await renderInlinePreview(value, lang);
+        if (!cancelled) {
+          setSegments(segs);
+          setChecks(c);
+        }
       } catch {
-        /* validation indisponible — silencieux */
+        /* aperçu/validation indisponible — silencieux */
       }
     }, 300);
     return () => {
       cancelled = true;
       clearTimeout(h);
     };
-  }, [value]);
+  }, [value, lang]);
 
   /** Insère un tag `{type/val}` à la position du curseur. */
   const insert = (type: string, val: string) => {
@@ -210,13 +217,17 @@ export function InlineTextField({
           onChange={(e) => onChange(e.target.value)}
         />
         <div
-          className={`border-line-subtle min-h-9 rounded-md border px-2 py-1 text-sm ${
+          className={`border-line-subtle min-h-9 rounded-md border px-2 py-1 text-sm whitespace-pre-line ${
             focused ? 'border-accent/40' : ''
           }`}
           aria-label="Aperçu"
         >
-          {/* Aperçu client : libellés colorés résolus, refs inconnues en rouge. */}
-          <InlinePreview text={value} refs={refs} />
+          {/* Aperçu fidèle : descripteurs (server) rendus par les vrais composants. */}
+          {value.trim() ? (
+            <InlinePreview segments={segments} />
+          ) : (
+            <span className="text-content-subtle text-xs">Aperçu…</span>
+          )}
         </div>
       </div>
 
