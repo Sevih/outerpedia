@@ -26,6 +26,7 @@ import {
 } from '@/lib/skill-view';
 import { img } from '@/lib/images';
 import { lRec } from '@/lib/i18n/localize';
+import { resolveSkillText } from '@/lib/skills';
 import { loadCharacterKitSections } from '@/lib/admin/character-skill-curated-store';
 import { extractedBundle } from '@/lib/admin/review-store';
 
@@ -99,7 +100,11 @@ export default async function EditorCharacterDetail({
     id: s.id,
     name: lRec(s.name, 'en'),
     type: s.type,
-    ...(s.desc ? { desc: lRec(s.desc, 'en') } : {}),
+    // Placeholders [Buff_V/C/T_…] résolus aux vars du dernier niveau (sinon la
+    // desc s'affiche brute — comme le rendu public via SkillDescription).
+    ...(s.desc
+      ? { desc: resolveSkillText(lRec(s.desc, 'en'), s.levels[s.levels.length - 1]?.vars) }
+      : {}),
     ...(s.icon ? { iconSrc: `/api/admin/sprite/${encodeURIComponent(s.icon)}` } : {}),
     chips: toChips(cardEffects(uniqueSkills, s, {})),
   }));
@@ -107,11 +112,13 @@ export default async function EditorCharacterDetail({
   const cp = uniqueSkills.find((s) => s.type === 'chain_passive');
   const chainView = cp ? buildChainView(uniqueSkills, 'en', {}) : null;
   if (cp && chainView) {
+    // Vars du dernier niveau de la chaîne pour résoudre les placeholders.
+    const chainVars = chainView.levels[chainView.levels.length - 1]?.vars;
     cards.push({
       id: cp.id,
       name: chainView.name || 'Chain',
       type: 'chain_passive',
-      ...(chainView.chainDesc ? { desc: chainView.chainDesc } : {}),
+      ...(chainView.chainDesc ? { desc: resolveSkillText(chainView.chainDesc, chainVars) } : {}),
       iconSrc: img.chain(char.element, char.chainType ?? 'start'),
       chips: toChips(chainView.chainEffects),
     });
@@ -119,7 +126,7 @@ export default async function EditorCharacterDetail({
       id: cp.id + DUAL_CARD_SUFFIX,
       name: 'Dual',
       type: 'dual',
-      ...(chainView.dualDesc ? { desc: chainView.dualDesc } : {}),
+      ...(chainView.dualDesc ? { desc: resolveSkillText(chainView.dualDesc, chainVars) } : {}),
       chips: toChips(chainView.dualEffects),
     });
   }

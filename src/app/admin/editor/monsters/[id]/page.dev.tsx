@@ -8,6 +8,7 @@ import {
 } from '@/components/admin/MonsterKitEditor';
 import { EntitySwitch } from '@/components/admin/EntitySwitch';
 import { monsterChipMeta, monsterSkillViews } from '@/lib/skill-view';
+import { resolveSkillText } from '@/lib/skills';
 import { getMergedEffects } from '@/lib/data/effects';
 import { monsterBossBadgeSrc, monsterIconSrc, monsterSlotSrc } from '@/lib/admin/monster-icon';
 import { committedMonsterSkills, committedMonsters } from '@/lib/admin/monster-store';
@@ -81,7 +82,11 @@ export default async function EditorMonsterPage({ params }: { params: Promise<{ 
     id: s.id,
     name: s.name.en,
     type: s.type,
-    ...(s.desc?.en ? { desc: s.desc.en } : {}),
+    // Placeholders [Buff_V/C/T_…] résolus aux vars du dernier niveau (sinon la
+    // desc s'affiche brute — comme le rendu public via SkillDescription).
+    ...(s.desc?.en
+      ? { desc: resolveSkillText(s.desc.en, s.levels[s.levels.length - 1]?.vars) }
+      : {}),
     ...(s.icon ? { iconSrc: `/api/admin/sprite/${encodeURIComponent(s.icon)}` } : {}),
   }));
 
