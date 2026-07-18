@@ -2,8 +2,9 @@ import { notFound } from 'next/navigation';
 import { EntitySwitch } from '@/components/admin/EntitySwitch';
 import { EeCuratedEditor } from '@/components/admin/EeCuratedEditor';
 import { type EffectOption } from '@/components/admin/CharacterKitEditor';
+import { renderGameColors } from '@/components/ui/GameText';
 import { getEEViews } from '@/lib/data/equipment';
-import { eeEditorChips } from '@/lib/data/equipment-detail';
+import { eeEditorChips, eeModelForView } from '@/lib/data/equipment-detail';
 import { loadEeCuratedEntry } from '@/lib/admin/equipment-curated-store';
 import { getMergedEffects } from '@/lib/data/effects';
 import { characterDisplayName, getCharacter } from '@/lib/data/characters';
@@ -26,6 +27,8 @@ export default async function EditorEeDetail({ params }: { params: Promise<{ id:
   const chips = eeEditorChips(id, 'en');
   const initial = loadEeCuratedEntry(id);
   const owner = getCharacter(id);
+  // Passifs résolus (déblocage Lv.1 + Lv.10) — référence de curation.
+  const passives = eeModelForView(view, 'en').passives;
 
   // Catalogue du glossaire pour le bouton + (effets non masqués, nommés) —
   // desc incluse (aide-mémoire quand on ajoute une chip).
@@ -61,6 +64,35 @@ export default async function EditorEeDetail({ params }: { params: Promise<{ id:
           </p>
         </div>
       </div>
+
+      {/* Passifs extraits (déblocage / +10) — référence, non éditables ici. */}
+      {passives.length > 0 && (
+        <section className="space-y-2">
+          <h2 className="text-content-strong text-xs font-semibold uppercase">
+            Passifs (référence)
+          </h2>
+          <div className="space-y-2">
+            {passives.map((p, i) => (
+              <div
+                key={`${p.unlockLevel}-${i}`}
+                className="border-line-subtle rounded-lg border p-3"
+              >
+                <div className="mb-1 flex items-center gap-2">
+                  <span className="bg-surface-base text-content-subtle rounded px-1.5 py-0.5 font-mono text-[11px] font-semibold">
+                    {p.unlockLevel <= 1 ? 'Déblocage' : `+${p.unlockLevel}`}
+                  </span>
+                  <span className="text-content-strong text-sm font-semibold">{p.name}</span>
+                </div>
+                {p.texts.map((t, j) => (
+                  <p key={j} className="text-content-subtle text-xs whitespace-pre-line">
+                    {renderGameColors(t.replace(/\\n/g, '\n'))}
+                  </p>
+                ))}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <EeCuratedEditor id={id} chips={chips} catalog={catalog} initial={initial} />
     </div>
