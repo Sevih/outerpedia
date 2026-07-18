@@ -6,6 +6,20 @@
 
 ## 2026-07-18
 
+- **Guide « Daily Stamina Burn » porté** (economy, ordre 3) : contenu verbatim
+  V2 (labels 5 langues, roadmap 5 priorités, suggestions hors endgame, pro
+  tips) sur les primitives éditoriales ; les noms des boss irréguliers
+  DÉRIVENT de monsters.json (la V2 les codait en dur) — sauf l'Irregular
+  Queen, au nom VIDE dans les tables du jeu (repli éditorial documenté). Deux
+  entrées curées d'items ajoutées pour les tags {I-I/…} du guide : « Gems »
+  (générique, icône V2 TI_GEM_dissolve_Random_3) et « Bounty Hunter
+  Ticket(s) » (l'asset officiel TICKET_GOLD s'appelle « Frog Hall Ticket » —
+  autre chose).
+- **Ether income : cadence bimestrielle** — guild raid et world boss ont lieu
+  UN MOIS SUR DEUX (info Sevih ; la V2 les comptait chaque mois) : champ
+  `monthsPerCycle` sur les sources, colonne/totaux en moyenne mensuelle, note
+  « Held once every 2 months — reward from {min} to {max} » dérivée des
+  échelles.
 - **Guide « Ether Income » porté** (tier economy, ordre 1 ; unlock-content
   reste 2) : les QUATRE échelles de récompenses par rang (arène 24 paliers,
   guild raid, world boss 4 ligues, singularity) DÉRIVENT désormais du jeu —

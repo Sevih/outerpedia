@@ -19561,6 +19561,19 @@
     "subType": "box_type_random",
     "star": 0
   },
+  "Bounty%20Hunter%20Ticket": {
+    "kind": "custom",
+    "name": {
+      "en": "Bounty Hunter Ticket(s)",
+      "jp": "指名手配チケット",
+      "kr": "현상 수배 티켓",
+      "zh": "悬赏通缉券"
+    },
+    "icon": "TI_Item_Ticket_Gold",
+    "grade": "normal",
+    "type": "custom",
+    "star": 0
+  },
   "COSTUME_1": {
     "kind": "costume",
     "name": {
@@ -21645,6 +21658,25 @@
     "star": 0,
     "characterId": "2000108",
     "source": "event_shop"
+  },
+  "Gems": {
+    "kind": "custom",
+    "name": {
+      "en": "Gems",
+      "jp": "ジェム",
+      "kr": "보석",
+      "zh": "宝石"
+    },
+    "desc": {
+      "en": "Various gems.",
+      "jp": "各種ジェム",
+      "kr": "각종 보석",
+      "zh": "各种宝石"
+    },
+    "icon": "TI_GEM_dissolve_Random_3",
+    "grade": "normal",
+    "type": "custom",
+    "star": 0
   },
   "Hero%20Piece": {
     "kind": "custom",
