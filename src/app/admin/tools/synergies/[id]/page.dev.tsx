@@ -1,7 +1,12 @@
 import { notFound } from 'next/navigation';
-import { characterDisplayName, getAllCharacters, getCharacter } from '@/lib/data/characters';
+import {
+  characterDisplayName,
+  getAllCharacters,
+  getCharacter,
+  slugForId,
+} from '@/lib/data/characters';
 import { getCharacterCurated } from '@/lib/data/curated';
-import { EditorialEditor } from '@/components/admin/EditorialEditor';
+import { EditorialEditor, type HeroView } from '@/components/admin/EditorialEditor';
 import { buildInlineRefs } from '@/lib/admin/inline-refs';
 
 export const dynamic = 'force-dynamic';
@@ -15,8 +20,24 @@ export default async function ToolSynergiesCharacter({
   const char = getCharacter(id);
   if (!char) notFound();
   const curated = getCharacterCurated(id);
-  const charNames = Object.fromEntries(
-    getAllCharacters().map((c) => [c.id, characterDisplayName(c)]),
+  const chars = getAllCharacters();
+  const charNames = Object.fromEntries(chars.map((c) => [c.id, characterDisplayName(c)]));
+  // Portraits des partenaires (résolus serveur — rendu façon SynergiesSection).
+  const heroViews: Record<string, HeroView> = Object.fromEntries(
+    chars.map((c) => {
+      const slug = slugForId(c.id);
+      return [
+        c.id,
+        {
+          id: c.id,
+          name: characterDisplayName(c),
+          element: c.element,
+          classType: c.class,
+          rarity: c.rarity,
+          href: slug ? `/characters/${slug}` : undefined,
+        },
+      ];
+    }),
   );
 
   return (
@@ -29,6 +50,7 @@ export default async function ToolSynergiesCharacter({
         id={id}
         curated={curated}
         charNames={charNames}
+        heroViews={heroViews}
         refs={buildInlineRefs()}
         show="synergies"
       />

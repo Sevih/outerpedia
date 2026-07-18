@@ -6,6 +6,23 @@
 
 ## 2026-07-19
 
+- **Éditeurs éditoriaux perso alignés sur le rendu du site (B/C/D)** — même
+  chaîne de descripteurs que l'aperçu inline, généralisée aux 3 éditeurs perso.
+  **B (pros/cons)** : `EditorialEditor` rend les entrées comme
+  `getCharacterProsCons` (2 onglets Pros/Cons, lignes `Side`), résolues par
+  `renderInlineBatch` (nouveau, `inline-preview-actions`) ; édition en place au
+  clic sur la tuile (plus de champ séparé), `✕` par entrée, `+ entrée`.
+  **B (synergies)** : les partenaires rendus en `CharacterPortrait` comme
+  `SynergiesSection`, ajout par datalist (`+ partenaire…`), raison éditable au
+  clic. **C** : `synergies/[id]/page.dev.tsx` construit les `heroViews`
+  (id→portrait/slug) passés à l'éditeur. **D** : `characters/[id]/page.dev.tsx`
+  regroupe champs manuels → skills → reco dans un `EditorTabs` (nouveau, panneaux
+  tous montés, inactifs `hidden` → l'état survit au changement d'onglet).
+  Piège corrigé : les wrappers cliquables étaient des `<button>` contenant du
+  rendu inline interactif (`StatInline`=button, `{P}`/`{SK}`=lien) → nesting DOM
+  invalide ; passés en `<div role="button" tabIndex onKeyDown>`, et `ItemRow`
+  (`GearRecoSection`) reçoit `noLink` pour que les tuiles d'édition ne naviguent
+  pas. Prolonge l'éditeur reco unifié du 18/07.
 - **`useUrlTab` — dédup de la logique « URL source de vérité »** — le bloc
   identique de `ui/Tabs` et `guides/.../BannerTabs` (lecture de la tranche
   `?<param>=<id>` via useUrlSlice → Back/Forward pilote l'UI, écriture par

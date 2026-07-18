@@ -317,17 +317,19 @@ export function GearRecoEditor({
           return (
             <Row key={i}>
               <div className="flex items-start gap-1">
-                <button
-                  type="button"
+                <div
+                  role="button"
+                  tabIndex={0}
                   onClick={() => toggleEdit(slot, i)}
+                  onKeyDown={(e) => e.key === 'Enter' && toggleEdit(slot, i)}
                   className="flex-1 cursor-pointer text-left"
                 >
                   {p.id && it && !it.unresolved ? (
-                    <ItemRow item={it} labels={srcLabel} />
+                    <ItemRow item={it} labels={srcLabel} noLink />
                   ) : (
                     <EmptyTile />
                   )}
-                </button>
+                </div>
                 <button
                   type="button"
                   className={`${btn} text-danger`}
@@ -512,17 +514,19 @@ export function GearRecoEditor({
                 return (
                   <Row key={i}>
                     <div className="flex items-start gap-1">
-                      <button
-                        type="button"
+                      <div
+                        role="button"
+                        tabIndex={0}
                         onClick={() => toggleEdit('talismans', i)}
+                        onKeyDown={(e) => e.key === 'Enter' && toggleEdit('talismans', i)}
                         className="flex-1 cursor-pointer text-left"
                       >
                         {tl && it && !it.unresolved ? (
-                          <ItemRow item={it} labels={srcLabel} />
+                          <ItemRow item={it} labels={srcLabel} noLink />
                         ) : (
                           <EmptyTile />
                         )}
-                      </button>
+                      </div>
                       <button
                         type="button"
                         className={`${btn} text-danger`}

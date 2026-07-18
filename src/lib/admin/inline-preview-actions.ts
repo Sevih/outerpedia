@@ -51,3 +51,11 @@ export async function renderInlinePreview(
   const checks = checkText(text ?? '', { guideHrefExists });
   return { segments, checks };
 }
+
+/** Résout un LOT de textes en segments (aperçu des lignes d'un éditeur). */
+export async function renderInlineBatch(texts: string[], lang: string): Promise<InlineSegment[][]> {
+  if (!IS_DEV) return texts.map(() => []);
+  const l = normalizeLang(lang);
+  const t = await getT(l);
+  return texts.map((text) => (text.trim() ? resolveInlineSegments(text, { lang: l, t }) : []));
+}

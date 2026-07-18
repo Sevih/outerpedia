@@ -151,11 +151,14 @@ function StatChip({ abbr, value }: { abbr: string; value?: string }) {
 export function ItemRow({
   item,
   labels,
+  noLink = false,
 }: {
   item: GearItem;
   // Ce que la carte utilise VRAIMENT — un appelant qui n'a pas de build (le
   // butin d'un donjon) n'a pas à fabriquer des libellés qu'elle ignore.
   labels: Pick<GearRecoLabels, 'source'>;
+  /** Coupe le lien /equipment (éditeur admin : le clic sert à éditer). */
+  noLink?: boolean;
 }) {
   if (item.unresolved) return <p className="text-sm text-red-400">{item.name}</p>;
   const chips = (item.mainStat ?? '')
@@ -177,7 +180,7 @@ export function ItemRow({
         />
       )}
       <div className="min-w-0">
-        {item.slug ? (
+        {item.slug && !noLink ? (
           <Link
             href={`/equipment/${item.slug}` as Route}
             className={`font-game block truncate text-sm font-semibold hover:underline ${nameColor}`}

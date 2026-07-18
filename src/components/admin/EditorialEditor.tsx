@@ -6,17 +6,31 @@
  * contenu humain, pas on ne contrôle la donnée du jeu. Les textes portent des
  * tags inline `{B/…}` (contrôlés par /admin/tags).
  */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { CharacterCurated } from '@contracts';
 import { type Keyed, stripKey, withKey } from '@/lib/admin/keyed';
 import { InlineTextField } from '@/components/admin/InlineTextField';
+import { InlinePreview } from '@/components/admin/InlinePreview';
+import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
+import type { InlineSegment } from '@/lib/parse-text';
+import { renderInlineBatch } from '@/lib/admin/inline-preview-actions';
 import { autoTranslate } from '@/lib/admin/translate-actions';
 
 type LocalizedText = Partial<Record<'en' | 'jp' | 'kr' | 'zh' | 'fr', string>>;
 interface SynergyGroup {
   heroes: string[];
   reason?: LocalizedText;
+}
+
+/** Portrait d'un héros (résolu serveur) pour l'affichage des synergies. */
+export interface HeroView {
+  id: string;
+  name: string;
+  element: string;
+  classType: string;
+  rarity: number;
+  href?: string;
 }
 
 const LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
@@ -27,71 +41,12 @@ const btn =
 const input =
   'w-full rounded-md border border-line bg-surface-base px-2 py-1 text-sm focus:border-accent focus:outline-none';
 
-/** Édition d'une liste de textes localisés (pros OU cons). */
-function TextListEditor({
-  title,
-  items,
-  lang,
-  refs,
-  onChange,
-}: {
-  title: string;
-  items: Keyed<LocalizedText>[];
-  lang: L;
-  refs: InlineRefs;
-  onChange: (next: Keyed<LocalizedText>[]) => void;
-}) {
-  return (
-    <div className="space-y-3">
-      <div className="flex items-center justify-between">
-        <p className="text-content-strong text-sm font-semibold">{title}</p>
-        <button
-          type="button"
-          className={btn}
-          onClick={() => onChange([...items, withKey({ en: '' })])}
-        >
-          + entrée
-        </button>
-      </div>
-      {items.map((item, i) => (
-        <div
-          key={item._key}
-          className="border-line-subtle flex items-start gap-2 rounded-lg border p-2"
-        >
-          <div className="flex-1">
-            <InlineTextField
-              value={item[lang] ?? ''}
-              refs={refs}
-              lang={lang}
-              layout="stacked"
-              placeholder={lang === 'en' ? '' : (item.en ?? '')}
-              onChange={(v) => {
-                const next = items.slice();
-                next[i] = { ...item, [lang]: v };
-                if (!v) delete next[i][lang];
-                onChange(next);
-              }}
-            />
-          </div>
-          <button
-            type="button"
-            className={`${btn} text-danger`}
-            onClick={() => onChange(items.filter((_, j) => j !== i))}
-            aria-label="Supprimer"
-          >
-            ✕
-          </button>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 export function EditorialEditor({
   id,
   curated,
   charNames,
   refs,
+  heroViews,
   show = 'all',
 }: {
   id: string;
@@ -101,6 +56,8 @@ export function EditorialEditor({
   charNames: Record<string, string>;
   /** Refs d'autocomplétion des tags inline. */
   refs: InlineRefs;
+  /** id → portrait (synergies) ; fourni par la page synergies uniquement. */
+  heroViews?: Record<string, HeroView>;
   /**
    * Sections affichées. Les Tools transverses n'en montrent qu'une ; l'autre
    * slice reste préservée (état initialisé depuis `curated`, réécrit à
@@ -122,6 +79,40 @@ export function EditorialEditor({
   const [error, setError] = useState<string | null>(null);
   const [trans, setTrans] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
   const [transMsg, setTransMsg] = useState<string | null>(null);
+  // Pros/cons : onglet actif, ligne en édition. Synergies : raison en édition
+  // (clé de groupe) + brouillon d'ajout de héros par groupe.
+  const [tab, setTab] = useState<'pros' | 'cons'>('pros');
+  const [editing, setEditing] = useState<number | null>(null);
+  const [editReason, setEditReason] = useState<string | null>(null);
+  const [addHero, setAddHero] = useState<Record<string, string>>({});
+  // Segments rendus (aperçu en place) des lignes pros/cons et des raisons.
+  const [segs, setSegs] = useState<{
+    pros: InlineSegment[][];
+    cons: InlineSegment[][];
+    reasons: InlineSegment[][];
+  }>({ pros: [], cons: [], reasons: [] });
+
+  // Rendu fidèle des lignes (aperçu en place) via la vraie donnée, debouncé.
+  useEffect(() => {
+    let cancelled = false;
+    const none: InlineSegment[][] = [];
+    const h = setTimeout(async () => {
+      try {
+        const [ps, cs, rs] = await Promise.all([
+          show !== 'synergies' ? renderInlineBatch(pros.map((p) => p[lang] ?? ''), lang) : none, // prettier-ignore
+          show !== 'synergies' ? renderInlineBatch(cons.map((c) => c[lang] ?? ''), lang) : none, // prettier-ignore
+          show !== 'prosCons' ? renderInlineBatch(synergies.map((g) => g.reason?.[lang] ?? ''), lang) : none, // prettier-ignore
+        ]);
+        if (!cancelled) setSegs({ pros: ps, cons: cs, reasons: rs });
+      } catch {
+        /* aperçu indisponible — silencieux */
+      }
+    }, 250);
+    return () => {
+      cancelled = true;
+      clearTimeout(h);
+    };
+  }, [pros, cons, synergies, lang, show]);
 
   /**
    * Auto-traduit l'EN vers les langues VIDES (pros, cons, raisons de synergie) en
@@ -259,14 +250,101 @@ export function EditorialEditor({
         )}
       </div>
 
-      {show !== 'synergies' && (
-        <div className="grid gap-6 lg:grid-cols-2">
-          <TextListEditor title="Pros" items={pros} lang={lang} refs={refs} onChange={setPros} />
-          <TextListEditor title="Cons" items={cons} lang={lang} refs={refs} onChange={setCons} />
-        </div>
-      )}
+      {show !== 'synergies' &&
+        (() => {
+          const side =
+            tab === 'pros'
+              ? { items: pros, set: setPros, segs: segs.pros, tone: 'text-emerald-400', sign: '+' }
+              : { items: cons, set: setCons, segs: segs.cons, tone: 'text-red-400', sign: '−' };
+          return (
+            <div className="space-y-3">
+              {/* Onglets Pros / Cons */}
+              <div className="border-line flex w-fit overflow-hidden rounded-md border">
+                {(['pros', 'cons'] as const).map((s) => (
+                  <button
+                    key={s}
+                    type="button"
+                    onClick={() => {
+                      setTab(s);
+                      setEditing(null);
+                    }}
+                    className={`px-3 py-1 text-sm ${s === tab ? 'bg-accent/20 text-accent font-semibold' : 'text-content-muted hover:bg-surface-overlay'}`}
+                  >
+                    {s === 'pros' ? 'Pros' : 'Cons'} ({(s === 'pros' ? pros : cons).length})
+                  </button>
+                ))}
+              </div>
 
-      {/* Synergies */}
+              {/* Liste rendue (style fiche) + édition en place au clic */}
+              <ul className="card flex flex-col gap-1.5 rounded-xl p-4">
+                {side.items.map((item, i) => (
+                  <li
+                    key={item._key}
+                    className="grid grid-cols-[16px_1fr_auto] items-start gap-1.5"
+                  >
+                    <span className={`font-mono text-sm font-bold ${side.tone}`}>{side.sign}</span>
+                    <div className="min-w-0">
+                      {editing === i ? (
+                        <InlineTextField
+                          value={item[lang] ?? ''}
+                          refs={refs}
+                          lang={lang}
+                          layout="stacked"
+                          placeholder={lang === 'en' ? '' : (item.en ?? '')}
+                          onChange={(v) => {
+                            const next = side.items.slice();
+                            next[i] = { ...item, [lang]: v };
+                            if (!v) delete next[i][lang];
+                            side.set(next);
+                          }}
+                        />
+                      ) : (
+                        <div
+                          role="button"
+                          tabIndex={0}
+                          onClick={() => setEditing(i)}
+                          onKeyDown={(e) => e.key === 'Enter' && setEditing(i)}
+                          className="text-content w-full cursor-pointer text-left text-[13px] leading-snug first-letter:uppercase"
+                        >
+                          {side.segs[i]?.length ? (
+                            <InlinePreview segments={side.segs[i]} />
+                          ) : (
+                            <span className="text-content-subtle italic">
+                              {item[lang] || item.en || '(vide — cliquer pour écrire)'}
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      className="text-danger text-sm"
+                      title="Supprimer"
+                      onClick={() => {
+                        side.set(side.items.filter((_, j) => j !== i));
+                        setEditing(null);
+                      }}
+                    >
+                      ✕
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <button
+                type="button"
+                className={btn}
+                onClick={() => {
+                  side.set([...side.items, withKey({ en: '' })]);
+                  setEditing(side.items.length);
+                }}
+              >
+                + entrée
+              </button>
+            </div>
+          );
+        })()}
+
+      {/* Synergies — héros en portraits, raison rendue et éditable au clic */}
       {show !== 'prosCons' && (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
@@ -274,83 +352,115 @@ export function EditorialEditor({
             <button
               type="button"
               className={btn}
-              onClick={() => setSynergies([...synergies, withKey({ heroes: [''] })])}
+              onClick={() => setSynergies([...synergies, withKey({ heroes: [] })])}
             >
               + groupe
             </button>
           </div>
-          {synergies.map((g, gi) => (
-            <div key={g._key} className="border-line-subtle space-y-2 rounded-lg border p-3">
-              <div className="flex items-start gap-2">
-                <div className="flex-1 space-y-1">
-                  <p className="text-content-subtle text-xs uppercase">
-                    Partenaires (id, nom EN exact, ou tag {'{…}'})
-                  </p>
-                  {g.heroes.map((h, hi) => (
-                    <div key={hi} className="flex items-center gap-2">
-                      <input
-                        className={input}
-                        value={h}
-                        onChange={(e) => {
-                          const next = synergies.slice();
-                          next[gi] = { ...g, heroes: g.heroes.with(hi, e.target.value) };
-                          setSynergies(next);
-                        }}
-                      />
-                      <span className="text-content-subtle w-40 truncate text-xs">
-                        {charNames[resolveHero(h)] ?? (h.startsWith('{') ? 'tag' : '—')}
-                      </span>
-                      <button
-                        type="button"
-                        className={`${btn} text-danger`}
-                        onClick={() => {
-                          const next = synergies.slice();
-                          next[gi] = { ...g, heroes: g.heroes.filter((_, j) => j !== hi) };
-                          setSynergies(next);
-                        }}
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  ))}
+          <datalist id="hero-names">
+            {Object.values(charNames).map((n) => (
+              <option key={n} value={n} />
+            ))}
+          </datalist>
+          {synergies.map((g, gi) => {
+            const setGroup = (p: Partial<SynergyGroup>) => {
+              const next = synergies.slice();
+              next[gi] = { ...g, ...p };
+              setSynergies(next);
+            };
+            return (
+              <div key={g._key} className="card space-y-3 rounded-xl p-4">
+                {/* Partenaires en portraits + ajout */}
+                <div className="flex flex-wrap items-center gap-3">
+                  {g.heroes.map((h, hi) => {
+                    const view = heroViews?.[resolveHero(h)];
+                    return (
+                      <div key={hi} className="relative">
+                        {view ? (
+                          <CharacterPortrait
+                            id={view.id}
+                            name={view.name}
+                            element={view.element}
+                            classType={view.classType}
+                            rarity={view.rarity}
+                            size={56}
+                          />
+                        ) : (
+                          <div className="border-line-subtle text-content-subtle flex h-14 w-14 items-center justify-center rounded-lg border p-1 text-center text-[10px]">
+                            {h.startsWith('{') ? 'tag' : h || '?'}
+                          </div>
+                        )}
+                        <button
+                          type="button"
+                          title="Retirer"
+                          className="border-line bg-surface-raised text-danger absolute -top-1.5 -right-1.5 rounded-full border px-1 text-xs"
+                          onClick={() => setGroup({ heroes: g.heroes.filter((_, j) => j !== hi) })}
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    );
+                  })}
+                  <input
+                    className={`${input} h-9 w-40`}
+                    list="hero-names"
+                    placeholder="+ partenaire…"
+                    value={addHero[g._key] ?? ''}
+                    onChange={(e) => setAddHero((m) => ({ ...m, [g._key]: e.target.value }))}
+                    onKeyDown={(e) => {
+                      if (e.key !== 'Enter') return;
+                      e.preventDefault();
+                      const raw = (addHero[g._key] ?? '').trim();
+                      if (raw) setGroup({ heroes: [...g.heroes, resolveHero(raw)] });
+                      setAddHero((m) => ({ ...m, [g._key]: '' }));
+                    }}
+                  />
                   <button
                     type="button"
-                    className={btn}
-                    onClick={() => {
-                      const next = synergies.slice();
-                      next[gi] = { ...g, heroes: [...g.heroes, ''] };
-                      setSynergies(next);
-                    }}
+                    className={`${btn} text-danger ml-auto`}
+                    onClick={() => setSynergies(synergies.filter((_, j) => j !== gi))}
                   >
-                    + partenaire
+                    Supprimer le groupe
                   </button>
                 </div>
-                <button
-                  type="button"
-                  className={`${btn} text-danger`}
-                  onClick={() => setSynergies(synergies.filter((_, j) => j !== gi))}
-                >
-                  Supprimer le groupe
-                </button>
+
+                {/* Raison — rendue, éditable au clic */}
+                <div>
+                  <p className="text-content-subtle mb-1 text-xs uppercase">Raison ({lang})</p>
+                  {editReason === g._key ? (
+                    <InlineTextField
+                      value={g.reason?.[lang] ?? ''}
+                      refs={refs}
+                      lang={lang}
+                      layout="stacked"
+                      placeholder={lang === 'en' ? '' : (g.reason?.en ?? '')}
+                      onChange={(v) => {
+                        const reason: LocalizedText = { ...(g.reason ?? {}), [lang]: v };
+                        if (!v) delete reason[lang];
+                        setGroup({ reason: Object.keys(reason).length ? reason : undefined });
+                      }}
+                    />
+                  ) : (
+                    <div
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => setEditReason(g._key)}
+                      onKeyDown={(e) => e.key === 'Enter' && setEditReason(g._key)}
+                      className="text-content w-full cursor-pointer text-left text-[13px] leading-snug"
+                    >
+                      {segs.reasons[gi]?.length ? (
+                        <InlinePreview segments={segs.reasons[gi]} />
+                      ) : (
+                        <span className="text-content-subtle italic">
+                          {g.reason?.[lang] || g.reason?.en || '(vide — cliquer pour écrire)'}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
-              <div>
-                <p className="text-content-subtle text-xs uppercase">Raison ({lang})</p>
-                <InlineTextField
-                  value={g.reason?.[lang] ?? ''}
-                  refs={refs}
-                  lang={lang}
-                  placeholder={lang === 'en' ? '' : (g.reason?.en ?? '')}
-                  onChange={(v) => {
-                    const next = synergies.slice();
-                    const reason: LocalizedText = { ...(g.reason ?? {}), [lang]: v };
-                    if (!v) delete reason[lang];
-                    next[gi] = { ...g, reason: Object.keys(reason).length ? reason : undefined };
-                    setSynergies(next);
-                  }}
-                />
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 

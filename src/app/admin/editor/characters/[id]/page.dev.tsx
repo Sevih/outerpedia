@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Skill } from '@contracts';
 import { CharacterVisual } from '@/components/admin/CharacterVisual';
 import { EntitySwitch } from '@/components/admin/EntitySwitch';
+import { EditorTabs } from '@/components/admin/EditorTabs';
 import { CharacterCuratedEditor } from '@/components/admin/CharacterCuratedEditor';
 import {
   CharacterKitEditor,
@@ -167,32 +168,48 @@ export default async function EditorCharacterDetail({
         tags={[...(curated.tags ?? []), ...(char.originalCharacter ? ['core-fusion'] : [])]}
       />
 
-      {/* Recos d'équipement (format curé, sélecteurs par id) */}
-      <GearRecoEditor
-        charId={id}
-        charClass={char.class}
-        initial={gearInitial}
-        options={gearOptions}
-        refs={buildInlineRefs()}
+      {/* Édition curée en onglets : champs manuels → skills → reco */}
+      <EditorTabs
+        tabs={[
+          {
+            key: 'manual',
+            label: 'Champs manuels',
+            content: (
+              <CharacterCuratedEditor
+                id={id}
+                characterName={characterDisplayName(char)}
+                initial={curated}
+                derivedTags={char.tags ?? []}
+              />
+            ),
+          },
+          {
+            key: 'skills',
+            label: 'Skills (buff/debuff)',
+            content: (
+              <CharacterKitEditor
+                cards={cards}
+                chipHide={chipHide}
+                chipAdd={chipAdd}
+                catalog={catalog}
+              />
+            ),
+          },
+          {
+            key: 'reco',
+            label: 'Reco d’équipement',
+            content: (
+              <GearRecoEditor
+                charId={id}
+                charClass={char.class}
+                initial={gearInitial}
+                options={gearOptions}
+                refs={buildInlineRefs()}
+              />
+            ),
+          },
+        ]}
       />
-
-      {/* Champs manuels (curé) */}
-      <section className="border-line-subtle border-t pt-4">
-        <h2 className="text-content-strong mb-3 text-xs font-semibold uppercase">
-          Champs manuels (curé)
-        </h2>
-        <CharacterCuratedEditor
-          id={id}
-          characterName={characterDisplayName(char)}
-          initial={curated}
-          derivedTags={char.tags ?? []}
-        />
-      </section>
-
-      {/* Câblage des buff/debuff des skills (curé — présentation seule) */}
-      <section className="border-line-subtle border-t pt-4">
-        <CharacterKitEditor cards={cards} chipHide={chipHide} chipAdd={chipAdd} catalog={catalog} />
-      </section>
     </div>
   );
 }
