@@ -125,6 +125,9 @@ export default async function EtherIncomeGuide({ lang }: { lang: Lang }) {
       note: note ? tpl(note, noteVars[s.id] ?? {}) : '–',
       amount: s.amount,
       ...(s.daysPerWeek !== undefined ? { daysPerWeek: s.daysPerWeek } : {}),
+      ...(s.monthsPerCycle !== undefined
+        ? { monthsPerCycle: s.monthsPerCycle, cadenceNote: L(LABELS.everyOtherMonth) }
+        : {}),
       ...(s.ranked ? { ranked: s.ranked } : {}),
     };
   };

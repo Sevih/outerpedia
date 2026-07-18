@@ -306,6 +306,15 @@ export const LABELS = {
     zh: 'Top {n}以下',
     fr: 'Sous le Top {n}',
   },
+  // Cadence guild raid / world boss (V3 — la V2 les comptait chaque mois) :
+  // {amount} = récompense par édition, moyennée dans les totaux mensuels.
+  everyOtherMonth: {
+    en: 'Runs every other month ({amount} per run, averaged).',
+    jp: '2ヶ月に1回開催（1回{amount}、月平均で計上）。',
+    kr: '2개월에 한 번 진행 (회당 {amount}, 월평균으로 집계).',
+    zh: '每2个月举行一次（每次{amount}，按月均计入）。',
+    fr: 'A lieu un mois sur deux ({amount} par édition, moyenné).',
+  },
 } as const satisfies Record<string, LocalizedText>;
 
 /** Libellés des sources de revenus (verbatim V2). */

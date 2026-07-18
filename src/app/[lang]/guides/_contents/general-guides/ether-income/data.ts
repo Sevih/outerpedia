@@ -17,6 +17,10 @@ export interface EtherSource {
   amount: number;
   /** Jours actifs par semaine (sources daily seulement, défaut 7). */
   daysPerWeek?: number;
+  /** Cadence en mois (sources monthly, défaut 1) : guild raid et world boss
+   *  ALTERNENT, un mois sur deux (décision Sevih 18/07 — la V2 les comptait
+   *  chaque mois). Les totaux moyennent (montant ÷ cadence). */
+  monthsPerCycle?: number;
   ranked?: RankedFamily;
 }
 
@@ -43,8 +47,8 @@ export const MONTHLY_SOURCES: EtherSource[] = [
   { id: 'monthly.checkin', amount: 750 },
   { id: 'monthly.maintenance', amount: 400 },
   { id: 'monthly.jointMission', amount: 880 },
-  { id: 'monthly.guildRaid', amount: 200, ranked: 'guildRaid' },
-  { id: 'monthly.worldBoss', amount: 60, ranked: 'worldBoss' },
+  { id: 'monthly.guildRaid', amount: 200, ranked: 'guildRaid', monthsPerCycle: 2 },
+  { id: 'monthly.worldBoss', amount: 60, ranked: 'worldBoss', monthsPerCycle: 2 },
 ];
 
 export const VARIABLE_SOURCE_IDS = [
