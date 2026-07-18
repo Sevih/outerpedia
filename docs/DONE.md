@@ -6,6 +6,41 @@
 
 ## 2026-07-18
 
+- **Éditeur reco d'équipement UNIFIÉ sur tuiles** — l'aperçu EST l'éditeur : rend
+  le vrai `GearRecoSection` (tuiles 6★, onglets par build), chaque tuile cliquable
+  ouvre son éditeur inline (`✕` direct pour retirer). (1) **Icônes 6★** :
+  `gear-options` dérive désormais des FAMILLES (`topId`) au lieu du plus petit id
+  → corrige le bug 1★. (2) **Filtre de classe** sur les selects arme/amulette
+  (`family.classLimits`, vide = libre ; valeur hors-classe préexistante conservée
+  et marquée). (3) **Main stats en multi-select** (puces, pool du slot ; armes =
+  ATK%/DEF%/HP% fixes ; amulettes = pool famille ; valeurs hors-pool retirables).
+  (4) **Presets bidirectionnels** (`gear-preset-resolve`) : DÉPLIÉS au chargement
+  (page) → édition en pièces 1:1 avec les tuiles, RECOMPRESSÉS au save (store)
+  → JSON compact, pas de diff géant. (5) **Import d'un build** depuis un autre
+  perso. Résolution via server action debouncée (`gear-preview-actions` +
+  `resolveGearBuilds` extrait de `getCharacterGearReco`). `GearRecoSection`
+  inchangé côté site (juste `SubstatPrioBar` exportée).
+- **Auto-traduction éditoriale (DeepL → fallback Haiku)** — bouton « Traduire
+  (EN → langues vides) » dans les éditeurs (pros/cons, synergie, notes reco).
+  `translate-actions` (server action) : masque les fragments à préserver (tags
+  `{…}` déjà localisés au rendu, `<color>`, `\n`), traduit la prose seule,
+  réinsère. Deux moteurs, bascule auto : **DeepL** primaire (mode XML
+  `ignore_tags`, quota gratuit) → sur **456** (quota épuisé) → **Claude Haiku**.
+  Remplit uniquement les langues vides (préserve les trads manuelles), champs
+  « à revoir ». Clés `DEEPL_API_KEY` / `ANTHROPIC_API_KEY` (env, dev-only).
+- **Aperçu inline fidèle (descripteurs + vrais composants)** — l'aperçu des tags
+  `{TYPE/…}` ne réimplémente plus le rendu (couleurs seules, sans icônes) :
+  `resolveInlineSegments` (sibling de `parseText`, partage ses résolveurs privés
+  → zéro dérive) projette le texte en DESCRIPTEURS purs, la server action
+  `inline-preview-actions` les renvoie (résolveurs effets/équipement server-only,
+  `node:fs`), et `InlinePreview` (client) les rend avec les VRAIS composants
+  inline (`InlineIcon`/`ItemInline`/`StatInline`/`EffectIconTile`, tous
+  client-safe) → identique au site (icônes, couleurs, liens, tooltips). Corrige
+  le mur Next 16 : renvoyer du JSX de composants clients depuis une action casse
+  le manifeste RSC Turbopack → on ne traverse QUE des données. `parseText`
+  intouché (tests verts). Câblé dans `InlineTextField` (prop `lang` réintroduite),
+  route `/api/admin/preview-text` supprimée (repliée dans l'action).
+
 - **Guide « Shop Purchase Priorities » porté** (economy, ordre 4) — le plus
   data-driven de la catégorie. La V2 codait ~1000 lignes de contenu de shop EN
   DUR (`data.ts`), déjà PÉRIMÉ (Guild Shop rebrassé le 2024-12-03 : prix changés,

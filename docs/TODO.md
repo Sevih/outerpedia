@@ -63,10 +63,12 @@ lui.
   logique d'écriture.
 
 **Piège technique (Next 16, déjà rencontré) :** `parseText`/`checkText`
-(`src/lib/parse-text.ts`) sont server-only (`node:fs`) ; `renderGameColors`
-(`GameText.tsx`) client-safe ; `react-dom/server` interdit en route handler →
-aperçu **100 % client**, validation via route dédiée (dupliquer
-`/api/admin/preview-text` en version publique).
+(`src/lib/parse-text.tsx`) sont server-only (`node:fs`), ET renvoyer du JSX de
+composants clients depuis une server action casse le manifeste RSC Turbopack.
+Solution retenue (18/07, cf. DONE) : `resolveInlineSegments` projette le texte en
+DESCRIPTEURS purs côté serveur (server action `inline-preview-actions`), rendus
+client par `InlinePreview` avec les vrais composants inline. Pour la version
+publique : même approche (server action publique, sans garde `IS_DEV`).
 
 **Formats JSON à figer au démarrage** (ne pas deviner) : pros/cons, synergies,
 gear reco = confirmés côté admin ; **recommended team** et **premium/limited**
