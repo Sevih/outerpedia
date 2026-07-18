@@ -25,6 +25,53 @@
       référence jusqu'à la bascule prod V2→V3 (liée à la page `/coupons`). Rien
       à faire d'ici là.
 
+## 💡 Feature — Outils publics de contribution (BLOQUÉ)
+
+> Idée Sevih (18/07). **NE PAS CODER TANT QUE L'ÉDITORIAL ADMIN N'EST PAS
+> STABILISÉ** : les éditeurs guides/pros-cons et les formats curés bougent
+> encore → risque de pondre du doublon ou de l'inutile. Repris seulement une
+> fois la matrice admin figée.
+
+Générateurs publics de « syntaxe » pour que les contributeurs (Jaego =
+pros/cons + synergies + gear reco + recommended team ; Shiraen = premium/
+limited) composent sans suivre un guide de syntaxe à la main, exportent un
+**JSON au format curé**, et l'envoient sur Discord. Sevih importe/relit chez
+lui.
+
+**Décisions actées (18/07) — sciemment minimal :**
+
+- **Pas d'auth / pas de BDD / pas d'OAuth / pas de file d'attente.** Sevih
+  relit de toute façon → l'infra d'auth ne servirait à rien. Choix Sevih :
+  outils publics → export JSON → Discord.
+- **Générateur = page prod publique mais NON référencée** (hors `NAV_ITEMS`/
+  sitemap, `noindex`). Aucun secret, aucun backend d'écriture → surface
+  d'attaque nulle.
+- **Import/review reste `.dev`** (gardé `IS_DEV`, comme les éditeurs actuels) :
+  ingère le JSON reçu, montre le **diff + les langues manquantes** (l'auteur
+  n'écrit souvent que l'EN — EN requis, jp/kr/zh optionnels), applique via les
+  stores curés → commit local. C'est là que vit le « check des traductions ».
+
+**Réutilise l'existant (ne PAS réécrire l'UI de saisie) :**
+
+- `src/components/admin/InlineTextField.tsx` (composeur : barre d'insertion
+  14 tokens, autocomplétion des refs, aperçu, validation live),
+  `InlinePreview.tsx` (aperçu client pur), `src/lib/admin/inline-refs.ts`
+  (`buildInlineRefs()`). Les rendre réutilisables hors `.dev` (aucun secret,
+  data de jeu publique) plutôt que dupliquer.
+- Écriture : stores curés canoniques (`character-skill-curated-store`,
+  `equipment-curated-store`, sérialiseur `datagen/lib/json`) — aucune nouvelle
+  logique d'écriture.
+
+**Piège technique (Next 16, déjà rencontré) :** `parseText`/`checkText`
+(`src/lib/parse-text.ts`) sont server-only (`node:fs`) ; `renderGameColors`
+(`GameText.tsx`) client-safe ; `react-dom/server` interdit en route handler →
+aperçu **100 % client**, validation via route dédiée (dupliquer
+`/api/admin/preview-text` en version publique).
+
+**Formats JSON à figer au démarrage** (ne pas deviner) : pros/cons, synergies,
+gear reco = confirmés côté admin ; **recommended team** et **premium/limited**
+= à lire dans les `@contracts` (`CharacterCurated`) + datagen avant de coder.
+
 ## 📄 Pages manquantes (inventaire layout du 2026-07-17)
 
 > Cibles du header/footer posés le 17/07 (contrat `src/lib/nav.ts`) — 404
@@ -133,7 +180,7 @@
   EXACTES actuelles, puis étendre RAW_COLOR. PÉRIMÈTRE (choix Sevih 18/07) :
   palettes `.ts` + composants d'abord, éditorial `_contents` en phase 2.
   🔶 EN COURS (18/07) : (1) `nodeStyles.ts` → tokens `--monad-milestone/
-    explore/combat/story` (valeurs exactes) → DONE ; `ELEMENT_RING` déjà
+  explore/combat/story` (valeurs exactes) → DONE ; `ELEMENT_RING` déjà
   tokenisé (rien à faire). (2) `TurnOrder` amber SPD → `text-stat` → DONE.
   (3) GALERIE DEV `/dev/tokens` (`page.dev.tsx`) : toutes les CSS vars en
   pastilles + valeur résolue, groupées — pour voir/ajuster. RESTE : les ~17
