@@ -168,7 +168,10 @@ function Module({
   );
 }
 
-function StatInline({ statKey, label }: { statKey: string; label?: string }) {
+// Chip de stat PROPRE à la fiche équipement (à ne pas confondre avec le
+// `inline/StatInline` partagé) : résout l'icône via `statKey`, tronque le nom
+// et n'a pas de tooltip — un rôle et un habillage distincts, pas un doublon.
+function EquipStatChip({ statKey, label }: { statKey: string; label?: string }) {
   return (
     <span className="text-content-strong inline-flex min-w-0 items-center gap-1.5 text-sm font-bold">
       {STAT_ICON[statKey] && (
@@ -581,7 +584,7 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
                               key={si}
                               className="flex items-baseline justify-between gap-2 py-0.5"
                             >
-                              <StatInline statKey={o.key} label={o.label} />
+                              <EquipStatChip statKey={o.key} label={o.label} />
                               <FlashNum
                                 value={mainValue(o, enh, tier, ascended, rules)}
                                 suffix={o.percent ? '%' : ''}
@@ -603,7 +606,7 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
                   <div className="flex flex-col gap-2">
                     {slot.options.map((o) => (
                       <div key={o.key} className="flex items-baseline justify-between gap-3">
-                        <StatInline statKey={o.key} label={o.label} />
+                        <EquipStatChip statKey={o.key} label={o.label} />
                         <FlashNum
                           value={mainValue(o, enh, tier, ascended, rules)}
                           suffix={o.percent ? '%' : ''}
@@ -632,7 +635,7 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
                               : 'transparent',
                           }}
                         >
-                          <StatInline statKey={o.key} label={o.label} />
+                          <EquipStatChip statKey={o.key} label={o.label} />
                           <FlashNum
                             value={mainValue(o, enh, tier, ascended, rules)}
                             suffix={o.percent ? '%' : ''}
@@ -670,7 +673,7 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
                     key={`${s.key}|${s.percent}`}
                     className="border-line-subtle bg-surface-base/40 flex items-center justify-between gap-2.5 rounded-lg border px-2.5 py-1.5"
                   >
-                    <StatInline statKey={s.key} />
+                    <EquipStatChip statKey={s.key} />
                     <span className="flex items-baseline gap-2 font-mono text-xs tabular-nums">
                       <span className="text-content-muted">+{fmt(s.step, s.percent)}</span>
                       <span className="text-content-subtle">→</span>

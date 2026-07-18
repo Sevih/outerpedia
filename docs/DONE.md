@@ -17,6 +17,22 @@
   loader (`guide-detail.tsx`) lit `mod.default` — re-export transparent.
   Typecheck OK, 27 tests guides verts.
 
+- **`StatInline` / hex éléments — faux doublon levé, mort retiré** (dette code /
+  duplication). Le `StatInline` local d'`EquipmentDetail.tsx` était flaggé
+  « redondant avec `inline/StatInline` » : VÉRIFICATION → ce n'est pas un
+  doublon. Le local résout l'icône depuis `statKey`, tronque le nom, n'a pas de
+  tooltip ; le partagé prend `name/iconSrc/desc` pré-résolus + tooltip. Rôles et
+  habillages distincts. Renommé `EquipStatChip` (l'homonyme induisait le faux
+  constat de doublon) + docstring qui explique la distinction. `detail/theme.ts` :
+  seul `.hex` d'`elementAccent()` était consommé — les 4 champs alpha
+  (`glow/soft/softer/border`) + l'interface `ElementAccent` étaient CALCULÉS
+  MORTS ; réduit à `elementHex(): string`, `ELEMENT_HEX` dé-exporté (n'était lu
+  qu'en interne). Les valeurs miroitent globals.css (`--fire`…) : commentaire
+  renforcé (seconde source assumée, pas indépendante). Le vrai single-source CSS
+  (`var(--${element})`) est REPORTÉ — il casse sur la clé `dark` vs `--dark-elem`
+  et touche des styles inline SSR de la fiche perso (risque visuel, relecture).
+  Typecheck OK.
+
 - **`data/legacy/` SUPPRIMÉ (249 fichiers) — l'oracle V2 déposé** (fin du PRIO #1).
   Trois familles de lecteurs coupées : (1) OUTILS ONE-SHOT obsolètes (migration
   finie) — `import-equipment`, `import-gear-reco`, `seedFromLegacy` +

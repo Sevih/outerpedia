@@ -29,7 +29,7 @@ import { mergeStatusEffects } from '@/lib/data/effects';
 import { GearRecoSection } from '@/components/character/GearRecoSection';
 import { getCharacterGearReco } from '@/lib/data/gear-reco';
 import { img, ELEMENT_TEXT, ROLE_BG } from '@/lib/images';
-import { elementAccent } from '@/components/character/detail/theme';
+import { elementHex } from '@/components/character/detail/theme';
 import { OverviewSection } from '@/components/character/detail/OverviewSection';
 import { QuickToc, type TocSection } from '@/components/character/detail/QuickToc';
 import type { FullArt } from '@/components/character/detail/FullArtCarousel';
@@ -137,7 +137,7 @@ export default async function CharacterDetail({
   const t = await getT(lang);
   const name = characterDisplayName(char, lang);
   const curated = getCharacterCurated(char.id);
-  const { hex } = elementAccent(char.element);
+  const hex = elementHex(char.element);
   const el = lRec(G.elements[char.element], lang);
   const cl = lRec(G.classes[char.class], lang);
   const sub = char.subClass ? lRec(G.subClasses[char.subClass]?.name, lang) : '';

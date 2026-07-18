@@ -210,9 +210,13 @@
       sur le re-export 1 ligne (18/07 → DONE). RESTE non concerné : 34 wrappers
       qui injectent un `content.json` local (BossGuide & co) et 12 contenus
       éditoriaux (general-guides/other).
-- [ ] `StatInline` local d'EquipmentDetail.tsx:167 redondant avec
-      `inline/StatInline` ; hex éléments de `detail/theme.ts` dupliquant les
-      tokens de globals.css (2 sources de vérité).
+- [x] `StatInline` local d'EquipmentDetail / hex `detail/theme.ts` (18/07 → DONE).
+      Verdict : PAS un vrai doublon — le local résout `statKey`, tronque, sans
+      tooltip (renommé `EquipStatChip`, homonyme tué). `detail/theme.ts` : mort
+      retiré (seul `.hex` lu → `elementAccent`→`elementHex`, interface + alpha
+      supprimées), `ELEMENT_HEX` dé-exporté, miroir globals.css DOCUMENTÉ (le
+      vrai single-source CSS via `var(--${element})` casse sur `dark`/`--dark-elem`
+      → reporté, risque visuel page perso).
 
 ### Chantiers actés (16/07, inchangés)
 
