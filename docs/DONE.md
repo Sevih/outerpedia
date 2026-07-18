@@ -6,6 +6,19 @@
 
 ## 2026-07-18
 
+- **Props / branches mortes retirées** (dette code, chaque prop RE-VÉRIFIÉE contre
+  tous ses call sites). `CharacterCard` : 6 props d'affichage jamais passées
+  (showName/showIcons/showElement/showClass/showStars/showBadge) + `children` +
+  la branche `maxWidth: 120` inatteignable (seul `sm` atteint le nom-sous-carte,
+  et son container fait 66) → composant allégé, sortie IDENTIQUE (les défauts
+  valaient déjà true). `title` : prop morte de MonadRouteClient (le seul appelant,
+  MonadGateGuide, ne la passe pas) qui alimentait un `<h2>` mort de MonadGateMap —
+  retirée des deux + son rendu. `defaultIndex` : mort sur SegmentedTabs (toujours 0) et BossEncounters (toujours `encounters.length-1`, la difficulté la plus
+  dure) → inliné ; EncounterSelection.defaultIndex GARDÉ (requis, passé par
+  StagedBossGuide). `guide-accents.ts` : `textSoft`/`dot`/`stripe`/`border` lus
+  par personne (CategoryCard n'utilise que 7 des 11 champs) → 48 chaînes Tailwind
+  mortes supprimées, type resserré. Typecheck + 353 tests OK.
+
 - **Éditeur admin EE** (dernier éditeur d'équipement — les autres pièces n'ont
   pas de curation à éditer, décision Sevih). L'`editor/ee` était un placeholder ;
   la couche curée EE (`rank`/`rank10`, tier list V2 ee-priority-base/plus10)

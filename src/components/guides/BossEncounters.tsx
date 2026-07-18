@@ -88,11 +88,6 @@ export async function BossEncounters({
   dungeons,
   lang,
   /**
-   * Difficulté ouverte au premier rendu. Par défaut la PLUS DURE : c'est celle
-   * pour laquelle les guides sont écrits (la V2 ne montrait même que celle-là).
-   */
-  defaultIndex,
-  /**
    * Encart posé DANS la carte du boss, sous ses stats — ce que le mode a de
    * particulier à dire sur CETTE difficulté (la poursuite irregular y met son
    * butin : le pool change d'une difficulté à l'autre, l'équipement ne tombe
@@ -127,7 +122,6 @@ export async function BossEncounters({
    */
   dungeons?: readonly string[];
   lang: Lang;
-  defaultIndex?: number;
   afterStats?: (encounter: Encounter) => ReactNode;
   monsters?: (encounter: Encounter) => DungeonMonster[];
   hideSpawnLabel?: boolean;
@@ -151,10 +145,9 @@ export async function BossEncounters({
   const labels = encounters.map((e) => encounterLabel(e.ref, lang, t));
 
   return (
-    <EncounterSelection
-      count={encounters.length}
-      defaultIndex={defaultIndex ?? encounters.length - 1}
-    >
+    // Difficulté ouverte au premier rendu = la PLUS DURE : celle pour laquelle
+    // les guides sont écrits (la V2 ne montrait même que celle-là).
+    <EncounterSelection count={encounters.length} defaultIndex={encounters.length - 1}>
       <div className="space-y-4">
         {encounters.length > 1 && (
           <EncounterTabs label={t('guides.difficulty.title')} tabs={labels} />

@@ -127,11 +127,14 @@
       (buff.ts, testés mais jamais appelés en prod), export `isPermilleRow`,
       `validateTagDef` (curated/tags.ts:57 — son commentaire prétend qu'il est
       branché, c'est faux : le brancher ou le supprimer).
-- [ ] Props/branches mortes : `CharacterCard` (showName/showIcons/showElement/
-      showClass/showStars/showBadge/children jamais passés ; branche `120` de
-      maxWidth l.265 inatteignable), `title` de MonadRouteClient/MonadGateMap,
-      `defaultIndex` de SegmentedTabs/BossEncounters, champs `textSoft`/`dot`/
-      `stripe`/`border` de `guide-accents.ts` (44 chaînes Tailwind mortes).
+- [x] Props/branches mortes (18/07 → DONE). RETIRÉS : 6 props jamais passées de
+      `CharacterCard` (showName/showIcons/showElement/showClass/showStars/showBadge) + `children` + branche `120` de maxWidth inatteignable (seul sm y arrive,
+      toujours 66) ; prop `title` de MonadRouteClient→MonadGateMap (le seul
+      appelant ne la passe pas) ; prop `defaultIndex` de SegmentedTabs (toujours 0)
+      et BossEncounters (toujours `length-1`) — EncounterSelection.defaultIndex
+      RESTE (requis, passé par StagedBossGuide) ; 48 chaînes Tailwind mortes de
+      `guide-accents.ts` (`textSoft`/`dot`/`stripe`/`border` — CategoryCard ne lit
+      que text/hoverBorder/iconBorder/iconFrom/pillBg/pillBorder/glow).
 - [ ] `.env.example:4-13` : `DB_*`/`BOT_API_URL` lus par aucun code — retirer
       ou annoter « V2, pas encore porté ».
 

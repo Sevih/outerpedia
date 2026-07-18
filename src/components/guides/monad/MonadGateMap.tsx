@@ -40,8 +40,6 @@ interface Props {
   edges: MonadEdge[];
   lang: Lang;
   strings: MonadStrings;
-  /** Titre optionnel au-dessus de la carte (nom de la région). */
-  title?: string;
 }
 
 /**
@@ -58,7 +56,7 @@ const ZOOM_SENSITIVITY = 0.04;
 const COMPACT_NODE_SIZE = 44;
 const COMPACT_NODE_GAP = 24;
 
-export default function MonadGateMap({ nodes, edges, lang, strings, title }: Props) {
+export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const fullscreenRef = useRef<HTMLDivElement>(null);
   const [drag, setDrag] = useState({ x: 0, y: 0 });
@@ -257,7 +255,6 @@ export default function MonadGateMap({ nodes, edges, lang, strings, title }: Pro
       ref={fullscreenRef}
       className={isFullscreen ? 'bg-surface-sunken fixed inset-0 z-9999' : 'relative'}
     >
-      {title && <h2 className="mb-2 text-lg font-bold">{title}</h2>}
       <div className="absolute top-14 right-4 left-4 z-20 flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap gap-2">
           <label className="border-line-strong bg-surface-raised text-content-strong inline-flex items-center gap-2 rounded border px-3 py-1 text-sm shadow">

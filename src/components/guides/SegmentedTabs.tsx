@@ -29,13 +29,11 @@ export interface TabItem {
 export function SegmentedTabs({
   tabs,
   ariaLabel,
-  defaultIndex = 0,
   urlKey,
   variant = 'pill',
 }: {
   tabs: TabItem[];
   ariaLabel: string;
-  defaultIndex?: number;
   /** Paramètre de hash à synchroniser (ex. `phase`, `boss`, `team`). */
   urlKey?: string;
   /**
@@ -46,9 +44,9 @@ export function SegmentedTabs({
    */
   variant?: 'pill' | 'boss' | 'icon';
 }) {
-  const [localSelected, setLocalSelected] = useState(defaultIndex);
+  const [localSelected, setLocalSelected] = useState(0);
   // Lecture inconditionnelle (règle des hooks) ; ignorée sans `urlKey`. Snapshot
-  // serveur `null` → premier rendu sur `defaultIndex`, resync après hydratation.
+  // serveur `null` → premier rendu sur le 1er onglet, resync après hydratation.
   const hashValue = useUrlSlice('hashchange', () => (urlKey ? readHashParam(urlKey) : null));
   const baseId = useId();
 
@@ -57,7 +55,7 @@ export function SegmentedTabs({
   let selected = localSelected;
   if (urlKey) {
     const idx = hashValue ? tabs.findIndex((tab) => tab.key === hashValue) : -1;
-    selected = idx >= 0 ? idx : defaultIndex;
+    selected = idx >= 0 ? idx : 0;
   }
 
   const select = (i: number) => {

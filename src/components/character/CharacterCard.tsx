@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import type { Route } from 'next';
-import type { ReactNode } from 'react';
 import { img, RECRUIT_TAG_SPRITE } from '@/lib/images';
 import { FitText } from '@/components/ui/FitText';
 
@@ -88,16 +87,9 @@ export interface CharacterCardProps {
   tags?: string[];
   size?: CharacterCardSize;
   href?: string;
-  showName?: boolean;
-  showIcons?: boolean;
-  showElement?: boolean;
-  showClass?: boolean;
-  showStars?: boolean;
   /** Gabarit a11y localisé des étoiles (`{rarity}`) — défaut EN. */
   starAriaLabel?: string;
-  showBadge?: boolean;
   priority?: boolean;
-  children?: ReactNode;
 }
 
 export function CharacterCard({
@@ -110,24 +102,14 @@ export function CharacterCard({
   tags,
   size = 'md',
   href,
-  showName = true,
-  showIcons = true,
-  showElement,
-  showClass,
-  showStars = true,
   starAriaLabel = '{rarity} star rarity',
-  showBadge = true,
   priority = false,
-  children,
 }: CharacterCardProps) {
   const s = SIZES[size];
   // Un seul badge : le premier tag QUI EN A UN. Les `tags` arrivent déjà dans
   // l'ordre canonique du vocabulaire (`sortTags`, data/curated/tags.json) — pas
   // d'ordre redéclaré ici, ce composant est client et ne lit pas le disque.
-  const badgeTag =
-    showBadge && s.badgeClass && tags ? tags.find((tg) => tg in RECRUIT_TAG_SPRITE) : undefined;
-  const renderElement = (showElement ?? showIcons) && element;
-  const renderClass = (showClass ?? showIcons) && classType;
+  const badgeTag = s.badgeClass && tags ? tags.find((tg) => tg in RECRUIT_TAG_SPRITE) : undefined;
   const baseName = prefix ? name.replace(prefix, '').trim() : name;
 
   const portraitBox = (
@@ -151,7 +133,7 @@ export function CharacterCard({
       )}
 
       {/* Étoiles — en haut à droite sur slot sombre */}
-      {showStars && rarity ? (
+      {rarity ? (
         <div
           className={`absolute ${s.starPos} z-10`}
           role="img"
@@ -185,7 +167,7 @@ export function CharacterCard({
       <div className="absolute inset-x-0 bottom-0 z-5 h-1/4 bg-linear-to-t from-black/80 to-transparent" />
 
       {/* Icône d'élément — en bas à droite */}
-      {renderElement && (
+      {element && (
         <div
           className={`absolute ${s.elemBottom} right-1 z-10`}
           style={{ width: s.iconSize, height: s.iconSize }}
@@ -200,7 +182,7 @@ export function CharacterCard({
       )}
 
       {/* Icône de classe — au-dessus de l'élément */}
-      {renderClass && (
+      {classType && (
         <div
           className={`absolute ${s.classBottom} right-1 z-10`}
           style={{ width: s.classIconSize, height: s.classIconSize }}
@@ -230,7 +212,7 @@ export function CharacterCard({
       )}
 
       {/* Nom en surimpression — bas gauche (md/lg) */}
-      {showName && s.nameOverlay && (
+      {s.nameOverlay && (
         <div
           style={{ textShadow: '1px 0 1px #000, -1px 0 1px #000, 0 1px 1px #000, 0 -1px 1px #000' }}
           className={`absolute bottom-4 ${s.nameLeft} z-10 ${s.nameMaxW} leading-tight font-bold text-white`}
@@ -256,28 +238,23 @@ export function CharacterCard({
     portraitBox
   );
 
-  const hasExtra = children || (showName && !s.nameOverlay);
-  if (!hasExtra) return wrapper;
+  // Nom SOUS la carte : uniquement les tailles sans surimpression (aujourd'hui
+  // le seul `sm`) — les autres peignent le nom dans le portrait.
+  if (s.nameOverlay) return wrapper;
 
   return (
     <div className="flex flex-col items-center gap-1">
       {wrapper}
-      {showName && !s.nameOverlay && (
-        <div
-          className="text-center leading-tight text-zinc-200"
-          style={{ maxWidth: s.container.includes('66') ? 66 : 120 }}
-        >
-          {prefix && (
-            <FitText max={s.prefixPx.max} min={s.prefixPx.min} center className="text-zinc-400">
-              {prefix}
-            </FitText>
-          )}
-          <FitText max={s.namePx.max} min={s.namePx.min} center>
-            {baseName}
+      <div className="text-center leading-tight text-zinc-200" style={{ maxWidth: 66 }}>
+        {prefix && (
+          <FitText max={s.prefixPx.max} min={s.prefixPx.min} center className="text-zinc-400">
+            {prefix}
           </FitText>
-        </div>
-      )}
-      {children}
+        )}
+        <FitText max={s.namePx.max} min={s.namePx.min} center>
+          {baseName}
+        </FitText>
+      </div>
     </div>
   );
 }

@@ -25,10 +25,9 @@ interface Props {
   lang: Lang;
   strings: MonadStrings;
   rewardLabels: { rewards: string; firstClear: string };
-  title?: string;
 }
 
-export default function MonadRouteClient({ variants, lang, strings, rewardLabels, title }: Props) {
+export default function MonadRouteClient({ variants, lang, strings, rewardLabels }: Props) {
   // `?v=<index>` : l'URL est la SOURCE DE VÉRITÉ de la variante active (deep-link
   // partageable, Back/Forward pilote l'UI — cf. useUrlSlice). Lecture par
   // `window.location` et non `useSearchParams`, qui forcerait une frontière
@@ -74,7 +73,6 @@ export default function MonadRouteClient({ variants, lang, strings, rewardLabels
         edges={current.route.edges}
         lang={lang}
         strings={strings}
-        title={title}
       />
     </div>
   );

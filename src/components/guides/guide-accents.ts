@@ -13,11 +13,6 @@ import type { GuideCategorySlug } from '@/lib/data/guide-categories';
 
 export type GuideAccent = {
   text: string;
-  textSoft: string;
-  dot: string;
-  /** Aplat utilitaire pour bandes de section / soulignés. */
-  stripe: string;
-  border: string;
   hoverBorder: string;
   iconBorder: string;
   iconFrom: string;
@@ -29,10 +24,6 @@ export type GuideAccent = {
 export const GUIDE_ACCENT: Record<GuideCategorySlug, GuideAccent> = {
   'general-guides': {
     text: 'text-emerald-300',
-    textSoft: 'text-emerald-400/80',
-    dot: 'bg-emerald-400 shadow-[0_0_8px_rgba(74,222,128,0.6)]',
-    stripe: 'bg-emerald-400',
-    border: 'border-emerald-500/30',
     hoverBorder: 'hover:border-emerald-500/50',
     iconBorder: 'border-emerald-500/30',
     iconFrom: 'from-emerald-500/15',
@@ -42,10 +33,6 @@ export const GUIDE_ACCENT: Record<GuideCategorySlug, GuideAccent> = {
   },
   adventure: {
     text: 'text-sky-300',
-    textSoft: 'text-sky-400/80',
-    dot: 'bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.6)]',
-    stripe: 'bg-sky-400',
-    border: 'border-sky-500/30',
     hoverBorder: 'hover:border-sky-500/50',
     iconBorder: 'border-sky-500/30',
     iconFrom: 'from-sky-500/15',
@@ -55,10 +42,6 @@ export const GUIDE_ACCENT: Record<GuideCategorySlug, GuideAccent> = {
   },
   'adventure-license': {
     text: 'text-indigo-300',
-    textSoft: 'text-indigo-400/80',
-    dot: 'bg-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.6)]',
-    stripe: 'bg-indigo-400',
-    border: 'border-indigo-500/30',
     hoverBorder: 'hover:border-indigo-500/50',
     iconBorder: 'border-indigo-500/30',
     iconFrom: 'from-indigo-500/15',
@@ -68,10 +51,6 @@ export const GUIDE_ACCENT: Record<GuideCategorySlug, GuideAccent> = {
   },
   'guild-raid': {
     text: 'text-amber-300',
-    textSoft: 'text-amber-400/80',
-    dot: 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]',
-    stripe: 'bg-amber-400',
-    border: 'border-amber-500/30',
     hoverBorder: 'hover:border-amber-500/50',
     iconBorder: 'border-amber-500/30',
     iconFrom: 'from-amber-500/15',
@@ -81,10 +60,6 @@ export const GUIDE_ACCENT: Record<GuideCategorySlug, GuideAccent> = {
   },
   'world-boss': {
     text: 'text-orange-300',
-    textSoft: 'text-orange-400/80',
-    dot: 'bg-orange-400 shadow-[0_0_8px_rgba(251,146,60,0.6)]',
-    stripe: 'bg-orange-400',
-    border: 'border-orange-500/30',
     hoverBorder: 'hover:border-orange-500/50',
     iconBorder: 'border-orange-500/30',
     iconFrom: 'from-orange-500/15',
@@ -94,10 +69,6 @@ export const GUIDE_ACCENT: Record<GuideCategorySlug, GuideAccent> = {
   },
   'dimensional-singularity': {
     text: 'text-violet-300',
-    textSoft: 'text-violet-400/80',
-    dot: 'bg-violet-400 shadow-[0_0_8px_rgba(167,139,250,0.6)]',
-    stripe: 'bg-violet-400',
-    border: 'border-violet-500/30',
     hoverBorder: 'hover:border-violet-500/50',
     iconBorder: 'border-violet-500/30',
     iconFrom: 'from-violet-500/15',
@@ -107,10 +78,6 @@ export const GUIDE_ACCENT: Record<GuideCategorySlug, GuideAccent> = {
   },
   'joint-challenge': {
     text: 'text-teal-300',
-    textSoft: 'text-teal-400/80',
-    dot: 'bg-teal-400 shadow-[0_0_8px_rgba(45,212,191,0.6)]',
-    stripe: 'bg-teal-400',
-    border: 'border-teal-500/30',
     hoverBorder: 'hover:border-teal-500/50',
     iconBorder: 'border-teal-500/30',
     iconFrom: 'from-teal-500/15',
@@ -120,10 +87,6 @@ export const GUIDE_ACCENT: Record<GuideCategorySlug, GuideAccent> = {
   },
   'special-request': {
     text: 'text-rose-300',
-    textSoft: 'text-rose-400/80',
-    dot: 'bg-rose-400 shadow-[0_0_8px_rgba(251,113,133,0.6)]',
-    stripe: 'bg-rose-400',
-    border: 'border-rose-500/30',
     hoverBorder: 'hover:border-rose-500/50',
     iconBorder: 'border-rose-500/30',
     iconFrom: 'from-rose-500/15',
@@ -133,10 +96,6 @@ export const GUIDE_ACCENT: Record<GuideCategorySlug, GuideAccent> = {
   },
   'irregular-extermination': {
     text: 'text-red-300',
-    textSoft: 'text-red-400/80',
-    dot: 'bg-red-400 shadow-[0_0_8px_rgba(239,68,68,0.6)]',
-    stripe: 'bg-red-400',
-    border: 'border-red-500/30',
     hoverBorder: 'hover:border-red-500/50',
     iconBorder: 'border-red-500/30',
     iconFrom: 'from-red-500/15',
@@ -146,10 +105,6 @@ export const GUIDE_ACCENT: Record<GuideCategorySlug, GuideAccent> = {
   },
   'monad-gate': {
     text: 'text-fuchsia-300',
-    textSoft: 'text-fuchsia-400/80',
-    dot: 'bg-fuchsia-400 shadow-[0_0_8px_rgba(232,121,249,0.6)]',
-    stripe: 'bg-fuchsia-400',
-    border: 'border-fuchsia-500/30',
     hoverBorder: 'hover:border-fuchsia-500/50',
     iconBorder: 'border-fuchsia-500/30',
     iconFrom: 'from-fuchsia-500/15',
@@ -159,10 +114,6 @@ export const GUIDE_ACCENT: Record<GuideCategorySlug, GuideAccent> = {
   },
   'skyward-tower': {
     text: 'text-cyan-300',
-    textSoft: 'text-cyan-400/80',
-    dot: 'bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.6)]',
-    stripe: 'bg-cyan-400',
-    border: 'border-cyan-500/30',
     hoverBorder: 'hover:border-cyan-500/50',
     iconBorder: 'border-cyan-500/30',
     iconFrom: 'from-cyan-500/15',
@@ -173,10 +124,6 @@ export const GUIDE_ACCENT: Record<GuideCategorySlug, GuideAccent> = {
   /* Catégorie « fourre-tout » : gris neutres — via les tokens, pas des zinc en dur. */
   other: {
     text: 'text-content',
-    textSoft: 'text-content-muted',
-    dot: 'bg-content-muted shadow-[0_0_8px_rgba(161,161,170,0.5)]',
-    stripe: 'bg-content-muted',
-    border: 'border-line',
     hoverBorder: 'hover:border-line-strong',
     iconBorder: 'border-line',
     iconFrom: 'from-content-subtle/10',
