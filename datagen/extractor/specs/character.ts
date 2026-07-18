@@ -483,13 +483,18 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
   id: 'character',
 
   select() {
-    // Entités réelles uniquement : bases visibles (roster) + core-fusions.
-    // Les apparences (skins) empruntent une identité → exclues (cf. ownIdentity).
+    // Entités réelles : bases à identité propre (`ownIdentity`) + core-fusions.
+    // Tout le reste est du SKIN et emprunte une identité :
+    //   - apparences (ids 201xxxx/202xxxx…) → écartées par `ownIdentity` ;
+    //   - formes alternées (`CharacterChangeTemplet`, ex. Luna 2000119↔2000120 :
+    //     la cible `ChangeCharacterID` emprunte l'identité de la base) → écartées.
+    // On NE filtre PLUS sur `ShowMainPage` : les persos non « sortis » mais réels
+    // (ex. Lambda 2000118) doivent apparaître dans l'extracteur pour que l'admin
+    // décide de les intégrer (l'intégration est la seule porte vers le site).
     const fusionIds = new Set(loadTable('CharacterFusionTemplet').map((r) => r.ChangeCharID));
+    const formIds = new Set(loadTable('CharacterChangeTemplet').map((r) => r.ChangeCharacterID));
     return loadTable('CharacterTemplet').filter(
-      (r) =>
-        r.Type === 'CT_PC' &&
-        ((ownIdentity(r) && r.ShowMainPage === 'true') || fusionIds.has(r.ID)),
+      (r) => r.Type === 'CT_PC' && !formIds.has(r.ID) && (ownIdentity(r) || fusionIds.has(r.ID)),
     );
   },
 

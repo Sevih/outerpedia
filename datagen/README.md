@@ -48,7 +48,9 @@ build.ts      Couche 5 — orchestration en 3 fichiers :
 refresh.ts      build.ts   lance les générateurs → data/extracted/ ;
 promote.ts      refresh.ts définition UNIQUE du flux « rafraîchir depuis le
                            jeu » (pull → extract → convert → build → promote),
-                           partagé par `pnpm dev` (apply) et `datagen:patch` (dry) ;
+                           partagé par `pnpm dev` et `datagen:patch` — les DEUX
+                           en dry (le dev ne promeut plus auto ; l'intégration
+                           se fait par entité depuis l'admin, ou promote manuel) ;
                 promote.ts diff entité par entité + `--apply` → data/generated/.
 ```
 

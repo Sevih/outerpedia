@@ -1,6 +1,11 @@
 import { characterDisplayName, getCharacter, getCharacterListItems } from '@/lib/data/characters';
 import { loadCuratedCharacters } from '@/lib/data/curated';
-import { characterV2Control, reviewTarget, type ControlGlossaries } from '@/lib/admin/review-store';
+import {
+  characterV2Control,
+  extractedCharacter,
+  reviewTarget,
+  type ControlGlossaries,
+} from '@/lib/admin/review-store';
 import type { Glossaries, Skill } from '@contracts';
 import glossariesData from '@data/generated/glossaries.json';
 import skillsData from '@data/generated/skills.json';
@@ -47,18 +52,23 @@ export function buildCharacterRows(): SidebarRow[] {
   const diffCounts = new Map(review.diff.changed.map((c) => [c.key, c.fields.length]));
 
   return [
-    // Nouveaux : extraits, pas encore committés.
-    ...review.diff.added.map((id) => ({
-      id,
-      name: id,
-      element: '',
-      class: '',
-      rarity: 0,
-      status: 'new' as const,
-      diffCount: 0,
-      v2Count: 0,
-      curated: false,
-    })),
+    // Nouveaux : extraits, pas encore committés (ex. Lambda, non « sorti »).
+    // Nom/élément/classe résolus depuis l'extraction fraîche pour un affichage
+    // lisible (« Lambda » plutôt que l'id brut).
+    ...review.diff.added.map((id) => {
+      const fresh = extractedCharacter(id);
+      return {
+        id,
+        name: fresh ? characterDisplayName(fresh) : id,
+        element: fresh?.element ?? '',
+        class: fresh?.class ?? '',
+        rarity: fresh?.rarity ?? 0,
+        status: 'new' as const,
+        diffCount: 0,
+        v2Count: 0,
+        curated: false,
+      };
+    }),
     ...items.map((c) => ({
       id: c.id,
       name: characterDisplayName(c),

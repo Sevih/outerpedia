@@ -33,11 +33,12 @@ const DST = resolve('data/generated');
 /**
  * Fichiers à RÉTENTION d'entités : une clé déjà VALIDÉE n'est jamais supprimée
  * par la promotion, même si le jeu a purgé ses lignes — les guides référencent
- * des boss par id, parfois anciens, et l'apply est AUTOMATIQUE en dev
- * (`pnpm dev`). Les clés absentes de la proposition sont réinjectées à
- * l'apply et signalées ; leur retrait reste une décision humaine (édition git).
- * `encounters.json` (donjons référencés par les `spawns` des monstres) est
- * retenu pour la même raison : un monstre retenu garde des réfs résolvables.
+ * des boss par id, parfois anciens. Les clés absentes de la proposition sont
+ * réinjectées à l'apply et signalées ; leur retrait reste une décision humaine
+ * (édition git). `encounters.json` (donjons référencés par les `spawns` des
+ * monstres) est retenu pour la même raison : un monstre retenu garde des réfs
+ * résolvables. NB : `promote --apply` est désormais un geste MANUEL (le `pnpm
+ * dev` ne promeut plus automatiquement — cf. scripts/dev-refresh.ts).
  */
 export const RETAIN_ENTITIES = new Set(['monsters.json', 'monster-skills.json', 'encounters.json']);
 

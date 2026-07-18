@@ -6,6 +6,19 @@
 
 ## 2026-07-18
 
+- **Modèle admin « intégration = seule porte »** (PRIO Sevih) — deux volets :
+  - _Extraction montre TOUT_ : la spec perso ne filtre plus sur `ShowMainPage`
+    (elle gardait de fait les non-« sortis » invisibles). On garde exactement
+    normaux (`ownIdentity`) + core-fusion, et on EXCLUT les form-changes
+    (`CharacterChangeTemplet`, ex. Luna 2000119↔2000120) comme les skins.
+    Résultat vérifié : +1 seul perso (Lambda 2000118), zéro skin/forme. La
+    sidebar extracteur le liste en « new » (nom/élément/classe résolus).
+  - _`pnpm dev` ne promeut plus auto_ (`scripts/dev-refresh.ts` : `apply:false`).
+    Le site sert la donnée INTÉGRÉE (`data/generated` committé) ; les changements
+    du jeu s'affichent en diff (extracteur + dry-run console) et s'intègrent
+    DÉLIBÉRÉMENT — par entité (bouton `integrateCharacter`, écrit direct dans
+    generated) ou via `promote --apply` manuel. Commentaires promote.ts/README
+    corrigés (l'« apply auto en dev » n'existe plus).
 - **Garde-fou des cibles internes `{L}`** (bug sévérité HAUTE) — `checkTag`
   validait `{L/…|/guides/…}` en `ok: true` inconditionnel : un lien de guide
   MORT passait le contrôle CI (seul `RelatedGuides` jetait, au render). Comme
