@@ -28,12 +28,17 @@
 - **Guide « Daily Stamina Burn » porté** (economy, ordre 3) : contenu verbatim
   V2 (labels 5 langues, roadmap 5 priorités, suggestions hors endgame, pro
   tips) sur les primitives éditoriales ; les noms des boss irréguliers
-  DÉRIVENT de monsters.json (la V2 les codait en dur) — sauf l'Irregular
-  Queen, au nom VIDE dans les tables du jeu (repli éditorial documenté). Deux
-  entrées curées d'items ajoutées pour les tags {I-I/…} du guide : « Gems »
-  (générique, icône V2 TI_GEM_dissolve_Random_3) et « Bounty Hunter
-  Ticket(s) » (l'asset officiel TICKET_GOLD s'appelle « Frog Hall Ticket » —
-  autre chose).
+  DÉRIVENT de monsters.json (la V2 les codait en dur). Entrée curée « Gems »
+  ajoutée pour les tags {I-I/…} (générique, icône V2 TI_GEM_dissolve_Random_3).
+- **Daily Stamina : corrections post-relecture Sevih** (414344c) — « Bounty
+  Hunter » est l'ANCIEN nom du mode, devenu Hypnotic Frog Hall
+  (SYS_GOLD_DUNGEON) : la note utilise le vrai {I-I/Frog Hall Ticket}
+  (SYS_ASSET_TICKET_GOLD, seul consommé par DungeonTemplet ; le jumeau legacy
+  TICKET_EXP, homonyme et consommé nulle part, est masqué en curé pour gagner
+  la résolution par nom). L'entrée custom « Bounty Hunter Ticket » saute. Les
+  boss pointent sur les fiches pursuit 512020xx (celles des guides
+  irregular-extermination) : noms complets 4 langues, y compris l'Irregular
+  Queen — fini le repli éditorial (les fiches 40xxxxx ont la Queen sans nom).
 - **Ether income : cadence bimestrielle** — guild raid et world boss ont lieu
   UN MOIS SUR DEUX (info Sevih ; la V2 les comptait chaque mois) : champ
   `monthsPerCycle` sur les sources, colonne/totaux en moyenne mensuelle, note
