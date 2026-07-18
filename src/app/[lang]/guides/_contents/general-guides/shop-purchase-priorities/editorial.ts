@@ -1,0 +1,269 @@
+/**
+ * Contenu ÉDITORIAL des shops NON dérivés du guide shop-priorities
+ * (transplant verbatim V2) : Supply Module et Rico Secret (texte pur), Event
+ * Shop et General/Resource (sélections curées / templates variables — pas un
+ * shop entier à refléter, donc pas dans le générateur). Les notes de shop
+ * (Event, Joint) accompagnent les tables dérivées.
+ */
+import type { LocalizedText } from '@contracts';
+
+/** Un item éditorial (event/resource) — même forme d'affichage que le dérivé. */
+export interface EditorialItem {
+  name: string;
+  label?: LocalizedText;
+  priority?: 'S' | 'A' | 'B' | 'C';
+  gives?: number;
+  cost?: { currency: string; amount: number };
+  limit?: { count: number; period: 'daily' | 'weekly' | 'monthly' | 'one-time' };
+  notes?: LocalizedText;
+}
+
+/** Notes affichées sous certains onglets (dérivés ou non). */
+export const SHOP_NOTES: Record<string, LocalizedText> = {
+  event: {
+    en: "Event shops vary a lot depending on the event. Adjust your priorities based on what's available, but generally focus on limited items first (cosmetics, 6★ event gear, rare manuals, transistones) before spending on more common resources.",
+    jp: 'イベントショップはイベントによって大きく異なります。入手可能なアイテムに基づいて優先順位を調整しますが、一般的には限定アイテム（コスメ、6★イベント装備、レアマニュアル、トランジストーン）を優先してから、より一般的なリソースに使いましょう。',
+    kr: '이벤트 상점은 이벤트에 따라 크게 다릅니다. 가용 아이템에 따라 우선순위를 조정하되, 일반적으로 제한된 아이템(코스메틱, 6★ 이벤트 장비, 희귀 매뉴얼, 트랜지스톤)을 먼저 구매한 후 일반 자원에 사용하세요.',
+    zh: '活动商店因活动而异。根据可用物品调整优先级，但通常先关注限定物品（外观、6★活动装备、稀有手册、晶石）再购买常见资源。',
+    fr: "Les Event shops varient beaucoup selon l'event. Ajustez vos priorités selon ce qui est disponible, mais concentrez-vous généralement d'abord sur les items limités (cosmétiques, 6★ event gear, manuels rares, transistones) avant de dépenser sur des ressources plus communes.",
+  },
+  joint: {
+    en: 'Save monthly purchases until the Joint Challenge event starts. The main concern is not having enough purchases to clear the quests. Once you can consistently max out the Joint Challenge, the currency becomes very abundant, so prioritize wisely at the start.',
+    jp: 'ジョイントチャレンジイベント開始まで月間購入を控えましょう。主な懸念はクエストをクリアするための購入回数が足りなくなることです。ジョイントチャレンジを安定してクリアできるようになれば通貨は非常に豊富になるので、最初は賢く優先順位をつけましょう。',
+    kr: '조인트 챌린지 이벤트가 시작될 때까지 월간 구매를 아끼세요. 주요 우려사항은 퀘스트를 클리어하기 위한 구매 횟수가 부족해지는 것입니다. 조인트 챌린지를 꾸준히 클리어할 수 있게 되면 재화가 매우 풍부해지므로 처음에는 현명하게 우선순위를 정하세요.',
+    zh: '在联合挑战活动开始前保留月度购买次数。主要担忧是没有足够的购买次数来完成任务。一旦能稳定满分通关联合挑战，货币会变得非常充裕，所以开始时要明智地分配优先级。',
+    fr: "Conservez vos achats mensuels jusqu'au démarrage de l'event Joint Challenge. La principale crainte est de ne pas avoir assez d'achats pour clear les quêtes. Une fois que vous pouvez constamment maxer le Joint Challenge, la monnaie devient très abondante, donc priorisez intelligemment au début.",
+  },
+};
+
+/** Shops en TEXTE seul (Supply, Rico) : paragraphes + note de gear. */
+export interface TextShop {
+  paragraphs: LocalizedText[];
+  gearNote?: LocalizedText;
+}
+
+export const TEXT_SHOPS: Record<string, TextShop> = {
+  supply: {
+    paragraphs: [
+      {
+        en: 'Only worth buying {I-I/Basic Skill Manual} and {I-I/Intermediate Skill Manual} for {I-I/Antimatter}.',
+        jp: '{I-I/Basic Skill Manual}と{I-I/Intermediate Skill Manual}を{I-I/Antimatter}で購入する価値があります。',
+        kr: '{I-I/Basic Skill Manual}과 {I-I/Intermediate Skill Manual}을 {I-I/Antimatter}로 구매할 가치가 있습니다.',
+        zh: '只值得用{I-I/Antimatter}购买{I-I/Basic Skill Manual}和{I-I/Intermediate Skill Manual}。',
+        fr: "Ne vaut le coup d'acheter que {I-I/Basic Skill Manual} et {I-I/Intermediate Skill Manual} avec de l'{I-I/Antimatter}.",
+      },
+      {
+        en: '{I-I/Intermediate Skill Manual} for {I-I/Free Ether} is fine if discounted and you really need them.',
+        jp: '割引があり本当に必要な場合、{I-I/Free Ether}で{I-I/Intermediate Skill Manual}を購入しても構いません。',
+        kr: '할인이 있고 정말 필요하다면 {I-I/Free Ether}로 {I-I/Intermediate Skill Manual}을 구매해도 괜찮습니다.',
+        zh: '如果有折扣且确实需要，用{I-I/Free Ether}购买{I-I/Intermediate Skill Manual}也可以。',
+        fr: "Acheter des {I-I/Intermediate Skill Manual} contre de l'{I-I/Free Ether} est acceptable s'ils sont en promotion et que vous en avez vraiment besoin.",
+      },
+    ],
+    gearNote: {
+      en: "6★ Legendary gear is only worth it if substats are strong: 3×3 matching the unit's stat priorities.",
+      jp: '6★レジェンダリー装備はサブステータスが強力な場合のみ価値があります：ユニットのステータス優先度に一致する3×3。',
+      kr: '6★ 레전더리 장비는 서브스탯이 강력한 경우에만 가치가 있습니다: 유닛의 스탯 우선순위와 일치하는 3×3.',
+      zh: '6★传说装备只有在副属性强力时才值得：3×3匹配角色的属性优先级。',
+      fr: "Le gear 6★ Legendary ne vaut le coup que si les substats sont solides : 3×3 correspondant aux priorités de stats de l'unité.",
+    },
+  },
+  rico: {
+    paragraphs: [
+      {
+        en: 'Always buy {I-I/Special Recruitment Ticket (Event)} when it appears for {I-I/Gold}.',
+        jp: '{I-I/Gold}で{I-I/Special Recruitment Ticket (Event)}が出たら必ず購入しましょう。',
+        kr: '{I-I/Gold}로 {I-I/Special Recruitment Ticket (Event)}가 나오면 반드시 구매하세요.',
+        zh: '当{I-I/Special Recruitment Ticket (Event)}以{I-I/Gold}出售时务必购买。',
+        fr: 'Achetez toujours les {I-I/Special Recruitment Ticket (Event)} quand ils apparaissent contre du {I-I/Gold}.',
+      },
+      {
+        en: 'Purchasing {I-I/Special Recruitment Ticket} with {I-I/Free Ether} is ill-advised due to expenses that come from Premium/Limited banners and Precise crafting.',
+        jp: '{I-I/Free Ether}で{I-I/Special Recruitment Ticket}を購入するのは、プレミアム/限定ガチャや精密クラフトの出費があるためお勧めしません。',
+        kr: '{I-I/Free Ether}로 {I-I/Special Recruitment Ticket}을 구매하는 것은 프리미엄/한정 배너와 정밀 제작에 필요한 비용 때문에 권장하지 않습니다.',
+        zh: '用{I-I/Free Ether}购买{I-I/Special Recruitment Ticket}不明智，因为需要用于限定池和精准制作的开支。',
+        fr: "Acheter des {I-I/Special Recruitment Ticket} avec de l'{I-I/Free Ether} est déconseillé à cause des dépenses liées aux Premium/Limited banners et au Precise crafting.",
+      },
+      {
+        en: '{I-I/Potentium (Armor)} / {I-I/Potentium (Weapon/Accessory)} are ok if the discount is 25–30%.',
+        jp: '{I-I/Potentium (Armor)} / {I-I/Potentium (Weapon/Accessory)}は25〜30%の割引があれば購入しても良いでしょう。',
+        kr: '{I-I/Potentium (Armor)} / {I-I/Potentium (Weapon/Accessory)}는 25~30% 할인이 있다면 구매해도 괜찮습니다.',
+        zh: '如果{I-I/Potentium (Armor)} / {I-I/Potentium (Weapon/Accessory)}有25-30%的折扣可以购买。',
+        fr: 'Les {I-I/Potentium (Armor)} / {I-I/Potentium (Weapon/Accessory)} sont corrects si la promo est de 25-30%.',
+      },
+    ],
+    gearNote: {
+      en: "6★ Legendary gear is only worth it if substats are strong: 3×3 or 2×3 + 1×4 matching the unit's stat priorities.",
+      jp: '6★レジェンダリー装備はサブステータスが強力な場合のみ価値があります：ユニットのステータス優先度に一致する3×3または2×3 + 1×4。',
+      kr: '6★ 레전더리 장비는 서브스탯이 강력한 경우에만 가치가 있습니다: 유닛의 스탯 우선순위와 일치하는 3×3 또는 2×3 + 1×4.',
+      zh: '6★传说装备只有在副属性强力时才值得：3×3或2×3 + 1×4匹配角色的属性优先级。',
+      fr: "Le gear 6★ Legendary ne vaut le coup que si les substats sont solides : 3×3 ou 2×3 + 1×4 correspondant aux priorités de stats de l'unité.",
+    },
+  },
+};
+
+/** Table éditoriale de l'Event Shop (template — coûts variables selon l'event). */
+export const EVENT_ITEMS: EditorialItem[] = [
+  {
+    name: 'Cosmetic',
+    label: {
+      en: 'Cosmetic',
+      jp: 'コスメティック',
+      kr: '코스메틱',
+      zh: '外观',
+      fr: 'Cosmétique',
+    },
+    priority: 'S',
+    cost: { currency: 'TBD', amount: 0 },
+  },
+  {
+    name: '6★ Equipment',
+    label: {
+      en: '6★ Equipment',
+      jp: '6★装備',
+      kr: '6★ 장비',
+      zh: '6★装备',
+      fr: 'Équipement 6★',
+    },
+    priority: 'S',
+    cost: { currency: 'TBD', amount: 0 },
+  },
+  {
+    name: 'Intermediate Skill Manual',
+    priority: 'S',
+    cost: { currency: 'TBD', amount: 0 },
+  },
+  {
+    name: 'Transistone (Individual)',
+    priority: 'S',
+    cost: { currency: 'TBD', amount: 0 },
+  },
+  {
+    name: 'Transistone (Total)',
+    priority: 'S',
+    cost: { currency: 'TBD', amount: 0 },
+  },
+  {
+    name: 'Wildcard Pieces',
+    priority: 'A',
+    cost: { currency: 'TBD', amount: 0 },
+  },
+  {
+    name: 'Refined Glunite',
+    priority: 'A',
+    cost: { currency: 'TBD', amount: 0 },
+  },
+  {
+    name: 'Gems',
+    priority: 'A',
+    cost: { currency: 'TBD', amount: 0 },
+  },
+  {
+    name: 'Potentium (Armor)',
+    priority: 'B',
+    cost: { currency: 'TBD', amount: 0 },
+  },
+  {
+    name: 'Potentium (Weapon/Accessory)',
+    priority: 'B',
+    cost: { currency: 'TBD', amount: 0 },
+  },
+  {
+    name: '5★ Equipment',
+    label: {
+      en: '5★ Equipment',
+      jp: '5★装備',
+      kr: '5★ 장비',
+      zh: '5★装备',
+      fr: 'Équipement 5★',
+    },
+    priority: 'B',
+    cost: { currency: 'TBD', amount: 0 },
+    notes: {
+      en: "You can ignore it if it doesn't have a unique passive like Sacreed Edge weapon",
+      fr: "Vous pouvez l'ignorer s'il n'a pas de passive unique comme la weapon Sacreed Edge.",
+    },
+  },
+  {
+    name: 'Event Glunite',
+    priority: 'B',
+    cost: { currency: 'TBD', amount: 0 },
+    notes: {
+      en: "Ignore if you didn't buy any equipment from the shop.",
+      fr: "Ignorez si vous n'avez acheté aucun équipement du shop.",
+    },
+  },
+  {
+    name: 'Food',
+    priority: 'C',
+    cost: { currency: 'TBD', amount: 0 },
+  },
+  {
+    name: 'Gold',
+    priority: 'C',
+    cost: { currency: 'TBD', amount: 0 },
+  },
+];
+
+/** Table éditoriale du shop General/Resource (sélection curée Ether/Gold). */
+export const RESOURCE_ITEMS: EditorialItem[] = [
+  {
+    name: 'Basic Skill Manual',
+    priority: 'S',
+    gives: 1,
+    cost: { currency: 'Gold', amount: 50000 },
+    limit: { count: 5, period: 'weekly' },
+  },
+  {
+    name: 'Intermediate Skill Manual',
+    priority: 'S',
+    gives: 1,
+    cost: { currency: 'Gold', amount: 150000 },
+    limit: { count: 2, period: 'weekly' },
+  },
+  {
+    name: 'Effectium',
+    priority: 'S',
+    gives: 100,
+    cost: { currency: 'Gold', amount: 50000 },
+    limit: { count: 1, period: 'daily' },
+  },
+  {
+    name: 'Gold',
+    priority: 'C',
+    gives: 50000,
+    cost: { currency: 'Free Ether', amount: 60 },
+  },
+  {
+    name: 'Gold',
+    priority: 'C',
+    gives: 550000,
+    cost: { currency: 'Free Ether', amount: 600 },
+  },
+  {
+    name: 'Gold',
+    priority: 'C',
+    gives: 2000000,
+    cost: { currency: 'Free Ether', amount: 1800 },
+  },
+  {
+    name: 'Stamina',
+    priority: 'C',
+    gives: 60,
+    cost: { currency: 'Free Ether', amount: 60 },
+    limit: { count: 25, period: 'daily' },
+  },
+  {
+    name: 'Effectium',
+    priority: 'C',
+    gives: 50,
+    cost: { currency: 'Free Ether', amount: 50 },
+    limit: { count: 10, period: 'daily' },
+  },
+  {
+    name: 'Arena Ticket',
+    priority: 'C',
+    gives: 5,
+    cost: { currency: 'Free Ether', amount: 50 },
+  },
+];

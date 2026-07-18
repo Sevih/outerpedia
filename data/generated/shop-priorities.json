@@ -1,0 +1,2342 @@
+{
+  "asOf": "2026-08-01",
+  "shops": [
+    {
+      "key": "guild",
+      "currency": {
+        "id": "SYS_ASSET_GUILD_COIN",
+        "name": {
+          "en": "Guild Coin",
+          "jp": "ギルドコイン",
+          "kr": "길드 코인",
+          "zh": "公会币"
+        },
+        "icon": "TI_Item_Guild_Coin"
+      },
+      "entries": [
+        {
+          "key": "guild/gold-10000/daily",
+          "productId": "29000",
+          "name": {
+            "en": "10,000 Gold",
+            "jp": "10,000ゴールド",
+            "kr": "골드 10,000",
+            "zh": "10,000金币"
+          },
+          "icon": "CM_TopMenu_Gold",
+          "gives": 10000,
+          "cost": 20,
+          "limit": {
+            "count": 5,
+            "period": "daily"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "guild/item-20001/daily",
+          "productId": "29002",
+          "name": {
+            "en": "Sandwich",
+            "jp": "サンドイッチ",
+            "kr": "샌드위치",
+            "zh": "三明治"
+          },
+          "icon": "TI_Item_Growth_Potion_01",
+          "gives": 1,
+          "cost": 10,
+          "limit": {
+            "count": 5,
+            "period": "daily"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "guild/item-20002/daily",
+          "productId": "29011",
+          "name": {
+            "en": "Cake Slice",
+            "jp": "チョコショートケーキ",
+            "kr": "조각 케이크",
+            "zh": "切块蛋糕"
+          },
+          "icon": "TI_Item_Growth_Potion_02",
+          "gives": 1,
+          "cost": 15,
+          "limit": {
+            "count": 3,
+            "period": "daily"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "guild/item-30277/daily",
+          "productId": "29020",
+          "name": {
+            "en": "Epic Quality Present Chest",
+            "jp": "プレゼントボックス【ユニーク】",
+            "kr": "영웅 등급 선물 상자",
+            "zh": "英雄级别礼物箱"
+          },
+          "icon": "TI_Common_Box04",
+          "gives": 1,
+          "cost": 50,
+          "limit": {
+            "count": 1,
+            "period": "daily"
+          }
+        },
+        {
+          "key": "guild/item-20003/daily",
+          "productId": "29030",
+          "name": {
+            "en": "Prosciutto",
+            "jp": "プロシュート",
+            "kr": "프로슈토",
+            "zh": "帕尔玛火腿"
+          },
+          "icon": "TI_Item_Growth_Potion_03",
+          "gives": 1,
+          "cost": 30,
+          "limit": {
+            "count": 2,
+            "period": "daily"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "guild/item-20004/daily",
+          "productId": "29040",
+          "name": {
+            "en": "Steak Dish",
+            "jp": "ステーキ定食",
+            "kr": "스테이크 정식",
+            "zh": "牛排套餐"
+          },
+          "icon": "TI_Item_Growth_Potion_04",
+          "gives": 1,
+          "cost": 45,
+          "limit": {
+            "count": 1,
+            "period": "daily"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "guild/gold-50000/weekly",
+          "productId": "29100",
+          "name": {
+            "en": "50,000 Gold",
+            "jp": "50,000ゴールド",
+            "kr": "골드 50,000",
+            "zh": "50,000金币"
+          },
+          "icon": "CM_TopMenu_Gold",
+          "gives": 50000,
+          "cost": 50,
+          "limit": {
+            "count": 10,
+            "period": "weekly"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "guild/item-30149/weekly",
+          "productId": "29101",
+          "name": {
+            "en": "[Guild] Enhancement Toolbox",
+            "jp": "【ギルド】強化ボックス",
+            "kr": "[길드] 강화 도구 상자",
+            "zh": "【公会】强化道具箱"
+          },
+          "icon": "TI_Common_Box03",
+          "gives": 1,
+          "cost": 30,
+          "limit": {
+            "count": 10,
+            "period": "weekly"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "guild/item-20201/weekly",
+          "productId": "29102",
+          "name": {
+            "en": "Basic Skill Manual",
+            "jp": "スキル教本：はじまり編",
+            "kr": "초급 스킬 교본",
+            "zh": "初级技能教材"
+          },
+          "icon": "TI_Item_Growth_Book_01",
+          "gives": 1,
+          "cost": 100,
+          "limit": {
+            "count": 3,
+            "period": "weekly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "guild/item-30153/weekly",
+          "productId": "29110",
+          "name": {
+            "en": "[Guild] Epic-Legendary Accessory Chest",
+            "jp": "【ギルド】アクセサリーボックス(ユニーク～レジェンド)",
+            "kr": "[길드] 영웅~전설 악세서리 상자",
+            "zh": "【公会】英雄~传说饰品箱"
+          },
+          "icon": "TI_Accessary_Box02",
+          "gives": 1,
+          "cost": 100,
+          "limit": {
+            "count": 3,
+            "period": "weekly"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "guild/item-20202/weekly",
+          "productId": "29111",
+          "name": {
+            "en": "Intermediate Skill Manual",
+            "jp": "スキル教本：応用編",
+            "kr": "중급 스킬 교본",
+            "zh": "中级技能教材"
+          },
+          "icon": "TI_Item_Growth_Book_02",
+          "gives": 1,
+          "cost": 150,
+          "limit": {
+            "count": 2,
+            "period": "weekly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "guild/item-30244/weekly",
+          "productId": "29120",
+          "name": {
+            "en": "Stage 3 Gem Chest",
+            "jp": "ジェムボックス(ランク3)",
+            "kr": "3단계 보석 상자",
+            "zh": "第3阶段宝石箱"
+          },
+          "icon": "TI_GEM_Box_01",
+          "gives": 1,
+          "cost": 150,
+          "limit": {
+            "count": 5,
+            "period": "weekly"
+          }
+        },
+        {
+          "key": "guild/item-20203/weekly",
+          "productId": "29130",
+          "name": {
+            "en": "Professional Skill Manual",
+            "jp": "スキル教本：専門家編",
+            "kr": "전문 스킬 교본",
+            "zh": "专家技能教材"
+          },
+          "icon": "TI_Item_Growth_Book_03",
+          "gives": 1,
+          "cost": 300,
+          "limit": {
+            "count": 1,
+            "period": "weekly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "guild/item-30411/weekly",
+          "productId": "29140",
+          "name": {
+            "en": "[Guild] 3★ Hero Piece Selection Chest",
+            "jp": "【ギルド】★3仲間ピース選択ボックス",
+            "kr": "[길드] 3성 동료 조각 선택 상자",
+            "zh": "【公会】3星同伴碎片选择箱"
+          },
+          "icon": "TI_CharacterCard_05",
+          "gives": 1,
+          "cost": 300,
+          "limit": {
+            "count": 5,
+            "period": "weekly"
+          },
+          "priority": "S"
+        }
+      ]
+    },
+    {
+      "key": "joint",
+      "currency": {
+        "id": "SYS_ASSET_EVENT_BOSS_COIN",
+        "name": {
+          "en": "Joint Challenge Coin",
+          "jp": "共同作戦コイン",
+          "kr": "합동 챌린지 코인",
+          "zh": "联合挑战硬币"
+        },
+        "icon": ""
+      },
+      "entries": [
+        {
+          "key": "joint/p-product_event_boss_01_name/daily",
+          "productId": "3001",
+          "name": {
+            "en": "50 Stamina",
+            "jp": "活力×50",
+            "kr": "행동력 50",
+            "zh": "50行动力"
+          },
+          "icon": "",
+          "gives": 50,
+          "cost": 15,
+          "limit": {
+            "count": 1,
+            "period": "daily"
+          }
+        },
+        {
+          "key": "joint/item-21104/weekly",
+          "productId": "3002",
+          "name": {
+            "en": "Legendary Reforge Catalyst x20",
+            "jp": "再錬カタリスト\\n(レジェンド)×20",
+            "kr": "전설 재련 촉매제 x20",
+            "zh": "传说重铸催化剂x20"
+          },
+          "icon": "TI_Item_Growth_Dissolve_04",
+          "gives": 20,
+          "cost": 30,
+          "limit": {
+            "count": 3,
+            "period": "weekly"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "joint/item-1000004/weekly",
+          "productId": "3004",
+          "name": {
+            "en": "Special Recruitment Ticket (Event)",
+            "jp": "プレミア\\nスカウトチケット(イベント)",
+            "kr": "특별 영입 티켓(이벤트)",
+            "zh": "特别招募券(活动)"
+          },
+          "icon": "TI_Item_Ticket_Recruit_04",
+          "gives": 1,
+          "cost": 100,
+          "limit": {
+            "count": 1,
+            "period": "weekly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "joint/item-30343/weekly",
+          "productId": "3005",
+          "name": {
+            "en": "Stage 3 Gem Chest",
+            "jp": "ジェムボックス\\n(ランク3)",
+            "kr": "3단계 보석 상자",
+            "zh": "第3阶段宝石箱"
+          },
+          "icon": "TI_GEM_Box_01",
+          "gives": 1,
+          "cost": 250,
+          "limit": {
+            "count": 1,
+            "period": "weekly"
+          }
+        },
+        {
+          "key": "joint/gold-20000/weekly",
+          "productId": "3006",
+          "name": {
+            "en": "20,000 Gold",
+            "jp": "20,000ゴールド",
+            "kr": "골드 20,000",
+            "zh": "20,000金币"
+          },
+          "icon": "CM_TopMenu_Gold",
+          "gives": 20000,
+          "cost": 15,
+          "limit": {
+            "count": 100,
+            "period": "weekly"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "joint/item-30206/weekly",
+          "productId": "3007",
+          "name": {
+            "en": "Legendary Quality Present Chest x10",
+            "jp": "プレゼントボックス\\n【レジェンド】×10",
+            "kr": "전설 등급 선물 상자 x10",
+            "zh": "传说级别礼物箱x10"
+          },
+          "icon": "TI_Common_Box05",
+          "gives": 10,
+          "cost": 2500,
+          "limit": {
+            "count": 1,
+            "period": "weekly"
+          }
+        },
+        {
+          "key": "joint/item-30299/weekly",
+          "productId": "3010",
+          "name": {
+            "en": "Stage 5 Random Gem Chest",
+            "jp": "ジェムボックス(ランク5)",
+            "kr": "5단계 보석 랜덤 상자",
+            "zh": "第5阶段宝石随机箱"
+          },
+          "icon": "TI_GEM_Box_01",
+          "gives": 1,
+          "cost": 2500,
+          "limit": {
+            "count": 1,
+            "period": "weekly"
+          },
+          "priority": "B"
+        },
+        {
+          "key": "joint/item-21127/weekly",
+          "productId": "3011",
+          "name": {
+            "en": "Armor Glunite",
+            "jp": "アーマーグルーナイト",
+            "kr": "아머 글루나이트",
+            "zh": "装甲格鲁矿石"
+          },
+          "icon": "TI_Equipment_Growth03",
+          "gives": 1,
+          "cost": 3000,
+          "limit": {
+            "count": 1,
+            "period": "weekly"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "joint/item-21107/monthly",
+          "productId": "3008",
+          "name": {
+            "en": "Refined Glunite",
+            "jp": "精製された\\nグルーナイト",
+            "kr": "정제된 글루나이트",
+            "zh": "精炼格鲁矿石"
+          },
+          "icon": "TI_Equipment_Growth02",
+          "gives": 1,
+          "cost": 5000,
+          "limit": {
+            "count": 1,
+            "period": "monthly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "joint/item-21202/monthly",
+          "productId": "3009",
+          "name": {
+            "en": "Transistone (Total)",
+            "jp": "トランストーン(全体)",
+            "kr": "트랜스톤(전체)",
+            "zh": "转换石(全部)"
+          },
+          "icon": "TI_Item_Option_Change_01",
+          "gives": 1,
+          "cost": 8000,
+          "limit": {
+            "count": 1,
+            "period": "monthly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "joint/item-21201/monthly",
+          "productId": "3012",
+          "name": {
+            "en": "Transistone (Individual)",
+            "jp": "トランストーン(選択)",
+            "kr": "트랜스톤(개별)",
+            "zh": "转换石 (单个)"
+          },
+          "icon": "TI_Item_Option_Change_02",
+          "gives": 1,
+          "cost": 8000,
+          "limit": {
+            "count": 1,
+            "period": "monthly"
+          },
+          "priority": "S"
+        }
+      ]
+    },
+    {
+      "key": "friend",
+      "currency": {
+        "id": "SYS_ASSET_FRIENDSHIP",
+        "name": {
+          "en": "Friendship Point",
+          "jp": "フレンドPt",
+          "kr": "우정 포인트",
+          "zh": "友情点数"
+        },
+        "icon": "TI_Item_FriendPoint"
+      },
+      "entries": [
+        {
+          "key": "friend/p-product_friendship_0000_name/daily",
+          "productId": "1101",
+          "name": {
+            "en": "30 Stamina",
+            "jp": "活力×30",
+            "kr": "30 행동력",
+            "zh": "30行动力"
+          },
+          "icon": "",
+          "gives": 30,
+          "cost": 50,
+          "limit": {
+            "count": 4,
+            "period": "daily"
+          }
+        },
+        {
+          "key": "friend/gold-10000/daily",
+          "productId": "1102",
+          "name": {
+            "en": "10,000 Gold",
+            "jp": "10,000ゴールド",
+            "kr": "10,000 골드",
+            "zh": "10,000金币"
+          },
+          "icon": "CM_TopMenu_Gold",
+          "gives": 10000,
+          "cost": 25,
+          "limit": {
+            "count": 1,
+            "period": "daily"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "friend/item-30114/weekly",
+          "productId": "1103",
+          "name": {
+            "en": "3★ Hero Piece Selection Ticket",
+            "jp": "★3仲間ピース選択チケット",
+            "kr": "3성 동료 조각 선택권",
+            "zh": "3星同伴碎片选择券"
+          },
+          "icon": "TI_CharacterCard_04",
+          "gives": 1,
+          "cost": 700,
+          "limit": {
+            "count": 1,
+            "period": "weekly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "friend/p-product_friendship_0003_name/daily",
+          "productId": "1104",
+          "name": {
+            "en": "Arena Ticket x5",
+            "jp": "アリーナチケット 5枚",
+            "kr": "결투장 티켓 5개",
+            "zh": "5张竞技场入场券"
+          },
+          "icon": "",
+          "gives": 5,
+          "cost": 200,
+          "limit": {
+            "count": 1,
+            "period": "daily"
+          }
+        },
+        {
+          "key": "friend/item-30111/daily",
+          "productId": "1105",
+          "name": {
+            "en": "Apprentice's Hammer Chest",
+            "jp": "まあまあな強化ボックス",
+            "kr": "입문 강화 도구 상자",
+            "zh": "入门强化道具箱"
+          },
+          "icon": "TI_Common_Box01",
+          "gives": 1,
+          "cost": 30,
+          "limit": {
+            "count": 3,
+            "period": "daily"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "friend/item-30047/weekly",
+          "productId": "1109",
+          "name": {
+            "en": "1-2★ Hero Piece Random Exchange Ticket",
+            "jp": "★1～2仲間ピースチケット",
+            "kr": "1~2성 동료 조각 랜덤 교환권",
+            "zh": "1~2星同伴碎片随机交换券"
+          },
+          "icon": "TI_CharacterCard_04",
+          "gives": 1,
+          "cost": 100,
+          "limit": {
+            "count": 1,
+            "period": "weekly"
+          },
+          "priority": "B"
+        }
+      ]
+    },
+    {
+      "key": "arena",
+      "currency": {
+        "id": "SYS_ASSET_PVP_POINT",
+        "name": {
+          "en": "Arena Medal",
+          "jp": "アリーナ勲章",
+          "kr": "결투장 훈장",
+          "zh": "竞技场勋章"
+        },
+        "icon": "TI_Item_PVP_Point"
+      },
+      "entries": [
+        {
+          "key": "arena/gold-10000/daily",
+          "productId": "1201",
+          "name": {
+            "en": "10,000 Gold",
+            "jp": "10,000ゴールド",
+            "kr": "10,000 골드",
+            "zh": "10,000金币"
+          },
+          "icon": "CM_TopMenu_Gold",
+          "gives": 10000,
+          "cost": 10,
+          "limit": {
+            "count": 1,
+            "period": "daily"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "arena/p-product_pvp_0002_name/daily",
+          "productId": "1202",
+          "name": {
+            "en": "50 Stamina",
+            "jp": "活力×50",
+            "kr": "50 행동력",
+            "zh": "50行动力"
+          },
+          "icon": "",
+          "gives": 50,
+          "cost": 15,
+          "limit": {
+            "count": 3,
+            "period": "daily"
+          }
+        },
+        {
+          "key": "arena/item-20203/weekly",
+          "productId": "1206",
+          "name": {
+            "en": "Professional Skill Manual",
+            "jp": "スキル教本：専門家編",
+            "kr": "전문 스킬 교본",
+            "zh": "专家技能教材"
+          },
+          "icon": "TI_Item_Growth_Book_03",
+          "gives": 1,
+          "cost": 350,
+          "limit": {
+            "count": 1,
+            "period": "weekly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "arena/item-3308/one-time",
+          "productId": "1211",
+          "name": {
+            "en": "Etheric Helmet of Speed",
+            "jp": "速度のエーテル\\nヘルム",
+            "kr": "속도의 에테르 투구",
+            "zh": "以太速度头盔"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 300,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-5308/one-time",
+          "productId": "1212",
+          "name": {
+            "en": "Etheric Chest Armor of Speed",
+            "jp": "速度のエーテル\\nアーマー",
+            "kr": "속도의 에테르 갑옷",
+            "zh": "以太速度盔甲"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 300,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-7308/one-time",
+          "productId": "1213",
+          "name": {
+            "en": "Etheric Gloves of Speed",
+            "jp": "速度のエーテル\\nガントレット",
+            "kr": "속도의 에테르 장갑",
+            "zh": "以太速度手套"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 300,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-9308/one-time",
+          "productId": "1214",
+          "name": {
+            "en": "Etheric Boots of Speed",
+            "jp": "速度のエーテル\\nブーツ",
+            "kr": "속도의 에테르 신발",
+            "zh": "以太速度鞋子"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 300,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-779/one-time",
+          "productId": "1215",
+          "name": {
+            "en": "Ether Blade",
+            "jp": "エーテルブレイド",
+            "kr": "에테르 블레이드",
+            "zh": "以太之剑"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 200,
+          "limit": {
+            "count": 5,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-1791/one-time",
+          "productId": "1216",
+          "name": {
+            "en": "Ether Amulet",
+            "jp": "エーテルアミュレット",
+            "kr": "에테르 아뮬렛",
+            "zh": "以太守护"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 200,
+          "limit": {
+            "count": 5,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-3506/one-time",
+          "productId": "701",
+          "name": {
+            "en": "Etheric Helmet of Attack",
+            "jp": "攻撃のエーテルヘルム",
+            "kr": "공격의 에테르 투구",
+            "zh": "以太攻击头盔"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 800,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-5506/one-time",
+          "productId": "702",
+          "name": {
+            "en": "Etheric Chest Armor of Attack",
+            "jp": "攻撃のエーテルアーマー",
+            "kr": "공격의 에테르 갑옷",
+            "zh": "以太攻击盔甲"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 800,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-7506/one-time",
+          "productId": "703",
+          "name": {
+            "en": "Etheric Gloves of Attack",
+            "jp": "攻撃のエーテルガントレット",
+            "kr": "공격의 에테르 장갑",
+            "zh": "以太攻击手套"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 800,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-9506/one-time",
+          "productId": "704",
+          "name": {
+            "en": "Etheric Boots of Attack",
+            "jp": "攻撃のエーテルブーツ",
+            "kr": "공격의 에테르 신발",
+            "zh": "以太攻击鞋子"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 800,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-3312/one-time",
+          "productId": "705",
+          "name": {
+            "en": "Etheric Helmet of Speed",
+            "jp": "速度のエーテル\\nヘルム",
+            "kr": "속도의 에테르 투구",
+            "zh": "以太速度头盔"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 800,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-5312/one-time",
+          "productId": "706",
+          "name": {
+            "en": "Etheric Chest Armor of Speed",
+            "jp": "速度のエーテル\\nアーマー",
+            "kr": "속도의 에테르 갑옷",
+            "zh": "以太速度盔甲"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 800,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-7312/one-time",
+          "productId": "707",
+          "name": {
+            "en": "Etheric Gloves of Speed",
+            "jp": "速度のエーテル\\nガントレット",
+            "kr": "속도의 에테르 장갑",
+            "zh": "以太速度手套"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 800,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-9312/one-time",
+          "productId": "708",
+          "name": {
+            "en": "Etheric Boots of Speed",
+            "jp": "速度の\\nエーテルブーツ",
+            "kr": "속도의 에테르 신발",
+            "zh": "以太速度鞋子"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 800,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-3240/one-time",
+          "productId": "709",
+          "name": {
+            "en": "Etheric Helmet of Lifesteal",
+            "jp": "吸収のエーテルヘルム",
+            "kr": "흡혈의 에테르 투구",
+            "zh": "以太吸血头盔"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 800,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-5240/one-time",
+          "productId": "710",
+          "name": {
+            "en": "Etheric Chest Armor of Lifesteal",
+            "jp": "吸収のエーテルアーマー",
+            "kr": "흡혈의 에테르 갑옷",
+            "zh": "以太吸血盔甲"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 800,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-7240/one-time",
+          "productId": "711",
+          "name": {
+            "en": "Etheric Gloves of Lifesteal",
+            "jp": "吸収のエーテルガントレット",
+            "kr": "흡혈의 에테르 장갑",
+            "zh": "以太吸血手套"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 800,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-9240/one-time",
+          "productId": "712",
+          "name": {
+            "en": "Etheric Boots of Lifesteal",
+            "jp": "吸収のエーテルブーツ",
+            "kr": "흡혈의 에테르 신발",
+            "zh": "以太吸血鞋子"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 800,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-3120/one-time",
+          "productId": "713",
+          "name": {
+            "en": "Etheric Helmet of Effectiveness",
+            "jp": "効果命中のエーテルヘルム",
+            "kr": "적중의 에테르 투구",
+            "zh": "以太效果命中头盔"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 800,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-5120/one-time",
+          "productId": "714",
+          "name": {
+            "en": "Etheric Chest Armor of Effectiveness",
+            "jp": "効果命中のエーテルアーマー",
+            "kr": "적중의 에테르 갑옷",
+            "zh": "以太效果命中盔甲"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 800,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-7120/one-time",
+          "productId": "715",
+          "name": {
+            "en": "Etheric Gloves of Effectiveness",
+            "jp": "効果命中のエーテルガントレット",
+            "kr": "적중의 에테르 장갑",
+            "zh": "以太效果命中手套"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 800,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "arena/item-9120/one-time",
+          "productId": "716",
+          "name": {
+            "en": "Etheric Boots of Effectiveness",
+            "jp": "効果命中のエーテルブーツ",
+            "kr": "적중의 에테르 신발",
+            "zh": "以太效果命中鞋子"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 800,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        }
+      ]
+    },
+    {
+      "key": "stars",
+      "currency": {
+        "id": "SYS_ASSET_MEMORY_STAR",
+        "name": {
+          "en": "Star's Memory",
+          "jp": "スターピース",
+          "kr": "별의 기억",
+          "zh": "星之记忆"
+        },
+        "icon": "TI_Item_Memory_Of_Star"
+      },
+      "entries": [
+        {
+          "key": "stars/p-product_memorystar_0001_name/daily",
+          "productId": "2001",
+          "name": {
+            "en": "Arena Ticket x5",
+            "jp": "アリーナチケット 5枚",
+            "kr": "결투장 티켓 5개",
+            "zh": "5张竞技场入场券"
+          },
+          "icon": "",
+          "gives": 5,
+          "cost": 3,
+          "limit": {
+            "count": 1,
+            "period": "daily"
+          }
+        },
+        {
+          "key": "stars/item-1000004/daily",
+          "productId": "2002",
+          "name": {
+            "en": "Special Recruitment Ticket (Event)",
+            "jp": "プレミア\\nスカウトチケット(イベント)",
+            "kr": "특별 영입 티켓 (이벤트)",
+            "zh": "特别招募券(活动)"
+          },
+          "icon": "TI_Item_Ticket_Recruit_04",
+          "gives": 1,
+          "cost": 1,
+          "limit": {
+            "count": 1,
+            "period": "daily"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "stars/p-product_memorystar_0003_name/daily",
+          "productId": "2003",
+          "name": {
+            "en": "150 Stamina",
+            "jp": "活力×150",
+            "kr": "150 행동력",
+            "zh": "150行动力"
+          },
+          "icon": "",
+          "gives": 150,
+          "cost": 5,
+          "limit": {
+            "count": 3,
+            "period": "daily"
+          }
+        },
+        {
+          "key": "stars/item-20004/daily",
+          "productId": "2004",
+          "name": {
+            "en": "Steak Dish x10",
+            "jp": "ステーキ定食 10個",
+            "kr": "스테이크 정식 10개",
+            "zh": "10个牛排套餐"
+          },
+          "icon": "TI_Item_Growth_Potion_04",
+          "gives": 10,
+          "cost": 15,
+          "limit": {
+            "count": 1,
+            "period": "daily"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "stars/item-20202/weekly",
+          "productId": "2006",
+          "name": {
+            "en": "Intermediate Skill Manual x1",
+            "jp": "スキル教本：応用編 1個",
+            "kr": "중급 스킬 교본 1개",
+            "zh": "1本中级技能教材"
+          },
+          "icon": "TI_Item_Growth_Book_02",
+          "gives": 1,
+          "cost": 5,
+          "limit": {
+            "count": 2,
+            "period": "weekly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "stars/item-20203/weekly",
+          "productId": "2007",
+          "name": {
+            "en": "Professional Skill Manual x1",
+            "jp": "スキル教本：専門家編 1個",
+            "kr": "전문 스킬 교본 1개",
+            "zh": "1本专家技能教材"
+          },
+          "icon": "TI_Item_Growth_Book_03",
+          "gives": 1,
+          "cost": 30,
+          "limit": {
+            "count": 1,
+            "period": "weekly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "stars/item-21106/weekly",
+          "productId": "2008",
+          "name": {
+            "en": "Glunite x1",
+            "jp": "グルーナイト 1個",
+            "kr": "글루나이트 1개",
+            "zh": "1个格鲁矿石"
+          },
+          "icon": "TI_Equipment_Growth01",
+          "gives": 1,
+          "cost": 25,
+          "limit": {
+            "count": 1,
+            "period": "weekly"
+          },
+          "priority": "B"
+        },
+        {
+          "key": "stars/item-21107/monthly",
+          "productId": "2009",
+          "name": {
+            "en": "Refined Glunite x1",
+            "jp": "精製されたグルーナイト 1個",
+            "kr": "정제된 글루나이트 1개",
+            "zh": "1个精炼的格鲁矿石"
+          },
+          "icon": "TI_Equipment_Growth02",
+          "gives": 1,
+          "cost": 50,
+          "limit": {
+            "count": 1,
+            "period": "monthly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "stars/item-30205/daily",
+          "productId": "2010",
+          "name": {
+            "en": "Epic Quality Present Selection Chest x3",
+            "jp": "プレゼント選択\\nボックス【ユニーク】3個",
+            "kr": "영웅 등급 선물 선택 상자 3개",
+            "zh": "3个英雄级别礼物选择箱"
+          },
+          "icon": "TI_Common_Box04",
+          "gives": 3,
+          "cost": 10,
+          "limit": {
+            "count": 1,
+            "period": "daily"
+          },
+          "priority": "B"
+        },
+        {
+          "key": "stars/gold-200000/daily",
+          "productId": "2011",
+          "name": {
+            "en": "200,000 Gold",
+            "jp": "200,000ゴールド",
+            "kr": "200,000 골드",
+            "zh": "200,000金币"
+          },
+          "icon": "CM_TopMenu_Gold",
+          "gives": 200000,
+          "cost": 10,
+          "limit": {
+            "count": 3,
+            "period": "daily"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "stars/item-1000002/weekly",
+          "productId": "2012",
+          "name": {
+            "en": "Special Recruitment Ticket x2",
+            "jp": "プレミア\\nスカウトチケット2枚",
+            "kr": "특별 영입 티켓 2개",
+            "zh": "2张特别招募券"
+          },
+          "icon": "TI_Item_Ticket_Recruit_02",
+          "gives": 2,
+          "cost": 10,
+          "limit": {
+            "count": 1,
+            "period": "weekly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "stars/item-22103/monthly",
+          "productId": "2013",
+          "name": {
+            "en": "Potentium (Weapon/Accessory) x1",
+            "jp": "オプショニウム\\n(武器・アクセサリー)1個",
+            "kr": "옵셔니움(무기/악세서리) 1개",
+            "zh": "1个属性剂(武器/饰品)"
+          },
+          "icon": "TI_Item_Craft_Addition_O_01",
+          "gives": 1,
+          "cost": 30,
+          "limit": {
+            "count": 1,
+            "period": "monthly"
+          }
+        },
+        {
+          "key": "stars/item-22104/monthly",
+          "productId": "2014",
+          "name": {
+            "en": "Potentium (Armor) x1",
+            "jp": "オプショニウム\\n(防具)",
+            "kr": "옵셔니움(방어구) 1개",
+            "zh": "1个属性剂(防具)"
+          },
+          "icon": "TI_Item_Craft_Addition_O_02",
+          "gives": 1,
+          "cost": 20,
+          "limit": {
+            "count": 1,
+            "period": "monthly"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "stars/item-21202/weekly",
+          "productId": "2015",
+          "name": {
+            "en": "Transistone (Total) x1",
+            "jp": "トランストーン\\n(全体)",
+            "kr": "트랜스톤(전체) 1개",
+            "zh": "1个转换石(全部)"
+          },
+          "icon": "TI_Item_Option_Change_01",
+          "gives": 1,
+          "cost": 50,
+          "limit": {
+            "count": 4,
+            "period": "weekly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "stars/item-21201/monthly",
+          "productId": "2016",
+          "name": {
+            "en": "Transistone (Individual) x1",
+            "jp": "トランストーン\\n(選択)",
+            "kr": "트랜스톤(개별) 1개",
+            "zh": "1个转换石(单个)"
+          },
+          "icon": "TI_Item_Option_Change_02",
+          "gives": 1,
+          "cost": 75,
+          "limit": {
+            "count": 4,
+            "period": "monthly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "stars/item-1001001/monthly",
+          "productId": "2017",
+          "name": {
+            "en": "Time Rewinder x1",
+            "jp": "タイム・\\nリワインダー1個",
+            "kr": "타임 리와인더 1개",
+            "zh": "1个时间倒带"
+          },
+          "icon": "TI_CharacterRecall",
+          "gives": 1,
+          "cost": 100,
+          "limit": {
+            "count": 1,
+            "period": "monthly"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "stars/item-22031/monthly",
+          "productId": "2021",
+          "name": {
+            "en": "Blue Stardust",
+            "jp": "ブルースターダスト",
+            "kr": "블루 스타 더스트",
+            "zh": "蓝色星尘"
+          },
+          "icon": "TI_Talisman_Growth_Enhance_01",
+          "gives": 1,
+          "cost": 1,
+          "limit": {
+            "count": 50,
+            "period": "monthly"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "stars/item-22033/monthly",
+          "productId": "2022",
+          "name": {
+            "en": "Purple Stardust",
+            "jp": "パープルスターダスト",
+            "kr": "퍼플 스타 더스트",
+            "zh": "紫色星尘"
+          },
+          "icon": "TI_Talisman_Growth_Enhance_02",
+          "gives": 1,
+          "cost": 3,
+          "limit": {
+            "count": 50,
+            "period": "monthly"
+          },
+          "priority": "B"
+        },
+        {
+          "key": "stars/item-22030/monthly",
+          "productId": "2023",
+          "name": {
+            "en": "Blue Memory Stone",
+            "jp": "ブルーメモリーストーン",
+            "kr": "블루 메모리 스톤",
+            "zh": "蓝色记忆石"
+          },
+          "icon": "TI_EX_Equip_Growth_Enhance_01",
+          "gives": 1,
+          "cost": 1,
+          "limit": {
+            "count": 50,
+            "period": "monthly"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "stars/item-22032/monthly",
+          "productId": "2024",
+          "name": {
+            "en": "Purple Memory Stone",
+            "jp": "パープルメモリーストーン",
+            "kr": "퍼플 메모리 스톤",
+            "zh": "紫色记忆石"
+          },
+          "icon": "TI_EX_Equip_Growth_Enhance_02",
+          "gives": 1,
+          "cost": 3,
+          "limit": {
+            "count": 50,
+            "period": "monthly"
+          },
+          "priority": "B"
+        },
+        {
+          "key": "stars/item-20008/one-time",
+          "productId": "2025",
+          "name": {
+            "en": "Ultra-Precision Control Chip",
+            "jp": "超精密制御チップ",
+            "kr": "초정밀 제어칩",
+            "zh": "超精密控制芯片"
+          },
+          "icon": "TI_Precision_Chip",
+          "gives": 1,
+          "cost": 500,
+          "limit": {
+            "count": 0,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "stars/item-21128/one-time",
+          "productId": "2026",
+          "name": {
+            "en": "Reforge Reset Scroll [Epic]",
+            "jp": "再錬リセットスクロール【ユニーク】",
+            "kr": "재련 초기화 스크롤[영웅]",
+            "zh": "重铸初始化卷轴【英雄】"
+          },
+          "icon": "TI_Item_Growth_Scroll_01",
+          "gives": 1,
+          "cost": 100,
+          "limit": {
+            "count": 0,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "stars/item-21129/one-time",
+          "productId": "2027",
+          "name": {
+            "en": "Reforge Reset Scroll [Legendary]",
+            "jp": "再錬リセットスクロール【レジェンド】",
+            "kr": "재련 초기화 스크롤[전설]",
+            "zh": "重铸初始化卷轴【传说】"
+          },
+          "icon": "TI_Item_Growth_Scroll_01",
+          "gives": 1,
+          "cost": 1000,
+          "limit": {
+            "count": 0,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "stars/item-1001002/one-time",
+          "productId": "2028",
+          "name": {
+            "en": "Gear Reset Module",
+            "jp": "ギア・リセットモジュール",
+            "kr": "기어 리셋 모듈",
+            "zh": "装备重置模块"
+          },
+          "icon": "TI_Gear_Reset",
+          "gives": 1,
+          "cost": 2000,
+          "limit": {
+            "count": 0,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "stars/item-500018/monthly",
+          "productId": "2037",
+          "name": {
+            "en": "6★ Talisman Selection Chest [Resilience]",
+            "jp": "★6タリスマン 選択ボックス [効果抵抗]",
+            "kr": "6성 탈리스만 선택 상자 [효과 저항]",
+            "zh": "6星护身符选择箱 [效果抵抗]"
+          },
+          "icon": "TI_Talisman_Box02",
+          "gives": 1,
+          "cost": 500,
+          "limit": {
+            "count": 1,
+            "period": "monthly"
+          }
+        },
+        {
+          "key": "stars/item-1000007/daily",
+          "productId": "2038",
+          "name": {
+            "en": "Dimensional Supply Ticket x2",
+            "jp": "次元召喚チケット x2",
+            "kr": "차원 호출 티켓 2장",
+            "zh": "次元召唤券 x2"
+          },
+          "icon": "TI_Item_Ticket_Recruit_08",
+          "gives": 2,
+          "cost": 10,
+          "limit": {
+            "count": 1,
+            "period": "daily"
+          }
+        }
+      ]
+    },
+    {
+      "key": "worldboss",
+      "currency": {
+        "id": "SYS_ASSET_WORLD_BOSS_COIN",
+        "name": {
+          "en": "World Boss Token",
+          "jp": "ワールドボスの証",
+          "kr": "월드 보스 증표",
+          "zh": "世界首领信物"
+        },
+        "icon": ""
+      },
+      "entries": [
+        {
+          "key": "worldboss/gold-10000/monthly",
+          "productId": "6001",
+          "name": {
+            "en": "10,000 Gold",
+            "jp": "10,000ゴールド",
+            "kr": "골드 10,000",
+            "zh": "10,000金币"
+          },
+          "icon": "CM_TopMenu_Gold",
+          "gives": 10000,
+          "cost": 10,
+          "limit": {
+            "count": 100,
+            "period": "monthly"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "worldboss/item-20004/monthly",
+          "productId": "6007",
+          "name": {
+            "en": "Steak Dish",
+            "jp": "ステーキ定食",
+            "kr": "스테이크 정식",
+            "zh": "牛排套餐"
+          },
+          "icon": "TI_Item_Growth_Potion_04",
+          "gives": 1,
+          "cost": 20,
+          "limit": {
+            "count": 30,
+            "period": "monthly"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "worldboss/item-22103/monthly",
+          "productId": "6002",
+          "name": {
+            "en": "Potentium (Weapon/Accessory)",
+            "jp": "オプショニウム\\n(武器・アクセサリー)",
+            "kr": "옵셔니움 (무기/악세서리)",
+            "zh": "属性剂(武器/饰品)"
+          },
+          "icon": "TI_Item_Craft_Addition_O_01",
+          "gives": 1,
+          "cost": 125,
+          "limit": {
+            "count": 3,
+            "period": "monthly"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "worldboss/item-22104/monthly",
+          "productId": "6003",
+          "name": {
+            "en": "Potentium (Armor)",
+            "jp": "オプショニウム(防具)",
+            "kr": "옵셔니움 (방어구)",
+            "zh": "属性剂(防具)"
+          },
+          "icon": "TI_Item_Craft_Addition_O_02",
+          "gives": 1,
+          "cost": 125,
+          "limit": {
+            "count": 3,
+            "period": "monthly"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "worldboss/item-21202/monthly",
+          "productId": "6004",
+          "name": {
+            "en": "Transistone (Total)",
+            "jp": "トランストーン\\n(全体)",
+            "kr": "트랜스톤 (전체)",
+            "zh": "转换石(全部)"
+          },
+          "icon": "TI_Item_Option_Change_01",
+          "gives": 1,
+          "cost": 250,
+          "limit": {
+            "count": 2,
+            "period": "monthly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "worldboss/item-21201/monthly",
+          "productId": "6005",
+          "name": {
+            "en": "Transistone (Individual)",
+            "jp": "トランストーン\\n(選択)",
+            "kr": "트랜스톤 (개별)",
+            "zh": "转换石(单个)"
+          },
+          "icon": "TI_Item_Option_Change_02",
+          "gives": 1,
+          "cost": 300,
+          "limit": {
+            "count": 2,
+            "period": "monthly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "worldboss/costume-36/one-time",
+          "productId": "6006",
+          "name": {
+            "en": "Indomitable Dragon Drakhan",
+            "jp": "不敗の竜・ドレイカーン",
+            "kr": "불패의 용 드레이칸",
+            "zh": "不败之龙德雷坎"
+          },
+          "icon": "TI_Costume_Clothes_2000063_02",
+          "gives": 1,
+          "cost": 3300,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          },
+          "priority": "B"
+        },
+        {
+          "key": "worldboss/costume-63/one-time",
+          "productId": "6008",
+          "name": {
+            "en": "Undefeated Leader Nella",
+            "jp": "不敗の指導者・ネラ",
+            "kr": "불패의 지도자 넬라",
+            "zh": "不败的领袖内拉"
+          },
+          "icon": "TI_Costume_Clothes_2000091_02",
+          "gives": 1,
+          "cost": 3300,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          },
+          "priority": "B"
+        }
+      ]
+    },
+    {
+      "key": "al",
+      "currency": {
+        "id": "SYS_ASSET_ADVENTURE_LICENSE",
+        "name": {
+          "en": "License Point",
+          "jp": "ライセンスポイント",
+          "kr": "라이선스 포인트",
+          "zh": "许可证点数"
+        },
+        "icon": "TI_Licence"
+      },
+      "entries": [
+        {
+          "key": "al/p-product_adventure_license_01/one-time",
+          "productId": "51001",
+          "name": {
+            "en": "Title [Tycoon]",
+            "jp": "称号【大富豪】",
+            "kr": "칭호 [대부호]",
+            "zh": "称号【大富豪】"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 650,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "al/item-10996/one-time",
+          "productId": "51002",
+          "name": {
+            "en": "Powerful Adventurer's Talisman",
+            "jp": "強力な冒険者のタリスマン",
+            "kr": "강력한 모험가의 탈리스만",
+            "zh": "强力冒险家的护身符"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 3000,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "al/item-10997/one-time",
+          "productId": "51003",
+          "name": {
+            "en": "Sharp Adventurer's Talisman",
+            "jp": "鋭敏な冒険者のタリスマン",
+            "kr": "예리한 모험가의 탈리스만",
+            "zh": "敏锐冒险家的护身符"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 3000,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "al/item-780/one-time",
+          "productId": "51004",
+          "name": {
+            "en": "Adventurer's Sword",
+            "jp": "冒険者の剣",
+            "kr": "모험가의 검",
+            "zh": "冒险家之剑"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 2500,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "al/item-1792/one-time",
+          "productId": "51005",
+          "name": {
+            "en": "Adventurer's Necklace",
+            "jp": "冒険者の首飾り",
+            "kr": "모험가의 목걸이",
+            "zh": "冒险家项链"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 2500,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "al/item-21107/one-time",
+          "productId": "51006",
+          "name": {
+            "en": "Refined Glunite",
+            "jp": "精製された\\nグルーナイト",
+            "kr": "정제된 글루나이트",
+            "zh": "精炼格鲁矿石"
+          },
+          "icon": "TI_Equipment_Growth02",
+          "gives": 1,
+          "cost": 2500,
+          "limit": {
+            "count": 8,
+            "period": "one-time"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "al/item-3336/one-time",
+          "productId": "51007",
+          "name": {
+            "en": "6★ Legendary Helmet [Burst]",
+            "jp": "★6炸裂のヘルム\\n【レジェンド】",
+            "kr": "6성 전설 투구 [버스트]",
+            "zh": "6星传说头盔【爆发】"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 1250,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "al/item-5336/one-time",
+          "productId": "51008",
+          "name": {
+            "en": "6★ Legendary Chest Armor [Burst]",
+            "jp": "★6炸裂のアーマー\\n【レジェンド】",
+            "kr": "6성 전설 갑옷 [버스트]",
+            "zh": "6星传说盔甲【爆发】"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 1250,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "al/item-7336/one-time",
+          "productId": "51009",
+          "name": {
+            "en": "6★ Legendary Gloves [Burst]",
+            "jp": "★6炸裂のガントレット\\n【レジェンド】",
+            "kr": "6성 전설 장갑 [버스트]",
+            "zh": "6星传说手套【爆发】"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 1250,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "al/item-9336/one-time",
+          "productId": "51010",
+          "name": {
+            "en": "6★ Legendary Boots [Burst]",
+            "jp": "★6炸裂のブーツ\\n【レジェンド】",
+            "kr": "6성 전설 신발 [버스트]",
+            "zh": "6星传说鞋子【爆发】"
+          },
+          "icon": "",
+          "gives": 1,
+          "cost": 1250,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "al/item-24003/weekly",
+          "productId": "51011",
+          "name": {
+            "en": "Proof of Worth",
+            "jp": "資格の証明",
+            "kr": "자격의 증명",
+            "zh": "资格证明"
+          },
+          "icon": "TI_Gift_Cost_03",
+          "gives": 1,
+          "cost": 125,
+          "limit": {
+            "count": 25,
+            "period": "weekly"
+          },
+          "priority": "S",
+          "notes": {
+            "en": "Only until you finish Adventure License Quirk then ignore it."
+          }
+        },
+        {
+          "key": "al/item-30385/weekly",
+          "productId": "51012",
+          "name": {
+            "en": "Stage 5–6 Gem Chest",
+            "jp": "ジェムボックス(ランク5～6)",
+            "kr": "5~6단계 보석 상자",
+            "zh": "第5~6阶段宝石箱"
+          },
+          "icon": "TI_GEM_Box_01",
+          "gives": 1,
+          "cost": 250,
+          "limit": {
+            "count": 2,
+            "period": "weekly"
+          },
+          "priority": "A"
+        }
+      ]
+    },
+    {
+      "key": "survey",
+      "currency": {
+        "id": "SYS_ASSET_RESEARCH",
+        "name": {
+          "en": "Survey Points",
+          "jp": "調査Pt",
+          "kr": "조사 포인트",
+          "zh": "调查点数"
+        },
+        "icon": "CM_Icon_Support_Survey"
+      },
+      "entries": [
+        {
+          "key": "survey/ether-1/monthly",
+          "productId": "5101",
+          "name": {
+            "en": "Ether",
+            "jp": "エーテル",
+            "kr": "에테르",
+            "zh": "以太"
+          },
+          "icon": "TI_Item_Cristal",
+          "gives": 1,
+          "cost": 10,
+          "limit": {
+            "count": 500,
+            "period": "monthly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "survey/item-1000004/monthly",
+          "productId": "5102",
+          "name": {
+            "en": "Special Recruitment Ticket (Event)",
+            "jp": "プレミア\\nスカウトチケット(イベント)",
+            "kr": "특별 영입 티켓(이벤트)",
+            "zh": "特别招募券(活动)"
+          },
+          "icon": "TI_Item_Ticket_Recruit_04",
+          "gives": 1,
+          "cost": 100,
+          "limit": {
+            "count": 30,
+            "period": "monthly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "survey/item-21201/monthly",
+          "productId": "5103",
+          "name": {
+            "en": "Transistone (Individual)",
+            "jp": "トランストーン\\n(選択)",
+            "kr": "트랜스톤 (개별)",
+            "zh": "转换石(单个)"
+          },
+          "icon": "TI_Item_Option_Change_02",
+          "gives": 1,
+          "cost": 500,
+          "limit": {
+            "count": 2,
+            "period": "monthly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "survey/item-21202/monthly",
+          "productId": "5104",
+          "name": {
+            "en": "Transistone (Total)",
+            "jp": "トランストーン\\n(全体)",
+            "kr": "트랜스톤 (전체)",
+            "zh": "转换石(全部)"
+          },
+          "icon": "TI_Item_Option_Change_01",
+          "gives": 1,
+          "cost": 400,
+          "limit": {
+            "count": 2,
+            "period": "monthly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "survey/item-21107/monthly",
+          "productId": "5105",
+          "name": {
+            "en": "Refined Glunite",
+            "jp": "精製されたグルーナイト",
+            "kr": "정제된 글루나이트",
+            "zh": "精炼格鲁矿石"
+          },
+          "icon": "TI_Equipment_Growth02",
+          "gives": 1,
+          "cost": 150,
+          "limit": {
+            "count": 5,
+            "period": "monthly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "survey/item-20203/monthly",
+          "productId": "5108",
+          "name": {
+            "en": "Professional Skill Manual",
+            "jp": "スキル教本：専門家編",
+            "kr": "전문 스킬 교본",
+            "zh": "专家技能教材"
+          },
+          "icon": "TI_Item_Growth_Book_03",
+          "gives": 1,
+          "cost": 50,
+          "limit": {
+            "count": 5,
+            "period": "monthly"
+          },
+          "priority": "S"
+        },
+        {
+          "key": "survey/item-30367/monthly",
+          "productId": "5109",
+          "name": {
+            "en": "Stage 4 Gem Selection Chest",
+            "jp": "ジェム選択ボックス(ランク4)",
+            "kr": "4단계 보석 선택 상자",
+            "zh": "第4阶段宝石选择箱"
+          },
+          "icon": "TI_GEM_Box_01",
+          "gives": 1,
+          "cost": 50,
+          "limit": {
+            "count": 5,
+            "period": "monthly"
+          }
+        },
+        {
+          "key": "survey/item-21104/monthly",
+          "productId": "5110",
+          "name": {
+            "en": "Legendary Reforge Catalyst",
+            "jp": "再錬カタリスト(レジェンド)",
+            "kr": "전설 재련 촉매제",
+            "zh": "传说重铸催化剂"
+          },
+          "icon": "TI_Item_Growth_Dissolve_04",
+          "gives": 1,
+          "cost": 20,
+          "limit": {
+            "count": 20,
+            "period": "monthly"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "survey/item-30249/monthly",
+          "productId": "5111",
+          "name": {
+            "en": "Superior Quality Present Chest",
+            "jp": "プレゼントボックス【レア】",
+            "kr": "고급 등급 선물 상자",
+            "zh": "高级级别礼物箱"
+          },
+          "icon": "TI_Common_Box03",
+          "gives": 1,
+          "cost": 1,
+          "limit": {
+            "count": 200,
+            "period": "monthly"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "survey/item-21004/monthly",
+          "productId": "5112",
+          "name": {
+            "en": "Artisan's Hammer",
+            "jp": "達人の強化ハンマー",
+            "kr": "명인 강화 도구",
+            "zh": "名匠强化道具"
+          },
+          "icon": "TI_Item_Growth_Enhance_04",
+          "gives": 1,
+          "cost": 5,
+          "limit": {
+            "count": 30,
+            "period": "monthly"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "survey/item-20004/monthly",
+          "productId": "5113",
+          "name": {
+            "en": "Steak Dish",
+            "jp": "ステーキ定食",
+            "kr": "스테이크 정식",
+            "zh": "牛排套餐"
+          },
+          "icon": "TI_Item_Growth_Potion_04",
+          "gives": 1,
+          "cost": 5,
+          "limit": {
+            "count": 100,
+            "period": "monthly"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "survey/item-22103/monthly",
+          "productId": "5114",
+          "name": {
+            "en": "Potentium (Weapon/Accessory)",
+            "jp": "オプショニウム\\n(武器・アクセサリー)",
+            "kr": "옵셔니움 (무기/악세서리)",
+            "zh": "属性剂(武器/饰品)"
+          },
+          "icon": "TI_Item_Craft_Addition_O_01",
+          "gives": 1,
+          "cost": 15,
+          "limit": {
+            "count": 10,
+            "period": "monthly"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "survey/item-22104/monthly",
+          "productId": "5115",
+          "name": {
+            "en": "Potentium (Armor)",
+            "jp": "オプショニウム(防具)",
+            "kr": "옵셔니움 (방어구)",
+            "zh": "属性剂(防具)"
+          },
+          "icon": "TI_Item_Craft_Addition_O_02",
+          "gives": 1,
+          "cost": 10,
+          "limit": {
+            "count": 15,
+            "period": "monthly"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "survey/item-22102/monthly",
+          "productId": "5116",
+          "name": {
+            "en": "10% Legendary Abrasive",
+            "jp": "レジェンド研磨剤10%",
+            "kr": "10% 전설 등급 연마제",
+            "zh": "10%传说级别研磨剂"
+          },
+          "icon": "TI_Item_Craft_Addition_U_01",
+          "gives": 1,
+          "cost": 20,
+          "limit": {
+            "count": 5,
+            "period": "monthly"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "survey/item-1001001/monthly",
+          "productId": "5117",
+          "name": {
+            "en": "Time Rewinder",
+            "jp": "タイム・リワインダー",
+            "kr": "타임 리와인더",
+            "zh": "时间倒带"
+          },
+          "icon": "TI_CharacterRecall",
+          "gives": 1,
+          "cost": 150,
+          "limit": {
+            "count": 1,
+            "period": "monthly"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "survey/item-30303/monthly",
+          "productId": "5118",
+          "name": {
+            "en": "5★ Random Talisman Chest",
+            "jp": "★5タリスマンランダムボックス",
+            "kr": "5성 탈리스만 랜덤 상자",
+            "zh": "5星护身符随机箱"
+          },
+          "icon": "TI_Talisman_Box02",
+          "gives": 1,
+          "cost": 300,
+          "limit": {
+            "count": 4,
+            "period": "monthly"
+          },
+          "priority": "B"
+        },
+        {
+          "key": "survey/item-30326/monthly",
+          "productId": "5119",
+          "name": {
+            "en": "6★ Talisman Selection Chest",
+            "jp": "★6タリスマン選択ボックス",
+            "kr": "6성 탈리스만 선택 상자",
+            "zh": "6星护身符选择箱"
+          },
+          "icon": "TI_Talisman_Box02",
+          "gives": 1,
+          "cost": 1500,
+          "limit": {
+            "count": 1,
+            "period": "monthly"
+          }
+        },
+        {
+          "key": "survey/item-30271/one-time",
+          "productId": "5120",
+          "name": {
+            "en": "6★ Legendary Weapon Selection Chest",
+            "jp": "★6武器選択ボックス【レジェンド】",
+            "kr": "6성 전설 무기 선택 상자",
+            "zh": "6星传说武器选择箱"
+          },
+          "icon": "TI_Weapon_Box02",
+          "gives": 1,
+          "cost": 750,
+          "limit": {
+            "count": 2,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "survey/item-30272/one-time",
+          "productId": "5121",
+          "name": {
+            "en": "6★ Legendary Accessory Selection Chest",
+            "jp": "★6アクセサリー選択ボックス【レジェンド】",
+            "kr": "6성 전설 악세서리 선택 상자",
+            "zh": "6星传说饰品选择箱"
+          },
+          "icon": "TI_Accessary_Box02",
+          "gives": 1,
+          "cost": 750,
+          "limit": {
+            "count": 2,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "survey/item-30273/one-time",
+          "productId": "5122",
+          "name": {
+            "en": "6★ Legendary Helmet Selection Chest",
+            "jp": "★6ヘルム選択ボックス【レジェンド】",
+            "kr": "6성 전설 투구 선택 상자",
+            "zh": "6星传说头盔选择箱"
+          },
+          "icon": "TI_Armor_Box02",
+          "gives": 1,
+          "cost": 450,
+          "limit": {
+            "count": 2,
+            "period": "one-time"
+          },
+          "priority": "B"
+        },
+        {
+          "key": "survey/item-30274/one-time",
+          "productId": "5123",
+          "name": {
+            "en": "6★ Legendary Chest Armor Selection Chest",
+            "jp": "★6アーマー選択ボックス【レジェンド】",
+            "kr": "6성 전설 갑옷 선택 상자",
+            "zh": "6星传说盔甲选择箱"
+          },
+          "icon": "TI_Armor_Box02",
+          "gives": 1,
+          "cost": 450,
+          "limit": {
+            "count": 2,
+            "period": "one-time"
+          }
+        },
+        {
+          "key": "survey/item-30275/one-time",
+          "productId": "5124",
+          "name": {
+            "en": "6★ Legendary Gloves Selection Chest",
+            "jp": "★6ガントレット選択ボックス【レジェンド】",
+            "kr": "6성 전설 장갑 선택 상자",
+            "zh": "6星传说手套选择箱"
+          },
+          "icon": "TI_Armor_Box02",
+          "gives": 1,
+          "cost": 450,
+          "limit": {
+            "count": 2,
+            "period": "one-time"
+          },
+          "priority": "B"
+        },
+        {
+          "key": "survey/item-30276/one-time",
+          "productId": "5125",
+          "name": {
+            "en": "6★ Legendary Boots Selection Chest",
+            "jp": "★6ブーツ選択ボックス【レジェンド】",
+            "kr": "6성 전설 신발 선택 상자",
+            "zh": "6星传说鞋子选择箱"
+          },
+          "icon": "TI_Armor_Box02",
+          "gives": 1,
+          "cost": 450,
+          "limit": {
+            "count": 2,
+            "period": "one-time"
+          },
+          "priority": "B"
+        },
+        {
+          "key": "survey/item-2000052/one-time",
+          "productId": "5126",
+          "name": {
+            "en": "Sigma Piece",
+            "jp": "シグマのピース",
+            "kr": "시그마의 조각",
+            "zh": "西格玛碎片"
+          },
+          "icon": "CM_Piece_Frame",
+          "gives": 1,
+          "cost": 1,
+          "limit": {
+            "count": 900,
+            "period": "one-time"
+          }
+        }
+      ]
+    }
+  ]
+}

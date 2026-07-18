@@ -54,6 +54,7 @@ import { buildSkills } from './generators/skills';
 import { buildUnlockContent } from './generators/unlock-content';
 import { buildRecruit } from './generators/recruit';
 import { buildEtherRankings } from './generators/ether-rankings';
+import { buildShopPriorities } from './generators/shop-priorities';
 import { buildEffectGlossary, unknownFamilyTypes } from './lib/effects';
 import {
   curatedBossIds,
@@ -180,6 +181,9 @@ async function main(): Promise<void> {
   // Ether par classement (arène/guild raid/world boss/singularity) — guide
   // « Ether Income ».
   await writeJson('ether-rankings.json', buildEtherRankings());
+  // Achats de shop par priorité (8 shops permanents dérivés ; éditorial curé) —
+  // guide « Recommended Purchases by Shop ».
+  await writeJson('shop-priorities.json', buildShopPriorities());
   // Rotation Monad Gate (groupes + cadence ; ancre curée), compositions des
   // tours et calendrier des contenus saisonniers — cf. en-têtes des générateurs.
   await writeJson('singularity.json', buildSingularity());

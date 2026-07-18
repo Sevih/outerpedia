@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Shop Purchase Priorities",
+    "jp": "ショップ購入優先順位",
+    "kr": "상점 구매 우선순위",
+    "zh": "商店购买优先级",
+    "fr": "Priorités d'achat du Shop"
+  },
+  "description": {
+    "en": "Outerplane shop guide with purchase priorities — best items to buy, what to skip, and how to spend currencies wisely.",
+    "jp": "Outerplaneショップガイド：購入優先順位 — 購入すべきアイテム、スキップすべきもの、通貨の賢い使い方。",
+    "kr": "Outerplane 상점 가이드: 구매 우선순위 — 구매해야 할 아이템, 건너뛸 것, 화폐를 현명하게 사용하는 방법.",
+    "zh": "Outerplane商店指南及购买优先级——最佳购买物品、应跳过的物品以及如何明智地购买",
+    "fr": "Guide des shops d'Outerplane avec priorités d'achat — quels items acheter, lesquels éviter, et comment dépenser vos monnaies intelligemment."
+  },
+  "icon": "TI_Web_Event_Coin",
+  "author": "Sevih / Shiraen",
+  "updated": "2026-07-18",
+  "order": 4,
+  "tier": "economy"
+}

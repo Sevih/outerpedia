@@ -1,0 +1,222 @@
+{
+  "_doc": "Overlay éditorial du guide shop-priorities : priorité (S/A/B/C) + notes, keyé par le slug STABLE shop/<goods>/<période> du générateur (insensible au prix/rotation). Seedé depuis la V2 ; à maintenir via l'admin. Un produit dérivé sans entrée ici = priorité à trancher (warn au build).",
+  "al/item-21107/one-time": {
+    "priority": "S"
+  },
+  "al/item-24003/weekly": {
+    "priority": "S",
+    "notes": {
+      "en": "Only until you finish Adventure License Quirk then ignore it."
+    }
+  },
+  "al/item-30385/weekly": {
+    "priority": "A"
+  },
+  "arena/gold-10000/daily": {
+    "priority": "A"
+  },
+  "arena/item-20203/weekly": {
+    "priority": "S"
+  },
+  "friend/gold-10000/daily": {
+    "priority": "S"
+  },
+  "friend/item-30047/weekly": {
+    "priority": "B"
+  },
+  "friend/item-30111/daily": {
+    "priority": "C"
+  },
+  "friend/item-30114/weekly": {
+    "priority": "S"
+  },
+  "guild/gold-10000/daily": {
+    "priority": "A"
+  },
+  "guild/gold-50000/weekly": {
+    "priority": "A"
+  },
+  "guild/item-20001/daily": {
+    "priority": "C"
+  },
+  "guild/item-20002/daily": {
+    "priority": "C"
+  },
+  "guild/item-20003/daily": {
+    "priority": "C"
+  },
+  "guild/item-20004/daily": {
+    "priority": "C"
+  },
+  "guild/item-20201/weekly": {
+    "priority": "S"
+  },
+  "guild/item-20202/weekly": {
+    "priority": "S"
+  },
+  "guild/item-20203/weekly": {
+    "priority": "S"
+  },
+  "guild/item-30149/weekly": {
+    "priority": "C"
+  },
+  "guild/item-30153/weekly": {
+    "priority": "A"
+  },
+  "guild/item-30411/weekly": {
+    "priority": "S"
+  },
+  "joint/gold-20000/weekly": {
+    "priority": "A"
+  },
+  "joint/item-1000004/weekly": {
+    "priority": "S"
+  },
+  "joint/item-21104/weekly": {
+    "priority": "C"
+  },
+  "joint/item-21107/monthly": {
+    "priority": "S"
+  },
+  "joint/item-21127/weekly": {
+    "priority": "A"
+  },
+  "joint/item-21201/monthly": {
+    "priority": "S"
+  },
+  "joint/item-21202/monthly": {
+    "priority": "S"
+  },
+  "joint/item-30299/weekly": {
+    "priority": "B"
+  },
+  "stars/gold-200000/daily": {
+    "priority": "A"
+  },
+  "stars/item-1000002/weekly": {
+    "priority": "S"
+  },
+  "stars/item-1000004/daily": {
+    "priority": "S"
+  },
+  "stars/item-1001001/monthly": {
+    "priority": "A"
+  },
+  "stars/item-20004/daily": {
+    "priority": "C"
+  },
+  "stars/item-20202/weekly": {
+    "priority": "S"
+  },
+  "stars/item-20203/weekly": {
+    "priority": "S"
+  },
+  "stars/item-21106/weekly": {
+    "priority": "B"
+  },
+  "stars/item-21107/monthly": {
+    "priority": "S"
+  },
+  "stars/item-21201/monthly": {
+    "priority": "S"
+  },
+  "stars/item-21202/weekly": {
+    "priority": "S"
+  },
+  "stars/item-22030/monthly": {
+    "priority": "A"
+  },
+  "stars/item-22031/monthly": {
+    "priority": "A"
+  },
+  "stars/item-22032/monthly": {
+    "priority": "B"
+  },
+  "stars/item-22033/monthly": {
+    "priority": "B"
+  },
+  "stars/item-22104/monthly": {
+    "priority": "A"
+  },
+  "stars/item-30205/daily": {
+    "priority": "B"
+  },
+  "survey/ether-1/monthly": {
+    "priority": "S"
+  },
+  "survey/item-1000004/monthly": {
+    "priority": "S"
+  },
+  "survey/item-1001001/monthly": {
+    "priority": "A"
+  },
+  "survey/item-20004/monthly": {
+    "priority": "C"
+  },
+  "survey/item-20203/monthly": {
+    "priority": "S"
+  },
+  "survey/item-21004/monthly": {
+    "priority": "C"
+  },
+  "survey/item-21104/monthly": {
+    "priority": "C"
+  },
+  "survey/item-21107/monthly": {
+    "priority": "S"
+  },
+  "survey/item-21201/monthly": {
+    "priority": "S"
+  },
+  "survey/item-21202/monthly": {
+    "priority": "S"
+  },
+  "survey/item-22102/monthly": {
+    "priority": "C"
+  },
+  "survey/item-22103/monthly": {
+    "priority": "A"
+  },
+  "survey/item-22104/monthly": {
+    "priority": "A"
+  },
+  "survey/item-30249/monthly": {
+    "priority": "C"
+  },
+  "survey/item-30273/one-time": {
+    "priority": "B"
+  },
+  "survey/item-30275/one-time": {
+    "priority": "B"
+  },
+  "survey/item-30276/one-time": {
+    "priority": "B"
+  },
+  "survey/item-30303/monthly": {
+    "priority": "B"
+  },
+  "worldboss/costume-36/one-time": {
+    "priority": "B"
+  },
+  "worldboss/costume-63/one-time": {
+    "priority": "B"
+  },
+  "worldboss/gold-10000/monthly": {
+    "priority": "A"
+  },
+  "worldboss/item-20004/monthly": {
+    "priority": "C"
+  },
+  "worldboss/item-21201/monthly": {
+    "priority": "S"
+  },
+  "worldboss/item-21202/monthly": {
+    "priority": "S"
+  },
+  "worldboss/item-22103/monthly": {
+    "priority": "A"
+  },
+  "worldboss/item-22104/monthly": {
+    "priority": "A"
+  }
+}

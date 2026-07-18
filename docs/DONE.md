@@ -6,6 +6,27 @@
 
 ## 2026-07-18
 
+- **Guide « Shop Purchase Priorities » porté** (economy, ordre 4) — le plus
+  data-driven de la catégorie. La V2 codait ~1000 lignes de contenu de shop EN
+  DUR (`data.ts`), déjà PÉRIMÉ (Guild Shop rebrassé le 2024-12-03 : prix changés,
+  Intermediate Skill Manual 200→150 Guild Coins). Nouveau générateur
+  `shop-priorities.json` : les 8 shops permanents « à monnaie » (guild, joint,
+  friend, arena, stars, worldboss, adventure-license, survey) DÉRIVENT de
+  `ProductTemplet` — noms (ProductNameID→TextItem, 4 langues), coûts, limites,
+  périodes, monnaie (asset du catalogue). « Produit courant » 100 % déterministe
+  SANS horloge (exigence Sevih « trigger quand ça bouge uniquement ») : ancre
+  `asOf` = StartDate réelle max (cluster d'années contigu → écarte les sentinelles
+  forever 2034/2224/2999), courant si `StartDate ≤ asOf < EndDate`. Overlay curé
+  `data/curated/shop-priorities.json` = SEUL l'éditorial (priorité S/A/B/C +
+  notes), keyé par un slug STABLE `shop/<goods>/<période>` (le productId ET le
+  ProductNameID bougent à chaque rotation ; l'invariant est CE QU'ON ACHÈTE) —
+  la priorité reste accrochée quand le jeu rebrasse le shop. Seed depuis la V2
+  (72/126 produits ; le reste = items V2 périmés rotationnés out, ou produits
+  nouveaux jamais notés — à compléter à l'admin). Shops variables (Event,
+  General/Resource) ou texte (Supply, Rico) restent éditoriaux (transplant
+  verbatim, `editorial.ts`). Guide V3 : `SegmentedTabs` 12 onglets (icône monnaie
+  - label), table unifiée dérivé/éditorial sur primitives, textes supply/rico.
+    Icône meta `TI_Web_Event_Coin` (collecte au prochain push d'assets).
 - **Éditeur EE — suivi (menu, colonne Curé, descriptions, portrait, passifs)**
   (raffinements de l'éditeur EE livré le même jour). (1) Menu Editor : retrait
   des entrées « à venir » armes/amulettes/armures/talismans + pages placeholder

@@ -97,6 +97,13 @@ export type {
 } from '../generators/recruit';
 export type { EtherRankTier, EtherRankingsData } from '../generators/ether-rankings';
 export type {
+  ShopPriority,
+  ShopPeriod,
+  ShopEntry,
+  ShopSection,
+  ShopPrioritiesData,
+} from '../generators/shop-priorities';
+export type {
   SingularityAnchor,
   SingularityBoss,
   SingularityData,
