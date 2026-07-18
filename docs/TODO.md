@@ -12,72 +12,17 @@
 
 ## 🎯 PRIO (décision Sevih)
 
-- [ ] **Retirer les comparaisons V2 des extracteurs** — l'oracle a joué son rôle.
-      Périmètre : `datagen/extractor/v2-control.ts` + contrôle de cohérence,
-      `equipmentV2Control`/`EquipmentReport` (Extractor gear), l'Extractor Effect
-      (pur contrôle de régression V2), les statuts « diff » de la sidebar,
-      `core/diff`, les lectures `../outerpedia-v2`. **EXCEPTION : le regen
-      coupons/banner se GARDE jusqu'à la bascule prod V2→V3.**
-      ✅ Préalable RÉGLÉ le 17/07 : le chemin `../outerpedia-v2` en dur était
-      dépendant de la machine (fixe : `outerpedia-v2`, portable : `outerpedia`)
-      → `V2_DIR` câblée (`datagen/lib/env.ts` : v2Dir/v2ImagesDir, consommée
-      par promo-banner-store, stage.ts et manifest.ts ; documentée dans
-      .env.example, posée dans le .env.local des machines). Une fois la dépose
-      faite : `data/legacy/` (248 fichiers) devient supprimable.
-      ✅ FAIT (18/07) : comparaisons V2 RETIRÉES de l'admin (extracteur +
-      éditeur). Supprimés : `v2-control.ts`, `coherence.ts`, `equipment-control.ts`,
-      `V2ControlPanel`, `EquipmentReport`, `v2MissingInV3`, `v2Reference`, script
-      `datagen:coherence`. Toutes les pages extracteur (persos, effets, EE, armes,
-      amulettes, armures, talismans, sets) tournent sur le moteur `review` (diff
-      jeu↔site new/diff/typo + « corriger les typos »), sidebars sans colonne
-      `v2≠`, badges du menu sur les buckets review.
-      ✅ FAIT (18/07) : `data/legacy/` (249 fichiers) SUPPRIMÉ. Coupé : outils
-      d'import one-shot (`import-equipment`, `import-gear-reco`, `seedFromLegacy`/
-      `seed-curated`), oracle de couverture (`core/spec`+`core/diff`, bloc
-      `coverage:`, CLI `extract-entity`), replis runtime (pros-cons legacy = code
-      mort ; icônes d'effets rapatriées dans `data/editorial/effect-icons.json`).
-      Vérifié : glossaire d'effets identique sans legacy, 351 tests.
-      RESTE : le regen coupons/banner (EXCEPTION jusqu'à bascule prod).
-- [ ] **Retravailler le rôle des Extractors/Editors du panneau admin** (corollaire
-      du point précédent — demande Sevih 2026-07-16) : certaines pages Extractor
-      n'existent que pour la comparaison V2. Quand la comp V2 saute, redéfinir la
-      matrice fonction × entité AVANT de retirer les contrôles, pour ne pas
-      laisser des pages mortes. À intégrer à ce chantier (audit 17/07) :
-      `CharactersSidebar` vs `ExtractorSidebar` sont quasi identiques (fusionner
-      sur ExtractorSidebar, 9 usages), `CharacterSwitch`/`MonsterSwitch`
-      identiques au chemin près, `CharacterPicker`/`ItemPicker` à factoriser.
-      🔶 EN COURS (18/07) : matrice d'accueil REDÉFINIE (Extract = diff jeu↔site
-      new/diff/typo sur 10 entités ; Édition = couverture curée X/N) ; pages
-      extracteur par entité FAITES (composant générique `ExtractorReview`) ;
-      ordre du side-menu Extractor/Editor aligné ; extraction perso montre TOUT
-      (Lambda intégrable), dev sans auto-promote (intégration = seule porte).
-      Modèle acté Sevih : extracteur = data du jeu (inclusion via bouton
-      d'intégration par entité) ; éditeur = committé + curé, effectif à chaud.
-      ✅ FAIT (18/07) : intégration par entité pour l'ÉQUIPEMENT — bouton sur
-      les fiches extracteur (armes/amulettes/talismans/EE/sets) qui merge la
-      famille + ses records partagés (pools/passifs/paliers) + `families.json`
-      et stage les images (`integrateEquipment`, cœur testé).
-      ✅ FAIT (18/07) : EXTRACTEUR D'ITEMS — cible review `item`
-      (`buildItemCatalog`, mémoïsée) + page `/admin/extractor/items` (diff
-      jeu↔site via `ExtractorReview`) + entrée de menu + ligne de la matrice
-      d'accueil (couverture curée depuis `data/curated/items.json`) + bouton
-      d'intégration PAR LIGNE (`integrateItem` : entrée `items.json` + icône ;
-      cœur `integrateItemData` partagé avec le rebake de l'éditeur).
-      ✅ FAIT (18/07) : factorisations admin — `EntitySwitch` générique
-      (ex-CharacterSwitch/MonsterSwitch), `SearchPicker<T>` (ex-CharacterPicker/
-      ItemPicker, adaptateurs minces), fusion `CharactersSidebar`→`ExtractorSidebar`
-      (adaptateur `characterExtractorRows`, marqueur ✎ curé générique).
-      ✅ FAIT (18/07) : CÂBLAGE buff/debuff des PERSOS dans l'éditeur (parité
-      partielle avec le monstre, périmètre acté Sevih = masquer + ajouter, PAS
-      de déplacement inter-cartes car le routage perso est déterministe). Couche
-      curée `data/curated/character-skills.json` (`chipHide`/`chipAdd` par
-      cardId) lue par `cardEffects`/`buildChainView` (filtre local
-      `applyCardCuration`), store + route `curated/character-skills`, composant
-      `CharacterKitEditor` (cartes mains/fusion/extra + chaîne + duo). 2e passe
-      `mergeStatusEffects` (chipAdd) sur fiche publique + extractor, comme
-      BossPanel. Fichier curé vide au départ → rendu public inchangé.
-      RESTE : éditeur gear manquant.
-- [ ] prevoir les editeurs pour update les guides
+> Le gros chantier admin (matrice Extractor/Editor) a été mené le 18/07 —
+> comparaisons V2 retirées, `data/legacy` déposé, intégration par entité
+> (perso/équipement/item), extracteur d'items, factorisations
+> switches/pickers/sidebars, câblage buff/debuff perso. Détail dans DONE.md.
+> Ne restent ci-dessous que les reliquats.
+
+- [ ] **Éditeurs admin manquants** — reliquat du chantier matrice ci-dessus :
+      éditeur **gear**, et des éditeurs pour mettre à jour les **guides**.
+- [ ] **Regen coupons/banner V2 = EXCEPTION assumée** — la source V2 reste la
+      référence jusqu'à la bascule prod V2→V3 (liée à la page `/coupons`). Rien
+      à faire d'ici là.
 
 ## 📄 Pages manquantes (inventaire layout du 2026-07-17)
 
@@ -136,11 +81,6 @@
       En passant : `src/hooks/useMediaQuery.ts:8-12` — mémoïser `subscribe`
       (`useCallback`), sinon désabo/réabo à chaque rendu.
 
-### Admin (dev-only mais irritant)
-
-> Les 3 items traités le 18/07 (helper `postJson`, keying stable, `eeReport`
-> O(n)) — cf. DONE.
-
 ### Datagen — divers
 
 - [ ] `datagen/extractor/specs/character.ts:492` : `ShowMainPage === 'true'`
@@ -148,8 +88,6 @@
       une normalisation côté jeu viderait le roster en silence. Généraliser
       `bool()` de `lib/tables` à tous les booléens de table (3 idiomes
       coexistent : `bool()`, `boolCol()`, comparaisons exactes).
-
-## 🌍 i18n / SEO / a11y (audit 17/07)
 
 ## 🧪 Tests à écrire
 
@@ -215,17 +153,6 @@
       equipment.ts vs lib/buff), résolution RewardTemplet ×2 (encounters vs
       monad, `span()` copié-collé), walk récursif ×4, `nameKey`/`isPresent`/
       `sc`/regex VA dupliqués, `norm()` divergents des deux import-*.
-- [x] Wrappers guides : 64 wrappers de pur forward (`{...props}`) uniformisés
-      sur le re-export 1 ligne (18/07 → DONE). RESTE non concerné : 34 wrappers
-      qui injectent un `content.json` local (BossGuide & co) et 12 contenus
-      éditoriaux (general-guides/other).
-- [x] `StatInline` local d'EquipmentDetail / hex `detail/theme.ts` (18/07 → DONE).
-      Verdict : PAS un vrai doublon — le local résout `statKey`, tronque, sans
-      tooltip (renommé `EquipStatChip`, homonyme tué). `detail/theme.ts` : mort
-      retiré (seul `.hex` lu → `elementAccent`→`elementHex`, interface + alpha
-      supprimées), `ELEMENT_HEX` dé-exporté, miroir globals.css DOCUMENTÉ (le
-      vrai single-source CSS via `var(--${element})` casse sur `dark`/`--dark-elem`
-      → reporté, risque visuel page perso).
 
 ### Chantiers actés (16/07, inchangés)
 
