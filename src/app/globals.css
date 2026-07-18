@@ -104,6 +104,24 @@
   --monad-explore: #4ade80; /* vert — exploration bénéfique (relic/moment) */
   --monad-combat: #f87171; /* rouge — combat (elite/pinnacle/final) */
   --monad-story: #38bdf8; /* bleu — narratif / spécial (saga/cube) */
+  /* Encarts/pastilles de la carte Monad Gate (popups & résumé True Ending),
+     PAR RÔLE. Valeurs Tailwind v4 EXACTES (OKLCH) des nuances d'origine —
+     tokenisées pour sortir les vives du composant sans bouger un pixel. Les
+     bords/fonds translucides = ces tokens + un modificateur d'opacité (`/30`…)
+     côté classe. Le fond jaune de la pastille de quête réutilise
+     --monad-milestone. */
+  --monad-choice-bd: oklch(72.3% 0.219 149.579); /* vert : bord du choix sélectionné (popup) */
+  --monad-choice-bg: oklch(52.7% 0.154 150.069); /* vert : fond du choix (popup plein + chip /30) */
+  --monad-choice-chip-bd: oklch(62.7% 0.194 149.214); /* vert : bord de la chip True Ending */
+  --monad-choice-text: oklch(96.2% 0.044 156.743); /* vert clair : texte de la chip */
+  --monad-key: oklch(76.5% 0.177 163.223); /* emerald : « donne une clé » (nœud/popup) */
+  --monad-key-soft: oklch(84.5% 0.143 164.978); /* emerald clair : « donne » dans le résumé */
+  --monad-key-badge: oklch(69.6% 0.17 162.48); /* emerald : pastille 🔑 du nœud compact */
+  --monad-void-bd: oklch(63.7% 0.237 25.331); /* rouge : bord « le choix n'a pas d'importance » */
+  --monad-void-bg: oklch(39.6% 0.141 25.723); /* rouge sombre : fond du même encart */
+  --monad-void-text: oklch(88.5% 0.062 18.334); /* rouge clair : texte du même encart */
+  --monad-quest-bd: oklch(79.5% 0.184 86.047); /* jaune : bord de la pastille numérotée */
+  --monad-quest-text: oklch(90.5% 0.182 98.111); /* jaune clair : numéro de la pastille */
   --stat: #fbbf24;
   --highlight: #22d3ee;
   /* Texte « équipement » (noms d'items dans la prose) — teinte V2 exacte. */
@@ -185,6 +203,18 @@
   --color-monad-explore: var(--monad-explore);
   --color-monad-combat: var(--monad-combat);
   --color-monad-story: var(--monad-story);
+  --color-monad-choice-bd: var(--monad-choice-bd);
+  --color-monad-choice-bg: var(--monad-choice-bg);
+  --color-monad-choice-chip-bd: var(--monad-choice-chip-bd);
+  --color-monad-choice-text: var(--monad-choice-text);
+  --color-monad-key: var(--monad-key);
+  --color-monad-key-soft: var(--monad-key-soft);
+  --color-monad-key-badge: var(--monad-key-badge);
+  --color-monad-void-bd: var(--monad-void-bd);
+  --color-monad-void-bg: var(--monad-void-bg);
+  --color-monad-void-text: var(--monad-void-text);
+  --color-monad-quest-bd: var(--monad-quest-bd);
+  --color-monad-quest-text: var(--monad-quest-text);
   --color-stat: var(--stat);
   --color-highlight: var(--highlight);
   --color-equipment: var(--equipment);

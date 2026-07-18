@@ -48,11 +48,19 @@
   `content-muted`). (5) `MonadGateMap` — conversions EXACTES sûres (valeur =
   token existant, 0 pixel bougé) : `text-yellow-400` #facc15 → `text-monad-milestone`
   (2 cases à cocher + texte « requis » + titre True Ending) ; `hover:text-red-400`
-  #f87171 → `hover:text-danger` (croix de fermeture). Typecheck + lint + 423 tests
-  OK. RESTE : nuances bespoke de MonadGateMap (encarts vert/rouge/jaune à opacités,
-  emerald « donne une clé », littéraux SVG) → arbitrage token-fin-exact vs
-  unification color-mix EN ATTENTE ; ~16 autres composants ; palettes de catégorie ;
-  extension RAW_COLOR ; phase 2 éditoriale.
+  #f87171 → `hover:text-danger` (croix de fermeture). (6) `MonadGateMap` — nuances
+  bespoke : arbitrage tranché par Sevih = TOKEN-FIN EXACT (0 pixel bougé, pas
+  d'unification color-mix). 12 tokens `--monad-*` ajoutés aux valeurs OKLCH EXACTES
+  de Tailwind v4 (relevées dans `tailwindcss/theme.css`) : famille choix (choice-bd/
+  bg/chip-bd/text), clé (key/key-soft/key-badge), « n'a pas d'importance » (void-bd/
+  bg/text), pastille de quête (quest-bd/text ; fond jaune réutilise monad-milestone).
+  Les 9 classes vives (green/emerald/red/yellow à opacités) routées dessus, opacité
+  gardée côté classe (`/30`…). Restent en littéraux SVG (attributs de présentation,
+  `var()` non résolu) : `fill="white"`, `stroke="black"`, `#facc15`, `#fde047` —
+  hors cible de l'eslint (classes). Galerie `/dev/tokens` : bloc « Encarts Monad
+  Gate » ajouté (reproduit les usages réels). Typecheck + lint + 423 tests OK.
+  RESTE : ~16 autres composants ; palettes de catégorie ; extension RAW_COLOR ;
+  phase 2 éditoriale.
 
 - **Lot de tests « petits modules purs »** (suite de la campagne tests, +40).
   Six fichiers co-localisés : `stats.test.ts` (statAbbr connu/repli,

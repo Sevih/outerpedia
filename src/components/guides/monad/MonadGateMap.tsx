@@ -446,7 +446,7 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
                       />
                       {giveLabel && (
                         <span
-                          className="ring-surface-sunken absolute -top-1 -right-1 z-20 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-[10px] leading-none shadow ring-1"
+                          className="ring-surface-sunken bg-monad-key-badge absolute -top-1 -right-1 z-20 flex h-5 w-5 items-center justify-center rounded-full text-[10px] leading-none shadow ring-1"
                           title={giveLabel}
                         >
                           🔑
@@ -488,7 +488,7 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
                         <div className="font-semibold">{typeLabel}</div>
                         {nodeLabel && <div className="text-[10px] italic">{nodeLabel}</div>}
                         {giveLabel && (
-                          <div className="text-[10px] text-emerald-400 italic">🔑 {giveLabel}</div>
+                          <div className="text-monad-key text-[10px] italic">🔑 {giveLabel}</div>
                         )}
                       </div>
                     </div>
@@ -575,7 +575,7 @@ function NodeChoicesPopup({
         ) : (
           <>
             {showEquivalentNotice && (
-              <div className="mb-2 rounded border border-red-500/60 bg-red-900/30 px-3 py-2 text-center text-xs font-semibold text-red-200">
+              <div className="border-monad-void-bd/60 bg-monad-void-bg/30 text-monad-void-text mb-2 rounded border px-3 py-2 text-center text-xs font-semibold">
                 {strings.choiceDoesntMatter}
               </div>
             )}
@@ -595,7 +595,7 @@ function NodeChoicesPopup({
                     shouldDim
                       ? 'border-line-subtle bg-surface-raised text-content-subtle'
                       : highlight
-                        ? 'text-content-strong border-green-500 bg-green-700'
+                        ? 'text-content-strong border-monad-choice-bd bg-monad-choice-bg'
                         : 'border-line-subtle bg-surface-raised text-content-strong'
                   }`}
                 >
@@ -606,7 +606,7 @@ function NodeChoicesPopup({
                     </div>
                   )}
                   {givesText && (
-                    <div className="mt-1 text-xs text-emerald-400 italic">
+                    <div className="text-monad-key mt-1 text-xs italic">
                       🔑 {strings.grants} : {givesText}
                     </div>
                   )}
@@ -682,7 +682,7 @@ function TrueEndingChoices({
       >
         {groups.map((group, idx) => (
           <li key={idx} className="flex items-start gap-3">
-            <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-yellow-500/40 bg-yellow-400/15 text-xs font-bold text-yellow-300">
+            <span className="border-monad-quest-bd/40 bg-monad-milestone/15 text-monad-quest-text mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-xs font-bold">
               {idx + 1}
             </span>
             <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2 gap-y-1">
@@ -693,18 +693,18 @@ function TrueEndingChoices({
                       {strings.or}
                     </span>
                   )}
-                  <span className="inline-flex items-center rounded-md border border-green-600/60 bg-green-700/30 px-2.5 py-1 text-sm text-green-100">
+                  <span className="border-monad-choice-chip-bd/60 bg-monad-choice-bg/30 text-monad-choice-text inline-flex items-center rounded-md border px-2.5 py-1 text-sm">
                     {lRec(edge.label, lang)}
                   </span>
                   {edge.gives && (
-                    <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-300">
+                    <span className="text-monad-key-soft inline-flex items-center gap-1 text-xs font-medium">
                       🔑 {lRec(edge.gives, lang)}
                     </span>
                   )}
                 </Fragment>
               ))}
               {group.length > 1 && (
-                <span className="inline-flex items-center rounded border border-red-500/60 bg-red-900/30 px-2 py-0.5 text-[10px] font-semibold text-red-200">
+                <span className="border-monad-void-bd/60 bg-monad-void-bg/30 text-monad-void-text inline-flex items-center rounded border px-2 py-0.5 text-[10px] font-semibold">
                   {strings.choiceDoesntMatter}
                 </span>
               )}

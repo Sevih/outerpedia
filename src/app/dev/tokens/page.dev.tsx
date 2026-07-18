@@ -184,6 +184,57 @@ export default function TokensGallery() {
           </div>
         </Demo>
 
+        {/* Encarts/pastilles Monad Gate — popups de choix & résumé True Ending */}
+        <Demo
+          title="Encarts Monad Gate (popups · résumé)"
+          tokens={[
+            '--color-monad-choice-bd',
+            '--color-monad-choice-bg',
+            '--color-monad-choice-chip-bd',
+            '--color-monad-choice-text',
+            '--color-monad-key',
+            '--color-monad-key-soft',
+            '--color-monad-key-badge',
+            '--color-monad-void-bd',
+            '--color-monad-void-bg',
+            '--color-monad-void-text',
+            '--color-monad-quest-bd',
+            '--color-monad-quest-text',
+          ]}
+        >
+          <div className="space-y-2 text-xs">
+            {/* Choix sélectionné dans le popup (fond vert plein) */}
+            <div className="text-content-strong border-monad-choice-bd bg-monad-choice-bg inline-block rounded border px-3 py-2">
+              Choix sélectionné (true path)
+            </div>
+            {/* Ligne du résumé : pastille numérotée + chip + clé */}
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="border-monad-quest-bd/40 bg-monad-milestone/15 text-monad-quest-text flex h-6 w-6 items-center justify-center rounded-full border font-bold">
+                1
+              </span>
+              <span className="border-monad-choice-chip-bd/60 bg-monad-choice-bg/30 text-monad-choice-text inline-flex items-center rounded-md border px-2.5 py-1 text-sm">
+                Choix A
+              </span>
+              <span className="text-monad-key-soft inline-flex items-center gap-1 font-medium">
+                🔑 Objet
+              </span>
+            </div>
+            {/* Encart « le choix n'a pas d'importance » (rouge translucide) */}
+            <span className="border-monad-void-bd/60 bg-monad-void-bg/30 text-monad-void-text inline-flex items-center rounded border px-2 py-0.5 font-semibold">
+              Le choix n’a pas d’importance
+            </span>
+            {/* « Donne une clé » sur un nœud + pastille 🔑 du nœud compact */}
+            <div className="flex items-center gap-3">
+              <span className="text-monad-key inline-flex items-center gap-1">
+                🔑 Donne une clé
+              </span>
+              <span className="bg-monad-key-badge flex h-5 w-5 items-center justify-center rounded-full text-[10px]">
+                🔑
+              </span>
+            </div>
+          </div>
+        </Demo>
+
         {/* Chips d'effet (buff / debuff) */}
         <Demo
           title="Chips d’effet (buff / debuff)"
