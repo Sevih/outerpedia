@@ -12,9 +12,14 @@ import setsData from '@data/generated/equipment/sets.json';
 export interface GearOption {
   id: string;
   label: string;
+  /** Sprite du jeu (aperçu « à vue » dans l'éditeur de recos). */
+  icon?: string;
 }
 
-type EquipJson = Record<string, { name?: { en?: string }; classLimit?: string | null }>;
+type EquipJson = Record<
+  string,
+  { name?: { en?: string }; classLimit?: string | null; icon?: string }
+>;
 
 function toOptions(data: EquipJson): GearOption[] {
   const map = new Map<string, GearOption>();
@@ -23,7 +28,7 @@ function toOptions(data: EquipJson): GearOption[] {
     const e = data[id];
     if (!e.name?.en) continue;
     const label = `${e.name.en}${e.classLimit ? ` [${e.classLimit}]` : ''}`;
-    if (!map.has(label)) map.set(label, { id, label });
+    if (!map.has(label)) map.set(label, { id, label, icon: e.icon });
   }
   return [...map.values()].sort((a, b) => a.label.localeCompare(b.label));
 }

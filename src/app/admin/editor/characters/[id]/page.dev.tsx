@@ -28,13 +28,23 @@ export default async function EditorCharacterDetail({
 
   // Options des sélecteurs gear reco (helper partagé avec /admin/gear-presets).
   const presets = loadGearPresets();
+  const opts = gearSelectOptions();
+  // Icônes des sets composant chaque preset (aperçu « à vue » dans l'éditeur).
+  const setIconById = new Map(opts.sets.map((o) => [o.id, o.icon]));
+  const setPresetIcons: Record<string, string[]> = {};
+  for (const [slug, pieces] of Object.entries(presets.sets)) {
+    setPresetIcons[slug] = pieces
+      .map((p) => setIconById.get(p.set))
+      .filter((i): i is string => Boolean(i));
+  }
   const gearOptions: GearRecoOptions = {
-    ...gearSelectOptions(),
+    ...opts,
     presets: {
       talismans: presets.talismans,
       sets: Object.keys(presets.sets),
       substats: Object.keys(presets.substats),
     },
+    setPresetIcons,
   };
   const gearInitial = loadGearReco()[id] ?? [];
 

@@ -6,6 +6,16 @@
 
 ## 2026-07-18
 
+- **Éditeur de recos : aperçu iconographique « à vue »** (demande Sevih) —
+  l'éditeur `GearRecoEditor` listait des ids bruts dans des `<select>`. Un
+  `<option>` HTML ne peut pas porter d'image → à côté de chaque sélecteur, un
+  aperçu du sprite de l'item choisi (endpoint `/api/admin/sprite`, dev, comme
+  `GearDetail`) : armes, amulettes, talismans (badge `$` pour un preset, ⚠ pour
+  un id irrésolu, carré vide si rien). Les sets (preset-only dans l'éditeur)
+  affichent les icônes des sets du preset — `GearOption` porte désormais son
+  `icon`, la page éditeur résout slug→pièces→icônes (`setPresetIcons`). Vérifié :
+  icônes résolues (armes/sets/presets), 351 tests verts, typecheck + lint OK.
+
 - **Primitive `HeatSlider` — dédup RankSlider ↔ EncounterSlider** — les deux
   glissières d'échelle longue (palier de boss dans BossStats, stage dans
   EncounterSelection) partageaient ~90 lignes quasi identiques : le double-ref

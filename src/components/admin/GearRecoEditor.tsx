@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- sprites dev (aperçu éditeur) */
 'use client';
 
 import { useState } from 'react';
@@ -11,6 +12,54 @@ const field =
 const label = 'text-xs font-semibold uppercase tracking-wide text-content-subtle';
 const btn = 'rounded border border-line px-2 py-0.5 text-xs text-content-subtle hover:text-content';
 
+const sprite = (name: string) => `/api/admin/sprite/${encodeURIComponent(name)}`;
+
+/**
+ * Aperçu « à vue » de l'item sélectionné : sprite du jeu, badge `$` pour un
+ * preset, ⚠ pour un id irrésolu, sinon un carré vide (rien de sélectionné).
+ */
+function IconChip({ id, options }: { id: string; options: GearOption[] }) {
+  const box = 'h-8 w-8 shrink-0 rounded';
+  if (id.startsWith('$'))
+    return (
+      <span
+        className={`${box} bg-surface-raised text-content-subtle flex items-center justify-center text-xs font-semibold`}
+      >
+        $
+      </span>
+    );
+  if (id.startsWith('!'))
+    return (
+      <span
+        className={`${box} text-danger flex items-center justify-center text-xs`}
+        title={id.slice(1)}
+      >
+        ⚠
+      </span>
+    );
+  const icon = id ? options.find((o) => o.id === id)?.icon : undefined;
+  if (!icon)
+    return (
+      <span className={`${box} bg-surface-raised/40 border-line-subtle border border-dashed`} />
+    );
+  return <img src={sprite(icon)} alt="" className={`${box} object-contain`} />;
+}
+
+/** Aperçu des sets d'un preset (une icône par set du combo). */
+function SetPresetIcons({ icons }: { icons?: string[] }) {
+  if (!icons?.length)
+    return (
+      <span className="bg-surface-raised/40 border-line-subtle h-8 w-8 shrink-0 rounded border border-dashed" />
+    );
+  return (
+    <span className="flex shrink-0 items-center gap-0.5">
+      {icons.map((icon, i) => (
+        <img key={i} src={sprite(icon)} alt="" className="h-8 w-8 object-contain" />
+      ))}
+    </span>
+  );
+}
+
 /** Options des sélecteurs (générées serveur : plus de fautes de frappe possibles). */
 export interface GearRecoOptions {
   weapons: GearOption[];
@@ -19,6 +68,8 @@ export interface GearRecoOptions {
   sets: GearOption[];
   /** Talismans avec leur CONTENU (pour convertir une saisie manuelle en preset). */
   presets: { talismans: Record<string, string[]>; sets: string[]; substats: string[] };
+  /** Icônes des sets composant chaque preset de sets (aperçu « à vue »). */
+  setPresetIcons?: Record<string, string[]>;
 }
 
 /** Si la liste manuelle d'ids égale un preset (même multiset), le référence. */
@@ -79,6 +130,7 @@ function PickList({
       <p className={label}>{title}</p>
       {picks.map((p, i) => (
         <div key={i} className="flex items-center gap-1">
+          <IconChip id={p.id} options={options} />
           <ItemSelect
             value={p.id}
             onChange={(id) => onChange(picks.map((x, j) => (j === i ? { ...x, id } : x)))}
@@ -211,6 +263,7 @@ export function GearRecoEditor({
               <p className={label}>Talismans (ou preset $)</p>
               {(b.talismans ?? []).map((tl, ti) => (
                 <div key={ti} className="flex items-center gap-1">
+                  <IconChip id={tl} options={options.talismans} />
                   <ItemSelect
                     value={tl}
                     onChange={(v) =>
@@ -241,6 +294,9 @@ export function GearRecoEditor({
               <p className={label}>Combos de sets (preset $ ou pièces)</p>
               {(b.sets ?? []).map((c, ci) => (
                 <div key={ci} className="flex items-center gap-1">
+                  <SetPresetIcons
+                    icons={c.preset ? options.setPresetIcons?.[c.preset] : undefined}
+                  />
                   <select
                     className={`${field} w-32`}
                     value={c.preset ?? ''}
