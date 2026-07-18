@@ -6,15 +6,19 @@
 
 ## 2026-07-18
 
-- **`useMediaQuery` mémoïsé** (perf UI publique, « en passant » de l'item
-  ResponsiveCharacterCard). `subscribe` et `getSnapshot` étaient recréés à chaque
+- **`ResponsiveCharacterCard` : layout-shift réduit (défaut SSR = md) + hook
+  mémoïsé** (perf UI publique, page la plus visitée). Deux volets :
+  (1) `useMediaQuery` mémoïsé — `subscribe`/`getSnapshot` étaient recréés à chaque
   rendu → `useSyncExternalStore` se désabonnait/réabonnait à `window.matchMedia`
-  à CHAQUE rendu ; multiplié par les ~200 cartes de `/characters` (2 requêtes
-  chacune), du churn pur. Passés en `useCallback([query])`. Zéro changement de
-  comportement. Bénéficie aussi à TeamSlotCarousel. Typecheck OK. RESTE (décision
-  Sevih) : le layout-shift sm→lg à l'hydratation de la carte elle-même — fix
-  structurel non trivial (les 3 tailles ont des DOM différents + FitText mesure
-  en JS), à trancher avec lui.
+  à CHAQUE rendu, multiplié par les ~200 cartes (2 requêtes chacune). Passés en
+  `useCallback([query])`. Bénéficie aussi à TeamSlotCarousel.
+  (2) Layout-shift — DÉCISION Sevih : le SSR (sans viewport) partait toujours sur
+  `sm` (66px) puis sautait à `lg` (120px) à l'hydratation. `useMediaQuery` gagne
+  un `serverDefault` (via `getServerSnapshot`) ; la carte force `md` au SSR
+  (`/characters` est surtout desktop). Le shift devient md→lg au pire sur grand
+  écran, mobile se recale md→sm — plus jamais depuis 66px. `useSyncExternalStore`
+  gère le recalage client sans warning d'hydratation. TeamSlotCarousel inchangé
+  (serverDefault reste `false`). Typecheck (mes fichiers) + 353 tests OK.
 
 - **Caches périmés (partie src) STAMPÉS sur le mtime du curé** (bug moyen —
   process admin long-running). `gear-reco.ts` (`famByMember`) et `rewards.ts`

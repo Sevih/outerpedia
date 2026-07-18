@@ -74,18 +74,13 @@
 
 ### UI publique
 
-- [ ] `src/components/character/ResponsiveCharacterCard.tsx:8-11` : SSR rend
-      toujours `sm` (useMediaQuery false côté serveur) → layout shift sm→lg à
-      l'hydratation sur `/characters` (page la plus visitée), images `priority`
-      peintes en 66px d'abord, et 2 abonnements matchMedia × ~200 cartes.
-      Passer en CSS responsive (variantes masquées) ou remonter le breakpoint.
-      ⚠️ EN ATTENTE décision Sevih : les 3 tailles diffèrent STRUCTURELLEMENT
-      (sm = nom sous la carte, md/lg = nom en surimpression) + FitText mesure en
-      JS → une approche « variantes masquées » triple le DOM et casse FitText sur
-      le caché. Choix à trancher (CSS-variants / breakpoint SSR par défaut / rester).
-      ✅ FAIT (18/07) : `useMediaQuery` mémoïsé (`subscribe`/`getSnapshot` en
-      `useCallback` sur `query`) — fin du désabo/réabo par rendu, bénéficie aussi
-      à TeamSlotCarousel. → DONE.
+- [x] `ResponsiveCharacterCard` layout-shift (18/07 → DONE). Décision Sevih :
+      DÉFAUT SSR = `md` (au lieu de `sm`) — `/characters` est surtout desktop, le
+      shift passe de sm→lg (66→120px) à md→lg au pire, mobile se recale md→sm.
+      `useMediaQuery(query, serverDefault=false)` gagne un `getServerSnapshot`
+      paramétrable ; la carte passe `true` pour le breakpoint md. En passant :
+      `useMediaQuery` mémoïsé (`subscribe`/`getSnapshot` en `useCallback`) — fin
+      du désabo/réabo par rendu, bénéficie aussi à TeamSlotCarousel.
 
 ### Datagen — divers
 
