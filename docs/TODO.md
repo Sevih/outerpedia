@@ -96,9 +96,6 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
       (item 📚).
 - [ ] **`/legal`** — mentions légales (lien de la barre basse du footer).
 - [ ] **`/feed`** — flux RSS (route handler ; lié par le footer).
-- [ ] **Recherche globale** (SearchModal + trigger + Ctrl+K du header V2) —
-      clés `search.*` ; lira `NAV_ITEMS`/`EXTRA_PAGES` de `src/lib/nav.ts` ;
-      l'emplacement dans HeaderClient est réservé (commentaire).
 - [ ] **Home riche** — sections bannières actives / codes promo / guides
       débutants (clés `home.*`, structure V2).
 

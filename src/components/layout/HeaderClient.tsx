@@ -4,6 +4,7 @@ import Link from 'next/link';
 import type { Route } from 'next';
 import { useEffect, useState } from 'react';
 import { LanguageSwitcher, type LanguageSwitcherStrings } from './LanguageSwitcher';
+import { SearchModal, type SearchStrings } from './SearchModal';
 import type { Lang } from '@/lib/i18n/config';
 
 /** Item de nav pré-localisé côté serveur (icône = URL R2 résolue). */
@@ -19,6 +20,18 @@ export interface HeaderNavItem {
 export interface HeaderStrings {
   toggleMenu: string;
   lang: LanguageSwitcherStrings;
+  /** Palette de recherche (Ctrl+K) : libellés + placeholder court du trigger. */
+  search: SearchStrings & { short: string };
+}
+
+/** Loupe (trigger + barre de la palette). */
+function SearchIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
+      <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2" />
+      <path d="M20 20l-3.5-3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
 }
 
 function NavIcon({ src, alt, size }: { src: string; alt: string; size: number }) {
@@ -50,6 +63,19 @@ export function HeaderClient({
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  // Raccourci global Ctrl/⌘+K (convention des palettes de recherche).
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   // Collapse au scroll — hystérésis (replie > 40, déplie < 10) : la zone morte
   // est plus large que la variation de hauteur du header, l'ancrage de scroll
@@ -146,8 +172,20 @@ export function HeaderClient({
           ))}
         </nav>
 
-        {/* Droite desktop : admin (dev) + langue — la recherche s'insérera ici. */}
+        {/* Droite desktop : recherche + admin (dev) + langue. */}
         <div className="ml-auto hidden items-center gap-2 md:flex">
+          <button
+            type="button"
+            onClick={() => setSearchOpen(true)}
+            aria-label={strings.search.placeholder}
+            className="border-line bg-surface-base text-content-subtle hover:text-content-muted flex items-center gap-2 rounded-md border px-2.5 py-1.5 text-xs transition"
+          >
+            <SearchIcon size={14} />
+            <span className="hidden lg:inline">{strings.search.short}</span>
+            <kbd className="border-line hidden rounded border px-1 py-0.5 font-mono text-[10px] lg:inline-block">
+              ⌘K
+            </kbd>
+          </button>
           {process.env.NODE_ENV === 'development' && (
             <Link
               href={'/admin' as Route}
@@ -160,8 +198,15 @@ export function HeaderClient({
           <LanguageSwitcher current={lang} strings={strings.lang} />
         </div>
 
-        {/* Droite mobile : burger */}
+        {/* Droite mobile : recherche + burger */}
         <div className="ml-auto flex items-center gap-2 md:hidden">
+          <button
+            className="border-line bg-surface-base text-content-muted hover:bg-surface-overlay flex size-9 items-center justify-center rounded-lg border transition"
+            onClick={() => setSearchOpen(true)}
+            aria-label={strings.search.placeholder}
+          >
+            <SearchIcon size={16} />
+          </button>
           <button
             className="border-line bg-surface-base text-content-muted hover:bg-surface-overlay flex size-9 items-center justify-center rounded-lg border transition"
             onClick={() => setMenuOpen((v) => !v)}
@@ -245,6 +290,10 @@ export function HeaderClient({
             </div>
           </div>
         </div>
+      )}
+
+      {searchOpen && (
+        <SearchModal lang={lang} strings={strings.search} onClose={() => setSearchOpen(false)} />
       )}
     </header>
   );

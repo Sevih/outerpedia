@@ -44,6 +44,14 @@ export async function Header() {
           community: t('header.lang.community'),
           communityNote: t('header.lang.community_note'),
         },
+        search: {
+          placeholder: t('search.placeholder'),
+          short: t('search.short_placeholder'),
+          noResults: t('search.no_results'),
+          pages: t('search.pages'),
+          characters: t('search.characters'),
+          guides: t('search.guides'),
+        },
       }}
     />
   );

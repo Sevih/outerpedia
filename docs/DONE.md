@@ -115,6 +115,26 @@ group-hover:border-danger`. Galerie : rampe danger ajoutée au bloc Statut.
   correct). RESTE (hors chantier guides) : tokeniser tools/landing puis étendre le
   garde-fou ; prose `_contents` éditoriale (à laisser en Tailwind direct, à confirmer).
 
+- **Recherche globale (palette Ctrl+K)** — item « Pages manquantes ». Trigger
+  header (desktop = pilule « Search… ⌘K », mobile = loupe) + raccourci global
+  Ctrl/⌘+K. Archi : index construit CÔTÉ SERVEUR (`src/lib/search-index.ts`,
+  `buildSearchIndex(lang, t)`) et servi par un route handler `/api/search?lang=`
+  (Cache-Control CDN agressif) — chargé à la 1re ouverture, PAS inliné dans le
+  header de chaque page. Périmètre : pages (nav + catégories de guides + pages
+  annexes, contrat `lib/nav.ts`), personnages (`/characters/<slug>` + face icon),
+  guides (`/guides/<cat>/<slug>`). **Équipement différé** (éclaté familles/sets/EE,
+  slugs dérivés — l'archi et la palette le prennent tel quel, `kind:'equipment'`).
+  `SearchModal` (client) : fetch mémorisé au niveau module (par langue, requêtes
+  concurrentes dédupliquées), filtre ACCENT-INSENSIBLE (NFD), résultats groupés
+  par nature (8/groupe), navigation clavier complète (↑↓ parcourt, Entrée ouvre,
+  Échap ferme), voile + verrou de scroll. `buildSearchIndex` est BEST-EFFORT par
+  source (`source()` : une source qui jette — ex. guide transitoirement malformé
+  pendant un portage — est ignorée avec `console.warn`, la palette ne 500 pas ;
+  l'erreur reste levée bruyamment par les pages qui lisent la donnée en direct).
+  Test `search-index.test.ts` (6) sur la donnée committée. Lint + tsc OK ; mes
+  tests verts. NB build : intégration non buildée ici (arbre transitoirement cassé
+  par un guide WIP du worker sans meta.json — hors de mes fichiers).
+
 - **Tests `seo.ts` + compléments `skill-view`** (suite de la campagne tests,
   +35 → 458). `seo.test.ts` (26) : `createPageMetadata` (canonical, hreflang ×5
   - x-default dérivés de `buildUrl`, suffixe titre, tailles/carte OG-Twitter
