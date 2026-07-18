@@ -143,8 +143,6 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
       (buff.ts, testés mais jamais appelés en prod), export `isPermilleRow`,
       `validateTagDef` (curated/tags.ts:57 — son commentaire prétend qu'il est
       branché, c'est faux : le brancher ou le supprimer).
-- [ ] `.env.example:4-13` : `DB_*`/`BOT_API_URL` lus par aucun code — retirer
-      ou annoter « V2, pas encore porté ».
 
 ### Duplication (les 2 gros d'abord)
 
@@ -174,10 +172,6 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
 
 ## ⚙️ Config / infra
 
-- [ ] **Trous de typecheck** : `next.config.ts` et `vitest.config.ts` couverts
-      par aucun des 3 tsc (include racine = src only) ; `assets-push.mjs` et
-      `r2-cors.mjs` (maillon R2 du commit) jamais typecheckés — les convertir
-      en `.ts` ou activer allowJs+checkJs.
 - [ ] CSP (`next.config.ts`) : `unsafe-eval` RETIRÉ de script-src en prod le
       18/07 (gardé en dev pour le HMR — cf. DONE). RESTE : viser nonce +
       strict-dynamic pour retirer aussi `unsafe-inline` (script ET style).
@@ -204,12 +198,13 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
       les namespaces non portés dans un fichier d'attente pour que « clé
       inutilisée » redevienne un signal. (Cohérence structurelle
       inter-langues : parfaite — clés identiques ×5, zéro manquante.)
-- [ ] Doc ↔ code : en-tête de `geas.ts:14` (dit l'inverse du code sur
-      `positive`), commentaires périmés de `face-icon.ts:5-7,37` (« à
-      re-porter » — c'est automatisé depuis le 14/07), doc de `slugTeam`
-      (skills.ts:113 — dit « undefined si CSV », le code prend le 1er token),
-      exception `stageLabel` non documentée (unlock-content.ts:112 contredit
-      son propre en-tête « jamais parser l'ID »).
+- [ ] Doc ↔ code (RESTE datagen → worker) : commentaires périmés de
+      `face-icon.ts:5-7,37` (« à re-porter » — c'est automatisé depuis le 14/07),
+      doc de `slugTeam` (datagen/generators/skills.ts:113 — dit « undefined si
+      CSV », le code prend le 1er token), exception `stageLabel` non documentée
+      (datagen/generators/unlock-content.ts contredit son en-tête « jamais parser
+      l'ID »). (SRC FAIT : en-tête `geas.ts` corrigé — classement sur signe de
+      `points`, pas `positive` — le 18/07.)
 
 ## 📦 Données V2 restant à porter (ex todo-data-v2)
 

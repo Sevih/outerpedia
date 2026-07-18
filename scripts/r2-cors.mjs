@@ -14,7 +14,7 @@ import { createHash, createHmac } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const env = {};
+const env = /** @type {Record<string, string>} */ ({});
 for (const line of readFileSync(resolve('.env.local'), 'utf8').split('\n')) {
   const m = /^([A-Z0-9_]+)=(.*)$/.exec(line.trim());
   if (m) env[m[1]] = m[2];
@@ -38,7 +38,12 @@ const body = [
   '</CORSConfiguration>',
 ].join('');
 
+/** @param {import('node:crypto').BinaryLike} s */
 const sha256 = (s) => createHash('sha256').update(s).digest('hex');
+/**
+ * @param {import('node:crypto').BinaryLike} key
+ * @param {import('node:crypto').BinaryLike} s
+ */
 const hmac = (key, s) => createHmac('sha256', key).update(s).digest();
 
 const url = new URL(R2_ENDPOINT);

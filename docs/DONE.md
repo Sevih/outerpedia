@@ -152,6 +152,21 @@ group-hover:border-danger`. Galerie : rampe danger ajoutée au bloc Statut.
   correct). RESTE (hors chantier guides) : tokeniser tools/landing puis étendre le
   garde-fou ; prose `_contents` éditoriale (à laisser en Tailwind direct, à confirmer).
 
+- **Lot config / hygiène (dette)**. (1) Trous de typecheck comblés :
+  `next.config.ts` + `vitest.config.ts` ajoutés au `include` de la tsconfig racine
+  (couverts par la passe `tsc` principale) ; `scripts/*.mjs` (maillon R2 :
+  `assets-push`, `r2-cors`) désormais typecheckés — `scripts/tsconfig.json` passe
+  en `allowJs+checkJs` (+ `**/*.mjs`), les 18 gaps révélés corrigés par
+  annotations JSDoc INERTES (objets `env`/`pushed` typés `Record<string,string>`,
+  params crypto/`walk` typés). Les 3 passes tsc vertes, `node --check` OK.
+  (2) `.env.example` : `DB_*`/`BOT_API_URL` (lus par AUCUN code, vérifié) annotés
+  « V2 — pas encore porté » (mémo de prod, plutôt que supprimés). (3) Doc↔code :
+  en-tête de `src/lib/data/geas.ts` corrigé — il disait que le classement bonus/
+  malus se lit sur le flag `positive`, alors que `isBonusGeas` classe sur le SIGNE
+  de `points` (« aide au combat ≠ bonus de score »). RESTE (hors ce lot) : CSP
+  nonce + strict-dynamic (risqué : middleware + vérif build/runtime → passe dédiée) ;
+  doc↔code restants en datagen (worker).
+
 - **Recherche globale (palette Ctrl+K)** — item « Pages manquantes ». Trigger
   header (desktop = pilule « Search… ⌘K », mobile = loupe) + raccourci global
   Ctrl/⌘+K. Archi : index construit CÔTÉ SERVEUR (`src/lib/search-index.ts`,

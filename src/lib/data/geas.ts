@@ -10,8 +10,9 @@
  *     (`stage_N`) porte `geasRewards = [id, id]`, les geas gagnés au palier N.
  *
  * On ne recopie donc rien : un guide désigne le `group` d'un sous-boss, tout le
- * reste en découle. Le classement bonus/malus se lit sur `positive`, jamais sur
- * l'ordre de la liste `geasRewards`.
+ * reste en découle. Le classement bonus/malus (de SCORE) se lit sur le SIGNE de
+ * `points` (cf. `isBonusGeas`) — jamais sur le flag `positive` (aide au combat ≠
+ * bonus de score) ni sur l'ordre de la liste `geasRewards`.
  */
 import glossariesData from '@data/generated/glossaries.json';
 import type { Glossaries, GuildRaidGeas } from '@contracts';

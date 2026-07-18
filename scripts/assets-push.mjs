@@ -51,7 +51,7 @@ const FULL = process.argv.includes('--full');
 const PURGE_ONLY = process.argv.includes('--purge-only');
 
 // .env.local : parse minimal KEY=VALUE (pas de dépendance).
-const env = {};
+const env = /** @type {Record<string, string>} */ ({});
 try {
   for (const line of readFileSync(resolve('.env.local'), 'utf8').split('\n')) {
     const m = /^([A-Z0-9_]+)=(.*)$/.exec(line.trim());
@@ -84,7 +84,9 @@ if (spawnSync('rclone', ['version'], { stdio: 'ignore' }).status !== 0) {
 
 /** Clés bucket du staging (séparateur `/`) → sha1 du contenu. */
 function hashStaging() {
+  /** @type {Map<string, string>} */
   const out = new Map();
+  /** @param {string} dir */
   const walk = (dir) => {
     for (const e of readdirSync(dir, { withFileTypes: true })) {
       const abs = join(dir, e.name);
@@ -104,7 +106,7 @@ function hashStaging() {
 }
 
 const current = hashStaging();
-let pushed = {};
+let pushed = /** @type {Record<string, string>} */ ({});
 try {
   pushed = JSON.parse(readFileSync(STATE_FILE, 'utf8'));
 } catch {
@@ -113,7 +115,7 @@ try {
 // `--full` ignore l'état comme référence de comparaison, mais on GARDE le fichier
 // lu pour la fusion finale : une clé poussée jadis puis retirée du staging vit
 // toujours sur R2 (on ne supprime jamais à distance), son entrée doit survivre.
-const baseline = FULL ? {} : pushed;
+const baseline = /** @type {Record<string, string>} */ (FULL ? {} : pushed);
 
 const added = [];
 const changed = [];
