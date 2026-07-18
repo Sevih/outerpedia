@@ -48,15 +48,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     {
       // Même ordre d'entités que l'Extractor (demande Sevih) ; le Monstre et
       // l'Item ferment la liste des deux côtés.
+      // Même ordre d'entités que l'Extractor (demande Sevih) ; le Monstre et
+      // l'Item ferment la liste des deux côtés. PAS d'éditeur pour les autres
+      // pièces d'équipement (armes/amulettes/armures/talismans/sets) : rien à
+      // curer dessus — seul l'EE a une curation (rang + câblage des chips).
       title: 'Editor',
       items: [
         { label: 'Personnage', href: '/admin/editor/characters' },
         { label: 'Effect', href: '/admin/editor/effects' },
         { label: 'EE', href: '/admin/editor/ee' },
-        { label: 'Armes', href: '/admin/editor/weapons', soon: true },
-        { label: 'Amulet', href: '/admin/editor/amulets', soon: true },
-        { label: 'Armor', href: '/admin/editor/armors', soon: true },
-        { label: 'Talisman', href: '/admin/editor/talismans', soon: true },
         { label: 'Monstre', href: '/admin/editor/monsters' },
         { label: 'Item', href: '/admin/editor/items' },
       ],
