@@ -42,11 +42,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         { label: 'Talisman', href: '/admin/extractor/talismans', badge: warn(n.talisman ?? 0) },
         { label: 'Sets', href: '/admin/extractor/sets', badge: warn(n.set ?? 0) },
         { label: 'Monstre', href: '/admin/extractor/monsters', badge: warn(n.monster ?? 0) },
+        { label: 'Item', href: '/admin/extractor/items', badge: warn(n.item ?? 0) },
       ],
     },
     {
-      // Même ordre d'entités que l'Extractor (demande Sevih) ; l'Item (sans
-      // extracteur encore) et le Monstre ferment la liste.
+      // Même ordre d'entités que l'Extractor (demande Sevih) ; le Monstre et
+      // l'Item ferment la liste des deux côtés.
       title: 'Editor',
       items: [
         { label: 'Personnage', href: '/admin/editor/characters' },

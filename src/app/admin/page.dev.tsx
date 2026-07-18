@@ -58,6 +58,15 @@ function EditionCell({ cover }: { cover: { href: string; done: number; total: nu
   );
 }
 
+/** Lecture tolérante d'un JSON du repo (dictionnaire d'ids) — `{}` si absent. */
+function readIdDict(rel: string): Record<string, unknown> {
+  try {
+    return JSON.parse(readFileSync(resolve(process.cwd(), rel), 'utf8')) as Record<string, unknown>;
+  } catch {
+    return {};
+  }
+}
+
 /** Rapport de collecte d'assets (écrit par `pnpm assets:collect`), si présent. */
 function readAssetsReport(): { total: number; missingCount: number; generatedAt: string } | null {
   try {
@@ -107,6 +116,15 @@ export default function AdminHome() {
     { label: 'Armor', extract: ex('armor', '/admin/extractor/armors'), edition: null },
     { label: 'Talisman', extract: ex('talisman', '/admin/extractor/talismans'), edition: null },
     { label: 'Sets', extract: ex('set', '/admin/extractor/sets'), edition: null },
+    {
+      label: 'Item',
+      extract: ex('item', '/admin/extractor/items'),
+      edition: {
+        href: '/admin/editor/items',
+        done: Object.keys(readIdDict('data/curated/items.json')).length,
+        total: Object.keys(readIdDict('data/generated/items.json')).length,
+      },
+    },
   ];
 
   const totalActionable = rows.reduce(

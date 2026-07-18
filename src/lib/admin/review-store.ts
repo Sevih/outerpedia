@@ -13,6 +13,7 @@ import {
   reviewEntities,
   reviewTarget,
   reviewTotals,
+  targetBuild,
   type EntityReview,
   type ReviewEntity,
   type TargetReview,
@@ -67,5 +68,6 @@ export {
   reviewEntities,
   reviewTarget,
   reviewTotals,
+  targetBuild,
   versionMonster,
 };

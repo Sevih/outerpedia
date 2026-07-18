@@ -12,8 +12,9 @@
 import { buildCharacters } from './specs/character';
 import { buildMonsters } from './specs/monster';
 import { buildEquipment, type EquipmentData } from '../generators/equipment';
+import { buildItemCatalog } from '../generators/item-catalog';
 import { buildEffectGlossary } from '../lib/effects';
-import { tablesStamp } from '../lib/tables';
+import { fileStamp, tablesStamp } from '../lib/tables';
 
 export interface GeneratedTarget {
   /** Identifiant CLI/route : `character`, `weapon`… */
@@ -53,6 +54,19 @@ const equipTarget = (id: string, label: string, key: keyof EquipmentData): Gener
   build: () => equipment()[key] as Record<string, unknown>,
 });
 
+/**
+ * Catalogue d'items UNIFIÉ (items + goods + costumes + overlay curé baké) — la
+ * forme exacte de `items.json` (cf. build.ts). Lourd (trois générateurs + le
+ * curé) → mémoïsé sur les tables d'items ET le curé éditable (l'éditeur d'items
+ * réécrit `data/curated/items.json`, la revue doit le refléter).
+ */
+let itemCache: { stamp: string; data: Record<string, unknown> } | undefined;
+function itemCatalog(): Record<string, unknown> {
+  const stamp = `${tablesStamp(['TextItem'])}|${fileStamp('data/curated/items.json')}`;
+  if (!itemCache || itemCache.stamp !== stamp) itemCache = { stamp, data: buildItemCatalog() };
+  return itemCache.data;
+}
+
 export const TARGETS: GeneratedTarget[] = [
   {
     id: 'character',
@@ -82,6 +96,12 @@ export const TARGETS: GeneratedTarget[] = [
   equipTarget('armor', 'Armures', 'armor'),
   equipTarget('talisman', 'Talismans', 'talisman'),
   equipTarget('set', 'Sets', 'sets'),
+  {
+    id: 'item',
+    label: 'Items',
+    file: 'items.json',
+    build: () => itemCatalog(),
+  },
 ];
 
 export function getTarget(id: string): GeneratedTarget | undefined {

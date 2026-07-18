@@ -6,6 +6,20 @@
 
 ## 2026-07-18
 
+- **Extracteur d'ITEMS** (PRIO Sevih — l'entité manquante de la matrice) —
+  nouvelle cible de revue `item` (`buildItemCatalog` : items + goods + costumes
+  - overlay curé baké, exactement la forme d'`items.json`), mémoïsée sur les
+    tables d'items ET `data/curated/items.json` (l'éditeur d'items le réécrit, la
+    revue doit le refléter). Page `/admin/extractor/items` sur le composant
+    générique `ExtractorReview` (diff jeu↔site new/diff/typo + « valider toute
+    l'extraction » + « corriger les typos »), helper `itemReviewProps` qui résout
+    les noms via l'union committé ∪ frais (nouveaux et disparus nommés), exposé
+    par un `targetBuild(id)` (build frais mémoïsé, gratuit après `reviewTarget`).
+    Entrée de menu Extractor (Item en fin, aligné sur l'Editor) + ligne de la
+    matrice d'accueil (couverture curée X/N). Vérifié : 0 faux positif
+    (`buildItemCatalog()` == `items.json` committé, 1171 items), 351 tests verts,
+    typecheck datagen + lint OK. RESTE : intégration PAR ENTITÉ (bouton) — le
+    « valider tout » global marche déjà.
 - **Intégration par entité pour l'ÉQUIPEMENT** (PRIO Sevih — pendant gear de
   `integrateCharacter`) — bouton « Intégrer » sur les fiches extracteur (armes,
   amulettes, talismans, EE, sets) qui valide CETTE entité sans passer par le

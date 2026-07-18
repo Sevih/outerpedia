@@ -42,7 +42,7 @@
       sur ExtractorSidebar, 9 usages), `CharacterSwitch`/`MonsterSwitch`
       identiques au chemin près, `CharacterPicker`/`ItemPicker` à factoriser.
       🔶 EN COURS (18/07) : matrice d'accueil REDÉFINIE (Extract = diff jeu↔site
-      new/diff/typo sur 9 entités ; Édition = couverture curée X/N) ; pages
+      new/diff/typo sur 10 entités ; Édition = couverture curée X/N) ; pages
       extracteur par entité FAITES (composant générique `ExtractorReview`) ;
       ordre du side-menu Extractor/Editor aligné ; extraction perso montre TOUT
       (Lambda intégrable), dev sans auto-promote (intégration = seule porte).
@@ -52,9 +52,14 @@
       les fiches extracteur (armes/amulettes/talismans/EE/sets) qui merge la
       famille + ses records partagés (pools/passifs/paliers) + `families.json`
       et stage les images (`integrateEquipment`, cœur testé).
-      RESTE : EXTRACTEUR D'ITEMS (à créer) ; éditeurs manquants (Monstre,
-      gear) ; factos `CharacterSwitch`/`MonsterSwitch`, `CharacterPicker`/
-      `ItemPicker` ; fusion `CharactersSidebar`↔`ExtractorSidebar`.
+      ✅ FAIT (18/07) : EXTRACTEUR D'ITEMS — cible review `item`
+      (`buildItemCatalog`, mémoïsée) + page `/admin/extractor/items` (diff
+      jeu↔site via `ExtractorReview`) + entrée de menu + ligne de la matrice
+      d'accueil (couverture curée depuis `data/curated/items.json`).
+      RESTE : intégration PAR ENTITÉ pour l'item (le bouton, comme gear/perso —
+      le « valider toute l'extraction » global marche déjà) ; éditeurs manquants
+      (Monstre, gear) ; factos `CharacterSwitch`/`MonsterSwitch`,
+      `CharacterPicker`/`ItemPicker` ; fusion `CharactersSidebar`↔`ExtractorSidebar`.
 - [ ] **Éditeur de recos (gear-reco) : rendre l'UI d'édition fidèle au rendu
       public** (demande Sevih 2026-07-18) — l'édition actuelle liste des ids
       bruts ; la faire ressembler au rendu personnage/slug (icônes d'armes/

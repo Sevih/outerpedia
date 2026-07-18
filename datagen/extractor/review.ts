@@ -100,6 +100,18 @@ export function reviewTarget(id: string): TargetReview {
   return runReview(target);
 }
 
+/**
+ * Extraction FRAÎCHE d'une cible (clé d'entité → objet) — sert à résoudre un
+ * libellé par entité côté UI (ex. le nom d'un item, y compris un nouveau, absent
+ * du committé). Appelé juste après `reviewTarget`, la mémoïsation du build
+ * (cibles lourdes : équipement, catalogue d'items) le rend gratuit.
+ */
+export function targetBuild(id: string): Record<string, unknown> {
+  const target = getTarget(id);
+  if (!target) throw new Error(`cible inconnue : ${id}`);
+  return target.build();
+}
+
 /** Revue de toutes les cibles déclarées. */
 export function reviewAll(): TargetReview[] {
   return TARGETS.map(runReview);
