@@ -1,0 +1,768 @@
+{
+  "arena": [
+    {
+      "kind": "rank",
+      "min": 0,
+      "max": 19,
+      "ether": 35,
+      "name": {
+        "en": "Bronze III",
+        "jp": "ブロンズ III",
+        "kr": "브론즈 III",
+        "zh": "黄铜III"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 20,
+      "max": 49,
+      "ether": 50,
+      "name": {
+        "en": "Bronze II",
+        "jp": "ブロンズ II",
+        "kr": "브론즈 II",
+        "zh": "黄铜II"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 50,
+      "max": 99,
+      "ether": 75,
+      "name": {
+        "en": "Bronze I",
+        "jp": "ブロンズ I",
+        "kr": "브론즈 I",
+        "zh": "黄铜I"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 100,
+      "max": 199,
+      "ether": 100,
+      "name": {
+        "en": "Silver III",
+        "jp": "シルバー III",
+        "kr": "실버 III",
+        "zh": "白银III"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 200,
+      "max": 299,
+      "ether": 125,
+      "name": {
+        "en": "Silver II",
+        "jp": "シルバー II",
+        "kr": "실버 II",
+        "zh": "白银II"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 300,
+      "max": 399,
+      "ether": 150,
+      "name": {
+        "en": "Silver I",
+        "jp": "シルバー I",
+        "kr": "실버 I",
+        "zh": "白银I"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 400,
+      "max": 499,
+      "ether": 175,
+      "name": {
+        "en": "Gold III",
+        "jp": "ゴールド III",
+        "kr": "골드 III",
+        "zh": "黄金III"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 500,
+      "max": 599,
+      "ether": 200,
+      "name": {
+        "en": "Gold II",
+        "jp": "ゴールド II",
+        "kr": "골드 II",
+        "zh": "黄金II"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 600,
+      "max": 699,
+      "ether": 225,
+      "name": {
+        "en": "Gold I",
+        "jp": "ゴールド I",
+        "kr": "골드 I",
+        "zh": "黄金I"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 700,
+      "max": 799,
+      "ether": 250,
+      "name": {
+        "en": "Platinum III",
+        "jp": "プラチナ III",
+        "kr": "플래티넘 III",
+        "zh": "铂金III"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 800,
+      "max": 899,
+      "ether": 300,
+      "name": {
+        "en": "Platinum II",
+        "jp": "プラチナ II",
+        "kr": "플래티넘 II",
+        "zh": "铂金II"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 900,
+      "max": 999,
+      "ether": 350,
+      "name": {
+        "en": "Platinum I",
+        "jp": "プラチナ I",
+        "kr": "플래티넘 I",
+        "zh": "铂金I"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 1000,
+      "max": 1149,
+      "ether": 400,
+      "name": {
+        "en": "Diamond III",
+        "jp": "ダイヤ III",
+        "kr": "다이아 III",
+        "zh": "钻石III"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 1150,
+      "max": 1299,
+      "ether": 450,
+      "name": {
+        "en": "Diamond II",
+        "jp": "ダイヤ II",
+        "kr": "다이아 II",
+        "zh": "钻石II"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 1300,
+      "max": 1499,
+      "ether": 500,
+      "name": {
+        "en": "Diamond I",
+        "jp": "ダイヤ I",
+        "kr": "다이아 I",
+        "zh": "钻石I"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 1500,
+      "max": 1699,
+      "ether": 550,
+      "name": {
+        "en": "Master III",
+        "jp": "マスター III",
+        "kr": "마스터 III",
+        "zh": "大师III"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 1700,
+      "max": 1899,
+      "ether": 600,
+      "name": {
+        "en": "Master II",
+        "jp": "マスター II",
+        "kr": "마스터 II",
+        "zh": "大师II"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 1900,
+      "max": 2000000000,
+      "ether": 750,
+      "name": {
+        "en": "Master I",
+        "jp": "マスター I",
+        "kr": "마스터 I",
+        "zh": "大师I"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 100,
+      "max": 51,
+      "ether": 800,
+      "name": {
+        "en": "Top 100",
+        "jp": "TOP 100",
+        "kr": "TOP 100",
+        "zh": "TOP100"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 50,
+      "max": 11,
+      "ether": 850,
+      "name": {
+        "en": "Top 50",
+        "jp": "TOP 50",
+        "kr": "TOP 50",
+        "zh": "TOP50"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 10,
+      "max": 4,
+      "ether": 1000,
+      "name": {
+        "en": "Top 10",
+        "jp": "TOP 10",
+        "kr": "TOP 10",
+        "zh": "TOP10"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 3,
+      "max": 3,
+      "ether": 1150,
+      "name": {
+        "en": "Top 3",
+        "jp": "TOP 3",
+        "kr": "TOP 3",
+        "zh": "TOP3"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 2,
+      "max": 2,
+      "ether": 1350,
+      "name": {
+        "en": "Top 2",
+        "jp": "TOP 2",
+        "kr": "TOP 2",
+        "zh": "TOP2"
+      }
+    },
+    {
+      "kind": "rank",
+      "min": 1,
+      "max": 1,
+      "ether": 1500,
+      "name": {
+        "en": "Top 1",
+        "jp": "TOP 1",
+        "kr": "TOP 1",
+        "zh": "TOP1"
+      }
+    }
+  ],
+  "guildRaid": {
+    "raidId": "46",
+    "tiers": [
+      {
+        "kind": "rank",
+        "min": 1,
+        "max": 1,
+        "ether": 3000
+      },
+      {
+        "kind": "rank",
+        "min": 2,
+        "max": 2,
+        "ether": 2800
+      },
+      {
+        "kind": "rank",
+        "min": 3,
+        "max": 3,
+        "ether": 2600
+      },
+      {
+        "kind": "rank",
+        "min": 4,
+        "max": 5,
+        "ether": 2400
+      },
+      {
+        "kind": "rank",
+        "min": 6,
+        "max": 10,
+        "ether": 2200
+      },
+      {
+        "kind": "rank",
+        "min": 11,
+        "max": 20,
+        "ether": 2000
+      },
+      {
+        "kind": "rank",
+        "min": 21,
+        "max": 50,
+        "ether": 1800
+      },
+      {
+        "kind": "rank",
+        "min": 51,
+        "max": 100,
+        "ether": 1700
+      },
+      {
+        "kind": "rank",
+        "min": 101,
+        "max": 150,
+        "ether": 1600
+      },
+      {
+        "kind": "rank",
+        "min": 151,
+        "max": 200,
+        "ether": 1500
+      },
+      {
+        "kind": "rank",
+        "min": 201,
+        "max": 300,
+        "ether": 1400
+      },
+      {
+        "kind": "rank",
+        "min": 301,
+        "max": 400,
+        "ether": 1300
+      },
+      {
+        "kind": "rank",
+        "min": 401,
+        "max": 500,
+        "ether": 1200
+      },
+      {
+        "kind": "rank",
+        "min": 501,
+        "max": 1000,
+        "ether": 1100
+      },
+      {
+        "kind": "rank",
+        "min": 1001,
+        "max": 1500,
+        "ether": 1000
+      },
+      {
+        "kind": "rank",
+        "min": 1501,
+        "max": 2000,
+        "ether": 900
+      },
+      {
+        "kind": "rank",
+        "min": 2001,
+        "max": 3000,
+        "ether": 800
+      },
+      {
+        "kind": "rank",
+        "min": 3001,
+        "max": 999999,
+        "ether": 400
+      }
+    ]
+  },
+  "worldBoss": {
+    "seasonId": "24",
+    "leagues": [
+      {
+        "level": 1,
+        "name": {
+          "en": "Normal League",
+          "jp": "ノーマルリーグ",
+          "kr": "노멀 리그",
+          "zh": "普通联赛"
+        },
+        "tiers": [
+          {
+            "kind": "rank",
+            "min": 1,
+            "max": 1,
+            "ether": 400
+          },
+          {
+            "kind": "rank",
+            "min": 2,
+            "max": 2,
+            "ether": 360
+          },
+          {
+            "kind": "rank",
+            "min": 3,
+            "max": 3,
+            "ether": 320
+          },
+          {
+            "kind": "rank",
+            "min": 4,
+            "max": 10,
+            "ether": 280
+          },
+          {
+            "kind": "rank",
+            "min": 11,
+            "max": 50,
+            "ether": 240
+          },
+          {
+            "kind": "rank",
+            "min": 51,
+            "max": 100,
+            "ether": 200
+          },
+          {
+            "kind": "rate",
+            "min": 0,
+            "max": 1,
+            "ether": 180
+          },
+          {
+            "kind": "rate",
+            "min": 1,
+            "max": 10,
+            "ether": 160
+          },
+          {
+            "kind": "rate",
+            "min": 10,
+            "max": 50,
+            "ether": 140
+          },
+          {
+            "kind": "rate",
+            "min": 50,
+            "max": 100,
+            "ether": 120
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "name": {
+          "en": "Hard League",
+          "jp": "ハードリーグ",
+          "kr": "하드 리그",
+          "zh": "困难联赛"
+        },
+        "tiers": [
+          {
+            "kind": "rank",
+            "min": 1,
+            "max": 1,
+            "ether": 600
+          },
+          {
+            "kind": "rank",
+            "min": 2,
+            "max": 2,
+            "ether": 540
+          },
+          {
+            "kind": "rank",
+            "min": 3,
+            "max": 3,
+            "ether": 480
+          },
+          {
+            "kind": "rank",
+            "min": 4,
+            "max": 10,
+            "ether": 420
+          },
+          {
+            "kind": "rank",
+            "min": 11,
+            "max": 50,
+            "ether": 360
+          },
+          {
+            "kind": "rank",
+            "min": 51,
+            "max": 100,
+            "ether": 320
+          },
+          {
+            "kind": "rate",
+            "min": 0,
+            "max": 1,
+            "ether": 280
+          },
+          {
+            "kind": "rate",
+            "min": 1,
+            "max": 10,
+            "ether": 240
+          },
+          {
+            "kind": "rate",
+            "min": 10,
+            "max": 50,
+            "ether": 200
+          },
+          {
+            "kind": "rate",
+            "min": 50,
+            "max": 100,
+            "ether": 160
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "name": {
+          "en": "Very Hard League",
+          "jp": "ベリーハードリーグ",
+          "kr": "베리 하드 리그",
+          "zh": "极难联赛"
+        },
+        "tiers": [
+          {
+            "kind": "rank",
+            "min": 1,
+            "max": 1,
+            "ether": 1000
+          },
+          {
+            "kind": "rank",
+            "min": 2,
+            "max": 2,
+            "ether": 900
+          },
+          {
+            "kind": "rank",
+            "min": 3,
+            "max": 3,
+            "ether": 800
+          },
+          {
+            "kind": "rank",
+            "min": 4,
+            "max": 10,
+            "ether": 700
+          },
+          {
+            "kind": "rank",
+            "min": 11,
+            "max": 50,
+            "ether": 600
+          },
+          {
+            "kind": "rank",
+            "min": 51,
+            "max": 100,
+            "ether": 500
+          },
+          {
+            "kind": "rate",
+            "min": 0,
+            "max": 1,
+            "ether": 400
+          },
+          {
+            "kind": "rate",
+            "min": 1,
+            "max": 10,
+            "ether": 300
+          },
+          {
+            "kind": "rate",
+            "min": 10,
+            "max": 50,
+            "ether": 240
+          },
+          {
+            "kind": "rate",
+            "min": 50,
+            "max": 100,
+            "ether": 200
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "name": {
+          "en": "Extreme League",
+          "jp": "エクストリームリーグ",
+          "kr": "익스트림 리그",
+          "zh": "极限联赛"
+        },
+        "tiers": [
+          {
+            "kind": "rank",
+            "min": 1,
+            "max": 1,
+            "ether": 3000
+          },
+          {
+            "kind": "rank",
+            "min": 2,
+            "max": 2,
+            "ether": 2800
+          },
+          {
+            "kind": "rank",
+            "min": 3,
+            "max": 3,
+            "ether": 2600
+          },
+          {
+            "kind": "rank",
+            "min": 4,
+            "max": 10,
+            "ether": 2200
+          },
+          {
+            "kind": "rank",
+            "min": 11,
+            "max": 50,
+            "ether": 2000
+          },
+          {
+            "kind": "rank",
+            "min": 51,
+            "max": 100,
+            "ether": 1800
+          },
+          {
+            "kind": "rate",
+            "min": 0,
+            "max": 1,
+            "ether": 1600
+          },
+          {
+            "kind": "rate",
+            "min": 1,
+            "max": 10,
+            "ether": 1200
+          },
+          {
+            "kind": "rate",
+            "min": 10,
+            "max": 50,
+            "ether": 800
+          },
+          {
+            "kind": "rate",
+            "min": 50,
+            "max": 100,
+            "ether": 400
+          }
+        ]
+      }
+    ]
+  },
+  "singularity": [
+    {
+      "kind": "rank",
+      "min": 1,
+      "max": 1,
+      "ether": 50
+    },
+    {
+      "kind": "rank",
+      "min": 2,
+      "max": 2,
+      "ether": 45
+    },
+    {
+      "kind": "rank",
+      "min": 3,
+      "max": 3,
+      "ether": 40
+    },
+    {
+      "kind": "rank",
+      "min": 4,
+      "max": 4,
+      "ether": 35
+    },
+    {
+      "kind": "rank",
+      "min": 5,
+      "max": 5,
+      "ether": 30
+    },
+    {
+      "kind": "rank",
+      "min": 6,
+      "max": 10,
+      "ether": 25
+    },
+    {
+      "kind": "rank",
+      "min": 11,
+      "max": 50,
+      "ether": 20
+    },
+    {
+      "kind": "rank",
+      "min": 51,
+      "max": 100,
+      "ether": 15
+    },
+    {
+      "kind": "rate",
+      "min": 0,
+      "max": 1,
+      "ether": 10
+    },
+    {
+      "kind": "rate",
+      "min": 1,
+      "max": 10,
+      "ether": 10
+    },
+    {
+      "kind": "rate",
+      "min": 10,
+      "max": 50,
+      "ether": 10
+    },
+    {
+      "kind": "rate",
+      "min": 50,
+      "max": 100,
+      "ether": 5
+    }
+  ]
+}

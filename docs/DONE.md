@@ -4,6 +4,22 @@
 > ne garde que le « à faire »). Un item traité migre ici avec sa date ; le
 > détail vit dans git. Ne pas confondre avec le `CHANGELOG.md` racine (public).
 
+## 2026-07-18
+
+- **Guide « Ether Income » porté** (tier economy, ordre 1 ; unlock-content
+  reste 2) : les QUATRE échelles de récompenses par rang (arène 24 paliers,
+  guild raid, world boss 4 ligues, singularity) DÉRIVENT désormais du jeu —
+  nouveau générateur `ether-rankings.json` (RewardTemplet.Crystal = Ether,
+  vérifié sur l'arène et la singularity, valeurs V2 à l'identique). Constat :
+  les valeurs V2 de guild raid et world boss étaient PÉRIMÉES (le jeu les a
+  doublées — top 1 raid 1500 → 3000) ; l'Ether du world boss vient du
+  classement GLOBAL_WORLD (MY_WORLD paie titres/cadres/tickets), ligues de la
+  saison courante par StartDate. Noms de paliers = noms officiels du jeu
+  (arène, ligues) + gabarits Top/Rank/Below ; notes de rang = gabarits
+  {min}/{max}/{league} remplis des données générées. Éditorial verbatim
+  (sources régulières, libellés, variables) ; calculateur client re-stylé V3
+  (formatage numérique à locale fixe — mismatch d'hydratation sinon).
+
 ## 2026-07-17
 
 - **Guides « Premium & Limited » (ordre 2) et « Core Fusion » (ordre 3)

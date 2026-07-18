@@ -53,6 +53,7 @@ import { buildGameVersion } from './generators/game-version';
 import { buildSkills } from './generators/skills';
 import { buildUnlockContent } from './generators/unlock-content';
 import { buildRecruit } from './generators/recruit';
+import { buildEtherRankings } from './generators/ether-rankings';
 import { buildEffectGlossary, unknownFamilyTypes } from './lib/effects';
 import {
   curatedBossIds,
@@ -176,6 +177,9 @@ async function main(): Promise<void> {
   // Domaine recrutement : pool custom, taux/coûts par type de bannière,
   // apparitions bannière des limited (guides general-guides).
   await writeJson('recruit.json', buildRecruit());
+  // Ether par classement (arène/guild raid/world boss/singularity) — guide
+  // « Ether Income ».
+  await writeJson('ether-rankings.json', buildEtherRankings());
   // Rotation Monad Gate (groupes + cadence ; ancre curée), compositions des
   // tours et calendrier des contenus saisonniers — cf. en-têtes des générateurs.
   await writeJson('singularity.json', buildSingularity());

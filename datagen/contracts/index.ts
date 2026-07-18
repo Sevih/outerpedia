@@ -95,6 +95,7 @@ export type {
   RecruitKindInfo,
   RecruitRate,
 } from '../generators/recruit';
+export type { EtherRankTier, EtherRankingsData } from '../generators/ether-rankings';
 export type {
   SingularityAnchor,
   SingularityBoss,
