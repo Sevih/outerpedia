@@ -133,6 +133,45 @@
   /* Texte « équipement » (noms d'items dans la prose) — teinte V2 exacte. */
   --equipment: #fbbf24;
 
+  /* ACCENTS DE CATÉGORIE de guides (portage V2 `guidesTheme`). Chaque catégorie
+     porte une teinte d'identité déclinée en 3 valeurs : -fg (texte, -300), -bd
+     (bords/fonds à opacités, -500 ; l'opacité reste côté classe) et -glow (ombre
+     colorée au survol). fg/bd = valeurs Tailwind v4 EXACTES (OKLCH) ; glow = hex
+     V2 verbatim. `other` (fourre-tout) reste sur les tokens neutres, hors d'ici. */
+  --cat-emerald-fg: oklch(84.5% 0.143 164.978);
+  --cat-emerald-bd: oklch(69.6% 0.17 162.48);
+  --cat-emerald-glow: #4ade80;
+  --cat-sky-fg: oklch(82.8% 0.111 230.318);
+  --cat-sky-bd: oklch(68.5% 0.169 237.323);
+  --cat-sky-glow: #38bdf8;
+  --cat-indigo-fg: oklch(78.5% 0.115 274.713);
+  --cat-indigo-bd: oklch(58.5% 0.233 277.117);
+  --cat-indigo-glow: #818cf8;
+  --cat-amber-fg: oklch(87.9% 0.169 91.605);
+  --cat-amber-bd: oklch(76.9% 0.188 70.08);
+  --cat-amber-glow: #fbbf24;
+  --cat-orange-fg: oklch(83.7% 0.128 66.29);
+  --cat-orange-bd: oklch(70.5% 0.213 47.604);
+  --cat-orange-glow: #fb923c;
+  --cat-violet-fg: oklch(81.1% 0.111 293.571);
+  --cat-violet-bd: oklch(60.6% 0.25 292.717);
+  --cat-violet-glow: #a78bfa;
+  --cat-teal-fg: oklch(85.5% 0.138 181.071);
+  --cat-teal-bd: oklch(70.4% 0.14 182.503);
+  --cat-teal-glow: #2dd4bf;
+  --cat-rose-fg: oklch(81% 0.117 11.638);
+  --cat-rose-bd: oklch(64.5% 0.246 16.439);
+  --cat-rose-glow: #fb7185;
+  --cat-red-fg: oklch(80.8% 0.114 19.571);
+  --cat-red-bd: oklch(63.7% 0.237 25.331);
+  --cat-red-glow: #ef4444;
+  --cat-fuchsia-fg: oklch(83.3% 0.145 321.434);
+  --cat-fuchsia-bd: oklch(66.7% 0.295 322.15);
+  --cat-fuchsia-glow: #e879f9;
+  --cat-cyan-fg: oklch(86.5% 0.127 207.078);
+  --cat-cyan-bd: oklch(71.5% 0.143 215.221);
+  --cat-cyan-glow: #22d3ee;
+
   /* Voile du fond de page */
   --page-veil: rgba(0, 0, 0, 0.4);
 
@@ -227,6 +266,28 @@
   --color-stat: var(--stat);
   --color-highlight: var(--highlight);
   --color-equipment: var(--equipment);
+  --color-cat-emerald-fg: var(--cat-emerald-fg);
+  --color-cat-emerald-bd: var(--cat-emerald-bd);
+  --color-cat-sky-fg: var(--cat-sky-fg);
+  --color-cat-sky-bd: var(--cat-sky-bd);
+  --color-cat-indigo-fg: var(--cat-indigo-fg);
+  --color-cat-indigo-bd: var(--cat-indigo-bd);
+  --color-cat-amber-fg: var(--cat-amber-fg);
+  --color-cat-amber-bd: var(--cat-amber-bd);
+  --color-cat-orange-fg: var(--cat-orange-fg);
+  --color-cat-orange-bd: var(--cat-orange-bd);
+  --color-cat-violet-fg: var(--cat-violet-fg);
+  --color-cat-violet-bd: var(--cat-violet-bd);
+  --color-cat-teal-fg: var(--cat-teal-fg);
+  --color-cat-teal-bd: var(--cat-teal-bd);
+  --color-cat-rose-fg: var(--cat-rose-fg);
+  --color-cat-rose-bd: var(--cat-rose-bd);
+  --color-cat-red-fg: var(--cat-red-fg);
+  --color-cat-red-bd: var(--cat-red-bd);
+  --color-cat-fuchsia-fg: var(--cat-fuchsia-fg);
+  --color-cat-fuchsia-bd: var(--cat-fuchsia-bd);
+  --color-cat-cyan-fg: var(--cat-cyan-fg);
+  --color-cat-cyan-bd: var(--cat-cyan-bd);
 }
 
 /*

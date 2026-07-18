@@ -66,10 +66,17 @@
   MonadRouteClient, SpecialRequestSplit, SkywardTowerView) ; opacités gardées
   côté classe. MonadRouteReward `text-emerald-300` (titre First Clear) réutilise
   `--monad-key-soft` (valeur exacte, 0 nouveau token). Galerie : bloc « Sélection »
-  ajouté. Typecheck + lint + 423 tests OK. RESTE : 3 rouges stragglers (BossPanel
-  repli d'erreur, IrregularChaseMap cadre, TowerCombatRoster « ban » — sémantiques
-  distinctes, arbitrage) ; fork palette `guide-accents.ts` (tokeniser 22 vs
-  exempter le fichier d'identité) ; extension RAW_COLOR ; phase 2 éditoriale.
+  ajouté. Typecheck + lint + 423 tests OK. (8) Palette d'IDENTITÉ des catégories
+  `guide-accents.ts` — fork tranché par Sevih = TOKENISER. 33 tokens `--cat-<teinte>-*`
+  pour 11 catégories colorées (emerald/sky/indigo/amber/orange/violet/teal/rose/
+  red/fuchsia/cyan) × 3 rôles : `-fg` (texte -300) + `-bd` (bords/fonds -500,
+  opacité côté classe) exposés en `@theme inline` ; `-glow` (ombre colorée au
+  survol, hex V2 verbatim) en var brute dans le `shadow-[…]`. fg/bd = OKLCH EXACTES
+  de Tailwind v4. `other` (fourre-tout) reste neutre-tokenisé. Galerie : bloc
+  « Accents de catégorie » appliquant la vraie map `GUIDE_ACCENT`. Lint + 423 tests
+  OK. RESTE : 3 rouges stragglers (BossPanel repli d'erreur, IrregularChaseMap
+  cadre, TowerCombatRoster « ban » — sémantiques distinctes, arbitrage) ; `editorial/
+accents.ts` (même schéma, phase 2) ; extension RAW_COLOR ; phase 2 éditoriale.
 
 - **Lot de tests « petits modules purs »** (suite de la campagne tests, +40).
   Six fichiers co-localisés : `stats.test.ts` (statAbbr connu/repli,

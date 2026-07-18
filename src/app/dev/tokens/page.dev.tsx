@@ -10,6 +10,7 @@
  * `src/app/globals.css`, pas les vues.
  */
 import { useSyncExternalStore } from 'react';
+import { GUIDE_ACCENT } from '@/components/guides/guide-accents';
 
 // Valeur résolue d'une CSS var sur `:root` — lecture SANS setState (règle
 // react-hooks/set-state-in-effect gardée active) : subscribe no-op, la valeur
@@ -410,6 +411,28 @@ export default function TokensGallery() {
             />
           </div>
         </Demo>
+
+        {/* Accents de catégorie — la vraie map GUIDE_ACCENT appliquée (survole
+            une pastille pour l'ombre colorée -glow). */}
+        <section className="border-line-subtle bg-surface-raised rounded-xl border p-4 lg:col-span-2">
+          <h2 className="text-content-strong mb-3 text-sm font-semibold tracking-wide uppercase">
+            Accents de catégorie (GUIDE_ACCENT)
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {Object.entries(GUIDE_ACCENT).map(([slug, a]) => (
+              <span
+                key={slug}
+                className={`rounded-lg border px-3 py-1.5 text-sm transition-all ${a.text} ${a.pillBg} ${a.pillBorder} ${a.hoverBorder} ${a.glow}`}
+              >
+                {slug}
+              </span>
+            ))}
+          </div>
+          <p className="text-content-subtle mt-3 text-[11px]">
+            Chaque catégorie : <code>-fg</code> (texte) + <code>-bd</code> (fond/bord à opacités) +{' '}
+            <code>-glow</code> (ombre au survol). <code>other</code> = neutre.
+          </p>
+        </section>
       </div>
     </div>
   );
