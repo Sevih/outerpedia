@@ -361,6 +361,23 @@ export function buildAssetManifest(): AssetRequest[] {
         if (it.grade === 'unique' && Number(it.star) >= 6) pushOgItem(it.icon);
       }
     }
+    // TOUTES les icônes d'équipement (webp) : les sprites sont des tuiles de
+    // TIER partagées (petit ensemble distinct malgré des milliers de pièces), à
+    // disposition pour toute référence hors pages détail — ex. les équipements
+    // vendus en shop (guide shop-priorities). Les pages détail ont EN PLUS la
+    // variante PNG (og:image) via pushOgItem ci-dessus ; push() dédoublonne.
+    for (const slot of [
+      'weapon',
+      'accessory',
+      'talisman',
+      'helmet',
+      'armor',
+      'gloves',
+      'shoes',
+      'ee',
+    ] as const) {
+      for (const it of Object.values(tables[slot])) pushItem(it.icon);
+    }
     for (const s of Object.values(load('equipment/sets.json'))) pushItem(s.icon);
     for (const icon of passiveIcons) pushItem(icon);
     // Icônes de stats du jeu (table unique STAT_ICON — src/lib/stats) + icône

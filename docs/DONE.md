@@ -34,7 +34,15 @@
     reste sans sprite. (2) Onglets : 12 icônes de shop dédiées (`shop_*.webp`
     V2 → `images/ui/shop/`, manifest + `img.shopIcon`) plutôt que l'icône de
     monnaie (vide pour world boss / joint challenge, absente pour les shops
-    éditoriaux supply/rico/event/resource).
+    éditoriaux supply/rico/event/resource). (3) CADRE DE RARETÉ manquant : rendu
+    des items via `ItemInline` (tuile `img.slotFrame(grade)` + icône + tooltip,
+    comme les chips `{I-I/…}` de parse-text) au lieu d'`InlineIcon` — d'où un
+    champ `grade` par entrée ; items éditoriaux (event/resource) résolus par nom
+    sur le catalogue (`CATALOG_BY_NAME`) pour icône/grade/desc. (4) Le manifest
+    ne collectait qu'un sous-ensemble d'icônes d'équipement (familles wiki +
+    unique 6★) → 404 sur les équipements mid-tier du shop : collecte désormais
+    TOUTES les icônes d'équipement (327 sprites de tier distincts, webp), à
+    disposition hors pages détail. Assets `ui/shop` + équipement à pousser.
 - **Éditeur EE — suivi (menu, colonne Curé, descriptions, portrait, passifs)**
   (raffinements de l'éditeur EE livré le même jour). (1) Menu Editor : retrait
   des entrées « à venir » armes/amulettes/armures/talismans + pages placeholder

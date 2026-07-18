@@ -25,6 +25,7 @@
           },
           "icon": "CM_TopMenu_Gold",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 10000,
           "cost": 20,
           "limit": {
@@ -44,6 +45,7 @@
           },
           "icon": "TI_Item_Growth_Potion_01",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 1,
           "cost": 10,
           "limit": {
@@ -63,6 +65,7 @@
           },
           "icon": "TI_Item_Growth_Potion_02",
           "iconKind": "item",
+          "grade": "magic",
           "gives": 1,
           "cost": 15,
           "limit": {
@@ -82,6 +85,7 @@
           },
           "icon": "TI_Common_Box04",
           "iconKind": "item",
+          "grade": "rare",
           "gives": 1,
           "cost": 50,
           "limit": {
@@ -100,6 +104,7 @@
           },
           "icon": "TI_Item_Growth_Potion_03",
           "iconKind": "item",
+          "grade": "rare",
           "gives": 1,
           "cost": 30,
           "limit": {
@@ -119,6 +124,7 @@
           },
           "icon": "TI_Item_Growth_Potion_04",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 45,
           "limit": {
@@ -138,6 +144,7 @@
           },
           "icon": "CM_TopMenu_Gold",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 50000,
           "cost": 50,
           "limit": {
@@ -157,6 +164,7 @@
           },
           "icon": "TI_Common_Box03",
           "iconKind": "item",
+          "grade": "magic",
           "gives": 1,
           "cost": 30,
           "limit": {
@@ -176,6 +184,7 @@
           },
           "icon": "TI_Item_Growth_Book_01",
           "iconKind": "item",
+          "grade": "magic",
           "gives": 1,
           "cost": 100,
           "limit": {
@@ -195,6 +204,7 @@
           },
           "icon": "TI_Accessary_Box02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 100,
           "limit": {
@@ -214,6 +224,7 @@
           },
           "icon": "TI_Item_Growth_Book_02",
           "iconKind": "item",
+          "grade": "rare",
           "gives": 1,
           "cost": 150,
           "limit": {
@@ -233,6 +244,7 @@
           },
           "icon": "TI_GEM_Box_01",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 150,
           "limit": {
@@ -251,6 +263,7 @@
           },
           "icon": "TI_Item_Growth_Book_03",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 300,
           "limit": {
@@ -270,6 +283,7 @@
           },
           "icon": "TI_CharacterCard_05",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 300,
           "limit": {
@@ -304,6 +318,7 @@
           },
           "icon": "TI_Item_Stamina",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 50,
           "cost": 15,
           "limit": {
@@ -322,6 +337,7 @@
           },
           "icon": "TI_Item_Growth_Dissolve_04",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 20,
           "cost": 30,
           "limit": {
@@ -341,6 +357,7 @@
           },
           "icon": "TI_Item_Ticket_Recruit_04",
           "iconKind": "item",
+          "grade": "magic",
           "gives": 1,
           "cost": 100,
           "limit": {
@@ -360,6 +377,7 @@
           },
           "icon": "TI_GEM_Box_01",
           "iconKind": "item",
+          "grade": "rare",
           "gives": 1,
           "cost": 250,
           "limit": {
@@ -378,6 +396,7 @@
           },
           "icon": "CM_TopMenu_Gold",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 20000,
           "cost": 15,
           "limit": {
@@ -397,6 +416,7 @@
           },
           "icon": "TI_Common_Box05",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 10,
           "cost": 2500,
           "limit": {
@@ -415,6 +435,7 @@
           },
           "icon": "TI_GEM_Box_01",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 2500,
           "limit": {
@@ -434,6 +455,7 @@
           },
           "icon": "TI_Equipment_Growth03",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 3000,
           "limit": {
@@ -453,6 +475,7 @@
           },
           "icon": "TI_Equipment_Growth02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 5000,
           "limit": {
@@ -472,6 +495,7 @@
           },
           "icon": "TI_Item_Option_Change_01",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 8000,
           "limit": {
@@ -491,6 +515,7 @@
           },
           "icon": "TI_Item_Option_Change_02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 8000,
           "limit": {
@@ -525,6 +550,7 @@
           },
           "icon": "TI_Item_Stamina",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 30,
           "cost": 50,
           "limit": {
@@ -543,6 +569,7 @@
           },
           "icon": "CM_TopMenu_Gold",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 10000,
           "cost": 25,
           "limit": {
@@ -562,6 +589,7 @@
           },
           "icon": "TI_CharacterCard_04",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 700,
           "limit": {
@@ -581,6 +609,7 @@
           },
           "icon": "TI_Item_Ticket_PVP",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 5,
           "cost": 200,
           "limit": {
@@ -599,6 +628,7 @@
           },
           "icon": "TI_Common_Box01",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 1,
           "cost": 30,
           "limit": {
@@ -618,6 +648,7 @@
           },
           "icon": "TI_CharacterCard_04",
           "iconKind": "item",
+          "grade": "rare",
           "gives": 1,
           "cost": 100,
           "limit": {
@@ -652,6 +683,7 @@
           },
           "icon": "CM_TopMenu_Gold",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 10000,
           "cost": 10,
           "limit": {
@@ -671,6 +703,7 @@
           },
           "icon": "TI_Item_Stamina",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 50,
           "cost": 15,
           "limit": {
@@ -689,6 +722,7 @@
           },
           "icon": "TI_Item_Growth_Book_03",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 350,
           "limit": {
@@ -708,6 +742,7 @@
           },
           "icon": "TI_Equipment_Helmet_05",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 300,
           "limit": {
@@ -726,6 +761,7 @@
           },
           "icon": "TI_Equipment_Armor_05",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 300,
           "limit": {
@@ -744,6 +780,7 @@
           },
           "icon": "TI_Equipment_Gloves_05",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 300,
           "limit": {
@@ -762,6 +799,7 @@
           },
           "icon": "TI_Equipment_Shoes_05",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 300,
           "limit": {
@@ -780,6 +818,7 @@
           },
           "icon": "TI_Equipment_Weapon_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 200,
           "limit": {
@@ -798,6 +837,7 @@
           },
           "icon": "TI_Equipment_Accessary_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 200,
           "limit": {
@@ -816,6 +856,7 @@
           },
           "icon": "TI_Equipment_Helmet_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 800,
           "limit": {
@@ -834,6 +875,7 @@
           },
           "icon": "TI_Equipment_Armor_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 800,
           "limit": {
@@ -852,6 +894,7 @@
           },
           "icon": "TI_Equipment_Gloves_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 800,
           "limit": {
@@ -870,6 +913,7 @@
           },
           "icon": "TI_Equipment_Shoes_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 800,
           "limit": {
@@ -888,6 +932,7 @@
           },
           "icon": "TI_Equipment_Helmet_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 800,
           "limit": {
@@ -906,6 +951,7 @@
           },
           "icon": "TI_Equipment_Armor_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 800,
           "limit": {
@@ -924,6 +970,7 @@
           },
           "icon": "TI_Equipment_Gloves_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 800,
           "limit": {
@@ -942,6 +989,7 @@
           },
           "icon": "TI_Equipment_Shoes_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 800,
           "limit": {
@@ -960,6 +1008,7 @@
           },
           "icon": "TI_Equipment_Helmet_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 800,
           "limit": {
@@ -978,6 +1027,7 @@
           },
           "icon": "TI_Equipment_Armor_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 800,
           "limit": {
@@ -996,6 +1046,7 @@
           },
           "icon": "TI_Equipment_Gloves_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 800,
           "limit": {
@@ -1014,6 +1065,7 @@
           },
           "icon": "TI_Equipment_Shoes_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 800,
           "limit": {
@@ -1032,6 +1084,7 @@
           },
           "icon": "TI_Equipment_Helmet_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 800,
           "limit": {
@@ -1050,6 +1103,7 @@
           },
           "icon": "TI_Equipment_Armor_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 800,
           "limit": {
@@ -1068,6 +1122,7 @@
           },
           "icon": "TI_Equipment_Gloves_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 800,
           "limit": {
@@ -1086,6 +1141,7 @@
           },
           "icon": "TI_Equipment_Shoes_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 800,
           "limit": {
@@ -1119,6 +1175,7 @@
           },
           "icon": "TI_Item_Ticket_PVP",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 5,
           "cost": 3,
           "limit": {
@@ -1137,6 +1194,7 @@
           },
           "icon": "TI_Item_Ticket_Recruit_04",
           "iconKind": "item",
+          "grade": "magic",
           "gives": 1,
           "cost": 1,
           "limit": {
@@ -1156,6 +1214,7 @@
           },
           "icon": "TI_Item_Stamina",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 150,
           "cost": 5,
           "limit": {
@@ -1174,6 +1233,7 @@
           },
           "icon": "TI_Item_Growth_Potion_04",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 10,
           "cost": 15,
           "limit": {
@@ -1193,6 +1253,7 @@
           },
           "icon": "TI_Item_Growth_Book_02",
           "iconKind": "item",
+          "grade": "rare",
           "gives": 1,
           "cost": 5,
           "limit": {
@@ -1212,6 +1273,7 @@
           },
           "icon": "TI_Item_Growth_Book_03",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 30,
           "limit": {
@@ -1231,6 +1293,7 @@
           },
           "icon": "TI_Equipment_Growth01",
           "iconKind": "item",
+          "grade": "rare",
           "gives": 1,
           "cost": 25,
           "limit": {
@@ -1250,6 +1313,7 @@
           },
           "icon": "TI_Equipment_Growth02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 50,
           "limit": {
@@ -1269,6 +1333,7 @@
           },
           "icon": "TI_Common_Box04",
           "iconKind": "item",
+          "grade": "rare",
           "gives": 3,
           "cost": 10,
           "limit": {
@@ -1288,6 +1353,7 @@
           },
           "icon": "CM_TopMenu_Gold",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 200000,
           "cost": 10,
           "limit": {
@@ -1307,6 +1373,7 @@
           },
           "icon": "TI_Item_Ticket_Recruit_02",
           "iconKind": "item",
+          "grade": "rare",
           "gives": 2,
           "cost": 10,
           "limit": {
@@ -1326,6 +1393,7 @@
           },
           "icon": "TI_Item_Craft_Addition_O_01",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 30,
           "limit": {
@@ -1344,6 +1412,7 @@
           },
           "icon": "TI_Item_Craft_Addition_O_02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 20,
           "limit": {
@@ -1363,6 +1432,7 @@
           },
           "icon": "TI_Item_Option_Change_01",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 50,
           "limit": {
@@ -1382,6 +1452,7 @@
           },
           "icon": "TI_Item_Option_Change_02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 75,
           "limit": {
@@ -1401,6 +1472,7 @@
           },
           "icon": "TI_CharacterRecall",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 100,
           "limit": {
@@ -1420,6 +1492,7 @@
           },
           "icon": "TI_Talisman_Growth_Enhance_01",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 1,
           "limit": {
@@ -1439,6 +1512,7 @@
           },
           "icon": "TI_Talisman_Growth_Enhance_02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 3,
           "limit": {
@@ -1458,6 +1532,7 @@
           },
           "icon": "TI_EX_Equip_Growth_Enhance_01",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 1,
           "limit": {
@@ -1477,6 +1552,7 @@
           },
           "icon": "TI_EX_Equip_Growth_Enhance_02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 3,
           "limit": {
@@ -1496,6 +1572,7 @@
           },
           "icon": "TI_Precision_Chip",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 500,
           "limit": {
@@ -1514,6 +1591,7 @@
           },
           "icon": "TI_Item_Growth_Scroll_01",
           "iconKind": "item",
+          "grade": "rare",
           "gives": 1,
           "cost": 100,
           "limit": {
@@ -1532,6 +1610,7 @@
           },
           "icon": "TI_Item_Growth_Scroll_01",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 1000,
           "limit": {
@@ -1550,6 +1629,7 @@
           },
           "icon": "TI_Gear_Reset",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 2000,
           "limit": {
@@ -1568,6 +1648,7 @@
           },
           "icon": "TI_Talisman_Box02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 500,
           "limit": {
@@ -1586,6 +1667,7 @@
           },
           "icon": "TI_Item_Ticket_Recruit_08",
           "iconKind": "item",
+          "grade": "rare",
           "gives": 2,
           "cost": 10,
           "limit": {
@@ -1619,6 +1701,7 @@
           },
           "icon": "CM_TopMenu_Gold",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 10000,
           "cost": 10,
           "limit": {
@@ -1638,6 +1721,7 @@
           },
           "icon": "TI_Item_Growth_Potion_04",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 20,
           "limit": {
@@ -1657,6 +1741,7 @@
           },
           "icon": "TI_Item_Craft_Addition_O_01",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 125,
           "limit": {
@@ -1676,6 +1761,7 @@
           },
           "icon": "TI_Item_Craft_Addition_O_02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 125,
           "limit": {
@@ -1695,6 +1781,7 @@
           },
           "icon": "TI_Item_Option_Change_01",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 250,
           "limit": {
@@ -1714,6 +1801,7 @@
           },
           "icon": "TI_Item_Option_Change_02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 300,
           "limit": {
@@ -1733,6 +1821,7 @@
           },
           "icon": "TI_Costume_Clothes_2000063_02",
           "iconKind": "item",
+          "grade": "magic",
           "gives": 1,
           "cost": 3300,
           "limit": {
@@ -1752,6 +1841,7 @@
           },
           "icon": "TI_Costume_Clothes_2000091_02",
           "iconKind": "item",
+          "grade": "magic",
           "gives": 1,
           "cost": 3300,
           "limit": {
@@ -1786,6 +1876,7 @@
           },
           "icon": "",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 1,
           "cost": 650,
           "limit": {
@@ -1804,6 +1895,7 @@
           },
           "icon": "TI_Equipment_Talisman_08",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 3000,
           "limit": {
@@ -1822,6 +1914,7 @@
           },
           "icon": "TI_Equipment_Talisman_03",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 3000,
           "limit": {
@@ -1840,6 +1933,7 @@
           },
           "icon": "TI_Equipment_Weapon_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 2500,
           "limit": {
@@ -1858,6 +1952,7 @@
           },
           "icon": "TI_Equipment_Accessary_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 2500,
           "limit": {
@@ -1876,6 +1971,7 @@
           },
           "icon": "TI_Equipment_Growth02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 2500,
           "limit": {
@@ -1895,6 +1991,7 @@
           },
           "icon": "TI_Equipment_Helmet_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 1250,
           "limit": {
@@ -1913,6 +2010,7 @@
           },
           "icon": "TI_Equipment_Armor_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 1250,
           "limit": {
@@ -1931,6 +2029,7 @@
           },
           "icon": "TI_Equipment_Gloves_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 1250,
           "limit": {
@@ -1949,6 +2048,7 @@
           },
           "icon": "TI_Equipment_Shoes_06",
           "iconKind": "equipment",
+          "grade": "unique",
           "gives": 1,
           "cost": 1250,
           "limit": {
@@ -1967,6 +2067,7 @@
           },
           "icon": "TI_Gift_Cost_03",
           "iconKind": "item",
+          "grade": "rare",
           "gives": 1,
           "cost": 125,
           "limit": {
@@ -1989,6 +2090,7 @@
           },
           "icon": "TI_GEM_Box_01",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 250,
           "limit": {
@@ -2023,6 +2125,7 @@
           },
           "icon": "TI_Item_Cristal",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 1,
           "cost": 10,
           "limit": {
@@ -2042,6 +2145,7 @@
           },
           "icon": "TI_Item_Ticket_Recruit_04",
           "iconKind": "item",
+          "grade": "magic",
           "gives": 1,
           "cost": 100,
           "limit": {
@@ -2061,6 +2165,7 @@
           },
           "icon": "TI_Item_Option_Change_02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 500,
           "limit": {
@@ -2080,6 +2185,7 @@
           },
           "icon": "TI_Item_Option_Change_01",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 400,
           "limit": {
@@ -2099,6 +2205,7 @@
           },
           "icon": "TI_Equipment_Growth02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 150,
           "limit": {
@@ -2118,6 +2225,7 @@
           },
           "icon": "TI_Item_Growth_Book_03",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 50,
           "limit": {
@@ -2137,6 +2245,7 @@
           },
           "icon": "TI_GEM_Box_01",
           "iconKind": "item",
+          "grade": "rare",
           "gives": 1,
           "cost": 50,
           "limit": {
@@ -2155,6 +2264,7 @@
           },
           "icon": "TI_Item_Growth_Dissolve_04",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 20,
           "limit": {
@@ -2174,6 +2284,7 @@
           },
           "icon": "TI_Common_Box03",
           "iconKind": "item",
+          "grade": "magic",
           "gives": 1,
           "cost": 1,
           "limit": {
@@ -2193,6 +2304,7 @@
           },
           "icon": "TI_Item_Growth_Enhance_04",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 5,
           "limit": {
@@ -2212,6 +2324,7 @@
           },
           "icon": "TI_Item_Growth_Potion_04",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 5,
           "limit": {
@@ -2231,6 +2344,7 @@
           },
           "icon": "TI_Item_Craft_Addition_O_01",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 15,
           "limit": {
@@ -2250,6 +2364,7 @@
           },
           "icon": "TI_Item_Craft_Addition_O_02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 10,
           "limit": {
@@ -2269,6 +2384,7 @@
           },
           "icon": "TI_Item_Craft_Addition_U_01",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 20,
           "limit": {
@@ -2288,6 +2404,7 @@
           },
           "icon": "TI_CharacterRecall",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 150,
           "limit": {
@@ -2307,6 +2424,7 @@
           },
           "icon": "TI_Talisman_Box02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 300,
           "limit": {
@@ -2326,6 +2444,7 @@
           },
           "icon": "TI_Talisman_Box02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 1500,
           "limit": {
@@ -2344,6 +2463,7 @@
           },
           "icon": "TI_Weapon_Box02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 750,
           "limit": {
@@ -2362,6 +2482,7 @@
           },
           "icon": "TI_Accessary_Box02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 750,
           "limit": {
@@ -2380,6 +2501,7 @@
           },
           "icon": "TI_Armor_Box02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 450,
           "limit": {
@@ -2399,6 +2521,7 @@
           },
           "icon": "TI_Armor_Box02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 450,
           "limit": {
@@ -2417,6 +2540,7 @@
           },
           "icon": "TI_Armor_Box02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 450,
           "limit": {
@@ -2436,6 +2560,7 @@
           },
           "icon": "TI_Armor_Box02",
           "iconKind": "item",
+          "grade": "unique",
           "gives": 1,
           "cost": 450,
           "limit": {
@@ -2455,6 +2580,7 @@
           },
           "icon": "CM_Piece_Frame",
           "iconKind": "item",
+          "grade": "normal",
           "gives": 1,
           "cost": 1,
           "limit": {

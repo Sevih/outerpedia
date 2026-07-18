@@ -84,6 +84,8 @@ export interface ShopEntry {
   icon: string;
   /** Namespace de l'icône : `item` (images/items) ou `equipment` (images/equipment). */
   iconKind: 'item' | 'equipment';
+  /** Grade (cadre de rareté de la tuile : normal/magic/rare/unique). */
+  grade: string;
   /** Quantité obtenue par achat (ProductGoodsValue). */
   gives: number;
   /** Coût unitaire dans la monnaie du shop. */
@@ -167,39 +169,36 @@ function goodsSlug(r: Row): string {
   return `p-${(r.ProductNameID ?? r.ID).toLowerCase()}`;
 }
 
-type Icon = { icon: string; iconKind: 'item' | 'equipment' };
-const ITEM_ICON = (icon: string): Icon => ({ icon, iconKind: 'item' });
+type Icon = { icon: string; iconKind: 'item' | 'equipment'; grade: string };
+type Gear = { icon: string; grade: string };
+const catIcon = (e: CatalogEntry | undefined): Icon => ({
+  icon: e?.icon ?? '',
+  iconKind: 'item',
+  grade: e?.grade ?? 'normal',
+});
 
 /**
- * Icône + namespace du gain. Le `ProductGoodsID` d'un PGT_ITEM peut être un
- * item du catalogue (materials/goods, `images/items`) OU une pièce d'équipement
- * (`images/equipment`) — d'où le namespace explicite. Tickets et gains à asset
- * (gold/ether/pièce) passent par le catalogue. Non résoluble → icône vide.
+ * Icône + namespace + grade du gain (le grade = cadre de rareté de la tuile,
+ * comme les chips `{I-I/…}` de parse-text). Le `ProductGoodsID` d'un PGT_ITEM
+ * peut être un item du catalogue (`images/items`) OU une pièce d'équipement
+ * (`images/equipment`) — d'où le namespace explicite. Non résoluble → vide.
  */
-function iconOf(
-  r: Row,
-  catalog: Record<string, CatalogEntry>,
-  gearIcons: Map<string, string>,
-): Icon {
+function iconOf(r: Row, catalog: Record<string, CatalogEntry>, gearIcons: Map<string, Gear>): Icon {
   const type = r.ProductGoodsType ?? '';
   const id = r.ProductGoodsID ?? '';
   if (type === 'PGT_ITEM') {
-    const item = catalog[id]?.icon;
-    if (item) return ITEM_ICON(item);
+    if (catalog[id]) return catIcon(catalog[id]);
     const gear = gearIcons.get(id); // équipement (weapon/armor/accessory/talisman)
-    if (gear) return { icon: gear, iconKind: 'equipment' };
-    return ITEM_ICON('');
+    if (gear) return { icon: gear.icon, iconKind: 'equipment', grade: gear.grade };
+    return catIcon(undefined);
   }
-  if (type === 'PGT_COSTUME') return ITEM_ICON(catalog[COSTUME_PREFIX + id]?.icon ?? '');
-  if (type === 'PGT_TICKET') {
-    const asset = TICKET_ASSET[id];
-    return ITEM_ICON(asset ? (catalog[asset]?.icon ?? '') : '');
-  }
-  return ITEM_ICON(catalog[GOODS_ICON_ASSET[type] ?? '']?.icon ?? '');
+  if (type === 'PGT_COSTUME') return catIcon(catalog[COSTUME_PREFIX + id]);
+  if (type === 'PGT_TICKET') return catIcon(catalog[TICKET_ASSET[id] ?? '']);
+  return catIcon(catalog[GOODS_ICON_ASSET[type] ?? '']);
 }
 
-/** Index id d'équipement → icône, tous slots confondus (namespace images/equipment). */
-function buildGearIcons(): Map<string, string> {
+/** Index id d'équipement → icône + grade, tous slots (namespace images/equipment). */
+function buildGearIcons(): Map<string, Gear> {
   const eq = buildEquipment();
   const slots = [
     eq.weapon,
@@ -211,9 +210,11 @@ function buildGearIcons(): Map<string, string> {
     eq.talisman,
     eq.ee,
   ];
-  const out = new Map<string, string>();
+  const out = new Map<string, Gear>();
   for (const slot of slots) {
-    for (const [id, it] of Object.entries(slot)) if (it.icon) out.set(id, it.icon);
+    for (const [id, it] of Object.entries(slot)) {
+      if (it.icon) out.set(id, { icon: it.icon, grade: it.grade });
+    }
   }
   return out;
 }
@@ -257,13 +258,14 @@ export function buildShopPriorities(): ShopPrioritiesData {
       seen.add(slug);
 
       const ed = curated[slug];
-      const { icon, iconKind } = iconOf(r, catalog, gearIcons);
+      const { icon, iconKind, grade } = iconOf(r, catalog, gearIcons);
       entries.push({
         key: slug,
         productId: r.ID,
         name,
         icon,
         iconKind,
+        grade,
         gives: num(r.ProductGoodsValue),
         cost: num(r.PriceValue),
         limit: { count: num(r.MaxBuyCount), period },
