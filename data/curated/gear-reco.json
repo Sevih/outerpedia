@@ -4802,39 +4802,18 @@
   ],
   "2000097": [
     {
-      "name": "Speed",
+      "name": "DPS",
       "weapons": [
         {
           "id": "23",
           "mainStat": "ATK%"
-        }
-      ],
-      "amulets": [
-        {
-          "id": "1017",
-          "mainStat": "SPD"
         },
         {
-          "id": "1040",
-          "mainStat": "SPD"
-        }
-      ],
-      "talismans": ["$CPdps"],
-      "sets": [
+          "id": "6",
+          "mainStat": "ATK%"
+        },
         {
-          "preset": "s4"
-        }
-      ],
-      "substats": "$sdps",
-      "note": {
-        "en": "PvP : {I-T/Assassin's Charm}"
-      }
-    },
-    {
-      "name": "Pen",
-      "weapons": [
-        {
-          "id": "23",
+          "id": "16",
           "mainStat": "ATK%"
         }
       ],
@@ -4842,18 +4821,66 @@
         {
           "id": "1012",
           "mainStat": "PEN%"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
         }
       ],
       "talismans": ["$CPdps"],
       "sets": [
         {
           "preset": "p4"
+        },
+        {
+          "preset": "a2s2"
+        },
+        {
+          "preset": "p2a2"
         }
       ],
-      "substats": "$sdps",
+      "substats": "CHC>ATK>SPD=CHD>DMG UP%",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm}"
+        "en": "{I-T/Executioner's Charm} at +10."
       }
+    },
+    {
+      "name": "Priority Support/PvP",
+      "weapons": [
+        {
+          "id": "23",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "6",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1800",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1795",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["10008", "10011"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$subDpsCrit"
     }
   ],
   "2000098": [
@@ -7243,6 +7270,89 @@
         }
       ],
       "substats": "$dps"
+    }
+  ],
+  "2000121": [
+    {
+      "name": "DPS",
+      "weapons": [
+        {
+          "id": "23",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "6",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        },
+        {
+          "preset": "a2s2"
+        },
+        {
+          "preset": "p2a2"
+        }
+      ],
+      "substats": "CHC>ATK>SPD=CHD>DMG UP%",
+      "note": {
+        "en": "{I-T/Executioner's Charm} at +10."
+      }
+    },
+    {
+      "name": "Priority Support/PvP",
+      "weapons": [
+        {
+          "id": "23",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "6",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1800",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1795",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["10008", "10011"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$subDpsCrit"
     }
   ],
   "2700003": [

@@ -52,6 +52,11 @@
       monstre) ; EXTRACTEUR D'ITEMS (à créer) ; éditeurs manquants (Monstre,
       gear) ; factos `CharacterSwitch`/`MonsterSwitch`, `CharacterPicker`/
       `ItemPicker` ; fusion `CharactersSidebar`↔`ExtractorSidebar`.
+- [ ] **Éditeur de recos (gear-reco) : rendre l'UI d'édition fidèle au rendu
+      public** (demande Sevih 2026-07-18) — l'édition actuelle liste des ids
+      bruts ; la faire ressembler au rendu personnage/slug (icônes d'armes/
+      amulettes/talismans/sets, main stats affichées, etc.) pour éditer « à vue »
+      et non par id. À rapprocher de la refonte matrice admin ci-dessus.
 - [ ] prevoir les editeurs pour update les guides
 
 ## 📄 Pages manquantes (inventaire layout du 2026-07-17)

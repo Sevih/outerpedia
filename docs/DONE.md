@@ -6,6 +6,17 @@
 
 ## 2026-07-18
 
+- **Recos (gear-reco) de Ryu Lion (2000097) + Delta (2000121) mises à jour
+  depuis V2** — le snapshot legacy était figé ; sync des fichiers V2 à jour
+  (`reco/2000097.json`, `reco/2000121.json` — nouveau, `reco/_presets.json`
+  +preset de sets `a2s2` = Attack×2/Speed×2) puis ré-import `import-gear-reco.ts`.
+  Périmètre vérifié strictement borné : côté curé, seuls `2000097` + `2000121`
+  changent (Delta ajouté, 90 persos / 246 builds), presets = +`a2s2` seul ; 0
+  référence irrésolue. Preuve d'absence de divergence : un ré-import à blanc du
+  legacy inchangé reproduit le curé à l'identique. LIMITE connue (pipeline, pas
+  une régression) : seules les notes EN sont capturées, les `Note_fr/jp/kr/zh`
+  V2 sont ignorées pour les 90 persos. TODO ajouté : rendre l'UI d'édition des
+  recos fidèle au rendu public (icônes, main stats).
 - **Comparaisons V2 RETIRÉES de l'admin** (PRIO Sevih #1) — l'oracle a joué son
   rôle. Supprimés : `datagen/extractor/v2-control.ts`, `coherence.ts`,
   `src/lib/admin/equipment-control.ts`, `V2ControlPanel`, `EquipmentReport`,
