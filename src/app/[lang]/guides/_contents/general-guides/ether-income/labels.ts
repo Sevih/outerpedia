@@ -306,14 +306,15 @@ export const LABELS = {
     zh: 'Top {n}以下',
     fr: 'Sous le Top {n}',
   },
-  // Cadence guild raid / world boss (V3 — la V2 les comptait chaque mois) :
-  // {amount} = récompense par édition, moyennée dans les totaux mensuels.
+  // Cadence guild raid / world boss (V3 — la V2 les comptait chaque mois).
+  // Remplace la note de rang V2 pour ces deux sources : fourchette {min}/{max}
+  // dérivée des échelles générées, colonne affichée en moyenne mensuelle.
   everyOtherMonth: {
-    en: 'Runs every other month ({amount} per run, averaged).',
-    jp: '2ヶ月に1回開催（1回{amount}、月平均で計上）。',
-    kr: '2개월에 한 번 진행 (회당 {amount}, 월평균으로 집계).',
-    zh: '每2个月举行一次（每次{amount}，按月均计入）。',
-    fr: 'A lieu un mois sur deux ({amount} par édition, moyenné).',
+    en: 'Held once every 2 months — reward from {min} to {max}. (Displayed as monthly average)',
+    jp: '開催は2ヶ月に1回 — 報酬は{min}〜{max}。（表示は月平均）',
+    kr: '2개월에 한 번 개최 — 보상 {min}~{max}. (월평균으로 표시)',
+    zh: '每两个月举办一次 — 奖励{min}至{max}。（按月平均显示）',
+    fr: 'A lieu une fois tous les 2 mois — récompense de {min} à {max}. (Affiché en moyenne mensuelle)',
   },
 } as const satisfies Record<string, LocalizedText>;
 
@@ -476,20 +477,6 @@ export const SOURCE_NOTES: Record<string, LocalizedText> = {
     kr: '이벤트 미션에서 80, 합동 챌린지 10회',
     zh: '活动任务80，完成10次联合挑战',
     fr: '80 via Event Mission, faites 10 runs de joint challenge',
-  },
-  'monthly.guildRaid': {
-    en: '{min} minimum. Can go up to {max} for rank 1.',
-    jp: '最低{min}。1位で最大{max}。',
-    kr: '최소 {min}. 1위 시 최대 {max}.',
-    zh: '最低{min}。第1名最高{max}。',
-    fr: '{min} minimum. Peut monter à {max} pour le rank 1.',
-  },
-  'monthly.worldBoss': {
-    en: '{min} minimum. Can go up to {max} for rank 1 in {league}.',
-    jp: '最低{min}。{league}1位で最大{max}。',
-    kr: '최소 {min}. {league} 1위 시 최대 {max}.',
-    zh: '最低{min}。{league}第1名最高{max}。',
-    fr: '{min} minimum. Peut monter à {max} pour le rank 1 en {league}.',
   },
 };
 

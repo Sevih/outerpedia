@@ -24,8 +24,6 @@ export interface SourceRow {
   /** Cadence en mois (monthly seulement, défaut 1) — guild raid et world boss
    *  alternent : la colonne et les totaux affichent la MOYENNE mensuelle. */
   monthsPerCycle?: number;
-  /** Gabarit de note de cadence ({amount} = récompense du palier sélectionné). */
-  cadenceNote?: string;
   ranked?: 'arena' | 'guildRaid' | 'worldBoss' | 'singularity';
 }
 
@@ -192,11 +190,6 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
     s.ranked ? (picked[s.ranked]?.ether ?? s.amount) : s.amount;
   /** Contribution MENSUELLE (moyenne si la source n'a pas lieu chaque mois). */
   const monthlyOf = (s: SourceRow): number => Math.round(amountOf(s) / (s.monthsPerCycle ?? 1));
-  /** Note effective (cadence remplie du montant du palier sélectionné). */
-  const noteOf = (s: SourceRow): string =>
-    s.cadenceNote
-      ? `${s.cadenceNote.replace('{amount}', fmt(amountOf(s)))} ${s.note === '–' ? '' : s.note}`.trim()
-      : s.note;
   /** Libellé effectif (palier sélectionné entre parenthèses, comme en V2). */
   const labelOf = (s: SourceRow): string => {
     if (!s.ranked) return s.label;
@@ -364,7 +357,7 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
             fmt(amount),
             fmt(amount * dpw),
             fmt(Math.round((amount * dpw * 30) / 7)),
-            noteOf(s),
+            s.note,
           ];
         })}
         footerLabel={L.dailySubtotal}
@@ -377,19 +370,14 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
       <SectionTable
         title={L.tableWeekly}
         head={[L.source, L.weekly, L.monthlyApprox4, L.notes]}
-        rows={model.weekly.map((s) => [
-          labelOf(s),
-          fmt(amountOf(s)),
-          fmt(amountOf(s) * 4),
-          noteOf(s),
-        ])}
+        rows={model.weekly.map((s) => [labelOf(s), fmt(amountOf(s)), fmt(amountOf(s) * 4), s.note])}
         footerLabel={L.weeklySubtotal}
         footerValues={[fmt(totals.weeklySpike), fmt(totals.weeklySpike * 4)]}
       />
       <SectionTable
         title={L.tableMonthly}
         head={[L.source, L.monthly, L.notes]}
-        rows={model.monthly.map((s) => [labelOf(s), fmt(monthlyOf(s)), noteOf(s)])}
+        rows={model.monthly.map((s) => [labelOf(s), fmt(monthlyOf(s)), s.note])}
         footerLabel={L.monthlySubtotal}
         footerValues={[fmt(totals.monthlySpike)]}
       />

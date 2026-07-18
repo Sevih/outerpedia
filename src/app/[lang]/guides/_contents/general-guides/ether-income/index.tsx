@@ -98,10 +98,9 @@ export default async function EtherIncomeGuide({ lang }: { lang: Lang }) {
     'singularity Top 100%',
   );
 
-  // --- Notes : gabarits {min}/{max}/{league} remplis depuis les échelles -------
+  // --- Notes : gabarits {min}/{max} remplis depuis les échelles générées -------
   const ethers = (tiers: EtherRankTier[]): number[] => tiers.map((t) => t.ether);
   const wbEthers = RANKINGS.worldBoss.leagues.flatMap((lg) => ethers(lg.tiers));
-  const extremeLeague = RANKINGS.worldBoss.leagues[leagueDefault];
   const noteVars: Record<string, Record<string, string | number>> = {
     'weekly.arena': {
       min: Math.min(...ethers(RANKINGS.arena)),
@@ -111,23 +110,24 @@ export default async function EtherIncomeGuide({ lang }: { lang: Lang }) {
       min: Math.min(...ethers(RANKINGS.guildRaid.tiers)),
       max: Math.max(...ethers(RANKINGS.guildRaid.tiers)),
     },
-    'monthly.worldBoss': {
-      min: Math.min(...wbEthers),
-      max: Math.max(...wbEthers),
-      league: lRec(extremeLeague.name, lang) || extremeLeague.name.en,
-    },
+    'monthly.worldBoss': { min: Math.min(...wbEthers), max: Math.max(...wbEthers) },
   };
   const toRow = (s: EtherSource): SourceRow => {
-    const note = SOURCE_NOTES[s.id];
+    // Cadence bimestrielle (guild raid / world boss) : la note dédiée remplace
+    // la note de rang V2 — fourchette + « affiché en moyenne mensuelle ».
+    const note =
+      s.monthsPerCycle !== undefined
+        ? tpl(LABELS.everyOtherMonth, noteVars[s.id] ?? {})
+        : SOURCE_NOTES[s.id]
+          ? tpl(SOURCE_NOTES[s.id], noteVars[s.id] ?? {})
+          : '–';
     return {
       id: s.id,
       label: L(SOURCE_LABELS[s.id]),
-      note: note ? tpl(note, noteVars[s.id] ?? {}) : '–',
+      note,
       amount: s.amount,
       ...(s.daysPerWeek !== undefined ? { daysPerWeek: s.daysPerWeek } : {}),
-      ...(s.monthsPerCycle !== undefined
-        ? { monthsPerCycle: s.monthsPerCycle, cadenceNote: L(LABELS.everyOtherMonth) }
-        : {}),
+      ...(s.monthsPerCycle !== undefined ? { monthsPerCycle: s.monthsPerCycle } : {}),
       ...(s.ranked ? { ranked: s.ranked } : {}),
     };
   };
