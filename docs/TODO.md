@@ -128,16 +128,22 @@
 
 ### Chantiers actés (16/07, inchangés)
 
-- [ ] **Tokeniser les couleurs vives des vues guides** (décision Sevih
-      2026-07-16 — la moitié eslint est faite, reste la PASSE DE FOND).
-      Inventaire : ~40 classes distinctes — top : `text-sky-400` ×16,
-      `text-amber-400` ×14, `bg-blue-600` ×8, famille yellow-400 (~20),
-      green/emerald (~15), red (~10, dont SVG TowerCombatRoster et
-      MonadGateMap). Palettes `.ts` : `guide-accents.ts`, `nodeStyles.ts`,
-      `ELEMENT_RING`. MÉTHODE actée : tokens sémantiques PAR RÔLE aux valeurs
-      EXACTES actuelles, puis étendre RAW_COLOR pour verrouiller.
-      (S'y rattache : `TurnOrder.tsx:61` amber vs tokens neutres de
-      BuildRequirements pour la même donnée SPD.)
+- [~] **Tokeniser les couleurs vives des vues guides** (décision Sevih
+  2026-07-16). MÉTHODE actée : tokens sémantiques PAR RÔLE aux valeurs
+  EXACTES actuelles, puis étendre RAW_COLOR. PÉRIMÈTRE (choix Sevih 18/07) :
+  palettes `.ts` + composants d'abord, éditorial `_contents` en phase 2.
+  🔶 EN COURS (18/07) : (1) `nodeStyles.ts` → tokens `--monad-milestone/
+    explore/combat/story` (valeurs exactes) → DONE ; `ELEMENT_RING` déjà
+  tokenisé (rien à faire). (2) `TurnOrder` amber SPD → `text-stat` → DONE.
+  (3) GALERIE DEV `/dev/tokens` (`page.dev.tsx`) : toutes les CSS vars en
+  pastilles + valeur résolue, groupées — pour voir/ajuster. RESTE : les ~17
+  composants guides restants (dont `MonadGateMap` = nombreuses NUANCES bespoke
+  avec opacités → soit tokens fins, soit micro-unifications à valider avec
+  toi via la galerie), `guide-accents.ts`/`editorial/accents.ts` (palettes par
+  catégorie), puis étendre RAW_COLOR aux vives (hors `_contents`), enfin la
+  phase 2 éditoriale. NB : décider aussi « SPD amber (stat) vs neutre » —
+  TurnOrder est tokenisé sans changer son look, l'unification avec
+  BuildRequirements reste un choix visuel à trancher.
 - [ ] (chantier guides éditoriaux) `BannerTabs` (?banner=) et le `?tab=` de
       free-heroes-start-banner → SegmentedTabs/#hash quand ces guides
       atterrissent. **Règle actée : état interne d'un guide = hash

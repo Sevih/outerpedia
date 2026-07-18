@@ -27,6 +27,22 @@
   `buildFaqJsonLd` (seo.ts — /tierlist et /tools à venir ; `getMonthYear`→
   `serverNow` au portage).
 
+- **Tokenisation couleurs guides — Phase 1 (palettes .ts) + galerie dev**
+  (chantier Sevih 16/07, périmètre choisi 18/07 : palettes+composants d'abord,
+  éditorial `_contents` en phase 2). Méthode actée : tokens PAR RÔLE aux valeurs
+  EXACTES → rendu inchangé. Fait : (1) `nodeStyles.ts` (Monad Gate) — 4 couleurs
+  vives de texte sorties en tokens `--monad-milestone/explore/combat/story`
+  (yellow/green/red/sky-400 V2), exposés `text-monad-*` ; le filtre CSS qui
+  teinte le sprite reste une chaîne `filter` à part. `ELEMENT_RING` déjà
+  tokenisé. (2) `TurnOrder` : amber SPD → `text-stat` (le point précis du TODO ;
+  look inchangé, l'unification SPD amber-vs-neutre reste un choix visuel).
+  (3) `/dev/tokens` (`page.dev.tsx`, dev-only) : GALERIE de tous les tokens de
+  couleur en pastilles + valeur résolue au runtime (lue via `useSyncExternalStore`
+  pour respecter `set-state-in-effect`), groupée par famille — permet de VOIR et
+  d'ajuster. Typecheck + lint + 423 tests OK. RESTE : ~17 composants (MonadGateMap
+  a beaucoup de nuances/opacités bespoke → à arbitrer via la galerie), palettes
+  de catégorie, extension RAW_COLOR, phase 2 éditoriale.
+
 - **Lot de tests « petits modules purs »** (suite de la campagne tests, +40).
   Six fichiers co-localisés : `stats.test.ts` (statAbbr connu/repli,
   `statOptionView` sur les 4 régimes flat/rate/%/RAW_FLAT — EFF flat brut, ATK

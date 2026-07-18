@@ -58,7 +58,7 @@ export function TurnOrder({
                   ) : (
                     <span className="text-content-strong text-sm">{name}</span>
                   )}
-                  <span className="text-xs text-amber-400">{step.speed} SPD</span>
+                  <span className="text-stat text-xs">{step.speed} SPD</span>
                 </span>
               </div>
             </div>
