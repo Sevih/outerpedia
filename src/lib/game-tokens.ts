@@ -40,16 +40,6 @@ export interface GameToken {
   text: string;
 }
 
-/** Nom localisé d'un élément (`fire` → « Fire », « 火属性 »). */
-export function elementName(slug: string, lang: Lang): string {
-  return lRec(G.elements?.[slug], lang) || slug;
-}
-
-/** Nom localisé d'une classe (`defender` → « Defender », « 防御型 »). */
-export function className(slug: string, lang: Lang): string {
-  return lRec(G.classes?.[slug], lang) || slug;
-}
-
 interface TokenTable {
   re: RegExp;
   bySlugText: Map<string, { kind: GameTokenKind; slug: string }>;

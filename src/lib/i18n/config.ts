@@ -29,14 +29,6 @@ type DefaultLang = {
 export const DEFAULT_LANG = (Object.entries(LANGUAGES).find(([, v]) => v.isDefault)?.[0] ??
   'en') as DefaultLang;
 
-/** Langues non-défaut. */
-export type SuffixLang = Exclude<Lang, typeof DEFAULT_LANG>;
-
-/** Config d'une langue. */
-export function getLangConfig(lang: Lang) {
-  return LANGUAGES[lang];
-}
-
 /** Garde de type. */
 export function isValidLang(value: string): value is Lang {
   return value in LANGUAGES;
@@ -52,20 +44,8 @@ export function normalizeLang(raw: string): Lang {
   return isValidLang(raw) ? raw : DEFAULT_LANG;
 }
 
-/**
- * GameLang = langues officiellement fournies par le jeu (données extraites).
- * Sous-ensemble de `Lang` ; les traductions communautaires (fr) n'en font pas
- * partie. Doit correspondre à `GAME_LANGS` de `datagen/lib/lang.ts`.
- */
-type OfficialLang = {
-  [K in Lang]: (typeof LANGUAGES)[K]['isOfficial'] extends true ? K : never;
-}[Lang];
-export type GameLang = OfficialLang;
-
-/** Langues de jeu, dans l'ordre de LANGUAGES. */
-export const GAME_LANGS = LANGS.filter((l): l is GameLang => LANGUAGES[l].isOfficial);
-
-/** Garde de type pour les langues de jeu. */
-export function isGameLang(value: string): value is GameLang {
-  return value in LANGUAGES && LANGUAGES[value as Lang].isOfficial;
-}
+// NB : la notion « langue de jeu » (sous-ensemble officiel, hors traductions
+// communautaires) vit CÔTÉ DONNÉES dans `datagen/lib/lang.ts` (`GameLang`/
+// `GAME_LANGS`) — la copie côté site avait été ajoutée ici mais aucun rendu ne
+// la consommait ; retirée (l'alignement `isOfficial` ↔ `GAME_LANGS` reste
+// documenté sur `LANGUAGES` en tête de fichier).

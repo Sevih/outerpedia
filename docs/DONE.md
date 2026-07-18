@@ -21,10 +21,10 @@
   • Moteur : `CharacterKitCuration` + `characterCurated()` (lecture disque
   tolérante au fichier absent) + `applyCardCuration()` (filtre LOCAL) threadés
   dans `cardEffects(skills, s, curated?)` et `buildChainView(skills, lang,
-  curated?)` — l'admin passe `{}` pour les positions « règles pures ».
+curated?)` — l'admin passe `{}` pour les positions « règles pures ».
   • Store `character-skill-curated-store.ts` (patch card-scoped, `writeJson`
   canonique, `_doc` préservé, clés triées) + route `POST
-  /api/admin/curated/character-skills` (403 hors dev).
+/api/admin/curated/character-skills` (403 hors dev).
   • Composant `CharacterKitEditor` (× masque / + ajoute, identité par
   carte+ref, datalist du glossaire) branché dans l'éditeur perso.
   • 2e passe `mergeStatusEffects` sur la fiche publique ET l'extractor pour
@@ -60,6 +60,22 @@
   (`var(--${element})`) est REPORTÉ — il casse sur la clé `dark` vs `--dark-elem`
   et touche des styles inline SSR de la fiche perso (risque visuel, relecture).
   Typecheck OK.
+
+- **Code mort — exports src sans consommateur** (dette code, chaque symbole
+  RE-VÉRIFIÉ par grep repo+datagen avant retrait). SUPPRIMÉS : `elementName`/
+  `className` (game-tokens.ts — seul `splitGameTokens`/`GameToken` importés),
+  `tagDesc` (tags.ts), et tout le cluster `SuffixLang`/`getLangConfig`/`GameLang`/
+  `GAME_LANGS`/`isGameLang` de `i18n/config.ts` — c'était une COPIE côté site,
+  self-référentielle (aucun rendu ne la lisait) ; la vraie notion « langue de
+  jeu » vit côté données dans `datagen/lib/lang.ts`, très utilisée (laissé un
+  commentaire qui pointe là). Repli INOPÉRANT retiré de `guide-sections.ts:69-72` :
+  le 2ᵉ `resolveEffectKey(côté inversé)` ne pouvait jamais réussir, la fonction
+  testant DÉJÀ en interne le côté demandé puis l'opposé puis le curé (effects.ts).
+  DÉ-EXPORTÉS (usage uniquement interne à leur fichier) : `resolveRewardEntry`
+  (rewards.ts), `EffectTooltipBody` (EffectChips.tsx), `ELEMENT_HEX` (fait à
+  l'item theme.ts). `gearIssueCounts` : déjà absent. GARDÉS À DESSEIN :
+  `getMonthYear`/`buildVideoObjectJsonLd`/`buildFaqJsonLd` (seo.ts) — /tierlist
+  et /tools sont inventoriés en « Pages manquantes ». Typecheck + 351 tests OK.
 
 - **`data/legacy/` SUPPRIMÉ (249 fichiers) — l'oracle V2 déposé** (fin du PRIO #1).
   Trois familles de lecteurs coupées : (1) OUTILS ONE-SHOT obsolètes (migration

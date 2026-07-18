@@ -66,9 +66,9 @@ function subject(spec: SectionTitle, lang: Lang, at: string): string {
     return lRec(e, lang);
   }
   if ('effect' in spec) {
-    const e =
-      resolveEffectKey(spec.side ?? 'debuff', spec.effect) ??
-      resolveEffectKey(spec.side === 'debuff' ? 'buff' : 'debuff', spec.effect);
+    // `resolveEffectKey` cherche déjà le côté demandé PUIS l'opposé PUIS le curé
+    // (cf. effects.ts) — un second appel côté inversé serait donc inopérant.
+    const e = resolveEffectKey(spec.side ?? 'debuff', spec.effect);
     if (!e) throw new Error(`${at} : effet « ${spec.effect} » introuvable dans le glossaire`);
     return lRec(e.name, lang);
   }

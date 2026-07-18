@@ -44,12 +44,6 @@ export function tagLabel(slug: string, lang: Lang): string {
   return def?.name[lang] ?? def?.name.en ?? slug;
 }
 
-/** Description localisée (repli EN), `undefined` si le tag n'en a pas. */
-export function tagDesc(slug: string, lang: Lang): string | undefined {
-  const def = tagDef(slug);
-  return def?.desc?.[lang] ?? def?.desc?.en;
-}
-
 /**
  * Trie par l'ordre canonique du vocabulaire. Un slug inconnu part en queue
  * plutôt que de casser le rendu (le test `tags.test.ts` est là pour qu'il

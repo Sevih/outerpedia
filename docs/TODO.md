@@ -2,9 +2,10 @@
 
 > Le « à faire » uniquement — le « fait » migre dans [DONE.md](./DONE.md)
 > (décision Sevih 2026-07-17). Réécrit le **2026-07-17** après audit complet du
-> code (7 passes par zone, chaque finding vérifié, sévérités contre-vérifiées).
-> État de référence : commit `7d30203`, **319/319 tests verts**, typecheck et
-> lint OK, v0.1.21.
+> code (7 passes par zone, chaque finding vérifié, sévérités contre-vérifiées),
+> **nettoyé le 18/07** (le « fait » de la journée migré dans DONE.md).
+> État de référence : **18/07**, **351 tests verts**, typecheck et lint OK,
+> v0.1.23.
 > Re-vérifier chaque item contre le code au moment de le traiter.
 
 ---
@@ -172,16 +173,15 @@
 
 ### Code mort (vérifié par grep repo entier, audit 17/07)
 
-- [ ] Exports src sans consommateur (`game-version.ts` SORTI de la liste le
-      17/07 : consommé par le Footer riche) : `elementName`/`className`
-      (game-tokens.ts:44), `getMonthYear`/`buildVideoObjectJsonLd`/
-      `buildFaqJsonLd` (seo.ts — GARDÉS : /tierlist et /tools sont
-      inventoriés dans « Pages manquantes » ; passer getMonthYear par
-      `serverNow` au portage), `tagDesc` (tags.ts:48),
-      `SuffixLang`/`getLangConfig`/`GameLang`/`GAME_LANGS`/`isGameLang`
-      (i18n/config.ts), repli inopérant de `guide-sections.ts:69-72`,
-      exports superflus `gearIssueCounts`/`resolveRewardEntry`/
-      `EffectTooltipBody`/`ELEMENT_HEX`.
+- [x] Exports src sans consommateur (18/07 → DONE). RETIRÉS : `elementName`/
+      `className` (game-tokens), `tagDesc` (tags), `SuffixLang`/`getLangConfig`/
+      `GameLang`/`GAME_LANGS`/`isGameLang` (i18n/config — copie site
+      self-référentielle, la vraie vit en datagen), repli inopérant de
+      `guide-sections.ts:69-72` (`resolveEffectKey` teste déjà les 2 côtés).
+      DÉ-EXPORTÉS : `resolveRewardEntry`, `EffectTooltipBody`, `ELEMENT_HEX`
+      (usage interne). `gearIssueCounts` déjà absent. GARDÉS volontairement :
+      `getMonthYear`/`buildVideoObjectJsonLd`/`buildFaqJsonLd` (seo.ts —
+      /tierlist et /tools à venir ; `getMonthYear`→`serverNow` au portage).
 - [ ] Datagen : `hasFaceIconLayout` (face-icon.ts:38), `r2Push` (lib/r2.ts:89 —
       doublonne assets-push.mjs en plus), `getMaxLevel`/`resolvePlaceholders`
       (buff.ts, testés mais jamais appelés en prod), export `isPermilleRow`,

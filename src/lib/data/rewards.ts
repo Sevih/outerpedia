@@ -113,7 +113,7 @@ function fromCatalog(
 }
 
 /** Résout UNE ligne de table (`kind` + id opaque) dans la donnée qui la connaît. */
-export function resolveRewardEntry(e: RewardEntry, lang: Lang): ResolvedReward {
+function resolveRewardEntry(e: RewardEntry, lang: Lang): ResolvedReward {
   const base = { min: e.min, max: e.max, ...(e.random ? { random: true } : {}) };
 
   if (e.kind === 'asset') {
