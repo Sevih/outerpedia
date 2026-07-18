@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import type { PromoCode } from '@/lib/admin/promo-banner-store';
+import { postJson } from '@/lib/admin/post-json';
+import { rowKey } from '@/lib/admin/keyed';
 import type { ItemOption } from '@/lib/data/items';
 import { ItemPicker } from './ItemPicker';
 import { RegenFromV2Button } from './RegenFromV2Button';
@@ -9,16 +11,17 @@ import { RegenFromV2Button } from './RegenFromV2Button';
 const input =
   'rounded-md border border-line bg-surface-base px-2 py-1 text-sm text-content focus:border-accent focus:outline-none';
 
-/** Reward = id d'item (stocké) → quantité. */
-type Reward = { id: string; qty: string };
-type Row = { code: string; start: string; end: string; rewards: Reward[] };
+/** Reward = id d'item (stocké) → quantité. `_key` = clé React stable. */
+type Reward = { id: string; qty: string; _key: string };
+type Row = { code: string; start: string; end: string; rewards: Reward[]; _key: string };
 type Status = { kind: 'idle' | 'ok' | 'err'; msg?: string };
 
 const toRow = (p: PromoCode): Row => ({
   code: p.code,
   start: p.start,
   end: p.end,
-  rewards: Object.entries(p.description ?? {}).map(([id, qty]) => ({ id, qty })),
+  rewards: Object.entries(p.description ?? {}).map(([id, qty]) => ({ id, qty, _key: rowKey() })),
+  _key: rowKey(),
 });
 const toPromo = (r: Row): PromoCode => ({
   code: r.code,
@@ -38,7 +41,7 @@ export function PromoCodesEditor({
   initial: PromoCode[];
   items: ItemOption[];
 }) {
-  const [rows, setRows] = useState<Row[]>(byStartDesc(initial.map(toRow)));
+  const [rows, setRows] = useState<Row[]>(() => byStartDesc(initial.map(toRow)));
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
 
   const set = (i: number, patch: Partial<Row>) =>
@@ -48,20 +51,25 @@ export function PromoCodesEditor({
       rewards: rows[i].rewards.map((x, j) => (j === ri ? { ...x, ...patch } : x)),
     });
   const add = () =>
-    setRows((s) => [{ code: '', start: '', end: '', rewards: [{ id: '', qty: '' }] }, ...s]);
+    setRows((s) => [
+      {
+        code: '',
+        start: '',
+        end: '',
+        rewards: [{ id: '', qty: '', _key: rowKey() }],
+        _key: rowKey(),
+      },
+      ...s,
+    ]);
   const remove = (i: number) => setRows((s) => s.filter((_, j) => j !== i));
 
   async function save() {
     setStatus({ kind: 'idle' });
-    const res = await fetch('/api/admin/curated/coupons', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(rows.filter((r) => r.code.trim()).map(toPromo)),
-    });
-    if (res.ok) setStatus({ kind: 'ok', msg: 'Enregistré' });
-    else {
-      const data = (await res.json().catch(() => ({}))) as { errors?: string[] };
-      setStatus({ kind: 'err', msg: data.errors?.join(' ; ') ?? 'Échec écriture' });
+    try {
+      await postJson('/api/admin/curated/coupons', rows.filter((r) => r.code.trim()).map(toPromo));
+      setStatus({ kind: 'ok', msg: 'Enregistré' });
+    } catch (e) {
+      setStatus({ kind: 'err', msg: (e as Error).message });
     }
   }
 
@@ -94,7 +102,7 @@ export function PromoCodesEditor({
 
       <div className="space-y-3">
         {rows.map((r, i) => (
-          <div key={i} className="border-line-subtle space-y-2 rounded-lg border p-3">
+          <div key={r._key} className="border-line-subtle space-y-2 rounded-lg border p-3">
             <div className="flex flex-wrap items-center gap-2">
               <input
                 className={`${input} w-44 font-mono`}
@@ -129,7 +137,7 @@ export function PromoCodesEditor({
             <div className="space-y-1 pl-1">
               <p className="text-content-subtle text-xs uppercase">Récompenses</p>
               {r.rewards.map((rw, ri) => (
-                <div key={ri} className="flex items-center gap-2">
+                <div key={rw._key} className="flex items-center gap-2">
                   <ItemPicker
                     options={items}
                     value={rw.id}
@@ -155,7 +163,9 @@ export function PromoCodesEditor({
               <button
                 type="button"
                 className="text-accent text-xs hover:underline"
-                onClick={() => set(i, { rewards: [...r.rewards, { id: '', qty: '' }] })}
+                onClick={() =>
+                  set(i, { rewards: [...r.rewards, { id: '', qty: '', _key: rowKey() }] })
+                }
               >
                 + récompense
               </button>

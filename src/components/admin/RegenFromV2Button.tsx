@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { postJson } from '@/lib/admin/post-json';
 
 /**
  * Bouton d'import ponctuel depuis le repo V2 voisin (écrase la copie V3).
@@ -20,22 +21,21 @@ export function RegenFromV2Button({
     if (!confirm('Écraser la liste actuelle avec la donnée V2 ?')) return;
     setBusy(true);
     setMsg(null);
-    const res = await fetch('/api/admin/tools/regen-v2', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ kind }),
-    });
-    const json = (await res.json().catch(() => ({}))) as {
-      ok?: boolean;
-      data?: unknown[];
-      error?: string;
-    };
-    setBusy(false);
-    if (res.ok && json.ok && json.data) {
-      onRegen(json.data);
-      setMsg(`Importé depuis V2 (${json.data.length})`);
-    } else {
-      setMsg(json.error ?? 'Échec import');
+    try {
+      const json = await postJson<{ ok?: boolean; data?: unknown[]; error?: string }>(
+        '/api/admin/tools/regen-v2',
+        { kind },
+      );
+      if (json.ok && json.data) {
+        onRegen(json.data);
+        setMsg(`Importé depuis V2 (${json.data.length})`);
+      } else {
+        setMsg(json.error ?? 'Échec import');
+      }
+    } catch (e) {
+      setMsg((e as Error).message);
+    } finally {
+      setBusy(false);
     }
   }
 

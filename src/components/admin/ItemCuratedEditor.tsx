@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { LangDict } from '@contracts';
 import type { ItemCurated } from '@/lib/admin/item-curated-store';
+import { postJson } from '@/lib/admin/post-json';
 import { img } from '@/lib/images';
 import { ItemInline } from '@/components/inline/ItemInline';
 
@@ -58,10 +59,15 @@ export function ItemCuratedEditor({
     const k = key.trim();
     if (!k) return;
     setStatus({ kind: 'idle' });
-    const res = await fetch(`/api/admin/text/resolve?key=${encodeURIComponent(k)}`);
-    const { text } = (await res.json().catch(() => ({}))) as { text?: LangDict | null };
-    if (text) apply({ en: text.en ?? '', jp: text.jp ?? '', kr: text.kr ?? '', zh: text.zh ?? '' });
-    else setStatus({ kind: 'err', msg: `Clé texte introuvable : ${k}` });
+    try {
+      const res = await fetch(`/api/admin/text/resolve?key=${encodeURIComponent(k)}`);
+      const { text } = (await res.json().catch(() => ({}))) as { text?: LangDict | null };
+      if (text)
+        apply({ en: text.en ?? '', jp: text.jp ?? '', kr: text.kr ?? '', zh: text.zh ?? '' });
+      else setStatus({ kind: 'err', msg: `Clé texte introuvable : ${k}` });
+    } catch (e) {
+      setStatus({ kind: 'err', msg: (e as Error).message });
+    }
   }
 
   // Aperçu = valeur effective (override sinon extraction).
@@ -88,15 +94,11 @@ export function ItemCuratedEditor({
       return;
     }
     setStatus({ kind: 'idle' });
-    const res = await fetch(`/api/admin/curated/items/${encodeURIComponent(id)}`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(built),
-    });
-    if (res.ok) setStatus({ kind: 'ok', msg: 'Enregistré' });
-    else {
-      const data = (await res.json().catch(() => ({}))) as { errors?: string[] };
-      setStatus({ kind: 'err', msg: data.errors?.join(' ; ') ?? 'Échec écriture' });
+    try {
+      await postJson(`/api/admin/curated/items/${encodeURIComponent(id)}`, built);
+      setStatus({ kind: 'ok', msg: 'Enregistré' });
+    } catch (e) {
+      setStatus({ kind: 'err', msg: (e as Error).message });
     }
   }
 

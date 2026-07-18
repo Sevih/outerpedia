@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { postJson } from '@/lib/admin/post-json';
 
 interface IntegrateReport {
   files: string[];
@@ -43,23 +44,13 @@ export function MonsterActions({
   const [label, setLabel] = useState('');
   const router = useRouter();
 
-  async function post(url: string, body?: unknown): Promise<Record<string, unknown>> {
-    const res = await fetch(url, {
-      method: 'POST',
-      ...(body
-        ? { headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }
-        : {}),
-    });
-    const data = (await res.json().catch(() => ({}))) as Record<string, unknown>;
-    if (!res.ok) throw new Error((data.error as string) ?? 'échec');
-    return data;
-  }
-
   async function save() {
     setStatus({ kind: 'busy' });
     try {
-      const data = await post(`/api/admin/integrate/monster/${id}`);
-      setStatus({ kind: 'saved', report: data.report as IntegrateReport });
+      const data = await postJson<{ report: IntegrateReport }>(
+        `/api/admin/integrate/monster/${id}`,
+      );
+      setStatus({ kind: 'saved', report: data.report });
       router.refresh();
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });
@@ -69,8 +60,10 @@ export function MonsterActions({
   async function version() {
     setStatus({ kind: 'busy' });
     try {
-      const data = await post(`/api/admin/version/monster/${id}`, { label });
-      setStatus({ kind: 'versioned', report: data.report as VersionReport });
+      const data = await postJson<{ report: VersionReport }>(`/api/admin/version/monster/${id}`, {
+        label,
+      });
+      setStatus({ kind: 'versioned', report: data.report });
       setLabel('');
       router.refresh();
     } catch (e) {

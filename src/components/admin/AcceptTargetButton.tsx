@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { postJson } from '@/lib/admin/post-json';
 
 type Status = { kind: 'idle' | 'busy' | 'ok' | 'err'; msg?: string };
 
@@ -14,12 +15,11 @@ export function AcceptTargetButton({ id, file }: { id: string; file: string }) {
 
   async function accept() {
     setStatus({ kind: 'busy' });
-    const res = await fetch(`/api/admin/review/${id}`, { method: 'POST' });
-    if (res.ok) {
+    try {
+      await postJson(`/api/admin/review/${id}`);
       setStatus({ kind: 'ok', msg: `${file} écrit — committe via git.` });
-    } else {
-      const data = (await res.json().catch(() => ({}))) as { error?: string };
-      setStatus({ kind: 'err', msg: data.error ?? 'Échec écriture' });
+    } catch (e) {
+      setStatus({ kind: 'err', msg: (e as Error).message });
     }
   }
 

@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import type { GearPresets, SetComboPiece } from '@contracts';
 import type { GearOption } from '@/lib/admin/gear-options';
+import { postJson } from '@/lib/admin/post-json';
+import { rowKey } from '@/lib/admin/keyed';
 
 const field =
   'rounded-md border border-line bg-surface-base px-2 py-1 text-sm text-content focus:border-accent focus:outline-none';
@@ -15,10 +17,12 @@ type Status = { kind: 'idle' | 'ok' | 'err'; msg?: string };
 interface Row<T> {
   slug: string;
   value: T;
+  /** Clé React stable (présentationnel — le save reconstruit via `slug`/`value`). */
+  _key: string;
 }
 
 const toRows = <T,>(rec: Record<string, T>): Row<T>[] =>
-  Object.entries(rec).map(([slug, value]) => ({ slug, value }));
+  Object.entries(rec).map(([slug, value]) => ({ slug, value, _key: rowKey() }));
 
 function SlugInput({
   row,
@@ -62,9 +66,9 @@ export function GearPresetsEditor({
   /** `kind:slug` → nombre de builds qui référencent ce preset. */
   usage: Record<string, number>;
 }) {
-  const [talis, setTalis] = useState<Row<string[]>[]>(toRows(initial.talismans));
-  const [sets, setSets] = useState<Row<SetComboPiece[]>[]>(toRows(initial.sets));
-  const [subs, setSubs] = useState<Row<string>[]>(toRows(initial.substats));
+  const [talis, setTalis] = useState<Row<string[]>[]>(() => toRows(initial.talismans));
+  const [sets, setSets] = useState<Row<SetComboPiece[]>[]>(() => toRows(initial.sets));
+  const [subs, setSubs] = useState<Row<string>[]>(() => toRows(initial.substats));
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
 
   async function save() {
@@ -87,15 +91,11 @@ export function GearPresetsEditor({
         subs.filter((r) => r.slug && r.value.trim()).map((r) => [r.slug, r.value.trim()]),
       ),
     };
-    const res = await fetch('/api/admin/curated/gear-presets', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    if (res.ok) setStatus({ kind: 'ok', msg: 'Enregistré' });
-    else {
-      const data = (await res.json().catch(() => ({}))) as { errors?: string[] };
-      setStatus({ kind: 'err', msg: data.errors?.join(' ; ') ?? 'Échec écriture' });
+    try {
+      await postJson('/api/admin/curated/gear-presets', body);
+      setStatus({ kind: 'ok', msg: 'Enregistré' });
+    } catch (e) {
+      setStatus({ kind: 'err', msg: (e as Error).message });
     }
   }
 
@@ -113,7 +113,7 @@ export function GearPresetsEditor({
         <p className={label}>Presets de talismans</p>
         {talis.map((row, i) => (
           <div
-            key={i}
+            key={row._key}
             className="border-line-subtle flex flex-wrap items-start gap-2 rounded-lg border p-2"
           >
             <SlugInput
@@ -171,7 +171,7 @@ export function GearPresetsEditor({
         <button
           type="button"
           className={btn}
-          onClick={() => setTalis([...talis, { slug: '', value: [] }])}
+          onClick={() => setTalis([...talis, { slug: '', value: [], _key: rowKey() }])}
         >
           + Nouveau preset talismans
         </button>
@@ -182,7 +182,7 @@ export function GearPresetsEditor({
         <p className={label}>Presets de combos de sets</p>
         {sets.map((row, i) => (
           <div
-            key={i}
+            key={row._key}
             className="border-line-subtle flex flex-wrap items-start gap-2 rounded-lg border p-2"
           >
             <SlugInput
@@ -258,7 +258,9 @@ export function GearPresetsEditor({
         <button
           type="button"
           className={btn}
-          onClick={() => setSets([...sets, { slug: '', value: [{ set: '', count: 4 }] }])}
+          onClick={() =>
+            setSets([...sets, { slug: '', value: [{ set: '', count: 4 }], _key: rowKey() }])
+          }
         >
           + Nouveau preset sets
         </button>
@@ -269,7 +271,7 @@ export function GearPresetsEditor({
         <p className={label}>Presets de priorités de substats (« ATK&gt;CHC=CHD&gt;SPD »)</p>
         {subs.map((row, i) => (
           <div
-            key={i}
+            key={row._key}
             className="border-line-subtle flex flex-wrap items-center gap-2 rounded-lg border p-2"
           >
             <SlugInput
@@ -294,7 +296,7 @@ export function GearPresetsEditor({
         <button
           type="button"
           className={btn}
-          onClick={() => setSubs([...subs, { slug: '', value: '' }])}
+          onClick={() => setSubs([...subs, { slug: '', value: '', _key: rowKey() }])}
         >
           + Nouveau preset substats
         </button>

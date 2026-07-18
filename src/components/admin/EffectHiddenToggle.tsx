@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { EffectCurated } from '@contracts';
+import { postJson } from '@/lib/admin/post-json';
 
 /**
  * Bascule « ignoré du live » d'un effet, directement depuis la fiche perso
@@ -27,14 +28,14 @@ export function EffectHiddenToggle({
     const body: EffectCurated = { ...curated };
     if (next) body.hidden = true;
     else delete body.hidden;
-    const res = await fetch(`/api/admin/curated/effects/${effectId}`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    setBusy(false);
-    if (res.ok) setHidden(next);
-    else setError(true);
+    try {
+      await postJson(`/api/admin/curated/effects/${effectId}`, body);
+      setHidden(next);
+    } catch {
+      setError(true);
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (

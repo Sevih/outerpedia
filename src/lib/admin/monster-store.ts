@@ -18,7 +18,7 @@ import { buildSingularity } from '@datagen/generators/singularity';
 import { buildTowers } from '@datagen/generators/towers';
 import { buildItemSources } from '@datagen/generators/sources';
 import { curatedBossIds, loadEquipmentCurated } from '@datagen/curated/equipment';
-import { loadTable } from '@datagen/lib/tables';
+import { fileStamp, loadTable, tablesStamp } from '@datagen/lib/tables';
 import { loadTextIndex, resolveText } from '@datagen/lib/text';
 import type { Skill } from '@datagen/generators/skills';
 import { statAbbr } from '@/lib/stats';
@@ -57,7 +57,7 @@ export function committedEncounters(): Record<string, DungeonRef> {
   return readGenerated<Record<string, DungeonRef>>('encounters.json') ?? {};
 }
 
-let siteIdsCache: Set<string> | undefined;
+let siteIdsCache: { stamp: string; ids: Set<string> } | undefined;
 
 /**
  * Modes de contenu que le SITE ne documente pas par monstre : le narratif
@@ -84,7 +84,12 @@ const NON_SITE_MODES = new Set([
  *   - les ADDS rattachés (`summonedBy`/`linkedTo` vers un monstre utilisé).
  */
 export function siteMonsterIds(): Set<string> {
-  if (siteIdsCache) return siteIdsCache;
+  // Cache stampé (même régime mtime que le reste — cf. TODO « caches périmés »
+  // 17/07) : l'ensemble dérive des tables .gamedata (un refresh les réécrit
+  // toutes → sentinelle TextSystem) ET du curé équipement (boss d'obtention,
+  // éditable via l'admin → fileStamp). Recalcul quand l'un des deux bouge.
+  const stamp = `${tablesStamp(['TextSystem'])}|${fileStamp('data/curated/equipment.json')}`;
+  if (siteIdsCache && siteIdsCache.stamp === stamp) return siteIdsCache.ids;
   const ids = new Set<string>();
   const dungeons = new Set<string>();
 
@@ -140,7 +145,7 @@ export function siteMonsterIds(): Set<string> {
     if (anchors.some((a) => ids.has(a))) ids.add(m.id);
   }
 
-  siteIdsCache = ids;
+  siteIdsCache = { stamp, ids };
   return ids;
 }
 
@@ -173,22 +178,27 @@ export function rankOptionLabels(ids: Iterable<string>): Record<string, string> 
   return out;
 }
 
-let tooltipNamesCache: Map<string, string> | undefined;
+let tooltipNamesCache: { stamp: string; names: Map<string, string> } | undefined;
 
 /**
  * Nom EN d'un tooltip du jeu (`BuffToolTipTemplet`) — pour rendre LISIBLE une
  * réf d'immunité sans entrée au glossaire d'effets (« 64 » seul ne dit rien).
+ *
+ * Index stampé sur les tables (sentinelle TextSystem, comme partout) : un
+ * refresh .gamedata le reconstruit sans redémarrage.
  */
 export function tooltipName(id: string): string | undefined {
-  if (!tooltipNamesCache) {
+  const stamp = tablesStamp(['TextSystem']);
+  if (!tooltipNamesCache || tooltipNamesCache.stamp !== stamp) {
     const sys = loadTextIndex('TextSystem');
     const skill = loadTextIndex('TextSkill');
-    tooltipNamesCache = new Map();
+    const names = new Map<string, string>();
     for (const r of loadTable('BuffToolTipTemplet')) {
       if (!r.ID || !r.NameID) continue;
       const name = resolveText(sys, r.NameID).en || resolveText(skill, r.NameID).en;
-      if (name) tooltipNamesCache.set(r.ID, name);
+      if (name) names.set(r.ID, name);
     }
+    tooltipNamesCache = { stamp, names };
   }
-  return tooltipNamesCache.get(id);
+  return tooltipNamesCache.names.get(id);
 }

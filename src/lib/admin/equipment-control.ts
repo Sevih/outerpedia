@@ -16,9 +16,8 @@ import {
   getWeaponFamilies,
   passiveEffects,
   resolvePassives,
-  slugifyEquipment,
 } from '@/lib/data/equipment';
-import { getEquipmentDetail } from '@/lib/data/equipment-detail';
+import { eeModelForView } from '@/lib/data/equipment-detail';
 import {
   effectForLabel,
   effectForTooltip,
@@ -185,6 +184,7 @@ function nameKey(name: string): string {
 function eeReport(v2: Record<string, Row>): CatalogueReport {
   const views = getEEViews();
   const byChar = new Map(views.map((v) => [v.characterId, v]));
+  const curatedFx = loadCuratedEffects(); // invariant sur la boucle → hissé
   const issues: EquipIssue[] = [];
   const missingV3: string[] = [];
   for (const [charId, r] of Object.entries(v2)) {
@@ -195,8 +195,10 @@ function eeReport(v2: Record<string, Row>): CatalogueReport {
       continue;
     }
     diffLang(issues, label, 'name', r, 'name', v.name);
-    const model = getEquipmentDetail(slugifyEquipment(v.name.en), 'en');
-    if (!model) continue;
+    // On tient déjà la vue EE (`v`) : la matérialiser directement évite le
+    // scan par slug + la re-matérialisation de toutes les familles que faisait
+    // `getEquipmentDetail` à chaque tour (O(n²) → O(n), cf. TODO audit 17/07).
+    const model = eeModelForView(v, 'en');
     // Main stat conditionnelle (libellé officiel).
     const opt = model.slots[0]?.options[0];
     diff(issues, label, 'mainStat', r.mainStat, opt?.label ?? opt?.key);
@@ -222,7 +224,6 @@ function eeReport(v2: Record<string, Row>): CatalogueReport {
     // BT_SEAL_COUNTER, SYS_BUFF_CHARGE_AP ↔ BT_AP_CHARGE). Une clé V2 sans
     // jeton = chip manquante ; une chip V3 sans clé V2 = ajout à arbitrer.
     const displayed = passiveEffects(v.passives).filter((e) => e.tooltip || e.label);
-    const curatedFx = loadCuratedEffects();
     const chips = displayed.map((e) => {
       const eff = e.tooltip
         ? (effectForTooltip(e.tooltip) ?? getMergedEffect(e.tooltip))

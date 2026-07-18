@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { postJson } from '@/lib/admin/post-json';
 
 interface Report {
   files: string[];
@@ -27,13 +28,13 @@ export function IntegrateCharacterButton({ id, isNew }: { id: string; isNew: boo
 
   async function integrate() {
     setStatus({ kind: 'busy' });
-    const res = await fetch(`/api/admin/integrate/character/${id}`, { method: 'POST' });
-    const data = (await res.json().catch(() => ({}))) as { report?: Report; error?: string };
-    if (res.ok && data.report) {
+    try {
+      const data = await postJson<{ report?: Report }>(`/api/admin/integrate/character/${id}`);
+      if (!data.report) throw new Error('Réponse sans rapport');
       setStatus({ kind: 'ok', report: data.report });
       router.refresh();
-    } else {
-      setStatus({ kind: 'err', msg: data.error ?? 'Échec intégration' });
+    } catch (e) {
+      setStatus({ kind: 'err', msg: (e as Error).message });
     }
   }
 

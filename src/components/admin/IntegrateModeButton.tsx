@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { postJson } from '@/lib/admin/post-json';
 
 type Status = { kind: 'idle' | 'busy' | 'ok' | 'err'; msg?: string };
 
@@ -15,20 +16,17 @@ export function IntegrateModeButton({ modes }: { modes: Array<{ value: string; l
 
   async function integrate() {
     setStatus({ kind: 'busy' });
-    const res = await fetch(`/api/admin/integrate/monster-mode/${encodeURIComponent(mode)}`, {
-      method: 'POST',
-    });
-    const data = (await res.json().catch(() => ({}))) as {
-      report?: { ids: string[]; files: string[] };
-      error?: string;
-    };
-    if (res.ok && data.report) {
+    try {
+      const data = await postJson<{ report?: { ids: string[]; files: string[] } }>(
+        `/api/admin/integrate/monster-mode/${encodeURIComponent(mode)}`,
+      );
+      if (!data.report) throw new Error('Réponse sans rapport');
       setStatus({
         kind: 'ok',
         msg: `${data.report.ids.length} monstre(s) écrits (${data.report.files.join(', ')}) — committe via git.`,
       });
-    } else {
-      setStatus({ kind: 'err', msg: data.error ?? 'Échec écriture' });
+    } catch (e) {
+      setStatus({ kind: 'err', msg: (e as Error).message });
     }
   }
 

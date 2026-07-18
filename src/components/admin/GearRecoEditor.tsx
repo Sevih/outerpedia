@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import type { GearBuild, GearPick, SetCombo } from '@contracts';
 import type { GearOption } from '@/lib/admin/gear-options';
+import { postJson } from '@/lib/admin/post-json';
+import { type Keyed, rowKey, stripKey, withKey } from '@/lib/admin/keyed';
 
 const field =
   'w-full rounded-md border border-line bg-surface-base px-2 py-1 text-sm text-content focus:border-accent focus:outline-none';
@@ -125,7 +127,7 @@ export function GearRecoEditor({
   initial: GearBuild[];
   options: GearRecoOptions;
 }) {
-  const [builds, setBuilds] = useState<GearBuild[]>(initial);
+  const [builds, setBuilds] = useState<Keyed<GearBuild>[]>(() => initial.map(withKey));
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
 
   const patch = (i: number, b: Partial<GearBuild>) =>
@@ -136,7 +138,8 @@ export function GearRecoEditor({
     // Nettoyage : picks sans id et combos vides écartés ; une liste manuelle de
     // talismans identique à un preset est convertie en `$preset`.
     const clean = builds.map((b) => ({
-      ...b,
+      // `_key` est présentationnel : retiré avant sérialisation (spread `...b`).
+      ...stripKey(b),
       weapons: b.weapons?.filter((p) => p.id),
       amulets: b.amulets?.filter((p) => p.id),
       talismans: b.talismans
@@ -144,15 +147,11 @@ export function GearRecoEditor({
         : undefined,
       sets: b.sets?.filter((c) => c.preset || c.pieces?.length),
     }));
-    const res = await fetch(`/api/admin/curated/gear-reco/${charId}`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(clean),
-    });
-    if (res.ok) setStatus({ kind: 'ok', msg: 'Enregistré' });
-    else {
-      const data = (await res.json().catch(() => ({}))) as { errors?: string[] };
-      setStatus({ kind: 'err', msg: data.errors?.join(' ; ') ?? 'Échec écriture' });
+    try {
+      await postJson(`/api/admin/curated/gear-reco/${charId}`, clean);
+      setStatus({ kind: 'ok', msg: 'Enregistré' });
+    } catch (e) {
+      setStatus({ kind: 'err', msg: (e as Error).message });
     }
   }
 
@@ -163,7 +162,7 @@ export function GearRecoEditor({
       </h2>
 
       {builds.map((b, i) => (
-        <div key={i} className="border-line-subtle space-y-3 rounded-lg border p-3">
+        <div key={b._key} className="border-line-subtle space-y-3 rounded-lg border p-3">
           <div className="flex items-center gap-2">
             <input
               className={`${field} max-w-60 font-semibold`}
@@ -178,6 +177,7 @@ export function GearRecoEditor({
                 setBuilds((all) => {
                   const copy = structuredClone(all[i]);
                   copy.name = `${copy.name} (copie)`;
+                  copy._key = rowKey(); // clé neuve — sinon collision avec l'original
                   return [...all.slice(0, i + 1), copy, ...all.slice(i + 1)];
                 })
               }
@@ -313,7 +313,7 @@ export function GearRecoEditor({
         <button
           type="button"
           className={btn}
-          onClick={() => setBuilds((all) => [...all, { name: `Build ${all.length + 1}` }])}
+          onClick={() => setBuilds((all) => [...all, withKey({ name: `Build ${all.length + 1}` })])}
         >
           + Nouveau build
         </button>

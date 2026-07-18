@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import type { CharacterCurated, CuratedRole, SkillPriority, VideoRef } from '@contracts';
+import { postJson } from '@/lib/admin/post-json';
+import { rowKey } from '@/lib/admin/keyed';
 import { VideoCurator } from './VideoCurator';
 
 const ROLES: Array<'' | CuratedRole> = ['', 'dps', 'support', 'sustain'];
@@ -25,11 +27,11 @@ const label = 'text-xs font-semibold uppercase tracking-wide text-content-subtle
 
 type Status = { kind: 'idle' | 'ok' | 'err'; msg?: string };
 
-/** Une entrée « palier → valeur » (transStar → tier/rôle). */
-type TransRow = { star: string; value: string };
+/** Une entrée « palier → valeur » (transStar → tier/rôle). `_key` = clé React stable. */
+type TransRow = { star: string; value: string; _key: string };
 
 const toRows = (rec?: Record<string, string>): TransRow[] =>
-  Object.entries(rec ?? {}).map(([star, value]) => ({ star, value }));
+  Object.entries(rec ?? {}).map(([star, value]) => ({ star, value, _key: rowKey() }));
 const toMap = (rows: TransRow[]): Record<string, string> =>
   Object.fromEntries(rows.filter((r) => r.star && r.value).map((r) => [r.star, r.value]));
 
@@ -58,7 +60,7 @@ function TranscendMapEditor({
         <button
           type="button"
           className="text-accent text-xs hover:underline"
-          onClick={() => onChange([...rows, { star: '', value: valueOptions[0] }])}
+          onClick={() => onChange([...rows, { star: '', value: valueOptions[0], _key: rowKey() }])}
         >
           + palier
         </button>
@@ -69,7 +71,7 @@ function TranscendMapEditor({
         </p>
       ) : (
         rows.map((r, i) => (
-          <div key={i} className="flex items-center gap-2">
+          <div key={r._key} className="flex items-center gap-2">
             <select
               className={`${field} w-auto`}
               value={r.star}
@@ -161,16 +163,11 @@ export function CharacterCuratedEditor({
 
   async function save() {
     setStatus({ kind: 'idle' });
-    const res = await fetch(`/api/admin/curated/characters/${id}`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(build()),
-    });
-    if (res.ok) {
+    try {
+      await postJson(`/api/admin/curated/characters/${id}`, build());
       setStatus({ kind: 'ok', msg: 'Enregistré' });
-    } else {
-      const data = (await res.json().catch(() => ({}))) as { errors?: string[] };
-      setStatus({ kind: 'err', msg: data.errors?.join(' ; ') ?? 'Échec écriture' });
+    } catch (e) {
+      setStatus({ kind: 'err', msg: (e as Error).message });
     }
   }
 

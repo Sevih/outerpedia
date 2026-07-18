@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { EffectPillShell } from '@/components/character/EffectChips';
 import { renderGameColors } from '@/components/ui/GameText';
+import { postJson } from '@/lib/admin/post-json';
 
 /** Un buff CHIPABLE du kit, selon les tables. */
 export interface KitChip {
@@ -165,24 +166,27 @@ export function MonsterKitEditor({
       chipOwner[c.buff] = c.owner;
       for (const on of c.hiddenOn) chipHide[on]?.push(c.buff);
     }
-    const res = await fetch('/api/admin/curated/monster-skills', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        kitSkillIds: skills.map((s) => s.id),
-        chipOwner,
-        chipHide,
-        chipAdd: adds,
-      }),
-    });
-    const json = (await res.json()) as { ok: boolean; errors?: string[] };
-    setBusy(false);
-    if (!json.ok) {
-      setMessage(`Erreur : ${(json.errors ?? ['inconnue']).join(' ; ')}`);
-      return;
+    try {
+      const json = await postJson<{ ok: boolean; errors?: string[] }>(
+        '/api/admin/curated/monster-skills',
+        {
+          kitSkillIds: skills.map((s) => s.id),
+          chipOwner,
+          chipHide,
+          chipAdd: adds,
+        },
+      );
+      if (!json.ok) {
+        setMessage(`Erreur : ${(json.errors ?? ['inconnue']).join(' ; ')}`);
+        return;
+      }
+      setMessage('Enregistré — data/curated/monster-skills.json (à committer via git).');
+      router.refresh();
+    } catch (e) {
+      setMessage(`Erreur : ${(e as Error).message}`);
+    } finally {
+      setBusy(false);
     }
-    setMessage('Enregistré — data/curated/monster-skills.json (à committer via git).');
-    router.refresh();
   };
 
   return (

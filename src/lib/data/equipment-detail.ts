@@ -27,6 +27,7 @@ import {
   fillPlaceholders,
   resolvePassives,
   slugifyEquipment,
+  type EEView,
   type GearFamily,
   type ResolvedPassive,
   type ResolvedSource,
@@ -570,9 +571,19 @@ function setModel(slug: string, lang: Lang): DetailModel | null {
 }
 
 function eeModel(slug: string, lang: Lang): DetailModel | null {
-  const views = getEEViews();
-  const view = views.find((e) => slugifyEquipment(e.name.en) === slug);
-  if (!view) return null;
+  const view = getEEViews().find((e) => slugifyEquipment(e.name.en) === slug);
+  return view ? eeModelForView(view, lang) : null;
+}
+
+/**
+ * Modèle de page EE à partir d'une vue DÉJÀ résolue — évite le `.find` par slug
+ * (et surtout la re-matérialisation de toutes les familles de `getEquipmentDetail`)
+ * quand l'appelant tient déjà la vue. Utilisé par le contrôle V2 des EE, qui
+ * itère les ~90 vues : le construire par vue rend le rapport O(n) au lieu de
+ * O(n²) (cf. audit 2026-07-17).
+ */
+export function eeModelForView(view: EEView, lang: Lang): DetailModel {
+  const slug = slugifyEquipment(view.name.en);
   const c = getCharacter(view.characterId);
   const curatedChars = loadCuratedCharacters();
   const eeItem = EE_ITEMS[view.itemId];

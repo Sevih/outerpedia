@@ -6,6 +6,25 @@
 
 ## 2026-07-18
 
+- **Robustesse des éditeurs admin (4 bugs de l'audit 17/07)** :
+  - _13 `fetch` sans `try/catch`_ → helper partagé `src/lib/admin/post-json.ts`
+    (`postJson` : parse tolérant, jette le message serveur `error`/`errors[]`,
+    supporte le contrat `200 {ok:false}`). Les 13 composants enveloppés en
+    `try/catch`(+`finally` sur l'état busy séparé) — plus de bouton figé sur
+    erreur réseau. `MonsterActions` (la référence) consomme le helper au lieu
+    de son `post` local dupliqué.
+  - _Listes keyées par index_ → util `src/lib/admin/keyed.ts`
+    (`rowKey`/`withKey`/`stripKey`, `_key` synthétique retiré avant
+    sérialisation) sur Banners, PromoCodes (+ récompenses), CharacterCurated
+    (paliers), Editorial (pros/cons + groupes), GearPresets, GearReco (dont le
+    piège `structuredClone` de « Dupliquer »). Supprimer une ligne ne transfère
+    plus la recherche du picker à la voisine.
+  - _`eeReport` O(n²)_ → `eeModelForView(view)` exposé dans `equipment-detail`,
+    modèle EE bâti depuis la vue en main (fin des re-matérialisations de
+    familles + `.find` par slug ; `loadCuratedEffects` hissé) — O(n).
+  - _Caches `monster-store`_ (`siteIdsCache`, `tooltipNamesCache`) passés au
+    régime `{stamp}` établi : sentinelle `tablesStamp(['TextSystem'])`
+    (+ `fileStamp` du curé équipement pour `siteMonsterIds`).
 - **Guide « Daily Stamina Burn » porté** (economy, ordre 3) : contenu verbatim
   V2 (labels 5 langues, roadmap 5 priorités, suggestions hors endgame, pro
   tips) sur les primitives éditoriales ; les noms des boss irréguliers

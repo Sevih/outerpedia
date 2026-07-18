@@ -31,6 +31,7 @@
       `CharactersSidebar` vs `ExtractorSidebar` sont quasi identiques (fusionner
       sur ExtractorSidebar, 9 usages), `CharacterSwitch`/`MonsterSwitch`
       identiques au chemin près, `CharacterPicker`/`ItemPicker` à factoriser.
+- [ ] prevoir les editeurs pour update les guides
 
 ## 📄 Pages manquantes (inventaire layout du 2026-07-17)
 
@@ -80,9 +81,9 @@
       (`curatedKeySides`), `datagen/assets/manifest.ts:54-63` (`faceIconIndex`),
       `datagen/generators/equipment.ts:444` (`groupKidsCache` — contraste avec
       `curatedKeyCache` l.522 du même fichier), `datagen/generators/goods.ts:40` + `recruit.ts:155`, `src/lib/data/gear-reco.ts:142-157` (`famByMember`,
-      contredit l'en-tête du fichier), `src/lib/data/rewards.ts:83`,
-      `src/lib/admin/monster-store.ts:60,176`. Stamper chacun (modèle
-      `fileStamp`/`tablesStamp`) ou documenter la limite.
+      contredit l'en-tête du fichier), `src/lib/data/rewards.ts:83`. Stamper
+      chacun (modèle `fileStamp`/`tablesStamp`) ou documenter la limite.
+      (`src/lib/admin/monster-store.ts` traité le 18/07 — cf. DONE.)
 
 ### UI publique
 
@@ -101,20 +102,8 @@
 
 ### Admin (dev-only mais irritant)
 
-- [ ] 13 composants admin sans try/catch autour des `fetch` (AcceptTargetButton,
-      IntegrateCharacterButton, IntegrateModeButton, EffectHiddenToggle,
-      MonsterKitEditor, BannersEditor, CharacterCuratedEditor,
-      EffectCuratedEditor, GearPresetsEditor, GearRecoEditor, ItemCuratedEditor,
-      PromoCodesEditor, RegenFromV2Button) : une erreur réseau bloque les
-      boutons en « busy » définitif. Généraliser le pattern de
-      `MonsterActions.tsx:58-79` via un helper `postJson()` partagé.
-- [ ] Listes éditables keyées par index avec enfants à état (BannersEditor:77,
-      PromoCodesEditor:97,132, EditorialEditor, GearPresetsEditor, GearRecoEditor,
-      CharacterCuratedEditor:71) : supprimer la ligne _i_ transfère la recherche/
-      dropdown à la suivante. Keyer par id stable (`crypto.randomUUID()` à l'ajout).
-- [ ] `src/lib/admin/equipment-control.ts:199` : `eeReport` O(n²) — ~90 EE ×
-      re-matérialisation complète de toutes les familles (chacune relisant le
-      curé au FS). Construire un index slug→modèle une fois.
+> Les 3 items traités le 18/07 (helper `postJson`, keying stable, `eeReport`
+> O(n)) — cf. DONE.
 
 ### Datagen — divers
 

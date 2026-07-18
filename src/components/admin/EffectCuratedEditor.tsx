@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { EffectCurated, LangDict, LocalizedText } from '@contracts';
+import { postJson } from '@/lib/admin/post-json';
 import { img } from '@/lib/images';
 
 const LANGS = ['en', 'fr', 'jp', 'kr', 'zh'] as const;
@@ -74,15 +75,11 @@ export function EffectCuratedEditor({
       setStatus({ kind: 'err', msg: 'Une création doit au moins avoir un nom EN.' });
       return;
     }
-    const res = await fetch(`/api/admin/curated/effects/${id}`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    if (res.ok) setStatus({ kind: 'ok', msg: 'Enregistré' });
-    else {
-      const data = (await res.json().catch(() => ({}))) as { errors?: string[] };
-      setStatus({ kind: 'err', msg: data.errors?.join(' ; ') ?? 'Échec écriture' });
+    try {
+      await postJson(`/api/admin/curated/effects/${id}`, body);
+      setStatus({ kind: 'ok', msg: 'Enregistré' });
+    } catch (e) {
+      setStatus({ kind: 'err', msg: (e as Error).message });
     }
   }
 

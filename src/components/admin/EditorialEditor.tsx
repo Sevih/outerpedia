@@ -8,6 +8,7 @@
  */
 import { useState } from 'react';
 import type { CharacterCurated } from '@contracts';
+import { type Keyed, stripKey, withKey } from '@/lib/admin/keyed';
 
 type LocalizedText = Partial<Record<'en' | 'jp' | 'kr' | 'zh' | 'fr', string>>;
 interface SynergyGroup {
@@ -31,20 +32,24 @@ function TextListEditor({
   onChange,
 }: {
   title: string;
-  items: LocalizedText[];
+  items: Keyed<LocalizedText>[];
   lang: L;
-  onChange: (next: LocalizedText[]) => void;
+  onChange: (next: Keyed<LocalizedText>[]) => void;
 }) {
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <p className="text-content-strong text-sm font-semibold">{title}</p>
-        <button type="button" className={btn} onClick={() => onChange([...items, { en: '' }])}>
+        <button
+          type="button"
+          className={btn}
+          onClick={() => onChange([...items, withKey({ en: '' })])}
+        >
           + entrée
         </button>
       </div>
       {items.map((item, i) => (
-        <div key={i} className="flex items-start gap-2">
+        <div key={item._key} className="flex items-start gap-2">
           <textarea
             className={`${input} min-h-9 font-mono text-xs`}
             rows={2}
@@ -90,9 +95,15 @@ export function EditorialEditor({
   show?: 'all' | 'prosCons' | 'synergies';
 }) {
   const [lang, setLang] = useState<L>('en');
-  const [pros, setPros] = useState<LocalizedText[]>(curated.prosCons?.pros ?? []);
-  const [cons, setCons] = useState<LocalizedText[]>(curated.prosCons?.cons ?? []);
-  const [synergies, setSynergies] = useState<SynergyGroup[]>(curated.synergies ?? []);
+  const [pros, setPros] = useState<Keyed<LocalizedText>[]>(() =>
+    (curated.prosCons?.pros ?? []).map(withKey),
+  );
+  const [cons, setCons] = useState<Keyed<LocalizedText>[]>(() =>
+    (curated.prosCons?.cons ?? []).map(withKey),
+  );
+  const [synergies, setSynergies] = useState<Keyed<SynergyGroup>[]>(() =>
+    (curated.synergies ?? []).map(withKey),
+  );
   const [state, setState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
 
@@ -106,13 +117,15 @@ export function EditorialEditor({
   async function save() {
     setState('saving');
     setError(null);
-    const cleanTexts = (list: LocalizedText[]) =>
-      list.filter((t) => Object.values(t).some((v) => v?.trim()));
+    // `stripKey` d'abord : `_key` fuirait au payload ET fausserait le filtre
+    // (`Object.values` verrait la clé comme un contenu non vide).
+    const cleanTexts = (list: Keyed<LocalizedText>[]): LocalizedText[] =>
+      list.map(stripKey).filter((t) => Object.values(t).some((v) => v?.trim()));
     const body: CharacterCurated = {
       ...curated,
       prosCons: { pros: cleanTexts(pros), cons: cleanTexts(cons) },
       synergies: synergies
-        .map((g) => ({ ...g, heroes: g.heroes.map(resolveHero).filter(Boolean) }))
+        .map((g) => ({ ...stripKey(g), heroes: g.heroes.map(resolveHero).filter(Boolean) }))
         .filter((g) => g.heroes.length),
     };
     if (!body.prosCons?.pros?.length && !body.prosCons?.cons?.length) delete body.prosCons;
@@ -166,13 +179,13 @@ export function EditorialEditor({
             <button
               type="button"
               className={btn}
-              onClick={() => setSynergies([...synergies, { heroes: [''] }])}
+              onClick={() => setSynergies([...synergies, withKey({ heroes: [''] })])}
             >
               + groupe
             </button>
           </div>
           {synergies.map((g, gi) => (
-            <div key={gi} className="border-line-subtle space-y-2 rounded-lg border p-3">
+            <div key={g._key} className="border-line-subtle space-y-2 rounded-lg border p-3">
               <div className="flex items-start gap-2">
                 <div className="flex-1 space-y-1">
                   <p className="text-content-subtle text-xs uppercase">
