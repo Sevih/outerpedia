@@ -1,13 +1,4 @@
 {
-  "Bounty%20Hunter%20Ticket": {
-    "name": {
-      "en": "Bounty Hunter Ticket(s)",
-      "jp": "指名手配チケット",
-      "kr": "현상 수배 티켓",
-      "zh": "悬赏通缉券"
-    },
-    "icon": "TI_Item_Ticket_Gold"
-  },
   "Gems": {
     "name": {
       "en": "Gems",
@@ -115,6 +106,13 @@
       "zh": "可通过季节招募获取<color=#cc5656>限定积分</color>，并用于指定招募。\\n<color=#cc5656>限定积分在招募期结束后仍会保留。</color>"
     },
     "icon": "TI_Item_Mileage_Seasonal"
+  },
+  "SYS_ASSET_RESEARCH": {
+    "icon": "CM_Icon_Support_Survey"
+  },
+  "SYS_ASSET_TICKET_EXP": {
+    "hidden": true,
+    "note": "Doublon legacy de SYS_ASSET_TICKET_GOLD (même nom/desc « Frog Hall Ticket ») : aucun donjon ne le consomme (DungeonTemplet.RequireTicket = TICKET_GOLD). Masqué pour que {I-I/Frog Hall Ticket} résolve sur le ticket vivant."
   },
   "SYS_EQUIP_GACHA_TITLE": {
     "name": {

@@ -19561,19 +19561,6 @@
     "subType": "box_type_random",
     "star": 0
   },
-  "Bounty%20Hunter%20Ticket": {
-    "kind": "custom",
-    "name": {
-      "en": "Bounty Hunter Ticket(s)",
-      "jp": "指名手配チケット",
-      "kr": "현상 수배 티켓",
-      "zh": "悬赏通缉券"
-    },
-    "icon": "TI_Item_Ticket_Gold",
-    "grade": "normal",
-    "type": "custom",
-    "star": 0
-  },
   "COSTUME_1": {
     "kind": "costume",
     "name": {
@@ -22592,7 +22579,7 @@
       "kr": "다양한 모험에 도전하여 입수한 포인트입니다.\\n조사지원소에서 상품으로 교환할 수 있습니다.\\n\\n모험 하드 난이도 / 비천의 탑 / 마왕의 유적 : 무한 회랑에서 입수하실 수 있습니다.",
       "zh": "通过挑战各种冒险获得的点数。\\n可在调查支援所兑换商品。\\n\\n获取场所：故事(困难)／飞天之塔／魔王遗迹(无限回廊)"
     },
-    "icon": "",
+    "icon": "CM_Icon_Support_Survey",
     "grade": "normal",
     "type": "goods",
     "star": 0
@@ -22614,7 +22601,8 @@
     "icon": "TI_Item_Ticket_Exp",
     "grade": "normal",
     "type": "goods",
-    "star": 0
+    "star": 0,
+    "hidden": true
   },
   "SYS_ASSET_TICKET_FARMING": {
     "kind": "goods",

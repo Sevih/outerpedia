@@ -2,8 +2,8 @@
  * Libellés du guide « Daily Stamina » — transplantés VERBATIM de la V2
  * (index.tsx, oracle de contenu). Le titre vit dans meta.json (le H2 en page
  * « Roadmap » de la V2 suit le pattern H1-meta des autres guides) ; les noms
- * des boss irréguliers DÉRIVENT de monsters.json — sauf l'Irregular Queen,
- * dont le nom est VIDE dans les tables du jeu (repli éditorial ci-dessous).
+ * des boss irréguliers DÉRIVENT de monsters.json (fiches pursuit 512020xx,
+ * les mêmes que les guides irregular-extermination — noms complets 4 langues).
  */
 import type { LocalizedText } from '@contracts';
 
@@ -225,23 +225,16 @@ export const LABELS = {
     zh: '：体力奖励保留约6天。让体力条自然恢复，需要时再领取。',
     fr: ' : Les récompenses de Stamina restent environ 6 jours. Laissez votre barre se régénérer naturellement, puis récupérez-les selon vos besoins.',
   },
+  // « Bounty Hunter » (V2) n'existe plus : le mode actuel est le Hypnotic Frog
+  // Hall (SYS_GOLD_DUNGEON), qui consomme le {I-I/Frog Hall Ticket} officiel.
   body_noteOtherDailies: {
-    en: 'Note: Other dailies like Bounty Hunter are also valuable, but they use {I-I/Bounty Hunter Ticket(s)}, not {I-I/Stamina}.',
-    jp: '注意：バウンティハンターなど他のデイリーも価値がありますが、{I-I/Stamina}ではなく{I-I/Bounty Hunter Ticket(s)}を使用します。',
-    kr: '참고: 현상금 사냥꾼 등 다른 일일 과제도 가치 있지만, {I-I/Stamina}가 아닌 {I-I/Bounty Hunter Ticket(s)}을 사용합니다.',
-    zh: '注意：赏金猎人等其他每日任务也很有价值，但使用{I-I/Bounty Hunter Ticket(s)}而非{I-I/Stamina}。',
-    fr: "Note : D'autres dailies comme Bounty Hunter sont aussi intéressantes, mais elles utilisent des {I-I/Bounty Hunter Ticket(s)} et non de la {I-I/Stamina}.",
+    en: 'Note: Other dailies like the Hypnotic Frog Hall are also valuable, but they use {I-I/Frog Hall Ticket}, not {I-I/Stamina}.',
+    jp: '注意：催眠カエルの殿堂など他のデイリーも価値がありますが、{I-I/Stamina}ではなく{I-I/Frog Hall Ticket}を使用します。',
+    kr: '참고: 최면 개구리의 전당 등 다른 일일 과제도 가치 있지만, {I-I/Stamina}가 아닌 {I-I/Frog Hall Ticket}을 사용합니다.',
+    zh: '注意：催眠青蛙殿堂等其他每日任务也很有价值，但使用{I-I/Frog Hall Ticket}而非{I-I/Stamina}。',
+    fr: "Note : D'autres dailies comme le Hypnotic Frog Hall sont aussi intéressantes, mais elles utilisent des {I-I/Frog Hall Ticket} et non de la {I-I/Stamina}.",
   },
 } as const satisfies Record<string, LocalizedText>;
-
-/** Repli éditorial : nom V2 de l'Irregular Queen (vide dans les tables). */
-export const IRREGULAR_QUEEN_NAME: LocalizedText = {
-  en: 'Irregular Queen',
-  jp: 'イレギュラークイーン',
-  kr: '이레귤러 퀸',
-  zh: '异型怪女王',
-  fr: 'Irregular Queen',
-};
 
 export interface SweepRow {
   name: LocalizedText;

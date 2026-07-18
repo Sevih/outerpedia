@@ -4,9 +4,9 @@
  *
  * Server Component : contenu verbatim V2 (labels.ts) sur les primitives
  * éditoriales ; parse-text STRICT (une référence d'item morte casse le build).
- * Les noms des boss irréguliers DÉRIVENT de monsters.json (la V2 les codait
- * en dur dans 5 langues) — sauf l'Irregular Queen, au nom vide dans les
- * tables du jeu (repli éditorial).
+ * Les noms des boss irréguliers DÉRIVENT de monsters.json via les fiches
+ * pursuit 512020xx (celles des guides irregular-extermination — noms complets,
+ * contrairement aux fiches 40xxxxx dont la Queen a un nom vide).
  */
 import type { ReactNode } from 'react';
 import type { Lang } from '@/lib/i18n/config';
@@ -18,14 +18,14 @@ import { img } from '@/lib/images';
 import { InlineIcon } from '@/components/inline/InlineIcon';
 import { Callout, Prose } from '@/components/guides/editorial/blocks';
 import type { LocalizedText } from '@contracts';
-import { IRREGULAR_QUEEN_NAME, LABELS, SWEEP_OPTIONAL, SWEEP_ROWS, type SweepRow } from './labels';
+import { LABELS, SWEEP_OPTIONAL, SWEEP_ROWS, type SweepRow } from './labels';
 
 const WHERE = 'daily-stamina';
 
 /** Boss irréguliers cités (les collections d'Irregular gear qu'ils droppent). */
 const GEAR_SOURCES: { collection: string; bossIds: string[] }[] = [
-  { collection: 'Briareos Collection', bossIds: ['4013071', '4013072'] },
-  { collection: 'Gorgon Collection', bossIds: ['4014003', '4089001'] },
+  { collection: 'Briareos Collection', bossIds: ['51202001', '51202002'] },
+  { collection: 'Gorgon Collection', bossIds: ['51202003', '51202004'] },
 ];
 
 /** Pastille de coût en stamina (le chip ambré V2). */
@@ -59,16 +59,13 @@ export default async function DailyStaminaGuide({ lang }: { lang: Lang }) {
   const L = (m: LocalizedText): string => lRec(m, lang) || m.en || '';
   const P = (m: LocalizedText): ReactNode => parseText(L(m), ctx);
 
-  /** Mention inline d'un boss : vignette + nom DÉRIVÉ (repli éditorial si les
-   *  tables n'en donnent pas — Irregular Queen). Id inconnu = build cassé. */
+  /** Mention inline d'un boss : vignette + nom DÉRIVÉ. Id inconnu ou fiche
+   *  sans nom = build cassé (signal qu'une table a bougé). */
   const boss = (id: string): ReactNode => {
     const monster = getMonster(id);
     if (!monster) throw new Error(`${WHERE} : monstre inconnu « ${id} »`);
-    const name =
-      lRec(monster.name, lang) ||
-      monster.name.en ||
-      (id === '4089001' ? L(IRREGULAR_QUEEN_NAME) : '');
-    if (!name) throw new Error(`${WHERE} : boss « ${id} » sans nom (ajouter un repli éditorial)`);
+    const name = lRec(monster.name, lang) || monster.name.en;
+    if (!name) throw new Error(`${WHERE} : boss « ${id} » sans nom dans les tables`);
     return <InlineIcon icon={monsterIconSrc(monster)} label={name} size={28} underline={false} />;
   };
 
