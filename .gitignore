@@ -26,6 +26,9 @@ next-env.d.ts
 # Tests / couverture
 /coverage
 
+# Rapports d'audit Unlighthouse (régénérés à la demande)
+/.unlighthouse/
+
 # Logs
 *.log
 npm-debug.log*
