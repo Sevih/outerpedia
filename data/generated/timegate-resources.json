@@ -1,0 +1,758 @@
+{
+  "asOf": "2026-08-01",
+  "tabs": [
+    {
+      "key": "books",
+      "items": [
+        {
+          "id": "20201",
+          "name": {
+            "en": "Basic Skill Manual",
+            "jp": "スキル教本：はじまり編",
+            "kr": "초급 스킬 교본",
+            "zh": "初级技能教材"
+          },
+          "icon": "TI_Item_Growth_Book_01",
+          "iconKind": "item",
+          "grade": "magic",
+          "sources": [
+            {
+              "sourceKey": "irregular-infiltration-floor-3",
+              "origin": "cured",
+              "type": "mission",
+              "monthly": 28
+            },
+            {
+              "sourceKey": "arena-weekly-play",
+              "origin": "cured",
+              "type": "mission",
+              "weekly": 5
+            },
+            {
+              "sourceKey": "weekly-mission",
+              "origin": "cured",
+              "type": "mission",
+              "weekly": 1
+            },
+            {
+              "sourceKey": "guild",
+              "origin": "shop",
+              "type": "guild",
+              "weekly": 3
+            },
+            {
+              "sourceKey": "general",
+              "origin": "shop",
+              "type": "shop",
+              "weekly": 5
+            },
+            {
+              "sourceKey": "tower",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 25
+            }
+          ],
+          "totals": {
+            "weekly": 14,
+            "monthly": 53,
+            "grandMonthly": 109
+          }
+        },
+        {
+          "id": "20202",
+          "name": {
+            "en": "Intermediate Skill Manual",
+            "jp": "スキル教本：応用編",
+            "kr": "중급 스킬 교본",
+            "zh": "中级技能教材"
+          },
+          "icon": "TI_Item_Growth_Book_02",
+          "iconKind": "item",
+          "grade": "rare",
+          "sources": [
+            {
+              "sourceKey": "irregular-infiltration-floor-3",
+              "origin": "cured",
+              "type": "mission",
+              "monthly": 17
+            },
+            {
+              "sourceKey": "arena-weekly-play",
+              "origin": "cured",
+              "type": "mission",
+              "weekly": 3
+            },
+            {
+              "sourceKey": "weekly-mission",
+              "origin": "cured",
+              "type": "mission",
+              "weekly": 1
+            },
+            {
+              "sourceKey": "guild",
+              "origin": "shop",
+              "type": "guild",
+              "weekly": 2
+            },
+            {
+              "sourceKey": "general",
+              "origin": "shop",
+              "type": "shop",
+              "weekly": 2
+            },
+            {
+              "sourceKey": "stars",
+              "origin": "shop",
+              "type": "shop",
+              "weekly": 2
+            },
+            {
+              "sourceKey": "tower",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 15
+            }
+          ],
+          "totals": {
+            "weekly": 10,
+            "monthly": 32,
+            "grandMonthly": 72
+          }
+        },
+        {
+          "id": "20203",
+          "name": {
+            "en": "Professional Skill Manual",
+            "jp": "スキル教本：専門家編",
+            "kr": "전문 스킬 교본",
+            "zh": "专家技能教材"
+          },
+          "icon": "TI_Item_Growth_Book_03",
+          "iconKind": "item",
+          "grade": "unique",
+          "sources": [
+            {
+              "sourceKey": "irregular-infiltration-floor-3",
+              "origin": "cured",
+              "type": "mission",
+              "monthly": 3
+            },
+            {
+              "sourceKey": "arena-weekly-play",
+              "origin": "cured",
+              "type": "mission",
+              "weekly": 1
+            },
+            {
+              "sourceKey": "guild",
+              "origin": "shop",
+              "type": "guild",
+              "weekly": 1
+            },
+            {
+              "sourceKey": "arena",
+              "origin": "shop",
+              "type": "shop",
+              "weekly": 1
+            },
+            {
+              "sourceKey": "pvp-real",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 5
+            },
+            {
+              "sourceKey": "stars",
+              "origin": "shop",
+              "type": "shop",
+              "weekly": 1
+            },
+            {
+              "sourceKey": "survey",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 5
+            },
+            {
+              "sourceKey": "tower",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 5
+            }
+          ],
+          "totals": {
+            "weekly": 4,
+            "monthly": 18,
+            "grandMonthly": 34
+          }
+        }
+      ]
+    },
+    {
+      "key": "transistones",
+      "items": [
+        {
+          "id": "21202",
+          "name": {
+            "en": "Transistone (Total)",
+            "jp": "トランストーン(全体)",
+            "kr": "트랜스톤(전체)",
+            "zh": "转换石 (全部)"
+          },
+          "icon": "TI_Item_Option_Change_01",
+          "iconKind": "item",
+          "grade": "unique",
+          "sources": [
+            {
+              "sourceKey": "irregular-extermination-points",
+              "origin": "cured",
+              "type": "mission",
+              "monthly": 12
+            },
+            {
+              "sourceKey": "irregular-infiltration-floor-3",
+              "origin": "cured",
+              "type": "mission",
+              "monthly": 9
+            },
+            {
+              "sourceKey": "pvp-real",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 5
+            },
+            {
+              "sourceKey": "stars",
+              "origin": "shop",
+              "type": "shop",
+              "weekly": 4
+            },
+            {
+              "sourceKey": "survey",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 2
+            },
+            {
+              "sourceKey": "worldboss",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 2
+            },
+            {
+              "sourceKey": "tower",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 1
+            },
+            {
+              "sourceKey": "joint",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 1
+            },
+            {
+              "sourceKey": "kates-workshop",
+              "origin": "cured",
+              "type": "craft",
+              "monthly": 3
+            }
+          ],
+          "totals": {
+            "weekly": 4,
+            "monthly": 35,
+            "grandMonthly": 51
+          }
+        },
+        {
+          "id": "21201",
+          "name": {
+            "en": "Transistone (Individual)",
+            "jp": "トランストーン(選択)",
+            "kr": "트랜스톤(개별)",
+            "zh": "转换石 (单个)"
+          },
+          "icon": "TI_Item_Option_Change_02",
+          "iconKind": "item",
+          "grade": "unique",
+          "sources": [
+            {
+              "sourceKey": "irregular-extermination-points",
+              "origin": "cured",
+              "type": "mission",
+              "monthly": 12
+            },
+            {
+              "sourceKey": "irregular-infiltration-floor-3",
+              "origin": "cured",
+              "type": "mission",
+              "monthly": 9
+            },
+            {
+              "sourceKey": "pvp-real",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 3
+            },
+            {
+              "sourceKey": "stars",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 4
+            },
+            {
+              "sourceKey": "survey",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 2
+            },
+            {
+              "sourceKey": "worldboss",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 2
+            },
+            {
+              "sourceKey": "tower",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 1
+            },
+            {
+              "sourceKey": "joint",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 1
+            },
+            {
+              "sourceKey": "kates-workshop",
+              "origin": "cured",
+              "type": "craft",
+              "monthly": 3
+            }
+          ],
+          "totals": {
+            "weekly": 0,
+            "monthly": 37,
+            "grandMonthly": 37
+          }
+        }
+      ]
+    },
+    {
+      "key": "special",
+      "items": [
+        {
+          "id": "22031",
+          "name": {
+            "en": "Blue Stardust",
+            "jp": "ブルースターダスト",
+            "kr": "블루 스타 더스트",
+            "zh": "蓝色星尘"
+          },
+          "icon": "TI_Talisman_Growth_Enhance_01",
+          "iconKind": "item",
+          "grade": "unique",
+          "sources": [
+            {
+              "sourceKey": "irregular-extermination-points",
+              "origin": "cured",
+              "type": "mission",
+              "monthly": 150
+            },
+            {
+              "sourceKey": "stars",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 50
+            },
+            {
+              "sourceKey": "kates-workshop",
+              "origin": "cured",
+              "type": "craft",
+              "weekly": 70
+            }
+          ],
+          "totals": {
+            "weekly": 70,
+            "monthly": 200,
+            "grandMonthly": 480
+          }
+        },
+        {
+          "id": "22033",
+          "name": {
+            "en": "Purple Stardust",
+            "jp": "パープルスターダスト",
+            "kr": "퍼플 스타 더스트",
+            "zh": "紫色星尘"
+          },
+          "icon": "TI_Talisman_Growth_Enhance_02",
+          "iconKind": "item",
+          "grade": "unique",
+          "sources": [
+            {
+              "sourceKey": "irregular-extermination-points",
+              "origin": "cured",
+              "type": "mission",
+              "monthly": 300
+            },
+            {
+              "sourceKey": "singularity-rank",
+              "origin": "cured",
+              "type": "mission",
+              "weekly": 320
+            },
+            {
+              "sourceKey": "stars",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 50
+            },
+            {
+              "sourceKey": "kates-workshop",
+              "origin": "cured",
+              "type": "craft",
+              "weekly": 10,
+              "costItem": {
+                "id": "22031",
+                "name": {
+                  "en": "Blue Stardust",
+                  "jp": "ブルースターダスト",
+                  "kr": "블루 스타 더스트",
+                  "zh": "蓝色星尘"
+                },
+                "icon": "TI_Talisman_Growth_Enhance_01",
+                "grade": "unique"
+              },
+              "costAmount": 30
+            }
+          ],
+          "totals": {
+            "weekly": 330,
+            "monthly": 350,
+            "grandMonthly": 1670
+          }
+        },
+        {
+          "id": "22030",
+          "name": {
+            "en": "Blue Memory Stone",
+            "jp": "ブルーメモリーストーン",
+            "kr": "블루 메모리 스톤",
+            "zh": "蓝色记忆石"
+          },
+          "icon": "TI_EX_Equip_Growth_Enhance_01",
+          "iconKind": "item",
+          "grade": "unique",
+          "sources": [
+            {
+              "sourceKey": "irregular-extermination-points",
+              "origin": "cured",
+              "type": "mission",
+              "monthly": 150
+            },
+            {
+              "sourceKey": "singularity-daily-run",
+              "origin": "cured",
+              "type": "mission",
+              "weekly": 20
+            },
+            {
+              "sourceKey": "stars",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 50
+            },
+            {
+              "sourceKey": "kates-workshop",
+              "origin": "cured",
+              "type": "craft",
+              "weekly": 70
+            }
+          ],
+          "totals": {
+            "weekly": 90,
+            "monthly": 200,
+            "grandMonthly": 560
+          }
+        },
+        {
+          "id": "22032",
+          "name": {
+            "en": "Purple Memory Stone",
+            "jp": "パープルメモリーストーン",
+            "kr": "퍼플 메모리 스톤",
+            "zh": "紫色记忆石"
+          },
+          "icon": "TI_EX_Equip_Growth_Enhance_02",
+          "iconKind": "item",
+          "grade": "unique",
+          "sources": [
+            {
+              "sourceKey": "irregular-extermination-points",
+              "origin": "cured",
+              "type": "mission",
+              "monthly": 300
+            },
+            {
+              "sourceKey": "singularity-rank",
+              "origin": "cured",
+              "type": "mission",
+              "weekly": 320
+            },
+            {
+              "sourceKey": "stars",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 50
+            },
+            {
+              "sourceKey": "kates-workshop",
+              "origin": "cured",
+              "type": "craft",
+              "weekly": 10,
+              "costItem": {
+                "id": "22030",
+                "name": {
+                  "en": "Blue Memory Stone",
+                  "jp": "ブルーメモリーストーン",
+                  "kr": "블루 메모리 스톤",
+                  "zh": "蓝色记忆石"
+                },
+                "icon": "TI_EX_Equip_Growth_Enhance_01",
+                "grade": "unique"
+              },
+              "costAmount": 30
+            }
+          ],
+          "totals": {
+            "weekly": 330,
+            "monthly": 350,
+            "grandMonthly": 1670
+          }
+        }
+      ]
+    },
+    {
+      "key": "singularity-gear",
+      "items": [
+        {
+          "id": "25001",
+          "name": {
+            "en": "High-Precision Chip",
+            "jp": "高精度チップ",
+            "kr": "고정밀 칩",
+            "zh": "高精度芯片"
+          },
+          "icon": "TI_Equip_Monad_Growth_Enhance_01",
+          "iconKind": "item",
+          "grade": "unique",
+          "sources": [
+            {
+              "sourceKey": "singularity-rank",
+              "origin": "cured",
+              "type": "mission",
+              "weekly": 320
+            },
+            {
+              "sourceKey": "singularity-daily-run",
+              "origin": "cured",
+              "type": "mission",
+              "weekly": 160
+            },
+            {
+              "sourceKey": "singularity-daily-ranking",
+              "origin": "cured",
+              "type": "mission",
+              "weeklyRange": [20, 240]
+            }
+          ],
+          "totals": {
+            "weekly": 480,
+            "monthly": 0,
+            "grandMonthly": 1920
+          }
+        },
+        {
+          "id": "25002",
+          "name": {
+            "en": "Reload Cartridge",
+            "jp": "リロードカートリッジ",
+            "kr": "리로드 카트리지",
+            "zh": "换弹匣"
+          },
+          "icon": "TI_Equip_Monad_Growth_Enhance_02",
+          "iconKind": "item",
+          "grade": "unique",
+          "sources": [
+            {
+              "sourceKey": "singularity-daily-run",
+              "origin": "cured",
+              "type": "mission",
+              "weekly": 200
+            },
+            {
+              "sourceKey": "singularity-daily-ranking",
+              "origin": "cured",
+              "type": "mission",
+              "weeklyRange": [40, 160]
+            }
+          ],
+          "totals": {
+            "weekly": 200,
+            "monthly": 0,
+            "grandMonthly": 800
+          }
+        }
+      ]
+    },
+    {
+      "key": "glunite",
+      "items": [
+        {
+          "id": "21107",
+          "name": {
+            "en": "Refined Glunite",
+            "jp": "精製されたグルーナイト",
+            "kr": "정제된 글루나이트",
+            "zh": "精炼格鲁矿石"
+          },
+          "icon": "TI_Equipment_Growth02",
+          "iconKind": "item",
+          "grade": "unique",
+          "sources": [
+            {
+              "sourceKey": "stars",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 1
+            },
+            {
+              "sourceKey": "survey",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 5
+            },
+            {
+              "sourceKey": "joint",
+              "origin": "shop",
+              "type": "shop",
+              "monthly": 1
+            }
+          ],
+          "totals": {
+            "weekly": 0,
+            "monthly": 7,
+            "grandMonthly": 7
+          }
+        },
+        {
+          "id": "21127",
+          "name": {
+            "en": "Armor Glunite",
+            "jp": "アーマーグルーナイト",
+            "kr": "아머 글루나이트",
+            "zh": "装甲格鲁矿石"
+          },
+          "icon": "TI_Equipment_Growth03",
+          "iconKind": "item",
+          "grade": "unique",
+          "sources": [
+            {
+              "sourceKey": "irregular-extermination-points",
+              "origin": "cured",
+              "type": "mission",
+              "monthly": 9
+            },
+            {
+              "sourceKey": "joint",
+              "origin": "shop",
+              "type": "shop",
+              "weekly": 1
+            },
+            {
+              "sourceKey": "kates-workshop",
+              "origin": "cured",
+              "type": "craft",
+              "weekly": 4
+            }
+          ],
+          "totals": {
+            "weekly": 5,
+            "monthly": 9,
+            "grandMonthly": 29
+          }
+        },
+        {
+          "id": "21106",
+          "name": {
+            "en": "Glunite",
+            "jp": "グルーナイト",
+            "kr": "글루나이트",
+            "zh": "格鲁矿石"
+          },
+          "icon": "TI_Equipment_Growth01",
+          "iconKind": "item",
+          "grade": "rare",
+          "sources": [
+            {
+              "sourceKey": "stars",
+              "origin": "shop",
+              "type": "shop",
+              "weekly": 1
+            }
+          ],
+          "totals": {
+            "weekly": 1,
+            "monthly": 0,
+            "grandMonthly": 4
+          }
+        }
+      ]
+    },
+    {
+      "key": "limit-break",
+      "items": [
+        {
+          "id": "30519",
+          "name": {
+            "en": "Limit Break Memory",
+            "jp": "限界突破メモリー",
+            "kr": "한계 돌파 메모리",
+            "zh": "极限突破记忆"
+          },
+          "icon": "TI_CharacterCard_07",
+          "iconKind": "item",
+          "grade": "unique",
+          "sources": [
+            {
+              "sourceKey": "singularity-rank",
+              "origin": "cured",
+              "type": "mission",
+              "weekly": 160
+            },
+            {
+              "sourceKey": "singularity-daily-run",
+              "origin": "cured",
+              "type": "mission",
+              "weekly": 100
+            },
+            {
+              "sourceKey": "singularity-daily-ranking",
+              "origin": "cured",
+              "type": "mission",
+              "weeklyRange": [20, 160]
+            }
+          ],
+          "totals": {
+            "weekly": 260,
+            "monthly": 0,
+            "grandMonthly": 1040
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -104,6 +104,13 @@ export type {
   ShopPrioritiesData,
 } from '../generators/shop-priorities';
 export type {
+  SourceType,
+  TimegateSource,
+  TimegateItem,
+  TimegateTab,
+  TimegateResourcesData,
+} from '../generators/timegate-resources';
+export type {
   SingularityAnchor,
   SingularityBoss,
   SingularityData,

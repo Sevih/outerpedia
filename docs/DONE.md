@@ -41,6 +41,33 @@
   intouché (tests verts). Câblé dans `InlineTextField` (prop `lang` réintroduite),
   route `/api/admin/preview-text` supprimée (repliée dans l'action).
 
+- **Guide « Weekly & Monthly Reference Tables » porté** (timegate-resource,
+  economy, ordre 5) — re-pivot par item du même socle `ProductTemplet`. Pour un
+  panel curé de ressources (manuels, transistones, poussière/mémoire, glunite,
+  engrenage de singularité, limit break) : d'où on les récolte par semaine/mois
+  et combien. Frontière dérivé/curé tranchée SOURCE PAR SOURCE (règle Sevih :
+  dérivable → on dérive, sinon → on cure) — vérifiée dans la donnée de jeu :
+  - _Dérivé_ (`timegate-resources.json`, générateur) : toute source de SHOP,
+    càd tout `ProductBuyType` permanent vendant l'item avec un reset RÉCURRENT
+    et un produit COURANT (helpers `computeAsOf`/`isCurrent`/`PERIOD`/`iconOf`
+    EXPORTÉS de `shop-priorities` → une seule règle « produit courant »).
+    Quantité = `MaxBuyCount` × période, auto-corrigée. La dérivation débusque
+    même des shops que la hand-list V2 avait ratés : **Skyward Tower** (25/15/5
+    manuels/mois), **Real-Time Arena**, **Remains** ; et retire ce qui a expiré
+    (arena/survey Basic Manual, fin 04-2026) — impossible à tenir à la main.
+  - _Curé_ (`data/curated/timegate-resources.json`) : le panel d'items + leur
+    regroupement en onglets (choix éditorial), ET les sources NON-SHOP dont la
+    quantité est une estimation joueur ABSENTE de la donnée — vérifié : drops
+    de Floor 3 (probabilistes), échange de points d'Extermination
+    (`IrregularChaseExchangeTemplet`, zéro colonne limite/reset → budget estimé),
+    Singularité rang/daily/ranking (suppose SSS++ + 4 jours joués), missions,
+    atelier de Kate (recette dans `ItemCraftConsumeTemplet` mais limite hebdo de
+    craft absente). Chiffres transplantés verbatim de la V2. Zéro chevauchement
+    avec le dérivé → pas de double comptage. Totaux calculés au build (mensuel
+    global = mensuel + hebdo×4). Guide V3 : `SegmentedTabs` 6 onglets, une table
+    par item, items en tuile à CADRE DE RARETÉ (`ItemInline`), badge par type de
+    source. Aucune horloge (déterministe, « ne bouge que quand la donnée bouge »).
+
 - **Guide « Shop Purchase Priorities » porté** (economy, ordre 4) — le plus
   data-driven de la catégorie. La V2 codait ~1000 lignes de contenu de shop EN
   DUR (`data.ts`), déjà PÉRIMÉ (Guild Shop rebrassé le 2024-12-03 : prix changés,

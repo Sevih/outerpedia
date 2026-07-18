@@ -44,8 +44,8 @@ const SHOPS: { key: string; buyType: string; currencyId: string }[] = [
   { key: 'survey', buyType: 'PBT_RESEARCH', currencyId: 'SYS_ASSET_RESEARCH' },
 ];
 
-/** ProductResetType → période d'achat (l'axe « limite »). */
-const PERIOD: Record<string, ShopPeriod> = {
+/** ProductResetType → période d'achat (l'axe « limite »). Partagé (timegate). */
+export const PERIOD: Record<string, ShopPeriod> = {
   PRT_DAILY: 'daily',
   PRT_WEEKLY: 'weekly',
   PRT_MONTHLY: 'monthly',
@@ -125,8 +125,9 @@ const day = (s: string | undefined): string => (s ?? '').slice(0, 10);
 /**
  * Ancre `asOf` = StartDate réelle max, « réelle » = dans le cluster d'années
  * contigu depuis le min (coupe au 1er trou > 1 an → écarte les sentinelles).
+ * Partagé avec `timegate-resources` (même règle « produit courant »).
  */
-function computeAsOf(rows: Row[]): { asOf: string; maxYear: number } {
+export function computeAsOf(rows: Row[]): { asOf: string; maxYear: number } {
   const years = [...new Set(rows.filter((r) => r.StartDate).map((r) => year(r.StartDate)))].sort(
     (a, b) => a - b,
   );
@@ -146,8 +147,8 @@ function computeAsOf(rows: Row[]): { asOf: string; maxYear: number } {
   return { asOf, maxYear };
 }
 
-/** Produit courant à la date d'ancrage (déterministe, sans horloge). */
-function isCurrent(r: Row, asOf: string, maxYear: number): boolean {
+/** Produit courant à la date d'ancrage (déterministe, sans horloge). Partagé. */
+export function isCurrent(r: Row, asOf: string, maxYear: number): boolean {
   const s = day(r.StartDate);
   const e = day(r.EndDate);
   if (s && year(r.StartDate) > maxYear) return false; // placeholder futur
@@ -169,7 +170,7 @@ function goodsSlug(r: Row): string {
   return `p-${(r.ProductNameID ?? r.ID).toLowerCase()}`;
 }
 
-type Icon = { icon: string; iconKind: 'item' | 'equipment'; grade: string };
+export type Icon = { icon: string; iconKind: 'item' | 'equipment'; grade: string };
 type Gear = { icon: string; grade: string };
 const catIcon = (e: CatalogEntry | undefined): Icon => ({
   icon: e?.icon ?? '',
@@ -183,7 +184,11 @@ const catIcon = (e: CatalogEntry | undefined): Icon => ({
  * peut être un item du catalogue (`images/items`) OU une pièce d'équipement
  * (`images/equipment`) — d'où le namespace explicite. Non résoluble → vide.
  */
-function iconOf(r: Row, catalog: Record<string, CatalogEntry>, gearIcons: Map<string, Gear>): Icon {
+export function iconOf(
+  r: Row,
+  catalog: Record<string, CatalogEntry>,
+  gearIcons: Map<string, Gear>,
+): Icon {
   const type = r.ProductGoodsType ?? '';
   const id = r.ProductGoodsID ?? '';
   if (type === 'PGT_ITEM') {
@@ -197,8 +202,8 @@ function iconOf(r: Row, catalog: Record<string, CatalogEntry>, gearIcons: Map<st
   return catIcon(catalog[GOODS_ICON_ASSET[type] ?? '']);
 }
 
-/** Index id d'équipement → icône + grade, tous slots (namespace images/equipment). */
-function buildGearIcons(): Map<string, Gear> {
+/** Index id d'équipement → icône + grade, tous slots (namespace images/equipment). Partagé. */
+export function buildGearIcons(): Map<string, Gear> {
   const eq = buildEquipment();
   const slots = [
     eq.weapon,

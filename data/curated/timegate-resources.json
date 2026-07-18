@@ -1,0 +1,81 @@
+{
+  "_doc": "Overlay curé du guide « Weekly & Monthly Reference Tables » (timegate-resources). NE CONTIENT QUE l'éditorial non-dérivable : (1) le panel d'items et leur regroupement en onglets (choix « quelles ressources comptent »), (2) les sources NON-SHOP dont la quantité est une estimation joueur absente de la donnée (drops de Floor 3, échange de points d'Extermination, missions/récompenses hebdo, Singularité rang/daily/ranking, atelier de Kate). Les sources de SHOP sont DÉRIVÉES de ProductTemplet par le générateur (quantité auto-corrigée) — ne JAMAIS les remettre ici (double comptage). Clés = item id du catalogue. Chiffres transplantés de la V2 (guides/general-guides/timegate-resource).",
+
+  "tabs": [
+    { "key": "books", "items": ["20201", "20202", "20203"] },
+    { "key": "transistones", "items": ["21202", "21201"] },
+    { "key": "special", "items": ["22031", "22033", "22030", "22032"] },
+    { "key": "singularity-gear", "items": ["25001", "25002"] },
+    { "key": "glunite", "items": ["21107", "21127", "21106"] },
+    { "key": "limit-break", "items": ["30519"] }
+  ],
+
+  "nonShopSources": {
+    "20201": [
+      { "source": "irregular-infiltration-floor-3", "monthly": 28 },
+      { "source": "arena-weekly-play", "weekly": 5 },
+      { "source": "weekly-mission", "weekly": 1 }
+    ],
+    "20202": [
+      { "source": "irregular-infiltration-floor-3", "monthly": 17 },
+      { "source": "arena-weekly-play", "weekly": 3 },
+      { "source": "weekly-mission", "weekly": 1 }
+    ],
+    "20203": [
+      { "source": "irregular-infiltration-floor-3", "monthly": 3 },
+      { "source": "arena-weekly-play", "weekly": 1 }
+    ],
+
+    "21202": [
+      { "source": "irregular-extermination-points", "monthly": 12 },
+      { "source": "irregular-infiltration-floor-3", "monthly": 9 },
+      { "source": "kates-workshop", "monthly": 3 }
+    ],
+    "21201": [
+      { "source": "irregular-extermination-points", "monthly": 12 },
+      { "source": "irregular-infiltration-floor-3", "monthly": 9 },
+      { "source": "kates-workshop", "monthly": 3 }
+    ],
+
+    "22031": [
+      { "source": "irregular-extermination-points", "monthly": 150 },
+      { "source": "kates-workshop", "weekly": 70 }
+    ],
+    "22033": [
+      { "source": "irregular-extermination-points", "monthly": 300 },
+      { "source": "kates-workshop", "weekly": 10, "costItemId": "22031", "costAmount": 30 },
+      { "source": "singularity-rank", "weekly": 320 }
+    ],
+    "22030": [
+      { "source": "irregular-extermination-points", "monthly": 150 },
+      { "source": "kates-workshop", "weekly": 70 },
+      { "source": "singularity-daily-run", "weekly": 20 }
+    ],
+    "22032": [
+      { "source": "irregular-extermination-points", "monthly": 300 },
+      { "source": "kates-workshop", "weekly": 10, "costItemId": "22030", "costAmount": 30 },
+      { "source": "singularity-rank", "weekly": 320 }
+    ],
+
+    "25001": [
+      { "source": "singularity-rank", "weekly": 320 },
+      { "source": "singularity-daily-run", "weekly": 160 },
+      { "source": "singularity-daily-ranking", "weeklyRange": [20, 240] }
+    ],
+    "25002": [
+      { "source": "singularity-daily-run", "weekly": 200 },
+      { "source": "singularity-daily-ranking", "weeklyRange": [40, 160] }
+    ],
+
+    "21127": [
+      { "source": "irregular-extermination-points", "monthly": 9 },
+      { "source": "kates-workshop", "weekly": 4 }
+    ],
+
+    "30519": [
+      { "source": "singularity-rank", "weekly": 160 },
+      { "source": "singularity-daily-run", "weekly": 100 },
+      { "source": "singularity-daily-ranking", "weeklyRange": [20, 160] }
+    ]
+  }
+}

@@ -55,6 +55,7 @@ import { buildUnlockContent } from './generators/unlock-content';
 import { buildRecruit } from './generators/recruit';
 import { buildEtherRankings } from './generators/ether-rankings';
 import { buildShopPriorities } from './generators/shop-priorities';
+import { buildTimegateResources } from './generators/timegate-resources';
 import { buildEffectGlossary, unknownFamilyTypes } from './lib/effects';
 import {
   curatedBossIds,
@@ -184,6 +185,9 @@ async function main(): Promise<void> {
   // Achats de shop par priorité (8 shops permanents dérivés ; éditorial curé) —
   // guide « Recommended Purchases by Shop ».
   await writeJson('shop-priorities.json', buildShopPriorities());
+  // Ressources timegatées (shops dérivés + non-shop curé, totaux hebdo/mensuel) —
+  // guide « Weekly & Monthly Reference Tables ».
+  await writeJson('timegate-resources.json', buildTimegateResources());
   // Rotation Monad Gate (groupes + cadence ; ancre curée), compositions des
   // tours et calendrier des contenus saisonniers — cf. en-têtes des générateurs.
   await writeJson('singularity.json', buildSingularity());

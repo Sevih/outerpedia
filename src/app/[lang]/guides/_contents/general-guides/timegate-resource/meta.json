@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Weekly & Monthly Reference Tables",
+    "jp": "週間・月間リソース一覧表",
+    "kr": "주간 & 월간 참고표",
+    "zh": "每周与每月参考表",
+    "fr": "Tableaux de référence hebdomadaires & mensuels"
+  },
+  "description": {
+    "en": "Every regular weekly and monthly source of timegated Outerplane resources — skill manuals, transistones, stardust, glunite, singularity gear and limit break — with per-source amounts and monthly totals.",
+    "jp": "アウタープレーンの週間・月間で入手できる時限リソース（スキル教本、トランストーン、スターダスト、グルーナイト、特異点装備、限界突破）を獲得先ごとの数量と月間合計でまとめた一覧表。",
+    "kr": "아우터플레인의 주간·월간 시간제한 리소스(스킬 교본, 트랜스톤, 스타더스트, 글루나이트, 특이점 장비, 한계 돌파)를 획득처별 수량과 월간 총합으로 정리한 참고표.",
+    "zh": "《Outerplane》每周和每月可定期获取的限时资源（技能教材、转换石、星尘、格鲁矿石、奇点装备、极限突破）一览，含各来源数量与月度总计。",
+    "fr": "Toutes les sources hebdomadaires et mensuelles régulières de ressources timegated d'Outerplane — manuels de skill, transistones, poussière d'étoile, glunite, équipement de singularité et limit break — avec les quantités par source et les totaux mensuels."
+  },
+  "icon": "TI_Item_Growth_Book_01",
+  "author": "Shiraen",
+  "updated": "2026-07-18",
+  "order": 5,
+  "tier": "economy"
+}
