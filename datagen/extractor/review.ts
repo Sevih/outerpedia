@@ -11,7 +11,14 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { writeJson } from '../lib/json';
-import { diffEntity, diffRecords, type FieldDiff, type RecordDiff } from './core/changes';
+import {
+  diffBuckets,
+  diffEntity,
+  diffRecords,
+  type DiffBuckets,
+  type FieldDiff,
+  type RecordDiff,
+} from './core/changes';
 import { getTarget, TARGETS, type GeneratedTarget } from './targets';
 
 const GENERATED = resolve('data/generated');
@@ -24,6 +31,12 @@ function readCommitted(file: string): Record<string, unknown> {
   }
 }
 
+/** Committé de la cible, sous-objet `select` appliqué (fichier partagé). */
+function committedOf(target: GeneratedTarget): Record<string, unknown> {
+  const raw = readCommitted(target.file);
+  return target.select ? target.select(raw) : raw;
+}
+
 export interface TargetReview {
   id: string;
   label: string;
@@ -34,6 +47,11 @@ export interface TargetReview {
 /** Compteur d'écarts d'une revue (pour les index/badges). */
 export function reviewTotals(diff: RecordDiff): number {
   return diff.added.length + diff.removed.length + diff.changed.length;
+}
+
+/** Répartition new / diff / typo / removed d'une revue (pour la matrice admin). */
+export function reviewBuckets(diff: RecordDiff): DiffBuckets {
+  return diffBuckets(diff);
 }
 
 /** Revue d'une cible : committé vs extraction fraîche. */
@@ -64,7 +82,7 @@ export interface EntityReview {
 export function entityReview(id: string, key: string): EntityReview {
   const target = getTarget(id);
   if (!target) throw new Error(`cible inconnue : ${id}`);
-  const existing = readCommitted(target.file);
+  const existing = committedOf(target);
   const extracted = target.build();
   const inOld = key in existing;
   const inNew = key in extracted;
@@ -76,7 +94,7 @@ export function entityReview(id: string, key: string): EntityReview {
 }
 
 function runReview(target: GeneratedTarget): TargetReview {
-  const existing = readCommitted(target.file);
+  const existing = committedOf(target);
   const extracted = target.build();
   return {
     id: target.id,

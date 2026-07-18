@@ -8,11 +8,13 @@ import {
   acceptTarget,
   entityReview,
   reviewAll,
+  reviewBuckets,
   reviewTarget,
   reviewTotals,
   type EntityReview,
   type TargetReview,
 } from '@datagen/extractor/review';
+import type { DiffBuckets } from '@datagen/extractor/core/changes';
 import {
   extractedBundle,
   extractedCharacter,
@@ -36,6 +38,7 @@ import {
 } from '@datagen/extractor/v2-control';
 
 export type {
+  DiffBuckets,
   EntityReview,
   TargetReview,
   IntegrateModeReport,
@@ -57,6 +60,7 @@ export {
   integrateMonsterMode,
   monsterArchiveOf,
   reviewAll,
+  reviewBuckets,
   reviewTarget,
   reviewTotals,
   versionMonster,

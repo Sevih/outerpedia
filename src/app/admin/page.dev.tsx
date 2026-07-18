@@ -4,30 +4,55 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { getCharacterListItems } from '@/lib/data/characters';
 import { loadCuratedCharacters } from '@/lib/data/curated';
-import { getMergedEffects, v2MissingInV3 } from '@/lib/data/effects';
-import { reviewTarget, reviewTotals } from '@/lib/admin/review-store';
-import { equipmentV2Control } from '@/lib/admin/equipment-control';
+import { getMergedEffects, loadCuratedEffects } from '@/lib/data/effects';
+import { reviewAll, reviewBuckets, type DiffBuckets } from '@/lib/admin/review-store';
 
 // Accueil = tableau de bord, extraction fraîche, jamais prérendu.
 export const dynamic = 'force-dynamic';
 
-type Cell = { href: string; count: number; tone: 'warn' | 'danger' } | null;
-
-/** Une case de la matrice : compteur « à traiter » (✓ si 0), ou « — » si N/A. */
-function MatrixCell({ cell }: { cell: Cell }) {
-  if (!cell) return <td className="text-content-subtle px-3 py-2 text-center">—</td>;
+/**
+ * Case EXTRACT = diff « data du jeu ↔ data du site » (moteur review : committé
+ * vs extraction fraîche). Trois buckets : `new` (dans le jeu, pas sur le site),
+ * `diff` (vrai champ changé), `typo` (n'a changé que typographiquement —
+ * cosmétique, en gris). ✓ si tout est à zéro.
+ */
+function ExtractCell({ href, b }: { href: string; b: DiffBuckets }) {
+  const actionable = b.new + b.diff + b.removed;
   return (
     <td className="px-3 py-2 text-center">
-      <Link href={cell.href as Route} className="inline-flex items-center gap-1 hover:underline">
-        {cell.count === 0 ? (
+      <Link
+        href={href as Route}
+        className="inline-flex items-center justify-center hover:underline"
+      >
+        {actionable === 0 && b.typo === 0 ? (
           <span className="text-success">✓</span>
         ) : (
-          <span
-            className={`${cell.tone === 'danger' ? 'text-danger' : 'text-warn'} font-medium tabular-nums`}
-          >
-            {cell.count}
+          <span className="flex items-center justify-center gap-2 text-xs tabular-nums">
+            {b.new > 0 && <span className="text-warn font-medium">{b.new} new</span>}
+            {b.diff > 0 && <span className="text-danger font-medium">{b.diff} diff</span>}
+            {b.removed > 0 && <span className="text-danger font-medium">{b.removed} rm</span>}
+            {b.typo > 0 && <span className="text-content-subtle">{b.typo} typo</span>}
           </span>
         )}
+      </Link>
+    </td>
+  );
+}
+
+/**
+ * Case ÉDITION = couverture de la couche CURÉE (combien d'entités portent au
+ * moins un champ curé, sur le total). Informative — pas une TODO : la plupart
+ * des entités n'ont pas besoin d'override. `—` si l'entité n'a pas d'éditeur.
+ */
+function EditionCell({ cover }: { cover: { href: string; done: number; total: number } | null }) {
+  if (!cover) return <td className="text-content-subtle px-3 py-2 text-center">—</td>;
+  return (
+    <td className="px-3 py-2 text-center">
+      <Link
+        href={cover.href as Route}
+        className="text-content-muted inline-flex items-center justify-center text-xs tabular-nums hover:underline"
+      >
+        {cover.done}/{cover.total} curés
       </Link>
     </td>
   );
@@ -48,39 +73,47 @@ export default function AdminHome() {
   const chars = getCharacterListItems();
   const curated = loadCuratedCharacters();
 
-  // Extractor = écarts vs oracle V2. Editor = à compléter (couverture curée).
-  const charReview = reviewTotals(reviewTarget('character').diff);
-  const charUncurated = chars.filter(
-    (c) => !(curated[c.id] && Object.keys(curated[c.id]).length),
-  ).length;
-  const effRegress = v2MissingInV3().length;
-  const effNoDesc = getMergedEffects().filter((e) => !e.desc.en).length;
-  const gear = Object.fromEntries(
-    equipmentV2Control().map((r) => [r.name, r.issues.length + r.missingV3.length]),
-  );
-  const g = (k: string, href: string): Cell => ({ href, count: gear[k] ?? 0, tone: 'warn' });
+  // EXTRACT : un seul moteur pour toutes les entités (committé vs frais).
+  const buckets = new Map(reviewAll().map((r) => [r.id, reviewBuckets(r.diff)]));
+  const empty: DiffBuckets = { new: 0, diff: 0, typo: 0, removed: 0 };
+  const ex = (id: string, route: string) => ({ href: route, b: buckets.get(id) ?? empty });
 
-  const rows: { label: string; extractor: Cell; editor: Cell }[] = [
+  // ÉDITION : couverture curée, pour les entités qui ont un éditeur d'entité.
+  const charCurated = chars.filter(
+    (c) => curated[c.id] && Object.keys(curated[c.id]).length,
+  ).length;
+  const effTotal = getMergedEffects().length;
+  const effCurated = Object.keys(loadCuratedEffects()).length;
+
+  const rows: {
+    label: string;
+    extract: { href: string; b: DiffBuckets };
+    edition: { href: string; done: number; total: number } | null;
+  }[] = [
     {
       label: 'Personnage',
-      extractor: { href: '/admin/extractor/characters', count: charReview, tone: 'warn' },
-      editor: { href: '/admin/editor/characters', count: charUncurated, tone: 'warn' },
+      extract: ex('character', '/admin/extractor/characters'),
+      edition: { href: '/admin/editor/characters', done: charCurated, total: chars.length },
     },
     {
       label: 'Effect',
-      extractor: { href: '/admin/extractor/effects', count: effRegress, tone: 'danger' },
-      editor: { href: '/admin/editor/effects', count: effNoDesc, tone: 'warn' },
+      extract: ex('effect', '/admin/extractor/effects'),
+      edition: { href: '/admin/editor/effects', done: effCurated, total: effTotal },
     },
-    { label: 'EE', extractor: g('ee', '/admin/extractor/ee'), editor: null },
-    { label: 'Armes', extractor: g('weapons', '/admin/extractor/weapons'), editor: null },
-    { label: 'Amulet', extractor: g('amulets', '/admin/extractor/amulets'), editor: null },
-    { label: 'Armor', extractor: null, editor: null },
-    { label: 'Talisman', extractor: g('talismans', '/admin/extractor/talismans'), editor: null },
-    { label: 'Sets', extractor: g('sets', '/admin/extractor/sets'), editor: null },
-    { label: 'Monstre', extractor: null, editor: null },
+    { label: 'Monstre', extract: ex('monster', '/admin/extractor/monsters'), edition: null },
+    { label: 'EE', extract: ex('ee', '/admin/extractor/ee'), edition: null },
+    { label: 'Armes', extract: ex('weapon', '/admin/extractor/weapons'), edition: null },
+    { label: 'Amulet', extract: ex('amulet', '/admin/extractor/amulets'), edition: null },
+    { label: 'Armor', extract: ex('armor', '/admin/extractor/armors'), edition: null },
+    { label: 'Talisman', extract: ex('talisman', '/admin/extractor/talismans'), edition: null },
+    { label: 'Sets', extract: ex('set', '/admin/extractor/sets'), edition: null },
   ];
 
-  const extractorPending = rows.reduce((n, r) => n + (r.extractor?.count ?? 0), 0);
+  const totalActionable = rows.reduce(
+    (n, r) => n + r.extract.b.new + r.extract.b.diff + r.extract.b.removed,
+    0,
+  );
+  const totalTypo = rows.reduce((n, r) => n + r.extract.b.typo, 0);
 
   // Tools transverses (couverture éditoriale).
   const prosDone = chars.filter(
@@ -95,35 +128,36 @@ export default function AdminHome() {
       <div className="space-y-1">
         <h1 className="text-content-strong text-xl font-semibold">Administration</h1>
         <p className="text-content-muted text-sm">
-          {extractorPending === 0 ? (
+          {totalActionable === 0 ? (
             <span className="text-success">✓ Extraction à jour partout.</span>
           ) : (
             <span className="text-warn">
-              {extractorPending} écart(s) d&apos;extraction à traiter.
+              {totalActionable} écart(s) d&apos;extraction à traiter
             </span>
-          )}{' '}
+          )}
+          {totalTypo > 0 && <span className="text-content-subtle"> · {totalTypo} typo</span>}{' '}
           <span className="text-content-subtle">
-            Extractor = écarts vs oracle V2 · Editor = à compléter.
+            Extract = diff jeu ↔ site (new/diff/typo) · Édition = couverture curée.
           </span>
         </p>
       </div>
 
-      {/* Matrice fonction × entité : reflet du menu, cases = à traiter */}
+      {/* Matrice entité × fonction : Extract = diff jeu↔site, Édition = couverture curée */}
       <section className="border-line-subtle bg-surface-raised overflow-x-auto rounded-lg border">
         <table className="w-full text-sm">
           <thead className="text-content-subtle text-left text-xs uppercase">
             <tr className="border-line-subtle border-b">
               <th className="px-3 py-2 font-medium">Entité</th>
-              <th className="px-3 py-2 text-center font-medium">Extractor</th>
-              <th className="px-3 py-2 text-center font-medium">Editor</th>
+              <th className="px-3 py-2 text-center font-medium">Extract (jeu ↔ site)</th>
+              <th className="px-3 py-2 text-center font-medium">Édition (curé)</th>
             </tr>
           </thead>
           <tbody>
             {rows.map((r) => (
               <tr key={r.label} className="border-line-subtle hover:bg-surface-base border-t">
                 <td className="text-content px-3 py-2">{r.label}</td>
-                <MatrixCell cell={r.extractor} />
-                <MatrixCell cell={r.editor} />
+                <ExtractCell href={r.extract.href} b={r.extract.b} />
+                <EditionCell cover={r.edition} />
               </tr>
             ))}
           </tbody>

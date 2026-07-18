@@ -6,6 +6,20 @@
 
 ## 2026-07-18
 
+- **Panneau admin : matrice repensée + moteur de diff jeu↔site généralisé**
+  (PRIO Sevih, 1re moitié). Le panneau d'accueil (`/admin`) ne compare plus la
+  V2 : chaque entité montre le diff **committé (`data/generated`) vs extraction
+  fraîche** en trois buckets **new / diff / typo** (colonne Extract), et la
+  **couverture curée X/N** (colonne Édition — le « 1 » énigmatique devient
+  « 142/143 curés »). Fondations : classifieur **typo** porté à l'identique de
+  la V2 (`normalizeTypo` : replie blanc + ponctuation pleine largeur/CJK +
+  guillemets simples courbes + `…` ; NE replie PAS les guillemets doubles, comme
+  la V2) + `diffBuckets` dans le cœur PUR `core/changes.ts` (+5 tests) ; registre
+  `TARGETS` étendu de 2 → 9 (character, monster, effect, ee, weapon, amulet,
+  armor, talisman, set), effets ciblés via `select` sur `glossaries.json`.effects,
+  `buildEquipment` mémoïsé (1× au lieu de 6×). Vérifié zéro faux positif :
+  `reviewAll` sur la data committée rend `new=0 diff=0 typo=0 removed=0` partout.
+  RESTE (cf. TODO PRIO) : pages extracteur PAR ENTITÉ + suppression `v2-control`.
 - **Robustesse des éditeurs admin (4 bugs de l'audit 17/07)** :
   - _13 `fetch` sans `try/catch`_ → helper partagé `src/lib/admin/post-json.ts`
     (`postJson` : parse tolérant, jette le message serveur `error`/`errors[]`,

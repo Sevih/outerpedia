@@ -77,6 +77,67 @@ export function diffEntity(existing: unknown, extracted: unknown): FieldDiff[] {
 }
 
 /**
+ * Normalisation TYPOGRAPHIQUE (portée de la V2) : deux valeurs qui ne diffèrent
+ * QUE par du blanc ou des variantes de ponctuation sont ramenées à la même
+ * chaîne. Sert à séparer une vraie modif d'une coquille cosmétique — guillemets
+ * courbes ↔ droits, ponctuation pleine largeur/CJK ↔ ASCII, points de
+ * suspension, espaces. Fréquent sur les textes localisés (effets en/jp/kr/zh),
+ * d'où l'intérêt de ne PAS les compter comme de vrais écarts.
+ */
+export function normalizeTypo(v: unknown): string {
+  return JSON.stringify(v ?? null)
+    .replace(/\s+/g, '')
+    .replace(/[，,]/g, ',')
+    .replace(/[：:]/g, ':')
+    .replace(/[（(]/g, '(')
+    .replace(/[）)]/g, ')')
+    .replace(/[！!]/g, '!')
+    .replace(/[‘’']/g, "'")
+    .replace(/[、､]/g, '、')
+    .replace(/[。｡]/g, '。')
+    .replace(/[~～]/g, '~')
+    .replace(/\.\.\./g, '…')
+    .replace(/…/g, '...')
+    .replace(/[？?]/g, '?')
+    .replace(/[％%]/g, '%')
+    .replace(/[；;]/g, ';')
+    .replace(/[＋+]/g, '+');
+}
+
+/** Un champ ne diffère que typographiquement (coquille, pas un vrai changement). */
+export function isTypoField(f: FieldDiff): boolean {
+  return normalizeTypo(f.existing) === normalizeTypo(f.extracted);
+}
+
+/** Une entité modifiée dont TOUS les champs sont typo (coquille pure). */
+export function isTypoEntity(e: EntityDiff): boolean {
+  return e.fields.length > 0 && e.fields.every(isTypoField);
+}
+
+/** Répartition d'un diff pour les badges : nouveau / vrai écart / typo / disparu. */
+export interface DiffBuckets {
+  /** Entités dans le jeu, pas encore sur le site (`added`). */
+  new: number;
+  /** Entités modifiées avec au moins un VRAI champ changé. */
+  diff: number;
+  /** Entités modifiées dont tous les champs ne sont que typographiques. */
+  typo: number;
+  /** Entités disparues du jeu mais encore committées (`removed`). */
+  removed: number;
+}
+
+/** Classe un `RecordDiff` en compteurs new / diff / typo / removed. */
+export function diffBuckets(diff: RecordDiff): DiffBuckets {
+  let typo = 0;
+  let real = 0;
+  for (const e of diff.changed) {
+    if (isTypoEntity(e)) typo++;
+    else real++;
+  }
+  return { new: diff.added.length, diff: real, typo, removed: diff.removed.length };
+}
+
+/**
  * Diff complet entre deux dictionnaires d'entités (clé → objet).
  * `changed` est trié par clé pour une revue déterministe.
  */
