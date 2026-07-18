@@ -6,6 +6,17 @@
 
 ## 2026-07-18
 
+- **Wrappers de guides uniformisés sur le re-export 1 ligne** (dette code /
+  duplication). 64 `index.tsx` qui ne faisaient que forwarder `{...props}` à un
+  composant de rendu partagé (EncounterBossGuide ×30, VersionedBossGuide ×11,
+  StagedBossGuide ×10, TowerGuide ×8, GuildRaidGuide ×5) passent de 6-8 lignes à
+  `export { X as default } from '…'` — modèle déjà prouvé par les 31 monad-gate.
+  NON touchés : les 34 wrappers qui INJECTENT un `content.json` local
+  (BossGuide & co, le re-export sec ne peut pas passer le contenu) et les 12
+  vrais contenus éditoriaux de `general-guides`/`other` (100-485 lignes). Le
+  loader (`guide-detail.tsx`) lit `mod.default` — re-export transparent.
+  Typecheck OK, 27 tests guides verts.
+
 - **`data/legacy/` SUPPRIMÉ (249 fichiers) — l'oracle V2 déposé** (fin du PRIO #1).
   Trois familles de lecteurs coupées : (1) OUTILS ONE-SHOT obsolètes (migration
   finie) — `import-equipment`, `import-gear-reco`, `seedFromLegacy` +

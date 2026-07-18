@@ -206,8 +206,10 @@
       equipment.ts vs lib/buff), résolution RewardTemplet ×2 (encounters vs
       monad, `span()` copié-collé), walk récursif ×4, `nameKey`/`isPresent`/
       `sc`/regex VA dupliqués, `norm()` divergents des deux import-*.
-- [ ] Wrappers guides 8 lignes ×~98 : uniformiser sur le re-export 1 ligne
-      (`export { default } from '…'`) prouvé par les 25 monad-gate.
+- [x] Wrappers guides : 64 wrappers de pur forward (`{...props}`) uniformisés
+      sur le re-export 1 ligne (18/07 → DONE). RESTE non concerné : 34 wrappers
+      qui injectent un `content.json` local (BossGuide & co) et 12 contenus
+      éditoriaux (general-guides/other).
 - [ ] `StatInline` local d'EquipmentDetail.tsx:167 redondant avec
       `inline/StatInline` ; hex éléments de `detail/theme.ts` dupliquant les
       tokens de globals.css (2 sources de vérité).
