@@ -96,8 +96,10 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
 - [ ] **`/contributors`** — dépend du portage `contributors.json` (item 📦).
 - [ ] **`/changelog`** — clés `changelog.*` ; lié au resync CHANGELOG.md
       (item 📚).
-- [ ] **`/legal`** — mentions légales (lien de la barre basse du footer).
-- [ ] **`/feed`** — flux RSS (route handler ; lié par le footer).
+- [x] ~~**`/legal`** — mentions légales (lien de la barre basse du footer).~~
+      FAIT le 19/07 (cf. DONE) : page statique i18n (clés `legal.*`), au sitemap.
+- [x] ~~**`/feed`** — flux RSS (route handler ; lié par le footer).~~ FAIT le
+      19/07 (cf. DONE) : RSS 2.0 des guides, racine hors `[lang]`, statique 24 h.
 - [ ] **Home riche** — sections bannières actives / codes promo / guides
       débutants (clés `home.*`, structure V2).
 

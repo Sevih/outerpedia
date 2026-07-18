@@ -6,6 +6,17 @@
 
 ## 2026-07-19
 
+- **Pages `/legal` + `/feed`** — les deux 404 de la barre basse du footer,
+  fermées. **`/legal`** (`src/app/[lang]/legal/page.tsx`) : page statique i18n,
+  contenu dans les clés `legal.*` déjà pré-seedées ×5 (heading, p1-p4, titre
+  hébergeur + p5 LCEN), `generateMetadata` via `createPageMetadata`
+  (`page.legal.*`), `revalidate` 24 h, ajoutée au `sitemap.ts` (page indexable).
+  **`/feed`** (`src/app/feed/route.ts`) : flux **RSS 2.0** des guides non
+  masqués, triés par fraîcheur (`guideUpdatedDate`, comme le sitemap), lien vers
+  la fiche en langue par défaut, dates RFC-822, entités XML échappées. Route à
+  la RACINE hors `[lang]` — le proxy l'exclut déjà nommément — donc flux unique
+  en langue par défaut ; `dynamic = 'force-static'` + revalidation 24 h,
+  `Content-Type: application/rss+xml`. 465 tests verts.
 - **Éditeurs éditoriaux perso alignés sur le rendu du site (B/C/D)** — même
   chaîne de descripteurs que l'aperçu inline, généralisée aux 3 éditeurs perso.
   **B (pros/cons)** : `EditorialEditor` rend les entrées comme

@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...allEquipmentSlugs().map((s) => `/equipment/${s}`),
     '/guides',
     ...GUIDE_CATEGORY_SLUGS.filter((c) => countGuides(c) > 0).map((c) => `/guides/${c}`),
+    '/legal',
   ];
 
   const entry = (path: string, lastModified?: string): MetadataRoute.Sitemap[number] => ({
