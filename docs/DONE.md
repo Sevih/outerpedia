@@ -45,9 +45,14 @@
   (4) 1er ajustement piloté par la galerie : `--content-subtle` #64748b→#808ea6
   (les légendes discrètes tombaient à ~3:1 de contraste sur `surface-overlay`, sous
   le seuil AA en `text-xs` ; remonté à ~4.4:1, reste le cran le plus faible sous
-  `content-muted`). Typecheck + lint + 423 tests OK. RESTE : ~17 composants (MonadGateMap
-  a beaucoup de nuances/opacités bespoke → à arbitrer via la galerie), palettes
-  de catégorie, extension RAW_COLOR, phase 2 éditoriale.
+  `content-muted`). (5) `MonadGateMap` — conversions EXACTES sûres (valeur =
+  token existant, 0 pixel bougé) : `text-yellow-400` #facc15 → `text-monad-milestone`
+  (2 cases à cocher + texte « requis » + titre True Ending) ; `hover:text-red-400`
+  #f87171 → `hover:text-danger` (croix de fermeture). Typecheck + lint + 423 tests
+  OK. RESTE : nuances bespoke de MonadGateMap (encarts vert/rouge/jaune à opacités,
+  emerald « donne une clé », littéraux SVG) → arbitrage token-fin-exact vs
+  unification color-mix EN ATTENTE ; ~16 autres composants ; palettes de catégorie ;
+  extension RAW_COLOR ; phase 2 éditoriale.
 
 - **Lot de tests « petits modules purs »** (suite de la campagne tests, +40).
   Six fichiers co-localisés : `stats.test.ts` (statAbbr connu/repli,

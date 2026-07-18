@@ -262,7 +262,7 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
               type="checkbox"
               checked={showOnlyTruePath}
               onChange={(e) => setShowOnlyTruePath(e.target.checked)}
-              className="text-yellow-400"
+              className="text-monad-milestone"
             />
             {strings.trueEndingPath}
           </label>
@@ -271,7 +271,7 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
               type="checkbox"
               checked={compactMode}
               onChange={(e) => setCompactMode(e.target.checked)}
-              className="text-yellow-400"
+              className="text-monad-milestone"
             />
             {strings.compact}
           </label>
@@ -564,7 +564,7 @@ function NodeChoicesPopup({
         <button
           type="button"
           onClick={onClose}
-          className="text-content-strong text-xs transition hover:text-red-400"
+          className="text-content-strong hover:text-danger text-xs transition"
         >
           X
         </button>
@@ -601,7 +601,7 @@ function NodeChoicesPopup({
                 >
                   <div className="italic">{labelText}</div>
                   {needText && (
-                    <div className="mt-1 text-xs text-yellow-400 italic">
+                    <div className="text-monad-milestone mt-1 text-xs italic">
                       {strings.required} : {needText}
                     </div>
                   )}
@@ -673,7 +673,7 @@ function TrueEndingChoices({
       className="border-line-subtle bg-surface-raised/60 relative mt-4 cursor-pointer rounded-lg border p-4"
       onClick={onReveal}
     >
-      <h3 className="mb-4 flex items-center gap-2 text-base font-semibold text-yellow-400">
+      <h3 className="text-monad-milestone mb-4 flex items-center gap-2 text-base font-semibold">
         <span>★</span>
         {strings.trueEndingChoices}
       </h3>
