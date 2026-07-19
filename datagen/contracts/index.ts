@@ -143,7 +143,11 @@ export type {
 } from '../generators/content-schedule';
 export type {
   EvolutionRung,
-  LimitBreakStep,
+  // `LimitBreakStep` existe AUSSI dans hero-growth (forme différente : vue
+  // Growth Systems) ; celui-ci est la mécanique de rappel (step/recallItemId/
+  // price). Aliasé pour lever la collision de barrel — aucun consommateur du
+  // nom nu, donc renommage sans risque de contrat.
+  LimitBreakStep as ProgressionLimitBreakStep,
   PremiumInfo,
   ProgressionData,
   QuirkBlock,

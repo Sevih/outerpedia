@@ -22,6 +22,7 @@ import {
   type GuideCategorySlug,
 } from '../../src/lib/data/guide-categories';
 import { listGuides, readGuideVersionFile, type Guide } from '../../src/lib/data/guides';
+import type { QuirksData } from '../contracts';
 import { buildItemCatalog } from '../generators/item-catalog';
 import { listHeroFullArt } from './hero-full-art';
 import { loadCuratedEffects } from '../curated/effects';
@@ -321,9 +322,7 @@ export function buildAssetManifest(): AssetRequest[] {
   // cadre hexagonal `CM_Gift_MainNode_Bg`. On collecte les glyphes RÉELLEMENT
   // référencés par `quirks.json` (namespace unique `ui/quirk`).
   {
-    const quirks = load('quirks.json') as {
-      categories: { trees: { nodes: { icon?: string }[] }[] }[];
-    };
+    const quirks = load('quirks.json') as unknown as QuirksData;
     const icons = new Set<string>(['CM_Gift_MainNode_Bg']);
     for (const c of quirks.categories)
       for (const tr of c.trees) for (const n of tr.nodes) if (n.icon) icons.add(n.icon);
