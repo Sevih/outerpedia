@@ -119,18 +119,18 @@ export function ComicsGallery({
       {/* Lightbox */}
       {current && (
         <div
-          className="fixed inset-0 z-100 flex items-center justify-center bg-[#000]/95 p-4"
+          className="bg-scrim/95 fixed inset-0 z-100 flex items-center justify-center p-4"
           onClick={close}
         >
           <button
             type="button"
             onClick={close}
             aria-label="Close"
-            className="absolute top-4 right-4 z-10 p-2 text-[#fff]/70 transition-colors hover:text-[#fff]"
+            className="text-content/70 hover:text-content absolute top-4 right-4 z-10 p-2 transition-colors"
           >
             <CloseGlyph className="size-8" />
           </button>
-          <div className="absolute top-4 left-4 z-10 text-sm text-[#fff]/70">
+          <div className="text-content/70 absolute top-4 left-4 z-10 text-sm">
             {lightbox! + 1} / {items.length}
           </div>
 
@@ -143,7 +143,7 @@ export function ComicsGallery({
                   nav(-1);
                 }}
                 aria-label="Previous"
-                className="absolute top-1/2 left-4 z-10 -translate-y-1/2 p-2 text-[#fff]/50 transition-colors hover:text-[#fff]"
+                className="text-content/50 hover:text-content absolute top-1/2 left-4 z-10 -translate-y-1/2 p-2 transition-colors"
               >
                 <ChevronGlyph className="size-10 rotate-180" />
               </button>
@@ -154,7 +154,7 @@ export function ComicsGallery({
                   nav(1);
                 }}
                 aria-label="Next"
-                className="absolute top-1/2 right-4 z-10 -translate-y-1/2 p-2 text-[#fff]/50 transition-colors hover:text-[#fff]"
+                className="text-content/50 hover:text-content absolute top-1/2 right-4 z-10 -translate-y-1/2 p-2 transition-colors"
               >
                 <ChevronGlyph className="size-10" />
               </button>

@@ -27,6 +27,9 @@
   --surface-raised: #131c2e;
   --surface-overlay: #1e293b;
   --surface-sunken: #070b14;
+  /* Voile modal (lightbox) : NOIR neutre, pas une surface teintée navy. Sa
+     neutralité met en valeur l'image affichée par-dessus (wallpapers, BD). */
+  --scrim: #000000;
 
   /* Contenu — échelle remontée (retour Sevih : trop sombre pour du texte).
      strong + content = VRAI blanc (strong se distingue par le gras, cf. la règle
@@ -239,6 +242,7 @@
   --color-surface-raised: var(--surface-raised);
   --color-surface-overlay: var(--surface-overlay);
   --color-surface-sunken: var(--surface-sunken);
+  --color-scrim: var(--scrim);
 
   --color-content-strong: var(--content-strong);
   --color-content: var(--content);
@@ -500,6 +504,29 @@ body::before {
     background-repeat: no-repeat;
     background-size: 100% 100%;
   }
+}
+
+/* Onglet « jeu » actif (portage V2) : glow doré façon UI Outerplane. Tout le
+   visuel vit ici (couleurs ambre brutes interdites dans les composants) ; le
+   liseré en pied est un pur gradient — pas d'asset, contrairement à la V2. */
+.tab-game-active {
+  position: relative;
+  color: #fcd34d; /* amber-300 */
+  background-image: linear-gradient(to bottom, rgba(245, 158, 11, 0.15), transparent);
+  border: 1px solid rgba(245, 158, 11, 0.2); /* amber-500/20 */
+  border-top-width: 2px;
+  border-top-color: rgba(251, 191, 36, 0.6); /* amber-400/60 */
+  box-shadow: 0 2px 16px rgba(251, 191, 36, 0.1);
+}
+.tab-game-active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 15%;
+  width: 70%;
+  height: 2px;
+  pointer-events: none;
+  background-image: linear-gradient(to right, transparent, rgba(251, 191, 36, 0.85), transparent);
 }
 
 @layer components {

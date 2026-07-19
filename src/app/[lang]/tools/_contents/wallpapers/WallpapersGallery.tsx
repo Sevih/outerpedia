@@ -157,7 +157,7 @@ export function WallpapersGallery({
               loading="lazy"
               className={`size-full ${isPortrait ? 'object-contain' : 'object-cover'}`}
             />
-            <span className="absolute right-1 bottom-1 rounded bg-[#000]/70 px-1.5 py-0.5 font-mono text-[10px] text-[#fff]">
+            <span className="bg-scrim/70 text-content absolute right-1 bottom-1 rounded px-1.5 py-0.5 font-mono text-[10px]">
               {w.w}×{w.h}
             </span>
           </button>
@@ -167,18 +167,18 @@ export function WallpapersGallery({
       {/* Lightbox */}
       {current && (
         <div
-          className="fixed inset-0 z-100 flex items-center justify-center bg-[#000]/95 p-4"
+          className="bg-scrim/95 fixed inset-0 z-100 flex items-center justify-center p-4"
           onClick={close}
         >
           <button
             type="button"
             onClick={close}
             aria-label="Close"
-            className="absolute top-4 right-4 z-10 p-2 text-[#fff]/70 transition-colors hover:text-[#fff]"
+            className="text-content/70 hover:text-content absolute top-4 right-4 z-10 p-2 transition-colors"
           >
             <CloseGlyph className="size-8" />
           </button>
-          <div className="absolute top-4 left-4 z-10 text-sm text-[#fff]/70">
+          <div className="text-content/70 absolute top-4 left-4 z-10 text-sm">
             {lightbox! + 1} / {items.length}
           </div>
 
@@ -191,7 +191,7 @@ export function WallpapersGallery({
                   nav(-1);
                 }}
                 aria-label="Previous"
-                className="absolute top-1/2 left-4 z-10 -translate-y-1/2 p-2 text-[#fff]/50 transition-colors hover:text-[#fff]"
+                className="text-content/50 hover:text-content absolute top-1/2 left-4 z-10 -translate-y-1/2 p-2 transition-colors"
               >
                 <ChevronGlyph className="size-10 rotate-180" />
               </button>
@@ -202,7 +202,7 @@ export function WallpapersGallery({
                   nav(1);
                 }}
                 aria-label="Next"
-                className="absolute top-1/2 right-4 z-10 -translate-y-1/2 p-2 text-[#fff]/50 transition-colors hover:text-[#fff]"
+                className="text-content/50 hover:text-content absolute top-1/2 right-4 z-10 -translate-y-1/2 p-2 transition-colors"
               >
                 <ChevronGlyph className="size-10" />
               </button>
@@ -221,13 +221,13 @@ export function WallpapersGallery({
             className="absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <span className="rounded-lg bg-[#000]/70 px-3 py-2 font-mono text-sm text-[#d1d5db]">
+            <span className="bg-scrim/70 text-content-muted rounded-lg px-3 py-2 font-mono text-sm">
               {current.w} × {current.h}
             </span>
             <a
               href={current.download}
               download
-              className="inline-flex items-center gap-2 rounded-lg bg-sky-600 px-6 py-3 text-sm font-medium text-[#fff] transition-colors hover:bg-sky-500"
+              className="text-content inline-flex items-center gap-2 rounded-lg bg-sky-600 px-6 py-3 text-sm font-medium transition-colors hover:bg-sky-500"
             >
               <DownloadGlyph className="size-5" />
               {strings.download}
