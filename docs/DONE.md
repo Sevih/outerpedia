@@ -6,13 +6,16 @@
 
 ## 2026-07-19
 
-- **Tokens de contraste remontés** (`globals.css`) — retour Sevih : `line`/
-  `line-subtle`/`content-subtle` devenaient illisibles À MÊME le fond du site
-  (sans surface derrière). Mesuré : `line-subtle` (#1e293b, = la couleur de
-  `surface-overlay`) tombait à 1.29:1, `line` à 1.82:1 (un contour UI veut ~3:1).
-  Remontés : `line-subtle` #42566e (2.5:1), `line` #526075 (3:1), `line-strong`
-  #64748b (4:1, remonté aussi pour garder subtle<normal<strong), `content-subtle`
-  #8a98af (6.45:1). `content-muted` inchangé (déjà 7.34:1). Hiérarchie préservée.
+- **Tokens de contraste remontés** (`globals.css`) — retours Sevih, en deux temps.
+  - _Bordures_ : `line`/`line-subtle` disparaissaient À MÊME le fond du site
+    (`line-subtle` #1e293b = la couleur de `surface-overlay` → 1.29:1). Remontés :
+    `line-subtle` #42566e (2.5:1), `line` #526075 (3:1), `line-strong` #64748b
+    (4:1, remonté aussi pour garder subtle<normal<strong).
+  - _Texte_ (échelle entière remontée, trop sombre) : `content-strong` + `content`
+    = VRAI blanc #fff — `content-strong` se distingue désormais par le GRAS (règle
+    `.text-content-strong { font-weight: 700 }` en `@layer base`, surchargeable par
+    un `font-*` explicite) ; `content-muted` + `content-subtle` reprennent l'ancien
+    `content` #cbd5e1 (bien plus clair que l'ancien slate moyen #94a3b8/#808ea6).
 
 - **Home riche** — page d'accueil reconstruite sur les primitives V3 (aucun
   import de composant V2). Sections : **HomeHero** (titre discret + déclencheur

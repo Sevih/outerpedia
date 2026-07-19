@@ -28,11 +28,14 @@
   --surface-overlay: #1e293b;
   --surface-sunken: #070b14;
 
-  /* Contenu — slate clair */
-  --content-strong: #f1f5f9;
-  --content: #cbd5e1;
-  --content-muted: #94a3b8;
-  --content-subtle: #8a98af;
+  /* Contenu — échelle remontée (retour Sevih : trop sombre pour du texte).
+     strong + content = VRAI blanc (strong se distingue par le gras, cf. la règle
+     `.text-content-strong` plus bas) ; muted + subtle reprennent l'ancien
+     `content` (#cbd5e1), bien plus lisible que l'ancien slate moyen. */
+  --content-strong: #ffffff;
+  --content: #ffffff;
+  --content-muted: #cbd5e1;
+  --content-subtle: #cbd5e1;
 
   /* Lignes — slate. Remontées pour rester visibles À MÊME le fond du site
      (sans surface derrière) : les valeurs d'origine (1.3–2.5:1) disparaissaient
@@ -379,6 +382,12 @@ body::before {
  * souligné en image d'UI du jeu. Le h2 des sections de fiche en hérite.
  */
 @layer base {
+  /* `content-strong` = même blanc que `content` : sa distinction passe par le
+     GRAS (retour Sevih). Placé en `base` → un `font-*` explicite le surcharge. */
+  .text-content-strong {
+    font-weight: 700;
+  }
+
   h1,
   h2,
   h3,
