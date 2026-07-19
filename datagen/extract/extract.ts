@@ -3,16 +3,19 @@
  *   - les .bytes (templates + textes)  → .gamedata/extracted/bytes/
  *   - les images (sprite/tex2d)        → .gamedata/extracted/images/
  *   - l'audio (OST/BGM → mp3)          → .gamedata/extracted/audio/bgm/
+ *   - les wallpapers (webp + png)      → .gamedata/extracted/wallpapers/
  *
  * Étape locale (l'outil .NET n'est pas réécrit en TS, juste piloté proprement).
  * Le convert (.bytes → templates typés) viendra ensuite, en TS. L'audio est
- * délégué à `extract-audio.ts` (extraction WAV + fusion + mp3, cf. son en-tête).
+ * délégué à `extract-audio.ts` ; les wallpapers à `extract-wallpapers.ts` (qui
+ * SCANNE le pool d'images ci-dessus — d'où l'ordre images → wallpapers).
  *
  * Usage :
- *   pnpm datagen:extract           # bytes + images + audio
- *   pnpm datagen:extract bytes     # uniquement les .bytes
- *   pnpm datagen:extract images    # uniquement les images
- *   pnpm datagen:extract audio     # uniquement l'OST (= pnpm datagen:extract-audio)
+ *   pnpm datagen:extract              # bytes + images + audio + wallpapers
+ *   pnpm datagen:extract bytes        # uniquement les .bytes
+ *   pnpm datagen:extract images       # uniquement les images
+ *   pnpm datagen:extract audio        # uniquement l'OST (= pnpm datagen:extract-audio)
+ *   pnpm datagen:extract wallpapers   # uniquement les wallpapers (= pnpm datagen:extract-wallpapers)
  *
  * Chemin de l'outil surchargeable via ASTUDIO_CLI.
  */
@@ -22,6 +25,7 @@ import { cpus } from 'node:os';
 import { resolve } from 'node:path';
 import { ASSETSTUDIO, ensureTool } from './tools';
 import { runAudio } from './extract-audio';
+import { runWallpapers } from './extract-wallpapers';
 
 const ROOT = resolve('.gamedata');
 // Surcharge explicite via ASTUDIO_CLI ; sinon `ensureTool` le résout (et le tire
@@ -87,9 +91,19 @@ function extractImages(): void {
   ]);
 }
 
-const what = process.argv[2] ?? 'all';
-if (what === 'bytes' || what === 'all') extractBytes();
-if (what === 'images' || what === 'all') extractImages();
-// L'audio (OST) : sa propre chaîne (WAV → fusion intro/loop → mp3), déléguée.
-if (what === 'audio' || what === 'all') runAudio();
-console.log('✅ Extraction terminée.');
+async function main(): Promise<void> {
+  const what = process.argv[2] ?? 'all';
+  if (what === 'bytes' || what === 'all') extractBytes();
+  if (what === 'images' || what === 'all') extractImages();
+  // L'audio (OST) : sa propre chaîne (WAV → fusion intro/loop → mp3), déléguée.
+  if (what === 'audio' || what === 'all') runAudio();
+  // Les wallpapers DÉRIVENT du pool d'images (scan + dédup sharp) : donc APRÈS
+  // images, et asynchrone. Délégué à extract-wallpapers.ts.
+  if (what === 'wallpapers' || what === 'all') await runWallpapers();
+  console.log('✅ Extraction terminée.');
+}
+
+main().catch((e) => {
+  console.error(`\n\x1b[31mErreur : ${e?.message ?? e}\x1b[0m`);
+  process.exit(1);
+});
