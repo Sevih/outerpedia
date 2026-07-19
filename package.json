@@ -19,6 +19,7 @@
     "datagen:pull": "tsx datagen/extract/pull-gamedata.ts",
     "datagen:tools": "tsx datagen/extract/tools.ts",
     "datagen:extract": "tsx datagen/extract/extract.ts",
+    "datagen:extract-audio": "tsx datagen/extract/extract-audio.ts",
     "datagen:dump": "tsx datagen/extract/dump.ts",
     "datagen:convert": "tsx datagen/templates/convert.ts",
     "datagen:build": "tsx datagen/build.ts",
