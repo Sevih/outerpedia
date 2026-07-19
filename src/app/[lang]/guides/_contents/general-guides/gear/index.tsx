@@ -33,6 +33,7 @@ import { getAscensionView, getEquipmentDetail } from '@/lib/data/equipment-detai
 import type { LocalizedText, EnhanceRules } from '@contracts';
 import enhanceRaw from '@data/generated/equipment/enhance.json';
 import { LABELS } from './labels';
+import { PropertyDiagram } from './PropertyDiagram';
 
 const rules = enhanceRaw as unknown as EnhanceRules;
 
@@ -201,14 +202,14 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
     r >= 80 ? 'text-success' : r >= 50 ? 'text-warn' : 'text-danger';
 
   // ════════════════════════════ Onglet : Bases ════════════════════════════
-  const PROP_KEYS = [
-    LABELS.prop_stars,
-    LABELS.prop_reforge,
-    LABELS.prop_rarity,
-    LABELS.prop_upgrade,
-    LABELS.prop_tier,
-    LABELS.prop_set,
-    LABELS.prop_class,
+  const PROP_ROWS = [
+    { key: 'stars', label: L(LABELS.prop_stars) },
+    { key: 'reforge', label: L(LABELS.prop_reforge) },
+    { key: 'rarity', label: L(LABELS.prop_rarity) },
+    { key: 'upgrade', label: L(LABELS.prop_upgrade) },
+    { key: 'tier', label: L(LABELS.prop_tier) },
+    { key: 'set', label: L(LABELS.prop_set) },
+    { key: 'class', label: L(LABELS.prop_class) },
   ];
   const basicsPanel = (
     <div className="space-y-4 text-sm">
@@ -228,20 +229,14 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
       <Card>
         <Heading>{L(LABELS.basics_propertiesTitle)}</Heading>
         <Prose>{L(LABELS.basics_propertiesText)}</Prose>
-        <div className="flex flex-wrap items-start gap-4">
-          <DotList accent="sky" items={PROP_KEYS.map((p) => L(p))} />
-          {surefire && (
-            <EquipmentIcon
-              icon={surefire.icon}
-              grade="unique"
-              stars={6}
-              tier={1}
-              enhanceLevel={4}
-              overlayIcon={surefire.passives[0]?.icon}
-              size={84}
-            />
-          )}
-        </div>
+        {surefire && (
+          <PropertyDiagram
+            rows={PROP_ROWS}
+            icon={surefire.icon}
+            classType={surefire.classLimits?.[0]}
+            effectIcon={surefire.passives[0]?.icon}
+          />
+        )}
       </Card>
 
       <Card>
@@ -438,33 +433,41 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
                     />
                     <span className="text-content-strong text-sm font-semibold">{set.name}</span>
                   </div>
-                  <div className="space-y-1.5 text-xs">
+                  <div className="space-y-2 text-xs">
                     {(
                       [
-                        ['2P', set.setEffects.p2, set.setEffects.p2e ?? set.setEffects.p2],
-                        ['4P', set.setEffects.p4, set.setEffects.p4e ?? set.setEffects.p4],
+                        ['T0', set.setEffects.p2, set.setEffects.p4, 'text-content-muted'],
+                        [
+                          'T4',
+                          set.setEffects.p2e ?? set.setEffects.p2,
+                          set.setEffects.p4e ?? set.setEffects.p4,
+                          'text-content',
+                        ],
                       ] as const
-                    ).map(([tag, base, t4]) =>
-                      base || t4 ? (
-                        <div key={tag}>
-                          <span className="border-buff/30 bg-buff/10 text-buff mr-1.5 rounded border px-1 text-[10px] font-bold">
-                            {tag}
-                          </span>
-                          {base && (
-                            <SkillDescription desc={base} className="text-content-muted inline" />
-                          )}
-                          {t4 && t4 !== base && (
-                            <>
-                              <span className="text-content-subtle"> → T4 </span>
-                              <SkillDescription desc={t4} className="text-success inline" />
-                            </>
-                          )}
-                          {!base && t4 && (
-                            <SkillDescription desc={t4} className="text-success inline" />
+                    ).map(([tier, p2, p4, cls]) => (
+                      <div key={tier}>
+                        <span className="text-content-subtle mb-1 block text-[10px] font-bold tracking-wide">
+                          {tier}
+                        </span>
+                        <div className="space-y-1">
+                          {(
+                            [
+                              ['2P', p2],
+                              ['4P', p4],
+                            ] as const
+                          ).map(([tag, v]) =>
+                            v ? (
+                              <div key={tag} className="flex gap-1.5">
+                                <span className="border-buff/30 bg-buff/10 text-buff h-fit shrink-0 rounded border px-1 text-[10px] font-bold">
+                                  {tag}
+                                </span>
+                                <SkillDescription desc={v} className={`${cls} inline`} />
+                              </div>
+                            ) : null,
                           )}
                         </div>
-                      ) : null,
-                    )}
+                      </div>
+                    ))}
                   </div>
                 </div>
               ),

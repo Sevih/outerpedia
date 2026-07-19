@@ -31,6 +31,9 @@
 - [ ] **Regen coupons/banner V2 = EXCEPTION assumée** — la source V2 reste la
       référence jusqu'à la bascule prod V2→V3 (liée à la page `/coupons`). Rien
       à faire d'ici là.
+- [ ] **Ajouter la bannière Dimensional Supply au guide banner** (banner-mileage) —
+      elle donne au max 4 segments jaunes sur un substat (cf. guide gear, onglet
+      Bases) ; à documenter côté guide des bannières.
 
 ## 💡 Feature — Outils publics de contribution (BLOQUÉ)
 

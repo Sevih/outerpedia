@@ -202,11 +202,11 @@ export const LABELS = {
     fr: 'Segments Jaunes Maximum',
   },
   basics_maxYellowText: {
-    en: "The maximum number of yellow segments per substat is 3, except for some items in the event shop where you may see 4. Rico's Secret Shop can grant 4 bars on a single substat, but this requires the shop to be max level (and even then, the chance is rare).",
-    jp: 'サブステータスごとの黄色セグメントの最大数は3です。ただし、イベントショップの一部アイテムでは4が見られる場合があります。リコの秘密ショップでは単一のサブステに4本のバーが付くこともありますが、ショップが最大レベルである必要があり、確率も低いです。',
-    kr: '부옵션당 노란색 세그먼트의 최대 수는 3개입니다. 단, 이벤트 상점의 일부 아이템에서는 4개가 나올 수 있습니다. 리코의 비밀 상점에서는 단일 부옵에 4칸이 붙을 수 있지만, 상점이 최대 레벨이어야 하며 확률도 낮습니다.',
-    zh: '每个副属性的黄色条段最多为3条，但活动商店的某些物品可能会出现4条。里科的秘密商店可以给单个副属性4条，但需要商店达到最高等级（即使如此，概率也很低）。',
-    fr: "Le nombre maximum de segments jaunes par substat est de 3, sauf pour certains items des event shops où vous pouvez en voir 4. Rico's Secret Shop peut donner 4 barres sur un seul substat, mais cela requiert que le shop soit au niveau max (et même là, la chance est rare).",
+    en: "The maximum number of yellow segments per substat is 3, except for a few sources where you may see 4: some event shop items, Rico's Secret Shop (requires the shop at max level — and even then the chance is rare), and the Dimensional Supply banner.",
+    jp: 'サブステータスごとの黄色セグメントの最大数は3ですが、4になる場合もあります：一部のイベントショップアイテム、リコの秘密ショップ（ショップが最大レベルである必要があり、確率も低い）、そして Dimensional Supply バナー。',
+    kr: '부옵션당 노란색 세그먼트의 최대 수는 3개이지만, 4개가 나오는 경우도 있습니다: 일부 이벤트 상점 아이템, 리코의 비밀 상점(상점이 최대 레벨이어야 하며 확률도 낮음), 그리고 Dimensional Supply 배너.',
+    zh: '每个副属性的黄色条段最多为3条，但以下来源可能出现4条：部分活动商店物品、里科的秘密商店（需商店满级，且概率很低），以及 Dimensional Supply 卡池。',
+    fr: "Le nombre maximum de segments jaunes par substat est de 3, sauf pour quelques sources où vous pouvez en voir 4 : certains items des event shops, Rico's Secret Shop (nécessite le shop au niveau max — et même là, la chance est rare), et la bannière Dimensional Supply.",
   },
   basics_segmentsSchemaNote: {
     en: 'A substat bar fills across 6 segments: yellow segments come from the initial roll (up to 3), orange segments are added later through reforge — a fully reforged 6★ item can reach 6 active segments on a substat.',
