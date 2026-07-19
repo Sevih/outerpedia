@@ -143,6 +143,31 @@
     **Recent Updates différée** (lit `getChangelog`,
     non porté). Vérifié runtime : 4 bannières actives, 12 coupons, buff du jour OK ;
     465 tests verts.
+- **Guide « How Quirks Work » porté** (quirk, heroes-gear, ordre 3) — le plus
+  « ajout de contenu » : la V2 était PUREMENT conceptuelle (5 catégories,
+  how-it-works, priorité, exemple, FAQ), la V3 y AJOUTE les **arbres reproduits
+  depuis les fichiers du jeu** (demande Sevih). 3 onglets (Guide / Quirk Trees /
+  FAQ). Nouveau générateur `quirks.ts` → `quirks.json` : les quirks = table
+  interne « **Awakening** » (`CharacterAwakeningNodeTemplet` + `…LevelTemplet` +
+  `…Templet`). Les **5 catégories V2 = les 5 groupes** du jeu (PVE→counteract,
+  JOB→class, ELEMENTAL→element, UTILITY, ADVENTURE_LICENSE) ; un sous-arbre = un
+  main node + tous les nœuds dont `RequireMainNodeID` pointe dessus (13 arbres :
+  5 éléments + 5 classes + utility + pve + adventure). Émis par nœud : type
+  (main/normal), couleur de fond du jeu, nom/desc (`TextSystem`, `{0}` = valeur),
+  connexions du graphe, niveau de main requis, et **coût (or + items) + effet PAR
+  NIVEAU**. Valeur d'effet dérivée pour les 128 nœuds `IOT_STAT`
+  (`formatStatValue` sur le SLUG, pas l'enum — CHC 2%/4%…) ; les 79 nœuds
+  `IOT_BUFF` (buffs `Awakening_*` ABSENTS de `BuffTemplet`) → nom + coût sans
+  chiffre (limite assumée). Rendu : **layout radial dérivé, main node au CENTRE**
+  (choix Sevih ; positions in-game relatives/ambiguës → on reconstruit le graphe
+  depuis les connexions, profondeur = distance), nœuds en pastilles teintées par
+  leur couleur (sprites `CM_Gift_*` non collectés), **tooltip au survol** (nom,
+  effet, coût total au max, niveau de déblocage) — client `QuirkTreeView` +
+  navigateur `QuirkTrees` (onglets catégorie + sélecteur élément/classe). Prose
+  5 langues portée V2 → `labels.ts` (tags `{C/}{E/}{S/}{P/}{I-I/}` supportés par
+  le parse-text V3 ; `{ICON_*}` de catégorie résolus en terme gras faute de
+  sprite de menu). Icône meta `TI_Gift_Cost_01` (choix Sevih). Rendu 200 EN + FR,
+  0 réf morte.
 - **Guide « Equipment Guide » porté** (gear, heroes-gear, ordre 2) — le plus
   gros des general-guides, 5 onglets (Bases, Upgrading, Ascension, Obtaining,
   FAQ). Port INTÉGRAL fidèle (décision Sevih), mais **zéro hardcode** : les

@@ -149,6 +149,13 @@ export type {
   QuirkBlock,
   StatBonus,
 } from '../generators/progression';
+export type {
+  QuirksData,
+  QuirkCategory,
+  QuirkTree,
+  QuirkNode,
+  QuirkLevel,
+} from '../generators/quirks';
 export type { ItemSources } from '../generators/sources';
 export type {
   MonadNode,

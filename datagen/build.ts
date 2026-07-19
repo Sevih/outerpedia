@@ -45,6 +45,7 @@ import { buildBosses } from './generators/bosses';
 import { buildItemSources } from './generators/sources';
 import { buildEnhanceRules } from './generators/enhance';
 import { buildProgression } from './generators/progression';
+import { buildQuirks } from './generators/quirks';
 import { buildItems } from './generators/items';
 import { buildAssetTypes, buildGoods } from './generators/goods';
 import { buildCostumes } from './generators/costumes';
@@ -236,6 +237,7 @@ async function main(): Promise<void> {
   await writeJson('equipment/sources.json', sources);
   await writeJson('equipment/enhance.json', buildEnhanceRules());
   await writeJson('progression.json', buildProgression());
+  await writeJson('quirks.json', buildQuirks());
   const equipCurated = loadEquipmentCurated();
   const curatedIssues = validateEquipmentCurated(equipCurated);
   if (curatedIssues.length) {

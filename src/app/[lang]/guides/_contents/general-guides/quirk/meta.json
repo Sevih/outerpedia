@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "How Quirks Work",
+    "jp": "ギフトの仕組み",
+    "kr": "기프트 작동 방식",
+    "zh": "天赋机制说明",
+    "fr": "Fonctionnement des Quirks"
+  },
+  "description": {
+    "en": "The account-wide Quirk (Awakening) system — categories, how nodes work, upgrade priority, and every quirk tree reproduced from the game files.",
+    "jp": "アカウント全体のギフト（覚醒）システム — カテゴリー、ノードの仕組み、優先順位、そしてゲームデータから再現した全ギフトツリー。",
+    "kr": "계정 전체 기프트(각성) 시스템 — 카테고리, 노드 작동 방식, 업그레이드 우선순위, 그리고 게임 데이터에서 재현한 모든 기프트 트리.",
+    "zh": "全账户天赋（觉醒）系统——类别、节点机制、升级优先级，以及从游戏文件还原的所有天赋树。",
+    "fr": "Le système de Quirks (Awakening) global au compte — catégories, fonctionnement des nœuds, priorité d'upgrade, et chaque arbre de quirks reproduit depuis les fichiers du jeu."
+  },
+  "icon": "TI_Gift_Cost_01",
+  "author": "Shiraen",
+  "updated": "2026-07-19",
+  "order": 3,
+  "tier": "heroes-gear"
+}
