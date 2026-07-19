@@ -32,12 +32,14 @@
   --content-strong: #f1f5f9;
   --content: #cbd5e1;
   --content-muted: #94a3b8;
-  --content-subtle: #808ea6;
+  --content-subtle: #8a98af;
 
-  /* Lignes — slate */
-  --line-subtle: #1e293b;
-  --line: #334155;
-  --line-strong: #475569;
+  /* Lignes — slate. Remontées pour rester visibles À MÊME le fond du site
+     (sans surface derrière) : les valeurs d'origine (1.3–2.5:1) disparaissaient
+     sur `--surface-base`. Cible ≈ 2.5 / 3 / 4:1, hiérarchie subtle<normal<strong. */
+  --line-subtle: #42566e;
+  --line: #526075;
+  --line-strong: #64748b;
   --ring: #38bdf8;
 
   /* Accent / états — bleu ciel */
