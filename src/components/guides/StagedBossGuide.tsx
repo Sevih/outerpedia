@@ -323,6 +323,7 @@ export async function StagedBossGuide({ lang, guide }: GuideContentProps) {
                 <SegmentedTabs
                   ariaLabel={t('guides.team_selector')}
                   urlKey="team"
+                  variant="game"
                   tabs={teams.buckets.map((bucket) => {
                     const [from, to] = bucket.stages;
                     return {

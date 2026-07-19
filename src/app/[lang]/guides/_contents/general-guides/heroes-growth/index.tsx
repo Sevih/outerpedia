@@ -445,7 +445,7 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
   return (
     <>
       <Prose>{L(LABELS.intro)}</Prose>
-      <SegmentedTabs tabs={tabs} ariaLabel={L(LABELS.intro)} urlKey="tab" variant="pill" />
+      <SegmentedTabs tabs={tabs} ariaLabel={L(LABELS.intro)} urlKey="tab" variant="game" />
     </>
   );
 }

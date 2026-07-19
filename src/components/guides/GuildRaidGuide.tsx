@@ -368,7 +368,12 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
         content: (
           <div className="space-y-6">
             {cfg?.main && <BossEncounters group={cfg.main} lang={lang} hideSpawnLabel compact />}
-            <SegmentedTabs ariaLabel={t('guides.tips.phase2')} tabs={teamTabs} urlKey="team" />
+            <SegmentedTabs
+              ariaLabel={t('guides.tips.phase2')}
+              tabs={teamTabs}
+              urlKey="team"
+              variant="game"
+            />
           </div>
         ),
       });
@@ -387,7 +392,12 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
         : {}),
       content: (
         <div className="space-y-6">
-          <SegmentedTabs ariaLabel={t('guides.strategy_guide')} tabs={phaseTabs} urlKey="phase" />
+          <SegmentedTabs
+            ariaLabel={t('guides.strategy_guide')}
+            tabs={phaseTabs}
+            urlKey="phase"
+            variant="game"
+          />
           {cfg?.videos?.length ? (
             <section className="space-y-2">
               <h2 className="text-content-strong text-xl font-bold">

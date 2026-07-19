@@ -164,7 +164,7 @@ export default function TimegateResourceGuide({ lang }: { lang: Lang }) {
   return (
     <>
       <Prose>{L(LABELS.intro)}</Prose>
-      <SegmentedTabs tabs={tabs} ariaLabel={L(LABELS.headers.source)} urlKey="tab" variant="pill" />
+      <SegmentedTabs tabs={tabs} ariaLabel={L(LABELS.headers.source)} urlKey="tab" variant="game" />
     </>
   );
 }

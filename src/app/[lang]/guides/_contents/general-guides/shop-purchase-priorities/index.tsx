@@ -213,29 +213,29 @@ export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang
   const ShopTable = ({ rows }: { rows: Row[] }) => {
     const hasNotes = rows.some((r) => r.notes);
     return (
-      <div className="border-line overflow-x-auto rounded-xl border">
+      <div className="border-line bg-surface-overlay mx-auto max-w-4xl overflow-x-auto rounded-xl border">
         <table className="w-full text-sm">
           <thead className="bg-surface-sunken text-content-subtle text-xs">
             <tr>
-              <th className="px-3 py-2 text-left font-medium">{L(LABELS.colPriority)}</th>
-              <th className="px-3 py-2 text-left font-medium">{L(LABELS.colItem)}</th>
-              <th className="px-3 py-2 text-left font-medium">{L(LABELS.colCost)}</th>
-              <th className="px-3 py-2 text-left font-medium">{L(LABELS.colLimit)}</th>
+              <th className="px-2.5 py-1.5 text-left font-medium">{L(LABELS.colPriority)}</th>
+              <th className="px-2.5 py-1.5 text-left font-medium">{L(LABELS.colItem)}</th>
+              <th className="px-2.5 py-1.5 text-left font-medium">{L(LABELS.colCost)}</th>
+              <th className="px-2.5 py-1.5 text-left font-medium">{L(LABELS.colLimit)}</th>
               {hasNotes && (
-                <th className="px-3 py-2 text-left font-medium">{L(LABELS.colNotes)}</th>
+                <th className="px-2.5 py-1.5 text-left font-medium">{L(LABELS.colNotes)}</th>
               )}
             </tr>
           </thead>
           <tbody>
             {rows.map((r, i) => (
-              <tr key={i} className="border-line-subtle border-t">
-                <td className="px-3 py-2">
+              <tr key={i} className="border-line-subtle even:bg-surface-raised/40 border-t">
+                <td className="px-2.5 py-1.5">
                   <PriorityBadge p={r.priority} />
                 </td>
-                <td className="text-content px-3 py-2">{r.item}</td>
-                <td className="text-content px-3 py-2">{r.cost}</td>
-                <td className="text-content px-3 py-2 text-center">{r.limit}</td>
-                {hasNotes && <td className="px-3 py-2">{r.notes}</td>}
+                <td className="text-content px-2.5 py-1.5">{r.item}</td>
+                <td className="text-content px-2.5 py-1.5">{r.cost}</td>
+                <td className="text-content px-2.5 py-1.5 text-center">{r.limit}</td>
+                {hasNotes && <td className="px-2.5 py-1.5">{r.notes}</td>}
               </tr>
             ))}
           </tbody>
@@ -339,7 +339,7 @@ export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang
   return (
     <>
       <Prose>{L(LABELS.description)}</Prose>
-      <SegmentedTabs tabs={tabs} ariaLabel={L(LABELS.colItem)} urlKey="shop" variant="pill" />
+      <SegmentedTabs tabs={tabs} ariaLabel={L(LABELS.colItem)} urlKey="shop" variant="game" />
     </>
   );
 }

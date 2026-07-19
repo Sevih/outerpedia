@@ -865,7 +865,7 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
   return (
     <>
       <Prose>{L(LABELS.intro)}</Prose>
-      <SegmentedTabs tabs={tabs} ariaLabel={L(LABELS.heading)} urlKey="tab" variant="pill" />
+      <SegmentedTabs tabs={tabs} ariaLabel={L(LABELS.heading)} urlKey="tab" variant="game" />
     </>
   );
 }

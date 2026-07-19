@@ -243,7 +243,7 @@ export default async function QuirkGuide({ lang }: { lang: Lang }) {
     <>
       <Prose>{P(LABELS.introP1)}</Prose>
       <Prose>{P(LABELS.introP2)}</Prose>
-      <SegmentedTabs tabs={tabs} ariaLabel={L(LABELS.title)} urlKey="tab" variant="pill" />
+      <SegmentedTabs tabs={tabs} ariaLabel={L(LABELS.title)} urlKey="tab" variant="game" />
     </>
   );
 }

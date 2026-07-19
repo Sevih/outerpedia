@@ -39,10 +39,11 @@ export function SegmentedTabs({
   /**
    * Style des boutons : `pill` (segmenté compact, défaut), `boss` (boutons
    * riches, portrait + nom + élément, surbrillance en anneau — le sélecteur de
-   * sous-boss façon V2) ou `icon` (juste l'icône, anneau doré sur l'actif — les
-   * onglets de compétences en mode compact).
+   * sous-boss façon V2), `icon` (juste l'icône, anneau doré sur l'actif — les
+   * onglets de compétences en mode compact) ou `game` (onglets « jeu » centrés,
+   * glow doré sur l'actif — calqués sur les Tabs V2).
    */
-  variant?: 'pill' | 'boss' | 'icon';
+  variant?: 'pill' | 'boss' | 'icon' | 'game';
 }) {
   const [localSelected, setLocalSelected] = useState(0);
   // Lecture inconditionnelle (règle des hooks) ; ignorée sans `urlKey`. Snapshot
@@ -76,7 +77,9 @@ export function SegmentedTabs({
       ? 'flex flex-wrap gap-2'
       : variant === 'icon'
         ? 'flex flex-wrap gap-1.5'
-        : 'border-line-subtle bg-surface-sunken inline-flex flex-wrap gap-0.5 rounded-lg border p-0.5';
+        : variant === 'game'
+          ? 'flex flex-wrap justify-center gap-2'
+          : 'border-line-subtle bg-surface-sunken inline-flex flex-wrap gap-0.5 rounded-lg border p-0.5';
 
   const buttonClass = (isActive: boolean) => {
     if (variant === 'boss')
@@ -89,6 +92,15 @@ export function SegmentedTabs({
     if (variant === 'icon')
       return `rounded-lg p-0.5 transition ${
         isActive ? 'ring-accent ring-2' : 'cursor-pointer opacity-50 hover:opacity-100'
+      }`;
+    // `game` : onglets centrés façon V2 — actif en glow doré (tout le visuel est
+    // dans la classe CSS `.tab-game-active`, ambre brut interdit ici), inactif
+    // bordé discret via tokens de surface.
+    if (variant === 'game')
+      return `rounded px-4 py-2 text-sm font-medium transition-all ${
+        isActive
+          ? 'tab-game-active'
+          : 'border-line-subtle text-content-muted hover:text-content-strong hover:bg-surface-raised hover:border-line-strong cursor-pointer border'
       }`;
     return `flex items-center gap-1.5 rounded-md px-3 py-1 text-sm font-semibold transition-colors ${
       isActive ? 'bg-accent text-accent-fg' : 'text-content hover:bg-surface-raised cursor-pointer'
