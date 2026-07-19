@@ -6,9 +6,14 @@ import { listMonsters } from '@/lib/data/monsters';
 import { buildInlineRefs } from '@/lib/admin/inline-refs';
 import { guideSpec, isEditableGuideCategory } from '@/lib/admin/guide-draft';
 import { loadGuideDraft } from '@/lib/admin/guide-store';
-import { isEditableGeneralGuide, loadFreeHeroes } from '@/lib/admin/general-guide-store';
+import {
+  isEditableGeneralGuide,
+  loadFreeHeroes,
+  loadPremiumLimited,
+} from '@/lib/admin/general-guide-store';
 import { GuideEditor } from '@/components/admin/GuideEditor';
 import { FreeHeroesEditor } from '@/components/admin/FreeHeroesEditor';
+import { PremiumLimitedEditor } from '@/components/admin/PremiumLimitedEditor';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,13 +34,33 @@ export default async function GuideEditPage({
     rarity: c.rarity,
   }));
 
-  // Guides GÉNÉRAUX à fragment éditable (contenu bespoke) : éditeur dédié.
+  // Guides GÉNÉRAUX à fragment éditable (contenu bespoke) : éditeur dédié par slug.
   if (category === 'general-guides' && isEditableGeneralGuide(slug)) {
+    const header = (
+      <h1 className="text-content-strong text-xl font-semibold">
+        {guide.title.en} <span className="text-content-subtle text-sm">· general-guides</span>
+      </h1>
+    );
+    if (slug === 'premium-limited') {
+      return (
+        <div className="space-y-4">
+          {header}
+          <p className="text-content-subtle text-sm">
+            Reviews are publicly contributable (Shiraen) via{' '}
+            <code className="text-content">/contribute/premium-reviews</code> — import their export
+            here.
+          </p>
+          <PremiumLimitedEditor
+            initial={loadPremiumLimited()}
+            refs={buildInlineRefs()}
+            charOptions={charOptions}
+          />
+        </div>
+      );
+    }
     return (
       <div className="space-y-4">
-        <h1 className="text-content-strong text-xl font-semibold">
-          {guide.title.en} <span className="text-content-subtle text-sm">· general-guides</span>
-        </h1>
+        {header}
         <FreeHeroesEditor
           slug={slug}
           initial={loadFreeHeroes()}

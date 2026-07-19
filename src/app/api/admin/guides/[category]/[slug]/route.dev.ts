@@ -5,12 +5,14 @@ import { addGuideVersion, loadGuideDraft, saveGuideDraft } from '@/lib/admin/gui
 import {
   isEditableGeneralGuide,
   saveFreeHeroes,
+  savePremiumLimited,
   type FreeHeroesData,
+  type PremiumLimitedData,
 } from '@/lib/admin/general-guide-store';
 
 type Body =
   | { op: 'save'; draft: GuideDraft }
-  | { op: 'save'; data: FreeHeroesData }
+  | { op: 'save'; data: FreeHeroesData | PremiumLimitedData }
   | { op: 'add-version'; newKey: string; fromKey: string };
 
 // Outil local : 403 en prod, écriture fichier seulement en dev.
@@ -23,13 +25,17 @@ export async function POST(
   const { category, slug } = await params;
   const body = (await req.json()) as Body;
 
-  // Guides GÉNÉRAUX à fragment éditable : payload bespoke (`data`), store dédié.
+  // Guides GÉNÉRAUX à fragment éditable : payload bespoke (`data`), store dédié
+  // dispatché par slug.
   if (category === 'general-guides') {
     if (body.op !== 'save' || !('data' in body))
       return NextResponse.json({ error: 'op inconnue' }, { status: 400 });
     if (!isEditableGeneralGuide(slug))
       return NextResponse.json({ error: 'guide non éditable' }, { status: 400 });
-    const errors = await saveFreeHeroes(body.data);
+    const errors =
+      slug === 'premium-limited'
+        ? await savePremiumLimited(body.data as PremiumLimitedData)
+        : await saveFreeHeroes(body.data as FreeHeroesData);
     if (errors.length) return NextResponse.json({ ok: false, errors }, { status: 400 });
     return NextResponse.json({ ok: true });
   }
