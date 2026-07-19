@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/guides',
     ...GUIDE_CATEGORY_SLUGS.filter((c) => countGuides(c) > 0).map((c) => `/guides/${c}`),
     '/legal',
+    '/contributors',
   ];
 
   const entry = (path: string, lastModified?: string): MetadataRoute.Sitemap[number] => ({

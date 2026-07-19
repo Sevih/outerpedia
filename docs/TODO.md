@@ -102,7 +102,9 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
       avant (`/tools#slug`).
 - [ ] **`/coupons`** — clés `coupons.*` ; lié à l'EXCEPTION PRIO (le regen
       coupons V2 reste la source jusqu'à la bascule prod).
-- [ ] **`/contributors`** — dépend du portage `contributors.json` (item 📦).
+- [x] ~~**`/contributors`** — dépend du portage `contributors.json` (item 📦).~~
+      FAIT le 19/07 (cf. DONE) : `contributors.json` ramené en curé + avatars
+      (data-driven), page statique i18n, perso favori via `parseText` (`{P/…}`).
 - [ ] **`/changelog`** — clés `changelog.*` ; lié au resync CHANGELOG.md
       (item 📚).
 - [x] ~~**`/legal`** — mentions légales (lien de la barre basse du footer).~~
@@ -239,7 +241,8 @@ Règle permanente : chaque `meta.bossId` d'un guide porté doit exister dans
 - [ ] **`bgm-mapping`** ← `LobbyCustomResourceTemplet` + TextSystem (fichier /
       nom localisé / durée).
 - [ ] **`name-aliases.json`** (curé) — alias de recherche par perso.
-- [ ] **`contributors.json`** (curé) — contributeurs du site.
+- [x] ~~**`contributors.json`** (curé) — contributeurs du site.~~ FAIT le 19/07 :
+      ramené tel quel en `data/curated/`, avatars collectés data-driven (manifest).
 - [ ] Patch-notes : quand la PAGE sera portée, préfixer `NEXT_PUBLIC_IMG_BASE`
       sur les `src` relatifs stockés (`/images/patch-notes/…webp`).
 - [ ] (Contenu, pas data) Les 3 Promotion Challenge « boostés » (Supreme 4-6,

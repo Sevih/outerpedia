@@ -1039,6 +1039,18 @@ export function buildAssetManifest(): AssetRequest[] {
       source: `ui/buffs/${buff}.webp`,
       domain: 'editorial',
     });
+  // Avatars des contributeurs (page /contributors) — collecte DATA-DRIVEN depuis
+  // le curé : chaque `avatar` référencé, une seule fois.
+  const contributors = JSON.parse(
+    readFileSync(resolve('data/curated/contributors.json'), 'utf8'),
+  ) as { avatar: string }[];
+  for (const avatar of new Set(contributors.map((c) => c.avatar)))
+    push({
+      kind: 'editorial',
+      key: `images/contributors/${avatar}.webp`,
+      source: `contributors/${avatar}.webp`,
+      domain: 'editorial',
+    });
   // Icônes de tags (créées pour le wiki).
   for (const tag of [
     'premium',

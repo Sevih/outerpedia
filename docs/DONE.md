@@ -6,6 +6,14 @@
 
 ## 2026-07-19
 
+- **Page `/contributors`** — 3ᵉ 404 du footer fermée. `contributors.json`
+  ramené du V2 en `data/curated/` (liste curée, pas de la donnée de jeu) ;
+  avatars (`images/contributors/*`) collectés **data-driven** (le manifest lit
+  le curé et pousse chaque `avatar` référencé une fois) + copie staging ;
+  helper `img.contributor`. Page statique i18n (clés `contributors.*`), grille de
+  cartes sur primitives V3, perso(s) favori(s) rendus par `parseText` (tags
+  `{P/…}`), ajoutée au sitemap. Vérifié : les 14 persos favoris résolvent tous.
+  Poussée R2 des avatars au prochain `pnpm images`.
 - **Guide editor — pilote joint-challenge (éditeur unifié « guide de boss »)** —
   dernier éditeur manquant de la matrice admin, posé sur la catégorie la plus
   utile (versionnée). Modèle métier (Sevih) : 1 monstre désigné + conseils +

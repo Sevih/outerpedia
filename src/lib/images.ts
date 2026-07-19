@@ -91,6 +91,8 @@ export const img = {
   discord: () => `${BASE}/images/discord.webp`,
   /** Icône d'un type de buff (widget Daily Buff — nom de sprite retravaillé). */
   buff: (sprite: string) => `${BASE}/images/ui/buffs/${sprite}.webp`,
+  /** Avatar d'un contributeur (page /contributors — clé `avatar` du curé). */
+  contributor: (avatar: string) => `${BASE}/images/contributors/${avatar}.webp`,
   /** Icône de l'or (coûts d'ascension). */
   gold: () => `${BASE}/images/items/CM_Goods_Gold.webp`,
   /** Icône d'item générique (gifts, pièces de rappel…). */
