@@ -21,7 +21,8 @@
  *
  * Usage : `pnpm datagen:extract-audio` (autonome), OU branché sur l'ombrelle
  * `pnpm datagen:extract [all]` via `runAudio()` (cf. datagen/extract/extract.ts).
- * Surcharges : ASTUDIO_CLI (exe), FFMPEG (binaire ffmpeg).
+ * Outils auto-résolus via `ensureTool` (tirés de R2 s'ils manquent) : AssetStudio
+ * + ffmpeg. Surcharges d'exe : ASTUDIO_CLI, FFMPEG (build local hors R2).
  */
 import { execFileSync } from 'node:child_process';
 import {
@@ -36,7 +37,7 @@ import {
 import { cpus } from 'node:os';
 import { parse as parsePath, resolve } from 'node:path';
 import { isMain } from '../lib/is-main';
-import { ASSETSTUDIO, ensureTool } from './tools';
+import { ASSETSTUDIO, FFMPEG, ensureTool } from './tools';
 
 const ROOT = resolve('.gamedata');
 const BUNDLES = resolve(ROOT, 'files/bundles');
@@ -48,23 +49,13 @@ const BITRATE = '192k';
 const BGM_FILTER =
   '^(Agitpunkt|Battle_|Boss_|Event_|Guild_Agit|Intro|Lobby_|Remains_|Scene_|Gacha_BGM|Monadgate|Result_|RTPVP_|RuinIsland)';
 
-/** ffmpeg : override FFMPEG, sinon sur le PATH. Absent = étape impossible. */
+/**
+ * ffmpeg : override `FFMPEG` (build local), sinon `ensureTool(FFMPEG)` le résout
+ * et le tire de R2 (`tools/ffmpeg`) au besoin — même binaire auto-fetch que le
+ * ffprobe du mapping OST, zéro dépendance PATH.
+ */
 function ffmpegBin(): string {
-  const override = process.env.FFMPEG;
-  if (override) return override;
-  try {
-    const out = execFileSync(process.platform === 'win32' ? 'where' : 'which', ['ffmpeg'], {
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'ignore'],
-    });
-    const first = out.trim().split('\n')[0];
-    if (first) return first;
-  } catch {
-    /* introuvable */
-  }
-  throw new Error(
-    'ffmpeg introuvable (PATH ou variable FFMPEG) — requis pour la conversion audio.',
-  );
+  return process.env.FFMPEG ?? ensureTool(FFMPEG);
 }
 
 /** 1) Extraction WAV depuis les bundles, à plat dans `WAV_TMP`. */
