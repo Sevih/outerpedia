@@ -38,9 +38,10 @@
     "assets:collect": "tsx datagen/assets/collect.ts",
     "assets:collect-audio": "tsx datagen/assets/collect-audio.ts",
     "assets:collect-wallpapers": "tsx datagen/assets/collect-wallpapers.ts",
+    "assets:collect-comics": "tsx datagen/assets/collect-comics.ts",
     "assets:pull": "tsx datagen/assets/pull.ts",
     "assets:push": "node scripts/assets-push.mjs",
-    "images": "pnpm assets:collect && pnpm assets:collect-audio && pnpm assets:collect-wallpapers && pnpm assets:push",
+    "images": "pnpm assets:collect && pnpm assets:collect-audio && pnpm assets:collect-wallpapers && pnpm assets:collect-comics && pnpm assets:push",
     "datagen:face-layout": "python datagen/assets/extract-face-layout.py"
   },
   "dependencies": {

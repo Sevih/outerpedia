@@ -6,6 +6,21 @@
 
 ## 2026-07-19
 
+- **Sous-outil `/4-comics` (galerie BD) — 3ᵉ et dernier média** (ordre Sevih :
+  ost → wallpapers → 4-comics ✓). BD faites main (hors jeu) : **ramenées en V3**
+  (27×3 EN/JP/KR de la V2 → `.editorial/comics/<LANG>/`, gitignoré → R2), zéro
+  dépendance V2. Générateur `datagen/generators/comics.ts` (`buildComics`, scanne
+  les originaux → `{EN,JP,KR}` de stems). Collect `collect-comics.ts` (originaux
+  → webp `quality:90`, idempotent mtime) ajouté à `pnpm images`. Page
+  `_contents/4-comics/` (wrapper serveur + `ComicsGallery` client : onglets
+  langue, grille portrait, lightbox clavier) sur tokens V3. Lib `comics.ts`,
+  registre outils, `data/generated/comics.json`.
+  • **Manifeste RUNTIME sur R2 (décision Sevih)** : pour ne PAS redéployer à
+  chaque BD, `collect-comics` pousse aussi `images/4-comics/comics.json` sur R2 ;
+  la page le lit à la requête (`fetch` + `revalidate:600`), repli sur le seed
+  committé en dev / si R2 injoignable. Ajouter une BD = `pnpm images`, visible
+  < 10 min sans build. Non câblé dans `build.ts` exprès (buildComics lit
+  `.editorial`, absent en CI → écraserait le seed). tsc app + datagen + eslint OK.
 - **Contribution premium/limited (Shiraen) — outil public + import admin
   générique.** Chaîne complète export→import bouclée.
   • **Outil public** `/contribute/premium-reviews` refondu : EN uniquement (pas

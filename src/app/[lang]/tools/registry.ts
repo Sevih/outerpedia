@@ -13,6 +13,7 @@ export const TOOL_COMPONENTS: Record<
 > = {
   ost: () => import('./_contents/ost'),
   wallpapers: () => import('./_contents/wallpapers'),
+  '4-comics': () => import('./_contents/4-comics'),
 };
 
 /** Slugs des outils portés (routeur + `generateStaticParams`). */
