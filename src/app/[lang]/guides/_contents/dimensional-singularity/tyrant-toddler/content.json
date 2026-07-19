@@ -104,5 +104,14 @@
         }
       ]
     }
+  ],
+  "videos": [
+    {
+      "platform": "youtube",
+      "id": "S84F1X5hZWE",
+      "title": "Dimensional Singularity Tyrant Toddler - S.Delta Team | Outerplane",
+      "author": "baba yaga",
+      "label": "S.Delta"
+    }
   ]
 }

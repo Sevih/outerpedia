@@ -1,10 +1,10 @@
 {
   "title": {
-    "en": "How Quirks Work",
-    "jp": "ギフトの仕組み",
-    "kr": "기프트 작동 방식",
-    "zh": "天赋机制说明",
-    "fr": "Fonctionnement des Quirks"
+    "en": "Quirk System",
+    "jp": "ギフトシステム",
+    "kr": "기프트 시스템",
+    "zh": "天赋系统",
+    "fr": "Système de Quirks"
   },
   "description": {
     "en": "The account-wide Quirk (Awakening) system — categories, how nodes work, upgrade priority, and every quirk tree reproduced from the game files.",

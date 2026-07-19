@@ -490,9 +490,11 @@ export const VARIABLE_ITEMS: Record<string, LocalizedText> = {
     fr: "Récompenses d'Ether Terminus Island (22-26 sur la treasure reward de Terminus 10) (5 chances par jour ×2 avec le terminus pack)",
   },
   'variable.updateEvent': {
+    en: "Every update's event",
     jp: '各アップデートのイベント',
     kr: '각 업데이트 이벤트',
     zh: '每次更新活动',
+    fr: 'Event de chaque update',
   },
   'variable.sideStories': {
     en: 'New Side Stories every new character (non-premium/limited)',

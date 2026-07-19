@@ -1,10 +1,10 @@
 {
   "title": {
-    "en": "Weekly & Monthly Reference Tables",
-    "jp": "週間・月間リソース一覧表",
-    "kr": "주간 & 월간 참고표",
-    "zh": "每周与每月参考表",
-    "fr": "Tableaux de référence hebdomadaires & mensuels"
+    "en": "Timegated Resources Guide",
+    "jp": "時間制限リソースガイド",
+    "kr": "시간 제한 자원 가이드",
+    "zh": "有限资源指南",
+    "fr": "Guide des ressources Timegated"
   },
   "description": {
     "en": "Every regular weekly and monthly source of timegated Outerplane resources — skill manuals, transistones, stardust, glunite, singularity gear and limit break — with per-source amounts and monthly totals.",

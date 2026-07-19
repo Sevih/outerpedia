@@ -1,5 +1,14 @@
 {
   "group": "world_boss:4086025",
+  "notes": [
+    {
+      "en": "No full written guide has been made yet. For now, we recommend watching this video by Ducky.",
+      "jp": "完全な攻略ガイドはまだ作成されていません。現時点では、Duckyさんのこの動画をご覧いただくことをお勧めします。",
+      "kr": "아직 완전한 공략 가이드가 작성되지 않았습니다. 현재로서는 Ducky님의 이 영상을 시청하시길 권장합니다.",
+      "zh": "完整的攻略指南尚未制作。目前，我们推荐观看Ducky制作的这部视频。",
+      "fr": "Aucun guide écrit complet n'a encore été rédigé. En attendant, nous vous recommandons de regarder cette vidéo de Ducky."
+    }
+  ],
   "videos": [
     {
       "platform": "youtube",
