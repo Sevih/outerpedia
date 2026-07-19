@@ -18,11 +18,12 @@
  * pool + des tables — le staging n'est qu'un tampon de push. Le mp3 n'est pas
  * ré-extrait ici (la conversion WAV→MP3 vit dans la chaîne datamine).
  *
- * Exécution : autonome via `pnpm datagen:bgm`, OU intégré à `pnpm datagen:build`
- * (buildBgmMapping) — dans les deux cas écrit/propose `bgm_mapping.json`.
+ * Écriture CANONIQUE : `pnpm datagen:build` (writeJson + revue via `promote`),
+ * comme tout `data/generated/`. L'exécution directe (`tsx …/bgm-mapping.ts`)
+ * se contente d'IMPRIMER le résultat pour revue — elle n'écrit rien.
  */
 import { execFile as execFileCb, execFileSync } from 'node:child_process';
-import { readdirSync, statSync, writeFileSync } from 'node:fs';
+import { readdirSync, statSync } from 'node:fs';
 import { parse as parsePath, resolve } from 'node:path';
 import { promisify } from 'node:util';
 import { loadTable } from '../lib/tables';
@@ -33,7 +34,6 @@ import { isMain } from '../lib/is-main';
 const execFile = promisify(execFileCb);
 
 const AUDIO_DIR = resolve(process.cwd(), '.gamedata/extracted/audio/bgm');
-const OUTPUT = resolve(process.cwd(), 'data/generated/bgm_mapping.json');
 
 /** Une piste de l'OST : nom localisé (anglais toujours) + métadonnées. */
 export interface BgmTrack {
@@ -180,10 +180,8 @@ export async function buildBgmMapping(): Promise<BgmTrack[]> {
   return tracks;
 }
 
+// Exécution directe = REVUE (impression), comme les autres générateurs ; le
+// writer canonique de `bgm_mapping.json` est `datagen:build`.
 if (isMain(import.meta.url)) {
-  buildBgmMapping().then((tracks) => {
-    writeFileSync(OUTPUT, `${JSON.stringify(tracks, null, 2)}\n`);
-    const localized = tracks.filter((t) => t.name_jp || t.name_kr || t.name_zh).length;
-    console.log(`bgm_mapping.json — ${tracks.length} pistes (${localized} localisées)`);
-  });
+  buildBgmMapping().then((tracks) => console.log(JSON.stringify(tracks, null, 2)));
 }

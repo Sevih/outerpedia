@@ -5,7 +5,7 @@ import { OstPlayer, type BgmTrack } from './OstPlayer';
 
 /**
  * OST (jukebox) — wrapper SERVEUR : résout les libellés i18n et passe la table
- * `bgm_mapping.json` (générée par `pnpm datagen:bgm`) au player client. La
+ * `bgm_mapping.json` (générée par `pnpm datagen:build`) au player client. La
  * localisation des NOMS de piste se fait côté client depuis les champs
  * `name_<lang>` de chaque entrée.
  */

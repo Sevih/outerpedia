@@ -9,7 +9,7 @@
  * regex de familles de l'extracteur filtre) : on copie TOUT, aucun orphelin.
  *
  * On copie tout (pas de filtrage par le mapping) pour que de NOUVELLES pistes
- * atterrissent en staging et soient découvertes par `pnpm datagen:bgm` ; le
+ * atterrissent en staging et soient découvertes par `pnpm datagen:build` ; le
  * mapping est DÉRIVÉ du pool, pas l'inverse.
  *
  * Idempotent : ne recopie qu'un fichier absent ou de taille différente. Si le
