@@ -35,9 +35,10 @@
     "clean": "node -e \"for(const f of ['.next'])require('fs').rmSync(f,{recursive:true,force:true})\"",
     "clean:all": "node -e \"for(const f of ['.next','node_modules'])require('fs').rmSync(f,{recursive:true,force:true})\" && pnpm install",
     "assets:collect": "tsx datagen/assets/collect.ts",
+    "assets:collect-audio": "tsx datagen/assets/collect-audio.ts",
     "assets:pull": "tsx datagen/assets/pull.ts",
     "assets:push": "node scripts/assets-push.mjs",
-    "images": "pnpm assets:collect && pnpm assets:push",
+    "images": "pnpm assets:collect && pnpm assets:collect-audio && pnpm assets:push",
     "datagen:face-layout": "python datagen/assets/extract-face-layout.py"
   },
   "dependencies": {

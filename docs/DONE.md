@@ -25,8 +25,11 @@
   ré-extraction datamine) sont RÉUTILISÉS, pas re-générés.
   • **Audio** : helper `src/lib/audio.ts` (base R2 partagée, préfixe `/audio`),
   route dev `src/app/audio/[...path]/route.dev.ts` avec **support `Range`**
-  (206) pour le seek. 91 mp3 (122 Mo) ramenés en staging (gitignoré). Push R2
-  = étape de déploiement différée (comme les images).
+  (206) pour le seek. 91 mp3 (122 Mo) en staging (gitignoré). **Push R2 câblé**
+  dans `pnpm images` : nouveau `assets:collect-audio` (data-driven — ne copie que
+  les mp3 référencés par `bgm_mapping.json`, source pool V2 `v2AudioBgmDir`) ;
+  `assets:push` parcourt déjà tout le staging → les mp3 montent sur R2
+  (`img.outerpedia.com/audio/bgm/*.mp3`, content-type auto par rclone).
   • **Page** `_contents/ost/` : wrapper serveur (résout les libellés, passe la
   table) + `OstPlayer` client (logique V2 fidèle : lecture/seek/shuffle/repeat/
   historique/volume/raccourcis) **réhabillé sur les tokens V3** (accent ciel
