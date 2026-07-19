@@ -23,6 +23,7 @@ import {
 } from '../../src/lib/data/guide-categories';
 import { listGuides, readGuideVersionFile, type Guide } from '../../src/lib/data/guides';
 import { buildItemCatalog } from '../generators/item-catalog';
+import { listHeroFullArt } from './hero-full-art';
 import { loadCuratedEffects } from '../curated/effects';
 import { resolveClass } from '../lib/class';
 import { slugEnum } from '../lib/enums';
@@ -217,6 +218,21 @@ export function buildAssetManifest(): AssetRequest[] {
     for (const r of characterAssetRequests(c, skillIconsOf(c, skills))) push(r);
   }
 
+  // --- HeroFullArt (page /wallpapers) : illustrations réutilisées -------------
+  // La catégorie HeroFullArt réutilise les full-arts perso (`img.full`), mais
+  // son set (cf. `listHeroFullArt`) dépasse les persos JOUABLES : arts
+  // alternatifs `IMG_<id>_NN` et arts de PNJ (`IMG_3000032`) que la boucle
+  // ci-dessus ne demande pas. On les héberge ici sous le MÊME namespace/clé —
+  // `push()` dédoublonne, donc seuls ces extras s'ajoutent (jamais deux copies
+  // d'un sprite de base déjà demandé). Sans ça, ces entrées 404 sur R2.
+  for (const { f } of listHeroFullArt())
+    push({
+      kind: 'image',
+      key: `images/characters/full/${f}.webp`,
+      candidates: [f],
+      domain: 'characters',
+    });
+
   // --- Glossaires UI : éléments / classes / sous-classes ---------------------
   // Les icônes élément/classe du site = celles de l'ordre de tour du jeu
   // (IG_Turn_*), pas les CM_* (autres contextes d'UI).
@@ -319,6 +335,18 @@ export function buildAssetManifest(): AssetRequest[] {
         domain: 'ui',
       });
   }
+
+  // --- Icônes illustratives du guide « Stats & Combat » ----------------------
+  // Bouton d'ordre de tour + skills de champ d'arène (exemples du guide). La
+  // flèche de priorité (`SC_Buff_Effect_Increase_Priority`) est déjà dans
+  // `ui/effect`, on ne la redéclare pas.
+  for (const icon of ['IG_Menu_Btn_Action', 'Skill_PVP_LeagueBuff_01', 'Skill_PVP_Penalty'])
+    push({
+      kind: 'image',
+      key: `images/ui/combat/${icon}.webp`,
+      candidates: [icon],
+      domain: 'ui',
+    });
 
   // --- Domaine équipement : pages /equipment ---------------------------------
   // Familles AFFICHABLES (grade unique aux paliers hauts), pièces de sets,

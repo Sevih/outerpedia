@@ -3,9 +3,11 @@
  *
  * Produit `wallpapers.json` : `{ catégorie: [{ f, w, h }] }`. Trois provenances,
  * jamais la V2 :
- *   - **HeroFullArt** : RÉUTILISE les full-arts perso déjà extraits/hébergés
- *     (`IMG_<id>`, cf. `img.full`) — on ne ré-héberge rien (décision Sevih). On
- *     énumère les `IMG_<id>` du pool d'images du jeu et on lit leurs dimensions.
+ *   - **HeroFullArt** : RÉUTILISE les full-arts perso déjà hébergés (`IMG_<id>`,
+ *     cf. `img.full`) — on ne ré-héberge rien deux fois (décision Sevih). La
+ *     liste vient de `listHeroFullArt` (source partagée avec le manifest, qui en
+ *     garantit l'hébergement) : superset du set V2 (base + skins + arts
+ *     alternatifs `_NN` + arts de PNJ), sans la dédup perceptuelle lossy de V2.
  *   - **Cutin / Full / Banner / Art** : pool wallpaper extrait NATIVEMENT par le
  *     worker (`.gamedata/extracted/wallpapers/<cat>`, webp + png dédupliqués).
  *     `Full` est éclaté en `Full:Events` / `Full:Scenario` / `Full:Others`.
@@ -19,9 +21,9 @@
  * promote). L'exécution directe IMPRIME pour revue.
  */
 import { closeSync, existsSync, openSync, readdirSync, readSync } from 'node:fs';
-import { basename, join, resolve } from 'node:path';
+import { join, resolve } from 'node:path';
 import { isMain } from '../lib/is-main';
-import { buildImageIndex } from '../assets/source';
+import { listHeroFullArt } from '../assets/hero-full-art';
 
 /** Une entrée wallpaper : nom de fichier (sans extension) + dimensions. */
 export interface Wallpaper {
@@ -68,16 +70,15 @@ function scanCategory(dir: string): Wallpaper[] {
     .sort(byF);
 }
 
-/** Full-arts perso réutilisés (IMG_<id> du pool jeu) — aucune re-extraction. */
+/**
+ * Full-arts perso réutilisés — aucune re-extraction. Set = `listHeroFullArt`
+ * (source partagée avec le manifest qui les héberge sous `images/characters/
+ * full/IMG_<id>.webp`). Superset du set V2 : base + skins + arts alternatifs
+ * `_NN` + arts de PNJ, sans la dédup perceptuelle lossy de V2. Toute entrée est
+ * donc garantie hébergée (le manifest en fait la demande), jamais de 404.
+ */
 function heroFullArt(): Wallpaper[] {
-  const index = buildImageIndex();
-  const out: Wallpaper[] = [];
-  for (const [key, path] of index) {
-    if (!/^img_\d+$/.test(key)) continue;
-    const d = pngDims(path);
-    out.push({ f: basename(path).replace(/\.png$/i, ''), w: d?.w ?? 0, h: d?.h ?? 0 });
-  }
-  return out.sort(byF);
+  return listHeroFullArt().map(({ f, w, h }) => ({ f, w, h }));
 }
 
 /** Construit le catalogue complet des wallpapers. */

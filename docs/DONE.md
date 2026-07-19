@@ -29,6 +29,16 @@
   (pool jeu + éditorial → staging `images/download/<cat>`, HeroFullArt réutilise
   `characters/full`) ajouté à `pnpm images`. Chaîne d'auto-maintenance bouclée
   (Hook 1 worker ✓, Hook 2 build.ts en cours côté worker, collect/push moi ✓).
+  • **Fix HeroFullArt (404 + parité V2)** : l'énumération `^IMG_\d+$` du pool ramassait
+  des ids de skin/PNJ non hébergés (`IMG_2000120` → 404) ET ratait les arts
+  alternatifs `IMG_<id>_NN` (8 que V2 a). Refonte en source partagée
+  `datagen/assets/hero-full-art.ts` (`listHeroFullArt`) répliquant l'INTENTION V2
+  (scan illust + min-largeur 250) **sans** sa dédup perceptuelle lossy (qui jette
+  de vrais skins) → **superset natif** : V2 (230) ⊆ 235 (garde les 5 skins que V2
+  sur-jette). Hébergement : le **manifest** demande `characters/full/IMG_<f>.webp`
+  pour chaque entrée (dédup par clé ⇒ seuls les 9 extras s'ajoutent, jamais deux
+  copies). `wallpapers.json` régénéré (HeroFullArt 227→235), 9 extras stagés en
+  webp. Décision Sevih : superset natif plutôt que parité stricte. tsc/eslint OK.
 - **Admin — toute l'UI passée en anglais** (décision Sevih). Balayage complet de
   la matrice (composants `admin/*`, pages `.dev`, stores/actions `lib/admin`,
   pickers) : seuls les CHAÎNES vues par l'utilisateur sont traduites, les
