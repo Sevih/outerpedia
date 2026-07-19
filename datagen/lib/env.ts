@@ -43,13 +43,3 @@ export function v2ImagesDir(): string {
   const explicit = envVar('V2_IMAGES_DIR');
   return explicit ? resolve(explicit) : resolve(v2Dir(), 'public/images');
 }
-
-/**
- * Pool audio V2 (mp3 de l'OST, déjà convertis par la chaîne datamine) —
- * `V2_AUDIO_DIR` explicite prime, sinon dérivé de v2Dir(). Source de la collecte
- * audio vers le staging (cf. `datagen/assets/collect-audio.ts`).
- */
-export function v2AudioBgmDir(): string {
-  const explicit = envVar('V2_AUDIO_DIR');
-  return explicit ? resolve(explicit) : resolve(v2Dir(), 'public/audio/bgm');
-}

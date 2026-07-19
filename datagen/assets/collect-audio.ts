@@ -1,54 +1,47 @@
 /**
  * COLLECTE AUDIO — peuple `.assets-staging/audio/bgm` avec les mp3 de l'OST,
  * pour que `assets:push` les envoie sur R2 (le push parcourt tout le staging).
+ * Même étage que la collecte d'images : pool extrait du JEU → staging → push.
  *
- * DATA-DRIVEN : on ne copie que les pistes réellement référencées par
- * `data/generated/bgm_mapping.json` (même doctrine que le manifest d'images —
- * jamais d'orphelin poussé). Source = pool audio V2 (`v2AudioBgmDir`), là où
- * vivent les mp3 déjà convertis par la chaîne datamine (hors scope V3).
+ * Source = pool audio extrait NATIVEMENT en V3 (`pnpm datagen:extract-audio` →
+ * `.gamedata/extracted/audio/bgm`, produit par la chaîne datamine côté worker).
+ * Plus aucune dépendance au repo V2. Le pool est déjà l'ensemble BGM curé (la
+ * regex de familles de l'extracteur filtre) : on copie TOUT, aucun orphelin.
+ *
+ * On copie tout (pas de filtrage par le mapping) pour que de NOUVELLES pistes
+ * atterrissent en staging et soient découvertes par `pnpm datagen:bgm` ; le
+ * mapping est DÉRIVÉ du pool, pas l'inverse.
  *
  * Idempotent : ne recopie qu'un fichier absent ou de taille différente. Si le
- * pool est absent (machine sans repo V2), on prévient et on sort sans erreur —
- * `pnpm images` ne doit pas casser pour autant.
+ * pool est absent (extraction pas encore lancée), on prévient et on sort sans
+ * erreur — `pnpm images` ne doit pas casser pour autant.
  *
  * Exécution : `pnpm assets:collect-audio` (ou via `pnpm images`).
  */
-import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { v2AudioBgmDir } from '../lib/env';
 import { STAGING_DIR } from './stage';
 
-interface BgmTrack {
-  file: string;
-}
-
-const MAPPING = resolve('data/generated/bgm_mapping.json');
+/** Pool audio extrait du jeu (miroir de `GAME_IMAGES_DIR` pour les images). */
+const GAME_AUDIO_DIR = resolve('.gamedata/extracted/audio/bgm');
 const DEST_DIR = resolve(STAGING_DIR, 'audio/bgm');
 
-export function collectAudio(): { copied: number; skipped: number; missing: string[] } {
-  const src = v2AudioBgmDir();
-  if (!existsSync(src)) {
-    console.warn(`⚠ pool audio introuvable (${src}) — collecte audio sautée.`);
-    return { copied: 0, skipped: 0, missing: [] };
-  }
-  if (!existsSync(MAPPING)) {
-    console.warn(`⚠ ${MAPPING} absent — lance d'abord : pnpm datagen:bgm`);
-    return { copied: 0, skipped: 0, missing: [] };
+export function collectAudio(): { copied: number; skipped: number } {
+  if (!existsSync(GAME_AUDIO_DIR)) {
+    console.warn(
+      `⚠ pool audio introuvable (${GAME_AUDIO_DIR}) — lance : pnpm datagen:extract-audio. Collecte sautée.`,
+    );
+    return { copied: 0, skipped: 0 };
   }
 
-  const tracks = JSON.parse(readFileSync(MAPPING, 'utf8')) as BgmTrack[];
+  const files = readdirSync(GAME_AUDIO_DIR).filter((f) => f.toLowerCase().endsWith('.mp3'));
   mkdirSync(DEST_DIR, { recursive: true });
 
   let copied = 0;
   let skipped = 0;
-  const missing: string[] = [];
-  for (const { file } of tracks) {
-    const from = resolve(src, `${file}.mp3`);
-    const to = resolve(DEST_DIR, `${file}.mp3`);
-    if (!existsSync(from)) {
-      missing.push(file);
-      continue;
-    }
+  for (const file of files) {
+    const from = resolve(GAME_AUDIO_DIR, file);
+    const to = resolve(DEST_DIR, file);
     // Recopie seulement si absent ou taille différente (idempotence bon marché).
     if (existsSync(to) && statSync(to).size === statSync(from).size) {
       skipped++;
@@ -57,17 +50,10 @@ export function collectAudio(): { copied: number; skipped: number; missing: stri
     copyFileSync(from, to);
     copied++;
   }
-  return { copied, skipped, missing };
+  return { copied, skipped };
 }
 
-const { copied, skipped, missing } = collectAudio();
+const { copied, skipped } = collectAudio();
 if (copied || skipped) {
-  console.log(
-    `audio/bgm — ${copied} copiés, ${skipped} à jour${missing.length ? `, ${missing.length} absents du pool` : ''}`,
-  );
-}
-if (missing.length) {
-  console.warn(
-    `⚠ mp3 référencés mais absents du pool : ${missing.slice(0, 10).join(', ')}${missing.length > 10 ? '…' : ''}`,
-  );
+  console.log(`audio/bgm — ${copied} copiés, ${skipped} à jour`);
 }

@@ -26,10 +26,16 @@
   • **Audio** : helper `src/lib/audio.ts` (base R2 partagée, préfixe `/audio`),
   route dev `src/app/audio/[...path]/route.dev.ts` avec **support `Range`**
   (206) pour le seek. 91 mp3 (122 Mo) en staging (gitignoré). **Push R2 câblé**
-  dans `pnpm images` : nouveau `assets:collect-audio` (data-driven — ne copie que
-  les mp3 référencés par `bgm_mapping.json`, source pool V2 `v2AudioBgmDir`) ;
-  `assets:push` parcourt déjà tout le staging → les mp3 montent sur R2
+  dans `pnpm images` : `assets:collect-audio` copie le pool audio → staging, et
+  `assets:push` parcourt déjà tout le staging → mp3 sur R2
   (`img.outerpedia.com/audio/bgm/*.mp3`, content-type auto par rclone).
+  • **Dépendance V2 coupée** (worker a livré l'extraction native, commit 8bfaaa0) :
+  `pnpm datagen:extract-audio` sort l'OST des bundles Unity vers
+  `.gamedata/extracted/audio/bgm` (pool V3-owned, miroir de `GAME_IMAGES_DIR`).
+  `collect-audio` repointé dessus (copie TOUT le pool — déjà curé par la regex
+  de l'extracteur, donc zéro orphelin ; robuste aux nouvelles pistes) ;
+  `v2AudioBgmDir()` retiré. Vérifié : mapping regénéré depuis le pool V3
+  **strictement identique** (diff vide, 91 pistes). Prérequis : ffmpeg sur PATH.
   • **Page** `_contents/ost/` : wrapper serveur (résout les libellés, passe la
   table) + `OstPlayer` client (logique V2 fidèle : lecture/seek/shuffle/repeat/
   historique/volume/raccourcis) **réhabillé sur les tokens V3** (accent ciel
