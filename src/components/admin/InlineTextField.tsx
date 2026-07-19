@@ -14,7 +14,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Lang } from '@/lib/i18n/config';
 import type { InlineRefs, RefItem } from '@/lib/admin/inline-refs';
 import type { InlineSegment, TagCheck } from '@/lib/parse-text';
-import { renderInlinePreview } from '@/lib/admin/inline-preview-actions';
+import { renderInlineBatch, renderInlinePreview } from '@/lib/admin/inline-preview-actions';
 import { InlinePreview } from '@/components/admin/InlinePreview';
 
 /** Un bouton de la barre : type de tag + libellé + source de refs. */
@@ -53,6 +53,7 @@ export function InlineTextField({
   placeholder,
   rows = 2,
   layout = 'split',
+  previewMode = 'block',
 }: {
   value: string;
   onChange: (v: string) => void;
@@ -63,19 +64,26 @@ export function InlineTextField({
   rows?: number;
   /** `split` = saisie/aperçu côte à côte (md+) ; `stacked` = aperçu dessous. */
   layout?: 'split' | 'stacked';
+  /**
+   * `block` = un seul texte rendu tel quel ; `list` = une ligne par entrée,
+   * rendues en LISTE (comme les conseils d'un guide : un éditeur, un rendu).
+   */
+  previewMode?: 'block' | 'list';
 }) {
   const taRef = useRef<HTMLTextAreaElement>(null);
   const [picker, setPicker] = useState<TokenDef | null>(null);
   const [query, setQuery] = useState('');
   const [skSlot, setSkSlot] = useState('S2');
   const [segments, setSegments] = useState<InlineSegment[]>([]);
+  const [listSegments, setListSegments] = useState<InlineSegment[][]>([]);
   const [checks, setChecks] = useState<TagCheck[]>([]);
   const [focused, setFocused] = useState(false);
 
   // Aperçu FIDÈLE + validation en un seul aller-retour debouncé : la server
   // action résout via les vrais résolveurs de `parse-text` (server-only) et
   // renvoie des descripteurs + les diagnostics. On garde l'aperçu précédent
-  // pendant la frappe (pas de flash).
+  // pendant la frappe (pas de flash). En mode `list`, chaque ligne non vide est
+  // résolue séparément → rendu en liste (comme les conseils d'un guide).
   useEffect(() => {
     let cancelled = false;
     const h = setTimeout(async () => {
@@ -85,6 +93,14 @@ export function InlineTextField({
           setSegments(segs);
           setChecks(c);
         }
+        if (previewMode === 'list') {
+          const lines = value
+            .split('\n')
+            .map((l) => l.trim())
+            .filter(Boolean);
+          const batch = await renderInlineBatch(lines, lang);
+          if (!cancelled) setListSegments(batch);
+        }
       } catch {
         /* aperçu/validation indisponible — silencieux */
       }
@@ -93,7 +109,7 @@ export function InlineTextField({
       cancelled = true;
       clearTimeout(h);
     };
-  }, [value, lang]);
+  }, [value, lang, previewMode]);
 
   /** Insère un tag `{type/val}` à la position du curseur. */
   const insert = (type: string, val: string) => {
@@ -223,10 +239,18 @@ export function InlineTextField({
           aria-label="Aperçu"
         >
           {/* Aperçu fidèle : descripteurs (server) rendus par les vrais composants. */}
-          {value.trim() ? (
-            <InlinePreview segments={segments} />
-          ) : (
+          {!value.trim() ? (
             <span className="text-content-subtle text-xs">Aperçu…</span>
+          ) : previewMode === 'list' ? (
+            <ul className="list-disc space-y-1 pl-4">
+              {listSegments.map((seg, i) => (
+                <li key={i}>
+                  <InlinePreview segments={seg} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <InlinePreview segments={segments} />
           )}
         </div>
       </div>

@@ -73,7 +73,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     },
     {
       title: 'Guide editor',
-      items: [{ label: 'Guides', href: '/admin/guides', soon: true }],
+      items: [{ label: 'Joint Challenge', href: '/admin/guides' }],
     },
     {
       title: 'Divers',

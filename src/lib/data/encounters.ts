@@ -196,6 +196,29 @@ export function modeLabel(d: DungeonRef, lang: Lang): string {
 }
 
 /**
+ * Tous les COMBATS proposables — un `group` distinct et peuplé, étiqueté par son
+ * boss (le plus dur) et son mode. Pour un SÉLECTEUR (admin) : on ne fabrique
+ * jamais un `group`, on choisit parmi ceux qui existent réellement dans
+ * `encounters.json`. Le libellé sert d'ancre de recherche, l'ordre est alphabétique.
+ */
+export function listGroups(lang: Lang): { group: string; label: string }[] {
+  const seen = new Set<string>();
+  const out: { group: string; label: string }[] = [];
+  for (const d of Object.values(DUNGEONS)) {
+    if (!d.group || !d.monsters?.length || seen.has(d.group)) continue;
+    seen.add(d.group);
+    const encs = encountersOfGroup(d.group);
+    const hardest = encs[encs.length - 1];
+    const boss = hardest?.monsters.find((m) => m.role === 'boss') ?? hardest?.monsters[0];
+    const monster = boss ? getMonster(boss.id) : undefined;
+    const name = monster ? lRec(monster.name, lang) || monster.name.en : d.group;
+    const mode = hardest ? modeLabel(hardest.ref, lang) : '';
+    out.push({ group: d.group, label: mode ? `${name} · ${mode}` : name });
+  }
+  return out.sort((a, b) => a.label.localeCompare(b.label));
+}
+
+/**
  * Un COMBATTANT d'une échelle de stages — l'unité de carte des modes à N stages.
  *
  * Le Special Request rejoue le même combat sur 13 stages, mais chaque stage

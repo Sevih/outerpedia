@@ -6,6 +6,30 @@
 
 ## 2026-07-19
 
+- **Guide editor — pilote joint-challenge (éditeur unifié « guide de boss »)** —
+  dernier éditeur manquant de la matrice admin, posé sur la catégorie la plus
+  utile (versionnée). Modèle métier (Sevih) : 1 monstre désigné + conseils +
+  persos + équipe + vidéos, par version. Un guide n'a AUCUN chemin d'écriture
+  jusqu'ici (couche `guides.ts` en lecture seule) : nouveau **store**
+  (`guide-store.ts` — load/save/add-version, `writeJson` canonique, mkdir/rm par
+  fichier, duplication d'une version « pour servir de base ») + **route**
+  `/api/admin/guides/[category]/[slug]` (gardée `IS_DEV`). Adaptateurs PURS
+  (`guide-draft.ts`) entre le modèle plat éditable et l'arbre de fichiers
+  (`strings.json` + `versions/YYYY-MM/{config,tips,recommended,teams}.json`) :
+  lecture aplatit, écriture ré-émet la forme courte (une section de conseils sans
+  titre → `{tactical}`, sinon `{sections}` titrées) — diffs JC minimaux. Le
+  « monstre » = un `DungeonRef.group`, choisi dans un **picker** alimenté par
+  `listGroups` (nouveau, `encounters.ts` : les combats réels étiquetés boss·mode).
+  UI (`GuideEditor` + `GroupPicker`) : intro commune + barre de versions + **＋
+  version** (source à dupliquer sélectionnable, défaut = la plus récente), parties
+  en **onglets** (`EditorTabs`, comme l'éditeur perso) — Monstre / Conseils /
+  Notes / Persos / Équipe / Vidéos. Conseils = **un éditeur bloc, un rendu liste**
+  (nouveau `previewMode="list"` d'`InlineTextField` : une ligne = un conseil,
+  rendu via le vrai `parseText` — l'EN pilote la structure, les autres langues
+  remplissent par index) ; équipe plafonnée à **4 slots** ; persos en portraits ;
+  vidéos via `VideoCurator` réutilisé ; **auto-trad EN → langues vides** (DeepL →
+  Haiku). Nav « Guide editor » activée (liste JC via `ToolCharacterList`). RESTE
+  (TODO) : brancher les autres catégories de la famille sur le même shell.
 - **Tokens de contraste remontés** (`globals.css`) — retours Sevih, en deux temps.
   - _Bordures_ : `line`/`line-subtle` disparaissaient À MÊME le fond du site
     (`line-subtle` #1e293b = la couleur de `surface-overlay` → 1.29:1). Remontés :
