@@ -52,6 +52,7 @@ import { buildCostumes } from './generators/costumes';
 import { buildItemCatalog } from './generators/item-catalog';
 import { buildGameVersion } from './generators/game-version';
 import { buildBgmMapping } from './generators/bgm-mapping';
+import { buildWallpapers } from './generators/wallpapers';
 import { buildSkills } from './generators/skills';
 import { buildUnlockContent } from './generators/unlock-content';
 import { buildRecruit } from './generators/recruit';
@@ -216,6 +217,10 @@ async function main(): Promise<void> {
   // pool audio extrait (.gamedata/extracted/audio/bgm — cf. extract-audio) et des
   // tables lobby/textes. Suppose l'audio extrait en amont (extract → build).
   await writeJson('bgm_mapping.json', await buildBgmMapping());
+  // Catalogue des wallpapers (/wallpapers) : pool jeu extrait (Cutin/Full/Banner/
+  // Art — cf. extract-wallpapers) + HeroFullArt réutilisés + éditorial Outerpedia
+  // (.editorial/, gitignoré → présent seulement sur une machine qui l'a). Sync.
+  await writeJson('wallpapers.json', buildWallpapers());
 
   const equip: EquipmentFiles = equipment;
   const slots: (keyof EquipmentFiles)[] = [
