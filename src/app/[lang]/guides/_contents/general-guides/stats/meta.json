@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Stats & Combat Mechanics",
+    "jp": "ステータス＆戦闘メカニクス",
+    "kr": "스탯 & 전투 메카닉",
+    "zh": "属性 & 战斗机制",
+    "fr": "Stats & Mécaniques de Combat"
+  },
+  "description": {
+    "en": "Every core stat explained, the turn-priority combat system, and a full FAQ with the exact damage, defense and speed formulas used in Outerplane.",
+    "jp": "全コアステータスの解説、ターン優先度制の戦闘システム、そしてアウタープレーンで使われる正確なダメージ・防御・速度計算式を網羅したFAQ。",
+    "kr": "모든 핵심 스탯 해설, 턴 우선도 전투 시스템, 그리고 아우터플레인에서 사용되는 정확한 데미지·방어·속도 공식을 담은 FAQ.",
+    "zh": "详解每一项核心属性、回合行动值战斗系统，以及包含《Outerplane》精确伤害、防御与速度公式的完整常见问题。",
+    "fr": "Chaque stat de base expliquée, le système de combat à priorité de tour, et une FAQ complète avec les formules exactes de dégâts, de défense et de vitesse d'Outerplane."
+  },
+  "icon": "CM_Icon_Power",
+  "author": "Shiraen",
+  "updated": "2026-07-19",
+  "order": 4,
+  "tier": "heroes-gear"
+}
