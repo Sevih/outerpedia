@@ -3,9 +3,10 @@
 > Le « à faire » uniquement — le « fait » migre dans [DONE.md](./DONE.md)
 > (décision Sevih 2026-07-17). Réécrit le **2026-07-17** après audit complet du
 > code (7 passes par zone, chaque finding vérifié, sévérités contre-vérifiées),
-> **nettoyé le 18/07** (le « fait » de la journée migré dans DONE.md).
-> État de référence : **18/07**, **353 tests verts**, typecheck et lint OK,
-> v0.1.23.
+> **nettoyé le 18/07 puis le 19/07** (à chaque fois le « fait » de la journée
+> migré dans DONE.md ; le 19/07, tous les `[x]` biffés qui traînaient encore ici
+> ont été retirés — ils vivent dans DONE).
+> État de référence : **19/07**, typecheck et lint OK, v0.1.24.
 > Re-vérifier chaque item contre le code au moment de le traiter.
 
 ---
@@ -18,16 +19,6 @@
 > switches/pickers/sidebars, câblage buff/debuff perso. Détail dans DONE.md.
 > Ne restent ci-dessous que les reliquats.
 
-- [x] ~~**Éditeurs pour mettre à jour les guides** — dernier éditeur manquant de
-      la matrice admin.~~ FAIT le 19/07 (cf. DONE) : éditeur unifié « guide de
-      boss » livré sur TOUTE la famille éditable — **joint-challenge** (versionné),
-      **special-request**, **irregular-extermination**, **adventure-license**,
-      **adventure**, **dimensional-singularity** (spec par catégorie : versionné /
-      plat / `content.json`, monstre par group / dungeons / bossId, équipes
-      slots / buckets / named / sections). HORS scope unifié (décision Sevih 19/07,
-      structures bespoke / sans contenu éditorial) : **guild-raid**, **world-boss**,
-      **general-guides/other**, **skyward-tower**, **monad-gate** — éditeurs
-      dédiés seulement si le besoin se présente.
 - [ ] **Regen coupons/banner V2 = EXCEPTION assumée** — la source V2 reste la
       référence jusqu'à la bascule prod V2→V3 (liée à la page `/coupons`). Rien
       à faire d'ici là.
@@ -90,45 +81,26 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
 > ASSUMÉES le temps du portage. Chaque page arrive avec ses clés de locale
 > DÉJÀ pré-seedées ×5 (cf. item « pré-seed » de la section Docs).
 
-- [~] **`/tierlist`** — **HUB FAIT** le 19/07 (cf. DONE) : 2 cartes phares
-  PvE/PvP + rail (ee-base/ee-plus10/most-used), `getMonthYear`, au sitemap ;
-  liens vers `/tools/<slug>` (sous-outils non portés). **RESTE** : l'aperçu
-  « top S-tier » par carte (données de RANG par perso absentes en V3 — elles
-  vivent dans l'outil tierlist, non porté) ; et les helpers seo.ts encore
-  inutilisés (`buildVideoObjectJsonLd`, `buildFaqJsonLd`) pour la vraie page
-  d'outil tierlist.
-- [~] **`/tools`** — **LANDING FAITE** le 19/07 (cf. DONE) : catégories
-  (rankings/info/media/simulators/equipment) + cartes des 17 outils visibles,
-  onglets + filtre par hash (`#cat-…`), données curées `data/curated/tools/`,
-  icônes ramenées (data-driven), au sitemap. **RESTENT les 18 sous-outils**
-  (`/tools/<slug>`, 404 pour l'instant — décision Sevih : layout d'abord) :
-  most-used-units, tierlistpve, tierlistpvp, ee-priority-base,
-  ee-priority-plus10, gear-usage-statistics, gear-usage-finder,
-  damage-calculator, pull-simulator, progress-tracker, team-planner,
-  tier-list-maker, patch-history, coupon-codes, event, wallpapers, 4-comics,
-  ost — namespaces `tools.*`/`progress.*`.
-- [x] ~~**`/coupons`** — clés `coupons.*` ; lié à l'EXCEPTION PRIO (le regen
-      coupons V2 reste la source jusqu'à la bascule prod).~~ FAIT le 19/07
-      (cf. DONE) : liste complète (actifs/à venir/expirés) depuis `coupons.json`,
-      statut + validité + copie, au sitemap. **Rachat one-click NON porté** —
-      `REDEEM_ENABLED=false` même en V2 (accord VA Games en attente) ; à porter
-      (`lib/redeem` + route `/api/redeem`) le jour du feu vert.
-- [x] ~~**`/contributors`** — dépend du portage `contributors.json` (item 📦).~~
-      FAIT le 19/07 (cf. DONE) : `contributors.json` ramené en curé + avatars
-      (data-driven), page statique i18n, perso favori via `parseText` (`{P/…}`).
+- [ ] **`/tierlist` — RELIQUAT** (hub fait le 19/07, cf. DONE). RESTE : l'aperçu
+      « top S-tier » par carte (données de RANG par perso absentes en V3 — elles
+      vivent dans l'outil tierlist, non porté) ; et les helpers seo.ts encore
+      inutilisés (`buildVideoObjectJsonLd`, `buildFaqJsonLd`) pour la vraie page
+      d'outil tierlist.
+- [ ] **`/tools` — RELIQUAT** (landing faite le 19/07, cf. DONE) : **les 18
+      sous-outils** (`/tools/<slug>`, 404 pour l'instant — décision Sevih : layout
+      d'abord) : most-used-units, tierlistpve, tierlistpvp, ee-priority-base,
+      ee-priority-plus10, gear-usage-statistics, gear-usage-finder,
+      damage-calculator, pull-simulator, progress-tracker, team-planner,
+      tier-list-maker, patch-history, coupon-codes, event, wallpapers, 4-comics,
+      ost — namespaces `tools.*`/`progress.*`.
+- [ ] **`/coupons` — RELIQUAT** (page faite le 19/07, cf. DONE) : **rachat
+      one-click NON porté** — `REDEEM_ENABLED=false` même en V2 (accord VA Games
+      en attente) ; à porter (`lib/redeem` + route `/api/redeem`) le jour du feu
+      vert.
 - [ ] **`/changelog`** — clés `changelog.*` ; lié au resync CHANGELOG.md
-      (item 📚).
-- [x] ~~**`/legal`** — mentions légales (lien de la barre basse du footer).~~
-      FAIT le 19/07 (cf. DONE) : page statique i18n (clés `legal.*`), au sitemap.
-- [x] ~~**`/feed`** — flux RSS (route handler ; lié par le footer).~~ FAIT le
-      19/07 (cf. DONE) : RSS 2.0 des guides, racine hors `[lang]`, statique 24 h.
-- [x] ~~**Home riche** — sections bannières actives / codes promo / guides
-      débutants (clés `home.*`, structure V2).~~ FAIT le 19/07 (cf. DONE) :
-      hero+recherche, Discord, bannières actives (recruit.json), resets serveur,
-      Daily Buff (buff-events.json), codes promo (coupons curés), guides
-      débutants. **RESTE** : section **Recent Updates** différée — elle lit
-      `getChangelog` (`@/lib/changelog`), non porté en V3 (dépend du portage
-      CHANGELOG/page changelog). À rebrancher quand le changelog atterrit.
+      (item 📚). Débloque aussi la section **Recent Updates** de la Home (différée :
+      elle lit `getChangelog`/`@/lib/changelog`, non porté — à rebrancher quand le
+      changelog atterrit).
 
 ## 🐛 Bugs — sévérité haute (audit 17/07, tous vérifiés)
 
@@ -180,10 +152,6 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
 - [ ] **Helpers adb** dupliqués entre `datagen/extract/dump.ts` et
       `pull-gamedata.ts` (ADB, PKG, capture, stream, pickDevice, bloc root) —
       extraire `extract/adb.ts`.
-- [x] ~~Logique « URL source de vérité » copiée entre ui/Tabs et BannerTabs →
-      hook `useUrlTab`~~ FAIT le 19/07 (cf. DONE). RESTE la migration
-      `BannerTabs` → hash (état interne de guide), tracée dans « Chantiers actés »
-      ci-dessous.
 - [ ] `rankOptionLabels` homonymes divergents (data/monsters.ts:97 vs
       admin/monster-store.ts:154) ; `BOSS_TYPES` homonymes DIVERGENTS
       (monster-icon.ts:32 vs towers.ts:92 — sets volontairement différents :
@@ -252,8 +220,6 @@ Règle permanente : chaque `meta.bossId` d'un guide porté doit exister dans
 - [ ] **`bgm-mapping`** ← `LobbyCustomResourceTemplet` + TextSystem (fichier /
       nom localisé / durée).
 - [ ] **`name-aliases.json`** (curé) — alias de recherche par perso.
-- [x] ~~**`contributors.json`** (curé) — contributeurs du site.~~ FAIT le 19/07 :
-      ramené tel quel en `data/curated/`, avatars collectés data-driven (manifest).
 - [ ] Patch-notes : quand la PAGE sera portée, préfixer `NEXT_PUBLIC_IMG_BASE`
       sur les `src` relatifs stockés (`/images/patch-notes/…webp`).
 - [ ] (Contenu, pas data) Les 3 Promotion Challenge « boostés » (Supreme 4-6,
