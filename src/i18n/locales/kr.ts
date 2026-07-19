@@ -1120,6 +1120,8 @@ const kr: Record<TranslationKey, string> = {
   'wallpapers.cat.Art': '데미우르고스 아트',
   'wallpapers.cat.Banner': '배너',
   'wallpapers.cat.Full:Events': '이벤트',
+  'wallpapers.cat.Full:Scenario': '시나리오',
+  'wallpapers.cat.Full:Others': '기타',
   'wallpapers.cat.HeroFullArt': '영웅',
   'wallpapers.cat.Cutin': '컷인',
   'wallpapers.disclaimer.line1':

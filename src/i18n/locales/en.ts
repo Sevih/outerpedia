@@ -1150,6 +1150,8 @@ const en = {
   'wallpapers.cat.Art': 'Demiurge Art',
   'wallpapers.cat.Banner': 'Banners',
   'wallpapers.cat.Full:Events': 'Events',
+  'wallpapers.cat.Full:Scenario': 'Scenario',
+  'wallpapers.cat.Full:Others': 'Others',
   'wallpapers.cat.HeroFullArt': 'Heroes',
   'wallpapers.cat.Cutin': 'Cutin',
   'wallpapers.disclaimer.line1':

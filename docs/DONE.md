@@ -6,6 +6,23 @@
 
 ## 2026-07-19
 
+- **Sous-outil `/wallpapers` (galerie) — tranche 1** (2ᵉ média, ordre Sevih).
+  Principes actés : **hors-jeu → ramené en V3**, **zéro dépendance V2**. Split :
+  jeu (Cutin/Full/Banner/Art) = extraction native **worker** (`extract-wallpapers`,
+  spec + 2 hooks d'auto-maintenance transmis) ; **HeroFullArt** = RÉUTILISE les
+  full-arts perso déjà hébergés (`IMG_<id>`, décision Sevih — zéro re-host) ;
+  **Outerpedia** (5 faits main) = ramenés en V3 (`.editorial/wallpapers/`,
+  gitignoré → R2, jamais git vu les 40 Mo dont un 8k).
+  • **Générateur** `datagen/generators/wallpapers.ts` → `wallpapers.json` : scan
+  pools (jeu + éditorial) + énumération `IMG_<id>` réutilisés, dims via en-tête
+  PNG (pas de sharp), split `Full:*`. Writer canonique = `datagen:build`
+  (buildWallpapers) ; exécution directe = revue. **Peuplé maintenant** :
+  Outerpedia (5) + HeroFullArt (227) ; catégories jeu à 0 jusqu'au worker.
+  • **Page** `_contents/wallpapers/` : wrapper serveur + `WallpapersGallery`
+  client (onglets, grille portrait/paysage, lightbox clavier + download) sur
+  tokens V3 (lightbox always-dark en valeurs arbitraires `[#fff]`/`[#000]`).
+  Helper `lib/wallpapers.ts`. Registre outils. 2 clés i18n `Full:Scenario`/
+  `Full:Others` ×5. tsc + eslint OK. **Reste** : collect+push R2 au pool worker.
 - **Admin — toute l'UI passée en anglais** (décision Sevih). Balayage complet de
   la matrice (composants `admin/*`, pages `.dev`, stores/actions `lib/admin`,
   pickers) : seuls les CHAÎNES vues par l'utilisateur sont traduites, les

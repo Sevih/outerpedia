@@ -1134,6 +1134,8 @@ const jp: Record<TranslationKey, string> = {
   'wallpapers.cat.Art': 'デミウルゴスアート',
   'wallpapers.cat.Banner': 'バナー',
   'wallpapers.cat.Full:Events': 'イベント',
+  'wallpapers.cat.Full:Scenario': 'シナリオ',
+  'wallpapers.cat.Full:Others': 'その他',
   'wallpapers.cat.HeroFullArt': 'ヒーロー',
   'wallpapers.cat.Cutin': 'カットイン',
   'wallpapers.disclaimer.line1':

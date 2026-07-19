@@ -12,6 +12,7 @@ export const TOOL_COMPONENTS: Record<
   () => Promise<{ default: ComponentType<{ lang: Lang }> }>
 > = {
   ost: () => import('./_contents/ost'),
+  wallpapers: () => import('./_contents/wallpapers'),
 };
 
 /** Slugs des outils portés (routeur + `generateStaticParams`). */

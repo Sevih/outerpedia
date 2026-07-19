@@ -1100,6 +1100,8 @@ const zh: Record<TranslationKey, string> = {
   'wallpapers.cat.Art': '创世之神招募',
   'wallpapers.cat.Banner': '横幅',
   'wallpapers.cat.Full:Events': '活动CG',
+  'wallpapers.cat.Full:Scenario': '剧情CG',
+  'wallpapers.cat.Full:Others': '其他',
   'wallpapers.cat.HeroFullArt': '同伴立绘',
   'wallpapers.cat.Cutin': '连携技能特写',
   'wallpapers.disclaimer.line1':

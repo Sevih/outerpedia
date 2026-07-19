@@ -1165,6 +1165,8 @@ const fr: Record<TranslationKey, string> = {
   'wallpapers.cat.Art': 'Art Demiurge',
   'wallpapers.cat.Banner': 'Banners',
   'wallpapers.cat.Full:Events': 'Événements',
+  'wallpapers.cat.Full:Scenario': 'Scénario',
+  'wallpapers.cat.Full:Others': 'Autres',
   'wallpapers.cat.HeroFullArt': 'Héros',
   'wallpapers.cat.Cutin': 'Cutin',
   'wallpapers.disclaimer.line1':
