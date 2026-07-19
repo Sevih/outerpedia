@@ -1023,6 +1023,22 @@ export function buildAssetManifest(): AssetRequest[] {
     source: 'discord.webp',
     domain: 'editorial',
   });
+  // Icônes du widget Daily Buff de l'accueil (retravaillées pour le wiki).
+  for (const buff of [
+    'TI_Item_Event_Gold',
+    'TI_Item_Event_User_Exp',
+    'TI_Item_Event_DayWeek_Open',
+    'TI_Item_Event_Boss_Reward_000',
+    'EBT_CHAR_PIECE_DROP',
+    'kate-workshop',
+    'story-survey',
+  ])
+    push({
+      kind: 'editorial',
+      key: `images/ui/buffs/${buff}.webp`,
+      source: `ui/buffs/${buff}.webp`,
+      domain: 'editorial',
+    });
   // Icônes de tags (créées pour le wiki).
   for (const tag of [
     'premium',

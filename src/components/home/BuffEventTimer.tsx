@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { LANGUAGES, type Lang } from '@/lib/i18n/config';
+import { img } from '@/lib/images';
 import { useNow } from '@/hooks/useNow';
 import type { BuffScheduleEntry } from '@/lib/home';
 
@@ -12,6 +13,19 @@ import type { BuffScheduleEntry } from '@/lib/home';
  * Planning dérivé des posts (`buff-events.json`) ; libellés d'affichage résolus
  * par l'appelant (`buff.type.<type>`), `raw` en repli.
  */
+
+// Icône par type de buff (sprite du pool éditorial). Les types sans icône
+// (modes abandonnés, `other`) retombent sur la pastille colorée.
+const BUFF_ICON: Record<string, string> = {
+  'frog-gold': 'TI_Item_Event_Gold',
+  'frog-food': 'TI_Item_Event_User_Exp',
+  'ark-raid': 'TI_Item_Event_DayWeek_Open',
+  'special-ecology': 'TI_Item_Event_Boss_Reward_000',
+  'special-identification': 'TI_Item_Event_Boss_Reward_000',
+  doppelganger: 'EBT_CHAR_PIECE_DROP',
+  'kate-workshop': 'kate-workshop',
+  'story-survey': 'story-survey',
+};
 
 // Pastille de couleur par type de buff (à défaut d'icône). `other` → token neutre.
 const BUFF_DOT: Record<string, string> = {
@@ -135,10 +149,19 @@ export function BuffEventTimer({
               <span className="text-content-subtle w-16 shrink-0 text-xs font-semibold whitespace-nowrap">
                 {rowName(e.date)}
               </span>
-              <span
-                className={`size-2.5 shrink-0 rounded-full ${BUFF_DOT[e.type] ?? BUFF_DOT.other}`}
-                aria-hidden
-              />
+              {BUFF_ICON[e.type] ? (
+                // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
+                <img
+                  src={img.buff(BUFF_ICON[e.type])}
+                  alt=""
+                  className="size-5 shrink-0 object-contain"
+                />
+              ) : (
+                <span
+                  className={`size-2.5 shrink-0 rounded-full ${BUFF_DOT[e.type] ?? BUFF_DOT.other}`}
+                  aria-hidden
+                />
+              )}
               <span
                 className={`truncate text-sm ${isToday ? 'text-content-strong font-semibold' : 'text-content-muted'}`}
               >
