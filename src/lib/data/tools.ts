@@ -50,6 +50,19 @@ export function getVisibleTools(): ToolMeta[] {
     .sort((a, b) => a.order - b.order);
 }
 
+/** Métadonnées d'un outil par slug (`null` si inconnu). Inclut hidden/unlisted. */
+export function getToolMeta(slug: string): ToolMeta | null {
+  const d = INDEX[slug];
+  if (!d) return null;
+  return {
+    slug,
+    icon: d.icon,
+    category: d.category,
+    order: d.order,
+    status: d.status as ToolStatus,
+  };
+}
+
 /** Outils groupés par catégorie (ordre des catégories ; groupes vides écartés). */
 export function getToolsByCategory(): { category: ToolCategory; tools: ToolMeta[] }[] {
   const tools = getVisibleTools();

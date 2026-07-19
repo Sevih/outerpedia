@@ -6,6 +6,32 @@
 
 ## 2026-07-19
 
+- **Sous-outil `/ost` (jukebox OST) + infra de routage des outils** — 1er des
+  3 médias (ordre Sevih : ost → wallpapers → 4-comics). **Décisions** (cf. TODO) :
+  URLs À PLAT `/(slug)` (parité prod V2, enjeu SEO) et « je fais aussi le
+  générateur ».
+  • **Routeur** `src/app/[lang]/[slug]/page.tsx` : catch-all qui sert
+  `_contents/<slug>` via un **registre** de slugs portés (`tools/registry.ts`) —
+  slug absent = 404 ; enveloppe titre i18n + fil d'Ariane + retour landing.
+  Landing `href` basculée `/tools/<slug>` → `/<slug>`. `getToolMeta` ajouté.
+  • **Générateur** `datagen/generators/bgm-mapping.ts` (`pnpm datagen:bgm`) :
+  lit `LobbyCustomResourceTemplet` (lignes `LRT_BGM`) + `TextSystem` via
+  `langDict` (en/jp/kr/zh d'un coup — plus riche que la V2 qui ne prenait que
+  l'anglais et reportait les autres à la main), noms de repli dérivés du fichier
+  (sans le tiret parasite « Battle - 02 » de la V2), `size`/`duration` sondées
+  (statSync + ffprobe). Sortie `data/generated/bgm_mapping.json` (91 pistes,
+  19 localisées). Vérifié vs V2 : mêmes 91, zéro vrai nom JP perdu, replis plus
+  propres, doublons anglais kr/zh omis. Les mp3 (déjà convertis, hors
+  ré-extraction datamine) sont RÉUTILISÉS, pas re-générés.
+  • **Audio** : helper `src/lib/audio.ts` (base R2 partagée, préfixe `/audio`),
+  route dev `src/app/audio/[...path]/route.dev.ts` avec **support `Range`**
+  (206) pour le seek. 91 mp3 (122 Mo) ramenés en staging (gitignoré). Push R2
+  = étape de déploiement différée (comme les images).
+  • **Page** `_contents/ost/` : wrapper serveur (résout les libellés, passe la
+  table) + `OstPlayer` client (logique V2 fidèle : lecture/seek/shuffle/repeat/
+  historique/volume/raccourcis) **réhabillé sur les tokens V3** (accent ciel
+  conservé — vif autorisé hors `guides/**` ; zinc/white/black → tokens). tsc +
+  eslint clean.
 - **Guide editor — general-guides bespoke : `free-heroes-start-banner` (onglet
   Free Heroes)** — premier fragment éditable d'un GUIDE GÉNÉRAL (contenu sur
   mesure, pas la famille de boss). Les SOURCES de héros gratuits sortent du TS

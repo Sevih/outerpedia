@@ -86,13 +86,15 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
       vivent dans l'outil tierlist, non porté) ; et les helpers seo.ts encore
       inutilisés (`buildVideoObjectJsonLd`, `buildFaqJsonLd`) pour la vraie page
       d'outil tierlist.
-- [ ] **`/tools` — RELIQUAT** (landing faite le 19/07, cf. DONE) : **les 18
-      sous-outils** (`/tools/<slug>`, 404 pour l'instant — décision Sevih : layout
-      d'abord) : most-used-units, tierlistpve, tierlistpvp, ee-priority-base,
-      ee-priority-plus10, gear-usage-statistics, gear-usage-finder,
-      damage-calculator, pull-simulator, progress-tracker, team-planner,
-      tier-list-maker, patch-history, coupon-codes, event, wallpapers, 4-comics,
-      ost — namespaces `tools.*`/`progress.*`.
+- [ ] **`/tools` — RELIQUAT** (landing faite le 19/07, cf. DONE). Routeur À PLAT
+      `[lang]/[slug]` posé le 19/07 (parité URL prod V2, registre de slugs portés).
+      **ost** porté le 19/07 (cf. DONE). **RESTENT 17 sous-outils** (`/<slug>`, 404
+      tant que non portés) : most-used-units, tierlistpve, tierlistpvp,
+      ee-priority-base, ee-priority-plus10, gear-usage-statistics,
+      gear-usage-finder, damage-calculator, pull-simulator, progress-tracker,
+      team-planner, tier-list-maker, patch-history, coupon-codes, event,
+      wallpapers, 4-comics — namespaces `tools.*`/`progress.*`. Ordre Sevih pour
+      les médias : wallpapers, puis 4-comics.
 - [ ] **`/changelog`** — clés `changelog.*` ; lié au resync CHANGELOG.md
       (item 📚). Débloque aussi la section **Recent Updates** de la Home (différée :
       elle lit `getChangelog`/`@/lib/changelog`, non porté — à rebrancher quand le
@@ -224,8 +226,6 @@ Règle permanente : chaque `meta.bossId` d'un guide porté doit exister dans
 `monsters.json` (le rendu JETTE sinon) — extraction à la demande
 (`pnpm datagen:extract-entity`).
 
-- [ ] **`bgm-mapping`** ← `LobbyCustomResourceTemplet` + TextSystem (fichier /
-      nom localisé / durée).
 - [ ] **`name-aliases.json`** (curé) — alias de recherche par perso.
 - [ ] Patch-notes : quand la PAGE sera portée, préfixer `NEXT_PUBLIC_IMG_BASE`
       sur les `src` relatifs stockés (`/images/patch-notes/…webp`).

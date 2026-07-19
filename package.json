@@ -26,6 +26,7 @@
     "datagen:regen": "pnpm datagen:build && pnpm datagen:promote --apply",
     "datagen:promote": "tsx datagen/promote.ts",
     "datagen:version-boss": "tsx datagen/version-boss.ts",
+    "datagen:bgm": "tsx datagen/generators/bgm-mapping.ts",
     "seo:audit": "pnpm dlx unlighthouse",
     "getNews": "tsx scripts/get-news.ts",
     "stamp:guides": "tsx scripts/stamp-guides.ts",

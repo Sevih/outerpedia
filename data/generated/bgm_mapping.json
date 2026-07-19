@@ -1,0 +1,583 @@
+[
+  {
+    "file": "Agitpunkt",
+    "name": "Thema - Base",
+    "size": 1.05,
+    "duration": 46,
+    "name_jp": "アジト"
+  },
+  {
+    "file": "Battle_01",
+    "name": "Battle - Normal",
+    "size": 1.86,
+    "duration": 81.2,
+    "name_jp": "戦闘(ノーマル)"
+  },
+  {
+    "file": "Battle_02",
+    "name": "Battle 02",
+    "size": 1.67,
+    "duration": 72.7
+  },
+  {
+    "file": "Battle_03",
+    "name": "Battle 03",
+    "size": 1.45,
+    "duration": 63.3
+  },
+  {
+    "file": "Battle_04",
+    "name": "Battle 04",
+    "size": 1.51,
+    "duration": 65.8
+  },
+  {
+    "file": "Battle_PvP",
+    "name": "Battle - Arena",
+    "size": 1.55,
+    "duration": 67.9,
+    "name_jp": "アリーナ"
+  },
+  {
+    "file": "Battle_Tower",
+    "name": "Battle - Skyward Tower",
+    "size": 1.55,
+    "duration": 67.5,
+    "name_jp": "飛天の塔"
+  },
+  {
+    "file": "Boss_Area_01",
+    "name": "Battle - Area Boss",
+    "size": 1.64,
+    "duration": 71.5,
+    "name_jp": "エリアボス"
+  },
+  {
+    "file": "Boss_Area_02",
+    "name": "Boss Area 02",
+    "size": 1.34,
+    "duration": 58.6
+  },
+  {
+    "file": "Boss_Area_03",
+    "name": "Boss Area 03",
+    "size": 1.69,
+    "duration": 73.6
+  },
+  {
+    "file": "Boss_Area_04",
+    "name": "Boss Area 04",
+    "size": 1.83,
+    "duration": 80.1
+  },
+  {
+    "file": "Boss_Normal_01",
+    "name": "Battle - Normal Boss",
+    "size": 1.56,
+    "duration": 67.9,
+    "name_jp": "ノーマルボス"
+  },
+  {
+    "file": "Boss_Normal_02",
+    "name": "Boss Normal 02",
+    "size": 1.59,
+    "duration": 69.5
+  },
+  {
+    "file": "Boss_Normal_03",
+    "name": "Boss Normal 03",
+    "size": 1.38,
+    "duration": 60.1
+  },
+  {
+    "file": "Boss_Normal_04",
+    "name": "Boss Normal 04",
+    "size": 1.68,
+    "duration": 73.4
+  },
+  {
+    "file": "Boss_Raid_01",
+    "name": "Battle - Raid Boss",
+    "size": 1.64,
+    "duration": 71.7,
+    "name_jp": "レイドボス"
+  },
+  {
+    "file": "Boss_Season_01_intro",
+    "name": "Boss Season 01 (Intro)",
+    "size": 0.87,
+    "duration": 38.1
+  },
+  {
+    "file": "Boss_Season_02_intro",
+    "name": "Boss Season 02 (Intro)",
+    "size": 1.06,
+    "duration": 46.3
+  },
+  {
+    "file": "Boss_Season_03_intro",
+    "name": "Boss Season 03 (Intro)",
+    "size": 1.26,
+    "duration": 55.1
+  },
+  {
+    "file": "Boss_Season_04_intro",
+    "name": "Boss Season 04 (Intro)",
+    "size": 2.17,
+    "duration": 94.8
+  },
+  {
+    "file": "Boss_World_01",
+    "name": "Boss World 01",
+    "size": 1.33,
+    "duration": 57.9
+  },
+  {
+    "file": "Event_00001",
+    "name": "Event - Death and the Gangster",
+    "size": 0.84,
+    "duration": 36.7
+  },
+  {
+    "file": "Event_00002",
+    "name": "Event - Summer Island",
+    "size": 1.37,
+    "duration": 59.8
+  },
+  {
+    "file": "Event_00003",
+    "name": "Event - Summer Camp",
+    "size": 1.31,
+    "duration": 57.4
+  },
+  {
+    "file": "Event_00005",
+    "name": "Event 00005",
+    "size": 0.98,
+    "duration": 42.9
+  },
+  {
+    "file": "Event_00006",
+    "name": "Event - Soulslayer",
+    "size": 1.37,
+    "duration": 59.6
+  },
+  {
+    "file": "Event_00007",
+    "name": "Event - Holidays",
+    "size": 1.32,
+    "duration": 57.6,
+    "name_jp": "Event - Christmas",
+    "name_kr": "Event - Christmas",
+    "name_zh": "Event - Christmas"
+  },
+  {
+    "file": "Event_00008",
+    "name": "Event - Valentine",
+    "size": 1.23,
+    "duration": 53.9
+  },
+  {
+    "file": "Event_00009",
+    "name": "Event - New Semester",
+    "size": 1.25,
+    "duration": 54.5
+  },
+  {
+    "file": "Event_00010",
+    "name": "Event - Athletic",
+    "size": 1.38,
+    "duration": 60.1
+  },
+  {
+    "file": "Event_00011",
+    "name": "Event - Hot Spring",
+    "size": 1.06,
+    "duration": 46.2,
+    "name_jp": "Event - Spa",
+    "name_kr": "Event - Spa",
+    "name_zh": "Event - Spa"
+  },
+  {
+    "file": "Event_00012",
+    "name": "Event - Iota World",
+    "size": 1.51,
+    "duration": 65.9,
+    "name_jp": "Event - IotaWorld",
+    "name_kr": "Event - IotaWorld",
+    "name_zh": "Event - IotaWorld"
+  },
+  {
+    "file": "Event_00013",
+    "name": "Event - Oasis",
+    "size": 1.03,
+    "duration": 44.8
+  },
+  {
+    "file": "Event_00014",
+    "name": "Event - Moment",
+    "size": 1.14,
+    "duration": 49.5
+  },
+  {
+    "file": "Event_00015",
+    "name": "Event - Soulslayer 2",
+    "size": 1.05,
+    "duration": 45.8,
+    "name_jp": "Event - Soulslayer2",
+    "name_kr": "Event - Soulslayer2",
+    "name_zh": "Event - Soulslayer2"
+  },
+  {
+    "file": "Event_00016",
+    "name": "Event - New World",
+    "size": 1.61,
+    "duration": 70.3
+  },
+  {
+    "file": "Event_00017",
+    "name": "Event - Reverse World",
+    "size": 1.33,
+    "duration": 58.1
+  },
+  {
+    "file": "Event_00018",
+    "name": "Event - Midwinter",
+    "size": 1.06,
+    "duration": 46.2
+  },
+  {
+    "file": "Event_00019",
+    "name": "Event - New Year",
+    "size": 0.95,
+    "duration": 41.5
+  },
+  {
+    "file": "Event_00020",
+    "name": "Event - Welcome To Utopia",
+    "size": 1.1,
+    "duration": 48
+  },
+  {
+    "file": "Event_00021",
+    "name": "Event - ChocoSquad",
+    "size": 0.77,
+    "duration": 33.6
+  },
+  {
+    "file": "Event_00022",
+    "name": "Event - Outer Dungeon",
+    "size": 1.7,
+    "duration": 74.1
+  },
+  {
+    "file": "Event_00023",
+    "name": "Event - Marching Band",
+    "size": 1,
+    "duration": 43.4
+  },
+  {
+    "file": "Event_00024",
+    "name": "Event: Twilight Project",
+    "size": 1.1,
+    "duration": 48,
+    "name_jp": "Event - Dusk Project",
+    "name_kr": "Event - Dusk Project",
+    "name_zh": "Event - Dusk Project"
+  },
+  {
+    "file": "Event_00025",
+    "name": "Event - Moonlight at World's End",
+    "size": 0.95,
+    "duration": 41.6
+  },
+  {
+    "file": "Event_00026",
+    "name": "Event – Dear Kei",
+    "size": 1.01,
+    "duration": 44,
+    "name_jp": "Event - Dear Kei",
+    "name_kr": "Event - Dear Kei",
+    "name_zh": "Event - Dear Kei"
+  },
+  {
+    "file": "Event_00027",
+    "name": "Event - Festival and Secret Recipe",
+    "size": 1.94,
+    "duration": 84.6
+  },
+  {
+    "file": "Event_00028",
+    "name": "Event - Strange Prison",
+    "size": 1.56,
+    "duration": 68.1
+  },
+  {
+    "file": "Event_00029",
+    "name": "Event - Mystic Sage of the Reversed World",
+    "size": 1.02,
+    "duration": 44.7
+  },
+  {
+    "file": "Event_00030",
+    "name": "Event - The Sun, Everlasting Light",
+    "size": 2.79,
+    "duration": 122
+  },
+  {
+    "file": "Event_00031",
+    "name": "Event - The Chocolate Fever",
+    "size": 0.77,
+    "duration": 33.8
+  },
+  {
+    "file": "Event_00032",
+    "name": "Event - The Teacher in Class E",
+    "size": 1.33,
+    "duration": 58
+  },
+  {
+    "file": "Event_00033",
+    "name": "Event - Land of Blooming Promise",
+    "size": 1.71,
+    "duration": 74.5
+  },
+  {
+    "file": "Event_00034",
+    "name": "Event - The Price of a Perfect Heist",
+    "size": 1.67,
+    "duration": 73,
+    "name_jp": "Event - Heist class,Highest Class",
+    "name_kr": "Event - Heist class,Highest Class",
+    "name_zh": "Event - Heist class,Highest Class"
+  },
+  {
+    "file": "Event_00035",
+    "name": "Event - NeoIotaCity",
+    "size": 2.24,
+    "duration": 97.7
+  },
+  {
+    "file": "Gacha_BGM",
+    "name": "Gacha BGM",
+    "size": 0.72,
+    "duration": 31.3
+  },
+  {
+    "file": "Gacha_BGM_02",
+    "name": "Gacha BGM 02",
+    "size": 0.73,
+    "duration": 31.8
+  },
+  {
+    "file": "Guild_Agit",
+    "name": "Thema - Guild",
+    "size": 1.26,
+    "duration": 55,
+    "name_jp": "ギルド"
+  },
+  {
+    "file": "Intro",
+    "name": "Intro",
+    "size": 1.67,
+    "duration": 73.1,
+    "name_jp": "タイトル"
+  },
+  {
+    "file": "Lobby_01",
+    "name": "Lobby",
+    "size": 1.45,
+    "duration": 63.3,
+    "name_jp": "ロビー"
+  },
+  {
+    "file": "Monadgate",
+    "name": "Monadgate",
+    "size": 0.96,
+    "duration": 41.7
+  },
+  {
+    "file": "Monadgate_Ending_Bad",
+    "name": "Monadgate Ending Bad",
+    "size": 0.22,
+    "duration": 9.6
+  },
+  {
+    "file": "Monadgate_Ending_Fail",
+    "name": "Monadgate Ending Fail",
+    "size": 0.25,
+    "duration": 10.7
+  },
+  {
+    "file": "Monadgate_Ending_True",
+    "name": "Monadgate Ending True",
+    "size": 0.28,
+    "duration": 12
+  },
+  {
+    "file": "Remains_01",
+    "name": "Thema - The Archdemon's Ruins",
+    "size": 1.05,
+    "duration": 45.6,
+    "name_jp": "魔王の遺跡"
+  },
+  {
+    "file": "Remains_02",
+    "name": "Remains 02",
+    "size": 1.26,
+    "duration": 55.2
+  },
+  {
+    "file": "Remains_03",
+    "name": "Remains 03",
+    "size": 2.58,
+    "duration": 112.5
+  },
+  {
+    "file": "Remains_04",
+    "name": "Remains 04",
+    "size": 1.69,
+    "duration": 73.8
+  },
+  {
+    "file": "Result_01",
+    "name": "Result 01",
+    "size": 0.7,
+    "duration": 30.3
+  },
+  {
+    "file": "RTPVP_BanPick",
+    "name": "RTPVP Ban Pick",
+    "size": 2.37,
+    "duration": 103.4
+  },
+  {
+    "file": "RTPVP_Battle",
+    "name": "RTPVP Battle",
+    "size": 2.67,
+    "duration": 116.4
+  },
+  {
+    "file": "RuinIsland",
+    "name": "Ruin Island",
+    "size": 0.81,
+    "duration": 35.2
+  },
+  {
+    "file": "Scene_Attempt",
+    "name": "Scene Attempt 01",
+    "size": 0.76,
+    "duration": 33.2
+  },
+  {
+    "file": "Scene_Attempt02",
+    "name": "Scene Attempt 02",
+    "size": 0.76,
+    "duration": 33.2
+  },
+  {
+    "file": "Scene_Bright",
+    "name": "Scene Bright",
+    "size": 1.12,
+    "duration": 49
+  },
+  {
+    "file": "Scene_Climax",
+    "name": "Scene Climax",
+    "size": 2.53,
+    "duration": 110.5
+  },
+  {
+    "file": "Scene_Crisis",
+    "name": "Scene Crisis",
+    "size": 2.3,
+    "duration": 100.4
+  },
+  {
+    "file": "Scene_Crisis02",
+    "name": "Scene Crisis 02",
+    "size": 0.9,
+    "duration": 39.2
+  },
+  {
+    "file": "Scene_Crisis03",
+    "name": "Scene Crisis 03",
+    "size": 2.02,
+    "duration": 88.2
+  },
+  {
+    "file": "Scene_Desire",
+    "name": "Scene Desire",
+    "size": 1.03,
+    "duration": 45
+  },
+  {
+    "file": "Scene_Doubt",
+    "name": "Scene Doubt",
+    "size": 0.87,
+    "duration": 38.1
+  },
+  {
+    "file": "Scene_EnemyEncounter",
+    "name": "Scene Enemy Encounter",
+    "size": 1.12,
+    "duration": 48.7,
+    "name_jp": "Scene EnemyEncounter",
+    "name_kr": "Scene EnemyEncounter",
+    "name_zh": "Scene EnemyEncounter"
+  },
+  {
+    "file": "Scene_Fantasy",
+    "name": "Scene Fantasy",
+    "size": 0.4,
+    "duration": 17.6
+  },
+  {
+    "file": "Scene_Normal",
+    "name": "Scene Normal",
+    "size": 3.15,
+    "duration": 137.4
+  },
+  {
+    "file": "Scene_Normal02",
+    "name": "Scene Normal 02",
+    "size": 2.43,
+    "duration": 106.1
+  },
+  {
+    "file": "Scene_Peaceful",
+    "name": "Scene Peaceful",
+    "size": 0.93,
+    "duration": 40.6
+  },
+  {
+    "file": "Scene_Prologue",
+    "name": "Scene Prologue",
+    "size": 0.18,
+    "duration": 7.8
+  },
+  {
+    "file": "Scene_Rhapsody",
+    "name": "Scene Rhapsody",
+    "size": 1.22,
+    "duration": 53.1
+  },
+  {
+    "file": "Scene_Sad",
+    "name": "Scene Sad",
+    "size": 1.76,
+    "duration": 76.8
+  },
+  {
+    "file": "Scene_Situation",
+    "name": "Scene Situation",
+    "size": 0.22,
+    "duration": 9.4
+  },
+  {
+    "file": "Scene_Void",
+    "name": "Scene Void",
+    "size": 1.29,
+    "duration": 56.1
+  }
+]
