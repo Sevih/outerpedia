@@ -6,6 +6,23 @@
 
 ## 2026-07-19
 
+- **Home riche** — page d'accueil reconstruite sur les primitives V3 (aucun
+  import de composant V2). Sections : **HomeHero** (titre discret + déclencheur
+  de recherche via événement `op:open-search`, écouté par HeaderClient),
+  **DiscordBanner** (compteurs via l'API d'invitation, revalidés 1 h),
+  **CurrentBanners** (bannières ACTIVES de `recruit.json` → `ResponsiveCharacterCard`
+  - compte à rebours), **ServerResets** (daily/weekly/monthly, calcul pur),
+    **BuffEventTimer** (Daily Buff depuis `buff-events.json`), **PromoCodes**
+    (codes actifs de `data/curated/coupons.json`, récompenses résolues en
+    `ItemInline`, copie presse-papier), **BeginnerGuides** (5 liens general-guides).
+    Assemblage data serveur dans `src/lib/home.ts` (bannières/coupons/buff en
+    view-models). Les 3 compteurs partagent une horloge unique
+    (`src/hooks/useNow.ts`, `useSyncExternalStore` — même idiome que
+    `SingularityCountdown`, pas de `setState`-dans-effet). Simplifications assumées :
+    pas de carousel mobile (flex-wrap responsive), pas d'images hero/discord
+    dédiées (gradient + icône). **Recent Updates différée** (lit `getChangelog`,
+    non porté). Vérifié runtime : 4 bannières actives, 12 coupons, buff du jour OK ;
+    465 tests verts.
 - **Guide « Growth Systems » porté** (heroes-growth, heroes-gear, ordre 1) —
   gros guide de systèmes, 7 onglets (Gems fusionné dans Special Equipment,
   décision Sevih). Nouveau générateur `hero-growth.json` : les tables NUMÉRIQUES

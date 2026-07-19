@@ -31,3 +31,11 @@ export function getRecruitKind(kind: RecruitKind): RecruitKindInfo {
 export function bannersOf(characterId: string): RecruitBanner[] {
   return RECRUIT.banners.filter((b) => b.characterId === characterId);
 }
+
+/**
+ * Bannières ACTIVES à la date `today` (`YYYY-MM-DD`, UTC) — `start <= today <=
+ * end`. Alimente la section « bannières actives » de l'accueil.
+ */
+export function activeBanners(today: string): RecruitBanner[] {
+  return RECRUIT.banners.filter((b) => b.start <= today && b.end >= today);
+}

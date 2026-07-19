@@ -65,7 +65,9 @@ export function HeaderClient({
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
-  // Raccourci global Ctrl/⌘+K (convention des palettes de recherche).
+  // Raccourci global Ctrl/⌘+K (convention des palettes de recherche) + événement
+  // `op:open-search` : d'autres surfaces (bandeau d'accueil…) ouvrent la palette
+  // sans connaître l'état interne du header.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
@@ -73,8 +75,13 @@ export function HeaderClient({
         setSearchOpen(true);
       }
     };
+    const onOpen = () => setSearchOpen(true);
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    window.addEventListener('op:open-search', onOpen);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('op:open-search', onOpen);
+    };
   }, []);
 
   // Collapse au scroll — hystérésis (replie > 40, déplie < 10) : la zone morte

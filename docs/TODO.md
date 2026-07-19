@@ -100,8 +100,13 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
       FAIT le 19/07 (cf. DONE) : page statique i18n (clés `legal.*`), au sitemap.
 - [x] ~~**`/feed`** — flux RSS (route handler ; lié par le footer).~~ FAIT le
       19/07 (cf. DONE) : RSS 2.0 des guides, racine hors `[lang]`, statique 24 h.
-- [ ] **Home riche** — sections bannières actives / codes promo / guides
-      débutants (clés `home.*`, structure V2).
+- [x] ~~**Home riche** — sections bannières actives / codes promo / guides
+      débutants (clés `home.*`, structure V2).~~ FAIT le 19/07 (cf. DONE) :
+      hero+recherche, Discord, bannières actives (recruit.json), resets serveur,
+      Daily Buff (buff-events.json), codes promo (coupons curés), guides
+      débutants. **RESTE** : section **Recent Updates** différée — elle lit
+      `getChangelog` (`@/lib/changelog`), non porté en V3 (dépend du portage
+      CHANGELOG/page changelog). À rebrancher quand le changelog atterrit.
 
 ## 🐛 Bugs — sévérité haute (audit 17/07, tous vérifiés)
 
