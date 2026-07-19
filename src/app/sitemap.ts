@@ -25,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/legal',
     '/contributors',
     '/coupons',
+    '/tools',
   ];
 
   const entry = (path: string, lastModified?: string): MetadataRoute.Sitemap[number] => ({

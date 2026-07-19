@@ -1,0 +1,138 @@
+{
+  "most-used-units": {
+    "icon": "nav/CM_Most_Used",
+    "category": "rankings",
+    "order": 10,
+    "status": "available",
+    "keywords": ["most used", "units", "characters", "recommended", "popular"]
+  },
+  "tierlistpve": {
+    "icon": "nav/CM_PvE_Rank",
+    "category": "rankings",
+    "order": 1,
+    "status": "available",
+    "keywords": ["tier list", "pve", "ranking", "characters"]
+  },
+  "tierlistpvp": {
+    "icon": "nav/CM_PvP_Rank",
+    "category": "rankings",
+    "order": 2,
+    "status": "available",
+    "keywords": ["tier list", "pvp", "ranking", "arena", "characters"]
+  },
+  "ee-priority-base": {
+    "icon": "nav/CM_UO_EXCLUSIVE",
+    "category": "rankings",
+    "order": 40,
+    "status": "available",
+    "keywords": ["exclusive", "equipment", "EE", "priority", "ranking", "base", "level 0"]
+  },
+  "ee-priority-plus10": {
+    "icon": "nav/CM_UO_EXCLUSIVE2",
+    "category": "rankings",
+    "order": 50,
+    "status": "available",
+    "keywords": ["exclusive", "equipment", "EE", "priority", "ranking", "+10", "enhanced"]
+  },
+  "gear-usage-statistics": {
+    "icon": "nav/CM_Gear_Stat",
+    "category": "equipment",
+    "order": 60,
+    "status": "available",
+    "keywords": ["gear", "usage", "statistics", "weapons", "amulets", "sets"]
+  },
+  "gear-usage-finder": {
+    "icon": "nav/CM_Gear_Find",
+    "category": "equipment",
+    "order": 70,
+    "status": "available",
+    "keywords": ["gear", "usage", "finder", "equipment", "match"]
+  },
+  "damage-calculator": {
+    "icon": "nav/CM_EtcMenu_PVP",
+    "category": "simulators",
+    "order": 75,
+    "status": "unlisted",
+    "keywords": ["damage", "calculator", "calc", "compute", "skill", "formula", "dps"]
+  },
+  "pull-simulator": {
+    "icon": "nav/CM_EtcMenu_Recruitment",
+    "category": "simulators",
+    "order": 80,
+    "status": "available",
+    "keywords": ["gacha", "pull", "simulator", "summon", "banner", "pity"]
+  },
+  "progress-tracker": {
+    "icon": "nav/CM_Tracker",
+    "category": "simulators",
+    "order": 90,
+    "status": "available",
+    "keywords": ["progress", "tracker", "checklist", "daily", "weekly", "monthly"]
+  },
+  "team-planner": {
+    "icon": "nav/CM_Agit_Icon_Supplier_05",
+    "category": "simulators",
+    "order": 100,
+    "status": "available",
+    "keywords": ["team", "planner", "builder", "composition"]
+  },
+  "tier-list-maker": {
+    "icon": "nav/CM_Crown",
+    "category": "simulators",
+    "order": 105,
+    "status": "available",
+    "keywords": [
+      "tier list",
+      "maker",
+      "creator",
+      "ranking",
+      "custom",
+      "build",
+      "share",
+      "characters"
+    ]
+  },
+  "patch-history": {
+    "icon": "nav/CM_Agit_Icon_Supplier_04",
+    "category": "info",
+    "order": 110,
+    "status": "available",
+    "keywords": ["patch", "notes", "developer", "update", "hero compendium"]
+  },
+  "coupon-codes": {
+    "icon": "nav/CM_Agit_Icon_Antiparticle_04",
+    "category": "info",
+    "order": 120,
+    "status": "available",
+    "href": "/coupons",
+    "keywords": ["coupon", "codes", "promo", "redeem", "free"]
+  },
+  "event": {
+    "icon": "nav/CM_Shop_Shortcuts_EventShop",
+    "category": "info",
+    "order": 130,
+    "status": "available",
+    "keywords": ["event", "community", "tournament", "contest"]
+  },
+  "wallpapers": {
+    "icon": "nav/CM_Wallpapers",
+    "category": "media",
+    "order": 140,
+    "status": "available",
+    "keywords": ["wallpaper", "artwork", "download", "official"]
+  },
+  "4-comics": {
+    "icon": "nav/CM_EtcMenu_Side_Story",
+    "category": "media",
+    "order": 145,
+    "status": "available",
+    "keywords": ["comics", "4-cut", "cartoon", "manga", "webtoon"]
+  },
+  "ost": {
+    "icon": "nav/CM_OST",
+    "category": "media",
+    "order": 150,
+    "status": "available",
+    "keywords": ["soundtrack", "OST", "music", "listen", "download"]
+  }
+}

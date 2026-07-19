@@ -1051,6 +1051,18 @@ export function buildAssetManifest(): AssetRequest[] {
       source: `contributors/${avatar}.webp`,
       domain: 'editorial',
     });
+  // Icônes des outils (landing /tools) — collecte DATA-DRIVEN depuis l'index curé.
+  // L'`icon` porte son sous-dossier (`nav/CM_…`) : `images/ui/<icon>.webp`.
+  const toolIndex = JSON.parse(
+    readFileSync(resolve('data/curated/tools/_index.json'), 'utf8'),
+  ) as Record<string, { icon: string }>;
+  for (const icon of new Set(Object.values(toolIndex).map((t) => t.icon)))
+    push({
+      kind: 'editorial',
+      key: `images/ui/${icon}.webp`,
+      source: `ui/${icon}.webp`,
+      domain: 'editorial',
+    });
   // Icônes de tags (créées pour le wiki).
   for (const tag of [
     'premium',

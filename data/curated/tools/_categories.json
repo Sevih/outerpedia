@@ -1,0 +1,17 @@
+{
+  "rankings": {
+    "order": 10
+  },
+  "equipment": {
+    "order": 50
+  },
+  "simulators": {
+    "order": 30
+  },
+  "info": {
+    "order": 20
+  },
+  "media": {
+    "order": 25
+  }
+}

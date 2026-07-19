@@ -6,6 +6,15 @@
 
 ## 2026-07-19
 
+- **Landing `/tools`** — 5ᵉ 404 du footer fermée (landing seule, décision Sevih :
+  le layout d'abord, les 18 sous-outils viendront après). Données curées ramenées
+  du V2 (`data/curated/tools/_categories.json` + `_index.json`) ; domaine
+  `src/lib/data/tools.ts` (import statique). 17 outils visibles groupés en 5
+  catégories, onglets + filtre par HASH (`#cat-…`, deep-link footer, idiome
+  `useUrlSlice`), cartes icône+titre+desc pointant `/tools/<slug>` (404 assumée le
+  temps du portage). 18 icônes ramenées data-driven (manifest lit `_index.json`),
+  helper `img.toolIcon`. Au sitemap. Vérifié : 17 outils, toutes les clés i18n
+  résolvent. Poussée R2 des icônes au prochain `pnpm images`.
 - **Page `/coupons`** — liste complète des codes promo depuis `coupons.json`
   (curé) : 90 codes triés actifs → à venir → expirés (12 actifs / 78 expirés
   ce jour), badge de statut, validité, récompenses résolues en `ItemInline`,

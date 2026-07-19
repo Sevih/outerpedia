@@ -92,14 +92,16 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
 - [ ] **`/tierlist`** — clés `tierlist.*` ; consommera les helpers seo.ts
       gardés (`getMonthYear` → `serverNow`, `buildVideoObjectJsonLd`,
       `buildFaqJsonLd`).
-- [ ] **`/tools`** (landing par catégories rankings/equipment/simulators/
-      info/media) + les **18 outils V2** : most-used-units, tierlistpve,
-      tierlistpvp, ee-priority-base, ee-priority-plus10,
-      gear-usage-statistics, gear-usage-finder, damage-calculator,
-      pull-simulator, progress-tracker, team-planner, tier-list-maker,
-      patch-history, coupon-codes, event, wallpapers, 4-comics, ost —
-      namespaces `tools.*`/`progress.*`. Le footer met les 6 premiers en
-      avant (`/tools#slug`).
+- [~] **`/tools`** — **LANDING FAITE** le 19/07 (cf. DONE) : catégories
+  (rankings/info/media/simulators/equipment) + cartes des 17 outils visibles,
+  onglets + filtre par hash (`#cat-…`), données curées `data/curated/tools/`,
+  icônes ramenées (data-driven), au sitemap. **RESTENT les 18 sous-outils**
+  (`/tools/<slug>`, 404 pour l'instant — décision Sevih : layout d'abord) :
+  most-used-units, tierlistpve, tierlistpvp, ee-priority-base,
+  ee-priority-plus10, gear-usage-statistics, gear-usage-finder,
+  damage-calculator, pull-simulator, progress-tracker, team-planner,
+  tier-list-maker, patch-history, coupon-codes, event, wallpapers, 4-comics,
+  ost — namespaces `tools.*`/`progress.*`.
 - [x] ~~**`/coupons`** — clés `coupons.*` ; lié à l'EXCEPTION PRIO (le regen
       coupons V2 reste la source jusqu'à la bascule prod).~~ FAIT le 19/07
       (cf. DONE) : liste complète (actifs/à venir/expirés) depuis `coupons.json`,
