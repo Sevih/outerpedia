@@ -8,6 +8,8 @@
  */
 import { useState } from 'react';
 import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
+import { img } from '@/lib/images';
+import { STAR_SPRITE } from '@/lib/data/char-progression';
 
 export interface PropertyRow {
   key: string;
@@ -55,16 +57,27 @@ export function PropertyDiagram({
         ))}
       </ul>
       <div className="relative shrink-0">
+        {/* stars gérées à la main : 3 orange (reforge) + 3 jaunes (star level). */}
         <EquipmentIcon
           icon={icon}
           grade="unique"
-          stars={6}
           tier={1}
           enhanceLevel={4}
           classType={classType}
           overlayIcon={effectIcon}
           size={112}
         />
+        <div className="pointer-events-none absolute inset-x-0 bottom-[4%] flex justify-center">
+          {Array.from({ length: 6 }, (_, i) => (
+            // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
+            <img
+              key={i}
+              src={img.transcendStar(i < 3 ? STAR_SPRITE.orange : STAR_SPRITE.yellow)}
+              alt=""
+              style={{ width: 20, height: 20, marginLeft: i ? -6 : 0 }}
+            />
+          ))}
+        </div>
         {hover && BOX[hover] && (
           <span
             className={`border-ed-sky bg-ed-sky/25 pointer-events-none absolute animate-pulse rounded border-2 ${BOX[hover]}`}
