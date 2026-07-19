@@ -30,12 +30,22 @@ import {
 } from '@/components/guides/editorial/blocks';
 import { getCatalog } from '@/lib/data/items';
 import { getAscensionView, getEquipmentDetail } from '@/lib/data/equipment-detail';
+import { GRADE_RANK } from '@/lib/data/gear-order';
 import type { LocalizedText, EnhanceRules } from '@contracts';
 import enhanceRaw from '@data/generated/equipment/enhance.json';
+import breakLimitsRaw from '@data/generated/equipment/breakLimits.json';
 import { LABELS } from './labels';
 import { PropertyDiagram } from './PropertyDiagram';
 
 const rules = enhanceRaw as unknown as EnhanceRules;
+
+/** Palier de breakthrough max (T0 → T4) — dérivé du nb de facteurs breakLimits. */
+const MAX_TIER = Math.max(
+  0,
+  ...Object.values(breakLimitsRaw as Record<string, { factors: number[] }>).map(
+    (b) => b.factors.length,
+  ),
+);
 
 /** En-tête de colonne « Main Stat » du tableau d'ascension (non porté en V2). */
 const MAIN_STAT_LABEL: LocalizedText = {
@@ -46,19 +56,21 @@ const MAIN_STAT_LABEL: LocalizedText = {
   fr: 'Main Stat',
 };
 
-/** Matériaux (tuiles) référencés par NOM dans la prose éditoriale. */
-const HAMMER_ITEMS = [
-  "Apprentice's Hammer",
-  "Expert's Hammer",
-  "Master's Hammer",
-  "Artisan's Hammer",
-];
-const CATALYST_ITEMS = [
-  'Normal Reforge Catalyst',
-  'Superior Reforge Catalyst',
-  'Epic Reforge Catalyst',
-  'Legendary Reforge Catalyst',
-];
+/** Matériaux d'un `subType` du catalogue, triés par rareté (par nom EN). */
+function catalogMaterials(subType: string, contains?: string): string[] {
+  return Object.values(getCatalog())
+    .filter((e) => e.subType === subType && (!contains || (e.name.en ?? '').includes(contains)))
+    .sort((a, b) => (GRADE_RANK[a.grade] ?? 9) - (GRADE_RANK[b.grade] ?? 9))
+    .map((e) => e.name.en)
+    .filter((n): n is string => !!n);
+}
+
+// Hammers et catalysts DÉRIVENT du catalogue (un item par rareté). Les reset
+// scrolls partagent le subType des catalysts → filtre sur « Catalyst ».
+const HAMMER_ITEMS = catalogMaterials('material_equip_enchant');
+const CATALYST_ITEMS = catalogMaterials('material_equip_transcend', 'Catalyst');
+// Glunites : le subType breaklimit contient ~20 variantes nommées (glunites de
+// substitution par arme) → sélection ÉDITORIALE des 4 génériques, non dérivable.
 const GLUNITE_ITEMS = ['Glunite', 'Refined Glunite', 'Event Glunite', 'Armor Glunite'];
 
 /** Index nom EN → item du catalogue (résout les items éditoriaux par nom). */
@@ -381,8 +393,8 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
                 <EquipmentIcon
                   icon={surefire.icon}
                   grade="unique"
-                  stars={6}
-                  tier={4}
+                  stars={surefire.star}
+                  tier={MAX_TIER}
                   overlayIcon={surefire.passives[0]?.icon}
                   size={44}
                 />
@@ -392,10 +404,12 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
                 <div className="text-content flex items-center gap-2 text-xs">
                   <span>ATK</span>
                   <span className="font-mono">{fmt(surefire.slots[0].options[0].base)}</span>
-                  <span className="text-content-subtle">→ T4</span>
+                  <span className="text-content-subtle">→ T{MAX_TIER}</span>
                   <span className="text-success font-mono font-semibold">
                     {fmt(
-                      Math.round(surefire.slots[0].options[0].base * (1 + rules.tierFactor * 4)),
+                      Math.round(
+                        surefire.slots[0].options[0].base * (1 + rules.tierFactor * MAX_TIER),
+                      ),
                     )}
                   </span>
                 </div>
@@ -406,7 +420,7 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
                     desc={surefire.passives[0].texts[0]}
                     className="text-content-muted"
                   />
-                  <div className="text-content-subtle">↓ T4</div>
+                  <div className="text-content-subtle">↓ T{MAX_TIER}</div>
                   <SkillDescription
                     desc={surefire.passives[0].texts[surefire.passives[0].texts.length - 1]}
                     className="text-content"
@@ -426,8 +440,8 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
                     <EquipmentIcon
                       icon={set.icon}
                       grade="unique"
-                      stars={6}
-                      tier={4}
+                      stars={set.star}
+                      tier={MAX_TIER}
                       overlayIcon={set.setIcon}
                       size={44}
                     />
@@ -438,7 +452,7 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
                       [
                         ['T0', set.setEffects.p2, set.setEffects.p4, 'text-content-muted'],
                         [
-                          'T4',
+                          `T${MAX_TIER}`,
                           set.setEffects.p2e ?? set.setEffects.p2,
                           set.setEffects.p4e ?? set.setEffects.p4,
                           'text-content',
