@@ -21,7 +21,7 @@ export type LText = LocalizedText & { en: string };
 /* --- Spec de catégorie --- */
 
 export type MonsterKind = 'group-config' | 'group-meta' | 'dungeons-meta' | 'bossId-meta';
-export type TeamKind = 'slots' | 'buckets' | 'named' | 'none';
+export type TeamKind = 'slots' | 'buckets' | 'named' | 'sections' | 'none';
 
 export interface CatSpec {
   /** Versions datées (`versions/YYYY-MM/`) vs guide plat (fichiers à la racine). */
@@ -52,6 +52,18 @@ export const GUIDE_SPECS: Record<string, CatSpec> = {
     versioned: true,
     monster: 'group-config',
     teams: 'slots',
+    videos: true,
+    notes: true,
+    tipTitles: true,
+    introRequired: true,
+  },
+  // Même renderer que joint-challenge (VersionedBossGuide) mais le World Boss
+  // DÉCOUPE tout par phase : conseils, persos ET équipes en SECTIONS titrées.
+  'world-boss': {
+    versioned: true,
+    monster: 'group-config',
+    teams: 'sections',
+    recoSections: true,
     videos: true,
     notes: true,
     tipTitles: true,
@@ -247,6 +259,26 @@ const writeRecommended = (reco: RecoGroupDraft[]): RecommendedGroupRaw[] | null 
   return kept.length ? kept : null;
 };
 
+/** `recommended.json` en SECTIONS titrées (world-boss : par phase). */
+const readRecoSections = (raw: RawRecommended | undefined): RecoSectionDraft[] => {
+  if (raw === undefined) return [];
+  if (Array.isArray(raw)) return raw.length ? [{ groups: raw }] : [];
+  return raw.sections.map((s) => ({ ...(s.title ? { title: s.title } : {}), groups: s.groups }));
+};
+
+const writeRecoSections = (sections: RecoSectionDraft[]): RawRecommended | null => {
+  const kept = sections
+    .map((s) => ({
+      ...(hasText(s.title) ? { title: s.title! } : {}),
+      groups: writeRecommended(s.groups) ?? [],
+    }))
+    .filter((s) => s.groups.length);
+  if (!kept.length) return null;
+  // Une seule section sans titre → forme courte (tableau), sinon sections.
+  if (kept.length === 1 && !kept[0].title) return kept[0].groups;
+  return { sections: kept };
+};
+
 /* --- Équipes : lecture/écriture par forme --- */
 
 const readTeams = (kind: TeamKind, raw: RawTeams | undefined): TeamDraft[] => {
@@ -268,6 +300,17 @@ const readTeams = (kind: TeamKind, raw: RawTeams | undefined): TeamDraft[] => {
       slots: t.slots,
       ...(t.note?.length ? { notes: t.note } : {}),
     }));
+  }
+  if (kind === 'sections') {
+    // Équipes titrées (world-boss : Phase 1/Phase 2…). Forme courte tolérée.
+    const r = raw as SlotsTeamRaw;
+    if (r.sections)
+      return r.sections.map((s) => ({
+        ...(s.title ? { title: s.title } : {}),
+        slots: s.slots,
+        ...(s.note ? { note: s.note } : {}),
+      }));
+    return r.slots ? [{ slots: r.slots, ...(r.note ? { note: r.note } : {}) }] : [];
   }
   // slots (joint) : une équipe (forme courte ou 1re section).
   const r = raw as SlotsTeamRaw;
@@ -302,6 +345,20 @@ const writeTeams = (kind: TeamKind, teams: TeamDraft[]): RawTeams | null => {
       ...(t.notes && clean(t.notes).length ? { note: clean(t.notes) } : {}),
     }));
   }
+  if (kind === 'sections') {
+    // Une seule équipe sans titre → forme courte, sinon sections titrées.
+    if (kept.length === 1 && !hasText(kept[0].title)) {
+      const t = kept[0];
+      return { slots: t.slots, ...(hasText(t.note) ? { note: t.note! } : {}) };
+    }
+    return {
+      sections: kept.map((t) => ({
+        ...(hasText(t.title) ? { title: t.title! } : {}),
+        slots: t.slots,
+        ...(hasText(t.note) ? { note: t.note! } : {}),
+      })),
+    };
+  }
   const t = kept[0];
   return { slots: t.slots, ...(hasText(t.note) ? { note: t.note! } : {}) };
 };
@@ -316,6 +373,7 @@ export interface RawVersionFiles {
 }
 
 export function toVersionDraft(
+  spec: CatSpec,
   key: string,
   files: RawVersionFiles,
   labelOverride?: LocalizedText,
@@ -326,9 +384,9 @@ export function toVersionDraft(
     ...(files.config?.group ? { group: files.config.group } : {}),
     tipSections: readTipSections(files.tips),
     notes: files.config?.notes ?? [],
-    recommended: readRecommended(files.recommended),
-    recoSections: [],
-    teams: readTeams('slots', files.teams),
+    recommended: spec.recoSections ? [] : readRecommended(files.recommended),
+    recoSections: spec.recoSections ? readRecoSections(files.recommended) : [],
+    teams: readTeams(spec.teams, files.teams),
     videos: files.config?.videos ?? [],
   };
 }
@@ -340,7 +398,7 @@ export interface VersionFilePayload {
   'teams.json': RawTeams | null;
 }
 
-export function fromVersionDraft(v: VersionDraft): VersionFilePayload {
+export function fromVersionDraft(spec: CatSpec, v: VersionDraft): VersionFilePayload {
   const notes = clean(v.notes);
   const config: RawConfig = {
     ...(v.group ? { group: v.group } : {}),
@@ -350,8 +408,10 @@ export function fromVersionDraft(v: VersionDraft): VersionFilePayload {
   return {
     'config.json': Object.keys(config).length ? config : null,
     'tips.json': writeTipsFile(v.tipSections),
-    'recommended.json': writeRecommended(v.recommended),
-    'teams.json': writeTeams('slots', v.teams),
+    'recommended.json': spec.recoSections
+      ? writeRecoSections(v.recoSections)
+      : writeRecommended(v.recommended),
+    'teams.json': writeTeams(spec.teams, v.teams),
   };
 }
 
@@ -425,7 +485,7 @@ const TEAM_TITLE_FALLBACK: SectionTitle = { preset: 'general' };
 
 interface StoryContent {
   intro: LText;
-  note?: LText;
+  note?: LText | LText[];
   tips?: LText[];
   recommended?: RecommendedGroupRaw[];
 }
@@ -482,7 +542,7 @@ export function toContentDraft(
       emptyVersion({
         ...(monster.dungeons?.length ? { dungeons: monster.dungeons } : {}),
         tipSections: c.tips?.length ? [{ tips: c.tips }] : [],
-        notes: c.note ? [c.note] : [],
+        notes: c.note ? (Array.isArray(c.note) ? c.note : [c.note]) : [],
         recommended: c.recommended ?? [],
       }),
     ],
@@ -513,11 +573,12 @@ export function fromContentDraft(spec: CatSpec, draft: GuideDraft): RawContent {
     return out;
   }
   const tips = clean(v.tipSections.flatMap((s) => s.tips));
-  const note = v.notes.find(hasText);
+  const notes = clean(v.notes);
   const recommended = writeRecommended(v.recommended);
   const out: StoryContent = {
     intro: draft.intro,
-    ...(note ? { note } : {}),
+    // Une seule note reste au format simple (diff minimal), plusieurs → tableau.
+    ...(notes.length ? { note: notes.length === 1 ? notes[0] : notes } : {}),
     ...(tips.length ? { tips } : {}),
     ...(recommended ? { recommended } : {}),
   };

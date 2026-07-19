@@ -52,14 +52,15 @@ async function writeOrRemove(path: string, data: unknown): Promise<void> {
 /** Lit un guide (versionné ou plat) dans le modèle plat éditable. */
 export function loadGuideDraft(category: string, slug: string): GuideDraft {
   const guide = getGuide(category, slug);
-  if (!guide) throw new Error(`Guide inconnu : ${category}/${slug}`);
+  if (!guide) throw new Error(`Unknown guide : ${category}/${slug}`);
   const spec = guideSpec(category);
-  if (!spec) throw new Error(`Catégorie non éditable : ${category}`);
+  if (!spec) throw new Error(`Non-editable category : ${category}`);
 
   if (spec.versioned) {
     const strings = readGuideFile<GuideStrings>(guide, 'strings.json');
     const versions = guide.versions.map((v) =>
       toVersionDraft(
+        spec,
         v.key,
         {
           config: readGuideVersionFile<RawConfig>(guide, v.key, 'config.json'),
@@ -118,18 +119,17 @@ export async function saveGuideDraft(
   draft: GuideDraft,
 ): Promise<string[]> {
   const spec = guideSpec(category);
-  if (!spec) return [`Catégorie non éditable : ${category}`];
+  if (!spec) return [`Non-editable category : ${category}`];
 
   const errors: string[] = [];
   if (spec.introRequired && !draft.intro.en?.trim())
-    errors.push('L’intro du guide (EN) est requise.');
+    errors.push('The guide intro (EN) is required.');
   const base = guideDir(category, slug);
-  if (!existsSync(base)) return [`Dossier de guide absent : ${category}/${slug}`];
+  if (!existsSync(base)) return [`Guide folder missing : ${category}/${slug}`];
 
   if (spec.versioned) {
     for (const v of draft.versions) {
-      if (!VERSION_KEY_RE.test(v.key))
-        errors.push(`Clé de version invalide : « ${v.key} » (YYYY-MM).`);
+      if (!VERSION_KEY_RE.test(v.key)) errors.push(`Invalid version key : “${v.key}” (YYYY-MM).`);
     }
     if (errors.length) return errors;
 
@@ -137,7 +137,7 @@ export async function saveGuideDraft(
     for (const v of draft.versions) {
       const vdir = resolve(base, 'versions', v.key);
       mkdirSync(vdir, { recursive: true });
-      const payload = fromVersionDraft(v);
+      const payload = fromVersionDraft(spec, v);
       for (const file of VERSION_FILES) await writeOrRemove(resolve(vdir, file), payload[file]);
     }
     return [];
@@ -146,8 +146,8 @@ export async function saveGuideDraft(
   if (spec.contentFile) {
     const cv = draft.versions[0];
     if (spec.monster === 'dungeons-meta' && !cv?.dungeons?.length)
-      errors.push('Au moins un donjon est requis.');
-    if (spec.monster === 'bossId-meta' && !cv?.bossId) errors.push('Un boss (monstre) est requis.');
+      errors.push('At least one dungeon is required.');
+    if (spec.monster === 'bossId-meta' && !cv?.bossId) errors.push('A boss (monster) is required.');
     if (errors.length) return errors;
 
     if (spec.monster === 'dungeons-meta')
@@ -160,7 +160,7 @@ export async function saveGuideDraft(
   // Guide plat.
   const v = draft.versions[0];
   if (spec.monster === 'group-meta' && !v?.group)
-    errors.push('Un combat (monstre) est requis pour ce guide.');
+    errors.push('A battle (monster) is required for this guide.');
   if (errors.length) return errors;
 
   if (spec.monster === 'group-meta') await patchGuideMeta(category, slug, 'group', v.group);
@@ -172,8 +172,9 @@ export async function saveGuideDraft(
 }
 
 /**
- * Crée une nouvelle version (VERSIONNÉ) en dupliquant une version existante.
- * Renvoie les écarts bloquants (vide = OK).
+ * Crée une nouvelle version (VERSIONNÉ). `fromKey` renseigné → duplique cette
+ * version « pour servir de base » ; vide → version VIERGE (première version d'un
+ * guide qui n'en a pas encore, ex. world-boss). Renvoie les écarts (vide = OK).
  */
 export function addGuideVersion(
   category: string,
@@ -182,17 +183,19 @@ export function addGuideVersion(
   fromKey: string,
 ): string[] {
   if (!VERSION_KEY_RE.test(newKey))
-    return [`Clé de version attendue au format YYYY-MM (reçu « ${newKey} »).`];
+    return [`Version key expected in YYYY-MM format (received “${newKey}”).`];
   const base = guideDir(category, slug);
   const dst = resolve(base, 'versions', newKey);
-  if (existsSync(dst)) return [`La version ${newKey} existe déjà.`];
-  const srcDir = resolve(base, 'versions', fromKey);
-  if (!existsSync(srcDir)) return [`Version source introuvable : ${fromKey}.`];
+  if (existsSync(dst)) return [`Version ${newKey} already exists.`];
 
   mkdirSync(dst, { recursive: true });
-  for (const file of [...VERSION_FILES, 'version.json']) {
-    const sp = resolve(srcDir, file);
-    if (existsSync(sp)) copyFileSync(sp, resolve(dst, file));
+  if (fromKey) {
+    const srcDir = resolve(base, 'versions', fromKey);
+    if (!existsSync(srcDir)) return [`Source version not found : ${fromKey}.`];
+    for (const file of [...VERSION_FILES, 'version.json']) {
+      const sp = resolve(srcDir, file);
+      if (existsSync(sp)) copyFileSync(sp, resolve(dst, file));
+    }
   }
   return [];
 }

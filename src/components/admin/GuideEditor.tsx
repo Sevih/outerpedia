@@ -97,7 +97,7 @@ function CharacterChips({
             )}
             <button
               type="button"
-              title="Retirer"
+              title="Remove"
               className="border-line bg-surface-raised text-danger absolute -top-1.5 -right-1.5 rounded-full border px-1 text-xs"
               onClick={() => onChange(names.filter((_, j) => j !== i))}
             >
@@ -109,7 +109,7 @@ function CharacterChips({
       <input
         className={`${input} h-9 w-36`}
         list="guide-char-names"
-        placeholder="+ perso…"
+        placeholder="+ character…"
         value={add}
         onChange={(e) => setAdd(e.target.value)}
         onKeyDown={(e) => {
@@ -166,10 +166,10 @@ export function GuideEditor({
   const dungeonLabel = (id: string) => dungeonOptions.find((o) => o.id === id)?.label ?? id;
   const titlePlaceholder = (hasRaw: boolean, title?: LText) =>
     hasRaw && !hasText(title)
-      ? 'Titre auto (généré) — écrire pour forcer'
-      : `Titre (optionnel${lang === 'en' ? '' : `, EN : ${title?.en ?? '—'}`})`;
+      ? 'Auto title (generated) — type to override'
+      : `Title (optional${lang === 'en' ? '' : `, EN: ${title?.en ?? '—'}`})`;
 
-  if (!spec) return <p className="text-content-subtle text-sm">Catégorie non éditable.</p>;
+  if (!spec) return <p className="text-content-subtle text-sm">Non-editable category.</p>;
 
   const v: Keyed<VersionDraft> | undefined = versions[active];
 
@@ -243,7 +243,7 @@ export function GuideEditor({
 
     if (!recs.length) {
       setTrans('done');
-      setTransMsg('Rien à traduire (aucun texte EN).');
+      setTransMsg('Nothing to translate (no EN text).');
       return;
     }
     try {
@@ -266,8 +266,8 @@ export function GuideEditor({
       setTrans('done');
       setTransMsg(
         filled
-          ? `${filled} champ(s) traduit(s) via ${provider === 'haiku' ? 'Haiku (quota DeepL atteint)' : 'DeepL'} — à revoir avant d’enregistrer.`
-          : 'Toutes les langues cibles étaient déjà remplies.',
+          ? `${filled} field(s) translated via ${provider === 'haiku' ? 'Haiku (DeepL quota reached)' : 'DeepL'} — to review before saving.`
+          : 'All target languages were already filled.',
       );
     } catch (e) {
       setTrans('error');
@@ -344,7 +344,7 @@ export function GuideEditor({
             <button
               type="button"
               className="text-danger mt-2 shrink-0 text-sm"
-              title="Supprimer le slot"
+              title="Delete slot"
               onClick={() => onChange(slots.filter((_, j) => j !== si))}
             >
               ✕
@@ -369,7 +369,8 @@ export function GuideEditor({
       return (
         <section className="space-y-2">
           <p className={heading}>
-            Donjons <span className="text-content-subtle font-normal">(du plus facile au dur)</span>
+            Dungeons{' '}
+            <span className="text-content-subtle font-normal">(from easiest to hardest)</span>
           </p>
           {dungeons.map((id, i) => (
             <div key={i} className="flex items-center gap-2">
@@ -378,7 +379,7 @@ export function GuideEditor({
               <button
                 type="button"
                 className="text-danger text-sm"
-                title="Retirer"
+                title="Remove"
                 onClick={() => patch({ dungeons: dungeons.filter((_, j) => j !== i) })}
               >
                 ✕
@@ -389,9 +390,11 @@ export function GuideEditor({
             options={dungeonOptions}
             value=""
             onSelect={(id) => id && patch({ dungeons: [...dungeons, id] })}
-            placeholder="Ajouter un donjon…"
+            placeholder="Add a dungeon…"
           />
-          {!dungeons.length && <p className="text-warn text-xs">Au moins un donjon est requis.</p>}
+          {!dungeons.length && (
+            <p className="text-warn text-xs">At least one dungeon is required.</p>
+          )}
         </section>
       );
     }
@@ -399,21 +402,21 @@ export function GuideEditor({
     if (spec!.monster === 'bossId-meta') {
       return (
         <section className="space-y-1.5">
-          <p className={heading}>Boss (monstre)</p>
+          <p className={heading}>Boss (monster)</p>
           <IdLabelPicker
             options={monsterOptions}
             value={v.bossId ?? ''}
             onSelect={(id) => patch({ bossId: id || undefined })}
-            placeholder="Chercher un monstre…"
+            placeholder="Search for a monster…"
           />
-          {!v.bossId && <p className="text-warn text-xs">Un boss est requis.</p>}
+          {!v.bossId && <p className="text-warn text-xs">A boss is required.</p>}
         </section>
       );
     }
     // Combat par `group` (config ou meta).
     return (
       <section className="space-y-1.5">
-        <p className={heading}>Monstre (combat)</p>
+        <p className={heading}>Monster (battle)</p>
         <GroupPicker
           options={groupOptions}
           value={v.group ?? ''}
@@ -421,7 +424,7 @@ export function GuideEditor({
         />
         {!v.group && (
           <p className="text-warn text-xs">
-            Aucun combat désigné — la version n’affichera pas de panneau de boss.
+            No battle assigned — the version won’t show a boss panel.
           </p>
         )}
       </section>
@@ -438,7 +441,7 @@ export function GuideEditor({
       const section = v.tipSections[0] ?? { tips: [] };
       return (
         <section className="space-y-2">
-          <p className={heading}>Conseils</p>
+          <p className={heading}>Tips</p>
           <InlineTextField
             value={itemsToBlock(section.tips, lang)}
             refs={refs}
@@ -446,7 +449,7 @@ export function GuideEditor({
             rows={6}
             layout="stacked"
             previewMode="list"
-            placeholder="Un conseil par ligne…"
+            placeholder="One tip per line…"
             onChange={(val) =>
               patch({ tipSections: [{ tips: blockToItems(val, section.tips, lang) }] })
             }
@@ -457,7 +460,7 @@ export function GuideEditor({
     return (
       <section className="space-y-4">
         {v.tipSections.length === 0 && (
-          <p className="text-content-subtle text-sm">Aucune section — ajoute-en une.</p>
+          <p className="text-content-subtle text-sm">No section — add one.</p>
         )}
         {v.tipSections.map((section, si) => (
           <div key={si} className="card space-y-2 rounded-xl p-4">
@@ -473,7 +476,7 @@ export function GuideEditor({
               <button
                 type="button"
                 className="text-danger ml-auto text-sm"
-                title="Supprimer la section"
+                title="Delete section"
                 onClick={() => patch({ tipSections: v.tipSections.filter((_, j) => j !== si) })}
               >
                 ✕ section
@@ -486,7 +489,7 @@ export function GuideEditor({
               rows={5}
               layout="stacked"
               previewMode="list"
-              placeholder="Un conseil par ligne…"
+              placeholder="One tip per line…"
               onChange={(val) => setSection(si, { tips: blockToItems(val, section.tips, lang) })}
             />
           </div>
@@ -507,7 +510,7 @@ export function GuideEditor({
     return (
       <section className="space-y-2">
         <p className={heading}>
-          Notes libres <span className="text-content-subtle font-normal">(paragraphes)</span>
+          Free notes <span className="text-content-subtle font-normal">(paragraphs)</span>
         </p>
         {v.notes.map((note, i) => (
           <div key={i} className="grid grid-cols-[1fr_auto] items-start gap-2">
@@ -524,7 +527,7 @@ export function GuideEditor({
             <button
               type="button"
               className="text-danger text-sm"
-              title="Supprimer"
+              title="Delete"
               onClick={() => patch({ notes: v.notes.filter((_, j) => j !== i) })}
             >
               ✕
@@ -569,11 +572,11 @@ export function GuideEditor({
                   className="text-danger shrink-0 text-sm"
                   onClick={() => onChange(groups.filter((_, j) => j !== gi))}
                 >
-                  Supprimer
+                  Delete
                 </button>
               </div>
               <div>
-                <p className="text-content-subtle mb-1 text-xs uppercase">Raison ({lang})</p>
+                <p className="text-content-subtle mb-1 text-xs uppercase">Reason ({lang})</p>
                 <InlineTextField
                   value={show(g.reason)}
                   refs={refs}
@@ -591,7 +594,7 @@ export function GuideEditor({
           className={btn}
           onClick={() => onChange([...groups, { characters: [] }])}
         >
-          + groupe
+          + group
         </button>
       </div>
     );
@@ -605,7 +608,7 @@ export function GuideEditor({
         patch({ recoSections: v.recoSections.map((s, j) => (j === si ? { ...s, ...p } : s)) });
       return (
         <section className="space-y-4">
-          <p className={heading}>Persos recommandés (sections)</p>
+          <p className={heading}>Recommended characters (sections)</p>
           {v.recoSections.map((s, si) => (
             <div key={si} className="card space-y-3 rounded-xl p-4">
               <div className="flex items-center gap-2">
@@ -640,7 +643,7 @@ export function GuideEditor({
     }
     return (
       <section className="space-y-3">
-        <p className={heading}>Persos recommandés</p>
+        <p className={heading}>Recommended characters</p>
         <RecoGroups groups={v.recommended} onChange={(g) => patch({ recommended: g })} />
       </section>
     );
@@ -658,11 +661,11 @@ export function GuideEditor({
       return (
         <section className="space-y-3">
           <p className={heading}>
-            Équipe <span className="text-content-subtle font-normal">(max {MAX_SLOTS} slots)</span>
+            Team <span className="text-content-subtle font-normal">(max {MAX_SLOTS} slots)</span>
           </p>
           <SlotsBlock slots={team.slots} onChange={setSlots} />
           <div>
-            <p className="text-content-subtle mb-1 text-xs uppercase">Note d’équipe ({lang})</p>
+            <p className="text-content-subtle mb-1 text-xs uppercase">Team note ({lang})</p>
             <InlineTextField
               value={show(team.note)}
               refs={refs}
@@ -708,7 +711,7 @@ export function GuideEditor({
                   className="text-danger ml-auto text-sm"
                   onClick={() => patch({ teams: v.teams.filter((_, j) => j !== ti) })}
                 >
-                  ✕ plage
+                  ✕ range
                 </button>
               </div>
               <SlotsBlock slots={t.slots} onChange={(slots) => setTeam(ti, { slots })} />
@@ -730,7 +733,55 @@ export function GuideEditor({
             className={btn}
             onClick={() => patch({ teams: [...v.teams, { stages: [1, 1], slots: [] }] })}
           >
-            + plage de stages
+            + stage range
+          </button>
+        </section>
+      );
+    }
+
+    // sections (world-boss) : équipes titrées par phase (titre libre + note simple).
+    if (spec!.teams === 'sections') {
+      return (
+        <section className="space-y-4">
+          {v.teams.map((t, ti) => (
+            <div key={ti} className="card space-y-3 rounded-xl p-4">
+              <div className="flex items-center gap-2">
+                <input
+                  className={`${input} max-w-xs`}
+                  placeholder={titlePlaceholder(false, t.title)}
+                  value={show(t.title)}
+                  onChange={(e) =>
+                    setTeam(ti, { title: orUndef(editLText(t.title, e.target.value)) })
+                  }
+                />
+                <button
+                  type="button"
+                  className="text-danger ml-auto text-sm"
+                  onClick={() => patch({ teams: v.teams.filter((_, j) => j !== ti) })}
+                >
+                  ✕ team
+                </button>
+              </div>
+              <SlotsBlock slots={t.slots} onChange={(slots) => setTeam(ti, { slots })} />
+              <div>
+                <p className="text-content-subtle mb-1 text-xs uppercase">Note ({lang})</p>
+                <InlineTextField
+                  value={show(t.note)}
+                  refs={refs}
+                  lang={lang}
+                  layout="stacked"
+                  placeholder={lang === 'en' ? '' : (t.note?.en ?? '')}
+                  onChange={(val) => setTeam(ti, { note: orUndef(editLText(t.note, val)) })}
+                />
+              </div>
+            </div>
+          ))}
+          <button
+            type="button"
+            className={btn}
+            onClick={() => patch({ teams: [...v.teams, { slots: [] }] })}
+          >
+            + team (phase)
           </button>
         </section>
       );
@@ -746,8 +797,8 @@ export function GuideEditor({
                 className={`${input} max-w-xs`}
                 placeholder={
                   t.rawTitle && !hasText(t.title)
-                    ? 'Titre auto (généré) — écrire pour forcer'
-                    : `Titre de l’équipe (optionnel${lang === 'en' ? '' : `, EN : ${t.title?.en ?? '—'}`})`
+                    ? 'Auto title (generated) — type to override'
+                    : `Team title (optional${lang === 'en' ? '' : `, EN: ${t.title?.en ?? '—'}`})`
                 }
                 value={show(t.title)}
                 onChange={(e) =>
@@ -759,13 +810,13 @@ export function GuideEditor({
                 className="text-danger ml-auto text-sm"
                 onClick={() => patch({ teams: v.teams.filter((_, j) => j !== ti) })}
               >
-                ✕ équipe
+                ✕ team
               </button>
             </div>
             <SlotsBlock slots={t.slots} onChange={(slots) => setTeam(ti, { slots })} />
             <div>
               <p className="text-content-subtle mb-1 text-xs uppercase">
-                Note ({lang}) — un paragraphe par ligne
+                Note ({lang}) — one paragraph per line
               </p>
               <InlineTextField
                 value={itemsToBlock(t.notes ?? [], lang)}
@@ -774,7 +825,7 @@ export function GuideEditor({
                 rows={4}
                 layout="stacked"
                 previewMode="list"
-                placeholder="Un paragraphe par ligne…"
+                placeholder="One paragraph per line…"
                 onChange={(val) => setTeam(ti, { notes: blockToItems(val, t.notes ?? [], lang) })}
               />
             </div>
@@ -785,7 +836,7 @@ export function GuideEditor({
           className={btn}
           onClick={() => patch({ teams: [...v.teams, { slots: [] }] })}
         >
-          + équipe
+          + team
         </button>
       </section>
     );
@@ -817,12 +868,12 @@ export function GuideEditor({
   }
 
   const tabs = [
-    { key: 'monster', label: 'Monstre', content: monsterTab() },
-    { key: 'tips', label: 'Conseils', content: tipsTab() },
+    { key: 'monster', label: 'Monster', content: monsterTab() },
+    { key: 'tips', label: 'Tips', content: tipsTab() },
     ...(spec.notes ? [{ key: 'notes', label: 'Notes', content: notesTab() }] : []),
-    { key: 'reco', label: 'Persos', content: recoTab() },
-    ...(spec.teams !== 'none' ? [{ key: 'team', label: 'Équipe', content: teamTab() }] : []),
-    ...(spec.videos ? [{ key: 'videos', label: 'Vidéos', content: videosTab() }] : []),
+    { key: 'reco', label: 'Characters', content: recoTab() },
+    ...(spec.teams !== 'none' ? [{ key: 'team', label: 'Team', content: teamTab() }] : []),
+    ...(spec.videos ? [{ key: 'videos', label: 'Videos', content: videosTab() }] : []),
   ];
 
   return (
@@ -835,7 +886,7 @@ export function GuideEditor({
 
       {/* Langue + auto-traduction */}
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-content-subtle text-xs uppercase">Langue</span>
+        <span className="text-content-subtle text-xs uppercase">Language</span>
         <div className="border-line flex overflow-hidden rounded-md border">
           {LANGS.map((l) => (
             <button
@@ -853,9 +904,9 @@ export function GuideEditor({
           className={btn}
           onClick={translateEmpty}
           disabled={trans === 'loading'}
-          title="Traduit l'EN vers les langues encore vides (DeepL → Haiku)"
+          title="Translates EN to the still-empty languages (DeepL → Haiku)"
         >
-          {trans === 'loading' ? 'Traduction…' : 'Traduire (EN → vides)'}
+          {trans === 'loading' ? 'Translating…' : 'Translate (EN → empty)'}
         </button>
         {transMsg && (
           <span className={`text-xs ${trans === 'error' ? 'text-danger' : 'text-content-subtle'}`}>
@@ -867,12 +918,9 @@ export function GuideEditor({
       {/* Intro */}
       <section className="space-y-1.5">
         <p className={heading}>
-          Intro du guide
+          Guide intro
           {spec.versioned && (
-            <span className="text-content-subtle font-normal">
-              {' '}
-              (commune à toutes les versions)
-            </span>
+            <span className="text-content-subtle font-normal"> (shared across all versions)</span>
           )}
         </p>
         <InlineTextField
@@ -896,7 +944,7 @@ export function GuideEditor({
               className={`rounded-md px-3 py-1 text-sm ${i === active ? 'bg-accent/20 text-accent font-semibold' : 'text-content-muted hover:bg-surface-overlay'}`}
             >
               {ver.key}
-              {i === 0 && <span className="text-content-subtle ml-1 text-[10px]">(récente)</span>}
+              {i === 0 && <span className="text-content-subtle ml-1 text-[10px]">(recent)</span>}
             </button>
           ))}
           <button
@@ -915,7 +963,7 @@ export function GuideEditor({
       {spec.versioned && adding && (
         <div className="border-line bg-surface-raised flex flex-wrap items-end gap-3 rounded-md border p-3">
           <label className="text-content-subtle text-xs">
-            Nouvelle version (YYYY-MM)
+            New version (YYYY-MM)
             <input
               className={`${input} mt-1 w-32`}
               placeholder="2026-08"
@@ -923,51 +971,53 @@ export function GuideEditor({
               onChange={(e) => setNewKey(e.target.value)}
             />
           </label>
-          <label className="text-content-subtle text-xs">
-            Dupliquer depuis
-            <select
-              className={`${input} mt-1 w-40`}
-              value={fromKey}
-              onChange={(e) => setFromKey(e.target.value)}
-            >
-              {versions.map((ver) => (
-                <option key={ver._key} value={ver.key}>
-                  {ver.key}
-                </option>
-              ))}
-            </select>
-          </label>
+          {versions.length > 0 ? (
+            <label className="text-content-subtle text-xs">
+              Duplicate from
+              <select
+                className={`${input} mt-1 w-40`}
+                value={fromKey}
+                onChange={(e) => setFromKey(e.target.value)}
+              >
+                {versions.map((ver) => (
+                  <option key={ver._key} value={ver.key}>
+                    {ver.key}
+                  </option>
+                ))}
+              </select>
+            </label>
+          ) : (
+            <span className="text-content-subtle text-xs">First version — blank.</span>
+          )}
           <button
             type="button"
             className={btn}
-            disabled={addBusy || !newKey.trim() || !fromKey}
+            disabled={addBusy || !newKey.trim() || (versions.length > 0 && !fromKey)}
             onClick={confirmAddVersion}
           >
-            {addBusy ? 'Création…' : 'Créer la version'}
+            {addBusy ? 'Creating…' : 'Create version'}
           </button>
           <button
             type="button"
             className="text-content-subtle text-sm hover:underline"
             onClick={() => setAdding(false)}
           >
-            annuler
+            cancel
           </button>
         </div>
       )}
 
       {!v ? (
-        <p className="text-content-subtle text-sm">
-          Aucune version — ajoute-en une pour commencer.
-        </p>
+        <p className="text-content-subtle text-sm">No version — add one to start.</p>
       ) : (
         <EditorTabs tabs={tabs} />
       )}
 
       <div className="border-line-subtle flex items-center gap-3 border-t pt-4">
         <button type="button" className={btn} onClick={save} disabled={state === 'saving'}>
-          {state === 'saving' ? 'Enregistrement…' : 'Enregistrer le guide'}
+          {state === 'saving' ? 'Saving…' : 'Save guide'}
         </button>
-        {state === 'saved' && <span className="text-success text-sm">✓ enregistré</span>}
+        {state === 'saved' && <span className="text-success text-sm">✓ saved</span>}
         {(state === 'error' || error) && <span className="text-danger text-sm">{error}</span>}
       </div>
     </div>

@@ -22,9 +22,9 @@ export interface StoryGuideContent {
    * Ce que le stage a de particulier À SAVOIR AVANT le combat — en pratique, le
    * stage jumeau que le guide couvre aussi (« vaut aussi pour S2 Hard 5-9 »).
    * Il se lit AVANT le boss, pas au milieu des conseils : il change le périmètre
-   * de ce qu'on lit.
+   * de ce qu'on lit. Une note unique OU plusieurs paragraphes (rétro-compatible).
    */
-  note?: LText;
+  note?: LText | LText[];
   tips?: LText[];
   recommended?: { characters: string[]; reason?: LText }[];
 }
@@ -93,11 +93,22 @@ export async function StoryBossGuide({
         {parseText(lRec(content.intro, lang), ctx)}
       </p>
 
-      {content.note && (
-        <p className="text-content border-highlight border-l-2 py-1 pl-3 text-sm italic">
-          {parseText(lRec(content.note, lang), ctx)}
-        </p>
-      )}
+      {(() => {
+        const notes = content.note
+          ? Array.isArray(content.note)
+            ? content.note
+            : [content.note]
+          : [];
+        return notes.length ? (
+          <div className="border-highlight space-y-1 border-l-2 py-1 pl-3">
+            {notes.map((n, i) => (
+              <p key={i} className="text-content text-sm italic">
+                {parseText(lRec(n, lang), ctx)}
+              </p>
+            ))}
+          </div>
+        ) : null;
+      })()}
 
       <BossEncounters
         dungeons={guide.dungeons}
