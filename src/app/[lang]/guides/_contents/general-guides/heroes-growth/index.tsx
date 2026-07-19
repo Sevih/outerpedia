@@ -21,6 +21,7 @@ import { StarIcon } from '@/components/guides/editorial/banner/StarText';
 import { SegmentedTabs, type TabItem } from '@/components/guides/SegmentedTabs';
 import { Prose, Callout, DotList } from '@/components/guides/editorial/blocks';
 import { getCatalog } from '@/lib/data/items';
+import { STAR_SPRITE } from '@/lib/data/char-progression';
 import type { LocalizedText, HeroGrowthData, ItemRef, ItemCost } from '@contracts';
 import growthRaw from '@data/generated/hero-growth.json';
 import { LABELS, GEAR_POINTS } from './labels';
@@ -115,6 +116,24 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
     </span>
   );
 
+  /** Rangée de 6 étoiles de transcendance (sprites du jeu, comme TranscendSlider). */
+  const StarRow = ({ stars, color }: { stars: number; color: string }) => (
+    <span className="inline-flex shrink-0 items-center gap-0.5">
+      {Array.from({ length: 6 }, (_, i) => {
+        const sprite =
+          i >= stars
+            ? STAR_SPRITE.gray
+            : i === stars - 1
+              ? (STAR_SPRITE[color] ?? STAR_SPRITE.yellow)
+              : STAR_SPRITE.yellow;
+        return (
+          // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
+          <img key={i} src={img.transcendStar(sprite)} alt="" width={15} height={15} />
+        );
+      })}
+    </span>
+  );
+
   const goldIcon = catalogById['SYS_ASSET_GOLD']?.icon;
   const goldCell = (n: number): ReactNode => (
     <span className="inline-flex items-center gap-1 whitespace-nowrap">
@@ -151,6 +170,7 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
   const levelingPanel = (
     <div className="space-y-3 text-sm">
       <Prose>{L(LABELS.levelingDesc1)}</Prose>
+      <Prose>{L(LABELS.levelingDesc2)}</Prose>
       <ul className="text-content space-y-1">
         {growth.xpFood.map((f) => (
           <li key={f.id} className="flex items-center gap-2">
@@ -161,7 +181,6 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
           </li>
         ))}
       </ul>
-      <Prose>{L(LABELS.levelingDesc2)}</Prose>
       <p className="text-content flex flex-wrap items-center gap-1.5">
         {chipByName('Unlimited Restaurant Voucher')} <span>{L(LABELS.instantLv100)}</span>
       </p>
@@ -230,14 +249,14 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
   const transcendencePanel = (
     <div className="space-y-3 text-sm">
       <Prose>{L(LABELS.transcendenceDesc1)}</Prose>
-      <Callout accent="amber">{L(LABELS.transcendenceDesc2)}</Callout>
+      <Callout accent="amber">{parseText(L(LABELS.transcendenceDesc2), ctx)}</Callout>
       <Prose>{L(LABELS.transcendenceDesc3)}</Prose>
-      <ul className="space-y-1.5">
+      <ul className="space-y-2">
         {TRANSCENDENCE_STEPS.map((s) => (
-          <li key={s.step} className="text-content flex items-start gap-2">
-            <span className="inline-flex shrink-0 items-center gap-0.5 font-medium">
-              {s.step}
-              <StarIcon size={13} />
+          <li key={s.step} className="text-content flex flex-wrap items-center gap-2">
+            <span className="inline-flex shrink-0 items-center gap-1.5">
+              <StarRow stars={s.stars} color={s.color} />
+              <span className="w-8 font-medium">{s.step}</span>
             </span>
             <span className="text-content-subtle">→</span>
             <span>

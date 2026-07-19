@@ -54,11 +54,11 @@ export const LABELS = {
 
   // ---- Leveling
   levelingDesc1: {
-    en: 'Heroes gain experience by participating in battles or by consuming XP items. Most content grants XP, but not all. The Hypnotic Frog Hall challenge mode rewards you with consumable XP food:',
-    jp: 'ヒーローは戦闘に参加するか、経験値アイテムを消費することで経験値を得ます。ほとんどのコンテンツで経験値が得られますが、すべてではありません。催眠カエルホールのチャレンジモードでは消費可能な経験値フードが報酬として得られます：',
-    kr: '영웅은 전투에 참여하거나 경험치 아이템을 소비하여 경험치를 얻습니다. 대부분의 콘텐츠에서 경험치를 얻을 수 있지만, 모든 콘텐츠가 그런 것은 아닙니다. 최면 개구리 홀 챌린지 모드에서는 소비 가능한 경험치 음식을 보상으로 받습니다:',
-    zh: '英雄可以通过参与战斗或消耗经验道具来获得经验值。大多数内容都会给予经验值，但不是全部。催眠青蛙大厅挑战模式会奖励可消耗的经验食物：',
-    fr: "Les Héros gagnent de l'expérience en participant aux combats ou en consommant des items XP. La plupart des contenus donnent de l'XP, mais pas tous. Le mode challenge Hypnotic Frog Hall vous récompense avec de la nourriture XP consommable :",
+    en: 'Heroes gain experience by participating in battles or by consuming XP items. Most content grants XP, but not all. The Hypnotic Frog Hall challenge mode rewards you with consumable XP food.',
+    jp: 'ヒーローは戦闘に参加するか、経験値アイテムを消費することで経験値を得ます。ほとんどのコンテンツで経験値が得られますが、すべてではありません。催眠カエルホールのチャレンジモードでは消費可能な経験値フードが報酬として得られます。',
+    kr: '영웅은 전투에 참여하거나 경험치 아이템을 소비하여 경험치를 얻습니다. 대부분의 콘텐츠에서 경험치를 얻을 수 있지만, 모든 콘텐츠가 그런 것은 아닙니다. 최면 개구리 홀 챌린지 모드에서는 소비 가능한 경험치 음식을 보상으로 받습니다.',
+    zh: '英雄可以通过参与战斗或消耗经验道具来获得经验值。大多数内容都会给予经验值，但不是全部。催眠青蛙大厅挑战模式会奖励可消耗的经验食物。',
+    fr: "Les Héros gagnent de l'expérience en participant aux combats ou en consommant des items XP. La plupart des contenus donnent de l'XP, mais pas tous. Le mode challenge Hypnotic Frog Hall vous récompense avec de la nourriture XP consommable.",
   },
   levelingDesc2: {
     en: 'You can use various items to grant XP:',
@@ -124,11 +124,11 @@ export const LABELS = {
     fr: 'Le Transcending améliore les Héros en utilisant des hero pieces au lieu de stones. Vous pouvez en obtenir via les dupes au pull, le Doppelganger challenge, le Hero Shop ou les events.',
   },
   transcendenceDesc2: {
-    en: 'Note: Demiurge and Limited units cannot be farmed via Doppelgänger and their transcends may have different bonuses, often including unique passives instead of stat buffs (e.g., DDrak reduces AoE damage) and don’t follow the generic transcendence effects.',
-    jp: '注意：デミウルゴスと限定ユニットはドッペルゲンガーでファームできず、異なるボーナスを持つ場合があります。多くの場合、ステータスバフの代わりにユニークなパッシブ（例：DDrakはAoEダメージを軽減）を含み、一般的な超越効果に従いません。',
-    kr: '참고: 데미우르고스와 한정 유닛은 도플갱어에서 파밍할 수 없으며, 스탯 버프 대신 고유 패시브(예: DDrak은 광역 데미지 감소)를 포함하는 다른 보너스를 가질 수 있으며, 일반적인 초월 효과를 따르지 않습니다.',
-    zh: '注意：造物主和限定角色无法通过分身挑战获取，它们可能有不同的加成，通常包括独特的被动技能而非属性加成（例如DDrak减少群体伤害），并且不遵循通用的超越效果。',
-    fr: 'Note : Les unités Demiurge et Limited ne peuvent pas être farmées via Doppelganger et leurs transcends peuvent avoir des bonus différents, incluant souvent des passives uniques au lieu de Buffs de stat (ex : DDrak réduit les dégâts AoE) et ne suivent pas les effets de transcendance génériques.',
+    en: 'Note: Demiurge and Limited units cannot be farmed via Doppelgänger and their transcends may have different bonuses, often including unique passives instead of stat buffs (e.g., {P/Demiurge Drakhan} reduces AoE damage) and don’t follow the generic transcendence effects.',
+    jp: '注意：デミウルゴスと限定ユニットはドッペルゲンガーでファームできず、異なるボーナスを持つ場合があります。多くの場合、ステータスバフの代わりにユニークなパッシブ（例：{P/Demiurge Drakhan}はAoEダメージを軽減）を含み、一般的な超越効果に従いません。',
+    kr: '참고: 데미우르고스와 한정 유닛은 도플갱어에서 파밍할 수 없으며, 스탯 버프 대신 고유 패시브(예: {P/Demiurge Drakhan}은 광역 데미지 감소)를 포함하는 다른 보너스를 가질 수 있으며, 일반적인 초월 효과를 따르지 않습니다.',
+    zh: '注意：造物主和限定角色无法通过分身挑战获取，它们可能有不同的加成，通常包括独特的被动技能而非属性加成（例如{P/Demiurge Drakhan}减少群体伤害），并且不遵循通用的超越效果。',
+    fr: 'Note : Les unités Demiurge et Limited ne peuvent pas être farmées via Doppelganger et leurs transcends peuvent avoir des bonus différents, incluant souvent des passives uniques au lieu de Buffs de stat (ex : {P/Demiurge Drakhan} réduit les dégâts AoE) et ne suivent pas les effets de transcendance génériques.',
   },
   transcendenceDesc3: {
     en: 'Generic transcendence effects (each step also includes a base ATK / DEF / HP stat bonus):',

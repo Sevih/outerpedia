@@ -62,19 +62,28 @@ export const AFFINITY_REWARDS: AffinityReward[] = [
 ];
 
 /**
- * Étapes de transcendance (3★→6★). Chaque étape donne un bonus de stat de base
- * (ATK/DEF/HP) ; certaines débloquent un effet spécial. `effect` absent = stat
- * de base seule.
+ * Étapes de transcendance (1★→6★). `stars`/`color` reproduisent le barème du
+ * jeu (rareté 3 pour les substeps colorés 4+/5+/5++ ; cf. `transcend.json`) →
+ * rangée de 6 sprites identique au `TranscendSlider` des fiches perso. Chaque
+ * étape donne un bonus de stat de base (ATK/DEF/HP) ; certaines débloquent un
+ * effet spécial (`effect`, éditorial générique — vaut pour toute base).
  */
 export interface TranscendStep {
+  /** Libellé affiché (« 4+ », « 5++ »). */
   step: string;
+  /** Nombre d'étoiles pleines (la dernière prend `color`). */
+  stars: number;
+  /** Couleur de la dernière étoile (clé STAR_SPRITE : yellow/orange/red/violet). */
+  color: string;
   effect?: LocalizedText;
 }
 export const TRANSCENDENCE_STEPS: TranscendStep[] = [
-  { step: '1' },
-  { step: '2' },
+  { step: '1', stars: 1, color: 'yellow' },
+  { step: '2', stars: 2, color: 'yellow' },
   {
     step: '3',
+    stars: 3,
+    color: 'yellow',
     effect: {
       en: 'Burst 2 unlocked',
       jp: 'バースト2解放',
@@ -85,6 +94,8 @@ export const TRANSCENDENCE_STEPS: TranscendStep[] = [
   },
   {
     step: '4',
+    stars: 4,
+    color: 'yellow',
     effect: {
       en: '1★/2★ gain a self-stat, 3★ gains a team-stat. All gain +1 Chain Passive Weakness Gauge Damage.',
       jp: '1★/2★は自己ステータス、3★はチームステータスを獲得。全員が+1チェーンパッシブ弱点ゲージダメージを獲得。',
@@ -93,9 +104,11 @@ export const TRANSCENDENCE_STEPS: TranscendStep[] = [
       fr: '1★/2★ gagnent un self-stat, 3★ un team-stat. Tous gagnent +1 dégâts Chain Passive Weakness Gauge.',
     },
   },
-  { step: '4+' },
+  { step: '4+', stars: 4, color: 'orange' },
   {
     step: '5',
+    stars: 5,
+    color: 'yellow',
     effect: {
       en: 'Burst 3 unlocked',
       jp: 'バースト3解放',
@@ -104,10 +117,12 @@ export const TRANSCENDENCE_STEPS: TranscendStep[] = [
       fr: 'Burst 3 débloqué',
     },
   },
-  { step: '5+' },
-  { step: '5++' },
+  { step: '5+', stars: 5, color: 'red' },
+  { step: '5++', stars: 5, color: 'violet' },
   {
     step: '6',
+    stars: 6,
+    color: 'yellow',
     effect: {
       en: '1★/2★ gain a self-stat improvement, 3★ gains a team-stat improvement. All gain +25 Action Points at battle start.',
       jp: '1★/2★は自己ステータス強化、3★はチームステータス強化を獲得。全員がバトル開始時に+25アクションポイントを獲得。',
