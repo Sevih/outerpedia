@@ -55,7 +55,14 @@
   `collect-audio` repointé dessus (copie TOUT le pool — déjà curé par la regex
   de l'extracteur, donc zéro orphelin ; robuste aux nouvelles pistes) ;
   `v2AudioBgmDir()` retiré. Vérifié : mapping regénéré depuis le pool V3
-  **strictement identique** (diff vide, 91 pistes). Prérequis : ffmpeg sur PATH.
+  **strictement identique** (diff vide, 91 pistes).
+  • **ffmpeg/ffprobe en auto-fetch R2** (comme AssetStudio) : entrées `FFMPEG`/
+  `FFPROBE` dans `datagen/extract/tools.ts` (dossier R2 `tools/ffmpeg`, exe à
+  plat), `ensureTool` les rapatrie dans `.gamedata/tools/ffmpeg` ; `datagen:tools`
+  les garantit. Mon `bgm-mapping` résout ffprobe via `ensureTool(FFPROBE)`
+  (surcharge `FFPROBE`). Plus de dépendance au PATH. Reste : pousser une fois le
+  build ffmpeg sur R2 `tools/ffmpeg` (comme AssetStudio l'a été) ; le worker
+  repointe son ffmpeg d'extraction sur `ensureTool(FFMPEG)`.
   • **Page** `_contents/ost/` : wrapper serveur (résout les libellés, passe la
   table) + `OstPlayer` client (logique V2 fidèle : lecture/seek/shuffle/repeat/
   historique/volume/raccourcis) **réhabillé sur les tokens V3** (accent ciel

@@ -22,7 +22,7 @@
  * comme tout `data/generated/`. L'exécution directe (`tsx …/bgm-mapping.ts`)
  * se contente d'IMPRIMER le résultat pour revue — elle n'écrit rien.
  */
-import { execFile as execFileCb, execFileSync } from 'node:child_process';
+import { execFile as execFileCb } from 'node:child_process';
 import { readdirSync, statSync } from 'node:fs';
 import { parse as parsePath, resolve } from 'node:path';
 import { promisify } from 'node:util';
@@ -30,10 +30,16 @@ import { loadTable } from '../lib/tables';
 import { langDict } from '../lib/text';
 import type { LangDict } from '../lib/lang';
 import { isMain } from '../lib/is-main';
+import { ensureTool, FFPROBE } from '../extract/tools';
 
 const execFile = promisify(execFileCb);
 
 const AUDIO_DIR = resolve(process.cwd(), '.gamedata/extracted/audio/bgm');
+
+/** Chemin de `ffprobe` : surcharge `FFPROBE`, sinon rapatrié de R2 (ensureTool). */
+function ffprobeBin(): string {
+  return process.env.FFPROBE ?? ensureTool(FFPROBE);
+}
 
 /** Une piste de l'OST : nom localisé (anglais toujours) + métadonnées. */
 export interface BgmTrack {
@@ -48,23 +54,8 @@ export interface BgmTrack {
   duration: number;
 }
 
-/** Localise l'exécutable (`ffprobe`) sans dépendre du shell. */
-function which(cmd: string): string | null {
-  try {
-    const out = execFileSync(process.platform === 'win32' ? 'where' : 'which', [cmd], {
-      encoding: 'utf-8',
-      stdio: ['ignore', 'pipe', 'ignore'],
-    });
-    return out.trim().split('\n')[0] || null;
-  } catch {
-    return null;
-  }
-}
-
-/** Durée du mp3 via ffprobe (secondes, 1 décimale) — `null` si ffprobe absent. */
-async function getDuration(filePath: string): Promise<number | null> {
-  const ffprobe = which('ffprobe');
-  if (!ffprobe) return null;
+/** Durée du mp3 via ffprobe (secondes, 1 décimale) — `null` si erreur de lecture. */
+async function getDuration(ffprobe: string, filePath: string): Promise<number | null> {
   try {
     const { stdout } = await execFile(ffprobe, [
       '-v',
@@ -142,7 +133,7 @@ function bgmNameIndex(): Map<string, LangDict> {
   return idx;
 }
 
-/** Construit le mapping de l'OST depuis les mp3 du staging + les tables. */
+/** Construit le mapping de l'OST depuis les mp3 du pool extrait + les tables. */
 export async function buildBgmMapping(): Promise<BgmTrack[]> {
   const stems = readdirSync(AUDIO_DIR)
     .filter((f) => f.toLowerCase().endsWith('.mp3'))
@@ -157,6 +148,7 @@ export async function buildBgmMapping(): Promise<BgmTrack[]> {
   });
 
   const names = bgmNameIndex();
+  const ffprobe = ffprobeBin(); // résolu une fois (surcharge FFPROBE ou fetch R2)
   const tracks: BgmTrack[] = [];
   for (const stem of kept.sort(byFileNameCI)) {
     const dict = names.get(stem.toLowerCase());
@@ -165,7 +157,7 @@ export async function buildBgmMapping(): Promise<BgmTrack[]> {
       file: stem,
       name: dict?.en || formatFilenameAsName(stem),
       size: Math.round((statSync(path).size / (1024 * 1024)) * 100) / 100,
-      duration: (await getDuration(path)) ?? 0,
+      duration: (await getDuration(ffprobe, path)) ?? 0,
     };
     // Langues secondaires : émises seulement si distinctes de l'anglais (le jeu
     // laisse souvent le nom anglais en repli) — JSON lisible, consommateur `l()`
