@@ -62,7 +62,7 @@ export function AdminSidebar({ sections }: { sections: NavSection[] }) {
         <button
           type="button"
           onClick={toggle}
-          title="Déplier le menu"
+          title="Expand the menu"
           className="text-content-subtle hover:text-content-strong text-lg"
         >
           ☰
@@ -76,7 +76,7 @@ export function AdminSidebar({ sections }: { sections: NavSection[] }) {
         </Link>
         <Link
           href={'/' as Route}
-          title="Retour au site"
+          title="Back to site"
           className="text-content-subtle hover:text-content-strong mt-auto text-sm"
         >
           ↩
@@ -97,7 +97,7 @@ export function AdminSidebar({ sections }: { sections: NavSection[] }) {
         <button
           type="button"
           onClick={toggle}
-          title="Replier le menu"
+          title="Collapse the menu"
           className="text-content-subtle hover:text-content-strong ml-auto text-sm"
         >
           ⟨⟨
@@ -106,7 +106,7 @@ export function AdminSidebar({ sections }: { sections: NavSection[] }) {
 
       <div className="border-line-subtle border-b px-4 py-1.5">
         <Link href={'/' as Route} className="text-content-subtle hover:text-content-strong text-xs">
-          ↩ Retour au site
+          ↩ Back to site
         </Link>
       </div>
 
@@ -131,9 +131,7 @@ export function AdminSidebar({ sections }: { sections: NavSection[] }) {
                       } ${item.soon ? 'opacity-40' : ''}`}
                     >
                       <span className="min-w-0 flex-1 truncate">{item.label}</span>
-                      {item.soon && (
-                        <span className="text-content-subtle text-[10px]">à venir</span>
-                      )}
+                      {item.soon && <span className="text-content-subtle text-[10px]">soon</span>}
                       {item.badge && item.badge.count > 0 && (
                         <span
                           className={`rounded px-1.5 text-[10px] font-medium tabular-nums ${TONE[item.badge.tone]}`}

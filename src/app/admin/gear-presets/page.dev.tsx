@@ -25,10 +25,10 @@ export default function AdminGearPresets() {
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-content-strong text-xl font-semibold">Presets de gear reco</h1>
+        <h1 className="text-content-strong text-xl font-semibold">Gear reco presets</h1>
         <p className="text-content-muted text-sm">
-          Référencés par <span className="font-mono">$slug</span> dans les builds des personnages.
-          Un preset encore référencé ne peut pas être supprimé.
+          Referenced by <span className="font-mono">$slug</span> in character builds. A preset that
+          is still referenced cannot be deleted.
         </p>
       </div>
       <GearPresetsEditor

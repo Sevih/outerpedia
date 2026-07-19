@@ -29,8 +29,7 @@ export default async function GameDataTablePage({
         <span className="text-content-subtle text-xs">
           {/* Le nom interne du parser (`CAdventureTemplet`) diffère du fichier. */}
           {initial.table !== table && <span className="mr-2 font-mono">{initial.table}</span>}
-          {initial.rowCount} lignes · {initial.filled.length}/{initial.columns.length} colonnes
-          renseignées
+          {initial.rowCount} rows · {initial.filled.length}/{initial.columns.length} columns filled
         </span>
       </div>
       <GameDataBrowser

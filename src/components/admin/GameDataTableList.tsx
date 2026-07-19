@@ -8,9 +8,9 @@ import type { TableInfo } from '@/lib/admin/gamedata-store';
 
 /** Taille de fichier lisible (les tables vont de 4 Ko à 18 Mo). */
 function humanSize(bytes: number): string {
-  if (bytes >= 1_000_000) return `${(bytes / 1_000_000).toFixed(1)} Mo`;
-  if (bytes >= 1_000) return `${Math.round(bytes / 1_000)} Ko`;
-  return `${bytes} o`;
+  if (bytes >= 1_000_000) return `${(bytes / 1_000_000).toFixed(1)} MB`;
+  if (bytes >= 1_000) return `${Math.round(bytes / 1_000)} KB`;
+  return `${bytes} B`;
 }
 
 /**
@@ -33,11 +33,11 @@ export function GameDataTableList({ tables }: { tables: TableInfo[] }) {
       <div className="border-line-subtle space-y-2 border-b p-3">
         <div className="text-content-subtle flex justify-between text-xs">
           <span>{tables.length} tables</span>
-          {search && <span>{filtered.length} filtrée(s)</span>}
+          {search && <span>{filtered.length} filtered</span>}
         </div>
         <input
           className="border-line bg-surface-base text-content focus:border-accent w-full rounded-md border px-2 py-1 text-sm focus:outline-none"
-          placeholder="Nom de table…"
+          placeholder="Table name…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -62,7 +62,7 @@ export function GameDataTableList({ tables }: { tables: TableInfo[] }) {
           );
         })}
         {filtered.length === 0 && (
-          <li className="text-content-subtle px-3 py-2 text-xs">Aucune table ne correspond.</li>
+          <li className="text-content-subtle px-3 py-2 text-xs">No matching table.</li>
         )}
       </ul>
     </aside>

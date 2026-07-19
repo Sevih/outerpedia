@@ -73,13 +73,13 @@ export function ItemPicker({
         o ? (
           <ItemInline item={inline(o)} size={18} />
         ) : (
-          <span className="text-warn text-xs italic">{value} (non résolu)</span>
+          <span className="text-warn text-xs italic">{value} (unresolved)</span>
         )
       }
       onPick={(o) => onChange(o.id)}
       onClear={() => onChange('')}
-      placeholder="Chercher un item…"
-      changeTitle="Changer d'item"
+      placeholder="Search an item…"
+      changeTitle="Change item"
     />
   );
 }

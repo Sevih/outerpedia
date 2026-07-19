@@ -50,7 +50,7 @@ export function VideoCurator({
     try {
       const res = await fetch(`/api/admin/youtube/search?q=${encodeURIComponent(characterName)}`);
       const data = (await res.json()) as { candidates?: Candidate[]; error?: string };
-      if (!res.ok) throw new Error(data.error ?? 'Échec recherche');
+      if (!res.ok) throw new Error(data.error ?? 'Search failed');
       setCandidates(data.candidates ?? []);
     } catch (e) {
       setError((e as Error).message);
@@ -70,9 +70,9 @@ export function VideoCurator({
         meta?: Record<string, Omit<Candidate, 'platform' | 'id' | 'channel'>>;
         error?: string;
       };
-      if (!res.ok) throw new Error(data.error ?? 'Échec enrichissement');
+      if (!res.ok) throw new Error(data.error ?? 'Enrichment failed');
       const m = data.meta?.[id];
-      if (!m) throw new Error('Vidéo introuvable');
+      if (!m) throw new Error('Video not found');
       add({ platform: 'youtube', id, title: m.title, author: m.author, uploadDate: m.uploadDate });
       setManualId('');
     } catch (e) {
@@ -84,7 +84,7 @@ export function VideoCurator({
 
   return (
     <div className="space-y-3">
-      <p className="text-content-subtle text-xs font-semibold tracking-wide uppercase">Vidéos</p>
+      <p className="text-content-subtle text-xs font-semibold tracking-wide uppercase">Videos</p>
 
       {/* Vidéos curées actuelles */}
       {videos.length > 0 ? (
@@ -103,28 +103,28 @@ export function VideoCurator({
                 </p>
               </div>
               <button type="button" onClick={() => remove(v.id)} className="text-danger text-xs">
-                retirer
+                remove
               </button>
             </li>
           ))}
         </ul>
       ) : (
-        <p className="text-content-subtle text-sm">Aucune vidéo.</p>
+        <p className="text-content-subtle text-sm">No video.</p>
       )}
 
       {/* Découverte + ajout manuel */}
       <div className="flex flex-wrap items-center gap-2">
         <button type="button" onClick={search} disabled={busy !== null} className={btn}>
-          {busy === 'search' ? 'Recherche…' : 'Chercher sur la chaîne officielle'}
+          {busy === 'search' ? 'Searching…' : 'Search the official channel'}
         </button>
         <input
           value={manualId}
           onChange={(e) => setManualId(e.target.value)}
-          placeholder="id YouTube manuel"
+          placeholder="manual YouTube id"
           className="border-line bg-surface-base text-content focus:border-accent w-44 rounded-md border px-3 py-1.5 text-sm focus:outline-none"
         />
         <button type="button" onClick={addManual} disabled={busy !== null} className={btn}>
-          {busy === 'meta' ? 'Ajout…' : 'Ajouter'}
+          {busy === 'meta' ? 'Adding…' : 'Add'}
         </button>
       </div>
 
@@ -164,7 +164,7 @@ export function VideoCurator({
                 disabled={has(c.id)}
                 className="text-accent text-xs font-semibold disabled:opacity-40"
               >
-                {has(c.id) ? 'ajouté' : 'ajouter'}
+                {has(c.id) ? 'added' : 'add'}
               </button>
             </li>
           ))}

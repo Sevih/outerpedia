@@ -51,12 +51,12 @@ const sorted = <T>(rec: Record<string, T>): Record<string, T> =>
 export async function applyCharacterKitCuration(patch: CharacterKitPatch): Promise<string[]> {
   const errors: string[] = [];
   const cards = new Set(patch.cardIds ?? []);
-  if (!cards.size) errors.push('cardIds manquant');
+  if (!cards.size) errors.push('cardIds missing');
   for (const section of ['chipHide', 'chipAdd'] as const) {
     for (const [cid, list] of Object.entries(patch[section] ?? {})) {
-      if (!cards.has(cid)) errors.push(`${section}[${cid}] : pas une carte du perso`);
+      if (!cards.has(cid)) errors.push(`${section}[${cid}] : not a card of this character`);
       if (!Array.isArray(list) || list.some((v) => typeof v !== 'string' || !v.trim()))
-        errors.push(`${section}[${cid}] : liste de chaînes attendue`);
+        errors.push(`${section}[${cid}] : string list expected`);
     }
   }
   if (errors.length) return errors;

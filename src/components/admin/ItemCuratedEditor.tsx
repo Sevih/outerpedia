@@ -64,7 +64,7 @@ export function ItemCuratedEditor({
       const { text } = (await res.json().catch(() => ({}))) as { text?: LangDict | null };
       if (text)
         apply({ en: text.en ?? '', jp: text.jp ?? '', kr: text.kr ?? '', zh: text.zh ?? '' });
-      else setStatus({ kind: 'err', msg: `Clé texte introuvable : ${k}` });
+      else setStatus({ kind: 'err', msg: `Text key not found: ${k}` });
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });
     }
@@ -90,13 +90,13 @@ export function ItemCuratedEditor({
   async function save() {
     const built = build();
     if (creation && !built.name?.en) {
-      setStatus({ kind: 'err', msg: 'Une création doit au moins avoir un nom EN.' });
+      setStatus({ kind: 'err', msg: 'A creation must at least have an EN name.' });
       return;
     }
     setStatus({ kind: 'idle' });
     try {
       await postJson(`/api/admin/curated/items/${encodeURIComponent(id)}`, built);
-      setStatus({ kind: 'ok', msg: 'Enregistré' });
+      setStatus({ kind: 'ok', msg: 'Saved' });
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });
     }
@@ -121,20 +121,20 @@ export function ItemCuratedEditor({
       </div>
 
       <section className="space-y-2">
-        <p className={label}>Nom (vide = garde l&apos;extrait)</p>
+        <p className={label}>Name (empty = keep extract)</p>
         <div className="flex items-center gap-2">
           <input
             className={`${field} max-w-64`}
             value={nameKey}
             onChange={(e) => setNameKey(e.target.value)}
-            placeholder="clé texte (ex. SYS_STAMINA) → récupérer"
+            placeholder="text key (e.g. SYS_STAMINA) → fetch"
           />
           <button
             type="button"
             className="border-line hover:border-accent rounded-md border px-2 py-1.5 text-xs whitespace-nowrap"
             onClick={() => pull(nameKey, setName)}
           >
-            récupérer
+            fetch
           </button>
         </div>
         <div className="grid gap-2 sm:grid-cols-2">
@@ -153,20 +153,20 @@ export function ItemCuratedEditor({
       </section>
 
       <section className="space-y-2">
-        <p className={label}>Description (vide = garde l&apos;extrait)</p>
+        <p className={label}>Description (empty = keep extract)</p>
         <div className="flex items-center gap-2">
           <input
             className={`${field} max-w-64`}
             value={descKey}
             onChange={(e) => setDescKey(e.target.value)}
-            placeholder="clé texte (ex. SYS_DISC_TICKET_STAMINA) → récupérer"
+            placeholder="text key (e.g. SYS_DISC_TICKET_STAMINA) → fetch"
           />
           <button
             type="button"
             className="border-line hover:border-accent rounded-md border px-2 py-1.5 text-xs whitespace-nowrap"
             onClick={() => pull(descKey, setDesc)}
           >
-            récupérer
+            fetch
           </button>
         </div>
         <div className="grid gap-2 sm:grid-cols-2">
@@ -186,7 +186,7 @@ export function ItemCuratedEditor({
 
       <section className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1">
-          <p className={label}>Icône (sprite `items`)</p>
+          <p className={label}>Icon (sprite `items`)</p>
           <div className="flex items-center gap-2">
             {effIcon && (
               <span className="border-line bg-surface-base relative h-8 w-8 shrink-0 rounded border">
@@ -208,12 +208,12 @@ export function ItemCuratedEditor({
         </div>
         <label className="text-content flex items-center gap-2 self-end pb-2 text-sm">
           <input type="checkbox" checked={hidden} onChange={(e) => setHidden(e.target.checked)} />
-          Masquer (bruit / interne)
+          Hide (noise / internal)
         </label>
       </section>
 
       <section className="space-y-1">
-        <p className={label}>Note interne</p>
+        <p className={label}>Internal note</p>
         <textarea
           className={`${field} h-16`}
           value={note}
@@ -227,10 +227,10 @@ export function ItemCuratedEditor({
           onClick={save}
           className="bg-accent text-accent-fg rounded-md px-4 py-2 text-sm font-semibold hover:opacity-90"
         >
-          Enregistrer
+          Save
         </button>
         <span className="text-content-subtle text-xs">
-          Tout vider + enregistrer = supprime l&apos;override.
+          Clear all + save = removes the override.
         </span>
         {status.kind === 'ok' && <span className="text-success text-sm">{status.msg}</span>}
         {status.kind === 'err' && <span className="text-danger text-sm">{status.msg}</span>}

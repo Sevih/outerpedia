@@ -33,15 +33,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     {
       title: 'Extractor',
       items: [
-        { label: 'Personnage', href: '/admin/extractor/characters', badge: warn(n.character ?? 0) },
+        { label: 'Character', href: '/admin/extractor/characters', badge: warn(n.character ?? 0) },
         { label: 'Effect', href: '/admin/extractor/effects', badge: warn(n.effect ?? 0) },
         { label: 'EE', href: '/admin/extractor/ee', badge: warn(n.ee ?? 0) },
-        { label: 'Armes', href: '/admin/extractor/weapons', badge: warn(n.weapon ?? 0) },
+        { label: 'Weapons', href: '/admin/extractor/weapons', badge: warn(n.weapon ?? 0) },
         { label: 'Amulet', href: '/admin/extractor/amulets', badge: warn(n.amulet ?? 0) },
         { label: 'Armor', href: '/admin/extractor/armors', badge: warn(n.armor ?? 0) },
         { label: 'Talisman', href: '/admin/extractor/talismans', badge: warn(n.talisman ?? 0) },
         { label: 'Sets', href: '/admin/extractor/sets', badge: warn(n.set ?? 0) },
-        { label: 'Monstre', href: '/admin/extractor/monsters', badge: warn(n.monster ?? 0) },
+        { label: 'Monster', href: '/admin/extractor/monsters', badge: warn(n.monster ?? 0) },
         { label: 'Item', href: '/admin/extractor/items', badge: warn(n.item ?? 0) },
       ],
     },
@@ -54,10 +54,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       // curer dessus — seul l'EE a une curation (rang + câblage des chips).
       title: 'Editor',
       items: [
-        { label: 'Personnage', href: '/admin/editor/characters' },
+        { label: 'Character', href: '/admin/editor/characters' },
         { label: 'Effect', href: '/admin/editor/effects' },
         { label: 'EE', href: '/admin/editor/ee' },
-        { label: 'Monstre', href: '/admin/editor/monsters' },
+        { label: 'Monster', href: '/admin/editor/monsters' },
         { label: 'Item', href: '/admin/editor/items' },
       ],
     },
@@ -66,9 +66,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       items: [
         { label: 'Pro / Con', href: '/admin/tools/pros-cons' },
         { label: 'Synergy', href: '/admin/tools/synergies' },
-        { label: 'Code promo', href: '/admin/tools/promo-codes' },
+        { label: 'Promo code', href: '/admin/tools/promo-codes' },
         { label: 'Banner', href: '/admin/tools/banners' },
-        { label: 'Données du jeu', href: '/admin/tools/gamedata' },
+        { label: 'Game data', href: '/admin/tools/gamedata' },
       ],
     },
     {
@@ -76,10 +76,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       items: [{ label: 'Guides', href: '/admin/guides' }],
     },
     {
-      title: 'Divers',
+      title: 'Misc',
       items: [
-        { label: 'Contrôle des tags', href: '/admin/tags' },
-        { label: 'Presets gear', href: '/admin/gear-presets' },
+        { label: 'Tag control', href: '/admin/tags' },
+        { label: 'Gear presets', href: '/admin/gear-presets' },
       ],
     },
   ];

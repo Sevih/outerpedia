@@ -172,12 +172,18 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
 
 > Pattern : registre `general-guide-store.ts` (slug → fragment), donnée sortie
 > en JSON local (rendu inchangé), éditeur dédié câblé sur `/admin/guides`.
-> `free-heroes-start-banner` (onglet Free Heroes) LIVRÉ le 19/07 (cf. DONE).
+> `free-heroes-start-banner` (onglet Free Heroes) et `premium-limited` (reviews +
+> recommended choices + contribution publique Shiraen) LIVRÉS le 19/07 (cf.
+> DONE). Modèle de contribution acté : outil PUBLIC exporte 1 perso →
+> IMPORT côté admin (pas d'écriture serveur publique, pas d'auth).
 
-- [ ] `premium-limited` : ajouter/modifier des reviews (prévoir la brique
-      publique pour Shiraen aussi) + éditer les recommended choices.
-- [ ] `core-fusion` : idem (reviews publiques Shiraen + recommended choices).
-- [ ] `shop-purchase-priorities` : modifier les priorités des items.
+- [ ] `core-fusion` : reviews (avec `changes` par skill + `recommendedLevels`) +
+      recommended choices (`op` sur les picks, pas de bucket `transcend`) —
+      répliquer le patron premium-limited (contribution publique aussi).
+- [ ] `shop-purchase-priorities` : modifier les priorités S/A/B/C des items —
+      LES DEUX (choix Sevih) : tables éditoriales (`editorial.ts`, EVENT/RESOURCE)
+      **et** overlay curé des shops dérivés (fusionné au build datagen → éditer
+      l'overlay puis régénérer `shop-priorities.json`).
 
 ## ⚙️ Config / infra
 

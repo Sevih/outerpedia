@@ -142,7 +142,7 @@ export function MonsterKitEditor({
     const q = addQuery.trim();
     const id = catalog[q] ? q : byName.get(q.toLowerCase());
     if (!id) {
-      setMessage(`« ${q} » : effet inconnu du glossaire.`);
+      setMessage(`“${q}”: unknown glossary effect.`);
       return;
     }
     setAdds((prev) => ({ ...prev, [skillId]: [...new Set([...(prev[skillId] ?? []), id])] }));
@@ -177,13 +177,13 @@ export function MonsterKitEditor({
         },
       );
       if (!json.ok) {
-        setMessage(`Erreur : ${(json.errors ?? ['inconnue']).join(' ; ')}`);
+        setMessage(`Error: ${(json.errors ?? ['unknown']).join(' ; ')}`);
         return;
       }
-      setMessage('Enregistré — data/curated/monster-skills.json (à committer via git).');
+      setMessage('Saved — data/curated/monster-skills.json (commit via git).');
       router.refresh();
     } catch (e) {
-      setMessage(`Erreur : ${(e as Error).message}`);
+      setMessage(`Error: ${(e as Error).message}`);
     } finally {
       setBusy(false);
     }
@@ -193,7 +193,7 @@ export function MonsterKitEditor({
     <section className="space-y-3">
       <div className="flex items-center justify-between gap-3">
         <h2 className="text-content-strong text-xs font-semibold uppercase">
-          Câblage des chips (curé — présentation seule)
+          Chip wiring (curated — display only)
         </h2>
         <div className="flex items-center gap-3">
           {message && <span className="text-content-subtle text-xs">{message}</span>}
@@ -203,13 +203,13 @@ export function MonsterKitEditor({
             disabled={busy || !dirty}
             className="bg-accent text-accent-fg rounded-md px-3 py-1.5 text-sm font-medium disabled:opacity-50"
           >
-            {busy ? 'Enregistrement…' : 'Enregistrer'}
+            {busy ? 'Saving…' : 'Save'}
           </button>
         </div>
       </div>
       <p className="text-content-subtle text-xs">
-        Glisse une chip sur une autre carte pour la réattribuer (chipOwner) · × pour la masquer sur
-        sa carte (chipHide) · + pour ajouter un effet du glossaire (chipAdd).
+        Drag a chip onto another card to reassign it (chipOwner) · × to hide it on its card
+        (chipHide) · + to add a glossary effect (chipAdd).
       </p>
 
       <datalist id="kit-editor-effects">
@@ -255,7 +255,7 @@ export function MonsterKitEditor({
               )}
               <div className="min-w-0">
                 <p className="text-content-strong text-sm font-semibold">
-                  {s.name || '(sans nom)'}{' '}
+                  {s.name || '(unnamed)'}{' '}
                   <span className="text-content-subtle font-mono text-xs font-normal">
                     {s.id} · {s.type}
                   </span>
@@ -274,14 +274,14 @@ export function MonsterKitEditor({
                   key={c.buff}
                   draggable
                   onDragStart={(e) => e.dataTransfer.setData('chip/buff', c.buff)}
-                  title={`${c.buff} — porté par les tables : ${c.carrier}`}
+                  title={`${c.buff} — carried by the tables: ${c.carrier}`}
                   className="cursor-grab active:cursor-grabbing"
                 >
                   <EffectPillShell icon={c.icon} name={c.name} isDebuff={c.isDebuff}>
                     <button
                       type="button"
                       onClick={() => hideChip(c.buff, s.id)}
-                      title="Masquer sur cette carte (chipHide)"
+                      title="Hide on this card (chipHide)"
                       className="ml-0.5 rounded px-0.5 text-[11px] leading-none opacity-60 hover:opacity-100"
                     >
                       ✕
@@ -310,7 +310,7 @@ export function MonsterKitEditor({
                       <button
                         type="button"
                         onClick={() => removeAdd(s.id, ref)}
-                        title="Retirer (chipAdd)"
+                        title="Remove (chipAdd)"
                         className="ml-0.5 rounded px-0.5 text-[11px] leading-none opacity-60 hover:opacity-100"
                       >
                         ✕
@@ -322,7 +322,7 @@ export function MonsterKitEditor({
               {hidden.map((c) => (
                 <span
                   key={`hidden-${c.buff}`}
-                  title={`${c.buff} — masquée ici (chipHide)`}
+                  title={`${c.buff} — hidden here (chipHide)`}
                   className="border-line flex items-center gap-1 rounded-md border border-dashed py-0.5 pr-1 pl-1 opacity-50"
                 >
                   <span className="text-content-subtle text-[11px] font-semibold line-through">
@@ -331,7 +331,7 @@ export function MonsterKitEditor({
                   <button
                     type="button"
                     onClick={() => restoreChip(c.buff, s.id)}
-                    title="Rétablir la chip"
+                    title="Restore the chip"
                     className="text-content-subtle hover:text-content ml-0.5 rounded px-0.5 text-[11px] leading-none"
                   >
                     ↺
@@ -349,7 +349,7 @@ export function MonsterKitEditor({
                       if (e.key === 'Enter') confirmAdd(s.id);
                       if (e.key === 'Escape') setAdding(null);
                     }}
-                    placeholder="Nom d'effet ou réf tooltip…"
+                    placeholder="Effect name or tooltip ref…"
                     className="border-line bg-surface-base text-content w-52 rounded-md border px-2 py-0.5 text-xs"
                   />
                   <button
@@ -364,7 +364,7 @@ export function MonsterKitEditor({
                     onClick={() => setAdding(null)}
                     className="text-content-subtle hover:text-content px-1 text-xs"
                   >
-                    annuler
+                    cancel
                   </button>
                 </span>
               ) : (
@@ -374,7 +374,7 @@ export function MonsterKitEditor({
                     setAdding(s.id);
                     setAddQuery('');
                   }}
-                  title="Ajouter un effet (chipAdd)"
+                  title="Add an effect (chipAdd)"
                   className="border-line text-content-subtle hover:text-content-strong hover:border-line-strong rounded-md border border-dashed px-1.5 py-0.5 text-xs"
                 >
                   +

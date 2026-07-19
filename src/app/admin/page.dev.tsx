@@ -53,7 +53,7 @@ function EditionCell({ cover }: { cover: { href: string; done: number; total: nu
         href={cover.href as Route}
         className="text-content-muted inline-flex items-center justify-center text-xs tabular-nums hover:underline"
       >
-        {cover.done}/{cover.total} curés
+        {cover.done}/{cover.total} curated
       </Link>
     </td>
   );
@@ -107,7 +107,7 @@ export default function AdminHome() {
     edition: { href: string; done: number; total: number } | null;
   }[] = [
     {
-      label: 'Personnage',
+      label: 'Character',
       extract: ex('character', '/admin/extractor/characters'),
       edition: { href: '/admin/editor/characters', done: charCurated, total: chars.length },
     },
@@ -116,13 +116,13 @@ export default function AdminHome() {
       extract: ex('effect', '/admin/extractor/effects'),
       edition: { href: '/admin/editor/effects', done: effCurated, total: effTotal },
     },
-    { label: 'Monstre', extract: ex('monster', '/admin/extractor/monsters'), edition: null },
+    { label: 'Monster', extract: ex('monster', '/admin/extractor/monsters'), edition: null },
     {
       label: 'EE',
       extract: ex('ee', '/admin/extractor/ee'),
       edition: { href: '/admin/editor/ee', done: eeCurated, total: eeViews.length },
     },
-    { label: 'Armes', extract: ex('weapon', '/admin/extractor/weapons'), edition: null },
+    { label: 'Weapons', extract: ex('weapon', '/admin/extractor/weapons'), edition: null },
     { label: 'Amulet', extract: ex('amulet', '/admin/extractor/amulets'), edition: null },
     { label: 'Armor', extract: ex('armor', '/admin/extractor/armors'), edition: null },
     { label: 'Talisman', extract: ex('talisman', '/admin/extractor/talismans'), edition: null },
@@ -158,15 +158,13 @@ export default function AdminHome() {
         <h1 className="text-content-strong text-xl font-semibold">Administration</h1>
         <p className="text-content-muted text-sm">
           {totalActionable === 0 ? (
-            <span className="text-success">✓ Extraction à jour partout.</span>
+            <span className="text-success">✓ Extraction up to date everywhere.</span>
           ) : (
-            <span className="text-warn">
-              {totalActionable} écart(s) d&apos;extraction à traiter
-            </span>
+            <span className="text-warn">{totalActionable} extraction diff(s) to process</span>
           )}
           {totalTypo > 0 && <span className="text-content-subtle"> · {totalTypo} typo</span>}{' '}
           <span className="text-content-subtle">
-            Extract = diff jeu ↔ site (new/diff/typo) · Édition = couverture curée.
+            Extract = game ↔ site diff (new/diff/typo) · Edition = curated coverage.
           </span>
         </p>
       </div>
@@ -176,9 +174,9 @@ export default function AdminHome() {
         <table className="w-full text-sm">
           <thead className="text-content-subtle text-left text-xs uppercase">
             <tr className="border-line-subtle border-b">
-              <th className="px-3 py-2 font-medium">Entité</th>
-              <th className="px-3 py-2 text-center font-medium">Extract (jeu ↔ site)</th>
-              <th className="px-3 py-2 text-center font-medium">Édition (curé)</th>
+              <th className="px-3 py-2 font-medium">Entity</th>
+              <th className="px-3 py-2 text-center font-medium">Extract (game ↔ site)</th>
+              <th className="px-3 py-2 text-center font-medium">Edition (curated)</th>
             </tr>
           </thead>
           <tbody>
@@ -203,7 +201,7 @@ export default function AdminHome() {
           >
             <div className="text-content-strong font-medium">Pro / Con</div>
             <div className="text-content-subtle text-sm">
-              {prosDone}/{chars.length} persos couverts
+              {prosDone}/{chars.length} characters covered
             </div>
           </Link>
           <Link
@@ -224,20 +222,19 @@ export default function AdminHome() {
         <div className="border-line-subtle bg-surface-raised rounded-lg border p-4 text-sm">
           {assets ? (
             <p className="text-content-muted">
-              {assets.total} requis par la donnée ·{' '}
+              {assets.total} required by data ·{' '}
               {assets.missingCount > 0 ? (
-                <span className="text-warn">{assets.missingCount} manquant(s) au pool</span>
+                <span className="text-warn">{assets.missingCount} missing from pool</span>
               ) : (
-                <span className="text-success">tout est collecté</span>
+                <span className="text-success">all collected</span>
               )}{' '}
               <span className="text-content-subtle">
-                (collecte du {new Date(assets.generatedAt).toLocaleDateString('fr-FR')})
+                (collected on {new Date(assets.generatedAt).toLocaleDateString('fr-FR')})
               </span>
             </p>
           ) : (
             <p className="text-content-subtle">
-              Aucun rapport — lance <code>pnpm assets:collect</code> puis{' '}
-              <code>pnpm assets:push</code>.
+              No report — run <code>pnpm assets:collect</code> then <code>pnpm assets:push</code>.
             </p>
           )}
         </div>

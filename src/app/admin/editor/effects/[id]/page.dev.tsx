@@ -25,7 +25,7 @@ export default async function EditorEffectEdit({ params }: { params: Promise<{ i
         href={'/admin/editor/effects' as Route}
         className="text-content-subtle hover:text-content text-sm"
       >
-        ← Effets
+        ← Effects
       </Link>
 
       {eff ? (
@@ -40,12 +40,12 @@ export default async function EditorEffectEdit({ params }: { params: Promise<{ i
               id {eff.id} · {eff.icon} · {eff.isDebuff ? 'debuff' : 'buff'} ·{' '}
               {eff.icon ? (
                 eff.iconEditorial ? (
-                  <span className="text-warn">icône wiki</span>
+                  <span className="text-warn">wiki icon</span>
                 ) : (
-                  <span className="text-success">icône jeu</span>
+                  <span className="text-success">game icon</span>
                 )
               ) : (
-                <span className="text-danger">sans icône</span>
+                <span className="text-danger">no icon</span>
               )}
             </span>
           </div>
@@ -60,20 +60,17 @@ export default async function EditorEffectEdit({ params }: { params: Promise<{ i
           <p className="text-content-subtle text-sm whitespace-pre-line">
             {strip(eff.desc.en ?? '')}
           </p>
-          <p className="text-content-subtle text-xs">
-            Tooltips fusionnés : {eff.tooltips.join(', ')}
-          </p>
+          <p className="text-content-subtle text-xs">Merged tooltips: {eff.tooltips.join(', ')}</p>
         </section>
       ) : (
         <section className="border-accent/40 bg-accent/5 space-y-1 rounded-lg border p-4">
           <h1 className="text-content-strong text-xl font-semibold">
-            {isNew ? 'Nouvelle création' : 'Création curée'} ·{' '}
-            <span className="font-mono">{id}</span>
+            {isNew ? 'New creation' : 'Curated creation'} · <span className="font-mono">{id}</span>
           </h1>
           <p className="text-content-muted text-sm">
-            Aucune donnée extraite pour cet id : l&apos;effet est porté à 100 % par la couche curée
-            (mécanique réelle du jeu sans texte dans les tables — Uncounterable, Elemental
-            Advantage…). Name/desc/icon/keys définissent l&apos;effet entier.
+            No extracted data for this id: the effect is 100% carried by the curated layer (real
+            game mechanic with no text in the tables — Uncounterable, Elemental Advantage…).
+            Name/desc/icon/keys define the entire effect.
           </p>
         </section>
       )}

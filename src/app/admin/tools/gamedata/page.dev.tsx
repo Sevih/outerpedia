@@ -10,48 +10,45 @@ export default function ToolGameData() {
   return (
     <div className="max-w-2xl space-y-4">
       <div>
-        <h1 className="text-content-strong text-xl font-semibold">Tools · Données du jeu</h1>
+        <h1 className="text-content-strong text-xl font-semibold">Tools · Game data</h1>
         <p className="text-content-muted text-sm">
-          Lecteur des tables BRUTES extraites du jeu (<code>.gamedata/parsed</code>) — telles que le
-          parser les produit, sans interprétation. C&apos;est l&apos;outil d&apos;exploration
-          d&apos;avant-générateur : on y cherche une colonne, on suit un id, on lit la clé de texte
-          qui va avec.
+          Reader for the RAW tables extracted from the game (<code>.gamedata/parsed</code>) — as the
+          parser produces them, without interpretation. This is the pre-generator exploration tool:
+          search for a column, follow an id, read the matching text key.
         </p>
       </div>
 
       {tables.length === 0 ? (
         <p className="text-warn text-sm">
-          Aucune table parsée. Lancer l&apos;extraction (<code>pnpm datagen:convert</code>) pour
-          alimenter <code>.gamedata/parsed</code>.
+          No parsed table. Run the extraction (<code>pnpm datagen:convert</code>) to populate{' '}
+          <code>.gamedata/parsed</code>.
         </p>
       ) : (
         <>
           <ul className="text-content-subtle space-y-1 text-sm">
             <li>
               <span className="text-content-strong">{tables.length}</span> tables ·{' '}
-              <span className="text-content-strong">{(bytes / 1_000_000).toFixed(0)} Mo</span> ·
-              dernière extraction le{' '}
+              <span className="text-content-strong">{(bytes / 1_000_000).toFixed(0)} MB</span> ·
+              last extraction on{' '}
               <span className="text-content-strong">
                 {new Date(last).toLocaleString('fr-FR', { dateStyle: 'medium' })}
               </span>
             </li>
           </ul>
           <div className="text-content-muted space-y-1 text-sm">
-            <p>Choisir une table à gauche. Sur une table :</p>
+            <p>Choose a table on the left. On a table:</p>
             <ul className="list-disc space-y-1 pl-5">
+              <li>search and pagination happen on the server (up to 18 MB per table);</li>
               <li>
-                la recherche et la pagination se font au serveur (jusqu&apos;à 18 Mo par table) ;
+                columns that are never filled are hidden by default — off-header columns (
+                <code>_unknown_*</code>) are always shown;
               </li>
               <li>
-                les colonnes jamais renseignées sont masquées par défaut — les colonnes hors en-tête
-                (<code>_unknown_*</code>) sont, elles, toujours montrées ;
+                a cell that is a text key shows the English below it; an <code>*ID</code> column
+                whose table exists (<span className="text-accent">↗</span>) becomes a link to the
+                target row;
               </li>
-              <li>
-                une cellule qui est une clé de texte affiche l&apos;anglais dessous ; une colonne{' '}
-                <code>*ID</code> dont la table existe (<span className="text-accent">↗</span>)
-                devient un lien vers la ligne visée ;
-              </li>
-              <li>cliquer une ligne montre son JSON brut.</li>
+              <li>clicking a row shows its raw JSON.</li>
             </ul>
           </div>
         </>

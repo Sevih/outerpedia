@@ -18,7 +18,7 @@ export function RegenFromV2Button({
   const [msg, setMsg] = useState<string | null>(null);
 
   async function regen() {
-    if (!confirm('Écraser la liste actuelle avec la donnée V2 ?')) return;
+    if (!confirm('Overwrite the current list with V2 data?')) return;
     setBusy(true);
     setMsg(null);
     try {
@@ -28,9 +28,9 @@ export function RegenFromV2Button({
       );
       if (json.ok && json.data) {
         onRegen(json.data);
-        setMsg(`Importé depuis V2 (${json.data.length})`);
+        setMsg(`Imported from V2 (${json.data.length})`);
       } else {
-        setMsg(json.error ?? 'Échec import');
+        setMsg(json.error ?? 'Import failed');
       }
     } catch (e) {
       setMsg((e as Error).message);
@@ -47,7 +47,7 @@ export function RegenFromV2Button({
         disabled={busy}
         className="border-line hover:border-accent rounded-md border px-3 py-1.5 text-sm disabled:opacity-50"
       >
-        {busy ? 'Import…' : 'Regen depuis V2'}
+        {busy ? 'Importing…' : 'Regen from V2'}
       </button>
       {msg && <span className="text-content-subtle text-xs">{msg}</span>}
     </span>

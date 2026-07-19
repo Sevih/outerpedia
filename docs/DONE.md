@@ -6,6 +6,26 @@
 
 ## 2026-07-19
 
+- **Admin — toute l'UI passée en anglais** (décision Sevih). Balayage complet de
+  la matrice (composants `admin/*`, pages `.dev`, stores/actions `lib/admin`,
+  pickers) : seuls les CHAÎNES vues par l'utilisateur sont traduites, les
+  COMMENTAIRES restent en français (convention). Fait via 8 sous-agents
+  parallèles sur lots disjoints + rattrapage des chaînes sans accent
+  (`Chercher`/`Changer` des pickers, `(no name)`, titres). tsc + eslint verts.
+- **Guide editor — Premium & Limited (reviews + recommended choices) + outil
+  public de contribution (Shiraen)** — 2ᵉ fragment general-guides bespoke.
+  Données sorties du TS vers JSON (`premium-reviews.json`,
+  `premium-priorities.json`, rendu inchangé). UX : UN éditeur par perso (édite un
+  existant pré-rempli ou ajoute), notes en ÉTOILES (impact 1-5 ; cibles reco =
+  plage 3-6 + Any + note libre, round-trip du texte existant). Recommended
+  choices éditables (paliers de pull). **Contribution export/import** : outil
+  PUBLIC `/contribute/premium-reviews` (prod, sans login, sans écriture serveur)
+  qui exporte UN perso ; l'IMPORT se fait côté admin (fusion dans le bucket).
+  Briques partagées (`PremiumLimitedParts`, `CharacterChips` extrait).
+- **Guide editor — world-boss (phases) + adventure (notes multiples)** — world-
+  boss branché sur le shell versionné (équipes/persos en SECTIONS de phase,
+  reco sectionnée, 1re version vierge possible) ; `StoryBossGuide` rend
+  DÉSORMAIS toutes les notes (`note: LText | LText[]`, rétro-compatible).
 - **Sous-outil `/ost` (jukebox OST) + infra de routage des outils** — 1er des
   3 médias (ordre Sevih : ost → wallpapers → 4-comics). **Décisions** (cf. TODO) :
   URLs À PLAT `/(slug)` (parité prod V2, enjeu SEO) et « je fais aussi le

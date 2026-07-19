@@ -31,12 +31,12 @@ export default function EditorEeCatalog() {
       <div>
         <h1 className="text-content-strong text-xl font-semibold">Editor · EE</h1>
         <p className="text-content-muted text-sm">
-          {views.length} EE · {done} curés ·{' '}
+          {views.length} EE · {done} curated ·{' '}
           <Link
             href={'/admin/extractor/ee' as Route}
             className="text-content-subtle hover:underline"
           >
-            contrôle extraction (Extractor) →
+            extraction control (Extractor) →
           </Link>
         </p>
       </div>
@@ -46,8 +46,8 @@ export default function EditorEeCatalog() {
           <thead className="text-content-subtle text-left text-xs uppercase">
             <tr className="border-line-subtle border-b">
               <th className="px-3 py-2 font-medium">EE</th>
-              <th className="px-3 py-2 text-center font-medium">Curé</th>
-              <th className="px-3 py-2 font-medium">Déblocage</th>
+              <th className="px-3 py-2 text-center font-medium">Curated</th>
+              <th className="px-3 py-2 font-medium">Unlock</th>
               <th className="px-3 py-2 font-medium">+10</th>
             </tr>
           </thead>
@@ -76,11 +76,11 @@ export default function EditorEeCatalog() {
                 </td>
                 <td className="px-3 py-1.5 text-center">
                   {v.curated ? (
-                    <span className="text-success" title="Curé">
+                    <span className="text-success" title="Curated">
                       ✓
                     </span>
                   ) : (
-                    <span className="text-content-subtle" title="Non curé">
+                    <span className="text-content-subtle" title="Not curated">
                       —
                     </span>
                   )}

@@ -161,7 +161,7 @@ async function translateHaiku(
   try {
     parsed = JSON.parse(slice) as Record<string, Record<string, string>>;
   } catch {
-    throw new Error('Réponse du modèle non-JSON — réessaie');
+    throw new Error('Non-JSON model response — retry');
   }
   return texts.map((_, i) => {
     const out: Translations = {};
@@ -198,12 +198,12 @@ export async function autoTranslate(
     } catch (e) {
       if (!(e instanceof DeeplQuotaError)) throw e;
       if (!anthropicKey)
-        throw new Error('Quota DeepL épuisé (1 M) — ajoute ANTHROPIC_API_KEY pour basculer sur Haiku.'); // prettier-ignore
+        throw new Error('DeepL quota exhausted (1 M) — add ANTHROPIC_API_KEY to switch to Haiku.'); // prettier-ignore
       return { results: await translateHaiku(texts, tgt, anthropicKey), provider: 'haiku' };
     }
   }
   if (anthropicKey) {
     return { results: await translateHaiku(texts, tgt, anthropicKey), provider: 'haiku' };
   }
-  throw new Error('Aucune clé (DEEPL_API_KEY ou ANTHROPIC_API_KEY) dans .env.local / SOPS.');
+  throw new Error('No key (DEEPL_API_KEY or ANTHROPIC_API_KEY) in .env.local / SOPS.');
 }

@@ -129,7 +129,7 @@ export function EditorialEditor({
     synergies.forEach((g, i) => g.reason?.en?.trim() && jobs.push({ en: g.reason.en, kind: 'reason', i })); // prettier-ignore
     if (!jobs.length) {
       setTrans('done');
-      setTransMsg('Rien à traduire (aucun texte EN).');
+      setTransMsg('Nothing to translate (no EN text).');
       return;
     }
     try {
@@ -170,8 +170,8 @@ export function EditorialEditor({
       setTrans('done');
       setTransMsg(
         filled
-          ? `${filled} champ(s) traduit(s) via ${provider === 'haiku' ? 'Haiku (quota DeepL atteint)' : 'DeepL'} — à revoir avant d’enregistrer.`
-          : 'Toutes les langues cibles étaient déjà remplies.',
+          ? `${filled} field(s) translated via ${provider === 'haiku' ? 'Haiku (DeepL quota reached)' : 'DeepL'} — review before saving.`
+          : 'All target languages were already filled.',
       );
     } catch (e) {
       setTrans('error');
@@ -221,7 +221,7 @@ export function EditorialEditor({
     <div className="space-y-6">
       {/* Langue éditée (les autres langues sont préservées) */}
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-content-subtle text-xs uppercase">Langue</span>
+        <span className="text-content-subtle text-xs uppercase">Language</span>
         <div className="border-line flex overflow-hidden rounded-md border">
           {LANGS.map((l) => (
             <button
@@ -239,9 +239,9 @@ export function EditorialEditor({
           className={btn}
           onClick={translateEmpty}
           disabled={trans === 'loading'}
-          title="Traduit l'EN vers les langues encore vides (Claude Haiku)"
+          title="Translates EN into the still-empty languages (Claude Haiku)"
         >
-          {trans === 'loading' ? 'Traduction…' : 'Traduire (EN → vides)'}
+          {trans === 'loading' ? 'Translating…' : 'Translate (EN → empty)'}
         </button>
         {transMsg && (
           <span className={`text-xs ${trans === 'error' ? 'text-danger' : 'text-content-subtle'}`}>
@@ -310,7 +310,7 @@ export function EditorialEditor({
                             <InlinePreview segments={side.segs[i]} />
                           ) : (
                             <span className="text-content-subtle italic">
-                              {item[lang] || item.en || '(vide — cliquer pour écrire)'}
+                              {item[lang] || item.en || '(empty — click to write)'}
                             </span>
                           )}
                         </div>
@@ -319,7 +319,7 @@ export function EditorialEditor({
                     <button
                       type="button"
                       className="text-danger text-sm"
-                      title="Supprimer"
+                      title="Delete"
                       onClick={() => {
                         side.set(side.items.filter((_, j) => j !== i));
                         setEditing(null);
@@ -338,7 +338,7 @@ export function EditorialEditor({
                   setEditing(side.items.length);
                 }}
               >
-                + entrée
+                + entry
               </button>
             </div>
           );
@@ -354,7 +354,7 @@ export function EditorialEditor({
               className={btn}
               onClick={() => setSynergies([...synergies, withKey({ heroes: [] })])}
             >
-              + groupe
+              + group
             </button>
           </div>
           <datalist id="hero-names">
@@ -392,7 +392,7 @@ export function EditorialEditor({
                         )}
                         <button
                           type="button"
-                          title="Retirer"
+                          title="Remove"
                           className="border-line bg-surface-raised text-danger absolute -top-1.5 -right-1.5 rounded-full border px-1 text-xs"
                           onClick={() => setGroup({ heroes: g.heroes.filter((_, j) => j !== hi) })}
                         >
@@ -404,7 +404,7 @@ export function EditorialEditor({
                   <input
                     className={`${input} h-9 w-40`}
                     list="hero-names"
-                    placeholder="+ partenaire…"
+                    placeholder="+ partner…"
                     value={addHero[g._key] ?? ''}
                     onChange={(e) => setAddHero((m) => ({ ...m, [g._key]: e.target.value }))}
                     onKeyDown={(e) => {
@@ -420,13 +420,13 @@ export function EditorialEditor({
                     className={`${btn} text-danger ml-auto`}
                     onClick={() => setSynergies(synergies.filter((_, j) => j !== gi))}
                   >
-                    Supprimer le groupe
+                    Delete the group
                   </button>
                 </div>
 
                 {/* Raison — rendue, éditable au clic */}
                 <div>
-                  <p className="text-content-subtle mb-1 text-xs uppercase">Raison ({lang})</p>
+                  <p className="text-content-subtle mb-1 text-xs uppercase">Reason ({lang})</p>
                   {editReason === g._key ? (
                     <InlineTextField
                       value={g.reason?.[lang] ?? ''}
@@ -452,7 +452,7 @@ export function EditorialEditor({
                         <InlinePreview segments={segs.reasons[gi]} />
                       ) : (
                         <span className="text-content-subtle italic">
-                          {g.reason?.[lang] || g.reason?.en || '(vide — cliquer pour écrire)'}
+                          {g.reason?.[lang] || g.reason?.en || '(empty — click to write)'}
                         </span>
                       )}
                     </div>
@@ -466,9 +466,9 @@ export function EditorialEditor({
 
       <div className="flex items-center gap-3">
         <button type="button" className={btn} onClick={save} disabled={state === 'saving'}>
-          {state === 'saving' ? 'Enregistrement…' : 'Enregistrer'}
+          {state === 'saving' ? 'Saving…' : 'Save'}
         </button>
-        {state === 'saved' && <span className="text-success text-sm">✓ enregistré</span>}
+        {state === 'saved' && <span className="text-success text-sm">✓ saved</span>}
         {state === 'error' && <span className="text-danger text-sm">{error}</span>}
       </div>
     </div>

@@ -38,7 +38,7 @@ export function BannersEditor({ initial, chars }: { initial: Banner[]; chars: Ch
           .filter((r) => r.id || r.name)
           .map((r): Banner => ({ id: r.id, name: r.name, start: r.start, end: r.end })),
       );
-      setStatus({ kind: 'ok', msg: 'Enregistré' });
+      setStatus({ kind: 'ok', msg: 'Saved' });
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });
     }
@@ -53,7 +53,7 @@ export function BannersEditor({ initial, chars }: { initial: Banner[]; chars: Ch
           onClick={save}
           className="bg-accent text-accent-fg rounded-md px-4 py-2 text-sm font-semibold hover:opacity-90"
         >
-          Enregistrer
+          Save
         </button>
         {status.kind === 'ok' && <span className="text-success text-sm">{status.msg}</span>}
         {status.kind === 'err' && <span className="text-danger text-sm">{status.msg}</span>}
@@ -62,22 +62,22 @@ export function BannersEditor({ initial, chars }: { initial: Banner[]; chars: Ch
           onClick={add}
           className="border-line hover:border-accent rounded-md border px-3 py-1.5 text-sm"
         >
-          + bannière
+          + banner
         </button>
         <RegenFromV2Button
           kind="banners"
           onRegen={(d) => setRows(byStartDesc((d as Banner[]).map(withKey)))}
         />
-        <span className="text-content-subtle ml-auto text-xs">{rows.length} bannière(s)</span>
+        <span className="text-content-subtle ml-auto text-xs">{rows.length} banner(s)</span>
       </div>
 
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="text-content-subtle text-left text-xs uppercase">
             <tr className="border-line-subtle border-b">
-              <th className="px-2 py-1 font-medium">Perso (recherche par nom)</th>
-              <th className="px-2 py-1 font-medium">Début</th>
-              <th className="px-2 py-1 font-medium">Fin</th>
+              <th className="px-2 py-1 font-medium">Character (search by name)</th>
+              <th className="px-2 py-1 font-medium">Start</th>
+              <th className="px-2 py-1 font-medium">End</th>
               <th className="px-2 py-1" />
             </tr>
           </thead>
@@ -113,7 +113,7 @@ export function BannersEditor({ initial, chars }: { initial: Banner[]; chars: Ch
                     type="button"
                     className="text-danger text-sm"
                     onClick={() => remove(i)}
-                    aria-label="Supprimer"
+                    aria-label="Delete"
                   >
                     ✕
                   </button>

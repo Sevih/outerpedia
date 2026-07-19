@@ -62,13 +62,11 @@ function TranscendMapEditor({
           className="text-accent text-xs hover:underline"
           onClick={() => onChange([...rows, { star: '', value: valueOptions[0], _key: rowKey() }])}
         >
-          + palier
+          + tier
         </button>
       </div>
       {rows.length === 0 ? (
-        <p className="text-content-subtle text-xs">
-          Aucun palier — la valeur de base s&apos;applique.
-        </p>
+        <p className="text-content-subtle text-xs">No tier — the base value applies.</p>
       ) : (
         rows.map((r, i) => (
           <div key={r._key} className="flex items-center gap-2">
@@ -77,7 +75,7 @@ function TranscendMapEditor({
               value={r.star}
               onChange={(e) => set(i, { star: e.target.value })}
             >
-              <option value="">palier ?</option>
+              <option value="">tier ?</option>
               {/* Valeur héritée hors plage : préservée pour ne pas perdre la donnée. */}
               {r.star && !STARS.includes(r.star) && <option value={r.star}>Trans {r.star}</option>}
               {STARS.map((s) => (
@@ -105,7 +103,7 @@ function TranscendMapEditor({
               type="button"
               className="text-danger ml-auto text-sm"
               onClick={() => onChange(rows.filter((_, j) => j !== i))}
-              aria-label="Supprimer le palier"
+              aria-label="Delete the tier"
             >
               ✕
             </button>
@@ -165,7 +163,7 @@ export function CharacterCuratedEditor({
     setStatus({ kind: 'idle' });
     try {
       await postJson(`/api/admin/curated/characters/${id}`, build());
-      setStatus({ kind: 'ok', msg: 'Enregistré' });
+      setStatus({ kind: 'ok', msg: 'Saved' });
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });
     }
@@ -195,7 +193,7 @@ export function CharacterCuratedEditor({
           </select>
         </div>
         <div className="space-y-1">
-          <p className={label}>Rôle</p>
+          <p className={label}>Role</p>
           <select className={field} value={role} onChange={(e) => setRole(e.target.value)}>
             {ROLES.map((r) => (
               <option key={r} value={r}>
@@ -208,7 +206,7 @@ export function CharacterCuratedEditor({
 
       <section className="grid gap-4 sm:grid-cols-3">
         <div className="space-y-1">
-          <p className={label}>Prio. 1er skill</p>
+          <p className={label}>1st skill prio.</p>
           <input
             className={field}
             value={first}
@@ -217,7 +215,7 @@ export function CharacterCuratedEditor({
           />
         </div>
         <div className="space-y-1">
-          <p className={label}>Prio. 2e skill</p>
+          <p className={label}>2nd skill prio.</p>
           <input
             className={field}
             value={second}
@@ -226,7 +224,7 @@ export function CharacterCuratedEditor({
           />
         </div>
         <div className="space-y-1">
-          <p className={label}>Prio. ultime</p>
+          <p className={label}>Ultimate prio.</p>
           <input
             className={field}
             value={ultimate}
@@ -238,7 +236,7 @@ export function CharacterCuratedEditor({
 
       <section className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1">
-          <p className={label}>Tags humains</p>
+          <p className={label}>Human tags</p>
           <div className="flex flex-wrap gap-x-4 gap-y-1.5 pt-1">
             {HUMAN_TAGS.map((t) => (
               <label key={t} className="text-content flex items-center gap-1.5 text-sm">
@@ -255,9 +253,9 @@ export function CharacterCuratedEditor({
           </div>
         </div>
         <div className="space-y-1">
-          <p className={label}>Tags dérivés du jeu (lecture seule)</p>
+          <p className={label}>Game-derived tags (read-only)</p>
           {derivedTags.length === 0 ? (
-            <p className="text-content-subtle pt-1 text-xs">Aucun.</p>
+            <p className="text-content-subtle pt-1 text-xs">None.</p>
           ) : (
             <div className="flex flex-wrap gap-1.5 pt-1">
               {derivedTags.map((t) => (
@@ -271,20 +269,20 @@ export function CharacterCuratedEditor({
             </div>
           )}
           <p className="text-content-subtle text-xs">
-            Extraits de la donnée de jeu (bannière, buffs, lignée) — non éditables.
+            Extracted from game data (banner, buffs, lineage) — not editable.
           </p>
         </div>
       </section>
 
       <section className="grid gap-4 sm:grid-cols-2">
         <TranscendMapEditor
-          title="Rank par transcendance"
+          title="Rank by transcendence"
           rows={rankByT}
           valueOptions={RANKS.filter(Boolean)}
           onChange={setRankByT}
         />
         <TranscendMapEditor
-          title="Rôle par transcendance"
+          title="Role by transcendence"
           rows={roleByT}
           valueOptions={ROLES.filter(Boolean)}
           onChange={setRoleByT}
@@ -296,7 +294,7 @@ export function CharacterCuratedEditor({
       </section>
 
       {initial.prosCons && (
-        <p className="text-content-subtle text-xs">Pros/cons préservés (édition à venir).</p>
+        <p className="text-content-subtle text-xs">Pros/cons preserved (editing coming soon).</p>
       )}
 
       <div className="flex items-center gap-3">
@@ -305,7 +303,7 @@ export function CharacterCuratedEditor({
           onClick={save}
           className="bg-accent text-accent-fg rounded-md px-4 py-2 text-sm font-semibold hover:opacity-90"
         >
-          Enregistrer
+          Save
         </button>
         {status.kind === 'ok' && <span className="text-success text-sm">{status.msg}</span>}
         {status.kind === 'err' && <span className="text-danger text-sm">{status.msg}</span>}

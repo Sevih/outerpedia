@@ -59,16 +59,16 @@ const sorted = <T>(rec: Record<string, T>): Record<string, T> =>
 export async function applyKitCuration(patch: KitCurationPatch): Promise<string[]> {
   const errors: string[] = [];
   const kit = new Set(patch.kitSkillIds ?? []);
-  if (!kit.size) errors.push('kitSkillIds manquant');
+  if (!kit.size) errors.push('kitSkillIds missing');
   for (const [buff, target] of Object.entries(patch.chipOwner ?? {})) {
     if (target !== null && !kit.has(target))
-      errors.push(`chipOwner[${buff}] : ${target} n'est pas un skill du kit`);
+      errors.push(`chipOwner[${buff}] : ${target} is not a skill of the kit`);
   }
   for (const section of ['chipHide', 'chipAdd'] as const) {
     for (const [sid, list] of Object.entries(patch[section] ?? {})) {
-      if (!kit.has(sid)) errors.push(`${section}[${sid}] : pas un skill du kit`);
+      if (!kit.has(sid)) errors.push(`${section}[${sid}] : not a skill of the kit`);
       if (!Array.isArray(list) || list.some((v) => typeof v !== 'string' || !v.trim()))
-        errors.push(`${section}[${sid}] : liste de chaînes attendue`);
+        errors.push(`${section}[${sid}] : string list expected`);
     }
   }
   if (errors.length) return errors;

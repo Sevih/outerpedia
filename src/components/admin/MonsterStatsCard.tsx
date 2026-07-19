@@ -44,7 +44,7 @@ export function MonsterStatsCard({
     <div className="space-y-2">
       {options.length > 1 && (
         <div className="flex flex-wrap items-center gap-1 text-xs">
-          <span className="text-content-subtle mr-1">Rencontre :</span>
+          <span className="text-content-subtle mr-1">Encounter:</span>
           {options.map((s, i) => (
             <button
               key={i}
@@ -69,7 +69,7 @@ export function MonsterStatsCard({
             <div className="text-content">
               {formatMonsterStat(slug, statAt(slug, r, ctx, quirkMods), scales)}
               {slug === 'hp' && ctx.hpLines ? (
-                <span className="text-content-subtle ml-1 text-xs">× {ctx.hpLines} barres</span>
+                <span className="text-content-subtle ml-1 text-xs">× {ctx.hpLines} bars</span>
               ) : null}
             </div>
           </div>
@@ -77,37 +77,37 @@ export function MonsterStatsCard({
       </div>
       <p className="text-content-subtle text-xs">
         {options.length === 0 ? (
-          <>Aucune rencontre connue — valeurs du templet au Lv {ctx.level}.</>
+          <>No known encounter — template values at Lv {ctx.level}.</>
         ) : (
           <>
             Lv {ctx.level}
-            {ctx.transLevel ? ` · transcendance ${ctx.transLevel}` : ''}
+            {ctx.transLevel ? ` · transcendence ${ctx.transLevel}` : ''}
             {ctx.adv
-              ? ` · modificateurs (${Object.entries(ctx.adv)
+              ? ` · modifiers (${Object.entries(ctx.adv)
                   .map(([k, v]) => `${k} ${v > 0 ? '+' : ''}${v / 10}%`)
                   .join(', ')})`
               : ''}
             {ctx.damage
-              ? ` · tranche : ${ctx.damage.min?.toLocaleString('en') ?? '0'} – ${
+              ? ` · range: ${ctx.damage.min?.toLocaleString('en') ?? '0'} – ${
                   ctx.damage.max ? ctx.damage.max.toLocaleString('en') : '∞'
-                } dégâts`
+                } damage`
               : ''}
-            {ctx.bar ? ` · barre du palier : ${ctx.bar.toLocaleString('en')}` : ''}
-            {ctx.bossHp ? ` · PV du mode : ${ctx.bossHp.toLocaleString('en')}` : ''}
+            {ctx.bar ? ` · tier bar: ${ctx.bar.toLocaleString('en')}` : ''}
+            {ctx.bossHp ? ` · mode HP: ${ctx.bossHp.toLocaleString('en')}` : ''}
             {quirkMods && Object.keys(quirkMods).length
-              ? ` · quirks appliqués (${Object.entries(quirkMods)
+              ? ` · quirks applied (${Object.entries(quirkMods)
                   .map(([s, v]) => `${statAbbr(s)} ${v > 0 ? '+' : ''}${v / 10}%`)
                   .join(', ')})`
               : ''}
-            {!modified ? ' · valeurs du templet interpolées' : ''}
+            {!modified ? ' · interpolated template values' : ''}
             {ctx.label ? ` — ${ctx.label}` : ''}
-            {ctx.rank ? ` (palier ${ctx.rank})` : ''}
+            {ctx.rank ? ` (tier ${ctx.rank})` : ''}
           </>
         )}
       </p>
       {ctx.options && ctx.options.length > 0 && (
         <p className="text-content-subtle text-xs">
-          Passifs additionnels du palier :{' '}
+          Additional tier passives:{' '}
           {/* Dédup d'affichage : certains paliers listent des copies techniques
               du même buff (Normal_1_1/Normal_1_2 → même libellé). */}
           {[...new Set(ctx.options.map((o) => optionLabels[o] ?? o))].join(' · ')}

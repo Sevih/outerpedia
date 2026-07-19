@@ -122,7 +122,7 @@ export function EeCuratedEditor({
     const q = addQuery.trim();
     const eid = catalog[q] ? q : byName.get(q.toLowerCase());
     if (!eid) {
-      setMessage(`« ${q} » : effet inconnu du glossaire.`);
+      setMessage(`“${q}” : effect unknown to the glossary.`);
       return;
     }
     setAdds((prev) => [...new Set([...prev, eid])]);
@@ -141,13 +141,13 @@ export function EeCuratedEditor({
         { rank, rank10, chipHide: hides, chipAdd: adds },
       );
       if (!json.ok) {
-        setMessage(`Erreur : ${(json.errors ?? ['inconnue']).join(' ; ')}`);
+        setMessage(`Error: ${(json.errors ?? ['unknown']).join(' ; ')}`);
         return;
       }
-      setMessage('Enregistré — data/curated/equipment.json (à committer via git).');
+      setMessage('Saved — data/curated/equipment.json (commit via git).');
       router.refresh();
     } catch (e) {
-      setMessage(`Erreur : ${(e as Error).message}`);
+      setMessage(`Error: ${(e as Error).message}`);
     } finally {
       setBusy(false);
     }
@@ -156,7 +156,7 @@ export function EeCuratedEditor({
   return (
     <section className="space-y-5">
       <div className="flex items-center justify-between gap-3">
-        <h2 className="text-content-strong text-xs font-semibold uppercase">Curation EE</h2>
+        <h2 className="text-content-strong text-xs font-semibold uppercase">EE curation</h2>
         <div className="flex items-center gap-3">
           {message && <span className="text-content-subtle text-xs">{message}</span>}
           <button
@@ -165,22 +165,22 @@ export function EeCuratedEditor({
             disabled={busy || !dirty}
             className="bg-accent text-accent-fg rounded-md px-3 py-1.5 text-sm font-medium disabled:opacity-50"
           >
-            {busy ? 'Enregistrement…' : 'Enregistrer'}
+            {busy ? 'Saving…' : 'Save'}
           </button>
         </div>
       </div>
 
       {/* Priorité éditoriale (tier list EE) */}
       <section className="grid gap-4 sm:grid-cols-2">
-        <RankSelect title="Rang au déblocage" value={rank} onChange={setRank} />
-        <RankSelect title="Rang au +10" value={rank10} onChange={setRank10} />
+        <RankSelect title="Rank at unlock" value={rank} onChange={setRank} />
+        <RankSelect title="Rank at +10" value={rank10} onChange={setRank10} />
       </section>
 
       {/* Câblage des chips de passifs (carte unique) */}
       <section className="space-y-2">
-        <p className={label}>Buff / debuff des passifs</p>
+        <p className={label}>Passive buffs / debuffs</p>
         <p className="text-content-subtle text-xs">
-          × masque une chip (chipHide) · + ajoute un effet du glossaire (chipAdd).
+          × hides a chip (chipHide) · + adds an effect from the glossary (chipAdd).
         </p>
         <datalist id="ee-kit-effects">
           {options.map((o) => (
@@ -189,13 +189,13 @@ export function EeCuratedEditor({
         </datalist>
         <div className="border-line-subtle flex flex-wrap items-center gap-1.5 rounded-lg border p-3">
           {chips.length === 0 && adds.length === 0 && (
-            <span className="text-content-subtle text-xs">Aucune chip auto.</span>
+            <span className="text-content-subtle text-xs">No auto chip.</span>
           )}
           {chips.map((c) =>
             isHidden(c.ref) ? (
               <span
                 key={`hidden-${c.ref}`}
-                title={`${c.ref} — masquée (chipHide)`}
+                title={`${c.ref} — hidden (chipHide)`}
                 className="border-line flex items-center gap-1 rounded-md border border-dashed py-0.5 pr-1 pl-1 opacity-50"
               >
                 <span className="text-content-subtle text-[11px] font-semibold line-through">
@@ -204,7 +204,7 @@ export function EeCuratedEditor({
                 <button
                   type="button"
                   onClick={() => toggleHide(c.ref, false)}
-                  title="Rétablir la chip"
+                  title="Restore the chip"
                   className="text-content-subtle hover:text-content ml-0.5 rounded px-0.5 text-[11px] leading-none"
                 >
                   ↺
@@ -216,7 +216,7 @@ export function EeCuratedEditor({
                   <button
                     type="button"
                     onClick={() => toggleHide(c.ref, true)}
-                    title="Masquer (chipHide)"
+                    title="Hide (chipHide)"
                     className="ml-0.5 rounded px-0.5 text-[11px] leading-none opacity-60 hover:opacity-100"
                   >
                     ✕
@@ -241,7 +241,7 @@ export function EeCuratedEditor({
                   <button
                     type="button"
                     onClick={() => removeAdd(ref)}
-                    title="Retirer (chipAdd)"
+                    title="Remove (chipAdd)"
                     className="ml-0.5 rounded px-0.5 text-[11px] leading-none opacity-60 hover:opacity-100"
                   >
                     ✕
@@ -261,7 +261,7 @@ export function EeCuratedEditor({
                   if (e.key === 'Enter') confirmAdd();
                   if (e.key === 'Escape') setAdding(false);
                 }}
-                placeholder="Nom d'effet ou réf tooltip…"
+                placeholder="Effect name or tooltip ref…"
                 className="border-line bg-surface-base text-content w-52 rounded-md border px-2 py-0.5 text-xs"
               />
               <button
@@ -276,7 +276,7 @@ export function EeCuratedEditor({
                 onClick={() => setAdding(false)}
                 className="text-content-subtle hover:text-content px-1 text-xs"
               >
-                annuler
+                cancel
               </button>
             </span>
           ) : (
@@ -286,7 +286,7 @@ export function EeCuratedEditor({
                 setAdding(true);
                 setAddQuery('');
               }}
-              title="Ajouter un effet (chipAdd)"
+              title="Add an effect (chipAdd)"
               className="border-line text-content-subtle hover:text-content-strong hover:border-line-strong rounded-md border border-dashed px-1.5 py-0.5 text-xs"
             >
               +

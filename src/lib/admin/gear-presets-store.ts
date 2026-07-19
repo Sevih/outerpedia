@@ -41,7 +41,7 @@ export function saveGearPresets(p: GearPresets): string[] {
   const errors = validateGearPresets(p);
   if (errors.length) return errors;
   const broken = brokenRefs(p);
-  if (broken.length) return broken.map((b) => `preset encore référencé : ${b}`);
+  if (broken.length) return broken.map((b) => `preset still referenced : ${b}`);
   writeFileSync(
     PATH,
     JSON.stringify(

@@ -17,28 +17,28 @@ export default function AdminTagsPage() {
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-content-strong text-xl font-semibold">Contrôle des tags inline</h1>
+        <h1 className="text-content-strong text-xl font-semibold">Inline tag control</h1>
         <p className="text-content-muted text-sm">
-          {occurrences.length} tags contrôlés (
+          {occurrences.length} tags checked (
           {[...byType.entries()]
             .sort(([a], [b]) => a.localeCompare(b))
             .map(([t, n]) => `${t}:${n}`)
             .join(' · ')}
-          ) — {bad.length} sans correspondance · contrôle BLOQUANT : vitest (tag-control.test.ts)
+          ) — {bad.length} unmatched · BLOCKING check: vitest (tag-control.test.ts)
         </p>
       </div>
 
       {bad.length === 0 ? (
         <p className="border-success/40 bg-success/5 text-success rounded-lg border p-4 text-sm">
-          ✓ Tous les tags du contenu éditorial ont une correspondance.
+          ✓ All editorial content tags have a match.
         </p>
       ) : (
         <table className="w-full text-sm">
           <thead className="text-content-subtle text-left text-xs uppercase">
             <tr>
               <th className="py-1 pr-3 font-medium">Tag</th>
-              <th className="py-1 pr-3 font-medium">Raison</th>
-              <th className="py-1 font-medium">Provenance</th>
+              <th className="py-1 pr-3 font-medium">Reason</th>
+              <th className="py-1 font-medium">Source</th>
             </tr>
           </thead>
           <tbody>

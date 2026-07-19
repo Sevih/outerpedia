@@ -42,7 +42,7 @@ function SlugInput({
         onChange={(e) => onChange(e.target.value.trim())}
       />
       <span className="text-content-subtle w-14 text-xs">
-        {usage ? `${usage} build${usage > 1 ? 's' : ''}` : 'inutilisé'}
+        {usage ? `${usage} build${usage > 1 ? 's' : ''}` : 'unused'}
       </span>
     </span>
   );
@@ -77,7 +77,7 @@ export function GearPresetsEditor({
       rows.map((r) => r.slug).filter((s, i, a) => s && a.indexOf(s) !== i);
     const dups = [...dup(talis), ...dup(sets), ...dup(subs)];
     if (dups.length) {
-      setStatus({ kind: 'err', msg: `Slugs en double : ${[...new Set(dups)].join(', ')}` });
+      setStatus({ kind: 'err', msg: `Duplicate slugs: ${[...new Set(dups)].join(', ')}` });
       return;
     }
     const body: GearPresets = {
@@ -93,7 +93,7 @@ export function GearPresetsEditor({
     };
     try {
       await postJson('/api/admin/curated/gear-presets', body);
-      setStatus({ kind: 'ok', msg: 'Enregistré' });
+      setStatus({ kind: 'ok', msg: 'Saved' });
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });
     }
@@ -110,7 +110,7 @@ export function GearPresetsEditor({
     <div className="space-y-8">
       {/* Talismans */}
       <section className="space-y-3">
-        <p className={label}>Presets de talismans</p>
+        <p className={label}>Talisman presets</p>
         {talis.map((row, i) => (
           <div
             key={row._key}
@@ -164,7 +164,7 @@ export function GearPresetsEditor({
               className={btn}
               onClick={() => setTalis(talis.filter((_, j) => j !== i))}
             >
-              Supprimer
+              Delete
             </button>
           </div>
         ))}
@@ -173,13 +173,13 @@ export function GearPresetsEditor({
           className={btn}
           onClick={() => setTalis([...talis, { slug: '', value: [], _key: rowKey() }])}
         >
-          + Nouveau preset talismans
+          + New talisman preset
         </button>
       </section>
 
       {/* Sets */}
       <section className="space-y-3">
-        <p className={label}>Presets de combos de sets</p>
+        <p className={label}>Set combo presets</p>
         {sets.map((row, i) => (
           <div
             key={row._key}
@@ -243,7 +243,7 @@ export function GearPresetsEditor({
                   patchRow(sets, setSets, i, { value: [...row.value, { set: '', count: 2 }] })
                 }
               >
-                + pièce
+                + piece
               </button>
             </div>
             <button
@@ -251,7 +251,7 @@ export function GearPresetsEditor({
               className={btn}
               onClick={() => setSets(sets.filter((_, j) => j !== i))}
             >
-              Supprimer
+              Delete
             </button>
           </div>
         ))}
@@ -262,13 +262,13 @@ export function GearPresetsEditor({
             setSets([...sets, { slug: '', value: [{ set: '', count: 4 }], _key: rowKey() }])
           }
         >
-          + Nouveau preset sets
+          + New set preset
         </button>
       </section>
 
       {/* Substats */}
       <section className="space-y-3">
-        <p className={label}>Presets de priorités de substats (« ATK&gt;CHC=CHD&gt;SPD »)</p>
+        <p className={label}>Substat priority presets (“ATK&gt;CHC=CHD&gt;SPD”)</p>
         {subs.map((row, i) => (
           <div
             key={row._key}
@@ -289,7 +289,7 @@ export function GearPresetsEditor({
               className={btn}
               onClick={() => setSubs(subs.filter((_, j) => j !== i))}
             >
-              Supprimer
+              Delete
             </button>
           </div>
         ))}
@@ -298,7 +298,7 @@ export function GearPresetsEditor({
           className={btn}
           onClick={() => setSubs([...subs, { slug: '', value: '', _key: rowKey() }])}
         >
-          + Nouveau preset substats
+          + New substat preset
         </button>
       </section>
 
@@ -308,7 +308,7 @@ export function GearPresetsEditor({
           onClick={save}
           className="bg-accent text-accent-fg rounded-md px-4 py-2 text-sm font-semibold hover:opacity-90"
         >
-          Enregistrer
+          Save
         </button>
         {status.kind === 'ok' && <span className="text-success text-sm">{status.msg}</span>}
         {status.kind === 'err' && <span className="text-danger text-sm">{status.msg}</span>}

@@ -117,7 +117,7 @@ export function CharacterKitEditor({
     const q = addQuery.trim();
     const id = catalog[q] ? q : byName.get(q.toLowerCase());
     if (!id) {
-      setMessage(`« ${q} » : effet inconnu du glossaire.`);
+      setMessage(`“${q}” : effect unknown to the glossary.`);
       return;
     }
     setAdds((prev) => ({ ...prev, [cardId]: [...new Set([...(prev[cardId] ?? []), id])] }));
@@ -144,13 +144,13 @@ export function CharacterKitEditor({
         { cardIds: cards.map((c) => c.id), chipHide, chipAdd },
       );
       if (!json.ok) {
-        setMessage(`Erreur : ${(json.errors ?? ['inconnue']).join(' ; ')}`);
+        setMessage(`Error: ${(json.errors ?? ['unknown']).join(' ; ')}`);
         return;
       }
-      setMessage('Enregistré — data/curated/character-skills.json (à committer via git).');
+      setMessage('Saved — data/curated/character-skills.json (commit via git).');
       router.refresh();
     } catch (e) {
-      setMessage(`Erreur : ${(e as Error).message}`);
+      setMessage(`Error: ${(e as Error).message}`);
     } finally {
       setBusy(false);
     }
@@ -160,7 +160,7 @@ export function CharacterKitEditor({
     <section className="space-y-3">
       <div className="flex items-center justify-between gap-3">
         <h2 className="text-content-strong text-xs font-semibold uppercase">
-          Câblage des chips (curé — présentation seule)
+          Chip wiring (curated — presentation only)
         </h2>
         <div className="flex items-center gap-3">
           {message && <span className="text-content-subtle text-xs">{message}</span>}
@@ -170,13 +170,13 @@ export function CharacterKitEditor({
             disabled={busy || !dirty}
             className="bg-accent text-accent-fg rounded-md px-3 py-1.5 text-sm font-medium disabled:opacity-50"
           >
-            {busy ? 'Enregistrement…' : 'Enregistrer'}
+            {busy ? 'Saving…' : 'Save'}
           </button>
         </div>
       </div>
       <p className="text-content-subtle text-xs">
-        × masque une chip sur sa carte (chipHide) · + ajoute un effet du glossaire (chipAdd). Le
-        routage auto étant déterministe, il n&apos;y a pas de déplacement inter-cartes.
+        × hides a chip on its card (chipHide) · + adds an effect from the glossary (chipAdd). Since
+        auto-routing is deterministic, there is no inter-card moving.
       </p>
 
       <datalist id="character-kit-effects">
@@ -202,7 +202,7 @@ export function CharacterKitEditor({
               )}
               <div className="min-w-0">
                 <p className="text-content-strong text-sm font-semibold">
-                  {card.name || '(sans nom)'}{' '}
+                  {card.name || '(no name)'}{' '}
                   <span className="text-content-subtle font-mono text-xs font-normal">
                     {card.id} · {card.type}
                   </span>
@@ -220,7 +220,7 @@ export function CharacterKitEditor({
                 isHidden(card.id, c.ref) ? (
                   <span
                     key={`hidden-${c.ref}`}
-                    title={`${c.ref} — masquée ici (chipHide)`}
+                    title={`${c.ref} — hidden here (chipHide)`}
                     className="border-line flex items-center gap-1 rounded-md border border-dashed py-0.5 pr-1 pl-1 opacity-50"
                   >
                     <span className="text-content-subtle text-[11px] font-semibold line-through">
@@ -229,7 +229,7 @@ export function CharacterKitEditor({
                     <button
                       type="button"
                       onClick={() => restoreChip(card.id, c.ref)}
-                      title="Rétablir la chip"
+                      title="Restore the chip"
                       className="text-content-subtle hover:text-content ml-0.5 rounded px-0.5 text-[11px] leading-none"
                     >
                       ↺
@@ -241,7 +241,7 @@ export function CharacterKitEditor({
                       <button
                         type="button"
                         onClick={() => hideChip(card.id, c.ref)}
-                        title="Masquer sur cette carte (chipHide)"
+                        title="Hide on this card (chipHide)"
                         className="ml-0.5 rounded px-0.5 text-[11px] leading-none opacity-60 hover:opacity-100"
                       >
                         ✕
@@ -266,7 +266,7 @@ export function CharacterKitEditor({
                       <button
                         type="button"
                         onClick={() => removeAdd(card.id, ref)}
-                        title="Retirer (chipAdd)"
+                        title="Remove (chipAdd)"
                         className="ml-0.5 rounded px-0.5 text-[11px] leading-none opacity-60 hover:opacity-100"
                       >
                         ✕
@@ -286,7 +286,7 @@ export function CharacterKitEditor({
                       if (e.key === 'Enter') confirmAdd(card.id);
                       if (e.key === 'Escape') setAdding(null);
                     }}
-                    placeholder="Nom d'effet ou réf tooltip…"
+                    placeholder="Effect name or tooltip ref…"
                     className="border-line bg-surface-base text-content w-52 rounded-md border px-2 py-0.5 text-xs"
                   />
                   <button
@@ -301,7 +301,7 @@ export function CharacterKitEditor({
                     onClick={() => setAdding(null)}
                     className="text-content-subtle hover:text-content px-1 text-xs"
                   >
-                    annuler
+                    cancel
                   </button>
                 </span>
               ) : (
@@ -311,7 +311,7 @@ export function CharacterKitEditor({
                     setAdding(card.id);
                     setAddQuery('');
                   }}
-                  title="Ajouter un effet (chipAdd)"
+                  title="Add an effect (chipAdd)"
                   className="border-line text-content-subtle hover:text-content-strong hover:border-line-strong rounded-md border border-dashed px-1.5 py-0.5 text-xs"
                 >
                   +

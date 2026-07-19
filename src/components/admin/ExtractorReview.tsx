@@ -16,7 +16,7 @@ const BADGE: Record<Status, { label: string; cls: string }> = {
   new: { label: 'new', cls: 'text-warn' },
   diff: { label: 'diff', cls: 'text-danger' },
   typo: { label: 'typo', cls: 'text-content-subtle' },
-  removed: { label: 'disparu', cls: 'text-danger' },
+  removed: { label: 'removed', cls: 'text-danger' },
 };
 
 /**
@@ -65,8 +65,8 @@ export function ExtractorReview({
         [key]: {
           tone: 'ok',
           text: r
-            ? `✓ ${r.files.join(', ')} · ${r.assets.staged} image(s) — committe via git.`
-            : '✓ intégré',
+            ? `✓ ${r.files.join(', ')} · ${r.assets.staged} image(s) — commit via git.`
+            : '✓ integrated',
         },
       }));
       router.refresh();
@@ -101,8 +101,8 @@ export function ExtractorReview({
         tone: 'ok',
         text:
           mode === 'typos'
-            ? `${res.fixed ?? 0} typo(s) corrigée(s) dans ${file} — committe via git.`
-            : `Extraction validée dans ${file} — committe via git.`,
+            ? `${res.fixed ?? 0} typo(s) fixed in ${file} — commit via git.`
+            : `Extraction confirmed in ${file} — commit via git.`,
       });
       router.refresh();
     } catch (e) {
@@ -119,7 +119,7 @@ export function ExtractorReview({
       {/* Actions */}
       <div className="border-line-subtle bg-surface-raised flex flex-wrap items-center gap-3 rounded-lg border p-3">
         {entities.length === 0 ? (
-          <span className="text-success text-sm">✓ Extraction à jour — aucun écart.</span>
+          <span className="text-success text-sm">✓ Extraction up to date — no differences.</span>
         ) : (
           <>
             <button
@@ -128,7 +128,7 @@ export function ExtractorReview({
               disabled={busy !== null}
               className="bg-accent text-accent-fg rounded-md px-3 py-1.5 text-sm font-semibold hover:opacity-90 disabled:opacity-50"
             >
-              {busy === 'all' ? '…' : 'Valider toute l’extraction'}
+              {busy === 'all' ? '…' : 'Confirm the whole extraction'}
             </button>
             {buckets.typo > 0 && (
               <button
@@ -137,11 +137,11 @@ export function ExtractorReview({
                 disabled={busy !== null}
                 className="border-line hover:border-accent rounded-md border px-3 py-1.5 text-sm disabled:opacity-50"
               >
-                {busy === 'typos' ? '…' : `Corriger les typos (${buckets.typo})`}
+                {busy === 'typos' ? '…' : `Fix typos (${buckets.typo})`}
               </button>
             )}
             <span className="text-content-subtle text-xs">
-              {total} vrai(s) écart(s){buckets.typo > 0 && ` · ${buckets.typo} typo`}
+              {total} real difference(s){buckets.typo > 0 && ` · ${buckets.typo} typo`}
             </span>
           </>
         )}
@@ -168,7 +168,7 @@ export function ExtractorReview({
                     : 'border-line-subtle text-content-subtle hover:text-content'
                 }`}
               >
-                {f === 'all' ? 'Tous' : BADGE[f].label} ({counts[f]})
+                {f === 'all' ? 'All' : BADGE[f].label} ({counts[f]})
               </button>
             ))}
         </div>
@@ -191,7 +191,7 @@ export function ExtractorReview({
                   disabled={rowBusy !== null}
                   className="border-line hover:border-accent ml-auto rounded-md border px-2 py-0.5 text-xs disabled:opacity-50"
                 >
-                  {rowBusy === e.key ? '…' : e.status === 'removed' ? 'Retirer' : 'Intégrer'}
+                  {rowBusy === e.key ? '…' : e.status === 'removed' ? 'Remove' : 'Integrate'}
                 </button>
               )}
             </div>

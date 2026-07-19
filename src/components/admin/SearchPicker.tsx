@@ -20,7 +20,7 @@ export function SearchPicker<T>({
   onPick,
   onClear,
   placeholder,
-  changeTitle = 'Changer',
+  changeTitle = 'Change',
   className = 'min-w-56',
 }: {
   options: T[];

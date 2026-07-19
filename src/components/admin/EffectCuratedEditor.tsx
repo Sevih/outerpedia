@@ -72,12 +72,12 @@ export function EffectCuratedEditor({
     setStatus({ kind: 'idle' });
     const body = build();
     if (creation && !body.name?.en) {
-      setStatus({ kind: 'err', msg: 'Une création doit au moins avoir un nom EN.' });
+      setStatus({ kind: 'err', msg: 'A creation must have at least an EN name.' });
       return;
     }
     try {
       await postJson(`/api/admin/curated/effects/${id}`, body);
-      setStatus({ kind: 'ok', msg: 'Enregistré' });
+      setStatus({ kind: 'ok', msg: 'Saved' });
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });
     }
@@ -87,7 +87,7 @@ export function EffectCuratedEditor({
     <div className="space-y-5">
       <section className="space-y-2">
         <p className={label}>
-          {creation ? 'Nom (EN obligatoire)' : 'Renommage (vide = garde l’extrait)'}
+          {creation ? 'Name (EN required)' : 'Rename (empty = keep the extract)'}
         </p>
         <div className="grid gap-2 sm:grid-cols-2">
           {LANGS.map((l) => (
@@ -106,7 +106,7 @@ export function EffectCuratedEditor({
 
       <section className="space-y-2">
         <p className={label}>
-          Description {creation ? '' : '(override rare — vide = garde l’extrait)'}
+          Description {creation ? '' : '(rare override — empty = keep the extract)'}
         </p>
         <div className="grid gap-2 sm:grid-cols-2">
           {LANGS.map((l) => (
@@ -124,7 +124,7 @@ export function EffectCuratedEditor({
 
       <section className="grid gap-4 sm:grid-cols-3">
         <div className="space-y-1">
-          <p className={label}>Icône (sprite `ui/effect`)</p>
+          <p className={label}>Icon (sprite `ui/effect`)</p>
           <div className="flex items-center gap-2">
             {icon.trim() && (
               <span className="border-line bg-surface-base relative h-8 w-8 shrink-0 rounded border">
@@ -147,13 +147,13 @@ export function EffectCuratedEditor({
         <div className="space-y-1">
           <p className={label}>Nature</p>
           <select className={field} value={isDebuff} onChange={(e) => setIsDebuff(e.target.value)}>
-            <option value="">{creation ? 'buff (défaut)' : 'hérité (extrait)'}</option>
+            <option value="">{creation ? 'buff (default)' : 'inherited (extract)'}</option>
             <option value="false">buff</option>
             <option value="true">debuff</option>
           </select>
         </div>
         <div className="space-y-1">
-          <p className={label}>Tag éditorial</p>
+          <p className={label}>Editorial tag</p>
           <input
             className={field}
             value={tag}
@@ -165,7 +165,7 @@ export function EffectCuratedEditor({
 
       <section className="space-y-1">
         <p className={label}>
-          Clés éditoriales ({'{B/…}'}/{'{D/…}'} — virgule ou retour ligne)
+          Editorial keys ({'{B/…}'}/{'{D/…}'} — comma or newline)
         </p>
         <textarea
           className={`${field} h-16 font-mono text-xs`}
@@ -178,10 +178,10 @@ export function EffectCuratedEditor({
       <section className="flex items-start gap-6">
         <label className="text-content flex items-center gap-2 pt-1 text-sm whitespace-nowrap">
           <input type="checkbox" checked={hidden} onChange={(e) => setHidden(e.target.checked)} />
-          Masquer (bruit / interne)
+          Hide (noise / internal)
         </label>
         <div className="flex-1 space-y-1">
-          <p className={label}>Note interne</p>
+          <p className={label}>Internal note</p>
           <textarea
             className={`${field} h-16`}
             value={note}
@@ -196,10 +196,10 @@ export function EffectCuratedEditor({
           onClick={save}
           className="bg-accent text-accent-fg rounded-md px-4 py-2 text-sm font-semibold hover:opacity-90"
         >
-          Enregistrer
+          Save
         </button>
         <span className="text-content-subtle text-xs">
-          Tout vider + enregistrer = supprime l’entrée curée.
+          Clear everything + save = deletes the curated entry.
         </span>
         {status.kind === 'ok' && <span className="text-success text-sm">{status.msg}</span>}
         {status.kind === 'err' && <span className="text-danger text-sm">{status.msg}</span>}

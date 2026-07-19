@@ -173,7 +173,7 @@ export default async function EditorCharacterDetail({
         tabs={[
           {
             key: 'manual',
-            label: 'Champs manuels',
+            label: 'Manual fields',
             content: (
               <CharacterCuratedEditor
                 id={id}
@@ -197,7 +197,7 @@ export default async function EditorCharacterDetail({
           },
           {
             key: 'reco',
-            label: 'Reco d’équipement',
+            label: 'Gear reco',
             content: (
               <GearRecoEditor
                 charId={id}

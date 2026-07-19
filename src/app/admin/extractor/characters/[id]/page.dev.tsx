@@ -134,11 +134,11 @@ export default async function ExtractorCharacterDetail({
       {/* Statut d'intégration */}
       {isNew ? (
         <p className="border-accent/40 bg-accent/5 text-accent rounded-lg border p-3 text-sm font-medium">
-          Nouveau — extrait du jeu, PAS ENCORE intégré. Vérifie ci-dessous puis intègre.
+          New — extracted from the game, NOT YET integrated. Check below then integrate.
         </p>
       ) : review.fields.length === 0 ? (
         <p className="text-success text-sm">
-          ✓ À jour — le committé correspond à l&apos;extraction.
+          ✓ Up to date — the committed version matches the extraction.
         </p>
       ) : null}
 
@@ -146,7 +146,7 @@ export default async function ExtractorCharacterDetail({
 
       {/* Ce que la DÉTECTION a produit — la partie « tags » de l'extraction. */}
       <section className="space-y-2">
-        <h2 className="text-content-strong text-xs font-semibold uppercase">Tags (détectés)</h2>
+        <h2 className="text-content-strong text-xs font-semibold uppercase">Tags (detected)</h2>
         {char.tags?.length ? (
           <div className="flex flex-wrap items-center gap-1.5">
             {char.tags.map((t) => (
@@ -162,12 +162,12 @@ export default async function ExtractorCharacterDetail({
             ))}
           </div>
         ) : (
-          <p className="text-content-subtle text-sm">Aucun tag dérivé de la donnée de jeu.</p>
+          <p className="text-content-subtle text-sm">No tag derived from the game data.</p>
         )}
         <p className="text-content-subtle text-xs">
-          Acquisition ← bannière (RecruitGroupTemplet) · ignore-defense ← buffs de pénétration
-          (kit/EE/transcendance) · core-fusion ← lignée. Le seul tag humain (<code>free</code>) vit
-          côté Editor.
+          Acquisition ← banner (RecruitGroupTemplet) · ignore-defense ← penetration buffs
+          (kit/EE/transcendence) · core-fusion ← lineage. The only human tag (<code>free</code>)
+          lives on the Editor side.
         </p>
       </section>
 
@@ -177,7 +177,7 @@ export default async function ExtractorCharacterDetail({
 
       {/* Ce que l'extraction produit : stats */}
       <section className="space-y-2">
-        <h2 className="text-content-strong text-xs font-semibold uppercase">Stats (extraites)</h2>
+        <h2 className="text-content-strong text-xs font-semibold uppercase">Stats (extracted)</h2>
         <div className="grid grid-cols-2 gap-2 text-sm sm:grid-cols-4">
           {Object.entries(char.stats).map(([key, r]) => (
             <div key={key} className="border-line-subtle rounded-md border px-3 py-1.5">
@@ -195,7 +195,7 @@ export default async function ExtractorCharacterDetail({
       {refEffects.size > 0 && (
         <section className="space-y-2">
           <h2 className="text-content-strong text-xs font-semibold uppercase">
-            Statuts référencés ({refEffects.size})
+            Referenced statuses ({refEffects.size})
           </h2>
           <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
             {[...refEffects.entries()].map(([effId, e]) => (

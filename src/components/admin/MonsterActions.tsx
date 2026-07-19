@@ -83,8 +83,8 @@ export function MonsterActions({
           {status.kind === 'busy'
             ? '…'
             : isNew
-              ? 'Enregistrer ce monstre (entité + skills)'
-              : 'Enregistrer (appliquer l’extraction)'}
+              ? 'Save this monster (entity + skills)'
+              : 'Save (apply extraction)'}
         </button>
         {canVersion && (
           <span className="flex items-center gap-2">
@@ -94,12 +94,12 @@ export function MonsterActions({
               disabled={status.kind === 'busy'}
               className="border-line-subtle text-content hover:bg-surface-raised rounded-md border px-4 py-2 text-sm font-semibold disabled:opacity-50"
             >
-              Versionner l’état committé
+              Version the committed state
             </button>
             <input
               value={label}
               onChange={(e) => setLabel(e.target.value)}
-              placeholder="label (optionnel) : avant maj 1.11…"
+              placeholder="label (optional): before update 1.11…"
               className="border-line-subtle bg-surface-base w-56 rounded-md border px-2 py-2 text-xs"
             />
           </span>
@@ -108,15 +108,15 @@ export function MonsterActions({
 
       {status.kind === 'saved' && (
         <p className="border-success/40 bg-success/5 text-success rounded-md border p-3 text-sm">
-          ✓ Enregistré — {status.report.files.join(', ')}. Committe via git.
+          ✓ Saved — {status.report.files.join(', ')}. Commit via git.
         </p>
       )}
       {status.kind === 'versioned' && (
         <p className="border-success/40 bg-success/5 text-success rounded-md border p-3 text-sm">
-          ✓ Figé sous <code>{status.report.key}</code>
+          ✓ Frozen under <code>{status.report.key}</code>
           {status.report.name ? ` (${status.report.name})` : ''} — {status.report.skills} skill(s),
           source {status.report.ref}
-          {status.report.gameVersion ? `, jeu ${status.report.gameVersion}` : ''}. Committe{' '}
+          {status.report.gameVersion ? `, game ${status.report.gameVersion}` : ''}. Commit{' '}
           <code>{status.report.file}</code>.
         </p>
       )}

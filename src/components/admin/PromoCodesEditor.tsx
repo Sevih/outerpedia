@@ -67,7 +67,7 @@ export function PromoCodesEditor({
     setStatus({ kind: 'idle' });
     try {
       await postJson('/api/admin/curated/coupons', rows.filter((r) => r.code.trim()).map(toPromo));
-      setStatus({ kind: 'ok', msg: 'Enregistré' });
+      setStatus({ kind: 'ok', msg: 'Saved' });
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });
     }
@@ -82,7 +82,7 @@ export function PromoCodesEditor({
           onClick={save}
           className="bg-accent text-accent-fg rounded-md px-4 py-2 text-sm font-semibold hover:opacity-90"
         >
-          Enregistrer
+          Save
         </button>
         {status.kind === 'ok' && <span className="text-success text-sm">{status.msg}</span>}
         {status.kind === 'err' && <span className="text-danger text-sm">{status.msg}</span>}
@@ -110,14 +110,14 @@ export function PromoCodesEditor({
                 placeholder="CODE"
                 onChange={(e) => set(i, { code: e.target.value })}
               />
-              <label className="text-content-subtle text-xs">du</label>
+              <label className="text-content-subtle text-xs">from</label>
               <input
                 type="date"
                 className={input}
                 value={r.start}
                 onChange={(e) => set(i, { start: e.target.value })}
               />
-              <label className="text-content-subtle text-xs">au</label>
+              <label className="text-content-subtle text-xs">to</label>
               <input
                 type="date"
                 className={input}
@@ -128,14 +128,14 @@ export function PromoCodesEditor({
                 type="button"
                 className="text-danger ml-auto text-sm"
                 onClick={() => remove(i)}
-                aria-label="Supprimer le code"
+                aria-label="Delete the code"
               >
                 ✕
               </button>
             </div>
 
             <div className="space-y-1 pl-1">
-              <p className="text-content-subtle text-xs uppercase">Récompenses</p>
+              <p className="text-content-subtle text-xs uppercase">Rewards</p>
               {r.rewards.map((rw, ri) => (
                 <div key={rw._key} className="flex items-center gap-2">
                   <ItemPicker
@@ -154,7 +154,7 @@ export function PromoCodesEditor({
                     type="button"
                     className="text-danger text-sm"
                     onClick={() => set(i, { rewards: r.rewards.filter((_, j) => j !== ri) })}
-                    aria-label="Supprimer la récompense"
+                    aria-label="Delete the reward"
                   >
                     ✕
                   </button>
@@ -167,7 +167,7 @@ export function PromoCodesEditor({
                   set(i, { rewards: [...r.rewards, { id: '', qty: '', _key: rowKey() }] })
                 }
               >
-                + récompense
+                + reward
               </button>
             </div>
           </div>

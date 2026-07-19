@@ -102,7 +102,7 @@ export function GameDataBrowser({
         <div className="flex flex-wrap items-center gap-2">
           <input
             className="border-line bg-surface-base text-content focus:border-accent w-64 rounded-md border px-2 py-1 text-sm focus:outline-none"
-            placeholder="Rechercher dans la table…"
+            placeholder="Search in the table…"
             value={q}
             onChange={(e) => {
               setQ(e.target.value);
@@ -119,7 +119,7 @@ export function GameDataBrowser({
             }}
             className="border-line bg-surface-base text-content max-w-48 rounded-md border px-1 py-1 text-xs"
           >
-            <option value="">toutes les colonnes</option>
+            <option value="">all columns</option>
             {data.columns.map((c) => (
               <option key={c} value={c}>
                 {c}
@@ -130,7 +130,7 @@ export function GameDataBrowser({
             <button
               type="button"
               onClick={() => setExact(false)}
-              title="Repasser en recherche par sous-chaîne"
+              title="Back to substring search"
               className="bg-accent/15 text-accent rounded px-2 py-0.5 text-xs"
             >
               {col} = {q} ×
@@ -142,7 +142,7 @@ export function GameDataBrowser({
               checked={hideEmpty}
               onChange={(e) => setHideEmpty(e.target.checked)}
             />
-            masquer les colonnes vides
+            hide empty columns
           </label>
           <label className="text-content-subtle flex items-center gap-1 text-xs">
             <input
@@ -150,11 +150,11 @@ export function GameDataBrowser({
               checked={resolve}
               onChange={(e) => setResolve(e.target.checked)}
             />
-            résoudre les textes
+            resolve texts
           </label>
 
           <span className="text-content-subtle ml-auto text-xs">
-            {loading ? '…' : `${data.matched} ligne(s)`}
+            {loading ? '…' : `${data.matched} row(s)`}
             {data.matched !== data.rowCount && ` / ${data.rowCount}`}
           </span>
           <div className="flex items-center gap-1 text-xs">
@@ -244,7 +244,7 @@ export function GameDataBrowser({
               {data.rows.length === 0 && (
                 <tr>
                   <td colSpan={columns.length} className="text-content-subtle px-2 py-3">
-                    Aucune ligne ne correspond.
+                    No matching row.
                   </td>
                 </tr>
               )}
@@ -256,13 +256,13 @@ export function GameDataBrowser({
       {selected && (
         <aside className="border-line-subtle sticky top-6 flex max-h-[calc(100dvh-7.5rem)] w-80 shrink-0 flex-col self-start overflow-hidden rounded-lg border">
           <div className="border-line-subtle flex items-center justify-between border-b px-3 py-2">
-            <span className="text-content-strong text-xs font-medium">Ligne brute</span>
+            <span className="text-content-strong text-xs font-medium">Raw row</span>
             <button
               type="button"
               onClick={() => setSelected(null)}
               className="text-content-subtle hover:text-content text-xs"
             >
-              fermer
+              close
             </button>
           </div>
           <pre className="text-content min-h-0 flex-1 overflow-auto p-3 font-mono text-xs whitespace-pre-wrap">

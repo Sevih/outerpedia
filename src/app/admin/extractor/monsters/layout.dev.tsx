@@ -11,8 +11,8 @@ export default function ExtractorMonstersLayout({ children }: { children: React.
       <ExtractorSidebar
         rows={rows}
         basePath="/admin/extractor/monsters"
-        toggles={[{ flag: 'site', label: 'Utilisés par le site', defaultOn: true }]}
-        tagFilter={{ allLabel: 'tous les modes', options: modeOptions }}
+        toggles={[{ flag: 'site', label: 'Used by the site', defaultOn: true }]}
+        tagFilter={{ allLabel: 'all modes', options: modeOptions }}
         iconSize={48}
       />
       <div className="min-w-0 flex-1">{children}</div>

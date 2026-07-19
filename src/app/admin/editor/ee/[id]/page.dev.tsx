@@ -69,7 +69,7 @@ export default async function EditorEeDetail({ params }: { params: Promise<{ id:
       {passives.length > 0 && (
         <section className="space-y-2">
           <h2 className="text-content-strong text-xs font-semibold uppercase">
-            Passifs (référence)
+            Passives (reference)
           </h2>
           <div className="space-y-2">
             {passives.map((p, i) => (
@@ -79,7 +79,7 @@ export default async function EditorEeDetail({ params }: { params: Promise<{ id:
               >
                 <div className="mb-1 flex items-center gap-2">
                   <span className="bg-surface-base text-content-subtle rounded px-1.5 py-0.5 font-mono text-[11px] font-semibold">
-                    {p.unlockLevel <= 1 ? 'Déblocage' : `+${p.unlockLevel}`}
+                    {p.unlockLevel <= 1 ? 'Unlock' : `+${p.unlockLevel}`}
                   </span>
                   <span className="text-content-strong text-sm font-semibold">{p.name}</span>
                 </div>

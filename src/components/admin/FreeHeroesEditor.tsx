@@ -70,7 +70,7 @@ function CharacterChips({
             )}
             <button
               type="button"
-              title="Retirer"
+              title="Remove"
               className="border-line bg-surface-raised text-danger absolute -top-1.5 -right-1.5 rounded-full border px-1 text-xs"
               onClick={() => onChange(names.filter((_, j) => j !== i))}
             >
@@ -82,7 +82,7 @@ function CharacterChips({
       <input
         className={`${input} h-9 w-36`}
         list="free-heroes-char-names"
-        placeholder="+ héros…"
+        placeholder="+ hero…"
         value={add}
         onChange={(e) => setAdd(e.target.value)}
         onKeyDown={(e) => {
@@ -153,7 +153,7 @@ export function FreeHeroesEditor({
     });
     if (!recs.length) {
       setTrans('done');
-      setTransMsg('Rien à traduire (aucun texte EN).');
+      setTransMsg('Nothing to translate (no EN text).');
       return;
     }
     try {
@@ -175,8 +175,8 @@ export function FreeHeroesEditor({
       setTrans('done');
       setTransMsg(
         filled
-          ? `${filled} champ(s) traduit(s) via ${provider === 'haiku' ? 'Haiku (quota DeepL atteint)' : 'DeepL'} — à revoir avant d’enregistrer.`
-          : 'Toutes les langues cibles étaient déjà remplies.',
+          ? `${filled} field(s) translated via ${provider === 'haiku' ? 'Haiku (DeepL quota reached)' : 'DeepL'} — review before saving.`
+          : 'All target languages were already filled.',
       );
     } catch (e) {
       setTrans('error');
@@ -221,7 +221,7 @@ export function FreeHeroesEditor({
 
       {/* Langue + auto-traduction */}
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-content-subtle text-xs uppercase">Langue</span>
+        <span className="text-content-subtle text-xs uppercase">Language</span>
         <div className="border-line flex overflow-hidden rounded-md border">
           {LANGS.map((l) => (
             <button
@@ -239,9 +239,9 @@ export function FreeHeroesEditor({
           className={btn}
           onClick={translateEmpty}
           disabled={trans === 'loading'}
-          title="Traduit l'EN vers les langues encore vides (DeepL → Haiku)"
+          title="Translate EN into the still-empty languages (DeepL → Haiku)"
         >
-          {trans === 'loading' ? 'Traduction…' : 'Traduire (EN → vides)'}
+          {trans === 'loading' ? 'Translating…' : 'Translate (EN → empty)'}
         </button>
         {transMsg && (
           <span className={`text-xs ${trans === 'error' ? 'text-danger' : 'text-content-subtle'}`}>
@@ -251,13 +251,11 @@ export function FreeHeroesEditor({
       </div>
 
       <p className="text-content-subtle text-sm">
-        Sources de héros gratuits — onglet <strong>Free Heroes</strong>. Une source = une ligne du
-        tableau ; chaque entrée porte ses héros, son type de choix et sa raison.
+        Free hero sources — <strong>Free Heroes</strong> tab. One source = one table row; each entry
+        carries its heroes, pick type and reason.
       </p>
 
-      {sources.length === 0 && (
-        <p className="text-content-subtle text-sm">Aucune source — ajoute-en une.</p>
-      )}
+      {sources.length === 0 && <p className="text-content-subtle text-sm">No source — add one.</p>}
 
       {sources.map((s, si) => (
         <div key={s._key} className="card space-y-4 rounded-xl p-4">
@@ -270,7 +268,7 @@ export function FreeHeroesEditor({
                 lang={lang}
                 rows={2}
                 layout="stacked"
-                placeholder={lang === 'en' ? 'Nom de la source…' : (s.source.en ?? '')}
+                placeholder={lang === 'en' ? 'Source name…' : (s.source.en ?? '')}
                 onChange={(val) =>
                   patchSource(si, { source: editLText(s.source, val) as KSource['source'] })
                 }
@@ -279,7 +277,7 @@ export function FreeHeroesEditor({
             <button
               type="button"
               className="text-danger shrink-0 text-sm"
-              title="Supprimer la source"
+              title="Delete the source"
               onClick={() => setSources((prev) => prev.filter((_, j) => j !== si))}
             >
               ✕ source
@@ -298,19 +296,19 @@ export function FreeHeroesEditor({
                   <button
                     type="button"
                     className="text-danger shrink-0 text-sm"
-                    title="Supprimer l’entrée"
+                    title="Delete the entry"
                     onClick={() =>
                       patchSource(si, {
                         entries: s.entries.filter((_, j) => j !== ei),
                       } as Partial<KSource>)
                     }
                   >
-                    ✕ entrée
+                    ✕ entry
                   </button>
                 </div>
 
                 <label className="text-content-subtle flex items-center gap-2 text-xs">
-                  Type de choix
+                  Pick type
                   <select
                     className={`${input} w-40`}
                     value={e.pickType}
@@ -318,13 +316,13 @@ export function FreeHeroesEditor({
                       patchEntry(si, ei, { pickType: ev.target.value as 'one' | 'all' })
                     }
                   >
-                    <option value="all">Tous (obtenus)</option>
-                    <option value="one">Un seul (au choix)</option>
+                    <option value="all">All (obtained)</option>
+                    <option value="one">One (your choice)</option>
                   </select>
                 </label>
 
                 <div>
-                  <p className="text-content-subtle mb-1 text-xs uppercase">Raison ({lang})</p>
+                  <p className="text-content-subtle mb-1 text-xs uppercase">Reason ({lang})</p>
                   <InlineTextField
                     value={show(e.reason)}
                     refs={refs}
@@ -346,7 +344,7 @@ export function FreeHeroesEditor({
                 patchSource(si, { entries: [...s.entries, emptyEntry()] } as Partial<KSource>)
               }
             >
-              + entrée
+              + entry
             </button>
           </div>
         </div>

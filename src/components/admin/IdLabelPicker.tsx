@@ -16,7 +16,7 @@ export function IdLabelPicker({
   options,
   value,
   onSelect,
-  placeholder = 'Chercher…',
+  placeholder = 'Search…',
 }: {
   options: IdLabel[];
   value: string;
@@ -43,7 +43,7 @@ export function IdLabelPicker({
       onPick={(o) => onSelect(o.id)}
       onClear={() => onSelect('')}
       placeholder={placeholder}
-      changeTitle="Changer"
+      changeTitle="Change"
     />
   );
 }

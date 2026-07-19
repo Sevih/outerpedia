@@ -28,7 +28,7 @@ export default function EditorEffectsLayout({ children }: { children: React.Reac
                   className={`h-2 w-2 shrink-0 rounded-full ${e.isDebuff ? 'bg-danger' : 'bg-success'}`}
                 />
                 <span className="text-content min-w-0 flex-1 truncate">
-                  {e.name.en || <span className="text-danger">(sans nom)</span>}
+                  {e.name.en || <span className="text-danger">(no name)</span>}
                 </span>
                 {e.hidden && <span className="text-content-subtle text-xs">✕</span>}
                 {e.overridden && <span className="text-accent text-xs">✎</span>}

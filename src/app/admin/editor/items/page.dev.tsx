@@ -36,9 +36,9 @@ export default function EditorItems() {
       <div>
         <h1 className="text-content-strong text-xl font-semibold">Editor · Item</h1>
         <p className="text-content-muted text-sm">
-          {entries.length - goods} items + {goods} monnaies · {noDesc} sans description ·{' '}
-          {unused.length} sprites à rentrer (filtre <span className="font-mono">unused</span>).
-          Clique une ligne pour éditer / rentrer.
+          {entries.length - goods} items + {goods} currencies · {noDesc} without description ·{' '}
+          {unused.length} sprites to integrate (filter <span className="font-mono">unused</span>).
+          Click a row to edit / integrate.
         </p>
       </div>
       <ItemsBrowser entries={[...entries, ...unused]} />

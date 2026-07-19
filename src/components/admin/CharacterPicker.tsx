@@ -65,8 +65,8 @@ export function CharacterPicker({
       }
       onPick={(o) => onSelect({ id: o.id, name: o.name })}
       onClear={() => onSelect({ id: '', name: '' })}
-      placeholder="Chercher un perso…"
-      changeTitle="Changer de perso"
+      placeholder="Search a character…"
+      changeTitle="Change character"
     />
   );
 }

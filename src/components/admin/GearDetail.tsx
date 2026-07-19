@@ -41,8 +41,8 @@ function IntegrateSection({ gearKind, id }: { gearKind: GearKind; id: string }) 
     <div className="border-line-subtle bg-surface-raised space-y-2 rounded-lg border p-4">
       <IntegrateGearButton kind={kind} id={id} isNew={isNew} />
       <p className="text-content-subtle text-xs">
-        Écrit cette entité (lignes de la famille + pools/passifs/paliers référencés) dans{' '}
-        <code>data/generated/equipment/</code> et stage ses images — à committer via git.
+        Writes this entity (family rows + referenced pools/passives/tiers) into{' '}
+        <code>data/generated/equipment/</code> and stages its images — to commit via git.
       </p>
     </div>
   );
@@ -80,14 +80,14 @@ function PassiveList({ passives }: { passives: ReturnType<typeof resolvePassives
             {p.icon && <img src={sprite(p.icon)} alt="" className="h-6 w-6 object-contain" />}
             {p.name}
             <span className="text-content-subtle text-xs font-normal">
-              niv. {p.level}
-              {p.isAdd ? ' (s’ajoute)' : ''} · {p.levels} palier(s)
+              lvl {p.level}
+              {p.isAdd ? ' (adds up)' : ''} · {p.levels} tier(s)
             </span>
           </p>
           <p className="text-content-subtle mt-1 text-xs whitespace-pre-line">{plain(p.first)}</p>
           {p.last && (
             <p className="text-content-subtle mt-1 text-xs whitespace-pre-line">
-              max : {plain(p.last)}
+              max: {plain(p.last)}
             </p>
           )}
         </li>
@@ -146,7 +146,7 @@ function FamilyDetail({ f }: { f: GearFamily }) {
           <>
             <span className="font-mono">{f.id}</span> · {f.grade} · ★{f.stars.join('/')}
             {f.mode ? ` · ${f.mode}` : ''}
-            {f.classLimits.length ? ` · classes : ${f.classLimits.join(', ')}` : ''}
+            {f.classLimits.length ? ` · classes: ${f.classLimits.join(', ')}` : ''}
           </>
         }
       />
@@ -164,11 +164,11 @@ function FamilyDetail({ f }: { f: GearFamily }) {
           </p>
         </Section>
       )}
-      <Section title="Passif">
+      <Section title="Passive">
         <PassiveList passives={passives} />
         {f.classPassives?.map((cp) => (
           <div key={cp.classLimit} className="space-y-1">
-            <p className="text-content-subtle text-xs">variante {cp.classLimit} :</p>
+            <p className="text-content-subtle text-xs">variant {cp.classLimit}:</p>
             <PassiveList passives={resolvePassives(cp.passives, 'en')} />
           </div>
         ))}
@@ -187,15 +187,15 @@ function FamilyDetail({ f }: { f: GearFamily }) {
         )}
       </Section>
       {f.source && (f.source.bosses.length > 0 || f.source.shops.length > 0 || f.source.label) && (
-        <Section title="Provenance">
+        <Section title="Source">
           <p className="text-content-subtle text-xs">
             {f.source.bosses.map((b) => b.name.en).join(', ')}
-            {f.source.shops.length ? ` · boutiques : ${f.source.shops.join(', ')}` : ''}
+            {f.source.shops.length ? ` · shops: ${f.source.shops.join(', ')}` : ''}
             {f.source.label ? ` · ${f.source.label}` : ''}
           </p>
         </Section>
       )}
-      <Section title="Membres de la famille">
+      <Section title="Family members">
         <p className="text-content-subtle font-mono text-xs">{f.ids.join(' · ')}</p>
       </Section>
     </div>
@@ -235,7 +235,7 @@ export function GearDetail({ kind, id }: { kind: GearKind; id: string }) {
           name={e.name}
           sub={
             <>
-              <span className="font-mono">{e.itemId}</span> · EE de{' '}
+              <span className="font-mono">{e.itemId}</span> · EE of{' '}
               <span className="font-mono">{e.characterId}</span> · {e.grade} · {e.star}★ · trust{' '}
               {e.trustLevel}
               {e.rank ? ` · rank ${e.rank}` : ''}
@@ -257,7 +257,7 @@ export function GearDetail({ kind, id }: { kind: GearKind; id: string }) {
             </p>
           </Section>
         )}
-        <Section title="Passif (base → +10)">
+        <Section title="Passive (base → +10)">
           <PassiveList passives={passives} />
           {effects.length > 0 && (
             <p className="flex flex-wrap gap-1 text-xs">
@@ -289,11 +289,11 @@ export function GearDetail({ kind, id }: { kind: GearKind; id: string }) {
         name={s.name}
         sub={
           <>
-            <span className="font-mono">{s.id}</span> · set d&apos;armure
+            <span className="font-mono">{s.id}</span> · armor set
           </>
         }
       />
-      <Section title="Pièces (6★)">
+      <Section title="Pieces (6★)">
         <p className="flex gap-2">
           {Object.entries(s.pieceIcons).map(([slot, icon]) => (
             <span key={slot} className="text-center text-xs">
@@ -303,11 +303,11 @@ export function GearDetail({ kind, id }: { kind: GearKind; id: string }) {
           ))}
         </p>
       </Section>
-      <Section title="Bonus (base → enchanté)">
+      <Section title="Bonus (base → enchanted)">
         <ul className="space-y-1 text-sm">
           {s.tiers.map((t, i) => (
             <li key={i} className="text-content-subtle text-xs">
-              <span className="text-content-strong">palier {i === 0 ? 'base' : 'enchanté'}</span>
+              <span className="text-content-strong">tier {i === 0 ? 'base' : 'enchanted'}</span>
               {t.p2 ? ` · 2P : ${plain(t.p2)}` : ''}
               {t.p4 ? ` · 4P : ${plain(t.p4)}` : ''}
             </li>
@@ -315,10 +315,10 @@ export function GearDetail({ kind, id }: { kind: GearKind; id: string }) {
         </ul>
       </Section>
       {s.source && (s.source.bosses.length > 0 || s.source.shops.length > 0 || s.source.label) && (
-        <Section title="Provenance">
+        <Section title="Source">
           <p className="text-content-subtle text-xs">
             {s.source.bosses.map((b) => b.name.en).join(', ')}
-            {s.source.shops.length ? ` · boutiques : ${s.source.shops.join(', ')}` : ''}
+            {s.source.shops.length ? ` · shops: ${s.source.shops.join(', ')}` : ''}
             {s.source.label ? ` · ${s.source.label}` : ''}
           </p>
         </Section>

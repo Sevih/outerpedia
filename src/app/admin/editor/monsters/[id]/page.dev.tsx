@@ -138,7 +138,7 @@ export default async function EditorMonsterPage({ params }: { params: Promise<{ 
           )}
         </span>
         <div>
-          <h1 className="text-content-strong text-xl font-semibold">{m.name.en || '(sans nom)'}</h1>
+          <h1 className="text-content-strong text-xl font-semibold">{m.name.en || '(no name)'}</h1>
           <p className="text-content-subtle text-sm">
             <span className="font-mono">{m.id}</span>
           </p>

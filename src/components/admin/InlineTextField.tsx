@@ -26,18 +26,18 @@ interface TokenDef {
 const TOKENS: TokenDef[] = [
   { type: 'B', label: 'Buff', refsKey: 'effectBuff' },
   { type: 'D', label: 'Debuff', refsKey: 'effectDebuff' },
-  { type: 'P', label: 'Perso', refsKey: 'character' },
+  { type: 'P', label: 'Character', refsKey: 'character' },
   { type: 'SK', label: 'Skill', refsKey: 'character' },
   { type: 'EE', label: 'EE', refsKey: 'characterEE' },
   { type: 'S', label: 'Stat', refsKey: 'stat' },
-  { type: 'E', label: 'Élément', refsKey: 'element' },
-  { type: 'C', label: 'Classe', refsKey: 'klass' },
+  { type: 'E', label: 'Element', refsKey: 'element' },
+  { type: 'C', label: 'Class', refsKey: 'klass' },
   { type: 'I-I', label: 'Item', refsKey: 'item' },
-  { type: 'I-W', label: 'Arme', refsKey: 'weapon' },
-  { type: 'I-A', label: 'Amulette', refsKey: 'amulet' },
+  { type: 'I-W', label: 'Weapon', refsKey: 'weapon' },
+  { type: 'I-A', label: 'Amulet', refsKey: 'amulet' },
   { type: 'I-T', label: 'Talisman', refsKey: 'talisman' },
   { type: 'AS', label: 'Set', refsKey: 'set' },
-  { type: 'L', label: 'Lien', refsKey: 'guide' },
+  { type: 'L', label: 'Link', refsKey: 'guide' },
 ];
 
 const SK_SLOTS = ['S1', 'S2', 'S3', 'Passive', 'Chain'];
@@ -195,12 +195,12 @@ export function InlineTextField({
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder={`Chercher un ${picker.label.toLowerCase()}…`}
+            placeholder={`Search for a ${picker.label.toLowerCase()}…`}
             className="border-line bg-surface-base text-content w-full rounded border px-2 py-1 text-xs"
           />
           <div className="max-h-48 space-y-0.5 overflow-y-auto">
             {options.length === 0 ? (
-              <p className="text-content-subtle px-1 py-2 text-xs">Aucun résultat.</p>
+              <p className="text-content-subtle px-1 py-2 text-xs">No results.</p>
             ) : (
               options.map((o) => (
                 <button
@@ -236,11 +236,11 @@ export function InlineTextField({
           className={`border-line-subtle min-h-9 rounded-md border px-2 py-1 text-sm whitespace-pre-line ${
             focused ? 'border-accent/40' : ''
           }`}
-          aria-label="Aperçu"
+          aria-label="Preview"
         >
           {/* Aperçu fidèle : descripteurs (server) rendus par les vrais composants. */}
           {!value.trim() ? (
-            <span className="text-content-subtle text-xs">Aperçu…</span>
+            <span className="text-content-subtle text-xs">Preview…</span>
           ) : previewMode === 'list' ? (
             <ul className="list-disc space-y-1 pl-4">
               {listSegments.map((seg, i) => (

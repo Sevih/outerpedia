@@ -36,7 +36,7 @@ function EffectCell({ e }: { e?: MergedEffect }) {
               href={`/admin/editor/effects/${encodeURIComponent(e.id)}` as Route}
               className="text-content-strong hover:text-accent font-medium"
             >
-              {e.name.en || <span className="text-danger italic">sans nom</span>}
+              {e.name.en || <span className="text-danger italic">no name</span>}
             </Link>
             {e.irremovable && <span className="text-warn text-[10px] uppercase">irremovable</span>}
           </div>
@@ -47,14 +47,14 @@ function EffectCell({ e }: { e?: MergedEffect }) {
               e.iconEditorial ? (
                 <span className="text-warn"> · wiki</span>
               ) : (
-                <span className="text-success"> · jeu</span>
+                <span className="text-success"> · game</span>
               )
             ) : (
-              <span className="text-danger"> · sans icône</span>
+              <span className="text-danger"> · no icon</span>
             )}
             {e.tag ? ` · ${e.tag}` : ''}
-            {e.overridden && e.origin !== 'curated' ? ' · curé' : ''}
-            {e.hidden ? ' · masqué' : ''}
+            {e.overridden && e.origin !== 'curated' ? ' · curated' : ''}
+            {e.hidden ? ' · hidden' : ''}
           </div>
         </div>
       </div>
@@ -119,10 +119,10 @@ export default async function EditorEffectsCatalog({
         <div>
           <h1 className="text-content-strong text-xl font-semibold">Editor · Effect</h1>
           <p className="text-content-muted text-sm">
-            {effects.length} effets ({effects.filter((e) => e.origin === 'tooltip').length} statuts
-            + {effects.filter((e) => e.origin === 'type').length} mécaniques +{' '}
-            {effects.filter((e) => e.origin === 'curated').length} créations) · {curated} curés
-            {noName ? ` · ${noName} sans nom` : ''}
+            {effects.length} effects ({effects.filter((e) => e.origin === 'tooltip').length}{' '}
+            statuses + {effects.filter((e) => e.origin === 'type').length} mechanics +{' '}
+            {effects.filter((e) => e.origin === 'curated').length} creations) · {curated} curated
+            {noName ? ` · ${noName} no name` : ''}
             {' · '}
             <Link
               href={
@@ -132,14 +132,14 @@ export default async function EditorEffectsCatalog({
               }
               className={noDescOnly ? 'text-accent underline' : 'text-warn hover:underline'}
             >
-              {noDescCount} sans description{noDescOnly ? ' (filtré — tout voir)' : ''}
+              {noDescCount} no description{noDescOnly ? ' (filtered — show all)' : ''}
             </Link>
             {' · '}
             <Link
               href={'/admin/extractor/effects' as Route}
               className="text-content-subtle hover:underline"
             >
-              contrôle régression (Extractor) →
+              regression control (Extractor) →
             </Link>
           </p>
         </div>
@@ -167,7 +167,7 @@ export default async function EditorEffectsCatalog({
                 colSpan={2}
                 className="text-content-subtle bg-surface-base px-3 py-1.5 text-xs font-semibold uppercase"
               >
-                Sans miroir ({orphanBuffs.length + orphanDebuffs.length})
+                No mirror ({orphanBuffs.length + orphanDebuffs.length})
               </td>
             </tr>
             {Array.from({ length: orphanRows }, (_, i) => (

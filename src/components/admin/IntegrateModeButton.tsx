@@ -20,10 +20,10 @@ export function IntegrateModeButton({ modes }: { modes: Array<{ value: string; l
       const data = await postJson<{ report?: { ids: string[]; files: string[] } }>(
         `/api/admin/integrate/monster-mode/${encodeURIComponent(mode)}`,
       );
-      if (!data.report) throw new Error('Réponse sans rapport');
+      if (!data.report) throw new Error('Response without report');
       setStatus({
         kind: 'ok',
-        msg: `${data.report.ids.length} monstre(s) écrits (${data.report.files.join(', ')}) — committe via git.`,
+        msg: `${data.report.ids.length} monster(s) written (${data.report.files.join(', ')}) — commit via git.`,
       });
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });
@@ -49,7 +49,7 @@ export function IntegrateModeButton({ modes }: { modes: Array<{ value: string; l
         disabled={status.kind === 'busy' || !mode}
         className="bg-accent text-accent-fg rounded-md px-3 py-1 text-xs font-semibold hover:opacity-90 disabled:opacity-50"
       >
-        {status.kind === 'busy' ? 'Écriture…' : 'Enregistrer le mode'}
+        {status.kind === 'busy' ? 'Writing…' : 'Save mode'}
       </button>
       {status.kind === 'ok' && <span className="text-success text-xs">{status.msg}</span>}
       {status.kind === 'err' && <span className="text-danger text-xs">{status.msg}</span>}

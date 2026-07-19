@@ -42,7 +42,7 @@ export function IntegrateGearButton({
       const data = await postJson<{ report?: Report }>(
         `/api/admin/integrate/equipment/${kind}/${encodeURIComponent(id)}`,
       );
-      if (!data.report) throw new Error('Réponse sans rapport');
+      if (!data.report) throw new Error('Response without report');
       setStatus({ kind: 'ok', report: data.report });
       router.refresh();
     } catch (e) {
@@ -59,20 +59,20 @@ export function IntegrateGearButton({
         className="bg-accent text-accent-fg rounded-md px-4 py-2 text-sm font-semibold hover:opacity-90 disabled:opacity-50"
       >
         {status.kind === 'busy'
-          ? 'Intégration…'
+          ? 'Integrating…'
           : isNew
-            ? 'Intégrer (données + images)'
-            : 'Ré-intégrer (appliquer l’extraction)'}
+            ? 'Integrate (data + images)'
+            : 'Re-integrate (apply extraction)'}
       </button>
 
       {status.kind === 'ok' && (
         <div className="border-success/40 bg-success/5 space-y-1 rounded-md border p-3 text-sm">
           <p className="text-success">
-            ✓ Intégré — {status.report.files.join(', ')} · images : {status.report.assets.staged}{' '}
-            produites
-            {status.report.assets.restaged > 0 &&
-              `, ${status.report.assets.restaged} refaites`}, {status.report.assets.present} déjà
-            là. Committe via git, puis <code>pnpm assets:push</code>.
+            ✓ Integrated — {status.report.files.join(', ')} · images: {status.report.assets.staged}{' '}
+            produced
+            {status.report.assets.restaged > 0 && `, ${status.report.assets.restaged} remade`},{' '}
+            {status.report.assets.present} already there. Commit via git, then{' '}
+            <code>pnpm assets:push</code>.
           </p>
           {status.report.assets.missing.length > 0 && (
             <ul className="text-warn text-xs">

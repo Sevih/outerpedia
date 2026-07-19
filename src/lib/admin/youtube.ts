@@ -40,7 +40,7 @@ export interface VideoCandidate extends VideoMeta {
 
 function apiKey(): string {
   const key = process.env.YOUTUBE_API_KEY;
-  if (!key) throw new Error('YOUTUBE_API_KEY manquante (à définir dans .env.local).');
+  if (!key) throw new Error('YOUTUBE_API_KEY missing (set it in .env.local).');
   return key;
 }
 

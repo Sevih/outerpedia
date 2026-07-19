@@ -55,7 +55,7 @@ export function ItemsBrowser({ entries }: { entries: CatalogEntry[] }) {
           className="border-line bg-surface-base text-content focus:border-accent w-64 rounded-md border px-2 py-1 text-sm focus:outline-none"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Nom ou id…"
+          placeholder="Name or id…"
         />
         <div className="flex flex-wrap gap-1">
           {types.map((t) => (
@@ -75,11 +75,11 @@ export function ItemsBrowser({ entries }: { entries: CatalogEntry[] }) {
         </div>
         <label className="text-content flex items-center gap-1.5 text-xs">
           <input type="checkbox" checked={noDesc} onChange={(e) => setNoDesc(e.target.checked)} />
-          sans description
+          no description
         </label>
         <label className="text-content flex items-center gap-1.5 text-xs">
           <input type="checkbox" checked={noIcon} onChange={(e) => setNoIcon(e.target.checked)} />
-          sans icône
+          no icon
         </label>
         <form
           className="flex items-center gap-1"
@@ -93,17 +93,17 @@ export function ItemsBrowser({ entries }: { entries: CatalogEntry[] }) {
             className="border-line bg-surface-base text-content focus:border-accent w-40 rounded-md border px-2 py-1 font-mono text-xs focus:outline-none"
             value={newId}
             onChange={(e) => setNewId(e.target.value)}
-            placeholder="id à créer/éditer"
+            placeholder="id to create/edit"
           />
           <button
             type="submit"
             className="border-line hover:border-accent rounded-md border px-2 py-1 text-xs"
           >
-            créer / éditer
+            create / edit
           </button>
         </form>
         <span className="text-content-subtle ml-auto text-xs">
-          {filtered.length} entrée(s){filtered.length > CAP ? ` · ${CAP} affichées` : ''}
+          {filtered.length} entry(ies){filtered.length > CAP ? ` · ${CAP} shown` : ''}
         </span>
       </div>
 
@@ -112,7 +112,7 @@ export function ItemsBrowser({ entries }: { entries: CatalogEntry[] }) {
           <thead className="text-content-subtle text-left text-xs uppercase">
             <tr className="border-line-subtle border-b">
               <th className="px-2 py-1" />
-              <th className="px-2 py-1 font-medium">Nom</th>
+              <th className="px-2 py-1 font-medium">Name</th>
               <th className="px-2 py-1 font-medium">Type</th>
               <th className="px-2 py-1 font-medium">Grade</th>
               <th className="px-2 py-1 font-medium">★</th>
@@ -142,7 +142,7 @@ export function ItemsBrowser({ entries }: { entries: CatalogEntry[] }) {
                     {e.name}
                     {e.curated && <span className="text-accent ml-1 text-[10px]">✎</span>}
                     {e.hidden && (
-                      <span className="text-content-subtle ml-1 text-[10px]">masqué</span>
+                      <span className="text-content-subtle ml-1 text-[10px]">hidden</span>
                     )}
                   </Link>
                 </td>

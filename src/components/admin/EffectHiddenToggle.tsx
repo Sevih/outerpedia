@@ -48,8 +48,8 @@ export function EffectHiddenToggle({
         disabled={busy}
         onChange={(e) => toggle(e.target.checked)}
       />
-      ignoré (live)
-      {error && <span className="text-danger">échec</span>}
+      ignored (live)
+      {error && <span className="text-danger">failed</span>}
     </label>
   );
 }

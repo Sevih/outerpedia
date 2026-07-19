@@ -70,8 +70,8 @@ function ItemSelect({
   return (
     <select className={field} value={value} onChange={(e) => onChange(e.target.value)}>
       <option value="">—</option>
-      {value.startsWith('!') && <option value={value}>⚠ {value.slice(1)} (irrésolu)</option>}
-      {missing && <option value={missing.id}>{missing.label} (hors classe)</option>}
+      {value.startsWith('!') && <option value={value}>⚠ {value.slice(1)} (unresolved)</option>}
+      {missing && <option value={missing.id}>{missing.label} (off-class)</option>}
       {options.map((o) => (
         <option key={o.id} value={o.id}>
           {o.label}
@@ -102,7 +102,7 @@ function MainStatPicker({
     set(selected.includes(s) ? selected.filter((x) => x !== s) : [...selected, s]);
   const extras = selected.filter((s) => !available.includes(s));
   if (!available.length && !selected.length)
-    return <span className="text-content-subtle px-1 text-[11px]">choisir l’équipement</span>;
+    return <span className="text-content-subtle px-1 text-[11px]">choose equipment</span>;
   return (
     <div className="flex flex-wrap items-center gap-1">
       {available.map((s) => (
@@ -124,7 +124,7 @@ function MainStatPicker({
           key={s}
           type="button"
           onClick={() => toggle(s)}
-          title="Valeur hors pool — cliquer pour retirer"
+          title="Value outside pool — click to remove"
           className="border-danger/50 text-danger rounded border px-1.5 py-0.5 text-[11px]"
         >
           {s} ✕
@@ -135,7 +135,7 @@ function MainStatPicker({
 }
 
 /** Tuile placeholder (pick vide / non résolu) — invite à choisir. */
-function EmptyTile({ text = '＋ choisir' }: { text?: string }) {
+function EmptyTile({ text = '＋ choose' }: { text?: string }) {
   return (
     <div className="border-line-subtle text-content-subtle flex h-13 items-center gap-2 rounded border border-dashed px-3 text-xs">
       {text}
@@ -258,7 +258,7 @@ export function GearRecoEditor({
     builds.forEach((b, i) => b.note?.en?.trim() && jobs.push({ i, en: b.note.en }));
     if (!jobs.length) {
       setTrans('done');
-      setTransMsg('Rien à traduire (aucune note EN).');
+      setTransMsg('Nothing to translate (no EN note).');
       return;
     }
     try {
@@ -283,8 +283,8 @@ export function GearRecoEditor({
       setTrans('done');
       setTransMsg(
         filled
-          ? `${filled} note(s) via ${provider === 'haiku' ? 'Haiku (quota DeepL atteint)' : 'DeepL'} — à revoir.`
-          : 'Notes déjà remplies.',
+          ? `${filled} note(s) via ${provider === 'haiku' ? 'Haiku (DeepL quota reached)' : 'DeepL'} — to review.`
+          : 'Notes already filled.',
       );
     } catch (e) {
       setTrans('error');
@@ -296,7 +296,7 @@ export function GearRecoEditor({
     setStatus({ kind: 'idle' });
     try {
       await postJson(`/api/admin/curated/gear-reco/${charId}`, forSave);
-      setStatus({ kind: 'ok', msg: 'Enregistré' });
+      setStatus({ kind: 'ok', msg: 'Saved' });
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });
     }
@@ -333,7 +333,7 @@ export function GearRecoEditor({
                 <button
                   type="button"
                   className={`${btn} text-danger`}
-                  title="Retirer"
+                  title="Remove"
                   onClick={() => {
                     setPicks(
                       slot,
@@ -381,7 +381,7 @@ export function GearRecoEditor({
             setEditing({ slot, index: picks.length });
           }}
         >
-          ＋ ajouter
+          ＋ add
         </button>
       </SlotCard>
     );
@@ -390,7 +390,7 @@ export function GearRecoEditor({
   return (
     <section className="space-y-4">
       <h2 className="text-content-strong text-xs font-semibold uppercase">
-        Équipement recommandé (curé)
+        Recommended gear (curated)
       </h2>
 
       {/* Onglets de builds + actions */}
@@ -425,7 +425,7 @@ export function GearRecoEditor({
           ＋ build
         </button>
         <button type="button" className={btn} onClick={openImport}>
-          Importer…
+          Import…
         </button>
       </div>
 
@@ -438,7 +438,7 @@ export function GearRecoEditor({
               value={importChar}
               onChange={(e) => setImportChar(e.target.value)}
             >
-              <option value="">{importList ? 'Choisir un perso…' : 'Chargement…'}</option>
+              <option value="">{importList ? 'Choose a character…' : 'Loading…'}</option>
               {importList?.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.name}
@@ -446,7 +446,7 @@ export function GearRecoEditor({
               ))}
             </select>
             <button type="button" className={btn} onClick={() => setImportOpen(false)}>
-              Fermer
+              Close
             </button>
           </div>
           {importChar &&
@@ -456,7 +456,7 @@ export function GearRecoEditor({
                 <div key={i} className="flex items-center gap-2">
                   <span className="text-content text-sm">{b.name || `Build ${i + 1}`}</span>
                   <button type="button" className={btn} onClick={() => importBuild(b)}>
-                    Importer ce build
+                    Import this build
                   </button>
                 </div>
               ))}
@@ -464,7 +464,7 @@ export function GearRecoEditor({
       )}
 
       {!build ? (
-        <p className="text-content-subtle text-sm">Aucun build. Ajoute-en un.</p>
+        <p className="text-content-subtle text-sm">No build. Add one.</p>
       ) : (
         <div className="border-line-subtle space-y-4 rounded-lg border p-3">
           {/* Nom + actions du build actif */}
@@ -472,7 +472,7 @@ export function GearRecoEditor({
             <input
               className={`${field} max-w-60 font-semibold`}
               value={build.name}
-              placeholder="Nom du build (Speed, PvP…)"
+              placeholder="Build name (Speed, PvP…)"
               onChange={(e) => patch({ name: e.target.value })}
             />
             <button
@@ -481,13 +481,13 @@ export function GearRecoEditor({
               onClick={() =>
                 setBuilds((all) => {
                   const copy = structuredClone(all[ai]);
-                  copy.name = `${copy.name} (copie)`;
+                  copy.name = `${copy.name} (copy)`;
                   copy._key = rowKey();
                   return [...all.slice(0, ai + 1), copy, ...all.slice(ai + 1)];
                 })
               }
             >
-              Dupliquer
+              Duplicate
             </button>
             <button
               type="button"
@@ -498,14 +498,14 @@ export function GearRecoEditor({
                 setEditing(null);
               }}
             >
-              Supprimer le build
+              Delete build
             </button>
           </div>
 
           {/* Grille de slots — tuiles cliquables */}
           <div className="grid gap-3 sm:grid-cols-2">
-            {pickSlot('weapons', 'Armes', build.weapons ?? [], weaponOpts, options.weapons)}
-            {pickSlot('amulets', 'Amulettes', build.amulets ?? [], amuletOpts, options.amulets)}
+            {pickSlot('weapons', 'Weapons', build.weapons ?? [], weaponOpts, options.weapons)}
+            {pickSlot('amulets', 'Amulets', build.amulets ?? [], amuletOpts, options.amulets)}
 
             {/* Talismans */}
             <SlotCard label="Talismans">
@@ -530,7 +530,7 @@ export function GearRecoEditor({
                       <button
                         type="button"
                         className={`${btn} text-danger`}
-                        title="Retirer"
+                        title="Remove"
                         onClick={() => {
                           setTalismans((build.talismans ?? []).filter((_, j) => j !== i));
                           setEditing(null);
@@ -561,7 +561,7 @@ export function GearRecoEditor({
                   setEditing({ slot: 'talismans', index: (build.talismans ?? []).length });
                 }}
               >
-                ＋ ajouter
+                ＋ add
               </button>
             </SlotCard>
 
@@ -650,14 +650,14 @@ export function GearRecoEditor({
                           )
                         }
                       >
-                        ＋ pièce
+                        ＋ piece
                       </button>
                       <button
                         type="button"
                         className={`${btn} text-danger`}
                         onClick={() => setSets((build.sets ?? []).filter((_, j) => j !== ci))}
                       >
-                        Retirer le combo
+                        Remove combo
                       </button>
                     </div>
                   </div>
@@ -677,7 +677,7 @@ export function GearRecoEditor({
 
           {/* Substats */}
           <div className="space-y-1">
-            <p className={label}>Substats (priorité « ATK&gt;CHC=CHD&gt;SPD »)</p>
+            <p className={label}>Substats (priority “ATK&gt;CHC=CHD&gt;SPD”)</p>
             {build.substats && <SubstatPrioBar prio={build.substats} />}
             <input
               className={field}
@@ -726,16 +726,16 @@ export function GearRecoEditor({
           className={btn}
           onClick={translateNotes}
           disabled={trans === 'loading'}
-          title="Traduit les notes EN vers les langues encore vides"
+          title="Translates EN notes to the still-empty languages"
         >
-          {trans === 'loading' ? 'Traduction…' : 'Traduire notes (EN → vides)'}
+          {trans === 'loading' ? 'Translating…' : 'Translate notes (EN → empty)'}
         </button>
         <button
           type="button"
           onClick={save}
           className="bg-accent text-accent-fg rounded-md px-4 py-1.5 text-sm font-semibold hover:opacity-90"
         >
-          Enregistrer
+          Save
         </button>
         {transMsg && (
           <span className={`text-sm ${trans === 'error' ? 'text-danger' : 'text-content-subtle'}`}>

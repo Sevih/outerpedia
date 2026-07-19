@@ -40,8 +40,8 @@ export function GroupPicker({
       }
       onPick={(o) => onSelect(o.group)}
       onClear={() => onSelect('')}
-      placeholder="Chercher un combat…"
-      changeTitle="Changer de combat"
+      placeholder="Search a battle…"
+      changeTitle="Change battle"
     />
   );
 }

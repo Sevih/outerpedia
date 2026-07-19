@@ -62,13 +62,13 @@ export default async function ExtractorMonsterPage({
     if (!step) return undefined;
     const at =
       m.rage!.trigger === 'hp_rate'
-        ? `à ${step.value / 10}% PV`
+        ? `at ${step.value / 10}% HP`
         : m.rage!.trigger === 'lose_hp_value'
-          ? `tous les ${step.value.toLocaleString('en-US')} PV perdus`
+          ? `every ${step.value.toLocaleString('en-US')} HP lost`
           : m.rage!.trigger === 'turn_count'
-            ? `au tour ${step.value}`
+            ? `at turn ${step.value}`
             : `${m.rage!.trigger} ${step.value}`;
-    return step.duration ? `${at} · ${step.duration} tours` : at;
+    return step.duration ? `${at} · ${step.duration} turns` : at;
   };
 
   // Skills pré-localisés (EN), MÊME rendu que les persos — vue « kit » monstre
@@ -165,7 +165,7 @@ export default async function ExtractorMonsterPage({
             )}
           </span>
           <span>
-            {m.name.en || '(sans nom)'}
+            {m.name.en || '(no name)'}
             {m.nickname?.en && (
               <span className="text-content-subtle ml-2 text-sm font-normal">{m.nickname.en}</span>
             )}
@@ -183,9 +183,9 @@ export default async function ExtractorMonsterPage({
           {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img src={img.klass(m.class)} alt={m.class} title={m.class} className="h-4.5 w-4.5" />
           {m.subClass ? `/ ${m.subClass}` : ''} · {m.race} · {m.rarity}★
-          {m.aiType ? ` · IA ${m.aiType}` : ''}
+          {m.aiType ? ` · AI ${m.aiType}` : ''}
           {review.status === 'removed' && (
-            <span className="text-warn ml-2">absent de l’extraction fraîche (retenu committé)</span>
+            <span className="text-warn ml-2">absent from fresh extraction (committed kept)</span>
           )}
         </p>
       </div>
@@ -203,7 +203,7 @@ export default async function ExtractorMonsterPage({
       {archives.length > 0 && (
         <div className="border-line-subtle rounded-lg border p-3 text-sm">
           <p className="text-content-strong mb-1 text-xs font-semibold uppercase">
-            Versions figées (épinglables par les guides)
+            Frozen versions (pinnable by guides)
           </p>
           <ul className="space-y-0.5">
             {archives.map((a) => (
@@ -212,7 +212,7 @@ export default async function ExtractorMonsterPage({
                   {a.id}@{a.version}
                 </code>{' '}
                 — {a.committedAt.slice(0, 10)}, source {a.ref}
-                {a.gameVersion ? `, jeu ${a.gameVersion}` : ''}
+                {a.gameVersion ? `, game ${a.gameVersion}` : ''}
                 {a.label ? ` — ${a.label}` : ''} · {Object.keys(a.skills).length} skill(s)
               </li>
             ))}
@@ -222,7 +222,7 @@ export default async function ExtractorMonsterPage({
 
       <section className="space-y-2">
         <h2 className="text-content-strong text-xs font-semibold uppercase">
-          Rencontres ({spawns.length})
+          Encounters ({spawns.length})
         </h2>
         {spawns.length > 0 ? (
           <ul className="space-y-0.5 text-xs">
@@ -234,19 +234,19 @@ export default async function ExtractorMonsterPage({
                 {s.ref!.area?.en ? ` (${s.ref!.area.en})` : ''}
                 {' · '}
                 <span className="text-content">Lv {s.level}</span>
-                {s.hpLines ? ` · ${s.hpLines} barres` : ''}
+                {s.hpLines ? ` · ${s.hpLines} bars` : ''}
               </li>
             ))}
             {spawns.length > 25 && (
-              <li className="text-content-subtle">… {spawns.length - 25} de plus</li>
+              <li className="text-content-subtle">… {spawns.length - 25} more</li>
             )}
           </ul>
         ) : summoners.length > 0 || linked.length > 0 ? (
           <p className="text-content-subtle text-xs">
-            Jamais spawné directement —{' '}
+            Never spawned directly —{' '}
             {summoners.length > 0 && (
               <>
-                invoqué par :{' '}
+                summoned by:{' '}
                 {summoners.map((s, i) => (
                   <span key={s.id}>
                     {i > 0 && ', '}
@@ -263,7 +263,7 @@ export default async function ExtractorMonsterPage({
             )}
             {linked.length > 0 && (
               <>
-                lié au kit de :{' '}
+                linked to the kit of:{' '}
                 {linked.map((s, i) => (
                   <span key={s.id}>
                     {i > 0 && ', '}
@@ -278,16 +278,16 @@ export default async function ExtractorMonsterPage({
                 .{' '}
               </>
             )}
-            Localisation via ces monstres.
+            Located via these monsters.
           </p>
         ) : (
           <p className="text-content-subtle text-xs">
-            Aucun spawn ni invocateur trouvé (contenu retiré ou à venir ?).
+            No spawn or summoner found (removed or upcoming content?).
           </p>
         )}
         {summons.length > 0 && (
           <p className="text-content-subtle text-xs">
-            Invoque :{' '}
+            Summons:{' '}
             {summons.map((s, i) => (
               <span key={s.id}>
                 {i > 0 && ', '}
@@ -304,9 +304,7 @@ export default async function ExtractorMonsterPage({
       </section>
 
       <section className="space-y-2">
-        <h2 className="text-content-strong text-xs font-semibold uppercase">
-          Stats à la rencontre
-        </h2>
+        <h2 className="text-content-strong text-xs font-semibold uppercase">Encounter stats</h2>
         <MonsterStatsCard
           stats={m.stats}
           scales={glossaries.statScales}
@@ -318,17 +316,17 @@ export default async function ExtractorMonsterPage({
 
       {(immunityEffects.length > 0 || unresolvedImmunities.length > 0) && (
         <section className="space-y-2">
-          <h2 className="text-content-strong text-xs font-semibold uppercase">Immunités</h2>
+          <h2 className="text-content-strong text-xs font-semibold uppercase">Immunities</h2>
           {immunityEffects.length > 0 && (
             <EffectChipsRow effects={immunityEffects} statuses={statuses} />
           )}
           {unresolvedImmunities.length > 0 && (
             <p className="text-content-subtle text-xs">
-              ⚠ sans entrée au glossaire d’effets :{' '}
+              ⚠ no entry in the effects glossary:{' '}
               {unresolvedImmunities
                 .map((ref) => {
                   const name = /^\d+$/.test(ref) ? tooltipName(ref) : undefined;
-                  return name ? `${ref} « ${name} »` : ref;
+                  return name ? `${ref} “${name}”` : ref;
                 })
                 .join(', ')}
             </p>
