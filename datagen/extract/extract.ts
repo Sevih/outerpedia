@@ -2,14 +2,17 @@
  * extract — lance AssetStudioModCLI sur les bundles pour en sortir :
  *   - les .bytes (templates + textes)  → .gamedata/extracted/bytes/
  *   - les images (sprite/tex2d)        → .gamedata/extracted/images/
+ *   - l'audio (OST/BGM → mp3)          → .gamedata/extracted/audio/bgm/
  *
  * Étape locale (l'outil .NET n'est pas réécrit en TS, juste piloté proprement).
- * Le convert (.bytes → templates typés) viendra ensuite, en TS.
+ * Le convert (.bytes → templates typés) viendra ensuite, en TS. L'audio est
+ * délégué à `extract-audio.ts` (extraction WAV + fusion + mp3, cf. son en-tête).
  *
  * Usage :
- *   pnpm datagen:extract           # bytes + images
+ *   pnpm datagen:extract           # bytes + images + audio
  *   pnpm datagen:extract bytes     # uniquement les .bytes
  *   pnpm datagen:extract images    # uniquement les images
+ *   pnpm datagen:extract audio     # uniquement l'OST (= pnpm datagen:extract-audio)
  *
  * Chemin de l'outil surchargeable via ASTUDIO_CLI.
  */
@@ -18,6 +21,7 @@ import { mkdirSync } from 'node:fs';
 import { cpus } from 'node:os';
 import { resolve } from 'node:path';
 import { ASSETSTUDIO, ensureTool } from './tools';
+import { runAudio } from './extract-audio';
 
 const ROOT = resolve('.gamedata');
 // Surcharge explicite via ASTUDIO_CLI ; sinon `ensureTool` le résout (et le tire
@@ -86,4 +90,6 @@ function extractImages(): void {
 const what = process.argv[2] ?? 'all';
 if (what === 'bytes' || what === 'all') extractBytes();
 if (what === 'images' || what === 'all') extractImages();
+// L'audio (OST) : sa propre chaîne (WAV → fusion intro/loop → mp3), déléguée.
+if (what === 'audio' || what === 'all') runAudio();
 console.log('✅ Extraction terminée.');

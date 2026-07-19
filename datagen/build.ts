@@ -51,6 +51,7 @@ import { buildAssetTypes, buildGoods } from './generators/goods';
 import { buildCostumes } from './generators/costumes';
 import { buildItemCatalog } from './generators/item-catalog';
 import { buildGameVersion } from './generators/game-version';
+import { buildBgmMapping } from './generators/bgm-mapping';
 import { buildSkills } from './generators/skills';
 import { buildUnlockContent } from './generators/unlock-content';
 import { buildRecruit } from './generators/recruit';
@@ -211,6 +212,10 @@ async function main(): Promise<void> {
   await writeJson('monad/routes.json', Object.fromEntries(monad.routes.map((r) => [r.groupId, r])));
   const gameVersion = buildGameVersion();
   if (gameVersion) await writeJson('game-version.json', gameVersion);
+  // Mapping de l'OST (jukebox /ost) : noms localisés + métadonnées, dérivés du
+  // pool audio extrait (.gamedata/extracted/audio/bgm — cf. extract-audio) et des
+  // tables lobby/textes. Suppose l'audio extrait en amont (extract → build).
+  await writeJson('bgm_mapping.json', await buildBgmMapping());
 
   const equip: EquipmentFiles = equipment;
   const slots: (keyof EquipmentFiles)[] = [

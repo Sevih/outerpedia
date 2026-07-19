@@ -19,7 +19,8 @@
  * les images extraites, pool V3-owned (fin de la dépendance à
  * `outerpedia-v2/public/audio/bgm`). `assets:collect-audio` le collecte ensuite.
  *
- * Usage : `pnpm datagen:extract-audio`
+ * Usage : `pnpm datagen:extract-audio` (autonome), OU branché sur l'ombrelle
+ * `pnpm datagen:extract [all]` via `runAudio()` (cf. datagen/extract/extract.ts).
  * Surcharges : ASTUDIO_CLI (exe), FFMPEG (binaire ffmpeg).
  */
 import { execFileSync } from 'node:child_process';
@@ -34,6 +35,7 @@ import {
 } from 'node:fs';
 import { cpus } from 'node:os';
 import { parse as parsePath, resolve } from 'node:path';
+import { isMain } from '../lib/is-main';
 import { ASSETSTUDIO, ensureTool } from './tools';
 
 const ROOT = resolve('.gamedata');
@@ -168,7 +170,8 @@ function convertToMp3(ffmpeg: string, input: string, out: string): void {
   });
 }
 
-function run(): void {
+/** Extraction complète de l'OST — appelable seul ou depuis l'ombrelle `extract`. */
+export function runAudio(): void {
   if (!existsSync(BUNDLES)) {
     throw new Error(`bundles absents (${BUNDLES}) — lance d'abord la récupération des bundles.`);
   }
@@ -209,4 +212,4 @@ function run(): void {
   );
 }
 
-run();
+if (isMain(import.meta.url)) runAudio();
