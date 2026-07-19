@@ -519,7 +519,9 @@ export function buildAssetManifest(): AssetRequest[] {
       ],
     ],
     ['evo', ['CM_Evolution_Tab', 'CM_Evolution_Tab_Select']],
-    ['rank', ['SSS', 'SS', 'S', 'A', 'B', 'C', 'D'].map((r) => `IG_Event_Rank_${r}`)],
+    // NB : les rangs `IG_Event_Rank_*` NE sont PAS collectés ici. Les sprites du
+    // jeu sont minuscules ; Sevih a upscalé/retravaillé les siens en V2. On les
+    // ramène donc en éditorial depuis le pool V2 (voir plus bas), pas du jeu.
     [
       'skills',
       ['CM_Skill_Icon_Burst', 'IG_Button_Burst_01', 'IG_Button_Burst_02', 'IG_Button_Burst_03'],
@@ -1023,6 +1025,16 @@ export function buildAssetManifest(): AssetRequest[] {
     source: 'discord.webp',
     domain: 'editorial',
   });
+  // Rangs `IG_Event_Rank_*` (glyphe de la landing tierlist, `img.rank`) : les
+  // sprites bruts du jeu sont minuscules — on prend les versions upscalées que
+  // Sevih a retravaillées en V2, pas celles de l'extraction.
+  for (const r of ['SSS', 'SS', 'S', 'A', 'B', 'C', 'D'])
+    push({
+      kind: 'editorial',
+      key: `images/ui/rank/IG_Event_Rank_${r}.webp`,
+      source: `ui/rank/IG_Event_Rank_${r}.webp`,
+      domain: 'editorial',
+    });
   // Icônes du widget Daily Buff de l'accueil (retravaillées pour le wiki).
   for (const buff of [
     'TI_Item_Event_Gold',

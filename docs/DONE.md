@@ -17,6 +17,10 @@
   rail=ciel), `FlagshipCard` à **panneau d'art** (dégradé radial + texture rayée +
   grand glyphe S centré), `VsBadge` (médaillon dégradé), `OtherRankingsRail`.
   Cluster de portraits top-tier toujours omis (pas de donnée de rang en V3).
+  _Correctif (retour Sevih)_ : le glyphe de rang prenait les sprites `IG_Event_Rank_*`
+  BRUTS du jeu (minuscules, ~1,6 Ko). Sevih avait upscalé les siens en V2 → on
+  retire le rang des sprites de jeu du manifeste et on le ramène en **éditorial**
+  depuis le pool V2 (`ui/rank/IG_Event_Rank_*`, S = 7,6 Ko). Staging resynchronisé.
 - **Hub `/tierlist`** — dernière page manquante de l'inventaire footer/nav
   (layout d'abord). Hero (`getMonthYear`, compteurs rankings/units), deux cartes
   phares **PvE vs PvP** (badge VS central) et un rail vers 3 autres classements
