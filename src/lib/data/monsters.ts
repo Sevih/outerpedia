@@ -31,6 +31,16 @@ export function getMonster(id: string): Monster | undefined {
 }
 
 /**
+ * Tous les monstres, étiquetés par leur nom — pour un SÉLECTEUR (admin, guides
+ * dimensional-singularity : `meta.bossId`). Trié par nom.
+ */
+export function listMonsters(lang: Lang): { id: string; label: string }[] {
+  return Object.entries(MONSTERS())
+    .map(([id, m]) => ({ id, label: lRec(m.name, lang) || id }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+}
+
+/**
  * Noms d'affichage d'un ENSEMBLE de monstres, l'élément entrant dans le nom
  * quand — et seulement quand — plusieurs monstres de l'ensemble le partagent.
  *

@@ -219,6 +219,18 @@ export function listGroups(lang: Lang): { group: string; label: string }[] {
 }
 
 /**
+ * Tous les DONJONS peuplés, étiquetés par leur nom et leur mode — pour un
+ * SÉLECTEUR (admin, guides adventure : `meta.dungeons`). On ne fabrique jamais
+ * un id de donjon, on choisit parmi ceux d'`encounters.json`.
+ */
+export function listDungeons(lang: Lang): { id: string; label: string }[] {
+  return Object.entries(DUNGEONS)
+    .filter(([, d]) => d.monsters?.length)
+    .map(([id, d]) => ({ id, label: `${lRec(d.name, lang) || id} · ${modeLabel(d, lang)}` }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+}
+
+/**
  * Un COMBATTANT d'une échelle de stages — l'unité de carte des modes à N stages.
  *
  * Le Special Request rejoue le même combat sur 13 stages, mais chaque stage

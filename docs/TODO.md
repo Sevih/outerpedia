@@ -18,18 +18,16 @@
 > switches/pickers/sidebars, câblage buff/debuff perso. Détail dans DONE.md.
 > Ne restent ci-dessous que les reliquats.
 
-- [ ] **Éditeurs pour mettre à jour les guides** — dernier éditeur manquant de
-      la matrice admin (l'éditeur gear s'est réduit à l'EE, FAIT le 18/07 → DONE :
-      armes/amulettes/talismans/sets n'ont pas de curation à éditer).
-      PILOTE joint-challenge LIVRÉ le 19/07 (éditeur unifié « guide de boss »,
-      cf. DONE). RESTE : brancher les autres catégories de la famille sur le même
-      shell — **special-request** / **irregular-extermination** / **adventure-license**
-      (plats, monstre = `meta.group`), **adventure** (monstre = `meta.dungeons`,
-      pas de teams), **dimensional-singularity** (monstre = `meta.bossId`, teams =
-      groupes sans slots) ; chacune = un adaptateur `guide-draft` + un picker de
-      monstre adapté. HORS scope unifié (décision Sevih 19/07) : **guild-raid**,
-      **world-boss**, **general-guides/other**, **skyward-tower**, **monad-gate**
-      (structures bespoke / sans contenu éditorial).
+- [x] ~~**Éditeurs pour mettre à jour les guides** — dernier éditeur manquant de
+      la matrice admin.~~ FAIT le 19/07 (cf. DONE) : éditeur unifié « guide de
+      boss » livré sur TOUTE la famille éditable — **joint-challenge** (versionné),
+      **special-request**, **irregular-extermination**, **adventure-license**,
+      **adventure**, **dimensional-singularity** (spec par catégorie : versionné /
+      plat / `content.json`, monstre par group / dungeons / bossId, équipes
+      slots / buckets / named / sections). HORS scope unifié (décision Sevih 19/07,
+      structures bespoke / sans contenu éditorial) : **guild-raid**, **world-boss**,
+      **general-guides/other**, **skyward-tower**, **monad-gate** — éditeurs
+      dédiés seulement si le besoin se présente.
 - [ ] **Regen coupons/banner V2 = EXCEPTION assumée** — la source V2 reste la
       référence jusqu'à la bascule prod V2→V3 (liée à la page `/coupons`). Rien
       à faire d'ici là.

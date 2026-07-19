@@ -6,6 +6,27 @@
 
 ## 2026-07-19
 
+- **Guide editor — famille complète (6 catégories) sur un shell unifié** — suite
+  du pilote joint-challenge : l'éditeur couvre désormais TOUTE la famille de boss.
+  Généralisation autour d'un **`CatSpec` par catégorie** (`guide-draft.ts`), qui
+  décrit un stockage divergent derrière un unique modèle éditable :
+  - **stockage** : versionné (`versions/YYYY-MM/*.json`, JC), plat (fichiers
+    racine, special-request / irregular / adventure-license), ou **`content.json`
+    mono-fichier** (adventure, dimensional-singularity) ;
+  - **monstre** : `config.group` (JC), `meta.group` (plates), `meta.dungeons`
+    ordonnés (adventure, picker donjon), `meta.bossId` (dim, picker monstre) —
+    écriture `meta.json` en read-merge-write ;
+  - **équipes** : une équipe `slots` (JC), **buckets par plage de stages**
+    (special-request), **nommées** titre `SectionTitle` + note multi-§ (irregular /
+    adventure-license), ou **persos en sections** (dim = `content.teams`) ;
+  - conseils en **sections titrées** (JC, dim) ou liste plate ; les titres
+    `SectionTitle` non libres (preset/perso/élément/effet) sont préservés et
+    éditables en libre. Nouveaux helpers data `listGroups`/`listDungeons`
+    (`encounters.ts`) + `listMonsters` (`monsters.ts`), picker générique
+    `IdLabelPicker`. Autotrad EN→vides couvrant tous les textes (intro, conseils,
+    notes, raisons, titres, notes d'équipe). HORS scope : guild-raid, world-boss,
+    general-guides/other, skyward-tower, monad-gate. Aperçu fidèle partout via le
+    même pipeline de descripteurs (`previewMode="list"` pour les conseils).
 - **Landing `/tools`** — 5ᵉ 404 du footer fermée (landing seule, décision Sevih :
   le layout d'abord, les 18 sous-outils viendront après). Données curées ramenées
   du V2 (`data/curated/tools/_categories.json` + `_index.json`) ; domaine

@@ -1,24 +1,29 @@
 'use client';
 
 /**
- * Éditeur UNIFIÉ d'un guide de boss VERSIONNÉ (pilote : joint-challenge).
+ * Éditeur UNIFIÉ des guides de boss de la famille (joint-challenge,
+ * special-request, irregular-extermination, adventure-license).
  *
- * Modèle métier (Sevih) : 1 monstre désigné (obligatoire) + conseils + persos +
- * équipe + vidéos, le tout par version. Les parties éditables sont réparties en
- * ONGLETS (comme l'éditeur perso). Chaque texte est un `InlineTextField` (aperçu
- * fidèle intégré via le vrai `parseText`) ; les conseils s'éditent en BLOC (une
- * ligne = un conseil) avec un unique rendu en liste, comme sur le vrai guide.
+ * Une seule UI pilotée par le `CatSpec` de la catégorie : versionné ou plat,
+ * monstre par `group`, équipes en `slots` / `buckets` (plages de stages) /
+ * `named` (équipes titrées). Chaque texte est un `InlineTextField` (aperçu
+ * fidèle via le vrai `parseText`) ; les conseils s'éditent en BLOC (une ligne =
+ * un conseil) avec un unique rendu en liste, comme sur le vrai guide.
  */
 import { useState } from 'react';
 import type { VideoRef } from '@contracts';
 import { type Keyed, stripKey, withKey } from '@/lib/admin/keyed';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
-import type {
-  GuideDraft,
-  LText,
-  RecoGroupDraft,
-  TipSectionDraft,
-  VersionDraft,
+import {
+  guideSpec,
+  hasText,
+  type GuideDraft,
+  type LText,
+  type RecoGroupDraft,
+  type RecoSectionDraft,
+  type TeamDraft,
+  type TipSectionDraft,
+  type VersionDraft,
 } from '@/lib/admin/guide-draft';
 import { autoTranslate } from '@/lib/admin/translate-actions';
 import { EditorTabs } from '@/components/admin/EditorTabs';
@@ -26,6 +31,7 @@ import { InlineTextField } from '@/components/admin/InlineTextField';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import type { CharOption } from '@/components/admin/CharacterPicker';
 import { GroupPicker, type GroupOption } from '@/components/admin/GroupPicker';
+import { IdLabelPicker, type IdLabel } from '@/components/admin/IdLabelPicker';
 import { VideoCurator } from '@/components/admin/VideoCurator';
 import type { VideoItem } from '@/components/ui/MultiVideoEmbed';
 
@@ -38,17 +44,12 @@ const btn =
 const input =
   'w-full rounded-md border border-line bg-surface-base px-2 py-1 text-sm focus:border-accent focus:outline-none';
 const heading = 'text-content-strong text-sm font-semibold';
-const hasText = (t?: LText): boolean =>
-  t ? Object.values(t).some((x) => typeof x === 'string' && x.trim()) : false;
 
-/** Conseils d'une langue → un bloc (une ligne par conseil). */
 const itemsToBlock = (items: LText[], lang: L): string =>
   items.map((t) => t[lang] ?? '').join('\n');
-
 /**
- * Bloc édité → liste de conseils localisés. L'EN est la STRUCTURE : l'éditer
- * ajoute/retire des conseils ; éditer une autre langue ne fait que remplir les
- * traductions par index, sans jamais changer le nombre de conseils.
+ * Bloc édité → liste localisée. L'EN est la STRUCTURE : l'éditer ajoute/retire
+ * des entrées ; une autre langue ne fait que remplir les traductions par index.
  */
 const blockToItems = (block: string, prev: LText[], lang: L): LText[] => {
   const lines = block.split('\n');
@@ -132,6 +133,8 @@ export function GuideEditor({
   refs,
   charOptions,
   groupOptions,
+  dungeonOptions = [],
+  monsterOptions = [],
 }: {
   category: string;
   slug: string;
@@ -139,7 +142,10 @@ export function GuideEditor({
   refs: InlineRefs;
   charOptions: CharOption[];
   groupOptions: GroupOption[];
+  dungeonOptions?: IdLabel[];
+  monsterOptions?: IdLabel[];
 }) {
+  const spec = guideSpec(category);
   const [lang, setLang] = useState<L>('en');
   const [intro, setIntro] = useState<LText>(initial.intro);
   const [versions, setVersions] = useState<Keyed<VersionDraft>[]>(() =>
@@ -150,7 +156,6 @@ export function GuideEditor({
   const [error, setError] = useState<string | null>(null);
   const [trans, setTrans] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
   const [transMsg, setTransMsg] = useState<string | null>(null);
-  // Ajout de version : brouillon de clé + version source à dupliquer.
   const [adding, setAdding] = useState(false);
   const [newKey, setNewKey] = useState('');
   const [fromKey, setFromKey] = useState('');
@@ -158,18 +163,22 @@ export function GuideEditor({
 
   const charByName = new Map(charOptions.map((c) => [c.name, c]));
   const groupLabel = (g?: string) => groupOptions.find((o) => o.group === g)?.label ?? g ?? '';
+  const dungeonLabel = (id: string) => dungeonOptions.find((o) => o.id === id)?.label ?? id;
+  const titlePlaceholder = (hasRaw: boolean, title?: LText) =>
+    hasRaw && !hasText(title)
+      ? 'Titre auto (généré) — écrire pour forcer'
+      : `Titre (optionnel${lang === 'en' ? '' : `, EN : ${title?.en ?? '—'}`})`;
+
+  if (!spec) return <p className="text-content-subtle text-sm">Catégorie non éditable.</p>;
 
   const v: Keyed<VersionDraft> | undefined = versions[active];
 
-  /** Remplace la version active par une version patchée. */
   const patch = (p: Partial<VersionDraft>) => {
     if (!v) return;
     const next = versions.slice();
     next[active] = { ...v, ...p };
     setVersions(next);
   };
-
-  /** Édite une valeur localisée pour la langue courante (préserve les autres). */
   const editLText = (cur: LText | undefined, val: string): LText => {
     const next: LText = { ...(cur ?? { en: '' }) };
     if (val) next[lang] = val;
@@ -177,77 +186,83 @@ export function GuideEditor({
     if (next.en === undefined) next.en = '';
     return next;
   };
-  /** Valeur affichée d'un LText pour la langue courante. */
   const show = (t: LText | undefined): string => t?.[lang] ?? '';
-  /** LText nettoyé → undefined si entièrement vide. */
   const orUndef = (t: LText): LText | undefined => (hasText(t) ? t : undefined);
 
   /* --- Auto-traduction (version active + intro) --- */
   async function translateEmpty() {
+    if (!v) return;
     setTrans('loading');
     setTransMsg(null);
     const targets = LANGS.filter((l) => l !== 'en');
-    type Job =
-      | { en: string; t: 'intro' }
-      | { en: string; t: 'tip'; si: number; ti: number }
-      | { en: string; t: 'note'; i: number }
-      | { en: string; t: 'reason'; gi: number }
-      | { en: string; t: 'teamNote' };
-    const jobs: Job[] = [];
-    if (intro.en?.trim()) jobs.push({ en: intro.en, t: 'intro' });
-    v?.tipSections.forEach((s, si) =>
-      s.tips.forEach((tip, ti) => tip.en?.trim() && jobs.push({ en: tip.en, t: 'tip', si, ti })),
-    );
-    v?.notes.forEach((n, i) => n.en?.trim() && jobs.push({ en: n.en, t: 'note', i }));
-    v?.recommended.forEach(
-      (g, gi) => g.reason?.en?.trim() && jobs.push({ en: g.reason.en, t: 'reason', gi }),
-    );
-    if (v?.teamNote?.en?.trim()) jobs.push({ en: v.teamNote.en, t: 'teamNote' });
 
-    if (!jobs.length) {
+    const nextIntro: LText = { ...intro };
+    const cv: VersionDraft = {
+      ...v,
+      tipSections: v.tipSections.map((s) => ({
+        ...s,
+        title: s.title ? { ...s.title } : undefined,
+        tips: s.tips.map((t) => ({ ...t })),
+      })),
+      notes: v.notes.map((t) => ({ ...t })),
+      recommended: v.recommended.map((g) => ({
+        ...g,
+        reason: g.reason ? { ...g.reason } : undefined,
+      })),
+      recoSections: v.recoSections.map((s) => ({
+        ...s,
+        title: s.title ? { ...s.title } : undefined,
+        groups: s.groups.map((g) => ({ ...g, reason: g.reason ? { ...g.reason } : undefined })),
+      })),
+      teams: v.teams.map((t) => ({
+        ...t,
+        title: t.title ? { ...t.title } : undefined,
+        note: t.note ? { ...t.note } : undefined,
+        notes: t.notes ? t.notes.map((n) => ({ ...n })) : undefined,
+      })),
+    };
+
+    // Collecte des LText EXISTANTS avec un EN (on ne remplit que les vides).
+    const recs: LText[] = [];
+    if (nextIntro.en?.trim()) recs.push(nextIntro);
+    cv.tipSections.forEach((s) => {
+      if (s.title?.en?.trim()) recs.push(s.title);
+      s.tips.forEach((t) => t.en?.trim() && recs.push(t));
+    });
+    cv.notes.forEach((t) => t.en?.trim() && recs.push(t));
+    cv.recommended.forEach((g) => g.reason?.en?.trim() && recs.push(g.reason));
+    cv.recoSections.forEach((s) => {
+      if (s.title?.en?.trim()) recs.push(s.title);
+      s.groups.forEach((g) => g.reason?.en?.trim() && recs.push(g.reason));
+    });
+    cv.teams.forEach((t) => {
+      if (t.title?.en?.trim()) recs.push(t.title);
+      if (t.note?.en?.trim()) recs.push(t.note);
+      t.notes?.forEach((n) => n.en?.trim() && recs.push(n));
+    });
+
+    if (!recs.length) {
       setTrans('done');
       setTransMsg('Rien à traduire (aucun texte EN).');
       return;
     }
     try {
       const { results, provider } = await autoTranslate(
-        jobs.map((j) => j.en),
+        recs.map((r) => r.en),
         targets,
       );
       let filled = 0;
-      const fillInto = (rec: LText, tr: Partial<Record<L, string>>) => {
+      recs.forEach((rec, k) => {
+        const tr = (results[k] ?? {}) as Partial<Record<L, string>>;
         for (const l of targets) {
           if (tr[l] && !rec[l]?.trim()) {
             rec[l] = tr[l]!;
             filled++;
           }
         }
-      };
-      const nextIntro: LText = { ...intro };
-      const tipSections: TipSectionDraft[] = v
-        ? v.tipSections.map((s) => ({ ...s, tips: s.tips.map((t) => ({ ...t })) }))
-        : [];
-      const notes = v ? v.notes.map((t) => ({ ...t })) : [];
-      const reco: RecoGroupDraft[] = v
-        ? v.recommended.map((g) => ({ ...g, reason: g.reason ? { ...g.reason } : undefined }))
-        : [];
-      const teamNote: LText | undefined = v?.teamNote ? { ...v.teamNote } : undefined;
-
-      jobs.forEach((job, k) => {
-        const tr = (results[k] ?? {}) as Partial<Record<L, string>>;
-        if (job.t === 'intro') fillInto(nextIntro, tr);
-        else if (job.t === 'tip') fillInto(tipSections[job.si].tips[job.ti], tr);
-        else if (job.t === 'note') fillInto(notes[job.i], tr);
-        else if (job.t === 'reason') {
-          const g = reco[job.gi];
-          const reason: LText = { ...(g.reason ?? { en: '' }) };
-          fillInto(reason, tr);
-          g.reason = reason;
-        } else if (job.t === 'teamNote' && teamNote) fillInto(teamNote, tr);
       });
-
       setIntro(nextIntro);
-      if (v) patch({ tipSections, notes, recommended: reco, teamNote });
+      patch(cv);
       setTrans('done');
       setTransMsg(
         filled
@@ -260,7 +275,7 @@ export function GuideEditor({
     }
   }
 
-  /* --- Enregistrement --- */
+  /* --- Enregistrement / ajout de version --- */
   async function save() {
     setState('saving');
     setError(null);
@@ -280,7 +295,6 @@ export function GuideEditor({
     }
   }
 
-  /* --- Ajout d'une version (duplication) --- */
   async function confirmAddVersion() {
     setAddBusy(true);
     setError(null);
@@ -305,9 +319,98 @@ export function GuideEditor({
     }
   }
 
-  /* --- Contenus des onglets de la version active --- */
+  /* --- Bloc de slots réutilisable (max 4) --- */
+  function SlotsBlock({
+    slots,
+    onChange,
+  }: {
+    slots: string[][];
+    onChange: (slots: string[][]) => void;
+  }) {
+    return (
+      <div className="space-y-2">
+        {slots.map((slot, si) => (
+          <div key={si} className="flex items-start gap-2">
+            <span className="text-content-subtle mt-3 w-6 shrink-0 text-right text-xs">
+              {si + 1}
+            </span>
+            <div className="min-w-0 flex-1">
+              <CharacterChips
+                names={slot}
+                charByName={charByName}
+                onChange={(names) => onChange(slots.map((s, j) => (j === si ? names : s)))}
+              />
+            </div>
+            <button
+              type="button"
+              className="text-danger mt-2 shrink-0 text-sm"
+              title="Supprimer le slot"
+              onClick={() => onChange(slots.filter((_, j) => j !== si))}
+            >
+              ✕
+            </button>
+          </div>
+        ))}
+        {slots.length < MAX_SLOTS && (
+          <button type="button" className={btn} onClick={() => onChange([...slots, []])}>
+            + slot
+          </button>
+        )}
+      </div>
+    );
+  }
+
+  /* --- Onglets de la version active --- */
   function monsterTab() {
     if (!v) return null;
+    // Donjons ordonnés (adventure : `meta.dungeons`).
+    if (spec!.monster === 'dungeons-meta') {
+      const dungeons = v.dungeons ?? [];
+      return (
+        <section className="space-y-2">
+          <p className={heading}>
+            Donjons <span className="text-content-subtle font-normal">(du plus facile au dur)</span>
+          </p>
+          {dungeons.map((id, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <span className="text-content-subtle w-6 text-right text-xs">{i + 1}</span>
+              <span className="text-content flex-1 text-sm">{dungeonLabel(id)}</span>
+              <button
+                type="button"
+                className="text-danger text-sm"
+                title="Retirer"
+                onClick={() => patch({ dungeons: dungeons.filter((_, j) => j !== i) })}
+              >
+                ✕
+              </button>
+            </div>
+          ))}
+          <IdLabelPicker
+            options={dungeonOptions}
+            value=""
+            onSelect={(id) => id && patch({ dungeons: [...dungeons, id] })}
+            placeholder="Ajouter un donjon…"
+          />
+          {!dungeons.length && <p className="text-warn text-xs">Au moins un donjon est requis.</p>}
+        </section>
+      );
+    }
+    // Boss unique (dimensional-singularity : `meta.bossId`).
+    if (spec!.monster === 'bossId-meta') {
+      return (
+        <section className="space-y-1.5">
+          <p className={heading}>Boss (monstre)</p>
+          <IdLabelPicker
+            options={monsterOptions}
+            value={v.bossId ?? ''}
+            onSelect={(id) => patch({ bossId: id || undefined })}
+            placeholder="Chercher un monstre…"
+          />
+          {!v.bossId && <p className="text-warn text-xs">Un boss est requis.</p>}
+        </section>
+      );
+    }
+    // Combat par `group` (config ou meta).
     return (
       <section className="space-y-1.5">
         <p className={heading}>Monstre (combat)</p>
@@ -327,11 +430,30 @@ export function GuideEditor({
 
   function tipsTab() {
     if (!v) return null;
-    const setSection = (si: number, p: Partial<TipSectionDraft>) => {
-      const sections = v.tipSections.slice();
-      sections[si] = { ...sections[si], ...p };
-      patch({ tipSections: sections });
-    };
+    const setSection = (si: number, p: Partial<TipSectionDraft>) =>
+      patch({ tipSections: v.tipSections.map((s, j) => (j === si ? { ...s, ...p } : s)) });
+
+    // Plat : une seule liste sans titre. Versionné : sections titrées.
+    if (!spec!.tipTitles) {
+      const section = v.tipSections[0] ?? { tips: [] };
+      return (
+        <section className="space-y-2">
+          <p className={heading}>Conseils</p>
+          <InlineTextField
+            value={itemsToBlock(section.tips, lang)}
+            refs={refs}
+            lang={lang}
+            rows={6}
+            layout="stacked"
+            previewMode="list"
+            placeholder="Un conseil par ligne…"
+            onChange={(val) =>
+              patch({ tipSections: [{ tips: blockToItems(val, section.tips, lang) }] })
+            }
+          />
+        </section>
+      );
+    }
     return (
       <section className="space-y-4">
         {v.tipSections.length === 0 && (
@@ -342,7 +464,7 @@ export function GuideEditor({
             <div className="flex items-center gap-2">
               <input
                 className={`${input} max-w-xs`}
-                placeholder={`Titre de section (optionnel${lang === 'en' ? '' : `, EN : ${section.title?.en ?? '—'}`})`}
+                placeholder={titlePlaceholder(Boolean(section.rawTitle), section.title)}
                 value={show(section.title)}
                 onChange={(e) =>
                   setSection(si, { title: orUndef(editLText(section.title, e.target.value)) })
@@ -395,11 +517,9 @@ export function GuideEditor({
               lang={lang}
               layout="stacked"
               placeholder={lang === 'en' ? '' : (note.en ?? '')}
-              onChange={(val) => {
-                const notes = v.notes.slice();
-                notes[i] = editLText(note, val);
-                patch({ notes });
-              }}
+              onChange={(val) =>
+                patch({ notes: v.notes.map((n, j) => (j === i ? editLText(n, val) : n)) })
+              }
             />
             <button
               type="button"
@@ -422,28 +542,22 @@ export function GuideEditor({
     );
   }
 
-  function recoTab() {
-    if (!v) return null;
+  // Liste éditable de groupes de persos (chips + raison) — réutilisée à plat et
+  // en sections (dimensional-singularity).
+  function RecoGroups({
+    groups,
+    onChange,
+  }: {
+    groups: RecoGroupDraft[];
+    onChange: (groups: RecoGroupDraft[]) => void;
+  }) {
     return (
-      <section className="space-y-3">
-        <div className="flex items-center justify-between">
-          <p className={heading}>Persos recommandés</p>
-          <button
-            type="button"
-            className={btn}
-            onClick={() => patch({ recommended: [...v.recommended, { characters: [] }] })}
-          >
-            + groupe
-          </button>
-        </div>
-        {v.recommended.map((g, gi) => {
-          const setGroup = (p: Partial<RecoGroupDraft>) => {
-            const reco = v.recommended.slice();
-            reco[gi] = { ...g, ...p };
-            patch({ recommended: reco });
-          };
+      <div className="space-y-3">
+        {groups.map((g, gi) => {
+          const setGroup = (p: Partial<RecoGroupDraft>) =>
+            onChange(groups.map((x, j) => (j === gi ? { ...x, ...p } : x)));
           return (
-            <div key={gi} className="card space-y-3 rounded-xl p-4">
+            <div key={gi} className="border-line-subtle space-y-3 rounded-lg border p-3">
               <div className="flex items-start justify-between gap-2">
                 <CharacterChips
                   names={g.characters}
@@ -453,7 +567,7 @@ export function GuideEditor({
                 <button
                   type="button"
                   className="text-danger shrink-0 text-sm"
-                  onClick={() => patch({ recommended: v.recommended.filter((_, j) => j !== gi) })}
+                  onClick={() => onChange(groups.filter((_, j) => j !== gi))}
                 >
                   Supprimer
                 </button>
@@ -472,65 +586,207 @@ export function GuideEditor({
             </div>
           );
         })}
+        <button
+          type="button"
+          className={btn}
+          onClick={() => onChange([...groups, { characters: [] }])}
+        >
+          + groupe
+        </button>
+      </div>
+    );
+  }
+
+  function recoTab() {
+    if (!v) return null;
+    // dim : persos en SECTIONS titrées (= `content.teams`, rendu RecommendedCharacters).
+    if (spec!.recoSections) {
+      const setSec = (si: number, p: Partial<RecoSectionDraft>) =>
+        patch({ recoSections: v.recoSections.map((s, j) => (j === si ? { ...s, ...p } : s)) });
+      return (
+        <section className="space-y-4">
+          <p className={heading}>Persos recommandés (sections)</p>
+          {v.recoSections.map((s, si) => (
+            <div key={si} className="card space-y-3 rounded-xl p-4">
+              <div className="flex items-center gap-2">
+                <input
+                  className={`${input} max-w-xs`}
+                  placeholder={titlePlaceholder(Boolean(s.rawTitle), s.title)}
+                  value={show(s.title)}
+                  onChange={(e) =>
+                    setSec(si, { title: orUndef(editLText(s.title, e.target.value)) })
+                  }
+                />
+                <button
+                  type="button"
+                  className="text-danger ml-auto text-sm"
+                  onClick={() => patch({ recoSections: v.recoSections.filter((_, j) => j !== si) })}
+                >
+                  ✕ section
+                </button>
+              </div>
+              <RecoGroups groups={s.groups} onChange={(groups) => setSec(si, { groups })} />
+            </div>
+          ))}
+          <button
+            type="button"
+            className={btn}
+            onClick={() => patch({ recoSections: [...v.recoSections, { groups: [] }] })}
+          >
+            + section
+          </button>
+        </section>
+      );
+    }
+    return (
+      <section className="space-y-3">
+        <p className={heading}>Persos recommandés</p>
+        <RecoGroups groups={v.recommended} onChange={(g) => patch({ recommended: g })} />
       </section>
     );
   }
 
   function teamTab() {
     if (!v) return null;
-    return (
-      <section className="space-y-3">
-        <div className="flex items-center justify-between">
+    const setTeam = (ti: number, p: Partial<TeamDraft>) =>
+      patch({ teams: v.teams.map((t, j) => (j === ti ? { ...t, ...p } : t)) });
+
+    // slots : une seule équipe (créée à la volée).
+    if (spec!.teams === 'slots') {
+      const team = v.teams[0] ?? { slots: [] };
+      const setSlots = (slots: string[][]) => patch({ teams: [{ ...team, slots }] });
+      return (
+        <section className="space-y-3">
           <p className={heading}>
             Équipe <span className="text-content-subtle font-normal">(max {MAX_SLOTS} slots)</span>
           </p>
-          {v.teamSlots.length < MAX_SLOTS && (
-            <button
-              type="button"
-              className={btn}
-              onClick={() => patch({ teamSlots: [...v.teamSlots, []] })}
-            >
-              + slot
-            </button>
-          )}
-        </div>
-        {v.teamSlots.map((slot, si) => (
-          <div key={si} className="flex items-start gap-2">
-            <span className="text-content-subtle mt-3 w-6 shrink-0 text-right text-xs">
-              {si + 1}
-            </span>
-            <div className="min-w-0 flex-1">
-              <CharacterChips
-                names={slot}
-                charByName={charByName}
-                onChange={(names) => {
-                  const teamSlots = v.teamSlots.slice();
-                  teamSlots[si] = names;
-                  patch({ teamSlots });
-                }}
+          <SlotsBlock slots={team.slots} onChange={setSlots} />
+          <div>
+            <p className="text-content-subtle mb-1 text-xs uppercase">Note d’équipe ({lang})</p>
+            <InlineTextField
+              value={show(team.note)}
+              refs={refs}
+              lang={lang}
+              layout="stacked"
+              placeholder={lang === 'en' ? '' : (team.note?.en ?? '')}
+              onChange={(val) =>
+                patch({ teams: [{ ...team, note: orUndef(editLText(team.note, val)) }] })
+              }
+            />
+          </div>
+        </section>
+      );
+    }
+
+    // buckets (special-request) : plusieurs équipes par plage de stages.
+    if (spec!.teams === 'buckets') {
+      return (
+        <section className="space-y-4">
+          {v.teams.map((t, ti) => (
+            <div key={ti} className="card space-y-3 rounded-xl p-4">
+              <div className="flex items-center gap-2">
+                <span className="text-content-subtle text-xs uppercase">Stages</span>
+                <input
+                  type="number"
+                  className={`${input} w-16`}
+                  value={t.stages?.[0] ?? 1}
+                  onChange={(e) =>
+                    setTeam(ti, { stages: [Number(e.target.value) || 1, t.stages?.[1] ?? 1] })
+                  }
+                />
+                <span className="text-content-subtle">→</span>
+                <input
+                  type="number"
+                  className={`${input} w-16`}
+                  value={t.stages?.[1] ?? 1}
+                  onChange={(e) =>
+                    setTeam(ti, { stages: [t.stages?.[0] ?? 1, Number(e.target.value) || 1] })
+                  }
+                />
+                <button
+                  type="button"
+                  className="text-danger ml-auto text-sm"
+                  onClick={() => patch({ teams: v.teams.filter((_, j) => j !== ti) })}
+                >
+                  ✕ plage
+                </button>
+              </div>
+              <SlotsBlock slots={t.slots} onChange={(slots) => setTeam(ti, { slots })} />
+              <div>
+                <p className="text-content-subtle mb-1 text-xs uppercase">Note ({lang})</p>
+                <InlineTextField
+                  value={show(t.note)}
+                  refs={refs}
+                  lang={lang}
+                  layout="stacked"
+                  placeholder={lang === 'en' ? '' : (t.note?.en ?? '')}
+                  onChange={(val) => setTeam(ti, { note: orUndef(editLText(t.note, val)) })}
+                />
+              </div>
+            </div>
+          ))}
+          <button
+            type="button"
+            className={btn}
+            onClick={() => patch({ teams: [...v.teams, { stages: [1, 1], slots: [] }] })}
+          >
+            + plage de stages
+          </button>
+        </section>
+      );
+    }
+
+    // named (irregular / adventure-license) : équipes titrées + note multi-§.
+    return (
+      <section className="space-y-4">
+        {v.teams.map((t, ti) => (
+          <div key={ti} className="card space-y-3 rounded-xl p-4">
+            <div className="flex items-center gap-2">
+              <input
+                className={`${input} max-w-xs`}
+                placeholder={
+                  t.rawTitle && !hasText(t.title)
+                    ? 'Titre auto (généré) — écrire pour forcer'
+                    : `Titre de l’équipe (optionnel${lang === 'en' ? '' : `, EN : ${t.title?.en ?? '—'}`})`
+                }
+                value={show(t.title)}
+                onChange={(e) =>
+                  setTeam(ti, { title: orUndef(editLText(t.title, e.target.value)) })
+                }
+              />
+              <button
+                type="button"
+                className="text-danger ml-auto text-sm"
+                onClick={() => patch({ teams: v.teams.filter((_, j) => j !== ti) })}
+              >
+                ✕ équipe
+              </button>
+            </div>
+            <SlotsBlock slots={t.slots} onChange={(slots) => setTeam(ti, { slots })} />
+            <div>
+              <p className="text-content-subtle mb-1 text-xs uppercase">
+                Note ({lang}) — un paragraphe par ligne
+              </p>
+              <InlineTextField
+                value={itemsToBlock(t.notes ?? [], lang)}
+                refs={refs}
+                lang={lang}
+                rows={4}
+                layout="stacked"
+                previewMode="list"
+                placeholder="Un paragraphe par ligne…"
+                onChange={(val) => setTeam(ti, { notes: blockToItems(val, t.notes ?? [], lang) })}
               />
             </div>
-            <button
-              type="button"
-              className="text-danger mt-2 shrink-0 text-sm"
-              title="Supprimer le slot"
-              onClick={() => patch({ teamSlots: v.teamSlots.filter((_, j) => j !== si) })}
-            >
-              ✕
-            </button>
           </div>
         ))}
-        <div>
-          <p className="text-content-subtle mb-1 text-xs uppercase">Note d’équipe ({lang})</p>
-          <InlineTextField
-            value={show(v.teamNote)}
-            refs={refs}
-            lang={lang}
-            layout="stacked"
-            placeholder={lang === 'en' ? '' : (v.teamNote?.en ?? '')}
-            onChange={(val) => patch({ teamNote: orUndef(editLText(v.teamNote, val)) })}
-          />
-        </div>
+        <button
+          type="button"
+          className={btn}
+          onClick={() => patch({ teams: [...v.teams, { slots: [] }] })}
+        >
+          + équipe
+        </button>
       </section>
     );
   }
@@ -560,9 +816,17 @@ export function GuideEditor({
     );
   }
 
+  const tabs = [
+    { key: 'monster', label: 'Monstre', content: monsterTab() },
+    { key: 'tips', label: 'Conseils', content: tipsTab() },
+    ...(spec.notes ? [{ key: 'notes', label: 'Notes', content: notesTab() }] : []),
+    { key: 'reco', label: 'Persos', content: recoTab() },
+    ...(spec.teams !== 'none' ? [{ key: 'team', label: 'Équipe', content: teamTab() }] : []),
+    ...(spec.videos ? [{ key: 'videos', label: 'Vidéos', content: videosTab() }] : []),
+  ];
+
   return (
     <div className="space-y-6">
-      {/* Datalist partagée des noms de persos (chips reco + équipe) */}
       <datalist id="guide-char-names">
         {charOptions.map((c) => (
           <option key={c.id} value={c.name} />
@@ -600,11 +864,16 @@ export function GuideEditor({
         )}
       </div>
 
-      {/* Intro partagée (commune à toutes les versions) */}
+      {/* Intro */}
       <section className="space-y-1.5">
         <p className={heading}>
-          Intro du guide{' '}
-          <span className="text-content-subtle font-normal">(commune à toutes les versions)</span>
+          Intro du guide
+          {spec.versioned && (
+            <span className="text-content-subtle font-normal">
+              {' '}
+              (commune à toutes les versions)
+            </span>
+          )}
         </p>
         <InlineTextField
           value={show(intro)}
@@ -616,33 +885,34 @@ export function GuideEditor({
         />
       </section>
 
-      {/* Onglets de version + ajout */}
-      <div className="border-line-subtle flex flex-wrap items-center gap-1 border-b pb-2">
-        {versions.map((ver, i) => (
+      {/* Barre de versions (versionné uniquement) */}
+      {spec.versioned && (
+        <div className="border-line-subtle flex flex-wrap items-center gap-1 border-b pb-2">
+          {versions.map((ver, i) => (
+            <button
+              key={ver._key}
+              type="button"
+              onClick={() => setActive(i)}
+              className={`rounded-md px-3 py-1 text-sm ${i === active ? 'bg-accent/20 text-accent font-semibold' : 'text-content-muted hover:bg-surface-overlay'}`}
+            >
+              {ver.key}
+              {i === 0 && <span className="text-content-subtle ml-1 text-[10px]">(récente)</span>}
+            </button>
+          ))}
           <button
-            key={ver._key}
             type="button"
-            onClick={() => setActive(i)}
-            className={`rounded-md px-3 py-1 text-sm ${i === active ? 'bg-accent/20 text-accent font-semibold' : 'text-content-muted hover:bg-surface-overlay'}`}
+            className="text-accent ml-2 text-sm hover:underline"
+            onClick={() => {
+              setAdding((s) => !s);
+              setFromKey(versions[0]?.key ?? '');
+            }}
           >
-            {ver.key}
-            {i === 0 && <span className="text-content-subtle ml-1 text-[10px]">(récente)</span>}
+            ＋ version
           </button>
-        ))}
-        <button
-          type="button"
-          className="text-accent ml-2 text-sm hover:underline"
-          onClick={() => {
-            setAdding((s) => !s);
-            setFromKey(versions[0]?.key ?? '');
-          }}
-        >
-          ＋ version
-        </button>
-      </div>
+        </div>
+      )}
 
-      {/* Panneau d'ajout de version */}
-      {adding && (
+      {spec.versioned && adding && (
         <div className="border-line bg-surface-raised flex flex-wrap items-end gap-3 rounded-md border p-3">
           <label className="text-content-subtle text-xs">
             Nouvelle version (YYYY-MM)
@@ -685,25 +955,14 @@ export function GuideEditor({
         </div>
       )}
 
-      {/* Éditeur de la version active — parties en onglets */}
       {!v ? (
         <p className="text-content-subtle text-sm">
           Aucune version — ajoute-en une pour commencer.
         </p>
       ) : (
-        <EditorTabs
-          tabs={[
-            { key: 'monster', label: 'Monstre', content: monsterTab() },
-            { key: 'tips', label: 'Conseils', content: tipsTab() },
-            { key: 'notes', label: 'Notes', content: notesTab() },
-            { key: 'reco', label: 'Persos', content: recoTab() },
-            { key: 'team', label: 'Équipe', content: teamTab() },
-            { key: 'videos', label: 'Vidéos', content: videosTab() },
-          ]}
-        />
+        <EditorTabs tabs={tabs} />
       )}
 
-      {/* Enregistrement */}
       <div className="border-line-subtle flex items-center gap-3 border-t pt-4">
         <button type="button" className={btn} onClick={save} disabled={state === 'saving'}>
           {state === 'saving' ? 'Enregistrement…' : 'Enregistrer le guide'}
