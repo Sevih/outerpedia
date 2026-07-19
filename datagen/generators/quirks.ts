@@ -10,12 +10,12 @@
  *
  * Un sous-arbre = un main node + tous les nœuds dont `RequireMainNodeID` pointe
  * dessus (robuste : les nœuds de subclass d'un arbre de classe restent rattachés
- * à leur main). Le LAYOUT (radial, main au centre) est calculé à l'affichage à
- * partir des connexions — ici on n'émet que le graphe.
+ * à leur main). On émet aussi la GRILLE du jeu (`PageNum` = aile, `NodePosition`
+ * = "col,row") : le layout d'affichage la reproduit fidèlement, main au centre.
  *
- * Valeur d'effet : dérivée pour les nœuds `IOT_STAT` (`formatStatValue`). Les
- * nœuds `IOT_BUFF` (buffs `Awakening_*` absents de `BuffTemplet`) n'ont pas de
- * valeur exploitable → nom + coût seulement (limite ASSUMÉE de la donnée).
+ * Valeur d'effet, dérivée PAR NIVEAU : nœuds `IOT_STAT` via `formatStatValue` ;
+ * nœuds `IOT_BUFF` via le buff `Awakening_*` résolu dans `BuffTemplet` (ex.
+ * Boss Dmg, OAT_RATE) ; buffs de compte `EBT_*` via `BuffValue` brut.
  */
 import { loadTable, num, splitCsv, type Row } from '../lib/tables';
 import { loadTextIndex, resolveText } from '../lib/text';
@@ -39,6 +39,12 @@ export interface QuirkNode {
   icon: string;
   /** Couleur de fond du jeu (hex), pour teinter la pastille. */
   color: string;
+  /** Aile de l'arbre (0 = gauche, 1 = droite). Le main n'en a pas (-1). */
+  page: number;
+  /** Colonne de la grille du jeu (`NodePosition`), -1 pour le main (centre). */
+  col: number;
+  /** Ligne de la grille du jeu (`NodePosition`), -1 pour le main (centre). */
+  row: number;
   name: LangDict;
   /** Desc avec placeholder `{0}` (rempli par la valeur du niveau à l'affichage). */
   desc: LangDict;
@@ -90,6 +96,31 @@ export function buildQuirks(): QuirksData {
   const nodes = loadTable('CharacterAwakeningNodeTemplet');
   const text = loadTextIndex('TextSystem');
 
+  // Index des buffs par `BuffID` : la magnitude d'un nœud `IOT_BUFF` (ex.
+  // `Awakening_Boss_Dmg_3`, +9 %) vit dans `BuffTemplet`, pas dans la ligne de
+  // niveau. On la résout via ApplyingType + Value du buff.
+  const buffIndex = new Map<string, Row>();
+  for (const bf of loadTable('BuffTemplet'))
+    if (bf.BuffID && !buffIndex.has(bf.BuffID)) buffIndex.set(bf.BuffID, bf);
+
+  /** Valeur d'effet affichable d'une ligne de niveau (stat, buff, ou buff de
+   *  compte EBT dont la magnitude est directement dans `BuffValue`). */
+  const levelValue = (r: Row): string | undefined => {
+    if (r.OptionType === 'IOT_STAT' && r.StatType && r.StatType !== 'ST_NONE')
+      return formatStatValue(r.ApplyingType ?? '', num(r.OptionValue), slugEnum(r.StatType));
+    if (r.OptionType === 'IOT_BUFF') {
+      const bf = r.BuffID ? buffIndex.get(r.BuffID) : undefined;
+      if (bf) {
+        const stat = bf.StatType && bf.StatType !== 'ST_NONE' ? slugEnum(bf.StatType) : undefined;
+        return formatStatValue(bf.ApplyingType ?? '', num(bf.Value), stat);
+      }
+      // Buffs de compte (EBT_*) : magnitude brute, le `%` éventuel est déjà
+      // dans le texte de description.
+      if (r.BuffValue && r.BuffValue !== '0') return String(num(r.BuffValue));
+    }
+    return undefined;
+  };
+
   // Niveaux indexés par groupe de niveau, triés.
   const levelsByLG = new Map<string, Row[]>();
   for (const l of loadTable('CharacterAwakeningLevelTemplet')) {
@@ -114,10 +145,7 @@ export function buildQuirks(): QuirksData {
       const items = ids
         .map((id, i) => ({ id, count: num(counts[i]) }))
         .filter((x) => x.id && x.id !== '0' && x.count > 0);
-      const value =
-        r.OptionType === 'IOT_STAT' && r.StatType && r.StatType !== 'ST_NONE'
-          ? formatStatValue(r.ApplyingType ?? '', num(r.OptionValue), slugEnum(r.StatType))
-          : undefined;
+      const value = levelValue(r);
       return {
         level: num(r.AwakeningLevel),
         gold: num(r.RequireGold),
@@ -125,11 +153,18 @@ export function buildQuirks(): QuirksData {
         ...(value ? { value } : {}),
       };
     });
+    // `NodePosition` = "col,row" pour un nœud normal ; "0" (ou vide) pour le
+    // main, qui n'a pas de case dans la grille (il est au centre de l'arbre).
+    const isMain = n.AwakeningNodeType === 'ANT_MAIN';
+    const [col, row] = isMain ? [-1, -1] : splitCsv(n.NodePosition ?? '').map((x) => num(x));
     return {
       id: num(n.ID),
-      type: n.AwakeningNodeType === 'ANT_MAIN' ? 'main' : 'normal',
+      type: isMain ? 'main' : 'normal',
       icon: n.NodeIconName ?? '',
       color: n.NodeIconBgColorHex ?? '',
+      page: isMain ? -1 : num(n.PageNum),
+      col: col ?? -1,
+      row: row ?? -1,
       name: resolveText(text, n.NodeNameID),
       desc: resolveText(text, n.NodeDescID),
       connections: splitCsv(n.ConnectionNodeID ?? '')

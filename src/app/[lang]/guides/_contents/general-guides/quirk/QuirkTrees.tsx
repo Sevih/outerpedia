@@ -4,8 +4,8 @@
  * Navigateur d'arbres de quirks : onglets de catégorie + sélecteur de sous-arbre
  * (élément/classe) → `QuirkTreeView`. Données pré-localisées côté serveur.
  */
-import { useState } from 'react';
-import { QuirkTreeView, type LocalTree, type QuirkTreeLabels } from './QuirkTreeView';
+import { useMemo, useState } from 'react';
+import { QuirkTreeView, frameOf, type LocalTree, type QuirkTreeLabels } from './QuirkTreeView';
 
 export interface LocalCategory {
   key: string;
@@ -24,6 +24,12 @@ export function QuirkTrees({
 }) {
   const [cat, setCat] = useState(0);
   const [tree, setTree] = useState(0);
+  // Cadre commun à TOUS les arbres → même forme de conteneur et même espacement,
+  // quel que soit l'arbre (les plus petits sont centrés dedans).
+  const frame = useMemo(
+    () => frameOf(categories.flatMap((c) => c.trees.map((t) => t.tree))),
+    [categories],
+  );
   const category = categories[cat] ?? categories[0];
   const idx = Math.min(tree, category.trees.length - 1);
   const current = category.trees[idx];
@@ -74,7 +80,7 @@ export function QuirkTrees({
         </div>
       )}
 
-      <QuirkTreeView tree={current.tree} materials={materials} labels={treeLabels} />
+      <QuirkTreeView tree={current.tree} frame={frame} materials={materials} labels={treeLabels} />
     </div>
   );
 }

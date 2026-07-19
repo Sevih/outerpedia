@@ -102,9 +102,13 @@ export default async function QuirkGuide({ lang }: { lang: Lang }) {
       id: n.id,
       type: n.type,
       color: n.color || 'var(--color-line-strong)',
+      icon: n.icon,
       name: L(n.name),
       desc: L(n.desc),
       connections: n.connections,
+      page: n.page,
+      col: n.col,
+      row: n.row,
       requireMainLevel: n.requireMainLevel,
       maxLevel: n.maxLevel,
       levels: n.levels,
@@ -190,7 +194,7 @@ export default async function QuirkGuide({ lang }: { lang: Lang }) {
         categories={categories}
         materials={materials}
         treeLabels={{
-          maxLevel: L(LABELS.treeMaxLevel),
+          level: L(LABELS.treeLevel),
           cost: L(LABELS.treeCost),
           unlockAt: L(LABELS.treeUnlockAt),
           mainNode: L(LABELS.treeMainNode),

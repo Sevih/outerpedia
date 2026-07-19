@@ -118,6 +118,8 @@ export const img = {
   coreFusionTag: () => `${BASE}/images/ui/tags/CT_Core_Icon.webp`,
   /** Icône de guide/catégorie de guides (sprite du jeu, namespace unique). */
   guideIcon: (icon: string) => `${BASE}/images/ui/guides/${icon}.webp`,
+  /** Glyphe/cadre d'un nœud de quirk (Awakening) — `CM_Gift_*Node_*`, hexagone. */
+  quirkNode: (sprite: string) => `${BASE}/images/ui/quirk/${sprite}.webp`,
   /**
    * Screenshot ÉDITORIAL d'un guide (capture, schéma — rien qui existe en jeu).
    * Source : `data/editorial/guides/<slug>/<fichier>`, collecté par scan

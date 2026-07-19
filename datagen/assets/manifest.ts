@@ -299,6 +299,27 @@ export function buildAssetManifest(): AssetRequest[] {
     });
   }
 
+  // --- Nœuds de quirk (Awakening) : glyphes + cadre hexagonal du main ---------
+  // Chaque nœud du guide `quirk` porte un glyphe blanc (`CM_Gift_*Node_*`) posé
+  // sur un disque sombre teinté par sa couleur de jeu ; le main node reprend le
+  // cadre hexagonal `CM_Gift_MainNode_Bg`. On collecte les glyphes RÉELLEMENT
+  // référencés par `quirks.json` (namespace unique `ui/quirk`).
+  {
+    const quirks = load('quirks.json') as {
+      categories: { trees: { nodes: { icon?: string }[] }[] }[];
+    };
+    const icons = new Set<string>(['CM_Gift_MainNode_Bg']);
+    for (const c of quirks.categories)
+      for (const tr of c.trees) for (const n of tr.nodes) if (n.icon) icons.add(n.icon);
+    for (const icon of [...icons].sort())
+      push({
+        kind: 'image',
+        key: `images/ui/quirk/${icon}.webp`,
+        candidates: [icon],
+        domain: 'ui',
+      });
+  }
+
   // --- Domaine équipement : pages /equipment ---------------------------------
   // Familles AFFICHABLES (grade unique aux paliers hauts), pièces de sets,
   // icônes de sets/passifs, cadres de rareté, boss des sources curées.

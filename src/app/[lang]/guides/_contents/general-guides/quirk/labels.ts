@@ -357,12 +357,13 @@ export const LABELS = {
     fr: 'Tous les arbres de quirks, reproduits depuis les fichiers du jeu. Choisissez une catégorie (et un élément/une class), puis survolez un nœud pour voir son effet et le coût total au max.',
   },
   treeMaxLevel: { en: 'Max Lv.', jp: '最大Lv.', kr: '최대 Lv.', zh: '满级', fr: 'Lv. max' },
+  treeLevel: { en: 'Level', jp: 'レベル', kr: '레벨', zh: '等级', fr: 'Niveau' },
   treeCost: {
-    en: 'Cost to max:',
-    jp: '最大までのコスト：',
-    kr: '만렙 비용:',
-    zh: '满级消耗：',
-    fr: 'Coût au max :',
+    en: 'Cost to this level:',
+    jp: 'このレベルまでのコスト：',
+    kr: '이 레벨까지 비용:',
+    zh: '至该等级消耗：',
+    fr: 'Coût jusqu’à ce niveau :',
   },
   treeUnlockAt: {
     en: '· unlocks at main Lv.',
