@@ -135,7 +135,7 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
           <div className="space-y-3">
             <Prose>{L(LABELS.pickup.desc)}</Prose>
             <div className={neutralBox}>
-              <p className="text-content-muted m-0 text-sm">
+              <p className="text-content m-0 text-sm">
                 <span className="font-semibold text-amber-400">
                   {L(LABELS.pickup.example_label)}
                 </span>
@@ -170,7 +170,7 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
           <SectionHeading accent="violet" title={L(LABELS.rateup.heading)} />
           <BannerRates info={getRecruitKind('pickup')} lang={lang} />
           <div className={neutralBox}>
-            <p className="text-content-muted m-0 text-sm">
+            <p className="text-content m-0 text-sm">
               {L(LABELS.rateup.desc)}
               <span className="font-semibold text-amber-400">{L(LABELS.rateup.desc_duration)}</span>
               {L(LABELS.rateup.desc_after)}
@@ -249,7 +249,7 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
               </div>
             </div>
             <div className={neutralBox}>
-              <p className="text-content-muted m-0 text-xs">
+              <p className="text-content m-0 text-xs">
                 {L(LABELS.limited.duration_before)}
                 <span className="font-semibold text-amber-400">
                   {L(LABELS.limited.duration_value)}

@@ -92,7 +92,7 @@ export default async function FreeHeroesStartBannerGuide({ lang }: { lang: Lang 
                   <td className={TD}>
                     <CharacterGrid names={entry.names} lang={lang} where={WHERE} />
                   </td>
-                  <td className={`${TD} text-content-muted max-w-90 text-left text-sm`}>
+                  <td className={`${TD} text-content max-w-90 text-left text-sm`}>
                     {entry.pickType === 'one' && (
                       <div className="mb-2 text-center">
                         <span className="text-lg font-bold text-amber-400 [text-shadow:0_0_10px_rgba(251,191,36,0.8)]">
@@ -144,7 +144,7 @@ export default async function FreeHeroesStartBannerGuide({ lang }: { lang: Lang 
                     where={WHERE}
                   />
                 </td>
-                <td className={`${TD} text-content-muted max-w-90 text-left text-sm`}>
+                <td className={`${TD} text-content max-w-90 text-left text-sm`}>
                   {withLineBreaks(lRec(entry.reason, lang), ctx)}
                 </td>
               </tr>

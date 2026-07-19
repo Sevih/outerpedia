@@ -100,7 +100,7 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
       <span className="inline-flex flex-col gap-0.5">
         {costs.map((c, i) => (
           <span key={i} className="inline-flex items-center gap-1 whitespace-nowrap">
-            {chip(c.item, 20)} <span className="text-content-subtle">×{c.count}</span>
+            {chip(c.item, 20)} <span className="text-content">×{c.count}</span>
           </span>
         ))}
       </span>
@@ -155,7 +155,7 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
         {growth.xpFood.map((f) => (
           <li key={f.id} className="flex items-center gap-2">
             {chip(f, 22)}
-            <span className="text-content-subtle">
+            <span className="text-content">
               {L(LABELS.grantsXP)} {fmt(f.xp)} {L(LABELS.xpUnit)}
             </span>
           </li>
@@ -179,7 +179,7 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
         <span className="text-content-subtle">→</span>
         <span className="inline-flex flex-wrap items-center gap-1.5">
           {chipById('30512')}
-          <span className="text-content-subtle text-xs italic">
+          <span className="text-content text-xs italic">
             ({L(LABELS.limitBreakChainElementChoice)})
           </span>
         </span>
@@ -244,7 +244,7 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
               {s.effect ? (
                 L(s.effect)
               ) : (
-                <span className="text-content-subtle italic">{L(STAT_BONUS)}</span>
+                <span className="text-content italic">{L(STAT_BONUS)}</span>
               )}
             </span>
           </li>
@@ -272,7 +272,7 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
             )}
             <td className="text-content px-3 py-2 align-middle whitespace-nowrap">
               +{fmt(tier.points)}{' '}
-              <span className="text-content-subtle">
+              <span className="text-content">
                 ({L(LABELS.bonus)}: +{fmt(tier.bonus)})
               </span>
             </td>

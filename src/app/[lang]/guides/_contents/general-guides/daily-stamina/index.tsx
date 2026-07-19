@@ -92,7 +92,7 @@ export default async function DailyStaminaGuide({ lang }: { lang: Lang }) {
         )}
       </div>
       <CostPill>{P(row.cost)}</CostPill>
-      <div className="text-content-muted pt-1 text-xs">{P(row.reason)}</div>
+      <div className="text-content pt-1 text-xs">{P(row.reason)}</div>
     </div>
   );
 
@@ -109,7 +109,7 @@ export default async function DailyStaminaGuide({ lang }: { lang: Lang }) {
         <span className="text-content-strong text-sm font-semibold">{L(heading)}</span>
       </div>
       <CostPill>{P(cost)}</CostPill>
-      <div className="text-content-muted pt-1 text-xs">{body}</div>
+      <div className="text-content pt-1 text-xs">{body}</div>
     </div>
   );
 
@@ -124,7 +124,7 @@ export default async function DailyStaminaGuide({ lang }: { lang: Lang }) {
           <NumBadge n={1} />
           <div className="min-w-0 flex-1 space-y-3">
             <div className="text-lg font-semibold text-sky-300">{L(LABELS.heading_dailySweep)}</div>
-            <p className="text-content-subtle m-0 text-sm">{L(LABELS.body_dailySweep)}</p>
+            <p className="text-content m-0 text-sm">{L(LABELS.body_dailySweep)}</p>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
               {SWEEP_ROWS.map((row, i) => (
                 <div key={i}>{sweepTile(row)}</div>

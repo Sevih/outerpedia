@@ -134,7 +134,7 @@ function SectionTable({
               {rows.map((r, i) => (
                 <tr key={i} className="even:bg-surface-raised/40">
                   {r.map((c, j) => (
-                    <td key={j} className={cn(TD, j === 0 && 'text-left', 'text-content-muted')}>
+                    <td key={j} className={cn(TD, j === 0 && 'text-left', 'text-content')}>
                       {c}
                     </td>
                   ))}
@@ -390,7 +390,7 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
         <div className="p-3 text-sm">
           <div className="border-line rounded-2xl border p-4">
             <div className="text-content-strong mb-2 font-medium">{L.variableTitle}</div>
-            <ul className="text-content-muted list-disc space-y-1 pl-5">
+            <ul className="text-content list-disc space-y-1 pl-5">
               {model.variable.map((item, i) => (
                 <li key={i}>
                   {item.text}
@@ -433,7 +433,7 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
               />
             </label>
             <div className="flex items-end text-sm">
-              <div className={cn(FIELD, 'text-content-muted h-auto w-full p-3')}>
+              <div className={cn(FIELD, 'text-content h-auto w-full p-3')}>
                 {L.daily}: {fmt(totals.dailyBase)} <br /> {L.weekly}: {fmt(totals.weeklySpike)}{' '}
                 <br /> {L.monthly}: {fmt(totals.monthlySpike)}
               </div>

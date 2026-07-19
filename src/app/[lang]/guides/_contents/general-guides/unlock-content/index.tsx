@@ -175,7 +175,7 @@ export default async function UnlockContentGuide({ lang }: { lang: Lang }) {
 
   return (
     <>
-      <p className="text-content-muted text-sm leading-relaxed">{lRec(LABELS.intro, lang)}</p>
+      <p className="text-content text-sm leading-relaxed">{lRec(LABELS.intro, lang)}</p>
       {CATEGORIES.map((cat) =>
         grouped[cat].length > 0 ? (
           <CategoryTable key={cat} category={cat} entries={grouped[cat]} lang={lang} ctx={ctx} />

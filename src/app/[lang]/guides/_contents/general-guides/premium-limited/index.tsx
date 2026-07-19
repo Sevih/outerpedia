@@ -66,7 +66,7 @@ export default async function PremiumLimitedGuide({ lang }: { lang: Lang }) {
         const g = resolveGuideCharacter(entry.name, lang, WHERE);
         return (
           <HeroReviewCard key={entry.name} character={g.character} lang={lang}>
-            <p className="text-content-muted text-sm whitespace-pre-line">
+            <p className="text-content text-sm whitespace-pre-line">
               {parseText(lRec(entry.review, lang), ctx)}
             </p>
             <div className="grid gap-4 md:grid-cols-2">

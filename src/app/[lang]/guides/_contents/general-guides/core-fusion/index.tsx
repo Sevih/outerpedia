@@ -94,7 +94,7 @@ export default async function CoreFusionGuide({ lang }: { lang: Lang }) {
     }
     return (
       <HeroReviewCard key={entry.name} character={pair.fusion} lang={lang}>
-        <p className="text-content-muted text-sm whitespace-pre-line">
+        <p className="text-content text-sm whitespace-pre-line">
           {parseText(lRec(entry.review, lang), ctx)}
         </p>
         {changeRows.length > 0 && (
