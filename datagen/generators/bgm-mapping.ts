@@ -12,11 +12,14 @@
  *     retombent sur un nom dérivé du fichier (`formatFilenameAsName`).
  *   - `size`/`duration` : lues sur le mp3 réel (statSync + ffprobe).
  *
- * Source audio : le staging local `.assets-staging/audio/bgm` (mêmes mp3 que la
- * prod, à pousser sur R2 au déploiement — comme les images). Le mp3 n'est pas
- * ré-extrait ici : la conversion WAV→MP3 vit dans la chaîne datamine (worker).
+ * Source audio : le pool extrait `.gamedata/extracted/audio/bgm` (produit par
+ * `pnpm datagen:extract-audio`, comme les images le sont par l'extraction). On
+ * lit la SOURCE, pas le staging : le mapping est un artefact de build, dérivé du
+ * pool + des tables — le staging n'est qu'un tampon de push. Le mp3 n'est pas
+ * ré-extrait ici (la conversion WAV→MP3 vit dans la chaîne datamine).
  *
- * Exécution : `pnpm datagen:bgm` (écrit `data/generated/bgm_mapping.json`).
+ * Exécution : autonome via `pnpm datagen:bgm`, OU intégré à `pnpm datagen:build`
+ * (buildBgmMapping) — dans les deux cas écrit/propose `bgm_mapping.json`.
  */
 import { execFile as execFileCb, execFileSync } from 'node:child_process';
 import { readdirSync, statSync, writeFileSync } from 'node:fs';
@@ -29,7 +32,7 @@ import { isMain } from '../lib/is-main';
 
 const execFile = promisify(execFileCb);
 
-const AUDIO_DIR = resolve(process.cwd(), '.assets-staging/audio/bgm');
+const AUDIO_DIR = resolve(process.cwd(), '.gamedata/extracted/audio/bgm');
 const OUTPUT = resolve(process.cwd(), 'data/generated/bgm_mapping.json');
 
 /** Une piste de l'OST : nom localisé (anglais toujours) + métadonnées. */
