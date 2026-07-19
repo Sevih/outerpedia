@@ -4,10 +4,12 @@
  * Non indexée — c'est un outil de travail, pas une page de contenu.
  */
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { normalizeLang } from '@/lib/i18n/config';
+import { localePath } from '@/lib/navigation';
 import { getAllCharacters, characterDisplayName } from '@/lib/data/characters';
 import { buildInlineRefs } from '@/lib/admin/inline-refs';
-import type { ReviewsBundle } from '@/lib/admin/general-guide-store';
+import { premiumLimitedRoster, type ReviewsBundle } from '@/lib/admin/general-guide-store';
 import {
   premiumReviews,
   limitedReviews,
@@ -49,12 +51,18 @@ export default async function ContributePremiumReviewsPage({
 
   return (
     <main className="mx-auto max-w-4xl space-y-6 px-4 py-8">
+      <Link
+        href={localePath(lang, '/contribute')}
+        className="text-content-subtle hover:text-accent text-sm"
+      >
+        ← Contribution tools
+      </Link>
       <h1 className="text-content-strong text-2xl font-semibold">
         Premium &amp; Limited — review contribution
       </h1>
-      <p className="text-content-subtle text-sm">Writing language: {lang.toUpperCase()}</p>
       <PremiumReviewsPublicTool
         initial={initialReviews}
+        roster={premiumLimitedRoster()}
         refs={buildInlineRefs()}
         charOptions={charOptions}
       />

@@ -12,7 +12,7 @@ import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { writeJson } from '@datagen/lib/json';
 import type { LocalizedText } from '@contracts';
-import { findCharacterByName } from '@/lib/data/characters';
+import { characterDisplayName, findCharacterByName, getAllCharacters } from '@/lib/data/characters';
 
 const CONTENTS_DIR = resolve(process.cwd(), 'src/app/[lang]/guides/_contents');
 const GENERAL_DIR = resolve(CONTENTS_DIR, 'general-guides');
@@ -93,6 +93,13 @@ export interface ReviewEntryData {
   recommendedPvp: string;
   /** Note éditoriale (1-5) par étoile de transcendance, PvE/PvP. */
   impact: Record<StarKey, { pve: string; pvp: string }>;
+  /**
+   * Perso PAS ENCORE SORTI (absent de la data du site) : la review est rédigée
+   * d'avance (contribution). On N'exige PAS que le nom résolve, et le rendu du
+   * guide SAUTE l'entrée tant que le perso n'existe pas — elle apparaît toute
+   * seule à la sortie (cf. `reviewCards`).
+   */
+  unreleased?: boolean;
 }
 export interface PriorityPickData {
   name: string;
@@ -138,7 +145,37 @@ export function normalizeReview(r: Partial<ReviewEntryData>): ReviewEntryData {
     recommendedPve: r.recommendedPve ?? '',
     recommendedPvp: r.recommendedPvp ?? '',
     impact,
+    ...(r.unreleased ? { unreleased: true } : {}),
   };
+}
+
+const PREMIUM_TAG = 'premium';
+const LIMITED_TAGS = ['limited', 'seasonal', 'collab'];
+
+/**
+ * Rosters « à reviewer » dérivés des TAGS de perso (source unique, toujours à
+ * jour) : Premium = tag `premium` ; Limited = `limited`/`seasonal`/`collab`
+ * (hors `premium`/`core-fusion`, qui ont leurs propres bannières/guides).
+ * Noms d'affichage EN triés. Sert au compteur « X/Y reviews » de l'outil.
+ */
+export function premiumLimitedRoster(): { premium: string[]; limited: string[] } {
+  const chars = getAllCharacters();
+  const has = (c: (typeof chars)[number], tag: string) => (c.tags ?? []).some((t) => t === tag);
+  const byName = (a: string, b: string) => a.localeCompare(b);
+  const premium = chars
+    .filter((c) => has(c, PREMIUM_TAG))
+    .map((c) => characterDisplayName(c))
+    .sort(byName);
+  const limited = chars
+    .filter(
+      (c) =>
+        (c.tags ?? []).some((t) => LIMITED_TAGS.includes(t)) &&
+        !has(c, PREMIUM_TAG) &&
+        !has(c, 'core-fusion'),
+    )
+    .map((c) => characterDisplayName(c))
+    .sort(byName);
+  return { premium, limited };
 }
 
 /** Lit reviews + priorités dans leurs JSON locaux. */
@@ -171,7 +208,10 @@ function validateReviews(bucket: string, list: ReviewEntryData[], errors: string
   list.forEach((r, i) => {
     const at = `${bucket} #${i + 1}`;
     if (!r.name?.trim()) errors.push(`${at}: hero is required.`);
-    else if (!findCharacterByName(r.name)) errors.push(`${at}: unknown hero “${r.name}”.`);
+    // Un perso « unreleased » n'est pas encore dans la data : on NE l'exige pas
+    // résolvable (sinon la contribution anticipée serait impossible à enregistrer).
+    else if (!r.unreleased && !findCharacterByName(r.name))
+      errors.push(`${at}: unknown hero “${r.name}”.`);
     if (!r.review?.en?.trim()) errors.push(`${at} (${r.name || '?'}): EN review is required.`);
   });
 }

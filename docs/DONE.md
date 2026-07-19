@@ -6,6 +6,27 @@
 
 ## 2026-07-19
 
+- **Contribution premium/limited (Shiraen) — outil public + import admin
+  générique.** Chaîne complète export→import bouclée.
+  • **Outil public** `/contribute/premium-reviews` refondu : EN uniquement (pas
+  de barre de langue — la trad se fait à l'import), pas de bouton delete,
+  sélection **pilotée par le roster** (dérivé des tags perso : Premium = tag
+  `premium` ; Limited = `limited`/`seasonal`/`collab` hors premium/core-fusion)
+  avec compteur « X/Y unit reviews » + puces ★/☆ + « N without review ». Support
+  **perso pas encore sorti** (`unreleased`) : review rédigée d'avance, saute au
+  rendu du guide jusqu'à la sortie (garde-fou anti-typo conservé pour les noms
+  non-unreleased). Hub `/contribute` + registre des outils.
+  • **Enveloppe de contribution auto-descriptive** (`src/lib/contribute/
+contribution.ts`) : `kind` (routage vers le guide), `mode` (edit/add),
+  `payload`. `parseContribution` tolère l'ancien format nu. Un `kind` =
+  `premium-limited-review` pour l'instant.
+  • **Tool d'import admin GÉNÉRIQUE** posé sur `/admin/guides`
+  (`ContributionImport` + server action `importContribution`, `IS_DEV`) : lit le
+  `kind`, fusionne dans le bon bucket (edit par match de nom sinon add),
+  **auto-traduit** les langues manquantes de l'entrée (EN→jp/kr/zh/fr, entrée
+  seule pour ne pas re-facturer tout le lot), **enregistre**, renvoie un résumé.
+  L'import per-guide de l'éditeur (stage avant Save) lit aussi l'enveloppe.
+  Brancher core-fusion/shop plus tard = 1 `kind` + 1 handler. tsc + eslint OK.
 - **Sous-outil `/wallpapers` (galerie) — tranche 1** (2ᵉ média, ordre Sevih).
   Principes actés : **hors-jeu → ramené en V3**, **zéro dépendance V2**. Split :
   jeu (Cutin/Full/Banner/Art) = extraction native **worker** (`extract-wallpapers`,

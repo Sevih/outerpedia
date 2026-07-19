@@ -26,18 +26,22 @@
       elle donne au max 4 segments jaunes sur un substat (cf. guide gear, onglet
       Bases) ; à documenter côté guide des bannières.
 
-## 💡 Feature — Outils publics de contribution (BLOQUÉ)
+## 💡 Feature — Outils publics de contribution (Jaego — RESTE)
 
-> Idée Sevih (18/07). **NE PAS CODER TANT QUE L'ÉDITORIAL ADMIN N'EST PAS
-> STABILISÉ** : les éditeurs guides/pros-cons et les formats curés bougent
-> encore → risque de pondre du doublon ou de l'inutile. Repris seulement une
-> fois la matrice admin figée.
+> **Shiraen (premium/limited) = LIVRÉ le 19/07** (cf. DONE) : outil public
+> `/contribute/premium-reviews`, enveloppe de contribution auto-descriptive
+> (`kind`/`mode`/`payload`) et tool d'import admin GÉNÉRIQUE (route par `kind`,
+> édite/ajoute, auto-traduit, enregistre). Le socle réutilisable (enveloppe +
+> `importContribution` + widget) est en place → brancher un contributeur =
+> ajouter un `kind` + son handler.
+> RESTE ci-dessous les générateurs **Jaego** (pros/cons + synergies + gear reco +
+> recommended team) : à faire seulement une fois les formats curés concernés
+> figés (risque de doublon sinon).
 
-Générateurs publics de « syntaxe » pour que les contributeurs (Jaego =
-pros/cons + synergies + gear reco + recommended team ; Shiraen = premium/
-limited) composent sans suivre un guide de syntaxe à la main, exportent un
-**JSON au format curé**, et l'envoient sur Discord. Sevih importe/relit chez
-lui.
+Générateurs publics de « syntaxe » pour que les contributeurs composent sans
+suivre un guide de syntaxe à la main, exportent un **JSON au format curé** (via
+l'enveloppe de contribution), et l'envoient sur Discord. Sevih importe/relit
+chez lui.
 
 **Décisions actées (18/07) — sciemment minimal :**
 

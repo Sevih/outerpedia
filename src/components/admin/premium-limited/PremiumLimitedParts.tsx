@@ -65,6 +65,7 @@ export function normalizeReview(r: Partial<ReviewEntryData>): ReviewEntryData {
     recommendedPve: r.recommendedPve ?? '',
     recommendedPvp: r.recommendedPvp ?? '',
     impact: base.impact,
+    ...(r.unreleased ? { unreleased: true } : {}),
   };
 }
 
@@ -76,12 +77,8 @@ export function normalizeBundle(b: Partial<ReviewsBundle>): ReviewsBundle {
   };
 }
 
-/** Un perso exporté seul (unité d'échange avec le contributeur public). */
+/** Bucket d'une review (l'unité d'échange import/export est `ReviewContributionPayload`). */
 export type Bucket = 'premium' | 'limited';
-export interface SingleReviewExport {
-  bucket: Bucket;
-  entry: ReviewEntryData;
-}
 
 export const editLText = (cur: LText | undefined, val: string, lang: L): LText => {
   const next: LText = { ...(cur ?? { en: '' }) };
@@ -250,12 +247,13 @@ function RecoTargetStars({ value, onChange }: { value: string; onChange: (v: str
 
 /* --- Formulaire d'UNE review (contrôlé) --- */
 
-function ReviewForm({
+export function ReviewForm({
   entry,
   lang,
   refs,
   charOptions,
   charByName,
+  heroMode = 'picker',
   onChange,
   onDelete,
 }: {
@@ -264,8 +262,14 @@ function ReviewForm({
   refs: InlineRefs;
   charOptions: CharOption[];
   charByName: Map<string, CharOption>;
+  /**
+   * `picker` (admin) : sélecteur de perso. `auto` (public) : le perso est déjà
+   * choisi hors du formulaire → nom en titre ; pour un perso `unreleased`
+   * (absent de la data), champ texte libre (on peut corriger le nom saisi).
+   */
+  heroMode?: 'picker' | 'auto';
   onChange: (r: ReviewEntryData) => void;
-  onDelete: () => void;
+  onDelete?: () => void;
 }) {
   const c = charByName.get(entry.name);
   const set = (p: Partial<ReviewEntryData>) => onChange({ ...entry, ...p });
@@ -275,23 +279,39 @@ function ReviewForm({
   return (
     <div className="card space-y-4 rounded-xl p-4">
       <div className="flex items-start justify-between gap-3">
-        <div>
+        <div className="min-w-0 flex-1">
           <p className="text-content-subtle mb-1 text-xs uppercase">Hero</p>
-          <CharacterPicker
-            options={charOptions}
-            id={c?.id ?? ''}
-            name={entry.name}
-            onSelect={(sel) => set({ name: sel.name })}
-          />
+          {heroMode === 'picker' ? (
+            <CharacterPicker
+              options={charOptions}
+              id={c?.id ?? ''}
+              name={entry.name}
+              onSelect={(sel) => set({ name: sel.name })}
+            />
+          ) : entry.unreleased ? (
+            <div className="space-y-1">
+              <input
+                className={`${input} w-full max-w-xs`}
+                value={entry.name}
+                placeholder="Unreleased hero name…"
+                onChange={(e) => set({ name: e.target.value })}
+              />
+              <span className="text-warn text-xs">Unreleased — not on the site yet.</span>
+            </div>
+          ) : (
+            <span className="text-content-strong text-base font-semibold">{entry.name}</span>
+          )}
         </div>
-        <button
-          type="button"
-          className="text-danger shrink-0 text-sm"
-          title="Delete this review"
-          onClick={onDelete}
-        >
-          ✕ delete
-        </button>
+        {onDelete && (
+          <button
+            type="button"
+            className="text-danger shrink-0 text-sm"
+            title="Delete this review"
+            onClick={onDelete}
+          >
+            ✕ delete
+          </button>
+        )}
       </div>
 
       <div>

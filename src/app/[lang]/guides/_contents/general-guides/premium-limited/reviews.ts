@@ -15,6 +15,9 @@ export interface HeroReviewEntry {
   recommendedPvp: string;
   /** Note éditoriale (1-5) par étoile de transcendance, PvE/PvP. */
   impact: Record<'3' | '4' | '5' | '6', { pve: string; pvp: string }>;
+  /** Perso pas encore sorti (review écrite d'avance) : SAUTÉ au rendu tant que
+   * le nom ne résout pas ; apparaît tout seul à la sortie du perso. */
+  unreleased?: boolean;
 }
 
 // Reviews éditables (JSON) : sorties du TS pour l'admin + contribution publique

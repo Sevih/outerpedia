@@ -25,8 +25,12 @@ import {
   translateReviews,
   type Bucket,
   type L,
-  type SingleReviewExport,
 } from '@/components/admin/premium-limited/PremiumLimitedParts';
+import {
+  makeContribution,
+  parseContribution,
+  type ReviewContributionPayload,
+} from '@/lib/contribute/contribution';
 
 const btn =
   'rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm hover:border-accent disabled:opacity-50';
@@ -83,10 +87,12 @@ export function PremiumLimitedEditor({
   async function onImport(file: File) {
     setMsg(null);
     try {
-      const parsed = JSON.parse(await file.text()) as Partial<SingleReviewExport>;
-      if (!parsed.entry) throw new Error('file has no “entry”.');
-      const b: Bucket = parsed.bucket === 'limited' ? 'limited' : 'premium';
-      const norm = normalizeReview(parsed.entry);
+      const c = parseContribution(JSON.parse(await file.text()));
+      if (c.kind !== 'premium-limited-review')
+        throw new Error(`this file is a “${c.kind}” contribution, not a review.`);
+      const payload = c.payload as ReviewContributionPayload;
+      const b: Bucket = payload.bucket === 'limited' ? 'limited' : 'premium';
+      const norm = normalizeReview(payload.entry);
       const list = reviews[b];
       const idx = list.findIndex((r) => r.name && r.name.toLowerCase() === norm.name.toLowerCase());
       const nextList = idx >= 0 ? list.map((x, j) => (j === idx ? norm : x)) : [...list, norm];
@@ -104,8 +110,8 @@ export function PremiumLimitedEditor({
   function exportSelected() {
     if (selected == null) return;
     const entry = reviews[bucket][selected];
-    const payload: SingleReviewExport = { bucket, entry };
-    downloadJson(`review-${fileSlug(entry.name)}.json`, payload);
+    const payload: ReviewContributionPayload = { bucket, entry };
+    downloadJson(`review-${fileSlug(entry.name)}.json`, makeContribution('premium-limited-review', 'edit', payload)); // prettier-ignore
   }
 
   async function save() {

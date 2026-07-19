@@ -10,7 +10,7 @@ import type { Lang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
-import { resolveGuideCharacter } from '@/lib/data/characters';
+import { findCharacterByName, resolveGuideCharacter } from '@/lib/data/characters';
 import { Tabs } from '@/components/ui/Tabs';
 import { Prose } from '@/components/guides/editorial/blocks';
 import { HeroReviewCard } from '@/components/guides/editorial/reviews/HeroReviewCard';
@@ -62,6 +62,10 @@ export default async function PremiumLimitedGuide({ lang }: { lang: Lang }) {
   const reviewCards = (entries: HeroReviewEntry[]): ReactNode =>
     [...entries]
       .sort((a, b) => a.name.localeCompare(b.name))
+      // Perso « unreleased » pas encore dans la data → on saute (il apparaîtra
+      // à sa sortie). Un nom inconnu NON marqué unreleased reste une erreur de
+      // build (garde-fou anti-typo), via `resolveGuideCharacter`.
+      .filter((entry) => !(entry.unreleased && !findCharacterByName(entry.name)))
       .map((entry) => {
         const g = resolveGuideCharacter(entry.name, lang, WHERE);
         return (
