@@ -6,6 +6,17 @@
 
 ## 2026-07-19
 
+- **`/tools` + `/tierlist` : fidélité visuelle V2** (retour Sevih : « ne ressemble
+  pas à la V2 »). J'avais trop neutralisé — or les couleurs vives Tailwind sont
+  autorisées HORS `guides/**`. Repris le design V2 sur les primitives V3 (seuls
+  les neutres → tokens). **Tools** : `toolsTheme` (accents par catégorie
+  rankings=rose / equipment=ambre / simulators=cyan / info=violet / media=rose),
+  onglets colorés, sections à en-tête barré d'accent, `ToolCard` (boîte d'icône à
+  dégradé d'accent + halo au survol), **FeaturedRow** (3 phares avec ruban),
+  `StatusBadge`. **Tierlist** : `tierlistTheme` (PvE=émeraude / PvP=rouge /
+  rail=ciel), `FlagshipCard` à **panneau d'art** (dégradé radial + texture rayée +
+  grand glyphe S centré), `VsBadge` (médaillon dégradé), `OtherRankingsRail`.
+  Cluster de portraits top-tier toujours omis (pas de donnée de rang en V3).
 - **Hub `/tierlist`** — dernière page manquante de l'inventaire footer/nav
   (layout d'abord). Hero (`getMonthYear`, compteurs rankings/units), deux cartes
   phares **PvE vs PvP** (badge VS central) et un rail vers 3 autres classements

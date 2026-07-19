@@ -3,6 +3,7 @@ import { normalizeLang } from '@/lib/i18n/config';
 import { getT, type TranslationKey } from '@/i18n';
 import { createPageMetadata } from '@/lib/seo';
 import { getToolsByCategory } from '@/lib/data/tools';
+import { asAccentKey } from '@/components/tools/toolsTheme';
 import { ToolsBrowser, type ToolGroupVM } from '@/components/tools/ToolsBrowser';
 
 export const revalidate = 86400;
@@ -34,17 +35,23 @@ export default async function ToolsPage({ params }: { params: Promise<{ lang: st
   const lang = normalizeLang(raw);
   const t = await getT(lang);
 
-  const groups: ToolGroupVM[] = getToolsByCategory().map((g) => ({
-    slug: g.category.slug,
-    label: t(`tools.category.${g.category.slug}` as TranslationKey),
-    tools: g.tools.map((tool) => ({
-      slug: tool.slug,
-      icon: tool.icon,
-      title: t(`tools.${tool.slug}` as TranslationKey),
-      desc: t(`tools.${tool.slug}.desc` as TranslationKey),
-      href: `/tools/${tool.slug}`,
-    })),
-  }));
+  const groups: ToolGroupVM[] = getToolsByCategory().map((g) => {
+    const categoryLabel = t(`tools.category.${g.category.slug}` as TranslationKey);
+    return {
+      slug: g.category.slug,
+      label: categoryLabel,
+      tools: g.tools.map((tool) => ({
+        slug: tool.slug,
+        icon: tool.icon,
+        title: t(`tools.${tool.slug}` as TranslationKey),
+        desc: t(`tools.${tool.slug}.desc` as TranslationKey),
+        status: tool.status,
+        href: `/tools/${tool.slug}`,
+        category: asAccentKey(g.category.slug),
+        categoryLabel,
+      })),
+    };
+  });
 
   const total = groups.reduce((n, g) => n + g.tools.length, 0);
 
@@ -60,7 +67,20 @@ export default async function ToolsPage({ params }: { params: Promise<{ lang: st
         </p>
       </div>
 
-      <ToolsBrowser groups={groups} allLabel={t('common.all')} />
+      <ToolsBrowser
+        groups={groups}
+        allLabel={t('common.all')}
+        comingSoonLabel={t('common.coming_soon')}
+        countLabel={t('tools.count')}
+        featured={{
+          featured: t('tools.featured'),
+          ribbon: {
+            most_used: t('tools.ribbon.most_used'),
+            community_pick: t('tools.ribbon.community_pick'),
+            new: t('tools.ribbon.new'),
+          },
+        }}
+      />
     </div>
   );
 }

@@ -1,16 +1,20 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import type { Route } from 'next';
 import { normalizeLang } from '@/lib/i18n/config';
 import { getT, type TranslationKey } from '@/i18n';
 import { createPageMetadata, getMonthYear } from '@/lib/seo';
 import { getVisibleTools, type ToolMeta } from '@/lib/data/tools';
 import { getCharacterListItems } from '@/lib/data/characters';
-import { img } from '@/lib/images';
+import { FlagshipCard } from '@/components/tierlist/FlagshipCard';
+import { VsBadge } from '@/components/tierlist/VsBadge';
+import { OtherRankingsRail, type RailToolVM } from '@/components/tierlist/OtherRankingsRail';
+import type { FlagshipKey } from '@/components/tierlist/tierlistTheme';
 
 export const revalidate = 86400;
 
-const FEATURED = ['tierlistpve', 'tierlistpvp'] as const;
+const FEATURED: { slug: string; flag: FlagshipKey; side: 'left' | 'right' }[] = [
+  { slug: 'tierlistpve', flag: 'pve', side: 'left' },
+  { slug: 'tierlistpvp', flag: 'pvp', side: 'right' },
+];
 const OTHER = ['ee-priority-base', 'ee-priority-plus10', 'most-used-units'] as const;
 
 export async function generateMetadata({
@@ -31,11 +35,10 @@ export async function generateMetadata({
 }
 
 /**
- * Hub des tier lists : deux cartes phares (PvE / PvP) et un rail vers les autres
- * classements. Les sous-outils `/tools/<slug>` ne sont pas encore portés (404
- * assumée — layout d'abord). L'aperçu « top S-tier » de la V2 est différé : la
- * donnée de rang par perso n'existe pas encore en V3 (elle vit dans l'outil
- * tierlist, non porté). Page statique, revalidation 24 h.
+ * Hub des tier lists : deux cartes phares PvE/PvP (badge VS) et un rail « autres
+ * classements ». Les sous-outils `/tools/<slug>` ne sont pas encore portés (404
+ * assumée — layout d'abord). L'aperçu top-tier est omis (pas de donnée de rang
+ * par perso en V3). Page statique, revalidation 24 h.
  */
 export default async function TierlistPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang: raw } = await params;
@@ -43,13 +46,24 @@ export default async function TierlistPage({ params }: { params: Promise<{ lang:
   const t = await getT(lang);
 
   const byId = new Map(getVisibleTools().map((tool) => [tool.slug, tool]));
-  const featured = FEATURED.map((slug) => byId.get(slug)).filter((x): x is ToolMeta => Boolean(x));
-  const others = OTHER.map((slug) => byId.get(slug)).filter((x): x is ToolMeta => Boolean(x));
-  const rankingsCount = featured.length + others.length;
-  const unitCount = getCharacterListItems().length;
-
   const toolTitle = (slug: string) => t(`tools.${slug}` as TranslationKey);
   const toolDesc = (slug: string) => t(`tools.${slug}.desc` as TranslationKey);
+
+  const featured = FEATURED.filter((f) => byId.has(f.slug));
+  const others: RailToolVM[] = OTHER.map((slug) => byId.get(slug))
+    .filter((x): x is ToolMeta => Boolean(x))
+    .map((tool) => ({
+      slug: tool.slug,
+      icon: tool.icon,
+      title: toolTitle(tool.slug),
+      desc: toolDesc(tool.slug),
+      href: `/tools/${tool.slug}`,
+    }));
+
+  const rankingsCount = featured.length + others.length;
+  const unitCount = getCharacterListItems().length;
+  const viewLabel = t('tierlist.versus.view');
+  const previewLabel = t('tierlist.versus.preview');
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-6 md:px-6">
@@ -70,62 +84,33 @@ export default async function TierlistPage({ params }: { params: Promise<{ lang:
 
       {/* Versus : PvE vs PvP */}
       <div className="relative mt-8 grid grid-cols-1 items-stretch gap-4 md:grid-cols-2 md:gap-5">
-        {featured.map((tool) => (
-          <Link
-            key={tool.slug}
-            href={`/tools/${tool.slug}` as Route}
-            className="card-interactive flex flex-col items-center gap-3 p-6 text-center"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-            <img src={img.toolIcon(tool.icon)} alt="" className="size-14 object-contain" />
-            <h2 className="text-content-strong text-lg font-bold">{toolTitle(tool.slug)}</h2>
-            <p className="text-content-subtle max-w-sm text-sm">{toolDesc(tool.slug)}</p>
-            <span className="text-accent mt-1 text-sm font-semibold">
-              {t('tierlist.versus.view')} →
-            </span>
-          </Link>
+        {featured.map((f) => (
+          <FlagshipCard
+            key={f.slug}
+            flagship={f.flag}
+            title={toolTitle(f.slug)}
+            description={toolDesc(f.slug)}
+            href={`/tools/${f.slug}`}
+            side={f.side}
+            viewLabel={`${viewLabel} ${f.flag.toUpperCase()}`}
+            previewLabel={previewLabel}
+          />
         ))}
-
         {featured.length === 2 && (
-          <span
-            className="border-line bg-surface-raised text-content-muted pointer-events-none absolute top-1/2 left-1/2 z-10 hidden size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 font-mono text-xs font-bold md:flex"
-            aria-hidden
-          >
-            VS
-          </span>
+          <div className="pointer-events-none absolute top-1/2 left-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 md:block">
+            <VsBadge />
+          </div>
         )}
       </div>
 
       {/* Rail : autres classements */}
       {others.length > 0 && (
         <div className="mt-10">
-          <h2 className="text-content-strong mb-3 text-base font-semibold">
-            {t('page.tierlist.other_rankings')}
-          </h2>
-          <div className="grid gap-3 sm:grid-cols-3">
-            {others.map((tool) => (
-              <Link
-                key={tool.slug}
-                href={`/tools/${tool.slug}` as Route}
-                className="card-interactive flex items-start gap-3 p-4"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-                <img
-                  src={img.toolIcon(tool.icon)}
-                  alt=""
-                  className="size-10 shrink-0 object-contain"
-                />
-                <div className="min-w-0">
-                  <p className="text-content-strong text-sm font-semibold">
-                    {toolTitle(tool.slug)}
-                  </p>
-                  <p className="text-content-subtle mt-0.5 line-clamp-2 text-xs">
-                    {toolDesc(tool.slug)}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <OtherRankingsRail
+            tools={others}
+            heading={t('page.tierlist.other_rankings')}
+            countLabel={`${others.length} ${t('tierlist.versus.tools_count')}`}
+          />
         </div>
       )}
     </div>
