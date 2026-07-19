@@ -20,4 +20,16 @@ export const CONTRIBUTE_TOOLS: ContributeTool[] = [
     description:
       'Write or adjust per-hero reviews (impact ratings, recommended transcendence targets) for the Premium & Limited guide, then export a hero to send back.',
   },
+  {
+    slug: 'pros-cons',
+    title: 'Character — Pros / Cons',
+    description:
+      'Write or adjust a hero’s pros and cons (short editorial bullet points), then export that hero to send back.',
+  },
+  {
+    slug: 'synergies',
+    title: 'Character — Synergies',
+    description:
+      'Write or adjust a hero’s synergy groups (partner heroes + a reason), then export that hero to send back.',
+  },
 ];

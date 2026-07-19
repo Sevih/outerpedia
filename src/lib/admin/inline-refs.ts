@@ -49,6 +49,14 @@ export interface InlineRefs {
 const byLabel = (a: RefItem, b: RefItem) => a.label.localeCompare(b.label);
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
+/** Dédoublonne par `value` (le tag inséré) : deux persos au même nom EN (modèle
+ *  base/skin) ne doivent proposer qu'UNE entrée d'autocomplétion (sinon clés
+ *  React dupliquées côté `InlineTextField`, keyé par `value`). */
+const dedupeByValue = (list: RefItem[]): RefItem[] => {
+  const seen = new Set<string>();
+  return list.filter((r) => (seen.has(r.value) ? false : (seen.add(r.value), true)));
+};
+
 /** Clés éditoriales d'effet d'un côté (glossaire `effectByKey` + créations curées). */
 function effectRefs(side: 'buff' | 'debuff'): RefItem[] {
   const G = loadDataJson<Glossaries>('generated/glossaries.json');
@@ -72,11 +80,15 @@ function effectRefs(side: 'buff' | 'debuff'): RefItem[] {
 /** Toutes les listes d'autocomplétion (clés EN). Server-only. */
 export function buildInlineRefs(): InlineRefs {
   const chars = getAllCharacters();
-  const character = chars.map((c) => ({ value: c.name.en, label: c.name.en })).sort(byLabel);
-  const characterEE = chars
-    .filter((c) => c.ee)
-    .map((c) => ({ value: c.name.en, label: c.name.en }))
-    .sort(byLabel);
+  const character = dedupeByValue(
+    chars.map((c) => ({ value: c.name.en, label: c.name.en })).sort(byLabel),
+  );
+  const characterEE = dedupeByValue(
+    chars
+      .filter((c) => c.ee)
+      .map((c) => ({ value: c.name.en, label: c.name.en }))
+      .sort(byLabel),
+  );
 
   const klass = [...new Set(chars.map((c) => c.class))]
     .map((k) => ({ value: cap(k), label: cap(k) }))

@@ -12,6 +12,7 @@
  * Tout se passe côté serveur (traduction = clés API, écriture = fs), d'où la
  * garde `IS_DEV`. Le retour est un résumé texte (jamais de JSX).
  */
+import type { CharacterCurated } from '@contracts';
 import { IS_DEV } from '@/lib/admin/guard';
 import { autoTranslate } from '@/lib/admin/translate-actions';
 import {
@@ -20,10 +21,14 @@ import {
   savePremiumLimited,
   type ReviewEntryData,
 } from '@/lib/admin/general-guide-store';
+import { getCharacter } from '@/lib/data/characters';
+import { getCharacterCurated } from '@/lib/data/curated';
+import { upsertCharacterCurated } from '@/lib/admin/curated-store';
 import {
   parseContribution,
   CONTRIBUTION_LABELS,
   type Contribution,
+  type EditorialContributionPayload,
   type ReviewContributionPayload,
 } from '@/lib/contribute/contribution';
 
@@ -73,6 +78,75 @@ async function importReview(c: Contribution): Promise<ImportResult> {
   return { ok: true, summary: `${label} › ${bucket} › ${entry.name}: ${replaced ? 'edited' : 'added'}${trad}.` }; // prettier-ignore
 }
 
+/* --- Handler `character-pros-cons-synergy` --- */
+
+type LText = Partial<Record<'en' | 'jp' | 'kr' | 'zh' | 'fr', string>>;
+const hasText = (t: LText): boolean => Object.values(t).some((v) => v?.trim());
+
+/** Remplit sur place les langues vides de tous les textes éditoriaux (un batch). */
+async function fillEditorialTranslations(payload: EditorialContributionPayload): Promise<number> {
+  const recs: LText[] = [];
+  const collect = (t?: LText) => {
+    if (t?.en?.trim()) recs.push(t);
+  };
+  payload.prosCons?.pros?.forEach(collect);
+  payload.prosCons?.cons?.forEach(collect);
+  payload.synergies?.forEach((g) => collect(g.reason));
+  if (!recs.length) return 0;
+
+  const { results } = await autoTranslate(
+    recs.map((r) => r.en!),
+    [...TARGET_LANGS],
+  );
+  let filled = 0;
+  recs.forEach((rec, k) => {
+    const tr = results[k] ?? {};
+    for (const l of TARGET_LANGS) {
+      if (tr[l]?.trim() && !rec[l]?.trim()) {
+        rec[l] = tr[l]!;
+        filled++;
+      }
+    }
+  });
+  return filled;
+}
+
+/** Merge la slice éditoriale ÉDITÉE (pros/cons OU synergies) dans le curé d'un perso. */
+async function importEditorial(c: Contribution): Promise<ImportResult> {
+  const payload = c.payload as EditorialContributionPayload;
+  const id = payload?.id?.trim();
+  if (!id) return { ok: false, errors: ['contribution has no character id.'] };
+  const char = getCharacter(id);
+  if (!char) return { ok: false, errors: [`unknown character id “${id}”.`] };
+
+  const filled = await fillEditorialTranslations(payload);
+
+  // Merge par PRÉSENCE : chaque outil n'édite qu'une slice. Une slice absente du
+  // payload est LAISSÉE INTACTE (jamais effacée) ; le reste du curé est préservé.
+  const merged: CharacterCurated = { ...getCharacterCurated(id) };
+  const parts: string[] = [];
+  if (payload.prosCons !== undefined) {
+    const pros = (payload.prosCons.pros ?? []).filter(hasText);
+    const cons = (payload.prosCons.cons ?? []).filter(hasText);
+    if (pros.length || cons.length) merged.prosCons = { pros, cons };
+    else delete merged.prosCons;
+    parts.push(`${pros.length} pro(s), ${cons.length} con(s)`);
+  }
+  if (payload.synergies !== undefined) {
+    const synergies = payload.synergies.filter((g) => g.heroes?.length);
+    if (synergies.length) merged.synergies = synergies;
+    else delete merged.synergies;
+    parts.push(`${synergies.length} synergy group(s)`);
+  }
+  if (!parts.length) return { ok: false, errors: ['contribution has no editorial content.'] };
+
+  const errors = await upsertCharacterCurated(id, merged);
+  if (errors.length) return { ok: false, errors };
+
+  const trad = filled ? `, ${filled} translation(s) filled` : '';
+  return { ok: true, summary: `${CONTRIBUTION_LABELS[c.kind]} › ${char.name.en}: ${parts.join(', ')}${trad}.` }; // prettier-ignore
+}
+
 /** Point d'entrée : parse l'enveloppe, route par `kind`, intègre et enregistre. */
 export async function importContribution(raw: unknown): Promise<ImportResult> {
   if (!IS_DEV) return { ok: false, errors: ['forbidden (dev-only tool).'] };
@@ -86,6 +160,9 @@ export async function importContribution(raw: unknown): Promise<ImportResult> {
   switch (c.kind) {
     case 'premium-limited-review':
       return importReview(c);
+    case 'character-pros-cons':
+    case 'character-synergy':
+      return importEditorial(c);
     default:
       return { ok: false, errors: [`No handler for kind “${c.kind}”.`] };
   }

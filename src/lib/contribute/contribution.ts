@@ -12,16 +12,20 @@
  * `import type` (effacés à la compilation). Ajouter un `kind` = l'ajouter au type
  * union + à `CONTRIBUTION_LABELS`, et brancher son handler côté serveur.
  */
+import type { CharacterCurated } from '@contracts';
 import type { ReviewEntryData } from '@/lib/admin/general-guide-store';
 
 export const CONTRIBUTION_VERSION = 1;
 
 /** Discriminant de routage : un `kind` = un guide/fragment cible. */
-export type ContributionKind = 'premium-limited-review';
+export type ContributionKind =
+  'premium-limited-review' | 'character-pros-cons' | 'character-synergy';
 
 /** Libellés humains (affichés par le tool d'import ; le routage se fait sur `kind`). */
 export const CONTRIBUTION_LABELS: Record<ContributionKind, string> = {
   'premium-limited-review': 'Premium & Limited — review',
+  'character-pros-cons': 'Character — pros/cons',
+  'character-synergy': 'Character — synergies',
 };
 
 export type ContributionMode = 'edit' | 'add';
@@ -41,6 +45,19 @@ export type ReviewBucket = 'premium' | 'limited';
 export interface ReviewContributionPayload {
   bucket: ReviewBucket;
   entry: ReviewEntryData;
+}
+
+/**
+ * `character-pros-cons` / `character-synergy` : couche éditoriale d'UN perso (par
+ * `id`). Chaque outil n'édite QU'UNE slice → seule la slice PRÉSENTE est remplacée
+ * à l'import (une slice absente = laissée intacte, jamais effacée) ; le reste du
+ * curé (skills, gear reco…) est préservé côté serveur. Les héros de synergie sont
+ * des IDs (résolus nom→id à l'export).
+ */
+export interface EditorialContributionPayload {
+  id: string;
+  prosCons?: CharacterCurated['prosCons'];
+  synergies?: CharacterCurated['synergies'];
 }
 
 /** Emballe un payload dans l'enveloppe versionnée (côté outil public). */

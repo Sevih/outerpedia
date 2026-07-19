@@ -28,15 +28,13 @@
 
 ## 💡 Feature — Outils publics de contribution (Jaego — RESTE)
 
-> **Shiraen (premium/limited) = LIVRÉ le 19/07** (cf. DONE) : outil public
-> `/contribute/premium-reviews`, enveloppe de contribution auto-descriptive
-> (`kind`/`mode`/`payload`) et tool d'import admin GÉNÉRIQUE (route par `kind`,
-> édite/ajoute, auto-traduit, enregistre). Le socle réutilisable (enveloppe +
-> `importContribution` + widget) est en place → brancher un contributeur =
-> ajouter un `kind` + son handler.
-> RESTE ci-dessous les générateurs **Jaego** (pros/cons + synergies + gear reco +
-> recommended team) : à faire seulement une fois les formats curés concernés
-> figés (risque de doublon sinon).
+> **LIVRÉ le 19/07** (cf. DONE) : socle réutilisable (enveloppe de contribution
+> `kind`/`mode`/`payload` + tool d'import admin GÉNÉRIQUE + widget) → brancher un
+> contributeur = ajouter un `kind` + son handler. Outils publics déjà branchés :
+> **Shiraen** premium/limited (`/contribute/premium-reviews`) ; **Jaego**
+> **pros/cons** (`/contribute/pros-cons`) et **synergies** (`/contribute/synergies`).
+> RESTE ci-dessous les deux derniers générateurs **Jaego** (gear reco +
+> recommended team) : à faire une fois leurs formats curés figés (risque de doublon).
 
 Générateurs publics de « syntaxe » pour que les contributeurs composent sans
 suivre un guide de syntaxe à la main, exportent un **JSON au format curé** (via

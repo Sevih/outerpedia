@@ -6,6 +6,27 @@
 
 ## 2026-07-19
 
+- **Contribution pros/cons & synergies (Jaego) — deux outils publics + import.**
+  Deux outils SÉPARÉS (pros/cons et synergies sont deux choses distinctes, comme
+  l'admin `/admin/tools/pros-cons` vs `/synergies`).
+  • **Réutilisation, pas de réécriture** : le corps d'édition de `EditorialEditor`
+  (pros/cons + synergies) extrait dans une brique CONTRÔLÉE partagée
+  `editorial/EditorialFields.tsx` ; l'éditeur admin l'utilise (langue + trad +
+  save autour), les outils publics aussi (EN only + export). Une seule UI de saisie.
+  • **Outils publics** `/contribute/pros-cons` + `/contribute/synergies`
+  (`EditorialPublicTool`, paramétré par `slice`/`kind`) : choix du perso par
+  **grille de portraits** cliquables (pas un select — on choisit à la tête), avec
+  toggle **Add** (persos SANS la slice) / **Edit** (ceux qui en ont), pré-rempli
+  depuis l'éditorial existant. Data serveur commune factorisée
+  (`editorial-tool-data.ts`). Hub : 2 cartes.
+  • **Deux `kind`** `character-pros-cons` / `character-synergy` → même handler
+  `importEditorial` : merge par PRÉSENCE de slice (un import synergies n'efface
+  PAS les pros/cons existants, et inversement), reste du curé (skills, gear reco)
+  préservé, batch auto-trad EN→vides, `upsertCharacterCurated`. Héros de synergie
+  résolus nom→id à l'export. Import via le tool générique `/admin/guides`.
+  • **Fix** : clé React dupliquée dans `InlineTextField` — les refs perso
+  d'autocomplétion (`inline-refs`) dédoublonnées par valeur (20+ persos partagent
+  un même nom EN : Ame, Snow, Eva… base/skin). tsc + eslint OK.
 - **Sous-outil `/4-comics` (galerie BD) — 3ᵉ et dernier média** (ordre Sevih :
   ost → wallpapers → 4-comics ✓). BD faites main (hors jeu) : **ramenées en V3**
   (27×3 EN/JP/KR de la V2 → `.editorial/comics/<LANG>/`, gitignoré → R2), zéro
