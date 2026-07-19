@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/contributors',
     '/coupons',
     '/tools',
+    '/tierlist',
   ];
 
   const entry = (path: string, lastModified?: string): MetadataRoute.Sitemap[number] => ({

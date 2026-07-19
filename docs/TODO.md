@@ -87,9 +87,13 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
 > ASSUMÉES le temps du portage. Chaque page arrive avec ses clés de locale
 > DÉJÀ pré-seedées ×5 (cf. item « pré-seed » de la section Docs).
 
-- [ ] **`/tierlist`** — clés `tierlist.*` ; consommera les helpers seo.ts
-      gardés (`getMonthYear` → `serverNow`, `buildVideoObjectJsonLd`,
-      `buildFaqJsonLd`).
+- [~] **`/tierlist`** — **HUB FAIT** le 19/07 (cf. DONE) : 2 cartes phares
+  PvE/PvP + rail (ee-base/ee-plus10/most-used), `getMonthYear`, au sitemap ;
+  liens vers `/tools/<slug>` (sous-outils non portés). **RESTE** : l'aperçu
+  « top S-tier » par carte (données de RANG par perso absentes en V3 — elles
+  vivent dans l'outil tierlist, non porté) ; et les helpers seo.ts encore
+  inutilisés (`buildVideoObjectJsonLd`, `buildFaqJsonLd`) pour la vraie page
+  d'outil tierlist.
 - [~] **`/tools`** — **LANDING FAITE** le 19/07 (cf. DONE) : catégories
   (rankings/info/media/simulators/equipment) + cartes des 17 outils visibles,
   onglets + filtre par hash (`#cat-…`), données curées `data/curated/tools/`,

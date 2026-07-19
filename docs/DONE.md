@@ -6,6 +6,14 @@
 
 ## 2026-07-19
 
+- **Hub `/tierlist`** — dernière page manquante de l'inventaire footer/nav
+  (layout d'abord). Hero (`getMonthYear`, compteurs rankings/units), deux cartes
+  phares **PvE vs PvP** (badge VS central) et un rail vers 3 autres classements
+  (ee-priority-base / ee-priority-plus10 / most-used-units) — métadonnées prises
+  dans le domaine outils (`getVisibleTools`), liens vers `/tools/<slug>` (404 le
+  temps du portage). Au sitemap. **Aperçu « top S-tier » différé** : aucune donnée
+  de RANG par perso en V3 (elle vit dans l'outil tierlist non porté). Page serveur
+  pure (liens seulement).
 - **Guide editor — famille complète (6 catégories) sur un shell unifié** — suite
   du pilote joint-challenge : l'éditeur couvre désormais TOUTE la famille de boss.
   Généralisation autour d'un **`CatSpec` par catégorie** (`guide-draft.ts`), qui
