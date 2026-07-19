@@ -22,7 +22,13 @@
   client (onglets, grille portrait/paysage, lightbox clavier + download) sur
   tokens V3 (lightbox always-dark en valeurs arbitraires `[#fff]`/`[#000]`).
   Helper `lib/wallpapers.ts`. Registre outils. 2 clés i18n `Full:Scenario`/
-  `Full:Others` ×5. tsc + eslint OK. **Reste** : collect+push R2 au pool worker.
+  `Full:Others` ×5. tsc + eslint OK.
+  • **Pool worker livré** (be3e700, parité V2 exacte : Cutin 222/Banner 90/Art 11/
+  Full 135) → `wallpapers.json` régénéré : **690 wallpapers** (Outerpedia 5,
+  HeroFullArt 227, + jeu). **Collect+push câblés** : `assets:collect-wallpapers`
+  (pool jeu + éditorial → staging `images/download/<cat>`, HeroFullArt réutilise
+  `characters/full`) ajouté à `pnpm images`. Chaîne d'auto-maintenance bouclée
+  (Hook 1 worker ✓, Hook 2 build.ts en cours côté worker, collect/push moi ✓).
 - **Admin — toute l'UI passée en anglais** (décision Sevih). Balayage complet de
   la matrice (composants `admin/*`, pages `.dev`, stores/actions `lib/admin`,
   pickers) : seuls les CHAÎNES vues par l'utilisateur sont traduites, les
