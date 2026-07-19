@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...GUIDE_CATEGORY_SLUGS.filter((c) => countGuides(c) > 0).map((c) => `/guides/${c}`),
     '/legal',
     '/contributors',
+    '/coupons',
   ];
 
   const entry = (path: string, lastModified?: string): MetadataRoute.Sitemap[number] => ({

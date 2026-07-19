@@ -6,6 +6,14 @@
 
 ## 2026-07-19
 
+- **Page `/coupons`** — liste complète des codes promo depuis `coupons.json`
+  (curé) : 90 codes triés actifs → à venir → expirés (12 actifs / 78 expirés
+  ce jour), badge de statut, validité, récompenses résolues en `ItemInline`,
+  copie presse-papier ; instructions de rachat MANUEL en tête (Android + lien iOS
+  officiel via HTML i18n de confiance). Assemblage `getAllCoupons` dans
+  `lib/home.ts` ; composant client `CouponsList`. Au sitemap. **Rachat one-click
+  NON porté** — `REDEEM_ENABLED=false` même en V2 (accord VA Games en attente) ;
+  le lien « voir les N codes » de la home pointe désormais sur une vraie page.
 - **Page `/contributors`** — 3ᵉ 404 du footer fermée. `contributors.json`
   ramené du V2 en `data/curated/` (liste curée, pas de la donnée de jeu) ;
   avatars (`images/contributors/*`) collectés **data-driven** (le manifest lit

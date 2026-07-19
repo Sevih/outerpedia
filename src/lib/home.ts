@@ -128,6 +128,41 @@ export function getActiveCoupons(
   return { codes, activeCount: active.length };
 }
 
+export type CouponStatus = 'active' | 'upcoming' | 'expired';
+
+export interface CouponFullVM extends CouponVM {
+  status: CouponStatus;
+}
+
+function couponStatus(c: RawCoupon, today: string): CouponStatus {
+  if (c.start > today) return 'upcoming';
+  if (c.end < today) return 'expired';
+  return 'active';
+}
+
+/**
+ * TOUS les coupons avec statut (actifs, puis à venir, puis expirés ; chaque
+ * groupe du plus récent au plus ancien), récompenses résolues. Pour la page
+ * `/coupons` (la home n'en montre qu'un sous-ensemble actif).
+ */
+export function getAllCoupons(lang: Lang): CouponFullVM[] {
+  const today = todayUTC();
+  const rank: Record<CouponStatus, number> = { active: 0, upcoming: 1, expired: 2 };
+  return (couponsData as unknown as RawCoupon[])
+    .map((c) => ({ raw: c, status: couponStatus(c, today) }))
+    .sort((a, b) => rank[a.status] - rank[b.status] || b.raw.start.localeCompare(a.raw.start))
+    .map(({ raw, status }) => ({
+      code: raw.code,
+      start: raw.start,
+      end: raw.end,
+      status,
+      rewards: Object.entries(raw.description).map(([key, qty]) => ({
+        item: resolveReward(key, lang),
+        qty,
+      })),
+    }));
+}
+
 /** Planning de buff quotidien (dérivé des posts par `get-news`). */
 export function getBuffSchedule(): BuffScheduleEntry[] {
   return ((buffData as { schedule?: BuffScheduleEntry[] }).schedule ?? []).slice();

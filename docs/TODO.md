@@ -100,8 +100,12 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
       patch-history, coupon-codes, event, wallpapers, 4-comics, ost —
       namespaces `tools.*`/`progress.*`. Le footer met les 6 premiers en
       avant (`/tools#slug`).
-- [ ] **`/coupons`** — clés `coupons.*` ; lié à l'EXCEPTION PRIO (le regen
-      coupons V2 reste la source jusqu'à la bascule prod).
+- [x] ~~**`/coupons`** — clés `coupons.*` ; lié à l'EXCEPTION PRIO (le regen
+      coupons V2 reste la source jusqu'à la bascule prod).~~ FAIT le 19/07
+      (cf. DONE) : liste complète (actifs/à venir/expirés) depuis `coupons.json`,
+      statut + validité + copie, au sitemap. **Rachat one-click NON porté** —
+      `REDEEM_ENABLED=false` même en V2 (accord VA Games en attente) ; à porter
+      (`lib/redeem` + route `/api/redeem`) le jour du feu vert.
 - [x] ~~**`/contributors`** — dépend du portage `contributors.json` (item 📦).~~
       FAIT le 19/07 (cf. DONE) : `contributors.json` ramené en curé + avatars
       (data-driven), page statique i18n, perso favori via `parseText` (`{P/…}`).
