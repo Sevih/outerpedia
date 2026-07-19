@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Equipment Guide",
+    "jp": "装備ガイド",
+    "kr": "장비 가이드",
+    "zh": "装备指南",
+    "fr": "Guide Équipement"
+  },
+  "description": {
+    "en": "Gear mechanics, upgrading systems and how to obtain the best equipment in Outerplane — with Singularity Ascension costs and bonus pools derived from game data.",
+    "jp": "アウタープレーンの装備の仕組み、強化システム、最高の装備の入手方法 — 特異点昇華のコストとボーナスプールはゲームデータから導出。",
+    "kr": "아우터플레인의 장비 시스템, 강화 방법, 최고의 장비 획득법 — 특이점 승화 비용과 보너스 풀은 게임 데이터에서 도출.",
+    "zh": "《Outerplane》的装备机制、强化系统与如何获取最佳装备——奇点升华消耗与额外效果池均由游戏数据推导。",
+    "fr": "Mécaniques d'équipement, systèmes d'upgrade et comment obtenir le meilleur gear dans Outerplane — coûts et pools de bonus de la Singularity Ascension dérivés des données de jeu."
+  },
+  "icon": "TI_Item_Craft_Material_10",
+  "author": "Shiraen",
+  "updated": "2026-07-19",
+  "order": 2,
+  "tier": "heroes-gear"
+}

@@ -407,6 +407,8 @@ export interface AscensionMaterialView {
 export interface AscensionView {
   activation: { price: number; rate: number; materials: AscensionMaterialView[] };
   steps: { to: number; price: number; rate: number; materials: AscensionMaterialView[] }[];
+  /** Reroll du bonus +15 (Reload Cartridge) — coût fixe, 100 %. */
+  reroll: { price: number; rate: number; materials: AscensionMaterialView[] };
   bonuses: AscensionBonusView[];
 }
 
@@ -435,6 +437,11 @@ function ascensionView(group: 'weapon' | 'armor', lang: Lang): AscensionView {
       rate: st.rate,
       materials: mats(st.materials),
     })),
+    reroll: {
+      price: s.reroll.price,
+      rate: s.reroll.rate,
+      materials: mats(s.reroll.materials),
+    },
     bonuses: s.bonuses[group].map((b) => ({
       name: lRec(b.name, lang) || b.name.en,
       icon: b.icon,
@@ -443,6 +450,15 @@ function ascensionView(group: 'weapon' | 'armor', lang: Lang): AscensionView {
       ...(b.splitLabels ? { splitLabels: b.splitLabels } : {}),
     })),
   };
+}
+
+/**
+ * Vue Ascension GÉNÉRIQUE (indépendante d'un item) — même source `enhance.json`
+ * que le ledger de la fiche, exposée pour le guide gear (tables d'ascension
+ * hors contexte d'une pièce précise).
+ */
+export function getAscensionView(group: 'weapon' | 'armor', lang: Lang): AscensionView {
+  return ascensionView(group, lang);
 }
 
 // --- construction du modèle par type ------------------------------------------------

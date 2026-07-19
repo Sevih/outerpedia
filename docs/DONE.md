@@ -117,6 +117,30 @@
     **Recent Updates différée** (lit `getChangelog`,
     non porté). Vérifié runtime : 4 bannières actives, 12 coupons, buff du jour OK ;
     465 tests verts.
+- **Guide « Equipment Guide » porté** (gear, heroes-gear, ordre 2) — le plus
+  gros des general-guides, 5 onglets (Bases, Upgrading, Ascension, Obtaining,
+  FAQ). Port INTÉGRAL fidèle (décision Sevih), mais **zéro hardcode** : les
+  tables numériques que la V2 figeait DÉRIVENT toutes de la donnée de jeu, en
+  réutilisant les briques de l'outil `equipment/[slug]` déjà en place —
+  - _ascension_ (activation, steps +11→+15, bonus +15 offensif/défensif avec
+    grades C→S+ et split F/W/E · L/D, reroll) : `getAscensionView('weapon'|'armor')`
+    exposé depuis `equipment-detail.ts`, source `enhance.json` (générique, sans
+    item) ; main-stat % dérivé des facteurs (0.15 + 0.1×4 + 0.2) ;
+  - _comparaison d'enhancement_ (Normal 1★ 18→90, Epic 2★ 54→270, Leg 1★ 30→150) :
+    nouveau champ `EnhanceRules.examples` — base ATK par archétype (grade, star)
+    tiré de `ItemOptionTemplet`, × ×5 au +10 ;
+  - _breakthrough_ (Surefire Greatsword ATK 200→240 + textes T0→T4, Immunity /
+    Penetration Set 2P/4P base vs T4) : `getEquipmentDetail` (mêmes passives /
+    setEffects que la fiche).
+  - _reroll manquant → DÉRIVÉ_ : le générateur `enhance.ts` mentionnait « reroll »
+    sans l'émettre ; ajouté `singularity.reroll` (`SET_EQUIP_REROLL` : 500 000 or
+    - Reload Cartridge ×10, 100 %) — plus besoin de curer.
+      Reste ÉDITORIAL (prose 5 langues transplantée V2 → `labels.ts`) : mécaniques
+      substats (barre 6 segments **sans valeurs chiffrées**, décision Sevih), tips
+      (ratios 2:1 / 6:1), Change Stats, priorité par slot, FAQ. Nouveaux tokens
+      `--substat-roll/reforge/empty` (jaune roll / orange reforge / creux). Guide V3 :
+      `SegmentedTabs` 5 onglets, cartes `EquipmentIcon`, items `{I-I/…}` parse-text
+      strict. Rendu 200 EN + FR ; datagen régénéré (`enhance.json`, lambda écarté).
 - **Guide « Growth Systems » porté** (heroes-growth, heroes-gear, ordre 1) —
   gros guide de systèmes, 7 onglets (Gems fusionné dans Special Equipment,
   décision Sevih). Nouveau générateur `hero-growth.json` : les tables NUMÉRIQUES

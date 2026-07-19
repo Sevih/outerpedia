@@ -164,6 +164,7 @@ export type {
   AscensionGrade,
   AscensionMaterial,
   AscensionStep,
+  EnhanceExample,
   EnhanceRules,
 } from '../generators/enhance';
 export type {

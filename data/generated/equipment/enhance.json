@@ -2,6 +2,26 @@
   "enhanceFactor": 0.4,
   "maxEnhance": 10,
   "tierFactor": 0.05,
+  "examples": [
+    {
+      "grade": "normal",
+      "star": 1,
+      "statKey": "ATK",
+      "base": 18
+    },
+    {
+      "grade": "rare",
+      "star": 2,
+      "statKey": "ATK",
+      "base": 54
+    },
+    {
+      "grade": "unique",
+      "star": 1,
+      "statKey": "ATK",
+      "base": 30
+    }
+  ],
   "singularity": {
     "minGrade": "unique",
     "minStar": 6,
@@ -272,6 +292,30 @@
         ]
       }
     ],
+    "reroll": {
+      "price": 500000,
+      "rate": 100,
+      "materials": [
+        {
+          "id": "25002",
+          "count": 10,
+          "name": {
+            "en": "Reload Cartridge",
+            "jp": "リロードカートリッジ",
+            "kr": "리로드 카트리지",
+            "zh": "换弹匣"
+          },
+          "icon": "TI_Equip_Monad_Growth_Enhance_02",
+          "grade": "unique",
+          "desc": {
+            "en": "A consumable that can recalculate the power of Singularity Gear enhanced to the maximum. Used for option recalculation of Singularity Gear.",
+            "jp": "最大まで強化された特異点装備の力を再算定できる消耗品です。特異点装備のオプション再算定に活用されます。",
+            "kr": "최대까지 강화된 특이점 장비의 힘을 재산정 할 수 있는 소모품입니다. 특이점 장비의 옵션 재산정에 활용됩니다.",
+            "zh": "可重新计算强化至最大的奇点装备力量的消耗品。用于奇点装备的选项重新计算。"
+          }
+        }
+      ]
+    },
     "bonuses": {
       "weapon": [
         {

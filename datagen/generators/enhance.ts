@@ -67,12 +67,26 @@ export interface AscensionBonus {
   splitLabels?: { primary: string; alt: string };
 }
 
+/**
+ * Exemple pédagogique d'enhancement (comparaison par rareté du guide gear) :
+ * base ATK d'une arme représentative d'un archétype (grade, star). Le +10
+ * (× (1 + enhanceFactor × maxEnhance)) se calcule à l'affichage.
+ */
+export interface EnhanceExample {
+  grade: string;
+  star: number;
+  statKey: string;
+  base: number;
+}
+
 export interface EnhanceRules {
   /** Croissance par niveau d'enchant (UpgradeFactorforOP). */
   enhanceFactor: number;
   maxEnhance: number;
   /** Bonus par palier de breakthrough (facteurs breakLimits, constants). */
   tierFactor: number;
+  /** Archétypes (grade, star) pour illustrer la comparaison d'enhancement. */
+  examples: EnhanceExample[];
   singularity: {
     /** Conditions d'éligibilité (grade slug + étoiles mini). */
     minGrade: string;
@@ -82,6 +96,8 @@ export interface EnhanceRules {
     addReforge: number;
     addLevels: number;
     steps: AscensionStep[];
+    /** Reroll du bonus +15 (Reload Cartridge) : coût fixe, 100 % de réussite. */
+    reroll: { price: number; rate: number; materials: AscensionMaterial[] };
     /** Bonus au +15 par groupe d'équipement (armes/amulettes vs armure). */
     bonuses: { weapon: AscensionBonus[]; armor: AscensionBonus[] };
   };
@@ -94,8 +110,37 @@ export function buildEnhanceRules(): EnhanceRules {
   const enhanceFactor = numf(enchant[0]?.UpgradeFactorforOP) || 0.4;
   const maxEnhance = Math.max(...enchant.map((r) => num(r.EnchantLevel)));
 
-  const items = new Map(loadTable('ItemTemplet').map((r) => [r.ID, r]));
+  const allItems = loadTable('ItemTemplet');
+  const items = new Map(allItems.map((r) => [r.ID, r]));
   const textItem = loadTextIndex('TextItem');
+
+  // Comparaison d'enhancement : base ATK d'une arme par archétype (grade, star).
+  // Archétypes repris du guide gear V2 : Normal 1★, Épic (rare) 2★, Légendaire
+  // (unique) 1★ — le base sort du 1er ATK plat du groupe de main option.
+  const optRows = loadTable('ItemOptionTemplet');
+  const weaponItems = allItems.filter((r) => r.ItemSubType === 'ITS_EQUIP_WEAPON');
+  const exampleOf = (gradeEnum: string, star: number): EnhanceExample | null => {
+    const it = weaponItems.find((r) => r.ItemGrade === gradeEnum && num(r.BasicStar) === star);
+    if (!it) return null;
+    const grp = (it.MainOptionGroupID ?? '').split(',')[0];
+    const row = optRows.find(
+      (o) => o.GroupID === grp && o.StatType === 'ST_ATK' && o.ApplyingType === 'OAT_ADD',
+    );
+    if (!row) return null;
+    return {
+      grade: slugEnum(gradeEnum) || 'normal',
+      star,
+      statKey: 'ATK',
+      base: num(row.OptionValue),
+    };
+  };
+  const examples = (
+    [
+      exampleOf('IG_NORMAL', 1),
+      exampleOf('IG_RARE', 2),
+      exampleOf('IG_UNIQUE', 1),
+    ] as (EnhanceExample | null)[]
+  ).filter((e): e is EnhanceExample => e !== null);
   const materialsOf = (r: Record<string, string>): AscensionMaterial[] => {
     const out: AscensionMaterial[] = [];
     for (const i of [1, 2, 3]) {
@@ -123,6 +168,7 @@ export function buildEnhanceRules(): EnhanceRules {
   const singAll = loadTable('SingularityEquipEnchantTemplet');
   const sing = singAll.filter((r) => r.ItemSubType === 'ITS_EQUIP_WEAPON');
   const act = sing.find((r) => r.EnchantType === 'SET_ENCHANT');
+  const rerollRow = sing.find((r) => r.EnchantType === 'SET_EQUIP_REROLL');
   const stepRows = sing
     .filter((r) => r.EnchantType === 'SET_EQUIP_ENHANCE')
     .sort((a, b) => num(a.NextEnchantLevel) - num(b.NextEnchantLevel));
@@ -263,6 +309,7 @@ export function buildEnhanceRules(): EnhanceRules {
     enhanceFactor,
     maxEnhance,
     tierFactor: 0.05, // breakLimits.factors — constant sur toute la table, vérifié
+    examples,
     singularity: {
       minGrade: 'unique',
       minStar: 6,
@@ -281,6 +328,11 @@ export function buildEnhanceRules(): EnhanceRules {
         rate: num(r.SuccessRate) / 10000,
         materials: materialsOf(r),
       })),
+      reroll: {
+        price: num(rerollRow?.UpgradePrice),
+        rate: num(rerollRow?.SuccessRate) / 10000,
+        materials: rerollRow ? materialsOf(rerollRow) : [],
+      },
       bonuses,
     },
   };

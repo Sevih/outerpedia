@@ -79,6 +79,13 @@
   --ax-grade-sp: #e02bcd;
   --stat-accent: #fbbf24;
 
+  /* Barre de segments de substat (gear) : jaune = roll initial (max 3), orange
+     = ajouté via reforge, creux = segment inactif. Valeurs V2 (yellow-400 /
+     orange-400 / slate creux). */
+  --substat-roll: #facc15;
+  --substat-reforge: #fb923c;
+  --substat-empty: #334155;
+
   /* CHALEUR des paliers de combat : froid = le début de l'échelle (E), chaud =
      le mur (SSS++). Sert de dégradé à la piste du sélecteur de palier et de
      repère de position — on lit où l'on en est sans rien manipuler.
@@ -274,6 +281,9 @@
   --color-ax-grade-s: var(--ax-grade-s);
   --color-ax-grade-sp: var(--ax-grade-sp);
   --color-stat-accent: var(--stat-accent);
+  --color-substat-roll: var(--substat-roll);
+  --color-substat-reforge: var(--substat-reforge);
+  --color-substat-empty: var(--substat-empty);
   --color-role-dps: var(--role-dps);
   --color-role-support: var(--role-support);
   --color-role-sustain: var(--role-sustain);
