@@ -85,6 +85,10 @@ export const img = {
    * `ogImage` explicite étaient donc mortes.
    */
   ogDefault: () => `${BASE}/images/ui/og_default.jpg`,
+  /** Bannière du bandeau d'accueil (artwork retravaillé, chrome du site). */
+  homeBanner: () => `${BASE}/images/croped_banner.webp`,
+  /** Icône du serveur Discord (encart d'accueil). */
+  discord: () => `${BASE}/images/discord.webp`,
   /** Icône de l'or (coûts d'ascension). */
   gold: () => `${BASE}/images/items/CM_Goods_Gold.webp`,
   /** Icône d'item générique (gifts, pièces de rappel…). */

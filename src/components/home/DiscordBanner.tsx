@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { FaDiscord } from 'react-icons/fa';
+import { img } from '@/lib/images';
 
 /**
  * Encart Discord — lien d'invitation + compteurs membres/en-ligne récupérés via
@@ -52,8 +53,9 @@ export async function DiscordBanner({ strings }: { strings: DiscordStrings }) {
         rel="noopener noreferrer"
         className="card-interactive group flex items-center gap-4 p-4 transition-colors hover:border-[#5865F2]/50"
       >
-        <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-[#5865F2] transition-transform group-hover:scale-110">
-          <FaDiscord className="text-content-strong text-2xl" />
+        <div className="size-12 shrink-0 overflow-hidden rounded-xl transition-transform group-hover:scale-110">
+          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
+          <img src={img.discord()} alt="Discord" className="h-full w-full object-cover" />
         </div>
 
         <div className="min-w-0 flex-1">

@@ -18,9 +18,12 @@
     Assemblage data serveur dans `src/lib/home.ts` (bannières/coupons/buff en
     view-models). Les 3 compteurs partagent une horloge unique
     (`src/hooks/useNow.ts`, `useSyncExternalStore` — même idiome que
-    `SingularityCountdown`, pas de `setState`-dans-effet). Simplifications assumées :
-    pas de carousel mobile (flex-wrap responsive), pas d'images hero/discord
-    dédiées (gradient + icône). **Recent Updates différée** (lit `getChangelog`,
+    `SingularityCountdown`, pas de `setState`-dans-effet). Bannière du site
+    (`croped_banner.webp`) + icône Discord (`discord.webp`) ramenées du pool V2
+    (entrées éditoriales dans le manifest d'assets + copie staging ;
+    `img.homeBanner`/`img.discord`) — la poussée R2 se fera au prochain `pnpm images`.
+    Simplification assumée : pas de carousel mobile (flex-wrap responsive).
+    **Recent Updates différée** (lit `getChangelog`,
     non porté). Vérifié runtime : 4 bannières actives, 12 coupons, buff du jour OK ;
     465 tests verts.
 - **Guide « Growth Systems » porté** (heroes-growth, heroes-gear, ordre 1) —

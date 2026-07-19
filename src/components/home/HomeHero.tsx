@@ -1,11 +1,13 @@
 'use client';
 
 import { FaSearch } from 'react-icons/fa';
+import { img } from '@/lib/images';
 
 /**
- * Bandeau d'accueil : titre discret + déclencheur de recherche (élément focal).
- * Le bouton ouvre la palette globale via un événement `op:open-search` écouté par
- * le header (HeaderClient). Fond en dégradé de tokens — pas d'image dédiée en V3.
+ * Bandeau d'accueil : bannière du site (chrome, `img.homeBanner`) assombrie pour
+ * la lisibilité, titre discret, et déclencheur de recherche (élément focal, ouvre
+ * la palette via l'événement `op:open-search` écouté par le header). Overlay en
+ * noir littéral (par-dessus une photo, indépendant du thème).
  */
 export interface HeroStrings {
   title: string;
@@ -17,9 +19,20 @@ export function HomeHero({ strings }: { strings: HeroStrings }) {
   const openSearch = () => window.dispatchEvent(new CustomEvent('op:open-search'));
 
   return (
-    <section className="from-surface-raised to-surface relative isolate min-h-44 overflow-hidden bg-gradient-to-b md:min-h-52 lg:min-h-60">
+    <section className="relative isolate min-h-44 overflow-hidden md:min-h-52 lg:min-h-60">
+      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
+      <img
+        src={img.homeBanner()}
+        alt={strings.title}
+        className="absolute inset-0 h-full w-full object-cover object-center"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-linear-to-b from-[rgb(0_0_0/0.55)] via-[rgb(0_0_0/0.35)] to-[rgb(0_0_0/0.8)]"
+      />
+
       <div className="relative z-10 mx-auto flex min-h-44 w-full max-w-3xl flex-col items-center justify-center gap-3 px-4 py-8 md:min-h-52 md:py-10 lg:min-h-60 lg:py-12">
-        <h1 className="border-line-subtle bg-surface-overlay/60 text-content-muted rounded-md border px-3 py-1 text-center text-xs font-semibold tracking-widest text-balance uppercase backdrop-blur-xs sm:text-sm">
+        <h1 className="border-line-subtle text-content-muted rounded-md border bg-[rgb(0_0_0/0.35)] px-3 py-1 text-center text-xs font-semibold tracking-widest text-balance uppercase backdrop-blur-xs sm:text-sm">
           {strings.title}
         </h1>
 

@@ -1010,6 +1010,19 @@ export function buildAssetManifest(): AssetRequest[] {
     source: 'background_compressed.webp',
     domain: 'editorial',
   });
+  // Bannière du bandeau d'accueil + icône Discord (chrome du site, hors extraction).
+  push({
+    kind: 'editorial',
+    key: 'images/croped_banner.webp',
+    source: 'croped_banner.webp',
+    domain: 'editorial',
+  });
+  push({
+    kind: 'editorial',
+    key: 'images/discord.webp',
+    source: 'discord.webp',
+    domain: 'editorial',
+  });
   // Icônes de tags (créées pour le wiki).
   for (const tag of [
     'premium',
