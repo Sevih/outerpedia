@@ -218,5 +218,167 @@
   },
   "worldboss/item-22104/monthly": {
     "priority": "A"
+  },
+  "guild/item-30277/daily": {
+    "priority": "B"
+  },
+  "guild/item-30244/weekly": {
+    "priority": "B"
+  },
+  "joint/p-product_event_boss_01_name/daily": {
+    "priority": "S"
+  },
+  "joint/item-30343/weekly": {
+    "priority": "C"
+  },
+  "joint/item-30206/weekly": {
+    "priority": "A"
+  },
+  "friend/p-product_friendship_0000_name/daily": {
+    "priority": "S"
+  },
+  "friend/p-product_friendship_0003_name/daily": {
+    "priority": "A"
+  },
+  "arena/p-product_pvp_0002_name/daily": {
+    "priority": "S"
+  },
+  "arena/item-3308/one-time": {
+    "priority": "C"
+  },
+  "arena/item-5308/one-time": {
+    "priority": "C"
+  },
+  "arena/item-7308/one-time": {
+    "priority": "C"
+  },
+  "arena/item-9308/one-time": {
+    "priority": "C"
+  },
+  "arena/item-779/one-time": {
+    "priority": "B"
+  },
+  "arena/item-1791/one-time": {
+    "priority": "B"
+  },
+  "arena/item-3506/one-time": {
+    "priority": "B"
+  },
+  "arena/item-5506/one-time": {
+    "priority": "B"
+  },
+  "arena/item-7506/one-time": {
+    "priority": "B"
+  },
+  "arena/item-9506/one-time": {
+    "priority": "B"
+  },
+  "arena/item-3312/one-time": {
+    "priority": "B"
+  },
+  "arena/item-5312/one-time": {
+    "priority": "B"
+  },
+  "arena/item-7312/one-time": {
+    "priority": "B"
+  },
+  "arena/item-9312/one-time": {
+    "priority": "B"
+  },
+  "arena/item-3240/one-time": {
+    "priority": "B"
+  },
+  "arena/item-5240/one-time": {
+    "priority": "B"
+  },
+  "arena/item-7240/one-time": {
+    "priority": "B"
+  },
+  "arena/item-9240/one-time": {
+    "priority": "B"
+  },
+  "arena/item-3120/one-time": {
+    "priority": "B"
+  },
+  "arena/item-5120/one-time": {
+    "priority": "B"
+  },
+  "arena/item-7120/one-time": {
+    "priority": "B"
+  },
+  "arena/item-9120/one-time": {
+    "priority": "B"
+  },
+  "stars/p-product_memorystar_0001_name/daily": {
+    "priority": "B"
+  },
+  "stars/p-product_memorystar_0003_name/daily": {
+    "priority": "S"
+  },
+  "stars/item-22103/monthly": {
+    "priority": "A"
+  },
+  "stars/item-20008/one-time": {
+    "priority": "A"
+  },
+  "stars/item-21128/one-time": {
+    "priority": "B"
+  },
+  "stars/item-21129/one-time": {
+    "priority": "A"
+  },
+  "stars/item-1001002/one-time": {
+    "priority": "B"
+  },
+  "stars/item-500018/monthly": {
+    "priority": "B"
+  },
+  "stars/item-1000007/daily": {
+    "priority": "S"
+  },
+  "al/p-product_adventure_license_01/one-time": {
+    "priority": "C"
+  },
+  "al/item-10996/one-time": {
+    "priority": "B"
+  },
+  "al/item-10997/one-time": {
+    "priority": "B"
+  },
+  "al/item-780/one-time": {
+    "priority": "A"
+  },
+  "al/item-1792/one-time": {
+    "priority": "A"
+  },
+  "al/item-3336/one-time": {
+    "priority": "A"
+  },
+  "al/item-5336/one-time": {
+    "priority": "A"
+  },
+  "al/item-7336/one-time": {
+    "priority": "A"
+  },
+  "al/item-9336/one-time": {
+    "priority": "A"
+  },
+  "survey/item-30367/monthly": {
+    "priority": "C"
+  },
+  "survey/item-30326/monthly": {
+    "priority": "S"
+  },
+  "survey/item-30271/one-time": {
+    "priority": "B"
+  },
+  "survey/item-30272/one-time": {
+    "priority": "B"
+  },
+  "survey/item-30274/one-time": {
+    "priority": "B"
+  },
+  "survey/item-2000052/one-time": {
+    "priority": "A"
   }
 }

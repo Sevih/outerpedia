@@ -91,7 +91,8 @@
           "limit": {
             "count": 1,
             "period": "daily"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "guild/item-20003/daily",
@@ -250,7 +251,8 @@
           "limit": {
             "count": 5,
             "period": "weekly"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "guild/item-20203/weekly",
@@ -324,7 +326,8 @@
           "limit": {
             "count": 1,
             "period": "daily"
-          }
+          },
+          "priority": "S"
         },
         {
           "key": "joint/item-21104/weekly",
@@ -383,7 +386,8 @@
           "limit": {
             "count": 1,
             "period": "weekly"
-          }
+          },
+          "priority": "C"
         },
         {
           "key": "joint/gold-20000/weekly",
@@ -422,7 +426,8 @@
           "limit": {
             "count": 1,
             "period": "weekly"
-          }
+          },
+          "priority": "A"
         },
         {
           "key": "joint/item-30299/weekly",
@@ -556,7 +561,8 @@
           "limit": {
             "count": 4,
             "period": "daily"
-          }
+          },
+          "priority": "S"
         },
         {
           "key": "friend/gold-10000/daily",
@@ -615,7 +621,8 @@
           "limit": {
             "count": 1,
             "period": "daily"
-          }
+          },
+          "priority": "A"
         },
         {
           "key": "friend/item-30111/daily",
@@ -709,7 +716,8 @@
           "limit": {
             "count": 3,
             "period": "daily"
-          }
+          },
+          "priority": "S"
         },
         {
           "key": "arena/item-20203/weekly",
@@ -748,7 +756,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "C"
         },
         {
           "key": "arena/item-5308/one-time",
@@ -767,7 +776,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "C"
         },
         {
           "key": "arena/item-7308/one-time",
@@ -786,7 +796,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "C"
         },
         {
           "key": "arena/item-9308/one-time",
@@ -805,7 +816,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "C"
         },
         {
           "key": "arena/item-779/one-time",
@@ -824,7 +836,8 @@
           "limit": {
             "count": 5,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-1791/one-time",
@@ -843,7 +856,8 @@
           "limit": {
             "count": 5,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-3506/one-time",
@@ -862,7 +876,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-5506/one-time",
@@ -881,7 +896,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-7506/one-time",
@@ -900,7 +916,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-9506/one-time",
@@ -919,7 +936,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-3312/one-time",
@@ -938,7 +956,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-5312/one-time",
@@ -957,7 +976,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-7312/one-time",
@@ -976,7 +996,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-9312/one-time",
@@ -995,7 +1016,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-3240/one-time",
@@ -1014,7 +1036,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-5240/one-time",
@@ -1033,7 +1056,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-7240/one-time",
@@ -1052,7 +1076,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-9240/one-time",
@@ -1071,7 +1096,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-3120/one-time",
@@ -1090,7 +1116,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-5120/one-time",
@@ -1109,7 +1136,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-7120/one-time",
@@ -1128,7 +1156,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "arena/item-9120/one-time",
@@ -1147,7 +1176,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         }
       ]
     },
@@ -1181,7 +1211,8 @@
           "limit": {
             "count": 1,
             "period": "daily"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "stars/item-1000004/daily",
@@ -1220,7 +1251,8 @@
           "limit": {
             "count": 3,
             "period": "daily"
-          }
+          },
+          "priority": "S"
         },
         {
           "key": "stars/item-20004/daily",
@@ -1399,7 +1431,8 @@
           "limit": {
             "count": 1,
             "period": "monthly"
-          }
+          },
+          "priority": "A"
         },
         {
           "key": "stars/item-22104/monthly",
@@ -1578,7 +1611,8 @@
           "limit": {
             "count": 0,
             "period": "one-time"
-          }
+          },
+          "priority": "A"
         },
         {
           "key": "stars/item-21128/one-time",
@@ -1597,7 +1631,8 @@
           "limit": {
             "count": 0,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "stars/item-21129/one-time",
@@ -1616,7 +1651,8 @@
           "limit": {
             "count": 0,
             "period": "one-time"
-          }
+          },
+          "priority": "A"
         },
         {
           "key": "stars/item-1001002/one-time",
@@ -1635,7 +1671,8 @@
           "limit": {
             "count": 0,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "stars/item-500018/monthly",
@@ -1654,7 +1691,8 @@
           "limit": {
             "count": 1,
             "period": "monthly"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "stars/item-1000007/daily",
@@ -1673,7 +1711,8 @@
           "limit": {
             "count": 1,
             "period": "daily"
-          }
+          },
+          "priority": "S"
         }
       ]
     },
@@ -1882,7 +1921,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "C"
         },
         {
           "key": "al/item-10996/one-time",
@@ -1901,7 +1941,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "al/item-10997/one-time",
@@ -1920,7 +1961,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "al/item-780/one-time",
@@ -1939,7 +1981,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "A"
         },
         {
           "key": "al/item-1792/one-time",
@@ -1958,7 +2001,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "A"
         },
         {
           "key": "al/item-21107/one-time",
@@ -1997,7 +2041,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "A"
         },
         {
           "key": "al/item-5336/one-time",
@@ -2016,7 +2061,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "A"
         },
         {
           "key": "al/item-7336/one-time",
@@ -2035,7 +2081,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "A"
         },
         {
           "key": "al/item-9336/one-time",
@@ -2054,7 +2101,8 @@
           "limit": {
             "count": 1,
             "period": "one-time"
-          }
+          },
+          "priority": "A"
         },
         {
           "key": "al/item-24003/weekly",
@@ -2251,7 +2299,8 @@
           "limit": {
             "count": 5,
             "period": "monthly"
-          }
+          },
+          "priority": "C"
         },
         {
           "key": "survey/item-21104/monthly",
@@ -2450,7 +2499,8 @@
           "limit": {
             "count": 1,
             "period": "monthly"
-          }
+          },
+          "priority": "S"
         },
         {
           "key": "survey/item-30271/one-time",
@@ -2469,7 +2519,8 @@
           "limit": {
             "count": 2,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "survey/item-30272/one-time",
@@ -2488,7 +2539,8 @@
           "limit": {
             "count": 2,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "survey/item-30273/one-time",
@@ -2527,7 +2579,8 @@
           "limit": {
             "count": 2,
             "period": "one-time"
-          }
+          },
+          "priority": "B"
         },
         {
           "key": "survey/item-30275/one-time",
@@ -2586,7 +2639,8 @@
           "limit": {
             "count": 900,
             "period": "one-time"
-          }
+          },
+          "priority": "A"
         }
       ]
     }
