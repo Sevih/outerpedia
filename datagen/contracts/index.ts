@@ -111,6 +111,15 @@ export type {
   TimegateResourcesData,
 } from '../generators/timegate-resources';
 export type {
+  ItemRef,
+  ItemCost,
+  LimitBreakStep,
+  SkillUpgradeRow,
+  EnchantRow,
+  XpFoodItem,
+  HeroGrowthData,
+} from '../generators/hero-growth';
+export type {
   SingularityAnchor,
   SingularityBoss,
   SingularityData,

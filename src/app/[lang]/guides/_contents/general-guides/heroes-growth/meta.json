@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "Growth Systems",
+    "jp": "育成システム",
+    "kr": "육성 시스템",
+    "zh": "培养系统",
+    "fr": "Systèmes de croissance"
+  },
+  "description": {
+    "en": "Every way to strengthen your Outerplane heroes — leveling, limit break, transcendence, affinity, skill upgrades, special equipment and gear — with exact game-derived costs.",
+    "jp": "アウタープレーンのヒーローを強化するあらゆる方法 — レベルアップ、限界突破、超越、親密度、スキル強化、特殊装備、装備 — をゲームデータ由来の正確なコストとともに解説。",
+    "kr": "아우터플레인 영웅을 강화하는 모든 방법 — 레벨업, 한계 돌파, 초월, 친밀도, 스킬 강화, 특수 장비, 장비 — 을 게임 데이터에서 도출한 정확한 비용과 함께 설명합니다.",
+    "zh": "强化《Outerplane》英雄的所有方法——升级、极限突破、超越、好感度、技能升级、特殊装备与装备——附游戏数据推导的精确消耗。",
+    "fr": "Toutes les façons de renforcer vos Héros d'Outerplane — leveling, limit break, transcendance, affinity, upgrade de skills, équipement spécial et gear — avec les coûts exacts dérivés du jeu."
+  },
+  "icon": "TI_Item_Growth_Potion_04",
+  "author": "Shiraen",
+  "updated": "2026-07-19",
+  "order": 1,
+  "tier": "heroes-gear"
+}

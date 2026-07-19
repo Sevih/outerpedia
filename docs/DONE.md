@@ -6,6 +6,28 @@
 
 ## 2026-07-19
 
+- **Guide « Growth Systems » porté** (heroes-growth, heroes-gear, ordre 1) —
+  gros guide de systèmes, 7 onglets (Gems fusionné dans Special Equipment,
+  décision Sevih). Nouveau générateur `hero-growth.json` : les tables NUMÉRIQUES
+  DÉRIVENT de la donnée de jeu (vérifiées identiques à la V2, avec le détail que
+  la V2 masquait) —
+  - _limit break_ : `CharacterMaxLevelTemplet` (facteurs = `CharBreakPieceQuantity`,
+    gold = `Price`, bonus de stat = `LevelUpStatModifierAfter100` ; pièces/prix
+    indépendants de l'élément → collapse par rareté) ;
+  - _skill upgrade_ : `CharacterSkillEnchantTemplet` (manuels via `ItemID_n`, gold
+    via `UpgradePrice`) ;
+  - _EE / talisman_ : `SpecialEquipEnchantTemplet` (`ITS_EQUIP_EXCLUSIVE` /
+    `ITS_EQUIP_OOPARTS`, matériaux + gold + déblocage de gem slot ; les « 150 »
+    de la V2 = la SOMME des coûts 10+20+30+40+50 → ici le détail par niveau) ;
+  - _XP food_ : `ItemTemplet` `ITS_MATERIAL_CHAR_LEVEL`, XP = `MaterialValue`.
+    Le reste reste ÉDITORIAL car ABSENT de la donnée (vérifié : pas de table
+    favor/present→points, pas de paliers d'affinité, effets de transcendance non
+    structurés) : points des gifts d'affinité, paliers de récompense, effets de
+    transcendance → `editorial.ts` ; toute la prose (5 langues) transplantée V2 →
+    `labels.ts`. Guide V3 : `SegmentedTabs` 7 onglets, tables en tuiles à cadre de
+    rareté (`ItemInline`), gem ref `{I-I/…}` en parse-text strict, résumé Gear +
+    lien vers le guide gear (ordre 2, à venir).
+
 - **Pages `/legal` + `/feed`** — les deux 404 de la barre basse du footer,
   fermées. **`/legal`** (`src/app/[lang]/legal/page.tsx`) : page statique i18n,
   contenu dans les clés `legal.*` déjà pré-seedées ×5 (heading, p1-p4, titre

@@ -1,0 +1,1203 @@
+{
+  "limitBreak": {
+    "1": [
+      {
+        "fromLevel": 100,
+        "toLevel": 105,
+        "pieces": 25,
+        "gold": 250000,
+        "statModifier": 200
+      },
+      {
+        "fromLevel": 105,
+        "toLevel": 110,
+        "pieces": 75,
+        "gold": 500000,
+        "statModifier": 400
+      },
+      {
+        "fromLevel": 110,
+        "toLevel": 120,
+        "pieces": 100,
+        "gold": 1000000,
+        "statModifier": 700
+      }
+    ],
+    "2": [
+      {
+        "fromLevel": 100,
+        "toLevel": 105,
+        "pieces": 40,
+        "gold": 400000,
+        "statModifier": 200
+      },
+      {
+        "fromLevel": 105,
+        "toLevel": 110,
+        "pieces": 80,
+        "gold": 800000,
+        "statModifier": 400
+      },
+      {
+        "fromLevel": 110,
+        "toLevel": 120,
+        "pieces": 180,
+        "gold": 1600000,
+        "statModifier": 700
+      }
+    ],
+    "3": [
+      {
+        "fromLevel": 100,
+        "toLevel": 105,
+        "pieces": 50,
+        "gold": 500000,
+        "statModifier": 200
+      },
+      {
+        "fromLevel": 105,
+        "toLevel": 110,
+        "pieces": 100,
+        "gold": 1000000,
+        "statModifier": 400
+      },
+      {
+        "fromLevel": 110,
+        "toLevel": 120,
+        "pieces": 250,
+        "gold": 2000000,
+        "statModifier": 700
+      }
+    ]
+  },
+  "skillUpgrade": {
+    "1": [
+      {
+        "level": 2,
+        "manuals": [
+          {
+            "item": {
+              "id": "20201",
+              "name": {
+                "en": "Basic Skill Manual",
+                "jp": "スキル教本：はじまり編",
+                "kr": "초급 스킬 교본",
+                "zh": "初级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_01",
+              "grade": "magic"
+            },
+            "count": 3
+          }
+        ],
+        "gold": 20000
+      },
+      {
+        "level": 3,
+        "manuals": [
+          {
+            "item": {
+              "id": "20201",
+              "name": {
+                "en": "Basic Skill Manual",
+                "jp": "スキル教本：はじまり編",
+                "kr": "초급 스킬 교본",
+                "zh": "初级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_01",
+              "grade": "magic"
+            },
+            "count": 3
+          },
+          {
+            "item": {
+              "id": "20202",
+              "name": {
+                "en": "Intermediate Skill Manual",
+                "jp": "スキル教本：応用編",
+                "kr": "중급 스킬 교본",
+                "zh": "中级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_02",
+              "grade": "rare"
+            },
+            "count": 1
+          }
+        ],
+        "gold": 36000
+      },
+      {
+        "level": 4,
+        "manuals": [
+          {
+            "item": {
+              "id": "20201",
+              "name": {
+                "en": "Basic Skill Manual",
+                "jp": "スキル教本：はじまり編",
+                "kr": "초급 스킬 교본",
+                "zh": "初级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_01",
+              "grade": "magic"
+            },
+            "count": 5
+          },
+          {
+            "item": {
+              "id": "20202",
+              "name": {
+                "en": "Intermediate Skill Manual",
+                "jp": "スキル教本：応用編",
+                "kr": "중급 스킬 교본",
+                "zh": "中级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_02",
+              "grade": "rare"
+            },
+            "count": 2
+          }
+        ],
+        "gold": 60000
+      },
+      {
+        "level": 5,
+        "manuals": [
+          {
+            "item": {
+              "id": "20202",
+              "name": {
+                "en": "Intermediate Skill Manual",
+                "jp": "スキル教本：応用編",
+                "kr": "중급 스킬 교본",
+                "zh": "中级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_02",
+              "grade": "rare"
+            },
+            "count": 4
+          },
+          {
+            "item": {
+              "id": "20203",
+              "name": {
+                "en": "Professional Skill Manual",
+                "jp": "スキル教本：専門家編",
+                "kr": "전문 스킬 교본",
+                "zh": "专家技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_03",
+              "grade": "unique"
+            },
+            "count": 1
+          }
+        ],
+        "gold": 96000
+      }
+    ],
+    "2": [
+      {
+        "level": 2,
+        "manuals": [
+          {
+            "item": {
+              "id": "20201",
+              "name": {
+                "en": "Basic Skill Manual",
+                "jp": "スキル教本：はじまり編",
+                "kr": "초급 스킬 교본",
+                "zh": "初级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_01",
+              "grade": "magic"
+            },
+            "count": 3
+          }
+        ],
+        "gold": 22500
+      },
+      {
+        "level": 3,
+        "manuals": [
+          {
+            "item": {
+              "id": "20201",
+              "name": {
+                "en": "Basic Skill Manual",
+                "jp": "スキル教本：はじまり編",
+                "kr": "초급 스킬 교본",
+                "zh": "初级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_01",
+              "grade": "magic"
+            },
+            "count": 4
+          },
+          {
+            "item": {
+              "id": "20202",
+              "name": {
+                "en": "Intermediate Skill Manual",
+                "jp": "スキル教本：応用編",
+                "kr": "중급 스킬 교본",
+                "zh": "中级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_02",
+              "grade": "rare"
+            },
+            "count": 1
+          }
+        ],
+        "gold": 40500
+      },
+      {
+        "level": 4,
+        "manuals": [
+          {
+            "item": {
+              "id": "20201",
+              "name": {
+                "en": "Basic Skill Manual",
+                "jp": "スキル教本：はじまり編",
+                "kr": "초급 스킬 교본",
+                "zh": "初级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_01",
+              "grade": "magic"
+            },
+            "count": 5
+          },
+          {
+            "item": {
+              "id": "20202",
+              "name": {
+                "en": "Intermediate Skill Manual",
+                "jp": "スキル教本：応用編",
+                "kr": "중급 스킬 교본",
+                "zh": "中级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_02",
+              "grade": "rare"
+            },
+            "count": 3
+          }
+        ],
+        "gold": 67500
+      },
+      {
+        "level": 5,
+        "manuals": [
+          {
+            "item": {
+              "id": "20202",
+              "name": {
+                "en": "Intermediate Skill Manual",
+                "jp": "スキル教本：応用編",
+                "kr": "중급 스킬 교본",
+                "zh": "中级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_02",
+              "grade": "rare"
+            },
+            "count": 5
+          },
+          {
+            "item": {
+              "id": "20203",
+              "name": {
+                "en": "Professional Skill Manual",
+                "jp": "スキル教本：専門家編",
+                "kr": "전문 스킬 교본",
+                "zh": "专家技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_03",
+              "grade": "unique"
+            },
+            "count": 1
+          }
+        ],
+        "gold": 108000
+      }
+    ],
+    "3": [
+      {
+        "level": 2,
+        "manuals": [
+          {
+            "item": {
+              "id": "20201",
+              "name": {
+                "en": "Basic Skill Manual",
+                "jp": "スキル教本：はじまり編",
+                "kr": "초급 스킬 교본",
+                "zh": "初级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_01",
+              "grade": "magic"
+            },
+            "count": 5
+          }
+        ],
+        "gold": 25000
+      },
+      {
+        "level": 3,
+        "manuals": [
+          {
+            "item": {
+              "id": "20201",
+              "name": {
+                "en": "Basic Skill Manual",
+                "jp": "スキル教本：はじまり編",
+                "kr": "초급 스킬 교본",
+                "zh": "初级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_01",
+              "grade": "magic"
+            },
+            "count": 5
+          },
+          {
+            "item": {
+              "id": "20202",
+              "name": {
+                "en": "Intermediate Skill Manual",
+                "jp": "スキル教本：応用編",
+                "kr": "중급 스킬 교본",
+                "zh": "中级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_02",
+              "grade": "rare"
+            },
+            "count": 3
+          }
+        ],
+        "gold": 45000
+      },
+      {
+        "level": 4,
+        "manuals": [
+          {
+            "item": {
+              "id": "20202",
+              "name": {
+                "en": "Intermediate Skill Manual",
+                "jp": "スキル教本：応用編",
+                "kr": "중급 스킬 교본",
+                "zh": "中级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_02",
+              "grade": "rare"
+            },
+            "count": 4
+          },
+          {
+            "item": {
+              "id": "20203",
+              "name": {
+                "en": "Professional Skill Manual",
+                "jp": "スキル教本：専門家編",
+                "kr": "전문 스킬 교본",
+                "zh": "专家技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_03",
+              "grade": "unique"
+            },
+            "count": 1
+          }
+        ],
+        "gold": 75000
+      },
+      {
+        "level": 5,
+        "manuals": [
+          {
+            "item": {
+              "id": "20202",
+              "name": {
+                "en": "Intermediate Skill Manual",
+                "jp": "スキル教本：応用編",
+                "kr": "중급 스킬 교본",
+                "zh": "中级技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_02",
+              "grade": "rare"
+            },
+            "count": 5
+          },
+          {
+            "item": {
+              "id": "20203",
+              "name": {
+                "en": "Professional Skill Manual",
+                "jp": "スキル教本：専門家編",
+                "kr": "전문 스킬 교본",
+                "zh": "专家技能教材"
+              },
+              "icon": "TI_Item_Growth_Book_03",
+              "grade": "unique"
+            },
+            "count": 2
+          }
+        ],
+        "gold": 120000
+      }
+    ]
+  },
+  "specialEquip": {
+    "ee": [
+      {
+        "level": 1,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 5
+          },
+          {
+            "item": {
+              "id": "22030",
+              "name": {
+                "en": "Blue Memory Stone",
+                "jp": "ブルーメモリーストーン",
+                "kr": "블루 메모리 스톤",
+                "zh": "蓝色记忆石"
+              },
+              "icon": "TI_EX_Equip_Growth_Enhance_01",
+              "grade": "unique"
+            },
+            "count": 10
+          }
+        ],
+        "gold": 100000,
+        "gemSlot": 0
+      },
+      {
+        "level": 2,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 10
+          },
+          {
+            "item": {
+              "id": "22030",
+              "name": {
+                "en": "Blue Memory Stone",
+                "jp": "ブルーメモリーストーン",
+                "kr": "블루 메모리 스톤",
+                "zh": "蓝色记忆石"
+              },
+              "icon": "TI_EX_Equip_Growth_Enhance_01",
+              "grade": "unique"
+            },
+            "count": 20
+          }
+        ],
+        "gold": 150000,
+        "gemSlot": 0
+      },
+      {
+        "level": 3,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 15
+          },
+          {
+            "item": {
+              "id": "22030",
+              "name": {
+                "en": "Blue Memory Stone",
+                "jp": "ブルーメモリーストーン",
+                "kr": "블루 메모리 스톤",
+                "zh": "蓝色记忆石"
+              },
+              "icon": "TI_EX_Equip_Growth_Enhance_01",
+              "grade": "unique"
+            },
+            "count": 30
+          }
+        ],
+        "gold": 230000,
+        "gemSlot": 0
+      },
+      {
+        "level": 4,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 20
+          },
+          {
+            "item": {
+              "id": "22030",
+              "name": {
+                "en": "Blue Memory Stone",
+                "jp": "ブルーメモリーストーン",
+                "kr": "블루 메모리 스톤",
+                "zh": "蓝色记忆石"
+              },
+              "icon": "TI_EX_Equip_Growth_Enhance_01",
+              "grade": "unique"
+            },
+            "count": 40
+          }
+        ],
+        "gold": 350000,
+        "gemSlot": 0
+      },
+      {
+        "level": 5,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 25
+          },
+          {
+            "item": {
+              "id": "22030",
+              "name": {
+                "en": "Blue Memory Stone",
+                "jp": "ブルーメモリーストーン",
+                "kr": "블루 메모리 스톤",
+                "zh": "蓝色记忆石"
+              },
+              "icon": "TI_EX_Equip_Growth_Enhance_01",
+              "grade": "unique"
+            },
+            "count": 50
+          }
+        ],
+        "gold": 530000,
+        "gemSlot": 1
+      },
+      {
+        "level": 6,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 30
+          },
+          {
+            "item": {
+              "id": "22032",
+              "name": {
+                "en": "Purple Memory Stone",
+                "jp": "パープルメモリーストーン",
+                "kr": "퍼플 메모리 스톤",
+                "zh": "紫色记忆石"
+              },
+              "icon": "TI_EX_Equip_Growth_Enhance_02",
+              "grade": "unique"
+            },
+            "count": 10
+          }
+        ],
+        "gold": 800000,
+        "gemSlot": 0
+      },
+      {
+        "level": 7,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 35
+          },
+          {
+            "item": {
+              "id": "22032",
+              "name": {
+                "en": "Purple Memory Stone",
+                "jp": "パープルメモリーストーン",
+                "kr": "퍼플 메모리 스톤",
+                "zh": "紫色记忆石"
+              },
+              "icon": "TI_EX_Equip_Growth_Enhance_02",
+              "grade": "unique"
+            },
+            "count": 20
+          }
+        ],
+        "gold": 1200000,
+        "gemSlot": 0
+      },
+      {
+        "level": 8,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 40
+          },
+          {
+            "item": {
+              "id": "22032",
+              "name": {
+                "en": "Purple Memory Stone",
+                "jp": "パープルメモリーストーン",
+                "kr": "퍼플 메모리 스톤",
+                "zh": "紫色记忆石"
+              },
+              "icon": "TI_EX_Equip_Growth_Enhance_02",
+              "grade": "unique"
+            },
+            "count": 30
+          }
+        ],
+        "gold": 1800000,
+        "gemSlot": 0
+      },
+      {
+        "level": 9,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 45
+          },
+          {
+            "item": {
+              "id": "22032",
+              "name": {
+                "en": "Purple Memory Stone",
+                "jp": "パープルメモリーストーン",
+                "kr": "퍼플 메모리 스톤",
+                "zh": "紫色记忆石"
+              },
+              "icon": "TI_EX_Equip_Growth_Enhance_02",
+              "grade": "unique"
+            },
+            "count": 40
+          }
+        ],
+        "gold": 2700000,
+        "gemSlot": 0
+      },
+      {
+        "level": 10,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 50
+          },
+          {
+            "item": {
+              "id": "22032",
+              "name": {
+                "en": "Purple Memory Stone",
+                "jp": "パープルメモリーストーン",
+                "kr": "퍼플 메모리 스톤",
+                "zh": "紫色记忆石"
+              },
+              "icon": "TI_EX_Equip_Growth_Enhance_02",
+              "grade": "unique"
+            },
+            "count": 50
+          }
+        ],
+        "gold": 4050000,
+        "gemSlot": 0
+      }
+    ],
+    "talisman": [
+      {
+        "level": 1,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 5
+          },
+          {
+            "item": {
+              "id": "22031",
+              "name": {
+                "en": "Blue Stardust",
+                "jp": "ブルースターダスト",
+                "kr": "블루 스타 더스트",
+                "zh": "蓝色星尘"
+              },
+              "icon": "TI_Talisman_Growth_Enhance_01",
+              "grade": "unique"
+            },
+            "count": 10
+          }
+        ],
+        "gold": 100000,
+        "gemSlot": 0
+      },
+      {
+        "level": 2,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 10
+          },
+          {
+            "item": {
+              "id": "22031",
+              "name": {
+                "en": "Blue Stardust",
+                "jp": "ブルースターダスト",
+                "kr": "블루 스타 더스트",
+                "zh": "蓝色星尘"
+              },
+              "icon": "TI_Talisman_Growth_Enhance_01",
+              "grade": "unique"
+            },
+            "count": 20
+          }
+        ],
+        "gold": 150000,
+        "gemSlot": 0
+      },
+      {
+        "level": 3,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 15
+          },
+          {
+            "item": {
+              "id": "22031",
+              "name": {
+                "en": "Blue Stardust",
+                "jp": "ブルースターダスト",
+                "kr": "블루 스타 더스트",
+                "zh": "蓝色星尘"
+              },
+              "icon": "TI_Talisman_Growth_Enhance_01",
+              "grade": "unique"
+            },
+            "count": 30
+          }
+        ],
+        "gold": 230000,
+        "gemSlot": 0
+      },
+      {
+        "level": 4,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 20
+          },
+          {
+            "item": {
+              "id": "22031",
+              "name": {
+                "en": "Blue Stardust",
+                "jp": "ブルースターダスト",
+                "kr": "블루 스타 더스트",
+                "zh": "蓝色星尘"
+              },
+              "icon": "TI_Talisman_Growth_Enhance_01",
+              "grade": "unique"
+            },
+            "count": 40
+          }
+        ],
+        "gold": 350000,
+        "gemSlot": 0
+      },
+      {
+        "level": 5,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 25
+          },
+          {
+            "item": {
+              "id": "22031",
+              "name": {
+                "en": "Blue Stardust",
+                "jp": "ブルースターダスト",
+                "kr": "블루 스타 더스트",
+                "zh": "蓝色星尘"
+              },
+              "icon": "TI_Talisman_Growth_Enhance_01",
+              "grade": "unique"
+            },
+            "count": 50
+          }
+        ],
+        "gold": 530000,
+        "gemSlot": 1
+      },
+      {
+        "level": 6,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 30
+          },
+          {
+            "item": {
+              "id": "22033",
+              "name": {
+                "en": "Purple Stardust",
+                "jp": "パープルスターダスト",
+                "kr": "퍼플 스타 더스트",
+                "zh": "紫色星尘"
+              },
+              "icon": "TI_Talisman_Growth_Enhance_02",
+              "grade": "unique"
+            },
+            "count": 10
+          }
+        ],
+        "gold": 800000,
+        "gemSlot": 0
+      },
+      {
+        "level": 7,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 35
+          },
+          {
+            "item": {
+              "id": "22033",
+              "name": {
+                "en": "Purple Stardust",
+                "jp": "パープルスターダスト",
+                "kr": "퍼플 스타 더스트",
+                "zh": "紫色星尘"
+              },
+              "icon": "TI_Talisman_Growth_Enhance_02",
+              "grade": "unique"
+            },
+            "count": 20
+          }
+        ],
+        "gold": 1200000,
+        "gemSlot": 0
+      },
+      {
+        "level": 8,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 40
+          },
+          {
+            "item": {
+              "id": "22033",
+              "name": {
+                "en": "Purple Stardust",
+                "jp": "パープルスターダスト",
+                "kr": "퍼플 스타 더스트",
+                "zh": "紫色星尘"
+              },
+              "icon": "TI_Talisman_Growth_Enhance_02",
+              "grade": "unique"
+            },
+            "count": 30
+          }
+        ],
+        "gold": 1800000,
+        "gemSlot": 0
+      },
+      {
+        "level": 9,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 45
+          },
+          {
+            "item": {
+              "id": "22033",
+              "name": {
+                "en": "Purple Stardust",
+                "jp": "パープルスターダスト",
+                "kr": "퍼플 스타 더스트",
+                "zh": "紫色星尘"
+              },
+              "icon": "TI_Talisman_Growth_Enhance_02",
+              "grade": "unique"
+            },
+            "count": 40
+          }
+        ],
+        "gold": 2700000,
+        "gemSlot": 0
+      },
+      {
+        "level": 10,
+        "materials": [
+          {
+            "item": {
+              "id": "21004",
+              "name": {
+                "en": "Artisan's Hammer",
+                "jp": "達人の強化ハンマー",
+                "kr": "명인 강화 도구",
+                "zh": "名匠强化道具"
+              },
+              "icon": "TI_Item_Growth_Enhance_04",
+              "grade": "unique"
+            },
+            "count": 50
+          },
+          {
+            "item": {
+              "id": "22033",
+              "name": {
+                "en": "Purple Stardust",
+                "jp": "パープルスターダスト",
+                "kr": "퍼플 스타 더스트",
+                "zh": "紫色星尘"
+              },
+              "icon": "TI_Talisman_Growth_Enhance_02",
+              "grade": "unique"
+            },
+            "count": 50
+          }
+        ],
+        "gold": 4050000,
+        "gemSlot": 0
+      }
+    ]
+  },
+  "xpFood": [
+    {
+      "id": "20001",
+      "name": {
+        "en": "Sandwich",
+        "jp": "サンドイッチ",
+        "kr": "샌드위치",
+        "zh": "三明治"
+      },
+      "icon": "TI_Item_Growth_Potion_01",
+      "grade": "normal",
+      "xp": 250
+    },
+    {
+      "id": "20002",
+      "name": {
+        "en": "Cake Slice",
+        "jp": "チョコショートケーキ",
+        "kr": "조각 케이크",
+        "zh": "切块蛋糕"
+      },
+      "icon": "TI_Item_Growth_Potion_02",
+      "grade": "magic",
+      "xp": 600
+    },
+    {
+      "id": "20003",
+      "name": {
+        "en": "Prosciutto",
+        "jp": "プロシュート",
+        "kr": "프로슈토",
+        "zh": "帕尔玛火腿"
+      },
+      "icon": "TI_Item_Growth_Potion_03",
+      "grade": "rare",
+      "xp": 2500
+    },
+    {
+      "id": "20004",
+      "name": {
+        "en": "Steak Dish",
+        "jp": "ステーキ定食",
+        "kr": "스테이크 정식",
+        "zh": "牛排套餐"
+      },
+      "icon": "TI_Item_Growth_Potion_04",
+      "grade": "unique",
+      "xp": 8000
+    }
+  ]
+}

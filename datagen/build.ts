@@ -56,6 +56,7 @@ import { buildRecruit } from './generators/recruit';
 import { buildEtherRankings } from './generators/ether-rankings';
 import { buildShopPriorities } from './generators/shop-priorities';
 import { buildTimegateResources } from './generators/timegate-resources';
+import { buildHeroGrowth } from './generators/hero-growth';
 import { buildEffectGlossary, unknownFamilyTypes } from './lib/effects';
 import {
   curatedBossIds,
@@ -188,6 +189,9 @@ async function main(): Promise<void> {
   // Ressources timegatées (shops dérivés + non-shop curé, totaux hebdo/mensuel) —
   // guide « Weekly & Monthly Reference Tables ».
   await writeJson('timegate-resources.json', buildTimegateResources());
+  // Systèmes de croissance des héros (tables numériques dérivées : limit break,
+  // skill upgrade, EE/talisman, XP food) — guide « Growth Systems ».
+  await writeJson('hero-growth.json', buildHeroGrowth());
   // Rotation Monad Gate (groupes + cadence ; ancre curée), compositions des
   // tours et calendrier des contenus saisonniers — cf. en-têtes des générateurs.
   await writeJson('singularity.json', buildSingularity());
