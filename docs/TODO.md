@@ -93,10 +93,6 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
       damage-calculator, pull-simulator, progress-tracker, team-planner,
       tier-list-maker, patch-history, coupon-codes, event, wallpapers, 4-comics,
       ost — namespaces `tools.*`/`progress.*`.
-- [ ] **`/coupons` — RELIQUAT** (page faite le 19/07, cf. DONE) : **rachat
-      one-click NON porté** — `REDEEM_ENABLED=false` même en V2 (accord VA Games
-      en attente) ; à porter (`lib/redeem` + route `/api/redeem`) le jour du feu
-      vert.
 - [ ] **`/changelog`** — clés `changelog.*` ; lié au resync CHANGELOG.md
       (item 📚). Débloque aussi la section **Recent Updates** de la Home (différée :
       elle lit `getChangelog`/`@/lib/changelog`, non porté — à rebrancher quand le
@@ -169,6 +165,17 @@ gear reco = confirmés côté admin ; **recommended team** et **premium/limited*
       free-heroes-start-banner → SegmentedTabs/#hash quand ces guides
       atterrissent. **Règle actée : état interne d'un guide = hash
       (SegmentedTabs) ; ui/Tabs (?param) = hors guides.**
+
+### Édition des general-guides bespoke (campagne en cours)
+
+> Pattern : registre `general-guide-store.ts` (slug → fragment), donnée sortie
+> en JSON local (rendu inchangé), éditeur dédié câblé sur `/admin/guides`.
+> `free-heroes-start-banner` (onglet Free Heroes) LIVRÉ le 19/07 (cf. DONE).
+
+- [ ] `premium-limited` : ajouter/modifier des reviews (prévoir la brique
+      publique pour Shiraen aussi) + éditer les recommended choices.
+- [ ] `core-fusion` : idem (reviews publiques Shiraen + recommended choices).
+- [ ] `shop-purchase-priorities` : modifier les priorités des items.
 
 ## ⚙️ Config / infra
 

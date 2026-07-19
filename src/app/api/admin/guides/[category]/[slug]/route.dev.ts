@@ -2,9 +2,16 @@ import { NextResponse } from 'next/server';
 import { IS_DEV } from '@/lib/admin/guard';
 import type { GuideDraft } from '@/lib/admin/guide-draft';
 import { addGuideVersion, loadGuideDraft, saveGuideDraft } from '@/lib/admin/guide-store';
+import {
+  isEditableGeneralGuide,
+  saveFreeHeroes,
+  type FreeHeroesData,
+} from '@/lib/admin/general-guide-store';
 
 type Body =
-  { op: 'save'; draft: GuideDraft } | { op: 'add-version'; newKey: string; fromKey: string };
+  | { op: 'save'; draft: GuideDraft }
+  | { op: 'save'; data: FreeHeroesData }
+  | { op: 'add-version'; newKey: string; fromKey: string };
 
 // Outil local : 403 en prod, écriture fichier seulement en dev.
 export async function POST(
@@ -16,7 +23,18 @@ export async function POST(
   const { category, slug } = await params;
   const body = (await req.json()) as Body;
 
-  if (body.op === 'save') {
+  // Guides GÉNÉRAUX à fragment éditable : payload bespoke (`data`), store dédié.
+  if (category === 'general-guides') {
+    if (body.op !== 'save' || !('data' in body))
+      return NextResponse.json({ error: 'op inconnue' }, { status: 400 });
+    if (!isEditableGeneralGuide(slug))
+      return NextResponse.json({ error: 'guide non éditable' }, { status: 400 });
+    const errors = await saveFreeHeroes(body.data);
+    if (errors.length) return NextResponse.json({ ok: false, errors }, { status: 400 });
+    return NextResponse.json({ ok: true });
+  }
+
+  if (body.op === 'save' && 'draft' in body) {
     const errors = await saveGuideDraft(category, slug, body.draft);
     if (errors.length) return NextResponse.json({ ok: false, errors }, { status: 400 });
     return NextResponse.json({ ok: true });

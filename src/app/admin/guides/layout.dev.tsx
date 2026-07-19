@@ -2,12 +2,14 @@ import { ToolCharacterList, type ToolRow } from '@/components/admin/ToolCharacte
 import { listGuidesByCategory } from '@/lib/data/guides';
 import type { GuideCategorySlug } from '@/lib/data/guide-categories';
 import { GUIDE_SPECS } from '@/lib/admin/guide-draft';
+import { EDITABLE_GENERAL_GUIDES } from '@/lib/admin/general-guide-store';
 
 export const dynamic = 'force-dynamic';
 
 /** Étiquette courte de catégorie dans la liste. */
 const CAT_LABEL: Record<string, string> = {
   'joint-challenge': 'JC',
+  'world-boss': 'WB',
   'special-request': 'SR',
   'irregular-extermination': 'IE',
   'adventure-license': 'AL',
@@ -27,6 +29,11 @@ export default function GuidesLayout({ children }: { children: React.ReactNode }
       done: true,
     })),
   );
+
+  // Fragments éditables des GUIDES GÉNÉRAUX (contenu bespoke, un JSON par guide).
+  for (const [slug, label] of Object.entries(EDITABLE_GENERAL_GUIDES)) {
+    rows.push({ id: `general-guides/${slug}`, name: `GG · ${label}`, done: true });
+  }
 
   return (
     <div className="flex gap-6">

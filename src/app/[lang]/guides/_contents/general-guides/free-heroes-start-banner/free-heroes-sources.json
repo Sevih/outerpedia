@@ -1,0 +1,256 @@
+{
+  "sources": [
+    {
+      "source": {
+        "en": "Start Dash",
+        "jp": "選抜スカウト",
+        "kr": "선별 동료 영입",
+        "zh": "甄选招募",
+        "fr": "Start Dash"
+      },
+      "entries": [
+        {
+          "names": ["Ame", "Rin", "Rey", "Vlada"],
+          "pickType": "one",
+          "reason": {
+            "en": "All solid choices, just pick the one you prefer.",
+            "jp": "どれも優秀。好きなキャラを選ぼう。",
+            "kr": "모두 좋은 선택지. 원하는 캐릭터를 고르세요.",
+            "zh": "都是不错的选择，挑你喜欢的就好。",
+            "fr": "Tous des choix solides, prenez simplement celui que vous préférez."
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "en": "New User Mission",
+        "jp": "新規ミッション",
+        "kr": "신규 미션",
+        "zh": "新手任务",
+        "fr": "New User Mission"
+      },
+      "entries": [
+        {
+          "names": ["Mene"],
+          "pickType": "all",
+          "reason": {
+            "en": "Guaranteed from missions.",
+            "jp": "ミッションで確定入手。",
+            "kr": "미션에서 확정 획득.",
+            "zh": "任务确定获得。",
+            "fr": "Garanti via les missions."
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "en": "New User Mission \n Cross-Mirsha Adventure I",
+        "jp": "新規ミッション \n メルシャ大陸冒険 I",
+        "kr": "신규 미션 \n 메르샤 대륙모험 I",
+        "zh": "新手任务 \n 弥乐沙大陆冒险I",
+        "fr": "New User Mission \n Cross-Mirsha Adventure I"
+      },
+      "entries": [
+        {
+          "names": [
+            "Alice",
+            "Eliza",
+            "Francesca",
+            "Leo",
+            "Maxwell",
+            "Rhona",
+            "Rin",
+            "Saeran",
+            "Valentine"
+          ],
+          "pickType": "one",
+          "reason": {
+            "en": "{I-I/3★ Hero Selection Ticket}. \n 1 for completing all 30 missions \n 1 for Season 1 Hardmode Adventure 10 clear.",
+            "jp": "{I-I/3★ Hero Selection Ticket}。 \n 30ミッション全クリアで1枚 \n シーズン1ハード冒険10クリアで1枚。",
+            "kr": "{I-I/3★ Hero Selection Ticket}. \n 30개 미션 전부 완료 시 1장 \n 시즌 1 하드 모험 10 클리어 시 1장.",
+            "zh": "{I-I/3★ Hero Selection Ticket}。 \n 完成全部30个任务获得1张 \n 通关第1季困难冒险10获得1张。",
+            "fr": "{I-I/3★ Hero Selection Ticket}. \n 1 en complétant les 30 missions \n 1 pour le clear de Season 1 Hardmode Adventure 10."
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "en": "Cross-Mirsha Adventure I",
+        "jp": "メルシャ大陸冒険 I",
+        "kr": "메르샤 대륙모험 I",
+        "zh": "弥乐沙大陆冒险I",
+        "fr": "Cross-Mirsha Adventure I"
+      },
+      "entries": [
+        {
+          "names": ["Veronica"],
+          "pickType": "all",
+          "reason": {
+            "en": "Clear Season 1 Normal Adventure 2-3.",
+            "jp": "シーズン1 ノーマル冒険2-3クリア。",
+            "kr": "시즌 1 노멀 모험 2-3 클리어.",
+            "zh": "通关第1季普通冒险2-3。",
+            "fr": "Terminez Season 1 Normal Adventure 2-3."
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "en": "Story",
+        "jp": "ストーリー",
+        "kr": "스토리",
+        "zh": "故事",
+        "fr": "Story"
+      },
+      "entries": [
+        {
+          "names": ["Fatal"],
+          "pickType": "all",
+          "reason": {
+            "en": "Clear Season 3 1-13: The Identity of the Relic.",
+            "jp": "シーズン3 1-13クリア：遺物の正体。",
+            "kr": "시즌 3 1-13 클리어: 유물의 정체.",
+            "zh": "通关第3季1-13：遗物的真面目。",
+            "fr": "Clear Season 3 1-13 : The Identity of the Relic."
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "en": "Skyward Tower 100F",
+        "jp": "飛天の塔100階",
+        "kr": "비천의 탑 100층",
+        "zh": "飞天之塔100层",
+        "fr": "Skyward Tower 100F"
+      },
+      "entries": [
+        {
+          "names": ["Sigma"],
+          "pickType": "all",
+          "reason": {
+            "en": "Clear Skyward Tower Floor 100.",
+            "jp": "飛天の塔100階クリア。",
+            "kr": "비천의 탑 100층 클리어.",
+            "zh": "通关飞天之塔100层。",
+            "fr": "Clear le Floor 100 de la Skyward Tower."
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "en": "Friendship Point Shop",
+        "jp": "フレンドPtショップ",
+        "kr": "우정 포인트 상점",
+        "zh": "友情点数商店",
+        "fr": "Friendship Point Shop"
+      },
+      "entries": [
+        {
+          "names": ["Stella"],
+          "pickType": "all",
+          "reason": {
+            "en": "10 {I-I/Hero Piece} per week for 700 {I-I/Friendship Point}.",
+            "jp": "毎週10 {I-I/Hero Piece}、700 {I-I/Friendship Point}で購入可能。",
+            "kr": "매주 10 {I-I/Hero Piece}, 700 {I-I/Friendship Point}로 구매 가능.",
+            "zh": "每周10个{I-I/Hero Piece}，700 {I-I/Friendship Point}购买。",
+            "fr": "10 {I-I/Hero Piece} par semaine pour 700 {I-I/Friendship Point}."
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "en": "Guild Shop",
+        "jp": "ギルドショップ",
+        "kr": "길드 상점",
+        "zh": "公会商店",
+        "fr": "Guild Shop"
+      },
+      "entries": [
+        {
+          "names": ["Ame", "Dahlia", "Epsilon", "Drakhan"],
+          "pickType": "all",
+          "reason": {
+            "en": "10 {I-I/Hero Piece} per week for 300 {I-I/Guild Coin}.",
+            "jp": "毎週10 {I-I/Hero Piece}、300 {I-I/Guild Coin}で購入可能。",
+            "kr": "매주 10 {I-I/Hero Piece}, 300 {I-I/Guild Coin}으로 구매 가능.",
+            "zh": "每周10个{I-I/Hero Piece}，300 {I-I/Guild Coin}购买。",
+            "fr": "10 {I-I/Hero Piece} par semaine pour 300 {I-I/Guild Coin}."
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "en": "Mirsha Supporters",
+        "jp": "メルシャサポーターズ",
+        "kr": "메르샤 서포터즈",
+        "zh": "美洛沙支援者",
+        "fr": "Mirsha Supporters"
+      },
+      "entries": [
+        {
+          "names": ["Dianne", "Drakhan", "Akari"],
+          "pickType": "all",
+          "reason": {
+            "en": "{E/Light} Starter — recommended choice. \n Get all heroes, mutually exclusive with {E/Dark} Starter.",
+            "jp": "{E/Light}スターター — おすすめ。 \n 全員入手、{E/Dark}スターターとは排他。",
+            "kr": "{E/Light} 스타터 — 추천。 \n 모두 획득、{E/Dark} 스타터와 배타적。",
+            "zh": "{E/Light}新手包 - 推荐。 \n 获得全部角色，与{E/Dark}新手包互斥。",
+            "fr": "Starter {E/Light} — choix recommandé. \n Obtenez tous les Héros, mutuellement exclusif avec le Starter {E/Dark}."
+          }
+        },
+        {
+          "names": ["Nella", "Hilde", "Iota"],
+          "pickType": "all",
+          "reason": {
+            "en": "{E/Dark} Starter. \n Get all heroes, mutually exclusive with {E/Light} Starter.",
+            "jp": "{E/Dark}スターター。 \n 全員入手、{E/Light}スターターとは排他。",
+            "kr": "{E/Dark} 스타터。 \n 모두 획득、{E/Light} 스타터와 배타적。",
+            "zh": "{E/Dark}新手包。 \n 获得全部角色，与{E/Light}新手包互斥。",
+            "fr": "Starter {E/Dark}. \n Obtenez tous les Héros, mutuellement exclusif avec le Starter {E/Light}."
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "en": "Special Request",
+        "jp": "特別依頼",
+        "kr": "특별 의뢰",
+        "zh": "特别委托",
+        "fr": "Special Request"
+      },
+      "entries": [
+        {
+          "names": ["Eternal", "Noa", "Laplace"],
+          "pickType": "all",
+          "reason": {
+            "en": "Challenge! Special Request: Identification.",
+            "jp": "挑戦! 特別依頼:識別。",
+            "kr": "도전! 특별의뢰 : 식별。",
+            "zh": "挑战!特别委托:鉴定。",
+            "fr": "Challenge! Special Request : Identification."
+          }
+        },
+        {
+          "names": ["Aer", "Kappa", "Beth"],
+          "pickType": "all",
+          "reason": {
+            "en": "Challenge! Special Request: Ecology Study.",
+            "jp": "挑戦! 特別依頼:生態調査。",
+            "kr": "도전! 특별의뢰 : 생태 조사。",
+            "zh": "挑战!特别委托:生态调查。",
+            "fr": "Challenge! Special Request : Ecology Study."
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -6,6 +6,17 @@
 
 ## 2026-07-19
 
+- **Guide editor — general-guides bespoke : `free-heroes-start-banner` (onglet
+  Free Heroes)** — premier fragment éditable d'un GUIDE GÉNÉRAL (contenu sur
+  mesure, pas la famille de boss). Les SOURCES de héros gratuits sortent du TS
+  (`recommended.ts`) vers `free-heroes-sources.json` (rendu `index.tsx`
+  INCHANGÉ, ré-export depuis le JSON) ; `general-guide-store.ts` porte un
+  REGISTRE extensible (slug → fragment) + load/save + validation (libellé EN,
+  ≥1 entrée, ≥1 héros, chaque nom résout). Éditeur `FreeHeroesEditor` :
+  ajout/retrait de sources, d'entrées et de héros (chips + portraits), type de
+  choix (tous / un au choix), libellé + raison en 5 langues (InlineTextField,
+  tokens, auto-traduction EN → vides). Câblé sur le shell `/admin/guides`
+  (ligne « GG · … », dispatch page, branche `general-guides` de la route).
 - **`/tools` + `/tierlist` : fidélité visuelle V2** (retour Sevih : « ne ressemble
   pas à la V2 »). J'avais trop neutralisé — or les couleurs vives Tailwind sont
   autorisées HORS `guides/**`. Repris le design V2 sur les primitives V3 (seuls
