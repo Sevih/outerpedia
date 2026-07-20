@@ -92,14 +92,13 @@ export function FlagshipCard({
               <div
                 className={`flex items-center gap-1 opacity-80 ${side === 'left' ? 'flex-row-reverse' : ''}`}
               >
+                {/* Largeur fixe par portrait : le span racine de CharacterPortrait
+                    est en w-full — nu dans la rangée flex, les 5 s'étireraient sur
+                    toute la largeur au lieu de serrer le coin. */}
                 {topHeroes.slice(5, 10).map((h) => (
-                  <CharacterPortrait
-                    key={h.id}
-                    id={h.id}
-                    name={h.name}
-                    size={32}
-                    showName={false}
-                  />
+                  <span key={h.id} className="w-8 shrink-0">
+                    <CharacterPortrait id={h.id} name={h.name} size={32} showName={false} />
+                  </span>
                 ))}
               </div>
               {/* Rangée avant — plus grande, tête de file au coin */}
@@ -107,13 +106,9 @@ export function FlagshipCard({
                 className={`flex items-end gap-1.5 ${side === 'left' ? 'flex-row-reverse' : ''}`}
               >
                 {topHeroes.slice(0, 5).map((h) => (
-                  <CharacterPortrait
-                    key={h.id}
-                    id={h.id}
-                    name={h.name}
-                    size={48}
-                    showName={false}
-                  />
+                  <span key={h.id} className="w-12 shrink-0">
+                    <CharacterPortrait id={h.id} name={h.name} size={48} showName={false} />
+                  </span>
                 ))}
               </div>
             </div>

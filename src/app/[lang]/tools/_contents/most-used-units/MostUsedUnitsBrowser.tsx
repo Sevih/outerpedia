@@ -221,16 +221,20 @@ export function MostUsedUnitsBrowser({
                   #{index + 1}
                 </span>
 
-                {/* Portrait */}
-                <CharacterPortrait
-                  id={row.id}
-                  name={row.name}
-                  element={row.element}
-                  classType={row.class}
-                  rarity={row.rarity}
-                  size={64}
-                  showName={false}
-                />
+                {/* Portrait — conteneur à largeur FIXE : le span racine de
+                    CharacterPortrait est en w-full, nu dans une rangée flex il
+                    écraserait le bloc nom (flex-1 → 0, contenu en débord). */}
+                <span className="w-16 shrink-0">
+                  <CharacterPortrait
+                    id={row.id}
+                    name={row.name}
+                    element={row.element}
+                    classType={row.class}
+                    rarity={row.rarity}
+                    size={64}
+                    showName={false}
+                  />
+                </span>
 
                 {/* Nom + élément/classe */}
                 <div className="min-w-0 flex-1">
