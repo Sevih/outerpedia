@@ -22,6 +22,7 @@ export const TOOL_COMPONENTS: Record<
   'gear-usage-statistics': () => import('./_contents/gear-usage-statistics'),
   'gear-usage-finder': () => import('./_contents/gear-usage-finder'),
   'patch-history': () => import('./_contents/patch-history'),
+  'pull-simulator': () => import('./_contents/pull-simulator'),
 };
 
 /** Slugs des outils portés (routeur + `generateStaticParams`). */

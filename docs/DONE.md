@@ -6,6 +6,20 @@
 
 ## 2026-07-20
 
+- **Outil `/pull-simulator` porté.** Moteur pur dans `src/lib/gacha.ts`
+  (4 bannières aux taux V2, session immuable, garantie 2★ du x10, mileage) —
+  FIX au passage : la V2 amorçait le compteur « premier 3★ » à `totalPulls`
+  avant de re-parcourir tout l'historique (numéro compté double dès la 2e
+  salve) ; en V3 les deux compteurs comptent depuis zéro (helper unique,
+  vérifié par smoke). Wrapper serveur : pools depuis le catalogue — entités
+  CORE-FUSION EXCLUES (non tirables ; la V2 n'en avait pas dans son index),
+  rareté 1/2 = pools mineurs, 3★ catégorisés par tags (premium /
+  limited-seasonal-collab / normal), noms+préfixes localisés serveur,
+  recherche multilingue via `characterSearchNames`+alias. Client sur les
+  primitives V3 (FilterPill, CharacterPortrait wrappé, FitText, tokens ;
+  ambre/violet = couleurs de donnée) : focus en combobox, x1/x10, mileage,
+  cartes de résultat, stats de session, historique par batch. Identité par ID
+  (plus de slugs — des 3★ sans fiche publique restent tirables).
 - **Outil `/patch-history` porté + archive Stove migrée.** Le pipeline major9
   existait déjà (getNews → `posts.json`, images staged/R2) ; ce chantier a
   ramené le RESTE. ① Migration ONE-SHOT `scripts/migrate-legacy-news.ts` :
