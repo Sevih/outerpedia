@@ -6,11 +6,12 @@ import { useUrlSlice, writeUrl } from '@/hooks/useUrlSlice';
 /**
  * Sélection d'onglet dont l'URL est la SOURCE DE VÉRITÉ (`?<urlParam>=<id>`).
  *
- * Factorise la logique commune à `ui/Tabs` et `guides/.../BannerTabs` : lecture
- * de la tranche d'URL (via useUrlSlice → Back/Forward pilote l'UI), écriture par
- * `history.replaceState` (pas de rechargement serveur), validation de l'id lu
- * contre la liste, et repli sur le premier onglet. Sans `urlParam`, la sélection
- * redevient un simple état local (ni URL, ni partage).
+ * Le moteur de `ui/Tabs` (son seul consommateur depuis la bascule des guides
+ * sur le hash) : lecture de la tranche d'URL (via useUrlSlice → Back/Forward
+ * pilote l'UI), écriture par `history.replaceState` (pas de rechargement
+ * serveur), validation de l'id lu contre la liste, et repli sur le premier
+ * onglet. Sans `urlParam`, la sélection redevient un simple état local (ni URL,
+ * ni partage).
  *
  * RÈGLE D'USAGE (décision 2026-07-16) : le `?param` sert les pages HORS guides ;
  * l'état interne d'un guide vit dans le HASH multi-params (`SegmentedTabs`).

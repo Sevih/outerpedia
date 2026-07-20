@@ -6,6 +6,14 @@
 
 ## 2026-07-20
 
+- **Règle « état interne d'un guide = hash » APPLIQUÉE partout (item Dette
+  soldé).** `BannerTabs` bascule de `?banner=` (useUrlTab) au hash
+  (`#banner=`, patron url-hash/SegmentedTabs, prop `urlKey`) ;
+  `free-heroes-start-banner` ET `premium-limited` (3e contrevenant, découvert
+  au passage) troquent `ui/Tabs ?tab=` contre `SegmentedTabs variant="game"
+urlKey="tab"`. Plus AUCUN `?param` dans `guides/` ; `useUrlTab` reste le
+  moteur de `ui/Tabs` seul (doc à jour). Vérifié : tsc propre, les 3 guides
+  rendent en 200.
 - **Tests générateurs : le TRIO PRIORITAIRE couvert (2270b92, 28 tests).**
   encounters/singularity/content-schedule, selon les deux registres actés
   (CI sans `.gamedata`) : cœurs PURS en synthétique (traversée spawn — CSV,

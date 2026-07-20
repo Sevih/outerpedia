@@ -302,7 +302,7 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
         <strong className="text-content-strong">{L(LABELS.intro_p4_bold2)}</strong>
         {L(LABELS.intro_p4_end)}
       </Prose>
-      <BannerTabs tabs={tabs} urlParam="banner" />
+      <BannerTabs tabs={tabs} urlKey="banner" />
     </div>
   );
 }

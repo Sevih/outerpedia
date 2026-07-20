@@ -51,11 +51,6 @@
 
 ## 🧹 Dette code
 
-- [ ] (chantier guides éditoriaux) `BannerTabs` (?banner=) et le `?tab=` de
-      free-heroes-start-banner → SegmentedTabs/#hash quand ces guides
-      atterrissent. **Règle actée : état interne d'un guide = hash
-      (SegmentedTabs) ; ui/Tabs (?param) = hors guides.**
-
 ### Édition des general-guides bespoke (campagne en cours)
 
 > Pattern : registre `general-guide-store.ts` (slug → fragment), donnée sortie

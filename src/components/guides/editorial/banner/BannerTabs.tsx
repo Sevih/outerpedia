@@ -1,8 +1,9 @@
 'use client';
 
-import { type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { cn } from '@/lib/cn';
-import { useUrlTab } from '@/hooks/useUrlTab';
+import { useUrlSlice } from '@/hooks/useUrlSlice';
+import { readHashParam, writeHashParam } from '@/lib/url-hash';
 
 export interface BannerTabDef {
   id: string;
@@ -16,12 +17,24 @@ export interface BannerTabDef {
 /**
  * Onglets à CARTES-IMAGES (colonne de vignettes de bannières, contenu à
  * droite) — le sélecteur du guide « Banners & Mileage » (portage V2). Même
- * politique d'URL que `Tabs` (hook `useUrlTab`) : `?<urlParam>=<id>` via
- * replaceState, l'URL est la source de vérité, la page reste statiquement
- * rendable.
+ * politique d'URL que `SegmentedTabs` (règle 2026-07-16 : état interne d'un
+ * guide = HASH multi-params) : `#<urlKey>=<id>` via url-hash, l'URL reste la
+ * source de vérité et la page statiquement rendable. Sans `urlKey`, simple
+ * état local.
  */
-export function BannerTabs({ tabs, urlParam }: { tabs: BannerTabDef[]; urlParam?: string }) {
-  const { active, current, select } = useUrlTab(tabs, urlParam);
+export function BannerTabs({ tabs, urlKey }: { tabs: BannerTabDef[]; urlKey?: string }) {
+  const [localTab, setLocalTab] = useState<string | null>(null);
+  // Lecture inconditionnelle (règle des hooks) ; ignorée sans `urlKey`. Snapshot
+  // serveur `null` → premier rendu sur le 1er onglet, resync après hydratation.
+  const hashValue = useUrlSlice('hashchange', () => (urlKey ? readHashParam(urlKey) : null));
+  const fromHash = hashValue && tabs.some((t) => t.id === hashValue) ? hashValue : null;
+  const active = (urlKey ? fromHash : localTab) ?? tabs[0]?.id;
+  const current = tabs.find((t) => t.id === active) ?? tabs[0];
+
+  const select = (id: string) => {
+    if (urlKey) writeHashParam(urlKey, id);
+    else setLocalTab(id);
+  };
 
   return (
     <div className="flex flex-col gap-6 md:flex-row">

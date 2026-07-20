@@ -11,7 +11,7 @@ import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import { findCharacterByName, resolveGuideCharacter } from '@/lib/data/characters';
-import { Tabs } from '@/components/ui/Tabs';
+import { SegmentedTabs } from '@/components/guides/SegmentedTabs';
 import { Prose } from '@/components/guides/editorial/blocks';
 import { HeroReviewCard } from '@/components/guides/editorial/reviews/HeroReviewCard';
 import {
@@ -102,11 +102,13 @@ export default async function PremiumLimitedGuide({ lang }: { lang: Lang }) {
   return (
     <>
       <Prose>{L(LABELS.intro)}</Prose>
-      <Tabs
-        urlParam="tab"
+      <SegmentedTabs
+        urlKey="tab"
+        variant="game"
+        ariaLabel="Premium / Limited"
         tabs={[
-          { id: 'premium', label: 'Premium', content: tabContent(premiumOrder, premiumReviews) },
-          { id: 'limited', label: 'Limited', content: tabContent(limitedOrder, limitedReviews) },
+          { key: 'premium', label: 'Premium', content: tabContent(premiumOrder, premiumReviews) },
+          { key: 'limited', label: 'Limited', content: tabContent(limitedOrder, limitedReviews) },
         ]}
       />
     </>

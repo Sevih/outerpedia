@@ -2,7 +2,7 @@
  * Guide « Free Heroes & Starter Banners » — deux onglets : les héros gratuits
  * (par source) et la stratégie Custom Banner (picks recommandés).
  *
- * Server Component (les onglets Tabs sont clients, leur CONTENU est rendu
+ * Server Component (les SegmentedTabs sont clients, leur CONTENU est rendu
  * serveur). La section « pas encore dans la Custom Banner » se DÉRIVE du pool
  * réel du jeu (data/generated/recruit.json) : réguliers 3★ absents du
  * pool — plus de liste éditoriale par exclusion comme en V2.
@@ -21,7 +21,7 @@ import {
   type GuideCharacter,
 } from '@/lib/data/characters';
 import { isInCustomRecruitPool } from '@/lib/data/recruit';
-import { Tabs } from '@/components/ui/Tabs';
+import { SegmentedTabs } from '@/components/guides/SegmentedTabs';
 import { Callout, Prose, SectionHeading } from '@/components/guides/editorial/blocks';
 import { CharacterGrid } from '@/components/guides/editorial/CharacterGrid';
 import { LABELS } from './labels';
@@ -176,12 +176,13 @@ export default async function FreeHeroesStartBannerGuide({ lang }: { lang: Lang 
     <>
       <Prose>{L(LABELS.intro)}</Prose>
       <Callout accent="amber">{L(LABELS.warning)}</Callout>
-      <Tabs
-        urlParam="tab"
-        className="justify-center"
+      <SegmentedTabs
+        urlKey="tab"
+        variant="game"
+        ariaLabel={`${L(LABELS.tabFree)} / ${L(LABELS.tabCustom)}`}
         tabs={[
-          { id: 'free', label: L(LABELS.tabFree), content: freeTab },
-          { id: 'custom', label: L(LABELS.tabCustom), content: customTab },
+          { key: 'free', label: L(LABELS.tabFree), content: freeTab },
+          { key: 'custom', label: L(LABELS.tabCustom), content: customTab },
         ]}
       />
     </>
