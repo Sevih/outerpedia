@@ -3,8 +3,8 @@ import { LANGS, normalizeLang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { createPageMetadata } from '@/lib/seo';
 import { GUIDE_CATEGORIES, type GuideCategory } from '@/lib/data/guide-categories';
-import { getGuide, guideUpdatedDate, listGuideParams } from '@/lib/data/guides';
-import { getMonster, monsterOgImage } from '@/lib/data/monsters';
+import { getGuide, guideBossMonster, guideUpdatedDate, listGuideParams } from '@/lib/data/guides';
+import { monsterOgImage } from '@/lib/data/monsters';
 import { GuideDetail } from './guide-detail';
 
 export function generateStaticParams() {
@@ -27,12 +27,12 @@ export async function generateMetadata({
   const updated = guideUpdatedDate(guide);
 
   // CARTE DE PARTAGE : le portrait du boss quand le guide en a un — c'est le
-  // visuel qui identifie le guide, et il est déjà dans la donnée (`meta.bossId`),
-  // donc rien à saisir à la main. `meta.ogImage` reste prioritaire : c'est
-  // l'échappatoire pour un guide qui veut son propre visuel.
+  // visuel qui identifie le guide. `guideBossMonster` en est la source unique
+  // (`meta.bossId`, ou le boss de phase 2 dérivé pour un guild raid). `meta.ogImage`
+  // reste prioritaire : c'est l'échappatoire pour un guide qui veut son propre visuel.
   // Les guides SANS boss (general-guides…) gardent la carte par défaut du site :
   // leur donner un visuel demande une image générée, chantier à part.
-  const boss = guide.bossId ? getMonster(guide.bossId) : undefined;
+  const boss = guideBossMonster(guide);
   const portrait =
     boss && !guide.ogImage
       ? // Les sprites `MT_*` font 128×128 (21 des 24 extraits ; les 3 autres à

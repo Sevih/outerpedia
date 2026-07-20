@@ -16,7 +16,7 @@
  */
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
-import type { LocalizedText } from '@contracts';
+import type { LocalizedText, Monster } from '@contracts';
 import { LANGUAGES, type Lang } from '@/lib/i18n/config';
 import {
   GUIDE_CATEGORIES,
@@ -28,6 +28,8 @@ import {
   type GuideTierKey,
 } from '@/lib/data/guide-categories';
 import { isTowerKey, TOWER_KEYS } from '@/lib/data/towers';
+import { getMonster } from '@/lib/data/monsters';
+import { encountersOfGroup } from '@/lib/data/encounters';
 
 const CONTENTS_DIR = resolve(process.cwd(), 'src/app/[lang]/guides/_contents');
 
@@ -477,6 +479,39 @@ export function readGuideFile<T>(
   const p = resolve(CONTENTS_DIR, guide.category, guide.slug, file);
   if (!existsSync(p)) return undefined;
   return JSON.parse(readFileSync(p, 'utf8')) as T;
+}
+
+/** Le monstre BOSS d'un combat (`group`) — celui de sa difficulté la plus haute
+ *  (dernier palier), le boss du terrain sinon le premier monstre. `undefined` si
+ *  le combat n'existe pas. */
+export function groupBossMonster(group: string): Monster | undefined {
+  const encs = encountersOfGroup(group);
+  const last = encs[encs.length - 1];
+  const ref = last?.monsters.find((m) => m.role === 'boss') ?? last?.monsters[0];
+  return ref ? getMonster(ref.id) : undefined;
+}
+
+/**
+ * LE BOSS qui REPRÉSENTE un guide — le monstre dont le portrait sert de carte de
+ * partage (og:image) et de vignette de journal. SOURCE UNIQUE, partagée par la
+ * page guide (`generateMetadata`) et le changelog (`changelogThumb`).
+ *
+ * `meta.bossId` explicite l'emporte toujours. À défaut, un GUILD RAID le DÉRIVE :
+ * son boss de phase 2 est le combat `main` de sa version la plus récente. La
+ * donnée du jeu ne garde pas ce boss dans le meta (il change à chaque saison), on
+ * le JOINT via le `group` du `config.json` courant — d'où les guild raids sans
+ * `bossId`. Les autres guides sans `bossId` n'ont pas de boss (→ carte par défaut).
+ */
+export function guideBossMonster(guide: Guide): Monster | undefined {
+  if (guide.bossId) return getMonster(guide.bossId);
+  if (guide.category === 'guild-raid') {
+    const newest = guide.versions[0];
+    if (newest) {
+      const cfg = readGuideVersionFile<{ main?: string }>(guide, newest.key, 'config.json');
+      if (cfg?.main) return groupBossMonster(cfg.main);
+    }
+  }
+  return undefined;
 }
 
 /** Props reçues par le composant de contenu d'un guide (`index.tsx`). */

@@ -28,14 +28,14 @@ import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import {
+  groupBossMonster,
   guideVersionLabel,
   readGuideFile,
   readGuideVersionFile,
   type GuideContentProps,
 } from '@/lib/data/guides';
 import { geasUnlockTable, resolveGeas } from '@/lib/data/geas';
-import { encountersOfGroup } from '@/lib/data/encounters';
-import { getMonster, monsterDisplayNames, monsterIconSrc } from '@/lib/data/monsters';
+import { monsterDisplayNames, monsterIconSrc } from '@/lib/data/monsters';
 import { BossEncounters } from '@/components/guides/BossEncounters';
 import {
   GeasUnlockList,
@@ -181,20 +181,12 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
     return <img src={src} alt="" width={20} height={20} className="h-5 w-5 shrink-0" />;
   };
 
-  /** Le monstre boss d'un combat (le boss du stage le plus haut). */
-  const bossOfGroup = (group: string) => {
-    const encs = encountersOfGroup(group);
-    const last = encs[encs.length - 1];
-    const ref = last?.monsters.find((m) => m.role === 'boss') ?? last?.monsters[0];
-    return ref ? getMonster(ref.id) : undefined;
-  };
-
   /** Colonne de geas (portrait + nom + table de déblocage) d'un sous-boss. */
   const geasColumn = (group: string | undefined): GeasColumn | undefined => {
     if (!group) return undefined;
     const unlocks = geasUnlockTable(group);
     if (!unlocks.length) return undefined;
-    const m = bossOfGroup(group);
+    const m = groupBossMonster(group);
     return {
       portraitSrc: m ? monsterIconSrc(m) : undefined,
       name: m ? (monsterDisplayNames([m.id], lang).get(m.id) ?? m.name.en) : '',
@@ -205,7 +197,7 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
   /** Libellé d'onglet d'un sous-boss : icône + nom du boss (données), sinon repli. */
   const subBossTabLabel = (group: string | undefined, index: number): ReactNode => {
     if (group) {
-      const m = bossOfGroup(group);
+      const m = groupBossMonster(group);
       if (m) {
         const name = monsterDisplayNames([m.id], lang).get(m.id) ?? m.name.en;
         return (
