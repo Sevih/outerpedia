@@ -45,6 +45,12 @@ const CATEGORY_ORDER: Record<EffectSide, string[]> = {
   debuff: ['statReduction', 'cc', 'dot', 'utility', 'unique'],
 };
 
+/** Familles valides par côté — pour valider un `tag` curé comme catégorie. */
+const VALID_CATEGORY: Record<EffectSide, Set<string>> = {
+  buff: new Set([...CATEGORY_ORDER.buff, 'hidden']),
+  debuff: new Set([...CATEGORY_ORDER.debuff, 'hidden']),
+};
+
 /**
  * Clé CANONIQUE d'une clé d'effet : `group` de la taxonomie si présent, sinon la
  * convention documentée `_IR` (jumeau irremovable) → base si la base existe.
@@ -96,11 +102,15 @@ export function buildEffectGroups(
   for (const raw of presentKeys) {
     const key = canonicalEffectKey(side, raw);
     if (seen.has(key)) continue;
-    const category = table[key]?.category;
-    if (!category || category === 'hidden') continue;
-    // Résolution FUSIONNÉE (curé > extrait) — nom ET icône curés.
+    // Résolution FUSIONNÉE (curé > extrait) — nom, icône ET `tag` curés.
     const eff = resolveEffectKey(side, key);
     if (!eff) continue;
+    // Le `tag` curé de l'effet (éditable par l'admin, « pour regrouper/filtrer »)
+    // prime sur la catégorie de la taxonomie quand c'est une famille valide —
+    // override par-effet immédiat (lecture disque), sans rebuild du glossaire.
+    const tagCat = eff.tag && VALID_CATEGORY[side].has(eff.tag) ? eff.tag : undefined;
+    const category = tagCat ?? table[key]?.category;
+    if (!category || category === 'hidden') continue;
     seen.add(key);
 
     const bucket = byCategory.get(category) ?? [];
