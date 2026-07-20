@@ -77,13 +77,22 @@ export function BannersEditor({ initial, chars }: { initial: Banner[]; chars: Ch
     setStatus({ kind: 'idle' });
     try {
       // `_key` est présentationnel : on reconstruit la forme métier Banner.
-      await postJson(
+      const res = await postJson<{
+        ok: boolean;
+        publish?: { ok: boolean; purged: boolean; error?: string };
+      }>(
         '/api/admin/curated/banners',
         rows
           .filter((r) => r.id || r.name)
           .map((r): Banner => ({ id: r.id, name: r.name, start: r.start, end: r.end })),
       );
-      setStatus({ kind: 'ok', msg: 'Saved' });
+      // La sauvegarde publie aussi la copie runtime R2 (live sans redéploiement) —
+      // un échec de publication est un AVERTISSEMENT, le fichier local est sauvé.
+      const p = res.publish;
+      if (p?.ok && p.purged) setStatus({ kind: 'ok', msg: 'Saved + publié (live ≤ 10 min)' });
+      else if (p?.ok) setStatus({ kind: 'ok', msg: `Saved + publié — ${p.error ?? ''}` });
+      else
+        setStatus({ kind: 'err', msg: `Saved local, publication R2 ratée : ${p?.error ?? '?'}` });
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });
     }

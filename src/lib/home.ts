@@ -65,25 +65,30 @@ type RawBanner = { id: string; name: string; start: string; end: string };
 const IMG_BASE = process.env.NEXT_PUBLIC_IMG_BASE ?? '';
 
 /**
- * Charge les coupons. En prod : la COPIE RUNTIME hébergée sur R2
- * (`data/coupons.json`, publiée par la sauvegarde admin — cf.
- * `lib/admin/coupons-publish`), lue à la requête avec revalidation — un code
- * poussé apparaît SANS redéploiement (patron du manifeste comics, décision
+ * Charge un JSON curé en RUNTIME. En prod : la COPIE hébergée sur R2
+ * (`data/<name>`, publiée par la sauvegarde admin — cf.
+ * `lib/admin/runtime-publish`), lue à la requête avec revalidation — une
+ * édition apparaît SANS redéploiement (patron du manifeste comics, décision
  * Sevih 20/07). En dev (base vide) ou si R2 est injoignable : repli sur la
  * donnée committée. Le `revalidate` de 600 s abaisse d'office l'ISR des pages
  * consommatrices (home, /coupons) à 10 min — c'est voulu, c'est la fraîcheur.
  */
-async function loadCoupons(): Promise<RawCoupon[]> {
+async function loadRuntimeJson<T>(name: string, fallback: T): Promise<T> {
   if (IMG_BASE) {
     try {
-      const res = await fetch(`${IMG_BASE}/data/coupons.json`, { next: { revalidate: 600 } });
-      if (res.ok) return (await res.json()) as RawCoupon[];
+      const res = await fetch(`${IMG_BASE}/data/${name}`, { next: { revalidate: 600 } });
+      if (res.ok) return (await res.json()) as T;
     } catch {
       /* R2 injoignable → repli committé */
     }
   }
-  return couponsData as unknown as RawCoupon[];
+  return fallback;
 }
+
+const loadCoupons = (): Promise<RawCoupon[]> =>
+  loadRuntimeJson('coupons.json', couponsData as unknown as RawCoupon[]);
+const loadBanners = (): Promise<RawBanner[]> =>
+  loadRuntimeJson('banner.json', bannersData as RawBanner[]);
 
 /** Jour courant `YYYY-MM-DD` en UTC (les fenêtres actives sont en jours UTC). */
 function todayUTC(): string {
@@ -95,13 +100,15 @@ function todayUTC(): string {
  * (`/admin/tools/banners`), PAS `recruit.json` : les patch notes tombent 24-48 h
  * avant la mise à jour du jeu, la curation permet de pré-saisir une bannière
  * que les tables n'ont pas encore (le généré reste la source des guides —
- * historique release/rerun des limited). Dédupliquées par perso (un même perso
- * peut avoir deux fenêtres qui se chevauchent) et triées par rareté.
+ * historique release/rerun des limited). Lue en runtime comme les coupons :
+ * une bannière sauvée en admin part en prod sans redéploiement. Dédupliquées
+ * par perso (un même perso peut avoir deux fenêtres qui se chevauchent) et
+ * triées par rareté.
  */
-export function getActiveBanners(lang: Lang): BannerVM[] {
+export async function getActiveBanners(lang: Lang): Promise<BannerVM[]> {
   const today = todayUTC();
   const byId = new Map<string, BannerVM>();
-  for (const b of (bannersData as RawBanner[]).filter((b) => b.start <= today && b.end >= today)) {
+  for (const b of (await loadBanners()).filter((b) => b.start <= today && b.end >= today)) {
     if (byId.has(b.id)) continue;
     const c = getCharacter(b.id);
     const slug = c && slugForId(c.id);

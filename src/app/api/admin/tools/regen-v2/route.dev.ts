@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { regenBannersFromV2, regenCouponsFromV2 } from '@/lib/admin/promo-banner-store';
 import { regenChangelogFromV2 } from '@/lib/admin/changelog-store';
-import { publishCoupons } from '@/lib/admin/coupons-publish';
+import { publishBanners, publishCoupons } from '@/lib/admin/runtime-publish';
 import { IS_DEV } from '@/lib/admin/guard';
 
 // Import ponctuel depuis le repo V2 voisin (écrase la copie V3). Dev only.
@@ -14,8 +14,11 @@ export async function POST(req: Request) {
       const data = await regenCouponsFromV2();
       return NextResponse.json({ ok: true, data, publish: await publishCoupons() });
     }
-    if (kind === 'banners')
-      return NextResponse.json({ ok: true, data: await regenBannersFromV2() });
+    // Même logique pour le regen banners : fichier réécrit → copie R2 republiée.
+    if (kind === 'banners') {
+      const data = await regenBannersFromV2();
+      return NextResponse.json({ ok: true, data, publish: await publishBanners() });
+    }
     if (kind === 'changelog')
       return NextResponse.json({ ok: true, data: await regenChangelogFromV2() });
     return NextResponse.json({ ok: false, error: 'kind inconnu' }, { status: 400 });

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { saveCoupons, type PromoCode } from '@/lib/admin/promo-banner-store';
-import { publishCoupons } from '@/lib/admin/coupons-publish';
+import { publishCoupons } from '@/lib/admin/runtime-publish';
 import { IS_DEV } from '@/lib/admin/guard';
 
 // Outil local : 403 en prod, écriture fichier seulement en dev. La sauvegarde

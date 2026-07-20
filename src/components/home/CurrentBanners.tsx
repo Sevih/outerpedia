@@ -8,7 +8,7 @@ import { BannerCountdown, BannerWrapper } from './BannerCountdown';
  * perso + compte à rebours. Section masquée s'il n'y en a aucune. Layout unique flex-wrap
  * (desktop et mobile) — pas de carousel dédié, les cartes s'enroulent.
  */
-export function CurrentBanners({
+export async function CurrentBanners({
   lang,
   title,
   endsInLabel,
@@ -19,7 +19,7 @@ export function CurrentBanners({
   endsInLabel: string;
   starAria: string;
 }) {
-  const banners = getActiveBanners(lang);
+  const banners = await getActiveBanners(lang);
   if (banners.length === 0) return null;
 
   return (
