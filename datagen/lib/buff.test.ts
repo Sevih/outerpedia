@@ -3,8 +3,6 @@ import {
   buffRowAtLevel,
   buffValuesAt,
   fillPlaceholders,
-  getMaxLevel,
-  resolvePlaceholders,
   resolveSkillPlaceholders,
   skillBuffVars,
 } from './buff';
@@ -48,36 +46,6 @@ const index = new Map<string, Row[]>([
   ['B_RATE', rateBuff],
   ['B_FLAT', flatBuff],
 ]);
-
-describe('getMaxLevel', () => {
-  it('renvoie le niveau max, défaut 1', () => {
-    expect(getMaxLevel(index, 'B_RATE')).toBe(5);
-    expect(getMaxLevel(index, 'B_FLAT')).toBe(1);
-    expect(getMaxLevel(index, 'INCONNU')).toBe(1);
-  });
-});
-
-describe('resolvePlaceholders', () => {
-  it('per-mille : Value/10 en %, Rate = CreateRate/10', () => {
-    expect(resolvePlaceholders('+[Value] HP for [Turn] turn at [Rate]', index, 'B_RATE', 1)).toBe(
-      '+1% HP for 1 turn at 100%',
-    );
-    expect(resolvePlaceholders('[Value]', index, 'B_RATE', 5)).toBe('2%');
-  });
-
-  it('plat : Value entier sans %', () => {
-    expect(resolvePlaceholders('+[Value] Speed', index, 'B_FLAT', 1)).toBe('+250 Speed');
-  });
-
-  it('niveau manquant → closest non géré ici : exact requis', () => {
-    // B_FLAT n'a que le niveau 1 : demander niveau 3 ne matche pas → placeholder gardé
-    expect(resolvePlaceholders('[Value]', index, 'B_FLAT', 3)).toBe('?');
-  });
-
-  it('buff inconnu → ?', () => {
-    expect(resolvePlaceholders('[Value]', index, 'INCONNU', 1)).toBe('?');
-  });
-});
 
 describe('buffValuesAt', () => {
   it('extrait value (per-mille), rate, turn', () => {

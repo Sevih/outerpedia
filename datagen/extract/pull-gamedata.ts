@@ -17,14 +17,12 @@
  *
  * Le chemin de l'adb LDPlayer peut être surchargé via ADB_PATH.
  */
-import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { isMain } from '../lib/is-main';
+import { PKG, capture, ensureRoot, pickDevice, stream } from './adb';
 
-const ADB = process.env.ADB_PATH ?? 'C:\\LDPlayer\\LDPlayer9\\adb.exe';
-const PKG = 'com.smilegate.outerplane.stove.google';
 const REMOTE = `/sdcard/Android/data/${PKG}/files`;
 const LOCAL = resolve('.gamedata/files');
 
@@ -38,30 +36,6 @@ const CONTENT_ADDRESSED = new Set(['bundles']);
 // Au-delà de ce nombre de fichiers à tirer, un pull complet du dossier (1 seul
 // transfert) est plus rapide que des pulls fichier par fichier.
 const FULL_PULL_THRESHOLD = 1000;
-
-/** adb qui renvoie sa sortie (pour la parser). */
-function capture(args: string[]): string {
-  return execFileSync(ADB, args, { encoding: 'utf-8', maxBuffer: 64 * 1024 * 1024 });
-}
-
-/** adb qui affiche sa sortie en direct (progression du pull). */
-function stream(args: string[]): void {
-  execFileSync(ADB, args, { stdio: 'inherit' });
-}
-
-/** Choisit le device : l'émulateur en priorité, sinon le premier connecté. */
-function pickDevice(): string {
-  const lines = capture(['devices'])
-    .split(/\r?\n/)
-    .slice(1)
-    .map((l) => l.trim())
-    .filter((l) => /\tdevice$/.test(l))
-    .map((l) => l.split('\t')[0]);
-  if (lines.length === 0) {
-    throw new Error('Aucun device adb détecté. LDPlayer est-il bien lancé ?');
-  }
-  return lines.find((d) => d.startsWith('emulator-')) ?? lines[0];
-}
 
 /** Signatures distantes { chemin relatif → signature } (taille ou md5). */
 function remoteSignatures(serial: string, baseDir: string, useHash: boolean): Map<string, string> {
@@ -147,14 +121,7 @@ export async function pull(subdirs: string[] = DEFAULT_SUBDIRS): Promise<PullRes
     return { changed: false, devicePresent: false };
   }
   console.log(`📱 Device : ${serial}`);
-
-  // Passage en root (nécessaire pour lire les données du jeu). Idempotent.
-  try {
-    stream(['-s', serial, 'root']);
-    stream(['-s', serial, 'wait-for-device']);
-  } catch {
-    // déjà root ou root non requis — on continue
-  }
+  ensureRoot(serial);
 
   let changed = false;
   for (const sub of subdirs) {

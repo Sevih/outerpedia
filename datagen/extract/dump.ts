@@ -23,10 +23,8 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { isMain } from '../lib/is-main';
+import { PKG, capture, ensureRoot, pickDevice, stream } from './adb';
 import { IL2CPPDUMPER, ensureTool } from './tools';
-
-const ADB = process.env.ADB_PATH ?? 'C:\\LDPlayer\\LDPlayer9\\adb.exe';
-const PKG = 'com.smilegate.outerplane.stove.google';
 
 // Entrées à extraire des APK (chemins internes stables du zip).
 const META_ENTRY = 'assets/bin/Data/Managed/Metadata/global-metadata.dat';
@@ -37,30 +35,6 @@ const META = resolve(APK_DIR, 'global-metadata.dat');
 const SO = resolve(APK_DIR, 'libil2cpp.so');
 const OUT = resolve(APK_DIR, 'dumped');
 const REMOTE_TMP = '/data/local/tmp';
-
-/** adb qui renvoie sa sortie (parsing). */
-function capture(args: string[]): string {
-  return execFileSync(ADB, args, { encoding: 'utf-8', maxBuffer: 16 * 1024 * 1024 });
-}
-
-/** adb qui affiche sa sortie en direct (progression du pull). */
-function stream(args: string[]): void {
-  execFileSync(ADB, args, { stdio: 'inherit' });
-}
-
-/** Choisit le device : l'émulateur en priorité, sinon le premier connecté. Lève si aucun. */
-function pickDevice(): string {
-  const lines = capture(['devices'])
-    .split(/\r?\n/)
-    .slice(1)
-    .map((l) => l.trim())
-    .filter((l) => /\tdevice$/.test(l))
-    .map((l) => l.split('\t')[0]);
-  if (lines.length === 0) {
-    throw new Error('Aucun device adb détecté. LDPlayer est-il bien lancé ?');
-  }
-  return lines.find((d) => d.startsWith('emulator-')) ?? lines[0];
-}
 
 /** Chemins des APK (base + splits) de l'install, via `pm path`. */
 function apkPaths(serial: string): string[] {
@@ -97,12 +71,7 @@ function extractFromApk(serial: string, apk: string, entry: string, dest: string
 function pullMatchedPair(): void {
   const serial = pickDevice();
   console.log(`📱 Device : ${serial}`);
-  try {
-    stream(['-s', serial, 'root']);
-    stream(['-s', serial, 'wait-for-device']);
-  } catch {
-    // déjà root ou root non requis — on continue
-  }
+  ensureRoot(serial);
 
   const apks = apkPaths(serial);
   const base = apks.find((p) => p.endsWith('/base.apk'));

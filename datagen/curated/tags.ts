@@ -53,7 +53,9 @@ export const tagDefSchema: Schema = {
   },
 };
 
-/** Valide une définition de tag (admin + test bloquant). */
+/** Valide une définition de tag — branché dans le test BLOQUANT (tags.test.ts) :
+ * une définition committée mal formée (kind hors enum, `sort` manquant…) fait
+ * échouer la suite, pas seulement une définition orpheline. */
 export function validateTagDef(def: unknown, path = 'tag'): string[] {
   return validate(def, tagDefSchema, path).map((e) => `${e.path} : ${e.message}`);
 }

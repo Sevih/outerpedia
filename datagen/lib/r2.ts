@@ -71,21 +71,3 @@ export function r2Copy(srcPrefix: string, destDir: string, extra: string[] = [])
     env,
   );
 }
-
-/** Envoie `<srcDir>` → `:s3:BUCKET/<destPrefix>` (peuplement des artefacts). */
-export function r2Push(srcDir: string, destPrefix: string, extra: string[] = []): void {
-  const env = r2Env();
-  rclone(
-    [
-      'copy',
-      srcDir,
-      `:s3:${env.R2_BUCKET}/${destPrefix}`,
-      '--s3-no-check-bucket',
-      '--transfers',
-      '16',
-      '--progress',
-      ...extra,
-    ],
-    env,
-  );
-}

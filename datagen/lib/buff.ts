@@ -28,14 +28,6 @@ export function loadBuffIndex(): Map<string, Row[]> {
   return withCaseInsensitiveGet(idx);
 }
 
-/** Niveau max disponible pour un BuffID (premier id si CSV). Défaut 1. */
-export function getMaxLevel(buffsByID: Map<string, Row[]>, buffIdStr: string): number {
-  const id = buffIdStr.split(',')[0]?.trim();
-  const rows = id ? buffsByID.get(id) : undefined;
-  if (!rows?.length) return 1;
-  return Math.max(...rows.map((r) => num(r.Level) || 1));
-}
-
 /** Vrai si la valeur du buff est en per-mille (à diviser par 10 pour un %). */
 function isPermille(buff: Row): boolean {
   if (buff.ApplyingType === 'OAT_RATE') return true;
@@ -58,11 +50,6 @@ function fmtValue(buff: Row): string {
 /** Formate la durée en tours (`?` si non numérique, ex. permanent). */
 function fmtTurn(buff: Row): string {
   return /^\d+$/.test(buff.TurnDuration ?? '') ? buff.TurnDuration! : '?';
-}
-
-/** Vrai si la valeur de cette ligne de buff est en per-mille (×10 → %). Exposé pour le classifier. */
-export function isPermilleRow(buff: Row): boolean {
-  return isPermille(buff);
 }
 
 /** Magnitude formatée d'une ligne de buff (per-mille → %, sinon entier absolu). Exposé pour le classifier. */
@@ -151,17 +138,6 @@ export function fillPlaceholders(template: string, v: BuffValues, color = false)
     .replace(/\[-Turn\]/gi, fs(v.turn, '-'))
     .replace(/\[Turn2\]/gi, f(v.turn2))
     .replace(/\[Turn\]/gi, f(v.turn));
-}
-
-/** Raccourci : extrait les valeurs d'un buff à un niveau et remplit le template d'un coup. */
-export function resolvePlaceholders(
-  text: string,
-  buffsByID: Map<string, Row[]>,
-  buffIdStr: string,
-  level: number,
-  color = false,
-): string {
-  return fillPlaceholders(text, buffValuesAt(buffsByID, buffIdStr, level), color);
 }
 
 // --- placeholders de COMPÉTENCE (primitive #5) -------------------------------

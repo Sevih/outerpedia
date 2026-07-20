@@ -21,6 +21,7 @@ import charactersData from '../../data/generated/characters.json';
 import curatedData from '../../data/curated/characters.json';
 import tagsData from '../../data/curated/tags.json';
 import type { CharactersFile, CharacterCurated, TagGlossary } from '../contracts';
+import { validateTagDef } from './tags';
 
 const characters = charactersData as CharactersFile;
 const curated = curatedData as Record<string, CharacterCurated>;
@@ -60,6 +61,13 @@ describe('vocabulaire des tags', () => {
     for (const [slug, def] of Object.entries(glossary)) {
       expect(def.name.en, `${slug} sans libellé EN`).toBeTruthy();
     }
+  });
+
+  it('chaque définition respecte le schéma (kind, name, desc?, sort)', () => {
+    // La forme aussi est gardée, pas que la couverture : un `kind` hors enum ou
+    // un `sort` manquant dans le fichier committé fait sonner la suite.
+    const errors = Object.entries(glossary).flatMap(([slug, def]) => validateTagDef(def, slug));
+    expect(errors).toEqual([]);
   });
 
   it('la couche curée ne contient QUE des tags humains', () => {

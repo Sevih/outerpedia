@@ -3,8 +3,8 @@
  *
  * Le jeu ne fournit pas d'image FI : elle se COMPOSE en appliquant au portrait
  * CT_<id> le layout RectTransform du prefab FaceIcon (variante « Thumbnail »).
- * Le layout vit dans `face-icon-layout.json` (718 entrées, extrait des bundles
- * via UnityPy — script à re-porter pour les futurs persos absents de la table).
+ * Le layout vit dans `face-icon-layout.json`, extrait des bundles via UnityPy
+ * (`extract-face-layout.py`, étape pilotée par `datagen:patch` — cf. refresh.ts).
  *
  * Convention Unity : position ancrée relative au centre du cadre, +Y vers le
  * haut → Y inversé pour les coordonnées image.
@@ -32,11 +32,6 @@ function layout(): FaceIconLayout {
     layoutCache = JSON.parse(readFileSync(FACE_ICON_LAYOUT, 'utf8')) as FaceIconLayout;
   }
   return layoutCache;
-}
-
-/** Vrai si le layout connaît ce perso (sinon : re-porter l'extracteur UnityPy). */
-export function hasFaceIconLayout(id: string): boolean {
-  return Boolean(layout()[id]?.Thumbnail);
 }
 
 /** Compose l'icône de visage depuis le portrait. `null` si layout absent.
