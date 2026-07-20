@@ -7,7 +7,9 @@
  *   - `buff` / `debuff` : union dédupliquée des clés d'effet CANONIQUES sur tout
  *     le kit (clés `effectByKey` : `BT_STAT|ST_ATK`, `BT_IMMUNE`, `POLAR_NIGHT`…,
  *     repliées sur leur `group` quand la taxonomie en définit un) ;
- *   - `effectsBySource` : les mêmes, ventilés par SOURCE de skill (s1/s2/…).
+ *   - `effectsBySource` : les mêmes, ventilés par SOURCE de skill (s1/s2/…) ;
+ *   - `teamBonuses` : stats données à TOUTE L'ÉQUIPE en permanence via le passif
+ *     de TRANSCENDANCE (clés STAT_ICON : SPD/ATK/…).
  *
  * RÉSOLUTION DE CLÉ (le point délicat) : le `type` brut d'un effet de skill a
  * des variantes (`BT_STAT_PREMIUM`…) qui NE SONT PAS des clés de taxonomie. On
@@ -21,8 +23,8 @@
  * / `dualAttack`. Les passifs restants (class/unique/burst/extra) comptent dans
  * l'union `buff`/`debuff` mais n'ont pas de source nommée (comportement V2).
  *
- * NB : `teamBonuses` (bonus d'équipe de transcendance) et `exclusiveEquip`
- * (effets de l'EE) ne sont PAS encore produits ici — cf. TODO en fin de fichier.
+ * NB : `exclusiveEquip` (effets de l'équipement exclusif) n'est PAS encore
+ * produit ici — cf. TODO en fin de fichier.
  *
  * Écriture CANONIQUE : `pnpm datagen:build` → `characters-list.json`. L'exécution
  * directe imprime des compteurs pour revue.
@@ -41,6 +43,68 @@ export interface CharacterEffects {
   debuff: string[];
   /** Mêmes clés, ventilées par source de skill (s1/s2/ultimate/…). */
   effectsBySource: Record<string, { buff: string[]; debuff: string[] }>;
+  /** Stats offertes à l'équipe par le passif de transcendance (clés STAT_ICON). */
+  teamBonuses: string[];
+}
+
+/**
+ * Vocabulaire FERMÉ des stats de bonus d'équipe (label du jeu → clé STAT_ICON).
+ * Les noms pleins viennent des textes de transcendance (`+X% Ally Team <Stat>`) ;
+ * les formes courtes (`DMG Incr`/`DMG Reduc`) sont des raccourcis propres à ces
+ * textes (pas des noms de stat du glossaire) — d'où cette table, comme la V2.
+ */
+const TEAM_STAT: Record<string, string> = {
+  attack: 'ATK',
+  defense: 'DEF',
+  health: 'HP',
+  speed: 'SPD',
+  'critical damage': 'CHD',
+  'critical hit chance': 'CHC',
+  effectiveness: 'EFF',
+  resilience: 'RES',
+  'dmg incr': 'DMG UP%',
+  'dmg reduc': 'DMG RED%',
+  penetration: 'PEN%',
+  lifesteal: 'LS',
+};
+
+/** Ordre canonique d'affichage des bonus d'équipe (déterminisme + parité V2). */
+const TB_ORDER = [
+  'SPD',
+  'ATK',
+  'HP',
+  'DEF',
+  'CHD',
+  'CHC',
+  'DMG UP%',
+  'DMG RED%',
+  'CDMG RED%',
+  'PEN%',
+  'EFF',
+  'RES',
+  'LS',
+];
+
+/**
+ * Stats d'équipe repérées dans un texte de transcendance : un label du
+ * vocabulaire fermé ADJACENT au marqueur « Ally/Allies[' Team] » (« +X% Ally Team
+ * Speed », « Allies DMG Incr +X% », « Increases Ally Resilience by X% »). On
+ * matche le LABEL connu directement (pas une capture ouverte) — insensible aux
+ * mots qui le suivent (« … Speed each turn », « … Resilience by 6% »).
+ */
+const ALLY_STAT = new RegExp(
+  `all(?:ies|y)(?:['’]s?)?(?:\\s+team)?\\s+(${Object.keys(TEAM_STAT)
+    .sort((a, b) => b.length - a.length)
+    .join('|')})\\b`,
+  'gi',
+);
+
+function teamStatsFromDesc(desc: string, into: Set<string>): void {
+  const flat = desc.replace(/\\n|\r?\n/g, ' ');
+  for (const m of flat.matchAll(ALLY_STAT)) {
+    const key = TEAM_STAT[m[1].toLowerCase()];
+    if (key) into.add(key);
+  }
 }
 
 export type CharactersListData = Record<string, CharacterEffects>;
@@ -115,10 +179,17 @@ export function buildCharactersList(deps: CharactersListDeps): CharactersListDat
   for (const char of Object.values(characters)) {
     const union: Record<Side, Set<string>> = { buff: new Set(), debuff: new Set() };
     const bySource: Record<string, Record<Side, Set<string>>> = {};
+    const team = new Set<string>();
 
     for (const skillId of char.skills) {
       const sk = skills[skillId];
-      if (!sk?.effects) continue;
+      if (!sk) continue;
+      // Bonus d'équipe : le passif de TRANSCENDANCE (unique_passive) décrit son
+      // gain d'équipe sur le desc PAR NIVEAU (SE_DESC_SKILL08_*).
+      if (sk.type === 'unique_passive') {
+        for (const lv of sk.levels ?? []) if (lv.desc?.en) teamStatsFromDesc(lv.desc.en, team);
+      }
+      if (!sk.effects) continue;
       const source = SLOT_SOURCE[sk.type];
       for (const e of sk.effects) {
         // Résolution par statut NOMMÉ (tooltip/label → id → clé de taxonomie
@@ -152,6 +223,7 @@ export function buildCharactersList(deps: CharactersListDeps): CharactersListDat
       buff: [...union.buff].sort(),
       debuff: [...union.debuff].sort(),
       effectsBySource,
+      teamBonuses: [...team].sort((a, b) => TB_ORDER.indexOf(a) - TB_ORDER.indexOf(b)),
     };
   }
 
@@ -181,13 +253,13 @@ if (isMain(import.meta.url)) {
     const withBuff = Object.values(data).filter((c) => c.buff.length).length;
     const withDebuff = Object.values(data).filter((c) => c.debuff.length).length;
     const withSrc = Object.values(data).filter((c) => Object.keys(c.effectsBySource).length).length;
+    const withTeam = Object.values(data).filter((c) => c.teamBonuses.length).length;
     console.log(`characters-list: ${n} persos`);
-    console.log(`  avec buff: ${withBuff} · avec debuff: ${withDebuff} · avec sources: ${withSrc}`);
+    console.log(
+      `  avec buff: ${withBuff} · debuff: ${withDebuff} · sources: ${withSrc} · teamBonuses: ${withTeam}`,
+    );
   };
   run();
 }
 
-// TODO(#3 teamBonuses) : bonus d'équipe de TRANSCENDANCE — dérivable du `desc`
-// par niveau du passif de transcendance (SkillLevel.desc, « +X% Ally Team … »),
-// pas des effets my_team (qui incluent les buffs de combat temporaires).
 // TODO(exclusiveEquip) : effets de l'équipement exclusif (source `exclusiveEquip`).

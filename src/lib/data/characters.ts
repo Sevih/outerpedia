@@ -84,6 +84,8 @@ export interface CharacterListItem {
   buff?: CharacterEffects['buff'];
   debuff?: CharacterEffects['debuff'];
   effectsBySource?: CharacterEffects['effectsBySource'];
+  /** Stats offertes à l'équipe (passif de transcendance) — clés STAT_ICON. */
+  teamBonuses?: CharacterEffects['teamBonuses'];
 }
 
 export function getAllCharacters(): Character[] {
