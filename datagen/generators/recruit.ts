@@ -30,11 +30,11 @@
  * Un PickupID de bannière inconnu de CharacterTemplet casse la génération.
  */
 import type { LangDict } from '../lib/lang';
-import { readDump } from '../lib/dump';
+import { DUMP_PATH, readDump } from '../lib/dump';
 import { isMain } from '../lib/is-main';
 import { readCuratedJson } from '../lib/json';
 import { loadTextIndex, resolveText } from '../lib/text';
-import { loadTable, num, type Row } from '../lib/tables';
+import { fileStamp, loadTable, num, type Row } from '../lib/tables';
 
 /** Une ligne de taux d'une bannière (déjà normalisée en pourcents). */
 export interface RecruitRate {
@@ -213,17 +213,22 @@ function ticketIdOf(group: Row): string | undefined {
   return id;
 }
 
-let assetEnum: Map<string, string> | undefined;
+// Empreinte mtime de dump.cs : un re-dump (nouvelle version du jeu, process
+// admin long-running) doit invalider l'enum, comme partout (modèle
+// `curatedKeyCache`).
+let assetEnum: { data: Map<string, string>; stamp: string } | undefined;
 /** Id numérique de monnaie → clé `SYS_ASSET_*` (via l'enum dumpée). */
 function assetKeyOf(id: string): string {
-  if (!assetEnum) {
-    assetEnum = new Map();
+  const stamp = fileStamp(DUMP_PATH);
+  if (!assetEnum || assetEnum.stamp !== stamp) {
+    const data = new Map<string, string>();
     const dump = readDump();
     for (const m of dump.matchAll(/public const ASSET_TYPE AT_([A-Z0-9_]+) = (\d+);/g)) {
-      assetEnum.set(m[2], `SYS_ASSET_${m[1]}`);
+      data.set(m[2], `SYS_ASSET_${m[1]}`);
     }
+    assetEnum = { data, stamp };
   }
-  const key = assetEnum.get(id);
+  const key = assetEnum.data.get(id);
   if (!key) throw new Error(`recruit : ASSET_TYPE inconnu dans la dump — id ${id}`);
   return key;
 }

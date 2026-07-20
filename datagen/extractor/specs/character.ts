@@ -14,7 +14,7 @@ import type { LangDict } from '../../lib/lang';
 import { resolveClass } from '../../lib/class';
 import { expandBuffIds, loadBuffGroups, loadBuffIndex } from '../../lib/buff';
 import { loadTextIndex, resolveText } from '../../lib/text';
-import { loadTable, num, splitCsv, type Row } from '../../lib/tables';
+import { bool, loadTable, num, splitCsv, type Row } from '../../lib/tables';
 import { buildImageIndex } from '../../assets/source';
 import { costumeCore } from '../../generators/costumes';
 import { runSpec } from '../core/runner';
@@ -560,7 +560,7 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     // Affichage du nickname en préfixe du nom (« Demiurge Stella »).
     const showNickNameIds = new Set(
       loadTable('CharacterExtraTemplet')
-        .filter((r) => r.ShowNickName === 'True')
+        .filter((r) => bool(r.ShowNickName))
         .map((r) => r.CharacterID),
     );
 

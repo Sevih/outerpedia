@@ -13,7 +13,7 @@
  * NOTE : on ne met PAS le wrap couleur `<color=#28d9ed>` de la V2 ici — c'est
  * de la présentation, pas de la donnée canonique. Le front stylise s'il veut.
  */
-import { loadTable, num, withCaseInsensitiveGet, type Row } from './tables';
+import { bool, loadTable, num, withCaseInsensitiveGet, type Row } from './tables';
 
 /** Index BuffTemplet : BuffID → lignes (une par niveau). Lookup insensible à la casse. */
 export function loadBuffIndex(): Map<string, Row[]> {
@@ -267,7 +267,7 @@ export function loadBuffGroups(): Map<string, BuffGroup> {
       const bid = g[`Child${i}_BID`];
       if (bid) kids.push(bid);
     }
-    out.set(g.ID, { kids, all: g.IsAllCreate === 'True' });
+    out.set(g.ID, { kids, all: bool(g.IsAllCreate) });
   }
   return out;
 }

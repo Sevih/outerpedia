@@ -37,6 +37,7 @@ import { statSlug } from '../lib/effects';
 import { slugEnum } from '../lib/enums';
 import { loadTextIndex, resolveText } from '../lib/text';
 import {
+  bool,
   fileStamp,
   groupBy,
   indexBy,
@@ -1299,7 +1300,7 @@ export function buildEncounters(): EncountersData {
         if (stat) opt.stat = stat;
         const v = num(row.Value);
         if (v) opt.value = v;
-        if (row.IsIgnoreInterruption === 'True') opt.irremovable = true;
+        if (bool(row.IsIgnoreInterruption)) opt.irremovable = true;
         if (row.ToolTipID) {
           opt.tooltip = row.ToolTipID;
           const nameId = tooltipById.get(row.ToolTipID)?.NameID;

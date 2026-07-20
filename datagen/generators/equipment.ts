@@ -441,21 +441,25 @@ function resolvePassive(
   return out;
 }
 
-let groupKidsCache: Map<string, string[]> | undefined;
+// Empreinte mtime : même régime que `curatedKeyCache` plus bas — un refresh
+// des tables (process admin long-running) doit invalider l'expansion.
+let groupKidsCache: { data: Map<string, string[]>; stamp: string } | undefined;
 
 /** Enfants des buffs conteneurs `BT_GROUP` (BuffGroupTemplet) — même expansion
  * que le générateur de skills. */
 function groupKids(): Map<string, string[]> {
-  if (!groupKidsCache) {
-    groupKidsCache = new Map();
+  const stamp = tablesStamp(['BuffGroupTemplet']);
+  if (!groupKidsCache || groupKidsCache.stamp !== stamp) {
+    const data = new Map<string, string[]>();
     for (const g of loadTable('BuffGroupTemplet')) {
       if (!g.ID) continue;
       const kids: string[] = [];
       for (let i = 1; i <= 10; i++) if (g[`Child${i}_BID`]) kids.push(g[`Child${i}_BID`]);
-      groupKidsCache.set(g.ID, kids);
+      data.set(g.ID, kids);
     }
+    groupKidsCache = { data, stamp };
   }
-  return groupKidsCache;
+  return groupKidsCache.data;
 }
 
 /**

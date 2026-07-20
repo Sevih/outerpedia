@@ -34,7 +34,7 @@ import { formatRowValue } from './buff';
 import { readCuratedJson } from './json';
 import type { LangDict } from './lang';
 import { loadTextIndex, resolveText } from './text';
-import { fileStamp, loadTable, num, tablesStamp, type Row } from './tables';
+import { bool, fileStamp, loadTable, num, tablesStamp, type Row } from './tables';
 import { loadCuratedEffects } from '../curated/effects';
 import { buildImageIndex, findImage } from '../assets/source';
 
@@ -205,7 +205,7 @@ export function classifyFamily(type: string): EffectFamily {
 export function classifyCategory(row: Row): EffectCategory {
   if ((row.BuffCCType ?? 'NONE') !== 'NONE') return 'cc';
   const dt = row.BuffDebuffType ?? '';
-  if (row.IsDebuff === 'True' || dt.startsWith('DEBUFF')) return 'debuff';
+  if (bool(row.IsDebuff) || dt.startsWith('DEBUFF')) return 'debuff';
   if (dt === 'BUFF') return 'buff';
   return 'neutral';
 }
@@ -459,13 +459,13 @@ export function buildEffectGlossary(): EffectGlossary {
         name: nameOf(base.NameID),
         desc: nameOf(base.DescID),
         icon: base.IconName ?? '',
-        isDebuff: base.IsDebuff === 'True',
+        isDebuff: bool(base.IsDebuff),
         origin: 'tooltip',
         tooltips: sub.map((m) => m.ID),
         ...(irremovable ? { irremovable: true } : {}),
       });
       for (const m of sub) byTooltip.set(m.ID, base.ID);
-      const subKey = `${base.NameID}|${irremovable}|${base.IsDebuff === 'True'}`;
+      const subKey = `${base.NameID}|${irremovable}|${bool(base.IsDebuff)}`;
       if (!subKeyToEffect.has(subKey)) subKeyToEffect.set(subKey, base.ID);
     }
     for (const nature of ['True', 'False']) {
@@ -481,7 +481,7 @@ export function buildEffectGlossary(): EffectGlossary {
   // nature) — le tooltip 64 « Cooldown Increase » rejoint l'effet 68.
   for (const r of loadTable('BuffToolTipTemplet')) {
     if (!r.ID || byTooltip.has(r.ID) || !nameOf(r.NameID).en) continue;
-    const key = `${r.NameID}|${/_Interruption/i.test(r.IconName ?? '')}|${r.IsDebuff === 'True'}`;
+    const key = `${r.NameID}|${/_Interruption/i.test(r.IconName ?? '')}|${bool(r.IsDebuff)}`;
     const eff = subKeyToEffect.get(key);
     if (eff) byTooltip.set(r.ID, eff);
   }
@@ -527,7 +527,7 @@ export function buildEffectGlossary(): EffectGlossary {
       name,
       desc: nameOf(b.DescID),
       icon: b.IconName ?? '',
-      isDebuff: b.IsDebuff === 'True' || /^\[DEBUFF/i.test(b.CreateText),
+      isDebuff: bool(b.IsDebuff) || /^\[DEBUFF/i.test(b.CreateText),
       origin: 'type',
       tooltips: [],
     });
@@ -554,7 +554,7 @@ export function buildEffectGlossary(): EffectGlossary {
   // effets mécaniques (`origin: type`) dont la ligne source ne dit pas le côté.
   const natureVotes = new Map<string, { buff: number; debuff: number }>();
   for (const b of loadTable('BuffTemplet')) {
-    if (b.IsEquip === 'True' || b.IsEquipBuff === 'True') continue;
+    if (bool(b.IsEquip) || bool(b.IsEquipBuff)) continue;
     const t = b.ToolTipID;
     const effId =
       (t && t !== '0' && t !== 'NONE' && byTooltip.get(t)) ||

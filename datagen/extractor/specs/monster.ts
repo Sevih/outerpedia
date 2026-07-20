@@ -33,7 +33,7 @@ import type { LangDict } from '../../lib/lang';
 import { resolveClass } from '../../lib/class';
 import { slugEnum } from '../../lib/enums';
 import { loadTextIndex, resolveText } from '../../lib/text';
-import { loadTable, num, splitCsv } from '../../lib/tables';
+import { bool, loadTable, num, splitCsv } from '../../lib/tables';
 import {
   buildEncounters,
   type EncountersData,
@@ -137,10 +137,12 @@ function monsterType(v: string | undefined): string {
   return slug === 'monster' ? slug : slug.replace(/_monster$/, '');
 }
 
-/** Booléen de table (`true`/`True`/`False`), `undefined` si colonne absente. */
+/** Booléen de table (`true`/`True`/`False`), `undefined` si colonne absente.
+ * Tri-état (la spec distingue « pas de colonne » de « faux ») ; le PARSING,
+ * lui, délègue à `bool()` de lib/tables — un seul point de vérité de casse. */
 function boolCol(v: string | undefined): boolean | undefined {
   if (v === undefined) return undefined;
-  return v.toLowerCase() === 'true';
+  return bool(v);
 }
 
 const monsterSchema: Schema = {

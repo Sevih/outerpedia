@@ -34,7 +34,7 @@ import { loadCuratedEffects } from '../curated/effects';
 import { resolveClass } from '../lib/class';
 import { slugEnum } from '../lib/enums';
 import { v2ImagesDir } from '../lib/env';
-import { loadTable } from '../lib/tables';
+import { loadTable, tablesStamp } from '../lib/tables';
 import { loadTextIndex } from '../lib/text';
 
 export type AssetRequest =
@@ -58,16 +58,20 @@ const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 /**
  * FaceIconID d'une ligne CharacterTemplet (paresseux, une passe) — certains
  * skins pointent le visage d'un frère au lieu du leur (cf. boucle apparences).
+ * Empreinte mtime : un refresh des tables (process admin long-running) doit
+ * invalider l'index, comme partout (modèle `curatedKeyCache`).
  */
-let faceIconIndex: Map<string, string> | undefined;
+let faceIconIndex: { data: Map<string, string>; stamp: string } | undefined;
 function faceIconOf(id: string): string | undefined {
-  if (!faceIconIndex) {
-    faceIconIndex = new Map();
+  const stamp = tablesStamp(['CharacterTemplet']);
+  if (!faceIconIndex || faceIconIndex.stamp !== stamp) {
+    const data = new Map<string, string>();
     for (const r of loadTable('CharacterTemplet')) {
-      if (r.ID && r.FaceIconID) faceIconIndex.set(r.ID, r.FaceIconID);
+      if (r.ID && r.FaceIconID) data.set(r.ID, r.FaceIconID);
     }
+    faceIconIndex = { data, stamp };
   }
-  return faceIconIndex.get(id);
+  return faceIconIndex.data.get(id);
 }
 
 /** Besoins d'UN personnage (réutilisé par le manifest global ET l'intégration). */

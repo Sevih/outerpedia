@@ -18,7 +18,7 @@
 import { readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { DUMP_PATH, readDump } from '../lib/dump';
-import { loadTable } from '../lib/tables';
+import { fileStamp, loadTable } from '../lib/tables';
 import { hasText, langDict } from '../lib/text';
 import type { LangDict } from '../lib/lang';
 import { slugEnum } from '../lib/enums';
@@ -37,10 +37,15 @@ const SPRITE_DIR = resolve(
   '.gamedata/extracted/images/assets/editor/resources/sprite/at_thumbnailitemruntime',
 );
 
-let iconIndex: Map<string, string> | null = null;
+// Empreinte mtime du DOSSIER : elle bouge à l'ajout/retrait d'entrées — et le
+// cache ne tient que la LISTE des noms, c'est exactement le signal qu'il faut
+// (une ré-extraction qui ajoute des sprites invalide ; un fichier réécrit à
+// l'identique ne change rien au contenu du cache). Modèle `curatedKeyCache`.
+let iconIndex: { data: Map<string, string>; stamp: string } | null = null;
 /** minuscule → vrai nom de fichier d'icône (sans extension). */
 function icons(): Map<string, string> {
-  if (iconIndex) return iconIndex;
+  const stamp = fileStamp(SPRITE_DIR);
+  if (iconIndex && iconIndex.stamp === stamp) return iconIndex.data;
   const m = new Map<string, string>();
   try {
     for (const f of readdirSync(SPRITE_DIR)) {
@@ -51,7 +56,7 @@ function icons(): Map<string, string> {
   } catch {
     /* assets pas encore extraits */
   }
-  iconIndex = m;
+  iconIndex = { data: m, stamp };
   return m;
 }
 
