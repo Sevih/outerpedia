@@ -10,10 +10,15 @@
  *   pnpm getNews                 # fetch incrémental (ancré sur le post le + récent)
  *   pnpm getNews --limit=5       # dev : borne le nombre de posts par page
  *   pnpm getNews --force-since=2025-01-01   # re-scrape depuis une date
+ *   pnpm getNews --no-commit     # n'auto-committe pas les fichiers patch-notes
  *
  * Incrémental : on ré-ancre par langue sur le post le plus récent qu'on a déjà,
  * et on filtre sur `modified_after` (le site ré-édite d'anciens posts).
+ *
+ * Auto-commit : si `posts.json`/`buff-events.json` changent, ils sont committés
+ * (message « news », chemins explicites) — plus de commit manuel à chaque scrape.
  */
+import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { join, basename, resolve } from 'node:path';
@@ -254,6 +259,28 @@ async function processContent(html: string): Promise<{ html: string; downloads: 
   return { html: $('body').html() || '', downloads };
 }
 
+/**
+ * Auto-commit des fichiers patch-notes RÉELLEMENT modifiés (message « news »),
+ * par CHEMINS EXPLICITES — jamais `git add -A` : le checkout est partagé avec
+ * d'autres tâches, on ne touche que nos fichiers. Best-effort : la donnée est
+ * déjà écrite sur disque, un échec git (hors dépôt, hook, rien à committer)
+ * n'échoue PAS le script, il est juste signalé. `--no-commit` pour désactiver.
+ */
+function commitPatchNotes(files: string[]): void {
+  if (!files.length || process.argv.includes('--no-commit')) return;
+  const paths = files.map((f) => `data/patch-notes/${f}`);
+  try {
+    execFileSync('git', ['rev-parse', '--is-inside-work-tree'], { stdio: 'ignore' });
+    execFileSync('git', ['add', '--', ...paths], { stdio: 'ignore' });
+    // `commit -- <paths>` : ne committe QUE ces fichiers, même si d'autres
+    // changements sont en cours (index/WIP d'un autre worker) → jamais happés.
+    execFileSync('git', ['commit', '-m', 'news', '--', ...paths], { stdio: 'ignore' });
+    console.log(`[getNews] committé : ${files.join(', ')}`);
+  } catch (e) {
+    console.warn(`[getNews] auto-commit sauté (${e instanceof Error ? e.message : e})`);
+  }
+}
+
 /** Écrit en JSON indenté seulement si le contenu diffère (évite de churner le fichier committé). */
 async function writeJsonIfChanged(path: string, data: unknown): Promise<boolean> {
   const json = JSON.stringify(data, null, 2) + '\n';
@@ -368,11 +395,16 @@ async function main(): Promise<void> {
     schedule: buffSchedule,
   });
 
-  const changed = [postsWritten && 'posts.json', buffWritten && 'buff-events.json'].filter(Boolean);
+  const changed = [postsWritten && 'posts.json', buffWritten && 'buff-events.json'].filter(
+    (f): f is string => Boolean(f),
+  );
   console.log(
     `${allPosts.length} posts (${newCount} new, ${updatedCount} updated), ${imgCount} images, ` +
       `${buffSchedule.length} buff days${changed.length ? ` — écrit ${changed.join(', ')}` : ' — aucun changement'}`,
   );
+  // Auto-commit des fichiers committés modifiés (posts/buff-events) : plus besoin
+  // de le faire à la main après chaque scrape. Best-effort, chemins explicites.
+  commitPatchNotes(changed);
 }
 
 main().catch((e) => {
