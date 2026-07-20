@@ -1,8 +1,8 @@
 /**
- * PUBLICATION RUNTIME des coupons : pousse `data/curated/coupons.json` sur R2
- * (`data/coupons.json`) et purge l'edge — appelée par la sauvegarde admin (et le
- * regen V2). C'est ce qui permet à `loadCoupons` (lib/home) de servir un code
- * SANS redéploiement du site.
+ * PUBLICATION RUNTIME des JSON curés : pousse un fichier de `data/curated/` sur
+ * R2 (namespace `data/`) et purge l'edge — appelée par la sauvegarde admin (et
+ * le regen V2). C'est ce qui permet aux loaders runtime de `lib/home` (coupons,
+ * bannières) de servir une édition SANS redéploiement du site.
  *
  * Mêmes conventions que `scripts/assets-push.mjs` (rclone spawn direct sans
  * shell, purge Cloudflare par API), avec deux différences assumées :
@@ -18,19 +18,28 @@
 import { spawnSync } from 'node:child_process';
 import { resolve } from 'node:path';
 
-const SRC = resolve(process.cwd(), 'data/curated/coupons.json');
-/** Clé bucket (namespace `data/` : les JSON runtime, distincts des images). */
-const KEY = 'data/coupons.json';
 const CACHE_CONTROL = 'public, max-age=300, s-maxage=600, stale-while-revalidate=3600';
 
-export interface CouponsPublishResult {
+/**
+ * Fichiers curés publiés en runtime (`data/curated/<name>` → clé `data/<name>`).
+ * AUSSI copiés dans le staging par `assets:collect` : le flux `pnpm commit`
+ * (→ `pnpm images`) resynchronise R2 même quand une édition a contourné le
+ * Save admin.
+ */
+export const RUNTIME_DATA_FILES = ['coupons.json', 'banner.json'] as const;
+
+export interface RuntimePublishResult {
   ok: boolean;
   /** Purge edge effectuée (sans elle, l'edge se rafraîchit seul en ≤ 10 min). */
   purged: boolean;
   error?: string;
 }
 
-export async function publishCoupons(): Promise<CouponsPublishResult> {
+/** Pousse `data/curated/<name>` vers la clé bucket `data/<name>` + purge edge. */
+async function publishRuntimeJson(name: string): Promise<RuntimePublishResult> {
+  const src = resolve(process.cwd(), 'data/curated', name);
+  const key = `data/${name}`;
+
   const { R2_ENDPOINT, R2_BUCKET, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY } = process.env;
   if (!R2_ENDPOINT || !R2_BUCKET || !R2_ACCESS_KEY_ID || !R2_SECRET_ACCESS_KEY) {
     return {
@@ -46,8 +55,8 @@ export async function publishCoupons(): Promise<CouponsPublishResult> {
     'rclone',
     [
       'copyto',
-      SRC,
-      `:s3:${R2_BUCKET}/${KEY}`,
+      src,
+      `:s3:${R2_BUCKET}/${key}`,
       '--header-upload',
       `Cache-Control: ${CACHE_CONTROL}`,
       '--s3-no-check-bucket',
@@ -96,7 +105,7 @@ export async function publishCoupons(): Promise<CouponsPublishResult> {
           Authorization: `Bearer ${CLOUDFLARE_API_TOKEN}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ files: [`${NEXT_PUBLIC_IMG_BASE}/${KEY}`] }),
+        body: JSON.stringify({ files: [`${NEXT_PUBLIC_IMG_BASE}/${key}`] }),
       },
     );
     if (!r.ok) return { ok: true, purged: false, error: `purge edge en échec (HTTP ${r.status}).` };
@@ -105,3 +114,8 @@ export async function publishCoupons(): Promise<CouponsPublishResult> {
   }
   return { ok: true, purged: true };
 }
+
+export const publishCoupons = (): Promise<RuntimePublishResult> =>
+  publishRuntimeJson('coupons.json');
+export const publishBanners = (): Promise<RuntimePublishResult> =>
+  publishRuntimeJson('banner.json');

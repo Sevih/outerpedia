@@ -40,6 +40,13 @@ const STAGING = resolve('.assets-staging');
 const STATE_FILE = resolve('datagen/assets/pushed.json');
 const IMG_BASE = 'https://img.outerpedia.com';
 const CACHE_CONTROL = 'public, max-age=600, s-maxage=31536000, stale-while-revalidate=86400';
+/**
+ * Les JSON RUNTIME (`data/*` : coupons, bannières) sont de la donnée VIVE, pas
+ * des assets quasi-immuables : `s-maxage` court pour que l'edge se rafraîchisse
+ * seul même sans purge — même en-tête que la publication admin directe
+ * (src/lib/admin/runtime-publish, qui pousse ces mêmes clés au Save).
+ */
+const CACHE_CONTROL_DATA = 'public, max-age=300, s-maxage=600, stale-while-revalidate=3600';
 /** Limite de l'API Cloudflare : 30 URLs par appel de purge. */
 const PURGE_BATCH = 30;
 const FULL = process.argv.includes('--full');
@@ -149,44 +156,52 @@ if (PURGE_ONLY) {
 // --- upload ---------------------------------------------------------------------
 
 if (!PURGE_ONLY) {
+  // Deux lots car deux Cache-Control : la donnée vive (`data/*`) et le reste.
   // `--files-from` : la liste EST la décision. `--no-traverse` n'énumère pas la
   // destination, `--ignore-times` ne compare rien — c'est notre état qui tranche,
   // pas un aller-retour avec R2.
-  const listFile = resolve(STAGING, '.push-list.txt');
-  writeFileSync(listFile, toPush.join('\n') + '\n');
+  const batches = [
+    { keys: toPush.filter((k) => !k.startsWith('data/')), header: CACHE_CONTROL },
+    { keys: toPush.filter((k) => k.startsWith('data/')), header: CACHE_CONTROL_DATA },
+  ];
+  for (const { keys, header } of batches) {
+    if (!keys.length) continue;
+    const listFile = resolve(STAGING, '.push-list.txt');
+    writeFileSync(listFile, keys.join('\n') + '\n');
 
-  const res = spawnSync(
-    'rclone',
-    [
-      'copy',
-      STAGING,
-      `:s3:${R2_BUCKET}`,
-      '--files-from',
-      listFile,
-      '--no-traverse',
-      '--ignore-times',
-      '--header-upload',
-      `Cache-Control: ${CACHE_CONTROL}`,
-      '--s3-no-check-bucket',
-      '--transfers',
-      '16',
-      '--progress',
-    ],
-    {
-      stdio: 'inherit',
-      env: {
-        ...process.env,
-        RCLONE_S3_PROVIDER: 'Cloudflare',
-        RCLONE_S3_ENDPOINT: R2_ENDPOINT,
-        RCLONE_S3_ACCESS_KEY_ID: R2_ACCESS_KEY_ID,
-        RCLONE_S3_SECRET_ACCESS_KEY: R2_SECRET_ACCESS_KEY,
+    const res = spawnSync(
+      'rclone',
+      [
+        'copy',
+        STAGING,
+        `:s3:${R2_BUCKET}`,
+        '--files-from',
+        listFile,
+        '--no-traverse',
+        '--ignore-times',
+        '--header-upload',
+        `Cache-Control: ${header}`,
+        '--s3-no-check-bucket',
+        '--transfers',
+        '16',
+        '--progress',
+      ],
+      {
+        stdio: 'inherit',
+        env: {
+          ...process.env,
+          RCLONE_S3_PROVIDER: 'Cloudflare',
+          RCLONE_S3_ENDPOINT: R2_ENDPOINT,
+          RCLONE_S3_ACCESS_KEY_ID: R2_ACCESS_KEY_ID,
+          RCLONE_S3_SECRET_ACCESS_KEY: R2_SECRET_ACCESS_KEY,
+        },
       },
-    },
-  );
-  rmSync(listFile, { force: true });
-  if (res.status !== 0) {
-    console.error('✗ rclone a échoué — état inchangé, relance le push.');
-    process.exit(res.status ?? 1);
+    );
+    rmSync(listFile, { force: true });
+    if (res.status !== 0) {
+      console.error('✗ rclone a échoué — état inchangé, relance le push.');
+      process.exit(res.status ?? 1);
+    }
   }
 }
 

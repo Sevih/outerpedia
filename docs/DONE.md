@@ -21,7 +21,12 @@
   regen V2 ; l'éditeur affiche « Saved + publié (live ≤ 10 min) » ou
   l'avertissement d'échec (l'écriture locale n'est jamais invalidée).
   Namespace R2 : `data/` (JSON runtime, distinct des images). tsc + eslint +
-  tests verts.
+  tests verts. COMPLÉMENT (échange Sevih) : les JSON runtime entrent aussi dans
+  le STAGING (`assets:collect` copie `data/curated/{coupons,banner}.json` →
+  `data/`) — le flux `pnpm commit` (→ `pnpm images`) resynchronise donc R2 même
+  si une édition a contourné le Save admin ; `assets:push` leur applique un
+  Cache-Control COURT dédié (donnée vive ≠ asset immuable, deux lots rclone).
+  Copies initiales poussées + vérifiées servies (200, bon en-tête).
 - **Hygiène CLI datagen : l'item ⚙️ soldé (re-vérifié : 3 cibles n'existaient
   plus — coherence.ts, extractor/run.ts, import-gear-reco).** ① Gardes
   `isMain` : extract.ts, convert.ts (script top-level enveloppé dans `main()` —

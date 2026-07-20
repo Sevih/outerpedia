@@ -6,10 +6,11 @@
  * Écrit `manifest-report.json` (affiché par l'admin) : requis / présents /
  * manquants par domaine. `pnpm assets:push` pousse ensuite vers R2.
  */
-import { existsSync, mkdirSync, statSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, statSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { isMain } from '../lib/is-main';
+import { RUNTIME_DATA_FILES } from '../../src/lib/admin/runtime-publish';
 import { buildAssetManifest } from './manifest';
 import { buildImageIndex, GAME_IMAGES_DIR } from './source';
 import { stageAssets, STAGING_DIR } from './stage';
@@ -60,6 +61,22 @@ async function main(): Promise<void> {
   ) {
     await sharp(bg).rotate(90).webp({ quality: 90 }).toFile(bgPortrait);
     console.log('  fond portrait généré (rotation 90°)');
+  }
+
+  // JSON RUNTIME (coupons, bannières) : copie de `data/curated/` vers le staging
+  // (`data/<name>`) — ainsi `pnpm commit` (→ pnpm images → assets:push, qui
+  // diffe et purge) resynchronise R2 même quand une édition a contourné le Save
+  // admin, qui publie déjà en direct (cf. src/lib/admin/runtime-publish).
+  {
+    mkdirSync(resolve(STAGING_DIR, 'data'), { recursive: true });
+    let staged = 0;
+    for (const name of RUNTIME_DATA_FILES) {
+      const src = resolve('data/curated', name);
+      if (!existsSync(src)) continue;
+      copyFileSync(src, resolve(STAGING_DIR, 'data', name));
+      staged++;
+    }
+    console.log(`  data runtime ${String(staged).padStart(5)} JSON copiés (coupons/bannières)`);
   }
 
   mkdirSync(STAGING_DIR, { recursive: true });
