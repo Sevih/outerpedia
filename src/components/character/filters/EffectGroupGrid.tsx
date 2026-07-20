@@ -2,14 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react';
 import type { EffectGroup } from '@/lib/data/effect-filters';
+import { EffectIconTile } from '@/components/character/EffectChips';
 
 type Side = 'buff' | 'debuff';
 
 /**
- * Grille des effets d'un côté (buff/desktop = grille d'icônes par famille ;
- * mobile = listes déroulantes à cases). Portage V2 réhabillé sur tokens V3 :
- * cyan = buff, rose = debuff. Les sprites d'effet sont déjà encadrés (`_D`,
- * `_Interruption`) → rendus tels quels, anneau de sélection par-dessus.
+ * Grille des effets d'un côté (desktop = grille d'icônes par famille ; mobile =
+ * listes déroulantes à cases). Les icônes passent par `EffectIconTile` — MÊME
+ * recoloration que les chips d'effet des skills (masque de luminance, vert=buff /
+ * rouge=debuff, exception « Interruption »). Anneau de sélection par-dessus.
  */
 export function EffectGroupGrid({
   groups,
@@ -92,10 +93,18 @@ function EffectIconToggle({
       title={label}
       aria-label={label}
       aria-pressed={selected}
-      className={`bg-scrim relative size-6 shrink-0 cursor-pointer rounded transition hover:scale-110 hover:brightness-150 ${ring}`}
+      className={`relative size-6 shrink-0 cursor-pointer rounded transition hover:scale-110 hover:brightness-150 ${ring}`}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-      <img src={icon} alt="" className="size-full rounded object-contain" />
+      {icon ? (
+        <EffectIconTile icon={icon} isDebuff={side === 'debuff'} className="size-full" />
+      ) : (
+        // Repli quand l'effet n'a pas d'icône (trou du glossaire) : initiales.
+        <span
+          className={`bg-scrim flex size-full items-center justify-center rounded text-[8px] leading-none font-bold ${side === 'buff' ? 'text-sky-300' : 'text-rose-300'}`}
+        >
+          {label.slice(0, 2).toUpperCase()}
+        </span>
+      )}
     </button>
   );
 }
@@ -171,10 +180,9 @@ function CheckboxSelect({
                   onChange={() => onToggle(eff.key)}
                   className={`size-4 shrink-0 ${side === 'buff' ? 'accent-sky-500' : 'accent-rose-500'}`}
                 />
-                <span className="bg-scrim relative size-5 shrink-0 rounded">
-                  {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-                  <img src={eff.icon} alt="" className="size-full rounded object-contain" />
-                </span>
+                {eff.icon && (
+                  <EffectIconTile icon={eff.icon} isDebuff={side === 'debuff'} className="size-5" />
+                )}
                 <span className="text-content text-xs">{eff.label}</span>
               </label>
             );

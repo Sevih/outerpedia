@@ -3,27 +3,28 @@
  *
  * La taxonomie (famille UI + regroupement des variantes) vit dans
  * `glossaries.effectFilters` (curée, portée de la V2) ; les libellés/icônes
- * viennent du glossaire d'effets (`effectByKey` → id → `effects[id]`).
+ * passent par la résolution FUSIONNÉE (`resolveEffectKey`) — MÊME source que les
+ * chips d'effet des skills, donc les overrides curés (nom, icône) sont pris
+ * (ex. « Priority Increase » a une icône curée `IG_Buff_Action_Gauge_Up` ; lire
+ * le glossaire brut ressortait l'icône d'encyclopédie `SC_Buff_Effect_…`).
  *
- * Tout est résolu CÔTÉ SERVEUR (aucun contexte i18n en V3, et `glossaries.json`
- * ne doit pas partir dans le bundle client). L'univers des options est DÉRIVÉ
- * DES AGRÉGATS réels des persos (`characters-list.json`) : chaque case matche
- * donc ≥1 perso, et chaque clé de perso a sa case — pas de filtre mort, pas de
- * dépendance à l'ordre d'itération d'un `invertKeys` reconstruit.
+ * Tout est résolu CÔTÉ SERVEUR (aucun contexte i18n en V3, `glossaries.json` et
+ * les lectures disque du curé hors bundle client). L'univers des options est
+ * DÉRIVÉ DES AGRÉGATS réels des persos (`characters-list.json`) : chaque case
+ * matche ≥1 perso, et chaque clé de perso a sa case — pas de filtre mort.
  */
 import glossariesData from '@data/generated/glossaries.json';
-import { img } from '@/lib/images';
+import { resolveEffectKey } from '@/lib/data/effects';
 import type { Lang } from '@/lib/i18n/config';
 
 export type EffectSide = 'buff' | 'debuff';
 
-/** Une case d'effet : clé canonique + libellé localisé + icône résolue. */
+/** Une case d'effet : clé canonique + libellé localisé + icône (nom BRUT). */
 export interface EffectOption {
   key: string;
   label: string;
+  /** Nom de sprite VERBATIM (pas l'URL) — passé à `EffectIconTile` qui recolore. */
   icon: string;
-  /** Statut irremovable (cadre spécial jamais recoloré). */
-  irremovable: boolean;
 }
 
 /** Un groupe d'effets d'une famille UI (statBoosts, cc…). */
@@ -34,15 +35,7 @@ export interface EffectGroup {
   effects: EffectOption[];
 }
 
-interface RawEffect {
-  name: Record<string, string>;
-  icon: string;
-  irremovable?: boolean;
-}
-
 const G = glossariesData as unknown as {
-  effects: Record<string, RawEffect>;
-  effectByKey: Record<EffectSide, Record<string, string>>;
   effectFilters?: Record<EffectSide, Record<string, { category: string; group?: string }>>;
 };
 
@@ -91,7 +84,6 @@ export function buildEffectGroups(
 ): EffectGroup[] {
   const table = G.effectFilters?.[side];
   if (!table) return [];
-  const byKey = G.effectByKey[side] ?? {};
   const order = CATEGORY_ORDER[side];
   const rank = (c: string) => {
     const i = order.indexOf(c);
@@ -106,8 +98,8 @@ export function buildEffectGroups(
     if (seen.has(key)) continue;
     const category = table[key]?.category;
     if (!category || category === 'hidden') continue;
-    const id = byKey[key];
-    const eff = id ? G.effects[id] : undefined;
+    // Résolution FUSIONNÉE (curé > extrait) — nom ET icône curés.
+    const eff = resolveEffectKey(side, key);
     if (!eff) continue;
     seen.add(key);
 
@@ -115,8 +107,7 @@ export function buildEffectGroups(
     bucket.push({
       key,
       label: eff.name[lang] ?? eff.name.en ?? key,
-      icon: img.effect(eff.icon),
-      irremovable: Boolean(eff.irremovable) || eff.icon.includes('Interruption'),
+      icon: eff.icon,
     });
     byCategory.set(category, bucket);
   }
