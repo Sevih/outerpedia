@@ -23,7 +23,9 @@
  */
 import { existsSync, mkdirSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
-import sharp from 'sharp';
+// sharp 0.35 : typings en `export =` — le type `Sharp` s'importe nommé, l'accès
+// namespace `sharp.Sharp` ne compile plus.
+import sharp, { type Sharp } from 'sharp';
 import { STAGING_DIR } from './stage';
 import { buildComics } from '../generators/comics';
 
@@ -46,7 +48,7 @@ async function collectLang(lang: string): Promise<{ made: number; skipped: numbe
   for (const f of readdirSync(srcDir)) {
     if (!SRC_RE.test(f)) continue;
     const from = join(srcDir, f);
-    const targets: Array<[string, () => sharp.Sharp]> = [
+    const targets: Array<[string, () => Sharp]> = [
       [join(destDir, f.replace(SRC_RE, '.webp')), () => sharp(from).webp({ quality: 90 })],
       [
         join(destDir, f.replace(SRC_RE, '.thumb.webp')),
