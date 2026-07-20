@@ -161,14 +161,20 @@ export function getCharacterBySlug(slug: string): Character | undefined {
 }
 
 /**
- * Noms RECHERCHABLES d'un perso (nom toutes langues + surnom + id + slug),
- * normalisés NFKC/minuscules, dédupliqués — l'univers du champ recherche des
- * browsers (liste des persos, tier lists, most-used units).
+ * Noms RECHERCHABLES d'un perso (nom toutes langues + surnom + id + slug + alias
+ * curés), normalisés NFKC/minuscules, dédupliqués — l'univers du champ recherche
+ * des browsers (liste des persos, tier lists, most-used units). Les `aliases`
+ * (fautes/abréviations, cf. `loadSearchAliases`) sont passés par l'appelant (chargés
+ * une fois par page, pas une lecture disque par perso).
  */
-export function characterSearchNames(c: Pick<Character, 'id' | 'name' | 'nickname'>): string[] {
+export function characterSearchNames(
+  c: Pick<Character, 'id' | 'name' | 'nickname'>,
+  aliases: string[] = [],
+): string[] {
   const names = [
     ...Object.values(c.name as Record<string, string>),
     ...(c.nickname ? Object.values(c.nickname as Record<string, string>) : []),
+    ...aliases,
     c.id,
     slugForId(c.id) ?? c.id,
   ];

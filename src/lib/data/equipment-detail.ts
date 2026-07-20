@@ -42,6 +42,7 @@ import {
   slugForId,
 } from '@/lib/data/characters';
 import { loadCuratedCharacters } from '@/lib/data/curated';
+import { loadShortNames } from '@/lib/data/short-names';
 import { effectForTooltip, getMergedEffect, mergeStatusEffects } from '@/lib/data/effects';
 import {
   isDebuffEffect,
@@ -339,15 +340,19 @@ function recommendedFor(
 ): RecommendedChar[] {
   const reco = loadGearReco();
   const curated = loadCuratedCharacters();
+  const shortNames = loadShortNames();
   const out: RecommendedChar[] = [];
   for (const [charId, builds] of Object.entries(reco)) {
     if (!builds.some(match)) continue;
     const c = getCharacter(charId);
     if (!c) continue;
+    const short = shortNames[charId];
     out.push({
       id: charId,
       slug: slugForId(charId) ?? charId,
-      name: characterDisplayName(c, lang),
+      // Nom COURT d'affichage si curé (place limitée sous le portrait), sinon
+      // nom complet. Fallback V2 : short[lang] → short.en → nom complet.
+      name: short?.[lang] ?? short?.en ?? characterDisplayName(c, lang),
       prefix: characterNamePrefix(c, lang),
       element: c.element,
       classType: c.class,

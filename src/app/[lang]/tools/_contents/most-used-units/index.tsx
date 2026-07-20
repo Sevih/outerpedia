@@ -2,6 +2,7 @@ import { getT, type TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { GUIDE_CATEGORIES } from '@/lib/data/guide-categories';
 import { characterDisplayName, characterSearchNames, slugForId } from '@/lib/data/characters';
+import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { computeUsage, USAGE_CATEGORIES } from './usage';
 import { MostUsedUnitsBrowser, type MostUsedLabels, type UsageRow } from './MostUsedUnitsBrowser';
 
@@ -13,6 +14,7 @@ import { MostUsedUnitsBrowser, type MostUsedLabels, type UsageRow } from './Most
  */
 export default async function MostUsedUnits({ lang }: { lang: Lang }) {
   const t = await getT(lang);
+  const aliases = loadSearchAliases();
 
   const rows: UsageRow[] = [...computeUsage()]
     .map(([character, usage]) => {
@@ -26,7 +28,7 @@ export default async function MostUsedUnits({ lang }: { lang: Lang }) {
         id: character.id,
         slug: slugForId(character.id) ?? character.id,
         name: characterDisplayName(character, lang),
-        searchNames: characterSearchNames(character),
+        searchNames: characterSearchNames(character, aliases[character.id]),
         element: character.element,
         class: character.class,
         rarity: character.rarity,

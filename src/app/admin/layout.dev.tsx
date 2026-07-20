@@ -66,6 +66,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       items: [
         { label: 'Pro / Con', href: '/admin/tools/pros-cons' },
         { label: 'Synergy', href: '/admin/tools/synergies' },
+        { label: 'Search aliases', href: '/admin/tools/search-aliases' },
+        { label: 'Short names', href: '/admin/tools/short-names' },
         { label: 'Promo code', href: '/admin/tools/promo-codes' },
         { label: 'Banner', href: '/admin/tools/banners' },
         { label: 'Changelog', href: '/admin/tools/changelog' },

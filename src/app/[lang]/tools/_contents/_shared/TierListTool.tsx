@@ -10,6 +10,7 @@ import {
   slugForId,
 } from '@/lib/data/characters';
 import { characterTags, loadCuratedCharacters } from '@/lib/data/curated';
+import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { getEEViews } from '@/lib/data/equipment';
 import {
   TierListBrowser,
@@ -70,6 +71,7 @@ export async function TierListTool({ lang, mode }: { lang: Lang; mode: TierListM
   const t = await getT(lang);
   const slug = SLUG[mode];
   const curated = loadCuratedCharacters();
+  const aliases = loadSearchAliases();
   const ranks = rankByCharacter(mode);
 
   const rows: TierListRow[] = getCharacterListItems()
@@ -80,7 +82,7 @@ export async function TierListTool({ lang, mode }: { lang: Lang; mode: TierListM
         slug: slugForId(c.id) ?? c.id,
         name: characterDisplayName(c, lang),
         prefix: characterNamePrefix(c, lang),
-        searchNames: characterSearchNames(c),
+        searchNames: characterSearchNames(c, aliases[c.id]),
         element: c.element,
         class: c.class,
         rarity: c.rarity,
