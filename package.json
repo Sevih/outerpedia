@@ -58,7 +58,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "cheerio": "^1.2.0",
-    "eslint": "^9",
+    "eslint": "^10",
     "eslint-config-next": "16.2.10",
     "lefthook": "^2.1.9",
     "prettier": "^3",
