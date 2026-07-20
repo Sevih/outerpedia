@@ -6,7 +6,24 @@
 
 ## 2026-07-20
 
-- **`/changelog` LIVRÉ (worker dédié — entrée reconstituée au nettoyage du
+- **Outil `/gear-usage-statistics` porté — agrégation gear-reco à la lecture.**
+  La V2 générait `gear-usage-stats.json` par un step de pipeline sur ses
+  fichiers de reco par perso ; en V3 l'usage se calcule au rendu depuis la
+  GEAR-RECO CURÉE (source unique des builds de fiche perso — `usage.ts`, même
+  régime que most-used-units). Unité de compte = la FAMILLE d'équipement
+  (armes/amulettes/talismans, presets `$` résolus) et le SET pour les armures ;
+  ids inconnus/`!refs` non arbitrés SKIPPÉS (modèle `unresolved` de la fiche,
+  pas une erreur) ; dédup par (perso, pièce). Abandonné : `buildNames` du JSON
+  V2 — jamais affiché, et son accumulation était cassée (le `seen` par perso ne
+  gardait que le premier build). Client `GearUsageBrowser` : onglets ×4 avec
+  comptes, recherche multilingue, lignes classées (tuile `EquipmentIcon` —
+  étoiles du haut de famille, passif/enchantement en overlay, cadre `unique`
+  pour les sets comme /equipment —, barre proportionnelle, count) dépliables
+  sur les persos (portrait + lien fiche). État local pur (parité V2, pas de
+  sync URL). tsc (src) + eslint verts ; datagen/tests rouges = WIP du worker
+  generators (content-schedule/encounters), hors périmètre — le bump sharp
+  0.35 de ce chantier-là cassait par contre tout `pnpm typecheck` : corrigé
+  (import nommé `type Sharp`, d12e5af).
   TODO, le worker n'avait pas journalisé).** Journal du site refait propre
   (pas de portage V2) : socle données + migration des 134 entrées V2, page
   publique + section Recent Updates de la Home (rebranchée) + i18n (5

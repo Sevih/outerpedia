@@ -19,6 +19,7 @@ export const TOOL_COMPONENTS: Record<
   'ee-priority-base': () => import('./_contents/ee-priority-base'),
   'ee-priority-plus10': () => import('./_contents/ee-priority-plus10'),
   'most-used-units': () => import('./_contents/most-used-units'),
+  'gear-usage-statistics': () => import('./_contents/gear-usage-statistics'),
 };
 
 /** Slugs des outils portés (routeur + `generateStaticParams`). */
