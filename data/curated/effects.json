@@ -40,6 +40,9 @@
   "1004": {
     "icon": "IG_Buff_Dot_Poison_Interruption_D"
   },
+  "2010112": {
+    "tag": "unique"
+  },
   "2100093": {
     "keys": ["BT_CASTER_COPY_BUFF"],
     "note": "copie de buffs (Dianne) : le buff BT_CASTER_COPY_BUFF n'a pas de tooltip — clé type → statut « Gift of Buffs »"
