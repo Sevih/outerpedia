@@ -120,8 +120,9 @@ export interface ContentScheduleData {
   jointChallenge: JointChallengeSeason[];
 }
 
-/** « 2026-07-02 0:00:00 » → « 2026-07-02T00:00:00Z » (fuseau UTC, cf. en-tête). */
-function isoUtc(v: string | undefined): string {
+/** « 2026-07-02 0:00:00 » → « 2026-07-02T00:00:00Z » (fuseau UTC, cf. en-tête).
+ * Exporté pour les tests (cœur PUR — la suite tourne sans `.gamedata`). */
+export function isoUtc(v: string | undefined): string {
   const raw = (v ?? '').trim();
   const m = /^(\d{4}-\d{2}-\d{2})\s+(\d{1,2}):(\d{2}):(\d{2})$/.exec(raw);
   if (!m) {
