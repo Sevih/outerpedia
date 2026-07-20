@@ -199,8 +199,8 @@ Règle permanente : chaque `meta.bossId` d'un guide porté doit exister dans
 
 ## 🤔 Décisions en attente (Sevih)
 
-- [ ] Icône `bosses.ts` (`MT_` baké) vs spec monstre (id brut) — unifier impose
-      une régénération de `bosses.json` + revue des consommateurs.
+- _(icône `bosses.ts` : TRANCHÉ + fait le 20/07 (go Sevih) → DONE — id brut
+  partout, `MT_` appliqué au rendu comme monsters.json.)_
 - [ ] `CHASE_TITLE_KEY` (sources.ts:37) reste en dur : le résolveur donnerait
       `SYS_IRR_CHASE_NAME_01` ≠ choix éditorial `SYS_IRREGULAR_EXTERMINATION`
       → assumer en curation mode-titles, ou garder tel quel.

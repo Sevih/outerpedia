@@ -6,6 +6,19 @@
 
 ## 2026-07-20
 
+- **Icône `bosses.json` unifiée sur l'id BRUT (décision Sevih : go).** Le
+  générateur bakait `MT_<FaceIconID>` dans la donnée là où `monsters.json`
+  stocke l'id brut (préfixe au rendu) — ambiguïté qui mordait en refactor
+  (double préfixe / 404). Désormais : id brut partout, le sprite est une
+  affaire de vue. `bosses.ts` (+ doc du type), 4 sites de rendu
+  (GearRecoSection ×2, equipment/cards, EquipmentDetail) et le manifest
+  d'assets préfixent `MT_` eux-mêmes ; `bosses.json` régénéré (diff = les 14
+  champs `icon` exactement, promotion ciblée `--only`). Au passage, le
+  dry-run de promote a CONFIRMÉ rétroactivement la neutralité de tous les
+  refactors datagen du jour (39 fichiers identiques) et révélé un perso
+  `lambda` (2000118) en attente dans l'extraction — non promu, décision de
+  contenu. Vérifié : tsc, eslint, 461/461, fiche équipement en dev (émet
+  `MT_4013071.webp`), assets:collect stable (mêmes clés R2, 0 re-staging).
 - **`coupon-codes` résolu + coupons en RUNTIME R2 (zéro redéploiement).**
   ① `coupon-codes` n'est pas une page : renvoi vers `/coupons` (parité V2) —
   le champ `href` du curé outils, déjà présent dans `_index.json`, est
