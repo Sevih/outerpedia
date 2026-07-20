@@ -21,7 +21,12 @@ import {
   categoryArt,
   type GuideCategorySlug,
 } from '../../src/lib/data/guide-categories';
-import { listGuides, readGuideVersionFile, type Guide } from '../../src/lib/data/guides';
+import {
+  guideBossMonster,
+  listGuides,
+  readGuideVersionFile,
+  type Guide,
+} from '../../src/lib/data/guides';
 import type { QuirksData } from '../contracts';
 import { buildItemCatalog } from '../generators/item-catalog';
 import { listHeroFullArt } from './hero-full-art';
@@ -764,6 +769,35 @@ export function buildAssetManifest(): AssetRequest[] {
         : {
             kind: 'image',
             key: `images/ui/guides/${icon}.webp`,
+            candidates: [icon],
+            domain: 'guides',
+          },
+    );
+  }
+  // Variante PNG : og:image des guides SANS boss ni ogImage explicite — leur
+  // carte de partage est l'icône du meta (cf. generateMetadata de la page
+  // détail), et les aperçus Discord/OG digèrent mal le WebP (même règle que
+  // faceicon/EE/boss). EXACTEMENT le sous-ensemble que la page utilise — même
+  // prédicat qu'elle (`guideBossMonster`, qui dérive aussi le boss de phase 2
+  // des guild raids sans `bossId`) : un guide à boss partage le portrait du
+  // boss, un ogImage explicite prime — pas de PNG orphelin sur R2 pour eux.
+  // Même résolution de source que le webp ; la conversion webp(pool)→png vit
+  // dans stage.ts (branche `editorial`).
+  for (const icon of new Set(
+    guides.filter((g) => !guideBossMonster(g) && !g.ogImage).map((g) => g.icon),
+  )) {
+    const pooled = existsSync(resolve(v2Pool, `guides/${icon}.webp`));
+    push(
+      pooled
+        ? {
+            kind: 'editorial',
+            key: `images/ui/guides/${icon}.png`,
+            source: `guides/${icon}.webp`,
+            domain: 'guides',
+          }
+        : {
+            kind: 'image',
+            key: `images/ui/guides/${icon}.png`,
             candidates: [icon],
             domain: 'guides',
           },

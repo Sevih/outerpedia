@@ -12,6 +12,8 @@ const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 export const img = {
   /** Portrait cadré (vignette/header). */
   portrait: (id: string) => `${BASE}/images/characters/portrait/CT_${id}.webp`,
+  /** Préfixe la base d'assets sur un chemin déjà résolu (image de contenu éditorial, ex. changelog). */
+  asset: (path: string) => `${BASE}${path}`,
   /** Corps entier (grand visuel). */
   full: (id: string) => `${BASE}/images/characters/full/IMG_${id}.webp`,
   /** Icône de visage (listes). */
@@ -118,6 +120,13 @@ export const img = {
   coreFusionTag: () => `${BASE}/images/ui/tags/CT_Core_Icon.webp`,
   /** Icône de guide/catégorie de guides (sprite du jeu, namespace unique). */
   guideIcon: (icon: string) => `${BASE}/images/ui/guides/${icon}.webp`,
+  /**
+   * Même icône, en PNG : la carte de partage (og:image) d'un guide SANS boss
+   * (general-guides…). Les aperçus Discord/OG digèrent mal le WebP — même
+   * règle que `monsterOgImage`. Collectée par le manifest pour exactement les
+   * guides qui s'en servent (ni bossId ni ogImage explicite).
+   */
+  guideIconPng: (icon: string) => `${BASE}/images/ui/guides/${icon}.png`,
   /** Glyphe/cadre d'un nœud de quirk (Awakening) — `CM_Gift_*Node_*`, hexagone. */
   quirkNode: (sprite: string) => `${BASE}/images/ui/quirk/${sprite}.webp`,
   /** Icône illustrative du guide Combat (bouton turn-order, skills d'arène). */

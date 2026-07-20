@@ -171,13 +171,19 @@ export async function stageAssets(
           result.missing.push({ key: req.key, reason: `éditorial absent du pool : ${req.source}` });
           continue;
         }
-        const { fresh, commit } = check(req.key, dest, [src], 'copy');
+        // Copie verbatim — SAUF quand la clé demande du PNG depuis une source
+        // qui n'en est pas (variantes og:image d'icônes du pool webp) : les
+        // aperçus Discord/OG digèrent mal le WebP, on convertit comme pour les
+        // sprites extraits (branche `image` plus bas).
+        const toPng = req.key.endsWith('.png') && !req.source.endsWith('.png');
+        const { fresh, commit } = check(req.key, dest, [src], toPng ? 'png' : 'copy');
         if (fresh) {
           result.present++;
           continue;
         }
         mkdirSync(dirname(dest), { recursive: true });
-        copyFileSync(src, dest);
+        if (toPng) await sharp(src).png().toFile(dest);
+        else copyFileSync(src, dest);
         commit();
         produced();
         continue;

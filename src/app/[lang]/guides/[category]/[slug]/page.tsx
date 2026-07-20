@@ -5,6 +5,7 @@ import { createPageMetadata } from '@/lib/seo';
 import { GUIDE_CATEGORIES, type GuideCategory } from '@/lib/data/guide-categories';
 import { getGuide, guideBossMonster, guideUpdatedDate, listGuideParams } from '@/lib/data/guides';
 import { monsterOgImage } from '@/lib/data/monsters';
+import { img } from '@/lib/images';
 import { GuideDetail } from './guide-detail';
 
 export function generateStaticParams() {
@@ -30,15 +31,19 @@ export async function generateMetadata({
   // visuel qui identifie le guide. `guideBossMonster` en est la source unique
   // (`meta.bossId`, ou le boss de phase 2 dérivé pour un guild raid). `meta.ogImage`
   // reste prioritaire : c'est l'échappatoire pour un guide qui veut son propre visuel.
-  // Les guides SANS boss (general-guides…) gardent la carte par défaut du site :
-  // leur donner un visuel demande une image générée, chantier à part.
+  // Les guides SANS boss (general-guides…) partagent leur ICÔNE de meta — le
+  // visuel qui les identifie déjà partout dans l'UI — en variante PNG collectée
+  // par le manifest pour EXACTEMENT ce sous-ensemble (les aperçus Discord/OG
+  // digèrent mal le WebP). Tailles d'icônes variables : l'indice par défaut de
+  // createPageMetadata suffit au crawler.
   const boss = guideBossMonster(guide);
-  const portrait =
-    boss && !guide.ogImage
+  const portrait = guide.ogImage
+    ? undefined
+    : boss
       ? // Les sprites `MT_*` font 128×128 (21 des 24 extraits ; les 3 autres à
         // quelques pixels près). La taille n'est qu'un indice pour le crawler.
         { ogImage: monsterOgImage(boss), ogImageSize: { width: 128, height: 128 } }
-      : undefined;
+      : { ogImage: img.guideIconPng(guide.icon) };
 
   // Catégorie `bossTitle` : le SEO titre sur le boss, comme la page —
   // « Nom du boss — Special Request » et la description préfixée de son nom
