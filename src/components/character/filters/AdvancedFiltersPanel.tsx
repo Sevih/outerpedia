@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { FilterPill } from './FilterPill';
 import { LogicToggle, Eyebrow, TONE } from './FilterAtoms';
+import { EffectGroupGrid } from './EffectGroupGrid';
+import type { EffectGroup } from '@/lib/data/effect-filters';
 
 /** Une option de filtre (valeur + libellé localisé + icône éventuelle). */
 export interface FilterOption {
@@ -22,6 +24,11 @@ export interface AdvancedPanelLabels {
   teamBonus: string;
   tags: string;
   matchLogic: string;
+  // Effects
+  buffs: string;
+  debuffs: string;
+  filterBySource: string;
+  unique: string;
 }
 
 export interface AdvancedFiltersPanelProps {
@@ -38,6 +45,26 @@ export interface AdvancedFiltersPanelProps {
   giftFilter: string[];
   onToggleGift: (v: string) => void;
 
+  // Effects
+  buffGroups: EffectGroup[];
+  debuffGroups: EffectGroup[];
+  selectedBuffs: string[];
+  onToggleBuff: (v: string) => void;
+  selectedDebuffs: string[];
+  onToggleDebuff: (v: string) => void;
+  effectLogic: 'AND' | 'OR';
+  onEffectLogicChange: (v: 'AND' | 'OR') => void;
+  sources: FilterOption[];
+  sourceFilter: string[];
+  onToggleSource: (v: string) => void;
+  showUnique: boolean;
+  onToggleShowUnique: () => void;
+
+  // Team Bonus
+  teamBonusOptions: FilterOption[];
+  teamBonusFilter: string[];
+  onToggleTeamBonus: (v: string) => void;
+
   // Tags
   tags: FilterOption[];
   tagFilter: string[];
@@ -46,13 +73,13 @@ export interface AdvancedFiltersPanelProps {
   onTagLogicChange: (v: 'AND' | 'OR') => void;
 }
 
-type TabKey = 'combat' | 'tags';
+type TabKey = 'combat' | 'effects' | 'bonus' | 'tags';
 
 /**
  * Corps des filtres avancés (bandeau d'onglets + contenu) — partagé par la
  * sidebar xl et le drawer mobile. État d'onglet local ; l'état des filtres vit
- * chez le parent. Phase 1 : Combat + Tags (Effects/Bonus arrivent avec la data
- * worker). Portage V2 sur tokens V3.
+ * chez le parent. Les onglets Effects/Bonus n'apparaissent que si leur donnée
+ * est présente (data-gated — pas d'onglet vide). Portage V2 sur tokens V3.
  */
 export function AdvancedFiltersPanel(props: AdvancedFiltersPanelProps) {
   const {
@@ -66,22 +93,47 @@ export function AdvancedFiltersPanel(props: AdvancedFiltersPanelProps) {
     gifts,
     giftFilter,
     onToggleGift,
+    buffGroups,
+    debuffGroups,
+    selectedBuffs,
+    onToggleBuff,
+    selectedDebuffs,
+    onToggleDebuff,
+    effectLogic,
+    onEffectLogicChange,
+    sources,
+    sourceFilter,
+    onToggleSource,
+    showUnique,
+    onToggleShowUnique,
+    teamBonusOptions,
+    teamBonusFilter,
+    onToggleTeamBonus,
     tags,
     tagFilter,
     onToggleTag,
     tagLogic,
     onTagLogicChange,
   } = props;
-  const [activeTab, setActiveTab] = useState<TabKey>('combat');
+
+  const hasEffects = buffGroups.length > 0 || debuffGroups.length > 0;
+  const hasBonus = teamBonusOptions.length > 0;
 
   const counts: Record<TabKey, number> = {
     combat: chainFilter.length + roleFilter.length + giftFilter.length,
+    effects:
+      selectedBuffs.length + selectedDebuffs.length + sourceFilter.length + (showUnique ? 1 : 0),
+    bonus: teamBonusFilter.length,
     tags: tagFilter.length,
   };
   const tabs: { key: TabKey; label: string }[] = [
     { key: 'combat', label: labels.tabCombat },
+    ...(hasEffects ? [{ key: 'effects' as const, label: labels.tabEffects }] : []),
+    ...(hasBonus ? [{ key: 'bonus' as const, label: labels.tabBonus }] : []),
     { key: 'tags', label: labels.tabTags },
   ];
+
+  const [activeTab, setActiveTab] = useState<TabKey>('combat');
 
   return (
     <>
@@ -144,6 +196,88 @@ export function AdvancedFiltersPanel(props: AdvancedFiltersPanelProps) {
             />
           </div>
         )}
+
+        {activeTab === 'effects' && hasEffects && (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <Eyebrow>{labels.matchLogic}</Eyebrow>
+              <LogicToggle value={effectLogic} onChange={onEffectLogicChange} />
+            </div>
+
+            {sources.length > 0 && (
+              <PillSection
+                label={labels.filterBySource}
+                options={sources}
+                selected={sourceFilter}
+                onToggle={onToggleSource}
+              />
+            )}
+
+            <label className="border-line-subtle bg-surface-sunken/70 hover:border-line flex cursor-pointer items-center gap-3 rounded-lg border px-3 py-2.5 transition">
+              <input
+                type="checkbox"
+                checked={showUnique}
+                onChange={onToggleShowUnique}
+                className="size-4 accent-sky-500"
+              />
+              <span className="text-content flex-1 text-sm">{labels.unique}</span>
+            </label>
+
+            {buffGroups.length > 0 && (
+              <div>
+                <p className="mb-2 text-center text-xs tracking-wide text-sky-300 uppercase">
+                  {labels.buffs}
+                </p>
+                <EffectGroupGrid
+                  groups={visibleGroups(buffGroups, showUnique)}
+                  selected={selectedBuffs}
+                  side="buff"
+                  onToggle={onToggleBuff}
+                />
+              </div>
+            )}
+
+            {debuffGroups.length > 0 && (
+              <>
+                <div className="border-line-subtle border-t" />
+                <div>
+                  <p className="mb-2 text-center text-xs tracking-wide text-rose-300 uppercase">
+                    {labels.debuffs}
+                  </p>
+                  <EffectGroupGrid
+                    groups={visibleGroups(debuffGroups, showUnique)}
+                    selected={selectedDebuffs}
+                    side="debuff"
+                    onToggle={onToggleDebuff}
+                  />
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {activeTab === 'bonus' && hasBonus && (
+          <div className="space-y-3">
+            <SectionLabel>{labels.teamBonus}</SectionLabel>
+            <div className="flex flex-wrap gap-2">
+              {teamBonusOptions.map((opt) => (
+                <FilterPill
+                  key={opt.value}
+                  active={teamBonusFilter.includes(opt.value)}
+                  onClick={() => onToggleTeamBonus(opt.value)}
+                  className="h-8 gap-1.5 px-2.5"
+                >
+                  {opt.icon && (
+                    // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
+                    <img src={opt.icon} alt="" className="size-4 shrink-0 object-contain" />
+                  )}
+                  <span>{opt.label}</span>
+                </FilterPill>
+              ))}
+            </div>
+          </div>
+        )}
+
         {activeTab === 'tags' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
@@ -165,6 +299,11 @@ export function AdvancedFiltersPanel(props: AdvancedFiltersPanelProps) {
 }
 
 // ── Sous-composants ──────────────────────────────────────────────────────────
+
+/** Ne garde la famille `unique` que si le toggle est activé (parité V2). */
+function visibleGroups(groups: EffectGroup[], showUnique: boolean): EffectGroup[] {
+  return showUnique ? groups : groups.filter((g) => g.category !== 'unique');
+}
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (

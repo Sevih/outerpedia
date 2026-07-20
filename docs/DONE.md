@@ -6,6 +6,24 @@
 
 ## 2026-07-20
 
+- **`/characters` (liste) — PHASE 2 : onglets Effects + Bonus (parité V2).**
+  Data worker atterrie (`glossaries.effectFilters` 89/77 + `CharacterListItem.
+{buff,debuff,effectsBySource,teamBonuses}`). Nouveau `lib/data/effect-filters.ts` :
+  arbre d'options des effets construit CÔTÉ SERVEUR (le gros `glossaries.json` ne
+  part pas dans le bundle client), **univers dérivé des agrégats réels** (chaque
+  case matche ≥1 perso, chaque clé de perso a sa case — pas de filtre mort).
+  Canonicalisation robuste `canonicalEffectKey` : `group` de la taxonomie, sinon
+  la convention `_IR → base` (referme les trous `BT_BARRIER_IR`,
+  `BT_STAT_BUFF_ENHANCE_IR` sans toucher la donnée). `EffectGroupGrid` :
+  grille d'icônes par famille (desktop/sidebar xl) + déroulants à cases (drawer
+  mobile), cyan=buff / rose=debuff. Onglet **Effects** : logique ET/OU, **filtre
+  par source** de skill (`effectsBySource`, sources présentes seulement), toggle
+  **unique**, familles ordonnées (statBoosts/supporting/utility/unique ·
+  statReduction/cc/dot/utility/unique), `hidden` exclu. Onglet **Bonus** :
+  `teamBonuses` avec icônes de stat (`STAT_ICON`), logique OU. Chips actifs +
+  URL partageable (`b`/`d`/`el2`/`src`/`uniq`/`tb`) + reset étendus. Onglets
+  data-gated (invisibles sans data). tsc + eslint verts ; pipeline (options ↔
+  agrégats) vérifié sur la donnée réelle : 54 buff / 39 debuff, 0 doublon, 0 orphelin.
 - **`/characters` (liste) — PHASE 1 : coquille + layout + filtres data-dispo.**
   Refonte du browser minimal (3 selects mono) en **recherche à facettes** parité
   V2, réécrite sur primitives/tokens V3 (zéro import V2). `components/character/
@@ -19,9 +37,7 @@ filters/` : `FilterAtoms` (pills élément/classe/étoile sur sprites `img.*`,
     recherche **multi-langues**, **URL partageable** (params simples lisibles, pas
     de LZString), hydratation depuis l'URL. `gift` exposé dans
     `getCharacterListItems`. i18n déjà pré-seedée (rien ajouté). tsc + eslint verts.
-    RESTE Phase 2 (bloquée data worker, spec transmise) : onglets **Effects**
-    (buffs/debuffs+source+unique) et **Bonus** (team bonus) — rendus conditionnés à
-    la data, donc pas d'onglet vide en prod.
+    (Phase 2 — onglets Effects/Bonus — livrée le même jour, cf. entrée ci-dessus.)
 - **Retours Shiraen/Jaego sur les outils publics** (déployés sur le VPS) — 3 fixes.
   • **Synergies** : sélectionner un héros dans la liste l'ajoute DIRECTEMENT au
   groupe (avant : il fallait Entrée après avoir choisi dans le datalist). Entrée

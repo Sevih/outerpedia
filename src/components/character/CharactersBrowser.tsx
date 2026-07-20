@@ -13,6 +13,7 @@ import {
 } from './filters/ActiveFiltersStrip';
 import type { AdvancedPanelLabels, FilterOption } from './filters/AdvancedFiltersPanel';
 import { ELEMENT_HEX, ROLE_HEX, RARITY_HEX, TONE } from './filters/FilterAtoms';
+import type { EffectGroup } from '@/lib/data/effect-filters';
 
 /** Ligne allégée pour l'affichage + le filtrage. */
 export interface CharacterRow {
@@ -31,6 +32,13 @@ export interface CharacterRow {
   role?: string;
   isFusion: boolean;
   tags: string[];
+  /** Clés d'effet CANONIQUES appliquées (repliées côté serveur) — filtres Effects. */
+  buff?: string[];
+  debuff?: string[];
+  /** Mêmes clés canoniques ventilées par source de skill (s1/s2/ultimate/…). */
+  effectsBySource?: Record<string, { buff: string[]; debuff: string[] }>;
+  /** Stats données à toute l'équipe (bonus de transcendance) — filtre Bonus. */
+  teamBonuses?: string[];
 }
 
 export interface CharactersBrowserLabels {
@@ -52,6 +60,13 @@ export interface CharactersBrowserLabels {
   };
   /** Icônes des tags (slug → URL). */
   tagIcons: Record<string, string>;
+  /** Données des filtres d'effets/bonus, construites côté serveur. */
+  effects: {
+    buff: EffectGroup[];
+    debuff: EffectGroup[];
+    sources: FilterOption[];
+    teamBonus: FilterOption[];
+  };
 }
 
 /** Options triées d'un champ, projetées en {value,label(,icon)}. */
@@ -85,6 +100,12 @@ export function CharactersBrowser({
   const [role, setRole] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
   const [tagLogic, setTagLogic] = useState<'AND' | 'OR'>('OR');
+  const [buffs, setBuffs] = useState<string[]>([]);
+  const [debuffs, setDebuffs] = useState<string[]>([]);
+  const [effectLogic, setEffectLogic] = useState<'AND' | 'OR'>('OR');
+  const [sources, setSources] = useState<string[]>([]);
+  const [showUnique, setShowUnique] = useState(false);
+  const [teamBonuses, setTeamBonuses] = useState<string[]>([]);
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -133,6 +154,12 @@ export function CharactersBrowser({
     setRole(list('role'));
     setTags(list('tags'));
     setTagLogic(p.get('tl') === 'AND' ? 'AND' : 'OR');
+    setBuffs(list('b'));
+    setDebuffs(list('d'));
+    setEffectLogic(p.get('el2') === 'AND' ? 'AND' : 'OR');
+    setSources(list('src'));
+    setShowUnique(p.get('uniq') === '1');
+    setTeamBonuses(list('tb'));
   }, []);
 
   // ── Sync filtres → URL (débattu) ──
@@ -149,6 +176,12 @@ export function CharactersBrowser({
     set('role', enc(role));
     set('tags', enc(tags));
     if (tags.length && tagLogic === 'AND') set('tl', 'AND');
+    set('b', enc(buffs));
+    set('d', enc(debuffs));
+    if ((buffs.length || debuffs.length) && effectLogic === 'AND') set('el2', 'AND');
+    set('src', enc(sources));
+    if (showUnique) set('uniq', '1');
+    set('tb', enc(teamBonuses));
     const query = params.toString();
     const url = query ? `${pathname}?${query}` : pathname;
     const handle = setTimeout(() => {
@@ -158,7 +191,25 @@ export function CharactersBrowser({
       router.replace(url as Parameters<typeof router.replace>[0], { scroll: false });
     }, 150);
     return () => clearTimeout(handle);
-  }, [q, element, klass, rarity, chain, gift, role, tags, tagLogic, pathname, router]);
+  }, [
+    q,
+    element,
+    klass,
+    rarity,
+    chain,
+    gift,
+    role,
+    tags,
+    tagLogic,
+    buffs,
+    debuffs,
+    effectLogic,
+    sources,
+    showUnique,
+    teamBonuses,
+    pathname,
+    router,
+  ]);
 
   // ── Filtrage ──
   const filtered = useMemo(() => {
@@ -169,6 +220,16 @@ export function CharactersBrowser({
     const chS = new Set(chain);
     const gS = new Set(gift);
     const roS = new Set(role);
+
+    // Un effet appliqué par le perso, RESTREINT aux sources sélectionnées le cas
+    // échéant (parité V2 `charHasEffectFromSources`). Clés déjà canoniques.
+    const hasEffect = (row: CharacterRow, key: string, side: 'buff' | 'debuff') => {
+      if (!sources.length) return (row[side] ?? []).includes(key);
+      const ebs = row.effectsBySource;
+      if (!ebs) return (row[side] ?? []).includes(key);
+      return sources.some((s) => (ebs[s]?.[side] ?? []).includes(key));
+    };
+
     return rows.filter((row) => {
       if (needle && !row.searchNames.some((n) => n.includes(needle))) return false;
       if (elS.size && !elS.has(row.element)) return false;
@@ -184,9 +245,50 @@ export function CharactersBrowser({
             : tags.some((t) => row.tags.includes(t));
         if (!ok) return false;
       }
+      // Effets : buffs et debuffs combinés selon la logique ET/OU (parité V2).
+      if (buffs.length || debuffs.length) {
+        const hb = buffs.length
+          ? effectLogic === 'AND'
+            ? buffs.every((b) => hasEffect(row, b, 'buff'))
+            : buffs.some((b) => hasEffect(row, b, 'buff'))
+          : true;
+        const hd = debuffs.length
+          ? effectLogic === 'AND'
+            ? debuffs.every((d) => hasEffect(row, d, 'debuff'))
+            : debuffs.some((d) => hasEffect(row, d, 'debuff'))
+          : true;
+        const match =
+          buffs.length && debuffs.length
+            ? effectLogic === 'AND'
+              ? hb && hd
+              : hb || hd
+            : buffs.length
+              ? hb
+              : hd;
+        if (!match) return false;
+      }
+      // Bonus d'équipe : le perso doit fournir AU MOINS un des bonus cochés (OU).
+      if (teamBonuses.length && !row.teamBonuses?.some((tb) => teamBonuses.includes(tb)))
+        return false;
       return true;
     });
-  }, [rows, q, element, klass, rarity, chain, gift, role, tags, tagLogic]);
+  }, [
+    rows,
+    q,
+    element,
+    klass,
+    rarity,
+    chain,
+    gift,
+    role,
+    tags,
+    tagLogic,
+    buffs,
+    debuffs,
+    effectLogic,
+    sources,
+    teamBonuses,
+  ]);
 
   // ── Reset / partage ──
   const resetAll = () => {
@@ -199,6 +301,12 @@ export function CharactersBrowser({
     setRole([]);
     setTags([]);
     setTagLogic('OR');
+    setBuffs([]);
+    setDebuffs([]);
+    setEffectLogic('OR');
+    setSources([]);
+    setShowUnique(false);
+    setTeamBonuses([]);
   };
   const copyShareUrl = () => {
     if (typeof window === 'undefined') return;
@@ -262,10 +370,69 @@ export function CharactersBrowser({
         color: TONE.indigo,
         onRemove: () => setTags((p) => p.filter((v) => v !== tk)),
       });
+    // Libellés des effets/sources/bonus (buff et debuff séparés : une même clé,
+    // ex. `BT_STAT|ST_ATK`, existe des deux côtés avec un libellé différent).
+    const flat = (gs: EffectGroup[]) =>
+      new Map(gs.flatMap((g) => g.effects.map((e) => [e.key, e.label] as const)));
+    const buffL = flat(labels.effects.buff);
+    const debuffL = flat(labels.effects.debuff);
+    const srcL = new Map(labels.effects.sources.map((o) => [o.value, o.label] as const));
+    const tbL = new Map(labels.effects.teamBonus.map((o) => [o.value, o.label] as const));
+    for (const b of buffs)
+      out.push({
+        key: `b-${b}`,
+        label: buffL.get(b) ?? b,
+        color: TONE.cyan,
+        onRemove: () => setBuffs((p) => p.filter((v) => v !== b)),
+      });
+    for (const d of debuffs)
+      out.push({
+        key: `d-${d}`,
+        label: debuffL.get(d) ?? d,
+        color: TONE.rose,
+        onRemove: () => setDebuffs((p) => p.filter((v) => v !== d)),
+      });
+    for (const s of sources)
+      out.push({
+        key: `src-${s}`,
+        label: srcL.get(s) ?? s,
+        color: TONE.cyan,
+        onRemove: () => setSources((p) => p.filter((v) => v !== s)),
+      });
+    for (const tb of teamBonuses)
+      out.push({
+        key: `tb-${tb}`,
+        label: tbL.get(tb) ?? tb,
+        color: TONE.emerald,
+        onRemove: () => setTeamBonuses((p) => p.filter((v) => v !== tb)),
+      });
     return out;
-  }, [q, element, klass, rarity, chain, role, gift, tags, labels]);
+  }, [
+    q,
+    element,
+    klass,
+    rarity,
+    chain,
+    role,
+    gift,
+    tags,
+    buffs,
+    debuffs,
+    sources,
+    teamBonuses,
+    labels,
+  ]);
 
-  const advancedCount = chain.length + role.length + gift.length + tags.length;
+  const advancedCount =
+    chain.length +
+    role.length +
+    gift.length +
+    tags.length +
+    buffs.length +
+    debuffs.length +
+    sources.length +
+    teamBonuses.length +
+    (showUnique ? 1 : 0);
 
   const panelProps = {
     labels: labels.panel,
@@ -283,6 +450,24 @@ export function CharactersBrowser({
     onToggleTag: toggle(setTags),
     tagLogic,
     onTagLogicChange: setTagLogic,
+    // Effects
+    buffGroups: labels.effects.buff,
+    debuffGroups: labels.effects.debuff,
+    selectedBuffs: buffs,
+    onToggleBuff: toggle(setBuffs),
+    selectedDebuffs: debuffs,
+    onToggleDebuff: toggle(setDebuffs),
+    effectLogic,
+    onEffectLogicChange: setEffectLogic,
+    sources: labels.effects.sources,
+    sourceFilter: sources,
+    onToggleSource: toggle(setSources),
+    showUnique,
+    onToggleShowUnique: () => setShowUnique((v) => !v),
+    // Team Bonus
+    teamBonusOptions: labels.effects.teamBonus,
+    teamBonusFilter: teamBonuses,
+    onToggleTeamBonus: toggle(setTeamBonuses),
   };
 
   return (
