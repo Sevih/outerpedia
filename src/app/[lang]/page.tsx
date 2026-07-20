@@ -53,7 +53,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const lang = normalizeLang(raw);
   const t = await getT(lang);
 
-  const { codes, activeCount } = getActiveCoupons(lang, 6);
+  const { codes, activeCount } = await getActiveCoupons(lang, 6);
   const buffSchedule = getBuffSchedule();
   const updates = getChangelog(lang, { limit: 5 });
   const buffLabels = Object.fromEntries(

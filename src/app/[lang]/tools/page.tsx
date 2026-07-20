@@ -46,7 +46,8 @@ export default async function ToolsPage({ params }: { params: Promise<{ lang: st
         title: t(`tools.${tool.slug}` as TranslationKey),
         desc: t(`tools.${tool.slug}.desc` as TranslationKey),
         status: tool.status,
-        href: `/${tool.slug}`,
+        // `href` curé = renvoi vers une page existante (coupon-codes → /coupons).
+        href: tool.href ?? `/${tool.slug}`,
         category: asAccentKey(g.category.slug),
         categoryLabel,
       })),

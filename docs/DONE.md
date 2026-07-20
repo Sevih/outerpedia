@@ -6,6 +6,37 @@
 
 ## 2026-07-20
 
+- **`coupon-codes` résolu + coupons en RUNTIME R2 (zéro redéploiement).**
+  ① `coupon-codes` n'est pas une page : renvoi vers `/coupons` (parité V2) —
+  le champ `href` du curé outils, déjà présent dans `_index.json`, est
+  maintenant SERVI (`ToolMeta.href`, landing `/tools`). ② Décision Sevih :
+  un code poussé ne doit plus redéployer le site → patron du manifeste comics
+  généralisé : `lib/home` lit `data/coupons.json` sur R2 à la requête
+  (revalidate 600 s, repli committé en dev/panne ; `getActiveCoupons`/
+  `getAllCoupons` async — home et /coupons passent à l'ISR 10 min de fait).
+  Publication À LA SAUVEGARDE admin : `lib/admin/coupons-publish` (rclone
+  copyto + purge edge d'une URL, conventions assets-push ; `s-maxage` COURT
+  10 min — donnée vive, l'edge se rafraîchit seul même sans purge ; pire cas
+  sans Cloudflare : ≤ 20 min). Branchée sur la route curated/coupons ET le
+  regen V2 ; l'éditeur affiche « Saved + publié (live ≤ 10 min) » ou
+  l'avertissement d'échec (l'écriture locale n'est jamais invalidée).
+  Namespace R2 : `data/` (JSON runtime, distinct des images). tsc + eslint +
+  tests verts.
+- **Hygiène CLI datagen : l'item ⚙️ soldé (re-vérifié : 3 cibles n'existaient
+  plus — coherence.ts, extractor/run.ts, import-gear-reco).** ① Gardes
+  `isMain` : extract.ts, convert.ts (script top-level enveloppé dans `main()` —
+  un import ne déclenche plus conversion + purge des fantômes), collect.ts
+  (garde + `.catch` → exit 1, plus d'unhandledRejection). ② Flags stricts :
+  `version-boss` refuse un flag sans valeur (`--ref --label x` prenait
+  `--label` comme ref) ; `promote --only` borné au PROCHAIN flag (absorbait
+  les fichiers situés après `--apply`). ③ `loadEnvLocal` (lib/env, hérité de
+  la note r2.ts) : quotes d'enrobage dotenv retirées. ④ pull-gamedata :
+  GARDE-FOU dossier distant absent — les signatures distantes vides faisaient
+  passer « jeu désinstallé » pour « tout a disparu » et PURGEAIENT le miroir
+  local entier ; désormais erreur explicite (`; true` pour que le test négatif
+  ne fasse pas jeter adb avant le message, même piège que dump.ts). Vérifié :
+  tsc, eslint, promote.test 12/12, CLI réels (usage, flag sans valeur,
+  convert 257/257).
 - **Homonymes site/admin désambiguïsés (dernier item Duplication).**
   `rankOptionLabels` (admin/monster-store) → `rankOptionAdminLabels` : PAS le
   même contrat que celui du site (EN seul + repli en cascade vs localisé +

@@ -66,8 +66,17 @@ export function PromoCodesEditor({
   async function save() {
     setStatus({ kind: 'idle' });
     try {
-      await postJson('/api/admin/curated/coupons', rows.filter((r) => r.code.trim()).map(toPromo));
-      setStatus({ kind: 'ok', msg: 'Saved' });
+      const res = await postJson<{
+        ok: boolean;
+        publish?: { ok: boolean; purged: boolean; error?: string };
+      }>('/api/admin/curated/coupons', rows.filter((r) => r.code.trim()).map(toPromo));
+      // La sauvegarde publie aussi la copie runtime R2 (live sans redéploiement) —
+      // un échec de publication est un AVERTISSEMENT, le fichier local est sauvé.
+      const p = res.publish;
+      if (p?.ok && p.purged) setStatus({ kind: 'ok', msg: 'Saved + publié (live ≤ 10 min)' });
+      else if (p?.ok) setStatus({ kind: 'ok', msg: `Saved + publié — ${p.error ?? ''}` });
+      else
+        setStatus({ kind: 'err', msg: `Saved local, publication R2 ratée : ${p?.error ?? '?'}` });
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });
     }

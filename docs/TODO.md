@@ -44,10 +44,12 @@
       **tierlistpvp**, **ee-priority-base**, **ee-priority-plus10**,
       **most-used-units** portés le 20/07 (cf. DONE — socle `TierListTool`
       commun aux 4 tier lists ; most-used = agrégation à la lecture des guides,
-      plus d'artefact généré). **RESTENT 10 sous-outils** (`/<slug>`, 404 tant
-      que non portés) : gear-usage-statistics, gear-usage-finder,
-      damage-calculator, pull-simulator, progress-tracker, team-planner,
-      tier-list-maker, patch-history, coupon-codes, event — namespaces
+      plus d'artefact généré) ; **coupon-codes** résolu le 20/07 : ce n'est PAS
+      une page mais un RENVOI vers `/coupons` (href curé, parité V2 — et les
+      coupons sont passés en runtime R2, cf. DONE). **RESTENT 9 sous-outils**
+      (`/<slug>`, 404 tant que non portés) : gear-usage-statistics,
+      gear-usage-finder, damage-calculator, pull-simulator, progress-tracker,
+      team-planner, tier-list-maker, patch-history, event — namespaces
       `tools.*`/`progress.*`.
 - [ ] **`/characters/[slug]` — RELIQUAT** : la fiche détail est portée, il ne
       MANQUE que les **Discord reviews** (section review communautaire de la V2).
@@ -157,13 +159,10 @@
       distribution/pagination conservés) ; clés i18n `page.character.reviews.*`
       (cta, no_reviews, count, load_more, via_discord) ×4 langues ; câbler la
       section dans la slug page + entrée QuickToc.
-- [ ] Datagen, hygiène CLI : garde `isMain` manquante sur extract.ts,
-      templates/convert.ts, coherence.ts, extractor/run.ts, import-gear-reco ;
-      `main()` sans `.catch` dans assets/collect.ts ; parsing des flags
-      (`version-boss.ts` `--ref --label x`, `promote.ts` `--only` qui absorbe
-      après un flag) ; parse `.env.local` maison de lib/r2.ts (quotes non
-      gérées) ; message explicite si dossier adb distant absent
-      (pull-gamedata.ts:67).
+- _(hygiène CLI datagen traitée le 20/07 → DONE : gardes isMain + .catch,
+  flags stricts version-boss/promote, quotes de `.env.local`, garde-fou
+  « dossier adb distant absent » — qui évitait une PURGE du miroir local.
+  coherence.ts / extractor-run.ts / import-gear-reco : n'existaient plus.)_
 
 ## 📚 Docs à resynchroniser
 
@@ -197,9 +196,6 @@ Règle permanente : chaque `meta.bossId` d'un guide porté doit exister dans
 - [ ] **`name-aliases.json`** (curé) — alias de recherche par perso.
 - [ ] Patch-notes : quand la PAGE sera portée, préfixer `NEXT_PUBLIC_IMG_BASE`
       sur les `src` relatifs stockés (`/images/patch-notes/…webp`).
-- [ ] (Contenu, pas data) Les 3 Promotion Challenge « boostés » (Supreme 4-6,
-      donjons 70600106/107/108) n'ont aucun guide — la V2 n'en avait pas non
-      plus.
 
 ## 🤔 Décisions en attente (Sevih)
 

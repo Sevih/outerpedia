@@ -1,13 +1,14 @@
 /**
  * ASSEMBLAGE DATA de la page d'accueil (serveur). Regroupe les sources déjà
- * générées/curées en view-models prêts à rendre : bannières ACTIVES (recruit),
+ * générées/curées en view-models prêts à rendre : bannières ACTIVES (curées),
  * codes promo ACTIFS avec récompenses résolues (coupons curés), planning de buff
  * quotidien (dérivé des posts). Aucune logique de rendu ici.
  *
  * Import statique des JSON (même choix que characters.ts / recruit.ts) : la
  * donnée est figée au build et rafraîchie au redéploiement ; le filtrage « actif »
- * se recalcule à chaque régénération ISR (24 h), et les comptes à rebours vivent
- * côté client.
+ * se recalcule à chaque régénération ISR, et les comptes à rebours vivent côté
+ * client. EXCEPTION coupons : lus au RUNTIME depuis R2 (cf. `loadCoupons`) pour
+ * qu'un code poussé paraisse sans redéploiement — l'import committé reste le repli.
  */
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
@@ -19,9 +20,9 @@ import {
   getCharacter,
   slugForId,
 } from '@/lib/data/characters';
-import { activeBanners } from '@/lib/data/recruit';
 import { getItemEntry } from '@/lib/data/item-catalog';
 import type { InlineItem } from '@/components/inline/ItemInline';
+import bannersData from '@data/curated/banner.json';
 import couponsData from '@data/curated/coupons.json';
 import buffData from '@data/patch-notes/buff-events.json';
 
@@ -58,6 +59,31 @@ export interface BuffScheduleEntry {
 }
 
 type RawCoupon = { code: string; description: Record<string, string>; start: string; end: string };
+/** Entrée de `data/curated/banner.json` (le `name` est un confort d'admin). */
+type RawBanner = { id: string; name: string; start: string; end: string };
+
+const IMG_BASE = process.env.NEXT_PUBLIC_IMG_BASE ?? '';
+
+/**
+ * Charge les coupons. En prod : la COPIE RUNTIME hébergée sur R2
+ * (`data/coupons.json`, publiée par la sauvegarde admin — cf.
+ * `lib/admin/coupons-publish`), lue à la requête avec revalidation — un code
+ * poussé apparaît SANS redéploiement (patron du manifeste comics, décision
+ * Sevih 20/07). En dev (base vide) ou si R2 est injoignable : repli sur la
+ * donnée committée. Le `revalidate` de 600 s abaisse d'office l'ISR des pages
+ * consommatrices (home, /coupons) à 10 min — c'est voulu, c'est la fraîcheur.
+ */
+async function loadCoupons(): Promise<RawCoupon[]> {
+  if (IMG_BASE) {
+    try {
+      const res = await fetch(`${IMG_BASE}/data/coupons.json`, { next: { revalidate: 600 } });
+      if (res.ok) return (await res.json()) as RawCoupon[];
+    } catch {
+      /* R2 injoignable → repli committé */
+    }
+  }
+  return couponsData as unknown as RawCoupon[];
+}
 
 /** Jour courant `YYYY-MM-DD` en UTC (les fenêtres actives sont en jours UTC). */
 function todayUTC(): string {
@@ -65,18 +91,22 @@ function todayUTC(): string {
 }
 
 /**
- * Bannières actives aujourd'hui, enrichies du perso. Dédupliquées par perso (un
- * même perso peut avoir deux fenêtres qui se chevauchent) et triées par rareté.
+ * Bannières actives aujourd'hui, enrichies du perso. Source = le fichier CURÉ
+ * (`/admin/tools/banners`), PAS `recruit.json` : les patch notes tombent 24-48 h
+ * avant la mise à jour du jeu, la curation permet de pré-saisir une bannière
+ * que les tables n'ont pas encore (le généré reste la source des guides —
+ * historique release/rerun des limited). Dédupliquées par perso (un même perso
+ * peut avoir deux fenêtres qui se chevauchent) et triées par rareté.
  */
 export function getActiveBanners(lang: Lang): BannerVM[] {
   const today = todayUTC();
   const byId = new Map<string, BannerVM>();
-  for (const b of activeBanners(today)) {
-    if (byId.has(b.characterId)) continue;
-    const c = getCharacter(b.characterId);
+  for (const b of (bannersData as RawBanner[]).filter((b) => b.start <= today && b.end >= today)) {
+    if (byId.has(b.id)) continue;
+    const c = getCharacter(b.id);
     const slug = c && slugForId(c.id);
     if (!c || !slug) continue;
-    byId.set(b.characterId, {
+    byId.set(b.id, {
       id: c.id,
       name: characterDisplayName(c, lang),
       prefix: characterNamePrefix(c, lang),
@@ -107,12 +137,12 @@ function resolveReward(key: string, lang: Lang): InlineItem {
  * Codes promo ACTIFS aujourd'hui (récents d'abord), récompenses résolues. Rend
  * aussi le nombre total d'actifs (pour le lien « voir les N codes »).
  */
-export function getActiveCoupons(
+export async function getActiveCoupons(
   lang: Lang,
   limit?: number,
-): { codes: CouponVM[]; activeCount: number } {
+): Promise<{ codes: CouponVM[]; activeCount: number }> {
   const today = todayUTC();
-  const active = (couponsData as unknown as RawCoupon[])
+  const active = (await loadCoupons())
     .filter((c) => c.start <= today && c.end >= today)
     .sort((a, b) => b.start.localeCompare(a.start));
   const sliced = limit ? active.slice(0, limit) : active;
@@ -145,10 +175,10 @@ function couponStatus(c: RawCoupon, today: string): CouponStatus {
  * groupe du plus récent au plus ancien), récompenses résolues. Pour la page
  * `/coupons` (la home n'en montre qu'un sous-ensemble actif).
  */
-export function getAllCoupons(lang: Lang): CouponFullVM[] {
+export async function getAllCoupons(lang: Lang): Promise<CouponFullVM[]> {
   const today = todayUTC();
   const rank: Record<CouponStatus, number> = { active: 0, upcoming: 1, expired: 2 };
-  return (couponsData as unknown as RawCoupon[])
+  return (await loadCoupons())
     .map((c) => ({ raw: c, status: couponStatus(c, today) }))
     .sort((a, b) => rank[a.status] - rank[b.status] || b.raw.start.localeCompare(a.raw.start))
     .map(({ raw, status }) => ({

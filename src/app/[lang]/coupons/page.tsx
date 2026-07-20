@@ -33,7 +33,7 @@ export default async function CouponsPage({ params }: { params: Promise<{ lang: 
   const { lang: raw } = await params;
   const lang = normalizeLang(raw);
   const t = await getT(lang);
-  const coupons = getAllCoupons(lang);
+  const coupons = await getAllCoupons(lang);
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-6 md:px-6">

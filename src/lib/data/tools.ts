@@ -16,6 +16,11 @@ export interface ToolMeta {
   category: string;
   order: number;
   status: ToolStatus;
+  /**
+   * Cible de RENVOI quand l'outil est une page existante hors routeur à plat
+   * (ex. `coupon-codes` → `/coupons`, parité V2). Absent = `/<slug>`.
+   */
+  href?: string;
 }
 
 export interface ToolCategory {
@@ -26,7 +31,7 @@ export interface ToolCategory {
 const CATEGORIES = categoriesData as Record<string, { order: number }>;
 const INDEX = indexData as Record<
   string,
-  { icon: string; category: string; order: number; status: string }
+  { icon: string; category: string; order: number; status: string; href?: string }
 >;
 
 /** Catégories triées par ordre. */
@@ -45,6 +50,7 @@ export function getVisibleTools(): ToolMeta[] {
       category: d.category,
       order: d.order,
       status: d.status as ToolStatus,
+      ...(d.href ? { href: d.href } : {}),
     }))
     .filter((t) => t.status !== 'hidden' && t.status !== 'unlisted')
     .sort((a, b) => a.order - b.order);
@@ -60,6 +66,7 @@ export function getToolMeta(slug: string): ToolMeta | null {
     category: d.category,
     order: d.order,
     status: d.status as ToolStatus,
+    ...(d.href ? { href: d.href } : {}),
   };
 }
 
