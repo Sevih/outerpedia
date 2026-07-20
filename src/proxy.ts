@@ -116,11 +116,13 @@ export function proxy(request: NextRequest) {
   // --- Domaine racine (pas de sous-domaine) = langue par défaut ---
   const firstSegment = pathname.split('/')[1];
 
-  // Préfixe langue par défaut → redirige pour le retirer (URL propre).
+  // Préfixe langue par défaut → redirige pour le retirer (URL propre). 308
+  // PERMANENT : c'est de la structure d'URL, pas un détour temporaire — le 307
+  // par défaut poussait les crawlers à revenir (audit Sitebulb 20/07).
   if (firstSegment === DEFAULT_LANG) {
     const url = request.nextUrl.clone();
     url.pathname = pathname.slice(`/${DEFAULT_LANG}`.length) || '/';
-    return NextResponse.redirect(url);
+    return NextResponse.redirect(url, 308);
   }
 
   // Préfixe d'une autre langue (dev path-based) → laisse passer.

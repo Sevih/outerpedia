@@ -22,20 +22,21 @@ describe('buildUrl — routage par CHEMIN (dev / staging)', () => {
     NEXT_PUBLIC_LANG_ROUTING: 'path',
   };
 
-  it('préfixe chaque langue en segment de chemin, langue par défaut incluse', async () => {
+  it('préfixe chaque langue en segment de chemin, SAUF la langue par défaut (servie sans préfixe — le proxy redirige /en/*)', async () => {
     const { buildUrl } = await loadSite(env);
-    expect(buildUrl('en', '/characters')).toBe('https://staging.example/en/characters');
+    expect(buildUrl('en', '/characters')).toBe('https://staging.example/characters');
     expect(buildUrl('jp', '/guides')).toBe('https://staging.example/jp/guides');
   });
 
   it('la racine `/` ne laisse pas de slash traînant', async () => {
     const { buildUrl } = await loadSite(env);
-    expect(buildUrl('en', '/')).toBe('https://staging.example/en');
+    expect(buildUrl('en', '/')).toBe('https://staging.example');
+    expect(buildUrl('jp', '/')).toBe('https://staging.example/jp');
   });
 
   it('normalise une langue invalide vers la langue par défaut', async () => {
     const { buildUrl } = await loadSite(env);
-    expect(buildUrl('zz' as never, '/x')).toBe('https://staging.example/en/x');
+    expect(buildUrl('zz' as never, '/x')).toBe('https://staging.example/x');
   });
 
   it('getBaseUrl = origine du déploiement', async () => {

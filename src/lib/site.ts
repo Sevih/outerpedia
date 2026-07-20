@@ -17,7 +17,7 @@
  * le staging est en `NODE_ENV=production` mais doit router par chemin (l'hôte
  * OVH ne sait pas servir `jp.vps-….ovh.net`). Bascule : docs/procedure/bascule-domaine.md
  */
-import { LANGUAGES, normalizeLang, type Lang } from '@/lib/i18n/config';
+import { DEFAULT_LANG, LANGUAGES, normalizeLang, type Lang } from '@/lib/i18n/config';
 
 export type LangRouting = 'path' | 'subdomain';
 
@@ -67,6 +67,12 @@ export function buildUrl(lang: Lang, path = ''): string {
     const sub = LANGUAGES[safeLang].subdomain; // '' pour la langue par défaut (apex)
     return sub ? `${ORIGIN.protocol}//${sub}.${ORIGIN.host}${segment}` : `${SITE_ORIGIN}${segment}`;
   }
-  // path : chaque langue est un préfixe de chemin, langue par défaut incluse.
-  return `${SITE_ORIGIN}/${safeLang}${segment}`;
+  // path : un préfixe de chemin par langue — SAUF la langue par défaut, servie
+  // sans préfixe (le proxy REDIRIGE /en/* vers /*) : canonical/hreflang doivent
+  // porter l'URL réellement servie, jamais une URL qui redirige (audit Sitebulb
+  // 20/07 : 1163 canonicals vers redirection). Même convention que le mode
+  // subdomain (apex = langue par défaut).
+  return safeLang === DEFAULT_LANG
+    ? `${SITE_ORIGIN}${segment}`
+    : `${SITE_ORIGIN}/${safeLang}${segment}`;
 }
