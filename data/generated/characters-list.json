@@ -1,0 +1,3156 @@
+{
+  "2000001": {
+    "buff": ["BT_BARRIER", "BT_CALL_BACKUP", "BT_COOL_CHARGE"],
+    "debuff": ["BT_AGGRO", "BT_REMOVE_BUFF", "BT_STAT|ST_ATK"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_REMOVE_BUFF"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_AGGRO"]
+      },
+      "ultimate": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": ["BT_STAT|ST_ATK"]
+      },
+      "chainPassive": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_REMOVE_BUFF"]
+      }
+    }
+  },
+  "2000002": {
+    "buff": ["BT_ADDITIVE_ATTACK", "BT_COOL_CHARGE", "BT_STAT|ST_CRITICAL_RATE"],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_CRITICAL_RATE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ADDITIVE_ATTACK"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_CRITICAL_RATE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_STAT|ST_CRITICAL_RATE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000003": {
+    "buff": ["BT_CP_CHARGE"],
+    "debuff": ["BT_ACTION_GAUGE", "BT_FREEZE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_ACTION_GAUGE"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_FREEZE"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_ACTION_GAUGE"]
+      },
+      "chainPassive": {
+        "buff": ["BT_CP_CHARGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000004": {
+    "buff": ["BT_ADDITIVE_TURN"],
+    "debuff": ["BT_DOT_BURN"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN"]
+      }
+    }
+  },
+  "2000005": {
+    "buff": ["BT_STAT|ST_ATK", "BT_STAT|ST_CRITICAL_RATE"],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_CRITICAL_RATE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      }
+    }
+  },
+  "2000006": {
+    "buff": ["BT_ACTION_GAUGE", "BT_CALL_BACKUP", "BT_STAT|ST_ATK", "BT_STAT|ST_SPEED"],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_STAT|ST_SPEED"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_SPEED"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000007": {
+    "buff": [],
+    "debuff": ["BT_STAT|ST_ATK", "BT_STAT|ST_DEF", "BT_STUN"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_DEF"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_ATK"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_STUN"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_DEF"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_DEF"]
+      }
+    }
+  },
+  "2000008": {
+    "buff": ["BT_COOL_CHARGE", "BT_STAT|ST_DEF"],
+    "debuff": ["BT_STAT|ST_DEF"],
+    "effectsBySource": {
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_DEF"]
+      }
+    }
+  },
+  "2000009": {
+    "buff": ["BT_BARRIER", "BT_COOL_CHARGE"],
+    "debuff": ["BT_STAT|ST_ATK"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_ATK"]
+      },
+      "ultimate": {
+        "buff": ["BT_BARRIER"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_BARRIER"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_ATK"]
+      }
+    }
+  },
+  "2000010": {
+    "buff": ["BT_CALL_BACKUP", "BT_STAT|ST_COUNTER_RATE", "BT_STAT|ST_DEF"],
+    "debuff": [],
+    "effectsBySource": {
+      "s2": {
+        "buff": ["BT_STAT|ST_COUNTER_RATE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_DEF"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_DEF"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_STAT|ST_DEF"],
+        "debuff": []
+      }
+    }
+  },
+  "2000011": {
+    "buff": ["BT_ACTION_GAUGE", "BT_CALL_BACKUP"],
+    "debuff": ["BT_MARKING", "BT_STAT|ST_ATK"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_MARKING"]
+      },
+      "s2": {
+        "buff": ["BT_CALL_BACKUP"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_ATK"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_MARKING"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_MARKING"]
+      }
+    }
+  },
+  "2000012": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_TURN",
+      "BT_CALL_BACKUP",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_CRITICAL_DMG_RATE",
+      "BT_STAT|ST_CRITICAL_RATE",
+      "BT_STAT|ST_SPEED"
+    ],
+    "debuff": ["BT_ACTION_GAUGE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_SPEED"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": [
+          "BT_ADDITIVE_TURN",
+          "BT_STAT|ST_ATK",
+          "BT_STAT|ST_CRITICAL_DMG_RATE",
+          "BT_STAT|ST_CRITICAL_RATE"
+        ],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_ACTION_GAUGE"]
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_CRITICAL_DMG_RATE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000013": {
+    "buff": ["BT_COOL_CHARGE"],
+    "debuff": [
+      "BT_REMOVE_BUFF",
+      "BT_SILENCE",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_CRITICAL_RATE",
+      "BT_STAT|ST_SPEED"
+    ],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_ATK"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_CRITICAL_RATE", "BT_STAT|ST_SPEED"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_SILENCE"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_ATK"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_ATK"]
+      }
+    }
+  },
+  "2000014": {
+    "buff": [],
+    "debuff": ["BT_DOT_CURSE", "BT_STAT|ST_DEF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_DOT_CURSE"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_DEF"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_DOT_CURSE"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_DOT_CURSE"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_CURSE"]
+      }
+    }
+  },
+  "2000015": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_ATTACK",
+      "BT_ADDITIVE_TURN",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_PIERCE_POWER_RATE"
+    ],
+    "debuff": ["BT_DOT_BLEED", "BT_REMOVE_BUFF", "DETONATE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": ["BT_DOT_BLEED"]
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_ADDITIVE_ATTACK", "BT_STAT|ST_PIERCE_POWER_RATE"],
+        "debuff": ["BT_DOT_BLEED"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_REMOVE_BUFF", "DETONATE"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED"]
+      }
+    }
+  },
+  "2000016": {
+    "buff": ["BT_STAT|ST_DEF"],
+    "debuff": ["BT_STAT|ST_ATK", "BT_STUN"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_DEF"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_STUN"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_ATK"]
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_DEF"],
+        "debuff": []
+      }
+    }
+  },
+  "2000017": {
+    "buff": ["BT_BARRIER", "BT_CONTINU_HEAL", "BT_REMOVE_DEBUFF", "BT_STAT|ST_ATK"],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_CONTINU_HEAL"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_BARRIER", "BT_CONTINU_HEAL"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      }
+    }
+  },
+  "2000018": {
+    "buff": ["BT_STAT|ST_BUFF_CHANCE"],
+    "debuff": ["BT_ACTION_GAUGE", "BT_DOT_LIGHTNING", "BT_STUN"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_DOT_LIGHTNING"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_STUN"]
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_BUFF_CHANCE"],
+        "debuff": ["BT_ACTION_GAUGE"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_DOT_LIGHTNING"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_LIGHTNING"]
+      }
+    }
+  },
+  "2000019": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_CRITICAL_DMG_RATE",
+      "BT_STAT|ST_CRITICAL_RATE"
+    ],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_COOL_CHARGE", "BT_STAT|ST_CRITICAL_DMG_RATE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_ATK", "BT_STAT|ST_CRITICAL_RATE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000020": {
+    "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "BT_STAT|ST_BUFF_CHANCE"],
+    "debuff": [
+      "BT_REMOVE_BUFF",
+      "BT_SEALED",
+      "BT_STAT|ST_BUFF_CHANCE",
+      "BT_STAT|ST_SPEED",
+      "EXECUTION_TIME"
+    ],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_BUFF_CHANCE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": ["BT_REMOVE_BUFF", "BT_STAT|ST_BUFF_CHANCE", "BT_STAT|ST_SPEED"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_SEALED", "EXECUTION_TIME"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_REMOVE_BUFF"]
+      },
+      "dualAttack": {
+        "buff": ["BT_STAT|ST_BUFF_CHANCE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000021": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_TURN",
+      "BT_DMG_TARGET_BREAK",
+      "BT_EXTEND_BUFF",
+      "BT_IMMUNE",
+      "BT_STAT|ST_COUNTER_RATE",
+      "BT_STAT|ST_DEF"
+    ],
+    "debuff": ["BT_AGGRO"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_STAT|ST_COUNTER_RATE", "BT_STAT|ST_DEF"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_IMMUNE"],
+        "debuff": ["BT_AGGRO"]
+      },
+      "chainPassive": {
+        "buff": ["BT_DMG_TARGET_BREAK"],
+        "debuff": []
+      }
+    }
+  },
+  "2000022": {
+    "buff": ["BT_ADDITIVE_ATTACK", "BT_COOL_CHARGE", "BT_CP_CHARGE", "BT_STAT|ST_CRITICAL_RATE"],
+    "debuff": [],
+    "effectsBySource": {
+      "s2": {
+        "buff": ["BT_ADDITIVE_ATTACK"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_CRITICAL_RATE"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_CP_CHARGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000023": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_CONTINU_HEAL",
+      "BT_COOL_CHARGE",
+      "BT_INVINCIBLE",
+      "BT_REMOVE_DEBUFF",
+      "BT_REVIVAL",
+      "BT_STAT|ST_ATK"
+    ],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_REMOVE_DEBUFF"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_CONTINU_HEAL", "BT_REMOVE_DEBUFF"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": [
+          "BT_ACTION_GAUGE",
+          "BT_COOL_CHARGE",
+          "BT_INVINCIBLE",
+          "BT_REMOVE_DEBUFF",
+          "BT_STAT|ST_ATK"
+        ],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_REMOVE_DEBUFF"],
+        "debuff": []
+      }
+    }
+  },
+  "2000024": {
+    "buff": ["BT_COOL_CHARGE", "BT_IMMUNE", "BT_INVINCIBLE"],
+    "debuff": ["BT_STAT|ST_BUFF_CHANCE", "BT_STAT|ST_DEF", "BT_STUN"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_STUN"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_DEF"]
+      },
+      "ultimate": {
+        "buff": ["BT_IMMUNE", "BT_INVINCIBLE"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_BUFF_CHANCE"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_STUN"]
+      }
+    }
+  },
+  "2000025": {
+    "buff": ["BT_STAT|ST_PIERCE_POWER_RATE"],
+    "debuff": ["BT_DOT_BLEED"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_PIERCE_POWER_RATE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED"]
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_PIERCE_POWER_RATE"],
+        "debuff": ["BT_DOT_BLEED"]
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_PIERCE_POWER_RATE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000026": {
+    "buff": ["BT_CALL_BACKUP", "BT_REMOVE_DEBUFF", "BT_STAT|ST_DEF"],
+    "debuff": ["BT_AGGRO"],
+    "effectsBySource": {
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_AGGRO"]
+      },
+      "ultimate": {
+        "buff": ["BT_REMOVE_DEBUFF", "BT_STAT|ST_DEF"],
+        "debuff": []
+      }
+    }
+  },
+  "2000027": {
+    "buff": ["BT_ACTION_GAUGE", "BT_IMMUNE"],
+    "debuff": [],
+    "effectsBySource": {
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_IMMUNE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000028": {
+    "buff": ["BT_INVINCIBLE", "BT_STAT|ST_ATK"],
+    "debuff": ["BT_EXTEND_BUFF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_EXTEND_BUFF"]
+      },
+      "dualAttack": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      }
+    }
+  },
+  "2000029": {
+    "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_ATK"],
+    "debuff": ["BT_DOT_POISON"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_DOT_POISON"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_DOT_POISON"]
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000030": {
+    "buff": ["BT_BARRIER", "BT_STAT|ST_BUFF_CHANCE", "BT_STAT|ST_BUFF_RESIST"],
+    "debuff": ["BT_STUN"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_BUFF_CHANCE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_BARRIER", "BT_STAT|ST_BUFF_RESIST"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_STUN"]
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_BUFF_CHANCE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_STAT|ST_BUFF_CHANCE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000031": {
+    "buff": ["BT_EXTEND_BUFF", "BT_STAT|ST_ATK", "BT_STAT|ST_SPEED"],
+    "debuff": [],
+    "effectsBySource": {
+      "s2": {
+        "buff": ["BT_STAT|ST_ATK", "BT_STAT|ST_SPEED"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_EXTEND_BUFF"],
+        "debuff": []
+      }
+    }
+  },
+  "2000032": {
+    "buff": ["BT_ADDITIVE_ATTACK", "BT_STAT|ST_ATK"],
+    "debuff": ["BT_DOT_BURN", "DETONATE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN"]
+      },
+      "s2": {
+        "buff": ["BT_ADDITIVE_ATTACK", "BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["DETONATE"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN"]
+      }
+    }
+  },
+  "2000033": {
+    "buff": ["BT_COOL_CHARGE", "BT_STAT|ST_ATK"],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000034": {
+    "buff": [],
+    "debuff": [],
+    "effectsBySource": {}
+  },
+  "2000035": {
+    "buff": ["BT_ACTION_GAUGE", "PUREBLOODS_DOMINION"],
+    "debuff": ["BT_DOT_BLEED", "BT_REMOVE_BUFF", "BT_STAT|ST_DEF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_REMOVE_BUFF", "BT_STAT|ST_DEF"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED"]
+      }
+    }
+  },
+  "2000036": {
+    "buff": [
+      "BT_AGILE_RESPONSE",
+      "BT_BARRIER",
+      "BT_COOL_CHARGE",
+      "BT_IMMUNE",
+      "BT_REMOVE_DEBUFF",
+      "BT_STAT|ST_DEF"
+    ],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_BARRIER"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_AGILE_RESPONSE", "BT_REMOVE_DEBUFF"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_DEF"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_BARRIER"],
+        "debuff": []
+      }
+    }
+  },
+  "2000037": {
+    "buff": [
+      "BT_BARRIER",
+      "BT_CALL_BACKUP",
+      "BT_REMOVE_DEBUFF",
+      "BT_STAT|ST_BUFF_CHANCE",
+      "BT_STAT|ST_DEF"
+    ],
+    "debuff": ["BT_AGGRO", "BT_REMOVE_BUFF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_CALL_BACKUP"],
+        "debuff": ["BT_AGGRO"]
+      },
+      "s2": {
+        "buff": ["BT_BARRIER", "BT_REMOVE_DEBUFF"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_BUFF_CHANCE", "BT_STAT|ST_DEF"],
+        "debuff": ["BT_REMOVE_BUFF"]
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_DEF"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_AGGRO"]
+      }
+    }
+  },
+  "2000038": {
+    "buff": ["BT_REMOVE_DEBUFF"],
+    "debuff": ["BT_REMOVE_BUFF"],
+    "effectsBySource": {
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_REMOVE_BUFF"]
+      },
+      "ultimate": {
+        "buff": ["BT_REMOVE_DEBUFF"],
+        "debuff": []
+      }
+    }
+  },
+  "2000039": {
+    "buff": ["BT_EXTEND_DEBUFF", "BT_REVENGE", "BT_STAT|ST_PIERCE_POWER_RATE"],
+    "debuff": ["BT_ACTION_GAUGE", "BT_STEAL_BUFF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_ACTION_GAUGE"]
+      },
+      "s2": {
+        "buff": ["BT_EXTEND_DEBUFF", "BT_REVENGE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_STEAL_BUFF"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_ACTION_GAUGE"]
+      }
+    }
+  },
+  "2000040": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_CALL_BACKUP",
+      "BT_COOL_CHARGE",
+      "BT_EXTEND_BUFF",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_COUNTER_RATE",
+      "BT_STAT|ST_VAMPIRIC",
+      "BT_UNDEAD"
+    ],
+    "debuff": ["BT_MARKING", "BT_STAT|ST_DEF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_CALL_BACKUP"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_EXTEND_BUFF", "BT_STAT|ST_VAMPIRIC"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_ATK", "BT_STAT|ST_COUNTER_RATE", "BT_UNDEAD"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_MARKING"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_MARKING"]
+      }
+    }
+  },
+  "2000041": {
+    "buff": ["BT_COOL_CHARGE", "BT_STAT|ST_SPEED"],
+    "debuff": ["BT_MARKING", "BT_STEAL_BUFF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_SPEED"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_STEAL_BUFF"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_MARKING"]
+      },
+      "dualAttack": {
+        "buff": ["BT_STAT|ST_SPEED"],
+        "debuff": []
+      }
+    }
+  },
+  "2000042": {
+    "buff": [
+      "BT_BARRIER",
+      "BT_COOL_CHARGE",
+      "BT_INVINCIBLE",
+      "BT_STAT|ST_BUFF_RESIST",
+      "BT_STAT|ST_DEF"
+    ],
+    "debuff": ["BT_AGGRO"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_BARRIER"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_BARRIER", "BT_STAT|ST_DEF"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_INVINCIBLE", "BT_STAT|ST_BUFF_RESIST"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000043": {
+    "buff": ["BT_DMG_TARGET_BREAK", "BT_STAT|ST_BUFF_CHANCE"],
+    "debuff": [
+      "BT_DOT_BURN",
+      "BT_REMOVE_BUFF",
+      "BT_SEALED_RECEIVE_HEAL",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_DEF",
+      "BT_STAT|ST_SPEED",
+      "BT_STEAL_BUFF"
+    ],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_DEF"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN", "BT_REMOVE_BUFF", "BT_STAT|ST_ATK"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_SEALED_RECEIVE_HEAL", "BT_STAT|ST_DEF", "BT_STAT|ST_SPEED"]
+      },
+      "chainPassive": {
+        "buff": ["BT_DMG_TARGET_BREAK"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_DEF"]
+      }
+    }
+  },
+  "2000044": {
+    "buff": ["BT_ADDITIVE_TURN", "BT_BARRIER", "BT_REMOVE_DEBUFF", "BT_STAT|ST_BUFF_CHANCE"],
+    "debuff": ["BT_STAT|ST_ATK", "BT_STAT|ST_SPEED"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_SPEED"]
+      },
+      "s2": {
+        "buff": ["BT_BARRIER"],
+        "debuff": ["BT_STAT|ST_ATK"]
+      },
+      "ultimate": {
+        "buff": ["BT_ADDITIVE_TURN", "BT_STAT|ST_BUFF_CHANCE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_SPEED"]
+      }
+    }
+  },
+  "2000045": {
+    "buff": ["BT_BARRIER", "BT_COOL_CHARGE"],
+    "debuff": [],
+    "effectsBySource": {
+      "ultimate": {
+        "buff": ["BT_BARRIER"],
+        "debuff": []
+      }
+    }
+  },
+  "2000046": {
+    "buff": ["BT_STAT|ST_BUFF_CHANCE"],
+    "debuff": ["BT_COOL_CHARGE", "BT_REMOVE_BUFF", "BT_STUN"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_COOL_CHARGE"]
+      },
+      "s2": {
+        "buff": ["BT_STAT|ST_BUFF_CHANCE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_STUN"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_REMOVE_BUFF"]
+      }
+    }
+  },
+  "2000047": {
+    "buff": ["BT_AGILE_RESPONSE", "BT_BARRIER", "BT_CONTINU_HEAL", "BT_STAT|ST_BUFF_RESIST"],
+    "debuff": [],
+    "effectsBySource": {
+      "s2": {
+        "buff": ["BT_AGILE_RESPONSE", "BT_CONTINU_HEAL"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_CONTINU_HEAL", "BT_STAT|ST_BUFF_RESIST"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_CONTINU_HEAL"],
+        "debuff": []
+      }
+    }
+  },
+  "2000048": {
+    "buff": ["BT_ACTION_GAUGE", "BT_BARRIER", "BT_REMOVE_DEBUFF"],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_REMOVE_DEBUFF"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_BARRIER"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_REMOVE_DEBUFF"],
+        "debuff": []
+      }
+    }
+  },
+  "2000049": {
+    "buff": [],
+    "debuff": ["BT_DOT_BLEED"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED"]
+      }
+    }
+  },
+  "2000050": {
+    "buff": ["BT_COOL_CHARGE", "BT_CP_CHARGE", "BT_STAT|ST_SPEED"],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_SPEED"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_CP_CHARGE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_STAT|ST_SPEED"],
+        "debuff": []
+      }
+    }
+  },
+  "2000051": {
+    "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "BT_STAT|ST_BUFF_RESIST"],
+    "debuff": [],
+    "effectsBySource": {
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_BUFF_RESIST"],
+        "debuff": []
+      }
+    }
+  },
+  "2000052": {
+    "buff": ["BT_ACTION_GAUGE", "BT_DMG_TARGET_BREAK", "BT_STAT|ST_ATK", "BT_STAT|ST_COUNTER_RATE"],
+    "debuff": ["BT_DOT_LIGHTNING", "BT_STUN"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_STUN"]
+      },
+      "s2": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": ["BT_DOT_LIGHTNING"]
+      },
+      "ultimate": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": ["BT_DOT_LIGHTNING"]
+      },
+      "chainPassive": {
+        "buff": ["BT_DMG_TARGET_BREAK"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_STUN"]
+      }
+    }
+  },
+  "2000053": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_TURN",
+      "BT_BARRIER",
+      "BT_REVENGE",
+      "BT_STAT|ST_DEF",
+      "SELFISH_GOD"
+    ],
+    "debuff": ["BT_STONE"],
+    "effectsBySource": {
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_REVENGE", "SELFISH_GOD"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_STONE"]
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000054": {
+    "buff": ["BT_EXTEND_DEBUFF", "BT_RESURRECTION", "BT_STAT|ST_ATK"],
+    "debuff": [],
+    "effectsBySource": {
+      "s2": {
+        "buff": ["BT_EXTEND_DEBUFF"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_RESURRECTION", "BT_STAT|ST_ATK"],
+        "debuff": []
+      }
+    }
+  },
+  "2000055": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_TURN",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_CRITICAL_RATE"
+    ],
+    "debuff": ["BT_REMOVE_BUFF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_CRITICAL_RATE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": ["BT_REMOVE_BUFF"]
+      },
+      "ultimate": {
+        "buff": ["BT_ADDITIVE_TURN"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_STAT|ST_CRITICAL_RATE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000056": {
+    "buff": ["BT_ACTION_GAUGE", "BT_ADDITIVE_ATTACK", "FIERCE_OFFENSIVE"],
+    "debuff": ["BT_DOT_POISON", "BT_SILENCE", "BT_STAT|ST_ATK"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ADDITIVE_ATTACK"],
+        "debuff": ["BT_DOT_POISON", "BT_SILENCE", "BT_STAT|ST_ATK"]
+      },
+      "ultimate": {
+        "buff": ["BT_ACTION_GAUGE", "FIERCE_OFFENSIVE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000057": {
+    "buff": [
+      "BT_ADDITIVE_ATTACK",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_BUFF_CHANCE",
+      "BT_STAT|ST_DEF",
+      "BT_STAT|ST_SPEED"
+    ],
+    "debuff": ["BT_EXTEND_BUFF", "BT_SEALED_RECEIVE_HEAL"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ADDITIVE_ATTACK"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_EXTEND_BUFF", "BT_SEALED_RECEIVE_HEAL"]
+      },
+      "ultimate": {
+        "buff": ["BT_COOL_CHARGE", "BT_STAT|ST_BUFF_CHANCE", "BT_STAT|ST_DEF"],
+        "debuff": ["BT_SEALED_RECEIVE_HEAL"]
+      },
+      "chainPassive": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000058": {
+    "buff": ["BT_ACTION_GAUGE", "BT_IMMUNE", "BT_REMOVE_DEBUFF"],
+    "debuff": ["BT_DOT_CURSE", "BT_STAT|ST_CRITICAL_RATE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_REMOVE_DEBUFF"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_IMMUNE"],
+        "debuff": ["BT_STAT|ST_CRITICAL_RATE"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_CURSE"]
+      }
+    }
+  },
+  "2000059": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_AGILE_RESPONSE",
+      "BT_COOL_CHARGE",
+      "BT_IMMUNE",
+      "BT_REVIVAL",
+      "BT_STAT|ST_SPEED",
+      "DOLL_GARDENS_CARETAKER"
+    ],
+    "debuff": ["BT_DEATH_IR"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_AGILE_RESPONSE", "BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "BT_REVIVAL", "DOLL_GARDENS_CARETAKER"],
+        "debuff": ["BT_DEATH_IR"]
+      },
+      "dualAttack": {
+        "buff": ["BT_STAT|ST_SPEED"],
+        "debuff": []
+      }
+    }
+  },
+  "2000060": {
+    "buff": [
+      "BT_ADDITIVE_TURN",
+      "BT_CALL_BACKUP",
+      "BT_STAT|ST_BUFF_CHANCE",
+      "BT_STAT|ST_CRITICAL_DMG_RATE",
+      "BT_STAT|ST_CRITICAL_RATE",
+      "BT_STAT|ST_PIERCE_POWER_RATE"
+    ],
+    "debuff": ["BT_COOL_CHARGE", "BT_MARKING", "BT_SILENCE", "BT_STAT|ST_DEF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_CALL_BACKUP"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_STAT|ST_CRITICAL_RATE"],
+        "debuff": ["BT_SILENCE"]
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_PIERCE_POWER_RATE"],
+        "debuff": ["BT_COOL_CHARGE", "BT_STAT|ST_DEF"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_MARKING"]
+      }
+    }
+  },
+  "2000061": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_AGILE_RESPONSE",
+      "BT_CALL_BACKUP",
+      "BT_COOL_CHARGE",
+      "BT_CP_CHARGE",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_BUFF_CHANCE",
+      "BT_STAT|ST_DEF"
+    ],
+    "debuff": ["BT_EXTEND_BUFF", "BT_REMOVE_BUFF", "BT_SEALED"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": ["BT_REMOVE_BUFF"]
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_AGILE_RESPONSE", "BT_STAT|ST_ATK", "BT_STAT|ST_DEF"],
+        "debuff": ["BT_EXTEND_BUFF"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_REMOVE_BUFF", "BT_SEALED"]
+      },
+      "chainPassive": {
+        "buff": ["BT_CP_CHARGE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_REMOVE_BUFF"]
+      }
+    }
+  },
+  "2000062": {
+    "buff": ["BT_STAT|ST_ATK"],
+    "debuff": ["BT_DOT_CURSE", "BT_STAT|ST_CRITICAL_RATE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_DOT_CURSE"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_DOT_CURSE"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_CRITICAL_RATE"]
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      }
+    }
+  },
+  "2000063": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_TURN",
+      "BT_BARRIER",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_DEF",
+      "BT_STAT|ST_PIERCE_POWER_RATE",
+      "SHOW_YOUR_LOYALTY"
+    ],
+    "debuff": [],
+    "effectsBySource": {
+      "s2": {
+        "buff": [
+          "BT_ADDITIVE_TURN",
+          "BT_BARRIER",
+          "BT_STAT|ST_DEF",
+          "BT_STAT|ST_PIERCE_POWER_RATE",
+          "SHOW_YOUR_LOYALTY"
+        ],
+        "debuff": []
+      }
+    }
+  },
+  "2000064": {
+    "buff": ["BT_STAT|ST_ATK"],
+    "debuff": [
+      "BT_EXTEND_DEBUFF",
+      "BT_SEALED",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_BUFF_RESIST",
+      "BT_STAT|ST_CRITICAL_RATE",
+      "BT_STAT|ST_DEF"
+    ],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_ATK"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_EXTEND_DEBUFF", "BT_STAT|ST_BUFF_RESIST"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_SEALED", "BT_STAT|ST_DEF"]
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_ATK"]
+      }
+    }
+  },
+  "2000065": {
+    "buff": ["BT_ACTION_GAUGE", "BT_ADDITIVE_TURN", "BT_CP_CHARGE", "SAKURA_CHIRU", "UME_ICHIRIN"],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_ADDITIVE_TURN", "BT_CP_CHARGE", "SAKURA_CHIRU", "UME_ICHIRIN"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_CP_CHARGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000066": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_TURN",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_CRITICAL_DMG_RATE",
+      "BT_STAT|ST_CRITICAL_RATE"
+    ],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_COOL_CHARGE", "BT_STAT|ST_CRITICAL_DMG_RATE", "BT_STAT|ST_CRITICAL_RATE"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000067": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_TURN",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_AVOID",
+      "BT_STAT|ST_COUNTER_RATE",
+      "REGINAS_WORLD"
+    ],
+    "debuff": ["BT_REMOVE_BUFF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_COOL_CHARGE", "BT_STAT|ST_AVOID", "BT_STAT|ST_COUNTER_RATE", "REGINAS_WORLD"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["REGINAS_WORLD"],
+        "debuff": ["BT_REMOVE_BUFF"]
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000068": {
+    "buff": ["BT_ACTION_GAUGE", "BT_BARRIER", "BT_DMG_TARGET_BREAK"],
+    "debuff": ["BT_FREEZE", "BT_REMOVE_BUFF", "BT_STAT|ST_SPEED"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_REMOVE_BUFF"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_FREEZE", "BT_STAT|ST_SPEED"]
+      },
+      "chainPassive": {
+        "buff": ["BT_DMG_TARGET_BREAK"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000069": {
+    "buff": ["BT_STAT|ST_SPEED", "BT_UNDEAD"],
+    "debuff": ["BT_ACTION_GAUGE", "BT_STUN"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_ACTION_GAUGE"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_ACTION_GAUGE"]
+      },
+      "ultimate": {
+        "buff": ["BT_UNDEAD"],
+        "debuff": ["BT_STUN"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_ACTION_GAUGE"]
+      }
+    }
+  },
+  "2000070": {
+    "buff": ["BT_DMG_TARGET_BREAK", "BT_INVINCIBLE", "BT_STAT|ST_DEF"],
+    "debuff": ["BT_REMOVE_BUFF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_DEF"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_INVINCIBLE"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_DMG_TARGET_BREAK"],
+        "debuff": []
+      }
+    }
+  },
+  "2000071": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_ATTACK",
+      "BT_BARRIER",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_COUNTER_RATE",
+      "BT_STAT|ST_CRITICAL_RATE",
+      "BT_STAT|ST_DEF",
+      "BT_UNDEAD"
+    ],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_ADDITIVE_ATTACK", "BT_BARRIER", "BT_STAT|ST_COUNTER_RATE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_COOL_CHARGE", "BT_STAT|ST_DEF"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_DEF"],
+        "debuff": []
+      }
+    }
+  },
+  "2000072": {
+    "buff": ["A_NINJAS_AFTERIMAGE", "BT_AGILE_RESPONSE", "BT_COOL_CHARGE", "BT_REMOVE_DEBUFF"],
+    "debuff": ["BT_SEALED", "BT_SEALED_RECEIVE_HEAL", "BT_STEAL_BUFF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_SEALED"]
+      },
+      "s2": {
+        "buff": ["A_NINJAS_AFTERIMAGE", "BT_AGILE_RESPONSE", "BT_REMOVE_DEBUFF"],
+        "debuff": ["BT_SEALED_RECEIVE_HEAL"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_STEAL_BUFF"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_SEALED"]
+      }
+    }
+  },
+  "2000073": {
+    "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE"],
+    "debuff": ["BT_DOT_BURN", "DETONATE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["DETONATE"]
+      },
+      "ultimate": {
+        "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE"],
+        "debuff": ["BT_DOT_BURN"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN"]
+      }
+    }
+  },
+  "2000074": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_CONTINU_HEAL",
+      "BT_DMG_TARGET_BREAK",
+      "BT_EXTEND_BUFF",
+      "BT_IMMUNE",
+      "BT_REMOVE_DEBUFF"
+    ],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_EXTEND_BUFF"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_IMMUNE", "BT_REMOVE_DEBUFF"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_DMG_TARGET_BREAK"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000075": {
+    "buff": ["BT_ADDITIVE_ATTACK", "BT_COOL_CHARGE", "BT_STAT|ST_SPEED", "DESTROYERS_PUNISHMENT"],
+    "debuff": ["BT_COOL_CHARGE", "BT_REMOVE_BUFF", "BT_SEALED_RECEIVE_HEAL", "BT_STAT|ST_DEF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_COOL_CHARGE"]
+      },
+      "s2": {
+        "buff": ["BT_ADDITIVE_ATTACK", "BT_COOL_CHARGE", "DESTROYERS_PUNISHMENT"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_REMOVE_BUFF", "BT_SEALED_RECEIVE_HEAL"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_COOL_CHARGE"]
+      }
+    }
+  },
+  "2000076": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_BARRIER",
+      "BT_CALL_BACKUP",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_PIERCE_POWER_RATE",
+      "CHARISMA"
+    ],
+    "debuff": ["BT_REMOVE_BUFF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_CALL_BACKUP"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_BARRIER", "CHARISMA"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_REMOVE_BUFF"]
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_PIERCE_POWER_RATE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_BARRIER"],
+        "debuff": []
+      }
+    }
+  },
+  "2000077": {
+    "buff": ["BT_ADDITIVE_ATTACK", "BT_BARRIER", "BT_REMOVE_DEBUFF", "BT_STAT|ST_DEF"],
+    "debuff": ["BT_REMOVE_BUFF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_BARRIER"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ADDITIVE_ATTACK", "BT_STAT|ST_DEF"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_REMOVE_DEBUFF"],
+        "debuff": ["BT_REMOVE_BUFF"]
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_DEF"],
+        "debuff": []
+      }
+    }
+  },
+  "2000078": {
+    "buff": [
+      "BT_ADDITIVE_TURN",
+      "BT_REMOVE_DEBUFF",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_SPEED",
+      "BT_STEALTHED"
+    ],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_REMOVE_DEBUFF", "BT_STAT|ST_SPEED", "BT_STEALTHED"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_ADDITIVE_TURN"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      }
+    }
+  },
+  "2000079": {
+    "buff": ["BT_COOL_CHARGE", "BT_CP_CHARGE"],
+    "debuff": [
+      "BT_ACTION_GAUGE",
+      "BT_EXTEND_DEBUFF",
+      "BT_MARKING",
+      "BT_STATBUFF_CONVERT_TO_STATDEBUFF"
+    ],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_MARKING"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_ACTION_GAUGE"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_EXTEND_DEBUFF", "BT_STATBUFF_CONVERT_TO_STATDEBUFF"]
+      },
+      "chainPassive": {
+        "buff": ["BT_CP_CHARGE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_MARKING"]
+      }
+    }
+  },
+  "2000080": {
+    "buff": ["BT_CONTINU_HEAL", "BT_COOL_CHARGE", "BT_CP_CHARGE", "BT_STAT|ST_COUNTER_RATE"],
+    "debuff": ["BT_COOL_CHARGE", "BT_REMOVE_BUFF", "BT_STAT|ST_BUFF_RESIST", "BT_STAT|ST_DEF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_DEF"]
+      },
+      "s2": {
+        "buff": ["BT_STAT|ST_COUNTER_RATE"],
+        "debuff": ["BT_REMOVE_BUFF", "BT_STAT|ST_BUFF_RESIST"]
+      },
+      "ultimate": {
+        "buff": ["BT_CONTINU_HEAL", "BT_CP_CHARGE"],
+        "debuff": ["BT_COOL_CHARGE"]
+      }
+    }
+  },
+  "2000081": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_ATTACK",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_PIERCE_POWER_RATE"
+    ],
+    "debuff": ["BT_DOT_BURN", "BT_EXTEND_DEBUFF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_ADDITIVE_ATTACK"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_ATK", "BT_STAT|ST_PIERCE_POWER_RATE"],
+        "debuff": ["BT_DOT_BURN"]
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000082": {
+    "buff": ["BT_ACTION_GAUGE", "BT_ADDITIVE_ATTACK", "BT_COOL_CHARGE", "BT_STAT|ST_BUFF_CHANCE"],
+    "debuff": ["BT_DOT_LIGHTNING", "BT_EXTEND_DEBUFF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_DOT_LIGHTNING"]
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_ADDITIVE_ATTACK", "BT_STAT|ST_BUFF_CHANCE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_DOT_LIGHTNING"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_DOT_LIGHTNING"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_LIGHTNING"]
+      }
+    }
+  },
+  "2000083": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_AGILE_RESPONSE",
+      "BT_CONTINU_HEAL",
+      "BT_IMMUNE",
+      "BT_RESURRECTION"
+    ],
+    "debuff": [],
+    "effectsBySource": {
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_AGILE_RESPONSE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_ACTION_GAUGE", "BT_IMMUNE", "BT_RESURRECTION"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_CONTINU_HEAL"],
+        "debuff": []
+      }
+    }
+  },
+  "2000084": {
+    "buff": [
+      "BT_AGILE_RESPONSE",
+      "BT_CALL_BACKUP",
+      "BT_EXTEND_DEBUFF",
+      "BT_INVINCIBLE",
+      "BT_REMOVE_DEBUFF",
+      "BT_REVIVAL",
+      "BT_STAT|ST_SPEED"
+    ],
+    "debuff": ["BT_SEAL_ADDITIVE_ATTACK"],
+    "effectsBySource": {
+      "s2": {
+        "buff": ["BT_AGILE_RESPONSE", "BT_EXTEND_DEBUFF"],
+        "debuff": ["BT_SEAL_ADDITIVE_ATTACK"]
+      },
+      "ultimate": {
+        "buff": ["BT_INVINCIBLE", "BT_STAT|ST_SPEED"],
+        "debuff": []
+      }
+    }
+  },
+  "2000085": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_ATTACK",
+      "BT_ADDITIVE_TURN",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_PIERCE_POWER_RATE"
+    ],
+    "debuff": ["BT_STEAL_BUFF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ADDITIVE_TURN"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_ADDITIVE_ATTACK"],
+        "debuff": ["BT_STEAL_BUFF"]
+      },
+      "ultimate": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000086": {
+    "buff": ["BT_ACTION_GAUGE", "BT_ADDITIVE_TURN", "BT_COOL_CHARGE", "BT_CP_CHARGE"],
+    "debuff": ["BT_DOT_CURSE", "BT_SEALED", "BT_STAT|ST_ATK", "DETONATE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_DOT_CURSE"]
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": ["BT_DOT_CURSE"]
+      },
+      "ultimate": {
+        "buff": ["BT_CP_CHARGE"],
+        "debuff": ["BT_DOT_CURSE", "DETONATE"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_DOT_CURSE"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_CURSE"]
+      }
+    }
+  },
+  "2000087": {
+    "buff": ["BT_ADDITIVE_TURN", "BT_COOL_CHARGE"],
+    "debuff": [],
+    "effectsBySource": {
+      "ultimate": {
+        "buff": ["BT_ADDITIVE_TURN", "BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000088": {
+    "buff": ["BT_CALL_BACKUP", "BT_STAT|ST_BUFF_CHANCE", "BT_STAT|ST_COUNTER_RATE"],
+    "debuff": ["BT_EXTEND_BUFF", "BT_STONE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_CALL_BACKUP"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_STAT|ST_COUNTER_RATE"],
+        "debuff": ["BT_STONE"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_EXTEND_BUFF"]
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_BUFF_CHANCE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000089": {
+    "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE"],
+    "debuff": ["BT_STAT|ST_CRITICAL_DMG_RATE", "BT_STEAL_BUFF"],
+    "effectsBySource": {
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": ["BT_STEAL_BUFF"]
+      },
+      "ultimate": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000090": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_ATTACK",
+      "BT_ADDITIVE_TURN",
+      "BT_BARRIER",
+      "BT_COOL_CHARGE",
+      "BT_CP_CHARGE",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_COUNTER_RATE",
+      "HUBRISS_DOMINION"
+    ],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_ADDITIVE_ATTACK", "BT_BARRIER", "BT_STAT|ST_COUNTER_RATE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_ATK", "HUBRISS_DOMINION"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_CP_CHARGE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000091": {
+    "buff": ["BT_ACTION_GAUGE", "BT_CP_CHARGE", "BT_STAT|ST_BUFF_CHANCE", "FINAL_BRAND"],
+    "debuff": [
+      "BT_COOL_CHARGE",
+      "BT_EXTEND_BUFF",
+      "BT_REMOVE_BUFF",
+      "BT_SEALED",
+      "BT_SILENCE",
+      "BT_STAT|ST_DEF",
+      "BT_STAT|ST_SPEED",
+      "BT_STUN"
+    ],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_BUFF_CHANCE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_COOL_CHARGE", "BT_SEALED"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_REMOVE_BUFF", "BT_STUN"]
+      },
+      "dualAttack": {
+        "buff": ["BT_STAT|ST_BUFF_CHANCE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000092": {
+    "buff": ["BT_COOL_CHARGE", "BT_STEALTHED", "RETRIBUTIONS_DOMINION"],
+    "debuff": ["DETONATE", "ETERNAL_BLEEDING"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["ETERNAL_BLEEDING"]
+      },
+      "s2": {
+        "buff": ["BT_STEALTHED"],
+        "debuff": ["ETERNAL_BLEEDING"]
+      },
+      "ultimate": {
+        "buff": ["RETRIBUTIONS_DOMINION"],
+        "debuff": ["DETONATE"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["ETERNAL_BLEEDING"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["ETERNAL_BLEEDING"]
+      }
+    }
+  },
+  "2000093": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_TURN",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_CRITICAL_DMG_RATE",
+      "BT_STAT|ST_CRITICAL_RATE",
+      "BT_STAT|ST_PIERCE_POWER_RATE",
+      "BT_STAT|ST_SPEED"
+    ],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000094": {
+    "buff": ["BT_AGILE_RESPONSE", "BT_BARRIER", "RADIANT_WILL"],
+    "debuff": ["BT_AGGRO", "BT_DOT_BURN", "BT_EXTEND_DEBUFF", "BT_MARKING"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_AGILE_RESPONSE"],
+        "debuff": ["BT_AGGRO", "BT_MARKING"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN"]
+      },
+      "ultimate": {
+        "buff": ["RADIANT_WILL"],
+        "debuff": ["BT_DOT_BURN"]
+      },
+      "chainPassive": {
+        "buff": ["RADIANT_WILL"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_MARKING"]
+      }
+    }
+  },
+  "2000095": {
+    "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "BT_STAT_BUFF_ENHANCE_IR", "BT_STAT|ST_ATK"],
+    "debuff": ["BT_DOT_BURN"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN"]
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": ["BT_DOT_BURN"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN"]
+      }
+    }
+  },
+  "2000096": {
+    "buff": [
+      "ARIEL",
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_TURN",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_CRITICAL_DMG_RATE"
+    ],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["ARIEL"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_CRITICAL_DMG_RATE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000097": {
+    "buff": ["BT_ACTION_GAUGE", "BT_ADDITIVE_ATTACK", "BT_COOL_CHARGE", "BT_STAT|ST_SPEED"],
+    "debuff": ["BT_SEALED"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ADDITIVE_ATTACK", "BT_STAT|ST_SPEED"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000098": {
+    "buff": ["BT_BARRIER", "BT_COOL_CHARGE", "BT_REMOVE_DEBUFF", "BT_STAT|ST_DEF"],
+    "debuff": [],
+    "effectsBySource": {
+      "s2": {
+        "buff": ["BT_BARRIER", "BT_STAT|ST_DEF"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_COOL_CHARGE", "BT_REMOVE_DEBUFF"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_BARRIER"],
+        "debuff": []
+      }
+    }
+  },
+  "2000099": {
+    "buff": ["BT_REMOVE_DEBUFF", "BT_REVENGE", "BT_STAT|ST_COUNTER_RATE"],
+    "debuff": [],
+    "effectsBySource": {
+      "s2": {
+        "buff": ["BT_REVENGE", "BT_STAT|ST_COUNTER_RATE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_COUNTER_RATE"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_COUNTER_RATE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000100": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_TURN",
+      "BT_COOL_CHARGE",
+      "BT_REMOVE_DEBUFF",
+      "BT_REVIVAL",
+      "BT_STAT|ST_BUFF_RESIST",
+      "ETHER_BOOST"
+    ],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_REMOVE_DEBUFF"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_ADDITIVE_TURN", "BT_REVIVAL", "ETHER_BOOST"],
+        "debuff": []
+      }
+    }
+  },
+  "2000101": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_CALL_BACKUP",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_BUFF_CHANCE",
+      "BT_STAT|ST_BUFF_RESIST",
+      "BT_STAT|ST_CRITICAL_DMG_RATE",
+      "BT_STAT|ST_CRITICAL_RATE"
+    ],
+    "debuff": ["BT_MARKING", "BT_STAT|ST_DEF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_STAT|ST_CRITICAL_DMG_RATE", "BT_STAT|ST_CRITICAL_RATE"],
+        "debuff": ["BT_STAT|ST_DEF"]
+      },
+      "ultimate": {
+        "buff": ["BT_COOL_CHARGE", "BT_STAT|ST_BUFF_CHANCE", "BT_STAT|ST_BUFF_RESIST"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000102": {
+    "buff": ["BT_ACTION_GAUGE", "BT_BARRIER", "BT_EXTEND_DEBUFF", "BT_STAT|ST_COUNTER_RATE"],
+    "debuff": [
+      "BT_ACTION_GAUGE",
+      "BT_AGGRO",
+      "BT_EXTEND_BUFF",
+      "BT_STAT|ST_SPEED",
+      "IRREGULAR_INFECTION"
+    ],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": ["BT_STAT|ST_SPEED"]
+      },
+      "s2": {
+        "buff": ["BT_STAT|ST_COUNTER_RATE"],
+        "debuff": ["BT_ACTION_GAUGE"]
+      },
+      "ultimate": {
+        "buff": ["BT_BARRIER", "BT_EXTEND_DEBUFF"],
+        "debuff": ["BT_AGGRO", "BT_EXTEND_BUFF", "IRREGULAR_INFECTION"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_SPEED"]
+      }
+    }
+  },
+  "2000103": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_ATTACK",
+      "BT_BARRIER",
+      "BT_CALL_BACKUP",
+      "BT_CP_CHARGE",
+      "BT_REMOVE_DEBUFF"
+    ],
+    "debuff": ["BT_SEALED"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ADDITIVE_ATTACK", "BT_CALL_BACKUP"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_BARRIER", "BT_REMOVE_DEBUFF"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_SEALED"]
+      },
+      "chainPassive": {
+        "buff": ["BT_CP_CHARGE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_BARRIER"],
+        "debuff": []
+      }
+    }
+  },
+  "2000105": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_BARRIER",
+      "BT_STAT|ST_BUFF_CHANCE",
+      "BT_STAT|ST_COUNTER_RATE",
+      "BT_STAT|ST_SPEED"
+    ],
+    "debuff": ["BT_STAT|ST_DEF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_BUFF_CHANCE", "BT_STAT|ST_SPEED"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_BARRIER", "BT_STAT|ST_COUNTER_RATE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000106": {
+    "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "BT_STAT|ST_DEF", "BT_STAT|ST_PIERCE_POWER_RATE"],
+    "debuff": ["BT_REMOVE_BUFF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_REMOVE_BUFF"]
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_DEF", "BT_STAT|ST_PIERCE_POWER_RATE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_REMOVE_BUFF"]
+      }
+    }
+  },
+  "2000107": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_ATTACK",
+      "BT_ADDITIVE_TURN",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_PIERCE_POWER_RATE"
+    ],
+    "debuff": [
+      "BT_DOT_BLEED",
+      "BT_EXTEND_DEBUFF",
+      "BT_FREEZE",
+      "BT_SEALED_RECEIVE_HEAL",
+      "BT_STAT|ST_DEF",
+      "BT_STAT|ST_SPEED"
+    ],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED"]
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_PIERCE_POWER_RATE"],
+        "debuff": ["BT_SEALED_RECEIVE_HEAL", "BT_STAT|ST_SPEED"]
+      },
+      "ultimate": {
+        "buff": ["BT_ADDITIVE_ATTACK", "BT_STAT|ST_ATK"],
+        "debuff": ["BT_DOT_BLEED", "BT_FREEZE", "BT_STAT|ST_DEF"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED"]
+      }
+    }
+  },
+  "2000108": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_BARRIER",
+      "BT_CALL_BACKUP",
+      "BT_DMG_TARGET_BREAK",
+      "BT_IMMUNE",
+      "BT_REMOVE_DEBUFF",
+      "BT_STAT|ST_COUNTER_RATE"
+    ],
+    "debuff": ["BT_DOT_POISON"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_CALL_BACKUP"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_BARRIER", "BT_STAT|ST_COUNTER_RATE"],
+        "debuff": ["BT_DOT_POISON"]
+      },
+      "ultimate": {
+        "buff": ["BT_ACTION_GAUGE", "BT_IMMUNE", "BT_REMOVE_DEBUFF"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_DMG_TARGET_BREAK"],
+        "debuff": []
+      }
+    }
+  },
+  "2000109": {
+    "buff": ["BANES_DOMAIN", "BT_ACTION_GAUGE", "BT_ADDITIVE_TURN"],
+    "debuff": [
+      "BANES_DOMAIN",
+      "BT_REMOVE_BUFF",
+      "BT_STAT|ST_DEF",
+      "BT_STUN",
+      "CORROSIVE_POISON",
+      "DETONATE"
+    ],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["CORROSIVE_POISON"]
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": ["BT_STUN", "CORROSIVE_POISON"]
+      },
+      "ultimate": {
+        "buff": ["BANES_DOMAIN", "BT_ADDITIVE_TURN"],
+        "debuff": ["BANES_DOMAIN", "BT_REMOVE_BUFF", "CORROSIVE_POISON"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["CORROSIVE_POISON"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["CORROSIVE_POISON"]
+      }
+    }
+  },
+  "2000110": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_ATTACK",
+      "BT_ADDITIVE_TURN",
+      "BT_COOL_CHARGE",
+      "BT_CP_CHARGE",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_SPEED",
+      "BT_UNDEAD",
+      "MANDALA"
+    ],
+    "debuff": ["BT_AP_CHARGE", "BT_STAT|ST_DEF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": ["BT_STAT|ST_DEF"]
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_UNDEAD", "MANDALA"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_ADDITIVE_TURN", "BT_CP_CHARGE"],
+        "debuff": ["BT_AP_CHARGE", "BT_STAT|ST_DEF"]
+      }
+    }
+  },
+  "2000111": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_TURN",
+      "BT_CALL_BACKUP",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_CRITICAL_DMG_RATE",
+      "BT_STAT|ST_PIERCE_POWER_RATE",
+      "BT_STAT|ST_SPEED"
+    ],
+    "debuff": [
+      "BT_GOLDEN_CURSE",
+      "BT_MARKING",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_CRITICAL_DMG_RATE",
+      "BT_STAT|ST_DEF"
+    ],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_CALL_BACKUP"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_CRITICAL_DMG_RATE", "BT_STAT|ST_PIERCE_POWER_RATE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": [
+          "BT_GOLDEN_CURSE",
+          "BT_STAT|ST_ATK",
+          "BT_STAT|ST_CRITICAL_DMG_RATE",
+          "BT_STAT|ST_DEF"
+        ]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_MARKING"]
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000112": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_TURN",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_DEF",
+      "SPATIAL_DISTORTION_SELF"
+    ],
+    "debuff": ["BT_ACTION_GAUGE", "BT_REDISTRIBUTE_BUFF", "BT_STAT|ST_PIERCE_POWER_RATE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": ["BT_REDISTRIBUTE_BUFF"]
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": ["BT_ACTION_GAUGE"]
+      },
+      "ultimate": {
+        "buff": ["SPATIAL_DISTORTION_SELF"],
+        "debuff": ["BT_REDISTRIBUTE_BUFF", "BT_STAT|ST_PIERCE_POWER_RATE"]
+      }
+    }
+  },
+  "2000113": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_AGILE_RESPONSE",
+      "BT_BARRIER",
+      "BT_CALL_BACKUP",
+      "BT_IMMUNE",
+      "BT_REMOVE_DEBUFF"
+    ],
+    "debuff": ["BT_FREEZE", "BT_SILENCE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_CALL_BACKUP"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_AGILE_RESPONSE"],
+        "debuff": ["BT_FREEZE"]
+      },
+      "ultimate": {
+        "buff": ["BT_BARRIER", "BT_IMMUNE", "BT_REMOVE_DEBUFF"],
+        "debuff": ["BT_SILENCE"]
+      }
+    }
+  },
+  "2000114": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_ATTACK",
+      "BT_ADDITIVE_TURN",
+      "BT_BARRIER",
+      "BT_BARRIER_IR",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_COUNTER_RATE",
+      "RUSH"
+    ],
+    "debuff": ["BT_ACTION_GAUGE", "BT_EXTEND_BUFF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_ACTION_GAUGE"]
+      },
+      "s2": {
+        "buff": ["BT_BARRIER", "BT_STAT|ST_COUNTER_RATE"],
+        "debuff": ["BT_ACTION_GAUGE"]
+      },
+      "ultimate": {
+        "buff": ["BT_ADDITIVE_ATTACK", "RUSH"],
+        "debuff": ["BT_EXTEND_BUFF"]
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    }
+  },
+  "2000116": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_BARRIER",
+      "BT_CALL_BACKUP",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_COUNTER_RATE",
+      "BT_STAT|ST_DEF"
+    ],
+    "debuff": ["BT_AGGRO"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_CALL_BACKUP"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_BARRIER", "BT_STAT|ST_DEF"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_ACTION_GAUGE", "BT_BARRIER", "BT_STAT|ST_COUNTER_RATE"],
+        "debuff": ["BT_AGGRO"]
+      },
+      "chainPassive": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_BARRIER"],
+        "debuff": []
+      }
+    }
+  },
+  "2000117": {
+    "buff": ["BT_ACTION_GAUGE", "BT_ADDITIVE_TURN", "BT_COOL_CHARGE"],
+    "debuff": ["BT_DOT_BLEED", "BT_DOT_BURN", "DETONATE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_ADDITIVE_TURN"],
+        "debuff": ["BT_DOT_BLEED", "BT_DOT_BURN"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN"]
+      }
+    }
+  },
+  "2000118": {
+    "buff": [],
+    "debuff": [],
+    "effectsBySource": {}
+  },
+  "2000119": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_TURN",
+      "BT_COOL_CHARGE",
+      "BT_CP_CHARGE",
+      "BT_EXTEND_BUFF",
+      "BT_INVINCIBLE",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_CRITICAL_RATE",
+      "BT_UNDEAD",
+      "POLAR_NIGHT",
+      "WHITE_NIGHT"
+    ],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": [
+          "BT_ADDITIVE_TURN",
+          "BT_CP_CHARGE",
+          "BT_EXTEND_BUFF",
+          "POLAR_NIGHT",
+          "WHITE_NIGHT"
+        ],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "BT_INVINCIBLE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_ATK"],
+        "debuff": []
+      }
+    }
+  },
+  "2000121": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_ATTACK",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_SPEED"
+    ],
+    "debuff": ["BT_SEALED", "BT_SILENCE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_COOL_CHARGE", "BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ADDITIVE_ATTACK", "BT_STAT|ST_SPEED"],
+        "debuff": ["BT_SILENCE"]
+      },
+      "ultimate": {
+        "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_ATK"],
+        "debuff": []
+      }
+    }
+  },
+  "2700003": {
+    "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "BT_STAT|ST_SPEED"],
+    "debuff": ["BT_ACTION_GAUGE", "BT_FREEZE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_ACTION_GAUGE"]
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": ["BT_FREEZE"]
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_SPEED"],
+        "debuff": ["BT_ACTION_GAUGE", "BT_FREEZE"]
+      }
+    }
+  },
+  "2700005": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_TURN",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_CRITICAL_DMG_RATE",
+      "BT_STAT|ST_PIERCE_POWER_RATE"
+    ],
+    "debuff": [],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "BT_STAT|ST_PIERCE_POWER_RATE"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_CRITICAL_DMG_RATE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      }
+    }
+  },
+  "2700037": {
+    "buff": [
+      "BT_BARRIER",
+      "BT_CALL_BACKUP",
+      "BT_REMOVE_DEBUFF",
+      "BT_STAT|ST_BUFF_CHANCE",
+      "BT_STAT|ST_COUNTER_RATE",
+      "BT_STAT|ST_CRITICAL_DMG_RATE",
+      "BT_STAT|ST_DEF"
+    ],
+    "debuff": ["BT_AGGRO", "BT_REMOVE_BUFF", "BT_STAT|ST_ATK"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_CALL_BACKUP"],
+        "debuff": ["BT_AGGRO", "BT_STAT|ST_ATK"]
+      },
+      "s2": {
+        "buff": ["BT_BARRIER", "BT_REMOVE_DEBUFF", "BT_STAT|ST_COUNTER_RATE"],
+        "debuff": ["BT_AGGRO"]
+      },
+      "ultimate": {
+        "buff": ["BT_STAT|ST_BUFF_CHANCE", "BT_STAT|ST_DEF"],
+        "debuff": ["BT_REMOVE_BUFF"]
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_DEF"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_AGGRO"]
+      },
+      "fusionPassive": {
+        "buff": ["BT_STAT|ST_CRITICAL_DMG_RATE"],
+        "debuff": []
+      }
+    }
+  },
+  "2700043": {
+    "buff": ["BT_ADDITIVE_TURN", "BT_BARRIER", "BT_STAT|ST_ATK", "BT_STAT|ST_SPEED"],
+    "debuff": [
+      "BT_ACTION_GAUGE",
+      "BT_DOT_BURN",
+      "BT_REMOVE_BUFF",
+      "BT_SEALED_RECEIVE_HEAL",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_DEF",
+      "BT_STAT|ST_SPEED",
+      "BT_STEAL_BUFF"
+    ],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_DEF"]
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN", "BT_REMOVE_BUFF", "BT_STAT|ST_ATK"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": [
+          "BT_ACTION_GAUGE",
+          "BT_DOT_BURN",
+          "BT_SEALED_RECEIVE_HEAL",
+          "BT_STAT|ST_DEF",
+          "BT_STAT|ST_SPEED"
+        ]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_DEF"]
+      },
+      "fusionPassive": {
+        "buff": ["BT_ADDITIVE_TURN", "BT_STAT|ST_ATK"],
+        "debuff": []
+      }
+    }
+  },
+  "2700056": {
+    "buff": ["BT_ACTION_GAUGE", "BT_ADDITIVE_ATTACK", "FIERCE_OFFENSIVE"],
+    "debuff": ["BT_DOT_POISON", "BT_SILENCE", "BT_STAT|ST_ATK", "DETONATE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": ["BT_DOT_POISON"]
+      },
+      "s2": {
+        "buff": ["BT_ADDITIVE_ATTACK"],
+        "debuff": ["BT_DOT_POISON", "BT_SILENCE", "BT_STAT|ST_ATK"]
+      },
+      "ultimate": {
+        "buff": ["BT_ACTION_GAUGE", "FIERCE_OFFENSIVE"],
+        "debuff": ["BT_DOT_POISON"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_DOT_POISON"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_POISON"]
+      }
+    }
+  },
+  "2700070": {
+    "buff": ["BT_COOL_CHARGE", "BT_INVINCIBLE", "BT_STAT|ST_CRITICAL_DMG_RATE", "BT_STAT|ST_DEF"],
+    "debuff": ["BT_STEAL_BUFF"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_DEF"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": [],
+        "debuff": ["BT_STEAL_BUFF"]
+      },
+      "ultimate": {
+        "buff": ["BT_INVINCIBLE", "BT_STAT|ST_CRITICAL_DMG_RATE"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_STEAL_BUFF"]
+      }
+    }
+  }
+}

@@ -5,13 +5,24 @@
  * les contrats ; un import JSON élargit les unions).
  */
 import charactersData from '@data/generated/characters.json';
+import charactersListData from '@data/generated/characters-list.json';
 import slugToIdData from '@data/generated/characters-slug-to-id.json';
 import glossariesData from '@data/generated/glossaries.json';
-import type { Character, CharactersFile, CharacterTag, Glossaries, LangDict } from '@contracts';
+import type {
+  Character,
+  CharacterEffects,
+  CharactersFile,
+  CharactersListData,
+  CharacterTag,
+  Glossaries,
+  LangDict,
+} from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { localePath } from '@/lib/navigation';
 
 const CHARACTERS = charactersData as unknown as CharactersFile;
+// Effets agrégés par perso (filtres liste) — fichier dédié, fusionné à la lecture.
+const CHARACTERS_LIST = charactersListData as unknown as CharactersListData;
 const FUSION_TITLE = (glossariesData as unknown as Glossaries).fusionTitle;
 const SLUG_TO_ID = slugToIdData as Record<string, string>;
 const ID_TO_SLUG: Record<string, string> = Object.fromEntries(
@@ -65,6 +76,14 @@ export interface CharacterListItem {
   isFusion: boolean;
   /** Étiquettes dérivées du jeu (le curé — `free` — se fusionne à la lecture). */
   tags?: CharacterTag[];
+  /**
+   * Effets appliqués agrégés (filtres à facettes de la liste) — clés d'effet
+   * canoniques (espace `effectByKey` + taxonomie `glossaries.effectFilters`).
+   * Fusionnés depuis `characters-list.json`. Absents si le perso n'applique rien.
+   */
+  buff?: CharacterEffects['buff'];
+  debuff?: CharacterEffects['debuff'];
+  effectsBySource?: CharacterEffects['effectsBySource'];
 }
 
 export function getAllCharacters(): Character[] {
@@ -157,6 +176,7 @@ export function getCharacterListItems(): CharacterListItem[] {
       originalCharacter: c.originalCharacter,
       isFusion: Boolean(c.originalCharacter),
       tags: c.tags,
+      ...CHARACTERS_LIST[c.id],
     }))
     .sort((a, b) => b.rarity - a.rarity || a.name.en.localeCompare(b.name.en));
 }

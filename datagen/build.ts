@@ -53,6 +53,7 @@ import { buildItemCatalog } from './generators/item-catalog';
 import { buildGameVersion } from './generators/game-version';
 import { buildBgmMapping } from './generators/bgm-mapping';
 import { buildWallpapers } from './generators/wallpapers';
+import { buildCharactersList } from './generators/characters-list';
 import { buildSkills } from './generators/skills';
 import { buildUnlockContent } from './generators/unlock-content';
 import { buildRecruit } from './generators/recruit';
@@ -178,6 +179,21 @@ async function main(): Promise<void> {
   const itemsFile: ItemsFile = catalog;
   await writeJson('characters.json', charactersFile);
   await writeJson('characters-slug-to-id.json', buildSlugMap(Object.values(charactersFile)));
+  // Donnée LISTE : effets agrégés par perso (buff/debuff + effectsBySource) pour
+  // les filtres à facettes de /characters. Fichier dédié (records persos lean) ;
+  // getCharacterListItems le fusionne. Clés = espace effectByKey + taxonomie.
+  await writeJson(
+    'characters-list.json',
+    buildCharactersList({
+      characters: charactersFile,
+      skills: skillsFile,
+      effects,
+      byTooltip,
+      byLabel,
+      byKey,
+      effectFilters,
+    }),
+  );
   await writeJson('monsters.json', monstersFile);
   await writeJson('transcend.json', transcendFile);
   await writeJson('skills.json', skillsFile);
