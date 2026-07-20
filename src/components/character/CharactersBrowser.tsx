@@ -471,7 +471,7 @@ export function CharactersBrowser({
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 px-2 md:px-4">
       <CharactersFiltersBar
         query={q}
         onQueryChange={setQ}

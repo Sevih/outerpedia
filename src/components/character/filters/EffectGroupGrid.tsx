@@ -37,7 +37,7 @@ export function EffectGroupGrid({
             >
               {group.title}
             </p>
-            <div className="grid grid-cols-6 justify-items-center gap-1 xl:grid-cols-5">
+            <div className="grid grid-cols-7 justify-items-center gap-1 xl:grid-cols-5">
               {group.effects.map((eff) => (
                 <EffectIconToggle
                   key={eff.key}

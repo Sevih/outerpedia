@@ -261,12 +261,16 @@ export default async function CharactersPage({ params }: { params: Promise<{ lan
   });
 
   return (
-    <div className="mx-auto max-w-7xl space-y-5 px-4 py-6">
+    // Gabarit V2 : pleine largeur (pas de max-w), en-tête centré, doubles paddings
+    // (outer px-4/md:px-6 + inner px-2/md:px-4 côté browser) — parité exacte.
+    <div className="px-4 py-6 md:px-6">
       <JsonLd data={itemList} />
-      <div>
-        <h1 className="text-content-strong text-2xl font-bold">{t('page.characters.title')}</h1>
-        <p className="text-content-muted text-sm">{t('page.characters.description')}</p>
-      </div>
+      <h1 className="text-content-strong mx-auto text-center text-3xl font-bold">
+        {t('page.characters.title')}
+      </h1>
+      <p className="text-content-muted mt-2 mb-4 text-center text-sm">
+        {t('page.characters.description')}
+      </p>
       <CharactersBrowser rows={rows} labels={buildLabels(rows, lang, t)} />
     </div>
   );
