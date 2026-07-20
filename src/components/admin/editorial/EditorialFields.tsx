@@ -238,6 +238,13 @@ export function EditorialFields({
               next[gi] = { ...g, ...p };
               onSynergies(next);
             };
+            // Ajoute un partenaire au groupe : résout nom→id et refuse les DOUBLONS.
+            const addPartner = (raw: string) => {
+              const cid = resolveHero(raw.trim());
+              if (!cid) return;
+              if (g.heroes.some((x) => resolveHero(x) === cid)) return;
+              setGroup({ heroes: [...g.heroes, cid] });
+            };
             return (
               <div key={g._key} className="card space-y-3 rounded-xl p-4">
                 {/* Partenaires en portraits + ajout */}
@@ -278,10 +285,14 @@ export function EditorialFields({
                     value={addHero[g._key] ?? ''}
                     onChange={(e) => {
                       const val = e.target.value;
+                      const prev = addHero[g._key] ?? '';
                       const cid = resolveHero(val);
-                      // Choix dans la liste (nom complet) → ajout DIRECT, sans Entrée.
-                      if (cid !== val && charNames[cid]) {
-                        setGroup({ heroes: [...g.heroes, cid] });
+                      // Ajout DIRECT seulement sur un « saut » de valeur (choix dans la
+                      // liste / autocomplétion) vers un nom complet. La frappe
+                      // char-par-char n'ajoute JAMAIS — sinon un nom plus long qu'un
+                      // nom existant (« Francesca ») serait impossible à taper.
+                      if (cid !== val && charNames[cid] && val.length - prev.length > 1) {
+                        addPartner(val);
                         setAddHero((m) => ({ ...m, [g._key]: '' }));
                       } else {
                         setAddHero((m) => ({ ...m, [g._key]: val }));
@@ -290,8 +301,7 @@ export function EditorialFields({
                     onKeyDown={(e) => {
                       if (e.key !== 'Enter') return;
                       e.preventDefault();
-                      const raw = (addHero[g._key] ?? '').trim();
-                      if (raw) setGroup({ heroes: [...g.heroes, resolveHero(raw)] });
+                      addPartner(addHero[g._key] ?? '');
                       setAddHero((m) => ({ ...m, [g._key]: '' }));
                     }}
                   />
