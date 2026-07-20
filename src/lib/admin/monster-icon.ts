@@ -29,9 +29,12 @@ export function monsterSlotSrc(type: string): string {
   return `/api/admin/sprite/${SLOT_BY_TYPE[type] ?? 'GD_Slot_Bg_01'}`;
 }
 
-const BOSS_TYPES = new Set(['boss', 'area_boss', 'season_boss']);
+/** Types qui portent le badge « BOSS » dans l'admin. PAS le même set que
+ * `FORMATION_BOSS_TYPES` (data/towers) : `season_boss` a le badge mais ne mène
+ * jamais une formation de tour. Sets volontairement distincts — ne pas fusionner. */
+const BOSS_BADGE_TYPES = new Set(['boss', 'area_boss', 'season_boss']);
 
 /** Badge « BOSS » du jeu, ou undefined si le type n'en est pas un. */
 export function monsterBossBadgeSrc(type: string): string | undefined {
-  return BOSS_TYPES.has(type) ? '/api/admin/sprite/CT_Slot_Boss' : undefined;
+  return BOSS_BADGE_TYPES.has(type) ? '/api/admin/sprite/CT_Slot_Boss' : undefined;
 }

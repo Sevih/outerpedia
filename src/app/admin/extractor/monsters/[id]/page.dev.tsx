@@ -23,7 +23,7 @@ import {
   committedMonsters,
   freshEncounters,
   freshMonsters,
-  rankOptionLabels,
+  rankOptionAdminLabels,
   tooltipName,
 } from '@/lib/admin/monster-store';
 import { extractedMonsterBundle } from '@/lib/admin/review-store';
@@ -309,7 +309,7 @@ export default async function ExtractorMonsterPage({
           stats={m.stats}
           scales={glossaries.statScales}
           spawns={statContexts}
-          optionLabels={rankOptionLabels(statContexts.flatMap((c) => c.options ?? []))}
+          optionLabels={rankOptionAdminLabels(statContexts.flatMap((c) => c.options ?? []))}
           quirkMods={enc.bossQuirkMods}
         />
       </section>

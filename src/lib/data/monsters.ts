@@ -103,6 +103,7 @@ export function getRankOptions(): Record<string, RankOption> {
  * Libellés localisés des passifs de palier d'un monstre, prêts pour le rendu
  * client (id d'option → « Increased Penetration +30% »). Une option inconnue du
  * glossaire est simplement OMISE : mieux vaut ne rien dire qu'inventer.
+ * (L'admin a son pendant `rankOptionAdminLabels` — EN seul, repli en cascade.)
  */
 export function rankOptionLabels(contexts: SpawnContext[], lang: Lang): Record<string, string> {
   const glossary = getRankOptions();

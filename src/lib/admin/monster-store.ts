@@ -155,8 +155,12 @@ export function siteMonsterIds(): Set<string> {
  * nom du tooltip du buff (« Increased Penetration », + marque irremovable) →
  * abréviation de la stat visée (« DMG UP ») → slug du type (« dmg reduce
  * final »). Valeur per-mille affichée en %.
+ *
+ * PAS le même contrat que `rankOptionLabels` du site (data/monsters.ts) : ici
+ * EN seul et repli en cascade (diagnostic admin exhaustif) ; là-bas localisé
+ * et option inconnue OMISE (rendu public). Nommés différemment exprès.
  */
-export function rankOptionLabels(ids: Iterable<string>): Record<string, string> {
+export function rankOptionAdminLabels(ids: Iterable<string>): Record<string, string> {
   const opts = buildEncounters().rankOptions;
   const out: Record<string, string> = {};
   for (const id of ids) {

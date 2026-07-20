@@ -88,8 +88,10 @@ export interface TowerCombat {
  * On déduplique par boss (les étages 5/10/15 rejouent les mêmes trois Demiurges,
  * les étages aléatoires piochent dans le même pool) et on range par groupe.
  */
-/** Types de monstre qui tiennent le rôle de BOSS d'une formation. */
-const BOSS_TYPES = new Set(['boss', 'area_boss']);
+/** Types de monstre qui tiennent le rôle de BOSS d'une formation.
+ * PAS le même set que `BOSS_BADGE_TYPES` (admin/monster-icon) : le badge admin
+ * inclut `season_boss`, qui ne mène jamais une formation de tour. */
+const FORMATION_BOSS_TYPES = new Set(['boss', 'area_boss']);
 
 export function getTowerCombats(tower: Tower): TowerCombat[] {
   const seen = new Map<string, TowerCombat>();
@@ -102,7 +104,7 @@ export function getTowerCombats(tower: Tower): TowerCombat[] {
     for (const formation of floor.encounters ?? []) {
       const boss = formation.find((u) => {
         const type = getMonster(u.id)?.type;
-        return type != null && BOSS_TYPES.has(type);
+        return type != null && FORMATION_BOSS_TYPES.has(type);
       });
       if (!boss || seen.has(boss.id)) continue;
       seen.set(boss.id, {
