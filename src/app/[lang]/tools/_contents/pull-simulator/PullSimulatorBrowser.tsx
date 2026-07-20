@@ -91,19 +91,22 @@ const BANNER_CATEGORY_WEIGHT: Record<BannerType, Record<GachaCategory, number>> 
   limited: { normal: 1, premium: 1, limited: 1 },
 };
 
-/** Couleurs de rareté des cartes de résultat (couleurs de donnée, parité V2). */
+/**
+ * Couleurs de rareté (schéma acté Sevih, appliqué PARTOUT — taux, cartes,
+ * stats, historique) : focus ROUGE, 3★ JAUNE, 2★ BLEU, 1★ BLANC.
+ */
 const RARITY_COLORS: Record<1 | 2 | 3, string> = {
-  1: 'border-line-subtle/60 bg-surface-sunken/40',
+  1: 'border-content-strong/25 bg-surface-sunken/40',
   2: 'border-blue-500/50 bg-blue-900/20',
-  3: 'border-violet-300/50 bg-violet-900/15',
+  3: 'border-yellow-400/50 bg-yellow-900/15',
 };
 const RARITY_GLOW: Record<1 | 2 | 3, string> = {
   1: '',
   2: 'shadow-[0_0_8px_rgba(59,130,246,0.25)]',
-  3: 'shadow-[0_0_10px_rgba(167,139,250,0.3)]',
+  3: 'shadow-[0_0_10px_rgba(250,204,21,0.3)]',
 };
 const FOCUS_STYLE =
-  'ring-2 ring-amber-400/60 border-amber-500/50 bg-amber-900/20 shadow-[0_0_12px_rgba(251,191,36,0.3)]';
+  'ring-2 ring-red-400/60 border-red-500/50 bg-red-900/20 shadow-[0_0_12px_rgba(248,113,113,0.3)]';
 
 /** Tirage au sort pondéré par catégorie. */
 function weightedPick(pool: GachaChar[], weights: Record<GachaCategory, number>): GachaChar {
@@ -264,17 +267,17 @@ export function PullSimulatorBrowser({
           {config.focus3Rate > 0 && (
             <span>
               3★ {labels.focus}:{' '}
-              <span className="font-semibold text-yellow-400">{config.focus3Rate}%</span>
+              <span className="font-semibold text-red-400">{config.focus3Rate}%</span>
             </span>
           )}
           <span>
             3★: <span className="font-semibold text-yellow-400">{config.offFocus3Rate}%</span>
           </span>
           <span>
-            2★: <span className="font-semibold text-purple-400">{config.rate2}%</span>
+            2★: <span className="font-semibold text-blue-400">{config.rate2}%</span>
           </span>
           <span>
-            1★: <span className="text-content font-semibold">{config.rate1}%</span>
+            1★: <span className="text-content-strong font-semibold">{config.rate1}%</span>
           </span>
         </div>
         <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
@@ -303,16 +306,14 @@ export function PullSimulatorBrowser({
                   key={char.id}
                   type="button"
                   onClick={() => toggleCharacter(char.id)}
-                  className="group flex cursor-pointer items-center gap-2 rounded-lg border border-amber-500/40 bg-amber-500/10 px-2 py-1.5 transition hover:border-red-500/40 hover:bg-red-500/10"
+                  className="group flex cursor-pointer items-center gap-2 rounded-lg border border-red-500/40 bg-red-500/10 px-2 py-1.5 transition hover:border-red-400 hover:bg-red-500/25"
                 >
                   {/* Largeur fixe : le span racine du portrait est en w-full. */}
                   <span className="w-7 shrink-0">
                     <CharacterPortrait id={char.id} name={char.name} size={28} showName={false} />
                   </span>
-                  <span className="text-xs font-medium text-amber-300 group-hover:text-red-300">
-                    {displayName(char)}
-                  </span>
-                  <span className="text-content-subtle text-[10px] group-hover:text-red-400">
+                  <span className="text-xs font-medium text-red-300">{displayName(char)}</span>
+                  <span className="text-content-subtle text-[10px] group-hover:text-red-200">
                     ✕
                   </span>
                 </button>
@@ -332,7 +333,7 @@ export function PullSimulatorBrowser({
                 onFocus={() => setFocusOpen(true)}
                 onBlur={() => setFocusOpen(false)}
                 placeholder={labels.searchPlaceholder}
-                className="border-line-subtle bg-surface-sunken/70 text-content placeholder:text-content-subtle w-full rounded-lg border px-3 py-2 text-sm focus:border-amber-500/40 focus:outline-none"
+                className="border-line-subtle bg-surface-sunken/70 text-content placeholder:text-content-subtle w-full rounded-lg border px-3 py-2 text-sm focus:border-red-500/40 focus:outline-none"
               />
               {focusOpen && (
                 <div className="border-line-subtle bg-surface-overlay/95 absolute z-20 mt-1 max-h-64 w-full overflow-y-auto rounded-lg border shadow-xl backdrop-blur-sm">
@@ -445,12 +446,12 @@ export function PullSimulatorBrowser({
             {lastResults.map((pull, i) => {
               const char = pull.charId ? charById.get(pull.charId) : undefined;
               const textColor = pull.isFocus
-                ? 'text-amber-300'
+                ? 'text-red-300'
                 : pull.rarity === 3
-                  ? 'text-violet-200'
+                  ? 'text-yellow-300'
                   : pull.rarity === 2
                     ? 'text-blue-300/80'
-                    : 'text-content-subtle';
+                    : 'text-content-strong';
               return (
                 <div
                   key={i}
@@ -490,7 +491,7 @@ export function PullSimulatorBrowser({
                     )}
                   </div>
                   {pull.isFocus && (
-                    <span className="text-[10px] font-bold text-amber-400">{labels.focus}</span>
+                    <span className="text-[10px] font-bold text-red-400">{labels.focus}</span>
                   )}
                 </div>
               );
@@ -515,13 +516,13 @@ export function PullSimulatorBrowser({
             <StatCard
               label={labels.first3Star}
               value={session.pullsToFirst3Star ?? labels.never}
-              highlight={session.pullsToFirst3Star !== null}
+              highlight={session.pullsToFirst3Star !== null ? 'text-yellow-300' : undefined}
             />
             {maxFocus > 0 && (
               <StatCard
                 label={labels.firstFocus}
                 value={session.pullsToFocus ?? labels.never}
-                highlight={session.pullsToFocus !== null}
+                highlight={session.pullsToFocus !== null ? 'text-red-300' : undefined}
               />
             )}
           </div>
@@ -531,7 +532,7 @@ export function PullSimulatorBrowser({
               label="1★"
               count={session.counts.star1}
               total={session.totalPulls}
-              color="bg-content-subtle/60"
+              color="bg-content-strong/80"
             />
             <RarityBar
               label="2★"
@@ -543,14 +544,14 @@ export function PullSimulatorBrowser({
               label="3★"
               count={session.counts.star3}
               total={session.totalPulls}
-              color="bg-violet-400"
+              color="bg-yellow-400"
             />
             {maxFocus > 0 && (
               <RarityBar
                 label={`3★ ${labels.focus}`}
                 count={session.counts.star3Focus}
                 total={session.totalPulls}
-                color="bg-amber-400"
+                color="bg-red-400"
               />
             )}
           </div>
@@ -576,11 +577,11 @@ export function PullSimulatorBrowser({
                         className={`inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium ${
                           pull.rarity === 3
                             ? pull.isFocus
-                              ? 'bg-amber-500/20 text-amber-300 ring-1 ring-amber-400/40'
-                              : 'bg-violet-500/15 text-violet-300'
+                              ? 'bg-red-500/20 text-red-300 ring-1 ring-red-400/40'
+                              : 'bg-yellow-500/15 text-yellow-300'
                             : pull.rarity === 2
                               ? 'bg-blue-500/15 text-blue-300'
-                              : 'bg-surface-overlay/40 text-content-subtle'
+                              : 'bg-surface-overlay/40 text-content-strong'
                         }`}
                       >
                         {pull.rarity}★{pull.isFocus ? ' ✦' : ''}
@@ -604,16 +605,13 @@ function StatCard({
 }: {
   label: string;
   value: string | number;
-  highlight?: boolean;
+  /** Classe de couleur du chiffre quand la stat est atteinte (jaune 3★, rouge focus). */
+  highlight?: string;
 }) {
   return (
     <div className="border-line-subtle bg-surface-raised/30 rounded-lg border p-3 text-center">
       <p className="text-content-subtle text-xs">{label}</p>
-      <p
-        className={`mt-1 text-lg font-bold ${highlight ? 'text-amber-300' : 'text-content-strong'}`}
-      >
-        {value}
-      </p>
+      <p className={`mt-1 text-lg font-bold ${highlight ?? 'text-content-strong'}`}>{value}</p>
     </div>
   );
 }
