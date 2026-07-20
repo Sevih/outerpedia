@@ -2,7 +2,7 @@ import type { LocalizedText } from '@contracts';
 import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
-import type { GuideContentProps } from '@/lib/data/guides';
+import { readGuideFile, type GuideContentProps } from '@/lib/data/guides';
 import {
   bossWaveMonsters,
   encounterLabel,
@@ -41,7 +41,9 @@ export interface StoryGuideContent {
  * version, avec deux API concurrentes selon le guide. Ici, les comparses sont
  * simplement les autres monstres de la VAGUE DU BOSS (`bossWaveMonsters`) : ils
  * viennent de la donnée, ils suivent le mode tout seuls, et un guide n'est plus
- * que `meta.json` + `content.json`. Les deux stages que cette règle ne sert pas
+ * que `meta.json` + `content.json` — lu ICI (`readGuideFile`, comme TowerGuide),
+ * l'`index.tsx` du guide n'étant qu'un re-export d'une ligne, identique dans
+ * toute la famille. Les deux stages que cette règle ne sert pas
  * (Alpha combat une vague avant Leo ; Maxwell traîne un clone et un orbe muets)
  * désignent leurs monstres dans le meta — une DONNÉE, pas un cas dans le code.
  *
@@ -49,20 +51,22 @@ export interface StoryGuideContent {
  * `encountersOfIds`). Le mode le plus dur ouvre par défaut — c'est pour lui que
  * les conseils sont écrits, et le bandeau le dit.
  *
- * STRICT : un donjon, un tag ou un nom de perso inconnu JETTE (build SSG cassé),
- * comme partout ailleurs dans les guides.
+ * STRICT : un `content.json` absent, un donjon, un tag ou un nom de perso
+ * inconnu JETTE (build SSG cassé), comme partout ailleurs dans les guides.
  */
-export async function StoryBossGuide({
-  lang,
-  guide,
-  content,
-}: GuideContentProps & { content: StoryGuideContent }) {
+export async function StoryBossGuide({ lang, guide }: GuideContentProps) {
   const t = await getT(lang);
   const ctx: ParseCtx = { lang, t, strict: true };
   const at = `${guide.category}/${guide.slug}`;
 
   if (!guide.dungeons?.length) {
     throw new Error(`${at} : « dungeons » manquant dans meta.json (guide de stage d'histoire).`);
+  }
+  const content = readGuideFile<StoryGuideContent>(guide, 'content.json');
+  if (!content) {
+    throw new Error(
+      `${at} : content.json manquant (guide de stage d'histoire — cf. StoryBossGuide).`,
+    );
   }
 
   // Les conseils sont écrits pour le mode le plus dur — le dire, comme partout :

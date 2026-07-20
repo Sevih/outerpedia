@@ -2,7 +2,7 @@ import type { LocalizedText } from '@contracts';
 import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
-import type { GuideContentProps } from '@/lib/data/guides';
+import { readGuideFile, type GuideContentProps } from '@/lib/data/guides';
 import { resolveSectionTitle, type SectionTitle } from '@/lib/data/guide-sections';
 import { BossPanel } from '@/components/guides/BossPanel';
 import { TacticalTips } from '@/components/guides/TacticalTips';
@@ -33,22 +33,25 @@ export interface BossGuideContent {
  * section propre à l'un d'eux, seul le NOMBRE de blocs variait. Ils existaient
  * pourtant en 13 fichiers TSX quasi identiques — d'où les dérives (titres
  * d'équipe divergents, id du boss écrit trois fois par fichier). Ici le rendu
- * vit une fois, et un guide n'est plus qu'un `content.json`.
+ * vit une fois, il lit LUI-MÊME le `content.json` du guide (`readGuideFile`,
+ * comme TowerGuide) — et l'`index.tsx` d'un guide n'est qu'un re-export d'une
+ * ligne, identique dans toute la famille.
  *
  * Le même composant sert aux autres modes à boss (joint challenge, world boss,
  * guild raid) : leur anatomie est la même.
  *
- * STRICT : un tag ou un nom de perso inconnu JETTE (build SSG cassé), comme
- * partout ailleurs dans les guides.
+ * STRICT : un `content.json` absent, un tag ou un nom de perso inconnu JETTE
+ * (build SSG cassé), comme partout ailleurs dans les guides.
  */
-export async function BossGuide({
-  lang,
-  guide,
-  content,
-}: GuideContentProps & { content: BossGuideContent }) {
+export async function BossGuide({ lang, guide }: GuideContentProps) {
   const t = await getT(lang);
   const ctx: ParseCtx = { lang, t, strict: true };
   const at = `${guide.category}/${guide.slug}`;
+
+  const content = readGuideFile<BossGuideContent>(guide, 'content.json');
+  if (!content) {
+    throw new Error(`${at} : content.json manquant (guide de boss — cf. BossGuide).`);
+  }
 
   return (
     <>
