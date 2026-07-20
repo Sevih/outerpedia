@@ -15,15 +15,16 @@
  * clients) depuis une action casse le manifeste RSC de Turbopack. Des
  * descripteurs plats traversent l'action sans souci ; le client fait le rendu.
  *
- * Garde `IS_DEV` : outil local. La future version publique (comptes) remplacera
- * ce garde par une auth — voir la note de contribution publique.
+ * PAS de garde `IS_DEV` : aperçu READ-ONLY de données de jeu PUBLIQUES (aucun
+ * secret, aucune écriture) — les outils publics de contribution (`/contribute/*`)
+ * en ont besoin en prod. L'écriture et `autoTranslate` (clés API) restent, elles,
+ * dev-only.
  */
 import { resolveInlineSegments, checkText, type InlineSegment, type TagCheck } from '@/lib/parse-text'; // prettier-ignore
 import { getGuide } from '@/lib/data/guides';
 import { GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
 import { getT } from '@/i18n';
 import { normalizeLang } from '@/lib/i18n/config';
-import { IS_DEV } from '@/lib/admin/guard';
 
 /** Existence d'une cible interne `/guides/…` (même règle que la gate CI). */
 function guideHrefExists(href: string): boolean {
@@ -44,7 +45,6 @@ export async function renderInlinePreview(
   text: string,
   lang: string,
 ): Promise<{ segments: InlineSegment[]; checks: TagCheck[] }> {
-  if (!IS_DEV) return { segments: [], checks: [] };
   const l = normalizeLang(lang);
   const t = await getT(l);
   const segments = text.trim() ? resolveInlineSegments(text, { lang: l, t }) : [];
@@ -54,7 +54,6 @@ export async function renderInlinePreview(
 
 /** Résout un LOT de textes en segments (aperçu des lignes d'un éditeur). */
 export async function renderInlineBatch(texts: string[], lang: string): Promise<InlineSegment[][]> {
-  if (!IS_DEV) return texts.map(() => []);
   const l = normalizeLang(lang);
   const t = await getT(l);
   return texts.map((text) => (text.trim() ? resolveInlineSegments(text, { lang: l, t }) : []));

@@ -276,7 +276,17 @@ export function EditorialFields({
                     list="hero-names"
                     placeholder="+ partner…"
                     value={addHero[g._key] ?? ''}
-                    onChange={(e) => setAddHero((m) => ({ ...m, [g._key]: e.target.value }))}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      const cid = resolveHero(val);
+                      // Choix dans la liste (nom complet) → ajout DIRECT, sans Entrée.
+                      if (cid !== val && charNames[cid]) {
+                        setGroup({ heroes: [...g.heroes, cid] });
+                        setAddHero((m) => ({ ...m, [g._key]: '' }));
+                      } else {
+                        setAddHero((m) => ({ ...m, [g._key]: val }));
+                      }
+                    }}
                     onKeyDown={(e) => {
                       if (e.key !== 'Enter') return;
                       e.preventDefault();

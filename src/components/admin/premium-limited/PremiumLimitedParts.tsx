@@ -203,9 +203,19 @@ function RecoTargetStars({ value, onChange }: { value: string; onChange: (v: str
   const set = (p: Partial<Reco>) => onChange(formatReco({ ...r, ...p }));
   const clickStar = (s: number) => {
     if (r.any || r.min === undefined) return set({ any: false, min: s, max: s });
-    if (s < r.min) return set({ min: s });
-    if (r.max !== undefined && s > r.max) return set({ max: s });
-    return set({ min: s, max: s }); // clic à l'intérieur → replie sur une seule étoile
+    const min = r.min;
+    const max = r.max ?? r.min;
+    if (min === max) {
+      if (s === min) return set({ min: undefined, max: undefined }); // clic sur l'unique → désélection
+      return set({ min: Math.min(min, s), max: Math.max(max, s) }); // étend en plage
+    }
+    // Plage : clic sur une BORNE la retire (4-5 → clic 4 = 5 seul), clic dehors
+    // étend, clic strictement dedans replie sur cette étoile.
+    if (s < min) return set({ min: s });
+    if (s > max) return set({ max: s });
+    if (s === min) return set({ min: min + 1 });
+    if (s === max) return set({ max: max - 1 });
+    return set({ min: s, max: s });
   };
   return (
     <div className="flex flex-wrap items-center gap-2">

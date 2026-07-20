@@ -4,6 +4,21 @@
 > ne garde que le « à faire »). Un item traité migre ici avec sa date ; le
 > détail vit dans git. Ne pas confondre avec le `CHANGELOG.md` racine (public).
 
+## 2026-07-20
+
+- **Retours Shiraen/Jaego sur les outils publics** (déployés sur le VPS) — 3 fixes.
+  • **Synergies** : sélectionner un héros dans la liste l'ajoute DIRECTEMENT au
+  groupe (avant : il fallait Entrée après avoir choisi dans le datalist). Entrée
+  reste dispo pour saisie manuelle / tag `{…}`.
+  • **Reco stars (premium)** : interaction _toggle de borne_ — sur une plage
+  4-5, clic 4 = « 5 seul », clic 5 = « 4 seul » (un seul clic, fini le
+  double-clic) ; clic dehors étend, clic sur l'étoile unique désélectionne.
+  • **Aperçu inline PUBLIC** : garde `IS_DEV` retirée des deux actions read-only
+  `renderInlinePreview`/`renderInlineBatch` (rendu de données de jeu publiques,
+  aucun secret/écriture) → les `{tags}` s'affichent en prod sur `/contribute/*`
+  (avant : blanc hors dev). `autoTranslate` + écriture restent dev-only. tsc +
+  eslint OK.
+
 ## 2026-07-19
 
 - **Contribution pros/cons & synergies (Jaego) — deux outils publics + import.**
