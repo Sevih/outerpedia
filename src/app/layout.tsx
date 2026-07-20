@@ -41,6 +41,10 @@ export const metadata: Metadata = {
    * copié tel quel dans l'image Docker. Toute icône ajoutée doit vivre là.
    */
   icons: { apple: '/icons/apple-touch-icon.png' },
+  // iOS : Safari ignore le manifest pour le mode standalone sur les anciens iOS
+  // (les récents le lisent) — ces metas restent le filet. L'icône d'accueil iOS
+  // vient de l'apple-touch-icon ci-dessus, jamais du manifest.
+  appleWebApp: { capable: true, statusBarStyle: 'black-translucent', title: 'Outerpedia' },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
