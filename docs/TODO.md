@@ -26,57 +26,6 @@
       elle donne au max 4 segments jaunes sur un substat (cf. guide gear, onglet
       Bases) ; à documenter côté guide des bannières.
 
-## 💡 Feature — Outils publics de contribution (Jaego — RESTE)
-
-> **LIVRÉ le 19/07** (cf. DONE) : socle réutilisable (enveloppe de contribution
-> `kind`/`mode`/`payload` + tool d'import admin GÉNÉRIQUE + widget) → brancher un
-> contributeur = ajouter un `kind` + son handler. Outils publics déjà branchés :
-> **Shiraen** premium/limited (`/contribute/premium-reviews`) ; **Jaego**
-> **pros/cons** (`/contribute/pros-cons`) et **synergies** (`/contribute/synergies`).
-> RESTE ci-dessous les deux derniers générateurs **Jaego** (gear reco +
-> recommended team) : à faire une fois leurs formats curés figés (risque de doublon).
-
-Générateurs publics de « syntaxe » pour que les contributeurs composent sans
-suivre un guide de syntaxe à la main, exportent un **JSON au format curé** (via
-l'enveloppe de contribution), et l'envoient sur Discord. Sevih importe/relit
-chez lui.
-
-**Décisions actées (18/07) — sciemment minimal :**
-
-- **Pas d'auth / pas de BDD / pas d'OAuth / pas de file d'attente.** Sevih
-  relit de toute façon → l'infra d'auth ne servirait à rien. Choix Sevih :
-  outils publics → export JSON → Discord.
-- **Générateur = page prod publique mais NON référencée** (hors `NAV_ITEMS`/
-  sitemap, `noindex`). Aucun secret, aucun backend d'écriture → surface
-  d'attaque nulle.
-- **Import/review reste `.dev`** (gardé `IS_DEV`, comme les éditeurs actuels) :
-  ingère le JSON reçu, montre le **diff + les langues manquantes** (l'auteur
-  n'écrit souvent que l'EN — EN requis, jp/kr/zh optionnels), applique via les
-  stores curés → commit local. C'est là que vit le « check des traductions ».
-
-**Réutilise l'existant (ne PAS réécrire l'UI de saisie) :**
-
-- `src/components/admin/InlineTextField.tsx` (composeur : barre d'insertion
-  14 tokens, autocomplétion des refs, aperçu, validation live),
-  `InlinePreview.tsx` (aperçu client pur), `src/lib/admin/inline-refs.ts`
-  (`buildInlineRefs()`). Les rendre réutilisables hors `.dev` (aucun secret,
-  data de jeu publique) plutôt que dupliquer.
-- Écriture : stores curés canoniques (`character-skill-curated-store`,
-  `equipment-curated-store`, sérialiseur `datagen/lib/json`) — aucune nouvelle
-  logique d'écriture.
-
-**Piège technique (Next 16, déjà rencontré) :** `parseText`/`checkText`
-(`src/lib/parse-text.tsx`) sont server-only (`node:fs`), ET renvoyer du JSX de
-composants clients depuis une server action casse le manifeste RSC Turbopack.
-Solution retenue (18/07, cf. DONE) : `resolveInlineSegments` projette le texte en
-DESCRIPTEURS purs côté serveur (server action `inline-preview-actions`), rendus
-client par `InlinePreview` avec les vrais composants inline. Pour la version
-publique : même approche (server action publique, sans garde `IS_DEV`).
-
-**Formats JSON à figer au démarrage** (ne pas deviner) : pros/cons, synergies,
-gear reco = confirmés côté admin ; **recommended team** et **premium/limited**
-= à lire dans les `@contracts` (`CharacterCurated`) + datagen avant de coder.
-
 ## 📄 Pages manquantes (inventaire layout du 2026-07-17)
 
 > Cibles du header/footer posés le 17/07 (contrat `src/lib/nav.ts`) — 404
