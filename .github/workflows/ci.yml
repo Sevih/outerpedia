@@ -24,7 +24,7 @@ jobs:
       # pendant que le CI et l'image de prod restaient en 10).
       - uses: pnpm/action-setup@v6
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           # .nvmrc = seule source de vérité de la version Node (comme
           # packageManager pour pnpm juste au-dessus).
