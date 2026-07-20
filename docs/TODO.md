@@ -46,6 +46,20 @@
       damage-calculator, pull-simulator, progress-tracker, team-planner,
       tier-list-maker, patch-history, coupon-codes, event — namespaces
       `tools.*`/`progress.*`.
+- [ ] **`/characters` (liste) — CHANTIER** : le browser V3 actuel est minimal
+      (recherche + 3 selects mono + étoiles). Objectif = **parité V2** (décision
+      Sevih : tous les filtres + layout fidèle desktop/mobile). Layout V2 : barre
+      (search + pills élément/classe/rareté) + **sidebar persistante xl** / **drawer
+      bottom-sheet mobile** portant un panneau avancé à 4 onglets (Combat
+      chaîne/role/gift · Effects buffs/debuffs+source+unique+logique · Bonus team
+      bonus · Tags), **bandeau de chips actifs** removables, **URL partageable**
+      (état bitfield LZString `?z=`). Faisable now (data V3) : élément/classe/
+      rareté/role/chaîne/gift/tags/recherche multi-langues + toute la coquille.
+      BLOQUÉ sur data worker (cf. spec transmise) : buffs/debuffs par perso +
+      effectsBySource, teamBonuses, `category`/`group` sur effets, métadonnée tags.
+- [ ] **`/characters/[slug]` — RELIQUAT** : la fiche détail est portée, il ne
+      MANQUE que les **Discord reviews** (section review communautaire de la V2).
+      Le reste (skills/burst/chain/gear/stats/transcend…) est là.
 - [ ] **`/changelog`** — clés `changelog.*` ; lié au resync CHANGELOG.md
       (item 📚). Débloque aussi la section **Recent Updates** de la Home (différée :
       elle lit `getChangelog`/`@/lib/changelog`, non porté — à rebrancher quand le
