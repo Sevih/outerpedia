@@ -6,7 +6,12 @@
  */
 const BASE = process.env.NEXT_PUBLIC_IMG_BASE ?? '';
 
-/** URL d'affichage (webp) d'une BD, par langue d'origine et nom de fichier. */
+/** URL d'affichage (webp pleine taille) d'une BD — lightbox. */
 export function comicSrc(lang: string, stem: string): string {
   return `${BASE}/images/4-comics/${lang}/${encodeURIComponent(stem)}.webp`;
+}
+
+/** URL de la VIGNETTE (360 px, `collect-comics`) — grille de la galerie. */
+export function comicThumbSrc(lang: string, stem: string): string {
+  return `${BASE}/images/4-comics/${lang}/${encodeURIComponent(stem)}.thumb.webp`;
 }

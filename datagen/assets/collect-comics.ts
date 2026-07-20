@@ -4,7 +4,11 @@
  * que la collecte images/audio/wallpapers : source éditoriale → staging → push.
  *
  * Source, jamais la V2 : `.editorial/comics/<LANG>/` (originaux png/jpg faits
- * main, ramenés en V3). On convertit en webp (recette projet `quality: 90`).
+ * main, ramenés en V3). On convertit en webp (recette projet `quality: 90`),
+ * PLUS une vignette `<stem>.thumb.webp` (360 px, q75) pour la grille de la
+ * galerie : les planches pleine taille pèsent ~450 Ko pièce et la page en
+ * rendait ~50 → 22 Mo (audit Sitebulb 20/07). La lightbox garde la pleine
+ * taille.
  *
  * MANIFESTE RUNTIME (décision Sevih) : on écrit AUSSI `images/4-comics/comics.json`
  * dans le staging → poussé sur R2 à côté des images. La page le lit à la requête
@@ -28,7 +32,10 @@ const DEST = resolve(STAGING_DIR, 'images/4-comics');
 const LANGS = ['EN', 'JP', 'KR'] as const;
 const SRC_RE = /\.(png|jpe?g)$/i;
 
-/** Convertit les originaux d'un dossier de langue en webp (idempotent par mtime). */
+/** Largeur des vignettes de grille (cellules ~250 px, marge rétina raisonnable). */
+const THUMB_WIDTH = 360;
+
+/** Convertit les originaux d'un dossier de langue en webp + vignette (idempotent par mtime). */
 async function collectLang(lang: string): Promise<{ made: number; skipped: number }> {
   const srcDir = join(EDITORIAL, lang);
   if (!existsSync(srcDir)) return { made: 0, skipped: 0 };
@@ -39,13 +46,25 @@ async function collectLang(lang: string): Promise<{ made: number; skipped: numbe
   for (const f of readdirSync(srcDir)) {
     if (!SRC_RE.test(f)) continue;
     const from = join(srcDir, f);
-    const to = join(destDir, f.replace(SRC_RE, '.webp'));
-    if (existsSync(to) && statSync(to).mtimeMs >= statSync(from).mtimeMs) {
-      skipped++;
-      continue;
+    const targets: Array<[string, () => sharp.Sharp]> = [
+      [join(destDir, f.replace(SRC_RE, '.webp')), () => sharp(from).webp({ quality: 90 })],
+      [
+        join(destDir, f.replace(SRC_RE, '.thumb.webp')),
+        // `withoutEnlargement` : un original plus étroit que 360 px reste tel quel.
+        () =>
+          sharp(from)
+            .resize({ width: THUMB_WIDTH, withoutEnlargement: true })
+            .webp({ quality: 75 }),
+      ],
+    ];
+    for (const [to, make] of targets) {
+      if (existsSync(to) && statSync(to).mtimeMs >= statSync(from).mtimeMs) {
+        skipped++;
+        continue;
+      }
+      await make().toFile(to);
+      made++;
     }
-    await sharp(from).webp({ quality: 90 }).toFile(to);
-    made++;
   }
   return { made, skipped };
 }

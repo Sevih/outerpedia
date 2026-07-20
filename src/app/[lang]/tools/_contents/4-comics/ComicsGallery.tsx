@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo, useCallback, useEffect } from 'react';
-import { comicSrc } from '@/lib/comics';
+import { comicSrc, comicThumbSrc } from '@/lib/comics';
 
 /** Catalogue des BD par langue d'origine (schéma de `comics.json`). */
 export type ComicsData = Record<string, string[]>;
@@ -35,7 +35,12 @@ export function ComicsGallery({
   const [lightbox, setLightbox] = useState<number | null>(null);
 
   const items = useMemo(
-    () => (data[selected] ?? []).map((stem) => ({ stem, src: comicSrc(selected, stem) })),
+    () =>
+      (data[selected] ?? []).map((stem) => ({
+        stem,
+        src: comicSrc(selected, stem),
+        thumb: comicThumbSrc(selected, stem),
+      })),
     [data, selected],
   );
 
@@ -110,8 +115,18 @@ export function ComicsGallery({
             onClick={() => setLightbox(i)}
             className="group border-line-subtle bg-surface-raised relative aspect-3/4 overflow-hidden rounded-lg border transition-all hover:scale-[1.02] hover:border-sky-500"
           >
+            {/* Vignette 360 px ; repli pleine taille tant que les thumbs ne sont
+                pas encore sur R2 (pool collecté avant leur introduction). */}
             {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-            <img src={c.src} alt={c.stem} loading="lazy" className="size-full object-contain" />
+            <img
+              src={c.thumb}
+              alt={c.stem}
+              loading="lazy"
+              onError={(e) => {
+                if (e.currentTarget.src !== c.src) e.currentTarget.src = c.src;
+              }}
+              className="size-full object-contain"
+            />
           </button>
         ))}
       </div>
