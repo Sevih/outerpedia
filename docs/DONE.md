@@ -6,6 +6,23 @@
 
 ## 2026-07-20
 
+- **Outil `/patch-history` porté + archive Stove migrée.** Le pipeline major9
+  existait déjà (getNews → `posts.json`, images staged/R2) ; ce chantier a
+  ramené le RESTE. ① Migration ONE-SHOT `scripts/migrate-legacy-news.ts` :
+  `legacy-posts.json` (806 posts EN, archive figée) copié verbatim + les 2 749
+  images RÉFÉRENCÉES par le contenu (déjà toutes .webp) copiées de la V2 vers
+  le staging → 211 Mo poussés sur R2. Collecte DATA-DRIVEN : le dossier V2 en
+  contenait 6 684 (originaux jpg/png, orphelins) — non embarqués. ② Outil :
+  wrapper serveur (posts major9 de la langue courante ; en/jp/kr seulement →
+  zh ET fr replient sur en, bandeau ; la V2 ne gérait que zh et le libellé fr
+  du bandeau parlait du chinois — corrigé) + client (ères, filtres par type,
+  recherche titre+contenu, pagination fenêtrée, posts dépliables, `?era&type`
+  - `#slug` auto-déplié). L'archive legacy (2,8 Mo) n'est PAS dans le bundle :
+    chunk chargé au premier passage sur l'ère Smilegate. ③ `prefixAssetSrcs`
+    (images.ts) préfixe la base R2 sur les `src` relatifs stockés — solde
+    l'item « Patch-notes : préfixer NEXT_PUBLIC_IMG_BASE » de l'ex todo-data.
+    ④ CSS `.patch-note-content` porté sur les tokens V3.
+
 - **Onglets « game » et filtres UNIFORMISÉS sur tout le site.** Le visuel
   d'onglet glow (`.tab-game-active`) devient LE style d'onglet : classes
   partagées dans `ui/game-tab` (SegmentedTabs, ui/Tabs `variant="game"`,

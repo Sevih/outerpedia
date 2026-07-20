@@ -157,6 +157,15 @@ export const img = {
 };
 
 /**
+ * Préfixe la base d'assets sur les `src="/images/…"` d'un HTML STOCKÉ (contenu
+ * des patch-notes scrapés — les chemins sont relatifs dans la donnée, cf.
+ * getNews). En dev BASE est vide et la route dev sert `/images/*` telle quelle.
+ */
+export function prefixAssetSrcs(html: string): string {
+  return BASE ? html.replaceAll('src="/images/', `src="${BASE}/images/`) : html;
+}
+
+/**
  * Fonds décoratifs référencés par `globals.css` (page + traits de titres). En
  * CSS on ne peut pas concaténer `var()` dans un `url()`, donc on injecte la
  * valeur `url(...)` COMPLÈTE (base R2 en prod, relatif en dev) comme variables

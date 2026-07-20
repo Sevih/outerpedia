@@ -26,9 +26,9 @@
 > ASSUMÉES le temps du portage. Chaque page arrive avec ses clés de locale
 > DÉJÀ pré-seedées ×5 (cf. item « pré-seed » de la section Docs).
 
-- [ ] **`/tools` — RESTENT 7 sous-outils** (`/<slug>`, 404 tant que non portés) :
+- [ ] **`/tools` — RESTENT 6 sous-outils** (`/<slug>`, 404 tant que non portés) :
       damage-calculator, pull-simulator, progress-tracker,
-      team-planner, tier-list-maker, patch-history, event — namespaces
+      team-planner, tier-list-maker, event — namespaces
       `tools.*`/`progress.*`.
       (Historique des portés : 19-20/07, cf. DONE — socle `TierListTool`,
       routeur à plat, coupon-codes = renvoi `/coupons`,
@@ -128,8 +128,6 @@ Règle permanente : chaque `meta.bossId` d'un guide porté doit exister dans
 `monsters.json` (le rendu JETTE sinon) — extraction à la demande
 (`pnpm datagen:extract-entity`).
 
-- [ ] Patch-notes : quand la PAGE sera portée, préfixer `NEXT_PUBLIC_IMG_BASE`
-      sur les `src` relatifs stockés (`/images/patch-notes/…webp`).
 - [ ] **Perso `lambda` (2000118) en attente dans l'extraction** (constat 20/07 :
       `datagen:promote` propose `characters.json +1` et `characters-slug-to-id
 +1`) — promotion = décision de contenu (nouveau perso du jeu ?).

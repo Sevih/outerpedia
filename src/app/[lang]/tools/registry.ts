@@ -21,6 +21,7 @@ export const TOOL_COMPONENTS: Record<
   'most-used-units': () => import('./_contents/most-used-units'),
   'gear-usage-statistics': () => import('./_contents/gear-usage-statistics'),
   'gear-usage-finder': () => import('./_contents/gear-usage-finder'),
+  'patch-history': () => import('./_contents/patch-history'),
 };
 
 /** Slugs des outils portés (routeur + `generateStaticParams`). */

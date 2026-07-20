@@ -243,7 +243,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.patch-history.type.world-introduction': 'Présentation du monde',
   'tools.patch-history.type.developer-notes': 'Note des dev.',
   'tools.patch-history.zh_fallback':
-    "Ce contenu est affiché en anglais car il n'est pas disponible en chinois.",
+    "Ce contenu est affiché en anglais car il n'est pas disponible en français.",
   'tools.patch-history.legacy_en_only':
     "Le contenu de l'ère Stove est disponible uniquement en anglais.",
   'tools.coupon-codes': 'Codes promo',
