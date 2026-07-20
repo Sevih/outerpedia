@@ -41,18 +41,16 @@
 
 ## 🧪 Tests à écrire
 
-- [ ] Les générateurs `datagen/generators/*` + `build.ts`/`refresh.ts`
-      (gros chantier — prioriser encounters/singularity/content-schedule).
-      CONTRAINTE actée : la suite tourne SANS `.gamedata` (CI) → extraire les
-      cœurs PURS et tester en synthétique (cf. `resolveKeyWinners`), ou ancrer
-      des invariants sur `data/generated/` committé (cf. `towers.test.ts`).
+- [ ] Les générateurs `datagen/generators/*` + `build.ts`/`refresh.ts` —
+      le TRIO PRIORITAIRE (encounters/singularity/content-schedule) est
+      COUVERT le 20/07 (28 tests, cf. DONE : cœurs purs en synthétique +
+      invariants sur data/generated). RESTENT les autres générateurs
+      (equipment, skills, towers-datagen, monad, goods, recruit, sources…) + build.ts/refresh.ts, même méthode. CONTRAINTE actée : la suite
+      tourne SANS `.gamedata` (CI).
 - [ ] `src/lib/admin/gamedata-store.ts` (dev-only, priorité moindre).
 
 ## 🧹 Dette code
 
-- [ ] Helpers seo.ts inutilisés (`buildVideoObjectJsonLd`, `buildFaqJsonLd`) —
-      la V2 ne les employait QUE dans `MultiVideoEmbed` (vidéo) : à brancher
-      quand un consommateur réel arrive, ou à retirer (code mort).
 - [ ] (chantier guides éditoriaux) `BannerTabs` (?banner=) et le `?tab=` de
       free-heroes-start-banner → SegmentedTabs/#hash quand ces guides
       atterrissent. **Règle actée : état interne d'un guide = hash

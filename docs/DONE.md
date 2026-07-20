@@ -6,6 +6,28 @@
 
 ## 2026-07-20
 
+- **Tests générateurs : le TRIO PRIORITAIRE couvert (2270b92, 28 tests).**
+  encounters/singularity/content-schedule, selon les deux registres actés
+  (CI sans `.gamedata`) : cœurs PURS en synthétique (traversée spawn — CSV,
+  slots ID0..3, dédup/accumulation — et `isoUtc` exporté pour ça) +
+  INVARIANTS sur data/generated committé (références croisées d'encounters
+  monstres/rewards/geas/rankOptions/spawns aller-retour/group mono-contenu,
+  vagues tout-ou-rien conformes au contrat de sérialisation ; singularity
+  rotation ordonnée + ancre curée + boss complets ; content-schedule tri,
+  bornes ISO ordonnées, donjons des saisons SERVIES — jc tous, gr saison
+  courante —, monstres de toutes les saisons, boss canonique courant).
+  Reste dans l'item : les autres générateurs + build/refresh, même méthode.
+- **Helpers seo.ts BRANCHÉS (c9cbb78) — VideoObject + FAQPage (item Dette
+  soldé).** Pipeline video-meta porté de la V2 en mieux : collecte
+  DATA-DRIVEN (marche des JSON de guides + curé persos) au lieu du scan
+  regex des .tsx, fetch incrémental YouTube API (`pnpm datagen:video-meta`,
+  YOUTUBE_API_KEY optionnel), purge des fantômes ; seed = cache V2 (169),
+  complété à 221. `VideoJsonLd` (serveur, pendant SEO de MultiVideoEmbed
+  client) branché dans les 5 moteurs de guides + la fiche perso — sans
+  meta, rien d'émis (jamais de schéma invalide). `buildFaqJsonLd` branché
+  sur beginner-faq : FAQ_LD déclaratif (14 Q/R en phase avec les QACard) +
+  `plainInlineText` (parse-text) qui aplatit les tags pour le JSON-LD.
+  Vérifié en dev : FAQPage 14 questions, VideoObject complet sur dahlia.
 - **Outil `/gear-usage-finder` porté — même régime gear-reco à la lecture.**
   La V2 lisait un artefact de pipeline `gear-finder-index.json` ; en V3
   `finder.ts` assemble au rendu, depuis la gear-reco curée, les builds MIS À
