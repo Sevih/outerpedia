@@ -54,11 +54,16 @@ const fr: Record<TranslationKey, string> = {
   'changelog.description':
     'Suivez toutes les mises à jour apportées à Outerpedia : guides, personnages, outils, et plus encore.',
   'changelog.view_full': 'Voir le journal complet',
-  'changelog.type.feature': 'Nouveauté',
+  'changelog.type.guide': 'Guide',
   'changelog.type.update': 'Mise à jour',
-  'changelog.type.fix': 'Correctif',
-  'changelog.type.balance': 'Équilibrage',
+  'changelog.type.feature': 'Nouveauté',
+  'changelog.type.character': 'Personnage',
   'changelog.type.news': 'Actualité',
+  'changelog.type.fix': 'Correctif',
+  'changelog.goto.character': 'Voir la fiche',
+  'changelog.goto.guide': 'Lire le guide',
+  'changelog.goto.tool': "Ouvrir l'outil",
+  'changelog.goto.page': 'En savoir plus',
 
   // Page metadata
   'page.home.title': 'Outerpedia — Wiki et base de données Outerplane',

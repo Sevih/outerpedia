@@ -54,11 +54,16 @@ const en = {
   'changelog.description':
     'Track all updates made to Outerpedia: guides, characters, tools, and more.',
   'changelog.view_full': 'View full changelog',
-  'changelog.type.feature': 'Feature',
+  'changelog.type.guide': 'Guide',
   'changelog.type.update': 'Update',
-  'changelog.type.fix': 'Fix',
-  'changelog.type.balance': 'Balance',
+  'changelog.type.feature': 'Feature',
+  'changelog.type.character': 'Character',
   'changelog.type.news': 'News',
+  'changelog.type.fix': 'Fix',
+  'changelog.goto.character': 'View character',
+  'changelog.goto.guide': 'Read the guide',
+  'changelog.goto.tool': 'Open the tool',
+  'changelog.goto.page': 'Learn more',
 
   // Page metadata
   'page.home.title': 'Outerpedia — Outerplane Wiki & Database',

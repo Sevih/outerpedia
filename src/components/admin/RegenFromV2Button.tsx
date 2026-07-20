@@ -11,7 +11,7 @@ export function RegenFromV2Button({
   kind,
   onRegen,
 }: {
-  kind: 'coupons' | 'banners';
+  kind: 'coupons' | 'banners' | 'changelog';
   onRegen: (data: unknown[]) => void;
 }) {
   const [busy, setBusy] = useState(false);

@@ -54,11 +54,16 @@ const jp: Record<TranslationKey, string> = {
   'changelog.description':
     'Outerpedia の更新情報（ガイド、キャラクター、ツールなど）を確認できます。',
   'changelog.view_full': 'すべての更新履歴を見る',
-  'changelog.type.feature': '新機能',
+  'changelog.type.guide': 'ガイド',
   'changelog.type.update': '更新',
-  'changelog.type.fix': '修正',
-  'changelog.type.balance': 'バランス',
+  'changelog.type.feature': '新機能',
+  'changelog.type.character': 'キャラクター',
   'changelog.type.news': 'お知らせ',
+  'changelog.type.fix': '修正',
+  'changelog.goto.character': 'キャラクターを見る',
+  'changelog.goto.guide': 'ガイドを読む',
+  'changelog.goto.tool': 'ツールを開く',
+  'changelog.goto.page': '詳しく見る',
 
   // Page metadata
   'page.home.title': 'Outerpedia — アウタープレーン Wiki & データベース',

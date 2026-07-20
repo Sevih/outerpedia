@@ -11,6 +11,8 @@ import { ServerResets } from '@/components/home/ServerResets';
 import { BuffEventTimer } from '@/components/home/BuffEventTimer';
 import { PromoCodes } from '@/components/home/PromoCodes';
 import { BeginnerGuides } from '@/components/home/BeginnerGuides';
+import { RecentUpdates } from '@/components/home/RecentUpdates';
+import { getChangelog } from '@/lib/data/changelog';
 
 export const revalidate = 86400;
 
@@ -53,6 +55,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
   const { codes, activeCount } = getActiveCoupons(lang, 6);
   const buffSchedule = getBuffSchedule();
+  const updates = getChangelog(lang, { limit: 5 });
   const buffLabels = Object.fromEntries(
     BUFF_TYPES.map((ty) => [ty, t(`buff.type.${ty}` as TranslationKey)]),
   );
@@ -134,6 +137,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </div>
 
         <BeginnerGuides lang={lang} title={t('home.section.beginner')} t={t} />
+
+        <RecentUpdates
+          entries={updates}
+          lang={lang}
+          title={t('home.section.updates')}
+          viewAll={t('changelog.view_full')}
+          t={t}
+        />
       </div>
     </main>
   );
