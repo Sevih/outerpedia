@@ -13,7 +13,9 @@ import type { Lang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { localePath } from '@/lib/navigation';
-import { parseText, type ParseCtx } from '@/lib/parse-text';
+import { parseText, plainInlineText, type ParseCtx } from '@/lib/parse-text';
+import { buildFaqJsonLd } from '@/lib/seo';
+import JsonLd from '@/components/seo/JsonLd';
 import { getMonster, monsterIconSrc } from '@/lib/data/monsters';
 import { InlineIcon } from '@/components/inline/InlineIcon';
 import {
@@ -30,6 +32,32 @@ import { TocBar } from '@/components/guides/editorial/TocBar';
 import { RelatedGuides } from '@/components/guides/editorial/RelatedGuides';
 import { EDITORIAL_ACCENT } from '@/components/guides/editorial/accents';
 import { LABELS } from './content';
+
+/**
+ * Q/R du JSON-LD FAQPage — clés de LABELS, en PHASE avec les QACard du rendu
+ * (question = prop `question`, réponses = la prose PRINCIPALE de la carte ;
+ * les tableaux/listes riches restent au rendu, un schéma veut du concis).
+ * Ajouter une carte = ajouter sa ligne ici.
+ */
+const FAQ_LD: Array<{ q: keyof typeof LABELS; a: Array<keyof typeof LABELS> }> = [
+  { q: 'rerollImportance', a: ['rerollAnswer', 'freeHeroesFoundation', 'newAccountStarters'] },
+  { q: 'whereGoFirst', a: ['evaGuideQuests', 'underChallengesLine', 'skywardTowerLine'] },
+  { q: 'whoPullFor', a: ['wideRangeHeroes', 'limitedDesc', 'premiumBannerDesc'] },
+  { q: 'pullForDupes', a: ['regularHeroesFarm', 'star4WeaknessGauge', 'star5Burst3'] },
+  { q: 'whatTeam', a: ['standardTeam', 'earthFireTeam'] },
+  { q: 'howGetGear', a: ['gearSourceDesc', 'chimeraArmorDesc', 'weaponAccessorySkills'] },
+  { q: 'howGetEETalismans', a: ['exclusiveEquipmentDesc', 'talismansDesc'] },
+  { q: 'gearWorthKeeping', a: ['dontThrowBlues', 'epicGearStaple', 'gearRarityMeaning'] },
+  {
+    q: 'whenUpgradeGear',
+    a: ['enhancingWeaponsDesc', 'accessoriesCritDesc', 'armorLaterChapters'],
+  },
+  { q: 'skillManualsFirst', a: ['skillLevel2Weakness', 'effectChanceDuration', 'chainPassive'] },
+  { q: 'baseUpgrades', a: ['baseUpgradeOrder', 'unlockQuirks'] },
+  { q: 'quirksPriority', a: ['quirksUpgradeOrder', 'dpsSubclassFirst', 'quirkLevel5'] },
+  { q: 'guildImportance', a: ['guildDesc'] },
+  { q: 'heroScaleHealth', a: ['keyWordsLookFor', 'proportionalStat'] },
+];
 
 /* Ancres stables (jamais localisées) des 5 sections. */
 const SECTIONS = [
@@ -106,8 +134,17 @@ export default async function BeginnerFaqGuide({ lang }: { lang: Lang }) {
 
   const premiumLimitedHref = localePath(lang, '/guides/general-guides/premium-limited') as Route;
 
+  // FAQPage : le rich-result que cette page mérite (c'est LITTÉRALEMENT une FAQ).
+  const faqLd = buildFaqJsonLd(
+    FAQ_LD.map(({ q, a }) => ({
+      question: L(LABELS[q]),
+      answer: a.map((k) => plainInlineText(lRec(LABELS[k], lang))).join(' '),
+    })),
+  );
+
   return (
     <>
+      <JsonLd id="ld-faq" data={faqLd} />
       <Prose>{L(LABELS.intro)}</Prose>
 
       <TocBar

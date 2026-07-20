@@ -23,6 +23,7 @@ import { RecommendedCharacters } from '@/components/guides/RecommendedCharacters
 import { TeamSlots } from '@/components/guides/TeamSlots';
 import { SegmentedTabs } from '@/components/guides/SegmentedTabs';
 import { MultiVideoEmbed, type VideoItem } from '@/components/ui/MultiVideoEmbed';
+import { VideoJsonLd } from '@/components/seo/VideoJsonLd';
 
 /** `strings.json` — le texte du guide. */
 interface GuideStrings {
@@ -356,6 +357,7 @@ export async function StagedBossGuide({ lang, guide }: GuideContentProps) {
         <section className="space-y-2">
           <h2 className="text-content-strong text-xl font-bold">{t('guides.combat_footage')}</h2>
           <MultiVideoEmbed videos={videos} />
+          <VideoJsonLd videos={videos} />
         </section>
       ) : null}
     </>

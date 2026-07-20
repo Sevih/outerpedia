@@ -47,6 +47,7 @@ import {
   type SynergyGroupView,
 } from '@/components/character/detail/SynergiesSection';
 import { MultiVideoEmbed, type VideoItem } from '@/components/ui/MultiVideoEmbed';
+import { VideoJsonLd } from '@/components/seo/VideoJsonLd';
 import { TranscendTierProvider } from '@/components/character/detail/TranscendTierContext';
 import { characterTags, getCharacterCurated } from '@/lib/data/curated';
 import { getCharacterProsCons } from '@/lib/data/pros-cons';
@@ -524,19 +525,20 @@ export default async function CharacterDetail({
     });
   }
   if (curated.videos && curated.videos.length > 0) {
+    const videoItems: VideoItem[] = curated.videos.map((v) => ({
+      platform: (v.platform as VideoItem['platform']) ?? 'youtube',
+      id: v.id,
+      title: v.title ?? name,
+      author: v.author,
+    }));
     secs.push({
       anchor: 'video',
       title: t('page.character.toc.video'),
       body: (
-        <MultiVideoEmbed
-          byLabel={t('video.by')}
-          videos={curated.videos.map((v) => ({
-            platform: (v.platform as VideoItem['platform']) ?? 'youtube',
-            id: v.id,
-            title: v.title ?? name,
-            author: v.author,
-          }))}
-        />
+        <>
+          <MultiVideoEmbed byLabel={t('video.by')} videos={videoItems} />
+          <VideoJsonLd videos={videoItems} />
+        </>
       ),
     });
   }

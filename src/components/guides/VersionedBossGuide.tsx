@@ -15,6 +15,7 @@ import { TacticalTips } from '@/components/guides/TacticalTips';
 import { RecommendedCharacters } from '@/components/guides/RecommendedCharacters';
 import { TeamSlots } from '@/components/guides/TeamSlots';
 import { MultiVideoEmbed, type VideoItem } from '@/components/ui/MultiVideoEmbed';
+import { VideoJsonLd } from '@/components/seo/VideoJsonLd';
 
 /** `strings.json` — le texte du guide qui ne dépend d'aucune version. */
 interface GuideStrings {
@@ -246,6 +247,7 @@ export async function VersionedBossGuide({ lang, guide }: GuideContentProps) {
                 {t('guides.combat_footage')}
               </h2>
               <MultiVideoEmbed videos={cfg.videos} />
+              <VideoJsonLd videos={cfg.videos} />
             </section>
           ) : null}
         </>

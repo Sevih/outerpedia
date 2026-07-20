@@ -8,6 +8,7 @@ import { BossPanel } from '@/components/guides/BossPanel';
 import { TacticalTips } from '@/components/guides/TacticalTips';
 import { RecommendedCharacters } from '@/components/guides/RecommendedCharacters';
 import { MultiVideoEmbed, type VideoItem } from '@/components/ui/MultiVideoEmbed';
+import { VideoJsonLd } from '@/components/seo/VideoJsonLd';
 
 /** Une section de conseils : ce qui la caractérise + ses points. */
 export type TipsSection = SectionTitle & { items: (LocalizedText & { en: string })[] };
@@ -88,6 +89,7 @@ export async function BossGuide({ lang, guide }: GuideContentProps) {
         <section className="space-y-2">
           <h2 className="text-content-strong text-xl font-bold">{t('guides.combat_footage')}</h2>
           <MultiVideoEmbed byLabel={t('video.by')} videos={content.videos} />
+          <VideoJsonLd videos={content.videos} />
         </section>
       ) : null}
     </>

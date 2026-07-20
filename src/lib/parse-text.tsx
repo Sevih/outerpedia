@@ -489,6 +489,20 @@ function checkTag(
 }
 
 /**
+ * Aplatit un texte à tags en TEXTE BRUT (JSON-LD, meta descriptions) : chaque
+ * tag est remplacé par son premier segment de payload — le nom visible dans la
+ * quasi-totalité des cas (`{P/Delta}` → « Delta », `{L/label|/chemin}` →
+ * « label », `{E/fire}` → « fire »). Approximation lisible et fidèle, sans
+ * résolution : un schéma n'a pas besoin d'icônes ni de tooltips.
+ */
+export function plainInlineText(text: string): string {
+  return text
+    .replace(/\{[A-Z-]+\/([^}|]*)(?:\|[^}]*)?\}/g, '$1')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
+/**
  * Contrôle d'un texte éditorial : tous les tags `{TYPE/valeur}` rencontrés,
  * avec leur statut de correspondance — y compris les tags MALFORMÉS que le
  * moteur de rendu ignorerait silencieusement (type hors liste).

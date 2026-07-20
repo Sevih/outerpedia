@@ -20,6 +20,7 @@ import { TacticalTips } from '@/components/guides/TacticalTips';
 import { RecommendedCharacters } from '@/components/guides/RecommendedCharacters';
 import { TeamSlots } from '@/components/guides/TeamSlots';
 import { MultiVideoEmbed, type VideoItem } from '@/components/ui/MultiVideoEmbed';
+import { VideoJsonLd } from '@/components/seo/VideoJsonLd';
 
 /** `strings.json` — optionnel : tous les portages n'ont pas d'intro. */
 interface GuideStrings {
@@ -222,6 +223,7 @@ export async function EncounterBossGuide({ lang, guide }: GuideContentProps) {
         <section className="space-y-2">
           <h2 className="text-content-strong text-xl font-bold">{t('guides.combat_footage')}</h2>
           <MultiVideoEmbed byLabel={t('video.by')} videos={videos} />
+          <VideoJsonLd videos={videos} />
         </section>
       ) : null}
     </>

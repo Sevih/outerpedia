@@ -50,6 +50,7 @@ import { TurnOrder, type TurnOrderStep } from '@/components/guides/TurnOrder';
 import { BuildRequirements, type RequirementsData } from '@/components/guides/BuildRequirements';
 import { SegmentedTabs, type TabItem } from '@/components/guides/SegmentedTabs';
 import { MultiVideoEmbed, type VideoItem } from '@/components/ui/MultiVideoEmbed';
+import { VideoJsonLd } from '@/components/seo/VideoJsonLd';
 import { img } from '@/lib/images';
 
 type LText = LocalizedText & { en: string };
@@ -261,7 +262,12 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
           labels={teamLabels}
         />
       )}
-      {data?.video && <MultiVideoEmbed byLabel={t('video.by')} videos={[data.video]} />}
+      {data?.video && (
+        <>
+          <MultiVideoEmbed byLabel={t('video.by')} videos={[data.video]} />
+          <VideoJsonLd videos={[data.video]} />
+        </>
+      )}
     </div>
   );
 
