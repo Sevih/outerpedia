@@ -24,6 +24,7 @@ import type {
   Family,
   GameSet,
   GearItem,
+  Glossaries,
   ItemSources,
   LangDict,
   Option,
@@ -51,6 +52,7 @@ import passivesData from '@data/generated/equipment/passives.json';
 import bossesData from '@data/generated/equipment/bosses.json';
 import familiesData from '@data/generated/equipment/families.json';
 import sourcesData from '@data/generated/equipment/sources.json';
+import glossariesData from '@data/generated/glossaries.json';
 
 const WEAPONS = weaponData as unknown as Record<string, GearItem>;
 const AMULETS = accessoryData as unknown as Record<string, GearItem>;
@@ -66,6 +68,7 @@ const FAMILIES = familiesData as unknown as {
   talisman: Family[];
 };
 const SOURCES = sourcesData as unknown as ItemSources;
+const CLASS_NAMES = (glossariesData as unknown as Glossaries).classes;
 const ARMOR_SLOTS = {
   helmet: armorPieces(helmetData),
   armor: armorPieces(armorData),
@@ -363,11 +366,12 @@ export interface GearFamily {
   /** Paliers de passif (refs → resolvePassives). */
   passives: PassiveRef[];
   /**
-   * Passifs PAR VARIANTE DE CLASSE quand ils diffèrent au sein de la famille
-   * (Briareos's Ambition / Gorgon's Vanity : 5 passifs distincts, un par
-   * classe) — `passives` ne porte alors que celui du membre de tête.
+   * VARIANTES PAR CLASSE quand les passifs diffèrent au sein de la famille
+   * (Briareos/Gorgon : 5 objets distincts en jeu — un par classe, chacun sa
+   * tuile ET son passif) — `passives`/`icon` de la famille ne portent alors
+   * que le membre de tête.
    */
-  classPassives?: { classLimit: string; passives: PassiveRef[] }[];
+  classPassives?: { classLimit: string; icon: string; passives: PassiveRef[] }[];
   source?: ResolvedSource;
   /** Talisman : type de points (extrait du buff du passif). */
   mode?: 'AP' | 'CP';
@@ -425,16 +429,16 @@ function materializeFamilies(
       const mains = (rolled.length ? rolled : memberGroups).flat();
       // Passifs PAR CLASSE quand les variantes du palier max en portent des
       // DIFFÉRENTS (Briareos/Gorgon : « Ambition: Aggression/Determination/… »).
-      const byClass = new Map<string, PassiveRef[]>();
+      const byClass = new Map<string, { icon: string; passives: PassiveRef[] }>();
       for (const id of topIds) {
         const m = table[id];
         const cl = 'classLimit' in m ? ((m as GearItem).classLimit ?? '') : '';
-        if (cl && !byClass.has(cl)) byClass.set(cl, m.passives);
+        if (cl && !byClass.has(cl)) byClass.set(cl, { icon: m.icon, passives: m.passives });
       }
       const sig = (ps: PassiveRef[]) => ps.map((p) => p.id).join(',');
       const classPassives =
-        byClass.size > 1 && new Set([...byClass.values()].map(sig)).size > 1
-          ? [...byClass].map(([classLimit, passives]) => ({ classLimit, passives }))
+        byClass.size > 1 && new Set([...byClass.values()].map((v) => sig(v.passives))).size > 1
+          ? [...byClass].map(([classLimit, v]) => ({ classLimit, ...v }))
           : undefined;
       return {
         id: f.id,
@@ -452,6 +456,41 @@ function materializeFamilies(
         ...('mode' in top && top.mode ? { mode: top.mode } : {}),
       };
     });
+}
+
+/**
+ * Nom suffixé du libellé de classe OFFICIEL du jeu — « Gorgon's Wrath
+ * [Defender] », 「ゴルゴンの憎悪 [防御型]」 (même convention que la V2, qui
+ * bakait le suffixe à la main). Sert à distinguer les VARIANTES DE CLASSE
+ * d'une famille (Briareos/Gorgon) partout où une variante précise s'affiche.
+ */
+export function withClassSuffix(name: LangDict, classLimit: string): LangDict {
+  const cls = CLASS_NAMES[classLimit] as Record<string, string> | undefined;
+  if (!cls) return name;
+  const out: Record<string, string> = {};
+  for (const [k, v] of Object.entries(name)) out[k] = `${v} [${cls[k] ?? cls.en}]`;
+  return out as LangDict;
+}
+
+/**
+ * Variante de classe d'un MEMBRE dans sa famille multi-classes (Briareos/
+ * Gorgon) : l'identité PROPRE de la variante (tuile, classe, passifs) —
+ * `undefined` pour une famille ordinaire. Pour les vues qui référencent un id
+ * précis (build curé, outils d'usage) : la tête de famille ne les représente
+ * pas.
+ */
+export function memberClassVariant(
+  f: GearFamily,
+  memberId: string,
+): { classLimit: string; icon: string; passives: PassiveRef[] } | undefined {
+  if (!f.classPassives) return undefined;
+  const m = WEAPONS[memberId] ?? AMULETS[memberId];
+  const cl = m?.classLimit;
+  const v = cl ? f.classPassives.find((cp) => cp.classLimit === cl) : undefined;
+  // Tuile du membre lui-même (les copies Singularité 92xxx gardent la bonne).
+  return v
+    ? { classLimit: v.classLimit, icon: m?.icon ?? v.icon, passives: v.passives }
+    : undefined;
 }
 
 export function getWeaponFamilies(): GearFamily[] {

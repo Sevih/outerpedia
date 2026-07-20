@@ -4,7 +4,9 @@ import {
   getAmuletFamilies,
   getSetViews,
   getWeaponFamilies,
+  memberClassVariant,
   resolvePassives,
+  withClassSuffix,
   type GearFamily,
 } from '@/lib/data/equipment';
 
@@ -69,18 +71,41 @@ export function computeFinderData(): RawFinderData {
   // (nom LangDict, tuiles) est indépendant de la langue.
   const setViews = getSetViews('en');
 
-  const famGear = (f: GearFamily): RawFinderGear => ({
-    key: f.id,
-    name: f.name,
-    icon: f.icon,
-    grade: f.grade,
-    star: f.stars.at(-1),
-    // Icône du passif (l'`icon` d'un ref est indépendante de la langue).
-    overlayIcon: resolvePassives(f.passives, 'en')[0]?.icon || undefined,
-    classType: f.classLimits.length === 1 ? f.classLimits[0] : undefined,
-    classLimits: f.classLimits,
-    mains: f.mainStats,
-  });
+  // Famille multi-classes (Briareos/Gorgon : 5 objets distincts sous un même
+  // nom) : UNE entrée sélectionnable par variante — sa tuile, son passif, son
+  // nom suffixé « [Classe] », restreinte à SA classe — sinon la famille entière.
+  const famGears = (f: GearFamily): RawFinderGear[] =>
+    f.classPassives
+      ? f.classPassives.map((v) => ({
+          key: `${f.id}:${v.classLimit}`,
+          name: withClassSuffix(f.name, v.classLimit),
+          icon: v.icon,
+          grade: f.grade,
+          star: f.stars.at(-1),
+          overlayIcon: resolvePassives(v.passives, 'en')[0]?.icon || undefined,
+          classType: v.classLimit,
+          classLimits: [v.classLimit],
+          mains: f.mainStats,
+        }))
+      : [
+          {
+            key: f.id,
+            name: f.name,
+            icon: f.icon,
+            grade: f.grade,
+            star: f.stars.at(-1),
+            // Icône du passif (l'`icon` d'un ref est indépendante de la langue).
+            overlayIcon: resolvePassives(f.passives, 'en')[0]?.icon || undefined,
+            classType: f.classLimits.length === 1 ? f.classLimits[0] : undefined,
+            classLimits: f.classLimits,
+            mains: f.mainStats,
+          },
+        ];
+  // Clé de matching d'un MEMBRE : la variante de classe si la famille en a.
+  const keyOf = (f: GearFamily, memberId: string): string => {
+    const v = memberClassVariant(f, memberId);
+    return v ? `${f.id}:${v.classLimit}` : f.id;
+  };
   const byName = (a: RawFinderGear, b: RawFinderGear) => a.name.en.localeCompare(b.name.en);
 
   const builds: RawFinderBuild[] = [];
@@ -90,20 +115,22 @@ export function computeFinderData(): RawFinderData {
       const addMains = (
         rec: Record<string, string[]>,
         fam: GearFamily | undefined | false,
+        memberId: string,
         mainStat?: string,
       ) => {
         if (!fam) return;
+        const key = keyOf(fam, memberId);
         const mains = (mainStat ?? '')
           .split('/')
           .map((s) => s.trim())
           .filter(Boolean);
         // Même famille citée deux fois dans un build (variantes de main) : fusion.
-        rec[fam.id] = [...new Set([...(rec[fam.id] ?? []), ...mains])];
+        rec[key] = [...new Set([...(rec[key] ?? []), ...mains])];
       };
       for (const w of b.weapons ?? [])
-        addMains(flat.weapons, !w.id.startsWith('!') && weaponOf.get(w.id), w.mainStat);
+        addMains(flat.weapons, !w.id.startsWith('!') && weaponOf.get(w.id), w.id, w.mainStat);
       for (const a of b.amulets ?? [])
-        addMains(flat.amulets, !a.id.startsWith('!') && amuletOf.get(a.id), a.mainStat);
+        addMains(flat.amulets, !a.id.startsWith('!') && amuletOf.get(a.id), a.id, a.mainStat);
       const combos = (b.sets ?? []).map(
         (c) => c.pieces ?? (c.preset ? (presets.sets[c.preset] ?? []) : []),
       );
@@ -122,8 +149,8 @@ export function computeFinderData(): RawFinderData {
   }
 
   return {
-    weapons: getWeaponFamilies().map(famGear).sort(byName),
-    amulets: getAmuletFamilies().map(famGear).sort(byName),
+    weapons: getWeaponFamilies().flatMap(famGears).sort(byName),
+    amulets: getAmuletFamilies().flatMap(famGears).sort(byName),
     sets: setViews
       .map((v): RawFinderGear => ({
         key: v.id,

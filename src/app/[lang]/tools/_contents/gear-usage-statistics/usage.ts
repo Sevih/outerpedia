@@ -5,7 +5,9 @@ import {
   getSetViews,
   getTalismanFamilies,
   getWeaponFamilies,
+  memberClassVariant,
   resolvePassives,
+  withClassSuffix,
   type GearFamily,
 } from '@/lib/data/equipment';
 
@@ -54,17 +56,23 @@ export function computeGearUsage(): Record<GearCategory, RawGearUsageEntry[]> {
   // (nom LangDict, tuiles) est indépendant de la langue.
   const setViews = new Map(getSetViews('en').map((v) => [v.id, v]));
 
-  const famEntry = (f: GearFamily): Omit<RawGearUsageEntry, 'characters'> => ({
-    key: f.id,
-    name: f.name,
-    slug: f.slug,
-    icon: f.icon,
-    grade: f.grade,
-    star: f.stars.at(-1),
-    // Icône du passif (l'`icon` d'un ref est indépendante de la langue).
-    overlayIcon: resolvePassives(f.passives, 'en')[0]?.icon || undefined,
-    classType: f.classLimits.length === 1 ? f.classLimits[0] : undefined,
-  });
+  // Variante de classe (Briareos/Gorgon : 5 objets distincts sous un même nom,
+  // cf. `memberClassVariant`) : UNE ligne par variante — sa tuile, son passif,
+  // son nom suffixé « [Classe] » — sinon la famille entière.
+  const famEntry = (f: GearFamily, memberId: string): Omit<RawGearUsageEntry, 'characters'> => {
+    const v = memberClassVariant(f, memberId);
+    return {
+      key: v ? `${f.id}:${v.classLimit}` : f.id,
+      name: v ? withClassSuffix(f.name, v.classLimit) : f.name,
+      slug: f.slug,
+      icon: v ? v.icon : f.icon,
+      grade: f.grade,
+      star: f.stars.at(-1),
+      // Icône du passif (l'`icon` d'un ref est indépendante de la langue).
+      overlayIcon: resolvePassives(v ? v.passives : f.passives, 'en')[0]?.icon || undefined,
+      classType: v ? v.classLimit : f.classLimits.length === 1 ? f.classLimits[0] : undefined,
+    };
+  };
 
   const usage: Record<GearCategory, Map<string, RawGearUsageEntry>> = {
     weapon: new Map(),
@@ -92,18 +100,18 @@ export function computeGearUsage(): Record<GearCategory, RawGearUsageEntry[]> {
     for (const b of builds) {
       for (const w of b.weapons ?? []) {
         const f = !w.id.startsWith('!') && weaponOf.get(w.id);
-        if (f) add('weapon', famEntry(f), charId, seen);
+        if (f) add('weapon', famEntry(f, w.id), charId, seen);
       }
       for (const a of b.amulets ?? []) {
         const f = !a.id.startsWith('!') && amuletOf.get(a.id);
-        if (f) add('amulet', famEntry(f), charId, seen);
+        if (f) add('amulet', famEntry(f, a.id), charId, seen);
       }
       const taliIds = (b.talismans ?? []).flatMap((tn) =>
         tn.startsWith('$') ? (presets.talismans[tn.slice(1)] ?? []) : [tn],
       );
       for (const id of taliIds) {
         const f = !id.startsWith('!') && talismanOf.get(id);
-        if (f) add('talisman', famEntry(f), charId, seen);
+        if (f) add('talisman', famEntry(f, id), charId, seen);
       }
       const combos = (b.sets ?? []).map(
         (c) => c.pieces ?? (c.preset ? (presets.sets[c.preset] ?? []) : []),

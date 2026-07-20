@@ -52,11 +52,14 @@ export interface GearRow {
   /** Lignes d'effet (paliers résolus). */
   effects: EffectLine[];
   /**
-   * Passif PAR VARIANTE DE CLASSE (Briareos/Gorgon) — remplace passive/effects
-   * quand présent : chaque classe a le sien.
+   * VARIANTE PAR CLASSE (Briareos/Gorgon : 5 objets distincts en jeu) —
+   * remplace passive/effects quand présent : chaque classe a sa tuile et son
+   * passif.
    */
   variants?: {
     classLimit: string;
+    /** Tuile PROPRE de la variante (la tête de famille ne la représente pas). */
+    icon: string;
     passive?: { name: string; icon: string };
     effects: EffectLine[];
   }[];
@@ -198,16 +201,22 @@ export function GearCard({ row, sourceTitle }: { row: GearRow; sourceTitle: stri
         </div>
       </div>
       {row.variants ? (
-        // Passif PAR CLASSE : un bloc par variante (icône de classe + pill + texte).
+        // Variante PAR CLASSE : un bloc par variante — SA tuile (chaque classe
+        // a la sienne en jeu) + icône de classe + pill + texte.
         <div className="space-y-2">
           {row.variants.map((v) => (
-            <div key={v.classLimit} className="space-y-1">
-              <div className="flex items-center gap-1.5">
-                {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-                <img src={img.klass(v.classLimit)} alt={v.classLimit} className="h-4 w-4" />
+            <div key={v.classLimit} className="flex items-start gap-2">
+              <EquipmentIcon
+                icon={v.icon}
+                grade={row.grade}
+                alt={v.classLimit}
+                size={40}
+                classType={v.classLimit}
+              />
+              <div className="min-w-0 flex-1 space-y-1">
                 {v.passive && <PassivePill passive={v.passive} />}
+                <EffectLines effects={v.effects} />
               </div>
-              <EffectLines effects={v.effects} />
             </div>
           ))}
         </div>

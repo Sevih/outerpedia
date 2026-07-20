@@ -6,6 +6,23 @@
 
 ## 2026-07-20
 
+- **Variantes de classe des items irregular (Briareos/Gorgon) distinguées
+  partout (constat Sevih en relisant les outils gear).** En jeu ce sont 5
+  objets distincts par item (un par classe : tuile ET passif propres) ; la V2
+  les séparait en bakant « [Striker] » dans le nom à la main. La famille V3
+  les groupait sous la tête (Striker) → BUG réel sur la fiche perso :
+  `resolveItem` affichait la tuile ET le passif Striker pour un build
+  référençant la variante Defender (ex. 2000106/787). Décision (tuile +
+  suffixe, périmètre complet) : `classPassives` porte maintenant l'`icon` de
+  chaque variante ; nouveaux helpers `withClassSuffix` (suffixe = libellé de
+  classe OFFICIEL du jeu via `glossaries.classes` — « [Defender] » /
+  「[防御型]」, comme la V2) et `memberClassVariant` (id membre → identité de
+  SA variante). Corrigés : fiche perso + aperçu admin (resolveItem : tuile/
+  passif/nom/classType de la variante), loot de donjon (nom suffixé),
+  gear-usage-statistics et gear-usage-finder (clé `famille:classe` → 5 lignes/
+  entrées par item, chacune sa tuile et sa classe), carte /equipment (chaque
+  bloc de variante montre SA tuile ; la page détail taguait déjà par classe).
+  Smoke test tsx sur les 3 vues + tsc + eslint + 300 tests src verts.
 - **Règle « état interne d'un guide = hash » APPLIQUÉE partout (item Dette
   soldé).** `BannerTabs` bascule de `?banner=` (useUrlTab) au hash
   (`#banner=`, patron url-hash/SegmentedTabs, prop `urlKey`) ;

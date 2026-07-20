@@ -20,6 +20,7 @@ import {
   resolvePassives,
   setEffectText,
   slugifyEquipment,
+  withClassSuffix,
   type GearFamily,
   type ResolvedSource,
 } from '@/lib/data/equipment';
@@ -238,19 +239,33 @@ function resolveItem(
   const e = table[id];
   if (!e) return { id, name: id, mainStat, unresolved: true };
   const f = familyOf(slot, id);
-  const eff = f ? effectAtMax(f, lang) : { texts: [] };
+  // Variante de classe (Briareos/Gorgon : 5 objets distincts sous un même
+  // nom) : la tuile, le passif et le nom suffixé sont ceux de LA variante
+  // référencée par le build — la tête de famille (Striker) ne la représente pas.
+  const variant =
+    f && e.classLimit ? f.classPassives?.find((v) => v.classLimit === e.classLimit) : undefined;
+  const eff = variant
+    ? effectAtMaxOf(variant.passives, lang)
+    : f
+      ? effectAtMax(f, lang)
+      : { texts: [] };
   const maxes = slot === 'talismans' ? {} : mainStatMaxOf(f ? topEntry(table, f) : e, mainStat);
   return {
     id,
-    name: lRec(e.name, lang),
-    // Tuile du HAUT de famille (6★) — les paliers bas ont d'autres miniatures.
-    icon: f?.icon ?? e.icon,
+    name: lRec(variant ? withClassSuffix(e.name, variant.classLimit) : e.name, lang),
+    // Tuile du HAUT de famille (6★) — les paliers bas ont d'autres miniatures —
+    // SAUF variante de classe : sa propre tuile.
+    icon: variant ? e.icon : (f?.icon ?? e.icon),
     grade: f?.grade ?? e.grade,
     star: f?.stars.at(-1),
     mainStat,
     slug: f?.slug,
     overlayIcon: eff.icon || undefined,
-    classType: f && f.classLimits.length === 1 ? f.classLimits[0] : undefined,
+    classType: variant
+      ? variant.classLimit
+      : f && f.classLimits.length === 1
+        ? f.classLimits[0]
+        : undefined,
     ...(Object.keys(maxes).length ? { mainStatMax: maxes } : {}),
     ...(eff.name ? { effectName: eff.name, effectIcon: eff.icon } : {}),
     ...(eff.texts.length ? { effectTexts: eff.texts } : {}),
@@ -395,9 +410,12 @@ export function resolveLootGear(id: string, lang: Lang): ResolvedGearItem | unde
     f?.classPassives?.find((cp) => cp.classLimit === e.classLimit)?.passives ?? f?.passives ?? [];
   const eff = effectAtMaxOf(passives, lang);
   const maxes = slot === 'talismans' ? {} : mainStatMaxOf(f ? topEntry(table, f) : e, mainStat);
+  // Variante de classe d'une famille Briareos/Gorgon : nom suffixé comme partout.
+  const suffixed =
+    f?.classPassives && e.classLimit ? withClassSuffix(e.name, e.classLimit) : e.name;
   return {
     id,
-    name: lRec(e.name, lang),
+    name: lRec(suffixed, lang),
     icon: e.icon,
     grade: e.grade,
     star: e.star,

@@ -122,6 +122,7 @@ function toGearRow(
       ? {
           variants: f.classPassives.map((v) => ({
             classLimit: v.classLimit,
+            icon: v.icon,
             ...passiveView(v.passives, lang, kind),
           })),
         }
