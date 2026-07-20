@@ -23,6 +23,8 @@
  * cas en V2, assumé).
  */
 
+import { useCallback, useEffect, useRef, useState } from 'react';
+
 /** Contrat d'un usage du storage (une clé = un spec, déclaré par l'outil). */
 export interface StoreSpec<T> {
   /** Clé V3 — convention `outerpedia:<outil>[:<quoi>]`. */
@@ -114,4 +116,47 @@ export function writeStored<T>(spec: StoreSpec<T>, value: T): void {
 /** Efface la clé V3 (les clés V2 héritées ne sont jamais touchées). */
 export function clearStored(spec: StoreSpec<unknown>): void {
   storage()?.removeItem(spec.key);
+}
+
+/**
+ * État React ADOSSÉ à un spec de storage — le contrat SSR du module en hook :
+ *
+ *   - SSR et PREMIER rendu client = `fallback` (zéro mismatch d'hydratation) ;
+ *   - lecture `readStored` au montage (une fois), signalée par `ready` — un
+ *     rendu qui veut attendre la vraie valeur (spinner, skeleton) s'y fie ;
+ *   - le setter (valeur ou updater fonctionnel) écrit en write-through via
+ *     `writeStored` à chaque changement committé.
+ *
+ * `spec` doit être une CONSTANTE de module (la clé/version ne changent pas en
+ * cours de vie) — seul le spec du premier rendu est lu au montage. Un setter
+ * appelé AVANT l'hydratation gagne sur la valeur stockée (l'utilisateur a agi,
+ * on n'écrase pas son geste).
+ */
+export function useStoredState<T>(
+  spec: StoreSpec<T>,
+): [T, (next: T | ((prev: T) => T)) => void, boolean] {
+  const [value, setValue] = useState<T>(spec.fallback);
+  const [ready, setReady] = useState(false);
+  // Vrai dès qu'un setter a été appelé : chaque valeur committée est écrite,
+  // et l'hydratation n'écrase plus l'état.
+  const dirty = useRef(false);
+  const hydrated = useRef(false);
+
+  useEffect(() => {
+    if (hydrated.current) return;
+    hydrated.current = true;
+    if (!dirty.current) setValue(readStored(spec));
+    setReady(true);
+  }, [spec]);
+
+  useEffect(() => {
+    if (dirty.current) writeStored(spec, value);
+  }, [spec, value]);
+
+  const set = useCallback((next: T | ((prev: T) => T)) => {
+    dirty.current = true;
+    setValue((prev) => (typeof next === 'function' ? (next as (prev: T) => T)(prev) : next));
+  }, []);
+
+  return [value, set, ready];
 }
