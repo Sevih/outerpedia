@@ -78,7 +78,9 @@ export default async function ToolPage({ params }: Props) {
         >
           &larr; {t('page.tools.title')}
         </Link>
-        <h1 className="text-content-strong mt-3 text-center text-3xl font-bold">{title}</h1>
+        {/* `mx-auto` obligatoire : les titres sont en `width: fit-content` (liseré
+            de base) — `text-center` seul ne centre pas le bloc. */}
+        <h1 className="text-content-strong mx-auto mt-3 text-center text-3xl font-bold">{title}</h1>
         {description && (
           <p className="text-content-muted mx-auto mt-2 max-w-2xl text-center text-sm">
             {description}
