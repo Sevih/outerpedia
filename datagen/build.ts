@@ -192,6 +192,8 @@ async function main(): Promise<void> {
       byLabel,
       byKey,
       effectFilters,
+      ee: equipment.ee,
+      passives: equipment.passives,
     }),
   );
   await writeJson('monsters.json', monstersFile);

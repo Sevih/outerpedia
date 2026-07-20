@@ -22,6 +22,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_REMOVE_BUFF"]
+      },
+      "exclusiveEquip": {
+        "buff": [],
+        "debuff": ["BT_REMOVE_BUFF"]
       }
     },
     "teamBonuses": []
@@ -54,7 +58,7 @@
     "teamBonuses": []
   },
   "2000003": {
-    "buff": ["BT_CP_CHARGE"],
+    "buff": ["BT_ACTION_GAUGE", "BT_CP_CHARGE"],
     "debuff": ["BT_ACTION_GAUGE", "BT_FREEZE"],
     "effectsBySource": {
       "s1": {
@@ -72,12 +76,16 @@
       "chainPassive": {
         "buff": ["BT_CP_CHARGE"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
       }
     },
     "teamBonuses": []
   },
   "2000004": {
-    "buff": ["BT_ADDITIVE_TURN"],
+    "buff": ["BT_ADDITIVE_TURN", "BT_STAT|ST_ATK", "BT_STAT|ST_DEF"],
     "debuff": ["BT_DOT_BURN"],
     "effectsBySource": {
       "s1": {
@@ -95,6 +103,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_DOT_BURN"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_STAT|ST_ATK", "BT_STAT|ST_DEF"],
+        "debuff": []
       }
     },
     "teamBonuses": []
@@ -150,7 +162,7 @@
     "teamBonuses": []
   },
   "2000007": {
-    "buff": [],
+    "buff": ["BT_STAT|ST_BUFF_CHANCE"],
     "debuff": ["BT_STAT|ST_ATK", "BT_STAT|ST_DEF", "BT_STUN"],
     "effectsBySource": {
       "s1": {
@@ -172,6 +184,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_STAT|ST_DEF"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_STAT|ST_BUFF_CHANCE"],
+        "debuff": []
       }
     },
     "teamBonuses": []
@@ -206,12 +222,16 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_STAT|ST_ATK"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
       }
     },
     "teamBonuses": []
   },
   "2000010": {
-    "buff": ["BT_CALL_BACKUP", "BT_STAT|ST_COUNTER_RATE", "BT_STAT|ST_DEF"],
+    "buff": ["BT_CALL_BACKUP", "BT_REMOVE_DEBUFF", "BT_STAT|ST_COUNTER_RATE", "BT_STAT|ST_DEF"],
     "debuff": [],
     "effectsBySource": {
       "s2": {
@@ -229,13 +249,17 @@
       "dualAttack": {
         "buff": ["BT_STAT|ST_DEF"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_REMOVE_DEBUFF"],
+        "debuff": []
       }
     },
     "teamBonuses": []
   },
   "2000011": {
     "buff": ["BT_ACTION_GAUGE", "BT_CALL_BACKUP"],
-    "debuff": ["BT_MARKING", "BT_STAT|ST_ATK"],
+    "debuff": ["BT_MARKING", "BT_STAT|ST_ATK", "BT_STAT|ST_SPEED"],
     "effectsBySource": {
       "s1": {
         "buff": [],
@@ -256,6 +280,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_MARKING"]
+      },
+      "exclusiveEquip": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_SPEED"]
       }
     },
     "teamBonuses": []
@@ -296,12 +324,16 @@
       "dualAttack": {
         "buff": ["BT_ACTION_GAUGE"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_CALL_BACKUP"],
+        "debuff": []
       }
     },
     "teamBonuses": ["DMG UP%"]
   },
   "2000013": {
-    "buff": ["BT_COOL_CHARGE"],
+    "buff": ["BT_COOL_CHARGE", "BT_STAT|ST_SPEED"],
     "debuff": [
       "BT_REMOVE_BUFF",
       "BT_SILENCE",
@@ -329,6 +361,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_STAT|ST_ATK"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_STAT|ST_SPEED"],
+        "debuff": []
       }
     },
     "teamBonuses": []
@@ -354,6 +390,10 @@
         "debuff": ["BT_DOT_CURSE"]
       },
       "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_CURSE"]
+      },
+      "exclusiveEquip": {
         "buff": [],
         "debuff": ["BT_DOT_CURSE"]
       }
@@ -385,12 +425,16 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_DOT_BLEED"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ADDITIVE_TURN"],
+        "debuff": []
       }
     },
     "teamBonuses": ["CHD"]
   },
   "2000016": {
-    "buff": ["BT_STAT|ST_DEF"],
+    "buff": ["BT_IMMUNE", "BT_STAT|ST_DEF"],
     "debuff": ["BT_STAT|ST_ATK", "BT_STUN"],
     "effectsBySource": {
       "s1": {
@@ -408,12 +452,23 @@
       "chainPassive": {
         "buff": ["BT_STAT|ST_DEF"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_IMMUNE"],
+        "debuff": []
       }
     },
     "teamBonuses": []
   },
   "2000017": {
-    "buff": ["BT_BARRIER", "BT_CONTINU_HEAL", "BT_REMOVE_DEBUFF", "BT_STAT|ST_ATK"],
+    "buff": [
+      "BT_BARRIER",
+      "BT_CONTINU_HEAL",
+      "BT_COOL_CHARGE",
+      "BT_REMOVE_DEBUFF",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_CRITICAL_RATE"
+    ],
     "debuff": [],
     "effectsBySource": {
       "s1": {
@@ -434,6 +489,10 @@
       },
       "dualAttack": {
         "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_COOL_CHARGE", "BT_STAT|ST_CRITICAL_RATE"],
         "debuff": []
       }
     },
@@ -462,6 +521,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_DOT_LIGHTNING"]
+      },
+      "exclusiveEquip": {
+        "buff": [],
+        "debuff": ["BT_DOT_LIGHTNING", "BT_STUN"]
       }
     },
     "teamBonuses": []
@@ -496,7 +559,7 @@
     "teamBonuses": ["CHD"]
   },
   "2000020": {
-    "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "BT_STAT|ST_BUFF_CHANCE"],
+    "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "BT_STAT|ST_BUFF_CHANCE", "BT_STAT|ST_SPEED"],
     "debuff": [
       "BT_REMOVE_BUFF",
       "BT_SEALED",
@@ -523,6 +586,10 @@
       },
       "dualAttack": {
         "buff": ["BT_STAT|ST_BUFF_CHANCE"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_STAT|ST_SPEED"],
         "debuff": []
       }
     },
@@ -554,6 +621,10 @@
       },
       "chainPassive": {
         "buff": ["BT_DMG_TARGET_BREAK"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
         "debuff": []
       }
     },
@@ -615,6 +686,10 @@
       "dualAttack": {
         "buff": ["BT_REMOVE_DEBUFF"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
       }
     },
     "teamBonuses": ["HP"]
@@ -642,12 +717,16 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_STUN"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
       }
     },
     "teamBonuses": []
   },
   "2000025": {
-    "buff": ["BT_STAT|ST_PIERCE_POWER_RATE"],
+    "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_PIERCE_POWER_RATE"],
     "debuff": ["BT_DOT_BLEED"],
     "effectsBySource": {
       "s1": {
@@ -665,6 +744,10 @@
       "chainPassive": {
         "buff": ["BT_STAT|ST_PIERCE_POWER_RATE"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
       }
     },
     "teamBonuses": ["CHD"]
@@ -680,12 +763,16 @@
       "ultimate": {
         "buff": ["BT_REMOVE_DEBUFF", "BT_STAT|ST_DEF"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": [],
+        "debuff": ["BT_AGGRO"]
       }
     },
     "teamBonuses": []
   },
   "2000027": {
-    "buff": ["BT_ACTION_GAUGE", "BT_IMMUNE"],
+    "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "BT_IMMUNE"],
     "debuff": [],
     "effectsBySource": {
       "s2": {
@@ -694,6 +781,10 @@
       },
       "ultimate": {
         "buff": ["BT_IMMUNE"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_COOL_CHARGE"],
         "debuff": []
       }
     },
@@ -719,7 +810,7 @@
     "teamBonuses": ["CHC"]
   },
   "2000029": {
-    "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_ATK"],
+    "buff": ["BT_ACTION_GAUGE", "BT_EXTEND_BUFF", "BT_STAT|ST_ATK"],
     "debuff": ["BT_DOT_POISON"],
     "effectsBySource": {
       "s1": {
@@ -740,6 +831,10 @@
       },
       "dualAttack": {
         "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_EXTEND_BUFF"],
         "debuff": []
       }
     },
@@ -773,7 +868,7 @@
     "teamBonuses": []
   },
   "2000031": {
-    "buff": ["BT_EXTEND_BUFF", "BT_STAT|ST_ATK", "BT_STAT|ST_SPEED"],
+    "buff": ["BT_ACTION_GAUGE", "BT_EXTEND_BUFF", "BT_STAT|ST_ATK", "BT_STAT|ST_SPEED"],
     "debuff": [],
     "effectsBySource": {
       "s2": {
@@ -782,6 +877,10 @@
       },
       "ultimate": {
         "buff": ["BT_EXTEND_BUFF"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
         "debuff": []
       }
     },
@@ -806,6 +905,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_DOT_BURN"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
       }
     },
     "teamBonuses": []
@@ -862,12 +965,17 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_DOT_BLEED"]
+      },
+      "exclusiveEquip": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED"]
       }
     },
     "teamBonuses": ["DMG UP%"]
   },
   "2000036": {
     "buff": [
+      "BT_ACTION_GAUGE",
       "BT_AGILE_RESPONSE",
       "BT_BARRIER",
       "BT_COOL_CHARGE",
@@ -891,6 +999,10 @@
       },
       "dualAttack": {
         "buff": ["BT_BARRIER"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
         "debuff": []
       }
     },
@@ -930,7 +1042,7 @@
     "teamBonuses": ["DMG RED%"]
   },
   "2000038": {
-    "buff": ["BT_REMOVE_DEBUFF"],
+    "buff": ["BT_COOL_CHARGE", "BT_REMOVE_DEBUFF"],
     "debuff": ["BT_REMOVE_BUFF"],
     "effectsBySource": {
       "s2": {
@@ -939,6 +1051,10 @@
       },
       "ultimate": {
         "buff": ["BT_REMOVE_DEBUFF"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_COOL_CHARGE"],
         "debuff": []
       }
     },
@@ -961,6 +1077,10 @@
         "debuff": ["BT_STEAL_BUFF"]
       },
       "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_ACTION_GAUGE"]
+      },
+      "exclusiveEquip": {
         "buff": [],
         "debuff": ["BT_ACTION_GAUGE"]
       }
@@ -1026,6 +1146,10 @@
       "dualAttack": {
         "buff": ["BT_STAT|ST_SPEED"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": [],
+        "debuff": ["BT_STEAL_BUFF"]
       }
     },
     "teamBonuses": []
@@ -1035,6 +1159,7 @@
       "BT_BARRIER",
       "BT_COOL_CHARGE",
       "BT_INVINCIBLE",
+      "BT_REVIVAL",
       "BT_STAT|ST_BUFF_RESIST",
       "BT_STAT|ST_DEF"
     ],
@@ -1055,12 +1180,16 @@
       "chainPassive": {
         "buff": ["BT_COOL_CHARGE"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_REVIVAL"],
+        "debuff": []
       }
     },
     "teamBonuses": ["RES"]
   },
   "2000043": {
-    "buff": ["BT_DMG_TARGET_BREAK", "BT_STAT|ST_BUFF_CHANCE"],
+    "buff": ["BT_ADDITIVE_TURN", "BT_DMG_TARGET_BREAK", "BT_STAT|ST_BUFF_CHANCE"],
     "debuff": [
       "BT_DOT_BURN",
       "BT_REMOVE_BUFF",
@@ -1090,6 +1219,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_STAT|ST_DEF"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ADDITIVE_TURN"],
+        "debuff": []
       }
     },
     "teamBonuses": ["EFF"]
@@ -1118,18 +1251,22 @@
     "teamBonuses": ["CHC"]
   },
   "2000045": {
-    "buff": ["BT_BARRIER", "BT_COOL_CHARGE"],
+    "buff": ["BT_ADDITIVE_TURN", "BT_BARRIER", "BT_COOL_CHARGE"],
     "debuff": [],
     "effectsBySource": {
       "ultimate": {
         "buff": ["BT_BARRIER"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ADDITIVE_TURN"],
         "debuff": []
       }
     },
     "teamBonuses": []
   },
   "2000046": {
-    "buff": ["BT_STAT|ST_BUFF_CHANCE"],
+    "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_BUFF_CHANCE"],
     "debuff": ["BT_COOL_CHARGE", "BT_REMOVE_BUFF", "BT_STUN"],
     "effectsBySource": {
       "s1": {
@@ -1147,6 +1284,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_REMOVE_BUFF"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
       }
     },
     "teamBonuses": []
@@ -1166,12 +1307,16 @@
       "chainPassive": {
         "buff": ["BT_CONTINU_HEAL"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_BARRIER"],
+        "debuff": []
       }
     },
     "teamBonuses": []
   },
   "2000048": {
-    "buff": ["BT_ACTION_GAUGE", "BT_BARRIER", "BT_REMOVE_DEBUFF"],
+    "buff": ["BT_ACTION_GAUGE", "BT_BARRIER", "BT_COOL_CHARGE", "BT_REMOVE_DEBUFF"],
     "debuff": [],
     "effectsBySource": {
       "s1": {
@@ -1184,6 +1329,10 @@
       },
       "dualAttack": {
         "buff": ["BT_REMOVE_DEBUFF"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_COOL_CHARGE"],
         "debuff": []
       }
     },
@@ -1271,6 +1420,10 @@
         "debuff": []
       },
       "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_STUN"]
+      },
+      "exclusiveEquip": {
         "buff": [],
         "debuff": ["BT_STUN"]
       }
@@ -1370,6 +1523,10 @@
       "dualAttack": {
         "buff": ["BT_ACTION_GAUGE"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE", "FIERCE_OFFENSIVE"],
+        "debuff": []
       }
     },
     "teamBonuses": ["ATK"]
@@ -1422,6 +1579,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_DOT_CURSE"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
       }
     },
     "teamBonuses": ["HP"]
@@ -1448,6 +1609,10 @@
       },
       "dualAttack": {
         "buff": ["BT_STAT|ST_SPEED"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["DOLL_GARDENS_CARETAKER"],
         "debuff": []
       }
     },
@@ -1520,7 +1685,7 @@
     "teamBonuses": ["RES"]
   },
   "2000062": {
-    "buff": ["BT_STAT|ST_ATK"],
+    "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_ATK"],
     "debuff": ["BT_DOT_CURSE", "BT_STAT|ST_CRITICAL_RATE"],
     "effectsBySource": {
       "s1": {
@@ -1538,6 +1703,10 @@
       "chainPassive": {
         "buff": ["BT_STAT|ST_ATK"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": ["BT_DOT_CURSE"]
       }
     },
     "teamBonuses": ["CHD"]
@@ -1597,6 +1766,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_STAT|ST_ATK"]
+      },
+      "exclusiveEquip": {
+        "buff": [],
+        "debuff": ["BT_EXTEND_DEBUFF"]
       }
     },
     "teamBonuses": ["DMG UP%"]
@@ -1650,6 +1823,10 @@
       "dualAttack": {
         "buff": ["BT_ACTION_GAUGE"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
       }
     },
     "teamBonuses": ["DMG UP%"]
@@ -1659,6 +1836,7 @@
       "BT_ACTION_GAUGE",
       "BT_ADDITIVE_TURN",
       "BT_COOL_CHARGE",
+      "BT_REMOVE_DEBUFF",
       "BT_STAT|ST_ATK",
       "BT_STAT|ST_AVOID",
       "BT_STAT|ST_COUNTER_RATE",
@@ -1685,12 +1863,16 @@
       "dualAttack": {
         "buff": ["BT_ACTION_GAUGE"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE", "BT_REMOVE_DEBUFF"],
+        "debuff": []
       }
     },
     "teamBonuses": ["CHC"]
   },
   "2000068": {
-    "buff": ["BT_ACTION_GAUGE", "BT_BARRIER", "BT_DMG_TARGET_BREAK"],
+    "buff": ["BT_ACTION_GAUGE", "BT_BARRIER", "BT_DMG_TARGET_BREAK", "BT_STAT|ST_SPEED"],
     "debuff": ["BT_FREEZE", "BT_REMOVE_BUFF", "BT_STAT|ST_SPEED"],
     "effectsBySource": {
       "s1": {
@@ -1711,6 +1893,10 @@
       },
       "dualAttack": {
         "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_STAT|ST_SPEED"],
         "debuff": []
       }
     },
@@ -1735,12 +1921,16 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_ACTION_GAUGE"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_UNDEAD"],
+        "debuff": []
       }
     },
     "teamBonuses": ["EFF"]
   },
   "2000070": {
-    "buff": ["BT_DMG_TARGET_BREAK", "BT_INVINCIBLE", "BT_STAT|ST_DEF"],
+    "buff": ["BT_ACTION_GAUGE", "BT_DMG_TARGET_BREAK", "BT_INVINCIBLE", "BT_STAT|ST_DEF"],
     "debuff": ["BT_REMOVE_BUFF"],
     "effectsBySource": {
       "s1": {
@@ -1753,6 +1943,10 @@
       },
       "chainPassive": {
         "buff": ["BT_DMG_TARGET_BREAK"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
         "debuff": []
       }
     },
@@ -1791,7 +1985,13 @@
     "teamBonuses": ["DEF"]
   },
   "2000072": {
-    "buff": ["A_NINJAS_AFTERIMAGE", "BT_AGILE_RESPONSE", "BT_COOL_CHARGE", "BT_REMOVE_DEBUFF"],
+    "buff": [
+      "A_NINJAS_AFTERIMAGE",
+      "BT_AGILE_RESPONSE",
+      "BT_COOL_CHARGE",
+      "BT_REMOVE_DEBUFF",
+      "BT_STEALTHED"
+    ],
     "debuff": ["BT_SEALED", "BT_SEALED_RECEIVE_HEAL", "BT_STEAL_BUFF"],
     "effectsBySource": {
       "s1": {
@@ -1809,6 +2009,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_SEALED"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_STEALTHED"],
+        "debuff": []
       }
     },
     "teamBonuses": ["DMG UP%"]
@@ -1834,6 +2038,10 @@
         "debuff": ["BT_DOT_BURN"]
       },
       "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_BURN"]
+      },
+      "exclusiveEquip": {
         "buff": [],
         "debuff": ["BT_DOT_BURN"]
       }
@@ -1868,6 +2076,10 @@
         "debuff": []
       },
       "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
         "buff": ["BT_ACTION_GAUGE"],
         "debuff": []
       }
@@ -1988,7 +2200,7 @@
     "teamBonuses": ["ATK"]
   },
   "2000079": {
-    "buff": ["BT_COOL_CHARGE", "BT_CP_CHARGE"],
+    "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "BT_CP_CHARGE"],
     "debuff": [
       "BT_ACTION_GAUGE",
       "BT_EXTEND_DEBUFF",
@@ -2015,6 +2227,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_MARKING"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
       }
     },
     "teamBonuses": ["EFF"]
@@ -2034,6 +2250,10 @@
       "ultimate": {
         "buff": ["BT_CONTINU_HEAL", "BT_CP_CHARGE"],
         "debuff": ["BT_COOL_CHARGE"]
+      },
+      "exclusiveEquip": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_DEF"]
       }
     },
     "teamBonuses": ["EFF"]
@@ -2067,13 +2287,23 @@
       "dualAttack": {
         "buff": ["BT_ACTION_GAUGE"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": ["BT_DOT_BURN"]
       }
     },
     "teamBonuses": ["ATK"]
   },
   "2000082": {
-    "buff": ["BT_ACTION_GAUGE", "BT_ADDITIVE_ATTACK", "BT_COOL_CHARGE", "BT_STAT|ST_BUFF_CHANCE"],
-    "debuff": ["BT_DOT_LIGHTNING", "BT_EXTEND_DEBUFF"],
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_ATTACK",
+      "BT_COOL_CHARGE",
+      "BT_EXTEND_BUFF",
+      "BT_STAT|ST_BUFF_CHANCE"
+    ],
+    "debuff": ["BT_ACTION_GAUGE", "BT_DOT_LIGHTNING", "BT_EXTEND_DEBUFF"],
     "effectsBySource": {
       "s1": {
         "buff": [],
@@ -2094,6 +2324,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_DOT_LIGHTNING"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_EXTEND_BUFF"],
+        "debuff": ["BT_ACTION_GAUGE"]
       }
     },
     "teamBonuses": ["CHC"]
@@ -2293,12 +2527,22 @@
       "dualAttack": {
         "buff": ["BT_ACTION_GAUGE"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_BARRIER"],
+        "debuff": []
       }
     },
     "teamBonuses": ["CHD"]
   },
   "2000091": {
-    "buff": ["BT_ACTION_GAUGE", "BT_CP_CHARGE", "BT_STAT|ST_BUFF_CHANCE", "FINAL_BRAND"],
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_COOL_CHARGE",
+      "BT_CP_CHARGE",
+      "BT_STAT|ST_BUFF_CHANCE",
+      "FINAL_BRAND"
+    ],
     "debuff": [
       "BT_COOL_CHARGE",
       "BT_EXTEND_BUFF",
@@ -2324,6 +2568,10 @@
       },
       "dualAttack": {
         "buff": ["BT_STAT|ST_BUFF_CHANCE"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_COOL_CHARGE"],
         "debuff": []
       }
     },
@@ -2380,7 +2628,7 @@
     "teamBonuses": []
   },
   "2000094": {
-    "buff": ["BT_AGILE_RESPONSE", "BT_BARRIER", "RADIANT_WILL"],
+    "buff": ["BT_AGILE_RESPONSE", "BT_BARRIER", "BT_STAT|ST_ATK", "RADIANT_WILL"],
     "debuff": ["BT_AGGRO", "BT_DOT_BURN", "BT_EXTEND_DEBUFF", "BT_MARKING"],
     "effectsBySource": {
       "s1": {
@@ -2402,6 +2650,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_MARKING"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_STAT|ST_ATK"],
+        "debuff": []
       }
     },
     "teamBonuses": ["DMG RED%"]
@@ -2461,6 +2713,10 @@
       },
       "dualAttack": {
         "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
         "debuff": []
       }
     },
@@ -2545,6 +2801,10 @@
       },
       "ultimate": {
         "buff": ["BT_ADDITIVE_TURN", "BT_REVIVAL", "ETHER_BOOST"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_REMOVE_DEBUFF", "BT_STAT|ST_BUFF_RESIST"],
         "debuff": []
       }
     },
@@ -2653,6 +2913,7 @@
     "buff": [
       "BT_ACTION_GAUGE",
       "BT_BARRIER",
+      "BT_EXTEND_BUFF",
       "BT_STAT|ST_BUFF_CHANCE",
       "BT_STAT|ST_COUNTER_RATE",
       "BT_STAT|ST_SPEED"
@@ -2673,6 +2934,10 @@
       },
       "dualAttack": {
         "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_EXTEND_BUFF"],
         "debuff": []
       }
     },
@@ -2802,6 +3067,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["CORROSIVE_POISON"]
+      },
+      "exclusiveEquip": {
+        "buff": [],
+        "debuff": ["CORROSIVE_POISON"]
       }
     },
     "teamBonuses": ["DEF"]
@@ -2831,6 +3100,10 @@
       "ultimate": {
         "buff": ["BT_ADDITIVE_TURN", "BT_CP_CHARGE"],
         "debuff": ["BT_AP_CHARGE", "BT_STAT|ST_DEF"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
       }
     },
     "teamBonuses": ["SPD", "ATK"]
@@ -2902,6 +3175,10 @@
       "ultimate": {
         "buff": ["SPATIAL_DISTORTION_SELF"],
         "debuff": ["BT_REDISTRIBUTE_BUFF", "BT_STAT|ST_PIERCE_POWER_RATE"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
       }
     },
     "teamBonuses": []
@@ -2928,6 +3205,10 @@
       "ultimate": {
         "buff": ["BT_BARRIER", "BT_IMMUNE", "BT_REMOVE_DEBUFF"],
         "debuff": ["BT_SILENCE"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
       }
     },
     "teamBonuses": ["HP"]
@@ -2940,6 +3221,7 @@
       "BT_BARRIER",
       "BT_BARRIER_IR",
       "BT_COOL_CHARGE",
+      "BT_EXTEND_DEBUFF",
       "BT_STAT|ST_COUNTER_RATE",
       "RUSH"
     ],
@@ -2959,6 +3241,10 @@
       },
       "dualAttack": {
         "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE", "BT_EXTEND_DEBUFF"],
         "debuff": []
       }
     },
@@ -3060,6 +3346,10 @@
       "dualAttack": {
         "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_ATK"],
         "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
       }
     },
     "teamBonuses": ["CHC"]
@@ -3140,6 +3430,7 @@
   },
   "2700037": {
     "buff": [
+      "BT_ACTION_GAUGE",
       "BT_BARRIER",
       "BT_CALL_BACKUP",
       "BT_REMOVE_DEBUFF",
@@ -3172,6 +3463,10 @@
       },
       "fusionPassive": {
         "buff": ["BT_STAT|ST_CRITICAL_DMG_RATE"],
+        "debuff": []
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
         "debuff": []
       }
     },
@@ -3246,12 +3541,22 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_DOT_POISON"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
       }
     },
     "teamBonuses": ["ATK"]
   },
   "2700070": {
-    "buff": ["BT_COOL_CHARGE", "BT_INVINCIBLE", "BT_STAT|ST_CRITICAL_DMG_RATE", "BT_STAT|ST_DEF"],
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_COOL_CHARGE",
+      "BT_INVINCIBLE",
+      "BT_STAT|ST_CRITICAL_DMG_RATE",
+      "BT_STAT|ST_DEF"
+    ],
     "debuff": ["BT_STEAL_BUFF"],
     "effectsBySource": {
       "s1": {
@@ -3273,6 +3578,10 @@
       "dualAttack": {
         "buff": [],
         "debuff": ["BT_STEAL_BUFF"]
+      },
+      "exclusiveEquip": {
+        "buff": ["BT_ACTION_GAUGE", "BT_STAT|ST_DEF"],
+        "debuff": []
       }
     },
     "teamBonuses": ["DEF"]

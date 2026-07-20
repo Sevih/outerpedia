@@ -7,7 +7,8 @@
  *   - `buff` / `debuff` : union dédupliquée des clés d'effet CANONIQUES sur tout
  *     le kit (clés `effectByKey` : `BT_STAT|ST_ATK`, `BT_IMMUNE`, `POLAR_NIGHT`…,
  *     repliées sur leur `group` quand la taxonomie en définit un) ;
- *   - `effectsBySource` : les mêmes, ventilés par SOURCE de skill (s1/s2/…) ;
+ *   - `effectsBySource` : les mêmes, ventilés par SOURCE de skill (s1/s2/…) et par
+ *     l'équipement exclusif (`exclusiveEquip`) ;
  *   - `teamBonuses` : stats données à TOUTE L'ÉQUIPE en permanence via le passif
  *     de TRANSCENDANCE (clés STAT_ICON : SPD/ATK/…).
  *
@@ -23,9 +24,6 @@
  * / `dualAttack`. Les passifs restants (class/unique/burst/extra) comptent dans
  * l'union `buff`/`debuff` mais n'ont pas de source nommée (comportement V2).
  *
- * NB : `exclusiveEquip` (effets de l'équipement exclusif) n'est PAS encore
- * produit ici — cf. TODO en fin de fichier.
- *
  * Écriture CANONIQUE : `pnpm datagen:build` → `characters-list.json`. L'exécution
  * directe imprime des compteurs pour revue.
  */
@@ -34,6 +32,7 @@ import type { Character } from '../extractor/specs/character';
 import type { Skill } from './skills';
 import type { Effect, ResolvedEffect } from '../lib/effects';
 import type { EffectFiltersData } from '../curated/effect-filters';
+import type { ExclusiveItem, Passive } from './equipment';
 
 /** Effets agrégés d'un perso pour les filtres de liste. */
 export interface CharacterEffects {
@@ -141,6 +140,10 @@ export interface CharactersListDeps {
   byKey: Record<Side, Map<string, string>>;
   /** Taxonomie de filtre curée (famille UI + group). */
   effectFilters: EffectFiltersData;
+  /** Équipements exclusifs (source `exclusiveEquip`), liés au perso par `character`. */
+  ee: Record<string, ExclusiveItem>;
+  /** Passifs référencés par les EE (id → passif, effets structurés). */
+  passives: Record<string, Passive>;
 }
 
 /**
@@ -172,8 +175,17 @@ function effectId(e: ResolvedEffect, byTooltip: Map<string, string>, byLabel: Ma
 
 /** Construit la donnée liste (agrégats d'effets) pour tous les persos. */
 export function buildCharactersList(deps: CharactersListDeps): CharactersListData {
-  const { characters, skills, effects, byTooltip, byLabel, byKey, effectFilters } = deps;
+  const { characters, skills, effects, byTooltip, byLabel, byKey, effectFilters, ee, passives } =
+    deps;
   const idToKey = invertKeys(byKey, effectFilters);
+  // Perso → ses équipements exclusifs (l'EE se lie au perso par `character`).
+  const eeByChar = new Map<string, ExclusiveItem[]>();
+  for (const item of Object.values(ee)) {
+    if (item.character)
+      (eeByChar.get(item.character) ?? eeByChar.set(item.character, []).get(item.character)!).push(
+        item,
+      );
+  }
   const out: CharactersListData = {};
 
   for (const char of Object.values(characters)) {
@@ -181,36 +193,39 @@ export function buildCharactersList(deps: CharactersListDeps): CharactersListDat
     const bySource: Record<string, Record<Side, Set<string>>> = {};
     const team = new Set<string>();
 
+    // Résout un effet en (côté, clé canonique) et l'ajoute à l'union + à sa
+    // source. On s'en tient aux STATUTS NOMMÉS (tooltip/label → id → clé de
+    // taxonomie inversée = les chips affichées) : les effets purement mécaniques
+    // sans tooltip (BT_AP_CHARGE self…) ne sont pas filtrables → zéro faux positif.
+    const addEffect = (e: ResolvedEffect, source: string | undefined): void => {
+      const id = effectId(e, byTooltip, byLabel);
+      const eff = id ? effects.get(id) : undefined;
+      if (!eff) return;
+      const side: Side = eff.isDebuff ? 'debuff' : 'buff';
+      const key = idToKey[side].get(id!);
+      if (!key) return;
+      const canonical = effectFilters[side][key]?.group ?? key; // variante `_IR`… → base
+      union[side].add(canonical);
+      if (source)
+        (bySource[source] ??= { buff: new Set(), debuff: new Set() })[side].add(canonical);
+    };
+
     for (const skillId of char.skills) {
       const sk = skills[skillId];
       if (!sk) continue;
       // Bonus d'équipe : le passif de TRANSCENDANCE (unique_passive) décrit son
       // gain d'équipe sur le desc PAR NIVEAU (SE_DESC_SKILL08_*).
-      if (sk.type === 'unique_passive') {
+      if (sk.type === 'unique_passive')
         for (const lv of sk.levels ?? []) if (lv.desc?.en) teamStatsFromDesc(lv.desc.en, team);
-      }
       if (!sk.effects) continue;
       const source = SLOT_SOURCE[sk.type];
-      for (const e of sk.effects) {
-        // Résolution par statut NOMMÉ (tooltip/label → id → clé de taxonomie
-        // inversée). On s'en tient AUX STATUTS NOMMÉS (= les chips affichées) :
-        // les effets purement mécaniques sans tooltip (BT_AP_CHARGE self…) ne
-        // sont pas des « buffs appliqués » filtrables → zéro faux positif.
-        const id = effectId(e, byTooltip, byLabel);
-        const eff = id ? effects.get(id) : undefined;
-        if (!eff) continue;
-        const side: Side = eff.isDebuff ? 'debuff' : 'buff';
-        const key = idToKey[side].get(id!);
-        if (!key) continue;
-        // Canonicalise la variante (`_IR`… → base) via la taxonomie.
-        const canonical = effectFilters[side][key]?.group ?? key;
-        union[side].add(canonical);
-        if (source) {
-          const bucket = (bySource[source] ??= { buff: new Set(), debuff: new Set() });
-          bucket[side].add(canonical);
-        }
-      }
+      for (const e of sk.effects) addEffect(e, source);
     }
+
+    // Équipement exclusif : effets des passifs de l'EE → source `exclusiveEquip`.
+    for (const item of eeByChar.get(char.id) ?? [])
+      for (const ref of item.passives)
+        for (const e of passives[ref.id]?.effects ?? []) addEffect(e, 'exclusiveEquip');
 
     const effectsBySource: CharacterEffects['effectsBySource'] = {};
     for (const [source, sides] of Object.entries(bySource)) {
@@ -237,9 +252,11 @@ if (isMain(import.meta.url)) {
     const { buildSkills } = await import('./skills');
     const { buildEffectGlossary } = await import('../lib/effects');
     const { loadEffectFilters } = await import('../curated/effect-filters');
+    const { buildEquipment } = await import('./equipment');
     const { characters } = buildCharacters();
     const { skills } = buildSkills();
     const { effects, byTooltip, byLabel, byKey } = buildEffectGlossary();
+    const equipment = buildEquipment();
     const data = buildCharactersList({
       characters,
       skills,
@@ -248,6 +265,8 @@ if (isMain(import.meta.url)) {
       byLabel,
       byKey,
       effectFilters: loadEffectFilters(),
+      ee: equipment.ee,
+      passives: equipment.passives,
     });
     const n = Object.keys(data).length;
     const withBuff = Object.values(data).filter((c) => c.buff.length).length;
@@ -261,5 +280,3 @@ if (isMain(import.meta.url)) {
   };
   run();
 }
-
-// TODO(exclusiveEquip) : effets de l'équipement exclusif (source `exclusiveEquip`).
