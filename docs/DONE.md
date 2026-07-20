@@ -6,6 +6,21 @@
 
 ## 2026-07-20
 
+- **Outil `/gear-usage-finder` porté — même régime gear-reco à la lecture.**
+  La V2 lisait un artefact de pipeline `gear-finder-index.json` ; en V3
+  `finder.ts` assemble au rendu, depuis la gear-reco curée, les builds MIS À
+  PLAT par FAMILLE (mains multi « ATK%/SPD » éclatées, presets `$` résolus —
+  sets ET substats, priorité « A>B=C » éclatée en clés) + les catalogues
+  sélectionnables (familles d'armes/amulettes avec `classLimits`/pools de
+  mains, sets). Client `GearUsageFinderBrowser`, parité V2 : modes Recommandé
+  (pièces/mains présentes dans les builds, main stricte) et Libre (tout le
+  catalogue, scoring main=4 pts + 1/substat), parcours type → classe → pièce →
+  main → substats, résultats en cartes triées par score (meilleur build par
+  perso, compte de builds). Différences V3 assumées : unité = famille (pas la
+  variante d'étoiles), restriction de classe vide = pièce montrée pour toutes
+  les classes, mains du mode libre = pools réels de la famille (la V2 codait
+  la liste en dur pour les armes). Pills de classe = `ClassIconPill` partagée.
+  Smoke test tsx : 246 builds, 55/51/21 catalogues, éclatements vérifiés.
 - **Outil `/gear-usage-statistics` porté — agrégation gear-reco à la lecture.**
   La V2 générait `gear-usage-stats.json` par un step de pipeline sur ses
   fichiers de reco par perso ; en V3 l'usage se calcule au rendu depuis la
@@ -24,6 +39,7 @@
   generators (content-schedule/encounters), hors périmètre — le bump sharp
   0.35 de ce chantier-là cassait par contre tout `pnpm typecheck` : corrigé
   (import nommé `type Sharp`, d12e5af).
+- **Page `/changelog` du site livrée (entrée reconstituée depuis le
   TODO, le worker n'avait pas journalisé).** Journal du site refait propre
   (pas de portage V2) : socle données + migration des 134 entrées V2, page
   publique + section Recent Updates de la Home (rebranchée) + i18n (5

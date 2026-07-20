@@ -26,13 +26,14 @@
 > ASSUMÉES le temps du portage. Chaque page arrive avec ses clés de locale
 > DÉJÀ pré-seedées ×5 (cf. item « pré-seed » de la section Docs).
 
-- [ ] **`/tools` — RESTENT 8 sous-outils** (`/<slug>`, 404 tant que non portés) :
-      gear-usage-finder, damage-calculator, pull-simulator, progress-tracker,
+- [ ] **`/tools` — RESTENT 7 sous-outils** (`/<slug>`, 404 tant que non portés) :
+      damage-calculator, pull-simulator, progress-tracker,
       team-planner, tier-list-maker, patch-history, event — namespaces
       `tools.*`/`progress.*`.
       (Historique des portés : 19-20/07, cf. DONE — socle `TierListTool`,
       routeur à plat, coupon-codes = renvoi `/coupons`,
-      gear-usage-statistics = agrégation gear-reco à la lecture.)
+      gear-usage-statistics & gear-usage-finder = agrégation gear-reco à la
+      lecture.)
 - [ ] **`/characters/[slug]` — RELIQUAT** : la fiche détail est portée, il ne
       MANQUE que les **Discord reviews** (section review communautaire de la V2).
       **Bloqué sur la migration du bot Discord → VPS** — cf. l'entrée dédiée
