@@ -104,11 +104,14 @@ export function ElementIconPill({
   active,
   onClick,
   size = 'md',
+  title,
 }: {
   element: string;
   active: boolean;
   onClick: () => void;
   size?: 'sm' | 'md';
+  /** Tooltip/aria localisé (défaut : le slug). */
+  title?: string;
 }) {
   return (
     <IconPill
@@ -116,8 +119,8 @@ export function ElementIconPill({
       color={ELEMENT_HEX[element] ?? TONE.cyan}
       onClick={onClick}
       size={size}
-      title={element}
-      aria-label={element}
+      title={title ?? element}
+      aria-label={title ?? element}
     >
       <PillSprite src={img.element(element)} size={size} />
     </IconPill>
@@ -129,11 +132,14 @@ export function ClassIconPill({
   active,
   onClick,
   size = 'md',
+  title,
 }: {
   classType: string;
   active: boolean;
   onClick: () => void;
   size?: 'sm' | 'md';
+  /** Tooltip/aria localisé (défaut : le slug). */
+  title?: string;
 }) {
   return (
     <IconPill
@@ -141,8 +147,8 @@ export function ClassIconPill({
       color={TONE.cyan}
       onClick={onClick}
       size={size}
-      title={classType}
-      aria-label={classType}
+      title={title ?? classType}
+      aria-label={title ?? classType}
     >
       <PillSprite src={img.klass(classType)} size={size} />
     </IconPill>
@@ -270,6 +276,77 @@ export function LogicToggle({
           </button>
         );
       })}
+    </div>
+  );
+}
+
+// ── Toolbar — briques de la barre de filtres ────────────────────────────────
+// (extraites de CharactersFiltersBar pour servir aussi /equipment — même
+// vocabulaire visuel sur tous les browsers.)
+
+/** Conteneur de la toolbar horizontale (desktop) des barres de filtres. */
+export const FILTERS_TOOLBAR_CLASS =
+  'border-line-subtle bg-surface-raised/60 flex flex-wrap items-end gap-x-4 gap-y-3 rounded-xl border px-3 py-2.5 backdrop-blur-sm';
+
+/** Champ de la toolbar hors pills (selects…) — assorti à SearchField. */
+export const FILTERS_FIELD_CLASS =
+  'border-line-subtle bg-surface-sunken/70 text-content focus:border-accent h-9 rounded-lg border px-2 text-sm focus:outline-none';
+
+export function ToolbarDivider() {
+  return <span className="bg-line/70 h-9 w-px self-end" aria-hidden />;
+}
+
+/** Groupe labellisé (eyebrow centré au-dessus des pills). */
+export function BarGroup({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col gap-1">
+      <span className="text-content-muted text-center font-mono text-[10px] font-semibold tracking-[0.16em] uppercase">
+        {label}
+      </span>
+      <div className="flex flex-wrap items-center justify-center gap-1">{children}</div>
+    </div>
+  );
+}
+
+/** Recherche avec loupe et croix d'effacement. */
+export function SearchField({
+  value,
+  onChange,
+  placeholder,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
+}) {
+  return (
+    <div className="relative flex items-center">
+      <svg
+        className="text-content-subtle pointer-events-none absolute left-3 size-3.5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        <circle cx="11" cy="11" r="7" />
+        <path d="M20 20l-3.5-3.5" strokeLinecap="round" />
+      </svg>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="border-line-subtle bg-surface-sunken/70 text-content placeholder:text-content-subtle focus:border-accent h-9 w-full rounded-lg border pr-8 pl-9 text-sm focus:outline-none"
+      />
+      {value && (
+        <button
+          type="button"
+          onClick={() => onChange('')}
+          aria-label="clear"
+          className="text-content-subtle hover:text-content-strong absolute right-2"
+        >
+          ×
+        </button>
+      )}
     </div>
   );
 }

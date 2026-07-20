@@ -48,10 +48,6 @@ function toRowSource(
   t: Awaited<ReturnType<typeof getT>>,
 ): RowSource | undefined {
   if (!source) return undefined;
-  const labels = [
-    ...source.shops.map((s) => shopSourceLabel(s, t)),
-    ...(source.label ? [source.label] : []),
-  ];
   return {
     bosses: source.bosses.map((b) => ({
       id: b.id,
@@ -59,7 +55,10 @@ function toRowSource(
       icon: b.icon,
       element: b.element,
     })),
-    label: labels.length ? labels.join(' · ') : undefined,
+    // Boutiques STRUCTURÉES (slug + libellé) : le browser en fait des pills à
+    // icône, la SourceLine des cartes les rend avec leur sprite.
+    shops: source.shops.map((s) => ({ slug: s, label: shopSourceLabel(s, t) })),
+    label: source.label,
   };
 }
 
@@ -217,6 +216,10 @@ export default async function EquipmentPage({ params }: { params: Promise<{ lang
     element: t('equip.filter.element'),
     source: t('equip.filter.source'),
     mainStat: t('equip.detail.mainstat'),
+    level: t('equip.filter.level'),
+    type: t('equip.filter.type'),
+    all: t('equip.filter.all'),
+    starAria: t('aria.star_rarity'),
     unlock: t('equip.ee.unlock'),
     upgrade: t('equip.ee.upgrade'),
     // Slug → libellé localisé pour les VALEURS des selects (même pattern que

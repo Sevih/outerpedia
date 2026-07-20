@@ -4,6 +4,7 @@ import { useId } from 'react';
 import { cn } from '@/lib/cn';
 import { onTabListKeyDown } from '@/lib/tablist';
 import { useUrlTab } from '@/hooks/useUrlTab';
+import { gameTabClass, gameTabListClass } from '@/components/ui/game-tab';
 
 export interface Tab {
   id: string;
@@ -22,15 +23,21 @@ export interface Tab {
  * RÈGLE D'USAGE (décision 2026-07-16) : ce composant sert les pages HORS
  * guides (browsers, admin…). L'état INTERNE d'un guide (version, phase,
  * équipe) vit dans le HASH multi-params → `guides/SegmentedTabs` + url-hash.
+ *
+ * `variant="game"` : mêmes onglets glow que SegmentedTabs (cf. ui/game-tab) —
+ * pour les pages hors guides qui doivent partager CE visuel (ex. /equipment)
+ * tout en gardant la politique `?param`.
  */
 export function Tabs({
   tabs,
   className,
   urlParam,
+  variant = 'underline',
 }: {
   tabs: Tab[];
   className?: string;
   urlParam?: string;
+  variant?: 'underline' | 'game';
 }) {
   const { active, current, select } = useUrlTab(tabs, urlParam);
   const activeIndex = Math.max(
@@ -48,7 +55,7 @@ export function Tabs({
     <div className={className}>
       <div
         role="tablist"
-        className="border-line-subtle flex gap-1 border-b"
+        className={variant === 'game' ? gameTabListClass : 'border-line-subtle flex gap-1 border-b'}
         onKeyDown={(e) => onTabListKeyDown(e, tabs.length, activeIndex, (i) => select(tabs[i].id))}
       >
         {tabs.map((t) => {
@@ -62,12 +69,16 @@ export function Tabs({
               aria-controls={panelId}
               tabIndex={on ? 0 : -1}
               onClick={() => select(t.id)}
-              className={cn(
-                '-mb-px border-b-2 px-4 py-2 text-sm font-medium transition-colors',
-                on
-                  ? 'border-accent text-content-strong'
-                  : 'text-content-muted hover:text-content-strong border-transparent',
-              )}
+              className={
+                variant === 'game'
+                  ? gameTabClass(on)
+                  : cn(
+                      '-mb-px border-b-2 px-4 py-2 text-sm font-medium transition-colors',
+                      on
+                        ? 'border-accent text-content-strong'
+                        : 'text-content-muted hover:text-content-strong border-transparent',
+                    )
+              }
             >
               {t.label}
             </button>

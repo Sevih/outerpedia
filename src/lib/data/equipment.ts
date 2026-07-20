@@ -387,12 +387,19 @@ function resolveSource(
   entry?: EquipmentCuratedEntry,
 ): ResolvedSource | undefined {
   const extracted = [...new Set(itemIds.flatMap((id) => SOURCES[id]?.bosses ?? []))];
-  const shops = [...new Set(itemIds.flatMap((id) => SOURCES[id]?.shops ?? []))];
+  // Boutiques : UNION extrait + curé sur le MÊME vocabulaire de slugs (le Set
+  // dédoublonne — c'est ce qui interdit deux options « Event Shop » au filtre).
+  const shops = [
+    ...new Set([
+      ...itemIds.flatMap((id) => SOURCES[id]?.shops ?? []),
+      ...(entry?.source?.shops ?? []),
+    ]),
+  ];
   const bossIds = extracted.length ? extracted : (entry?.source?.bosses ?? []);
   const bosses = bossIds
     .map((id) => (BOSSES[id] ? { id, ...BOSSES[id] } : null))
     .filter((b): b is Boss & { id: string } => Boolean(b));
-  // Le libellé curé ne sert que si RIEN n'est extrait pour la famille.
+  // Le libellé curé = texte libre résiduel : ne sert que si RIEN d'autre.
   const label = extracted.length || shops.length ? undefined : entry?.source?.label;
   if (!bosses.length && !shops.length && !label) return undefined;
   return { bosses, shops, label };

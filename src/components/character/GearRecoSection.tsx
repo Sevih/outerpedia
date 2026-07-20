@@ -8,6 +8,7 @@ import { STAT_ICON } from '@/lib/stats';
 import { SkillDescription } from '@/components/character/SkillDescription';
 import { InlineTooltip } from '@/components/inline/InlineTooltip';
 import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
+import { gameTabClass } from '@/components/ui/game-tab';
 
 const ACCENT = 'var(--cd-el)';
 const TOTAL_SEGMENTS = 6;
@@ -419,8 +420,9 @@ export function GearRecoSection({
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Onglets */}
-      <div className="inline-flex flex-wrap gap-1 self-start rounded-lg border border-white/6 bg-slate-900/60 p-1">
+      {/* Onglets de builds — style « game » partagé (cf. ui/game-tab) ; le glow
+          prend le thème élémentaire tout seul (--cd-el hérité de .cd-page). */}
+      <div className="flex flex-wrap gap-2 self-start">
         {builds.map((b, i) => {
           const on = i === active;
           return (
@@ -429,19 +431,7 @@ export function GearRecoSection({
               type="button"
               onClick={() => setActive(i)}
               aria-pressed={on}
-              style={
-                on
-                  ? {
-                      color: ACCENT,
-                      backgroundColor: `color-mix(in srgb, ${ACCENT} 14%, transparent)`,
-                      borderColor: `color-mix(in srgb, ${ACCENT} 42%, transparent)`,
-                    }
-                  : undefined
-              }
-              className={[
-                'rounded-md border px-3.5 py-1.5 text-[13px] transition-colors',
-                on ? 'font-semibold' : 'border-transparent text-zinc-400 hover:text-zinc-200',
-              ].join(' ')}
+              className={gameTabClass(on)}
             >
               {b.name}
             </button>

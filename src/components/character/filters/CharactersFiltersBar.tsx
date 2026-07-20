@@ -1,6 +1,14 @@
 'use client';
 
-import { ElementIconPill, ClassIconPill, StarPill, TONE } from './FilterAtoms';
+import {
+  ElementIconPill,
+  ClassIconPill,
+  StarPill,
+  TONE,
+  BarGroup,
+  SearchField,
+  ToolbarDivider,
+} from './FilterAtoms';
 import { FilterPill } from './FilterPill';
 import type { FilterOption } from './AdvancedFiltersPanel';
 
@@ -153,7 +161,7 @@ export function CharactersFiltersBar({
           />
         </div>
 
-        <Divider />
+        <ToolbarDivider />
 
         <BarGroup label={labels.elements}>
           {elements.map((el) => (
@@ -166,7 +174,7 @@ export function CharactersFiltersBar({
           ))}
         </BarGroup>
 
-        <Divider />
+        <ToolbarDivider />
 
         <BarGroup label={labels.classes}>
           {classes.map((cl) => (
@@ -179,7 +187,7 @@ export function CharactersFiltersBar({
           ))}
         </BarGroup>
 
-        <Divider />
+        <ToolbarDivider />
 
         <BarGroup label={labels.rarity}>
           {rarities.map((r) => (
@@ -195,7 +203,7 @@ export function CharactersFiltersBar({
 
         {showRoles && (
           <>
-            <Divider />
+            <ToolbarDivider />
             <BarGroup label={labels.roles ?? ''}>
               {roles!.map((r) => (
                 <FilterPill
@@ -230,63 +238,8 @@ export function CharactersFiltersBar({
 }
 
 // ── Sous-composants ──────────────────────────────────────────────────────────
-
-function Divider() {
-  return <span className="bg-line/70 h-9 w-px self-end" aria-hidden />;
-}
-
-function BarGroup({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="flex flex-col gap-1">
-      <span className="text-content-muted text-center font-mono text-[10px] font-semibold tracking-[0.16em] uppercase">
-        {label}
-      </span>
-      <div className="flex flex-wrap items-center justify-center gap-1">{children}</div>
-    </div>
-  );
-}
-
-function SearchField({
-  value,
-  onChange,
-  placeholder,
-}: {
-  value: string;
-  onChange: (v: string) => void;
-  placeholder?: string;
-}) {
-  return (
-    <div className="relative flex items-center">
-      <svg
-        className="text-content-subtle pointer-events-none absolute left-3 size-3.5"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
-        <circle cx="11" cy="11" r="7" />
-        <path d="M20 20l-3.5-3.5" strokeLinecap="round" />
-      </svg>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className="border-line-subtle bg-surface-sunken/70 text-content placeholder:text-content-subtle focus:border-accent h-9 w-full rounded-lg border pr-8 pl-9 text-sm focus:outline-none"
-      />
-      {value && (
-        <button
-          type="button"
-          onClick={() => onChange('')}
-          aria-label="clear"
-          className="text-content-subtle hover:text-content-strong absolute right-2"
-        >
-          ×
-        </button>
-      )}
-    </div>
-  );
-}
+// (SearchField/BarGroup/ToolbarDivider vivent dans FilterAtoms — partagés avec
+// la toolbar de /equipment.)
 
 function AdvancedButton({
   label,

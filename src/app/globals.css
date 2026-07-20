@@ -508,15 +508,23 @@ body::before {
 
 /* Onglet « jeu » actif (portage V2) : glow doré façon UI Outerplane. Tout le
    visuel vit ici (couleurs ambre brutes interdites dans les composants) ; le
-   liseré en pied est un pur gradient — pas d'asset, contrairement à la V2. */
+   liseré en pied est un pur gradient — pas d'asset, contrairement à la V2.
+   Teinte PARAMÉTRABLE via `--tab-glow` : par défaut le thème élémentaire de la
+   fiche perso (`--cd-el`) s'il est posé, sinon l'ambre. Toutes les nuances en
+   dérivent (color-mix), le texte est éclairci comme l'amber-300 d'origine. */
 .tab-game-active {
+  --tab-glow: var(--cd-el, #fbbf24); /* thème perso, sinon amber-400 */
   position: relative;
-  color: #fcd34d; /* amber-300 */
-  background-image: linear-gradient(to bottom, rgba(245, 158, 11, 0.15), transparent);
-  border: 1px solid rgba(245, 158, 11, 0.2); /* amber-500/20 */
+  color: color-mix(in srgb, var(--tab-glow) 78%, white);
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--tab-glow) 15%, transparent),
+    transparent
+  );
+  border: 1px solid color-mix(in srgb, var(--tab-glow) 20%, transparent);
   border-top-width: 2px;
-  border-top-color: rgba(251, 191, 36, 0.6); /* amber-400/60 */
-  box-shadow: 0 2px 16px rgba(251, 191, 36, 0.1);
+  border-top-color: color-mix(in srgb, var(--tab-glow) 60%, transparent);
+  box-shadow: 0 2px 16px color-mix(in srgb, var(--tab-glow) 10%, transparent);
 }
 .tab-game-active::after {
   content: '';
@@ -526,7 +534,12 @@ body::before {
   width: 70%;
   height: 2px;
   pointer-events: none;
-  background-image: linear-gradient(to right, transparent, rgba(251, 191, 36, 0.85), transparent);
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in srgb, var(--tab-glow) 85%, transparent),
+    transparent
+  );
 }
 
 @layer components {

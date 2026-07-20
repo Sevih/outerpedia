@@ -1,90 +1,90 @@
-{
+﻿{
   "weapons": {
     "630": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     },
     "631": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     },
     "632": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     },
     "635": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     },
     "636": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     },
     "644": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     },
     "645": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     },
     "646": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     },
     "647": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     },
     "648": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     },
     "649": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     },
     "650": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     },
     "652": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     }
   },
   "amulets": {
     "1643": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     },
     "1648": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     },
     "1649": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     },
     "1652": {
       "source": {
-        "label": "Event Shop"
+        "shops": ["event_shop"]
       }
     }
   },

@@ -17,6 +17,7 @@ import { useId, useState, type ReactNode } from 'react';
 import { useUrlSlice } from '@/hooks/useUrlSlice';
 import { readHashParam, writeHashParam } from '@/lib/url-hash';
 import { onTabListKeyDown } from '@/lib/tablist';
+import { gameTabClass, gameTabListClass } from '@/components/ui/game-tab';
 
 export interface TabItem {
   key: string;
@@ -78,7 +79,7 @@ export function SegmentedTabs({
       : variant === 'icon'
         ? 'flex flex-wrap gap-1.5'
         : variant === 'game'
-          ? 'flex flex-wrap justify-center gap-2'
+          ? gameTabListClass
           : 'border-line-subtle bg-surface-sunken inline-flex flex-wrap gap-0.5 rounded-lg border p-0.5';
 
   const buttonClass = (isActive: boolean) => {
@@ -93,15 +94,8 @@ export function SegmentedTabs({
       return `rounded-lg p-0.5 transition ${
         isActive ? 'ring-accent ring-2' : 'cursor-pointer opacity-50 hover:opacity-100'
       }`;
-    // `game` : onglets centrés façon V2 — actif en glow doré (tout le visuel est
-    // dans la classe CSS `.tab-game-active`, ambre brut interdit ici), inactif
-    // bordé discret via tokens de surface.
-    if (variant === 'game')
-      return `rounded px-4 py-2 text-sm font-medium transition-all ${
-        isActive
-          ? 'tab-game-active'
-          : 'border-line-subtle text-content-muted hover:text-content-strong hover:bg-surface-raised hover:border-line-strong cursor-pointer border'
-      }`;
+    // `game` : onglets centrés façon V2 — visuel partagé (cf. ui/game-tab).
+    if (variant === 'game') return gameTabClass(isActive);
     return `flex items-center gap-1.5 rounded-md px-3 py-1 text-sm font-semibold transition-colors ${
       isActive ? 'bg-accent text-accent-fg' : 'text-content hover:bg-surface-raised cursor-pointer'
     }`;

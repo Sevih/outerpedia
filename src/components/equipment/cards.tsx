@@ -25,7 +25,17 @@ export interface SourceBoss {
 
 export interface RowSource {
   bosses: SourceBoss[];
+  /** Boutiques extraites (slug + libellé localisé) — icône via `shopIconSrc`. */
+  shops?: { slug: string; label: string }[];
+  /** Libellé curé (texte libre, sans icône). */
   label?: string;
+}
+
+/** Icône d'une boutique source (slug extrait → sprite du jeu déjà poussé). */
+export function shopIconSrc(slug: string): string | undefined {
+  if (slug === 'adventure_license') return img.guideIcon('CM_Adventure_License');
+  if (slug === 'event_shop') return img.navIcon('CM_Shop_Shortcuts_EventShop');
+  return undefined;
 }
 
 /**
@@ -88,9 +98,10 @@ export interface EERow {
   trustLevel: number;
 }
 
-/** Ligne « Source » : portraits + noms des boss, ou libellé curé. */
+/** Ligne « Source » : portraits + noms des boss, boutiques (icône + libellé),
+ * libellé curé. */
 export function SourceLine({ source, title }: { source?: RowSource; title: string }) {
-  if (!source || (!source.bosses.length && !source.label)) return null;
+  if (!source || (!source.bosses.length && !source.shops?.length && !source.label)) return null;
   return (
     <div className="border-line-subtle mt-auto flex flex-wrap items-center gap-2 border-t pt-2">
       <span className="text-content-subtle text-xs uppercase">{title}</span>
@@ -101,6 +112,18 @@ export function SourceLine({ source, title }: { source?: RowSource; title: strin
           <span className="text-content-muted text-xs">{b.name}</span>
         </span>
       ))}
+      {source.shops?.map((s) => {
+        const icon = shopIconSrc(s.slug);
+        return (
+          <span key={s.slug} className="inline-flex items-center gap-1">
+            {icon && (
+              // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
+              <img src={icon} alt="" className="h-6 w-6 rounded object-contain" />
+            )}
+            <span className="text-content-muted text-xs">{s.label}</span>
+          </span>
+        );
+      })}
       {source.label && <span className="text-content-muted text-xs">{source.label}</span>}
     </div>
   );

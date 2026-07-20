@@ -20,11 +20,15 @@
 import { readCuratedJson } from '../lib/json';
 import { validate, type Schema } from '../extractor/core/validate';
 
-/** Source d'obtention d'un item (boss droppant et/ou libellé hors combat). */
+/** Source d'obtention d'un item (boss droppant et/ou boutique hors combat). */
 export interface EquipmentSource {
   /** Ids de boss (`MonsterTemplet`) droppant l'item. */
   bosses?: string[];
-  /** Libellé hors boss (« Event Shop », « Adventure License »…). */
+  /** Slugs de boutique (`event_shop`, `adventure_license`) — MÊME vocabulaire
+   * que l'extraction (`sources.json`), jamais de texte libre pour une boutique
+   * connue : le filtre de /equipment dédoublonne par slug. */
+  shops?: string[];
+  /** Libellé texte libre — uniquement ce qui n'est NI boss NI boutique connue. */
   label?: string;
 }
 
@@ -69,6 +73,7 @@ const entrySchema: Schema = {
       optional: true,
       fields: {
         bosses: { kind: 'array', of: { kind: 'string' }, optional: true },
+        shops: { kind: 'array', of: { kind: 'string' }, optional: true },
         label: { kind: 'string', optional: true },
       },
     },

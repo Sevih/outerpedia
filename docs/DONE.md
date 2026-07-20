@@ -6,6 +6,22 @@
 
 ## 2026-07-20
 
+- **Onglets « game » et filtres UNIFORMISÉS sur tout le site.** Le visuel
+  d'onglet glow (`.tab-game-active`) devient LE style d'onglet : classes
+  partagées dans `ui/game-tab` (SegmentedTabs, ui/Tabs `variant="game"`,
+  onglets de builds de GearRecoSection), teinte paramétrable `--tab-glow`
+  (défaut `var(--cd-el, ambre)` — la fiche perso teinte ses onglets à
+  l'élément SANS style inline). `/equipment` : tabs → game (en gardant
+  `?tab=`, règle hors guides) et filtres refondus sur la toolbar de
+  /characters (SearchField/BarGroup/ToolbarDivider MUTUALISÉS dans
+  FilterAtoms, pills élément/classe/étoiles multi-sélection). Filtre source
+  en pills à icônes multi (OU) : portraits de boss (halo élémentaire) +
+  boutiques (sprites CM_Adventure_License / CM_Shop_Shortcuts_EventShop,
+  déjà sur R2) ; doublon Event Shop réglé À LA RACINE — le curé équipement
+  gagne `source.shops` (slugs, vocabulaire de l'extraction), les 17
+  `label: "Event Shop"` migrés, `resolveSource` fait l'union dédoublonnée ;
+  queue de liste éditoriale (4 boss d'équipement puis boutiques, le reste
+  alphabétique devant).
 - **Variantes irregular, PASSE 2 : /equipment éclaté en cartes ET fiches PAR
   variante (retour Sevih : « 1 seule carte pour tous »).** Le browser rend
   UNE carte par variante (tuile/passif/nom suffixé/classe propres — plus de
