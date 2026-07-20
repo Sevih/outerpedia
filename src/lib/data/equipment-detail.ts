@@ -28,6 +28,7 @@ import {
   loadEquipmentEditorial,
   resolvePassives,
   slugifyEquipment,
+  withClassSuffix,
   type EEView,
   type GearFamily,
   type ResolvedPassive,
@@ -473,21 +474,32 @@ function gearModel(
   table: Record<string, GearItem>,
   kind: 'weapon' | 'amulet',
   lang: Lang,
+  // Variante de classe (Briareos/Gorgon) : la fiche est celle de LA variante —
+  // nom suffixé, sa tuile, sa classe, son seul passif, ses seuls porteurs. Le
+  // slug de famille (sans suffixe) reste servi en vue d'ensemble (compat).
+  variant?: NonNullable<GearFamily['classPassives']>[number],
 ): DetailModel {
   const top = table[f.ids.reduce((m, id) => (table[id].star > table[m].star ? id : m), f.ids[0])];
-  const idSet = new Set(f.ids);
+  const idSet = new Set(
+    variant ? f.ids.filter((id) => table[id].classLimit === variant.classLimit) : f.ids,
+  );
+  const name = variant ? withClassSuffix(f.name, variant.classLimit) : f.name;
   return {
     kind,
-    slug: f.slug,
-    name: lRec(f.name, lang) || f.name.en,
-    icon: f.icon,
+    slug: variant ? variant.slug : f.slug,
+    name: lRec(name, lang) || name.en,
+    icon: variant ? variant.icon : f.icon,
     grade: f.grade,
     star: top.star,
-    classLimits: f.classLimits,
+    classLimits: variant ? [variant.classLimit] : f.classLimits,
     slots: toSlots(top.main, lang),
     sub: toSubPool(top.sub),
-    // Famille à passif PAR CLASSE : un palier par variante, tagué de sa classe.
-    passives: (f.classPassives ?? [{ classLimit: undefined, passives: f.passives }]).flatMap((v) =>
+    // Famille à passif PAR CLASSE : un palier par variante, tagué de sa classe
+    // (vue d'ensemble) — la fiche d'UNE variante ne porte que le sien.
+    passives: (variant
+      ? [{ classLimit: undefined, passives: variant.passives }]
+      : (f.classPassives ?? [{ classLimit: undefined, passives: f.passives }])
+    ).flatMap((v) =>
       toPassiveTiers(
         resolvePassives(v.passives, lang),
         passiveTexts(v.passives, lang),
@@ -724,10 +736,22 @@ export function eeModelForView(view: EEView, lang: Lang): DetailModel {
 
 /** Toutes les fiches (slug + nom EN) — sitemap, static params, index llms.txt. */
 export function allEquipmentEntries(): { slug: string; name: string }[] {
+  // Famille multi-classes (Briareos/Gorgon) : les fiches PUBLIÉES sont les 5
+  // variantes (slugs suffixés, = URLs V2) — le slug de famille reste servi
+  // (vue d'ensemble, compat) mais n'est pas listé.
+  const famEntries = (fams: GearFamily[]) =>
+    fams.flatMap((f) =>
+      f.classPassives
+        ? f.classPassives.map((v) => ({
+            slug: v.slug,
+            name: withClassSuffix(f.name, v.classLimit).en,
+          }))
+        : [{ slug: f.slug, name: f.name.en }],
+    );
   return [
-    ...getWeaponFamilies().map((f) => ({ slug: f.slug, name: f.name.en })),
-    ...getAmuletFamilies().map((f) => ({ slug: f.slug, name: f.name.en })),
-    ...getTalismanFamilies().map((f) => ({ slug: f.slug, name: f.name.en })),
+    ...famEntries(getWeaponFamilies()),
+    ...famEntries(getAmuletFamilies()),
+    ...famEntries(getTalismanFamilies()),
     ...getSetViews('en').map((s) => ({ slug: s.slug, name: s.name.en })),
     ...getEEViews().map((e) => ({ slug: slugifyEquipment(e.name.en), name: e.name.en })),
   ];
@@ -738,12 +762,28 @@ export function allEquipmentSlugs(): string[] {
   return allEquipmentEntries().map((e) => e.slug);
 }
 
+/**
+ * Famille dont le slug (de famille OU d'une variante de classe) matche —
+ * la variante matchée est renvoyée avec.
+ */
+function familyBySlug(
+  fams: GearFamily[],
+  slug: string,
+): { f: GearFamily; v?: NonNullable<GearFamily['classPassives']>[number] } | undefined {
+  for (const f of fams) {
+    if (f.slug === slug) return { f };
+    const v = f.classPassives?.find((x) => x.slug === slug);
+    if (v) return { f, v };
+  }
+  return undefined;
+}
+
 /** Modèle complet d'une page détail, ou null (ordre de balayage V2). */
 export function getEquipmentDetail(slug: string, lang: Lang): DetailModel | null {
-  const w = getWeaponFamilies().find((f) => f.slug === slug);
-  if (w) return gearModel(w, WEAPONS, 'weapon', lang);
-  const a = getAmuletFamilies().find((f) => f.slug === slug);
-  if (a) return gearModel(a, AMULETS, 'amulet', lang);
+  const w = familyBySlug(getWeaponFamilies(), slug);
+  if (w) return gearModel(w.f, WEAPONS, 'weapon', lang, w.v);
+  const a = familyBySlug(getAmuletFamilies(), slug);
+  if (a) return gearModel(a.f, AMULETS, 'amulet', lang, a.v);
   const t = getTalismanFamilies().find((f) => f.slug === slug);
   if (t) return talismanModel(t, lang);
   return setModel(slug, lang) ?? eeModel(slug, lang);

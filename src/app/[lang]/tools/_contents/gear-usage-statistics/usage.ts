@@ -64,7 +64,7 @@ export function computeGearUsage(): Record<GearCategory, RawGearUsageEntry[]> {
     return {
       key: v ? `${f.id}:${v.classLimit}` : f.id,
       name: v ? withClassSuffix(f.name, v.classLimit) : f.name,
-      slug: f.slug,
+      slug: v ? v.slug : f.slug,
       icon: v ? v.icon : f.icon,
       grade: f.grade,
       star: f.stars.at(-1),

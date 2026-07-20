@@ -6,6 +6,19 @@
 
 ## 2026-07-20
 
+- **Variantes irregular, PASSE 2 : /equipment éclaté en cartes ET fiches PAR
+  variante (retour Sevih : « 1 seule carte pour tous »).** Le browser rend
+  UNE carte par variante (tuile/passif/nom suffixé/classe propres — plus de
+  bloc « variants » groupé, retiré de cards.tsx) et chaque variante a SA page
+  détail au slug suffixé (`briareoss-recklessness-defender`…) = les URLs V2
+  (le suffixe était dans le nom → même slugify, les liens survivent). 20
+  fiches : 2 armes ET 2 amulettes (Ambition/Vanity, couvertes par le même
+  chemin). `classPassives` porte le `slug` de variante ; `gearModel` accepte
+  une variante (nom/tuile/classe/SON passif/SES porteurs) ; le slug de
+  FAMILLE reste servi en vue d'ensemble (compat V3, plus listé dans
+  sitemap/llms) ; resolveItem/loot/stats lient la fiche de la variante.
+  Manifest : PNG og pour TOUS les membres du palier max (+ passifs par
+  variante), 13 assets poussés sur R2. tsc ×3 + eslint + 300 tests src verts.
 - **Variantes de classe des items irregular (Briareos/Gorgon) distinguées
   partout (constat Sevih en relisant les outils gear).** En jeu ce sont 5
   objets distincts par item (un par classe : tuile ET passif propres) ; la V2

@@ -401,14 +401,22 @@ export function buildAssetManifest(): AssetRequest[] {
     // Familles de wiki (la règle d'affichabilité vit dans families.json).
     const families = load('equipment/families.json') as unknown as Record<
       'weapon' | 'accessory' | 'talisman',
-      { topId: string; wiki: boolean }[]
+      { topId: string; ids: string[]; wiki: boolean }[]
     >;
     for (const slot of ['weapon', 'accessory', 'talisman'] as const) {
       for (const f of families[slot]) {
         if (!f.wiki) continue;
-        const it = tables[slot][f.topId];
-        pushOgItem(it.icon);
-        collectPassives(it);
+        const top = tables[slot][f.topId];
+        // PNG og pour TOUS les membres du palier max, pas que la tête : les
+        // familles multi-classes (Briareos/Gorgon) publient une fiche PAR
+        // variante, chacune sa tuile (push() dédoublonne les icônes partagées).
+        for (const id of f.ids) {
+          const it = tables[slot][id];
+          if (it.star !== top.star) continue;
+          pushOgItem(it.icon);
+          // Passifs de CHAQUE variante (Briareos/Gorgon en ont un par classe).
+          collectPassives(it);
+        }
       }
     }
     // EE : tous ; pièces d'armure des sets : paliers hauts (icônes partagées).

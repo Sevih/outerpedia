@@ -368,10 +368,10 @@ export interface GearFamily {
   /**
    * VARIANTES PAR CLASSE quand les passifs diffèrent au sein de la famille
    * (Briareos/Gorgon : 5 objets distincts en jeu — un par classe, chacun sa
-   * tuile ET son passif) — `passives`/`icon` de la famille ne portent alors
-   * que le membre de tête.
+   * tuile, son passif et sa PAGE détail au slug suffixé, comme en V2) —
+   * `passives`/`icon`/`slug` de la famille ne portent que le membre de tête.
    */
-  classPassives?: { classLimit: string; icon: string; passives: PassiveRef[] }[];
+  classPassives?: { classLimit: string; slug: string; icon: string; passives: PassiveRef[] }[];
   source?: ResolvedSource;
   /** Talisman : type de points (extrait du buff du passif). */
   mode?: 'AP' | 'CP';
@@ -438,7 +438,13 @@ function materializeFamilies(
       const sig = (ps: PassiveRef[]) => ps.map((p) => p.id).join(',');
       const classPassives =
         byClass.size > 1 && new Set([...byClass.values()].map((v) => sig(v.passives))).size > 1
-          ? [...byClass].map(([classLimit, v]) => ({ classLimit, ...v }))
+          ? [...byClass].map(([classLimit, v]) => ({
+              classLimit,
+              // Slug de LA variante (« briareoss-recklessness-striker ») — les
+              // URLs V2 avaient le suffixe dans le nom, les liens survivent.
+              slug: slugifyEquipment(withClassSuffix(top.name, classLimit).en),
+              ...v,
+            }))
           : undefined;
       return {
         id: f.id,
@@ -482,15 +488,13 @@ export function withClassSuffix(name: LangDict, classLimit: string): LangDict {
 export function memberClassVariant(
   f: GearFamily,
   memberId: string,
-): { classLimit: string; icon: string; passives: PassiveRef[] } | undefined {
+): { classLimit: string; slug: string; icon: string; passives: PassiveRef[] } | undefined {
   if (!f.classPassives) return undefined;
   const m = WEAPONS[memberId] ?? AMULETS[memberId];
   const cl = m?.classLimit;
   const v = cl ? f.classPassives.find((cp) => cp.classLimit === cl) : undefined;
   // Tuile du membre lui-même (les copies Singularité 92xxx gardent la bonne).
-  return v
-    ? { classLimit: v.classLimit, icon: m?.icon ?? v.icon, passives: v.passives }
-    : undefined;
+  return v ? { ...v, icon: m?.icon ?? v.icon } : undefined;
 }
 
 export function getWeaponFamilies(): GearFamily[] {

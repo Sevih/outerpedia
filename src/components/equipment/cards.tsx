@@ -51,18 +51,6 @@ export interface GearRow {
   passive?: { name: string; icon: string };
   /** Lignes d'effet (paliers résolus). */
   effects: EffectLine[];
-  /**
-   * VARIANTE PAR CLASSE (Briareos/Gorgon : 5 objets distincts en jeu) —
-   * remplace passive/effects quand présent : chaque classe a sa tuile et son
-   * passif.
-   */
-  variants?: {
-    classLimit: string;
-    /** Tuile PROPRE de la variante (la tête de famille ne la représente pas). */
-    icon: string;
-    passive?: { name: string; icon: string };
-    effects: EffectLine[];
-  }[];
   source?: RowSource;
   mode?: 'AP' | 'CP';
 }
@@ -200,32 +188,8 @@ export function GearCard({ row, sourceTitle }: { row: GearRow; sourceTitle: stri
           <MainStatChips stats={row.mainStats} />
         </div>
       </div>
-      {row.variants ? (
-        // Variante PAR CLASSE : un bloc par variante — SA tuile (chaque classe
-        // a la sienne en jeu) + icône de classe + pill + texte.
-        <div className="space-y-2">
-          {row.variants.map((v) => (
-            <div key={v.classLimit} className="flex items-start gap-2">
-              <EquipmentIcon
-                icon={v.icon}
-                grade={row.grade}
-                alt={v.classLimit}
-                size={40}
-                classType={v.classLimit}
-              />
-              <div className="min-w-0 flex-1 space-y-1">
-                {v.passive && <PassivePill passive={v.passive} />}
-                <EffectLines effects={v.effects} />
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <>
-          {row.passive && <PassivePill passive={row.passive} />}
-          <EffectLines effects={row.effects} />
-        </>
-      )}
+      {row.passive && <PassivePill passive={row.passive} />}
+      <EffectLines effects={row.effects} />
       <SourceLine source={row.source} title={sourceTitle} />
     </div>
   );

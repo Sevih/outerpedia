@@ -16,6 +16,7 @@ import {
   passiveEffects,
   resolvePassives,
   shopSourceLabel,
+  withClassSuffix,
   type GearFamily,
   type ResolvedSource,
 } from '@/lib/data/equipment';
@@ -101,35 +102,46 @@ function passiveView(
   return { passive: { name: t1.name, icon: t1.icon }, effects };
 }
 
-function toGearRow(
+function toGearRows(
   f: GearFamily,
   lang: Lang,
   kind: 'gear' | 'talisman',
   t: Awaited<ReturnType<typeof getT>>,
-): GearRow {
-  return {
-    id: f.id,
-    slug: f.slug,
-    name: lRec(f.name, lang) || f.name.en,
-    icon: f.icon,
+): GearRow[] {
+  const base = {
     grade: f.grade,
     stars: f.stars,
-    classLimits: f.classLimits,
     mainStats: f.mainStats,
-    ...passiveView(f.passives, lang, kind),
-    // Familles à passif PAR CLASSE (Briareos/Gorgon) : un bloc par variante.
-    ...(f.classPassives
-      ? {
-          variants: f.classPassives.map((v) => ({
-            classLimit: v.classLimit,
-            icon: v.icon,
-            ...passiveView(v.passives, lang, kind),
-          })),
-        }
-      : {}),
     source: toRowSource(f.source, lang, t),
     mode: f.mode,
   };
+  // Famille multi-classes (Briareos/Gorgon : 5 objets distincts en jeu) : UNE
+  // carte par variante — sa tuile, son passif, son nom suffixé, son slug —
+  // comme les 5 entrées séparées de la V2.
+  if (f.classPassives)
+    return f.classPassives.map((v) => {
+      const name = withClassSuffix(f.name, v.classLimit);
+      return {
+        ...base,
+        id: `${f.id}:${v.classLimit}`,
+        slug: v.slug,
+        name: lRec(name, lang) || name.en,
+        icon: v.icon,
+        classLimits: [v.classLimit],
+        ...passiveView(v.passives, lang, kind),
+      };
+    });
+  return [
+    {
+      ...base,
+      id: f.id,
+      slug: f.slug,
+      name: lRec(f.name, lang) || f.name.en,
+      icon: f.icon,
+      classLimits: f.classLimits,
+      ...passiveView(f.passives, lang, kind),
+    },
+  ];
 }
 
 export default async function EquipmentPage({ params }: { params: Promise<{ lang: string }> }) {
@@ -137,9 +149,9 @@ export default async function EquipmentPage({ params }: { params: Promise<{ lang
   const lang = normalizeLang(raw);
   const t = await getT(lang);
 
-  const weapons = getWeaponFamilies().map((f) => toGearRow(f, lang, 'gear', t));
-  const amulets = getAmuletFamilies().map((f) => toGearRow(f, lang, 'gear', t));
-  const talismans = getTalismanFamilies().map((f) => toGearRow(f, lang, 'talisman', t));
+  const weapons = getWeaponFamilies().flatMap((f) => toGearRows(f, lang, 'gear', t));
+  const amulets = getAmuletFamilies().flatMap((f) => toGearRows(f, lang, 'gear', t));
+  const talismans = getTalismanFamilies().flatMap((f) => toGearRows(f, lang, 'talisman', t));
   const sets: SetRow[] = getSetViews(lang).map((s) => {
     const last = s.tiers[s.tiers.length - 1];
     return {

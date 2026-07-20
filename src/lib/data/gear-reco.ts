@@ -259,7 +259,7 @@ function resolveItem(
     grade: f?.grade ?? e.grade,
     star: f?.stars.at(-1),
     mainStat,
-    slug: f?.slug,
+    slug: variant ? variant.slug : f?.slug,
     overlayIcon: eff.icon || undefined,
     classType: variant
       ? variant.classLimit
@@ -406,21 +406,20 @@ export function resolveLootGear(id: string, lang: Lang): ResolvedGearItem | unde
   // Les mains POSSIBLES de la famille (pool roulé) : le loot n'en fixe aucune,
   // contrairement à un build curé qui recommande la sienne.
   const mainStat = f?.mainStats.length ? f.mainStats.join('/') : undefined;
-  const passives =
-    f?.classPassives?.find((cp) => cp.classLimit === e.classLimit)?.passives ?? f?.passives ?? [];
-  const eff = effectAtMaxOf(passives, lang);
+  // Variante de classe d'une famille Briareos/Gorgon : passif, nom suffixé et
+  // lien vers la fiche de LA variante, comme partout.
+  const lootVariant =
+    f && e.classLimit ? f.classPassives?.find((cp) => cp.classLimit === e.classLimit) : undefined;
+  const eff = effectAtMaxOf(lootVariant?.passives ?? f?.passives ?? [], lang);
   const maxes = slot === 'talismans' ? {} : mainStatMaxOf(f ? topEntry(table, f) : e, mainStat);
-  // Variante de classe d'une famille Briareos/Gorgon : nom suffixé comme partout.
-  const suffixed =
-    f?.classPassives && e.classLimit ? withClassSuffix(e.name, e.classLimit) : e.name;
   return {
     id,
-    name: lRec(suffixed, lang),
+    name: lRec(lootVariant ? withClassSuffix(e.name, lootVariant.classLimit) : e.name, lang),
     icon: e.icon,
     grade: e.grade,
     star: e.star,
     mainStat,
-    slug: f?.slug,
+    slug: lootVariant ? lootVariant.slug : f?.slug,
     overlayIcon: eff.icon || undefined,
     classType: e.classLimit ?? undefined,
     ...(Object.keys(maxes).length ? { mainStatMax: maxes } : {}),
