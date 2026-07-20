@@ -40,6 +40,7 @@ import {
   bool,
   fileStamp,
   groupBy,
+  idSpan,
   indexBy,
   loadTable,
   num,
@@ -524,6 +525,28 @@ export function spawnUnits(rows: Row[]): string[] {
     }
   }
   return out;
+}
+
+/**
+ * Monstres spawnés d'un DONJON (dédupliqués, ordre des tables) — la traversée
+ * complète donjon → groupes (`spawnGroupIds`) → unités (`spawnUnits`), que
+ * singularity, content-schedule et sources recopiaient chacun. `spawnsByGroup` =
+ * `groupBy(loadTable('DungeonSpawnTemplet'), 'GroupID')`, fourni par l'appelant
+ * (chargé une fois par build). `into` permet d'ACCUMULER sur plusieurs donjons
+ * (content-schedule agrège les ligues d'une saison).
+ */
+export function dungeonSpawnedMonsters(
+  dungeon: Row | undefined,
+  spawnsByGroup: Map<string, Row[]>,
+  into: string[] = [],
+): string[] {
+  if (!dungeon) return into;
+  for (const g of spawnGroupIds(dungeon)) {
+    for (const mid of spawnUnits(spawnsByGroup.get(g) ?? [])) {
+      if (!into.includes(mid)) into.push(mid);
+    }
+  }
+  return into;
 }
 
 /** Remplit le placeholder `{0}` d'un titre, dans toutes les langues. */
@@ -1379,18 +1402,14 @@ export function buildEncounters(): EncountersData {
   const gapsSig =
     [...missingRewardIds].sort().join(',') + '§' + [...typelessGroups].sort().join(',');
   if (gapsSig !== '§' && gapsSig !== lastRewardGapsSig) {
-    const span = (s: Set<string>) => {
-      const ids = [...s].sort();
-      return ids.length > 3 ? `${ids[0]}…${ids[ids.length - 1]}` : ids.join(', ');
-    };
     const parts: string[] = [];
     if (typelessGroups.size)
       parts.push(
-        `${typelessGroups.size} ligne(s) de RewardGroup sans TypeID (${span(typelessGroups)})`,
+        `${typelessGroups.size} ligne(s) de RewardGroup sans TypeID (${idSpan(typelessGroups)})`,
       );
     if (missingRewardIds.size)
       parts.push(
-        `${missingRewardIds.size} RewardID absent(s) de RewardTemplet (${span(missingRewardIds)})`,
+        `${missingRewardIds.size} RewardID absent(s) de RewardTemplet (${idSpan(missingRewardIds)})`,
       );
     console.warn(`⚠ encounters : butin partiellement ignoré — ${parts.join(' ; ')}.`);
   }

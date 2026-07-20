@@ -23,7 +23,7 @@
  * « source » utile → non extraits, complétés par la couche curée.
  */
 import { groupBy, loadTable, splitCsv } from '../lib/tables';
-import { modeTitleKey, spawnGroupIds, spawnUnits } from './encounters';
+import { dungeonSpawnedMonsters, modeTitleKey } from './encounters';
 
 export type ItemSources = Record<string, { bosses: string[]; shops?: string[] }>;
 
@@ -52,18 +52,15 @@ export function buildItemSources(): ItemSourcesResult {
   const spawnsByGroup = groupBy(loadTable('DungeonSpawnTemplet'), 'GroupID');
   const monsters = new Map(loadTable('MonsterTemplet').map((r) => [r.ID, r]));
 
-  /** Boss d'un donjon : NameID → id de monstre (variante la plus élevée). */
+  /** Boss d'un donjon : NameID → id de monstre (variante la plus élevée).
+   * Traversée donjon → spawn partagée (cf. encounters) ; le filtre boss reste ici. */
   const bossesOfDungeon = (dungeonId: string): Map<string, string> => {
     const bosses = new Map<string, string>();
-    const d = dungeons.get(dungeonId);
-    if (!d) return bosses;
-    for (const gid of spawnGroupIds(d)) {
-      for (const mid of spawnUnits(spawnsByGroup.get(gid) ?? [])) {
-        const m = monsters.get(mid);
-        if (m?.Type !== 'CT_AREA_BOSS_MONSTER' || !m.NameID) continue;
-        const prev = bosses.get(m.NameID);
-        if (!prev || Number(mid) > Number(prev)) bosses.set(m.NameID, mid);
-      }
+    for (const mid of dungeonSpawnedMonsters(dungeons.get(dungeonId), spawnsByGroup)) {
+      const m = monsters.get(mid);
+      if (m?.Type !== 'CT_AREA_BOSS_MONSTER' || !m.NameID) continue;
+      const prev = bosses.get(m.NameID);
+      if (!prev || Number(mid) > Number(prev)) bosses.set(m.NameID, mid);
     }
     return bosses;
   };

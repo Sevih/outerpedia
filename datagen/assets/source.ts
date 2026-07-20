@@ -7,8 +7,9 @@
  * par basename. Un même nom peut exister dans plusieurs containers (common /
  * re_common…) : choix DÉTERMINISTE = premier chemin en ordre trié.
  */
-import { existsSync, readdirSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { walkFiles } from '../lib/fs';
 
 export const GAME_IMAGES_DIR = resolve('.gamedata/extracted/images');
 
@@ -19,21 +20,18 @@ export function buildImageIndex(dir = GAME_IMAGES_DIR): ImageIndex {
   const index: ImageIndex = new Map();
   if (!existsSync(dir)) return index;
 
-  const walk = (d: string): void => {
-    for (const e of readdirSync(d, { withFileTypes: true }).sort((a, b) =>
-      a.name.localeCompare(b.name),
-    )) {
-      const full = join(d, e.name);
-      if (e.isDirectory()) {
-        walk(full);
-        continue;
-      }
-      if (!/\.png$/i.test(e.name)) continue;
-      const key = e.name.replace(/\.png$/i, '').toLowerCase();
+  // Parcours partagé (lib/fs), TRIÉ : « premier trié gagne » — le tri rend
+  // l'index déterministe quel que soit l'ordre du FS.
+  walkFiles(
+    dir,
+    (full, rel) => {
+      const name = rel.split('/').pop()!;
+      if (!/\.png$/i.test(name)) return;
+      const key = name.replace(/\.png$/i, '').toLowerCase();
       if (!index.has(key)) index.set(key, full); // premier trié gagne
-    }
-  };
-  walk(dir);
+    },
+    { sorted: true },
+  );
   return index;
 }
 

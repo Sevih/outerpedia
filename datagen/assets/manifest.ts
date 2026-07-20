@@ -31,6 +31,7 @@ import type { QuirksData } from '../contracts';
 import { buildItemCatalog } from '../generators/item-catalog';
 import { listHeroFullArt } from './hero-full-art';
 import { loadCuratedEffects } from '../curated/effects';
+import { effectIconCandidates } from '../lib/effects';
 import { resolveClass } from '../lib/class';
 import { slugEnum } from '../lib/enums';
 import { v2ImagesDir } from '../lib/env';
@@ -291,13 +292,12 @@ export function buildAssetManifest(): AssetRequest[] {
   // leurs icônes sont de vrais sprites du jeu), via le loader partagé du curé.
   // Priorité aux sprites SC_* (icône nue) — les IG_* portent un cadre noir
   // opaque et ne servent qu'en repli.
-  const sc = (n: string) => n.replace(/^IG_/, 'SC_');
   for (const e of [...Object.values(glossaries.effects), ...Object.values(loadCuratedEffects())]) {
     if (!e.icon) continue;
     push({
       kind: 'image',
       key: `images/ui/effect/${e.icon}.webp`,
-      candidates: [sc(e.icon), e.icon],
+      candidates: effectIconCandidates(e.icon),
       domain: 'effects',
       editorialFallback: `ui/effect/${e.icon}.webp`,
     });

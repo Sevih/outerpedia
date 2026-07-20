@@ -18,8 +18,9 @@
  * Le chemin de l'adb LDPlayer peut être surchargé via ADB_PATH.
  */
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, rmSync, statSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
+import { walkFiles } from '../lib/fs';
 import { isMain } from '../lib/is-main';
 import { PKG, capture, ensureRoot, pickDevice, stream } from './adb';
 
@@ -80,22 +81,16 @@ function remoteSignatures(serial: string, baseDir: string, useHash: boolean): Ma
 function localSignatures(baseDir: string, useHash: boolean): Map<string, string> {
   const map = new Map<string, string>();
   if (!existsSync(baseDir)) return map;
-  const walk = (dir: string, prefix: string) => {
-    for (const entry of readdirSync(dir, { withFileTypes: true })) {
-      const rel = prefix ? `${prefix}/${entry.name}` : entry.name;
-      const abs = join(dir, entry.name);
-      if (entry.isDirectory()) walk(abs, rel);
-      else if (entry.isFile()) {
-        map.set(
-          rel,
-          useHash
-            ? createHash('md5').update(readFileSync(abs)).digest('hex')
-            : String(statSync(abs).size),
-        );
-      }
-    }
-  };
-  walk(baseDir, '');
+  // Parcours partagé (lib/fs) — les clés `rel` en `/` se comparent aux
+  // listings Android de remoteSignatures.
+  walkFiles(baseDir, (abs, rel) => {
+    map.set(
+      rel,
+      useHash
+        ? createHash('md5').update(readFileSync(abs)).digest('hex')
+        : String(statSync(abs).size),
+    );
+  });
   return map;
 }
 

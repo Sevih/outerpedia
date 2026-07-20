@@ -33,7 +33,7 @@ import { isMain } from '../lib/is-main';
 import { readCuratedJson } from '../lib/json';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { groupBy, indexBy, loadTable, num } from '../lib/tables';
-import { spawnGroupIds, spawnUnits } from './encounters';
+import { dungeonSpawnedMonsters } from './encounters';
 
 /** Un combat de boss d'un groupe de rotation. */
 export interface SingularityBoss {
@@ -124,18 +124,9 @@ export function buildSingularity(): SingularityData {
   const spawnsByGroup = groupBy(loadTable('DungeonSpawnTemplet'), 'GroupID');
   const dungeonGroups = groupBy(loadTable('SingularityDungeonGroupTemplet'), 'GroupID');
 
-  /** Monstres spawnés d'un donjon (dédupliqués, ordre des tables). */
-  const monstersOf = (dungeonId: string): string[] => {
-    const d = dungeonById.get(dungeonId);
-    if (!d) return [];
-    const out: string[] = [];
-    for (const g of spawnGroupIds(d)) {
-      for (const mid of spawnUnits(spawnsByGroup.get(g) ?? [])) {
-        if (!out.includes(mid)) out.push(mid);
-      }
-    }
-    return out;
-  };
+  /** Monstres spawnés d'un donjon (traversée partagée — cf. encounters). */
+  const monstersOf = (dungeonId: string): string[] =>
+    dungeonSpawnedMonsters(dungeonById.get(dungeonId), spawnsByGroup);
 
   const groups: SingularityGroup[] = [];
   let startDow = '';

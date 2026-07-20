@@ -13,7 +13,7 @@
  * NOTE : on ne met PAS le wrap couleur `<color=#28d9ed>` de la V2 ici — c'est
  * de la présentation, pas de la donnée canonique. Le front stylise s'il veut.
  */
-import { bool, loadTable, num, withCaseInsensitiveGet, type Row } from './tables';
+import { bool, loadTable, num, tablesStamp, withCaseInsensitiveGet, type Row } from './tables';
 
 /** Index BuffTemplet : BuffID → lignes (une par niveau). Lookup insensible à la casse. */
 export function loadBuffIndex(): Map<string, Row[]> {
@@ -233,19 +233,28 @@ export interface BuffGroup {
   all: boolean;
 }
 
+// Empreinte mtime : index UNIQUE de l'expansion Child1..10 (skills,
+// monster-skills, equipment ×2 — plus de recopie de la boucle), invalidé au
+// refresh des tables comme partout (modèle `curatedKeyCache`).
+let buffGroupsCache: { data: Map<string, BuffGroup>; stamp: string } | undefined;
+
 /** Index BuffGroupTemplet : id de groupe → enfants + mode de tirage. */
 export function loadBuffGroups(): Map<string, BuffGroup> {
-  const out = new Map<string, BuffGroup>();
-  for (const g of loadTable('BuffGroupTemplet')) {
-    if (!g.ID) continue;
-    const kids: string[] = [];
-    for (let i = 1; i <= 10; i++) {
-      const bid = g[`Child${i}_BID`];
-      if (bid) kids.push(bid);
+  const stamp = tablesStamp(['BuffGroupTemplet']);
+  if (!buffGroupsCache || buffGroupsCache.stamp !== stamp) {
+    const out = new Map<string, BuffGroup>();
+    for (const g of loadTable('BuffGroupTemplet')) {
+      if (!g.ID) continue;
+      const kids: string[] = [];
+      for (let i = 1; i <= 10; i++) {
+        const bid = g[`Child${i}_BID`];
+        if (bid) kids.push(bid);
+      }
+      out.set(g.ID, { kids, all: bool(g.IsAllCreate) });
     }
-    out.set(g.ID, { kids, all: bool(g.IsAllCreate) });
+    buffGroupsCache = { data: out, stamp };
   }
-  return out;
+  return buffGroupsCache.data;
 }
 
 /** Id de buff expansé + provenance (enfant d'un groupe ? à tirage aléatoire ?). */

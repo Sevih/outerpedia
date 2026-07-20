@@ -16,8 +16,8 @@
  *     filtre ancré `^IMG_\d+$` excluait, et les arts de PNJ (`IMG_3000032`,
  *     hors `illust/`) que seul ce conteneur porte.
  */
-import { closeSync, existsSync, openSync, readdirSync, readSync } from 'node:fs';
-import { join } from 'node:path';
+import { closeSync, existsSync, openSync, readSync } from 'node:fs';
+import { walkFiles } from '../lib/fs';
 import { GAME_IMAGES_DIR } from './source';
 
 /** Largeur minimale d'un art affichable (même seuil que la V2 : exclut les vignettes). */
@@ -57,22 +57,17 @@ export function listHeroFullArt(dir = GAME_IMAGES_DIR): HeroArt[] {
   if (!existsSync(dir)) return [];
   const chosen = new Map<string, string>(); // basename minuscule → chemin retenu
 
-  const walk = (d: string): void => {
-    for (const e of readdirSync(d, { withFileTypes: true })) {
-      const full = join(d, e.name);
-      if (e.isDirectory()) {
-        walk(full);
-        continue;
-      }
-      const m = /^(IMG_\d+(?:_\d+)?)\.png$/i.exec(e.name);
-      if (!m) continue;
-      const key = m[1].toLowerCase();
-      const prev = chosen.get(key);
-      // Première vue, ou on remplace une copie non-illust par la copie illust.
-      if (!prev || (!isIllust(prev) && isIllust(full))) chosen.set(key, full);
-    }
-  };
-  walk(dir);
+  // Parcours partagé (lib/fs), ordre FS naturel : « première vue gagne » —
+  // le trier changerait quelle copie d'un doublon est retenue.
+  walkFiles(dir, (full, rel) => {
+    const name = rel.split('/').pop()!;
+    const m = /^(IMG_\d+(?:_\d+)?)\.png$/i.exec(name);
+    if (!m) return;
+    const key = m[1].toLowerCase();
+    const prev = chosen.get(key);
+    // Première vue, ou on remplace une copie non-illust par la copie illust.
+    if (!prev || (!isIllust(prev) && isIllust(full))) chosen.set(key, full);
+  });
 
   const out: HeroArt[] = [];
   for (const path of chosen.values()) {

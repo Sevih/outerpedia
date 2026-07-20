@@ -36,6 +36,7 @@ import {
 } from 'node:fs';
 import { cpus } from 'node:os';
 import { parse as parsePath, resolve } from 'node:path';
+import { walkFiles } from '../lib/fs';
 import { isMain } from '../lib/is-main';
 import { ASSETSTUDIO, FFMPEG, ensureTool } from './tools';
 
@@ -93,14 +94,9 @@ function extractWavs(): number {
   // `-g none` peut nicher sous un sous-dossier selon l'outil : on récupère les
   // WAV où qu'ils soient, remontés à plat dans WAV_TMP.
   const wavs: string[] = [];
-  const walk = (dir: string): void => {
-    for (const e of readdirSync(dir, { withFileTypes: true })) {
-      const p = resolve(dir, e.name);
-      if (e.isDirectory()) walk(p);
-      else if (e.name.toLowerCase().endsWith('.wav')) wavs.push(p);
-    }
-  };
-  walk(WAV_TMP);
+  walkFiles(WAV_TMP, (abs, rel) => {
+    if (rel.toLowerCase().endsWith('.wav')) wavs.push(abs);
+  });
   for (const p of wavs) {
     const flat = resolve(WAV_TMP, parsePath(p).base);
     if (p !== flat && !existsSync(flat)) renameSync(p, flat);

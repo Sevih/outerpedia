@@ -284,6 +284,16 @@ const EDITORIAL_KEY_ALIASES: Record<string, string | Record<EffectSide, string>>
 };
 
 /** Nom d'effet → clé éditoriale (« Bane's Domain » → `BANES_DOMAIN`). */
+/**
+ * Candidats de sprite pour l'icône d'un effet, par ordre de préférence :
+ * la variante `SC_*` (icône nue) d'abord, le nom verbatim en repli — les
+ * sprites `IG_*` portent un cadre noir opaque. Partagé avec le manifest
+ * d'assets (mêmes candidats à la collecte et au flag `iconEditorial`).
+ */
+export function effectIconCandidates(icon: string): string[] {
+  return [icon.replace(/^IG_/, 'SC_'), icon];
+}
+
 export function effectNameKey(name: string): string {
   return name
     .replace(/['’]/g, '')
@@ -654,13 +664,13 @@ export function buildEffectGlossary(): EffectGlossary {
   }
 
   // Officiel ou communautaire ? Une icône introuvable dans les sprites
-  // extraits du jeu (nom verbatim ou variante SC_) est un asset WIKI.
+  // extraits du jeu (nom verbatim ou variante SC_, cf. effectIconCandidates)
+  // est un asset WIKI.
   try {
     const index = buildImageIndex();
-    const sc = (n: string) => n.replace(/^IG_/, 'SC_');
     for (const e of effects.values()) {
       if (!e.icon) continue;
-      const found = findImage(index, [sc(e.icon), e.icon]);
+      const found = findImage(index, effectIconCandidates(e.icon));
       if (!found) e.iconEditorial = true;
     }
   } catch {

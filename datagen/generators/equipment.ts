@@ -38,6 +38,7 @@ import {
   buffRowAtLevel,
   buffValuesAt,
   fillPlaceholders,
+  loadBuffGroups,
   loadBuffIndex,
   type BuffValues,
 } from '../lib/buff';
@@ -426,7 +427,7 @@ function resolvePassive(
     const ids = [id];
     const row0 = buffRowAtLevel(buffsByID, id, maxLv);
     if (row0?.Type === 'BT_GROUP' || row0?.Type === 'BT_GROUP_CASTER_TOOLTIP_CHECK')
-      ids.push(...(groupKids().get(row0.Value ?? '') ?? []));
+      ids.push(...(loadBuffGroups().get(row0.Value ?? '')?.kids ?? []));
     for (const bid of ids) {
       const row = buffRowAtLevel(buffsByID, bid, maxLv);
       if (!row) continue;
@@ -439,27 +440,6 @@ function resolvePassive(
   }
   if (shapes.length) out.effects = shapes;
   return out;
-}
-
-// Empreinte mtime : même régime que `curatedKeyCache` plus bas — un refresh
-// des tables (process admin long-running) doit invalider l'expansion.
-let groupKidsCache: { data: Map<string, string[]>; stamp: string } | undefined;
-
-/** Enfants des buffs conteneurs `BT_GROUP` (BuffGroupTemplet) — même expansion
- * que le générateur de skills. */
-function groupKids(): Map<string, string[]> {
-  const stamp = tablesStamp(['BuffGroupTemplet']);
-  if (!groupKidsCache || groupKidsCache.stamp !== stamp) {
-    const data = new Map<string, string[]>();
-    for (const g of loadTable('BuffGroupTemplet')) {
-      if (!g.ID) continue;
-      const kids: string[] = [];
-      for (let i = 1; i <= 10; i++) if (g[`Child${i}_BID`]) kids.push(g[`Child${i}_BID`]);
-      data.set(g.ID, kids);
-    }
-    groupKidsCache = { data, stamp };
-  }
-  return groupKidsCache.data;
 }
 
 /**
@@ -560,7 +540,8 @@ export function buildEquipment(): EquipmentData {
   const specById = indexBy(specRows, 'ID');
   const specByGroup = groupBy(specRows, 'GroupID');
   const buffsByID = loadBuffIndex();
-  const buffGroups = indexBy(loadTable('BuffGroupTemplet'), 'ID');
+  // Expansion BT_GROUP partagée (lib/buff) — plus de lecture brute Child1..10.
+  const buffGroups = loadBuffGroups();
 
   // Résout un buff en effets structurés, en suivant les BT_GROUP (groupe d'enfants).
   const resolveBuffEffects = (buffId: string, level: number, depth = 0): BuffEffect[] => {
@@ -573,10 +554,7 @@ export function buildEquipment(): EquipmentData {
       const grp = buffGroups.get(b.Value);
       if (!grp) return [];
       const out: BuffEffect[] = [];
-      for (let i = 1; i <= 10; i++) {
-        const child = grp[`Child${i}_BID`];
-        if (child) out.push(...resolveBuffEffects(child, level, depth + 1));
-      }
+      for (const child of grp.kids) out.push(...resolveBuffEffects(child, level, depth + 1));
       return out;
     }
     return [

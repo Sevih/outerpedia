@@ -189,6 +189,14 @@ export function bool(v: string | undefined | null): boolean {
   return v != null && /^true$/i.test(v);
 }
 
+/** Résumé compact d'un ensemble d'ids pour une ligne de warn agrégée :
+ * `id1, id2` si ≤ 3, sinon `premier…dernier` (tri lexical). Partagé par les
+ * lacunes de butin d'encounters et de monad. */
+export function idSpan(s: Set<string>): string {
+  const ids = [...s].sort();
+  return ids.length > 3 ? `${ids[0]}…${ids[ids.length - 1]}` : ids.join(', ');
+}
+
 /** Découpe une valeur CSV en jetons nettoyés (vide → `[]`). */
 export function splitCsv(v: string | undefined | null): string[] {
   if (!v) return [];

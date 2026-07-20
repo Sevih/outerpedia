@@ -42,7 +42,7 @@ import type { LangDict } from '../lib/lang';
 import { isMain } from '../lib/is-main';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { groupBy, indexBy, loadTable, num, splitCsv } from '../lib/tables';
-import { spawnGroupIds, spawnUnits } from './encounters';
+import { dungeonSpawnedMonsters } from './encounters';
 
 /** Une saison de World Boss. */
 export interface WorldBossSeason {
@@ -146,17 +146,9 @@ export function buildContentSchedule(): ContentScheduleData {
   const dungeonById = indexBy(loadTable('DungeonTemplet'));
   const spawnsByGroup = groupBy(loadTable('DungeonSpawnTemplet'), 'GroupID');
 
-  /** Monstres spawnés d'un donjon (dédupliqués, ordre des tables). */
-  const monstersOf = (dungeonId: string, into: string[] = []): string[] => {
-    const d = dungeonById.get(dungeonId);
-    if (!d) return into;
-    for (const g of spawnGroupIds(d)) {
-      for (const mid of spawnUnits(spawnsByGroup.get(g) ?? [])) {
-        if (!into.includes(mid)) into.push(mid);
-      }
-    }
-    return into;
-  };
+  /** Monstres spawnés d'un donjon (traversée partagée — cf. encounters). */
+  const monstersOf = (dungeonId: string, into: string[] = []): string[] =>
+    dungeonSpawnedMonsters(dungeonById.get(dungeonId), spawnsByGroup, into);
 
   // --- World Boss : les donjons vivent sur les LIGUES de la saison. ---------
   const leaguesByBoss = groupBy(loadTable('WorldBossLeagueTemplet'), 'WorldBossID');

@@ -23,7 +23,7 @@
  */
 import type { GameLang, LangDict } from '../lib/lang';
 import { GAME_LANGS } from '../lib/lang';
-import { groupBy, indexBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
+import { groupBy, idSpan, indexBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
 import { hasText, loadTextIndex, resolveText } from '../lib/text';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -699,7 +699,13 @@ function markTruePaths(
 
 /** Lacunes de butin rencontrées pendant un build — signalées en UNE ligne
  * agrégée à la fin (même régime qu'encounters) ; jamais de throw : la donnée
- * réelle peut être lacunaire sans invalider le reste du build. */
+ * réelle peut être lacunaire sans invalider le reste du build.
+ *
+ * La RÉSOLUTION elle-même reste volontairement séparée de celle d'encounters :
+ * les deux lisent RewardTemplet/RewardGroupTemplet mais produisent des CONTRATS
+ * différents (`MonadReward` : gold/crystal en min-max, items plats, type brut ;
+ * `RewardTable` : crystal scalaire, exp, `kind` slugifié, flag `random`).
+ * Mutualiser imposerait de changer l'un des deux JSON committés. */
 interface RewardGaps {
   rewards: Set<string>;
   groups: Set<string>;
@@ -877,18 +883,14 @@ export function buildMonad(): { theme: MonadThemeFile; routes: MonadRouteFile[] 
   }
   // Lacunes de butin : UNE ligne agrégée par build (cf. RewardGaps).
   if (gaps.rewards.size || gaps.groups.size) {
-    const span = (s: Set<string>) => {
-      const ids = [...s].sort();
-      return ids.length > 3 ? `${ids[0]}…${ids[ids.length - 1]}` : ids.join(', ');
-    };
     const parts: string[] = [];
     if (gaps.rewards.size)
       parts.push(
-        `${gaps.rewards.size} RewardID absent(s) de RewardTemplet (${span(gaps.rewards)})`,
+        `${gaps.rewards.size} RewardID absent(s) de RewardTemplet (${idSpan(gaps.rewards)})`,
       );
     if (gaps.groups.size)
       parts.push(
-        `${gaps.groups.size} groupe(s) de RewardGroup vide(s) ou sans TypeID (${span(gaps.groups)})`,
+        `${gaps.groups.size} groupe(s) de RewardGroup vide(s) ou sans TypeID (${idSpan(gaps.groups)})`,
       );
     console.warn(`⚠ monad : butin partiellement ignoré — ${parts.join(' ; ')}.`);
   }
