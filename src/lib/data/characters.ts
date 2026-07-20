@@ -160,6 +160,21 @@ export function getCharacterBySlug(slug: string): Character | undefined {
   return id ? CHARACTERS[id] : undefined;
 }
 
+/**
+ * Noms RECHERCHABLES d'un perso (nom toutes langues + surnom + id + slug),
+ * normalisés NFKC/minuscules, dédupliqués — l'univers du champ recherche des
+ * browsers (liste des persos, tier lists, most-used units).
+ */
+export function characterSearchNames(c: Pick<Character, 'id' | 'name' | 'nickname'>): string[] {
+  const names = [
+    ...Object.values(c.name as Record<string, string>),
+    ...(c.nickname ? Object.values(c.nickname as Record<string, string>) : []),
+    c.id,
+    slugForId(c.id) ?? c.id,
+  ];
+  return [...new Set(names.map((s) => s.normalize('NFKC').toLowerCase().trim()).filter(Boolean))];
+}
+
 /** Items allégés, triés par rareté décroissante puis nom EN. */
 export function getCharacterListItems(): CharacterListItem[] {
   return Object.values(CHARACTERS)

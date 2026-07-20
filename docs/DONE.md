@@ -6,6 +6,23 @@
 
 ## 2026-07-20
 
+- **Outil `/most-used-units` porté — agrégation à la LECTURE, plus d'artefact.**
+  La V2 générait `most-used-units.json` par un step de pipeline avec 4
+  extracteurs par famille ; en V3 l'usage se calcule au rendu (ISR 24 h) depuis
+  les fichiers de guides eux-mêmes (`usage.ts`) : collecte STRUCTURELLE unique —
+  partout dans les contenus V3, les persos recommandés vivent dans
+  `characters: string[]` ou `slots: string[][]` — sur les 9 catégories comptées
+  (dernière version seulement pour les guides versionnés, méta courante ; noms
+  résolus par `findCharacterByName`, inconnu = THROW, doctrine bruyante).
+  Vérifié sur la donnée réelle : 108 persos / 91 guides, top Monad Eva=56 —
+  cohérent avec le JSON V2 (56/37 sur les mêmes têtes). Client
+  `MostUsedUnitsBrowser` (dans `_contents/`, pattern ost/wallpapers) : barre
+  standard + pills de catégorie (`common.all` + catégories présentes, libellés
+  `GUIDE_CATEGORIES.label`), lignes dépliables (portrait overlays + guides par
+  catégorie en liens), total recalculé sur les catégories cochées, URL à plat
+  `q/el/cl/r/cat`. Au passage : `characterSearchNames` factorisé dans
+  `lib/data/characters` (le bloc était copié dans /characters + TierListTool,
+  le 3e usage arrivait). tsc + eslint + tests verts.
 - **Dette code datagen : code mort soldé + helpers adb mutualisés.**
   ① **Code mort (5 sites, re-vérifiés par grep)** : supprimés `hasFaceIconLayout`
   (face-icon.ts — et son en-tête « script à re-porter » corrigé : l'extracteur

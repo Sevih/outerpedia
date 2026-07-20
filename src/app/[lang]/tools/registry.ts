@@ -18,6 +18,7 @@ export const TOOL_COMPONENTS: Record<
   tierlistpvp: () => import('./_contents/tierlistpvp'),
   'ee-priority-base': () => import('./_contents/ee-priority-base'),
   'ee-priority-plus10': () => import('./_contents/ee-priority-plus10'),
+  'most-used-units': () => import('./_contents/most-used-units'),
 };
 
 /** Slugs des outils portés (routeur + `generateStaticParams`). */

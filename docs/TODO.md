@@ -41,12 +41,14 @@
 - [ ] **`/tools` — RELIQUAT** (landing faite le 19/07, cf. DONE). Routeur À PLAT
       `[lang]/[slug]` posé le 19/07 (parité URL prod V2, registre de slugs portés).
       **ost**, **wallpapers**, **4-comics** portés le 19/07 ; **tierlistpve**,
-      **tierlistpvp**, **ee-priority-base**, **ee-priority-plus10** portés le
-      20/07 (cf. DONE — socle `TierListTool` commun aux 4). **RESTENT 11
-      sous-outils** (`/<slug>`, 404 tant que non portés) : most-used-units,
-      gear-usage-statistics, gear-usage-finder, damage-calculator,
-      pull-simulator, progress-tracker, team-planner, tier-list-maker,
-      patch-history, coupon-codes, event — namespaces `tools.*`/`progress.*`.
+      **tierlistpvp**, **ee-priority-base**, **ee-priority-plus10**,
+      **most-used-units** portés le 20/07 (cf. DONE — socle `TierListTool`
+      commun aux 4 tier lists ; most-used = agrégation à la lecture des guides,
+      plus d'artefact généré). **RESTENT 10 sous-outils** (`/<slug>`, 404 tant
+      que non portés) : gear-usage-statistics, gear-usage-finder,
+      damage-calculator, pull-simulator, progress-tracker, team-planner,
+      tier-list-maker, patch-history, coupon-codes, event — namespaces
+      `tools.*`/`progress.*`.
 - [ ] **`/characters/[slug]` — RELIQUAT** : la fiche détail est portée, il ne
       MANQUE que les **Discord reviews** (section review communautaire de la V2).
       Le reste (skills/burst/chain/gear/stats/transcend…) est là. **Bloqué sur la

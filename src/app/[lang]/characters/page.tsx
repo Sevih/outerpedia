@@ -11,6 +11,7 @@ import {
 import {
   characterDisplayName,
   characterNamePrefix,
+  characterSearchNames,
   getCharacterListItems,
   slugForId,
 } from '@/lib/data/characters';
@@ -60,8 +61,6 @@ const TEAM_BONUS_ORDER = [
 const GIFT_NAMES =
   (glossariesData as { gifts?: Record<string, Record<string, string>> }).gifts ?? {};
 
-const norm = (s: string) => s.normalize('NFKC').toLowerCase().trim();
-
 export async function generateMetadata({
   params,
 }: {
@@ -81,18 +80,12 @@ export async function generateMetadata({
 function buildRows(lang: Lang): CharacterRow[] {
   const curated = loadCuratedCharacters();
   return getCharacterListItems().map((c) => {
-    const names = [
-      ...Object.values(c.name as Record<string, string>),
-      ...(c.nickname ? Object.values(c.nickname as Record<string, string>) : []),
-      c.id,
-      slugForId(c.id) ?? c.id,
-    ];
     return {
       id: c.id,
       slug: slugForId(c.id) ?? c.id,
       name: characterDisplayName(c, lang),
       prefix: characterNamePrefix(c, lang),
-      searchNames: [...new Set(names.map(norm).filter(Boolean))],
+      searchNames: characterSearchNames(c),
       element: c.element,
       class: c.class,
       rarity: c.rarity,
