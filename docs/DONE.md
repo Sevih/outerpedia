@@ -6,6 +6,27 @@
 
 ## 2026-07-20
 
+- **`/changelog` LIVRÉ (worker dédié — entrée reconstituée au nettoyage du
+  TODO, le worker n'avait pas journalisé).** Journal du site refait propre
+  (pas de portage V2) : socle données + migration des 134 entrées V2, page
+  publique + section Recent Updates de la Home (rebranchée) + i18n (5
+  locales), éditeur admin (store + route `.dev` + presets + lien typé +
+  date/programmée/brouillon + regen V2 + sidebar Tools), flux RSS dédié
+  `/feed/changelog` avec filtre de programmation. Vignette = og:image de la
+  cible (garde-fou `og_default`) ; upload abandonné (inutile).
+- **Outils admin Search aliases + Short names livrés (a36c228, worker
+  aliases — entrée reconstituée).** Curés par perso. ATTENTION : le module
+  site `src/lib/data/name-aliases` importé par characters/TierListTool/
+  most-used n'existe pas encore → tsc casse sur main (suivi en PRIO du TODO).
+- **H1 réellement centrés sur les pages du site (8588562).** Les headings
+  sont en `width: fit-content` (globals.css, trait de titre du jeu) :
+  `text-center` seul ne centre RIEN — le centrage passe par `mx-auto` sur le
+  bloc. Vrais bugs corrigés (/contributors, /coupons, /changelog : intention
+  `text-center` annulée par le fit-content) ; H1 à gauche centrés (/equipment
+  en-tête complet, /legal, /guides/[category] bloc icône+titre, guide détail
+  sans boss aligné sur la variante boss, /contribute ×4). Exclusions voulues
+  (mises en page propres) : /characters/[slug], /tools, /tools/[slug],
+  EquipmentDetail. Déjà bons : /characters, /guides, /tierlist, HomeHero.
 - **Icône `bosses.json` unifiée sur l'id BRUT (décision Sevih : go).** Le
   générateur bakait `MT_<FaceIconID>` dans la donnée là où `monsters.json`
   stocke l'id brut (préfixe au rendu) — ambiguïté qui mordait en refactor
