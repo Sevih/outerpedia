@@ -6,7 +6,7 @@
       "kr": "아이언 스트레쳐",
       "zh": "铁血伸张者"
     },
-    "icon": "MT_4013071",
+    "icon": "4013071",
     "element": "fire",
     "source": {
       "en": "Irregular Extermination Project",
@@ -22,7 +22,7 @@
       "kr": "블록버스터",
       "zh": "破坏猛兽"
     },
-    "icon": "MT_4013072",
+    "icon": "4013072",
     "element": "water",
     "source": {
       "en": "Irregular Extermination Project",
@@ -38,7 +38,7 @@
       "kr": "변이된 와이브르",
       "zh": "变异双足飞龙"
     },
-    "icon": "MT_4014003",
+    "icon": "4014003",
     "element": "light",
     "source": {
       "en": "Irregular Extermination Project",
@@ -54,7 +54,7 @@
       "kr": "이레귤러 퀸",
       "zh": "异型怪女王"
     },
-    "icon": "MT_4089001",
+    "icon": "4089001",
     "element": "dark",
     "source": {
       "en": "Irregular Extermination Project",
@@ -70,7 +70,7 @@
       "kr": "미확인 키메라",
       "zh": "未知的奇美拉"
     },
-    "icon": "MT_4034002",
+    "icon": "4034002",
     "element": "earth",
     "source": {
       "en": "Special Request: Ecology Study",
@@ -86,7 +86,7 @@
       "kr": "그랑 칼라마리",
       "zh": "海怪"
     },
-    "icon": "MT_4034003",
+    "icon": "4034003",
     "element": "dark",
     "source": {
       "en": "Special Request: Ecology Study",
@@ -102,7 +102,7 @@
       "kr": "주인 잃은 가디언",
       "zh": "失去主人的守护者"
     },
-    "icon": "MT_4076006",
+    "icon": "4076006",
     "element": "fire",
     "source": {
       "en": "Special Request: Ecology Study",
@@ -118,7 +118,7 @@
       "kr": "세이크리드 가디언",
       "zh": "圣科利德守护者"
     },
-    "icon": "MT_4044003",
+    "icon": "4044003",
     "element": "light",
     "source": {
       "en": "Special Request: Ecology Study",
@@ -134,7 +134,7 @@
       "kr": "글리시스",
       "zh": "克里希丝"
     },
-    "icon": "MT_4076001",
+    "icon": "4076001",
     "element": "water",
     "source": {
       "en": "Special Request: Identification",
@@ -150,7 +150,7 @@
       "kr": "화염기사 메테우스",
       "zh": "火焰骑士梅修斯"
     },
-    "icon": "MT_4076002",
+    "icon": "4076002",
     "element": "fire",
     "source": {
       "en": "Special Request: Identification",
@@ -166,7 +166,7 @@
       "kr": "데그릴",
       "zh": "泰格里尔"
     },
-    "icon": "MT_4076003",
+    "icon": "4076003",
     "element": "earth",
     "source": {
       "en": "Special Request: Identification",
@@ -182,7 +182,7 @@
       "kr": "아르스 노바",
       "zh": "艺术新星"
     },
-    "icon": "MT_4076008",
+    "icon": "4076008",
     "element": "light",
     "source": {
       "en": "Special Request: Identification",
@@ -198,7 +198,7 @@
       "kr": "아마데우스",
       "zh": "阿玛迪斯"
     },
-    "icon": "MT_4076009",
+    "icon": "4076009",
     "element": "dark",
     "source": {
       "en": "Special Request: Identification",
@@ -214,7 +214,7 @@
       "kr": "타일런트 유생체",
       "zh": "幼体泰兰特"
     },
-    "icon": "MT_4076005",
+    "icon": "4076005",
     "element": "water",
     "source": {
       "en": "Special Request: Ecology Study",

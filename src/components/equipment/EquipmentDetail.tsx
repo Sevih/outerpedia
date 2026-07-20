@@ -758,7 +758,7 @@ function SourceDetail({ source }: { source: NonNullable<DetailModel['source']> }
         <div key={b.id} className="flex items-center gap-2.5">
           {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
-            src={img.boss(b.icon)}
+            src={img.boss(`MT_${b.icon}`)}
             alt=""
             className="border-line-subtle h-10 w-10 rounded-lg border object-cover"
           />

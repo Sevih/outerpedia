@@ -243,7 +243,7 @@ export function ItemRow({
           {item.source.bosses.map((b) => (
             <span key={b.id} className="flex items-center gap-1.5 text-xs text-zinc-200">
               {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-              <img src={img.boss(b.icon)} alt="" className="h-5 w-5 rounded object-cover" />
+              <img src={img.boss(`MT_${b.icon}`)} alt="" className="h-5 w-5 rounded object-cover" />
               {b.name}
               {b.sourceLabel && <span className="text-zinc-400">· {b.sourceLabel}</span>}
             </span>
@@ -321,7 +321,7 @@ export function SetPieceGroup({
           {eff.source.bosses.map((b) => (
             <span key={b.id} className="flex items-center gap-1.5 text-xs text-zinc-200">
               {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-              <img src={img.boss(b.icon)} alt="" className="h-5 w-5 rounded object-cover" />
+              <img src={img.boss(`MT_${b.icon}`)} alt="" className="h-5 w-5 rounded object-cover" />
               {b.name}
               {b.sourceLabel && <span className="text-zinc-400">· {b.sourceLabel}</span>}
             </span>

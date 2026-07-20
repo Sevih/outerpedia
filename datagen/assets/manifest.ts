@@ -469,12 +469,14 @@ export function buildAssetManifest(): AssetRequest[] {
         pushItem(m.icon);
     }
     // Boss des sources d'obtention (résolus par le build depuis le curé).
+    // `icon` = FaceIconID BRUT (même convention que monsters.json) — le
+    // préfixe sprite `MT_` s'applique ici, comme au rendu.
     for (const b of Object.values(load('equipment/bosses.json'))) {
       if (typeof b.icon === 'string' && b.icon)
         push({
           kind: 'image',
-          key: `images/ui/boss/${b.icon}.webp`,
-          candidates: [b.icon],
+          key: `images/ui/boss/MT_${b.icon}.webp`,
+          candidates: [`MT_${b.icon}`],
           domain: 'ui',
         });
     }

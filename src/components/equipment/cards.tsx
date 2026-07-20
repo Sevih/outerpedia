@@ -106,7 +106,7 @@ export function SourceLine({ source, title }: { source?: RowSource; title: strin
       {source.bosses.map((b) => (
         <span key={b.id} className="inline-flex items-center gap-1">
           {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-          <img src={img.boss(b.icon)} alt="" className="h-6 w-6 rounded object-cover" />
+          <img src={img.boss(`MT_${b.icon}`)} alt="" className="h-6 w-6 rounded object-cover" />
           <span className="text-content-muted text-xs">{b.name}</span>
         </span>
       ))}

@@ -3,7 +3,8 @@
  *
  * La couche curée (`data/curated/equipment.json`) et les sources extraites
  * référencent les boss par id (`MonsterTemplet`) ; on résout ici nom localisé,
- * portrait (`MT_<FaceIconID>`, vignette monstre du jeu), élément et — quand la
+ * portrait (`FaceIconID` BRUT — le sprite `MT_<icon>` est une affaire de vue,
+ * même convention que `monsters.json`), élément et — quand la
  * source extraite le sait — le TITRE du contenu où on l'affronte (clé
  * `TextSystem`, ex. `SYS_RAID_1_TITLE` → « Special Request: Ecology Study »).
  * Sortie : `data/generated/equipment/bosses.json` (uniquement les ids requis).
@@ -15,7 +16,8 @@ import type { LangDict } from '../lib/lang';
 
 export interface Boss {
   name: LangDict;
-  /** Nom de sprite portrait (`MT_<FaceIconID>`, at_thumbnailmonsterruntime). */
+  /** Id de portrait (FaceIconID BRUT) — sprite `MT_<icon>` côté front
+   * (at_thumbnailmonsterruntime), même convention que `monsters.json`. */
   icon: string;
   element: string;
   /** Titre localisé du contenu (mode de donjon) — absent si non extrait. */
@@ -39,7 +41,7 @@ export function buildBosses(
     const source = titleKey ? resolveText(sys, titleKey) : undefined;
     out[r.ID] = {
       name: resolveText(text, r.NameID),
-      icon: `MT_${r.FaceIconID ?? r.ID}`,
+      icon: r.FaceIconID ?? r.ID,
       element: slugEnum(r.Element),
       ...(source?.en ? { source } : {}),
     };
