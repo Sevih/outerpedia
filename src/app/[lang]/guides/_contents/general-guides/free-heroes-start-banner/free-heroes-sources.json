@@ -86,7 +86,7 @@
       },
       "entries": [
         {
-          "names": ["Veronica"],
+          "names": ["Luna"],
           "pickType": "all",
           "reason": {
             "en": "Clear Season 1 Normal Adventure 2-3.",
@@ -248,6 +248,28 @@
             "kr": "도전! 특별의뢰 : 생태 조사。",
             "zh": "挑战!特别委托:生态调查。",
             "fr": "Challenge! Special Request : Ecology Study."
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "en": "Story mode",
+        "fr": "Story mode",
+        "jp": "ストーリーモード",
+        "kr": "스토리 모드",
+        "zh": "剧情模式"
+      },
+      "entries": [
+        {
+          "names": ["Luna", "Viella", "Delta"],
+          "pickType": "all",
+          "reason": {
+            "en": "Given for free in story mode.",
+            "jp": "ストーリーモードで無料で入手できます。",
+            "kr": "스토리 모드에서 무료로 제공됩니다.",
+            "zh": "在故事模式中免费获得。",
+            "fr": "Offert gratuitement en mode histoire."
           }
         }
       ]

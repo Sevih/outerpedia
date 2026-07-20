@@ -107,7 +107,17 @@ export const customBannerPicks: CustomBannerPick[] = [
     },
   },
   {
-    names: ['Sterope', 'Notia', 'Hilde', 'Charlotte', 'Fran', 'Luna', 'Ember', 'Stella'],
+    names: [
+      'Sterope',
+      'Veronica',
+      'Notia',
+      'Hilde',
+      'Charlotte',
+      'Fran',
+      'Luna',
+      'Ember',
+      'Stella',
+    ],
     reason: {
       en: 'Niche but useful in specific content.',
       jp: 'ニッチだが特定コンテンツで有用。',

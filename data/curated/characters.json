@@ -953,15 +953,6 @@
     }
   },
   "2000037": {
-    "rank": "A",
-    "rankPvp": "A",
-    "role": "sustain",
-    "tags": ["free"],
-    "skillPriority": {
-      "first": 3,
-      "second": 2,
-      "ultimate": 1
-    },
     "prosCons": {
       "pros": [
         {
@@ -1000,7 +991,15 @@
         "author": "아우터플레인 공식 채널",
         "uploadDate": "2025-09-22T17:15:03Z"
       }
-    ]
+    ],
+    "rank": "A",
+    "rankPvp": "A",
+    "role": "sustain",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
   },
   "2000038": {
     "rank": "D",
