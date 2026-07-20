@@ -253,6 +253,13 @@ export interface Glossaries {
    */
   effectByKey: Record<'buff' | 'debuff', Record<string, string>>;
   /**
+   * Taxonomie de FILTRE des effets (page liste `/characters`), par côté, clé =
+   * clé `effectByKey`. `category` = famille UI (statBoosts/cc/dot…), `group` =
+   * clé canonique absorbant les variantes (`_IR` → base). 100 % éditorial
+   * (`data/curated/effect-filters.json`). Optionnel (curé absent → omis).
+   */
+  effectFilters?: Record<'buff' | 'debuff', Record<string, { category: string; group?: string }>>;
+  /**
    * tooltip → types de mécanique (`BT_X`, ou `BT_STAT|stat` composite) qui
    * l'appliquent dans les tables. Dédup des statuts de NIVEAU redondants : un
    * statut générique affiché par le skill est masqué quand une chip du kit

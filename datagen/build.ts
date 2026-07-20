@@ -61,6 +61,7 @@ import { buildShopPriorities } from './generators/shop-priorities';
 import { buildTimegateResources } from './generators/timegate-resources';
 import { buildHeroGrowth } from './generators/hero-growth';
 import { buildEffectGlossary, unknownFamilyTypes } from './lib/effects';
+import { loadEffectFilters, validateEffectFilters } from './curated/effect-filters';
 import {
   curatedBossIds,
   loadEquipmentCurated,
@@ -106,6 +107,12 @@ async function main(): Promise<void> {
     costumes: buildCostumes(),
   });
   const { effects, byTooltip, byLabel, byKey, tooltipKinds } = buildEffectGlossary();
+  // Taxonomie de filtre curée (famille UI + regroupement des variantes).
+  const effectFilters = loadEffectFilters();
+  const filterIssues = validateEffectFilters(effectFilters);
+  if (filterIssues.length) {
+    console.warn(`⚠ data/curated/effect-filters.json invalide :\n  ${filterIssues.join('\n  ')}`);
+  }
   // Types de buff INCONNUS des règles de famille : à classer via
   // data/curated/effect-families.json (pas besoin de toucher au code).
   const unknown = unknownFamilyTypes();
@@ -140,6 +147,9 @@ async function main(): Promise<void> {
       buff: Object.fromEntries(byKey.buff),
       debuff: Object.fromEntries(byKey.debuff),
     },
+    // Taxonomie de filtre (famille UI + regroupement) des effets — éditorial,
+    // même espace de clés que effectByKey. Alimente les filtres de /characters.
+    effectFilters,
     tooltipKinds: Object.fromEntries(tooltipKinds),
     // Titres des modes de contenu (résolus sans mapping en dur) — glossaire
     // comme les éléments/classes ; les donjons vivent dans encounters.json.
