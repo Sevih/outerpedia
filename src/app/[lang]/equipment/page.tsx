@@ -235,8 +235,11 @@ export default async function EquipmentPage({ params }: { params: Promise<{ lang
   return (
     <div className="mx-auto max-w-7xl space-y-5 px-4 py-6">
       <JsonLd data={itemList} />
-      <div>
-        <h1 className="text-content-strong text-2xl font-bold">{t('page.equipments.title')}</h1>
+      {/* En-tête centré, comme les autres listes (headings fit-content → mx-auto). */}
+      <div className="text-center">
+        <h1 className="text-content-strong mx-auto text-2xl font-bold">
+          {t('page.equipments.title')}
+        </h1>
         <p className="text-content-muted text-sm">{t('page.equipments.description')}</p>
       </div>
       <EquipmentBrowser

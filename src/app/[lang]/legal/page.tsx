@@ -33,7 +33,7 @@ export default async function LegalPage({ params }: { params: Promise<{ lang: st
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="text-content-strong text-3xl font-bold">{t('legal.heading')}</h1>
+      <h1 className="text-content-strong mx-auto text-3xl font-bold">{t('legal.heading')}</h1>
 
       <div className="text-content-muted mt-6 space-y-4 leading-relaxed">
         <p>{t('legal.p1')}</p>

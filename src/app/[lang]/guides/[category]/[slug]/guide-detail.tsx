@@ -106,7 +106,8 @@ export async function GuideDetail({
     </header>
   ) : (
     <header className="space-y-2">
-      <h1 className="text-content-strong text-3xl font-bold">{title}</h1>
+      {/* Même centrage que la variante boss (headings fit-content → mx-auto). */}
+      <h1 className="text-content-strong mx-auto text-3xl font-bold">{title}</h1>
       <div className="text-content-muted flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
         <span>
           {t('page.guide.by', { author: guide.author })} ·{' '}

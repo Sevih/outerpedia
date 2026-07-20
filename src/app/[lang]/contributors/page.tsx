@@ -46,7 +46,9 @@ export default async function ContributorsPage({ params }: { params: Promise<{ l
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-6 md:px-6">
-      <h1 className="text-content-strong mb-4 text-center text-3xl font-bold">
+      {/* Les headings sont en `width: fit-content` (globals.css) : `text-center`
+          seul ne centre rien, il faut centrer le BLOC (mx-auto). */}
+      <h1 className="text-content-strong mx-auto mb-4 text-center text-3xl font-bold">
         {t('contributors.title')}
       </h1>
       <p className="text-content-muted mx-auto mb-8 max-w-2xl text-center">

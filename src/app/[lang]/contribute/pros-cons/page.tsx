@@ -40,7 +40,9 @@ export default async function ContributeProsConsPage({
       >
         ← Contribution tools
       </Link>
-      <h1 className="text-content-strong text-2xl font-semibold">Pros / Cons — contribution</h1>
+      <h1 className="text-content-strong mx-auto text-2xl font-semibold">
+        Pros / Cons — contribution
+      </h1>
       <EditorialPublicTool slice="prosCons" kind="character-pros-cons" {...data} />
     </main>
   );

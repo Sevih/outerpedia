@@ -40,7 +40,9 @@ export default async function ContributeSynergiesPage({
       >
         ← Contribution tools
       </Link>
-      <h1 className="text-content-strong text-2xl font-semibold">Synergies — contribution</h1>
+      <h1 className="text-content-strong mx-auto text-2xl font-semibold">
+        Synergies — contribution
+      </h1>
       <EditorialPublicTool slice="synergies" kind="character-synergy" {...data} />
     </main>
   );

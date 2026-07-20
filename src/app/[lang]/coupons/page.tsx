@@ -37,7 +37,8 @@ export default async function CouponsPage({ params }: { params: Promise<{ lang: 
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-6 md:px-6">
-      <h1 className="text-content-strong mb-3 text-center text-3xl font-bold">
+      {/* fit-content (globals.css) : le centrage passe par mx-auto, pas text-center. */}
+      <h1 className="text-content-strong mx-auto mb-3 text-center text-3xl font-bold">
         {t('page.coupons.title')}
       </h1>
       <p className="text-content-muted mx-auto mb-6 max-w-xl text-center">

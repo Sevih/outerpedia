@@ -57,7 +57,7 @@ export default async function ContributePremiumReviewsPage({
       >
         ← Contribution tools
       </Link>
-      <h1 className="text-content-strong text-2xl font-semibold">
+      <h1 className="text-content-strong mx-auto text-2xl font-semibold">
         Premium &amp; Limited — review contribution
       </h1>
       <PremiumReviewsPublicTool
