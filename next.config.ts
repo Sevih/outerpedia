@@ -94,7 +94,22 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
 
   async headers() {
-    return [{ source: '/(.*)', headers: securityHeaders }];
+    return [
+      { source: '/(.*)', headers: securityHeaders },
+      // Fichiers de `public/` : Next les sert en `max-age=0` par défaut →
+      // re-téléchargés à chaque visite (hint Sitebulb 20/07). Les icônes ne
+      // changent qu'à une refonte : 1 semaine + revalidation en fond suffit
+      // (pas d'`immutable` — noms non fingerprintés, cache impurgeable).
+      {
+        source: '/icons/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=604800, stale-while-revalidate=86400',
+          },
+        ],
+      },
+    ];
   },
 
   // Slugs de guides RENOMMÉS en V2 (301 hérités — contrat d'URL). Chaque entrée

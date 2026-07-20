@@ -19,10 +19,15 @@
  * Le Cache-Control dissocie les deux caches, qui n'ont pas les mêmes contraintes :
  *   - `s-maxage` (edge Cloudflare) = 1 an. R2 n'est donc presque jamais sollicité,
  *     et comme on purge nous-mêmes l'edge sur les clés poussées, il ne ment pas.
- *   - `max-age` (navigateur) = 10 min. Ce cache-là est INPURGEABLE : sa durée EST
+ *   - `max-age` (navigateur) = 1 JOUR. Ce cache-là est INPURGEABLE : sa durée EST
  *     le délai maximal avant qu'une correction soit vue. L'ancien réglage
  *     (`max-age=31536000, immutable`) signifiait littéralement « ne revalide
  *     jamais » : une image corrigée restait fausse un an chez qui l'avait déjà vue.
+ *     Le 10 min initial sur-corrigeait dans l'autre sens : ~1456 revalidations
+ *     par visiteur récurrent (hint Critical Sitebulb 20/07). Les corrections
+ *     d'images EXISTANTES étant rares, 1 jour est l'arbitrage retenu (Sevih,
+ *     20/07) — changer ce header exige un `assets:push --full` (en-tête S3 figé
+ *     à l'upload).
  *   - `stale-while-revalidate` : le navigateur affiche sa copie immédiatement et
  *     revalide en fond — la fraîcheur ne coûte aucune latence.
  *
@@ -39,7 +44,7 @@ import { dirname, join, relative, resolve } from 'node:path';
 const STAGING = resolve('.assets-staging');
 const STATE_FILE = resolve('datagen/assets/pushed.json');
 const IMG_BASE = 'https://img.outerpedia.com';
-const CACHE_CONTROL = 'public, max-age=600, s-maxage=31536000, stale-while-revalidate=86400';
+const CACHE_CONTROL = 'public, max-age=86400, s-maxage=31536000, stale-while-revalidate=86400';
 /**
  * Les JSON RUNTIME (`data/*` : coupons, bannières) sont de la donnée VIVE, pas
  * des assets quasi-immuables : `s-maxage` court pour que l'edge se rafraîchisse

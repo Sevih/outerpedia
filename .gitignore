@@ -44,3 +44,4 @@ desktop.ini
 # Pool éditorial (médias faits main, ex. wallpapers Outerpedia) — gros binaires
 # poussés sur R2 comme le reste, jamais dans git. Source durable = R2 + originaux.
 .editorial/
+docs/seo&audit
