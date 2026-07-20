@@ -32,20 +32,21 @@
 > ASSUMÉES le temps du portage. Chaque page arrive avec ses clés de locale
 > DÉJÀ pré-seedées ×5 (cf. item « pré-seed » de la section Docs).
 
-- [ ] **`/tierlist` — RELIQUAT** (hub fait le 19/07, cf. DONE). RESTE : l'aperçu
-      « top S-tier » par carte (données de RANG par perso absentes en V3 — elles
-      vivent dans l'outil tierlist, non porté) ; et les helpers seo.ts encore
-      inutilisés (`buildVideoObjectJsonLd`, `buildFaqJsonLd`) pour la vraie page
-      d'outil tierlist.
+- [ ] **`/tierlist` — reliquat SOLDÉ le 20/07** (aperçu top S-tier restauré,
+      cf. DONE — la donnée de rang existait dans le curé, l'item était périmé).
+      RESTE (mineur) : les helpers seo.ts inutilisés (`buildVideoObjectJsonLd`,
+      `buildFaqJsonLd`) — la V2 ne les employait QUE dans `MultiVideoEmbed`
+      (vidéo), pas sur les pages tierlist : à brancher quand un consommateur
+      réel arrive, ou à retirer (code mort).
 - [ ] **`/tools` — RELIQUAT** (landing faite le 19/07, cf. DONE). Routeur À PLAT
       `[lang]/[slug]` posé le 19/07 (parité URL prod V2, registre de slugs portés).
-      **ost**, **wallpapers**, **4-comics** portés (cf. DONE — les 3 médias faits,
-      ordre Sevih respecté). **RESTENT 15 sous-outils** (`/<slug>`, 404 tant que
-      non portés) : most-used-units, tierlistpve, tierlistpvp, ee-priority-base,
-      ee-priority-plus10, gear-usage-statistics, gear-usage-finder,
-      damage-calculator, pull-simulator, progress-tracker, team-planner,
-      tier-list-maker, patch-history, coupon-codes, event — namespaces
-      `tools.*`/`progress.*`.
+      **ost**, **wallpapers**, **4-comics** portés le 19/07 ; **tierlistpve**,
+      **tierlistpvp**, **ee-priority-base**, **ee-priority-plus10** portés le
+      20/07 (cf. DONE — socle `TierListTool` commun aux 4). **RESTENT 11
+      sous-outils** (`/<slug>`, 404 tant que non portés) : most-used-units,
+      gear-usage-statistics, gear-usage-finder, damage-calculator,
+      pull-simulator, progress-tracker, team-planner, tier-list-maker,
+      patch-history, coupon-codes, event — namespaces `tools.*`/`progress.*`.
 - [ ] **`/characters/[slug]` — RELIQUAT** : la fiche détail est portée, il ne
       MANQUE que les **Discord reviews** (section review communautaire de la V2).
       Le reste (skills/burst/chain/gear/stats/transcend…) est là. **Bloqué sur la
@@ -56,6 +57,13 @@
       (item 📚). Débloque aussi la section **Recent Updates** de la Home (différée :
       elle lit `getChangelog`/`@/lib/changelog`, non porté — à rebrancher quand le
       changelog atterrit).
+      _PRÊT À RELIRE/COMMITTER (worker dédié, 20/07) — ne pas doubler_ : journal du
+      site refait propre (pas de portage V2). FAIT : socle données + migration des
+      134 entrées V2, page publique + section Recent Updates + i18n (5 locales),
+      éditeur admin (store + route `.dev` + presets + lien typé + date/programmée/
+      brouillon + regen V2 + sidebar Tools), flux RSS dédié `/feed/changelog`
+      (filtre de programmation). Vignette = og:image de la cible (garde-fou
+      `og_default`) ; upload abandonné (inutile). Fichiers encore non suivis (WIP).
 
 ## 🐛 Bugs — sévérité haute (audit 17/07, tous vérifiés)
 
@@ -63,25 +71,7 @@
 
 ## 🐛 Bugs — sévérité moyenne
 
-### Caches périmés (process admin long-running)
-
-- [ ] Caches module qui contournent le régime mtime/TTL pourtant établi
-      partout ailleurs. RESTE (datagen → worker) : `datagen/extractor/v2-control.ts:408-424`
-      (`curatedKeySides`), `datagen/assets/manifest.ts:54-63` (`faceIconIndex`),
-      `datagen/generators/equipment.ts:444` (`groupKidsCache` — contraste avec
-      `curatedKeyCache` l.522 du même fichier), `datagen/generators/goods.ts:40` + `recruit.ts:155`. Stamper chacun (modèle `fileStamp`/`tablesStamp`) ou
-      documenter la limite.
-      (SRC FAIT : `gear-reco.ts` `famByMember` + `rewards.ts` `gearIndex` stampés
-      sur le mtime du curé équipement, `skill-view` `curatedKeyCache` mutualisé →
-      DONE ; `monster-store.ts` traité le 18/07 — cf. DONE.)
-
-### Datagen — divers
-
-- [ ] `datagen/extractor/specs/character.ts:492` : `ShowMainPage === 'true'`
-      en casse exacte (le dump mélange `'True'`/`'true'` selon les colonnes) —
-      une normalisation côté jeu viderait le roster en silence. Généraliser
-      `bool()` de `lib/tables` à tous les booléens de table (3 idiomes
-      coexistent : `bool()`, `boolCol()`, comparaisons exactes).
+- _(vide — caches datagen stampés + `bool()` généralisé le 20/07 → DONE)_
 
 ## 🧪 Tests à écrire
 
@@ -96,17 +86,11 @@
 
 ### Code mort (vérifié par grep repo entier, audit 17/07)
 
-- [ ] Datagen : `hasFaceIconLayout` (face-icon.ts:38), `r2Push` (lib/r2.ts:89 —
-      doublonne assets-push.mjs en plus), `getMaxLevel`/`resolvePlaceholders`
-      (buff.ts, testés mais jamais appelés en prod), export `isPermilleRow`,
-      `validateTagDef` (curated/tags.ts:57 — son commentaire prétend qu'il est
-      branché, c'est faux : le brancher ou le supprimer).
+- _(vide — les 5 sites datagen traités le 20/07 → DONE : 4 supprimés,
+  `validateTagDef` BRANCHÉ dans le test bloquant.)_
 
 ### Duplication (les 2 gros d'abord)
 
-- [ ] **Helpers adb** dupliqués entre `datagen/extract/dump.ts` et
-      `pull-gamedata.ts` (ADB, PKG, capture, stream, pickDevice, bloc root) —
-      extraire `extract/adb.ts`.
 - [ ] `rankOptionLabels` homonymes divergents (data/monsters.ts:97 vs
       admin/monster-store.ts:154) ; `BOSS_TYPES` homonymes DIVERGENTS
       (monster-icon.ts:32 vs towers.ts:92 — sets volontairement différents :

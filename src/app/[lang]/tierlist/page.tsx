@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
-import { normalizeLang } from '@/lib/i18n/config';
+import { normalizeLang, type Lang } from '@/lib/i18n/config';
 import { getT, type TranslationKey } from '@/i18n';
 import { createPageMetadata, getMonthYear } from '@/lib/seo';
 import { getVisibleTools, type ToolMeta } from '@/lib/data/tools';
-import { getCharacterListItems } from '@/lib/data/characters';
-import { FlagshipCard } from '@/components/tierlist/FlagshipCard';
+import { characterDisplayName, getCharacterListItems } from '@/lib/data/characters';
+import { loadCuratedCharacters } from '@/lib/data/curated';
+import type { CharacterCurated } from '@contracts';
+import { FlagshipCard, type FlagshipTopHero } from '@/components/tierlist/FlagshipCard';
 import { VsBadge } from '@/components/tierlist/VsBadge';
 import { OtherRankingsRail, type RailToolVM } from '@/components/tierlist/OtherRankingsRail';
 import type { FlagshipKey } from '@/components/tierlist/tierlistTheme';
@@ -35,10 +37,56 @@ export async function generateMetadata({
 }
 
 /**
- * Hub des tier lists : deux cartes phares PvE/PvP (badge VS) et un rail « autres
- * classements ». Les sous-outils `/tools/<slug>` ne sont pas encore portés (404
- * assumée — layout d'abord). L'aperçu top-tier est omis (pas de donnée de rang
- * par perso en V3). Page statique, revalidation 24 h.
+ * Aperçu top-tier d'une carte phare : les S-tier du mode, mélangés avec une
+ * graine STABLE SUR LA JOURNÉE (l'ordre ne change pas à l'intérieur de la
+ * fenêtre ISR de 24 h), plafonnés à 12 (2 rangées de portraits).
+ */
+function topHeroesFor(
+  select: (cu: CharacterCurated) => string | undefined,
+  lang: Lang,
+  seedKey: string,
+  cap = 12,
+): FlagshipTopHero[] {
+  const curated = loadCuratedCharacters();
+  const candidates = getCharacterListItems().filter((c) => select(curated[c.id] ?? {}) === 'S');
+  return seededShuffle(candidates, dailySeed(seedKey))
+    .slice(0, cap)
+    .map((c) => ({ id: c.id, name: characterDisplayName(c, lang) }));
+}
+
+/** Graine déterministe qui change une fois par jour (hash djb2 de `jour:clé`). */
+function dailySeed(extra: string): number {
+  const day = Math.floor(Date.now() / 86_400_000);
+  const key = `${day}:${extra}`;
+  let h = 5381;
+  for (let i = 0; i < key.length; i++) h = ((h << 5) + h) ^ key.charCodeAt(i);
+  return h >>> 0;
+}
+
+/** Mélange de Fisher–Yates piloté par un PRNG mulberry32 (déterministe). */
+function seededShuffle<T>(arr: readonly T[], seed: number): T[] {
+  const out = [...arr];
+  let s = seed | 0;
+  const rand = () => {
+    s = (s + 0x6d2b79f5) | 0;
+    let t = s;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
+/**
+ * Hub des tier lists : deux cartes phares PvE/PvP (badge VS, cluster de
+ * portraits top S-tier mélangé chaque jour) et un rail « autres classements ».
+ * Les liens suivent le routeur À PLAT (`/<slug>`, parité URL prod V2) ; les
+ * sous-outils non portés y répondent 404 (assumé). Page statique, revalidation
+ * 24 h.
  */
 export default async function TierlistPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang: raw } = await params;
@@ -57,8 +105,13 @@ export default async function TierlistPage({ params }: { params: Promise<{ lang:
       icon: tool.icon,
       title: toolTitle(tool.slug),
       desc: toolDesc(tool.slug),
-      href: `/tools/${tool.slug}`,
+      href: `/${tool.slug}`,
     }));
+
+  const topHeroes: Record<FlagshipKey, FlagshipTopHero[]> = {
+    pve: topHeroesFor((cu) => cu.rank, lang, 'pve'),
+    pvp: topHeroesFor((cu) => cu.rankPvp, lang, 'pvp'),
+  };
 
   const rankingsCount = featured.length + others.length;
   const unitCount = getCharacterListItems().length;
@@ -90,10 +143,11 @@ export default async function TierlistPage({ params }: { params: Promise<{ lang:
             flagship={f.flag}
             title={toolTitle(f.slug)}
             description={toolDesc(f.slug)}
-            href={`/tools/${f.slug}`}
+            href={`/${f.slug}`}
             side={f.side}
             viewLabel={`${viewLabel} ${f.flag.toUpperCase()}`}
             previewLabel={previewLabel}
+            topHeroes={topHeroes[f.flag]}
           />
         ))}
         {featured.length === 2 && (

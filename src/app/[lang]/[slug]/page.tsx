@@ -7,6 +7,7 @@ import { normalizeLang, type Lang } from '@/lib/i18n/config';
 import { getT, type TranslationKey } from '@/i18n';
 import { createPageMetadata, buildBreadcrumbJsonLd } from '@/lib/seo';
 import { buildUrl } from '@/lib/site';
+import { img } from '@/lib/images';
 import { getToolMeta } from '@/lib/data/tools';
 import JsonLd from '@/components/seo/JsonLd';
 import { TOOL_COMPONENTS, PORTED_TOOL_SLUGS } from '../tools/registry';
@@ -37,6 +38,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     path: `/${slug}`,
     title: t('page.tool.meta_title').replace('{title}', title),
     description: t(`tools.${slug}.desc` as TranslationKey),
+    // Carte de partage = l'icône de l'outil (celle de la landing), en PNG
+    // (Discord/OG digèrent mal le WebP — collecte dans le manifeste d'assets).
+    ogImage: img.toolIconPng(tool.icon),
   });
 }
 

@@ -97,6 +97,8 @@ export const img = {
   contributor: (avatar: string) => `${BASE}/images/contributors/${avatar}.webp`,
   /** Icône d'un outil (landing /tools — `icon` du curé, sous-dossier inclus). */
   toolIcon: (icon: string) => `${BASE}/images/ui/${icon}.webp`,
+  /** Variante PNG (og:image des pages d'outil — Discord/OG préfèrent le PNG). */
+  toolIconPng: (icon: string) => `${BASE}/images/ui/${icon}.png`,
   /** Icône de l'or (coûts d'ascension). */
   gold: () => `${BASE}/images/items/CM_Goods_Gold.webp`,
   /** Icône d'item générique (gifts, pièces de rappel…). */

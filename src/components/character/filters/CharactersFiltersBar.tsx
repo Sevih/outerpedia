@@ -1,12 +1,16 @@
 'use client';
 
 import { ElementIconPill, ClassIconPill, StarPill, TONE } from './FilterAtoms';
+import { FilterPill } from './FilterPill';
+import type { FilterOption } from './AdvancedFiltersPanel';
 
 export interface FiltersBarLabels {
   searchPlaceholder: string;
   elements: string;
   classes: string;
   rarity: string;
+  /** Libellé du groupe Rôles (requis si `roles` est fourni). */
+  roles?: string;
   filtersTitle: string;
   advanced: string;
   starAria: string;
@@ -28,10 +32,16 @@ interface Props {
   rarityFilter: number[];
   onToggleRarity: (v: number) => void;
 
+  /** Fournis ensemble, ajoutent un groupe Rôles dans la barre (parité V2). */
+  roles?: FilterOption[];
+  roleFilter?: string[];
+  onToggleRole?: (v: string) => void;
+
   labels: FiltersBarLabels;
   /** Compte des filtres avancés actifs (badge du bouton). */
-  advancedCount: number;
-  onOpenAdvanced: () => void;
+  advancedCount?: number;
+  /** Absent → pas de panneau avancé : le déclencheur n'est pas rendu. */
+  onOpenAdvanced?: () => void;
   advancedOpen?: boolean;
 }
 
@@ -53,12 +63,16 @@ export function CharactersFiltersBar({
   rarities,
   rarityFilter,
   onToggleRarity,
+  roles,
+  roleFilter,
+  onToggleRole,
   labels,
-  advancedCount,
+  advancedCount = 0,
   onOpenAdvanced,
   advancedOpen,
 }: Props) {
   const basicsCount = elementFilter.length + classFilter.length + rarityFilter.length;
+  const showRoles = Boolean(roles?.length && roleFilter && onToggleRole);
 
   return (
     <div className="space-y-3">
@@ -69,12 +83,14 @@ export function CharactersFiltersBar({
           onChange={onQueryChange}
           placeholder={labels.searchPlaceholder}
         />
-        <AdvancedButton
-          label={labels.filtersTitle}
-          count={advancedCount + basicsCount}
-          active={advancedOpen}
-          onClick={onOpenAdvanced}
-        />
+        {onOpenAdvanced && (
+          <AdvancedButton
+            label={labels.filtersTitle}
+            count={advancedCount + basicsCount}
+            active={advancedOpen}
+            onClick={onOpenAdvanced}
+          />
+        )}
       </div>
 
       {/* Mobile : rangées rapides élément puis classe + rareté */}
@@ -111,6 +127,20 @@ export function CharactersFiltersBar({
             />
           ))}
         </div>
+        {showRoles && (
+          <div className="flex flex-wrap items-center justify-center gap-1.5">
+            {roles!.map((r) => (
+              <FilterPill
+                key={r.value}
+                active={roleFilter!.includes(r.value)}
+                onClick={() => onToggleRole!(r.value)}
+                className="h-7 px-2.5"
+              >
+                {r.label}
+              </FilterPill>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Desktop : toolbar horizontale unique */}
@@ -163,17 +193,37 @@ export function CharactersFiltersBar({
           ))}
         </BarGroup>
 
+        {showRoles && (
+          <>
+            <Divider />
+            <BarGroup label={labels.roles ?? ''}>
+              {roles!.map((r) => (
+                <FilterPill
+                  key={r.value}
+                  active={roleFilter!.includes(r.value)}
+                  onClick={() => onToggleRole!(r.value)}
+                  className="h-8 px-3"
+                >
+                  {r.label}
+                </FilterPill>
+              ))}
+            </BarGroup>
+          </>
+        )}
+
         <div className="flex-1" />
 
         {/* xl+ : la sidebar remplace ce déclencheur. */}
-        <div className="xl:hidden">
-          <AdvancedButton
-            label={labels.advanced}
-            count={advancedCount}
-            active={advancedOpen}
-            onClick={onOpenAdvanced}
-          />
-        </div>
+        {onOpenAdvanced && (
+          <div className="xl:hidden">
+            <AdvancedButton
+              label={labels.advanced}
+              count={advancedCount}
+              active={advancedOpen}
+              onClick={onOpenAdvanced}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1154,13 +1154,25 @@ export function buildAssetManifest(): AssetRequest[] {
   const toolIndex = JSON.parse(
     readFileSync(resolve('data/curated/tools/_index.json'), 'utf8'),
   ) as Record<string, { icon: string }>;
-  for (const icon of new Set(Object.values(toolIndex).map((t) => t.icon)))
+  for (const icon of new Set(Object.values(toolIndex).map((t) => t.icon))) {
     push({
       kind: 'editorial',
       key: `images/ui/${icon}.webp`,
       source: `ui/${icon}.webp`,
       domain: 'editorial',
     });
+    // Variante PNG : og:image des pages d'outil (`/<slug>` sert l'icône de la
+    // landing en carte de partage — Discord/OG digèrent mal le WebP, même règle
+    // que guides/faceicon/EE). Tout l'index (pas le seul sous-ensemble porté) :
+    // le registre des slugs portés vit côté `src/app`, le lire d'ici inverserait
+    // la doctrine des contrats — et chaque outil finira porté.
+    push({
+      kind: 'editorial',
+      key: `images/ui/${icon}.png`,
+      source: `ui/${icon}.webp`,
+      domain: 'editorial',
+    });
+  }
   // Icônes de tags (créées pour le wiki).
   for (const tag of [
     'premium',

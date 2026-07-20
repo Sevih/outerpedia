@@ -5,6 +5,7 @@ import { listCharacterSlugs } from '@/lib/data/characters';
 import { GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
 import { countGuides, guideUpdatedDate, listGuides } from '@/lib/data/guides';
 import { allEquipmentSlugs } from '@/lib/data/equipment-detail';
+import { PORTED_TOOL_SLUGS } from './[lang]/tools/registry';
 
 /**
  * Sitemap multilingue avec alternates hreflang. Énumère home + liste persos +
@@ -26,6 +27,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/contributors',
     '/coupons',
     '/tools',
+    // Outils portés (routeur à plat `/<slug>`) — s'étend avec le registre.
+    ...PORTED_TOOL_SLUGS.map((s) => `/${s}`),
     '/tierlist',
   ];
 

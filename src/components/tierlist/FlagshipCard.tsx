@@ -1,13 +1,20 @@
 import Link from 'next/link';
 import type { Route } from 'next';
 import { img } from '@/lib/images';
+import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import { FLAGSHIP_ACCENT, type FlagshipKey } from './tierlistTheme';
+
+/** Perso du cluster d'aperçu (portrait décoratif : id + nom pour l'alt). */
+export interface FlagshipTopHero {
+  id: string;
+  name: string;
+}
 
 /**
  * Carte phare PvE / PvP : panneau d'art (dégradé radial d'accent + texture rayée
- * + grand glyphe « S »), bloc titre et pastille CTA. Le CLUSTER DE PORTRAITS
- * top-tier de la V2 est omis : la donnée de rang par perso n'existe pas encore en
- * V3 (elle vit dans l'outil tierlist, non porté) — le glyphe S est centré à la place.
+ * + grand glyphe « S » en coin) avec CLUSTER DE PORTRAITS top-tier sur deux
+ * rangées (parité V2), bloc titre et pastille CTA. Sans `topHeroes`, le glyphe S
+ * se centre seul (dégradé propre).
  */
 export function FlagshipCard({
   flagship,
@@ -17,6 +24,7 @@ export function FlagshipCard({
   side,
   viewLabel,
   previewLabel,
+  topHeroes = [],
 }: {
   flagship: FlagshipKey;
   title: string;
@@ -25,6 +33,7 @@ export function FlagshipCard({
   side: 'left' | 'right';
   viewLabel: string;
   previewLabel: string;
+  topHeroes?: FlagshipTopHero[];
 }) {
   const accent = FLAGSHIP_ACCENT[flagship];
   const eyebrow = flagship === 'pve' ? 'PVE' : 'PVP';
@@ -44,17 +53,72 @@ export function FlagshipCard({
           className="absolute inset-0 bg-[repeating-linear-gradient(135deg,#16161c_0_14px,#101015_14px_28px)] opacity-30"
           aria-hidden
         />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 flex items-center justify-center transition-transform duration-200 group-hover:-translate-y-0.5"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
-          <img
-            src={img.rank('S')}
-            alt=""
-            className="size-28 object-contain opacity-70 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]"
-          />
-        </div>
+        {topHeroes.length === 0 ? (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 flex items-center justify-center transition-transform duration-200 group-hover:-translate-y-0.5"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
+            <img
+              src={img.rank('S')}
+              alt=""
+              className="size-28 object-contain opacity-70 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]"
+            />
+          </div>
+        ) : (
+          <>
+            {/* Glyphe « S » en coin, côté opposé au cluster */}
+            <div
+              aria-hidden
+              className={`pointer-events-none absolute top-2 ${side === 'left' ? 'left-2' : 'right-2'}`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
+              <img
+                src={img.rank('S')}
+                alt=""
+                className="size-24 object-contain opacity-60 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] md:size-28"
+              />
+            </div>
+
+            {/* Cluster de portraits — deux rangées, ancrées au coin */}
+            <div
+              className={`absolute inset-y-4 flex flex-col justify-center gap-1.5 transition-transform duration-200 group-hover:-translate-y-0.5 ${
+                side === 'left'
+                  ? 'right-3 left-28 items-end md:left-32'
+                  : 'right-28 left-3 items-start md:right-32'
+              }`}
+            >
+              {/* Rangée arrière — petite, légèrement estompée */}
+              <div
+                className={`flex items-center gap-1 opacity-80 ${side === 'left' ? 'flex-row-reverse' : ''}`}
+              >
+                {topHeroes.slice(5, 10).map((h) => (
+                  <CharacterPortrait
+                    key={h.id}
+                    id={h.id}
+                    name={h.name}
+                    size={32}
+                    showName={false}
+                  />
+                ))}
+              </div>
+              {/* Rangée avant — plus grande, tête de file au coin */}
+              <div
+                className={`flex items-end gap-1.5 ${side === 'left' ? 'flex-row-reverse' : ''}`}
+              >
+                {topHeroes.slice(0, 5).map((h) => (
+                  <CharacterPortrait
+                    key={h.id}
+                    id={h.id}
+                    name={h.name}
+                    size={48}
+                    showName={false}
+                  />
+                ))}
+              </div>
+            </div>
+          </>
+        )}
         <div
           className={`text-content-subtle absolute bottom-2 font-mono text-[10px] tracking-[0.14em] uppercase ${side === 'left' ? 'left-3' : 'right-3'}`}
         >

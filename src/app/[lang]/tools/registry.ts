@@ -14,6 +14,10 @@ export const TOOL_COMPONENTS: Record<
   ost: () => import('./_contents/ost'),
   wallpapers: () => import('./_contents/wallpapers'),
   '4-comics': () => import('./_contents/4-comics'),
+  tierlistpve: () => import('./_contents/tierlistpve'),
+  tierlistpvp: () => import('./_contents/tierlistpvp'),
+  'ee-priority-base': () => import('./_contents/ee-priority-base'),
+  'ee-priority-plus10': () => import('./_contents/ee-priority-plus10'),
 };
 
 /** Slugs des outils portés (routeur + `generateStaticParams`). */
