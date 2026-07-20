@@ -4,6 +4,29 @@
 > ne garde que le « à faire »). Un item traité migre ici avec sa date ; le
 > détail vit dans git. Ne pas confondre avec le `CHANGELOG.md` racine (public).
 
+## 2026-07-21
+
+- **Outil `/progress-tracker` porté** (+ hook `useStoredState` posé la veille,
+  a06cdfe). Logique V2 réécrite en fonctions PURES
+  (`_contents/progress-tracker/tracker.ts`, 28 tests) : `count` = seule source
+  de vérité (« complété » = count ≥ max TOUJOURS dérivé des réglages — la V2
+  stockait `completed`/`maxCount` en doublon et son `toggleTask` était du code
+  mort), resets UTC (quotidien/lundi/1er) via arithmétique epoch, couloir
+  infini (3 j après complétion), VHT (phases 1/8/15/22), fabrication précise
+  (30 j glissants), singularité mer→sam, packs (Terminus/Veronica/licence).
+  Persistance via les DEUX specs actés : `outerpedia:progress-tracker`
+  (legacy `outerplane:progress`) et `…:settings` (legacy
+  `outerplane:settings`), `coerceProgress` absorbe le schéma V2 (y compris le
+  vieux « coché sans count »), clés V2 laissées en place. Le client ne lit
+  JAMAIS le stocké tel quel : vue `reconcileProgress` à chaque rendu (tick
+  60 s), mutations depuis la vue → resets persistés au premier geste, zéro
+  effet de synchro. Définitions verbatim (`tasks.ts`, labelKey dérivé),
+  wrapper serveur (libellés + 27 items du catalogue résolus par nom EN +
+  sprites monnaies), UI V2 refaite sur tokens V3 (cartes-onglets / page
+  unique, hiérarchie boutique, modales réglages 5 onglets + export/import —
+  l'import accepte aussi un export V2 brut). 4 icônes nav + monnaie de guilde
+  ancrées au manifeste (déjà sur R2 via le re-push du 20/07).
+
 ## 2026-07-20
 
 - **Outil `/pull-simulator` porté.** Moteur pur dans `src/lib/gacha.ts`

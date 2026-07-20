@@ -687,6 +687,27 @@ export function buildAssetManifest(): AssetRequest[] {
     candidates: ['CM_Goods_Gold'],
     domain: 'ui',
   });
+  // Progress tracker : boutons d'action (réglages / export / reset / atelier)…
+  for (const name of [
+    'CM_Agit_Facility',
+    'CM_Agit_Retention',
+    'CM_Guild_Management',
+    'CM_Agit_Crafting',
+  ])
+    push({
+      kind: 'image',
+      key: `images/ui/nav/${name}.webp`,
+      candidates: [name],
+      domain: 'ui',
+    });
+  // … + la monnaie de guilde (en-têtes de la hiérarchie boutique de l'outil ;
+  // les autres monnaies sont déjà là via le catalogue d'items).
+  push({
+    kind: 'image',
+    key: 'images/items/CM_Goods_Guild_Coin.webp',
+    candidates: ['CM_Goods_Guild_Coin'],
+    domain: 'ui',
+  });
   // Catalogue d'items UNIFIÉ : TOUTES les icônes déclarées (items + monnaies +
   // costumes + overrides/créations curés) sous le namespace `images/items/`. Un
   // item est référençable partout (fiches perso, cadeaux, rewards de promo-codes,

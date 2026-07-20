@@ -26,10 +26,10 @@
 > ASSUMÉES le temps du portage. Chaque page arrive avec ses clés de locale
 > DÉJÀ pré-seedées ×5 (cf. item « pré-seed » de la section Docs).
 
-- [ ] **`/tools` — RESTENT 5 sous-outils** (`/<slug>`, 404 tant que non portés) :
-      damage-calculator, progress-tracker,
+- [ ] **`/tools` — RESTENT 4 sous-outils** (`/<slug>`, 404 tant que non portés) :
+      damage-calculator,
       team-planner, tier-list-maker, event — namespaces
-      `tools.*`/`progress.*`.
+      `tools.*`.
       (Historique des portés : 19-20/07, cf. DONE — socle `TierListTool`,
       routeur à plat, coupon-codes = renvoi `/coupons`,
       gear-usage-statistics & gear-usage-finder = agrégation gear-reco à la
