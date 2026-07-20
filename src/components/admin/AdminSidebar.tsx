@@ -112,8 +112,9 @@ export function AdminSidebar({ sections }: { sections: NavSection[] }) {
 
       <nav className="min-h-0 flex-1 overflow-y-auto py-2">
         {sections.map((section) => (
-          <div key={section.title} className="mb-3">
-            <p className="text-content-subtle px-4 pb-1 text-[10px] font-semibold tracking-wider uppercase">
+          <div key={section.title} className="mt-4 mb-1 first:mt-1">
+            {/* En-tête de SECTION : filet + fond léger → nettement distinct d'un item cliquable. */}
+            <p className="text-content-subtle bg-surface-overlay/40 border-line-subtle mb-1 border-y px-4 py-1 text-[10px] font-bold tracking-widest uppercase">
               {section.title}
             </p>
             <ul>
@@ -124,9 +125,9 @@ export function AdminSidebar({ sections }: { sections: NavSection[] }) {
                     <Link
                       href={item.href as Route}
                       aria-current={active ? 'page' : undefined}
-                      className={`flex items-center gap-2 border-l-2 px-4 py-1.5 text-sm ${
+                      className={`flex items-center gap-2 border-l-2 py-1.5 pr-3 pl-6 text-sm ${
                         active
-                          ? 'border-accent bg-surface-overlay text-content-strong'
+                          ? 'border-accent bg-surface-overlay text-content-strong font-medium'
                           : 'text-content-muted hover:text-content-strong hover:bg-surface-overlay/50 border-transparent'
                       } ${item.soon ? 'opacity-40' : ''}`}
                     >
