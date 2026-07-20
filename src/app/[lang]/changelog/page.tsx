@@ -48,7 +48,7 @@ export default async function ChangelogPage({ params }: Props) {
       <JsonLd data={jsonLd} id="ld-changelog" />
 
       <header className="mb-8 text-center">
-        <h1 className="text-content-strong text-3xl font-bold">{t('changelog.title')}</h1>
+        <h1 className="text-content-strong mx-auto text-3xl font-bold">{t('changelog.title')}</h1>
         <p className="text-content-muted mx-auto mt-2 max-w-xl text-sm">
           {t('changelog.description')}
         </p>

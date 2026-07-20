@@ -6,6 +6,30 @@
 
 ## 2026-07-20
 
+- **Homonymes site/admin désambiguïsés (dernier item Duplication).**
+  `rankOptionLabels` (admin/monster-store) → `rankOptionAdminLabels` : PAS le
+  même contrat que celui du site (EN seul + repli en cascade vs localisé +
+  option inconnue omise) — doc croisée des deux côtés. `BOSS_TYPES` ×2 →
+  `FORMATION_BOSS_TYPES` (data/towers : mène une formation) et
+  `BOSS_BADGE_TYPES` (admin/monster-icon : porte le badge, `season_boss` en
+  plus) — sets volontairement distincts, commentaires « ne pas fusionner ».
+  Vérifié : tsc, towers.test 19/19, eslint.
+- **Dette code datagen : le gros item duplications ×N soldé.** ① Traversée
+  « monstres spawnés d'un donjon » ×3 → `dungeonSpawnedMonsters` (encounters,
+  à côté de `spawnGroupIds`/`spawnUnits`) ; singularity/content-schedule en
+  wrappers d'une ligne, sources garde son filtre boss dessus. ② Expansion
+  BuffGroup Child1..10 ×3 → `loadBuffGroups` (lib/buff) devient l'index UNIQUE,
+  stampé mtime ; equipment perd `groupKids` ET sa lecture brute (resolveBuffEffects
+  itère `grp.kids`). ③ `span()` ×2 → `idSpan` (lib/tables) ; les résolutions
+  RewardTemplet restent volontairement SÉPARÉES (contrats `RewardTable` vs
+  `MonadReward` différents — mutualiser changerait un JSON committé ; documenté
+  dans monad.ts). ④ Walk récursif ×4 → `walkFiles` (lib/fs, nouveau) avec
+  option `sorted` (source.ts seul : « premier trié gagne » ; les autres gardent
+  l'ordre FS — trier changerait quel doublon gagne). ⑤ `sc()` ×2 →
+  `effectIconCandidates` (lib/effects, partagé avec le manifest). Sous-items
+  ÉTEINTS constatés : `nameKey`/`isPresent`/regex VA/`norm()` import-* n'existent
+  plus. Vérifié : tsc datagen, eslint, 461/461, regen à blanc byte-identique,
+  assets:collect à blanc = 0 re-staging.
 - **Outil `/most-used-units` porté — agrégation à la LECTURE, plus d'artefact.**
   La V2 générait `most-used-units.json` par un step de pipeline avec 4
   extracteurs par famille ; en V3 l'usage se calcule au rendu (ISR 24 h) depuis

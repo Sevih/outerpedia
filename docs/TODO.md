@@ -93,16 +93,14 @@
 
 ### Duplication (les 2 gros d'abord)
 
-- [ ] `rankOptionLabels` homonymes divergents (data/monsters.ts:97 vs
-      admin/monster-store.ts:154) ; `BOSS_TYPES` homonymes DIVERGENTS
-      (monster-icon.ts:32 vs towers.ts:92 — sets volontairement différents :
-      renommer plutôt que mutualiser). [ces deux-là touchent l'admin → worker]
-      (`resolveEffectKey` index mutualisé + `GRADE_RANK`/`PIECE_ORDER` centralisés + `gearById`→`gearFamilyById` faits le 18/07 → DONE.)
-- [ ] Datagen : helper « monstres spawnés d'un donjon » ×3 (singularity,
-      content-schedule, sources), expansion BuffGroup Child1..10 ×3 (dont 2 dans
-      equipment.ts vs lib/buff), résolution RewardTemplet ×2 (encounters vs
-      monad, `span()` copié-collé), walk récursif ×4, `nameKey`/`isPresent`/
-      `sc`/regex VA dupliqués, `norm()` divergents des deux import-*.
+- _(homonymes traités le 20/07 → DONE : `rankOptionAdminLabels` renommé,
+  `FORMATION_BOSS_TYPES`/`BOSS_BADGE_TYPES` renommés + commentaires croisés
+  « ne pas fusionner ». `resolveEffectKey`/`GRADE_RANK`/`PIECE_ORDER`/
+  `gearFamilyById` faits le 18/07 → DONE.)_
+- _(le gros item datagen ×N traité le 20/07 → DONE : spawn ×3, BuffGroup ×3,
+  `span()` ×2, walk ×4, `sc` ×2 mutualisés ; résolutions RewardTemplet
+  volontairement séparées — contrats de sortie différents, documenté ;
+  `nameKey`/`isPresent`/regex VA/`norm()` import-\* : déjà disparus du code.)_
 
 ### Chantiers actés (16/07, inchangés)
 
