@@ -48,7 +48,10 @@
       `tools.*`/`progress.*`.
 - [ ] **`/characters/[slug]` — RELIQUAT** : la fiche détail est portée, il ne
       MANQUE que les **Discord reviews** (section review communautaire de la V2).
-      Le reste (skills/burst/chain/gear/stats/transcend…) est là.
+      Le reste (skills/burst/chain/gear/stats/transcend…) est là. **Bloqué sur la
+      migration du bot Discord → VPS** : entrée dédiée dans ⚙️ Config / infra
+      (« Reviews Discord »), car ce n'est PAS de la donnée du repo mais un `fetch`
+      runtime vers un service externe.
 - [ ] **`/changelog`** — clés `changelog.*` ; lié au resync CHANGELOG.md
       (item 📚). Débloque aussi la section **Recent Updates** de la Home (différée :
       elle lit `getChangelog`/`@/lib/changelog`, non porté — à rebrancher quand le
@@ -149,6 +152,27 @@
       non-noncé attendu), (d) **PASSE 3** : basculer la politique réelle de
       `next.config.ts` sur le nonce et retirer `'unsafe-inline'` des scripts.
       (`style-src` garde `'unsafe-inline'` : styles inline React, non prioritaire.)
+- [ ] **Reviews Discord (`/characters/[slug]`) — CHANTIER BOT + CODE** (acté
+      Sevih 20/07). La section « Reviews » de la V2 n'est PAS de la donnée du
+      repo : c'est un `fetch` runtime `GET ${BOT_API_URL}/reviews/${slug}` vers un
+      **bot Discord externe** qui agrège les avis du Discord EvaMains (V2 :
+      `src/lib/data/reviews.ts`, `revalidate` 60 s ; renvoie `[]` si l'URL n'est
+      pas jointe → dégradation propre). `.env.example` réserve déjà `BOT_API_URL`
+      (« runtime, optionnel »).
+      **① INFRA (bloqueur) — le bot migre lui aussi sur le VPS** : le déployer/
+      rendre joignable depuis le réseau Docker interne (comme le cron de purge),
+      poser `BOT_API_URL` en secret runtime. Tant que ce n'est pas fait, la
+      section reste vide en prod.
+      **② CSP** : `img-src` doit autoriser `cdn.discordapp.com` (avatars +
+      emojis custom) — à intégrer à la passe CSP ci-dessus.
+      **③ CODE V3 (mon ressort, dégradable proprement sans le bot)** : porter
+      `lib/data/reviews.ts` (+ type `Review`) ; réécrire `ReviewsSection` sur les
+      primitives V3 (V2 en `zinc/indigo/emerald`, `useI18n`, `.card`,
+      `elementAccent` → tokens sémantiques, labels résolus serveur→props, hex
+      élément via `detail/theme`, `<img>` + eslint-disable ; agrégats moyenne/
+      distribution/pagination conservés) ; clés i18n `page.character.reviews.*`
+      (cta, no_reviews, count, load_more, via_discord) ×4 langues ; câbler la
+      section dans la slug page + entrée QuickToc.
 - [ ] Datagen, hygiène CLI : garde `isMain` manquante sur extract.ts,
       templates/convert.ts, coherence.ts, extractor/run.ts, import-gear-reco ;
       `main()` sans `.catch` dans assets/collect.ts ; parsing des flags
