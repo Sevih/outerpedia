@@ -6,6 +6,22 @@
 
 ## 2026-07-20
 
+- **`/characters` (liste) — PHASE 1 : coquille + layout + filtres data-dispo.**
+  Refonte du browser minimal (3 selects mono) en **recherche à facettes** parité
+  V2, réécrite sur primitives/tokens V3 (zéro import V2). `components/character/
+filters/` : `FilterAtoms` (pills élément/classe/étoile sur sprites `img.*`,
+  chips ×, toggle AND/OR), `FilterPill`, `CharactersFiltersBar` (toolbar desktop +
+  rangées mobiles), `AdvancedFiltersPanel` (onglets), `CharactersFiltersSidebar`
+  (xl persistante), `CharactersFiltersDrawer` (bottom-sheet mobile, TOUJOURS monté
+  - CSS pour éviter le setState-in-effect banni), `ActiveFiltersStrip` (chips +
+    reset + copier le lien). `CharactersBrowser` réécrit : multi-sélection
+    élément/classe/rareté/**chaîne**/**gift**/role/**tags** (logique ET/OU),
+    recherche **multi-langues**, **URL partageable** (params simples lisibles, pas
+    de LZString), hydratation depuis l'URL. `gift` exposé dans
+    `getCharacterListItems`. i18n déjà pré-seedée (rien ajouté). tsc + eslint verts.
+    RESTE Phase 2 (bloquée data worker, spec transmise) : onglets **Effects**
+    (buffs/debuffs+source+unique) et **Bonus** (team bonus) — rendus conditionnés à
+    la data, donc pas d'onglet vide en prod.
 - **Retours Shiraen/Jaego sur les outils publics** (déployés sur le VPS) — 3 fixes.
   • **Synergies** : sélectionner un héros dans la liste l'ajoute DIRECTEMENT au
   groupe (avant : il fallait Entrée après avoir choisi dans le datalist). Entrée

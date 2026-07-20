@@ -46,17 +46,15 @@
       damage-calculator, pull-simulator, progress-tracker, team-planner,
       tier-list-maker, patch-history, coupon-codes, event — namespaces
       `tools.*`/`progress.*`.
-- [ ] **`/characters` (liste) — CHANTIER** : le browser V3 actuel est minimal
-      (recherche + 3 selects mono + étoiles). Objectif = **parité V2** (décision
-      Sevih : tous les filtres + layout fidèle desktop/mobile). Layout V2 : barre
-      (search + pills élément/classe/rareté) + **sidebar persistante xl** / **drawer
-      bottom-sheet mobile** portant un panneau avancé à 4 onglets (Combat
-      chaîne/role/gift · Effects buffs/debuffs+source+unique+logique · Bonus team
-      bonus · Tags), **bandeau de chips actifs** removables, **URL partageable**
-      (état bitfield LZString `?z=`). Faisable now (data V3) : élément/classe/
-      rareté/role/chaîne/gift/tags/recherche multi-langues + toute la coquille.
-      BLOQUÉ sur data worker (cf. spec transmise) : buffs/debuffs par perso +
-      effectsBySource, teamBonuses, `category`/`group` sur effets, métadonnée tags.
+- [ ] **`/characters` (liste) — PHASE 2** (Phase 1 livrée le 20/07, cf. DONE :
+      coquille + layout desktop/mobile + filtres élément/classe/rareté/chaîne/gift/
+      role/tags + recherche multi-langues + URL partageable). RESTE, **bloqué sur
+      data worker** (spec transmise) : onglets **Effects** (buffs/debuffs par perso + `effectsBySource` pour le filtre source + `category`/`group` sur effets +
+      toggle unique + logique ET/OU) et **Bonus** (`teamBonuses` par perso +
+      `STAT_ICON`). L'`AdvancedFiltersPanel` est prêt à recevoir ces 2 onglets
+      (rendu conditionné à la présence de data → pas d'onglet vide). Métadonnée
+      tags (`tags.json` : label/desc/type/image) affinera l'onglet Tags (libellés
+      humanisés en attendant).
 - [ ] **`/characters/[slug]` — RELIQUAT** : la fiche détail est portée, il ne
       MANQUE que les **Discord reviews** (section review communautaire de la V2).
       Le reste (skills/burst/chain/gear/stats/transcend…) est là.

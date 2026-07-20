@@ -55,6 +55,8 @@ export interface CharacterListItem {
   class: string;
   subClass?: string;
   chainType?: string;
+  /** Type de cadeau préféré (present_0X — cf. glossaries.gifts). */
+  gift?: string;
   rarity: number;
   icon: string;
   /** Id de la base d'origine — présent = entité core-fusion (préfixe le nom). */
@@ -149,6 +151,7 @@ export function getCharacterListItems(): CharacterListItem[] {
       class: c.class,
       subClass: c.subClass,
       chainType: c.chainType,
+      gift: c.gift,
       rarity: c.rarity,
       icon: c.icon,
       originalCharacter: c.originalCharacter,

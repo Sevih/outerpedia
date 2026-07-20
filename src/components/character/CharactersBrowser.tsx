@@ -1,54 +1,70 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { ResponsiveCharacterCard } from './ResponsiveCharacterCard';
+import { CharactersFiltersBar, type FiltersBarLabels } from './filters/CharactersFiltersBar';
+import { CharactersFiltersSidebar } from './filters/CharactersFiltersSidebar';
+import { CharactersFiltersDrawer, type DrawerLabels } from './filters/CharactersFiltersDrawer';
+import {
+  ActiveFiltersStrip,
+  type ActiveChipItem,
+  type StripLabels,
+} from './filters/ActiveFiltersStrip';
+import type { AdvancedPanelLabels, FilterOption } from './filters/AdvancedFiltersPanel';
+import { ELEMENT_HEX, ROLE_HEX, RARITY_HEX, TONE } from './filters/FilterAtoms';
 
-/** Ligne allégée pour l'affichage en carte/liste. */
+/** Ligne allégée pour l'affichage + le filtrage. */
 export interface CharacterRow {
   id: string;
   slug: string;
-  /** Nom complet localisé (préfixe Core Fusion / surnom inclus). */
+  /** Nom complet localisé (affiché sur la carte). */
   name: string;
-  /** Préfixe de titre (affiché au-dessus du nom sur la carte). */
   prefix?: string | null;
+  /** Noms recherchables (toutes langues + id + slug), déjà normalisés. */
+  searchNames: string[];
   element: string;
   class: string;
   rarity: number;
-  isFusion: boolean;
-  /** Tags éditoriaux (premium/limited/…) + `core-fusion` (icône de carte). */
-  tags: string[];
-  rank?: string;
+  chainType?: string;
+  gift?: string;
   role?: string;
+  isFusion: boolean;
+  tags: string[];
 }
 
-/**
- * Libellés pré-traduits (la page serveur passe le dictionnaire — même pattern
- * que EquipmentBrowser : le composant client ne connaît pas t()).
- */
 export interface CharactersBrowserLabels {
-  search: string;
-  element: string;
-  class: string;
-  role: string;
-  /** Gabarit `{count} …` — substitué côté client (le compte est dynamique). */
-  count: string;
-  /** Gabarit a11y des étoiles (`{rarity}`). */
-  starAria: string;
-  /** Libellés localisés des valeurs d'options (slug → libellé). */
+  bar: FiltersBarLabels;
+  panel: AdvancedPanelLabels;
+  strip: StripLabels;
+  drawer: DrawerLabels;
+  sidebar: { advanced: string; reset: string };
+  noMatch: string;
+  reset: string;
+  /** Maps valeur → libellé localisé (options des filtres). */
   options: {
     element: Record<string, string>;
     class: Record<string, string>;
     role: Record<string, string>;
+    chain: Record<string, string>;
+    gift: Record<string, string>;
+    tag: Record<string, string>;
   };
+  /** Icônes des tags (slug → URL). */
+  tagIcons: Record<string, string>;
 }
 
-const field =
-  'rounded-md border border-line bg-surface-base px-2 py-1.5 text-sm text-content focus:border-accent focus:outline-none';
-
-/** Valeurs distinctes triées d'un champ. */
-function distinct(rows: CharacterRow[], key: keyof CharacterRow): string[] {
-  return [...new Set(rows.map((r) => r[key]).filter(Boolean) as string[])].sort();
+/** Options triées d'un champ, projetées en {value,label(,icon)}. */
+function toOptions(
+  values: string[],
+  labelMap: Record<string, string>,
+  icons?: Record<string, string>,
+): FilterOption[] {
+  return values.map((v) => ({ value: v, label: labelMap[v] ?? v, icon: icons?.[v] }));
 }
+
+/** Sérialise une liste en paramètre d'URL (vide → absent). */
+const enc = (arr: (string | number)[]) => (arr.length ? arr.join(',') : undefined);
 
 export function CharactersBrowser({
   rows,
@@ -57,103 +73,298 @@ export function CharactersBrowser({
   rows: CharacterRow[];
   labels: CharactersBrowserLabels;
 }) {
-  const [element, setElement] = useState('');
-  const [klass, setKlass] = useState('');
-  const [role, setRole] = useState('');
-  const [rarity, setRarity] = useState(0);
-  const [q, setQ] = useState('');
+  const router = useRouter();
+  const pathname = usePathname();
 
-  const elements = useMemo(() => distinct(rows, 'element'), [rows]);
-  const classes = useMemo(() => distinct(rows, 'class'), [rows]);
-  const roles = useMemo(() => distinct(rows, 'role'), [rows]);
+  const [q, setQ] = useState('');
+  const [element, setElement] = useState<string[]>([]);
+  const [klass, setKlass] = useState<string[]>([]);
+  const [rarity, setRarity] = useState<number[]>([]);
+  const [chain, setChain] = useState<string[]>([]);
+  const [gift, setGift] = useState<string[]>([]);
+  const [role, setRole] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>([]);
+  const [tagLogic, setTagLogic] = useState<'AND' | 'OR'>('OR');
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const hydrated = useRef(false);
+  const lastUrl = useRef('');
+
+  // ── Options distinctes (dérivées des lignes) ──
+  const distinct = useCallback(
+    (key: keyof CharacterRow) =>
+      [...new Set(rows.map((r) => r[key]).filter(Boolean) as string[])].sort(),
+    [rows],
+  );
+  const elements = useMemo(() => distinct('element'), [distinct]);
+  const classes = useMemo(() => distinct('class'), [distinct]);
+  const chains = useMemo(() => distinct('chainType'), [distinct]);
+  const gifts = useMemo(() => distinct('gift'), [distinct]);
+  const roles = useMemo(() => distinct('role'), [distinct]);
   const rarities = useMemo(
     () => [...new Set(rows.map((r) => r.rarity))].sort((a, b) => b - a),
     [rows],
   );
+  const allTags = useMemo(() => [...new Set(rows.flatMap((r) => r.tags))].sort(), [rows]);
 
+  // ── Bascule multi-sélection générique ──
+  const toggle =
+    <T,>(setter: React.Dispatch<React.SetStateAction<T[]>>) =>
+    (value: T) =>
+      setter((prev) => (prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]));
+
+  // ── Hydratation depuis l'URL (au montage) ──
+  useEffect(() => {
+    if (hydrated.current) return;
+    hydrated.current = true;
+    const p = new URLSearchParams(window.location.search);
+    const list = (k: string) => (p.get(k) ? p.get(k)!.split(',').filter(Boolean) : []);
+    setQ(p.get('q') ?? '');
+    setElement(list('el'));
+    setKlass(list('cl'));
+    setRarity(
+      list('r')
+        .map(Number)
+        .filter((n) => !Number.isNaN(n)),
+    );
+    setChain(list('chain'));
+    setGift(list('gift'));
+    setRole(list('role'));
+    setTags(list('tags'));
+    setTagLogic(p.get('tl') === 'AND' ? 'AND' : 'OR');
+  }, []);
+
+  // ── Sync filtres → URL (débattu) ──
+  useEffect(() => {
+    if (!hydrated.current) return;
+    const params = new URLSearchParams();
+    const set = (k: string, v?: string) => v && params.set(k, v);
+    set('q', q.trim() || undefined);
+    set('el', enc(element));
+    set('cl', enc(klass));
+    set('r', enc(rarity));
+    set('chain', enc(chain));
+    set('gift', enc(gift));
+    set('role', enc(role));
+    set('tags', enc(tags));
+    if (tags.length && tagLogic === 'AND') set('tl', 'AND');
+    const query = params.toString();
+    const url = query ? `${pathname}?${query}` : pathname;
+    const handle = setTimeout(() => {
+      if (lastUrl.current === url) return;
+      lastUrl.current = url;
+      // URL dynamique (filtres) → hors du typage des routes statiques de Next.
+      router.replace(url as Parameters<typeof router.replace>[0], { scroll: false });
+    }, 150);
+    return () => clearTimeout(handle);
+  }, [q, element, klass, rarity, chain, gift, role, tags, tagLogic, pathname, router]);
+
+  // ── Filtrage ──
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
-    return rows.filter(
-      (r) =>
-        (!element || r.element === element) &&
-        (!klass || r.class === klass) &&
-        (!role || r.role === role) &&
-        (!rarity || r.rarity === rarity) &&
-        (!needle || r.name.toLowerCase().includes(needle)),
-    );
-  }, [rows, element, klass, role, rarity, q]);
+    const elS = new Set(element);
+    const clS = new Set(klass);
+    const rS = new Set(rarity);
+    const chS = new Set(chain);
+    const gS = new Set(gift);
+    const roS = new Set(role);
+    return rows.filter((row) => {
+      if (needle && !row.searchNames.some((n) => n.includes(needle))) return false;
+      if (elS.size && !elS.has(row.element)) return false;
+      if (clS.size && !clS.has(row.class)) return false;
+      if (rS.size && !rS.has(row.rarity)) return false;
+      if (chS.size && (!row.chainType || !chS.has(row.chainType))) return false;
+      if (gS.size && (!row.gift || !gS.has(row.gift))) return false;
+      if (roS.size && (!row.role || !roS.has(row.role))) return false;
+      if (tags.length) {
+        const ok =
+          tagLogic === 'AND'
+            ? tags.every((t) => row.tags.includes(t))
+            : tags.some((t) => row.tags.includes(t));
+        if (!ok) return false;
+      }
+      return true;
+    });
+  }, [rows, q, element, klass, rarity, chain, gift, role, tags, tagLogic]);
+
+  // ── Reset / partage ──
+  const resetAll = () => {
+    setQ('');
+    setElement([]);
+    setKlass([]);
+    setRarity([]);
+    setChain([]);
+    setGift([]);
+    setRole([]);
+    setTags([]);
+    setTagLogic('OR');
+  };
+  const copyShareUrl = () => {
+    if (typeof window === 'undefined') return;
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1200);
+    });
+  };
+
+  // ── Chips actifs ──
+  const chips: ActiveChipItem[] = useMemo(() => {
+    const out: ActiveChipItem[] = [];
+    if (q.trim())
+      out.push({ key: 'q', label: `"${q.trim()}"`, color: TONE.cyan, onRemove: () => setQ('') });
+    for (const el of element)
+      out.push({
+        key: `el-${el}`,
+        label: labels.options.element[el] ?? el,
+        color: ELEMENT_HEX[el] ?? TONE.cyan,
+        onRemove: () => setElement((p) => p.filter((v) => v !== el)),
+      });
+    for (const cl of klass)
+      out.push({
+        key: `cl-${cl}`,
+        label: labels.options.class[cl] ?? cl,
+        color: TONE.cyan,
+        onRemove: () => setKlass((p) => p.filter((v) => v !== cl)),
+      });
+    for (const r of rarity)
+      out.push({
+        key: `r-${r}`,
+        label: `${r}★`,
+        color: RARITY_HEX[r] ?? TONE.cyan,
+        onRemove: () => setRarity((p) => p.filter((v) => v !== r)),
+      });
+    for (const c of chain)
+      out.push({
+        key: `ch-${c}`,
+        label: labels.options.chain[c] ?? c,
+        color: TONE.cyan,
+        onRemove: () => setChain((p) => p.filter((v) => v !== c)),
+      });
+    for (const ro of role)
+      out.push({
+        key: `ro-${ro}`,
+        label: labels.options.role[ro] ?? ro,
+        color: ROLE_HEX[ro] ?? TONE.cyan,
+        onRemove: () => setRole((p) => p.filter((v) => v !== ro)),
+      });
+    for (const g of gift)
+      out.push({
+        key: `g-${g}`,
+        label: labels.options.gift[g] ?? g,
+        color: TONE.amber,
+        onRemove: () => setGift((p) => p.filter((v) => v !== g)),
+      });
+    for (const tk of tags)
+      out.push({
+        key: `t-${tk}`,
+        label: labels.options.tag[tk] ?? tk,
+        color: TONE.indigo,
+        onRemove: () => setTags((p) => p.filter((v) => v !== tk)),
+      });
+    return out;
+  }, [q, element, klass, rarity, chain, role, gift, tags, labels]);
+
+  const advancedCount = chain.length + role.length + gift.length + tags.length;
+
+  const panelProps = {
+    labels: labels.panel,
+    chains: toOptions(chains, labels.options.chain),
+    chainFilter: chain,
+    onToggleChain: toggle(setChain),
+    roles: toOptions(roles, labels.options.role),
+    roleFilter: role,
+    onToggleRole: toggle(setRole),
+    gifts: toOptions(gifts, labels.options.gift),
+    giftFilter: gift,
+    onToggleGift: toggle(setGift),
+    tags: toOptions(allTags, labels.options.tag, labels.tagIcons),
+    tagFilter: tags,
+    onToggleTag: toggle(setTags),
+    tagLogic,
+    onTagLogicChange: setTagLogic,
+  };
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-2">
-        <input
-          className={`${field} w-44`}
-          placeholder={labels.search}
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
+    <div className="space-y-3">
+      <CharactersFiltersBar
+        query={q}
+        onQueryChange={setQ}
+        elements={elements}
+        elementFilter={element}
+        onToggleElement={toggle(setElement)}
+        classes={classes}
+        classFilter={klass}
+        onToggleClass={toggle(setKlass)}
+        rarities={rarities}
+        rarityFilter={rarity}
+        onToggleRarity={toggle(setRarity)}
+        labels={labels.bar}
+        advancedCount={advancedCount}
+        onOpenAdvanced={() => setDrawerOpen(true)}
+        advancedOpen={drawerOpen}
+      />
+
+      <div className="flex gap-4">
+        <CharactersFiltersSidebar
+          advancedLabel={labels.sidebar.advanced}
+          resetLabel={labels.sidebar.reset}
+          onResetAll={resetAll}
+          {...panelProps}
         />
-        <select className={field} value={element} onChange={(e) => setElement(e.target.value)}>
-          <option value="">{labels.element}</option>
-          {elements.map((el) => (
-            <option key={el} value={el}>
-              {labels.options.element[el] ?? el}
-            </option>
-          ))}
-        </select>
-        <select className={field} value={klass} onChange={(e) => setKlass(e.target.value)}>
-          <option value="">{labels.class}</option>
-          {classes.map((cl) => (
-            <option key={cl} value={cl}>
-              {labels.options.class[cl] ?? cl}
-            </option>
-          ))}
-        </select>
-        <select className={field} value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="">{labels.role}</option>
-          {roles.map((ro) => (
-            <option key={ro} value={ro}>
-              {labels.options.role[ro] ?? ro}
-            </option>
-          ))}
-        </select>
-        <div className="flex items-center gap-1">
-          {rarities.map((r) => (
-            <button
-              key={r}
-              type="button"
-              onClick={() => setRarity(rarity === r ? 0 : r)}
-              className={`rounded-md border px-2 py-1 text-xs ${
-                rarity === r
-                  ? 'border-accent text-accent'
-                  : 'border-line text-content-subtle hover:text-content'
-              }`}
-            >
-              {r}★
-            </button>
-          ))}
+
+        <div className="min-w-0 flex-1 space-y-3">
+          <ActiveFiltersStrip
+            items={chips}
+            matchCount={filtered.length}
+            labels={labels.strip}
+            onResetAll={resetAll}
+            onCopyShareUrl={copyShareUrl}
+            copied={copied}
+          />
+
+          {filtered.length === 0 ? (
+            <div className="flex flex-col items-center gap-3 py-12 text-center">
+              <p className="text-content-muted text-sm">{labels.noMatch}</p>
+              <button
+                type="button"
+                onClick={resetAll}
+                className="border-line-subtle bg-surface-raised text-content-muted hover:border-line hover:text-content-strong rounded-md border px-3 py-1.5 text-xs transition"
+              >
+                {labels.reset}
+              </button>
+            </div>
+          ) : (
+            <div className="flex flex-wrap justify-center gap-4 lg:gap-6">
+              {filtered.map((row, i) => (
+                <ResponsiveCharacterCard
+                  key={row.id}
+                  starAriaLabel={labels.bar.starAria}
+                  id={row.id}
+                  name={row.name}
+                  prefix={row.prefix}
+                  element={row.element}
+                  classType={row.class}
+                  rarity={row.rarity}
+                  tags={row.tags}
+                  href={`/characters/${row.slug}`}
+                  priority={i <= 5}
+                />
+              ))}
+            </div>
+          )}
         </div>
-        <span className="text-content-subtle ml-auto text-xs">
-          {labels.count.replace('{count}', String(filtered.length))}
-        </span>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-4 lg:gap-6">
-        {filtered.map((row, i) => (
-          <ResponsiveCharacterCard
-            key={row.id}
-            starAriaLabel={labels.starAria}
-            id={row.id}
-            name={row.name}
-            prefix={row.prefix}
-            element={row.element}
-            classType={row.class}
-            rarity={row.rarity}
-            tags={row.tags}
-            href={`/characters/${row.slug}`}
-            priority={i <= 5}
-          />
-        ))}
-      </div>
+      <CharactersFiltersDrawer
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        onResetAll={resetAll}
+        matchCount={filtered.length}
+        totalCount={rows.length}
+        drawerLabels={labels.drawer}
+        {...panelProps}
+      />
     </div>
   );
 }
