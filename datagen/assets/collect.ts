@@ -9,6 +9,7 @@
 import { existsSync, mkdirSync, statSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
+import { isMain } from '../lib/is-main';
 import { buildAssetManifest } from './manifest';
 import { buildImageIndex, GAME_IMAGES_DIR } from './source';
 import { stageAssets, STAGING_DIR } from './stage';
@@ -85,4 +86,11 @@ async function main(): Promise<void> {
   }
 }
 
-main();
+// Exécution directe seulement (`pnpm assets:collect`) — et un échec (sharp,
+// FS…) doit sortir en code 1, pas en unhandledRejection.
+if (isMain(import.meta.url)) {
+  main().catch((e) => {
+    console.error(`\n✗ assets:collect a échoué : ${e instanceof Error ? e.message : e}`);
+    process.exit(1);
+  });
+}

@@ -123,6 +123,19 @@ export async function pull(subdirs: string[] = DEFAULT_SUBDIRS): Promise<PullRes
     const useHash = !CONTENT_ADDRESSED.has(sub);
     const remoteDir = `${REMOTE}/${sub}`;
     const localDir = join(LOCAL, sub);
+    // GARDE-FOU : dossier distant absent → signatures distantes VIDES → la
+    // sync prendrait ça pour « tout a disparu côté jeu » et PURGERAIT le
+    // miroir local entier. On refuse explicitement à la place.
+    // (`; true` : sans lui, un test négatif ferait sortir adb en code ≠ 0 et
+    // execFileSync jetterait AVANT notre message — même piège que dump.ts.)
+    if (
+      !capture(['-s', serial, 'shell', `[ -d '${remoteDir}' ] && echo OK; true`]).includes('OK')
+    ) {
+      throw new Error(
+        `dossier distant absent : ${remoteDir} — le jeu est-il installé (et lancé au moins ` +
+          `une fois pour télécharger ses données) ?`,
+      );
+    }
     mkdirSync(localDir, { recursive: true });
 
     const remote = remoteSignatures(serial, remoteDir, useHash);

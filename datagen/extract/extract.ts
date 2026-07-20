@@ -23,6 +23,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdirSync } from 'node:fs';
 import { cpus } from 'node:os';
 import { resolve } from 'node:path';
+import { isMain } from '../lib/is-main';
 import { ASSETSTUDIO, ensureTool } from './tools';
 import { runAudio } from './extract-audio';
 import { runWallpapers } from './extract-wallpapers';
@@ -103,7 +104,11 @@ async function main(): Promise<void> {
   console.log('✅ Extraction terminée.');
 }
 
-main().catch((e) => {
-  console.error(`\n\x1b[31mErreur : ${e?.message ?? e}\x1b[0m`);
-  process.exit(1);
-});
+// Exécution directe seulement (`pnpm datagen:extract [cible]`) — un import ne
+// doit pas déclencher une extraction complète.
+if (isMain(import.meta.url)) {
+  main().catch((e) => {
+    console.error(`\n\x1b[31mErreur : ${e?.message ?? e}\x1b[0m`);
+    process.exit(1);
+  });
+}

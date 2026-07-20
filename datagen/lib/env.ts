@@ -21,7 +21,13 @@ export function loadEnvLocal(): Record<string, string> {
   if (existsSync(path)) {
     for (const line of readFileSync(path, 'utf8').split('\n')) {
       const m = line.match(/^([A-Z0-9_]+)=(.*)$/);
-      if (m) out[m[1]] = m[2].trim();
+      if (!m) continue;
+      let v = m[2].trim();
+      // Quotes d'enrobage (convention dotenv) : `KEY="valeur"` doit donner
+      // `valeur` — sinon les guillemets partent dans l'identifiant (R2…).
+      if (v.length >= 2 && ((v[0] === '"' && v.endsWith('"')) || (v[0] === "'" && v.endsWith("'"))))
+        v = v.slice(1, -1);
+      out[m[1]] = v;
     }
   }
   cache = out;

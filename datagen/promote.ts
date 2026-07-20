@@ -200,12 +200,13 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
 
 async function main(): Promise<void> {
   const apply = process.argv.includes('--apply');
-  // `--only a.json b.json` : promotion ciblée (cf. en-tête).
+  // `--only a.json b.json` : promotion ciblée (cf. en-tête). La liste s'arrête
+  // au PROCHAIN flag — avant, `--only a.json --apply b.json` absorbait aussi
+  // `b.json` situé après le flag (filtre au lieu de borne).
   const onlyIdx = process.argv.indexOf('--only');
-  const only =
-    onlyIdx === -1
-      ? null
-      : new Set(process.argv.slice(onlyIdx + 1).filter((a) => !a.startsWith('--')));
+  const rest = onlyIdx === -1 ? [] : process.argv.slice(onlyIdx + 1);
+  const stop = rest.findIndex((a) => a.startsWith('--'));
+  const only = onlyIdx === -1 ? null : new Set(stop === -1 ? rest : rest.slice(0, stop));
   if (only && !only.size) {
     console.error('--only : au moins un fichier attendu (relatif à data/extracted).');
     process.exit(1);
