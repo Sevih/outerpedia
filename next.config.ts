@@ -109,6 +109,17 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Servi par la route metadata (src/app/favicon.ico) en `max-age=0,
+      // must-revalidate` par défaut — re-téléchargé sur chaque page.
+      {
+        source: '/favicon.ico',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=604800, stale-while-revalidate=86400',
+          },
+        ],
+      },
     ];
   },
 
