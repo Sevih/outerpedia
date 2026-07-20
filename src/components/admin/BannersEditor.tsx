@@ -17,10 +17,55 @@ type Row = Keyed<Banner>;
 const byStartDesc = <T extends { start: string }>(l: T[]): T[] =>
   [...l].sort((a, b) => (b.start || '').localeCompare(a.start || ''));
 
+/** Statut d'une fenêtre à aujourd'hui (jours UTC, même règle que la home). */
+type WindowStatus = 'active' | 'upcoming' | 'expired' | 'draft';
+function statusOf(b: Banner, today: string): WindowStatus {
+  if (!b.start || !b.end) return 'draft';
+  if (b.start > today) return 'upcoming';
+  if (b.end < today) return 'expired';
+  return 'active';
+}
+
+/** Jours entiers entre deux dates ISO (b − a). */
+const daysBetween = (a: string, b: string): number =>
+  Math.round((Date.parse(b) - Date.parse(a)) / 86_400_000);
+
+/** Badge de statut : Active (jours restants) / Upcoming (dans N j) / Expired. */
+function StatusBadge({
+  status,
+  banner,
+  today,
+}: {
+  status: WindowStatus;
+  banner: Banner;
+  today: string;
+}) {
+  if (status === 'draft') return null;
+  const cls = {
+    active: 'border-success/40 text-success',
+    upcoming: 'border-accent/40 text-accent',
+    expired: 'border-line text-content-subtle',
+  }[status];
+  const label = {
+    active: `Active · ${daysBetween(today, banner.end)}d left`,
+    upcoming: `Upcoming · in ${daysBetween(today, banner.start)}d`,
+    expired: 'Expired',
+  }[status];
+  return (
+    <span
+      className={`inline-block rounded-full border px-2 py-0.5 text-xs whitespace-nowrap ${cls}`}
+    >
+      {label}
+    </span>
+  );
+}
+
 /** Éditeur des bannières : on choisit le perso par nom (id auto), + période. */
 export function BannersEditor({ initial, chars }: { initial: Banner[]; chars: CharOption[] }) {
   const [rows, setRows] = useState<Row[]>(() => byStartDesc(initial.map(withKey)));
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
+  // Jour UTC figé au premier rendu — même horloge que le filtre actif de la home.
+  const [today] = useState(() => new Date().toISOString().slice(0, 10));
 
   const set = (i: number, patch: Partial<Banner>) =>
     setRows((s) => s.map((r, j) => (j === i ? { ...r, ...patch } : r)));
@@ -71,55 +116,68 @@ export function BannersEditor({ initial, chars }: { initial: Banner[]; chars: Ch
         <span className="text-content-subtle ml-auto text-xs">{rows.length} banner(s)</span>
       </div>
 
-      <div className="overflow-x-auto">
+      {/* max-w : colonnes étroites, une table pleine largeur n'est que du vide.
+          4xl — en 3xl les dates compressent la colonne Status (badge rogné). */}
+      <div className="max-w-4xl overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="text-content-subtle text-left text-xs uppercase">
             <tr className="border-line-subtle border-b">
               <th className="px-2 py-1 font-medium">Character (search by name)</th>
-              <th className="px-2 py-1 font-medium">Start</th>
-              <th className="px-2 py-1 font-medium">End</th>
-              <th className="px-2 py-1" />
+              <th className="w-36 px-2 py-1 font-medium">Start</th>
+              <th className="w-36 px-2 py-1 font-medium">End</th>
+              <th className="w-40 px-2 py-1 font-medium">Status</th>
+              <th className="w-8 px-2 py-1" />
             </tr>
           </thead>
           <tbody>
-            {rows.map((r, i) => (
-              <tr key={r._key} className="border-line-subtle border-t align-top">
-                <td className="px-2 py-1">
-                  <CharacterPicker
-                    options={chars}
-                    id={r.id}
-                    name={r.name}
-                    onSelect={(c) => set(i, { id: c.id, name: c.name })}
-                  />
-                </td>
-                <td className="px-2 py-1">
-                  <input
-                    type="date"
-                    className={input}
-                    value={r.start}
-                    onChange={(e) => set(i, { start: e.target.value })}
-                  />
-                </td>
-                <td className="px-2 py-1">
-                  <input
-                    type="date"
-                    className={input}
-                    value={r.end}
-                    onChange={(e) => set(i, { end: e.target.value })}
-                  />
-                </td>
-                <td className="px-2 py-1 text-right">
-                  <button
-                    type="button"
-                    className="text-danger text-sm"
-                    onClick={() => remove(i)}
-                    aria-label="Delete"
-                  >
-                    ✕
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {rows.map((r, i) => {
+              const st = statusOf(r, today);
+              return (
+                <tr
+                  key={r._key}
+                  className={`border-line-subtle border-t align-middle ${st === 'expired' ? 'opacity-50' : ''}`}
+                >
+                  <td className="px-2 py-1.5">
+                    <CharacterPicker
+                      compact
+                      options={chars}
+                      id={r.id}
+                      name={r.name}
+                      onSelect={(c) => set(i, { id: c.id, name: c.name })}
+                    />
+                  </td>
+                  <td className="px-2 py-1.5">
+                    <input
+                      type="date"
+                      className={input}
+                      value={r.start}
+                      onChange={(e) => set(i, { start: e.target.value })}
+                    />
+                  </td>
+                  <td className="px-2 py-1.5">
+                    <input
+                      type="date"
+                      className={input}
+                      value={r.end}
+                      onChange={(e) => set(i, { end: e.target.value })}
+                    />
+                  </td>
+                  <td className="px-2 py-1.5">
+                    <StatusBadge status={st} banner={r} today={today} />
+                  </td>
+                  <td className="px-2 py-1.5 text-right">
+                    <button
+                      type="button"
+                      className="text-danger text-sm"
+                      onClick={() => remove(i)}
+                      aria-label="Delete"
+                    >
+                      ✕
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

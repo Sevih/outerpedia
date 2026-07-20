@@ -4,8 +4,8 @@ import { getActiveBanners } from '@/lib/home';
 import { BannerCountdown, BannerWrapper } from './BannerCountdown';
 
 /**
- * Bannières de recrutement ACTIVES (recruit.json) — carte perso + compte à
- * rebours. Section masquée s'il n'y en a aucune. Layout unique flex-wrap
+ * Bannières de recrutement ACTIVES (curées via /admin/tools/banners) — carte
+ * perso + compte à rebours. Section masquée s'il n'y en a aucune. Layout unique flex-wrap
  * (desktop et mobile) — pas de carousel dédié, les cartes s'enroulent.
  */
 export function CurrentBanners({

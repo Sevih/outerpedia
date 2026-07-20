@@ -16,17 +16,22 @@ export interface CharOption {
  * Sélecteur de personnage par NOM (l'id est renseigné automatiquement depuis la
  * sélection). Aperçu portrait (`FI_{id}`). Un id legacy hors data V3 reste
  * affiché par sa face + son nom. Adaptateur de `SearchPicker`.
+ *
+ * `compact` : aperçu sur UNE ligne (petite face + nom en clair) — pour les
+ * tables denses (bannières), où le nom sous un portrait de 44px se tronque.
  */
 export function CharacterPicker({
   options,
   id,
   name,
   onSelect,
+  compact = false,
 }: {
   options: CharOption[];
   id: string;
   name: string;
   onSelect: (c: { id: string; name: string }) => void;
+  compact?: boolean;
 }) {
   return (
     <SearchPicker
@@ -42,7 +47,17 @@ export function CharacterPicker({
         <img src={img.face(o.id)} alt="" className="h-6 w-6 shrink-0 rounded object-cover" />
       )}
       renderSelected={(o) =>
-        o ? (
+        compact ? (
+          <span className="flex min-w-0 items-center gap-2">
+            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
+            <img
+              src={img.face(id)}
+              alt=""
+              className="border-line-subtle h-9 w-9 shrink-0 rounded-lg border object-cover"
+            />
+            <span className="text-content min-w-0 truncate text-sm">{o?.name || name || id}</span>
+          </span>
+        ) : o ? (
           <CharacterPortrait
             id={o.id}
             name={o.name}
