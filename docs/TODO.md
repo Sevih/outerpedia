@@ -19,12 +19,6 @@
 - [ ] **Ajouter la bannière Dimensional Supply au guide banner** (banner-mileage) —
       elle donne au max 4 segments jaunes sur un substat (cf. guide gear, onglet
       Bases) ; à documenter côté guide des bannières.
-- [ ] **`src/lib/data/name-aliases` MANQUANT alors qu'il est importé** (constat
-      20/07 après a36c228) : les outils admin Search aliases / Short names sont
-      livrés, mais `characters/page.tsx`, `TierListTool` et `most-used-units`
-      importent `@/lib/data/name-aliases` qui n'existe pas → **tsc casse sur
-      main**. Worker aliases dessus (ne pas doubler) — vérifier que le module
-      atterrit vite.
 
 ## 📄 Pages manquantes (inventaire layout du 2026-07-17)
 
@@ -143,7 +137,7 @@ Règle permanente : chaque `meta.bossId` d'un guide porté doit exister dans
       sur les `src` relatifs stockés (`/images/patch-notes/…webp`).
 - [ ] **Perso `lambda` (2000118) en attente dans l'extraction** (constat 20/07 :
       `datagen:promote` propose `characters.json +1` et `characters-slug-to-id
-    +1`) — promotion = décision de contenu (nouveau perso du jeu ?).
+  +1`) — promotion = décision de contenu (nouveau perso du jeu ?).
 
 ## 🤔 Décisions en attente (Sevih)
 

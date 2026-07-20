@@ -15,9 +15,12 @@
   `/feed/changelog` avec filtre de programmation. Vignette = og:image de la
   cible (garde-fou `og_default`) ; upload abandonné (inutile).
 - **Outils admin Search aliases + Short names livrés (a36c228, worker
-  aliases — entrée reconstituée).** Curés par perso. ATTENTION : le module
-  site `src/lib/data/name-aliases` importé par characters/TierListTool/
-  most-used n'existe pas encore → tsc casse sur main (suivi en PRIO du TODO).
+  aliases — entrée reconstituée).** Curés par perso. Le transitoire
+  `@/lib/data/name-aliases` (importé mais inexistant, tsc cassé sur main
+  quelques heures) a été résolu par SCISSION : `search-aliases.ts` (élargit la
+  recherche) + `short-names.ts` (noms courts d'affichage) — vérifié, tsc
+  propre. Solde aussi l'item « name-aliases.json à porter » de l'ex-section
+  Données V2 (parité V2 atteinte via les deux curés).
 - **H1 réellement centrés sur les pages du site (8588562).** Les headings
   sont en `width: fit-content` (globals.css, trait de titre du jeu) :
   `text-center` seul ne centre RIEN — le centrage passe par `mx-auto` sur le
