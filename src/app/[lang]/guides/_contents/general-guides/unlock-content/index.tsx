@@ -5,7 +5,7 @@
  * viennent de `data/generated/unlock-content.json` et se mettent à jour avec
  * les données du jeu ; seules les descriptions (notes.ts) sont éditoriales.
  */
-import type { LocalizedText, UnlockRequirement } from '@contracts';
+import type { LocalizedText, StoryMode, UnlockRequirement } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
@@ -43,11 +43,21 @@ const LABELS = {
     fr: 'Description',
   },
   orSeparator: { en: 'or', jp: 'または', kr: '또는', zh: '或', fr: 'ou' },
+  // Noms officiels des deux campagnes (patch 21/07), transcrits des chaînes de
+  // quête du jeu (SYS_GUIDE_QUEST_ORIGIN_* : « Clear Origin Story 1-4 »).
+  modeStory: { en: 'Story', jp: 'ストーリー', kr: '스토리', zh: '剧情', fr: 'Story' },
+  modeOrigin: {
+    en: 'Origin Story',
+    jp: 'オリジンストーリー',
+    kr: '오리진 스토리',
+    zh: '起源剧情',
+    fr: 'Origin Story',
+  },
 } satisfies Record<string, LocalizedText>;
 
 // --- résolution données ↔ éditorial -----------------------------------------
 
-type ResolvedReq = { stage: string; dungeonName: LocalizedText };
+type ResolvedReq = { stage: string; dungeonName: LocalizedText; mode?: StoryMode };
 
 function requirementsOf(entry: GuideEntry): ResolvedReq[] {
   if (entry.source === 'manual') {
@@ -66,6 +76,7 @@ function requirementsOf(entry: GuideEntry): ResolvedReq[] {
   return auto.requirements.map((r: UnlockRequirement) => ({
     stage: r.stage ?? '?',
     dungeonName: r.dungeonName ?? { en: '?' },
+    ...(r.mode ? { mode: r.mode } : {}),
   }));
 }
 
@@ -143,6 +154,17 @@ function CategoryTable({
                     {shown.map((r, i) => (
                       <div key={i} className={i > 0 ? 'mt-1' : undefined}>
                         {i > 0 && <span className="text-content-muted mr-1 text-xs">{or}</span>}
+                        {r.mode && (
+                          <span
+                            className={`mr-1.5 rounded border px-1 py-px align-middle text-[10px] ${
+                              r.mode === 'story'
+                                ? 'border-yellow-500/40 bg-yellow-500/10 text-yellow-300'
+                                : 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300'
+                            }`}
+                          >
+                            {lRec(r.mode === 'story' ? LABELS.modeStory : LABELS.modeOrigin, lang)}
+                          </span>
+                        )}
                         <span className="font-mono">{r.stage}</span> : {lRec(r.dungeonName, lang)}
                       </div>
                     ))}

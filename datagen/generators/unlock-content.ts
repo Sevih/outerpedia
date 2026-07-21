@@ -17,11 +17,24 @@
  *
  * ⚠ Les IDs de donjons mentent parfois (réorganisés entre saisons au fil des
  * patchs) : toujours passer par AreaID, jamais parser l'ID.
+ *
+ * ⚠ Depuis le patch 21/07 la campagne est DÉDOUBLÉE (« Story » vs « Origin
+ * Story ») : la plupart des verrous listent un stage de chaque, et les deux
+ * campagnes réutilisent la même numérotation saison/épisode. D'où `mode` sur
+ * chaque prérequis — sinon les deux s'affichent « S1-1-x » sans distinction.
  */
 import type { LangDict } from '../lib/lang';
 import { isMain } from '../lib/is-main';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { indexBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
+
+/**
+ * Mode d'histoire d'un stage requis. Le patch du 21/07 a dédoublé la campagne :
+ * la nouvelle « Story » (areas `AGT_NEW_*`) coexiste avec l'« Origin Story »
+ * (areas `AGT_NORMAL`/`AGT_HARD`). Les deux réutilisent LA MÊME numérotation
+ * saison/épisode — sans ce champ, « S1-1-3 » est ambigu à l'écran.
+ */
+export type StoryMode = 'story' | 'origin';
 
 /** Un stage requis pour débloquer un contenu. */
 export interface UnlockRequirement {
@@ -31,6 +44,8 @@ export interface UnlockRequirement {
   dungeonName?: LangDict;
   /** Région/chapitre (AreaTemplet), si résolue. */
   areaName?: LangDict;
+  /** Campagne d'origine du stage — absent hors story (event, tutoriel). */
+  mode?: StoryMode;
 }
 
 /** Une entrée de ContentLockTemplet, résolue. */
@@ -114,10 +129,18 @@ export function buildUnlockContent(): UnlockContentData {
   const dungeonById = indexBy(loadTable('DungeonTemplet'));
   const areas = loadTable('AreaTemplet');
   const areaById = indexBy(areas);
-  // Les zones Hard portent ShortName `SYS_HARD_AREA*` (Normal : `SYS_AREA*`).
-  const hardAreas = new Set(
-    areas.filter((a) => (a.ShortName ?? '').startsWith('SYS_HARD_AREA')).map((a) => a.ID),
-  );
+  // Difficulté ET campagne se lisent sur `AreaGroupType` (AGT_[NEW_]NORMAL|HARD,
+  // AGT_EVENT_*). L'ancienne heuristique sur ShortName `SYS_HARD_AREA*` ratait
+  // les zones Hard de la nouvelle Story, qui portent `SYS_AREA*` comme le Normal.
+  const groupOf = (areaId: string | undefined): string =>
+    areaById.get(areaId ?? '')?.AreaGroupType ?? '';
+  const isHard = (areaId: string | undefined): boolean => groupOf(areaId).endsWith('_HARD');
+  const storyMode = (areaId: string | undefined): StoryMode | undefined => {
+    const g = groupOf(areaId);
+    if (g.startsWith('AGT_NEW_')) return 'story';
+    if (g === 'AGT_NORMAL' || g === 'AGT_HARD') return 'origin';
+    return undefined; // event / tutoriel : hors campagne
+  };
   const seasonDisplay = buildSeasonDisplayMap(areas);
 
   const stageLabel = (dungeonId: string, dungeon: Row): string | undefined => {
@@ -128,7 +151,7 @@ export function buildUnlockContent(): UnlockContentData {
     const episode = num(area.EpisodeNum);
     if (!season || !episode) return undefined;
     const stage = num(dungeonId.slice(-2));
-    const hard = hardAreas.has(dungeon.AreaID) ? 'H' : '';
+    const hard = isHard(dungeon.AreaID) ? 'H' : '';
     return `S${seasonDisplay.get(season) ?? season}${hard}-${episode}-${stage}`;
   };
 
@@ -143,6 +166,8 @@ export function buildUnlockContent(): UnlockContentData {
     const area = areaById.get(dungeon.AreaID ?? '');
     const areaName = area ? nonEmpty(resolveText(tsys, area.NameID)) : undefined;
     if (areaName) out.areaName = areaName;
+    const mode = storyMode(dungeon.AreaID);
+    if (mode) out.mode = mode;
     return out;
   };
 

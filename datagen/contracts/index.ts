@@ -85,6 +85,7 @@ export type {
 } from '../generators/equipment';
 export type { Boss } from '../generators/bosses';
 export type {
+  StoryMode,
   UnlockContentData,
   UnlockEntry,
   UnlockRequirement,
