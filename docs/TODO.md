@@ -157,11 +157,6 @@ Règle permanente : chaque `meta.bossId` d'un guide porté doit exister dans
 
 ## 🤔 Décisions en attente (Sevih)
 
-- [ ] `CHASE_TITLE_KEY` (sources.ts:37) reste en dur : le résolveur donnerait
-      `SYS_IRR_CHASE_NAME_01` ≠ choix éditorial `SYS_IRREGULAR_EXTERMINATION`
-      → assumer en curation mode-titles, ou garder tel quel.
-- [ ] Convention `_doc` des curés non uniforme (`note` vs `_notes` vs `_doc` vs
-      rien) — vérifier d'abord que chaque lecteur tolère la clé.
 - [ ] `TODO(guides)` de `version-monster.ts:16` : « Versionner » doit
       RÉ-ÉPINGLER les guides `<id>` → `<id>@<n>` — le domaine guides existe,
       c'est actionnable.

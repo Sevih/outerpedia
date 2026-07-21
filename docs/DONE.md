@@ -6,6 +6,20 @@
 
 ## 2026-07-21
 
+- **Deux « décisions en attente » tranchées (Sevih).** ① `CHASE_TITLE_KEY`
+  (sources.ts) : **gardé en dur et ASSUMÉ par un commentaire** — la poursuite
+  est nommée à deux niveaux dans le jeu (le MODE « Pursuit Operation », ce que
+  rendrait `modeTitleKey`, vs le CONTENU « Irregular Extermination Project »,
+  celui qu'on veut sous le portrait du boss) ; le curer dans `mode-titles.json`
+  renommerait AUSSI le mode sur les fiches de monstres, d'où la constante.
+  ② Convention `_doc` des curés **uniformisée et gravée dans CONVENTIONS.md**.
+  L'inventaire des 21 curés a montré DEUX familles que l'item confondait :
+  `_doc`/`_docXxx` à la racine = doc de fichier (7 fichiers, la majorité) ;
+  `note` DANS une entrée = justification de cette entrée (gear-reco ×89 =
+  contenu AFFICHÉ, effects ×18, items) — à NE PAS renommer. Restaient 2 vraies
+  divergences, corrigées : `singularity.note` → `_doc`, `monster-skills._notes`
+  → `_docNotes` (loaders vérifiés tolérants avant renommage : singularity ne
+  lit que `anchor`, le store admin fait du read-merge-write).
 - **Outil `/tier-list-maker` porté + PREMIER code BDD de la V3.** ① Socle :
   `src/lib/db.ts` (mysql2, connexion éphémère par requête, `null` sans env
   `DB_*` → toute fonctionnalité dégrade) + routes `/api/tierlist` (POST

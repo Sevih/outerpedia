@@ -1,7 +1,7 @@
 {
+  "_doc": "Ancre calendaire de la rotation Monad Gate : le groupe 3 a démarré sa fenêtre le mercredi 2026-05-20 (date locale serveur). Constatée EN JEU — non dérivable des tables (SingularityTemplet ne porte que la cadence : mercredi, 4 j de combat + 3 j de récompense). À re-vérifier en jeu si la rotation affichée diverge un jour du calcul.",
   "anchor": {
     "date": "2026-05-20",
     "group": 3
-  },
-  "note": "Ancre calendaire de la rotation Monad Gate : le groupe 3 a démarré sa fenêtre le mercredi 2026-05-20 (date locale serveur). Constatée EN JEU — non dérivable des tables (SingularityTemplet ne porte que la cadence : mercredi, 4 j de combat + 3 j de récompense). À re-vérifier en jeu si la rotation affichée diverge un jour du calcul."
+  }
 }

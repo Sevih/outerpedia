@@ -33,7 +33,19 @@ export interface ItemSourcesResult {
   bossTitleKeys: Map<string, string>;
 }
 
-/** Titre du contenu Irregular Chase (« Irregular Extermination Project »). */
+/**
+ * Titre du contenu Irregular Chase (« Irregular Extermination Project »).
+ *
+ * EN DUR ET ASSUMÉ (décision Sevih 2026-07-21) : contrairement à la passe 1,
+ * qui résout le titre par mode (`modeTitleKey`), la poursuite est nommée à DEUX
+ * niveaux dans le jeu — le MODE s'appelle « Pursuit Operation » (ce que rendrait
+ * le résolveur, cf. `glossaries.modes.irregular_chase`) mais le CONTENU qui
+ * l'englobe, celui qu'on veut sous le portrait du boss sur `/equipment/<slug>`,
+ * s'appelle « Irregular Extermination Project ». Les deux titres sont justes et
+ * doivent RESTER distincts : curer celui-ci dans `mode-titles.json` renommerait
+ * aussi le mode partout ailleurs (fiches de monstres). D'où la constante — pas
+ * un oubli de curation.
+ */
 const CHASE_TITLE_KEY = 'SYS_IRREGULAR_EXTERMINATION';
 
 /** ProductBuyType → slug de boutique (clé i18n `equip.source.<slug>`). */

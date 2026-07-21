@@ -61,3 +61,22 @@ Un commit = un changement cohérent. Les messages alimentent le CHANGELOG.
   Phase 2 (les artefacts générés seront committés pour un build sans python).
 - Passer par la **data access layer** (`src/lib/data/`) — ne jamais importer le
   JSON directement pour les données de jeu.
+
+### Documenter un curé (`data/curated/`)
+
+Un curé porte une décision HUMAINE : il doit dire pourquoi, dans le fichier
+lui-même (le JSON n'accepte pas de commentaire). Deux niveaux, à ne pas
+confondre — convention uniformisée le 2026-07-21 :
+
+- **`_doc` à la racine** = à quoi sert le fichier et la règle de curation. Une
+  section non évidente prend son propre `_docXxx` juste avant elle
+  (`_docDifficulties`, `_docIgnore`, `_docChipAdd`…). Le préfixe `_` signe la
+  MÉTA : les loaders ne lisent que les clés qu'ils connaissent, donc ces clés
+  traversent le pipeline sans effet — vérifier quand même le loader avant d'en
+  ajouter une à un curé validé par schéma.
+- **`note` DANS une entrée** = justification de CETTE entrée (pourquoi cet item
+  est masqué, pourquoi ce pont type→statut). Ex. `effects.json`, `items.json`.
+  À ne pas renommer : c'est de la donnée par entrée, pas de la doc de fichier.
+
+Un curé dont la forme parle d'elle-même (`tags.json`, `characters.json`…) peut
+se passer de `_doc` ; dès qu'une clé encode un arbitrage, elle se documente.

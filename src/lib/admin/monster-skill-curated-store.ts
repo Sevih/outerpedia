@@ -2,7 +2,7 @@
  * Écriture de la curation d'AFFICHAGE des kits monstres
  * (`data/curated/monster-skills.json`) — réservée à l'ADMIN local.
  *
- * Read-merge-write : les clés de doc (`_doc*`, `_notes`) sont préservées, les
+ * Read-merge-write : les clés de doc (`_doc*`) sont préservées, les
  * entrées de chaque section triées pour des diffs git stables. La sémantique
  * des trois gestes est documentée dans le fichier curé lui-même ; ici on ne
  * fait que fusionner un PATCH limité au kit édité :
