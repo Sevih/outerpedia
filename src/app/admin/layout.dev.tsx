@@ -11,12 +11,17 @@ export const dynamic = 'force-dynamic';
  * badge). Robuste : une extraction en échec ne doit PAS faire tomber toute la
  * coquille admin.
  */
-function pendingCounts(): Record<string, number> {
-  const out: Record<string, number> = {};
+function pendingCounts(): Record<string, { count: number; title: string }> {
+  const out: Record<string, { count: number; title: string }> = {};
   try {
     for (const r of reviewAll()) {
       const b = reviewBuckets(r.diff);
-      out[r.id] = b.new + b.diff + b.removed;
+      // Le badge est un TOTAL ; le détail va en infobulle (sinon « 4 » se lit
+      // « 4 diff » alors que la page dit « 2 new + 2 diff »).
+      out[r.id] = {
+        count: b.new + b.diff + b.removed,
+        title: `${b.new} new + ${b.diff} diff + ${b.removed} removed`,
+      };
     }
   } catch {
     /* extraction indisponible */
@@ -27,22 +32,23 @@ function pendingCounts(): Record<string, number> {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   assertDevOnly();
   const n = pendingCounts();
-  const warn = (count: number) => (count > 0 ? { count, tone: 'warn' as const } : null);
+  const warn = (p?: { count: number; title: string }) =>
+    p && p.count > 0 ? { count: p.count, tone: 'warn' as const, title: p.title } : null;
 
   const sections: NavSection[] = [
     {
       title: 'Extractor',
       items: [
-        { label: 'Character', href: '/admin/extractor/characters', badge: warn(n.character ?? 0) },
-        { label: 'Effect', href: '/admin/extractor/effects', badge: warn(n.effect ?? 0) },
-        { label: 'EE', href: '/admin/extractor/ee', badge: warn(n.ee ?? 0) },
-        { label: 'Weapons', href: '/admin/extractor/weapons', badge: warn(n.weapon ?? 0) },
-        { label: 'Amulet', href: '/admin/extractor/amulets', badge: warn(n.amulet ?? 0) },
-        { label: 'Armor', href: '/admin/extractor/armors', badge: warn(n.armor ?? 0) },
-        { label: 'Talisman', href: '/admin/extractor/talismans', badge: warn(n.talisman ?? 0) },
-        { label: 'Sets', href: '/admin/extractor/sets', badge: warn(n.set ?? 0) },
-        { label: 'Monster', href: '/admin/extractor/monsters', badge: warn(n.monster ?? 0) },
-        { label: 'Item', href: '/admin/extractor/items', badge: warn(n.item ?? 0) },
+        { label: 'Character', href: '/admin/extractor/characters', badge: warn(n.character) },
+        { label: 'Effect', href: '/admin/extractor/effects', badge: warn(n.effect) },
+        { label: 'EE', href: '/admin/extractor/ee', badge: warn(n.ee) },
+        { label: 'Weapons', href: '/admin/extractor/weapons', badge: warn(n.weapon) },
+        { label: 'Amulet', href: '/admin/extractor/amulets', badge: warn(n.amulet) },
+        { label: 'Armor', href: '/admin/extractor/armors', badge: warn(n.armor) },
+        { label: 'Talisman', href: '/admin/extractor/talismans', badge: warn(n.talisman) },
+        { label: 'Sets', href: '/admin/extractor/sets', badge: warn(n.set) },
+        { label: 'Monster', href: '/admin/extractor/monsters', badge: warn(n.monster) },
+        { label: 'Item', href: '/admin/extractor/items', badge: warn(n.item) },
       ],
     },
     {

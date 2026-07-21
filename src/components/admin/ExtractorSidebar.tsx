@@ -68,6 +68,7 @@ export function ExtractorSidebar({
   basePath,
   toggles,
   tagFilter,
+  counts,
   iconSize = 32,
 }: {
   rows: ExtractorRow[];
@@ -76,6 +77,13 @@ export function ExtractorSidebar({
   toggles?: ToggleFilter[];
   /** Filtre par étiquette (mode de jeu…). */
   tagFilter?: TagFilter;
+  /**
+   * Compteurs AUTORITAIRES de la revue (par ENTITÉ), affichés tels quels dans
+   * l'en-tête. À fournir quand une ligne ≠ une entité de revue (équipement :
+   * une ligne = une FAMILLE, la revue est par item) — sinon l'en-tête
+   * contredirait la page index. Absent → compteurs dérivés des lignes.
+   */
+  counts?: { new: number; diff: number };
   /** Côté du portrait en px (les overlays élément/classe suivent, le badge
    * BOSS garde sa taille). */
   iconSize?: number;
@@ -94,10 +102,12 @@ export function ExtractorSidebar({
     () => ({
       total: rows.length,
       ok: rows.filter((r) => r.status === 'ok').length,
-      diff: rows.filter((r) => r.status === 'diff').length,
-      new: rows.filter((r) => r.status === 'new').length,
+      // Compteurs de la REVUE quand fournis (l'unité de ligne ≠ l'unité de
+      // revue), sinon dérivés des lignes.
+      diff: counts ? counts.diff : rows.filter((r) => r.status === 'diff').length,
+      new: counts ? counts.new : rows.filter((r) => r.status === 'new').length,
     }),
-    [rows],
+    [rows, counts],
   );
 
   const filtered = useMemo(() => {
@@ -130,8 +140,20 @@ export function ExtractorSidebar({
           {hasStatus && (
             <>
               <span className="text-success">{stats.ok} ok</span>
-              <span className="text-warn">{stats.diff} diff</span>
-              <span className="text-accent">{stats.new} new</span>
+              <span
+                className="text-warn"
+                title={counts ? 'Écarts par item (la liste montre des familles)' : undefined}
+              >
+                {stats.diff} diff
+              </span>
+              <span
+                className="text-accent"
+                title={
+                  counts ? 'Nouveaux items — non navigables ici, voir la page index' : undefined
+                }
+              >
+                {stats.new} new
+              </span>
             </>
           )}
         </div>

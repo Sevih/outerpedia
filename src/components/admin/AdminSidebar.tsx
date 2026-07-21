@@ -10,8 +10,9 @@ export type NavTone = 'warn' | 'danger' | 'accent';
 export interface NavItem {
   label: string;
   href: string;
-  /** Compteur « à traiter » ; masqué si count = 0. */
-  badge?: { count: number; tone: NavTone } | null;
+  /** Compteur « à traiter » ; masqué si count = 0. `title` = détail au survol
+   *  (le badge est un TOTAL : new + diff + removed). */
+  badge?: { count: number; tone: NavTone; title?: string } | null;
   /** Placeholder : lien visible mais grisé. */
   soon?: boolean;
 }
@@ -135,6 +136,7 @@ export function AdminSidebar({ sections }: { sections: NavSection[] }) {
                       {item.soon && <span className="text-content-subtle text-[10px]">soon</span>}
                       {item.badge && item.badge.count > 0 && (
                         <span
+                          title={item.badge.title}
                           className={`rounded px-1.5 text-[10px] font-medium tabular-nums ${TONE[item.badge.tone]}`}
                         >
                           {item.badge.count}
