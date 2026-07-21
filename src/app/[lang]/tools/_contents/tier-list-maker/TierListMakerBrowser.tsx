@@ -318,8 +318,11 @@ type ItemViewProps = {
   item: TierItem;
   selected: boolean;
   dimmed: boolean;
+  /** Nom du PERSO (toggle « noms ») — pour un skin, celui du perso de base. */
   label: string;
   shortLabel?: string;
+  /** Nom du SKIN, en ligne dédiée sous le portrait (toggle « noms de skin »). */
+  skinLabel?: string;
   size: IconSize;
   showName: boolean;
   showElement: boolean;
@@ -334,6 +337,7 @@ const ItemView = memo(function ItemView({
   dimmed,
   label,
   shortLabel,
+  skinLabel,
   size,
   showName,
   showElement,
@@ -346,8 +350,8 @@ const ItemView = memo(function ItemView({
     <div
       data-item-key={item.key}
       onPointerDown={(e) => onPointerDown(e, item.key)}
-      title={label}
-      className={`relative flex shrink-0 cursor-grab touch-none flex-col items-center select-none ${showName ? s.col : ''} ${dimmed ? 'opacity-30' : ''}`}
+      title={item.label}
+      className={`relative flex shrink-0 cursor-grab touch-none flex-col items-center select-none ${showName || skinLabel ? s.col : ''} ${dimmed ? 'opacity-30' : ''}`}
     >
       <div
         className={[
@@ -400,6 +404,14 @@ const ItemView = memo(function ItemView({
           className="text-content-muted mt-0.5 w-full text-center text-[10px] leading-tight hyphens-auto"
         >
           {shortLabel || label}
+        </span>
+      )}
+      {skinLabel && (
+        <span
+          lang="en"
+          className="text-content-subtle mt-0.5 line-clamp-2 w-full text-center text-[10px] leading-tight"
+        >
+          {skinLabel}
         </span>
       )}
     </div>
@@ -645,14 +657,14 @@ export function TierListMakerBrowser({
   const [colorRow, setColorRow] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
-  // Quel nom afficher : un costume retombe sur le nom du perso de base quand
-  // « noms de skin » est décoché.
-  const labelFor = useCallback(
-    (it: TierItem) => (it.isSkin && !showSkinNames ? (it.baseLabel ?? it.label) : it.label),
-    [showSkinNames],
-  );
-  const shortFor = useCallback(
-    (it: TierItem) => (it.isSkin && !showSkinNames ? it.baseShort : it.short),
+  // Deux lignes de nom distinctes : « noms » = toujours le nom du PERSO (un
+  // skin affiche celui de son perso de base) ; « noms de skin » = le nom du
+  // costume en ligne dédiée sous le portrait — le mode cartes l'affiche
+  // toujours, le mode tuiles suit le toggle.
+  const labelFor = useCallback((it: TierItem) => it.baseLabel ?? it.label, []);
+  const shortFor = useCallback((it: TierItem) => (it.isSkin ? it.baseShort : it.short), []);
+  const skinLabelFor = useCallback(
+    (it: TierItem) => (it.isSkin && showSkinNames ? (it.short ?? it.label) : undefined),
     [showSkinNames],
   );
 
@@ -1090,8 +1102,9 @@ export function TierListMakerBrowser({
     if (!ctx) return;
 
     // Pré-wrap des noms : la hauteur d'une ligne de tier s'adapte au plus long.
-    // Mode cartes : DEUX noms sous la cellule — perso de base (si showNames)
-    // et nom du costume (toujours, pour un costume).
+    // Deux lignes possibles sous une cellule — nom du PERSO (si showNames) et
+    // nom du COSTUME (toujours en mode cartes ; au toggle « noms de skin » en
+    // mode tuiles) — même règle que l'affichage à l'écran.
     ctx.font = NAME_FONT;
     const baseNameLines = new Map<string, string[]>();
     const skinNameLines = new Map<string, string[]>();
@@ -1099,27 +1112,15 @@ export function TierListMakerBrowser({
       for (const k of tr.items) {
         const it = itemMap.get(k);
         if (!it) continue;
-        if (showCards) {
-          if (showNames)
-            baseNameLines.set(
-              k,
-              wrapLabel(ctx, it.baseShort ?? it.baseLabel ?? it.short ?? it.label, cellW - 2),
-            );
-          if (it.isSkin) skinNameLines.set(k, wrapLabel(ctx, it.short ?? it.label, cellW - 2));
-        } else if (showNames) {
+        if (showNames)
           baseNameLines.set(k, wrapLabel(ctx, shortFor(it) ?? labelFor(it), cellW - 2));
-        }
+        if (it.isSkin && (showCards || showSkinNames))
+          skinNameLines.set(k, wrapLabel(ctx, it.short ?? it.label, cellW - 2));
       }
     const cellTotalH = tiers.map((tr) => {
-      let extra = 0;
-      if (showCards) {
-        const maxBase = Math.max(0, ...tr.items.map((k) => baseNameLines.get(k)?.length ?? 0));
-        const maxSkin = Math.max(0, ...tr.items.map((k) => skinNameLines.get(k)?.length ?? 0));
-        if (maxBase || maxSkin) extra = (maxBase + maxSkin) * NAME_LH + 4;
-      } else if (showNames) {
-        const maxLines = Math.max(1, ...tr.items.map((k) => baseNameLines.get(k)?.length ?? 1));
-        extra = maxLines * NAME_LH + 4;
-      }
+      const maxBase = Math.max(0, ...tr.items.map((k) => baseNameLines.get(k)?.length ?? 0));
+      const maxSkin = Math.max(0, ...tr.items.map((k) => skinNameLines.get(k)?.length ?? 0));
+      const extra = maxBase || maxSkin ? (maxBase + maxSkin) * NAME_LH + 4 : 0;
       return cellH + extra;
     });
 
@@ -1271,29 +1272,22 @@ export function TierListMakerBrowser({
             }
           }
         }
-        // Noms sous la cellule — base puis costume (cartes) ou base (portrait).
+        // Noms sous la cellule — nom du perso puis nom du costume (mêmes
+        // règles que l'écran, cf. le pré-wrap plus haut).
         ctx.font = NAME_FONT;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         let ty = cellY + cellH + 2;
-        if (isCard) {
-          if (showNames) {
-            ctx.fillStyle = '#d4d4d8';
-            const bn = baseNameLines.get(k) ?? [];
-            bn.forEach((ln, i) => ctx.fillText(ln, cellX + cellW / 2, ty + i * NAME_LH));
-            ty += bn.length * NAME_LH;
-          }
-          if (it.isSkin) {
-            ctx.fillStyle = '#a1a1aa';
-            (skinNameLines.get(k) ?? []).forEach((ln, i) =>
-              ctx.fillText(ln, cellX + cellW / 2, ty + i * NAME_LH),
-            );
-          }
-        } else if (showNames) {
+        const bn = baseNameLines.get(k) ?? [];
+        if (bn.length) {
           ctx.fillStyle = '#d4d4d8';
-          (baseNameLines.get(k) ?? []).forEach((ln, i) =>
-            ctx.fillText(ln, cellX + cellW / 2, ty + i * NAME_LH),
-          );
+          bn.forEach((ln, i) => ctx.fillText(ln, cellX + cellW / 2, ty + i * NAME_LH));
+          ty += bn.length * NAME_LH;
+        }
+        const sn = skinNameLines.get(k) ?? [];
+        if (sn.length) {
+          ctx.fillStyle = '#a1a1aa';
+          sn.forEach((ln, i) => ctx.fillText(ln, cellX + cellW / 2, ty + i * NAME_LH));
         }
       });
       y += rh;
@@ -1347,6 +1341,7 @@ export function TierListMakerBrowser({
     showCards,
     cardSize,
     showCardTags,
+    showSkinNames,
     labelFor,
     shortFor,
     L.exportBlocked,
@@ -1649,6 +1644,7 @@ export function TierListMakerBrowser({
                               dimmed={drag?.key === key}
                               label={labelFor(it)}
                               shortLabel={shortFor(it)}
+                              skinLabel={skinLabelFor(it)}
                               size={iconSize}
                               showName={showNames}
                               showElement={showElement}
@@ -1858,6 +1854,7 @@ export function TierListMakerBrowser({
                   dimmed={drag?.key === it.key}
                   label={labelFor(it)}
                   shortLabel={shortFor(it)}
+                  skinLabel={skinLabelFor(it)}
                   size={iconSize}
                   showName={showNames}
                   showElement={showElement}
