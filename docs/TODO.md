@@ -71,7 +71,14 @@
 > Le gros de l'audit est traité (cf. DONE 20-21/07 : canonicals, comics, cache).
 > Ce qui suit est du volume, pas du bug. Détail : `docs/seo&audit/`.
 
-- [ ] **`alt` manquants** (13 894 images) — beaucoup sont DÉCORATIVES : la
+- [ ] **`<html lang>` figé à `en` sur TOUTES les langues** (trouvé au test
+      subdomain du 21/07, préexistant — le staging path-based sert aussi
+      `lang="en"` sur /jp). Cause : le layout RACINE rend `<html>` au-dessus du
+      segment `[lang]`, sans accès au param. Les hreflang/canonicals sont
+      justes (le SEO est mitigé), mais lecteurs d'écran et détection de langue
+      lisent `lang`. Pistes : route groups avec deux layouts racine
+      (`(site)/[lang]/layout` porte `<html lang>` ; admin/api gardent le leur) —
+      PAS de `headers()` dans le layout racine (ça dynamiserait tout le SSG). — beaucoup sont DÉCORATIVES : la
       bonne réponse est `alt=""` + `aria-hidden` (sprites d'élément/classe posés
       à côté d'un libellé déjà lisible), pas d'inventer du texte. À traiter par
       composant partagé, pas image par image.
