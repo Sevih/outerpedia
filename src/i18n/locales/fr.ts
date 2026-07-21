@@ -304,6 +304,8 @@ const fr: Record<TranslationKey, string> = {
   'tools.event.organizer': 'Organisateur',
   'tools.event.next_step': 'Prochaine étape : {step} — {date}',
   'tools.event.draft': 'Brouillon',
+  'tools.event.starts': 'Débute le {date}',
+  'tools.event.ends': 'Se termine le {date}',
   'tools.event.empty': 'Aucun événement pour le moment.',
   'tools.team-planner': "Planificateur d'équipe",
   'tools.team-planner.desc':

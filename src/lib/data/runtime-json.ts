@@ -8,15 +8,18 @@
  * En dev (base d'images vide) ou si R2 est injoignable : repli sur la donnée
  * committée passée en `fallback`.
  *
- * Le `revalidate` de 600 s abaisse d'office l'ISR des pages consommatrices à
- * 10 min — c'est voulu, c'est la fraîcheur.
+ * ATTENTION au `revalidate` : il ABAISSE d'office l'ISR de la page appelante.
+ * 600 s (défaut) est le bon compromis pour une page dédiée à cette donnée
+ * (accueil, /coupons, /event) ; un appel depuis un LAYOUT partagé doit passer
+ * une valeur alignée sur l'ISR du site (86 400), sinon c'est tout le site qui
+ * se régénère toutes les 10 minutes.
  */
 const IMG_BASE = process.env.NEXT_PUBLIC_IMG_BASE ?? '';
 
-export async function loadRuntimeJson<T>(name: string, fallback: T): Promise<T> {
+export async function loadRuntimeJson<T>(name: string, fallback: T, revalidate = 600): Promise<T> {
   if (IMG_BASE) {
     try {
-      const res = await fetch(`${IMG_BASE}/data/${name}`, { next: { revalidate: 600 } });
+      const res = await fetch(`${IMG_BASE}/data/${name}`, { next: { revalidate } });
       if (res.ok) return (await res.json()) as T;
     } catch {
       /* R2 injoignable → repli committé */

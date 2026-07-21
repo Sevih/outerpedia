@@ -290,6 +290,8 @@ const kr: Record<TranslationKey, string> = {
   'tools.event.organizer': '주최자',
   'tools.event.next_step': '다음 일정: {step} — {date}',
   'tools.event.draft': '초안',
+  'tools.event.starts': '{date} 시작',
+  'tools.event.ends': '{date} 종료',
   'tools.event.empty': '현재 이벤트가 없습니다.',
   'tools.team-planner': '팀 플래너',
   'tools.team-planner.desc': '모든 콘텐츠에 맞는 팀 구성을 만들고 공유하세요.',

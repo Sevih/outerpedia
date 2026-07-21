@@ -295,6 +295,8 @@ const jp: Record<TranslationKey, string> = {
   'tools.event.organizer': '主催者',
   'tools.event.next_step': '次の予定：{step} — {date}',
   'tools.event.draft': '下書き',
+  'tools.event.starts': '{date} 開始',
+  'tools.event.ends': '{date} 終了',
   'tools.event.empty': '現在イベントはありません。',
   'tools.team-planner': 'チームプランナー',
   'tools.team-planner.desc': 'あらゆるコンテンツ向けのチーム編成を作成・共有。',

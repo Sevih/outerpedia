@@ -117,7 +117,8 @@ export interface EventSummary {
 const committed = eventsData as unknown as EventEntry[];
 
 /** Le curé, lu en RUNTIME (R2) avec repli sur la copie committée. */
-export const loadEvents = (): Promise<EventEntry[]> => loadRuntimeJson('events.json', committed);
+export const loadEvents = (revalidate?: number): Promise<EventEntry[]> =>
+  loadRuntimeJson('events.json', committed, revalidate);
 
 /**
  * Statut d'un événement à l'instant `now` (ms). Fenêtre INCLUSIVE des deux
@@ -210,6 +211,18 @@ export async function getEvent(
   return options?.includeDrafts || isPublic(found) ? found : undefined;
 }
 
+/**
+ * Événements à ANNONCER dans le bandeau du header : en cours et à venir, dans
+ * cet ordre. Lu avec l'ISR du SITE (24 h) et non les 600 s des pages dédiées :
+ * le bandeau vit dans le layout partagé, une revalidation courte y ferait
+ * régénérer TOUTES les pages du wiki toutes les 10 minutes. Un événement
+ * démarrant à une date, la purge de cache de 00:05 UTC l'affiche la nuit même.
+ */
+export async function getBannerEvents(lang: Lang): Promise<EventSummary[]> {
+  const all = summarize(await loadEvents(86_400), lang);
+  return all.filter((e) => e.status === 'ongoing' || e.status === 'upcoming');
+}
+
 /** Un événement + tout ce qui se déduit de l'instant courant (page détail). */
 export interface EventView {
   event: EventEntry;
@@ -250,4 +263,22 @@ export function formatEventDate(iso: string, lang: Lang): string {
     day: 'numeric',
     timeZone: 'UTC',
   });
+}
+
+/**
+ * Date + heure UTC (« 24 mars 14:00 UTC ») — l'échéance annoncée dans le
+ * bandeau : à quelques heures de la clôture, le jour seul ne suffit plus.
+ */
+export function formatEventDeadline(iso: string, lang: Lang): string {
+  const ms = Date.parse(iso);
+  if (Number.isNaN(ms)) return iso;
+  const d = new Date(ms);
+  const day = d.toLocaleDateString(LANGUAGES[lang].htmlLang, {
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'UTC',
+  });
+  const hh = String(d.getUTCHours()).padStart(2, '0');
+  const mm = String(d.getUTCMinutes()).padStart(2, '0');
+  return `${day} ${hh}:${mm} UTC`;
 }

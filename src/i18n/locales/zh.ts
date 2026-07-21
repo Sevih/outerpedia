@@ -284,6 +284,8 @@ const zh: Record<TranslationKey, string> = {
   'tools.event.organizer': '主办方',
   'tools.event.next_step': '下一步：{step} — {date}',
   'tools.event.draft': '草稿',
+  'tools.event.starts': '{date} 开始',
+  'tools.event.ends': '{date} 结束',
   'tools.event.empty': '目前没有活动。',
   'tools.team-planner': '队伍规划器',
   'tools.team-planner.desc': '创建队伍配置并分享。',

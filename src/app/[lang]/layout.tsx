@@ -5,6 +5,7 @@ import { getT } from '@/i18n';
 import { buildSiteJsonLd } from '@/lib/seo';
 import JsonLd from '@/components/seo/JsonLd';
 import { Header } from '@/components/layout/Header';
+import { EventBanner } from '@/components/layout/EventBanner';
 import { HtmlLang } from '@/components/layout/HtmlLang';
 import { Footer } from '@/components/layout/Footer';
 
@@ -31,6 +32,7 @@ export default async function LangLayout({
       <HtmlLang lang={lang as Lang} />
       <JsonLd id="ld-site" data={buildSiteJsonLd(lang as Lang, t('page.home.description'))} />
       <Header />
+      <EventBanner lang={lang as Lang} />
       {/* Pas de conteneur global : chaque page pose le sien (la fiche perso est
           full-bleed, comme en V2). `page-container` = l'ancien gabarit. */}
       <main>{children}</main>
