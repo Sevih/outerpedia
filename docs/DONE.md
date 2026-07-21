@@ -6,6 +6,29 @@
 
 ## 2026-07-21
 
+- **Outil `/tier-list-maker` porté + PREMIER code BDD de la V3.** ① Socle :
+  `src/lib/db.ts` (mysql2, connexion éphémère par requête, `null` sans env
+  `DB_*` → toute fonctionnalité dégrade) + routes `/api/tierlist` (POST
+  rate-limité 30/min/IP, id = sha256(payload) tronqué — idempotent ; GET par id,
+  cache 5 min) — MÊME table `tier_lists`/mêmes ids que la V2. ② Codec du lien
+  de partage extrait en module PUR `share-codec.ts` (6 tests dont un ÉPINGLAGE
+  octet-à-octet du format : les liens `?z=` V2 circulent, le format ne doit
+  jamais bouger) — encodage par rang de sélection contre un canon par type trié
+  par id numérique. Compat canon : core-fusion EXCLUES du pool perso. ③ Wrapper
+  serveur : pools localisés (persos + 99 costumes via `appearances`, EE, boss =
+  monstres `type boss` référencés par une rencontre dédup par icône — règle
+  DUPLIQUÉE dans le manifeste d'assets pour la collecte des portraits, 33 MT_
+  produits + push). ④ Client réécrit sur tokens V3 : DnD pointeur
+  (souris/tactile + tap-to-place), lignes éditables (label/couleur/palette/
+  réorder), pool filtrable 3 onglets, export PNG canvas (fond tokens V3,
+  `crossOrigin` — l'export dépend du CORS de img.outerpedia.com, garde-fou
+  `export_blocked` sinon), export/import JSON, réglages via `useStoredState`
+  (clé `outerpedia:tier-list-maker:settings` v1, legacy `tlm-settings`
+  absorbée). RESTE côté infra : décommenter `DB_*` (fait dans sevih-tool, à
+  déployer) et DÉCIDER la migration de la table `tier_lists` V2 → MySQL VPS
+  (sans elle, les liens courts `?s=` V2 sont morts — les `?z=` longs, eux,
+  marchent).
+
 - **Cache statique des images ALIGNÉ en prod (e172ec9).** `assets:push --full`
   (9094 assets ré-uploadés + purge edge) : un en-tête S3 est figé à l'upload et
   le push incrémental ne renvoie que ce qui change — les objets déjà en place

@@ -708,6 +708,39 @@ export function buildAssetManifest(): AssetRequest[] {
     candidates: ['CM_Goods_Guild_Coin'],
     domain: 'ui',
   });
+  // Tier-list maker : pool des BOSS — monstres `type: 'boss'` référencés par au
+  // moins une rencontre, dédupliqués par icône. MÊME règle que le wrapper de
+  // l'outil (src/app/[lang]/tools/_contents/tier-list-maker/index.tsx : les
+  // deux doivent rester alignées). Icône « 2… » = modèle de perso (face icon,
+  // dédupliquée par clé avec le domaine perso) ; sinon vignette MT_ sous le
+  // namespace boss existant (même clé que guides/sources — jamais deux copies).
+  {
+    const monsters = load('monsters.json') as Record<string, { type?: string; icon?: string }>;
+    const encounters = load('encounters.json') as Record<string, { monsters?: { id: string }[] }>;
+    const referenced = new Set<string>();
+    for (const enc of Object.values(encounters))
+      for (const mo of enc.monsters ?? []) referenced.add(mo.id);
+    const seenBossIcons = new Set<string>();
+    for (const [mid, m] of Object.entries(monsters)) {
+      if (m.type !== 'boss' || !m.icon || !referenced.has(mid) || seenBossIcons.has(m.icon))
+        continue;
+      seenBossIcons.add(m.icon);
+      if (m.icon.startsWith('2'))
+        push({
+          kind: 'face-icon',
+          key: `images/characters/faceicon/FI_${m.icon}.webp`,
+          id: m.icon,
+          domain: 'characters',
+        });
+      else
+        push({
+          kind: 'image',
+          key: `images/ui/boss/MT_${m.icon}.webp`,
+          candidates: [`MT_${m.icon}`],
+          domain: 'ui',
+        });
+    }
+  }
   // Catalogue d'items UNIFIÉ : TOUTES les icônes déclarées (items + monnaies +
   // costumes + overrides/créations curés) sous le namespace `images/items/`. Un
   // item est référençable partout (fiches perso, cadeaux, rewards de promo-codes,

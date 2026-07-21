@@ -28,7 +28,9 @@
 
 - [ ] **`/tools` — RESTENT 3 sous-outils** (`/<slug>`, 404 tant que non portés) :
       damage-calculator, team-planner, event — namespaces `tools.*`.
-      (`tier-list-maker` est EN COURS — worker, cf. `_contents/tier-list-maker` + `api/tierlist` + `lib/db.ts`.)
+      (`tier-list-maker` PORTÉ le 21/07, cf. DONE — reste côté infra :
+      déployer les `DB_*` décommentés du compose + DÉCIDER la migration de la
+      table `tier_lists` V2, sans quoi les liens courts `?s=` V2 sont morts.)
       (Historique des portés : 19-21/07, cf. DONE — socle `TierListTool`,
       routeur à plat, coupon-codes = renvoi `/coupons`,
       gear-usage-statistics & gear-usage-finder = agrégation gear-reco à la

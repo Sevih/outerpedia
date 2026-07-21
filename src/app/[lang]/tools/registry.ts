@@ -24,6 +24,7 @@ export const TOOL_COMPONENTS: Record<
   'patch-history': () => import('./_contents/patch-history'),
   'pull-simulator': () => import('./_contents/pull-simulator'),
   'progress-tracker': () => import('./_contents/progress-tracker'),
+  'tier-list-maker': () => import('./_contents/tier-list-maker'),
 };
 
 /** Slugs des outils portés (routeur + `generateStaticParams`). */
