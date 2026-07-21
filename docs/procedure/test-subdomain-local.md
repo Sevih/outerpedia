@@ -23,46 +23,36 @@ TODO, pas lié aux sous-domaines.
 - Caddy installé ; sa CA locale est déjà dans le magasin Windows (`caddy trust`
   au besoin) → cadenas vert.
 
-## Caddyfile local
+## Le dev EST le banc (défaut depuis le 21/07 — décision Sevih : plus de mode path en local)
 
-```caddy
-outerpedia.local, jp.outerpedia.local, kr.outerpedia.local, zh.outerpedia.local, fr.outerpedia.local, www.outerpedia.local {
-	tls internal
-	# :3100 = build de test (`next start`) ; :3000 = serveur dev (hot reload).
-	reverse_proxy localhost:3100
-}
+`pnpm dev` lance Next **et** le Caddy local ([Caddyfile.dev](../../Caddyfile.dev)
+à la racine, via `concurrently`) : le dev se navigue sur
+`https://outerpedia.local` avec le vrai comportement sous-domaines, hot reload
+compris. Les deux variables qui bakent les LIENS en sous-domaines vivent dans
+`.env.local` (non committé — ni la CI ni l'image Docker ne les voient, le
+profil prod vient des ARG du Dockerfile) :
+
+```
+NEXT_PUBLIC_SITE_ORIGIN=https://outerpedia.local
+NEXT_PUBLIC_LANG_ROUTING=subdomain
 ```
 
-`caddy run --config <ce fichier>` (premier lancement : invite UAC pour la CA).
+`next.config.ts` porte le pendant dev : `allowedDevOrigins`
+(`*.outerpedia.local`), sinon le dev server refuse les `/_next/*` proxifiés.
 
-## Mode A — build de test (fidèle prod, ce qui a été validé)
+## Mode A — build de test (fidèle prod : pages figées, profil baké)
 
-⚠️ Couper le serveur dev d'abord (`pnpm build` écrit dans `.next`), et purger
-`.next` si le dev a tourné (ses types générés — `/admin` — cassent le build).
+⚠️ Couper le dev d'abord (`pnpm build` écrit dans `.next`), et purger `.next`
+si le dev a tourné (ses types générés — `/admin` — cassent le build). Les
+variables du profil viennent de `.env.local` (lu par `next build`).
 
 ```powershell
 Remove-Item -Recurse -Force .next
-$env:NEXT_PUBLIC_SITE_ORIGIN = 'https://outerpedia.local'
-$env:NEXT_PUBLIC_LANG_ROUTING = 'subdomain'
-$env:NEXT_PUBLIC_IMG_BASE = 'https://img.outerpedia.com'
 pnpm build
 $env:PORT = '3100'; pnpm start
+# Caddy vers le build plutôt que le dev :
+$env:OUTERPEDIA_PORT = '3100'; caddy run --config Caddyfile.dev
 ```
-
-## Mode B — serveur dev (hot reload, liens subdomain)
-
-Le PROXY (host → langue) est runtime : il marche en dev tel quel. Pour que les
-LIENS GÉNÉRÉS (sélecteur de langue, canonicals) soient en sous-domaines aussi,
-décommenter dans `.env.local` :
-
-```
-# NEXT_PUBLIC_SITE_ORIGIN=https://outerpedia.local
-# NEXT_PUBLIC_LANG_ROUTING=subdomain
-```
-
-puis relancer le dev, et pointer le Caddyfile sur `localhost:3000`.
-**Recommenter après** : avec ces variables actives, les liens inter-langues du
-dev pointent `jp.outerpedia.local` — morts si Caddy ne tourne pas.
 
 ## Batterie de vérification (curl)
 

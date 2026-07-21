@@ -1,0 +1,14 @@
+# HTTPS local pour le DEV en mode sous-domaines (outerpedia.local — cf.
+# docs/procedure/test-subdomain-local.md). Lancé automatiquement par `pnpm dev`
+# (concurrently). NE CONCERNE QUE LE POSTE LOCAL : le Caddy du VPS vit dans
+# sevih-tool/stack/Caddyfile, et ni la CI ni l'image Docker ne lisent ce fichier.
+#
+# Pré-requis poste : entrées 127.0.0.1 dans le fichier hosts pour l'apex + les
+# sous-domaines, CA locale Caddy de confiance (`caddy trust`).
+#
+# OUTERPEDIA_PORT : 3000 (dev, défaut) — exporter 3100 pour proxifier un build
+# de test (`next start`, mode A de la procédure).
+outerpedia.local, jp.outerpedia.local, kr.outerpedia.local, zh.outerpedia.local, fr.outerpedia.local, www.outerpedia.local {
+	tls internal
+	reverse_proxy localhost:{$OUTERPEDIA_PORT:3000}
+}

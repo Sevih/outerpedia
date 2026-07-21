@@ -66,6 +66,11 @@ const nextConfig: NextConfig = {
   // Standalone output -> minimal production image for Docker.
   output: 'standalone',
 
+  // Dev en mode sous-domaines derrière le Caddy local (Caddyfile.dev) : sans
+  // ça, le dev server refuse les requêtes /_next/* arrivant sous un autre
+  // Host que localhost. Option DEV uniquement, sans effet en prod.
+  allowedDevOrigins: ['outerpedia.local', '*.outerpedia.local'],
+
   pageExtensions,
 
   // Les guides sont SCANNÉS au filesystem (meta.json + versions/*.json) — y
