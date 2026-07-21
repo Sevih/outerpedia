@@ -20,7 +20,11 @@
   (décision Sevih : lambda `2000118` et `2400015` ne partent pas — vérifié :
   aucun de leurs skills/EE dans les 15 fichiers promus). 552 tests verts.
   Régime de croisière : une regen complète par patch → invariants verts ; les
-  retraits de contenu futurs passent en archive automatiquement.
+  retraits de contenu futurs passent en archive automatiquement. Décision
+  Sevih : l'enregistrement UNITAIRE d'un monstre reste chirurgical (il
+  n'entraîne PAS les co-monstres de ses donjons — si l'invariant d'aller-retour
+  signale le reste du roster, c'est une CHECKLIST, pas un bug ; le lot = bouton
+  « Enregistrer le mode »).
 
 - **`/characters` : retour au `?z=` compact (codec V2) dans la barre
   d'adresse.** Décision Sevih : la barre EST le lien de partage (réflexe =
