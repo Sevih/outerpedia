@@ -6,6 +6,13 @@
 
 ## 2026-07-21
 
+- **Cache statique des images ALIGNÉ en prod (e172ec9).** `assets:push --full`
+  (9094 assets ré-uploadés + purge edge) : un en-tête S3 est figé à l'upload et
+  le push incrémental ne renvoie que ce qui change — les objets déjà en place
+  seraient restés en `max-age=600` pour toujours. Vérifié par `curl` :
+  images `max-age=86400`, `data/*` (coupons/bannières) inchangé en 300/600.
+  Dernière marche du hint « efficient cache policy » côté assets.
+
 - **Outil `/progress-tracker` porté** (+ hook `useStoredState` posé la veille,
   a06cdfe). Logique V2 réécrite en fonctions PURES
   (`_contents/progress-tracker/tracker.ts`, 28 tests) : `count` = seule source
@@ -28,6 +35,68 @@
   ancrées au manifeste (déjà sur R2 via le re-push du 20/07).
 
 ## 2026-07-20
+
+- **Socle `client-storage` posé AVANT les outils à état client (1f53858,
+  a06cdfe).** `readStored`/`writeStored`/`clearStored` + `useStoredState`
+  autour d'un `StoreSpec` déclaré par l'outil. Trois conventions, tirées des
+  ratés V2 : version de schéma DANS la valeur (`{v, data}` + `migrate`) et
+  JAMAIS dans le nom de la clé (les bumps V2 `damage-lab-form-v9` perdaient les
+  données) ; absorption des clés V2 héritées à la première lecture (`legacyKeys`
+  - `fromLegacy`) puisque la V3 remplacera la V2 sur le MÊME origin — périmètre
+    arbitré : `outerplane:progress`/`:settings` et `tlm-settings` repris, redeem
+    et damage-calc/lab NON ; la clé V2 est laissée en place (retour arrière).
+    SSR/JSON corrompu/quota → `fallback` silencieux, lecture après montage
+    (`ready`) donc zéro mismatch d'hydratation. 10 + 6 tests. Premier
+    consommateur : le progress-tracker le lendemain.
+
+- **Audit Sitebulb de la prod (crawl du 20/07, export `docs/seo&audit/`) —
+  3 hints majeurs traités.** ① **Canonicals (7144d84, ~70 % de l'audit)** :
+  `buildUrl` en mode path préfixait la langue par défaut alors que le proxy
+  SERT `/characters` et REDIRIGE `/en/characters` — 1163 pages annonçaient
+  comme canonique une URL qui redirige (+ hreflang, x-default, sitemap). La
+  langue par défaut n'est plus préfixée (même convention que le mode
+  subdomain), la redirection `/en/*` passe en 308 permanent, 3 tests réalignés.
+  Au passage : 2 hrefs du changelog curé pointaient le slug V2
+  `primordial_sentinel` (404) → `primordial-sentinel`. ② **`/4-comics`
+  22 Mo (537dd8a)** : la grille rendait les planches PLEINE TAILLE (~758 Ko
+  pièce) ; `collect-comics` émet désormais `<stem>.thumb.webp` (360 px, q75,
+  idempotent mtime), la grille charge ~44 Ko/planche (×17), la lightbox garde
+  l'original, repli `onError` le temps que R2 se peuple. ③ **Cache statique**
+  : `max-age` navigateur des images 600 → 86400 (arbitrage Sevih : une
+  correction reste visible sous 24 h, contre ~1456 revalidations par visiteur
+  récurrent) ; `/icons/*` et `/favicon.ico`, servis en `max-age=0` par Next,
+  passent à 1 semaine via `headers()` (4c8f294). CLASSÉ BRUIT après mesure :
+  « properly size images » (les sprites sont à ~2× leur rendu = correct pour le
+  rétina, Sitebulb crawle en densité 1), CSS render-blocking (2 fichiers Next
+  gzippés immutable), majuscules des slugs adventure, GA/GTM absents (design).
+  Duplicate content : RAS.
+
+- **Site INSTALLABLE — PWA sans service worker (0b03a75).** Le « worker » de la
+  V2 était un service worker dont le vrai rôle était de rattraper les chunks
+  orphelins après déploiement : Next 16 gère ça nativement (fallback navigation
+  complète), les statiques sont déjà `immutable` et les images vivent sur R2 —
+  le porter aurait réintroduit sa machinerie (`set-version.js`, cache versionné)
+  pour rien. Livré à la place : `src/app/manifest.ts` (route metadata, servie
+  sur `/manifest.webmanifest` — chemin déjà whitelisté par le garde anti-points
+  du proxy) + icônes 192/512 sous `/icons/` (préfixe autorisé), couleurs
+  `--surface-base` V3, et `appleWebApp` dans le layout (standalone iOS ancien +
+  barre de statut + titre d'app). Pas de mode hors-ligne : un wiki vit de
+  données fraîches.
+
+- **Bannières de la home : source CURÉE + lecture RUNTIME R2 (56672b3,
+  af5136e).** La home lisait `recruit.json` (dérivé des tables du jeu) qui
+  n'émet QUE les bannières limited : Caren, en pickup normal, manquait alors
+  qu'elle était dans l'éditeur admin. Bascule sur `data/curated/banner.json`
+  — décision Sevih : les patch notes tombent 24-48 h AVANT la mise à jour du
+  jeu, la curation permet de pré-saisir ; le généré reste la source des guides
+  (historique release/rerun). `activeBanners()` retiré (sans consommateur).
+  Puis même patron que les coupons : `loadRuntimeJson` (fetch R2, revalidate
+  600 s, repli committé), publication R2 au Save admin et au regen V2 via
+  `runtime-publish` (module généralisé depuis `coupons-publish`), résultat
+  affiché dans l'éditeur → une bannière saisie est en prod en ≤ 10 min sans
+  redéploiement. Éditeur `/admin/tools/banners` refait au passage : picker
+  compact (fini le nom tronqué sous un portrait), badges
+  Active/Upcoming/Expired avec jours restants, lignes expirées atténuées.
 
 - **Outil `/pull-simulator` porté.** Moteur pur dans `src/lib/gacha.ts`
   (4 bannières aux taux V2, session immuable, garantie 2★ du x10, mileage) —

@@ -3,10 +3,10 @@
 > Le « à faire » uniquement — le « fait » migre dans [DONE.md](./DONE.md)
 > (décision Sevih 2026-07-17). Réécrit le **2026-07-17** après audit complet du
 > code (7 passes par zone, chaque finding vérifié, sévérités contre-vérifiées),
-> **nettoyé les 18, 19 et 20/07** (à chaque fois le « fait » de la journée migré
-> dans DONE.md ; le 20/07, les sections vidées — bugs, code mort, duplication,
-> hygiène CLI — ont été retirées : leur bilan vit dans DONE).
-> État de référence : **20/07**.
+> **nettoyé les 18, 19, 20 et 21/07** (à chaque fois le « fait » de la journée
+> migré dans DONE.md ; le 20/07, les sections vidées — bugs, code mort,
+> duplication, hygiène CLI — ont été retirées : leur bilan vit dans DONE).
+> État de référence : **21/07**.
 > Re-vérifier chaque item contre le code au moment de le traiter.
 
 ---
@@ -26,14 +26,20 @@
 > ASSUMÉES le temps du portage. Chaque page arrive avec ses clés de locale
 > DÉJÀ pré-seedées ×5 (cf. item « pré-seed » de la section Docs).
 
-- [ ] **`/tools` — RESTENT 4 sous-outils** (`/<slug>`, 404 tant que non portés) :
-      damage-calculator,
-      team-planner, tier-list-maker, event — namespaces
-      `tools.*`.
-      (Historique des portés : 19-20/07, cf. DONE — socle `TierListTool`,
+- [ ] **`/tools` — RESTENT 3 sous-outils** (`/<slug>`, 404 tant que non portés) :
+      damage-calculator, team-planner, event — namespaces `tools.*`.
+      (`tier-list-maker` est EN COURS — worker, cf. `_contents/tier-list-maker` + `api/tierlist` + `lib/db.ts`.)
+      (Historique des portés : 19-21/07, cf. DONE — socle `TierListTool`,
       routeur à plat, coupon-codes = renvoi `/coupons`,
       gear-usage-statistics & gear-usage-finder = agrégation gear-reco à la
-      lecture.)
+      lecture, patch-history, pull-simulator, progress-tracker.)
+- [ ] **Cartes « coming soon » sur `/tools`** (audit Sitebulb 20/07) : la
+      landing linke les outils NON portés → autant de 404 internes indexables
+      (crawl gaspillé ; c'est aussi la cause du hint « Multiple title tags »,
+      la page 404 de Next empilant 2 `<title>`). Rendre la carte NON cliquable
+      tant que le slug est absent de `PORTED_TOOL_SLUGS` (le registry sait
+      déjà). S'éteint tout seul à mesure des portages, mais vaut mieux que
+      d'attendre.
 - [ ] **`/characters/[slug]` — RELIQUAT** : la fiche détail est portée, il ne
       MANQUE que les **Discord reviews** (section review communautaire de la V2).
       **Bloqué sur la migration du bot Discord → VPS** — cf. l'entrée dédiée
@@ -67,6 +73,21 @@
       LES DEUX (choix Sevih) : tables éditoriales (`editorial.ts`, EVENT/RESOURCE)
       **et** overlay curé des shops dérivés (fusionné au build datagen → éditer
       l'overlay puis régénérer `shop-priorities.json`).
+
+### Lots de fond SEO/perf (audit Sitebulb 20/07 — non urgents)
+
+> Le gros de l'audit est traité (cf. DONE 20-21/07 : canonicals, comics, cache).
+> Ce qui suit est du volume, pas du bug. Détail : `docs/seo&audit/`.
+
+- [ ] **`alt` manquants** (13 894 images) — beaucoup sont DÉCORATIVES : la
+      bonne réponse est `alt=""` + `aria-hidden` (sprites d'élément/classe posés
+      à côté d'un libellé déjà lisible), pas d'inventer du texte. À traiter par
+      composant partagé, pas image par image.
+- [ ] **`width`/`height` sur les `<img>`** (« Add dimensions to images »,
+      1167 pages) — vrai gain CLS. Les tailles sont souvent connues du composant
+      (portraits, faces, icônes) : les poser dans les primitives suffit.
+- [ ] **Titles / meta descriptions courts** (572 / 135 pages) — surtout les
+      pages générées ; à arbitrer, ce n'est pas mécanique.
 
 ## ⚙️ Config / infra
 
