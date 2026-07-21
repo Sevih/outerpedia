@@ -355,7 +355,8 @@
     "file": "Event_00035",
     "name": "Event - NeoIotaCity",
     "size": 2.24,
-    "duration": 97.7
+    "duration": 97.7,
+    "name_kr": "Event - NeoYotaCity"
   },
   {
     "file": "Gacha_BGM",

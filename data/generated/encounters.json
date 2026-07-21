@@ -8,10 +8,10 @@
       "zh": "Intro-暗堡核心"
     },
     "area": {
-      "en": "Outer City",
-      "jp": "アウターシティ",
-      "kr": "아우터시티",
-      "zh": "外城"
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
     },
     "monsters": [
       {
@@ -66,13 +66,13 @@
     "monsters": [
       {
         "id": "401100201",
-        "level": 1,
+        "level": 25,
         "role": "add",
         "wave": 1
       },
       {
         "id": "401300101",
-        "level": 1,
+        "level": 25,
         "role": "boss",
         "wave": 2
       }
@@ -81,8 +81,9 @@
     "episode": 1,
     "reward": "100101",
     "adv": {
-      "atk": -561,
-      "hp": -248
+      "atk": -737,
+      "def": 4,
+      "hp": -616
     }
   },
   "100103": {
@@ -102,19 +103,19 @@
     "monsters": [
       {
         "id": "410101301",
-        "level": 3,
+        "level": 26,
         "role": "add",
         "wave": 1
       },
       {
         "id": "410101101",
-        "level": 3,
+        "level": 26,
         "role": "add",
         "wave": 1
       },
       {
         "id": "450000101",
-        "level": 3,
+        "level": 26,
         "role": "boss",
         "wave": 2
       }
@@ -123,9 +124,8 @@
     "episode": 1,
     "reward": "100103",
     "adv": {
-      "atk": -756,
-      "def": 18,
-      "hp": -616
+      "atk": -736,
+      "hp": -603
     }
   },
   "100104": {
@@ -145,23 +145,29 @@
     "monsters": [
       {
         "id": "401103101",
-        "level": 4,
+        "level": 26,
         "role": "add",
         "wave": 1
       },
       {
-        "id": "401303101",
-        "level": 4,
-        "role": "boss",
+        "id": "401103201",
+        "level": 26,
+        "role": "add",
         "wave": 2
+      },
+      {
+        "id": "401303101",
+        "level": 26,
+        "role": "boss",
+        "wave": 3
       }
     ],
     "season": 1,
     "episode": 1,
     "reward": "100104",
     "adv": {
-      "atk": -801,
-      "hp": -647
+      "atk": -736,
+      "hp": -603
     }
   },
   "100105": {
@@ -181,29 +187,35 @@
     "monsters": [
       {
         "id": "411103201",
-        "level": 5,
+        "level": 27,
         "role": "add",
         "wave": 1
       },
       {
         "id": "411103101",
-        "level": 5,
+        "level": 27,
         "role": "add",
         "wave": 1
       },
       {
-        "id": "401303201",
-        "level": 5,
-        "role": "boss",
+        "id": "401103201",
+        "level": 27,
+        "role": "add",
         "wave": 2
+      },
+      {
+        "id": "401303201",
+        "level": 27,
+        "role": "boss",
+        "wave": 3
       }
     ],
     "season": 1,
     "episode": 1,
     "reward": "100105",
     "adv": {
-      "atk": -829,
-      "hp": -665
+      "atk": -741,
+      "hp": -591
     }
   },
   "100107": {
@@ -223,29 +235,29 @@
     "monsters": [
       {
         "id": "401103201",
-        "level": 6,
+        "level": 28,
         "role": "add",
         "wave": 1
       },
       {
         "id": "400101101",
-        "level": 6,
+        "level": 28,
         "role": "add",
         "wave": 2
       },
       {
         "id": "400301101",
-        "level": 6,
+        "level": 28,
         "role": "boss",
-        "wave": 2
+        "wave": 3
       }
     ],
     "season": 1,
     "episode": 1,
     "reward": "100107",
     "adv": {
-      "atk": -847,
-      "hp": -688
+      "atk": -738,
+      "hp": -579
     }
   },
   "100108": {
@@ -265,30 +277,29 @@
     "monsters": [
       {
         "id": "400101101",
-        "level": 7,
+        "level": 28,
         "role": "add",
         "wave": 1
       },
       {
         "id": "400101301",
-        "level": 7,
+        "level": 28,
         "role": "add",
         "wave": 1
       },
       {
         "id": "400301201",
-        "level": 7,
+        "level": 28,
         "role": "boss",
-        "wave": 2
+        "wave": 3
       }
     ],
     "season": 1,
     "episode": 1,
     "reward": "100108",
     "adv": {
-      "atk": -861,
-      "def": 11,
-      "hp": -704
+      "atk": -738,
+      "hp": -579
     }
   },
   "100109": {
@@ -308,29 +319,35 @@
     "monsters": [
       {
         "id": "400101101",
-        "level": 8,
+        "level": 29,
         "role": "add",
         "wave": 1
       },
       {
         "id": "401103201",
-        "level": 8,
+        "level": 29,
         "role": "add",
         "wave": 1
       },
       {
-        "id": "400301101",
-        "level": 8,
-        "role": "boss",
+        "id": "400101301",
+        "level": 29,
+        "role": "add",
         "wave": 2
+      },
+      {
+        "id": "400301101",
+        "level": 29,
+        "role": "boss",
+        "wave": 3
       }
     ],
     "season": 1,
     "episode": 1,
     "reward": "100109",
     "adv": {
-      "atk": -870,
-      "hp": -714
+      "atk": -732,
+      "hp": -568
     }
   },
   "100110": {
@@ -350,25 +367,81 @@
     "monsters": [
       {
         "id": "400101301",
-        "level": 10,
+        "level": 30,
         "role": "add",
         "wave": 1
       },
       {
+        "id": "401103101",
+        "level": 30,
+        "role": "add",
+        "wave": 2
+      },
+      {
         "id": "402400101",
-        "level": 10,
+        "level": 30,
         "hpLines": 10,
         "role": "boss",
-        "wave": 2
+        "wave": 3
       }
     ],
     "season": 1,
     "episode": 1,
     "reward": "100110",
     "adv": {
-      "atk": -885,
-      "hp": -723
+      "atk": -701,
+      "hp": -574
     }
+  },
+  "100113": {
+    "mode": "normal",
+    "name": {
+      "en": "Memory of the Hero",
+      "jp": "勇者の記憶",
+      "kr": "용사의 기억",
+      "zh": "勇士的记忆"
+    },
+    "area": {
+      "en": "Outer City",
+      "jp": "アウターシティ",
+      "kr": "아우터시티",
+      "zh": "外城"
+    },
+    "monsters": [
+      {
+        "id": "404100101",
+        "level": 50,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "404300201",
+        "level": 50,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "404100201",
+        "level": 50,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "404100301",
+        "level": 50,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "404400101",
+        "level": 100,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 4
+      }
+    ],
+    "season": 1,
+    "episode": 1
   },
   "100201": {
     "mode": "normal",
@@ -387,19 +460,19 @@
     "monsters": [
       {
         "id": "4001011",
-        "level": 10,
+        "level": 30,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001013",
-        "level": 10,
+        "level": 30,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4003011",
-        "level": 10,
+        "level": 30,
         "role": "boss",
         "wave": 3
       }
@@ -408,8 +481,8 @@
     "episode": 2,
     "reward": "100201",
     "adv": {
-      "atk": -885,
-      "hp": -723
+      "atk": -701,
+      "hp": -574
     }
   },
   "100202": {
@@ -429,19 +502,19 @@
     "monsters": [
       {
         "id": "4001011",
-        "level": 11,
+        "level": 31,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001013",
-        "level": 11,
+        "level": 31,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4003012",
-        "level": 11,
+        "level": 31,
         "role": "boss",
         "wave": 3
       }
@@ -450,8 +523,8 @@
     "episode": 2,
     "reward": "100202",
     "adv": {
-      "atk": -822,
-      "hp": -676
+      "atk": -705,
+      "hp": -564
     }
   },
   "100203": {
@@ -471,25 +544,25 @@
     "monsters": [
       {
         "id": "4021001",
-        "level": 12,
+        "level": 31,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4021003",
-        "level": 12,
+        "level": 31,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4021002",
-        "level": 12,
+        "level": 31,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4023001",
-        "level": 12,
+        "level": 31,
         "role": "boss",
         "wave": 3
       }
@@ -498,8 +571,8 @@
     "episode": 2,
     "reward": "100203",
     "adv": {
-      "atk": -827,
-      "hp": -680
+      "atk": -705,
+      "hp": -564
     }
   },
   "100204": {
@@ -519,25 +592,25 @@
     "monsters": [
       {
         "id": "4021003",
-        "level": 13,
+        "level": 32,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4011003",
-        "level": 13,
+        "level": 32,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4021001",
-        "level": 13,
+        "level": 32,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4023002",
-        "level": 13,
+        "level": 32,
         "role": "boss",
         "wave": 3
       }
@@ -546,8 +619,8 @@
     "episode": 2,
     "reward": "100204",
     "adv": {
-      "atk": -830,
-      "hp": -684
+      "atk": -708,
+      "hp": -570
     }
   },
   "100205": {
@@ -567,31 +640,31 @@
     "monsters": [
       {
         "id": "4041001",
-        "level": 14,
+        "level": 32,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041004",
-        "level": 14,
+        "level": 32,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041002",
-        "level": 14,
+        "level": 32,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4041003",
-        "level": 14,
+        "level": 32,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4043002",
-        "level": 14,
+        "level": 32,
         "role": "boss",
         "wave": 3
       }
@@ -600,9 +673,8 @@
     "episode": 2,
     "reward": "100205",
     "adv": {
-      "atk": -833,
-      "def": 6,
-      "hp": -688
+      "atk": -708,
+      "hp": -570
     }
   },
   "100207": {
@@ -622,31 +694,31 @@
     "monsters": [
       {
         "id": "4041002",
-        "level": 15,
+        "level": 33,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041004",
-        "level": 15,
+        "level": 33,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041001",
-        "level": 15,
+        "level": 33,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4041003",
-        "level": 15,
+        "level": 33,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4043001",
-        "level": 15,
+        "level": 33,
         "role": "boss",
         "wave": 3
       }
@@ -655,8 +727,8 @@
     "episode": 2,
     "reward": "100207",
     "adv": {
-      "atk": -836,
-      "hp": -686
+      "atk": -709,
+      "hp": -568
     }
   },
   "100208": {
@@ -676,25 +748,25 @@
     "monsters": [
       {
         "id": "4041002",
-        "level": 16,
+        "level": 33,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041004",
-        "level": 16,
+        "level": 33,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041003",
-        "level": 16,
+        "level": 33,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4043002",
-        "level": 16,
+        "level": 33,
         "role": "boss",
         "wave": 3
       }
@@ -703,8 +775,8 @@
     "episode": 2,
     "reward": "100208",
     "adv": {
-      "atk": -761,
-      "hp": -689
+      "atk": -709,
+      "hp": -568
     }
   },
   "100209": {
@@ -724,31 +796,31 @@
     "monsters": [
       {
         "id": "4041001",
-        "level": 17,
+        "level": 34,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041004",
-        "level": 17,
+        "level": 34,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041002",
-        "level": 17,
+        "level": 34,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4041003",
-        "level": 17,
+        "level": 34,
         "role": "add",
         "wave": 2
       },
       {
         "id": "450000202",
-        "level": 17,
+        "level": 34,
         "role": "boss",
         "wave": 3
       }
@@ -757,8 +829,8 @@
     "episode": 2,
     "reward": "100209",
     "adv": {
-      "atk": -763,
-      "hp": -691
+      "atk": -711,
+      "hp": -573
     }
   },
   "100210": {
@@ -778,7 +850,7 @@
     "monsters": [
       {
         "id": "450000302",
-        "level": 18,
+        "level": 34,
         "role": "boss"
       }
     ],
@@ -786,8 +858,8 @@
     "episode": 2,
     "reward": "100210",
     "adv": {
-      "atk": -765,
-      "hp": -693
+      "atk": -711,
+      "hp": -573
     }
   },
   "100211": {
@@ -807,32 +879,32 @@
     "monsters": [
       {
         "id": "4041002",
-        "level": 20,
+        "level": 35,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041003",
-        "level": 20,
+        "level": 35,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4242002",
-        "level": 20,
+        "level": 35,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "404400102",
-        "level": 20,
+        "level": 35,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4251011",
-        "level": 20,
+        "level": 35,
         "hpLines": 10,
         "role": "add",
         "wave": 3
@@ -842,8 +914,8 @@
     "episode": 2,
     "reward": "100211",
     "adv": {
-      "atk": -767,
-      "hp": -693
+      "atk": -709,
+      "hp": -572
     }
   },
   "100301": {
@@ -863,25 +935,25 @@
     "monsters": [
       {
         "id": "4031002",
-        "level": 21,
+        "level": 35,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4031003",
-        "level": 21,
+        "level": 35,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4032002",
-        "level": 21,
+        "level": 35,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4033002",
-        "level": 21,
+        "level": 35,
         "role": "boss",
         "wave": 3
       }
@@ -890,8 +962,8 @@
     "episode": 3,
     "reward": "100301",
     "adv": {
-      "atk": -759,
-      "hp": -682
+      "atk": -709,
+      "hp": -572
     }
   },
   "100302": {
@@ -911,25 +983,25 @@
     "monsters": [
       {
         "id": "4021001",
-        "level": 22,
+        "level": 35,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4021004",
-        "level": 22,
+        "level": 35,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4021002",
-        "level": 22,
+        "level": 35,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4023002",
-        "level": 22,
+        "level": 35,
         "role": "boss",
         "wave": 3
       }
@@ -938,8 +1010,8 @@
     "episode": 3,
     "reward": "100302",
     "adv": {
-      "atk": -766,
-      "hp": -663
+      "atk": -709,
+      "hp": -572
     }
   },
   "100303": {
@@ -959,25 +1031,25 @@
     "monsters": [
       {
         "id": "4032001",
-        "level": 23,
+        "level": 36,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4031004",
-        "level": 23,
+        "level": 36,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4031003",
-        "level": 23,
+        "level": 36,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4033001",
-        "level": 23,
+        "level": 36,
         "role": "boss",
         "wave": 3
       }
@@ -986,8 +1058,8 @@
     "episode": 3,
     "reward": "100303",
     "adv": {
-      "atk": -740,
-      "hp": -646
+      "atk": -711,
+      "hp": -576
     }
   },
   "100304": {
@@ -1007,31 +1079,31 @@
     "monsters": [
       {
         "id": "4011011",
-        "level": 24,
+        "level": 36,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4011012",
-        "level": 24,
+        "level": 36,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4011013",
-        "level": 24,
+        "level": 36,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4011014",
-        "level": 24,
+        "level": 36,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4013011",
-        "level": 24,
+        "level": 36,
         "role": "boss",
         "wave": 3
       }
@@ -1040,8 +1112,8 @@
     "episode": 3,
     "reward": "100304",
     "adv": {
-      "atk": -739,
-      "hp": -630
+      "atk": -711,
+      "hp": -576
     }
   },
   "100305": {
@@ -1061,31 +1133,31 @@
     "monsters": [
       {
         "id": "4011013",
-        "level": 25,
+        "level": 37,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4011012",
-        "level": 25,
+        "level": 37,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4011011",
-        "level": 25,
+        "level": 37,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4011014",
-        "level": 25,
+        "level": 37,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4013012",
-        "level": 25,
+        "level": 37,
         "role": "boss",
         "wave": 3
       }
@@ -1094,9 +1166,8 @@
     "episode": 3,
     "reward": "100305",
     "adv": {
-      "atk": -737,
-      "def": 4,
-      "hp": -616
+      "atk": -714,
+      "hp": -575
     }
   },
   "100306": {
@@ -1116,25 +1187,25 @@
     "monsters": [
       {
         "id": "4021001",
-        "level": 27,
+        "level": 37,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4021002",
-        "level": 27,
+        "level": 37,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4021004",
-        "level": 27,
+        "level": 37,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4023001",
-        "level": 27,
+        "level": 37,
         "role": "boss",
         "wave": 3
       }
@@ -1143,8 +1214,8 @@
     "episode": 3,
     "reward": "100306",
     "adv": {
-      "atk": -741,
-      "hp": -591
+      "atk": -714,
+      "hp": -575
     }
   },
   "100308": {
@@ -1164,31 +1235,31 @@
     "monsters": [
       {
         "id": "4041002",
-        "level": 28,
+        "level": 38,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041004",
-        "level": 28,
+        "level": 38,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041001",
-        "level": 28,
+        "level": 38,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4041003",
-        "level": 28,
+        "level": 38,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4043002",
-        "level": 28,
+        "level": 38,
         "role": "boss",
         "wave": 3
       }
@@ -1197,7 +1268,7 @@
     "episode": 3,
     "reward": "100308",
     "adv": {
-      "atk": -738,
+      "atk": -716,
       "hp": -579
     }
   },
@@ -1218,31 +1289,31 @@
     "monsters": [
       {
         "id": "4041001",
-        "level": 29,
+        "level": 39,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041003",
-        "level": 29,
+        "level": 39,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041004",
-        "level": 29,
+        "level": 39,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4043001",
-        "level": 29,
+        "level": 39,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4041002",
-        "level": 29,
+        "level": 39,
         "role": "add",
         "wave": 3
       }
@@ -1251,8 +1322,8 @@
     "episode": 3,
     "reward": "100309",
     "adv": {
-      "atk": -732,
-      "hp": -568
+      "atk": -718,
+      "hp": -577
     }
   },
   "100310": {
@@ -1272,31 +1343,31 @@
     "monsters": [
       {
         "id": "4041002",
-        "level": 29,
+        "level": 39,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041003",
-        "level": 29,
+        "level": 39,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041001",
-        "level": 29,
+        "level": 39,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4042002",
-        "level": 29,
+        "level": 39,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "404400103",
-        "level": 29,
+        "level": 39,
         "role": "boss",
         "wave": 3
       }
@@ -1305,8 +1376,8 @@
     "episode": 3,
     "reward": "100310",
     "adv": {
-      "atk": -732,
-      "hp": -568
+      "atk": -718,
+      "hp": -577
     }
   },
   "100311": {
@@ -1326,26 +1397,26 @@
     "monsters": [
       {
         "id": "4012012",
-        "level": 30,
+        "level": 40,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4112011",
-        "level": 30,
+        "level": 40,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "401400103",
-        "level": 30,
+        "level": 40,
         "hpLines": 20,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4111013",
-        "level": 30,
+        "level": 40,
         "hpLines": 20,
         "role": "add",
         "wave": 3
@@ -1355,8 +1426,8 @@
     "episode": 3,
     "reward": "100311",
     "adv": {
-      "atk": -701,
-      "hp": -574
+      "atk": -715,
+      "hp": -524
     }
   },
   "100312": {
@@ -1376,19 +1447,19 @@
     "monsters": [
       {
         "id": "4011013",
-        "level": 30,
+        "level": 40,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4011012",
-        "level": 30,
+        "level": 40,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4500005",
-        "level": 30,
+        "level": 40,
         "role": "boss",
         "wave": 2
       }
@@ -1397,8 +1468,8 @@
     "episode": 3,
     "reward": "100312",
     "adv": {
-      "atk": -701,
-      "hp": -574
+      "atk": -715,
+      "hp": -524
     }
   },
   "100401": {
@@ -1418,25 +1489,25 @@
     "monsters": [
       {
         "id": "4002011",
-        "level": 30,
+        "level": 40,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4001012",
-        "level": 30,
+        "level": 40,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001022",
-        "level": 30,
+        "level": 40,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4003012",
-        "level": 30,
+        "level": 40,
         "role": "boss",
         "wave": 3
       }
@@ -1445,8 +1516,8 @@
     "episode": 4,
     "reward": "100401",
     "adv": {
-      "atk": -701,
-      "hp": -574
+      "atk": -715,
+      "hp": -524
     }
   },
   "100402": {
@@ -1466,31 +1537,31 @@
     "monsters": [
       {
         "id": "4001012",
-        "level": 31,
+        "level": 41,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001022",
-        "level": 31,
+        "level": 41,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001021",
-        "level": 31,
+        "level": 41,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4002012",
-        "level": 31,
+        "level": 41,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4003022",
-        "level": 31,
+        "level": 41,
         "role": "boss",
         "wave": 3
       }
@@ -1499,8 +1570,8 @@
     "episode": 4,
     "reward": "100402",
     "adv": {
-      "atk": -705,
-      "hp": -564
+      "atk": -698,
+      "hp": -600
     }
   },
   "100403": {
@@ -1520,31 +1591,31 @@
     "monsters": [
       {
         "id": "4001021",
-        "level": 31,
+        "level": 41,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001022",
-        "level": 31,
+        "level": 41,
         "role": "add",
         "wave": 1
       },
       {
         "id": "451000604",
-        "level": 31,
+        "level": 41,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4001024",
-        "level": 31,
+        "level": 41,
         "role": "add",
         "wave": 2
       },
       {
         "id": "450000004",
-        "level": 31,
+        "level": 41,
         "role": "boss",
         "wave": 3
       }
@@ -1553,8 +1624,8 @@
     "episode": 4,
     "reward": "100403",
     "adv": {
-      "atk": -705,
-      "hp": -564
+      "atk": -698,
+      "hp": -600
     }
   },
   "100404": {
@@ -1574,31 +1645,31 @@
     "monsters": [
       {
         "id": "4001023",
-        "level": 32,
+        "level": 42,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001024",
-        "level": 32,
+        "level": 42,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4002021",
-        "level": 32,
+        "level": 42,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "451000604",
-        "level": 32,
+        "level": 42,
         "role": "add",
         "wave": 3
       },
       {
         "id": "450000004",
-        "level": 32,
+        "level": 42,
         "role": "boss",
         "wave": 3
       }
@@ -1607,8 +1678,8 @@
     "episode": 4,
     "reward": "100404",
     "adv": {
-      "atk": -708,
-      "hp": -570
+      "atk": -697,
+      "hp": -584
     }
   },
   "100405": {
@@ -1628,31 +1699,31 @@
     "monsters": [
       {
         "id": "4001022",
-        "level": 32,
+        "level": 42,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001024",
-        "level": 32,
+        "level": 42,
         "role": "add",
         "wave": 1
       },
       {
         "id": "451000604",
-        "level": 32,
+        "level": 42,
         "role": "add",
         "wave": 2
       },
       {
         "id": "451000004",
-        "level": 32,
+        "level": 42,
         "role": "add",
         "wave": 2
       },
       {
         "id": "450000704",
-        "level": 32,
+        "level": 42,
         "role": "boss",
         "wave": 3
       }
@@ -1661,8 +1732,8 @@
     "episode": 4,
     "reward": "100405",
     "adv": {
-      "atk": -708,
-      "hp": -570
+      "atk": -697,
+      "hp": -584
     }
   },
   "100407": {
@@ -1682,25 +1753,25 @@
     "monsters": [
       {
         "id": "4051002",
-        "level": 33,
+        "level": 43,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4051003",
-        "level": 33,
+        "level": 43,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4052001",
-        "level": 33,
+        "level": 43,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4053002",
-        "level": 33,
+        "level": 43,
         "role": "boss",
         "wave": 3
       }
@@ -1709,7 +1780,8 @@
     "episode": 4,
     "reward": "100407",
     "adv": {
-      "atk": -709,
+      "atk": -695,
+      "def": -2,
       "hp": -568
     }
   },
@@ -1730,31 +1802,31 @@
     "monsters": [
       {
         "id": "4051001",
-        "level": 33,
+        "level": 43,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4051004",
-        "level": 33,
+        "level": 43,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4051002",
-        "level": 33,
+        "level": 43,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4052002",
-        "level": 33,
+        "level": 43,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "451000404",
-        "level": 33,
+        "level": 43,
         "role": "boss",
         "wave": 3
       }
@@ -1763,7 +1835,8 @@
     "episode": 4,
     "reward": "100408",
     "adv": {
-      "atk": -709,
+      "atk": -695,
+      "def": -2,
       "hp": -568
     }
   },
@@ -1784,31 +1857,31 @@
     "monsters": [
       {
         "id": "4051002",
-        "level": 34,
+        "level": 44,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4051003",
-        "level": 34,
+        "level": 44,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4051001",
-        "level": 34,
+        "level": 44,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4052001",
-        "level": 34,
+        "level": 44,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4053002",
-        "level": 34,
+        "level": 44,
         "role": "boss",
         "wave": 3
       }
@@ -1817,8 +1890,8 @@
     "episode": 4,
     "reward": "100409",
     "adv": {
-      "atk": -711,
-      "hp": -573
+      "atk": -692,
+      "hp": -554
     }
   },
   "100410": {
@@ -1838,7 +1911,7 @@
     "monsters": [
       {
         "id": "450000404",
-        "level": 34,
+        "level": 44,
         "role": "boss"
       }
     ],
@@ -1846,8 +1919,8 @@
     "episode": 4,
     "reward": "100410",
     "adv": {
-      "atk": -711,
-      "hp": -573
+      "atk": -692,
+      "hp": -554
     }
   },
   "100411": {
@@ -1867,25 +1940,25 @@
     "monsters": [
       {
         "id": "4152002",
-        "level": 35,
+        "level": 45,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4051002",
-        "level": 35,
+        "level": 45,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4051003",
-        "level": 35,
+        "level": 45,
         "role": "add",
         "wave": 1
       },
       {
         "id": "400400104",
-        "level": 35,
+        "level": 45,
         "hpLines": 20,
         "role": "boss",
         "wave": 2
@@ -1895,8 +1968,8 @@
     "episode": 4,
     "reward": "100411",
     "adv": {
-      "atk": -709,
-      "hp": -572
+      "atk": -684,
+      "hp": -539
     }
   },
   "100501": {
@@ -1916,25 +1989,25 @@
     "monsters": [
       {
         "id": "4002021",
-        "level": 35,
+        "level": 45,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4001024",
-        "level": 35,
+        "level": 45,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001023",
-        "level": 35,
+        "level": 45,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4003021",
-        "level": 35,
+        "level": 45,
         "role": "boss",
         "wave": 3
       }
@@ -1943,8 +2016,8 @@
     "episode": 5,
     "reward": "100501",
     "adv": {
-      "atk": -709,
-      "hp": -572
+      "atk": -684,
+      "hp": -539
     }
   },
   "100502": {
@@ -1964,31 +2037,31 @@
     "monsters": [
       {
         "id": "4001023",
-        "level": 36,
+        "level": 46,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4002022",
-        "level": 36,
+        "level": 46,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4001021",
-        "level": 36,
+        "level": 46,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4001024",
-        "level": 36,
+        "level": 46,
         "role": "add",
         "wave": 2
       },
       {
         "id": "450000605",
-        "level": 36,
+        "level": 46,
         "role": "boss",
         "wave": 3
       }
@@ -1997,8 +2070,8 @@
     "episode": 5,
     "reward": "100502",
     "adv": {
-      "atk": -711,
-      "hp": -576
+      "atk": -694,
+      "hp": -559
     }
   },
   "100503": {
@@ -2018,31 +2091,31 @@
     "monsters": [
       {
         "id": "4001023",
-        "level": 36,
+        "level": 46,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4002022",
-        "level": 36,
+        "level": 46,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4001002",
-        "level": 36,
+        "level": 46,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4001004",
-        "level": 36,
+        "level": 46,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4003001",
-        "level": 36,
+        "level": 46,
         "role": "boss",
         "wave": 3
       }
@@ -2051,8 +2124,8 @@
     "episode": 5,
     "reward": "100503",
     "adv": {
-      "atk": -711,
-      "hp": -576
+      "atk": -694,
+      "hp": -559
     }
   },
   "100504": {
@@ -2072,25 +2145,25 @@
     "monsters": [
       {
         "id": "4001002",
-        "level": 37,
+        "level": 47,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001004",
-        "level": 37,
+        "level": 47,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4002002",
-        "level": 37,
+        "level": 47,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4003002",
-        "level": 37,
+        "level": 47,
         "role": "boss",
         "wave": 3
       }
@@ -2099,8 +2172,8 @@
     "episode": 5,
     "reward": "100504",
     "adv": {
-      "atk": -714,
-      "hp": -575
+      "atk": -691,
+      "hp": -545
     }
   },
   "100505": {
@@ -2120,31 +2193,31 @@
     "monsters": [
       {
         "id": "4002001",
-        "level": 37,
+        "level": 47,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4001002",
-        "level": 37,
+        "level": 47,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001001",
-        "level": 37,
+        "level": 47,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4001003",
-        "level": 37,
+        "level": 47,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4500005",
-        "level": 37,
+        "level": 47,
         "role": "boss",
         "wave": 3
       }
@@ -2153,8 +2226,8 @@
     "episode": 5,
     "reward": "100505",
     "adv": {
-      "atk": -714,
-      "hp": -575
+      "atk": -691,
+      "hp": -545
     }
   },
   "100507": {
@@ -2174,31 +2247,31 @@
     "monsters": [
       {
         "id": "4011031",
-        "level": 38,
+        "level": 48,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4011032",
-        "level": 38,
+        "level": 48,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4012031",
-        "level": 38,
+        "level": 48,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4013031",
-        "level": 38,
+        "level": 48,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4011033",
-        "level": 38,
+        "level": 48,
         "role": "add",
         "wave": 3
       }
@@ -2207,8 +2280,8 @@
     "episode": 5,
     "reward": "100507",
     "adv": {
-      "atk": -716,
-      "hp": -579
+      "atk": -694,
+      "hp": -532
     }
   },
   "100508": {
@@ -2228,31 +2301,31 @@
     "monsters": [
       {
         "id": "4011031",
-        "level": 38,
+        "level": 48,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4011034",
-        "level": 38,
+        "level": 48,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4011032",
-        "level": 38,
+        "level": 48,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4012032",
-        "level": 38,
+        "level": 48,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4013032",
-        "level": 38,
+        "level": 48,
         "role": "boss",
         "wave": 3
       }
@@ -2261,8 +2334,8 @@
     "episode": 5,
     "reward": "100508",
     "adv": {
-      "atk": -716,
-      "hp": -579
+      "atk": -694,
+      "hp": -532
     }
   },
   "100509": {
@@ -2282,31 +2355,31 @@
     "monsters": [
       {
         "id": "4011032",
-        "level": 39,
+        "level": 49,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4011034",
-        "level": 39,
+        "level": 49,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4011031",
-        "level": 39,
+        "level": 49,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4012031",
-        "level": 39,
+        "level": 49,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4013031",
-        "level": 39,
+        "level": 49,
         "role": "boss",
         "wave": 3
       }
@@ -2315,8 +2388,8 @@
     "episode": 5,
     "reward": "100509",
     "adv": {
-      "atk": -718,
-      "hp": -577
+      "atk": -694,
+      "hp": -519
     }
   },
   "100510": {
@@ -2336,31 +2409,31 @@
     "monsters": [
       {
         "id": "4011031",
-        "level": 39,
+        "level": 49,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4011033",
-        "level": 39,
+        "level": 49,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4012032",
-        "level": 39,
+        "level": 49,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4011034",
-        "level": 39,
+        "level": 49,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4013032",
-        "level": 39,
+        "level": 49,
         "role": "boss",
         "wave": 3
       }
@@ -2369,8 +2442,8 @@
     "episode": 5,
     "reward": "100510",
     "adv": {
-      "atk": -718,
-      "hp": -577
+      "atk": -694,
+      "hp": -519
     }
   },
   "100511": {
@@ -2390,31 +2463,31 @@
     "monsters": [
       {
         "id": "4011031",
-        "level": 40,
+        "level": 50,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4012031",
-        "level": 40,
+        "level": 50,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4011032",
-        "level": 40,
+        "level": 50,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4112032",
-        "level": 40,
+        "level": 50,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "403400205",
-        "level": 40,
+        "level": 50,
         "hpLines": 20,
         "role": "boss",
         "wave": 3
@@ -2424,8 +2497,8 @@
     "episode": 5,
     "reward": "100511",
     "adv": {
-      "atk": -715,
-      "hp": -524
+      "atk": -697,
+      "hp": -520
     }
   },
   "100601": {
@@ -2445,31 +2518,31 @@
     "monsters": [
       {
         "id": "4001041",
-        "level": 40,
+        "level": 50,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001043",
-        "level": 40,
+        "level": 50,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001042",
-        "level": 40,
+        "level": 50,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4003041",
-        "level": 40,
+        "level": 50,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4001044",
-        "level": 40,
+        "level": 50,
         "role": "add",
         "wave": 3
       }
@@ -2499,37 +2572,37 @@
     "monsters": [
       {
         "id": "4001041",
-        "level": 41,
+        "level": 51,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041023",
-        "level": 41,
+        "level": 51,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4042022",
-        "level": 41,
+        "level": 51,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4001043",
-        "level": 41,
+        "level": 51,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4043021",
-        "level": 41,
+        "level": 51,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4041021",
-        "level": 41,
+        "level": 51,
         "role": "add",
         "wave": 3
       }
@@ -2559,43 +2632,43 @@
     "monsters": [
       {
         "id": "4001043",
-        "level": 41,
+        "level": 51,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001044",
-        "level": 41,
+        "level": 51,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001042",
-        "level": 41,
+        "level": 51,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4002041",
-        "level": 41,
+        "level": 51,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4041024",
-        "level": 41,
+        "level": 51,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4003042",
-        "level": 41,
+        "level": 51,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4041022",
-        "level": 41,
+        "level": 51,
         "role": "add",
         "wave": 3
       }
@@ -2625,31 +2698,31 @@
     "monsters": [
       {
         "id": "4041021",
-        "level": 42,
+        "level": 52,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041024",
-        "level": 42,
+        "level": 52,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4042022",
-        "level": 42,
+        "level": 52,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4041023",
-        "level": 42,
+        "level": 52,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4043022",
-        "level": 42,
+        "level": 52,
         "role": "boss",
         "wave": 3
       }
@@ -2679,37 +2752,37 @@
     "monsters": [
       {
         "id": "4041022",
-        "level": 42,
+        "level": 52,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001044",
-        "level": 42,
+        "level": 52,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041023",
-        "level": 42,
+        "level": 52,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4001042",
-        "level": 42,
+        "level": 52,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4043021",
-        "level": 42,
+        "level": 52,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4002043",
-        "level": 42,
+        "level": 52,
         "role": "add",
         "wave": 3
       }
@@ -2739,37 +2812,37 @@
     "monsters": [
       {
         "id": "4002041",
-        "level": 43,
+        "level": 53,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4001041",
-        "level": 43,
+        "level": 53,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001042",
-        "level": 43,
+        "level": 53,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001043",
-        "level": 43,
+        "level": 53,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4001044",
-        "level": 43,
+        "level": 53,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4003042",
-        "level": 43,
+        "level": 53,
         "role": "boss",
         "wave": 3
       }
@@ -2800,37 +2873,37 @@
     "monsters": [
       {
         "id": "4001043",
-        "level": 43,
+        "level": 53,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001042",
-        "level": 43,
+        "level": 53,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001041",
-        "level": 43,
+        "level": 53,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4001044",
-        "level": 43,
+        "level": 53,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4003041",
-        "level": 43,
+        "level": 53,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4002043",
-        "level": 43,
+        "level": 53,
         "role": "add",
         "wave": 3
       }
@@ -2861,37 +2934,37 @@
     "monsters": [
       {
         "id": "4002041",
-        "level": 44,
+        "level": 54,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4001041",
-        "level": 44,
+        "level": 54,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001044",
-        "level": 44,
+        "level": 54,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001043",
-        "level": 44,
+        "level": 54,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4001042",
-        "level": 44,
+        "level": 54,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4500008",
-        "level": 44,
+        "level": 54,
         "role": "boss",
         "wave": 3
       }
@@ -2921,7 +2994,7 @@
     "monsters": [
       {
         "id": "4004006",
-        "level": 44,
+        "level": 54,
         "hpLines": 30,
         "role": "boss"
       }
@@ -2951,19 +3024,19 @@
     "monsters": [
       {
         "id": "4001043",
-        "level": 45,
+        "level": 55,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4002042",
-        "level": 45,
+        "level": 55,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4004002",
-        "level": 45,
+        "level": 55,
         "hpLines": 30,
         "role": "boss",
         "wave": 2
@@ -2994,25 +3067,25 @@
     "monsters": [
       {
         "id": "4031011",
-        "level": 45,
+        "level": 55,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4031012",
-        "level": 45,
+        "level": 55,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4032011",
-        "level": 45,
+        "level": 55,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4033011",
-        "level": 45,
+        "level": 55,
         "role": "boss",
         "wave": 3
       }
@@ -3021,8 +3094,8 @@
     "episode": 7,
     "reward": "100701",
     "adv": {
-      "atk": -684,
-      "hp": -539
+      "atk": -699,
+      "hp": -482
     }
   },
   "100702": {
@@ -3042,25 +3115,25 @@
     "monsters": [
       {
         "id": "4001051",
-        "level": 46,
+        "level": 56,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001053",
-        "level": 46,
+        "level": 56,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4002051",
-        "level": 46,
+        "level": 56,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4003052",
-        "level": 46,
+        "level": 56,
         "role": "boss",
         "wave": 3
       }
@@ -3069,8 +3142,8 @@
     "episode": 7,
     "reward": "100702",
     "adv": {
-      "atk": -694,
-      "hp": -559
+      "atk": -702,
+      "hp": -499
     }
   },
   "100703": {
@@ -3090,25 +3163,25 @@
     "monsters": [
       {
         "id": "4001052",
-        "level": 46,
+        "level": 56,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001054",
-        "level": 46,
+        "level": 56,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001053",
-        "level": 46,
+        "level": 56,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4500009",
-        "level": 46,
+        "level": 56,
         "role": "boss",
         "wave": 3
       }
@@ -3117,8 +3190,8 @@
     "episode": 7,
     "reward": "100703",
     "adv": {
-      "atk": -694,
-      "hp": -559
+      "atk": -702,
+      "hp": -499
     }
   },
   "100704": {
@@ -3138,25 +3211,25 @@
     "monsters": [
       {
         "id": "4031011",
-        "level": 47,
+        "level": 56,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4031012",
-        "level": 47,
+        "level": 56,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4031014",
-        "level": 47,
+        "level": 56,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4033012",
-        "level": 47,
+        "level": 56,
         "role": "boss",
         "wave": 3
       }
@@ -3165,8 +3238,8 @@
     "episode": 7,
     "reward": "100704",
     "adv": {
-      "atk": -691,
-      "hp": -545
+      "atk": -702,
+      "hp": -499
     }
   },
   "100705": {
@@ -3186,25 +3259,25 @@
     "monsters": [
       {
         "id": "4031011",
-        "level": 47,
+        "level": 57,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4031012",
-        "level": 47,
+        "level": 57,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4033011",
-        "level": 47,
+        "level": 57,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4032014",
-        "level": 47,
+        "level": 57,
         "role": "add",
         "wave": 3
       }
@@ -3213,8 +3286,8 @@
     "episode": 7,
     "reward": "100705",
     "adv": {
-      "atk": -691,
-      "hp": -545
+      "atk": -705,
+      "hp": -489
     }
   },
   "100707": {
@@ -3234,25 +3307,25 @@
     "monsters": [
       {
         "id": "4001052",
-        "level": 48,
+        "level": 57,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001054",
-        "level": 48,
+        "level": 57,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4002051",
-        "level": 48,
+        "level": 57,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4103051",
-        "level": 48,
+        "level": 57,
         "role": "boss",
         "wave": 3
       }
@@ -3261,8 +3334,8 @@
     "episode": 7,
     "reward": "100707",
     "adv": {
-      "atk": -694,
-      "hp": -532
+      "atk": -705,
+      "hp": -489
     }
   },
   "100708": {
@@ -3282,25 +3355,25 @@
     "monsters": [
       {
         "id": "4001052",
-        "level": 48,
+        "level": 58,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001053",
-        "level": 48,
+        "level": 58,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4002051",
-        "level": 48,
+        "level": 58,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4500010",
-        "level": 48,
+        "level": 58,
         "role": "boss",
         "wave": 3
       }
@@ -3309,8 +3382,8 @@
     "episode": 7,
     "reward": "100708",
     "adv": {
-      "atk": -694,
-      "hp": -532
+      "atk": -708,
+      "hp": -491
     }
   },
   "100709": {
@@ -3330,31 +3403,31 @@
     "monsters": [
       {
         "id": "4001052",
-        "level": 49,
+        "level": 58,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001053",
-        "level": 49,
+        "level": 58,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001054",
-        "level": 49,
+        "level": 58,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4002052",
-        "level": 49,
+        "level": 58,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4500011",
-        "level": 49,
+        "level": 58,
         "role": "boss",
         "wave": 3
       }
@@ -3363,8 +3436,8 @@
     "episode": 7,
     "reward": "100709",
     "adv": {
-      "atk": -694,
-      "hp": -519
+      "atk": -708,
+      "hp": -491
     }
   },
   "100710": {
@@ -3384,7 +3457,7 @@
     "monsters": [
       {
         "id": "4004004",
-        "level": 49,
+        "level": 58,
         "hpLines": 30,
         "role": "boss"
       }
@@ -3393,8 +3466,8 @@
     "episode": 7,
     "reward": "100710",
     "adv": {
-      "atk": -694,
-      "hp": -519
+      "atk": -708,
+      "hp": -491
     }
   },
   "100711": {
@@ -3414,7 +3487,7 @@
     "monsters": [
       {
         "id": "4500012",
-        "level": 50,
+        "level": 58,
         "role": "boss"
       }
     ],
@@ -3443,31 +3516,31 @@
     "monsters": [
       {
         "id": "4031012",
-        "level": 51,
+        "level": 58,
         "role": "add",
         "wave": 1
       },
       {
         "id": "415101290",
-        "level": 51,
+        "level": 58,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4032012",
-        "level": 51,
+        "level": 58,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4031011",
-        "level": 51,
+        "level": 58,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4033011",
-        "level": 51,
+        "level": 58,
         "role": "boss",
         "wave": 3
       }
@@ -3498,43 +3571,43 @@
     "monsters": [
       {
         "id": "4032011",
-        "level": 51,
+        "level": 58,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "415101391",
-        "level": 51,
+        "level": 58,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001002",
-        "level": 51,
+        "level": 58,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4001001",
-        "level": 51,
+        "level": 58,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4003001",
-        "level": 51,
+        "level": 58,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4001003",
-        "level": 51,
+        "level": 58,
         "role": "add",
         "wave": 3
       },
       {
         "id": "4001004",
-        "level": 51,
+        "level": 58,
         "role": "add",
         "wave": 3
       }
@@ -3565,31 +3638,31 @@
     "monsters": [
       {
         "id": "4031011",
-        "level": 51,
+        "level": 58,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4031012",
-        "level": 51,
+        "level": 58,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4031014",
-        "level": 51,
+        "level": 58,
         "role": "add",
         "wave": 2
       },
       {
         "id": "415101192",
-        "level": 51,
+        "level": 58,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4033012",
-        "level": 51,
+        "level": 58,
         "role": "boss",
         "wave": 3
       }
@@ -3620,37 +3693,37 @@
     "monsters": [
       {
         "id": "4001002",
-        "level": 52,
+        "level": 58,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4002002",
-        "level": 52,
+        "level": 58,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "415101290",
-        "level": 52,
+        "level": 58,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4031011",
-        "level": 52,
+        "level": 58,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4003002",
-        "level": 52,
+        "level": 58,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4001004",
-        "level": 52,
+        "level": 58,
         "role": "add",
         "wave": 3
       }
@@ -3681,45 +3754,45 @@
     "monsters": [
       {
         "id": "4001002",
-        "level": 52,
+        "level": 58,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4002002",
-        "level": 52,
+        "level": 58,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "415101391",
-        "level": 52,
+        "level": 58,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4001001",
-        "level": 52,
+        "level": 58,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4104007",
-        "level": 52,
+        "level": 58,
         "hpLines": 30,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4004007",
-        "level": 52,
+        "level": 58,
         "hpLines": 30,
         "role": "add",
         "wave": 3
       },
       {
         "id": "4251015",
-        "level": 52,
+        "level": 58,
         "hpLines": 30,
         "role": "add",
         "wave": 3
@@ -3751,25 +3824,25 @@
     "monsters": [
       {
         "id": "4011041",
-        "level": 53,
+        "level": 59,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4011044",
-        "level": 53,
+        "level": 59,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4012041",
-        "level": 53,
+        "level": 59,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4013042",
-        "level": 53,
+        "level": 59,
         "role": "boss",
         "wave": 3
       }
@@ -3800,31 +3873,31 @@
     "monsters": [
       {
         "id": "4011041",
-        "level": 53,
+        "level": 59,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4011042",
-        "level": 53,
+        "level": 59,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4011044",
-        "level": 53,
+        "level": 59,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4011043",
-        "level": 53,
+        "level": 59,
         "role": "add",
         "wave": 3
       },
       {
         "id": "4013041",
-        "level": 53,
+        "level": 59,
         "role": "boss",
         "wave": 4
       }
@@ -3855,31 +3928,31 @@
     "monsters": [
       {
         "id": "4012042",
-        "level": 54,
+        "level": 59,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4011044",
-        "level": 54,
+        "level": 59,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4012041",
-        "level": 54,
+        "level": 59,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4013042",
-        "level": 54,
+        "level": 59,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4011043",
-        "level": 54,
+        "level": 59,
         "role": "add",
         "wave": 3
       }
@@ -3911,7 +3984,7 @@
     "monsters": [
       {
         "id": "4004006",
-        "level": 54,
+        "level": 60,
         "hpLines": 30,
         "role": "boss"
       }
@@ -3943,19 +4016,19 @@
     "monsters": [
       {
         "id": "4012042",
-        "level": 55,
+        "level": 60,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4011044",
-        "level": 55,
+        "level": 60,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4014002",
-        "level": 55,
+        "level": 60,
         "hpLines": 30,
         "role": "boss",
         "wave": 2
@@ -3987,31 +4060,31 @@
     "monsters": [
       {
         "id": "4001031",
-        "level": 55,
+        "level": 60,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4002031",
-        "level": 55,
+        "level": 60,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4001033",
-        "level": 55,
+        "level": 60,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4003032",
-        "level": 55,
+        "level": 60,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4001034",
-        "level": 55,
+        "level": 60,
         "role": "add",
         "wave": 3
       }
@@ -4042,31 +4115,31 @@
     "monsters": [
       {
         "id": "4061004",
-        "level": 56,
+        "level": 60,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4061001",
-        "level": 56,
+        "level": 60,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4062001",
-        "level": 56,
+        "level": 60,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4063001",
-        "level": 56,
+        "level": 60,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4061003",
-        "level": 56,
+        "level": 60,
         "role": "add",
         "wave": 3
       }
@@ -4097,43 +4170,43 @@
     "monsters": [
       {
         "id": "4001032",
-        "level": 56,
+        "level": 60,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4061001",
-        "level": 56,
+        "level": 60,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001033",
-        "level": 56,
+        "level": 60,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4002031",
-        "level": 56,
+        "level": 60,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4061004",
-        "level": 56,
+        "level": 60,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4003031",
-        "level": 56,
+        "level": 60,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4001034",
-        "level": 56,
+        "level": 60,
         "role": "add",
         "wave": 3
       }
@@ -4164,31 +4237,31 @@
     "monsters": [
       {
         "id": "4061004",
-        "level": 57,
+        "level": 61,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001032",
-        "level": 57,
+        "level": 61,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4001033",
-        "level": 57,
+        "level": 61,
         "role": "add",
         "wave": 3
       },
       {
         "id": "4062001",
-        "level": 57,
+        "level": 61,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4004009",
-        "level": 57,
+        "level": 61,
         "role": "boss",
         "wave": 4
       }
@@ -4219,25 +4292,25 @@
     "monsters": [
       {
         "id": "4001032",
-        "level": 57,
+        "level": 61,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001033",
-        "level": 57,
+        "level": 61,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001031",
-        "level": 57,
+        "level": 61,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4004008",
-        "level": 57,
+        "level": 61,
         "role": "boss",
         "wave": 3
       }
@@ -4268,31 +4341,31 @@
     "monsters": [
       {
         "id": "4021011",
-        "level": 58,
+        "level": 61,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4021012",
-        "level": 58,
+        "level": 61,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4022011",
-        "level": 58,
+        "level": 61,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4021014",
-        "level": 58,
+        "level": 61,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4023012",
-        "level": 58,
+        "level": 61,
         "role": "boss",
         "wave": 3
       }
@@ -4323,37 +4396,37 @@
     "monsters": [
       {
         "id": "4021011",
-        "level": 58,
+        "level": 62,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4021002",
-        "level": 58,
+        "level": 62,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4022001",
-        "level": 58,
+        "level": 62,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4021013",
-        "level": 58,
+        "level": 62,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4023011",
-        "level": 58,
+        "level": 62,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4021012",
-        "level": 58,
+        "level": 62,
         "role": "add",
         "wave": 3
       }
@@ -4384,43 +4457,43 @@
     "monsters": [
       {
         "id": "4022001",
-        "level": 59,
+        "level": 62,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4021012",
-        "level": 59,
+        "level": 62,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4061001",
-        "level": 59,
+        "level": 62,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4061004",
-        "level": 59,
+        "level": 62,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4061003",
-        "level": 59,
+        "level": 62,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4023002",
-        "level": 59,
+        "level": 62,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4061002",
-        "level": 59,
+        "level": 62,
         "role": "add",
         "wave": 3
       }
@@ -4451,31 +4524,31 @@
     "monsters": [
       {
         "id": "4031011",
-        "level": 59,
+        "level": 62,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4031012",
-        "level": 59,
+        "level": 62,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4012041",
-        "level": 59,
+        "level": 62,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4011043",
-        "level": 59,
+        "level": 62,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4033012",
-        "level": 59,
+        "level": 62,
         "role": "boss",
         "wave": 4
       }
@@ -4506,12 +4579,12 @@
     "monsters": [
       {
         "id": "4104011",
-        "level": 60,
+        "level": 63,
         "role": "boss"
       },
       {
         "id": "4004010",
-        "level": 60,
+        "level": 63,
         "role": "add"
       }
     ],
@@ -4541,7 +4614,7 @@
     "monsters": [
       {
         "id": "4004011",
-        "level": 60,
+        "level": 63,
         "hpLines": 30,
         "role": "boss"
       }
@@ -4572,25 +4645,25 @@
     "monsters": [
       {
         "id": "4031021",
-        "level": 61,
+        "level": 63,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4031022",
-        "level": 61,
+        "level": 63,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4032021",
-        "level": 61,
+        "level": 63,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4033021",
-        "level": 61,
+        "level": 63,
         "role": "boss",
         "wave": 3
       }
@@ -4599,9 +4672,8 @@
     "episode": 10,
     "reward": "101001",
     "adv": {
-      "atk": -698,
-      "def": -2,
-      "hp": -477,
+      "atk": -681,
+      "hp": -452,
       "spd": 280
     }
   },
@@ -4622,37 +4694,37 @@
     "monsters": [
       {
         "id": "4022022",
-        "level": 61,
+        "level": 63,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4021024",
-        "level": 61,
+        "level": 63,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4022021",
-        "level": 61,
+        "level": 63,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4021023",
-        "level": 61,
+        "level": 63,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4023021",
-        "level": 61,
+        "level": 63,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4021022",
-        "level": 61,
+        "level": 63,
         "role": "add",
         "wave": 3
       }
@@ -4661,9 +4733,8 @@
     "episode": 10,
     "reward": "101002",
     "adv": {
-      "atk": -698,
-      "def": -2,
-      "hp": -477,
+      "atk": -681,
+      "hp": -452,
       "spd": 280
     }
   },
@@ -4684,37 +4755,37 @@
     "monsters": [
       {
         "id": "4041031",
-        "level": 62,
+        "level": 63,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4042032",
-        "level": 62,
+        "level": 63,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4041032",
-        "level": 62,
+        "level": 63,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4041033",
-        "level": 62,
+        "level": 63,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4042031",
-        "level": 62,
+        "level": 63,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4043032",
-        "level": 62,
+        "level": 63,
         "role": "boss",
         "wave": 4
       }
@@ -4723,8 +4794,8 @@
     "episode": 10,
     "reward": "101003",
     "adv": {
-      "atk": -689,
-      "hp": -464,
+      "atk": -681,
+      "hp": -452,
       "spd": 280
     }
   },
@@ -4745,31 +4816,31 @@
     "monsters": [
       {
         "id": "4031021",
-        "level": 62,
+        "level": 64,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041033",
-        "level": 62,
+        "level": 64,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041032",
-        "level": 62,
+        "level": 64,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4043031",
-        "level": 62,
+        "level": 64,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4041034",
-        "level": 62,
+        "level": 64,
         "role": "add",
         "wave": 3
       }
@@ -4778,8 +4849,8 @@
     "episode": 10,
     "reward": "101004",
     "adv": {
-      "atk": -689,
-      "hp": -464,
+      "atk": -653,
+      "hp": -440,
       "spd": 280
     }
   },
@@ -4800,37 +4871,37 @@
     "monsters": [
       {
         "id": "4022022",
-        "level": 62,
+        "level": 64,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4031022",
-        "level": 62,
+        "level": 64,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4021021",
-        "level": 62,
+        "level": 64,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4032022",
-        "level": 62,
+        "level": 64,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4023022",
-        "level": 62,
+        "level": 64,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "4031024",
-        "level": 62,
+        "level": 64,
         "role": "add",
         "wave": 3
       }
@@ -4839,8 +4910,8 @@
     "episode": 10,
     "reward": "101005",
     "adv": {
-      "atk": -689,
-      "hp": -464,
+      "atk": -653,
+      "hp": -440,
       "spd": 280
     }
   },
@@ -4861,19 +4932,19 @@
     "monsters": [
       {
         "id": "4041032",
-        "level": 63,
+        "level": 64,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041034",
-        "level": 63,
+        "level": 64,
         "role": "add",
         "wave": 1
       },
       {
         "id": "400400710",
-        "level": 63,
+        "level": 64,
         "role": "boss",
         "wave": 2
       }
@@ -4882,8 +4953,8 @@
     "episode": 10,
     "reward": "101007",
     "adv": {
-      "atk": -681,
-      "hp": -452,
+      "atk": -653,
+      "hp": -440,
       "spd": 280
     }
   },
@@ -4904,37 +4975,37 @@
     "monsters": [
       {
         "id": "4042031",
-        "level": 64,
+        "level": 65,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4041033",
-        "level": 64,
+        "level": 65,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041032",
-        "level": 64,
+        "level": 65,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4041034",
-        "level": 64,
+        "level": 65,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4042032",
-        "level": 64,
+        "level": 65,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "450000510",
-        "level": 64,
+        "level": 65,
         "role": "boss",
         "wave": 3
       }
@@ -4943,8 +5014,9 @@
     "episode": 10,
     "reward": "101009",
     "adv": {
-      "atk": -653,
-      "hp": -440,
+      "atk": -625,
+      "def": -2,
+      "hp": -428,
       "spd": 280
     }
   },
@@ -4965,31 +5037,31 @@
     "monsters": [
       {
         "id": "4041033",
-        "level": 64,
+        "level": 65,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4042032",
-        "level": 64,
+        "level": 65,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4041034",
-        "level": 64,
+        "level": 65,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4042031",
-        "level": 64,
+        "level": 65,
         "role": "boss",
         "wave": 3
       },
       {
         "id": "450000710",
-        "level": 64,
+        "level": 65,
         "role": "boss",
         "wave": 4
       }
@@ -4998,8 +5070,9 @@
     "episode": 10,
     "reward": "101010",
     "adv": {
-      "atk": -653,
-      "hp": -440,
+      "atk": -625,
+      "def": -2,
+      "hp": -428,
       "spd": 280
     }
   },
@@ -10692,7 +10765,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "122101",
     "adv": {
@@ -10745,7 +10818,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "122102",
     "adv": {
@@ -10798,7 +10871,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "122103",
     "adv": {
@@ -10851,7 +10924,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "122104",
     "adv": {
@@ -10897,7 +10970,7 @@
         "wave": 2
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "122105",
     "adv": {
@@ -10957,7 +11030,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "122107",
     "adv": {
@@ -11010,7 +11083,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "122108",
     "adv": {
@@ -11062,7 +11135,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "122109",
     "adv": {
@@ -11129,7 +11202,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "122110",
     "adv": {
@@ -11189,7 +11262,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "122111",
     "adv": {
@@ -11248,7 +11321,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "123101",
     "adv": {
@@ -11309,7 +11382,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "123102",
     "adv": {
@@ -11377,7 +11450,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "123103",
     "adv": {
@@ -11438,7 +11511,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "123104",
     "adv": {
@@ -11470,7 +11543,7 @@
         "role": "boss"
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "123105",
     "adv": {
@@ -11530,7 +11603,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "123107",
     "adv": {
@@ -11583,7 +11656,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "123108",
     "adv": {
@@ -11635,7 +11708,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "123109",
     "adv": {
@@ -11695,7 +11768,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "123110",
     "adv": {
@@ -11726,7 +11799,7 @@
         "role": "boss"
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "123111",
     "adv": {
@@ -11785,7 +11858,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "124101",
     "adv": {
@@ -11839,7 +11912,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "124102",
     "adv": {
@@ -11907,7 +11980,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "124103",
     "adv": {
@@ -11968,7 +12041,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "124104",
     "adv": {
@@ -12022,7 +12095,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "124106",
     "adv": {
@@ -12081,7 +12154,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "124107",
     "adv": {
@@ -12147,7 +12220,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "124108",
     "adv": {
@@ -12207,7 +12280,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "124109",
     "adv": {
@@ -12260,7 +12333,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "124110",
     "adv": {
@@ -12291,7 +12364,7 @@
         "role": "boss"
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "124111",
     "adv": {
@@ -12344,7 +12417,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "125101",
     "adv": {
@@ -12405,7 +12478,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "125102",
     "adv": {
@@ -12458,7 +12531,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "125103",
     "adv": {
@@ -12518,7 +12591,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "125104",
     "adv": {
@@ -12571,7 +12644,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "125105",
     "adv": {
@@ -12631,7 +12704,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "125107",
     "adv": {
@@ -12699,7 +12772,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "125108",
     "adv": {
@@ -12766,7 +12839,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "125109",
     "adv": {
@@ -12841,7 +12914,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "125110",
     "adv": {
@@ -12872,7 +12945,7 @@
         "role": "boss"
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "125111",
     "adv": {
@@ -12931,7 +13004,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "126101",
     "adv": {
@@ -12991,7 +13064,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "126102",
     "adv": {
@@ -13051,7 +13124,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "126103",
     "adv": {
@@ -13111,7 +13184,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "126104",
     "adv": {
@@ -13172,7 +13245,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "126105",
     "adv": {
@@ -13233,7 +13306,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "126108",
     "adv": {
@@ -13300,7 +13373,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "126109",
     "adv": {
@@ -13374,7 +13447,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "126110",
     "adv": {
@@ -13434,7 +13507,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "126111",
     "adv": {
@@ -13471,7 +13544,7 @@
         "role": "boss"
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "126112",
     "adv": {
@@ -13508,7 +13581,7 @@
         "role": "boss"
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "126113",
     "adv": {
@@ -16406,7 +16479,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "127101",
     "adv": {
@@ -16460,7 +16533,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "127102",
     "adv": {
@@ -16513,7 +16586,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "127103",
     "adv": {
@@ -16566,7 +16639,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "127104",
     "adv": {
@@ -16619,7 +16692,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "127105",
     "adv": {
@@ -16679,7 +16752,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "127106",
     "adv": {
@@ -16733,7 +16806,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "127107",
     "adv": {
@@ -16786,7 +16859,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "127108",
     "adv": {
@@ -16854,7 +16927,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "127109",
     "adv": {
@@ -16915,7 +16988,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 6,
     "reward": "127110",
     "adv": {
@@ -16974,7 +17047,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "128101",
     "adv": {
@@ -17034,7 +17107,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "128102",
     "adv": {
@@ -17101,7 +17174,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "128103",
     "adv": {
@@ -17162,7 +17235,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "128104",
     "adv": {
@@ -17194,7 +17267,7 @@
         "role": "boss"
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "128105",
     "adv": {
@@ -17255,7 +17328,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "128106",
     "adv": {
@@ -17309,7 +17382,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "128107",
     "adv": {
@@ -17361,7 +17434,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "128108",
     "adv": {
@@ -17421,7 +17494,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "128109",
     "adv": {
@@ -17481,7 +17554,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 7,
     "reward": "128110",
     "adv": {
@@ -17540,7 +17613,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "129101",
     "adv": {
@@ -17593,7 +17666,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "129102",
     "adv": {
@@ -17660,7 +17733,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "129103",
     "adv": {
@@ -17720,7 +17793,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "129104",
     "adv": {
@@ -17773,7 +17846,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "129105",
     "adv": {
@@ -17833,7 +17906,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "129106",
     "adv": {
@@ -17900,7 +17973,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "129107",
     "adv": {
@@ -17959,7 +18032,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "129108",
     "adv": {
@@ -18012,7 +18085,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "129109",
     "adv": {
@@ -18043,7 +18116,7 @@
         "role": "boss"
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 8,
     "reward": "129110",
     "adv": {
@@ -18095,7 +18168,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "130101",
     "adv": {
@@ -18155,7 +18228,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "130102",
     "adv": {
@@ -18208,7 +18281,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "130103",
     "adv": {
@@ -18268,7 +18341,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "130104",
     "adv": {
@@ -18321,7 +18394,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "130105",
     "adv": {
@@ -18381,7 +18454,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "130106",
     "adv": {
@@ -18448,7 +18521,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "130107",
     "adv": {
@@ -18514,7 +18587,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "130108",
     "adv": {
@@ -18588,7 +18661,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "130109",
     "adv": {
@@ -18619,7 +18692,7 @@
         "role": "boss"
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 9,
     "reward": "130110",
     "adv": {
@@ -18678,7 +18751,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "131101",
     "adv": {
@@ -18738,7 +18811,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "131102",
     "adv": {
@@ -18798,7 +18871,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "131103",
     "adv": {
@@ -18858,7 +18931,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "131104",
     "adv": {
@@ -18918,7 +18991,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "131105",
     "adv": {
@@ -18978,7 +19051,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "131106",
     "adv": {
@@ -19045,7 +19118,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "131107",
     "adv": {
@@ -19118,7 +19191,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "131108",
     "adv": {
@@ -19178,7 +19251,7 @@
         "wave": 3
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "131109",
     "adv": {
@@ -19215,7 +19288,7 @@
         "role": "boss"
       }
     ],
-    "season": 3,
+    "season": 2,
     "episode": 10,
     "reward": "131110",
     "adv": {
@@ -19260,7 +19333,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "132101",
     "adv": {
@@ -19313,7 +19386,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "132102",
     "adv": {
@@ -19359,7 +19432,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "132103",
     "adv": {
@@ -19405,7 +19478,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "132105",
     "adv": {
@@ -19451,7 +19524,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "132106",
     "adv": {
@@ -19504,7 +19577,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "132107",
     "adv": {
@@ -19557,7 +19630,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "132108",
     "adv": {
@@ -19617,7 +19690,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "132110",
     "adv": {
@@ -19670,7 +19743,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "132112",
     "adv": {
@@ -19730,7 +19803,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "132113",
     "adv": {
@@ -19790,7 +19863,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "132114",
     "adv": {
@@ -19843,7 +19916,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "134102",
     "adv": {
@@ -19896,7 +19969,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "134103",
     "adv": {
@@ -19949,7 +20022,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "134104",
     "adv": {
@@ -19988,7 +20061,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "134105",
     "adv": {
@@ -20041,7 +20114,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "134107",
     "adv": {
@@ -20101,7 +20174,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "134108",
     "adv": {
@@ -20161,7 +20234,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "134109",
     "adv": {
@@ -20221,7 +20294,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "134110",
     "adv": {
@@ -20288,7 +20361,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "134111",
     "adv": {
@@ -20348,7 +20421,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "134112",
     "adv": {
@@ -20401,7 +20474,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "136102",
     "adv": {
@@ -20447,7 +20520,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "136103",
     "adv": {
@@ -20500,7 +20573,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "136104",
     "adv": {
@@ -20560,7 +20633,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "136105",
     "adv": {
@@ -20620,7 +20693,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "136107",
     "adv": {
@@ -20666,7 +20739,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "136108",
     "adv": {
@@ -20733,7 +20806,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "136110",
     "adv": {
@@ -20793,7 +20866,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "136111",
     "adv": {
@@ -20846,7 +20919,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "136113",
     "adv": {
@@ -20913,7 +20986,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "136114",
     "adv": {
@@ -20952,7 +21025,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "138101",
     "adv": {
@@ -20991,7 +21064,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "138102",
     "adv": {
@@ -21037,7 +21110,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "138103",
     "adv": {
@@ -21090,7 +21163,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "138104",
     "adv": {
@@ -21143,7 +21216,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "138105",
     "adv": {
@@ -21182,7 +21255,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "138106",
     "adv": {
@@ -21235,7 +21308,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "138107",
     "adv": {
@@ -21302,7 +21375,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "138108",
     "adv": {
@@ -21362,7 +21435,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "138112",
     "adv": {
@@ -21436,7 +21509,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "138113",
     "adv": {
@@ -21489,7 +21562,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "140101",
     "adv": {
@@ -21542,7 +21615,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "140102",
     "adv": {
@@ -21595,7 +21668,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "140104",
     "adv": {
@@ -21655,7 +21728,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "140105",
     "adv": {
@@ -21701,7 +21774,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "140107",
     "adv": {
@@ -21754,7 +21827,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "140108",
     "adv": {
@@ -21807,7 +21880,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "140110",
     "adv": {
@@ -21860,7 +21933,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "140111",
     "adv": {
@@ -21920,7 +21993,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "140112",
     "adv": {
@@ -21980,7 +22053,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "140113",
     "adv": {
@@ -22006,33 +22079,33 @@
     "monsters": [
       {
         "id": "4061021",
-        "level": 150,
+        "level": 145,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4061023",
-        "level": 150,
+        "level": 145,
         "hpLines": 10,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4063021",
-        "level": 150,
+        "level": 145,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "142101",
     "adv": {
       "atk": -535,
       "hp": -175,
-      "spd": 700
+      "spd": 630
     }
   },
   "130604": {
@@ -22052,33 +22125,33 @@
     "monsters": [
       {
         "id": "4061023",
-        "level": 151,
+        "level": 146,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4062021",
-        "level": 151,
+        "level": 146,
         "hpLines": 10,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4063022",
-        "level": 151,
+        "level": 146,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "142104",
     "adv": {
       "atk": -535,
       "hp": -175,
-      "spd": 700
+      "spd": 630
     }
   },
   "130605": {
@@ -22098,33 +22171,33 @@
     "monsters": [
       {
         "id": "4062021",
-        "level": 151,
+        "level": 146,
         "hpLines": 10,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4061021",
-        "level": 151,
+        "level": 146,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4186025",
-        "level": 151,
+        "level": 146,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "142105",
     "adv": {
       "atk": -535,
       "hp": -175,
-      "spd": 700
+      "spd": 630
     }
   },
   "130606": {
@@ -22144,40 +22217,40 @@
     "monsters": [
       {
         "id": "4001401",
-        "level": 152,
+        "level": 147,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001403",
-        "level": 152,
+        "level": 147,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001402",
-        "level": 152,
+        "level": 147,
         "hpLines": 10,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4003401",
-        "level": 152,
+        "level": 147,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "142106",
     "adv": {
       "atk": -535,
       "hp": -175,
-      "spd": 700
+      "spd": 630
     }
   },
   "130608": {
@@ -22197,40 +22270,40 @@
     "monsters": [
       {
         "id": "4061024",
-        "level": 152,
+        "level": 147,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4061023",
-        "level": 152,
+        "level": 147,
         "hpLines": 10,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4062022",
-        "level": 152,
+        "level": 147,
         "hpLines": 10,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4063021",
-        "level": 152,
+        "level": 147,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "142108",
     "adv": {
       "atk": -535,
       "hp": -175,
-      "spd": 700
+      "spd": 630
     }
   },
   "130609": {
@@ -22250,40 +22323,40 @@
     "monsters": [
       {
         "id": "4001401",
-        "level": 153,
+        "level": 148,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001404",
-        "level": 153,
+        "level": 148,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001403",
-        "level": 153,
+        "level": 148,
         "hpLines": 10,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4500294",
-        "level": 153,
+        "level": 148,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "142109",
     "adv": {
       "atk": -535,
       "hp": -175,
-      "spd": 700
+      "spd": 630
     }
   },
   "130610": {
@@ -22303,61 +22376,61 @@
     "monsters": [
       {
         "id": "4001404",
-        "level": 153,
+        "level": 148,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001401",
-        "level": 153,
+        "level": 148,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001402",
-        "level": 153,
+        "level": 148,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4001403",
-        "level": 153,
+        "level": 148,
         "hpLines": 10,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4500297",
-        "level": 153,
+        "level": 148,
         "hpLines": 10,
         "role": "add",
         "wave": 3
       },
       {
         "id": "4500298",
-        "level": 153,
+        "level": 148,
         "hpLines": 10,
         "role": "add",
         "wave": 3
       },
       {
         "id": "4500296",
-        "level": 153,
+        "level": 148,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "142110",
     "adv": {
       "atk": -535,
       "hp": -175,
-      "spd": 700
+      "spd": 630
     }
   },
   "130611": {
@@ -22377,40 +22450,40 @@
     "monsters": [
       {
         "id": "4041041",
-        "level": 153,
+        "level": 149,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041043",
-        "level": 153,
+        "level": 149,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4042042",
-        "level": 153,
+        "level": 149,
         "hpLines": 10,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4043042",
-        "level": 153,
+        "level": 149,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "142111",
     "adv": {
       "atk": -535,
       "hp": -175,
-      "spd": 700
+      "spd": 630
     }
   },
   "130612": {
@@ -22430,47 +22503,47 @@
     "monsters": [
       {
         "id": "4041042",
-        "level": 154,
+        "level": 149,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4041041",
-        "level": 154,
+        "level": 149,
         "hpLines": 10,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4042041",
-        "level": 154,
+        "level": 149,
         "hpLines": 10,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4041043",
-        "level": 154,
+        "level": 149,
         "hpLines": 10,
         "role": "add",
         "wave": 3
       },
       {
         "id": "4500295",
-        "level": 154,
+        "level": 149,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "142112",
     "adv": {
       "atk": -535,
       "hp": -175,
-      "spd": 700
+      "spd": 630
     }
   },
   "130614": {
@@ -22490,12 +22563,12 @@
     "monsters": [
       {
         "id": "4186025",
-        "level": 154,
+        "level": 150,
         "hpLines": 10,
         "role": "boss"
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "142114",
     "adv": {
@@ -22521,12 +22594,12 @@
     "monsters": [
       {
         "id": "4186026",
-        "level": 155,
+        "level": 150,
         "hpLines": 10,
         "role": "boss"
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "142115",
     "adv": {
@@ -22579,7 +22652,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "144102",
     "adv": {
@@ -22639,7 +22712,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "144103",
     "adv": {
@@ -22699,7 +22772,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "144105",
     "adv": {
@@ -22752,7 +22825,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "144106",
     "adv": {
@@ -22805,7 +22878,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "144108",
     "adv": {
@@ -22865,7 +22938,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "144109",
     "adv": {
@@ -22932,7 +23005,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "144110",
     "adv": {
@@ -22963,7 +23036,7 @@
         "role": "boss"
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "144111",
     "adv": {
@@ -22994,7 +23067,7 @@
         "role": "boss"
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "144113",
     "adv": {
@@ -23025,7 +23098,7 @@
         "role": "boss"
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "144115",
     "adv": {
@@ -23078,7 +23151,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "146101",
     "adv": {
@@ -23138,7 +23211,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "146103",
     "adv": {
@@ -23191,7 +23264,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "146104",
     "adv": {
@@ -23244,7 +23317,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "146105",
     "adv": {
@@ -23304,7 +23377,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "146108",
     "adv": {
@@ -23364,7 +23437,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "146109",
     "adv": {
@@ -23417,7 +23490,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "146110",
     "adv": {
@@ -23470,7 +23543,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "146111",
     "adv": {
@@ -23537,7 +23610,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "146112",
     "adv": {
@@ -23590,7 +23663,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "146113",
     "adv": {
@@ -23636,7 +23709,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "148101",
     "adv": {
@@ -23689,7 +23762,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "148102",
     "adv": {
@@ -23749,7 +23822,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "148103",
     "adv": {
@@ -23809,7 +23882,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "148104",
     "adv": {
@@ -23876,7 +23949,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "148105",
     "adv": {
@@ -23936,7 +24009,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "148108",
     "adv": {
@@ -23989,7 +24062,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "148109",
     "adv": {
@@ -24042,7 +24115,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "148110",
     "adv": {
@@ -24095,7 +24168,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "148112",
     "adv": {
@@ -24155,7 +24228,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "148114",
     "adv": {
@@ -24186,7 +24259,7 @@
         "role": "boss"
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "148116",
     "adv": {
@@ -24232,7 +24305,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "133101",
     "adv": {
@@ -24278,7 +24351,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "133102",
     "adv": {
@@ -24324,7 +24397,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "133103",
     "adv": {
@@ -24370,7 +24443,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "133104",
     "adv": {
@@ -24423,7 +24496,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "133105",
     "adv": {
@@ -24476,7 +24549,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "133106",
     "adv": {
@@ -24536,7 +24609,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "133107",
     "adv": {
@@ -24589,7 +24662,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "133108",
     "adv": {
@@ -24649,7 +24722,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "133109",
     "adv": {
@@ -24709,7 +24782,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 1,
     "reward": "133110",
     "adv": {
@@ -24762,7 +24835,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "135101",
     "adv": {
@@ -24815,7 +24888,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "135102",
     "adv": {
@@ -24854,7 +24927,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "135103",
     "adv": {
@@ -24893,7 +24966,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "135104",
     "adv": {
@@ -24946,7 +25019,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "135105",
     "adv": {
@@ -25006,7 +25079,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "135106",
     "adv": {
@@ -25066,7 +25139,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "135107",
     "adv": {
@@ -25126,7 +25199,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "135108",
     "adv": {
@@ -25193,7 +25266,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "135109",
     "adv": {
@@ -25253,7 +25326,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 2,
     "reward": "135110",
     "adv": {
@@ -25306,7 +25379,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "137101",
     "adv": {
@@ -25352,7 +25425,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "137102",
     "adv": {
@@ -25405,7 +25478,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "137103",
     "adv": {
@@ -25465,7 +25538,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "137104",
     "adv": {
@@ -25525,7 +25598,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "137105",
     "adv": {
@@ -25571,7 +25644,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "137106",
     "adv": {
@@ -25638,7 +25711,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "137107",
     "adv": {
@@ -25698,7 +25771,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "137108",
     "adv": {
@@ -25751,7 +25824,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "137109",
     "adv": {
@@ -25818,7 +25891,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 3,
     "reward": "137110",
     "adv": {
@@ -25857,7 +25930,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "139101",
     "adv": {
@@ -25896,7 +25969,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "139102",
     "adv": {
@@ -25942,7 +26015,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "139103",
     "adv": {
@@ -25995,7 +26068,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "139104",
     "adv": {
@@ -26048,7 +26121,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "139105",
     "adv": {
@@ -26087,7 +26160,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "139106",
     "adv": {
@@ -26140,7 +26213,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "139107",
     "adv": {
@@ -26207,7 +26280,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "139108",
     "adv": {
@@ -26267,7 +26340,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "139109",
     "adv": {
@@ -26341,7 +26414,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 4,
     "reward": "139110",
     "adv": {
@@ -26394,7 +26467,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "141101",
     "adv": {
@@ -26447,7 +26520,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "141102",
     "adv": {
@@ -26500,7 +26573,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "141103",
     "adv": {
@@ -26560,7 +26633,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "141104",
     "adv": {
@@ -26606,7 +26679,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "141105",
     "adv": {
@@ -26659,7 +26732,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "141106",
     "adv": {
@@ -26712,7 +26785,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "141107",
     "adv": {
@@ -26765,7 +26838,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "141108",
     "adv": {
@@ -26825,7 +26898,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "141109",
     "adv": {
@@ -26885,7 +26958,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 5,
     "reward": "141110",
     "adv": {
@@ -26911,27 +26984,27 @@
     "monsters": [
       {
         "id": "4161021",
-        "level": 170,
+        "level": 165,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4161023",
-        "level": 170,
+        "level": 165,
         "hpLines": 10,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4163021",
-        "level": 170,
+        "level": 165,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "143101",
     "adv": {
@@ -26957,27 +27030,27 @@
     "monsters": [
       {
         "id": "4161023",
-        "level": 170,
+        "level": 165,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4162021",
-        "level": 170,
+        "level": 165,
         "hpLines": 10,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4163022",
-        "level": 170,
+        "level": 165,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "143102",
     "adv": {
@@ -27003,27 +27076,27 @@
     "monsters": [
       {
         "id": "4162021",
-        "level": 171,
+        "level": 166,
         "hpLines": 10,
         "role": "boss",
         "wave": 1
       },
       {
         "id": "4161021",
-        "level": 171,
+        "level": 166,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4286025",
-        "level": 171,
+        "level": 166,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "143103",
     "adv": {
@@ -27049,34 +27122,34 @@
     "monsters": [
       {
         "id": "4101401",
-        "level": 171,
+        "level": 166,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4101403",
-        "level": 171,
+        "level": 166,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4101402",
-        "level": 171,
+        "level": 166,
         "hpLines": 10,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4103401",
-        "level": 171,
+        "level": 166,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "143104",
     "adv": {
@@ -27102,34 +27175,34 @@
     "monsters": [
       {
         "id": "4161024",
-        "level": 172,
+        "level": 167,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4161023",
-        "level": 172,
+        "level": 167,
         "hpLines": 10,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4162022",
-        "level": 172,
+        "level": 167,
         "hpLines": 10,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4163021",
-        "level": 172,
+        "level": 167,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "143105",
     "adv": {
@@ -27155,34 +27228,34 @@
     "monsters": [
       {
         "id": "4101401",
-        "level": 172,
+        "level": 167,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4101404",
-        "level": 172,
+        "level": 167,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4101403",
-        "level": 172,
+        "level": 167,
         "hpLines": 10,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4500299",
-        "level": 172,
+        "level": 167,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "143106",
     "adv": {
@@ -27208,55 +27281,55 @@
     "monsters": [
       {
         "id": "4101404",
-        "level": 173,
+        "level": 168,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4101401",
-        "level": 173,
+        "level": 168,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4101402",
-        "level": 173,
+        "level": 168,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4101403",
-        "level": 173,
+        "level": 168,
         "hpLines": 10,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4500302",
-        "level": 173,
+        "level": 168,
         "hpLines": 10,
         "role": "add",
         "wave": 3
       },
       {
         "id": "4500303",
-        "level": 173,
+        "level": 168,
         "hpLines": 10,
         "role": "add",
         "wave": 3
       },
       {
         "id": "4500301",
-        "level": 173,
+        "level": 168,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "143107",
     "adv": {
@@ -27282,34 +27355,34 @@
     "monsters": [
       {
         "id": "4141041",
-        "level": 173,
+        "level": 168,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4141043",
-        "level": 173,
+        "level": 168,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4142042",
-        "level": 173,
+        "level": 168,
         "hpLines": 10,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4143042",
-        "level": 173,
+        "level": 168,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "143108",
     "adv": {
@@ -27335,41 +27408,41 @@
     "monsters": [
       {
         "id": "4141042",
-        "level": 174,
+        "level": 169,
         "hpLines": 10,
         "role": "add",
         "wave": 1
       },
       {
         "id": "4141041",
-        "level": 174,
+        "level": 169,
         "hpLines": 10,
         "role": "add",
         "wave": 2
       },
       {
         "id": "4142041",
-        "level": 174,
+        "level": 169,
         "hpLines": 10,
         "role": "boss",
         "wave": 2
       },
       {
         "id": "4141043",
-        "level": 174,
+        "level": 169,
         "hpLines": 10,
         "role": "add",
         "wave": 3
       },
       {
         "id": "4500300",
-        "level": 174,
+        "level": 169,
         "hpLines": 10,
         "role": "boss",
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "143109",
     "adv": {
@@ -27395,12 +27468,12 @@
     "monsters": [
       {
         "id": "4286026",
-        "level": 175,
+        "level": 170,
         "hpLines": 10,
         "role": "boss"
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 6,
     "reward": "143110",
     "adv": {
@@ -27453,7 +27526,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "145101",
     "adv": {
@@ -27513,7 +27586,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "145102",
     "adv": {
@@ -27573,7 +27646,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "145103",
     "adv": {
@@ -27626,7 +27699,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "145104",
     "adv": {
@@ -27679,7 +27752,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "145105",
     "adv": {
@@ -27739,7 +27812,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "145106",
     "adv": {
@@ -27806,7 +27879,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "145107",
     "adv": {
@@ -27837,7 +27910,7 @@
         "role": "boss"
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "145108",
     "adv": {
@@ -27868,7 +27941,7 @@
         "role": "boss"
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "145109",
     "adv": {
@@ -27899,7 +27972,7 @@
         "role": "boss"
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 7,
     "reward": "145110",
     "adv": {
@@ -27952,7 +28025,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "147101",
     "adv": {
@@ -28012,7 +28085,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "147102",
     "adv": {
@@ -28065,7 +28138,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "147103",
     "adv": {
@@ -28118,7 +28191,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "147104",
     "adv": {
@@ -28178,7 +28251,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "147105",
     "adv": {
@@ -28238,7 +28311,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "147106",
     "adv": {
@@ -28291,7 +28364,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "147107",
     "adv": {
@@ -28344,7 +28417,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "147108",
     "adv": {
@@ -28411,7 +28484,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "147109",
     "adv": {
@@ -28464,7 +28537,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 8,
     "reward": "147110",
     "adv": {
@@ -28510,7 +28583,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "149101",
     "adv": {
@@ -28563,7 +28636,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "149102",
     "adv": {
@@ -28623,7 +28696,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "149103",
     "adv": {
@@ -28683,7 +28756,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "149104",
     "adv": {
@@ -28743,7 +28816,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "149105",
     "adv": {
@@ -28796,7 +28869,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "149106",
     "adv": {
@@ -28849,7 +28922,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "149107",
     "adv": {
@@ -28902,7 +28975,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "149108",
     "adv": {
@@ -28962,7 +29035,7 @@
         "wave": 3
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "149109",
     "adv": {
@@ -28993,7 +29066,7 @@
         "role": "boss"
       }
     ],
-    "season": 4,
+    "season": 3,
     "episode": 9,
     "reward": "149110",
     "adv": {
@@ -29046,7 +29119,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "150102",
     "adv": {
@@ -29127,7 +29200,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "150103",
     "adv": {
@@ -29180,7 +29253,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "150104",
     "adv": {
@@ -29240,7 +29313,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "150105",
     "adv": {
@@ -29307,7 +29380,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "150107",
     "adv": {
@@ -29360,7 +29433,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "150109",
     "adv": {
@@ -29413,7 +29486,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "150110",
     "adv": {
@@ -29466,7 +29539,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "150111",
     "adv": {
@@ -29526,7 +29599,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "150113",
     "adv": {
@@ -29572,7 +29645,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "152102",
     "adv": {
@@ -29618,7 +29691,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "152103",
     "adv": {
@@ -29678,7 +29751,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "152104",
     "adv": {
@@ -29738,7 +29811,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "152105",
     "adv": {
@@ -29798,7 +29871,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "152106",
     "adv": {
@@ -29858,7 +29931,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "152109",
     "adv": {
@@ -29911,7 +29984,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "152111",
     "adv": {
@@ -29971,7 +30044,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "152112",
     "adv": {
@@ -30031,7 +30104,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "152113",
     "adv": {
@@ -30091,7 +30164,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "152114",
     "adv": {
@@ -30151,7 +30224,7 @@
         "wave": 2
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "151101",
     "adv": {
@@ -30204,7 +30277,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "151102",
     "adv": {
@@ -30285,7 +30358,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "151103",
     "adv": {
@@ -30338,7 +30411,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "151104",
     "adv": {
@@ -30398,7 +30471,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "151105",
     "adv": {
@@ -30465,7 +30538,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "151106",
     "adv": {
@@ -30518,7 +30591,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "151107",
     "adv": {
@@ -30571,7 +30644,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "151108",
     "adv": {
@@ -30624,7 +30697,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "151109",
     "adv": {
@@ -30684,7 +30757,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 1,
     "reward": "151110",
     "adv": {
@@ -30730,7 +30803,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "153101",
     "adv": {
@@ -30776,7 +30849,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "153102",
     "adv": {
@@ -30836,7 +30909,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "153103",
     "adv": {
@@ -30896,7 +30969,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "153104",
     "adv": {
@@ -30956,7 +31029,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "153105",
     "adv": {
@@ -31016,7 +31089,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "153106",
     "adv": {
@@ -31069,7 +31142,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "153107",
     "adv": {
@@ -31129,7 +31202,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "153108",
     "adv": {
@@ -31182,7 +31255,7 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "153109",
     "adv": {
@@ -31242,13 +31315,2733 @@
         "wave": 3
       }
     ],
-    "season": 5,
+    "season": 4,
     "episode": 2,
     "reward": "153110",
     "adv": {
       "atk": -535,
       "hp": -175,
       "spd": 910
+    }
+  },
+  "200101": {
+    "mode": "normal",
+    "name": {
+      "en": "First Real Battle",
+      "jp": "初の実戦",
+      "kr": "첫 실전",
+      "zh": "初次实战"
+    },
+    "area": {
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
+    },
+    "monsters": [
+      {
+        "id": "404104101",
+        "level": 2,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "404304101",
+        "level": 2,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      }
+    ],
+    "season": 1,
+    "episode": 1,
+    "reward": "200101",
+    "adv": {
+      "atk": -666,
+      "hp": -542
+    }
+  },
+  "200102": {
+    "mode": "normal",
+    "name": {
+      "en": "Securing Parts (1)",
+      "jp": "部品確保（1）",
+      "kr": "부품 확보 (1)",
+      "zh": "确保零件（1）"
+    },
+    "area": {
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
+    },
+    "monsters": [
+      {
+        "id": "404104301",
+        "level": 3,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "404304201",
+        "level": 3,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      }
+    ],
+    "season": 1,
+    "episode": 1,
+    "reward": "200102",
+    "adv": {
+      "atk": -756,
+      "def": 18,
+      "hp": -616
+    }
+  },
+  "200103": {
+    "mode": "normal",
+    "name": {
+      "en": "Securing Parts (2)",
+      "jp": "部品確保（2）",
+      "kr": "부품 확보 (2)",
+      "zh": "确保零件（2）"
+    },
+    "area": {
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
+    },
+    "monsters": [
+      {
+        "id": "4041002",
+        "level": 4,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4041004",
+        "level": 4,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4043002",
+        "level": 4,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      }
+    ],
+    "season": 1,
+    "episode": 1,
+    "reward": "200103",
+    "adv": {
+      "atk": -801,
+      "hp": -647
+    }
+  },
+  "200104": {
+    "mode": "normal",
+    "name": {
+      "en": "What is Scientific Inheritance?",
+      "jp": "科学遺産とは？",
+      "kr": "과학 유산이란?",
+      "zh": "什么是科学遗产？"
+    },
+    "area": {
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
+    },
+    "monsters": [
+      {
+        "id": "404104401",
+        "level": 5,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "404304101",
+        "level": 5,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      }
+    ],
+    "season": 1,
+    "episode": 1,
+    "reward": "200104",
+    "adv": {
+      "atk": -829,
+      "hp": -665
+    }
+  },
+  "200105": {
+    "mode": "normal",
+    "name": {
+      "en": "Fixing the Circuit (1)",
+      "jp": "回路を直す（1）",
+      "kr": "회로 고치기 (1)",
+      "zh": "修复电路（1）"
+    },
+    "area": {
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
+    },
+    "monsters": [
+      {
+        "id": "4041001",
+        "level": 6,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4041003",
+        "level": 6,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4043001",
+        "level": 6,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4041004",
+        "level": 6,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      }
+    ],
+    "season": 1,
+    "episode": 1,
+    "reward": "200105",
+    "adv": {
+      "atk": -847,
+      "hp": -688
+    }
+  },
+  "200106": {
+    "mode": "normal",
+    "name": {
+      "en": "Fixing the Circuit (2)",
+      "jp": "回路を直す（2）",
+      "kr": "회로 고치기 (2)",
+      "zh": "修复电路（2）"
+    },
+    "area": {
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
+    },
+    "monsters": [
+      {
+        "id": "4041002",
+        "level": 7,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4041003",
+        "level": 7,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4043002",
+        "level": 7,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      }
+    ],
+    "season": 1,
+    "episode": 1,
+    "reward": "200106",
+    "adv": {
+      "atk": -861,
+      "def": 11,
+      "hp": -704
+    }
+  },
+  "200107": {
+    "mode": "normal",
+    "name": {
+      "en": "Competition with the Nightwatch",
+      "jp": "ナイトウォッチとの競争",
+      "kr": "나이트워치와의 경쟁",
+      "zh": "与骑士堡的竞争"
+    },
+    "area": {
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
+    },
+    "monsters": [
+      {
+        "id": "4001021",
+        "level": 8,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4001024",
+        "level": 8,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4003023",
+        "level": 8,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4001023",
+        "level": 8,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      }
+    ],
+    "season": 1,
+    "episode": 1,
+    "reward": "200107",
+    "adv": {
+      "atk": -870,
+      "hp": -714
+    }
+  },
+  "200108": {
+    "mode": "normal",
+    "name": {
+      "en": "Clash with a Role Model",
+      "jp": "ロールモデルとの対立",
+      "kr": "롤모델과의 대립",
+      "zh": "与榜样的对立"
+    },
+    "area": {
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
+    },
+    "monsters": [
+      {
+        "id": "4003802",
+        "level": 10,
+        "hpLines": 10,
+        "role": "boss"
+      },
+      {
+        "id": "4001024",
+        "level": 10,
+        "hpLines": 10,
+        "role": "add"
+      }
+    ],
+    "season": 1,
+    "episode": 1,
+    "reward": "200108",
+    "adv": {
+      "atk": -885,
+      "hp": -723
+    }
+  },
+  "200200": {
+    "mode": "normal",
+    "name": {
+      "en": "Restaurant Guests",
+      "jp": "食堂のお客様",
+      "kr": "식당의 손님들",
+      "zh": "餐厅的客人们"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "400180101",
+        "level": 10,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400180201",
+        "level": 10,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "410380101",
+        "level": 10,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "200200",
+    "adv": {
+      "atk": -885,
+      "hp": -723
+    }
+  },
+  "200201": {
+    "mode": "normal",
+    "name": {
+      "en": "Void Invasion",
+      "jp": "虚空の侵入",
+      "kr": "공허의 침입",
+      "zh": "虚空的入侵"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "400180101",
+        "level": 11,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400180201",
+        "level": 11,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400280101",
+        "level": 11,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "400380101",
+        "level": 11,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "200201",
+    "adv": {
+      "atk": -822,
+      "hp": -676
+    }
+  },
+  "200202": {
+    "mode": "normal",
+    "name": {
+      "en": "Find the Knights",
+      "jp": "騎士たちを探せ",
+      "kr": "기사들을 찾자",
+      "zh": "寻找骑士们"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "400280101",
+        "level": 11,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "400180101",
+        "level": 11,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400180201",
+        "level": 11,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "410380101",
+        "level": 11,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "200202",
+    "adv": {
+      "atk": -822,
+      "hp": -676
+    }
+  },
+  "200203": {
+    "mode": "normal",
+    "name": {
+      "en": "Knight Order Control (1)",
+      "jp": "騎士団の制御（1）",
+      "kr": "기사단의 통제 (1)",
+      "zh": "骑士团的管控（1）"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "4001021",
+        "level": 12,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4001024",
+        "level": 12,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4002021",
+        "level": 12,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4001022",
+        "level": 12,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4003022",
+        "level": 12,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "200203",
+    "adv": {
+      "atk": -827,
+      "hp": -680
+    }
+  },
+  "200204": {
+    "mode": "normal",
+    "name": {
+      "en": "Knight Order Control (2)",
+      "jp": "騎士団の制御（2）",
+      "kr": "기사단의 통제 (2)",
+      "zh": "骑士团的管控（2）"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "4001021",
+        "level": 13,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4001022",
+        "level": 13,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4001024",
+        "level": 13,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4002022",
+        "level": 13,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4003021",
+        "level": 13,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "200204",
+    "adv": {
+      "atk": -830,
+      "hp": -684
+    }
+  },
+  "200205": {
+    "mode": "normal",
+    "name": {
+      "en": "Street Mercenaries",
+      "jp": "街の傭兵たち",
+      "kr": "거리의 용병들",
+      "zh": "街上的佣兵们"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "4001021",
+        "level": 14,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4001024",
+        "level": 14,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4003803",
+        "level": 14,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4001803",
+        "level": 14,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4001804",
+        "level": 14,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "200205",
+    "adv": {
+      "atk": -833,
+      "def": 6,
+      "hp": -688
+    }
+  },
+  "200208": {
+    "mode": "normal",
+    "name": {
+      "en": "Purpose of Garrison",
+      "jp": "駐屯の目的",
+      "kr": "주둔의 목적",
+      "zh": "驻扎的目的"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "400180101",
+        "level": 16,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400180201",
+        "level": 16,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400280101",
+        "level": 16,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "400380101",
+        "level": 16,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "200208",
+    "adv": {
+      "atk": -761,
+      "hp": -689
+    }
+  },
+  "200209": {
+    "mode": "normal",
+    "name": {
+      "en": "Village Dungeon Transformation",
+      "jp": "村のダンジョン化",
+      "kr": "마을의 던전화",
+      "zh": "村庄的地下城化"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "400280101",
+        "level": 16,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "400180201",
+        "level": 16,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "410380101",
+        "level": 16,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "200209",
+    "adv": {
+      "atk": -761,
+      "hp": -689
+    }
+  },
+  "200210": {
+    "mode": "normal",
+    "name": {
+      "en": "Suspicious Exhaust Sound",
+      "jp": "不審な排気音",
+      "kr": "수상한 배기음",
+      "zh": "可疑的排气声"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "4064001",
+        "level": 18,
+        "hpLines": 10,
+        "role": "boss"
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "200210",
+    "adv": {
+      "atk": -765,
+      "hp": -693
+    }
+  },
+  "200211": {
+    "mode": "normal",
+    "name": {
+      "en": "Critical Strategic Supplies",
+      "jp": "重要な戦略物資",
+      "kr": "중요 전략 물자",
+      "zh": "重要战略物资"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "4344006",
+        "level": 19,
+        "hpLines": 10,
+        "role": "boss"
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "200211",
+    "adv": {
+      "atk": -766,
+      "hp": -691
+    }
+  },
+  "200302": {
+    "mode": "normal",
+    "name": {
+      "en": "Test Drive",
+      "jp": "テストドライブ",
+      "kr": "테스트 드라이브",
+      "zh": "试驾"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "4001021",
+        "level": 20,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4001022",
+        "level": 20,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4001024",
+        "level": 20,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4003022",
+        "level": 20,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "200302",
+    "adv": {
+      "atk": -767,
+      "hp": -693
+    }
+  },
+  "200303": {
+    "mode": "normal",
+    "name": {
+      "en": "The Legend of Mirsha's Hero",
+      "jp": "メルシャの英雄譚",
+      "kr": "메르샤의 영웅담",
+      "zh": "弥乐沙的英雄事迹"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "4032011",
+        "level": 21,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4031014",
+        "level": 21,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4031011",
+        "level": 21,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4031012",
+        "level": 21,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4033011",
+        "level": 21,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "200303",
+    "adv": {
+      "atk": -759,
+      "hp": -682
+    }
+  },
+  "200304": {
+    "mode": "normal",
+    "name": {
+      "en": "A Familiar Face",
+      "jp": "見覚えのある顔",
+      "kr": "낯익은 얼굴",
+      "zh": "熟悉的面孔"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "4041001",
+        "level": 21,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4041003",
+        "level": 21,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4041004",
+        "level": 21,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4042001",
+        "level": 21,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4043001",
+        "level": 21,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "200304",
+    "adv": {
+      "atk": -759,
+      "hp": -682
+    }
+  },
+  "200305": {
+    "mode": "normal",
+    "name": {
+      "en": "The Truth Behind the Legend",
+      "jp": "英雄譚の真実",
+      "kr": "영웅담의 진실",
+      "zh": "英雄事迹背后的真相"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "4203807",
+        "level": 22,
+        "hpLines": 10,
+        "role": "boss"
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "200305",
+    "adv": {
+      "atk": -766,
+      "hp": -663
+    }
+  },
+  "200308": {
+    "mode": "normal",
+    "name": {
+      "en": "Kingdom in Crisis (1)",
+      "jp": "危機の王国（1）",
+      "kr": "위기의 왕국 (1)",
+      "zh": "危机中的王国（1）"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "4001091",
+        "level": 23,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4001092",
+        "level": 23,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4002092",
+        "level": 23,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4003092",
+        "level": 23,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "200308",
+    "adv": {
+      "atk": -740,
+      "hp": -646
+    }
+  },
+  "200309": {
+    "mode": "normal",
+    "name": {
+      "en": "Kingdom in Crisis (2)",
+      "jp": "危機の王国（2）",
+      "kr": "위기의 왕국 (2)",
+      "zh": "危机中的王国（2）"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "4001092",
+        "level": 23,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4001091",
+        "level": 23,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4002091",
+        "level": 23,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4001094",
+        "level": 23,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4003091",
+        "level": 23,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "200309",
+    "adv": {
+      "atk": -740,
+      "hp": -646
+    }
+  },
+  "200310": {
+    "mode": "normal",
+    "name": {
+      "en": "Frost Kingdom Executives",
+      "jp": "雪国の幹部たち",
+      "kr": "설국의 간부들",
+      "zh": "雪国的干部们"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "4001091",
+        "level": 24,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4001092",
+        "level": 24,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4500373",
+        "level": 24,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4500372",
+        "level": 24,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4500371",
+        "level": 24,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "200310",
+    "adv": {
+      "atk": -739,
+      "hp": -630
+    }
+  },
+  "200312": {
+    "mode": "normal",
+    "name": {
+      "en": "Come Out, Commander!",
+      "jp": "団長出てこい！",
+      "kr": "단장 나와!",
+      "zh": "团长，出来！"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "4002021",
+        "level": 25,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4001024",
+        "level": 25,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4001021",
+        "level": 25,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4002022",
+        "level": 25,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4003021",
+        "level": 25,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4001022",
+        "level": 25,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "200312",
+    "adv": {
+      "atk": -737,
+      "def": 4,
+      "hp": -616
+    }
+  },
+  "200313": {
+    "mode": "normal",
+    "name": {
+      "en": "Knights Who Lost Trust",
+      "jp": "信頼を失った騎士たち",
+      "kr": "신뢰를 잃은 기사들",
+      "zh": "失去信任的骑士们"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "4500377",
+        "level": 25,
+        "hpLines": 10,
+        "role": "boss"
+      },
+      {
+        "id": "4500376",
+        "level": 25,
+        "hpLines": 10,
+        "role": "boss"
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "200313",
+    "adv": {
+      "atk": -737,
+      "def": 4,
+      "hp": -616
+    }
+  },
+  "200314": {
+    "mode": "normal",
+    "name": {
+      "en": "But Then!",
+      "jp": "ところがその時！",
+      "kr": "그런데 그때!",
+      "zh": "然而就在那时！"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "4203803",
+        "level": 25,
+        "hpLines": 10,
+        "role": "boss"
+      },
+      {
+        "id": "4201804",
+        "level": 25,
+        "hpLines": 10,
+        "role": "add"
+      },
+      {
+        "id": "4201803",
+        "level": 25,
+        "hpLines": 10,
+        "role": "add"
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "200314",
+    "adv": {
+      "atk": -737,
+      "def": 4,
+      "hp": -616
+    }
+  },
+  "210101": {
+    "mode": "normal",
+    "name": {
+      "en": "First Real Battle",
+      "jp": "初の実戦",
+      "kr": "첫 실전",
+      "zh": "初次实战"
+    },
+    "area": {
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
+    },
+    "monsters": [
+      {
+        "id": "4141041",
+        "level": 65,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4143041",
+        "level": 65,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      }
+    ],
+    "season": 1,
+    "episode": 1,
+    "reward": "210101",
+    "adv": {
+      "atk": -625,
+      "def": -2,
+      "hp": -428,
+      "spd": 280
+    }
+  },
+  "210102": {
+    "mode": "normal",
+    "name": {
+      "en": "Securing Parts (1)",
+      "jp": "部品確保（1）",
+      "kr": "부품 확보 (1)",
+      "zh": "确保零件（1）"
+    },
+    "area": {
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
+    },
+    "monsters": [
+      {
+        "id": "4141043",
+        "level": 65,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4143042",
+        "level": 65,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      }
+    ],
+    "season": 1,
+    "episode": 1,
+    "reward": "210102",
+    "adv": {
+      "atk": -625,
+      "def": -2,
+      "hp": -428,
+      "spd": 280
+    }
+  },
+  "210103": {
+    "mode": "normal",
+    "name": {
+      "en": "Securing Parts (2)",
+      "jp": "部品確保（2）",
+      "kr": "부품 확보 (2)",
+      "zh": "确保零件（2）"
+    },
+    "area": {
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
+    },
+    "monsters": [
+      {
+        "id": "404100211",
+        "level": 66,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "404100411",
+        "level": 66,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "404300211",
+        "level": 66,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      }
+    ],
+    "season": 1,
+    "episode": 1,
+    "reward": "210103",
+    "adv": {
+      "atk": -629,
+      "hp": -431,
+      "spd": 280
+    }
+  },
+  "210104": {
+    "mode": "normal",
+    "name": {
+      "en": "What is Scientific Inheritance?",
+      "jp": "科学遺産とは？",
+      "kr": "과학 유산이란?",
+      "zh": "什么是科学遗产？"
+    },
+    "area": {
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
+    },
+    "monsters": [
+      {
+        "id": "4141044",
+        "level": 66,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4143041",
+        "level": 66,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      }
+    ],
+    "season": 1,
+    "episode": 1,
+    "reward": "210104",
+    "adv": {
+      "atk": -629,
+      "hp": -431,
+      "spd": 280
+    }
+  },
+  "210105": {
+    "mode": "normal",
+    "name": {
+      "en": "Fixing the Circuit (1)",
+      "jp": "回路を直す（1）",
+      "kr": "회로 고치기 (1)",
+      "zh": "修复电路（1）"
+    },
+    "area": {
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
+    },
+    "monsters": [
+      {
+        "id": "404100111",
+        "level": 67,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "404100311",
+        "level": 67,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "404300111",
+        "level": 67,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "404100411",
+        "level": 67,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      }
+    ],
+    "season": 1,
+    "episode": 1,
+    "reward": "210105",
+    "adv": {
+      "atk": -631,
+      "hp": -432,
+      "spd": 280
+    }
+  },
+  "210106": {
+    "mode": "normal",
+    "name": {
+      "en": "Fixing the Circuit (2)",
+      "jp": "回路を直す（2）",
+      "kr": "회로 고치기 (2)",
+      "zh": "修复电路（2）"
+    },
+    "area": {
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
+    },
+    "monsters": [
+      {
+        "id": "404100211",
+        "level": 67,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "404100311",
+        "level": 67,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "404300211",
+        "level": 67,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      }
+    ],
+    "season": 1,
+    "episode": 1,
+    "reward": "210106",
+    "adv": {
+      "atk": -631,
+      "hp": -432,
+      "spd": 280
+    }
+  },
+  "210107": {
+    "mode": "normal",
+    "name": {
+      "en": "Competition with the Nightwatch",
+      "jp": "ナイトウォッチとの競争",
+      "kr": "나이트워치와의 경쟁",
+      "zh": "与骑士堡的竞争"
+    },
+    "area": {
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
+    },
+    "monsters": [
+      {
+        "id": "400102111",
+        "level": 68,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400102411",
+        "level": 68,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400302211",
+        "level": 68,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "400102311",
+        "level": 68,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      }
+    ],
+    "season": 1,
+    "episode": 1,
+    "reward": "210107",
+    "adv": {
+      "atk": -634,
+      "def": -1,
+      "hp": -421
+    }
+  },
+  "210108": {
+    "mode": "normal",
+    "name": {
+      "en": "Clash with a Role Model",
+      "jp": "ロールモデルとの対立",
+      "kr": "롤모델과의 대립",
+      "zh": "与榜样的对立"
+    },
+    "area": {
+      "en": "Path to Nationhood",
+      "jp": "建国の道",
+      "kr": "건국의 길",
+      "zh": "建国之路"
+    },
+    "monsters": [
+      {
+        "id": "400102111",
+        "level": 68,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400102211",
+        "level": 68,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4103802",
+        "level": 68,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "400102411",
+        "level": 68,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      }
+    ],
+    "season": 1,
+    "episode": 1,
+    "reward": "210108",
+    "adv": {
+      "atk": -634,
+      "def": -1,
+      "hp": -421,
+      "spd": 280
+    }
+  },
+  "210201": {
+    "mode": "normal",
+    "name": {
+      "en": "Restaurant Guests",
+      "jp": "食堂のお客様",
+      "kr": "식당의 손님들",
+      "zh": "餐厅的客人们"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "4101801",
+        "level": 69,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4101802",
+        "level": 69,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4203801",
+        "level": 69,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "210201",
+    "adv": {
+      "atk": -633,
+      "hp": -364
+    }
+  },
+  "210202": {
+    "mode": "normal",
+    "name": {
+      "en": "Void Invasion",
+      "jp": "虚空の侵入",
+      "kr": "공허의 침입",
+      "zh": "虚空的入侵"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "4101801",
+        "level": 69,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4101802",
+        "level": 69,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4102801",
+        "level": 69,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4103801",
+        "level": 69,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "210202",
+    "adv": {
+      "atk": -633,
+      "hp": -364
+    }
+  },
+  "210203": {
+    "mode": "normal",
+    "name": {
+      "en": "Find the Knights",
+      "jp": "騎士たちを探せ",
+      "kr": "기사들을 찾자",
+      "zh": "寻找骑士们"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "4102801",
+        "level": 70,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4101801",
+        "level": 70,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4101802",
+        "level": 70,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4203801",
+        "level": 70,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "210203",
+    "adv": {
+      "atk": -635,
+      "hp": -369
+    }
+  },
+  "210204": {
+    "mode": "normal",
+    "name": {
+      "en": "Knight Order Control (1)",
+      "jp": "騎士団の制御（1）",
+      "kr": "기사단의 통제 (1)",
+      "zh": "骑士团的管控（1）"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "400102111",
+        "level": 70,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400102411",
+        "level": 70,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400202111",
+        "level": 70,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "400102211",
+        "level": 70,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "400302211",
+        "level": 70,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "210204",
+    "adv": {
+      "atk": -635,
+      "hp": -369
+    }
+  },
+  "210205": {
+    "mode": "normal",
+    "name": {
+      "en": "Knight Order Control (2)",
+      "jp": "騎士団の制御（2）",
+      "kr": "기사단의 통제 (2)",
+      "zh": "骑士团的管控（2）"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "400102111",
+        "level": 70,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400102211",
+        "level": 70,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400102411",
+        "level": 70,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400202211",
+        "level": 70,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "400302111",
+        "level": 70,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "210205",
+    "adv": {
+      "atk": -635,
+      "hp": -369
+    }
+  },
+  "210206": {
+    "mode": "normal",
+    "name": {
+      "en": "Street Mercenaries",
+      "jp": "街の傭兵たち",
+      "kr": "거리의 용병들",
+      "zh": "街上的佣兵们"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "400102111",
+        "level": 71,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400102411",
+        "level": 71,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4103803",
+        "level": 71,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4101803",
+        "level": 71,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4101804",
+        "level": 71,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "210206",
+    "adv": {
+      "atk": -638,
+      "hp": -373
+    }
+  },
+  "210207": {
+    "mode": "normal",
+    "name": {
+      "en": "Purpose of Garrison",
+      "jp": "駐屯の目的",
+      "kr": "주둔의 목적",
+      "zh": "驻扎的目的"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "4101801",
+        "level": 71,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4101802",
+        "level": 71,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4102801",
+        "level": 71,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4103801",
+        "level": 71,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "210207",
+    "adv": {
+      "atk": -638,
+      "hp": -373
+    }
+  },
+  "210208": {
+    "mode": "normal",
+    "name": {
+      "en": "Village Dungeon Transformation",
+      "jp": "村のダンジョン化",
+      "kr": "마을의 던전화",
+      "zh": "村庄的地下城化"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "4102801",
+        "level": 71,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4101802",
+        "level": 71,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4203801",
+        "level": 71,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "210208",
+    "adv": {
+      "atk": -638,
+      "hp": -373
+    }
+  },
+  "210209": {
+    "mode": "normal",
+    "name": {
+      "en": "Suspicious Exhaust Sound",
+      "jp": "不審な排気音",
+      "kr": "수상한 배기음",
+      "zh": "可疑的排气声"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "4164001",
+        "level": 72,
+        "hpLines": 10,
+        "role": "boss"
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "210209",
+    "adv": {
+      "atk": -641,
+      "def": -1,
+      "hp": -378
+    }
+  },
+  "210210": {
+    "mode": "normal",
+    "name": {
+      "en": "Critical Strategic Supplies",
+      "jp": "重要な戦略物資",
+      "kr": "중요 전략 물자",
+      "zh": "重要战略物资"
+    },
+    "area": {
+      "en": "Singularity",
+      "jp": "特異点",
+      "kr": "특이점",
+      "zh": "奇点"
+    },
+    "monsters": [
+      {
+        "id": "4444006",
+        "level": 72,
+        "hpLines": 10,
+        "role": "boss"
+      }
+    ],
+    "season": 1,
+    "episode": 2,
+    "reward": "210210",
+    "adv": {
+      "atk": -641,
+      "def": -1,
+      "hp": -378
+    }
+  },
+  "210301": {
+    "mode": "normal",
+    "name": {
+      "en": "Test Drive",
+      "jp": "テストドライブ",
+      "kr": "테스트 드라이브",
+      "zh": "试驾"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "400102111",
+        "level": 72,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400102211",
+        "level": 72,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400102411",
+        "level": 72,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "400302211",
+        "level": 72,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "210301",
+    "adv": {
+      "atk": -767,
+      "hp": -693
+    }
+  },
+  "210302": {
+    "mode": "normal",
+    "name": {
+      "en": "The Legend of Mirsha's Hero",
+      "jp": "メルシャの英雄譚",
+      "kr": "메르샤의 영웅담",
+      "zh": "弥乐沙的英雄事迹"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "403201111",
+        "level": 72,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "403101411",
+        "level": 72,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "403101111",
+        "level": 72,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "403101211",
+        "level": 72,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "403301111",
+        "level": 72,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "210302",
+    "adv": {
+      "atk": -759,
+      "hp": -682
+    }
+  },
+  "210303": {
+    "mode": "normal",
+    "name": {
+      "en": "A Familiar Face",
+      "jp": "見覚えのある顔",
+      "kr": "낯익은 얼굴",
+      "zh": "熟悉的面孔"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "404100111",
+        "level": 73,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "404100311",
+        "level": 73,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "404100411",
+        "level": 73,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "404200111",
+        "level": 73,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "404300111",
+        "level": 73,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "210303",
+    "adv": {
+      "atk": -759,
+      "hp": -682
+    }
+  },
+  "210304": {
+    "mode": "normal",
+    "name": {
+      "en": "The Truth Behind the Legend",
+      "jp": "英雄譚の真実",
+      "kr": "영웅담의 진실",
+      "zh": "英雄事迹背后的真相"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "4303807",
+        "level": 73,
+        "hpLines": 10,
+        "role": "boss"
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "210304",
+    "adv": {
+      "atk": -766,
+      "hp": -663
+    }
+  },
+  "210305": {
+    "mode": "normal",
+    "name": {
+      "en": "Kingdom in Crisis (1)",
+      "jp": "危機の王国（1）",
+      "kr": "위기의 왕국 (1)",
+      "zh": "危机中的王国（1）"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "4101091",
+        "level": 73,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4201092",
+        "level": 73,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4102092",
+        "level": 73,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4103092",
+        "level": 73,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "210305",
+    "adv": {
+      "atk": -740,
+      "hp": -646
+    }
+  },
+  "210306": {
+    "mode": "normal",
+    "name": {
+      "en": "Kingdom in Crisis (2)",
+      "jp": "危機の王国（2）",
+      "kr": "위기의 왕국 (2)",
+      "zh": "危机中的王国（2）"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "4201092",
+        "level": 74,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4101091",
+        "level": 74,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4102091",
+        "level": 74,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4201094",
+        "level": 74,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4203091",
+        "level": 74,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "210306",
+    "adv": {
+      "atk": -740,
+      "hp": -646
+    }
+  },
+  "210307": {
+    "mode": "normal",
+    "name": {
+      "en": "Frost Kingdom Executives",
+      "jp": "雪国の幹部たち",
+      "kr": "설국의 간부들",
+      "zh": "雪国的干部们"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "4101091",
+        "level": 74,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4201092",
+        "level": 74,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4500381",
+        "level": 74,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4500379",
+        "level": 74,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4500378",
+        "level": 74,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "210307",
+    "adv": {
+      "atk": -739,
+      "hp": -630
+    }
+  },
+  "210308": {
+    "mode": "normal",
+    "name": {
+      "en": "Come Out, Commander!",
+      "jp": "団長出てこい！",
+      "kr": "단장 나와!",
+      "zh": "团长，出来！"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "400202111",
+        "level": 74,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "400102411",
+        "level": 74,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400102111",
+        "level": 74,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "400202211",
+        "level": 74,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "400302111",
+        "level": 74,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "400102211",
+        "level": 74,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "210308",
+    "adv": {
+      "atk": -737,
+      "def": 4,
+      "hp": -616
+    }
+  },
+  "210309": {
+    "mode": "normal",
+    "name": {
+      "en": "Knights Who Lost Trust",
+      "jp": "信頼を失った騎士たち",
+      "kr": "신뢰를 잃은 기사들",
+      "zh": "失去信任的骑士们"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "4500382",
+        "level": 75,
+        "hpLines": 10,
+        "role": "boss"
+      },
+      {
+        "id": "4500380",
+        "level": 75,
+        "hpLines": 10,
+        "role": "boss"
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "210309",
+    "adv": {
+      "atk": -737,
+      "def": 4,
+      "hp": -616
+    }
+  },
+  "210310": {
+    "mode": "normal",
+    "name": {
+      "en": "But Then!",
+      "jp": "ところがその時！",
+      "kr": "그런데 그때!",
+      "zh": "然而就在那时！"
+    },
+    "area": {
+      "en": "World Memory",
+      "jp": "世界の記憶",
+      "kr": "세계 기억",
+      "zh": "世界记忆"
+    },
+    "monsters": [
+      {
+        "id": "4303803",
+        "level": 75,
+        "hpLines": 10,
+        "role": "boss"
+      },
+      {
+        "id": "4301804",
+        "level": 75,
+        "hpLines": 10,
+        "role": "add"
+      },
+      {
+        "id": "4301803",
+        "level": 75,
+        "hpLines": 10,
+        "role": "add"
+      }
+    ],
+    "season": 1,
+    "episode": 3,
+    "reward": "210310",
+    "adv": {
+      "atk": -737,
+      "def": 4,
+      "hp": -616
     }
   },
   "40101001": {
@@ -32217,6 +35010,7 @@
       }
     ],
     "floor": 25,
+    "reward": "40501025",
     "adv": {
       "atk": -692,
       "hp": -554
@@ -33237,6 +36031,7 @@
       }
     ],
     "floor": 50,
+    "reward": "40501050",
     "adv": {
       "atk": -635,
       "hp": -369
@@ -34307,6 +37102,7 @@
       }
     ],
     "floor": 75,
+    "reward": "40501075",
     "adv": {
       "atk": -580,
       "def": -1,
@@ -35303,6 +38099,7 @@
       }
     ],
     "floor": 100,
+    "reward": "40501100",
     "adv": {
       "atk": -535,
       "hp": -175
@@ -35643,6 +38440,7 @@
       }
     ],
     "floor": 10,
+    "reward": "40601010",
     "adv": {
       "atk": 90,
       "def": 90,
@@ -35993,6 +38791,7 @@
       }
     ],
     "floor": 20,
+    "reward": "40601020",
     "adv": {
       "atk": 190,
       "def": 190,
@@ -36305,6 +39104,7 @@
       }
     ],
     "floor": 30,
+    "reward": "40601030",
     "adv": {
       "atk": 290,
       "def": 290,
@@ -36619,6 +39419,7 @@
       }
     ],
     "floor": 40,
+    "reward": "40601040",
     "adv": {
       "atk": 390,
       "def": 723,
@@ -38275,6 +41076,7 @@
       }
     ],
     "floor": 10,
+    "reward": "40701010",
     "adv": {
       "atk": 190,
       "def": 190,
@@ -39907,6 +42709,7 @@
       }
     ],
     "floor": 20,
+    "reward": "40701020",
     "adv": {
       "atk": 290,
       "def": 290,
@@ -57639,7 +60442,11 @@
       "order": 1
     },
     "group": "raid_1:SYS_RAID_1_DUNGEON_E",
-    "reward": "50101001"
+    "reward": "50101001",
+    "adv": {
+      "atk": -767,
+      "hp": -693
+    }
   },
   "50101002": {
     "mode": "raid_1",
@@ -57675,7 +60482,12 @@
       "order": 2
     },
     "group": "raid_1:SYS_RAID_1_DUNGEON_E",
-    "reward": "50101002"
+    "reward": "50101002",
+    "adv": {
+      "atk": -737,
+      "def": 4,
+      "hp": -616
+    }
   },
   "50101003": {
     "mode": "raid_1",
@@ -57711,7 +60523,11 @@
       "order": 3
     },
     "group": "raid_1:SYS_RAID_1_DUNGEON_E",
-    "reward": "50101003"
+    "reward": "50101003",
+    "adv": {
+      "atk": -701,
+      "hp": -574
+    }
   },
   "50101004": {
     "mode": "raid_1",
@@ -57747,7 +60563,11 @@
       "order": 4
     },
     "group": "raid_1:SYS_RAID_1_DUNGEON_E",
-    "reward": "50101004"
+    "reward": "50101004",
+    "adv": {
+      "atk": -709,
+      "hp": -572
+    }
   },
   "50101005": {
     "mode": "raid_1",
@@ -57783,7 +60603,11 @@
       "order": 5
     },
     "group": "raid_1:SYS_RAID_1_DUNGEON_E",
-    "reward": "50101005"
+    "reward": "50101005",
+    "adv": {
+      "atk": -715,
+      "hp": -524
+    }
   },
   "50101006": {
     "mode": "raid_1",
@@ -57819,7 +60643,11 @@
       "order": 6
     },
     "group": "raid_1:SYS_RAID_1_DUNGEON_E",
-    "reward": "50101006"
+    "reward": "50101006",
+    "adv": {
+      "atk": -697,
+      "hp": -520
+    }
   },
   "50101007": {
     "mode": "raid_1",
@@ -57855,7 +60683,11 @@
       "order": 7
     },
     "group": "raid_1:SYS_RAID_1_DUNGEON_E",
-    "reward": "50101007"
+    "reward": "50101007",
+    "adv": {
+      "atk": -704,
+      "hp": -473
+    }
   },
   "50101008": {
     "mode": "raid_1",
@@ -57891,7 +60723,11 @@
       "order": 8
     },
     "group": "raid_1:SYS_RAID_1_DUNGEON_E",
-    "reward": "50101008"
+    "reward": "50101008",
+    "adv": {
+      "atk": -635,
+      "hp": -369
+    }
   },
   "50101009": {
     "mode": "raid_1",
@@ -57927,7 +60763,11 @@
       "order": 9
     },
     "group": "raid_1:SYS_RAID_1_DUNGEON_E",
-    "reward": "50101009"
+    "reward": "50101009",
+    "adv": {
+      "atk": -613,
+      "hp": -270
+    }
   },
   "50101010": {
     "mode": "raid_1",
@@ -57963,7 +60803,12 @@
       "order": 10
     },
     "group": "raid_1:SYS_RAID_1_DUNGEON_E",
-    "reward": "50101010"
+    "reward": "50101010",
+    "adv": {
+      "atk": -588,
+      "def": -1,
+      "hp": -227
+    }
   },
   "50101011": {
     "mode": "raid_1",
@@ -57999,7 +60844,11 @@
       "order": 11
     },
     "group": "raid_1:SYS_RAID_1_DUNGEON_E",
-    "reward": "50101011"
+    "reward": "50101011",
+    "adv": {
+      "atk": -535,
+      "hp": -175
+    }
   },
   "50101012": {
     "mode": "raid_1",
@@ -58035,7 +60884,11 @@
       "order": 12
     },
     "group": "raid_1:SYS_RAID_1_DUNGEON_E",
-    "reward": "50101012"
+    "reward": "50101012",
+    "adv": {
+      "atk": -535,
+      "hp": -175
+    }
   },
   "50101013": {
     "mode": "raid_1",
@@ -58071,7 +60924,11 @@
       "order": 13
     },
     "group": "raid_1:SYS_RAID_1_DUNGEON_E",
-    "reward": "50101013"
+    "reward": "50101013",
+    "adv": {
+      "atk": -535,
+      "hp": -175
+    }
   },
   "50102001": {
     "mode": "raid_1",
@@ -59134,7 +61991,7 @@
       "en": "Masterless Guardian (Stage 12)",
       "jp": "主を失ったガーディアン(12段階)",
       "kr": "주인 잃은 가디언 (12 단계)",
-      "zh": "失去主人的守护者(第11阶段)"
+      "zh": "失去主人的守护者(第12阶段)"
     },
     "monsters": [
       {
@@ -64204,7 +67061,8 @@
     "adv": {
       "atk": -697,
       "hp": -520
-    }
+    },
+    "retired": true
   },
   "55400002": {
     "mode": "world_boss",
@@ -64224,7 +67082,8 @@
     "adv": {
       "atk": -697,
       "hp": -520
-    }
+    },
+    "retired": true
   },
   "55400101": {
     "mode": "world_boss",
@@ -64244,7 +67103,8 @@
     "adv": {
       "atk": -613,
       "hp": -270
-    }
+    },
+    "retired": true
   },
   "55400102": {
     "mode": "world_boss",
@@ -64264,7 +67124,8 @@
     "adv": {
       "atk": -613,
       "hp": -270
-    }
+    },
+    "retired": true
   },
   "55400201": {
     "mode": "world_boss",
@@ -64284,7 +67145,8 @@
     "adv": {
       "atk": -535,
       "hp": -175
-    }
+    },
+    "retired": true
   },
   "55400202": {
     "mode": "world_boss",
@@ -64304,7 +67166,8 @@
     "adv": {
       "atk": -535,
       "hp": -175
-    }
+    },
+    "retired": true
   },
   "55500001": {
     "mode": "world_boss",

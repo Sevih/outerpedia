@@ -365,8 +365,8 @@
     {
       "id": "629",
       "topId": "629",
-      "ids": ["629"],
-      "stars": [5],
+      "ids": ["629", "998"],
+      "stars": [6],
       "classLimits": ["mage"],
       "wiki": true
     },
@@ -461,8 +461,8 @@
     {
       "id": "641",
       "topId": "641",
-      "ids": ["641"],
-      "stars": [5],
+      "ids": ["641", "999"],
+      "stars": [6],
       "classLimits": ["striker"],
       "wiki": true
     },

@@ -66,6 +66,21 @@
       "contentType": "AGIT_CUSTOM_CRAFT",
       "requirements": [
         {
+          "stage": "S1-6-5",
+          "dungeonName": {
+            "en": "Pass",
+            "jp": "合格",
+            "kr": "합격",
+            "zh": "通过"
+          },
+          "areaName": {
+            "en": "Magnolia",
+            "jp": "マグノリア",
+            "kr": "매그놀리아",
+            "zh": "麦格诺里亚"
+          }
+        },
+        {
           "stage": "S1-9-5",
           "dungeonName": {
             "en": "The Responsibility of the Guilty",
@@ -92,6 +107,21 @@
       "contentType": "AGIT_GIFT",
       "requirements": [
         {
+          "stage": "S1-6-5",
+          "dungeonName": {
+            "en": "Pass",
+            "jp": "合格",
+            "kr": "합격",
+            "zh": "通过"
+          },
+          "areaName": {
+            "en": "Magnolia",
+            "jp": "マグノリア",
+            "kr": "매그놀리아",
+            "zh": "麦格诺里亚"
+          }
+        },
+        {
           "stage": "S1-9-5",
           "dungeonName": {
             "en": "The Responsibility of the Guilty",
@@ -117,6 +147,21 @@
     {
       "contentType": "AGIT_MAIN",
       "requirements": [
+        {
+          "stage": "S1-3-0",
+          "dungeonName": {
+            "en": "Not in Great Shape",
+            "jp": "どうにも優れないコンディション",
+            "kr": "영 좋지 않은 컨디션",
+            "zh": "状态很差"
+          },
+          "areaName": {
+            "en": "World Memory",
+            "jp": "世界の記憶",
+            "kr": "세계 기억",
+            "zh": "世界记忆"
+          }
+        },
         {
           "stage": "S1-3-1",
           "dungeonName": {
@@ -150,6 +195,21 @@
       "contentType": "AGIT_SYNCHRO_ROOM",
       "requirements": [
         {
+          "stage": "S1-4-5",
+          "dungeonName": {
+            "en": "The Commander's Consideration",
+            "jp": "騎士団長の気づかい",
+            "kr": "단장의 배려",
+            "zh": "团长的关怀"
+          },
+          "areaName": {
+            "en": "Nightwatch",
+            "jp": "ナイトウォッチ",
+            "kr": "나이트워치",
+            "zh": "骑士堡"
+          }
+        },
+        {
           "stage": "S1-7-5",
           "dungeonName": {
             "en": "An Unjust Fight",
@@ -182,6 +242,21 @@
       "contentType": "BATTLE_AUTO",
       "requirements": [
         {
+          "stage": "S1-1-3",
+          "dungeonName": {
+            "en": "Securing Parts (2)",
+            "jp": "部品確保（2）",
+            "kr": "부품 확보 (2)",
+            "zh": "确保零件（2）"
+          },
+          "areaName": {
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
+          }
+        },
+        {
           "stage": "S1-1-4",
           "dungeonName": {
             "en": "Outer City",
@@ -208,6 +283,21 @@
       "contentType": "BATTLE_AUTO_CONTINUE",
       "requirements": [
         {
+          "stage": "S1-2-10",
+          "dungeonName": {
+            "en": "Suspicious Exhaust Sound",
+            "jp": "不審な排気音",
+            "kr": "수상한 배기음",
+            "zh": "可疑的排气声"
+          },
+          "areaName": {
+            "en": "Singularity",
+            "jp": "特異点",
+            "kr": "특이점",
+            "zh": "奇点"
+          }
+        },
+        {
           "stage": "S1-1-11",
           "dungeonName": {
             "en": "Quirk",
@@ -227,6 +317,21 @@
     {
       "contentType": "BATTLE_BURST",
       "requirements": [
+        {
+          "stage": "S1-1-2",
+          "dungeonName": {
+            "en": "Securing Parts (1)",
+            "jp": "部品確保（1）",
+            "kr": "부품 확보 (1)",
+            "zh": "确保零件（1）"
+          },
+          "areaName": {
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
+          }
+        },
         {
           "stage": "S1-1-3",
           "dungeonName": {
@@ -253,6 +358,21 @@
     {
       "contentType": "BATTLE_CHAIN",
       "requirements": [
+        {
+          "stage": "S1-2-9",
+          "dungeonName": {
+            "en": "Village Dungeon Transformation",
+            "jp": "村のダンジョン化",
+            "kr": "마을의 던전화",
+            "zh": "村庄的地下城化"
+          },
+          "areaName": {
+            "en": "Singularity",
+            "jp": "特異点",
+            "kr": "특이점",
+            "zh": "奇点"
+          }
+        },
         {
           "stage": "S1-1-10",
           "dungeonName": {
@@ -297,10 +417,10 @@
             "zh": "Intro-暗堡核心"
           },
           "areaName": {
-            "en": "Outer City",
-            "jp": "アウターシティ",
-            "kr": "아우터시티",
-            "zh": "外城"
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
           }
         }
       ],
@@ -314,6 +434,21 @@
     {
       "contentType": "BATTLE_REPEAT",
       "requirements": [
+        {
+          "stage": "S1-1-9",
+          "dungeonName": {
+            "en": "The King's Dignity",
+            "jp": "国王の品格",
+            "kr": "국왕의 품격",
+            "zh": "国王的品格"
+          },
+          "areaName": {
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
+          }
+        },
         {
           "stage": "S1-1-10",
           "dungeonName": {
@@ -341,6 +476,21 @@
       "contentType": "BATTLE_SWEEP",
       "requirements": [
         {
+          "stage": "S1-1-9",
+          "dungeonName": {
+            "en": "The King's Dignity",
+            "jp": "国王の品格",
+            "kr": "국왕의 품격",
+            "zh": "国王的品格"
+          },
+          "areaName": {
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
+          }
+        },
+        {
           "stage": "S1-1-10",
           "dungeonName": {
             "en": "Transformation",
@@ -367,6 +517,21 @@
       "contentType": "BATTLE_ULTIMATE_SKIP",
       "requirements": [
         {
+          "stage": "S1-1-3",
+          "dungeonName": {
+            "en": "Securing Parts (2)",
+            "jp": "部品確保（2）",
+            "kr": "부품 확보 (2)",
+            "zh": "确保零件（2）"
+          },
+          "areaName": {
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
+          }
+        },
+        {
           "stage": "S1-1-4",
           "dungeonName": {
             "en": "Outer City",
@@ -392,6 +557,21 @@
     {
       "contentType": "CHARACTER_ENCHANT",
       "requirements": [
+        {
+          "stage": "S1-1-3",
+          "dungeonName": {
+            "en": "Securing Parts (2)",
+            "jp": "部品確保（2）",
+            "kr": "부품 확보 (2)",
+            "zh": "确保零件（2）"
+          },
+          "areaName": {
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
+          }
+        },
         {
           "stage": "S1-1-3",
           "dungeonName": {
@@ -424,6 +604,21 @@
     {
       "contentType": "CHARACTER_EQUIP_SPECIAL",
       "requirements": [
+        {
+          "stage": "S1-2-1",
+          "dungeonName": {
+            "en": "Trauma",
+            "jp": "トラウマ",
+            "kr": "트라우마",
+            "zh": "创伤"
+          },
+          "areaName": {
+            "en": "Eastern Dungeon",
+            "jp": "東部ダンジョン",
+            "kr": "동부 던전",
+            "zh": "东部暗堡"
+          }
+        },
         {
           "stage": "S1-5-1",
           "dungeonName": {
@@ -477,12 +672,6 @@
         "jp": "仲間進化",
         "kr": "동료 진화",
         "zh": "同伴进化"
-      },
-      "officialName": {
-        "en": "Ark Raid",
-        "jp": "アーク強襲",
-        "kr": "방주 습격",
-        "zh": "方舟强袭"
       }
     },
     {
@@ -522,10 +711,10 @@
             "zh": "Intro-暗堡核心"
           },
           "areaName": {
-            "en": "Outer City",
-            "jp": "アウターシティ",
-            "kr": "아우터시티",
-            "zh": "外城"
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
           }
         }
       ],
@@ -547,10 +736,10 @@
             "zh": "Intro-暗堡核心"
           },
           "areaName": {
-            "en": "Outer City",
-            "jp": "アウターシティ",
-            "kr": "아우터시티",
-            "zh": "外城"
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
           }
         }
       ],
@@ -572,10 +761,10 @@
             "zh": "Intro-暗堡核心"
           },
           "areaName": {
-            "en": "Outer City",
-            "jp": "アウターシティ",
-            "kr": "아우터시티",
-            "zh": "外城"
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
           }
         }
       ],
@@ -589,6 +778,21 @@
     {
       "contentType": "EQUIP_ALL",
       "requirements": [
+        {
+          "stage": "S1-1-5",
+          "dungeonName": {
+            "en": "Fixing the Circuit (1)",
+            "jp": "回路を直す（1）",
+            "kr": "회로 고치기 (1)",
+            "zh": "修复电路（1）"
+          },
+          "areaName": {
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
+          }
+        },
         {
           "stage": "S1-1-5",
           "dungeonName": {
@@ -642,6 +846,21 @@
       "contentType": "EVENT_BOSS_CHALLENGE",
       "requirements": [
         {
+          "stage": "S1-4-6",
+          "dungeonName": {
+            "en": "The Commander's Sophistry",
+            "jp": "騎士団長の詭弁",
+            "kr": "단장의 궤변",
+            "zh": "团长的诡辩"
+          },
+          "areaName": {
+            "en": "Nightwatch",
+            "jp": "ナイトウォッチ",
+            "kr": "나이트워치",
+            "zh": "骑士堡"
+          }
+        },
+        {
           "stage": "S1-7-6",
           "dungeonName": {
             "en": "Awakening of an Archdemon",
@@ -673,6 +892,21 @@
     {
       "contentType": "EVENT_DUNGEON",
       "requirements": [
+        {
+          "stage": "S1-3-4",
+          "dungeonName": {
+            "en": "A Familiar Face",
+            "jp": "見覚えのある顔",
+            "kr": "낯익은 얼굴",
+            "zh": "熟悉的面孔"
+          },
+          "areaName": {
+            "en": "World Memory",
+            "jp": "世界の記憶",
+            "kr": "세계 기억",
+            "zh": "世界记忆"
+          }
+        },
         {
           "stage": "S1-3-5",
           "dungeonName": {
@@ -706,12 +940,86 @@
       "contentType": "FESTIVAL",
       "requirements": [
         {
+          "dungeonName": {
+            "en": "Intro - Dungeon Core",
+            "jp": "プロローグ：ことの始まり",
+            "kr": "Intro - 던전 코어",
+            "zh": "Intro-暗堡核心"
+          },
+          "areaName": {
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
+          }
+        },
+        {
           "stage": "S1-1-3",
           "dungeonName": {
             "en": "A Knight Appears",
             "jp": "騎士イディス、現る",
             "kr": "기사, 나타나다",
             "zh": "骑士现身"
+          },
+          "areaName": {
+            "en": "Outer City",
+            "jp": "アウターシティ",
+            "kr": "아우터시티",
+            "zh": "外城"
+          }
+        }
+      ]
+    },
+    {
+      "contentType": "GUIDE_QUEST_ORIGIN",
+      "requirements": [
+        {
+          "stage": "S1-3-15",
+          "dungeonName": {
+            "en": "Part of the Plan",
+            "jp": "作戦の一部",
+            "kr": "작전의 일부",
+            "zh": "计划的一部分"
+          },
+          "areaName": {
+            "en": "World Memory",
+            "jp": "世界の記憶",
+            "kr": "세계 기억",
+            "zh": "世界记忆"
+          }
+        }
+      ]
+    },
+    {
+      "contentType": "GUIDE_QUEST_PVE",
+      "requirements": [
+        {
+          "stage": "S1-2-3",
+          "dungeonName": {
+            "en": "Knight Order Control (1)",
+            "jp": "騎士団の制御（1）",
+            "kr": "기사단의 통제 (1)",
+            "zh": "骑士团的管控（1）"
+          },
+          "areaName": {
+            "en": "Singularity",
+            "jp": "特異点",
+            "kr": "특이점",
+            "zh": "奇点"
+          }
+        }
+      ]
+    },
+    {
+      "contentType": "GUIDE_QUEST_PVP",
+      "requirements": [
+        {
+          "stage": "S1-1-6",
+          "dungeonName": {
+            "en": "Commotion at the Tavern",
+            "jp": "酒場での騒動",
+            "kr": "주점에서의 소동",
+            "zh": "酒馆中的骚动"
           },
           "areaName": {
             "en": "Outer City",
@@ -733,10 +1041,10 @@
             "zh": "Intro-暗堡核心"
           },
           "areaName": {
-            "en": "Outer City",
-            "jp": "アウターシティ",
-            "kr": "아우터시티",
-            "zh": "外城"
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
           }
         }
       ],
@@ -846,6 +1154,25 @@
       ]
     },
     {
+      "contentType": "GUIDE_QUEST_STORY",
+      "requirements": [
+        {
+          "dungeonName": {
+            "en": "Intro - Dungeon Core",
+            "jp": "プロローグ：ことの始まり",
+            "kr": "Intro - 던전 코어",
+            "zh": "Intro-暗堡核心"
+          },
+          "areaName": {
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
+          }
+        }
+      ]
+    },
+    {
       "contentType": "GUILD",
       "requirements": [
         {
@@ -856,10 +1183,10 @@
             "zh": "Intro-暗堡核心"
           },
           "areaName": {
-            "en": "Outer City",
-            "jp": "アウターシティ",
-            "kr": "아우터시티",
-            "zh": "外城"
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
           }
         }
       ],
@@ -931,6 +1258,21 @@
       "contentType": "ITEM_BREAK_LIMIT",
       "requirements": [
         {
+          "stage": "S1-2-5",
+          "dungeonName": {
+            "en": "Ambush",
+            "jp": "奇襲",
+            "kr": "기습",
+            "zh": "突袭"
+          },
+          "areaName": {
+            "en": "Eastern Dungeon",
+            "jp": "東部ダンジョン",
+            "kr": "동부 던전",
+            "zh": "东部暗堡"
+          }
+        },
+        {
           "stage": "S1-5-5",
           "dungeonName": {
             "en": "A Temporary Truce",
@@ -956,6 +1298,21 @@
     {
       "contentType": "ITEM_SMELTING",
       "requirements": [
+        {
+          "stage": "S1-2-5",
+          "dungeonName": {
+            "en": "Ambush",
+            "jp": "奇襲",
+            "kr": "기습",
+            "zh": "突袭"
+          },
+          "areaName": {
+            "en": "Eastern Dungeon",
+            "jp": "東部ダンジョン",
+            "kr": "동부 던전",
+            "zh": "东部暗堡"
+          }
+        },
         {
           "stage": "S1-5-5",
           "dungeonName": {
@@ -983,6 +1340,21 @@
       "contentType": "IVANEZ_FESTIVAL",
       "requirements": [
         {
+          "stage": "S1-1-9",
+          "dungeonName": {
+            "en": "The King's Dignity",
+            "jp": "国王の品格",
+            "kr": "국왕의 품격",
+            "zh": "国王的品格"
+          },
+          "areaName": {
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
+          }
+        },
+        {
           "stage": "S1-1-11",
           "dungeonName": {
             "en": "Quirk",
@@ -1008,6 +1380,21 @@
     {
       "contentType": "MAIN_MENU_FRIEND",
       "requirements": [
+        {
+          "stage": "S1-1-8",
+          "dungeonName": {
+            "en": "Clash with a Role Model",
+            "jp": "ロールモデルとの対立",
+            "kr": "롤모델과의 대립",
+            "zh": "与榜样的对立"
+          },
+          "areaName": {
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
+          }
+        },
         {
           "stage": "S1-1-8",
           "dungeonName": {
@@ -1043,6 +1430,21 @@
         {
           "stage": "S1-1-5",
           "dungeonName": {
+            "en": "Fixing the Circuit (1)",
+            "jp": "回路を直す（1）",
+            "kr": "회로 고치기 (1)",
+            "zh": "修复电路（1）"
+          },
+          "areaName": {
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
+          }
+        },
+        {
+          "stage": "S1-1-5",
+          "dungeonName": {
             "en": "The Demibeast and the Lord",
             "jp": "獣人と領主",
             "kr": "수인과 영주",
@@ -1075,6 +1477,21 @@
         {
           "stage": "S1-2-3",
           "dungeonName": {
+            "en": "Knight Order Control (1)",
+            "jp": "騎士団の制御（1）",
+            "kr": "기사단의 통제 (1)",
+            "zh": "骑士团的管控（1）"
+          },
+          "areaName": {
+            "en": "Singularity",
+            "jp": "特異点",
+            "kr": "특이점",
+            "zh": "奇点"
+          }
+        },
+        {
+          "stage": "S1-2-3",
+          "dungeonName": {
             "en": "The Mage and Her Cat",
             "jp": "魔法使いと猫さん",
             "kr": "마법사와 고양이",
@@ -1098,6 +1515,21 @@
     {
       "contentType": "MAIN_MENU_PVP",
       "requirements": [
+        {
+          "stage": "S1-1-6",
+          "dungeonName": {
+            "en": "Commotion at the Tavern",
+            "jp": "酒場での騒動",
+            "kr": "주점에서의 소동",
+            "zh": "酒馆中的骚动"
+          },
+          "areaName": {
+            "en": "Outer City",
+            "jp": "アウターシティ",
+            "kr": "아우터시티",
+            "zh": "外城"
+          }
+        },
         {
           "stage": "S1-4-6",
           "dungeonName": {
@@ -1130,6 +1562,20 @@
     {
       "contentType": "MAIN_MENU_RECRUIT",
       "requirements": [
+        {
+          "dungeonName": {
+            "en": "Intro - Dungeon Core",
+            "jp": "プロローグ：ことの始まり",
+            "kr": "Intro - 던전 코어",
+            "zh": "Intro-暗堡核心"
+          },
+          "areaName": {
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
+          }
+        },
         {
           "stage": "S1-1-3",
           "dungeonName": {
@@ -1170,10 +1616,24 @@
             "zh": "Intro-暗堡核心"
           },
           "areaName": {
-            "en": "Outer City",
-            "jp": "アウターシティ",
-            "kr": "아우터시티",
-            "zh": "外城"
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
+          }
+        },
+        {
+          "dungeonName": {
+            "en": "Intro - Dungeon Core",
+            "jp": "プロローグ：ことの始まり",
+            "kr": "Intro - 던전 코어",
+            "zh": "Intro-暗堡核心"
+          },
+          "areaName": {
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
           }
         }
       ],
@@ -1187,6 +1647,20 @@
     {
       "contentType": "MIRSHA_SETTLEMENT",
       "requirements": [
+        {
+          "dungeonName": {
+            "en": "Intro - Dungeon Core",
+            "jp": "プロローグ：ことの始まり",
+            "kr": "Intro - 던전 코어",
+            "zh": "Intro-暗堡核心"
+          },
+          "areaName": {
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
+          }
+        },
         {
           "stage": "S1-1-3",
           "dungeonName": {
@@ -1237,8 +1711,49 @@
       }
     },
     {
+      "contentType": "ORIGIN_STORY",
+      "requirements": [
+        {
+          "stage": "S1-3-15",
+          "dungeonName": {
+            "en": "Part of the Plan",
+            "jp": "作戦の一部",
+            "kr": "작전의 일부",
+            "zh": "计划的一部分"
+          },
+          "areaName": {
+            "en": "World Memory",
+            "jp": "世界の記憶",
+            "kr": "세계 기억",
+            "zh": "世界记忆"
+          }
+        }
+      ],
+      "officialName": {
+        "en": "Origin Story",
+        "jp": "オリジンストーリー",
+        "kr": "오리진 스토리",
+        "zh": "起源剧情"
+      }
+    },
+    {
       "contentType": "PIECE_DUNGEON",
       "requirements": [
+        {
+          "stage": "S1-3-5",
+          "dungeonName": {
+            "en": "Finding Blacksmith",
+            "jp": "鍛冶屋の姉御",
+            "kr": "대장장이 확보",
+            "zh": "拉拢铁匠"
+          },
+          "areaName": {
+            "en": "Forest Dungeon",
+            "jp": "森林ダンジョン",
+            "kr": "숲 속의 던전",
+            "zh": "林中暗堡"
+          }
+        },
         {
           "stage": "S1-6-5",
           "dungeonName": {
@@ -1274,6 +1789,21 @@
         {
           "stage": "S1-2-3",
           "dungeonName": {
+            "en": "Knight Order Control (1)",
+            "jp": "騎士団の制御（1）",
+            "kr": "기사단의 통제 (1)",
+            "zh": "骑士团的管控（1）"
+          },
+          "areaName": {
+            "en": "Singularity",
+            "jp": "特異点",
+            "kr": "특이점",
+            "zh": "奇点"
+          }
+        },
+        {
+          "stage": "S1-2-3",
+          "dungeonName": {
             "en": "The Mage and Her Cat",
             "jp": "魔法使いと猫さん",
             "kr": "마법사와 고양이",
@@ -1303,6 +1833,21 @@
     {
       "contentType": "PVE_EXPLORATION",
       "requirements": [
+        {
+          "stage": "S1-6-5",
+          "dungeonName": {
+            "en": "Pass",
+            "jp": "合格",
+            "kr": "합격",
+            "zh": "通过"
+          },
+          "areaName": {
+            "en": "Magnolia",
+            "jp": "マグノリア",
+            "kr": "매그놀리아",
+            "zh": "麦格诺里亚"
+          }
+        },
         {
           "stage": "S1-9-5",
           "dungeonName": {
@@ -1338,6 +1883,21 @@
         {
           "stage": "S1-2-7",
           "dungeonName": {
+            "en": "For Luna's Sake",
+            "jp": "ルナのためならば",
+            "kr": "루나를 위한다면",
+            "zh": "为了露娜"
+          },
+          "areaName": {
+            "en": "Singularity",
+            "jp": "特異点",
+            "kr": "특이점",
+            "zh": "奇点"
+          }
+        },
+        {
+          "stage": "S1-2-7",
+          "dungeonName": {
             "en": "A Hunch About a Strong Enemy",
             "jp": "強敵の予感",
             "kr": "강적의 예감",
@@ -1356,11 +1916,32 @@
         "jp": "アーク強襲",
         "kr": "방주 습격",
         "zh": "方舟强袭"
+      },
+      "officialName": {
+        "en": "Ark Raid",
+        "jp": "アーク強襲",
+        "kr": "방주 습격",
+        "zh": "方舟强袭"
       }
     },
     {
       "contentType": "PVE_RAID_A",
       "requirements": [
+        {
+          "stage": "S1-2-5",
+          "dungeonName": {
+            "en": "Ambush",
+            "jp": "奇襲",
+            "kr": "기습",
+            "zh": "突袭"
+          },
+          "areaName": {
+            "en": "Eastern Dungeon",
+            "jp": "東部ダンジョン",
+            "kr": "동부 던전",
+            "zh": "东部暗堡"
+          }
+        },
         {
           "stage": "S1-5-5",
           "dungeonName": {
@@ -1388,6 +1969,21 @@
       "contentType": "PVE_RAID_A_DARK",
       "requirements": [
         {
+          "stage": "S1-3-5",
+          "dungeonName": {
+            "en": "Finding Blacksmith",
+            "jp": "鍛冶屋の姉御",
+            "kr": "대장장이 확보",
+            "zh": "拉拢铁匠"
+          },
+          "areaName": {
+            "en": "Forest Dungeon",
+            "jp": "森林ダンジョン",
+            "kr": "숲 속의 던전",
+            "zh": "林中暗堡"
+          }
+        },
+        {
           "stage": "S1-5-5",
           "dungeonName": {
             "en": "A Temporary Truce",
@@ -1414,6 +2010,21 @@
       "contentType": "PVE_RAID_A_LIGHT",
       "requirements": [
         {
+          "stage": "S1-3-5",
+          "dungeonName": {
+            "en": "Finding Blacksmith",
+            "jp": "鍛冶屋の姉御",
+            "kr": "대장장이 확보",
+            "zh": "拉拢铁匠"
+          },
+          "areaName": {
+            "en": "Forest Dungeon",
+            "jp": "森林ダンジョン",
+            "kr": "숲 속의 던전",
+            "zh": "林中暗堡"
+          }
+        },
+        {
           "stage": "S1-5-5",
           "dungeonName": {
             "en": "A Temporary Truce",
@@ -1439,6 +2050,21 @@
     {
       "contentType": "PVE_RAID_B",
       "requirements": [
+        {
+          "stage": "S1-2-5",
+          "dungeonName": {
+            "en": "Ambush",
+            "jp": "奇襲",
+            "kr": "기습",
+            "zh": "突袭"
+          },
+          "areaName": {
+            "en": "Eastern Dungeon",
+            "jp": "東部ダンジョン",
+            "kr": "동부 던전",
+            "zh": "东部暗堡"
+          }
+        },
         {
           "stage": "S1-5-5",
           "dungeonName": {
@@ -1472,6 +2098,21 @@
       "contentType": "PVE_RAID_B_DARK",
       "requirements": [
         {
+          "stage": "S1-3-5",
+          "dungeonName": {
+            "en": "Finding Blacksmith",
+            "jp": "鍛冶屋の姉御",
+            "kr": "대장장이 확보",
+            "zh": "拉拢铁匠"
+          },
+          "areaName": {
+            "en": "Forest Dungeon",
+            "jp": "森林ダンジョン",
+            "kr": "숲 속의 던전",
+            "zh": "林中暗堡"
+          }
+        },
+        {
           "stage": "S1-5-5",
           "dungeonName": {
             "en": "A Temporary Truce",
@@ -1497,6 +2138,21 @@
     {
       "contentType": "PVE_RAID_B_LIGHT",
       "requirements": [
+        {
+          "stage": "S1-3-5",
+          "dungeonName": {
+            "en": "Finding Blacksmith",
+            "jp": "鍛冶屋の姉御",
+            "kr": "대장장이 확보",
+            "zh": "拉拢铁匠"
+          },
+          "areaName": {
+            "en": "Forest Dungeon",
+            "jp": "森林ダンジョン",
+            "kr": "숲 속의 던전",
+            "zh": "林中暗堡"
+          }
+        },
         {
           "stage": "S1-5-5",
           "dungeonName": {
@@ -1570,17 +2226,26 @@
         "jp": "魔王の遺跡：無限の回廊",
         "kr": "마왕의 유적: 무한의 회랑",
         "zh": "魔王遗迹：无限回廊"
-      },
-      "officialName": {
-        "en": "The Archdemon's Ruins: The Infinite Corridor",
-        "jp": "魔王の遺跡：無限の回廊",
-        "kr": "마왕의 유적: 무한 회랑",
-        "zh": "魔王遗迹：无限回廊"
       }
     },
     {
       "contentType": "PVE_TOWER",
       "requirements": [
+        {
+          "stage": "S1-3-7",
+          "dungeonName": {
+            "en": "Tree of Sephirot",
+            "jp": "セフィロトの木",
+            "kr": "세피로트의 나무",
+            "zh": "生命之树·塞菲洛特"
+          },
+          "areaName": {
+            "en": "World Memory",
+            "jp": "世界の記憶",
+            "kr": "세계 기억",
+            "zh": "世界记忆"
+          }
+        },
         {
           "stage": "S1-3-13",
           "dungeonName": {
@@ -1613,6 +2278,21 @@
     {
       "contentType": "PVE_TOWER_ELEMENTAL",
       "requirements": [
+        {
+          "stage": "S1-4-5",
+          "dungeonName": {
+            "en": "The Commander's Consideration",
+            "jp": "騎士団長の気づかい",
+            "kr": "단장의 배려",
+            "zh": "团长的关怀"
+          },
+          "areaName": {
+            "en": "Nightwatch",
+            "jp": "ナイトウォッチ",
+            "kr": "나이트워치",
+            "zh": "骑士堡"
+          }
+        },
         {
           "stage": "S1-7-5",
           "dungeonName": {
@@ -1672,6 +2352,21 @@
       "contentType": "PVP",
       "requirements": [
         {
+          "stage": "S1-1-6",
+          "dungeonName": {
+            "en": "Commotion at the Tavern",
+            "jp": "酒場での騒動",
+            "kr": "주점에서의 소동",
+            "zh": "酒馆中的骚动"
+          },
+          "areaName": {
+            "en": "Outer City",
+            "jp": "アウターシティ",
+            "kr": "아우터시티",
+            "zh": "外城"
+          }
+        },
+        {
           "stage": "S1-4-6",
           "dungeonName": {
             "en": "The Commander's Sophistry",
@@ -1704,6 +2399,21 @@
       "contentType": "PVP_REAL_TIME",
       "requirements": [
         {
+          "stage": "S1-1-6",
+          "dungeonName": {
+            "en": "Commotion at the Tavern",
+            "jp": "酒場での騒動",
+            "kr": "주점에서의 소동",
+            "zh": "酒馆中的骚动"
+          },
+          "areaName": {
+            "en": "Outer City",
+            "jp": "アウターシティ",
+            "kr": "아우터시티",
+            "zh": "外城"
+          }
+        },
+        {
           "stage": "S1-4-6",
           "dungeonName": {
             "en": "The Commander's Sophistry",
@@ -1730,6 +2440,21 @@
       "contentType": "PVP_REAL_TIME_FRIENDLY",
       "requirements": [
         {
+          "stage": "S1-1-6",
+          "dungeonName": {
+            "en": "Commotion at the Tavern",
+            "jp": "酒場での騒動",
+            "kr": "주점에서의 소동",
+            "zh": "酒馆中的骚动"
+          },
+          "areaName": {
+            "en": "Outer City",
+            "jp": "アウターシティ",
+            "kr": "아우터시티",
+            "zh": "外城"
+          }
+        },
+        {
           "stage": "S1-4-6",
           "dungeonName": {
             "en": "The Commander's Sophistry",
@@ -1755,6 +2480,21 @@
     {
       "contentType": "PVP_REAL_TIME_FRIENDLY",
       "requirements": [
+        {
+          "stage": "S1-1-6",
+          "dungeonName": {
+            "en": "Commotion at the Tavern",
+            "jp": "酒場での騒動",
+            "kr": "주점에서의 소동",
+            "zh": "酒馆中的骚动"
+          },
+          "areaName": {
+            "en": "Outer City",
+            "jp": "アウターシティ",
+            "kr": "아우터시티",
+            "zh": "外城"
+          }
+        },
         {
           "stage": "S1-4-11",
           "dungeonName": {
@@ -1860,6 +2600,21 @@
         {
           "stage": "S1-1-5",
           "dungeonName": {
+            "en": "Fixing the Circuit (1)",
+            "jp": "回路を直す（1）",
+            "kr": "회로 고치기 (1)",
+            "zh": "修复电路（1）"
+          },
+          "areaName": {
+            "en": "Path to Nationhood",
+            "jp": "建国の道",
+            "kr": "건국의 길",
+            "zh": "建国之路"
+          }
+        },
+        {
+          "stage": "S1-1-5",
+          "dungeonName": {
             "en": "The Demibeast and the Lord",
             "jp": "獣人と領主",
             "kr": "수인과 영주",
@@ -1883,6 +2638,21 @@
     {
       "contentType": "WORLD_BOSS",
       "requirements": [
+        {
+          "stage": "S1-7-11",
+          "dungeonName": {
+            "en": "Archdemon of Pure Blood",
+            "jp": "鮮血の魔王",
+            "kr": "선혈의 마왕",
+            "zh": "鲜血魔王"
+          },
+          "areaName": {
+            "en": "Fiend Territory",
+            "jp": "魔族の領域",
+            "kr": "마족의 영역",
+            "zh": "魔族领域"
+          }
+        },
         {
           "stage": "S1-10-14",
           "dungeonName": {

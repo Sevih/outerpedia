@@ -6380,9 +6380,14 @@
       "value": 50
     },
     "2400016": {
-      "stat": "critical_rate",
-      "mode": "flat",
-      "value": 50
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2400039": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
     },
     "2500001": {
       "stat": "def",
@@ -9863,6 +9868,29 @@
           "stat": "critical_dmg_rate",
           "applying": "add",
           "value": 80
+        }
+      ]
+    },
+    "11808": {
+      "2": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "3": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 30
+        }
+      ],
+      "4": [
+        {
+          "stat": "critical_rate",
+          "applying": "add",
+          "value": 60
         }
       ]
     },

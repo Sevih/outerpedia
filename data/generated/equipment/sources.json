@@ -153,6 +153,14 @@
   "790": {
     "bosses": ["51202003", "51202004"]
   },
+  "998": {
+    "bosses": [],
+    "shops": ["event_shop"]
+  },
+  "999": {
+    "bosses": [],
+    "shops": ["event_shop"]
+  },
   "1641": {
     "bosses": [],
     "shops": ["event_shop"]
@@ -190,7 +198,8 @@
     "shops": ["event_shop"]
   },
   "1760": {
-    "bosses": ["407600262"]
+    "bosses": ["407600262"],
+    "shops": ["event_shop"]
   },
   "1761": {
     "bosses": ["407600262"]
@@ -259,7 +268,8 @@
     "bosses": ["407600962"]
   },
   "1789": {
-    "bosses": ["407600962"]
+    "bosses": ["407600962"],
+    "shops": ["event_shop"]
   },
   "1790": {
     "bosses": ["407600962"]

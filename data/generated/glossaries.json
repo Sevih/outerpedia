@@ -6895,61 +6895,29 @@
     },
     "100101": {
       "credit": {
-        "min": 450,
-        "max": 450
+        "min": 3069,
+        "max": 3069
       },
-      "charExp": 105,
-      "accountExp": 37
-    },
-    "100103": {
-      "credit": {
-        "min": 666,
-        "max": 666
-      },
-      "charExp": 130,
-      "accountExp": 46
-    },
-    "100104": {
-      "credit": {
-        "min": 774,
-        "max": 774
-      },
-      "charExp": 140,
-      "accountExp": 49
-    },
-    "100105": {
-      "credit": {
-        "min": 882,
-        "max": 882
-      },
-      "charExp": 160,
-      "accountExp": 56
-    },
-    "100107": {
-      "credit": {
-        "min": 999,
-        "max": 999
-      },
-      "charExp": 175,
-      "accountExp": 61,
+      "charExp": 563,
+      "accountExp": 171,
       "entries": [
         {
           "kind": "item",
-          "id": "5001",
+          "id": "152",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "7001",
+          "id": "1154",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "9001",
+          "id": "3006",
           "min": 1,
           "max": 1,
           "random": true
@@ -6958,36 +6926,188 @@
           "kind": "item",
           "id": "20001",
           "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "100103": {
+      "credit": {
+        "min": 3177,
+        "max": 3177
+      },
+      "charExp": 585,
+      "accountExp": 174,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "152",
+          "min": 1,
           "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1154",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3006",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "100104": {
+      "credit": {
+        "min": 3177,
+        "max": 3177
+      },
+      "charExp": 585,
+      "accountExp": 174,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "5006",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7006",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9006",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "100105": {
+      "credit": {
+        "min": 3285,
+        "max": 3285
+      },
+      "charExp": 608,
+      "accountExp": 177,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "152",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1154",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3006",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "100107": {
+      "credit": {
+        "min": 3393,
+        "max": 3393
+      },
+      "charExp": 632,
+      "accountExp": 181,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "5006",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7006",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9006",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
           "random": true
         }
       ]
     },
     "100108": {
       "credit": {
-        "min": 1107,
-        "max": 1107
+        "min": 3393,
+        "max": 3393
       },
-      "charExp": 210,
-      "accountExp": 74,
+      "charExp": 632,
+      "accountExp": 181,
       "entries": [
         {
           "kind": "item",
-          "id": "1",
+          "id": "152",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "1001",
+          "id": "1154",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "3001",
+          "id": "3006",
           "min": 1,
           "max": 1,
           "random": true
@@ -6996,36 +7116,36 @@
           "kind": "item",
           "id": "20001",
           "min": 1,
-          "max": 1,
+          "max": 2,
           "random": true
         }
       ]
     },
     "100109": {
       "credit": {
-        "min": 1215,
-        "max": 1215
+        "min": 3501,
+        "max": 3501
       },
-      "charExp": 235,
-      "accountExp": 82,
+      "charExp": 656,
+      "accountExp": 184,
       "entries": [
         {
           "kind": "item",
-          "id": "5001",
+          "id": "5006",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "7001",
+          "id": "7006",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "9001",
+          "id": "9006",
           "min": 1,
           "max": 1,
           "random": true
@@ -7034,36 +7154,36 @@
           "kind": "item",
           "id": "20001",
           "min": 1,
-          "max": 1,
+          "max": 2,
           "random": true
         }
       ]
     },
     "100110": {
       "credit": {
-        "min": 1431,
-        "max": 1431
+        "min": 3618,
+        "max": 3618
       },
-      "charExp": 263,
-      "accountExp": 92,
+      "charExp": 681,
+      "accountExp": 187,
       "entries": [
         {
           "kind": "item",
-          "id": "1",
+          "id": "152",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "1001",
+          "id": "1154",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "3001",
+          "id": "3006",
           "min": 1,
           "max": 1,
           "random": true
@@ -7072,42 +7192,36 @@
           "kind": "item",
           "id": "20001",
           "min": 1,
-          "max": 1,
+          "max": 2,
           "random": true
         }
       ]
     },
     "100201": {
       "credit": {
-        "min": 1431,
-        "max": 1431
+        "min": 3618,
+        "max": 3618
       },
-      "charExp": 263,
-      "accountExp": 92,
+      "charExp": 681,
+      "accountExp": 187,
       "entries": [
         {
           "kind": "item",
-          "id": "20001",
-          "min": 1,
-          "max": 1
-        },
-        {
-          "kind": "item",
-          "id": "5049",
+          "id": "152",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "7049",
+          "id": "1154",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "9049",
+          "id": "3054",
           "min": 1,
           "max": 1,
           "random": true
@@ -7116,42 +7230,36 @@
           "kind": "item",
           "id": "20001",
           "min": 1,
-          "max": 1,
+          "max": 2,
           "random": true
         }
       ]
     },
     "100202": {
       "credit": {
-        "min": 1539,
-        "max": 1539
+        "min": 3726,
+        "max": 3726
       },
-      "charExp": 277,
-      "accountExp": 97,
+      "charExp": 701,
+      "accountExp": 190,
       "entries": [
         {
           "kind": "item",
-          "id": "20001",
-          "min": 1,
-          "max": 1
-        },
-        {
-          "kind": "item",
-          "id": "1",
+          "id": "5054",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "1003",
+          "id": "7054",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "3049",
+          "id": "9054",
           "min": 1,
           "max": 1,
           "random": true
@@ -7160,42 +7268,36 @@
           "kind": "item",
           "id": "20001",
           "min": 1,
-          "max": 1,
+          "max": 2,
           "random": true
         }
       ]
     },
     "100203": {
       "credit": {
-        "min": 1647,
-        "max": 1647
+        "min": 3726,
+        "max": 3726
       },
-      "charExp": 291,
-      "accountExp": 102,
+      "charExp": 701,
+      "accountExp": 190,
       "entries": [
         {
           "kind": "item",
-          "id": "20001",
-          "min": 1,
-          "max": 1
-        },
-        {
-          "kind": "item",
-          "id": "5049",
+          "id": "152",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "7049",
+          "id": "1154",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "9049",
+          "id": "3054",
           "min": 1,
           "max": 1,
           "random": true
@@ -7204,42 +7306,36 @@
           "kind": "item",
           "id": "20001",
           "min": 1,
-          "max": 1,
+          "max": 2,
           "random": true
         }
       ]
     },
     "100204": {
       "credit": {
-        "min": 1755,
-        "max": 1755
+        "min": 3834,
+        "max": 3834
       },
-      "charExp": 306,
-      "accountExp": 107,
+      "charExp": 722,
+      "accountExp": 193,
       "entries": [
         {
           "kind": "item",
-          "id": "20001",
-          "min": 1,
-          "max": 1
-        },
-        {
-          "kind": "item",
-          "id": "1",
+          "id": "5054",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "1003",
+          "id": "7054",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "3049",
+          "id": "9054",
           "min": 1,
           "max": 1,
           "random": true
@@ -7248,42 +7344,36 @@
           "kind": "item",
           "id": "20001",
           "min": 1,
-          "max": 1,
+          "max": 2,
           "random": true
         }
       ]
     },
     "100205": {
       "credit": {
-        "min": 1872,
-        "max": 1872
+        "min": 3834,
+        "max": 3834
       },
-      "charExp": 335,
-      "accountExp": 117,
+      "charExp": 722,
+      "accountExp": 193,
       "entries": [
         {
           "kind": "item",
-          "id": "20001",
-          "min": 1,
-          "max": 1
-        },
-        {
-          "kind": "item",
-          "id": "5049",
+          "id": "152",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "7049",
+          "id": "1154",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "9049",
+          "id": "3054",
           "min": 1,
           "max": 1,
           "random": true
@@ -7292,42 +7382,36 @@
           "kind": "item",
           "id": "20001",
           "min": 1,
-          "max": 1,
+          "max": 2,
           "random": true
         }
       ]
     },
     "100207": {
       "credit": {
-        "min": 1980,
-        "max": 1980
+        "min": 3942,
+        "max": 3942
       },
-      "charExp": 350,
-      "accountExp": 123,
+      "charExp": 744,
+      "accountExp": 196,
       "entries": [
         {
           "kind": "item",
-          "id": "20001",
-          "min": 1,
-          "max": 1
-        },
-        {
-          "kind": "item",
-          "id": "2",
+          "id": "5054",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "1006",
+          "id": "7054",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "3050",
+          "id": "9054",
           "min": 1,
           "max": 1,
           "random": true
@@ -7336,70 +7420,36 @@
           "kind": "item",
           "id": "20001",
           "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "1",
-          "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "1003",
-          "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "3049",
-          "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "20001",
-          "min": 1,
-          "max": 1,
+          "max": 2,
           "random": true
         }
       ]
     },
     "100208": {
       "credit": {
-        "min": 2088,
-        "max": 2088
+        "min": 3942,
+        "max": 3942
       },
-      "charExp": 365,
-      "accountExp": 128,
+      "charExp": 744,
+      "accountExp": 196,
       "entries": [
         {
           "kind": "item",
-          "id": "20001",
-          "min": 1,
-          "max": 1
-        },
-        {
-          "kind": "item",
-          "id": "5050",
+          "id": "152",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "7050",
+          "id": "1154",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "9050",
+          "id": "3054",
           "min": 1,
           "max": 1,
           "random": true
@@ -7408,70 +7458,36 @@
           "kind": "item",
           "id": "20001",
           "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "5049",
-          "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "7049",
-          "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "9049",
-          "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "20001",
-          "min": 1,
-          "max": 1,
+          "max": 2,
           "random": true
         }
       ]
     },
     "100209": {
       "credit": {
-        "min": 2196,
-        "max": 2196
+        "min": 4050,
+        "max": 4050
       },
-      "charExp": 380,
-      "accountExp": 133,
+      "charExp": 767,
+      "accountExp": 200,
       "entries": [
         {
           "kind": "item",
-          "id": "20001",
-          "min": 1,
-          "max": 1
-        },
-        {
-          "kind": "item",
-          "id": "2",
+          "id": "5054",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "1006",
+          "id": "7054",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "3050",
+          "id": "9054",
           "min": 1,
           "max": 1,
           "random": true
@@ -7480,70 +7496,36 @@
           "kind": "item",
           "id": "20001",
           "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "1",
-          "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "1003",
-          "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "3049",
-          "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "20001",
-          "min": 1,
-          "max": 1,
+          "max": 2,
           "random": true
         }
       ]
     },
     "100210": {
       "credit": {
-        "min": 2304,
-        "max": 2304
+        "min": 4050,
+        "max": 4050
       },
-      "charExp": 400,
-      "accountExp": 140,
+      "charExp": 767,
+      "accountExp": 200,
       "entries": [
         {
           "kind": "item",
-          "id": "20001",
-          "min": 1,
-          "max": 1
-        },
-        {
-          "kind": "item",
-          "id": "5050",
+          "id": "152",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "7050",
+          "id": "1154",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "9050",
+          "id": "3054",
           "min": 1,
           "max": 1,
           "random": true
@@ -7552,70 +7534,36 @@
           "kind": "item",
           "id": "20001",
           "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "5049",
-          "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "7049",
-          "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "9049",
-          "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "20001",
-          "min": 1,
-          "max": 1,
+          "max": 2,
           "random": true
         }
       ]
     },
     "100211": {
       "credit": {
-        "min": 2520,
-        "max": 2520
+        "min": 4158,
+        "max": 4158
       },
-      "charExp": 440,
-      "accountExp": 154,
+      "charExp": 790,
+      "accountExp": 203,
       "entries": [
         {
           "kind": "item",
-          "id": "20001",
-          "min": 1,
-          "max": 1
-        },
-        {
-          "kind": "item",
-          "id": "2",
+          "id": "5054",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "1006",
+          "id": "7054",
           "min": 1,
           "max": 1,
           "random": true
         },
         {
           "kind": "item",
-          "id": "3050",
+          "id": "9054",
           "min": 1,
           "max": 1,
           "random": true
@@ -7624,46 +7572,18 @@
           "kind": "item",
           "id": "20001",
           "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "1",
-          "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "1003",
-          "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "3049",
-          "min": 1,
-          "max": 1,
-          "random": true
-        },
-        {
-          "kind": "item",
-          "id": "20001",
-          "min": 1,
-          "max": 1,
+          "max": 2,
           "random": true
         }
       ]
     },
     "100301": {
       "credit": {
-        "min": 2628,
-        "max": 2628
+        "min": 4158,
+        "max": 4158
       },
-      "charExp": 458,
-      "accountExp": 151,
+      "charExp": 790,
+      "accountExp": 203,
       "entries": [
         {
           "kind": "item",
@@ -7731,11 +7651,11 @@
     },
     "100302": {
       "credit": {
-        "min": 2745,
-        "max": 2745
+        "min": 4266,
+        "max": 4266
       },
-      "charExp": 476,
-      "accountExp": 154,
+      "charExp": 812,
+      "accountExp": 206,
       "entries": [
         {
           "kind": "item",
@@ -7803,11 +7723,11 @@
     },
     "100303": {
       "credit": {
-        "min": 2853,
-        "max": 2853
+        "min": 4266,
+        "max": 4266
       },
-      "charExp": 495,
-      "accountExp": 157,
+      "charExp": 812,
+      "accountExp": 206,
       "entries": [
         {
           "kind": "item",
@@ -7875,11 +7795,11 @@
     },
     "100304": {
       "credit": {
-        "min": 2961,
-        "max": 2961
+        "min": 4374,
+        "max": 4374
       },
-      "charExp": 515,
-      "accountExp": 160,
+      "charExp": 835,
+      "accountExp": 209,
       "entries": [
         {
           "kind": "item",
@@ -7947,11 +7867,11 @@
     },
     "100305": {
       "credit": {
-        "min": 3069,
-        "max": 3069
+        "min": 4374,
+        "max": 4374
       },
-      "charExp": 536,
-      "accountExp": 163,
+      "charExp": 835,
+      "accountExp": 209,
       "entries": [
         {
           "kind": "item",
@@ -8019,11 +7939,11 @@
     },
     "100306": {
       "credit": {
-        "min": 3285,
-        "max": 3285
+        "min": 4482,
+        "max": 4482
       },
-      "charExp": 579,
-      "accountExp": 169,
+      "charExp": 858,
+      "accountExp": 212,
       "entries": [
         {
           "kind": "item",
@@ -8091,11 +8011,11 @@
     },
     "100308": {
       "credit": {
-        "min": 3393,
-        "max": 3393
+        "min": 4482,
+        "max": 4482
       },
-      "charExp": 602,
-      "accountExp": 172,
+      "charExp": 858,
+      "accountExp": 212,
       "entries": [
         {
           "kind": "item",
@@ -8163,11 +8083,11 @@
     },
     "100309": {
       "credit": {
-        "min": 3501,
-        "max": 3501
+        "min": 4599,
+        "max": 4599
       },
-      "charExp": 625,
-      "accountExp": 175,
+      "charExp": 882,
+      "accountExp": 215,
       "entries": [
         {
           "kind": "item",
@@ -8235,11 +8155,11 @@
     },
     "100310": {
       "credit": {
-        "min": 3501,
-        "max": 3501
+        "min": 4599,
+        "max": 4599
       },
-      "charExp": 625,
-      "accountExp": 175,
+      "charExp": 882,
+      "accountExp": 215,
       "entries": [
         {
           "kind": "item",
@@ -8307,11 +8227,11 @@
     },
     "100311": {
       "credit": {
-        "min": 3618,
-        "max": 3618
+        "min": 4707,
+        "max": 4707
       },
-      "charExp": 649,
-      "accountExp": 178,
+      "charExp": 907,
+      "accountExp": 218,
       "entries": [
         {
           "kind": "item",
@@ -8379,11 +8299,11 @@
     },
     "100312": {
       "credit": {
-        "min": 3618,
-        "max": 3618
+        "min": 4707,
+        "max": 4707
       },
-      "charExp": 649,
-      "accountExp": 178,
+      "charExp": 907,
+      "accountExp": 218,
       "entries": [
         {
           "kind": "item",
@@ -8451,11 +8371,11 @@
     },
     "100401": {
       "credit": {
-        "min": 3618,
-        "max": 3618
+        "min": 4707,
+        "max": 4707
       },
-      "charExp": 649,
-      "accountExp": 178,
+      "charExp": 907,
+      "accountExp": 218,
       "entries": [
         {
           "kind": "item",
@@ -8495,11 +8415,11 @@
     },
     "100402": {
       "credit": {
-        "min": 3726,
-        "max": 3726
+        "min": 4815,
+        "max": 4815
       },
-      "charExp": 668,
-      "accountExp": 181,
+      "charExp": 930,
+      "accountExp": 221,
       "entries": [
         {
           "kind": "item",
@@ -8539,11 +8459,11 @@
     },
     "100403": {
       "credit": {
-        "min": 3726,
-        "max": 3726
+        "min": 4815,
+        "max": 4815
       },
-      "charExp": 668,
-      "accountExp": 181,
+      "charExp": 930,
+      "accountExp": 221,
       "entries": [
         {
           "kind": "item",
@@ -8569,11 +8489,11 @@
     },
     "100404": {
       "credit": {
-        "min": 3834,
-        "max": 3834
+        "min": 4923,
+        "max": 4923
       },
-      "charExp": 688,
-      "accountExp": 184,
+      "charExp": 954,
+      "accountExp": 224,
       "entries": [
         {
           "kind": "item",
@@ -8613,11 +8533,11 @@
     },
     "100405": {
       "credit": {
-        "min": 3834,
-        "max": 3834
+        "min": 4923,
+        "max": 4923
       },
-      "charExp": 688,
-      "accountExp": 184,
+      "charExp": 954,
+      "accountExp": 224,
       "entries": [
         {
           "kind": "item",
@@ -8657,11 +8577,11 @@
     },
     "100407": {
       "credit": {
-        "min": 3942,
-        "max": 3942
+        "min": 5031,
+        "max": 5031
       },
-      "charExp": 709,
-      "accountExp": 187,
+      "charExp": 980,
+      "accountExp": 227,
       "entries": [
         {
           "kind": "item",
@@ -8701,11 +8621,11 @@
     },
     "100408": {
       "credit": {
-        "min": 3942,
-        "max": 3942
+        "min": 5031,
+        "max": 5031
       },
-      "charExp": 709,
-      "accountExp": 187,
+      "charExp": 980,
+      "accountExp": 227,
       "entries": [
         {
           "kind": "item",
@@ -8731,11 +8651,11 @@
     },
     "100409": {
       "credit": {
-        "min": 4050,
-        "max": 4050
+        "min": 5139,
+        "max": 5139
       },
-      "charExp": 730,
-      "accountExp": 190,
+      "charExp": 1005,
+      "accountExp": 230,
       "entries": [
         {
           "kind": "item",
@@ -8775,11 +8695,11 @@
     },
     "100410": {
       "credit": {
-        "min": 4050,
-        "max": 4050
+        "min": 5139,
+        "max": 5139
       },
-      "charExp": 730,
-      "accountExp": 190,
+      "charExp": 1005,
+      "accountExp": 230,
       "entries": [
         {
           "kind": "item",
@@ -8833,11 +8753,11 @@
     },
     "100411": {
       "credit": {
-        "min": 4158,
-        "max": 4158
+        "min": 5247,
+        "max": 5247
       },
-      "charExp": 752,
-      "accountExp": 193,
+      "charExp": 1031,
+      "accountExp": 233,
       "entries": [
         {
           "kind": "item",
@@ -8905,11 +8825,11 @@
     },
     "100501": {
       "credit": {
-        "min": 4158,
-        "max": 4158
+        "min": 5247,
+        "max": 5247
       },
-      "charExp": 752,
-      "accountExp": 193,
+      "charExp": 1031,
+      "accountExp": 233,
       "entries": [
         {
           "kind": "item",
@@ -8949,11 +8869,11 @@
     },
     "100502": {
       "credit": {
-        "min": 4266,
-        "max": 4266
+        "min": 5355,
+        "max": 5355
       },
-      "charExp": 773,
-      "accountExp": 196,
+      "charExp": 1056,
+      "accountExp": 235,
       "entries": [
         {
           "kind": "item",
@@ -8993,11 +8913,11 @@
     },
     "100503": {
       "credit": {
-        "min": 4266,
-        "max": 4266
+        "min": 5355,
+        "max": 5355
       },
-      "charExp": 773,
-      "accountExp": 196,
+      "charExp": 1056,
+      "accountExp": 235,
       "entries": [
         {
           "kind": "item",
@@ -9037,11 +8957,11 @@
     },
     "100504": {
       "credit": {
-        "min": 4374,
-        "max": 4374
+        "min": 5472,
+        "max": 5472
       },
-      "charExp": 795,
-      "accountExp": 199,
+      "charExp": 1082,
+      "accountExp": 237,
       "entries": [
         {
           "kind": "item",
@@ -9081,11 +9001,11 @@
     },
     "100505": {
       "credit": {
-        "min": 4374,
-        "max": 4374
+        "min": 5472,
+        "max": 5472
       },
-      "charExp": 795,
-      "accountExp": 199,
+      "charExp": 1082,
+      "accountExp": 237,
       "entries": [
         {
           "kind": "item",
@@ -9125,11 +9045,11 @@
     },
     "100507": {
       "credit": {
-        "min": 4482,
-        "max": 4482
+        "min": 5580,
+        "max": 5580
       },
-      "charExp": 817,
-      "accountExp": 202,
+      "charExp": 1108,
+      "accountExp": 239,
       "entries": [
         {
           "kind": "item",
@@ -9169,11 +9089,11 @@
     },
     "100508": {
       "credit": {
-        "min": 4482,
-        "max": 4482
+        "min": 5580,
+        "max": 5580
       },
-      "charExp": 817,
-      "accountExp": 202,
+      "charExp": 1108,
+      "accountExp": 239,
       "entries": [
         {
           "kind": "item",
@@ -9241,11 +9161,11 @@
     },
     "100509": {
       "credit": {
-        "min": 4599,
-        "max": 4599
+        "min": 5688,
+        "max": 5688
       },
-      "charExp": 840,
-      "accountExp": 205,
+      "charExp": 1134,
+      "accountExp": 242,
       "entries": [
         {
           "kind": "item",
@@ -9313,11 +9233,11 @@
     },
     "100510": {
       "credit": {
-        "min": 4599,
-        "max": 4599
+        "min": 5688,
+        "max": 5688
       },
-      "charExp": 840,
-      "accountExp": 205,
+      "charExp": 1134,
+      "accountExp": 242,
       "entries": [
         {
           "kind": "item",
@@ -9385,11 +9305,11 @@
     },
     "100511": {
       "credit": {
-        "min": 4707,
-        "max": 4707
+        "min": 5796,
+        "max": 5796
       },
-      "charExp": 864,
-      "accountExp": 208,
+      "charExp": 1161,
+      "accountExp": 244,
       "entries": [
         {
           "kind": "item",
@@ -9457,11 +9377,11 @@
     },
     "100601": {
       "credit": {
-        "min": 4707,
-        "max": 4707
+        "min": 5796,
+        "max": 5796
       },
-      "charExp": 864,
-      "accountExp": 208,
+      "charExp": 1161,
+      "accountExp": 244,
       "entries": [
         {
           "kind": "item",
@@ -9529,11 +9449,11 @@
     },
     "100602": {
       "credit": {
-        "min": 4815,
-        "max": 4815
+        "min": 5904,
+        "max": 5904
       },
-      "charExp": 886,
-      "accountExp": 210,
+      "charExp": 1184,
+      "accountExp": 246,
       "entries": [
         {
           "kind": "item",
@@ -9601,11 +9521,11 @@
     },
     "100603": {
       "credit": {
-        "min": 4815,
-        "max": 4815
+        "min": 5904,
+        "max": 5904
       },
-      "charExp": 886,
-      "accountExp": 210,
+      "charExp": 1184,
+      "accountExp": 246,
       "entries": [
         {
           "kind": "item",
@@ -9673,11 +9593,11 @@
     },
     "100604": {
       "credit": {
-        "min": 4923,
-        "max": 4923
+        "min": 6012,
+        "max": 6012
       },
-      "charExp": 909,
-      "accountExp": 213,
+      "charExp": 1209,
+      "accountExp": 248,
       "entries": [
         {
           "kind": "item",
@@ -9745,11 +9665,11 @@
     },
     "100605": {
       "credit": {
-        "min": 4923,
-        "max": 4923
+        "min": 6012,
+        "max": 6012
       },
-      "charExp": 909,
-      "accountExp": 213,
+      "charExp": 1209,
+      "accountExp": 248,
       "entries": [
         {
           "kind": "item",
@@ -9817,11 +9737,11 @@
     },
     "100607": {
       "credit": {
-        "min": 5031,
-        "max": 5031
+        "min": 6120,
+        "max": 6120
       },
-      "charExp": 933,
-      "accountExp": 216,
+      "charExp": 1233,
+      "accountExp": 250,
       "entries": [
         {
           "kind": "item",
@@ -9889,11 +9809,11 @@
     },
     "100608": {
       "credit": {
-        "min": 5031,
-        "max": 5031
+        "min": 6120,
+        "max": 6120
       },
-      "charExp": 933,
-      "accountExp": 216,
+      "charExp": 1233,
+      "accountExp": 250,
       "entries": [
         {
           "kind": "item",
@@ -9961,11 +9881,11 @@
     },
     "100609": {
       "credit": {
-        "min": 5139,
-        "max": 5139
+        "min": 6228,
+        "max": 6228
       },
-      "charExp": 957,
-      "accountExp": 219,
+      "charExp": 1257,
+      "accountExp": 252,
       "entries": [
         {
           "kind": "item",
@@ -10033,11 +9953,11 @@
     },
     "100610": {
       "credit": {
-        "min": 5139,
-        "max": 5139
+        "min": 6228,
+        "max": 6228
       },
-      "charExp": 957,
-      "accountExp": 219,
+      "charExp": 1257,
+      "accountExp": 252,
       "entries": [
         {
           "kind": "item",
@@ -10105,11 +10025,11 @@
     },
     "100611": {
       "credit": {
-        "min": 5247,
-        "max": 5247
+        "min": 6345,
+        "max": 6345
       },
-      "charExp": 982,
-      "accountExp": 222,
+      "charExp": 1282,
+      "accountExp": 254,
       "entries": [
         {
           "kind": "item",
@@ -10177,11 +10097,11 @@
     },
     "100701": {
       "credit": {
-        "min": 5247,
-        "max": 5247
+        "min": 6345,
+        "max": 6345
       },
-      "charExp": 982,
-      "accountExp": 222,
+      "charExp": 1282,
+      "accountExp": 254,
       "entries": [
         {
           "kind": "item",
@@ -10249,11 +10169,11 @@
     },
     "100702": {
       "credit": {
-        "min": 5355,
-        "max": 5355
+        "min": 6453,
+        "max": 6453
       },
-      "charExp": 1006,
-      "accountExp": 224,
+      "charExp": 1303,
+      "accountExp": 256,
       "entries": [
         {
           "kind": "item",
@@ -10321,11 +10241,11 @@
     },
     "100703": {
       "credit": {
-        "min": 5355,
-        "max": 5355
+        "min": 6453,
+        "max": 6453
       },
-      "charExp": 1006,
-      "accountExp": 224,
+      "charExp": 1303,
+      "accountExp": 256,
       "entries": [
         {
           "kind": "item",
@@ -10393,11 +10313,11 @@
     },
     "100704": {
       "credit": {
-        "min": 5472,
-        "max": 5472
+        "min": 6453,
+        "max": 6453
       },
-      "charExp": 1030,
-      "accountExp": 226,
+      "charExp": 1303,
+      "accountExp": 256,
       "entries": [
         {
           "kind": "item",
@@ -10465,11 +10385,11 @@
     },
     "100705": {
       "credit": {
-        "min": 5472,
-        "max": 5472
+        "min": 6561,
+        "max": 6561
       },
-      "charExp": 1030,
-      "accountExp": 226,
+      "charExp": 1324,
+      "accountExp": 258,
       "entries": [
         {
           "kind": "item",
@@ -10537,11 +10457,11 @@
     },
     "100707": {
       "credit": {
-        "min": 5580,
-        "max": 5580
+        "min": 6561,
+        "max": 6561
       },
-      "charExp": 1055,
-      "accountExp": 228,
+      "charExp": 1324,
+      "accountExp": 258,
       "entries": [
         {
           "kind": "item",
@@ -10609,11 +10529,11 @@
     },
     "100708": {
       "credit": {
-        "min": 5580,
-        "max": 5580
+        "min": 6669,
+        "max": 6669
       },
-      "charExp": 1055,
-      "accountExp": 228,
+      "charExp": 1345,
+      "accountExp": 260,
       "entries": [
         {
           "kind": "item",
@@ -10681,11 +10601,11 @@
     },
     "100709": {
       "credit": {
-        "min": 5688,
-        "max": 5688
+        "min": 6669,
+        "max": 6669
       },
-      "charExp": 1080,
-      "accountExp": 230,
+      "charExp": 1345,
+      "accountExp": 260,
       "entries": [
         {
           "kind": "item",
@@ -10753,11 +10673,11 @@
     },
     "100710": {
       "credit": {
-        "min": 5688,
-        "max": 5688
+        "min": 6669,
+        "max": 6669
       },
-      "charExp": 1080,
-      "accountExp": 230,
+      "charExp": 1345,
+      "accountExp": 260,
       "entries": [
         {
           "kind": "item",
@@ -10825,11 +10745,11 @@
     },
     "100711": {
       "credit": {
-        "min": 5796,
-        "max": 5796
+        "min": 6669,
+        "max": 6669
       },
-      "charExp": 1106,
-      "accountExp": 232,
+      "charExp": 1345,
+      "accountExp": 260,
       "entries": [
         {
           "kind": "item",
@@ -10897,11 +10817,11 @@
     },
     "100801": {
       "credit": {
-        "min": 5904,
-        "max": 5904
+        "min": 6669,
+        "max": 6669
       },
-      "charExp": 1128,
-      "accountExp": 234,
+      "charExp": 1345,
+      "accountExp": 260,
       "entries": [
         {
           "kind": "item",
@@ -10962,11 +10882,11 @@
     },
     "100802": {
       "credit": {
-        "min": 5904,
-        "max": 5904
+        "min": 6669,
+        "max": 6669
       },
-      "charExp": 1128,
-      "accountExp": 234,
+      "charExp": 1345,
+      "accountExp": 260,
       "entries": [
         {
           "kind": "item",
@@ -11027,11 +10947,11 @@
     },
     "100803": {
       "credit": {
-        "min": 5904,
-        "max": 5904
+        "min": 6669,
+        "max": 6669
       },
-      "charExp": 1128,
-      "accountExp": 234,
+      "charExp": 1345,
+      "accountExp": 260,
       "entries": [
         {
           "kind": "item",
@@ -11092,11 +11012,11 @@
     },
     "100804": {
       "credit": {
-        "min": 6012,
-        "max": 6012
+        "min": 6669,
+        "max": 6669
       },
-      "charExp": 1151,
-      "accountExp": 236,
+      "charExp": 1345,
+      "accountExp": 260,
       "entries": [
         {
           "kind": "item",
@@ -11157,11 +11077,11 @@
     },
     "100805": {
       "credit": {
-        "min": 6012,
-        "max": 6012
+        "min": 6669,
+        "max": 6669
       },
-      "charExp": 1151,
-      "accountExp": 236,
+      "charExp": 1345,
+      "accountExp": 260,
       "entries": [
         {
           "kind": "item",
@@ -11222,11 +11142,11 @@
     },
     "100807": {
       "credit": {
-        "min": 6120,
-        "max": 6120
+        "min": 6777,
+        "max": 6777
       },
-      "charExp": 1174,
-      "accountExp": 238,
+      "charExp": 1366,
+      "accountExp": 263,
       "entries": [
         {
           "kind": "item",
@@ -11287,11 +11207,11 @@
     },
     "100808": {
       "credit": {
-        "min": 6120,
-        "max": 6120
+        "min": 6777,
+        "max": 6777
       },
-      "charExp": 1174,
-      "accountExp": 238,
+      "charExp": 1366,
+      "accountExp": 263,
       "entries": [
         {
           "kind": "item",
@@ -11352,11 +11272,11 @@
     },
     "100809": {
       "credit": {
-        "min": 6228,
-        "max": 6228
+        "min": 6777,
+        "max": 6777
       },
-      "charExp": 1197,
-      "accountExp": 240,
+      "charExp": 1366,
+      "accountExp": 263,
       "entries": [
         {
           "kind": "item",
@@ -11417,11 +11337,11 @@
     },
     "100810": {
       "credit": {
-        "min": 6228,
-        "max": 6228
+        "min": 6885,
+        "max": 6885
       },
-      "charExp": 1197,
-      "accountExp": 240,
+      "charExp": 1388,
+      "accountExp": 266,
       "entries": [
         {
           "kind": "item",
@@ -11482,11 +11402,11 @@
     },
     "100811": {
       "credit": {
-        "min": 6345,
-        "max": 6345
+        "min": 6885,
+        "max": 6885
       },
-      "charExp": 1221,
-      "accountExp": 242,
+      "charExp": 1388,
+      "accountExp": 266,
       "entries": [
         {
           "kind": "item",
@@ -11547,11 +11467,11 @@
     },
     "100901": {
       "credit": {
-        "min": 6345,
-        "max": 6345
+        "min": 6885,
+        "max": 6885
       },
-      "charExp": 1221,
-      "accountExp": 242,
+      "charExp": 1388,
+      "accountExp": 266,
       "entries": [
         {
           "kind": "item",
@@ -11612,11 +11532,11 @@
     },
     "100902": {
       "credit": {
-        "min": 6453,
-        "max": 6453
+        "min": 6885,
+        "max": 6885
       },
-      "charExp": 1241,
-      "accountExp": 244,
+      "charExp": 1388,
+      "accountExp": 266,
       "entries": [
         {
           "kind": "item",
@@ -11677,11 +11597,11 @@
     },
     "100903": {
       "credit": {
-        "min": 6453,
-        "max": 6453
+        "min": 6885,
+        "max": 6885
       },
-      "charExp": 1241,
-      "accountExp": 244,
+      "charExp": 1388,
+      "accountExp": 266,
       "entries": [
         {
           "kind": "item",
@@ -11742,11 +11662,11 @@
     },
     "100904": {
       "credit": {
-        "min": 6561,
-        "max": 6561
+        "min": 6993,
+        "max": 6993
       },
-      "charExp": 1261,
-      "accountExp": 246,
+      "charExp": 1408,
+      "accountExp": 268,
       "entries": [
         {
           "kind": "item",
@@ -11807,11 +11727,11 @@
     },
     "100905": {
       "credit": {
-        "min": 6561,
-        "max": 6561
+        "min": 6993,
+        "max": 6993
       },
-      "charExp": 1261,
-      "accountExp": 246,
+      "charExp": 1408,
+      "accountExp": 268,
       "entries": [
         {
           "kind": "item",
@@ -11872,11 +11792,11 @@
     },
     "100907": {
       "credit": {
-        "min": 6669,
-        "max": 6669
+        "min": 6993,
+        "max": 6993
       },
-      "charExp": 1281,
-      "accountExp": 248,
+      "charExp": 1408,
+      "accountExp": 268,
       "entries": [
         {
           "kind": "item",
@@ -11937,11 +11857,11 @@
     },
     "100908": {
       "credit": {
-        "min": 6669,
-        "max": 6669
+        "min": 7101,
+        "max": 7101
       },
-      "charExp": 1281,
-      "accountExp": 248,
+      "charExp": 1428,
+      "accountExp": 270,
       "entries": [
         {
           "kind": "item",
@@ -12002,11 +11922,11 @@
     },
     "100909": {
       "credit": {
-        "min": 6777,
-        "max": 6777
+        "min": 7101,
+        "max": 7101
       },
-      "charExp": 1301,
-      "accountExp": 250,
+      "charExp": 1428,
+      "accountExp": 270,
       "entries": [
         {
           "kind": "item",
@@ -12067,11 +11987,11 @@
     },
     "100910": {
       "credit": {
-        "min": 6777,
-        "max": 6777
+        "min": 7101,
+        "max": 7101
       },
-      "charExp": 1301,
-      "accountExp": 250,
+      "charExp": 1428,
+      "accountExp": 270,
       "entries": [
         {
           "kind": "item",
@@ -12132,11 +12052,11 @@
     },
     "100911": {
       "credit": {
-        "min": 6885,
-        "max": 6885
+        "min": 7218,
+        "max": 7218
       },
-      "charExp": 1322,
-      "accountExp": 253,
+      "charExp": 1448,
+      "accountExp": 272,
       "entries": [
         {
           "kind": "item",
@@ -12197,11 +12117,11 @@
     },
     "100912": {
       "credit": {
-        "min": 6885,
-        "max": 6885
+        "min": 7218,
+        "max": 7218
       },
-      "charExp": 1322,
-      "accountExp": 253,
+      "charExp": 1448,
+      "accountExp": 272,
       "entries": [
         {
           "kind": "item",
@@ -12256,11 +12176,11 @@
     },
     "101001": {
       "credit": {
-        "min": 6993,
-        "max": 6993
+        "min": 7218,
+        "max": 7218
       },
-      "charExp": 1341,
-      "accountExp": 255,
+      "charExp": 1448,
+      "accountExp": 272,
       "entries": [
         {
           "kind": "item",
@@ -12321,11 +12241,11 @@
     },
     "101002": {
       "credit": {
-        "min": 6993,
-        "max": 6993
+        "min": 7218,
+        "max": 7218
       },
-      "charExp": 1341,
-      "accountExp": 255,
+      "charExp": 1448,
+      "accountExp": 272,
       "entries": [
         {
           "kind": "item",
@@ -12386,11 +12306,11 @@
     },
     "101003": {
       "credit": {
-        "min": 7101,
-        "max": 7101
+        "min": 7218,
+        "max": 7218
       },
-      "charExp": 1360,
-      "accountExp": 257,
+      "charExp": 1448,
+      "accountExp": 272,
       "entries": [
         {
           "kind": "item",
@@ -12451,11 +12371,11 @@
     },
     "101004": {
       "credit": {
-        "min": 7101,
-        "max": 7101
+        "min": 7326,
+        "max": 7326
       },
-      "charExp": 1360,
-      "accountExp": 257,
+      "charExp": 1468,
+      "accountExp": 274,
       "entries": [
         {
           "kind": "item",
@@ -12516,11 +12436,11 @@
     },
     "101005": {
       "credit": {
-        "min": 7101,
-        "max": 7101
+        "min": 7326,
+        "max": 7326
       },
-      "charExp": 1360,
-      "accountExp": 257,
+      "charExp": 1468,
+      "accountExp": 274,
       "entries": [
         {
           "kind": "item",
@@ -12581,11 +12501,11 @@
     },
     "101007": {
       "credit": {
-        "min": 7218,
-        "max": 7218
+        "min": 7326,
+        "max": 7326
       },
-      "charExp": 1379,
-      "accountExp": 259,
+      "charExp": 1468,
+      "accountExp": 274,
       "entries": [
         {
           "kind": "item",
@@ -12646,11 +12566,11 @@
     },
     "101009": {
       "credit": {
-        "min": 7326,
-        "max": 7326
+        "min": 7434,
+        "max": 7434
       },
-      "charExp": 1398,
-      "accountExp": 261,
+      "charExp": 1489,
+      "accountExp": 276,
       "entries": [
         {
           "kind": "item",
@@ -12711,11 +12631,11 @@
     },
     "101010": {
       "credit": {
-        "min": 7326,
-        "max": 7326
+        "min": 7434,
+        "max": 7434
       },
-      "charExp": 1398,
-      "accountExp": 261,
+      "charExp": 1489,
+      "accountExp": 276,
       "entries": [
         {
           "kind": "item",
@@ -12776,11 +12696,11 @@
     },
     "101012": {
       "credit": {
-        "min": 7500,
-        "max": 7500
+        "min": 7434,
+        "max": 7434
       },
-      "charExp": 1398,
-      "accountExp": 261,
+      "charExp": 1489,
+      "accountExp": 276,
       "entries": [
         {
           "kind": "item",
@@ -12841,11 +12761,11 @@
     },
     "101013": {
       "credit": {
-        "min": 7550,
-        "max": 7550
+        "min": 7434,
+        "max": 7434
       },
-      "charExp": 1418,
-      "accountExp": 263,
+      "charExp": 1489,
+      "accountExp": 276,
       "entries": [
         {
           "kind": "item",
@@ -33901,6 +33821,2205 @@
         }
       ]
     },
+    "200101": {
+      "credit": {
+        "min": 558,
+        "max": 558
+      },
+      "charExp": 126,
+      "accountExp": 44
+    },
+    "200102": {
+      "credit": {
+        "min": 666,
+        "max": 666
+      },
+      "charExp": 137,
+      "accountExp": 48
+    },
+    "200103": {
+      "credit": {
+        "min": 774,
+        "max": 774
+      },
+      "charExp": 147,
+      "accountExp": 51
+    },
+    "200104": {
+      "credit": {
+        "min": 882,
+        "max": 882
+      },
+      "charExp": 168,
+      "accountExp": 59,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "1",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3001",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 1,
+          "random": true
+        }
+      ]
+    },
+    "200105": {
+      "credit": {
+        "min": 999,
+        "max": 999
+      },
+      "charExp": 184,
+      "accountExp": 64,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "1001",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5001",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 1,
+          "random": true
+        }
+      ]
+    },
+    "200106": {
+      "credit": {
+        "min": 1107,
+        "max": 1107
+      },
+      "charExp": 221,
+      "accountExp": 78,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "1",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7001",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 1,
+          "random": true
+        }
+      ]
+    },
+    "200107": {
+      "credit": {
+        "min": 1215,
+        "max": 1215
+      },
+      "charExp": 247,
+      "accountExp": 86,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "1001",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9001",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 1,
+          "random": true
+        }
+      ]
+    },
+    "200108": {
+      "credit": {
+        "min": 1431,
+        "max": 1431
+      },
+      "charExp": 276,
+      "accountExp": 97,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "1",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1001",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 1,
+          "random": true
+        }
+      ]
+    },
+    "200200": {
+      "credit": {
+        "min": 1431,
+        "max": 1431
+      },
+      "charExp": 276,
+      "accountExp": 97,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "1",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1002",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3049",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200201": {
+      "credit": {
+        "min": 1539,
+        "max": 1539
+      },
+      "charExp": 291,
+      "accountExp": 102,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "5049",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7049",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9049",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200202": {
+      "credit": {
+        "min": 1539,
+        "max": 1539
+      },
+      "charExp": 291,
+      "accountExp": 102,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "1",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1002",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3049",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 1,
+          "random": true
+        }
+      ]
+    },
+    "200203": {
+      "credit": {
+        "min": 1647,
+        "max": 1647
+      },
+      "charExp": 306,
+      "accountExp": 107,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "5049",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7049",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9049",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200204": {
+      "credit": {
+        "min": 1755,
+        "max": 1755
+      },
+      "charExp": 321,
+      "accountExp": 112,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "1",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1002",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3049",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200205": {
+      "credit": {
+        "min": 1872,
+        "max": 1872
+      },
+      "charExp": 352,
+      "accountExp": 123,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "5049",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7049",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9049",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200208": {
+      "credit": {
+        "min": 2088,
+        "max": 2088
+      },
+      "charExp": 383,
+      "accountExp": 134,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "2",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1005",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3050",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200209": {
+      "credit": {
+        "min": 2088,
+        "max": 2088
+      },
+      "charExp": 383,
+      "accountExp": 134,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "5050",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7050",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9050",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200210": {
+      "credit": {
+        "min": 2304,
+        "max": 2304
+      },
+      "charExp": 420,
+      "accountExp": 147,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "2",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1005",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3050",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 1,
+          "random": true
+        }
+      ]
+    },
+    "200211": {
+      "credit": {
+        "min": 2412,
+        "max": 2412
+      },
+      "charExp": 441,
+      "accountExp": 154,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "5050",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7050",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9050",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200302": {
+      "credit": {
+        "min": 2520,
+        "max": 2520
+      },
+      "charExp": 462,
+      "accountExp": 162,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "151",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1152",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200303": {
+      "credit": {
+        "min": 2628,
+        "max": 2628
+      },
+      "charExp": 481,
+      "accountExp": 159,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "5077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200304": {
+      "credit": {
+        "min": 2628,
+        "max": 2628
+      },
+      "charExp": 481,
+      "accountExp": 159,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "151",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1152",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200305": {
+      "credit": {
+        "min": 2745,
+        "max": 2745
+      },
+      "charExp": 500,
+      "accountExp": 162,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "5077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200308": {
+      "credit": {
+        "min": 2853,
+        "max": 2853
+      },
+      "charExp": 520,
+      "accountExp": 165,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "151",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1152",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200309": {
+      "credit": {
+        "min": 2853,
+        "max": 2853
+      },
+      "charExp": 520,
+      "accountExp": 165,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "5077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200310": {
+      "credit": {
+        "min": 2961,
+        "max": 2961
+      },
+      "charExp": 541,
+      "accountExp": 168,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "151",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1152",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200312": {
+      "credit": {
+        "min": 3069,
+        "max": 3069
+      },
+      "charExp": 563,
+      "accountExp": 171,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "5077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200313": {
+      "credit": {
+        "min": 3069,
+        "max": 3069
+      },
+      "charExp": 563,
+      "accountExp": 171,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "151",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1152",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "200314": {
+      "credit": {
+        "min": 3069,
+        "max": 3069
+      },
+      "charExp": 563,
+      "accountExp": 171,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "5077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9077",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20001",
+          "min": 1,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "210101": {
+      "credit": {
+        "min": 7434,
+        "max": 7434
+      },
+      "charExp": 1489,
+      "accountExp": 276,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "3058",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5058",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3298",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5298",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 2,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "210102": {
+      "credit": {
+        "min": 7434,
+        "max": 7434
+      },
+      "charExp": 1489,
+      "accountExp": 276,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "7058",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9058",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7298",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9298",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 2,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "210103": {
+      "credit": {
+        "min": 7542,
+        "max": 7542
+      },
+      "charExp": 1507,
+      "accountExp": 278,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "303",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1304",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1307",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 2,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "210104": {
+      "credit": {
+        "min": 7542,
+        "max": 7542
+      },
+      "charExp": 1507,
+      "accountExp": 278,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "3058",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5058",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3298",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5298",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 2,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "210105": {
+      "credit": {
+        "min": 7650,
+        "max": 7650
+      },
+      "charExp": 1525,
+      "accountExp": 280,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "7058",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9058",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7298",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9298",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 2,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "210106": {
+      "credit": {
+        "min": 7650,
+        "max": 7650
+      },
+      "charExp": 1525,
+      "accountExp": 280,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "303",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1304",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1307",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 2,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "210107": {
+      "credit": {
+        "min": 7758,
+        "max": 7758
+      },
+      "charExp": 1542,
+      "accountExp": 282,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "3058",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5058",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3298",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5298",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 2,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "210108": {
+      "credit": {
+        "min": 7758,
+        "max": 7758
+      },
+      "charExp": 1542,
+      "accountExp": 282,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "7058",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9058",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7298",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9298",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 2,
+          "max": 2,
+          "random": true
+        }
+      ]
+    },
+    "210201": {
+      "credit": {
+        "min": 7866,
+        "max": 7866
+      },
+      "charExp": 1561,
+      "accountExp": 285,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "3082",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5082",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3274",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5274",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210202": {
+      "credit": {
+        "min": 7866,
+        "max": 7866
+      },
+      "charExp": 1561,
+      "accountExp": 285,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "7082",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9082",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7274",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9274",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210203": {
+      "credit": {
+        "min": 7974,
+        "max": 7974
+      },
+      "charExp": 1580,
+      "accountExp": 287,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "303",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1305",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1308",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210204": {
+      "credit": {
+        "min": 7974,
+        "max": 7974
+      },
+      "charExp": 1580,
+      "accountExp": 287,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "3082",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5082",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3274",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5274",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210205": {
+      "credit": {
+        "min": 7974,
+        "max": 7974
+      },
+      "charExp": 1580,
+      "accountExp": 287,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "7082",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9082",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7274",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9274",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210206": {
+      "credit": {
+        "min": 8082,
+        "max": 8082
+      },
+      "charExp": 1596,
+      "accountExp": 289,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "303",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1305",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1308",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210207": {
+      "credit": {
+        "min": 8082,
+        "max": 8082
+      },
+      "charExp": 1596,
+      "accountExp": 289,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "3086",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5086",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3278",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5278",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210208": {
+      "credit": {
+        "min": 8082,
+        "max": 8082
+      },
+      "charExp": 1596,
+      "accountExp": 289,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "7086",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9086",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7278",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9278",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210209": {
+      "credit": {
+        "min": 8199,
+        "max": 8199
+      },
+      "charExp": 1612,
+      "accountExp": 291,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "452",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "453",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1455",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1458",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210210": {
+      "credit": {
+        "min": 8199,
+        "max": 8199
+      },
+      "charExp": 1612,
+      "accountExp": 291,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "3086",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5086",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3278",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5278",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210301": {
+      "credit": {
+        "min": 8199,
+        "max": 8199
+      },
+      "charExp": 1612,
+      "accountExp": 291,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "3302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3158",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5158",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210302": {
+      "credit": {
+        "min": 8199,
+        "max": 8199
+      },
+      "charExp": 1612,
+      "accountExp": 291,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "7302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7158",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9158",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210303": {
+      "credit": {
+        "min": 8307,
+        "max": 8307
+      },
+      "charExp": 1628,
+      "accountExp": 293,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "452",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "453",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1455",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1458",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210304": {
+      "credit": {
+        "min": 8307,
+        "max": 8307
+      },
+      "charExp": 1628,
+      "accountExp": 293,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "3302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3158",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5158",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210305": {
+      "credit": {
+        "min": 8307,
+        "max": 8307
+      },
+      "charExp": 1628,
+      "accountExp": 293,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "7302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7158",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9158",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210306": {
+      "credit": {
+        "min": 8415,
+        "max": 8415
+      },
+      "charExp": 1644,
+      "accountExp": 295,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "452",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "453",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1455",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1458",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210307": {
+      "credit": {
+        "min": 8415,
+        "max": 8415
+      },
+      "charExp": 1644,
+      "accountExp": 295,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "3302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3158",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5158",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210308": {
+      "credit": {
+        "min": 8415,
+        "max": 8415
+      },
+      "charExp": 1644,
+      "accountExp": 295,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "7302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "7158",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "9158",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210309": {
+      "credit": {
+        "min": 8523,
+        "max": 8523
+      },
+      "charExp": 1661,
+      "accountExp": 297,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "452",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "453",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1455",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "1458",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
+    "210310": {
+      "credit": {
+        "min": 8523,
+        "max": 8523
+      },
+      "charExp": 1661,
+      "accountExp": 297,
+      "entries": [
+        {
+          "kind": "item",
+          "id": "3302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5302",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "3158",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "5158",
+          "min": 1,
+          "max": 1,
+          "random": true
+        },
+        {
+          "kind": "item",
+          "id": "20002",
+          "min": 3,
+          "max": 3,
+          "random": true
+        }
+      ]
+    },
     "720001": {
       "entries": [
         {
@@ -41370,6 +43489,106 @@
           "id": "19",
           "min": 50,
           "max": 50
+        }
+      ]
+    },
+    "40501025": {
+      "entries": [
+        {
+          "kind": "item",
+          "id": "30548",
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "40501050": {
+      "entries": [
+        {
+          "kind": "item",
+          "id": "30548",
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "40501075": {
+      "entries": [
+        {
+          "kind": "item",
+          "id": "30548",
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "40501100": {
+      "entries": [
+        {
+          "kind": "item",
+          "id": "30548",
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "40601010": {
+      "entries": [
+        {
+          "kind": "item",
+          "id": "30548",
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "40601020": {
+      "entries": [
+        {
+          "kind": "item",
+          "id": "30548",
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "40601030": {
+      "entries": [
+        {
+          "kind": "item",
+          "id": "30548",
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "40601040": {
+      "entries": [
+        {
+          "kind": "item",
+          "id": "30548",
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "40701010": {
+      "entries": [
+        {
+          "kind": "item",
+          "id": "30548",
+          "min": 2,
+          "max": 2
+        }
+      ]
+    },
+    "40701020": {
+      "entries": [
+        {
+          "kind": "item",
+          "id": "30548",
+          "min": 2,
+          "max": 2
         }
       ]
     },

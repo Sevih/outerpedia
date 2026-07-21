@@ -5557,7 +5557,7 @@
         ],
         "restrictions": [],
         "randomized": true,
-        "power": 159670,
+        "power": 159710,
         "level": 130
       },
       {
@@ -5743,7 +5743,7 @@
         ],
         "restrictions": [],
         "randomized": true,
-        "power": 161580,
+        "power": 161660,
         "level": 131
       },
       {
@@ -5809,7 +5809,7 @@
         ],
         "restrictions": [],
         "randomized": true,
-        "power": 163490,
+        "power": 163610,
         "level": 132
       },
       {
@@ -5995,7 +5995,7 @@
         ],
         "restrictions": [],
         "randomized": true,
-        "power": 165400,
+        "power": 165560,
         "level": 133
       },
       {
@@ -6042,7 +6042,7 @@
           ]
         ],
         "restrictions": [],
-        "power": 167310,
+        "power": 167510,
         "level": 134
       },
       {
@@ -6228,7 +6228,7 @@
         ],
         "restrictions": [],
         "randomized": true,
-        "power": 177310,
+        "power": 169460,
         "level": 135
       },
       {
@@ -6414,7 +6414,7 @@
         ],
         "restrictions": [],
         "randomized": true,
-        "power": 179260,
+        "power": 171410,
         "level": 136
       },
       {
@@ -6480,7 +6480,7 @@
         ],
         "restrictions": [],
         "randomized": true,
-        "power": 181210,
+        "power": 173360,
         "level": 137
       },
       {
@@ -6666,7 +6666,7 @@
         ],
         "restrictions": [],
         "randomized": true,
-        "power": 183160,
+        "power": 175310,
         "level": 138
       },
       {
@@ -6713,7 +6713,7 @@
           ]
         ],
         "restrictions": [],
-        "power": 185110,
+        "power": 177260,
         "level": 139
       },
       {
@@ -6899,7 +6899,7 @@
         ],
         "restrictions": [],
         "randomized": true,
-        "power": 187060,
+        "power": 179210,
         "level": 140
       },
       {
@@ -7085,7 +7085,7 @@
         ],
         "restrictions": [],
         "randomized": true,
-        "power": 189010,
+        "power": 181160,
         "level": 141
       },
       {
@@ -7151,7 +7151,7 @@
         ],
         "restrictions": [],
         "randomized": true,
-        "power": 190960,
+        "power": 183110,
         "level": 142
       },
       {
@@ -7337,7 +7337,7 @@
         ],
         "restrictions": [],
         "randomized": true,
-        "power": 192910,
+        "power": 185060,
         "level": 143
       },
       {
@@ -7384,7 +7384,7 @@
           ]
         ],
         "restrictions": [],
-        "power": 194860,
+        "power": 187010,
         "level": 144
       },
       {
@@ -7570,7 +7570,7 @@
         ],
         "restrictions": [],
         "randomized": true,
-        "power": 196810,
+        "power": 188960,
         "level": 145
       },
       {
@@ -7756,7 +7756,7 @@
         ],
         "restrictions": [],
         "randomized": true,
-        "power": 198760,
+        "power": 190910,
         "level": 146
       },
       {
@@ -7822,7 +7822,7 @@
         ],
         "restrictions": [],
         "randomized": true,
-        "power": 200710,
+        "power": 192860,
         "level": 147
       },
       {
@@ -8008,7 +8008,7 @@
         ],
         "restrictions": [],
         "randomized": true,
-        "power": 202660,
+        "power": 194810,
         "level": 148
       },
       {
@@ -8037,7 +8037,7 @@
           ]
         ],
         "restrictions": [],
-        "power": 204610,
+        "power": 196760,
         "level": 149
       }
     ],
@@ -14010,7 +14010,7 @@
             }
           }
         ],
-        "power": 126100,
+        "power": 118600,
         "level": 131
       },
       {
