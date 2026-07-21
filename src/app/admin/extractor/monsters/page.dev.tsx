@@ -1,6 +1,7 @@
 import { AcceptTargetButton } from '@/components/admin/AcceptTargetButton';
 import { IntegrateModeButton } from '@/components/admin/IntegrateModeButton';
 import { buildMonsterRows } from '@/lib/admin/monster-rows';
+import { siteMonsterDiff } from '@/lib/admin/monster-review';
 import { reviewTarget, reviewTotals } from '@/lib/admin/review-store';
 
 export const dynamic = 'force-dynamic';
@@ -13,6 +14,9 @@ export const dynamic = 'force-dynamic';
 export default function ExtractorMonstersIndex() {
   const review = reviewTarget('monster');
   const total = reviewTotals(review.diff);
+  // Périmètre SITE : ce que comptent le badge du menu et l'accueil (le reste de
+  // l'extraction couvre des monstres qu'aucune page ne sert).
+  const siteTotal = reviewTotals(siteMonsterDiff(review.diff));
   const { modeOptions } = buildMonsterRows();
 
   return (
@@ -38,6 +42,11 @@ export default function ExtractorMonstersIndex() {
           <dd className="text-content">{review.diff.removed.length}</dd>
         </div>
       </dl>
+      <p className="text-content-subtle text-xs">
+        Whole extraction above. <span className="text-content">{siteTotal}</span> of these concern
+        monsters <strong>used by the site</strong> — that&apos;s what the menu badge and the
+        dashboard count (the sidebar filters the same way by default).
+      </p>
 
       {total > 0 && (
         <div className="border-line-subtle bg-surface-raised space-y-2 rounded-lg border p-4">

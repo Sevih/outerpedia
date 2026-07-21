@@ -22,6 +22,7 @@ import { fileStamp, loadTable, tablesStamp } from '@datagen/lib/tables';
 import { loadTextIndex, resolveText } from '@datagen/lib/text';
 import type { Skill } from '@datagen/generators/skills';
 import { statAbbr } from '@/lib/stats';
+import { listGuides } from '@/lib/data/guides';
 
 export type { DungeonRef, EncountersData, Monster, Skill };
 
@@ -80,6 +81,8 @@ const NON_SITE_MODES = new Set([
  *   - réfs directes des données servies — content-schedule (world boss, guild
  *     raid main+sub, joint challenge), singularity, towers, boss d'obtention
  *     d'équipement (sources + curé) — et leurs donjons ;
+ *   - les boss référencés par un GUIDE (`meta.bossId`) — certains ne spawnent
+ *     que dans un mode exclu (adventure-license, story) ;
  *   - tout monstre spawnant dans un mode NON exclu (cf. `NON_SITE_MODES`) ;
  *   - les ADDS rattachés (`summonedBy`/`linkedTo` vers un monstre utilisé).
  */
@@ -88,6 +91,8 @@ export function siteMonsterIds(): Set<string> {
   // 17/07) : l'ensemble dérive des tables .gamedata (un refresh les réécrit
   // toutes → sentinelle TextSystem) ET du curé équipement (boss d'obtention,
   // éditable via l'admin → fileStamp). Recalcul quand l'un des deux bouge.
+  // Les `meta.bossId` des guides ne sont PAS stampés : ce sont des fichiers de
+  // `src/` — les toucher recompile le dev server, ce qui vide ce cache module.
   const stamp = `${tablesStamp(['TextSystem'])}|${fileStamp('data/curated/equipment.json')}`;
   if (siteIdsCache && siteIdsCache.stamp === stamp) return siteIdsCache.ids;
   const ids = new Set<string>();
@@ -128,6 +133,12 @@ export function siteMonsterIds(): Set<string> {
   // + complément curé) — donjons quotidiens, Special Request, licences…
   for (const s of Object.values(buildItemSources().items)) for (const b of s.bosses) ids.add(b);
   for (const b of curatedBossIds(loadEquipmentCurated())) ids.add(b);
+
+  // Boss RÉFÉRENCÉS PAR UN GUIDE (`meta.bossId`). Indispensable : certains ne
+  // spawnent QUE dans un mode exclu par `NON_SITE_MODES` (adventure-license,
+  // story) — sans ça, une page de guide servirait un monstre hors périmètre et
+  // ses écarts d'extraction seraient invisibles (21 cas au 20/07).
+  for (const g of listGuides()) if (g.bossId) ids.add(g.bossId);
 
   const monsters = freshMonsters();
   const enc = buildEncounters();

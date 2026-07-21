@@ -7,6 +7,7 @@ import { loadCuratedCharacters } from '@/lib/data/curated';
 import { getMergedEffects, loadCuratedEffects } from '@/lib/data/effects';
 import { getEEViews, loadEquipmentEditorial } from '@/lib/data/equipment';
 import { reviewAll, reviewBuckets, type DiffBuckets } from '@/lib/admin/review-store';
+import { actionableDiff } from '@/lib/admin/monster-review';
 
 // Accueil = tableau de bord, extraction fraîche, jamais prérendu.
 export const dynamic = 'force-dynamic';
@@ -84,7 +85,11 @@ export default function AdminHome() {
   const curated = loadCuratedCharacters();
 
   // EXTRACT : un seul moteur pour toutes les entités (committé vs frais).
-  const buckets = new Map(reviewAll().map((r) => [r.id, reviewBuckets(r.diff)]));
+  // Monstres restreints au périmètre SITE (cf. `actionableDiff`) — mêmes
+  // chiffres que le badge du menu.
+  const buckets = new Map(
+    reviewAll().map((r) => [r.id, reviewBuckets(actionableDiff(r.id, r.diff))]),
+  );
   const empty: DiffBuckets = { new: 0, diff: 0, typo: 0, removed: 0 };
   const ex = (id: string, route: string) => ({ href: route, b: buckets.get(id) ?? empty });
 

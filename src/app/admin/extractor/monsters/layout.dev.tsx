@@ -1,5 +1,6 @@
 import { ExtractorSidebar } from '@/components/admin/ExtractorSidebar';
 import { buildMonsterRows } from '@/lib/admin/monster-rows';
+import { siteMonsterCounts } from '@/lib/admin/monster-review';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,6 +11,7 @@ export default function ExtractorMonstersLayout({ children }: { children: React.
     <div className="flex gap-6">
       <ExtractorSidebar
         rows={rows}
+        counts={siteMonsterCounts()}
         basePath="/admin/extractor/monsters"
         toggles={[{ flag: 'site', label: 'Used by the site', defaultOn: true }]}
         tagFilter={{ allLabel: 'all modes', options: modeOptions }}

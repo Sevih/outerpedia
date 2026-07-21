@@ -1,6 +1,7 @@
 import { AdminSidebar, type NavSection } from '@/components/admin/AdminSidebar';
 import { assertDevOnly } from '@/lib/admin/guard';
 import { reviewAll, reviewBuckets } from '@/lib/admin/review-store';
+import { actionableDiff } from '@/lib/admin/monster-review';
 
 // Outil local : jamais prérendu, 404 en prod.
 export const dynamic = 'force-dynamic';
@@ -15,7 +16,9 @@ function pendingCounts(): Record<string, { count: number; title: string }> {
   const out: Record<string, { count: number; title: string }> = {};
   try {
     for (const r of reviewAll()) {
-      const b = reviewBuckets(r.diff);
+      // Monstres : seuls ceux servis par le site sont actionnables (cf.
+      // `actionableDiff`) — sinon le badge compte du bruit d'extraction.
+      const b = reviewBuckets(actionableDiff(r.id, r.diff));
       // Le badge est un TOTAL ; le détail va en infobulle (sinon « 4 » se lit
       // « 4 diff » alors que la page dit « 2 new + 2 diff »).
       out[r.id] = {

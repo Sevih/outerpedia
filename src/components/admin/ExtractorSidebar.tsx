@@ -142,14 +142,20 @@ export function ExtractorSidebar({
               <span className="text-success">{stats.ok} ok</span>
               <span
                 className="text-warn"
-                title={counts ? 'Écarts par item (la liste montre des familles)' : undefined}
+                title={
+                  counts
+                    ? 'Écarts de la REVUE (périmètre à traiter) — la liste ci-dessous peut avoir une autre granularité ou un autre filtre'
+                    : undefined
+                }
               >
                 {stats.diff} diff
               </span>
               <span
                 className="text-accent"
                 title={
-                  counts ? 'Nouveaux items — non navigables ici, voir la page index' : undefined
+                  counts
+                    ? 'Nouvelles entités de la revue — certaines ne sont pas navigables ici, voir la page index'
+                    : undefined
                 }
               >
                 {stats.new} new
