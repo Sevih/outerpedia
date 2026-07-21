@@ -46,6 +46,17 @@ const STATE_FILE = resolve('datagen/assets/pushed.json');
 const IMG_BASE = 'https://img.outerpedia.com';
 const CACHE_CONTROL = 'public, max-age=86400, s-maxage=31536000, stale-while-revalidate=86400';
 /**
+ * Délai max avant qu'un visiteur ayant DÉJÀ l'image voie une correction, LU
+ * DANS le header plutôt qu'écrit à la main : le message de fin a menti pendant
+ * un mois (« sous 10 min ») après le passage du max-age à 1 jour le 20/07.
+ */
+const BROWSER_TTL = (() => {
+  const s = Number(/max-age=(\d+)/.exec(CACHE_CONTROL)?.[1] ?? 0);
+  if (s >= 86400) return `${Math.round(s / 86400)} j`;
+  if (s >= 3600) return `${Math.round(s / 3600)} h`;
+  return `${Math.round(s / 60)} min`;
+})();
+/**
  * Les JSON RUNTIME (`data/*` : coupons, bannières) sont de la donnée VIVE, pas
  * des assets quasi-immuables : `s-maxage` court pour que l'edge se rafraîchisse
  * seul même sans purge — même en-tête que la publication admin directe
@@ -269,6 +280,8 @@ console.log(`\n✅ ${toPush.length} asset(s) poussé(s). Commite datagen/assets/
 if (changed.length && !bootstrap && !FULL) {
   console.log(
     `   ${changed.length} image(s) CORRIGÉE(S) en place : l'edge est purgé (visible tout de suite\n` +
-      `   pour qui ne les a pas en cache), les autres revalideront sous 10 min.`,
+      `   pour qui ne les a pas en cache). Ceux qui l'ont déjà la gardent jusqu'à\n` +
+      `   ${BROWSER_TTL} (max-age navigateur, INPURGEABLE), puis la revalidation se fait en\n` +
+      `   fond (stale-while-revalidate) : la correction apparaît au chargement suivant.`,
   );
 }
