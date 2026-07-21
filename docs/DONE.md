@@ -6,6 +6,22 @@
 
 ## 2026-07-21
 
+- **Promotion du patch réparée + deux verrous dans `promote` (cd218dc,
+  d263b88).** Les invariants d'encounters.test ont détecté un état MI-PROMU :
+  `monsters.json` copié verbatim depuis l'extrait SANS ses 41 skills ni les 57
+  donjons de ses spawns (les boutons admin « Enregistrer » n'y sont pour rien —
+  ils embarquent bien entité + skills + donjons ; c'est une promotion par
+  fichier qui a coupé le trio). Verrous : ① `--only` sur un membre du trio à
+  rétention (monsters/monster-skills/encounters) ENTRAÎNE les deux autres
+  (unité référentielle) ; ② les entités retenues sont marquées `retired: true`
+  (archives — contenu retiré des tables, ex. les 6 donjons world boss event
+  554xxx purgés par le patch) et l'invariant d'aller-retour spawn↔donjon
+  exempte les archives. Promotion appliquée SANS les persos en proposition
+  (décision Sevih : lambda `2000118` et `2400015` ne partent pas — vérifié :
+  aucun de leurs skills/EE dans les 15 fichiers promus). 552 tests verts.
+  Régime de croisière : une regen complète par patch → invariants verts ; les
+  retraits de contenu futurs passent en archive automatiquement.
+
 - **`/characters` : retour au `?z=` compact (codec V2) dans la barre
   d'adresse.** Décision Sevih : la barre EST le lien de partage (réflexe =
   copier l'URL, pas un bouton), et les params en clair faisaient des URLs de
