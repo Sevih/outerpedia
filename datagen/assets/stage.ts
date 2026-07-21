@@ -223,7 +223,11 @@ export async function stageAssets(
       if (!src) {
         // Repli éditorial : sprite absent de l'extraction mais existant comme
         // asset wiki (pool V3 d'abord, pool V2 en héritage — icônes
-        // retravaillées/composées à la main).
+        // retravaillées/composées à la main). `candidates: []` en fait la
+        // source EXCLUSIVE : le sprite du jeu, même présent, est ignoré (série
+        // de badges qui doit rester homogène — cf. manifest, recrutement).
+        // NB : la copie est BRUTE — le fichier éditorial doit porter le format
+        // de la clé (un .png de pool ne satisfait pas une clé .webp).
         if (req.editorialFallback) {
           const fb = editorialSource(req.editorialFallback);
           if (fb) {
@@ -239,7 +243,12 @@ export async function stageAssets(
             continue;
           }
         }
-        result.missing.push({ key: req.key, reason: `sprite introuvable : ${req.candidates[0]}` });
+        result.missing.push({
+          key: req.key,
+          reason: req.candidates.length
+            ? `sprite introuvable : ${req.candidates[0]}`
+            : `source éditoriale absente des pools : ${req.editorialFallback}`,
+        });
         continue;
       }
 

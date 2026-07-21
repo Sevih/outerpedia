@@ -16,7 +16,7 @@ import { buildImageIndex } from '../assets/source';
 import { stageAssets } from '../assets/stage';
 import type { AssetRequest } from '../assets/manifest';
 import { integrateItemData } from '../generators/item-catalog';
-import { MISSING_ITEM_ICONS } from '../../src/lib/data/item-blacklist';
+import { MISSING_ITEM_ICONS } from '../lib/item-blacklist';
 import type { IntegrateReport } from './integrate';
 
 const GEN = resolve('data/generated');

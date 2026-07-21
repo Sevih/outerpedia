@@ -6,6 +6,36 @@
 
 ## 2026-07-21
 
+- **Badges de recrutement : SÉRIE DÉPAREILLÉE corrigée (constat Sevih).** Les
+  5 `CM_Recruit_Tag_*` étaient collectés de DEUX sources : le jeu ne porte que
+  Seasonal/Premium/Fes, donc ces trois venaient du client et Collab/Free du
+  wiki — trois sprites du jeu et deux visuels wiki côte à côte sur la même
+  carte. Les 5 PNG V2 sont désormais convertis en webp DANS le pool éditorial
+  V3 (`data/editorial/ui/recruit/`, versionné : plus rien à chercher dans la
+  V2) et le manifest les déclare en source EXCLUSIVE (`candidates: []` → le
+  sprite du jeu, même présent, est ignoré). Vérifié : `assets:collect` refait
+  exactement 5 assets, tailles staging = tailles éditoriales (copie brute).
+  Second bug trouvé au passage : le repli V2 ne résolvait PAS ici (il n'y
+  porte que des `.png` quand la clé demande `.webp` et que la copie éditoriale
+  est brute) — les deux webp présents étaient des VESTIGES non reproductibles.
+  `stage.ts` documente la règle de format et signale désormais correctement une
+  source éditoriale absente (au lieu de « sprite introuvable : undefined »).
+- **Les 4 items d'audit du 17/07 traités (décisions Sevih).**
+  ① `ModeColumns` REFONDU : une seule instance de chaque colonne, bascule
+  mobile/desktop en pur CSS (avant : bloc mobile + bloc desktop = colonne
+  active sérialisée 2×). Mesuré sur `/guides/special-request` : 175 → 165 Ko
+  d'HTML, 45 → 40 occurrences de cartes (plus aucune dupliquée) ; titre de
+  colonne en `sr-only` mobile (l'onglet en tient lieu) → l'a11y ne régresse
+  pas. ② `item-blacklist` DÉPLACÉ dans `datagen/lib/` : ses 3 consommateurs
+  sont des générateurs et AUCUN code `src` ne le lisait — l'import
+  datagen → src violait la doctrine des contrats pour rien. ③ `[+Turn]` :
+  FAUX POSITIF de l'audit, comportement CONSERVÉ et commenté — les 22 usages
+  réels sont des DURÉES (« [+Turn]ターンの間 » = pendant N tours), un signe
+  donnerait « pendant +2 tours » ; la V2 fait pareil et `[-Turn]` n'existe
+  dans aucune table. ④ `comics.json` EXEMPTÉ du signalement « orphelin » de
+  `promote` (`isArchive` → `isPureCurated`) : validé pur par construction
+  (BD faites main, `buildComics` volontairement hors `build.ts`, manifeste R2
+  à la requête) — le warning à chaque promote masquait les vrais orphelins.
 - **Outil `/team-planner` porté.** ① Moteur SERVEUR dans `skill-view.ts` :
   `buildTeamKitView` (4 tests) — mêmes règles de routage que les cartes de la
   fiche (variantes unies, passifs rattachés caller/convention, upgrades de

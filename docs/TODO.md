@@ -161,18 +161,8 @@ Règle permanente : chaque `meta.bossId` d'un guide porté doit exister dans
 - [ ] `TODO(guides)` de `version-monster.ts:16` : « Versionner » doit
       RÉ-ÉPINGLER les guides `<id>` → `<id>@<n>` — le domaine guides existe,
       c'est actionnable.
-- [ ] (audit 17/07) `ModeColumns.tsx:39-49` : le contenu serveur de toutes les
-      colonnes est rendu 2× dans le DOM (bloc mobile + bloc desktop) — payload
-      doublé sur des colonnes lourdes. Accepter et documenter, ou refondre en
-      une instance + bascule CSS.
-- [ ] (audit 17/07) `item-catalog.ts:23` importe
-      `src/lib/data/item-blacklist` — dépendance datagen → src à rebours de la
-      doctrine des contrats. Déplacer la source unique côté datagen/curated ?
-- [ ] (audit 17/07) `lib/buff.ts:150` : `[+Turn]` rend « 2 » sans le signe `+`
-      (asymétrie avec `[+Value*]`/`[-Turn]`) — vérifier le comportement V2
-      avant de trancher.
-- [ ] `comics.json` : validé sans équivalent extrait (signalé par chaque
-      `datagen:promote`) — à trancher (source runtime R2, cf. manifeste).
+      (Les 4 items d'audit — ModeColumns, item-blacklist, `[+Turn]`, comics.json —
+      sont TRAITÉS le 21/07, cf. DONE.)
 
 ---
 

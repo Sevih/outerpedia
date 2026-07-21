@@ -21,7 +21,7 @@ import { isMain } from '../lib/is-main';
 import { readCuratedJson, writeJson } from '../lib/json';
 import { num } from '../lib/tables';
 import type { LangDict } from '../lib/lang';
-import { MISSING_ITEM_ICONS } from '../../src/lib/data/item-blacklist';
+import { MISSING_ITEM_ICONS } from '../lib/item-blacklist';
 import { buildItems, type Item } from './items';
 import { buildGoods, type Goods } from './goods';
 import { buildCostumes, type CostumeEntry } from './costumes';

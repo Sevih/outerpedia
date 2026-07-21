@@ -15,7 +15,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { STAT_ICON } from '../../src/lib/stats';
 import { rankBadgeSprite } from '../../src/lib/ranks';
-import { MISSING_ITEM_ICONS as ITEM_ICON_BLACKLIST } from '../../src/lib/data/item-blacklist';
+import { MISSING_ITEM_ICONS as ITEM_ICON_BLACKLIST } from '../lib/item-blacklist';
 import {
   GUIDE_CATEGORIES,
   categoryArt,
@@ -665,8 +665,17 @@ export function buildAssetManifest(): AssetRequest[] {
         candidates: [name],
         domain: 'ui',
       });
-  // Cartes de persos : badges de recrutement (Collab/Free absents des tables
-  // du jeu → repli pool V2) + icône core-fusion.
+  // Cartes de persos : badges de recrutement — SOURCE ÉDITORIALE EXCLUSIVE
+  // (`candidates: []` → jamais l'extraction du jeu, cf. `data/editorial/`).
+  //
+  // POURQUOI (constat Sevih 2026-07-21) : le jeu ne porte que 3 des 5 sprites
+  // (Seasonal/Premium/Fes ; Collab et Free n'existent pas côté client). Les
+  // prendre du jeu quand ils s'y trouvent donnait une SÉRIE DÉPAREILLÉE — trois
+  // badges au sprite du jeu, deux au visuel wiki, côte à côte sur la même
+  // carte. Les cinq viennent donc du pool éditorial, versionné dans le repo :
+  // même série, et plus rien à aller chercher dans la V2 (le repli V2 ne
+  // résolvait d'ailleurs PAS ici — il n'y porte que des .png quand la copie
+  // éditoriale est brute, sans conversion).
   for (const name of [
     'CM_Recruit_Tag_Collab',
     'CM_Recruit_Tag_Seasonal',
@@ -677,7 +686,7 @@ export function buildAssetManifest(): AssetRequest[] {
     push({
       kind: 'image',
       key: `images/ui/recruit/${name}.webp`,
-      candidates: [name],
+      candidates: [],
       domain: 'ui',
       editorialFallback: `ui/recruit/${name}.webp`,
     });

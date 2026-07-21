@@ -119,25 +119,34 @@ export function fillPlaceholders(template: string, v: BuffValues, color = false)
   const w = (s: string) => (color ? `<color=#28d9ed>${s}</color>` : s);
   const f = (s: string | undefined) => (s == null ? '?' : w(s));
   const fs = (s: string | undefined, sign: '+' | '-') => (s == null ? '?' : w(`${sign}${s}`));
-  return template
-    .replace(/\[\+Value5\]/gi, fs(v.value5, '+'))
-    .replace(/\[-Value5\]/gi, fs(v.value5, '-'))
-    .replace(/\[Value5\]/gi, f(v.value5))
-    .replace(/\[\+Value4\]/gi, fs(v.value4, '+'))
-    .replace(/\[-Value4\]/gi, fs(v.value4, '-'))
-    .replace(/\[Value4\]/gi, f(v.value4))
-    .replace(/\[\+Value2\]/gi, fs(v.value2, '+'))
-    .replace(/\[-Value2\]/gi, fs(v.value2, '-'))
-    .replace(/\[Value2\]/gi, f(v.value2))
-    .replace(/\[RATE\]/gi, f(v.rate))
-    .replace(/\[Rate1?\]/g, f(v.rate))
-    .replace(/\[\+Value\]/gi, fs(v.value, '+'))
-    .replace(/\[-Value\]/gi, fs(v.value, '-'))
-    .replace(/\[Value\]/gi, f(v.value))
-    .replace(/\[\+Turn1?\]/gi, f(v.turn))
-    .replace(/\[-Turn\]/gi, fs(v.turn, '-'))
-    .replace(/\[Turn2\]/gi, f(v.turn2))
-    .replace(/\[Turn\]/gi, f(v.turn));
+  return (
+    template
+      .replace(/\[\+Value5\]/gi, fs(v.value5, '+'))
+      .replace(/\[-Value5\]/gi, fs(v.value5, '-'))
+      .replace(/\[Value5\]/gi, f(v.value5))
+      .replace(/\[\+Value4\]/gi, fs(v.value4, '+'))
+      .replace(/\[-Value4\]/gi, fs(v.value4, '-'))
+      .replace(/\[Value4\]/gi, f(v.value4))
+      .replace(/\[\+Value2\]/gi, fs(v.value2, '+'))
+      .replace(/\[-Value2\]/gi, fs(v.value2, '-'))
+      .replace(/\[Value2\]/gi, f(v.value2))
+      .replace(/\[RATE\]/gi, f(v.rate))
+      .replace(/\[Rate1?\]/g, f(v.rate))
+      .replace(/\[\+Value\]/gi, fs(v.value, '+'))
+      .replace(/\[-Value\]/gi, fs(v.value, '-'))
+      .replace(/\[Value\]/gi, f(v.value))
+      // `[+Turn]` SANS signe, volontairement (vérifié 2026-07-21 sur les 22
+      // usages réels + la V2, qui fait pareil) : contrairement à `[+Value]` qui
+      // est un DELTA (« ATK +15 % »), celui-ci est une DURÉE — les gabarits du
+      // jeu disent « [+Turn]ターンの間 » / « [+Turn]턴 » / « [+Turn]回合 », soit
+      // « pendant N tours ». Un signe donnerait « pendant +2 tours ». Le « + » du
+      // nom ne désigne donc pas le signe. (`[-Turn]` n'apparaît nulle part dans
+      // les tables : défensif.)
+      .replace(/\[\+Turn1?\]/gi, f(v.turn))
+      .replace(/\[-Turn\]/gi, fs(v.turn, '-'))
+      .replace(/\[Turn2\]/gi, f(v.turn2))
+      .replace(/\[Turn\]/gi, f(v.turn))
+  );
 }
 
 // --- placeholders de COMPÉTENCE (primitive #5) -------------------------------

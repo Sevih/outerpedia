@@ -43,11 +43,17 @@ const DST = resolve('data/generated');
 export const RETAIN_ENTITIES = new Set(['monsters.json', 'monster-skills.json', 'encounters.json']);
 
 /**
- * Sous-dossier des états FIGÉS de boss (`pnpm datagen:version-boss`) : du
- * validé pur, sans équivalent extrait par construction — hors périmètre du
- * signalement « orphelin ».
+ * Validés PURS, sans équivalent extrait PAR CONSTRUCTION — hors périmètre du
+ * signalement « orphelin » (qui ne doit lever que sur un vrai résidu) :
+ *   - `monster-archive/` : états FIGÉS de boss (`pnpm datagen:version-boss`) ;
+ *   - `comics.json` : les 4-cut comics sont FAITES MAIN (aucune table du jeu
+ *     ne les décrit) et `buildComics` n'est délibérément PAS câblé dans
+ *     `build.ts` — la liste servie est le manifeste R2 lu à la requête, ce
+ *     fichier n'étant que le repli committé (cf. tools/_contents/4-comics).
+ *     Il était signalé à CHAQUE promote, bruit qui masque les vrais orphelins.
  */
-const isArchive = (rel: string): boolean => rel.startsWith('monster-archive/');
+const isPureCurated = (rel: string): boolean =>
+  rel.startsWith('monster-archive/') || rel === 'comics.json';
 
 /** Tous les .json d'un dossier (récursif), chemins relatifs POSIX. */
 function walk(dir: string, base = dir): string[] {
@@ -140,7 +146,7 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
     files = files.filter((f) => only.has(f));
   }
   // En promotion ciblée, le reste du monde est volontairement hors périmètre.
-  const orphans = only ? [] : walk(dst).filter((f) => !files.includes(f) && !isArchive(f));
+  const orphans = only ? [] : walk(dst).filter((f) => !files.includes(f) && !isPureCurated(f));
   let identical = 0;
   const diffs: string[] = [];
 
