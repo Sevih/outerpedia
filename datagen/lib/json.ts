@@ -44,7 +44,10 @@ export function readCuratedJson<T>(path: string): T | undefined {
     throw e;
   }
   try {
-    return JSON.parse(raw) as T;
+    // BOM UTF-8 toléré : sous Windows, un outil PowerShell (`Set-Content`,
+    // `Out-File`) qui réécrit un curé le préfixe volontiers de U+FEFF —
+    // `JSON.parse` le refuse (vécu : `equipment.json`, 21/07/2026).
+    return JSON.parse(raw.replace(/^﻿/, '')) as T;
   } catch (e) {
     throw new Error(`${path} : JSON invalide — ${(e as Error).message}`);
   }
