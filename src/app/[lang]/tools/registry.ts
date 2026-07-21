@@ -25,6 +25,7 @@ export const TOOL_COMPONENTS: Record<
   'pull-simulator': () => import('./_contents/pull-simulator'),
   'progress-tracker': () => import('./_contents/progress-tracker'),
   'tier-list-maker': () => import('./_contents/tier-list-maker'),
+  'team-planner': () => import('./_contents/team-planner'),
 };
 
 /** Slugs des outils portés (routeur + `generateStaticParams`). */

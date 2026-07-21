@@ -133,6 +133,9 @@ export const img = {
   quirkNode: (sprite: string) => `${BASE}/images/ui/quirk/${sprite}.webp`,
   /** Icône illustrative du guide Combat (bouton turn-order, skills d'arène). */
   combatIcon: (sprite: string) => `${BASE}/images/ui/combat/${sprite}.webp`,
+  /** Sprite d'UI de l'attaque en chaîne (team-planner : slot vide, cercle de
+   *  sélection, masque de colonne, fonds d'icônes d'effet). */
+  skillchain: (sprite: string) => `${BASE}/images/ui/skillchain/${sprite}.webp`,
   /**
    * Screenshot ÉDITORIAL d'un guide (capture, schéma — rien qui existe en jeu).
    * Source : `data/editorial/guides/<slug>/<fichier>`, collecté par scan

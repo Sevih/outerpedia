@@ -796,3 +796,83 @@ export function buildChainView(
     dualEffects: applyCardCuration(dualChips, cp.id + DUAL_CARD_SUFFIX, curated),
   };
 }
+
+// ---------------------------------------------------------------------------
+// Vue « ÉQUIPE » d'un kit (team-planner) : les chips AVEC leur cible de jeu.
+// ---------------------------------------------------------------------------
+
+/** Une chip de kit accompagnée de sa CIBLE de jeu (slug `TargetType`). */
+export interface TargetedChip {
+  chip: ClientEffect;
+  /** `me`, `my_team*`, `enemy*`, `next_chain_striker`… (peut être vide). */
+  target: string;
+}
+
+export interface TeamKitView {
+  /** Kit de BASE : s1/s2/s3 (variantes + passifs rattachés) + effets extra (EE). */
+  base: TargetedChip[];
+  /** Chips accordées UNIQUEMENT par les déclinaisons burst_1..3. */
+  burst: TargetedChip[];
+  /** Attaque en CHAÎNE : chain_passive + strike_* + passifs `_chain`. */
+  chain: TargetedChip[];
+  /** Attaque DUO : backup_* + passifs `_backup`. */
+  dual: TargetedChip[];
+}
+
+/** Chips + cibles d'une liste d'effets bruts, dédupliquées par (réf, cible). */
+function targetedChips(raw: RawEffect[]): TargetedChip[] {
+  const out: TargetedChip[] = [];
+  const seen = new Set<string>();
+  for (const e of raw) {
+    const chip = toChipEffect(e);
+    if (!chip) continue;
+    const key = `${chip.tooltip ?? chip.label}|${e.target}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push({ chip, target: e.target });
+  }
+  return out;
+}
+
+/** Effets bruts d'un skill, upgrades de transcendance exclues (règle des cartes). */
+function rawOf(s: Skill): RawEffect[] {
+  return (s.effects ?? []).filter((e) => !isTranscendUpgrade(s, e));
+}
+
+/**
+ * Vue « équipe » du kit d'un perso (team-planner) : QUI reçoit quoi. Reprend le
+ * routage des cartes (variantes unies, passifs rattachés par caller/convention,
+ * upgrades de transcendance exclues, résolution chips) mais conserve la CIBLE
+ * de chaque effet — perdue par les vues de cartes — et sépare le kit de base de
+ * ses déclinaisons burst : `burst` ne liste que ce que le burst APPORTE (une
+ * chip déjà accordée par le kit de base n'y figure pas — même règle que le
+ * flag `burst` du générateur skill-buffs V2).
+ * `extraBase` : effets hors skills rattachés au kit de base (passifs de l'EE).
+ */
+export function buildTeamKitView(skills: Skill[], extraBase: RawEffect[] = []): TeamKitView {
+  const kitRaw = (kit: string): RawEffect[] => {
+    const variants = skills.filter((s) => s.type === kit);
+    return [...variants.flatMap(rawOf), ...passiveKitRaw(skills, kit, variants)];
+  };
+  const base = targetedChips([...MAIN_SKILL_TYPES.flatMap(kitRaw), ...extraBase]);
+
+  const baseRefs = new Set(base.map((c) => c.chip.tooltip ?? c.chip.label));
+  const burst = targetedChips(
+    skills.filter((s) => s.type.startsWith('burst_')).flatMap(rawOf),
+  ).filter((c) => !baseRefs.has(c.chip.tooltip ?? c.chip.label));
+
+  const cp = skills.find((s) => s.type === 'chain_passive');
+  const strikes = skills.filter((s) => s.type.startsWith('strike_'));
+  const backups = skills.filter((s) => s.type.startsWith('backup_'));
+  const passive = cp ? passiveKitRaw(skills, 'chain_passive', [cp, ...strikes, ...backups]) : [];
+  const chain = targetedChips([
+    ...(cp ? [cp, ...strikes] : []).flatMap(rawOf),
+    ...passive.filter((e) => !e.buff?.includes('_backup')),
+  ]);
+  const dual = targetedChips([
+    ...backups.flatMap(rawOf),
+    ...passive.filter((e) => e.buff?.includes('_backup')),
+  ]);
+
+  return { base, burst, chain, dual };
+}

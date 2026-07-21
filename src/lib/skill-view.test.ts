@@ -6,6 +6,7 @@ import {
   buildBurstViews,
   buildChainView,
   buildStatusMap,
+  buildTeamKitView,
   cardEffects,
   dedupSkills,
   immunityChipEffects,
@@ -426,6 +427,82 @@ const ICON = (() => {
   }
   return undefined;
 })();
+
+describe('buildTeamKitView — vue équipe (cibles conservées)', () => {
+  /** Refs d'un bucket (tooltip ou label) — comparaison stable. */
+  const refs = (chips: { chip: { tooltip?: string; label?: string } }[]) =>
+    chips.map((c) => c.chip.tooltip ?? c.chip.label);
+
+  it('sépare base/chaîne/duo et garde la cible de chaque chip', () => {
+    const skills = [
+      skill({
+        id: 'f',
+        type: 'first',
+        effects: [eff({ tooltip: REAL_TOOLTIP, target: 'my_team' })],
+      }),
+      skill({ id: 'cp', type: 'chain_passive', name: NAME }),
+      skill({
+        id: 'st',
+        type: 'strike_1',
+        effects: [eff({ tooltip: REAL_TOOLTIP2, type: 'BT_STUN', target: 'enemy_team' })],
+      }),
+      skill({
+        id: 'bk',
+        type: 'backup_1',
+        effects: [eff({ tooltip: REAL_TOOLTIP, type: 'BT_STUN', target: 'enemy' })],
+      }),
+    ];
+    const view = buildTeamKitView(skills);
+    expect(view.base).toEqual([
+      { chip: expect.objectContaining({ tooltip: REAL_TOOLTIP }), target: 'my_team' },
+    ]);
+    expect(view.chain).toEqual([
+      { chip: expect.objectContaining({ tooltip: REAL_TOOLTIP2 }), target: 'enemy_team' },
+    ]);
+    expect(view.dual).toEqual([
+      { chip: expect.objectContaining({ tooltip: REAL_TOOLTIP }), target: 'enemy' },
+    ]);
+  });
+
+  it('burst = seulement ce que le burst APPORTE (pas les chips du kit de base)', () => {
+    const skills = [
+      skill({ id: 'u', type: 'ultimate', effects: [eff({ tooltip: REAL_TOOLTIP })] }),
+      skill({
+        id: 'b1',
+        type: 'burst_1',
+        effects: [eff({ tooltip: REAL_TOOLTIP }), eff({ tooltip: REAL_TOOLTIP2 })],
+      }),
+    ];
+    const view = buildTeamKitView(skills);
+    expect(refs(view.burst)).toEqual([REAL_TOOLTIP2]);
+  });
+
+  it('un passif rattaché au kit (caller) rejoint la base avec sa cible', () => {
+    const skills = [
+      skill({ id: 'f', type: 'first' }),
+      skill({
+        id: 'p',
+        type: 'class_passive',
+        effects: [eff({ caller: 'first', tooltip: REAL_TOOLTIP2, target: 'me' })],
+      }),
+    ];
+    const view = buildTeamKitView(skills);
+    expect(view.base).toEqual([
+      { chip: expect.objectContaining({ tooltip: REAL_TOOLTIP2 }), target: 'me' },
+    ]);
+  });
+
+  it('extraBase (passifs d’EE) rejoint le kit de base et se déduplique par (réf, cible)', () => {
+    const skills = [
+      skill({ id: 'f', type: 'first', effects: [eff({ tooltip: REAL_TOOLTIP, target: 'me' })] }),
+    ];
+    const view = buildTeamKitView(skills, [
+      eff({ tooltip: REAL_TOOLTIP, target: 'me' }), // doublon exact → absorbé
+      eff({ tooltip: REAL_TOOLTIP2, target: 'enemy' }),
+    ]);
+    expect(refs(view.base)).toEqual([REAL_TOOLTIP, REAL_TOOLTIP2]);
+  });
+});
 
 describe('cardEffects — statuts de NIVEAU (levelTooltipEffects)', () => {
   it.skipIf(!ICON)('un tooltip de niveau à icône devient une chip', () => {

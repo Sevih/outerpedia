@@ -26,11 +26,12 @@
 > ASSUMÉES le temps du portage. Chaque page arrive avec ses clés de locale
 > DÉJÀ pré-seedées ×5 (cf. item « pré-seed » de la section Docs).
 
-- [ ] **`/tools` — RESTENT 3 sous-outils** (`/<slug>`, 404 tant que non portés) :
-      damage-calculator, team-planner, event — namespaces `tools.*`.
+- [ ] **`/tools` — RESTENT 2 sous-outils** (`/<slug>`, 404 tant que non portés) :
+      damage-calculator (un worktree d'agent contient déjà du travail — à
+      évaluer avant de repartir de zéro), event — namespaces `tools.*`.
       (`tier-list-maker` PORTÉ le 21/07, cf. DONE — reste côté infra :
-      déployer les `DB_*` décommentés du compose + DÉCIDER la migration de la
-      table `tier_lists` V2, sans quoi les liens courts `?s=` V2 sont morts.)
+      DÉCIDER la migration de la table `tier_lists` V2, sans quoi les liens
+      courts `?s=` V2 sont morts. `team-planner` PORTÉ le 21/07, cf. DONE.)
       (Historique des portés : 19-21/07, cf. DONE — socle `TierListTool`,
       routeur à plat, coupon-codes = renvoi `/coupons`,
       gear-usage-statistics & gear-usage-finder = agrégation gear-reco à la

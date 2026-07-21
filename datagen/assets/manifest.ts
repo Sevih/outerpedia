@@ -356,6 +356,28 @@ export function buildAssetManifest(): AssetRequest[] {
       domain: 'ui',
     });
 
+  // --- UI de l'attaque en chaîne (outil team-planner) -------------------------
+  // Slot d'équipe vide, cercle de sélection, masque de colonne d'ordre de
+  // chaîne, fonds d'icônes d'effet (bleu buff / rouge debuff / gris désactivé)
+  // — servis par `img.skillchain`, namespace unique ui/skillchain. Repli pool
+  // V2 : `T_FX_SkillChain_Mask` est une texture de VFX absente des bundles
+  // qu'on extrait — le pool V2 (même chemin relatif) porte les six sprites.
+  for (const icon of [
+    'TI_Slot_Empty',
+    'T_Tame_Select',
+    'T_FX_SkillChain_Mask',
+    'SC_Whole_Blue_Bg',
+    'SC_Whole_Red_Bg',
+    'SC_Whole_Disable',
+  ])
+    push({
+      kind: 'image',
+      key: `images/ui/skillchain/${icon}.webp`,
+      candidates: [icon],
+      domain: 'ui',
+      editorialFallback: `ui/skillchain/${icon}.webp`,
+    });
+
   // --- Domaine équipement : pages /equipment ---------------------------------
   // Familles AFFICHABLES (grade unique aux paliers hauts), pièces de sets,
   // icônes de sets/passifs, cadres de rareté, boss des sources curées.

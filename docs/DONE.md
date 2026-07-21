@@ -6,6 +6,28 @@
 
 ## 2026-07-21
 
+- **Outil `/team-planner` porté.** ① Moteur SERVEUR dans `skill-view.ts` :
+  `buildTeamKitView` (4 tests) — mêmes règles de routage que les cartes de la
+  fiche (variantes unies, passifs rattachés caller/convention, upgrades de
+  transcendance exclues, résolution chips) mais qui CONSERVE la cible de
+  chaque effet et isole ce que le burst APPORTE (chips absentes du kit de
+  base — équivalent du flag `burst` du générateur skill-buffs V2, sans
+  pipeline Python : tout sort de `skills.json`). ② Wrapper : classement par
+  cible/nature (self / équipe / debuffs ennemis / burst / chaîne / duo), EE
+  compté dans le kit de base (passifs `equipment/passives.json`), le client ne
+  reçoit que des réfs + la `StatusMap` résolue (trimée aux réfs utilisées).
+  ③ Client sur primitives V3 (`EffectIconBadge`/`EffectChip`,
+  `CharacterPortrait`) : croix 4 slots (sprites `ui/skillchain`, 6 collectés —
+  `T_FX_SkillChain_Mask` absent des bundles extraits → repli pool V2 via
+  `editorialFallback`), buffs self en icônes près des portraits, ordre de
+  chaîne (échange par deux clics, validité Start/Join/Finish par position,
+  icônes d'effet sur fond bleu/rouge/gris), synthèse par perso (team
+  buffs/debuffs, burst, duo si équipe complète), picker
+  recherche + élément/classe. Roster V3 complet (core-fusion INCLUSES — kits
+  propres, absentes de la V2). ④ Partage : format `?z=` V2 à l'identique
+  (lz-string ajouté, ids de base = ids du jeu → liens V2 compatibles), legacy
+  `?t=&o=&n=` décodé. Clés `tools.team-planner.*` déjà ×5 depuis le pré-seed.
+
 - **Deux « décisions en attente » tranchées (Sevih).** ① `CHASE_TITLE_KEY`
   (sources.ts) : **gardé en dur et ASSUMÉ par un commentaire** — la poursuite
   est nommée à deux niveaux dans le jeu (le MODE « Pursuit Operation », ce que
