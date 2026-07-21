@@ -4,6 +4,46 @@
 > ne garde que le « à faire »). Un item traité migre ici avec sa date ; le
 > détail vit dans git. Ne pas confondre avec le `CHANGELOG.md` racine (public).
 
+## 2026-07-22 (nuit du 21 au 22)
+
+- **🚀 BASCULE V2→V3 EXÉCUTÉE — `outerpedia.com` est la V3.** Décision Sevih
+  (« c'est un wiki, rien de vital ») après levée de TOUTES les inconnues le
+  21/07 : mécanique subdomain prouvée au banc local, ACME prouvé par le canari
+  `v2.outerpedia.com` (~10 s/cert), parité d'URLs V2↔V3 (la V2 servait DÉJÀ les
+  sous-domaines de langue — découvert dans la zone Cloudflare, ça a annulé
+  l'idée de « répétition générale » sur les sous-domaines, vivants). Séquence
+  sans coupure : image profil prod déployée d'abord (Dockerfile : défauts
+  `outerpedia.com` + `subdomain` + `INDEXABLE=true`), puis flip des 6 DNS
+  (apex, www, jp, kr, zh, fr → 213.32.67.18, NUAGE GRIS), puis recreate Caddy
+  (bloc 6 hôtes + `bot_api`, www/v2/ancien staging → 301 apex) — les clients
+  sur l'ancienne IP voyaient la V2 pendant la propagation. Certs en ~15 s sauf
+  `zh` (+90 s : l'enregistrement avait échappé au premier flip, LE validait
+  encore l'ancienne IP). Batterie post-bascule TOUTE VERTE : page JP + canonical,
+  308 `/en/*`, robots ouvert, sitemap, `/botapi`, `/api/bot/*`, lien court
+  tier-list V2, reviews sur fiche. RESTE (non bloquant) : Search Console
+  (sitemap + suivi), AAAA éventuels, nuage orange = chantier à part (cert
+  d'origine + Full strict), décommission de l'ancien serveur après quelques
+  jours de fenêtre de rollback (rollback = re-pointer les 6 DNS).
+
+## 2026-07-22
+
+- **`@next/next/no-img-element` : la dette éteinte à la source, pas rustinée.**
+  La CI annotait encore des `<img>` non couverts (tier-list-maker,
+  progress-tracker) et le réflexe était d'ajouter le `eslint-disable-next-line`
+  maison. Diagnostic : `next.config.ts` pose `images.unoptimized: true` (assets
+  R2 en `.webp` pré-dimensionné + cache headers réglés le 20/07) — donc
+  `<Image />` n'émettrait qu'un `<img>` nu et la règle n'a **aucun objet** ici.
+  La convention par commentaire était le vrai palliatif : **215 directives dans
+  96 fichiers**, que tout nouveau fichier « oubliait » (d'où le bruit
+  récurrent). Règle éteinte **une fois** dans `eslint.config.mjs` (bloc commenté :
+  pourquoi, et quoi rallumer si `unoptimized` repasse à false en « Phase 3 »),
+  les 215 directives supprimées. Effet de bord gagné : prettier recolle le JSX
+  que ces commentaires forçaient en multi-lignes (~30 blocs). Convention notée
+  dans `CONVENTIONS.md`. Lint 0, typecheck OK, 586 tests verts. À NOTER : le
+  vrai sujet perf que la règle effleurait (`width`/`height` manquants → CLS,
+  1167 pages) reste ouvert dans `TODO.md` — il se traite dans les primitives
+  d'image, pas via le linter.
+
 ## 2026-07-21
 
 - **Pré-bascule : les 3 reliquats utilisateurs traités.** ① `/tools` : le

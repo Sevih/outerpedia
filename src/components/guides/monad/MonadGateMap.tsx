@@ -426,7 +426,6 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
                 >
                   {compactMode ? (
                     <div className="relative flex h-full w-full items-center justify-center">
-                      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                       <img
                         src={img.monad('CM_Monad_Node_Circle')}
                         alt=""
@@ -435,7 +434,6 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
                         className="absolute"
                         style={{ filter: style.filter }}
                       />
-                      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                       <img
                         src={img.monad(style.icon)}
                         alt={typeLabel}
@@ -455,7 +453,6 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
                     </div>
                   ) : (
                     <div className="relative flex h-full w-full items-center overflow-hidden pl-10">
-                      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                       <img
                         src={img.monad('CM_Monad_Box_Line')}
                         alt=""
@@ -463,7 +460,6 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
                         style={{ filter: style.filter }}
                       />
                       <div className="relative z-20 flex h-12 w-12 items-center justify-center overflow-hidden">
-                        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                         <img
                           src={img.monad('CM_Monad_Node_Circle')}
                           alt=""
@@ -472,7 +468,6 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
                           className="absolute"
                           style={{ filter: style.filter }}
                         />
-                        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                         <img
                           src={img.monad(style.icon)}
                           alt={typeLabel}

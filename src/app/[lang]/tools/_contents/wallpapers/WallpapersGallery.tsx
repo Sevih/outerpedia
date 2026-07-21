@@ -150,7 +150,6 @@ export function WallpapersGallery({
               isPortrait ? 'aspect-3/4' : 'aspect-video'
             }`}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img
               src={w.src}
               alt={w.f}
@@ -209,7 +208,6 @@ export function WallpapersGallery({
             </>
           )}
 
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={current.src}
             alt={current.f}

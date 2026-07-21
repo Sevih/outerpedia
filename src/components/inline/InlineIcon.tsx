@@ -37,7 +37,6 @@ export function InlineIcon({
       {iconNode}
       {!iconNode && icon && (
         <span className="relative inline-block shrink-0" style={{ width: size, height: size }}>
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={icon}
             alt={label}

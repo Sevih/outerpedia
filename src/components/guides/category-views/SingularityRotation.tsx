@@ -237,7 +237,6 @@ function Identity({
           key={i}
           className={`inline-flex items-center justify-center rounded-md border p-0.5 ${skin} ${box}`}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img src={src} alt="" className="h-full w-full object-contain" />
         </span>
       ))}
@@ -295,7 +294,6 @@ function FeaturedBanner({
           isToday ? 'border-accent ring-accent/40 ring-1' : 'border-line-subtle'
         }`}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img
           src={img.singularity(day.boss.banner)}
           alt=""
@@ -361,7 +359,6 @@ function RailBanner({
       }`}
     >
       <div className="border-line-subtle group-hover:border-accent/60 relative aspect-680/94 w-full overflow-hidden rounded-lg border transition-colors">
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img
           src={img.singularity(day.boss.banner)}
           alt=""
@@ -406,7 +403,6 @@ function LibraryCard({
   const body = (
     <>
       <div className="flex items-start gap-3">
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img
           src={boss.thumbnail ? img.singularity(boss.thumbnail) : img.boss(`MT_${monster.icon}`)}
           alt=""

@@ -1,6 +1,5 @@
 'use client';
 
-/* eslint-disable @next/next/no-img-element -- sprites dev */
 import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { EffectPillShell } from '@/components/character/EffectChips';

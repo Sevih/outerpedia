@@ -1,5 +1,13 @@
 # Procédure — bascule VPS → `outerpedia.com`
 
+> ✅ **EXÉCUTÉE dans la nuit du 21 au 22/07/2026** (détail : DONE.md du 22/07).
+> Écarts au plan : nuage Cloudflare passé en GRIS sur les 6 hôtes (le orange
+> redeviendra un chantier à part — cert d'origine + Full strict) ; la V2
+> servait DÉJÀ les sous-domaines de langue, la bascule a donc été totale d'un
+> coup (pas de phase « sous-domaines d'abord ») ; ordre inversé app→DNS→Caddy
+> pour éviter les échecs ACME pré-DNS (rate-limit LE). Conservée comme
+> référence du DNS/Caddy cible.
+
 Le jour où le vrai domaine est prêt. On passe de :
 
 |                     | Avant (staging)            | Après (prod)                                         |

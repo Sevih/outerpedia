@@ -166,7 +166,6 @@ function FooterLanguages({ lang, label }: { lang: Lang; label: string }) {
               aria-current={isCurrent ? 'true' : undefined}
               hrefLang={cfg.htmlLang}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
               <img
                 src={img.flag(cfg.flag)}
                 alt=""
@@ -220,7 +219,6 @@ export async function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-[1.5fr_repeat(4,1fr)] md:gap-8">
           <div>
             <div className="mb-4 flex items-center gap-3">
-              {/* eslint-disable-next-line @next/next/no-img-element -- favicon local */}
               <img src="/favicon.ico" alt="Outerpedia" className="size-9 shrink-0 object-contain" />
               <div>
                 <p className="text-content-strong font-semibold tracking-wide">Outerpedia</p>

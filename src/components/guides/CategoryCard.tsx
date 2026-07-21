@@ -41,7 +41,6 @@ export function CategoryCard({
           accent.iconFrom,
         ].join(' ')}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img
           src={img.guideIcon(cat.icon)}
           alt=""

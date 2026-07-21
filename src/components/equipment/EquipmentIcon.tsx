@@ -45,13 +45,11 @@ export function EquipmentIcon({
   const badgeFontSize = Math.max(9, Math.round(size * 0.14));
   return (
     <div className="relative shrink-0" style={{ width: size, height: size }}>
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img
         src={img.slotFrame(ascended ? 'singularity' : grade)}
         alt=""
         className="absolute inset-0 h-full w-full"
       />
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img
         src={src ?? img.equipment(icon ?? '')}
         alt={alt}
@@ -59,7 +57,6 @@ export function EquipmentIcon({
         className="absolute inset-0 h-full w-full object-contain p-[6%]"
       />
       {overlayIcon && (
-        // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
         <img
           src={img.equipment(overlayIcon)}
           alt=""
@@ -67,7 +64,6 @@ export function EquipmentIcon({
         />
       )}
       {classType && (
-        // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
         <img
           src={img.klass(classType)}
           alt={classType}
@@ -100,7 +96,6 @@ export function EquipmentIcon({
           aria-label={`${stars} stars`}
         >
           {Array.from({ length: stars }, (_, i) => (
-            // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
             <img
               key={i}
               src={ascended ? img.starSingularity() : img.star()}

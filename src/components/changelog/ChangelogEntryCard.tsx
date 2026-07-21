@@ -37,7 +37,6 @@ export function ChangelogEntryCard({
     <>
       <div className="bg-surface-overlay border-line-subtle grid size-14 shrink-0 place-items-center overflow-hidden rounded-lg border text-2xl">
         {thumb ? (
-          // eslint-disable-next-line @next/next/no-img-element
           <img src={thumb} alt="" loading="lazy" className="size-full object-cover" />
         ) : (
           <span aria-hidden>{CHANGELOG_TYPE_ICON[entry.type]}</span>

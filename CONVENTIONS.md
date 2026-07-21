@@ -36,6 +36,12 @@ Un commit = un changement cohérent. Les messages alimentent le CHANGELOG.
   Vérifier l'échelle Tailwind v4 avant d'utiliser une valeur arbitraire `[Xpx]`.
 - **Images** : `.webp` dans les composants ; `.jpg`/`.png` pour les métadonnées
   (OG/Twitter) — certains crawlers ne gèrent pas le webp.
+- **`<img>` brut, pas `next/image`** — `next.config.ts` pose
+  `images.unoptimized: true` (assets servis par R2, déjà en `.webp`
+  pré-dimensionné) : `<Image />` n'y émettrait qu'un `<img>` nu. La règle
+  `@next/next/no-img-element` est éteinte une fois dans `eslint.config.mjs` —
+  **ne pas remettre de `eslint-disable-next-line`** au-dessus des `<img>`.
+  Poser en revanche `width`/`height` quand la taille est connue (CLS).
 - **Slugs** en kebab-case, identifiants primaires — ne jamais filtrer/grouper
   sur des champs localisés.
 

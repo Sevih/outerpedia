@@ -135,7 +135,6 @@ function StatChip({ abbr, value }: { abbr: string; value?: string }) {
   return (
     <span className="inline-flex items-center gap-1 text-xs text-zinc-300">
       {STAT_ICON[abbr] && (
-        // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
         <img src={img.statIcon(STAT_ICON[abbr])} alt="" className="h-3.5 w-3.5" />
       )}
       {abbr}
@@ -227,7 +226,6 @@ export function ItemRow({
       {item.effectName && (
         <div className="inline-flex w-fit items-center gap-1.5 rounded-full bg-zinc-500/40 px-2.5 py-1">
           {item.effectIcon && (
-            // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
             <img src={img.equipment(item.effectIcon)} alt="" className="h-4 w-4" />
           )}
           <span className="text-buff text-xs">{item.effectName}</span>
@@ -243,7 +241,6 @@ export function ItemRow({
           </span>
           {item.source.bosses.map((b) => (
             <span key={b.id} className="flex items-center gap-1.5 text-xs text-zinc-200">
-              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
               <img src={img.boss(`MT_${b.icon}`)} alt="" className="h-5 w-5 rounded object-cover" />
               {b.name}
               {b.sourceLabel && <span className="text-zinc-400">· {b.sourceLabel}</span>}
@@ -296,7 +293,6 @@ export function SetPieceGroup({
     <div className="flex max-w-72 flex-col gap-1.5">
       <div className="flex items-center gap-2">
         {piece.icon && (
-          // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
           <img src={img.effect(piece.icon)} alt="" className="h-8 w-8 shrink-0 object-contain" />
         )}
         <span className="text-equipment text-sm font-bold">{piece.name}</span>
@@ -321,7 +317,6 @@ export function SetPieceGroup({
         <div className="flex flex-col gap-1">
           {eff.source.bosses.map((b) => (
             <span key={b.id} className="flex items-center gap-1.5 text-xs text-zinc-200">
-              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
               <img src={img.boss(`MT_${b.icon}`)} alt="" className="h-5 w-5 rounded object-cover" />
               {b.name}
               {b.sourceLabel && <span className="text-zinc-400">· {b.sourceLabel}</span>}
@@ -522,7 +517,6 @@ export function GearRecoSection({
               <div key={eff.id} className="flex gap-2.5">
                 {eff.icon && (
                   <span className="relative mt-0.5 h-6 w-6 shrink-0">
-                    {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                     <img
                       src={img.effect(eff.icon)}
                       alt=""

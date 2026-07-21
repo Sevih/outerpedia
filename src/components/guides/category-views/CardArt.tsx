@@ -32,7 +32,6 @@ export function GuideCardArt({
 }) {
   return (
     <>
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img
         src={img.guideIcon(icon)}
         alt={alt}

@@ -94,7 +94,6 @@ export function VideoCurator({
               key={v.id}
               className="border-line-subtle flex items-center gap-3 rounded-md border p-2"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element -- vignette externe YouTube, admin local */}
               <img src={thumb(v.id)} alt="" className="h-9 w-16 rounded object-cover" />
               <div className="min-w-0 flex-1">
                 <p className="text-content truncate text-sm">{v.title ?? v.id}</p>
@@ -138,7 +137,6 @@ export function VideoCurator({
               key={c.id}
               className="border-line-subtle bg-surface-base flex items-center gap-3 rounded-md border p-2"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element -- vignette externe YouTube, admin local */}
               <img
                 src={c.thumbnail ?? thumb(c.id)}
                 alt=""

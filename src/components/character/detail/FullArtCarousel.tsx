@@ -32,7 +32,6 @@ export function FullArtCarousel({
     return (
       <div className="relative mx-auto aspect-6/7 w-full max-w-90 shrink-0 lg:mx-0">
         {art && (
-          // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
           <img
             src={art.src}
             alt={art.alt}
@@ -61,7 +60,6 @@ export function FullArtCarousel({
         }}
       >
         {items.map((art, i) => (
-          // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
           <img
             key={art.src}
             src={art.src}

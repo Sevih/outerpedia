@@ -60,7 +60,6 @@ export default async function ContributorsPage({ params }: { params: Promise<{ l
           <div key={c.id} className="border-line-subtle bg-surface-raised rounded-lg border p-6">
             <div className="flex flex-col gap-4">
               <div className="flex items-start gap-4">
-                {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                 <img
                   src={img.contributor(c.avatar)}
                   alt={c.name}

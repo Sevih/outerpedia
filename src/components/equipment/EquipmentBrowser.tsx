@@ -134,7 +134,6 @@ function SourcePills({
             title={o.label}
             aria-label={o.label}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img src={o.iconSrc} alt="" className="size-7 rounded-md object-contain" />
           </IconPill>
         ) : (

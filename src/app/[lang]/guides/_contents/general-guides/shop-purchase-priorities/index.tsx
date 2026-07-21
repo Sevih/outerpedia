@@ -150,7 +150,6 @@ export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang
       <span className="inline-flex items-center gap-1 whitespace-nowrap">
         {fmt(e.cost)}
         {currencyIcon && (
-          // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
           <img
             src={img.item(currencyIcon)}
             alt=""
@@ -271,7 +270,6 @@ export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang
         <div className="text-content-subtle flex items-center justify-center gap-1.5 text-sm">
           <span>{L(LABELS.colCost)}:</span>
           {shop.currency.icon && (
-            // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
             <img
               src={img.item(shop.currency.icon)}
               alt=""
@@ -328,7 +326,6 @@ export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang
     key,
     label: (
       <span className="inline-flex items-center gap-1.5">
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img src={img.shopIcon(key)} alt="" width={16} height={16} className="inline-block" />
         <span>{L(label)}</span>
       </span>

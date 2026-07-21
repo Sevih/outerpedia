@@ -254,7 +254,6 @@ export function QuirkTreeView({
               aria-label={strip(p.node.name)}
             >
               {p.node.icon && (
-                // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
                 <img
                   src={img.quirkNode(p.node.icon)}
                   alt=""
@@ -279,7 +278,6 @@ export function QuirkTreeView({
             }}
           >
             {node.icon && (
-              // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
               <img
                 src={img.quirkNode(node.icon)}
                 alt=""
@@ -334,7 +332,6 @@ export function QuirkTreeView({
         <div className="text-content mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
           <span className="text-content-subtle">{labels.cost}</span>
           <span className="inline-flex items-center gap-1">
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img src={img.gold()} alt="" className="h-4 w-4" />
             {cumGold.toLocaleString('en-US')}
           </span>
@@ -342,11 +339,7 @@ export function QuirkTreeView({
             const m = materials[id];
             return (
               <span key={id} className="inline-flex items-center gap-1 whitespace-nowrap">
-                {m && (
-                  // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
-                  <img src={m.icon} alt={m.name} title={m.name} className="h-4 w-4" />
-                )}
-                ×{count}
+                {m && <img src={m.icon} alt={m.name} title={m.name} className="h-4 w-4" />}×{count}
               </span>
             );
           })}

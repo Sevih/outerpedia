@@ -7,8 +7,6 @@ import { lRec } from '@/lib/i18n/localize';
 
 export const dynamic = 'force-dynamic';
 
-/* eslint-disable @next/next/no-img-element -- assets R2/rangs, admin dev */
-
 /** Catalogue éditorial des EE : priorité (rank/rank10) + câblage des chips. */
 export default function EditorEeCatalog() {
   const eeCur = loadEquipmentEditorial().ee;

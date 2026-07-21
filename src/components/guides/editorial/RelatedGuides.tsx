@@ -58,7 +58,6 @@ export function RelatedGuides({
                   a.from,
                 )}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                 <img
                   src={img.guideIcon(guide.icon)}
                   alt=""

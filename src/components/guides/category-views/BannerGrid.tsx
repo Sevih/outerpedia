@@ -58,7 +58,6 @@ export default async function BannerGrid({ lang, guides }: CategoryViewProps) {
                 : 'ring-line-subtle hover:ring-accent/60 ring-1'
             }`}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img
               src={img.guideIcon(guide.icon)}
               alt=""

@@ -65,7 +65,6 @@ export function RecoTargets({ pve, pvp }: { pve: string; pvp: string }) {
               ring,
             )}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img src={icon} alt={title} className="h-full w-full object-contain p-2" />
           </span>
           <span className="text-content-strong text-sm font-semibold">{title}</span>
@@ -132,7 +131,6 @@ export function TranscendSweetspots({ character, lang }: { character: Character;
         <div key={s.star} className="border-line-subtle rounded-md border p-3">
           <div className="mb-2 flex items-center gap-0.5">
             {s.stars.map((sprite, i) => (
-              // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
               <img key={i} src={img.transcendStar(sprite)} alt="" className="h-4.5 w-4.5" />
             ))}
           </div>

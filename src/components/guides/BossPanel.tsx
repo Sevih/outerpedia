@@ -174,7 +174,6 @@ export async function BossCard({
             cherche (le jeu l'écrit au même endroit) ; il suit la glissière, d'où
             le contexte partagé. */}
         <div className="flex items-center gap-4">
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={monsterIconSrc(monster)}
             alt={name}
@@ -193,9 +192,7 @@ export async function BossCard({
               )}
             </div>
             <div className="mt-1 flex items-center gap-2">
-              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
               <img src={img.element(monster.element)} alt={monster.element} className="h-5 w-5" />
-              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
               <img src={img.klass(monster.class)} alt={monster.class} className="h-5 w-5" />
               <BossLevel label={t('page.character.skill.level')} />
             </div>
@@ -283,7 +280,6 @@ export async function BossCard({
                   key: skill.id,
                   label:
                     skill.iconSrc || skill.icon ? (
-                      // eslint-disable-next-line @next/next/no-img-element -- icône de skill
                       <img
                         src={skill.iconSrc ?? img.skill(skill.icon!)}
                         alt={skill.name}

@@ -52,7 +52,6 @@ export function OtherRankingsRail({
             <div
               className={`relative flex size-12 shrink-0 items-center justify-center rounded-lg border bg-linear-to-br to-transparent ${RAIL_ACCENT.iconBorder} ${RAIL_ACCENT.iconFrom}`}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
               <img
                 src={img.toolIcon(tool.icon)}
                 alt=""

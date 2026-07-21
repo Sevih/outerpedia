@@ -58,7 +58,6 @@ export function FlagshipCard({
             aria-hidden
             className="pointer-events-none absolute inset-0 flex items-center justify-center transition-transform duration-200 group-hover:-translate-y-0.5"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img
               src={img.rank('S')}
               alt=""
@@ -72,7 +71,6 @@ export function FlagshipCard({
               aria-hidden
               className={`pointer-events-none absolute top-2 ${side === 'left' ? 'left-2' : 'right-2'}`}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
               <img
                 src={img.rank('S')}
                 alt=""

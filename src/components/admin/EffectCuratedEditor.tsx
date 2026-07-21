@@ -128,7 +128,6 @@ export function EffectCuratedEditor({
           <div className="flex items-center gap-2">
             {icon.trim() && (
               <span className="border-line bg-surface-base relative h-8 w-8 shrink-0 rounded border">
-                {/* eslint-disable-next-line @next/next/no-img-element -- aperçu admin */}
                 <img
                   src={img.effect(icon.trim())}
                   alt=""

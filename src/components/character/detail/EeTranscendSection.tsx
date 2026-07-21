@@ -53,9 +53,7 @@ function EeCard({ ee, labels }: { ee: EeCardView; labels: EeTranscendLabels }) {
       <div className="card flex flex-col gap-3 rounded-xl p-4">
         <div className="flex items-center gap-3">
           <span className="relative h-16 w-16 shrink-0">
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img src={img.slotFrame('unique')} alt="" className="absolute inset-0 h-full w-full" />
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img
               src={img.ee(ee.characterId)}
               alt={ee.name}
@@ -74,7 +72,6 @@ function EeCard({ ee, labels }: { ee: EeCardView; labels: EeTranscendLabels }) {
               {ee.mainStats.map((s, i) => (
                 <span key={i} className="mr-2 inline-flex items-center gap-1">
                   {STAT_ICON[s.key] && (
-                    // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
                     <img src={img.statIcon(STAT_ICON[s.key])} alt="" className="h-3.5 w-3.5" />
                   )}
                   {s.label ?? s.key}
@@ -86,7 +83,6 @@ function EeCard({ ee, labels }: { ee: EeCardView; labels: EeTranscendLabels }) {
 
         {ee.badgeIcon && (
           <div className="inline-flex w-fit items-center gap-1.5 rounded-full bg-zinc-500/40 px-2.5 py-1">
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img src={img.equipment(ee.badgeIcon)} alt="" className="h-4 w-4" />
             <span className="text-buff text-xs">{ee.badgeText}</span>
           </div>
@@ -147,7 +143,6 @@ function TranscendSlider({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-0.5">
             {tier.stars.map((sprite, i) => (
-              // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
               <img key={i} src={img.transcendStar(sprite)} alt="" className="h-6 w-6" />
             ))}
           </div>
@@ -209,7 +204,6 @@ function TranscendSlider({
                   {l.keys.map(
                     (k) =>
                       STAT_ICON[k] && (
-                        // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
                         <img key={k} src={img.statIcon(STAT_ICON[k])} alt={k} className="h-4 w-4" />
                       ),
                   )}

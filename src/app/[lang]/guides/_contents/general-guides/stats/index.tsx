@@ -157,7 +157,6 @@ export default async function StatsGuide({ lang }: { lang: Lang }) {
     </p>
   );
 
-  /* eslint-disable @next/next/no-img-element -- assets R2/staging */
   const combatIcon = (sprite: string, effect = false) => (
     <img
       src={effect ? img.effect(sprite) : img.combatIcon(sprite)}
@@ -165,7 +164,6 @@ export default async function StatsGuide({ lang }: { lang: Lang }) {
       className="inline-block h-5 w-5 align-text-bottom"
     />
   );
-  /* eslint-enable @next/next/no-img-element */
 
   // ════════════════════════════ Onglet : Basic Stats ════════════════════════════
   const statsPanel = (

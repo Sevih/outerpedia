@@ -212,7 +212,6 @@ export function SearchModal({
                       }`}
                     >
                       {entry.icon ? (
-                        // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
                         <img
                           src={entry.icon}
                           alt=""

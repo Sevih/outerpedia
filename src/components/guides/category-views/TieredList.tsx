@@ -75,7 +75,6 @@ function LessonCard({
       className="border-line-subtle bg-surface-raised hover:border-accent/50 group flex items-start gap-3 rounded-xl border p-4 transition-[transform,border-color] duration-150 hover:-translate-y-px"
     >
       <div className="border-line-subtle bg-surface flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border">
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img
           src={img.guideIcon(guide.icon)}
           alt=""

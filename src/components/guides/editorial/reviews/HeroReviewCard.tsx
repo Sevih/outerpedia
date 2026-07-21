@@ -32,7 +32,6 @@ export function HeroReviewCard({
     <section className="border-line bg-surface-raised/60 rounded-xl border p-5">
       <header className="flex flex-wrap items-center justify-between gap-3">
         <h3 className="text-content-strong m-0 flex items-center gap-3 text-xl font-semibold">
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={img.atb(character.id)}
             alt=""
@@ -50,19 +49,14 @@ export function HeroReviewCard({
           ) : (
             name
           )}
-          {tag && (
-            // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
-            <img src={img.tag(tag)} alt={tag} className="h-9 w-9 object-contain" />
-          )}
+          {tag && <img src={img.tag(tag)} alt={tag} className="h-9 w-9 object-contain" />}
         </h3>
         <div className="flex items-center gap-1.5">
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={img.element(character.element)}
             alt={character.element}
             className="h-6 w-6 drop-shadow-md"
           />
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={img.klass(character.class)}
             alt={character.class}

@@ -87,7 +87,6 @@ function StageTile({ stage, spoilers }: { stage: StageCard; spoilers: boolean })
       href={stage.href}
       className="ring-line group hover:ring-select/50 relative h-40 w-20 overflow-hidden rounded-lg ring-1 transition-all sm:h-64 sm:w-32"
     >
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img
         src={stage.src}
         alt=""
@@ -106,7 +105,6 @@ function StageTile({ stage, spoilers }: { stage: StageCard; spoilers: boolean })
 
       {spoilers && (
         <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-1 p-2">
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={stage.boss.src}
             alt={stage.boss.name}

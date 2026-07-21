@@ -243,12 +243,10 @@ export function MostUsedUnitsBrowser({
                   </span>
                   <div className="mt-0.5 flex items-center gap-2">
                     <span className="text-content-muted flex items-center gap-1 text-xs">
-                      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                       <img src={img.element(row.element)} alt="" width={16} height={16} />
                       {labels.elements[row.element] ?? row.element}
                     </span>
                     <span className="text-content-muted flex items-center gap-1 text-xs">
-                      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                       <img src={img.klass(row.class)} alt="" width={16} height={16} />
                       {labels.classes[row.class] ?? row.class}
                     </span>

@@ -37,7 +37,6 @@ export default async function IrregularChaseMap({ lang, category, guides }: Cate
 
   return (
     <div className="ring-line relative aspect-1439/719 w-full overflow-hidden rounded-lg ring-1">
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img
         src={img.guideIcon(art)}
         alt={lRec(GUIDE_CATEGORIES[category].label, lang)}
@@ -128,13 +127,11 @@ function BossPin({ guide, lang, t }: { guide: Guide; lang: Lang; t: TFunction })
           {name}
         </span>
         <span className="border-danger-deep group-hover:border-danger relative h-12 w-12 shrink-0 overflow-hidden rounded-md border transition-all lg:h-16 lg:w-16">
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={img.slotFrame('unique')}
             alt=""
             className="absolute inset-0 h-full w-full object-contain"
           />
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={portraitSrc}
             alt={name}
@@ -176,13 +173,11 @@ function BossPin({ guide, lang, t }: { guide: Guide; lang: Lang; t: TFunction })
 function VariantIcon({ variant: v }: { variant: LootVariant }) {
   return (
     <span title={v.name} className="relative inline-block h-4.5 w-4.5 shrink-0 lg:h-6 lg:w-6">
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img
         src={img.slotFrame(v.grade)}
         alt=""
         className="absolute inset-0 h-full w-full object-contain"
       />
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img src={v.iconSrc} alt={v.name} className="absolute inset-0 h-full w-full object-contain" />
     </span>
   );

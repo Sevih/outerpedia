@@ -268,7 +268,6 @@ export function AdvancedFiltersPanel(props: AdvancedFiltersPanelProps) {
                   className="h-8 gap-1.5 px-2.5"
                 >
                   {opt.icon && (
-                    // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
                     <img src={opt.icon} alt="" className="size-4 shrink-0 object-contain" />
                   )}
                   <span>{opt.label}</span>
@@ -339,7 +338,6 @@ function PillSection({
             className={withIcon ? 'h-8 gap-1.5 px-2.5' : 'h-8 px-3'}
           >
             {withIcon && opt.icon && (
-              // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
               <img src={opt.icon} alt="" className="size-4 shrink-0 object-contain" />
             )}
             <span>{opt.label}</span>

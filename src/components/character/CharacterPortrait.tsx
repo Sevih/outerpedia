@@ -37,7 +37,6 @@ export function CharacterPortrait({
   const content = (
     <span className="flex w-full flex-col items-center gap-1">
       <span className="relative inline-block shrink-0" style={{ width: size, height: size }}>
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img
           src={img.face(id)}
           alt={name}
@@ -45,7 +44,6 @@ export function CharacterPortrait({
           className="border-line-subtle h-full w-full rounded-lg border object-cover"
         />
         {element && (
-          // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
           <img
             src={img.element(element)}
             alt={element}
@@ -53,7 +51,6 @@ export function CharacterPortrait({
           />
         )}
         {classType && (
-          // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
           <img
             src={img.klass(classType)}
             alt={classType}
@@ -67,7 +64,6 @@ export function CharacterPortrait({
             aria-label={`${rarity} stars`}
           >
             {Array.from({ length: rarity }, (_, i) => (
-              // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
               <img
                 key={i}
                 src={img.star()}

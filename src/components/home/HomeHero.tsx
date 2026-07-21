@@ -20,7 +20,6 @@ export function HomeHero({ strings }: { strings: HeroStrings }) {
 
   return (
     <section className="relative isolate min-h-44 overflow-hidden md:min-h-52 lg:min-h-60">
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img
         src={img.homeBanner()}
         alt={strings.title}

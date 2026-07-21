@@ -56,7 +56,6 @@ export async function DiscordBanner({ strings }: { strings: DiscordStrings }) {
         className="card-interactive group flex items-center gap-4 p-4 transition-colors hover:border-[#5865F2]/50"
       >
         <div className="size-12 shrink-0 overflow-hidden rounded-xl transition-transform group-hover:scale-110">
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img src={img.discord()} alt="Discord" className="h-full w-full object-cover" />
         </div>
 

@@ -43,10 +43,8 @@ export function ItemInline({
   const body = (
     <span className={`${color} inline-flex items-center gap-1 align-middle`}>
       <span className="relative inline-block shrink-0" style={{ width: size, height: size }}>
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img src={img.slotFrame(item.grade)} alt="" className="absolute inset-0 h-full w-full" />
         {item.iconSrc && (
-          // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
           <img
             src={item.iconSrc}
             alt={item.name}

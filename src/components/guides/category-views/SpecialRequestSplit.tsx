@@ -109,7 +109,6 @@ function BannerCard({ guide, lang, sig }: { guide: Guide; lang: Lang; sig: LootS
       href={localePath(lang, `/guides/${guide.category}/${guide.slug}`)}
       className="group ring-line-subtle hover:ring-select/50 relative mx-auto block aspect-27/5 w-full max-w-135 overflow-hidden rounded-lg ring-1 transition-all"
     >
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img
         src={img.guideIcon(guide.icon)}
         alt=""
@@ -132,7 +131,6 @@ function BannerCard({ guide, lang, sig }: { guide: Guide; lang: Lang; sig: LootS
                   rounded ? 'bg-surface-sunken/70 rounded-full' : ''
                 }`}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                 <img
                   src={b.iconSrc}
                   alt={b.name}

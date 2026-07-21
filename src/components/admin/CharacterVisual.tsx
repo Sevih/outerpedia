@@ -44,7 +44,6 @@ export function CharacterVisual({ char, tags }: { char: Character; tags?: string
         <div className="text-content-muted flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
           {char.subClass && (
             <span className="inline-flex items-center gap-1.5">
-              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
               <img src={img.subClass(char.subClass)} alt="" className="h-5 w-5" />
               {char.subClass}
             </span>
@@ -65,7 +64,6 @@ export function CharacterVisual({ char, tags }: { char: Character; tags?: string
               <div
                 className={`border-line-subtle bg-surface-base flex h-24 items-center justify-center overflow-hidden rounded-md border ${g.wide ? 'w-32' : 'w-24'}`}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                 <img src={g.src} alt={g.label} className="max-h-full max-w-full object-contain" />
               </div>
               <figcaption className="text-content-subtle text-center text-[10px] uppercase">

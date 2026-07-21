@@ -140,7 +140,6 @@ export default function TimegateResourceGuide({ lang }: { lang: Lang }) {
     label: (
       <span className="inline-flex items-center gap-1.5">
         {tab.items[0] && (
-          // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
           <img
             src={img.item(tab.items[0].icon)}
             alt=""

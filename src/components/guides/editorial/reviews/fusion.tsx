@@ -53,7 +53,6 @@ export function FusionCostPills({
               <span className="text-ed-purple-fg text-xl font-bold">Lv {lv}</span>
               <span className="flex items-center gap-1">
                 {core.iconSrc && (
-                  // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
                   <img
                     src={core.iconSrc}
                     alt={core.name}
@@ -161,9 +160,7 @@ function EeMiniCard({
       )}
     >
       <span className="relative h-12 w-12 shrink-0">
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img src={img.slotFrame(side.grade)} alt="" className="absolute inset-0 h-full w-full" />
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img
           src={img.ee(side.characterId)}
           alt={side.name}

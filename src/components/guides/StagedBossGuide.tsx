@@ -104,7 +104,6 @@ function StageLootIcons({
           }
         >
           <button type="button" className="cursor-default align-middle">
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img src={s.iconSrc} alt={s.name} className="h-8 w-8 object-contain" loading="lazy" />
           </button>
         </InlineTooltip>

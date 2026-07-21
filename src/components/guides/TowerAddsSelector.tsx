@@ -42,7 +42,6 @@ export function TowerAddsSelector({ adds }: { adds: TowerAdd[] }) {
                 ].join(' ')}
               >
                 {a.iconSrc && (
-                  // eslint-disable-next-line @next/next/no-img-element -- sprite R2/staging
                   <img
                     src={a.iconSrc}
                     alt=""

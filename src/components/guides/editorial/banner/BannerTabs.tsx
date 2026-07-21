@@ -57,7 +57,6 @@ export function BannerTabs({ tabs, urlKey }: { tabs: BannerTabDef[]; urlKey?: st
               )}
             >
               <span className="relative block h-23.5 w-51.5 overflow-hidden rounded-xl">
-                {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                 <img
                   src={tab.imageSrc}
                   alt={tab.label}

@@ -143,20 +143,17 @@ export default async function ExtractorMonsterPage({
       <div className="space-y-1">
         <h1 className="text-content-strong flex items-center gap-3 text-xl font-semibold">
           <span className="relative h-14 w-14 shrink-0">
-            {/* eslint-disable-next-line @next/next/no-img-element -- sprite dev */}
             <img
               src={monsterSlotSrc(m.type)}
               alt=""
               className="absolute inset-0 h-full w-full rounded object-cover"
             />
-            {/* eslint-disable-next-line @next/next/no-img-element -- sprite dev */}
             <img
               src={monsterIconSrc(m.icon)}
               alt=""
               className="absolute inset-[7%] h-[86%] w-[86%] rounded object-cover"
             />
             {monsterBossBadgeSrc(m.type) && (
-              // eslint-disable-next-line @next/next/no-img-element -- sprite dev
               <img
                 src={monsterBossBadgeSrc(m.type)}
                 alt="boss"
@@ -173,14 +170,12 @@ export default async function ExtractorMonsterPage({
         </h1>
         <p className="text-content-subtle flex flex-wrap items-center gap-x-1.5 text-sm">
           <span className="font-mono">{m.id}</span> · {m.type} ·
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={img.element(m.element)}
             alt={m.element}
             title={m.element}
             className="h-4.5 w-4.5"
           />
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img src={img.klass(m.class)} alt={m.class} title={m.class} className="h-4.5 w-4.5" />
           {m.subClass ? `/ ${m.subClass}` : ''} · {m.race} · {m.rarity}★
           {m.aiType ? ` · AI ${m.aiType}` : ''}

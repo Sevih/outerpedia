@@ -35,10 +35,7 @@ function SearchIcon({ size = 16 }: { size?: number }) {
 }
 
 function NavIcon({ src, alt, size }: { src: string; alt: string; size: number }) {
-  return (
-    // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
-    <img src={src} alt={alt} width={size} height={size} className="object-contain" />
-  );
+  return <img src={src} alt={alt} width={size} height={size} className="object-contain" />;
 }
 
 /**
@@ -115,7 +112,6 @@ export function HeaderClient({
       >
         {/* Logo + versions */}
         <Link href={'/' as Route} className="flex shrink-0 items-center gap-2">
-          {/* eslint-disable-next-line @next/next/no-img-element -- favicon local */}
           <img
             src="/favicon.ico"
             alt="Outerpedia"

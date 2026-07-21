@@ -117,7 +117,6 @@ export function ComicsGallery({
           >
             {/* Vignette 360 px ; repli pleine taille tant que les thumbs ne sont
                 pas encore sur R2 (pool collecté avant leur introduction). */}
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img
               src={c.thumb}
               alt={c.stem}
@@ -176,7 +175,6 @@ export function ComicsGallery({
             </>
           )}
 
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={current.src}
             alt={current.stem}

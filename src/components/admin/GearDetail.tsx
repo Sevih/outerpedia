@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element -- sprites dev */
 /**
  * Fiche INFO d'une entrée d'équipement (extracteur) : identité multilingue,
  * sprites, stats, passifs résolus (palier 1 → max), chips d'effets, provenance.

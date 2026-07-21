@@ -28,7 +28,6 @@ export function ToolCard({ tool, comingSoonLabel }: { tool: ToolCardVM; comingSo
           isDim ? 'border-line-subtle from-transparent' : `${accent.iconBorder} ${accent.iconFrom}`
         }`}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img
           src={img.toolIcon(tool.icon)}
           alt=""

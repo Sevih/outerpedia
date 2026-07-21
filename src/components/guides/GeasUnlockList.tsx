@@ -33,7 +33,6 @@ function descLines(text: string): string[] {
 function GeasIcon({ geas, size = 44 }: { geas: GuildRaidGeas; size?: number }) {
   return (
     <span className="relative inline-block shrink-0" style={{ width: size, height: size }}>
-      {/* eslint-disable-next-line @next/next/no-img-element -- cadre de grade */}
       <img
         src={img.geasFrame(geas.grade)}
         alt=""
@@ -200,7 +199,6 @@ function BossHead({ col }: { col: GeasColumn }) {
   return (
     <div className="flex h-14 items-center justify-center">
       <span className="relative shrink-0">
-        {/* eslint-disable-next-line @next/next/no-img-element -- portrait de boss */}
         <img
           src={col.portraitSrc}
           alt={col.name}

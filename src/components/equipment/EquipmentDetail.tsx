@@ -175,7 +175,6 @@ function EquipStatChip({ statKey, label }: { statKey: string; label?: string }) 
   return (
     <span className="text-content-strong inline-flex min-w-0 items-center gap-1.5 text-sm font-bold">
       {STAT_ICON[statKey] && (
-        // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
         <img src={img.statIcon(STAT_ICON[statKey])} alt="" className="h-4 w-4 shrink-0" />
       )}
       <span className="truncate">{label ?? statKey}</span>
@@ -536,7 +535,6 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
                   ([label, rank]) =>
                     rank && (
                       <div key={label} className="flex items-center gap-2">
-                        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                         <img src={img.rank(rank)} alt={rank} className="h-8 w-8" />
                         <span className="text-content-muted text-xs uppercase">{label}</span>
                       </div>
@@ -756,7 +754,6 @@ function SourceDetail({ source }: { source: NonNullable<DetailModel['source']> }
     <div className="flex flex-col gap-2">
       {source.bosses.map((b) => (
         <div key={b.id} className="flex items-center gap-2.5">
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={img.boss(`MT_${b.icon}`)}
             alt=""
@@ -806,7 +803,6 @@ function AxActivationBand({ asc, labels }: { asc: AscView; labels: DetailLabels 
           <span className="text-stat-accent font-mono font-bold">
             {asc.activation.price.toLocaleString('en')}
           </span>
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img src={img.gold()} alt="Gold" className="h-4.5 w-4.5" />
         </span>
         {asc.activation.materials.map((m) => (
@@ -837,7 +833,6 @@ function AxStepsCard({ asc, labels }: { asc: AscView; labels: DetailLabels }) {
               {labels.step}
             </th>
             <th className="pb-1.5 pl-2 text-right text-xs whitespace-nowrap">
-              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
               <img src={img.gold()} alt="Gold" className="inline h-4.5 w-4.5" />
             </th>
             {headMats.map((m) => (
@@ -1016,7 +1011,6 @@ function OwnerFullArt({ owner }: { owner: RecommendedChar }) {
       className="border-line-subtle relative block overflow-hidden rounded-lg border transition-opacity hover:opacity-90"
       style={{ aspectRatio: '3 / 4' }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img
         src={img.full(owner.id)}
         alt={owner.name}
@@ -1068,7 +1062,6 @@ function PassiveModules({
             >
               {p.classLimit && (
                 <div className="mb-1 flex items-center gap-1.5">
-                  {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                   <img src={img.klass(p.classLimit)} alt={p.classLimit} className="h-4 w-4" />
                   <span className="text-content-strong text-xs font-semibold">{p.name}</span>
                 </div>

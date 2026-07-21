@@ -48,7 +48,6 @@ export function ImageLightbox({
           className="cursor-zoom-in focus:outline-none"
           aria-label={(strings?.zoom ?? 'Zoom: {alt}').replace('{alt}', alt)}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={src}
             alt={alt}
@@ -81,7 +80,6 @@ export function ImageLightbox({
             >
               ✕
             </button>
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img
               src={src}
               alt={alt}

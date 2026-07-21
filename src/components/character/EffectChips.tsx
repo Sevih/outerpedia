@@ -95,7 +95,6 @@ export function EffectIconTile({
       {recolor ? (
         <TintedIcon src={src} isDebuff={isDebuff} className="h-full w-full" />
       ) : (
-        // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
         <img src={src} alt="" className="absolute inset-0 h-full w-full object-contain" />
       )}
     </span>

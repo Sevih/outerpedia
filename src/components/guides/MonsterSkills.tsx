@@ -91,7 +91,6 @@ export function MonsterSkills({
           className="border-line-subtle bg-surface-raised flex items-start gap-3 rounded-lg border p-3"
         >
           {(skill.iconSrc || skill.icon) && (
-            // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
             <img
               src={skill.iconSrc ?? img.skill(skill.icon!)}
               alt=""

@@ -207,7 +207,6 @@ export function BossStats({
                   className="border-line-subtle bg-surface-raised flex items-center gap-1.5 rounded-md border px-2 py-1"
                 >
                   {label?.icon ? (
-                    // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
                     <img
                       src={img.statIcon(label.icon)}
                       alt=""
@@ -340,7 +339,6 @@ function RankSlider({
       // libellé complet reste dit au lecteur d'écran (aria-valuetext).
       thumb={
         ctx.rank ? (
-          // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
           <img
             src={img.rankBadge(rankBadgeSprite(ctx.rank))}
             alt=""

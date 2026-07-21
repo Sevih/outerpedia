@@ -117,7 +117,6 @@ function ElementalCard({ guide, lang, element }: { guide: Guide; lang: Lang; ele
     >
       <GuideCardArt icon={guide.icon} alt={name} topVeil hoverScale />
       <div className="absolute inset-x-0 top-0 flex items-center gap-1 p-2">
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img src={img.element(element)} alt="" loading="lazy" className="h-4 w-4 drop-shadow-lg" />
         <p className="text-content line-clamp-1 text-xs font-medium drop-shadow-lg">{name}</p>
       </div>

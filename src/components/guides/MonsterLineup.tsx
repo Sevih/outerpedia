@@ -107,7 +107,6 @@ function CompactRoster({ items, label }: { items: LineupItem[]; label: string })
                 : 'border-line-subtle text-content hover:bg-surface-raised'
             }`}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img
               src={item.iconSrc}
               alt=""

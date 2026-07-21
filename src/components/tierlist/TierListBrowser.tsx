@@ -189,7 +189,6 @@ export function TierListBrowser({
         <div className="text-content-muted flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs">
           {labels.legend.map(({ tier, label }) => (
             <div key={tier} className="flex items-center gap-1">
-              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
               <img src={img.rank(tier)} alt={tier} width={20} height={20} />
               <span>{label}</span>
             </div>
@@ -232,7 +231,6 @@ export function TierListBrowser({
               >
                 <span className="flex items-center -space-x-1">
                   {Array.from({ length: lvl }, (_, i) => (
-                    // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
                     <img key={i} src={img.star()} alt="" width={16} height={16} />
                   ))}
                 </span>
@@ -255,7 +253,6 @@ export function TierListBrowser({
               <div className="flex items-center gap-3">
                 {/* Glyphe de rang */}
                 <div className="flex min-h-20 w-16 shrink-0 items-center justify-center md:w-20">
-                  {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                   <img
                     src={img.rank(tier)}
                     alt={`Tier ${tier}`}

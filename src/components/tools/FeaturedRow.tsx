@@ -63,7 +63,6 @@ export function FeaturedRow({ tools, strings }: { tools: ToolCardVM[]; strings: 
                 <div
                   className={`relative flex size-14 shrink-0 items-center justify-center rounded-xl border bg-linear-to-br to-transparent ${accent.iconBorder} ${accent.iconFrom}`}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                   <img
                     src={img.toolIcon(tool.icon)}
                     alt=""

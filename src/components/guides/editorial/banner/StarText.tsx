@@ -14,7 +14,6 @@ export function StarIcon({ size = 14 }: { size?: number }) {
       role="img"
       aria-label="star"
     >
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img src={img.star()} alt="" className="h-full w-full object-contain" />
     </span>
   );

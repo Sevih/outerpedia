@@ -121,7 +121,6 @@ export function StatsRankingSection({
                 className="flex items-center gap-1 font-mono text-sm text-zinc-100 tabular-nums"
                 title={labels.cpTitle}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                 <img src={img.power()} alt="CP" className="h-4 w-4 object-contain" />
                 {cp.toLocaleString('en')}
               </span>
@@ -225,14 +224,12 @@ export function StatsRankingSection({
                     }`}
                   >
                     <span className="relative h-8 w-8">
-                      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                       <img
                         src={img.evoTab(false)}
                         alt=""
                         className="absolute inset-0 h-full w-full object-contain"
                       />
                       {on && (
-                        // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
                         <img
                           src={img.evoTab(true)}
                           alt=""
@@ -270,7 +267,6 @@ export function StatsRankingSection({
                   </span>
                 )}
                 <span className="flex items-center gap-1.5">
-                  {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                   <img src={img.gold()} alt="Gold" className="h-5 w-5 object-contain" />
                   <span className="text-zinc-100">
                     {step.limitBreak.price.toLocaleString('en')}
@@ -298,7 +294,6 @@ export function StatsRankingSection({
                   {tc.label}
                 </span>
                 {tc.rank ? (
-                  // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
                   <img src={img.rank(tc.rank)} alt={tc.rank} className="h-12 w-12" />
                 ) : (
                   <span className="text-xs text-zinc-600">{labels.comingSoon}</span>

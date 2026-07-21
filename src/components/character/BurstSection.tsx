@@ -26,7 +26,6 @@ export function BurstSection({ bursts }: { bursts: BurstCard[] }) {
           style={{ aspectRatio: '220 / 310' }}
         >
           {/* Cadre de la carte (fond du jeu) */}
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={img.burstCard(burst.level)}
             alt={`Burst ${burst.level}`}

@@ -43,13 +43,11 @@ export function CharacterPicker({
         opts.filter((o) => o.name.toLowerCase().includes(q.toLowerCase())).slice(0, 20)
       }
       renderIcon={(o) => (
-        // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
         <img src={img.face(o.id)} alt="" className="h-6 w-6 shrink-0 rounded object-cover" />
       )}
       renderSelected={(o) =>
         compact ? (
           <span className="flex min-w-0 items-center gap-2">
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img
               src={img.face(id)}
               alt=""
@@ -68,7 +66,6 @@ export function CharacterPicker({
           />
         ) : (
           <span className="flex flex-col items-center">
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img
               src={img.face(id)}
               alt={name || id}

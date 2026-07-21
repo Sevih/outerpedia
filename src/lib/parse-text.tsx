@@ -114,17 +114,14 @@ function characterChip(name: string, ctx: ParseCtx, k: number): ReactNode {
   const cl = ctx.t(`sys.class.${c.class}` as TranslationKey);
   const tooltip = (
     <div className="flex gap-2">
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img src={img.face(c.id)} alt={display} className="h-14 w-14 shrink-0 rounded" />
       <div className="flex flex-col gap-0.5">
         <span className="text-content-strong text-sm font-bold">{display}</span>
         <span className="text-content text-xs">{'★'.repeat(c.rarity)}</span>
         <span className={`flex items-center gap-1 text-xs ${ELEMENT_TEXT[c.element] ?? ''}`}>
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img src={img.element(c.element)} alt="" className="h-4 w-4" /> {el}
         </span>
         <span className="text-class flex items-center gap-1 text-xs">
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img src={img.klass(c.class)} alt="" className="h-4 w-4" /> {cl}
         </span>
       </div>
@@ -216,7 +213,6 @@ function setChip(name: string, ctx: ParseCtx, k: number): ReactNode {
   const tooltip = (
     <div className="flex gap-2">
       <span className="relative h-10 w-10 shrink-0">
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img src={img.equipment(set.icon)} alt={label} className="h-full w-full object-contain" />
       </span>
       <div className="flex flex-col gap-0.5">

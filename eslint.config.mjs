@@ -27,6 +27,24 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   {
+    // `<img>` BRUT ASSUMÉ, PARTOUT (2026-07-22). `next.config.ts` pose
+    // `images.unoptimized: true` : les assets viennent de R2 en `.webp`
+    // pré-dimensionné, avec les cache headers réglés côté Caddy/Next. Dans ces
+    // conditions `<Image />` émet un `<img>` nu — la règle réclame un wrapper
+    // qui n'optimise rien. On l'éteint UNE fois ici plutôt que de l'annuler
+    // ligne à ligne : elle traînait 215 directives dans 96 fichiers, et tout
+    // nouveau fichier « oubliait » la convention (d'où le bruit récurrent en
+    // CI).
+    // À RALLUMER le jour où `images.unoptimized` repasse à false (« Phase 3 »,
+    // cf. next.config.ts) — ce sera cette ligne, et rien d'autre, à retirer.
+    // NB : le vrai sujet perf que cette règle effleure, ce sont les
+    // `width`/`height` manquants (CLS, cf. docs/TODO.md) — il se traite dans
+    // les primitives d'image, pas via le linter.
+    rules: {
+      '@next/next/no-img-element': 'off',
+    },
+  },
+  {
     // `.ts` inclus (2026-07-16) : les palettes hors JSX (nodeStyles,
     // guide-accents, ELEMENT_RING…) portaient des classes de couleur que la
     // règle ne voyait pas.

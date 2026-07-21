@@ -50,7 +50,6 @@ function renderTextWithEmojis(text: string) {
     const [, animated, name, id] = match;
     const ext = animated ? 'gif' : 'webp';
     return (
-      // eslint-disable-next-line @next/next/no-img-element -- emoji du CDN Discord
       <img
         key={i}
         src={`https://cdn.discordapp.com/emojis/${id}.${ext}?size=20`}
@@ -196,7 +195,6 @@ export function ReviewsSection({ reviews, hex, dateLocale, labels }: Props) {
                   <span className="text-xs text-zinc-500">👎</span>
                 </div>
 
-                {/* eslint-disable-next-line @next/next/no-img-element -- avatar du CDN Discord */}
                 <img
                   src={discordAvatarUrl(review.userId, review.avatar)}
                   alt={review.displayName}

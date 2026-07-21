@@ -1,6 +1,5 @@
 'use client';
 
-/* eslint-disable @next/next/no-img-element -- sprites dev (staging / .gamedata) */
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import type { Route } from 'next';

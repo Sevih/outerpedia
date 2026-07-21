@@ -101,7 +101,6 @@ export function TowerFloorMenu({
                     </span>
                   )}
                   {e.portraitSrc && (
-                    // eslint-disable-next-line @next/next/no-img-element -- sprite R2/staging
                     <img
                       src={e.portraitSrc}
                       alt=""
@@ -113,13 +112,9 @@ export function TowerFloorMenu({
                   {(e.element || e.classType) && (
                     <span className="flex shrink-0 items-center gap-1">
                       {e.classType && (
-                        // eslint-disable-next-line @next/next/no-img-element -- sprite R2/staging
                         <img src={img.klass(e.classType)} alt="" className="h-4 w-4" />
                       )}
-                      {e.element && (
-                        // eslint-disable-next-line @next/next/no-img-element -- sprite R2/staging
-                        <img src={img.element(e.element)} alt="" className="h-4 w-4" />
-                      )}
+                      {e.element && <img src={img.element(e.element)} alt="" className="h-4 w-4" />}
                     </span>
                   )}
                   {e.flag && (

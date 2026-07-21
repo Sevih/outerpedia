@@ -16,10 +16,8 @@ const inline = (o: ItemOption) => ({
 function Tile({ o }: { o: ItemOption }) {
   return (
     <span className="relative inline-block shrink-0" style={{ width: 18, height: 18 }}>
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img src={img.slotFrame(o.grade)} alt="" className="absolute inset-0 h-full w-full" />
       {o.icon && (
-        // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
         <img
           src={img.item(o.icon)}
           alt=""

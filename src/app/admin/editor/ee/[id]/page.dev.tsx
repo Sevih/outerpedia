@@ -53,7 +53,6 @@ export default async function EditorEeDetail({ params }: { params: Promise<{ id:
       <EntitySwitch id={id} mode="editor" entity="ee" />
 
       <div className="flex items-center gap-3">
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2 */}
         <img src={img.ee(id)} alt="" className="h-14 w-14 shrink-0 rounded object-cover" />
         <div>
           <h1 className="text-content-strong text-xl font-semibold">

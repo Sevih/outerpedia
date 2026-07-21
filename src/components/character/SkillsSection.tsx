@@ -45,12 +45,10 @@ export function SkillsSection({
             {priority.steps.map((step, i) => (
               <Fragment key={i}>
                 {i > 0 && (
-                  // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
                   <img src={img.chainArrow()} alt="→" width={24} height={24} className="mt-2.5" />
                 )}
                 <span className="flex flex-col items-center gap-1">
                   {step.icon && (
-                    // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
                     <img src={img.skill(step.icon)} alt={step.name} width={36} height={36} />
                   )}
                   <span className="text-xs font-semibold text-yellow-300">{step.name}</span>

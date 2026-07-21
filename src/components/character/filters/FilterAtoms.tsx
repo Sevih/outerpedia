@@ -93,7 +93,6 @@ function PillSprite({ src, size }: { src: string; size: 'sm' | 'md' }) {
   const dim = size === 'sm' ? 18 : 20;
   return (
     <span className="relative block" style={{ width: dim, height: dim }}>
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img src={src} alt="" className="size-full object-contain" />
     </span>
   );
@@ -182,7 +181,6 @@ export function StarPill({
       className={`focus-visible:ring-accent inline-flex h-8 shrink-0 items-center gap-0.5 rounded-lg border px-2.5 transition focus:outline-none focus-visible:ring-2 ${active ? '' : 'bg-surface-sunken/70'}`}
     >
       {Array.from({ length: stars }, (_, i) => (
-        // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
         <img
           key={i}
           src={img.star()}

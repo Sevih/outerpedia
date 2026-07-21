@@ -69,7 +69,6 @@ export function PropertyDiagram({
         />
         <div className="pointer-events-none absolute inset-x-0 bottom-[4%] flex justify-center">
           {Array.from({ length: 6 }, (_, i) => (
-            // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
             <img
               key={i}
               src={img.transcendStar(i < 3 ? STAR_SPRITE.orange : STAR_SPRITE.yellow)}

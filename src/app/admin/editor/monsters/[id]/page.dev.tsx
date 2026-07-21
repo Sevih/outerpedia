@@ -116,20 +116,17 @@ export default async function EditorMonsterPage({ params }: { params: Promise<{ 
 
       <div className="flex items-center gap-3">
         <span className="relative h-14 w-14 shrink-0">
-          {/* eslint-disable-next-line @next/next/no-img-element -- sprite dev */}
           <img
             src={monsterSlotSrc(m.type)}
             alt=""
             className="absolute inset-0 h-full w-full rounded object-cover"
           />
-          {/* eslint-disable-next-line @next/next/no-img-element -- sprite dev */}
           <img
             src={monsterIconSrc(m.icon)}
             alt=""
             className="absolute inset-[7%] h-[86%] w-[86%] rounded object-cover"
           />
           {monsterBossBadgeSrc(m.type) && (
-            // eslint-disable-next-line @next/next/no-img-element -- sprite dev
             <img
               src={monsterBossBadgeSrc(m.type)}
               alt="boss"

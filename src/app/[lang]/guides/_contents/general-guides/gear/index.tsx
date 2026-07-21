@@ -139,7 +139,6 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
   const goldCell = (n: number): ReactNode => (
     <span className="inline-flex items-center gap-1 whitespace-nowrap">
       {goldIcon && (
-        // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
         <img src={img.item(goldIcon)} alt="" width={15} height={15} className="inline-block" />
       )}
       {fmt(n)}

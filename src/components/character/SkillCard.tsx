@@ -139,7 +139,6 @@ export function SkillCard({
         <div className="relative h-14 w-14 shrink-0">
           <div className="relative h-full w-full overflow-hidden">
             {(skill.iconSrc || skill.icon) && (
-              // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
               <img
                 src={skill.iconSrc ?? img.skill(skill.icon!)}
                 alt={skill.name}
@@ -149,7 +148,6 @@ export function SkillCard({
           </div>
           {skill.burst && (
             <div className="absolute -top-1 -right-1 h-5 w-5">
-              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
               <img src={img.burstBadge()} alt="" className="h-full w-full object-contain" />
             </div>
           )}

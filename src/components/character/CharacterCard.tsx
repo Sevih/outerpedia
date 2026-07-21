@@ -114,7 +114,6 @@ export function CharacterCard({
 
   const portraitBox = (
     <div className={`relative overflow-hidden rounded ${s.container}`}>
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img
         src={img.portrait(id)}
         alt={name}
@@ -124,7 +123,6 @@ export function CharacterCard({
 
       {/* Badge de recrutement — en haut à gauche */}
       {badgeTag && (
-        // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
         <img
           src={img.recruitTag(badgeTag)}
           alt={badgeTag}
@@ -140,7 +138,6 @@ export function CharacterCard({
           aria-label={starAriaLabel.replace('{rarity}', String(rarity))}
         >
           <div className="relative" style={{ width: s.slotWidth, height: s.slotHeight }}>
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img
               src={img.starSlot()}
               alt=""
@@ -151,7 +148,6 @@ export function CharacterCard({
             className={`absolute inset-0 flex flex-col items-center justify-start ${s.starGap} ${s.starPt}`}
           >
             {Array.from({ length: rarity }, (_, i) => (
-              // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
               <img
                 key={i}
                 src={img.star()}
@@ -172,7 +168,6 @@ export function CharacterCard({
           className={`absolute ${s.elemBottom} right-1 z-10`}
           style={{ width: s.iconSize, height: s.iconSize }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={img.element(element)}
             alt={element}
@@ -187,7 +182,6 @@ export function CharacterCard({
           className={`absolute ${s.classBottom} right-1 z-10`}
           style={{ width: s.classIconSize, height: s.classIconSize }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={img.klass(classType)}
             alt={classType}
@@ -202,7 +196,6 @@ export function CharacterCard({
           className={`absolute ${s.coreFusionBottom} right-1 z-10`}
           style={{ width: s.classIconSize, height: s.classIconSize }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={img.coreFusionTag()}
             alt="Core Fusion"

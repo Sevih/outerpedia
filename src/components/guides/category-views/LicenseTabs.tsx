@@ -84,7 +84,6 @@ function WeeklyCard({ card }: { card: LicenseCard }) {
   return (
     <Link href={card.href} className={`group flex flex-col items-center gap-1.5 ${CARD_W}`}>
       <div className="group-hover:ring-select/50 relative aspect-150/260 w-full overflow-hidden rounded-lg transition-all group-hover:ring-1">
-        {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
         <img
           src={card.src}
           alt={card.name}
@@ -134,7 +133,6 @@ function PromotionCard({
             tabIndex={revealed ? -1 : 0}
             className="absolute inset-0 cursor-pointer overflow-hidden rounded-lg backface-hidden"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img
               src={card.src}
               alt=""
@@ -151,7 +149,6 @@ function PromotionCard({
             tabIndex={revealed ? 0 : -1}
             className="group hover:ring-select/50 absolute inset-0 transform-[rotateY(180deg)] overflow-hidden rounded-lg transition-all backface-hidden hover:ring-1"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img
               src={card.openSrc}
               alt={card.name}

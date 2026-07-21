@@ -20,7 +20,6 @@ export interface LanguageSwitcherStrings {
  */
 function FlagIcon({ code, className = 'h-3.5 w-5' }: { code: string; className?: string }) {
   return (
-    /* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */
     <img
       src={img.flag(code)}
       alt=""

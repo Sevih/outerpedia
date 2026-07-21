@@ -190,7 +190,6 @@ export function ItemCuratedEditor({
           <div className="flex items-center gap-2">
             {effIcon && (
               <span className="border-line bg-surface-base relative h-8 w-8 shrink-0 rounded border">
-                {/* eslint-disable-next-line @next/next/no-img-element -- aperçu admin */}
                 <img
                   src={img.item(effIcon)}
                   alt=""

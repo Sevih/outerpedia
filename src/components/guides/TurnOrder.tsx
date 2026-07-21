@@ -42,7 +42,6 @@ export function TurnOrder({
             <div key={i} className="flex items-center">
               {i > 0 && <span className="text-content-muted mx-2 text-lg select-none">›</span>}
               <div className="flex items-center gap-1.5">
-                {/* eslint-disable-next-line @next/next/no-img-element -- sprite ATB */}
                 <img
                   src={img.atb(c.id)}
                   alt=""

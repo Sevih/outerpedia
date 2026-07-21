@@ -30,7 +30,6 @@ export function GuideCard({
       href={localePath(lang, `/guides/${guide.category}/${guide.slug}`)}
       className="group border-line-subtle bg-surface-overlay/50 hover:border-line flex items-start gap-4 rounded-xl border p-4 transition-[transform,border-color] duration-150 hover:-translate-y-px"
     >
-      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
       <img
         src={iconSrc ?? img.guideIcon(guide.icon)}
         alt=""

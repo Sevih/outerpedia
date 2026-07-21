@@ -66,10 +66,7 @@ export async function OverviewSection(p: OverviewProps) {
           <div className="flex flex-wrap items-center gap-2">
             {p.unitTag && (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1 text-sm ring-1 ring-white/10">
-                {p.unitTag.iconSrc && (
-                  // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
-                  <img src={p.unitTag.iconSrc} alt="" width={16} height={16} />
-                )}
+                {p.unitTag.iconSrc && <img src={p.unitTag.iconSrc} alt="" width={16} height={16} />}
                 {p.unitTag.label}
               </span>
             )}
@@ -114,7 +111,6 @@ export async function OverviewSection(p: OverviewProps) {
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <span className="inline-flex items-center gap-0.5">
               {[...Array(p.rarity)].map((_, i) => (
-                // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
                 <img key={i} src={p.starSrc} alt="star" width={20} height={20} />
               ))}
             </span>
@@ -122,18 +118,15 @@ export async function OverviewSection(p: OverviewProps) {
             <span
               className={`inline-flex items-center gap-1.5 text-sm font-medium ${p.element.textClass}`}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
               <img src={p.element.iconSrc} alt={p.element.label} width={22} height={22} />
               {p.element.label}
             </span>
             <span className="inline-flex items-center gap-1.5 text-sm text-zinc-200">
-              {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
               <img src={p.klass.iconSrc} alt={p.klass.label} width={22} height={22} />
               {p.klass.label}
             </span>
             {p.subClass && (
               <span className="inline-flex items-center gap-1.5 text-sm text-zinc-400">
-                {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                 <img src={p.subClass.iconSrc} alt={p.subClass.label} width={22} height={22} />
                 {p.subClass.label}
               </span>

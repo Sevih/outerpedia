@@ -178,7 +178,6 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
         ? img.effect(team.icon)
         : undefined;
     if (!src) return undefined;
-    // eslint-disable-next-line @next/next/no-img-element -- petit badge d'équipe
     return <img src={src} alt="" width={20} height={20} className="h-5 w-5 shrink-0" />;
   };
 
@@ -203,7 +202,6 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
         const name = monsterDisplayNames([m.id], lang).get(m.id) ?? m.name.en;
         return (
           <>
-            {/* eslint-disable-next-line @next/next/no-img-element -- portrait de boss */}
             <img
               src={monsterIconSrc(m)}
               alt=""
@@ -213,7 +211,6 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
             />
             <span className="min-w-0 truncate">{name}</span>
             {m.element && (
-              // eslint-disable-next-line @next/next/no-img-element -- icône d'élément
               <img
                 src={img.element(m.element)}
                 alt=""

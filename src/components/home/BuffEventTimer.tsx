@@ -150,7 +150,6 @@ export function BuffEventTimer({
                 {rowName(e.date)}
               </span>
               {BUFF_ICON[e.type] ? (
-                // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
                 <img
                   src={img.buff(BUFF_ICON[e.type])}
                   alt=""

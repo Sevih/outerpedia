@@ -177,7 +177,6 @@ function TeamSlot({
             showName={false}
           />
         ) : (
-          // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
           <img
             src={img.skillchain('TI_Slot_Empty')}
             alt={emptyAlt}
@@ -244,14 +243,12 @@ function ChainEffectIcons({
             className="relative flex h-7 w-7 items-center justify-center sm:h-9 sm:w-9"
             title={e.name}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
             <img
               src={img.skillchain(bg)}
               alt=""
               className="absolute inset-0 h-full w-full object-contain"
             />
             {e.icon && (
-              // eslint-disable-next-line @next/next/no-img-element -- asset R2/staging
               <img
                 src={img.effect(e.icon)}
                 alt={e.name}
@@ -396,7 +393,6 @@ function CharPicker({
                 onClick={() => setElement((v) => (v === el ? null : el))}
                 className={filterBtn(element === el)}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                 <img src={img.element(el)} alt={el} className="h-5 w-5" />
               </button>
             ))}
@@ -410,7 +406,6 @@ function CharPicker({
                 onClick={() => setCls((v) => (v === k ? null : k))}
                 className={filterBtn(cls === k)}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                 <img src={img.klass(k)} alt={k} className="h-5 w-5" />
               </button>
             ))}
@@ -606,7 +601,6 @@ export function TeamPlannerBrowser({ chars, fx, statuses, labels: L }: Props) {
       {/* Croix d'équipe (slot 0 en haut, 1 à gauche, 2 à droite, 3 en bas). */}
       <div className="relative mx-auto w-fit">
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={img.skillchain('T_Tame_Select')}
             alt=""
@@ -664,7 +658,6 @@ export function TeamPlannerBrowser({ chars, fx, statuses, labels: L }: Props) {
                     isSelected ? 'ring-accent rounded-lg ring-2' : ''
                   }`}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                   <img
                     src={img.skillchain('T_FX_SkillChain_Mask')}
                     alt=""
@@ -675,7 +668,6 @@ export function TeamPlannerBrowser({ chars, fx, statuses, labels: L }: Props) {
                       className="block h-full w-full"
                       style={{ transform: 'scale(1.7)', transformOrigin: 'center center' }}
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
                       <img
                         src={img.portrait(c.id)}
                         alt={c.label}

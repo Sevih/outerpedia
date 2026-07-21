@@ -52,7 +52,6 @@ export function ChainDualSection({
       {/* Icône + nom */}
       <div className="mb-4 flex items-center gap-3">
         <div className="relative h-14 w-14 shrink-0 overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element -- asset R2/staging */}
           <img
             src={iconSrc}
             alt={name}
