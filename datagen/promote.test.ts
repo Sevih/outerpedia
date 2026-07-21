@@ -45,22 +45,37 @@ const read = (dir: string, rel: string): Record<string, unknown> =>
   JSON.parse(readFileSync(join(dir, rel), 'utf8')) as Record<string, unknown>;
 
 describe('applyRetention — cœur pur de la rétention', () => {
-  it('réinjecte les clés validées absentes de la proposition, en fin', () => {
+  it('réinjecte les clés validées absentes de la proposition, en fin, MARQUÉES retired', () => {
     const committed = { old: { hp: 1 }, kept: { hp: 2 } };
     const extracted = { kept: { hp: 3 }, fresh: { hp: 4 } };
     const { merged, retained } = applyRetention(committed, extracted);
     expect(retained).toEqual(['old']);
     // La proposition fait foi pour les clés communes ; les retenues arrivent APRÈS
-    // (ordre stable → diff git minimal).
+    // (ordre stable → diff git minimal), estampillées archives (`retired`).
     expect(Object.keys(merged)).toEqual(['kept', 'fresh', 'old']);
     expect(merged.kept).toEqual({ hp: 3 });
-    expect(merged.old).toEqual({ hp: 1 });
+    expect(merged.old).toEqual({ hp: 1, retired: true });
   });
 
   it('ne retient rien quand la proposition couvre tout le validé', () => {
     const { merged, retained } = applyRetention({ a: 1 }, { a: 2, b: 3 });
     expect(retained).toEqual([]);
     expect(merged).toEqual({ a: 2, b: 3 });
+  });
+
+  it('marquage idempotent ; une entité REVENUE dans la proposition perd son flag', () => {
+    // Archive déjà marquée, toujours absente → re-marquée à l'identique.
+    const again = applyRetention({ old: { hp: 1, retired: true } }, { fresh: { hp: 4 } });
+    expect(again.merged.old).toEqual({ hp: 1, retired: true });
+    // L'entité réapparaît dans l'extraction → la proposition fait foi (sans flag).
+    const back = applyRetention({ old: { hp: 1, retired: true } }, { old: { hp: 5 } });
+    expect(back.retained).toEqual([]);
+    expect(back.merged.old).toEqual({ hp: 5 });
+  });
+
+  it('une valeur retenue NON-objet passe telle quelle (pas de marquage possible)', () => {
+    const { merged } = applyRetention({ n: 7 }, {});
+    expect(merged.n).toBe(7);
   });
 });
 
@@ -72,8 +87,9 @@ describe('promote — rétention à l’apply', () => {
     const res = await promote({ src, dst, apply: true });
 
     const out = read(dst, 'monsters.json');
-    // La clé retenue survit, la commune est mise à jour, la nouvelle entre.
-    expect(out.boss_old).toEqual({ name: 'Old' });
+    // La clé retenue survit (marquée archive), la commune est mise à jour, la
+    // nouvelle entre.
+    expect(out.boss_old).toEqual({ name: 'Old', retired: true });
     expect(out.boss_shared).toEqual({ name: 'v2' });
     expect(out.boss_new).toEqual({ name: 'New' });
     // Et la rétention est signalée dans l'écran de revue.
@@ -86,8 +102,8 @@ describe('promote — rétention à l’apply', () => {
       await put(src, rel, { other: { v: 2 } });
     }
     await promote({ src, dst, apply: true });
-    expect(read(dst, 'monster-skills.json').kept_key).toEqual({ v: 1 });
-    expect(read(dst, 'encounters.json').kept_key).toEqual({ v: 1 });
+    expect(read(dst, 'monster-skills.json').kept_key).toEqual({ v: 1, retired: true });
+    expect(read(dst, 'encounters.json').kept_key).toEqual({ v: 1, retired: true });
   });
 
   it('supprime bien les clés des fichiers SANS rétention (glossaires & co)', async () => {
@@ -138,6 +154,24 @@ describe('promote — --only', () => {
     await expect(promote({ src, dst, only: new Set(['nope.json']) })).rejects.toThrow(
       /introuvable/,
     );
+  });
+
+  it('citer UN membre du trio à rétention entraîne les deux autres (unité référentielle)', async () => {
+    // Le vécu du 21/07 : monsters.json promu seul = donjons orphelins + skills
+    // pendants. Le garde-fou élargit le périmètre aux jumeaux présents.
+    for (const rel of ['monsters.json', 'monster-skills.json', 'encounters.json']) {
+      await put(src, rel, { fresh: { v: 2 } });
+      await put(dst, rel, { fresh: { v: 1 } });
+    }
+    await put(src, 'glossary.json', { g: { v: 2 } });
+    await put(dst, 'glossary.json', { g: { v: 1 } });
+
+    await promote({ src, dst, apply: true, only: new Set(['monsters.json']) });
+
+    expect(read(dst, 'monsters.json').fresh).toEqual({ v: 2 });
+    expect(read(dst, 'monster-skills.json').fresh).toEqual({ v: 2 }); // entraîné
+    expect(read(dst, 'encounters.json').fresh).toEqual({ v: 2 }); // entraîné
+    expect(read(dst, 'glossary.json').g).toEqual({ v: 1 }); // hors périmètre
   });
 });
 

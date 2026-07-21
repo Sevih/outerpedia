@@ -16,7 +16,9 @@
  * Exception : `--only <fichier> [...]` promeut uniquement les fichiers cités
  * (chemins relatifs à data/extracted). Réservé aux fichiers AUTONOMES (sans
  * réfs croisées vers glossaires/skills — ex. `unlock-content.json`) quand un
- * autre domaine est en chantier et ne doit pas partir avec.
+ * autre domaine est en chantier et ne doit pas partir avec. GARDE-FOU : citer
+ * un membre du trio à rétention (`RETAIN_ENTITIES`) entraîne les deux autres —
+ * ils forment une unité référentielle, un seul promu casse les invariants.
  *
  * La logique cœur est exportée (`promote`, `applyRetention`) avec chemins
  * injectables : c'est elle qui est couverte par `promote.test.ts` — l'apply
@@ -94,6 +96,13 @@ function entityDiff(a: unknown, b: unknown): string {
  * entités déjà validées (`committed`) qu'elle ne produit plus. L'ordre des
  * clés est celui de la proposition, entités retenues APPENDUES en fin —
  * même geste que l'intégration ciblée → diff git minimal et stable.
+ *
+ * Chaque entité retenue est MARQUÉE `retired: true` : le jeu a retiré ce
+ * contenu, l'entrée est une ARCHIVE — les invariants « vivants » (tests de
+ * spawn inverse d'encounters) l'exemptent, et le front peut un jour l'afficher
+ * comme telle. Idempotent : une archive déjà marquée se re-marque à
+ * l'identique (l'entité revenue dans l'extraction reprend la proposition,
+ * donc perd le flag).
  */
 export function applyRetention(
   committed: Record<string, unknown>,
@@ -101,7 +110,13 @@ export function applyRetention(
 ): { merged: Record<string, unknown>; retained: string[] } {
   const retained = Object.keys(committed).filter((k) => !(k in extracted));
   const merged: Record<string, unknown> = { ...extracted };
-  for (const k of retained) merged[k] = committed[k];
+  for (const k of retained) {
+    const entry = committed[k];
+    merged[k] =
+      entry && typeof entry === 'object' && !Array.isArray(entry)
+        ? { ...entry, retired: true }
+        : entry;
+  }
   return { merged, retained };
 }
 
@@ -143,7 +158,16 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
     if (unknown.length) {
       throw new Error(`--only : introuvable(s) dans data/extracted : ${unknown.join(', ')}`);
     }
-    files = files.filter((f) => only.has(f));
+    // Le trio à rétention est une UNITÉ RÉFÉRENTIELLE (monsters → skills de
+    // monstres, spawns → donjons) : en promouvoir UN seul coupe des réfs — le
+    // vécu du 21/07 : monsters.json promu seul = 57 donjons orphelins et 41
+    // skills pendants, détectés par les invariants d'encounters.test. Citer un
+    // membre entraîne les autres (présents dans la proposition).
+    const scope = new Set(only);
+    if ([...only].some((f) => RETAIN_ENTITIES.has(f))) {
+      for (const f of RETAIN_ENTITIES) if (files.includes(f)) scope.add(f);
+    }
+    files = files.filter((f) => scope.has(f));
   }
   // En promotion ciblée, le reste du monde est volontairement hors périmètre.
   const orphans = only ? [] : walk(dst).filter((f) => !files.includes(f) && !isPureCurated(f));

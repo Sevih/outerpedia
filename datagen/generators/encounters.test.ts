@@ -183,6 +183,11 @@ describe('encounters.json — invariants référentiels', () => {
   it('cohérence aller-retour : un monstre listé par un donjon a le spawn inverse', () => {
     const missing: string[] = [];
     for (const [id, d] of dungeonEntries) {
+      // ARCHIVE (`retired`, posé par la rétention de promote) : le jeu a retiré
+      // ce donjon, les spawns de ses monstres — recalculés sur le présent — ne
+      // pointent légitimement plus vers lui. L'invariant ne vaut que pour le
+      // contenu VIVANT.
+      if (d.retired) continue;
       for (const m of d.monsters ?? []) {
         const spawns = monsters[m.id]?.spawns ?? [];
         if (!spawns.some((s) => s.dungeon === id)) missing.push(`${id} → ${m.id}`);

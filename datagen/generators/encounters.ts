@@ -316,6 +316,13 @@ export interface DungeonRef {
   bossHp?: number;
   /** Paliers de rencontre des modes à progression (cf. `DungeonRank`). */
   ranks?: DungeonRank[];
+  /**
+   * ARCHIVE : le jeu a retiré ce donjon de ses tables, l'entrée est RETENUE
+   * par la promotion (posé par `promote`, jamais par le build — cf.
+   * `applyRetention`). Les invariants « vivants » (spawn inverse) ne
+   * s'appliquent pas à une archive : ses monstres ne pointent plus vers elle.
+   */
+  retired?: boolean;
 }
 
 /** Une apparition d'un monstre dans un donjon. */
