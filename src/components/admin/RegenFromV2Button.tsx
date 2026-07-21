@@ -11,7 +11,9 @@ export function RegenFromV2Button({
   kind,
   onRegen,
 }: {
-  kind: 'coupons' | 'banners' | 'changelog';
+  // Seul le changelog importe encore depuis la V2 (coupons/banners retirés le
+  // 21/07 — fichiers à jour, V3 = source de vérité).
+  kind: 'changelog';
   onRegen: (data: unknown[]) => void;
 }) {
   const [busy, setBusy] = useState(false);

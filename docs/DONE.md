@@ -6,6 +6,23 @@
 
 ## 2026-07-21
 
+- **Pré-bascule : les 3 reliquats utilisateurs traités.** ① `/tools` : le
+  REGISTRY fait autorité sur la disponibilité — un outil sans composant porté
+  (et sans `href` de renvoi) est « coming soon » quoi qu'en dise le curé : carte
+  grisée non cliquable au lieu d'un 404 (mécanisme d'affichage déjà en place,
+  seule la source du statut manquait ; s'éteint tout seul à mesure des
+  portages). ② Tables V2 `tier_lists` (8 lignes) + `teams` (31) MIGRÉES sur le
+  MySQL du VPS depuis le dump live (local, `*.sql` désormais gitignoré) — import
+  en fusion (`CREATE IF NOT EXISTS` + `INSERT IGNORE`, ids = hashes
+  déterministes donc collision = même contenu ; l'`ADD PRIMARY KEY` du dump
+  retiré pour `tier_lists`, la table app existait déjà) ; lien court V2 vérifié
+  200 sur staging. `teams` n'a PAS encore de consommateur V3 (le team-planner
+  partage par URL compacte) — la donnée est là si on porte les liens courts un
+  jour. ③ Regen V2 coupons/banners RETIRÉE (fichiers à jour, V3 = source de
+  vérité — décision Sevih) : fonctions du store, branches de la route
+  `regen-v2`, boutons des éditeurs ; ne reste que le volet CHANGELOG comme
+  dernier import V2 (à trancher avec l'item CHANGELOG.md).
+
 - **Reviews Discord LIVRÉES ET EN PROD — chantier complet ①②③ + bascule.** Le
   bot V2 « à l'arrache » (fichiers JSON committés dans son repo, copie des
   données du site, `UPDATE.md` manuel à chaque perso : scripts + commit +

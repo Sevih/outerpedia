@@ -5,7 +5,6 @@ import type { Banner } from '@/lib/admin/promo-banner-store';
 import { postJson } from '@/lib/admin/post-json';
 import { type Keyed, rowKey, withKey } from '@/lib/admin/keyed';
 import { CharacterPicker, type CharOption } from '@/components/admin/CharacterPicker';
-import { RegenFromV2Button } from './RegenFromV2Button';
 
 const input =
   'rounded-md border border-line bg-surface-base px-2 py-1 text-sm text-content focus:border-accent focus:outline-none';
@@ -118,10 +117,6 @@ export function BannersEditor({ initial, chars }: { initial: Banner[]; chars: Ch
         >
           + banner
         </button>
-        <RegenFromV2Button
-          kind="banners"
-          onRegen={(d) => setRows(byStartDesc((d as Banner[]).map(withKey)))}
-        />
         <span className="text-content-subtle ml-auto text-xs">{rows.length} banner(s)</span>
       </div>
 

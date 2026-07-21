@@ -1,13 +1,12 @@
 /**
  * Store des codes promo + bannières (couche curée éditable, ADMIN local).
- * Format IDENTIQUE à V2 (aucune transformation) : le « regen » est une simple
- * copie du repo V2 voisin — une seule donnée à maintenir. V3 = source de vérité
- * une fois seedé ; le regen n'est qu'un import ponctuel (écrase).
+ * Format hérité de la V2 tel quel ; V3 est la SOURCE DE VÉRITÉ depuis le
+ * 21/07 (le « regen » d'import ponctuel depuis le repo V2 voisin a été retiré
+ * une fois les fichiers à jour — décision Sevih).
  */
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { writeJson } from '@datagen/lib/json';
-import { catalogIdByName } from '@/lib/data/item-catalog';
 
 export interface PromoCode {
   code: string;
@@ -27,12 +26,6 @@ export interface Banner {
 
 const COUPONS_PATH = resolve(process.cwd(), 'data/curated/coupons.json');
 const BANNER_PATH = resolve(process.cwd(), 'data/curated/banner.json');
-// Repo V2 voisin. Lecture seule, dev only. Nom du dossier dépendant de la
-// machine (fixe : outerpedia-v2, portable : outerpedia) → V2_DIR de .env.local
-// (chargé par Next au démarrage, cf. .env.example).
-const V2_ROOT = resolve(process.cwd(), process.env.V2_DIR ?? '../outerpedia-v2');
-const V2_COUPONS = resolve(V2_ROOT, 'data', 'coupons.json');
-const V2_BANNER = resolve(V2_ROOT, 'data', 'banner.json');
 
 function readArray<T>(path: string): T[] {
   try {
@@ -41,13 +34,6 @@ function readArray<T>(path: string): T[] {
   } catch {
     return [];
   }
-}
-
-/** Lecture stricte (regen) : jette si absent/invalide → on n'écrase pas à vide. */
-function readArrayStrict<T>(path: string): T[] {
-  const data = JSON.parse(readFileSync(path, 'utf8'));
-  if (!Array.isArray(data)) throw new Error(`${path} : tableau attendu`);
-  return data as T[];
 }
 
 // Format CANONIQUE (`writeJson`) — sinon chaque édition reformate tout le fichier.
@@ -60,30 +46,3 @@ export const loadBanners = (): Banner[] => readArray<Banner>(BANNER_PATH);
 
 export const saveCoupons = (list: PromoCode[]): Promise<void> => writeArray(COUPONS_PATH, list);
 export const saveBanners = (list: Banner[]): Promise<void> => writeArray(BANNER_PATH, list);
-
-/**
- * Import des codes promo depuis V2 (écrase la copie V3). V2 stocke les rewards
- * par NOM ; on mappe vers l'id d'item (best-effort — nom non trouvé = gardé tel
- * quel, éditable ensuite dans le picker).
- */
-export async function regenCouponsFromV2(): Promise<PromoCode[]> {
-  const raw = readArrayStrict<PromoCode>(V2_COUPONS);
-  // Index catalogue complet : items + monnaies + costumes + créations (Stamina…).
-  const nameToId = catalogIdByName();
-  const mapped = raw.map((c) => ({
-    ...c,
-    description: Object.fromEntries(
-      Object.entries(c.description ?? {}).map(([name, qty]) => [
-        nameToId.get(name.trim().toLowerCase()) ?? name,
-        qty,
-      ]),
-    ),
-  }));
-  await writeArray(COUPONS_PATH, mapped);
-  return mapped;
-}
-export async function regenBannersFromV2(): Promise<Banner[]> {
-  const data = readArrayStrict<Banner>(V2_BANNER);
-  await writeArray(BANNER_PATH, data);
-  return data;
-}

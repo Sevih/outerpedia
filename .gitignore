@@ -45,3 +45,5 @@ desktop.ini
 # poussés sur R2 comme le reste, jamais dans git. Source durable = R2 + originaux.
 .editorial/
 docs/seo&audit
+# Dumps SQL locaux (migration ponctuelle) — jamais commites
+*.sql

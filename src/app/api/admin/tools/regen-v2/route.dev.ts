@@ -1,24 +1,14 @@
 import { NextResponse } from 'next/server';
-import { regenBannersFromV2, regenCouponsFromV2 } from '@/lib/admin/promo-banner-store';
 import { regenChangelogFromV2 } from '@/lib/admin/changelog-store';
-import { publishBanners, publishCoupons } from '@/lib/admin/runtime-publish';
 import { IS_DEV } from '@/lib/admin/guard';
 
 // Import ponctuel depuis le repo V2 voisin (écrase la copie V3). Dev only.
+// Ne reste que le CHANGELOG : coupons/banners retirés le 21/07 (fichiers à
+// jour, V3 = source de vérité — décision Sevih).
 export async function POST(req: Request) {
   if (!IS_DEV) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
   const { kind } = (await req.json()) as { kind?: string };
   try {
-    // Le regen coupons réécrit le fichier → republie la copie runtime R2 aussi.
-    if (kind === 'coupons') {
-      const data = await regenCouponsFromV2();
-      return NextResponse.json({ ok: true, data, publish: await publishCoupons() });
-    }
-    // Même logique pour le regen banners : fichier réécrit → copie R2 republiée.
-    if (kind === 'banners') {
-      const data = await regenBannersFromV2();
-      return NextResponse.json({ ok: true, data, publish: await publishBanners() });
-    }
     if (kind === 'changelog')
       return NextResponse.json({ ok: true, data: await regenChangelogFromV2() });
     return NextResponse.json({ ok: false, error: 'kind inconnu' }, { status: 400 });

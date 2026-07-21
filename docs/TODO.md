@@ -13,9 +13,6 @@
 
 ## 🎯 PRIO (décision Sevih)
 
-- [ ] **Regen coupons/banner V2 = EXCEPTION assumée** — la source V2 reste la
-      référence jusqu'à la bascule prod V2→V3 (liée à la page `/coupons`). Rien
-      à faire d'ici là.
 - [ ] **Ajouter la bannière Dimensional Supply au guide banner** (banner-mileage) —
       elle donne au max 4 segments jaunes sur un substat (cf. guide gear, onglet
       Bases) ; à documenter côté guide des bannières.
@@ -32,20 +29,13 @@
       (`event` PORTÉ le 21/07, cf. DONE — reste à POUSSER les visuels
       d'événement sur R2 : `pnpm images` collecte `images/events/**` depuis le
       pool, la bannière `default.webp` en dépend.)
-      (`tier-list-maker` PORTÉ le 21/07, cf. DONE — reste côté infra :
-      DÉCIDER la migration de la table `tier_lists` V2, sans quoi les liens
-      courts `?s=` V2 sont morts. `team-planner` PORTÉ le 21/07, cf. DONE.)
+      (`tier-list-maker` et `team-planner` PORTÉS le 21/07 ; tables V2
+      `tier_lists` + `teams` MIGRÉES sur le MySQL du VPS le 21/07, cf. DONE —
+      les liens courts `?s=` V2 résolvent.)
       (Historique des portés : 19-21/07, cf. DONE — socle `TierListTool`,
       routeur à plat, coupon-codes = renvoi `/coupons`,
       gear-usage-statistics & gear-usage-finder = agrégation gear-reco à la
       lecture, patch-history, pull-simulator, progress-tracker.)
-- [ ] **Cartes « coming soon » sur `/tools`** (audit Sitebulb 20/07) : la
-      landing linke les outils NON portés → autant de 404 internes indexables
-      (crawl gaspillé ; c'est aussi la cause du hint « Multiple title tags »,
-      la page 404 de Next empilant 2 `<title>`). Rendre la carte NON cliquable
-      tant que le slug est absent de `PORTED_TOOL_SLUGS` (le registry sait
-      déjà). S'éteint tout seul à mesure des portages, mais vaut mieux que
-      d'attendre.
 
 ## 🧪 Tests à écrire
 

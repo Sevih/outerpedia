@@ -5,6 +5,7 @@ import { createPageMetadata } from '@/lib/seo';
 import { getToolsByCategory } from '@/lib/data/tools';
 import { asAccentKey } from '@/components/tools/toolsTheme';
 import { ToolsBrowser, type ToolGroupVM } from '@/components/tools/ToolsBrowser';
+import { PORTED_TOOL_SLUGS } from './registry';
 
 export const revalidate = 86400;
 
@@ -45,7 +46,10 @@ export default async function ToolsPage({ params }: { params: Promise<{ lang: st
         icon: tool.icon,
         title: t(`tools.${tool.slug}` as TranslationKey),
         desc: t(`tools.${tool.slug}.desc` as TranslationKey),
-        status: tool.status,
+        // Le REGISTRY fait autorité sur la disponibilité : un outil sans
+        // composant porté (et sans `href` de renvoi) est « coming soon » quoi
+        // qu'en dise le curé — sa carte se grise au lieu de linker un 404.
+        status: tool.href || PORTED_TOOL_SLUGS.includes(tool.slug) ? tool.status : 'coming-soon',
         // `href` curé = renvoi vers une page existante (coupon-codes → /coupons).
         href: tool.href ?? `/${tool.slug}`,
         category: asAccentKey(g.category.slug),

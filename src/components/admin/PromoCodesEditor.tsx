@@ -6,7 +6,6 @@ import { postJson } from '@/lib/admin/post-json';
 import { rowKey } from '@/lib/admin/keyed';
 import type { ItemOption } from '@/lib/data/items';
 import { ItemPicker } from './ItemPicker';
-import { RegenFromV2Button } from './RegenFromV2Button';
 
 const input =
   'rounded-md border border-line bg-surface-base px-2 py-1 text-sm text-content focus:border-accent focus:outline-none';
@@ -102,10 +101,6 @@ export function PromoCodesEditor({
         >
           + code
         </button>
-        <RegenFromV2Button
-          kind="coupons"
-          onRegen={(d) => setRows(byStartDesc((d as PromoCode[]).map(toRow)))}
-        />
         <span className="text-content-subtle ml-auto text-xs">{rows.length} code(s)</span>
       </div>
 
