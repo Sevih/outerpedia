@@ -4001,6 +4001,27 @@
     "star": 0,
     "characterLimit": "2000089"
   },
+  "23043": {
+    "kind": "item",
+    "name": {
+      "en": "Oath with Luna",
+      "jp": "ルナとの誓約",
+      "kr": "루나와의 서약",
+      "zh": "与露娜的誓约"
+    },
+    "desc": {
+      "en": "A token that allows you to form an everlasting bond with [Luna].\\nWhen used, grants 170,000 Affinity EXP, enough to raise [Luna]'s Affinity to Lv. 10 instantly.\\nIf [Luna]'s Affinity is already at the maximum level, you can sell this item for 100,000 Gold.",
+      "jp": "【ルナ】と永遠の親密な関係を築くことができる証。\\n使用時、【ルナ】の親密度を一度に10LVまで成長させられる分の経験値（170,000）を提供する。\\nすでに完璧な親密関係が構築されている場合、このアイテムを100,000ゴールドで売却できます。",
+      "kr": "[루나]과 영원한 애정 관계를 구축할 수 있는 증표.\\n사용 시 [루나]의 애정도를 한번에 10LV까지 성장 시킬 수 있는 분량의 경험치 (170,000) 를 제공합니다.\\n이미 완벽한 애정 관계가 구축되신 경우, 해당 아이템을 100,000 골드로 판매하실 수 있습니다.",
+      "zh": "可与【露娜】建立永恒亲密关系的证明。\\n使用时，提供可将【露娜】的亲密度一次提升至10LV的经验值（170,000）。\\n若已建立完美的亲密关系，可将该道具以100,000金币出售。"
+    },
+    "icon": "TI_present_Max_Public",
+    "grade": "unique",
+    "type": "present",
+    "subType": "present_max",
+    "star": 0,
+    "characterLimit": "2000103"
+  },
   "24001": {
     "kind": "item",
     "name": {
@@ -14669,6 +14690,66 @@
     "subType": "box_type_random",
     "star": 0
   },
+  "30548": {
+    "kind": "item",
+    "name": {
+      "en": "Talisman Random Box",
+      "jp": "タリスマンランダムボックス",
+      "kr": "탈리스만 랜덤 상자",
+      "zh": "护身符随机宝箱"
+    },
+    "desc": {
+      "en": "Obtain one random Talisman of 4★ to 6★ rarity.",
+      "jp": "4★～6★タリスマンの中から一つを確率に応じて獲得する。",
+      "kr": "4~6성 탈리스만 중 한가지를 확률에 따라 얻습니다.",
+      "zh": "按概率获得4★至6★护身符中的一种。"
+    },
+    "icon": "TI_Talisman_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_random",
+    "star": 0
+  },
+  "30549": {
+    "kind": "item",
+    "name": {
+      "en": "4★ Talisman Selection Box",
+      "jp": "4★タリスマン選択ボックス",
+      "kr": "4성 탈리스만 선택 상자",
+      "zh": "4★护身符选择宝箱"
+    },
+    "desc": {
+      "en": "Select and obtain one 4★ Talisman.",
+      "jp": "4★タリスマンの中から一つを選択して獲得する。",
+      "kr": "4성 탈리스만 중 한가지를 선택하여 얻습니다.",
+      "zh": "选择并获得4★护身符中的一种。"
+    },
+    "icon": "TI_Talisman_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_choice_item",
+    "star": 0
+  },
+  "30550": {
+    "kind": "item",
+    "name": {
+      "en": "5★ Talisman Selection Box",
+      "jp": "5★タリスマン選択ボックス",
+      "kr": "5성 탈리스만 선택 상자",
+      "zh": "5★护身符选择宝箱"
+    },
+    "desc": {
+      "en": "Select and obtain one 5★ Talisman.",
+      "jp": "5★タリスマンの中から一つを選択して獲得する。",
+      "kr": "5성 탈리스만 중 한가지를 선택하여 얻습니다.",
+      "zh": "选择并获得5★护身符中的一种。"
+    },
+    "icon": "TI_Talisman_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_choice_item",
+    "star": 0
+  },
   "40001": {
     "kind": "item",
     "name": {
@@ -21589,7 +21670,7 @@
     "name": {
       "en": "Round-the-Clock Tourist Luna",
       "jp": "昼夜なき観光客・ルナ",
-      "kr": "밤낮 없는 관광객  루나",
+      "kr": "밤낮 없는 관광객 루나",
       "zh": "不分昼夜的游客 露娜"
     },
     "desc": {
@@ -21744,16 +21825,16 @@
   "SYS_ASSET_ALWAYS_EVENT_COIN_2": {
     "kind": "goods",
     "name": {
-      "en": "Proof of Effort",
-      "jp": "努力の証",
-      "kr": "노력의 증표",
-      "zh": "努力的证明"
+      "en": "Dahlia's Domain",
+      "jp": "ダリアの領地",
+      "kr": "달리아의 영지",
+      "zh": "达利娅的领地"
     },
     "desc": {
-      "en": "A token given after running. Can be exchanged for various items in the Permanent Event Shop.",
-      "jp": "走った後に支給される証。常設イベントショップで様々なアイテムと交換できる。",
-      "kr": "달리기 후에 지급되는 증표. 상시 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
-      "zh": "奔跑后获得的证明。可于常驻活动商店兑换各种商品。"
+      "en": "An icon crafted using Dahlia's weapon parts. Can be exchanged for various items in the Permanent Event Shop.",
+      "jp": "ダリアの武器部品を使用して製作したアイコン。常設イベントショップで様々なアイテムと交換できる。",
+      "kr": "달리아의 무기 부속을 사용하여 아이콘 제작. 상시 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
+      "zh": "使用达利娅的武器部件制作的图标。可于常驻活动商店兑换各种商品。"
     },
     "icon": "",
     "grade": "normal",
@@ -21763,16 +21844,16 @@
   "SYS_ASSET_ALWAYS_EVENT_COIN_3": {
     "kind": "goods",
     "name": {
-      "en": "Cursed Trumpet",
-      "jp": "呪われたトランペット",
-      "kr": "저주받은 트럼펫",
-      "zh": "受诅咒的小号"
+      "en": "Fire Crystal",
+      "jp": "火の結晶",
+      "kr": "불의 결정",
+      "zh": "火之结晶"
     },
     "desc": {
-      "en": "A trumpet that Maxi and Roxy stole from Amadeus. Can be exchanged for various items in the Permanent Event Shop.",
-      "jp": "マクシーとロクシーがアマデウスから盗んだトランペット。常設イベントショップで様々なアイテムと交換できる。",
-      "kr": "맥시와 록시가 아마데우스에게서 훔친 트럼펫. 상시 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
-      "zh": "麦克西和洛克西从阿玛迪斯那里偷来的小号。可于常驻活动商店兑换各种商品。"
+      "en": "An unidentified fuel created by Tamamo-no-Mae. Can be exchanged for various items in the Permanent Event Shop.",
+      "jp": "タマモノマエが作った正体不明の燃料。常設イベントショップで様々なアイテムと交換できる。",
+      "kr": "타마모노마에가 만든 정체 불명의 연료. 상시 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
+      "zh": "玉藻前制作的来历不明的燃料。可于常驻活动商店兑换各种商品。"
     },
     "icon": "",
     "grade": "normal",
@@ -21782,16 +21863,16 @@
   "SYS_ASSET_ALWAYS_EVENT_COIN_4": {
     "kind": "goods",
     "name": {
-      "en": "Mithril",
-      "jp": "ミスリル",
-      "kr": "미스릴",
-      "zh": "秘银"
+      "en": "Fragment of the World",
+      "jp": "世界の編鱗",
+      "kr": "세계의 편린",
+      "zh": "世界的碎片"
     },
     "desc": {
-      "en": "Magical silver refined from rare metals found in Omega's factory. Can be exchanged for various items in the Permanent Event Shop.",
-      "jp": "オメガの工場で発見された希少金属を精製した魔力の銀。常設イベントショップで様々なアイテムと交換できる。",
-      "kr": "오메가의 공장에서 발견한 희귀금속을 정제한 마력의 은. 상시 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
-      "zh": "提炼自欧米茄工厂稀有金属的魔力之银。可于常驻活动商店兑换各种商品。"
+      "en": "A puzzle piece engraved with a cosmic/galactic pattern. Can be exchanged for various items in the Permanent Event Shop.",
+      "jp": "宇宙/銀河系の模様が刻まれたパズルのピース。常設イベントショップで様々なアイテムと交換できる。",
+      "kr": "우주/은하계 무늬가 새겨진 퍼즐 조각. 상시 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
+      "zh": "刻有宇宙/银河系纹样的拼图碎片。可于常驻活动商店兑换各种商品。"
     },
     "icon": "",
     "grade": "normal",
@@ -22295,10 +22376,10 @@
       "zh": "异型怪样本"
     },
     "desc": {
-      "en": "A sample reagent extracted from an Irregular's body. Exchange it at Caren's Supply Shop for supplies that are useful in the Infiltration Operation.",
-      "jp": "イレギュラーの体内から抽出したサンプル試薬。カレンの補給ショップで侵入殲滅戦に有用な補給品と交換できる。",
-      "kr": "이레귤러의 체내에서 추출한 샘플 시약. 카렌의 보급 상점을 통해 침투 섬멸에 유용하게 활용할 수 있는 보급품과 교환할 수 있습니다.",
-      "zh": "从异型怪体内提取的样本试剂。可通过卡伦的补给商店兑换渗透歼灭战所需的补给品。"
+      "en": "A sample reagent extracted from an Irregular's body. Exchange it at Lambda's Supply Shop for supplies that are useful in the Infiltration Operation.",
+      "jp": "イレギュラーの体内から抽出したサンプル試薬。ラムダの補給ショップで侵入殲滅戦に有用な補給品と交換できる。",
+      "kr": "이레귤러의 체내에서 추출한 샘플 시약. 람다의 보급 상점을 통해 침투 섬멸에 유용하게 활용할 수 있는 보급품과 교환할 수 있습니다.",
+      "zh": "从异型怪体内提取的样本试剂。可通过拉姆达的补给商店兑换渗透歼灭战所需的补给品。"
     },
     "icon": "",
     "grade": "normal",

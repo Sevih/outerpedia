@@ -3496,7 +3496,7 @@
       "desc": {
         "en": "Reduces the caster's Speed by 90%. When an ally takes a turn and performs an action, the caster uses [Repent!] on the enemy with the highest Attack.. Then, increase the caster's Priority by 40%. (Irremovable. Removed when a Boss Break occurs or at the end of the caster's turn. When the caster is the only surviving ally, the Speed reduction effect is removed and will not occur.)",
         "jp": "自分のスピードが90%DOWNし、\\n味方がターンを獲得して行動する時、\\n攻撃力が最も高い敵単体に\\n【懺悔なさい！】を発動する。\\nその後、\\n自分の行動ゲージが40%UPする。\\n（解除不可、ブレイクまたは\\n自分のターン終了時に解除。\\n三蔵法師・あめのみ生存時は\\nスピードDOWN効果を解除し、\\n効果は発動しない）",
-        "kr": "자신의 속도가 90% 감소하고, 아군이 턴을 획득하여 행동 시 [참회하세요!]를 가장 공격력이 높은 적에게 사용합니다.\\n이후 자신의 행동 게이지가 40% 증가합니다.(해제 불가, 보스 브레이크 및 자신 턴 종료 시 해제, 혼자 생존 시 속도 감소 효과 제거 및 미발생)",
+        "kr": "자신의 속도가 90% 감소하고, 아군이 턴을 획득하여 행동 시 참회하세요! 를 가장 공격력이 높은 적에게 사용합니다.\\n이후 자신의 행동 게이지가 40% 증가합니다.(해제 불가, 보스 브레이크 및 자신 턴 종료 시 해제, 혼자 생존 시 속도 감소 효과 제거 및 미발생)",
         "zh": "自身速度降低90%，\\n当我方单位获得回合并行动时，\\n对攻击力最高的敌人使用【忏悔吧!】。\\n\\n之后自身行动值提高40%。\\n（无法驱散，首领进入力竭状态及\\n自身回合结束时解除，\\n独自生存时\\n速度降低效果将被移除且不会触发）"
       },
       "icon": "IG_Buff_2000110_Interruption",

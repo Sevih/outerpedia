@@ -3160,12 +3160,12 @@
       "zh": "死灵术士之符"
     },
     "grade": "unique",
-    "star": 5,
-    "icon": "TI_Equipment_Weapon_05_Mage",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
     "craftable": false,
     "classLimit": "mage",
-    "main": ["25", "1061"],
-    "sub": "105",
+    "main": ["24", "1054"],
+    "sub": "106",
     "passives": [
       {
         "id": "4001",
@@ -3173,7 +3173,7 @@
         "isAdd": false
       }
     ],
-    "breakLimit": "5|unique"
+    "breakLimit": "6|unique"
   },
   "630": {
     "name": {
@@ -3436,12 +3436,12 @@
       "zh": "傲慢寒冬"
     },
     "grade": "unique",
-    "star": 5,
-    "icon": "TI_Equipment_Weapon_05",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
     "craftable": false,
     "classLimit": "striker",
-    "main": ["27", "1063"],
-    "sub": "105",
+    "main": ["24", "1504"],
+    "sub": "106",
     "passives": [
       {
         "id": "4022",
@@ -3449,7 +3449,7 @@
         "isAdd": false
       }
     ],
-    "breakLimit": "5|unique"
+    "breakLimit": "6|unique"
   },
   "642": {
     "name": {
@@ -4622,6 +4622,52 @@
     "passives": [
       {
         "id": "1037",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "998": {
+    "name": {
+      "en": "Necromancer's Amulet",
+      "jp": "死霊術師の御守り",
+      "kr": "사령술사의 부적",
+      "zh": "死灵术士之符"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06_Mage",
+    "craftable": false,
+    "classLimit": "mage",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "4001",
+        "level": 1,
+        "isAdd": false
+      }
+    ],
+    "breakLimit": "6|unique"
+  },
+  "999": {
+    "name": {
+      "en": "Winter of Hubris",
+      "jp": "傲慢な冬",
+      "kr": "오만한 겨울",
+      "zh": "傲慢寒冬"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": "striker",
+    "main": ["24", "1054"],
+    "sub": "106",
+    "passives": [
+      {
+        "id": "4022",
         "level": 1,
         "isAdd": false
       }

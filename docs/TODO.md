@@ -159,10 +159,6 @@ Règle permanente : chaque `meta.bossId` d'un guide porté doit exister dans
 `monsters.json` (le rendu JETTE sinon) — extraction à la demande
 (`pnpm datagen:extract-entity`).
 
-- [ ] **Perso `lambda` (2000118) en attente dans l'extraction** (constat 20/07 :
-      `datagen:promote` propose `characters.json +1` et `characters-slug-to-id
-+1`) — promotion = décision de contenu (nouveau perso du jeu ?).
-
 ## 🤔 Décisions en attente (Sevih)
 
 - [ ] `TODO(guides)` de `version-monster.ts:16` : « Versionner » doit
