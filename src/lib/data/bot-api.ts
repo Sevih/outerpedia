@@ -31,7 +31,7 @@ import {
   type ResolvedSource,
 } from '@/lib/data/equipment';
 
-/** Un perso pour le bot (création de post forum + /char) — id V3 (portrait ATB). */
+/** Un perso pour le bot (création de post forum + /char) — id V3 (face icon FI_). */
 export interface BotCharacter {
   slug: string;
   name: string;
