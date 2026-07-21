@@ -23,6 +23,7 @@
 import { closeSync, existsSync, openSync, readdirSync, readSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { isMain } from '../lib/is-main';
+import { isUnreleasedCharacterAsset } from '../lib/released';
 import { listHeroFullArt } from '../assets/hero-full-art';
 
 /** Une entrée wallpaper : nom de fichier (sans extension) + dimensions. */
@@ -60,14 +61,19 @@ function byF(a: Wallpaper, b: Wallpaper): number {
 /** Scanne un dossier de catégorie : une entrée par `.png`, dimensions lues. */
 function scanCategory(dir: string): Wallpaper[] {
   if (!existsSync(dir)) return [];
-  return readdirSync(dir)
-    .filter((f) => f.toLowerCase().endsWith('.png'))
-    .map((f) => {
-      const stem = f.replace(/\.png$/i, '');
-      const d = pngDims(join(dir, f));
-      return { f: stem, w: d?.w ?? 0, h: d?.h ?? 0 };
-    })
-    .sort(byF);
+  return (
+    readdirSync(dir)
+      .filter((f) => f.toLowerCase().endsWith('.png'))
+      .map((f) => f.replace(/\.png$/i, ''))
+      // Cutin/Art sont nommés par id de perso : on n'annonce pas les illustrations
+      // d'un perso que le wiki n'a pas encore intégré (cf. `released.ts`).
+      .filter((stem) => !isUnreleasedCharacterAsset(stem))
+      .map((stem) => {
+        const d = pngDims(join(dir, `${stem}.png`));
+        return { f: stem, w: d?.w ?? 0, h: d?.h ?? 0 };
+      })
+      .sort(byF)
+  );
 }
 
 /**

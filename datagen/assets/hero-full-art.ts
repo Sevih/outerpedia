@@ -18,6 +18,7 @@
  */
 import { closeSync, existsSync, openSync, readSync } from 'node:fs';
 import { walkFiles } from '../lib/fs';
+import { isUnreleasedCharacterAsset } from '../lib/released';
 import { GAME_IMAGES_DIR } from './source';
 
 /** Largeur minimale d'un art affichable (même seuil que la V2 : exclut les vignettes). */
@@ -77,6 +78,10 @@ export function listHeroFullArt(dir = GAME_IMAGES_DIR): HeroArt[] {
       .replace(/\.png$/i, '')
       .split(/[\\/]/)
       .pop()!;
+    // Perso pas encore intégré au wiki (doublon de dev, lambda, patch à venir) :
+    // ni hébergé sur R2 (le manifest lit cette même liste) ni servi par
+    // `/wallpapers`. Les PNJ et les skins des persos sortis passent.
+    if (isUnreleasedCharacterAsset(f)) continue;
     out.push({ f, path, w: d.w, h: d.h });
   }
   return out.sort((a, b) => (a.f < b.f ? -1 : a.f > b.f ? 1 : 0));

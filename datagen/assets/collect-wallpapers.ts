@@ -16,8 +16,9 @@
  *
  * Exécution : `pnpm assets:collect-wallpapers` (ou via `pnpm images`).
  */
-import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readdirSync, rmSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
+import { isUnreleasedCharacterAsset } from '../lib/released';
 import { STAGING_DIR } from './stage';
 
 const GAME_POOL = resolve('.gamedata/extracted/wallpapers');
@@ -34,16 +35,30 @@ const SOURCES: Array<[root: string, category: string]> = [
 ];
 
 /** Copie les webp/png d'un dossier de catégorie vers le staging (idempotent). */
-function copyCategory(srcDir: string, category: string): { copied: number; skipped: number } {
-  if (!existsSync(srcDir)) return { copied: 0, skipped: 0 };
+function copyCategory(
+  srcDir: string,
+  category: string,
+): { copied: number; skipped: number; pruned: number } {
+  if (!existsSync(srcDir)) return { copied: 0, skipped: 0, pruned: 0 };
   const destDir = resolve(DEST, category);
   mkdirSync(destDir, { recursive: true });
   let copied = 0;
   let skipped = 0;
+  let pruned = 0;
   for (const f of readdirSync(srcDir)) {
     if (!/\.(webp|png)$/i.test(f)) continue;
     const from = join(srcDir, f);
     const to = join(destDir, f);
+    // Perso pas encore intégré au wiki (Cutin/Art sont nommés par id) : on ne
+    // le pousse pas sur R2 — et on RETIRE la copie qu'une collecte précédente
+    // aurait déjà déposée, sinon le push continuerait de l'envoyer.
+    if (isUnreleasedCharacterAsset(f.replace(/\.(webp|png)$/i, ''))) {
+      if (existsSync(to)) {
+        rmSync(to, { force: true });
+        pruned++;
+      }
+      continue;
+    }
     if (existsSync(to) && statSync(to).size === statSync(from).size) {
       skipped++;
       continue;
@@ -51,21 +66,24 @@ function copyCategory(srcDir: string, category: string): { copied: number; skipp
     copyFileSync(from, to);
     copied++;
   }
-  return { copied, skipped };
+  return { copied, skipped, pruned };
 }
 
-export function collectWallpapers(): { copied: number; skipped: number } {
+export function collectWallpapers(): { copied: number; skipped: number; pruned: number } {
   let copied = 0;
   let skipped = 0;
+  let pruned = 0;
   for (const [root, category] of SOURCES) {
     const r = copyCategory(join(root, category), category);
     copied += r.copied;
     skipped += r.skipped;
+    pruned += r.pruned;
   }
-  return { copied, skipped };
+  return { copied, skipped, pruned };
 }
 
-const { copied, skipped } = collectWallpapers();
-if (copied || skipped) {
-  console.log(`wallpapers → ${copied} copiés, ${skipped} à jour`);
+const { copied, skipped, pruned } = collectWallpapers();
+if (copied || skipped || pruned) {
+  const tail = pruned ? `, ${pruned} retirés (perso non intégré)` : '';
+  console.log(`wallpapers → ${copied} copiés, ${skipped} à jour${tail}`);
 }
