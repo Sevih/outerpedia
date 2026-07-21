@@ -80,6 +80,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         { label: 'Promo code', href: '/admin/tools/promo-codes' },
         { label: 'Banner', href: '/admin/tools/banners' },
         { label: 'Changelog', href: '/admin/tools/changelog' },
+        { label: 'Events', href: '/admin/tools/events' },
         { label: 'Game data', href: '/admin/tools/gamedata' },
       ],
     },

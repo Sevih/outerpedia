@@ -6,6 +6,34 @@
 
 ## 2026-07-21
 
+- **Outil `event` porté — mais REPENSÉ : un événement est une DONNÉE, plus un
+  composant.** En V2, un événement = un fichier `events/<slug>.tsx` avec son
+  dictionnaire i18n inline : publier, corriger une date ou ajouter les gagnants
+  demandait un commit + un redéploiement, et le filtre des événements cachés
+  étant CÔTÉ CLIENT, leur contenu partait quand même dans le bundle de prod.
+  V3 : `data/curated/events.json` = métadonnées + liste de BLOCS au vocabulaire
+  fermé (`prose`, `list`, `sections`, `timeline`, `callout`, `cta`, `videos`,
+  `image`), rendus par un composant unique (`EventBlocks`). Décisions Sevih :
+  ① UNE PAGE PAR ÉVÉNEMENT (`/event/<slug>` — URL partageable, meta description
+  et carte OG propres ; `/event` reste l'index) ; ② bloc `videos` GÉNÉRIQUE —
+  une entrée porteuse d'un libellé `featured` passe en lecteur embarqué badgé,
+  les autres forment la grille : le podium d'un concours et une galerie de
+  showcase sont la même donnée. Le statut (à venir/en cours/terminé) se DÉDUIT
+  des dates (plus rien à basculer), `draft` remplace le `hidden` V2 et est
+  filtré CÔTÉ SERVEUR. `meta.phases` devient la source unique des dates
+  intermédiaires (le bloc `timeline` les rend, l'en-tête met en avant le jalon
+  courant) — la V2 les retapait en dur dans la prose ×4 langues. Admin
+  `/admin/tools/events` (maître/détail, blocs réordonnables, bouton Traduire
+  DeepL/Haiku) et `events.json` rejoint `RUNTIME_DATA_FILES` : **enregistrer
+  publie sur R2, l'événement paraît en prod sans redéploiement**. Au passage :
+  `loadRuntimeJson` extrait de `lib/home` en module partagé, collecte R2 des
+  visuels d'événement data-driven dans le manifeste, `ToolShell` extrait du
+  routeur à plat (partagé avec la route dédiée `/event`), et la CSP ouvre
+  `frame-src` à Twitch/Bilibili — `MultiVideoEmbed` sait les embarquer depuis
+  toujours mais leur lecteur était bloqué en silence. Contenu V2 transplanté
+  (concours vidéo de mars + le teaser `_no-peaking`, en brouillon). 578 tests
+  verts (+20). RESTE : pousser `images/events/**` sur R2 (`pnpm images`).
+
 - **Promotion du patch réparée + deux verrous dans `promote` (cd218dc,
   d263b88).** Les invariants d'encounters.test ont détecté un état MI-PROMU :
   `monsters.json` copié verbatim depuis l'extrait SANS ses 41 skills ni les 57

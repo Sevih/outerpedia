@@ -35,7 +35,9 @@ const securityHeaders = [
       "font-src 'self' data:",
       "connect-src 'self' https://cloudflareinsights.com",
       "media-src 'self' https://*.youtube.com https://cdn.discordapp.com",
-      "frame-src 'self' https://*.youtube.com",
+      // Les TROIS plateformes que `MultiVideoEmbed` sait embarquer : sans
+      // twitch/bilibili ici, leur lecteur est bloqué en silence (cadre vide).
+      "frame-src 'self' https://*.youtube.com https://player.twitch.tv https://player.bilibili.com",
       "object-src 'none'",
       "base-uri 'self'",
       "form-action 'self'",

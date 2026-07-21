@@ -1,15 +1,12 @@
 import type { Metadata } from 'next';
-import type { Route } from 'next';
 import type { ComponentType } from 'react';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
 import { normalizeLang, type Lang } from '@/lib/i18n/config';
 import { getT, type TranslationKey } from '@/i18n';
-import { createPageMetadata, buildBreadcrumbJsonLd } from '@/lib/seo';
-import { buildUrl } from '@/lib/site';
+import { createPageMetadata } from '@/lib/seo';
 import { img } from '@/lib/images';
 import { getToolMeta } from '@/lib/data/tools';
-import JsonLd from '@/components/seo/JsonLd';
+import { ToolShell } from '@/components/tools/ToolShell';
 import { TOOL_COMPONENTS, PORTED_TOOL_SLUGS } from '../tools/registry';
 
 export const revalidate = 86400;
@@ -62,34 +59,9 @@ export default async function ToolPage({ params }: Props) {
     notFound();
   }
 
-  const breadcrumb = buildBreadcrumbJsonLd([
-    { name: t('nav.home'), url: buildUrl(lang, '/') },
-    { name: t('page.tools.title'), url: buildUrl(lang, '/tools') },
-    { name: title, url: buildUrl(lang, `/${slug}`) },
-  ]);
-
   return (
-    <div className="px-4 py-6 md:px-6">
-      <JsonLd data={breadcrumb} id="ld-breadcrumb" />
-      <div className="mx-auto max-w-6xl">
-        <Link
-          href={'/tools' as Route}
-          className="text-content-muted hover:text-content-strong inline-flex items-center gap-1 text-sm transition-colors"
-        >
-          &larr; {t('page.tools.title')}
-        </Link>
-        {/* `mx-auto` obligatoire : les titres sont en `width: fit-content` (liseré
-            de base) — `text-center` seul ne centre pas le bloc. */}
-        <h1 className="text-content-strong mx-auto mt-3 text-center text-3xl font-bold">{title}</h1>
-        {description && (
-          <p className="text-content-muted mx-auto mt-2 max-w-2xl text-center text-sm">
-            {description}
-          </p>
-        )}
-      </div>
-      <div className="mt-6">
-        <ToolContent lang={lang} />
-      </div>
-    </div>
+    <ToolShell lang={lang} slug={slug} title={title} description={description} t={t}>
+      <ToolContent lang={lang} />
+    </ToolShell>
   );
 }

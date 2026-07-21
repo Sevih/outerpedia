@@ -21,6 +21,7 @@ import {
   slugForId,
 } from '@/lib/data/characters';
 import { getItemEntry } from '@/lib/data/item-catalog';
+import { loadRuntimeJson } from '@/lib/data/runtime-json';
 import type { InlineItem } from '@/components/inline/ItemInline';
 import bannersData from '@data/curated/banner.json';
 import couponsData from '@data/curated/coupons.json';
@@ -61,29 +62,6 @@ export interface BuffScheduleEntry {
 type RawCoupon = { code: string; description: Record<string, string>; start: string; end: string };
 /** Entrée de `data/curated/banner.json` (le `name` est un confort d'admin). */
 type RawBanner = { id: string; name: string; start: string; end: string };
-
-const IMG_BASE = process.env.NEXT_PUBLIC_IMG_BASE ?? '';
-
-/**
- * Charge un JSON curé en RUNTIME. En prod : la COPIE hébergée sur R2
- * (`data/<name>`, publiée par la sauvegarde admin — cf.
- * `lib/admin/runtime-publish`), lue à la requête avec revalidation — une
- * édition apparaît SANS redéploiement (patron du manifeste comics, décision
- * Sevih 20/07). En dev (base vide) ou si R2 est injoignable : repli sur la
- * donnée committée. Le `revalidate` de 600 s abaisse d'office l'ISR des pages
- * consommatrices (home, /coupons) à 10 min — c'est voulu, c'est la fraîcheur.
- */
-async function loadRuntimeJson<T>(name: string, fallback: T): Promise<T> {
-  if (IMG_BASE) {
-    try {
-      const res = await fetch(`${IMG_BASE}/data/${name}`, { next: { revalidate: 600 } });
-      if (res.ok) return (await res.json()) as T;
-    } catch {
-      /* R2 injoignable → repli committé */
-    }
-  }
-  return fallback;
-}
 
 const loadCoupons = (): Promise<RawCoupon[]> =>
   loadRuntimeJson('coupons.json', couponsData as unknown as RawCoupon[]);

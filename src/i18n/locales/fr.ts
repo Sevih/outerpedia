@@ -301,13 +301,10 @@ const fr: Record<TranslationKey, string> = {
   'tools.event.status.ongoing': 'En cours',
   'tools.event.status.upcoming': 'À venir',
   'tools.event.status.ended': 'Terminé',
-  'tools.event.status.hidden': 'Masqué',
   'tools.event.organizer': 'Organisateur',
-  'tools.event.link': "Lien de l'événement",
-  'tools.event.upcoming_placeholder':
-    "Les détails seront révélés quand l'événement débutera. Restez à l'écoute !",
+  'tools.event.next_step': 'Prochaine étape : {step} — {date}',
+  'tools.event.draft': 'Brouillon',
   'tools.event.empty': 'Aucun événement pour le moment.',
-  'tools.event.ends': 'Se termine',
   'tools.team-planner': "Planificateur d'équipe",
   'tools.team-planner.desc':
     "Construisez et partagez des compositions d'équipe pour tout type de contenu.",

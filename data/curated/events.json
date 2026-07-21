@@ -1,0 +1,425 @@
+[
+  {
+    "slug": "20260324-video",
+    "type": "contest",
+    "title": {
+      "en": "Hero Video Event - Spring 2026",
+      "jp": "ヒーロー動画イベント - 2026年春",
+      "kr": "히어로 영상 이벤트 - 2026년 봄",
+      "zh": "英雄视频活动 - 2026年春季"
+    },
+    "summary": {
+      "en": "Calling all creators new and seasoned! Outerpedia is hosting a gallery for fan-made content — hero introductions, showcases, guides, and entertainment! Send us your videos to help us add more flair to the space!",
+      "jp": "新人もベテランもクリエイター大集合！Outerpediaがファン制作コンテンツのギャラリーを開催します — ヒーロー紹介、ショーケース、ガイド、エンタメ！動画を送ってスペースを盛り上げよう！",
+      "kr": "신인부터 베테랑까지 모든 크리에이터 여러분! Outerpedia가 팬 제작 콘텐츠 갤러리를 개최합니다 — 히어로 소개, 쇼케이스, 가이드, 엔터테인먼트! 영상을 보내 공간을 더 멋지게 만들어주세요!",
+      "zh": "召集所有新老创作者！Outerpedia正在举办粉丝创作内容画廊 — 同伴介绍、展示、攻略和娱乐！发送你的视频，帮助我们更加精彩！"
+    },
+    "organizer": "Outerpedia / EvaMains",
+    "cover": "/images/events/default.webp",
+    "start": "2026-03-24T00:00:00Z",
+    "end": "2026-05-05T00:00:00Z",
+    "phases": [
+      {
+        "until": "2026-03-24T00:00:00Z",
+        "label": {
+          "en": "Submissions open",
+          "jp": "提出開始",
+          "kr": "제출 시작",
+          "zh": "提交开放"
+        }
+      },
+      {
+        "until": "2026-04-28T00:00:00Z",
+        "label": {
+          "en": "Submission deadline",
+          "jp": "提出期限",
+          "kr": "제출 마감",
+          "zh": "提交截止"
+        }
+      },
+      {
+        "until": "2026-05-05T00:00:00Z",
+        "label": {
+          "en": "Community vote & final tally",
+          "jp": "コミュニティ投票＆最終集計",
+          "kr": "커뮤니티 투표 & 최종 집계",
+          "zh": "社区投票和最终统计"
+        }
+      },
+      {
+        "until": "2026-05-12T00:00:00Z",
+        "label": {
+          "en": "Prize distribution (target)",
+          "jp": "賞品配布（予定）",
+          "kr": "상품 배포 (예정)",
+          "zh": "奖品发放（预计）"
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "kind": "prose",
+        "text": {
+          "en": "The EvaMains team has received gifts to share with the community from OUTERPLANE's new publisher, Major9 and support from VAGAMES!",
+          "jp": "EvaMainsチームはOUTERPLANEの新パブリッシャーMajor9とVAGAMESの支援により、コミュニティへのプレゼントを受け取りました！",
+          "kr": "EvaMains 팀은 OUTERPLANE의 새 퍼블리셔 Major9와 VAGAMES의 지원으로 커뮤니티와 나눌 선물을 받았습니다!",
+          "zh": "EvaMains团队收到了与社区分享的礼物：感谢《异域战记》新发行商Major9以及VAGAMES的支持！"
+        }
+      },
+      {
+        "kind": "prose",
+        "title": {
+          "en": "Results",
+          "jp": "結果",
+          "kr": "결과",
+          "zh": "结果"
+        },
+        "text": {
+          "en": "The hero video event has now ended! Every one of the 9 participants receives an extra 3 000 ether coupon in addition to their prize.",
+          "jp": "ヒーロー動画イベントが終了しました！9名の参加者全員が、賞品とは別に3 000エーテルのクーポンを追加で受け取ります。",
+          "kr": "히어로 영상 이벤트가 종료되었습니다! 9명의 참가자 모두가 상품과 별도로 3 000 에테르 쿠폰을 추가로 받습니다.",
+          "zh": "英雄视频活动已结束！9位参与者每人都将在原有奖品之外，额外获得3 000以太币优惠券。"
+        }
+      },
+      {
+        "kind": "callout",
+        "text": {
+          "en": "Special shoutout to everyone's honorary hero, [Rick](https://youtu.be/dQw4w9WgXcQ)!\nFor video projects that weren't ready in time, Outerpedia will still feature them once completed.\nDon't forget to redeem coupon code OUTERPEDIA1YEAR — available to all players. Sevih will distribute prize coupon codes to participants via Discord, so make sure he can reach you.",
+          "jp": "みんなの名誉ヒーロー、[Rick](https://youtu.be/dQw4w9WgXcQ)に特別な感謝を！\n間に合わなかった動画プロジェクトも、完成次第Outerpediaで紹介します。\nクーポンコードOUTERPEDIA1YEARの引き換えをお忘れなく — 全プレイヤー対象。賞品クーポンコードはSevihがDiscordで配布しますので、連絡が取れるようにしてください。",
+          "kr": "모두의 명예 히어로 [Rick](https://youtu.be/dQw4w9WgXcQ)에게 특별한 감사를!\n제때 완성되지 못한 영상 프로젝트도 완성되는 대로 Outerpedia에서 소개됩니다.\n쿠폰 코드 OUTERPEDIA1YEAR 사용을 잊지 마세요 — 모든 플레이어 대상. 상품 쿠폰 코드는 Sevih가 Discord를 통해 배포하므로 연락이 가능하도록 해주세요.",
+          "zh": "特别感谢大家的荣誉同伴[Rick](https://youtu.be/dQw4w9WgXcQ)！\n未能及时完成的视频项目，Outerpedia会在完成后继续展示。\n别忘了兑换优惠码OUTERPEDIA1YEAR — 所有玩家均可使用。奖品优惠码将由Sevih通过Discord发放给参与者，请确保能联系到你。"
+        }
+      },
+      {
+        "kind": "videos",
+        "entries": [
+          {
+            "platform": "youtube",
+            "id": "pIQNseGWDBg",
+            "title": "Snow - Outerpedia Event",
+            "author": "39_mikulove",
+            "featured": {
+              "en": "1st place",
+              "jp": "1位",
+              "kr": "1위",
+              "zh": "第1名"
+            }
+          },
+          {
+            "platform": "youtube",
+            "id": "G1AvFRJFVSE",
+            "title": "OUTERPLANE RTA TACTICS LEAGUE: REVIEW",
+            "author": "SkyNova",
+            "featured": {
+              "en": "2nd place",
+              "jp": "2位",
+              "kr": "2위",
+              "zh": "第2名"
+            }
+          },
+          {
+            "platform": "youtube",
+            "id": "v_6s_T5hTG0",
+            "title": "Gnosis Domine Guide & Review! [ Outerplane ]",
+            "author": "adjen",
+            "featured": {
+              "en": "3rd place",
+              "jp": "3位",
+              "kr": "3위",
+              "zh": "第3名"
+            }
+          }
+        ]
+      },
+      {
+        "kind": "videos",
+        "title": {
+          "en": "Other Entries",
+          "jp": "その他のエントリー",
+          "kr": "기타 참가작",
+          "zh": "其他参赛作品"
+        },
+        "entries": [
+          {
+            "platform": "youtube",
+            "id": "e2r-aoutmgs",
+            "title": "Outerplane: Poison Goes BOOM BOOM!",
+            "author": "Hiragami"
+          },
+          {
+            "platform": "youtube",
+            "id": "On_dL9Cbfwo",
+            "title": "【アウタープレーン】キャラの必殺技を合体攻撃風にしてみた",
+            "author": "puyotchi#8704"
+          },
+          {
+            "platform": "bilibili",
+            "id": "BV11EXHBNEt2",
+            "title": "游戏开荒攻略：异域战记。主角色配队与自动推图",
+            "author": "wintrydance"
+          },
+          {
+            "platform": "youtube",
+            "id": "MhQAqceZV0Q",
+            "title": "[아우터플레인] 역대급 사기캐 '그노시스 도미네' 등장! | 성능 및 나홀로 결투장",
+            "author": "yu__zzi"
+          },
+          {
+            "platform": "bilibili",
+            "id": "BV1aKXGBHEhA",
+            "title": "【异域战记】实用小技巧之皮肤篇",
+            "author": "elara301"
+          },
+          {
+            "platform": "youtube",
+            "id": "Gu6hNcjORfQ",
+            "title": "[아우터 플레인 / OUTERPLANE ] 간?단하게 신규 동료 그노시스 도미네 간단하게 살펴보는 영상 'ㅂ')/",
+            "author": "엘유#5059"
+          }
+        ]
+      },
+      {
+        "kind": "list",
+        "title": {
+          "en": "The Prizes",
+          "jp": "賞品",
+          "kr": "상품",
+          "zh": "奖品"
+        },
+        "items": [
+          {
+            "en": "All players: Coupon Code",
+            "jp": "全プレイヤー：クーポンコード",
+            "kr": "전체 플레이어: 쿠폰 코드",
+            "zh": "所有玩家：优惠码"
+          },
+          {
+            "en": "1st place: 10 000 {I-I/Free Ether}",
+            "jp": "1位：10 000 {I-I/Free Ether}",
+            "kr": "1등: 10 000 {I-I/Free Ether}",
+            "zh": "第1名：10 000 {I-I/Free Ether}"
+          },
+          {
+            "en": "2nd–3rd place: 6 000 {I-I/Free Ether}",
+            "jp": "2～3位：6 000 {I-I/Free Ether}",
+            "kr": "2~3등: 6 000 {I-I/Free Ether}",
+            "zh": "第2~3名：6 000 {I-I/Free Ether}"
+          },
+          {
+            "en": "4th–10th place: 3 000 {I-I/Free Ether}",
+            "jp": "4～10位：3 000 {I-I/Free Ether}",
+            "kr": "4~10등: 3 000 {I-I/Free Ether}",
+            "zh": "第4~10名：3 000 {I-I/Free Ether}"
+          },
+          {
+            "en": "8 lucky participants will receive 3 000 {I-I/Free Ether}",
+            "jp": "抽選で8名に3 000 {I-I/Free Ether}",
+            "kr": "행운의 8명에게 3 000 {I-I/Free Ether}",
+            "zh": "8位幸运参与者将获得3 000 {I-I/Free Ether}"
+          },
+          {
+            "en": "All creators: A place to share your content on Outerpedia",
+            "jp": "全クリエイター：Outerpediaにコンテンツを掲載",
+            "kr": "모든 크리에이터: Outerpedia에 콘텐츠 게재",
+            "zh": "所有创作者：在Outerpedia展示你的内容"
+          }
+        ]
+      },
+      {
+        "kind": "sections",
+        "title": {
+          "en": "The Theme",
+          "jp": "テーマ",
+          "kr": "테마",
+          "zh": "主题"
+        },
+        "items": [
+          {
+            "title": {
+              "en": "Complete Introduction!",
+              "jp": "完全紹介！",
+              "kr": "완전 소개!",
+              "zh": "完整介绍！"
+            },
+            "text": {
+              "en": "Outerplane's official channel already has skill introduction videos for many 3-star heroes, but there's more to them than that. Show off their lobby poses, expressions, costumes, best voice lines, and more!",
+              "jp": "Outerplaneの公式チャンネルには多くの3つ星ヒーローのスキル紹介動画がありますが、それだけではありません。ロビーポーズ、表情、コスチューム、ベストボイスなどを見せてください！",
+              "kr": "Outerplane 공식 채널에는 많은 3성 히어로의 스킬 소개 영상이 있지만, 그게 전부가 아닙니다. 로비 포즈, 표정, 코스튬, 최고의 보이스 등을 보여주세요!",
+              "zh": "异域战记官方频道已经有许多3星同伴的技能介绍视频，但同伴们的魅力远不止于此。展示同伴的大厅姿势、表情、服装、最佳台词等！"
+            }
+          },
+          {
+            "title": {
+              "en": "Showcase!",
+              "jp": "ショーケース！",
+              "kr": "쇼케이스!",
+              "zh": "展示！"
+            },
+            "text": {
+              "en": "How do we build our heroes? What can they really accomplish? Special Request, Irregulars, Adventurer License, Arena, RTA — anything goes!",
+              "jp": "ヒーローをどう育成する？彼らの本当の実力は？特別依頼、イレギュラーズ、冒険者ライセンス、アリーナ、RTA — 何でもOK！",
+              "kr": "히어로를 어떻게 육성하나요? 그들이 정말로 달성할 수 있는 것은? 특별 의뢰, 이레귤러즈, 모험가 라이선스, 아레나, RTA — 무엇이든 OK!",
+              "zh": "我们如何培养同伴？能够做到什么？特别委托、异形怪、冒险家执照、竞技场、实时对战等——什么都行！"
+            }
+          },
+          {
+            "title": {
+              "en": "Lights, Camera, Action!",
+              "jp": "ライト、カメラ、アクション！",
+              "kr": "라이트, 카메라, 액션!",
+              "zh": "灯光、摄影、开拍！"
+            },
+            "text": {
+              "en": "Funny lobby compositions, meme teams, fanfiction — it's a game, have fun with it!",
+              "jp": "面白いロビー構成、ミームチーム、ファンフィクション — ゲームだから楽しもう！",
+              "kr": "재미있는 로비 구성, 밈 팀, 팬픽션 — 게임이니까 즐기세요!",
+              "zh": "有趣的大厅组合、玩梗队、同人创作——毕竟这是游戏，尽情享受吧！"
+            }
+          }
+        ]
+      },
+      {
+        "kind": "timeline",
+        "title": {
+          "en": "Timeline",
+          "jp": "スケジュール",
+          "kr": "일정",
+          "zh": "截止时间"
+        }
+      },
+      {
+        "kind": "callout",
+        "text": {
+          "en": "This event coincides with Outerpedia's 1st anniversary on April 29 — celebrate with us!",
+          "jp": "このイベントはOuterpediaの1周年記念（4月29日）と重なります — 一緒にお祝いしましょう！",
+          "kr": "이 이벤트는 Outerpedia 1주년(4월 29일)과 함께합니다 — 함께 축하해요!",
+          "zh": "本活动恰逢Outerpedia一周年纪念日（4月29日）——与我们一起庆祝吧！"
+        }
+      },
+      {
+        "kind": "list",
+        "title": {
+          "en": "Rules",
+          "jp": "ルール",
+          "kr": "규칙",
+          "zh": "规则"
+        },
+        "items": [
+          {
+            "en": "Only use in-game footage in the video.",
+            "jp": "動画にはゲーム内の映像のみを使用してください。",
+            "kr": "영상에는 게임 내 화면만 사용하세요.",
+            "zh": "视频中只能使用游戏内画面。"
+          },
+          {
+            "en": "Face cam is allowed for guide content.",
+            "jp": "ガイドコンテンツではフェイスカメラの使用が許可されています。",
+            "kr": "가이드 콘텐츠에는 페이스캠이 허용됩니다.",
+            "zh": "攻略类内容允许露脸。"
+          },
+          {
+            "en": "Any hero voice-over language is allowed.",
+            "jp": "ヒーローのボイスオーバー言語は問いません。",
+            "kr": "히어로 보이스오버 언어는 무엇이든 가능합니다.",
+            "zh": "同伴的配音语言不限。"
+          },
+          {
+            "en": "Video length between 50 and 600 seconds.",
+            "jp": "動画の長さは50～600秒。",
+            "kr": "영상 길이는 50~600초.",
+            "zh": "视频长度在50至600秒之间。"
+          },
+          {
+            "en": "Videos must be hosted on YouTube, Twitch, or Bilibili. Direct file uploads are not accepted.",
+            "jp": "動画はYouTube、Twitch、またはBilibiliでホストする必要があります。ファイルの直接アップロードは受け付けていません。",
+            "kr": "영상은 YouTube, Twitch 또는 Bilibili에 호스팅해야 합니다. 파일 직접 업로드는 불가합니다.",
+            "zh": "视频必须上传在YouTube、Twitch或Bilibili上。不接受直接文件上传。"
+          },
+          {
+            "en": "Add \"Outerpedia video event 2026 – <Your Nickname>\" to the description or pinned comment to verify your submission.",
+            "jp": "「Outerpedia video event 2026 – <あなたのニックネーム>」を説明文または固定コメントに追加してください。",
+            "kr": "\"Outerpedia video event 2026 – <닉네임>\"을 설명란 또는 고정 댓글에 추가하세요.",
+            "zh": "请在描述或置顶评论中添加\"Outerpedia video event 2026 – <你的昵称>\"以验证你的提交。"
+          },
+          {
+            "en": "Existing videos are accepted too!",
+            "jp": "既存の動画も受け付けます！",
+            "kr": "기존 영상도 제출 가능합니다!",
+            "zh": "现有视频也可以参加！"
+          },
+          {
+            "en": "Prizes will be distributed as a Coupon Code (provided by Major9), so please ensure we can contact you.",
+            "jp": "賞品はクーポンコード（Major9提供）として配布されますので、連絡が取れるようにしてください。",
+            "kr": "상품은 쿠폰 코드(Major9 제공)로 배포되므로 연락 가능한 상태를 유지해주세요.",
+            "zh": "奖品将以优惠码（由Major9提供）的形式发放，请确保我们能联系到你。"
+          },
+          {
+            "en": "Videos (prize-winning or not) may be linked in Outerpedia's gallery, with creator consent.",
+            "jp": "動画（受賞作品かどうかに関わらず）はクリエイターの同意の上、Outerpediaのギャラリーにリンクされる場合があります。",
+            "kr": "영상(수상 여부와 관계없이)은 크리에이터 동의 하에 Outerpedia 갤러리에 링크될 수 있습니다.",
+            "zh": "Outerpedia画廊可在经创作者同意后提供视频（无论是否获奖）链接。"
+          },
+          {
+            "en": "Videos can remain hosted on your own channel. YouTube videos can optionally be mirrored on Outerpedia's YouTube channel — your choice.",
+            "jp": "動画はご自身のチャンネルでホストしたままで構いません。YouTube動画はOuterpediaのYouTubeチャンネルにミラーリングすることもできます。",
+            "kr": "영상은 본인 채널에서 호스팅한 채로 유지할 수 있습니다. YouTube 영상은 선택적으로 Outerpedia YouTube 채널에 미러링할 수 있습니다.",
+            "zh": "视频保留在你自己的频道。YouTube的视频可以选择镜像到Outerpedia的YouTube频道。"
+          },
+          {
+            "en": "The OUTERPLANE team is watching! Major9 or VAGAMES may contact participants to feature their videos on the official OUTERPLANE YouTube channel, or use them in future promotions.",
+            "jp": "OUTERPLANEチームも注目しています！Major9またはVAGAMESが公式OUTERPLANEYouTubeチャンネルでの掲載や今後のプロモーションへの使用について連絡する場合があります。",
+            "kr": "OUTERPLANE 팀이 지켜보고 있습니다! Major9 또는 VAGAMES가 공식 OUTERPLANE YouTube 채널 게재 또는 향후 프로모션에 사용하기 위해 연락할 수 있습니다.",
+            "zh": "《异域战记》团队也在关注！Major9或VAGAMES可能会联系参与者，将其视频展示在异域战记官方YouTube频道或用于未来推广。"
+          },
+          {
+            "en": "Submissions may be disqualified if not submitted by the original creator, or if they include content not suitable for OUTERPLANE's age rating. Contact the EvaMains Discord admins for disputes.",
+            "jp": "オリジナルのクリエイター以外からの提出、またはOUTERPLANEの年齢制限に適さないコンテンツを含む場合、失格となる場合があります。異議はEvaMains Discordの管理者にお問い合わせください。",
+            "kr": "원본 크리에이터가 아닌 사람이 제출하거나, OUTERPLANE 연령 등급에 적합하지 않은 콘텐츠가 포함된 경우 실격될 수 있습니다. 이의 제기는 EvaMains Discord 관리자에게 문의하세요.",
+            "zh": "非原作者提交，或包含不适合《异域战记》年龄分级内容的提交可能会被取消资格。如有异议请联系EvaMains Discord管理员。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "_no-peaking",
+    "type": "community",
+    "title": {
+      "en": "Get out of here",
+      "jp": "ここから出て",
+      "kr": "여기서 나가",
+      "zh": "快离开这里"
+    },
+    "organizer": "Outerpedia",
+    "cover": "/images/events/gtfo.webp",
+    "start": "2025-10-09T00:00:00Z",
+    "end": "2025-10-15T23:59:59Z",
+    "draft": true,
+    "blocks": [
+      {
+        "kind": "prose",
+        "text": {
+          "en": "You weren't supposed to find this page.\nThere's nothing to see here. No event. No secret. Definitely not a hidden test for something coming soon.",
+          "jp": "このページを見つけるはずではなかったのに。\nここには何もありません。イベントもなし。秘密もなし。近日公開予定の隠しテストでもありません。",
+          "kr": "이 페이지를 찾으면 안 되는 건데.\n여기엔 아무것도 없습니다. 이벤트도 없고. 비밀도 없고. 곧 나올 무언가의 숨겨진 테스트도 절대 아닙니다.",
+          "zh": "你不应该找到这个页面的。\n这里什么都没有。没有活动。没有秘密。绝对不是即将推出的东西的隐藏测试。"
+        }
+      },
+      {
+        "kind": "callout",
+        "title": {
+          "en": "Confidential Area",
+          "jp": "機密エリア",
+          "kr": "기밀 구역",
+          "zh": "机密区域"
+        },
+        "text": {
+          "en": "Access restricted to Outerpedia Admins, Cats, and Possibly Space Jellyfish. Unauthorized reading may result in mild disappointment.\n(A mysterious force prevents you from going further. Maybe it's the dev's coffee break.)",
+          "jp": "Outerpedia管理者、猫、そしておそらく宇宙クラゲのみアクセス可能。無断閲覧は軽い失望を招く可能性があります。\n（謎の力がこれ以上進むことを阻んでいます。開発者のコーヒーブレイクかもしれません。）",
+          "kr": "Outerpedia 관리자, 고양이, 그리고 아마도 우주 해파리만 접근 가능. 무단 열람 시 가벼운 실망이 발생할 수 있습니다.\n(신비로운 힘이 더 나아가는 것을 막고 있습니다. 아마 개발자의 커피 브레이크일 겁니다.)",
+          "zh": "仅限Outerpedia管理员、猫和可能存在的太空水母访问。未经授权的阅读可能导致轻微失望。\n（一股神秘的力量阻止你继续前进。也许是开发者的咖啡休息时间。）"
+        }
+      }
+    ]
+  }
+]

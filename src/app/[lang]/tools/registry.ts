@@ -26,6 +26,11 @@ export const TOOL_COMPONENTS: Record<
   'progress-tracker': () => import('./_contents/progress-tracker'),
   'tier-list-maker': () => import('./_contents/tier-list-maker'),
   'team-planner': () => import('./_contents/team-planner'),
+  // ABSENT VOLONTAIREMENT : `event`. L'outil a des sous-pages
+  // (`/event/<slug>`), donc sa propre route `[lang]/event/page.tsx` — l'inscrire
+  // ici en plus créerait DEUX routes pour `/event` (erreur de build). Son
+  // wrapper `_contents/event` est rendu par cette route dédiée, et la landing
+  // le liste depuis `_index.json`, indépendant de ce registre.
 };
 
 /** Slugs des outils portés (routeur + `generateStaticParams`). */

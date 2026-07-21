@@ -26,9 +26,12 @@
 > ASSUMÉES le temps du portage. Chaque page arrive avec ses clés de locale
 > DÉJÀ pré-seedées ×5 (cf. item « pré-seed » de la section Docs).
 
-- [ ] **`/tools` — RESTENT 2 sous-outils** (`/<slug>`, 404 tant que non portés) :
+- [ ] **`/tools` — RESTE 1 sous-outil** (`/<slug>`, 404 tant que non porté) :
       damage-calculator (un worktree d'agent contient déjà du travail — à
-      évaluer avant de repartir de zéro), event — namespaces `tools.*`.
+      évaluer avant de repartir de zéro) — namespaces `tools.*`.
+      (`event` PORTÉ le 21/07, cf. DONE — reste à POUSSER les visuels
+      d'événement sur R2 : `pnpm images` collecte `images/events/**` depuis le
+      pool, la bannière `default.webp` en dépend.)
       (`tier-list-maker` PORTÉ le 21/07, cf. DONE — reste côté infra :
       DÉCIDER la migration de la table `tier_lists` V2, sans quoi les liens
       courts `?s=` V2 sont morts. `team-planner` PORTÉ le 21/07, cf. DONE.)

@@ -26,7 +26,7 @@ const CACHE_CONTROL = 'public, max-age=300, s-maxage=600, stale-while-revalidate
  * (→ `pnpm images`) resynchronise R2 même quand une édition a contourné le
  * Save admin.
  */
-export const RUNTIME_DATA_FILES = ['coupons.json', 'banner.json'] as const;
+export const RUNTIME_DATA_FILES = ['coupons.json', 'banner.json', 'events.json'] as const;
 
 export interface RuntimePublishResult {
   ok: boolean;
@@ -119,3 +119,4 @@ export const publishCoupons = (): Promise<RuntimePublishResult> =>
   publishRuntimeJson('coupons.json');
 export const publishBanners = (): Promise<RuntimePublishResult> =>
   publishRuntimeJson('banner.json');
+export const publishEvents = (): Promise<RuntimePublishResult> => publishRuntimeJson('events.json');

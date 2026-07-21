@@ -57,6 +57,40 @@ const load = (p: string): Dict =>
 const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 
 /**
+ * Visuels déclarés par les ÉVÉNEMENTS communautaires (`data/curated/events.json`,
+ * écrit par l'admin). Lecture directe du fichier : le module de données publique
+ * lit au runtime depuis R2, ce qui n'a aucun sens dans une collecte d'assets.
+ * Fichier absent (jamais aucun événement) = aucune demande, pas une erreur.
+ */
+interface CuratedEvent {
+  cover?: string;
+  blocks?: { kind: string; src?: string }[];
+}
+function curatedEvents(): CuratedEvent[] {
+  try {
+    const data = JSON.parse(
+      readFileSync(resolve('data/curated/events.json'), 'utf8'),
+    ) as CuratedEvent[];
+    return Array.isArray(data) ? data : [];
+  } catch {
+    return [];
+  }
+}
+/** Bannières d'événement (dédupliquées) — elles ont aussi une variante PNG. */
+const eventCovers = (): string[] => [
+  ...new Set(curatedEvents().flatMap((e) => (e.cover ? [e.cover] : []))),
+];
+/** Tous les visuels d'événement : bannières + images posées dans le contenu. */
+const eventImageSources = (): string[] => [
+  ...new Set([
+    ...eventCovers(),
+    ...curatedEvents().flatMap((e) =>
+      (e.blocks ?? []).flatMap((b) => (b.kind === 'image' && b.src ? [b.src] : [])),
+    ),
+  ]),
+];
+
+/**
  * FaceIconID d'une ligne CharacterTemplet (paresseux, une passe) — certains
  * skins pointent le visage d'un frère au lieu du leur (cf. boucle apparences).
  * Empreinte mtime : un refresh des tables (process admin long-running) doit
@@ -1170,6 +1204,26 @@ export function buildAssetManifest(): AssetRequest[] {
         domain: 'ui',
       });
     }
+  }
+
+  // --- Événements communautaires : bannières et visuels de contenu -----------
+  // Collecte DATA-DRIVEN du curé (`cover` d'un événement, `src` d'un bloc image) :
+  // ajouter un événement en admin suffit, aucune liste à tenir ici. Sources
+  // ÉDITORIALES par nature (aucun sprite du jeu ne décrit un concours vidéo) →
+  // pool V3 `data/editorial/events/…`, pool V2 en héritage. La variante PNG sert
+  // de carte de partage (Discord/OG digèrent mal le WebP, même règle qu'ailleurs).
+  for (const src of eventImageSources()) {
+    const rel = src.replace(/^\/images\//, '');
+    push({ kind: 'editorial', key: `images/${rel}`, source: rel, domain: 'events' });
+  }
+  for (const cover of eventCovers()) {
+    const rel = cover.replace(/^\/images\//, '');
+    push({
+      kind: 'editorial',
+      key: `images/${rel.replace(/\.webp$/i, '.png')}`,
+      source: rel,
+      domain: 'events',
+    });
   }
 
   // --- Éditorial (n'existe pas en jeu) : drapeaux + OG -----------------------
