@@ -29,16 +29,16 @@ FROM base AS builder
 # statique fige les URLs à la compilation : ces valeurs ne sont PAS ajustables au
 # runtime du conteneur.
 #
-# Profil de déploiement (cf. src/lib/site.ts). Défauts = STAGING (VPS OVH) : la CI
-# builde sans build-args, l'image sert donc d'emblée le bon profil staging
-# (canonicals/hreflang vers le vrai hôte + noindex).
-# BASCULE prod (outerpedia.com) = changer ces 3 défauts, ou passer des
-# --build-arg. Détail : docs/procedure/bascule-domaine.md
-ARG NEXT_PUBLIC_SITE_ORIGIN=https://vps-7b703196.vps.ovh.net
+# Profil de déploiement (cf. src/lib/site.ts). Défauts = PROD (outerpedia.com,
+# sous-domaines de langue, indexable) depuis la BASCULE du 21/07/2026 — la CI
+# builde sans build-args. L'ancien profil staging (vps-7b703196.vps.ovh.net,
+# path, noindex) reste accessible par --build-arg au besoin.
+# Détail : docs/procedure/bascule-domaine.md
+ARG NEXT_PUBLIC_SITE_ORIGIN=https://outerpedia.com
 ENV NEXT_PUBLIC_SITE_ORIGIN=${NEXT_PUBLIC_SITE_ORIGIN}
-ARG NEXT_PUBLIC_LANG_ROUTING=path
+ARG NEXT_PUBLIC_LANG_ROUTING=subdomain
 ENV NEXT_PUBLIC_LANG_ROUTING=${NEXT_PUBLIC_LANG_ROUTING}
-ARG NEXT_PUBLIC_SITE_INDEXABLE=false
+ARG NEXT_PUBLIC_SITE_INDEXABLE=true
 ENV NEXT_PUBLIC_SITE_INDEXABLE=${NEXT_PUBLIC_SITE_INDEXABLE}
 # Base des assets images : sans elle, les URLs d'images deviennent relatives →
 # servies (404) par le VPS au lieu du bucket R2. Indépendante du domaine du site.
