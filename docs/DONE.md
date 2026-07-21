@@ -6,6 +6,31 @@
 
 ## 2026-07-21
 
+- **Reviews Discord LIVRÉES ET EN PROD — chantier complet ①②③ + bascule.** Le
+  bot V2 « à l'arrache » (fichiers JSON committés dans son repo, copie des
+  données du site, `UPDATE.md` manuel à chaque perso : scripts + commit +
+  restart PM2) est REMPLACÉ par **`outerbot`** (repo dédié, TS/discord.js 14/
+  better-sqlite3, 15 tests) : Discord = source de vérité, SQLite = index
+  RECONSTRUCTIBLE (base vide au boot → resync complet automatique — la
+  migration réelle a relié les 123 posts hérités et 90 reviews en 35 s, zéro
+  intervention), posts forum créés AUTOMATIQUEMENT pour les persos manquants
+  (cron 6 h + `/admin sync`), slug posé en DB à la création (plus jamais déduit
+  du nom du thread). Données wiki : plus aucune copie — routes internes
+  `/api/bot/{characters,guides,items}` côté site (payloads pré-formatés pour
+  les embeds, test de contrat inter-repos), client TTL 1 h + repli stale côté
+  bot. Côté site : `lib/data/reviews.ts` (BOT_API_URL, revalidate 60 s, toute
+  erreur → `[]` → pas de section) + `ReviewsSection` V3 (labels serveur→props,
+  dates localisées, hex élément, ordre V2 synergies→reviews→video) — la CSP
+  couvrait déjà le CDN Discord (`img-src https:`). Infra : service `outerbot`
+  dans la stack (réseau interne SEULEMENT, volume SQLite, healthcheck),
+  `BOT_API_URL` sur le site, 3 secrets `OUTERBOT_*` au coffre SOPS, CI/CD
+  identique au site (GHCR + deploy SSH). Dev local : les routes read-only du
+  bot exposées par Caddy sous `/botapi` (staging) — `BOT_API_URL` du
+  `.env.local` pointe dessus, vraies reviews de prod sans bot local. Bascule
+  faite le 21/07 : bot V2 `pm2 stop` (le site V2 affiche des sections vides,
+  assumé), slash commands réenregistrées (mêmes 6), 73 build threads curés
+  (`threads.json` V2) importés par script — 73/73 matchés par nom via l'API.
+
 - **Outil `event` porté — mais REPENSÉ : un événement est une DONNÉE, plus un
   composant.** En V2, un événement = un fichier `events/<slug>.tsx` avec son
   dictionnaire i18n inline : publier, corriger une date ou ajouter les gagnants
