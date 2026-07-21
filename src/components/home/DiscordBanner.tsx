@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FaDiscord } from 'react-icons/fa';
 import { img } from '@/lib/images';
+import { DISCORD_INVITE_CODE, DISCORD_INVITE_URL } from '@/lib/discord';
 
 /**
  * Encart Discord — lien d'invitation + compteurs membres/en-ligne récupérés via
@@ -8,8 +9,6 @@ import { img } from '@/lib/images';
  * `react-icons` (pas d'asset image dédié en V3). Couleur de marque Discord en
  * valeur littérale (hors palette sémantique, assumé).
  */
-const INVITE_URL = 'https://discord.com/invite/PNMd5mkAV8';
-const INVITE_CODE = 'PNMd5mkAV8';
 
 export interface DiscordStrings {
   title: string;
@@ -23,9 +22,12 @@ export interface DiscordStrings {
 
 async function fetchDiscordCounts(): Promise<{ members: number; online: number } | null> {
   try {
-    const res = await fetch(`https://discord.com/api/v9/invites/${INVITE_CODE}?with_counts=true`, {
-      next: { revalidate: 3600 },
-    });
+    const res = await fetch(
+      `https://discord.com/api/v9/invites/${DISCORD_INVITE_CODE}?with_counts=true`,
+      {
+        next: { revalidate: 3600 },
+      },
+    );
     if (!res.ok) return null;
     const data = await res.json();
     return {
@@ -48,7 +50,7 @@ export async function DiscordBanner({ strings }: { strings: DiscordStrings }) {
   return (
     <section>
       <Link
-        href={INVITE_URL}
+        href={DISCORD_INVITE_URL}
         target="_blank"
         rel="noopener noreferrer"
         className="card-interactive group flex items-center gap-4 p-4 transition-colors hover:border-[#5865F2]/50"

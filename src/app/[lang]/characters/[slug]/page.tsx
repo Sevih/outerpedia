@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
-import { LANGS, normalizeLang } from '@/lib/i18n/config';
+import { LANGS, LANGUAGES, normalizeLang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { getT } from '@/i18n';
 import {
@@ -46,6 +46,8 @@ import {
   SynergiesSection,
   type SynergyGroupView,
 } from '@/components/character/detail/SynergiesSection';
+import { ReviewsSection } from '@/components/character/detail/ReviewsSection';
+import { getReviewsForCharacter } from '@/lib/data/reviews';
 import { MultiVideoEmbed, type VideoItem } from '@/components/ui/MultiVideoEmbed';
 import { VideoJsonLd } from '@/components/seo/VideoJsonLd';
 import { TranscendTierProvider } from '@/components/character/detail/TranscendTierContext';
@@ -136,6 +138,9 @@ export default async function CharacterDetail({
   if (!char) notFound();
 
   const t = await getT(lang);
+  // Seule donnée VIVANTE de la fiche : l'API du bot Discord (revalidate 60 s ;
+  // bot injoignable → [] → pas de section, la page se rend quand même).
+  const reviews = await getReviewsForCharacter(slug);
   const name = characterDisplayName(char, lang);
   const curated = getCharacterCurated(char.id);
   const hex = elementHex(char.element);
@@ -522,6 +527,28 @@ export default async function CharacterDetail({
       anchor: 'synergies',
       title: t('page.character.toc.synergies'),
       body: <SynergiesSection groups={groups} />,
+    });
+  }
+  // Ordre V2 : les reviews s'intercalent entre synergies et vidéo. Section (et
+  // entrée de toc) seulement s'il y a des avis — même règle que la V2.
+  if (reviews.length > 0) {
+    secs.push({
+      anchor: 'reviews',
+      title: t('page.character.toc.reviews'),
+      body: (
+        <ReviewsSection
+          reviews={reviews}
+          hex={hex}
+          dateLocale={LANGUAGES[lang].htmlLang}
+          labels={{
+            cta: t('page.character.reviews.cta'),
+            noReviews: t('page.character.reviews.no_reviews'),
+            count: t('page.character.reviews.count', { count: reviews.length }),
+            loadMore: t('page.character.reviews.load_more'),
+            viaDiscord: t('page.character.reviews.via_discord'),
+          }}
+        />
+      ),
     });
   }
   if (curated.videos && curated.videos.length > 0) {
