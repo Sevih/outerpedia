@@ -659,8 +659,7 @@ export function TierListMakerBrowser({
 
   // Deux lignes de nom distinctes : « noms » = toujours le nom du PERSO (un
   // skin affiche celui de son perso de base) ; « noms de skin » = le nom du
-  // costume en ligne dédiée sous le portrait — le mode cartes l'affiche
-  // toujours, le mode tuiles suit le toggle.
+  // costume en ligne dédiée sous la tuile OU la carte, au toggle.
   const labelFor = useCallback((it: TierItem) => it.baseLabel ?? it.label, []);
   const shortFor = useCallback((it: TierItem) => (it.isSkin ? it.baseShort : it.short), []);
   const skinLabelFor = useCallback(
@@ -1102,9 +1101,9 @@ export function TierListMakerBrowser({
     if (!ctx) return;
 
     // Pré-wrap des noms : la hauteur d'une ligne de tier s'adapte au plus long.
-    // Deux lignes possibles sous une cellule — nom du PERSO (si showNames) et
-    // nom du COSTUME (toujours en mode cartes ; au toggle « noms de skin » en
-    // mode tuiles) — même règle que l'affichage à l'écran.
+    // Deux lignes possibles sous une cellule — nom du PERSO (toggle « noms »)
+    // et nom du COSTUME (toggle « noms de skin ») — même règle que l'écran,
+    // tuiles comme cartes.
     ctx.font = NAME_FONT;
     const baseNameLines = new Map<string, string[]>();
     const skinNameLines = new Map<string, string[]>();
@@ -1114,7 +1113,7 @@ export function TierListMakerBrowser({
         if (!it) continue;
         if (showNames)
           baseNameLines.set(k, wrapLabel(ctx, shortFor(it) ?? labelFor(it), cellW - 2));
-        if (it.isSkin && (showCards || showSkinNames))
+        if (it.isSkin && showSkinNames)
           skinNameLines.set(k, wrapLabel(ctx, it.short ?? it.label, cellW - 2));
       }
     const cellTotalH = tiers.map((tr) => {
@@ -1622,10 +1621,11 @@ export function TierListMakerBrowser({
                               item={it}
                               selected={selectedKey === key}
                               dimmed={drag?.key === key}
-                              /* Les cartes affichent toujours le nom du perso de
-                                 base ; le nom du costume passe sous la carte. */
+                              /* Carte : nom du perso de base SUR la carte ; le
+                                 nom du costume sous la carte, au toggle
+                                 « noms de skin » — même règle qu'en tuiles. */
                               label={it.baseLabel ?? it.label}
-                              skinLabel={it.isSkin ? it.label : undefined}
+                              skinLabel={skinLabelFor(it)}
                               size={cardSize}
                               showName={showNames}
                               showElement={showElement}
