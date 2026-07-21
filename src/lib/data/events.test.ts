@@ -87,6 +87,55 @@ describe('summarize — ce que le client reçoit', () => {
     ]);
   });
 
+  it('TEASER : un événement pas encore démarré ne livre ni titre, ni résumé, ni bannière', () => {
+    // La surprise fait partie de l'annonce : le client reçoit qu'un concours
+    // arrive et quand — le reste ne quitte pas le serveur (la V2 l'envoyait
+    // puis le masquait en CSS).
+    const teaser = make({
+      slug: 'secret',
+      type: 'contest',
+      title: { en: 'Le grand concours secret' },
+      summary: { en: 'Des lots énormes' },
+      cover: '/images/events/secret.webp',
+      organizer: 'Outerpedia',
+      start: '2026-09-01T00:00:00Z',
+      end: '2026-10-01T00:00:00Z',
+    });
+    const [vm] = summarize([teaser], 'en', { now });
+    expect(vm.teased).toBe(true);
+    expect(vm.title).toBe('');
+    expect(vm.summary).toBe('');
+    expect(vm.cover).toBeUndefined();
+    expect(vm.organizer).toBeUndefined();
+    // Ce qui RESTE annoncé : la famille et les dates.
+    expect(vm.type).toBe('contest');
+    expect(vm.start).toBe('2026-09-01T00:00:00Z');
+  });
+
+  it('`revealEarly` publie le contenu avant le début (règlement annoncé d’avance)', () => {
+    const early = make({
+      slug: 'ouvert',
+      title: { en: 'Règlement connu' },
+      revealEarly: true,
+      start: '2026-09-01T00:00:00Z',
+      end: '2026-10-01T00:00:00Z',
+    });
+    const [vm] = summarize([early], 'en', { now });
+    expect(vm.status).toBe('upcoming');
+    expect(vm.teased).toBeUndefined();
+    expect(vm.title).toBe('Règlement connu');
+  });
+
+  it('un événement DÉMARRÉ n’est jamais un teaser, même sans revealEarly', () => {
+    const [vm] = summarize(
+      [make({ slug: 'live', title: { en: 'Visible' }, start: '2026-03-01T00:00:00Z' })],
+      'en',
+      { now },
+    );
+    expect(vm.teased).toBeUndefined();
+    expect(vm.title).toBe('Visible');
+  });
+
   it('résout la langue avec repli EN et n’expose que le jalon en cours', () => {
     const events = [
       make({

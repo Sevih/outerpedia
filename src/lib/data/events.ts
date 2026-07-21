@@ -96,13 +96,29 @@ export interface EventEntry {
   blocks: EventBlock[];
   /** Jamais publié, quelle que soit la date (invisible hors admin local). */
   draft?: boolean;
+  /**
+   * Montrer le contenu AVANT le début. Par défaut un événement pas encore
+   * démarré est un TEASER (règle V2) : on annonce qu'il arrive et sa famille,
+   * pas son titre, son résumé ni ses blocs — la surprise fait partie de
+   * l'annonce. À cocher quand on veut publier le règlement à l'avance pour que
+   * les gens se préparent.
+   */
+  revealEarly?: boolean;
 }
+
+/**
+ * L'événement est-il en mode TEASER (annoncé, contenu tenu secret) ? Vrai
+ * seulement avant le début, et seulement sans `revealEarly`.
+ */
+export const isTeased = (e: EventEntry, status: EventStatus): boolean =>
+  status === 'upcoming' && !e.revealEarly;
 
 /** Ligne de la liste `/event` (l'entrée complète n'est chargée qu'au détail). */
 export interface EventSummary {
   slug: string;
   type: EventType;
   status: EventStatus;
+  /** VIDE si `teased` : l'appelant affiche « À venir — <famille> ». */
   title: string;
   summary: string;
   organizer?: string;
@@ -112,6 +128,8 @@ export interface EventSummary {
   /** Libellé du jalon en cours (événement `ongoing` seulement). */
   phase?: string;
   draft?: boolean;
+  /** Contenu tenu secret : ni titre, ni résumé, ni bannière dans cette ligne. */
+  teased?: boolean;
 }
 
 const committed = eventsData as unknown as EventEntry[];
@@ -184,18 +202,22 @@ export function summarize(
     .map((e) => {
       const status = eventStatus(e, now);
       const phase = status === 'ongoing' ? currentPhase(e, now) : undefined;
+      // TEASER : ni titre, ni résumé, ni bannière ne QUITTENT le serveur — la
+      // V2 les rendait puis les masquait, donc les livrait quand même.
+      const teased = isTeased(e, status);
       return {
         slug: e.slug,
         type: e.type,
         status,
-        title: lRec(e.title, lang),
-        summary: lRec(e.summary, lang),
+        title: teased ? '' : lRec(e.title, lang),
+        summary: teased ? '' : lRec(e.summary, lang),
         start: e.start,
         end: e.end,
-        ...(e.organizer && { organizer: e.organizer }),
-        ...(e.cover && { cover: e.cover }),
+        ...(e.organizer && !teased && { organizer: e.organizer }),
+        ...(e.cover && !teased && { cover: e.cover }),
         ...(phase && { phase: lRec(phase.label, lang) }),
         ...(e.draft && { draft: true }),
+        ...(teased && { teased: true }),
       };
     })
     .sort(compareEvents);
@@ -230,6 +252,8 @@ export interface EventView {
   phase?: EventPhase;
   /** L'instant retenu — passé au rendu pour que la page reste cohérente. */
   now: number;
+  /** Pas encore démarré et gardé secret : la page ne rend AUCUN bloc. */
+  teased: boolean;
 }
 
 /**
@@ -245,7 +269,13 @@ export async function getEventView(
   if (!event) return undefined;
   const now = Date.now();
   const status = eventStatus(event, now);
-  return { event, status, now, ...(status === 'ongoing' && { phase: currentPhase(event, now) }) };
+  return {
+    event,
+    status,
+    now,
+    teased: isTeased(event, status),
+    ...(status === 'ongoing' && { phase: currentPhase(event, now) }),
+  };
 }
 
 /** Slugs PUBLIÉS (`generateStaticParams`) — un brouillon n'a pas de page. */

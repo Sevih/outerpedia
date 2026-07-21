@@ -290,6 +290,7 @@ const kr: Record<TranslationKey, string> = {
   'tools.event.organizer': '주최자',
   'tools.event.next_step': '다음 일정: {step} — {date}',
   'tools.event.draft': '초안',
+  'tools.event.upcoming_placeholder': '이벤트가 시작되면 상세 내용이 공개됩니다. 기대해 주세요!',
   'tools.event.starts': '{date} 시작',
   'tools.event.ends': '{date} 종료',
   'tools.event.empty': '현재 이벤트가 없습니다.',

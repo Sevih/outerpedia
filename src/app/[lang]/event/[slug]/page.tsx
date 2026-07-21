@@ -22,7 +22,12 @@ import { img } from '@/lib/images';
 import { buildBreadcrumbJsonLd, createPageMetadata } from '@/lib/seo';
 import { buildUrl } from '@/lib/site';
 import { IS_DEV } from '@/lib/admin/guard';
-import { formatEventDate, getEvent, getEventView, listEventSlugs } from '@/lib/data/events';
+import {
+  formatEventDate,
+  formatEventDeadline,
+  getEventView,
+  listEventSlugs,
+} from '@/lib/data/events';
 import JsonLd from '@/components/seo/JsonLd';
 import { EventBlocks } from '@/components/events/EventBlocks';
 import { EVENT_STATUS_BADGE, EVENT_TYPE_BADGE } from '@/components/events/presentation';
@@ -39,8 +44,20 @@ type Props = { params: Promise<{ lang: string; slug: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang: raw, slug } = await params;
   const lang = normalizeLang(raw);
-  const event = await getEvent(slug, { includeDrafts: IS_DEV });
-  if (!event) return {};
+  const view = await getEventView(slug, { includeDrafts: IS_DEV });
+  if (!view) return {};
+  const { event, teased } = view;
+  const t = await getT(lang);
+  // TEASER : le titre et le résumé ne doivent pas fuir non plus par la balise
+  // meta, l'aperçu de partage ou l'onglet du navigateur.
+  if (teased) {
+    return createPageMetadata({
+      lang,
+      path: `/event/${slug}`,
+      title: `${t('tools.event.status.upcoming')} — ${t(`tools.event.type.${event.type}`)}`,
+      description: t('tools.event.upcoming_placeholder'),
+    });
+  }
   return createPageMetadata({
     lang,
     path: `/event/${slug}`,
@@ -55,11 +72,16 @@ export default async function EventDetailPage({ params }: Props) {
   const lang = normalizeLang(raw);
   const view = await getEventView(slug, { includeDrafts: IS_DEV });
   if (!view) notFound();
-  const { event, status, phase, now } = view;
+  const { event, status, phase, now, teased } = view;
 
   const t = await getT(lang);
-  const title = lRec(event.title, lang);
-  const summary = lRec(event.summary, lang);
+  // TEASER : rien du contenu ne descend dans le HTML — ni le titre, ni la
+  // bannière, ni un seul bloc. Seuls la famille et la date de début sont
+  // annoncées, c'est tout l'intérêt de l'annonce.
+  const title = teased
+    ? `${t('tools.event.status.upcoming')} — ${t(`tools.event.type.${event.type}`)}`
+    : lRec(event.title, lang);
+  const summary = teased ? '' : lRec(event.summary, lang);
 
   const breadcrumb = buildBreadcrumbJsonLd([
     { name: t('nav.home'), url: buildUrl(lang, '/') },
@@ -101,7 +123,7 @@ export default async function EventDetailPage({ params }: Props) {
             {title}
           </h1>
 
-          {event.cover && (
+          {event.cover && !teased && (
             <div className="relative mx-auto aspect-video w-full max-w-md">
               <Image
                 src={img.asset(event.cover)}
@@ -118,7 +140,7 @@ export default async function EventDetailPage({ params }: Props) {
             <span>
               {formatEventDate(event.start, lang)} — {formatEventDate(event.end, lang)}
             </span>
-            {event.organizer && (
+            {event.organizer && !teased && (
               <span>
                 {t('tools.event.organizer')}:{' '}
                 <span className="text-content-strong">{event.organizer}</span>
@@ -143,7 +165,19 @@ export default async function EventDetailPage({ params }: Props) {
         </header>
 
         <div className="mt-8">
-          <EventBlocks event={event} lang={lang} t={t} now={now} />
+          {teased ? (
+            <div className="border-line-subtle bg-surface-raised/50 flex flex-col items-center gap-3 rounded-xl border border-dashed px-6 py-16 text-center">
+              <span className="text-4xl" aria-hidden>
+                🔒
+              </span>
+              <p className="text-content-muted max-w-md">{t('tools.event.upcoming_placeholder')}</p>
+              <p className="text-content-subtle text-sm">
+                {t('tools.event.starts', { date: formatEventDeadline(event.start, lang) })}
+              </p>
+            </div>
+          ) : (
+            <EventBlocks event={event} lang={lang} t={t} now={now} />
+          )}
         </div>
       </article>
     </div>

@@ -700,6 +700,17 @@ export function EventsEditor({ initial }: { initial: EventEntry[] }) {
                   />
                   brouillon (jamais publié)
                 </label>
+                <label
+                  className="text-content-subtle flex items-center gap-1 text-xs"
+                  title="Par défaut, un événement pas encore démarré est un TEASER : on annonce sa famille et sa date, rien d'autre ne quitte le serveur."
+                >
+                  <input
+                    type="checkbox"
+                    checked={current.revealEarly ?? false}
+                    onChange={(e) => update({ revealEarly: e.target.checked })}
+                  />
+                  dévoiler le contenu avant le début
+                </label>
                 <button
                   type="button"
                   className="text-danger ml-auto text-sm"

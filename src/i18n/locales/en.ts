@@ -299,6 +299,8 @@ const en = {
   'tools.event.organizer': 'Organizer',
   'tools.event.next_step': 'Next: {step} — {date}',
   'tools.event.draft': 'Draft',
+  'tools.event.upcoming_placeholder':
+    'Details will be revealed when the event goes live. Stay tuned!',
   'tools.event.starts': 'Starts {date}',
   'tools.event.ends': 'Ends {date}',
   'tools.event.empty': 'No events at the moment.',

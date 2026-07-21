@@ -295,6 +295,7 @@ const jp: Record<TranslationKey, string> = {
   'tools.event.organizer': '主催者',
   'tools.event.next_step': '次の予定：{step} — {date}',
   'tools.event.draft': '下書き',
+  'tools.event.upcoming_placeholder': 'イベント開始時に詳細が公開されます。お楽しみに！',
   'tools.event.starts': '{date} 開始',
   'tools.event.ends': '{date} 終了',
   'tools.event.empty': '現在イベントはありません。',

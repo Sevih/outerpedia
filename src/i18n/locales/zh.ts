@@ -284,6 +284,7 @@ const zh: Record<TranslationKey, string> = {
   'tools.event.organizer': '主办方',
   'tools.event.next_step': '下一步：{step} — {date}',
   'tools.event.draft': '草稿',
+  'tools.event.upcoming_placeholder': '活动开始后将公布详细内容，敬请期待！',
   'tools.event.starts': '{date} 开始',
   'tools.event.ends': '{date} 结束',
   'tools.event.empty': '目前没有活动。',

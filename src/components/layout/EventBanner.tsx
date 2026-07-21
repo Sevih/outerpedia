@@ -36,7 +36,13 @@ export async function EventBanner({ lang }: { lang: Lang }) {
             >
               {t(`tools.event.status.${e.status}`)}
             </span>
-            <span className="text-content-strong text-sm font-medium">{e.title}</span>
+            {/* Teaser : la donnée n'a pas envoyé le titre — on n'annonce que la
+                famille d'événement, comme la V2 (le reste est la surprise). */}
+            <span
+              className={`text-sm font-medium ${e.teased ? 'text-content-muted italic' : 'text-content-strong'}`}
+            >
+              {e.teased ? t(`tools.event.type.${e.type}`) : e.title}
+            </span>
             <span className="text-content-subtle text-xs">
               ·{' '}
               {e.status === 'upcoming'

@@ -28,6 +28,8 @@ export interface EventCardVM {
   dates: string;
   phase?: string;
   draft?: boolean;
+  /** Teaser : `title` est le libellé générique, il n'y a ni résumé ni bannière. */
+  teased?: boolean;
 }
 
 export interface EventsLabels {
@@ -128,7 +130,11 @@ export function EventsBrowser({ events, labels }: { events: EventCardVM[]; label
                   )}
                   <span className="text-content-subtle ml-auto text-xs">{e.dates}</span>
                 </div>
-                <h2 className="text-content-strong truncate font-semibold">{e.title}</h2>
+                <h2
+                  className={`truncate font-semibold ${e.teased ? 'text-content-muted italic' : 'text-content-strong'}`}
+                >
+                  {e.title}
+                </h2>
                 {e.phase && <p className="text-accent text-xs">{e.phase}</p>}
                 {e.summary && (
                   <p className="text-content-muted line-clamp-2 text-sm">{e.summary}</p>

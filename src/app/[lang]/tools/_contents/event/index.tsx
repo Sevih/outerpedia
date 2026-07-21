@@ -26,8 +26,13 @@ export default async function EventTool({ lang }: { lang: Lang }) {
     href: localePath(lang, `/event/${e.slug}`),
     type: e.type,
     status: e.status,
-    title: e.title,
+    // Teaser : la donnée n'a PAS envoyé le titre — on affiche la seule chose
+    // annoncée, « À venir — Concours ».
+    title: e.teased
+      ? `${t('tools.event.status.upcoming')} — ${t(`tools.event.type.${e.type}`)}`
+      : e.title,
     summary: e.summary,
+    ...(e.teased && { teased: true }),
     dates: `${formatEventDate(e.start, lang)} — ${formatEventDate(e.end, lang)}`,
     ...(e.organizer && { organizer: e.organizer }),
     ...(e.cover && { cover: img.asset(e.cover) }),
