@@ -43,6 +43,13 @@ function buildCsp(nonce: string): string {
  * navigateur, qui ne voit que le `-Report-Only`).
  */
 function withCsp(request: NextRequest, rewriteTo?: URL): NextResponse {
+  // PAS de Report-Only en DEV : le HMR (inline + eval) viole la politique
+  // stricte sur chaque page, Chrome groupe ces centaines de rapports en un
+  // POST > BODY_MAX du collecteur → 413 en boucle et logs pollués. La passe 1
+  // mesure le trafic RÉEL de prod, le dev n'a rien à lui apprendre.
+  if (process.env.NODE_ENV !== 'production') {
+    return rewriteTo ? NextResponse.rewrite(rewriteTo) : NextResponse.next();
+  }
   const nonce = btoa(crypto.randomUUID());
   const csp = buildCsp(nonce);
 
