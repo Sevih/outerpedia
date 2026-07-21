@@ -94,6 +94,13 @@
 
 ## ⚙️ Config / infra
 
+- [ ] **Raccourcisseur interne `/s/[id]`** (idée actée 21/07, non prioritaire —
+      la barre d'adresse en `?z=` compact couvre le besoin réel de partage) :
+      table `short_links` (id = hash du chemin, 12 chars, upsert idempotent),
+      `POST /api/shortlink { path }` validé chemin INTERNE seulement (jamais
+      d'URL absolue — zéro open redirect), `GET /s/[id]` → 302. Réutilise
+      `src/lib/db.ts` ; sans BDD → dégradation lien long. Premier consommateur
+      envisagé : bouton « partager » optionnel (Discord) sur les pages à état.
 - [ ] CSP durcissement — PASSE 1 livrée le 19/07 (cf. DONE) : politique stricte
       nonce + strict-dynamic servie en **Report-Only** via `proxy.ts`, collecteur
       `/api/csp-report`. Ne bloque rien encore. **RESTE** : (a) déployer en prod,

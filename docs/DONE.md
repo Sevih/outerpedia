@@ -6,6 +6,23 @@
 
 ## 2026-07-21
 
+- **`/characters` : retour au `?z=` compact (codec V2) dans la barre
+  d'adresse.** Décision Sevih : la barre EST le lien de partage (réflexe =
+  copier l'URL, pas un bouton), et les params en clair faisaient des URLs de
+  300 chars dès que les facettes s'empilent. `filter-codec.ts` (10 tests dont
+  épinglage octet-à-octet + décodage d'un payload V2 brut) : bitfields aux
+  POSITIONS V2 avec les slugs V3 (le contrat = les bits, pas les chaînes),
+  indices buffs/debuffs/tags GELÉS depuis `effectsIndex.json` V2 (snapshot
+  21/07) avec canonisation V3 au décodage (variantes `_IR` → clé de base,
+  dédup) ; toute clé future sans indice voyage en clair dans `bx`/`dx`/`tx` —
+  zéro table à maintenir, zéro dérive possible. Conséquences : les liens V2
+  `/characters?z=…` se décodent à nouveau ; les params en clair de la période
+  intérimaire restent lus à l'hydratation (legacy), la sync n'écrit plus que
+  `?z=`. Piège appris : l'alphabet lz-string URI-safe contient `+`
+  (URLSearchParams le rend en espace, `decompressFromEncodedURIComponent` le
+  restaure — testé). Le raccourcisseur `/s/[id]` est NOTÉ au TODO (non
+  prioritaire, la barre compacte couvre le besoin).
+
 - **Badges de recrutement : SÉRIE DÉPAREILLÉE corrigée (constat Sevih).** Les
   5 `CM_Recruit_Tag_*` étaient collectés de DEUX sources : le jeu ne porte que
   Seasonal/Premium/Fes, donc ces trois venaient du client et Collab/Free du

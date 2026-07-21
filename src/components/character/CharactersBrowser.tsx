@@ -13,6 +13,7 @@ import {
 } from './filters/ActiveFiltersStrip';
 import type { AdvancedPanelLabels, FilterOption } from './filters/AdvancedFiltersPanel';
 import { ELEMENT_HEX, ROLE_HEX, RARITY_HEX, TONE } from './filters/FilterAtoms';
+import { decodeFilters, encodeFilters } from './filters/filter-codec';
 import type { EffectGroup } from '@/lib/data/effect-filters';
 
 /** Ligne allégée pour l'affichage + le filtrage. */
@@ -78,9 +79,6 @@ function toOptions(
   return values.map((v) => ({ value: v, label: labelMap[v] ?? v, icon: icons?.[v] }));
 }
 
-/** Sérialise une liste en paramètre d'URL (vide → absent). */
-const enc = (arr: (string | number)[]) => (arr.length ? arr.join(',') : undefined);
-
 export function CharactersBrowser({
   rows,
   labels,
@@ -136,54 +134,61 @@ export function CharactersBrowser({
       setter((prev) => (prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]));
 
   // ── Hydratation depuis l'URL (au montage) ──
+  // `?z=` compact (codec — liens V2 inclus) d'abord ; à défaut, les params en
+  // clair (`?el=fire&…`) que la V3 a écrits entre le portage de la page et le
+  // retour au codec (21/07) — des liens de cette période circulent peut-être.
   useEffect(() => {
     if (hydrated.current) return;
     hydrated.current = true;
     const p = new URLSearchParams(window.location.search);
+    const decoded = decodeFilters(p.get('z'));
     const list = (k: string) => (p.get(k) ? p.get(k)!.split(',').filter(Boolean) : []);
-    setQ(p.get('q') ?? '');
-    setElement(list('el'));
-    setKlass(list('cl'));
+    setQ(decoded ? decoded.q : (p.get('q') ?? ''));
+    setElement(decoded ? decoded.element : list('el'));
+    setKlass(decoded ? decoded.klass : list('cl'));
     setRarity(
-      list('r')
-        .map(Number)
-        .filter((n) => !Number.isNaN(n)),
+      decoded
+        ? decoded.rarity
+        : list('r')
+            .map(Number)
+            .filter((n) => !Number.isNaN(n)),
     );
-    setChain(list('chain'));
-    setGift(list('gift'));
-    setRole(list('role'));
-    setTags(list('tags'));
-    setTagLogic(p.get('tl') === 'AND' ? 'AND' : 'OR');
-    setBuffs(list('b'));
-    setDebuffs(list('d'));
-    setEffectLogic(p.get('el2') === 'AND' ? 'AND' : 'OR');
-    setSources(list('src'));
-    setShowUnique(p.get('uniq') === '1');
-    setTeamBonuses(list('tb'));
+    setChain(decoded ? decoded.chain : list('chain'));
+    setGift(decoded ? decoded.gift : list('gift'));
+    setRole(decoded ? decoded.role : list('role'));
+    setTags(decoded ? decoded.tags : list('tags'));
+    setTagLogic(decoded ? decoded.tagLogic : p.get('tl') === 'AND' ? 'AND' : 'OR');
+    setBuffs(decoded ? decoded.buffs : list('b'));
+    setDebuffs(decoded ? decoded.debuffs : list('d'));
+    setEffectLogic(decoded ? decoded.effectLogic : p.get('el2') === 'AND' ? 'AND' : 'OR');
+    setSources(decoded ? decoded.sources : list('src'));
+    setShowUnique(decoded ? decoded.showUnique : p.get('uniq') === '1');
+    setTeamBonuses(decoded ? decoded.teamBonuses : list('tb'));
   }, []);
 
   // ── Sync filtres → URL (débattu) ──
+  // La barre d'adresse EST le lien de partage : un seul `?z=` compact (l'URL
+  // reste courte quel que soit le nombre de facettes), format V2 (filter-codec).
   useEffect(() => {
     if (!hydrated.current) return;
-    const params = new URLSearchParams();
-    const set = (k: string, v?: string) => v && params.set(k, v);
-    set('q', q.trim() || undefined);
-    set('el', enc(element));
-    set('cl', enc(klass));
-    set('r', enc(rarity));
-    set('chain', enc(chain));
-    set('gift', enc(gift));
-    set('role', enc(role));
-    set('tags', enc(tags));
-    if (tags.length && tagLogic === 'AND') set('tl', 'AND');
-    set('b', enc(buffs));
-    set('d', enc(debuffs));
-    if ((buffs.length || debuffs.length) && effectLogic === 'AND') set('el2', 'AND');
-    set('src', enc(sources));
-    if (showUnique) set('uniq', '1');
-    set('tb', enc(teamBonuses));
-    const query = params.toString();
-    const url = query ? `${pathname}?${query}` : pathname;
+    const z = encodeFilters({
+      q,
+      element,
+      klass,
+      rarity,
+      chain,
+      gift,
+      role,
+      tags,
+      tagLogic,
+      buffs,
+      debuffs,
+      effectLogic,
+      sources,
+      showUnique,
+      teamBonuses,
+    });
+    const url = z ? `${pathname}?z=${z}` : pathname;
     const handle = setTimeout(() => {
       if (lastUrl.current === url) return;
       lastUrl.current = url;
