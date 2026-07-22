@@ -27,6 +27,32 @@
 
 ## 2026-07-22
 
+- **« HTML dépasse la limite de 2 Mo de Google » (hint _Critical_ de Sitebulb) :
+  MESURÉ, sans effet — chantier CLOS, refactor annulé.** 4 pages dépassent bien
+  2 MiB en BRUT (frost-legion 2,25 Mo, madman-laboratory 2,15,
+  prevent-world-alteration 2,14, patch-history 2,52 ; planetary-control-unit à
+  1,91 était « le prochain »). Deux mesures tuent l'alerte :
+  (1) **Google lit tout.** Le contenu visible d'un guild raid s'arrête à
+  l'octet **153 208** (`</main>` à 129 135) et celui de `/patch-history` à
+  **30 642** ; le payload RSC ne démarre qu'ensuite et court jusqu'au bout. La
+  coupe des 2 MiB tombe donc en plein milieu du payload d'HYDRATATION, qui ne
+  contient aucun contenu indexable.
+  (2) **Les visiteurs ne le paient pas.** En brotli : frost-legion **67 Ko**,
+  madman **66 Ko**, patch-history **314 Ko**, TTFB 137-182 ms. Le payload d'un
+  guild raid se comprime d'un facteur ~35 tant il est répétitif (11 115
+  `className`, 858 blocs de masque CSS inline identiques).
+  MÉCANISME quand même compris, pour mémoire : 93 % du HTML d'un guild raid est
+  du payload RSC, parce que `SegmentedTabs` et `GuideVersions` sont des
+  composants CLIENT qui reçoivent chaque onglet et chaque saison en `ReactNode`
+  DÉJÀ RENDU (leur docblock l'assume). React sérialise donc toutes les saisons
+  alors qu'une seule s'affiche — le markup visible ne fait que 150 Ko sur 2,25.
+  C'est un choix de conception (bascule d'onglet instantanée, zéro fetch) qui
+  coûte du parsing, pas de la bande passante ; les CWV terrain sont tout verts.
+  ⚠ ANNULÉ de ce fait : le découpage de `posts.json` en `content.{lang}.json`
+  avec chargement paresseux, qui aurait touché `scripts/get-news.ts` et la
+  forme des données committées. Ne pas le ressortir sans une mesure qui le
+  justifie.
+
 - **Vidéos non indexées (605, dont 0 indexée) : piste FERMÉE, ne pas la
   rouvrir.** Le ratio donne envie d'y voir un défaut ; c'en est l'inverse.
   Motif Google : « Video isn't on a watch page ». Ses deux cas disqualifiants
