@@ -116,6 +116,27 @@
   étages restent rendus et navigables : on ne retire que la candidature à
   l'index. 2 tests.
 
+- **Retour au NUAGE ORANGE Cloudflare, exécuté** (côté `sevih-tool` : procédure,
+  Caddyfile et certificat — voir `docs/nuage-orange.md` de ce dépôt-là).
+  Apex, `jp`, `kr`, `fr`, `www` et `v2` passent derrière le proxy ; Caddy leur
+  sert un **certificat d'origine Cloudflare valable jusqu'en 2041**, ce qui
+  supprime tout ACME pour eux — donc le risque de renouvellement échouant en
+  silence derrière le proxy. Le mode de chiffrement était déjà Full (Strict),
+  qui accepte aussi bien une CA publique que le certificat d'origine : rien à
+  y toucher. **`zh` reste en nuage GRIS** (Cloudflare est inutilisable depuis
+  la Chine) et garde son Let's Encrypt automatique.
+  ⚠️ INCIDENT au premier essai, ~2 min de coupure pour `zh` : le certificat
+  demandé portait un joker `*.outerpedia.com`, qui couvrait donc `zh` — Caddy
+  choisit son certificat par SNI dans un cache GLOBAL (pas par bloc de site) et
+  cesse de gérer les noms couverts par un certificat manuel. `zh` s'est vu
+  servir un certificat que seuls les serveurs Cloudflare reconnaissent →
+  `HTTP 000`. Rollback immédiat (les deux lignes `tls` recommentées), puis
+  nouveau certificat **sans joker**, énumérant les 6 hôtes proxifiés et eux
+  seuls. Leçon : ce n'est pas la structure du Caddyfile qui isole un hôte,
+  c'est la PORTÉE du certificat.
+  Rappel toujours valable : ne pas réactiver l'injection automatique de Web
+  Analytics, le beacon est posé à la main (cf. entrée suivante).
+
 - **Mesure d'audience réparée — beacon Cloudflare posé à la main.** Trou
   découvert en creusant une question de l'audit Sitebulb (« 99,92 % des URLs
   sans GA/GTM : volontaire ou trou de mesure ? »). Réponse : les deux, dans

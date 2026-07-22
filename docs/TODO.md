@@ -111,16 +111,6 @@
 
 ## ⚙️ Config / infra
 
-- [ ] **Retour au nuage ORANGE Cloudflare** (envisagé « d'ici quelques jours si
-      rien ne casse », 22/07) — chantier à part : certificat d'origine + mode
-      Full (strict), sinon Cloudflare parle au VPS en clair ou en self-signed.
-      ⚠ AU MOMENT DE LA BASCULE : laisser Web Analytics sur « Enable with JS
-      Snippet installation ». Le beacon est posé À LA MAIN depuis le 22/07
-      (`src/components/seo/Analytics.tsx`) parce que le nuage gris ne l'injecte
-      pas ; réactiver l'injection automatique le chargerait DEUX fois et
-      doublerait les pages vues. Vérif d'après-bascule :
-      `curl -s https://outerpedia.com | grep -c beacon.min.js` doit rendre 1.
-
 - [ ] **Raccourcisseur interne `/s/[id]`** (idée actée 21/07, non prioritaire —
       la barre d'adresse en `?z=` compact couvre le besoin réel de partage) :
       table `short_links` (id = hash du chemin, 12 chars, upsert idempotent),
