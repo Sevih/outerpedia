@@ -13,11 +13,11 @@
 
 import type { StoreSpec } from '@/lib/client-storage';
 import {
-  DAILY_TASK_DEFINITIONS,
   TASK_DEFINITIONS,
   TASK_TYPES,
   SWEEPABLE_TASK_IDS,
   defaultCategoryTaskIds,
+  isSeasonalTask,
   permanentTaskIds,
   type TaskType,
 } from './tasks';
@@ -49,6 +49,11 @@ export interface UserSettings {
   adventureLicenseCombatsPerStage: 2 | 3 | 4;
   /** Tour élémentaire finie une fois pour toutes → tâche masquée. */
   hasCompletedElementalTower: boolean;
+  /**
+   * Contenus saisonniers (JC / guild raid / world boss) pilotés par le
+   * CALENDRIER du jeu plutôt qu'à la main. Activé par défaut.
+   */
+  autoSeasonalTasks: boolean;
   displayMode: 'tabs' | 'single-page';
 }
 
@@ -97,6 +102,9 @@ export function normalizeSettings(raw: unknown): UserSettings {
     hasVeronicaPremiumPack: d.hasVeronicaPremiumPack === true,
     adventureLicenseCombatsPerStage: combats === 3 || combats === 4 ? combats : 2,
     hasCompletedElementalTower: d.hasCompletedElementalTower === true,
+    // Défaut ACTIF, y compris pour un réglage stocké d'avant l'option : sans
+    // elle, l'utilisateur devait cocher/décocher trois cases à chaque saison.
+    autoSeasonalTasks: d.autoSeasonalTasks !== false,
     displayMode: d.displayMode === 'single-page' ? 'single-page' : 'tabs',
   };
 }
@@ -128,9 +136,49 @@ export function isDimensionalSingularityActive(now: number): boolean {
   return day >= 3 && day <= 6;
 }
 
-/** Ids activés et RÉELLEMENT disponibles maintenant (filtres calendaires). */
-export function activeTaskIds(type: TaskType, settings: UserSettings, now: number): string[] {
-  return settings.enabledTasks[type].filter((id) => {
+/**
+ * Fenêtres jouables des modes saisonniers, telles que servies par la page
+ * (`playableWindowsFrom`). Clés = ids de tâche saisonnière.
+ */
+export type SeasonWindows = Partial<Record<string, { start: string; end: string }[]>>;
+
+/** Ce mode saisonnier est-il ouvert à l'instant `now` ? */
+export function isSeasonLive(windows: SeasonWindows, id: string, now: number): boolean {
+  return (windows[id] ?? []).some((w) => Date.parse(w.start) <= now && now < Date.parse(w.end));
+}
+
+/**
+ * Ids activés et RÉELLEMENT disponibles maintenant (filtres calendaires).
+ *
+ * AUTO-DÉTECTION (`autoSeasonalTasks`, par défaut) : les trois contenus
+ * saisonniers — joint challenge, guild raid, world boss — ne suivent plus la
+ * case cochée mais le CALENDRIER DU JEU. Ils tournent par fenêtres d'environ
+ * une semaine toutes les quelques semaines ; les cocher et décocher à la main à
+ * chaque saison était le seul entretien récurrent de l'outil.
+ *
+ * Le réglage manuel reste possible (bascule coupée) : les tables ne portent que
+ * les saisons du patch courant, donc un contenu annoncé mais pas encore livré
+ * en donnée n'est détectable par personne.
+ */
+export function activeTaskIds(
+  type: TaskType,
+  settings: UserSettings,
+  now: number,
+  windows: SeasonWindows = {},
+): string[] {
+  const auto = settings.autoSeasonalTasks;
+  const enabled = settings.enabledTasks[type];
+  // En auto, une saisonnière entre par le calendrier même si sa case est
+  // décochée — on repart donc de l'ordre des DÉFINITIONS, pas de la liste
+  // stockée (qui ne contient que les cochées).
+  const candidates = auto ? Object.keys(TASK_DEFINITIONS[type]) : enabled;
+
+  return candidates.filter((id) => {
+    if (isSeasonalTask(id)) {
+      if (auto) return isSeasonLive(windows, id, now);
+      return enabled.includes(id);
+    }
+    if (auto && !enabled.includes(id)) return false;
     if (id === 'elemental-tower' && settings.hasCompletedElementalTower) return false;
     if (id === 'dimensional-singularity' && !isDimensionalSingularityActive(now)) return false;
     return true;
@@ -150,11 +198,12 @@ export function syncProgressWithSettings(
   progress: UserProgress,
   settings: UserSettings,
   now: number,
+  windows: SeasonWindows = {},
 ): UserProgress {
   const next = { ...progress };
   for (const type of TASK_TYPES) {
     const list: Record<string, TaskProgress> = {};
-    for (const id of activeTaskIds(type, settings, now)) {
+    for (const id of activeTaskIds(type, settings, now, windows)) {
       const prev = progress[type][id];
       const max = getTaskMaxCount(id, type, settings);
       list[id] = prev
@@ -183,29 +232,14 @@ function startOfUtcMonth(ts: number): number {
   return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1);
 }
 
-/**
- * Applique les resets dus depuis la dernière visite. Les récurrentes
- * (couloir infini) ne retombent que `resetIntervalDays` jours — comptés en
- * jours UTC — après leur complétion.
- */
-export function checkAndResetProgress(
-  progress: UserProgress,
-  settings: UserSettings,
-  now: number,
-): UserProgress {
+/** Applique les resets dus depuis la dernière visite (quotidien/hebdo/mensuel). */
+export function checkAndResetProgress(progress: UserProgress, now: number): UserProgress {
   let next = progress;
 
   if (progress.lastDailyReset < startOfUtcDay(now)) {
-    const daily: Record<string, TaskProgress> = {};
-    for (const [id, task] of Object.entries(next.daily)) {
-      const def = DAILY_TASK_DEFINITIONS[id];
-      if (def?.resetIntervalDays && isTaskCompleted(task, getTaskMaxCount(id, 'daily', settings))) {
-        const resetAt = startOfUtcDay(task.lastUpdated) + def.resetIntervalDays * DAY_MS;
-        daily[id] = now >= resetAt ? { ...task, count: 0 } : task;
-      } else {
-        daily[id] = { ...task, count: 0 };
-      }
-    }
+    const daily = Object.fromEntries(
+      Object.entries(next.daily).map(([id, task]) => [id, { ...task, count: 0 }]),
+    );
     next = { ...next, daily, lastDailyReset: now };
   }
 
@@ -234,8 +268,9 @@ export function reconcileProgress(
   progress: UserProgress,
   settings: UserSettings,
   now: number,
+  windows: SeasonWindows = {},
 ): UserProgress {
-  return checkAndResetProgress(syncProgressWithSettings(progress, settings, now), settings, now);
+  return checkAndResetProgress(syncProgressWithSettings(progress, settings, now, windows), now);
 }
 
 export function getNextReset(type: TaskType, now: number): number {
@@ -243,19 +278,6 @@ export function getNextReset(type: TaskType, now: number): number {
   if (type === 'weekly') return startOfUtcWeek(now) + 7 * DAY_MS;
   const d = new Date(now);
   return Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1);
-}
-
-/** Prochain reset d'une récurrente complétée (null si non complétée). */
-export function getNextRecurringTaskReset(
-  progress: UserProgress,
-  taskId: string,
-  settings: UserSettings,
-): number | null {
-  const task = progress.daily[taskId];
-  const def = DAILY_TASK_DEFINITIONS[taskId];
-  if (!task || !def?.resetIntervalDays) return null;
-  if (!isTaskCompleted(task, getTaskMaxCount(taskId, 'daily', settings))) return null;
-  return startOfUtcDay(task.lastUpdated) + def.resetIntervalDays * DAY_MS;
 }
 
 /* ------------------------------------------------------------------------ */

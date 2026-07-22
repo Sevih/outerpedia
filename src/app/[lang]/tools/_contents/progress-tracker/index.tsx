@@ -8,6 +8,9 @@ import {
   type TrackerLabels,
 } from './ProgressTrackerBrowser';
 import { TASK_DEFINITIONS, TASK_TYPES } from './tasks';
+import type { SeasonWindows } from './tracker';
+import { playableWindowsFrom } from '@/lib/data/content-schedule';
+import { serverNow } from '@/lib/time';
 
 /**
  * Progress tracker — wrapper SERVEUR : résout TOUS les libellés (tâches,
@@ -70,7 +73,6 @@ export default async function ProgressTracker({ lang }: { lang: Lang }) {
     },
     categories: {
       task: t('progress.category.tasks'),
-      recurring: t('progress.category.recurring'),
       craft: t('progress.category.craft'),
       shop: t('progress.category.shop'),
     },
@@ -130,7 +132,10 @@ export default async function ProgressTracker({ lang }: { lang: Lang }) {
     clearData: t('progress.clearData'),
     clearDataDesc: t('progress.clearDataDesc'),
     clearDataConfirm: t('progress.clearDataConfirm'),
-    daysShort: t('progress.daysShort'),
+    autoSeasonal: t('progress.autoSeasonal'),
+    autoSeasonalDesc: t('progress.autoSeasonalDesc'),
+    autoSeasonalLive: t('progress.autoSeasonalLive'),
+    autoSeasonalOff: t('progress.autoSeasonalOff'),
   };
 
   const assets: TrackerAssets = {
@@ -144,5 +149,15 @@ export default async function ProgressTracker({ lang }: { lang: Lang }) {
     items,
   };
 
-  return <ProgressTrackerBrowser labels={labels} assets={assets} />;
+  // Contenus saisonniers : on envoie les BORNES des fenêtres jouables, pas un
+  // « c'est ouvert » calculé ici — le client les compare à son horloge, donc
+  // l'auto-détection reste juste même sur une page servie depuis le cache.
+  const windows = playableWindowsFrom(serverNow());
+  const seasonWindows: SeasonWindows = {
+    'joint-challenge': windows['joint-challenge'],
+    'guild-raid': windows['guild-raid'],
+    'world-boss': windows['world-boss'],
+  };
+
+  return <ProgressTrackerBrowser labels={labels} assets={assets} seasonWindows={seasonWindows} />;
 }

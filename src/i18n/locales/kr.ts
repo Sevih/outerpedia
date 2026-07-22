@@ -1163,6 +1163,11 @@ const kr: Record<TranslationKey, string> = {
   'progress.settings': '설정',
   'progress.settingsTitle': '설정',
   'progress.optionalContentDesc': '현재 활성화된 이벤트의 작업을 활성화하세요',
+  'progress.autoSeasonal': '시즌 콘텐츠 자동 감지',
+  'progress.autoSeasonalDesc':
+    '조인트 챌린지, 길드 레이드, 월드 보스는 게임 일정을 따릅니다: 시즌 중에는 자동으로 표시되고 종료되면 사라집니다.',
+  'progress.autoSeasonalLive': '진행 중',
+  'progress.autoSeasonalOff': '종료',
   'progress.preciseCraft': '정밀 제작',
   'progress.preciseCraftItem': '정밀 제작 (30일 쿨다운)',
   'progress.preciseCraftTimerDesc': '최근에 제작한 경우 남은 일수를 설정하세요.',
@@ -1187,7 +1192,6 @@ const kr: Record<TranslationKey, string> = {
   'progress.task.elemental-tower': '엘레멘탈 타워',
   'progress.task.memorial-match': '메모리얼 대전',
   'progress.task.ad-stamina': '광고 스태미나',
-  'progress.task.infinite-corridor': '무한 회랑',
   'progress.task.dimensional-singularity': '차원 특이점 (수~토)',
   'progress.task.shop-daily-free-gift': '일일 무료 선물',
   'progress.task.shop-weekly-free-gift': '주간 무료 선물',
@@ -1216,7 +1220,6 @@ const kr: Record<TranslationKey, string> = {
   'progress.elementalTowerCompletedDesc':
     '원소의 탑을 일일 작업에서 숨김 (리셋되지 않는 영구 콘텐츠)',
   'progress.category.tasks': '할 일',
-  'progress.category.recurring': '주기',
   'progress.category.craft': '제작',
   'progress.category.shop': '상점',
   'progress.shop.daily-weekly-monthly': '일간/주간/월간',
@@ -1237,7 +1240,6 @@ const kr: Record<TranslationKey, string> = {
   'progress.shop.adventure-license': '모험 라이선스 상점',
   'progress.shop.survey-hub': '조사 지원소',
   'progress.craft.kates-workshop': '케이트 공방',
-  'progress.daysShort': '일',
   'progress.dangerZone': '위험 구역',
   'progress.clearData': '모든 데이터 삭제',
   'progress.clearDataDesc':

@@ -1178,6 +1178,11 @@ const jp: Record<TranslationKey, string> = {
   'progress.settings': '設定',
   'progress.settingsTitle': '設定',
   'progress.optionalContentDesc': '現在開催中のイベントのタスクを有効にしてください',
+  'progress.autoSeasonal': 'シーズンコンテンツの自動検出',
+  'progress.autoSeasonalDesc':
+    'ジョイントチャレンジ、ギルドレイド、ワールドボスはゲーム内スケジュールに従います：開催中は自動的に表示され、終了すると消えます。',
+  'progress.autoSeasonalLive': '開催中',
+  'progress.autoSeasonalOff': '終了',
   'progress.preciseCraft': '精密作成',
   'progress.preciseCraftItem': '精密作成（30日クールダウン）',
   'progress.preciseCraftTimerDesc': '最近作成した場合は残り日数を設定してください。',
@@ -1202,7 +1207,6 @@ const jp: Record<TranslationKey, string> = {
   'progress.task.elemental-tower': 'エレメンタルタワー',
   'progress.task.memorial-match': 'メモリアル対戦',
   'progress.task.ad-stamina': '広告スタミナ',
-  'progress.task.infinite-corridor': '無限の回廊',
   'progress.task.dimensional-singularity': '次元特異点 (水〜土)',
   'progress.task.shop-daily-free-gift': 'デイリープレゼント',
   'progress.task.shop-weekly-free-gift': 'ウィークリー無料プレゼント',
@@ -1231,7 +1235,6 @@ const jp: Record<TranslationKey, string> = {
   'progress.elementalTowerCompletedDesc':
     '元素の塔をデイリータスクから非表示にする（リセットしない永続コンテンツ）',
   'progress.category.tasks': 'タスク',
-  'progress.category.recurring': '周期',
   'progress.category.craft': '製作',
   'progress.category.shop': 'ショップ',
   'progress.shop.daily-weekly-monthly': 'デイリー/ウィークリー/マンスリー',
@@ -1252,7 +1255,6 @@ const jp: Record<TranslationKey, string> = {
   'progress.shop.adventure-license': '冒険者ライセンスショップ',
   'progress.shop.survey-hub': '調査支援所',
   'progress.craft.kates-workshop': 'ケイトの鍛冶工房',
-  'progress.daysShort': '日',
   'progress.dangerZone': '危険ゾーン',
   'progress.clearData': '全データを削除',
   'progress.clearDataDesc':

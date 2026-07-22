@@ -78,6 +78,41 @@ const raw = scheduleData as unknown as {
   jointChallenge: RawJointChallenge[];
 };
 
+/** Fenêtre JOUABLE d'une saison (bornes ISO UTC) — ni règlement, ni récompenses. */
+export interface SeasonWindow {
+  start: string;
+  /** Fin du COMBAT : `battleEnd` (WB/GR) ou `end` (JC, qui ne découpe pas). */
+  end: string;
+}
+
+/**
+ * Fenêtres jouables PAS ENCORE TERMINÉES, par mode — de quoi dire « ce contenu
+ * est-il ouvert maintenant ? » sans horloge serveur.
+ *
+ * Destiné aux outils CLIENTS qui ont déjà leur propre tic d'horloge (le suivi de
+ * progression) : on leur envoie les bornes plutôt qu'un booléen calculé au
+ * rendu. Un booléen se serait figé dans le cache ISR et aurait menti jusqu'à la
+ * purge suivante ; des bornes restent vraies, le client les compare à SON heure.
+ *
+ * Les tables ne portent que les saisons livrées avec le patch courant : entre
+ * deux saisons, le résultat est légitimement vide (le prochain guild raid
+ * n'existe encore nulle part). `limit` borne la charge utile.
+ */
+export function playableWindowsFrom(now: Date, limit = 8): Record<ContentMode, SeasonWindow[]> {
+  const t = now.getTime();
+  const keep = (windows: SeasonWindow[]): SeasonWindow[] =>
+    windows
+      .filter((w) => Date.parse(w.end) > t)
+      .sort((a, b) => a.start.localeCompare(b.start))
+      .slice(0, limit);
+
+  return {
+    'world-boss': keep(raw.worldBoss.map((s) => ({ start: s.start, end: s.battleEnd }))),
+    'guild-raid': keep(raw.guildRaid.map((s) => ({ start: s.start, end: s.battleEnd }))),
+    'joint-challenge': keep(raw.jointChallenge.map((s) => ({ start: s.start, end: s.end }))),
+  };
+}
+
 /**
  * Toutes les saisons où ce monstre est COMBATTU, de la plus ancienne à la plus
  * récente. `bossId` peut porter un suffixe d'épinglage `@n` (convention datagen) :

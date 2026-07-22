@@ -1212,6 +1212,11 @@ const fr: Record<TranslationKey, string> = {
   'progress.settings': 'Paramètres',
   'progress.settingsTitle': 'Paramètres',
   'progress.optionalContentDesc': 'Activez les tâches pour les événements actuellement actifs',
+  'progress.autoSeasonal': 'Détection auto du contenu saisonnier',
+  'progress.autoSeasonalDesc':
+    'Joint Challenge, Guild Raid et World Boss suivent le calendrier du jeu : ils apparaissent tout seuls pendant une saison, et disparaissent à sa fin.',
+  'progress.autoSeasonalLive': 'En cours',
+  'progress.autoSeasonalOff': 'Fermé',
   'progress.preciseCraft': 'Precise Craft',
   'progress.preciseCraftItem': 'Precise Craft (cooldown de 30 jours)',
   'progress.preciseCraftTimerDesc':
@@ -1237,7 +1242,6 @@ const fr: Record<TranslationKey, string> = {
   'progress.task.elemental-tower': 'Elemental Tower',
   'progress.task.memorial-match': 'Memorial Match',
   'progress.task.ad-stamina': 'Ad Stamina',
-  'progress.task.infinite-corridor': 'The Infinite Corridor',
   'progress.task.dimensional-singularity': 'Dimensional Singularity (mer.–sam.)',
   'progress.task.shop-daily-free-gift': 'Cadeau gratuit quotidien',
   'progress.task.shop-weekly-free-gift': 'Cadeau gratuit hebdomadaire',
@@ -1267,7 +1271,6 @@ const fr: Record<TranslationKey, string> = {
   'progress.elementalTowerCompletedDesc':
     'Masquer Elemental Tower des tâches quotidiennes (contenu permanent qui ne se reset jamais)',
   'progress.category.tasks': 'Tâches',
-  'progress.category.recurring': 'Récurrent',
   'progress.category.craft': 'Craft',
   'progress.category.shop': 'Boutique',
   'progress.shop.daily-weekly-monthly': 'Quotidien/Hebdomadaire/Mensuel',
@@ -1288,7 +1291,6 @@ const fr: Record<TranslationKey, string> = {
   'progress.shop.adventure-license': 'Boutique Adventure License',
   'progress.shop.survey-hub': 'Survey Hub',
   'progress.craft.kates-workshop': 'Atelier de Kate',
-  'progress.daysShort': 'j',
   'progress.dangerZone': 'Zone de danger',
   'progress.clearData': 'Effacer toutes les données',
   'progress.clearDataDesc':

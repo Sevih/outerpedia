@@ -1194,6 +1194,11 @@ const en = {
   'progress.settings': 'Settings',
   'progress.settingsTitle': 'Settings',
   'progress.optionalContentDesc': 'Enable tasks for events that are currently active',
+  'progress.autoSeasonal': 'Auto-detect seasonal content',
+  'progress.autoSeasonalDesc':
+    'Joint Challenge, Guild Raid and World Boss follow the in-game schedule: they appear on their own while a season is running, and disappear once it ends.',
+  'progress.autoSeasonalLive': 'Live',
+  'progress.autoSeasonalOff': 'Closed',
   'progress.preciseCraft': 'Precise Craft',
   'progress.preciseCraftItem': 'Precise Craft (30-day cooldown)',
   'progress.preciseCraftTimerDesc': 'Set remaining days if you already crafted recently.',
@@ -1218,7 +1223,6 @@ const en = {
   'progress.task.elemental-tower': 'Elemental Tower',
   'progress.task.memorial-match': 'Memorial Match',
   'progress.task.ad-stamina': 'Ad Stamina',
-  'progress.task.infinite-corridor': 'The Infinite Corridor',
   'progress.task.dimensional-singularity': 'Dimensional Singularity (Wed–Sat)',
   'progress.task.shop-daily-free-gift': 'Daily Free Gift',
   'progress.task.shop-weekly-free-gift': 'Weekly Free Gift',
@@ -1248,7 +1252,6 @@ const en = {
   'progress.elementalTowerCompletedDesc':
     'Hide Elemental Tower from daily tasks (permanent content that never resets)',
   'progress.category.tasks': 'Tasks',
-  'progress.category.recurring': 'Recurring',
   'progress.category.craft': 'Craft',
   'progress.category.shop': 'Shop',
   'progress.shop.daily-weekly-monthly': 'Daily/Weekly/Monthly',
@@ -1269,7 +1272,6 @@ const en = {
   'progress.shop.adventure-license': 'Adventure License Shop',
   'progress.shop.survey-hub': 'Survey Hub',
   'progress.craft.kates-workshop': "Kate's Workshop",
-  'progress.daysShort': 'd',
   'progress.dangerZone': 'Danger Zone',
   'progress.clearData': 'Clear All Data',
   'progress.clearDataDesc':

@@ -1,8 +1,14 @@
 /**
  * Progress tracker — DÉFINITIONS des tâches (portage V2 `taskDefinitions.ts`,
- * données à l'identique). Trois cycles (daily / weekly / monthly), quatre
- * catégories : `task` (contenu du jeu), `recurring` (cycle spécial en jours),
- * `shop` (achats boutique) et `craft` (atelier de Kate).
+ * données à l'identique). Trois cycles (daily / weekly / monthly), trois
+ * catégories : `task` (contenu du jeu), `shop` (achats boutique) et `craft`
+ * (atelier de Kate).
+ *
+ * La catégorie `recurring` (cycle « N jours après complétion ») a été RETIRÉE
+ * le 22/07 avec son unique entrée, le couloir infini — contenu mort côté jeu.
+ * Le moteur associé (`resetIntervalDays`, section dédiée, compte à rebours)
+ * partait avec : il ne servait plus rien. À ressusciter depuis git si le jeu
+ * réintroduit un contenu à cycle propre.
  *
  * Libellé d'une tâche : les entrées AVEC `shopItemKey` sont libellées par
  * l'item du catalogue (résolu côté serveur, nom localisé + sprite) ; les
@@ -11,7 +17,18 @@
  */
 
 export type TaskType = 'daily' | 'weekly' | 'monthly';
-export type TaskCategory = 'task' | 'recurring' | 'craft' | 'shop';
+export type TaskCategory = 'task' | 'craft' | 'shop';
+
+/**
+ * Contenu SAISONNIER : ouvert par fenêtres, pas en permanence. Ces ids sont
+ * exactement les `ContentMode` du calendrier de contenu — c'est ce qui permet
+ * de les activer tout seuls quand la saison tourne (réglage « auto »,
+ * cf. `activeTaskIds`). Un renommage ici doit suivre `ContentMode`.
+ */
+export const SEASONAL_TASK_IDS = ['joint-challenge', 'guild-raid', 'world-boss'] as const;
+export type SeasonalTaskId = (typeof SEASONAL_TASK_IDS)[number];
+const SEASONAL = new Set<string>(SEASONAL_TASK_IDS);
+export const isSeasonalTask = (id: string): boolean => SEASONAL.has(id);
 
 export interface TaskDefinition {
   id: string;
@@ -23,8 +40,6 @@ export interface TaskDefinition {
   permanent: boolean;
   /** Sprite d'item AFFICHÉ devant l'entrée (boutiques à monnaie dédiée). */
   icon?: string;
-  /** Cycle spécial : reset N jours après complétion (couloir infini). */
-  resetIntervalDays?: number;
   /** Déblocage par phases selon le jour du mois (tour céleste very hard). */
   hasProgressiveUnlock?: boolean;
   /** Clés i18n de la hiérarchie boutique (catégorie > sous-cat > onglet). */
@@ -68,13 +83,6 @@ export const DAILY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('dai
   'ad-stamina': { category: 'task', permanent: true, maxCount: 10 },
   // 2 entrées/jour, ouvert mercredi → samedi seulement (filtré à la synchro)
   'dimensional-singularity': { category: 'task', permanent: true, maxCount: 2 },
-  // Cycle spécial : reset 3 jours après complétion
-  'infinite-corridor': {
-    category: 'recurring',
-    permanent: true,
-    maxCount: 1,
-    resetIntervalDays: 3,
-  },
   // Premium Shop > Normal > Daily/Weekly/Monthly
   'shop-daily-free-gift': {
     category: 'shop',

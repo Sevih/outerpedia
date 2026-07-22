@@ -16,7 +16,6 @@ import {
   exportState,
   formatTimeUntil,
   getNextPreciseCraftTime,
-  getNextRecurringTaskReset,
   getNextReset,
   getNextVHTUnlockTime,
   getStats,
@@ -173,40 +172,28 @@ describe('resets', () => {
     let p = reconcileProgress(EMPTY_PROGRESS, s, WED);
     p = withTaskCount(p, 'daily', 'story-hard', 12, s, WED);
     // Même jour, une heure plus tard : rien ne bouge.
-    expect(checkAndResetProgress(p, s, WED + 3_600_000).daily['story-hard'].count).toBe(12);
+    expect(checkAndResetProgress(p, WED + 3_600_000).daily['story-hard'].count).toBe(12);
     // Lendemain : remise à zéro.
-    const next = checkAndResetProgress(p, s, WED + DAY);
+    const next = checkAndResetProgress(p, WED + DAY);
     expect(next.daily['story-hard'].count).toBe(0);
     expect(next.lastDailyReset).toBe(WED + DAY);
-  });
-
-  it('récurrente (couloir infini) : retombe 3 jours UTC après complétion, pas avant', () => {
-    let p = reconcileProgress(EMPTY_PROGRESS, s, WED);
-    p = withTaskCount(p, 'daily', 'infinite-corridor', 1, s, WED);
-    expect(getNextRecurringTaskReset(p, 'infinite-corridor', s)).toBe(Date.UTC(2026, 6, 18));
-    // Lendemain : le reset quotidien passe mais la récurrente tient.
-    const day1 = checkAndResetProgress(p, s, WED + DAY);
-    expect(day1.daily['infinite-corridor'].count).toBe(1);
-    // Trois jours après (18/07 10:00) : elle retombe.
-    const day3 = checkAndResetProgress(day1, s, WED + 3 * DAY);
-    expect(day3.daily['infinite-corridor'].count).toBe(0);
   });
 
   it('hebdo au lundi 00:00 UTC', () => {
     let p = reconcileProgress(EMPTY_PROGRESS, s, SUN);
     p = withTaskCount(p, 'weekly', 'arena-battle', 30, s, SUN);
-    const monday = checkAndResetProgress(p, s, MON);
+    const monday = checkAndResetProgress(p, MON);
     expect(monday.weekly['arena-battle'].count).toBe(0);
     // Mardi → mercredi de la même semaine : pas de nouveau reset hebdo.
     const tue = withTaskCount(monday, 'weekly', 'arena-battle', 7, s, MON + DAY);
-    expect(checkAndResetProgress(tue, s, MON + 2 * DAY).weekly['arena-battle'].count).toBe(7);
+    expect(checkAndResetProgress(tue, MON + 2 * DAY).weekly['arena-battle'].count).toBe(7);
   });
 
   it('mensuel au 1er 00:00 UTC', () => {
     const endOfJune = Date.UTC(2026, 5, 30, 22);
     let p = reconcileProgress(EMPTY_PROGRESS, s, endOfJune);
     p = withTaskCount(p, 'monthly', 'skyward-tower-100', 1, s, endOfJune);
-    const july = checkAndResetProgress(p, s, Date.UTC(2026, 6, 1, 2));
+    const july = checkAndResetProgress(p, Date.UTC(2026, 6, 1, 2));
     expect(july.monthly['skyward-tower-100'].count).toBe(0);
   });
 
@@ -381,5 +368,58 @@ describe('interprétation du schéma V2 et import/export', () => {
     expect(imported.progress.daily['story-hard'].count).toBe(3);
     expect(imported.settings).toBeNull();
     expect(importState('{pas du json')).toBeNull();
+  });
+});
+
+describe('contenus saisonniers — auto-détection', () => {
+  // Le JC est ouvert du 14 au 21 juillet ; WED (15/07) tombe dedans, SUN
+  // (12/07) non. Le guild raid n'a AUCUNE fenêtre connue (entre deux saisons :
+  // les tables ne portent que celles du patch courant).
+  const windows = {
+    'joint-challenge': [{ start: '2026-07-14T00:00:00Z', end: '2026-07-21T00:00:00Z' }],
+    'guild-raid': [],
+  };
+  const auto = createDefaultSettings();
+
+  it('est active par défaut, y compris pour des réglages stockés qui l’ignoraient', () => {
+    expect(auto.autoSeasonalTasks).toBe(true);
+    expect(normalizeSettings({ displayMode: 'tabs' }).autoSeasonalTasks).toBe(true);
+  });
+
+  it('ouvre la tâche pendant la saison SANS que la case soit cochée', () => {
+    expect(auto.enabledTasks.daily).not.toContain('joint-challenge');
+    expect(activeTaskIds('daily', auto, WED, windows)).toContain('joint-challenge');
+  });
+
+  it('la referme hors saison, et ignore un mode sans fenêtre connue', () => {
+    expect(activeTaskIds('daily', auto, SUN, windows)).not.toContain('joint-challenge');
+    expect(activeTaskIds('daily', auto, WED, windows)).not.toContain('guild-raid');
+  });
+
+  it('bascule coupée : on revient au pilotage MANUEL, calendrier ignoré', () => {
+    const manual: UserSettings = { ...auto, autoSeasonalTasks: false };
+    // Cochée à la main hors saison → présente quand même.
+    const ticked: UserSettings = {
+      ...manual,
+      enabledTasks: { ...manual.enabledTasks, daily: [...manual.enabledTasks.daily, 'guild-raid'] },
+    };
+    expect(activeTaskIds('daily', ticked, SUN, windows)).toContain('guild-raid');
+    // Non cochée pendant la saison → absente.
+    expect(activeTaskIds('daily', manual, WED, windows)).not.toContain('joint-challenge');
+  });
+
+  it('n’affecte AUCUNE tâche non saisonnière (les filtres habituels tiennent)', () => {
+    const ids = activeTaskIds('daily', auto, WED, windows);
+    expect(ids).toContain('story-hard');
+    // Singularité : ouverte mercredi, fermée dimanche — inchangé par l'auto.
+    expect(ids).toContain('dimensional-singularity');
+    expect(activeTaskIds('daily', auto, SUN, windows)).not.toContain('dimensional-singularity');
+  });
+
+  it('la progression suit : la tâche entre puis sort du suivi avec sa saison', () => {
+    const live = reconcileProgress(EMPTY_PROGRESS, auto, WED, windows);
+    expect(live.daily['joint-challenge']).toBeDefined();
+    const closed = reconcileProgress(EMPTY_PROGRESS, auto, SUN, windows);
+    expect(closed.daily['joint-challenge']).toBeUndefined();
   });
 });

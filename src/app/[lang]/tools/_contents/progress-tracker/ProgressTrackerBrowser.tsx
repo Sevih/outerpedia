@@ -5,6 +5,7 @@ import { useStoredState } from '@/lib/client-storage';
 import {
   SWEEPABLE_TASK_IDS,
   TASK_DEFINITIONS,
+  isSeasonalTask,
   type TaskCategory,
   type TaskDefinition,
   type TaskType,
@@ -17,7 +18,6 @@ import {
   exportState,
   formatTimeUntil,
   getNextPreciseCraftTime,
-  getNextRecurringTaskReset,
   getNextReset,
   getNextVHTUnlockTime,
   getStats,
@@ -26,7 +26,9 @@ import {
   importState,
   isPreciseCraftAvailable,
   normalizeSettings,
+  isSeasonLive,
   reconcileProgress,
+  type SeasonWindows,
   withCategoryToggled,
   withPreciseCraftDays,
   withPreciseCraftToggled,
@@ -96,7 +98,10 @@ export interface TrackerLabels {
   clearData: string;
   clearDataDesc: string;
   clearDataConfirm: string;
-  daysShort: string;
+  autoSeasonal: string;
+  autoSeasonalDesc: string;
+  autoSeasonalLive: string;
+  autoSeasonalOff: string;
 }
 
 export interface TrackerAssets {
@@ -146,9 +151,17 @@ function debounced(fn: () => void) {
 export function ProgressTrackerBrowser({
   labels,
   assets,
+  seasonWindows,
 }: {
   labels: TrackerLabels;
   assets: TrackerAssets;
+  /**
+   * Fenêtres jouables des contenus saisonniers, servies par la page. On reçoit
+   * des BORNES, pas un « c'est ouvert » calculé au rendu : un booléen se serait
+   * figé dans le cache ISR et aurait menti jusqu'à la purge suivante, alors que
+   * des bornes se comparent au tic d'horloge local (60 s).
+   */
+  seasonWindows: SeasonWindows;
 }) {
   const [storedProgress, setProgress, progressReady] = useStoredState(PROGRESS_SPEC);
   const [storedSettings, setSettings, settingsReady] = useStoredState(SETTINGS_SPEC);
@@ -170,8 +183,8 @@ export function ProgressTrackerBrowser({
   // normalise à la lecture (permanents forcés, obsolètes écartés, ordre).
   const settings = useMemo(() => normalizeSettings(storedSettings), [storedSettings]);
   const view = useMemo(
-    () => reconcileProgress(storedProgress, settings, now),
-    [storedProgress, settings, now],
+    () => reconcileProgress(storedProgress, settings, now, seasonWindows),
+    [storedProgress, settings, now, seasonWindows],
   );
 
   const ready = progressReady && settingsReady;
@@ -512,6 +525,14 @@ export function ProgressTrackerBrowser({
 
           {settingsTab === 'content' && (
             <div className="space-y-6">
+              <SettingToggle
+                checked={settings.autoSeasonalTasks}
+                title={labels.autoSeasonal}
+                desc={labels.autoSeasonalDesc}
+                onChange={() =>
+                  setSettings({ ...settings, autoSeasonalTasks: !settings.autoSeasonalTasks })
+                }
+              />
               <p className="text-content-muted text-sm">{labels.optionalContentDesc}</p>
               {(['daily', 'monthly'] as TaskType[]).map((type) => {
                 const optional = Object.values(TASK_DEFINITIONS[type]).filter(
@@ -524,20 +545,41 @@ export function ProgressTrackerBrowser({
                       {labels.cycleTasks[type]}
                     </p>
                     <div className="space-y-1">
-                      {optional.map((def) => (
-                        <label
-                          key={def.id}
-                          className="bg-surface-overlay hover:bg-surface-overlay/70 flex cursor-pointer items-center gap-3 rounded p-2 transition"
-                        >
-                          <input
-                            type="checkbox"
-                            checked={settings.enabledTasks[type].includes(def.id)}
-                            onChange={() => toggleEnabled(def.id, type)}
-                            className="size-4 accent-sky-500"
-                          />
-                          <span className="flex-1 text-sm">{labels.tasks[def.id]}</span>
-                        </label>
-                      ))}
+                      {optional.map((def) => {
+                        // Piloté par le calendrier : la case ne ment pas, elle
+                        // affiche l'état RÉEL et se coupe (sinon on cliquerait
+                        // sans effet).
+                        const auto = settings.autoSeasonalTasks && isSeasonalTask(def.id);
+                        const live = isSeasonLive(seasonWindows, def.id, now);
+                        return (
+                          <label
+                            key={def.id}
+                            className={`bg-surface-overlay flex items-center gap-3 rounded p-2 transition ${
+                              auto ? 'cursor-default' : 'hover:bg-surface-overlay/70 cursor-pointer'
+                            }`}
+                          >
+                            <input
+                              type="checkbox"
+                              checked={auto ? live : settings.enabledTasks[type].includes(def.id)}
+                              disabled={auto}
+                              onChange={() => !auto && toggleEnabled(def.id, type)}
+                              className="size-4 accent-sky-500 disabled:opacity-60"
+                            />
+                            <span className="flex-1 text-sm">{labels.tasks[def.id]}</span>
+                            {auto && (
+                              <span
+                                className={`rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase ${
+                                  live
+                                    ? 'bg-cat-emerald-fg/15 text-cat-emerald-fg'
+                                    : 'text-content-subtle bg-surface-raised'
+                                }`}
+                              >
+                                {live ? labels.autoSeasonalLive : labels.autoSeasonalOff}
+                              </span>
+                            )}
+                          </label>
+                        );
+                      })}
                     </div>
                   </div>
                 );
@@ -885,7 +927,7 @@ function TaskLabel({
   if (!def.shopItemKey) return <>{labels.tasks[def.id]}</>;
   const item = assets.items[def.shopItemKey];
   return (
-    <span className={`inline-flex items-center gap-1 ${completed ? 'opacity-50' : ''}`}>
+    <span className="inline-flex items-center gap-1">
       {def.shopItemQuantity !== undefined && (
         <span className={completed ? 'text-content-subtle line-through' : 'text-content-muted'}>
           {def.shopItemQuantity} x
@@ -906,7 +948,6 @@ function TaskItem({
   labels,
   assets,
   compact = false,
-  resetTimeText,
   onRowClick,
   onCheckboxChange,
 }: {
@@ -916,15 +957,13 @@ function TaskItem({
   labels: TrackerLabels;
   assets: TrackerAssets;
   compact?: boolean;
-  /** Compte à rebours d'une récurrente complétée (couloir infini). */
-  resetTimeText?: string | null;
   onRowClick: () => void;
   onCheckboxChange: () => void;
 }) {
   const completed = count >= max;
   return (
     <div
-      className={`flex items-center gap-3 ${compact ? 'bg-surface-overlay/50 p-3' : 'bg-surface-raised p-4'} group hover:bg-surface-overlay/70 cursor-pointer rounded-lg transition select-none`}
+      className={`flex items-center gap-3 ${compact ? 'bg-surface-overlay/50 p-3' : 'bg-surface-raised p-4'} ${completed ? 'opacity-60' : ''} group hover:bg-surface-overlay/70 cursor-pointer rounded-lg transition select-none`}
       onClick={onRowClick}
     >
       <input
@@ -945,9 +984,6 @@ function TaskItem({
       <span className="text-content-muted text-sm">
         {count}/{max}
       </span>
-      {resetTimeText && completed && (
-        <span className="text-xs text-purple-400">{resetTimeText}</span>
-      )}
     </div>
   );
 }
@@ -975,7 +1011,7 @@ function VHTTaskItem({
   const fullyCompleted = count >= phase;
   return (
     <div
-      className="bg-surface-raised group hover:bg-surface-overlay/70 cursor-pointer rounded-lg p-4 transition select-none"
+      className={`bg-surface-raised ${fullyCompleted ? 'opacity-60' : ''} group hover:bg-surface-overlay/70 cursor-pointer rounded-lg p-4 transition select-none`}
       onClick={onRowClick}
     >
       <div className="flex items-center gap-3">
@@ -1020,7 +1056,7 @@ function VHTTaskItem({
   );
 }
 
-/** Liste d'un cycle groupée par catégorie (task / recurring / craft / shop). */
+/** Liste d'un cycle groupée par catégorie (task / craft / shop). */
 function TaskList({
   type,
   view,
@@ -1052,17 +1088,11 @@ function TaskList({
   }
 
   const defs = TASK_DEFINITIONS[type];
-  const byCategory: Record<TaskCategory, string[]> = {
-    task: [],
-    recurring: [],
-    craft: [],
-    shop: [],
-  };
+  const byCategory: Record<TaskCategory, string[]> = { task: [], craft: [], shop: [] };
   for (const id of entries) byCategory[defs[id]?.category ?? 'task'].push(id);
 
   const categoryColor: Record<TaskCategory, string> = {
     task: 'text-content-muted',
-    recurring: 'text-purple-400',
     craft: 'text-orange-400',
     shop: 'text-yellow-400',
   };
@@ -1085,9 +1115,6 @@ function TaskList({
         />
       );
     }
-    const recurringReset = def.resetIntervalDays
-      ? getNextRecurringTaskReset(view, id, settings)
-      : null;
     return (
       <TaskItem
         key={id}
@@ -1097,7 +1124,6 @@ function TaskList({
         labels={labels}
         assets={assets}
         compact={compact}
-        resetTimeText={recurringReset ? formatTimeUntil(recurringReset, now) : null}
         onRowClick={() => onIncrement(id, type)}
         onCheckboxChange={() => onToggle(id, type)}
       />
@@ -1140,7 +1166,6 @@ function TaskList({
 
   const hasSweepable =
     type === 'daily' && byCategory.task.some((id) => SWEEPABLE_TASK_IDS.includes(id));
-  const recurringDef = byCategory.recurring[0] ? defs[byCategory.recurring[0]] : null;
 
   return (
     <div className="space-y-4">
@@ -1159,18 +1184,6 @@ function TaskList({
             ) : undefined,
           )}
           <div className="space-y-2">{byCategory.task.map((id) => item(id))}</div>
-        </div>
-      )}
-
-      {byCategory.recurring.length > 0 && (
-        <div>
-          {header(
-            'recurring',
-            recurringDef?.resetIntervalDays
-              ? ` (${recurringDef.resetIntervalDays}${labels.daysShort})`
-              : '',
-          )}
-          <div className="space-y-2">{byCategory.recurring.map((id) => item(id))}</div>
         </div>
       )}
 
