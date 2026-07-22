@@ -27,6 +27,27 @@
 
 ## 2026-07-22
 
+- **Mesure d'audience réparée — beacon Cloudflare posé à la main.** Trou
+  découvert en creusant une question de l'audit Sitebulb (« 99,92 % des URLs
+  sans GA/GTM : volontaire ou trou de mesure ? »). Réponse : les deux, dans
+  cet ordre. À l'audit du 20/07 c'était un ARTEFACT — Sitebulb crawlait
+  `vps-7b703196.vps.ovh.net`, donc l'origine en direct, et le beacon Cloudflare
+  n'existe pas dans le code : il était injecté par le proxy, invisible depuis
+  l'origine. Mais DEPUIS la bascule du 21/07 le nuage est GRIS, donc plus de
+  proxy, donc plus d'injection : le site n'a mesuré AUCUNE visite depuis sa
+  mise en ligne (vérifié en prod : ni beacon dans le HTML, ni en-tête
+  `cf-ray`). Correctif : `src/components/seo/Analytics.tsx`, rendu par le
+  layout racine PUBLIC seulement (l'admin et les outils dev ne sont pas
+  mesurés), no-op sans token. Token = identifiant de site, PAS un secret (il
+  est servi en clair) → baké dans le Dockerfile comme le reste du profil, et
+  laissé VIDE en dev pour ne pas polluer les stats avec le trafic local. Mode
+  « JS Snippet installation » choisi côté Cloudflare : il fonctionne en gris ET
+  en orange, donc rien à re-câbler au retour du orange (item ajouté au TODO
+  avec l'avertissement de double comptage) — et il est le seul compatible avec
+  la PASSE 3 de CSP, où `strict-dynamic` ignorera l'allowlist d'hôtes et
+  exigera un nonce qu'un script injecté par Cloudflare n'aurait jamais.
+  `defer` explicite plutôt qu'un `eslint-disable` de `no-sync-scripts`.
+
 - **Le repo passe en PUBLIC — doc remise d'équerre (décision Sevih).** Le site
   tournant sur cette version, plus de raison de garder le code privé.
   Audit préalable de l'historique complet (pickaxe `ghp_`/`github_pat_`/

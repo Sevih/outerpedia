@@ -44,6 +44,11 @@ ENV NEXT_PUBLIC_SITE_INDEXABLE=${NEXT_PUBLIC_SITE_INDEXABLE}
 # servies (404) par le VPS au lieu du bucket R2. Indépendante du domaine du site.
 ARG NEXT_PUBLIC_IMG_BASE=https://img.outerpedia.com
 ENV NEXT_PUBLIC_IMG_BASE=${NEXT_PUBLIC_IMG_BASE}
+# Cloudflare Web Analytics : identifiant de site, PAS un secret (il est servi en
+# clair dans le HTML). Baké ici parce que le beacon est posé à la main — cf.
+# src/components/seo/Analytics.tsx. Vide = aucune mesure (dev, forks).
+ARG NEXT_PUBLIC_CF_BEACON_TOKEN=831f68c0d4244d99b057d698480c2445
+ENV NEXT_PUBLIC_CF_BEACON_TOKEN=${NEXT_PUBLIC_CF_BEACON_TOKEN}
 ENV NODE_ENV=production
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .

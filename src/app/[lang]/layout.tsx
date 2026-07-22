@@ -5,6 +5,7 @@ import { getT } from '@/i18n';
 import { getBaseUrl, buildSiteJsonLd } from '@/lib/seo';
 import { SITE_INDEXABLE } from '@/lib/site';
 import JsonLd from '@/components/seo/JsonLd';
+import { Analytics } from '@/components/seo/Analytics';
 import { Header } from '@/components/layout/Header';
 import { EventBanner } from '@/components/layout/EventBanner';
 import { Footer } from '@/components/layout/Footer';
@@ -77,6 +78,8 @@ export default async function LangLayout({
           full-bleed, comme en V2). `page-container` = l'ancien gabarit. */}
       <main>{children}</main>
       <Footer />
+      {/* Site PUBLIC uniquement : l'admin et les outils dev ne sont pas mesurés. */}
+      <Analytics />
     </RootDocument>
   );
 }
