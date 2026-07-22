@@ -27,6 +27,39 @@
 
 ## 2026-07-22
 
+- **`GET /api/reco/:id` était mort depuis la reconstruction V3 — restauré,
+  enrichi, et désormais tenu par des tests.** Signalé par le mainteneur de
+  **Gear Solver** (app desktop, repo séparé) : sa fonction « Get preset »
+  appelait l'endpoint pour pré-remplir les filtres du solveur. La V3 ne l'avait
+  jamais porté, la prod servait la page HTML 404 de Next — indistinguable d'une
+  panne réseau côté app, alors que son 404 est un signal métier (« ce perso n'a
+  pas de preset »). **Personne ne l'a vu pendant des semaines : aucun test, et
+  le consommateur est dans un autre dépôt.** La donnée, elle, n'avait rien
+  perdu (90 persos des deux côtés). Deux traductions séparent le curé V3 du
+  vocabulaire du solveur, et **les deux échouent en silence** : (1) libellés de
+  stats du wiki → clés moteur (`ATK%` → `atkPct`) ; (2) **le palier
+  d'équipement** — le curé référence le membre bas de famille (Surefire
+  Greatsword id 4, 1★) parce que c'est la famille qu'affiche le wiki, mais l'app
+  résout l'effet via l'INVENTAIRE du joueur, où l'objet possédé est le 6★
+  (754). Règle retenue : déjà au palier max de sa famille → id conservé, sinon
+  `topId` — elle préserve les variantes par classe (Briareos/Gorgon : 5 objets
+  distincts) et les familles mono-palier (Bloody Edge, 5★ sans 6★). Validée
+  contre la sortie V2 : **49 des 68 items référencés identiques au bit près**,
+  les 19 autres étant les variantes que la V2 renvoyait à `itemId: null` (l'app
+  sautait leur filtre d'effet) et qui sont maintenant résolues. Second passage
+  après revue d'en face : **talismans exposés** (clé `Talisman` additive) — avec
+  le piège que leurs passifs CHANGENT d'un palier à l'autre (Executioner's
+  Charm : 3001 en 4★, 3023 en 6★), contrairement aux armes, donc c'est bien le
+  6★ qu'on émet ; et **la variante de classe verrouillée par un test** : les 5
+  variantes portent des `setId` différents, en recommander une de la mauvaise
+  classe poserait une contrainte qu'aucune pièce de l'inventaire ne satisfait —
+  zéro build, et l'app n'a aucun moyen de le détecter (l'id est valide). Trois
+  invariants balayent les 90 persos curés (vocabulaire de stats, `itemId`/`setId`
+  tous résolus, tiers non vides). **Leçon : un contrat consommé hors du dépôt
+  n'existe que s'il est testé ici** — sinon sa disparition est silencieuse des
+  deux côtés. Validé en live par le mainteneur (89 recos en 200, 33 en 404,
+  zéro warning de traduction).
+
 - **Les skills NPC ne polluent plus les fiches perso, et un diff d'ids devient
   lisible.** Parti d'une question de Sevih sur `/admin/extractor/characters/2000001` :
   « `skills[14] : 132 → 130`, ça correspond à quoi ? ». Deux problèmes distincts
