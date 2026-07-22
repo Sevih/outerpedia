@@ -38,7 +38,7 @@ export const LANG_ROUTING: LangRouting =
  * `noindex` tant qu'on ne l'active pas explicitement (staging VPS = noindex ;
  * prod finale = `NEXT_PUBLIC_SITE_INDEXABLE=true`). En dev, indexable par défaut
  * pour que les audits locaux (Lighthouse) ne râlent pas « blocked from indexing »
- * sur chaque page. Le noindex se pose par META (cf. app/layout.tsx), PAS par un
+ * sur chaque page. Le noindex se pose par META (cf. app/[lang]/layout.tsx), PAS par un
  * `Disallow` robots.txt : sinon Googlebot ne verrait jamais le noindex.
  */
 export const SITE_INDEXABLE =

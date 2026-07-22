@@ -102,7 +102,7 @@ export function proxy(request: NextRequest) {
   // RACINE : `/apple-touch-icon.png` renvoyait 404 alors que le fichier existait
   // et que le <head> le référençait. Tout asset servi depuis `public/` doit donc
   // vivre sous un préfixe AUTORISÉ ci-dessus (`/images`, `/icons`, `/audio`) —
-  // c'est le cas des icônes, cf. `metadata.icons` dans src/app/layout.tsx.
+  // c'est le cas des icônes, cf. `metadata.icons` dans src/app/[lang]/layout.tsx.
   // (`favicon.ico` échappe à tout : le `matcher` du proxy l'exclut nommément.)
   if (pathname.startsWith('/.') || pathname.includes('.')) {
     return new NextResponse(null, { status: 404 });

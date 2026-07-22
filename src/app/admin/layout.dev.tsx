@@ -2,9 +2,14 @@ import { AdminSidebar, type NavSection } from '@/components/admin/AdminSidebar';
 import { assertDevOnly } from '@/lib/admin/guard';
 import { reviewAll, reviewBuckets } from '@/lib/admin/review-store';
 import { actionableDiff } from '@/lib/admin/monster-review';
+import { RootDocument } from '../root-document';
 
 // Outil local : jamais prérendu, 404 en prod.
 export const dynamic = 'force-dynamic';
+
+// Layout RACINE de l'admin (pas de `app/layout.tsx` global — chaque racine rend
+// son <html> via RootDocument, cf. ce fichier). Figé en `en` : outil local.
+export const metadata = { title: { default: 'Admin', template: '%s | Outerpedia Admin' } };
 
 /**
  * Compteurs « à traiter » (diff jeu ↔ site) affichés sur les lignes Extractor,
@@ -98,9 +103,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ];
 
   return (
-    <div className="bg-surface-base text-content flex min-h-dvh">
-      <AdminSidebar sections={sections} />
-      <main className="min-w-0 flex-1 px-6 py-6">{children}</main>
-    </div>
+    <RootDocument lang="en">
+      <div className="bg-surface-base text-content flex min-h-dvh">
+        <AdminSidebar sections={sections} />
+        <main className="min-w-0 flex-1 px-6 py-6">{children}</main>
+      </div>
+    </RootDocument>
   );
 }
