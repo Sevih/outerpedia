@@ -27,6 +27,49 @@
 
 ## 2026-07-22
 
+- **Éditeur de guides : la frappe ne remonte plus l'arbre, et la traduction ne
+  brûle plus le quota (3947b95).** Symptôme : dans `/admin/guides/.../S4-1-10`
+  onglet Characters, chaque LETTRE tapée perdait le focus et relançait l'aperçu
+  de TOUS les champs (une requête `renderInlinePreview` par champ, par frappe).
+  Cause : `SlotsBlock` et `RecoGroups` étaient déclarés DANS le corps de
+  `GuideEditor` — nouvelle identité de composant à chaque rendu, donc React
+  démonte/remonte tout le sous-arbre (le `textarea` est un nouveau nœud DOM, et
+  les effets se rejouent). Hoistés au niveau module avec un ⚠ pour que le piège
+  ne revienne pas. Mutualisation au passage, demandée par Sevih (« au final
+  c'est la même chose ») : `CharacterChips` n'existe plus qu'en UN exemplaire
+  (il y en avait 3 : partagé, FreeHeroes, GuideEditor), agnostique du jeton
+  stocké (guides = NOM EN, synergies = ID) via `resolve`/`viewOf` — les
+  correctifs Shiraen (dédoublonnage, ajout au choix dans la datalist, « Francesca »
+  tapable) profitent donc à tout le monde ; et `CharacterGroups` (portraits +
+  raison éditée UNE à la fois, aperçus au repos en un seul batch) sert
+  maintenant les synergies ET les persos recommandés d'un guide.
+  **Traduction — deux corrections de fond, source unique dans
+  `lib/admin/translate-fill.ts`** (les 6 éditeurs la ré-implémentaient chacun) :
+  (1) l'EN fait foi, donc une retraduction ÉCRASE les cibles — l'ancien
+  « ne remplir que les langues vides » rendait toute CORRECTION de l'anglais
+  inrattrapable ; (2) `createFreshness` restreint l'envoi à ce qui a BOUGÉ
+  depuis le chargement (EN inconnu = édité/ajouté) ou à qui il manque une
+  langue : 39 champs envoyés → 1 sur le cas réel. La référence est l'ENSEMBLE
+  des EN au montage, pas une position — ajouter/supprimer/réordonner ne fausse
+  rien. Limite assumée : une traduction retouchée à la main sans toucher l'EN
+  n'est pas régénérée. Import de contributions aligné sur l'écrasement (sans
+  fraîcheur : une contribution arrive sans historique).
+
+- **Compteurs de l'admin : quatre sources, quatre chiffres (6efbb17, cf5c4cd).**
+  `/admin/extractor/weapons` annonçait 4 diff au menu, 0 à sa sidebar, 2 new +
+  2 diff sur sa page. Cause : `gear-rows.ts` codait `status: 'ok'` en dur (une
+  ligne = une FAMILLE, la revue est par item) — remplacé par une agrégation
+  réelle par famille + un compteur AUTORITAIRE passé à `ExtractorSidebar`
+  (`counts`) quand la ligne n'est pas l'unité de revue, plus une infobulle qui
+  dit pourquoi les granularités diffèrent. Même divergence côté monstres (18 vs 10) : la sidebar dérivait ses stats de TOUTES ses lignes alors que le toggle
+  « Used by the site » ne filtre que l'affichage. Le badge du menu compte
+  désormais le PÉRIMÈTRE SITE (`monster-review.ts`, défensif : diff rendu
+  intact si l'ensemble n'est pas calculable). Trouvé en vérifiant la question de
+  Sevih (« `siteMonsterIds` est à jour ? ») : **21 des 87 `bossId` de guides
+  manquaient** (20 adventure-license + 1 adventure — ils ne spawnent que dans
+  des modes exclus), donc leurs écarts d'extraction étaient invisibles. Comblé
+  (2034 → 2055 ids, 0 manquant).
+
 - **`@next/next/no-img-element` : la dette éteinte à la source, pas rustinée.**
   La CI annotait encore des `<img>` non couverts (tier-list-maker,
   progress-tracker) et le réflexe était d'ajouter le `eslint-disable-next-line`
