@@ -27,6 +27,26 @@
 
 ## 2026-07-22
 
+- **Logo de l'éditeur en 404 dans le JSON-LD de CHAQUE page.**
+  `buildSiteJsonLd` publiait `Organization.logo` en
+  `https://outerpedia.com/images/logo.png` — le MÊME piège que l'image OG par
+  défaut, déjà corrigé dans ce fichier : un chemin racine résolu contre le
+  domaine du SITE, où `/images/*` n'est servi par personne en prod (les assets
+  vivent sur R2). L'OG avait été réparée, le logo avait survécu. Vérifié en
+  prod : 404. Il pointe désormais `/icons/icon-512x512.png`, l'icône PWA servie
+  par Next lui-même — délibérément PAS via `img.*` (R2), pour qu'il tienne sur
+  tous les hôtes de langue sans dépendre de la base d'assets (200 vérifié sur
+  l'apex ET sur `kr.`). Dimensions corrigées (512×512, elles annonçaient encore
+  1000×1353). Un test verrouille l'invariant « jamais sous `/images/` » — ce
+  bug a déjà survécu à une correction du même piège.
+  TROUVÉ EN CREUSANT le rapport de couverture Search Console, dont la
+  conclusion principale était pourtant qu'il n'y avait RIEN à faire :
+  467 chemins distincts en 404, dont 333 `/patch-history/{type}/{slug}` et
+  49 `/item/*` — des reliques de V1 (décision Sevih : un 404 est la bonne
+  réponse pour une page morte, pas de table de redirections à maintenir).
+  `/manifest.webmanifest`, seul 404 suspect de la liste, répond 200 depuis la
+  bascule.
+
 - **La règle `alt` passe dans CONVENTIONS — le lot Sitebulb « 27 267 images
   sans alt » est un FAUX POSITIF, à ne pas retraiter.** Le nouveau crawl le
   remonte à 27 267 instances (contre 13 894 le 20/07, la hausse suit la

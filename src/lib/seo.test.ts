@@ -193,6 +193,16 @@ describe('buildSiteJsonLd', () => {
       ],
     });
   });
+
+  it('logo de l’éditeur : servi par l’app, JAMAIS sous /images (non servi en prod)', () => {
+    const graph = buildSiteJsonLd('en', 'D')['@graph'] as Array<Record<string, unknown>>;
+    const publisher = graph.find((n) => n['@id'] === `${CANONICAL_ORIGIN}/#publisher`)!;
+    const logo = publisher.logo as Record<string, unknown>;
+    // `/images/*` n'est servi par personne en prod (les assets vivent sur R2) :
+    // un logo écrit là partait en 404 dans le JSON-LD de chaque page.
+    expect(logo.url).not.toContain('/images/');
+    expect(logo.url).toBe(`${CANONICAL_ORIGIN}/icons/icon-512x512.png`);
+  });
 });
 
 describe('buildBreadcrumbJsonLd', () => {

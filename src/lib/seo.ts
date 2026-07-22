@@ -132,7 +132,19 @@ const WEBSITE_ID = `${CANONICAL_ORIGIN}/#website`;
 const VIDEOGAME_ID = `${CANONICAL_ORIGIN}/#videogame`;
 const ORGANIZATION_ID = `${CANONICAL_ORIGIN}/#organization`;
 const PUBLISHER_ID = `${CANONICAL_ORIGIN}/#publisher`;
-const LOGO_PATH = '/images/logo.png';
+/**
+ * Logo de l'éditeur (JSON-LD `Organization`) — l'icône PWA, servie depuis
+ * `public/icons/` par Next lui-même.
+ *
+ * Pointait `/images/logo.png` : le MÊME piège que l'image OG par défaut (cf.
+ * `DEFAULT_OG_IMAGE` plus haut) — un chemin racine résolu contre le domaine du
+ * SITE, où `/images/*` n'est servi par personne en prod. Corrigé pour l'OG, ce
+ * logo-ci avait survécu, et partait donc en 404 dans le JSON-LD de CHAQUE page
+ * (repéré le 2026-07-22 dans le rapport de couverture Search Console). On ne
+ * repasse pas par `img.*` (bucket R2) exprès : `/icons/` est servi par l'app
+ * sur tous les hôtes de langue, sans dépendre de la base d'assets.
+ */
+const LOGO_PATH = '/icons/icon-512x512.png';
 
 type JsonLdValue = string | number | boolean | null | JsonLdNode | JsonLdValue[];
 type JsonLdNode = { [key: string]: JsonLdValue };
@@ -176,8 +188,8 @@ export function buildSiteJsonLd(lang: Lang, description: string): JsonLdNode {
         logo: {
           '@type': 'ImageObject',
           url: `${CANONICAL_ORIGIN}${LOGO_PATH}`,
-          width: 1000,
-          height: 1353,
+          width: 512,
+          height: 512,
         },
       },
     ],
