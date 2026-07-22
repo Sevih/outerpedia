@@ -22,12 +22,20 @@
  *     chacun) sont déjà au palier max : elles passent telles quelles, et sont
  *     désormais RÉSOLUES — la V2 les renvoyait à `itemId: null`, ce qui faisait
  *     sauter le filtre d'effet côté app.
+ *
+ *     Le palier compte DOUBLE sur les talismans : leurs passifs CHANGENT d'un
+ *     palier à l'autre (Executioner's Charm : 3001 en 4★, 3023 en 6★), là où
+ *     une famille d'armes garde le sien. Émettre le membre curé (4★) ferait
+ *     filtrer sur un effet que le talisman 6★ du joueur ne porte pas — zéro
+ *     build trouvé, sans un warning. C'est le 6★ qu'on émet, et c'est déjà
+ *     l'effet que la fiche perso affiche.
  */
 import type { GearBuild, GearPresets, LangDict, SetComboPiece } from '@contracts';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
 import { withClassSuffix } from '@/lib/data/equipment';
 import weaponsData from '@data/generated/equipment/weapon.json';
 import accessoryData from '@data/generated/equipment/accessory.json';
+import talismanData from '@data/generated/equipment/talisman.json';
 import setsData from '@data/generated/equipment/sets.json';
 import familiesData from '@data/generated/equipment/families.json';
 import passivesData from '@data/generated/equipment/passives.json';
@@ -56,6 +64,9 @@ export interface StructuredRecoBuild {
   /** OR-list d'alternatives. */
   Weapon?: RecoGearStat[];
   Amulet?: RecoGearStat[];
+  /** OR-list d'alternatives. `mainStat` y est toujours vide : le curé ne
+   *  recommande pas de main stat de talisman, seulement l'objet. */
+  Talisman?: RecoGearStat[];
   /** OR-list de combos, chaque combo étant une ET-list de conditions. */
   Set?: RecoSetStat[][];
   /** Tiers ORDONNÉS, ex æquo dans un même tier. Tier 0 = priorité max. */
@@ -81,13 +92,16 @@ interface FamilyEntry {
   classLimits: string[];
 }
 
-const WEAPONS = weaponsData as unknown as Record<string, EquipEntry>;
-const AMULETS = accessoryData as unknown as Record<string, EquipEntry>;
 const SETS = setsData as unknown as Record<string, { name: { en: string } }>;
 const PASSIVES = passivesData as unknown as Record<string, { icon?: string }>;
-const FAMILIES = familiesData as unknown as {
-  weapon: FamilyEntry[];
-  accessory: FamilyEntry[];
+const FAMILIES = familiesData as unknown as Record<Slot, FamilyEntry[]>;
+
+type Slot = 'weapon' | 'accessory' | 'talisman';
+
+const TABLES: Record<Slot, Record<string, EquipEntry>> = {
+  weapon: weaponsData as unknown as Record<string, EquipEntry>,
+  accessory: accessoryData as unknown as Record<string, EquipEntry>,
+  talisman: talismanData as unknown as Record<string, EquipEntry>,
 };
 
 /**
@@ -145,12 +159,18 @@ function parseSubstatPrio(value: string | undefined): string[][] | undefined {
   return tiers.length > 0 ? tiers : undefined;
 }
 
-// Index membre → famille, construit une fois : les tables et `families.json`
-// sont du GÉNÉRÉ importé statiquement, il ne bouge pas sous le process (à
-// l'inverse du curé, relu au FS à chaque appel).
-const familyOfMember = new Map<string, FamilyEntry>();
-for (const fams of [FAMILIES.weapon, FAMILIES.accessory]) {
-  for (const f of fams) for (const id of f.ids) familyOfMember.set(id, f);
+// Index membre → famille, PAR SLOT et construit une fois : les tables et
+// `families.json` sont du GÉNÉRÉ importé statiquement, ça ne bouge pas sous le
+// process (à l'inverse du curé, relu au FS à chaque appel). Indexer par slot
+// plutôt qu'à plat coûte trois lignes et rend impossible qu'un id partagé un
+// jour entre deux tables aille chercher la famille de l'autre.
+const familyIndex: Record<Slot, Map<string, FamilyEntry>> = {
+  weapon: new Map(),
+  accessory: new Map(),
+  talisman: new Map(),
+};
+for (const slot of Object.keys(familyIndex) as Slot[]) {
+  for (const f of FAMILIES[slot]) for (const id of f.ids) familyIndex[slot].set(id, f);
 }
 
 /**
@@ -159,32 +179,29 @@ for (const fams of [FAMILIES.weapon, FAMILIES.accessory]) {
  * distincts d'une même famille) et des familles mono-palier (Bloody Edge, 5★
  * sans 6★), que `topId` écraserait toutes sur un seul id.
  */
-function canonicalId(id: string, table: Record<string, EquipEntry>): string | null {
-  const entry = table[id];
+function canonicalId(id: string, slot: Slot): string | null {
+  const entry = TABLES[slot][id];
   if (!entry) return null;
-  const family = familyOfMember.get(id);
+  const family = familyIndex[slot].get(id);
   if (!family) return id;
   return entry.star === Math.max(...family.stars) ? id : family.topId;
 }
 
-function resolveGear(
-  pick: { id: string; mainStat?: string },
-  table: Record<string, EquipEntry>,
-): RecoGearStat {
+function resolveGear(pick: { id: string; mainStat?: string }, slot: Slot): RecoGearStat {
   const mainStat = parseMainStat(pick.mainStat);
   // Référence `!nom` non arbitrée dans l'admin : on la remonte telle quelle
   // plutôt que de la taire — l'app affiche un warning et saute ce filtre.
   if (pick.id.startsWith('!')) {
     return { name: pick.id.slice(1), itemId: null, effectIcon: null, mainStat };
   }
-  const canonical = canonicalId(pick.id, table);
-  const entry = canonical ? table[canonical] : undefined;
+  const canonical = canonicalId(pick.id, slot);
+  const entry = canonical ? TABLES[slot][canonical] : undefined;
   if (!canonical || !entry) {
     return { name: pick.id, itemId: null, effectIcon: null, mainStat };
   }
   // Variante par classe : le nom nu est ambigu (5 objets s'appellent
   // « Briareos's Recklessness »), on suffixe comme partout ailleurs en V3.
-  const family = familyOfMember.get(canonical);
+  const family = familyIndex[slot].get(canonical);
   const name =
     family && family.classLimits.length > 1 && entry.classLimit
       ? withClassSuffix(entry.name, entry.classLimit).en
@@ -217,9 +234,15 @@ export function toStructuredBuilds(
     const substats = build.substats?.startsWith('$')
       ? presets.substats[build.substats.slice(1)]
       : build.substats;
+    // Les talismans se réfèrent en vrac (ids ou `$preset`), sans main stat :
+    // le curé recommande l'objet, pas la stat qu'il porte.
+    const talismanIds = (build.talismans ?? []).flatMap((t) =>
+      t.startsWith('$') ? (presets.talismans[t.slice(1)] ?? [t]) : [t],
+    );
     builds[build.name] = {
-      Weapon: (build.weapons ?? []).map((w) => resolveGear(w, WEAPONS)),
-      Amulet: (build.amulets ?? []).map((a) => resolveGear(a, AMULETS)),
+      Weapon: (build.weapons ?? []).map((w) => resolveGear(w, 'weapon')),
+      Amulet: (build.amulets ?? []).map((a) => resolveGear(a, 'accessory')),
+      Talisman: talismanIds.map((id) => resolveGear({ id }, 'talisman')),
       Set: combos.map((combo) =>
         combo.map((piece) => ({
           name: setName(piece.set),

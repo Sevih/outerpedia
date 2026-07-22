@@ -2,6 +2,12 @@ import { describe, expect, it } from 'vitest';
 import { getRecoStatPriorities } from '@/lib/data/reco-api';
 import { loadGearReco } from '@/lib/data/gear-reco';
 import { GET } from '@/app/api/reco/[id]/route';
+import charactersData from '@data/generated/characters.json';
+import weaponsData from '@data/generated/equipment/weapon.json';
+import accessoryData from '@data/generated/equipment/accessory.json';
+
+const CHARACTERS = charactersData as unknown as Record<string, unknown>;
+const EQUIPMENT = { ...weaponsData, ...accessoryData } as unknown as Record<string, unknown>;
 
 /**
  * `reco-api.ts` — CONTRAT PUBLIC de `GET /api/reco/:id`, consommé par l'app
@@ -53,6 +59,14 @@ describe('getRecoStatPriorities — forme du contrat', () => {
     expect(speed.Amulet).toEqual([
       expect.objectContaining({ name: "Death's Hold", mainStat: ['pen', 'critDmg'] }),
       expect.objectContaining({ name: 'Clock Up', mainStat: ['spd'] }),
+    ]);
+
+    // Talisman : même forme que Weapon/Amulet, mais sans main stat curée. Ici
+    // le preset `$CPdps` s'aplatit en ses trois talismans (OR-list).
+    expect(speed.Talisman).toEqual([
+      { name: "Sage's Charm", itemId: 10204, effectIcon: expect.any(String), mainStat: [] },
+      { name: "Rogue's Charm", itemId: 10203, effectIcon: expect.any(String), mainStat: [] },
+      { name: "Executioner's Charm", itemId: 10201, effectIcon: expect.any(String), mainStat: [] },
     ]);
 
     // Set : OR-list de combos, chaque combo étant une ET-list de conditions.
@@ -132,6 +146,50 @@ describe('itemId — palier canonique', () => {
   });
 });
 
+describe('variantes par classe — la bonne, ou rien', () => {
+  /**
+   * Signalé par le mainteneur du Gear Solver, et c'est le pire mode de panne
+   * du contrat : les 5 variantes d'une famille Briareos/Gorgon portent des
+   * `setId` DIFFÉRENTS, et c'est sa clé de filtre d'effet. Recommander la
+   * variante d'une autre classe que celle du perso pose donc une contrainte
+   * qu'aucune pièce de son inventaire ne peut satisfaire → zéro build trouvé,
+   * et son app n'a AUCUN moyen de s'en apercevoir : elle n'a pas de warning à
+   * lever, l'id est valide. Pire que l'ancien `itemId: null`, qui prévenait.
+   *
+   * Ça ne peut donc pas rester une propriété qu'on vérifie à la main.
+   */
+  it('la variante recommandée est toujours de la classe du personnage', () => {
+    const mismatches: string[] = [];
+    let checked = 0;
+    for (const charId of Object.keys(loadGearReco())) {
+      const charClass = (CHARACTERS[charId] as { class?: string } | undefined)?.class;
+      if (!charClass) continue;
+      const reco = getRecoStatPriorities(charId)!;
+      for (const [buildName, build] of Object.entries(reco.builds)) {
+        for (const piece of [...(build.Weapon ?? []), ...(build.Amulet ?? [])]) {
+          // Seules les variantes par classe portent un suffixe « [Classe] ».
+          const suffix = /\[([^\]]+)\]$/.exec(piece.name);
+          if (!suffix) continue;
+          checked++;
+          const limit = (
+            (piece.itemId != null ? EQUIPMENT[String(piece.itemId)] : undefined) as
+              { classLimit?: string | null } | undefined
+          )?.classLimit;
+          if (limit && limit !== charClass) {
+            mismatches.push(
+              `${charId}/${buildName} : "${piece.name}" (${limit}) sur un perso ${charClass}`,
+            );
+          }
+        }
+      }
+    }
+    expect(mismatches).toEqual([]);
+    // Sans ça, le test passerait À VIDE le jour où le suffixe de classe change
+    // de forme — en ne vérifiant plus rien, mais toujours au vert.
+    expect(checked, 'aucune variante par classe inspectée').toBeGreaterThan(10);
+  });
+});
+
 describe('invariants sur les 90 personnages curés', () => {
   const all = Object.keys(loadGearReco()).map((id) => getRecoStatPriorities(id)!);
 
@@ -159,7 +217,12 @@ describe('invariants sur les 90 personnages curés', () => {
     const unresolved: string[] = [];
     for (const reco of all) {
       for (const [name, build] of Object.entries(reco.builds)) {
-        for (const piece of [...(build.Weapon ?? []), ...(build.Amulet ?? [])]) {
+        const pieces = [
+          ...(build.Weapon ?? []),
+          ...(build.Amulet ?? []),
+          ...(build.Talisman ?? []),
+        ];
+        for (const piece of pieces) {
           if (piece.itemId === null) unresolved.push(`${reco.id}/${name} item "${piece.name}"`);
         }
         for (const combo of build.Set ?? []) {
