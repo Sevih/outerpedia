@@ -27,6 +27,22 @@
 
 ## 2026-07-22
 
+- **Vidéos non indexées (605, dont 0 indexée) : piste FERMÉE, ne pas la
+  rouvrir.** Le ratio donne envie d'y voir un défaut ; c'en est l'inverse.
+  Motif Google : « Video isn't on a watch page ». Ses deux cas disqualifiants
+  décrivent EXACTEMENT nos pages — « un article où la vidéo complète le texte
+  plutôt que d'en être le contenu principal » (nos guides sont des stratégies
+  écrites, la vidéo illustre un clear) et « une page qui liste plusieurs vidéos
+  d'importance égale » (le composant s'appelle `MultiVideoEmbed` ; 18 de nos 47
+  blocs portent 2 vidéos ou plus, jusqu'à 4). Google classe correctement.
+  Rendre les 605 éligibles imposerait 605 pages DÉDIÉES, une vidéo par page en
+  contenu principal — soit recréer le motif de pages fines qu'on vient
+  d'éteindre sur Skyward Tower. Et le gain serait nul : ce sont des embeds
+  YouTube (257 références), déjà indexés sur YouTube et attribués à leur chaîne
+  (Sevih 157, ダイス 49, Shiraen 35, Tango, Ducky…). Le balisage, lui, est sain
+  (286 vidéos valides, 0 invalide) : c'est le TYPE DE PAGE qui ne colle pas, et
+  c'est un choix éditorial assumé, pas un bug.
+
 - **Logo de l'éditeur en 404 dans le JSON-LD de CHAQUE page.**
   `buildSiteJsonLd` publiait `Organization.logo` en
   `https://outerpedia.com/images/logo.png` — le MÊME piège que l'image OG par
