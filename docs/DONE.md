@@ -27,6 +27,22 @@
 
 ## 2026-07-22
 
+- **La règle `alt` passe dans CONVENTIONS — le lot Sitebulb « 27 267 images
+  sans alt » est un FAUX POSITIF, à ne pas retraiter.** Le nouveau crawl le
+  remonte à 27 267 instances (contre 13 894 le 20/07, la hausse suit la
+  couverture du crawl) sur 82 % des pages, ce qui donne envie de rouvrir le
+  chantier. Vérification : **476 images distinctes seulement**, et surtout
+  **zéro `<img>` sans attribut `alt` dans tout le repo** — ce sont donc des
+  `alt=""` délibérés. Les 4 familles dominantes ont été relues (drapeaux
+  5 950, icônes de nav 5 950, boss 6 996, portraits 5 703) : toutes doublées
+  par leur nom en texte adjacent, donc décoratives — même conclusion que la
+  revue site par site du 20-21/07 (a9c1381). Leur donner un `alt` ferait
+  annoncer chaque nom DEUX FOIS par un lecteur d'écran : ce serait une
+  régression d'accessibilité, pas un correctif. La règle (décoratif =
+  `alt="" aria-hidden` ; `alt` descriptif quand l'image porte SEULE
+  l'information, cf. `CharacterPortrait`) est écrite dans `CONVENTIONS.md`
+  avec les chiffres, pour que le prochain audit ne relance pas le sujet.
+
 - **`lib/stats` scindé : les tables pures d'un côté, le glossaire de l'autre —
   fuites client 16 → 8.** Même classe de bug que `STAR_SPRITE`, en plus
   systémique : `lib/stats` mêlait des tables PURES (`STAT_ABBR`, `STAT_ICON`,

@@ -52,6 +52,15 @@ l'entrée DONE ne cite pas le hash du commit, inconnu au moment de l'écrire.
   `@next/next/no-img-element` est éteinte une fois dans `eslint.config.mjs` —
   **ne pas remettre de `eslint-disable-next-line`** au-dessus des `<img>`.
   Poser en revanche `width`/`height` quand la taille est connue (CLS).
+- **`alt` : décoratif = `alt="" aria-hidden`** — une icône DOUBLÉE par son nom en
+  texte adjacent (portrait + nom, icône de nav + libellé, drapeau + abréviation)
+  est décorative : lui donner un `alt` ferait annoncer le nom DEUX FOIS par un
+  lecteur d'écran. L'`alt` descriptif est pour l'image qui porte seule
+  l'information (cf. `CharacterPortrait`, où le portrait est la seule identité
+  du perso quand `showName` est coupé). Un audit externe compte l'`alt` vide
+  comme « manquant » (Sitebulb, 2026-07-22 : 27 267 instances, 476 images
+  distinctes, **aucun défaut réel** — zéro `<img>` sans attribut `alt` dans le
+  repo) : ne pas « corriger » ce faux positif.
 - **Slugs** en kebab-case, identifiants primaires — ne jamais filtrer/grouper
   sur des champs localisés.
 
