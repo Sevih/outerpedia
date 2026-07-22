@@ -27,6 +27,39 @@
 
 ## 2026-07-22
 
+- **`<html lang>` par langue — layouts racine multiples (b679985).** Le layout
+  racine global figeait `lang="en"` partout ; il disparaît. Chaque racine rend
+  son `<html>` via la coquille commune `src/app/root-document.tsx` :
+  `[lang]/layout` porte le vrai lang (SSG ×5 vérifié en build PROPRE :
+  en/fr/jp/kr/zh dans le HTML prérendu), `admin/` et `dev/` (dev-only) portent
+  le leur figé `en`. `HtmlLang` (patch client) supprimé — en navigation client
+  le param du segment change et React met l'attribut à jour seul. Garde
+  invalide : PAS de `notFound()` dans un layout racine (interdit) →
+  `normalizeLang`, inatteignable de toute façon (le proxy réécrit tout préfixe
+  inconnu vers `/en/…`). Reliquat cosmétique : le 404 global par défaut de Next
+  (`_not-found`) rend sans attribut lang — inatteignable en pratique.
+  ⚠ PIÈGE local découvert au passage : `pnpm build` avec le serveur dev actif
+  échoue — `.next/types` (build) et `.next/dev/types` (dev) sont TOUS DEUX dans
+  le tsconfig et leurs routes divergent par construction (les `.dev.tsx`
+  n'existent qu'en dev) → clash de types. Le build de vérification s'est fait
+  dans un worktree propre ; `.next/types` supprimé ensuite pour rendre le
+  typecheck local à nouveau vert. Docker/CI (env propre) n'est pas concerné.
+
+- **Images : `aria-hidden` sur le décoratif + dimensions intrinsèques
+  (a9c1381)** — deux lots Sitebulb (« alt manquants » 13 894, « add
+  dimensions » 1 167 pages). (1) Les 143 `<img alt="">` sans `aria-hidden`
+  l'ont reçu (codemod + revue site par site : tous décoratifs — sprites à côté
+  d'un libellé lisible, cadres, overlays ; AUCUN n'était l'unique contenu d'un
+  lien, pas de texte inventé). (2) `width`/`height` posés partout où la taille
+  est connue : dérivés des classes Tailwind numériques (h-N w-N, size-N →
+  N×4 px, 90 sites via codemod) + passe manuelle sur les primitives à taille
+  en prop (EquipmentIcon, CharacterPortrait, CharacterCard, ItemInline/
+  StatInline, lightbox wallpapers, logo header). 146/242 `<img>` du code
+  portent leurs dimensions ; le reste ASSUMÉ sans (overlays absolus en % dans
+  des conteneurs dimensionnés — aucun CLS possible, l'espace est réservé par
+  le parent). CSS garde la main sur le rendu : les attributs ne fixent que le
+  ratio intrinsèque.
+
 - **Éditeur de guides : la frappe ne remonte plus l'arbre, et la traduction ne
   brûle plus le quota (3947b95).** Symptôme : dans `/admin/guides/.../S4-1-10`
   onglet Characters, chaque LETTRE tapée perdait le focus et relançait l'aperçu
