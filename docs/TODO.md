@@ -95,7 +95,9 @@
 - [ ] **Titles / meta descriptions courts** (572 / 135 pages) — surtout les
       pages générées ; à arbitrer, ce n'est pas mécanique.
       (`<html lang>`, `alt` manquants et `width`/`height` TRAITÉS le 22/07,
-      cf. DONE.)
+      cf. DONE. Les 147 titres de GUIDES portent leur catégorie depuis le
+      22/07 — ça les rend uniques et les allonge ; restent les fiches perso,
+      équipement et les pages d'outils.)
 
 ## ⚙️ Config / infra
 

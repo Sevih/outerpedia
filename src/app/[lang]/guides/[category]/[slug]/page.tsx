@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { LANGS, normalizeLang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
+import { getT } from '@/i18n';
 import { createPageMetadata } from '@/lib/seo';
 import { GUIDE_CATEGORIES, type GuideCategory } from '@/lib/data/guide-categories';
 import { getGuide, guideBossMonster, guideUpdatedDate, listGuideParams } from '@/lib/data/guides';
@@ -25,6 +26,7 @@ export async function generateMetadata({
   const lang = normalizeLang(raw);
   const guide = getGuide(category, slug);
   if (!guide) return {};
+  const t = await getT(lang);
   const updated = guideUpdatedDate(guide);
 
   // CARTE DE PARTAGE : le portrait du boss quand le guide en a un — c'est le
@@ -53,12 +55,23 @@ export async function generateMetadata({
       ? lRec(boss.name, lang) || boss.name.en
       : undefined;
 
+  // PORTÉE du titre — un titre de meta n'est PAS unique à l'échelle du site
+  // (audit du 2026-07-22) : « Drakhan » titrait à la fois la fiche du perso et
+  // son guide World Boss, « Tyrant Toddler » ses deux guides (Singularity et
+  // Adventure License). Le libellé de catégorie les sépare. Monad Gate rejoue en
+  // plus les MÊMES zones à chaque profondeur — « Land of Snow and Steel » existe
+  // en Depth 3 puis 6→10, 29 guides pour 5 titres : là, seule la profondeur
+  // tranche. Effet de bord voulu : des titres plus longs (578 URLs étaient sous
+  // la longueur utile).
+  const catLabel = lRec(GUIDE_CATEGORIES[guide.category].label, lang);
+  const scope = guide.depth
+    ? `${catLabel} ${t('guides.monad_gate.depth', { n: guide.depth })}`
+    : catLabel;
+
   return createPageMetadata({
     lang,
     path: `/guides/${category}/${slug}`,
-    title: bossName
-      ? `${bossName} — ${lRec(GUIDE_CATEGORIES[guide.category].label, lang)}`
-      : lRec(guide.title, lang),
+    title: `${bossName ?? lRec(guide.title, lang)} — ${scope}`,
     description: bossName
       ? `${bossName} — ${lRec(guide.description, lang)}`
       : lRec(guide.description, lang),

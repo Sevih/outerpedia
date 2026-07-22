@@ -27,6 +27,23 @@
 
 ## 2026-07-22
 
+- **Titre de guide : la catégorie entre dans le titre — 147 guides, 147 titres
+  distincts.** Un titre de meta n'était pas unique à l'échelle du SITE :
+  « Drakhan » titrait à la fois `/characters/drakhan` et son guide World Boss,
+  « Tyrant Toddler » ses deux guides (Dimensional Singularity et Adventure
+  License) — deux pages à nous qui se disputent la même requête. Sitebulb n'en
+  voyait que la moitié : il n'avait crawlé que 12 des 35 pages Monad Gate, où
+  **29 guides partagent 5 titres** (la même zone rejouée de Depth 1 à 10).
+  Correctif dans `[category]/[slug]/page.tsx` : `titre — catégorie`, plus la
+  profondeur quand le guide en déclare une (clé `guides.monad_gate.depth`,
+  déjà localisée). Piste ÉCARTÉE : activer le flag `bossTitle` existant sur
+  world-boss / dimensional-singularity / adventure-license — il pilote AUSSI
+  le h1 et la mise en page (h1 centré au nom du monstre + sous-titre), et sur
+  adventure-license il aurait écrasé les titres curés (« Promotion : Demiurge
+  Astei » → nom brut du boss). Un correctif SEO ne doit pas embarquer un
+  changement d'UI. Effet de bord voulu : des titres plus longs, ce qui entame
+  le lot « titles trop courts ». Vérifié par simulation sur les 147 metas.
+
 - **Étages de tour : canonical vers le guide parent — 410 duplicates et 711 h1
   dupliqués éteints d'un coup.** Audit Sitebulb du 22/07 : les 410 URLs en
   duplicate content sont TOUTES des étages de Skyward Tower (176 groupes, 8
