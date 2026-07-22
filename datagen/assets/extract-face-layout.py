@@ -157,8 +157,20 @@ def load_cached() -> dict[str, dict]:
 
 
 def save_cached(layout: dict[str, dict]) -> None:
+    """Écrit le cache dans un format STABLE d'une extraction à l'autre.
+
+    Deux détails qui, sans ça, faisaient réapparaître un diff de 12 000 lignes
+    à chaque patch alors que pas une valeur n'avait bougé :
+      - `newline='\\n'` : sous Windows, `write_text` traduit en CRLF, alors que
+        le dépôt est en LF (cf. .gitattributes) ;
+      - le saut de ligne final, que git attend et que `json.dumps` n'ajoute pas.
+
+    Ce fichier est par ailleurs dans `.prettierignore` : prettier recollerait
+    les paires `scale` sur une ligne, et l'extraction suivante les redéplierait
+    — chacun défaisant l'autre indéfiniment. Le format de CE script fait foi.
+    """
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(layout, indent=2), encoding='utf-8')
+    OUT.write_text(json.dumps(layout, indent=2) + '\n', encoding='utf-8', newline='\n')
 
 
 def ensure_chars(char_ids: Iterable[str]) -> dict[str, dict]:

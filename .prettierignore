@@ -8,3 +8,11 @@ pnpm-lock.yaml
 # Snapshot V2 figé (oracle de complétude) — ne jamais reformater.
 data/legacy
 .assets-staging/
+
+# Écrit par un script PYTHON (`datagen:face-layout`), qui ne peut pas appeler
+# prettier — contrairement aux JSON de `data/generated`, produits PAR prettier
+# via `writeJson`. Les deux formats se contredisent : prettier recolle les
+# paires `scale` sur une ligne, l'extraction suivante les redéplie. Résultat,
+# un diff de 12 000 lignes à chaque patch sans qu'une valeur ait changé. Le
+# format du script fait foi ; personne ne lit ce tableau de 15 000 lignes.
+datagen/assets/face-icon-layout.json
