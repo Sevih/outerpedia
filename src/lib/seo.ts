@@ -48,6 +48,15 @@ const OG_LOCALE = Object.fromEntries(
 type PageMetadataOptions = {
   lang: Lang;
   path: string;
+  /**
+   * Page qui n'est PAS une entité de recherche autonome : canonical ET hreflang
+   * pointent vers `canonicalPath` au lieu de la page elle-même. Les deux vont
+   * ENSEMBLE — un hreflang qui annoncerait la page canonicalisée contredirait le
+   * canonical, et Google ignore les paires en conflit. `og:url` reste sur `path`
+   * (l'URL réellement partagée). Absent = la page se canonicalise sur elle-même,
+   * cas par défaut.
+   */
+  canonicalPath?: string;
   title: string;
   description: string;
   ogImage?: string;
@@ -68,6 +77,7 @@ type PageMetadataOptions = {
 export function createPageMetadata({
   lang,
   path,
+  canonicalPath,
   title,
   description,
   ogImage = DEFAULT_OG_IMAGE,
@@ -76,6 +86,7 @@ export function createPageMetadata({
   article,
 }: PageMetadataOptions): Metadata {
   const url = buildUrl(lang, path);
+  const canonicalUrl = canonicalPath ? buildUrl(lang, canonicalPath) : url;
   const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
   const isDefault = ogImage === DEFAULT_OG_IMAGE;
   const { width, height } =
@@ -102,7 +113,7 @@ export function createPageMetadata({
   return {
     title,
     description,
-    alternates: { canonical: url, languages: buildAlternates(path) },
+    alternates: { canonical: canonicalUrl, languages: buildAlternates(canonicalPath ?? path) },
     openGraph,
     twitter: {
       card: isDefault || width > height ? 'summary_large_image' : 'summary',

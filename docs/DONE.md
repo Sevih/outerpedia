@@ -27,6 +27,23 @@
 
 ## 2026-07-22
 
+- **Étages de tour : canonical vers le guide parent — 410 duplicates et 711 h1
+  dupliqués éteints d'un coup.** Audit Sitebulb du 22/07 : les 410 URLs en
+  duplicate content sont TOUTES des étages de Skyward Tower (176 groupes, 8
+  tours, aucune exception), et 6 h1 couvrent 100 pages chacun (« Elemental
+  Tower: Light »…). Cause : chaque étage se canonicalisait sur LUI-MÊME, alors
+  qu'il est une VUE du guide de tour — même cadre, même h1 — et que des étages
+  entiers partagent la même équipe de clear, donc le même contenu. Les étages
+  pèsent 670 des 1193 URLs crawlées, soit 56 % du site (potentiel ~16 000 avec
+  les 5 langues, alors qu'ils ne sont même pas au sitemap : Google les trouve
+  par le maillage). Correctif : option `canonicalPath` de `createPageMetadata`
+  (`src/lib/seo.ts`), posée par `[floor]/page.tsx`. Canonical ET hreflang
+  basculent ENSEMBLE sur la tour — un hreflang qui annoncerait la page
+  canonicalisée contredirait le canonical, et Google ignore les paires en
+  conflit ; `og:url` reste sur l'étage, c'est l'URL réellement partagée. Les
+  étages restent rendus et navigables : on ne retire que la candidature à
+  l'index. 2 tests.
+
 - **Mesure d'audience réparée — beacon Cloudflare posé à la main.** Trou
   découvert en creusant une question de l'audit Sitebulb (« 99,92 % des URLs
   sans GA/GTM : volontaire ou trou de mesure ? »). Réponse : les deux, dans

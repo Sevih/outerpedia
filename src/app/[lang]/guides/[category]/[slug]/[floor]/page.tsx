@@ -4,7 +4,7 @@
  * Seuls les guides `skyward-tower` peuplent cette route ; les autres guides
  * n'ont simplement pas de segment `[floor]`. Le cadre (en-tête, fil d'Ariane…)
  * est mutualisé avec la route de base (`GuideDetail`) ; ici on ne fait que
- * résoudre l'étage et canonicaliser sur lui.
+ * résoudre l'étage et le canonicaliser vers son guide de tour.
  *
  * Pas de `generateStaticParams` : les ~3297 étages (× 5 langues) dominaient le
  * build. On les rend À LA DEMANDE puis on les cache 24 h (`revalidate`), comme
@@ -43,8 +43,14 @@ export async function generateMetadata({
 
   return createPageMetadata({
     lang,
-    // Chaque étage/combat se canonicalise sur LUI-MÊME (contenu propre).
     path: `/guides/${category}/${slug}/${floor}`,
+    // Un étage n'est PAS une entité de recherche autonome : c'est une vue du
+    // guide de tour — même cadre, même H1, et des étages entiers partagent la
+    // même équipe de clear donc le même contenu (audit du 2026-07-22 : 410 URLs
+    // en duplicate, TOUTES des étages de tour). Les ~3300 étages × 5 langues
+    // restent navigables et rendus, mais se canonicalisent vers leur tour :
+    // une seule entité par tour dans l'index au lieu de ~16 000.
+    canonicalPath: `/guides/${category}/${slug}`,
     title: `${lRec(guide.title, lang)} — ${label}`,
     description: `${label} — ${lRec(guide.description, lang)}`,
     ...(guide.ogImage ? { ogImage: guide.ogImage } : {}),

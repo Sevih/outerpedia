@@ -37,6 +37,32 @@ describe('createPageMetadata — canonical & hreflang', () => {
     expect(langs['x-default']).toBe(buildUrl(DEFAULT_LANG, '/characters'));
   });
 
+  it('canonicalPath : canonical ET hreflang basculent sur la cible, og:url reste sur la page', () => {
+    const floor = '/guides/skyward-tower/light-tower/42';
+    const tower = '/guides/skyward-tower/light-tower';
+    const meta = createPageMetadata({
+      lang: 'fr',
+      path: floor,
+      canonicalPath: tower,
+      title: 'T',
+      description: 'D',
+    });
+    expect(meta.alternates?.canonical).toBe(buildUrl('fr', tower));
+    // Les alternates suivent le canonical : un hreflang pointant vers l'étage
+    // contredirait le canonical, et Google ignore les paires en conflit.
+    const langs = meta.alternates?.languages as Record<string, string>;
+    for (const l of LANGS) expect(langs[LANGUAGES[l].htmlLang]).toBe(buildUrl(l, tower));
+    expect(langs['x-default']).toBe(buildUrl(DEFAULT_LANG, tower));
+    // og:url = l'URL réellement partagée, donc l'étage.
+    expect(meta.openGraph?.url).toBe(buildUrl('fr', floor));
+  });
+
+  it('sans canonicalPath : la page reste sa propre canonique', () => {
+    const meta = createPageMetadata({ lang: 'en', path: '/x', title: 'T', description: 'D' });
+    expect(meta.alternates?.canonical).toBe(buildUrl('en', '/x'));
+    expect(meta.openGraph?.url).toBe(buildUrl('en', '/x'));
+  });
+
   it('mappe le hreflang sur le htmlLang (pas la clé de langue) : jp → ja, kr → ko', () => {
     const langs = createPageMetadata({ lang: 'en', path: '/x', title: 'T', description: 'D' })
       .alternates?.languages as Record<string, string>;
