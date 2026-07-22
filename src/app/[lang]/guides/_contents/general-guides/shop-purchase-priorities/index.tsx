@@ -153,6 +153,7 @@ export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang
           <img
             src={img.item(currencyIcon)}
             alt=""
+            aria-hidden
             width={16}
             height={16}
             className="inline-block"
@@ -273,6 +274,7 @@ export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang
             <img
               src={img.item(shop.currency.icon)}
               alt=""
+              aria-hidden
               width={18}
               height={18}
               className="inline-block"
@@ -326,7 +328,14 @@ export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang
     key,
     label: (
       <span className="inline-flex items-center gap-1.5">
-        <img src={img.shopIcon(key)} alt="" width={16} height={16} className="inline-block" />
+        <img
+          src={img.shopIcon(key)}
+          alt=""
+          aria-hidden
+          width={16}
+          height={16}
+          className="inline-block"
+        />
         <span>{L(label)}</span>
       </span>
     ),

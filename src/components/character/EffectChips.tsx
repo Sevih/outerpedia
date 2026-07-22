@@ -95,7 +95,12 @@ export function EffectIconTile({
       {recolor ? (
         <TintedIcon src={src} isDebuff={isDebuff} className="h-full w-full" />
       ) : (
-        <img src={src} alt="" className="absolute inset-0 h-full w-full object-contain" />
+        <img
+          src={src}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-contain"
+        />
       )}
     </span>
   );

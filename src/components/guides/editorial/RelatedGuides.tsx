@@ -61,6 +61,7 @@ export function RelatedGuides({
                 <img
                   src={img.guideIcon(guide.icon)}
                   alt=""
+                  aria-hidden
                   width={32}
                   height={32}
                   className="object-contain"

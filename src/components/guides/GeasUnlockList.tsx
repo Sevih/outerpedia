@@ -36,6 +36,7 @@ function GeasIcon({ geas, size = 44 }: { geas: GuildRaidGeas; size?: number }) {
       <img
         src={img.geasFrame(geas.grade)}
         alt=""
+        aria-hidden
         className="absolute inset-0 h-full w-full object-contain"
       />
       {geas.icon && (

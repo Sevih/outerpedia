@@ -90,6 +90,7 @@ function StageTile({ stage, spoilers }: { stage: StageCard; spoilers: boolean })
       <img
         src={stage.src}
         alt=""
+        aria-hidden
         loading="lazy"
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
       />
@@ -110,6 +111,8 @@ function StageTile({ stage, spoilers }: { stage: StageCard; spoilers: boolean })
             alt={stage.boss.name}
             loading="lazy"
             className="ring-line h-10 w-10 rounded-md object-cover ring-1 sm:h-14 sm:w-14"
+            width={40}
+            height={40}
           />
           <span className="text-content-strong hidden max-w-full truncate text-xs font-medium drop-shadow-lg sm:block">
             {stage.boss.name}

@@ -14,7 +14,7 @@ export function StarIcon({ size = 14 }: { size?: number }) {
       role="img"
       aria-label="star"
     >
-      <img src={img.star()} alt="" className="h-full w-full object-contain" />
+      <img src={img.star()} alt="" aria-hidden className="h-full w-full object-contain" />
     </span>
   );
 }

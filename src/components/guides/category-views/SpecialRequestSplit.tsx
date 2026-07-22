@@ -112,6 +112,7 @@ function BannerCard({ guide, lang, sig }: { guide: Guide; lang: Lang; sig: LootS
       <img
         src={img.guideIcon(guide.icon)}
         alt=""
+        aria-hidden
         loading="lazy"
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
       />

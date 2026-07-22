@@ -53,7 +53,14 @@ export default async function EditorEeDetail({ params }: { params: Promise<{ id:
       <EntitySwitch id={id} mode="editor" entity="ee" />
 
       <div className="flex items-center gap-3">
-        <img src={img.ee(id)} alt="" className="h-14 w-14 shrink-0 rounded object-cover" />
+        <img
+          src={img.ee(id)}
+          alt=""
+          aria-hidden
+          className="h-14 w-14 shrink-0 rounded object-cover"
+          width={56}
+          height={56}
+        />
         <div>
           <h1 className="text-content-strong text-xl font-semibold">
             {lRec(view.name, 'en') || view.name.en}

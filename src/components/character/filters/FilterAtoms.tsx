@@ -93,7 +93,7 @@ function PillSprite({ src, size }: { src: string; size: 'sm' | 'md' }) {
   const dim = size === 'sm' ? 18 : 20;
   return (
     <span className="relative block" style={{ width: dim, height: dim }}>
-      <img src={src} alt="" className="size-full object-contain" />
+      <img src={src} alt="" aria-hidden className="size-full object-contain" />
     </span>
   );
 }
@@ -185,6 +185,7 @@ export function StarPill({
           key={i}
           src={img.star()}
           alt=""
+          aria-hidden
           width={14}
           height={14}
           style={{ width: 14, height: 14 }}

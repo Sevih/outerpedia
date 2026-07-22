@@ -859,12 +859,12 @@ const fr: Record<TranslationKey, string> = {
   'footer.col.community': 'Communauté',
   'footer.col.official': 'Officiel',
   'footer.disclaimer':
-    "Outerpedia est un projet de fans non officiel. Tous les contenus liés à Outerplane, y compris les personnages, images et autres éléments du jeu, sont la propriété de VAGAMES CORP. Ce site n'est ni affilié, ni approuvé, ni sponsorisé par VAGAMES CORP de quelque manière que ce soit.",
+    "Outerpedia est un projet de fans non officiel. Tous les contenus liés à Outerplane, y compris les personnages, images et autres éléments du jeu, sont la propriété de Major9. Ce site n'est ni affilié, ni approuvé, ni sponsorisé par Major9 de quelque manière que ce soit.",
 
   // Legal page content
   'legal.heading': 'Mentions légales et avertissement | Outerpedia',
   'legal.p1':
-    "Cet avis sert de mentions légales pour Outerpedia, un projet de fans non officiel dédié au jeu Outerplane. Tous les noms, images et autres éléments utilisés sur ce site sont la propriété de VAGAMES CORP ou de leurs ayants droit respectifs. Ce site n'est ni affilié, ni approuvé, ni sponsorisé par VAGAMES CORP.",
+    "Cet avis sert de mentions légales pour Outerpedia, un projet de fans non officiel dédié au jeu Outerplane. Tous les noms, images et autres éléments utilisés sur ce site sont la propriété de Major9 ou de leurs ayants droit respectifs. Ce site n'est ni affilié, ni approuvé, ni sponsorisé par Major9.",
   'legal.p2':
     "Ce site a été créé exclusivement à des fins non commerciales, éducatives et informatives. Aucune publicité, aucun don, aucun outil de suivi ou mécanisme de monétisation n'est utilisé.",
   'legal.p3':
@@ -1160,7 +1160,7 @@ const fr: Record<TranslationKey, string> = {
   'ost.download': 'Télécharger',
   'ost.selectTrack': 'Sélectionnez une piste',
   'ost.disclaimer.line1':
-    "Ces bandes originales sont fournies à des fins personnelles et non commerciales uniquement, avec l'autorisation des développeurs (VAGames).",
+    "Ces bandes originales sont fournies à des fins personnelles et non commerciales uniquement, avec l'autorisation de l'ayant droit (Major9).",
   'ost.disclaimer.line2': 'Ce contenu peut être retiré sur demande du détenteur des droits.',
   'ost.keyboardShortcuts': 'Raccourcis clavier',
   // Wallpapers
@@ -1176,7 +1176,7 @@ const fr: Record<TranslationKey, string> = {
   'wallpapers.cat.HeroFullArt': 'Héros',
   'wallpapers.cat.Cutin': 'Cutin',
   'wallpapers.disclaimer.line1':
-    "Ces éléments sont fournis à des fins personnelles uniquement, avec l'autorisation de l'éditeur (Major9) et des développeurs (VAGames).",
+    "Ces éléments sont fournis à des fins personnelles uniquement, avec l'autorisation de l'ayant droit (Major9).",
   'wallpapers.disclaimer.line2':
     'Pour toute autre utilisation, veuillez demander la permission via',
   'wallpapers.contactLink': 'Support officiel',

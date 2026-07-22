@@ -139,7 +139,14 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
   const goldCell = (n: number): ReactNode => (
     <span className="inline-flex items-center gap-1 whitespace-nowrap">
       {goldIcon && (
-        <img src={img.item(goldIcon)} alt="" width={15} height={15} className="inline-block" />
+        <img
+          src={img.item(goldIcon)}
+          alt=""
+          aria-hidden
+          width={15}
+          height={15}
+          className="inline-block"
+        />
       )}
       {fmt(n)}
     </span>

@@ -94,8 +94,11 @@ export function MonsterSkills({
             <img
               src={skill.iconSrc ?? img.skill(skill.icon!)}
               alt=""
+              aria-hidden
               className="h-8 w-8 shrink-0 object-contain"
               loading="lazy"
+              width={32}
+              height={32}
             />
           )}
           <MonsterSkillBody skill={skill} statuses={statuses} labels={labels} lang={lang} />

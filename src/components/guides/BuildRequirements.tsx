@@ -125,7 +125,14 @@ function EntryRow({ entry, step, ctx }: { entry: RequirementEntry; step: number;
       {spd !== undefined && (
         <div className="flex w-14 shrink-0 flex-col items-center justify-center gap-0.5 self-center">
           {STAT_ICON['SPD'] && (
-            <img src={img.statIcon(STAT_ICON['SPD'])} alt="" className="h-5 w-5" />
+            <img
+              src={img.statIcon(STAT_ICON['SPD'])}
+              alt=""
+              aria-hidden
+              className="h-5 w-5"
+              width={20}
+              height={20}
+            />
           )}
           <span className="text-content-strong text-xl leading-none font-bold tabular-nums">
             {parseText(spd, ctx)}
@@ -143,7 +150,14 @@ function EntryRow({ entry, step, ctx }: { entry: RequirementEntry; step: number;
             {stats.map((s) => (
               <span key={s.key} className="inline-flex items-center gap-1 text-sm">
                 {s.abbr && STAT_ICON[s.abbr] ? (
-                  <img src={img.statIcon(STAT_ICON[s.abbr])} alt="" className="h-4 w-4" />
+                  <img
+                    src={img.statIcon(STAT_ICON[s.abbr])}
+                    alt=""
+                    aria-hidden
+                    className="h-4 w-4"
+                    width={16}
+                    height={16}
+                  />
                 ) : (
                   <span className="text-accent text-xs font-semibold tracking-wide uppercase">
                     {s.label ? t(s.label) : s.key}

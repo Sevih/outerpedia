@@ -257,6 +257,7 @@ export function QuirkTreeView({
                 <img
                   src={img.quirkNode(p.node.icon)}
                   alt=""
+                  aria-hidden
                   className="pointer-events-none select-none"
                   style={{ width: isMain ? '52%' : '60%', height: isMain ? '52%' : '60%' }}
                   draggable={false}
@@ -281,8 +282,11 @@ export function QuirkTreeView({
               <img
                 src={img.quirkNode(node.icon)}
                 alt=""
+                aria-hidden
                 className="h-3.5 w-3.5"
                 draggable={false}
+                width={14}
+                height={14}
               />
             )}
           </span>
@@ -332,14 +336,24 @@ export function QuirkTreeView({
         <div className="text-content mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
           <span className="text-content-subtle">{labels.cost}</span>
           <span className="inline-flex items-center gap-1">
-            <img src={img.gold()} alt="" className="h-4 w-4" />
+            <img src={img.gold()} alt="" aria-hidden className="h-4 w-4" width={16} height={16} />
             {cumGold.toLocaleString('en-US')}
           </span>
           {[...cumItems].map(([id, count]) => {
             const m = materials[id];
             return (
               <span key={id} className="inline-flex items-center gap-1 whitespace-nowrap">
-                {m && <img src={m.icon} alt={m.name} title={m.name} className="h-4 w-4" />}×{count}
+                {m && (
+                  <img
+                    src={m.icon}
+                    alt={m.name}
+                    title={m.name}
+                    className="h-4 w-4"
+                    width={16}
+                    height={16}
+                  />
+                )}
+                ×{count}
               </span>
             );
           })}

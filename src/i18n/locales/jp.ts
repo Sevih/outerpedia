@@ -836,12 +836,12 @@ const jp: Record<TranslationKey, string> = {
   'footer.col.community': 'コミュニティ',
   'footer.col.official': '公式',
   'footer.disclaimer':
-    'Outerpediaは非公式のファンメイドプロジェクトです。キャラクター、画像、その他のゲームアセットを含むアウタープレーンに関するすべてのコンテンツはVAGAMES CORPの所有物です。本サイトはVAGAMES CORPとの提携、承認、またはスポンサーシップを受けていません。',
+    'Outerpediaは非公式のファンメイドプロジェクトです。キャラクター、画像、その他のゲームアセットを含むアウタープレーンに関するすべてのコンテンツはMajor9の所有物です。本サイトはMajor9との提携、承認、またはスポンサーシップを受けていません。',
 
   // Legal page content
   'legal.heading': '法的通知 & 免責事項 | Outerpedia',
   'legal.p1':
-    'この通知はOuterpedia（ゲーム「Outerplane」専用の非公式ファンメイドプロジェクト）の法的免責事項です。本サイトで使用されているすべての名称、画像、その他のアセットはVAGAMES CORPまたはそれぞれの所有者の財産です。本サイトはVAGAMES CORPとの提携、承認、またはスポンサーシップを受けていません。',
+    'この通知はOuterpedia（ゲーム「Outerplane」専用の非公式ファンメイドプロジェクト）の法的免責事項です。本サイトで使用されているすべての名称、画像、その他のアセットはMajor9またはそれぞれの所有者の財産です。本サイトはMajor9との提携、承認、またはスポンサーシップを受けていません。',
   'legal.p2':
     'このウェブサイトは非営利、教育、情報提供のみを目的として作成されました。広告、寄付、トラッキングツール、または収益化の仕組みは一切使用していません。',
   'legal.p3':
@@ -1129,7 +1129,7 @@ const jp: Record<TranslationKey, string> = {
   'ost.download': 'ダウンロード',
   'ost.selectTrack': 'トラックを選択',
   'ost.disclaimer.line1':
-    'これらのサウンドトラックは開発者（VAGames）の許可を得て、個人的な非商用利用のみを目的として提供されています。',
+    'これらのサウンドトラックは権利者（Major9）の許可を得て、個人的な非商用利用のみを目的として提供されています。',
   'ost.disclaimer.line2': 'このコンテンツは権利者の要請により削除される場合があります。',
   'ost.keyboardShortcuts': 'キーボードショートカット',
   // Wallpapers
@@ -1145,7 +1145,7 @@ const jp: Record<TranslationKey, string> = {
   'wallpapers.cat.HeroFullArt': 'ヒーロー',
   'wallpapers.cat.Cutin': 'カットイン',
   'wallpapers.disclaimer.line1':
-    'これらの素材は、パブリッシャー（Major9）および開発者（VAGames）の許可を得て、個人使用目的でのみ提供されています。',
+    'これらの素材は、権利者（Major9）の許可を得て、個人使用目的でのみ提供されています。',
   'wallpapers.disclaimer.line2': 'その他の使用については、こちらからお問い合わせください：',
   'wallpapers.contactLink': '公式サポート',
   // ─── 4-Cut Comics ────────────────────────────────────────────────────────

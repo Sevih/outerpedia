@@ -154,7 +154,9 @@ export function buildSiteJsonLd(lang: Lang, description: string): JsonLdNode {
         operatingSystem: ['Android', 'iOS'],
         publisher: { '@id': ORGANIZATION_ID },
       },
-      { '@type': 'Organization', '@id': ORGANIZATION_ID, name: 'VAGAMES CORP' },
+      // Major9 a racheté l'IP Outerplane et l'équipe de dev à VA Games (oct. 2025) :
+      // c'est lui l'éditeur ET l'ayant droit depuis.
+      { '@type': 'Organization', '@id': ORGANIZATION_ID, name: 'Major9' },
       {
         '@type': 'Organization',
         '@id': PUBLISHER_ID,

@@ -210,7 +210,10 @@ export function BossStats({
                     <img
                       src={img.statIcon(label.icon)}
                       alt=""
+                      aria-hidden
                       className="h-5 w-5 shrink-0 object-contain"
+                      width={20}
+                      height={20}
                     />
                   ) : (
                     <span className="text-content w-5 shrink-0 text-center text-[10px] font-semibold">
@@ -342,8 +345,11 @@ function RankSlider({
           <img
             src={img.rankBadge(rankBadgeSprite(ctx.rank))}
             alt=""
+            aria-hidden
             draggable={false}
             className="h-7.5 w-7.5 object-contain"
+            width={30}
+            height={30}
           />
         ) : (
           ctx.stage && (

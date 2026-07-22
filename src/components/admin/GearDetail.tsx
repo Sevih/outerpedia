@@ -76,7 +76,16 @@ function PassiveList({ passives }: { passives: ReturnType<typeof resolvePassives
       {passives.map((p, i) => (
         <li key={i} className="border-line-subtle rounded-lg border p-3 text-sm">
           <p className="text-content-strong flex items-center gap-2 font-medium">
-            {p.icon && <img src={sprite(p.icon)} alt="" className="h-6 w-6 object-contain" />}
+            {p.icon && (
+              <img
+                src={sprite(p.icon)}
+                alt=""
+                aria-hidden
+                className="h-6 w-6 object-contain"
+                width={24}
+                height={24}
+              />
+            )}
             {p.name}
             <span className="text-content-subtle text-xs font-normal">
               lvl {p.level}
@@ -115,12 +124,14 @@ function Header({
             <img
               src={frame}
               alt=""
+              aria-hidden
               className="absolute inset-0 h-full w-full rounded object-cover"
             />
           )}
           <img
             src={sprite(icon)}
             alt=""
+            aria-hidden
             className="absolute inset-0 h-full w-full rounded object-contain"
           />
         </span>
@@ -296,7 +307,14 @@ export function GearDetail({ kind, id }: { kind: GearKind; id: string }) {
         <p className="flex gap-2">
           {Object.entries(s.pieceIcons).map(([slot, icon]) => (
             <span key={slot} className="text-center text-xs">
-              <img src={sprite(icon)} alt="" className="h-10 w-10 object-contain" />
+              <img
+                src={sprite(icon)}
+                alt=""
+                aria-hidden
+                className="h-10 w-10 object-contain"
+                width={40}
+                height={40}
+              />
               <span className="text-content-subtle">{slot}</span>
             </span>
           ))}

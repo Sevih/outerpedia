@@ -211,6 +211,8 @@ export function WallpapersGallery({
           <img
             src={current.src}
             alt={current.f}
+            width={current.w}
+            height={current.h}
             onClick={(e) => e.stopPropagation()}
             className="max-h-[82vh] max-w-[92vw] object-contain"
           />

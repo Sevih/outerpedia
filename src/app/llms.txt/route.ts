@@ -18,7 +18,7 @@ export function GET(): Response {
   const body = [
     '# Outerpedia',
     '',
-    '> Wiki communautaire et base de données du jeu mobile Outerplane (VAGAMES) :',
+    '> Wiki communautaire et base de données du jeu mobile Outerplane (Major9) :',
     '> personnages, compétences, équipement, tier lists et guides.',
     '',
     '## Personnages',

@@ -43,11 +43,20 @@ export function ItemInline({
   const body = (
     <span className={`${color} inline-flex items-center gap-1 align-middle`}>
       <span className="relative inline-block shrink-0" style={{ width: size, height: size }}>
-        <img src={img.slotFrame(item.grade)} alt="" className="absolute inset-0 h-full w-full" />
+        <img
+          src={img.slotFrame(item.grade)}
+          alt=""
+          aria-hidden
+          width={size}
+          height={size}
+          className="absolute inset-0 h-full w-full"
+        />
         {item.iconSrc && (
           <img
             src={item.iconSrc}
             alt={item.name}
+            width={size}
+            height={size}
             className="absolute inset-0 h-full w-full object-contain"
           />
         )}

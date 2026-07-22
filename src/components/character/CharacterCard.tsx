@@ -141,6 +141,7 @@ export function CharacterCard({
             <img
               src={img.starSlot()}
               alt=""
+              aria-hidden
               className="absolute inset-0 h-full w-full object-contain"
             />
           </div>
@@ -152,7 +153,9 @@ export function CharacterCard({
                 key={i}
                 src={img.star()}
                 alt=""
-                style={{ width: s.starSize, height: s.starSize }}
+                aria-hidden
+                width={s.starSize}
+                height={s.starSize}
               />
             ))}
           </div>

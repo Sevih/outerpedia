@@ -16,11 +16,21 @@ const inline = (o: ItemOption) => ({
 function Tile({ o }: { o: ItemOption }) {
   return (
     <span className="relative inline-block shrink-0" style={{ width: 18, height: 18 }}>
-      <img src={img.slotFrame(o.grade)} alt="" className="absolute inset-0 h-full w-full" />
+      <img
+        src={img.slotFrame(o.grade)}
+        alt=""
+        aria-hidden
+        width={18}
+        height={18}
+        className="absolute inset-0 h-full w-full"
+      />
       {o.icon && (
         <img
           src={img.item(o.icon)}
           alt=""
+          aria-hidden
+          width={18}
+          height={18}
           className="absolute inset-0 h-full w-full object-contain"
         />
       )}

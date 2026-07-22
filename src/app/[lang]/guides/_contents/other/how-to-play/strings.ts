@@ -248,12 +248,14 @@ export const S = {
     zh: '官网',
     fr: 'Site officiel',
   },
+  // Libellé volontairement neutre : le site officiel a déjà changé de main une
+  // fois (VAGames → Major9), inutile d'y recâbler un nom d'éditeur.
   sidebarOfficialBtn: {
-    en: 'Visit VAGAMES Website',
-    jp: 'VAGAMESサイトへ',
-    kr: 'VAGAMES 웹사이트 방문',
-    zh: '访问VAGAMES网站',
-    fr: 'Visiter le site de VAGAMES',
+    en: 'Visit the Official Website',
+    jp: '公式サイトへ',
+    kr: '공식 웹사이트 방문',
+    zh: '访问官方网站',
+    fr: 'Visiter le site officiel',
   },
   sidebarCommunity: {
     en: 'Join the Community',

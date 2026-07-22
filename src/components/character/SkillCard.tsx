@@ -148,7 +148,12 @@ export function SkillCard({
           </div>
           {skill.burst && (
             <div className="absolute -top-1 -right-1 h-5 w-5">
-              <img src={img.burstBadge()} alt="" className="h-full w-full object-contain" />
+              <img
+                src={img.burstBadge()}
+                alt=""
+                aria-hidden
+                className="h-full w-full object-contain"
+              />
             </div>
           )}
         </div>

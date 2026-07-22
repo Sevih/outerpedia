@@ -178,6 +178,8 @@ export async function BossCard({
             src={monsterIconSrc(monster)}
             alt={name}
             className="border-line-subtle h-16 w-16 rounded-lg border object-cover"
+            width={64}
+            height={64}
           />
           <div>
             <div className="flex flex-wrap items-center gap-2">
@@ -192,8 +194,20 @@ export async function BossCard({
               )}
             </div>
             <div className="mt-1 flex items-center gap-2">
-              <img src={img.element(monster.element)} alt={monster.element} className="h-5 w-5" />
-              <img src={img.klass(monster.class)} alt={monster.class} className="h-5 w-5" />
+              <img
+                src={img.element(monster.element)}
+                alt={monster.element}
+                className="h-5 w-5"
+                width={20}
+                height={20}
+              />
+              <img
+                src={img.klass(monster.class)}
+                alt={monster.class}
+                className="h-5 w-5"
+                width={20}
+                height={20}
+              />
               <BossLevel label={t('page.character.skill.level')} />
             </div>
           </div>
@@ -284,6 +298,8 @@ export async function BossCard({
                         src={skill.iconSrc ?? img.skill(skill.icon!)}
                         alt={skill.name}
                         className="h-9 w-9 rounded object-contain"
+                        width={36}
+                        height={36}
                       />
                     ) : (
                       skill.name

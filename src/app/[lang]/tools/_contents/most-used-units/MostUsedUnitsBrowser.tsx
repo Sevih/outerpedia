@@ -243,11 +243,17 @@ export function MostUsedUnitsBrowser({
                   </span>
                   <div className="mt-0.5 flex items-center gap-2">
                     <span className="text-content-muted flex items-center gap-1 text-xs">
-                      <img src={img.element(row.element)} alt="" width={16} height={16} />
+                      <img
+                        src={img.element(row.element)}
+                        alt=""
+                        aria-hidden
+                        width={16}
+                        height={16}
+                      />
                       {labels.elements[row.element] ?? row.element}
                     </span>
                     <span className="text-content-muted flex items-center gap-1 text-xs">
-                      <img src={img.klass(row.class)} alt="" width={16} height={16} />
+                      <img src={img.klass(row.class)} alt="" aria-hidden width={16} height={16} />
                       {labels.classes[row.class] ?? row.class}
                     </span>
                   </div>

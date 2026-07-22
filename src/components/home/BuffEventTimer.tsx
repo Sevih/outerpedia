@@ -153,7 +153,10 @@ export function BuffEventTimer({
                 <img
                   src={img.buff(BUFF_ICON[e.type])}
                   alt=""
+                  aria-hidden
                   className="size-5 shrink-0 object-contain"
+                  width={20}
+                  height={20}
                 />
               ) : (
                 <span

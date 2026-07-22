@@ -131,6 +131,7 @@ export function EffectCuratedEditor({
                 <img
                   src={img.effect(icon.trim())}
                   alt=""
+                  aria-hidden
                   className="absolute inset-0 h-full w-full object-contain"
                 />
               </span>

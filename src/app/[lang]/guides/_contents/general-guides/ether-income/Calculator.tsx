@@ -92,7 +92,7 @@ function EtherAmount({ value, icon }: { value: number; icon: string }) {
   return (
     <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap">
       <span className="text-content-strong text-xs font-semibold tabular-nums">{fmt(value)}</span>
-      <img src={icon} alt="Ether" className="h-4 w-4 object-contain" />
+      <img src={icon} alt="Ether" className="h-4 w-4 object-contain" width={16} height={16} />
     </span>
   );
 }

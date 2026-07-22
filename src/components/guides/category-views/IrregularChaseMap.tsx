@@ -130,6 +130,7 @@ function BossPin({ guide, lang, t }: { guide: Guide; lang: Lang; t: TFunction })
           <img
             src={img.slotFrame('unique')}
             alt=""
+            aria-hidden
             className="absolute inset-0 h-full w-full object-contain"
           />
           <img
@@ -176,6 +177,7 @@ function VariantIcon({ variant: v }: { variant: LootVariant }) {
       <img
         src={img.slotFrame(v.grade)}
         alt=""
+        aria-hidden
         className="absolute inset-0 h-full w-full object-contain"
       />
       <img src={v.iconSrc} alt={v.name} className="absolute inset-0 h-full w-full object-contain" />

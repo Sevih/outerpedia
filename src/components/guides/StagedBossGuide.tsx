@@ -104,7 +104,14 @@ function StageLootIcons({
           }
         >
           <button type="button" className="cursor-default align-middle">
-            <img src={s.iconSrc} alt={s.name} className="h-8 w-8 object-contain" loading="lazy" />
+            <img
+              src={s.iconSrc}
+              alt={s.name}
+              className="h-8 w-8 object-contain"
+              loading="lazy"
+              width={32}
+              height={32}
+            />
           </button>
         </InlineTooltip>
       ))}

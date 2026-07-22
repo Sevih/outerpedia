@@ -826,12 +826,12 @@ const kr: Record<TranslationKey, string> = {
   'footer.col.community': '커뮤니티',
   'footer.col.official': '공식',
   'footer.disclaimer':
-    'Outerpedia는 비공식 팬메이드 프로젝트입니다. 캐릭터, 이미지 및 기타 게임 에셋을 포함한 아우터플레인 관련 모든 콘텐츠는 VAGAMES CORP의 재산입니다. 이 웹사이트는 VAGAMES CORP와 어떠한 제휴, 보증 또는 후원 관계도 없습니다.',
+    'Outerpedia는 비공식 팬메이드 프로젝트입니다. 캐릭터, 이미지 및 기타 게임 에셋을 포함한 아우터플레인 관련 모든 콘텐츠는 Major9의 재산입니다. 이 웹사이트는 Major9와 어떠한 제휴, 보증 또는 후원 관계도 없습니다.',
 
   // Legal page content
   'legal.heading': '법적 고지 & 면책 조항 | Outerpedia',
   'legal.p1':
-    '이 고지는 Outerpedia(게임 Outerplane 전용 비공식 팬메이드 프로젝트)의 법적 면책 조항입니다. 본 사이트에서 사용된 모든 이름, 이미지 및 기타 자산은 VAGAMES CORP 또는 각 소유자의 재산입니다. 본 사이트는 VAGAMES CORP와 어떠한 제휴, 보증 또는 후원 관계도 없습니다.',
+    '이 고지는 Outerpedia(게임 Outerplane 전용 비공식 팬메이드 프로젝트)의 법적 면책 조항입니다. 본 사이트에서 사용된 모든 이름, 이미지 및 기타 자산은 Major9 또는 각 소유자의 재산입니다. 본 사이트는 Major9와 어떠한 제휴, 보증 또는 후원 관계도 없습니다.',
   'legal.p2':
     '이 웹사이트는 비영리, 교육 및 정보 제공 목적으로만 제작되었습니다. 광고, 기부, 추적 도구 또는 수익화 메커니즘은 사용되지 않습니다.',
   'legal.p3':
@@ -1115,7 +1115,7 @@ const kr: Record<TranslationKey, string> = {
   'ost.download': '다운로드',
   'ost.selectTrack': '트랙을 선택하세요',
   'ost.disclaimer.line1':
-    '이 사운드트랙은 개발자(VAGames)의 승인을 받아 개인적, 비상업적 용도로만 제공됩니다.',
+    '이 사운드트랙은 권리자(Major9)의 승인을 받아 개인적, 비상업적 용도로만 제공됩니다.',
   'ost.disclaimer.line2': '이 콘텐츠는 권리자의 요청에 따라 삭제될 수 있습니다.',
   'ost.keyboardShortcuts': '키보드 단축키',
   // Wallpapers
@@ -1131,7 +1131,7 @@ const kr: Record<TranslationKey, string> = {
   'wallpapers.cat.HeroFullArt': '영웅',
   'wallpapers.cat.Cutin': '컷인',
   'wallpapers.disclaimer.line1':
-    '이 자료는 퍼블리셔(Major9)와 개발사(VAGames)의 승인을 받아 개인 사용 목적으로만 제공됩니다.',
+    '이 자료는 권리자(Major9)의 승인을 받아 개인 사용 목적으로만 제공됩니다.',
   'wallpapers.disclaimer.line2': '기타 용도는 공식 지원을 통해 허가를 요청해 주세요:',
   'wallpapers.contactLink': '공식 지원',
   // ─── 4-Cut Comics ────────────────────────────────────────────────────────

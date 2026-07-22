@@ -231,7 +231,7 @@ export function TierListBrowser({
               >
                 <span className="flex items-center -space-x-1">
                   {Array.from({ length: lvl }, (_, i) => (
-                    <img key={i} src={img.star()} alt="" width={16} height={16} />
+                    <img key={i} src={img.star()} alt="" aria-hidden width={16} height={16} />
                   ))}
                 </span>
               </FilterPill>
@@ -257,6 +257,8 @@ export function TierListBrowser({
                     src={img.rank(tier)}
                     alt={`Tier ${tier}`}
                     className="size-12 object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] md:size-14"
+                    width={48}
+                    height={48}
                   />
                 </div>
 

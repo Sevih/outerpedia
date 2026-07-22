@@ -143,6 +143,7 @@ export default function TimegateResourceGuide({ lang }: { lang: Lang }) {
           <img
             src={img.item(tab.items[0].icon)}
             alt=""
+            aria-hidden
             width={18}
             height={18}
             className="inline-block"

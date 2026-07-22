@@ -66,7 +66,9 @@ export async function OverviewSection(p: OverviewProps) {
           <div className="flex flex-wrap items-center gap-2">
             {p.unitTag && (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1 text-sm ring-1 ring-white/10">
-                {p.unitTag.iconSrc && <img src={p.unitTag.iconSrc} alt="" width={16} height={16} />}
+                {p.unitTag.iconSrc && (
+                  <img src={p.unitTag.iconSrc} alt="" aria-hidden width={16} height={16} />
+                )}
                 {p.unitTag.label}
               </span>
             )}

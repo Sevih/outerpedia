@@ -115,6 +115,8 @@ export function HeaderClient({
           <img
             src="/favicon.ico"
             alt="Outerpedia"
+            width={28}
+            height={28}
             className={`object-contain transition-[width,height] ${scrolled ? 'h-6 w-6' : 'h-7 w-7'}`}
           />
           <span

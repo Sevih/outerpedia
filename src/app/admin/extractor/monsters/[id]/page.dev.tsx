@@ -146,11 +146,13 @@ export default async function ExtractorMonsterPage({
             <img
               src={monsterSlotSrc(m.type)}
               alt=""
+              aria-hidden
               className="absolute inset-0 h-full w-full rounded object-cover"
             />
             <img
               src={monsterIconSrc(m.icon)}
               alt=""
+              aria-hidden
               className="absolute inset-[7%] h-[86%] w-[86%] rounded object-cover"
             />
             {monsterBossBadgeSrc(m.type) && (
@@ -175,8 +177,17 @@ export default async function ExtractorMonsterPage({
             alt={m.element}
             title={m.element}
             className="h-4.5 w-4.5"
+            width={18}
+            height={18}
           />
-          <img src={img.klass(m.class)} alt={m.class} title={m.class} className="h-4.5 w-4.5" />
+          <img
+            src={img.klass(m.class)}
+            alt={m.class}
+            title={m.class}
+            className="h-4.5 w-4.5"
+            width={18}
+            height={18}
+          />
           {m.subClass ? `/ ${m.subClass}` : ''} · {m.race} · {m.rarity}★
           {m.aiType ? ` · AI ${m.aiType}` : ''}
           {review.status === 'removed' && (

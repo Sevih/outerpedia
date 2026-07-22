@@ -48,18 +48,24 @@ export function EquipmentIcon({
       <img
         src={img.slotFrame(ascended ? 'singularity' : grade)}
         alt=""
+        aria-hidden
+        width={size}
+        height={size}
         className="absolute inset-0 h-full w-full"
       />
       <img
         src={src ?? img.equipment(icon ?? '')}
         alt={alt}
         loading="lazy"
+        width={size}
+        height={size}
         className="absolute inset-0 h-full w-full object-contain p-[6%]"
       />
       {overlayIcon && (
         <img
           src={img.equipment(overlayIcon)}
           alt=""
+          aria-hidden
           className="absolute top-[2%] right-[2%] h-[26%] w-[26%]"
         />
       )}
@@ -100,7 +106,10 @@ export function EquipmentIcon({
               key={i}
               src={ascended ? img.starSingularity() : img.star()}
               alt=""
-              style={{ width: starSize, height: starSize, marginLeft: i ? -starSize * 0.3 : 0 }}
+              aria-hidden
+              width={starSize}
+              height={starSize}
+              style={{ marginLeft: i ? -starSize * 0.3 : 0 }}
             />
           ))}
         </div>

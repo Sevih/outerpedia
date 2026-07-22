@@ -94,7 +94,14 @@ export function VideoCurator({
               key={v.id}
               className="border-line-subtle flex items-center gap-3 rounded-md border p-2"
             >
-              <img src={thumb(v.id)} alt="" className="h-9 w-16 rounded object-cover" />
+              <img
+                src={thumb(v.id)}
+                alt=""
+                aria-hidden
+                className="h-9 w-16 rounded object-cover"
+                width={64}
+                height={36}
+              />
               <div className="min-w-0 flex-1">
                 <p className="text-content truncate text-sm">{v.title ?? v.id}</p>
                 <p className="text-content-subtle truncate text-xs">
@@ -140,7 +147,10 @@ export function VideoCurator({
               <img
                 src={c.thumbnail ?? thumb(c.id)}
                 alt=""
+                aria-hidden
                 className="h-9 w-16 rounded object-cover"
+                width={64}
+                height={36}
               />
               <div className="min-w-0 flex-1">
                 <p className="text-content truncate text-sm">{c.title}</p>

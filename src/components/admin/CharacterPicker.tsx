@@ -43,7 +43,14 @@ export function CharacterPicker({
         opts.filter((o) => o.name.toLowerCase().includes(q.toLowerCase())).slice(0, 20)
       }
       renderIcon={(o) => (
-        <img src={img.face(o.id)} alt="" className="h-6 w-6 shrink-0 rounded object-cover" />
+        <img
+          src={img.face(o.id)}
+          alt=""
+          aria-hidden
+          className="h-6 w-6 shrink-0 rounded object-cover"
+          width={24}
+          height={24}
+        />
       )}
       renderSelected={(o) =>
         compact ? (
@@ -51,7 +58,10 @@ export function CharacterPicker({
             <img
               src={img.face(id)}
               alt=""
+              aria-hidden
               className="border-line-subtle h-9 w-9 shrink-0 rounded-lg border object-cover"
+              width={36}
+              height={36}
             />
             <span className="text-content min-w-0 truncate text-sm">{o?.name || name || id}</span>
           </span>
@@ -70,6 +80,8 @@ export function CharacterPicker({
               src={img.face(id)}
               alt={name || id}
               className="border-line-subtle h-11 w-11 rounded-lg border object-cover"
+              width={44}
+              height={44}
             />
             <span className="text-content-subtle max-w-24 truncate text-xs">{name || id}</span>
           </span>

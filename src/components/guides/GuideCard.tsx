@@ -33,8 +33,11 @@ export function GuideCard({
       <img
         src={iconSrc ?? img.guideIcon(guide.icon)}
         alt=""
+        aria-hidden
         className="h-12 w-12 shrink-0 object-contain p-1"
         loading="lazy"
+        width={48}
+        height={48}
       />
       <div className="min-w-0">
         {/* `static pb-0 after:hidden` : neutralise le trait de titre global. */}

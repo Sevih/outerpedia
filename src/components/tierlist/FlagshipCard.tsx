@@ -61,7 +61,10 @@ export function FlagshipCard({
             <img
               src={img.rank('S')}
               alt=""
+              aria-hidden
               className="size-28 object-contain opacity-70 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]"
+              width={112}
+              height={112}
             />
           </div>
         ) : (
@@ -74,7 +77,10 @@ export function FlagshipCard({
               <img
                 src={img.rank('S')}
                 alt=""
+                aria-hidden
                 className="size-24 object-contain opacity-60 drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] md:size-28"
+                width={96}
+                height={96}
               />
             </div>
 

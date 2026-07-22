@@ -31,6 +31,7 @@ export function ToolCard({ tool, comingSoonLabel }: { tool: ToolCardVM; comingSo
         <img
           src={img.toolIcon(tool.icon)}
           alt=""
+          aria-hidden
           className={`absolute inset-0 size-full object-contain p-1 ${isDim ? 'opacity-60' : ''}`}
         />
       </div>

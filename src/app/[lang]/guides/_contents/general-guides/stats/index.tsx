@@ -161,7 +161,10 @@ export default async function StatsGuide({ lang }: { lang: Lang }) {
     <img
       src={effect ? img.effect(sprite) : img.combatIcon(sprite)}
       alt=""
+      aria-hidden
       className="inline-block h-5 w-5 align-text-bottom"
+      width={20}
+      height={20}
     />
   );
 

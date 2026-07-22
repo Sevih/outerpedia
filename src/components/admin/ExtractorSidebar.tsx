@@ -237,6 +237,7 @@ export function ExtractorSidebar({
                       <img
                         src={r.iconFrame}
                         alt=""
+                        aria-hidden
                         loading="lazy"
                         className="absolute inset-0 h-full w-full rounded object-cover"
                       />
@@ -244,6 +245,7 @@ export function ExtractorSidebar({
                     <img
                       src={r.icon}
                       alt=""
+                      aria-hidden
                       loading="lazy"
                       className={`absolute rounded object-contain ${r.iconInset ? 'inset-[7%] h-[86%] w-[86%]' : 'inset-0 h-full w-full'}`}
                       onError={(e) => {
@@ -254,6 +256,7 @@ export function ExtractorSidebar({
                       <img
                         src={r.elementIcon}
                         alt=""
+                        aria-hidden
                         loading="lazy"
                         className="absolute -top-1 -right-1 h-[42%] w-[42%] drop-shadow-md"
                       />
@@ -262,6 +265,7 @@ export function ExtractorSidebar({
                       <img
                         src={r.classIcon}
                         alt=""
+                        aria-hidden
                         loading="lazy"
                         className="absolute top-[42%] -right-0.5 h-[32%] w-[32%] drop-shadow-md"
                       />

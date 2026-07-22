@@ -35,6 +35,7 @@ export function HeroReviewCard({
           <img
             src={img.atb(character.id)}
             alt=""
+            aria-hidden
             width={40}
             height={40}
             className="h-10 w-10 rounded-lg object-contain"
@@ -49,18 +50,30 @@ export function HeroReviewCard({
           ) : (
             name
           )}
-          {tag && <img src={img.tag(tag)} alt={tag} className="h-9 w-9 object-contain" />}
+          {tag && (
+            <img
+              src={img.tag(tag)}
+              alt={tag}
+              className="h-9 w-9 object-contain"
+              width={36}
+              height={36}
+            />
+          )}
         </h3>
         <div className="flex items-center gap-1.5">
           <img
             src={img.element(character.element)}
             alt={character.element}
             className="h-6 w-6 drop-shadow-md"
+            width={24}
+            height={24}
           />
           <img
             src={img.klass(character.class)}
             alt={character.class}
             className="h-6 w-6 drop-shadow-md"
+            width={24}
+            height={24}
           />
         </div>
       </header>

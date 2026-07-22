@@ -45,6 +45,7 @@ export function TurnOrder({
                 <img
                   src={img.atb(c.id)}
                   alt=""
+                  aria-hidden
                   width={32}
                   height={32}
                   className="h-8 w-8 shrink-0 rounded object-contain"

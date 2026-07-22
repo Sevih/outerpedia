@@ -175,7 +175,14 @@ function EquipStatChip({ statKey, label }: { statKey: string; label?: string }) 
   return (
     <span className="text-content-strong inline-flex min-w-0 items-center gap-1.5 text-sm font-bold">
       {STAT_ICON[statKey] && (
-        <img src={img.statIcon(STAT_ICON[statKey])} alt="" className="h-4 w-4 shrink-0" />
+        <img
+          src={img.statIcon(STAT_ICON[statKey])}
+          alt=""
+          aria-hidden
+          className="h-4 w-4 shrink-0"
+          width={16}
+          height={16}
+        />
       )}
       <span className="truncate">{label ?? statKey}</span>
     </span>
@@ -535,7 +542,13 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
                   ([label, rank]) =>
                     rank && (
                       <div key={label} className="flex items-center gap-2">
-                        <img src={img.rank(rank)} alt={rank} className="h-8 w-8" />
+                        <img
+                          src={img.rank(rank)}
+                          alt={rank}
+                          className="h-8 w-8"
+                          width={32}
+                          height={32}
+                        />
                         <span className="text-content-muted text-xs uppercase">{label}</span>
                       </div>
                     ),
@@ -757,7 +770,10 @@ function SourceDetail({ source }: { source: NonNullable<DetailModel['source']> }
           <img
             src={img.boss(`MT_${b.icon}`)}
             alt=""
+            aria-hidden
             className="border-line-subtle h-10 w-10 rounded-lg border object-cover"
+            width={40}
+            height={40}
           />
           <div className="min-w-0">
             <div className="text-content-strong text-sm font-semibold">{b.name}</div>
@@ -803,7 +819,7 @@ function AxActivationBand({ asc, labels }: { asc: AscView; labels: DetailLabels 
           <span className="text-stat-accent font-mono font-bold">
             {asc.activation.price.toLocaleString('en')}
           </span>
-          <img src={img.gold()} alt="Gold" className="h-4.5 w-4.5" />
+          <img src={img.gold()} alt="Gold" className="h-4.5 w-4.5" width={18} height={18} />
         </span>
         {asc.activation.materials.map((m) => (
           <span key={m.icon} className="inline-flex items-center gap-1.5">
@@ -833,7 +849,13 @@ function AxStepsCard({ asc, labels }: { asc: AscView; labels: DetailLabels }) {
               {labels.step}
             </th>
             <th className="pb-1.5 pl-2 text-right text-xs whitespace-nowrap">
-              <img src={img.gold()} alt="Gold" className="inline h-4.5 w-4.5" />
+              <img
+                src={img.gold()}
+                alt="Gold"
+                className="inline h-4.5 w-4.5"
+                width={18}
+                height={18}
+              />
             </th>
             {headMats.map((m) => (
               <th key={m.icon} className="pb-1.5 pl-2 text-right text-xs whitespace-nowrap">
@@ -1062,7 +1084,13 @@ function PassiveModules({
             >
               {p.classLimit && (
                 <div className="mb-1 flex items-center gap-1.5">
-                  <img src={img.klass(p.classLimit)} alt={p.classLimit} className="h-4 w-4" />
+                  <img
+                    src={img.klass(p.classLimit)}
+                    alt={p.classLimit}
+                    className="h-4 w-4"
+                    width={16}
+                    height={16}
+                  />
                   <span className="text-content-strong text-xs font-semibold">{p.name}</span>
                 </div>
               )}

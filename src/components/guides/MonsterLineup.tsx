@@ -110,8 +110,11 @@ function CompactRoster({ items, label }: { items: LineupItem[]; label: string })
             <img
               src={item.iconSrc}
               alt=""
+              aria-hidden
               className="h-6 w-6 shrink-0 rounded object-cover"
               loading="lazy"
+              width={24}
+              height={24}
             />
             <span className="max-w-40 truncate">{item.name}</span>
           </button>

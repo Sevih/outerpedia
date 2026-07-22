@@ -94,7 +94,14 @@ export default async function GuideCategoryPage({
       </nav>
       {/* En-tête (icône + titre) centré, comme les autres pages de liste. */}
       <div className="flex items-center justify-center gap-4">
-        <img src={img.guideIcon(cat.icon)} alt="" className="h-12 w-12 object-contain" />
+        <img
+          src={img.guideIcon(cat.icon)}
+          alt=""
+          aria-hidden
+          className="h-12 w-12 object-contain"
+          width={48}
+          height={48}
+        />
         <div>
           <h1 className="text-content-strong text-2xl font-bold">{label}</h1>
           <p className="text-content-muted text-sm">{lRec(cat.desc, lang)}</p>

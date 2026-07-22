@@ -44,7 +44,14 @@ export function CharacterVisual({ char, tags }: { char: Character; tags?: string
         <div className="text-content-muted flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
           {char.subClass && (
             <span className="inline-flex items-center gap-1.5">
-              <img src={img.subClass(char.subClass)} alt="" className="h-5 w-5" />
+              <img
+                src={img.subClass(char.subClass)}
+                alt=""
+                aria-hidden
+                className="h-5 w-5"
+                width={20}
+                height={20}
+              />
               {char.subClass}
             </span>
           )}

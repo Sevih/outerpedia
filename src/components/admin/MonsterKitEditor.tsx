@@ -246,10 +246,13 @@ export function MonsterKitEditor({
                 <img
                   src={s.iconSrc}
                   alt=""
+                  aria-hidden
                   className="h-10 w-10 shrink-0 rounded object-contain"
                   onError={(e) => {
                     e.currentTarget.style.visibility = 'hidden';
                   }}
+                  width={40}
+                  height={40}
                 />
               )}
               <div className="min-w-0">

@@ -845,12 +845,12 @@ const en = {
   'footer.col.community': 'Community',
   'footer.col.official': 'Official',
   'footer.disclaimer':
-    'Outerpedia is an unofficial fan-made project. All content related to Outerplane, including characters, images, and other game assets, is the property of VAGAMES CORP. This website is not affiliated with, endorsed by, or sponsored by VAGAMES CORP in any way.',
+    'Outerpedia is an unofficial fan-made project. All content related to Outerplane, including characters, images, and other game assets, is the property of Major9. This website is not affiliated with, endorsed by, or sponsored by Major9 in any way.',
 
   // Legal page content
   'legal.heading': 'Legal Notice & Disclaimer | Outerpedia',
   'legal.p1':
-    'This notice serves as a legal disclaimer for Outerpedia, an unofficial, fan-made project dedicated to the game Outerplane. All names, images, and other assets used on this site are the property of VAGAMES CORP or their respective owners. This site is not affiliated with, endorsed by, or sponsored by VAGAMES CORP.',
+    'This notice serves as a legal disclaimer for Outerpedia, an unofficial, fan-made project dedicated to the game Outerplane. All names, images, and other assets used on this site are the property of Major9 or their respective owners. This site is not affiliated with, endorsed by, or sponsored by Major9.',
   'legal.p2':
     'This website was created strictly for non-commercial, educational, and informational purposes. No advertisements, donations, tracking tools, or monetization mechanisms are used.',
   'legal.p3':
@@ -1145,7 +1145,7 @@ const en = {
   'ost.download': 'Download',
   'ost.selectTrack': 'Select a track',
   'ost.disclaimer.line1':
-    'These soundtracks are provided for personal, non-commercial use only, with approval from the developers (VAGames).',
+    'These soundtracks are provided for personal, non-commercial use only, with approval from the rightsholder (Major9).',
   'ost.disclaimer.line2': 'This content may be removed upon request from the rights holder.',
   'ost.keyboardShortcuts': 'Keyboard shortcuts',
   // Wallpapers
@@ -1161,7 +1161,7 @@ const en = {
   'wallpapers.cat.HeroFullArt': 'Heroes',
   'wallpapers.cat.Cutin': 'Cutin',
   'wallpapers.disclaimer.line1':
-    'These assets are provided for personal use only, with approval from the publisher (Major9) and developers (VAGames).',
+    'These assets are provided for personal use only, with approval from the rightsholder (Major9).',
   'wallpapers.disclaimer.line2': 'For any other use, please request permission via',
   'wallpapers.contactLink': 'Official Support',
   // ─── 4-Cut Comics ────────────────────────────────────────────────────────

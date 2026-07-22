@@ -73,7 +73,10 @@ export function PropertyDiagram({
               key={i}
               src={img.transcendStar(i < 3 ? STAR_SPRITE.orange : STAR_SPRITE.yellow)}
               alt=""
-              style={{ width: 20, height: 20, marginLeft: i ? -6 : 0 }}
+              aria-hidden
+              width={20}
+              height={20}
+              style={{ marginLeft: i ? -6 : 0 }}
             />
           ))}
         </div>

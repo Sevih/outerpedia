@@ -429,6 +429,7 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
                       <img
                         src={img.monad('CM_Monad_Node_Circle')}
                         alt=""
+                        aria-hidden
                         width={COMPACT_NODE_SIZE}
                         height={COMPACT_NODE_SIZE}
                         className="absolute"
@@ -456,6 +457,7 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
                       <img
                         src={img.monad('CM_Monad_Box_Line')}
                         alt=""
+                        aria-hidden
                         className="pointer-events-none absolute inset-0 z-0 h-full w-full object-contain"
                         style={{ filter: style.filter }}
                       />
@@ -463,6 +465,7 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
                         <img
                           src={img.monad('CM_Monad_Node_Circle')}
                           alt=""
+                          aria-hidden
                           width={48}
                           height={48}
                           className="absolute"

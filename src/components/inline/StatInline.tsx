@@ -22,7 +22,14 @@ export function StatInline({
     <span className={`inline-flex items-center gap-1 align-middle ${color}`}>
       {iconSrc && (
         <span className="relative inline-block shrink-0" style={{ width: size, height: size }}>
-          <img src={iconSrc} alt="" className="absolute inset-0 h-full w-full object-contain" />
+          <img
+            src={iconSrc}
+            alt=""
+            aria-hidden
+            width={size}
+            height={size}
+            className="absolute inset-0 h-full w-full object-contain"
+          />
         </span>
       )}
       {name}

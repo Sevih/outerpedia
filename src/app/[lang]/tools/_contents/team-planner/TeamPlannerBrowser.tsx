@@ -246,6 +246,7 @@ function ChainEffectIcons({
             <img
               src={img.skillchain(bg)}
               alt=""
+              aria-hidden
               className="absolute inset-0 h-full w-full object-contain"
             />
             {e.icon && (
@@ -393,7 +394,7 @@ function CharPicker({
                 onClick={() => setElement((v) => (v === el ? null : el))}
                 className={filterBtn(element === el)}
               >
-                <img src={img.element(el)} alt={el} className="h-5 w-5" />
+                <img src={img.element(el)} alt={el} className="h-5 w-5" width={20} height={20} />
               </button>
             ))}
           </div>
@@ -406,7 +407,7 @@ function CharPicker({
                 onClick={() => setCls((v) => (v === k ? null : k))}
                 className={filterBtn(cls === k)}
               >
-                <img src={img.klass(k)} alt={k} className="h-5 w-5" />
+                <img src={img.klass(k)} alt={k} className="h-5 w-5" width={20} height={20} />
               </button>
             ))}
           </div>
@@ -604,7 +605,10 @@ export function TeamPlannerBrowser({ chars, fx, statuses, labels: L }: Props) {
           <img
             src={img.skillchain('T_Tame_Select')}
             alt=""
+            aria-hidden
             className="h-52 w-52 object-contain opacity-30 sm:h-64 sm:w-64"
+            width={208}
+            height={208}
           />
         </div>
         <div className="relative grid grid-cols-3 grid-rows-3 place-items-center gap-5 p-4 sm:gap-6">
@@ -661,6 +665,7 @@ export function TeamPlannerBrowser({ chars, fx, statuses, labels: L }: Props) {
                   <img
                     src={img.skillchain('T_FX_SkillChain_Mask')}
                     alt=""
+                    aria-hidden
                     className="absolute inset-0 h-full w-full object-contain opacity-20"
                   />
                   <span className="absolute inset-0 z-10 overflow-hidden rounded-lg">

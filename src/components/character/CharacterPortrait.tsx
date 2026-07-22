@@ -41,6 +41,8 @@ export function CharacterPortrait({
           src={img.face(id)}
           alt={name}
           loading="lazy"
+          width={size}
+          height={size}
           className="border-line-subtle h-full w-full rounded-lg border object-cover"
         />
         {element && (
@@ -68,8 +70,11 @@ export function CharacterPortrait({
                 key={i}
                 src={img.star()}
                 alt=""
+                aria-hidden
+                width={starSize}
+                height={starSize}
                 className="drop-shadow-md"
-                style={{ width: starSize, height: starSize, marginLeft: i ? -starSize * 0.25 : 0 }}
+                style={{ marginLeft: i ? -starSize * 0.25 : 0 }}
               />
             ))}
           </span>

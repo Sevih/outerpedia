@@ -55,6 +55,7 @@ export function OtherRankingsRail({
               <img
                 src={img.toolIcon(tool.icon)}
                 alt=""
+                aria-hidden
                 className="absolute inset-0 size-full object-contain p-1"
               />
             </div>

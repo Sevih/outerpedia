@@ -178,7 +178,7 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
         ? img.effect(team.icon)
         : undefined;
     if (!src) return undefined;
-    return <img src={src} alt="" width={20} height={20} className="h-5 w-5 shrink-0" />;
+    return <img src={src} alt="" aria-hidden width={20} height={20} className="h-5 w-5 shrink-0" />;
   };
 
   /** Colonne de geas (portrait + nom + table de déblocage) d'un sous-boss. */
@@ -205,6 +205,7 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
             <img
               src={monsterIconSrc(m)}
               alt=""
+              aria-hidden
               width={28}
               height={28}
               className="h-7 w-7 shrink-0 rounded"
@@ -214,6 +215,7 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
               <img
                 src={img.element(m.element)}
                 alt=""
+                aria-hidden
                 width={16}
                 height={16}
                 className="h-4 w-4 shrink-0"

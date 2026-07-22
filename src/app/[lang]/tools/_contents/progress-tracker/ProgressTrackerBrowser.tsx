@@ -740,6 +740,7 @@ function ActionButton({
       <img
         src={icon}
         alt=""
+        aria-hidden
         width={32}
         height={32}
         className="size-8 object-contain transition-transform group-hover:scale-110"
@@ -934,7 +935,7 @@ function TaskLabel({
         </span>
       )}
       {item?.icon && (
-        <img src={item.icon} alt="" width={18} height={18} className="object-contain" />
+        <img src={item.icon} alt="" aria-hidden width={18} height={18} className="object-contain" />
       )}
       <span>{item?.name ?? def.shopItemKey}</span>
     </span>
@@ -1206,6 +1207,7 @@ function TaskList({
                   <img
                     src={assets.navCraft}
                     alt=""
+                    aria-hidden
                     width={18}
                     height={18}
                     className="object-contain"
@@ -1248,6 +1250,7 @@ function TaskList({
                             <img
                               src={assets.shopIcons[subKey]}
                               alt=""
+                              aria-hidden
                               width={16}
                               height={16}
                               className="object-contain"
@@ -1265,6 +1268,7 @@ function TaskList({
                                   <img
                                     src={assets.shopIcons[tabKey]}
                                     alt=""
+                                    aria-hidden
                                     width={14}
                                     height={14}
                                     className="object-contain"
@@ -1309,7 +1313,14 @@ function PreciseCraftSection({
   return (
     <div className="mt-6">
       <div className="mb-3 flex items-center gap-2">
-        <img src={craftIcon} alt="" width={24} height={24} className="size-6 object-contain" />
+        <img
+          src={craftIcon}
+          alt=""
+          aria-hidden
+          width={24}
+          height={24}
+          className="size-6 object-contain"
+        />
         <h3 className="text-lg font-semibold text-purple-400">{labels.preciseCraft}</h3>
       </div>
       <div

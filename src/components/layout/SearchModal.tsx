@@ -215,7 +215,10 @@ export function SearchModal({
                         <img
                           src={entry.icon}
                           alt=""
+                          aria-hidden
                           className="bg-surface-overlay size-6 shrink-0 rounded object-contain"
+                          width={24}
+                          height={24}
                         />
                       ) : (
                         <span className="bg-surface-overlay size-6 shrink-0 rounded" aria-hidden />

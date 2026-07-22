@@ -37,7 +37,7 @@ export function ChangelogEntryCard({
     <>
       <div className="bg-surface-overlay border-line-subtle grid size-14 shrink-0 place-items-center overflow-hidden rounded-lg border text-2xl">
         {thumb ? (
-          <img src={thumb} alt="" loading="lazy" className="size-full object-cover" />
+          <img src={thumb} alt="" aria-hidden loading="lazy" className="size-full object-cover" />
         ) : (
           <span aria-hidden>{CHANGELOG_TYPE_ICON[entry.type]}</span>
         )}

@@ -121,7 +121,13 @@ export function StatsRankingSection({
                 className="flex items-center gap-1 font-mono text-sm text-zinc-100 tabular-nums"
                 title={labels.cpTitle}
               >
-                <img src={img.power()} alt="CP" className="h-4 w-4 object-contain" />
+                <img
+                  src={img.power()}
+                  alt="CP"
+                  className="h-4 w-4 object-contain"
+                  width={16}
+                  height={16}
+                />
                 {cp.toLocaleString('en')}
               </span>
             )}
@@ -227,12 +233,14 @@ export function StatsRankingSection({
                       <img
                         src={img.evoTab(false)}
                         alt=""
+                        aria-hidden
                         className="absolute inset-0 h-full w-full object-contain"
                       />
                       {on && (
                         <img
                           src={img.evoTab(true)}
                           alt=""
+                          aria-hidden
                           className="absolute inset-0 h-full w-full object-contain"
                         />
                       )}
@@ -267,7 +275,13 @@ export function StatsRankingSection({
                   </span>
                 )}
                 <span className="flex items-center gap-1.5">
-                  <img src={img.gold()} alt="Gold" className="h-5 w-5 object-contain" />
+                  <img
+                    src={img.gold()}
+                    alt="Gold"
+                    className="h-5 w-5 object-contain"
+                    width={20}
+                    height={20}
+                  />
                   <span className="text-zinc-100">
                     {step.limitBreak.price.toLocaleString('en')}
                   </span>
@@ -294,7 +308,13 @@ export function StatsRankingSection({
                   {tc.label}
                 </span>
                 {tc.rank ? (
-                  <img src={img.rank(tc.rank)} alt={tc.rank} className="h-12 w-12" />
+                  <img
+                    src={img.rank(tc.rank)}
+                    alt={tc.rank}
+                    className="h-12 w-12"
+                    width={48}
+                    height={48}
+                  />
                 ) : (
                   <span className="text-xs text-zinc-600">{labels.comingSoon}</span>
                 )}

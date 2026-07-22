@@ -78,8 +78,11 @@ function LessonCard({
         <img
           src={img.guideIcon(guide.icon)}
           alt=""
+          aria-hidden
           className="h-9 w-9 object-contain"
           loading="lazy"
+          width={36}
+          height={36}
         />
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-1.5">

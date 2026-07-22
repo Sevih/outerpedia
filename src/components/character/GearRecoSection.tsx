@@ -135,7 +135,14 @@ function StatChip({ abbr, value }: { abbr: string; value?: string }) {
   return (
     <span className="inline-flex items-center gap-1 text-xs text-zinc-300">
       {STAT_ICON[abbr] && (
-        <img src={img.statIcon(STAT_ICON[abbr])} alt="" className="h-3.5 w-3.5" />
+        <img
+          src={img.statIcon(STAT_ICON[abbr])}
+          alt=""
+          aria-hidden
+          className="h-3.5 w-3.5"
+          width={14}
+          height={14}
+        />
       )}
       {abbr}
       {value && <span className="text-zinc-400">{value}</span>}
@@ -226,7 +233,14 @@ export function ItemRow({
       {item.effectName && (
         <div className="inline-flex w-fit items-center gap-1.5 rounded-full bg-zinc-500/40 px-2.5 py-1">
           {item.effectIcon && (
-            <img src={img.equipment(item.effectIcon)} alt="" className="h-4 w-4" />
+            <img
+              src={img.equipment(item.effectIcon)}
+              alt=""
+              aria-hidden
+              className="h-4 w-4"
+              width={16}
+              height={16}
+            />
           )}
           <span className="text-buff text-xs">{item.effectName}</span>
         </div>
@@ -241,7 +255,14 @@ export function ItemRow({
           </span>
           {item.source.bosses.map((b) => (
             <span key={b.id} className="flex items-center gap-1.5 text-xs text-zinc-200">
-              <img src={img.boss(`MT_${b.icon}`)} alt="" className="h-5 w-5 rounded object-cover" />
+              <img
+                src={img.boss(`MT_${b.icon}`)}
+                alt=""
+                aria-hidden
+                className="h-5 w-5 rounded object-cover"
+                width={20}
+                height={20}
+              />
               {b.name}
               {b.sourceLabel && <span className="text-zinc-400">· {b.sourceLabel}</span>}
             </span>
@@ -293,7 +314,14 @@ export function SetPieceGroup({
     <div className="flex max-w-72 flex-col gap-1.5">
       <div className="flex items-center gap-2">
         {piece.icon && (
-          <img src={img.effect(piece.icon)} alt="" className="h-8 w-8 shrink-0 object-contain" />
+          <img
+            src={img.effect(piece.icon)}
+            alt=""
+            aria-hidden
+            className="h-8 w-8 shrink-0 object-contain"
+            width={32}
+            height={32}
+          />
         )}
         <span className="text-equipment text-sm font-bold">{piece.name}</span>
       </div>
@@ -317,7 +345,14 @@ export function SetPieceGroup({
         <div className="flex flex-col gap-1">
           {eff.source.bosses.map((b) => (
             <span key={b.id} className="flex items-center gap-1.5 text-xs text-zinc-200">
-              <img src={img.boss(`MT_${b.icon}`)} alt="" className="h-5 w-5 rounded object-cover" />
+              <img
+                src={img.boss(`MT_${b.icon}`)}
+                alt=""
+                aria-hidden
+                className="h-5 w-5 rounded object-cover"
+                width={20}
+                height={20}
+              />
               {b.name}
               {b.sourceLabel && <span className="text-zinc-400">· {b.sourceLabel}</span>}
             </span>
@@ -520,6 +555,7 @@ export function GearRecoSection({
                     <img
                       src={img.effect(eff.icon)}
                       alt=""
+                      aria-hidden
                       className="absolute inset-0 h-full w-full object-contain"
                     />
                   </span>

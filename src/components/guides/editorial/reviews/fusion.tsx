@@ -160,7 +160,12 @@ function EeMiniCard({
       )}
     >
       <span className="relative h-12 w-12 shrink-0">
-        <img src={img.slotFrame(side.grade)} alt="" className="absolute inset-0 h-full w-full" />
+        <img
+          src={img.slotFrame(side.grade)}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 h-full w-full"
+        />
         <img
           src={img.ee(side.characterId)}
           alt={side.name}

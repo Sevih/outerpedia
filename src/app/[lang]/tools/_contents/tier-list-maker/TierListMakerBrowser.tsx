@@ -374,6 +374,7 @@ const ItemView = memo(function ItemView({
           <img
             src={img.element(item.element)}
             alt=""
+            aria-hidden
             className="absolute -top-1 -right-1 h-[40%] w-[40%] drop-shadow-md"
           />
         )}
@@ -381,6 +382,7 @@ const ItemView = memo(function ItemView({
           <img
             src={img.klass(item.cls)}
             alt=""
+            aria-hidden
             className="absolute top-[42%] right-0 h-[28%] w-[28%] drop-shadow-md"
           />
         )}
@@ -391,8 +393,11 @@ const ItemView = memo(function ItemView({
                 key={i}
                 src={img.star()}
                 alt=""
+                aria-hidden
                 className="h-3 w-3 drop-shadow-md"
                 style={{ marginLeft: i ? -3 : 0 }}
+                width={12}
+                height={12}
               />
             ))}
           </span>
@@ -480,11 +485,19 @@ const CardView = memo(function CardView({
             e.currentTarget.style.visibility = 'hidden';
           }}
         />
-        {badge && <img src={badge} alt="" className="absolute top-1 left-1 w-[60%]" />}
+        {badge && <img src={badge} alt="" aria-hidden className="absolute top-1 left-1 w-[60%]" />}
         {showStars && item.rarity ? (
           <span className="absolute top-1 right-1 flex flex-col items-center">
             {Array.from({ length: item.rarity }, (_, i) => (
-              <img key={i} src={img.star()} alt="" className="h-3 w-3 drop-shadow-md" />
+              <img
+                key={i}
+                src={img.star()}
+                alt=""
+                aria-hidden
+                className="h-3 w-3 drop-shadow-md"
+                width={12}
+                height={12}
+              />
             ))}
           </span>
         ) : null}
@@ -492,6 +505,7 @@ const CardView = memo(function CardView({
           <img
             src={img.klass(item.cls)}
             alt=""
+            aria-hidden
             className="absolute right-1 bottom-[26%] w-[26%] drop-shadow-md"
           />
         )}
@@ -499,6 +513,7 @@ const CardView = memo(function CardView({
           <img
             src={img.element(item.element)}
             alt=""
+            aria-hidden
             className="absolute right-1 bottom-1 w-[24%] drop-shadow-md"
           />
         )}
@@ -571,6 +586,7 @@ function DropPreview({
         <img
           src={src}
           alt=""
+          aria-hidden
           draggable={false}
           className="h-full w-full rounded-md object-cover opacity-40"
         />
@@ -1765,7 +1781,13 @@ export function TierListMakerBrowser({
                     className="h-8 w-8 px-0"
                     title={el}
                   >
-                    <img src={img.element(el)} alt={el} className="h-6 w-6" />
+                    <img
+                      src={img.element(el)}
+                      alt={el}
+                      className="h-6 w-6"
+                      width={24}
+                      height={24}
+                    />
                   </FilterPill>
                 ))}
               </div>
@@ -1782,7 +1804,7 @@ export function TierListMakerBrowser({
                     className="h-8 w-8 px-0"
                     title={cl}
                   >
-                    <img src={img.klass(cl)} alt={cl} className="h-6 w-6" />
+                    <img src={img.klass(cl)} alt={cl} className="h-6 w-6" width={24} height={24} />
                   </FilterPill>
                 ))}
               </div>
@@ -1877,7 +1899,10 @@ export function TierListMakerBrowser({
           <img
             src={itemMap.get(drag.key)?.img}
             alt=""
+            aria-hidden
             className="h-16 w-16 rounded-md border-2 border-amber-400 object-cover shadow-2xl"
+            width={64}
+            height={64}
           />
         </div>
       )}

@@ -104,17 +104,36 @@ export function TowerFloorMenu({
                     <img
                       src={e.portraitSrc}
                       alt=""
+                      aria-hidden
                       className="border-line-subtle h-8 w-8 shrink-0 rounded-full border object-cover"
                       loading="lazy"
+                      width={32}
+                      height={32}
                     />
                   )}
                   <span className="min-w-0 flex-1 truncate">{e.label}</span>
                   {(e.element || e.classType) && (
                     <span className="flex shrink-0 items-center gap-1">
                       {e.classType && (
-                        <img src={img.klass(e.classType)} alt="" className="h-4 w-4" />
+                        <img
+                          src={img.klass(e.classType)}
+                          alt=""
+                          aria-hidden
+                          className="h-4 w-4"
+                          width={16}
+                          height={16}
+                        />
                       )}
-                      {e.element && <img src={img.element(e.element)} alt="" className="h-4 w-4" />}
+                      {e.element && (
+                        <img
+                          src={img.element(e.element)}
+                          alt=""
+                          aria-hidden
+                          className="h-4 w-4"
+                          width={16}
+                          height={16}
+                        />
+                      )}
                     </span>
                   )}
                   {e.flag && (

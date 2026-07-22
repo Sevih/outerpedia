@@ -45,8 +45,11 @@ export function TowerAddsSelector({ adds }: { adds: TowerAdd[] }) {
                   <img
                     src={a.iconSrc}
                     alt=""
+                    aria-hidden
                     className="h-11 w-11 rounded-md object-cover"
                     loading="lazy"
+                    width={44}
+                    height={44}
                   />
                 )}
                 <span className="text-content-muted max-w-14 truncate text-[11px] leading-tight">

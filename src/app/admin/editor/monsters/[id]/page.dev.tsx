@@ -119,11 +119,13 @@ export default async function EditorMonsterPage({ params }: { params: Promise<{ 
           <img
             src={monsterSlotSrc(m.type)}
             alt=""
+            aria-hidden
             className="absolute inset-0 h-full w-full rounded object-cover"
           />
           <img
             src={monsterIconSrc(m.icon)}
             alt=""
+            aria-hidden
             className="absolute inset-[7%] h-[86%] w-[86%] rounded object-cover"
           />
           {monsterBossBadgeSrc(m.type) && (

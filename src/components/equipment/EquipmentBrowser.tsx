@@ -134,7 +134,14 @@ function SourcePills({
             title={o.label}
             aria-label={o.label}
           >
-            <img src={o.iconSrc} alt="" className="size-7 rounded-md object-contain" />
+            <img
+              src={o.iconSrc}
+              alt=""
+              aria-hidden
+              className="size-7 rounded-md object-contain"
+              width={28}
+              height={28}
+            />
           </IconPill>
         ) : (
           <FilterPill

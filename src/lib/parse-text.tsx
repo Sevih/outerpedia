@@ -114,15 +114,37 @@ function characterChip(name: string, ctx: ParseCtx, k: number): ReactNode {
   const cl = ctx.t(`sys.class.${c.class}` as TranslationKey);
   const tooltip = (
     <div className="flex gap-2">
-      <img src={img.face(c.id)} alt={display} className="h-14 w-14 shrink-0 rounded" />
+      <img
+        src={img.face(c.id)}
+        alt={display}
+        className="h-14 w-14 shrink-0 rounded"
+        width={56}
+        height={56}
+      />
       <div className="flex flex-col gap-0.5">
         <span className="text-content-strong text-sm font-bold">{display}</span>
         <span className="text-content text-xs">{'★'.repeat(c.rarity)}</span>
         <span className={`flex items-center gap-1 text-xs ${ELEMENT_TEXT[c.element] ?? ''}`}>
-          <img src={img.element(c.element)} alt="" className="h-4 w-4" /> {el}
+          <img
+            src={img.element(c.element)}
+            alt=""
+            aria-hidden
+            className="h-4 w-4"
+            width={16}
+            height={16}
+          />{' '}
+          {el}
         </span>
         <span className="text-class flex items-center gap-1 text-xs">
-          <img src={img.klass(c.class)} alt="" className="h-4 w-4" /> {cl}
+          <img
+            src={img.klass(c.class)}
+            alt=""
+            aria-hidden
+            className="h-4 w-4"
+            width={16}
+            height={16}
+          />{' '}
+          {cl}
         </span>
       </div>
     </div>

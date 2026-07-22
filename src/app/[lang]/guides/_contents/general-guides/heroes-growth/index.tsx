@@ -126,7 +126,9 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
             : i === stars - 1
               ? (STAR_SPRITE[color] ?? STAR_SPRITE.yellow)
               : STAR_SPRITE.yellow;
-        return <img key={i} src={img.transcendStar(sprite)} alt="" width={15} height={15} />;
+        return (
+          <img key={i} src={img.transcendStar(sprite)} alt="" aria-hidden width={15} height={15} />
+        );
       })}
     </span>
   );
@@ -135,7 +137,14 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
   const goldCell = (n: number): ReactNode => (
     <span className="inline-flex items-center gap-1 whitespace-nowrap">
       {goldIcon && (
-        <img src={img.item(goldIcon)} alt="" width={15} height={15} className="inline-block" />
+        <img
+          src={img.item(goldIcon)}
+          alt=""
+          aria-hidden
+          width={15}
+          height={15}
+          className="inline-block"
+        />
       )}
       {fmt(n)}
     </span>

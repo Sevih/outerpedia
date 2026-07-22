@@ -56,10 +56,21 @@ const key = (type: ColType, subType: string, count: number) => `${type}|${subTyp
 /** Icône d'une case : sprite d'élément / de classe, ou badge « N★ ». */
 function targetIcon(type: ColType, subType: string): ReactNode {
   if (type === 'element') {
-    return <img src={img.element(subType)} alt="" className="h-6 w-6" />;
+    return (
+      <img
+        src={img.element(subType)}
+        alt=""
+        aria-hidden
+        className="h-6 w-6"
+        width={24}
+        height={24}
+      />
+    );
   }
   if (type === 'class') {
-    return <img src={img.klass(subType)} alt="" className="h-6 w-6" />;
+    return (
+      <img src={img.klass(subType)} alt="" aria-hidden className="h-6 w-6" width={24} height={24} />
+    );
   }
   return <span className="text-xs font-bold tabular-nums">{subType}★</span>;
 }

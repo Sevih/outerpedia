@@ -268,7 +268,14 @@ export function AdvancedFiltersPanel(props: AdvancedFiltersPanelProps) {
                   className="h-8 gap-1.5 px-2.5"
                 >
                   {opt.icon && (
-                    <img src={opt.icon} alt="" className="size-4 shrink-0 object-contain" />
+                    <img
+                      src={opt.icon}
+                      alt=""
+                      aria-hidden
+                      className="size-4 shrink-0 object-contain"
+                      width={16}
+                      height={16}
+                    />
                   )}
                   <span>{opt.label}</span>
                 </FilterPill>
@@ -338,7 +345,14 @@ function PillSection({
             className={withIcon ? 'h-8 gap-1.5 px-2.5' : 'h-8 px-3'}
           >
             {withIcon && opt.icon && (
-              <img src={opt.icon} alt="" className="size-4 shrink-0 object-contain" />
+              <img
+                src={opt.icon}
+                alt=""
+                aria-hidden
+                className="size-4 shrink-0 object-contain"
+                width={16}
+                height={16}
+              />
             )}
             <span>{opt.label}</span>
           </FilterPill>

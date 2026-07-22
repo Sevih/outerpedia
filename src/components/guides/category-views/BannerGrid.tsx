@@ -61,6 +61,7 @@ export default async function BannerGrid({ lang, guides }: CategoryViewProps) {
             <img
               src={img.guideIcon(guide.icon)}
               alt=""
+              aria-hidden
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
               loading="lazy"
             />

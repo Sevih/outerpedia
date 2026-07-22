@@ -53,7 +53,12 @@ function EeCard({ ee, labels }: { ee: EeCardView; labels: EeTranscendLabels }) {
       <div className="card flex flex-col gap-3 rounded-xl p-4">
         <div className="flex items-center gap-3">
           <span className="relative h-16 w-16 shrink-0">
-            <img src={img.slotFrame('unique')} alt="" className="absolute inset-0 h-full w-full" />
+            <img
+              src={img.slotFrame('unique')}
+              alt=""
+              aria-hidden
+              className="absolute inset-0 h-full w-full"
+            />
             <img
               src={img.ee(ee.characterId)}
               alt={ee.name}
@@ -72,7 +77,14 @@ function EeCard({ ee, labels }: { ee: EeCardView; labels: EeTranscendLabels }) {
               {ee.mainStats.map((s, i) => (
                 <span key={i} className="mr-2 inline-flex items-center gap-1">
                   {STAT_ICON[s.key] && (
-                    <img src={img.statIcon(STAT_ICON[s.key])} alt="" className="h-3.5 w-3.5" />
+                    <img
+                      src={img.statIcon(STAT_ICON[s.key])}
+                      alt=""
+                      aria-hidden
+                      className="h-3.5 w-3.5"
+                      width={14}
+                      height={14}
+                    />
                   )}
                   {s.label ?? s.key}
                 </span>
@@ -83,7 +95,14 @@ function EeCard({ ee, labels }: { ee: EeCardView; labels: EeTranscendLabels }) {
 
         {ee.badgeIcon && (
           <div className="inline-flex w-fit items-center gap-1.5 rounded-full bg-zinc-500/40 px-2.5 py-1">
-            <img src={img.equipment(ee.badgeIcon)} alt="" className="h-4 w-4" />
+            <img
+              src={img.equipment(ee.badgeIcon)}
+              alt=""
+              aria-hidden
+              className="h-4 w-4"
+              width={16}
+              height={16}
+            />
             <span className="text-buff text-xs">{ee.badgeText}</span>
           </div>
         )}
@@ -143,7 +162,15 @@ function TranscendSlider({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-0.5">
             {tier.stars.map((sprite, i) => (
-              <img key={i} src={img.transcendStar(sprite)} alt="" className="h-6 w-6" />
+              <img
+                key={i}
+                src={img.transcendStar(sprite)}
+                alt=""
+                aria-hidden
+                className="h-6 w-6"
+                width={24}
+                height={24}
+              />
             ))}
           </div>
           <span className="font-mono text-lg font-bold text-amber-300">{tier.label}</span>
@@ -204,7 +231,14 @@ function TranscendSlider({
                   {l.keys.map(
                     (k) =>
                       STAT_ICON[k] && (
-                        <img key={k} src={img.statIcon(STAT_ICON[k])} alt={k} className="h-4 w-4" />
+                        <img
+                          key={k}
+                          src={img.statIcon(STAT_ICON[k])}
+                          alt={k}
+                          className="h-4 w-4"
+                          width={16}
+                          height={16}
+                        />
                       ),
                   )}
                   <span className="ml-1 font-mono font-semibold text-emerald-300">+{l.pct}%</span>

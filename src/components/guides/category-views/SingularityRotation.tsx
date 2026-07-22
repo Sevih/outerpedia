@@ -237,7 +237,7 @@ function Identity({
           key={i}
           className={`inline-flex items-center justify-center rounded-md border p-0.5 ${skin} ${box}`}
         >
-          <img src={src} alt="" className="h-full w-full object-contain" />
+          <img src={src} alt="" aria-hidden className="h-full w-full object-contain" />
         </span>
       ))}
     </span>
@@ -297,6 +297,7 @@ function FeaturedBanner({
         <img
           src={img.singularity(day.boss.banner)}
           alt=""
+          aria-hidden
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
         {isToday && <span className="bg-accent absolute inset-y-0 left-0 w-0.75" aria-hidden />}
@@ -362,6 +363,7 @@ function RailBanner({
         <img
           src={img.singularity(day.boss.banner)}
           alt=""
+          aria-hidden
           className="absolute inset-0 h-full w-full object-cover"
           loading="lazy"
         />
@@ -406,6 +408,7 @@ function LibraryCard({
         <img
           src={boss.thumbnail ? img.singularity(boss.thumbnail) : img.boss(`MT_${monster.icon}`)}
           alt=""
+          aria-hidden
           className={`h-12 w-12 shrink-0 rounded-lg border object-cover ${
             active ? 'border-accent' : 'border-line-subtle'
           }`}

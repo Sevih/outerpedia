@@ -219,7 +219,13 @@ export async function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-[1.5fr_repeat(4,1fr)] md:gap-8">
           <div>
             <div className="mb-4 flex items-center gap-3">
-              <img src="/favicon.ico" alt="Outerpedia" className="size-9 shrink-0 object-contain" />
+              <img
+                src="/favicon.ico"
+                alt="Outerpedia"
+                className="size-9 shrink-0 object-contain"
+                width={36}
+                height={36}
+              />
               <div>
                 <p className="text-content-strong font-semibold tracking-wide">Outerpedia</p>
                 <p className="text-content-subtle font-mono text-[10px] tracking-widest uppercase">

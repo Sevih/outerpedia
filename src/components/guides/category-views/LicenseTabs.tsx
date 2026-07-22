@@ -136,6 +136,7 @@ function PromotionCard({
             <img
               src={card.src}
               alt=""
+              aria-hidden
               loading="lazy"
               className="absolute inset-0 h-full w-full object-cover"
             />

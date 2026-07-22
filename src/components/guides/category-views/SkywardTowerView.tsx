@@ -117,7 +117,15 @@ function ElementalCard({ guide, lang, element }: { guide: Guide; lang: Lang; ele
     >
       <GuideCardArt icon={guide.icon} alt={name} topVeil hoverScale />
       <div className="absolute inset-x-0 top-0 flex items-center gap-1 p-2">
-        <img src={img.element(element)} alt="" loading="lazy" className="h-4 w-4 drop-shadow-lg" />
+        <img
+          src={img.element(element)}
+          alt=""
+          aria-hidden
+          loading="lazy"
+          className="h-4 w-4 drop-shadow-lg"
+          width={16}
+          height={16}
+        />
         <p className="text-content line-clamp-1 text-xs font-medium drop-shadow-lg">{name}</p>
       </div>
       <div className="absolute inset-x-0 bottom-0 p-2">

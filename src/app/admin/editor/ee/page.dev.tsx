@@ -60,7 +60,10 @@ export default function EditorEeCatalog() {
                     <img
                       src={img.ee(v.characterId)}
                       alt=""
+                      aria-hidden
                       className="h-9 w-9 rounded object-cover"
+                      width={36}
+                      height={36}
                     />
                     <div className="min-w-0">
                       <div className="text-content-strong hover:text-accent font-medium">

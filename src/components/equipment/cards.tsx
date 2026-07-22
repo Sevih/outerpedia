@@ -107,7 +107,14 @@ export function SourceLine({ source, title }: { source?: RowSource; title: strin
       <span className="text-content-subtle text-xs uppercase">{title}</span>
       {source.bosses.map((b) => (
         <span key={b.id} className="inline-flex items-center gap-1">
-          <img src={img.boss(`MT_${b.icon}`)} alt="" className="h-6 w-6 rounded object-cover" />
+          <img
+            src={img.boss(`MT_${b.icon}`)}
+            alt=""
+            aria-hidden
+            className="h-6 w-6 rounded object-cover"
+            width={24}
+            height={24}
+          />
           <span className="text-content-muted text-xs">{b.name}</span>
         </span>
       ))}
@@ -115,7 +122,16 @@ export function SourceLine({ source, title }: { source?: RowSource; title: strin
         const icon = shopIconSrc(s.slug);
         return (
           <span key={s.slug} className="inline-flex items-center gap-1">
-            {icon && <img src={icon} alt="" className="h-6 w-6 rounded object-contain" />}
+            {icon && (
+              <img
+                src={icon}
+                alt=""
+                aria-hidden
+                className="h-6 w-6 rounded object-contain"
+                width={24}
+                height={24}
+              />
+            )}
             <span className="text-content-muted text-xs">{s.label}</span>
           </span>
         );
@@ -129,7 +145,16 @@ export function SourceLine({ source, title }: { source?: RowSource; title: strin
 function PassivePill({ passive }: { passive: NonNullable<GearRow['passive']> }) {
   return (
     <span className="bg-surface-base border-line-subtle inline-flex w-fit items-center gap-1.5 rounded-full border py-0.5 pr-2.5 pl-1">
-      {passive.icon && <img src={img.equipment(passive.icon)} alt="" className="h-4 w-4" />}
+      {passive.icon && (
+        <img
+          src={img.equipment(passive.icon)}
+          alt=""
+          aria-hidden
+          className="h-4 w-4"
+          width={16}
+          height={16}
+        />
+      )}
       <span className="text-content-strong text-xs font-semibold">{passive.name}</span>
     </span>
   );
@@ -161,7 +186,16 @@ function MainStatChips({ stats }: { stats: string[] }) {
     <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
       {stats.map((s) => (
         <span key={s} className="text-content-subtle inline-flex items-center gap-1 text-xs">
-          {STAT_ICON[s] && <img src={img.statIcon(STAT_ICON[s])} alt="" className="h-3.5 w-3.5" />}
+          {STAT_ICON[s] && (
+            <img
+              src={img.statIcon(STAT_ICON[s])}
+              alt=""
+              aria-hidden
+              className="h-3.5 w-3.5"
+              width={14}
+              height={14}
+            />
+          )}
           {s}
         </span>
       ))}
@@ -193,7 +227,15 @@ export function GearCard({ row, sourceTitle }: { row: GearRow; sourceTitle: stri
           {!singleClass && row.classLimits.length > 0 && (
             <div className="flex flex-wrap items-center gap-1">
               {row.classLimits.map((cl) => (
-                <img key={cl} src={img.klass(cl)} alt={cl} title={cl} className="h-5 w-5" />
+                <img
+                  key={cl}
+                  src={img.klass(cl)}
+                  alt={cl}
+                  title={cl}
+                  className="h-5 w-5"
+                  width={20}
+                  height={20}
+                />
               ))}
             </div>
           )}
@@ -305,7 +347,14 @@ export function EECard({
             href={`/characters/${row.charSlug}` as Route}
             className="text-content-muted hover:text-accent inline-flex items-center gap-1.5 text-sm"
           >
-            <img src={img.face(row.characterId)} alt="" className="h-6 w-6 rounded" />
+            <img
+              src={img.face(row.characterId)}
+              alt=""
+              aria-hidden
+              className="h-6 w-6 rounded"
+              width={24}
+              height={24}
+            />
             {row.charName}
           </Link>
         </div>
@@ -319,7 +368,7 @@ export function EECard({
             ([label, rank]) =>
               rank && (
                 <div key={label} className="flex flex-col items-center gap-0.5">
-                  <img src={img.rank(rank)} alt={rank} className="h-7 w-7" />
+                  <img src={img.rank(rank)} alt={rank} className="h-7 w-7" width={28} height={28} />
                   <span className="text-content-subtle text-[9px] uppercase">{label}</span>
                 </div>
               ),
