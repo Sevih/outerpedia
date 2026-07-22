@@ -69,6 +69,24 @@
       **et** overlay curé des shops dérivés (fusionné au build datagen → éditer
       l'overlay puis régénérer `shop-priorities.json`).
 
+### Panneau admin
+
+> Décisions d'IA figées le 07/07 (matrice fonction × entité) — ces trois items
+> vivaient hors du repo jusqu'au 22/07, remis ici à leur place.
+
+- [ ] **Diff « TYPO » + bouton quick-fix** : classer à part les écarts de casse,
+      d'apostrophes et d'espaces, corrigeables en un clic. Seule la
+      normalisation d'apostrophes existe (`equipment-control.ts`).
+- [ ] **Auto-détection des tags perso** à l'extraction (premium/limited/collab…).
+      ⚠ GARDE : tant qu'elle n'existe pas, **ne pas retirer ces tags du curé** —
+      ce serait une perte de donnée sèche. Seul `free` est un champ d'Editor.
+- [ ] **Home `/admin` = doublon d'Extractor** — refonte possible en « inbox
+      priorisée » (ce qui demande une action, trié par urgence).
+- [ ] **Extractors orphelins depuis la fin de la migration** : les pages nées du
+      contrôle de régression contre l'ancien site (Effect, rapport gear, badges
+      de diff de la sidebar) n'ont plus d'oracle en face. Redéfinir leur rôle
+      AVANT de les retirer — certaines servent encore de contrôle de cohérence.
+
 ### Lots de fond SEO/perf (audit Sitebulb 20/07 — non urgents)
 
 > Le gros de l'audit est traité (cf. DONE 20-21/07 : canonicals, comics, cache).
@@ -102,8 +120,6 @@
 - [ ] **CHANGELOG.md** (dev, racine — PAS `/changelog` du site, livré le 20/07) :
       le retard a grossi — 216 commits au 17/07, davantage depuis. Resync ou
       assouplir la règle PR qui l'exige.
-- [ ] **`data/editorial/` non documenté nulle part** → CONVENTIONS.md
-      « Données » + tableau des zones de datagen/README.
 - [ ] **Locales : documenter le pré-seed** — une grosse part des clés (les
       namespaces des pages V2 pas encore portées, ×5 langues) n'a aucun
       consommateur ; chaque page est TRACÉE dans « Pages manquantes ». Soit

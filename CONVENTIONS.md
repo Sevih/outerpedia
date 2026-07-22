@@ -22,13 +22,23 @@ chore(deps): bump next to 16.2.0
 
 Un commit = un changement cohérent. Les messages alimentent le CHANGELOG.
 
+**Stager par chemins explicites** — jamais `git add -A` ni `git add <dossier>` :
+un dossier entier embarque le travail en cours d'à côté. Et jamais de fichier à
+moitié stagé : combiné à prettier au pre-commit, lefthook peut échouer à
+restaurer son stash et perdre les modifications non stagées.
+
+**Un commit de travail embarque la mise à jour de [docs/DONE.md](./docs/DONE.md)**
+(et le retrait de l'item dans [docs/TODO.md](./docs/TODO.md)) : le suivi part
+avec le changement qu'il décrit, pas dans un commit de docs séparé. Corollaire :
+l'entrée DONE ne cite pas le hash du commit, inconnu au moment de l'écrire.
+
 ## Branches & PR
 
-- `main` = toujours déployable.
-- Travail sur des branches `type/sujet` (ex. `feat/admin-auth`).
-- Une PR par sujet ; la CI doit être verte (lint + typecheck + tests + build)
-  avant merge.
-- Mettre à jour le `CHANGELOG.md` (section « Non publié ») dans la PR.
+- `main` = toujours déployable, et le mainteneur y committe directement.
+- Pour une contribution extérieure ou un gros chantier : une branche
+  `type/sujet` (ex. `feat/admin-auth`), une PR par sujet, la CI verte
+  (lint + typecheck + tests + build) avant merge.
+- Mettre à jour le `CHANGELOG.md` (section « Non publié »).
 
 ## Style de code
 
@@ -63,8 +73,10 @@ Un commit = un changement cohérent. Les messages alimentent le CHANGELOG.
 ## Données
 
 - Données de jeu dans `data/` (pas dans `src/`).
-- `data/generated/` = produit par le pipeline. Politique de commit décidée en
-  Phase 2 (les artefacts générés seront committés pour un build sans python).
+- `data/generated/` = produit par le pipeline, et **committé** : le build le
+  consomme tel quel, sans python ni accès aux données du jeu.
+- `data/editorial/` = les assets que le wiki produit lui-même (absents du jeu),
+  versionnés ici parce qu'ils sont des SOURCES ; la collecte les pousse sur R2.
 - Passer par la **data access layer** (`src/lib/data/`) — ne jamais importer le
   JSON directement pour les données de jeu.
 

@@ -1,20 +1,21 @@
 # Outerpedia
 
-Wiki communautaire pour le jeu **Outerplane** — refonte « V3 ».
+Wiki communautaire pour le jeu **Outerplane** — le code qui fait tourner
+[outerpedia.com](https://outerpedia.com).
 
-> 🚧 **En construction.** Ce dépôt est la reconstruction propre d'outerpedia (ex
-> `outerpediaV2`). Objectif : un projet maintenable, automatisé et déployé en
-> Docker derrière Cloudflare. Voir [ROADMAP.md](./ROADMAP.md).
+Le site est statique et multilingue (en, fr, jp, kr, zh). Ses données de jeu ne
+sont pas saisies à la main : elles sont **générées** depuis les tables du client
+du jeu par un atelier maison (`datagen/`), puis committées comme artefacts — le
+build ne fait que les consommer. Les images vivent hors du repo, sur Cloudflare
+R2.
 
 ## Stack
 
-- **Next.js** (App Router) · **React 19** · **TypeScript 5**
-- **Tailwind CSS 4**
-- **Node 24** (voir `.nvmrc`)
-- Déploiement : **Docker** → GHCR → VPS, **Cloudflare** en frontal
-- Données : JSON généré et committé (`data/generated/`), images sur **R2/CDN**.
-  MySQL prévu en **Phase 5** pour les features dynamiques (ex. partage de
-  tier-list) — rien en base aujourd'hui.
+- **Next.js** (App Router) · **React 19** · **TypeScript 5** · **Tailwind CSS 4**
+- **Node 24** (voir `.nvmrc`) · **pnpm** (le repo n'a pas de `package-lock.json`)
+- Déploiement : **Docker** → GHCR → VPS OVH, **Caddy** en frontal
+- Données : JSON généré et committé (`data/generated/`), images sur **R2/CDN**,
+  **MySQL** pour les rares features dynamiques (partage de tier-list, d'équipe)
 
 ## Démarrage (dev)
 
@@ -24,20 +25,36 @@ pnpm install
 pnpm dev        # clean:all → refresh des données (datagen) → next dev
 ```
 
-- `pnpm test` — la suite Vitest (app + datagen).
+Le repo se clone et se lance tel quel : les données générées sont committées.
+La **régénération** depuis le jeu (`datagen:*`) demande en plus une aire
+`.gamedata/` locale, qui n'est pas publiée — c'est un dump du client Android,
+pas du code (voir [datagen/README.md](./datagen/README.md)).
+
+- `pnpm test` — la suite Vitest (app + datagen)
 - `pnpm commit` — publication guidée : contrôles (format/lint/typecheck/test)
-  → bump de version → images R2 → commit + push. Voir `scripts/commit.ts`.
+  → bump de version → images R2 → commit + push (`scripts/commit.ts`)
+- `pnpm build` — le build prod, **réservé à la CI** (cf. `datagen/README.md`)
 
 ## Documentation
 
-- [ROADMAP.md](./ROADMAP.md) — la feuille de route par phases
-- [CHANGELOG.md](./CHANGELOG.md) — journal des changements
-- [CONVENTIONS.md](./CONVENTIONS.md) — commits, branches, style, process
+- [CONVENTIONS.md](./CONVENTIONS.md) — commits, i18n, style, données
 - [CLAUDE.md](./CLAUDE.md) — règles pour le dev assisté par IA
 - [datagen/README.md](./datagen/README.md) — l'atelier de données (architecture, flux patch)
-- [docs/procedure/newPatch.md](./docs/procedure/newPatch.md) — la procédure « patch du jeu »
-- [docs/TODO.md](./docs/TODO.md) — le suivi unique (bugs, dette, data à porter, décisions)
+- [docs/procedure/](./docs/procedure/) — installation, patch du jeu, ajout de contenu
+- [docs/TODO.md](./docs/TODO.md) · [docs/DONE.md](./docs/DONE.md) — le suivi du projet
+- [CHANGELOG.md](./CHANGELOG.md) — journal des changements
 
-## Statut
+L'infrastructure du serveur (Docker, Caddy, secrets, sauvegardes) vit dans un
+repo d'Infrastructure-as-Code séparé, qui reste privé.
 
-Projet **privé**. Tous droits réservés.
+## Licence
+
+Le code est publié sous licence [MIT](./LICENSE).
+
+En revanche, **les données et les images du jeu ne m'appartiennent pas** :
+_Outerplane_ et tous les assets qui en sont dérivés restent la propriété de
+leur éditeur (Major9) et de leur développeur (VA Games). Ils sont ici à des
+fins d'information communautaire ; la licence MIT ne couvre pas leur
+réutilisation.
+
+Ce projet n'est ni affilié à, ni approuvé par l'éditeur du jeu.

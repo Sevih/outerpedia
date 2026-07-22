@@ -27,6 +27,33 @@
 
 ## 2026-07-22
 
+- **Le repo passe en PUBLIC — doc remise d'équerre (décision Sevih).** Le site
+  tournant sur cette version, plus de raison de garder le code privé.
+  Audit préalable de l'historique complet (pickaxe `ghp_`/`github_pat_`/
+  `AGE-SECRET-KEY`/webhooks/clés privées/`R2_SECRET`) : **aucun secret** — les
+  seuls hits sont des noms de variables et un `.env.example` à valeur vide,
+  `.env*` est ignoré depuis le premier commit. Ajout d'une **licence MIT**
+  (choix Sevih), avec la réserve explicite que les données et images du jeu
+  restent la propriété de Major9 / VA Games et ne sont pas couvertes par elle.
+  README réécrit pour un lecteur extérieur (ce qu'est le projet, pourquoi les
+  données sont générées, ce qu'un clone permet de faire sans `.gamedata`).
+  **ROADMAP.md supprimée** : ses 6 phases étaient toutes atteintes (la phase 5
+  était la bascule du 21/07) et elle doublonnait `docs/TODO.md`, fichier de
+  suivi unique depuis le 17/07 ; renvois retirés du README et de CLAUDE.md.
+  Incohérences doc↔code corrigées au passage : CLAUDE.md ne présente plus le
+  projet comme « la reconstruction de la V2 » (+ ajout des gardes réelles :
+  pnpm only, ne pas lancer `pnpm dev`, admin dev-only en double garde) ;
+  CONVENTIONS.md — la politique de commit de `data/generated/` passe du futur
+  (« Phase 2 ») au présent, `data/editorial/` enfin documenté (ici ET dans le
+  tableau des zones de datagen/README — item du TODO), règles de staging
+  explicites et « DONE.md part dans le commit du fix » gravées là plutôt que
+  dans la tête de l'IA ; datagen/README ne promet plus une synchro `.gamedata`
+  par R2 qui n'a jamais été branchée (on refait un `datagen:pull`) ;
+  test-subdomain-local.md perd sa section « Jour J » d'avant-bascule.
+  Enfin, les 4 chantiers du panneau admin qui ne vivaient QUE dans la mémoire
+  de l'IA sont posés dans la section Dette code — dont la garde « ne pas
+  retirer les tags perso du curé avant leur auto-détection ».
+
 - **Purge des dépendances V2 mortes (post-bascule).** Inventaire complet à la
   demande de Sevih : la prod ne lit RIEN de la V2 (image Docker = .next+public,
   assets R2, MySQL migré, changelog seedé) ; extract-audio/wallpapers sont V3

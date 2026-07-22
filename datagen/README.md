@@ -110,6 +110,10 @@ prioritaire : cf. le fork tranché en faveur de l'isolation.
   On n'y écrit que par `pnpm datagen:promote` (diff entité par entité, `--apply`
   pour appliquer) ou par l'intégration ciblée d'un perso depuis l'admin — un
   pull de patch ne peut pas partir en prod par accident.
+- **Sources éditoriales** : `data/editorial/` (✅ committé) — les assets que le
+  wiki produit lui-même, absents du jeu (icônes d'effets corrigées, bannières
+  de guides, drapeaux…). Ce sont des SOURCES, pas des sorties : la collecte les
+  lit pour alimenter le staging, au même titre que le pool extrait du jeu.
 - **Images générées** : vont sur **R2/CDN**, **jamais** dans le repo.
 
 ---
@@ -132,7 +136,8 @@ prioritaire : cf. le fork tranché en faveur de l'isolation.
 | **Régénérer** (jeu a patché)        | l'aire `.gamedata/`       | la récupérer depuis **R2** (pas de ré-extraction) |
 
 Le quotidien est 100% git. Seule la régénération (rare) a besoin de `.gamedata/`,
-synchronisé via R2 (à brancher en Phase 3).
+qui n'est **pas** synchronisé entre machines : sur l'autre PC, on le reconstitue
+par un `pnpm datagen:pull` depuis LDPlayer.
 
 ---
 

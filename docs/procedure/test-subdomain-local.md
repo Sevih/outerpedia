@@ -64,10 +64,7 @@ curl -sk https://outerpedia.local/sitemap.xml                  # <loc> apex + al
 curl -sk https://jp.outerpedia.local/en/characters/ame         # doublon toléré, canonical → apex
 ```
 
-## Jour J (rappel)
-
-La mécanique app étant prouvée, la bascule réelle ne teste plus que l'INFRA :
-DNS, certs Caddy des 5 hôtes, build profil prod (`outerpedia.com`,
-`INDEXABLE=true`). Voir [bascule-domaine.md](./bascule-domaine.md) — et l'option
-« répétition générale » : DNS des sous-domaines SEULS d'abord (invisibles au
-public, l'apex reste V2), la bascule finale se réduisant à l'apex.
+> La bascule vers `outerpedia.com` a été exécutée le 22/07/2026
+> ([bascule-domaine.md](./bascule-domaine.md)). Ce banc reste la façon de tester
+> le routage par sous-domaines **en local**, avant de pousser un changement qui
+> y touche.
