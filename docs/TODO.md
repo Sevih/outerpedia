@@ -26,6 +26,9 @@
 - [ ] **`/tools` — RESTE 1 sous-outil** (`/<slug>`, 404 tant que non porté) :
       damage-calculator (un worktree d'agent contient déjà du travail — à
       évaluer avant de repartir de zéro) — namespaces `tools.*`.
+      ⚠ SURTOUT NE PAS se baser sur la V2 pour cet outil (décision Sevih
+      22/07 : le calculateur V2 est foireux) — exception à la règle « V2 =
+      oracle », conception V3 native.
       (`event` PORTÉ le 21/07, cf. DONE — reste à POUSSER les visuels
       d'événement sur R2 : `pnpm images` collecte `images/events/**` depuis le
       pool, la bannière `default.webp` en dépend.)

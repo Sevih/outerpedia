@@ -27,6 +27,22 @@
 
 ## 2026-07-22
 
+- **Purge des dépendances V2 mortes (post-bascule).** Inventaire complet à la
+  demande de Sevih : la prod ne lit RIEN de la V2 (image Docker = .next+public,
+  assets R2, MySQL migré, changelog seedé) ; extract-audio/wallpapers sont V3
+  natifs (la V2 n'y vit qu'en commentaires d'héritage). RETIRÉS (décision
+  Sevih) : le regen changelog depuis la V2 (`regenChangelogFromV2` + route
+  `/api/admin/tools/regen-v2` + `RegenFromV2Button` — l'historique est seedé,
+  V3 seule source de vérité, le code vit dans git) et
+  `scripts/migrate-legacy-news.ts` (one-shot déjà joué). RESTE, assumé : le
+  pool d'images héritage de `assets:collect` (stage.ts, « on s'en fiche un peu
+  des images restantes ») et la V2 sur l'ancien serveur en filet de rollback.
+  `.env.example` resynchronisé : l'en-tête « V2 — PAS ENCORE PORTÉ / aucun code
+  ne lit ces variables » mentait (DB_*, BOT_API_URL, REVALIDATE_SECRET sont
+  consommés depuis le 21/07) ; bloc V2_DIR réduit au seul pool d'images.
+  ⚠ Décision gravée au TODO : le damage-calculator se conçoit V3 NATIF, sans
+  regarder la V2 (« elle est foireuse ») — exception à la règle « V2 = oracle ».
+
 - **`GET /api/reco/:id` était mort depuis la reconstruction V3 — restauré,
   enrichi, et désormais tenu par des tests.** Signalé par le mainteneur de
   **Gear Solver** (app desktop, repo séparé) : sa fonction « Get preset »

@@ -5,7 +5,6 @@ import { LANGS, LANGUAGES, type Lang } from '@/lib/i18n/config';
 import type { ChangelogEntry, ChangelogLink, ChangelogType } from '@/lib/data/changelog';
 import { postJson } from '@/lib/admin/post-json';
 import { rowKey } from '@/lib/admin/keyed';
-import { RegenFromV2Button } from './RegenFromV2Button';
 
 const input =
   'rounded-md border border-line bg-surface-base px-2 py-1 text-sm text-content focus:border-accent focus:outline-none';
@@ -154,11 +153,6 @@ export function ChangelogEditor({ initial }: { initial: ChangelogEntry[] }) {
         </button>
         {status.kind === 'ok' && <span className="text-success text-sm">{status.msg}</span>}
         {status.kind === 'err' && <span className="text-danger text-sm">{status.msg}</span>}
-        <RegenFromV2Button
-          kind="changelog"
-          onRegen={(d) => setRows(byDateDesc((d as ChangelogEntry[]).map(toRow)))}
-        />
-
         {/* Sélecteur de langue (édite une langue à la fois) */}
         <div className="ml-auto flex items-center gap-1">
           {LANGS.map((l) => (

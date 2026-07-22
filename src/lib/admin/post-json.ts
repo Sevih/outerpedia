@@ -12,7 +12,7 @@
  *
  * Certaines routes répondent `200 { ok: false, errors }` plutôt qu'un statut
  * d'erreur : `postJson` rend alors le corps sans jeter, à l'appelant de tester
- * le champ `ok` retourné (cf. MonsterKitEditor, RegenFromV2Button).
+ * le champ `ok` retourné (cf. MonsterKitEditor).
  */
 export async function postJson<T = unknown>(url: string, body?: unknown): Promise<T> {
   const res = await fetch(url, {
