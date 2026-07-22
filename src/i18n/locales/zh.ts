@@ -1145,7 +1145,7 @@ const zh: Record<TranslationKey, string> = {
   'progress.optionalContentDesc': '为当前开放的活动启用任务',
   'progress.autoSeasonal': '自动检测赛季内容',
   'progress.autoSeasonalDesc':
-    '联合挑战、公会突袭和世界boss将跟随游戏日程：赛季进行中自动出现，结束后消失。',
+    '联合挑战、公会突袭和世界boss将自动跟随游戏日程：赛季中出现，结束后消失。',
   'progress.autoSeasonalLive': '进行中',
   'progress.autoSeasonalOff': '已结束',
   'progress.preciseCraft': '精密制作',
