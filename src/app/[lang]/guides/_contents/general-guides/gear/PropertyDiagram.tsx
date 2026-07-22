@@ -8,8 +8,7 @@
  */
 import { useState } from 'react';
 import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
-import { img } from '@/lib/images';
-import { STAR_SPRITE } from '@/lib/data/char-progression';
+import { img, STAR_SPRITE } from '@/lib/images';
 
 export interface PropertyRow {
   key: string;

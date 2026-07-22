@@ -195,6 +195,26 @@ const SLOT_FRAME: Record<string, string> = {
   singularity: 'Singularity',
 };
 
+/**
+ * Couleur d'étoile → sprite de transcendance (cf. `img.transcendStar`).
+ *
+ * Vit ICI et non dans `data/char-progression` : c'est une table de NOMS DE
+ * SPRITES, sans lien avec la donnée de progression. Hébergée là-bas, elle
+ * traînait tout le module — et ses 6,1 Mo de JSON (`skills.json`,
+ * `items.json`) — dans le bundle NAVIGATEUR dès qu'un composant `use client`
+ * la lisait. C'était le cas de `PropertyDiagram`, qui n'en veut qu'une clé ;
+ * l'import joker de `guide-detail` propageait le tout aux 794 pages de guides
+ * (audit du 2026-07-22 : un chunk de 4,03 Mo décompressés). `images.ts` n'a
+ * AUCUN import : rien ne peut plus suivre.
+ */
+export const STAR_SPRITE: Record<string, string> = {
+  yellow: 'CM_icon_star_y',
+  orange: 'CM_icon_star_o',
+  red: 'CM_icon_star_r',
+  violet: 'CM_icon_star_v',
+  gray: 'CM_icon_star_w',
+};
+
 /** Tag éditorial → sprite de badge de recrutement (ordre V2 : premier trouvé). */
 export const RECRUIT_TAG_SPRITE: Record<string, string> = {
   collab: 'CM_Recruit_Tag_Collab',

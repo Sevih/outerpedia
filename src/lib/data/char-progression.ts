@@ -23,6 +23,7 @@ import type {
 } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
+import { STAR_SPRITE } from '@/lib/images';
 import { GRADE_RANK } from '@/lib/data/gear-order';
 import {
   STEP_STAT_KEYS,
@@ -225,13 +226,10 @@ export function getStatLayers(char: Character): StatLayersView {
 // --- Transcendance -----------------------------------------------------------------
 
 /** Couleur d'étoile déclarée par le jeu → sprite CM_icon_star_*. */
-export const STAR_SPRITE: Record<string, string> = {
-  yellow: 'CM_icon_star_y',
-  orange: 'CM_icon_star_o',
-  red: 'CM_icon_star_r',
-  violet: 'CM_icon_star_v',
-  gray: 'CM_icon_star_w',
-};
+// STAR_SPRITE vit dans `@/lib/images` — table de noms de sprites, elle n'a rien
+// à faire dans un module qui importe 6 Mo de JSON (cf. le commentaire là-bas).
+// Pas de réexport ici : ce serait rouvrir le chemin d'import qu'on vient de
+// fermer. Les appelants la prennent directement dans `@/lib/images`.
 
 export interface TranscendTierView {
   /** Libellé (« 4+ », « 5++ ») — étoile UI + suffixe selon la couleur. */

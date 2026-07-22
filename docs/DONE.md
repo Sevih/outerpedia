@@ -27,6 +27,24 @@
 
 ## 2026-07-22
 
+- **`skills.json` (5,2 Mo) sort du bundle navigateur des 794 pages de guides —
+  pour UNE constante mal rangée.** L'audit Sitebulb flaggait 794 URLs en
+  « enormous network payloads » (67 % du site) ; en croisant les ressources du
+  rapport, un SEUL chunk explique tout : 4,03 Mo décompressés, 64 % du JS du
+  site, chargé sur exactement ces 794 pages (le socle commun, lui, est sain :
+  251 Ko sur les 1191). Contenu identifié en le récupérant en prod —
+  234 des 300 plus longues chaînes s'y retrouvent textuellement dans
+  `skills.json`, dans les 5 langues. Chaîne coupable : `STAR_SPRITE`, une table
+  de 5 NOMS DE SPRITES, habitait `lib/data/char-progression` — un module qui
+  importe 6,1 Mo de JSON. `PropertyDiagram` (`use client`) n'en lit qu'une clé,
+  et comme `guide-detail` résout son contenu par un `import()` JOKER sur tous
+  les `_contents`, le bundler devait embarquer ce client-là dans toute la
+  route. Correctif : `STAR_SPRITE` déménage dans `lib/images`, qui n'a AUCUN
+  import — rien ne peut plus suivre. Vérifié par graphe d'imports : plus aucun
+  module client n'atteint `skills.json`. ⚠ Sitebulb annonce la taille
+  DÉCOMPRESSÉE : sur le réseau le chunk faisait 480 Ko gzippés, le gain est
+  surtout en parsing/exécution (coût CPU mobile), pas en bande passante.
+
 - **Titre de guide : la catégorie entre dans le titre — 147 guides, 147 titres
   distincts.** Un titre de meta n'était pas unique à l'échelle du SITE :
   « Drakhan » titrait à la fois `/characters/drakhan` et son guide World Boss,

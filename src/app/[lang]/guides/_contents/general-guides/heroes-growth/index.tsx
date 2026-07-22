@@ -21,7 +21,7 @@ import { StarIcon } from '@/components/guides/editorial/banner/StarText';
 import { SegmentedTabs, type TabItem } from '@/components/guides/SegmentedTabs';
 import { Prose, Callout, DotList } from '@/components/guides/editorial/blocks';
 import { getCatalog } from '@/lib/data/items';
-import { STAR_SPRITE } from '@/lib/data/char-progression';
+import { STAR_SPRITE } from '@/lib/images';
 import type { LocalizedText, HeroGrowthData, ItemRef, ItemCost } from '@contracts';
 import growthRaw from '@data/generated/hero-growth.json';
 import { LABELS, GEAR_POINTS } from './labels';
