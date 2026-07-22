@@ -3,13 +3,13 @@
  *
  * Dérivé de `data/generated/*` : chaque entité déclare ses besoins. La SOURCE
  * est l'extraction du JEU (`.gamedata/extracted/images`, noms de sprites =
- * clés stables) — jamais le pool V2, sauf l'ÉDITORIAL qui n'existe pas en jeu
- * (drapeaux, image OG, BD…).
+ * clés stables) — sauf l'ÉDITORIAL qui n'existe pas en jeu (drapeaux, image
+ * OG, BD…) et vit dans `data/editorial` (versionné, héritage V2 rapatrié).
  *
  * Trois genres de demandes :
  *   - `image`     : trouver le sprite du jeu (candidats = basenames) → webp ;
  *   - `face-icon` : COMPOSÉE depuis le portrait + layout Unity (cf. face-icon.ts) ;
- *   - `editorial` : copie telle quelle depuis le pool V2 (hors jeu).
+ *   - `editorial` : copie telle quelle depuis `data/editorial` (hors jeu).
  */
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -34,7 +34,7 @@ import { loadCuratedEffects } from '../curated/effects';
 import { effectIconCandidates } from '../lib/effects';
 import { resolveClass } from '../lib/class';
 import { slugEnum } from '../lib/enums';
-import { v2ImagesDir } from '../lib/env';
+
 import { loadTable, tablesStamp } from '../lib/tables';
 import { loadTextIndex } from '../lib/text';
 
@@ -44,7 +44,7 @@ export type AssetRequest =
       key: string;
       candidates: string[];
       domain: string;
-      /** Copie depuis le pool V2 si aucun sprite du jeu ne matche (icônes wiki). */
+      /** Copie depuis `data/editorial` si aucun sprite du jeu ne matche (icônes wiki). */
       editorialFallback?: string;
     }
   | { kind: 'face-icon'; key: string; id: string; domain: string }
@@ -850,7 +850,7 @@ export function buildAssetManifest(): AssetRequest[] {
   // visuels de boss ne passent PAS ici (référencés par `bossId`, namespace
   // boss existant) pour ne pas dupliquer un sprite entre namespaces.
   //
-  // LES ICÔNES DE CATÉGORIE VIENNENT DU POOL V2, PAS DE L'EXTRACTION.
+  // LES ICÔNES DE CATÉGORIE VIENNENT DU POOL ÉDITORIAL, PAS DE L'EXTRACTION.
   //
   // Ce sont des icônes de MENU, et le jeu remanie ses menus : il a déjà réutilisé
   // `CM_Adventure_Cooperation`, `CM_Adventure_WorldBoss` et
@@ -860,17 +860,18 @@ export function buildAssetManifest(): AssetRequest[] {
   // `editorialFallback` (qui ne se déclenche qu'en cas d'absence) ne voyait rien.
   //
   // Une liste d'exceptions aurait dérivé au premier remaniement suivant : c'est
-  // une course qu'on ne gagne pas. Le pool V2 est FIGÉ et ces douze icônes y sont
+  // une course qu'on ne gagne pas. Le pool éditorial est FIGÉ (héritage V2
+  // rapatrié dans `data/editorial` le 22/07) et ces douze icônes y sont
   // toutes — c'est notre chrome de navigation, pas de la donnée de jeu, et il n'a
   // aucune raison de suivre les refontes d'UI de l'éditeur.
   //
   // Même règle pour les BANNIÈRES des guides (`T_Banner_*` du meta.json) : toute
-  // icône que le pool V2 possède vient de lui — de l'UI déjà validée à l'écran,
-  // pas une clé de sprite qu'on espère encore intacte côté jeu. L'extraction ne
-  // sert que pour ce qu'un pool figé ne PEUT pas avoir : les bannières du
-  // contenu sorti après la V2.
+  // icône que le pool possède vient de l'UI déjà validée à l'écran, pas d'une
+  // clé de sprite qu'on espère encore intacte côté jeu. L'extraction ne sert
+  // que pour ce qu'un pool figé ne PEUT pas avoir : les bannières du contenu
+  // sorti après le gel.
   const guides = listGuides();
-  const v2Pool = v2ImagesDir();
+  const editorialPool = resolve('data/editorial');
   for (const icon of new Set(Object.values(GUIDE_CATEGORIES).map((c) => c.icon)))
     push({
       kind: 'editorial',
@@ -890,7 +891,7 @@ export function buildAssetManifest(): AssetRequest[] {
     .map((g) => g.icon)
     .flatMap((icon) => (icon.endsWith('_Lock') ? [icon, icon.replace(/_Lock$/, '_Open')] : [icon]));
   for (const icon of new Set([...guideIcons, ...categoryArts])) {
-    const pooled = existsSync(resolve(v2Pool, `guides/${icon}.webp`));
+    const pooled = existsSync(resolve(editorialPool, `guides/${icon}.webp`));
     push(
       pooled
         ? {
@@ -919,7 +920,7 @@ export function buildAssetManifest(): AssetRequest[] {
   for (const icon of new Set(
     guides.filter((g) => !guideBossMonster(g) && !g.ogImage).map((g) => g.icon),
   )) {
-    const pooled = existsSync(resolve(v2Pool, `guides/${icon}.webp`));
+    const pooled = existsSync(resolve(editorialPool, `guides/${icon}.webp`));
     push(
       pooled
         ? {
@@ -945,11 +946,14 @@ export function buildAssetManifest(): AssetRequest[] {
     if (existsSync(pool)) {
       for (const dir of readdirSync(pool, { withFileTypes: true })) {
         if (!dir.isDirectory()) continue;
-        for (const f of readdirSync(resolve(pool, dir.name))) {
+        for (const f of readdirSync(resolve(pool, dir.name), { withFileTypes: true })) {
+          // Fichiers seulement : un sous-dossier (ex. `general-guides/banner/`,
+          // sprites servis par leur `editorialFallback`) n'est pas un screenshot.
+          if (!f.isFile()) continue;
           push({
             kind: 'editorial',
-            key: `images/guides/${dir.name}/${f}`,
-            source: `guides/${dir.name}/${f}`,
+            key: `images/guides/${dir.name}/${f.name}`,
+            source: `guides/${dir.name}/${f.name}`,
             domain: 'guides',
           });
         }

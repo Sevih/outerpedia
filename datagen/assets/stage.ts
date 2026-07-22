@@ -28,35 +28,28 @@ import {
 import { createHash } from 'node:crypto';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
-import { v2ImagesDir } from '../lib/env';
 import { FACE_ICON_LAYOUT, makeFaceIcon } from './face-icon';
 import type { AssetRequest } from './manifest';
 import { findImage, type ImageIndex } from './source';
 
 export const STAGING_DIR = resolve('.assets-staging');
-// Racine machine-dépendante → V2_DIR/.env.local (cf. datagen/lib/env).
-const V2_POOL = () => v2ImagesDir();
 /**
- * Pool éditorial de la V3 — assets qui n'existent PAS dans le jeu et que le
- * wiki produit lui-même (icône corrigée d'un effet que les tables affublent du
- * sprite d'un autre…). Mêmes chemins relatifs que le pool V2, mais VERSIONNÉ
- * dans le repo : la V2 est la prod, on n'y écrit pas, et un asset qui ne vit
- * que sur une machine finit par manquer à la collecte suivante.
- *
- * Consulté AVANT la V2 : la V3 corrige, la V2 n'est qu'un héritage.
+ * Pool éditorial — assets qui n'existent PAS dans le jeu et que le wiki
+ * produit lui-même (icône corrigée d'un effet que les tables affublent du
+ * sprite d'un autre…). VERSIONNÉ dans le repo : un asset qui ne vit que sur
+ * une machine finit par manquer à la collecte suivante. SEUL pool depuis le
+ * 22/07 : l'héritage V2 (309 fichiers, 4 Mo) y a été rapatrié et le pont
+ * V2_DIR coupé (décision Sevih — la V2 se décommissionne).
  * Fichier SOURCE, jamais servi — `assets:collect` le dépose dans le staging,
  * `assets:push` l'envoie au R2 (le build CI ne le lit pas et l'image Docker ne
  * l'embarque pas : elle ne copie que .next + public).
  */
-const V3_EDITORIAL = () => resolve('data/editorial');
+const EDITORIAL_POOL = () => resolve('data/editorial');
 
-/** Premier pool contenant `rel` (V3 d'abord, V2 en héritage) — undefined sinon. */
+/** Chemin de `rel` dans le pool éditorial — undefined s'il n'y est pas. */
 function editorialSource(rel: string): string | undefined {
-  for (const pool of [V3_EDITORIAL(), V2_POOL()]) {
-    const p = resolve(pool, rel);
-    if (existsSync(p)) return p;
-  }
-  return undefined;
+  const p = resolve(EDITORIAL_POOL(), rel);
+  return existsSync(p) ? p : undefined;
 }
 
 // --- état de fraîcheur ----------------------------------------------------------

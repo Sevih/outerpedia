@@ -34,9 +34,18 @@
   Sevih) : le regen changelog depuis la V2 (`regenChangelogFromV2` + route
   `/api/admin/tools/regen-v2` + `RegenFromV2Button` — l'historique est seedé,
   V3 seule source de vérité, le code vit dans git) et
-  `scripts/migrate-legacy-news.ts` (one-shot déjà joué). RESTE, assumé : le
-  pool d'images héritage de `assets:collect` (stage.ts, « on s'en fiche un peu
-  des images restantes ») et la V2 sur l'ancien serveur en filet de rollback.
+  `scripts/migrate-legacy-news.ts` (one-shot déjà joué). Le POOL D'IMAGES V2
+  aussi (2ᵉ passe, précision Sevih « dégage-le ») : les 309 sources
+  éditoriales (4,0 Mo) que la collecte résolvait encore depuis le pool V2 sont
+  RAPATRIÉES dans `data/editorial` (versionné — fin du pool machine-dépendant),
+  `v2Dir`/`v2ImagesDir`/`V2_DIR` supprimés, le choix editorial-vs-extraction du
+  manifeste se fait sur `data/editorial`. Au passage le scan des screenshots de
+  guides ignore désormais les sous-dossiers (le `general-guides/banner/`
+  rapatrié le faisait trébucher — ces sprites passent par `editorialFallback`).
+  `assets:collect` vérifié TOUT VERT sans repo V2 voisin. Les 50 sources
+  « nulle part » de l'inventaire = `editorialFallback` jamais déclenchés
+  (l'extraction couvre), comportement inchangé. RESTE : la V2 sur l'ancien
+  serveur en filet de rollback (décommission planifiée).
   `.env.example` resynchronisé : l'en-tête « V2 — PAS ENCORE PORTÉ / aucun code
   ne lit ces variables » mentait (DB_*, BOT_API_URL, REVALIDATE_SECRET sont
   consommés depuis le 21/07) ; bloc V2_DIR réduit au seul pool d'images.
