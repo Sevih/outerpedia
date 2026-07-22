@@ -27,10 +27,15 @@ import { statAbbr } from '@/lib/stats';
 import { getCharacter } from '@/lib/data/characters';
 import { getCharacterCurated } from '@/lib/data/curated';
 import { entityReview, extractedBundle } from '@/lib/admin/review-store';
-import type { Glossaries, Skill } from '@contracts';
+import { diffLabels, skillLabel } from '@/lib/admin/diff-labels';
+import type { Glossaries, LocalizedText, Skill } from '@contracts';
 import glossariesData from '@data/generated/glossaries.json';
+import committedSkillsData from '@data/generated/skills.json';
+import setsData from '@data/generated/equipment/sets.json';
 
 const G = glossariesData as unknown as Glossaries;
+const COMMITTED_SKILLS = committedSkillsData as unknown as Record<string, Skill>;
+const SETS = setsData as unknown as Record<string, { name: LocalizedText }>;
 
 /**
  * VUE EXTRACTOR d'un perso : l'extraction FRAÎCHE (la proposition) + le contrôle
@@ -107,6 +112,14 @@ export default async function ExtractorCharacterDetail({
     'en',
   );
 
+  // Libellés du diff : un écart de liste de skills est indécidable en ids nus.
+  // L'id qui DISPARAÎT n'existe que côté committé (`skills.json`), celui qui
+  // apparaît que côté extraction — d'où les deux sources.
+  const labels = diffLabels(review.fields, {
+    skills: (sid) => skillLabel((bundle.skills[sid] as Skill | undefined) ?? COMMITTED_SKILLS[sid]),
+    recommendedSets: (sid) => (SETS[sid] ? lRec(SETS[sid].name, 'en') : undefined),
+  });
+
   // Statuts référencés par le kit : lien encyclopédie + bascule « ignoré du live ».
   const curatedEffects = loadCuratedEffects();
   const refEffects = new Map<
@@ -172,7 +185,7 @@ export default async function ExtractorCharacterDetail({
       </section>
 
       {/* Diff extraction ↔ committé */}
-      <EntityDiffPanel fields={review.fields} />
+      <EntityDiffPanel fields={review.fields} labels={labels} />
       {hasChanges && <IntegrateCharacterButton id={id} isNew={isNew} />}
 
       {/* Ce que l'extraction produit : stats */}

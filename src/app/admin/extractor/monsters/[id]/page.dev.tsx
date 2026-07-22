@@ -15,6 +15,7 @@ import { lRec } from '@/lib/i18n/localize';
 import { expandRankContexts } from '@/lib/monster-stats';
 import { MonsterStatsCard } from '@/components/admin/MonsterStatsCard';
 import { entityReview, monsterArchiveOf } from '@/lib/admin/review-store';
+import { diffLabels, skillLabel } from '@/lib/admin/diff-labels';
 import { monsterBossBadgeSrc, monsterIconSrc, monsterSlotSrc } from '@/lib/admin/monster-icon';
 import { img } from '@/lib/images';
 import {
@@ -51,6 +52,13 @@ export default async function ExtractorMonsterPage({
   const skills = m.skills
     .map((sid) => (bundle?.skills[sid] ?? committedSkills[sid]) as Skill | undefined)
     .filter((s): s is Skill => Boolean(s));
+
+  // Libellés du diff : un écart de liste de skills est indécidable en ids nus.
+  // L'id qui DISPARAÎT n'existe que côté committé, celui qui apparaît que côté
+  // extraction — d'où les deux sources.
+  const labels = diffLabels(review.fields, {
+    skills: (sid) => skillLabel((bundle?.skills[sid] as Skill | undefined) ?? committedSkills[sid]),
+  });
 
   // Déclencheur d'enrage RÉEL (`Monster.rage`, extrait de RageTemplet) : les
   // descs des skills rage_enterN sont écrites pour UNE variante du boss et
@@ -198,7 +206,7 @@ export default async function ExtractorMonsterPage({
 
       <EntitySwitch id={m.id} mode="extractor" entity="monsters" />
 
-      {review.status === 'changed' && <EntityDiffPanel fields={review.fields} />}
+      {review.status === 'changed' && <EntityDiffPanel fields={review.fields} labels={labels} />}
 
       <MonsterActions
         id={m.id}

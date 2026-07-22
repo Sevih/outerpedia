@@ -27,6 +27,37 @@
 
 ## 2026-07-22
 
+- **Les skills NPC ne polluent plus les fiches perso, et un diff d'ids devient
+  lisible.** Parti d'une question de Sevih sur `/admin/extractor/characters/2000001` :
+  « `skills[14] : 132 → 130`, ça correspond à quoi ? ». Deux problèmes distincts
+  derrière. **(1) Le panneau de diff était indécidable** : des ids nus, sans
+  moyen de trancher. `lib/admin/diff-labels.ts` résout les valeurs des DEUX
+  côtés — l'id qui disparaît n'existe plus que dans le committé (`skills.json`),
+  celui qui apparaît que dans l'extraction fraîche, une seule source et la
+  moitié des lignes reste muette. Repli sur le TYPE quand le skill n'a pas de
+  nom localisé (`strike_finish`), et le diff mot-à-mot est désactivé sur les ids
+  résolus (comparer « 132 » et « 130 » lettre à lettre n'apprend rien). Branché
+  sur les fiches perso (+ `recommendedSets`) et monstre. **(2) Le vrai bug,
+  trouvé grâce aux libellés** (intuition de Sevih : « c'est pas le perso, c'est
+  les monstres qui ont son modèle ») : la spec déduisait une « forme de combat »
+  d'une RESSEMBLANCE — apparence dont le kit principal diffère de la base — et
+  ramassait donc les variantes **NPC** (`NPCCharacterTemplet` : K niveau 99 ★9,
+  id 2600001, `OriginalCharacterID` 2000001). Six persos héritaient de skills
+  qu'un joueur ne joue jamais (K perdait « Raging Storm » + « Sliding
+  Uppercut », Snow, Francesca, Tanya, Veronica, Stella). Remplacé par la
+  DÉCLARATION du jeu (`CharacterChangeTemplet`), skins ramenés à leur base.
+  Vérifié : Demiurge Luna garde sa vraie forme (12001…12021), **zéro**
+  changement de `tags`/`ignoreDefense` (la détection de pénétration parcourt
+  `skills` — c'était le risque), aucune entrée curée orpheline. Piège écarté au
+  passage : `NPCCharacterTemplet` n'est PAS un marqueur de fausse variante (les
+  persos jouables et leurs skins y figurent, le jeu les utilise en NPC de
+  scénario) — écrire la règle en exclusion aurait cassé des skins légitimes.
+  Refusé : classer ces écarts en « typo » comme demandé — ce bucket alimente
+  `applyTypoOnly()` qui applique AUTOMATIQUEMENT, et il ne peut plus se
+  reproduire de toute façon (les 6 écarts sont un nettoyage unique, à intégrer
+  fiche par fiche : l'accept global embarquerait Lambda et le `2400015` sans
+  nom, pas encore publiables).
+
 - **`<html lang>` par langue — layouts racine multiples (b679985).** Le layout
   racine global figeait `lang="en"` partout ; il disparaît. Chaque racine rend
   son `<html>` via la coquille commune `src/app/root-document.tsx` :

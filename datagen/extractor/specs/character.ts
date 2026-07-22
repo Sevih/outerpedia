@@ -656,24 +656,30 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       else appearancesOf.set(target, [r.ID]);
     }
 
-    // FORMES DE COMBAT : apparence dont le KIT PRINCIPAL (Skill_1..3) diffère de
-    // la base = même perso sous une autre forme en combat (Demiurge Luna
-    // 2000119 ↔ 2000120 via son S2). Ses skills rejoignent la fiche de la base —
-    // le jeu les présente comme un seul personnage. Les variantes de contenu
-    // spécial (slots annexes uniquement) et les skins ne sont PAS concernés.
+    // FORMES DE COMBAT : la transformation DÉCLARÉE par le jeu
+    // (`CharacterChangeTemplet`, Demiurge Luna 2000119 → 2000120 via son S2).
+    // Ses skills rejoignent la fiche de la base — le joueur les déclenche, le
+    // jeu présente un seul personnage.
+    //
+    // ⚠ Ne PAS déduire la forme d'un « kit principal différent » : les VARIANTES
+    // NPC (`NPCCharacterTemplet` : K niveau 99 ★9 en renfort de scénario, id
+    // 2600001, `OriginalCharacterID` 2000001) empruntent le modèle ET l'identité
+    // d'un perso avec un kit à elles. L'heuristique les repliait sur la fiche du
+    // JOUEUR, qui héritait de skills qu'il ne joue jamais (K : « Raging Storm »,
+    // « Sliding Uppercut »…). Une déclaration explicite du jeu, pas une
+    // ressemblance.
     const rowById = new Map(loadTable('CharacterTemplet').map((r) => [r.ID, r]));
     const formSkillsByBase = new Map<string, string[]>();
-    for (const r of loadTable('CharacterTemplet')) {
-      if (r.Type !== 'CT_PC' || ownIdentity(r)) continue;
-      const base = rowById.get(r.NameID.replace(/_Name$/, ''));
-      if (!base) continue;
-      const mainSwapped = ['Skill_1', 'Skill_2', 'Skill_3'].some(
-        (k) => r[k] && base[k] && r[k] !== base[k],
-      );
-      if (!mainSwapped) continue;
+    for (const chg of loadTable('CharacterChangeTemplet')) {
+      const source = rowById.get(chg.ID);
+      const form = rowById.get(chg.ChangeCharacterID);
+      if (!source || !form) continue;
+      // La transformation est déclarée aussi pour les SKINS (2010119 → 2010120) :
+      // on ramène toujours à l'identité de base.
+      const baseId = ownIdentity(source) ? source.ID : source.NameID.replace(/_Name$/, '');
       const skills: string[] = [];
-      for (let i = 1; i <= 23; i++) if (r[`Skill_${i}`]) skills.push(r[`Skill_${i}`]);
-      formSkillsByBase.set(base.ID, [...(formSkillsByBase.get(base.ID) ?? []), ...skills]);
+      for (let i = 1; i <= 23; i++) if (form[`Skill_${i}`]) skills.push(form[`Skill_${i}`]);
+      formSkillsByBase.set(baseId, [...(formSkillsByBase.get(baseId) ?? []), ...skills]);
     }
 
     // ACQUISITION (premium/limited/seasonal/collab) : la BANNIÈRE fait foi.
