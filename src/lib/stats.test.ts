@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { statAbbr, statIconSprite, statName, statOptionView } from '@/lib/stats';
+import { statAbbr, statIconSprite, statOptionView } from '@/lib/stats';
+import { statName } from '@/lib/data/stat-glossary';
 
 describe('statAbbr', () => {
   it('rend l’abréviation canonique d’un slug connu', () => {

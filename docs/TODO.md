@@ -92,6 +92,16 @@
 > Le gros de l'audit est traité (cf. DONE 20-21/07 : canonicals, comics, cache).
 > Ce qui suit est du volume, pas du bug. Détail : `docs/seo&audit/`.
 
+- [ ] **Découper `glossaries.json` à la génération** (1,79 Mo, 21 sections) —
+      6 composants client le tirent ENTIER via
+      `SkillDescription → GameTokens → lib/game-tokens`, qui n'y lit que
+      `elements` + `classes` : **0,8 Ko, 0,04 % du fichier**. À lui seul
+      `rewardTables` en fait 43 %, et n'a rien à faire dans un rendu de
+      description de skill. Chantier `datagen/` (sortie de pipeline, pas
+      d'édition à la main) : émettre des fichiers par famille et faire pointer
+      chaque consommateur sur ce dont il a besoin. Les autres fuites ont été
+      fermées le 22/07 (cf. DONE : `STAR_SPRITE`, scission de `lib/stats`).
+
 - [ ] **Titles / meta descriptions courts** (572 / 135 pages) — surtout les
       pages générées ; à arbitrer, ce n'est pas mécanique.
       (`<html lang>`, `alt` manquants et `width`/`height` TRAITÉS le 22/07,

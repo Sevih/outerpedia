@@ -27,6 +27,27 @@
 
 ## 2026-07-22
 
+- **`lib/stats` scindé : les tables pures d'un côté, le glossaire de l'autre —
+  fuites client 16 → 8.** Même classe de bug que `STAR_SPRITE`, en plus
+  systémique : `lib/stats` mêlait des tables PURES (`STAT_ABBR`, `STAT_ICON`,
+  `statAbbr`, `statIconSprite`, `statOptionView`) et deux fonctions adossées au
+  glossaire extrait (`statName`, `statDesc`, via `glossaries.json`, 1,8 Mo).
+  Relevé des 20 sites d'import : les composants `use client` (fiches perso,
+  équipement, tier list, outils) ne prennent QUE `STAT_ICON` ou `statAbbr` —
+  aucun ne veut les noms localisés — et embarquaient pourtant 1,8 Mo. Les deux
+  fonctions partent dans `lib/data/stat-glossary` (data access layer : c'est de
+  la donnée de jeu), `lib/stats` n'importe plus rien de `data/`. La frontière
+  est posée sur la DÉPENDANCE À LA DONNÉE, pas sur le thème — écrit dans le
+  docblock du nouveau module pour qu'elle ne se referme pas. 7 appelants
+  serveur réorientés.
+
+  RESTE (voir TODO) : 6 composants client tirent encore les 1,8 Mo par
+  `SkillDescription → GameTokens → lib/game-tokens`. Là ce n'est plus un
+  rangement mais la forme du fichier : `game-tokens` lit `elements` et
+  `classes`, soit **0,8 Ko — 0,04 % de `glossaries.json`**, dont 43 % sont des
+  `rewardTables` sans rapport. Le correctif est un découpage à la GÉNÉRATION,
+  pas un déplacement de code.
+
 - **`skills.json` (5,2 Mo) sort du bundle navigateur des 794 pages de guides —
   pour UNE constante mal rangée.** L'audit Sitebulb flaggait 794 URLs en
   « enormous network payloads » (67 % du site) ; en croisant les ressources du

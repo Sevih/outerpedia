@@ -18,7 +18,8 @@ import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { img } from '@/lib/images';
 import { localePath } from '@/lib/navigation';
-import { STAT_ICON, statName } from '@/lib/stats';
+import { STAT_ICON } from '@/lib/stats';
+import { statName } from '@/lib/data/stat-glossary';
 import { getCatalogEntry } from '@/lib/data/items';
 import {
   accessoryMainStats,

@@ -36,7 +36,8 @@ import type {
 import type { Lang } from '@/lib/i18n/config';
 import type { TFunction } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
-import { statAbbr, statName } from '@/lib/stats';
+import { statAbbr } from '@/lib/stats';
+import { statName } from '@/lib/data/stat-glossary';
 import { GRADE_RANK } from '@/lib/data/gear-order';
 import weaponData from '@data/generated/equipment/weapon.json';
 import accessoryData from '@data/generated/equipment/accessory.json';

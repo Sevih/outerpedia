@@ -64,7 +64,7 @@ import {
   type GiftView,
 } from '@/lib/data/char-progression';
 import { STEP_STAT_KEYS, type StepStatKey } from '@/lib/stat-compose';
-import { statDesc, statName } from '@/lib/stats';
+import { statDesc, statName } from '@/lib/data/stat-glossary';
 import { getEquipmentDetail } from '@/lib/data/equipment-detail';
 import { shopSourceLabel, slugifyEquipment } from '@/lib/data/equipment';
 import {

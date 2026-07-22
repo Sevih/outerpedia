@@ -38,7 +38,8 @@ import {
 } from '@/lib/data/monsters';
 import type { CardSkill } from '@/components/character/SkillCard';
 import { EffectIconBadge } from '@/components/character/EffectChips';
-import { statIconSprite, statAbbr, statName } from '@/lib/stats';
+import { statIconSprite, statAbbr } from '@/lib/stats';
+import { statName } from '@/lib/data/stat-glossary';
 import { MonsterSkills, MonsterSkillBody } from './MonsterSkills';
 import { SegmentedTabs, type TabItem } from './SegmentedTabs';
 import { BossRankProvider, BossLevel } from './BossRank';

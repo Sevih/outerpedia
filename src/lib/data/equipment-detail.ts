@@ -16,7 +16,8 @@ import type {
 } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
-import { STAT_ABBR, statName, statOptionView } from '@/lib/stats';
+import { STAT_ABBR, statOptionView } from '@/lib/stats';
+import { statName } from '@/lib/data/stat-glossary';
 import { PERCENT_STATS } from '@/../datagen/lib/stats';
 import {
   getAmuletFamilies,

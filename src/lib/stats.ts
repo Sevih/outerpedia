@@ -14,18 +14,7 @@
  *
  * Toute nouvelle correspondance de stat se déclare ICI, nulle part ailleurs.
  */
-import type { LangDict } from '@contracts';
-import type { Lang } from '@/lib/i18n/config';
-import { lRec } from '@/lib/i18n/localize';
 import { PERCENT_STATS, RAW_FLAT_STATS } from '@/../datagen/lib/stats';
-import glossariesData from '@data/generated/glossaries.json';
-
-const GLOSSARIES = glossariesData as unknown as {
-  statNames: Record<string, LangDict>;
-  statDescs: Record<string, LangDict>;
-};
-const STAT_NAMES = GLOSSARIES.statNames;
-const STAT_DESCS = GLOSSARIES.statDescs;
 
 /** Slug de stat (perso OU buff) → abréviation canonique. */
 export const STAT_ABBR: Record<string, string> = {
@@ -55,33 +44,6 @@ export const STAT_ABBR: Record<string, string> = {
   // PAS de mapping pour `accuracy`/`avoid` : stats RETIRÉES du jeu (l'ancien
   // couple précision/esquive) — il n'en survit que les effets « Miss Rate »,
   // résolus par leur nom, jamais par abréviation de stat.
-};
-
-/**
- * Abréviation canonique (= token `{S/…}` éditorial) → slug du glossaire
- * `statNames` extrait du jeu. `pct` = variante % d'une stat flat : le jeu ne
- * la nomme pas séparément, on compose « Attack % ».
- */
-const ABBR_TO_SLUG: Record<string, { slug: string; pct?: boolean }> = {
-  ATK: { slug: 'atk' },
-  'ATK%': { slug: 'atk', pct: true },
-  DEF: { slug: 'def' },
-  'DEF%': { slug: 'def', pct: true },
-  HP: { slug: 'hp' },
-  'HP%': { slug: 'hp', pct: true },
-  SPD: { slug: 'speed' },
-  CHC: { slug: 'critical_rate' },
-  CHD: { slug: 'critical_dmg_rate' },
-  EFF: { slug: 'buff_chance' },
-  'EFF%': { slug: 'buff_chance', pct: true },
-  RES: { slug: 'buff_resist' },
-  'RES%': { slug: 'buff_resist', pct: true },
-  PEN: { slug: 'pierce_power' },
-  'PEN%': { slug: 'pierce_power_rate' },
-  LS: { slug: 'vampiric' },
-  'DMG UP%': { slug: 'dmg_boost' },
-  'DMG RED%': { slug: 'dmg_reduce_rate' },
-  'CDMG RED%': { slug: 'e_cri_dmg_reduce' },
 };
 
 /** Abréviation canonique → sprite d'icône de stat du jeu (`CM_Stat_Icon_*`). */
@@ -145,29 +107,6 @@ export function statOptionView(
   return { key: percent && PCT_SUFFIX.has(stat) ? `${abbr}%` : abbr, percent };
 }
 
-/**
- * Nom complet localisé d'un slug ou d'une abréviation, depuis le glossaire
- * `statNames` EXTRAIT (« Counterattack Chance »…). Repli : abréviation.
- */
-export function statName(slugOrAbbr: string, lang: Lang): string {
-  const direct = STAT_NAMES[slugOrAbbr];
-  if (direct) return lRec(direct, lang) || direct.en;
-  const abbr = STAT_ABBR[slugOrAbbr] ?? slugOrAbbr;
-  const entry = ABBR_TO_SLUG[abbr];
-  const name = entry && STAT_NAMES[entry.slug];
-  if (!name) return abbr;
-  return `${lRec(name, lang) || name.en}${entry.pct ? ' %' : ''}`;
-}
-
-/**
- * Description OFFICIELLE d'une stat (`SYS_STAT_DESC_*`) — le jeu n'en fournit
- * que pour quelques-unes (DMG ±, pénétration…). `undefined` sinon.
- */
-export function statDesc(slugOrAbbr: string, lang: Lang): string | undefined {
-  const slug = STAT_DESCS[slugOrAbbr]
-    ? slugOrAbbr
-    : ABBR_TO_SLUG[STAT_ABBR[slugOrAbbr] ?? slugOrAbbr]?.slug;
-  const d = slug ? STAT_DESCS[slug] : undefined;
-  if (!d) return undefined;
-  return (lRec(d, lang) || d.en).replace(/\\n/g, '\n');
-}
+// `statName` / `statDesc` vivent dans `@/lib/data/stat-glossary` : ils lisent le
+// glossaire extrait (1,8 Mo), que ce module ne doit PAS entraîner — il est lu
+// par des composants `use client` qui n'en veulent que les tables pures.
