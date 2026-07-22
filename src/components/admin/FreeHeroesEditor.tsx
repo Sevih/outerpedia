@@ -7,21 +7,29 @@
  *
  * Chaque texte (libellé de source, raison) est un `InlineTextField` : aperçu
  * fidèle via le vrai `parseText` (tokens `{I-I/…}`, `{E/…}`), et auto-traduction
- * EN → langues vides (DeepL → Haiku), comme l'éditeur de guides de boss. Les
+ * EN → toutes les langues (DeepL → Haiku), comme l'éditeur de guides de boss. Les
  * héros sont désignés par NOM D'AFFICHAGE EN (clé du contenu, comme le rendu).
  */
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { type Keyed, rowKey, stripKey, withKey } from '@/lib/admin/keyed';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import type { FreeHeroesData, FreeHeroSourceData } from '@/lib/admin/general-guide-store';
 import { autoTranslate } from '@/lib/admin/translate-actions';
+import { applyTranslation, createFreshness } from '@/lib/admin/translate-fill';
 import { InlineTextField } from '@/components/admin/InlineTextField';
-import { CharacterPortrait } from '@/components/character/CharacterPortrait';
+import {
+  CharacterChips,
+  CharacterNameDatalist,
+  viewsByName,
+} from '@/components/admin/CharacterChips';
 import type { CharOption } from '@/components/admin/CharacterPicker';
 
 const LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
 type L = (typeof LANGS)[number];
 type LText = { en?: string } & Record<string, string | undefined>;
+
+/** Datalist des noms de persos, posée une fois par page. */
+const DATALIST_ID = 'free-heroes-char-names';
 
 const btn =
   'rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm hover:border-accent disabled:opacity-50';
@@ -36,66 +44,6 @@ const keySource = (s: FreeHeroSourceData): KSource =>
   withKey({ ...s, entries: s.entries.map(withKey) });
 const stripSource = (s: KSource): FreeHeroSourceData =>
   stripKey({ ...s, entries: s.entries.map(stripKey) });
-
-/* --- Puces de personnages (mêmes portraits que le guide) --- */
-function CharacterChips({
-  names,
-  charByName,
-  onChange,
-}: {
-  names: string[];
-  charByName: Map<string, CharOption>;
-  onChange: (names: string[]) => void;
-}) {
-  const [add, setAdd] = useState('');
-  return (
-    <div className="flex flex-wrap items-center gap-2">
-      {names.map((n, i) => {
-        const c = charByName.get(n);
-        return (
-          <div key={i} className="relative">
-            {c ? (
-              <CharacterPortrait
-                id={c.id}
-                name={c.name}
-                element={c.element}
-                classType={c.class}
-                rarity={c.rarity}
-                size={48}
-              />
-            ) : (
-              <div className="border-line-subtle text-content-subtle flex h-12 w-12 items-center justify-center rounded-lg border p-1 text-center text-[10px]">
-                {n || '?'}
-              </div>
-            )}
-            <button
-              type="button"
-              title="Remove"
-              className="border-line bg-surface-raised text-danger absolute -top-1.5 -right-1.5 rounded-full border px-1 text-xs"
-              onClick={() => onChange(names.filter((_, j) => j !== i))}
-            >
-              ✕
-            </button>
-          </div>
-        );
-      })}
-      <input
-        className={`${input} h-9 w-36`}
-        list="free-heroes-char-names"
-        placeholder="+ hero…"
-        value={add}
-        onChange={(e) => setAdd(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key !== 'Enter') return;
-          e.preventDefault();
-          const raw = add.trim();
-          if (raw) onChange([...names, raw]);
-          setAdd('');
-        }}
-      />
-    </div>
-  );
-}
 
 /* --- Éditeur principal --- */
 export function FreeHeroesEditor({
@@ -115,8 +63,14 @@ export function FreeHeroesEditor({
   const [error, setError] = useState<string | null>(null);
   const [trans, setTrans] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
   const [transMsg, setTransMsg] = useState<string | null>(null);
+  // Photo des EN au chargement : référence de ce qui est « déjà traduit ».
+  const [freshness] = useState(() =>
+    createFreshness(
+      initial.sources.flatMap((s) => [s.source.en, ...s.entries.map((e) => e.reason.en)]),
+    ),
+  );
 
-  const charByName = new Map(charOptions.map((c) => [c.name, c]));
+  const viewOf = useMemo(() => viewsByName(charOptions), [charOptions]);
 
   const show = (t: LText | undefined): string => t?.[lang] ?? '';
   const editLText = (cur: LText | undefined, val: string): LText => {
@@ -134,8 +88,8 @@ export function FreeHeroesEditor({
       entries: sources[si].entries.map((e, j) => (j === ei ? { ...e, ...p } : e)),
     } as Partial<KSource>);
 
-  /* --- Auto-traduction : EN → langues vides (libellés + raisons) --- */
-  async function translateEmpty() {
+  /* --- Auto-traduction : EN → toutes les langues (libellés + raisons) --- */
+  async function translateAll() {
     setTrans('loading');
     setTransMsg(null);
     const targets = LANGS.filter((l) => l !== 'en');
@@ -146,37 +100,34 @@ export function FreeHeroesEditor({
       source: { ...s.source },
       entries: s.entries.map((e) => ({ ...e, reason: { ...e.reason } })),
     }));
+    // Ne part au traducteur que ce qui a BOUGÉ (EN édité/ajouté) ou à qui il
+    // manque une langue — inutile de repayer DeepL pour l'identique.
     const recs: LText[] = [];
     next.forEach((s) => {
-      if (s.source.en?.trim()) recs.push(s.source);
-      s.entries.forEach((e) => e.reason.en?.trim() && recs.push(e.reason));
+      recs.push(s.source, ...s.entries.map((e) => e.reason));
     });
-    if (!recs.length) {
+    const stale = recs.filter((t) => freshness.isStale(t, targets));
+    if (!stale.length) {
       setTrans('done');
-      setTransMsg('Nothing to translate (no EN text).');
+      setTransMsg('Nothing to translate — every English text is already up to date.');
       return;
     }
     try {
       const { results, provider } = await autoTranslate(
-        recs.map((r) => r.en!),
+        stale.map((r) => r.en!),
         targets,
       );
       let filled = 0;
-      recs.forEach((rec, k) => {
-        const tr = (results[k] ?? {}) as Partial<Record<L, string>>;
-        for (const l of targets) {
-          if (tr[l] && !rec[l]?.trim()) {
-            rec[l] = tr[l]!;
-            filled++;
-          }
-        }
+      stale.forEach((rec, k) => {
+        filled += applyTranslation(rec, results[k] ?? {}, targets);
+        freshness.markFresh(rec);
       });
       setSources(next);
       setTrans('done');
       setTransMsg(
         filled
           ? `${filled} field(s) translated via ${provider === 'haiku' ? 'Haiku (DeepL quota reached)' : 'DeepL'} — review before saving.`
-          : 'All target languages were already filled.',
+          : 'Every translation already matched the English text.',
       );
     } catch (e) {
       setTrans('error');
@@ -213,11 +164,7 @@ export function FreeHeroesEditor({
 
   return (
     <div className="space-y-6">
-      <datalist id="free-heroes-char-names">
-        {charOptions.map((c) => (
-          <option key={c.id} value={c.name} />
-        ))}
-      </datalist>
+      <CharacterNameDatalist id={DATALIST_ID} options={charOptions} />
 
       {/* Langue + auto-traduction */}
       <div className="flex flex-wrap items-center gap-2">
@@ -237,11 +184,11 @@ export function FreeHeroesEditor({
         <button
           type="button"
           className={btn}
-          onClick={translateEmpty}
+          onClick={translateAll}
           disabled={trans === 'loading'}
-          title="Translate EN into the still-empty languages (DeepL → Haiku)"
+          title="Regenerates every other language from the English text — existing translations are overwritten (DeepL → Haiku)"
         >
-          {trans === 'loading' ? 'Translating…' : 'Translate (EN → empty)'}
+          {trans === 'loading' ? 'Translating…' : 'Translate (EN → all)'}
         </button>
         {transMsg && (
           <span className={`text-xs ${trans === 'error' ? 'text-danger' : 'text-content-subtle'}`}>
@@ -289,8 +236,9 @@ export function FreeHeroesEditor({
               <div key={e._key} className="border-line-subtle space-y-3 rounded-lg border p-3">
                 <div className="flex items-start justify-between gap-2">
                   <CharacterChips
-                    names={e.names}
-                    charByName={charByName}
+                    values={e.names}
+                    datalistId={DATALIST_ID}
+                    viewOf={viewOf}
                     onChange={(names) => patchEntry(si, ei, { names })}
                   />
                   <button

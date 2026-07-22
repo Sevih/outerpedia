@@ -22,8 +22,9 @@ import type {
   ReviewsBundle,
 } from '@/lib/admin/general-guide-store';
 import { autoTranslate } from '@/lib/admin/translate-actions';
+import { applyTranslation, type Freshness } from '@/lib/admin/translate-fill';
 import { InlineTextField } from '@/components/admin/InlineTextField';
-import { CharacterChips } from '@/components/admin/CharacterChips';
+import { CharacterChips, chipView } from '@/components/admin/CharacterChips';
 import { CharacterPicker, type CharOption } from '@/components/admin/CharacterPicker';
 
 export const LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
@@ -88,17 +89,23 @@ export const editLText = (cur: LText | undefined, val: string, lang: L): LText =
   return next;
 };
 
-/** Traduit l'EN → langues vides des REVIEWS des deux buckets (admin). */
+/**
+ * Regénère les REVIEWS des deux buckets depuis leur EN (admin) — écrase les
+ * traductions. La fraîcheur restreint l'envoi à ce qui a BOUGÉ depuis le
+ * chargement (quota DeepL).
+ */
 export async function translateReviews(
   bundle: ReviewsBundle,
+  freshness: Freshness,
 ): Promise<{ next: ReviewsBundle; filled: number; provider: string }> {
   const targets = LANGS.filter((l) => l !== 'en');
   const clone = (list: ReviewEntryData[]) =>
     list.map((r) => ({ ...r, review: { ...r.review } as LText }));
   const next: ReviewsBundle = { premium: clone(bundle.premium), limited: clone(bundle.limited) };
 
-  const recs: LText[] = [];
-  for (const r of [...next.premium, ...next.limited]) if (r.review.en?.trim()) recs.push(r.review);
+  const recs = [...next.premium, ...next.limited]
+    .map((r) => r.review)
+    .filter((t) => freshness.isStale(t, targets));
   if (!recs.length) return { next, filled: 0, provider: 'deepl' };
 
   const { results, provider } = await autoTranslate(
@@ -107,13 +114,8 @@ export async function translateReviews(
   );
   let filled = 0;
   recs.forEach((rec, k) => {
-    const tr = (results[k] ?? {}) as Partial<Record<L, string>>;
-    for (const l of targets) {
-      if (tr[l] && !rec[l]?.trim()) {
-        rec[l] = tr[l]!;
-        filled++;
-      }
-    }
+    filled += applyTranslation(rec, results[k] ?? {}, targets);
+    freshness.markFresh(rec);
   });
   return { next, filled, provider };
 }
@@ -546,16 +548,16 @@ export function PriorityOrderEditor({
               ))}
             </div>
             <CharacterChips
-              names={[]}
-              charByName={charByName}
+              values={[]}
               datalistId={DATALIST_ID}
+              viewOf={(name) => chipView(charByName.get(name))}
               onChange={(added) => {
                 const name = added[added.length - 1];
                 if (name) setTier(key, [...list, { name, stars: 3 }]);
               }}
             />
             <p className="text-content-subtle text-[11px]">
-              Type a name + Enter to add a hero to this tier.
+              Pick a hero from the list — or type a name + Enter — to add it to this tier.
             </p>
           </div>
         );

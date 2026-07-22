@@ -65,13 +65,13 @@
       }
     },
     {
-      "characters": ["Mene"],
+      "characters": ["Mene", "Primine"],
       "reason": {
-        "en": "{C/Healer} with both {B/BT_RESURRECTION} and {B/BT_EXTEND_DEBUFF}.",
-        "jp": "{B/BT_RESURRECTION}と{B/BT_EXTEND_DEBUFF}の両方を持つ{C/Healer}。",
-        "kr": "{B/BT_RESURRECTION}와 {B/BT_EXTEND_DEBUFF}를 모두 가진 {C/Healer}.",
-        "zh": "同时拥有{B/BT_RESURRECTION}和{B/BT_EXTEND_DEBUFF}的{C/Healer}。",
-        "fr": "{C/Healer} avec à la fois {B/BT_RESURRECTION} et {B/BT_EXTEND_DEBUFF}."
+        "en": "{E/Water} {C/Healer} options.",
+        "jp": "{E/Water} {C/Healer} オプション。",
+        "kr": "{E/Water} {C/Healer} 옵션.",
+        "zh": "{E/Water} {C/Healer} 选项。",
+        "fr": "{E/Water} {C/Healer} options."
       }
     },
     {

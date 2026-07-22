@@ -224,7 +224,7 @@ export type RawTeams = SlotsTeamRaw | BucketTeamRaw | NamedTeamRaw;
 
 /* --- Helpers partagés --- */
 
-export const hasText = (t?: LText): boolean =>
+export const hasText = (t?: LocalizedText): boolean =>
   t ? Object.values(t).some((x) => typeof x === 'string' && x.trim()) : false;
 
 const clean = <T extends LText>(list: T[]): T[] => list.filter(hasText);

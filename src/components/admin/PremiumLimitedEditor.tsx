@@ -15,6 +15,7 @@ import type { InlineRefs } from '@/lib/admin/inline-refs';
 import type { PremiumLimitedData, ReviewsBundle } from '@/lib/admin/general-guide-store';
 import type { CharOption } from '@/components/admin/CharacterPicker';
 import { CharacterNameDatalist } from '@/components/admin/CharacterChips';
+import { createFreshness } from '@/lib/admin/translate-fill';
 import {
   DATALIST_ID,
   LangBar,
@@ -59,6 +60,12 @@ export function PremiumLimitedEditor({
   const [trans, setTrans] = useState<'idle' | 'loading'>('idle');
   const [msg, setMsg] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  // Photo des EN au chargement : référence de ce qui est « déjà traduit ».
+  const [freshness] = useState(() =>
+    createFreshness(
+      [...initial.reviews.premium, ...initial.reviews.limited].map((r) => r.review.en),
+    ),
+  );
 
   const charByName = new Map(charOptions.map((c) => [c.name, c]));
   const switchBucket = (b: Bucket) => {
@@ -70,12 +77,12 @@ export function PremiumLimitedEditor({
     setTrans('loading');
     setMsg(null);
     try {
-      const { next, filled, provider } = await translateReviews(reviews);
+      const { next, filled, provider } = await translateReviews(reviews, freshness);
       setReviews(next);
       setMsg(
         filled
           ? `${filled} field(s) translated via ${provider === 'haiku' ? 'Haiku' : 'DeepL'} — review before saving.`
-          : 'Nothing to fill.',
+          : 'Nothing to translate — every English text is already up to date.',
       );
     } catch (e) {
       setMsg((e as Error).message);
@@ -141,8 +148,14 @@ export function PremiumLimitedEditor({
       <div className="flex flex-wrap items-center gap-2">
         <span className="text-content-subtle text-xs uppercase">Language</span>
         <LangBar lang={lang} setLang={setLang} />
-        <button type="button" className={btn} onClick={doTranslate} disabled={trans === 'loading'}>
-          {trans === 'loading' ? 'Translating…' : 'Translate (EN → empty)'}
+        <button
+          type="button"
+          className={btn}
+          onClick={doTranslate}
+          disabled={trans === 'loading'}
+          title="Regenerates every other language from the English text — existing translations are overwritten (DeepL → Haiku)"
+        >
+          {trans === 'loading' ? 'Translating…' : 'Translate (EN → all)'}
         </button>
         <span className="text-line mx-1">|</span>
         <button type="button" className={btn} onClick={() => fileRef.current?.click()}>

@@ -8,7 +8,7 @@
  * les BLOCS de contenu (ajouter / monter / descendre / supprimer).
  *
  * Une seule langue à la fois (comme les autres éditeurs V3) : l'ANGLAIS est la
- * source, les autres langues se remplissent au bouton « Traduire » (DeepL puis
+ * source, les autres langues se REGÉNÈRENT au bouton « Traduire » (DeepL puis
  * Haiku). Conséquence assumée : la STRUCTURE (nombre de puces, de vidéos, de
  * jalons) ne se modifie qu'en anglais — sinon une traduction en cours pourrait
  * amputer la liste partagée par toutes les langues.
@@ -23,6 +23,7 @@ import { LANGS, LANGUAGES, type Lang } from '@/lib/i18n/config';
 import { postJson } from '@/lib/admin/post-json';
 import { rowKey, stripKey } from '@/lib/admin/keyed';
 import { autoTranslate } from '@/lib/admin/translate-actions';
+import { applyTranslation, createFreshness } from '@/lib/admin/translate-fill';
 import {
   EVENT_TYPES,
   EVENT_VIDEO_PLATFORMS,
@@ -499,6 +500,10 @@ export function EventsEditor({ initial }: { initial: EventEntry[] }) {
   // Figé au montage : le statut affiché dans la liste n'a pas à bouger sous les
   // doigts pendant une session d'édition (et `Date.now()` en rendu est impur).
   const [now] = useState(() => Date.now());
+  // Photo des EN au chargement : référence de ce qui est « déjà traduit ».
+  const [freshness] = useState(() =>
+    createFreshness(initial.flatMap((e) => collectTexts(e).map((t) => t.en))),
+  );
   const current = rows.find((r) => r._key === selected);
   const isEn = lang === 'en';
 
@@ -547,32 +552,29 @@ export function EventsEditor({ initial }: { initial: EventEntry[] }) {
     setStatus({ kind: 'idle' });
     try {
       const clone = structuredClone({ ...current }) as Row;
-      const texts = collectTexts(clone).filter((t) => t.en?.trim());
+      const targets = LANGS.filter((l) => l !== 'en');
+      // On n'envoie que ce qui a BOUGÉ (EN édité/ajouté) ou à qui il manque une
+      // langue — inutile de repayer DeepL pour l'identique.
+      const texts = collectTexts(clone).filter((t) => freshness.isStale(t, targets));
       if (!texts.length) {
-        setStatus({ kind: 'err', msg: 'Rien à traduire (aucun texte EN).' });
+        setStatus({ kind: 'err', msg: 'Rien à traduire — tous les textes anglais sont à jour.' });
         return;
       }
-      const targets = LANGS.filter((l) => l !== 'en');
       const { results, provider } = await autoTranslate(
         texts.map((t) => t.en!),
         targets,
       );
       let filled = 0;
       texts.forEach((rec, k) => {
-        const tr = results[k] ?? {};
-        for (const l of targets) {
-          if (tr[l] && !rec[l]?.trim()) {
-            rec[l] = tr[l];
-            filled++;
-          }
-        }
+        filled += applyTranslation(rec, results[k] ?? {}, targets);
+        freshness.markFresh(rec);
       });
       setRows((s) => s.map((r) => (r._key === selected ? clone : r)));
       setStatus({
         kind: 'ok',
         msg: filled
           ? `${filled} champ(s) traduits via ${provider} — à relire avant d'enregistrer.`
-          : 'Toutes les langues cibles étaient déjà remplies.',
+          : 'Toutes les traductions correspondaient déjà au texte anglais.',
       });
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });
@@ -610,7 +612,13 @@ export function EventsEditor({ initial }: { initial: EventEntry[] }) {
         >
           Enregistrer
         </button>
-        <button type="button" className={btn} onClick={translate} disabled={busy || !current}>
+        <button
+          type="button"
+          className={btn}
+          onClick={translate}
+          disabled={busy || !current}
+          title="Regénère toutes les autres langues depuis l'anglais — les traductions existantes sont écrasées"
+        >
           Traduire cet événement
         </button>
         {status.kind === 'ok' && <span className="text-success text-sm">{status.msg}</span>}

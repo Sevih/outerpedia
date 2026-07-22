@@ -15,6 +15,7 @@
 import type { CharacterCurated } from '@contracts';
 import { IS_DEV } from '@/lib/admin/guard';
 import { autoTranslate } from '@/lib/admin/translate-actions';
+import { applyTranslation } from '@/lib/admin/translate-fill';
 import {
   loadPremiumLimited,
   normalizeReview,
@@ -36,22 +37,17 @@ export type ImportResult = { ok: true; summary: string } | { ok: false; errors: 
 
 const TARGET_LANGS = ['jp', 'kr', 'zh', 'fr'] as const;
 
-/** Remplit sur place les langues VIDES d'une review depuis son EN. Renvoie le nb rempli. */
-async function fillMissingTranslations(entry: ReviewEntryData): Promise<number> {
+/**
+ * Regénère sur place les langues d'une review depuis son EN. Renvoie le nb de
+ * traductions CHANGÉES. L'EN de la contribution fait foi : une review éditée
+ * arrive avec ses anciennes traductions, qu'il faut donc refaire (cf.
+ * `applyTranslation`).
+ */
+async function retranslateReview(entry: ReviewEntryData): Promise<number> {
   const en = entry.review.en?.trim();
   if (!en) return 0;
-  const targets = TARGET_LANGS.filter((l) => !entry.review[l]?.trim());
-  if (!targets.length) return 0;
-  const { results } = await autoTranslate([en], [...targets]);
-  const tr = results[0] ?? {};
-  let filled = 0;
-  for (const l of targets) {
-    if (tr[l]?.trim()) {
-      entry.review[l] = tr[l]!;
-      filled++;
-    }
-  }
-  return filled;
+  const { results } = await autoTranslate([en], [...TARGET_LANGS]);
+  return applyTranslation(entry.review, results[0] ?? {}, TARGET_LANGS);
 }
 
 /** Handler `premium-limited-review` : fusion par nom dans le bucket + trad + save. */
@@ -62,7 +58,7 @@ async function importReview(c: Contribution): Promise<ImportResult> {
   const entry = normalizeReview(payload.entry);
   if (!entry.name.trim()) return { ok: false, errors: ['review has no hero name.'] };
 
-  const filled = await fillMissingTranslations(entry);
+  const filled = await retranslateReview(entry);
 
   const data = loadPremiumLimited();
   const list = data.reviews[bucket];
@@ -73,7 +69,7 @@ async function importReview(c: Contribution): Promise<ImportResult> {
   const errors = await savePremiumLimited(data);
   if (errors.length) return { ok: false, errors };
 
-  const trad = filled ? `, ${filled} translation(s) filled` : '';
+  const trad = filled ? `, ${filled} translation(s) regenerated` : '';
   const label = CONTRIBUTION_LABELS[c.kind];
   return { ok: true, summary: `${label} › ${bucket} › ${entry.name}: ${replaced ? 'edited' : 'added'}${trad}.` }; // prettier-ignore
 }
@@ -83,8 +79,8 @@ async function importReview(c: Contribution): Promise<ImportResult> {
 type LText = Partial<Record<'en' | 'jp' | 'kr' | 'zh' | 'fr', string>>;
 const hasText = (t: LText): boolean => Object.values(t).some((v) => v?.trim());
 
-/** Remplit sur place les langues vides de tous les textes éditoriaux (un batch). */
-async function fillEditorialTranslations(payload: EditorialContributionPayload): Promise<number> {
+/** Regénère les langues de tous les textes éditoriaux depuis leur EN (un batch). */
+async function retranslateEditorial(payload: EditorialContributionPayload): Promise<number> {
   const recs: LText[] = [];
   const collect = (t?: LText) => {
     if (t?.en?.trim()) recs.push(t);
@@ -100,13 +96,7 @@ async function fillEditorialTranslations(payload: EditorialContributionPayload):
   );
   let filled = 0;
   recs.forEach((rec, k) => {
-    const tr = results[k] ?? {};
-    for (const l of TARGET_LANGS) {
-      if (tr[l]?.trim() && !rec[l]?.trim()) {
-        rec[l] = tr[l]!;
-        filled++;
-      }
-    }
+    filled += applyTranslation(rec, results[k] ?? {}, TARGET_LANGS);
   });
   return filled;
 }
@@ -119,7 +109,7 @@ async function importEditorial(c: Contribution): Promise<ImportResult> {
   const char = getCharacter(id);
   if (!char) return { ok: false, errors: [`unknown character id “${id}”.`] };
 
-  const filled = await fillEditorialTranslations(payload);
+  const filled = await retranslateEditorial(payload);
 
   // Merge par PRÉSENCE : chaque outil n'édite qu'une slice. Une slice absente du
   // payload est LAISSÉE INTACTE (jamais effacée) ; le reste du curé est préservé.
@@ -143,7 +133,7 @@ async function importEditorial(c: Contribution): Promise<ImportResult> {
   const errors = await upsertCharacterCurated(id, merged);
   if (errors.length) return { ok: false, errors };
 
-  const trad = filled ? `, ${filled} translation(s) filled` : '';
+  const trad = filled ? `, ${filled} translation(s) regenerated` : '';
   return { ok: true, summary: `${CONTRIBUTION_LABELS[c.kind]} › ${char.name.en}: ${parts.join(', ')}${trad}.` }; // prettier-ignore
 }
 

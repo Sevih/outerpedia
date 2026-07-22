@@ -10,7 +10,7 @@
  * fidèle via le vrai `parseText`) ; les conseils s'éditent en BLOC (une ligne =
  * un conseil) avec un unique rendu en liste, comme sur le vrai guide.
  */
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { VideoRef } from '@contracts';
 import { type Keyed, stripKey, withKey } from '@/lib/admin/keyed';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
@@ -26,9 +26,16 @@ import {
   type VersionDraft,
 } from '@/lib/admin/guide-draft';
 import { autoTranslate } from '@/lib/admin/translate-actions';
+import { applyTranslation, createFreshness } from '@/lib/admin/translate-fill';
 import { EditorTabs } from '@/components/admin/EditorTabs';
 import { InlineTextField } from '@/components/admin/InlineTextField';
-import { CharacterPortrait } from '@/components/character/CharacterPortrait';
+import {
+  CharacterChips,
+  CharacterNameDatalist,
+  viewsByName,
+  type ChipView,
+} from '@/components/admin/CharacterChips';
+import { CharacterGroups, type GroupWithReason } from '@/components/admin/CharacterGroups';
 import type { CharOption } from '@/components/admin/CharacterPicker';
 import { GroupPicker, type GroupOption } from '@/components/admin/GroupPicker';
 import { IdLabelPicker, type IdLabel } from '@/components/admin/IdLabelPicker';
@@ -38,6 +45,10 @@ import type { VideoItem } from '@/components/ui/MultiVideoEmbed';
 const LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
 type L = (typeof LANGS)[number];
 const MAX_SLOTS = 4;
+/** Datalist des noms de persos, posée une fois par page. */
+const DATALIST_ID = 'guide-char-names';
+/** Jeton stocké par les guides = NOM D'AFFICHAGE EN du perso. */
+type ViewOf = (token: string) => ChipView | undefined;
 
 const btn =
   'rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm hover:border-accent disabled:opacity-50';
@@ -63,64 +74,122 @@ const blockToItems = (block: string, prev: LText[], lang: L): LText[] => {
   });
 };
 
-/* --- Puces de personnages (persos recommandés + slots d'équipe) --- */
+/**
+ * Tous les textes localisés d'une version, dans l'ordre — les OBJETS EUX-MÊMES
+ * (la traduction écrit dedans). Sert aussi à photographier l'état au montage
+ * pour ne retraduire que ce qui a bougé.
+ */
+function versionTexts(ver: VersionDraft): LText[] {
+  const out: LText[] = [];
+  ver.tipSections.forEach((s) => {
+    if (s.title) out.push(s.title);
+    out.push(...s.tips);
+  });
+  out.push(...ver.notes);
+  ver.recommended.forEach((g) => g.reason && out.push(g.reason));
+  ver.recoSections.forEach((s) => {
+    if (s.title) out.push(s.title);
+    s.groups.forEach((g) => g.reason && out.push(g.reason));
+  });
+  ver.teams.forEach((t) => {
+    if (t.title) out.push(t.title);
+    if (t.note) out.push(t.note);
+    if (t.notes) out.push(...t.notes);
+  });
+  return out;
+}
 
-function CharacterChips({
-  names,
-  charByName,
+/* --- Briques d'édition (HORS du composant) ---
+ *
+ * ⚠ Ces composants DOIVENT rester au niveau module. Déclarés dans le corps de
+ * `GuideEditor`, leur identité change à chaque rendu : React démonte puis
+ * remonte tout leur sous-arbre à CHAQUE frappe — le champ perd le focus et
+ * chaque `InlineTextField` refait son aperçu (une requête par champ, par
+ * lettre). */
+
+/** Bloc de slots d'équipe (max 4) — une ligne = les alternatives d'un slot. */
+function SlotsBlock({
+  slots,
+  viewOf,
   onChange,
 }: {
-  names: string[];
-  charByName: Map<string, CharOption>;
-  onChange: (names: string[]) => void;
+  slots: string[][];
+  viewOf: ViewOf;
+  onChange: (slots: string[][]) => void;
 }) {
-  const [add, setAdd] = useState('');
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      {names.map((n, i) => {
-        const c = charByName.get(n);
-        return (
-          <div key={i} className="relative">
-            {c ? (
-              <CharacterPortrait
-                id={c.id}
-                name={c.name}
-                element={c.element}
-                classType={c.class}
-                rarity={c.rarity}
-                size={48}
-              />
-            ) : (
-              <div className="border-line-subtle text-content-subtle flex h-12 w-12 items-center justify-center rounded-lg border p-1 text-center text-[10px]">
-                {n || '?'}
-              </div>
-            )}
-            <button
-              type="button"
-              title="Remove"
-              className="border-line bg-surface-raised text-danger absolute -top-1.5 -right-1.5 rounded-full border px-1 text-xs"
-              onClick={() => onChange(names.filter((_, j) => j !== i))}
-            >
-              ✕
-            </button>
+    <div className="space-y-2">
+      {slots.map((slot, si) => (
+        <div key={si} className="flex items-start gap-2">
+          <span className="text-content-subtle mt-3 w-6 shrink-0 text-right text-xs">{si + 1}</span>
+          <div className="min-w-0 flex-1">
+            <CharacterChips
+              values={slot}
+              datalistId={DATALIST_ID}
+              viewOf={viewOf}
+              onChange={(names) => onChange(slots.map((s, j) => (j === si ? names : s)))}
+            />
           </div>
-        );
-      })}
-      <input
-        className={`${input} h-9 w-36`}
-        list="guide-char-names"
-        placeholder="+ character…"
-        value={add}
-        onChange={(e) => setAdd(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key !== 'Enter') return;
-          e.preventDefault();
-          const raw = add.trim();
-          if (raw) onChange([...names, raw]);
-          setAdd('');
-        }}
-      />
+          <button
+            type="button"
+            className="text-danger mt-2 shrink-0 text-sm"
+            title="Delete slot"
+            onClick={() => onChange(slots.filter((_, j) => j !== si))}
+          >
+            ✕
+          </button>
+        </div>
+      ))}
+      {slots.length < MAX_SLOTS && (
+        <button type="button" className={btn} onClick={() => onChange([...slots, []])}>
+          + slot
+        </button>
+      )}
     </div>
+  );
+}
+
+/**
+ * Persos recommandés — même brique que les synergies d'une fiche perso (des
+ * portraits + une raison, éditée une à la fois). Les guides désignent les persos
+ * par NOM EN, d'où l'adaptation `characters` ⇄ `heroes` en entrée/sortie.
+ */
+function RecoGroups({
+  groups,
+  onChange,
+  lang,
+  refs,
+  viewOf,
+}: {
+  groups: RecoGroupDraft[];
+  onChange: (groups: RecoGroupDraft[]) => void;
+  lang: L;
+  refs: InlineRefs;
+  viewOf: ViewOf;
+}) {
+  const adapted: GroupWithReason[] = groups.map((g) => ({
+    heroes: g.characters,
+    ...(g.reason ? { reason: g.reason } : {}),
+  }));
+  return (
+    <CharacterGroups
+      groups={adapted}
+      onChange={(next) =>
+        onChange(
+          next.map((g) => ({
+            characters: g.heroes,
+            // L'EN reste la structure du contenu localisé (cf. `editLText`).
+            ...(hasText(g.reason) ? { reason: { ...g.reason, en: g.reason?.en ?? '' } } : {}),
+          })),
+        )
+      }
+      newGroup={() => ({ heroes: [] })}
+      lang={lang}
+      refs={refs}
+      datalistId={DATALIST_ID}
+      viewOf={viewOf}
+      chipSize={48}
+    />
   );
 }
 
@@ -160,8 +229,12 @@ export function GuideEditor({
   const [newKey, setNewKey] = useState('');
   const [fromKey, setFromKey] = useState('');
   const [addBusy, setAddBusy] = useState(false);
+  // Photo des EN au chargement : référence de ce qui est « déjà traduit ».
+  const [freshness] = useState(() =>
+    createFreshness([initial.intro, ...initial.versions.flatMap(versionTexts)].map((t) => t?.en)),
+  );
 
-  const charByName = new Map(charOptions.map((c) => [c.name, c]));
+  const viewOf = useMemo(() => viewsByName(charOptions), [charOptions]);
   const groupLabel = (g?: string) => groupOptions.find((o) => o.group === g)?.label ?? g ?? '';
   const dungeonLabel = (id: string) => dungeonOptions.find((o) => o.id === id)?.label ?? id;
   const titlePlaceholder = (hasRaw: boolean, title?: LText) =>
@@ -190,7 +263,7 @@ export function GuideEditor({
   const orUndef = (t: LText): LText | undefined => (hasText(t) ? t : undefined);
 
   /* --- Auto-traduction (version active + intro) --- */
-  async function translateEmpty() {
+  async function translateAll() {
     if (!v) return;
     setTrans('loading');
     setTransMsg(null);
@@ -222,28 +295,13 @@ export function GuideEditor({
       })),
     };
 
-    // Collecte des LText EXISTANTS avec un EN (on ne remplit que les vides).
-    const recs: LText[] = [];
-    if (nextIntro.en?.trim()) recs.push(nextIntro);
-    cv.tipSections.forEach((s) => {
-      if (s.title?.en?.trim()) recs.push(s.title);
-      s.tips.forEach((t) => t.en?.trim() && recs.push(t));
-    });
-    cv.notes.forEach((t) => t.en?.trim() && recs.push(t));
-    cv.recommended.forEach((g) => g.reason?.en?.trim() && recs.push(g.reason));
-    cv.recoSections.forEach((s) => {
-      if (s.title?.en?.trim()) recs.push(s.title);
-      s.groups.forEach((g) => g.reason?.en?.trim() && recs.push(g.reason));
-    });
-    cv.teams.forEach((t) => {
-      if (t.title?.en?.trim()) recs.push(t.title);
-      if (t.note?.en?.trim()) recs.push(t.note);
-      t.notes?.forEach((n) => n.en?.trim() && recs.push(n));
-    });
+    // Ne part au traducteur que ce qui a BOUGÉ (EN édité/ajouté) ou à qui il
+    // manque une langue — inutile de repayer DeepL pour l'identique.
+    const recs = [nextIntro, ...versionTexts(cv)].filter((t) => freshness.isStale(t, targets));
 
     if (!recs.length) {
       setTrans('done');
-      setTransMsg('Nothing to translate (no EN text).');
+      setTransMsg('Nothing to translate — every English text is already up to date.');
       return;
     }
     try {
@@ -253,13 +311,8 @@ export function GuideEditor({
       );
       let filled = 0;
       recs.forEach((rec, k) => {
-        const tr = (results[k] ?? {}) as Partial<Record<L, string>>;
-        for (const l of targets) {
-          if (tr[l] && !rec[l]?.trim()) {
-            rec[l] = tr[l]!;
-            filled++;
-          }
-        }
+        filled += applyTranslation(rec, results[k] ?? {}, targets);
+        freshness.markFresh(rec);
       });
       setIntro(nextIntro);
       patch(cv);
@@ -267,7 +320,7 @@ export function GuideEditor({
       setTransMsg(
         filled
           ? `${filled} field(s) translated via ${provider === 'haiku' ? 'Haiku (DeepL quota reached)' : 'DeepL'} — to review before saving.`
-          : 'All target languages were already filled.',
+          : 'Every translation already matched the English text.',
       );
     } catch (e) {
       setTrans('error');
@@ -317,47 +370,6 @@ export function GuideEditor({
     } finally {
       setAddBusy(false);
     }
-  }
-
-  /* --- Bloc de slots réutilisable (max 4) --- */
-  function SlotsBlock({
-    slots,
-    onChange,
-  }: {
-    slots: string[][];
-    onChange: (slots: string[][]) => void;
-  }) {
-    return (
-      <div className="space-y-2">
-        {slots.map((slot, si) => (
-          <div key={si} className="flex items-start gap-2">
-            <span className="text-content-subtle mt-3 w-6 shrink-0 text-right text-xs">
-              {si + 1}
-            </span>
-            <div className="min-w-0 flex-1">
-              <CharacterChips
-                names={slot}
-                charByName={charByName}
-                onChange={(names) => onChange(slots.map((s, j) => (j === si ? names : s)))}
-              />
-            </div>
-            <button
-              type="button"
-              className="text-danger mt-2 shrink-0 text-sm"
-              title="Delete slot"
-              onClick={() => onChange(slots.filter((_, j) => j !== si))}
-            >
-              ✕
-            </button>
-          </div>
-        ))}
-        {slots.length < MAX_SLOTS && (
-          <button type="button" className={btn} onClick={() => onChange([...slots, []])}>
-            + slot
-          </button>
-        )}
-      </div>
-    );
   }
 
   /* --- Onglets de la version active --- */
@@ -545,61 +557,6 @@ export function GuideEditor({
     );
   }
 
-  // Liste éditable de groupes de persos (chips + raison) — réutilisée à plat et
-  // en sections (dimensional-singularity).
-  function RecoGroups({
-    groups,
-    onChange,
-  }: {
-    groups: RecoGroupDraft[];
-    onChange: (groups: RecoGroupDraft[]) => void;
-  }) {
-    return (
-      <div className="space-y-3">
-        {groups.map((g, gi) => {
-          const setGroup = (p: Partial<RecoGroupDraft>) =>
-            onChange(groups.map((x, j) => (j === gi ? { ...x, ...p } : x)));
-          return (
-            <div key={gi} className="border-line-subtle space-y-3 rounded-lg border p-3">
-              <div className="flex items-start justify-between gap-2">
-                <CharacterChips
-                  names={g.characters}
-                  charByName={charByName}
-                  onChange={(characters) => setGroup({ characters })}
-                />
-                <button
-                  type="button"
-                  className="text-danger shrink-0 text-sm"
-                  onClick={() => onChange(groups.filter((_, j) => j !== gi))}
-                >
-                  Delete
-                </button>
-              </div>
-              <div>
-                <p className="text-content-subtle mb-1 text-xs uppercase">Reason ({lang})</p>
-                <InlineTextField
-                  value={show(g.reason)}
-                  refs={refs}
-                  lang={lang}
-                  layout="stacked"
-                  placeholder={lang === 'en' ? '' : (g.reason?.en ?? '')}
-                  onChange={(val) => setGroup({ reason: orUndef(editLText(g.reason, val)) })}
-                />
-              </div>
-            </div>
-          );
-        })}
-        <button
-          type="button"
-          className={btn}
-          onClick={() => onChange([...groups, { characters: [] }])}
-        >
-          + group
-        </button>
-      </div>
-    );
-  }
-
   function recoTab() {
     if (!v) return null;
     // dim : persos en SECTIONS titrées (= `content.teams`, rendu RecommendedCharacters).
@@ -628,7 +585,13 @@ export function GuideEditor({
                   ✕ section
                 </button>
               </div>
-              <RecoGroups groups={s.groups} onChange={(groups) => setSec(si, { groups })} />
+              <RecoGroups
+                groups={s.groups}
+                onChange={(groups) => setSec(si, { groups })}
+                lang={lang}
+                refs={refs}
+                viewOf={viewOf}
+              />
             </div>
           ))}
           <button
@@ -644,7 +607,13 @@ export function GuideEditor({
     return (
       <section className="space-y-3">
         <p className={heading}>Recommended characters</p>
-        <RecoGroups groups={v.recommended} onChange={(g) => patch({ recommended: g })} />
+        <RecoGroups
+          groups={v.recommended}
+          onChange={(g) => patch({ recommended: g })}
+          lang={lang}
+          refs={refs}
+          viewOf={viewOf}
+        />
       </section>
     );
   }
@@ -663,7 +632,7 @@ export function GuideEditor({
           <p className={heading}>
             Team <span className="text-content-subtle font-normal">(max {MAX_SLOTS} slots)</span>
           </p>
-          <SlotsBlock slots={team.slots} onChange={setSlots} />
+          <SlotsBlock slots={team.slots} viewOf={viewOf} onChange={setSlots} />
           <div>
             <p className="text-content-subtle mb-1 text-xs uppercase">Team note ({lang})</p>
             <InlineTextField
@@ -714,7 +683,11 @@ export function GuideEditor({
                   ✕ range
                 </button>
               </div>
-              <SlotsBlock slots={t.slots} onChange={(slots) => setTeam(ti, { slots })} />
+              <SlotsBlock
+                slots={t.slots}
+                viewOf={viewOf}
+                onChange={(slots) => setTeam(ti, { slots })}
+              />
               <div>
                 <p className="text-content-subtle mb-1 text-xs uppercase">Note ({lang})</p>
                 <InlineTextField
@@ -762,7 +735,11 @@ export function GuideEditor({
                   ✕ team
                 </button>
               </div>
-              <SlotsBlock slots={t.slots} onChange={(slots) => setTeam(ti, { slots })} />
+              <SlotsBlock
+                slots={t.slots}
+                viewOf={viewOf}
+                onChange={(slots) => setTeam(ti, { slots })}
+              />
               <div>
                 <p className="text-content-subtle mb-1 text-xs uppercase">Note ({lang})</p>
                 <InlineTextField
@@ -813,7 +790,11 @@ export function GuideEditor({
                 ✕ team
               </button>
             </div>
-            <SlotsBlock slots={t.slots} onChange={(slots) => setTeam(ti, { slots })} />
+            <SlotsBlock
+              slots={t.slots}
+              viewOf={viewOf}
+              onChange={(slots) => setTeam(ti, { slots })}
+            />
             <div>
               <p className="text-content-subtle mb-1 text-xs uppercase">
                 Note ({lang}) — one paragraph per line
@@ -878,11 +859,7 @@ export function GuideEditor({
 
   return (
     <div className="space-y-6">
-      <datalist id="guide-char-names">
-        {charOptions.map((c) => (
-          <option key={c.id} value={c.name} />
-        ))}
-      </datalist>
+      <CharacterNameDatalist id={DATALIST_ID} options={charOptions} />
 
       {/* Langue + auto-traduction */}
       <div className="flex flex-wrap items-center gap-2">
@@ -902,11 +879,11 @@ export function GuideEditor({
         <button
           type="button"
           className={btn}
-          onClick={translateEmpty}
+          onClick={translateAll}
           disabled={trans === 'loading'}
-          title="Translates EN to the still-empty languages (DeepL → Haiku)"
+          title="Regenerates every other language from the English text — existing translations are overwritten (DeepL → Haiku)"
         >
-          {trans === 'loading' ? 'Translating…' : 'Translate (EN → empty)'}
+          {trans === 'loading' ? 'Translating…' : 'Translate (EN → all)'}
         </button>
         {transMsg && (
           <span className={`text-xs ${trans === 'error' ? 'text-danger' : 'text-content-subtle'}`}>

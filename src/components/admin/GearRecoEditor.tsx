@@ -22,6 +22,7 @@ import {
 } from '@/components/character/GearRecoSection';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import { autoTranslate } from '@/lib/admin/translate-actions';
+import { applyTranslation, createFreshness } from '@/lib/admin/translate-fill';
 import {
   previewGearReco,
   listImportableBuilds,
@@ -157,6 +158,8 @@ export function GearRecoEditor({
   refs: InlineRefs;
 }) {
   const [builds, setBuilds] = useState<Keyed<GearBuild>[]>(() => initial.map(withKey));
+  // Photo des EN au chargement : référence de ce qui est « déjà traduit ».
+  const [freshness] = useState(() => createFreshness(initial.map((b) => b.note?.en)));
   const [active, setActive] = useState(0);
   const [editing, setEditing] = useState<EditKey>(null);
   const [noteLang, setNoteLang] = useState<NoteLang>('en');
@@ -254,11 +257,15 @@ export function GearRecoEditor({
     setTrans('loading');
     setTransMsg(null);
     const tgt = NOTE_LANGS.filter((l) => l !== 'en');
+    // On n'envoie que ce qui a BOUGÉ (EN édité/ajouté) ou à qui il manque une
+    // langue — inutile de repayer DeepL pour l'identique.
     const jobs: { i: number; en: string }[] = [];
-    builds.forEach((b, i) => b.note?.en?.trim() && jobs.push({ i, en: b.note.en }));
+    builds.forEach((bd, i) => {
+      if (bd.note && freshness.isStale(bd.note, tgt)) jobs.push({ i, en: bd.note.en! });
+    });
     if (!jobs.length) {
       setTrans('done');
-      setTransMsg('Nothing to translate (no EN note).');
+      setTransMsg('Nothing to translate — every English note is already up to date.');
       return;
     }
     try {
@@ -271,12 +278,8 @@ export function GearRecoEditor({
       jobs.forEach((job, k) => {
         const tr = results[k] ?? {};
         const note: NonNullable<GearBuild['note']> = { ...(next[job.i].note ?? {}) };
-        for (const l of tgt) {
-          if (tr[l] && !note[l]?.trim()) {
-            note[l] = tr[l];
-            filled++;
-          }
-        }
+        filled += applyTranslation(note, tr, tgt);
+        freshness.markFresh(note);
         next[job.i] = { ...next[job.i], note };
       });
       setBuilds(next);
@@ -284,7 +287,7 @@ export function GearRecoEditor({
       setTransMsg(
         filled
           ? `${filled} note(s) via ${provider === 'haiku' ? 'Haiku (DeepL quota reached)' : 'DeepL'} — to review.`
-          : 'Notes already filled.',
+          : 'Every note already matched its English text.',
       );
     } catch (e) {
       setTrans('error');
@@ -726,9 +729,9 @@ export function GearRecoEditor({
           className={btn}
           onClick={translateNotes}
           disabled={trans === 'loading'}
-          title="Translates EN notes to the still-empty languages"
+          title="Regenerates every other language from the English note — existing translations are overwritten"
         >
-          {trans === 'loading' ? 'Translating…' : 'Translate notes (EN → empty)'}
+          {trans === 'loading' ? 'Translating…' : 'Translate notes (EN → all)'}
         </button>
         <button
           type="button"

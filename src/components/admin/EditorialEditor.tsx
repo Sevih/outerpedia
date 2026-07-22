@@ -14,6 +14,7 @@ import { useState } from 'react';
 import type { CharacterCurated } from '@contracts';
 import { type Keyed, stripKey, withKey } from '@/lib/admin/keyed';
 import { autoTranslate } from '@/lib/admin/translate-actions';
+import { applyTranslation, createFreshness } from '@/lib/admin/translate-fill';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import {
   EditorialFields,
@@ -69,23 +70,34 @@ export function EditorialEditor({
   const [error, setError] = useState<string | null>(null);
   const [trans, setTrans] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
   const [transMsg, setTransMsg] = useState<string | null>(null);
+  // Photo des EN au chargement : référence de ce qui est « déjà traduit ».
+  const [freshness] = useState(() =>
+    createFreshness([
+      ...(curated.prosCons?.pros ?? []).map((t) => t.en),
+      ...(curated.prosCons?.cons ?? []).map((t) => t.en),
+      ...(curated.synergies ?? []).map((g) => g.reason?.en),
+    ]),
+  );
 
   /**
-   * Auto-traduit l'EN vers les langues VIDES (pros, cons, raisons de synergie) en
-   * un seul appel. Ne réécrase jamais une trad existante ; les champs remplis
-   * sont à REVOIR avant enregistrement.
+   * Auto-traduit l'EN vers TOUTES les autres langues (pros, cons, raisons de
+   * synergie) en un seul appel — les trads existantes sont ÉCRASÉES, l'EN fait
+   * foi (cf. `applyTranslation`). À REVOIR avant enregistrement.
    */
-  async function translateEmpty() {
+  async function translateAll() {
     setTrans('loading');
     setTransMsg(null);
     const tgt = LANGS.filter((l) => l !== 'en');
+    // On n'envoie que ce qui a BOUGÉ (EN édité/ajouté) ou à qui il manque une
+    // langue — inutile de repayer DeepL pour l'identique.
     const jobs: { en: string; kind: 'pros' | 'cons' | 'reason'; i: number }[] = [];
-    pros.forEach((p, i) => p.en?.trim() && jobs.push({ en: p.en, kind: 'pros', i }));
-    cons.forEach((p, i) => p.en?.trim() && jobs.push({ en: p.en, kind: 'cons', i }));
-    synergies.forEach((g, i) => g.reason?.en?.trim() && jobs.push({ en: g.reason.en, kind: 'reason', i })); // prettier-ignore
+    const stale = (t?: LocalizedText) => Boolean(t && freshness.isStale(t, tgt));
+    pros.forEach((p, i) => stale(p) && jobs.push({ en: p.en!, kind: 'pros', i }));
+    cons.forEach((p, i) => stale(p) && jobs.push({ en: p.en!, kind: 'cons', i }));
+    synergies.forEach((g, i) => stale(g.reason) && jobs.push({ en: g.reason!.en!, kind: 'reason', i })); // prettier-ignore
     if (!jobs.length) {
       setTrans('done');
-      setTransMsg('Nothing to translate (no EN text).');
+      setTransMsg('Nothing to translate — every English text is already up to date.');
       return;
     }
     try {
@@ -97,14 +109,9 @@ export function EditorialEditor({
       const nextCons = cons.slice();
       const nextSyn = synergies.slice();
       let filled = 0;
-      // Remplit uniquement les langues VIDES (préserve les trads manuelles).
       const fillInto = (rec: LocalizedText, tr: Partial<LocalizedText>) => {
-        for (const l of tgt) {
-          if (tr[l] && !rec[l]?.trim()) {
-            rec[l] = tr[l];
-            filled++;
-          }
-        }
+        filled += applyTranslation(rec, tr, tgt);
+        freshness.markFresh(rec);
       };
       jobs.forEach((job, k) => {
         const tr = results[k] ?? {};
@@ -127,7 +134,7 @@ export function EditorialEditor({
       setTransMsg(
         filled
           ? `${filled} field(s) translated via ${provider === 'haiku' ? 'Haiku (DeepL quota reached)' : 'DeepL'} — review before saving.`
-          : 'All target languages were already filled.',
+          : 'Every translation already matched the English text.',
       );
     } catch (e) {
       setTrans('error');
@@ -187,11 +194,11 @@ export function EditorialEditor({
         <button
           type="button"
           className={btn}
-          onClick={translateEmpty}
+          onClick={translateAll}
           disabled={trans === 'loading'}
-          title="Translates EN into the still-empty languages (Claude Haiku)"
+          title="Regenerates every other language from the English text — existing translations are overwritten (DeepL → Haiku)"
         >
-          {trans === 'loading' ? 'Translating…' : 'Translate (EN → empty)'}
+          {trans === 'loading' ? 'Translating…' : 'Translate (EN → all)'}
         </button>
         {transMsg && (
           <span className={`text-xs ${trans === 'error' ? 'text-danger' : 'text-content-subtle'}`}>
