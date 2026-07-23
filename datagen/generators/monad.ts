@@ -149,7 +149,7 @@ function resolveOrNull(index: Map<string, LangDict>, key: string | undefined): L
 // Sépare un libellé résolu en {label, need} en pelant le dernier groupe entre
 // parenthèses de chaque langue. Le jeu inline les conditions (« Advance there.
 // (Key Item: Fake ID) ») — on les détache pour l'UI.
-function splitLabelAndNeed(full: LangDict): { label: LangDict; need: LangDict } {
+export function splitLabelAndNeed(full: LangDict): { label: LangDict; need: LangDict } {
   const labelOut = {} as LangDict;
   const needOut = {} as LangDict;
   for (const lang of GAME_LANGS) {
@@ -170,7 +170,7 @@ function splitLabelAndNeed(full: LangDict): { label: LangDict; need: LangDict } 
 // désambiguïsé via `NodeName` d'abord car l'icône est ambiguë : la depth 4
 // réutilise CM_Monad_Node_Icon_08 pour EVENT_01 (Path of Fate) et EVENT_03
 // (Eldritch Realm).
-function mapNodeType(stage: Row): MonadNodeType {
+export function mapNodeType(stage: Row): MonadNodeType {
   const nodeType = stage.NodeType;
   const icon = stage.GateNodeImage;
   const ending = stage.EndingImage;
@@ -208,7 +208,7 @@ function mapNodeType(stage: Row): MonadNodeType {
 }
 
 // Parse `NextNodeIndex` « -1,0,1 » → [-1, 0, 1].
-function parseIndex(raw: string | undefined): number[] {
+export function parseIndex(raw: string | undefined): number[] {
   if (!raw) return [0];
   return raw
     .split(',')
@@ -479,7 +479,7 @@ function extractGroup(
  * requireGauge, gaugeDelta (modif d'arête), givesItemIds. La jauge est
  * discrétisée en paquets de 50 pour borner la combinatoire.
  */
-function markTruePaths(
+export function markTruePaths(
   nodes: WorkNode[],
   edges: WorkEdge[],
   gaugePerMove: number,
