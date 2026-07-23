@@ -242,7 +242,7 @@ const SLOT: Record<string, keyof EquipmentData> = {
   ITS_EQUIP_EXCLUSIVE: 'ee',
 };
 
-const optMode = (applying: string | undefined): Option['mode'] =>
+export const optMode = (applying: string | undefined): Option['mode'] =>
   applying === 'OAT_RATE' ? 'rate' : applying === 'OAT_ADD' ? 'flat' : 'none';
 
 /**
@@ -268,7 +268,7 @@ const COND_ELEMENT: Record<string, string> = {
  * sur le buff et nomme l'affichage dans `TextSystem` :
  * `SYS_BT_DMG_REDUCE_TARGET_EARTH` → « Reduced DMG Taken vs Earth ».
  */
-function conditionalLabel(
+export function conditionalLabel(
   system: Map<string, LangDict>,
   b: Row | undefined,
   buffId: string,
@@ -377,7 +377,7 @@ function setEffect(
 }
 
 /** Placeholders réellement présents dans un template → clés de valeurs à conserver. */
-function usedValueKeys(template: string): (keyof BuffValues)[] {
+export function usedValueKeys(template: string): (keyof BuffValues)[] {
   const keys: (keyof BuffValues)[] = [];
   if (/\[[-+]?Value\]/i.test(template)) keys.push('value');
   if (/\[(?:Rate1?|RATE)\]/i.test(template)) keys.push('rate');
@@ -524,7 +524,7 @@ function curatedKeyMap(): Map<string, string> {
   return map;
 }
 
-function sortByNumericKey<T>(obj: Record<string, T>): Record<string, T> {
+export function sortByNumericKey<T>(obj: Record<string, T>): Record<string, T> {
   return Object.fromEntries(
     Object.entries(obj).sort(([a], [b]) => num(a) - num(b) || a.localeCompare(b)),
   );
