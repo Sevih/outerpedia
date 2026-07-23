@@ -6,6 +6,23 @@
 
 ## 2026-07-23
 
+- **Tests datagen : les générateurs MINCES/fs restants couverts — le chantier
+  « Tests à écrire » est SOLDÉ.** Derniers non nommés, même méthode (cœur pur
+  synthétique quand il y en a un + invariants sur `data/generated/` committé,
+  sans `.gamedata`). **game-version** (5 t — `parseResVersion` extrait de la
+  regex inline : ancrage fin de chaîne, tolérance espaces, null si pas en toute
+  fin), **bgm-mapping** (12 t — `formatFilenameAsName` : camelCase/digit collé/
+  acronyme majuscule/`_intro` ; `byFileNameCI` déterministe ; invariants forme +
+  ORDRE du JSON), **unlock-content** (8 t — `buildSeasonDisplayMap` exporté :
+  numérotation saison JOUEUR, une suite d'épisodes ≠ redémarrage NE crée PAS de
+  saison ; invariants stage `S1H-10-7`/mode/dicts), **comics** (2 t, invariants —
+  clés = langues connues, stems sans extension, uniques, triés), **wallpapers**
+  (4 t, invariants — éclatement `Full:` par préfixe, tri par `f`, HeroFullArt =
+  `IMG_<id>`). **effects** n'a RIEN de neuf : c'est un outil de staging dont
+  toute la logique vit dans `lib/effects.ts`, déjà couvert par `lib/effects.test`
+  (`classifyFamily`, `resolveKeyWinners`). Cœurs privés exportés/extraits, zéro
+  changement de comportement. Suite datagen : **372 tests** (43 fichiers).
+
 - **`shop-purchase-priorities` éditable en admin — CLÔT la campagne
   general-guides bespoke.** Dernier fragment (après free-heroes et
   premium-limited). Deux surfaces, décision Sevih « LES DEUX » : (1) les 8 shops

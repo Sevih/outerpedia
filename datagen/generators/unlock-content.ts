@@ -102,8 +102,8 @@ function nonEmpty(d: LangDict): LangDict | undefined {
   return Object.values(d).some(Boolean) ? d : undefined;
 }
 
-/** SeasonID interne → numéro de saison JOUEUR (cf. en-tête). */
-function buildSeasonDisplayMap(areas: Row[]): Map<number, number> {
+/** SeasonID interne → numéro de saison JOUEUR (cf. en-tête). Exporté pour le test. */
+export function buildSeasonDisplayMap(areas: Row[]): Map<number, number> {
   const minEp = new Map<number, number>();
   for (const a of areas) {
     const season = num(a.SeasonID);

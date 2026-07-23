@@ -15,6 +15,17 @@ export interface GameVersion {
   resVersion: string;
 }
 
+/**
+ * Extrait `X.Y.Z` du `…,"version":"X.Y.Z"}` en FIN de chaîne — pur, exporté
+ * pour le test. Ancré sur la fin (`\}\s*$`) : c'est la version DU MANIFESTE,
+ * pas un `"version"` qui traînerait plus haut dans la fenêtre lue. `null` si le
+ * motif n'est pas en toute fin.
+ */
+export function parseResVersion(tail: string): string | null {
+  const m = tail.match(/"version"\s*:\s*"([^"]+)"\s*\}\s*$/);
+  return m ? m[1] : null;
+}
+
 /** Lit `"version":"X.Y.Z"` en fin de `manifest.dat` (256 derniers octets). */
 export function buildGameVersion(): GameVersion | null {
   if (!existsSync(MANIFEST)) return null;
@@ -27,8 +38,8 @@ export function buildGameVersion(): GameVersion | null {
   } finally {
     closeSync(fd);
   }
-  const m = buf.toString('utf-8').match(/"version"\s*:\s*"([^"]+)"\s*\}\s*$/);
-  return m ? { resVersion: m[1] } : null;
+  const resVersion = parseResVersion(buf.toString('utf-8'));
+  return resVersion ? { resVersion } : null;
 }
 
 // Exécution directe.

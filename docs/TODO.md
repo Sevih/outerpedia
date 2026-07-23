@@ -40,21 +40,6 @@
       gear-usage-statistics & gear-usage-finder = agrégation gear-reco à la
       lecture, patch-history, pull-simulator, progress-tracker.)
 
-## 🧪 Tests à écrire
-
-- [ ] Les générateurs `datagen/generators/*` — le TRIO (encounters/
-      singularity/content-schedule, 20/07), le LOT NOMMÉ (skills, recruit, goods,
-      monad, towers, equipment, sources + `refresh` + `gamedata-store`, 23/07) et
-      les SECONDAIRES nommés (characters-list, progression, hero-growth, quirks,
-      item-catalog, costumes, bosses, enhance, monster-skills, ether-rankings,
-      shop-priorities, timegate-resources, 23/07 — cf. DONE) sont COUVERTS.
-      `build.ts` l'est indirectement (invariants inter-fichiers) ; `items` via
-      item-catalog (fondu dans `items.json`). RESTENT seulement les générateurs
-      MINCES/fs non nommés (`unlock-content`, `effects`, `game-version`,
-      `bgm-mapping`, `comics`, `wallpapers`) — surtout des invariants légers, à
-      faire si le besoin se présente. CONTRAINTE actée : la suite tourne SANS
-      `.gamedata` (CI). Suite datagen : 346 tests.
-
 ## 🧹 Dette code
 
 ### Panneau admin

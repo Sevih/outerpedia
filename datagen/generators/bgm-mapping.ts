@@ -76,7 +76,7 @@ async function getDuration(ffprobe: string, filePath: string): Promise<number | 
  * Nom lisible dérivé d'un nom de fichier (repli quand la piste n'a pas de ligne
  * lobby). `Boss_Season_01` → « Boss - Season 01 ». Logique reprise de la V2.
  */
-function formatFilenameAsName(filename: string): string {
+export function formatFilenameAsName(filename: string): string {
   let name = filename.replace(/_[Ii]ntro$/, '');
   const isIntro = name !== filename;
 
@@ -110,7 +110,7 @@ function formatFilenameAsName(filename: string): string {
  * suffixées `_x` peuvent comparer égaux, et l'ordre du JSON dériverait alors de
  * l'ordre de `readdirSync`. Comparaison par unités de code + départage exact.
  */
-function byFileNameCI(a: string, b: string): number {
+export function byFileNameCI(a: string, b: string): number {
   const al = a.toLowerCase();
   const bl = b.toLowerCase();
   if (al !== bl) return al < bl ? -1 : 1;
