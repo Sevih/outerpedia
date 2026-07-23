@@ -6,6 +6,46 @@
 
 ## 2026-07-23
 
+- **`shop-purchase-priorities` éditable en admin — CLÔT la campagne
+  general-guides bespoke.** Dernier fragment (après free-heroes et
+  premium-limited). Deux surfaces, décision Sevih « LES DEUX » : (1) les 8 shops
+  DÉRIVÉS du jeu (guild/joint/friend/arena/stars/worldboss/al/survey) — seuls
+  priorité S/A/B/C + notes sont curés, overlay `data/curated/shop-priorities.json`
+  keyé par slug stable ; à la sauvegarde on RÉGÉNÈRE
+  `data/generated/shop-priorities.json` (via le générateur en process, comme
+  l'intégration monstre lance `buildMonsters`) → aperçu live sans
+  `pnpm datagen:build`. Vérifié : régénération **byte-identique** au committé
+  quand rien ne change (zéro diff parasite). (2) les shops ÉDITORIAUX
+  (Event/Resource/Supply/Rico + notes) — `editorial.ts` MIGRÉ en
+  `shop-editorial.json` (par script, zéro transcription ; le module ne garde que
+  types + lecture typée, `index.tsx` du guide inchangé) → tout éditable en admin.
+  Éditeur : onglet par shop, `PriorityPicker`, notes/textes localisés au clic
+  (un seul `InlineTextField` monté, sous-composants au niveau module), barre de
+  langue + Translate (périmètre de fraîcheur). Store branché sur le registre
+  general-guide + l'API `[category]/[slug]` + la sidebar general-guides.
+
+- **Guide editor : une entrée de menu PAR TYPE, sidebar filtrée.** Avant : une
+  seule entrée « Guides » → sidebar listant TOUT le corpus. Maintenant le menu
+  admin liste un type par ligne (dérivés de `GUIDE_SPECS` + general-guides, via
+  `guide-nav.ts` — source unique partagée menu/sidebar, une future catégorie
+  branchée apparaît d'office), et chaque type a sa sidebar (layout `[category]`).
+  Le layout global (liste plate) supprimé ; index de catégorie ajouté (sinon
+  `/admin/guides/<type>` = 404) ; `AdminSidebar` gagne un flag `exact` pour que
+  l'entrée « Overview » (accueil + import de contribution) ne s'allume qu'au
+  chemin exact. Bonus : pour les catégories `bossTitle` (special-request), la
+  sidebar liste par NOM DE BOSS (résolu depuis `bossId`, comme le H1 public) —
+  sinon 8 lignes « Strategy Guide » identiques.
+
+- **Titres SEO des guides special-request rendus uniques.** 8 des 10 avaient un
+  `meta.title` générique « Strategy Guide » (mauvais pour le SEO et les cartes de
+  liste — le H1 public, lui, titre déjà sur le nom du boss via `bossId`). Titre
+  regénéré « <Boss> Special Request Guide » dans les 5 langues, gabarit dérivé de
+  chimera (rédigé indépendamment → gabarit validé), nom de boss résolu depuis
+  `TextCharacter` (jeu). beatles EXCLU (guide de boss jumeaux Dek'Ril & Mek'Ril,
+  `bossId` n'en résout qu'un → titre légitimement custom). Reste en TODO : les
+  meta DESCRIPTIONS, encore génériques et dupliquées (8 identiques), éditorial à
+  passer famille par famille.
+
 - **« Extractors orphelins » : prémisse déjà résolue — rien à redéfinir.** Le
   TODO craignait des pages de contrôle de régression sans oracle depuis la fin
   de la migration (Effect, rapport gear, badges de diff sidebar). Or l'oracle

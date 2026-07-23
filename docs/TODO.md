@@ -55,20 +55,6 @@
 
 ## 🧹 Dette code
 
-### Édition des general-guides bespoke (campagne en cours)
-
-> Pattern : registre `general-guide-store.ts` (slug → fragment), donnée sortie
-> en JSON local (rendu inchangé), éditeur dédié câblé sur `/admin/guides`.
-> `free-heroes-start-banner` (onglet Free Heroes) et `premium-limited` (reviews +
-> recommended choices + contribution publique Shiraen) LIVRÉS le 19/07 (cf.
-> DONE). Modèle de contribution acté : outil PUBLIC exporte 1 perso →
-> IMPORT côté admin (pas d'écriture serveur publique, pas d'auth).
-
-- [ ] `shop-purchase-priorities` : modifier les priorités S/A/B/C des items —
-      LES DEUX (choix Sevih) : tables éditoriales (`editorial.ts`, EVENT/RESOURCE)
-      **et** overlay curé des shops dérivés (fusionné au build datagen → éditer
-      l'overlay puis régénérer `shop-priorities.json`).
-
 ### Panneau admin
 
 > Décision d'IA figée le 07/07 (matrice fonction × entité). Deux des trois items
@@ -89,6 +75,16 @@
       cf. DONE. Les 147 titres de GUIDES portent leur catégorie depuis le
       22/07 — ça les rend uniques et les allonge ; restent les fiches perso,
       équipement et les pages d'outils.)
+- [ ] **Meta descriptions de guides GÉNÉRIQUES / dupliquées** — les familles à
+      contenu templaté partagent souvent une description identique. Constaté sur
+      special-request : 8 des 10 guides ont la MÊME (« Strategy guide for Special
+      Request: Identification mission ») ; seuls beatles/chimera ont une desc
+      propre au boss. Les `meta.title`, eux, ont été rendus uniques (nom du boss)
+      cette session — cf. DONE. Probablement le même motif ailleurs (adventure-
+      license, irregular-extermination, dimensional-singularity…). PAS mécanique
+      (une phrase par boss), donc éditorial à passer famille par famille. NB : le
+      nom du boss est fiable (résolu depuis `TextCharacter` du jeu) — utilisable
+      comme graine.
 
 ## ⚙️ Config / infra
 

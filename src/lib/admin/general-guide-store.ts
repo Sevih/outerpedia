@@ -36,6 +36,7 @@ export interface FreeHeroesData {
 export const EDITABLE_GENERAL_GUIDES: Record<string, string> = {
   'free-heroes-start-banner': 'Free Heroes & Starter Banners',
   'premium-limited': 'Premium & Limited',
+  'shop-purchase-priorities': 'Shop Purchase Priorities',
 };
 
 export function isEditableGeneralGuide(slug: string): boolean {

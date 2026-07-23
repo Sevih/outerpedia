@@ -15,6 +15,9 @@ export interface NavItem {
   badge?: { count: number; tone: NavTone; title?: string } | null;
   /** Placeholder : lien visible mais grisé. */
   soon?: boolean;
+  /** Actif au chemin EXACT seulement (pas le sous-arbre) — pour une entrée
+   *  « overview » qui partage son préfixe avec ses voisines. */
+  exact?: boolean;
 }
 
 export interface NavSection {
@@ -120,7 +123,9 @@ export function AdminSidebar({ sections }: { sections: NavSection[] }) {
             </p>
             <ul>
               {section.items.map((item) => {
-                const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+                const active = item.exact
+                  ? pathname === item.href
+                  : pathname === item.href || pathname.startsWith(`${item.href}/`);
                 return (
                   <li key={item.href}>
                     <Link

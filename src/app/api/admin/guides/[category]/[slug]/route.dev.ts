@@ -9,10 +9,13 @@ import {
   type FreeHeroesData,
   type PremiumLimitedData,
 } from '@/lib/admin/general-guide-store';
+import { saveShopPriorities, type ShopPrioritiesSaveData } from '@/lib/admin/shop-priorities-store';
+
+type GeneralData = FreeHeroesData | PremiumLimitedData | ShopPrioritiesSaveData;
 
 type Body =
   | { op: 'save'; draft: GuideDraft }
-  | { op: 'save'; data: FreeHeroesData | PremiumLimitedData }
+  | { op: 'save'; data: GeneralData }
   | { op: 'add-version'; newKey: string; fromKey: string };
 
 // Outil local : 403 en prod, écriture fichier seulement en dev.
@@ -35,7 +38,9 @@ export async function POST(
     const errors =
       slug === 'premium-limited'
         ? await savePremiumLimited(body.data as PremiumLimitedData)
-        : await saveFreeHeroes(body.data as FreeHeroesData);
+        : slug === 'shop-purchase-priorities'
+          ? await saveShopPriorities(body.data as ShopPrioritiesSaveData)
+          : await saveFreeHeroes(body.data as FreeHeroesData);
     if (errors.length) return NextResponse.json({ ok: false, errors }, { status: 400 });
     return NextResponse.json({ ok: true });
   }

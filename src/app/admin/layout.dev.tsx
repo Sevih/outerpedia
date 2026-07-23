@@ -2,6 +2,7 @@ import { AdminSidebar, type NavSection } from '@/components/admin/AdminSidebar';
 import { assertDevOnly } from '@/lib/admin/guard';
 import { reviewAll, reviewBuckets } from '@/lib/admin/review-store';
 import { actionableDiff } from '@/lib/admin/monster-review';
+import { GUIDE_EDITOR_CATEGORIES } from '@/lib/admin/guide-nav';
 import { RootDocument } from '../root-document';
 
 // Outil local : jamais prérendu, 404 en prod.
@@ -90,8 +91,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       ],
     },
     {
+      // Une entrée par TYPE de guide (chaque type a sa propre liste latérale) ;
+      // « Overview » garde l'accueil (import de contribution) accessible.
       title: 'Guide editor',
-      items: [{ label: 'Guides', href: '/admin/guides' }],
+      items: [
+        { label: 'Overview', href: '/admin/guides', exact: true },
+        ...GUIDE_EDITOR_CATEGORIES.map((c) => ({
+          label: c.label,
+          href: `/admin/guides/${c.slug}`,
+        })),
+      ],
     },
     {
       title: 'Misc',

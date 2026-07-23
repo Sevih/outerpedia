@@ -11,9 +11,11 @@ import {
   loadFreeHeroes,
   loadPremiumLimited,
 } from '@/lib/admin/general-guide-store';
+import { loadShopPriorities } from '@/lib/admin/shop-priorities-store';
 import { GuideEditor } from '@/components/admin/GuideEditor';
 import { FreeHeroesEditor } from '@/components/admin/FreeHeroesEditor';
 import { PremiumLimitedEditor } from '@/components/admin/PremiumLimitedEditor';
+import { ShopPrioritiesEditor } from '@/components/admin/ShopPrioritiesEditor';
 
 export const dynamic = 'force-dynamic';
 
@@ -55,6 +57,14 @@ export default async function GuideEditPage({
             refs={buildInlineRefs()}
             charOptions={charOptions}
           />
+        </div>
+      );
+    }
+    if (slug === 'shop-purchase-priorities') {
+      return (
+        <div className="space-y-4">
+          {header}
+          <ShopPrioritiesEditor initial={loadShopPriorities()} refs={buildInlineRefs()} />
         </div>
       );
     }
