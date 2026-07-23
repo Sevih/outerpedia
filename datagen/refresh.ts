@@ -75,6 +75,25 @@ const readStamp = (): string | null => {
   }
 };
 
+/**
+ * Décision PURE de (re)génération — isolée du flux à effets de bord pour être
+ * testable (cf. refresh.test). On régénère si `.gamedata/files` est là ET
+ * (`--force`, OU le pull a ramené du neuf, OU la signature des entrées diffère
+ * du dernier build réussi = auto-réparation). Un 1er run (`prevSig === null`)
+ * n'est PAS « stale » : la baseline s'amorce sans régénérer.
+ */
+export function regenDecision(i: {
+  hasGamedata: boolean;
+  force: boolean;
+  changed: boolean;
+  prevSig: string | null;
+  currentSig: string;
+}): { doGen: boolean; staleByStamp: boolean } {
+  const staleByStamp = i.hasGamedata && i.prevSig !== null && i.prevSig !== i.currentSig;
+  const doGen = i.hasGamedata && (i.force || i.changed || staleByStamp);
+  return { doGen, staleByStamp };
+}
+
 export type RefreshOptions = {
   /** Forcer la re-génération même si le local est déjà à jour (filet anti-échec). */
   force?: boolean;
@@ -110,8 +129,13 @@ export async function refresh(opts: RefreshOptions = {}): Promise<void> {
   const hasGamedata = existsSync(GAMEDATA);
   const currentSig = inputSignature();
   const prevSig = readStamp();
-  const staleByStamp = hasGamedata && prevSig !== null && prevSig !== currentSig;
-  const doGen = hasGamedata && (force || changed || staleByStamp);
+  const { doGen, staleByStamp } = regenDecision({
+    hasGamedata,
+    force,
+    changed,
+    prevSig,
+    currentSig,
+  });
 
   if (doGen) {
     if (!changed && (force || staleByStamp)) {
