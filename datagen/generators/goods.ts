@@ -60,19 +60,28 @@ function icons(): Map<string, string> {
   return m;
 }
 
-/** Convention `<REST>` → `TI_Item_<TitleCase(REST)>`, vérifiée contre les assets réels. */
-function conventionIcon(part: string): string {
-  const set = icons();
+/**
+ * Candidats de nom d'icône pour une monnaie `SYS_ASSET_<REST>` : le REST en
+ * TitleCase, plus deux variantes de numéro final (zéro-padé sur 2 chiffres, et
+ * dé-padé) — les assets nomment le suffixe des deux façons (`_1` vs `_01`),
+ * l'asset réel tranche ensuite. Pur (aucun accès disque), testable isolément.
+ */
+export function iconNameCandidates(part: string): string[] {
   const rest = part
     .split('_')
     .map((w) => (w ? w[0] + w.slice(1).toLowerCase() : w))
     .join('_');
-  const cands = [
+  return [
     rest,
     rest.replace(/_(\d+)$/, (_m, d: string) => '_' + d.padStart(2, '0')),
     rest.replace(/_0*(\d+)$/, '_$1'),
   ];
-  for (const c of cands) {
+}
+
+/** Convention `<REST>` → `TI_Item_<TitleCase(REST)>`, vérifiée contre les assets réels. */
+function conventionIcon(part: string): string {
+  const set = icons();
+  for (const c of iconNameCandidates(part)) {
     const hit = set.get(`ti_item_${c.toLowerCase()}`);
     if (hit) return hit;
   }
