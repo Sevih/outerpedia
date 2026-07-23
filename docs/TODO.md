@@ -68,15 +68,10 @@
 
 ### Panneau admin
 
-> Décisions d'IA figées le 07/07 (matrice fonction × entité) — ces trois items
-> vivaient hors du repo jusqu'au 22/07, remis ici à leur place.
+> Décision d'IA figée le 07/07 (matrice fonction × entité). Deux des trois items
+> d'origine sont LIVRÉS (diff « TYPO » + quick-fix, auto-détection des tags
+> perso) — cf. DONE 2026-07-23. Reste le doublon Home/Extractor.
 
-- [ ] **Diff « TYPO » + bouton quick-fix** : classer à part les écarts de casse,
-      d'apostrophes et d'espaces, corrigeables en un clic. Seule la
-      normalisation d'apostrophes existe (`equipment-control.ts`).
-- [ ] **Auto-détection des tags perso** à l'extraction (premium/limited/collab…).
-      ⚠ GARDE : tant qu'elle n'existe pas, **ne pas retirer ces tags du curé** —
-      ce serait une perte de donnée sèche. Seul `free` est un champ d'Editor.
 - [ ] **Home `/admin` = doublon d'Extractor** — refonte possible en « inbox
       priorisée » (ce qui demande une action, trié par urgence).
 
@@ -123,12 +118,6 @@
       (Cohérence structurelle inter-langues : parfaite — clés identiques ×5.)
       NB : le pool se résorbe avec les portages (tools/tierlist/changelog
       consomment désormais leurs clés).
-- [ ] Doc ↔ code (reste 2 sites datagen) : doc de `slugTeam`
-      (datagen/generators/skills.ts:113 — dit « undefined si CSV », le code
-      prend le 1er token) ; exception `stageLabel` non documentée
-      (datagen/generators/unlock-content.ts contredit son en-tête « jamais
-      parser l'ID »). (face-icon.ts corrigé le 20/07 avec la purge du code
-      mort ; `geas.ts` le 18/07 — cf. DONE.)
 
 ## 📦 Données V2 restant à porter (ex todo-data-v2)
 

@@ -109,7 +109,10 @@ export interface SkillData {
   skills: Record<string, Skill>;
 }
 
-/** Valeur d'enum de cible/portée → slug minuscule, `undefined` si NONE/vide/CSV. */
+/**
+ * Valeur d'enum de cible/portée → slug minuscule. Sur un CSV (plusieurs cibles),
+ * on garde le 1er token ; `undefined` seulement si NONE ou vide.
+ */
 function slugTeam(v: string | undefined): string | undefined {
   const first = splitCsv(v ?? '')[0];
   if (!first || first === 'NONE') return undefined;

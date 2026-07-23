@@ -143,6 +143,10 @@ export function buildUnlockContent(): UnlockContentData {
   };
   const seasonDisplay = buildSeasonDisplayMap(areas);
 
+  // Le n° de stage (dans l'épisode) ne vit NULLE PART ailleurs que dans les 2
+  // derniers chiffres de l'ID de donjon → SEULE exception à la règle d'en-tête
+  // « jamais parser l'ID » : saison/épisode passent bien par AreaID, seul le
+  // stage se lit sur l'ID (`slice(-2)` ci-dessous).
   const stageLabel = (dungeonId: string, dungeon: Row): string | undefined => {
     if (!/^\d{2,}$/.test(dungeonId)) return undefined;
     const area = areaById.get(dungeon.AreaID ?? '');

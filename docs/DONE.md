@@ -23,6 +23,30 @@
   ici : regens `banners`/`promo-codes`/`changelog`, imports ponctuels — pas des
   oracles de diff — à couper à la bascule prod.)
 
+- **Deux dérives doc↔code datagen corrigées (commentaires seuls, zéro
+  comportement).** (1) `slugTeam` (`datagen/generators/skills.ts`) prétendait
+  rendre `undefined` sur un CSV, alors que `splitCsv(v)[0]` prend le 1er token
+  (« A,B » → `'a'`) — commentaire recadré (`undefined` seulement si NONE/vide).
+  (2) `stageLabel` (`datagen/generators/unlock-content.ts`) contredit sans le
+  dire l'en-tête « jamais parser l'ID » : le n° de stage se lit bien sur
+  `dungeonId.slice(-2)` (il ne vit nulle part ailleurs) — exception désormais
+  documentée sur la fonction (saison/épisode passent, eux, par AreaID). Vidait
+  le dernier item « Doc ↔ code » du TODO.
+
+- **Deux TODO « Panneau admin » fermés — DÉJÀ livrés, vérifiés à l'audit.**
+  (1) **Diff « TYPO » + quick-fix** : le bucket `typo` est classé côté serveur
+  (`datagen/extractor/core/changes.ts` — `isTypoField`/`diffBuckets`), et l'UI
+  expose le bouton « Fix typos (N) » (`ExtractorReview.tsx`) → `POST
+/api/admin/review/[id]` mode `typos` → `acceptTypos`. Le TODO citait encore
+  « seule la normalisation d'apostrophes existe (`equipment-control.ts`) » —
+  doublement périmé, ce fichier a été supprimé. (2) **Auto-détection des tags
+  perso** (premium/limited/seasonal/collab) : produite en dur par la spec
+  d'extraction (`datagen/extractor/specs/character.ts` — `recruitTagById` via
+  `RecruitGroupTemplet.RibbonType` + détection collab par image de bannière /
+  `ThumbnailEffect`). Seul `free` reste curé (aucun marqueur en jeu). La GARDE
+  « ne pas retirer ces tags du curé tant que l'auto-détection n'existe pas » est
+  donc levée.
+
 - **`rewardTables` sort de `glossaries.json` → fuites client vers un gros JSON
   8 → 2, et `glossaries.json` quitte la catégorie « gros ».** Suite directe de
   la scission de `lib/stats` (22/07). MESURÉ en prod sur `/characters/drakhan` :
