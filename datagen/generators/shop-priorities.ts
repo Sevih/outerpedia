@@ -158,7 +158,7 @@ export function isCurrent(r: Row, asOf: string, maxYear: number): boolean {
 }
 
 /** Partie « goods » du slug stable : ce qu'on achète, indépendant du prix/rotation. */
-function goodsSlug(r: Row): string {
+export function goodsSlug(r: Row): string {
   const type = r.ProductGoodsType ?? '';
   const id = r.ProductGoodsID ?? '';
   const val = r.ProductGoodsValue ?? '';
