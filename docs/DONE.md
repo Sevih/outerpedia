@@ -6,6 +6,26 @@
 
 ## 2026-07-23
 
+- **`rewardTables` sort de `glossaries.json` → fuites client vers un gros JSON
+  8 → 2, et `glossaries.json` quitte la catégorie « gros ».** Suite directe de
+  la scission de `lib/stats` (22/07). MESURÉ en prod sur `/characters/drakhan` :
+  le glossaire ENTIER partait au navigateur (chunk de 917 Ko décompressés,
+  55 % du JS de la page), et `rewardTables` en fait **85 % indenté / 76 %
+  minifié** (1367 tables) — lu du SEUL `lib/data/rewards`, serveur, jamais
+  d'un composant client. Ces tables ne voyageaient que parce qu'elles
+  PARTAGEAIENT UN FICHIER avec `elements`/`classes` (tirés côté client par
+  `game-tokens`). Sorties dans `reward-tables.json` : `glossaries.json` passe
+  de 1,88 Mo à 277 Ko, tombe SOUS le seuil « gros JSON » du graphe d'imports,
+  et `reward-tables.json` (1,43 Mo) n'est atteint par AUCUN module client.
+  Touche `datagen/build.ts` (écriture séparée), `contracts` (type
+  `RewardTablesFile`, `rewardTables` quitte `Glossaries`), `lib/data/rewards`
+  et le test d'invariants d'`encounters`. Les deux fichiers `data/generated/`
+  ont été produits par un SPLIT DÉTERMINISTE du `glossaries.json` committé, via
+  le formateur canonique du pipeline (`formatJson`) — byte-identique à la sortie
+  de `build.ts`, pour isoler le déplacement sans embarquer la dérive de contenu
+  du jour. Le prochain `datagen:regen` réconciliera ces deux fichiers avec un
+  diff vide (hors contenu de jeu réellement nouveau, revu à part).
+
 - **Slug des core-fusions : `notia-2` → `core-fusion-notia`.** Une core-fusion
   est une entité séparée portant le MÊME nom EN que sa base ; `buildSlugMap`
   (datagen/lib/slug.ts) lui collait donc un suffixe de collision (`notia-2`) au

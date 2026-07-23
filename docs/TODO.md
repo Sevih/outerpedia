@@ -92,25 +92,6 @@
 > Le gros de l'audit est traité (cf. DONE 20-21/07 : canonicals, comics, cache).
 > Ce qui suit est du volume, pas du bug. Détail : `docs/seo&audit/`.
 
-- [ ] **Sortir `rewardTables` de `glossaries.json`** — UNE section à déplacer,
-      pas un découpage en 21 (analyse affinée le 22/07 : minifié, ce que voit
-      le bundler, `rewardTables` pèse **682 Ko sur 892**, soit **76 %** — la
-      version indentée du fichier gonflait les petites sections et donnait
-      43 %). MESURÉ en prod sur `/characters/drakhan` : le glossaire ENTIER
-      part au navigateur dans un chunk de **917 Ko décompressés / 77 Ko
-      transférés** (55 % du JS de la page), et les clés `rewardTables`,
-      `statDescs`, `geas`, `effectByTooltip` y sont toutes présentes — aucun
-      élagage. Or **aucun composant client n'importe `lib/data/rewards`** :
-      ces 682 Ko voyagent uniquement parce qu'ils PARTAGENT UN FICHIER avec des
-      sections réellement utilisées côté client. Gain attendu : chunk à ~216 Ko
-      décompressés, ~18 Ko transférés, sur les fiches perso, l'équipement, la
-      tier list et les outils. Chantier `datagen/` : `build.ts` (l.163) émet un
-      `reward-tables.json` séparé, `contracts/index.ts` (l.289) et
-      `lib/data/rewards.ts` suivent ; `data/generated/` est une sortie de
-      pipeline, donc régénération, pas d'édition à la main.
-      Les autres fuites ont été fermées le 22/07 (cf. DONE : `STAR_SPRITE`,
-      scission de `lib/stats`).
-
 - [ ] **Titles / meta descriptions courts** (572 / 135 pages) — surtout les
       pages générées ; à arbitrer, ce n'est pas mécanique.
       (`<html lang>`, `alt` manquants et `width`/`height` TRAITÉS le 22/07,

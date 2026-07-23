@@ -18,6 +18,7 @@
 import { describe, expect, it } from 'vitest';
 import encountersData from '../../data/generated/encounters.json';
 import glossariesData from '../../data/generated/glossaries.json';
+import rewardTablesData from '../../data/generated/reward-tables.json';
 import monstersData from '../../data/generated/monsters.json';
 import type { Row } from '../lib/tables';
 import {
@@ -87,14 +88,15 @@ describe('dungeonSpawnedMonsters — traversée complète', () => {
 // ─── 2. Invariants sur la donnée committée ───────────────────────────────────
 
 // Au BUILD, EncountersData est ÉCLATÉ : `dungeons` → encounters.json ;
-// modes/rankOptions/rewardTables/geas → glossaries.json ; les spawns inverses
+// modes/rankOptions/geas → glossaries.json ; `rewardTables` → reward-tables.json
+// (sorti du glossaire le 2026-07-23, cf. build.ts) ; les spawns inverses
 // (MonsterEncounters) sont fusionnés dans chaque monstre de monsters.json.
 const dungeons = encountersData as unknown as Record<string, DungeonRef>;
 const glossaries = glossariesData as unknown as {
   rankOptions: Record<string, RankOption>;
-  rewardTables: Record<string, RewardTable>;
   geas: Record<string, GuildRaidGeas>;
 };
+const rewardTables = rewardTablesData as unknown as Record<string, RewardTable>;
 const monsters = monstersData as unknown as Record<string, { spawns?: MonsterSpawn[] }>;
 const monsterIds = new Set(Object.keys(monsters));
 const dungeonEntries = Object.entries(dungeons);
@@ -114,7 +116,7 @@ describe('encounters.json — invariants référentiels', () => {
     const missing: string[] = [];
     for (const [id, d] of dungeonEntries) {
       for (const ref of [d.reward, d.rewardWin, d.rewardLose]) {
-        if (ref && !glossaries.rewardTables[ref]) missing.push(`${id} → ${ref}`);
+        if (ref && !rewardTables[ref]) missing.push(`${id} → ${ref}`);
       }
     }
     expect(missing).toEqual([]);

@@ -1,6 +1,6 @@
 /**
  * RÉCOMPENSES DE DONJON — la résolution `DungeonRef.reward[Win|Lose]` →
- * glossaire `rewardTables` → catalogue d'items / familles d'équipement.
+ * `reward-tables.json` → catalogue d'items / familles d'équipement.
  *
  * La V2 affichait le butin d'un boss via un champ `boss` curé À LA MAIN sur
  * chaque équipement, et la vue de catégorie irregular portait carrément une
@@ -13,7 +13,8 @@
  * manque à l'écran sans un bruit est exactement le bug qu'on remplace.
  */
 import glossariesData from '@data/generated/glossaries.json';
-import type { Glossaries, RewardEntry, RewardTable } from '@contracts';
+import rewardTablesData from '@data/generated/reward-tables.json';
+import type { Glossaries, RewardEntry, RewardTable, RewardTablesFile } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { img } from '@/lib/images';
@@ -45,6 +46,10 @@ import {
 } from '@/lib/data/gear-reco';
 
 const G = glossariesData as unknown as Glossaries;
+// `rewardTables` a quitté `glossaries.json` (le 2026-07-23) : 85 % de son poids,
+// lu ICI seulement (serveur), alors que le glossaire voyage jusqu'au navigateur
+// avec les fiches perso/équipement. `assetTypes` (ci-dessous) y reste, minuscule.
+const REWARD_TABLES = rewardTablesData as unknown as RewardTablesFile;
 
 /**
  * La monnaie du champ `credit` d'une table (`RewardTemplet.CreditMin/Max`) :
@@ -54,9 +59,9 @@ const G = glossariesData as unknown as Glossaries;
 const GOLD_KEY = 'SYS_ASSET_GOLD';
 
 export function getRewardTable(id: string): RewardTable {
-  const table = G.rewardTables?.[id];
+  const table = REWARD_TABLES[id];
   if (!table) {
-    throw new Error(`rewards : table « ${id} » absente du glossaire rewardTables.`);
+    throw new Error(`rewards : table « ${id} » absente de reward-tables.json.`);
   }
   return table;
 }

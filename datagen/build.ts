@@ -27,6 +27,7 @@ import type {
   ItemsFile,
   MonsterSkillsFile,
   MonstersFile,
+  RewardTablesFile,
   SkillsFile,
   TranscendFile,
 } from './contracts';
@@ -158,9 +159,6 @@ async function main(): Promise<void> {
     // Passifs de PALIER résolus (`DungeonRank.options` → buff) — le site
     // affiche les rangs (singularity…) sans lire les tables du jeu.
     rankOptions: encounters.rankOptions,
-    // Tables de récompense résolues — référencées par `DungeonRef.reward`,
-    // `rewardWin`, `rewardLose` (encounters.json).
-    rewardTables: encounters.rewardTables,
     // Geas du guild raid (phase 2) — référencés par `DungeonRef.geasRewards`.
     geas: encounters.geas,
     // Monnaies par id numérique (lignes `asset` des rewardTables) — lu de
@@ -206,6 +204,12 @@ async function main(): Promise<void> {
   await writeJson('encounters.json', encountersFile);
   await writeJson('items.json', itemsFile);
   await writeJson('glossaries.json', glossaries);
+  // Tables de récompense résolues (réf `DungeonRef.reward`/`rewardWin`/`rewardLose`).
+  // FICHIER À PART, hors `glossaries.json` : 76 % de son poids, lu du seul
+  // `lib/data/rewards` (serveur), alors que le glossaire voyage jusqu'au
+  // navigateur avec les fiches perso/équipement — séparé, il ne le suit plus.
+  const rewardTablesFile: RewardTablesFile = encounters.rewardTables;
+  await writeJson('reward-tables.json', rewardTablesFile);
   // Conditions de déblocage des contenus (guide « Unlocking Content »).
   await writeJson('unlock-content.json', buildUnlockContent());
   // Domaine recrutement : pool custom, taux/coûts par type de bannière,

@@ -282,12 +282,6 @@ export interface Glossaries {
    */
   rankOptions?: Record<string, RankOption>;
   /**
-   * Tables de récompense résolues (`RewardTemplet` + groupes), référencées
-   * par `DungeonRef.reward`/`rewardWin`/`rewardLose` — mutualisées entre
-   * donjons. Optionnel comme `modes` (absent avant la première promotion).
-   */
-  rewardTables?: Record<string, RewardTable>;
-  /**
    * Geas du guild raid (phase 2 — contenu pas encore ouvert in-game),
    * référencés par `DungeonRef.geasRewards`. Optionnel comme `modes`.
    */
@@ -310,6 +304,17 @@ export interface Glossaries {
 
 /** `data/generated/characters.json` */
 export type CharactersFile = Record<string, Character>;
+/**
+ * `data/generated/reward-tables.json` — tables de récompense résolues
+ * (`RewardTemplet` + groupes), référencées par
+ * `DungeonRef.reward`/`rewardWin`/`rewardLose`, mutualisées entre donjons.
+ * Extrait de `glossaries.json` (le 2026-07-23) : 76 % de son poids, lu par le
+ * SEUL `lib/data/rewards` côté serveur, alors que le glossaire part au
+ * navigateur avec les fiches perso/équipement/tier list. Séparé, il ne voyage
+ * plus. Optionnel à l'usage comme les autres sorties du domaine monstre —
+ * absent avant la première promotion.
+ */
+export type RewardTablesFile = Record<string, RewardTable>;
 /** `data/generated/transcend.json` (barème partagé + overrides) */
 export type TranscendFile = TranscendData;
 /** `data/generated/skills.json` */
