@@ -199,21 +199,30 @@ function resolveCells(rows: Row[]): Record<string, string> {
  * naturellement dans ce trou, et c'est la résolution de texte qui les rend
  * lisibles. La cible se filtre sur sa clé primaire `ID`.
  */
+/**
+ * Table cible d'UNE colonne (pur, testable). Retire le suffixe `ID(s)`, puis
+ * essaie les suffixes de mots du plus long au plus court (`ClearDungeon`, puis
+ * `Dungeon`), en préférant `<X>Templet` à `<X>`. `undefined` si aucune table
+ * candidate n'existe (conservateur), ou si la colonne n'est pas un `*ID`.
+ */
+export function linkTargetFor(col: string, tables: Set<string>): string | undefined {
+  const base = col.replace(/I[Dd]s?$/, '');
+  if (!base || base === col) return undefined; // seules les colonnes `*ID` désignent une table
+  const words = base.match(/[A-Z][a-z0-9]*|[a-z0-9]+/g) ?? [];
+  for (let i = 0; i < words.length; i++) {
+    const cand = words.slice(i).join('');
+    const target = [`${cand}Templet`, cand].find((t) => tables.has(t));
+    if (target) return target;
+  }
+  return undefined;
+}
+
 export function linkTargets(columns: string[]): Record<string, string> {
   const tables = new Set(listTableNames());
   const out: Record<string, string> = {};
   for (const col of columns) {
-    const base = col.replace(/I[Dd]s?$/, '');
-    if (!base || base === col) continue; // seules les colonnes `*ID` désignent une autre table
-    const words = base.match(/[A-Z][a-z0-9]*|[a-z0-9]+/g) ?? [];
-    for (let i = 0; i < words.length; i++) {
-      const cand = words.slice(i).join('');
-      const target = [`${cand}Templet`, cand].find((t) => tables.has(t));
-      if (target) {
-        out[col] = target;
-        break;
-      }
-    }
+    const target = linkTargetFor(col, tables);
+    if (target) out[col] = target;
   }
   return out;
 }
