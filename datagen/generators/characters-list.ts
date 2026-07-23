@@ -98,7 +98,7 @@ const ALLY_STAT = new RegExp(
   'gi',
 );
 
-function teamStatsFromDesc(desc: string, into: Set<string>): void {
+export function teamStatsFromDesc(desc: string, into: Set<string>): void {
   const flat = desc.replace(/\\n|\r?\n/g, ' ');
   for (const m of flat.matchAll(ALLY_STAT)) {
     const key = TEAM_STAT[m[1].toLowerCase()];
@@ -151,7 +151,7 @@ export interface CharactersListDeps {
  * présentes dans la taxonomie curée ; sur collision (plusieurs clés → même id),
  * préfère la clé de BASE (sans `group`) à une variante.
  */
-function invertKeys(
+export function invertKeys(
   byKey: Record<Side, Map<string, string>>,
   filters: EffectFiltersData,
 ): Record<Side, Map<string, string>> {
@@ -167,7 +167,11 @@ function invertKeys(
 }
 
 /** Résout un effet de skill vers son id de glossaire (tooltip puis label). */
-function effectId(e: ResolvedEffect, byTooltip: Map<string, string>, byLabel: Map<string, string>) {
+export function effectId(
+  e: ResolvedEffect,
+  byTooltip: Map<string, string>,
+  byLabel: Map<string, string>,
+) {
   if (e.tooltip && byTooltip.has(e.tooltip)) return byTooltip.get(e.tooltip);
   if (e.label && byLabel.has(e.label)) return byLabel.get(e.label);
   return undefined;
