@@ -6,6 +6,18 @@
 
 ## 2026-07-23
 
+- **Fix prod : `/ost` « Failed to load track » sur toutes les pistes — CSP.**
+  La CSP appliquée (`next.config.ts`) avait `media-src 'self' youtube discord`
+  mais PAS le host des assets `img.outerpedia.com` → les mp3 du jukebox, servis
+  en cross-origin depuis R2, étaient bloqués par le navigateur (l'`<audio>` fire
+  `error`). Les images passaient parce qu'`img-src` a un `https:` large, pas le
+  média. En local l'URL est same-origin (`/audio/…`, `NEXT_PUBLIC_IMG_BASE` vide)
+  → couverte par `'self'`, d'où le « marche en local, casse en prod ». Diagnostic
+  confirmé sur la donnée réelle : `curl` sur R2 renvoie `206` + `audio/mpeg` +
+  ranges, l'asset était sain — seule la CSP bloquait. `img.outerpedia.com` ajouté
+  à `media-src` dans les DEUX CSP (appliquée + Report-Only jumelle de `proxy.ts`).
+  Nécessite un déploiement prod (build). Non poussé.
+
 - **Tests datagen : les générateurs MINCES/fs restants couverts — le chantier
   « Tests à écrire » est SOLDÉ.** Derniers non nommés, même méthode (cœur pur
   synthétique quand il y en a un + invariants sur `data/generated/` committé,

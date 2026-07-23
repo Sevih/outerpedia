@@ -21,7 +21,9 @@ function buildCsp(nonce: string): string {
     "img-src 'self' data: https: blob:",
     "font-src 'self' data:",
     "connect-src 'self' https://cloudflareinsights.com",
-    "media-src 'self' https://*.youtube.com https://cdn.discordapp.com",
+    // img.outerpedia.com = host R2 des assets : les mp3 de /ost sont cross-origin
+    // (cf. même directive dans next.config.ts, la CSP appliquée).
+    "media-src 'self' https://img.outerpedia.com https://*.youtube.com https://cdn.discordapp.com",
     "frame-src 'self' https://*.youtube.com",
     "object-src 'none'",
     "base-uri 'self'",

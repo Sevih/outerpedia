@@ -34,7 +34,12 @@ const securityHeaders = [
       "img-src 'self' data: https: blob:",
       "font-src 'self' data:",
       "connect-src 'self' https://cloudflareinsights.com",
-      "media-src 'self' https://*.youtube.com https://cdn.discordapp.com",
+      // img.outerpedia.com = host R2 des assets (NEXT_PUBLIC_IMG_BASE) : sans lui,
+      // le jukebox /ost charge ses mp3 en cross-origin et la CSP les BLOQUE (les
+      // images passent par le `https:` large d'img-src, pas le média). En local
+      // l'URL est same-origin (`/audio/…`) donc couverte par 'self' — d'où le
+      // « marche en local, casse en prod » sur TOUTES les pistes.
+      "media-src 'self' https://img.outerpedia.com https://*.youtube.com https://cdn.discordapp.com",
       // Les TROIS plateformes que `MultiVideoEmbed` sait embarquer : sans
       // twitch/bilibili ici, leur lecteur est bloqué en silence (cadre vide).
       "frame-src 'self' https://*.youtube.com https://player.twitch.tv https://player.bilibili.com",
