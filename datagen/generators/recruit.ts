@@ -108,7 +108,7 @@ const BANNER_KIND: Record<string, RecruitBanner['kind']> = {
 };
 
 /** `2026-07-14  00:00:00` → `2026-07-14`. */
-const isoDate = (raw: string): string => (raw ?? '').trim().slice(0, 10);
+export const isoDate = (raw: string): string => (raw ?? '').trim().slice(0, 10);
 
 /** `data/curated/recruit-banners.json` — mémoire des purges de tables. */
 interface RecruitBannersCurated {
@@ -185,7 +185,11 @@ function buildCustomPool(groups: Row[], gradeRecipes: Row[]): string[] {
 }
 
 /** Taux d'un groupe : poids CHARACTER normalisés en % (2 décimales). */
-function ratesOf(gradeRecipes: Row[], groupId: string, tsys: Map<string, LangDict>): RecruitRate[] {
+export function ratesOf(
+  gradeRecipes: Row[],
+  groupId: string,
+  tsys: Map<string, LangDict>,
+): RecruitRate[] {
   const rows = gradeRecipes.filter((r) => r.GroupID === groupId && r.RecipeType === 'CHARACTER');
   const totalNormal = rows.reduce((s, r) => s + num(r.NormalRate), 0);
   const totalConfirm = rows.reduce((s, r) => s + num(r.ConfirmRate), 0);
