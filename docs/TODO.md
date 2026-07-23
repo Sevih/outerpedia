@@ -61,9 +61,6 @@
 > DONE). Modèle de contribution acté : outil PUBLIC exporte 1 perso →
 > IMPORT côté admin (pas d'écriture serveur publique, pas d'auth).
 
-- [ ] `core-fusion` : reviews (avec `changes` par skill + `recommendedLevels`) +
-      recommended choices (`op` sur les picks, pas de bucket `transcend`) —
-      répliquer le patron premium-limited (contribution publique aussi).
 - [ ] `shop-purchase-priorities` : modifier les priorités S/A/B/C des items —
       LES DEUX (choix Sevih) : tables éditoriales (`editorial.ts`, EVENT/RESOURCE)
       **et** overlay curé des shops dérivés (fusionné au build datagen → éditer
