@@ -6,6 +6,16 @@
 
 ## 2026-07-23
 
+- **Warnings Firefox « police préchargée … non utilisée » coupés.** `next/font`
+  préchargeait les TROIS polices (`<link rel=preload as=font>` par page) ; Firefox
+  avertit dès qu'une page n'en peint pas le glyphe dans les ~3 s. `preload: false`
+  sur les DEUX secondaires (Geist Sans = simple fallback de Paybooc, Geist Mono =
+  usages épars). **Paybooc GARDE son préchargement** : c'est la police par défaut
+  du site (`--font-sans`), peinte above-the-fold partout (LCP) — la dé-précharger
+  flasherait le fallback à chaque premier rendu. Elles se chargent toujours à la
+  découverte CSS ; `display: swap` + fallback à métriques ajustées de next/font
+  couvrent le rendu sans préchargement.
+
 - **Fix prod : `/ost` « Failed to load track » sur toutes les pistes — CSP.**
   La CSP appliquée (`next.config.ts`) avait `media-src 'self' youtube discord`
   mais PAS le host des assets `img.outerpedia.com` → les mp3 du jukebox, servis
