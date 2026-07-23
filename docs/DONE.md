@@ -23,6 +23,29 @@
   ici : regens `banners`/`promo-codes`/`changelog`, imports ponctuels — pas des
   oracles de diff — à couper à la bascule prod.)
 
+- **Tests datagen : le LOT NOMMÉ de générateurs couvert (7) + gating de
+  `refresh` + `gamedata-store`.** Même méthode que le trio du 20/07 — cœurs purs
+  isolés en synthétique (aucune table) + invariants référentiels sur
+  `data/generated/` committé, la suite tourne SANS `.gamedata` (CI). Détail :
+  **skills** (16 t — `assembleSkill` buffs vides, réf croisée persos↔skills),
+  **recruit** (10 t — `ratesOf` poids→%, taux à 100, bannières), **goods** (6 t —
+  `iconNameCandidates`, assetTypes↔goods), **monad** (15 t — le SOLVEUR BFS
+  True Ending sur graphes synthétiques, `mapNodeType`/`splitLabelAndNeed`,
+  bijection index↔routes), **towers** (8 t — `formationOf`, étages↔donjons/
+  monstres, pool very-hard), **equipment** (14 t — `usedValueKeys`/
+  `conditionalLabel`, graphe de réfs items→pools/passifs/breakLimits/sets→EE→
+  perso→familles), **sources** (5 t — `shopSlug`, items↔équipement/boss).
+  `refresh` : décision de (re)génération extraite en `regenDecision` pur (gating
+  extract→build). `gamedata-store` (dev-only) : `isValidTableName` + `linkTargetFor`.
+  Pour tester, les cœurs purs privés ont été EXPORTÉS ou extraits au scope module
+  (convention encounters), sans changer aucun comportement. Suite datagen : 271
+  tests ; suite complète : 692. Trois quirks de donnée RÉELLE documentés par les
+  tests plutôt que masqués : skill orphelin `3807` (0 niveau, aucun perso — « pas
+  de drop silencieux »), 5 bannières `seasonal-selection` à `end='0'` (rerun
+  ouvert sans fin en table), 3 Unique Options descriptives sans `BuffTemplet`
+  (« Fatal's Exclusive Equipment »…). Restent les générateurs secondaires non
+  nommés (cf. TODO).
+
 - **Deux dérives doc↔code datagen corrigées (commentaires seuls, zéro
   comportement).** (1) `slugTeam` (`datagen/generators/skills.ts`) prétendait
   rendre `undefined` sur un CSV, alors que `splitCsv(v)[0]` prend le 1er token

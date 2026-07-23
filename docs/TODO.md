@@ -42,13 +42,16 @@
 
 ## 🧪 Tests à écrire
 
-- [ ] Les générateurs `datagen/generators/*` + `build.ts`/`refresh.ts` —
-      le TRIO PRIORITAIRE (encounters/singularity/content-schedule) est
-      COUVERT le 20/07 (28 tests, cf. DONE : cœurs purs en synthétique +
-      invariants sur data/generated). RESTENT les autres générateurs
-      (equipment, skills, towers-datagen, monad, goods, recruit, sources…) + build.ts/refresh.ts, même méthode. CONTRAINTE actée : la suite
-      tourne SANS `.gamedata` (CI).
-- [ ] `src/lib/admin/gamedata-store.ts` (dev-only, priorité moindre).
+- [ ] Les générateurs `datagen/generators/*` — le TRIO (encounters/
+      singularity/content-schedule, 20/07) puis le LOT NOMMÉ (skills, recruit,
+      goods, monad, towers, equipment, sources + gating de `refresh` +
+      `gamedata-store`, 23/07 — cf. DONE) sont COUVERTS. `build.ts` l'est
+      indirectement (ses sorties sont vérifiées par les invariants inter-fichiers
+      des générateurs). RESTENT les générateurs SECONDAIRES non nommés
+      (characters-list, progression, hero-growth, quirks, items/item-catalog,
+      costumes, bosses, enhance, monster-skills, ether-rankings,
+      shop-priorities, timegate-resources…), même méthode. CONTRAINTE actée :
+      la suite tourne SANS `.gamedata` (CI).
 
 ## 🧹 Dette code
 
