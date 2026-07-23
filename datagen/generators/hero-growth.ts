@@ -80,14 +80,14 @@ export interface HeroGrowthData {
 }
 
 /** Résout une réf d'item depuis le catalogue (jette si absent — SSG strict). */
-function itemRef(id: string, catalog: Record<string, CatalogEntry>): ItemRef {
+export function itemRef(id: string, catalog: Record<string, CatalogEntry>): ItemRef {
   const e = catalog[id];
   if (!e) throw new Error(`hero-growth : item ${id} absent du catalogue`);
   return { id, name: e.name, icon: e.icon, grade: e.grade };
 }
 
 /** [{ItemID_n, ItemCnt_n}] présents (id ≠ 0, count > 0) → coûts résolus. */
-function costsFrom(
+export function costsFrom(
   row: Row,
   pairs: [string, string][],
   catalog: Record<string, CatalogEntry>,
