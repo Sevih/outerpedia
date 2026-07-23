@@ -63,6 +63,26 @@
   ici : regens `banners`/`promo-codes`/`changelog`, imports ponctuels — pas des
   oracles de diff — à couper à la bascule prod.)
 
+- **Tests datagen : les générateurs SECONDAIRES nommés couverts (12).** Suite
+  du lot principal, même méthode (cœurs purs synthétiques + invariants sur
+  `data/generated/` committé, sans `.gamedata`). **characters-list** (12 t —
+  `buildCharactersList` end-to-end : résolution effet→clé, repli `group`, EE,
+  zéro faux positif sur un mécanique ; `teamStatsFromDesc`/`invertKeys`),
+  **progression** (7 t, invariants — évolutions/limit breaks/quirks ; documente
+  le sur-ensemble `premium` = tous les CT_PC), **hero-growth** (8 t — `costsFrom`/
+  `itemRef`), **item-catalog** (8 t — `catalogCompare`/`applyCurated` + fichier
+  trié = diff stable ; `items` fondu dedans), **quirks** (4 t, invariants arbres
+  d'Awakening), **ether-rankings** (6 t — `byRank`), **enhance** (5 t, invariants
+  ascension Singularity), **shop-priorities** (7 t — `computeAsOf`/`isCurrent`/
+  `goodsSlug`, ancre déterministe), **timegate-resources** (4 t, invariants —
+  total mensuel global), **costumes** (3 t — `costumeCore`), **bosses** (2 t —
+  boss de source résolu), **monster-skills** (3 t — cœur `assembleSkill` déjà
+  couvert par skills.test ; documente le `type` vide côté monstre). Cœurs purs
+  privés EXPORTÉS/extraits au scope module (convention encounters), zéro
+  changement de comportement. Suite datagen : **346 tests** (38 fichiers).
+  Restent seulement les générateurs minces/fs non nommés (unlock-content,
+  effects, game-version, bgm-mapping, comics, wallpapers).
+
 - **Tests datagen : le LOT NOMMÉ de générateurs couvert (7) + gating de
   `refresh` + `gamedata-store`.** Même méthode que le trio du 20/07 — cœurs purs
   isolés en synthétique (aucune table) + invariants référentiels sur
