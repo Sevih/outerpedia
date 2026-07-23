@@ -57,6 +57,21 @@ export interface TowerUnit {
 }
 
 /**
+ * Une ligne de groupe de spawn (`DungeonSpawnTemplet`) → une formation : les 4
+ * slots `ID0..3`, chacun pouvant être un CSV de plusieurs monstres qui
+ * PARTAGENT le `Level<i>` de leur slot. Pur (aucune table), cœur testable.
+ */
+export function formationOf(w: Row): TowerUnit[] {
+  const units: TowerUnit[] = [];
+  for (let i = 0; i < 4; i++) {
+    for (const mid of splitCsv(w[`ID${i}`] ?? '')) {
+      units.push({ id: mid, level: num(w[`Level${i}`]) });
+    }
+  }
+  return units;
+}
+
+/**
  * Restriction d'équipe (source : `DungeonTeamConditionTemplet`), telle quelle,
  * sans jugement éditorial.
  */
@@ -206,17 +221,6 @@ export function buildTowers(): TowersData {
     const up = (nameId ?? '').toUpperCase();
     for (const el of elemConfig.keys()) if (up.includes(`_${el.toUpperCase()}_`)) return el;
     return undefined;
-  };
-
-  /** Une ligne de groupe de spawn → une formation. */
-  const formationOf = (w: Row): TowerUnit[] => {
-    const units: TowerUnit[] = [];
-    for (let i = 0; i < 4; i++) {
-      for (const mid of splitCsv(w[`ID${i}`] ?? '')) {
-        units.push({ id: mid, level: num(w[`Level${i}`]) });
-      }
-    }
-    return units;
   };
 
   /** Composition d'un étage — `waves` OU `encounters` selon la forme (cf. en-tête). */
