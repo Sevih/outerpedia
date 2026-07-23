@@ -6,6 +6,25 @@
 
 ## 2026-07-23
 
+- **CI : Docker construit sur `/mnt`, fin du `rm -rf` I/O-bound.** Le build sature
+  le disque RACINE au COPY final (standalone duplique node_modules + ~4500 pages).
+  On libérait ~25 Go en `rm -rf` des toolchains préinstallés — I/O-bound, et sur
+  un runner à disque lent monté à **10 min 32 s** (vs 24 s d'habitude, run
+  30025349354, +10 min sur les 17 min du run). Impossible à backgrounder : la
+  place DOIT être libre avant le COPY final, sinon ENOSPC. À la place, data-root
+  Docker déplacé sur `/mnt` (disque éphémère du runner, ~70 Go libres) : les
+  couches ne touchent plus `/`, plus de suppression, plus de variance. jq fusionne
+  data-root dans un `daemon.json` éventuel ; pas d'action tierce (choix maintenu).
+
+- **Warning Turbopack « over bundling » sur les guides coupée.** `readGuideFile`/
+  `readGuideVersionFile` (`src/lib/data/guides.ts`) lisent des JSON via
+  `resolve(CONTENTS_DIR, <dyn>, <dyn>, <dyn>)`. Turbopack constant-foldait
+  `CONTENTS_DIR` (= `process.cwd()`+littéral) et croyait devoir embarquer TOUT
+  l'arbre `_contents` (~11700 fichiers) dans le bundle serveur. Base rendue opaque
+  via `process.env.GUIDES_CONTENTS_DIR ?? <défaut>` → l'analyse statique lâche.
+  Sans effet runtime : ces JSON viennent de `outputFileTracingIncludes`
+  (next.config), pas de ce bundling.
+
 - **Warnings Firefox « police préchargée … non utilisée » coupés.** `next/font`
   préchargeait les TROIS polices (`<link rel=preload as=font>` par page) ; Firefox
   avertit dès qu'une page n'en peint pas le glyphe dans les ~3 s. `preload: false`

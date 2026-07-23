@@ -31,7 +31,15 @@ import { isTowerKey, TOWER_KEYS } from '@/lib/data/towers';
 import { getMonster } from '@/lib/data/monsters';
 import { encountersOfGroup } from '@/lib/data/encounters';
 
-const CONTENTS_DIR = resolve(process.cwd(), 'src/app/[lang]/guides/_contents');
+// Sous-dossier lu via env (défaut = le chemin réel). L'indirection `process.env
+// … ?? …` casse la CONSTANT-FOLD de l'analyseur : sinon Turbopack résout
+// process.cwd() = /ROOT, voit `resolve(<dossier connu>, <dyn>, <dyn>, <dyn>)`
+// dans les readFileSync ci-dessous et croit devoir embarquer TOUT l'arbre
+// `_contents` (~11700 fichiers) dans le bundle serveur (« Overly broad patterns
+// … over bundling »). Sans risque runtime : la sortie standalone tient ces JSON
+// de `outputFileTracingIncludes` (next.config.ts), pas de ce bundling.
+const CONTENTS_SUBDIR = process.env.GUIDES_CONTENTS_DIR ?? 'src/app/[lang]/guides/_contents';
+const CONTENTS_DIR = resolve(process.cwd(), CONTENTS_SUBDIR);
 
 /** `meta.json` d'un guide (validé au scan — champs inconnus refusés). */
 export interface GuideMeta {

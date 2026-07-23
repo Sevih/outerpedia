@@ -59,21 +59,33 @@ jobs:
       packages: write
     steps:
       # Le build genere ~4500 pages statiques et la sortie standalone de Next
-      # DUPLIQUE node_modules dans l'image : le disque ~14 Go du runner sature
-      # au COPY final (`no space left on device`). On retire les toolchains
-      # preinstalles dont ce build ne se sert pas (Android ~9 Go, .NET ~2 Go,
-      # GHC, CodeQL, Swift) -> ~25 Go regagnes. Pas d'action tierce : un rm
-      # transparent, verifie par le `df -h` avant/apres dans les logs.
-      - name: Liberer de l'espace disque sur le runner
+      # DUPLIQUE node_modules dans l'image : le disque RACINE (`/`, ~16 Go libres)
+      # sature au COPY final (`no space left on device`).
+      #
+      # On ne LIBERE plus l'espace en supprimant les toolchains preinstalles : ce
+      # `rm -rf` d'~25 Go de petits fichiers etait I/O-bound et, sur un runner a
+      # disque lent, montait a >10 min (constate 24 s -> 10 min 32 s le 23/07,
+      # run 30025349354) — il DEVAIT finir avant le COPY final, donc impossible a
+      # backgrounder sans risquer un ENOSPC.
+      #
+      # A la place on fait ecrire Docker sur `/mnt` (le disque ephemere du runner,
+      # ~70 Go libres) : les couches d'image ne touchent plus `/`, plus aucune
+      # suppression, plus de variance. Pas d'action tierce. jq (preinstalle) fusionne
+      # data-root dans un daemon.json eventuellement deja present.
+      - name: Docker sur /mnt (disque plus grand) — evite la saturation du disque racine
         run: |
-          echo "Avant :" && df -h / | tail -1
-          sudo rm -rf /usr/local/lib/android \
-                      /usr/share/dotnet \
-                      /opt/ghc \
-                      /opt/hostedtoolcache/CodeQL \
-                      /usr/local/share/powershell \
-                      /usr/share/swift
-          echo "Apres :" && df -h / | tail -1
+          echo "Avant :" && df -h / /mnt | grep -E '/$|/mnt'
+          sudo mkdir -p /mnt/docker /etc/docker
+          if [ -f /etc/docker/daemon.json ]; then
+            sudo jq '. + {"data-root":"/mnt/docker"}' /etc/docker/daemon.json \
+              | sudo tee /etc/docker/daemon.json.tmp >/dev/null && \
+              sudo mv /etc/docker/daemon.json.tmp /etc/docker/daemon.json
+          else
+            echo '{"data-root":"/mnt/docker"}' | sudo tee /etc/docker/daemon.json >/dev/null
+          fi
+          # data-root neuf (rien a migrer) : restart applique la conf et relance la socket.
+          sudo systemctl restart docker
+          echo "Docker root: $(docker info -f '{{ .DockerRootDir }}')"
 
       - uses: actions/checkout@v7
 
