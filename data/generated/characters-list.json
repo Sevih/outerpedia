@@ -3303,12 +3303,6 @@
     },
     "teamBonuses": ["CHD"]
   },
-  "2000118": {
-    "buff": [],
-    "debuff": [],
-    "effectsBySource": {},
-    "teamBonuses": []
-  },
   "2000119": {
     "buff": [
       "BT_ACTION_GAUGE",
