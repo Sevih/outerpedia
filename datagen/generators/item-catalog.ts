@@ -67,7 +67,7 @@ function loadCurated(): Record<string, ItemCurated> {
 }
 
 /** Applique un override curé (nom/desc/icône/masquage) sur une entrée de base. */
-function applyCurated(e: CatalogEntry, cur: ItemCurated | undefined): CatalogEntry {
+export function applyCurated(e: CatalogEntry, cur: ItemCurated | undefined): CatalogEntry {
   if (!cur) return e;
   return {
     ...e,
