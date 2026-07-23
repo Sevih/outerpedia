@@ -49,7 +49,7 @@ export interface ItemSourcesResult {
 const CHASE_TITLE_KEY = 'SYS_IRREGULAR_EXTERMINATION';
 
 /** ProductBuyType → slug de boutique (clé i18n `equip.source.<slug>`). */
-function shopSlug(buyType: string | undefined): string | null {
+export function shopSlug(buyType: string | undefined): string | null {
   if (!buyType) return null;
   if (buyType === 'PBT_ADVENTURE_LICENSE') return 'adventure_license';
   if (/^PBT_(ALWAYS_)?EVENT_COIN/.test(buyType)) return 'event_shop';
