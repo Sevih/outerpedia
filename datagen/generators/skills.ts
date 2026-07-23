@@ -113,14 +113,14 @@ export interface SkillData {
  * Valeur d'enum de cible/portée → slug minuscule. Sur un CSV (plusieurs cibles),
  * on garde le 1er token ; `undefined` seulement si NONE ou vide.
  */
-function slugTeam(v: string | undefined): string | undefined {
+export function slugTeam(v: string | undefined): string | undefined {
   const first = splitCsv(v ?? '')[0];
   if (!first || first === 'NONE') return undefined;
   return first.toLowerCase();
 }
 
 /** Sous-type ACTIVE/PASSIVE → slug, sinon null. */
-function subTypeOf(v: string | undefined): SkillSubType {
+export function subTypeOf(v: string | undefined): SkillSubType {
   if (v === 'ACTIVE') return 'active';
   if (v === 'PASSIVE') return 'passive';
   return null;
