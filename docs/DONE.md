@@ -4,6 +4,18 @@
 > ne garde que le « à faire »). Un item traité migre ici avec sa date ; le
 > détail vit dans git. Ne pas confondre avec le `CHANGELOG.md` racine (public).
 
+## 2026-07-23
+
+- **Slug des core-fusions : `notia-2` → `core-fusion-notia`.** Une core-fusion
+  est une entité séparée portant le MÊME nom EN que sa base ; `buildSlugMap`
+  (datagen/lib/slug.ts) lui collait donc un suffixe de collision (`notia-2`) au
+  lieu de l'URL canonique V2. Fix : si `originalCharacter` est posé, base du
+  slug = `core-fusion-<nom>` (préfixe figé, pas dérivé du libellé localisé
+  FusionTitle — un slug est une URL stable). Vérifié : les 6 fusions repassent
+  en `core-fusion-*`, `notia` (la base) intacte, aucun autre perso touché
+  (tous les `-N` de la map appartenaient à des fusions). 3 liens du changelog
+  curé (epsilon/eternal/notia) repointés sur le nouveau slug.
+
 ## 2026-07-22 (nuit du 21 au 22)
 
 - **🚀 BASCULE V2→V3 EXÉCUTÉE — `outerpedia.com` est la V3.** Décision Sevih

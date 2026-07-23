@@ -7,7 +7,13 @@
  */
 import type { LangDict } from './lang';
 
-type NameLike = { id: string; name: LangDict; nickname?: LangDict; showNickName?: boolean };
+type NameLike = {
+  id: string;
+  name: LangDict;
+  nickname?: LangDict;
+  showNickName?: boolean;
+  originalCharacter?: string;
+};
 
 /** « Monad Iota » -> « monad-iota ». */
 export function toSlug(fullname: string): string {
@@ -31,7 +37,14 @@ export function buildSlugMap(chars: NameLike[]): Record<string, string> {
   const out: Record<string, string> = {};
   const seen = new Map<string, number>();
   for (const c of [...chars].sort((a, b) => a.id.localeCompare(b.id))) {
-    const base = toSlug(displayNameEn(c));
+    // Une core-fusion (`originalCharacter` posé) est une entité SÉPARÉE portant
+    // le MÊME nom que sa base → sans préfixe, elle héritait d'un suffixe de
+    // collision (`notia-2`) au lieu de l'URL canonique V2 `core-fusion-notia`.
+    // Préfixe FIGÉ, pas dérivé du libellé localisé FusionTitle : un slug est une
+    // URL stable, indépendante de la langue.
+    const base = c.originalCharacter
+      ? `core-fusion-${toSlug(c.name.en)}`
+      : toSlug(displayNameEn(c));
     const n = (seen.get(base) ?? 0) + 1;
     seen.set(base, n);
     out[n === 1 ? base : `${base}-${n}`] = c.id;

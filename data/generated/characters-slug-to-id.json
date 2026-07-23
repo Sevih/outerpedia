@@ -116,10 +116,10 @@
   "eris": "2000117",
   "demiurge-luna": "2000119",
   "heatwave-cop-delta": "2000121",
-  "snow-2": "2700003",
-  "lisha-2": "2700005",
-  "veronica-2": "2700037",
-  "eternal-2": "2700043",
-  "notia-2": "2700056",
-  "epsilon-2": "2700070"
+  "core-fusion-snow": "2700003",
+  "core-fusion-lisha": "2700005",
+  "core-fusion-veronica": "2700037",
+  "core-fusion-eternal": "2700043",
+  "core-fusion-notia": "2700056",
+  "core-fusion-epsilon": "2700070"
 }
