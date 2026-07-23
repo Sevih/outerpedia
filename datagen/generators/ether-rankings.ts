@@ -45,6 +45,20 @@ export interface EtherRankingsData {
   singularity: EtherRankTier[];
 }
 
+/**
+ * Ordre des paliers de classement : `rank` avant `rate` ; entre rangs, `Min`
+ * croissant ; entre taux, `Max` croissant (meilleur → pire). Pur, testable.
+ */
+export function byRank(a: EtherRankTier, b: EtherRankTier): number {
+  return a.kind === b.kind
+    ? a.kind === 'rank'
+      ? a.min - b.min
+      : a.max - b.max
+    : a.kind === 'rank'
+      ? -1
+      : 1;
+}
+
 export function buildEtherRankings(): EtherRankingsData {
   const tsys = loadTextIndex('TextSystem');
   const rewards = new Map(loadTable('RewardTemplet').map((r) => [r.ID, r]));
@@ -61,16 +75,6 @@ export function buildEtherRankings(): EtherRankingsData {
     max: num(r.Max),
     ether: etherOf(r.RewardID, where),
   });
-  /** rank d'abord (Min croissant), puis rate (Max croissant) — meilleur → pire. */
-  const byRank = (a: EtherRankTier, b: EtherRankTier) =>
-    a.kind === b.kind
-      ? a.kind === 'rank'
-        ? a.min - b.min
-        : a.max - b.max
-      : a.kind === 'rank'
-        ? -1
-        : 1;
-
   // --- Arène : récompense de saison par palier, pire → meilleur -----------------
   const arena = loadTable('PVPRankTemplet')
     .map((r) => ({
