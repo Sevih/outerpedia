@@ -6,6 +6,23 @@
 
 ## 2026-07-23
 
+- **« Extractors orphelins » : prémisse déjà résolue — rien à redéfinir.** Le
+  TODO craignait des pages de contrôle de régression sans oracle depuis la fin
+  de la migration (Effect, rapport gear, badges de diff sidebar). Or l'oracle
+  externe (l'ancien site / la V2) a DÉJÀ été arraché : cf. « Comparaisons V2
+  retirées de l'admin » et « `data/legacy/` supprimé (249 fichiers) » plus bas
+  — `data/legacy` absent, plus aucun `V2Control*`/`EquipmentReport`/`v2-control`
+  dans `src` ni `datagen`. Bilan par cible : le **rapport gear** (`EquipmentReport`)
+  n'existe littéralement plus (supprimé) ; la page **Effect**
+  (`extractor/effects/page.dev.tsx`) et les **badges sidebar** (`pendingCounts()`
+  dans `layout.dev.tsx`, `new + diff + removed`) sont vivantes et centrales, mais
+  ont changé de rôle : ce ne sont plus des contrôles de régression contre
+  l'ancien site, ce sont des contrôles de cohérence **data jeu ↔ data site**
+  (extraction fraîche des tables ↔ data committée). L'oracle d'aujourd'hui, c'est
+  le jeu. TODO fermé. (Les derniers vrais liens vers la V2 restent hors périmètre
+  ici : regens `banners`/`promo-codes`/`changelog`, imports ponctuels — pas des
+  oracles de diff — à couper à la bascule prod.)
+
 - **`rewardTables` sort de `glossaries.json` → fuites client vers un gros JSON
   8 → 2, et `glossaries.json` quitte la catégorie « gros ».** Suite directe de
   la scission de `lib/stats` (22/07). MESURÉ en prod sur `/characters/drakhan` :

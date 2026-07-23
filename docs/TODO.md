@@ -79,10 +79,6 @@
       ce serait une perte de donnée sèche. Seul `free` est un champ d'Editor.
 - [ ] **Home `/admin` = doublon d'Extractor** — refonte possible en « inbox
       priorisée » (ce qui demande une action, trié par urgence).
-- [ ] **Extractors orphelins depuis la fin de la migration** : les pages nées du
-      contrôle de régression contre l'ancien site (Effect, rapport gear, badges
-      de diff de la sidebar) n'ont plus d'oracle en face. Redéfinir leur rôle
-      AVANT de les retirer — certaines servent encore de contrôle de cohérence.
 
 ### Lots de fond SEO/perf (audit Sitebulb 20/07 — non urgents)
 
