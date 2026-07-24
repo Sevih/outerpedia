@@ -78,6 +78,7 @@ export default async function EditorEffectEdit({ params }: { params: Promise<{ i
       <EffectCuratedEditor
         id={id}
         extractedName={eff?.name ?? { en: '', jp: '', kr: '', zh: '' }}
+        extractedIsDebuff={eff?.isDebuff}
         initial={initial}
         creation={isCreation}
       />

@@ -15,9 +15,10 @@
  */
 import glossariesData from '@data/generated/glossaries.json';
 import { resolveEffectKey } from '@/lib/data/effects';
+import { EFFECT_FAMILIES, type EffectSide } from '@/lib/data/effect-families';
 import type { Lang } from '@/lib/i18n/config';
 
-export type EffectSide = 'buff' | 'debuff';
+export type { EffectSide };
 
 /** Une case d'effet : clé canonique + libellé localisé + icône (nom BRUT). */
 export interface EffectOption {
@@ -39,11 +40,8 @@ const G = glossariesData as unknown as {
   effectFilters?: Record<EffectSide, Record<string, { category: string; group?: string }>>;
 };
 
-/** Ordre d'affichage des familles, par côté (parité V2). */
-const CATEGORY_ORDER: Record<EffectSide, string[]> = {
-  buff: ['statBoosts', 'supporting', 'utility', 'unique'],
-  debuff: ['statReduction', 'cc', 'dot', 'utility', 'unique'],
-};
+/** Ordre d'affichage des familles, par côté — source unique. */
+const CATEGORY_ORDER = EFFECT_FAMILIES;
 
 /** Familles valides par côté — pour valider un `tag` curé comme catégorie. */
 const VALID_CATEGORY: Record<EffectSide, Set<string>> = {
@@ -109,8 +107,11 @@ export function buildEffectGroups(
     // prime sur la catégorie de la taxonomie quand c'est une famille valide —
     // override par-effet immédiat (lecture disque), sans rebuild du glossaire.
     const tagCat = eff.tag && VALID_CATEGORY[side].has(eff.tag) ? eff.tag : undefined;
-    const category = tagCat ?? table[key]?.category;
-    if (!category || category === 'hidden') continue;
+    // `other` = fourre-tout des statuts NOMMÉS sans famille de taxonomie : tout
+    // effet affiché en chip est filtrable (parité EffectChips), rangé ici par
+    // défaut (trié en dernier par `rank`) tant qu'un `tag` curé ne le déplace pas.
+    const category = tagCat ?? table[key]?.category ?? 'other';
+    if (category === 'hidden') continue;
     seen.add(key);
 
     const bucket = byCategory.get(category) ?? [];

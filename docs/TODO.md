@@ -51,6 +51,25 @@
 - [ ] **Home `/admin` = doublon d'Extractor** — refonte possible en « inbox
       priorisée » (ce qui demande une action, trié par urgence).
 
+### Bugs non urgents
+
+> L'éditeur assisté `/admin/guides` (picker `{P/}` + doublons buff/debuff) est
+> CORRIGÉ le 24/07 (`inline-refs.ts` : picker keyé par `characterDisplayName`,
+> effets dédupliqués par apparence) — cf. DONE une fois validé en dev.
+
+- [ ] **Infobulles `{I-W|A|T/…}` et `{SK/…}` réduites au nom** (`parse-text.tsx`,
+      chemin de rendu PUBLIC) — au rendu, `equipmentChip` (armes/amulettes/
+      talismans) et `skillChip` ne passent AUCUNE `desc`/`tooltip` à leur chip :
+      l'infobulle n'affiche que le nom. Les items `{I-I/…}` passent déjà leur
+      desc (seuls à marcher), les sets `{AS/…}` ont un tooltip 2P/4P. Constaté
+      sur `guides/dimensional-singularity/skuld-dark`. Fix = brancher les
+      résolveurs EXISTANTS : arme → passif du haut de famille
+      (`passiveTextAt(f.passives, <palier max>, lang)`) ; skill → desc du dernier
+      palier (`skill.levels[last]`, placeholders remplis, comme la fiche perso).
+      ⚠ MIROIR à tenir : corriger les 2 fns de rendu ET les 2 cas
+      `resolveSegment` de l'aperçu admin (doivent rester synchro), + ajouter un
+      champ `desc` au segment `icon` (skill). SSG strict → valider le rendu.
+
 ### Lots de fond SEO/perf (audit Sitebulb 20/07 — non urgents)
 
 > Le gros de l'audit est traité (cf. DONE 20-21/07 : canonicals, comics, cache).

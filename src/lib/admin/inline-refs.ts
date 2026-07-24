@@ -11,7 +11,7 @@
 import type { Glossaries } from '@contracts';
 import { loadDataJson } from '@/lib/data/disk';
 import { getMergedEffect, curatedKeyIndex } from '@/lib/data/effects';
-import { getAllCharacters } from '@/lib/data/characters';
+import { getAllCharacters, characterDisplayName } from '@/lib/data/characters';
 import {
   getAmuletFamilies,
   getSetViews,
@@ -57,36 +57,51 @@ const dedupeByValue = (list: RefItem[]): RefItem[] => {
   return list.filter((r) => (seen.has(r.value) ? false : (seen.add(r.value), true)));
 };
 
-/** Clés éditoriales d'effet d'un côté (glossaire `effectByKey` + créations curées). */
+/** Clés éditoriales d'effet d'un côté (glossaire `effectByKey` + créations curées).
+ *  Un même effet a souvent PLUSIEURS clés (variantes, jumeau `_IR`…) au rendu
+ *  STRICTEMENT identique (nom + icône + description) : le picker n'en propose
+ *  qu'UNE — la clé la plus courte (la base, pas le jumeau). Deux effets homonymes
+ *  à description DIFFÉRENTE restent distincts (ce sont de vrais effets séparés). */
 function effectRefs(side: 'buff' | 'debuff'): RefItem[] {
   const G = loadDataJson<Glossaries>('generated/glossaries.json');
-  const out: RefItem[] = [];
-  const seen = new Set<string>();
-  const push = (key: string, id: string) => {
-    if (seen.has(key)) return;
-    seen.add(key);
-    out.push({ value: key, label: getMergedEffect(id)?.name.en || key });
+  const bySig = new Map<string, { key: string; label: string }>();
+  const consider = (key: string, id: string) => {
+    const eff = getMergedEffect(id);
+    const label = eff?.name.en || key;
+    const sig = `${label}␟${eff?.icon ?? ''}␟${eff?.desc?.en ?? ''}`;
+    const prev = bySig.get(sig);
+    // À apparence égale, on garde la clé la plus courte (puis la plus petite) —
+    // choix déterministe qui fait ressortir la base (`BT_X`) plutôt que `BT_X_IR`.
+    if (!prev || key.length < prev.key.length || (key.length === prev.key.length && key < prev.key))
+      bySig.set(sig, { key, label });
   };
-  for (const [key, id] of Object.entries(G.effectByKey[side] ?? {})) push(key, id);
+  for (const [key, id] of Object.entries(G.effectByKey[side] ?? {})) consider(key, id);
   // Créations curées adressées par `keys` (mécaniques sans texte de jeu).
   for (const [sk, id] of curatedKeyIndex().bySideKey) {
     const sep = sk.indexOf('|');
     if (sk.slice(0, sep) !== side) continue;
-    push(sk.slice(sep + 1), id);
+    consider(sk.slice(sep + 1), id);
   }
-  return out.sort(byLabel);
+  return [...bySig.values()].map((e) => ({ value: e.key, label: e.label })).sort(byLabel);
 }
 
 /** Toutes les listes d'autocomplétion (clés EN). Server-only. */
 export function buildInlineRefs(): InlineRefs {
   const chars = getAllCharacters();
-  const character = dedupeByValue(
-    chars.map((c) => ({ value: c.name.en, label: c.name.en })).sort(byLabel),
-  );
+  // `value` = NOM D'AFFICHAGE EN (préfixe compris : « Core Fusion … », surnoms)
+  // — c'est la clé indexée par `findCharacterByName`, donc le SEUL nom que le
+  // tag `{P/…}`/`{SK/…}` sait résoudre. Lister le nom nu (`c.name.en`) rendait
+  // les persos à nom composé introuvables au picker ET fondait les fusions/skins
+  // sous le nom de base (dédup par `value`).
+  const named = (c: (typeof chars)[number]) => {
+    const name = characterDisplayName(c, 'en');
+    return { value: name, label: name };
+  };
+  const character = dedupeByValue(chars.map(named).sort(byLabel));
   const characterEE = dedupeByValue(
     chars
       .filter((c) => c.ee)
-      .map((c) => ({ value: c.name.en, label: c.name.en }))
+      .map(named)
       .sort(byLabel),
   );
 

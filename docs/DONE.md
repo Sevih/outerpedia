@@ -4,6 +4,33 @@
 > ne garde que le « à faire »). Un item traité migre ici avec sa date ; le
 > détail vit dans git. Ne pas confondre avec le `CHANGELOG.md` racine (public).
 
+## 2026-07-24
+
+- **Éditeur d'effet curé : « Editorial tag » → select fermé « Editorial family ».**
+  Le champ était libre (placeholder « dot, stat, cc… » — trompeur : « stat »
+  n'est pas une famille, la vraie est `statBoosts`), alors que le runtime
+  (`buildEffectGroups`) n'applique l'override de `tag` que si c'est une famille
+  VALIDE du côté de l'effet. Devenu un select piloté par la nature effective
+  (buff/debuff), qui ne propose que les familles de ce côté. SOURCE UNIQUE
+  extraite dans `src/lib/data/effect-families.ts` (`EFFECT_FAMILIES` +
+  `effectFamilyLabel`, sans dépendance runtime) : `effect-filters.ts` la consomme
+  (fin de la liste dupliquée) et l'éditeur client aussi. Garde-fou : un `tag`
+  hérité d'un autre côté reste affiché (« other side ») — pas d'effacement muet.
+  Les 14 tags curés existants (`statReduction`/`unique`/`utility`) sont tous des
+  familles valides → rien à migrer.
+
+- **Bug éditeur assisté `/admin/guides` : picker `{P/}` + doublons buff/debuff.**
+  (1) Le picker `{P/}`/`{SK/}`/`{EE/}` listait le nom NU (`c.name.en`) alors que
+  le résolveur `findCharacterByName` indexe par `characterDisplayName` (préfixe
+  compris : « Core Fusion … », surnoms) → les persos à nom composé étaient
+  introuvables, ou fondus sous leur nom de base par la dédup → tag inséré non
+  résolvable. Le picker liste désormais la MÊME clé que le résolveur.
+  (2) Les listes buff/debuff dédoublonnent maintenant par APPARENCE (nom, icône
+  et description) et non par clé : un effet à N clés au rendu identique
+  (variantes, jumeau `_IR`) ne propose plus qu'une entrée (la clé la plus courte
+  = la base) ; deux homonymes à description DIFFÉRENTE restent distincts. Tout
+  dans `src/lib/admin/inline-refs.ts`.
+
 ## 2026-07-23
 
 - **CI : Docker construit sur `/mnt`, fin du `rm -rf` I/O-bound.** Le build sature

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import type { EffectCurated, LangDict, LocalizedText } from '@contracts';
 import { postJson } from '@/lib/admin/post-json';
 import { img } from '@/lib/images';
+import { EFFECT_FAMILIES, effectFamilyLabel } from '@/lib/data/effect-families';
 
 const LANGS = ['en', 'fr', 'jp', 'kr', 'zh'] as const;
 const field =
@@ -29,11 +30,14 @@ function compactLoc(values: Record<string, string>): LocalizedText | undefined {
 export function EffectCuratedEditor({
   id,
   extractedName,
+  extractedIsDebuff,
   initial,
   creation = false,
 }: {
   id: string;
   extractedName: LangDict;
+  /** Nature de l'effet extrait (undefined en création) — sert de côté par défaut. */
+  extractedIsDebuff?: boolean;
   initial: EffectCurated;
   creation?: boolean;
 }) {
@@ -48,6 +52,12 @@ export function EffectCuratedEditor({
   const [hidden, setHidden] = useState(Boolean(initial.hidden));
   const [note, setNote] = useState(initial.note ?? '');
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
+
+  // Côté effectif : la nature choisie prime, sinon celle de l'extrait (buff par
+  // défaut). Détermine QUELLES familles sont proposées comme `tag` — le runtime
+  // n'applique l'override que si le tag est une famille valide de CE côté.
+  const debuffSide = isDebuff !== '' ? isDebuff === 'true' : Boolean(extractedIsDebuff);
+  const side = debuffSide ? 'debuff' : 'buff';
 
   function build(): EffectCurated {
     const c: EffectCurated = {};
@@ -153,13 +163,20 @@ export function EffectCuratedEditor({
           </select>
         </div>
         <div className="space-y-1">
-          <p className={label}>Editorial tag</p>
-          <input
-            className={field}
-            value={tag}
-            onChange={(e) => setTag(e.target.value)}
-            placeholder="dot, stat, cc…"
-          />
+          <p className={label}>Editorial family ({side})</p>
+          <select className={field} value={tag} onChange={(e) => setTag(e.target.value)}>
+            <option value="">taxonomy default</option>
+            {EFFECT_FAMILIES[side].map((f) => (
+              <option key={f} value={f}>
+                {effectFamilyLabel(side, f)}
+              </option>
+            ))}
+            {/* Tag hérité d'un autre côté (ex. nature encore « inherited ») — gardé
+                affichable pour ne pas l'effacer en douce à l'enregistrement. */}
+            {tag && !EFFECT_FAMILIES[side].includes(tag) && (
+              <option value={tag}>{tag} (other side)</option>
+            )}
+          </select>
         </div>
       </section>
 
