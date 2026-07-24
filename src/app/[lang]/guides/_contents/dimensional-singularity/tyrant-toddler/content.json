@@ -83,7 +83,7 @@
           }
         },
         {
-          "characters": ["Heatwave Cop Delta", "Ryu Lion"],
+          "characters": ["Heatwave Cop Delta", "Ryu Lion", "Notia", "Core Fusion Notia"],
           "reason": {
             "en": "Same kit — run only one to get the free {D/BT_STAT|ST_DEF_IR} on the boss. {P/Heatwave Cop Delta} preferred: +30% damage to all allies just by being there, an Attack buff for {E/Earth} allies and companion fixed damage instead of a finisher.",
             "jp": "同じ性能 — 1人だけ編成することでボスへの{D/BT_STAT|ST_DEF_IR}が無償で入る。{P/Heatwave Cop Delta}推奨：編成しているだけで味方全体のダメージ+30%、{E/Earth}属性味方への攻撃力バフ、フィニッシャーの代わりにコンパニオンの固定ダメージ。",
@@ -100,6 +100,16 @@
             "kr": "둘 다 {D/BT_STAT|ST_SPEED}을 해제하는 {B/BT_REMOVE_DEBUFF}을 보유합니다. {P/Viella}는 {D/BT_DOT_POISON}과 {B/BT_IMMUNE}을, {P/Monad Eva}는 {B/BT_REVIVAL}, {B/BT_INVINCIBLE}, {B/BT_STAT|ST_SPEED} 버프를 더합니다.",
             "zh": "两者都具备可解除{D/BT_STAT|ST_SPEED}的{B/BT_REMOVE_DEBUFF}。{P/Viella}额外提供{D/BT_DOT_POISON}与{B/BT_IMMUNE}；{P/Monad Eva}额外提供{B/BT_REVIVAL}、{B/BT_INVINCIBLE}以及{B/BT_STAT|ST_SPEED}增益。",
             "fr": "Les deux apportent le {B/BT_REMOVE_DEBUFF} qui nettoie le {D/BT_STAT|ST_SPEED}. {P/Viella} ajoute {D/BT_DOT_POISON} et {B/BT_IMMUNE} ; {P/Monad Eva} ajoute {B/BT_REVIVAL}, {B/BT_INVINCIBLE} et un buff de {B/BT_STAT|ST_SPEED}."
+          }
+        },
+        {
+          "characters": ["Mystic Sage Ame"],
+          "reason": {
+            "en": "Stacking buff support, let her die when she reaches 5 stacks.",
+            "jp": "バフのスタックを積み重ね、スタックが5に達したら彼女を死なせる。",
+            "kr": "버프 중첩을 쌓아주고, 중첩이 5개에 도달하면 그녀를 죽게 내버려 두세요.",
+            "zh": "叠加增益效果，当她叠加到5层时让她死亡。",
+            "fr": "Support avec effet cumulatif : laissez-la mourir lorsqu'elle atteint 5 cumuls."
           }
         }
       ]

@@ -98,7 +98,7 @@
       "element": "light",
       "groups": [
         {
-          "characters": ["Demiurge Luna", "Regina"],
+          "characters": ["Demiurge Luna", "Regina", "Core Fusion Epsilon", "Midnight Rush Skadi"],
           "reason": {
             "en": "Main damage dealer with high damage mitigation.",
             "jp": "高い被ダメージ軽減を持つメインアタッカー。",
@@ -108,13 +108,13 @@
           }
         },
         {
-          "characters": ["Skadi"],
+          "characters": ["Skadi", "Mystic Sage Ame"],
           "reason": {
-            "en": "Cooldown reductions, plus buffs to cover for immortality, revival and invincibility.",
-            "jp": "クールダウン短縮に加え、不死・復活・無敵をカバーするバフを提供する。",
-            "kr": "쿨다운 감소와 더불어 불사·부활·무적을 보완하는 버프를 제공합니다.",
-            "zh": "提供冷却缩减，以及保障不死、复活与无敌的增益。",
-            "fr": "Réductions de cooldown, plus des buffs pour assurer immortalité, réanimation et invincibilité."
+            "en": "Cooldown decrease, damage buffs",
+            "jp": "クールダウンの短縮、ダメージの強化",
+            "kr": "재사용 대기시간 감소, 피해량 증가",
+            "zh": "冷却时间缩短，伤害提升",
+            "fr": "Réduction des temps de recharge, augmentations des dégâts"
           }
         },
         {
@@ -128,13 +128,104 @@
           }
         },
         {
-          "characters": ["Mystic Sage Ame", "Leo", "Demiurge Drakhan"],
+          "characters": ["Leo", "Demiurge Drakhan"],
           "reason": {
-            "en": "Pick one — {P/Mystic Sage Ame} brings cooldown reduction for the main DPS's S3 and high WG damage; {P/Leo} brings a cooldown-reduction chain starter and {B/BT_INVINCIBLE}; {P/Demiurge Drakhan} brings AoE damage reduction, {S/PEN%} buff, {B/BT_BARRIER} and WG-damage support.",
-            "jp": "1枠選択 — {P/Mystic Sage Ame}はメインDPSのS3クールダウン短縮と高いWGダメージを、{P/Leo}はクールダウン短縮のチェイン起点と{B/BT_INVINCIBLE}を、{P/Demiurge Drakhan}はAoEダメージ軽減・{S/PEN%}バフ・{B/BT_BARRIER}・WGダメージ補助を提供する。",
-            "kr": "1자리 선택 — {P/Mystic Sage Ame}는 메인 딜러의 S3 쿨다운 감소와 높은 WG 피해를, {P/Leo}는 쿨다운 감소 연계 시작점과 {B/BT_INVINCIBLE}을, {P/Demiurge Drakhan}은 광역 피해 감소·{S/PEN%} 버프·{B/BT_BARRIER}·WG 피해 보조를 제공합니다.",
-            "zh": "三选一 — {P/Mystic Sage Ame}为主C的S3缩减冷却并提供高WG伤害；{P/Leo}提供冷却缩减连携起点与{B/BT_INVINCIBLE}；{P/Demiurge Drakhan}提供范围伤害减免、{S/PEN%}增益、{B/BT_BARRIER}及WG伤害支援。",
-            "fr": "Au choix — {P/Mystic Sage Ame} apporte une réduction de cooldown du S3 du DPS principal et de gros dégâts de WG ; {P/Leo} apporte une amorce de chaîne de réduction de cooldown et {B/BT_INVINCIBLE} ; {P/Demiurge Drakhan} apporte réduction de dégâts de zone, buff de {S/PEN%}, {B/BT_BARRIER} et soutien aux dégâts de WG."
+            "en": "Pick one — {P/Leo} brings a cooldown-reduction chain starter and {B/BT_INVINCIBLE}; {P/Demiurge Drakhan} brings AoE damage reduction, {S/PEN%} buff, {B/BT_BARRIER} and WG-damage support.",
+            "jp": "どちらか一つを選んでください――「{P/Leo}」には、クールダウン短縮チェーンの起点となるスキルと「{B/BT_INVINCIBLE}」が含まれます。「{P/Demiurge Drakhan}」には、範囲ダメージ軽減、{S/PEN%}バフ、{B/BT_BARRIER}、およびWGダメージのサポートが含まれます。",
+            "kr": "하나를 선택하세요 — ‘{P/Leo}’는 재사용 대기시간 감소 연쇄의 시작 효과와 ‘{B/BT_INVINCIBLE}’를 제공하며, ‘{P/Demiurge Drakhan}’는 AoE 피해 감소, ‘{S/PEN%}’ 버프, ‘{B/BT_BARRIER}’ 및 WG 피해 지원 효과를 제공합니다.",
+            "zh": "选一个——{P/Leo}提供了一个冷却时间缩减链的起始道具和{B/BT_INVINCIBLE}；{P/Demiurge Drakhan}则提供范围伤害减免、{S/PEN%}增益效果、{B/BT_BARRIER}以及对WG伤害的加成。",
+            "fr": "Faites votre choix : « {P/Leo} » propose un déclencheur de chaîne de réduction des temps de recharge et « {B/BT_INVINCIBLE} » ; « {P/Demiurge Drakhan} » offre une réduction des dégâts de zone, un bonus « {S/PEN%} », « {B/BT_BARRIER} » et un soutien aux dégâts WG."
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "en": "Mero team",
+        "jp": "Meroチーム",
+        "kr": "메로 팀",
+        "zh": "Mero团队",
+        "fr": "L'équipe Mero"
+      },
+      "groups": [
+        {
+          "characters": ["Mero"],
+          "reason": {
+            "en": "Main dps with {I-W/Heartunder's Blade} for {D/BT_DOT_BURN}, {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} & {B/BT_UNDEAD}, {SK/Mero|S3} then repeat {SK/Mero|S2} (burst 1) until turns run out.",
+            "jp": "メインDPSは、{I-W/Heartunder's Blade}で{D/BT_DOT_BURN}、{B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER}、{B/BT_UNDEAD}、{SK/Mero|S3}を行い、その後、ターンが尽きるまで{SK/Mero|S2}（バースト1）を繰り返す。",
+            "kr": "{I-W/Heartunder's Blade}를 사용해 {D/BT_DOT_BURN}, {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} 및 {B/BT_UNDEAD}, {SK/Mero|S3}에 주 DPS를 가한 뒤, 턴이 다 소진될 때까지 {SK/Mero|S2} (버스트 1)을 반복합니다.",
+            "zh": "主要输出职业使用{I-W/Heartunder's Blade}，对{D/BT_DOT_BURN}、{B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER}和{B/BT_UNDEAD}施放技能，随后使用{SK/Mero|S3}，然后重复{SK/Mero|S2}（爆发1）直至回合结束。",
+            "fr": "DPS principal avec « {I-W/Heartunder's Blade} » pour « {D/BT_DOT_BURN} », « {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} » et « {B/BT_UNDEAD} », « {SK/Mero|S3} », puis répétez « {SK/Mero|S2} » (burst 1) jusqu’à ce que les tours soient épuisés."
+          }
+        },
+        {
+          "characters": ["Monad Eva", "Primine"],
+          "reason": {
+            "en": "{B/BT_REMOVE_DEBUFF}/{B/BT_IMMUNE} to get rid of {D/BT_SEALED} when {P/Mero} doesn't have all her buffs up yet.",
+            "jp": "{B/BT_REMOVE_DEBUFF} / {B/BT_IMMUNE} を使って、{P/Mero}のバフがまだすべて発動していない場合に、{D/BT_SEALED}を排除する。",
+            "kr": "{B/BT_REMOVE_DEBUFF} / {B/BT_IMMUNE}: {P/Mero}의 버프가 모두 적용되지 않았을 때 {D/BT_SEALED}를 제거하기 위해.",
+            "zh": "{B/BT_REMOVE_DEBUFF} / 使用{B/BT_IMMUNE}来消除{D/BT_SEALED}，当{P/Mero}尚未激活所有增益效果时。",
+            "fr": "{B/BT_REMOVE_DEBUFF} / {B/BT_IMMUNE} pour se débarrasser d'{D/BT_SEALED} lorsque {P/Mero} n'a pas encore tous ses buffs actifs."
+          }
+        },
+        {
+          "characters": ["Mystic Sage Ame"],
+          "reason": {
+            "en": "Stacking defense down, attack up and dmg bonus",
+            "jp": "防御ダウン、攻撃アップ、ダメージボーナスを積み重ねる",
+            "kr": "방어력 감소, 공격력 증가 및 대미지 보너스 중첩",
+            "zh": "叠加防御下、攻击上和伤害加成",
+            "fr": "Cumul de la défense, de l'attaque et du bonus de dégâts"
+          }
+        },
+        {
+          "characters": ["Tamamo-no-Mae"],
+          "reason": {
+            "en": "Boss damage bonus for {E/Fire} element",
+            "jp": "「{E/Fire}」要素のボスへのダメージボーナス",
+            "kr": "{E/Fire} 원소의 보스 대미지 보너스",
+            "zh": "{E/Fire}元素的BOSS伤害加成",
+            "fr": "Bonus de dégâts contre les boss pour l'élément «{E/Fire} »"
+          }
+        },
+        {
+          "characters": ["Tamara", "Valentine", "Skadi"],
+          "reason": {
+            "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} buffs",
+            "jp": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} バフ",
+            "kr": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} 버프",
+            "zh": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} 增益效果",
+            "fr": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} bonus"
+          }
+        },
+        {
+          "characters": ["Summer Knight's Dream Ember", "Demiurge Drakhan"],
+          "reason": {
+            "en": "{B/BT_STAT|ST_PIERCE_POWER_RATE}",
+            "jp": "{B/BT_STAT|ST_PIERCE_POWER_RATE}",
+            "kr": "{B/BT_STAT|ST_PIERCE_POWER_RATE}",
+            "zh": "{B/BT_STAT|ST_PIERCE_POWER_RATE}",
+            "fr": "{B/BT_STAT|ST_PIERCE_POWER_RATE}"
+          }
+        },
+        {
+          "characters": ["Demiurge Luna"],
+          "reason": {
+            "en": "High damage while she can stay up",
+            "jp": "立ち上がっている間は高いダメージを与える",
+            "kr": "서 있을 수 있는 동안 높은 데미지를 입힙니다",
+            "zh": "在能够保持站立的同时造成高伤害",
+            "fr": "Elle inflige des dégâts importants tant qu’elle reste debout"
+          }
+        },
+        {
+          "characters": ["Fran"],
+          "reason": {
+            "en": "{B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} buffs for {P/Mystic Sage Ame}/{P/Demiurge Luna}",
+            "jp": "{B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} {P/Mystic Sage Ame} / {P/Demiurge Luna} のバフ",
+            "kr": "{B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} {P/Mystic Sage Ame} / {P/Demiurge Luna}에 대한 버프",
+            "zh": "{B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} {P/Mystic Sage Ame} / {P/Demiurge Luna} 的增益效果",
+            "fr": "{B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} améliorations pour {P/Mystic Sage Ame} / {P/Demiurge Luna}"
           }
         }
       ]

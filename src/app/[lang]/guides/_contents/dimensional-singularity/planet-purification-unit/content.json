@@ -104,6 +104,16 @@
             "zh": "缩短冷却时间并提供伤害增益。",
             "fr": "Réduction de cooldown et buffs de dégâts."
           }
+        },
+        {
+          "characters": ["Core Fusion Epsilon", "Midnight Rush Skadi"],
+          "reason": {
+            "en": "Anywhere dps (losing some damage bonus because not {E/Water})",
+            "jp": "どこでもDPS（{E/Water}ではないため、ダメージボーナスが若干減少）",
+            "kr": "어디서나 DPS ({E/Water}가 아니기 때문에 일부 피해 보너스를 잃음)",
+            "zh": "任意位置的DPS（因未使用{E/Water}而损失部分伤害加成）",
+            "fr": "DPS en tout type de combat (avec une légère perte de bonus de dégâts car ce n'est pas «{E/Water} »)"
+          }
         }
       ]
     }

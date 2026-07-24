@@ -146,7 +146,7 @@
           }
         },
         {
-          "characters": ["Alice", "Akari"],
+          "characters": ["Alice", "Akari", "Kitsune of Eternity Tamamo-no-Mae"],
           "reason": {
             "en": "{D/BT_SEALED} to tick down boss buffs. {P/Alice} increases {E/Earth} damage taken and applies {D/BT_STAT|ST_SPEED} and {D/BT_STAT|ST_BUFF_CHANCE}; {P/Akari} provides {D/BT_EXTEND_DEBUFF} with {D/BT_STAT|ST_DEF} and {D/BT_STAT|ST_ATK}.",
             "jp": "{D/BT_SEALED}でボスのバフを削る。{P/Alice}は被{E/Earth}ダメージを増加させ{D/BT_STAT|ST_SPEED}と{D/BT_STAT|ST_BUFF_CHANCE}を付与。{P/Akari}は{D/BT_EXTEND_DEBUFF}と{D/BT_STAT|ST_DEF}・{D/BT_STAT|ST_ATK}を付与する。",
@@ -156,13 +156,13 @@
           }
         },
         {
-          "characters": ["Ryu Lion", "Ame", "Rey", "Noa"],
+          "characters": ["Ryu Lion", "Ame", "Rey", "Noa", "Heatwave Cop Delta"],
           "reason": {
-            "en": "{E/Earth} damage dealers. {P/Ryu Lion} is preferred for her {B/BT_STAT|ST_SPEED} buff and extra {D/BT_SEALED}.",
-            "jp": "{E/Earth}属性アタッカー。{P/Ryu Lion}は{B/BT_STAT|ST_SPEED}バフと追加の{D/BT_SEALED}を持つため推奨。",
-            "kr": "{E/Earth} 속성 딜러. {P/Ryu Lion}은 {B/BT_STAT|ST_SPEED} 버프와 추가 {D/BT_SEALED} 덕분에 추천됩니다.",
-            "zh": "{E/Earth}属性输出。推荐{P/Ryu Lion}，因其提供{B/BT_STAT|ST_SPEED}增益与额外的{D/BT_SEALED}。",
-            "fr": "DPS {E/Earth}. {P/Ryu Lion} est préférée pour son buff de {B/BT_STAT|ST_SPEED} et son {D/BT_SEALED} supplémentaire."
+            "en": "{E/Earth} damage dealers. {P/Ryu Lion}/{P/Heatwave Cop Delta} are preferred for her {B/BT_STAT|ST_SPEED} buff and extra {D/BT_SEALED}.",
+            "jp": "{E/Earth} ダメージディーラー。「{P/Ryu Lion}」や「{P/Heatwave Cop Delta}」は、彼女の「{B/BT_STAT|ST_SPEED}」バフと追加の「{D/BT_SEALED}」が得られるため、推奨されます。",
+            "kr": "{E/Earth} 데미지 딜러. {P/Ryu Lion} / {P/Heatwave Cop Delta}는 그녀의 {B/BT_STAT|ST_SPEED} 버프와 추가 {D/BT_SEALED} 효과 때문에 선호됩니다.",
+            "zh": "{E/Earth} 输出型英雄。推荐选择{P/Ryu Lion}和{P/Heatwave Cop Delta}，因为它们能提供{B/BT_STAT|ST_SPEED}增益效果和额外的{D/BT_SEALED}。",
+            "fr": "{E/Earth} les personnages infligeant des dégâts. {P/Ryu Lion} / {P/Heatwave Cop Delta} sont privilégiés pour son bonus « {B/BT_STAT|ST_SPEED} » et ses « {D/BT_SEALED} » supplémentaires."
           }
         },
         {

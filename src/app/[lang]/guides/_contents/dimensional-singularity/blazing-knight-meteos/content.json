@@ -347,6 +347,57 @@
           }
         }
       ]
+    },
+    {
+      "title": {
+        "en": "Skadi team",
+        "jp": "スカディチーム",
+        "kr": "스카디 팀",
+        "zh": "Skadi 团队",
+        "fr": "L'équipe Skadi"
+      },
+      "groups": [
+        {
+          "characters": ["Midnight Rush Skadi"],
+          "reason": {
+            "en": "Main DPS.",
+            "jp": "メインDPS。",
+            "kr": "주력 DPS.",
+            "zh": "主力输出。",
+            "fr": "DPS principal."
+          }
+        },
+        {
+          "characters": ["Mystic Sage Ame"],
+          "reason": {
+            "en": "EE increases damage to bosses. Stacking defense down & buffs based on her transcend (5-star Atk, 6-star damage increase.",
+            "jp": "EEはボスへのダメージを増加させる。防御力ダウン効果を積み重ね、彼女の超越レベルに応じてバフを付与する（5スター：攻撃力、6スター：ダメージ増加）。",
+            "kr": "EE는 보스에게 주는 피해를 증가시킵니다. 그녀의 초월 등급에 따라 방어력 감소 및 버프 효과가 중첩됩니다(5성: 공격력, 6성: 피해량 증가).",
+            "zh": "EE可提升对首领的伤害。根据她的超越等级叠加减防效果及增益效果（5星提升攻击力，6星提升伤害）。",
+            "fr": "EE augmente les dégâts infligés aux boss. Elle cumule les réductions de défense et les bonus en fonction de son niveau de transcendance (Attaque 5 étoiles, augmentation des dégâts 6 étoiles)."
+          }
+        },
+        {
+          "characters": ["Tamamo-no-Mae"],
+          "reason": {
+            "en": "Boss damage bonus for {E/fire} element",
+            "jp": "「{E/fire}」要素のボスへのダメージボーナス",
+            "kr": "{E/fire} 원소의 보스 대미지 보너스",
+            "zh": "{E/fire}元素的BOSS伤害加成",
+            "fr": "Bonus de dégâts contre les boss pour l'élément «{E/fire} »"
+          }
+        },
+        {
+          "characters": ["Monad Eva"],
+          "reason": {
+            "en": "Bonus HP from transcendance",
+            "jp": "超越によるボーナスHP",
+            "kr": "초월을 통해 얻는 추가 HP",
+            "zh": "来自“超脱”的额外生命值",
+            "fr": "Points de vie supplémentaires grâce à la transcendance"
+          }
+        }
+      ]
     }
   ],
   "videos": [

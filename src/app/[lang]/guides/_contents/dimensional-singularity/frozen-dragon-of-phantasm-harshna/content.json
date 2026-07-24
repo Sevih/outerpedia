@@ -91,7 +91,15 @@
           }
         },
         {
-          "characters": ["Ryu Lion", "Ame", "Rey", "Mystic Sage Ame"],
+          "characters": [
+            "Ryu Lion",
+            "Ame",
+            "Rey",
+            "Mystic Sage Ame",
+            "Heatwave Cop Delta",
+            "Core Fusion Epsilon",
+            "Midnight Rush Skadi"
+          ],
           "reason": {
             "en": "Main DPS options.",
             "jp": "メインDPSの候補。",
