@@ -977,6 +977,8 @@ const kr: Record<TranslationKey, string> = {
   'characters.effectsGroups.debuff.utility': '유틸 디버프',
   'characters.effectsGroups.buff.unique': '고유 버프',
   'characters.effectsGroups.debuff.unique': '고유 디버프',
+  'characters.effectsGroups.buff.other': '기타',
+  'characters.effectsGroups.debuff.other': '기타',
   'characters.effectsGroups.hidden': '숨겨진 효과',
 
   // Characters tags

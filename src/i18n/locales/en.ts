@@ -1007,6 +1007,8 @@ const en = {
   'characters.effectsGroups.debuff.utility': 'Utility Debuffs',
   'characters.effectsGroups.buff.unique': 'Unique Buffs',
   'characters.effectsGroups.debuff.unique': 'Unique Debuffs',
+  'characters.effectsGroups.buff.other': 'Other',
+  'characters.effectsGroups.debuff.other': 'Other',
   'characters.effectsGroups.hidden': 'Hidden',
 
   // Characters tags

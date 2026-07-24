@@ -991,6 +991,8 @@ const jp: Record<TranslationKey, string> = {
   'characters.effectsGroups.debuff.utility': 'ユーティリティデバフ',
   'characters.effectsGroups.buff.unique': 'ユニークバフ',
   'characters.effectsGroups.debuff.unique': 'ユニークデバフ',
+  'characters.effectsGroups.buff.other': 'その他',
+  'characters.effectsGroups.debuff.other': 'その他',
   'characters.effectsGroups.hidden': '隠し効果',
 
   // Characters tags

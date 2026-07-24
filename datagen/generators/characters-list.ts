@@ -30,9 +30,15 @@
 import { isMain } from '../lib/is-main';
 import type { Character } from '../extractor/specs/character';
 import type { Skill } from './skills';
-import type { Effect, ResolvedEffect } from '../lib/effects';
+import { effectNameKey, type Effect, type ResolvedEffect } from '../lib/effects';
 import type { EffectFiltersData } from '../curated/effect-filters';
 import type { ExclusiveItem, Passive } from './equipment';
+// LE constructeur de chips de la fiche (runtime) — réutilisé ici pour que
+// l'univers FILTRABLE = l'univers AFFICHÉ (cf. `addEffect`/`kit` plus bas).
+import { cardEffects, mainSkills } from '../../src/lib/skill-view';
+// Résolution FUSIONNÉE (curé inclus) — pour les statuts synthétiques de la carte
+// (bonus WG) absents du glossaire extrait ; même voie que la chip.
+import { getMergedEffect } from '../../src/lib/data/effects';
 
 /** Effets agrégés d'un perso pour les filtres de liste. */
 export interface CharacterEffects {
@@ -198,20 +204,42 @@ export function buildCharactersList(deps: CharactersListDeps): CharactersListDat
     const team = new Set<string>();
 
     // Résout un effet en (côté, clé canonique) et l'ajoute à l'union + à sa
-    // source. On s'en tient aux STATUTS NOMMÉS (tooltip/label → id → clé de
-    // taxonomie inversée = les chips affichées) : les effets purement mécaniques
-    // sans tooltip (BT_AP_CHARGE self…) ne sont pas filtrables → zéro faux positif.
-    const addEffect = (e: ResolvedEffect, source: string | undefined): void => {
-      const id = effectId(e, byTooltip, byLabel);
-      const eff = id ? effects.get(id) : undefined;
-      if (!eff) return;
-      const side: Side = eff.isDebuff ? 'debuff' : 'buff';
-      const key = idToKey[side].get(id!);
-      if (!key) return;
-      const canonical = effectFilters[side][key]?.group ?? key; // variante `_IR`… → base
+    // source. On s'en tient aux STATUTS NOMMÉS (tooltip/label → id = les chips
+    // affichées) : les effets purement mécaniques sans tooltip (BT_AP_CHARGE
+    // self…) ne sont pas filtrables → zéro faux positif.
+    //
+    // IDENTITÉ DE FILTRE = celle de la chip (EffectChips). Clé de TAXONOMIE quand
+    // l'effet en a une (préserve les indices gelés du codec `?z=` + les liens
+    // partagés + le rangement en familles), SINON la clé-NOM canonique
+    // (`effectNameKey`) — même règle que la dédup d'EffectChips, qui fusionne les
+    // homonymes par nom. Ainsi tout effet AFFICHÉ sur une fiche est FILTRABLE :
+    // plus de statut nommé jeté faute de clé de taxonomie (cf. « Random Increased
+    // Stat », « Gift of Buffs », dégâts WG…). Le rangement en famille se fait à
+    // l'affichage (`buildEffectGroups` : `other` par défaut, supplanté par le tag curé).
+    const record = (side: Side, canonical: string, source: string | undefined): void => {
       union[side].add(canonical);
       if (source)
         (bySource[source] ??= { buff: new Set(), debuff: new Set() })[side].add(canonical);
+    };
+    const addEffect = (e: ResolvedEffect, source: string | undefined): void => {
+      const id = effectId(e, byTooltip, byLabel);
+      const eff = id ? effects.get(id) : undefined;
+      if (eff) {
+        const side: Side = eff.isDebuff ? 'debuff' : 'buff';
+        const taxo = idToKey[side].get(id!);
+        const key = taxo ?? effectNameKey(eff.name.en);
+        if (!key) return;
+        record(side, taxo ? (effectFilters[side][taxo]?.group ?? taxo) : key, source); // `_IR`→base
+        return;
+      }
+      // 2e étage — statut SYNTHÉTIQUE de la carte (bonus WG du burst : clé
+      // `WEAKNESS_GAUGE_DAMAGE`, absente du glossaire EXTRAIT car inventée par la
+      // fiche) : résolu par la MÊME voie que la chip (`getMergedEffect`, curé
+      // inclus). On exige une icône = un vrai statut affichable, pas du câblage.
+      const synthKey = e.tooltip ?? e.label;
+      const m = synthKey ? getMergedEffect(synthKey) : undefined;
+      if (!m?.icon) return;
+      record(m.isDebuff ? 'debuff' : 'buff', effectNameKey(m.name.en), source);
     };
 
     for (const skillId of char.skills) {
@@ -224,6 +252,22 @@ export function buildCharactersList(deps: CharactersListDeps): CharactersListDat
       if (!sk.effects) continue;
       const source = SLOT_SOURCE[sk.type];
       for (const e of sk.effects) addEffect(e, source);
+    }
+
+    // PARITÉ FICHE. Les `sk.effects` structurés ne sont qu'UNE des sources de
+    // chips : la carte d'un skill affiche AUSSI les statuts montrés par ses
+    // NIVEAUX (`BuffToolTip` — « Random Increased Stat », « Gift of Buffs »…) et
+    // les bonus WG synthétiques du burst. On repasse donc la sortie de
+    // `cardEffects` (le MÊME constructeur que la fiche) dans `addEffect`, par
+    // skill principal → même identité, même source. Additif : les doublons
+    // fusionnent dans les Set, aucune régression sur les effets déjà captés.
+    const kit = char.skills.map((id) => skills[id]).filter(Boolean) as unknown as Parameters<
+      typeof cardEffects
+    >[0];
+    for (const s of mainSkills(kit)) {
+      const source = SLOT_SOURCE[s.type];
+      for (const ce of cardEffects(kit, s) ?? [])
+        addEffect(ce as unknown as ResolvedEffect, source);
     }
 
     // Équipement exclusif : effets des passifs de l'EE → source `exclusiveEquip`.

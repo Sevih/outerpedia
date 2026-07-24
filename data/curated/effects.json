@@ -1,6 +1,15 @@
 {
+  "10": {
+    "tag": "statBoosts"
+  },
+  "19": {
+    "tag": "statReduction"
+  },
   "51": {
     "icon": "IG_Buff_BuffdurationReduce"
+  },
+  "54": {
+    "tag": "utility"
   },
   "61": {
     "icon": "IG_Buff_Action_Gauge_Up",
@@ -40,11 +49,18 @@
   "1004": {
     "icon": "IG_Buff_Dot_Poison_Interruption_D"
   },
+  "1010": {
+    "tag": "statBoosts"
+  },
+  "10002": {
+    "tag": "statBoosts"
+  },
   "2010112": {
     "tag": "unique"
   },
   "2100093": {
     "keys": ["BT_CASTER_COPY_BUFF"],
+    "tag": "unique",
     "note": "copie de buffs (Dianne) : le buff BT_CASTER_COPY_BUFF n'a pas de tooltip — clé type → statut « Gift of Buffs »"
   },
   "DISCHARGE_AP": {
@@ -218,6 +234,10 @@
     "tag": "statReduction",
     "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
   },
+  "SYS_BUFF_ADDITIVE_SKILL": {
+    "icon": "extra_skill",
+    "tag": "utility"
+  },
   "SYS_BUFF_CHARGE_AP": {
     "desc": {
       "en": "Generates AP.",
@@ -225,7 +245,8 @@
       "kr": "AP를 획득합니다.",
       "zh": "获得AP。"
     },
-    "keys": ["BT_AP_CHARGE"]
+    "keys": ["BT_AP_CHARGE"],
+    "tag": "utility"
   },
   "SYS_BUFF_CHARGE_CP": {
     "desc": {
@@ -235,6 +256,9 @@
       "zh": "获得CP。"
     },
     "keys": ["BT_CP_CHARGE"]
+  },
+  "SYS_BUFF_DMG": {
+    "hidden": true
   },
   "SYS_BUFF_EXTEND_DEBUFF_UP": {
     "desc": {

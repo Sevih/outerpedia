@@ -1021,6 +1021,8 @@ const fr: Record<TranslationKey, string> = {
   'characters.effectsGroups.debuff.utility': 'Debuffs utilitaires',
   'characters.effectsGroups.buff.unique': 'Buffs uniques',
   'characters.effectsGroups.debuff.unique': 'Debuffs uniques',
+  'characters.effectsGroups.buff.other': 'Autres',
+  'characters.effectsGroups.debuff.other': 'Autres',
   'characters.effectsGroups.hidden': 'Masqué',
 
   // Characters tags

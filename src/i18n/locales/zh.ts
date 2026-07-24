@@ -960,6 +960,8 @@ const zh: Record<TranslationKey, string> = {
   'characters.effectsGroups.debuff.utility': '其他效果',
   'characters.effectsGroups.buff.unique': '独有增益',
   'characters.effectsGroups.debuff.unique': '独有减益',
+  'characters.effectsGroups.buff.other': '其他',
+  'characters.effectsGroups.debuff.other': '其他',
   'characters.effectsGroups.hidden': '隐藏效果',
 
   // Characters tags

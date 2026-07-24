@@ -50,15 +50,46 @@ const VALID_CATEGORY: Record<EffectSide, Set<string>> = {
 };
 
 /**
- * Clé CANONIQUE d'une clé d'effet : `group` de la taxonomie si présent, sinon la
- * convention documentée `_IR` (jumeau irremovable) → base si la base existe.
- * Referme les rares trous de la taxonomie curée (`BT_BARRIER_IR`,
- * `BT_STAT_BUFF_ENHANCE_IR`…) sans toucher à la donnée. Appelée sur les clés des
+ * Index (par côté) nom AFFICHÉ → clé REPRÉSENTANTE. Construit depuis les clés de
+ * taxonomie de BASE (`effectFilters`, hors variantes `group`/`_IR`), résolues par
+ * la voie FUSIONNÉE (`resolveEffectKey` — le nom affiché de `BT_AP_CHARGE` debuff
+ * est « Discharge AP » via override curé, pas son nom brut). La représentante est
+ * une clé de taxonomie : stable pour le codec `?z=` et porteuse d'une famille.
+ * Mémoïsé (construit une fois par côté).
+ */
+const REPR: Partial<Record<EffectSide, Map<string, string>>> = {};
+function representativeByName(side: EffectSide): Map<string, string> {
+  const cached = REPR[side];
+  if (cached) return cached;
+  const table = G.effectFilters?.[side] ?? {};
+  const m = new Map<string, string>();
+  for (const key of Object.keys(table)) {
+    // Variantes (groupée, ou `_IR` dont la base existe) → jamais représentantes :
+    // elles se replient déjà sur leur base, qui porte le même nom.
+    if (table[key].group) continue;
+    if (key.endsWith('_IR') && table[key.slice(0, -3)]) continue;
+    const name = resolveEffectKey(side, key)?.name.en;
+    if (name && !m.has(name)) m.set(name, key);
+  }
+  REPR[side] = m;
+  return m;
+}
+
+/**
+ * Clé CANONIQUE d'une clé d'effet. UNIFICATION PAR NOM AFFICHÉ : deux clés au même
+ * nom — une clé de taxonomie et une clé-nom (« Increased Resilience », « Discharge
+ * AP »), ou une base et sa variante irremovable (« Barrier ») — sont UN seul statut
+ * côté joueur → une seule case. On rabat sur la clé représentante de ce nom (cf.
+ * `representativeByName`). Généralise le repli `group`/`_IR` d'avant, conservé en
+ * FALLBACK pour les clés non résolubles (hors glossaire). Appelée sur les clés des
  * agrégats ET sur celles des options — même identité des deux côtés.
  */
 export function canonicalEffectKey(side: EffectSide, key: string): string {
   const table = G.effectFilters?.[side];
   if (!table) return key;
+  const name = resolveEffectKey(side, key)?.name.en;
+  const repr = name ? representativeByName(side).get(name) : undefined;
+  if (repr) return repr;
   const group = table[key]?.group;
   if (group) return group;
   if (key.endsWith('_IR')) {
@@ -100,9 +131,12 @@ export function buildEffectGroups(
   for (const raw of presentKeys) {
     const key = canonicalEffectKey(side, raw);
     if (seen.has(key)) continue;
-    // Résolution FUSIONNÉE (curé > extrait) — nom, icône ET `tag` curés.
+    // Résolution FUSIONNÉE (curé > extrait) — nom, icône, `tag` ET `hidden` curés.
     const eff = resolveEffectKey(side, key);
     if (!eff) continue;
+    // `hidden` curé de l'effet (`SYS_BUFF_DMG`…) = statut masqué du jeu : jamais
+    // une case de filtre, comme EffectChips le masque déjà de la fiche.
+    if (eff.hidden) continue;
     // Le `tag` curé de l'effet (éditable par l'admin, « pour regrouper/filtrer »)
     // prime sur la catégorie de la taxonomie quand c'est une famille valide —
     // override par-effet immédiat (lecture disque), sans rebuild du glossaire.

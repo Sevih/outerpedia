@@ -9,15 +9,17 @@
  *      `invertKeys` (préférence base sur variante) et `effectId`. Aucune table.
  *
  *   2. INVARIANTS RÉFÉRENTIELS sur `data/generated/characters-list.json` : clés
- *      canoniques présentes dans `glossaries.effectFilters`, sources connues,
- *      effets par source ⊂ union, teamBonuses dans le vocabulaire STAT_ICON.
+ *      canoniques RÉSOLUBLES (clé de taxonomie `effectFilters` OU clé-nom présente
+ *      dans `effectByKey` — l'identité de filtre = celle de la chip, cf.
+ *      `buildEffectGroups`/`resolveEffectKey`), sources connues, effets par source
+ *      ⊂ union, teamBonuses dans le vocabulaire STAT_ICON.
  *
  * La suite tourne SANS `.gamedata` (contrainte CI).
  */
 import { describe, expect, it } from 'vitest';
 import charactersListData from '../../data/generated/characters-list.json';
 import charactersData from '../../data/generated/characters.json';
-import glossariesData from '../../data/generated/glossaries.json';
+import { resolveEffectKey } from '../../src/lib/data/effects';
 import {
   buildCharactersList,
   effectId,
@@ -91,14 +93,22 @@ describe('buildCharactersList — agrégation end-to-end (synthétique)', () => 
   const deps = {
     characters: { C1: { id: 'C1', skills: ['S1', 'S2', 'UP', 'MECH'] } },
     skills: {
-      S1: { type: 'first', effects: [{ tooltip: 'tt_atk' }] },
-      S2: { type: 'second', effects: [{ tooltip: 'tt_poison' }] },
+      // `type` sur chaque effet + `levels` sur chaque skill : la donnée réelle
+      // les a toujours, et le constructeur de chips partagé (`cardEffects` →
+      // `toChipEffect`/`levelTooltipEffects`) les lit.
+      S1: { type: 'first', levels: [], effects: [{ tooltip: 'tt_atk', type: 'BT_STAT' }] },
+      S2: {
+        type: 'second',
+        levels: [],
+        effects: [{ tooltip: 'tt_poison', type: 'BT_DOT_POISON' }],
+      },
       UP: {
         type: 'unique_passive',
         levels: [{ level: 1, desc: { en: '+5% Ally Team Speed', jp: '', kr: '', zh: '' } }],
       },
-      // Effet SANS tooltip/label → non résolu → JAMAIS compté (zéro faux positif).
-      MECH: { type: 'ultimate', effects: [{ stat: 'ap' }] },
+      // Mécanique INTERNE sans statut nommé (dégâts proportionnels à une stat,
+      // ni tooltip ni label, aucune chip) → JAMAIS comptée (zéro faux positif).
+      MECH: { type: 'ultimate', levels: [], effects: [{ type: 'BT_DMG_OWNER_STAT' }] },
     },
     effects: new Map([
       ['e_atk', { isDebuff: false }],
@@ -139,7 +149,7 @@ describe('buildCharactersList — agrégation end-to-end (synthétique)', () => 
   it('replie une clé variante sur son `group` canonique', () => {
     const d = {
       characters: { C1: { id: 'C1', skills: ['S'] } },
-      skills: { S: { type: 'first', effects: [{ tooltip: 'tt' }] } },
+      skills: { S: { type: 'first', levels: [], effects: [{ tooltip: 'tt', type: 'BT_IMMUNE' }] } },
       effects: new Map([['e', { isDebuff: false }]]),
       byTooltip: new Map([['tt', 'e']]),
       byLabel: new Map<string, string>(),
@@ -162,11 +172,11 @@ describe('buildCharactersList — agrégation end-to-end (synthétique)', () => 
 
 const list = charactersListData as unknown as CharactersListData;
 const characterIds = new Set(Object.keys(charactersData as Record<string, unknown>));
-const ef = (
-  glossariesData as unknown as {
-    effectFilters: { buff: Record<string, unknown>; debuff: Record<string, unknown> };
-  }
-).effectFilters;
+// Clé de FILTRE résoluble = EXACTEMENT ce que `resolveEffectKey` accepte (index
+// généré OU création curée synthétique — WG, discharge AP…) : c'est ce que
+// `buildEffectGroups` rendra sans dropper. Résolution runtime réelle, pas un
+// sous-ensemble (`effectByKey` seul ratait les créations curées).
+const resolvable = (side: 'buff' | 'debuff', k: string) => Boolean(resolveEffectKey(side, k));
 const VALID_SOURCES = new Set([
   's1',
   's2',
@@ -199,11 +209,11 @@ describe('characters-list.json — invariants', () => {
     expect(entries.filter(([id]) => !characterIds.has(id)).map(([id]) => id)).toEqual([]);
   });
 
-  it('clés canoniques présentes dans effectFilters, arrays triés', () => {
+  it('clés canoniques résolubles (taxonomie ou clé-nom), arrays triés', () => {
     const bad: string[] = [];
     for (const [id, c] of entries) {
-      for (const k of c.buff) if (!ef.buff[k]) bad.push(`${id} buff ${k}`);
-      for (const k of c.debuff) if (!ef.debuff[k]) bad.push(`${id} debuff ${k}`);
+      for (const k of c.buff) if (!resolvable('buff', k)) bad.push(`${id} buff ${k}`);
+      for (const k of c.debuff) if (!resolvable('debuff', k)) bad.push(`${id} debuff ${k}`);
       if ([...c.buff].sort().join() !== c.buff.join()) bad.push(`${id} buff non trié`);
       if ([...c.debuff].sort().join() !== c.debuff.join()) bad.push(`${id} debuff non trié`);
     }
