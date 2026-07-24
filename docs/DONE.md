@@ -6,6 +6,20 @@
 
 ## 2026-07-24
 
+- **Auto-convert des icônes faites main + icône « Extra Skill ».** L'effet
+  `SYS_BUFF_ADDITIVE_SKILL` (« Extra Skill ») n'avait aucune icône (le jeu n'en
+  fournit pas) : icône générée par IA déposée dans le POOL ÉDITORIAL versionné
+  (`data/editorial/ui/effect/extra_skill.webp`), que le manifest route déjà via
+  `editorialFallback` — donc durable et suivie (pas coincée dans `.assets-staging/`,
+  gitignoré, où `collect` la déclarait « manquante » et où un rebuild l'aurait
+  perdue). `assets:collect` gagne `normalizeEditorialPool()` : un raster png/jpg
+  FRAÎCHEMENT DÉPOSÉ (non suivi par git) dans `data/editorial/` est converti en
+  webp — déposer un `.png` suffit désormais, `pnpm images` fait le reste. Borné
+  au git-untracked À DESSEIN : le pool contient aussi des rasters versionnés
+  légitimes qui doivent rester tels quels (og:image `ui/og_default.jpg` en `.jpg`).
+  Au passage, `extra_skill.png` poussé par erreur sur R2 a été supprimé du bucket
+  (+ purge edge, entrée retirée de `pushed.json`).
+
 - **Éditeur d'effet curé : « Editorial tag » → select fermé « Editorial family ».**
   Le champ était libre (placeholder « dot, stat, cc… » — trompeur : « stat »
   n'est pas une famille, la vraie est `statBoosts`), alors que le runtime

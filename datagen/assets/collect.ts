@@ -6,7 +6,8 @@
  * Écrit `manifest-report.json` (affiché par l'admin) : requis / présents /
  * manquants par domaine. `pnpm assets:push` pousse ensuite vers R2.
  */
-import { copyFileSync, existsSync, mkdirSync, statSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { isMain } from '../lib/is-main';
@@ -14,6 +15,43 @@ import { RUNTIME_DATA_FILES } from '../../src/lib/admin/runtime-publish';
 import { buildAssetManifest } from './manifest';
 import { buildImageIndex, GAME_IMAGES_DIR } from './source';
 import { stageAssets, STAGING_DIR } from './stage';
+
+/**
+ * Convertit en webp les rasters NOUVELLEMENT déposés dans le pool éditorial
+ * (`data/editorial/`, VERSIONNÉ) — une icône générée que le jeu n'a pas. Le pool
+ * sert surtout des sprites `.webp` (clés du manifest + copie brute de
+ * `editorialFallback`, cf. stage.ts), un png y serait inerte ; déposer
+ * `data/editorial/<clé>.png` suffit, `pnpm images` fait le reste.
+ *
+ * NE TOUCHE QUE LES FICHIERS NON SUIVIS PAR GIT (fraîchement déposés) : le pool
+ * contient AUSSI des rasters versionnés légitimes qui doivent rester tels quels
+ * — notamment les og:image en `.jpg` (`ui/og_default.jpg`, clé `.jpg` pour les
+ * aperçus Discord/social). Les convertir les casserait (retour d'expérience).
+ * Pas de git / hors dépôt → on ne touche à rien.
+ */
+async function normalizeEditorialPool(): Promise<void> {
+  if (!existsSync(resolve('data/editorial'))) return;
+  const res = spawnSync('git', ['ls-files', '--others', '--exclude-standard', 'data/editorial'], {
+    encoding: 'utf8',
+  });
+  if (res.status !== 0) return;
+  const dropped = res.stdout
+    .split('\n')
+    .map((s) => s.trim())
+    .filter((p) => /\.(png|jpe?g)$/i.test(p));
+  if (!dropped.length) return;
+  let made = 0;
+  for (const rel of dropped) {
+    const abs = resolve(rel);
+    const webp = abs.replace(/\.(png|jpe?g)$/i, '.webp');
+    if (!existsSync(webp)) {
+      await sharp(abs).webp({ quality: 90, alphaQuality: 100, effort: 6 }).toFile(webp);
+      made++;
+    }
+    rmSync(abs, { force: true });
+  }
+  console.log(`  pool éditorial : ${made} raster(s) déposé(s) → webp`);
+}
 
 async function main(): Promise<void> {
   if (!existsSync(GAME_IMAGES_DIR)) {
@@ -23,6 +61,7 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
+  await normalizeEditorialPool();
   const index = buildImageIndex();
   console.log(`index jeu : ${index.size} sprites`);
 
