@@ -69,9 +69,11 @@ function withCsp(request: NextRequest, rewriteTo?: URL): NextResponse {
 /**
  * Proxy i18n par SOUS-DOMAINE :
  *   jp.outerpedia.com/characters → réécrit vers /jp/characters
+ *   kr.outerpedia.com/zh/…       → redirige vers kr.outerpedia.com/… (le sous-domaine fait foi)
  *   outerpedia.com/characters    → réécrit vers /en/characters
  *   outerpedia.com/en/…          → redirige vers outerpedia.com/… (retire le défaut)
- * En dev (localhost) : routing par PATH (/jp/…), le défaut sans préfixe.
+ * En dev (localhost, sans sous-domaine) : langue par défaut ; routing par PATH
+ * (/jp/…) réservé au staging (`LANG_ROUTING=path`), le défaut sans préfixe.
  */
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -116,7 +118,17 @@ export function proxy(request: NextRequest) {
 
   if (subdomain && isValidLang(subdomain)) {
     const firstSegment = pathname.split('/')[1];
-    if (isValidLang(firstSegment)) return withCsp(request);
+    // Le SOUS-DOMAINE fait foi. Un préfixe de langue dans le path (vieux lien
+    // path-based, ou switcher d'avant le passage aux sous-domaines) entre en
+    // conflit avec lui : on le RETIRE et on redirige vers l'URL propre du MÊME
+    // sous-domaine, servie dans SA langue — kr.outerpedia.com/zh →
+    // kr.outerpedia.com/ (coréen), plus de contenu d'une AUTRE langue sur `kr`.
+    // 308 : structure d'URL, comme le retrait du préfixe par défaut sur l'apex.
+    if (isValidLang(firstSegment)) {
+      const url = request.nextUrl.clone();
+      url.pathname = pathname.slice(`/${firstSegment}`.length) || '/';
+      return NextResponse.redirect(url, 308);
+    }
     const url = request.nextUrl.clone();
     url.pathname = `/${subdomain}${pathname}`;
     return withCsp(request, url);

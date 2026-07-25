@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import type { Route } from 'next';
 import { LANGUAGES, LANGS, DEFAULT_LANG, type Lang } from '@/lib/i18n/config';
+import { buildUrl, LANG_ROUTING } from '@/lib/site';
 import { img } from '@/lib/images';
 
 /** Libellés du sélecteur (localisés côté serveur — pas de contexte i18n client). */
@@ -36,10 +37,14 @@ type Variant = 'desktop' | 'mobile-chips';
 /**
  * Sélecteur de langue (structure V2, tokens V3) : bouton drapeau + abréviation
  * ouvrant une liste avec badge officiel/communautaire et note de repli, ou
- * variante `mobile-chips` (rangée de puces, drawer mobile). La navigation reste
- * celle de la V3 (préfixe de path, pas de sous-domaine) et CONSERVE ?query et
- * #hash — l'état des guides vit dans l'URL (#version=/#team=…), connus
- * seulement au clic.
+ * variante `mobile-chips` (rangée de puces, drawer mobile).
+ *
+ * NAVIGATION selon le profil de déploiement (`LANG_ROUTING`, cf. `site.ts`) :
+ * en `subdomain` (prod + dev local) changer de langue = changer d'HÔTE — on vise
+ * `buildUrl(target, path)` (`jp.outerpedia.com/…`) en navigation pleine page
+ * (cross-origin, hors du `router` same-origin) ; en `path` (staging) on garde le
+ * préfixe de chemin. Dans les deux cas on CONSERVE ?query et #hash — l'état des
+ * guides vit dans l'URL (#version=/#team=…), connu seulement au clic.
  */
 export function LanguageSwitcher({
   current,
@@ -78,9 +83,17 @@ export function LanguageSwitcher({
   const navigate = (target: Lang) => {
     setOpen(false);
     if (target === current) return;
+    const suffix = window.location.search + window.location.hash;
+    // Mode sous-domaine : la langue EST l'hôte → navigation pleine page vers le
+    // sous-domaine cible (le `router` de Next ne franchit pas les origines).
+    if (LANG_ROUTING === 'subdomain') {
+      window.location.assign(buildUrl(target, stripped) + suffix);
+      return;
+    }
+    // Mode path (staging) : préfixe de chemin, défaut sans préfixe.
     const base =
       target === DEFAULT_LANG ? stripped : `/${target}${stripped === '/' ? '' : stripped}`;
-    router.push((base + window.location.search + window.location.hash) as Route);
+    router.push((base + suffix) as Route);
   };
 
   const cfg = LANGUAGES[current];
