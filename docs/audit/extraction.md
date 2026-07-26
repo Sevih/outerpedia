@@ -1,6 +1,9 @@
 # Audit — sous-système EXTRACTION (`datagen/extract/`)
 
-> Compte rendu à mettre en commun avec l'audit du worker (panneau admin).
+> Volet EXTRACTION (constats **E1–E8**). La mise en commun avec le volet admin est
+> faite : **[README.md](./README.md)** porte la synthèse dédupliquée et le backlog
+> unique priorisé — c'est par là qu'il faut entrer. Volet voisin :
+> [admin.md](./admin.md) (**F1–F9**).
 > Fait le **2026-07-26** après clôture des TODO d'extraction. Périmètre lu de
 > première main (pas de résumé d'agent) : les 7 fichiers de `datagen/extract/`
 > (~1160 lignes) + les dépendances partagées touchées (`lib/fs.walkFiles`,
@@ -42,7 +45,7 @@ de correction avéré sur le chemin nominal.
 
 ## Constats (par sévérité)
 
-### 1. [MOYEN] Cœurs purs d'extraction NON testés
+### E1 · [MOYEN] Cœurs purs d'extraction NON testés
 
 Aucun test dans `datagen/extract/` (confirmé). Or plusieurs cœurs sont purs et
 testables **sans device ni `.gamedata`**, exactement comme les générateurs qu'on
@@ -50,7 +53,7 @@ vient de couvrir :
 
 - **Parsers de signatures** `pull-gamedata.ts:51-104` — le parsing `ls -lR`
   (taille) et `md5sum` est **fragile** (dépend du layout de colonnes toybox) et
-  porte une conséquence lourde (cf. constat 2). À extraire en fonctions pures
+  porte une conséquence lourde (cf. E2). À extraire en fonctions pures
   `parseLsLR(text)` / `parseMd5(text)` et tester en priorité.
 - **Classifieurs wallpapers** `extract-wallpapers.ts` : `getPriorityScore` (143),
   `getCategory` (175), `shouldExclude` (168) — purs, testables tels quels.
@@ -61,7 +64,7 @@ vient de couvrir :
 > Reco : même méthode que le lot générateurs (extraire/exporter le cœur pur,
 > tester en synthétique). Priorité aux **parsers `ls -lR`/`md5sum`**.
 
-### 2. [MOYEN-] Suppression locale SILENCIEUSE sur miss partiel de listing
+### E2 · [MOYEN-] Suppression locale SILENCIEUSE sur miss partiel de listing
 
 `pull-gamedata.ts:216-217` + `259-261`. Une ligne de listing distant non parsée
 → absente de `remote` → classée `toDelete` **et** non re-tirée (pas dans `remote`
@@ -76,7 +79,7 @@ transitoire md5sum), mais **silencieux** et affecte la complétude du build.
 > tant que `toPull` est faible — un vrai wipe côté jeu est rare et mérite un stop
 > explicite —, ou logguer chaque suppression.
 
-### 3. [FAIBLE] Duplication — parsing d'en-tête PNG (IHDR 24 octets) en TRIPLE
+### E3 · [FAIBLE] Duplication — parsing d'en-tête PNG (IHDR 24 octets) en TRIPLE
 
 Même logique (`89504e470d0a1a0a` + `readUInt32BE(16/20)`) copiée dans :
 
@@ -90,14 +93,14 @@ readPngSize(path)`), testé une fois, importé aux trois endroits. Le test
 > Mineure aussi : `maxTasks = min(max(cpus-4,1),16)` dupliqué
 > `extract.ts:71` ↔ `extract-audio.ts:67`.
 
-### 4. [FAIBLE] Pas de timeout sur l'extraction bytes/images
+### E4 · [FAIBLE] Pas de timeout sur l'extraction bytes/images
 
 `extract.ts` `cli()` (39-42) n'impose **aucun** `timeout`, alors qu'`extract-audio`
 en met un (`600_000`, l. 92). Une passe AssetStudio bloquée pendrait indéfiniment.
 
 > Reco : aligner un `timeout` sur `cli()` (même ordre de grandeur).
 
-### 5. [FAIBLE] Flatten audio — collision de basename silencieuse
+### E5 · [FAIBLE] Flatten audio — collision de basename silencieuse
 
 `extract-audio.ts:100-104` : un WAV niché dont le basename existe déjà à plat
 n'est pas remonté (`!existsSync(flat)`), puis `readdirSync` non récursif (115)
@@ -105,7 +108,7 @@ l'ignore → piste perdue sans trace. Noms BGM uniques en pratique.
 
 > Reco : `console.warn` sur collision (coût nul, rend le cas visible).
 
-### 6. [FAIBLE] Perf — dédup wallpapers séquentielle
+### E6 · [FAIBLE] Perf — dédup wallpapers séquentielle
 
 `extract-wallpapers.ts:234-265` : `scanAndFilter` et `detectDuplicates` font
 `await sharp(...)` **fichier par fichier**. Sur un grand pool, sérialisé.
@@ -114,7 +117,7 @@ l'ignore → piste perdue sans trace. Noms BGM uniques en pratique.
 > risque nul (déterminisme préservé : la dédup regroupe par hash, indépendant de
 > l'ordre).
 
-### 7. [INFO] Maintenabilité — blocklist wallpapers ~50 regex verbatim V2
+### E7 · [INFO] Maintenabilité — blocklist wallpapers ~50 regex verbatim V2
 
 `extract-wallpapers.ts:74-127` : héritée telle quelle, **partiellement redondante**
 avec l'allowlist par catégorie (`getCategory` renvoie `null` → déjà exclu hors
@@ -124,7 +127,7 @@ sur la donnée quelles familles la catégorisation écarte déjà.
 > Reco : chantier « élagage » à part, après avoir mesuré (sur le pool réel) le
 > recouvrement blocklist ∩ catégorisation. Pas urgent.
 
-### 8. [INFO] Interpolation shell dans les commandes adb
+### E8 · [INFO] Interpolation shell dans les commandes adb
 
 `sub` (argv) → `remoteDir` ; `apk`/`entry` (device) → `adb shell`. Surface
 d'injection **théorique**, entrées = le dev lui-même / le device, outil local.
@@ -136,15 +139,15 @@ Risque réel négligeable — noté pour complétude, aucune action.
 
 **Quick wins (risque nul, gain net)**
 
-- Helper PNG partagé (constat 3) — supprime une triple duplication.
-- Timeout sur `cli()` (constat 4).
-- `console.warn` collision flatten (constat 5).
+- Helper PNG partagé (E3) — supprime une triple duplication.
+- Timeout sur `cli()` (E4).
+- `console.warn` collision flatten (E5).
 
 **Chantiers**
 
-- Tests des cœurs purs d'extraction, parsers `ls -lR`/`md5sum` en tête (constat 1).
-- Garde-fou anti-suppression massive sur miss partiel (constat 2).
-- Parallélisme dédup wallpapers (constat 6).
-- Élagage blocklist wallpapers, après mesure (constat 7).
+- Tests des cœurs purs d'extraction, parsers `ls -lR`/`md5sum` en tête (E1).
+- Garde-fou anti-suppression massive sur miss partiel (E2).
+- Parallélisme dédup wallpapers (E6).
+- Élagage blocklist wallpapers, après mesure (E7).
 
 **Rien à faire** : sécurité shell (8), archi générale (saine).

@@ -48,17 +48,35 @@ sévérité Haute de tout l'audit.
 
 ## Angle mort commun : `datagen/extractor/` NON audité
 
-Distinction à ne pas confondre :
+Deux dossiers aux noms presque identiques, à ne pas confondre :
 
-- `datagen/**extract**/` = pipeline device → pool (audité, volet E).
-- `datagen/**extractor**/` = moteur de **revue/intégration** (`reviewAll`,
-  `integrate*.ts`, `specs/`, `core/`) — utilisé par l'admin via `review-store`.
+| Dossier              | Rôle                                                                       | Taille                     | Audité ?          |
+| -------------------- | -------------------------------------------------------------------------- | -------------------------- | ----------------- |
+| `datagen/extract/`   | pipeline device → pool                                                     | 7 fichiers · 1 160 l.      | **oui** (volet E) |
+| `datagen/extractor/` | moteur de revue/intégration (`reviewAll`, `integrate*`, `specs/`, `core/`) | 13 fichiers · **2 699 l.** | **non**           |
 
-**Ni l'un ni l'autre audit ne l'a couvert.** L'audit admin le mesure en boîte
-noire : `reviewAll()` coûte **1 320 ms** et était appelé deux fois par chargement
-`/admin` (mémoïsé depuis le 26/07). Le coût est **imputable à `extractor/`, pas à
-l'admin**. C'est le premier candidat perf ET le prochain périmètre d'audit
-naturel. → **à planifier** (hors des deux rapports actuels).
+**Ni l'un ni l'autre audit ne l'a couvert** — et la zone non auditée est **plus du
+double** de la zone auditée. Elle est pourtant au centre : l'admin la consomme via
+`review-store`, qui n'est qu'une façade.
+
+Ce qui rend le trou concret, mesuré le 26/07 :
+
+- **Couverture partielle.** 4 fichiers de test existent et couvrent le chemin
+  d'intégration (`changes`, `validate`, `integrate`, `integrate-equipment`) — c'est
+  bien. Mais les **specs**, qui décident de ce qui est extrait, n'en ont **aucun** :
+  `specs/character.ts` (**887 l.**, le plus gros module du dossier) et
+  `specs/monster.ts` (347 l.).
+- **Le trou est là où un vrai bug est passé.** La pollution des skills NPC
+  (skills 14/15/16 sur le perso 2000001, corrigée cette session en basculant la
+  détection de forme de la ressemblance vers `CharacterChangeTemplet`) vivait
+  exactement dans `specs/character.ts`. Aucun test ne prévient sa réapparition.
+- **Le coût perf y est aussi.** `reviewAll()` = **1 320 ms mesuré**, dans
+  `review.ts` (190 l., non testé, non audité). Il était appelé deux fois par
+  chargement de `/admin` — mémoïsé depuis le 26/07, mais le coût unitaire est
+  **imputable à `extractor/`, pas à l'admin**.
+
+→ **Prochain périmètre d'audit, et le plus rentable** : c'est à la fois le premier
+candidat perf, le principal trou de tests et le lieu d'un bug déjà vécu.
 
 ## Backlog unique priorisé
 
@@ -86,6 +104,18 @@ naturel. → **à planifier** (hors des deux rapports actuels).
 
 ## Note de méthode
 
-Rien ajouté à `TODO.md`/`DONE.md` depuis cette synthèse : ces fichiers portent des
-modifs non commitées (worker admin). Ce backlog est le matériau à trier ensemble ;
-Sevih décide ce qui monte dans `TODO.md`.
+**Provenance des constats** — les deux volets ont été audités séparément, et cette
+distinction compte pour arbitrer :
+
+- **F1–F9** (admin) : mesurés de première main — chronos (`reviewAll` 1 320 ms,
+  scan de tags 120 ms), comptages (27/27 routes, 53 sites d'écriture, 8 entrées
+  publiques), exécution réelle des résolveurs. Chaque chiffre du volet admin est
+  reproductible.
+- **E1–E8** (extraction) : produits par l'audit du pipeline `datagen/extract/`,
+  repris ici **sans re-vérification indépendante**. Les sévérités et les
+  références `fichier:ligne` sont celles de ce rapport.
+- **Chiffres d'`extractor/`** (§ Angle mort) : mesurés de première main le 26/07.
+
+`TODO.md`/`DONE.md` ne sont pas alimentés depuis cette synthèse : ils portent des
+modifs non commitées. Ce backlog est le matériau à trier ensemble ; Sevih décide ce
+qui monte dans `TODO.md`.
