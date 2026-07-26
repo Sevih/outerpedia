@@ -35,9 +35,6 @@
       ⚠ SURTOUT NE PAS se baser sur la V2 pour cet outil (décision Sevih 22/07 :
       le calculateur V2 est foireux) — exception à la règle « V2 = oracle »,
       conception V3 native.
-- [ ] **Pousser les visuels d'événement sur R2** — reste de la page `event`
-      portée le 21/07 : `pnpm images` collecte `images/events/**` depuis le pool,
-      la bannière `default.webp` en dépend.
 
 ## 🧹 Dette code
 
@@ -105,6 +102,12 @@
 
 ## 📌 Notes de référence (à ne pas perdre)
 
+- **Assets d'événement : rien à pousser à la main.** La collecte
+  (`datagen/assets/manifest.ts`, PAS `collect.ts` qui n'indexe que les sprites du
+  jeu) est DATA-DRIVEN sur le curé : ajouter un événement en admin suffit, il n'y a
+  aucune liste d'assets à tenir. `pnpm images` enchaîne collect + audio +
+  wallpapers + comics + push — ce n'est pas une commande « événements », elle
+  pousse TOUT ce qui est en attente.
 - **Guide porté → son boss doit exister** : chaque `meta.bossId` d'un guide doit
   être dans `monsters.json`, sinon le rendu JETTE. Extraction à la demande
   (`pnpm datagen:extract-entity`).

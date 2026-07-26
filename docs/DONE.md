@@ -6,6 +6,23 @@
 
 ## 2026-07-26
 
+- **Visuels d'événement sur R2 : item FERMÉ sans rien pousser** — l'item demandait
+  de lancer `pnpm images` pour collecter `images/events/**`. Vérifié AVANT d'agir,
+  et c'était périmé : les 2 événements curés référencent 2 visuels, tous deux
+  présents dans le pool `data/editorial/events/`, et les 4 clés
+  (`default.webp`/`.png`, `gtfo.webp`/`.png` — la variante PNG est la carte de
+  partage) sont tracées dans `pushed.json` ET servies en HTTP 200 par
+  `img.outerpedia.com`. Zéro asset en attente. Aucune référence du curé ne pointe
+  vers un fichier absent du pool.
+  DEUX ERREURS DANS L'ÉNONCÉ DE L'ITEM, corrigées au passage. La collecte des
+  événements ne vit pas dans `collect.ts` (qui n'indexe que les sprites du JEU
+  depuis `.gamedata/extracted/images`) mais dans `manifest.ts`, en DATA-DRIVEN sur
+  le curé : ajouter un événement en admin suffit, aucune liste d'assets à tenir.
+  Et `pnpm images` n'est pas « la commande des événements » : elle enchaîne
+  collect + audio + wallpapers + comics + push, donc elle aurait poussé TOUT ce
+  qui traîne en attente. La lancer pour cet item aurait été une opération de
+  production pour un gain nul.
+
 - **Éditeur assisté validé en dev, et un doublon de clé React corrigé au
   passage** — validation dev de Sevih : le geste d'édition de **F5** et les **4
   éditeurs de F9** sont bons (les deux ⚠ ci-dessous tombent). L'éditeur assisté,
