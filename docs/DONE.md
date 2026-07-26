@@ -6,6 +6,39 @@
 
 ## 2026-07-26
 
+- **F7 : plus de perte d'écriture entre deux onglets** (`3d92d9f`) — le bug a été
+  MESURÉ avant d'être corrigé, et il était réel : deux `upsertCharacterCurated`
+  concurrents sur deux persos DIFFÉRENTS ne laissaient qu'une seule entrée dans
+  `characters.json`, l'autre évaporée, les deux appels répondant « OK ».
+  LA CAUSE est un point de suspension véritable. Un store fait `readAll()` →
+  modifier → `await writeJson()`, et `writeJson` FORMATE avant d'écrire
+  (`await formatJson`, qui passe par prettier). Entre la lecture et l'écriture,
+  une autre requête du même processus se glisse : A lit `{}`, rend la main au
+  formatage, B lit `{}` à son tour, A écrit `{stella}`, B écrit `{tamamo}` — et
+  l'écriture de A est perdue. ⚠ À NE PAS confondre avec F1 : là, l'entrelacement
+  intra-processus était IMPOSSIBLE (`writeFileSync` puis `renameSync`, synchrones,
+  rien entre eux) et je m'étais trompé en l'affirmant ; ici l'`await` existe
+  vraiment. D'où la démonstration empirique avant d'écrire une ligne de correctif.
+  LE REMÈDE : `withStoreLock(fichier, fn)`, une file d'attente en mémoire par
+  fichier, appliquée aux **9 stores dont le merge est par CLÉ** (characters,
+  effects, equipment, gear-reco, search-aliases, short-names, les deux kits,
+  l'overlay shop). C'est sur l'overlay shop que la perte coûtait le plus cher : il
+  PRÉSERVE les slugs hors rotation, donc deux enregistrements se rendaient
+  mutuellement leurs priorités invisibles — constat qu'on n'aurait fait que des
+  semaines plus tard, au retour du produit en boutique.
+  PORTÉE ASSUMÉE : un seul processus (les deux onglets parlent au même serveur
+  dev). Deux PROCESSUS (dev + CLI datagen) demanderaient un verrou sur disque,
+  hors de proportion pour un outil local mono-utilisateur — et F1 garantit déjà
+  qu'aucun des deux ne laisse de fichier tronqué. Les stores qui REMPLACENT le
+  fichier entier (changelog, events, coupons/bannières, presets) ne sont pas
+  concernés : l'éditeur y envoie la liste complète qu'il a chargée, le dernier
+  écrase par construction — il faudrait une détection de version côté UI, autre
+  sujet. Un échec ne gèle pas la file (testé) : sinon un enregistrement refusé
+  bloquerait toutes les écritures suivantes jusqu'au redémarrage.
+  **+16 cas** (1160 tests). `item-curated-store` est le seul store par clé NON
+  protégé — il était en cours de modification par l'agent datagen (F11) ; à
+  reprendre une fois son travail committé.
+
 - **F5 : aperçus au montage — un seul champ éditable à la fois** — `InlineTextField`
   lance son aperçu dans un `useEffect` dépendant de `[value, lang, previewMode]` :
   il part donc AU MONTAGE, sans frappe. Là où un champ est monté PAR ÉLÉMENT de
