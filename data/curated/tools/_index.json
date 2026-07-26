@@ -49,7 +49,7 @@
     "keywords": ["gear", "usage", "finder", "equipment", "match"]
   },
   "damage-calculator": {
-    "icon": "nav/CM_EtcMenu_PVP",
+    "icon": "nav/CM_Damage_Calc",
     "category": "simulators",
     "order": 75,
     "status": "coming-soon",
