@@ -6,6 +6,25 @@
 
 ## 2026-07-26
 
+- **E1 : tests des cœurs purs d'extraction (parsers de signatures + classifieurs
+  wallpapers)** — **+19 cas** (431 tests datagen), sans device ni `.gamedata`.
+  PRIORITÉ aux parsers de `pull-gamedata.ts` (fragiles, dépendants du layout de
+  colonnes toybox, et à conséquence lourde — siège d'E2) : `remoteSignatures`
+  faisait le parsing inline, EXTRAIT en deux fonctions pures exportées —
+  `parseMd5(text)` (« hash ./relatif », ignore bruit adb / hash invalide / `./`
+  manquant, CRLF toléré) et `parseLsLR(text, baseDir)` (un bloc par dossier, ne
+  retient que les fichiers réguliers `-`, écarte dossiers/liens/`total`, taille en
+  5e colonne, nom à espaces via la 8e). Un cas documente le SIÈGE d'E2 : une ligne
+  `ls -lR` tronquée (< 8 colonnes) est ignorée en silence → le fichier manque de
+  `remote`, ce que `massDeleteGuard` rattrape en aval. Puis les classifieurs de
+  `extract-wallpapers.ts` (`getPriorityScore`/`getCategory`/`shouldExclude`, juste
+  EXPORTÉS) : hiérarchie des doublons (CG scénario > BG scénario > BG event > CG
+  event, bonus `_E2`), catégorie « premier match gagne » (Full dimensionnel
+  l'emporte sur le nom), blocklist nom + chemin (HeroFullArt `IMG_`, textures 3D
+  par chemin). Noms de test pris RÉELS dans `wallpapers.json` (le motif `_a` de la
+  blocklist excluait mon nom synthétique). Aucune logique de prod modifiée, juste
+  isolée et exportée. TSC datagen vert.
+
 - **X1 : tests des prédicats purs des specs (character/monster)** — le siège du
   bug NPC de la session mis sous garde. **+25 cas** (412 tests datagen). Prédicats
   rendus testables SANS moteur (ils prennent des `Row` bruts) :

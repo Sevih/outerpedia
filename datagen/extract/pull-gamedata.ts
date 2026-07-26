@@ -47,27 +47,35 @@ const CONTENT_ADDRESSED = new Set(['bundles']);
  */
 const BATCH_FILES = 300;
 
-/** Signatures distantes { chemin relatif → signature } (taille ou md5). */
-function remoteSignatures(serial: string, baseDir: string, useHash: boolean): Map<string, string> {
+/**
+ * Parse la sortie `md5sum` récursive de toybox — une ligne « hash  ./chemin/relatif »
+ * par fichier. Seules les lignes conformes (32 hexa + `./`) sont retenues ; le
+ * reste (bruit adb, ligne vide) est ignoré en silence. Retour : { relatif → md5 }.
+ * PUR — testable sans device (E1). Une ligne NON parsée fait manquer le fichier
+ * de `remote` → c'est le siège d'E2 (cf. `massDeleteGuard`).
+ */
+export function parseMd5(text: string): Map<string, string> {
   const map = new Map<string, string>();
-  if (useHash) {
-    // md5 récursif via toybox : "hash  ./chemin/relatif"
-    const out = capture([
-      '-s',
-      serial,
-      'shell',
-      `cd ${baseDir} && find . -type f -exec md5sum {} +`,
-    ]);
-    for (const line of out.split(/\r?\n/)) {
-      const m = line.match(/^([0-9a-f]{32})\s+\.\/(.+)$/);
-      if (m) map.set(m[2], m[1]);
-    }
-    return map;
+  for (const line of text.split(/\r?\n/)) {
+    const m = line.match(/^([0-9a-f]{32})\s+\.\/(.+)$/);
+    if (m) map.set(m[2], m[1]);
   }
-  // taille récursive via ls -lR
-  const out = capture(['-s', serial, 'shell', `ls -lR ${baseDir}`]);
+  return map;
+}
+
+/**
+ * Parse la sortie `ls -lR <baseDir>` de toybox — un bloc par dossier (en-tête
+ * « <chemin>: », ligne `total N`, puis une entrée par ligne). On ne retient que
+ * les fichiers RÉGULIERS (préfixe `-`, donc ni dossier `d` ni lien `l`) et leur
+ * TAILLE (5e colonne) ; le nom prend tout à partir de la 8e colonne (tolère les
+ * espaces). Le chemin relatif est reconstruit depuis l'en-tête de bloc, débarrassé
+ * de `baseDir`. FRAGILE (dépend du layout de colonnes toybox) — d'où E1 : sous
+ * test. Retour : { relatif → taille en octets (string) }. PUR — sans device.
+ */
+export function parseLsLR(text: string, baseDir: string): Map<string, string> {
+  const map = new Map<string, string>();
   let curDir = '';
-  for (const raw of out.split(/\r?\n/)) {
+  for (const raw of text.split(/\r?\n/)) {
     const line = raw.trimEnd();
     if (!line) continue;
     if (line.endsWith(':')) {
@@ -84,6 +92,18 @@ function remoteSignatures(serial: string, baseDir: string, useHash: boolean): Ma
     if (rel) map.set(rel, size);
   }
   return map;
+}
+
+/** Signatures distantes { chemin relatif → signature } (taille ou md5). */
+function remoteSignatures(serial: string, baseDir: string, useHash: boolean): Map<string, string> {
+  if (useHash) {
+    // md5 récursif via toybox : "hash  ./chemin/relatif"
+    return parseMd5(
+      capture(['-s', serial, 'shell', `cd ${baseDir} && find . -type f -exec md5sum {} +`]),
+    );
+  }
+  // taille récursive via ls -lR
+  return parseLsLR(capture(['-s', serial, 'shell', `ls -lR ${baseDir}`]), baseDir);
 }
 
 /** Signatures locales { chemin relatif → signature } (taille ou md5), récursif. */

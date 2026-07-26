@@ -132,7 +132,7 @@ interface FileInfo {
  * (verbatim V2) : CG scénario > BG scénario > BG event > CG event ; `_E2`
  * bonifié ; les IMG_ (exclus ici) sont départagés par id décroissant.
  */
-function getPriorityScore(filename: string): number {
+export function getPriorityScore(filename: string): number {
   let score = 0;
   if (filename.includes('T_ScenarioCG_')) score += 100;
   else if (filename.includes('T_ScenarioBG_')) score += 80;
@@ -157,14 +157,14 @@ function getAllFiles(dir: string, files: string[] = []): string[] {
   return files;
 }
 
-function shouldExclude(filePath: string, fileName: string): boolean {
+export function shouldExclude(filePath: string, fileName: string): boolean {
   return (
     EXCLUDE_PATTERNS.some((p) => p.test(fileName)) ||
     EXCLUDE_PATH_PATTERNS.some((p) => p.test(filePath))
   );
 }
 
-function getCategory(name: string, w: number, h: number): string | null {
+export function getCategory(name: string, w: number, h: number): string | null {
   for (const c of CATEGORIES) if (c.match(name, w, h)) return c.name;
   return null;
 }

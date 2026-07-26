@@ -51,8 +51,10 @@
 > atomique), **E2** (garde anti-purge), **E3** (helper PNG), **E4** (timeout
 > extraction), l'**audit `datagen/extractor/`** (constats X1–X6), **X3**
 > (mémoïsation `character`/`monster`, `0396470`), **X2** (lecture committé via
-> `readCuratedJson`, anti-wipe, `f3f1cd0`) et **X1** (tests des prédicats purs des
-> specs — `isInnatePierce` / `isRealCharacterRow` / `extractStats`…, +25 cas).
+> `readCuratedJson`, anti-wipe, `f3f1cd0`), **X1** (tests des prédicats purs des
+> specs — `isInnatePierce` / `isRealCharacterRow` / `extractStats`…, +25 cas) et
+> **E1** (tests des cœurs purs d'extraction — parsers `parseMd5` / `parseLsLR`
+> extraits de `pull-gamedata`, classifieurs wallpapers exportés, +19 cas).
 > Reste ci-dessous.
 > ✅ Faits le 26/07 (Worker, migrés dans [DONE.md](./DONE.md)) : **F6**
 > (confinement des chemins de guides, `c13ba4b`), **F3** (garde de forme des corps
@@ -62,8 +64,6 @@
 
 ### 👤 Claude — datagen / extraction / socle
 
-- [ ] **E1** _(P3)_ — tests des cœurs purs d'extraction, **parsers `ls -lR`/`md5sum`
-      en tête** (fragiles + conséquence E2), puis classifieurs wallpapers.
 - [ ] **E6** _(P3)_ — parallélisme borné (p-limit ≈ cpus) de la dédup wallpapers.
 - [ ] **E7** _(dette)_ — élagage de la blocklist wallpapers (~50 regex V2), après
       mesure du recouvrement avec la catégorisation.
