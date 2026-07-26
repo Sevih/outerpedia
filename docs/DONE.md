@@ -6,6 +6,69 @@
 
 ## 2026-07-26
 
+- **Audit datagen en TROIS volets + synthèse consolidée.** Campagne d'audit de
+  la chaîne datagen, lue de première main (pas de résumé d'agent) : `datagen/extract/`
+  (pipeline device → pool, **E1–E8**, [`docs/audit/extraction.md`](./audit/extraction.md),
+  commit `92be398`) puis `datagen/extractor/` (moteur de revue/intégration,
+  **13 fic. · 2699 l.**, l'angle mort — plus du double de `extract/` — **X1–X6**,
+  [`docs/audit/extractor.md`](./audit/extractor.md), commit `10b59d5`). Mis en
+  commun avec l'audit worker du panneau admin (**F1–F9**, `admin.md`) dans une
+  synthèse dédupliquée et priorisée ([`docs/audit/README.md`](./audit/README.md),
+  commits `ee3731f`/`523bb39`). **Verdict croisé : les trois volets sont sains** ;
+  le vrai risque partagé n'est pas l'exposition mais la **durabilité de la donnée
+  éditoriale**, et il converge sur un fichier commun (`datagen/lib/json.ts`). Fil
+  rouge des trois : « lecture ratée → vide silencieux → purge » (F1 / E2 / X2),
+  dont le remède unique est `readCuratedJson`. Backlog restant tenu dans TODO,
+  réparti par rôle (Claude = datagen, Worker = admin).
+
+- **F1 — écriture atomique `writeJson` (socle partagé, seul constat de sévérité
+  Haute).** `datagen/lib/json.ts` écrivait sans fichier temporaire : une
+  interruption laissait un JSON tronqué, et comme `readCuratedJson` **lève** sur
+  JSON cassé (à raison), un save interrompu **bloquait `pnpm dev` ET le build**.
+  Surface : 53 sites d'écriture, dont `characters.json` (243 Ko de travail
+  éditorial). Fix = write-tmp + `renameSync` atomique (`MoveFileEx` écrase sur
+  Windows), avec nom de temporaire unique (`${path}.${pid}.${seq}.tmp`) et
+  `rmSync` de nettoyage sur échec — robuste aussi en concurrence inter-processus
+  (dev server ↔ CLI datagen). Testé (round-trip, zéro `.tmp` résiduel, écrasement,
+  concurrence). Commit `f4fc6d4`. **Corrigé une seule fois** : bénéficie aux trois
+  volets (l'admin écrit ces curés, l'extraction les relit).
+
+- **E2 — garde anti-purge du miroir sur listing incomplet.** `pull-gamedata` :
+  un miss partiel du listing distant → suppression locale SILENCIEUSE (le
+  garde-fou d'origine ne couvrait que le vide total). Ajout de `massDeleteGuard`
+  (pur + testé) : refuse la passe si `>50 %` du local serait supprimé pour `<10 %`
+  tiré (signature d'un listing tronqué). Câblé avant la boucle de suppression.
+  Commit `db6afaf`.
+
+- **E3 — helper PNG partagé `lib/png readPngSize`.** Le parsing de l'en-tête IHDR
+  (24 octets, fd fermé en `finally`) était dupliqué ×3 (`extract-wallpapers.ts`,
+  `generators/wallpapers.ts`, `assets/hero-full-art.ts`). Extrait en un seul
+  `readPngSize(path)` ; les trois sites y basculent (`extract-wallpapers` adapte
+  `{w,h}` → `{width,height}`). Commit `706ee03` (+ test dédié).
+
+- **E4 — timeout anti-blocage sur l'extraction bytes/images.** `extract.ts`
+  `cli()` (`execFileSync` sur AssetStudio) n'avait aucun garde-fou : un process
+  pendu ne rendait jamais la main. Ajout d'un `timeout` de 30 min — pas un plafond
+  de durée normale (le process complet tourne ~10-15 min sur un gros patch), mais
+  une borne bien au-dessus du pire cas d'UNE passe. Aligné en esprit sur le
+  timeout de l'audio. Commit `918a130`.
+
+- **Desc de skill PAR NIVEAU (le texte ne suivait pas le palier).** Le `DescID`
+  d'un skill est une liste CSV — une desc PLEINE par niveau — mais le datagen ne
+  gardait que `splitCsv(DescID)[0]` (niveau 1), jetant les suivants. Invisible
+  pour ~800 skills (entrées identiques : template unique, les nombres viennent
+  des placeholders + vars) mais **84 skills** changent le TEXTE à un palier
+  (S2 ×41, S3 ×34, S1 ×3, Core-Fused Passive ×6) — ex. le passif de CF Veronica
+  gagne au Lv2 « Increases Damage for all allies currently affected by Increased
+  Defense », jamais affiché. Fix : `datagen/generators/skills.ts` émet `levels[].desc`
+  quand les entrées CSV DIVERGENT (repli sur la dernière si moins d'entrées que de
+  niveaux ; balaie aussi ces descs pour résoudre leurs placeholders) ; `SkillCard`
+  rend `levels[niveau].desc ?? skill.desc`. Le champ `SkillLevel.desc` existait
+  déjà au contrat. `skills.json` régénéré CHIRURGICALEMENT (patch des seuls ids
+  déjà committés → 84 skills / 394 niveaux, ZÉRO perso non intégré ajouté, diff
+  purement additif). Au passage, les skills à desc chiffrée en dur par niveau
+  (ex. « 40 % » → « 60 % » de contre-attaque) affichent enfin la bonne valeur.
+
 - **Raccourcis `{SK/…}` : `Passive` recadré + `Dual` ajouté + passif Core Fusion
   affiché.** `SKILL_SHORTHAND` mélangeait deux choses : `Passive → unique_passive`,
   or `unique_passive` n'est qu'un marqueur « Burst Level 2 Unlocked » (tout le

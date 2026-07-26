@@ -15,6 +15,11 @@ export interface CardLevel {
   vars?: Record<string, SkillBuffVars>;
   /** Notes d'amélioration localisées de CE palier (« +10% damage »). */
   upgrades?: string[];
+  /**
+   * Desc PROPRE à ce niveau — présente uniquement quand le jeu change le TEXTE
+   * de la desc à ce palier (pas juste les nombres). Sinon on rend `skill.desc`.
+   */
+  desc?: string;
 }
 
 /** Compétence pré-localisée pour la carte V2 (le serveur prépare tout). */
@@ -189,10 +194,10 @@ export function SkillCard({
         label={labels.level}
       />
 
-      {skill.desc && (
+      {(lv?.desc ?? skill.desc) && (
         <div className="mb-3">
           <SkillDescription
-            desc={skill.desc}
+            desc={lv?.desc ?? skill.desc!}
             vars={lv?.vars}
             className="text-sm leading-relaxed whitespace-pre-line text-zinc-200"
           />

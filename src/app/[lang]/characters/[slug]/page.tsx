@@ -207,6 +207,7 @@ export default async function CharacterDetail({
       wgReduce: l.wgReduce,
       vars: l.vars,
       upgrades: l.upgrades?.map((u) => lRec(u, lang)).filter(Boolean),
+      ...(l.desc ? { desc: lRec(l.desc, lang) } : {}),
     })),
     effects: cardEffects(skills, s),
   });

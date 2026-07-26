@@ -172,9 +172,16 @@ export function assembleSkill(
 
   // Desc principale = DescID du skill (template), sinon (persos) DescID du
   // niveau 1 — cas des passifs uniques dont la desc vit sur la ligne de niveau.
+  //
+  // Le `DescID` du skill est une LISTE CSV : une desc PLEINE par niveau. Pour
+  // l'immense majorité les entrées sont IDENTIQUES (template unique, les nombres
+  // viennent des placeholders + vars) → on n'en garde qu'une. Mais ~84 skills
+  // (S2/S3, Core-Fused Passives…) changent le TEXTE à un palier (une phrase
+  // s'ajoute) : on émet alors une desc PAR NIVEAU (cf. plus bas).
   const mainOnSkill = !!s.DescID;
-  const descKey =
-    splitCsv(s.DescID ?? '')[0] || (forCharacter ? splitCsv(lvl1?.DescID ?? '')[0] : '') || '';
+  const descIds = splitCsv(s.DescID ?? '');
+  const perLevelDescs = descIds.map((k) => resolveText(tskill, k));
+  const descKey = descIds[0] || (forCharacter ? splitCsv(lvl1?.DescID ?? '')[0] : '') || '';
   const desc = descKey ? resolveText(tskill, descKey) : undefined;
 
   const maxLevel = num(lvlRows[lvlRows.length - 1]?.SkillLevel) || lvlRows.length || 1;
@@ -195,12 +202,31 @@ export function assembleSkill(
   };
   if (desc && desc.en) skill.desc = desc;
 
+  // Desc PAR NIVEAU quand les entrées du CSV `DescID` divergent en TEXTE (pas
+  // juste les nombres) : le jeu ajoute une phrase à un palier. Alignées par index
+  // de niveau, repli sur la dernière si moins d'entrées que de niveaux. Les
+  // skills à entrées identiques gardent leur unique `skill.desc` (aucun `levels[].desc`).
+  if (forCharacter && perLevelDescs.length > 1) {
+    const en0 = perLevelDescs[0]?.en ?? '';
+    const diverge = perLevelDescs.some((d) => (d?.en ?? '') !== en0);
+    if (diverge) {
+      skill.levels.forEach((lv, i) => {
+        const d = perLevelDescs[i] ?? perLevelDescs[perLevelDescs.length - 1];
+        if (d?.en) lv.desc = d;
+      });
+    }
+  }
+
   // Vars des buffs référencés par la DESC mais portés par un AUTRE skill
   // (formes de combat : le S1 de Demiurge Luna cite `[Buff_T_2000120_1_1]`,
   // buff du kit jumeau) — résolution GLOBALE par id de buff, niveau à niveau.
-  if (skill.desc) {
-    const refIds = new Set([...skill.desc.en.matchAll(/\[Buff_[CVT]_(.+?)\]/g)].map((m) => m[1]));
+  // Balaie aussi les desc PAR NIVEAU (leurs placeholders doivent être résolus).
+  if (skill.desc || skill.levels.some((l) => l.desc)) {
+    const refsOf = (t?: string): string[] =>
+      t ? [...t.matchAll(/\[Buff_[CVT]_(.+?)\]/g)].map((m) => m[1]) : [];
+    const baseRefs = refsOf(skill.desc?.en);
     for (const lv of skill.levels) {
+      const refIds = new Set([...baseRefs, ...refsOf(lv.desc?.en)]);
       for (const refId of refIds) {
         if (lv.vars?.[refId]) continue;
         const v = skillBuffVars(buffs, refId, lv.level);
