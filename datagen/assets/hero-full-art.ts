@@ -16,8 +16,9 @@
  *     filtre ancré `^IMG_\d+$` excluait, et les arts de PNJ (`IMG_3000032`,
  *     hors `illust/`) que seul ce conteneur porte.
  */
-import { closeSync, existsSync, openSync, readSync } from 'node:fs';
+import { existsSync } from 'node:fs';
 import { walkFiles } from '../lib/fs';
+import { readPngSize } from '../lib/png';
 import { isUnreleasedCharacterAsset } from '../lib/released';
 import { GAME_IMAGES_DIR } from './source';
 
@@ -31,20 +32,6 @@ export interface HeroArt {
   path: string;
   w: number;
   h: number;
-}
-
-/** Dimensions d'un PNG via son en-tête (signature + IHDR) — `null` si illisible. */
-function pngDims(path: string): { w: number; h: number } | null {
-  try {
-    const buf = Buffer.alloc(24);
-    const fd = openSync(path, 'r');
-    readSync(fd, buf, 0, 24, 0);
-    closeSync(fd);
-    if (buf.toString('hex', 0, 8) !== '89504e470d0a1a0a') return null;
-    return { w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) };
-  } catch {
-    return null;
-  }
 }
 
 const isIllust = (p: string): boolean => /[\\/]ui[\\/]illust[\\/]/i.test(p);
@@ -72,7 +59,7 @@ export function listHeroFullArt(dir = GAME_IMAGES_DIR): HeroArt[] {
 
   const out: HeroArt[] = [];
   for (const path of chosen.values()) {
-    const d = pngDims(path);
+    const d = readPngSize(path);
     if (!d || d.w < MIN_WIDTH) continue;
     const f = path
       .replace(/\.png$/i, '')

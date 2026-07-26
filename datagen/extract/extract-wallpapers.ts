@@ -30,19 +30,11 @@
  * `pnpm datagen:extract [all]` via `runWallpapers()` (cf. extract.ts).
  * Outillage : sharp (dédup perceptuelle + webp), pas de binaire externe.
  */
-import {
-  copyFileSync,
-  existsSync,
-  mkdirSync,
-  openSync,
-  readSync,
-  closeSync,
-  readdirSync,
-  rmSync,
-} from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readdirSync, rmSync } from 'node:fs';
 import { basename, extname, join, resolve } from 'node:path';
 import sharp from 'sharp';
 import { isMain } from '../lib/is-main';
+import { readPngSize } from '../lib/png';
 
 const ROOT = resolve('.gamedata');
 const SRC_IMAGES = resolve(ROOT, 'extracted/images');
@@ -177,25 +169,11 @@ function getCategory(name: string, w: number, h: number): string | null {
   return null;
 }
 
-/** Dimensions d'un PNG par lecture de l'en-tête IHDR (24 octets) — sans décoder. */
-function pngDimensions(filePath: string): { width: number; height: number } | null {
-  try {
-    const buf = Buffer.alloc(24);
-    const fd = openSync(filePath, 'r');
-    readSync(fd, buf, 0, 24, 0);
-    closeSync(fd);
-    if (buf.toString('hex', 0, 8) !== '89504e470d0a1a0a') return null;
-    return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
-  } catch {
-    return null;
-  }
-}
-
 /** Dimensions : en-tête PNG (bon marché) sinon sharp (jpg/webp éventuels). */
 async function readDims(filePath: string): Promise<{ width: number; height: number } | null> {
   if (/\.png$/i.test(filePath)) {
-    const d = pngDimensions(filePath);
-    if (d) return d;
+    const d = readPngSize(filePath);
+    if (d) return { width: d.w, height: d.h };
   }
   try {
     const m = await sharp(filePath).metadata();

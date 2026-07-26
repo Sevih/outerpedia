@@ -20,9 +20,10 @@
  * Écriture CANONIQUE : `pnpm datagen:build` (buildWallpapers via writeJson +
  * promote). L'exécution directe IMPRIME pour revue.
  */
-import { closeSync, existsSync, openSync, readdirSync, readSync } from 'node:fs';
+import { existsSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { isMain } from '../lib/is-main';
+import { readPngSize } from '../lib/png';
 import { isUnreleasedCharacterAsset } from '../lib/released';
 import { listHeroFullArt } from '../assets/hero-full-art';
 
@@ -38,20 +39,6 @@ export type WallpapersData = Record<string, Wallpaper[]>;
 const GAME_POOL = resolve('.gamedata/extracted/wallpapers');
 /** Pool éditorial ramené en V3 (Outerpedia). */
 const EDITORIAL = resolve('.editorial/wallpapers');
-
-/** Dimensions d'un PNG via son en-tête (signature + IHDR) — `null` si illisible. */
-function pngDims(path: string): { w: number; h: number } | null {
-  try {
-    const buf = Buffer.alloc(24);
-    const fd = openSync(path, 'r');
-    readSync(fd, buf, 0, 24, 0);
-    closeSync(fd);
-    if (buf.toString('hex', 0, 8) !== '89504e470d0a1a0a') return null;
-    return { w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) };
-  } catch {
-    return null;
-  }
-}
 
 /** Comparateur déterministe par nom de fichier (ordre stable du JSON). */
 function byF(a: Wallpaper, b: Wallpaper): number {
@@ -69,7 +56,7 @@ function scanCategory(dir: string): Wallpaper[] {
       // d'un perso que le wiki n'a pas encore intégré (cf. `released.ts`).
       .filter((stem) => !isUnreleasedCharacterAsset(stem))
       .map((stem) => {
-        const d = pngDims(join(dir, `${stem}.png`));
+        const d = readPngSize(join(dir, `${stem}.png`));
         return { f: stem, w: d?.w ?? 0, h: d?.h ?? 0 };
       })
       .sort(byF)
