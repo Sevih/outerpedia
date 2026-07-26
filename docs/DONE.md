@@ -6,6 +6,25 @@
 
 ## 2026-07-26
 
+- **Damage Calculator : UI POSÉE sur le site (phase UI seule, `unlisted`)** —
+  wrapper serveur + client (`tools/_contents/damage-calculator/`), moteur PAS
+  branché (rapport à « — »). Décisions produit intégrées au fil de la revue
+  Sevih : stats saisies = fiche du jeu, mais on ne DEMANDE que celles qui
+  pilotent les dégâts du perso choisi — faits dérivés des kits par le NOUVEAU
+  générateur `datagen/generators/damage-scaling.ts` (swap d'ATK
+  `BT_SWAP_STAT_ATTACK` → HP/DEF-scalers, scalings annexes `BT_DMG_OWNER_STAT`
+  (SPD/HP/DEF/CHC/EFF), dégâts lost-HP, DoT → EFF), promotion ciblée
+  `--only damage-scaling.json`. RES/lifesteal écartés (ne touchent pas les
+  dégâts), CHC seulement si le kit scale dessus (le crit du rapport est un
+  interrupteur), PEN % et DMG UP % sont des lignes de la fiche (le Penetration
+  Set passe par la saisie). Sets whitelist combat (Revenge/Patience/
+  Pulverization/Swiftness/Weakness/Augmentation), talisman réduit au Rogue's
+  Charm, armes/accessoires filtrés par classe, chain/dual hors calc, quirks
+  OFFENSIFS de compte en réglage localStorage (onglet Settings). Les arbres de
+  quirks du guide sont devenus un module partagé `src/components/quirks/`.
+  Presets de cible : TOUS les donjons peuplés d'`encounters.json` (1671 cibles,
+  13 modes, monad exclu) — payload ~730 Ko à optimiser quand le besoin sera figé.
+
 - **Passifs +10 FANTÔMES purgés (talismans Adventurer + EE Eclipse)** — Sharp &
   Powerful Adventurer's Talisman affichaient un passif « +10 : Recovers [Value]
   Action Points when using an ultimate » — placeholder `[Value]` non substitué.

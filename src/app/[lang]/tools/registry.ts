@@ -26,6 +26,9 @@ export const TOOL_COMPONENTS: Record<
   'progress-tracker': () => import('./_contents/progress-tracker'),
   'tier-list-maker': () => import('./_contents/tier-list-maker'),
   'team-planner': () => import('./_contents/team-planner'),
+  // Phase UI seule (statut `unlisted` : routable pour revue, absent de la
+  // landing) — passera `available` quand le moteur de calcul sera branché.
+  'damage-calculator': () => import('./_contents/damage-calculator'),
   // ABSENT VOLONTAIREMENT : `event`. L'outil a des sous-pages
   // (`/event/<slug>`), donc sa propre route `[lang]/event/page.tsx` — l'inscrire
   // ici en plus créerait DEUX routes pour `/event` (erreur de build). Son

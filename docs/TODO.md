@@ -28,10 +28,11 @@
 > consommateur fait désormais échouer `locales/keys.test.ts`.)
 
 - [ ] **`/tools` — RESTE 1 sous-outil : damage-calculator** — namespaces `tools.*`.
-      CHANTIER EN COURS au 26/07, pas un terrain vierge : du travail non committé
-      existe dans l'arbre (`tools/_contents/damage-calculator/`, plus
-      `tools/registry.ts` et `data/curated/tools/_index.json` modifiés) et un
-      worktree d'agent en contient aussi. À ÉVALUER avant de repartir de zéro.
+      UI POSÉE et committée le 26/07 (page `unlisted`, boucle de revue Sevih en
+      cours — cf. DONE). RESTE : le MOTEUR — extracteurs damage
+      (`docs/specs/damage-report-inputs.md` § 6) puis branchement du rapport ;
+      `pnpm images` AVANT merge (icône `CM_Damage_Calc` pas encore sur R2) ;
+      passage `unlisted` → `available` quand le rapport calcule.
       ⚠ SURTOUT NE PAS se baser sur la V2 pour cet outil (décision Sevih 22/07 :
       le calculateur V2 est foireux) — exception à la règle « V2 = oracle »,
       conception V3 native.
