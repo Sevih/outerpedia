@@ -16,7 +16,7 @@
  * `prettier --check`. On retient l'indenté : un champ par ligne → le diff git
  * d'une entité se lit ligne à ligne, ce que la revue de `promote` demande.
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { format, resolveConfig, type Options } from 'prettier';
 
@@ -65,7 +65,21 @@ export async function formatJson(data: unknown): Promise<string> {
   return format(JSON.stringify(data, null, 2) + '\n', await config());
 }
 
-/** Écrit un JSON au format canonique. `path` est absolu ou relatif au cwd. */
+/**
+ * Écrit un JSON au format canonique, de façon ATOMIQUE. `path` est absolu ou
+ * relatif au cwd.
+ *
+ * On formate AVANT d'ouvrir la fenêtre d'écriture, puis on écrit à côté et on
+ * RENOMME (atomique sur le même FS — MoveFileEx sous Windows écrase la cible).
+ * Sinon `writeFileSync` tronque-puis-écrit : une interruption (Ctrl-C, crash,
+ * redémarrage du serveur dev) laisserait un JSON tronqué que `readCuratedJson`
+ * refuse ensuite (il LÈVE, cf. plus bas) → `pnpm dev` et le build BLOQUÉS
+ * jusqu'à réparation manuelle. Ce seul point couvre les ~53 sites d'écriture des
+ * stores curés (audit F1, socle partagé admin ↔ datagen).
+ */
 export async function writeJson(path: string, data: unknown): Promise<void> {
-  writeFileSync(path, await formatJson(data));
+  const body = await formatJson(data);
+  const tmp = `${path}.tmp`;
+  writeFileSync(tmp, body);
+  renameSync(tmp, path);
 }
