@@ -6,6 +6,16 @@
 
 ## 2026-07-26
 
+- **E5 : collision de basename au flatten audio rendue VISIBLE** — `extract-audio.ts`
+  remonte les WAV nichés à plat, mais si deux partagent le basename, le second
+  restait niché et le `readdirSync` NON récursif l'ignorait → piste perdue **sans
+  la moindre trace**. Rare (noms BGM uniques en pratique) mais silencieux. Ajout
+  d'un `console.warn` sur la collision (coût nul, comportement inchangé : on
+  n'écrase toujours pas l'existant). Ferme le dernier quick-win ouvert du volet
+  extraction —
+  E8 (sécurité shell) et X4/X5 (diff négligeable, clés inattendues assumées) sont
+  « rien à faire » par verdict d'audit. TSC datagen vert.
+
 - **F7 : plus de perte d'écriture entre deux onglets** (`3d92d9f`) — le bug a été
   MESURÉ avant d'être corrigé, et il était réel : deux `upsertCharacterCurated`
   concurrents sur deux persos DIFFÉRENTS ne laissaient qu'une seule entrée dans

@@ -99,7 +99,15 @@ function extractWavs(): number {
   });
   for (const p of wavs) {
     const flat = resolve(WAV_TMP, parsePath(p).base);
-    if (p !== flat && !existsSync(flat)) renameSync(p, flat);
+    if (p === flat) continue; // déjà à plat
+    if (existsSync(flat)) {
+      // Collision de basename (audit E5) : un second WAV niché au même nom reste
+      // niché, et le `readdirSync` NON récursif ci-dessous l'ignore → piste perdue.
+      // Rare (les noms BGM sont uniques en pratique) mais SILENCIEUX sinon.
+      console.warn(`⚠ WAV en collision de nom, piste ignorée : ${p} (déjà à plat : ${flat})`);
+      continue;
+    }
+    renameSync(p, flat);
   }
   return readdirSync(WAV_TMP).filter((f) => f.toLowerCase().endsWith('.wav')).length;
 }

@@ -76,9 +76,12 @@
 
 ### 👤 Claude — datagen / extraction / socle
 
-> _Backlog d'audit datagen CLOS (E1–E8, X1–X6, + F11 côté `datagen/`). E7 tranché
-> le 26/07 : les 12 motifs inertes de la blocklist wallpapers sont GARDÉS
-> (assurance, cf. DONE + commentaire en tête de `EXCLUDE_PATTERNS`). Rien d'ouvert._
+> _Backlog d'audit datagen CLOS (+ F11 côté `datagen/`). Traités : E1–E7, X1–X3.
+> « Rien à faire » par verdict d'audit : E8 (sécurité shell théorique), X4 (diff
+> négligeable), X5 (clés inattendues, choix assumé), X6 (sain). E7 tranché le 26/07 :
+> les 12 motifs inertes de la blocklist wallpapers sont GARDÉS (assurance, cf. DONE
+>
+> - commentaire en tête de `EXCLUDE_PATTERNS`). Rien d'ouvert._
 
 ### 🤖 Worker — panneau admin (`src/**/admin`)
 
