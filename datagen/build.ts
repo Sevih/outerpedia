@@ -55,6 +55,7 @@ import { buildGameVersion } from './generators/game-version';
 import { buildBgmMapping } from './generators/bgm-mapping';
 import { buildWallpapers } from './generators/wallpapers';
 import { buildCharactersList } from './generators/characters-list';
+import { buildDamageScaling } from './generators/damage-scaling';
 import { buildSkills } from './generators/skills';
 import { buildUnlockContent } from './generators/unlock-content';
 import { buildRecruit } from './generators/recruit';
@@ -197,6 +198,9 @@ async function main(): Promise<void> {
   await writeJson('monsters.json', monstersFile);
   await writeJson('transcend.json', transcendFile);
   await writeJson('skills.json', skillsFile);
+  // Stats qui pilotent les dégâts de chaque perso (swap d'ATK, scalings
+  // secondaires, DoT) — le damage calculator ne demande que celles-là.
+  await writeJson('damage-scaling.json', buildDamageScaling());
   await writeJson('monster-skills.json', monsterSkillsFile);
   // Dictionnaire des donjons référencés par les `spawns` des monstres (la
   // localisation elle-même vit sur chaque entité monstre).

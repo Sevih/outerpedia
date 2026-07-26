@@ -48,6 +48,7 @@ export type {
   SetComboPiece,
 } from '../curated/gear-reco';
 export type { Skill, SkillLevel } from '../generators/skills';
+export type { DamageScaling, DamageScalingFile } from '../generators/damage-scaling';
 export type { CharacterEffects, CharactersListData } from '../generators/characters-list';
 export type { Item } from '../generators/items';
 export type { Goods } from '../generators/goods';

@@ -1,0 +1,209 @@
+{
+  "2000003": {
+    "bonusStats": ["speed"]
+  },
+  "2000004": {
+    "dot": true
+  },
+  "2000008": {
+    "bonusStats": ["hp"]
+  },
+  "2000010": {
+    "bonusStats": ["def"]
+  },
+  "2000014": {
+    "dot": true
+  },
+  "2000015": {
+    "dot": true
+  },
+  "2000016": {
+    "bonusStats": ["def"]
+  },
+  "2000018": {
+    "dot": true
+  },
+  "2000021": {
+    "bonusStats": ["def"]
+  },
+  "2000024": {
+    "lostHpDmg": true
+  },
+  "2000025": {
+    "dot": true
+  },
+  "2000026": {
+    "bonusStats": ["hp"]
+  },
+  "2000029": {
+    "dot": true
+  },
+  "2000031": {
+    "bonusStats": ["speed"]
+  },
+  "2000032": {
+    "dot": true
+  },
+  "2000034": {
+    "lostHpDmg": true
+  },
+  "2000035": {
+    "dot": true
+  },
+  "2000039": {
+    "bonusStats": ["speed"]
+  },
+  "2000041": {
+    "bonusStats": ["speed"]
+  },
+  "2000042": {
+    "bonusStats": ["def"]
+  },
+  "2000043": {
+    "dot": true
+  },
+  "2000049": {
+    "lostHpDmg": true,
+    "dot": true
+  },
+  "2000051": {
+    "bonusStats": ["hp"]
+  },
+  "2000052": {
+    "dot": true
+  },
+  "2000053": {
+    "bonusStats": ["hp"]
+  },
+  "2000056": {
+    "dot": true
+  },
+  "2000057": {
+    "bonusStats": ["hp"]
+  },
+  "2000058": {
+    "dot": true
+  },
+  "2000060": {
+    "bonusStats": ["speed"]
+  },
+  "2000062": {
+    "dot": true
+  },
+  "2000063": {
+    "attackStat": "hp",
+    "lostHpDmg": true
+  },
+  "2000067": {
+    "bonusStats": ["critical_rate"]
+  },
+  "2000069": {
+    "lostHpDmg": true
+  },
+  "2000071": {
+    "attackStat": "def",
+    "lostHpDmg": true
+  },
+  "2000072": {
+    "bonusStats": ["hp"],
+    "lostHpDmg": true
+  },
+  "2000073": {
+    "dot": true
+  },
+  "2000077": {
+    "attackStat": "def"
+  },
+  "2000079": {
+    "bonusStats": ["get_gold_rate"]
+  },
+  "2000080": {
+    "attackStat": "hp"
+  },
+  "2000081": {
+    "dot": true
+  },
+  "2000082": {
+    "dot": true
+  },
+  "2000086": {
+    "dot": true
+  },
+  "2000088": {
+    "attackStat": "hp"
+  },
+  "2000089": {
+    "attackStat": "def"
+  },
+  "2000091": {
+    "attackStat": "hp",
+    "bonusStats": ["buff_chance"]
+  },
+  "2000092": {
+    "dot": true
+  },
+  "2000093": {
+    "bonusStats": ["speed"]
+  },
+  "2000094": {
+    "dot": true
+  },
+  "2000095": {
+    "dot": true
+  },
+  "2000097": {
+    "bonusStats": ["speed"]
+  },
+  "2000099": {
+    "attackStat": "hp"
+  },
+  "2000102": {
+    "attackStat": "hp"
+  },
+  "2000106": {
+    "attackStat": "hp"
+  },
+  "2000107": {
+    "dot": true
+  },
+  "2000108": {
+    "dot": true
+  },
+  "2000109": {
+    "attackStat": "hp",
+    "dot": true
+  },
+  "2000112": {
+    "attackStat": "def"
+  },
+  "2000114": {
+    "attackStat": "hp"
+  },
+  "2000116": {
+    "attackStat": "def"
+  },
+  "2000117": {
+    "dot": true
+  },
+  "2000121": {
+    "bonusStats": ["speed"]
+  },
+  "2400015": {
+    "attackStat": "hp"
+  },
+  "2700003": {
+    "bonusStats": ["speed"]
+  },
+  "2700037": {
+    "attackStat": "hp"
+  },
+  "2700043": {
+    "dot": true
+  },
+  "2700056": {
+    "dot": true
+  },
+  "2700070": {
+    "attackStat": "def"
+  }
+}
