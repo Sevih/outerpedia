@@ -6,6 +6,46 @@
 
 ## 2026-07-26
 
+- **F2 (2/2) : la frontière `admin/` devient BLOQUANTE, dans les deux sens** —
+  arbitrage tranché avec Sevih, et ni l'une ni l'autre des deux options de
+  l'audit : « documenter » ne bloque rien (un commentaire en tête de dossier
+  vieillit, et le jour où il mentira sera précisément le jour de l'incident), et
+  l'extraction complète vers `lib/editorial/` demandait une fermeture transitive
+  que je ne pouvais pas chiffrer honnêtement d'avance.
+  TROISIÈME VOIE : `no-restricted-imports` avec liste blanche — coût de
+  « documenter », mais la liste devient EXÉCUTABLE, donc incapable de mentir. Le
+  repo faisait déjà ça pour l'architecture (tokens de couleur, et
+  `react-hooks/static-components` qui a refusé un `ShopNoteRow` le 24/07) ; c'est
+  son idiome, pas une nouveauté.
+  RÈGLE 1, vers l'extérieur : hors `admin/` et hors `.dev.*`, seuls 6 modules
+  `admin/` sont importables (`ADMIN_SHIPS_TO_PROD`). `allowTypeImports` couvre
+  gratuitement les 4 traversées en `import type`, qui ne peuvent rien embarquer.
+  RÈGLE 2, vers l'intérieur — ET C'EST ELLE QUI AURAIT ATTRAPÉ LE VRAI BUG : la
+  règle 1 ne voit rien de ce qui se passe DANS `admin/`, or le fil trouvé ce jour
+  était interne. Les deux dossiers de briques partagées (`editorial/`,
+  `premium-limited/`) portent donc l'invariant « tout ce qui vit ici ship », et il
+  leur est interdit d'importer un secret ou un module dont la sûreté tient à
+  `IS_DEV`. `*-actions` étant la convention de nommage des server actions, un
+  nouveau module d'actions est couvert d'office ; seule exception,
+  `inline-preview-actions`, délibérément publique.
+  PIÈGE GITIGNORE, trouvé en le mesurant : une exception `!` ne réinclut PAS un
+  fichier dont un dossier parent est matché. `@/components/admin/**` matchait le
+  dossier `editorial`, donc les deux outils publics nichés restaient bloqués
+  MALGRÉ leur présence dans la liste. Corrigé en ne matchant que des FICHIERS
+  (`*/*`, jamais de motif sur un ancêtre) — documenté dans la config, c'est le
+  genre de subtilité qui se re-perd.
+  LES DEUX RÈGLES SONT PASSÉES AU CANARI, parce qu'un garde-fou qui ne se
+  déclenche pas est pire que pas de garde-fou : vérifié qu'elles refusent bien une
+  vraie violation et laissent passer l'exception assumée.
+  `premium-limited-translate.ts` remonté HORS de `premium-limited/` : l'y laisser
+  aurait obligé à percer une exception dans la règle 2 dès le premier jour, donc à
+  rendre l'invariant du dossier faux immédiatement.
+  Enfin `lib/data/item-catalog.ts` ne s'annonce plus « Vue ADMIN » alors que la
+  home publique le consomme — l'étiquette qui invite à y glisser une hypothèse
+  dev-only. eslint, tsc et prettier verts, 1214 tests.
+  ⚠ `docs/TODO.md` NON touché : il portait une note non committée de Sevih (descs
+  buggées des talismans Adventurer's). La ligne F2 y reste donc à retirer.
+
 - **F2 (1/2) : les pages `/contribute` publiques ne tirent plus la couche de
   traduction** — en rouvrant la donnée de F2 avant d'arbitrer, la frontière s'est
   révélée plus PETITE que l'audit le disait : sur les 13 imports hors-admin, **4

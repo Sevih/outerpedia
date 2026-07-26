@@ -1,8 +1,16 @@
 /**
- * Vue ADMIN du catalogue d'items : le catalogue SERVI (`items.json`, déjà bakée
- * items + monnaies + costumes + curé committé) + un overlay LIVE de
+ * Catalogue d'items : le catalogue SERVI (`items.json`, déjà bakée items +
+ * monnaies + costumes + curé committé) + un overlay LIVE de
  * `data/curated/items.json` pour un retour instantané avant `datagen:regen`.
  * Source unique pour le picker de rewards ET le navigateur d'items.
+ *
+ * ⚠ CE MODULE SHIPPE EN PROD (audit F2). Il s'annonçait « Vue ADMIN » alors que
+ * la home publique le consomme via `lib/home.ts` — exactement le genre
+ * d'étiquette qui fait qu'on y ajoute un jour une hypothèse dev-only sans y
+ * penser. L'overlay lit donc le disque EN PRODUCTION : c'est ASSUMÉ et ça
+ * fonctionne (`data/curated/**` est tracé dans l'image, cf. `next.config.ts`, et
+ * `loadItemCurated` rend un objet vide si le fichier manque), mais ça devait
+ * cesser de se lire comme du code dev-only.
  */
 import type { CatalogEntry, LangDict } from '@contracts';
 import { getCatalog, type ItemOption } from './items';

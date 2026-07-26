@@ -29,7 +29,7 @@ import {
 } from '@/components/admin/premium-limited/PremiumLimitedParts';
 // Traduction à part : elle porte les clés API, donc elle ne peut PAS vivre dans
 // le module partagé avec les outils publics (audit F2).
-import { translateReviews } from '@/components/admin/premium-limited/premium-translate';
+import { translateReviews } from '@/components/admin/premium-limited-translate';
 import {
   makeContribution,
   parseContribution,

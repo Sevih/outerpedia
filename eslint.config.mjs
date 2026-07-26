@@ -21,6 +21,35 @@ const VIVID_COLOR =
 const VIVID_COLOR_MSG =
   'Couleur vive en dur interdite dans les guides (déjà tokenisés). Utilise un token : --cat-*/--ed-*/--monad-*/--select/--danger-*/--stat… (cf. src/app/globals.css & /dev/tokens).';
 
+// FRONTIÈRE `admin/` (audit F2). Le chemin `admin/` NE garantit PAS qu'un module
+// reste en dev : **6 modules** sont importés EN VALEUR depuis du code servi au
+// public (les outils de contribution réutilisent volontairement les briques
+// éditoriales, et la home lit l'overlay du catalogue d'items), plus 2 en type
+// seul. Cette liste est la seule exception, et elle est BLOQUANTE — ce qui la
+// rend incapable de vieillir en mentant, contrairement à un commentaire en tête
+// de dossier.
+//
+// Les `import type` sont autorisés d'office (`allowTypeImports`) : effacés à la
+// compilation, ils ne peuvent rien embarquer.
+//
+// ⚠ AVANT D'AJOUTER UNE ENTRÉE : ce module lit-il un secret ? sa sûreté repose-
+// t-elle sur `IS_DEV` ? Si oui, sors la brique partagée dans un module neutre au
+// lieu d'élargir la liste — c'est exactement ce qui a été fait pour
+// `translateReviews` (elle tirait DEEPL_API_KEY / ANTHROPIC_API_KEY dans le
+// bundle des pages `/contribute`), cf. `premium-limited/premium-translate.ts`.
+const ADMIN_SHIPS_TO_PROD = [
+  '@/lib/admin/guard', // IS_DEV — simple constante (pages event)
+  '@/lib/admin/inline-refs', // refs inline des outils publics de contribution
+  '@/lib/admin/general-guide-store', // premiumLimitedRoster (/contribute/premium-reviews)
+  '@/lib/admin/item-curated-store', // loadItemCurated — overlay catalogue, lu par la home
+  '@/components/admin/editorial/EditorialPublicTool',
+  '@/components/admin/premium-limited/PremiumReviewsPublicTool',
+];
+const ADMIN_BOUNDARY_MSG =
+  "Frontière admin/ : ce module n'est pas censé partir en production. Les exceptions assumées sont listées dans ADMIN_SHIPS_TO_PROD (eslint.config.mjs) — avant d'y ajouter la tienne, vérifie qu'elle ne porte ni secret ni garde IS_DEV, sinon extrais la brique partagée.";
+const SHARED_BRICK_MSG =
+  "Ce dossier de briques est PARTAGÉ avec les outils publics de contribution : tout ce qui s'y trouve part dans le bundle de production. Interdit d'y importer un module porteur de secret (server actions `*-actions`) ou dont la sûreté repose sur IS_DEV. Sors la fonction concernée dans un module admin-only, hors de ce dossier (cf. premium-limited-translate.ts).";
+
 // Note vs V2: on NE désactive PAS react-hooks/set-state-in-effect — on garde la
 // règle active et on corrige les vrais cas au portage (faire BIEN).
 const eslintConfig = defineConfig([
@@ -88,6 +117,79 @@ const eslintConfig = defineConfig([
     ],
     rules: {
       'no-restricted-syntax': 'off',
+    },
+  },
+  {
+    // Garde-fou de la frontière `admin/` (cf. ADMIN_SHIPS_TO_PROD ci-dessus).
+    // Exemptés : `admin/` lui-même, et les `.dev.*` — `pageExtensions`
+    // (next.config.ts) ne les reconnaît QU'en développement, ils ne shippent
+    // donc jamais, où qu'ils vivent. C'est bien « ce qui ship » qu'on garde, pas
+    // une convention de chemin.
+    files: ['src/**/*.{ts,tsx}'],
+    ignores: ['src/**/admin/**', 'src/**/*.dev.{ts,tsx}'],
+    rules: {
+      '@typescript-eslint/no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              // Ordre gitignore : le large d'abord, les exceptions `!` ensuite.
+              // ⚠ PAS de `**` ici : en sémantique gitignore on ne réinclut pas un
+              // fichier situé dans un dossier exclu. `*` ne traversant pas `/`,
+              // ces motifs excluent les FICHIERS un par un — et une exception `!`
+              // sur un fichier, elle, fonctionne (vérifié : sans ça, les deux
+              // outils publics nichés restaient bloqués malgré la liste).
+              group: [
+                '@/lib/admin/*',
+                '@/components/admin/*/*',
+                ...ADMIN_SHIPS_TO_PROD.map((m) => `!${m}`),
+              ],
+              allowTypeImports: true,
+              message: ADMIN_BOUNDARY_MSG,
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    // DEUXIÈME SENS DE LA FRONTIÈRE — et c'est celui qui aurait attrapé le vrai
+    // incident. Le garde-fou ci-dessus regarde « qui importe `admin/` » ; il ne
+    // voit RIEN de ce qui se passe à l'intérieur. Or le fil trouvé le 26/07 était
+    // interne : `premium-limited/PremiumLimitedParts` (brique partagée avec les
+    // outils publics) importait `translate-actions` et embarquait ainsi
+    // DEEPL_API_KEY / ANTHROPIC_API_KEY dans le graphe des pages `/contribute`.
+    //
+    // Ces deux dossiers portent donc un INVARIANT : tout ce qui y vit part en
+    // prod. On y interdit l'import d'un module porteur de secret ou dont la
+    // sûreté repose sur `IS_DEV`. `*-actions` étant la convention de nommage des
+    // server actions du repo, un nouveau module d'actions est couvert d'office.
+    //
+    // Seule exception, `inline-preview-actions` : délibérément NON gardée, en
+    // lecture seule sur des données de jeu publiques, et nécessaire aux outils
+    // publics (décision documentée en tête de ce fichier-là).
+    files: [
+      'src/components/admin/editorial/**/*.{ts,tsx}',
+      'src/components/admin/premium-limited/**/*.{ts,tsx}',
+    ],
+    rules: {
+      '@typescript-eslint/no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: [
+                '@/lib/admin/*-actions',
+                '!@/lib/admin/inline-preview-actions',
+                '@/lib/admin/guard',
+                '@/lib/admin/useAutoTranslate',
+              ],
+              allowTypeImports: true,
+              message: SHARED_BRICK_MSG,
+            },
+          ],
+        },
+      ],
     },
   },
   // `.unlighthouse/**` : rapports d'audit générés (`pnpm seo:audit`), bundles JS

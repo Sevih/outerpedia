@@ -16,6 +16,13 @@
  *
  * Seul appelant : `PremiumLimitedEditor` (dev). Le jour où un deuxième apparaît,
  * vérifier qu'il n'est pas servi en prod.
+ *
+ * ⚠ ET C'EST POUR ÇA QUE CE FICHIER EST ICI, et non dans `premium-limited/` avec
+ * les briques : ce dossier-là a un invariant, « tout ce qui y vit ship en prod »,
+ * et le garde-fou eslint l'applique en interdisant aux deux dossiers de briques
+ * partagées (`editorial/`, `premium-limited/`) d'importer un secret. Garder ce
+ * fichier dedans aurait obligé à y percer une exception — donc à rendre
+ * l'invariant faux dès le premier jour.
  */
 import type { ReviewEntryData, ReviewsBundle } from '@/lib/admin/general-guide-store';
 import { autoTranslate } from '@/lib/admin/translate-actions';

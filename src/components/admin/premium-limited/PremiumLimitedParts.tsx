@@ -17,10 +17,10 @@
  * ⚠ CE MODULE SHIPPE EN PROD malgré son chemin `admin/` (audit F2) : il part
  * dans le bundle client des pages `/contribute`. RÈGLE — rien ici ne doit
  * importer un module qui porte un secret ou dont la sûreté repose sur `IS_DEV`.
- * C'est pour ça que `translateReviews` a été sortie vers `premium-translate.ts`
- * (elle tirait `translate-actions` et ses deux clés API). Le garde-fou eslint
- * `no-restricted-imports` liste les modules `lib/admin` autorisés en prod ;
- * si tu dois l'y ajouter, demande-toi d'abord si ça ship.
+ * C'est pour ça que `translateReviews` a été sortie vers
+ * `../premium-limited-translate.ts` (elle tirait `translate-actions` et ses deux
+ * clés API). Le garde-fou eslint applique la règle sur TOUT ce dossier — l'ajout
+ * d'un import de secret ici est BLOQUANT, pas seulement déconseillé.
  */
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import type {
