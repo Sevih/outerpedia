@@ -6,6 +6,25 @@
 
 ## 2026-07-26
 
+- **F6 : confinement des chemins d'écriture de guides** (`guide-store.ts`).
+  `guideDir` faisait `resolve(CONTENTS_DIR, category, slug)` sans vérifier le
+  périmètre — or `resolve()` normalise les `..` et le `slug` vient de l'URL sans
+  validation. Confinement rendu STRUCTUREL : `guideDir` renvoie `null` hors
+  périmètre, il FAUT donc traiter le cas (impossible d'oublier la garde à un futur
+  appel). Idiome aligné sur `src/app/images/[...path]/route.dev.ts`. `fromKey`
+  (clé de version, servait à choisir le dossier source à recopier) validé par la
+  même regex `YYYY-MM` que `newKey`.
+  DEUX DÉFAUTS ADJACENTS trouvés en instrumentant : (1) `addGuideVersion` ne
+  validait PAS la catégorie (contrairement à `saveGuideDraft`) → une catégorie
+  inventée passait le confinement puis `mkdirSync` créait un dossier parasite que
+  le scanner de guides parcourt ; corrigé par liste blanche `guideSpec` + exigence
+  `spec.versioned` ; (2) le dossier cible était créé AVANT de vérifier la version
+  source → un `fromKey` introuvable laissait un `versions/<clé>/` vide derrière lui.
+  Nouveau `guide-store.test.ts` (6 cas) — il n'exerce QUE les chemins de refus,
+  donc n'écrit rien ; le piège inverse est documenté en tête du fichier (ma
+  première version passait un slug VALIDE et a réellement créé un dossier dans
+  l'arbre du site, supprimé depuis).
+
 - **F1, complément : temporaire à nom UNIQUE + nettoyage sur échec** (`writeJson`).
   L'écriture atomique posée plus tôt utilisait un temporaire à nom FIXE
   (`<path>.tmp`). Constat mesuré en écrivant le test : ce nom fixe était **déjà

@@ -13,7 +13,7 @@
  * sur la donnée réelle) ; le build la revérifie au rendu.
  */
 import { copyFileSync, existsSync, mkdirSync, rmSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { resolve, sep } from 'node:path';
 import { writeJson } from '@datagen/lib/json';
 import { getGuide, readGuideFile, readGuideVersionFile } from '@/lib/data/guides';
 import {
@@ -37,7 +37,26 @@ const CONTENTS_DIR = resolve(process.cwd(), 'src/app/[lang]/guides/_contents');
 const VERSION_KEY_RE = /^\d{4}-(0[1-9]|1[0-2])$/;
 const VERSION_FILES = ['config.json', 'tips.json', 'recommended.json', 'teams.json'] as const;
 
-const guideDir = (category: string, slug: string) => resolve(CONTENTS_DIR, category, slug);
+/**
+ * Dossier d'un guide, CONFINÉ sous `CONTENTS_DIR` — `null` si le couple
+ * catégorie/slug s'en échappe.
+ *
+ * `resolve()` normalise les `..` : un `slug` forgé (jamais validé, il vient de
+ * l'URL) désignait donc n'importe quel dossier du disque, où l'on se serait fait
+ * écrire un `strings.json`. La `category`, elle, est déjà en liste blanche
+ * (`guideSpec`). Confinement rendu STRUCTUREL — impossible d'oublier la garde à
+ * un futur appel, puisqu'il faut traiter le `null`. Même idiome que la route
+ * d'images (`src/app/images/[...path]/route.dev.ts`).
+ */
+const guideDir = (category: string, slug: string): string | null => {
+  const full = resolve(CONTENTS_DIR, category, slug);
+  return full.startsWith(CONTENTS_DIR + sep) ? full : null;
+};
+
+/** Erreur commune d'un chemin de guide hors périmètre. */
+const outsideError = (category: string, slug: string): string[] => [
+  `Invalid guide path : ${category}/${slug}`,
+];
 
 interface GuideStrings {
   intro?: { en: string } & Record<string, string>;
@@ -109,7 +128,9 @@ async function patchGuideMeta(
   const empty = value === undefined || (Array.isArray(value) && value.length === 0);
   if (empty) delete meta[key];
   else meta[key] = value;
-  await writeJson(resolve(guideDir(category, slug), 'meta.json'), meta);
+  const dir = guideDir(category, slug);
+  if (!dir) return; // hors périmètre (le guide existe pourtant : `getGuide` a répondu)
+  await writeJson(resolve(dir, 'meta.json'), meta);
 }
 
 /** Valide puis écrit un guide. Renvoie les écarts bloquants (vide = OK). */
@@ -125,6 +146,7 @@ export async function saveGuideDraft(
   if (spec.introRequired && !draft.intro.en?.trim())
     errors.push('The guide intro (EN) is required.');
   const base = guideDir(category, slug);
+  if (!base) return outsideError(category, slug);
   if (!existsSync(base)) return [`Guide folder missing : ${category}/${slug}`];
 
   if (spec.versioned) {
@@ -182,16 +204,32 @@ export function addGuideVersion(
   newKey: string,
   fromKey: string,
 ): string[] {
+  // Catégorie en LISTE BLANCHE, comme `saveGuideDraft` : sans elle, le
+  // `mkdirSync` plus bas créait un dossier parasite pour n'importe quelle
+  // catégorie inventée — que le scanner de guides parcourt ensuite. Et cette
+  // route n'a de sens que pour une catégorie VERSIONNÉE.
+  const spec = guideSpec(category);
+  if (!spec) return [`Non-editable category : ${category}`];
+  if (!spec.versioned) return [`Category ${category} is not versioned.`];
   if (!VERSION_KEY_RE.test(newKey))
     return [`Version key expected in YYYY-MM format (received “${newKey}”).`];
+  // `fromKey` est une clé de version comme `newKey` : même validation. Elle ne
+  // servait qu'en lecture (dossier source à copier), mais non validée elle
+  // désignait un dossier arbitraire dont on recopiait les `*.json` dans le guide.
+  if (fromKey && !VERSION_KEY_RE.test(fromKey))
+    return [`Source version key expected in YYYY-MM format (received “${fromKey}”).`];
   const base = guideDir(category, slug);
+  if (!base) return outsideError(category, slug);
   const dst = resolve(base, 'versions', newKey);
   if (existsSync(dst)) return [`Version ${newKey} already exists.`];
 
+  // Source vérifiée AVANT de créer la cible : sinon un `fromKey` introuvable
+  // laissait derrière lui un dossier de version vide, que le scanner voit.
+  const srcDir = fromKey ? resolve(base, 'versions', fromKey) : null;
+  if (srcDir && !existsSync(srcDir)) return [`Source version not found : ${fromKey}.`];
+
   mkdirSync(dst, { recursive: true });
-  if (fromKey) {
-    const srcDir = resolve(base, 'versions', fromKey);
-    if (!existsSync(srcDir)) return [`Source version not found : ${fromKey}.`];
+  if (srcDir) {
     for (const file of [...VERSION_FILES, 'version.json']) {
       const sp = resolve(srcDir, file);
       if (existsSync(sp)) copyFileSync(sp, resolve(dst, file));
