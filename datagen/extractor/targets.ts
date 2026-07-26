@@ -67,18 +67,43 @@ function itemCatalog(): Record<string, unknown> {
   return itemCache.data;
 }
 
+/**
+ * `buildCharacters`/`buildMonsters` reconstruisent TOUTE l'entité en mémoire
+ * (≈15 tables, `prepare` sur chaque ligne, résolution buffs/textes/pool d'images) :
+ * lourd, et la revue enchaîne plusieurs appels par cible et par session
+ * (`reviewAll`, puis `reviewTarget`/`acceptTypos`…). Mémoïsé sur les tables comme
+ * `equipment` — un refresh les réécrit TOUTES (sentinelle `TextSystem`). Ni l'un
+ * ni l'autre ne lit de curé éditable (tout vient de `.gamedata`) → rien à ajouter
+ * à l'empreinte, contrairement à `itemCatalog`. Le résultat est traité en LECTURE
+ * SEULE par la revue, comme les caches equipment/item existants.
+ */
+let charCache: { stamp: string; data: ReturnType<typeof buildCharacters> } | undefined;
+function characters(): ReturnType<typeof buildCharacters> {
+  const stamp = tablesStamp(['TextSystem']);
+  if (!charCache || charCache.stamp !== stamp) charCache = { stamp, data: buildCharacters() };
+  return charCache.data;
+}
+
+let monsterCache: { stamp: string; data: ReturnType<typeof buildMonsters> } | undefined;
+function monsters(): ReturnType<typeof buildMonsters> {
+  const stamp = tablesStamp(['TextSystem']);
+  if (!monsterCache || monsterCache.stamp !== stamp)
+    monsterCache = { stamp, data: buildMonsters() };
+  return monsterCache.data;
+}
+
 export const TARGETS: GeneratedTarget[] = [
   {
     id: 'character',
     label: 'Personnages',
     file: 'characters.json',
-    build: () => buildCharacters().characters as unknown as Record<string, unknown>,
+    build: () => characters().characters as unknown as Record<string, unknown>,
   },
   {
     id: 'monster',
     label: 'Monstres',
     file: 'monsters.json',
-    build: () => buildMonsters().monsters as unknown as Record<string, unknown>,
+    build: () => monsters().monsters as unknown as Record<string, unknown>,
   },
   {
     id: 'effect',
