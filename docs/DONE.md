@@ -6,6 +6,66 @@
 
 ## 2026-07-26
 
+- **Raccourcis `{SK/…}` : `Passive` recadré + `Dual` ajouté + passif Core Fusion
+  affiché.** `SKILL_SHORTHAND` mélangeait deux choses : `Passive → unique_passive`,
+  or `unique_passive` n'est qu'un marqueur « Burst Level 2 Unlocked » (tout le
+  roster) — pas un passif. Le VRAI passif ne vit que sur les 6 entités core-fusion
+  (`2700xxx`, tag `core-fusion`, affichées « Core Fusion X ») dans leur
+  `fusion_passive` (« Core-Fused Passive »). Nouvelle sémantique : `Passive →
+fusion_passive` (rouge sur un perso normal — voulu), `Chain`/`Dual` visent le
+  même `chain_passive` mais `skillDesc` n'en garde que LEUR moitié
+  (`splitChainDual`) ET le libellé du chip devient le TITRE de section coloré du
+  jeu (« Chain Companion Effect », « Dual Attack Effect ») au lieu du nom générique
+  « Chain Passive » — sinon Chain et Dual s'affichaient identiques. La fiche perso
+  ne rendait jamais `fusion_passive` : ajout
+  d'une carte de skill dédiée (après S1/S2/S3, via le `SkillCard` existant qui
+  gère nativement une carte sans cooldown/cible/burst) quand un `fusion_passive`
+  non vide existe. Contenu curé rectifié : les 5 `{SK/Bryn|Passive}` (Bryn n'est
+  pas core-fusion ; le texte parlait de son effet Chain Starter) → `{SK/Bryn|Chain}`.
+  Miroir aperçu admin (`resolveSegment`) tenu ; banc `/dev/parse-text` enrichi
+  (Chain/Dual + Passive core-fusion + le cas rouge). tsc + eslint verts.
+
+- **Accueil `/admin` : la matrice devient une INBOX priorisée** (dernier des trois
+  items du chantier « panneau admin » figé le 07/07 — la section est close). La
+  home affichait une matrice entité × fonction dont la colonne « Extract »
+  redisait EXACTEMENT les badges de la sidebar (mêmes chiffres, mêmes liens), en
+  dix lignes dont neuf « ✓ ». Remplacée par une liste de ce qui DEMANDE une
+  action, triée par urgence, tous signaux confondus : tag éditorial mort (rang 0
+  — casse le rendu et bloque `tag-control.test`), entité `diff`/`removed` (rang 1
+  — le site sert du faux), entité `new` (rang 2), asset manquant (rang 3), `typo`
+  seul (rang 4, cosmétique). Rien à signaler → « Nothing to process » : l'écran
+  vide DIT quelque chose. La couverture curée (info absente de la sidebar, jamais
+  une TODO) descend en section « Editorial coverage ».
+  DUPLICATION RÉGLÉE À LA SOURCE, au-delà du visuel : `src/lib/admin/admin-inbox.ts`
+  porte désormais la liste des entités d'extraction (sidebar ET home en tenaient
+  chacune une copie — celle de la home avait déjà dérivé, Monstre en 3e au lieu
+  de l'avant-dernier) et le calcul de revue, mémoïsé à la requête via `cache()`
+  de React (motif déjà utilisé par `i18n/server.ts`). Le moteur coûte ~1,3 s
+  MESURÉ : layout et page le lançaient chacun de leur côté, soit ~2,6 s par
+  chargement de `/admin` — un seul appel les sert tous les deux (dédup RSC à
+  confirmer en dev, non vérifiable hors rendu). Le scan de tags, lui, est bon
+  marché (~120 ms mesuré) : il entre dans l'inbox sans la ralentir.
+
+- **Infobulles `{I-W|A|T/…}` et `{SK/…}` : desc branchée (plus juste le nom).**
+  Au rendu public (`parse-text.tsx`), `equipmentChip` (armes/amulettes/talismans)
+  et `skillChip` ne passaient AUCUNE desc à leur chip → tooltip réduit au nom
+  (seuls les items `{I-I/…}` et les sets `{AS/…}` marchaient). Branché sur les
+  résolveurs EXISTANTS, sans dupliquer : équipement (`{I-W|A|T/…}`) ET EE
+  (`{EE/…}`) → `gearPassivesText(refs, lang, byTier)` qui reprend TOUS les passifs
+  (MIROIR de la page détail — pas juste le premier ; Executioner's Charm en a 2),
+  `byTier` selon le type (armes/amulettes par breakthrough, talismans/EE par niveau
+  déclaré), et dédoublonne par template de desc (dernier gagne — un EE porte souvent
+  le même passif en base+upgrade → une ligne à la valeur max). Passifs gear sans
+  `<color>` (rendu direct `ItemInline`) ; passifs d'EE AVEC `<color>` → tooltip
+  `renderGameColors`. Skill → helper `skillDesc()` = `resolveSkillText(desc, dernier
+palier.vars)` + `\n` littéraux convertis, EXACTEMENT la résolution de la fiche
+  perso (`SkillDescription`) et de l'aperçu admin (`page.dev`). La desc de skill
+  garde ses `<color=…>`, rendus par `renderGameColors` dans le tooltip.
+  MIROIR tenu : les fns de rendu ET les cas de `resolveSegment` (aperçu admin)
+  corrigés ensemble ; segment `icon` doté d'un champ `desc?`, rendu par
+  `InlinePreview` (tooltip via `renderGameColors`). Helpers partagés rendu/aperçu
+  (pas de dérive). tsc + eslint + parse-text.test verts.
+
 - **CSP — chantier CLOS : nonce + strict-dynamic ABANDONNÉ (résultat négatif),
   Report-Only retiré, `img-src` resserré.** L'expérience Report-Only (PASSE 1,
   livrée le 19/07) a tourné ~1 semaine en prod ; les rapports (`docker logs

@@ -2678,11 +2678,11 @@
           "fr": "{EE/Bryn} s'accorde parfaitement avec son kit en augmentant nettement les dégâts de tout allié possédant un {B/BT_BARRIER}, de 30 % (60 % au niveau 10)"
         },
         {
-          "en": "Serves as an exceptional Chain Starter, utilizing her {SK/Bryn|Passive} to grant a {B/BT_STAT|ST_PIERCE_POWER_RATE} to all allies involved in the Skill Chain, greatly amplifying team burst damage",
-          "jp": "優れたチェインスターターとして、{SK/Bryn|Passive}を活用してスキルチェインに参加する全味方に{B/BT_STAT|ST_PIERCE_POWER_RATE}を付与し、チームのバーストダメージを大幅に増幅させる",
-          "kr": "뛰어난 체인 스타터로서 {SK/Bryn|Passive}를 활용하여 스킬 체인에 참여한 모든 아군에게 {B/BT_STAT|ST_PIERCE_POWER_RATE}를 부여하여 팀의 폭딜을 크게 증폭시킴",
-          "zh": "作为出色的连锁起手，利用{SK/Bryn|Passive}为所有参与连锁技的友军提供{B/BT_STAT|ST_PIERCE_POWER_RATE}，大幅放大团队爆发伤害",
-          "fr": "Excellente Chain Starter, utilisant sa {SK/Bryn|Passive} pour accorder {B/BT_STAT|ST_PIERCE_POWER_RATE} à tous les alliés participant à la chaîne de compétences, amplifiant fortement le burst de l'équipe"
+          "en": "Serves as an exceptional Chain Starter, utilizing her {SK/Bryn|Chain} to grant a {B/BT_STAT|ST_PIERCE_POWER_RATE} to all allies involved in the Skill Chain, greatly amplifying team burst damage",
+          "jp": "優れたチェインスターターとして、{SK/Bryn|Chain}を活用してスキルチェインに参加する全味方に{B/BT_STAT|ST_PIERCE_POWER_RATE}を付与し、チームのバーストダメージを大幅に増幅させる",
+          "kr": "뛰어난 체인 스타터로서 {SK/Bryn|Chain}를 활용하여 스킬 체인에 참여한 모든 아군에게 {B/BT_STAT|ST_PIERCE_POWER_RATE}를 부여하여 팀의 폭딜을 크게 증폭시킴",
+          "zh": "作为出色的连锁起手，利用{SK/Bryn|Chain}为所有参与连锁技的友军提供{B/BT_STAT|ST_PIERCE_POWER_RATE}，大幅放大团队爆发伤害",
+          "fr": "Excellente Chain Starter, utilisant sa {SK/Bryn|Chain} pour accorder {B/BT_STAT|ST_PIERCE_POWER_RATE} à tous les alliés participant à la chaîne de compétences, amplifiant fortement le burst de l'équipe"
         }
       ],
       "cons": [

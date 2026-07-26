@@ -193,7 +193,7 @@ export default async function CharacterDetail({
     );
   };
   const mains = mainSkills(skills);
-  const cardSkills: CardSkill[] = mains.map((s) => ({
+  const toCardSkill = (s: Skill): CardSkill => ({
     id: s.id,
     name: lRec(s.name, lang),
     desc: s.desc ? lRec(s.desc, lang) : undefined,
@@ -209,7 +209,18 @@ export default async function CharacterDetail({
       upgrades: l.upgrades?.map((u) => lRec(u, lang)).filter(Boolean),
     })),
     effects: cardEffects(skills, s),
-  }));
+  });
+  // Passif « Core-Fused » (core-fusion uniquement) : carte dédiée après S1/S2/S3.
+  // Le vrai passif vit dans le `fusion_passive` — le `unique_passive` n'est qu'un
+  // marqueur « Burst Level 2 Unlocked ». Absent/vide sur les persos normaux → pas
+  // de carte. (Miroir éditorial : c'est la cible du raccourci `{SK/…|Passive}`.)
+  const fusionPassive = skills.find(
+    (s) => s.type === 'fusion_passive' && Boolean(s.name?.en || s.desc?.en),
+  );
+  const cardSkills: CardSkill[] = [
+    ...mains.map(toCardSkill),
+    ...(fusionPassive ? [toCardSkill(fusionPassive)] : []),
+  ];
 
   // Priorité de montée des skills (curée).
   const priority: SkillPriority | null = curated.skillPriority

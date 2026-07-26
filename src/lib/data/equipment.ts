@@ -217,6 +217,46 @@ export function passiveTextAt(refs: PassiveRef[], tier: number, lang: Lang): str
   return v ? fillPlaceholders(desc, v, false) : desc;
 }
 
+/**
+ * Texte de tooltip d'une famille d'équipement : TOUS ses passifs au palier MAX,
+ * joints par saut de ligne — même sélection que la page détail
+ * (`equipment-detail`), et non plus le seul premier passif (Executioner's Charm
+ * en a deux : Chain Points + Action Points). `byTier` distingue les deux
+ * indexations de `values`, comme `passiveTexts` de la page détail :
+ *   • gear (armes/amulettes) → valeurs par BREAKTHROUGH, on prend la dernière (max) ;
+ *   • talisman/EE → valeurs aux NIVEAUX DÉCLARÉS, on prend celle du niveau de
+ *     déblocage du passif (`ref.level`).
+ * Texte BRUT (sans balises couleur) : c'est la forme des tooltips.
+ */
+export function gearPassivesText(
+  refs: PassiveRef[],
+  lang: Lang,
+  byTier: boolean,
+): string | undefined {
+  // Dédup par TEMPLATE de desc (dernier gagne) : un EE porte souvent le MÊME
+  // passif à deux refs (base niv.1 + upgrade niv.10) → une seule ligne, à la
+  // valeur MAX. Les passifs DISTINCTS (talisman : Chain Points + Action Points)
+  // ont des templates différents → tous conservés, dans l'ordre.
+  const byTemplate = new Map<string, string>();
+  for (const ref of refs) {
+    const p = PASSIVES[ref.id];
+    if (!p) continue;
+    const desc = lRec(p.desc, lang) || p.desc.en;
+    if (!desc) continue;
+    let filled: string;
+    if (!p.values.length) filled = desc;
+    else if (byTier) filled = fillPlaceholders(desc, p.values[p.values.length - 1], false);
+    else {
+      let idx = 0;
+      for (let i = 0; i < (p.levels?.length ?? 0); i++) if (p.levels[i] <= ref.level) idx = i;
+      filled = fillPlaceholders(desc, p.values[Math.min(idx, p.values.length - 1)], false);
+    }
+    byTemplate.set(desc, filled);
+  }
+  const text = [...byTemplate.values()].join('\n');
+  return text || undefined;
+}
+
 /** Paliers de passif d'un item, résolus (textes remplis, localisés). */
 export function resolvePassives(refs: PassiveRef[], lang: Lang): ResolvedPassive[] {
   const out: ResolvedPassive[] = [];

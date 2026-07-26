@@ -4,13 +4,20 @@ import type { SkillBuffVars } from '@contracts';
  * Raccourci de skill ÉDITORIAL → type de skill V3 (clé `Skill.type`).
  * Table unique du domaine : parse-text (`{SK/perso|S2}`) et tout futur
  * consommateur de raccourcis S1/S2/S3 importent d'ici.
+ *
+ * `Chain` et `Dual` visent le MÊME skill (`chain_passive`) mais son consommateur
+ * en extrait la moitié correspondante de la desc (`splitChainDual`). `Passive`
+ * vise le `fusion_passive` (« Core-Fused Passive ») que SEULS les personnages
+ * core-fusion possèdent : sur un perso normal, le raccourci ne résout rien
+ * (chip rouge) — c'est voulu, `unique_passive` n'est qu'un marqueur de burst.
  */
 export const SKILL_SHORTHAND: Record<string, string> = {
   S1: 'first',
   S2: 'second',
   S3: 'ultimate',
-  Passive: 'unique_passive',
   Chain: 'chain_passive',
+  Dual: 'chain_passive',
+  Passive: 'fusion_passive',
 };
 
 /** Ordre d'affichage des skills principaux (grille de cartes). */

@@ -40,35 +40,68 @@
       gear-usage-statistics & gear-usage-finder = agrégation gear-reco à la
       lecture, patch-history, pull-simulator, progress-tracker.)
 
+## 🔍 Suite d'audit (26/07) — par rôle
+
+> Backlog des deux audits (extraction + admin), dédupliqué dans
+> [`docs/audit/README.md`](./audit/README.md) (détail : `audit/extraction.md`
+> **E1–E8**, `audit/admin.md` **F1–F9**). Priorité `P1>P2>P3>dette`.
+> Rôles : **Claude** = `datagen/` (extraction + socle partagé) ; **Worker** =
+> panneau admin (`src/**/admin`).
+> ✅ **F1** (écriture atomique `writeJson`, socle partagé) — FAIT le 26/07
+> (Claude, commit `f4fc6d4`).
+
+### 👤 Claude — datagen / extraction / socle
+
+- [ ] **E2** _(P2)_ — garde anti-suppression massive dans `pull-gamedata` : un
+      miss partiel de listing distant → suppression locale SILENCIEUSE (le
+      garde-fou ne couvre que le vide total). Seuil `toDelete/local` ou log.
+- [ ] **E4** _(P2)_ — timeout sur l'extraction bytes/images (`extract.ts` `cli()`),
+      aligné sur celui de l'audio (`600_000`).
+- [ ] **E3** _(P2)_ — helper PNG partagé (`lib/png readPngSize`) : dédup du parsing
+      d'en-tête IHDR présent ×3 (`extract-wallpapers.ts:181`,
+      `generators/wallpapers.ts:49`, `assets/hero-full-art.ts:43`). Le test
+      `wallpapers.test` migre dessus.
+- [ ] **E1** _(P3)_ — tests des cœurs purs d'extraction, **parsers `ls -lR`/`md5sum`
+      en tête** (fragiles + conséquence E2), puis classifieurs wallpapers.
+- [ ] **E6** _(P3)_ — parallélisme borné (p-limit ≈ cpus) de la dédup wallpapers.
+- [ ] **E7** _(dette)_ — élagage de la blocklist wallpapers (~50 regex V2), après
+      mesure du recouvrement avec la catégorisation.
+- [ ] **AUDIT `datagen/extractor/`** _(à planifier)_ — le moteur de revue
+      (13 fic. · 2699 l., **plus du double de l'extraction auditée**) n'est audité
+      par personne : `specs/character.ts` (887 l., **lieu du bug NPC de la
+      session**) sans test, `reviewAll` **1320 ms** non profilé. Prochain audit le
+      plus rentable (périmètre datagen → Claude).
+
+### 🤖 Worker — panneau admin (`src/**/admin`)
+
+- [ ] **F3** _(P2)_ — `try` autour de `req.json()` + validation de forme des
+      payloads d'écriture (17 routes lisent du JSON, ~6 sans `try`). Garde l'entrée
+      du tuyau que F1 vient de fermer côté écriture.
+- [ ] **F6** _(P2)_ — confinement de chemin sur l'écriture de guides
+      (`guide-store.ts` : `slug` jamais validé, `fromKey` sans regex). Idiome
+      maison existant : `src/app/images/[...path]/route.dev.ts:25`.
+- [ ] **F4** _(P2)_ — hook `useAutoTranslate(collect)` : dédup de l'échafaudage
+      « translate » répété ×6 (allège aussi F9).
+- [ ] **F8** _(P3)_ — tests des **16 stores qui écrivent** en priorité (pas les
+      composants) : une régression y corrompt la donnée éditoriale en silence.
+- [ ] **F5** _(dette)_ — aperçu au montage : garde « un seul éditeur actif »
+      (`GuideEditor`, `FreeHeroesEditor`), idiome `EditorialFields`/`CharacterGroups`.
+- [ ] **F7** _(dette)_ — concurrence read-merge-write des stores (2 onglets admin).
+- [ ] **F9** _(dette)_ — taille des composants (750–1000 l.) ; F4 en retire une part.
+
+### 🤝 À arbitrer ensemble
+
+- [ ] **F2** _(décision archi)_ — `admin/` n'est pas une frontière (8 entrées
+      publiques importent `lib/admin`). Documenter les modules qui shippent en
+      prod, OU extraire `lib/editorial/` + `components/editorial/`.
+
 ## 🧹 Dette code
-
-### Panneau admin
-
-> Décision d'IA figée le 07/07 (matrice fonction × entité). Deux des trois items
-> d'origine sont LIVRÉS (diff « TYPO » + quick-fix, auto-détection des tags
-> perso) — cf. DONE 2026-07-23. Reste le doublon Home/Extractor.
-
-- [ ] **Home `/admin` = doublon d'Extractor** — refonte possible en « inbox
-      priorisée » (ce qui demande une action, trié par urgence).
 
 ### Bugs non urgents
 
 > L'éditeur assisté `/admin/guides` (picker `{P/}` + doublons buff/debuff) est
 > CORRIGÉ le 24/07 (`inline-refs.ts` : picker keyé par `characterDisplayName`,
 > effets dédupliqués par apparence) — cf. DONE une fois validé en dev.
-
-- [ ] **Infobulles `{I-W|A|T/…}` et `{SK/…}` réduites au nom** (`parse-text.tsx`,
-      chemin de rendu PUBLIC) — au rendu, `equipmentChip` (armes/amulettes/
-      talismans) et `skillChip` ne passent AUCUNE `desc`/`tooltip` à leur chip :
-      l'infobulle n'affiche que le nom. Les items `{I-I/…}` passent déjà leur
-      desc (seuls à marcher), les sets `{AS/…}` ont un tooltip 2P/4P. Constaté
-      sur `guides/dimensional-singularity/skuld-dark`. Fix = brancher les
-      résolveurs EXISTANTS : arme → passif du haut de famille
-      (`passiveTextAt(f.passives, <palier max>, lang)`) ; skill → desc du dernier
-      palier (`skill.levels[last]`, placeholders remplis, comme la fiche perso).
-      ⚠ MIROIR à tenir : corriger les 2 fns de rendu ET les 2 cas
-      `resolveSegment` de l'aperçu admin (doivent rester synchro), + ajouter un
-      champ `desc` au segment `icon` (skill). SSG strict → valider le rendu.
 
 ### Lots de fond SEO/perf (audit Sitebulb 20/07 — non urgents)
 

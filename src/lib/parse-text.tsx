@@ -4,7 +4,8 @@
  * garde que l'interactivité des tooltips).
  *
  * Tags : {B/clé} {D/clé} (effets via l'encyclopédie), {E/élément}, {C/classe},
- * {S/stat}, {P/perso}, {SK/perso|S1..S3|Passive|Chain}, {EE/perso},
+ * {S/stat}, {P/perso}, {SK/perso|S1..S3|Chain|Dual|Passive} (Passive =
+ * « Core-Fused Passive », core-fusion uniquement ; cf. SKILL_SHORTHAND), {EE/perso},
  * {L/label|/chemin}, {I-W|A|T/nom} (équipement par nom EN → lien vers la page
  * détail), {I-I/nom} (item générique du catalogue), {AS/nom} (set d'armure,
  * tooltip 2P/4P). Le tag restant ({SKB/…} — skills de boss) est rendu en texte
@@ -20,7 +21,7 @@ import { lRec } from '@/lib/i18n/localize';
 import { img, ELEMENT_TEXT, GRADE_TEXT } from '@/lib/images';
 import { STAT_ICON } from '@/lib/stats';
 import { statDesc, statName } from '@/lib/data/stat-glossary';
-import { SKILL_SHORTHAND } from '@/lib/skills';
+import { SKILL_SHORTHAND, resolveSkillText, splitChainDual } from '@/lib/skills';
 import { resolveEffectKey } from '@/lib/data/effects';
 import { characterDisplayName, findCharacterByName, slugForId } from '@/lib/data/characters';
 import {
@@ -28,6 +29,8 @@ import {
   getSetViews,
   getTalismanFamilies,
   getWeaponFamilies,
+  gearPassivesText,
+  gearPassiveRefs,
   type GearFamily,
   type SetView,
 } from '@/lib/data/equipment';
@@ -36,6 +39,7 @@ import { InlineIcon } from '@/components/inline/InlineIcon';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { StatInline } from '@/components/inline/StatInline';
 import { EffectIconTile } from '@/components/character/EffectChips';
+import { renderGameColors } from '@/components/ui/GameText';
 import type { CatalogEntry, Skill, LangDict } from '@contracts';
 import skillsData from '@data/generated/skills.json';
 import eeData from '@data/generated/equipment/ee.json';
@@ -161,7 +165,72 @@ function characterChip(name: string, ctx: ParseCtx, k: number): ReactNode {
   );
 }
 
-/** Chip skill ({SK/perso|S2}) : icône + nom du skill, lien vers la fiche. */
+/**
+ * Desc de tooltip d'une famille d'équipement, MIROIR de la page détail : TOUS
+ * ses passifs au palier max (pas juste le premier). `byTier` selon le type —
+ * armes/amulettes par breakthrough, talismans/EE par niveau déclaré. Point
+ * unique du miroir rendu/aperçu : `equipmentChip` ET `resolveSegment('I-…')`.
+ */
+function gearDesc(
+  f: GearFamily,
+  kind: 'weapon' | 'amulet' | 'talisman',
+  lang: Lang,
+): string | undefined {
+  return gearPassivesText(f.passives, lang, kind !== 'talisman');
+}
+
+/** Desc de tooltip d'un EE : ses passifs par niveau (byTier=false, comme la page
+ * détail EE et le talisman). Texte BRUT gardant ses `<color=…>`. */
+function eeDesc(eeId: string | undefined, lang: Lang): string | undefined {
+  return eeId ? gearPassivesText(gearPassiveRefs(eeId) ?? [], lang, false) : undefined;
+}
+
+/**
+ * Libellé d'un chip skill. `Chain`/`Dual` visent le même `chain_passive` dont le
+ * nom générique (« Chain Passive ») ne distinguerait pas les deux : on prend le
+ * TITRE de section coloré du jeu porté par la moitié (« Chain Companion Effect »,
+ * « Dual Attack Effect »…). Repli sur le nom du skill puis le raccourci.
+ */
+function skillChipLabel(
+  skill: Skill,
+  lang: Lang,
+  shorthand: string | undefined,
+  desc: string,
+): string {
+  const key = shorthand?.trim();
+  if (key === 'Chain' || key === 'Dual') {
+    const m = desc.match(/<color=#ffd732>([^<]+)<\/color>/i);
+    if (m) return m[1].trim();
+  }
+  return lRec(skill.name, lang) || skill.name.en || (shorthand ?? '');
+}
+
+/**
+ * Desc du DERNIER palier d'un skill, placeholders `[Buff_C/V/T_…]` résolus et
+ * `\n` littéraux convertis en vrais sauts — même résolution que la fiche perso
+ * (`SkillDescription`) et que l'aperçu admin (`page.dev`). Point unique du
+ * miroir rendu/aperçu : `skillChip` ET `resolveSegment('SK')` passent par ici.
+ * Le texte GARDE ses balises `<color=…>` (rendues par `renderGameColors`).
+ *
+ * `shorthand` = raccourci éditorial : `Chain`/`Dual` visent le même
+ * `chain_passive` mais n'en gardent que LEUR moitié (`splitChainDual`) — le jeu
+ * décrit chaîne et duo dans une seule desc, séparées par un titre coloré.
+ */
+function skillDesc(skill: Skill, lang: Lang, shorthand?: string): string {
+  const raw = skill.desc ? lRec(skill.desc, lang) || skill.desc.en || '' : '';
+  if (!raw) return '';
+  const full = resolveSkillText(raw, skill.levels[skill.levels.length - 1]?.vars).replace(
+    /\\n/g,
+    '\n',
+  );
+  const key = shorthand?.trim();
+  if (key === 'Chain') return splitChainDual(full).chain;
+  if (key === 'Dual') return splitChainDual(full).dual;
+  return full;
+}
+
+/** Chip skill ({SK/perso|S2}) : icône + nom du skill, lien vers la fiche,
+ * tooltip nom + description du dernier palier (placeholders résolus). */
 function skillChip(value: string, ctx: ParseCtx, k: number): ReactNode {
   const [name, shorthand] = value.split('|');
   const c = findCharacter(name);
@@ -169,7 +238,26 @@ function skillChip(value: string, ctx: ParseCtx, k: number): ReactNode {
   const skill = c?.skills.map((id) => SKILLS[id]).find((s) => s && s.type === type);
   if (!c || !skill) return unknownRef(value, `{SK/${value}}`, ctx, k);
   const slug = slugForId(c.id);
-  const label = lRec(skill.name, ctx.lang) || skill.name.en || shorthand;
+  const desc = skillDesc(skill, ctx.lang, shorthand);
+  const label = skillChipLabel(skill, ctx.lang, shorthand, desc);
+  const tooltip = desc ? (
+    <div className="flex max-w-64 flex-col gap-1">
+      <div className="flex items-center gap-1.5">
+        {skill.icon && (
+          <img
+            src={img.skill(skill.icon)}
+            alt=""
+            aria-hidden
+            width={24}
+            height={24}
+            className="h-6 w-6 shrink-0"
+          />
+        )}
+        <span className="text-content-strong text-sm font-bold">{label}</span>
+      </div>
+      <p className="text-content text-xs whitespace-pre-line">{renderGameColors(desc)}</p>
+    </div>
+  ) : undefined;
   return (
     <InlineIcon
       key={k}
@@ -177,23 +265,44 @@ function skillChip(value: string, ctx: ParseCtx, k: number): ReactNode {
       label={label}
       color="text-highlight"
       href={slug ? `${localePath(ctx.lang, `/characters/${slug}`)}#skills` : undefined}
+      tooltip={tooltip}
     />
   );
 }
 
-/** Chip EE ({EE/perso}) : icône + nom de l'équipement exclusif. */
+/** Chip EE ({EE/perso}) : icône + nom de l'équipement exclusif, tooltip nom +
+ * effets des passifs (par niveau, comme la page détail EE). */
 function eeChip(name: string, ctx: ParseCtx, k: number): ReactNode {
   const c = findCharacter(name);
   const ee = c?.ee ? EE[c.ee] : undefined;
   if (!c || !ee) return unknownRef(name, `{EE/${name}}`, ctx, k);
   const slug = slugForId(c.id);
+  const label = lRec(ee.name, ctx.lang) || ee.name.en;
+  const desc = eeDesc(c.ee, ctx.lang);
+  const tooltip = desc ? (
+    <div className="flex max-w-64 flex-col gap-1">
+      <div className="flex items-center gap-1.5">
+        <img
+          src={img.ee(c.id)}
+          alt=""
+          aria-hidden
+          width={24}
+          height={24}
+          className="h-6 w-6 shrink-0"
+        />
+        <span className="text-content-strong text-sm font-bold">{label}</span>
+      </div>
+      <p className="text-content text-xs whitespace-pre-line">{renderGameColors(desc)}</p>
+    </div>
+  ) : undefined;
   return (
     <InlineIcon
       key={k}
       icon={img.ee(c.id)}
-      label={lRec(ee.name, ctx.lang) || ee.name.en}
+      label={label}
       color="text-item-legendary"
       href={slug ? `${localePath(ctx.lang, `/characters/${slug}`)}#ee` : undefined}
+      tooltip={tooltip}
     />
   );
 }
@@ -304,6 +413,9 @@ function equipmentChip(
         name: lRec(f.name, ctx.lang) || f.name.en,
         iconSrc: img.equipment(f.icon),
         grade: f.grade,
+        // Tous les passifs du haut de famille au palier max : l'effet montré
+        // sur la page détail — le tooltip le reprend intégralement.
+        desc: gearDesc(f, kind, ctx.lang),
       }}
       color={GRADE_TEXT[f.grade] ?? 'text-equipment'}
       href={localePath(ctx.lang, `/equipment/${f.slug}`)}
@@ -590,7 +702,7 @@ export type InlineSegment =
   | { t: 'text'; s: string }
   | { t: 'br' }
   | { t: 'unknown'; s: string }
-  | { t: 'icon'; label: string; color: string; icon?: string; href?: string; underline: boolean }
+  | { t: 'icon'; label: string; color: string; icon?: string; href?: string; underline: boolean; desc?: string } // prettier-ignore
   | { t: 'effect'; label: string; color: string; icon?: string; isDebuff: boolean; desc?: string }
   | { t: 'item'; name: string; iconSrc: string; grade: string; color: string; href?: string; desc?: string } // prettier-ignore
   | { t: 'stat'; name: string; iconSrc?: string; desc?: string };
@@ -657,13 +769,15 @@ function resolveSegment(type: string, value: string, lang: Lang, t: TFunction): 
       const skill = c?.skills.map((id) => SKILLS[id]).find((s) => s && s.type === skType);
       if (!c || !skill) return unknown();
       const slug = slugForId(c.id);
+      const desc = skillDesc(skill, lang, shorthand);
       return {
         t: 'icon',
-        label: lRec(skill.name, lang) || skill.name.en || (shorthand ?? ''),
+        label: skillChipLabel(skill, lang, shorthand, desc),
         color: 'text-highlight',
         icon: skill.icon ? img.skill(skill.icon) : undefined,
         href: slug ? `${localePath(lang, `/characters/${slug}`)}#skills` : undefined,
         underline: true,
+        desc: desc || undefined,
       };
     }
     case 'EE': {
@@ -678,6 +792,7 @@ function resolveSegment(type: string, value: string, lang: Lang, t: TFunction): 
         icon: img.ee(c.id),
         href: slug ? `${localePath(lang, `/characters/${slug}`)}#ee` : undefined,
         underline: true,
+        desc: eeDesc(c.ee, lang) || undefined,
       };
     }
     case 'L': {
@@ -705,6 +820,7 @@ function resolveSegment(type: string, value: string, lang: Lang, t: TFunction): 
         grade: f.grade,
         color: GRADE_TEXT[f.grade] ?? 'text-equipment',
         href: localePath(lang, `/equipment/${f.slug}`),
+        desc: gearDesc(f, kind, lang),
       };
     }
     case 'I-I': {

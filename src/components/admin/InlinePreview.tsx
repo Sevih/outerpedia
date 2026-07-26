@@ -16,6 +16,7 @@ import { InlineIcon } from '@/components/inline/InlineIcon';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { StatInline } from '@/components/inline/StatInline';
 import { EffectIconTile } from '@/components/character/EffectChips';
+import { renderGameColors } from '@/components/ui/GameText';
 
 /** Tooltip d'effet (tuile + nom + description), miroir de `parse-text`. */
 function effectTooltip(label: string, desc: string | undefined, isDebuff: boolean, icon?: string) {
@@ -26,6 +27,22 @@ function effectTooltip(label: string, desc: string | undefined, isDebuff: boolea
         <span className="text-content-strong text-sm font-bold">{label}</span>
       </div>
       {desc && <p className="text-content text-xs whitespace-pre-line">{desc}</p>}
+    </div>
+  );
+}
+
+/** Tooltip d'icône avec desc (skill : nom + desc du dernier palier), miroir de
+ * `skillChip` — desc porteuse de balises `<color=…>` rendues par renderGameColors. */
+function iconTooltip(label: string, desc: string, icon?: string) {
+  return (
+    <div className="flex max-w-64 flex-col gap-1">
+      <div className="flex items-center gap-1.5">
+        {icon && (
+          <img src={icon} alt="" aria-hidden width={24} height={24} className="h-6 w-6 shrink-0" />
+        )}
+        <span className="text-content-strong text-sm font-bold">{label}</span>
+      </div>
+      <p className="text-content text-xs whitespace-pre-line">{renderGameColors(desc)}</p>
     </div>
   );
 }
@@ -46,6 +63,7 @@ function Segment({ seg }: { seg: InlineSegment }) {
           color={seg.color}
           href={seg.href}
           underline={seg.underline}
+          tooltip={seg.desc ? iconTooltip(seg.label, seg.desc, seg.icon) : undefined}
         />
       );
     case 'effect':
