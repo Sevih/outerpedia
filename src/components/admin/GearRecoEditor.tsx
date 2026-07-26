@@ -30,13 +30,16 @@ import {
   type ImportableChar,
 } from '@/lib/admin/gear-preview-actions';
 
-const NOTE_LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
-type NoteLang = (typeof NOTE_LANGS)[number];
-
-const field =
-  'w-full rounded-md border border-line bg-surface-base px-2 py-1 text-sm text-content focus:border-accent focus:outline-none';
-const label = 'text-xs font-semibold uppercase tracking-wide text-content-subtle';
-const btn = 'rounded border border-line px-2 py-0.5 text-xs text-content-subtle hover:text-content';
+import {
+  NOTE_LANGS,
+  field,
+  label,
+  btn,
+  ItemSelect,
+  MainStatPicker,
+  EmptyTile,
+  type NoteLang,
+} from '@/components/admin/gear/GearBlocks';
 
 /** Options des sélecteurs (générées serveur : plus de fautes de frappe possibles). */
 export interface GearRecoOptions {
@@ -51,99 +54,6 @@ export interface GearRecoOptions {
 
 type Status = { kind: 'idle' | 'ok' | 'err'; msg?: string };
 type EditKey = { slot: 'weapons' | 'amulets' | 'talismans'; index: number } | null;
-
-/** Select d'un équipement (option filtrée + valeur hors-classe réinjectée). */
-function ItemSelect({
-  value,
-  onChange,
-  options,
-  allOptions,
-}: {
-  value: string;
-  onChange: (v: string) => void;
-  options: GearOption[];
-  allOptions?: GearOption[];
-}) {
-  const missing =
-    value && !value.startsWith('!') && !options.some((o) => o.id === value)
-      ? (allOptions ?? options).find((o) => o.id === value)
-      : undefined;
-  return (
-    <select className={field} value={value} onChange={(e) => onChange(e.target.value)}>
-      <option value="">—</option>
-      {value.startsWith('!') && <option value={value}>⚠ {value.slice(1)} (unresolved)</option>}
-      {missing && <option value={missing.id}>{missing.label} (off-class)</option>}
-      {options.map((o) => (
-        <option key={o.id} value={o.id}>
-          {o.label}
-        </option>
-      ))}
-    </select>
-  );
-}
-
-/** Multi-select de main stats (puces) — stocké joint par « / ». */
-function MainStatPicker({
-  value,
-  available,
-  onChange,
-}: {
-  value?: string;
-  available: string[];
-  onChange: (v: string | undefined) => void;
-}) {
-  const selected = value
-    ? value
-        .split('/')
-        .map((s) => s.trim())
-        .filter(Boolean)
-    : [];
-  const set = (next: string[]) => onChange(next.length ? next.join('/') : undefined);
-  const toggle = (s: string) =>
-    set(selected.includes(s) ? selected.filter((x) => x !== s) : [...selected, s]);
-  const extras = selected.filter((s) => !available.includes(s));
-  if (!available.length && !selected.length)
-    return <span className="text-content-subtle px-1 text-[11px]">choose equipment</span>;
-  return (
-    <div className="flex flex-wrap items-center gap-1">
-      {available.map((s) => (
-        <button
-          key={s}
-          type="button"
-          onClick={() => toggle(s)}
-          className={`rounded border px-1.5 py-0.5 text-[11px] ${
-            selected.includes(s)
-              ? 'border-accent text-accent'
-              : 'border-line-subtle text-content-subtle hover:text-content'
-          }`}
-        >
-          {s}
-        </button>
-      ))}
-      {extras.map((s) => (
-        <button
-          key={s}
-          type="button"
-          onClick={() => toggle(s)}
-          title="Value outside pool — click to remove"
-          className="border-danger/50 text-danger rounded border px-1.5 py-0.5 text-[11px]"
-        >
-          {s} ✕
-        </button>
-      ))}
-    </div>
-  );
-}
-
-/** Tuile placeholder (pick vide / non résolu) — invite à choisir. */
-function EmptyTile({ text = '＋ choose' }: { text?: string }) {
-  return (
-    <div className="border-line-subtle text-content-subtle flex h-13 items-center gap-2 rounded border border-dashed px-3 text-xs">
-      {text}
-    </div>
-  );
-}
-
 export function GearRecoEditor({
   charId,
   charClass,
