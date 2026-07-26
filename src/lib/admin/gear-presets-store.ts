@@ -3,10 +3,11 @@
  * Le fichier est remplacé entier (petit et cohérent), validation avant écriture
  * + garde-fou : refuse de supprimer un preset encore référencé par un build.
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { GearBuild, GearPresets } from '@contracts';
 import { validateGearPresets } from '@datagen/curated/gear-reco';
+import { writeJson } from '@datagen/lib/json';
 
 const PATH = resolve(process.cwd(), 'data/curated/gear-presets.json');
 const RECO_PATH = resolve(process.cwd(), 'data/curated/gear-reco.json');
@@ -36,23 +37,28 @@ function brokenRefs(p: GearPresets): string[] {
   return [...broken];
 }
 
-/** Valide puis remplace le fichier de presets. Renvoie les erreurs (vide = OK). */
-export function saveGearPresets(p: GearPresets): string[] {
+/**
+ * Valide puis remplace le fichier de presets. Renvoie les erreurs (vide = OK).
+ *
+ * Passe par `writeJson` comme les 15 autres stores (audit F10) : ce fichier était
+ * le SEUL écrit avec `writeFileSync` + `JSON.stringify` nu. Deux conséquences,
+ * toutes deux vécues :
+ *   - pas d'atomicité — une interruption laissait un JSON tronqué, que
+ *     `readCuratedJson` refuse ensuite (il LÈVE), donc `pnpm dev` et le build
+ *     bloqués jusqu'à réparation manuelle (le trou que F1 avait manqué) ;
+ *   - format hors canon — les tableaux courts partaient éclatés, le hook
+ *     pre-commit prettier les ramassait derrière, et chaque édition d'UN preset
+ *     produisait un diff git sur tout le fichier.
+ */
+export async function saveGearPresets(p: GearPresets): Promise<string[]> {
   const errors = validateGearPresets(p);
   if (errors.length) return errors;
   const broken = brokenRefs(p);
   if (broken.length) return broken.map((b) => `preset still referenced : ${b}`);
-  writeFileSync(
-    PATH,
-    JSON.stringify(
-      {
-        talismans: sortKeys(p.talismans),
-        sets: sortKeys(p.sets),
-        substats: sortKeys(p.substats),
-      },
-      null,
-      2,
-    ) + '\n',
-  );
+  await writeJson(PATH, {
+    talismans: sortKeys(p.talismans),
+    sets: sortKeys(p.sets),
+    substats: sortKeys(p.substats),
+  });
   return [];
 }

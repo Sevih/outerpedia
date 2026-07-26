@@ -11,7 +11,7 @@ export async function POST(req: Request) {
   const parsed = await jsonObjectBody<GearPresets>(req);
   if (!parsed.ok) return parsed.res;
   const body = parsed.body;
-  const errors = saveGearPresets(body);
+  const errors = await saveGearPresets(body);
   if (errors.length) return NextResponse.json({ ok: false, errors }, { status: 400 });
   return NextResponse.json({ ok: true });
 }

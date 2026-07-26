@@ -6,6 +6,40 @@
 
 ## 2026-07-26
 
+- **F10 : les trois divergences de socle des stores, corrigées** — issues des
+  constats faits en écrivant F8. **+27 cas** (1159 tests, 103 fichiers).
+  SÉRIALISEUR : `gear-presets-store` passe à `writeJson` — il était le SEUL des 16
+  à écrire en `writeFileSync` + `JSON.stringify` nu. Deux gains, tous deux
+  vécus ailleurs : l'ATOMICITÉ (une interruption y laissait un JSON tronqué, que
+  `readCuratedJson` refuse ensuite en levant → `pnpm dev` et build bloqués ; c'est
+  le trou que F1 avait manqué en annonçant couvrir « les ~53 sites d'écriture »),
+  et le FORMAT canonique (le fichier committé est déjà au format prettier, donc le
+  store écrivait éclaté et le hook pre-commit ramassait derrière : chaque édition
+  d'UN preset diffait tout le fichier). `saveGearPresets` devient async, son unique
+  appelant est la route.
+  VALIDATION : `promo-banner-store` n'en avait AUCUNE alors que sa sauvegarde
+  PUBLIE sur R2 — un coupon cassé partait en prod sans redéploiement, exactement
+  l'argument qui avait motivé celle d'`events-store`. Ajout de `validateCoupons`
+  et `validateBanners` (cœurs purs testés) : code requis et UNIQUE (c'est
+  l'identité de l'entrée — deux lignes pour un code et la période affichée devient
+  un tirage au sort), dates `YYYY-MM-DD` ordonnables en texte, fin après début, au
+  moins une récompense. PAS d'unicité sur l'id de bannière : un perso revient
+  légitimement en rerun. Les règles ont été calibrées SUR LA DONNÉE COMMITTÉE
+  avant d'être écrites (91 coupons, 48 bannières relus : tous passent, dont 19
+  bannières en rerun) — sans quoi la validation aurait bloqué la première
+  sauvegarde. `item-curated-store` non plus ne validait rien et renvoyait `void` :
+  schéma ajouté, l'enjeu étant direct (la route rebake dans la foulée, donc un
+  `hidden: "true"` ou un nom en chaîne partait dans le catalogue SERVI).
+  TRI : `curated-store` et `item-curated-store` alignés sur `numeric: true`.
+  Vérifié avant : ZÉRO changement d'ordre sur les 123 + 23 clés committées (ids
+  textuels) — c'est de la cohérence préventive, pas un bug corrigé.
+  Les trois routes concernées renvoient désormais `400 { ok, errors }` ; aucun
+  composant à toucher — `postJson` jette déjà une `Error` construite depuis
+  `errors[]` et les éditeurs ont leur `try/catch` (dividende de F3).
+  Constat reporté en **F11** : le type `ItemCurated` est dupliqué entre
+  `item-curated-store` et `datagen/generators/item-catalog` — non touché, c'est le
+  périmètre datagen.
+
 - **F8 : tests des 16 stores qui écrivent** — les 14 non couverts le sont
   désormais (events et guide l'étaient déjà), **+178 cas** (1132 tests au total,
   102 fichiers). Ce que ça verrouille n'est PAS la validation (elle vit dans

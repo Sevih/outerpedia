@@ -14,7 +14,8 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
   const parsed = await jsonObjectBody<ItemCurated>(req);
   if (!parsed.ok) return parsed.res;
   const body = parsed.body;
-  await upsertItemCurated(id, body);
+  const errors = await upsertItemCurated(id, body);
+  if (errors.length) return NextResponse.json({ ok: false, errors }, { status: 400 });
   // Rebake immédiat de l'entrée servie : l'édition curée vaut validation (la
   // donnée jeu sous-jacente n'a pas bougé) — rien à promouvoir pour la voir.
   try {

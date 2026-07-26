@@ -13,6 +13,7 @@ export async function POST(req: Request) {
   const parsed = await jsonArrayBody<Banner>(req);
   if (!parsed.ok) return parsed.res;
   const body = parsed.body;
-  await saveBanners(body);
+  const errors = await saveBanners(body);
+  if (errors.length) return NextResponse.json({ ok: false, errors }, { status: 400 });
   return NextResponse.json({ ok: true, publish: await publishBanners() });
 }

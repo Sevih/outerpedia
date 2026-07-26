@@ -24,7 +24,11 @@ function readAll(): Record<string, CharacterCurated> {
 // Format CANONIQUE (`writeJson`) — sinon les tableaux courts (`tags`, `videos`…)
 // s'éclatent et chaque édition reformate tout le fichier (diff git géant).
 function writeAll(data: Record<string, CharacterCurated>): Promise<void> {
-  const sorted = Object.fromEntries(Object.entries(data).sort(([a], [b]) => a.localeCompare(b)));
+  // Tri NUMÉRIQUE comme les autres stores (audit F10) : sans effet sur les 123
+  // ids committés (tous textuels), mais aligné — « 9 » avant « 10 » partout.
+  const sorted = Object.fromEntries(
+    Object.entries(data).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true })),
+  );
   return writeJson(CURATED_PATH, sorted);
 }
 

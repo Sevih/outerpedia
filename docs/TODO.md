@@ -64,8 +64,9 @@
 > (confinement des chemins de guides, `c13ba4b`), **F3** (garde de forme des corps
 > d'écriture — sévérité révisée à la hausse : un payload mal typé SUPPRIMAIT la
 > curée, `7854a6e`), **F4** (hook `useAutoTranslate` + `TranslateButton`), le
-> complément de **F1** (temporaire unique, `bd88cc4`) et **F8** (tests des 16
-> stores qui écrivent — +178 cas, bac à sable `store-fixture`).
+> complément de **F1** (temporaire unique, `bd88cc4`), **F8** (tests des 16
+> stores qui écrivent — +178 cas, bac à sable `store-fixture`, `daadd8f`) et
+> **F10** (les 3 divergences de socle : sérialiseur, validation, tri).
 
 ### 👤 Claude — datagen / extraction / socle
 
@@ -79,17 +80,13 @@
 
 ### 🤖 Worker — panneau admin (`src/**/admin`)
 
-- [ ] **F10** _(P3, issu de F8)_ — aligner les trois stores qui divergent du
-      socle, constats faits en écrivant leurs tests (comportement actuel déjà
-      verrouillé par des cas qui le DÉCRIVENT — les mettre à jour en corrigeant).
-      SÉRIALISEUR : `gear-presets-store` écrit avec `writeFileSync` +
-      `JSON.stringify` nu, SEUL des 16 hors du sérialiseur canonique → ni
-      atomique (trou résiduel de F1) ni au format commun.
-      VALIDATION : `item-curated-store` et `promo-banner-store` ne valident RIEN
-      (le second accepte un code promo en double et des dates illisibles, là où
-      `events-store` refuse un slug en double).
-      TRI : divergent (`numeric: true` chez cinq stores, absent chez
-      `curated-store` et `item-curated-store`).
+- [ ] **F11** _(dette, constat de F10)_ — le type `ItemCurated` est DUPLIQUÉ :
+      `src/lib/admin/item-curated-store.ts` et `datagen/generators/item-catalog.ts`
+      (« forme miroir »). Identiques au 26/07, mais rien ne les tient ensemble — le
+      curé est écrit d'un côté et lu de l'autre. À unifier (le contrat devrait
+      vivre dans `datagen/curated/`, comme character/effects/equipment/gear-reco).
+      ⚠ touche `datagen/` = périmètre Claude, pas Worker → à faire côté datagen ou
+      à deux.
 - [ ] **F5** _(dette)_ — aperçu au montage : garde « un seul éditeur actif »
       (`GuideEditor`, `FreeHeroesEditor`), idiome `EditorialFields`/`CharacterGroups`.
 - [ ] **F7** _(dette)_ — concurrence read-merge-write des stores (2 onglets admin).
