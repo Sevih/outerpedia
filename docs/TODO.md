@@ -80,8 +80,7 @@
 > « Rien à faire » par verdict d'audit : E8 (sécurité shell théorique), X4 (diff
 > négligeable), X5 (clés inattendues, choix assumé), X6 (sain). E7 tranché le 26/07 :
 > les 12 motifs inertes de la blocklist wallpapers sont GARDÉS (assurance, cf. DONE
->
-> - commentaire en tête de `EXCLUDE_PATTERNS`). Rien d'ouvert._
+> et le commentaire en tête de `EXCLUDE_PATTERNS`). Rien d'ouvert._
 
 ### 🤖 Worker — panneau admin (`src/**/admin`)
 
