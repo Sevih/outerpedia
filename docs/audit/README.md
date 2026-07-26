@@ -1,13 +1,14 @@
-# Audit — synthèse consolidée (extraction + admin)
+# Audit — synthèse consolidée (extraction + admin + extractor)
 
-> Vue commune des deux volets, **dédupliquée**, avec un backlog unique priorisé.
-> Fait le **2026-07-26**. Les deux rapports de détail restent la source :
+> Vue commune des **trois** volets, **dédupliquée**, avec un backlog unique
+> priorisé. Fait le **2026-07-26**. Les rapports de détail restent la source :
 >
-> - [extraction.md](./extraction.md) — pipeline `datagen/extract/` (constats **E1–E8**)
+> - [extraction.md](./extraction.md) — pipeline `datagen/extract/` (device → pool, constats **E1–E8**)
 > - [admin.md](./admin.md) — panneau admin `src/{app,components,lib}/admin` (constats **F1–F9**)
+> - [extractor.md](./extractor.md) — moteur de revue/intégration `datagen/extractor/` (constats **X1–X6**)
 >
 > Ce document ne réécrit pas les constats : il **relie**, dédoublonne les
-> recouvrements et donne UN ordre de traitement pour les deux à la fois.
+> recouvrements et donne UN ordre de traitement pour les trois à la fois.
 
 ## Verdict croisé
 
@@ -46,61 +47,64 @@ sévérité Haute de tout l'audit.
 | **Confinement d'entrée**                  | F6 (slug guide, pas de garde `..`)      | E8 (interpolation shell adb)                                        | idiome maison existe (`route.dev.ts:25`) — aligner                |
 | **Robustesse silencieuse**                | F7 (read-merge-write concurrent)        | E2 (suppression locale sur miss de listing), E5 (collision flatten) | même classe : perte silencieuse, rendre bruyant                   |
 
-## Angle mort commun : `datagen/extractor/` NON audité
+Le **volet extractor (X)** s'inscrit dans deux de ces thèmes : **X2** (lecture ratée
+→ `{}` → wipe) rejoint « robustesse silencieuse » **et** le socle F1 —
+`readCuratedJson` est le remède commun aux trois (**F1 / E2 / X2**) ; **X1** (specs
+`character`/`monster` non testées) rejoint « cœurs non testés qui mutent » (**F8 /
+E1 / X1**).
+
+## Le troisième volet : `datagen/extractor/` (ex-angle mort, désormais audité)
 
 Deux dossiers aux noms presque identiques, à ne pas confondre :
 
 | Dossier              | Rôle                                                                       | Taille                     | Audité ?          |
 | -------------------- | -------------------------------------------------------------------------- | -------------------------- | ----------------- |
 | `datagen/extract/`   | pipeline device → pool                                                     | 7 fichiers · 1 160 l.      | **oui** (volet E) |
-| `datagen/extractor/` | moteur de revue/intégration (`reviewAll`, `integrate*`, `specs/`, `core/`) | 13 fichiers · **2 699 l.** | **non**           |
+| `datagen/extractor/` | moteur de revue/intégration (`reviewAll`, `integrate*`, `specs/`, `core/`) | 13 fichiers · **2 699 l.** | **oui** (volet X) |
 
-**Ni l'un ni l'autre audit ne l'a couvert** — et la zone non auditée est **plus du
-double** de la zone auditée. Elle est pourtant au centre : l'admin la consomme via
-`review-store`, qui n'est qu'une façade.
+C'était l'angle mort des deux premiers audits — **plus du double** de la zone
+`extract/`, et au centre du flux (l'admin le consomme via `review-store`, une
+façade). Il est maintenant couvert : [extractor.md](./extractor.md). Verdict
+**sain** ; les trois constats qui comptent :
 
-Ce qui rend le trou concret, mesuré le 26/07 :
-
-- **Couverture partielle.** 4 fichiers de test existent et couvrent le chemin
-  d'intégration (`changes`, `validate`, `integrate`, `integrate-equipment`) — c'est
-  bien. Mais les **specs**, qui décident de ce qui est extrait, n'en ont **aucun** :
-  `specs/character.ts` (**887 l.**, le plus gros module du dossier) et
-  `specs/monster.ts` (347 l.).
-- **Le trou est là où un vrai bug est passé.** La pollution des skills NPC
-  (skills 14/15/16 sur le perso 2000001, corrigée cette session en basculant la
-  détection de forme de la ressemblance vers `CharacterChangeTemplet`) vivait
-  exactement dans `specs/character.ts`. Aucun test ne prévient sa réapparition.
-- **Le coût perf y est aussi.** `reviewAll()` = **1 320 ms mesuré**, dans
-  `review.ts` (190 l., non testé, non audité). Il était appelé deux fois par
-  chargement de `/admin` — mémoïsé depuis le 26/07, mais le coût unitaire est
-  **imputable à `extractor/`, pas à l'admin**.
-
-→ **Prochain périmètre d'audit, et le plus rentable** : c'est à la fois le premier
-candidat perf, le principal trou de tests et le lieu d'un bug déjà vécu.
+- **X1** — les **specs** (`character.ts` 887 l., `monster.ts` 347 l.) n'ont **aucun
+  test**, alors qu'elles portent la logique d'extraction — et que le bug NPC de la
+  session (skills 14/15/16 sur 2000001, corrigé via `CharacterChangeTemplet`) y
+  vivait. Le chemin d'intégration, lui, EST testé (`changes`/`validate`/`integrate`).
+- **X2** — `review.readCommitted` et `integrate.readJsonOr` avalent un parse-error
+  en `{}` → **risque de wipe** au merge (même famille que F1/E2, cf. Convergences).
+- **X3** — le **1 320 ms** de `reviewAll` : `character`/`monster` ne sont **pas
+  mémoïsés** dans `targets.ts` (contrairement à equipment/item) → reconstruction
+  complète à chaque appel. Levier perf le plus sûr — mirroir du cache existant.
 
 ## Backlog unique priorisé
 
-**P1 — à faire même si rien d'autre**
+> ✅ **Déjà fait le 26/07** (côté datagen, Claude) : **F1** `json.ts` atomique
+> (`f4fc6d4`, +tests concurrence renforcés) · **E3** helper PNG partagé (`706ee03`)
+> · **E2** garde anti-purge miroir (`db6afaf`) · **E4** timeout extraction
+> (`918a130`). Reste ci-dessous.
 
-- **F1** — `json.ts` écriture atomique (3 l., un fichier, protège les deux volets).
+**P1**
+
+- _(fait — F1)_ — socle atomique en place, protège les trois volets.
 
 **P2 — robustesse & duplication (petits, gain net)**
 
 - **F3** — try + validation de forme des payloads d'écriture (garde l'entrée de F1).
 - **F6** — confinement du chemin guide (`slug`/`fromKey`) — 1 ligne, idiome maison.
-- **E4** — timeout sur l'extraction bytes/images (aligné sur audio).
-- **E2** — garde anti-suppression massive sur miss partiel de listing.
-- **E3 + F4** — dédup à la source : helper PNG partagé (×3) ; hook `useAutoTranslate` (×6, allège aussi F9).
+- **X2** — router `review.readCommitted` / `integrate.readJsonOr` par `readCuratedJson` (supprime le risque de wipe ; converge avec F1).
+- **X3** — mémoïser `character`/`monster` dans `targets.ts` (mirroir equipment/item) → coupe le gros du **1 320 ms**.
+- **F4** — hook `useAutoTranslate` (dédup translate ×6, allège aussi F9).
 
-**P3 — tests & perf**
+**P3 — tests**
 
-- **F8 + E1** — tests des fonctions qui **mutent/parsent** : 16 stores admin en tête, puis parsers `ls -lR`/`md5sum`.
-- **E6** — parallélisme dédup wallpapers ; **[handoff]** `extractor/reviewAll` (1 320 ms).
+- **F8 + E1 + X1** — tests des fonctions qui **mutent/parsent** : 16 stores admin, parsers `ls -lR`/`md5sum`, prédicats de specs (`isInnatePierce`, exclusion NPC de `select` — le siège du bug de la session).
+- **E6** — parallélisme dédup wallpapers.
 
 **Dette (au fil de l'eau)**
 
 - **F2** — frontière `admin/` (documenter les modules qui shippent, ou extraire `lib/editorial/`).
-- **F9** — taille des composants (F4 en retire une part) ; **E7** élagage blocklist wallpapers (après mesure) ; **F5** aperçus au montage ; **F7** concurrence stores.
+- **F9** — taille des composants (F4 en retire une part) ; **E7** élagage blocklist wallpapers (après mesure) ; **F5** aperçus au montage ; **F7** concurrence stores ; **X4** micro-opt du diff (négligeable).
 
 ## Note de méthode
 
@@ -111,11 +115,11 @@ distinction compte pour arbitrer :
   scan de tags 120 ms), comptages (27/27 routes, 53 sites d'écriture, 8 entrées
   publiques), exécution réelle des résolveurs. Chaque chiffre du volet admin est
   reproductible.
-- **E1–E8** (extraction) : produits par l'audit du pipeline `datagen/extract/`,
-  repris ici **sans re-vérification indépendante**. Les sévérités et les
-  références `fichier:ligne` sont celles de ce rapport.
-- **Chiffres d'`extractor/`** (§ Angle mort) : mesurés de première main le 26/07.
+- **E1–E8** (extraction) et **X1–X6** (extractor) : audités de première main
+  (lecture du code + comptages : 7 fic./1160 l. et 13 fic./2699 l.). Les X ont été
+  écrits en relisant `extractor/` directement, pas depuis un résumé. Les sévérités
+  et références `fichier:ligne` sont celles de leurs rapports respectifs.
 
-`TODO.md`/`DONE.md` ne sont pas alimentés depuis cette synthèse : ils portent des
-modifs non commitées. Ce backlog est le matériau à trier ensemble ; Sevih décide ce
-qui monte dans `TODO.md`.
+`DONE.md` n'est pas alimenté depuis cette synthèse (modifs non commitées du worker).
+`TODO.md` porte déjà la répartition par rôle (section « Suite d'audit », arbre de
+travail) — Claude a coché F1/E2/E3/E4 faits. Sevih tranche ce qui reste à trier.
