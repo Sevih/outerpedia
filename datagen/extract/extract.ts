@@ -36,9 +36,16 @@ const BUNDLES = resolve(ROOT, 'files/bundles');
 const OUT_BYTES = resolve(ROOT, 'extracted/bytes');
 const OUT_IMAGES = resolve(ROOT, 'extracted/images');
 
+// Garde-fou anti-BLOCAGE (audit E4) — pas un plafond de durée normale. Un appel
+// AssetStudio (bytes OU images) n'est qu'une fraction du process complet, qui
+// tourne ~10-15 min sur un gros patch (pull+extract+build) ; 30 min est donc bien
+// au-dessus du pire cas d'UNE passe, mais borne un process réellement pendu (qui,
+// lui, ne rendrait jamais la main). Aligné en esprit sur le timeout de l'audio.
+const EXTRACT_TIMEOUT_MS = 30 * 60_000;
+
 function cli(args: string[]): void {
   const bin = CLI_OVERRIDE ?? ensureTool(ASSETSTUDIO);
-  execFileSync(bin, args, { stdio: 'inherit' });
+  execFileSync(bin, args, { stdio: 'inherit', timeout: EXTRACT_TIMEOUT_MS });
 }
 
 /** .bytes = templates (Templet) + textes (Text*), à plat. */
