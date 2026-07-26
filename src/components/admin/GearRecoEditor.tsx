@@ -21,8 +21,8 @@ import {
   type GearItem,
 } from '@/components/character/GearRecoSection';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
-import { autoTranslate } from '@/lib/admin/translate-actions';
-import { applyTranslation, createFreshness } from '@/lib/admin/translate-fill';
+import { createFreshness } from '@/lib/admin/translate-fill';
+import { useAutoTranslate } from '@/lib/admin/useAutoTranslate';
 import {
   previewGearReco,
   listImportableBuilds,
@@ -164,8 +164,6 @@ export function GearRecoEditor({
   const [editing, setEditing] = useState<EditKey>(null);
   const [noteLang, setNoteLang] = useState<NoteLang>('en');
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
-  const [trans, setTrans] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
-  const [transMsg, setTransMsg] = useState<string | null>(null);
   const [resolved, setResolved] = useState<{
     builds: PreviewBuild[];
     labels: import('@/components/character/GearRecoSection').GearRecoLabels;
@@ -253,47 +251,22 @@ export function GearRecoEditor({
   }
 
   // --- Traduction des notes ----------------------------------------------------
-  async function translateNotes() {
-    setTrans('loading');
-    setTransMsg(null);
-    const tgt = NOTE_LANGS.filter((l) => l !== 'en');
-    // On n'envoie que ce qui a BOUGÉ (EN édité/ajouté) ou à qui il manque une
-    // langue — inutile de repayer DeepL pour l'identique.
-    const jobs: { i: number; en: string }[] = [];
-    builds.forEach((bd, i) => {
-      if (bd.note && freshness.isStale(bd.note, tgt)) jobs.push({ i, en: bd.note.en! });
-    });
-    if (!jobs.length) {
-      setTrans('done');
-      setTransMsg('Nothing to translate — every English note is already up to date.');
-      return;
-    }
-    try {
-      const { results, provider } = await autoTranslate(
-        jobs.map((j) => j.en),
-        tgt,
-      );
-      const next = builds.slice();
-      let filled = 0;
-      jobs.forEach((job, k) => {
-        const tr = results[k] ?? {};
-        const note: NonNullable<GearBuild['note']> = { ...(next[job.i].note ?? {}) };
-        filled += applyTranslation(note, tr, tgt);
-        freshness.markFresh(note);
-        next[job.i] = { ...next[job.i], note };
-      });
-      setBuilds(next);
-      setTrans('done');
-      setTransMsg(
-        filled
-          ? `${filled} note(s) via ${provider === 'haiku' ? 'Haiku (DeepL quota reached)' : 'DeepL'} — to review.`
-          : 'Every note already matched its English text.',
-      );
-    } catch (e) {
-      setTrans('error');
-      setTransMsg((e as Error).message);
-    }
-  }
+  // Seule la LOGIQUE est mutualisée : le JSX de cet éditeur diffère (libellé
+  // « Translate notes », message rejeté après le bouton Save), il garde donc le
+  // sien et lit `translate.state` / `translate.message`.
+  const translate = useAutoTranslate({
+    langs: NOTE_LANGS,
+    freshness,
+    collect: () => {
+      // Copie des seules notes existantes : ce sont elles que le hook mute.
+      const draft = builds.map((bd) => (bd.note ? { ...bd, note: { ...bd.note } } : bd));
+      const records = draft
+        .map((bd) => bd.note)
+        .filter((n): n is NonNullable<GearBuild['note']> => Boolean(n));
+      return { draft, records };
+    },
+    commit: setBuilds,
+  });
 
   async function save() {
     setStatus({ kind: 'idle' });
@@ -727,11 +700,11 @@ export function GearRecoEditor({
         <button
           type="button"
           className={btn}
-          onClick={translateNotes}
-          disabled={trans === 'loading'}
+          onClick={translate.run}
+          disabled={translate.state === 'loading'}
           title="Regenerates every other language from the English note — existing translations are overwritten"
         >
-          {trans === 'loading' ? 'Translating…' : 'Translate notes (EN → all)'}
+          {translate.state === 'loading' ? 'Translating…' : 'Translate notes (EN → all)'}
         </button>
         <button
           type="button"
@@ -740,9 +713,11 @@ export function GearRecoEditor({
         >
           Save
         </button>
-        {transMsg && (
-          <span className={`text-sm ${trans === 'error' ? 'text-danger' : 'text-content-subtle'}`}>
-            {transMsg}
+        {translate.message && (
+          <span
+            className={`text-sm ${translate.state === 'error' ? 'text-danger' : 'text-content-subtle'}`}
+          >
+            {translate.message}
           </span>
         )}
         {status.kind === 'ok' && <span className="text-success text-sm">{status.msg}</span>}

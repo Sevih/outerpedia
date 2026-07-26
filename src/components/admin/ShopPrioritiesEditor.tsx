@@ -26,8 +26,9 @@ import type {
   ShopPrioritiesEditData,
   TextShop,
 } from '@/lib/admin/shop-priorities-store';
-import { autoTranslate } from '@/lib/admin/translate-actions';
-import { applyTranslation, createFreshness } from '@/lib/admin/translate-fill';
+import { createFreshness } from '@/lib/admin/translate-fill';
+import { useAutoTranslate } from '@/lib/admin/useAutoTranslate';
+import { TranslateButton } from '@/components/admin/TranslateButton';
 import { InlineTextField } from '@/components/admin/InlineTextField';
 import { EditorTabs } from '@/components/admin/EditorTabs';
 import { ItemInline } from '@/components/inline/ItemInline';
@@ -523,8 +524,6 @@ export function ShopPrioritiesEditor({
   );
   const [state, setState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
-  const [trans, setTrans] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
-  const [transMsg, setTransMsg] = useState<string | null>(null);
 
   const derivedByKey = useMemo(
     () => new Map(initial.derived.map((s) => [s.key, s])),
@@ -546,40 +545,18 @@ export function ShopPrioritiesEditor({
   };
 
   /* --- Traduction EN → autres langues (seulement ce qui a bougé) --- */
-  async function translateAll() {
-    setTrans('loading');
-    setTransMsg(null);
-    const targets = LANGS.filter((l) => l !== 'en');
-    const stale = allTexts(overlay, editorial).filter((t) => freshness.isStale(t, targets));
-    if (!stale.length) {
-      setTrans('done');
-      setTransMsg('Nothing to translate — every English text is already up to date.');
-      return;
-    }
-    try {
-      const { results, provider } = await autoTranslate(
-        stale.map((t) => t.en!),
-        targets,
-      );
-      let filled = 0;
-      stale.forEach((rec, k) => {
-        filled += applyTranslation(rec, results[k] ?? {}, targets);
-        freshness.markFresh(rec);
-      });
-      // Les objets mutés sont partagés par référence avec les états → on force le rerender.
+  const translate = useAutoTranslate({
+    langs: LANGS,
+    freshness,
+    // Mutation EN PLACE : ici les textes appartiennent déjà aux états, il n'y a
+    // donc pas de copie à publier (`draft` vide) — seulement le rerender à
+    // forcer, les objets mutés étant partagés par référence.
+    collect: () => ({ draft: undefined, records: allTexts(overlay, editorial) }),
+    commit: () => {
       setOverlay((o) => ({ ...o }));
       setEditorial((e) => ({ ...e }));
-      setTrans('done');
-      setTransMsg(
-        filled
-          ? `${filled} field(s) translated via ${provider === 'haiku' ? 'Haiku (DeepL quota reached)' : 'DeepL'} — review before saving.`
-          : 'Every translation already matched the English text.',
-      );
-    } catch (e) {
-      setTrans('error');
-      setTransMsg((e as Error).message);
-    }
-  }
+    },
+  });
 
   async function save() {
     setState('saving');
@@ -705,20 +682,7 @@ export function ShopPrioritiesEditor({
             </button>
           ))}
         </div>
-        <button
-          type="button"
-          className={btn}
-          onClick={translateAll}
-          disabled={trans === 'loading'}
-          title="Regenerates every other language from the English text — existing translations are overwritten (DeepL → Haiku)"
-        >
-          {trans === 'loading' ? 'Translating…' : 'Translate (EN → all)'}
-        </button>
-        {transMsg && (
-          <span className={`text-xs ${trans === 'error' ? 'text-danger' : 'text-content-subtle'}`}>
-            {transMsg}
-          </span>
-        )}
+        <TranslateButton t={translate} className={btn} />
       </div>
 
       <EditorTabs tabs={tabs} />

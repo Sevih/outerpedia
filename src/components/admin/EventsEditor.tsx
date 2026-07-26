@@ -24,6 +24,7 @@ import { postJson } from '@/lib/admin/post-json';
 import { rowKey, stripKey } from '@/lib/admin/keyed';
 import { autoTranslate } from '@/lib/admin/translate-actions';
 import { applyTranslation, createFreshness } from '@/lib/admin/translate-fill';
+import { TRANSLATE_MSG } from '@/lib/admin/useAutoTranslate';
 import {
   EVENT_TYPES,
   EVENT_VIDEO_PLATFORMS,
@@ -557,7 +558,7 @@ export function EventsEditor({ initial }: { initial: EventEntry[] }) {
       // langue — inutile de repayer DeepL pour l'identique.
       const texts = collectTexts(clone).filter((t) => freshness.isStale(t, targets));
       if (!texts.length) {
-        setStatus({ kind: 'err', msg: 'Rien à traduire — tous les textes anglais sont à jour.' });
+        setStatus({ kind: 'err', msg: TRANSLATE_MSG.nothingStale });
         return;
       }
       const { results, provider } = await autoTranslate(
@@ -572,9 +573,7 @@ export function EventsEditor({ initial }: { initial: EventEntry[] }) {
       setRows((s) => s.map((r) => (r._key === selected ? clone : r)));
       setStatus({
         kind: 'ok',
-        msg: filled
-          ? `${filled} champ(s) traduits via ${provider} — à relire avant d'enregistrer.`
-          : 'Toutes les traductions correspondaient déjà au texte anglais.',
+        msg: filled ? TRANSLATE_MSG.filled(filled, provider) : TRANSLATE_MSG.noChange,
       });
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });

@@ -14,9 +14,10 @@ import { useMemo, useState } from 'react';
 import { type Keyed, rowKey, stripKey, withKey } from '@/lib/admin/keyed';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import type { FreeHeroesData, FreeHeroSourceData } from '@/lib/admin/general-guide-store';
-import { autoTranslate } from '@/lib/admin/translate-actions';
-import { applyTranslation, createFreshness } from '@/lib/admin/translate-fill';
+import { createFreshness } from '@/lib/admin/translate-fill';
+import { useAutoTranslate } from '@/lib/admin/useAutoTranslate';
 import { InlineTextField } from '@/components/admin/InlineTextField';
+import { TranslateButton } from '@/components/admin/TranslateButton';
 import {
   CharacterChips,
   CharacterNameDatalist,
@@ -61,8 +62,6 @@ export function FreeHeroesEditor({
   const [sources, setSources] = useState<KSource[]>(() => initial.sources.map(keySource));
   const [state, setState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
-  const [trans, setTrans] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
-  const [transMsg, setTransMsg] = useState<string | null>(null);
   // Photo des EN au chargement : référence de ce qui est « déjà traduit ».
   const [freshness] = useState(() =>
     createFreshness(
@@ -89,51 +88,23 @@ export function FreeHeroesEditor({
     } as Partial<KSource>);
 
   /* --- Auto-traduction : EN → toutes les langues (libellés + raisons) --- */
-  async function translateAll() {
-    setTrans('loading');
-    setTransMsg(null);
-    const targets = LANGS.filter((l) => l !== 'en');
-
-    // Clone profond, collecte des LText EN à traduire.
-    const next: KSource[] = sources.map((s) => ({
-      ...s,
-      source: { ...s.source },
-      entries: s.entries.map((e) => ({ ...e, reason: { ...e.reason } })),
-    }));
-    // Ne part au traducteur que ce qui a BOUGÉ (EN édité/ajouté) ou à qui il
-    // manque une langue — inutile de repayer DeepL pour l'identique.
-    const recs: LText[] = [];
-    next.forEach((s) => {
-      recs.push(s.source, ...s.entries.map((e) => e.reason));
-    });
-    const stale = recs.filter((t) => freshness.isStale(t, targets));
-    if (!stale.length) {
-      setTrans('done');
-      setTransMsg('Nothing to translate — every English text is already up to date.');
-      return;
-    }
-    try {
-      const { results, provider } = await autoTranslate(
-        stale.map((r) => r.en!),
-        targets,
-      );
-      let filled = 0;
-      stale.forEach((rec, k) => {
-        filled += applyTranslation(rec, results[k] ?? {}, targets);
-        freshness.markFresh(rec);
-      });
-      setSources(next);
-      setTrans('done');
-      setTransMsg(
-        filled
-          ? `${filled} field(s) translated via ${provider === 'haiku' ? 'Haiku (DeepL quota reached)' : 'DeepL'} — review before saving.`
-          : 'Every translation already matched the English text.',
-      );
-    } catch (e) {
-      setTrans('error');
-      setTransMsg((e as Error).message);
-    }
-  }
+  const translate = useAutoTranslate({
+    langs: LANGS,
+    freshness,
+    // Clone profond : les LText collectés appartiennent à cette copie, que le
+    // hook mute puis publie via `commit`.
+    collect: () => {
+      const draft: KSource[] = sources.map((s) => ({
+        ...s,
+        source: { ...s.source },
+        entries: s.entries.map((e) => ({ ...e, reason: { ...e.reason } })),
+      }));
+      const records: LText[] = [];
+      draft.forEach((s) => records.push(s.source, ...s.entries.map((e) => e.reason)));
+      return { draft, records };
+    },
+    commit: setSources,
+  });
 
   /* --- Enregistrement --- */
   async function save() {
@@ -181,20 +152,7 @@ export function FreeHeroesEditor({
             </button>
           ))}
         </div>
-        <button
-          type="button"
-          className={btn}
-          onClick={translateAll}
-          disabled={trans === 'loading'}
-          title="Regenerates every other language from the English text — existing translations are overwritten (DeepL → Haiku)"
-        >
-          {trans === 'loading' ? 'Translating…' : 'Translate (EN → all)'}
-        </button>
-        {transMsg && (
-          <span className={`text-xs ${trans === 'error' ? 'text-danger' : 'text-content-subtle'}`}>
-            {transMsg}
-          </span>
-        )}
+        <TranslateButton t={translate} className={btn} />
       </div>
 
       <p className="text-content-subtle text-sm">

@@ -13,8 +13,9 @@
 import { useState } from 'react';
 import type { CharacterCurated } from '@contracts';
 import { type Keyed, stripKey, withKey } from '@/lib/admin/keyed';
-import { autoTranslate } from '@/lib/admin/translate-actions';
-import { applyTranslation, createFreshness } from '@/lib/admin/translate-fill';
+import { createFreshness } from '@/lib/admin/translate-fill';
+import { useAutoTranslate } from '@/lib/admin/useAutoTranslate';
+import { TranslateButton } from '@/components/admin/TranslateButton';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import {
   EditorialFields,
@@ -68,8 +69,6 @@ export function EditorialEditor({
   );
   const [state, setState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
-  const [trans, setTrans] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
-  const [transMsg, setTransMsg] = useState<string | null>(null);
   // Photo des EN au chargement : référence de ce qui est « déjà traduit ».
   const [freshness] = useState(() =>
     createFreshness([
@@ -84,63 +83,34 @@ export function EditorialEditor({
    * synergie) en un seul appel — les trads existantes sont ÉCRASÉES, l'EN fait
    * foi (cf. `applyTranslation`). À REVOIR avant enregistrement.
    */
-  async function translateAll() {
-    setTrans('loading');
-    setTransMsg(null);
-    const tgt = LANGS.filter((l) => l !== 'en');
-    // On n'envoie que ce qui a BOUGÉ (EN édité/ajouté) ou à qui il manque une
-    // langue — inutile de repayer DeepL pour l'identique.
-    const jobs: { en: string; kind: 'pros' | 'cons' | 'reason'; i: number }[] = [];
-    const stale = (t?: LocalizedText) => Boolean(t && freshness.isStale(t, tgt));
-    pros.forEach((p, i) => stale(p) && jobs.push({ en: p.en!, kind: 'pros', i }));
-    cons.forEach((p, i) => stale(p) && jobs.push({ en: p.en!, kind: 'cons', i }));
-    synergies.forEach((g, i) => stale(g.reason) && jobs.push({ en: g.reason!.en!, kind: 'reason', i })); // prettier-ignore
-    if (!jobs.length) {
-      setTrans('done');
-      setTransMsg('Nothing to translate — every English text is already up to date.');
-      return;
-    }
-    try {
-      const { results, provider } = await autoTranslate(
-        jobs.map((j) => j.en),
-        tgt,
-      );
-      const nextPros = pros.slice();
-      const nextCons = cons.slice();
-      const nextSyn = synergies.slice();
-      let filled = 0;
-      const fillInto = (rec: LocalizedText, tr: Partial<LocalizedText>) => {
-        filled += applyTranslation(rec, tr, tgt);
-        freshness.markFresh(rec);
-      };
-      jobs.forEach((job, k) => {
-        const tr = results[k] ?? {};
-        if (job.kind === 'reason') {
-          const g = nextSyn[job.i];
-          const reason: LocalizedText = { ...(g.reason ?? {}) };
-          fillInto(reason, tr);
-          nextSyn[job.i] = { ...g, reason };
-        } else {
-          const arr = job.kind === 'pros' ? nextPros : nextCons;
-          const rec: LocalizedText = { ...arr[job.i] };
-          fillInto(rec, tr);
-          arr[job.i] = { ...arr[job.i], ...rec };
-        }
-      });
+  const translate = useAutoTranslate({
+    langs: LANGS,
+    freshness,
+    // Les copies sont faites D'ABORD : le hook mute les enregistrements qu'on lui
+    // rend, ils doivent donc déjà appartenir aux tableaux que `commit` publiera.
+    // (Avant, une structure `jobs` {kind, index} reroutait chaque résultat vers sa
+    // case — le filtrage du périmé et le report vivent maintenant dans le hook.)
+    collect: () => {
+      const nextPros = pros.map((p) => ({ ...p }));
+      const nextCons = cons.map((c) => ({ ...c }));
+      const nextSyn = synergies.map((g) => ({
+        ...g,
+        reason: g.reason ? { ...g.reason } : undefined,
+      }));
+      const records: LocalizedText[] = [
+        ...nextPros,
+        ...nextCons,
+        // Seules les synergies QUI ONT une raison sont traduisibles.
+        ...nextSyn.map((g) => g.reason).filter((r): r is LocalizedText => Boolean(r)),
+      ];
+      return { draft: { nextPros, nextCons, nextSyn }, records };
+    },
+    commit: ({ nextPros, nextCons, nextSyn }) => {
       setPros(nextPros);
       setCons(nextCons);
       setSynergies(nextSyn);
-      setTrans('done');
-      setTransMsg(
-        filled
-          ? `${filled} field(s) translated via ${provider === 'haiku' ? 'Haiku (DeepL quota reached)' : 'DeepL'} — review before saving.`
-          : 'Every translation already matched the English text.',
-      );
-    } catch (e) {
-      setTrans('error');
-      setTransMsg((e as Error).message);
-    }
-  }
+    },
+  });
 
   async function save() {
     setState('saving');
@@ -191,20 +161,7 @@ export function EditorialEditor({
             </button>
           ))}
         </div>
-        <button
-          type="button"
-          className={btn}
-          onClick={translateAll}
-          disabled={trans === 'loading'}
-          title="Regenerates every other language from the English text — existing translations are overwritten (DeepL → Haiku)"
-        >
-          {trans === 'loading' ? 'Translating…' : 'Translate (EN → all)'}
-        </button>
-        {transMsg && (
-          <span className={`text-xs ${trans === 'error' ? 'text-danger' : 'text-content-subtle'}`}>
-            {transMsg}
-          </span>
-        )}
+        <TranslateButton t={translate} className={btn} />
       </div>
 
       <EditorialFields

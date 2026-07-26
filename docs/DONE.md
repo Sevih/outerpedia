@@ -6,6 +6,39 @@
 
 ## 2026-07-26
 
+- **F4 : hook `useAutoTranslate` + `TranslateButton`** — fin de l'échafaudage
+  « Translate » recopié. **−335 / +193 lignes** sur les éditeurs (~142 lignes de
+  duplication retirées). Le COMPORTEMENT vivait déjà en un point
+  (`translate-fill.ts`) ; ce qui restait dupliqué était la plomberie : deux états,
+  les langues cibles, la sortie anticipée, l'appel, la boucle
+  `applyTranslation` + `markFresh`, les messages — jusqu'aux chaînes littérales,
+  identiques dans six fichiers. Le JSX du bouton l'était aussi (infobulle et
+  classes comprises) d'où la seconde extraction. Chaque éditeur ne fournit plus
+  que `collect()` (copie mutable + enregistrements) et `commit()` (publication) —
+  la seule chose qui variait vraiment.
+  PÉRIMÈTRE, revu contre le code et non contre l'audit : **5 éditeurs** sur le hook
+  (FreeHeroes, Guide, ShopPriorities, Editorial, GearReco — ce dernier avait bien
+  l'échafaudage, l'audit l'avait écarté à tort) ; `GearRecoEditor` garde son JSX
+  (libellé « Translate notes », message après le bouton Save) ;
+  `PremiumLimitedEditor` **non migré volontairement** — il délègue déjà à
+  `translateReviews`, qui RETOURNE un objet au lieu de muter, le forcer dans le
+  modèle collect/commit aurait été un mauvais ajustement ; il consomme les
+  messages partagés. Résultat : plus une seule chaîne dupliquée ni un état
+  `trans/transMsg` résiduel.
+  TROUVÉ EN ROUTE : `EventsEditor` avait ses messages en FRANÇAIS (convention = UI
+  en anglais) ; trois divergences accidentelles effacées (`Haiku` sans mention du
+  quota, `note(s) via X — to review.`, « to review » vs « review ») — le libellé de
+  GearReco passe donc de « notes » à « fields ». Dans `GuideEditor`, le hook a dû
+  REMONTER au-dessus du `if (!spec) return` (règle des hooks ; l'ancienne fonction
+  pouvait vivre plus bas) — un ⚠ le dit sur place, sinon on le « rangera » et ça
+  cassera.
+  TESTS : `useAutoTranslate.hook.test.tsx` (6 cas) sur le précédent maison
+  (`client-storage.hook.test`, rendu réel via `react-dom/client` sous happy-dom) :
+  sortie anticipée sans `commit`, comptage, repli Haiku, cas « déjà identique »,
+  et l'erreur du traducteur qui ne doit JAMAIS échapper. L'état `loading` n'était
+  pas observable (React 19 regroupe les rendus) → l'appel est tenu en suspens pour
+  vérifier que le bouton est bien désactivé PENDANT l'appel.
+
 - **F3 : garde de FORME sur tous les corps d'écriture admin** — et sévérité
   RÉVISÉE À LA HAUSSE. L'audit annonçait « JSON malformé → 500 » ; l'exécution a
   montré bien pire. Les stores « compactent » l'entrée reçue puis appliquent
@@ -25,7 +58,7 @@
   nu. 5 contrôles `Array.isArray` devenus morts retirés (pas de garde en double
   qui ferait croire à deux niveaux). AUCUNE dépendance ajoutée (pas de zod) ; la
   validation PAR CHAMP reste dans les stores, où elle est déjà et a du sens.
-  - `route-body.test.ts` (10 cas, dont les 5 payloads qui effaçaient la curée).
+  TESTS : `route-body.test.ts` (10 cas, dont les 5 payloads qui effaçaient la curée).
 
 - **F6 : confinement des chemins d'écriture de guides** (`guide-store.ts`).
   `guideDir` faisait `resolve(CONTENTS_DIR, category, slug)` sans vérifier le

@@ -52,6 +52,11 @@
 > extraction), l'**audit `datagen/extractor/`** (constats X1–X6), **X3**
 > (mémoïsation `character`/`monster`, `0396470`) et **X2** (lecture committé via
 > `readCuratedJson`, anti-wipe, `f3f1cd0`). Reste ci-dessous.
+> ✅ Faits le 26/07 (Worker, migrés dans [DONE.md](./DONE.md)) : **F6**
+> (confinement des chemins de guides, `c13ba4b`), **F3** (garde de forme des corps
+> d'écriture — sévérité révisée à la hausse : un payload mal typé SUPPRIMAIT la
+> curée, `7854a6e`), **F4** (hook `useAutoTranslate` + `TranslateButton`) et le
+> complément de **F1** (temporaire unique, `bd88cc4`).
 
 ### 👤 Claude — datagen / extraction / socle
 
@@ -65,8 +70,6 @@
 
 ### 🤖 Worker — panneau admin (`src/**/admin`)
 
-- [ ] **F4** _(P2)_ — hook `useAutoTranslate(collect)` : dédup de l'échafaudage
-      « translate » répété ×6 (allège aussi F9).
 - [ ] **F8** _(P3)_ — tests des **16 stores qui écrivent** en priorité (pas les
       composants) : une régression y corrompt la donnée éditoriale en silence.
 - [ ] **F5** _(dette)_ — aperçu au montage : garde « un seul éditeur actif »

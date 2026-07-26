@@ -25,8 +25,9 @@ import {
   type TipSectionDraft,
   type VersionDraft,
 } from '@/lib/admin/guide-draft';
-import { autoTranslate } from '@/lib/admin/translate-actions';
-import { applyTranslation, createFreshness } from '@/lib/admin/translate-fill';
+import { createFreshness } from '@/lib/admin/translate-fill';
+import { useAutoTranslate } from '@/lib/admin/useAutoTranslate';
+import { TranslateButton } from '@/components/admin/TranslateButton';
 import { EditorTabs } from '@/components/admin/EditorTabs';
 import { InlineTextField } from '@/components/admin/InlineTextField';
 import {
@@ -223,8 +224,6 @@ export function GuideEditor({
   const [active, setActive] = useState(0);
   const [state, setState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
-  const [trans, setTrans] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
-  const [transMsg, setTransMsg] = useState<string | null>(null);
   const [adding, setAdding] = useState(false);
   const [newKey, setNewKey] = useState('');
   const [fromKey, setFromKey] = useState('');
@@ -241,6 +240,56 @@ export function GuideEditor({
     hasRaw && !hasText(title)
       ? 'Auto title (generated) — type to override'
       : `Title (optional${lang === 'en' ? '' : `, EN: ${title?.en ?? '—'}`})`;
+
+  /* --- Auto-traduction (version active + intro) ---
+   *
+   * ⚠ DOIT rester AVANT le `if (!spec) return` ci-dessous : c'est un HOOK, il ne
+   * peut pas être appelé conditionnellement (l'ancienne `translateAll` était une
+   * simple fonction, elle pouvait vivre plus bas). `collect`/`commit` référencent
+   * `v` et `patch`, déclarés après — sans risque, ces closures ne s'exécutent
+   * qu'au clic. */
+  const translate = useAutoTranslate({
+    langs: LANGS,
+    freshness,
+    collect: () => {
+      // Sans version active il n'y a rien à traduire : zéro enregistrement, le
+      // hook répond « nothing to translate » (plutôt qu'un bouton qui ne fait rien).
+      if (!v) return { draft: null, records: [] };
+
+      const nextIntro: LText = { ...intro };
+      const cv: VersionDraft = {
+        ...v,
+        tipSections: v.tipSections.map((s) => ({
+          ...s,
+          title: s.title ? { ...s.title } : undefined,
+          tips: s.tips.map((t) => ({ ...t })),
+        })),
+        notes: v.notes.map((t) => ({ ...t })),
+        recommended: v.recommended.map((g) => ({
+          ...g,
+          reason: g.reason ? { ...g.reason } : undefined,
+        })),
+        recoSections: v.recoSections.map((s) => ({
+          ...s,
+          title: s.title ? { ...s.title } : undefined,
+          groups: s.groups.map((g) => ({ ...g, reason: g.reason ? { ...g.reason } : undefined })),
+        })),
+        teams: v.teams.map((t) => ({
+          ...t,
+          title: t.title ? { ...t.title } : undefined,
+          note: t.note ? { ...t.note } : undefined,
+          notes: t.notes ? t.notes.map((n) => ({ ...n })) : undefined,
+        })),
+      };
+
+      return { draft: { intro: nextIntro, cv }, records: [nextIntro, ...versionTexts(cv)] };
+    },
+    commit: (draft) => {
+      if (!draft) return;
+      setIntro(draft.intro);
+      patch(draft.cv);
+    },
+  });
 
   if (!spec) return <p className="text-content-subtle text-sm">Non-editable category.</p>;
 
@@ -261,72 +310,6 @@ export function GuideEditor({
   };
   const show = (t: LText | undefined): string => t?.[lang] ?? '';
   const orUndef = (t: LText): LText | undefined => (hasText(t) ? t : undefined);
-
-  /* --- Auto-traduction (version active + intro) --- */
-  async function translateAll() {
-    if (!v) return;
-    setTrans('loading');
-    setTransMsg(null);
-    const targets = LANGS.filter((l) => l !== 'en');
-
-    const nextIntro: LText = { ...intro };
-    const cv: VersionDraft = {
-      ...v,
-      tipSections: v.tipSections.map((s) => ({
-        ...s,
-        title: s.title ? { ...s.title } : undefined,
-        tips: s.tips.map((t) => ({ ...t })),
-      })),
-      notes: v.notes.map((t) => ({ ...t })),
-      recommended: v.recommended.map((g) => ({
-        ...g,
-        reason: g.reason ? { ...g.reason } : undefined,
-      })),
-      recoSections: v.recoSections.map((s) => ({
-        ...s,
-        title: s.title ? { ...s.title } : undefined,
-        groups: s.groups.map((g) => ({ ...g, reason: g.reason ? { ...g.reason } : undefined })),
-      })),
-      teams: v.teams.map((t) => ({
-        ...t,
-        title: t.title ? { ...t.title } : undefined,
-        note: t.note ? { ...t.note } : undefined,
-        notes: t.notes ? t.notes.map((n) => ({ ...n })) : undefined,
-      })),
-    };
-
-    // Ne part au traducteur que ce qui a BOUGÉ (EN édité/ajouté) ou à qui il
-    // manque une langue — inutile de repayer DeepL pour l'identique.
-    const recs = [nextIntro, ...versionTexts(cv)].filter((t) => freshness.isStale(t, targets));
-
-    if (!recs.length) {
-      setTrans('done');
-      setTransMsg('Nothing to translate — every English text is already up to date.');
-      return;
-    }
-    try {
-      const { results, provider } = await autoTranslate(
-        recs.map((r) => r.en),
-        targets,
-      );
-      let filled = 0;
-      recs.forEach((rec, k) => {
-        filled += applyTranslation(rec, results[k] ?? {}, targets);
-        freshness.markFresh(rec);
-      });
-      setIntro(nextIntro);
-      patch(cv);
-      setTrans('done');
-      setTransMsg(
-        filled
-          ? `${filled} field(s) translated via ${provider === 'haiku' ? 'Haiku (DeepL quota reached)' : 'DeepL'} — to review before saving.`
-          : 'Every translation already matched the English text.',
-      );
-    } catch (e) {
-      setTrans('error');
-      setTransMsg((e as Error).message);
-    }
-  }
 
   /* --- Enregistrement / ajout de version --- */
   async function save() {
@@ -876,20 +859,7 @@ export function GuideEditor({
             </button>
           ))}
         </div>
-        <button
-          type="button"
-          className={btn}
-          onClick={translateAll}
-          disabled={trans === 'loading'}
-          title="Regenerates every other language from the English text — existing translations are overwritten (DeepL → Haiku)"
-        >
-          {trans === 'loading' ? 'Translating…' : 'Translate (EN → all)'}
-        </button>
-        {transMsg && (
-          <span className={`text-xs ${trans === 'error' ? 'text-danger' : 'text-content-subtle'}`}>
-            {transMsg}
-          </span>
-        )}
+        <TranslateButton t={translate} className={btn} />
       </div>
 
       {/* Intro */}

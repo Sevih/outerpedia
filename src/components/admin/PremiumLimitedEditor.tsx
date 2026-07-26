@@ -16,6 +16,7 @@ import type { PremiumLimitedData, ReviewsBundle } from '@/lib/admin/general-guid
 import type { CharOption } from '@/components/admin/CharacterPicker';
 import { CharacterNameDatalist } from '@/components/admin/CharacterChips';
 import { createFreshness } from '@/lib/admin/translate-fill';
+import { TRANSLATE_MSG } from '@/lib/admin/useAutoTranslate';
 import {
   DATALIST_ID,
   LangBar,
@@ -79,11 +80,7 @@ export function PremiumLimitedEditor({
     try {
       const { next, filled, provider } = await translateReviews(reviews, freshness);
       setReviews(next);
-      setMsg(
-        filled
-          ? `${filled} field(s) translated via ${provider === 'haiku' ? 'Haiku' : 'DeepL'} — review before saving.`
-          : 'Nothing to translate — every English text is already up to date.',
-      );
+      setMsg(filled ? TRANSLATE_MSG.filled(filled, provider) : TRANSLATE_MSG.nothingStale);
     } catch (e) {
       setMsg((e as Error).message);
     } finally {
