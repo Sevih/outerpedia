@@ -18,9 +18,8 @@
  * (`integrate.test.ts`) — les wrappers publics ne font qu'y brancher
  * l'extraction fraîche et le staging d'images.
  */
-import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { writeJson as writeCanonicalJson } from '../lib/json';
+import { readCuratedJson, writeJson as writeCanonicalJson } from '../lib/json';
 import { characterAssetRequests, skillIconsOf } from '../assets/manifest';
 import { buildImageIndex } from '../assets/source';
 import { stageAssets, type StageResult } from '../assets/stage';
@@ -37,17 +36,20 @@ const GEN = resolve('data/generated');
 
 type Dict = Record<string, unknown>;
 // `dir` injectable : les tests travaillent sur un dossier temporaire, jamais
-// sur le vrai `data/generated`.
-const readJson = (dir: string, rel: string): Dict =>
-  JSON.parse(readFileSync(resolve(dir, rel), 'utf8')) as Dict;
-/** Comme `readJson`, mais `{}` si le fichier n'existe pas encore (1re intégration). */
-const readJsonOr = (dir: string, rel: string): Dict => {
-  try {
-    return readJson(dir, rel);
-  } catch {
-    return {};
-  }
+// sur le vrai `data/generated`. Lecture via `readCuratedJson` : un fichier
+// PRÉSENT mais CASSÉ (JSON tronqué, conflit git non résolu) LÈVE en nommant le
+// fichier — jamais un `{}` silencieux. Sinon on mergerait UNE entité sur du vide
+// et l'écriture PERDRAIT toutes les autres du committé (audit X2 — même famille
+// que F1/E2 : lecture ratée traitée comme un vide, qui purge sans un mot).
+const readJson = (dir: string, rel: string): Dict => {
+  const data = readCuratedJson<Dict>(resolve(dir, rel));
+  if (data === undefined) throw new Error(`${resolve(dir, rel)} : fichier absent`);
+  return data;
 };
+/** Comme `readJson`, mais `{}` si le fichier n'existe pas ENCORE (1re
+ * intégration, cas normal). Un fichier présent mais cassé LÈVE quand même. */
+const readJsonOr = (dir: string, rel: string): Dict =>
+  readCuratedJson<Dict>(resolve(dir, rel)) ?? {};
 // Écrit au format CANONIQUE (`lib/json`) — celui de `datagen:build` et des
 // fichiers committés → le diff git se limite au perso intégré, sans re-mise en
 // forme parasite du reste du fichier.

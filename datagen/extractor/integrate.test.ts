@@ -12,7 +12,7 @@
  * fraîche (qui exige un `.gamedata/parsed` complet, hors de portée d'un test
  * unitaire) et le staging d'images.
  */
-import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
@@ -139,6 +139,19 @@ describe('integrateMonsterData', () => {
     const snap = ['monsters.json', 'monster-skills.json'].map(bytes);
     await integrateMonsterData(dir, m, freshSkills, () => ({}));
     expect(['monsters.json', 'monster-skills.json'].map(bytes)).toEqual(snap);
+  });
+
+  it('committé CASSÉ → LÈVE au lieu de merger sur du vide (pas de wipe silencieux, X2)', async () => {
+    // Un `monsters.json` PRÉSENT mais corrompu (édition à la main, conflit git non
+    // résolu) ne doit PAS être traité comme vide : sinon on y mergerait `boss_x`
+    // seul et TOUS les autres monstres committés seraient perdus à l'écriture.
+    const corrompu = '{ "boss_old": { "id": "boss_old" }, }'; // virgule traînante
+    writeFileSync(join(dir, 'monsters.json'), corrompu);
+    await expect(
+      integrateMonsterData(dir, monster(), { msk_1: { v: 2 } }, () => ({})),
+    ).rejects.toThrow(/JSON invalide/);
+    // Le fichier corrompu est resté INTACT — rien n'a été écrit par-dessus.
+    expect(bytes('monsters.json')).toBe(corrompu);
   });
 
   it('sans spawns : ne touche pas encounters.json et ne construit pas les donjons', async () => {

@@ -8,9 +8,8 @@
  *
  * Un seul moteur pour toutes les entités (≠ V2 : une route de diff par entité).
  */
-import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { writeJson } from '../lib/json';
+import { readCuratedJson, writeJson } from '../lib/json';
 import {
   diffBuckets,
   diffEntity,
@@ -25,11 +24,12 @@ import { getTarget, TARGETS, type GeneratedTarget } from './targets';
 const GENERATED = resolve('data/generated');
 
 function readCommitted(file: string): Record<string, unknown> {
-  try {
-    return JSON.parse(readFileSync(resolve(GENERATED, file), 'utf8')) as Record<string, unknown>;
-  } catch {
-    return {};
-  }
+  // Committé ABSENT (cible jamais générée) → `{}` : tout est vu comme « new »,
+  // cas normal. Committé PRÉSENT mais CASSÉ → `readCuratedJson` LÈVE en nommant
+  // le fichier — jamais un `{}` silencieux qui ferait voir TOUTES les entités
+  // comme « new » (diff faussé) et, au `writeBack` d'une cible à `subKey`,
+  // ÉCRASERAIT les autres clés du fichier partagé (audit X2).
+  return readCuratedJson<Record<string, unknown>>(resolve(GENERATED, file)) ?? {};
 }
 
 /** Committé de la cible — sous-objet `subKey` extrait si fichier partagé. */
