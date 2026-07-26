@@ -1,4 +1,10 @@
-// Source of truth — exports TranslationKey type
+// Source of truth — exports TranslationKey type.
+//
+// CONTRAT (gardé par locales/keys.test.ts depuis la fin du portage V2) :
+// chaque clé a un CONSOMMATEUR dans le code (littéral ou préfixe dynamique
+// détecté), et les 5 langues portent des clés IDENTIQUES. Une clé orpheline
+// fait échouer la suite — le pré-seed V2 est terminé, purgé le 22/07 (150
+// vestiges).
 
 const en = {
   // Navigation
@@ -14,33 +20,18 @@ const en = {
 
   // Common
   'common.search': 'Search',
-  'common.filter': 'Filter',
   'common.all': 'All',
-  'common.none': 'None',
-  'common.back': 'Back',
   'common.loading': 'Loading...',
   'common.coming_soon': 'Coming soon.',
-  'common.updated': 'Updated {monthYear}',
-  'common.back_to_top': 'Back to top',
   'common.language': 'Language',
   'common.copied': 'Copied!',
   'share.on': 'Share on {platform}',
   'share.copy_link': 'Copy link',
-  'common.sort': 'Sort',
-  'common.sort.order': 'Default',
-  'common.sort.date_desc': 'Newest',
-  'common.sort.date_asc': 'Oldest',
-  'common.sort.name_asc': 'Name A→Z',
-  'common.sort.name_desc': 'Name Z→A',
-  'common.sort.author_asc': 'Author A→Z',
-  'common.sort.author_desc': 'Author Z→A',
   'aria.toggle_menu': 'Toggle menu',
   'aria.prev_art': 'Previous art',
   'aria.next_art': 'Next art',
   'aria.show_art': 'Show art {n}',
   'aria.star_rarity': '{rarity} star rarity',
-  'aria.zoom': 'Zoom: {alt}',
-  'aria.close': 'Close',
   'video.by': 'by {author}',
 
   // Contributors
@@ -70,11 +61,9 @@ const en = {
   'page.home.description':
     'Outerpedia is a community-driven wiki and database for Outerplane. Find character builds, tier lists, guides, equipment recommendations, and more.',
   'page.characters.title': 'Outerplane Characters Database',
-  'page.characters.meta_title': 'Outerplane Characters Database – {monthYear}',
   'page.characters.description':
     'Browse all Outerplane characters. Filter by element, class, and rarity. View skills, stats, and equipment details. Updated {monthYear}.',
   'page.equipments.title': 'Outerplane Equipment Database',
-  'page.equipments.meta_title': 'Outerplane Equipment Database – {monthYear}',
   'page.equipments.description':
     'Explore all Outerplane weapons, accessories, talismans, and armor sets. Compare stats and find the best gear for your characters. Updated {monthYear}.',
   'page.equipment.meta_description':
@@ -84,13 +73,8 @@ const en = {
   'equip.tab.sets': 'Armor Sets',
   'equip.tab.talismans': 'Talismans',
   'equip.tab.ee': 'Exclusive Equipment',
-  'equip.tab.items': 'Items',
   'equip.filter.all': 'All',
   'equip.filter.type': 'Type',
-  'equip.items.gem': 'Gems',
-  'equip.items.material': 'Materials',
-  'equip.items.present': 'Presents',
-  'equip.items.box': 'Boxes',
   'equip.source.event_shop': 'Event Shop',
   'equip.source.adventure_license': 'Adventure License',
   'equip.set.2piece': '2 pieces',
@@ -102,10 +86,6 @@ const en = {
   'equip.ee.unlock': 'Unlock',
   'equip.ee.upgrade': 'Upgrade',
   'equip.filter.search': 'Search by name...',
-  'equip.filter.searchEE': 'Search by name or character...',
-  'equip.filter.more': 'More Filters',
-  'equip.source.sr.ecology': 'Special Request: Ecology Study',
-  'equip.source.sr.identification': 'Special Request: Identification',
   'equip.detail.configure': 'Configure',
   'equip.detail.enhancement': 'Enhancement',
   'equip.detail.breakthrough': 'Breakthrough',
@@ -568,19 +548,49 @@ const en = {
     'Team contribution applied at calc time',
   'tools.damage-calculator.attacker.tier_lower': 'Lower tier',
   'tools.damage-calculator.attacker.tier_raise': 'Raise tier',
-  'tools.damage-calculator.attacker.tier_label': 'Transcend tier',
+  'tools.damage-calculator.attacker.tier_label': 'Transcend level',
+  'tools.damage-calculator.attacker.skill_levels': 'Skill levels',
+  'tools.damage-calculator.attacker.tag_dmg': 'DMG',
+  'tools.damage-calculator.equipment.sets': 'Active sets',
+  'tools.damage-calculator.equipment.add_set': '+ Add a set',
+  'tools.damage-calculator.stats.sheet_note': 'from the in-game character sheet',
+  'tools.damage-calculator.stats.final': 'Final stats',
+  'tools.damage-calculator.stats.final_note': 'computed · read-only',
+  'tools.damage-calculator.target.monster': 'Monster',
+  'tools.damage-calculator.target.resolved': 'Resolved',
+  'tools.damage-calculator.target.hp_bars': '{n} HP bars',
+  'tools.damage-calculator.target.spawn_adv': 'spawn +{pct}% ATK/DEF',
+  'tools.damage-calculator.context.title': 'Context',
+  'tools.damage-calculator.context.content_type': 'Content type',
+  'tools.damage-calculator.context.type_pve': 'PvE',
+  'tools.damage-calculator.context.type_arena': 'PvP Arena',
+  'tools.damage-calculator.context.type_rtpvp': 'Real-time PvP',
+  'tools.damage-calculator.context.targets_hit': 'Targets hit',
+  'tools.damage-calculator.context.penalty_cycle': 'Penalty cycle',
+  'tools.damage-calculator.context.penalty_note':
+    'PvP escalation from turn 10 — applies to both sides.',
+  'tools.damage-calculator.buffs.from_kits': '+ From kits',
+  'tools.damage-calculator.buffs.kits_soon': 'needs kit buff data — coming with the engine',
+  'tools.damage-calculator.buffs.on_attacker': 'On attacker',
+  'tools.damage-calculator.buffs.on_target': 'On target',
+  'tools.damage-calculator.buffs.value': 'Value',
+  'tools.damage-calculator.buffs.stacks': 'Stacks',
+  'tools.damage-calculator.report.engine_wip':
+    'Calculation engine not connected yet — final layout with placeholder values.',
+  'tools.damage-calculator.report.branches_note': 'enumerated branches · exact probabilities',
+  'tools.damage-calculator.report.critical': 'Critical',
+  'tools.damage-calculator.report.miss': 'Miss',
+  'tools.damage-calculator.report.expected': 'Expected damage',
+  'tools.damage-calculator.report.expected_note': 'weighted across all branches',
+  'tools.damage-calculator.report.support_skills': 'Support skills (no card): {names}',
   'page.guides.title': 'Outerplane Guides',
   'page.guides.description':
     'Outerplane guides for adventure stages, boss fights, guild raids, world bosses, and beginner tips.',
-  'page.guides.meta_title': 'Outerplane Guides – {monthYear}',
   'page.guides.list': 'Guide List',
-  'page.guide.meta_title': '{title} — {category}',
   'page.guide.by': 'By {author}',
   'page.guide.updated': 'Updated {date}',
   'page.guide.older_version_warning':
     'Note: This is an older strategy ({currentVersion}). While the core mechanics remain similar, we recommend checking the updated {newestVersion} version for the latest strategies and character recommendations.',
-  'page.guide.updating_disclaimer':
-    'This guide is currently being updated for this version. Some recommendations may change.',
 
   // Catégories de guides : libellés + descriptions dans guide-categories.ts
   // (source unique, LocalizedText) — plus de clés de locale par catégorie.
@@ -597,7 +607,6 @@ const en = {
   'guides.singularity.next_week.title': 'Next rotation',
   'guides.singularity.next_week.tagline':
     'Reward phase — no boss is active. The next rotation opens {date}.',
-  'guides.singularity.rotation': 'Rotation {n}',
   'guides.singularity.library.title': 'Boss library',
   'guides.singularity.library.tagline':
     "Every guide stays accessible even when its boss isn't active.",
@@ -624,8 +633,6 @@ const en = {
   'guides.tips.phase2': 'Phase 2',
   'guides.tips.transition': 'Phase Transition',
   'guides.recommended.title': 'Recommended Characters',
-  'guides.recommended.phase1': 'Phase 1 — Recommended Characters',
-  'guides.recommended.phase2': 'Phase 2 — Recommended Characters',
   'guides.combat_footage': 'Combat Footage',
   'guides.team_selector': 'Suggested Teams',
   'guides.team.prev_option': 'Previous option',
@@ -665,38 +672,16 @@ const en = {
   'guides.adventure_license.weekly': 'Weekly',
   'guides.adventure_license.promotion': 'Promotion',
   'guides.adventure_license.reveal': 'Reveal',
-  'guides.special_request.identification': 'Identification',
-  'guides.special_request.ecology_study': 'Ecology Study',
   'guides.monad_gate.variant': 'Variant {v}',
   'guides.monad_gate.depth': 'Depth {n}',
   'guides.skyward_tower.difficulty': 'Difficulty Towers',
   'guides.skyward_tower.elemental': 'Elemental Towers',
   'tower.search_placeholder': 'Search by floor or boss name...',
   'tower.floor': 'Floor {n}',
-  'tower.floor_short': 'F{n}',
   'tower.restrictions': 'Restrictions',
-  'tower.no_restrictions': 'No restrictions',
-  'tower.random_floor': 'Random',
-  'tower.random_sets': '{n} possible sets',
-  'tower.select_floor': 'Select a floor to view details',
-  'tower.set': 'Set {n}',
-  'tower.monthly_reset': 'Monthly Reset',
-  'tower.floor_20': 'Floor 20',
-  'tower.fixed_floors': 'Floors 5 / 10 / 15',
-  'tower.random_floors': 'Random Floors',
-  'tower.main_boss': 'Main Boss',
-  'tower.minions': 'Minions',
-  'tower.advice': 'Advice',
-  'tower.recommended': 'Noticeable Characters',
-  'tower.no_recommended': 'No particular hero stands out for this encounter.',
-  'tower.select_set': 'Select a restriction set:',
-  'tower.per_floor_strategy': 'Per Floor Strategy',
 
   // Guild Raid
   'guildraid.geas': 'Geas Modifiers',
-  'guildraid.geas.desc':
-    'Toggle geas on/off to calculate your score multiplier. Activating malus geas increases difficulty but boosts your score.',
-  'guildraid.geas.level': 'Level {n}',
   'guildraid.total_multiplier': 'Total Score Multiplier',
   'guildraid.geas_table_full': 'View full unlock table',
   'guildraid.active_geas': 'Active Geas',
@@ -719,43 +704,11 @@ const en = {
   'coupons.redeem_ios':
     'iOS: <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" target="_blank" rel="noopener noreferrer" class="underline text-cyan-400">Redeem on the official website</a>',
   // Coupon one-click redeem
-  'coupons.redeem.title': 'One-Click Redeem',
-  'coupons.redeem.desc':
-    'Save your UID once, then redeem any active code without leaving this page.',
-  'coupons.redeem.uid_label': 'Player UID',
-  'coupons.redeem.uid_placeholder': 'e.g. 123456789',
-  'coupons.redeem.server_label': 'Server',
-  'coupons.redeem.server_global1': 'Global 1',
-  'coupons.redeem.server_global2': 'Global 2',
-  'coupons.redeem.server_jp': 'Japan',
-  'coupons.redeem.hint': 'Find your UID in-game under Settings → Account.',
-  'coupons.redeem.save': 'Save',
-  'coupons.redeem.saved': 'Saved',
-  'coupons.redeem.button': 'Redeem',
-  'coupons.redeem.busy': 'Redeeming…',
-  'coupons.redeem.redeemed': 'Redeemed',
-  'coupons.redeem.need_setup': 'Enter your UID first',
-  'coupons.redeem.disclaimer':
-    'Codes are sent directly to the official Outerplane coupon service. Outerpedia keeps nothing.',
-  'coupons.redeem.result.success':
-    'Redeemed successfully! Claim your rewards from the in-game mailbox.',
-  'coupons.redeem.result.user_not_found': 'User not found. Check your UID and selected server.',
-  'coupons.redeem.result.invalid': 'This coupon is invalid.',
-  'coupons.redeem.result.expired': 'This coupon has expired.',
-  'coupons.redeem.result.exhausted': 'This coupon has been fully claimed.',
-  'coupons.redeem.result.already_used': 'You have already used this coupon.',
-  'coupons.redeem.result.same_type': 'You have already used a coupon of the same type.',
-  'coupons.redeem.result.maintenance': 'The coupon service is under maintenance. Try again later.',
-  'coupons.redeem.result.rate_limited': 'Too many attempts. Please wait a minute and try again.',
-  'coupons.redeem.result.network': 'Could not reach the coupon service. Try again later.',
-  'coupons.redeem.result.unknown': 'Unknown error. Please try again later.',
 
   // Homepage sections
-  'home.cta.characters': 'Browse Characters',
   'home.section.banners': 'Active banners',
   'home.section.codes': 'Active Promo Codes',
   'home.section.beginner': 'New to Outerplane?',
-  'home.beginner.desc': 'Start your journey with these beginner-friendly guides:',
   'home.beginner.faq': 'Beginner FAQ',
   'home.beginner.faq.desc': 'common questions and answers for new players.',
   'home.beginner.freeheroes': 'Free Heroes & Starter Banners',
@@ -766,7 +719,6 @@ const en = {
   'home.beginner.gear.desc': 'how equipment works and how to upgrade it.',
   'home.beginner.growth': 'Hero Growth',
   'home.beginner.growth.desc': 'leveling, transcendence, affinity, and more.',
-  'home.beginner.footer': 'Perfect for first-time players',
   'home.section.updates': 'Recent Updates',
   'home.codes.copy': 'Copy',
   'home.codes.empty': 'No active codes right now.',
@@ -778,7 +730,6 @@ const en = {
   'home.discord.members': '{count} members',
   'home.discord.online': '{count} online',
   'home.banner.ends_in': 'Ends in',
-  'home.banner.ended': 'Ended',
   'home.resets.title': 'Server Resets',
   'home.resets.daily': 'Daily',
   'home.resets.weekly': 'Weekly',
@@ -810,7 +761,6 @@ const en = {
   'search.no_results': 'No results found',
   'search.pages': 'Pages',
   'search.characters': 'Characters',
-  'search.equipment': 'Equipment',
   'search.guides': 'Guides',
   'search.short_placeholder': 'Search...',
 
@@ -818,7 +768,6 @@ const en = {
   'header.lang.official': 'Official',
   'header.lang.community': 'Community',
   'header.lang.community_note': 'Community translations fall back to English for game data.',
-  'header.buff.active': 'Buff active',
 
   // Navigation (short labels for md-xl breakpoint)
   'nav.characters.short': 'Chars',
@@ -862,10 +811,6 @@ const en = {
     'This site is maintained by a private individual. In accordance with French law (LCEN), identification information may be disclosed to judicial authorities upon legal request via our hosting provider.',
 
   // Errors
-  'error.404': 'Page not found',
-  'error.500': 'Something went wrong',
-  'error.back_home': 'Back to home',
-  'error.try_again': 'Try again',
 
   // Elements
   'sys.element.fire': 'Fire',
@@ -875,10 +820,6 @@ const en = {
   'sys.element.dark': 'Dark',
 
   // Rarities
-  'sys.rarity.normal': 'Normal',
-  'sys.rarity.superior': 'Superior',
-  'sys.rarity.epic': 'Epic',
-  'sys.rarity.legendary': 'Legendary',
 
   // Classes
   'sys.class.defender': 'Defender',
@@ -940,23 +881,13 @@ const en = {
   'filters.roles.sustain': 'Sustain',
 
   // Characters filters
-  'characters.filters.search': 'Search…',
-  'characters.filters.element': 'Element',
-  'characters.filters.class': 'Class',
-  'characters.filters.role': 'Role',
   'characters.filters.count': '{count} characters',
   'characters.filters.chains': 'Chains',
   'characters.filters.roles': 'Roles',
   'characters.filters.gifts': 'Gifts',
-  'characters.filters.showBuffs': 'Show Buffs/Debuffs Filters',
-  'characters.filters.hideBuffs': 'Hide Buffs/Debuffs Filters',
-  'characters.filters.showTags': 'Show Tags',
-  'characters.filters.hideTags': 'Hide Tags',
   'characters.filters.reset': 'Reset filters',
   'characters.filters.copy': 'Copy share link',
   'characters.filters.unique': 'Show Unique Effects',
-  'characters.filters.and': 'AND',
-  'characters.filters.or': 'OR',
   'characters.filters.buffs': 'Buffs',
   'characters.filters.debuffs': 'Debuffs',
   'characters.filters.sources.filterBySource': 'Filter by Source',
@@ -969,21 +900,15 @@ const en = {
   'characters.filters.advanced': 'Advanced filters',
   'characters.filters.empty_hint': 'No filters yet — pick element or class to start',
   'characters.filters.match_logic': 'Match',
-  'characters.filters.tab.basics': 'Basics',
   'characters.filters.tab.combat': 'Combat',
   'characters.filters.tab.effects': 'Effects',
   'characters.filters.tab.tags': 'Tags',
   'characters.filters.tab.bonus': 'Team Bonus',
   'characters.filters.search_placeholder': 'Search a character…',
-  'characters.filters.search_effects': 'Search effects…',
   'characters.filters.close': 'Close',
   'characters.filters.no_match': 'No characters match these filters',
-  'characters.filters.active.count':
-    '{count, plural, one {# active filter} other {# active filters}}',
 
   // Characters common
-  'characters.loading': 'Loading characters...',
-  'characters.common.matches': '{count, plural, one {# match} other {# matches}}',
 
   // Characters chains
   'characters.chains.starter': 'Starter',
@@ -991,11 +916,6 @@ const en = {
   'characters.chains.finisher': 'Finisher',
 
   // Characters gifts
-  'characters.gifts.science': 'Science',
-  'characters.gifts.luxury': 'Luxury',
-  'characters.gifts.magicTool': 'Magic Tool',
-  'characters.gifts.craftwork': 'Craftwork',
-  'characters.gifts.naturalObject': 'Natural Object',
 
   // Characters effects groups
   'characters.effectsGroups.buff.statBoosts': 'Stat Boosts',
@@ -1009,14 +929,10 @@ const en = {
   'characters.effectsGroups.debuff.unique': 'Unique Debuffs',
   'characters.effectsGroups.buff.other': 'Other',
   'characters.effectsGroups.debuff.other': 'Other',
-  'characters.effectsGroups.hidden': 'Hidden',
 
   // Characters tags
-  'characters.tags.types.mechanic': 'Mechanic',
-  'characters.tags.types.unit-type': 'Unit Type',
 
   // Character detail page
-  'page.character.meta_title': '{name} — Builds & Tier',
   'page.character.meta_description':
     '{name} ({element} {classType}) — skills breakdown, exclusive equipment, recommended gear builds, and tier ranking on Outerpedia.',
   'page.character.sr_suffix': ' — Outerplane {element} {classType} Guide',
@@ -1047,22 +963,10 @@ const en = {
   'page.character.skill.cooldown': 'CD',
   'page.character.skill.wgr': 'WGR',
   'page.character.skill.dual_wgr': 'Dual WGR',
-  'page.character.skill.target_mono': 'Single Target',
-  'page.character.skill.target_multi': 'All Enemies',
-  'page.character.skill.target_duo': 'Dual Target',
-  'page.character.skill.target_mono_ally': 'Single Ally',
-  'page.character.skill.target_multi_ally': 'All Allies',
-  'page.character.skill.target_duo_ally': 'Dual Ally',
   'page.character.skill.enhancement': 'Enhancement',
-  'page.character.skill.burn_cards': 'Burn Cards',
-  'page.character.skill.burn_cost': 'Cost',
   'page.character.skill.level': 'Lv.',
   'page.character.skill.type.s1': 'Skill 1',
   'page.character.skill.type.s2': 'Skill 2',
-  'page.character.skill.type.ultimate': 'Ultimate',
-  'page.character.skill.type.passive': 'Passive',
-  'page.character.skill.type.chain': 'Chain',
-  'page.character.skill.type.core_passive': 'Core-Fused Passive',
   'page.character.skill.priority_title': 'Skill Upgrade Priority',
   'page.character.skill.priority_rule_title': 'Skill up rule of thumb:',
   'page.character.skill.priority_rule_1': 'Level 2 for Weakness Gauge damage',
@@ -1088,20 +992,11 @@ const en = {
   'page.character.birthday': 'Birthday',
   'page.character.height': 'Height',
   'page.character.weight': 'Weight',
-  'page.character.story': 'Story',
-  'page.character.chain_effect': 'Chain Effect',
-  'page.character.dual_effect': 'Dual Attack Effect',
   'page.character.stats.title': 'Base Stats',
-  'page.character.stats.class_passive': 'Class Passive',
   'page.character.stats.no_data': 'No stats available',
   'page.character.stats.limit_break_cost': 'Limit Break cost',
   'page.character.stats.codex': 'Codex',
   'page.character.stats.quirks': 'Quirks',
-  'page.character.core_fusion.available': 'Core Fusion available',
-  'page.character.core_fusion.original': 'Original character',
-  'page.character.core_fusion.skill_info':
-    'Unlocking Core Fusion costs {unlockCost} {material} (skills start at Lv.1). Each skill level upgrade costs {upgradeCost} {material} and raises all skills by 1 level. Total: {totalCost} {material} to fully max all skills.',
-  'page.character.no_reco': 'No gear recommendation available yet.',
 
   // Monad Gate
   'monad.rewards': 'Rewards',
@@ -1135,15 +1030,7 @@ const en = {
   'monad.node.cube': 'Search Cube',
   'monad.node.unknown': 'Unexplored Area',
   // Routes
-  'monad.route.1': 'Land of the White Falcon',
-  'monad.route.2': 'Sacred Archipelago',
-  'monad.route.3': 'Land of Snow and Steel',
-  'monad.route.4': 'Land of Sandstorms',
-  'monad.route.4.1': 'Land of Sandstorms [1st Part]',
-  'monad.route.4.2': 'Land of Sandstorms [2nd Part]',
-  'monad.route.5': 'Realm of Bane',
   // Soundtrack
-  'ost.title': 'Soundtrack',
   'ost.download': 'Download',
   'ost.selectTrack': 'Select a track',
   'ost.disclaimer.line1':
@@ -1301,14 +1188,10 @@ const en = {
   'tower.strategy': 'Strategy',
   'tower.level': 'Lv. {n}',
   'tower.power': 'Power {n}',
-  'tower.pool': 'Possible bosses',
   'tower.adds': 'Adds',
-  'tower.restriction_label': 'Restriction',
-  'tower.restriction_none': 'No restriction',
   'tower.restr_element': 'Element',
   'tower.restr_class': 'Class',
   'tower.restr_star': 'Base rarity',
-  'tower.roster_empty': 'Every recommended character is excluded by this restriction.',
   'tower.group_floor20': 'Floor 20',
   'tower.group_demiurge': 'Floors 5 / 10 / 15',
   'tower.group_random': 'Random floors',

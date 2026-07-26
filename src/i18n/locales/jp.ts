@@ -14,33 +14,18 @@ const jp: Record<TranslationKey, string> = {
 
   // Common
   'common.search': '検索',
-  'common.filter': 'フィルター',
   'common.all': 'すべて',
-  'common.none': 'なし',
-  'common.back': '戻る',
   'common.loading': '読み込み中...',
   'common.coming_soon': '近日公開',
-  'common.updated': '{monthYear} 更新',
-  'common.back_to_top': 'トップへ戻る',
   'common.language': '言語',
   'common.copied': 'コピー済み！',
   'share.on': '{platform}で共有',
   'share.copy_link': 'リンクをコピー',
-  'common.sort': '並べ替え',
-  'common.sort.order': 'デフォルト',
-  'common.sort.date_desc': '新しい順',
-  'common.sort.date_asc': '古い順',
-  'common.sort.name_asc': '名前 A→Z',
-  'common.sort.name_desc': '名前 Z→A',
-  'common.sort.author_asc': '著者 A→Z',
-  'common.sort.author_desc': '著者 Z→A',
   'aria.toggle_menu': 'メニュー切替',
   'aria.prev_art': '前のイラスト',
   'aria.next_art': '次のイラスト',
   'aria.show_art': 'イラスト{n}を表示',
   'aria.star_rarity': '星{rarity}のレアリティ',
-  'aria.zoom': 'ズーム：{alt}',
-  'aria.close': '閉じる',
   'video.by': '投稿者：{author}',
 
   // Contributors
@@ -70,11 +55,9 @@ const jp: Record<TranslationKey, string> = {
   'page.home.description':
     'Outerpediaはアウタープレーンのコミュニティ主導のWikiとデータベースです。キャラクタービルド、ティアリスト、攻略ガイド、装備推奨など。',
   'page.characters.title': 'アウタープレーン キャラクターデータベース',
-  'page.characters.meta_title': 'アウタープレーン キャラクターデータベース – {monthYear}',
   'page.characters.description':
     'アウタープレーンの全キャラクターを閲覧。属性、クラス、レアリティでフィルター。スキル、ステータス、装備の詳細を確認。{monthYear}更新。',
   'page.equipments.title': 'アウタープレーン 装備データベース',
-  'page.equipments.meta_title': 'アウタープレーン 装備データベース – {monthYear}',
   'page.equipments.description':
     'アウタープレーンの全装備を探索。武器、アクセサリー、タリスマン、セット効果のステータス比較。{monthYear}更新。',
   'page.equipment.meta_description':
@@ -84,13 +67,8 @@ const jp: Record<TranslationKey, string> = {
   'equip.tab.sets': 'セット',
   'equip.tab.talismans': 'タリスマン',
   'equip.tab.ee': '専用装備',
-  'equip.tab.items': 'アイテム',
   'equip.filter.all': '全て',
   'equip.filter.type': 'タイプ',
-  'equip.items.gem': 'ジェム',
-  'equip.items.material': '素材',
-  'equip.items.present': 'プレゼント',
-  'equip.items.box': 'ボックス',
   'equip.source.event_shop': 'イベントショップ',
   'equip.source.adventure_license': '冒険者ライセンス',
   'equip.set.2piece': '2セット',
@@ -102,10 +80,6 @@ const jp: Record<TranslationKey, string> = {
   'equip.ee.unlock': '解放',
   'equip.ee.upgrade': '強化',
   'equip.filter.search': '名前で検索...',
-  'equip.filter.searchEE': '名前またはキャラで検索...',
-  'equip.filter.more': 'その他のフィルター',
-  'equip.source.sr.ecology': '特別依頼:生態調査',
-  'equip.source.sr.identification': '特別依頼:正体究明',
   'equip.detail.configure': '設定',
   'equip.detail.enhancement': '強化',
   'equip.detail.breakthrough': '限界突破',
@@ -561,19 +535,49 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.attacker.team_contribution_hint': 'チーム寄与は計算時に適用',
   'tools.damage-calculator.attacker.tier_lower': '段階を下げる',
   'tools.damage-calculator.attacker.tier_raise': '段階を上げる',
-  'tools.damage-calculator.attacker.tier_label': '超越段階',
+  'tools.damage-calculator.attacker.tier_label': '超越レベル',
+  'tools.damage-calculator.attacker.skill_levels': 'スキルレベル',
+  'tools.damage-calculator.attacker.tag_dmg': 'DMG',
+  'tools.damage-calculator.equipment.sets': 'セット効果',
+  'tools.damage-calculator.equipment.add_set': '+ セットを追加',
+  'tools.damage-calculator.stats.sheet_note': 'ゲーム内のキャラクターシート通り',
+  'tools.damage-calculator.stats.final': '最終ステータス',
+  'tools.damage-calculator.stats.final_note': '計算値・閲覧のみ',
+  'tools.damage-calculator.target.monster': 'モンスター',
+  'tools.damage-calculator.target.resolved': '解決値',
+  'tools.damage-calculator.target.hp_bars': 'HPバー{n}本',
+  'tools.damage-calculator.target.spawn_adv': 'スポーン +{pct}% ATK/DEF',
+  'tools.damage-calculator.context.title': 'コンテキスト',
+  'tools.damage-calculator.context.content_type': 'コンテンツ種別',
+  'tools.damage-calculator.context.type_pve': 'PvE',
+  'tools.damage-calculator.context.type_arena': 'アリーナ',
+  'tools.damage-calculator.context.type_rtpvp': 'リアルタイムPvP',
+  'tools.damage-calculator.context.targets_hit': '対象数',
+  'tools.damage-calculator.context.penalty_cycle': 'ペナルティサイクル',
+  'tools.damage-calculator.context.penalty_note':
+    '10ターン目からのPvPペナルティ — 双方に適用されます。',
+  'tools.damage-calculator.buffs.from_kits': '+ キットから',
+  'tools.damage-calculator.buffs.kits_soon': 'キットのバフデータが必要 — エンジンと同時に実装',
+  'tools.damage-calculator.buffs.on_attacker': '攻撃側に',
+  'tools.damage-calculator.buffs.on_target': '対象に',
+  'tools.damage-calculator.buffs.value': '数値',
+  'tools.damage-calculator.buffs.stacks': 'スタック',
+  'tools.damage-calculator.report.engine_wip':
+    '計算エンジンは未接続です — 最終レイアウトを仮の値で表示しています。',
+  'tools.damage-calculator.report.branches_note': '分岐を列挙・正確な確率',
+  'tools.damage-calculator.report.critical': 'クリティカル',
+  'tools.damage-calculator.report.miss': '回避',
+  'tools.damage-calculator.report.expected': '期待ダメージ',
+  'tools.damage-calculator.report.expected_note': '全分岐の加重平均',
+  'tools.damage-calculator.report.support_skills': 'サポートスキル（カードなし）：{names}',
   'page.guides.title': 'アウタープレーン 攻略ガイド',
   'page.guides.description':
     'アウタープレーン攻略ガイド。冒険ステージ、ボス戦、ギルドレイド、ワールドボス、初心者向けのヒント。',
-  'page.guides.meta_title': 'アウタープレーン 攻略ガイド – {monthYear}',
   'page.guides.list': 'ガイド一覧',
-  'page.guide.meta_title': '{title} — {category}',
   'page.guide.by': '著者: {author}',
   'page.guide.updated': '{date} 更新',
   'page.guide.older_version_warning':
     '注意: これは古い攻略情報です（{currentVersion}）。基本的な仕組みは同じですが、最新の攻略やキャラクター推奨については、{newestVersion}版をご確認ください。',
-  'page.guide.updating_disclaimer':
-    'このガイドは現在このバージョン向けに更新中です。推奨内容が変更される場合があります。',
 
   // Catégories de guides : libellés + descriptions dans guide-categories.ts
   // (source unique, LocalizedText) — plus de clés de locale par catégorie.
@@ -589,7 +593,6 @@ const jp: Record<TranslationKey, string> = {
   'guides.singularity.next_week.title': '次のローテーション',
   'guides.singularity.next_week.tagline':
     '報酬期間 — 挑戦可能なボスはいません。次のローテーションは{date}に開始します。',
-  'guides.singularity.rotation': 'ローテーション{n}',
   'guides.singularity.library.title': 'ボス一覧',
   'guides.singularity.library.tagline':
     'ローテーション外でも、各ボスのガイドは常時アクセス可能です。',
@@ -616,8 +619,6 @@ const jp: Record<TranslationKey, string> = {
   'guides.tips.phase2': 'フェーズ2',
   'guides.tips.transition': 'フェーズ移行',
   'guides.recommended.title': 'おすすめキャラクター',
-  'guides.recommended.phase1': 'フェーズ1 — おすすめキャラクター',
-  'guides.recommended.phase2': 'フェーズ2 — おすすめキャラクター',
   'guides.combat_footage': '実戦動画',
   'guides.team_selector': 'おすすめチーム',
   'guides.team.prev_option': '前の候補',
@@ -654,38 +655,16 @@ const jp: Record<TranslationKey, string> = {
   'guides.adventure_license.weekly': 'ウィークリー',
   'guides.adventure_license.promotion': 'プロモーション',
   'guides.adventure_license.reveal': '公開する',
-  'guides.special_request.identification': '正体究明',
-  'guides.special_request.ecology_study': '生態調査',
   'guides.monad_gate.variant': 'バリアント{v}',
   'guides.monad_gate.depth': '深度{n}',
   'guides.skyward_tower.difficulty': '難易度の塔',
   'guides.skyward_tower.elemental': '属性の塔',
   'tower.search_placeholder': '階数またはボス名で検索...',
   'tower.floor': '{n}階',
-  'tower.floor_short': '{n}F',
   'tower.restrictions': '制限',
-  'tower.no_restrictions': '制限なし',
-  'tower.random_floor': 'ランダム',
-  'tower.random_sets': '{n}パターン',
-  'tower.select_floor': '階を選択して詳細を表示',
-  'tower.set': 'パターン{n}',
-  'tower.monthly_reset': '月間リセット',
-  'tower.floor_20': '20階',
-  'tower.fixed_floors': '5 / 10 / 15階',
-  'tower.random_floors': 'ランダムフロア',
-  'tower.main_boss': 'メインボス',
-  'tower.minions': '取り巻き',
-  'tower.advice': 'アドバイス',
-  'tower.recommended': '注目キャラクター',
-  'tower.no_recommended': 'この戦闘で特に目立つヒーローはいません。',
-  'tower.select_set': '制限セットを選択:',
-  'tower.per_floor_strategy': '各階の攻略',
 
   // Guild Raid
   'guildraid.geas': 'ゲアス修正',
-  'guildraid.geas.desc':
-    'ゲアスのオン/オフを切り替えてスコア倍率を計算しましょう。マルスゲアスを有効化すると難易度が上がりますがスコアが増加します。',
-  'guildraid.geas.level': 'レベル{n}',
   'guildraid.total_multiplier': 'スコア倍率合計',
   'guildraid.geas_table_full': '解放テーブル全体を表示',
   'guildraid.active_geas': '有効なゲアス',
@@ -708,46 +687,11 @@ const jp: Record<TranslationKey, string> = {
   'coupons.redeem_ios':
     'iOS: <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" target="_blank" rel="noopener noreferrer" class="underline text-cyan-400">公式サイトで引き換え</a>',
   // Coupon one-click redeem
-  'coupons.redeem.title': 'ワンクリック交換',
-  'coupons.redeem.desc': 'UIDを一度保存すれば、このページから有効なコードをすぐに交換できます。',
-  'coupons.redeem.uid_label': 'プレイヤーUID',
-  'coupons.redeem.uid_placeholder': '例: 123456789',
-  'coupons.redeem.server_label': 'サーバー',
-  'coupons.redeem.server_global1': 'グローバル1',
-  'coupons.redeem.server_global2': 'グローバル2',
-  'coupons.redeem.server_jp': '日本',
-  'coupons.redeem.hint': 'UIDはゲーム内の[設定]→[アカウント]で確認できます。',
-  'coupons.redeem.save': '保存',
-  'coupons.redeem.saved': '保存しました',
-  'coupons.redeem.button': '交換',
-  'coupons.redeem.busy': '交換中…',
-  'coupons.redeem.redeemed': '交換済み',
-  'coupons.redeem.need_setup': '先にUIDを入力してください',
-  'coupons.redeem.disclaimer':
-    'コードはOuterplane公式クーポンサービスに直接送信されます。Outerpediaは何も保存しません。',
-  'coupons.redeem.result.success':
-    'クーポンを適用しました！ゲーム内メールから報酬を受け取ってください。',
-  'coupons.redeem.result.user_not_found':
-    '該当ユーザーが見つかりません。UIDとサーバーを確認してください。',
-  'coupons.redeem.result.invalid': '無効なクーポンです。',
-  'coupons.redeem.result.expired': 'クーポンの有効期限が切れています。',
-  'coupons.redeem.result.exhausted': 'クーポンが使い切られました。',
-  'coupons.redeem.result.already_used': 'このクーポンは既に使用済みです。',
-  'coupons.redeem.result.same_type': '同じ種類のクーポンを既に使用しました。',
-  'coupons.redeem.result.maintenance':
-    'クーポンサービスはメンテナンス中です。しばらくしてからお試しください。',
-  'coupons.redeem.result.rate_limited':
-    '試行回数が多すぎます。1分ほど待ってから再試行してください。',
-  'coupons.redeem.result.network':
-    'クーポンサービスに接続できませんでした。しばらくしてからお試しください。',
-  'coupons.redeem.result.unknown': '不明なエラーが発生しました。しばらくしてからお試しください。',
 
   // Homepage sections
-  'home.cta.characters': 'キャラクター一覧',
   'home.section.banners': '開催中のバナー',
   'home.section.codes': '有効なプロモコード',
   'home.section.beginner': 'アウタープレーン初心者ですか？',
-  'home.beginner.desc': '初心者向けのガイドで冒険を始めましょう：',
   'home.beginner.faq': '初心者向けFAQ',
   'home.beginner.faq.desc': '新規プレイヤーのよくある質問と回答。',
   'home.beginner.freeheroes': '無料ヒーロー & スタートバナー',
@@ -758,7 +702,6 @@ const jp: Record<TranslationKey, string> = {
   'home.beginner.gear.desc': '装備の仕組みと強化方法。',
   'home.beginner.growth': 'ヒーロー育成',
   'home.beginner.growth.desc': 'レベル上げ、超越、親密度など。',
-  'home.beginner.footer': '初心者プレイヤーに最適',
   'home.section.updates': '最近の更新',
   'home.codes.copy': 'コピー',
   'home.codes.empty': '現在有効なコードはありません。',
@@ -769,7 +712,6 @@ const jp: Record<TranslationKey, string> = {
   'home.discord.members': '{count}人のメンバー',
   'home.discord.online': '{count}人がオンライン',
   'home.banner.ends_in': '終了まで',
-  'home.banner.ended': '終了',
   'home.resets.title': 'サーバーリセット',
   'home.resets.daily': 'デイリー',
   'home.resets.weekly': 'ウィークリー',
@@ -801,7 +743,6 @@ const jp: Record<TranslationKey, string> = {
   'search.no_results': '結果が見つかりません',
   'search.pages': 'ページ',
   'search.characters': 'キャラクター',
-  'search.equipment': '装備',
   'search.guides': 'ガイド',
   'search.short_placeholder': '検索...',
 
@@ -809,7 +750,6 @@ const jp: Record<TranslationKey, string> = {
   'header.lang.official': '公式',
   'header.lang.community': 'コミュニティ',
   'header.lang.community_note': 'コミュニティ翻訳はゲームデータには英語版が使用されます。',
-  'header.buff.active': 'バフ有効',
 
   // Navigation (short labels for md-xl breakpoint)
   'nav.characters.short': 'キャラ',
@@ -853,10 +793,6 @@ const jp: Record<TranslationKey, string> = {
     '本サイトは個人により運営されています。フランス法（LCEN）に基づき、法的要請に応じてホスティングプロバイダーを通じて身元情報を司法当局に開示することがあります。',
 
   // Errors
-  'error.404': 'ページが見つかりません',
-  'error.500': 'エラーが発生しました',
-  'error.back_home': 'ホームに戻る',
-  'error.try_again': 'もう一度試す',
 
   // Elements
   'sys.element.fire': '火',
@@ -866,10 +802,6 @@ const jp: Record<TranslationKey, string> = {
   'sys.element.dark': '闇',
 
   // Rarities
-  'sys.rarity.normal': 'ノーマル',
-  'sys.rarity.superior': 'レア',
-  'sys.rarity.epic': 'ユニーク',
-  'sys.rarity.legendary': 'レジェンド',
 
   // Classes
   'sys.class.defender': '防御型',
@@ -925,23 +857,13 @@ const jp: Record<TranslationKey, string> = {
   'filters.roles.sustain': '耐久',
 
   // Characters filters
-  'characters.filters.search': '検索…',
-  'characters.filters.element': '属性',
-  'characters.filters.class': 'クラス',
-  'characters.filters.role': '役割',
   'characters.filters.count': 'キャラクター{count}体',
   'characters.filters.chains': 'チェイン',
   'characters.filters.roles': '役割',
   'characters.filters.gifts': '贈り物',
-  'characters.filters.showBuffs': 'バフ/デバフフィルターを表示',
-  'characters.filters.hideBuffs': 'バフ/デバフフィルターを非表示',
-  'characters.filters.showTags': 'タグを表示',
-  'characters.filters.hideTags': 'タグを非表示',
   'characters.filters.reset': 'フィルターをリセット',
   'characters.filters.copy': '共有リンクをコピー',
   'characters.filters.unique': 'ユニーク効果を表示',
-  'characters.filters.and': 'かつ',
-  'characters.filters.or': 'または',
   'characters.filters.buffs': 'バフ',
   'characters.filters.debuffs': 'デバフ',
   'characters.filters.sources.filterBySource': 'ソースでフィルタ',
@@ -954,20 +876,15 @@ const jp: Record<TranslationKey, string> = {
   'characters.filters.advanced': '詳細フィルター',
   'characters.filters.empty_hint': 'フィルターなし — 属性またはクラスを選択してください',
   'characters.filters.match_logic': '条件',
-  'characters.filters.tab.basics': '基本',
   'characters.filters.tab.combat': '戦闘',
   'characters.filters.tab.effects': '効果',
   'characters.filters.tab.tags': 'タグ',
   'characters.filters.tab.bonus': 'チームボーナス',
   'characters.filters.search_placeholder': 'キャラクターを検索…',
-  'characters.filters.search_effects': '効果を検索…',
   'characters.filters.close': '閉じる',
   'characters.filters.no_match': '条件に一致するキャラクターはいません',
-  'characters.filters.active.count': '{count, plural, other {有効: # フィルター}}',
 
   // Characters common
-  'characters.loading': 'キャラクターを読み込み中...',
-  'characters.common.matches': '{count, plural, one {# 件一致} other {# 件一致}}',
 
   // Characters chains
   'characters.chains.starter': '開始',
@@ -975,11 +892,6 @@ const jp: Record<TranslationKey, string> = {
   'characters.chains.finisher': 'フィニッシャー',
 
   // Characters gifts
-  'characters.gifts.science': '科学',
-  'characters.gifts.luxury': '高級品',
-  'characters.gifts.magicTool': '魔道具',
-  'characters.gifts.craftwork': '工芸品',
-  'characters.gifts.naturalObject': '自然物',
 
   // Characters effects groups
   'characters.effectsGroups.buff.statBoosts': 'ステータス強化',
@@ -993,14 +905,10 @@ const jp: Record<TranslationKey, string> = {
   'characters.effectsGroups.debuff.unique': 'ユニークデバフ',
   'characters.effectsGroups.buff.other': 'その他',
   'characters.effectsGroups.debuff.other': 'その他',
-  'characters.effectsGroups.hidden': '隠し効果',
 
   // Characters tags
-  'characters.tags.types.mechanic': 'メカニック',
-  'characters.tags.types.unit-type': 'ユニットタイプ',
 
   // Character detail page
-  'page.character.meta_title': '{name} — ビルド & ティア',
   'page.character.meta_description':
     '{name}（{element} {classType}）— スキル詳細、専用装備、推奨装備ビルド、ティアランキング。',
   'page.character.sr_suffix': ' — Outerplane {element}{classType}ガイド',
@@ -1031,22 +939,10 @@ const jp: Record<TranslationKey, string> = {
   'page.character.skill.cooldown': 'CT',
   'page.character.skill.wgr': 'WG',
   'page.character.skill.dual_wgr': 'デュアル WG',
-  'page.character.skill.target_mono': '単体',
-  'page.character.skill.target_multi': '全体',
-  'page.character.skill.target_duo': '2体',
-  'page.character.skill.target_mono_ally': '味方単体',
-  'page.character.skill.target_multi_ally': '味方全体',
-  'page.character.skill.target_duo_ally': '味方2体',
   'page.character.skill.enhancement': '強化',
-  'page.character.skill.burn_cards': 'バーストカード',
-  'page.character.skill.burn_cost': 'コスト',
   'page.character.skill.level': 'Lv.',
   'page.character.skill.type.s1': 'スキル1',
   'page.character.skill.type.s2': 'スキル2',
-  'page.character.skill.type.ultimate': '必殺技',
-  'page.character.skill.type.passive': 'パッシブ',
-  'page.character.skill.type.chain': 'チェイン',
-  'page.character.skill.type.core_passive': 'コアフュージョンパッシブ',
   'page.character.skill.priority_title': 'スキル強化優先度',
   'page.character.skill.priority_rule_title': 'スキル強化の基本ルール：',
   'page.character.skill.priority_rule_1': '弱点ゲージダメージのためにレベル2まで上げる',
@@ -1072,20 +968,11 @@ const jp: Record<TranslationKey, string> = {
   'page.character.birthday': '誕生日',
   'page.character.height': '身長',
   'page.character.weight': '体重',
-  'page.character.story': 'ストーリー',
-  'page.character.chain_effect': 'チェイン効果',
-  'page.character.dual_effect': 'デュアルアタック効果',
   'page.character.stats.title': '基本ステータス',
-  'page.character.stats.class_passive': 'クラスパッシブ',
   'page.character.stats.no_data': 'ステータスデータなし',
   'page.character.stats.limit_break_cost': '限界突破コスト',
   'page.character.stats.codex': '図鑑',
   'page.character.stats.quirks': 'ギアス',
-  'page.character.core_fusion.available': 'コアフュージョンあり',
-  'page.character.core_fusion.original': 'オリジナルキャラクター',
-  'page.character.core_fusion.skill_info':
-    'コアフュージョンの解放には{unlockCost}個の{material}が必要です（スキルはLv.1から開始）。スキルレベルの強化には{upgradeCost}個の{material}を消費し、全スキルのレベルが1上がります。合計: {totalCost}個の{material}で全スキル最大化。',
-  'page.character.no_reco': 'このキャラクターのおすすめ装備情報はまだありません。',
 
   // Monad Gate
   'monad.rewards': '報酬',
@@ -1119,15 +1006,7 @@ const jp: Record<TranslationKey, string> = {
   'monad.node.cube': 'キューブ探索',
   'monad.node.unknown': '未確認地域',
   // Routes
-  'monad.route.1': '白い鷹の国',
-  'monad.route.2': '聖なる群島',
-  'monad.route.3': '白い雪と鋼の国',
-  'monad.route.4': '砂風の国',
-  'monad.route.4.1': '砂風の国【前編】',
-  'monad.route.4.2': '砂風の国【後編】',
-  'monad.route.5': '劇毒の領域',
   // Soundtrack
-  'ost.title': 'サウンドトラック',
   'ost.download': 'ダウンロード',
   'ost.selectTrack': 'トラックを選択',
   'ost.disclaimer.line1':
@@ -1284,14 +1163,10 @@ const jp: Record<TranslationKey, string> = {
   'tower.strategy': '攻略',
   'tower.level': 'Lv.{n}',
   'tower.power': '戦闘力{n}',
-  'tower.pool': '出現しうるボス',
   'tower.adds': '雑魚',
-  'tower.restriction_label': '制限',
-  'tower.restriction_none': 'なし',
   'tower.restr_element': '属性',
   'tower.restr_class': 'クラス',
   'tower.restr_star': '初期レア度',
-  'tower.roster_empty': 'この制限ではおすすめキャラが全員編成不可です。',
   'tower.group_floor20': '20階',
   'tower.group_demiurge': '5 / 10 / 15階',
   'tower.group_random': 'ランダム階',
