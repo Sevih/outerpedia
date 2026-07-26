@@ -72,7 +72,28 @@ const CATEGORIES: CategoryDef[] = [
   { name: 'Art', match: (n) => /^T_Demi_/.test(n) },
 ];
 
-/** Blocklist de noms (verbatim V2) + `^IMG_` (HeroFullArt réutilisé ailleurs). */
+/**
+ * Blocklist de noms (héritée V2) + `^IMG_` (HeroFullArt réutilisé ailleurs).
+ *
+ * MESURÉE sur le pool réel le 2026-07-26 (audit E7, 17 380 PNG) : la liste n'est
+ * PAS du gras redondant avec la catégorisation — elle RATTRAPE 952 images pourtant
+ * catégorisables ≥ 250px (surtout des 2048×1024 qui tombent dans la règle Full)
+ * qui, sans elle, FUIRAIENT dans la sortie (497 vrais wallpapers ↔ 1449 candidats
+ * catégorisés). La catégorisation n'est donc pas un sur-ensemble : NE PAS vider.
+ *
+ * Décomposition (par « seul rempart » d'un wallpaper, cf. la mesure) :
+ *  - 11 motifs PORTEURS (à garder absolument) : `^T_Banner_` (80), `^LOADING_` (64),
+ *    `^T_Event_World_` (36), `_(d|body|cloud|a)` (21), `#` (10), `^sactx` (7),
+ *    `^T_MonadGate_` (3), puis Recruit_Normal / Dialog_Title / `^T_Intro` /
+ *    `^T_ScenarioBG_\d+` (1 chacun) ;
+ *  - 12 motifs INERTES sur ce pool (0 match) — assurance héritée V2 (familles de
+ *    textures/UI absentes du pool extrait V3 : FX, Lightmap, colormap, mask, SDF,
+ *    Nebula…) ; candidats à un élagage, mais c'est de l'assurance non nulle →
+ *    laissé à l'arbitrage plutôt que supprimé à l'aveugle ;
+ *  - 26 redondants INDIVIDUELLEMENT (matchent, jamais seuls) — retrait unitaire
+ *    sans effet, mais recouvrement croisé : pas d'élagage en bloc sans re-mesure.
+ * Le comportement porteur est gelé par des tests (cf. extract-wallpapers.test.ts).
+ */
 const EXCLUDE_PATTERNS: RegExp[] = [
   /#/,
   /^T_FX_/,

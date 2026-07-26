@@ -44,6 +44,26 @@
   et le tri diverge entre stores (`numeric: true` chez cinq, absent chez deux).
   TSC vert, eslint vert, prettier vert.
 
+- **E7 : blocklist wallpapers MESURÉE sur le pool réel (puis documentée + gelée)** —
+  la crainte de l'audit (« ~50 regex verbatim V2, partiellement redondantes avec la
+  catégorisation ») est TRANCHÉE par la donnée, pas par l'intuition. Mesure sur les
+  **17 380 PNG** extraits (script jetable, lecture seule) du recouvrement blocklist ∩
+  catégorisation, par motif, avec la métrique « seul rempart d'un wallpaper » :
+  la blocklist **RATTRAPE 952** images pourtant catégorisables ≥ 250px (surtout des
+  2048×1024 happées par la règle Full) qui, sans elle, fuiraient dans la sortie
+  (497 vrais wallpapers ↔ 1449 candidats). La catégorisation n'est **pas** un
+  sur-ensemble → la vider serait un BUG. Décomposition : **11 porteurs** (seul
+  rempart d'≥ 1 wallpaper : `^T_Banner_` 80, `^LOADING_` 64, `^T_Event_World_` 36,
+  `_(d|body|cloud|a)` 21, `#` 10…), **12 inertes** (0 match — assurance héritée V2,
+  familles de textures/UI absentes du pool V3), **26 redondants individuellement**
+  (matchent mais jamais seuls ; recouvrement croisé → pas d'élagage en bloc sans
+  re-mesure). LIVRÉ : le POURQUOI mesuré consigné en tête de la blocklist (fin du
+  « verbatim V2 » inexpliqué = le vrai passif d'E7) + **1 test** qui gèle le
+  comportement porteur (nom catégorisable Full MAIS exclu, pour 5 motifs) contre un
+  futur « nettoyage » silencieux. Aucun motif supprimé : l'élagage effectif des 12
+  inertes est de l'assurance non nulle → laissé à l'arbitrage Sevih plutôt que
+  tranché seul. TSC datagen vert, 439/439.
+
 - **E6 : parallélisme borné de la dédup wallpapers** — les deux passes `sharp` de
   `extract-wallpapers.ts` (`scanAndFilter` lisait les dimensions fichier par
   fichier, `detectDuplicates` hashait fichier par fichier) étaient SÉRIALISÉES sur

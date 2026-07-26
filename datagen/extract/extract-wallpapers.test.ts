@@ -37,6 +37,28 @@ describe('shouldExclude — blocklist nom + chemin', () => {
   });
 });
 
+describe('blocklist PORTEUSE — comportement gelé (mesure E7 du 26/07)', () => {
+  // La mesure sur le pool réel a montré que ces motifs sont le SEUL rempart de
+  // vrais candidats : des images CATÉGORISABLES (ici 2048×1024 → Full) que la
+  // blocklist doit malgré tout écarter. Sans eux, 952 images fuiraient. On gèle
+  // le couple « catégorisable MAIS exclu » pour qu'un futur « nettoyage » de la
+  // blocklist ne casse pas la sortie en silence.
+  const porteurs = [
+    'T_Banner_Summer.png', // ^T_Banner_ — 80 rattrapés
+    'LOADING_Chapter3.png', // ^LOADING_ — 64
+    'T_Event_World_Map.png', // ^T_Event_World_ — 36
+    'T_Boss_a.png', // _(d|body|cloud|a) — 21
+    'weird#name.png', // # — 10
+  ];
+
+  it('chaque motif porteur : nom catégorisable (Full 2048×1024) MAIS exclu', () => {
+    for (const name of porteurs) {
+      expect(getCategory(name, 2048, 1024)).not.toBeNull(); // sortirait sinon…
+      expect(shouldExclude(`/pool/${name}`, name)).toBe(true); // …mais la blocklist l'écarte
+    }
+  });
+});
+
 describe('getCategory — premier match gagne (ordre significatif)', () => {
   it('Full est DIMENSIONNEL (2048×1024), indépendant du nom', () => {
     expect(getCategory('T_ScenarioCG_A0106', 2048, 1024)).toBe('Full');

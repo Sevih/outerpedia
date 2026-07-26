@@ -56,8 +56,10 @@
 > **E1** (tests des cœurs purs d'extraction — parsers `parseMd5` / `parseLsLR`
 > extraits de `pull-gamedata`, classifieurs wallpapers exportés, +19 cas) et
 > **E6** (parallélisme borné des passes sharp de la dédup wallpapers — helper pur
-> `lib/concurrency.mapLimit`, ordre préservé, +7 cas).
-> Reste ci-dessous.
+> `lib/concurrency.mapLimit`, ordre préservé, +7 cas) et **E7** (blocklist
+> wallpapers MESURÉE sur le pool réel — load-bearing, rattrape 952 catégorisables
+> qui fuiraient ; POURQUOI documenté en tête de liste + comportement porteur gelé
+> par test). Reste ci-dessous.
 > ✅ Faits le 26/07 (Worker, migrés dans [DONE.md](./DONE.md)) : **F6**
 > (confinement des chemins de guides, `c13ba4b`), **F3** (garde de forme des corps
 > d'écriture — sévérité révisée à la hausse : un payload mal typé SUPPRIMAIT la
@@ -67,8 +69,13 @@
 
 ### 👤 Claude — datagen / extraction / socle
 
-- [ ] **E7** _(dette)_ — élagage de la blocklist wallpapers (~50 regex V2), après
-      mesure du recouvrement avec la catégorisation.
+- [ ] **E7-suite** _(arbitrage Sevih, dette)_ — la MESURE est faite (cf. DONE : la
+      blocklist est load-bearing, 11 porteurs, 12 inertes, 26 redondants). Reste à
+      décider : supprimer ou non les **12 motifs inertes** (0 match sur le pool —
+      `^T_FX_`, `^Day_`, `^Lightmap-`, `^colormap_`, `^mask_`, `^SDF_`, `^T_Light`,
+      `^T_Nebula`, `^T_PopUP`, `^T_MC`, `^S02`, et le seul motif de chemin
+      `model/textures`). Gain : −12 lignes de passif V2. Coût : c'est de l'assurance
+      contre un futur asset 2048×1024 de ces familles → non nul. Pas tranché seul.
 
 ### 🤖 Worker — panneau admin (`src/**/admin`)
 
