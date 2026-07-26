@@ -64,13 +64,25 @@ naturel. → **à planifier** (hors des deux rapports actuels).
 
 **P1 — à faire même si rien d'autre**
 
-1. **F1** `json.ts` écriture atomique (3 l., un fichier, protège les deux volets).
+- **F1** — `json.ts` écriture atomique (3 l., un fichier, protège les deux volets).
 
-**P2 — robustesse & duplication (petits, gain net)** 2. **F3** try + validation de forme des payloads d'écriture (garde l'entrée de F1). 3. **F6** confinement du chemin guide (`slug`/`fromKey`) — 1 ligne, idiome maison. 4. **E4** timeout sur l'extraction bytes/images (aligné sur audio). 5. **E2** garde anti-suppression massive sur miss partiel de listing. 6. **E3 + F4** dédup à la source : helper PNG partagé (×3) ; hook `useAutoTranslate` (×6, allège aussi F9).
+**P2 — robustesse & duplication (petits, gain net)**
 
-**P3 — tests & perf** 7. **F8 + E1** tests des fonctions qui **mutent/parsent** : 16 stores admin en tête, puis parsers `ls -lR`/`md5sum`. 8. **E6** parallélisme dédup wallpapers ; **[handoff]** `extractor/reviewAll` (1 320 ms).
+- **F3** — try + validation de forme des payloads d'écriture (garde l'entrée de F1).
+- **F6** — confinement du chemin guide (`slug`/`fromKey`) — 1 ligne, idiome maison.
+- **E4** — timeout sur l'extraction bytes/images (aligné sur audio).
+- **E2** — garde anti-suppression massive sur miss partiel de listing.
+- **E3 + F4** — dédup à la source : helper PNG partagé (×3) ; hook `useAutoTranslate` (×6, allège aussi F9).
 
-**Dette (au fil de l'eau)** 9. **F2** frontière `admin/` (documenter les modules qui shippent, ou extraire `lib/editorial/`). 10. **F9** taille des composants (F4 en retire une part) ; **E7** élagage blocklist wallpapers (après mesure) ; **F5** aperçus au montage ; **F7** concurrence stores.
+**P3 — tests & perf**
+
+- **F8 + E1** — tests des fonctions qui **mutent/parsent** : 16 stores admin en tête, puis parsers `ls -lR`/`md5sum`.
+- **E6** — parallélisme dédup wallpapers ; **[handoff]** `extractor/reviewAll` (1 320 ms).
+
+**Dette (au fil de l'eau)**
+
+- **F2** — frontière `admin/` (documenter les modules qui shippent, ou extraire `lib/editorial/`).
+- **F9** — taille des composants (F4 en retire une part) ; **E7** élagage blocklist wallpapers (après mesure) ; **F5** aperçus au montage ; **F7** concurrence stores.
 
 ## Note de méthode
 
