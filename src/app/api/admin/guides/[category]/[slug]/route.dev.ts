@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { IS_DEV } from '@/lib/admin/guard';
+import { jsonObjectBody } from '@/lib/admin/route-body';
 import type { GuideDraft } from '@/lib/admin/guide-draft';
 import { addGuideVersion, loadGuideDraft, saveGuideDraft } from '@/lib/admin/guide-store';
 import {
@@ -26,7 +27,9 @@ export async function POST(
   if (!IS_DEV) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
 
   const { category, slug } = await params;
-  const body = (await req.json()) as Body;
+  const parsed = await jsonObjectBody<Body>(req);
+  if (!parsed.ok) return parsed.res;
+  const body = parsed.body;
 
   // Guides GÉNÉRAUX à fragment éditable : payload bespoke (`data`), store dédié
   // dispatché par slug.

@@ -65,9 +65,6 @@
 
 ### 🤖 Worker — panneau admin (`src/**/admin`)
 
-- [ ] **F3** _(P2)_ — `try` autour de `req.json()` + validation de forme des
-      payloads d'écriture (17 routes lisent du JSON, ~6 sans `try`). Garde l'entrée
-      du tuyau que F1 vient de fermer côté écriture.
 - [ ] **F4** _(P2)_ — hook `useAutoTranslate(collect)` : dédup de l'échafaudage
       « translate » répété ×6 (allège aussi F9).
 - [ ] **F8** _(P3)_ — tests des **16 stores qui écrivent** en priorité (pas les

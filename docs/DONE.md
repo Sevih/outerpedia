@@ -6,6 +6,27 @@
 
 ## 2026-07-26
 
+- **F3 : garde de FORME sur tous les corps d'écriture admin** — et sévérité
+  RÉVISÉE À LA HAUSSE. L'audit annonçait « JSON malformé → 500 » ; l'exécution a
+  montré bien pire. Les stores « compactent » l'entrée reçue puis appliquent
+  « compact vide ⇒ plus de curation ⇒ SUPPRIMER l'entrée ». Un payload d'un
+  mauvais TYPE n'a aucun champ connu → compact vide → **l'override curé est
+  effacé et la route répond `{ ok: true }`**. Vérifié sur `upsertEffectCurated` :
+  `"bonjour"`, `42`, `true`, `["a"]` renvoient tous ZÉRO erreur (`null` lève un
+  500). Donc `POST /curated/effects/42` avec le corps `"oops"` supprimait la
+  curation de l'effet 42, en silence, en affichant un succès. Ce n'était pas du
+  bruit de log mais de la perte de donnée éditoriale.
+  Nouveau `route-body.ts`, trois contrats explicites plutôt qu'un helper
+  fourre-tout : `jsonObjectBody` (objet obligatoire — refuse `null`, tableau,
+  scalaire ; 9 routes), `jsonArrayBody` (6 routes), `optionalJsonObject` (2 routes
+  d'ACTION où poster sans corps est NORMAL — leur `req.json().catch(() => ({}))`
+  ne rattrapait pas un `null` littéral, JSON valide, donc `body.x` levait un 500).
+  Couverture : **100 % des routes admin lisant du JSON**, plus aucun `req.json()`
+  nu. 5 contrôles `Array.isArray` devenus morts retirés (pas de garde en double
+  qui ferait croire à deux niveaux). AUCUNE dépendance ajoutée (pas de zod) ; la
+  validation PAR CHAMP reste dans les stores, où elle est déjà et a du sens.
+  - `route-body.test.ts` (10 cas, dont les 5 payloads qui effaçaient la curée).
+
 - **F6 : confinement des chemins d'écriture de guides** (`guide-store.ts`).
   `guideDir` faisait `resolve(CONTENTS_DIR, category, slug)` sans vérifier le
   périmètre — or `resolve()` normalise les `..` et le `slug` vient de l'URL sans

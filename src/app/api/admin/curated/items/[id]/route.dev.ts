@@ -5,12 +5,15 @@ import {
   type ItemCurated,
 } from '@/lib/admin/item-curated-store';
 import { IS_DEV } from '@/lib/admin/guard';
+import { jsonObjectBody } from '@/lib/admin/route-body';
 
 // Outil local : 403 en prod, écriture fichier seulement en dev.
 export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
   if (!IS_DEV) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
   const { id } = await params;
-  const body = (await req.json()) as ItemCurated;
+  const parsed = await jsonObjectBody<ItemCurated>(req);
+  if (!parsed.ok) return parsed.res;
+  const body = parsed.body;
   await upsertItemCurated(id, body);
   // Rebake immédiat de l'entrée servie : l'édition curée vaut validation (la
   // donnée jeu sous-jacente n'a pas bougé) — rien à promouvoir pour la voir.

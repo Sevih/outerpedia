@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { versionMonster } from '@/lib/admin/review-store';
 import { IS_DEV } from '@/lib/admin/guard';
+import { optionalJsonObject } from '@/lib/admin/route-body';
 
 /**
  * Outil local : 403 en prod. FIGE l'état committé (git HEAD) d'un monstre dans
@@ -11,7 +12,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
   if (!IS_DEV) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
 
   const { id } = await params;
-  const body = (await req.json().catch(() => ({}))) as { label?: string };
+  const body = await optionalJsonObject<{ label: string }>(req);
   try {
     const report = await versionMonster(id, { label: body.label?.trim() || undefined });
     return NextResponse.json({ ok: true, report });

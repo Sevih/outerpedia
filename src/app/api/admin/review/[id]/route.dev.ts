@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { acceptTarget, acceptTypos } from '@/lib/admin/review-store';
 import { IS_DEV } from '@/lib/admin/guard';
+import { optionalJsonObject } from '@/lib/admin/route-body';
 
 // Outil local : 403 en prod, écriture fichier seulement en dev.
 // Corps optionnel `{ mode: 'typos' }` → n'applique QUE les corrections
@@ -9,7 +10,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
   if (!IS_DEV) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
 
   const { id } = await params;
-  const body = (await req.json().catch(() => ({}))) as { mode?: string };
+  const body = await optionalJsonObject<{ mode: string }>(req);
   try {
     if (body.mode === 'typos') {
       const fixed = await acceptTypos(id);
