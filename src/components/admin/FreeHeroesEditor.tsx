@@ -5,18 +5,27 @@
  * — les SOURCES de héros gratuits (data : `free-heroes-sources.json`). On peut
  * AJOUTER/RETIRER des sources et, dans chacune, des ENTRÉES et des HÉROS.
  *
- * Chaque texte (libellé de source, raison) est un `InlineTextField` : aperçu
- * fidèle via le vrai `parseText` (tokens `{I-I/…}`, `{E/…}`), et auto-traduction
- * EN → toutes les langues (DeepL → Haiku), comme l'éditeur de guides de boss. Les
- * héros sont désignés par NOM D'AFFICHAGE EN (clé du contenu, comme le rendu).
+ * Chaque texte (libellé de source, raison) a un aperçu fidèle via le vrai
+ * `parseText` (tokens `{I-I/…}`, `{E/…}`), et l'auto-traduction EN → toutes les
+ * langues (DeepL → Haiku), comme l'éditeur de guides de boss. Les héros sont
+ * désignés par NOM D'AFFICHAGE EN (clé du contenu, comme le rendu).
+ *
+ * UN SEUL champ est monté en édition à la fois (`editing`), les autres sont
+ * rendus au repos depuis UN appel `renderInlineBatch` debouncé — idiome
+ * `EditorialFields`/`CharacterGroups`. Sans cette garde, chaque `InlineTextField`
+ * lançait son propre aperçu AU MONTAGE : 24 allers-retours serveur à l'ouverture
+ * sur la donnée réelle (11 sources + 13 entrées au 26/07), pour zéro frappe.
  */
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { type Keyed, rowKey, stripKey, withKey } from '@/lib/admin/keyed';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import type { FreeHeroesData, FreeHeroSourceData } from '@/lib/admin/general-guide-store';
 import { createFreshness } from '@/lib/admin/translate-fill';
 import { useAutoTranslate } from '@/lib/admin/useAutoTranslate';
 import { InlineTextField } from '@/components/admin/InlineTextField';
+import { InlinePreview } from '@/components/admin/InlinePreview';
+import { renderInlineBatch } from '@/lib/admin/inline-preview-actions';
+import type { InlineSegment } from '@/lib/parse-text';
 import { TranslateButton } from '@/components/admin/TranslateButton';
 import {
   CharacterChips,
@@ -40,6 +49,37 @@ const input =
 /** Lignes keyées : sources et entrées portent une clé React stable. */
 type KEntry = Keyed<FreeHeroSourceData['entries'][number]>;
 type KSource = Keyed<Omit<FreeHeroSourceData, 'entries'> & { entries: KEntry[] }>;
+
+/**
+ * Texte AU REPOS : l'aperçu rendu, cliquable pour passer en édition. Déclaré au
+ * niveau module (`react-hooks/static-components`) — le définir dans le corps de
+ * rendu recréerait son identité à chaque frappe et démonterait le champ.
+ */
+function RestingText({
+  segments,
+  empty,
+  onEdit,
+}: {
+  segments: InlineSegment[] | undefined;
+  empty: string;
+  onEdit: () => void;
+}) {
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={onEdit}
+      onKeyDown={(e) => e.key === 'Enter' && onEdit()}
+      className="border-line-subtle hover:border-accent min-h-8 w-full cursor-pointer rounded-md border px-2 py-1 text-left text-sm leading-snug"
+    >
+      {segments?.length ? (
+        <InlinePreview segments={segments} />
+      ) : (
+        <span className="text-content-subtle italic">{empty}</span>
+      )}
+    </div>
+  );
+}
 
 const keySource = (s: FreeHeroSourceData): KSource =>
   withKey({ ...s, entries: s.entries.map(withKey) });
@@ -69,7 +109,40 @@ export function FreeHeroesEditor({
     ),
   );
 
+  // Champ en cours d'édition — clé COMPOSITE, la structure étant imbriquée :
+  // `s:<si>` pour un libellé de source, `e:<si>:<ei>` pour une raison.
+  const [editing, setEditing] = useState<string | null>(null);
+  const [segs, setSegs] = useState<Record<string, InlineSegment[]>>({});
+
   const viewOf = useMemo(() => viewsByName(charOptions), [charOptions]);
+
+  // UN appel pour TOUS les textes au repos, debouncé — au lieu d'un aperçu par
+  // champ monté. Les clés suivent l'ordre d'aplatissement ci-dessous.
+  useEffect(() => {
+    let cancelled = false;
+    const keys: string[] = [];
+    const texts: string[] = [];
+    sources.forEach((s, si) => {
+      keys.push(`s:${si}`);
+      texts.push(s.source[lang] ?? '');
+      s.entries.forEach((e, ei) => {
+        keys.push(`e:${si}:${ei}`);
+        texts.push(e.reason[lang] ?? '');
+      });
+    });
+    const h = setTimeout(async () => {
+      try {
+        const out = await renderInlineBatch(texts, lang);
+        if (!cancelled) setSegs(Object.fromEntries(keys.map((k, i) => [k, out[i] ?? []])));
+      } catch {
+        /* aperçu indisponible — silencieux, l'édition reste possible */
+      }
+    }, 250);
+    return () => {
+      cancelled = true;
+      clearTimeout(h);
+    };
+  }, [sources, lang]);
 
   const show = (t: LText | undefined): string => t?.[lang] ?? '';
   const editLText = (cur: LText | undefined, val: string): LText => {
@@ -167,23 +240,36 @@ export function FreeHeroesEditor({
           <div className="flex items-start gap-2">
             <div className="min-w-0 flex-1">
               <p className="text-content-subtle mb-1 text-xs uppercase">Source ({lang})</p>
-              <InlineTextField
-                value={show(s.source)}
-                refs={refs}
-                lang={lang}
-                rows={2}
-                layout="stacked"
-                placeholder={lang === 'en' ? 'Source name…' : (s.source.en ?? '')}
-                onChange={(val) =>
-                  patchSource(si, { source: editLText(s.source, val) as KSource['source'] })
-                }
-              />
+              {editing === `s:${si}` ? (
+                <InlineTextField
+                  value={show(s.source)}
+                  refs={refs}
+                  lang={lang}
+                  rows={2}
+                  layout="stacked"
+                  placeholder={lang === 'en' ? 'Source name…' : (s.source.en ?? '')}
+                  onChange={(val) =>
+                    patchSource(si, { source: editLText(s.source, val) as KSource['source'] })
+                  }
+                />
+              ) : (
+                <RestingText
+                  segments={segs[`s:${si}`]}
+                  empty={lang === 'en' ? 'Source name…' : (s.source.en ?? 'Source name…')}
+                  onEdit={() => setEditing(`s:${si}`)}
+                />
+              )}
             </div>
             <button
               type="button"
               className="text-danger shrink-0 text-sm"
               title="Delete the source"
-              onClick={() => setSources((prev) => prev.filter((_, j) => j !== si))}
+              onClick={() => {
+                // Les clés d'édition portent l'INDEX : après un retrait elles
+                // désignent une autre ligne. On sort de l'édition.
+                setEditing(null);
+                setSources((prev) => prev.filter((_, j) => j !== si));
+              }}
             >
               ✕ source
             </button>
@@ -203,11 +289,12 @@ export function FreeHeroesEditor({
                     type="button"
                     className="text-danger shrink-0 text-sm"
                     title="Delete the entry"
-                    onClick={() =>
+                    onClick={() => {
+                      setEditing(null); // cf. suppression de source : index décalés
                       patchSource(si, {
                         entries: s.entries.filter((_, j) => j !== ei),
-                      } as Partial<KSource>)
-                    }
+                      } as Partial<KSource>);
+                    }}
                   >
                     ✕ entry
                   </button>
@@ -229,17 +316,25 @@ export function FreeHeroesEditor({
 
                 <div>
                   <p className="text-content-subtle mb-1 text-xs uppercase">Reason ({lang})</p>
-                  <InlineTextField
-                    value={show(e.reason)}
-                    refs={refs}
-                    lang={lang}
-                    rows={3}
-                    layout="stacked"
-                    placeholder={lang === 'en' ? '' : (e.reason.en ?? '')}
-                    onChange={(val) =>
-                      patchEntry(si, ei, { reason: editLText(e.reason, val) as KEntry['reason'] })
-                    }
-                  />
+                  {editing === `e:${si}:${ei}` ? (
+                    <InlineTextField
+                      value={show(e.reason)}
+                      refs={refs}
+                      lang={lang}
+                      rows={3}
+                      layout="stacked"
+                      placeholder={lang === 'en' ? '' : (e.reason.en ?? '')}
+                      onChange={(val) =>
+                        patchEntry(si, ei, { reason: editLText(e.reason, val) as KEntry['reason'] })
+                      }
+                    />
+                  ) : (
+                    <RestingText
+                      segments={segs[`e:${si}:${ei}`]}
+                      empty={lang === 'en' ? 'Reason…' : (e.reason.en ?? 'Reason…')}
+                      onEdit={() => setEditing(`e:${si}:${ei}`)}
+                    />
+                  )}
                 </div>
               </div>
             ))}

@@ -10,8 +10,9 @@
  * fidèle via le vrai `parseText`) ; les conseils s'éditent en BLOC (une ligne =
  * un conseil) avec un unique rendu en liste, comme sur le vrai guide.
  */
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { VideoRef } from '@contracts';
+import type { InlineSegment } from '@/lib/parse-text';
 import { type Keyed, stripKey, withKey } from '@/lib/admin/keyed';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import {
@@ -30,6 +31,8 @@ import { useAutoTranslate } from '@/lib/admin/useAutoTranslate';
 import { TranslateButton } from '@/components/admin/TranslateButton';
 import { EditorTabs } from '@/components/admin/EditorTabs';
 import { InlineTextField } from '@/components/admin/InlineTextField';
+import { InlinePreview } from '@/components/admin/InlinePreview';
+import { renderInlineBatch } from '@/lib/admin/inline-preview-actions';
 import {
   CharacterChips,
   CharacterNameDatalist,
@@ -107,6 +110,71 @@ function versionTexts(ver: VersionDraft): LText[] {
  * remonte tout leur sous-arbre à CHAQUE frappe — le champ perd le focus et
  * chaque `InlineTextField` refait son aperçu (une requête par champ, par
  * lettre). */
+
+/**
+ * Note d'équipe AU REPOS : l'aperçu rendu, cliquable pour éditer (audit F5).
+ * Sans ça, chaque note montait un `InlineTextField` qui lançait son propre
+ * aperçu à l'ouverture du guide — une requête par équipe, sans une frappe.
+ */
+function RestingNote({
+  segments,
+  empty,
+  onEdit,
+}: {
+  segments: InlineSegment[] | undefined;
+  empty: string;
+  onEdit: () => void;
+}) {
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={onEdit}
+      onKeyDown={(e) => e.key === 'Enter' && onEdit()}
+      className="border-line-subtle hover:border-accent min-h-8 w-full cursor-pointer rounded-md border px-2 py-1 text-left text-sm leading-snug"
+    >
+      {segments?.length ? (
+        <InlinePreview segments={segments} />
+      ) : (
+        <span className="text-content-subtle italic">{empty}</span>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Note-LISTE au repos (mode `named`) — même rendu à puces que l'aperçu
+ * `previewMode="list"` du champ, pour que passer en édition ne déplace rien.
+ */
+function RestingNoteList({
+  paragraphs,
+  onEdit,
+}: {
+  paragraphs: InlineSegment[][] | undefined;
+  onEdit: () => void;
+}) {
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={onEdit}
+      onKeyDown={(e) => e.key === 'Enter' && onEdit()}
+      className="border-line-subtle hover:border-accent min-h-8 w-full cursor-pointer rounded-md border px-2 py-1 text-left text-sm leading-snug"
+    >
+      {paragraphs?.length ? (
+        <ul className="list-disc space-y-1 pl-4">
+          {paragraphs.map((seg, i) => (
+            <li key={i}>
+              <InlinePreview segments={seg} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <span className="text-content-subtle italic">One paragraph per line…</span>
+      )}
+    </div>
+  );
+}
 
 /** Bloc de slots d'équipe (max 4) — une ligne = les alternatives d'un slot. */
 function SlotsBlock({
@@ -291,6 +359,58 @@ export function GuideEditor({
     },
   });
 
+  /* --- Aperçus des notes d'équipe (audit F5) ---
+   *
+   * ⚠ HOOKS : doivent rester AVANT le `if (!spec) return` ci-dessous, comme
+   * `translate`. Ils passent par `versions[active]` et non `v`, déclaré plus bas.
+   *
+   * UN appel pour toutes les notes de la version active, au lieu d'un aperçu
+   * lancé par chaque `InlineTextField` AU MONTAGE (jusqu'à 5 équipes par guide
+   * dans la donnée réelle, sans une frappe). Une seule note est éditable à la
+   * fois — idiome `EditorialFields`/`CharacterGroups`. */
+  const [editingNote, setEditingNote] = useState<number | null>(null);
+  const [noteSegs, setNoteSegs] = useState<InlineSegment[][]>([]);
+  // Mode `named` : la note est une LISTE de paragraphes → équipe → para → segments.
+  const [noteListSegs, setNoteListSegs] = useState<InlineSegment[][][]>([]);
+  const activeTeams = versions[active]?.teams;
+
+  useEffect(() => {
+    let cancelled = false;
+    const teams = activeTeams ?? [];
+    // Un seul aller-retour couvre les DEUX formes de note : la simple (`note`)
+    // et la liste (`notes`, mode `named`). Les listes sont aplaties puis
+    // regroupées au retour — d'où les longueurs mémorisées.
+    const single = teams.map((t) => t.note?.[lang] ?? '');
+    const lists = teams.map((t) => (t.notes ?? []).map((n) => n[lang] ?? '').filter(Boolean));
+    const h = setTimeout(async () => {
+      try {
+        const out = await renderInlineBatch([...single, ...lists.flat()], lang);
+        if (cancelled) return;
+        setNoteSegs(out.slice(0, single.length));
+        let at = single.length;
+        setNoteListSegs(
+          lists.map((l) => {
+            const seg = out.slice(at, at + l.length);
+            at += l.length;
+            return seg;
+          }),
+        );
+      } catch {
+        /* aperçu indisponible — silencieux, l'édition reste possible */
+      }
+    }, 250);
+    return () => {
+      cancelled = true;
+      clearTimeout(h);
+    };
+  }, [activeTeams, lang]);
+
+  /** Change de version ET sort de l'édition : les index d'équipe sont rebattus. */
+  const goToVersion = (i: number) => {
+    setActive(i);
+    setEditingNote(null);
+  };
+
   if (!spec) return <p className="text-content-subtle text-sm">Non-editable category.</p>;
 
   const v: Keyed<VersionDraft> | undefined = versions[active];
@@ -345,7 +465,7 @@ export function GuideEditor({
       setVersions(json.draft.versions.map(withKey));
       setIntro(json.draft.intro);
       const idx = json.draft.versions.findIndex((x) => x.key === newKey.trim());
-      setActive(idx < 0 ? 0 : idx);
+      goToVersion(idx < 0 ? 0 : idx);
       setAdding(false);
       setNewKey('');
     } catch (e) {
@@ -661,7 +781,10 @@ export function GuideEditor({
                 <button
                   type="button"
                   className="text-danger ml-auto text-sm"
-                  onClick={() => patch({ teams: v.teams.filter((_, j) => j !== ti) })}
+                  onClick={() => {
+                    setEditingNote(null); // les index d'equipe se decalent apres un retrait
+                    patch({ teams: v.teams.filter((_, j) => j !== ti) });
+                  }}
                 >
                   ✕ range
                 </button>
@@ -673,14 +796,22 @@ export function GuideEditor({
               />
               <div>
                 <p className="text-content-subtle mb-1 text-xs uppercase">Note ({lang})</p>
-                <InlineTextField
-                  value={show(t.note)}
-                  refs={refs}
-                  lang={lang}
-                  layout="stacked"
-                  placeholder={lang === 'en' ? '' : (t.note?.en ?? '')}
-                  onChange={(val) => setTeam(ti, { note: orUndef(editLText(t.note, val)) })}
-                />
+                {editingNote === ti ? (
+                  <InlineTextField
+                    value={show(t.note)}
+                    refs={refs}
+                    lang={lang}
+                    layout="stacked"
+                    placeholder={lang === 'en' ? '' : (t.note?.en ?? '')}
+                    onChange={(val) => setTeam(ti, { note: orUndef(editLText(t.note, val)) })}
+                  />
+                ) : (
+                  <RestingNote
+                    segments={noteSegs[ti]}
+                    empty={lang === 'en' ? 'Note…' : (t.note?.en ?? 'Note…')}
+                    onEdit={() => setEditingNote(ti)}
+                  />
+                )}
               </div>
             </div>
           ))}
@@ -713,7 +844,10 @@ export function GuideEditor({
                 <button
                   type="button"
                   className="text-danger ml-auto text-sm"
-                  onClick={() => patch({ teams: v.teams.filter((_, j) => j !== ti) })}
+                  onClick={() => {
+                    setEditingNote(null); // les index d'equipe se decalent apres un retrait
+                    patch({ teams: v.teams.filter((_, j) => j !== ti) });
+                  }}
                 >
                   ✕ team
                 </button>
@@ -725,14 +859,22 @@ export function GuideEditor({
               />
               <div>
                 <p className="text-content-subtle mb-1 text-xs uppercase">Note ({lang})</p>
-                <InlineTextField
-                  value={show(t.note)}
-                  refs={refs}
-                  lang={lang}
-                  layout="stacked"
-                  placeholder={lang === 'en' ? '' : (t.note?.en ?? '')}
-                  onChange={(val) => setTeam(ti, { note: orUndef(editLText(t.note, val)) })}
-                />
+                {editingNote === ti ? (
+                  <InlineTextField
+                    value={show(t.note)}
+                    refs={refs}
+                    lang={lang}
+                    layout="stacked"
+                    placeholder={lang === 'en' ? '' : (t.note?.en ?? '')}
+                    onChange={(val) => setTeam(ti, { note: orUndef(editLText(t.note, val)) })}
+                  />
+                ) : (
+                  <RestingNote
+                    segments={noteSegs[ti]}
+                    empty={lang === 'en' ? 'Note…' : (t.note?.en ?? 'Note…')}
+                    onEdit={() => setEditingNote(ti)}
+                  />
+                )}
               </div>
             </div>
           ))}
@@ -768,7 +910,10 @@ export function GuideEditor({
               <button
                 type="button"
                 className="text-danger ml-auto text-sm"
-                onClick={() => patch({ teams: v.teams.filter((_, j) => j !== ti) })}
+                onClick={() => {
+                  setEditingNote(null); // les index d'equipe se decalent apres un retrait
+                  patch({ teams: v.teams.filter((_, j) => j !== ti) });
+                }}
               >
                 ✕ team
               </button>
@@ -782,16 +927,20 @@ export function GuideEditor({
               <p className="text-content-subtle mb-1 text-xs uppercase">
                 Note ({lang}) — one paragraph per line
               </p>
-              <InlineTextField
-                value={itemsToBlock(t.notes ?? [], lang)}
-                refs={refs}
-                lang={lang}
-                rows={4}
-                layout="stacked"
-                previewMode="list"
-                placeholder="One paragraph per line…"
-                onChange={(val) => setTeam(ti, { notes: blockToItems(val, t.notes ?? [], lang) })}
-              />
+              {editingNote === ti ? (
+                <InlineTextField
+                  value={itemsToBlock(t.notes ?? [], lang)}
+                  refs={refs}
+                  lang={lang}
+                  rows={4}
+                  layout="stacked"
+                  previewMode="list"
+                  placeholder="One paragraph per line…"
+                  onChange={(val) => setTeam(ti, { notes: blockToItems(val, t.notes ?? [], lang) })}
+                />
+              ) : (
+                <RestingNoteList paragraphs={noteListSegs[ti]} onEdit={() => setEditingNote(ti)} />
+              )}
             </div>
           </div>
         ))}
@@ -887,7 +1036,7 @@ export function GuideEditor({
             <button
               key={ver._key}
               type="button"
-              onClick={() => setActive(i)}
+              onClick={() => goToVersion(i)}
               className={`rounded-md px-3 py-1 text-sm ${i === active ? 'bg-accent/20 text-accent font-semibold' : 'text-content-muted hover:bg-surface-overlay'}`}
             >
               {ver.key}
