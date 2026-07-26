@@ -12,11 +12,12 @@
 
 ## Verdict croisé
 
-Les deux volets sont **sains** : sécurité admin solide (27/27 routes gardées, 0
-eslint sur 21 500 lignes), pipeline d'extraction mûr et bien gardé. Aucun bug
-ouvert sur le chemin nominal de part et d'autre. Le vrai risque partagé n'est pas
-l'exposition, c'est la **durabilité de la donnée éditoriale** — et il se joue dans
-**un fichier commun aux deux volets**.
+Les **trois volets sont sains** : sécurité admin solide (27/27 routes gardées, 0
+eslint sur 21 500 lignes), pipeline d'extraction mûr et bien gardé, moteur
+extractor propre et bien conçu. Aucun bug ouvert sur le chemin nominal. Le vrai
+risque partagé n'est pas l'exposition, c'est la **durabilité de la donnée
+éditoriale** — et il se joue dans **un fichier commun aux trois volets**
+(`datagen/lib/json.ts`).
 
 ## Le point de fusion : `datagen/lib/json.ts`
 
