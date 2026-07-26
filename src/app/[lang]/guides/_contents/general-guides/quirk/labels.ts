@@ -356,23 +356,6 @@ export const LABELS = {
     zh: '所有天赋树，从游戏文件还原。选择类别（及属性/职业），将鼠标悬停在节点上即可查看效果与满级总消耗。',
     fr: 'Tous les arbres de quirks, reproduits depuis les fichiers du jeu. Choisissez une catégorie (et un élément/une class), puis survolez un nœud pour voir son effet et le coût total au max.',
   },
-  treeMaxLevel: { en: 'Max Lv.', jp: '最大Lv.', kr: '최대 Lv.', zh: '满级', fr: 'Lv. max' },
-  treeLevel: { en: 'Level', jp: 'レベル', kr: '레벨', zh: '等级', fr: 'Niveau' },
-  treeCost: {
-    en: 'Cost to this level:',
-    jp: 'このレベルまでのコスト：',
-    kr: '이 레벨까지 비용:',
-    zh: '至该等级消耗：',
-    fr: 'Coût jusqu’à ce niveau :',
-  },
-  treeUnlockAt: {
-    en: '· unlocks at main Lv.',
-    jp: '· メインLv.で解放',
-    kr: '· 메인 Lv. 해금',
-    zh: '· 主节点Lv.解锁',
-    fr: '· débloqué au main Lv.',
-  },
-  treeMainNode: { en: 'Main', jp: 'メイン', kr: '메인', zh: '主', fr: 'Main' },
   treeResetNote: {
     en: 'Each category can be fully reset with Free Ether, refunding every material.',
     jp: '各カテゴリーはFree Etherで完全リセットでき、全素材が返還されます。',
