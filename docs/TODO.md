@@ -90,6 +90,15 @@
 
 ## 📌 Notes de référence (à ne pas perdre)
 
+- **Warnings Turbopack au build (« overly broad patterns » sur guides.ts,
+  « unexpected file in NFT list ») : BÉNINS, mesurés le 26/07.** Le scan FS des
+  guides fait tracer tout le projet → ~16 Mo embarqués à tort dans l'image
+  (src 11 Mo + datagen 3 Mo + docs 1,4 Mo), négligeable vs les 1,6 Go du
+  `.next` légitime (1584 pages SSG). Le runtime, lui, est garanti par
+  `outputFileTracingIncludes`. Si le temps de build ou l'image dérivent un
+  jour : annotations `/*turbopackIgnore: true*/` sur les `resolve()` de
+  guides.ts (sans risque, l'inclusion étant déclarée à la main).
+
 - **Assets d'événement : rien à pousser à la main.** La collecte
   (`datagen/assets/manifest.ts`, PAS `collect.ts` qui n'indexe que les sprites du
   jeu) est DATA-DRIVEN sur le curé : ajouter un événement en admin suffit, il n'y a
