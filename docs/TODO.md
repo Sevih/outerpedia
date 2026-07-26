@@ -42,35 +42,26 @@
 
 ## 🔍 Suite d'audit (26/07) — par rôle
 
-> Backlog des deux audits (extraction + admin), dédupliqué dans
+> Backlog des trois audits (extraction + admin + extractor), dédupliqué dans
 > [`docs/audit/README.md`](./audit/README.md) (détail : `audit/extraction.md`
-> **E1–E8**, `audit/admin.md` **F1–F9**). Priorité `P1>P2>P3>dette`.
-> Rôles : **Claude** = `datagen/` (extraction + socle partagé) ; **Worker** =
-> panneau admin (`src/**/admin`).
-> ✅ **F1** (écriture atomique `writeJson`, socle partagé) — FAIT le 26/07
-> (Claude, commit `f4fc6d4`).
+> **E1–E8**, `audit/admin.md` **F1–F9**, `audit/extractor.md` **X1–X6**).
+> Priorité `P1>P2>P3>dette`. Rôles : **Claude** = `datagen/` (extraction +
+> extractor + socle partagé) ; **Worker** = panneau admin (`src/**/admin`).
+> ✅ Faits le 26/07 (Claude, migrés dans [DONE.md](./DONE.md)) : **F1** (json
+> atomique), **E2** (garde anti-purge), **E3** (helper PNG), **E4** (timeout
+> extraction), l'**audit `datagen/extractor/`** (constats X1–X6), **X3**
+> (mémoïsation `character`/`monster`, `0396470`) et **X2** (lecture committé via
+> `readCuratedJson`, anti-wipe, `f3f1cd0`). Reste ci-dessous.
 
 ### 👤 Claude — datagen / extraction / socle
 
-- [ ] **E2** _(P2)_ — garde anti-suppression massive dans `pull-gamedata` : un
-      miss partiel de listing distant → suppression locale SILENCIEUSE (le
-      garde-fou ne couvre que le vide total). Seuil `toDelete/local` ou log.
-- [ ] **E4** _(P2)_ — timeout sur l'extraction bytes/images (`extract.ts` `cli()`),
-      aligné sur celui de l'audio (`600_000`).
-- [ ] **E3** _(P2)_ — helper PNG partagé (`lib/png readPngSize`) : dédup du parsing
-      d'en-tête IHDR présent ×3 (`extract-wallpapers.ts:181`,
-      `generators/wallpapers.ts:49`, `assets/hero-full-art.ts:43`). Le test
-      `wallpapers.test` migre dessus.
 - [ ] **E1** _(P3)_ — tests des cœurs purs d'extraction, **parsers `ls -lR`/`md5sum`
       en tête** (fragiles + conséquence E2), puis classifieurs wallpapers.
+- [ ] **X1** _(P3)_ — tester les prédicats des specs (`isInnatePierce`, exclusion
+      NPC de `select`, tags) — le siège du bug NPC de la session.
 - [ ] **E6** _(P3)_ — parallélisme borné (p-limit ≈ cpus) de la dédup wallpapers.
 - [ ] **E7** _(dette)_ — élagage de la blocklist wallpapers (~50 regex V2), après
       mesure du recouvrement avec la catégorisation.
-- [ ] **AUDIT `datagen/extractor/`** _(à planifier)_ — le moteur de revue
-      (13 fic. · 2699 l., **plus du double de l'extraction auditée**) n'est audité
-      par personne : `specs/character.ts` (887 l., **lieu du bug NPC de la
-      session**) sans test, `reviewAll` **1320 ms** non profilé. Prochain audit le
-      plus rentable (périmètre datagen → Claude).
 
 ### 🤖 Worker — panneau admin (`src/**/admin`)
 

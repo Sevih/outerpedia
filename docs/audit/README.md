@@ -121,6 +121,8 @@ distinction compte pour arbitrer :
   écrits en relisant `extractor/` directement, pas depuis un résumé. Les sévérités
   et références `fichier:ligne` sont celles de leurs rapports respectifs.
 
-`DONE.md` n'est pas alimenté depuis cette synthèse (modifs non commitées du worker).
-`TODO.md` porte déjà la répartition par rôle (section « Suite d'audit », arbre de
-travail) — Claude a coché F1/E2/E3/E4 faits. Sevih tranche ce qui reste à trier.
+Les faits du 26/07 (F1, E2, E3, E4, audit extractor) ont **migré dans
+[`DONE.md`](../DONE.md)** plutôt que d'être cochés dans le TODO (convention Sevih :
+le TODO ne garde que le « à faire »). `TODO.md` porte la répartition par rôle
+(section « Suite d'audit ») ; il ne reste que les items ouverts. Sevih tranche ce
+qui reste à trier.

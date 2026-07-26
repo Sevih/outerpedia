@@ -53,6 +53,36 @@
   une borne bien au-dessus du pire cas d'UNE passe. Aligné en esprit sur le
   timeout de l'audio. Commit `918a130`.
 
+- **X3 — mémoïsation `character`/`monster` dans `targets.ts` (le gros des
+  1320 ms de `reviewAll`).** `targets.ts` cachait déjà `equipment()` et
+  `itemCatalog()` sur l'empreinte des tables, mais les cibles `character` et
+  `monster` appelaient `buildCharacters()`/`buildMonsters()` SANS cache : chaque
+  `reviewAll`, puis chaque `reviewTarget`/`acceptTypos` sur ces cibles,
+  reconstruisait l'extraction complète (~15 tables, `prepare` sur chaque ligne,
+  résolution buffs/textes/pool d'images) — payé plusieurs fois par session de
+  revue admin. Fix : deux helpers mémoïsés calqués à l'identique sur `equipment()`,
+  sur la sentinelle `TextSystem` (un refresh réécrit TOUTES les tables d'un coup).
+  Ni `buildCharacters` ni `buildMonsters` ne lit de curé éditable (tout vient de
+  `.gamedata`) → rien à ajouter à l'empreinte, contrairement à `itemCatalog` ;
+  résultat traité en LECTURE SEULE par la revue, comme les caches existants.
+  TSC datagen vert, suite datagen 386/386. Commit `0396470`.
+
+- **X2 — lecture du committé via `readCuratedJson` : anti-wipe silencieux.** Deux
+  lecteurs AVANT écriture confondaient « fichier ABSENT » (normal) et « fichier
+  CASSÉ » (erreur), en renvoyant `{}` dans les deux cas. `review.ts`
+  `readCommitted` : un `data/generated/*.json` corrompu faisait voir TOUTES les
+  entités comme « new » (diff faussé) et, au `writeBack` d'une cible à `subKey`
+  (effets sous `glossaries.json`), `{ ...readCommitted(file), [subKey]: data }`
+  avec `readCommitted = {}` **écrasait les autres clés** du fichier partagé à
+  l'accept. `integrate.ts` `readJsonOr` : un `monsters.json` momentanément
+  corrompu → merge d'un monstre sur `{}` → **tous les autres monstres perdus**.
+  Même classe que F1 (admin) et E2 (extraction). Fix : router ces lectures par
+  `readCuratedJson` (ENOENT → `{}`, JSON cassé → **throw** nommant le fichier) ;
+  `readJson` garde son throw-sur-absent. Idiome unifié, plus de
+  `JSON.parse(readFileSync)` maison ni de catch-all. Test de non-régression
+  (integrate) : un committé cassé lève au lieu de merger sur du vide, fichier
+  corrompu resté intact. Suite datagen 387/387. Commit `f3f1cd0`.
+
 - **Desc de skill PAR NIVEAU (le texte ne suivait pas le palier).** Le `DescID`
   d'un skill est une liste CSV — une desc PLEINE par niveau — mais le datagen ne
   gardait que `splitCsv(DescID)[0]` (niveau 1), jetant les suivants. Invisible
