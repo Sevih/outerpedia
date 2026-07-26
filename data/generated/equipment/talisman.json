@@ -764,11 +764,6 @@
         "id": "5002",
         "level": 1,
         "isAdd": false
-      },
-      {
-        "id": "5102",
-        "level": 10,
-        "isAdd": true
       }
     ],
     "mode": "AP"
@@ -790,11 +785,6 @@
         "id": "5001",
         "level": 1,
         "isAdd": false
-      },
-      {
-        "id": "5101",
-        "level": 10,
-        "isAdd": true
       }
     ],
     "mode": "CP"

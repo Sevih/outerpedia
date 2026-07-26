@@ -610,7 +610,14 @@ export function buildEquipment(): EquipmentData {
     for (const optId of splitCsv(r.UniqueOptionID)) {
       const spec = specById.get(optId);
       if (!spec) continue;
-      if (!(optId in data.passives)) data.passives[optId] = resolvePassive(spec, skill, buffsByID);
+      const p = data.passives[optId] ?? resolvePassive(spec, skill, buffsByID);
+      // Palier FANTÔME : certaines Unique Options existent dans la table mais ne
+      // référencent AUCUN buff (le +10 de Sharp/Powerful Adventurer's Talisman —
+      // VÉRIFIÉ en jeu : ces deux-là n'ont pas de passif au +10). Sans buff, le
+      // passif ressort avec un `desc` à `[Value]` non substitué et zéro effet →
+      // une ligne fantôme sur la fiche. On ne l'émet ni en ref, ni en passif.
+      if (!p.buff && !p.values.length && !p.effects?.length) continue;
+      if (!(optId in data.passives)) data.passives[optId] = p;
       out.push({ id: optId, level: num(spec.Level) || 1, isAdd: bool(spec.IsAdd) });
     }
     return out.sort((a, b) => a.level - b.level);

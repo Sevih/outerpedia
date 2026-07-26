@@ -38,12 +38,6 @@
 
 ## 🧹 Dette code
 
-### Bugs non urgents
-
-- [ ] Sharp Adventurer's Talisman et Powerful Adventurer's Talisman ont des desc
-      buggés (« Recovers [Value] Action Points when using an ultimate ») et je
-      crois qu'ils n'ont pas d'effets +10 (à vérifier). _(note Sevih)_
-
 ### Lots de fond SEO/perf (audit Sitebulb 20/07 — non urgents)
 
 > Le gros de l'audit est traité (cf. DONE 20-22/07). Ce qui suit est du VOLUME

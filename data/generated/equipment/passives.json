@@ -6943,42 +6943,6 @@
       }
     ]
   },
-  "5101": {
-    "name": {
-      "en": "Chain Point Generation: Critical Hit",
-      "jp": "CP獲得 - 会心攻撃",
-      "kr": "CP회복 - 치명 공격",
-      "zh": "CP恢复-暴击"
-    },
-    "desc": {
-      "en": "Generates [Value] Chain Points when an attack scores a critical hit",
-      "jp": "会心発生時、CPを[Value]獲得する。",
-      "kr": "치명 공격 시 CP [Value] 회복",
-      "zh": "发动暴击时，CP恢复[Value]"
-    },
-    "values": [],
-    "levels": [],
-    "icon": "TI_Icon_UO_Talisman_03",
-    "buff": ""
-  },
-  "5102": {
-    "name": {
-      "en": "Action Point Recovery - Ultimate",
-      "jp": "AP獲得 - 必殺スキル",
-      "kr": "AP회복 - 필살기",
-      "zh": "AP恢复-必杀技"
-    },
-    "desc": {
-      "en": "Recovers [Value] Action Points when using an ultimate",
-      "jp": "必殺スキル使用時、APを[Value]獲得する。",
-      "kr": "필살기 사용 시 AP [Value] 회복",
-      "zh": "使用必杀技时，AP恢复[Value]"
-    },
-    "values": [],
-    "levels": [],
-    "icon": "TI_Icon_UO_Talisman_08",
-    "buff": ""
-  },
   "2000001": {
     "name": {
       "en": "K's Exclusive Equipment",
@@ -13273,24 +13237,6 @@
         "mode": "up"
       }
     ]
-  },
-  "2100078": {
-    "name": {
-      "en": "Fatal's Exclusive Equipment",
-      "jp": "フェータルの専用装備",
-      "kr": "페이탈의 전용 장비",
-      "zh": "法塔尔专属装备"
-    },
-    "desc": {
-      "en": "<color=#28d9ed>+30%</color> Critical Damage",
-      "jp": "会心ダメージ<color=#28d9ed>+30%</color>",
-      "kr": "치명 피해 <color=#28d9ed>+30%</color>",
-      "zh": "暴击伤害<color=#28d9ed>+30%</color>"
-    },
-    "values": [],
-    "levels": [],
-    "icon": "TI_Icon_UO_EXCLUSIVE",
-    "buff": ""
   },
   "2100079": {
     "name": {

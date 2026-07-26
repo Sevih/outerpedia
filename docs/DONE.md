@@ -6,6 +6,22 @@
 
 ## 2026-07-26
 
+- **Passifs +10 FANTÔMES purgés (talismans Adventurer + EE Eclipse)** — Sharp &
+  Powerful Adventurer's Talisman affichaient un passif « +10 : Recovers [Value]
+  Action Points when using an ultimate » — placeholder `[Value]` non substitué.
+  VÉRIFIÉ en jeu (Sevih) : ces deux-là n'ont PAS de passif au +10. La donnée le
+  reflétait déjà (les Unique Options `5101`/`5102` n'ont AUCUN buff en source),
+  mais le générateur émettait quand même la ref, et le rendu
+  (`equipment-detail.ts:325` renvoie le desc BRUT quand `values` est vide) sortait
+  la ligne fantôme avec `[Value]`. Correctif À LA SOURCE : `resolvePassiveRefs`
+  (`generators/equipment.ts`) n'émet plus une Unique Option sans buff/valeur/effet
+  — ni comme ref d'équipement, ni comme définition dans `passives.json`. Mesuré :
+  **3 passifs vides sur 411** — `5101`/`5102` (les 2 talismans) et `2100078`, même
+  signature vide, porté au +10 par l'**EE Eclipse** (nettoyé du même coup ; le
+  `[Value]` y était faux de toute façon — un contrôle en jeu confirmerait qu'Eclipse
+  n'a pas non plus de +10). Regen équipement ciblé (`talisman`/`passives`/`ee.json`),
+  diff prouvé chirurgical (aucune autre dérive). TSC datagen vert, 439/439.
+
 - **Locales : pré-seed V2 TERMINÉ — 150 clés orphelines purgées ×5 langues,
   contrat gardé par TEST** (`src/i18n/locales/keys.test.ts`, commit e219d55).
   L'item offrait « documenter ou parquer » ; la mesure a tranché mieux : après
