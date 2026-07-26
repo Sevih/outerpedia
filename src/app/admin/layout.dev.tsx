@@ -1,7 +1,6 @@
 import { AdminSidebar, type NavSection } from '@/components/admin/AdminSidebar';
 import { assertDevOnly } from '@/lib/admin/guard';
-import { reviewAll, reviewBuckets } from '@/lib/admin/review-store';
-import { actionableDiff } from '@/lib/admin/monster-review';
+import { actionableCount, bucketsOf, EXTRACTOR_ENTITIES } from '@/lib/admin/admin-inbox';
 import { GUIDE_EDITOR_CATEGORIES } from '@/lib/admin/guide-nav';
 import { RootDocument } from '../root-document';
 
@@ -12,57 +11,39 @@ export const dynamic = 'force-dynamic';
 // son <html> via RootDocument, cf. ce fichier). Figé en `en` : outil local.
 export const metadata = { title: { default: 'Admin', template: '%s | Outerpedia Admin' } };
 
-/**
- * Compteurs « à traiter » (diff jeu ↔ site) affichés sur les lignes Extractor,
- * par id de cible. `new + diff + removed` (le typo, cosmétique, est exclu du
- * badge). Robuste : une extraction en échec ne doit PAS faire tomber toute la
- * coquille admin.
- */
-function pendingCounts(): Record<string, { count: number; title: string }> {
-  const out: Record<string, { count: number; title: string }> = {};
-  try {
-    for (const r of reviewAll()) {
-      // Monstres : seuls ceux servis par le site sont actionnables (cf.
-      // `actionableDiff`) — sinon le badge compte du bruit d'extraction.
-      const b = reviewBuckets(actionableDiff(r.id, r.diff));
-      // Le badge est un TOTAL ; le détail va en infobulle (sinon « 4 » se lit
-      // « 4 diff » alors que la page dit « 2 new + 2 diff »).
-      out[r.id] = {
-        count: b.new + b.diff + b.removed,
-        title: `${b.new} new + ${b.diff} diff + ${b.removed} removed`,
-      };
-    }
-  } catch {
-    /* extraction indisponible */
-  }
-  return out;
-}
-
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   assertDevOnly();
-  const n = pendingCounts();
-  const warn = (p?: { count: number; title: string }) =>
-    p && p.count > 0 ? { count: p.count, tone: 'warn' as const, title: p.title } : null;
+  /**
+   * Badge « à traiter » d'une entité : le TOTAL `new + diff + removed` (le typo,
+   * cosmétique, en est exclu) ; le détail va en infobulle, sinon « 4 » se lit
+   * « 4 diff » alors que la page dit « 2 new + 2 diff ».
+   * Les buckets viennent de `admin-inbox` — même calcul que l'inbox de la home,
+   * mémoïsé à la requête (cf. `entityBuckets`).
+   */
+  const badge = (id: string) => {
+    const b = bucketsOf(id);
+    const count = actionableCount(b);
+    return count > 0
+      ? {
+          count,
+          tone: 'warn' as const,
+          title: `${b.new} new + ${b.diff} diff + ${b.removed} removed`,
+        }
+      : null;
+  };
 
   const sections: NavSection[] = [
     {
+      // Liste + ordre viennent d'`admin-inbox` (source unique, partagée avec la
+      // home) — le Monstre et l'Item ferment la liste (décision Sevih).
       title: 'Extractor',
-      items: [
-        { label: 'Character', href: '/admin/extractor/characters', badge: warn(n.character) },
-        { label: 'Effect', href: '/admin/extractor/effects', badge: warn(n.effect) },
-        { label: 'EE', href: '/admin/extractor/ee', badge: warn(n.ee) },
-        { label: 'Weapons', href: '/admin/extractor/weapons', badge: warn(n.weapon) },
-        { label: 'Amulet', href: '/admin/extractor/amulets', badge: warn(n.amulet) },
-        { label: 'Armor', href: '/admin/extractor/armors', badge: warn(n.armor) },
-        { label: 'Talisman', href: '/admin/extractor/talismans', badge: warn(n.talisman) },
-        { label: 'Sets', href: '/admin/extractor/sets', badge: warn(n.set) },
-        { label: 'Monster', href: '/admin/extractor/monsters', badge: warn(n.monster) },
-        { label: 'Item', href: '/admin/extractor/items', badge: warn(n.item) },
-      ],
+      items: EXTRACTOR_ENTITIES.map((e) => ({
+        label: e.label,
+        href: e.href,
+        badge: badge(e.id),
+      })),
     },
     {
-      // Même ordre d'entités que l'Extractor (demande Sevih) ; le Monstre et
-      // l'Item ferment la liste des deux côtés.
       // Même ordre d'entités que l'Extractor (demande Sevih) ; le Monstre et
       // l'Item ferment la liste des deux côtés. PAS d'éditeur pour les autres
       // pièces d'équipement (armes/amulettes/armures/talismans/sets) : rien à
