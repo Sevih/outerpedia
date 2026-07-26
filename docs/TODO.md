@@ -101,14 +101,6 @@
       d'URL absolue — zéro open redirect), `GET /s/[id]` → 302. Réutilise
       `src/lib/db.ts` ; sans BDD → dégradation lien long. Premier consommateur
       envisagé : bouton « partager » optionnel (Discord) sur les pages à état.
-- [ ] CSP durcissement — PASSE 1 livrée le 19/07 (cf. DONE) : politique stricte
-      nonce + strict-dynamic servie en **Report-Only** via `proxy.ts`, collecteur
-      `/api/csp-report`. Ne bloque rien encore. **RESTE** : (a) déployer en prod,
-      (b) laisser les rapports s'accumuler quelques jours, `grep [csp-report]`
-      dans les logs du conteneur, (c) traiter les vraies violations (CF Insights
-      non-noncé attendu), (d) **PASSE 3** : basculer la politique réelle de
-      `next.config.ts` sur le nonce et retirer `'unsafe-inline'` des scripts.
-      (`style-src` garde `'unsafe-inline'` : styles inline React, non prioritaire.)
 
 ## 📚 Docs à resynchroniser
 

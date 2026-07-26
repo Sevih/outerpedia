@@ -4,6 +4,32 @@
 > ne garde que le « à faire »). Un item traité migre ici avec sa date ; le
 > détail vit dans git. Ne pas confondre avec le `CHANGELOG.md` racine (public).
 
+## 2026-07-26
+
+- **CSP — chantier CLOS : nonce + strict-dynamic ABANDONNÉ (résultat négatif),
+  Report-Only retiré, `img-src` resserré.** L'expérience Report-Only (PASSE 1,
+  livrée le 19/07) a tourné ~1 semaine en prod ; les rapports (`docker logs
+stack-outerpedia-1 | grep [csp-report]`) ont tranché : ce n'était PAS du bruit
+  de tiers mais **nos propres scripts**, sur TOUTES les pages, tous les
+  sous-domaines — deux classes, `script-src-elem` bloqué sur les chunks
+  `_next/static/chunks/*.js` (strict-dynamic ignore `'self'`) ET sur l'inline
+  (`__next_f`, bootstrap RSC). Cause unique : le **nonce par-requête ≠ HTML ISR
+  mis en cache** (nonce baké une fois à la génération, régénéré à chaque requête).
+  Le nonce impose le rendu dynamique (perte de l'ISR 24 h + archi du cron de
+  purge) et le payload RSC inline n'est pas hashable (change à chaque page) → pas
+  de retrait propre de `'unsafe-inline'` sur du statique. DÉCISION : on garde
+  `'unsafe-inline'` côté script (défendable : wiki de données curées, zéro contenu
+  utilisateur réinjecté dans le DOM, pas de session publique). RETIRÉ : `buildCsp`
+  /`withCsp` + headers Report-Only/`Reporting-Endpoints` de `proxy.ts` (redevient
+  du pur routing i18n), et la route collectrice `src/app/api/csp-report/route.ts`
+  (chaque visiteur POSTait un rapport par page — bruit/bande passante pour rien).
+  GAIN réel et compatible statique : `img-src` passe du `https:` fourre-tout (toute
+  image HTTPS autorisée) à un allowlist EXPLICITE — inventaire vérifié des hôtes
+  servis : `'self'`, `data:`, `blob:` (export tier-list), `img.outerpedia.com`
+  (R2), `cdn.discordapp.com` (avatars+emojis reviews), `i.ytimg.com` +
+  `img.youtube.com` (miniatures) ; grep confirmé zéro hotlink vers le CDN du jeu.
+  Commentaires `next.config.ts` + `Analytics.tsx` alignés. tsc + eslint verts.
+
 ## 2026-07-24
 
 - **Auto-convert des icônes faites main + icône « Extra Skill ».** L'effet
