@@ -6,6 +6,34 @@
 
 ## 2026-07-26
 
+- **Éditeur assisté validé en dev, et un doublon de clé React corrigé au
+  passage** — validation dev de Sevih : le geste d'édition de **F5** et les **4
+  éditeurs de F9** sont bons (les deux ⚠ ci-dessous tombent). L'éditeur assisté,
+  lui, portait encore un vrai bug : React « two children with the same key,
+  `BT_AP_CHARGE` » dans le picker d'`InlineTextField`, vu depuis
+  `CharacterGroups`/`RecoGroups`.
+  CAUSE : la dédup posée le 24/07 se fait par APPARENCE (nom + icône + desc).
+  Elle garantit l'unicité de la SIGNATURE, pas celle de la CLÉ — or
+  `InlineTextField` keye ses options par la clé. La boucle parcourait les IDS, et
+  plusieurs ids réclament la même clé : `BT_AP_CHARGE` est revendiquée par le
+  glossaire DES DEUX CÔTÉS (`SYS_BUFF_CHARGE_CP` en buff, `SYS_BUFF_REDUCE_AP` en
+  debuff) et par trois effets curés. Chaque id apportant son apparence, plusieurs
+  entrées survivaient avec la même `value`.
+  CORRECTIF À LA SOURCE : on itère les CLÉS, dédoublonnées DANS le helper, et
+  chaque clé est étiquetée par ce que `resolveEffectKey` résout réellement
+  (glossaire du côté demandé, puis côté opposé, puis curé). Ça corrige au passage
+  un MENSONGE : le picker affichait l'apparence de l'id qui avait introduit la
+  clé, pas celle que le tag rend. Effet de bord assumé — quelques étiquettes du
+  picker changent, elles sont désormais exactes.
+  MA PREMIÈRE VERSION NE TENAIT PAS : j'avais déplacé la dédup côté clés mais
+  laissé le helper faire confiance à l'appelant. Le test l'a refusée — soit
+  exactement la classe d'invariant implicite qui a causé le bug. L'unicité est
+  maintenant structurelle, elle ne dépend plus de la vigilance de l'appelant.
+  TESTS : dix cas de plus, huit sur le cœur pur et deux sur la DONNÉE RÉELLE
+  (garde anti-vide, puis unicité des `value` sur les 13 listes) — le second est le
+  seul capable d'attraper une clé nouvellement partagée, comme celle-ci l'a été.
+  1224 tests verts (110 fichiers).
+
 - **F2 (2/2) : la frontière `admin/` devient BLOQUANTE, dans les deux sens** —
   arbitrage tranché avec Sevih, et ni l'une ni l'autre des deux options de
   l'audit : « documenter » ne bloque rien (un commentaire en tête de dossier
@@ -100,7 +128,7 @@
   demanderait dix props pour un gain douteux et un risque que je ne peux pas
   vérifier à l'écran. Seules les briques autonomes sortent.
   Déplacements PURS : aucune prop ni comportement modifié. 1212 tests verts (108
-  fichiers). ⚠ à valider en dev par prudence, comme F5.
+  fichiers). VALIDÉ EN DEV le 26/07 par Sevih, comme F5.
   Commits `64dc6ff`, `e158f5b`, `9b751eb`, `9a27cb2`.
 
 - **F7-reste : le 10ᵉ store passe sous verrou** — `item-curated-store` était le
@@ -177,7 +205,8 @@
   que passer en édition ne déplace rien. `RestingText` / `RestingNote` /
   `RestingNoteList` sont au niveau module (`react-hooks/static-components`, cf. le
   bloc d'avertissement en tête de `GuideEditor`).
-  ⚠ SEUL item de la série qui CHANGE UN GESTE d'édition : à valider en dev.
+  SEUL item de la série qui CHANGE UN GESTE d'édition — VALIDÉ EN DEV le 26/07
+  par Sevih.
   TSC / eslint / prettier verts, 1159 tests inchangés.
 
 - **F11 : type `ItemCurated` unifié — fin de la « forme miroir »** — le contrat de

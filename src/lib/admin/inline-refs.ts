@@ -10,7 +10,7 @@
  */
 import type { Glossaries } from '@contracts';
 import { loadDataJson } from '@/lib/data/disk';
-import { getMergedEffect, curatedKeyIndex } from '@/lib/data/effects';
+import { curatedKeyIndex, resolveEffectKey } from '@/lib/data/effects';
 import { getAllCharacters, characterDisplayName } from '@/lib/data/characters';
 import {
   getAmuletFamilies,
@@ -57,32 +57,64 @@ const dedupeByValue = (list: RefItem[]): RefItem[] => {
   return list.filter((r) => (seen.has(r.value) ? false : (seen.add(r.value), true)));
 };
 
-/** Clés éditoriales d'effet d'un côté (glossaire `effectByKey` + créations curées).
- *  Un même effet a souvent PLUSIEURS clés (variantes, jumeau `_IR`…) au rendu
- *  STRICTEMENT identique (nom + icône + description) : le picker n'en propose
- *  qu'UNE — la clé la plus courte (la base, pas le jumeau). Deux effets homonymes
- *  à description DIFFÉRENTE restent distincts (ce sont de vrais effets séparés). */
-function effectRefs(side: 'buff' | 'debuff'): RefItem[] {
-  const G = loadDataJson<Glossaries>('generated/glossaries.json');
+/** Apparence d'un effet, réduite à ce qui distingue deux entrées du picker. */
+interface EffectLook {
+  name?: { en?: string };
+  icon?: string;
+  desc?: { en?: string };
+}
+
+/**
+ * Cœur PUR du picker d'effets : une entrée par APPARENCE distincte.
+ *
+ * Un même effet a souvent plusieurs clés (variantes, jumeau `_IR`…) au rendu
+ * strictement identique (nom + icône + description) : on n'en propose qu'UNE, la
+ * plus courte (la base `BT_X`, pas `BT_X_IR`). Deux effets homonymes à
+ * description DIFFÉRENTE restent distincts — ce sont de vrais effets séparés.
+ *
+ * ⚠ ON ITÈRE LES CLÉS, PAS LES IDS, et l'étiquette vient de ce que la clé
+ * RÉSOUT. C'est ce qui garantit l'unicité de `value`, dont dépendent les clés
+ * React d'`InlineTextField`. La version précédente parcourait les ids, or
+ * PLUSIEURS ids peuvent réclamer la même clé : `BT_AP_CHARGE` est revendiquée par
+ * le glossaire (des deux côtés) ET par trois effets curés. Chaque id apportant
+ * son apparence, la dédup par signature les gardait tous — deux entrées, même
+ * `value`, doublon de clé React à l'écran (constaté en dev le 26/07).
+ * Étiqueter par `resolveEffectKey` corrige au passage un mensonge : le picker
+ * montre désormais l'effet que le tag rendra vraiment, pas celui de l'id qui a
+ * introduit la clé.
+ */
+export function effectRefsFromKeys(
+  keys: Iterable<string>,
+  resolve: (key: string) => EffectLook | undefined,
+): RefItem[] {
   const bySig = new Map<string, { key: string; label: string }>();
-  const consider = (key: string, id: string) => {
-    const eff = getMergedEffect(id);
-    const label = eff?.name.en || key;
+  // Clés dédoublonnées ICI, et `resolve` appelé UNE fois par clé : c'est ce qui
+  // rend l'unicité de `value` structurelle. Une clé vue deux fois pourrait sinon
+  // gagner deux signatures et ressortir en double — le contrat ne doit pas
+  // dépendre de la vigilance de l'appelant, c'est précisément ce qui a lâché.
+  for (const key of new Set(keys)) {
+    const eff = resolve(key);
+    const label = eff?.name?.en || key;
     const sig = `${label}␟${eff?.icon ?? ''}␟${eff?.desc?.en ?? ''}`;
     const prev = bySig.get(sig);
     // À apparence égale, on garde la clé la plus courte (puis la plus petite) —
     // choix déterministe qui fait ressortir la base (`BT_X`) plutôt que `BT_X_IR`.
     if (!prev || key.length < prev.key.length || (key.length === prev.key.length && key < prev.key))
       bySig.set(sig, { key, label });
-  };
-  for (const [key, id] of Object.entries(G.effectByKey[side] ?? {})) consider(key, id);
-  // Créations curées adressées par `keys` (mécaniques sans texte de jeu).
-  for (const [sk, id] of curatedKeyIndex().bySideKey) {
-    const sep = sk.indexOf('|');
-    if (sk.slice(0, sep) !== side) continue;
-    consider(sk.slice(sep + 1), id);
   }
   return [...bySig.values()].map((e) => ({ value: e.key, label: e.label })).sort(byLabel);
+}
+
+/** Clés éditoriales d'effet d'un côté : glossaire `effectByKey` + créations curées. */
+function effectRefs(side: 'buff' | 'debuff'): RefItem[] {
+  const G = loadDataJson<Glossaries>('generated/glossaries.json');
+  const keys = new Set<string>(Object.keys(G.effectByKey?.[side] ?? {}));
+  // Créations curées adressées par `keys` (mécaniques sans texte de jeu).
+  for (const sk of curatedKeyIndex().bySideKey.keys()) {
+    const sep = sk.indexOf('|');
+    if (sk.slice(0, sep) === side) keys.add(sk.slice(sep + 1));
+  }
+  return effectRefsFromKeys(keys, (key) => resolveEffectKey(side, key));
 }
 
 /** Toutes les listes d'autocomplétion (clés EN). Server-only. */
