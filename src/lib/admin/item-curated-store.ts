@@ -12,6 +12,7 @@ import { resolve } from 'node:path';
 import { validateItemCurated, type ItemCurated } from '@datagen/curated/items';
 import { integrateItemData } from '@datagen/generators/item-catalog';
 import { writeJson } from '@datagen/lib/json';
+import { withStoreLock } from '@/lib/admin/store-lock';
 
 // Contrat + validation : source UNIQUE dans `datagen/curated/items.ts` (audit
 // F11 — fini la « forme miroir » avec le générateur). Ré-exportés parce que les
@@ -34,17 +35,21 @@ export async function upsertItemCurated(id: string, curated: ItemCurated): Promi
   const errors = curated ? validateItemCurated(id, curated) : [];
   if (errors.length) return errors;
 
-  const all = loadItemCurated();
-  if (!curated || Object.keys(curated).length === 0) delete all[id];
-  else all[id] = curated;
-  // Tri numérique comme les autres stores (F10) : les ids d'items sont textuels
-  // aujourd'hui, mais `21201` (cf. les récompenses de coupons) en est un aussi.
-  const sorted = Object.fromEntries(
-    Object.entries(all).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true })),
-  );
-  // Format CANONIQUE (`writeJson`) — cohérent avec `bakeItemCatalogEntry` ci-dessous.
-  await writeJson(PATH, sorted);
-  return [];
+  // Read-merge-write sous verrou (audit F7) : deux items enregistrés en même
+  // temps écrivent le MÊME fichier, l'un écrasait l'autre en silence.
+  return withStoreLock(PATH, async () => {
+    const all = loadItemCurated();
+    if (!curated || Object.keys(curated).length === 0) delete all[id];
+    else all[id] = curated;
+    // Tri numérique comme les autres stores (F10) : les ids d'items sont textuels
+    // aujourd'hui, mais `21201` (cf. les récompenses de coupons) en est un aussi.
+    const sorted = Object.fromEntries(
+      Object.entries(all).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true })),
+    );
+    // Format CANONIQUE (`writeJson`) — cohérent avec `bakeItemCatalogEntry` ci-dessous.
+    await writeJson(PATH, sorted);
+    return [];
+  });
 }
 
 const GEN = resolve(process.cwd(), 'data/generated');

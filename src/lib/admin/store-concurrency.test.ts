@@ -25,6 +25,7 @@ const { upsertEffectCurated } = await import('./effects-store');
 const { upsertSearchAliases } = await import('./search-alias-store');
 const { upsertShortName } = await import('./short-name-store');
 const { applyCharacterKitCuration } = await import('./character-skill-curated-store');
+const { upsertItemCurated } = await import('./item-curated-store');
 
 beforeEach(() => box.reset());
 afterAll(() => box.dispose());
@@ -94,6 +95,19 @@ describe('deux enregistrements simultanés sur le même fichier curé', () => {
       'data/curated/character-skills.json',
     );
     expect(f.chipHide).toEqual({ c1: ['b1'], c2: ['b2'] });
+  });
+
+  it('item-curated-store : les DEUX items survivent', async () => {
+    // Ce store est arrivé après les autres : il était en cours de refonte côté
+    // datagen (F11) quand F7 a été posé.
+    await Promise.all([
+      upsertItemCurated('gold', { hidden: true }),
+      upsertItemCurated('gem', { hidden: true }),
+    ]);
+    expect(Object.keys(box.read<object>('data/curated/items.json')).sort()).toEqual([
+      'gem',
+      'gold',
+    ]);
   });
 
   it('aucun temporaire ne survit à une rafale', async () => {

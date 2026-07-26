@@ -72,7 +72,10 @@
 > ⚠ **F5 change un GESTE d'édition** (cliquer une note pour l'ouvrir) : à valider
 > en dev, c'est le seul item de la série qui se voit à l'écran.
 > Puis **F7** (perte d'écriture entre deux onglets — bug MESURÉ puis corrigé par
-> `withStoreLock` sur les 9 stores à merge par clé, `3d92d9f`).
+> `withStoreLock` sur les 9 stores à merge par clé, `3d92d9f` ; le 10ᵉ,
+> `item-curated-store`, rattrapé après le F11 de l'agent datagen) et **F9**
+> (taille des 4 éditeurs : briques sorties dans `guide/`, `events/`, `shop/`,
+> `gear/` — 3464 → 2240 lignes cumulées, +37 cas sur les cœurs purs extraits).
 
 ### 👤 Claude — datagen / extraction / socle
 
@@ -84,12 +87,11 @@
 
 ### 🤖 Worker — panneau admin (`src/**/admin`)
 
-- [ ] **F7-reste** _(dette, petit)_ — `item-curated-store` est le seul store par
-      CLÉ non protégé par `withStoreLock` : il était en cours de modification par
-      l'agent datagen (F11) au moment de F7. Une fois son travail committé,
-      envelopper son read-merge-write comme les 9 autres (une ligne) et ajouter le
-      cas correspondant à `store-concurrency.test.ts`.
-- [ ] **F9** _(dette)_ — taille des composants (750–1000 l.) ; F4 en retire une part.
+> _Backlog d'audit admin CLOS (F1–F11). Reste **F2** ci-dessous, qui demande un
+> arbitrage. Deux choses à valider EN DEV, elles se voient à l'écran : le geste
+> d'édition de F5 (cliquer une note pour l'ouvrir, dans `GuideEditor` et
+> `FreeHeroesEditor`) et, par prudence, les 4 éditeurs remaniés par F9 —
+> déplacements purs, mais non vérifiés à l'écran._
 
 ### 🤝 À arbitrer ensemble
 

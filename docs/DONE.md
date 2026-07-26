@@ -6,6 +6,46 @@
 
 ## 2026-07-26
 
+- **F9 : taille des 4 éditeurs admin** — `3464 → 2240` lignes cumulées, en
+  sortant les briques dans un dossier par éditeur (`guide/`, `events/`, `shop/`,
+  `gear/` — convention déjà en place avec `editorial/` et `premium-limited/`) :
+  `GuideEditor` 1121 → 911, `EventsEditor` 890 → 449, `ShopPrioritiesEditor`
+  725 → 242, `GearRecoEditor` 728 → 638.
+  NB : `GuideEditor` était remonté à 1121 (au-dessus des 1002 de l'audit) parce
+  que **F5 l'avait allongé de ~120 lignes** — le refactor rattrape ça en plus.
+  CE N'EST PAS DU RANGEMENT, c'est une protection. Ces composants doivent vivre
+  au niveau MODULE : déclarés dans le corps de l'éditeur, leur identité change à
+  chaque rendu et React démonte puis remonte tout leur sous-arbre à CHAQUE frappe
+  — le champ perd le focus et chaque aperçu repart. C'est le bug vécu le 24/07, et
+  la surface exacte que F9 visait. `ShopPrioritiesEditor` le DISAIT déjà en tête
+  de fichier (« sinon remontage → perte de focus ») : dans un fichier séparé,
+  l'erreur devient impossible à commettre par distraction.
+  LE VRAI GAIN est la testabilité des cœurs purs ainsi dégagés — **+37 cas** :
+  `guide-text` (15) verrouille la règle la moins évidente de l'éditeur de guides,
+  **l'ANGLAIS est la STRUCTURE** (éditer le bloc EN ajoute/retire des entrées ;
+  éditer une autre langue ne fait que remplir des traductions par index — sans
+  cette asymétrie, traduire un guide en FR pourrait en supprimer des conseils) ;
+  `event-text` (13) verrouille la RÉFÉRENCE (les valeurs rendues sont les objets
+  eux-mêmes, `applyTranslation` écrit dedans — des copies casseraient la
+  traduction en silence) et la COUVERTURE, un cas par forme de bloc puisqu'un type
+  oublié dans la collecte ne serait jamais traduit ; `shop-text` (9) verrouille la
+  référence et le FILTRE PAR L'ANGLAIS (un texte sans EN n'a rien à traduire).
+  `GearRecoEditor` rend volontairement moins : sa logique (édition de tuiles,
+  import de build, résolution debouncée) est indissociable de son état, l'extraire
+  demanderait dix props pour un gain douteux et un risque que je ne peux pas
+  vérifier à l'écran. Seules les briques autonomes sortent.
+  Déplacements PURS : aucune prop ni comportement modifié. 1212 tests verts (108
+  fichiers). ⚠ à valider en dev par prudence, comme F5.
+  Commits `64dc6ff`, `e158f5b`, `9b751eb`, `9a27cb2`.
+
+- **F7-reste : le 10ᵉ store passe sous verrou** — `item-curated-store` était le
+  seul store à merge par CLÉ non protégé par `withStoreLock` : il était en pleine
+  refonte côté datagen (F11) au moment de F7, et je n'allais pas éditer un fichier
+  que quelqu'un d'autre tenait. Rattrapé une fois son travail committé — son F11 a
+  bien préservé la validation et le tri numérique posés par F10. +1 cas dans
+  `store-concurrency.test.ts`. **F1–F11 : backlog d'audit admin clos**, hors F2
+  (arbitrage archi).
+
 - **E5 : collision de basename au flatten audio rendue VISIBLE** — `extract-audio.ts`
   remonte les WAV nichés à plat, mais si deux partagent le basename, le second
   restait niché et le `readdirSync` NON récursif l'ignorait → piste perdue **sans
