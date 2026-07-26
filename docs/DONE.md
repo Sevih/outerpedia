@@ -6,6 +6,21 @@
 
 ## 2026-07-26
 
+- **Locales : pré-seed V2 TERMINÉ — 150 clés orphelines purgées ×5 langues,
+  contrat gardé par TEST** (`src/i18n/locales/keys.test.ts`, commit e219d55).
+  L'item offrait « documenter ou parquer » ; la mesure a tranché mieux : après
+  la bascule il ne restait plus de pré-seed légitime, juste des VESTIGES (la
+  page V3 consomme d'autres clés que celles transplantées de la V2 —
+  `coupons.redeem.*` 27 clés vs les clés plates de `/coupons`,
+  `characters.filters.*` vs `filters.*`, `common.sort`, `monad.route`,
+  `sys.rarity`, `tower.*`…). Le test garde DEUX invariants : clés identiques
+  ×5 langues, et chaque clé EN a un consommateur — littéral OU préfixe
+  dynamique EXTRAIT du code (`t(\`tools.${'{'}slug}\`)`, concat `'xxx.' +`),
+donc un refactor qui supprime le consommateur ré-expose ses clés. « Clé
+inutilisée » est redevenu un signal bloquant. En covoiturage assumé (choix
+Sevih) : les clés `tools.damage-calculator.*`du chantier parallèle,
+cohérentes ×5 et couvertes par le préfixe`tools.`.
+
 - **Visuels d'événement sur R2 : item FERMÉ sans rien pousser** — l'item demandait
   de lancer `pnpm images` pour collecter `images/events/**`. Vérifié AVANT d'agir,
   et c'était périmé : les 2 événements curés référencent 2 visuels, tous deux

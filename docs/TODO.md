@@ -18,14 +18,14 @@
       Bases) ; à documenter côté guide des bannières.
       VÉRIFIÉ le 26/07 : « Dimensional Supply » n'apparaît que dans
       `general-guides/gear/labels.ts` (la source de l'info), nulle part dans le
-      guide des bannières. Toujours à faire.
+      guide des bannières. Toujours à faire. MAIS FAUT ATTENDRE LA REFONTE INGAME AVANT!!!!!
 
 ## 📄 Pages manquantes (inventaire layout du 2026-07-17)
 
 > Cibles du header/footer posés le 17/07 (contrat `src/lib/nav.ts`) — 404
-> ASSUMÉES le temps du portage. Chaque page arrive avec ses clés de locale DÉJÀ
-> pré-seedées ×5 (cf. item « pré-seed » de la section Docs). L'historique des
-> portages (19-21/07) vit dans DONE.
+> ASSUMÉES le temps du portage. L'historique des portages (19-21/07) vit dans
+> DONE. (Le pré-seed des clés de locale est TERMINÉ et purgé — une clé sans
+> consommateur fait désormais échouer `locales/keys.test.ts`.)
 
 - [ ] **`/tools` — RESTE 1 sous-outil : damage-calculator** — namespaces `tools.*`.
       CHANTIER EN COURS au 26/07, pas un terrain vierge : du travail non committé
@@ -83,13 +83,6 @@
       17/07, et le fichier en est toujours à `## [Non publié]`. Resync, ou
       assouplir la règle PR qui l'exige (la seconde option se défend : le journal
       de suivi interne vit dans DONE.md, qui est à jour).
-- [ ] **Locales : documenter le pré-seed** — une grosse part des clés (les
-      namespaces des pages V2 pas encore portées, ×5 langues) n'a aucun
-      consommateur ; chaque page est TRACÉE dans « Pages manquantes ». Soit
-      l'assumer en tête de fichier, soit parquer les namespaces non portés dans un
-      fichier d'attente pour que « clé inutilisée » redevienne un signal.
-      (Cohérence structurelle inter-langues : parfaite — clés identiques ×5.)
-      NB : le pool se résorbe avec les portages.
 
 ## 🤔 Décisions en attente (Sevih)
 
