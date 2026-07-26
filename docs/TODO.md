@@ -71,6 +71,8 @@
 > et **F5** (aperçus au montage — un seul champ éditable à la fois).
 > ⚠ **F5 change un GESTE d'édition** (cliquer une note pour l'ouvrir) : à valider
 > en dev, c'est le seul item de la série qui se voit à l'écran.
+> Puis **F7** (perte d'écriture entre deux onglets — bug MESURÉ puis corrigé par
+> `withStoreLock` sur les 9 stores à merge par clé, `3d92d9f`).
 
 ### 👤 Claude — datagen / extraction / socle
 
@@ -80,7 +82,11 @@
 
 ### 🤖 Worker — panneau admin (`src/**/admin`)
 
-- [ ] **F7** _(dette)_ — concurrence read-merge-write des stores (2 onglets admin).
+- [ ] **F7-reste** _(dette, petit)_ — `item-curated-store` est le seul store par
+      CLÉ non protégé par `withStoreLock` : il était en cours de modification par
+      l'agent datagen (F11) au moment de F7. Une fois son travail committé,
+      envelopper son read-merge-write comme les 9 autres (une ligne) et ajouter le
+      cas correspondant à `store-concurrency.test.ts`.
 - [ ] **F9** _(dette)_ — taille des composants (750–1000 l.) ; F4 en retire une part.
 
 ### 🤝 À arbitrer ensemble
