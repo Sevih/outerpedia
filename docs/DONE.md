@@ -6,6 +6,59 @@
 
 ## 2026-07-26
 
+- **F8 : tests des 16 stores qui écrivent** — les 14 non couverts le sont
+  désormais (events et guide l'étaient déjà), **+178 cas** (1132 tests au total,
+  102 fichiers). Ce que ça verrouille n'est PAS la validation (elle vit dans
+  `datagen/curated/*` et avait déjà ses tests) mais le **read-merge-write** :
+  c'est là qu'une régression perd de la curation en silence, sans qu'aucun test de
+  schéma ne bronche et sans rien casser au rendu.
+  APPROCHE : plutôt que de mocker `writeJson` (ce qui n'aurait rien dit du merge),
+  `process.cwd()` est redirigé vers un dossier temporaire AVANT l'import du store —
+  les chemins étant résolus au chargement du module, tout le geste réel est
+  exercé (vraie lecture, vrai `writeJson` atomique, vrai format canonique) sans
+  jamais toucher `data/curated/` du repo. L'échafaudage est mutualisé dans
+  `src/lib/admin/store-fixture.ts` (`sandbox()`), avec l'ordre d'appel obligatoire
+  documenté en tête — le piège de la session précédente (un test de `guide-store`
+  qui avait créé un VRAI répertoire) ne peut plus se reproduire par construction.
+  INVARIANTS COUVERTS, store par store : préservation des clés voisines, entrée
+  vide qui supprime la clé, remplacement (et non fusion) de l'entrée éditée,
+  écriture TOUT-OU-RIEN quand la validation échoue (vérifiée octet pour octet :
+  ni écriture partielle, ni reformatage), tri stable, zéro `.tmp` résiduel. Plus
+  les cas propres à chacun : les kits JUMEAUX de `chipOwner` (poser un porteur
+  pour un kit préserve les candidats des autres monstres), les slugs HORS ROTATION
+  de l'overlay shop (le cas qui justifie le merge), le `source` d'une entrée EE
+  qu'un éditeur hors périmètre ne doit pas effacer, les clés `_doc` de trois
+  fichiers, la recompression des builds vers `$preset` de gear-reco, le garde-fou
+  de références de gear-presets (refus de retirer un preset encore cité), et
+  l'exception `unreleased` sans laquelle la contribution anticipée de Shiraen
+  serait impossible à enregistrer. Deux générateurs hors périmètre sont mockés
+  (`buildShopPriorities`, la data persos) : ils ont leurs propres tests.
+  CONSTATS relevés en écrivant les tests, verrouillés par des cas qui DÉCRIVENT
+  l'état actuel plutôt que de le cautionner — reportés en TODO (**F10**) :
+  `gear-presets-store` est le SEUL des 16 à écrire hors du sérialiseur canonique
+  (`writeFileSync` + `JSON.stringify` nu), donc ni atomique ni au format commun —
+  ce qui corrige au passage une phrase trop large de F1 (« ce seul point couvre
+  les ~53 sites d'écriture ») : il en restait un ; `item-curated-store` et
+  `promo-banner-store` n'ont AUCUNE validation (le second accepte un code en
+  double et des dates illisibles, là où `events-store` refuse un slug en double) ;
+  et le tri diverge entre stores (`numeric: true` chez cinq, absent chez deux).
+  TSC vert, eslint vert, prettier vert.
+
+- **E6 : parallélisme borné de la dédup wallpapers** — les deux passes `sharp` de
+  `extract-wallpapers.ts` (`scanAndFilter` lisait les dimensions fichier par
+  fichier, `detectDuplicates` hashait fichier par fichier) étaient SÉRIALISÉES sur
+  un grand pool. Nouveau helper pur **`lib/concurrency.mapLimit(items, limit, fn)`**
+  — mini-pool sans dépendance externe (le repo n'en a aucune pour ça), au plus
+  `limit` tâches en vol, résultats rendus **dans l'ordre des entrées** : le tri/dédup
+  aval reste DÉTERMINISTE (le représentant retenu par groupe de doublons ne change
+  pas). Les deux boucles passent en `mapLimit(all, CONCURRENCY, …)` avec
+  `CONCURRENCY = min(max(cpus, 1), 16)` (lectures/décodages courts, seule work en
+  cours — pas la réserve `-4` de l'ombrelle AssetStudio). `writeOutputs` reste
+  séquentiel (sa gestion de collision de noms via `taken` est ordonnée, hors
+  périmètre E6). Tests : `concurrency.test.ts` (7 cas — ordre préservé même à
+  achèvement inversé, plafond jamais dépassé, `limit ≤ 0 → 1`, liste vide, erreur
+  propagée, index passé). **+7 cas** (438 tests datagen). TSC datagen vert.
+
 - **E1 : tests des cœurs purs d'extraction (parsers de signatures + classifieurs
   wallpapers)** — **+19 cas** (431 tests datagen), sans device ni `.gamedata`.
   PRIORITÉ aux parsers de `pull-gamedata.ts` (fragiles, dépendants du layout de

@@ -31,14 +31,24 @@
  * Outillage : sharp (dédup perceptuelle + webp), pas de binaire externe.
  */
 import { copyFileSync, existsSync, mkdirSync, readdirSync, rmSync } from 'node:fs';
+import { cpus } from 'node:os';
 import { basename, extname, join, resolve } from 'node:path';
 import sharp from 'sharp';
+import { mapLimit } from '../lib/concurrency';
 import { isMain } from '../lib/is-main';
 import { readPngSize } from '../lib/png';
 
 const ROOT = resolve('.gamedata');
 const SRC_IMAGES = resolve(ROOT, 'extracted/images');
 const OUT_WP = resolve(ROOT, 'extracted/wallpapers');
+
+/**
+ * Parallélisme des passes sharp (lecture de dimensions + hash perceptuel). Borné
+ * aux cœurs (plafond 16) : ce sont des lectures/décodages courts, seule work en
+ * cours ici — pas besoin de réserver comme l'ombrelle AssetStudio. Le déterminisme
+ * est préservé (`mapLimit` rend les résultats dans l'ordre des entrées).
+ */
+const CONCURRENCY = Math.min(Math.max(cpus().length, 1), 16);
 
 /** Largeur minimale d'un candidat wallpaper (rejette les petites UI). */
 const MIN_WIDTH = 250;
@@ -211,28 +221,33 @@ async function computePerceptualHash(filePath: string): Promise<string | null> {
 /** 1) Scan du pool d'images → candidats filtrés + catégorisés. */
 async function scanAndFilter(): Promise<FileInfo[]> {
   const all = getAllFiles(SRC_IMAGES);
-  const valid: FileInfo[] = [];
-  for (const path of all) {
+  // Lecture des dimensions EN PARALLÈLE borné (en-tête PNG / sharp par fichier).
+  // Le filtre (exclusion, largeur mini, catégorie) reste dans la tâche ; `null`
+  // = candidat écarté. L'ordre est préservé → tri/dédup aval déterministes.
+  const infos = await mapLimit(all, CONCURRENCY, async (path): Promise<FileInfo | null> => {
     const name = basename(path);
-    if (shouldExclude(path, name)) continue;
+    if (shouldExclude(path, name)) return null;
     const dims = await readDims(path);
-    if (!dims || dims.width < MIN_WIDTH) continue;
+    if (!dims || dims.width < MIN_WIDTH) return null;
     const category = getCategory(name, dims.width, dims.height);
-    if (!category) continue;
-    valid.push({ path, name, width: dims.width, height: dims.height, category });
-  }
-  return valid;
+    if (!category) return null;
+    return { path, name, width: dims.width, height: dims.height, category };
+  });
+  return infos.filter((f): f is FileInfo => f !== null);
 }
 
 /** 2) Dédup perceptuelle : marque à écarter tout sauf le meilleur par hash. */
 async function detectDuplicates(files: FileInfo[]): Promise<Set<string>> {
+  // Hash perceptuel EN PARALLÈLE borné ; le REGROUPEMENT se fait ensuite dans
+  // l'ordre des fichiers (déterminisme du représentant retenu par groupe).
+  const hashes = await mapLimit(files, CONCURRENCY, (f) => computePerceptualHash(f.path));
   const byHash = new Map<string, FileInfo[]>();
-  for (const f of files) {
-    const hash = await computePerceptualHash(f.path);
-    if (!hash) continue;
+  files.forEach((f, i) => {
+    const hash = hashes[i];
+    if (!hash) return;
     f.hash = hash;
     (byHash.get(hash) ?? byHash.set(hash, []).get(hash)!).push(f);
-  }
+  });
   const skip = new Set<string>();
   for (const [, group] of byHash) {
     if (group.length < 2) continue;

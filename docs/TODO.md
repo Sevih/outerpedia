@@ -54,24 +54,35 @@
 > `readCuratedJson`, anti-wipe, `f3f1cd0`), **X1** (tests des prédicats purs des
 > specs — `isInnatePierce` / `isRealCharacterRow` / `extractStats`…, +25 cas) et
 > **E1** (tests des cœurs purs d'extraction — parsers `parseMd5` / `parseLsLR`
-> extraits de `pull-gamedata`, classifieurs wallpapers exportés, +19 cas).
+> extraits de `pull-gamedata`, classifieurs wallpapers exportés, +19 cas) et
+> **E6** (parallélisme borné des passes sharp de la dédup wallpapers — helper pur
+> `lib/concurrency.mapLimit`, ordre préservé, +7 cas).
 > Reste ci-dessous.
 > ✅ Faits le 26/07 (Worker, migrés dans [DONE.md](./DONE.md)) : **F6**
 > (confinement des chemins de guides, `c13ba4b`), **F3** (garde de forme des corps
 > d'écriture — sévérité révisée à la hausse : un payload mal typé SUPPRIMAIT la
-> curée, `7854a6e`), **F4** (hook `useAutoTranslate` + `TranslateButton`) et le
-> complément de **F1** (temporaire unique, `bd88cc4`).
+> curée, `7854a6e`), **F4** (hook `useAutoTranslate` + `TranslateButton`), le
+> complément de **F1** (temporaire unique, `bd88cc4`) et **F8** (tests des 16
+> stores qui écrivent — +178 cas, bac à sable `store-fixture`).
 
 ### 👤 Claude — datagen / extraction / socle
 
-- [ ] **E6** _(P3)_ — parallélisme borné (p-limit ≈ cpus) de la dédup wallpapers.
 - [ ] **E7** _(dette)_ — élagage de la blocklist wallpapers (~50 regex V2), après
       mesure du recouvrement avec la catégorisation.
 
 ### 🤖 Worker — panneau admin (`src/**/admin`)
 
-- [ ] **F8** _(P3)_ — tests des **16 stores qui écrivent** en priorité (pas les
-      composants) : une régression y corrompt la donnée éditoriale en silence.
+- [ ] **F10** _(P3, issu de F8)_ — aligner les trois stores qui divergent du
+      socle, constats faits en écrivant leurs tests (comportement actuel déjà
+      verrouillé par des cas qui le DÉCRIVENT — les mettre à jour en corrigeant).
+      SÉRIALISEUR : `gear-presets-store` écrit avec `writeFileSync` +
+      `JSON.stringify` nu, SEUL des 16 hors du sérialiseur canonique → ni
+      atomique (trou résiduel de F1) ni au format commun.
+      VALIDATION : `item-curated-store` et `promo-banner-store` ne valident RIEN
+      (le second accepte un code promo en double et des dates illisibles, là où
+      `events-store` refuse un slug en double).
+      TRI : divergent (`numeric: true` chez cinq stores, absent chez
+      `curated-store` et `item-curated-store`).
 - [ ] **F5** _(dette)_ — aperçu au montage : garde « un seul éditeur actif »
       (`GuideEditor`, `FreeHeroesEditor`), idiome `EditorialFields`/`CharacterGroups`.
 - [ ] **F7** _(dette)_ — concurrence read-merge-write des stores (2 onglets admin).
