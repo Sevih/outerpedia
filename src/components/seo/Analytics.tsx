@@ -16,10 +16,10 @@
  * figé dans le Dockerfile côté prod ; absent en dev, exprès, pour ne pas
  * polluer les statistiques avec le trafic local.
  *
- * CSP : `static.cloudflareinsights.com` est déjà autorisé en `script-src` et
- * `cloudflareinsights.com` en `connect-src` (next.config.ts). Le jour de la
- * PASSE 3 (nonce + strict-dynamic), l'allowlist d'hôtes sera IGNORÉE par
- * `strict-dynamic` : ce script devra porter le nonce, comme les autres.
+ * CSP : `static.cloudflareinsights.com` est autorisé en `script-src` et
+ * `cloudflareinsights.com` en `connect-src` (next.config.ts) — l'allowlist
+ * d'hôtes suffit. (Le durcissement nonce + strict-dynamic, qui aurait ignoré
+ * cette allowlist et exigé un nonce ici, a été abandonné : cf. src/proxy.ts.)
  */
 const BEACON_TOKEN = process.env.NEXT_PUBLIC_CF_BEACON_TOKEN;
 

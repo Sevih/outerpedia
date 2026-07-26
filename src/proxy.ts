@@ -2,69 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import { DEFAULT_LANG, isValidLang } from '@/lib/i18n/config';
 
 /**
- * CSP stricte (nonce + strict-dynamic) servie en REPORT-ONLY — PASSE 1. Elle ne
- * bloque RIEN : la politique réelle reste celle de `next.config.ts` (avec
- * `'unsafe-inline'`), inchangée. Le navigateur évalue celle-ci EN PLUS et remonte
- * ce qu'elle casserait à `/api/csp-report`, sur le trafic réel. On bascule en
- * réel (PASSE 3) quand les rapports ne montrent plus que du bruit d'extensions.
- * `style-src` garde `'unsafe-inline'` même en cible : React pose des styles
- * inline sans nonce, et les styles ne sont pas un vecteur XSS majeur — on durcit
- * les SCRIPTS. Voir aussi src/app/api/csp-report/route.ts.
+ * CSP : servie STATIQUEMENT par `next.config.ts` (headers globaux) ; le proxy ne
+ * s'en occupe plus. L'expérience « nonce + strict-dynamic en Report-Only » a été
+ * CONCLUANTE mais NÉGATIVE : les rapports ont montré que TOUTES nos pages (ISR)
+ * bloquaient leurs propres scripts (chunks `_next` + inline `__next_f`), car un
+ * nonce par-requête ne peut pas correspondre au nonce baké dans un HTML mis en
+ * cache. Le nonce impose le rendu dynamique — inacceptable pour un wiki ISR — et
+ * le payload RSC inline n'est pas hashable (il change à chaque page). On reste
+ * donc sur `'unsafe-inline'` côté script (défendable : données curées, aucun
+ * contenu utilisateur réinjecté dans le DOM, pas de session publique). Report-Only
+ * et le collecteur `/api/csp-report` ont été retirés. Détail : docs/DONE.md.
  */
-function buildCsp(nonce: string): string {
-  return [
-    "default-src 'self'",
-    // strict-dynamic : seuls les scripts porteurs du nonce (et leur cascade)
-    // s'exécutent ; les listes de hosts sont alors ignorées par le navigateur.
-    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
-    "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: https: blob:",
-    "font-src 'self' data:",
-    "connect-src 'self' https://cloudflareinsights.com",
-    // img.outerpedia.com = host R2 des assets : les mp3 de /ost sont cross-origin
-    // (cf. même directive dans next.config.ts, la CSP appliquée).
-    "media-src 'self' https://img.outerpedia.com https://*.youtube.com https://cdn.discordapp.com",
-    "frame-src 'self' https://*.youtube.com",
-    "object-src 'none'",
-    "base-uri 'self'",
-    "form-action 'self'",
-    "frame-ancestors 'self'",
-    'upgrade-insecure-requests',
-    // report-uri : Firefox/Safari (format historique) ; report-to : Chrome (API
-    // moderne, nomme l'endpoint déclaré par l'en-tête `Reporting-Endpoints`).
-    'report-uri /api/csp-report',
-    'report-to csp-endpoint',
-  ].join('; ');
-}
-
-/**
- * Sert une page en posant la CSP Report-Only. Le nonce doit se retrouver sur NOS
- * <script> (ceux de Next), sinon ils seraient signalés comme violations : Next
- * le pose tout seul dès qu'il lit une CSP sur les en-têtes de REQUÊTE — d'où le
- * `Content-Security-Policy` glissé côté requête (interne, jamais renvoyé au
- * navigateur, qui ne voit que le `-Report-Only`).
- */
-function withCsp(request: NextRequest, rewriteTo?: URL): NextResponse {
-  // PAS de Report-Only en DEV : le HMR (inline + eval) viole la politique
-  // stricte sur chaque page, Chrome groupe ces centaines de rapports en un
-  // POST > BODY_MAX du collecteur → 413 en boucle et logs pollués. La passe 1
-  // mesure le trafic RÉEL de prod, le dev n'a rien à lui apprendre.
-  if (process.env.NODE_ENV !== 'production') {
-    return rewriteTo ? NextResponse.rewrite(rewriteTo) : NextResponse.next();
-  }
-  const nonce = btoa(crypto.randomUUID());
-  const csp = buildCsp(nonce);
-
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set('x-nonce', nonce);
-  requestHeaders.set('Content-Security-Policy', csp);
-  const init = { request: { headers: requestHeaders } };
-
-  const res = rewriteTo ? NextResponse.rewrite(rewriteTo, init) : NextResponse.next(init);
-  res.headers.set('Content-Security-Policy-Report-Only', csp);
-  res.headers.set('Reporting-Endpoints', 'csp-endpoint="/api/csp-report"');
-  return res;
-}
 
 /**
  * Proxy i18n par SOUS-DOMAINE :
@@ -131,7 +79,7 @@ export function proxy(request: NextRequest) {
     }
     const url = request.nextUrl.clone();
     url.pathname = `/${subdomain}${pathname}`;
-    return withCsp(request, url);
+    return NextResponse.rewrite(url);
   }
 
   // --- Domaine racine (pas de sous-domaine) = langue par défaut ---
@@ -147,12 +95,12 @@ export function proxy(request: NextRequest) {
   }
 
   // Préfixe d'une autre langue (dev path-based) → laisse passer.
-  if (isValidLang(firstSegment)) return withCsp(request);
+  if (isValidLang(firstSegment)) return NextResponse.next();
 
   // Pas de préfixe → réécriture interne avec la langue par défaut.
   const url = request.nextUrl.clone();
   url.pathname = `/${DEFAULT_LANG}${pathname}`;
-  return withCsp(request, url);
+  return NextResponse.rewrite(url);
 }
 
 /** Extrait le sous-domaine de l'hôte (« jp.outerpedia.com » → « jp »). */

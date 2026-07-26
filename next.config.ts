@@ -8,8 +8,12 @@ const isDev = process.env.NODE_ENV !== 'production';
 
 // `'unsafe-eval'` n'est requis QU'EN DEV (le HMR / React Fast Refresh de Next
 // s'appuie sur eval) ; un build de prod n'en a pas besoin — on le retire du
-// script-src en prod pour resserrer la CSP. Reste `'unsafe-inline'` (objectif
-// ultérieur : nonce + strict-dynamic).
+// script-src en prod pour resserrer la CSP. `'unsafe-inline'` RESTE, faute de
+// mieux : nonce + strict-dynamic a été essayé (Report-Only, une semaine de prod)
+// et ABANDONNÉ — le nonce par-requête ne correspond jamais au HTML ISR mis en
+// cache (toutes nos pages bloquaient leurs propres scripts), et le payload RSC
+// inline n'est pas hashable. Acceptable ici : données curées, zéro contenu
+// utilisateur réinjecté dans le DOM, pas de session publique. Cf. src/proxy.ts.
 const scriptSrc = [
   "'self'",
   "'unsafe-inline'",
@@ -31,7 +35,11 @@ const securityHeaders = [
       "default-src 'self'",
       `script-src ${scriptSrc}`,
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: https: blob:",
+      // Allowlist EXPLICITE (fini le `https:` fourre-tout qui autorisait toute
+      // image HTTPS) — inventaire des hôtes réellement servis : R2 (assets),
+      // Discord CDN (avatars + emojis des reviews), miniatures YouTube. `data:`
+      // = placeholders/SVG inline ; `blob:` = export client (tier-list-maker).
+      "img-src 'self' data: blob: https://img.outerpedia.com https://cdn.discordapp.com https://i.ytimg.com https://img.youtube.com",
       "font-src 'self' data:",
       "connect-src 'self' https://cloudflareinsights.com",
       // img.outerpedia.com = host R2 des assets (NEXT_PUBLIC_IMG_BASE) : sans lui,
