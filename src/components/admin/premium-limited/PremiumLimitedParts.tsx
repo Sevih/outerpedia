@@ -13,6 +13,14 @@
  *
  * Composants CONTRÔLÉS (état chez le parent). Types du store en `import type`
  * uniquement (le store touche `node:fs`, interdit côté client).
+ *
+ * ⚠ CE MODULE SHIPPE EN PROD malgré son chemin `admin/` (audit F2) : il part
+ * dans le bundle client des pages `/contribute`. RÈGLE — rien ici ne doit
+ * importer un module qui porte un secret ou dont la sûreté repose sur `IS_DEV`.
+ * C'est pour ça que `translateReviews` a été sortie vers `premium-translate.ts`
+ * (elle tirait `translate-actions` et ses deux clés API). Le garde-fou eslint
+ * `no-restricted-imports` liste les modules `lib/admin` autorisés en prod ;
+ * si tu dois l'y ajouter, demande-toi d'abord si ça ship.
  */
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import type {
@@ -21,15 +29,13 @@ import type {
   ReviewEntryData,
   ReviewsBundle,
 } from '@/lib/admin/general-guide-store';
-import { autoTranslate } from '@/lib/admin/translate-actions';
-import { applyTranslation, type Freshness } from '@/lib/admin/translate-fill';
 import { InlineTextField } from '@/components/admin/InlineTextField';
 import { CharacterChips, chipView } from '@/components/admin/CharacterChips';
 import { CharacterPicker, type CharOption } from '@/components/admin/CharacterPicker';
 
 export const LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
 export type L = (typeof LANGS)[number];
-type LText = { en?: string } & Record<string, string | undefined>;
+export type LText = { en?: string } & Record<string, string | undefined>;
 
 const STARS = ['3', '4', '5', '6'] as const;
 export const DATALIST_ID = 'premium-limited-char-names';
@@ -88,37 +94,6 @@ export const editLText = (cur: LText | undefined, val: string, lang: L): LText =
   if (next.en === undefined) next.en = '';
   return next;
 };
-
-/**
- * Regénère les REVIEWS des deux buckets depuis leur EN (admin) — écrase les
- * traductions. La fraîcheur restreint l'envoi à ce qui a BOUGÉ depuis le
- * chargement (quota DeepL).
- */
-export async function translateReviews(
-  bundle: ReviewsBundle,
-  freshness: Freshness,
-): Promise<{ next: ReviewsBundle; filled: number; provider: string }> {
-  const targets = LANGS.filter((l) => l !== 'en');
-  const clone = (list: ReviewEntryData[]) =>
-    list.map((r) => ({ ...r, review: { ...r.review } as LText }));
-  const next: ReviewsBundle = { premium: clone(bundle.premium), limited: clone(bundle.limited) };
-
-  const recs = [...next.premium, ...next.limited]
-    .map((r) => r.review)
-    .filter((t) => freshness.isStale(t, targets));
-  if (!recs.length) return { next, filled: 0, provider: 'deepl' };
-
-  const { results, provider } = await autoTranslate(
-    recs.map((r) => r.en!),
-    targets,
-  );
-  let filled = 0;
-  recs.forEach((rec, k) => {
-    filled += applyTranslation(rec, results[k] ?? {}, targets);
-    freshness.markFresh(rec);
-  });
-  return { next, filled, provider };
-}
 
 /* --- Barre de langue + téléchargement JSON (partagés) --- */
 

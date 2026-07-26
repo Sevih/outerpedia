@@ -6,6 +6,31 @@
 
 ## 2026-07-26
 
+- **F2 (1/2) : les pages `/contribute` publiques ne tirent plus la couche de
+  traduction** — en rouvrant la donnée de F2 avant d'arbitrer, la frontière s'est
+  révélée plus PETITE que l'audit le disait : sur les 13 imports hors-admin, **4
+  sont des `import type`** (effacés à la compilation) et `IS_DEV` est une
+  constante. Ce qui ship vraiment tient en 5 modules + 2 composants clients.
+  MAIS un fil reliait le public aux clés API. `PremiumLimitedParts` — le module
+  de briques PARTAGÉ avec les outils publics de contribution — importait
+  `autoTranslate` pour la seule `translateReviews`, et les deux outils publics
+  importent ce module (`downloadJson`, `ReviewForm`, `emptyReview`). Le graphe de
+  modules des TROIS pages `/contribute` publiques incluait donc
+  `translate-actions`, qui lit `DEEPL_API_KEY` et `ANTHROPIC_API_KEY`.
+  VÉRIFIÉ, RIEN NE FUYAIT : le corps d'une server action ne part jamais au
+  navigateur (seule une référence y va), la garde `IS_DEV` la rend inerte en prod,
+  et `translateReviews` n'a qu'un appelant, `PremiumLimitedEditor` (dev) — donc
+  pas de bouton mort chez les contributeurs non plus.
+  C'EST EXACTEMENT LA THÈSE DE F2, rendue concrète : la sûreté ne tenait qu'à une
+  garde posée dans un module que personne ne croyait public. Un fichier `admin/`
+  qui ship, c'est l'endroit où quelqu'un ajoutera une hypothèse dev-only.
+  `translateReviews` isolée dans `premium-limited/premium-translate.ts`
+  (admin-only) ; l'arête n'existe plus. Les 9 importateurs restants de
+  `translate-actions` sont tous des éditeurs admin, aucun dans le graphe public.
+  L'en-tête de `PremiumLimitedParts` porte désormais la RÈGLE : ce module ship
+  malgré son chemin, rien ici ne doit importer un secret ni dépendre d'`IS_DEV`.
+  Déplacement PUR, aucun comportement changé. 1214 tests verts (109 fichiers).
+
 - **F9 : taille des 4 éditeurs admin** — `3464 → 2240` lignes cumulées, en
   sortant les briques dans un dossier par éditeur (`guide/`, `events/`, `shop/`,
   `gear/` — convention déjà en place avec `editorial/` et `premium-limited/`) :
