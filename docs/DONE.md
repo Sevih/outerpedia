@@ -6,6 +6,20 @@
 
 ## 2026-07-26
 
+- **F1, complément : temporaire à nom UNIQUE + nettoyage sur échec** (`writeJson`).
+  L'écriture atomique posée plus tôt utilisait un temporaire à nom FIXE
+  (`<path>.tmp`). Constat mesuré en écrivant le test : ce nom fixe était **déjà
+  sans risque en intra-processus** — `writeFileSync` et `renameSync` sont
+  synchrones et rien ne les sépare, donc deux requêtes admin ne peuvent pas
+  s'entrelacer (vérifié : la suite passe à l'identique avec un nom fixe, mon
+  hypothèse « deux onglets » était FAUSSE). Le gain réel est **inter-processus** :
+  serveur dev enregistrant un curé pendant qu'une CLI datagen réécrit le même
+  fichier visaient le même `.tmp` → octets mélangés puis double rename. Le `pid`
+  ferme ça ; la séquence est une défense en profondeur si un refactor glissait un
+  `await` entre l'écriture et le rename. Ajouté aussi : un échec d'écriture ne
+  laisse plus de temporaire orphelin à côté du curé. Suite json : 11 tests (dont
+  un qui porte l'avertissement « ce test ne démontre pas l'utilité du pid »).
+
 - **Audit datagen en TROIS volets + synthèse consolidée.** Campagne d'audit de
   la chaîne datagen, lue de première main (pas de résumé d'agent) : `datagen/extract/`
   (pipeline device → pool, **E1–E8**, [`docs/audit/extraction.md`](./audit/extraction.md),
