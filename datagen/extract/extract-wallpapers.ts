@@ -88,8 +88,8 @@ const CATEGORIES: CategoryDef[] = [
  *    `^T_ScenarioBG_\d+` (1 chacun) ;
  *  - 12 motifs INERTES sur ce pool (0 match) — assurance héritée V2 (familles de
  *    textures/UI absentes du pool extrait V3 : FX, Lightmap, colormap, mask, SDF,
- *    Nebula…) ; candidats à un élagage, mais c'est de l'assurance non nulle →
- *    laissé à l'arbitrage plutôt que supprimé à l'aveugle ;
+ *    Nebula…) GARDÉS délibérément (décision Sevih 2026-07-26) : 12 lignes pour
+ *    couvrir un futur asset 2048×1024 de ces familles, l'échange en vaut la peine ;
  *  - 26 redondants INDIVIDUELLEMENT (matchent, jamais seuls) — retrait unitaire
  *    sans effet, mais recouvrement croisé : pas d'élagage en bloc sans re-mesure.
  * Le comportement porteur est gelé par des tests (cf. extract-wallpapers.test.ts).

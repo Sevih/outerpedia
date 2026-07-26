@@ -70,13 +70,10 @@
 
 ### 👤 Claude — datagen / extraction / socle
 
-- [ ] **E7-suite** _(arbitrage Sevih, dette)_ — la MESURE est faite (cf. DONE : la
-      blocklist est load-bearing, 11 porteurs, 12 inertes, 26 redondants). Reste à
-      décider : supprimer ou non les **12 motifs inertes** (0 match sur le pool —
-      `^T_FX_`, `^Day_`, `^Lightmap-`, `^colormap_`, `^mask_`, `^SDF_`, `^T_Light`,
-      `^T_Nebula`, `^T_PopUP`, `^T_MC`, `^S02`, et le seul motif de chemin
-      `model/textures`). Gain : −12 lignes de passif V2. Coût : c'est de l'assurance
-      contre un futur asset 2048×1024 de ces familles → non nul. Pas tranché seul.
+> _Backlog d'audit datagen CLOS (E1–E8, X1–X6). E7 tranché le 26/07 : les 12 motifs
+> inertes de la blocklist wallpapers sont GARDÉS (assurance, cf. DONE + commentaire
+> en tête de `EXCLUDE_PATTERNS`)._ Reste F11 (type `ItemCurated` dupliqué), qui
+> touche `datagen/` → périmètre Claude, listé côté Worker ci-dessous.
 
 ### 🤖 Worker — panneau admin (`src/**/admin`)
 
