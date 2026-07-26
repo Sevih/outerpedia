@@ -166,6 +166,35 @@ function pushList(serial: string, rels: string[]): void {
   capture(['-s', serial, 'push', LOCAL_LIST, REMOTE_LIST]);
 }
 
+/**
+ * Garde-fou E2 (audit extraction) — refuse une suppression MASSIVE du miroir
+ * quand on ne tire presque rien en échange. C'est la signature d'un listing
+ * distant INCOMPLET (une ligne `ls -lR`/`md5sum` non parsée → le fichier
+ * manque de `remote` → classé « à supprimer » à tort) : la sync purgerait le
+ * miroir en SILENCE, sans que rien n'ait bougé côté jeu. Un vrai gros patch, lui,
+ * TIRE autant qu'il supprime (bundles content-addressed : nouveau nom = nouveau
+ * tirage). Seuils volontairement larges — ne trippe que sur le cas pathologique,
+ * tunables. Retour : `null` = OK, sinon la raison du refus. PUR (testable sans device).
+ */
+export function massDeleteGuard(opts: {
+  localSize: number;
+  toDelete: number;
+  toPull: number;
+}): string | null {
+  const { localSize, toDelete, toPull } = opts;
+  if (localSize === 0) return null; // bootstrap : miroir vide, rien à protéger
+  const delRatio = toDelete / localSize;
+  const pullRatio = toPull / localSize;
+  if (delRatio > 0.5 && pullRatio < 0.1) {
+    return (
+      `suppression suspecte : ${toDelete}/${localSize} fichiers (${Math.round(delRatio * 100)} %) ` +
+      `à supprimer pour seulement ${toPull} tiré(s) — listing distant incomplet ? ` +
+      `Sync interrompue, miroir intact (relance, ou force si le jeu a vraiment purgé).`
+    );
+  }
+  return null;
+}
+
 export type PullResult = {
   /** Au moins un fichier a été tiré ou supprimé (→ il faut re-générer en aval). */
   changed: boolean;
@@ -220,6 +249,13 @@ export async function pull(subdirs: string[] = DEFAULT_SUBDIRS): Promise<PullRes
       console.log(`✓ ${sub} : à jour (${remote.size} fichiers${useHash ? ', md5' : ''})`);
       continue;
     }
+    // E2 : stop AVANT tout tirage/suppression si le diff sent le listing tronqué.
+    const refusal = massDeleteGuard({
+      localSize: local.size,
+      toDelete: toDelete.length,
+      toPull: toPull.length,
+    });
+    if (refusal) throw new Error(`${sub} : ${refusal}`);
     changed = true;
     console.log(`↻ ${sub} : ${toPull.length} à tirer, ${toDelete.length} à supprimer`);
 
