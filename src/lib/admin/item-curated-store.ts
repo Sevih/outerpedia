@@ -9,45 +9,15 @@
  */
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import type { LangDict } from '@contracts';
+import { validateItemCurated, type ItemCurated } from '@datagen/curated/items';
 import { integrateItemData } from '@datagen/generators/item-catalog';
-import { validate, type Schema } from '@datagen/extractor/core/validate';
 import { writeJson } from '@datagen/lib/json';
 
-export interface ItemCurated {
-  name?: LangDict;
-  desc?: LangDict;
-  icon?: string;
-  hidden?: boolean;
-  note?: string;
-}
-
-/**
- * Contrat de l'override (audit F10 — ce store écrivait sans AUCUNE garde).
- * Ce qu'un mauvais type coûte ici : `applyCurated` remplace le nom/la desc de
- * l'entrée SERVIE, et `bakeItemCatalogEntry` rebake dans la foulée — une valeur
- * mal typée part donc directement dans le catalogue public.
- *
- * ⚠ `datagen/generators/item-catalog.ts` porte une copie de ce type (« forme
- * miroir ») ; les deux sont identiques au 26/07 mais rien ne les tient ensemble.
- */
-const itemCuratedSchema: Schema = {
-  kind: 'object',
-  fields: {
-    name: { kind: 'record', of: { kind: 'string' }, optional: true },
-    desc: { kind: 'record', of: { kind: 'string' }, optional: true },
-    icon: { kind: 'string', optional: true },
-    hidden: { kind: 'boolean', optional: true },
-    note: { kind: 'string', optional: true },
-  },
-};
-
-/** Valide un override d'item ; renvoie les écarts de schéma (vide = OK). */
-export function validateItemCurated(id: string, c: ItemCurated): string[] {
-  return validate(c, itemCuratedSchema, `itemCurated[${id}]`).map(
-    (i) => `${i.path} — ${i.message}`,
-  );
-}
+// Contrat + validation : source UNIQUE dans `datagen/curated/items.ts` (audit
+// F11 — fini la « forme miroir » avec le générateur). Ré-exportés parce que les
+// consommateurs du store (route admin, overlay live, bake) les tiraient d'ici.
+export { validateItemCurated };
+export type { ItemCurated };
 
 const PATH = resolve(process.cwd(), 'data/curated/items.json');
 

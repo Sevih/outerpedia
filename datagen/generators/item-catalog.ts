@@ -25,6 +25,7 @@ import { MISSING_ITEM_ICONS } from '../lib/item-blacklist';
 import { buildItems, type Item } from './items';
 import { buildGoods, type Goods } from './goods';
 import { buildCostumes, type CostumeEntry } from './costumes';
+import type { ItemCurated } from '../curated/items';
 
 /** Préfixe d'id des costumes dans le catalogue unifié. */
 export const COSTUME_PREFIX = 'COSTUME_';
@@ -48,15 +49,6 @@ export interface CatalogEntry {
   source?: string;
   /** Masqué du catalogue servi (baked depuis le curé). */
   hidden?: boolean;
-}
-
-/** Override curé d'une entrée (forme miroir de `data/curated/items.json`). */
-interface ItemCurated {
-  name?: LangDict;
-  desc?: LangDict;
-  icon?: string;
-  hidden?: boolean;
-  note?: string;
 }
 
 const EMPTY: LangDict = { en: '', jp: '', kr: '', zh: '' };

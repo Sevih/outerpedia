@@ -59,33 +59,27 @@
 > `lib/concurrency.mapLimit`, ordre préservé, +7 cas) et **E7** (blocklist
 > wallpapers MESURÉE sur le pool réel — load-bearing, rattrape 952 catégorisables
 > qui fuiraient ; POURQUOI documenté en tête de liste + comportement porteur gelé
-> par test). Reste ci-dessous.
+> par test) et **F11** (type `ItemCurated` unifié dans `datagen/curated/items.ts` —
+> fin de la « forme miroir » store↔générateur). Reste ci-dessous.
 > ✅ Faits le 26/07 (Worker, migrés dans [DONE.md](./DONE.md)) : **F6**
 > (confinement des chemins de guides, `c13ba4b`), **F3** (garde de forme des corps
 > d'écriture — sévérité révisée à la hausse : un payload mal typé SUPPRIMAIT la
 > curée, `7854a6e`), **F4** (hook `useAutoTranslate` + `TranslateButton`), le
 > complément de **F1** (temporaire unique, `bd88cc4`), **F8** (tests des 16
-> stores qui écrivent — +178 cas, bac à sable `store-fixture`, `daadd8f`) et
-> **F10** (les 3 divergences de socle : sérialiseur, validation, tri).
+> stores qui écrivent — +178 cas, bac à sable `store-fixture`, `daadd8f`),
+> **F10** (les 3 divergences de socle : sérialiseur, validation, tri, `79521fd`)
+> et **F5** (aperçus au montage — un seul champ éditable à la fois).
+> ⚠ **F5 change un GESTE d'édition** (cliquer une note pour l'ouvrir) : à valider
+> en dev, c'est le seul item de la série qui se voit à l'écran.
 
 ### 👤 Claude — datagen / extraction / socle
 
-> _Backlog d'audit datagen CLOS (E1–E8, X1–X6). E7 tranché le 26/07 : les 12 motifs
-> inertes de la blocklist wallpapers sont GARDÉS (assurance, cf. DONE + commentaire
-> en tête de `EXCLUDE_PATTERNS`)._ Reste F11 (type `ItemCurated` dupliqué), qui
-> touche `datagen/` → périmètre Claude, listé côté Worker ci-dessous.
+> _Backlog d'audit datagen CLOS (E1–E8, X1–X6, + F11 côté `datagen/`). E7 tranché
+> le 26/07 : les 12 motifs inertes de la blocklist wallpapers sont GARDÉS
+> (assurance, cf. DONE + commentaire en tête de `EXCLUDE_PATTERNS`). Rien d'ouvert._
 
 ### 🤖 Worker — panneau admin (`src/**/admin`)
 
-- [ ] **F11** _(dette, constat de F10)_ — le type `ItemCurated` est DUPLIQUÉ :
-      `src/lib/admin/item-curated-store.ts` et `datagen/generators/item-catalog.ts`
-      (« forme miroir »). Identiques au 26/07, mais rien ne les tient ensemble — le
-      curé est écrit d'un côté et lu de l'autre. À unifier (le contrat devrait
-      vivre dans `datagen/curated/`, comme character/effects/equipment/gear-reco).
-      ⚠ touche `datagen/` = périmètre Claude, pas Worker → à faire côté datagen ou
-      à deux.
-- [ ] **F5** _(dette)_ — aperçu au montage : garde « un seul éditeur actif »
-      (`GuideEditor`, `FreeHeroesEditor`), idiome `EditorialFields`/`CharacterGroups`.
 - [ ] **F7** _(dette)_ — concurrence read-merge-write des stores (2 onglets admin).
 - [ ] **F9** _(dette)_ — taille des composants (750–1000 l.) ; F4 en retire une part.
 

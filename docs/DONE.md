@@ -6,6 +6,46 @@
 
 ## 2026-07-26
 
+- **F5 : aperçus au montage — un seul champ éditable à la fois** — `InlineTextField`
+  lance son aperçu dans un `useEffect` dépendant de `[value, lang, previewMode]` :
+  il part donc AU MONTAGE, sans frappe. Là où un champ est monté PAR ÉLÉMENT de
+  liste, ça fait autant d'allers-retours serveur à la simple ouverture de la page.
+  Remède : l'idiome qui existait déjà dans le repo (`EditorialFields`,
+  `CharacterGroups`) — un état `editing`, UN seul `InlineTextField` monté, les
+  autres rendus au repos depuis UN `renderInlineBatch` debouncé (250 ms),
+  cliquables pour passer en édition.
+  MESURE, qui corrige mon propre audit sur deux points : F5 annonçait « au plus 3
+  équipes par guide », la donnée réelle en montre **5** (73 équipes sur 25
+  fichiers) ; et il citait UN site par éditeur alors qu'il y en a **trois** —
+  `FreeHeroesEditor` monte aussi un champ par SOURCE (11) en plus des raisons (13),
+  soit **24 aperçus** à l'ouverture, et `GuideEditor` a un troisième site en liste
+  (mode `named`, notes multi-paragraphes) que l'audit ne listait pas. Les trois
+  sites sont traités.
+  DÉTAILS qui comptent : les clés d'édition portent l'INDEX, donc supprimer une
+  source/entrée/équipe ou changer de version en sort explicitement (sinon on
+  éditerait la ligne voisine) — d'où `goToVersion` plutôt qu'un effet, la règle
+  `react-hooks/set-state-in-effect` interdisant le `setState` en effet. Le rendu au
+  repos du mode `named` reprend la même liste à puces que l'aperçu du champ, pour
+  que passer en édition ne déplace rien. `RestingText` / `RestingNote` /
+  `RestingNoteList` sont au niveau module (`react-hooks/static-components`, cf. le
+  bloc d'avertissement en tête de `GuideEditor`).
+  ⚠ SEUL item de la série qui CHANGE UN GESTE d'édition : à valider en dev.
+  TSC / eslint / prettier verts, 1159 tests inchangés.
+
+- **F11 : type `ItemCurated` unifié — fin de la « forme miroir »** — le contrat de
+  l'override d'item était DUPLIQUÉ entre le store admin (`item-curated-store.ts`,
+  qui ÉCRIT le curé) et le générateur (`generators/item-catalog.ts`, qui le LIT et
+  le bake) : deux `interface ItemCurated` identiques mais que rien ne tenait
+  ensemble — le curé écrit d'un côté, lu de l'autre, sans garde-fou de forme
+  partagée. Contrat + validation déplacés dans **`datagen/curated/items.ts`**
+  (source UNIQUE, comme character/effects/equipment/gear-reco) : `interface
+ItemCurated`, `itemCuratedSchema`, `validateItemCurated`. Le store le ré-exporte
+  (ses consommateurs — route admin, overlay live, bake — le tiraient de là) ; le
+  générateur l'importe. `LangDict` étant le MÊME type des deux côtés (`@contracts`
+  ré-exporte `datagen/lib/lang`), l'unification est sans risque de divergence.
+  Aucun comportement changé (mêmes champs, même schéma). TSC datagen + racine
+  verts, 439/439 datagen + tests store inchangés.
+
 - **F10 : les trois divergences de socle des stores, corrigées** — issues des
   constats faits en écrivant F8. **+27 cas** (1159 tests, 103 fichiers).
   SÉRIALISEUR : `gear-presets-store` passe à `writeJson` — il était le SEUL des 16
