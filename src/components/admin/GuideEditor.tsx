@@ -20,7 +20,6 @@ import {
   hasText,
   type GuideDraft,
   type LText,
-  type RecoGroupDraft,
   type RecoSectionDraft,
   type TeamDraft,
   type TipSectionDraft,
@@ -31,236 +30,27 @@ import { useAutoTranslate } from '@/lib/admin/useAutoTranslate';
 import { TranslateButton } from '@/components/admin/TranslateButton';
 import { EditorTabs } from '@/components/admin/EditorTabs';
 import { InlineTextField } from '@/components/admin/InlineTextField';
-import { InlinePreview } from '@/components/admin/InlinePreview';
 import { renderInlineBatch } from '@/lib/admin/inline-preview-actions';
-import {
-  CharacterChips,
-  CharacterNameDatalist,
-  viewsByName,
-  type ChipView,
-} from '@/components/admin/CharacterChips';
-import { CharacterGroups, type GroupWithReason } from '@/components/admin/CharacterGroups';
+import { CharacterNameDatalist, viewsByName } from '@/components/admin/CharacterChips';
 import type { CharOption } from '@/components/admin/CharacterPicker';
 import { GroupPicker, type GroupOption } from '@/components/admin/GroupPicker';
 import { IdLabelPicker, type IdLabel } from '@/components/admin/IdLabelPicker';
 import { VideoCurator } from '@/components/admin/VideoCurator';
 import type { VideoItem } from '@/components/ui/MultiVideoEmbed';
-
-const LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
-type L = (typeof LANGS)[number];
-const MAX_SLOTS = 4;
-/** Datalist des noms de persos, posée une fois par page. */
-const DATALIST_ID = 'guide-char-names';
-/** Jeton stocké par les guides = NOM D'AFFICHAGE EN du perso. */
-type ViewOf = (token: string) => ChipView | undefined;
-
-const btn =
-  'rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm hover:border-accent disabled:opacity-50';
-const input =
-  'w-full rounded-md border border-line bg-surface-base px-2 py-1 text-sm focus:border-accent focus:outline-none';
-const heading = 'text-content-strong text-sm font-semibold';
-
-const itemsToBlock = (items: LText[], lang: L): string =>
-  items.map((t) => t[lang] ?? '').join('\n');
-/**
- * Bloc édité → liste localisée. L'EN est la STRUCTURE : l'éditer ajoute/retire
- * des entrées ; une autre langue ne fait que remplir les traductions par index.
- */
-const blockToItems = (block: string, prev: LText[], lang: L): LText[] => {
-  const lines = block.split('\n');
-  if (lang === 'en') return lines.map((line, i) => ({ ...(prev[i] ?? { en: '' }), en: line }));
-  return prev.map((t, i) => {
-    const line = lines[i] ?? '';
-    const next: LText = { ...t };
-    if (line.trim()) next[lang] = line;
-    else delete next[lang];
-    return next;
-  });
-};
-
-/**
- * Tous les textes localisés d'une version, dans l'ordre — les OBJETS EUX-MÊMES
- * (la traduction écrit dedans). Sert aussi à photographier l'état au montage
- * pour ne retraduire que ce qui a bougé.
- */
-function versionTexts(ver: VersionDraft): LText[] {
-  const out: LText[] = [];
-  ver.tipSections.forEach((s) => {
-    if (s.title) out.push(s.title);
-    out.push(...s.tips);
-  });
-  out.push(...ver.notes);
-  ver.recommended.forEach((g) => g.reason && out.push(g.reason));
-  ver.recoSections.forEach((s) => {
-    if (s.title) out.push(s.title);
-    s.groups.forEach((g) => g.reason && out.push(g.reason));
-  });
-  ver.teams.forEach((t) => {
-    if (t.title) out.push(t.title);
-    if (t.note) out.push(t.note);
-    if (t.notes) out.push(...t.notes);
-  });
-  return out;
-}
-
-/* --- Briques d'édition (HORS du composant) ---
- *
- * ⚠ Ces composants DOIVENT rester au niveau module. Déclarés dans le corps de
- * `GuideEditor`, leur identité change à chaque rendu : React démonte puis
- * remonte tout leur sous-arbre à CHAQUE frappe — le champ perd le focus et
- * chaque `InlineTextField` refait son aperçu (une requête par champ, par
- * lettre). */
-
-/**
- * Note d'équipe AU REPOS : l'aperçu rendu, cliquable pour éditer (audit F5).
- * Sans ça, chaque note montait un `InlineTextField` qui lançait son propre
- * aperçu à l'ouverture du guide — une requête par équipe, sans une frappe.
- */
-function RestingNote({
-  segments,
-  empty,
-  onEdit,
-}: {
-  segments: InlineSegment[] | undefined;
-  empty: string;
-  onEdit: () => void;
-}) {
-  return (
-    <div
-      role="button"
-      tabIndex={0}
-      onClick={onEdit}
-      onKeyDown={(e) => e.key === 'Enter' && onEdit()}
-      className="border-line-subtle hover:border-accent min-h-8 w-full cursor-pointer rounded-md border px-2 py-1 text-left text-sm leading-snug"
-    >
-      {segments?.length ? (
-        <InlinePreview segments={segments} />
-      ) : (
-        <span className="text-content-subtle italic">{empty}</span>
-      )}
-    </div>
-  );
-}
-
-/**
- * Note-LISTE au repos (mode `named`) — même rendu à puces que l'aperçu
- * `previewMode="list"` du champ, pour que passer en édition ne déplace rien.
- */
-function RestingNoteList({
-  paragraphs,
-  onEdit,
-}: {
-  paragraphs: InlineSegment[][] | undefined;
-  onEdit: () => void;
-}) {
-  return (
-    <div
-      role="button"
-      tabIndex={0}
-      onClick={onEdit}
-      onKeyDown={(e) => e.key === 'Enter' && onEdit()}
-      className="border-line-subtle hover:border-accent min-h-8 w-full cursor-pointer rounded-md border px-2 py-1 text-left text-sm leading-snug"
-    >
-      {paragraphs?.length ? (
-        <ul className="list-disc space-y-1 pl-4">
-          {paragraphs.map((seg, i) => (
-            <li key={i}>
-              <InlinePreview segments={seg} />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <span className="text-content-subtle italic">One paragraph per line…</span>
-      )}
-    </div>
-  );
-}
-
-/** Bloc de slots d'équipe (max 4) — une ligne = les alternatives d'un slot. */
-function SlotsBlock({
-  slots,
-  viewOf,
-  onChange,
-}: {
-  slots: string[][];
-  viewOf: ViewOf;
-  onChange: (slots: string[][]) => void;
-}) {
-  return (
-    <div className="space-y-2">
-      {slots.map((slot, si) => (
-        <div key={si} className="flex items-start gap-2">
-          <span className="text-content-subtle mt-3 w-6 shrink-0 text-right text-xs">{si + 1}</span>
-          <div className="min-w-0 flex-1">
-            <CharacterChips
-              values={slot}
-              datalistId={DATALIST_ID}
-              viewOf={viewOf}
-              onChange={(names) => onChange(slots.map((s, j) => (j === si ? names : s)))}
-            />
-          </div>
-          <button
-            type="button"
-            className="text-danger mt-2 shrink-0 text-sm"
-            title="Delete slot"
-            onClick={() => onChange(slots.filter((_, j) => j !== si))}
-          >
-            ✕
-          </button>
-        </div>
-      ))}
-      {slots.length < MAX_SLOTS && (
-        <button type="button" className={btn} onClick={() => onChange([...slots, []])}>
-          + slot
-        </button>
-      )}
-    </div>
-  );
-}
-
-/**
- * Persos recommandés — même brique que les synergies d'une fiche perso (des
- * portraits + une raison, éditée une à la fois). Les guides désignent les persos
- * par NOM EN, d'où l'adaptation `characters` ⇄ `heroes` en entrée/sortie.
- */
-function RecoGroups({
-  groups,
-  onChange,
-  lang,
-  refs,
-  viewOf,
-}: {
-  groups: RecoGroupDraft[];
-  onChange: (groups: RecoGroupDraft[]) => void;
-  lang: L;
-  refs: InlineRefs;
-  viewOf: ViewOf;
-}) {
-  const adapted: GroupWithReason[] = groups.map((g) => ({
-    heroes: g.characters,
-    ...(g.reason ? { reason: g.reason } : {}),
-  }));
-  return (
-    <CharacterGroups
-      groups={adapted}
-      onChange={(next) =>
-        onChange(
-          next.map((g) => ({
-            characters: g.heroes,
-            // L'EN reste la structure du contenu localisé (cf. `editLText`).
-            ...(hasText(g.reason) ? { reason: { ...g.reason, en: g.reason?.en ?? '' } } : {}),
-          })),
-        )
-      }
-      newGroup={() => ({ heroes: [] })}
-      lang={lang}
-      refs={refs}
-      datalistId={DATALIST_ID}
-      viewOf={viewOf}
-      chipSize={48}
-    />
-  );
-}
+import {
+  LANGS,
+  MAX_SLOTS,
+  DATALIST_ID,
+  btn,
+  input,
+  heading,
+  RestingNote,
+  RestingNoteList,
+  SlotsBlock,
+  RecoGroups,
+  type L,
+} from '@/components/admin/guide/GuideBlocks';
+import { itemsToBlock, blockToItems, versionTexts } from '@/components/admin/guide/guide-text';
 
 /* --- Éditeur principal --- */
 
