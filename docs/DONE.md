@@ -6,6 +6,22 @@
 
 ## 2026-07-26
 
+- **X1 : tests des prédicats purs des specs (character/monster)** — le siège du
+  bug NPC de la session mis sous garde. **+25 cas** (412 tests datagen). Prédicats
+  rendus testables SANS moteur (ils prennent des `Row` bruts) :
+  `isInnatePierce` (les trois formes de pénétration à ne pas confondre — buff
+  durable `ON_TURN_END`, dégâts conditionnés `BT_DMG`, pénétration innée
+  `ON_SKILL_FINISH`/`NONE` — plus le cas négatif sur `ENEMY_TEAM` de Domine/Anarky
+  et l'exclusion `MY_TEAM_WITHOUT_ME`), `ownIdentity` (base vs skin), `boolCol`
+  (tri-état : colonne absente ≠ faux), `monsterType` (catégorie `CT_*`), et le
+  cœur de stats partagé `extractStats` (stats de cœur toujours émises, valeurs
+  BRUTES sans échelle). La règle de sélection de `select` a été EXTRAITE en
+  prédicat pur `isRealCharacterRow(r, formIds, fusionIds)` — l'exclusion
+  NPC/skin/forme testée seule : base gardée, skin écarté, forme de combat écartée,
+  core-fusion gardée par le `OR` (identité empruntée mais dans `fusionIds`), clone
+  NPC (`Type ≠ CT_PC`) écarté. Aucune logique de prod modifiée, juste isolée et
+  exportée. TSC datagen vert.
+
 - **F4 : hook `useAutoTranslate` + `TranslateButton`** — fin de l'échafaudage
   « Translate » recopié. **−335 / +193 lignes** sur les éditeurs (~142 lignes de
   duplication retirées). Le COMPORTEMENT vivait déjà en un point

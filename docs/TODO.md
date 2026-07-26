@@ -50,8 +50,10 @@
 > ✅ Faits le 26/07 (Claude, migrés dans [DONE.md](./DONE.md)) : **F1** (json
 > atomique), **E2** (garde anti-purge), **E3** (helper PNG), **E4** (timeout
 > extraction), l'**audit `datagen/extractor/`** (constats X1–X6), **X3**
-> (mémoïsation `character`/`monster`, `0396470`) et **X2** (lecture committé via
-> `readCuratedJson`, anti-wipe, `f3f1cd0`). Reste ci-dessous.
+> (mémoïsation `character`/`monster`, `0396470`), **X2** (lecture committé via
+> `readCuratedJson`, anti-wipe, `f3f1cd0`) et **X1** (tests des prédicats purs des
+> specs — `isInnatePierce` / `isRealCharacterRow` / `extractStats`…, +25 cas).
+> Reste ci-dessous.
 > ✅ Faits le 26/07 (Worker, migrés dans [DONE.md](./DONE.md)) : **F6**
 > (confinement des chemins de guides, `c13ba4b`), **F3** (garde de forme des corps
 > d'écriture — sévérité révisée à la hausse : un payload mal typé SUPPRIMAIT la
@@ -62,8 +64,6 @@
 
 - [ ] **E1** _(P3)_ — tests des cœurs purs d'extraction, **parsers `ls -lR`/`md5sum`
       en tête** (fragiles + conséquence E2), puis classifieurs wallpapers.
-- [ ] **X1** _(P3)_ — tester les prédicats des specs (`isInnatePierce`, exclusion
-      NPC de `select`, tags) — le siège du bug NPC de la session.
 - [ ] **E6** _(P3)_ — parallélisme borné (p-limit ≈ cpus) de la dédup wallpapers.
 - [ ] **E7** _(dette)_ — élagage de la blocklist wallpapers (~50 regex V2), après
       mesure du recouvrement avec la catégorisation.

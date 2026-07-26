@@ -132,7 +132,7 @@ interface MonsterAux {
  * Catégorie de monstre : `CT_<X>_MONSTER` → `<x>` (boss, area_boss, named,
  * season_boss) ; `CT_MONSTER` (mob de base) → `monster`.
  */
-function monsterType(v: string | undefined): string {
+export function monsterType(v: string | undefined): string {
   const slug = slugEnum(v ?? '');
   return slug === 'monster' ? slug : slug.replace(/_monster$/, '');
 }
@@ -140,7 +140,7 @@ function monsterType(v: string | undefined): string {
 /** Booléen de table (`true`/`True`/`False`), `undefined` si colonne absente.
  * Tri-état (la spec distingue « pas de colonne » de « faux ») ; le PARSING,
  * lui, délègue à `bool()` de lib/tables — un seul point de vérité de casse. */
-function boolCol(v: string | undefined): boolean | undefined {
+export function boolCol(v: string | undefined): boolean | undefined {
   if (v === undefined) return undefined;
   return bool(v);
 }

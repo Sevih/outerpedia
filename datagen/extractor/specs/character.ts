@@ -100,7 +100,7 @@ const RIBBON_TAG: Record<string, CharacterTag> = {
  * Valeur POSITIVE : un `ST_PIERCE_POWER_RATE` NÉGATIF sur `ENEMY_TEAM` RÉDUIT la
  * pénétration adverse (Domine, Anarky) — l'exact inverse d'un ignore-DEF.
  */
-function isInnatePierce(b: Row): boolean {
+export function isInnatePierce(b: Row): boolean {
   return (
     (b.StatType ?? '').startsWith('ST_PIERCE_POWER') &&
     num(b.Value) > 0 &&
@@ -321,8 +321,25 @@ function slugAfter(v: string | undefined, prefix: string): string {
  * (skins) empruntent au contraire le `NameID` de leur base (`2000005_Name` sur
  * l'id `2010005`) → c'est ce qui les distingue d'un vrai perso/évolution.
  */
-function ownIdentity(r: Row): boolean {
+export function ownIdentity(r: Row): boolean {
   return r.NameID === `${r.ID}_Name`;
+}
+
+/**
+ * Une ligne `CharacterTemplet` est une ENTITÉ RÉELLE (à extraire) — c'est LA
+ * règle de sélection, isolée du chargement de tables pour être testable seule.
+ *
+ * Garde trois portes, dans l'ordre :
+ *   - `CT_PC` : uniquement les personnages jouables ;
+ *   - PAS une FORME de combat (`formIds` = `ChangeCharacterID` de
+ *     `CharacterChangeTemplet`) — ses skills rejoignent la fiche de sa base ;
+ *   - identité PROPRE (`ownIdentity`) OU core-fusion (`fusionIds` =
+ *     `ChangeCharID` de `CharacterFusionTemplet`). Le `OR` est nécessaire : une
+ *     fusion EMPRUNTE souvent le `NameID` de sa base — seule sa présence dans
+ *     `fusionIds` la sauve. Tout le reste sans identité propre est du skin.
+ */
+export function isRealCharacterRow(r: Row, formIds: Set<string>, fusionIds: Set<string>): boolean {
+  return r.Type === 'CT_PC' && !formIds.has(r.ID) && (ownIdentity(r) || fusionIds.has(r.ID));
 }
 
 /**
@@ -493,9 +510,7 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     // décide de les intégrer (l'intégration est la seule porte vers le site).
     const fusionIds = new Set(loadTable('CharacterFusionTemplet').map((r) => r.ChangeCharID));
     const formIds = new Set(loadTable('CharacterChangeTemplet').map((r) => r.ChangeCharacterID));
-    return loadTable('CharacterTemplet').filter(
-      (r) => r.Type === 'CT_PC' && !formIds.has(r.ID) && (ownIdentity(r) || fusionIds.has(r.ID)),
-    );
+    return loadTable('CharacterTemplet').filter((r) => isRealCharacterRow(r, formIds, fusionIds));
   },
 
   prepare(rows) {
