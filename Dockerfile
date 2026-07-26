@@ -19,6 +19,11 @@ RUN npm install -g pnpm@11.13.0
 
 # ---- Étape 1 : dépendances ----
 FROM base AS deps
+# CI=true : lefthook SAUTE l'installation de ses hooks (il n'y a ni git ni
+# dépôt dans l'image) — sans ça, son postinstall logge « exec "git":
+# executable file not found » à chaque build, un faux positif qu'on a déjà
+# pris pour un bug de CI.
+ENV CI=true
 # Manifestes seuls -> cache Docker tant qu'ils ne changent pas.
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
