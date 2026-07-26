@@ -7,6 +7,7 @@ import { resolve } from 'node:path';
 import type { EffectCurated } from '@contracts';
 import { compactEffect, validateEffectCurated } from '@datagen/curated/effects';
 import { writeJson } from '@datagen/lib/json';
+import { withStoreLock } from '@/lib/admin/store-lock';
 
 const PATH = resolve(process.cwd(), 'data/curated/effects.json');
 
@@ -32,9 +33,12 @@ export async function upsertEffectCurated(id: string, curated: EffectCurated): P
   const compact = compactEffect(curated);
   const errors = validateEffectCurated(id, compact);
   if (errors.length) return errors;
-  const all = readAll();
-  if (Object.keys(compact).length === 0) delete all[id];
-  else all[id] = compact;
-  await writeAll(all);
-  return [];
+  // Read-merge-write sous verrou (audit F7).
+  return withStoreLock(PATH, async () => {
+    const all = readAll();
+    if (Object.keys(compact).length === 0) delete all[id];
+    else all[id] = compact;
+    await writeAll(all);
+    return [];
+  });
 }

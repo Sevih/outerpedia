@@ -17,6 +17,7 @@ import {
   type EquipmentCuratedEntry,
 } from '@datagen/curated/equipment';
 import { writeJson } from '@datagen/lib/json';
+import { withStoreLock } from '@/lib/admin/store-lock';
 
 const CURATED_PATH = resolve(process.cwd(), 'data/curated/equipment.json');
 
@@ -56,32 +57,36 @@ export async function upsertEeCurated(
   characterId: string,
   patch: EeCuratedPatch,
 ): Promise<string[]> {
-  const all = readAll();
-  // Merge sur l'existant : préserve un éventuel `source` (hors périmètre EE).
-  const next: EquipmentCuratedEntry = { ...all.ee[characterId] };
-  const rank = patch.rank?.trim();
-  const rank10 = patch.rank10?.trim();
-  const chipHide = cleanList(patch.chipHide);
-  const chipAdd = cleanList(patch.chipAdd);
-  if (rank) next.rank = rank;
-  else delete next.rank;
-  if (rank10) next.rank10 = rank10;
-  else delete next.rank10;
-  if (chipHide.length) next.chipHide = chipHide;
-  else delete next.chipHide;
-  if (chipAdd.length) next.chipAdd = chipAdd;
-  else delete next.chipAdd;
+  // Tout le read-merge-write sous verrou (audit F7) — la validation dépend de
+  // l'état LU, elle doit donc être dedans elle aussi.
+  return withStoreLock(CURATED_PATH, async () => {
+    const all = readAll();
+    // Merge sur l'existant : préserve un éventuel `source` (hors périmètre EE).
+    const next: EquipmentCuratedEntry = { ...all.ee[characterId] };
+    const rank = patch.rank?.trim();
+    const rank10 = patch.rank10?.trim();
+    const chipHide = cleanList(patch.chipHide);
+    const chipAdd = cleanList(patch.chipAdd);
+    if (rank) next.rank = rank;
+    else delete next.rank;
+    if (rank10) next.rank10 = rank10;
+    else delete next.rank10;
+    if (chipHide.length) next.chipHide = chipHide;
+    else delete next.chipHide;
+    if (chipAdd.length) next.chipAdd = chipAdd;
+    else delete next.chipAdd;
 
-  if (Object.keys(next).length === 0) delete all.ee[characterId];
-  else all.ee[characterId] = next;
+    if (Object.keys(next).length === 0) delete all.ee[characterId];
+    else all.ee[characterId] = next;
 
-  const issues = validateEquipmentCurated(all);
-  if (issues.length) return issues;
+    const issues = validateEquipmentCurated(all);
+    if (issues.length) return issues;
 
-  // Section `ee` triée par id (diffs stables) ; autres sections intactes.
-  all.ee = Object.fromEntries(
-    Object.entries(all.ee).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true })),
-  );
-  await writeJson(CURATED_PATH, all);
-  return [];
+    // Section `ee` triée par id (diffs stables) ; autres sections intactes.
+    all.ee = Object.fromEntries(
+      Object.entries(all.ee).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true })),
+    );
+    await writeJson(CURATED_PATH, all);
+    return [];
+  });
 }

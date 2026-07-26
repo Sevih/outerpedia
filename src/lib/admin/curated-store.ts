@@ -10,6 +10,7 @@ import type { CharacterCurated } from '@contracts';
 import { characterCuratedSchema } from '@datagen/curated/character';
 import { validate } from '@datagen/extractor/core/validate';
 import { writeJson } from '@datagen/lib/json';
+import { withStoreLock } from '@/lib/admin/store-lock';
 
 const CURATED_PATH = resolve(process.cwd(), 'data/curated/characters.json');
 
@@ -43,9 +44,13 @@ export async function upsertCharacterCurated(
   const issues = validate(curated, characterCuratedSchema, `curated[${id}]`);
   if (issues.length) return issues.map((i) => `${i.path} — ${i.message}`);
 
-  const all = readAll();
-  if (Object.keys(curated).length === 0) delete all[id];
-  else all[id] = curated;
-  await writeAll(all);
-  return [];
+  // Lecture ET écriture sous verrou (audit F7) : sans lui, deux enregistrements
+  // simultanés sur DEUX persos différents n'en gardaient qu'un.
+  return withStoreLock(CURATED_PATH, async () => {
+    const all = readAll();
+    if (Object.keys(curated).length === 0) delete all[id];
+    else all[id] = curated;
+    await writeAll(all);
+    return [];
+  });
 }

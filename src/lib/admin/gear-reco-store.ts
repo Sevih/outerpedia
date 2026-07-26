@@ -9,6 +9,7 @@ import { validateGearBuilds } from '@datagen/curated/gear-reco';
 import { writeJson } from '@datagen/lib/json';
 import { loadGearPresets } from '@/lib/data/gear-reco';
 import { collapseBuild } from '@/lib/admin/gear-preset-resolve';
+import { withStoreLock } from '@/lib/admin/store-lock';
 
 const PATH = resolve(process.cwd(), 'data/curated/gear-reco.json');
 
@@ -28,13 +29,16 @@ export async function upsertGearReco(charId: string, builds: GearBuild[]): Promi
   const compact = builds.map((b) => collapseBuild(b, presets));
   const errors = validateGearBuilds(charId, compact);
   if (errors.length) return errors;
-  const all = readAll();
-  if (compact.length === 0) delete all[charId];
-  else all[charId] = compact;
-  const sorted = Object.fromEntries(
-    Object.entries(all).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true })),
-  );
-  // Format CANONIQUE (`writeJson`) — sinon chaque édition reformate tout le fichier.
-  await writeJson(PATH, sorted);
-  return [];
+  // Read-merge-write sous verrou (audit F7).
+  return withStoreLock(PATH, async () => {
+    const all = readAll();
+    if (compact.length === 0) delete all[charId];
+    else all[charId] = compact;
+    const sorted = Object.fromEntries(
+      Object.entries(all).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true })),
+    );
+    // Format CANONIQUE (`writeJson`) — sinon chaque édition reformate tout le fichier.
+    await writeJson(PATH, sorted);
+    return [];
+  });
 }

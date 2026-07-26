@@ -7,6 +7,7 @@
 import { resolve } from 'node:path';
 import { writeJson } from '@datagen/lib/json';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
+import { withStoreLock } from '@/lib/admin/store-lock';
 
 const PATH = resolve(process.cwd(), 'data/curated/search-aliases.json');
 
@@ -28,13 +29,16 @@ function cleanAliases(list: string[]): string[] {
 /** Enregistre les alias d'un perso. Liste vide → supprime la clé. Renvoie [] (rien de bloquant). */
 export async function upsertSearchAliases(charId: string, aliases: string[]): Promise<string[]> {
   const compact = cleanAliases(aliases);
-  const all = loadSearchAliases();
-  if (compact.length === 0) delete all[charId];
-  else all[charId] = compact;
-  const sorted = Object.fromEntries(
-    Object.entries(all).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true })),
-  );
-  // Format CANONIQUE (`writeJson`) — sinon chaque édition reformate tout le fichier.
-  await writeJson(PATH, sorted);
-  return [];
+  // Read-merge-write sous verrou (audit F7).
+  return withStoreLock(PATH, async () => {
+    const all = loadSearchAliases();
+    if (compact.length === 0) delete all[charId];
+    else all[charId] = compact;
+    const sorted = Object.fromEntries(
+      Object.entries(all).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true })),
+    );
+    // Format CANONIQUE (`writeJson`) — sinon chaque édition reformate tout le fichier.
+    await writeJson(PATH, sorted);
+    return [];
+  });
 }

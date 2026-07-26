@@ -15,6 +15,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { writeJson } from '@datagen/lib/json';
+import { withStoreLock } from '@/lib/admin/store-lock';
 
 const CURATED_PATH = resolve(process.cwd(), 'data/curated/monster-skills.json');
 
@@ -73,32 +74,36 @@ export async function applyKitCuration(patch: KitCurationPatch): Promise<string[
   }
   if (errors.length) return errors;
 
-  const file = readFile();
+  // Read-merge-write sous verrou (audit F7) : la fusion de `chipOwner` repart de
+  // l'état LU, deux kits enregistrés en même temps s'écrasaient l'un l'autre.
+  return withStoreLock(CURATED_PATH, async () => {
+    const file = readFile();
 
-  const owner = { ...(file.chipOwner ?? {}) };
-  for (const [buff, target] of Object.entries(patch.chipOwner ?? {})) {
-    const existing = owner[buff];
-    // Candidats des AUTRES kits (jumeaux) : préservés tels quels.
-    const others = (Array.isArray(existing) ? existing : existing ? [existing] : []).filter(
-      (sid) => !kit.has(sid),
-    );
-    const next = target === null ? others : [...others, target];
-    if (!next.length) delete owner[buff];
-    else owner[buff] = next.length === 1 ? next[0] : next;
-  }
-  file.chipOwner = sorted(owner);
-
-  for (const section of ['chipHide', 'chipAdd'] as const) {
-    const rec = { ...(file[section] ?? {}) };
-    for (const [sid, list] of Object.entries(patch[section] ?? {})) {
-      const clean = [...new Set(list.map((v) => v.trim()).filter(Boolean))];
-      if (!clean.length) delete rec[sid];
-      else rec[sid] = clean;
+    const owner = { ...(file.chipOwner ?? {}) };
+    for (const [buff, target] of Object.entries(patch.chipOwner ?? {})) {
+      const existing = owner[buff];
+      // Candidats des AUTRES kits (jumeaux) : préservés tels quels.
+      const others = (Array.isArray(existing) ? existing : existing ? [existing] : []).filter(
+        (sid) => !kit.has(sid),
+      );
+      const next = target === null ? others : [...others, target];
+      if (!next.length) delete owner[buff];
+      else owner[buff] = next.length === 1 ? next[0] : next;
     }
-    file[section] = sorted(rec);
-  }
+    file.chipOwner = sorted(owner);
 
-  // Format CANONIQUE (`writeJson`) — sinon chaque édition reformate tout le fichier.
-  await writeJson(CURATED_PATH, file);
-  return [];
+    for (const section of ['chipHide', 'chipAdd'] as const) {
+      const rec = { ...(file[section] ?? {}) };
+      for (const [sid, list] of Object.entries(patch[section] ?? {})) {
+        const clean = [...new Set(list.map((v) => v.trim()).filter(Boolean))];
+        if (!clean.length) delete rec[sid];
+        else rec[sid] = clean;
+      }
+      file[section] = sorted(rec);
+    }
+
+    // Format CANONIQUE (`writeJson`) — sinon chaque édition reformate tout le fichier.
+    await writeJson(CURATED_PATH, file);
+    return [];
+  });
 }

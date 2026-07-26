@@ -17,6 +17,7 @@ import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { writeJson } from '@datagen/lib/json';
 import { buildShopPriorities } from '@datagen/generators/shop-priorities';
+import { withStoreLock } from '@/lib/admin/store-lock';
 import type { LocalizedText, ShopSection } from '@contracts';
 import type {
   EditorialItem,
@@ -155,41 +156,50 @@ export async function saveShopPriorities(data: ShopPrioritiesSaveData): Promise<
   validateEditorial(data.editorial, errors);
   if (errors.length) return errors;
 
-  // Overlay : repart de l'existant (préserve `_doc` + les slugs hors rotation).
-  const existing = readCurated();
-  const doc = existing._doc;
-  const next: Record<string, OverlayEntry> = {};
-  for (const [k, v] of Object.entries(existing)) {
-    if (k === '_doc') continue;
-    next[k] = v;
-  }
-  for (const [slug, entry] of Object.entries(data.overlay)) {
-    const clean: OverlayEntry = {};
-    if (entry.priority) clean.priority = entry.priority;
-    if (hasText(entry.notes)) clean.notes = entry.notes;
-    if (Object.keys(clean).length) next[slug] = clean;
-    else delete next[slug];
-  }
-  const sorted: Record<string, unknown> = {};
-  if (doc) sorted._doc = doc;
-  for (const k of Object.keys(next).sort((a, b) =>
-    a.localeCompare(b, undefined, { numeric: true }),
-  ))
-    sorted[k] = next[k];
-  await writeJson(CURATED_PATH, sorted);
+  // Read-merge-write sous verrou (audit F7). C'est ici que la perte coûtait le
+  // plus cher : l'overlay PRÉSERVE les slugs hors rotation, donc deux
+  // enregistrements simultanés se rendaient mutuellement leurs priorités
+  // invisibles — constat qu'on n'aurait fait que des semaines plus tard, au
+  // retour du produit en boutique. La régénération du dérivé et l'écriture de
+  // l'éditorial restent DANS le verrou : le dérivé se construit depuis l'overlay
+  // qui vient d'être écrit, il ne doit pas lire celui d'un enregistrement voisin.
+  return withStoreLock(CURATED_PATH, async () => {
+    // Overlay : repart de l'existant (préserve `_doc` + les slugs hors rotation).
+    const existing = readCurated();
+    const doc = existing._doc;
+    const next: Record<string, OverlayEntry> = {};
+    for (const [k, v] of Object.entries(existing)) {
+      if (k === '_doc') continue;
+      next[k] = v;
+    }
+    for (const [slug, entry] of Object.entries(data.overlay)) {
+      const clean: OverlayEntry = {};
+      if (entry.priority) clean.priority = entry.priority;
+      if (hasText(entry.notes)) clean.notes = entry.notes;
+      if (Object.keys(clean).length) next[slug] = clean;
+      else delete next[slug];
+    }
+    const sorted: Record<string, unknown> = {};
+    if (doc) sorted._doc = doc;
+    for (const k of Object.keys(next).sort((a, b) =>
+      a.localeCompare(b, undefined, { numeric: true }),
+    ))
+      sorted[k] = next[k];
+    await writeJson(CURATED_PATH, sorted);
 
-  // Régénère le dérivé (l'overlay vient d'être écrit → priorités à jour).
-  await writeJson(GENERATED_PATH, buildShopPriorities());
+    // Régénère le dérivé (l'overlay vient d'être écrit → priorités à jour).
+    await writeJson(GENERATED_PATH, buildShopPriorities());
 
-  // Éditorial (contenu pur).
-  await writeJson(EDITORIAL_PATH, {
-    _doc: (readEditorialDoc() ?? '').trim() || undefined,
-    shopNotes: data.editorial.shopNotes,
-    textShops: data.editorial.textShops,
-    eventItems: data.editorial.eventItems,
-    resourceItems: data.editorial.resourceItems,
+    // Éditorial (contenu pur).
+    await writeJson(EDITORIAL_PATH, {
+      _doc: (readEditorialDoc() ?? '').trim() || undefined,
+      shopNotes: data.editorial.shopNotes,
+      textShops: data.editorial.textShops,
+      eventItems: data.editorial.eventItems,
+      resourceItems: data.editorial.resourceItems,
+    });
+    return [];
   });
-  return [];
 }
 
 /** `_doc` de l'éditorial, préservé à la réécriture. */

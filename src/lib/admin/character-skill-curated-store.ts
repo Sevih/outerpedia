@@ -12,6 +12,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { writeJson } from '@datagen/lib/json';
+import { withStoreLock } from '@/lib/admin/store-lock';
 
 const CURATED_PATH = resolve(process.cwd(), 'data/curated/character-skills.json');
 
@@ -61,18 +62,22 @@ export async function applyCharacterKitCuration(patch: CharacterKitPatch): Promi
   }
   if (errors.length) return errors;
 
-  const file = readFile();
-  for (const section of ['chipHide', 'chipAdd'] as const) {
-    const rec = { ...(file[section] ?? {}) };
-    for (const [cid, list] of Object.entries(patch[section] ?? {})) {
-      const clean = [...new Set(list.map((v) => v.trim()).filter(Boolean))];
-      if (!clean.length) delete rec[cid];
-      else rec[cid] = clean;
+  // Read-merge-write sous verrou (audit F7) : deux persos édités en parallèle
+  // écrivent le MÊME fichier, l'un écrasait l'autre.
+  return withStoreLock(CURATED_PATH, async () => {
+    const file = readFile();
+    for (const section of ['chipHide', 'chipAdd'] as const) {
+      const rec = { ...(file[section] ?? {}) };
+      for (const [cid, list] of Object.entries(patch[section] ?? {})) {
+        const clean = [...new Set(list.map((v) => v.trim()).filter(Boolean))];
+        if (!clean.length) delete rec[cid];
+        else rec[cid] = clean;
+      }
+      file[section] = sorted(rec);
     }
-    file[section] = sorted(rec);
-  }
 
-  // Format CANONIQUE (`writeJson`) — sinon chaque édition reformate tout le fichier.
-  await writeJson(CURATED_PATH, file);
-  return [];
+    // Format CANONIQUE (`writeJson`) — sinon chaque édition reformate tout le fichier.
+    await writeJson(CURATED_PATH, file);
+    return [];
+  });
 }

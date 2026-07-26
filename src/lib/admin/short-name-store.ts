@@ -8,6 +8,7 @@ import { resolve } from 'node:path';
 import type { LocalizedText } from '@contracts';
 import { writeJson } from '@datagen/lib/json';
 import { loadShortNames } from '@/lib/data/short-names';
+import { withStoreLock } from '@/lib/admin/store-lock';
 
 const PATH = resolve(process.cwd(), 'data/curated/short-names.json');
 const LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
@@ -25,13 +26,16 @@ function clean(name: LocalizedText): LocalizedText {
 /** Enregistre le nom court d'un perso. Entrée vide → supprime la clé. Renvoie []. */
 export async function upsertShortName(id: string, name: LocalizedText): Promise<string[]> {
   const compact = clean(name);
-  const all = loadShortNames();
-  if (Object.keys(compact).length === 0) delete all[id];
-  else all[id] = compact;
-  const sorted = Object.fromEntries(
-    Object.entries(all).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true })),
-  );
-  // Format CANONIQUE (`writeJson`) — sinon chaque édition reformate tout le fichier.
-  await writeJson(PATH, sorted);
-  return [];
+  // Read-merge-write sous verrou (audit F7).
+  return withStoreLock(PATH, async () => {
+    const all = loadShortNames();
+    if (Object.keys(compact).length === 0) delete all[id];
+    else all[id] = compact;
+    const sorted = Object.fromEntries(
+      Object.entries(all).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true })),
+    );
+    // Format CANONIQUE (`writeJson`) — sinon chaque édition reformate tout le fichier.
+    await writeJson(PATH, sorted);
+    return [];
+  });
 }
