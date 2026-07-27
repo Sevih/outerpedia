@@ -61,7 +61,7 @@
     "@types/react-dom": "^19",
     "cheerio": "^1.2.0",
     "concurrently": "^10.0.3",
-    "eslint": "^9",
+    "eslint": "^10",
     "eslint-config-next": "16.2.10",
     "happy-dom": "^20.11.0",
     "lefthook": "^2.1.10",
