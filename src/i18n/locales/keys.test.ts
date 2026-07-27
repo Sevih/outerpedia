@@ -63,11 +63,17 @@ describe('locales — contrat des clés', () => {
 
   it('chaque clé a un consommateur (littéral ou préfixe dynamique du code)', () => {
     const corpus = sourceCorpus();
-    // Préfixes dynamiques réels : segment de template `xxx.${` ou concat `'xxx.' +`.
-    const dynamic = new Set<string>([
-      ...[...corpus.matchAll(/`([a-z][a-z0-9_.-]*\.)\$\{/gi)].map((m) => m[1]),
-      ...[...corpus.matchAll(/'([a-z][a-z0-9_.-]*\.)'\s*\+/gi)].map((m) => m[1]),
-    ]);
+    // Préfixes dynamiques réels : segment de template `xxx${` ou concat `'xxx' +`.
+    // AUCUNE contrainte sur le caractère final du préfixe : exiger un point a
+    // fait purger à tort `page.character.skill.target_mono` & co (consommées
+    // via `target_${key}` — préfixe en underscore). Un préfixe doit juste
+    // contenir un point pour compter (sinon `Lv.`-like trop courts matchent tout).
+    const dynamic = new Set<string>(
+      [
+        ...[...corpus.matchAll(/`([a-z][a-z0-9_.-]*)\$\{/gi)].map((m) => m[1]),
+        ...[...corpus.matchAll(/'([a-z][a-z0-9_.-]*)'\s*\+/gi)].map((m) => m[1]),
+      ].filter((p) => p.includes('.')),
+    );
     const dead = enKeys.filter(
       (k) =>
         !corpus.includes(`'${k}'`) &&
