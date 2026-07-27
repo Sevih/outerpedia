@@ -381,7 +381,6 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.panel.attacker': 'DPS',
   'tools.damage-calculator.panel.target': 'Cible',
   'tools.damage-calculator.panel.result': 'Résultat',
-  'tools.damage-calculator.panel.debug': 'Debug',
   'tools.damage-calculator.panel.team': 'Équipe',
   // Team panel — 3 ally slots
   'tools.damage-calculator.team.empty': 'Emplacement {n} — choisir un allié',

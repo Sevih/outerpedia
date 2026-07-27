@@ -652,7 +652,6 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       target: t(k('panel.target')),
       team: t(k('panel.team')),
       result: t(k('panel.result')),
-      debug: t(k('panel.debug')),
     },
     title: t('tools.damage-calculator'),
     pick: t(k('attacker.pick')),

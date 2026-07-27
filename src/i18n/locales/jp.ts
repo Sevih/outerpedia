@@ -368,7 +368,6 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.panel.attacker': 'アタッカー',
   'tools.damage-calculator.panel.target': 'ターゲット',
   'tools.damage-calculator.panel.result': '結果',
-  'tools.damage-calculator.panel.debug': 'デバッグ',
   'tools.damage-calculator.panel.team': 'チーム',
   // Team panel — 3 ally slots
   'tools.damage-calculator.team.empty': 'スロット {n} — 味方を選択',

@@ -355,7 +355,6 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.panel.attacker': '输出',
   'tools.damage-calculator.panel.target': '目标',
   'tools.damage-calculator.panel.result': '结果',
-  'tools.damage-calculator.panel.debug': '调试',
   'tools.damage-calculator.panel.team': '队伍',
   // Team panel — 3 ally slots
   'tools.damage-calculator.team.empty': '槽位 {n} — 选择队友',

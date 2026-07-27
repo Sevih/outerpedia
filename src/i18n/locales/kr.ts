@@ -361,7 +361,6 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.panel.attacker': '딜러',
   'tools.damage-calculator.panel.target': '타겟',
   'tools.damage-calculator.panel.result': '결과',
-  'tools.damage-calculator.panel.debug': '디버그',
   'tools.damage-calculator.panel.team': '팀',
   // Team panel — 3 ally slots
   'tools.damage-calculator.team.empty': '슬롯 {n} — 아군 선택',

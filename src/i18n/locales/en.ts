@@ -378,7 +378,6 @@ const en = {
   'tools.damage-calculator.panel.attacker': 'Damage Dealer',
   'tools.damage-calculator.panel.target': 'Target',
   'tools.damage-calculator.panel.result': 'Result',
-  'tools.damage-calculator.panel.debug': 'Debug',
   'tools.damage-calculator.panel.team': 'Team',
   // Team panel — 3 ally slots
   'tools.damage-calculator.team.empty': 'Slot {n} — pick an ally',

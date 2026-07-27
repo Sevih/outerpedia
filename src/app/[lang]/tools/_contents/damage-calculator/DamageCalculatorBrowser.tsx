@@ -26,6 +26,7 @@ import { EffectIconTile } from '@/components/character/EffectChips';
 import { SearchField } from '@/components/character/filters/FilterAtoms';
 import { FilterPill } from '@/components/character/filters/FilterPill';
 import { GameText } from '@/components/ui/GameText';
+import { DebugHarness } from './DebugHarness';
 
 // ── Contrats wrapper → client ──────────────────────────────────────────────
 
@@ -183,7 +184,7 @@ export interface DcLabels {
   select: string;
   noMatches: string;
   clear: string;
-  panels: { attacker: string; target: string; team: string; result: string; debug: string };
+  panels: { attacker: string; target: string; team: string; result: string };
   title: string;
   pick: string;
   skills: { title: string; dmg: string; support: string };
@@ -2132,15 +2133,13 @@ export function DamageCalculatorBrowser({
         </div>
       )}
 
-      {/* DEV ONLY (Sevih 27/07/2026) — le harnais complet (trace de calcul,
-        table attendu/calculé/en jeu, anti-régression) est spécifié dans
-        docs/specs/damage-debug-harness.md. */}
+      {/* DEV ONLY (Sevih 27/07/2026) — maquette Claude Design implémentée,
+        spec docs/specs/damage-debug-harness.md ; libellés en dur (§ 5). */}
       {tab === 'calc' && process.env.NODE_ENV !== 'production' && (
-        <Card title={L.panels.debug}>
-          <pre className="text-content-muted overflow-x-auto font-mono text-[11px] leading-relaxed">
-            {JSON.stringify(debugState, null, 2)}
-          </pre>
-        </Card>
+        <DebugHarness
+          state={debugState}
+          skills={offensiveSkills.map((s) => ({ slot: s.slot, name: s.name }))}
+        />
       )}
     </div>
   );
