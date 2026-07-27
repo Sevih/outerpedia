@@ -11,18 +11,19 @@ import {
   getWeaponFamilies,
   gearPassivesText,
   passiveTextAt,
+  resolvePassives,
   type GearFamily,
 } from '@/lib/data/equipment';
 import {
-  bossWaveMonsters,
   difficultyLabel,
   encounterSpawnContexts,
   modeLabel,
   type Encounter,
 } from '@/lib/data/encounters';
 import { getMonster } from '@/lib/data/monsters';
+import { getTranscendTiers } from '@/lib/data/char-progression';
+import { statAt } from '@/lib/monster-stats';
 import { statName } from '@/lib/data/stat-glossary';
-import { statAbbr } from '@/lib/stats';
 import { dedupSkills } from '@/lib/skill-view';
 import { img } from '@/lib/images';
 import type {
@@ -36,10 +37,16 @@ import type {
 import skillsData from '@data/generated/skills.json';
 import scalingData from '@data/generated/damage-scaling.json';
 import passivesData from '@data/generated/equipment/passives.json';
+import eeRawData from '@data/generated/equipment/ee.json';
+import poolsData from '@data/generated/equipment/pools.json';
+import talismanRawData from '@data/generated/equipment/talisman.json';
+import setsRawData from '@data/generated/equipment/sets.json';
+import glossariesData from '@data/generated/glossaries.json';
 import encountersData from '@data/generated/encounters.json';
 import quirksRaw from '@data/generated/quirks.json';
 import {
   DamageCalculatorBrowser,
+  type DcBuffOption,
   type DcChar,
   type DcEE,
   type DcGear,
@@ -80,6 +87,105 @@ interface PassiveEntry {
   levels: number[];
 }
 const PASSIVES = passivesData as unknown as Record<string, PassiveEntry>;
+
+// Mains d'EE (pools résolus) : seuls `buff`/`levels`/`label` servent ici.
+interface PoolRow {
+  buff?: string;
+  levels?: number[];
+  label?: LangDict;
+}
+const EE_RAW = eeRawData as unknown as Record<string, { options: string[] }>;
+const POOLS = poolsData as unknown as Record<string, PoolRow[]>;
+const TALISMAN_RAW = talismanRawData as unknown as Record<string, { options?: string[] }>;
+
+/**
+ * Main stats possibles d'un TALISMAN — token de la clé de buff du jeu
+ * (`BID_ITEM_STAT_OOPARTS_<STAT>_<palier>`, stable) → slug du glossaire des
+ * noms. La main du talisman de chaque ALLIÉ est une entrée du moteur
+ * (décision Sevih 27/07/2026).
+ */
+const TALIS_STAT_SLUG: Record<string, string> = {
+  ATK: 'atk',
+  DEF: 'def',
+  HP: 'hp',
+  CRI: 'critical_rate',
+  CRI_DMG: 'critical_dmg_rate',
+  DMG_REDUCE: 'dmg_reduce_rate',
+  DMG: 'dmg_boost',
+  BUFF_CHANCE: 'buff_chance',
+  BUF_RESIST: 'buff_resist',
+};
+
+// Sets bruts : la CLASSIFICATION (« proportional to missing Health ») se fait
+// sur le texte EN — l'affichage reste localisé via getSetViews.
+interface SetEffectRaw {
+  desc?: LangDict;
+}
+const SETS_RAW = setsRawData as unknown as Record<
+  string,
+  { tiers: { '2p'?: SetEffectRaw | null; '4p'?: SetEffectRaw | null }[] }
+>;
+/** Effet de set fonction des PV manquants → l'UI demande les PV actuels. */
+const HP_SCALED_SET = /missing Health/i;
+
+// Glossaire des effets : les buffs/débuffs STANDARDISÉS du jeu (nom, desc à
+// magnitude fixe, icône IG_Buff_*).
+const GLOSS = glossariesData as unknown as {
+  effects: Record<string, { name: LangDict; desc: LangDict; icon: string }>;
+  effectByKey: { buff: Record<string, string>; debuff: Record<string, string> };
+  /** Noms localisés des éléments (niveaux de cascade du picker de cible). */
+  elements: Record<string, LangDict>;
+};
+
+/**
+ * Buffs/débuffs de scénario PROPOSÉS : uniquement ceux qui pèsent sur les
+ * dégâts (décision Sevih 27/07/2026 — « atk30, def50, cdd50, pen30… »), en
+ * QUATRE groupes : buffs/débuffs du lanceur, buffs/débuffs de la cible.
+ * `stat` = slug de la fiche : le chip n'apparaît que si la stat est pertinente
+ * pour l'attaquant choisi (même filtre que la saisie des stats) — un buff DEF
+ * sur un ATK-scaler n'est jamais proposé.
+ */
+type FxKey = { key: string; from: string; stat?: string };
+const ATTACKER_BUFFS: FxKey[] = [
+  { key: 'atk', from: 'BT_STAT|ST_ATK', stat: 'atk' },
+  { key: 'def', from: 'BT_STAT|ST_DEF', stat: 'def' },
+  { key: 'chd', from: 'BT_STAT|ST_CRITICAL_DMG_RATE', stat: 'critical_dmg' },
+  { key: 'pen', from: 'BT_STAT|ST_PIERCE_POWER_RATE', stat: 'pierce_power_rate' },
+  { key: 'spd', from: 'BT_STAT|ST_SPEED', stat: 'speed' },
+  { key: 'eff', from: 'BT_STAT|ST_BUFF_CHANCE', stat: 'buff_chance' },
+];
+// Miroir débuff : les MÊMES stats du lanceur, réduites (mêmes conditions).
+const ATTACKER_DEBUFFS: FxKey[] = [
+  { key: 'atk_down', from: 'BT_STAT|ST_ATK', stat: 'atk' },
+  { key: 'def_down', from: 'BT_STAT|ST_DEF', stat: 'def' },
+  { key: 'chd_down', from: 'BT_STAT|ST_CRITICAL_DMG_RATE', stat: 'critical_dmg' },
+  // `BT_STAT|ST_PIERCE_POWER_RATE` côté débuff = « Spatial Distortion » (boss
+  // spécifique) — la clé générique du glossaire porte le bon nom.
+  { key: 'pen_down', from: 'REDUCED_PENETRATION', stat: 'pierce_power_rate' },
+  { key: 'spd_down', from: 'BT_STAT|ST_SPEED', stat: 'speed' },
+  { key: 'eff_down', from: 'BT_STAT|ST_BUFF_CHANCE', stat: 'buff_chance' },
+];
+// Côté CIBLE : la DEF et la réduction de dégâts pèsent toujours sur le calcul ;
+// la Résilience ne sert qu'aux kits qui POSENT des debuffs (EFF).
+const TARGET_BUFFS: FxKey[] = [
+  { key: 't_def', from: 'BT_STAT|ST_DEF' },
+  { key: 't_dmg_red', from: 'REDUCED_DAMAGE_TAKEN' },
+  { key: 't_res', from: 'BT_STAT|ST_BUFF_RESIST', stat: 'buff_chance' },
+];
+const TARGET_DEBUFFS: FxKey[] = [
+  { key: 't_def_down', from: 'BT_STAT|ST_DEF' },
+  { key: 't_dmg_taken', from: 'BT_DMG_REDUCE' },
+  // Marked : « takes increased damage » — même famille d'impact.
+  { key: 't_marked', from: 'BT_MARKING' },
+  { key: 't_res_down', from: 'BT_STAT|ST_BUFF_RESIST', stat: 'buff_chance' },
+];
+
+/**
+ * Main d'EE « dégâts vs élément » — la SEULE stat d'EE qui touche aux dégâts
+ * sans figurer sur la fiche perso (décision Sevih 27/07/2026) : l'UI demande
+ * alors le niveau de l'EE (+0..+10) et affiche le montant du palier.
+ */
+const EE_DMG_MAIN = /^BID_CEQUIP_MAIN_DMG_(FIRE|WATER|EARTH|LIGHT|DARK)$/;
 
 /** Slots du kit. Chain/dual : hors périmètre du calc (décision Sevih 26/07/2026). */
 const KIT_SLOTS: { type: string; slot: string }[] = [
@@ -141,8 +247,12 @@ function statKeysFor(id: string): string[] {
  */
 const DAMAGE_SET_IDS = new Set(['15', '16', '17', '19', '20', '21']);
 
-/** Monad hors périmètre du calculateur (décision Sevih 26/07/2026). */
-const EXCLUDED_MODES = new Set(['monad_battle_1', 'monad_battle_2']);
+/**
+ * Les SKIRMISH du Monad Gate restent hors périmètre ; les boss « Dimensional
+ * Singularity » (monad_battle_2, libellé du glossaire des modes) sont des
+ * cibles réelles (Sevih 27/07/2026 — révise la décision du 26/07).
+ */
+const EXCLUDED_MODES = new Set(['monad_battle_1']);
 
 /**
  * Catégories de quirks PERTINENTES pour les dégâts → clé i18n de leur libellé.
@@ -192,6 +302,9 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         name: lRec(sk.name, lang) || sk.name.en,
         ...(sk.icon ? { iconSrc: img.skill(sk.icon) } : {}),
         offensive: sk.offensive,
+        // Multi-cible (RangeType all/double) : conditionne la saisie du nombre
+        // de cibles touchées (décroissance AoE) — inutile sur un kit mono-cible.
+        ...(sk.range === 'all' || sk.range === 'double' ? { aoe: true } : {}),
         maxLevel: sk.maxLevel,
       });
     }
@@ -204,14 +317,27 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       cls: c.class,
       rarity: c.rarity,
       statKeys: statKeysFor(c.id),
+      // Paliers de transcendance RÉELS du perso (barème de sa rareté ou
+      // override), forme compacte — le client reconstruit la rangée d'étoiles
+      // via `transcendStarRow` (même slider que la fiche perso, Sevih
+      // 27/07/2026).
+      transcend: getTranscendTiers(c, lang).map(({ label, star, color }) => ({
+        label,
+        star,
+        color,
+      })),
     });
   }
   chars.sort((a, b) => b.rarity - a.rarity || a.label.localeCompare(b.label));
 
   // Passifs d'arme/accessoire par palier de breakthrough (T0..T4 = values 1..5),
   // avec les VARIANTES PAR CLASSE quand la famille en a (Briareos/Gorgon).
+  // Valeurs colorées (balises <color>) : le client rend en GameText.
   const tiersOf = (refs: GearFamily['passives']): string[] =>
-    [1, 2, 3, 4, 5].map((tier) => passiveTextAt(refs, tier, lang) ?? '');
+    [1, 2, 3, 4, 5].map((tier) => passiveTextAt(refs, tier, lang, true) ?? '');
+  /** Icône d'effet du passif (overlay de tuile « comme partout »). */
+  const effectIconOf = (refs: GearFamily['passives']): string | undefined =>
+    resolvePassives(refs, lang)[0]?.icon || undefined;
   const gearOf = (families: GearFamily[]): DcGear[] =>
     families
       .filter((f) => f.passives.length)
@@ -220,6 +346,10 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         label: lRec(f.name, lang) || f.name.en,
         icon: f.icon,
         grade: f.grade,
+        // Tuile « comme partout » (/equipment, gear reco) : étoiles du haut de
+        // famille + icône d'effet du passif en overlay.
+        star: f.stars[f.stars.length - 1] ?? 0,
+        ...(effectIconOf(f.passives) ? { overlayIcon: effectIconOf(f.passives) } : {}),
         classLimits: f.classLimits,
         tiers: tiersOf(f.passives),
         ...(f.classPassives
@@ -242,8 +372,39 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       icon: s.icon,
       p2: s.tiers.map((tier) => tier.p2 ?? null),
       p4: s.tiers.map((tier) => tier.p4 ?? null),
+      // Effet fonction des PV manquants (Revenge/Patience/Swiftness) → l'UI
+      // demande les PV actuels, qui pèsent sur les stats finales.
+      ...(SETS_RAW[s.id]?.tiers.some((t) =>
+        [t['2p'], t['4p']].some((e) => e?.desc?.en && HP_SCALED_SET.test(e.desc.en)),
+      )
+        ? { hpScaled: true }
+        : {}),
     }))
     .sort((a, b) => a.label.localeCompare(b.label));
+
+  // Buffs/débuffs standardisés à impact (chips de scénario, cf. constantes).
+  const buffOptionOf = (
+    side: 'buff' | 'debuff',
+    o: { key: string; from: string; stat?: string },
+  ): DcBuffOption | null => {
+    const e = GLOSS.effects[GLOSS.effectByKey[side][o.from] ?? ''];
+    if (!e) return null;
+    return {
+      key: o.key,
+      name: lRec(e.name, lang) || e.name.en,
+      desc: lRec(e.desc, lang) || e.desc.en,
+      icon: e.icon,
+      debuff: side === 'debuff',
+      ...(o.stat ? { stat: o.stat } : {}),
+    };
+  };
+  const isOption = (x: DcBuffOption | null): x is DcBuffOption => x !== null;
+  const buffOptions = {
+    atkBuff: ATTACKER_BUFFS.map((o) => buffOptionOf('buff', o)).filter(isOption),
+    atkDebuff: ATTACKER_DEBUFFS.map((o) => buffOptionOf('debuff', o)).filter(isOption),
+    tgtBuff: TARGET_BUFFS.map((o) => buffOptionOf('buff', o)).filter(isOption),
+    tgtDebuff: TARGET_DEBUFFS.map((o) => buffOptionOf('debuff', o)).filter(isOption),
+  };
 
   // Décision Sevih 26/07/2026 : seul le Rogue's Charm influe sur les dégâts
   // (dégâts accrus sur cible break) — les autres talismans sont ignorés.
@@ -255,7 +416,8 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       icon: f.icon,
       grade: f.grade,
       star: f.stars[f.stars.length - 1] ?? 0,
-      text: f.passives.length ? (gearPassivesText(f.passives, lang, false) ?? null) : null,
+      ...(effectIconOf(f.passives) ? { overlayIcon: effectIconOf(f.passives) } : {}),
+      text: f.passives.length ? (gearPassivesText(f.passives, lang, false, true) ?? null) : null,
     }));
 
   // EE par perso porteur — UNE ligne PAR palier de passif (Lv0 / Lv10), texte
@@ -274,55 +436,150 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       return [{ level: ref.level, isAdd: ref.isAdd, html }];
     });
     if (!rows.length) continue;
+    // Main « dégâts vs élément » : montant par niveau d'enchant (levels ‰).
+    const dmgMain = (EE_RAW[e.itemId]?.options ?? [])
+      .flatMap((ref) => POOLS[ref] ?? [])
+      .find((o) => o.buff && EE_DMG_MAIN.test(o.buff) && o.levels?.length);
     ees[e.characterId] = {
       name: lRec(e.name, lang) || e.name.en,
       src: img.ee(e.characterId),
       grade: e.grade,
       star: e.star,
       rows,
+      ...(dmgMain?.label && dmgMain.levels
+        ? {
+            dmgMain: {
+              label: lRec(dmgMain.label, lang) || dmgMain.label.en,
+              levels: dmgMain.levels,
+            },
+          }
+        : {}),
     };
   }
 
-  // Presets de cible : TOUS les donjons peuplés d'encounters.json qui alignent
-  // un boss (monad écarté), dans l'ordre du jeu — mode → donjon → contexte.
+  // Presets de cible : TOUS les donjons peuplés et NON RETIRÉS d'encounters.json,
+  // UNE entrée PAR BOSS — de TOUTES les vagues, pas seulement la dernière : les
+  // ligues Very Hard/Extreme du world boss jouent leur phase 1 en vague 1 et la
+  // phase 2 en vague 2 (`encounterSpawnContexts` partitionne l'échelle de rangs
+  // par boss) ; ne garder que la vague finale CACHAIT les phases 1 (bug relevé
+  // par Sevih 27/07/2026).
+  //
+  // `path` = CASCADE de selects sous le mode (hiérarchies actées par Sevih
+  // 27/07/2026), chaque niveau porté par la DONNÉE — rien n'est parsé des
+  // libellés localisés :
+  //   Story            → Saison, Épisode (champs `season`/`episode`)
+  //   World Boss       → Ligue (difficulté)
+  //   Joint Challenge / Pursuit Operation → Difficulté
+  //   Special Request  → Élément du boss
+  //   Guild Raid       → Phase (main/sub, du slug de mode)
+  //   Tours            → Difficulté (Skyward) ou Élément (Elemental)
+  //   Weekly Conquest / Promotion Challenge / Infiltration / Dimensional
+  //   Singularity → à plat
+  //     (l'échelle vit dans les rangs du spawn ; les étages d'infiltration
+  //     nomment les ENTRÉES, cf. `floor` extrait de la clé du nom du jeu).
+  const seasonTpl = t(k('target.season_label'));
+  const episodeLbl = t(k('target.episode'));
+  const floorTpl = t(k('target.floor_label'));
+  const elemName = (slug: string): string => {
+    const e = GLOSS.elements[slug];
+    return e ? lRec(e, lang) || e.en : slug;
+  };
+  const TOWER_DIFF: Record<string, string> = {
+    tower: t('guides.difficulty.normal'),
+    tower_hard: t('guides.difficulty.hard'),
+    tower_very_hard: t('guides.difficulty.very_hard'),
+  };
+  const PHASE: Record<string, string> = {
+    guild_raid_main_boss: t(k('target.phase_main')),
+    guild_raid_sub_boss: t(k('target.phase_sub')),
+  };
+  const cascadeOf = (
+    ref: EncountersFile[string],
+    bossElement: string,
+    diff: string | undefined,
+  ): string[] | undefined => {
+    if (ref.season != null && ref.episode != null)
+      return [seasonTpl.replace('{n}', String(ref.season)), `${episodeLbl} ${ref.episode}`];
+    if (ref.mode === 'raid_1' || ref.mode === 'raid_2') return [elemName(bossElement)];
+    if (PHASE[ref.mode]) return [PHASE[ref.mode]];
+    if (ref.mode.startsWith('tower'))
+      return [ref.element ? elemName(ref.element) : (TOWER_DIFF[ref.mode] ?? ref.mode)];
+    // Ligue du world boss, difficulté du joint challenge / de la poursuite.
+    if (diff) return [diff];
+    return undefined;
+  };
   const targets: DcTarget[] = [];
+  const floorOf = new Map<string, number>();
   for (const [id, ref] of Object.entries(DUNGEONS)) {
-    if (!ref.monsters?.length || EXCLUDED_MODES.has(ref.mode)) continue;
+    if (!ref.monsters?.length || EXCLUDED_MODES.has(ref.mode) || ref.retired) continue;
     const e: Encounter = { id, ref, monsters: ref.monsters };
-    const wave = bossWaveMonsters(e);
-    const boss = wave.find((m) => m.role === 'boss');
-    if (!boss) continue;
-    const monster = getMonster(boss.id);
-    if (!monster) continue;
     const diff = difficultyLabel(ref, lang, t);
-    const spawns = encounterSpawnContexts(e, boss, lang).map((s, i) => ({
-      label:
-        s.stageLabel ??
-        (s.rank ? `Rank ${s.rank}` : s.stage ? `#${s.stage}` : i ? `#${i + 1}` : ''),
-      level: s.level,
-      ...(s.hpLines ? { hpLines: s.hpLines } : {}),
-      ...(s.adv
-        ? {
-            advLabel: Object.entries(s.adv)
-              .map(([slug, v]) => `${statAbbr(slug)} ${v > 0 ? '+' : ''}${v / 10}%`)
-              .join(' · '),
-          }
-        : {}),
-    }));
-    if (!spawns.length) continue;
-    targets.push({
-      id,
-      mode: modeLabel(ref, lang),
-      label: `${lRec(ref.name, lang) || ref.name.en}${diff ? ` · ${diff}` : ''}`,
-      name: lRec(monster.name, lang) || monster.name.en,
-      // Règle d'icône de monstre (miroir de `monsterIconSrc`, serveur only) :
-      // icône '2…' = modèle de perso → face, sinon portrait de boss MT_*.
-      iconSrc: monster.icon.startsWith('2')
-        ? img.face(monster.icon)
-        : img.boss(`MT_${monster.icon}`),
-      element: monster.element,
-      spawns,
-    });
+    const dungeonName = lRec(ref.name, lang) || ref.name.en;
+    const seenBosses = new Set<string>();
+    for (const boss of e.monsters.filter((m) => m.role === 'boss')) {
+      // Un même boss peut réapparaître d'une vague à l'autre : une seule entrée.
+      if (seenBosses.has(boss.id)) continue;
+      seenBosses.add(boss.id);
+      const monster = getMonster(boss.id);
+      if (!monster) continue;
+      const spawns = encounterSpawnContexts(e, boss, lang).map((s, i) => {
+        // Stats EFFECTIVES au spawn — les défensives qui pèsent sur les dégâts
+        // reçus : HP, DEF, DMG RED %, CDMG RED % (décision Sevih 27/07/2026).
+        // `statAt` = le calcul partagé des fiches monstre (niveau + adv + bossHp).
+        const at = (slug: string): number => {
+          const r = monster.stats[slug];
+          return r ? statAt(slug, r, s) : 0;
+        };
+        // hpLines/adv ne sont PAS exposés : l'adv est déjà APPLIQUÉ dans les
+        // stats effectives, l'afficher en plus troublait (décision Sevih
+        // 27/07/2026 — « le reste on s'en fiche »).
+        return {
+          label:
+            s.stageLabel ??
+            (s.rank ? `Rank ${s.rank}` : s.stage ? `#${s.stage}` : i ? `#${i + 1}` : ''),
+          level: s.level,
+          stats: {
+            hp: at('hp'),
+            def: at('def'),
+            dmgRed: at('dmg_reduce'),
+            cdmgRed: at('enemy_critical_dmg_reduce'),
+          },
+        };
+      });
+      if (!spawns.length) continue;
+      const path = cascadeOf(ref, monster.element, diff);
+      const isFloor = ref.mode === 'irregular_infiltrate' && ref.floor != null;
+      if (isFloor) floorOf.set(`${id}:${boss.id}`, ref.floor as number);
+      targets.push({
+        id: `${id}:${boss.id}`,
+        mode: modeLabel(ref, lang),
+        ...(path ? { path } : {}),
+        // Le nom du donjon porte déjà stage/étage/difficulté quand le jeu les
+        // nomme ; en infiltration tous les étages partagent le même libellé
+        // (« Search Coordinates: Unknown ») → « Floor N » (extrait de la clé).
+        label: isFloor ? floorTpl.replace('{n}', String(ref.floor)) : dungeonName,
+        name: lRec(monster.name, lang) || monster.name.en,
+        cls: monster.class,
+        // Règle d'icône de monstre (miroir de `monsterIconSrc`, serveur only) :
+        // icône '2…' = modèle de perso → face, sinon portrait de boss MT_*.
+        iconSrc: monster.icon.startsWith('2')
+          ? img.face(monster.icon)
+          : img.boss(`MT_${monster.icon}`),
+        element: monster.element,
+        spawns,
+      });
+    }
+  }
+  // L'ID d'infiltration ne suit PAS l'étage (73000001 = étage 46) : remettre
+  // ce bloc (contigu) en ordre d'étage, sans toucher au reste.
+  if (floorOf.size) {
+    const first = targets.findIndex((tg) => floorOf.has(tg.id));
+    const floors = targets
+      .filter((tg) => floorOf.has(tg.id))
+      .sort((a, b) => (floorOf.get(a.id) ?? 0) - (floorOf.get(b.id) ?? 0));
+    const others = targets.filter((tg) => !floorOf.has(tg.id));
+    targets.length = 0;
+    targets.push(...others.slice(0, first), ...floors, ...others.slice(first));
   }
 
   const statFields: DcStatField[] = SHEET_STATS.map(({ slug, percent }) => ({
@@ -330,6 +587,33 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     label: statName(slug, lang),
     percent,
   }));
+
+  // Stats DÉFENSIVES de la cible (affichage preset + saisie manuelle) — slugs
+  // du glossaire des NOMS (`dmg_reduce_rate`/`e_cri_dmg_reduce`), les tables de
+  // monstre disent `dmg_reduce`/`enemy_critical_dmg_reduce` pour les mêmes stats.
+  const targetStatFields: DcStatField[] = [
+    { key: 'hp', label: statName('hp', lang), percent: false },
+    { key: 'def', label: statName('def', lang), percent: false },
+    { key: 'dmgRed', label: statName('dmg_reduce_rate', lang), percent: true },
+    { key: 'cdmgRed', label: statName('e_cri_dmg_reduce', lang), percent: true },
+  ];
+
+  // Main stats de talisman proposées pour les ALLIÉS — union des pools réels
+  // (mêmes 9 stats à tous les paliers), dans l'ordre du jeu.
+  const talismanMains: { key: string; label: string }[] = [];
+  {
+    const seen = new Set<string>();
+    for (const tal of Object.values(TALISMAN_RAW))
+      for (const ref of tal.options ?? [])
+        for (const row of POOLS[ref] ?? []) {
+          const m = /^BID_ITEM_STAT_OOPARTS_(.+)_\d+$/.exec(row.buff ?? '');
+          const slug = m ? TALIS_STAT_SLUG[m[1]] : undefined;
+          if (slug && !seen.has(slug)) {
+            seen.add(slug);
+            talismanMains.push({ key: slug, label: statName(slug, lang) });
+          }
+        }
+  }
 
   // Quirks de compte : SEULS les nœuds offensifs (cf. OFFENSIVE_QUIRK_DESC),
   // en liste plate par catégorie — le réglage localStorage vit côté client.
@@ -367,13 +651,11 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       attacker: t(k('panel.attacker')),
       target: t(k('panel.target')),
       team: t(k('panel.team')),
-      buffs: t(k('panel.buffs')),
       result: t(k('panel.result')),
+      debug: t(k('panel.debug')),
     },
     title: t('tools.damage-calculator'),
     pick: t(k('attacker.pick')),
-    pickCharacter: t('tools.team-planner.pick_character'),
-    transcend: t(k('attacker.tier_label')),
     skills: {
       title: t(k('attacker.skill_levels')),
       dmg: t(k('attacker.tag_dmg')),
@@ -383,12 +665,12 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       title: t(k('settings.title')),
       subtitle: t(k('settings.subtitle')),
       quirks: t(k('settings.quirks')),
+      reset: t(k('settings.reset')),
+      activateAll: t(k('settings.activate_all')),
     },
     equipment: {
       title: t(k('equipment.title')),
       sets: t(k('equipment.sets')),
-      addSet: t(k('equipment.add_set')),
-      breakthrough: t('equip.detail.breakthrough'),
       weapon: t('page.character.gear.weapon'),
       accessory: t(k('equipment.accessory')),
       ee: t(k('equipment.ee')),
@@ -396,7 +678,6 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       noPassive: t(k('equipment.no_passive_data')),
       pickWeapon: t(k('equipment.pick_weapon')),
       pickAccessory: t(k('equipment.pick_accessory')),
-      pickTalisman: t(k('equipment.pick_talisman')),
       talisman: t('page.character.gear.talisman'),
       lv0: t(k('equipment.passive_lv0')),
       lv10: t(k('equipment.passive_lv10')),
@@ -410,39 +691,45 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       finalNote: t(k('stats.final_note')),
     },
     target: {
-      monster: t(k('target.monster')),
-      character: t('changelog.type.character'),
+      preset: t(k('target.tab.cascade')),
+      manual: t(k('target.tab.manual')),
+      element: t(k('target.manual.element')),
+      copyFromSelected: t(k('target.manual.copy_from_selected')),
+      all: t('common.all'),
       mode: t(k('target.mode')),
-      resolved: t(k('target.resolved')),
       lv: t(k('target.lv_prefix')),
-      boss: t(k('target.boss_badge')),
-      hpBars: t(k('target.hp_bars')),
       stage: t(k('target.stage')),
       fight: t(k('target.fight')),
+      bossFlag: t(k('target.boss_flag')),
     },
+    toolbar: {
+      reset: t(k('toolbar.reset')),
+      copy: t(k('toolbar.copy_link')),
+      copied: t(k('toolbar.copied')),
+    },
+    // Contexte réduit au NOMBRE DE CIBLES TOUCHÉES (décroissance AoE § 7) :
+    // le type de contenu se déduit du preset choisi, le PvP est hors périmètre
+    // (décision Sevih 27/07/2026).
     context: {
       title: t(k('context.title')),
-      contentType: t(k('context.content_type')),
-      types: {
-        pve: t(k('context.type_pve')),
-        arena: t(k('context.type_arena')),
-        rtpvp: t(k('context.type_rtpvp')),
-        worldboss: t('progress.task.world-boss'),
-      },
       targetsHit: t(k('context.targets_hit')),
-      penaltyCycle: t(k('context.penalty_cycle')),
-      penaltyNote: t(k('context.penalty_note')),
+      // PV actuels des DEUX combattants — du contexte (Sevih 27/07/2026).
+      attackerHp: t(k('context.attacker_hp')),
+      targetHp: t(k('context.target_hp')),
     },
     team: {
       emptySlot: t(k('team.empty')),
+      eeOwned: t(k('team.ee_owned')),
+      eePlus: t(k('team.ee_plus10')),
     },
     buffs: {
       fromKits: t(k('buffs.from_kits')),
       kitsSoon: t(k('buffs.kits_soon')),
-      onAttacker: t(k('buffs.on_attacker')),
-      onTarget: t(k('buffs.on_target')),
-      value: t(k('buffs.value')),
-      stacks: t(k('buffs.stacks')),
+      awaitPick: t(k('buffs.await_pick')),
+      atkBuff: t(k('buffs.col.attacker_buff')),
+      atkDebuff: t(k('buffs.col.attacker_debuff')),
+      tgtBuff: t(k('buffs.col.target_buff')),
+      tgtDebuff: t(k('buffs.col.target_debuff')),
     },
     report: {
       empty: t(k('result.empty')),
@@ -451,8 +738,6 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       normal: t(k('sub.normal')),
       critical: t(k('report.critical')),
       miss: t(k('report.miss')),
-      expected: t(k('report.expected')),
-      expectedNote: t(k('report.expected_note')),
       supportSkills: t(k('report.support_skills')),
     },
   };
@@ -468,6 +753,9 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       ees={ees}
       targets={targets}
       statFields={statFields}
+      targetStatFields={targetStatFields}
+      talismanMains={talismanMains}
+      buffOptions={buffOptions}
       quirks={quirks}
       labels={labels}
     />

@@ -206,15 +206,21 @@ export function gearPassiveRefs(id: string): PassiveRef[] | undefined {
 /**
  * Texte du PREMIER passif d'un item à un PALIER donné (1-based — gear : un
  * palier par breakthrough, 1..5). Au-delà des paliers connus, le dernier fait
- * foi. Texte BRUT (sans balises couleur) : c'est la forme des tooltips.
+ * foi. Par défaut texte BRUT (forme des tooltips) ; `color` enrobe les valeurs
+ * de balises `<color>` pour un rendu GameText (damage calculator).
  */
-export function passiveTextAt(refs: PassiveRef[], tier: number, lang: Lang): string | undefined {
+export function passiveTextAt(
+  refs: PassiveRef[],
+  tier: number,
+  lang: Lang,
+  color = false,
+): string | undefined {
   const ref = refs[0];
   const p = ref ? PASSIVES[ref.id] : undefined;
   if (!p) return undefined;
   const desc = lRec(p.desc, lang) || p.desc.en;
   const v = p.values[Math.min(tier, p.values.length) - 1];
-  return v ? fillPlaceholders(desc, v, false) : desc;
+  return v ? fillPlaceholders(desc, v, color) : desc;
 }
 
 /**
@@ -226,12 +232,14 @@ export function passiveTextAt(refs: PassiveRef[], tier: number, lang: Lang): str
  *   • gear (armes/amulettes) → valeurs par BREAKTHROUGH, on prend la dernière (max) ;
  *   • talisman/EE → valeurs aux NIVEAUX DÉCLARÉS, on prend celle du niveau de
  *     déblocage du passif (`ref.level`).
- * Texte BRUT (sans balises couleur) : c'est la forme des tooltips.
+ * Par défaut texte BRUT (forme des tooltips) ; `color` enrobe les valeurs de
+ * balises `<color>` pour un rendu GameText (damage calculator).
  */
 export function gearPassivesText(
   refs: PassiveRef[],
   lang: Lang,
   byTier: boolean,
+  color = false,
 ): string | undefined {
   // Dédup par TEMPLATE de desc (dernier gagne) : un EE porte souvent le MÊME
   // passif à deux refs (base niv.1 + upgrade niv.10) → une seule ligne, à la
@@ -245,11 +253,11 @@ export function gearPassivesText(
     if (!desc) continue;
     let filled: string;
     if (!p.values.length) filled = desc;
-    else if (byTier) filled = fillPlaceholders(desc, p.values[p.values.length - 1], false);
+    else if (byTier) filled = fillPlaceholders(desc, p.values[p.values.length - 1], color);
     else {
       let idx = 0;
       for (let i = 0; i < (p.levels?.length ?? 0); i++) if (p.levels[i] <= ref.level) idx = i;
-      filled = fillPlaceholders(desc, p.values[Math.min(idx, p.values.length - 1)], false);
+      filled = fillPlaceholders(desc, p.values[Math.min(idx, p.values.length - 1)], color);
     }
     byTemplate.set(desc, filled);
   }

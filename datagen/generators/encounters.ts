@@ -966,6 +966,15 @@ export function buildEncounters(): EncountersData {
         if (m[1]) ref.element = m[1].toLowerCase();
       }
     }
+    // Infiltration : l'étage vit AUSSI dans la clé du nom
+    // (SYS_IRR_INFILTREATE_DUNGEON_<étage>, « INFILTREATE » sic — faute du
+    // jeu comprise). Tous les donjons partagent le même libellé (« Search
+    // Coordinates: Unknown ») : sans l'étage, 60+ entrées indiscernables.
+    // L'ID ne le porte PAS (73000001 = étage 46) — seule la clé fait foi.
+    if (mode === 'irregular_infiltrate') {
+      const m = /^SYS_IRR_INFILTREATE_DUNGEON_(\d+)$/.exec((d.NameID ?? '').replace(/\s+/g, ''));
+      if (m) ref.floor = Number(m[1]);
+    }
     // Butin répétable du donjon (table mutualisée, cf. rewardTables).
     const reward = resolveReward(d.RewardID);
     if (reward) ref.reward = reward;

@@ -731,6 +731,14 @@ export function buildAssetManifest(): AssetRequest[] {
     domain: 'ui',
     editorialFallback: 'ui/tags/CT_Core_Icon.webp',
   });
+  // Bannière BOSS des portraits de cible (damage calculator).
+  push({
+    kind: 'image',
+    key: 'images/ui/tags/MT_Boss.webp',
+    candidates: ['MT_Boss'],
+    domain: 'ui',
+    editorialFallback: 'ui/tags/MT_Boss.webp',
+  });
   // Boutons de bannière du guide « Banners & Mileage » — DATA-DRIVEN : les
   // sprites (BannerImageName) sortent de recruit.json, même namespace que les
   // badges (un sprite de recrutement = ui/recruit, jamais de copie éditoriale).

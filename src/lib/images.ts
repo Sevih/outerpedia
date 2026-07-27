@@ -215,6 +215,20 @@ export const STAR_SPRITE: Record<string, string> = {
   gray: 'CM_icon_star_w',
 };
 
+/**
+ * Rangée des 6 étoiles d'un palier de transcendance : jaunes jusqu'au palier,
+ * la DERNIÈRE à la couleur déclarée par le jeu, grises au-delà. Vit ici pour
+ * la même raison que `STAR_SPRITE` : rendu partagé fiche perso / damage
+ * calculator, sans entraîner la donnée de progression dans le bundle client.
+ */
+export function transcendStarRow(star: number, color: string): string[] {
+  return Array.from({ length: 6 }, (_, i) => {
+    if (i >= star) return STAR_SPRITE.gray;
+    if (i === star - 1) return STAR_SPRITE[color] ?? STAR_SPRITE.yellow;
+    return STAR_SPRITE.yellow;
+  });
+}
+
 /** Tag éditorial → sprite de badge de recrutement (ordre V2 : premier trouvé). */
 export const RECRUIT_TAG_SPRITE: Record<string, string> = {
   collab: 'CM_Recruit_Tag_Collab',

@@ -23,7 +23,7 @@ import type {
 } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
-import { STAR_SPRITE } from '@/lib/images';
+import { transcendStarRow } from '@/lib/images';
 import { GRADE_RANK } from '@/lib/data/gear-order';
 import {
   STEP_STAT_KEYS,
@@ -234,6 +234,11 @@ export function getStatLayers(char: Character): StatLayersView {
 export interface TranscendTierView {
   /** Libellé (« 4+ », « 5++ ») — étoile UI + suffixe selon la couleur. */
   label: string;
+  /** Étoile UI du palier + couleur déclarée — la forme COMPACTE de `stars`
+   *  (le damage calculator embarque ces deux champs et reconstruit la rangée
+   *  via `transcendStarRow`). */
+  star: number;
+  color: string;
   /** Rangée de 6 étoiles : sprites (jaunes + dernière colorée + grises). */
   stars: string[];
   /** Bonus cumulés (%) — hp/atk/def sont déjà des totaux dans la table. */
@@ -305,14 +310,11 @@ function passiveLines(unique: Skill | undefined, level: number, lang: Lang): str
 }
 
 function toTier(s: TranscendStep, unique: Skill | undefined, lang: Lang): TranscendTierView {
-  const stars = Array.from({ length: 6 }, (_, i) => {
-    if (i >= s.showStar) return STAR_SPRITE.gray;
-    if (i === s.showStar - 1) return STAR_SPRITE[s.starColor] ?? STAR_SPRITE.yellow;
-    return STAR_SPRITE.yellow;
-  });
   return {
     label: `${s.showStar}${COLOR_SUFFIX[s.starColor] ?? ''}`,
-    stars,
+    star: s.showStar,
+    color: s.starColor,
+    stars: transcendStarRow(s.showStar, s.starColor),
     hpPct: s.hp / 10,
     atkPct: s.atk / 10,
     defPct: s.def / 10,

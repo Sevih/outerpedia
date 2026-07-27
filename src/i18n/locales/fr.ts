@@ -1,4 +1,4 @@
-import type { TranslationKey } from './en';
+﻿import type { TranslationKey } from './en';
 
 const fr: Record<TranslationKey, string> = {
   // Navigation
@@ -369,9 +369,10 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.disclaimer':
     "En cours de développement — le calculateur est en développement actif. Les résultats peuvent varier par rapport à la valeur du jeu pendant que nous ajustons les contributeurs et ajoutons la prise en charge de l'équipement et des buffs.",
   'tools.damage-calculator.settings.title': 'Paramètres du compte',
-  'tools.damage-calculator.settings.subtitle': 'Codex + Quirks partagés entre tous les personnages',
-  'tools.damage-calculator.settings.codex': 'Codex des héros',
+  'tools.damage-calculator.settings.subtitle': 'Quirks partagés entre tous les personnages',
   'tools.damage-calculator.settings.quirks': 'Quirks',
+  'tools.damage-calculator.settings.reset': 'Réinitialiser',
+  'tools.damage-calculator.settings.activate_all': 'Tout activer',
   'tools.damage-calculator.settings.quirk_element': 'Élément',
   'tools.damage-calculator.settings.quirk_class': 'Classe',
   'tools.damage-calculator.settings.quirk_counteract': 'Counteract Strong Enemies',
@@ -380,10 +381,12 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.panel.attacker': 'DPS',
   'tools.damage-calculator.panel.target': 'Cible',
   'tools.damage-calculator.panel.result': 'Résultat',
-  'tools.damage-calculator.panel.buffs': 'Buffs / Debuffs',
+  'tools.damage-calculator.panel.debug': 'Debug',
   'tools.damage-calculator.panel.team': 'Équipe',
   // Team panel — 3 ally slots
   'tools.damage-calculator.team.empty': 'Emplacement {n} — choisir un allié',
+  'tools.damage-calculator.team.ee_owned': 'EE possédé',
+  'tools.damage-calculator.team.ee_plus10': 'EE +10',
   'tools.damage-calculator.team.exquisite_death': 'Exquisite Death',
   'tools.damage-calculator.team.absolute_music': 'Absolute Music',
   // Result panel — final damage + debug breakdown
@@ -445,7 +448,6 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.buffs.col.attacker_debuff': 'Debuffs du lanceur',
   'tools.damage-calculator.buffs.col.target_buff': 'Buffs de la cible',
   'tools.damage-calculator.buffs.col.target_debuff': 'Debuffs de la cible',
-  'tools.damage-calculator.buffs.marked': 'Marqué',
   // Common UI strings
   'tools.damage-calculator.common.select': '— sélectionner —',
   'tools.damage-calculator.common.no_matches': 'Aucune correspondance',
@@ -462,7 +464,13 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.dungeon': 'Dungeon',
   'tools.damage-calculator.target.stage': 'Stage',
   'tools.damage-calculator.target.fight': 'Combat {n}',
-  'tools.damage-calculator.target.boss_badge': 'BOSS',
+  'tools.damage-calculator.target.boss_flag': 'Boss',
+  'tools.damage-calculator.toolbar.reset': 'Réinitialiser le scénario',
+  'tools.damage-calculator.toolbar.copy_link': 'Copier le lien',
+  'tools.damage-calculator.toolbar.copied': 'Copié !',
+  'tools.damage-calculator.target.phase_main': 'Boss principal',
+  'tools.damage-calculator.target.phase_sub': 'Boss secondaire',
+  'tools.damage-calculator.target.floor_label': 'Étage {n}',
   'tools.damage-calculator.target.boss_mechanics': 'Mécaniques du Boss',
   'tools.damage-calculator.target.boss_enrage_badge': 'Enrage',
   'tools.damage-calculator.target.lv_prefix': 'Nv',
@@ -531,7 +539,6 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.equipment.pick_weapon': 'Choisir une arme',
   'tools.damage-calculator.equipment.pick_accessory': 'Choisir un accessoire',
   'tools.damage-calculator.equipment.pick_set': 'Choisir un set ({slot})',
-  'tools.damage-calculator.equipment.pick_talisman': 'Choisir un talisman',
   // Target picker categories (reuse guides.category.* for shared modes)
   'tools.damage-calculator.cat.story': 'Histoire',
   'tools.damage-calculator.cat.skyward_towers': 'Skyward Towers',
@@ -554,40 +561,26 @@ const fr: Record<TranslationKey, string> = {
     "Contribution de l'équipe appliquée au moment du calcul",
   'tools.damage-calculator.attacker.tier_lower': 'Tier inférieur',
   'tools.damage-calculator.attacker.tier_raise': 'Tier supérieur',
-  'tools.damage-calculator.attacker.tier_label': 'Niveau de transcendance',
   'tools.damage-calculator.attacker.skill_levels': 'Niveaux de skill',
   'tools.damage-calculator.attacker.tag_dmg': 'DMG',
   'tools.damage-calculator.equipment.sets': 'Sets actifs',
   'tools.damage-calculator.stats.sheet_note': 'depuis la fiche personnage en jeu',
   'tools.damage-calculator.stats.final': 'Stats finales',
   'tools.damage-calculator.stats.final_note': 'calculées · lecture seule',
-  'tools.damage-calculator.target.monster': 'Monstre',
-  'tools.damage-calculator.target.resolved': 'Résolu',
-  'tools.damage-calculator.target.hp_bars': '{n} barres de PV',
   'tools.damage-calculator.target.spawn_adv': 'spawn +{pct}% ATK/DEF',
   'tools.damage-calculator.context.title': 'Contexte',
-  'tools.damage-calculator.context.content_type': 'Type de contenu',
-  'tools.damage-calculator.context.type_pve': 'PvE',
-  'tools.damage-calculator.context.type_arena': 'Arène PvP',
-  'tools.damage-calculator.context.type_rtpvp': 'PvP temps réel',
   'tools.damage-calculator.context.targets_hit': 'Cibles touchées',
-  'tools.damage-calculator.context.penalty_cycle': 'Cycle de pénalité',
-  'tools.damage-calculator.context.penalty_note':
-    "Escalade PvP à partir du tour 10 — s'applique aux deux camps.",
+  'tools.damage-calculator.context.attacker_hp': 'PV actuels — attaquant',
+  'tools.damage-calculator.context.target_hp': 'PV actuels — cible',
   'tools.damage-calculator.buffs.from_kits': '+ Depuis les kits',
+  'tools.damage-calculator.buffs.await_pick': "Choisis d'abord un attaquant et une cible",
   'tools.damage-calculator.buffs.kits_soon':
     'nécessite les données de buffs des kits — arrive avec le moteur',
-  'tools.damage-calculator.buffs.on_attacker': "Sur l'attaquant",
-  'tools.damage-calculator.buffs.on_target': 'Sur la cible',
-  'tools.damage-calculator.buffs.value': 'Valeur',
-  'tools.damage-calculator.buffs.stacks': 'Stacks',
   'tools.damage-calculator.report.engine_wip':
     'Moteur de calcul pas encore branché — mise en page finale avec valeurs factices.',
   'tools.damage-calculator.report.branches_note': 'branches énumérées · probabilités exactes',
   'tools.damage-calculator.report.critical': 'Critique',
   'tools.damage-calculator.report.miss': 'Esquivé',
-  'tools.damage-calculator.report.expected': 'Dégâts espérés',
-  'tools.damage-calculator.report.expected_note': 'pondérés sur toutes les branches',
   'tools.damage-calculator.report.support_skills': 'Skills de soutien (sans carte) : {names}',
   'page.guides.title': 'Guides Outerplane',
   'page.guides.description':
