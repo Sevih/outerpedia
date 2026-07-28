@@ -403,15 +403,30 @@ export function resolveLootGear(id: string, lang: Lang): ResolvedGearItem | unde
   const table = TABLES[slot];
   const e = table[id];
   const f = familyOf(slot, id);
-  // Les mains POSSIBLES de la famille (pool roulé) : le loot n'en fixe aucune,
-  // contrairement à un build curé qui recommande la sienne.
-  const mainStat = f?.mainStats.length ? f.mainStats.join('/') : undefined;
   // Variante de classe d'une famille Briareos/Gorgon : passif, nom suffixé et
   // lien vers la fiche de LA variante, comme partout.
   const lootVariant =
     f && e.classLimit ? f.classPassives?.find((cp) => cp.classLimit === e.classLimit) : undefined;
+  // Les mains POSSIBLES (pool roulé) : le loot n'en fixe aucune. Celles de LA
+  // variante quand la famille décline par classe — chaque classe a son pool
+  // (Briareos/Gorgon), pas l'union de famille.
+  const mains = lootVariant ? lootVariant.mainStats : (f?.mainStats ?? []);
+  const mainStat = mains.length ? mains.join('/') : undefined;
   const eff = effectAtMaxOf(lootVariant?.passives ?? f?.passives ?? [], lang);
-  const maxes = slot === 'talismans' ? {} : mainStatMaxOf(f ? topEntry(table, f) : e, mainStat);
+  // Les valeurs max se lisent sur le pool du MÊME objet : le top de SA classe
+  // pour une variante (le top de famille est d'une autre classe → autre pool).
+  const maxEntry =
+    f && lootVariant
+      ? (f.ids.reduce<EquipEntry | undefined>((best, id) => {
+          const x = table[id];
+          return x && x.classLimit === e.classLimit && (!best || (x.star ?? 0) > (best.star ?? 0))
+            ? x
+            : best;
+        }, undefined) ?? e)
+      : f
+        ? topEntry(table, f)
+        : e;
+  const maxes = slot === 'talismans' ? {} : mainStatMaxOf(maxEntry, mainStat);
   return {
     id,
     name: lRec(lootVariant ? withClassSuffix(e.name, lootVariant.classLimit) : e.name, lang),

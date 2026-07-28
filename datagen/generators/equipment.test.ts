@@ -264,3 +264,26 @@ describe('equipment — palier 2★ L/T renommé (typo de NameID du jeu)', () =>
     }
   });
 });
+
+describe('equipment — familles multi-classes ÉPINGLÉES (garde anti-contamination)', () => {
+  // Le regroupement en familles se fait PAR NOM (seule jointure que la donnée du
+  // jeu offre : aucun FamilyID, le lien 1★→6★ n'existe que par le nom). Revers :
+  // une ligne au nom corrompu rejoint la famille d'un AUTRE item — c'est le bug
+  // des jumelles L/T 2★. Cet invariant fait sonner toute contamination : les
+  // familles multi-classes légitimes sont EXACTEMENT les 4 sets irregular à
+  // 5 variantes (un objet par classe, design du jeu). Une famille qui gagne une
+  // classe de plus (typo du jeu, nouveau lot mal nommé) casse ce test — un
+  // humain tranche alors (nouveau set irregular ? → mettre à jour la liste).
+  it('seules les 4 familles irregular (Briareos/Gorgon ×2) sont multi-classes, à 5 classes', () => {
+    const multi: string[] = [];
+    for (const [slot, fams] of Object.entries(families)) {
+      for (const f of fams) {
+        if (f.classLimits.length > 1) {
+          multi.push(`${slot}/${f.id}`);
+          expect(f.classLimits, `${slot}/${f.id}`).toHaveLength(5);
+        }
+      }
+    }
+    expect(multi.sort()).toEqual(['accessory/1793', 'accessory/1798', 'weapon/781', 'weapon/786']);
+  });
+});

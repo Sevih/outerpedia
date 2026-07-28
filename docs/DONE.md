@@ -31,6 +31,23 @@
   chaque variante ses 6 stats, classiques inchangés. Regen ciblée
   accessory/families uniquement (le contenu Epsilon frais du parsed N'EST PAS
   embarqué). TSC datagen + racine verts.
+  SUITE (question Sevih « tous les consommateurs ? ») — balayage EXHAUSTIF de
+  `mainStats`/`classPassives`/`getEquipmentDetail` : 2 consommateurs publics
+  portaient encore l'union — `gear-usage-finder` (mains par variante) et
+  `resolveLootGear` (MiniCards de butin des guides : mains ET valeurs max, qui
+  seraient sorties VIDES avec les mains de la variante lues sur le pool du top
+  de famille → `maxEntry` = top de SA classe). Corrigés et VÉRIFIÉS en exécutant
+  les deux sur la vraie donnée (drop `9921795` compris). Sains d'office :
+  bot-api (n'expose pas les mains), carte EE (pas de variantes), rewards (par id
+  brut), damage-calculator (passifs seuls). ⚠ RESTE côté WORKER (admin, pas
+  touché) : `GearDetail.tsx` affiche l'union de famille, `gear-options.ts` la
+  propose au picker gear-reco — `classPassives[].mainStats` est dispo pour les
+  brancher. GARDE-FOU anti-contamination ajouté (réponse au « un accessoire qui
+  merde ne devrait pas taper sur un autre ») : le regroupement par NOM est la
+  seule jointure que la donnée du jeu offre (aucun FamilyID) — un test épingle
+  donc l'ensemble EXACT des familles multi-classes légitimes (les 4 sets
+  irregular à 5 classes) ; toute famille qui gagne une classe fait sonner la
+  suite (18/18).
 
 - **Damage Calculator : UI POSÉE sur le site (phase UI seule, `unlisted`)** —
   wrapper serveur + client (`tools/_contents/damage-calculator/`), moteur PAS

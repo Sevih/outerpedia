@@ -85,7 +85,8 @@ export function computeFinderData(): RawFinderData {
           overlayIcon: resolvePassives(v.passives, 'en')[0]?.icon || undefined,
           classType: v.classLimit,
           classLimits: [v.classLimit],
-          mains: f.mainStats,
+          // Les mains de SA variante (chaque classe a son pool — Briareos/Gorgon).
+          mains: v.mainStats,
         }))
       : [
           {
