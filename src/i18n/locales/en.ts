@@ -366,8 +366,9 @@ const en = {
   'tools.damage-calculator.disclaimer':
     'Work in progress — calculator is under active development. Results may have variance compared to the in-game value as we tune contributors and add gear/buff support.',
   'tools.damage-calculator.settings.title': 'Account Settings',
-  'tools.damage-calculator.settings.subtitle': 'Quirks shared across every character',
+  'tools.damage-calculator.settings.subtitle': 'Codex + Quirks shared across every character',
   'tools.damage-calculator.settings.quirks': 'Quirks',
+  'tools.damage-calculator.settings.codex': 'Hero Codex',
   'tools.damage-calculator.settings.reset': 'Reset',
   'tools.damage-calculator.settings.activate_all': 'Activate all',
   'tools.damage-calculator.settings.quirk_element': 'Element',
@@ -491,6 +492,7 @@ const en = {
   'tools.damage-calculator.tab.compare': 'Compare 3 builds',
   // Attacker panel labels
   'tools.damage-calculator.attacker.pick': 'Pick a damage dealer…',
+  'tools.damage-calculator.attacker.affinity': 'Affinity',
   'tools.damage-calculator.attacker.crit': 'Crit',
   'tools.damage-calculator.attacker.burst_label': 'Burst',
   'tools.damage-calculator.attacker.burst_off': 'Off',

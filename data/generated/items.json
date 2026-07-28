@@ -19725,6 +19725,26 @@
     "star": 0,
     "characterId": "2000111"
   },
+  "COSTUME_102": {
+    "kind": "costume",
+    "name": {
+      "en": "Indigo Nostalgia Lambda",
+      "jp": "瑠璃色ノスタルジア・ラムダ",
+      "kr": "쪽빛 노스텔지어 람다",
+      "zh": "靛蓝色乡愁 拉姆达"
+    },
+    "desc": {
+      "en": "A costume that [Lambda] can equip.",
+      "jp": "【ラムダ】のスキンです。\\nスキンは【仲間】→【スキン】で装備できます。",
+      "kr": "[람다]가 착용할 수 있는 코스튬입니다.",
+      "zh": "【拉姆达】可穿戴的皮肤。"
+    },
+    "icon": "TI_Costume_Clothes_2000118_02",
+    "grade": "rare",
+    "type": "costume",
+    "star": 0,
+    "characterId": "2000118"
+  },
   "COSTUME_11": {
     "kind": "costume",
     "name": {
@@ -21831,7 +21851,7 @@
       "zh": "达利娅的领地"
     },
     "desc": {
-      "en": "Dahlia's gnostic essence, collected by someone for observation. It harbors the potential for dreadful possibilities. Can be exchanged for various items in the Permanent Event Shop.",
+      "en": "Dahlia's Domain, collected by someone for observation. It harbors dreadful possibilities. Can be exchanged for various items in the Permanent Event Shop.",
       "jp": "誰かが観測のために集めたダリアの領地。恐ろしい可能性を秘めている。常設イベントショップでさまざまなアイテムと交換できます。",
       "kr": "누군가가 관측을 위해 수집한 달리아의 영지. 끔찍한 가능성을 내포하고 있다. 상시 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
       "zh": "有人为了观测而收集的达利娅的领地。蕴含着可怕的可能性。可在常驻活动商店兑换各种商品。"

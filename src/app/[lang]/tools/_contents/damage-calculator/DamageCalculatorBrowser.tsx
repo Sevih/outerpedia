@@ -187,11 +187,13 @@ export interface DcLabels {
   panels: { attacker: string; target: string; team: string; result: string };
   title: string;
   pick: string;
+  affinity: string;
   skills: { title: string; dmg: string; support: string };
   settings: {
     title: string;
     subtitle: string;
     quirks: string;
+    codex: string;
     reset: string;
     activateAll: string;
   };
@@ -275,6 +277,8 @@ interface Props {
     tgtDebuff: DcBuffOption[];
   };
   quirks: DcQuirkGroup[];
+  /** Courbe du Codex : 11 paliers de taux ‰ (ATK/DEF/HP) sur la stat de BASE. */
+  codexTiers: { atk: number; def: number; hp: number }[];
   labels: DcLabels;
 }
 
@@ -284,6 +288,14 @@ const QUIRKS_STORE: StoreSpec<Record<number, number>> = {
   key: 'outerpedia:damage-calculator:quirks',
   version: 1,
   fallback: {},
+};
+
+/** Niveau du Codex (archive) POSSÉDÉ — réglage de COMPTE, comme les quirks :
+ *  c'est un compteur de complétions global, pas un réglage par perso. */
+const CODEX_STORE: StoreSpec<number> = {
+  key: 'outerpedia:damage-calculator:codex',
+  version: 1,
+  fallback: 0,
 };
 
 // ── Briques d'affichage ────────────────────────────────────────────────────
@@ -786,9 +798,10 @@ const EMPTY_ALLY: AllyPick = {
  * Tout est REVALIDÉ à l'hydratation (ids inconnus écartés, nombres bornés).
  */
 interface UrlState {
-  /** Attaquant + palier de transcendance + niveaux de skill. */
+  /** Attaquant + palier de transcendance + affinité (0..5) + niveaux de skill. */
   a?: string;
   x?: number;
+  af?: number;
   k?: Record<string, number>;
   /** Arme / accessoire (slug + breakthrough). */
   w?: string;
@@ -836,6 +849,7 @@ export function DamageCalculatorBrowser({
   talismanMains,
   buffOptions,
   quirks,
+  codexTiers,
   labels: L,
 }: Props) {
   const [tab, setTab] = useState<'calc' | 'settings'>('calc');
@@ -857,8 +871,12 @@ export function DamageCalculatorBrowser({
   const [eeOwned, setEeOwned] = useState(true);
   // Niveau d'enchant de l'EE (+0..+10) — ne sert qu'aux mains « dégâts vs élément ».
   const [eeLevel, setEeLevel] = useState(10);
+  // Affinité (Trust) 0..5 — buffs passifs plats ABSENTS de la fiche affichée
+  // (canal buffValue, vérifié binaire 27/07/2026) : le moteur les ajoute.
+  const [affinity, setAffinity] = useState(0);
   const [statVals, setStatVals] = useState<Record<string, string>>({});
   const [quirkLvls, setQuirkLvls] = useStoredState(QUIRKS_STORE);
+  const [codexLvl, setCodexLvl] = useStoredState(CODEX_STORE);
   // Cible : preset (donjon réel) OU saisie manuelle — le type de contenu se
   // DÉDUIT du preset choisi, le PvP est hors périmètre (Sevih 27/07/2026).
   const [targetTab, setTargetTab] = useState<'preset' | 'manual'>('preset');
@@ -923,6 +941,7 @@ export function DamageCalculatorBrowser({
   const pickAttacker = (id: string) => {
     setAttackerId(id);
     setTranscend((chars.find((c) => c.id === id)?.transcend.length ?? 1) - 1);
+    setAffinity(0);
     const lvls: Record<string, number> = {};
     for (const row of kits[id] ?? []) lvls[row.slot] = row.maxLevel;
     setSkillLvls(lvls);
@@ -937,6 +956,7 @@ export function DamageCalculatorBrowser({
   const resetScenario = () => {
     setAttackerId(null);
     setTranscend(0);
+    setAffinity(0);
     setSkillLvls({});
     setSetPicks([]);
     setWeaponSlug(null);
@@ -994,6 +1014,7 @@ export function DamageCalculatorBrowser({
         setAttackerId(char.id);
         const maxIdx = Math.max(char.transcend.length - 1, 0);
         setTranscend(typeof st.x === 'number' ? Math.min(Math.max(st.x, 0), maxIdx) : maxIdx);
+        if (typeof st.af === 'number') setAffinity(Math.min(Math.max(st.af, 0), 5));
         const lvls: Record<string, number> = {};
         for (const row of kits[char.id] ?? []) {
           const v = st.k?.[row.slot];
@@ -1069,6 +1090,7 @@ export function DamageCalculatorBrowser({
       if (attackerId) {
         z.a = attackerId;
         z.x = transcend;
+        if (affinity) z.af = affinity;
         z.k = skillLvls;
         if (weaponSlug) {
           z.w = weaponSlug;
@@ -1121,6 +1143,7 @@ export function DamageCalculatorBrowser({
   }, [
     attackerId,
     transcend,
+    affinity,
     skillLvls,
     weaponSlug,
     weaponTier,
@@ -1157,6 +1180,7 @@ export function DamageCalculatorBrowser({
       ? {
           id: attacker.id,
           transcend: attacker.transcend[transcend]?.label ?? null,
+          affinity,
           skills: skillLvls,
           weapon: weapon ? { slug: weapon.slug, tier: weaponTier } : null,
           amulet: amulet ? { slug: amulet.slug, tier: amuletTier } : null,
@@ -1188,6 +1212,7 @@ export function DamageCalculatorBrowser({
         ee: a.id && ees[a.id] ? { owned: a.ee, plus10: a.eePlus } : null,
       })),
     quirks: Object.fromEntries(Object.entries(quirkLvls).filter(([, v]) => v > 0)),
+    codex: codexLvl,
   };
 
   return (
@@ -1216,6 +1241,32 @@ export function DamageCalculatorBrowser({
       {tab === 'settings' && (
         <div className="mx-auto w-full max-w-3xl space-y-4">
           <p className="text-content-subtle text-center text-xs">{L.settings.subtitle}</p>
+
+          {/* Codex (archive) : % de la stat de BASE seule, HORS multiplicateur
+            de buffs (CalcFinalStat § 3) — le moteur devra retrancher ce terme
+            de la fiche saisie avant d'appliquer les buffs (27/07/2026). */}
+          <Card title={L.settings.codex}>
+            <div className="flex items-center gap-3">
+              <span className="text-content-muted min-w-0 flex-1 font-mono text-[11px] tabular-nums">
+                {codexLvl > 0 && codexTiers[codexLvl - 1]
+                  ? ['atk', 'def', 'hp']
+                      .map(
+                        (s) =>
+                          `${s.toUpperCase()} +${(codexTiers[codexLvl - 1][s as 'atk' | 'def' | 'hp'] ?? 0) / 10}%`,
+                      )
+                      .join(' · ')
+                  : '—'}
+              </span>
+              <Stepper
+                value={Math.min(codexLvl, codexTiers.length)}
+                min={0}
+                max={codexTiers.length}
+                onChange={setCodexLvl}
+                format={(v) => `Lv ${v}`}
+              />
+            </div>
+          </Card>
+
           {/* Tout à 0 / tout au max — réglage de COMPTE, pas de scénario. */}
           <div className="flex justify-center gap-2">
             <button
@@ -1329,6 +1380,18 @@ export function DamageCalculatorBrowser({
                   ) : undefined
                 }
               />
+
+              {/* Affinité (Trust) 0..5 : buffs passifs plats ABSENTS de la
+                fiche affichée — le moteur les ajoutera (binaire 27/07/2026). */}
+              {attacker && (
+                <div className="flex items-center gap-2">
+                  <span className="text-content-subtle font-mono text-[9px] tracking-wide uppercase">
+                    {L.affinity}
+                  </span>
+                  <span className="flex-1" />
+                  <Stepper value={affinity} min={0} max={5} onChange={setAffinity} />
+                </div>
+              )}
             </Card>
 
             {/* Ordre de la colonne (Sevih 27/07/2026) : perso → stats → skills

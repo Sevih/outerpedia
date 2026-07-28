@@ -12353,6 +12353,116 @@
       }
     ]
   },
+  "2000118": {
+    "id": "2000118",
+    "name": {
+      "en": "Lambda",
+      "jp": "ラムダ",
+      "kr": "람다",
+      "zh": "拉姆达"
+    },
+    "rarity": 3,
+    "element": "water",
+    "class": "mage",
+    "race": "automaton",
+    "icon": "2000118",
+    "skills": [
+      "11801",
+      "11802",
+      "11803",
+      "11804",
+      "11805",
+      "11806",
+      "11808",
+      "11809",
+      "11810",
+      "11819",
+      "11820",
+      "11821",
+      "4"
+    ],
+    "stats": {
+      "hp": {
+        "min": 498,
+        "max": 3433
+      },
+      "atk": {
+        "min": 86,
+        "max": 861
+      },
+      "def": {
+        "min": 16,
+        "max": 167
+      },
+      "speed": {
+        "min": 124,
+        "max": 124
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 50
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "buff_chance": {
+        "min": 10,
+        "max": 10
+      },
+      "buff_resist": {
+        "min": 10,
+        "max": 100
+      }
+    },
+    "nickname": {
+      "en": "Automaton of the Deep",
+      "jp": "海のオートマタ",
+      "kr": "바다의 자동인형",
+      "zh": "海洋的机械人偶"
+    },
+    "subClass": "wizard",
+    "chainType": "join",
+    "gift": "present_01",
+    "voiceActor": {
+      "en": "Erika Harlacher",
+      "jp": "白砂沙帆",
+      "kr": "장채연",
+      "zh": ""
+    },
+    "profile": {
+      "birthday": "06/08",
+      "height": 168,
+      "story": {
+        "en": "I can't believe I'm introducing myself. It makes me a little nervous.\\nFirst, my name is <Color=#FFBF00>Lambda</Color>. To be specific, I'm an automaton created for marine exploration. In the past, I met Dr. Caren in another world and learned many things from her. I was especially deeply moved by what I learned about humans. Because of that, I've become absorbed in watching video media filled with people's stories.\\n\\nI may still be inexperienced, but I'll do my best! And, Premier... if you happen to find any d-drama tapes during your adventures, could you give them to me?",
+        "jp": "私が自己紹介をするなんて、なんだか胸がドキドキしますね。\\nひとまず、私の名前は<Color=#FFBF00>ラムダ</color>。 具体的には海洋探査のために制作されたオートマタです。 過去に、別の世界でカレン博士に出会い色々なことを学びましたが、特に、人間に関する部分には深く感銘を受けました。 その影響で、今は人々の物語が描かれた映像メディアを視聴することに夢中になっています。\\n\\nまだまだ未熟ですが、一生懸命頑張ります！ それから、宰相様。 もし冒険中にド、ドラマのテープみたいなものを見つけたら、私に譲っていただけませんか？",
+        "kr": "제가 제 소개를 하게 되다니, 왠지 가슴이 떨리네요.\\n일단 제 이름은 <Color=#FFBF00>람다</Color>, 구체적으로는 해양 탐사를 위해 제작된 자동인형이에요. 과거, 다른 세계에서 카렌 박사님을 만나 여러 가지를 배웠는데. 특히, 인간에 관한 부분에 감명을 많이 받았어요. 그 영향으로, 지금은 사람들의 이야기가 담긴 영상 매체를 시청하는 데 몰두하고 있어요.\\n\\n비록 미숙하지만, 열심히 할게요! 그리고 재상님. 혹시 모험 중에 드, 드라마 테이프 같은 걸 발견하면 제게 주시겠어요?",
+        "zh": "没想到我会做自我介绍，不知为何心里有些紧张呢。\\n首先，我的名字是<Color=#FFBF00>拉姆达</Color>，具体来说，我是为了海洋探查而被制作出来的机械人偶。过去，我在另一个世界遇到了卡伦博士，学到了很多东西。尤其是关于人类的部分，我深受感动。受其影响，我现在沉迷于观看记录人们故事的影像媒体。\\n\\n虽然我还不够成熟，但我会努力的！还有，宰相大人，如果在冒险途中发现了录、录像带之类的东西，可以给我吗？"
+      }
+    },
+    "ee": "2000118",
+    "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["ee"],
+    "tags": ["ignore-defense"],
+    "appearances": ["2010118"],
+    "costumes": [
+      {
+        "id": "102",
+        "model": "2010118",
+        "name": {
+          "en": "Indigo Nostalgia Lambda",
+          "jp": "瑠璃色ノスタルジア・ラムダ",
+          "kr": "쪽빛 노스텔지어 람다",
+          "zh": "靛蓝色乡愁 拉姆达"
+        },
+        "icon": "TI_Costume_Clothes_2000118_02",
+        "grade": "rare",
+        "sort": 1,
+        "fusionModel": "0",
+        "art": true
+      }
+    ]
+  },
   "2000119": {
     "id": "2000119",
     "name": {

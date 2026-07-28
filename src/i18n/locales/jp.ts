@@ -356,8 +356,9 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.disclaimer':
     '開発中 — 計算機は現在開発中です。コントリビューターを調整し、装備/バフ対応を追加していくため、ゲーム内の値とずれが生じる場合があります。',
   'tools.damage-calculator.settings.title': 'アカウント設定',
-  'tools.damage-calculator.settings.subtitle': 'ギフトは全キャラ共通',
+  'tools.damage-calculator.settings.subtitle': 'コーデックス + ギフトは全キャラ共通',
   'tools.damage-calculator.settings.quirks': 'ギフト',
+  'tools.damage-calculator.settings.codex': 'ヒーローコーデックス',
   'tools.damage-calculator.settings.reset': 'リセット',
   'tools.damage-calculator.settings.activate_all': 'すべて有効化',
   'tools.damage-calculator.settings.quirk_element': '属性',
@@ -480,6 +481,7 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.tab.compare': '3ビルド比較',
   // Attacker panel labels
   'tools.damage-calculator.attacker.pick': 'ダメージディーラーを選択…',
+  'tools.damage-calculator.attacker.affinity': '好感度',
   'tools.damage-calculator.attacker.crit': 'クリティカル',
   'tools.damage-calculator.attacker.burst_label': 'バースト',
   'tools.damage-calculator.attacker.burst_off': 'オフ',

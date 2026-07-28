@@ -206626,8 +206626,8 @@
   "11801": {
     "id": "11801",
     "name": {
-      "en": "Cool Down a Bit",
-      "jp": "少し熱を冷ましてください",
+      "en": "Cool Off, Please!",
+      "jp": "熱、下げましょう。​",
       "kr": "열 좀 식히세요",
       "zh": "冷静一下吧"
     },
@@ -206700,7 +206700,7 @@
       {
         "level": 4,
         "damageFactor": 1700,
-        "wgReduce": 3,
+        "wgReduce": 2,
         "vars": {
           "2000118_1_1": {
             "c": "85%",
@@ -206721,7 +206721,7 @@
       {
         "level": 5,
         "damageFactor": 1800,
-        "wgReduce": 3,
+        "wgReduce": 2,
         "vars": {
           "2000118_1_1": {
             "c": "100%",
@@ -206775,8 +206775,8 @@
     "id": "11802",
     "name": {
       "en": "Tidal Wave Incoming!",
-      "jp": "ヘイル、突撃します！",
-      "kr": "헤일, 들이칩니다!",
+      "jp": "大波警報!​",
+      "kr": "해일, 들이칩니다!",
       "zh": "嘿，冲上去！"
     },
     "type": "second",
@@ -206789,6 +206789,7 @@
         "damageFactor": 1400,
         "cool": 4,
         "startCool": 4,
+        "wgReduce": 1,
         "vars": {
           "2000118_2_1": {
             "c": "100%",
@@ -206802,7 +206803,7 @@
         "tooltips": ["63"],
         "desc": {
           "en": "Attacks all enemies, then increases all <color=#28d9ed>Water</color> allies' <color=#28d9ed>Attack</color> by <color=#28d9ed>2%</color>. (Stacks up to 3 times)\\nIf there are <color=#28d9ed>4</color> <color=#28d9ed>Water</color> members on the team, decreases the skill cooldown of the ally with the highest Attack by <color=#28d9ed>1 turn</color>.",
-          "jp": "敵全体にダメージを与えた後、<color=#28d9ed>水属性</color>味方全体の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2%</color>UPさせる。（最大3回累積）\\n編成チームの内<color=#28d9ed>水属性</color>仲間が<color=#28d9ed>4人</color>の場合、攻撃力が最も高い味方のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
+          "jp": "敵全体にダメージを与えた後、<color=#28d9ed>水属性</color>の味方全体に<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2%</color>UPさせる。（最大3回累積）\\n<color=#28d9ed>水属性</color>の味方が<color=#28d9ed>4人</color>編成されている場合、攻撃力が最も高い味方のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
           "kr": "적 전체를 공격한 뒤, <color=#28d9ed>수속성</color> 아군 전체의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>2%</color> 증가시키고,(최대 3회 누적)\\n팀내 <color=#28d9ed>수속성</color> 구성원이 <color=#28d9ed>4명</color>인 경우, 공격력이 가장 높은 아군의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
           "zh": "攻击全体敌人后，使<color=#28d9ed>水属性</color>我方全体<color=#28d9ed>攻击力</color>增加<color=#28d9ed>2%</color>。（最多叠加3次）\\n若队伍内<color=#28d9ed>水属性</color>成员为<color=#28d9ed>4名</color>，使攻击力最高的我方冷却时间减少<color=#28d9ed>1回合</color>。"
         }
@@ -206812,6 +206813,7 @@
         "damageFactor": 1500,
         "cool": 4,
         "startCool": 4,
+        "wgReduce": 2,
         "vars": {
           "2000118_2_1": {
             "c": "100%",
@@ -206839,7 +206841,7 @@
         ],
         "desc": {
           "en": "Attacks all enemies, then increases all <color=#28d9ed>Water</color> allies' <color=#28d9ed>Attack</color> by <color=#28d9ed>2%</color>. (Stacks up to 3 times)\\nIf there are <color=#28d9ed>4</color> <color=#28d9ed>Water</color> members on the team, decreases the skill cooldown of the ally with the highest Attack by <color=#28d9ed>1 turn</color>.",
-          "jp": "敵全体にダメージを与えた後、<color=#28d9ed>水属性</color>味方全体の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2%</color>UPさせる。（最大3回累積）\\n編成チームの内<color=#28d9ed>水属性</color>仲間が<color=#28d9ed>4人</color>の場合、攻撃力が最も高い味方のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
+          "jp": "敵全体にダメージを与えた後、<color=#28d9ed>水属性</color>の味方全体に<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2%</color>UPさせる。（最大3回累積）\\n<color=#28d9ed>水属性</color>の味方が<color=#28d9ed>4人</color>編成されている場合、攻撃力が最も高い味方のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
           "kr": "적 전체를 공격한 뒤, <color=#28d9ed>수속성</color> 아군 전체의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>2%</color> 증가시키고,(최대 3회 누적)\\n팀내 <color=#28d9ed>수속성</color> 구성원이 <color=#28d9ed>4명</color>인 경우, 공격력이 가장 높은 아군의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
           "zh": "攻击全体敌人后，使<color=#28d9ed>水属性</color>我方全体<color=#28d9ed>攻击力</color>增加<color=#28d9ed>2%</color>。（最多叠加3次）\\n若队伍内<color=#28d9ed>水属性</color>成员为<color=#28d9ed>4名</color>，使攻击力最高的我方冷却时间减少<color=#28d9ed>1回合</color>。"
         }
@@ -206849,6 +206851,7 @@
         "damageFactor": 1500,
         "cool": 3,
         "startCool": 3,
+        "wgReduce": 2,
         "vars": {
           "2000118_2_1": {
             "c": "100%",
@@ -206870,7 +206873,7 @@
         ],
         "desc": {
           "en": "Attacks all enemies, then increases all <color=#28d9ed>Water</color> allies' <color=#28d9ed>Attack</color> by <color=#28d9ed>2%</color>. (Stacks up to 3 times)\\nIf there are <color=#28d9ed>4</color> <color=#28d9ed>Water</color> members on the team, decreases the skill cooldown of the ally with the highest Attack by <color=#28d9ed>1 turn</color>.",
-          "jp": "敵全体にダメージを与えた後、<color=#28d9ed>水属性</color>味方全体の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2%</color>UPさせる。（最大3回累積）\\n編成チームの内<color=#28d9ed>水属性</color>仲間が<color=#28d9ed>4人</color>の場合、攻撃力が最も高い味方のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
+          "jp": "敵全体にダメージを与えた後、<color=#28d9ed>水属性</color>の味方全体に<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2%</color>UPさせる。（最大3回累積）\\n<color=#28d9ed>水属性</color>の味方が<color=#28d9ed>4人</color>編成されている場合、攻撃力が最も高い味方のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
           "kr": "적 전체를 공격한 뒤, <color=#28d9ed>수속성</color> 아군 전체의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>2%</color> 증가시키고,(최대 3회 누적)\\n팀내 <color=#28d9ed>수속성</color> 구성원이 <color=#28d9ed>4명</color>인 경우, 공격력이 가장 높은 아군의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
           "zh": "攻击全体敌人后，使<color=#28d9ed>水属性</color>我方全体<color=#28d9ed>攻击力</color>增加<color=#28d9ed>2%</color>。（最多叠加3次）\\n若队伍内<color=#28d9ed>水属性</color>成员为<color=#28d9ed>4名</color>，使攻击力最高的我方冷却时间减少<color=#28d9ed>1回合</color>。"
         }
@@ -206880,6 +206883,7 @@
         "damageFactor": 1600,
         "cool": 3,
         "startCool": 3,
+        "wgReduce": 2,
         "vars": {
           "2000118_2_1": {
             "c": "100%",
@@ -206901,7 +206905,7 @@
         ],
         "desc": {
           "en": "Attacks all enemies, then increases all <color=#28d9ed>Water</color> allies' <color=#28d9ed>Attack</color> by <color=#28d9ed>2%</color>. (Stacks up to 3 times)\\nIf there are <color=#28d9ed>4</color> <color=#28d9ed>Water</color> members on the team, decreases the skill cooldown of the ally with the highest Attack by <color=#28d9ed>1 turn</color>.",
-          "jp": "敵全体にダメージを与えた後、<color=#28d9ed>水属性</color>味方全体の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2%</color>UPさせる。（最大3回累積）\\n編成チームの内<color=#28d9ed>水属性</color>仲間が<color=#28d9ed>4人</color>の場合、攻撃力が最も高い味方のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
+          "jp": "敵全体にダメージを与えた後、<color=#28d9ed>水属性</color>の味方全体に<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2%</color>UPさせる。（最大3回累積）\\n<color=#28d9ed>水属性</color>の味方が<color=#28d9ed>4人</color>編成されている場合、攻撃力が最も高い味方のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
           "kr": "적 전체를 공격한 뒤, <color=#28d9ed>수속성</color> 아군 전체의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>2%</color> 증가시키고,(최대 3회 누적)\\n팀내 <color=#28d9ed>수속성</color> 구성원이 <color=#28d9ed>4명</color>인 경우, 공격력이 가장 높은 아군의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
           "zh": "攻击全体敌人后，使<color=#28d9ed>水属性</color>我方全体<color=#28d9ed>攻击力</color>增加<color=#28d9ed>2%</color>。（最多叠加3次）\\n若队伍内<color=#28d9ed>水属性</color>成员为<color=#28d9ed>4名</color>，使攻击力最高的我方冷却时间减少<color=#28d9ed>1回合</color>。"
         }
@@ -206911,6 +206915,7 @@
         "damageFactor": 1700,
         "cool": 3,
         "startCool": 3,
+        "wgReduce": 2,
         "vars": {
           "2000118_2_1": {
             "c": "100%",
@@ -206938,7 +206943,7 @@
         ],
         "desc": {
           "en": "Attacks all enemies, then increases all <color=#28d9ed>Water</color> allies' <color=#28d9ed>Attack</color> by <color=#28d9ed>5%</color>. (Stacks up to 3 times)\\nIf there are <color=#28d9ed>4</color> <color=#28d9ed>Water</color> members on the team, decreases the skill cooldown of the ally with the highest Attack by <color=#28d9ed>1 turn</color>.",
-          "jp": "敵全体にダメージを与えた後、<color=#28d9ed>水属性</color>味方全体の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>5%</color>UPさせる。（最大3回累積）\\n編成チームの内<color=#28d9ed>水属性</color>仲間が<color=#28d9ed>4人</color>の場合、攻撃力が最も高い味方のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
+          "jp": "敵全体にダメージを与えた後、<color=#28d9ed>水属性</color>の味方全体に<color=#28d9ed>攻撃力</color>を<color=#28d9ed>5%</color>UPさせる。（最大3回累積）\\n<color=#28d9ed>水属性</color>の味方が<color=#28d9ed>4人</color>編成されている場合、攻撃力が最も高い味方のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
           "kr": "적 전체를 공격한 뒤, <color=#28d9ed>수속성</color> 아군 전체의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>5%</color> 증가시키고,(최대 3회 누적)\\n팀내 <color=#28d9ed>수속성</color> 구성원이 <color=#28d9ed>4명</color>인 경우, 공격력이 가장 높은 아군의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
           "zh": "攻击全体敌人后，使<color=#28d9ed>水属性</color>我方全体<color=#28d9ed>攻击力</color>增加<color=#28d9ed>5%</color>。（最多叠加3次）\\n若队伍内<color=#28d9ed>水属性</color>成员为<color=#28d9ed>4名</color>，使攻击力最高的我方冷却时间减少<color=#28d9ed>1回合</color>。"
         }
@@ -206946,7 +206951,7 @@
     ],
     "desc": {
       "en": "Attacks all enemies, then increases all <color=#28d9ed>Water</color> allies' <color=#28d9ed>Attack</color> by <color=#28d9ed>2%</color>. (Stacks up to 3 times)\\nIf there are <color=#28d9ed>4</color> <color=#28d9ed>Water</color> members on the team, decreases the skill cooldown of the ally with the highest Attack by <color=#28d9ed>1 turn</color>.",
-      "jp": "敵全体にダメージを与えた後、<color=#28d9ed>水属性</color>味方全体の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2%</color>UPさせる。（最大3回累積）\\n編成チームの内<color=#28d9ed>水属性</color>仲間が<color=#28d9ed>4人</color>の場合、攻撃力が最も高い味方のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
+      "jp": "敵全体にダメージを与えた後、<color=#28d9ed>水属性</color>の味方全体に<color=#28d9ed>攻撃力</color>を<color=#28d9ed>2%</color>UPさせる。（最大3回累積）\\n<color=#28d9ed>水属性</color>の味方が<color=#28d9ed>4人</color>編成されている場合、攻撃力が最も高い味方のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
       "kr": "적 전체를 공격한 뒤, <color=#28d9ed>수속성</color> 아군 전체의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>2%</color> 증가시키고,(최대 3회 누적)\\n팀내 <color=#28d9ed>수속성</color> 구성원이 <color=#28d9ed>4명</color>인 경우, 공격력이 가장 높은 아군의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
       "zh": "攻击全体敌人后，使<color=#28d9ed>水属性</color>我方全体<color=#28d9ed>攻击力</color>增加<color=#28d9ed>2%</color>。（最多叠加3次）\\n若队伍内<color=#28d9ed>水属性</color>成员为<color=#28d9ed>4名</color>，使攻击力最高的我方冷却时间减少<color=#28d9ed>1回合</color>。"
     },
@@ -206980,7 +206985,7 @@
     "id": "11803",
     "name": {
       "en": "Neptune, Deploy!",
-      "jp": "ネプトゥヌス号、出撃！",
+      "jp": "ネプトゥヌス号、出撃!​",
       "kr": "넵투누스 호, 출격!",
       "zh": "海神号，出击！"
     },
@@ -206994,6 +206999,7 @@
         "damageFactor": 1450,
         "cool": 5,
         "startCool": 5,
+        "wgReduce": 2,
         "vars": {
           "2000118_3_1": {
             "c": "100%",
@@ -207016,6 +207022,7 @@
         "damageFactor": 1550,
         "cool": 5,
         "startCool": 5,
+        "wgReduce": 3,
         "vars": {
           "2000118_3_1": {
             "c": "100%",
@@ -207052,6 +207059,7 @@
         "damageFactor": 1550,
         "cool": 4,
         "startCool": 4,
+        "wgReduce": 3,
         "vars": {
           "2000118_3_1": {
             "c": "100%",
@@ -207082,6 +207090,7 @@
         "damageFactor": 1650,
         "cool": 4,
         "startCool": 4,
+        "wgReduce": 3,
         "vars": {
           "2000118_3_1": {
             "c": "100%",
@@ -207112,6 +207121,7 @@
         "damageFactor": 1850,
         "cool": 4,
         "startCool": 4,
+        "wgReduce": 3,
         "vars": {
           "2000118_3_1": {
             "c": "100%",
@@ -207145,9 +207155,9 @@
       }
     ],
     "desc": {
-      "en": "Attacks all enemies and grants all allies a <color=#28d9ed>Barrier</color> for <color=#28d9ed>[Buff_T_2000118_3_1] turns</color>.\\nBarrier strength increases proportional to Lambda's Attack.\\nIncreases damage dealt to bosses by <color=#28d9ed>50%</color>, and if there are <color=#28d9ed>4</color> <color=#28d9ed>Water</color> members on the team, resets the cooldown of <color=#28d9ed>Hail Incoming!</color>.",
-      "jp": "敵全体にダメージを与え、味方全体に<color=#28d9ed>シールド</color>を<color=#28d9ed>[Buff_T_2000118_3_1]ターン</color>の間付与する。\\nラムダの攻撃力が高いほど、シールド量が増える。\\nボスへのダメージが<color=#28d9ed>50%</color>UPし、チーム内の<color=#28d9ed>水属性</color>仲間が<color=#28d9ed>4人</color>の場合、<color=#28d9ed>ヘイル、突撃します！</color>のスキルターンを初期化する。",
-      "kr": "적전체를 공격하고, 아군 전체에게 <color=#28d9ed>실드</color>를 <color=#28d9ed>[Buff_T_2000118_3_1]턴</color> 동안 부여합니다.\\n실드량은 람다의 공격력에 비례합니다.\\n보스에 대한 피해량이 <color=#28d9ed>50%</color> 증가하고, 팀내 <color=#28d9ed>수속성</color> 구성원이 <color=#28d9ed>4명</color>이면 <color=#28d9ed>헤일, 들이칩니다!</color>의 쿨타임을 초기화합니다.",
+      "en": "Attacks all enemies and grants all allies a <color=#28d9ed>Barrier</color> for <color=#28d9ed>[Buff_T_2000118_3_1] turns</color>.\\nBarrier strength increases proportional to Lambda's Attack.\\nIncreases damage dealt to bosses by <color=#28d9ed>50%</color>, and if there are <color=#28d9ed>4</color> <color=#28d9ed>Water</color> members on the team, resets the cooldown of <color=#28d9ed>Tidal Wave Incoming!</color>.",
+      "jp": "敵全体にダメージを与え、味方全体に<color=#28d9ed>シールド</color>を<color=#28d9ed>[Buff_T_2000118_3_1]ターン</color>の間付与する。\\nラムダの攻撃力が高いほど、シールド量が増える。\\nボスへのダメージが<color=#28d9ed>50%</color>UPし、<color=#28d9ed>水属性</color>の味方が<color=#28d9ed>4人</color>編成されている場合、<color=#28d9ed>【大波警報！】</color>のスキルターンを初期化する。",
+      "kr": "적전체를 공격하고, 아군 전체에게 <color=#28d9ed>실드</color>를 <color=#28d9ed>[Buff_T_2000118_3_1]턴</color> 동안 부여합니다.\\n실드량은 람다의 공격력에 비례합니다.\\n보스에 대한 피해량이 <color=#28d9ed>50%</color> 증가하고, 팀내 <color=#28d9ed>수속성</color> 구성원이 <color=#28d9ed>4명</color>이면 <color=#28d9ed>해일, 들이칩니다!</color>의 쿨타임을 초기화합니다.",
       "zh": "攻击全体敌人，并对我方全体附加<color=#28d9ed>[Buff_T_2000118_3_1]回合</color>的<color=#28d9ed>护盾</color>。\\n护盾量按拉姆达的攻击力比例增加。\\n对首领的伤害增加<color=#28d9ed>50%</color>，若队伍内<color=#28d9ed>水属性</color>成员为<color=#28d9ed>4名</color>，则重置<color=#28d9ed>嘿，冲上去！</color>的冷却时间。"
     },
     "target": "enemy",
@@ -207264,7 +207274,7 @@
     ],
     "desc": {
       "en": "<color=#ffd732>Chain Companion Effect</color>: After attacking, grants all allies a <color=#28d9ed>Barrier</color> for <color=#28d9ed>2 turns</color>.\\nBarrier strength increases proportional to Lambda's Attack.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, grants the caster a <color=#28d9ed>Barrier</color> for <color=#28d9ed>1 turn</color>.\\nBarrier strength increases proportional to Lambda's Attack.",
-      "jp": "<color=#ffd732>チェーン効果(汎用)</color>：攻撃後、味方全体に<color=#28d9ed>シールド</color>を<color=#28d9ed>2ターン</color>の間付与する。\\nラムダの攻撃力が高いほどシールド量はに比例する。\\n\\n<color=#ffd732>連携効果</color>：攻撃後、自分に<color=#28d9ed>シールド</color>を<color=#28d9ed>1ターン</color>の間付与する。\\nラムダの攻撃力が高いほど、シールド量が増える。",
+      "jp": "<color=#ffd732>チェーン効果(汎用)</color>：攻撃後、味方全体に<color=#28d9ed>シールド</color>を<color=#28d9ed>2ターン</color>の間付与する。\\nラムダの攻撃力が高いほど、シールド量が増える。\\n\\n<color=#ffd732>連携効果</color>：攻撃後、自分に<color=#28d9ed>シールド</color>を<color=#28d9ed>1ターン</color>の間付与する。\\nラムダの攻撃力が高いほど、シールド量が増える。",
       "kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후, 아군 전체에게 <color=#28d9ed>실드</color>를 <color=#28d9ed>2턴</color> 동안 부여합니다.\\n실드량은 람다의 공격력에 비례합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후, 자신에게 <color=#28d9ed>실드</color>를 <color=#28d9ed>1턴</color> 동안 부여합니다.\\n실드량은 람다의 공격력에 비례합니다.",
       "zh": "<color=#ffd732>连携技能自由顺序效果</color>：攻击后，对我方全体附加<color=#28d9ed>2回合</color>的<color=#28d9ed>护盾</color>。\\n护盾量按拉姆达的攻击力比例增加。\\n\\n<color=#ffd732>夹攻效果</color>：攻击后，对自身附加<color=#28d9ed>1回合</color>的<color=#28d9ed>护盾</color>。\\n护盾量按拉姆达的攻击力比例增加。"
     },
@@ -207880,7 +207890,7 @@
         "level": 1,
         "damageFactor": 1500,
         "gainCP": 2,
-        "wgReduce": 1,
+        "wgReduce": 2,
         "vars": {
           "2000118_1_1": {
             "c": "70%",
@@ -207902,7 +207912,7 @@
         "level": 2,
         "damageFactor": 1600,
         "gainCP": 2,
-        "wgReduce": 2,
+        "wgReduce": 3,
         "vars": {
           "2000118_1_1": {
             "c": "70%",
@@ -207924,7 +207934,7 @@
         "level": 3,
         "damageFactor": 1600,
         "gainCP": 2,
-        "wgReduce": 2,
+        "wgReduce": 3,
         "vars": {
           "2000118_1_1": {
             "c": "85%",
@@ -207946,7 +207956,7 @@
         "level": 4,
         "damageFactor": 1700,
         "gainCP": 2,
-        "wgReduce": 2,
+        "wgReduce": 3,
         "vars": {
           "2000118_1_1": {
             "c": "85%",
@@ -208043,7 +208053,7 @@
         "level": 1,
         "damageFactor": 2025,
         "gainCP": 7,
-        "wgReduce": 1,
+        "wgReduce": 2,
         "vars": {
           "2000118_1_1": {
             "c": "70%",
@@ -208069,7 +208079,7 @@
         "level": 2,
         "damageFactor": 2125,
         "gainCP": 7,
-        "wgReduce": 2,
+        "wgReduce": 3,
         "vars": {
           "2000118_1_1": {
             "c": "70%",
@@ -208095,7 +208105,7 @@
         "level": 3,
         "damageFactor": 2125,
         "gainCP": 7,
-        "wgReduce": 2,
+        "wgReduce": 3,
         "vars": {
           "2000118_1_1": {
             "c": "85%",
@@ -208121,7 +208131,7 @@
         "level": 4,
         "damageFactor": 2225,
         "gainCP": 7,
-        "wgReduce": 2,
+        "wgReduce": 3,
         "vars": {
           "2000118_1_1": {
             "c": "85%",
@@ -208172,7 +208182,7 @@
     ],
     "desc": {
       "en": "Changes to an Enhanced Attack\\nResets the cooldown of Tidal Wave Incoming!",
-      "jp": "強化攻撃に変更\\nヘイル、突撃します！スキルターン初期化",
+      "jp": "強化攻撃に変更\\n【大波警報!】スキルターン初期化",
       "kr": "강화 공격으로 교체\\n해일, 들이칩니다! 쿨타임 초기화",
       "zh": "替换为强化攻击\\n嘿，冲上去！冷却时间重置"
     },

@@ -10647,6 +10647,33 @@
       }
     ]
   },
+  "2000118": {
+    "name": {
+      "en": "Lambda's Exclusive Equipment",
+      "jp": "ラムダの専用装備",
+      "kr": "람다의 전용 장비",
+      "zh": "拉姆达的专属装备"
+    },
+    "desc": {
+      "en": "DMG dealt to Fire enemies +100% (Unaffected by elemental advantage bonuses)",
+      "jp": "火属性の敵に与えるダメージ+100%（有利な属性相性攻撃の影響を受けない）",
+      "kr": "화속성 적에게 입히는 피해 +100% (유리한 상성 공격의 영향을 받지 않음)",
+      "zh": "对火属性敌人造成的伤害+100%（不受有利属性相克攻击的影响）"
+    },
+    "values": [{}],
+    "levels": [1],
+    "icon": "TI_Icon_UO_EXCLUSIVE",
+    "buff": "BID_CEQUIP_2000118",
+    "effects": [
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "BID_CEQUIP_2000118"
+      }
+    ]
+  },
   "2000119": {
     "name": {
       "en": "Demiurge Luna's Exclusive Equipment",
@@ -14408,6 +14435,35 @@
         "buff": "BID_CEQUIP_2000117_ADD",
         "caller": "ultimate",
         "tooltip": "UNCOUNTERABLE"
+      }
+    ]
+  },
+  "2100118": {
+    "name": {
+      "en": "Lambda's Exclusive Equipment",
+      "jp": "ラムダの専用装備",
+      "kr": "람다의 전용 장비",
+      "zh": "拉姆达的专属装备"
+    },
+    "desc": {
+      "en": "Penetration against bosses +30%",
+      "jp": "ボス対象貫通力+30%",
+      "kr": "보스 대상 관통력 +30%",
+      "zh": "对首领目标穿透力+30%"
+    },
+    "values": [{}],
+    "levels": [1],
+    "icon": "TI_Icon_UO_EXCLUSIVE",
+    "buff": "BID_CEQUIP_2000118_ADD",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "BID_CEQUIP_2000118_ADD",
+        "stat": "pierce_power_rate",
+        "mode": "up"
       }
     ]
   },

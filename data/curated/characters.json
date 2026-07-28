@@ -4325,6 +4325,23 @@
       }
     ]
   },
+  "2000118": {
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "uGTchAnrzGg",
+        "title": "[OUTERPLANE] Lambda (VA. Erika Harlacher)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2026-07-28T02:39:10Z"
+      }
+    ],
+    "role": "dps",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
   "2000119": {
     "rank": "S",
     "rankPvp": "S",

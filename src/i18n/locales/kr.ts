@@ -349,8 +349,9 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.disclaimer':
     '개발 중 — 데미지 계산기는 현재 개발 중입니다. 기여 요소를 조정하고 장비/버프 지원을 추가하면서 인게임 수치와 차이가 있을 수 있습니다.',
   'tools.damage-calculator.settings.title': '계정 설정',
-  'tools.damage-calculator.settings.subtitle': '기프트는 모든 캐릭터에 공통 적용',
+  'tools.damage-calculator.settings.subtitle': '도감 + 기프트는 모든 캐릭터에 공통 적용',
   'tools.damage-calculator.settings.quirks': '기프트',
+  'tools.damage-calculator.settings.codex': '영웅 도감',
   'tools.damage-calculator.settings.reset': '초기화',
   'tools.damage-calculator.settings.activate_all': '모두 활성화',
   'tools.damage-calculator.settings.quirk_element': '속성',
@@ -472,6 +473,7 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.tab.compare': '3개 빌드 비교',
   // Attacker panel labels
   'tools.damage-calculator.attacker.pick': '딜러를 선택하세요…',
+  'tools.damage-calculator.attacker.affinity': '호감도',
   'tools.damage-calculator.attacker.crit': '치명',
   'tools.damage-calculator.attacker.burst_label': '버스트',
   'tools.damage-calculator.attacker.burst_off': '끄기',

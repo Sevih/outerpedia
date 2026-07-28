@@ -369,8 +369,9 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.disclaimer':
     "En cours de développement — le calculateur est en développement actif. Les résultats peuvent varier par rapport à la valeur du jeu pendant que nous ajustons les contributeurs et ajoutons la prise en charge de l'équipement et des buffs.",
   'tools.damage-calculator.settings.title': 'Paramètres du compte',
-  'tools.damage-calculator.settings.subtitle': 'Quirks partagés entre tous les personnages',
+  'tools.damage-calculator.settings.subtitle': 'Codex + Quirks partagés entre tous les personnages',
   'tools.damage-calculator.settings.quirks': 'Quirks',
+  'tools.damage-calculator.settings.codex': 'Codex des héros',
   'tools.damage-calculator.settings.reset': 'Réinitialiser',
   'tools.damage-calculator.settings.activate_all': 'Tout activer',
   'tools.damage-calculator.settings.quirk_element': 'Élément',
@@ -497,6 +498,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.tab.compare': 'Comparer 3 builds',
   // Attacker panel labels
   'tools.damage-calculator.attacker.pick': 'Choisir un DPS…',
+  'tools.damage-calculator.attacker.affinity': 'Affinité',
   'tools.damage-calculator.attacker.crit': 'Crit',
   'tools.damage-calculator.attacker.burst_label': 'Burst',
   'tools.damage-calculator.attacker.burst_off': 'Désactivé',

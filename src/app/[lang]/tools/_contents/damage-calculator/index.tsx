@@ -22,6 +22,7 @@ import {
 } from '@/lib/data/encounters';
 import { getMonster } from '@/lib/data/monsters';
 import { getTranscendTiers } from '@/lib/data/char-progression';
+import progressionData from '@data/generated/progression.json';
 import { statAt } from '@/lib/monster-stats';
 import { statName } from '@/lib/data/stat-glossary';
 import { dedupSkills } from '@/lib/skill-view';
@@ -655,6 +656,9 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     },
     title: t('tools.damage-calculator'),
     pick: t(k('attacker.pick')),
+    // Affinité (Trust) : 5 paliers de buffs passifs plats, ABSENTS de la fiche
+    // affichée (canal buffValue — vérifié binaire 27/07/2026).
+    affinity: t(k('attacker.affinity')),
     skills: {
       title: t(k('attacker.skill_levels')),
       dmg: t(k('attacker.tag_dmg')),
@@ -664,6 +668,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       title: t(k('settings.title')),
       subtitle: t(k('settings.subtitle')),
       quirks: t(k('settings.quirks')),
+      codex: t(k('settings.codex')),
       reset: t(k('settings.reset')),
       activateAll: t(k('settings.activate_all')),
     },
@@ -741,6 +746,13 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     },
   };
 
+  // Courbe du Codex (archive) : 11 paliers de taux ‰ appliqués sur la stat de
+  // BASE seule, HORS multiplicateur de buffs (CalcFinalStat, spec formule § 3)
+  // — même donnée que la fiche perso (progression.json, extraction directe de
+  // CharacterArchiveStatTemplet).
+  const codexTiers = (progressionData as { codex: { atk: number; def: number; hp: number }[] })
+    .codex;
+
   return (
     <DamageCalculatorBrowser
       chars={chars}
@@ -756,6 +768,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       talismanMains={talismanMains}
       buffOptions={buffOptions}
       quirks={quirks}
+      codexTiers={codexTiers}
       labels={labels}
     />
   );

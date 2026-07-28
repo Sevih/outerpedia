@@ -1,5 +1,29 @@
 [
   {
+    "date": "2026-07-28",
+    "type": "character",
+    "title": {
+      "en": "Lambda",
+      "jp": "ラムダ",
+      "kr": "람다",
+      "zh": "Lambda",
+      "fr": "Lambda"
+    },
+    "content": {
+      "en": ["Lambda has been added to the database with full skills and stats."],
+      "jp": ["Lambdaが、スキルとステータスをすべて含めてデータベースに追加されました。"],
+      "kr": ["람다가 모든 스킬과 능력치를 갖춘 상태로 데이터베이스에 추가되었습니다."],
+      "zh": ["Lambda 已连同其全部技能和属性数据一并添加至数据库中。"],
+      "fr": [
+        "Lambda a été ajouté à la base de données avec l'ensemble de ses compétences et de ses statistiques."
+      ]
+    },
+    "link": {
+      "kind": "character",
+      "slug": "lambda"
+    }
+  },
+  {
     "date": "2026-07-15",
     "type": "guide",
     "title": {
@@ -338,15 +362,19 @@
     "type": "guide",
     "title": {
       "en": "Blazing Knight Meteos",
-      "jp": "火炎の騎士メテウス",
-      "kr": "화염기사 메테우스",
-      "zh": "火焰骑士梅修斯"
+      "jp": "ブレイジング・ナイト メテオス",
+      "kr": "불타는 기사 메테오스",
+      "zh": "烈焰骑士梅特奥斯",
+      "fr": "Meteos, le chevalier flamboyant"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs Blazing Knight Meteos."],
-      "jp": ["次元特異点 火炎の騎士メテウス 攻略ガイド。"],
-      "kr": ["차원 특이점 화염기사 메테우스 공략 가이드."],
-      "zh": ["次元奇点 火焰骑士梅修斯 策略攻略。"]
+      "jp": [
+        "「ディメンショナル・シンギュラリティ」戦略ガイド vs 「ブレイジング・ナイト・メテオス」。"
+      ],
+      "kr": ["‘디멘셔널 싱귤래리티’ 전략 가이드 vs ‘블레이징 나이트 메테오스’."],
+      "zh": ["《维度奇点》攻略指南 vs 《烈焰骑士：Meteos》。"],
+      "fr": ["Guide stratégique de Dimensional Singularity contre Blazing Knight Meteos."]
     },
     "link": {
       "kind": "guide",
@@ -358,15 +386,17 @@
     "type": "guide",
     "title": {
       "en": "Android Sphinx",
-      "jp": "アンドロ・スフィンクス",
-      "kr": "안드로 스핑크스",
-      "zh": "狮身人面像"
+      "jp": "Android スフィンクス",
+      "kr": "안드로이드 스핑크스",
+      "zh": "Android Sphinx",
+      "fr": "Android Sphinx"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs Android Sphinx."],
-      "jp": ["次元特異点 アンドロ・スフィンクス 攻略ガイド。"],
-      "kr": ["차원 특이점 안드로 스핑크스 공략 가이드."],
-      "zh": ["次元奇点 狮身人面像 策略攻略。"]
+      "jp": ["『Dimensional Singularity』攻略ガイド vs Android版『Sphinx』。"],
+      "kr": ["‘Dimensional Singularity’ 전략 가이드 vs Android Sphinx."],
+      "zh": ["《维度奇点》攻略指南 vs Android版《斯芬克斯》。"],
+      "fr": ["Guide stratégique de Dimensional Singularity contre Android Sphinx."]
     },
     "link": {
       "kind": "guide",
@@ -380,13 +410,15 @@
       "en": "VI=E-11-A",
       "jp": "VI=E-11-A",
       "kr": "VI=E-11-A",
-      "zh": "VI=E-11-A"
+      "zh": "VI=E-11-A",
+      "fr": "VI=E-11-A"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs VI=E-11-A."],
-      "jp": ["次元特異点 VI=E-11-A 攻略ガイド。"],
-      "kr": ["차원 특이점 VI=E-11-A 공략 가이드."],
-      "zh": ["次元奇点 VI=E-11-A 策略攻略。"]
+      "jp": ["『ディメンショナル・シンギュラリティ』攻略ガイド vs VI=E-11-A。"],
+      "kr": ["차원 특이점 전략 가이드 vs VI=E-11-A."],
+      "zh": ["《维度奇点》攻略指南 vs VI=E-11-A。"],
+      "fr": ["Guide stratégique de « Dimensional Singularity » contre VI=E-11-A."]
     },
     "link": {
       "kind": "guide",
@@ -1685,15 +1717,19 @@
     "type": "update",
     "title": {
       "en": "Prototype EX-78 Joint Boss",
-      "jp": "試作機:EX-78 共同ボス",
-      "kr": "EX-78 시범기 공동 보스",
-      "fr": "Prototype EX-78 Joint Boss"
+      "jp": "試作機 EX-78 ジョイントボス",
+      "kr": "EX-78 조인트 보스 시제품",
+      "zh": "EX-78 原型机 连接凸台",
+      "fr": "Prototype EX-78 « Joint Boss »"
     },
     "content": {
       "en": ["Prototype EX-78 joint boss updated for October 2025 version."],
-      "jp": ["試作機:EX-78 共同ボスが2025年10月版にアップデートされました。"],
-      "kr": ["EX-78 시범기 공동 보스가 2025년 10월 버전으로 업데이트되었습니다."],
-      "fr": ["Prototype EX-78 joint boss a été mis à jour pour la version d'octobre 2025."]
+      "jp": ["プロトタイプEX-78のジョイントボス部が、2025年10月版に合わせて更新されました。"],
+      "kr": ["EX-78 프로토타입 조인트 보스가 2025년 10월 버전으로 업데이트되었습니다."],
+      "zh": ["EX-78 原型机的接头凸台已针对 2025 年 10 月版进行了更新。"],
+      "fr": [
+        "Mise à jour du bossage d'assemblage du prototype EX-78 pour la version d'octobre 2025."
+      ]
     },
     "link": {
       "kind": "guide",
@@ -1705,15 +1741,19 @@
     "type": "update",
     "title": {
       "en": "The Madman's Laboratory Guild Raid",
-      "jp": "狂人の研究室 ギルドレイド",
-      "kr": "The Madman's Laboratory 길드 레이드",
-      "fr": "The Madman's Laboratory Guild Raid"
+      "jp": "「狂人の実験室」ギルドレイド",
+      "kr": "‘광인의 실험실’ 길드 레이드",
+      "zh": "“疯子实验室”公会团队副本",
+      "fr": "Le raid de guilde « Le laboratoire du fou »"
     },
     "content": {
       "en": ["The Madman's Laboratory guild raid updated for october 2025 version."],
-      "jp": ["狂人の研究室 ギルドレイドが2025年10月版にアップデートされました。"],
-      "kr": ["The Madman's Laboratory 길드 레이드가 2025년 10월 버전으로 업데이트되었습니다."],
-      "fr": ["The Madman's Laboratory guild raid a été mis à jour pour la version d'octobre 2025."]
+      "jp": ["ギルドレイド「狂人の実験室」が、2025年10月版に更新されました。"],
+      "kr": ["‘광인의 실험실’ 길드 레이드가 2025년 10월 버전으로 업데이트되었습니다."],
+      "zh": ["“疯子实验室”公会团队副本已更新至2025年10月版本。"],
+      "fr": [
+        "Le raid de guilde « Le laboratoire du fou » a été mis à jour pour la version d'octobre 2025."
+      ]
     },
     "link": {
       "kind": "guide",
@@ -1725,22 +1765,24 @@
     "type": "character",
     "title": {
       "en": "New Hero Viella",
-      "jp": "新ヒーロー ビエラ",
-      "kr": "신규 영웅 비엘라",
-      "fr": "Nouvelle héroïne Viella"
+      "jp": "新ヒーロー「ヴィエラ」",
+      "kr": "새로운 영웅 비엘라",
+      "zh": "新英雄维埃拉",
+      "fr": "Nouvelle héroïne : Viella"
     },
     "content": {
       "en": [
         "Viella, who grants immunity to allies and increases the team's overall damage through Poison, is now underway."
       ],
       "jp": [
-        "味方に免疫を付与し、毒を通じてチーム全体のダメージを増加させるビエラが登場しました。"
+        "味方に免疫を付与し、毒の効果でチーム全体のダメージを向上させるヴィエラの登場が、現在進行中です。"
       ],
       "kr": [
-        "아군에게 면역을 부여하고 독을 통해 팀 전체의 데미지를 증가시키는 비엘라가 등장했습니다."
+        "아군에게 면역 효과를 부여하고 ‘독’ 효과를 통해 팀의 전체 대미지를 증가시키는 비엘라의 업데이트가 현재 진행 중입니다."
       ],
+      "zh": ["维埃拉——这位能为盟友提供免疫效果，并通过“毒”效果提升团队整体伤害的英雄——现已上线。"],
       "fr": [
-        "Viella, qui accorde Immunity à ses alliés et augmente les dégâts globaux de l'équipe grâce à Poison, est désormais en route."
+        "Viella, qui confère l'immunité à ses alliés et augmente les dégâts globaux de l'équipe grâce à l'effet « Poison », est désormais disponible."
       ]
     },
     "link": {
@@ -1753,9 +1795,10 @@
     "type": "feature",
     "title": {
       "en": "Most Used Units in Guides",
-      "jp": "ガイドで最も使用されているユニット",
-      "kr": "가이드에서 가장 많이 사용되는 유닛",
-      "fr": "Most Used Units in Guides"
+      "jp": "ガイドで最もよく使われる単位",
+      "kr": "가이드에서 가장 많이 사용되는 단위",
+      "zh": "指南中最常用的单位",
+      "fr": "Unités les plus utilisées dans les guides"
     },
     "content": {
       "en": [
@@ -1764,19 +1807,24 @@
         "🆓 **Free Unit tag** now available on character pages and tier lists."
       ],
       "jp": [
-        "🔍 **新ツール公開** – すべてのOuterpediaガイドで最も頻繁に推奨されているヒーローを発見しましょう。",
-        "🎯 カテゴリー、属性、クラス、レアリティでフィルタリングし、限定ユニットを切り替えることができます。",
-        "🆓 **無料ユニットタグ**がキャラクターページとティアリストで利用可能になりました。"
+        "🔍 **新ツールが登場** – すべてのOuterpediaガイドを通じて、どのヒーローが最も頻繁に推奨されているかを確認しましょう。",
+        "🎯 カテゴリ、要素、クラス、レア度で絞り込み、入手数が限られているアイテムの表示を切り替えることができます。",
+        "🆓 **無料ユニットタグ**が、キャラクターページやティアリストで利用可能になりました。"
       ],
       "kr": [
-        "🔍 **새로운 도구 출시** – 모든 Outerpedia 가이드에서 가장 자주 추천되는 영웅을 찾아보세요.",
-        "🎯 카테고리, 속성, 클래스, 레어도로 필터링하고 한정 유닛을 전환할 수 있습니다.",
-        "🆓 **무료 유닛 태그**가 캐릭터 페이지와 티어 리스트에서 이용 가능합니다."
+        "🔍 **새로운 도구 출시** – 모든 Outerpedia 가이드에서 가장 자주 추천되는 영웅이 누구인지 확인해 보세요.",
+        "🎯 카테고리, 요소, 클래스, 희귀도별로 필터링하고, 한정 아이템 표시 여부를 전환할 수 있습니다.",
+        "🆓 **무료 유닛 태그**가 이제 캐릭터 페이지와 티어 리스트에서 이용 가능합니다."
+      ],
+      "zh": [
+        "🔍 **新工具上线** – 了解在所有Outerpedia攻略中被推荐次数最多的英雄有哪些。",
+        "🎯 可按类别、元素、职业、稀有度进行筛选，并可切换“数量有限”选项。",
+        "🆓 **免费单位标签** 现已在角色页面和等级列表中上线。"
       ],
       "fr": [
-        "🔍 **Nouvel outil disponible** — Découvrez quels héros sont le plus souvent recommandés dans l'ensemble des guides Outerpedia.",
-        "🎯 Filtrez par catégorie, élément, classe, rareté, et activez le toggle pour les unités limited.",
-        "🆓 Le tag **Free Unit** est désormais disponible sur les pages personnage et les tier lists."
+        "🔍 **Nouvel outil disponible** – Découvrez quels héros sont les plus souvent recommandés dans tous les guides d'Outerpedia.",
+        "🎯 Filtrez par catégorie, élément, classe, rareté et activez/désactivez l'affichage des unités en quantité limitée.",
+        "🆓 **Étiquette « Unité gratuite »** désormais disponible sur les pages des personnages et dans les classements."
       ]
     },
     "link": {
@@ -1789,9 +1837,10 @@
     "type": "update",
     "title": {
       "en": "Outerpedia Update – October 2025",
-      "jp": "Outerpediaアップデート – 2025年10月",
+      "jp": "Outerpediaの最新情報 – 2025年10月",
       "kr": "Outerpedia 업데이트 – 2025년 10월",
-      "fr": "Mise à jour Outerpedia — Octobre 2025"
+      "zh": "《Outerpedia》更新——2025年10月",
+      "fr": "Mise à jour d'Outerpedia – octobre 2025"
     },
     "content": {
       "en": [
@@ -1800,19 +1849,24 @@
         "⚔️ **Equipment Overhaul** – Complete visual rework of the database pages for a cleaner, unified look."
       ],
       "jp": [
-        "**アイテムページ**と**多言語対応**に焦点を当てた大型アップデート！",
-        "🌍 **多言語拡張** – すべてのアイテムページ（武器・アクセサリー・セット）が**英語・日本語・韓国語**に完全対応しました。",
-        "⚔️ **装備リニューアル** – データベースページのデザインを全面的に一新し、より統一感のあるビジュアルに。"
+        "**アイテムページ**と**多言語対応**に焦点を当てた大規模なアップデートです！",
+        "🌍 **多言語対応の拡大** – すべてのアイテムページ（武器、アクセサリー、セット）が、**英語、日本語、韓国語**で完全に利用可能になりました。",
+        "⚔️ **装備の全面見直し** – データベースページのビジュアルを全面的に刷新し、よりすっきりとした統一感のあるデザインにしました。"
       ],
       "kr": [
-        "**아이템 페이지**와 **다국어 지원**에 초점을 맞춘 대형 업데이트!",
-        "🌍 **다국어 확장** – 모든 아이템 페이지(무기, 액세서리, 세트)가 이제 **영어, 일본어, 한국어**로 완전히 제공됩니다.",
-        "⚔️ **장비 개편** – 데이터베이스 페이지의 비주얼을 전면적으로 새롭게 개선했습니다."
+        "**아이템 페이지**와 **다국어 지원**에 중점을 둔 대규모 업데이트입니다!",
+        "🌍 **다국어 지원 확대** – 모든 아이템 페이지(무기, 액세서리, 세트)가 이제 **영어, 일본어, 한국어**로 완벽하게 제공됩니다.",
+        "⚔️ **장비 전면 개편** – 데이터베이스 페이지를 시각적으로 전면 개편하여 더 깔끔하고 통일감 있는 디자인을 구현했습니다."
+      ],
+      "zh": [
+        "本次重大更新重点关注了**商品详情页**和**多语言支持**！",
+        "🌍 **多语言扩展** – 所有物品页面（武器、饰品、套装）现已全面支持 **英语、日语和韩语**。",
+        "⚔️ **设备大修** – 对数据库页面进行了全面的视觉重构，以呈现更简洁、统一的视觉效果。"
       ],
       "fr": [
-        "Une grosse mise à jour centrée sur les **pages d'items** et le **support multilingue** !",
-        "🌍 **Extension multilingue** — Toutes les pages d'items (Weapons, Accessories, Sets) sont désormais entièrement disponibles en **anglais, japonais et coréen**.",
-        "⚔️ **Refonte de l'équipement** — Refonte visuelle complète des pages de la base de données pour un rendu plus propre et unifié."
+        "Une mise à jour majeure axée sur les **fiches produits** et la **prise en charge multilingue** !",
+        "🌍 **Déploiement multilingue** – Toutes les pages d'objets (armes, accessoires, ensembles) sont désormais entièrement disponibles en **anglais, japonais et coréen**.",
+        "⚔️ **Refonte de l'interface** – Refonte visuelle complète des pages de la base de données pour un aspect plus épuré et harmonisé."
       ]
     }
   },
@@ -1821,9 +1875,10 @@
     "type": "character",
     "title": {
       "en": "New Hero Summer Knight's Dream Ember",
-      "jp": "新ヒーロー Summer Knight's Dream Ember",
-      "kr": "신규 영웅 Summer Knight's Dream Ember",
-      "fr": "Nouvelle héroïne Summer Knight's Dream Ember"
+      "jp": "新ヒーロー「サマーナイト」の「ドリーム・エンバー」",
+      "kr": "신규 영웅 ‘여름의 기사’의 꿈의 불씨",
+      "zh": "新英雄“夏日骑士”的“梦之余烬”",
+      "fr": "Nouveau héros : « Summer Knight's Dream Ember »"
     },
     "content": {
       "en": [
@@ -1831,16 +1886,20 @@
         "She inflicts **fixed damage on bosses** and grants **Penetration** and **Priority** buffs to her allies."
       ],
       "jp": [
-        "季節限定ヒーロー **Summer Knight's Dream Ember** がOUTERPLANEに登場！",
-        "ボスに**固定ダメージ**を与え、味方に**貫通**と**優先権**バフを付与します。"
+        "季節限定ヒーロー「**サマーナイトの夢の焔**」がOUTERPLANEに登場しました！",
+        "彼女は**ボスに固定ダメージを与える**ほか、味方に**貫通**と**優先度**のバフを付与する。"
       ],
       "kr": [
-        "시즌 한정 영웅 **Summer Knight's Dream Ember** 가 OUTERPLANE에 등장했습니다!",
-        "보스에게 **고정 피해**를 입히고 아군에게 **관통** 및 **우선권** 버프를 부여합니다."
+        "시즌 한정 영웅 **여름 기사의 꿈의 불씨**가 OUTERPLANE에 등장했습니다!",
+        "그녀는 **보스에게 고정 피해를 입히며**, 아군에게 **관통력**과 **우선 공격권** 버프를 부여합니다."
+      ],
+      "zh": [
+        "季节限定英雄 **夏日骑士的梦之余烬** 现已登陆 OUTERPLANE！",
+        "她会对**BOSS造成固定伤害**，并为队友提供**穿透**和**优先攻击**增益效果。"
       ],
       "fr": [
-        "L'héroïne Limited saisonnière **Summer Knight's Dream Ember** est arrivée dans OUTERPLANE !",
-        "Elle inflige des **fixed damage aux Boss** et accorde des buffs de **Penetration** et **Priority** à ses alliés."
+        "Le héros en édition limitée saisonnière **Summer Knight's Dream Ember** fait son apparition dans OUTERPLANE !",
+        "Elle inflige **des dégâts fixes aux boss** et confère à ses alliés les bonus **Pénétration** et **Priorité**."
       ]
     },
     "link": {
@@ -1853,9 +1912,10 @@
     "type": "update",
     "title": {
       "en": "Multilingual support (WIP)",
-      "jp": "多言語対応（進行中）",
-      "kr": "다국어 지원(진행 중)",
-      "fr": "Support multilingue (WIP)"
+      "jp": "多言語対応（開発中）",
+      "kr": "다국어 지원 (개발 중)",
+      "zh": "多语言支持（开发中）",
+      "fr": "Prise en charge multilingue (en cours de développement)"
     },
     "content": {
       "en": [
@@ -1864,19 +1924,24 @@
         "Work in progress. Please report issues on Discord."
       ],
       "jp": [
-        "多言語対応の実装を開始しました。ヘッダーに**言語**セレクターを追加し、切り替えても現在のページを維持します（en/jp/kr）。",
-        "まずはホームページのSEOと変更履歴でローカライズを公開しました。ほかのページも順次対応します。",
-        "作業中のため、一部のテキストは英語のままです。問題があればDiscordでお知らせください。"
+        "多言語対応の実装を開始しました。ヘッダーに**言語**セレクターが追加され、切り替え時（en/jp/kr）でも現在のページが維持されるようになりました。",
+        "ホームページのSEO対策および変更履歴の初期ローカライズ版が公開されました。その他のページについても順次公開していく予定です。",
+        "現在開発中です。不具合はDiscordまでご報告ください。"
       ],
       "kr": [
-        "다국어 지원 구현을 시작했습니다. 헤더에 **언어** 선택기가 추가되었고 전환 시 현재 페이지를 유지합니다(en/jp/kr).",
-        "첫 로컬라이제이션은 홈페이지 SEO와 변경 로그에 적용되었습니다. 다른 페이지도 순차적으로 적용됩니다.",
-        "작업 진행 중이므로 일부 텍스트는 아직 영어입니다. 문제는 Discord로 알려 주세요."
+        "다국어 지원 기능을 구현하기 시작했습니다. 이제 헤더에 **언어** 선택기가 추가되었으며, 언어를 전환할 때(en/jp/kr) 현재 보고 있는 페이지가 유지됩니다.",
+        "홈페이지 SEO 및 변경 내역에 대한 초기 현지화 작업이 완료되었습니다. 향후 더 많은 페이지가 순차적으로 공개될 예정입니다.",
+        "현재 작업 중입니다. 문제가 있으면 Discord에 알려주세요."
+      ],
+      "zh": [
+        "已开始实现多语言支持。页眉处现已提供**语言**选择器，切换语言时（en/jp/kr）当前页面将保持不变。",
+        "首页的SEO内容和更新日志的初步本地化工作现已上线。更多页面将陆续推出。",
+        "正在开发中。如有问题，请在 Discord 上反馈。"
       ],
       "fr": [
-        "Le support multilingue commence à être implémenté. Un sélecteur de **Language** est désormais disponible dans le header et conserve votre page actuelle lors du changement (en/jp/kr).",
-        "La localisation initiale est en ligne pour le SEO de la homepage et le changelog. D'autres pages seront déployées progressivement.",
-        "Travail en cours. Merci de signaler les problèmes sur Discord."
+        "Nous avons commencé à mettre en place la prise en charge multilingue. Un sélecteur de **langue** est désormais disponible dans l'en-tête et permet de conserver la page sur laquelle vous vous trouvez lorsque vous changez de langue (en/jp/kr).",
+        "La localisation initiale est désormais disponible pour le référencement de la page d'accueil et le journal des modifications. D'autres pages seront mises en ligne progressivement.",
+        "Travaux en cours. Merci de signaler tout problème sur Discord."
       ]
     }
   },
@@ -1885,16 +1950,31 @@
     "type": "feature",
     "title": {
       "en": "Gacha Pull Simulator & Utilities rename",
-      "fr": "Gacha Pull Simulator & renommage des Utilities"
+      "jp": "ガチャ引きシミュレーター＆ユーティリティの名称変更",
+      "kr": "가챠 뽑기 시뮬레이터 및 유틸리티 이름 변경",
+      "zh": "抽卡模拟器及实用工具重命名",
+      "fr": "Simulateur de tirages Gacha et utilitaires de changement de nom"
     },
     "content": {
       "en": [
         "New **Gacha Pull Simulator**: simulate Rate Up, Premium, and Limited banners with the mileage system.",
         "Renamed the **Tools** category to **Utilities** (URL stays `/tools`) and aligned page metadata for SEO."
       ],
+      "jp": [
+        "新登場の**ガチャシミュレーター**：マイルシステムを使って、レートアップ、プレミアム、限定バナーをシミュレートできます。",
+        "**「Tools」**カテゴリの名称を**「Utilities」**に変更し（URLは引き続き `/tools` のまま）、SEO対策のためにページのメタデータを調整しました。"
+      ],
+      "kr": [
+        "새로운 **가챠 시뮬레이터**: 마일리지 시스템을 통해 확률 상승, 프리미엄, 한정 배너를 시뮬레이션해 보세요.",
+        "**도구** 카테고리의 이름을 **유틸리티**로 변경했으며(URL은 `/tools`로 유지), SEO를 위해 페이지 메타데이터를 조정했습니다."
+      ],
+      "zh": [
+        "全新**抽卡模拟器**：通过里程系统模拟“抽卡率提升”、“高级抽卡”和“限时卡池”。",
+        "将**“工具”**分类更名为**“实用工具”**（URL仍为 `/tools`），并优化了页面元数据以提升搜索引擎优化效果。"
+      ],
       "fr": [
-        "Nouveau **Gacha Pull Simulator** : simulez les banners Rate Up, Premium et Limited avec le système de Mileage.",
-        "La catégorie **Tools** a été renommée en **Utilities** (l'URL reste `/tools`) et les métadonnées des pages alignées pour le SEO."
+        "Nouveau **Simulateur de tirages Gacha** : simulez les bannières « Rate Up », « Premium » et « Limited » grâce au système de points.",
+        "La catégorie **Outils** a été renommée **Utilitaires** (l'URL reste `/tools`) et les métadonnées de la page ont été optimisées pour le référencement."
       ]
     },
     "link": {
@@ -1907,14 +1987,22 @@
     "type": "feature",
     "title": {
       "en": "Official Video",
+      "jp": "公式動画",
+      "kr": "공식 영상",
+      "zh": "官方视频",
       "fr": "Vidéo officielle"
     },
     "content": {
       "en": [
         "Official YouTube videos are now embedded on character detail pages (when available)."
       ],
+      "jp": [
+        "キャラクター詳細ページに、公式YouTube動画が埋め込まれるようになりました（利用可能な場合）。"
+      ],
+      "kr": ["이제 캐릭터 상세 페이지에 공식 유튜브 동영상이 삽입됩니다(동영상이 있는 경우)."],
+      "zh": ["角色详情页现已嵌入官方 YouTube 视频（如有）。"],
       "fr": [
-        "Les vidéos YouTube officielles sont désormais intégrées sur les pages de détail des personnages (quand disponibles)."
+        "Les vidéos YouTube officielles sont désormais intégrées aux pages de présentation des personnages (lorsqu'elles sont disponibles)."
       ]
     }
   },
@@ -1923,14 +2011,26 @@
     "type": "feature",
     "title": {
       "en": "Ether Income Guide",
-      "fr": "Guide Ether Income"
+      "jp": "イーサリアム収入ガイド",
+      "kr": "이더리움 수익 창출 가이드",
+      "zh": "以太坊收益指南",
+      "fr": "Guide sur les revenus en Ether"
     },
     "content": {
       "en": [
         "Added the **Ether Income Guide**: overview of all regular and variable sources of Ether in Outerplane, with daily, weekly, and monthly totals."
       ],
+      "jp": [
+        "**「イーサ収入ガイド」**を追加しました。これは、『Outerplane』におけるすべての定期的および変動的なイーサの入手源の概要であり、日次、週次、月次の合計額も記載されています。"
+      ],
+      "kr": [
+        "**이더 수익 가이드**를 추가했습니다: ‘아우터플레인’ 내 모든 정기적 및 변동적 이더 수익원에 대한 개요와 일별, 주별, 월별 총액을 확인할 수 있습니다."
+      ],
+      "zh": [
+        "新增了**以太币收入指南**：概述了《Outerplane》中所有固定和可变的以太币来源，并列出了每日、每周和每月的总收入。"
+      ],
       "fr": [
-        "Ajout du **guide Ether Income** : vue d'ensemble de toutes les sources régulières et variables d'Ether dans Outerplane, avec totaux journaliers, hebdomadaires et mensuels."
+        "Ajout du **Guide des revenus en Ether** : aperçu de toutes les sources régulières et variables d'Ether dans Outerplane, avec les totaux quotidiens, hebdomadaires et mensuels."
       ]
     },
     "link": {
@@ -1943,14 +2043,24 @@
     "type": "feature",
     "title": {
       "en": "Premium & Limited Guide",
-      "fr": "Guide Premium & Limited"
+      "jp": "プレミアム＆限定ガイド",
+      "kr": "프리미엄 및 한정판 가이드",
+      "zh": "高级与限量版指南",
+      "fr": "Guide « Premium » et « Édition limitée »"
     },
     "content": {
       "en": [
         "Added the **Premium & Limited Guide**: Quick recommendations for Premium and Limited banners."
       ],
+      "jp": [
+        "**「プレミアム＆リミテッドガイド」**を追加しました：プレミアムおよびリミテッドバナーに関する簡単なおすすめ情報です。"
+      ],
+      "kr": [
+        "**프리미엄 및 한정 가이드**를 추가했습니다: 프리미엄 및 한정 배너에 대한 간단한 추천 정보입니다."
+      ],
+      "zh": ["新增了**“高级与限时指南”**：针对高级和限时横幅的快速推荐。"],
       "fr": [
-        "Ajout du **guide Premium & Limited** : recommandations rapides pour les banners Premium et Limited."
+        "Ajout du **Guide Premium et Éditions limitées** : recommandations rapides pour les bannières Premium et Éditions limitées."
       ]
     },
     "link": {
@@ -1963,7 +2073,10 @@
     "type": "feature",
     "title": {
       "en": "Skyward Tower Guide, Tags & Roles Filters",
-      "fr": "Guide Skyward Tower, filtres Tags & Roles"
+      "jp": "スカイワード・タワー ガイド、タグ、役割フィルター",
+      "kr": "스카이워드 타워 가이드, 태그 및 역할 필터",
+      "zh": "《天际塔》攻略、标签与角色筛选器",
+      "fr": "Guide de la Tour Céleste, filtres par mots-clés et rôles"
     },
     "content": {
       "en": [
@@ -1972,11 +2085,29 @@
         "Introduced role filters on the character list",
         "Improved character sorting and browsing with the new filters"
       ],
+      "jp": [
+        "**「スカイワード・タワーガイド」**を追加しました",
+        "キャラクター一覧にタグフィルターを導入しました",
+        "キャラクター一覧に「役割」フィルターを追加しました",
+        "新しいフィルター機能により、キャラクターの並べ替えと閲覧機能が向上しました"
+      ],
+      "kr": [
+        "**스카이워드 타워 가이드**를 추가했습니다.",
+        "캐릭터 목록에 태그 필터 기능을 추가했습니다",
+        "캐릭터 목록에 역할 필터 기능을 추가했습니다",
+        "새로운 필터 기능을 통해 캐릭터 정렬 및 탐색 기능이 개선되었습니다."
+      ],
+      "zh": [
+        "新增了**《天际塔攻略》**",
+        "在角色列表中引入了标签过滤器",
+        "在角色列表中引入了职业筛选功能",
+        "借助新筛选器，角色排序和浏览功能得到优化"
+      ],
       "fr": [
-        "Ajout du **guide Skyward Tower**",
-        "Introduction des filtres tag dans la liste des personnages",
-        "Introduction des filtres role dans la liste des personnages",
-        "Amélioration du tri et de la navigation des personnages grâce aux nouveaux filtres"
+        "Ajout du **Guide de la Tour Céleste**",
+        "Ajout de filtres par balise dans la liste des personnages",
+        "Ajout de filtres par rôle dans la liste des personnages",
+        "Amélioration du tri et de la navigation parmi les personnages grâce aux nouveaux filtres"
       ]
     },
     "link": {
@@ -1989,16 +2120,31 @@
     "type": "feature",
     "title": {
       "en": "Sharable Character Filters",
-      "fr": "Filtres de personnage partageables"
+      "jp": "共有可能な文字フィルター",
+      "kr": "공유 가능한 문자 필터",
+      "zh": "可共享的角色筛选器",
+      "fr": "Filtres de caractères partageables"
     },
     "content": {
       "en": [
         "Character page filters (element, class, rarity, buffs/debuffs, etc.) are now encoded in the URL.",
         "You can copy and share the link to directly show your filtered characters to others."
       ],
+      "jp": [
+        "キャラクターページのフィルター（要素、クラス、レア度、バフ／デバフなど）が、URLにエンコードされるようになりました。",
+        "リンクをコピーして共有すれば、フィルタリングしたキャラクターを直接他の人に表示させることができます。"
+      ],
+      "kr": [
+        "캐릭터 페이지 필터(요소, 클래스, 희귀도, 버프/디버프 등)가 이제 URL에 포함됩니다.",
+        "링크를 복사하여 공유하면, 필터링된 캐릭터를 다른 사람들에게 바로 보여줄 수 있습니다."
+      ],
+      "zh": [
+        "角色页面筛选条件（元素、职业、稀有度、增益/减益效果等）现已编码到URL中。",
+        "您可以复制并分享该链接，直接向他人展示您筛选出的角色。"
+      ],
       "fr": [
-        "Les filtres de la page personnages (élément, classe, rareté, buffs/debuffs, etc.) sont désormais encodés dans l'URL.",
-        "Vous pouvez copier et partager le lien pour montrer directement vos personnages filtrés à d'autres."
+        "Les filtres de la page des personnages (élément, classe, rareté, bonus/malus, etc.) sont désormais intégrés dans l'URL.",
+        "Vous pouvez copier et partager le lien pour montrer directement vos personnages filtrés à d'autres personnes."
       ]
     },
     "link": {
@@ -2011,14 +2157,26 @@
     "type": "feature",
     "title": {
       "en": "Shop Guide Release",
-      "fr": "Sortie du guide Shop"
+      "jp": "ショップガイドの公開",
+      "kr": "쇼핑 가이드 출시",
+      "zh": "《购物指南》发布",
+      "fr": "Sortie du guide d'achat"
     },
     "content": {
       "en": [
         "Outerplane **shop guide** with purchase priorities — best items to buy, what to skip, and how to spend currencies wisely."
       ],
+      "jp": [
+        "アウタープレーンの**ショップガイド**：購入の優先順位 — 買うべきおすすめアイテム、避けるべきアイテム、そして通貨の賢い使い方。"
+      ],
+      "kr": [
+        "아웃터플레인 **상점 가이드**: 구매 우선순위 — 꼭 사야 할 아이템, 건너뛸 아이템, 그리고 화폐를 현명하게 사용하는 방법."
+      ],
+      "zh": [
+        "《外域》**购物指南**：购买优先级——最值得购买的物品、可跳过的项目，以及如何明智地使用货币。"
+      ],
       "fr": [
-        "**Guide shop** d'Outerplane avec priorités d'achat — quels items acheter, lesquels éviter et comment dépenser vos monnaies intelligemment."
+        "**Guide d'achat** d'Outerplane avec les priorités d'achat — les meilleurs objets à acheter, ceux à éviter et comment dépenser judicieusement vos devises."
       ]
     },
     "link": {
@@ -2031,11 +2189,17 @@
     "type": "update",
     "title": {
       "en": "Shichifuja Update",
-      "fr": "Mise à jour Shichifuja"
+      "jp": "七藤の最新情報",
+      "kr": "시치후자 최신 소식",
+      "zh": "七七冤家最新动态",
+      "fr": "Actualités Shichifuja"
     },
     "content": {
       "en": ["Joint boss Shichifuja has been updated for August 2025 version."],
-      "fr": ["Le Boss Joint Shichifuja a été mis à jour pour la version d'août 2025."]
+      "jp": ["共同ボス「七藤」が、2025年8月版に更新されました。"],
+      "kr": ["공동 보스 시치후자가 2025년 8월 버전으로 업데이트되었습니다."],
+      "zh": ["联合首领“七藤”已更新至2025年8月版本。"],
+      "fr": ["Le boss Shichifuja a été mis à jour pour la version d'août 2025."]
     },
     "link": {
       "kind": "guide",
@@ -2047,11 +2211,17 @@
     "type": "update",
     "title": {
       "en": "Planetary Control Unit Guild Raid",
-      "fr": "Planetary Control Unit Guild Raid"
+      "jp": "惑星制御ユニット ギルドレイド",
+      "kr": "행성 제어 장치 길드 레이드",
+      "zh": "行星控制单元公会团队副本",
+      "fr": "Raid de guilde « Unité de contrôle planétaire »"
     },
     "content": {
       "en": ["Planetary Control Unit Guild Raid Guide release."],
-      "fr": ["Sortie du guide Guild Raid Planetary Control Unit."]
+      "jp": ["「プラネタリー・コントロール・ユニット」ギルドレイドガイドを公開しました。"],
+      "kr": ["행성 제어 장치 길드 레이드 가이드 공개."],
+      "zh": ["《行星控制单元》公会团队副本攻略发布。"],
+      "fr": ["Sortie du guide des raids de guilde « Planetary Control Unit »."]
     },
     "link": {
       "kind": "guide",
@@ -2063,7 +2233,10 @@
     "type": "update",
     "title": {
       "en": "OUTERPLANE Service Transfer to VAGAMES",
-      "fr": "Transfert de service d'OUTERPLANE vers VAGAMES"
+      "jp": "OUTERPLANEのサービスがVAGAMESに移管されました",
+      "kr": "OUTERPLANE 서비스, VAGAMES로 이전",
+      "zh": "OUTERPLANE 服务移交至 VAGAMES",
+      "fr": "Transfert du service OUTERPLANE vers VAGAMES"
     },
     "content": {
       "en": [
@@ -2071,10 +2244,25 @@
         "Make sure to complete the transfer process to keep your account and data.",
         "[View Transfer Procedure](/guides/other/service-transfer)"
       ],
+      "jp": [
+        "📢 <strong>サービス移管のお知らせ：</strong> OUTERPLANEは、<strong>2025年9月23日</strong>に<strong>VAGAMES</strong>へ移管されます。",
+        "アカウントとデータを維持するためには、必ず移行手続きを完了させてください。",
+        "[移転手続きを見る](/guides/other/service-transfer)"
+      ],
+      "kr": [
+        "📢 <strong>서비스 이전 안내: </strong> OUTERPLANE은 <strong>2025년 9월 23일</strong>에 <strong>VAGAMES</strong>로 이전됩니다.",
+        "계정과 데이터를 유지하려면 반드시 이전 절차를 완료해 주세요.",
+        "[이전 절차 보기](/guides/other/service-transfer)"
+      ],
+      "zh": [
+        "📢 <strong>服务转移通知：</strong> OUTERPLANE 将于 <strong>2025年9月23日</strong> 转移至 <strong>VAGAMES</strong>。",
+        "请务必完成转移流程，以确保您的账户和数据得以保留。",
+        "[查看转移流程](/guides/other/service-transfer)"
+      ],
       "fr": [
-        "📢 <strong>Transfert de service à venir :</strong> OUTERPLANE va être transféré vers <strong>VAGAMES</strong> le <strong>23 septembre 2025</strong>.",
-        "Assurez-vous de compléter la procédure de transfert pour conserver votre compte et vos données.",
-        "[Voir la procédure de transfert](/guides/other/service-transfer)"
+        "📢 <strong>Transfert de service à venir : </strong> OUTERPLANE sera transféré vers <strong>VAGAMES</strong> le <strong>23 septembre 2025</strong>.",
+        "Veillez à mener à bien la procédure de transfert afin de conserver votre compte et vos données.",
+        "[Consulter la procédure de transfert](/guides/other/service-transfer)"
       ]
     }
   },
@@ -2083,14 +2271,24 @@
     "type": "feature",
     "title": {
       "en": "Timegated Resources Guide",
-      "fr": "Guide des ressources timegated"
+      "jp": "タイムゲート付きリソースガイド",
+      "kr": "시간 제한 자원 안내서",
+      "zh": "《时间门限资源指南》",
+      "fr": "Guide des ressources à durée limitée"
     },
     "content": {
       "en": [
         "Complete guide to Outerplane’s timegated resources — skill books, transistones, special gear materials, and glunite sources."
       ],
+      "jp": [
+        "アウタープレーンの時間制限付き資源――スキルブック、トランジストーン、特殊装備の素材、グルナイトの入手源――に関する完全ガイド。"
+      ],
+      "kr": [
+        "아우터플레인의 시간 제한 자원(스킬 서적, 트랜지스톤, 특수 장비 제작 재료, 글루나이트 원료)에 대한 완전한 가이드."
+      ],
+      "zh": ["《Outerplane》时间门限资源完整指南——技能书、晶石、特殊装备材料及格鲁尼特来源。"],
       "fr": [
-        "Guide complet des ressources timegated d'Outerplane — skill books, transistones, matériaux d'équipement spéciaux et sources de glunite."
+        "Guide complet des ressources à durée limitée d'Outerplane : livres de compétences, transistones, matériaux d'équipement spéciaux et sources de glunite."
       ]
     },
     "link": {
@@ -2103,11 +2301,19 @@
     "type": "update",
     "title": {
       "en": "Revenant Dragon Harshna update",
-      "fr": "Mise à jour Revenant Dragon Harshna"
+      "jp": "リヴェナント・ドラゴン「ハルシュナ」のアップデート",
+      "kr": "리버넌트 드래곤 하르슈나 업데이트",
+      "zh": "“复仇之龙哈什纳”更新",
+      "fr": "Mise à jour concernant le dragon revenant Harshna"
     },
     "content": {
       "en": ["Guide is up to date for july 2025 version. Learn More"],
-      "fr": ["Le guide est à jour pour la version de juillet 2025. En savoir plus"]
+      "jp": ["このガイドは2025年7月版に更新されています。詳細はこちら"],
+      "kr": [
+        "이 가이드는 2025년 7월 버전을 기준으로 최신 정보로 업데이트되었습니다. 자세히 알아보기"
+      ],
+      "zh": ["本指南已更新至2025年7月版。了解更多"],
+      "fr": ["Ce guide est à jour pour la version de juillet 2025. En savoir plus"]
     },
     "link": {
       "kind": "guide",
@@ -2119,14 +2325,24 @@
     "type": "character",
     "title": {
       "en": "New Hero Fran",
-      "fr": "Nouvelle héroïne Fran"
+      "jp": "新ヒーロー「フラン」",
+      "kr": "새로운 영웅 프란",
+      "zh": "新英雄弗兰",
+      "fr": "Fran, la nouvelle héroïne"
     },
     "content": {
       "en": [
         "Fran, a genius gamer who grants Counterattack to all allies and reduces all of the Unique Resource count on the target."
       ],
+      "jp": [
+        "フランは、すべての味方に「反撃」を付与し、対象のすべてのユニークリソースの数を減少させる、天才ゲーマーである。"
+      ],
+      "kr": [
+        "프란은 모든 아군에게 ‘반격’ 효과를 부여하고, 대상의 모든 고유 자원 수치를 감소시키는 천재 게이머입니다."
+      ],
+      "zh": ["弗兰，一位天才玩家，能为所有盟友赋予“反击”效果，并减少目标身上所有独特资源的数量。"],
       "fr": [
-        "Fran, une gameuse de génie qui accorde Counterattack à tous les alliés et réduit le compteur de Ressource Unique sur la cible."
+        "Fran, une joueuse de génie qui confère « Contre-attaque » à tous ses alliés et réduit le nombre total de ressources uniques de la cible."
       ]
     },
     "link": {
@@ -2139,11 +2355,19 @@
     "type": "update",
     "title": {
       "en": "Deep Sea Guardian Update",
-      "fr": "Mise à jour Deep Sea Guardian"
+      "jp": "『ディープ・シー・ガーディアン』最新情報",
+      "kr": "‘딥 시 가디언’ 업데이트",
+      "zh": "《深海守护者》更新",
+      "fr": "Mise à jour sur « Deep Sea Guardian »"
     },
     "content": {
       "en": ["Joint boss Deep Sea Guardian has been updated for July 2025 version."],
-      "fr": ["Le Boss Joint Deep Sea Guardian a été mis à jour pour la version de juillet 2025."]
+      "jp": ["ボス「ディープ・シー・ガーディアン」が、2025年7月版に更新されました。"],
+      "kr": ["공동 보스 ‘딥 씨 가디언’이 2025년 7월 버전으로 업데이트되었습니다."],
+      "zh": ["联合BOSS“深海守护者”已更新至2025年7月版本。"],
+      "fr": [
+        "Le boss « Joint » de Deep Sea Guardian a été mis à jour pour la version de juillet 2025."
+      ]
     },
     "link": {
       "kind": "guide",
@@ -2155,11 +2379,17 @@
     "type": "update",
     "title": {
       "en": "Dignity of the Golden Kingdom Guild Raid",
-      "fr": "Dignity of the Golden Kingdom Guild Raid"
+      "jp": "「黄金の王国」ギルドレイドの尊厳",
+      "kr": "황금 왕국 길드 레이드의 위엄",
+      "zh": "“黄金王国”公会团队副本：尊严",
+      "fr": "Raid de la guilde « Dignité du Royaume d’Or »"
     },
     "content": {
       "en": ["Dignity of the Golden Kingdom Guild Raid Guide release."],
-      "fr": ["Sortie du guide Guild Raid Dignity of the Golden Kingdom."]
+      "jp": ["「黄金の王国」ギルドレイドガイドを公開しました。"],
+      "kr": ["‘황금 왕국의 위엄’ 길드 레이드 가이드 공개."],
+      "zh": ["《黄金王国公会团队副本攻略》发布。"],
+      "fr": ["Sortie du guide de raid de la guilde « Dignity of the Golden Kingdom »."]
     },
     "link": {
       "kind": "guide",
@@ -2171,11 +2401,17 @@
     "type": "update",
     "title": {
       "en": "Archdemon of Hubris Dahlia update",
-      "fr": "Mise à jour Archdemon of Hubris Dahlia"
+      "jp": "「傲慢の大悪魔ダリア」の最新情報",
+      "kr": "오만 대악마 달리아 업데이트",
+      "zh": "傲慢之大恶魔达莉亚更新",
+      "fr": "Mise à jour concernant l'archidémon de l'Orgueil, Dahlia"
     },
     "content": {
       "en": ["Guide is up to date for july 2025 version."],
-      "fr": ["Le guide est à jour pour la version de juillet 2025."]
+      "jp": ["このガイドは2025年7月版に更新されています。"],
+      "kr": ["이 가이드는 2025년 7월 버전에 맞춰 최신 정보로 업데이트되었습니다."],
+      "zh": ["本指南已更新至2025年7月版。"],
+      "fr": ["Ce guide est à jour pour la version de juillet 2025."]
     },
     "link": {
       "kind": "guide",
@@ -2187,14 +2423,26 @@
     "type": "fix",
     "title": {
       "en": "Tier List major change",
-      "fr": "Changement majeur de Tier List"
+      "jp": "ティアリストの大幅な変更",
+      "kr": "티어 리스트의 대대적인 변경",
+      "zh": "实力排名表重大调整",
+      "fr": "Changement majeur dans le classement par niveaux"
     },
     "content": {
       "en": [
         "1-2★ heroes were intended to be ranked separately from 3★. To improve readability and avoid confusion all 1-2★ heroes were demoted one tier to better reflect their actual performance."
       ],
+      "jp": [
+        "1～2★のヒーローは、本来3★のヒーローとは別枠でランク付けされる予定でした。読みやすさを向上させ、混乱を避けるため、すべての1～2★のヒーローを1ランク下げ、実際の性能をより適切に反映するようにしました。"
+      ],
+      "kr": [
+        "1~2★ 영웅들은 원래 3★ 영웅들과 별도로 등급이 매겨지도록 설계되었습니다. 가독성을 높이고 혼란을 방지하기 위해, 모든 1~2★ 영웅들의 등급을 한 단계 하향 조정하여 실제 성능을 더 잘 반영하도록 했습니다."
+      ],
+      "zh": [
+        "1-2★英雄原本是设计为与3★英雄分开评级的。为了提高可读性并避免混淆，所有1-2★英雄均被降级一级，以更好地反映其实际表现。"
+      ],
       "fr": [
-        "Les héros 1-2★ étaient censés être classés séparément des 3★. Pour améliorer la lisibilité et éviter la confusion, tous les héros 1-2★ ont été descendus d'un tier afin de mieux refléter leurs performances réelles."
+        "Les héros 1-2★ devaient initialement être classés séparément des héros 3★. Afin d'améliorer la lisibilité et d'éviter toute confusion, tous les héros 1-2★ ont été rétrogradés d'un niveau pour mieux refléter leurs performances réelles."
       ]
     }
   },
@@ -2203,11 +2451,17 @@
     "type": "update",
     "title": {
       "en": "Annihilator Update",
-      "fr": "Mise à jour Annihilator"
+      "jp": "「アニヒレーター」の最新情報",
+      "kr": "애니힐레이터 업데이트",
+      "zh": "《Annihilator》更新",
+      "fr": "Mise à jour d'Annihilator"
     },
     "content": {
       "en": ["Joint boss Annihilator  has been updated for June 2025 version."],
-      "fr": ["Le Boss Joint Annihilator a été mis à jour pour la version de juin 2025."]
+      "jp": ["「ジョイントボス・アニヒレーター」が、2025年6月版にアップデートされました。"],
+      "kr": ["공동 보스 ‘애니힐레이터’가 2025년 6월 버전에 맞춰 업데이트되었습니다."],
+      "zh": ["联合首领“毁灭者”已更新至2025年6月版本。"],
+      "fr": ["Le boss commun « Annihilator » a été mis à jour pour la version de juin 2025."]
     },
     "link": {
       "kind": "guide",
@@ -2219,11 +2473,17 @@
     "type": "update",
     "title": {
       "en": "Prevent World Alteration Guild Raid",
-      "fr": "Prevent World Alteration Guild Raid"
+      "jp": "「世界改変阻止ギルド」のレイド",
+      "kr": "‘세계 변형 방지 길드’ 레이드",
+      "zh": "阻止“世界改变公会”的团队副本",
+      "fr": "Raid de la guilde « Prevent World Alteration »"
     },
     "content": {
       "en": ["Prevent World Alteration Guild Raid Guide release."],
-      "fr": ["Sortie du guide Guild Raid Prevent World Alteration."]
+      "jp": ["「ワールド変更防止ギルド」レイドガイドの公開。"],
+      "kr": ["‘세계 변형 방지 길드’ 레이드 가이드 공개."],
+      "zh": ["《防止世界改变公会》团队副本攻略发布。"],
+      "fr": ["Sortie du guide de raid de la guilde « Prevent World Alteration »."]
     },
     "link": {
       "kind": "guide",
@@ -2235,14 +2495,26 @@
     "type": "character",
     "title": {
       "en": "New Hero Liselotte",
-      "fr": "Nouvelle héroïne Liselotte"
+      "jp": "新ヒーロー「リゼロッテ」",
+      "kr": "새로운 영웅 리젤로테",
+      "zh": "新英雄莉泽洛特",
+      "fr": "Nouvelle héroïne : Liselotte"
     },
     "content": {
       "en": [
         "Liselotte, a genius magician who increases barrier and defense when an ally uses an attack that targets all enemies and fights by removing debuffs and reducing cooldowns."
       ],
+      "jp": [
+        "リゼロッテは、味方が全敵を対象とする攻撃を使用するとバリアと防御力を高め、デバフを解除したりクールダウンを短縮したりしながら戦う、天才的な魔法使いである。"
+      ],
+      "kr": [
+        "리젤로테는 아군이 모든 적을 대상으로 하는 공격을 사용할 때 장벽과 방어력을 높여주고, 디버프를 제거하며 재사용 대기시간을 단축시키는 방식으로 싸우는 천재 마법사입니다."
+      ],
+      "zh": [
+        "莉泽洛特是一位天才魔法师，当队友使用针对所有敌人的攻击时，她能增强队友的护盾和防御力，并通过清除负面效果和缩短冷却时间来参与战斗。"
+      ],
       "fr": [
-        "Liselotte, une magicienne de génie qui augmente barrier et defense quand un allié utilise une attaque ciblant tous les ennemis et combat en retirant les debuffs et en réduisant les cooldowns."
+        "Liselotte, une magicienne de génie qui renforce les barrières et les défenses lorsqu'un allié lance une attaque ciblant tous les ennemis, et qui combat en supprimant les effets négatifs et en réduisant les temps de recharge."
       ]
     },
     "link": {
@@ -2255,14 +2527,24 @@
     "type": "feature",
     "title": {
       "en": "Character Profiles",
-      "fr": "Profils des personnages"
+      "jp": "キャラクター紹介",
+      "kr": "캐릭터 소개",
+      "zh": "角色简介",
+      "fr": "Fiches des personnages"
     },
     "content": {
       "en": [
         "Character pages now include detailed profile info: birthday, height, weight, and lore."
       ],
+      "jp": [
+        "キャラクターページには、誕生日、身長、体重、設定などの詳細なプロフィール情報が追加されました。"
+      ],
+      "kr": [
+        "캐릭터 페이지에 이제 생일, 키, 몸무게, 배경 이야기 등 상세한 프로필 정보가 포함됩니다."
+      ],
+      "zh": ["角色页面现已包含详细的个人资料信息：生日、身高、体重以及背景故事。"],
       "fr": [
-        "Les pages des personnages incluent désormais des infos détaillées de profil : anniversaire, taille, poids et lore."
+        "Les fiches des personnages contiennent désormais des informations détaillées sur leur profil : date de naissance, taille, poids et histoire."
       ]
     }
   },
@@ -2271,14 +2553,24 @@
     "type": "feature",
     "title": {
       "en": "Quirk guide",
-      "fr": "Guide Quirk"
+      "jp": "クィークガイド",
+      "kr": "Quirk 가이드",
+      "zh": "怪癖指南",
+      "fr": "Guide des particularités"
     },
     "content": {
       "en": [
         "Learn how to efficiently enhance your heroes with the Quirk system: upgrade paths, recommended priorities, and required materials."
       ],
+      "jp": [
+        "「クィーク」システムを活用して、ヒーローを効率的に強化する方法――アップグレードのルート、推奨される優先順位、必要な素材について解説します。"
+      ],
+      "kr": [
+        "‘특성’ 시스템을 통해 영웅을 효율적으로 강화하는 방법—업그레이드 경로, 권장 우선순위, 필요한 재료 등을 알아보세요."
+      ],
+      "zh": ["了解如何通过“特质”系统高效提升英雄实力：升级路径、推荐优先级以及所需材料。"],
       "fr": [
-        "Apprenez à améliorer vos héros efficacement avec le système de Quirks : chemins d'amélioration, priorités recommandées et matériaux nécessaires."
+        "Découvrez comment améliorer efficacement vos héros grâce au système « Quirk » : parcours d'amélioration, priorités recommandées et ressources nécessaires."
       ]
     },
     "link": {
@@ -2291,7 +2583,10 @@
     "type": "feature",
     "title": {
       "en": "Added base stats, gift preferences, and promo code display",
-      "fr": "Ajout des stats de base, préférences cadeaux et affichage des codes promo"
+      "jp": "基本ステータス、ギフトの好み、プロモーションコードの表示を追加しました",
+      "kr": "기본 능력치, 선물 선호도 및 프로모션 코드 표시 기능을 추가했습니다.",
+      "zh": "添加了基础属性、礼物偏好和促销代码显示功能",
+      "fr": "Ajout des statistiques de base, des préférences en matière de cadeaux et de l'affichage des codes promotionnels"
     },
     "content": {
       "en": [
@@ -2299,10 +2594,25 @@
         "-Gift preferences are now shown on character pages and can be used as a filter in the character list",
         "-Promo codes are now visible on the homepage (only valid ones) and fully listed on the [/coupons](/coupons) page"
       ],
+      "jp": [
+        "-キャラクターページに基本ステータスが表示されるようになりました",
+        "-キャラクターページに「プレゼントの希望」が表示されるようになり、キャラクター一覧ではこれをフィルタとして利用できるようになりました",
+        "- プロモーションコードがホームページに表示されるようになりました（有効なもののみ）。また、[/coupons](/coupons)ページにはすべてのコードが一覧表示されています。"
+      ],
+      "kr": [
+        "-캐릭터 페이지에 이제 기본 능력치가 표시됩니다",
+        "-이제 캐릭터 페이지에 선물 선호도가 표시되며, 캐릭터 목록에서 필터로 사용할 수 있습니다.",
+        "-프로모션 코드가 이제 홈페이지에 표시되며(유효한 코드만), [/coupons](/coupons) 페이지에 전체 목록이 게재되어 있습니다."
+      ],
+      "zh": [
+        "-角色页面现可显示基础属性",
+        "-角色页面现已显示礼物偏好，且可在角色列表中将其用作筛选条件",
+        "- 优惠码现已在首页显示（仅显示有效的优惠码），并在 [/coupons](/coupons) 页面上完整列出"
+      ],
       "fr": [
-        "Les pages personnages affichent désormais les stats de base",
-        "Les préférences cadeaux sont désormais affichées sur les pages personnages et peuvent servir de filtre dans la liste des personnages",
-        "Les codes promo sont désormais visibles sur la homepage (uniquement ceux valides) et entièrement listés sur la page [/coupons](/coupons)"
+        "- Les fiches de personnages affichent désormais les statistiques de base",
+        "- Les préférences en matière de cadeaux apparaissent désormais sur les fiches des personnages et peuvent servir de filtre dans la liste des personnages",
+        "- Les codes promotionnels sont désormais visibles sur la page d'accueil (uniquement ceux qui sont valides) et répertoriés dans leur intégralité sur la page [/coupons](/coupons)"
       ]
     }
   },
@@ -2311,16 +2621,31 @@
     "type": "update",
     "title": {
       "en": "Statistics & Combat Basics and Promotion : Monad Eva guides now available",
-      "fr": "Guides Statistics & Combat Basics et Promotion : Monad Eva désormais disponibles"
+      "jp": "「統計・戦闘の基礎と昇格」：モナド・エヴァのガイドが公開されました",
+      "kr": "통계 및 전투 기초와 승급: ‘모나드 에바’ 가이드가 공개되었습니다",
+      "zh": "《属性与战斗基础及晋升》：Monad Eva攻略现已发布",
+      "fr": "Statistiques, principes de base du combat et promotion : les guides Monad Eva sont désormais disponibles"
     },
     "content": {
       "en": [
         "[Statistics & Combat Basics](/guides/general-guides/stats) : Fundamental systems, mechanics, and beginner-friendly guides that apply to the entire game.",
         "[Promotion Monad Eva](/guides/adventure-license/promote-meva) : Boss strategy guide."
       ],
+      "jp": [
+        "[ステータスと戦闘の基本](/guides/general-guides/stats) ：ゲーム全体に共通する基本的なシステムや仕組み、初心者向けのガイドを掲載しています。",
+        "[プロモーション・モナド・エヴァ](/guides/adventure-license/promote-meva) ：ボス攻略ガイド。"
+      ],
+      "kr": [
+        "[통계 및 전투 기초](/guides/general-guides/stats) : 게임 전반에 적용되는 기본 시스템, 메커니즘 및 초보자를 위한 가이드.",
+        "[모나드 에바 승급](/guides/adventure-license/promote-meva) : 보스 공략 가이드."
+      ],
+      "zh": [
+        "[属性与战斗基础](/guides/general-guides/stats)：适用于整个游戏的基础系统、机制以及面向新手的指南。",
+        "[莫纳德·伊娃的晋升](/guides/adventure-license/promote-meva)：BOSS攻略指南。"
+      ],
       "fr": [
-        "[Statistics & Combat Basics](/guides/general-guides/stats) : systèmes fondamentaux, mécaniques et guides accessibles aux débutants qui s'appliquent à tout le jeu.",
-        "[Promotion Monad Eva](/guides/adventure-license/promote-meva) : guide de stratégie pour le Boss."
+        "[Statistiques et principes de base du combat](/guides/general-guides/stats) : Systèmes fondamentaux, mécanismes de jeu et guides destinés aux débutants, applicables à l'ensemble du jeu.",
+        "[Promotion Monad Eva](/guides/adventure-license/promote-meva) : Guide stratégique pour le boss."
       ]
     }
   },
@@ -2329,11 +2654,17 @@
     "type": "update",
     "title": {
       "en": "Walking Fortress Venion update",
-      "fr": "Mise à jour Walking Fortress Venion"
+      "jp": "「ウォーキング・フォートレス・ヴェニオン」のアップデート",
+      "kr": "‘걷는 요새 베니온’ 업데이트",
+      "zh": "“行走要塞”维尼翁更新",
+      "fr": "Mise à jour de « Walking Fortress Venion »"
     },
     "content": {
       "en": ["Guide is up to date for june 2025 version."],
-      "fr": ["Le guide est à jour pour la version de juin 2025."]
+      "jp": ["このガイドは、2025年6月版の最新情報に基づいています。"],
+      "kr": ["이 가이드는 2025년 6월 버전에 맞춰 최신 정보로 업데이트되었습니다."],
+      "zh": ["本指南已更新至2025年6月版。"],
+      "fr": ["Ce guide est à jour pour la version de juin 2025."]
     },
     "link": {
       "kind": "guide",
@@ -2345,16 +2676,31 @@
     "type": "update",
     "title": {
       "en": "Hero Growth & Gear guides",
-      "fr": "Guides Hero Growth & Gear"
+      "jp": "ヒーローの育成・装備ガイド",
+      "kr": "영웅 성장 및 장비 가이드",
+      "zh": "英雄成长与装备指南",
+      "fr": "Guides sur la progression et l'équipement des héros"
     },
     "content": {
       "en": [
         "[Hero Growth guide](/guides/general-guides/heroes-growth) : A complete breakdown of how to power up your heroes efficiently.",
         "[Gear guide](/guides/general-guides/gear) : A guide to gear types, upgrades, and how to make your equipment stronger."
       ],
+      "jp": [
+        "[ヒーロー育成ガイド](/guides/general-guides/heroes-growth) ：ヒーローを効率的に強化する方法について、詳しく解説しています。",
+        "[装備ガイド](/guides/general-guides/gear) ：装備の種類、強化方法、そして装備をより強力にする方法についてのガイドです。"
+      ],
+      "kr": [
+        "[영웅 육성 가이드](/guides/general-guides/heroes-growth) : 영웅을 효율적으로 육성하는 방법에 대한 상세한 안내.",
+        "[장비 가이드](/guides/general-guides/gear) : 장비 종류, 업그레이드 방법, 그리고 장비를 더 강력하게 만드는 방법에 대한 안내입니다."
+      ],
+      "zh": [
+        "[英雄培养指南](/guides/general-guides/heroes-growth)：全面详解如何高效提升英雄实力。",
+        "[装备指南](/guides/general-guides/gear)：关于装备类型、升级以及如何增强装备的指南。"
+      ],
       "fr": [
-        "[Guide Hero Growth](/guides/general-guides/heroes-growth) : un guide complet pour faire progresser vos héros efficacement.",
-        "[Guide Gear](/guides/general-guides/gear) : un guide sur les types d'équipement, les améliorations et comment renforcer votre stuff."
+        "[Guide de progression des héros](/guides/general-guides/heroes-growth) : un guide complet pour savoir comment faire progresser efficacement vos héros.",
+        "[Guide de l'équipement](/guides/general-guides/gear) : un guide sur les différents types d'équipement, les améliorations possibles et les moyens de renforcer votre équipement."
       ]
     }
   },
@@ -2363,10 +2709,16 @@
     "type": "update",
     "title": {
       "en": "Knight of Hope Meteos guide",
-      "fr": "Guide Knight of Hope Meteos"
+      "jp": "『Knight of Hope』メテオス攻略ガイド",
+      "kr": "‘희망의 기사’ 메테오스 공략 가이드",
+      "zh": "《希望骑士：梅特奥斯》攻略",
+      "fr": "Guide de « Knight of Hope » sur Meteos"
     },
     "content": {
       "en": ["Guide update for May 2025."],
+      "jp": ["2025年5月のガイド更新。"],
+      "kr": ["2025년 5월 가이드 업데이트."],
+      "zh": ["2025年5月指南更新。"],
       "fr": ["Mise à jour du guide pour mai 2025."]
     },
     "link": {
@@ -2379,7 +2731,10 @@
     "type": "update",
     "title": {
       "en": "Adventure Guide Release",
-      "fr": "Sortie du guide Adventure"
+      "jp": "『アドベンチャー・ガイド』発売",
+      "kr": "어드벤처 가이드 출시",
+      "zh": "《冒险指南》发布",
+      "fr": "Sortie du guide d'aventure"
     },
     "content": {
       "en": [
@@ -2388,11 +2743,29 @@
         "You can reveal boss names and details by disabling Spoiler-Free mode",
         "Explore now: [Adventure Guides](/guides/adventure)"
       ],
+      "jp": [
+        "ガイドはシーズン（S1、S2、S3…）ごとに分類されており、ゲーム内の進行状況に沿って構成されています。",
+        "「ネタバレ防止モード」はデフォルトで有効になっています",
+        "「ネタバレ防止モード」をオフにすることで、ボスの名前や詳細情報を表示できます",
+        "今すぐチェック：[アドベンチャーガイド](/guides/adventure)"
+      ],
+      "kr": [
+        "가이드는 시즌(S1, S2, S3...)별로 분류되어 있으며, 게임 내 진행 상황을 따릅니다.",
+        "스포일러 차단 모드는 기본적으로 활성화되어 있습니다.",
+        "‘스포일러 방지’ 모드를 해제하면 보스의 이름과 세부 정보를 확인할 수 있습니다.",
+        "지금 바로 살펴보세요: [모험 가이드](/guides/adventure)"
+      ],
+      "zh": [
+        "指南按赛季（S1、S2、S3……）分组，并遵循游戏内的进度",
+        "默认启用“无剧透”模式",
+        "您可以通过关闭“无剧透模式”来查看BOSS的名称和详细信息",
+        "立即探索：[探险指南](/guides/adventure)"
+      ],
       "fr": [
-        "Les guides sont regroupés par saison (S1, S2, S3...) et suivent la progression in-game",
-        "Le mode Spoiler-Free est activé par défaut",
-        "Vous pouvez révéler les noms des Boss et les détails en désactivant le mode Spoiler-Free",
-        "Découvrez : [Guides Adventure](/guides/adventure)"
+        "Les guides sont classés par saison (S1, S2, S3…) et suivent la progression dans le jeu.",
+        "Le mode « sans spoilers » est activé par défaut",
+        "Vous pouvez dévoiler les noms et les informations concernant les boss en désactivant le mode « Sans spoilers ».",
+        "Découvrez dès maintenant : [Guides d'aventure](/guides/adventure)"
       ]
     }
   },
@@ -2401,16 +2774,31 @@
     "type": "feature",
     "title": {
       "en": "Guides updated: New entries in the General section",
-      "fr": "Guides mis à jour : nouvelles entrées dans la section General"
+      "jp": "ガイドの更新：「一般」セクションに新しい項目が追加されました",
+      "kr": "가이드 업데이트: ‘일반’ 섹션에 새로운 항목 추가",
+      "zh": "指南已更新：\"综合\"栏目新增条目",
+      "fr": "Mise à jour des guides : nouvelles entrées dans la section « Général »"
     },
     "content": {
       "en": [
         "[Banners & Mileage System](/guides/general-guides/banner-mileage) guide release.",
         "[Daily Stamina Burn](/guides/general-guides/daily-stamina) guide release."
       ],
+      "jp": [
+        "[バナーとマイルシステム](/guides/general-guides/banner-mileage) ガイドを公開しました。",
+        "「[デイリースタミナ消費](/guides/general-guides/daily-stamina)」ガイドを公開しました。"
+      ],
+      "kr": [
+        "[배너 및 마일리지 시스템](/guides/general-guides/banner-mileage) 가이드 공개.",
+        "[일일 스태미나 소모](/guides/general-guides/daily-stamina) 가이드 공개."
+      ],
+      "zh": [
+        "[横幅与里程系统](/guides/general-guides/banner-mileage) 指南发布。",
+        "《[每日耐力消耗](/guides/general-guides/daily-stamina)》攻略发布。"
+      ],
       "fr": [
-        "Sortie du guide [Banners & système de Mileage](/guides/general-guides/banner-mileage).",
-        "Sortie du guide [Dépense quotidienne de stamina](/guides/general-guides/daily-stamina)."
+        "Publication du guide [Bannières et système de points de fidélité](/guides/general-guides/banner-mileage).",
+        "Publication du guide « [Consommation quotidienne d'endurance](/guides/general-guides/daily-stamina) »."
       ]
     }
   },
@@ -2419,7 +2807,10 @@
     "type": "feature",
     "title": {
       "en": "Skill Chain Filter & Fix",
-      "fr": "Filtre Skill Chain & Fix"
+      "jp": "スキルチェーンのフィルタリングと修正",
+      "kr": "스킬 체인 필터 및 수정",
+      "zh": "技能链筛选与修复",
+      "fr": "Filtrer et corriger la chaîne de compétences"
     },
     "content": {
       "en": [
@@ -2427,10 +2818,25 @@
         "Add Notice on Tier List PvE & PvP",
         "Frost Legion P2 skills overview"
       ],
+      "jp": [
+        "「キャラクター」ページに「スキルチェーン」タイプのフィルターを追加する",
+        "PvE・PvPのティアリストに関するお知らせを追加",
+        "フロスト・レギオン P2 スキルの概要"
+      ],
+      "kr": [
+        "캐릭터 페이지에 ‘스킬 체인’ 유형 필터 추가",
+        "PvE 및 PvP 티어 리스트에 공지사항 추가",
+        "프로스트 군단 P2 스킬 개요"
+      ],
+      "zh": [
+        "在“角色”页面添加“技能链”类型的筛选条件",
+        "在“强度榜”PvE和PvP部分添加公告",
+        "霜之军团 P2 技能概述"
+      ],
       "fr": [
-        "Ajout du filtre Skill Chain sur la page personnages",
-        "Ajout d'une notice sur la Tier List PvE & PvP",
-        "Vue d'ensemble des skills de la Phase 2 de Frost Legion"
+        "Ajouter un filtre de type « Chaîne de compétences » sur la page « Personnage »",
+        "Ajouter une note concernant le classement PvE et PvP",
+        "Présentation des compétences de niveau 2 de la Légion du Givre"
       ]
     }
   },
@@ -2439,11 +2845,19 @@
     "type": "feature",
     "title": {
       "en": "Skill Upgrade Priority",
-      "fr": "Priorités d'amélioration des compétences"
+      "jp": "スキルの強化優先順位",
+      "kr": "스킬 업그레이드 우선순위",
+      "zh": "技能升级优先级",
+      "fr": "Priorité d'amélioration des compétences"
     },
     "content": {
       "en": ["Add Skill Upgrade Priority section in character's pages"],
-      "fr": ["Ajout d'une section Skill Upgrade Priority sur les pages personnages"]
+      "jp": ["キャラクターのページに「スキルアップグレードの優先順位」セクションを追加する"],
+      "kr": ["캐릭터 페이지에 ‘스킬 업그레이드 우선순위’ 섹션 추가"],
+      "zh": ["在角色页面中添加“技能升级优先级”部分"],
+      "fr": [
+        "Ajouter une section « Priorité d'amélioration des compétences » dans les fiches des personnages"
+      ]
     }
   },
   {
@@ -2451,16 +2865,28 @@
     "type": "feature",
     "title": {
       "en": "D.luna gear reco & Frost Legion Phase 1 guide",
-      "fr": "Reco de gear D.luna & guide Frost Legion Phase 1"
+      "jp": "D.lunaの装備おすすめ＆フロスト・レギオン フェーズ1攻略ガイド",
+      "kr": "D.luna 장비 추천 및 프로스트 군단 1단계 공략 가이드",
+      "zh": "D.luna 装备推荐及霜之军团第一阶段攻略",
+      "fr": "Recommandations d'équipement pour D.luna et guide de la phase 1 de la Légion de Givre"
     },
     "content": {
       "en": [
         "Add gear recommandation for Demiurge Luna",
         "Add guide for current guild raid Frost Legion Phase 1"
       ],
+      "jp": [
+        "デミウルグ・ルナの装備推奨リストを追加",
+        "現在のギルドレイド「フロスト・レギオン」フェーズ1の攻略ガイドを追加"
+      ],
+      "kr": [
+        "데미우르그 루나용 장비 추천 추가",
+        "현재 길드 레이드인 ‘프로스트 군단’ 1단계에 대한 가이드를 추가해 주세요."
+      ],
+      "zh": ["为“造物主·露娜”添加装备推荐", "添加当前公会团队副本“冰霜军团”第一阶段攻略"],
       "fr": [
-        "Ajout des recommandations de gear pour Demiurge Luna",
-        "Ajout du guide pour le Guild Raid actuel Frost Legion Phase 1"
+        "Ajouter une recommandation d'équipement pour Demiurge Luna",
+        "Ajouter un guide pour le raid de guilde actuel « Frost Legion » – Phase 1"
       ]
     }
   },
@@ -2469,14 +2895,26 @@
     "type": "character",
     "title": {
       "en": "Demiurge Luna",
+      "jp": "デミウルグ・ルナ",
+      "kr": "데미우르그 루나",
+      "zh": "造物主卢娜",
       "fr": "Demiurge Luna"
     },
     "content": {
       "en": [
         "Demiurge Luna, a versatile Hero who deals heavy single-target damage to enemies and excels at multi-target damage is now live."
       ],
+      "jp": [
+        "敵に強力な単体ダメージを与え、複数ターゲットへのダメージにも優れた万能ヒーロー「デミウルグ・ルナ」が実装されました。"
+      ],
+      "kr": [
+        "적에게 막대한 단일 대상 피해를 입히며 다중 대상 피해에도 뛰어난 다재다능한 영웅 ‘데미우르그 루나’가 이제 게임에 등장했습니다."
+      ],
+      "zh": [
+        "全能型英雄“造物主·露娜”现已上线，她不仅能对敌人造成高额单体伤害，在多目标伤害方面也表现出色。"
+      ],
       "fr": [
-        "Demiurge Luna, une héroïne polyvalente qui inflige de lourds dégâts monocibles aux ennemis et excelle aussi en dégâts multicibles, est désormais en ligne."
+        "Demiurge Luna, une héroïne polyvalente capable d'infliger d'importants dégâts à une cible unique et particulièrement douée pour infliger des dégâts à plusieurs cibles, est désormais disponible."
       ]
     },
     "link": {
@@ -2489,16 +2927,31 @@
     "type": "feature",
     "title": {
       "en": "Gear Usage Finder",
-      "fr": "Gear Usage Finder"
+      "jp": "ギア使用状況検索ツール",
+      "kr": "장비 사용 안내",
+      "zh": "齿轮使用查找器",
+      "fr": "Recherche d'utilisation des équipements"
     },
     "content": {
       "en": [
         "Unsure which character can use your gear? This tool helps you find the best match based on equipment.",
         "This tool is still under development — results may be incomplete or imprecise. Use it as a guide, not as a final answer."
       ],
+      "jp": [
+        "どのキャラクターがその装備を使えるか分からない？このツールを使えば、装備に基づいて最適なキャラクターを見つけることができます。",
+        "このツールは現在開発中のため、結果が不完全または不正確な場合があります。最終的な答えとしてではなく、あくまで参考としてご利用ください。"
+      ],
+      "kr": [
+        "어떤 캐릭터가 내 장비를 사용할 수 있는지 잘 모르시겠나요? 이 도구를 사용하면 장비에 따라 가장 적합한 캐릭터를 찾을 수 있습니다.",
+        "이 도구는 아직 개발 중이므로, 결과가 불완전하거나 부정확할 수 있습니다. 이 도구를 최종적인 답이 아닌 참고 자료로만 활용해 주십시오."
+      ],
+      "zh": [
+        "不确定哪个角色可以使用你的装备？这款工具可根据装备帮你找到最合适的角色。",
+        "该工具目前仍在开发中——结果可能不完整或不准确。请将其作为参考，而非最终答案。"
+      ],
       "fr": [
-        "Vous ne savez pas quel personnage peut porter votre gear ? Cet outil vous aide à trouver la meilleure correspondance selon l'équipement.",
-        "Cet outil est encore en développement — les résultats peuvent être incomplets ou imprécis. Utilisez-le comme une indication, pas comme une réponse définitive."
+        "Vous ne savez pas quel personnage peut utiliser votre équipement ? Cet outil vous aide à trouver la meilleure combinaison en fonction de votre équipement.",
+        "Cet outil est encore en cours de développement ; les résultats peuvent être incomplets ou imprécis. Utilisez-le à titre indicatif, et non comme une réponse définitive."
       ]
     },
     "link": {
@@ -2511,12 +2964,20 @@
     "type": "feature",
     "title": {
       "en": "Gear Usage Statistics",
-      "fr": "Gear Usage Statistics"
+      "jp": "ギアの使用統計",
+      "kr": "장비 사용 통계",
+      "zh": "装备使用统计",
+      "fr": "Statistiques d'utilisation de l'équipement"
     },
     "content": {
       "en": ["Discover the most recommended weapons, amulets and sets in Outerplane builds."],
+      "jp": [
+        "「アウタープレーン」のビルドで、最もおすすめされる武器、アミュレット、セットをご紹介します。"
+      ],
+      "kr": ["아우터플레인 빌드에서 가장 추천받는 무기, 부적, 세트를 확인해 보세요."],
+      "zh": ["探索《Outerplane》各流派中最受推荐的武器、护身符和套装。"],
       "fr": [
-        "Découvrez les weapons, amulets et sets les plus recommandés dans les builds Outerplane."
+        "Découvrez les armes, amulettes et ensembles les plus recommandés pour les builds d'Outerplane."
       ]
     },
     "link": {
@@ -2529,12 +2990,22 @@
     "type": "feature",
     "title": {
       "en": "New guide - Understanding Free Heroes & Starter Banners",
-      "fr": "Nouveau guide — Comprendre les Free Heroes & Starter Banners"
+      "jp": "新ガイド - 無料ヒーローとスターターバナーの解説",
+      "kr": "새로운 가이드 - 무료 영웅 및 초보자 배너 이해하기",
+      "zh": "新指南——了解免费英雄与新手卡池",
+      "fr": "Nouveau guide - Tout savoir sur les héros gratuits et les bannières de démarrage"
     },
     "content": {
       "en": [
         "Learn which heroes you’ll get for free in Outerplane and how to make the best choices from the Start."
       ],
+      "jp": [
+        "『Outerplane』で無料で入手できるヒーローや、ゲーム開始当初から最適な選択をする方法をご紹介します。"
+      ],
+      "kr": [
+        "‘아우터플레인’에서 어떤 영웅을 무료로 얻을 수 있는지, 그리고 게임 초반부터 최선의 선택을 하는 방법을 알아보세요."
+      ],
+      "zh": ["了解在《Outerplane》中可以免费获得哪些英雄，以及如何从一开始就做出最佳选择。"],
       "fr": [
         "Découvrez quels héros vous obtiendrez gratuitement dans Outerplane et comment faire les meilleurs choix dès le début."
       ]
@@ -2549,16 +3020,28 @@
     "type": "feature",
     "title": {
       "en": "5★ item support",
-      "fr": "Support des items 5★"
+      "jp": "5★アイテムのサポート",
+      "kr": "5★ 아이템 지원",
+      "zh": "5★道具支持",
+      "fr": "Assistance pour les objets 5★"
     },
     "content": {
       "en": [
         "Add 5★ items from event shop from event shop",
         "Name and Rarity filters has been added on the Equipments Page"
       ],
+      "jp": [
+        "イベントショップから5★アイテムを追加",
+        "「装備」ページに「名前」および「レア度」のフィルターが追加されました"
+      ],
+      "kr": [
+        "이벤트 상점에서 5★ 아이템을 추가하세요",
+        "장비 페이지에 ‘이름’ 및 ‘희귀도’ 필터가 추가되었습니다."
+      ],
+      "zh": ["从活动商店添加5★道具", "“装备”页面已新增“名称”和“稀有度”筛选功能"],
       "fr": [
-        "Ajout des items 5★ provenant des event shops",
-        "Les filtres Name et Rarity ont été ajoutés sur la page Equipments"
+        "Ajouter des objets 5★ depuis la boutique de l'événement",
+        "Des filtres par nom et par rareté ont été ajoutés à la page « Équipements »."
       ]
     }
   },
@@ -2567,11 +3050,17 @@
     "type": "feature",
     "title": {
       "en": "PvP Tier List",
-      "fr": "Tier List PvP"
+      "jp": "PvP ティアリスト",
+      "kr": "PvP 티어 리스트",
+      "zh": "PvP 强度排行榜",
+      "fr": "Classement PvP"
     },
     "content": {
       "en": ["PvP tier list add updated with O. Nadja"],
-      "fr": ["Tier list PvP mise à jour avec O. Nadja"]
+      "jp": ["O. Nadja を追加・更新した PvP ティアリスト"],
+      "kr": ["O. Nadja가 추가된 PvP 티어 리스트 업데이트"],
+      "zh": ["PvP 排名榜已更新，新增了 O. Nadja"],
+      "fr": ["Mise à jour du classement PvP avec O. Nadja"]
     }
   },
   {
@@ -2579,7 +3068,10 @@
     "type": "feature",
     "title": {
       "en": "Adventure License ,Gear Boss & Irregular Pursuit Guides",
-      "fr": "Guides Adventure License, Gear Boss & Irregular Pursuit"
+      "jp": "アドベンチャー・ライセンス、ギア・ボス、およびイレギュラー・パースート・ガイド",
+      "kr": "어드벤처 라이선스, 기어 보스 및 어리규어 퍼슈트 가이드",
+      "zh": "《冒险许可证》、《装备之王》及《非正规追踪指南》",
+      "fr": "Adventure License, Gear Boss et Irregular Pursuit Guides"
     },
     "content": {
       "en": [
@@ -2588,11 +3080,29 @@
         "All Irregular Pursuit guides are now live",
         "Agile Respond has been added to the filters on the Characters page"
       ],
+      "jp": [
+        "「Gear Boss」のガイドがすべて公開されました",
+        "「アドベンチャー・ライセンス」のガイドがすべて公開されました",
+        "『Irregular Pursuit』のガイドがすべて公開されました",
+        "「Agile Respond」が「キャラクター」ページのフィルターに追加されました"
+      ],
+      "kr": [
+        "모든 기어 보스 가이드가 이제 공개되었습니다",
+        "모든 ‘어드벤처 라이선스’ 가이드가 이제 공개되었습니다.",
+        "모든 ‘Irregular Pursuit’ 가이드가 이제 공개되었습니다.",
+        "‘캐릭터’ 페이지의 필터에 ‘Agile Respond’가 추가되었습니다."
+      ],
+      "zh": [
+        "所有装备首领攻略现已上线",
+        "所有“冒险许可证”指南现已上线",
+        "《Irregular Pursuit》的所有攻略现已上线",
+        "“敏捷响应”已添加到“角色”页面的筛选条件中"
+      ],
       "fr": [
-        "Tous les guides Gear Boss sont désormais en ligne",
-        "Tous les guides Adventure License sont désormais en ligne",
-        "Tous les guides Irregular Pursuit sont désormais en ligne",
-        "Agile Respond a été ajouté aux filtres de la page Characters"
+        "Tous les guides Gear Boss sont désormais disponibles",
+        "Tous les guides « Adventure License » sont désormais disponibles",
+        "Tous les guides « Irregular Pursuit » sont désormais disponibles",
+        "« Agile Respond » a été ajouté aux filtres de la page « Personnages »"
       ]
     }
   },
@@ -2601,14 +3111,26 @@
     "type": "update",
     "title": {
       "en": "New hero - Nadja",
-      "fr": "Nouvelle héroïne — Nadja"
+      "jp": "新ヒーロー - ナジャ",
+      "kr": "새로운 영웅 - 나디아",
+      "zh": "新英雄——娜佳",
+      "fr": "Nouveau héros : Nadja"
     },
     "content": {
       "en": [
         "Omega Nadja, who removes enemy Detonation damage and Priority increase effects, plays an important role in various boss battles and will be joining us."
       ],
+      "jp": [
+        "敵の「爆発」ダメージや「優先度」上昇効果を解除する「オメガ・ナジャ」は、さまざまなボス戦で重要な役割を果たしており、今回仲間として加わることになります。"
+      ],
+      "kr": [
+        "적의 폭발 피해와 우선도 증가 효과를 제거하는 오메가 나드자가 다양한 보스전에서 중요한 역할을 맡게 되며, 우리 팀에 합류하게 됩니다."
+      ],
+      "zh": [
+        "欧米茄·娜佳能够消除敌方的“爆炸”伤害和“优先级提升”效果，在各类BOSS战中发挥着重要作用，她即将加入我们的队伍。"
+      ],
       "fr": [
-        "Omega Nadja, qui retire les effets Detonation et les augmentations de Priority des ennemis, joue un rôle important dans de nombreux combats de Boss et nous rejoint."
+        "Omega Nadja, qui supprime les dégâts de détonation infligés par l'ennemi ainsi que les effets d'augmentation de priorité, joue un rôle important dans divers combats contre des boss et va rejoindre nos rangs."
       ]
     }
   },
@@ -2617,11 +3139,19 @@
     "type": "update",
     "title": {
       "en": "Add guide",
-      "fr": "Ajout de guides"
+      "jp": "ガイドを追加",
+      "kr": "가이드 추가",
+      "zh": "添加指南",
+      "fr": "Ajouter un guide"
     },
     "content": {
       "en": ["Some guide were add like world boss and RGB special request"],
-      "fr": ["Quelques guides ont été ajoutés, comme world boss et RGB special request"]
+      "jp": ["ワールドボスやRGBの特別リクエストなど、いくつかのガイドが追加されました"],
+      "kr": ["월드 보스나 RGB 특별 요청과 같은 몇 가지 가이드가 추가되었습니다."],
+      "zh": ["新增了一些指南，例如世界首领和RGB特殊请求等。"],
+      "fr": [
+        "Certains guides ont été ajoutés, comme ceux consacrés aux boss mondiaux et aux demandes spéciales RGB."
+      ]
     }
   },
   {
@@ -2629,14 +3159,24 @@
     "type": "feature",
     "title": {
       "en": "Multi Select",
-      "fr": "Multi Select"
+      "jp": "複数選択",
+      "kr": "여러 개 선택",
+      "zh": "多选",
+      "fr": "Sélection multiple"
     },
     "content": {
       "en": [
         "Add the option to select multple element, class, rarity on tier list, ee priority and character page"
       ],
+      "jp": [
+        "ティアリスト、EE優先度、キャラクターページにおいて、複数の要素、クラス、レアリティを選択できる機能を追加する"
+      ],
+      "kr": [
+        "티어 리스트, ee 우선순위 및 캐릭터 페이지에서 여러 요소, 클래스, 희귀도를 선택할 수 있는 옵션을 추가해 주세요."
+      ],
+      "zh": ["在层级列表、ee优先级和角色页面中添加选择多个元素、类和稀有度的选项"],
       "fr": [
-        "Ajout de l'option pour sélectionner plusieurs éléments, classes et raretés sur la tier list, l'EE priority et la page personnages"
+        "Ajouter la possibilité de sélectionner plusieurs éléments, classes, niveaux de rareté dans le classement, priorités EE et sur la page des personnages"
       ]
     }
   },
@@ -2645,16 +3185,25 @@
     "type": "feature",
     "title": {
       "en": "Exclusive Equipment Priority",
-      "fr": "Priorité de l'Exclusive Equipment"
+      "jp": "専用装備の優先順位",
+      "kr": "전용 장비 우선권",
+      "zh": "专用设备优先权",
+      "fr": "Priorité exclusive en matière d'équipement"
     },
     "content": {
       "en": [
         "Add Exclusive Equipment Priority Tier List",
         "Add filter by Element and Class on Tier list"
       ],
+      "jp": [
+        "限定装備の優先度ランキングを追加",
+        "ティアリストに「要素」と「クラス」によるフィルタを追加する"
+      ],
+      "kr": ["독점 장비 우선순위 티어 리스트 추가", "티어 목록에 ‘요소’ 및 ‘클래스’별 필터 추가"],
+      "zh": ["添加专属装备优先级排行榜", "在排名列表中添加按元素和类别的筛选条件"],
       "fr": [
-        "Ajout de la tier list Exclusive Equipment Priority",
-        "Ajout d'un filtre par élément et classe sur la Tier List"
+        "Ajouter le classement par niveau de priorité des équipements exclusifs",
+        "Ajouter un filtre par élément et par classe dans le classement par niveau"
       ]
     }
   },
@@ -2663,7 +3212,10 @@
     "type": "fix",
     "title": {
       "en": "Legal compliance update",
-      "fr": "Mise à jour de conformité légale"
+      "jp": "法令遵守に関する最新情報",
+      "kr": "법규 준수 관련 최신 정보",
+      "zh": "合规动态",
+      "fr": "Point sur la conformité réglementaire"
     },
     "content": {
       "en": [
@@ -2671,10 +3223,25 @@
         "Created a dedicated `/legal` page with hosting information and takedown policy.",
         "Confirmed the site does not collect personal data or include monetization."
       ],
+      "jp": [
+        "知的財産権および非公式な性質に関する一般的な免責事項を追加しました。",
+        "ホスティング情報や削除ポリシーを掲載した専用の「/legal」ページを作成しました。",
+        "当該サイトが個人データを収集しておらず、収益化も行っていないことを確認しました。"
+      ],
+      "kr": [
+        "지적 재산권 및 비공식적 지위에 관한 전 세계적인 면책 조항을 추가했습니다.",
+        "호스팅 정보와 게시물 삭제 정책이 포함된 전용 `/legal` 페이지를 생성했습니다.",
+        "해당 사이트가 개인정보를 수집하지 않으며 수익화 기능도 포함하지 않는 것으로 확인되었습니다."
+      ],
+      "zh": [
+        "添加了关于知识产权及非官方性质的通用免责声明。",
+        "创建了一个专门的 `/legal` 页面，其中包含托管信息和下架政策。",
+        "已确认该网站不收集个人数据，也不包含变现功能。"
+      ],
       "fr": [
-        "Ajout d'un disclaimer global concernant la propriété intellectuelle et le statut non officiel.",
-        "Création d'une page `/legal` dédiée avec les informations d'hébergement et la politique de takedown.",
-        "Confirmation que le site ne collecte aucune donnée personnelle et n'inclut aucune monétisation."
+        "Ajout d'une clause de non-responsabilité générale concernant la propriété intellectuelle et le caractère non officiel.",
+        "Création d'une page dédiée « /legal » contenant les informations relatives à l'hébergement et la politique de retrait de contenu.",
+        "Il a été confirmé que le site ne collecte pas de données à caractère personnel et ne fait l'objet d'aucune monétisation."
       ]
     }
   },
@@ -2683,16 +3250,31 @@
     "type": "feature",
     "title": {
       "en": "Filter debuff logic and 1-2 star tier list",
-      "fr": "Logique des filtres debuff et tier list 1-2★"
+      "jp": "デバフロジックのフィルタリングと1～2スターのティアリスト",
+      "kr": "디버프 로직 필터링 및 1~2성 티어 리스트",
+      "zh": "减益效果筛选逻辑及1-2星评级榜",
+      "fr": "Logique des effets négatifs des filtres et classement des niveaux 1 à 2 étoiles"
     },
     "content": {
       "en": [
         "added 1 and 2 star heroes in tier list",
         "Add EE and Burst skill buff and debuff in logic when filtering heroes on https://outerpedia.com/characters page"
       ],
+      "jp": [
+        "ティアリストに1つ星および2つ星のヒーローを追加しました",
+        "https://outerpedia.com/characters ページでヒーローをフィルタリングする際、ロジックに EE およびバーストスキルのバフとデバフを追加する"
+      ],
+      "kr": [
+        "티어 리스트에 1성 및 2성 영웅을 추가했습니다",
+        "https://outerpedia.com/characters 페이지에서 영웅을 필터링할 때 로직에 EE 및 버스트 스킬의 버프와 디버프를 추가하세요."
+      ],
+      "zh": [
+        "在英雄等级榜中新增了1星和2星英雄",
+        "在 https://outerpedia.com/characters 页面筛选英雄时，将 EE 和 Burst 技能的增益与减益效果加入逻辑判断中"
+      ],
       "fr": [
-        "Ajout des héros 1 et 2★ dans la tier list",
-        "Prise en compte des buffs et debuffs d'EE et de Burst skill dans la logique de filtrage des héros sur https://outerpedia.com/characters"
+        "Ajout des héros 1 et 2 étoiles au classement par niveau",
+        "Ajouter les bonus et malus liés aux compétences « EE » et « Burst » dans la logique de filtrage des héros sur la page https://outerpedia.com/characters"
       ]
     }
   },
@@ -2701,7 +3283,10 @@
     "type": "update",
     "title": {
       "en": "Website Officially Release",
-      "fr": "Sortie officielle du site"
+      "jp": "ウェブサイトの正式公開",
+      "kr": "웹사이트 공식 출시",
+      "zh": "网站正式上线",
+      "fr": "Lancement officiel du site web"
     },
     "content": {
       "en": [
@@ -2714,15 +3299,45 @@
         "Full CDN support for images (characters, equipment, icons) ensuring fast load times.",
         "Built-in changelog page and homepage recent updates feed to track improvements."
       ],
+      "jp": [
+        "🎉 Outerpediaが正式に公開されました！",
+        "**完全なティアリスト**、**キャラクターデータベース全容**、および**限定装備**のデータが含まれています。",
+        "**デスクトップおよびモバイル**向けに最適化されており、**PWA**を完全にサポートしています（アプリとしてインストール可能）。",
+        "SEOの最適化、構造化データ、動的なOpen Graph画像を備えた高速な静的生成。",
+        "**Next.js 15** と **TailwindCSS** を基盤とした、最新のレスポンシブ UI。",
+        "キャラクターページ、ティアリストタブ、装備一覧の動的ルーティング。",
+        "画像（キャラクター、装備、アイコン）に対する完全なCDN対応により、高速な読み込みを実現しています。",
+        "改善状況を把握できるよう、変更履歴ページとホームページの最新更新情報フィードが組み込まれています。"
+      ],
+      "kr": [
+        "🎉 Outerpedia가 드디어 정식 출시되었습니다!",
+        "**완전한 티어 리스트**, **전체 캐릭터 데이터베이스**, **독점 장비** 데이터가 포함되어 있습니다.",
+        "**데스크톱 및 모바일**에 최적화되어 있으며, **PWA**를 완벽하게 지원합니다(앱으로 설치 가능).",
+        "최적화된 SEO, 구조화된 데이터, 동적 Open Graph 이미지를 활용한 빠른 정적 페이지 생성.",
+        "**Next.js 15**와 **TailwindCSS**를 기반으로 한 최신 반응형 UI.",
+        "캐릭터 페이지, 티어 리스트 탭, 장비 목록에 대한 동적 라우팅.",
+        "이미지(캐릭터, 장비, 아이콘)에 대한 완벽한 CDN 지원을 통해 빠른 로딩 속도를 보장합니다.",
+        "개선 사항을 확인할 수 있도록 변경 내역 페이지와 홈페이지의 최근 업데이트 피드가 기본으로 제공됩니다."
+      ],
+      "zh": [
+        "🎉 Outerpedia 现已正式上线！",
+        "包含**完整的角色强度排行榜**、**完整的角色数据库**以及**独家装备**数据。",
+        "针对**桌面端和移动端**进行了优化，并全面支持**PWA**（可作为应用程序安装）。",
+        "快速静态生成，支持优化后的SEO、结构化数据和动态Open Graph图片。",
+        "基于 **Next.js 15** 和 **TailwindCSS** 构建的现代响应式用户界面。",
+        "角色页面、层级列表标签页和装备列表的动态路由。",
+        "全面支持图片（角色、装备、图标）的CDN服务，确保快速加载。",
+        "内置了变更日志页面和首页的最新更新动态，以便跟踪改进情况。"
+      ],
       "fr": [
         "🎉 Outerpedia est désormais officiellement en ligne !",
-        "Inclut la **Tier List complète**, la **base de données complète des personnages** et les données d'**Exclusive Equipment**.",
-        "Optimisé pour **desktop et mobile** avec support **PWA** complet (installable comme une app).",
-        "Génération statique rapide avec SEO optimisé, structured data et images Open Graph dynamiques.",
-        "Interface responsive moderne propulsée par **Next.js 15** et **TailwindCSS**.",
-        "Routing dynamique pour les pages personnages, les onglets de la tier list et les listings d'équipement.",
-        "Support CDN complet pour les images (personnages, équipement, icônes) garantissant des temps de chargement rapides.",
-        "Page de changelog intégrée et flux des dernières mises à jour sur la homepage pour suivre les améliorations."
+        "Comprend un **classement complet des personnages**, une **base de données exhaustive des personnages** et des informations sur des **équipements exclusifs**.",
+        "Optimisé pour **les ordinateurs de bureau et les appareils mobiles**, avec prise en charge complète des **PWA** (installables comme des applications).",
+        "Génération statique rapide avec optimisation pour le référencement naturel (SEO), données structurées et images Open Graph dynamiques.",
+        "Une interface utilisateur moderne et adaptative, basée sur **Next.js 15** et **TailwindCSS**.",
+        "Routage dynamique pour les pages de personnages, les onglets de classement et les listes d'équipement.",
+        "Prise en charge complète du CDN pour les images (personnages, équipement, icônes), garantissant des temps de chargement rapides.",
+        "Une page de journal des modifications intégrée et un flux d'actualités sur la page d'accueil permettent de suivre les améliorations apportées."
       ]
     }
   },
@@ -2731,7 +3346,10 @@
     "type": "feature",
     "title": {
       "en": "All character data, Tier List & SEO Improvements",
-      "fr": "Données complètes des personnages, Tier List & améliorations SEO"
+      "jp": "すべてのキャラクターデータ、ティアリスト、およびSEO対策の改善",
+      "kr": "모든 캐릭터 데이터, 티어 리스트 및 SEO 개선 사항",
+      "zh": "所有角色数据、强度榜及SEO优化",
+      "fr": "Toutes les données sur les personnages, le classement par niveau et les améliorations en matière de référencement"
     },
     "content": {
       "en": [
@@ -2744,15 +3362,45 @@
         "Improved SEO script (seo-check.cjs) to validate JSON integrity and image presence, executed only in development mode.",
         "Improved loading and priority hints for critical images (Tier List portraits, character icons)."
       ],
+      "jp": [
+        "URLルーティング（/tierlist/[tab]）を通じて動的なタブ（DPS、サポート、サステイン）に対応できるよう、ティアリストページをリファクタリングしました。",
+        "本番環境でのAPIフェッチを回避するため、ビルドのたびに生成される静的な_allCharacters.jsonを実装しました。",
+        "タブごとおよび全体として、ティアリストのSEOメタデータを動的に改善しました。",
+        "キャラクターIDに基づいて、すべてのキャラクターページに動的なOpenGraphおよびTwitter Cardの画像を追加しました。",
+        "キャラクターページにおいて、要素、クラス、およびサブクラスの情報を組み合わせた、より充実した構造化された説明を追加しました。",
+        "インデックス登録の精度を高めるため、キャラクターごとに動的なメタキーワードを追加しました。",
+        "JSONの整合性と画像の存在を確認するためのSEOスクリプト（seo-check.cjs）を改善しました。このスクリプトは開発モードでのみ実行されます。",
+        "重要な画像（ティアリストのポートレート、キャラクターアイコン）の読み込みおよび優先順位のヒントを改善しました。"
+      ],
+      "kr": [
+        "URL 라우팅(/tierlist/[tab])을 통해 동적 탭(DPS, 서포트, 서스테인)을 지원하도록 티어 리스트 페이지를 재구성했습니다.",
+        "프로덕션 환경에서 API 호출을 피하기 위해, 빌드 시마다 생성되는 정적 _allCharacters.json 파일을 구현했습니다.",
+        "탭별 및 전체적으로 티어 리스트 SEO 메타데이터를 동적으로 개선했습니다.",
+        "캐릭터 ID를 기반으로 모든 캐릭터 페이지에 동적 OpenGraph 및 Twitter Card 이미지를 추가했습니다.",
+        "캐릭터 페이지에서 요소, 클래스 및 하위 클래스 정보를 통합하여 구조화된 설명을 강화했습니다.",
+        "색인 생성을 개선하기 위해 캐릭터별로 동적 메타 키워드를 추가했습니다.",
+        "JSON 무결성 및 이미지 존재 여부를 검증하도록 개선된 SEO 스크립트(seo-check.cjs)로, 개발 모드에서만 실행됩니다.",
+        "중요한 이미지(티어 리스트 초상화, 캐릭터 아이콘)에 대한 로딩 및 우선순위 관련 안내가 개선되었습니다."
+      ],
+      "zh": [
+        "对“层级列表”页面进行了重构，通过 URL 路由（/tierlist/[tab]）支持动态标签页（输出、辅助、续航）。",
+        "已实现静态文件 _allCharacters.json，该文件在每次构建时生成，以避免在生产环境中调用 API。",
+        "针对每个标签页以及全局范围，动态优化了“排名列表”的SEO元数据。",
+        "根据角色ID，为所有角色页面添加了动态的OpenGraph和Twitter Card图片。",
+        "在角色页面上，通过整合元素、类和子类信息，对结构化描述进行了增强。",
+        "为优化索引效果，按字符添加了动态元关键词。",
+        "改进了 SEO 脚本（seo-check.cjs），用于验证 JSON 完整性和图片是否存在，该脚本仅在开发模式下执行。",
+        "针对关键图片（分级榜头像、角色图标）优化了加载和优先级提示。"
+      ],
       "fr": [
-        "Refactorisation de la page Tier List pour supporter des onglets dynamiques (DPS, Support, Sustain) via le routing URL (/tierlist/[tab]).",
-        "Implémentation d'un _allCharacters.json statique généré à chaque build pour éviter les fetch API en production.",
-        "Amélioration des métadonnées SEO de la Tier List, dynamiquement par onglet et globalement.",
-        "Ajout d'images OpenGraph et Twitter Card dynamiques pour toutes les pages personnages, basées sur l'ID du personnage.",
-        "Amélioration des descriptions structurées sur les pages personnages combinant élément, classe et sous-classe.",
-        "Ajout de meta keywords dynamiques par personnage pour un meilleur indexage.",
-        "Amélioration du script SEO (seo-check.cjs) pour valider l'intégrité du JSON et la présence des images, exécuté uniquement en mode développement.",
-        "Amélioration des hints de chargement et de priorité pour les images critiques (portraits Tier List, icônes personnages)."
+        "Refonte de la page « Classement des classes » pour prendre en charge des onglets dynamiques (DPS, Soutien, Soutien prolongé) via le routage d'URL (/tierlist/[tab]).",
+        "Mise en place du fichier statique _allCharacters.json généré à chaque compilation afin d'éviter les requêtes API en production.",
+        "Amélioration des métadonnées SEO du classement par niveau, de manière dynamique par onglet et à l'échelle globale.",
+        "Ajout d'images OpenGraph et Twitter Card dynamiques pour toutes les pages de personnages, en fonction de leur identifiant.",
+        "Description structurée améliorée sur les pages consacrées aux personnages, combinant des informations sur les éléments, les classes et les sous-classes.",
+        "Ajout de mots-clés méta dynamiques par personnage pour améliorer l'indexation.",
+        "Script SEO amélioré (seo-check.cjs) permettant de vérifier l'intégrité des fichiers JSON et la présence des images, exécuté uniquement en mode développement.",
+        "Amélioration du chargement et des indications de priorité pour les images essentielles (portraits du classement, icônes de personnages)."
       ]
     }
   },
@@ -2761,7 +3409,10 @@
     "type": "update",
     "title": {
       "en": "SEO, Mobile & PWA Improvements",
-      "fr": "Améliorations SEO, Mobile & PWA"
+      "jp": "SEO、モバイル、およびPWAの改善",
+      "kr": "SEO, 모바일 및 PWA 개선 사항",
+      "zh": "SEO、移动端及PWA优化",
+      "fr": "Améliorations en matière de référencement naturel (SEO), de mobile et d'applications web progressives (PWA)"
     },
     "content": {
       "en": [
@@ -2771,12 +3422,33 @@
         "Optimized mobile layouts for Home and Navigation.",
         "Fixed structured data validation warnings (Search Console OK)."
       ],
+      "jp": [
+        "すべてのページにおいて、SEOおよびOpenGraphメタデータを改善しました。",
+        "デプロイのたびに、sitemap.xml が自動的に生成されます。",
+        "PWA 対応のため、manifest.json とモバイル用アイコンを追加しました。",
+        "ホーム画面とナビゲーションのモバイル用レイアウトを最適化しました。",
+        "構造化データの検証に関する警告を修正しました（Search Consoleで問題なし）。"
+      ],
+      "kr": [
+        "모든 페이지에 걸쳐 SEO 및 OpenGraph 메타데이터를 개선했습니다.",
+        "배포할 때마다 sitemap.xml 파일이 자동으로 생성됩니다.",
+        "PWA 지원을 위해 manifest.json 파일과 모바일 아이콘을 추가했습니다.",
+        "홈 및 내비게이션의 모바일 레이아웃을 최적화했습니다.",
+        "구조화된 데이터 유효성 검사 경고가 수정되었습니다(Search Console에서 정상으로 표시됨)."
+      ],
+      "zh": [
+        "优化了所有页面的搜索引擎优化（SEO）和 OpenGraph 元数据。",
+        "每次部署时都会自动生成 sitemap.xml 文件。",
+        "添加了 manifest.json 文件和移动端图标，以支持 PWA。",
+        "优化了“首页”和“导航”的移动端布局。",
+        "修复了结构化数据验证警告（Search Console 显示正常）。"
+      ],
       "fr": [
-        "Amélioration du SEO et des métadonnées OpenGraph sur toutes les pages.",
-        "Génération automatique du sitemap.xml à chaque déploiement.",
-        "Ajout du manifest.json et des icônes mobiles pour le support PWA.",
-        "Optimisation des layouts mobile pour Home et Navigation.",
-        "Correction des warnings de validation des structured data (Search Console OK)."
+        "Amélioration du référencement naturel (SEO) et des métadonnées OpenGraph sur l'ensemble des pages.",
+        "Le fichier sitemap.xml est généré automatiquement à chaque déploiement.",
+        "Ajout du fichier `manifest.json` et des icônes mobiles pour la prise en charge des PWA.",
+        "Mise en page mobile optimisée pour la page d'accueil et la navigation.",
+        "Correction des avertissements liés à la validation des données structurées (Search Console : tout est en ordre)."
       ]
     }
   },
@@ -2785,7 +3457,10 @@
     "type": "update",
     "title": {
       "en": "Exclusive Equipment Data Complete",
-      "fr": "Données Exclusive Equipment complètes"
+      "jp": "独占装備データの全情報",
+      "kr": "독점 장비 데이터 완료",
+      "zh": "独家设备数据已完整",
+      "fr": "Données complètes et exclusives sur les équipements"
     },
     "content": {
       "en": [
@@ -2802,19 +3477,61 @@
         "Resolved Search Console critical errors by switching to proper **VideoGame** schema.",
         "Internal tools: added a **JSON-LD preview button** for development validation."
       ],
+      "jp": [
+        "全キャラクターの限定装備に関する**データと画像**をすべて追加しました。",
+        "各EEには、完全なメタデータ（名前、メインステータス、+0/+10の効果）が含まれています。",
+        "武器およびアミュレットに**デュアルステータス対応**を追加しました（`/`区切りによるforcedMainStat）。",
+        "ツールチップやサマリーカードに、**アイコンとステータス値の両方**が正しく表示されるようになりました。",
+        "**WeaponMiniCard** および **AmuletMiniCard** コンポーネントを改善し、複数のメインステータスに対応するとともに、代替アイコンの表示機能を追加しました。",
+        "/equipments に、**VideoGame + CreativeWork** の **schema.org JSON-LD** 構造を完全に実装しました。",
+        "すべての**武器**、**護符**、**防具セット**、**お守り**、および**限定装備**の画像をJSON-LD形式で含めました。",
+        "リアルな表現を実現するため、**ヘルメット**、**鎧**、**手袋**、**靴**など、さまざまなセットの画像を動的に表示します。",
+        "構造化データにおいて、限定装備のキャラクターページへの**自動URLリンク**を追加しました。",
+        "**武器**と**護符**のコンポーネント間でコード構造を統一し、メンテナンスを容易にする。",
+        "適切な**VideoGame**スキーマに切り替えることで、Search Consoleの重大なエラーを解決しました。",
+        "内部ツール：開発時の検証用に**JSON-LDプレビューボタン**を追加しました。"
+      ],
+      "kr": [
+        "모든 캐릭터의 전용 장비 **데이터 및 이미지**를 모두 추가했습니다.",
+        "각 EE에는 전체 메타데이터(이름, 주요 능력치, +0/+10 효과)가 포함되어 있습니다.",
+        "무기와 목걸이에 대한 **이중 능력치 지원**을 추가했습니다(`/` 구분자를 사용한 forcedMainStat).",
+        "툴팁과 요약 카드에 **아이콘과 능력치 값**이 모두 올바르게 표시되도록 수정했습니다.",
+        "**WeaponMiniCard** 및 **AmuletMiniCard** 컴포넌트를 개선하여, 대체 아이콘을 통해 여러 가지 주요 능력치를 지원하도록 했습니다.",
+        "/equipments에 **VideoGame + CreativeWork** **schema.org JSON-LD** 구조를 완전히 구현했습니다.",
+        "JSON-LD 형식으로 모든 **무기**, **부적**, **갑옷 세트**, **탈리스만** 및 **독점 장비**에 대한 이미지를 포함했습니다.",
+        "실감 나는 표현을 위해 다양한 세트 이미지(**헬멧**, **갑옷**, **장갑**, **신발**)를 동적으로 적용합니다.",
+        "구조화된 데이터에서 ‘독점 장비’에 대한 **자동 URL 연결** 기능을 캐릭터 페이지에 추가했습니다.",
+        "유지보수를 용이하게 하기 위해 **무기** 및 **부적** 구성 요소 간의 코드 구조를 통일했습니다.",
+        "올바른 **VideoGame** 스키마로 전환하여 Search Console의 중대한 오류를 해결했습니다.",
+        "내부 도구: 개발 검증용 **JSON-LD 미리보기 버튼**을 추가했습니다."
+      ],
+      "zh": [
+        "已添加所有角色的专属装备**数据和图片**。",
+        "每个EE都包含完整的元数据（名称、主要属性、+0/+10效果）。",
+        "为武器和护身符添加了**双属性支持**（使用 `/` 分隔符的 forcedMainStat）。",
+        "在工具提示和摘要卡片中正确显示了**图标和数值**。",
+        "改进了 **WeaponMiniCard** 和 **AmuletMiniCard** 组件，以支持多种主要属性，并提供备用图标。",
+        "已在 /equipments 页面上实现了完整的 **VideoGame + CreativeWork** **schema.org JSON-LD** 结构。",
+        "已将所有**武器**、**护身符**、**护甲套装**、**护身符**和**限定装备**的图片以JSON-LD格式包含在内。",
+        "动态展示多种套装造型（**头盔**、**护甲**、**手套**、**鞋子**），以呈现逼真的效果。",
+        "在结构化数据中，为“专属装备”添加了指向角色页面的**自动URL链接**。",
+        "统一**武器**和**护身符**组件的代码结构，以便于维护。",
+        "通过切换到正确的**VideoGame**架构，解决了Search Console中的严重错误。",
+        "内部工具：新增了用于开发验证的**JSON-LD 预览按钮**。"
+      ],
       "fr": [
-        "Ajout de l'ensemble des **données et images** d'Exclusive Equipment pour tous les personnages.",
-        "Chaque EE inclut les métadonnées complètes (name, main stat, effets +0/+10).",
-        "Ajout du **support dual-stat** pour les weapons et amulets (forcedMainStat avec séparateur `/`).",
-        "Affichage correct des **icônes et valeurs de stats** dans les tooltips et summary cards.",
-        "Amélioration des composants **WeaponMiniCard** et **AmuletMiniCard** pour supporter plusieurs main stats avec icônes de fallback.",
-        "Implémentation complète de la structure **schema.org JSON-LD VideoGame + CreativeWork** sur /equipments.",
-        "Inclusion des images pour tous les **weapons**, **amulets**, **armor sets**, **talismans** et **exclusive equipment** dans le JSON-LD.",
-        "Variation dynamique des images de sets (**Helmet**, **Armor**, **Gloves**, **Shoes**) pour une représentation réaliste.",
-        "Ajout du **linking URL automatique** pour les Exclusive Equipment vers les pages personnages dans les structured data.",
-        "Unification de la structure de code entre les composants **weapon** et **amulet** pour faciliter la maintenance.",
-        "Résolution des erreurs critiques Search Console en passant à un schéma **VideoGame** approprié.",
-        "Outils internes : ajout d'un **bouton de prévisualisation JSON-LD** pour la validation en dev."
+        "Ajout des **données et images** relatives à tous les équipements exclusifs pour tous les personnages.",
+        "Chaque EE comprend des métadonnées complètes (nom, statistique principale, effets +0/+10).",
+        "Ajout de la **prise en charge des statistiques doubles** pour les armes et les amulettes (forcedMainStat avec le séparateur `/`).",
+        "Les **icônes et les valeurs statistiques** s'affichent désormais correctement dans les infobulles et les fiches récapitulatives.",
+        "Amélioration des composants **WeaponMiniCard** et **AmuletMiniCard** afin de prendre en charge plusieurs statistiques principales avec des icônes de secours.",
+        "Mise en place de la structure complète **VideoGame + CreativeWork** **schema.org JSON-LD** sur la page /equipments.",
+        "Images incluses pour toutes les **armes**, **amulettes**, **ensembles d'armures**, **talismans** et **équipements exclusifs** au format JSON-LD.",
+        "Des images variées s'affichent de manière dynamique (**Casque**, **Armure**, **Gants**, **Chaussures**) pour un rendu réaliste.",
+        "Ajout d'un **lien URL automatique** vers les pages des personnages pour l'équipement exclusif dans les données structurées.",
+        "Structure de code harmonisée entre les composants **arme** et **amulette** afin de faciliter la maintenance.",
+        "Les erreurs critiques de Search Console ont été résolues grâce à l'adoption du schéma **VideoGame** approprié.",
+        "Outils internes : ajout d'un **bouton d'aperçu JSON-LD** pour la validation en cours de développement."
       ]
     }
   },
@@ -2823,11 +3540,17 @@
     "type": "update",
     "title": {
       "en": "Character Additions",
-      "fr": "Ajouts de personnages"
+      "jp": "キャラクターの追加",
+      "kr": "캐릭터 추가",
+      "zh": "新增角色",
+      "fr": "Nouveaux personnages"
     },
     "content": {
       "en": ["Added character from Christina to Ember (39 / 101)."],
-      "fr": ["Ajout des personnages de Christina à Ember (39 / 101)."]
+      "jp": ["クリスティーナからエンバーにキャラクターを追加しました（39 / 101）。"],
+      "kr": ["크리스티나에서 엠버로 캐릭터를 추가했습니다 (39 / 101)."],
+      "zh": ["从克里斯蒂娜处为埃姆伯增加了角色（39 / 101）。"],
+      "fr": ["Ajout d'un personnage de Christina à Ember (39 / 101)."]
     }
   },
   {
@@ -2835,7 +3558,10 @@
     "type": "feature",
     "title": {
       "en": "Character Additions & Burn Visuals",
-      "fr": "Ajouts de personnages & visuels Burn"
+      "jp": "キャラクターの追加とバーンエフェクト",
+      "kr": "캐릭터 추가 및 화상 효과",
+      "zh": "角色新增内容与燃烧特效",
+      "fr": "Ajouts de personnages et effets visuels de brûlure"
     },
     "content": {
       "en": [
@@ -2845,12 +3571,33 @@
         "Corrected **Charisma Bryn**'s skill placement.",
         "Added Open Graph metadata for the Equipment page and icons to the Characters list."
       ],
+      "jp": [
+        "キャラクターデータベースに、**シャーロット**、**カレン**、およびAからBまでのすべてのキャラクターを追加しました。",
+        "ゲーム内のビジュアルに合わせて、バーンカードのスキルアイコン（左上隅）を追加しました。",
+        "**ルナ**および**ヒルデ**の覚醒画面における表示のずれを修正しました。",
+        "**Charisma Bryn**のスキル配置を修正しました。",
+        "「装備」ページにOpen Graphメタデータを追加し、「キャラクター一覧」にアイコンを追加しました。"
+      ],
+      "kr": [
+        "캐릭터 데이터베이스에 **샬럿**, **카렌**, 그리고 A부터 B까지의 모든 캐릭터를 추가했습니다.",
+        "게임 내 시각 효과와 일치하도록 번 카드에 스킬 아이콘(왼쪽 상단 모서리)을 추가했습니다.",
+        "**루나**와 **힐데**의 각성 화면에서 발생하던 정렬 오류를 수정했습니다.",
+        "**Charisma Bryn**의 스킬 배치를 수정했습니다.",
+        "‘장비’ 페이지에 오픈 그래프 메타데이터를 추가하고, ‘캐릭터’ 목록에 아이콘을 추가했습니다."
+      ],
+      "zh": [
+        "已将**夏洛特**、**卡伦**以及从A到B的所有角色添加到角色数据库中。",
+        "在燃烧卡牌上添加了技能图标（左上角），以与游戏内视觉效果保持一致。",
+        "修复了**Luna**和**Hilde**觉醒画面中的对齐问题。",
+        "修正了**Charisma Bryn**的技能位置。",
+        "为“装备”页面添加了 Open Graph 元数据，并在“角色”列表中添加了图标。"
+      ],
       "fr": [
-        "Ajout de **Charlotte**, **Caren** et de tous les personnages de A à B à la base de données.",
-        "Ajout de l'icône de compétence (coin haut gauche) sur les cards de burn pour correspondre aux visuels in-game.",
-        "Correction du mauvais alignement des affichages d'awakening de **Luna** et **Hilde**.",
-        "Correction du placement de skill de **Charisma Bryn**.",
-        "Ajout des métadonnées Open Graph pour la page Equipment et des icônes pour la liste des personnages."
+        "Ajout de **Charlotte**, **Caren** et de tous les personnages dont le nom commence par A ou B à la base de données des personnages.",
+        "Ajout de l'icône de compétence (coin supérieur gauche) sur les cartes « Burn » afin de l'harmoniser avec les graphismes du jeu.",
+        "Correction d'un problème d'alignement dans les écrans d'éveil de **Luna** et **Hilde**.",
+        "Correction du placement des compétences de **Charisma Bryn**.",
+        "Ajout de métadonnées Open Graph pour la page « Équipement » et d'icônes à la liste des personnages."
       ]
     }
   },
@@ -2859,7 +3606,10 @@
     "type": "feature",
     "title": {
       "en": "New Characters & Visual Enhancements",
-      "fr": "Nouveaux personnages & améliorations visuelles"
+      "jp": "新キャラクターとビジュアルの改良",
+      "kr": "새로운 캐릭터 및 그래픽 개선",
+      "zh": "新角色与画面优化",
+      "fr": "Nouveaux personnages et améliorations graphiques"
     },
     "content": {
       "en": [
@@ -2867,10 +3617,25 @@
         "Updated the homepage banner with a new visual and smooth CSS masking.",
         "Refined the style of the \"Currently Pullable\" section for a cleaner layout."
       ],
+      "jp": [
+        "キャラクターデータベースに**ルナ**、**ヒルデ**、**アデリー**を追加しました。",
+        "ホームページのバナーを、新しいビジュアルと滑らかなCSSマスキングで更新しました。",
+        "「現在プル可能なもの」セクションのスタイルを調整し、よりすっきりとしたレイアウトにしました。"
+      ],
+      "kr": [
+        "캐릭터 데이터베이스에 **루나**, **힐데**, **아델리**를 추가했습니다.",
+        "홈페이지 배너를 새로운 비주얼과 부드러운 CSS 마스킹 효과로 업데이트했습니다.",
+        "“현재 풀링 가능” 섹션의 스타일을 다듬어 레이아웃을 더 깔끔하게 정리했습니다."
+      ],
+      "zh": [
+        "已将**露娜**、**希尔德**和**阿德利**添加到角色数据库中。",
+        "更新了首页横幅，采用了新的视觉设计和流畅的CSS遮罩效果。",
+        "优化了“当前可拉取”部分的样式，使布局更加简洁。"
+      ],
       "fr": [
         "Ajout de **Luna**, **Hilde** et **Adelie** à la base de données des personnages.",
-        "Mise à jour de la banner de la homepage avec un nouveau visuel et un masking CSS smooth.",
-        "Affinage du style de la section « Currently Pullable » pour un layout plus propre."
+        "Mise à jour de la bannière de la page d'accueil avec un nouveau visuel et un masquage CSS fluide.",
+        "Nous avons peaufiné le style de la section « Disponible actuellement » afin d'obtenir une mise en page plus épurée."
       ]
     }
   },
@@ -2879,7 +3644,10 @@
     "type": "update",
     "title": {
       "en": "Cleanup & UI Polish for Changelog and Updates",
-      "fr": "Cleanup & polish UI du changelog et des updates"
+      "jp": "変更履歴とアップデートの整理およびUIの改良",
+      "kr": "변경 내역 및 업데이트 항목에 대한 정리 및 UI 개선",
+      "zh": "对“更新日志”和“更新”部分进行整理与界面优化",
+      "fr": "Nettoyage et amélioration de l'interface utilisateur pour le journal des modifications et les mises à jour"
     },
     "content": {
       "en": [
@@ -2889,12 +3657,33 @@
         "Homepage \"Recent Updates\" section uses a timeline-style vertical layout with animated section titles.",
         "Removed all STOVE news integration attempts for maintainability reasons."
       ],
+      "jp": [
+        "ホームページと「/changelog」の更新履歴エントリ間で、ビジュアルスタイルを統一する。",
+        "更新の種類（FEATURE、FIX、UPDATE...）ごとにバッジの色を割り当てた、デザイン性の高い変更履歴カード。",
+        "変更履歴のエントリでマークダウンレンダリングが有効になり、リスト、リンク、書式設定に対応しました。",
+        "ホームページの「最新情報」セクションでは、アニメーション付きのセクションタイトルを備えた、タイムライン風の縦型レイアウトが採用されています。",
+        "保守性を考慮し、STOVE関連のニュース統合に関するすべての試みを削除しました。"
+      ],
+      "kr": [
+        "업데이트 항목에 대해 홈페이지와 /changelog 간의 시각적 스타일을 통일합니다.",
+        "각 업데이트 유형(FEATURE, FIX, UPDATE...)에 따라 배지 색상이 적용된 스타일리시한 변경 내역 카드.",
+        "변경 내역 항목에 대해 마크다운 렌더링이 활성화되어 목록, 링크 및 서식 지정이 가능해졌습니다.",
+        "홈페이지의 “최근 업데이트” 섹션은 애니메이션이 적용된 섹션 제목과 함께 타임라인 스타일의 세로형 레이아웃을 사용합니다.",
+        "유지 관리 편의성을 고려하여 STOVE 뉴스 연동 시도를 모두 제거했습니다."
+      ],
+      "zh": [
+        "首页和 /changelog 页面中更新条目的视觉风格保持统一。",
+        "设计了更新日志卡片，并为每种更新类型（功能、修复、更新等）设置了相应的徽章颜色。",
+        "已为变更日志条目启用 Markdown 渲染功能，以支持列表、链接和格式设置。",
+        "主页的“最新动态”栏目采用时间轴风格的垂直布局，栏目标题带有动画效果。",
+        "出于可维护性的考虑，已移除所有与 STOVE 新闻集成的尝试。"
+      ],
       "fr": [
-        "Unification du style visuel entre la homepage et /changelog pour les entrées d'update.",
-        "Stylisation des cards de changelog avec des badges colorés pour chaque type (FEATURE, FIX, UPDATE...).",
-        "Rendu Markdown activé pour les entrées de changelog (listes, liens et formatage).",
-        "La section « Recent Updates » de la homepage utilise un layout vertical en timeline avec des titres de section animés.",
-        "Suppression des tentatives d'intégration des news STOVE pour des raisons de maintenance."
+        "Harmonisation du style visuel entre la page d'accueil et la page /changelog pour les entrées de mise à jour.",
+        "Fiches de journal des modifications stylisées, avec des couleurs de badge pour chaque type de mise à jour (FONCTIONNALITÉ, CORRECTION, MISE À JOUR...).",
+        "Le rendu Markdown est activé pour les entrées du journal des modifications afin de prendre en charge les listes, les liens et la mise en forme.",
+        "La section « Mises à jour récentes » de la page d'accueil utilise une mise en page verticale de type chronologique avec des titres de section animés.",
+        "Toutes les tentatives d'intégration des actualités STOVE ont été supprimées pour des raisons de facilité de maintenance."
       ]
     }
   },
@@ -2903,7 +3692,10 @@
     "type": "update",
     "title": {
       "en": "Homepage & SEO improvements, gear note rework",
-      "fr": "Améliorations homepage & SEO, refonte des gear notes"
+      "jp": "ホームページおよびSEOの改善、ギアノートの見直し",
+      "kr": "홈페이지 및 SEO 개선, 기어 노트 개편",
+      "zh": "主页及搜索引擎优化（SEO）改进，装备说明重写",
+      "fr": "Améliorations apportées à la page d'accueil et au référencement naturel (SEO), refonte de la rubrique « Équipement »"
     },
     "content": {
       "en": [
@@ -2913,12 +3705,33 @@
         "Fixed issues with special characters in charm names.",
         "Added sitemap, robots.txt, and SEO check scripts."
       ],
+      "jp": [
+        "ホームページのSEOを改善し、ソーシャルプレビュー用のOpen Graphバナーを追加しました。",
+        "キャラクターページおよび装備ページにJSON-LDメタデータを追加しました。",
+        "ギアのメモ形式が簡略化され、星印のテキストの代わりにアイコンが表示されるようになりました。",
+        "チャーム名に含まれる特殊文字に関する問題を修正しました。",
+        "サイトマップ、robots.txt、およびSEOチェックスクリプトを追加しました。"
+      ],
+      "kr": [
+        "홈페이지 SEO를 개선하고, 소셜 미리보기를 위한 오픈 그래프 배너를 추가했습니다.",
+        "캐릭터 및 장비 페이지에 JSON-LD 메타데이터를 추가했습니다.",
+        "기어 노트 형식이 간소화되었으며, 이제 별표 텍스트 대신 아이콘이 표시됩니다.",
+        "참 이름에 포함된 특수 문자와 관련된 문제를 수정했습니다.",
+        "사이트맵, robots.txt 및 SEO 점검 스크립트를 추가했습니다."
+      ],
+      "zh": [
+        "优化了首页的搜索引擎优化（SEO），并添加了用于社交媒体预览的 Open Graph 横幅。",
+        "在角色和装备页面中添加了 JSON-LD 元数据。",
+        "简化了齿轮注释的格式，现在显示图标而非星号文本。",
+        "修复了符文名称中包含特殊字符的问题。",
+        "添加了网站地图、robots.txt 文件以及 SEO 检查脚本。"
+      ],
       "fr": [
-        "Amélioration du SEO de la homepage et ajout d'une banner Open Graph pour les previews sociaux.",
-        "Ajout des métadonnées JSON-LD aux pages personnages et équipement.",
-        "Simplification du format des gear notes, qui affichent désormais des icônes au lieu de texte d'étoiles.",
-        "Correction des problèmes avec les caractères spéciaux dans les noms de charms.",
-        "Ajout du sitemap, robots.txt et de scripts de SEO check."
+        "Optimisation du référencement naturel (SEO) de la page d'accueil et ajout d'une bannière Open Graph pour les aperçus sur les réseaux sociaux.",
+        "Ajout de métadonnées JSON-LD aux pages consacrées aux personnages et à l'équipement.",
+        "Le format des notes sur les équipements a été simplifié et affiche désormais des icônes à la place des étoiles.",
+        "Correction de problèmes liés aux caractères spéciaux dans les noms des charmes.",
+        "Ajout d'un plan du site, d'un fichier robots.txt et de scripts de vérification du référencement."
       ]
     }
   },
@@ -2927,14 +3740,26 @@
     "type": "feature",
     "title": {
       "en": "Major Data Pipeline Update",
+      "jp": "データパイプラインの大幅な更新",
+      "kr": "주요 데이터 파이프라인 업데이트",
+      "zh": "数据管道重大更新",
       "fr": "Mise à jour majeure du pipeline de données"
     },
     "content": {
       "en": [
         "Automated extraction and parsing of in-game data from `.bytes` files. Character JSONs are now generated with full skill info (enhancements, chain/dual effects, buffs/debuffs), exclusive equipment (`ee.json`), and recommended gear (`data/reco/`). Character data (excluding gear reco) will go live in a few days!"
       ],
+      "jp": [
+        "`.bytes` ファイルからのゲーム内データの自動抽出および解析。キャラクターの JSON ファイルには、スキル情報（エンハンスメント、チェーン／デュアル効果、バフ／デバフ）の全内容、専用装備（`ee.json`）、および推奨装備（`data/reco/`）が含まれるようになりました。 キャラクターデータ（装備推奨リストを除く）は、数日中に公開予定です！"
+      ],
+      "kr": [
+        "`.bytes` 파일에서 게임 내 데이터를 자동으로 추출하고 파싱합니다. 이제 캐릭터 JSON 파일에는 전체 스킬 정보(강화 효과, 연쇄/이중 효과, 버프/디버프), 전용 장비(`ee.json`), 추천 장비(`data/reco/`)가 포함되어 생성됩니다. (장비 추천을 제외한) 캐릭터 데이터는 며칠 내로 공개될 예정입니다!"
+      ],
+      "zh": [
+        "自动从 `.bytes` 文件中提取并解析游戏内数据。现在生成的角色 JSON 文件包含完整的技能信息（强化、连锁/双重效果、增益/减益）、专属装备（`ee.json`）以及推荐装备（`data/reco/`）。 角色数据（不包括装备推荐）将在几天后上线！"
+      ],
       "fr": [
-        "Extraction et parsing automatisés des données in-game depuis les fichiers `.bytes`. Les JSON des personnages sont désormais générés avec les infos de skills complètes (enhancements, effets chain/dual, buffs/debuffs), Exclusive Equipment (`ee.json`) et recommandations de gear (`data/reco/`). Les données des personnages (hors gear reco) seront en ligne d'ici quelques jours !"
+        "Extraction et analyse automatisées des données du jeu à partir des fichiers `.bytes`. Les fichiers JSON des personnages sont désormais générés avec toutes les informations relatives aux compétences (améliorations, effets en chaîne/doubles, buffs/débuffs), l'équipement exclusif (`ee.json`) et l'équipement recommandé (`data/reco/`). Les données de personnage (à l'exception des recommandations d'équipement) seront mises en ligne dans quelques jours !"
       ]
     }
   },
@@ -2943,14 +3768,26 @@
     "type": "feature",
     "title": {
       "en": "Official Discord Server",
+      "jp": "公式Discordサーバー",
+      "kr": "공식 디스코드 서버",
+      "zh": "官方 Discord 服务器",
       "fr": "Serveur Discord officiel"
     },
     "content": {
       "en": [
         "The official Outerpedia Discord server is now live! [Join the community](https://discord.com/invite/PNMd5mkAV8) to discuss builds, report issues, suggest improvements, and receive update notifications."
       ],
+      "jp": [
+        "Outerpediaの公式Discordサーバーが開設されました！[コミュニティに参加する](https://discord.com/invite/PNMd5mkAV8)して、ビルドについて話し合ったり、不具合を報告したり、改善案を提案したり、アップデート通知を受け取ったりしましょう。"
+      ],
+      "kr": [
+        "Outerpedia 공식 디스코드 서버가 오픈되었습니다! [커뮤니티에 참여하세요](https://discord.com/invite/PNMd5mkAV8) 빌드에 대해 논의하고, 문제를 신고하며, 개선 사항을 제안하고, 업데이트 알림을 받아보세요."
+      ],
+      "zh": [
+        "Outerpedia 官方 Discord 服务器现已上线！[加入社区](https://discord.com/invite/PNMd5mkAV8)，讨论配置方案、报告问题、提出改进建议，并接收更新通知。"
+      ],
       "fr": [
-        "Le serveur Discord officiel d'Outerpedia est en ligne ! [Rejoignez la communauté](https://discord.com/invite/PNMd5mkAV8) pour discuter de builds, signaler des problèmes, suggérer des améliorations et recevoir des notifications de mise à jour."
+        "Le serveur Discord officiel d'Outerpedia est désormais disponible ! [Rejoignez la communauté](https://discord.com/invite/PNMd5mkAV8) pour discuter des configurations, signaler des problèmes, proposer des améliorations et recevoir des notifications de mise à jour."
       ]
     }
   },
@@ -2959,14 +3796,24 @@
     "type": "feature",
     "title": {
       "en": "Weapon MiniCard Tooltip",
-      "fr": "Tooltip Weapon MiniCard"
+      "jp": "武器のミニカード・ツールチップ",
+      "kr": "무기 미니카드 툴팁",
+      "zh": "武器迷你卡工具提示",
+      "fr": "Info-bulle de la MiniCard « Arme »"
     },
     "content": {
       "en": [
         "Added a detailed tooltip on weapon hover in the Recommended Gear section of character pages."
       ],
+      "jp": [
+        "キャラクターページの「おすすめ装備」セクションで、武器にカーソルを合わせると表示される詳細なツールチップを追加しました。"
+      ],
+      "kr": [
+        "캐릭터 페이지의 ‘추천 장비’ 섹션에서 무기에 마우스를 올렸을 때 표시되는 상세한 툴팁을 추가했습니다."
+      ],
+      "zh": ["在角色页面“推荐装备”部分，为武器悬停时添加了详细的工具提示。"],
       "fr": [
-        "Ajout d'un tooltip détaillé au hover sur les weapons dans la section Recommended Gear des pages personnages."
+        "Ajout d'une infobulle détaillée qui s'affiche lorsque l'on passe la souris sur une arme dans la section « Équipement recommandé » des pages de personnage."
       ]
     }
   },
@@ -2975,12 +3822,22 @@
     "type": "update",
     "title": {
       "en": "Skills Disclaimer",
-      "fr": "Disclaimer des skills"
+      "jp": "スキルに関する免責事項",
+      "kr": "기술 관련 면책 조항",
+      "zh": "技能免责声明",
+      "fr": "Avertissement concernant les compétences"
     },
     "content": {
       "en": ["Added a disclaimer: 'Skills are displayed here with maximum enhancements applied.'"],
+      "jp": [
+        "免責事項を追加しました：「ここに表示されているスキルは、最大強化が適用された状態のものとなります。」"
+      ],
+      "kr": [
+        "다음과 같은 주의 사항을 추가했습니다. ‘여기에 표시된 스킬은 최대 강화 상태가 적용된 것입니다.’"
+      ],
+      "zh": ["添加了一条免责声明：“此处显示的技能已应用了最大强化效果。”"],
       "fr": [
-        "Ajout d'un disclaimer : « Les skills affichés ici le sont avec les enhancements maximum appliqués. »"
+        "Ajout d'une mention : « Les compétences sont présentées ici avec toutes les améliorations possibles. »"
       ]
     }
   },
@@ -2989,12 +3846,20 @@
     "type": "fix",
     "title": {
       "en": "Exclusive Equipment Level Fix",
-      "fr": "Correctif du niveau Exclusive Equipment"
+      "jp": "限定装備のレベル修正",
+      "kr": "독점 장비 레벨 수정",
+      "zh": "专属装备等级修复",
+      "fr": "Correction exclusive du niveau d'équipement"
     },
     "content": {
       "en": ["Corrected display of Exclusive Equipment levels: 'EE: Lv. 10', not 'rank 10'."],
+      "jp": [
+        "「専用装備」のレベル表示を修正しました。「ランク10」ではなく「EE：Lv. 10」と表示されます。"
+      ],
+      "kr": ["독점 장비 레벨 표기 수정: ‘EE: Lv. 10’으로, ‘rank 10’이 아님."],
+      "zh": ["修正了专属装备等级的显示：应为“EE：Lv. 10”，而非“rank 10”。"],
       "fr": [
-        "Correction de l'affichage des niveaux d'Exclusive Equipment : « EE : Nv. 10 », et non « rank 10 »."
+        "Correction de l'affichage des niveaux d'équipement exclusif : « EE : Niv. 10 », et non « rang 10 »."
       ]
     }
   },
@@ -3003,14 +3868,26 @@
     "type": "feature",
     "title": {
       "en": "Initial Changelog Setup",
-      "fr": "Mise en place initiale du changelog"
+      "jp": "初期変更履歴の設定",
+      "kr": "초기 변경 내역 설정",
+      "zh": "初始变更日志设置",
+      "fr": "Configuration initiale du journal des modifications"
     },
     "content": {
       "en": [
         "Created a visual changelog page and linked it in the footer. Last 10 updates are now shown on the homepage."
       ],
+      "jp": [
+        "変更履歴を視覚的に確認できるページを作成し、フッターにリンクを貼りました。トップページには、直近の10件の更新情報が表示されるようになりました。"
+      ],
+      "kr": [
+        "시각적인 변경 내역 페이지를 만들고 푸터에 링크를 추가했습니다. 이제 홈페이지에 최근 10건의 업데이트 내역이 표시됩니다."
+      ],
+      "zh": [
+        "创建了一个可视化更新日志页面，并在页脚中添加了链接。现在，首页会显示最近的10次更新。"
+      ],
       "fr": [
-        "Création d'une page changelog visuelle et lien ajouté dans le footer. Les 10 dernières mises à jour sont désormais affichées sur la homepage."
+        "J'ai créé une page présentant l'historique des modifications sous forme visuelle et j'ai ajouté un lien vers celle-ci dans le pied de page. Les 10 dernières mises à jour s'affichent désormais sur la page d'accueil."
       ]
     }
   },
@@ -3019,12 +3896,20 @@
     "type": "update",
     "title": {
       "en": "Character Page Enhancements",
-      "fr": "Améliorations de la page personnage"
+      "jp": "キャラクターページの機能強化",
+      "kr": "캐릭터 페이지 개선 사항",
+      "zh": "角色页面优化",
+      "fr": "Améliorations apportées à la page des personnages"
     },
     "content": {
       "en": ["Added chain and dual attack effects with icons based on character element."],
+      "jp": [
+        "キャラクターの属性に基づいたアイコン付きの「チェーン」および「デュアルアタック」効果を追加しました。"
+      ],
+      "kr": ["캐릭터의 속성에 따라 달라지는 아이콘과 함께 체인 및 이중 공격 효과를 추가했습니다."],
+      "zh": ["新增了连锁攻击和双重攻击效果，其图标根据角色属性而定。"],
       "fr": [
-        "Ajout des effets chain et dual attack avec icônes basées sur l'élément du personnage."
+        "Ajout d'effets de chaîne et de double attaque avec des icônes correspondant à l'élément du personnage."
       ]
     }
   },
@@ -3033,14 +3918,24 @@
     "type": "feature",
     "title": {
       "en": "Buff/Debuff Filters",
-      "fr": "Filtres Buff/Debuff"
+      "jp": "バフ／デバフフィルター",
+      "kr": "버프/디버프 필터",
+      "zh": "增益/减益过滤器",
+      "fr": "Filtres de buffs/débuffs"
     },
     "content": {
       "en": [
         "Implemented filter interface for buffs and debuffs with AND/OR logic and icon support."
       ],
+      "jp": [
+        "バフおよびデバフ向けに、AND/ORロジックとアイコン対応を備えたフィルターインターフェースを実装しました。"
+      ],
+      "kr": [
+        "AND/OR 논리를 적용하고 아이콘을 지원하는 버프 및 디버프 필터 인터페이스를 구현했습니다."
+      ],
+      "zh": ["实现了用于增益和减益效果的过滤器接口，支持“与”/“或”逻辑及图标显示。"],
       "fr": [
-        "Implémentation d'une interface de filtres pour buffs et debuffs avec logique AND/OR et support des icônes."
+        "Mise en place d'une interface de filtrage pour les bonus et les malus, avec une logique « ET/OU » et la prise en charge des icônes."
       ]
     }
   },
@@ -3049,14 +3944,20 @@
     "type": "fix",
     "title": {
       "en": "Basic Equipment Filters",
-      "fr": "Filtres Basic Equipment"
+      "jp": "基本装備のフィルター",
+      "kr": "기본 장비 필터",
+      "zh": "基本设备过滤器",
+      "fr": "Filtres pour équipement de base"
     },
     "content": {
       "en": [
         "Filtered out exclusive gear and talismans from the Equipment page. Only basic gear is shown."
       ],
+      "jp": ["「装備」ページから限定装備とお守りを除外しました。基本装備のみが表示されています。"],
+      "kr": ["‘장비’ 페이지에서 전용 장비와 부적을 제외했습니다. 기본 장비만 표시됩니다."],
+      "zh": ["已从“装备”页面中过滤掉了专属装备和护身符。仅显示基础装备。"],
       "fr": [
-        "Exclusion des exclusive gear et talismans de la page Equipment. Seul le gear de base est affiché."
+        "Les équipements exclusifs et les talismans ont été masqués sur la page « Équipement ». Seuls les équipements de base sont affichés."
       ]
     }
   },
@@ -3065,12 +3966,22 @@
     "type": "feature",
     "title": {
       "en": "Armor Set Visual Cards",
-      "fr": "Cards visuelles des armor sets"
+      "jp": "アーマーセットのビジュアルカード",
+      "kr": "갑옷 세트 비주얼 카드",
+      "zh": "护甲套装视觉卡",
+      "fr": "Cartes illustrées des ensembles d'armures"
     },
     "content": {
       "en": ["Introduced visual cards for armor sets with hover effects and custom backgrounds."],
+      "jp": [
+        "アーマーセット用のビジュアルカードを導入し、ホバー効果やカスタム背景を追加しました。"
+      ],
+      "kr": [
+        "마우스 오버 효과와 사용자 지정 배경을 적용한 방어구 세트용 시각적 카드를 도입했습니다."
+      ],
+      "zh": ["为护甲套装引入了带有悬停效果和自定义背景的视觉卡片。"],
       "fr": [
-        "Introduction de cards visuelles pour les armor sets avec effets de hover et arrière-plans personnalisés."
+        "Ajout de cartes visuelles pour les ensembles d'armures, avec des effets au survol et des arrière-plans personnalisés."
       ]
     }
   },

@@ -15,6 +15,14 @@
  *      Aer (pénétration portée par l'EE seul), Vlada (pénétration débloquée à la
  *      transcendance seulement), Francesca (buff de pénétration NOMMÉ, que
  *      l'heuristique « effet sans tooltip » ratait).
+ *
+ * ⚠ AUCUN EFFECTIF N'EST FIGÉ ICI, et c'est délibéré : ce fichier garde une
+ * donnée VIVANTE, qui grossit à chaque patch. Un `toHaveLength(47)` transformait
+ * chaque intégration de perso en échec de pré-commit, avec un chiffre qu'on ne
+ * pouvait corriger qu'en committant — le test se bloquait lui-même. Les
+ * effectifs sont donc des PLANCHERS (« la détection ne s'effondre pas ») et la
+ * justesse est portée par des RÈGLES et des cas nommés, qui ne dépendent, eux,
+ * d'aucun compte.
  */
 import { describe, expect, it } from 'vitest';
 import charactersData from '../../data/generated/characters.json';
@@ -35,6 +43,26 @@ const byId = (id: string) => characters[id];
 
 /** Le seul tag que l'extraction ne peut PAS dériver (aucun marqueur en table). */
 const HUMAN_ONLY = 'free';
+
+/**
+ * PLANCHER, pas un recensement. Le nombre de persos à pénétration innée grandit
+ * à chaque patch, et le figer rendait ce test AUTO-BLOQUANT : intégrer un perso
+ * le faisait échouer, le hook de pré-commit refusait le commit, et corriger le
+ * chiffre demandait justement de committer. On tournait en rond (26/07).
+ *
+ * Ce qu'un compte protégeait réellement, c'est que la DÉTECTION ne s'effondre
+ * pas — un détecteur cassé rend 0 ou une poignée, pas 47. Un plancher le dit
+ * aussi bien, sans casser à chaque ajout. La JUSTESSE, elle, est gardée par ce
+ * qui suit et qui ne dépend d'aucun effectif : la règle « taggé ⇔ provenance »,
+ * la validité des provenances, et les cas ÉPINGLÉS NOMMÉMENT plus bas — Delta,
+ * Aer, Vlada, Francesca, Beth… — qui sont la mémoire des bugs passés.
+ *
+ * À ne toucher QUE si la détection régresse vraiment sous ce seuil.
+ */
+const IGNORE_DEFENSE_FLOOR = 47;
+
+/** Les voies d'acquisition d'une pénétration innée que le modèle connaît. */
+const PIERCE_ORIGINS = new Set(['kit', 'ee', 'transcend']);
 
 describe('vocabulaire des tags', () => {
   it('tout tag porté par un perso est défini dans data/curated/tags.json', () => {
@@ -88,12 +116,13 @@ describe('détection des tags d’acquisition (RecruitGroupTemplet)', () => {
     }
   });
 
-  it('les effectifs par catégorie sont ceux du jeu', () => {
-    expect(withTag('premium')).toHaveLength(11);
-    expect(withTag('limited')).toHaveLength(4);
-    // 6e seasonal : Heatwave Cop Delta (2000121), patch du 2026-07-14.
-    expect(withTag('seasonal')).toHaveLength(6);
-    expect(withTag('collab')).toHaveLength(3);
+  it('les effectifs par catégorie ne RÉGRESSENT pas', () => {
+    // Planchers, pas un recensement — cf. l'explication en tête de fichier.
+    // Ces catégories grandissent à chaque bannière.
+    expect(withTag('premium').length).toBeGreaterThanOrEqual(11);
+    expect(withTag('limited').length).toBeGreaterThanOrEqual(4);
+    expect(withTag('seasonal').length).toBeGreaterThanOrEqual(6);
+    expect(withTag('collab').length).toBeGreaterThanOrEqual(3);
   });
 
   it('les trois personnages de collaboration sont taggés collab', () => {
@@ -106,10 +135,22 @@ describe('détection des tags d’acquisition (RecruitGroupTemplet)', () => {
 });
 
 describe('détection de ignore-defense (pénétration INNÉE)', () => {
-  it('47 personnages percent la DEF par eux-mêmes', () => {
-    // 47e : Heatwave Cop Delta (2000121) — même famille que le cas épinglé
-    // Delta (pénétration derrière une indirection BT_GROUP), patch 2026-07-14.
-    expect(withTag('ignore-defense')).toHaveLength(47);
+  it('la détection ne s’effondre pas (plancher, pas un recensement)', () => {
+    expect(withTag('ignore-defense').length).toBeGreaterThanOrEqual(IGNORE_DEFENSE_FLOOR);
+  });
+
+  it('toute provenance est une origine CONNUE', () => {
+    // Ce que le compte figé garantissait aussi, en creux : que la détection ne
+    // se mette pas à produire n'importe quoi. Une provenance inconnue = une
+    // nouvelle voie d'acquisition non modélisée, à traiter, pas à laisser passer.
+    // Filtré sur la valeur BRUTE, pas sur une chaîne recomposée : un nom de
+    // perso contenant « : » suffirait à faire mentir un `split`.
+    const unknown = all.flatMap((c) =>
+      (c.ignoreDefense ?? [])
+        .filter((o) => !PIERCE_ORIGINS.has(o))
+        .map((o) => `${c.name.en} → ${o}`),
+    );
+    expect(unknown).toEqual([]);
   });
 
   it('tout perso taggé porte au moins une provenance, et inversement', () => {

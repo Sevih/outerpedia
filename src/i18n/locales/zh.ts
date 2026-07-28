@@ -343,8 +343,9 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.disclaimer':
     '开发中 — 伤害计算器正在积极开发中。在我们调试和添加对装备/增益的支持的过程中，结果可能与游戏内数值存在偏差。',
   'tools.damage-calculator.settings.title': '账户设置',
-  'tools.damage-calculator.settings.subtitle': '天赋增益适用于所有角色',
+  'tools.damage-calculator.settings.subtitle': '图鉴与天赋增益适用于所有角色',
   'tools.damage-calculator.settings.quirks': '天赋',
+  'tools.damage-calculator.settings.codex': '同伴图鉴',
   'tools.damage-calculator.settings.reset': '重置',
   'tools.damage-calculator.settings.activate_all': '全部激活',
   'tools.damage-calculator.settings.quirk_element': '属性',
@@ -465,6 +466,7 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.tab.compare': '对比3套配装',
   // Attacker panel labels
   'tools.damage-calculator.attacker.pick': '选择输出角色…',
+  'tools.damage-calculator.attacker.affinity': '好感度',
   'tools.damage-calculator.attacker.crit': '暴击',
   'tools.damage-calculator.attacker.burst_label': '爆发',
   'tools.damage-calculator.attacker.burst_off': '关闭',

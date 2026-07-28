@@ -3099,6 +3099,33 @@
       }
     ]
   },
+  "2000118": {
+    "name": {
+      "en": "Triaena",
+      "jp": "トリアイナ",
+      "kr": "트리아이나",
+      "zh": "特里艾娜"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000118",
+    "craftable": false,
+    "character": "2000118",
+    "trustLevel": 10,
+    "options": ["2000118"],
+    "passives": [
+      {
+        "id": "2000118",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100118",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
+  },
   "2000119": {
     "name": {
       "en": "King's Wisdom",
