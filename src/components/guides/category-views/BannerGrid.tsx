@@ -3,7 +3,7 @@ import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { localePath } from '@/lib/navigation';
 import { img } from '@/lib/images';
-import { formatGuideDate, guideUpdatedDate, type Guide } from '@/lib/data/guides';
+import { formatGuideDate, guideBossMonster, guideUpdatedDate } from '@/lib/data/guides';
 import { compareBySeason, seasonStandingAt, seasonsForBoss } from '@/lib/data/content-schedule';
 import { serverNow } from '@/lib/time';
 import { SeasonBadge } from '@/components/guides/SeasonBadge';
@@ -25,13 +25,22 @@ export default async function BannerGrid({ lang, guides }: CategoryViewProps) {
   if (guides.length === 0) return <EmptyCategory lang={lang} />;
 
   const now = serverNow();
-  const standing = (g: Guide) =>
-    g.bossId ? seasonStandingAt(seasonsForBoss(g.bossId), now) : undefined;
-
-  // L'ordre suit le JEU (cf. `compareBySeason`), la date de mise à jour ne sert
-  // plus que de départage — pour les guides qu'aucun calendrier ne connaît.
+  // Le boss d'un guide vient du résolveur UNIQUE `guideBossMonster` (même source
+  // que l'og:image) : `meta.bossId` explicite, ou DÉRIVÉ pour un guild raid — son
+  // boss change chaque saison, joint via le `group` de la version courante, d'où
+  // les guild raids SANS `bossId`. On ne lit donc plus `guide.bossId` brut, qui
+  // leur manque : sinon leur badge de saison (et le tri « actualité ») disparaît.
   const sorted = guides
-    .map((g) => ({ guide: g, st: standing(g) }))
+    .map((g) => {
+      const bossId = guideBossMonster(g)?.id;
+      return {
+        guide: g,
+        bossId,
+        st: bossId ? seasonStandingAt(seasonsForBoss(bossId), now) : undefined,
+      };
+    })
+    // L'ordre suit le JEU (cf. `compareBySeason`), la date de mise à jour ne sert
+    // plus que de départage — pour les guides qu'aucun calendrier ne connaît.
     .sort(
       (a, b) =>
         compareBySeason(a.st, b.st) ||
@@ -43,7 +52,7 @@ export default async function BannerGrid({ lang, guides }: CategoryViewProps) {
     // (cinq guides sur trois colonnes : 3 + 2 orphelines). Avec cinq boss dans un
     // mode qui en fait tourner un à la fois, ça arrive tout le temps.
     <div className="flex flex-wrap justify-center gap-4">
-      {sorted.map(({ guide, st }) => {
+      {sorted.map(({ guide, bossId, st }) => {
         const live = st?.state === 'live';
         return (
           <Link
@@ -70,7 +79,7 @@ export default async function BannerGrid({ lang, guides }: CategoryViewProps) {
             <span className="text-content absolute top-1.5 left-2.5 text-xs drop-shadow-lg">
               {t('page.guide.updated', { date: formatGuideDate(guideUpdatedDate(guide), lang) })}
             </span>
-            <SeasonBadge bossId={guide.bossId} lang={lang} />
+            <SeasonBadge bossId={bossId} lang={lang} />
             <h2 className="text-content-strong absolute inset-0 flex items-center p-3 text-sm font-semibold drop-shadow-lg">
               {lRec(guide.title, lang)}
             </h2>

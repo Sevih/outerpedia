@@ -6416,11 +6416,6 @@
       "mode": "rate",
       "value": 150
     },
-    "2400015": {
-      "stat": "critical_rate",
-      "mode": "flat",
-      "value": 50
-    },
     "2400016": {
       "stat": "atk",
       "mode": "rate",
