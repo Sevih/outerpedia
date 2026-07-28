@@ -6,6 +6,25 @@
 
 ## 2026-07-26
 
+- **`tags.test.ts` ne se bloque plus lui-même** (signalé par Sevih) — le test
+  figeait des EFFECTIFS d'une donnée VIVANTE (`toHaveLength(47)` pour
+  `ignore-defense`, plus les 4 catégories de bannière). Intégrer un perso le
+  faisait donc échouer, le hook de pré-commit refusait le commit, et corriger le
+  chiffre demandait justement de committer : impasse circulaire, vécue le 26/07 en
+  pleine intégration.
+  CE QU'UN COMPTE PROTÉGEAIT VRAIMENT, c'est que la détection ne s'effondre pas —
+  un détecteur cassé rend 0 ou une poignée, pas 47. Un PLANCHER
+  (`toBeGreaterThanOrEqual`) le dit aussi bien sans casser à chaque ajout. La
+  justesse, elle, ne dépendait déjà d'aucun effectif : règle « taggé ⇔
+  provenance », exclusivité des catégories de bannière, et surtout les cas
+  ÉPINGLÉS NOMMÉMENT (Delta, Aer, Vlada, Francesca, Beth…) qui sont la mémoire des
+  bugs — tout ça est intact.
+  Ajouté en remplacement de ce que le compte gardait en creux : toute provenance
+  de pénétration est une origine CONNUE (`kit`/`ee`/`transcend`), donc une
+  nouvelle voie d'acquisition non modélisée fait sonner la suite au lieu de passer
+  inaperçue. 19 cas (contre 18), suite complète à 1243 verts.
+  Le POURQUOI est en tête de fichier : aucun effectif n'y est figé, délibérément.
+
 - **Auto-traduction branchée sur l'éditeur du changelog** — `/admin/tools/changelog`
   était le dernier éditeur localisé sans bouton « Translate » : l'échafaudage de F4
   (`useAutoTranslate` + `TranslateButton`) couvrait six éditeurs, pas celui-là.
