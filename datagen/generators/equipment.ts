@@ -230,6 +230,36 @@ export interface EquipmentData {
   statDescs: Record<string, LangDict>;
 }
 
+/**
+ * TYPO DE NAMEID DANS LA DONNÉE DU JEU — le palier 2★ des accessoires uniques
+ * Lumière/Ténèbres (craft `ICT_WEAPON_LIGHT`/`_DARK`, groupes de reward
+ * 9124/10124). La série vit à tous les paliers (1031=1★, 1181=2★, 1331=3★…
+ * pas de +150) et se reconnaît à son UniqueOptionID (2016–2025, un par famille,
+ * constant du 1★ au 6★). Au 1★ les clés de nom sont `ITEM_ACC_U_1_16..25_NAME` ;
+ * au 2★ les deux premières (`_2_16`/`_2_17`) sont justes mais les HUIT suivantes
+ * ont été mal numérotées `_2_8.._2_15` — les clés des accessoires uniques
+ * CLASSIQUES. Conséquence : « Physical Exorcism 2★ » (1185, ranger) s'appelait
+ * « Resurrection Token » (healer !), et le regroupement par nom fusionnait ces
+ * lignes dans les MAUVAISES familles — la fiche Resurrection Token affichait
+ * ranger en plus de healer (constat Sevih en jeu : ces items sont mono-classe),
+ * idem Clear Mind / Saint's Ring / Combination Simulator ; et les familles L/T
+ * avaient un TROU à 2★ ([1,3,4,5,6]). On RÉPARE le nom à la source : ces lignes
+ * prennent la clé de nom d'un frère de série (même UniqueOptionID, hors du lot),
+ * ce qui les range dans leur vraie famille et comble le palier manquant.
+ */
+const MISNAMED_LD_2STAR = new Set([
+  '1181',
+  '1182',
+  '1183',
+  '1184',
+  '1185',
+  '1186',
+  '1187',
+  '1188',
+  '1189',
+  '1190',
+]);
+
 /** ItemSubType → nom de slot. */
 const SLOT: Record<string, keyof EquipmentData> = {
   ITS_EQUIP_WEAPON: 'weapon',
@@ -678,13 +708,27 @@ export function buildEquipment(): EquipmentData {
     return groupId;
   };
 
+  // Clé de nom CORRECTE par UniqueOptionID pour la série L/T (cf. doc du Set) :
+  // le premier frère hors du lot (le 1★, la table est croissante) fait foi.
+  const ldNameKeyByUO = new Map<string, string>();
+  for (const r of rows) {
+    if (r.ItemType !== 'IT_EQUIP' || MISNAMED_LD_2STAR.has(r.ID)) continue;
+    const uo = r.UniqueOptionID ?? '';
+    if (uo && !uo.includes(',') && !ldNameKeyByUO.has(uo)) ldNameKeyByUO.set(uo, r.NameID);
+  }
+
   for (const r of rows) {
     if (r.ItemType !== 'IT_EQUIP' || !r.ID) continue;
     const slot = SLOT[r.ItemSubType];
     if (!slot) continue;
 
+    // Typo de NameID du palier 2★ L/T : reprendre la clé d'un frère de série.
+    const nameKey = MISNAMED_LD_2STAR.has(r.ID)
+      ? (ldNameKeyByUO.get(r.UniqueOptionID ?? '') ?? r.NameID)
+      : r.NameID;
+
     const identity: Identity = {
-      name: resolveText(text, r.NameID),
+      name: resolveText(text, nameKey),
       grade: slugEnum(r.ItemGrade),
       star: num(r.BasicStar),
       icon: r.IconName ?? '',

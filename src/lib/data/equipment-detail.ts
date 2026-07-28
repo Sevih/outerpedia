@@ -481,9 +481,17 @@ function gearModel(
   variant?: NonNullable<GearFamily['classPassives']>[number],
 ): DetailModel {
   const top = table[f.ids.reduce((m, id) => (table[id].star > table[m].star ? id : m), f.ids[0])];
-  const idSet = new Set(
-    variant ? f.ids.filter((id) => table[id].classLimit === variant.classLimit) : f.ids,
-  );
+  const variantIds = variant
+    ? f.ids.filter((id) => table[id].classLimit === variant.classLimit)
+    : f.ids;
+  const idSet = new Set(variantIds);
+  // Les stats (main/sub) viennent de la ligne top de LA variante, pas du top de
+  // famille : sur les irregular (Briareos's Ambition, Gorgon's Vanity), les pools
+  // de main stat DIFFÈRENT par classe — le top de famille (striker) faisait
+  // afficher à la fiche [Ranger] des mains qu'elle ne peut pas avoir en jeu.
+  const statRow = variant
+    ? table[variantIds.reduce((m, id) => (table[id].star > table[m].star ? id : m), variantIds[0])]
+    : top;
   const name = variant ? withClassSuffix(f.name, variant.classLimit) : f.name;
   return {
     kind,
@@ -493,8 +501,8 @@ function gearModel(
     grade: f.grade,
     star: top.star,
     classLimits: variant ? [variant.classLimit] : f.classLimits,
-    slots: toSlots(top.main, lang),
-    sub: toSubPool(top.sub),
+    slots: toSlots(statRow.main, lang),
+    sub: toSubPool(statRow.sub),
     // Famille à passif PAR CLASSE : un palier par variante, tagué de sa classe
     // (vue d'ensemble) — la fiche d'UNE variante ne porte que le sien.
     passives: (variant

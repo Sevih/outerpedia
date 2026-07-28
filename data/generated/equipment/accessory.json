@@ -1477,10 +1477,10 @@
   },
   "1183": {
     "name": {
-      "en": "Combination Simulator",
-      "jp": "コンビネーションシミュレーター",
-      "kr": "콤비네이션 시뮬레이터",
-      "zh": "组合模拟器"
+      "en": "Starlight Road",
+      "jp": "スターライト・ロード",
+      "kr": "스타라이트 로드",
+      "zh": "星光大道"
     },
     "grade": "unique",
     "star": 2,
@@ -1500,10 +1500,10 @@
   },
   "1184": {
     "name": {
-      "en": "Search and Destroy",
-      "jp": "見敵必殺",
-      "kr": "견적필살",
-      "zh": "见敌必杀"
+      "en": "Queen of Prism",
+      "jp": "クイーン・オブ・プリズム",
+      "kr": "퀸 오브 프리즘",
+      "zh": "棱镜女王"
     },
     "grade": "unique",
     "star": 2,
@@ -1523,10 +1523,10 @@
   },
   "1185": {
     "name": {
-      "en": "Resurrection Token",
-      "jp": "復活の証",
-      "kr": "부활의 증표",
-      "zh": "复活的信物"
+      "en": "Physical Exorcism",
+      "jp": "フィジカルエクソシズム",
+      "kr": "피지컬 엑소시즘",
+      "zh": "除灵案件"
     },
     "grade": "unique",
     "star": 2,
@@ -1546,10 +1546,10 @@
   },
   "1186": {
     "name": {
-      "en": "Dancer's Necklace",
-      "jp": "踊り子の首飾り",
-      "kr": "무희의 목걸이",
-      "zh": "舞娘项链"
+      "en": "A Prima Vista",
+      "jp": "プリマ・ヴィスタ",
+      "kr": "아 프리마 비스타",
+      "zh": "初见"
     },
     "grade": "unique",
     "star": 2,
@@ -1569,10 +1569,10 @@
   },
   "1187": {
     "name": {
-      "en": "Charmer's Golden Chalice",
-      "jp": "美人の黄金杯",
-      "kr": "가인의 황금잔",
-      "zh": "佳人黄金杯"
+      "en": "Unholy Exsultet",
+      "jp": "祝福なき典礼玉",
+      "kr": "언홀리 엑술떼",
+      "zh": "罪恶逾越颂"
     },
     "grade": "unique",
     "star": 2,
@@ -1592,10 +1592,10 @@
   },
   "1188": {
     "name": {
-      "en": "Clear Mind",
-      "jp": "クリアマインド",
-      "kr": "클리어 마인드",
-      "zh": "澄明心智"
+      "en": "Obsidian Oath",
+      "jp": "ダークヘルパー",
+      "kr": "어둠의 헌신",
+      "zh": "黑暗献身"
     },
     "grade": "unique",
     "star": 2,
@@ -1615,10 +1615,10 @@
   },
   "1189": {
     "name": {
-      "en": "Memento Mori",
-      "jp": "メメント・モリ",
-      "kr": "메멘토 모리",
-      "zh": "向死而生"
+      "en": "Dies Irae",
+      "jp": "ディエス・イレ",
+      "kr": "진노의 날",
+      "zh": "神怒之日"
     },
     "grade": "unique",
     "star": 2,
@@ -1638,10 +1638,10 @@
   },
   "1190": {
     "name": {
-      "en": "Saint's Ring",
-      "jp": "聖女の指輪",
-      "kr": "성녀의 반지",
-      "zh": "圣女之戒"
+      "en": "Absolute Music",
+      "jp": "絶対音楽",
+      "kr": "앱솔루트 뮤직",
+      "zh": "无标题音乐"
     },
     "grade": "unique",
     "star": 2,

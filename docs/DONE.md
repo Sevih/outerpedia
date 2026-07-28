@@ -6,6 +6,32 @@
 
 ## 2026-07-26
 
+- **Équipement : 2 bugs signalés par Sevih — jumelles de nom L/T et mains des
+  variantes irregular** (vérifiés sur le RENDU réel avant tests, demande Sevih).
+  (1) Resurrection Token / Clear Mind / Saint's Ring (+ Combination Simulator)
+  affichaient DEUX restrictions de classe : TYPO DANS LA DONNÉE DU JEU — le
+  palier 2★ des accessoires uniques Lumière/Ténèbres (1181–1190, série
+  reconnaissable à son UniqueOptionID 2016–2025 constant du 1★ au 6★) a 8 clés de
+  nom mal numérotées (`_2_8.._2_15` = les clés des accessoires CLASSIQUES au lieu
+  de `_2_18.._2_25`). « Physical Exorcism 2★ » (ranger) s'appelait donc
+  « Resurrection Token » et fusionnait dans la famille healer. Réparé au
+  générateur (`MISNAMED_LD_2STAR` : reprise de la clé d'un frère de série via
+  l'UO) — les 4 familles polluées redeviennent mono-classe ET les 8 familles L/T
+  récupèrent leur palier 2★ manquant ([1,3,4,5,6] → [1..6]). Gelé par 3 cas dans
+  `equipment.test.ts` (17/17).
+  (2) Briareos's Ambition / Gorgon's Vanity : chaque variante de classe a SON
+  pool de mains (ranger 2454 vs 2354 chez Briareos ; mage 2354 vs 2454 chez
+  Gorgon) mais le site affichait autre chose — la FICHE prenait les mains du top
+  de famille (le striker), et les CARTES de /equipment l'UNION des pools des 5
+  classes (12 stats, capture Sevih). Corrigé aux deux niveaux : `gearModel`
+  (fiche de variante → main/sub de SA ligne top) et `materializeFamilies` +
+  `page.tsx` (`classPassives[].mainStats` par classe, la carte de variante
+  l'utilise ; l'union reste pour les familles à variante PAR main stat, où elle
+  est la bonne sémantique). Vérifié en rendant cartes ET fiches réelles :
+  chaque variante ses 6 stats, classiques inchangés. Regen ciblée
+  accessory/families uniquement (le contenu Epsilon frais du parsed N'EST PAS
+  embarqué). TSC datagen + racine verts.
+
 - **Damage Calculator : UI POSÉE sur le site (phase UI seule, `unlisted`)** —
   wrapper serveur + client (`tools/_contents/damage-calculator/`), moteur PAS
   branché (rapport à « — »). Décisions produit intégrées au fil de la revue

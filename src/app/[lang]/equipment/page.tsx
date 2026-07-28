@@ -127,6 +127,9 @@ function toGearRows(
         name: lRec(name, lang) || name.en,
         icon: v.icon,
         classLimits: [v.classLimit],
+        // Chaque variante a SON pool de mains (Briareos/Gorgon) — pas l'union
+        // de famille du `base`.
+        mainStats: v.mainStats,
         ...passiveView(v.passives, lang, kind),
       };
     });

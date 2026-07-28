@@ -420,7 +420,14 @@ export interface GearFamily {
    * tuile, son passif et sa PAGE détail au slug suffixé, comme en V2) —
    * `passives`/`icon`/`slug` de la famille ne portent que le membre de tête.
    */
-  classPassives?: { classLimit: string; slug: string; icon: string; passives: PassiveRef[] }[];
+  classPassives?: {
+    classLimit: string;
+    slug: string;
+    icon: string;
+    passives: PassiveRef[];
+    /** Main stats de CETTE variante (chaque classe a son pool — Briareos/Gorgon). */
+    mainStats: string[];
+  }[];
   source?: ResolvedSource;
   /** Talisman : type de points (extrait du buff du passif). */
   mode?: 'AP' | 'CP';
@@ -485,22 +492,43 @@ function materializeFamilies(
       const mains = (rolled.length ? rolled : memberGroups).flat();
       // Passifs PAR CLASSE quand les variantes du palier max en portent des
       // DIFFÉRENTS (Briareos/Gorgon : « Ambition: Aggression/Determination/… »).
-      const byClass = new Map<string, { icon: string; passives: PassiveRef[] }>();
+      // On collecte AUSSI les pools de chaque classe : chaque variante a SES
+      // mains (Ambition ranger ≠ striker) — la carte et la fiche ne doivent pas
+      // afficher l'union de famille.
+      const byClass = new Map<
+        string,
+        { icon: string; passives: PassiveRef[]; groups: string[][] }
+      >();
       for (const id of topIds) {
         const m = table[id];
         const cl = 'classLimit' in m ? ((m as GearItem).classLimit ?? '') : '';
-        if (cl && !byClass.has(cl)) byClass.set(cl, { icon: m.icon, passives: m.passives });
+        if (!cl) continue;
+        const groups = 'options' in m ? (m as SpecialItem).options : (m as GearItem).main;
+        const e = byClass.get(cl);
+        if (e) e.groups.push(groups);
+        else byClass.set(cl, { icon: m.icon, passives: m.passives, groups: [groups] });
       }
       const sig = (ps: PassiveRef[]) => ps.map((p) => p.id).join(',');
       const classPassives =
         byClass.size > 1 && new Set([...byClass.values()].map((v) => sig(v.passives))).size > 1
-          ? [...byClass].map(([classLimit, v]) => ({
-              classLimit,
-              // Slug de LA variante (« briareoss-recklessness-striker ») — les
-              // URLs V2 avaient le suffixe dans le nom, les liens survivent.
-              slug: slugifyEquipment(withClassSuffix(top.name, classLimit).en),
-              ...v,
-            }))
+          ? [...byClass].map(([classLimit, v]) => {
+              // Même règle que la famille : seuls les pools ROULÉS de la classe
+              // disent ce que SA variante peut porter (les mains figées des
+              // loots pré-roulés 93xxx sont écartées).
+              const rolledCl = v.groups.filter((gs) => gs.some((g) => (POOLS[g] ?? []).length > 1));
+              return {
+                classLimit,
+                // Slug de LA variante (« briareoss-recklessness-striker ») — les
+                // URLs V2 avaient le suffixe dans le nom, les liens survivent.
+                slug: slugifyEquipment(withClassSuffix(top.name, classLimit).en),
+                icon: v.icon,
+                passives: v.passives,
+                mainStats: mainStatsOf(
+                  (rolledCl.length ? rolledCl : v.groups).flat(),
+                  excludeFlatBase,
+                ),
+              };
+            })
           : undefined;
       return {
         id: f.id,

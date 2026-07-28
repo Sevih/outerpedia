@@ -227,3 +227,40 @@ describe('equipment — familles', () => {
     expect(bad).toEqual([]);
   });
 });
+
+describe('equipment — palier 2★ L/T renommé (typo de NameID du jeu)', () => {
+  // Le jeu numérote mal les clés de nom des huit accessoires uniques L/T au 2★
+  // (`_2_8.._2_15` = les clés des accessoires CLASSIQUES) — le générateur répare
+  // via l'UniqueOptionID partagé de la série (cf. MISNAMED_LD_2STAR). Ces cas
+  // gèlent la réparation : sans elle, « Resurrection Token » (healer) affiche
+  // AUSSI ranger (constat Sevih en jeu : mono-classe) et les familles L/T ont
+  // un trou à 2★.
+  const acc = SLOTS.accessory;
+  const fams = families.accessory;
+  const famOf = (id: string) => fams.find((f) => f.ids.includes(id));
+
+  it('1185 est Physical Exorcism 2★ (pas « Resurrection Token »)', () => {
+    expect(acc['1185']?.name?.en).toBe('Physical Exorcism');
+    expect(famOf('1185')?.id).toBe('1035');
+  });
+
+  it('les 4 familles classiques polluées sont redevenues MONO-classe', () => {
+    const expected: Record<string, string> = {
+      '1017': 'ranger', // Combination Simulator
+      '1019': 'healer', // Resurrection Token
+      '1022': 'ranger', // Clear Mind
+      '1024': 'healer', // Saint's Ring
+    };
+    for (const [famId, cls] of Object.entries(expected)) {
+      const f = fams.find((x) => x.id === famId)!;
+      expect(f.classLimits).toEqual([cls]);
+    }
+  });
+
+  it('les 8 familles L/T retrouvent leur palier 2★ (échelle 1..6 complète)', () => {
+    for (const famId of ['1033', '1034', '1035', '1036', '1037', '1038', '1039', '1040']) {
+      const f = fams.find((x) => x.id === famId)!;
+      expect(f.stars).toEqual([1, 2, 3, 4, 5, 6]);
+    }
+  });
+});
