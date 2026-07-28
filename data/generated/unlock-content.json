@@ -298,7 +298,7 @@
         {
           "stage": "S1-2-10",
           "dungeonName": {
-            "en": "Suspicious Exhaust Sound",
+            "en": "A Suspicious Exhaust Note",
             "jp": "不審な排気音",
             "kr": "수상한 배기음",
             "zh": "可疑的排气声"
@@ -378,7 +378,7 @@
         {
           "stage": "S1-2-9",
           "dungeonName": {
-            "en": "Village Dungeon Transformation",
+            "en": "The Village Becomes a Dungeon",
             "jp": "村のダンジョン化",
             "kr": "마을의 던전화",
             "zh": "村庄的地下城化"
@@ -430,10 +430,10 @@
       "requirements": [
         {
           "dungeonName": {
-            "en": "Intro - Dungeon Core",
-            "jp": "プロローグ：ことの始まり",
-            "kr": "Intro - 던전 코어",
-            "zh": "Intro-暗堡核心"
+            "en": "Intro - Fateful Encounter",
+            "jp": "Intro - 運命的な出会い",
+            "kr": "Intro - 운명적인 만남",
+            "zh": "Intro - 命中注定的相遇"
           },
           "areaName": {
             "en": "Path to Nationhood",
@@ -737,10 +737,10 @@
       "requirements": [
         {
           "dungeonName": {
-            "en": "Intro - Dungeon Core",
-            "jp": "プロローグ：ことの始まり",
-            "kr": "Intro - 던전 코어",
-            "zh": "Intro-暗堡核心"
+            "en": "Intro - Fateful Encounter",
+            "jp": "Intro - 運命的な出会い",
+            "kr": "Intro - 운명적인 만남",
+            "zh": "Intro - 命中注定的相遇"
           },
           "areaName": {
             "en": "Path to Nationhood",
@@ -763,10 +763,10 @@
       "requirements": [
         {
           "dungeonName": {
-            "en": "Intro - Dungeon Core",
-            "jp": "プロローグ：ことの始まり",
-            "kr": "Intro - 던전 코어",
-            "zh": "Intro-暗堡核心"
+            "en": "Intro - Fateful Encounter",
+            "jp": "Intro - 運命的な出会い",
+            "kr": "Intro - 운명적인 만남",
+            "zh": "Intro - 命中注定的相遇"
           },
           "areaName": {
             "en": "Path to Nationhood",
@@ -789,10 +789,10 @@
       "requirements": [
         {
           "dungeonName": {
-            "en": "Intro - Dungeon Core",
-            "jp": "プロローグ：ことの始まり",
-            "kr": "Intro - 던전 코어",
-            "zh": "Intro-暗堡核心"
+            "en": "Intro - Fateful Encounter",
+            "jp": "Intro - 運命的な出会い",
+            "kr": "Intro - 운명적인 만남",
+            "zh": "Intro - 命中注定的相遇"
           },
           "areaName": {
             "en": "Path to Nationhood",
@@ -983,10 +983,10 @@
       "requirements": [
         {
           "dungeonName": {
-            "en": "Intro - Dungeon Core",
-            "jp": "プロローグ：ことの始まり",
-            "kr": "Intro - 던전 코어",
-            "zh": "Intro-暗堡核心"
+            "en": "Intro - Fateful Encounter",
+            "jp": "Intro - 運命的な出会い",
+            "kr": "Intro - 운명적인 만남",
+            "zh": "Intro - 命中注定的相遇"
           },
           "areaName": {
             "en": "Path to Nationhood",
@@ -1041,7 +1041,7 @@
         {
           "stage": "S1-2-3",
           "dungeonName": {
-            "en": "Knight Order Control (1)",
+            "en": "The Knight Order's Control (1)",
             "jp": "騎士団の制御（1）",
             "kr": "기사단의 통제 (1)",
             "zh": "骑士团的管控（1）"
@@ -1082,10 +1082,10 @@
       "requirements": [
         {
           "dungeonName": {
-            "en": "Intro - Dungeon Core",
-            "jp": "プロローグ：ことの始まり",
-            "kr": "Intro - 던전 코어",
-            "zh": "Intro-暗堡核心"
+            "en": "Intro - Fateful Encounter",
+            "jp": "Intro - 運命的な出会い",
+            "kr": "Intro - 운명적인 만남",
+            "zh": "Intro - 命中注定的相遇"
           },
           "areaName": {
             "en": "Path to Nationhood",
@@ -1210,10 +1210,10 @@
       "requirements": [
         {
           "dungeonName": {
-            "en": "Intro - Dungeon Core",
-            "jp": "プロローグ：ことの始まり",
-            "kr": "Intro - 던전 코어",
-            "zh": "Intro-暗堡核心"
+            "en": "Intro - Fateful Encounter",
+            "jp": "Intro - 運命的な出会い",
+            "kr": "Intro - 운명적인 만남",
+            "zh": "Intro - 命中注定的相遇"
           },
           "areaName": {
             "en": "Path to Nationhood",
@@ -1230,10 +1230,10 @@
       "requirements": [
         {
           "dungeonName": {
-            "en": "Intro - Dungeon Core",
-            "jp": "プロローグ：ことの始まり",
-            "kr": "Intro - 던전 코어",
-            "zh": "Intro-暗堡核心"
+            "en": "Intro - Fateful Encounter",
+            "jp": "Intro - 運命的な出会い",
+            "kr": "Intro - 운명적인 만남",
+            "zh": "Intro - 命中注定的相遇"
           },
           "areaName": {
             "en": "Path to Nationhood",
@@ -1542,7 +1542,7 @@
         {
           "stage": "S1-2-3",
           "dungeonName": {
-            "en": "Knight Order Control (1)",
+            "en": "The Knight Order's Control (1)",
             "jp": "騎士団の制御（1）",
             "kr": "기사단의 통제 (1)",
             "zh": "骑士团的管控（1）"
@@ -1633,10 +1633,10 @@
       "requirements": [
         {
           "dungeonName": {
-            "en": "Intro - Dungeon Core",
-            "jp": "プロローグ：ことの始まり",
-            "kr": "Intro - 던전 코어",
-            "zh": "Intro-暗堡核心"
+            "en": "Intro - Fateful Encounter",
+            "jp": "Intro - 運命的な出会い",
+            "kr": "Intro - 운명적인 만남",
+            "zh": "Intro - 命中注定的相遇"
           },
           "areaName": {
             "en": "Path to Nationhood",
@@ -1681,10 +1681,10 @@
       "requirements": [
         {
           "dungeonName": {
-            "en": "Intro - Dungeon Core",
-            "jp": "プロローグ：ことの始まり",
-            "kr": "Intro - 던전 코어",
-            "zh": "Intro-暗堡核心"
+            "en": "Intro - Fateful Encounter",
+            "jp": "Intro - 運命的な出会い",
+            "kr": "Intro - 운명적인 만남",
+            "zh": "Intro - 命中注定的相遇"
           },
           "areaName": {
             "en": "Path to Nationhood",
@@ -1696,10 +1696,10 @@
         },
         {
           "dungeonName": {
-            "en": "Intro - Dungeon Core",
-            "jp": "プロローグ：ことの始まり",
-            "kr": "Intro - 던전 코어",
-            "zh": "Intro-暗堡核心"
+            "en": "Intro - Fateful Encounter",
+            "jp": "Intro - 運命的な出会い",
+            "kr": "Intro - 운명적인 만남",
+            "zh": "Intro - 命中注定的相遇"
           },
           "areaName": {
             "en": "Path to Nationhood",
@@ -1722,10 +1722,10 @@
       "requirements": [
         {
           "dungeonName": {
-            "en": "Intro - Dungeon Core",
-            "jp": "プロローグ：ことの始まり",
-            "kr": "Intro - 던전 코어",
-            "zh": "Intro-暗堡核心"
+            "en": "Intro - Fateful Encounter",
+            "jp": "Intro - 運命的な出会い",
+            "kr": "Intro - 운명적인 만남",
+            "zh": "Intro - 命中注定的相遇"
           },
           "areaName": {
             "en": "Path to Nationhood",
@@ -1868,7 +1868,7 @@
         {
           "stage": "S1-2-3",
           "dungeonName": {
-            "en": "Knight Order Control (1)",
+            "en": "The Knight Order's Control (1)",
             "jp": "騎士団の制御（1）",
             "kr": "기사단의 통제 (1)",
             "zh": "骑士团的管控（1）"
@@ -2652,18 +2652,18 @@
       "contentType": "SUPPORT_SURVEY_SHOP",
       "requirements": [
         {
-          "stage": "S1H-1-6",
+          "stage": "S1H-5-4",
           "dungeonName": {
-            "en": "A Potential Enemy",
-            "jp": "潜在的な敵",
-            "kr": "잠재적인 적",
-            "zh": "潜在敌人"
+            "en": "Killing Both",
+            "jp": "二人とも殺して",
+            "kr": "둘 다 죽여",
+            "zh": "杀死他们两个"
           },
           "areaName": {
-            "en": "Another Beginning",
-            "jp": "始まり、再び",
-            "kr": "시작, 다시",
-            "zh": "开始，再次"
+            "en": "Reunion",
+            "jp": "再会",
+            "kr": "재회",
+            "zh": "再会"
           },
           "mode": "origin"
         }

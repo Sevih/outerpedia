@@ -3751,6 +3751,33 @@
     },
     "teamBonuses": ["CHD"]
   },
+  "2000118": {
+    "buff": ["BT_BARRIER", "BT_COOL_CHARGE", "BT_STAT|ST_ATK"],
+    "debuff": ["WEAKNESS_GAUGE_DAMAGE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_BARRIER", "BT_COOL_CHARGE", "BT_STAT|ST_ATK"],
+        "debuff": ["WEAKNESS_GAUGE_DAMAGE"]
+      },
+      "s2": {
+        "buff": ["BT_COOL_CHARGE", "BT_STAT|ST_ATK"],
+        "debuff": []
+      },
+      "ultimate": {
+        "buff": ["BT_BARRIER", "BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_BARRIER"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_BARRIER"],
+        "debuff": []
+      }
+    },
+    "teamBonuses": ["CHC"]
+  },
   "2000119": {
     "buff": [
       "BT_ACTION_GAUGE",

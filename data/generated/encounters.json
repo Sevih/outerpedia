@@ -2,10 +2,10 @@
   "1": {
     "mode": "normal",
     "name": {
-      "en": "Intro - Dungeon Core",
-      "jp": "プロローグ：ことの始まり",
-      "kr": "Intro - 던전 코어",
-      "zh": "Intro-暗堡核心"
+      "en": "Intro - Fateful Encounter",
+      "jp": "Intro - 運命的な出会い",
+      "kr": "Intro - 운명적인 만남",
+      "zh": "Intro - 命中注定的相遇"
     },
     "area": {
       "en": "Path to Nationhood",
@@ -31822,7 +31822,7 @@
   "200203": {
     "mode": "normal",
     "name": {
-      "en": "Knight Order Control (1)",
+      "en": "The Knight Order's Control (1)",
       "jp": "騎士団の制御（1）",
       "kr": "기사단의 통제 (1)",
       "zh": "骑士团的管控（1）"
@@ -31881,7 +31881,7 @@
   "200204": {
     "mode": "normal",
     "name": {
-      "en": "Knight Order Control (2)",
+      "en": "The Knight Order's Control (2)",
       "jp": "騎士団の制御（2）",
       "kr": "기사단의 통제 (2)",
       "zh": "骑士团的管控（2）"
@@ -32000,7 +32000,7 @@
   "200208": {
     "mode": "normal",
     "name": {
-      "en": "Purpose of Garrison",
+      "en": "The Purpose of the Garrison",
       "jp": "駐屯の目的",
       "kr": "주둔의 목적",
       "zh": "驻扎的目的"
@@ -32052,7 +32052,7 @@
   "200209": {
     "mode": "normal",
     "name": {
-      "en": "Village Dungeon Transformation",
+      "en": "The Village Becomes a Dungeon",
       "jp": "村のダンジョン化",
       "kr": "마을의 던전화",
       "zh": "村庄的地下城化"
@@ -32097,7 +32097,7 @@
   "200210": {
     "mode": "normal",
     "name": {
-      "en": "Suspicious Exhaust Sound",
+      "en": "A Suspicious Exhaust Note",
       "jp": "不審な排気音",
       "kr": "수상한 배기음",
       "zh": "可疑的排气声"
@@ -33194,7 +33194,7 @@
   "210204": {
     "mode": "normal",
     "name": {
-      "en": "Knight Order Control (1)",
+      "en": "The Knight Order's Control (1)",
       "jp": "騎士団の制御（1）",
       "kr": "기사단의 통제 (1)",
       "zh": "骑士团的管控（1）"
@@ -33253,7 +33253,7 @@
   "210205": {
     "mode": "normal",
     "name": {
-      "en": "Knight Order Control (2)",
+      "en": "The Knight Order's Control (2)",
       "jp": "騎士団の制御（2）",
       "kr": "기사단의 통제 (2)",
       "zh": "骑士团的管控（2）"
@@ -33371,7 +33371,7 @@
   "210207": {
     "mode": "normal",
     "name": {
-      "en": "Purpose of Garrison",
+      "en": "The Purpose of the Garrison",
       "jp": "駐屯の目的",
       "kr": "주둔의 목적",
       "zh": "驻扎的目的"
@@ -33423,7 +33423,7 @@
   "210208": {
     "mode": "normal",
     "name": {
-      "en": "Village Dungeon Transformation",
+      "en": "The Village Becomes a Dungeon",
       "jp": "村のダンジョン化",
       "kr": "마을의 던전화",
       "zh": "村庄的地下城化"
@@ -33468,7 +33468,7 @@
   "210209": {
     "mode": "normal",
     "name": {
-      "en": "Suspicious Exhaust Sound",
+      "en": "A Suspicious Exhaust Note",
       "jp": "不審な排気音",
       "kr": "수상한 배기음",
       "zh": "可疑的排气声"
@@ -73246,7 +73246,7 @@
       "name": {
         "en": "Normal",
         "jp": "ノーマル",
-        "kr": "노말",
+        "kr": "노멀",
         "zh": "普通"
       }
     },
@@ -73355,7 +73355,7 @@
       "name": {
         "en": "Normal",
         "jp": "ノーマル",
-        "kr": "노말",
+        "kr": "노멀",
         "zh": "普通"
       }
     },
@@ -73464,7 +73464,7 @@
       "name": {
         "en": "Normal",
         "jp": "ノーマル",
-        "kr": "노말",
+        "kr": "노멀",
         "zh": "普通"
       }
     },
@@ -73573,7 +73573,7 @@
       "name": {
         "en": "Normal",
         "jp": "ノーマル",
-        "kr": "노말",
+        "kr": "노멀",
         "zh": "普通"
       }
     },
@@ -91155,7 +91155,7 @@
       "name": {
         "en": "Normal",
         "jp": "ノーマル",
-        "kr": "노말",
+        "kr": "노멀",
         "zh": "普通"
       }
     },
@@ -91255,7 +91255,7 @@
       "name": {
         "en": "Normal",
         "jp": "ノーマル",
-        "kr": "노말",
+        "kr": "노멀",
         "zh": "普通"
       }
     },
@@ -91355,7 +91355,7 @@
       "name": {
         "en": "Normal",
         "jp": "ノーマル",
-        "kr": "노말",
+        "kr": "노멀",
         "zh": "普通"
       }
     },
@@ -91455,7 +91455,7 @@
       "name": {
         "en": "Normal",
         "jp": "ノーマル",
-        "kr": "노말",
+        "kr": "노멀",
         "zh": "普通"
       }
     },
@@ -91555,7 +91555,7 @@
       "name": {
         "en": "Normal",
         "jp": "ノーマル",
-        "kr": "노말",
+        "kr": "노멀",
         "zh": "普通"
       }
     },

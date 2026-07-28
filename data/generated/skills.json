@@ -53656,6 +53656,11 @@
             "c": "80%",
             "v": "30%",
             "t": "2"
+          },
+          "2000032_1_1": {
+            "c": "40%",
+            "v": "50%",
+            "t": "2"
           }
         },
         "tooltips": ["7"],
@@ -53694,6 +53699,11 @@
             "c": "80%",
             "v": "30%",
             "t": "2"
+          },
+          "2000032_1_1": {
+            "c": "50%",
+            "v": "50%",
+            "t": "2"
           }
         },
         "tooltips": ["7"],
@@ -53726,6 +53736,11 @@
             "c": "80%",
             "v": "30%",
             "t": "2"
+          },
+          "2000032_1_1": {
+            "c": "50%",
+            "v": "50%",
+            "t": "2"
           }
         },
         "tooltips": ["7"],
@@ -53757,6 +53772,11 @@
           "2000032_2_2": {
             "c": "100%",
             "v": "30%",
+            "t": "2"
+          },
+          "2000032_1_1": {
+            "c": "50%",
+            "v": "50%",
             "t": "2"
           }
         },
@@ -203467,7 +203487,6 @@
         "damageFactor": 2200,
         "cool": 6,
         "startCool": 6,
-        "gainCP": 2,
         "wgReduce": 2,
         "vars": {
           "2000116_3_1": {
@@ -203496,7 +203515,6 @@
         "damageFactor": 2300,
         "cool": 6,
         "startCool": 6,
-        "gainCP": 2,
         "wgReduce": 3,
         "vars": {
           "2000116_3_1": {
@@ -203539,7 +203557,6 @@
         "damageFactor": 2300,
         "cool": 5,
         "startCool": 5,
-        "gainCP": 2,
         "wgReduce": 3,
         "vars": {
           "2000116_3_1": {
@@ -203576,7 +203593,6 @@
         "damageFactor": 2400,
         "cool": 5,
         "startCool": 5,
-        "gainCP": 2,
         "wgReduce": 3,
         "vars": {
           "2000116_3_1": {
@@ -203613,7 +203629,6 @@
         "damageFactor": 2500,
         "cool": 5,
         "startCool": 5,
-        "gainCP": 2,
         "wgReduce": 3,
         "vars": {
           "2000116_3_1": {
@@ -203721,13 +203736,11 @@
       {
         "level": 1,
         "damageFactor": 770,
-        "gainCP": 8,
         "tooltips": ["73", "67"]
       },
       {
         "level": 2,
         "damageFactor": 770,
-        "gainCP": 8,
         "tooltips": ["73", "67"],
         "upgrades": [
           {
@@ -203747,7 +203760,6 @@
       {
         "level": 3,
         "damageFactor": 770,
-        "gainCP": 8,
         "tooltips": ["73", "67"],
         "upgrades": [
           {
@@ -203761,7 +203773,6 @@
       {
         "level": 4,
         "damageFactor": 770,
-        "gainCP": 8,
         "tooltips": ["73", "67"],
         "upgrades": [
           {
@@ -203775,7 +203786,6 @@
       {
         "level": 5,
         "damageFactor": 770,
-        "gainCP": 8,
         "tooltips": ["73", "67"],
         "upgrades": [
           {
@@ -204416,6 +204426,7 @@
       {
         "level": 1,
         "damageFactor": 1230,
+        "gainCP": 1,
         "wgReduce": 2,
         "vars": {
           "2000116_1_1": {
@@ -204441,6 +204452,7 @@
       {
         "level": 2,
         "damageFactor": 1330,
+        "gainCP": 1,
         "wgReduce": 3,
         "vars": {
           "2000116_1_1": {
@@ -204466,6 +204478,7 @@
       {
         "level": 3,
         "damageFactor": 1330,
+        "gainCP": 1,
         "wgReduce": 3,
         "vars": {
           "2000116_1_1": {
@@ -204491,6 +204504,7 @@
       {
         "level": 4,
         "damageFactor": 1530,
+        "gainCP": 1,
         "wgReduce": 3,
         "vars": {
           "2000116_1_1": {
@@ -204516,6 +204530,7 @@
       {
         "level": 5,
         "damageFactor": 1630,
+        "gainCP": 1,
         "wgReduce": 3,
         "vars": {
           "2000116_1_1": {
@@ -204601,6 +204616,7 @@
       {
         "level": 1,
         "damageFactor": 1660,
+        "gainCP": 6,
         "wgReduce": 2,
         "vars": {
           "2000116_1_1": {
@@ -204631,6 +204647,7 @@
       {
         "level": 2,
         "damageFactor": 1760,
+        "gainCP": 6,
         "wgReduce": 3,
         "vars": {
           "2000116_1_1": {
@@ -204661,6 +204678,7 @@
       {
         "level": 3,
         "damageFactor": 1760,
+        "gainCP": 6,
         "wgReduce": 3,
         "vars": {
           "2000116_1_1": {
@@ -204691,6 +204709,7 @@
       {
         "level": 4,
         "damageFactor": 1960,
+        "gainCP": 6,
         "wgReduce": 3,
         "vars": {
           "2000116_1_1": {
@@ -204721,6 +204740,7 @@
       {
         "level": 5,
         "damageFactor": 2060,
+        "gainCP": 6,
         "wgReduce": 3,
         "vars": {
           "2000116_1_1": {
@@ -212403,10 +212423,10 @@
         },
         "tooltips": ["15"],
         "desc": {
-          "en": "(Passive Effect)\\nDamage dealt by all attacks increases proportional to Speed. Also increases all allies' damage dealt by <color=#28d9ed>30%</color>.\\n\\n(Triggered Effect)\\nAfter using <color=#28d9ed>Delta Wave!</color>, activates <color=#28d9ed>Freeze!</color> on the enemy with the highest Speed, then increases all allies' <color=#28d9ed>Speed</color> for <color=#28d9ed>1 turn</color>.",
-          "jp": "(パッシブ効果)\\nすべての攻撃が自分のスピードが高いほどダメージがUPし、味方全体のダメージを<color=#28d9ed>30%</color>UPさせる。\\n\\n(発動効果)\\n<color=#28d9ed>【デルタウェーブ！】</color>使用後、スピードが最も高い敵に<color=#28d9ed>【フリーズ！】</color>を発動し、味方全体の<color=#28d9ed>スピード</color>を<color=#28d9ed>1ターン</color>の間UPさせる。",
-          "kr": "(패시브 효과)\\n모든 공격이 속도에 비례하여 피해가 증가하고 아군 전체의 피해를 <color=#28d9ed>30%</color> 증가시킵니다.\\n\\n(발동 효과)\\n<color=#28d9ed>델타 웨이브!</color> 사용 후 속도가 가장 빠른 적에게 <color=#28d9ed>Freeze!</color>를 발동한 뒤, 아군 전체의 <color=#28d9ed>속도</color>를 <color=#28d9ed>1턴</color> 동안 증가시킵니다.",
-          "zh": "（被动效果）\\n所有攻击伤害按速度比例增加，并使我方全体伤害增加<color=#28d9ed>30%</color>。\\n\\n（发动效果）\\n使用<color=#28d9ed>Delta Wave！</color>后，对速度最快的敌人发动<color=#28d9ed>Freeze！</color>，然后使我方全体<color=#28d9ed>速度</color>在<color=#28d9ed>1回合</color>内增加。"
+          "en": "(Passive Effect)\\nIncreases damage dealt of all attacks proportional to Speed. Also increases all allies' damage dealt by <color=#28d9ed>30%</color>.\\n\\n(Triggered Effect)\\nAfter using <color=#28d9ed>Delta Wave!</color>, activates <color=#28d9ed>Summer Slam</color> on the enemy with the highest Speed.\\n\\n<color=#ffd732>Summer Slam</color>: After attacking, grants increased <color=#28d9ed>Speed</color> to all allies for <color=#28d9ed>1 turn</color>.",
+          "jp": "(パッシブ効果)\\nすべての攻撃が自分のスピードが高いほどダメージがUPし、味方全体のダメージを<color=#28d9ed>30%</color>UPさせる。\\n\\n(発動効果)\\n<color=#28d9ed>【デルタウェーブ！】</color>使用後、スピードが最も高い敵に<color=#28d9ed>【真夏の制圧】</color>を使用する。\\n\\n<color=#ffd732>【真夏の制圧】</color>：攻撃後、味方全体にそれぞれ<color=#28d9ed>スピード</color>UPを<color=#28d9ed>1ターン</color>の間付与する。",
+          "kr": "(패시브 효과)\\n모든 공격이 속도에 비례하여 피해가 증가하고 아군 전체의 피해를 <color=#28d9ed>30%</color> 증가시킵니다.\\n\\n(발동 효과)\\n<color=#28d9ed>델타 웨이브!</color> 사용 후 속도가 가장 빠른 적에게 <color=#28d9ed>섬머 슬램</color>을 사용합니다. \\n\\n<color=#ffd732>섬머 슬램</color> : 공격 후 아군 전체에게 각각 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>속도</color> 증가를 부여합니다.",
+          "zh": "（被动效果）\\n所有攻击伤害按速度比例增加，并使我方全体伤害增加<color=#28d9ed>30%</color>。\\n\\n（发动效果）\\n使用<color=#28d9ed>Delta Wave！</color>后，对速度最快的敌人使用<color=#28d9ed>夏日强击</color>。\\n\\n<color=#ffd732>夏日强击</color>：攻击后，分别为我方全体附加<color=#28d9ed>1回合</color>的<color=#28d9ed>速度</color>提升。"
         }
       },
       {
@@ -212462,10 +212482,10 @@
           }
         ],
         "desc": {
-          "en": "(Passive Effect)\\nDamage dealt by all attacks increases proportional to Speed. Also increases all allies' damage dealt by <color=#28d9ed>30%</color>.\\n\\n(Triggered Effect)\\nAfter using <color=#28d9ed>Delta Wave!</color>, activates <color=#28d9ed>Freeze!</color> on the enemy with the highest Speed, then increases all allies' <color=#28d9ed>Speed</color> for <color=#28d9ed>1 turn</color>.",
-          "jp": "(パッシブ効果)\\nすべての攻撃が自分のスピードが高いほどダメージがUPし、味方全体のダメージを<color=#28d9ed>30%</color>UPさせる。\\n\\n(発動効果)\\n<color=#28d9ed>【デルタウェーブ！】</color>使用後、スピードが最も高い敵に<color=#28d9ed>【フリーズ！】</color>を発動し、味方全体の<color=#28d9ed>スピード</color>を<color=#28d9ed>1ターン</color>の間UPさせる。",
-          "kr": "(패시브 효과)\\n모든 공격이 속도에 비례하여 피해가 증가하고 아군 전체의 피해를 <color=#28d9ed>30%</color> 증가시킵니다.\\n\\n(발동 효과)\\n<color=#28d9ed>델타 웨이브!</color> 사용 후 속도가 가장 빠른 적에게 <color=#28d9ed>Freeze!</color>를 발동한 뒤, 아군 전체의 <color=#28d9ed>속도</color>를 <color=#28d9ed>1턴</color> 동안 증가시킵니다.",
-          "zh": "（被动效果）\\n所有攻击伤害按速度比例增加，并使我方全体伤害增加<color=#28d9ed>30%</color>。\\n\\n（发动效果）\\n使用<color=#28d9ed>Delta Wave！</color>后，对速度最快的敌人发动<color=#28d9ed>Freeze！</color>，然后使我方全体<color=#28d9ed>速度</color>在<color=#28d9ed>1回合</color>内增加。"
+          "en": "(Passive Effect)\\nIncreases damage dealt of all attacks proportional to Speed. Also increases all allies' damage dealt by <color=#28d9ed>30%</color>.\\n\\n(Triggered Effect)\\nAfter using <color=#28d9ed>Delta Wave!</color>, activates <color=#28d9ed>Summer Slam</color> on the enemy with the highest Speed.\\n\\n<color=#ffd732>Summer Slam</color>: After attacking, grants increased <color=#28d9ed>Speed</color> to all allies for <color=#28d9ed>1 turn</color>.",
+          "jp": "(パッシブ効果)\\nすべての攻撃が自分のスピードが高いほどダメージがUPし、味方全体のダメージを<color=#28d9ed>30%</color>UPさせる。\\n\\n(発動効果)\\n<color=#28d9ed>【デルタウェーブ！】</color>使用後、スピードが最も高い敵に<color=#28d9ed>【真夏の制圧】</color>を使用する。\\n\\n<color=#ffd732>【真夏の制圧】</color>：攻撃後、味方全体にそれぞれ<color=#28d9ed>スピード</color>UPを<color=#28d9ed>1ターン</color>の間付与する。",
+          "kr": "(패시브 효과)\\n모든 공격이 속도에 비례하여 피해가 증가하고 아군 전체의 피해를 <color=#28d9ed>30%</color> 증가시킵니다.\\n\\n(발동 효과)\\n<color=#28d9ed>델타 웨이브!</color> 사용 후 속도가 가장 빠른 적에게 <color=#28d9ed>섬머 슬램</color>을 사용합니다. \\n\\n<color=#ffd732>섬머 슬램</color> : 공격 후 아군 전체에게 각각 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>속도</color> 증가를 부여합니다.",
+          "zh": "（被动效果）\\n所有攻击伤害按速度比例增加，并使我方全体伤害增加<color=#28d9ed>30%</color>。\\n\\n（发动效果）\\n使用<color=#28d9ed>Delta Wave！</color>后，对速度最快的敌人使用<color=#28d9ed>夏日强击</color>。\\n\\n<color=#ffd732>夏日强击</color>：攻击后，分别为我方全体附加<color=#28d9ed>1回合</color>的<color=#28d9ed>速度</color>提升。"
         }
       },
       {
@@ -212515,10 +212535,10 @@
           }
         ],
         "desc": {
-          "en": "(Passive Effect)\\nDamage dealt by all attacks increases proportional to Speed. Also increases all allies' damage dealt by <color=#28d9ed>30%</color>.\\n\\n(Triggered Effect)\\nAfter using <color=#28d9ed>Delta Wave!</color>, activates <color=#28d9ed>Freeze!</color> on the enemy with the highest Speed, then increases all allies' <color=#28d9ed>Speed</color> for <color=#28d9ed>1 turn</color>.",
-          "jp": "(パッシブ効果)\\nすべての攻撃が自分のスピードが高いほどダメージがUPし、味方全体のダメージを<color=#28d9ed>30%</color>UPさせる。\\n\\n(発動効果)\\n<color=#28d9ed>【デルタウェーブ！】</color>使用後、スピードが最も高い敵に<color=#28d9ed>【フリーズ！】</color>を発動し、味方全体の<color=#28d9ed>スピード</color>を<color=#28d9ed>1ターン</color>の間UPさせる。",
-          "kr": "(패시브 효과)\\n모든 공격이 속도에 비례하여 피해가 증가하고 아군 전체의 피해를 <color=#28d9ed>30%</color> 증가시킵니다.\\n\\n(발동 효과)\\n<color=#28d9ed>델타 웨이브!</color> 사용 후 속도가 가장 빠른 적에게 <color=#28d9ed>Freeze!</color>를 발동한 뒤, 아군 전체의 <color=#28d9ed>속도</color>를 <color=#28d9ed>1턴</color> 동안 증가시킵니다.",
-          "zh": "（被动效果）\\n所有攻击伤害按速度比例增加，并使我方全体伤害增加<color=#28d9ed>30%</color>。\\n\\n（发动效果）\\n使用<color=#28d9ed>Delta Wave！</color>后，对速度最快的敌人发动<color=#28d9ed>Freeze！</color>，然后使我方全体<color=#28d9ed>速度</color>在<color=#28d9ed>1回合</color>内增加。"
+          "en": "(Passive Effect)\\nIncreases damage dealt of all attacks proportional to Speed. Also increases all allies' damage dealt by <color=#28d9ed>30%</color>.\\n\\n(Triggered Effect)\\nAfter using <color=#28d9ed>Delta Wave!</color>, activates <color=#28d9ed>Summer Slam</color> on the enemy with the highest Speed.\\n\\n<color=#ffd732>Summer Slam</color>: After attacking, grants increased <color=#28d9ed>Speed</color> to all allies for <color=#28d9ed>1 turn</color>.",
+          "jp": "(パッシブ効果)\\nすべての攻撃が自分のスピードが高いほどダメージがUPし、味方全体のダメージを<color=#28d9ed>30%</color>UPさせる。\\n\\n(発動効果)\\n<color=#28d9ed>【デルタウェーブ！】</color>使用後、スピードが最も高い敵に<color=#28d9ed>【真夏の制圧】</color>を使用する。\\n\\n<color=#ffd732>【真夏の制圧】</color>：攻撃後、味方全体にそれぞれ<color=#28d9ed>スピード</color>UPを<color=#28d9ed>1ターン</color>の間付与する。",
+          "kr": "(패시브 효과)\\n모든 공격이 속도에 비례하여 피해가 증가하고 아군 전체의 피해를 <color=#28d9ed>30%</color> 증가시킵니다.\\n\\n(발동 효과)\\n<color=#28d9ed>델타 웨이브!</color> 사용 후 속도가 가장 빠른 적에게 <color=#28d9ed>섬머 슬램</color>을 사용합니다. \\n\\n<color=#ffd732>섬머 슬램</color> : 공격 후 아군 전체에게 각각 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>속도</color> 증가를 부여합니다.",
+          "zh": "（被动效果）\\n所有攻击伤害按速度比例增加，并使我方全体伤害增加<color=#28d9ed>30%</color>。\\n\\n（发动效果）\\n使用<color=#28d9ed>Delta Wave！</color>后，对速度最快的敌人使用<color=#28d9ed>夏日强击</color>。\\n\\n<color=#ffd732>夏日强击</color>：攻击后，分别为我方全体附加<color=#28d9ed>1回合</color>的<color=#28d9ed>速度</color>提升。"
         }
       },
       {
@@ -212568,10 +212588,10 @@
           }
         ],
         "desc": {
-          "en": "(Passive Effect)\\nDamage dealt by all attacks increases proportional to Speed. Also increases all allies' damage dealt by <color=#28d9ed>30%</color>.\\n\\n(Triggered Effect)\\nAfter using <color=#28d9ed>Delta Wave!</color>, activates <color=#28d9ed>Freeze!</color> on the enemy with the highest Speed, then increases all allies' <color=#28d9ed>Speed</color> for <color=#28d9ed>1 turn</color>.",
-          "jp": "(パッシブ効果)\\nすべての攻撃が自分のスピードが高いほどダメージがUPし、味方全体のダメージを<color=#28d9ed>30%</color>UPさせる。\\n\\n(発動効果)\\n<color=#28d9ed>【デルタウェーブ！】</color>使用後、スピードが最も高い敵に<color=#28d9ed>【フリーズ！】</color>を発動し、味方全体の<color=#28d9ed>スピード</color>を<color=#28d9ed>1ターン</color>の間UPさせる。",
-          "kr": "(패시브 효과)\\n모든 공격이 속도에 비례하여 피해가 증가하고 아군 전체의 피해를 <color=#28d9ed>30%</color> 증가시킵니다.\\n\\n(발동 효과)\\n<color=#28d9ed>델타 웨이브!</color> 사용 후 속도가 가장 빠른 적에게 <color=#28d9ed>Freeze!</color>를 발동한 뒤, 아군 전체의 <color=#28d9ed>속도</color>를 <color=#28d9ed>1턴</color> 동안 증가시킵니다.",
-          "zh": "（被动效果）\\n所有攻击伤害按速度比例增加，并使我方全体伤害增加<color=#28d9ed>30%</color>。\\n\\n（发动效果）\\n使用<color=#28d9ed>Delta Wave！</color>后，对速度最快的敌人发动<color=#28d9ed>Freeze！</color>，然后使我方全体<color=#28d9ed>速度</color>在<color=#28d9ed>1回合</color>内增加。"
+          "en": "(Passive Effect)\\nIncreases damage dealt of all attacks proportional to Speed. Also increases all allies' damage dealt by <color=#28d9ed>30%</color>.\\n\\n(Triggered Effect)\\nAfter using <color=#28d9ed>Delta Wave!</color>, activates <color=#28d9ed>Summer Slam</color> on the enemy with the highest Speed.\\n\\n<color=#ffd732>Summer Slam</color>: After attacking, grants increased <color=#28d9ed>Speed</color> to all allies for <color=#28d9ed>1 turn</color>.",
+          "jp": "(パッシブ効果)\\nすべての攻撃が自分のスピードが高いほどダメージがUPし、味方全体のダメージを<color=#28d9ed>30%</color>UPさせる。\\n\\n(発動効果)\\n<color=#28d9ed>【デルタウェーブ！】</color>使用後、スピードが最も高い敵に<color=#28d9ed>【真夏の制圧】</color>を使用する。\\n\\n<color=#ffd732>【真夏の制圧】</color>：攻撃後、味方全体にそれぞれ<color=#28d9ed>スピード</color>UPを<color=#28d9ed>1ターン</color>の間付与する。",
+          "kr": "(패시브 효과)\\n모든 공격이 속도에 비례하여 피해가 증가하고 아군 전체의 피해를 <color=#28d9ed>30%</color> 증가시킵니다.\\n\\n(발동 효과)\\n<color=#28d9ed>델타 웨이브!</color> 사용 후 속도가 가장 빠른 적에게 <color=#28d9ed>섬머 슬램</color>을 사용합니다. \\n\\n<color=#ffd732>섬머 슬램</color> : 공격 후 아군 전체에게 각각 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>속도</color> 증가를 부여합니다.",
+          "zh": "（被动效果）\\n所有攻击伤害按速度比例增加，并使我方全体伤害增加<color=#28d9ed>30%</color>。\\n\\n（发动效果）\\n使用<color=#28d9ed>Delta Wave！</color>后，对速度最快的敌人使用<color=#28d9ed>夏日强击</color>。\\n\\n<color=#ffd732>夏日强击</color>：攻击后，分别为我方全体附加<color=#28d9ed>1回合</color>的<color=#28d9ed>速度</color>提升。"
         }
       },
       {
@@ -212627,18 +212647,18 @@
           }
         ],
         "desc": {
-          "en": "(Passive Effect)\\nDamage dealt by all attacks increases proportional to Speed. Also increases all allies' damage dealt by <color=#28d9ed>50%</color>.\\n\\n(Triggered Effect)\\nAfter using <color=#28d9ed>Delta Wave!</color>, activates <color=#28d9ed>Freeze!</color> on the enemy with the highest Speed, then increases all allies' <color=#28d9ed>Speed</color> for <color=#28d9ed>1 turn</color>.",
-          "jp": "(パッシブ効果)\\nすべての攻撃が自分のスピードが高いほどダメージがUPし、味方全体のダメージを<color=#28d9ed>50%</color>UPさせる。\\n\\n(発動効果)\\n<color=#28d9ed>【デルタウェーブ！】</color>使用後、スピードが最も高い敵に<color=#28d9ed>【フリーズ！】</color>を発動し、味方全体の<color=#28d9ed>スピード</color>を<color=#28d9ed>1ターン</color>の間UPさせる。",
-          "kr": "(패시브 효과)\\n모든 공격이 속도에 비례하여 피해가 증가하고 아군 전체의 피해를 <color=#28d9ed>50%</color> 증가시킵니다.\\n\\n(발동 효과)\\n<color=#28d9ed>델타 웨이브!</color> 사용 후 속도가 가장 빠른 적에게 <color=#28d9ed>Freeze!</color>를 발동한 뒤, 아군 전체의 <color=#28d9ed>속도</color>를 <color=#28d9ed>1턴</color> 동안 증가시킵니다.",
-          "zh": "（被动效果）\\n所有攻击伤害按速度比例增加，并使我方全体伤害增加<color=#28d9ed>50%</color>。\\n\\n（发动效果）\\n使用<color=#28d9ed>Delta Wave！</color>后，对速度最快的敌人发动<color=#28d9ed>Freeze！</color>，然后使我方全体<color=#28d9ed>速度</color>在<color=#28d9ed>1回合</color>内增加。"
+          "en": "(Passive Effect)\\nIncreases damage dealt of all attacks proportional to Speed. Also increases all allies' damage dealt by <color=#28d9ed>50%</color>.\\n\\n(Triggered Effect)\\nAfter using <color=#28d9ed>Delta Wave!</color>, activates <color=#28d9ed>Summer Slam</color> on the enemy with the highest Speed.\\n\\n<color=#ffd732>Summer Slam</color>: After attacking, grants increased <color=#28d9ed>Speed</color> to all allies for <color=#28d9ed>1 turn</color>.3",
+          "jp": "(パッシブ効果)\\nすべての攻撃が自分のスピードが高いほどダメージがUPし、味方全体のダメージを<color=#28d9ed>50%</color>UPさせる。\\n\\n(発動効果)\\n<color=#28d9ed>【デルタウェーブ！】</color>使用後、スピードが最も高い敵に<color=#28d9ed>【真夏の制圧】</color>を使用する。\\n\\n<color=#ffd732>【真夏の制圧】</color>：攻撃後、味方全体にそれぞれ<color=#28d9ed>スピード</color>UPを<color=#28d9ed>1ターン</color>の間付与する。",
+          "kr": "(패시브 효과)\\n모든 공격이 속도에 비례하여 피해가 증가하고 아군 전체의 피해를 <color=#28d9ed>50%</color> 증가시킵니다.\\n\\n(발동 효과)\\n<color=#28d9ed>델타 웨이브!</color> 사용 후 속도가 가장 빠른 적에게 <color=#28d9ed>섬머 슬램</color>을 사용합니다. \\n\\n<color=#ffd732>섬머 슬램</color> : 공격 후 아군 전체에게 각각 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>속도</color> 증가를 부여합니다.",
+          "zh": "（被动效果）\\n所有攻击伤害按速度比例增加，并使我方全体伤害增加<color=#28d9ed>50%</color>。\\n\\n（发动效果）\\n使用<color=#28d9ed>Delta Wave！</color>后，对速度最快的敌人使用<color=#28d9ed>夏日强击</color>。\\n\\n<color=#ffd732>夏日强击</color>：攻击后，分别为我方全体附加<color=#28d9ed>1回合</color>的<color=#28d9ed>速度</color>提升。"
         }
       }
     ],
     "desc": {
-      "en": "(Passive Effect)\\nDamage dealt by all attacks increases proportional to Speed. Also increases all allies' damage dealt by <color=#28d9ed>30%</color>.\\n\\n(Triggered Effect)\\nAfter using <color=#28d9ed>Delta Wave!</color>, activates <color=#28d9ed>Freeze!</color> on the enemy with the highest Speed, then increases all allies' <color=#28d9ed>Speed</color> for <color=#28d9ed>1 turn</color>.",
-      "jp": "(パッシブ効果)\\nすべての攻撃が自分のスピードが高いほどダメージがUPし、味方全体のダメージを<color=#28d9ed>30%</color>UPさせる。\\n\\n(発動効果)\\n<color=#28d9ed>【デルタウェーブ！】</color>使用後、スピードが最も高い敵に<color=#28d9ed>【フリーズ！】</color>を発動し、味方全体の<color=#28d9ed>スピード</color>を<color=#28d9ed>1ターン</color>の間UPさせる。",
-      "kr": "(패시브 효과)\\n모든 공격이 속도에 비례하여 피해가 증가하고 아군 전체의 피해를 <color=#28d9ed>30%</color> 증가시킵니다.\\n\\n(발동 효과)\\n<color=#28d9ed>델타 웨이브!</color> 사용 후 속도가 가장 빠른 적에게 <color=#28d9ed>Freeze!</color>를 발동한 뒤, 아군 전체의 <color=#28d9ed>속도</color>를 <color=#28d9ed>1턴</color> 동안 증가시킵니다.",
-      "zh": "（被动效果）\\n所有攻击伤害按速度比例增加，并使我方全体伤害增加<color=#28d9ed>30%</color>。\\n\\n（发动效果）\\n使用<color=#28d9ed>Delta Wave！</color>后，对速度最快的敌人发动<color=#28d9ed>Freeze！</color>，然后使我方全体<color=#28d9ed>速度</color>在<color=#28d9ed>1回合</color>内增加。"
+      "en": "(Passive Effect)\\nIncreases damage dealt of all attacks proportional to Speed. Also increases all allies' damage dealt by <color=#28d9ed>30%</color>.\\n\\n(Triggered Effect)\\nAfter using <color=#28d9ed>Delta Wave!</color>, activates <color=#28d9ed>Summer Slam</color> on the enemy with the highest Speed.\\n\\n<color=#ffd732>Summer Slam</color>: After attacking, grants increased <color=#28d9ed>Speed</color> to all allies for <color=#28d9ed>1 turn</color>.",
+      "jp": "(パッシブ効果)\\nすべての攻撃が自分のスピードが高いほどダメージがUPし、味方全体のダメージを<color=#28d9ed>30%</color>UPさせる。\\n\\n(発動効果)\\n<color=#28d9ed>【デルタウェーブ！】</color>使用後、スピードが最も高い敵に<color=#28d9ed>【真夏の制圧】</color>を使用する。\\n\\n<color=#ffd732>【真夏の制圧】</color>：攻撃後、味方全体にそれぞれ<color=#28d9ed>スピード</color>UPを<color=#28d9ed>1ターン</color>の間付与する。",
+      "kr": "(패시브 효과)\\n모든 공격이 속도에 비례하여 피해가 증가하고 아군 전체의 피해를 <color=#28d9ed>30%</color> 증가시킵니다.\\n\\n(발동 효과)\\n<color=#28d9ed>델타 웨이브!</color> 사용 후 속도가 가장 빠른 적에게 <color=#28d9ed>섬머 슬램</color>을 사용합니다. \\n\\n<color=#ffd732>섬머 슬램</color> : 공격 후 아군 전체에게 각각 <color=#28d9ed>1턴</color> 동안 <color=#28d9ed>속도</color> 증가를 부여합니다.",
+      "zh": "（被动效果）\\n所有攻击伤害按速度比例增加，并使我方全体伤害增加<color=#28d9ed>30%</color>。\\n\\n（发动效果）\\n使用<color=#28d9ed>Delta Wave！</color>后，对速度最快的敌人使用<color=#28d9ed>夏日强击</color>。\\n\\n<color=#ffd732>夏日强击</color>：攻击后，分别为我方全体附加<color=#28d9ed>1回合</color>的<color=#28d9ed>速度</color>提升。"
     },
     "target": "enemy",
     "range": "single",
@@ -212725,7 +212745,6 @@
         "damageFactor": 2700,
         "cool": 5,
         "startCool": 5,
-        "gainCP": 2,
         "wgReduce": 2,
         "vars": {
           "2000121_1_2": {
@@ -212763,7 +212782,6 @@
         "damageFactor": 2800,
         "cool": 5,
         "startCool": 5,
-        "gainCP": 2,
         "wgReduce": 3,
         "vars": {
           "2000121_1_2": {
@@ -212815,7 +212833,6 @@
         "damageFactor": 2800,
         "cool": 4,
         "startCool": 4,
-        "gainCP": 2,
         "wgReduce": 3,
         "vars": {
           "2000121_1_2": {
@@ -212861,7 +212878,6 @@
         "damageFactor": 2800,
         "cool": 4,
         "startCool": 4,
-        "gainCP": 2,
         "wgReduce": 3,
         "vars": {
           "2000121_1_2": {
@@ -212912,7 +212928,6 @@
         "damageFactor": 3000,
         "cool": 4,
         "startCool": 4,
-        "gainCP": 2,
         "wgReduce": 3,
         "vars": {
           "2000121_1_2": {
@@ -213048,13 +213063,11 @@
       {
         "level": 1,
         "damageFactor": 770,
-        "gainCP": 8,
         "tooltips": ["73"]
       },
       {
         "level": 2,
         "damageFactor": 770,
-        "gainCP": 8,
         "tooltips": ["73"],
         "upgrades": [
           {
@@ -213074,7 +213087,6 @@
       {
         "level": 3,
         "damageFactor": 770,
-        "gainCP": 8,
         "tooltips": ["73"],
         "upgrades": [
           {
@@ -213088,7 +213100,6 @@
       {
         "level": 4,
         "damageFactor": 770,
-        "gainCP": 8,
         "tooltips": ["73"],
         "upgrades": [
           {
@@ -213102,7 +213113,6 @@
       {
         "level": 5,
         "damageFactor": 770,
-        "gainCP": 8,
         "tooltips": ["73"],
         "upgrades": [
           {
@@ -213973,6 +213983,7 @@
       {
         "level": 1,
         "damageFactor": 1300,
+        "gainCP": 1,
         "wgReduce": 2,
         "vars": {
           "2000121_1_1": {
@@ -214009,6 +214020,7 @@
       {
         "level": 2,
         "damageFactor": 1400,
+        "gainCP": 1,
         "wgReduce": 3,
         "vars": {
           "2000121_1_1": {
@@ -214045,6 +214057,7 @@
       {
         "level": 3,
         "damageFactor": 1400,
+        "gainCP": 1,
         "wgReduce": 3,
         "vars": {
           "2000121_1_1": {
@@ -214081,6 +214094,7 @@
       {
         "level": 4,
         "damageFactor": 1500,
+        "gainCP": 1,
         "wgReduce": 4,
         "vars": {
           "2000121_1_1": {
@@ -214117,6 +214131,7 @@
       {
         "level": 5,
         "damageFactor": 1700,
+        "gainCP": 1,
         "wgReduce": 4,
         "vars": {
           "2000121_1_1": {
@@ -214240,6 +214255,7 @@
       {
         "level": 1,
         "damageFactor": 1755,
+        "gainCP": 5,
         "wgReduce": 2,
         "vars": {
           "2000121_1_1": {
@@ -214280,6 +214296,7 @@
       {
         "level": 2,
         "damageFactor": 1855,
+        "gainCP": 5,
         "wgReduce": 3,
         "vars": {
           "2000121_1_1": {
@@ -214320,6 +214337,7 @@
       {
         "level": 3,
         "damageFactor": 1855,
+        "gainCP": 5,
         "wgReduce": 3,
         "vars": {
           "2000121_1_1": {
@@ -214360,6 +214378,7 @@
       {
         "level": 4,
         "damageFactor": 1955,
+        "gainCP": 5,
         "wgReduce": 4,
         "vars": {
           "2000121_1_1": {
@@ -214400,6 +214419,7 @@
       {
         "level": 5,
         "damageFactor": 2155,
+        "gainCP": 5,
         "wgReduce": 4,
         "vars": {
           "2000121_1_1": {

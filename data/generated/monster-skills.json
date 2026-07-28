@@ -23805,7 +23805,7 @@
       }
     ],
     "desc": {
-      "en": "(Passive Effect)\\n<color=#ffd732>Upon death, restores AP [Buff_V_common_monster_passive_AP] and CP [Buff_V_common_monster_passive_cp] per enemy.</color>\\n\\nAt the start of battle, <color=#28d9ed>Effectiveness</color> increases for <color=#28d9ed>[Buff_T_common_monster_passive_09] turns</color>.",
+      "en": "(Passive Effect)\\n<color=#ffd732>Upon death, each enemy recovers [Buff_V_common_monster_passive_AP] Action Points and [Buff_V_common_monster_passive_cp] Chain Points.</color>\\n\\nAt the start of battle, <color=#28d9ed>Effectiveness</color> increases for <color=#28d9ed>[Buff_T_common_monster_passive_09] turns</color>.",
       "jp": "（パッシブ効果）\\n<color=#ffd732>倒れた時、敵1人につきAP [Buff_V_common_monster_passive_AP]、CP [Buff_V_common_monster_passive_cp]ずつ回復させる。</color>\\n\\n戦闘開始時、<color=#28d9ed>効果命中</color>が<color=#28d9ed>[Buff_T_common_monster_passive_09]ターン</color>の間UPする。",
       "kr": "(패시브 효과)\\n<color=#ffd732>사망 시 적 한 명당 AP [Buff_V_common_monster_passive_AP], CP [Buff_V_common_monster_passive_cp] 씩 회복시킵니다.</color>\\n\\n전투 시작 시 <color=#28d9ed>[Buff_T_common_monster_passive_09]턴</color> 동안 <color=#28d9ed>효과 적중</color>이 증가합니다.",
       "zh": "（被动效果）\\n<color=#ffd732>死亡时，每名敌人回复AP [Buff_V_common_monster_passive_AP]、CP [Buff_V_common_monster_passive_cp]。</color>\\n\\n战斗开始时，<color=#28d9ed>效果命中</color>在<color=#28d9ed>[Buff_T_common_monster_passive_09]回合</color>内增加。"
@@ -23877,7 +23877,7 @@
       }
     ],
     "desc": {
-      "en": "(Passive Effect)\\n<color=#ffd732>Upon death, restores [Buff_V_common_monster_passive_AP] AP and [Buff_V_common_monster_passive_cp] CP for each enemy.</color>\\n\\nGains a <color=#28d9ed>Barrier</color> at the start of battle.",
+      "en": "(Passive Effect)\\n<color=#ffd732>Upon death, each enemy recovers [Buff_V_common_monster_passive_AP] Action Points and [Buff_V_common_monster_passive_cp] Chain Points.</color>\\n\\nGains a <color=#28d9ed>Barrier</color> at the start of battle.",
       "jp": "（パッシブ効果）\\n<color=#ffd732>倒れた時、敵1人につきAP [Buff_V_common_monster_passive_AP]、CP [Buff_V_common_monster_passive_cp]ずつ回復させる。</color>\\n\\n戦闘開始時に<color=#28d9ed>シールド</color>を獲得する。",
       "kr": "(패시브 효과)\\n<color=#ffd732>사망 시 적 한 명당 AP [Buff_V_common_monster_passive_AP], CP [Buff_V_common_monster_passive_cp] 씩 회복시킵니다.</color>\\n\\n전투 시작 시 <color=#28d9ed>실드</color>를 획득합니다.",
       "zh": "（被动效果）\\n<color=#ffd732>死亡时，每名敌人回复AP [Buff_V_common_monster_passive_AP]、CP [Buff_V_common_monster_passive_cp]。</color>\\n\\n战斗开始时获得<color=#28d9ed>护盾</color>。"

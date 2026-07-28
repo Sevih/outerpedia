@@ -138,7 +138,7 @@
     },
     {
       "kind": "pickup",
-      "groupId": "120",
+      "groupId": "121",
       "rates": [
         {
           "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_05",
@@ -190,7 +190,7 @@
       "ticketId": "1000002",
       "ticketCost": 1,
       "freeCount": 0,
-      "bannerImage": "CM_Btn_Recruit_PickUp_03",
+      "bannerImage": "CM_Btn_Recruit_PickUp",
       "mileageCost": 200
     },
     {
