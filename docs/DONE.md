@@ -4,6 +4,32 @@
 > ne garde que le « à faire »). Un item traité migre ici avec sa date ; le
 > détail vit dans git. Ne pas confondre avec le `CHANGELOG.md` racine (public).
 
+## 2026-07-28
+
+- **Garde perso dans `promote` : un perso non intégré ne part JAMAIS avec un
+  `--apply`** (règle posée par Sevih le 28/07). Le jeu embarque les persos des
+  patchs à venir : la proposition du jour portait `2400015` (sans nom → slug
+  VIDE dans characters-slug-to-id) dans 5 fichiers, et un promote global
+  l'aurait publié — en contradiction avec le contrat d'`integrate.ts` (« rien
+  n'entre dans data/generated sans un clic dans l'admin »). Mesure préalable :
+  la fuite avait DÉJÀ eu lieu pour `damage-scaling.json` et `progression.json`
+  validés — le premier dry-run gardé l'a montré en les nettoyant.
+  CHOIX D'EMPLACEMENT : pas de filtre générateur par générateur
+  (damage-scaling et progression lisent chacun CharacterTemplet — la convention
+  à recopier partout est la dette de demain), mais UN point d'étranglement là où
+  la frontière extrait → validé se franchit : promote. « Non intégré » = clé du
+  characters.json proposé absente du validé ; sans l'un des deux fichiers,
+  aucun filtrage (on ne filtre que sur une preuve, comme lib/released.ts).
+  DEUX ÉTAGES : (1) écartement GÉNÉRIQUE récursif — entrée de record dont la
+  clé OU la valeur est un id non intégré — qui couvre les 5 fichiers du jour
+  sans liste à tenir ; (2) VERROU : une réf qui survit (id dans un tableau,
+  forme d'un futur générateur) refuse la promotion ENTIÈRE en nommant
+  fichier + ids, bornes non-chiffre pour ne pas confondre `2400015` et
+  `24000151`. Les écritures sont différées après le verrou : une promotion
+  refusée ne laisse RIEN d'écrit (avant, l'apply écrivait au fil de l'eau).
+  L'écran de revue nomme l'écarté à CHAQUE run, même quand les fichiers
+  finissent identiques. 6 tests promote + 4 tests du cœur pur, suite à 24.
+
 ## 2026-07-26
 
 - **`tags.test.ts` ne se bloque plus lui-même** (signalé par Sevih) — le test

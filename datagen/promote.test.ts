@@ -1,9 +1,10 @@
 /**
  * Tests de la logique de PROMOTION (`promote.ts`) — la partie la plus
- * destructive du datagen : l'apply réécrit `data/generated` (le committé) et
- * tourne AUTOMATIQUEMENT en dev (`pnpm dev`). On vérifie donc les invariants
- * qui protègent la donnée validée :
+ * destructive du datagen : l'apply réécrit `data/generated` (le committé).
+ * On vérifie donc les invariants qui protègent la donnée validée :
  *   - RÉTENTION : une entité déjà validée n'est JAMAIS supprimée par l'apply ;
+ *   - GARDE PERSO : un perso non intégré (clé absente du `characters.json`
+ *     validé) ne part JAMAIS avec une promotion — écarté, ou promotion refusée ;
  *   - STABILITÉ : re-lancer l'apply ne produit aucun diff (idempotence) ;
  *   - `--only` : rien d'autre que les fichiers cités n'est touché ;
  *   - ORPHELINS : signalés (jamais supprimés), archive de boss exclue.
@@ -16,7 +17,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { formatJson } from './lib/json';
-import { applyRetention, promote } from './promote';
+import { applyRetention, promote, stripUnintegratedCharacters } from './promote';
 
 let src: string;
 let dst: string;
@@ -112,6 +113,103 @@ describe('promote — rétention à l’apply', () => {
     await put(src, 'glossary.json', { kept: 2 });
     await promote({ src, dst, apply: true });
     expect(read(dst, 'glossary.json')).toEqual({ kept: 2 });
+  });
+});
+
+describe('stripUnintegratedCharacters — cœur pur de la garde perso', () => {
+  const ids = new Set(['2400015']);
+
+  it('écarte une entrée de record par CLÉ, à toute profondeur (progression.premium)', () => {
+    const data = {
+      '2000001': { hp: 1 },
+      '2400015': { hp: 2 },
+      premium: { '2000001': { v: 1 }, '2400015': { v: 2 } },
+    };
+    expect(stripUnintegratedCharacters(data, ids)).toEqual(['2400015']);
+    expect(data).toEqual({ '2000001': { hp: 1 }, premium: { '2000001': { v: 1 } } });
+  });
+
+  it('écarte une entrée par VALEUR exacte (slug map, y compris le slug vide)', () => {
+    // Le vécu du 28/07 : le perso d'un patch à venir n'a pas encore de nom →
+    // `"": "2400015"` dans characters-slug-to-id.json.
+    const data = { kanna: '2000118', '': '2400015' };
+    expect(stripUnintegratedCharacters(data, ids)).toEqual(['2400015']);
+    expect(data).toEqual({ kanna: '2000118' });
+  });
+
+  it("ne touche PAS une réf dans un tableau — c'est le verrou aval qui la bloque", () => {
+    const data = { banner: { chars: ['2000118', '2400015'] } };
+    expect(stripUnintegratedCharacters(data, ids)).toEqual([]);
+    expect(data.banner.chars).toEqual(['2000118', '2400015']);
+  });
+
+  it('ne confond pas un id avec un préfixe (2400015 vs clé 24000151)', () => {
+    const data = { '24000151': { skill: true } };
+    expect(stripUnintegratedCharacters(data, ids)).toEqual([]);
+    expect(data['24000151']).toEqual({ skill: true });
+  });
+});
+
+describe('promote — garde perso à l’apply', () => {
+  /** Proposition + validé minimaux : `2000001` intégré, `2400015` inconnu du validé. */
+  async function seed(): Promise<void> {
+    await put(dst, 'characters.json', { '2000001': { name: 'K' } });
+    await put(src, 'characters.json', {
+      '2000001': { name: 'K', hp: 2 },
+      '2400015': { name: '' },
+    });
+  }
+
+  it('écarte le perso non intégré de tous les fichiers promus (clé ET valeur)', async () => {
+    await seed();
+    await put(src, 'characters-slug-to-id.json', { k: '2000001', '': '2400015' });
+    await put(src, 'damage-scaling.json', { '2400015': { dot: true } });
+
+    const res = await promote({ src, dst, apply: true });
+
+    expect(res.strippedCharacters).toEqual(['2400015']);
+    expect(Object.keys(read(dst, 'characters.json'))).toEqual(['2000001']);
+    expect(read(dst, 'characters-slug-to-id.json')).toEqual({ k: '2000001' });
+    expect(read(dst, 'damage-scaling.json')).toEqual({});
+    // L'écran de revue nomme l'écarté.
+    expect(res.diffs.join('\n')).toContain('non intégré(s) écarté(s) : 2400015');
+  });
+
+  it('REFUSE la promotion entière si une réf survit au retrait — rien n’est écrit', async () => {
+    await seed();
+    // Forme que le retrait générique ne couvre pas : id dans un tableau.
+    await put(src, 'recruit.json', { banner: { chars: ['2400015'] } });
+    await put(src, 'glossary.json', { g: 1 });
+
+    await expect(promote({ src, dst, apply: true })).rejects.toThrow(/recruit\.json : 2400015/);
+    // Tout-ou-rien : même les fichiers sains n'ont pas été écrits.
+    expect(read(dst, 'characters.json')).toEqual({ '2000001': { name: 'K' } });
+  });
+
+  it('un id embarqué dans un nombre plus long ne déclenche PAS le verrou', async () => {
+    await seed();
+    // `24000151` est un id DISTINCT qui contient `2400015` en préfixe — les
+    // bornes non-chiffre du verrou doivent l'ignorer.
+    await put(src, 'skills.json', { '24000151': { power: 1 } });
+
+    const res = await promote({ src, dst, apply: true });
+    expect(read(dst, 'skills.json')).toEqual({ '24000151': { power: 1 } });
+    expect(res.strippedCharacters).toEqual(['2400015']);
+  });
+
+  it('sans characters.json validé (bootstrap), aucune garde — rien à comparer', async () => {
+    await put(src, 'characters.json', { '2400015': { name: '' } });
+    await promote({ src, dst, apply: true });
+    expect(Object.keys(read(dst, 'characters.json'))).toEqual(['2400015']);
+  });
+
+  it('idempotent : un 2e apply après écartement ne voit plus aucun diff', async () => {
+    await seed();
+    await promote({ src, dst, apply: true });
+    const second = await promote({ src, dst, apply: true });
+    expect(second.diffs).toHaveLength(0);
+    // L'écarté reste signalé à chaque run (l'écran de revue doit le dire).
+    expect(second.strippedCharacters).toEqual(['2400015']);
   });
 });
 

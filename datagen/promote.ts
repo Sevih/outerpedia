@@ -12,6 +12,9 @@
  * La promotion est GLOBALE (les glossaires/skills/équipement sont transverses
  * et doivent rester cohérents entre eux) ; pour intégrer UN perso sans le
  * reste, passer par l'intégration ciblée de l'admin (`integrateCharacter`).
+ * GARDE PERSO : la réciproque est VERROUILLÉE — un perso que l'admin n'a pas
+ * intégré ne part JAMAIS avec une promotion, même globale (cf.
+ * `stripUnintegratedCharacters`).
  *
  * Exception : `--only <fichier> [...]` promeut uniquement les fichiers cités
  * (chemins relatifs à data/extracted). Réservé aux fichiers AUTONOMES (sans
@@ -120,6 +123,54 @@ export function applyRetention(
   return { merged, retained };
 }
 
+/**
+ * GARDE PERSO — un personnage n'entre dans le validé QUE par l'intégration
+ * ciblée de l'admin (`integrateCharacter`), JAMAIS par la promotion globale
+ * (décision Sevih 2026-07-28 : le jeu embarque les persos des patchs À VENIR —
+ * `2400015` le jour de la mesure, sans même un nom, donc slug vide — et un
+ * `promote --apply` global les aurait publiés).
+ *
+ * « Non intégré » = clé du `characters.json` PROPOSÉ absente du `characters.json`
+ * VALIDÉ. Sans l'un des deux fichiers sous la main (bootstrap, promotion
+ * partielle), aucun filtrage — on ne filtre que sur une PREUVE de
+ * non-intégration, même philosophie que `lib/released.ts`.
+ *
+ * Le retrait est GÉNÉRIQUE (récursif, aucune liste de fichiers à tenir) :
+ * dans tout record, une entrée dont la CLÉ est un id non intégré saute
+ * (`characters`, `characters-list`, `damage-scaling`, `progression.premium`…),
+ * de même qu'une entrée dont la VALEUR est exactement cet id
+ * (`characters-slug-to-id`). Une réf qui SURVIT au retrait (id dans un tableau,
+ * forme nouvelle d'un futur générateur) fait REFUSER la promotion entière en
+ * nommant fichier + ids : le « jamais » est garanti par erreur bloquante, pas
+ * par convention. Mutation en place ; retourne les ids effectivement écartés.
+ */
+export function stripUnintegratedCharacters(data: unknown, ids: ReadonlySet<string>): string[] {
+  const removed = new Set<string>();
+  const visit = (v: unknown): void => {
+    if (Array.isArray(v)) {
+      for (const e of v) visit(e);
+      return;
+    }
+    if (!v || typeof v !== 'object') return;
+    const rec = v as Record<string, unknown>;
+    for (const [k, val] of Object.entries(rec)) {
+      if (ids.has(k) || (typeof val === 'string' && ids.has(val))) {
+        removed.add(ids.has(k) ? k : (val as string));
+        delete rec[k];
+      } else visit(val);
+    }
+  };
+  visit(data);
+  return [...removed].sort();
+}
+
+/** Clés du `characters.json` d'un dossier, ou `null` s'il n'y en a pas. */
+function characterIds(dir: string): Set<string> | null {
+  const path = join(dir, 'characters.json');
+  if (!existsSync(path)) return null;
+  return new Set(Object.keys(JSON.parse(readFileSync(path, 'utf8')) as Record<string, unknown>));
+}
+
 export interface PromoteOptions {
   /** Dossier de la proposition (défaut `data/extracted`). Injectable pour les tests. */
   src?: string;
@@ -138,6 +189,8 @@ export interface PromoteResult {
   diffs: string[];
   /** Fichiers validés sans équivalent extrait (à trancher à la main). */
   orphans: string[];
+  /** Ids de persos non intégrés écartés de la promotion (garde perso). */
+  strippedCharacters: string[];
 }
 
 /**
@@ -171,8 +224,22 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
   }
   // En promotion ciblée, le reste du monde est volontairement hors périmètre.
   const orphans = only ? [] : walk(dst).filter((f) => !files.includes(f) && !isPureCurated(f));
+
+  // Garde perso : nouveaux ids de la proposition, inconnus du validé (cf.
+  // `stripUnintegratedCharacters`). Sans les deux fichiers, pas de filtrage.
+  const srcChars = characterIds(src);
+  const dstChars = characterIds(dst);
+  const unintegrated = new Set(
+    srcChars && dstChars ? [...srcChars].filter((id) => !dstChars.has(id)) : [],
+  );
+
   let identical = 0;
   const diffs: string[] = [];
+  const strippedAll = new Set<string>();
+  const violations: string[] = [];
+  // Écritures DIFFÉRÉES à après le verrou perso : une promotion refusée ne
+  // laisse RIEN d'écrit (tout-ou-rien), jamais un validé à moitié promu.
+  const pending: Array<{ path: string; text: string }> = [];
 
   for (const rel of files) {
     const srcText = readFileSync(join(src, rel), 'utf8');
@@ -193,20 +260,50 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
       if (retained.length) out = await formatJson(r.merged);
     }
 
+    // Garde perso : écarte les persos non intégrés, puis VERROUILLE — une réf
+    // survivante (bornée par des non-chiffres : `2400015` ne matche pas dans
+    // `24000151`) refuse la promotion entière, générateur à corriger.
+    let stripped: string[] = [];
+    if (unintegrated.size) {
+      if ([...unintegrated].some((id) => out.includes(id))) {
+        const data = JSON.parse(out) as unknown;
+        stripped = stripUnintegratedCharacters(data, unintegrated);
+        if (stripped.length) out = await formatJson(data);
+        for (const id of stripped) strippedAll.add(id);
+      }
+      const residue = [...unintegrated].filter((id) =>
+        new RegExp(`(?<!\\d)${id}(?!\\d)`).test(out),
+      );
+      if (residue.length) violations.push(`${rel} : ${residue.join(', ')}`);
+    }
+
     if (dstText === out) {
       identical++;
       continue;
     }
+    const notes =
+      (retained.length ? ` · ${retained.length} retenue(s), jamais supprimées` : '') +
+      (stripped.length
+        ? ` · ${stripped.length} perso(s) non intégré(s) écarté(s) : ${stripped.join(', ')}`
+        : '');
     const label =
       dstText === undefined
-        ? 'NOUVEAU fichier'
-        : entityDiff(JSON.parse(dstText) as unknown, JSON.parse(out) as unknown) +
-          (retained.length ? ` · ${retained.length} retenue(s), jamais supprimées` : '');
+        ? `NOUVEAU fichier${notes}`
+        : entityDiff(JSON.parse(dstText) as unknown, JSON.parse(out) as unknown) + notes;
     diffs.push(`  ${rel.padEnd(34)} ${label}`);
-    if (apply) {
-      mkdirSync(dirname(dstPath), { recursive: true });
-      writeFileSync(dstPath, out);
-    }
+    if (apply) pending.push({ path: dstPath, text: out });
+  }
+
+  if (violations.length) {
+    throw new Error(
+      'perso(s) non intégré(s) encore référencé(s) après écartement — promotion REFUSÉE, ' +
+        'rien n’a été écrit. Intégrer via l’admin, ou corriger le générateur fautif :\n  ' +
+        violations.join('\n  '),
+    );
+  }
+  for (const { path, text } of pending) {
+    mkdirSync(dirname(path), { recursive: true });
+    writeFileSync(path, text);
   }
 
   console.log(
@@ -217,6 +314,12 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
   // signalés pour décision humaine (entité retirée du jeu ? renommage ?).
   for (const rel of orphans)
     console.log(`  ⚠ ${rel} — validé sans équivalent extrait (à trancher)`);
+  // Toujours signalé, même quand les fichiers finissent identiques (re-run) :
+  // l'écran de revue doit dire QUI a été écarté et pourquoi il ne partira pas.
+  if (strippedAll.size)
+    console.log(
+      `  ⛔ perso(s) non intégré(s), jamais promu(s) : ${[...strippedAll].sort().join(', ')} — intégration via l'admin uniquement`,
+    );
 
   if (diffs.length) {
     console.log(
@@ -225,7 +328,7 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
         : '\n(dry-run — rien n’a été écrit ; relance avec --apply pour valider)',
     );
   }
-  return { identical, diffs, orphans };
+  return { identical, diffs, orphans, strippedCharacters: [...strippedAll].sort() };
 }
 
 async function main(): Promise<void> {
