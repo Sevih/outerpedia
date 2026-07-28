@@ -6,6 +6,31 @@
 
 ## 2026-07-26
 
+- **Auto-traduction branchée sur l'éditeur du changelog** — `/admin/tools/changelog`
+  était le dernier éditeur localisé sans bouton « Translate » : l'échafaudage de F4
+  (`useAutoTranslate` + `TranslateButton`) couvrait six éditeurs, pas celui-là.
+  Titres ET puces y passent désormais, l'anglais faisant foi comme partout.
+  LE POINT DÉLICAT est que le contenu d'une entrée n'est pas un texte mais une
+  LISTE de puces par langue. Choix retenu : UNE PUCE = UN enregistrement, aligné
+  sur l'index de la puce anglaise. Surtout PAS un `join` par saut de ligne pour
+  n'envoyer qu'un texte par entrée — rien ne garantit le nombre de lignes EN
+  RETOUR : `PROTECT` (`translate-actions`) ne couvre pas le saut de ligne, Haiku
+  ne le préserve que sur consigne de prompt, et l'appel DeepL ne passe ni
+  `preserve_formatting` ni `splitting_tags`. Un redécoupage désaligné mélangerait
+  les puces en silence. VÉRIFIÉ dans le code avant de trancher, pas déduit de
+  l'en-tête du module — lui annonce les sauts de ligne comme préservés.
+  Ce découpage ne coûte AUCUN appel de plus : le hook groupe tous les
+  enregistrements périmés dans une seule requête.
+  PIÈGE ÉVITÉ, celui qui aurait coûté du texte : reprojeter les puces d'une entrée
+  NON traduite la réaligne sur la structure anglaise, donc supprime ses puces
+  orphelines (une langue plus longue que l'EN). Silencieux, et sur une entrée que
+  l'utilisateur n'a même pas fait traduire. `rebuiltContent` renvoie `null` quand
+  rien n'a bougé — seule une entrée réellement traduite est reconstruite.
+  Cœur pur dans `changelog/changelog-text.ts` (même convention que les quatre
+  dossiers de F9), verrouillé par dix cas : alignement par index, langue plus
+  courte que l'EN, entrée intacte qui garde ses orphelines, entrée traduite qui
+  suit la structure anglaise.
+
 - **Équipement : 2 bugs signalés par Sevih — jumelles de nom L/T et mains des
   variantes irregular** (vérifiés sur le RENDU réel avant tests, demande Sevih).
   (1) Resurrection Token / Clear Mind / Saint's Ring (+ Combination Simulator)

@@ -1,10 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { LANGS, LANGUAGES, type Lang } from '@/lib/i18n/config';
 import type { ChangelogEntry, ChangelogLink, ChangelogType } from '@/lib/data/changelog';
 import { postJson } from '@/lib/admin/post-json';
 import { rowKey } from '@/lib/admin/keyed';
+import { createFreshness } from '@/lib/admin/translate-fill';
+import { useAutoTranslate } from '@/lib/admin/useAutoTranslate';
+import { TranslateButton } from '@/components/admin/TranslateButton';
+import {
+  contentBullets,
+  rebuiltContent,
+  type Localized,
+} from '@/components/admin/changelog/changelog-text';
 
 const input =
   'rounded-md border border-line bg-surface-base px-2 py-1 text-sm text-content focus:border-accent focus:outline-none';
@@ -99,12 +107,53 @@ function toEntry(r: Row): ChangelogEntry {
 const byDateDesc = (l: Row[]): Row[] =>
   [...l].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
-/** Éditeur du journal du site (page /changelog). Édition d'une langue à la fois. */
+/**
+ * Éditeur du journal du site (page /changelog). Édition d'une langue à la fois.
+ *
+ * Auto-traduction branchée sur l'échafaudage commun (`useAutoTranslate` +
+ * `TranslateButton`, audit F4) : l'anglais fait foi, seul le PÉRIMÉ repart au
+ * traducteur. Titres et puces y passent, les puces une par une — le pourquoi est
+ * en tête de `changelog/changelog-text.ts`.
+ */
 export function ChangelogEditor({ initial }: { initial: ChangelogEntry[] }) {
   const [rows, setRows] = useState<Row[]>(() => byDateDesc(initial.map(toRow)));
   const [lang, setLang] = useState<Lang>('en');
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
   const today = todayUtc();
+
+  // Photo des EN au chargement (titres ET puces) : référence de « déjà traduit ».
+  const [freshness] = useState(() =>
+    createFreshness(initial.flatMap((e) => [e.title?.en, ...(e.content?.en ?? [])])),
+  );
+  // Appariement posé par `collect`, relu par `commit` : le hook mute les
+  // enregistrements sans savoir à quelle entrée ils appartiennent.
+  const pending = useRef<{ row: Row; bullets: Localized[]; before: Localized[] }[]>([]);
+
+  const translate = useAutoTranslate<Row[]>({
+    langs: LANGS,
+    freshness,
+    collect: () => {
+      // Copie MUTABLE : le hook écrit dans les enregistrements collectés, il ne
+      // faut pas que ça touche l'état courant (React ne verrait rien changer).
+      const draft = rows.map((r) => ({ ...r, title: { ...r.title }, content: { ...r.content } }));
+      pending.current = draft.map((row) => {
+        const bullets = contentBullets(row.content);
+        return { row, bullets, before: bullets.map((b) => ({ ...b })) };
+      });
+      return {
+        draft,
+        records: pending.current.flatMap((p) => [p.row.title, ...p.bullets]),
+      };
+    },
+    commit: (draft) => {
+      for (const { row, bullets, before } of pending.current) {
+        // `null` = entrée non traduite, on n'y touche pas (cf. `rebuiltContent`).
+        const next = rebuiltContent(row.content, bullets, before);
+        if (next) row.content = next;
+      }
+      setRows(draft);
+    },
+  });
 
   const set = (i: number, patch: Partial<Row>) =>
     setRows((s) => s.map((r, j) => (j === i ? { ...r, ...patch } : r)));
@@ -151,6 +200,7 @@ export function ChangelogEditor({ initial }: { initial: ChangelogEntry[] }) {
         >
           Enregistrer
         </button>
+        <TranslateButton t={translate} />
         {status.kind === 'ok' && <span className="text-success text-sm">{status.msg}</span>}
         {status.kind === 'err' && <span className="text-danger text-sm">{status.msg}</span>}
         {/* Sélecteur de langue (édite une langue à la fois) */}
