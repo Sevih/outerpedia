@@ -1049,6 +1049,76 @@
       "date": "2026-07-27",
       "type": "special-identification",
       "raw": "Challenge! Special Request: Identification Drop Rate +30%"
+    },
+    {
+      "date": "2026-07-28",
+      "type": "frog-food",
+      "raw": "Hypnotic Frog Hall: Increased Food Rewards by 100%"
+    },
+    {
+      "date": "2026-07-29",
+      "type": "frog-gold",
+      "raw": "Hypnotic Frog Hall: Increased Gold Rewards by 100%"
+    },
+    {
+      "date": "2026-07-30",
+      "type": "ark-raid",
+      "raw": "Ark Raid: Increased Item Rewards by 100%"
+    },
+    {
+      "date": "2026-07-31",
+      "type": "special-ecology",
+      "raw": "Challenge! Special Request: Ecology Study Drop Rate +30%"
+    },
+    {
+      "date": "2026-08-01",
+      "type": "kate-workshop",
+      "raw": "Kate’s Workshop Crafting Gold 30% Discount Event"
+    },
+    {
+      "date": "2026-08-02",
+      "type": "story-survey",
+      "raw": "[Origin Story] Survey Points x2"
+    },
+    {
+      "date": "2026-08-03",
+      "type": "special-identification",
+      "raw": "Challenge! Special Request: Identification Drop Rate +30%"
+    },
+    {
+      "date": "2026-08-04",
+      "type": "frog-food",
+      "raw": "Hypnotic Frog Hall: Increased Food Rewards by 100%"
+    },
+    {
+      "date": "2026-08-05",
+      "type": "frog-gold",
+      "raw": "Hypnotic Frog Hall: Increased Gold Rewards by 100%"
+    },
+    {
+      "date": "2026-08-06",
+      "type": "ark-raid",
+      "raw": "Ark Raid: Increased Item Rewards by 100%"
+    },
+    {
+      "date": "2026-08-07",
+      "type": "special-ecology",
+      "raw": "Challenge! Special Request: Ecology Study Drop Rate +30%"
+    },
+    {
+      "date": "2026-08-08",
+      "type": "doppelganger",
+      "raw": "[Doppelgänger Hunt] Increases piece received by +1"
+    },
+    {
+      "date": "2026-08-09",
+      "type": "kate-workshop",
+      "raw": "Kate’s Workshop Crafting Gold 30% Discount Event"
+    },
+    {
+      "date": "2026-08-10",
+      "type": "special-identification",
+      "raw": "Challenge! Special Request: Identification Drop Rate +30%"
     }
   ]
 }
