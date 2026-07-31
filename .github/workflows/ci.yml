@@ -118,6 +118,19 @@ jobs:
     needs: docker
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    # Deux pushes rapprochés = deux deploys simultanés sur le même VPS. Vécu le
+    # 30/07 (runs 30560351230/30560401933) : pendant le recreate du premier,
+    # compose renomme l'ancien conteneur en `<hash>_stack-outerpedia-1`, et le
+    # `compose up` du second percute ce nom temporaire → « name already in
+    # use ». Le groupe sérialise : le second ATTEND la fin du premier
+    # (`cancel-in-progress: false` — on ne coupe JAMAIS un deploy en vol) ; si
+    # un troisième arrive, il remplace le deuxième en file (seul le dernier
+    # état compte, l'image est taguée `latest`). NB : ce groupe ne voit que CE
+    # repo — la course inter-repos (outerbot déploie la même stack) est tenue
+    # par le flock côté VPS, dans le script ci-dessous.
+    concurrency:
+      group: deploy-prod
+      cancel-in-progress: false
     steps:
       - name: Déploiement SSH sur le VPS
         uses: appleboy/ssh-action@v1
@@ -138,6 +151,14 @@ jobs:
             # introuvable et le déchiffrement échoue.
             export PATH="$HOME/.local/bin:$PATH"
             cd ~/sevih-tool
+            # VERROU inter-repos : outerbot déploie la MÊME stack (compose pull
+            # + up sur les mêmes conteneurs) et le groupe `concurrency` GitHub
+            # ne voit pas les autres repos. flock sérialise tout déploiement
+            # sur le VPS, d'où qu'il vienne — la 1re course (pulls concurrents
+            # site+bot, « lease does not exist ») devient impossible aussi.
+            # 10 min d'attente max (= command_timeout), puis échec FRANC.
+            exec 9>/tmp/deploy-stack.lock
+            flock -w 600 9
             # Régénère stack/.env depuis le coffre chiffré. Le compose exige des
             # variables (`${VAR:?}`) ; si l'infra en ajoute une et que .env n'est
             # pas régénéré, le déploiement du CODE casse à cause d'un changement
