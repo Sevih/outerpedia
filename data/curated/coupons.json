@@ -1,5 +1,13 @@
 [
   {
+    "code": "LOVEDELTA",
+    "start": "2026-08-02",
+    "end": "2026-10-11",
+    "description": {
+      "1000005": "10"
+    }
+  },
+  {
     "code": "OUTERLETTERJUL1",
     "start": "2026-07-20",
     "end": "2026-08-31",

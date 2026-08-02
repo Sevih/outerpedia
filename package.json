@@ -1,13 +1,13 @@
 {
   "name": "outerpedia",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "private": true,
   "packageManager": "pnpm@11.13.0",
   "engines": {
     "node": ">=24"
   },
   "scripts": {
-    "dev": "pnpm clean:all && tsx scripts/dev-refresh.ts && concurrently -n next,caddy -c blue,green \"next dev\" \"caddy run --config Caddyfile.dev\"",
+    "dev": "pnpm clean:all && tsx scripts/dev-refresh.ts && concurrently -n next,caddy -c blue,green \"next dev --webpack\" \"caddy run --config Caddyfile.dev\"",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

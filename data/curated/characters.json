@@ -337,15 +337,6 @@
     }
   },
   "2000019": {
-    "rank": "A",
-    "rankPvp": "C",
-    "role": "dps",
-    "tags": ["free"],
-    "skillPriority": {
-      "first": 3,
-      "second": 2,
-      "ultimate": 1
-    },
     "prosCons": {
       "pros": [
         {
@@ -388,7 +379,16 @@
         "author": "아우터플레인 공식 채널",
         "uploadDate": "2025-09-22T16:15:01Z"
       }
-    ]
+    ],
+    "rank": "B",
+    "rankPvp": "C",
+    "role": "dps",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
   },
   "2000020": {
     "rank": "B",
@@ -4335,6 +4335,8 @@
         "uploadDate": "2026-07-28T02:39:10Z"
       }
     ],
+    "rank": "B",
+    "rankPvp": "D",
     "role": "dps",
     "skillPriority": {
       "first": 3,

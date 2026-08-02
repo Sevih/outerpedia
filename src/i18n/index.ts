@@ -10,7 +10,11 @@ export type TFunction = (key: TranslationKey, vars?: Record<string, string | num
 /** Charge les messages d'une langue (mémoïsé par requête). */
 export const loadMessages = cache(async (lang: Lang): Promise<Messages> => {
   const safeLang = isValidLang(lang) ? lang : 'en';
-  const mod = await import(`./locales/${safeLang}.ts`);
+  // `webpackExclude` : le glob de ce dynamic import balaie tout `locales/*.ts` ;
+  // sans ça, webpack (dev) embarque `keys.test.ts` → vitest → vite (warning
+  // `import.meta`). `safeLang` est déjà validé, le test n'est jamais chargé au
+  // runtime — on l'exclut juste du graphe. Commentaire ignoré par Turbopack (prod).
+  const mod = await import(/* webpackExclude: /\.test\.ts$/ */ `./locales/${safeLang}.ts`);
   return mod.default;
 });
 

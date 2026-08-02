@@ -1,0 +1,325 @@
+{
+  "teams": [
+    {
+      "title": {
+        "en": "Light"
+      },
+      "element": "light",
+      "slots": [["Anarky"], ["Dianne"], ["Demiurge Luna"], ["Mystic Sage Ame"]],
+      "geasActive": {
+        "bonus": ["53", "47"],
+        "malus": ["15", "16", "20", "38", "56", "67", "70", "71", "103"]
+      },
+      "requirements": {
+        "entries": [
+          {
+            "character": "Anarky",
+            "stats": {
+              "spd": "148"
+            },
+            "equipment": {
+              "amulet": ["{I-A/Charmer's Golden Chalice}"],
+              "talisman": ["{I-T/Rogue's Charm}"],
+              "set": ["{AS/Lifesteal}", "{AS/Life}"]
+            }
+          },
+          {
+            "character": "Dianne",
+            "stats": {
+              "spd": "266"
+            },
+            "equipment": {
+              "talisman": ["{I-T/Executioner's Charm}"]
+            }
+          },
+          {
+            "character": "Demiurge Luna",
+            "stats": {
+              "spd": "202"
+            },
+            "equipment": {
+              "talisman": ["{I-T/Rogue's Charm}"],
+              "set": ["{AS/Penetration}"]
+            }
+          },
+          {
+            "character": "Mystic Sage Ame",
+            "stats": {
+              "spd": "261"
+            },
+            "equipment": {
+              "talisman": ["{I-T/Rogue's Charm}"],
+              "set": ["{AS/Penetration}"]
+            }
+          }
+        ]
+      },
+      "video": {
+        "platform": "youtube",
+        "id": "Nqp2L9Y1Dn4",
+        "title": "Light Team",
+        "author": "Hienragami"
+      }
+    },
+    {
+      "title": {
+        "en": "Ember"
+      },
+      "element": "fire",
+      "slots": [
+        ["Ember"],
+        ["Liselotte", "Demiurge Delta", "Dianne", "Mene", "Viella"],
+        ["Kuro"],
+        ["Christina", "Ritri", "Demiurge Drakhan", "Omega Nadja"]
+      ],
+      "geasActive": {
+        "bonus": ["69"],
+        "malus": ["16", "38", "103", "57", "15", "70", "56", "30", "20"]
+      },
+      "requirements": {
+        "entries": [
+          {
+            "character": "Ember",
+            "stats": {
+              "spd": "166"
+            },
+            "equipment": {
+              "weapon": ["T4 {I-W/Token of the Supreme Witch}"],
+              "amulet": ["{I-A/Unholy Exsultet}"],
+              "talisman": ["{I-T/Vanguard's Charm}"],
+              "set": ["T4 {AS/Revenge}"]
+            },
+            "notes": [
+              {
+                "en": "166+ SPD at stage 10+ — 156 works if paired with a Healer granting +10 passive speed at 6★ transcendence."
+              },
+              {
+                "en": "{I-A/Unholy Exsultet} with ATK% main stat for bigger shields; prioritize ATK and SPD substats, with enough Effectiveness to land debuffs (use the +Effectiveness geas rather than an Effectiveness accessory)."
+              }
+            ]
+          }
+        ]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "Sacrifice options — use a {C/Mage} to tank the stun; the others can hold charms:"
+          }
+        },
+        {
+          "ul": [
+            {
+              "en": "{P/Liselotte}: +10 SPD and damage reduction while shielded (her EE); can hold {I-A/Starlight Road}. Best option for this slot thanks to her EE — {P/Demiurge Delta}, {P/Dianne}, {P/Mene} and {P/Viella} also work."
+            },
+            {
+              "en": "{P/Christina}: -30% damage reduction, holding a T4 {I-A/Charmer's Golden Chalice} — drop it if Ember doesn't fall below 50% HP on turn 1."
+            },
+            {
+              "en": "{P/Kuro}: tanks the stun, resets the boss's action bar on turn 1 and self-revives, so Ember only needs to tank her S3 before her shield is up (268+ Effectiveness)."
+            },
+            {
+              "en": "{P/Ritri}, {P/Demiurge Drakhan} and {P/Omega Nadja}: damage reduction, can hold {I-A/Charmer's Golden Chalice} ({P/Omega Nadja} also lands Irregular Infection on turn 1 for a damage debuff)."
+            }
+          ]
+        },
+        {
+          "p": {
+            "en": "Remove geas 15 (Ally Max HP -30%) for better survivability.",
+            "jp": "ギアス15（味方の最大HP-30%）を外すと生存率が上がります。",
+            "kr": "기어스 15(아군 최대 체력 -30%)를 제거하면 생존율이 높아집니다.",
+            "zh": "移除契约15（友军最大生命值-30%）可提高生存率。",
+            "fr": "Retirez le geas 15 (HP max alliés -30%) pour une meilleure survie."
+          }
+        }
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "Wxw0TNUdMDE",
+        "title": "Solo Ember",
+        "author": "Tango"
+      }
+    },
+    {
+      "title": {
+        "en": "Burn Team"
+      },
+      "icon": "IG_Buff_Dot_Burn",
+      "slots": [
+        ["Maxie"],
+        ["Roxie"],
+        ["Vlada"],
+        ["Core Fusion Veronica", "Veronica", "Omega Nadja"]
+      ],
+      "geasActive": {
+        "bonus": ["69", "50"],
+        "malus": ["16", "38", "15", "70", "56", "30"]
+      },
+      "requirements": {
+        "entries": [
+          {
+            "character": "Core Fusion Veronica",
+            "stats": {
+              "spd": "252"
+            },
+            "equipment": {
+              "set": ["{AS/Speed}"],
+              "talisman": ["{I-T/Rogue's Charm}"]
+            },
+            "notes": [
+              {
+                "en": "Can use a slower build with EE+10 to chain skill earlier and boost team AP."
+              }
+            ]
+          },
+          {
+            "character": "Maxie",
+            "stats": {
+              "spd": "238",
+              "trans": "5-6"
+            },
+            "equipment": {
+              "weapon": ["{I-W/Heartunder's Blade}"],
+              "talisman": ["{I-T/Executioner's Charm} +10"],
+              "set": ["T4 {AS/Revenge}"],
+              "ee": ["+0 min"]
+            }
+          },
+          {
+            "character": "Roxie",
+            "stats": {
+              "spd": "221",
+              "trans": "5-6"
+            },
+            "equipment": {
+              "amulet": ["{I-A/Dies Irae}"],
+              "talisman": ["{I-T/Executioner's Charm} +10"],
+              "set": ["2pc {AS/Immunity}"],
+              "ee": ["+10"]
+            }
+          },
+          {
+            "character": "Vlada",
+            "stats": {
+              "spd": "95"
+            },
+            "equipment": {
+              "weapon": ["{I-W/Phantasm Necrosis}"],
+              "talisman": ["{I-T/Rogue's Charm}"],
+              "set": ["T4 {AS/Revenge}"]
+            },
+            "notes": [
+              {
+                "en": "Uses {I-W/Phantasm Necrosis} to lower her speed."
+              }
+            ]
+          }
+        ]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "Break the boss on turn 15 before he uses enrage ultimate. Only remove geas 15 (Ally Max HP -30%) or use {P/Omega Nadja} if necessary for survivability.",
+            "jp": "ターン15で怒りのアルティメットを使う前にボスをブレイクしてください。生存のためにギアス15（味方の最大HP-30%）を外すか、{P/Omega Nadja}を使用してください。",
+            "kr": "턴 15에서 분노 궁극기를 사용하기 전에 보스를 브레이크하세요. 생존을 위해 기어스 15(아군 최대 체력 -30%)를 제거하거나 {P/Omega Nadja}를 사용하세요.",
+            "zh": "在第15回合狂暴大招前打破Boss。为了生存可以移除契约15（友军最大生命值-30%）或使用{P/Omega Nadja}。",
+            "fr": "Brisez le Boss au tour 15 avant qu'il n'utilise son ultime d'enrage. Ne retirez le geas 15 (HP max alliés -30%) ou n'utilisez {P/Omega Nadja} qu'en cas de nécessité pour la survie."
+          }
+        },
+        {
+          "p": {
+            "en": "Replace {P/Core Fusion Veronica} with {P/Omega Nadja} for better turn 1 survivability (use min speed, hoping for speed debuff proc). If using {P/Omega Nadja}, disable the counter geas. Regular {P/Veronica} also works.",
+            "jp": "{P/Core Fusion Veronica}を{P/Omega Nadja}に置き換えるとターン1の生存率が上がります（最低速度で速度デバフを期待）。{P/Omega Nadja}使用時はカウンターギアスを無効に。通常の{P/Veronica}でも可。",
+            "kr": "{P/Core Fusion Veronica}를 {P/Omega Nadja}로 교체하면 턴 1 생존율이 높아집니다(최저 속도로 속도 디버프 기대). {P/Omega Nadja} 사용 시 카운터 기어스를 비활성화하세요. 일반 {P/Veronica}도 가능합니다.",
+            "zh": "将{P/Core Fusion Veronica}替换为{P/Omega Nadja}可提高第1回合生存率（最低速度期待速度减益触发）。使用{P/Omega Nadja}时禁用反击契约。普通{P/Veronica}也可以。",
+            "fr": "Remplacez {P/Core Fusion Veronica} par {P/Omega Nadja} pour une meilleure survie au tour 1 (utilisez la vitesse minimale, en espérant le proc du debuff de vitesse). Si vous utilisez {P/Omega Nadja}, désactivez le geas de contre-attaque. La {P/Veronica} classique fonctionne aussi."
+          }
+        }
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "wX_q5uLchGY",
+        "title": "Burn Team Stage 12 - 16.1m dmg, 155% multiplier",
+        "author": "Tango"
+      }
+    },
+    {
+      "title": {
+        "en": "Burn Team (Stage 20+)"
+      },
+      "icon": "IG_Buff_Dot_Burn",
+      "slots": [["Maxie"], ["Roxie"], ["Vlada"], ["Omega Nadja"]],
+      "geasActive": {
+        "bonus": ["69", "50"],
+        "malus": ["38", "16", "70", "56"]
+      },
+      "requirements": {
+        "entries": [
+          {
+            "character": "Maxie",
+            "stats": {
+              "spd": "217",
+              "trans": "5-6"
+            },
+            "equipment": {
+              "weapon": ["{I-W/Heartunder's Blade}"],
+              "talisman": ["{I-T/Executioner's Charm} +10"],
+              "set": ["T4 {AS/Revenge}"],
+              "ee": ["+0 min"]
+            }
+          },
+          {
+            "character": "Roxie",
+            "stats": {
+              "spd": "205",
+              "trans": "5-6"
+            },
+            "equipment": {
+              "amulet": ["{I-A/Dies Irae}"],
+              "talisman": ["{I-T/Executioner's Charm} +10"],
+              "set": ["2pc {AS/Immunity}"],
+              "ee": ["+10"]
+            }
+          },
+          {
+            "character": "Vlada",
+            "stats": {
+              "spd": "142"
+            },
+            "equipment": {
+              "talisman": ["{I-T/Rogue's Charm}"],
+              "set": ["T4 {AS/Revenge}"]
+            }
+          },
+          {
+            "character": "Omega Nadja",
+            "stats": {
+              "spd": "105"
+            },
+            "equipment": {
+              "weapon": ["{I-W/Force Field Generator}"],
+              "amulet": ["{I-A/Charmer's Golden Chalice}"]
+            }
+          }
+        ]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "Designed for especially high-level stages (20+) over the previous team, where {P/Core Fusion Veronica} doesn't provide enough damage reduction to keep the team alive — especially if the boss crits someone on turn 1."
+          }
+        },
+        {
+          "p": {
+            "en": "The -30% Max HP geas is turned OFF here, but you can turn it on if all your units survive a turn-1 crit, or to gamble for more points (the boss crit rate is 10%, but it feels much lower)."
+          }
+        }
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "xBjY0bRtbVI",
+        "title": "Burn Team (Stage 20+)",
+        "author": "Tango"
+      }
+    }
+  ]
+}

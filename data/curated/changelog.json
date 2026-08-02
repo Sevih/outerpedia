@@ -1,5 +1,29 @@
 [
   {
+    "date": "2026-08-02",
+    "type": "update",
+    "title": {
+      "en": "Dignity of the Golden Kingdom",
+      "jp": "黄金の王国の尊厳",
+      "kr": "황금 왕국의 위엄",
+      "zh": "“黄金王国”的尊严",
+      "fr": "La dignité du Royaume d'Or"
+    },
+    "content": {
+      "en": ["Dignity of the Golden Kingdom Guild Raid Guide updated for July 2026 version."],
+      "jp": ["「黄金の王国の尊厳」ギルドレイドガイドを2026年7月版に更新しました。"],
+      "kr": ["‘황금 왕국의 위엄’ 길드 레이드 가이드가 2026년 7월 버전으로 업데이트되었습니다."],
+      "zh": ["《黄金王国公会团队副本攻略》已更新至2026年7月版本。"],
+      "fr": [
+        "Guide de raid de la guilde « Dignity of the Golden Kingdom » mis à jour pour la version de juillet 2026."
+      ]
+    },
+    "link": {
+      "kind": "guide",
+      "href": "/guides/guild-raid/dignity-of-the-golden-kingdom"
+    }
+  },
+  {
     "date": "2026-07-28",
     "type": "character",
     "title": {
