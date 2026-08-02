@@ -725,6 +725,49 @@ Ce qui s'applique **hors combat vs en combat** :
 - Jamais en combat : ST_GET_GOLD_RATE (20), ST_GET_CHARACTER_EXP_RATE (21)
   (économie), et de fait ST_ACCURACY (13).
 
+### 16.1 De la fiche affichée aux stats de combat (consolidé 27/07/2026)
+
+Ajouté après l'angle mort « Codex » (le terme d'archive était documenté au § 3
+depuis la phase 1, mais sa CONSÉQUENCE de saisie n'était reliée nulle part —
+la faute au vocabulaire : chaque système a un nom FORMULE et un nom UI).
+
+**Glossaire binaire ↔ jeu** — toujours donner les deux :
+
+| Nom formule / tables                       | Nom en jeu (UI)          | Canal CalcFinalStat                                                                      |
+| ------------------------------------------ | ------------------------ | ---------------------------------------------------------------------------------------- |
+| archive (`CharacterArchiveStatTemplet`)    | **Hero Codex**           | `base × archiveRate`, HORS sous-total                                                    |
+| éveil / Awakening (`CharacterAwakening*`)  | **Quirks / Gift**        | `awakVal` (plats) + `awakRate` (IOT_STAT) ; les nœuds IOT_BUFF sont des CBuffs de combat |
+| Trust (`TrustBuffTemplet` → `BuffTemplet`) | **Affinité** (5 paliers) | `buffVal` — buffs passifs plats (+60 ATK/+40 DEF/+300 HP par palier)                     |
+| monad (`MonadGateEnchantNodeTemplet`)      | **Monad Gate**           | `monadVal`/`monadRate`                                                                   |
+| transcendance                              | **Transcendance** (aura) | `transRate` (multiplicateur commun)                                                      |
+
+**Ce que la fiche affichée contient** (pipeline § 16 sans `buffVal`/`buffRate`,
+corroboré in-game 27/07/2026 — l'affinité n'apparaît PAS dans la fiche) :
+
+| Couche                                     | Dans la fiche ? | Multipliée par `buffRate` en combat ?          |
+| ------------------------------------------ | --------------- | ---------------------------------------------- |
+| base, évolution, éveil, monad (plats)      | oui             | oui                                            |
+| taux éveil/monad/transcendance/items       | oui             | oui                                            |
+| plats d'équipement (`itemVal`)             | oui             | oui — mais PAS multipliés par `itemRate` (§ 3) |
+| archive / **Codex**                        | oui             | **NON** (ajouté après le ×buffRate)            |
+| Trust / **Affinité**                       | **NON**         | oui (canal `buffVal`)                          |
+| buffs de combat, passifs d'équipement § 15 | non             | —                                              |
+
+**Identité de reconstruction** (EXACTE, aucune approximation — les troncatures
+s'annulent car `fiche = sub_sans_buffs + A`) : pour passer d'une stat SAISIE
+depuis la fiche à la stat de combat,
+
+```text
+A       = div1000(base × archiveRate)        // terme Codex (base = CalcStat § 3.1)
+combat  = div1000((fiche − A + buffVal) × (1000 + buffRate)) + A
+```
+
+avec `buffVal` incluant les paliers d'affinité. Le moteur n'a donc besoin que
+de : la fiche saisie, la stat de base recalculée, le niveau de Codex, le palier
+d'affinité, et les buffs du scénario. (Re-vérification du 27/07/2026 : la
+formule § 3 a été re-dérivée indépendamment depuis `CalcFinalStat.asm` —
+conforme, y compris le clamp `bic` et les troncatures vers zéro.)
+
 ## 17. Agrégation des couches — CCharacterData.CalcStat (0x27E2870) et satellites
 
 Le mapping templet → 13 paramètres de CalcFinalStat, extrait fonction par fonction

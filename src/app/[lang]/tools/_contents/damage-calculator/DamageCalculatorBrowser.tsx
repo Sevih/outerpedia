@@ -132,10 +132,12 @@ export interface DcEE {
 }
 
 export interface DcSpawn {
-  label: string;
+  /** Absent quand le jeu ne nomme pas le spawn (repli « Fight N » à l'affichage). */
+  label?: string;
   level: number;
-  /** Stats défensives EFFECTIVES au spawn (niveau + adv + bossHp appliqués). */
-  stats: { hp: number; def: number; dmgRed: number; cdmgRed: number };
+  /** Stats défensives EFFECTIVES au spawn (niveau + adv + bossHp appliqués).
+   *  Un champ ABSENT vaut 0 — les zéros sont omis du payload. */
+  stats: { hp?: number; def?: number; dmgRed?: number; cdmgRed?: number };
 }
 
 export interface DcTarget {
@@ -151,7 +153,8 @@ export interface DcTarget {
   cls: string;
   /** Boss de la vague principale. */
   name: string;
-  iconSrc: string;
+  /** Nom BRUT d'icône de monstre — l'URL est dérivée client (`monsterIcon`). */
+  icon: string;
   element: string;
   spawns: DcSpawn[];
 }
@@ -277,7 +280,8 @@ interface Props {
     tgtDebuff: DcBuffOption[];
   };
   quirks: DcQuirkGroup[];
-  /** Courbe du Codex : 11 paliers de taux ‰ (ATK/DEF/HP) sur la stat de BASE. */
+  /** Courbe du Codex, indexée PAR NIVEAU ([0] = niveau 0, [1..11] = paliers) :
+   *  taux ‰ (ATK/DEF/HP) sur la stat de BASE. */
   codexTiers: { atk: number; def: number; hp: number }[];
   labels: DcLabels;
 }
@@ -472,6 +476,11 @@ function SlotTile({
     </span>
   );
 }
+
+/** Règle d'icône de monstre (miroir de `monsterIconSrc`, serveur only) :
+ *  icône '2…' = modèle de perso → face, sinon portrait de boss MT_*. */
+const monsterIcon = (icon: string): string =>
+  icon.startsWith('2') ? img.face(icon) : img.boss(`MT_${icon}`);
 
 const ROW_CLASS =
   'hover:bg-surface-raised/80 flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm transition';
@@ -1083,90 +1092,80 @@ export function DamageCalculatorBrowser({
     });
   }, [chars, kits, weapons, amulets, sets, targets, talismanMains]);
 
+  // État d'URL COURANT (compressé) — partagé entre l'effet débouncé, le bouton
+  // « copier le lien » et la capture de fixture : ces deux-là ne doivent JAMAIS
+  // lire une URL en retard de debounce (Sevih 27/07/2026).
+  const packZ = (): string => {
+    const z: UrlState = {};
+    if (attackerId) {
+      z.a = attackerId;
+      z.x = transcend;
+      if (affinity) z.af = affinity;
+      z.k = skillLvls;
+      if (weaponSlug) {
+        z.w = weaponSlug;
+        if (weaponTier) z.y = weaponTier;
+      }
+      if (amuletSlug) {
+        z.m = amuletSlug;
+        if (amuletTier) z.q = amuletTier;
+      }
+      if (setPicks.length) z.s = setPicks.map((p) => [p.setId, p.tier]);
+      if (talismanOn) z.t = 1;
+      if (!eeOwned) z.eo = 0;
+      if (eeLevel !== 10) z.e = eeLevel;
+      const vals = Object.fromEntries(Object.entries(statVals).filter(([, v]) => v !== ''));
+      if (Object.keys(vals).length) z.v = vals;
+      if (hpPct !== '100') z.h = hpPct;
+      if (atkFx.length) z.b = atkFx;
+      if (tgtFx.length) z.d = tgtFx;
+    }
+    if (targetTab === 'manual') z.g = 1;
+    if (targetId) {
+      z.ti = targetId;
+      if (spawnIdx) z.si = spawnIdx;
+    }
+    if (tgtElement) z.te = tgtElement;
+    const tv = Object.fromEntries(Object.entries(tgtStats).filter(([, v]) => v !== ''));
+    if (Object.keys(tv).length) z.tv = tv;
+    if (tgtBoss) z.tb = 1;
+    if (tgtHpPct !== '100') z.th = tgtHpPct;
+    if (targetsHit > 1) z.n = targetsHit;
+    if (allies.some((a) => a.id))
+      z.al = allies.map((a) => [
+        a.id ?? '',
+        a.transcend,
+        a.talisman ?? '',
+        a.talismanLv,
+        Number(a.ee),
+        Number(a.eePlus),
+      ]);
+    return Object.keys(z).length ? LZString.compressToEncodedURIComponent(JSON.stringify(z)) : '';
+  };
+
+  /** URL de partage de l'état courant — et l'écrit dans la barre au passage. */
+  const flushShareUrl = (): string => {
+    const packed = packZ();
+    const url = `${window.location.pathname}${packed ? `?z=${packed}` : ''}${window.location.hash}`;
+    window.history.replaceState(null, '', url);
+    return `${window.location.origin}${url}`;
+  };
+
+  // SANS tableau de deps, à dessein : l'effet re-arme le timer à chaque rendu
+  // et n'écrit que 400 ms après le DERNIER — même débounce qu'avant, sans la
+  // liste de 24 deps à maintenir.
   useEffect(() => {
     if (!didHydrate.current) return;
     const timer = window.setTimeout(() => {
-      const z: UrlState = {};
-      if (attackerId) {
-        z.a = attackerId;
-        z.x = transcend;
-        if (affinity) z.af = affinity;
-        z.k = skillLvls;
-        if (weaponSlug) {
-          z.w = weaponSlug;
-          if (weaponTier) z.y = weaponTier;
-        }
-        if (amuletSlug) {
-          z.m = amuletSlug;
-          if (amuletTier) z.q = amuletTier;
-        }
-        if (setPicks.length) z.s = setPicks.map((p) => [p.setId, p.tier]);
-        if (talismanOn) z.t = 1;
-        if (!eeOwned) z.eo = 0;
-        if (eeLevel !== 10) z.e = eeLevel;
-        const vals = Object.fromEntries(Object.entries(statVals).filter(([, v]) => v !== ''));
-        if (Object.keys(vals).length) z.v = vals;
-        if (hpPct !== '100') z.h = hpPct;
-        if (atkFx.length) z.b = atkFx;
-        if (tgtFx.length) z.d = tgtFx;
-      }
-      if (targetTab === 'manual') z.g = 1;
-      if (targetId) {
-        z.ti = targetId;
-        if (spawnIdx) z.si = spawnIdx;
-      }
-      if (tgtElement) z.te = tgtElement;
-      const tv = Object.fromEntries(Object.entries(tgtStats).filter(([, v]) => v !== ''));
-      if (Object.keys(tv).length) z.tv = tv;
-      if (tgtBoss) z.tb = 1;
-      if (tgtHpPct !== '100') z.th = tgtHpPct;
-      if (targetsHit > 1) z.n = targetsHit;
-      if (allies.some((a) => a.id))
-        z.al = allies.map((a) => [
-          a.id ?? '',
-          a.transcend,
-          a.talisman ?? '',
-          a.talismanLv,
-          Number(a.ee),
-          Number(a.eePlus),
-        ]);
-      const packed = Object.keys(z).length
-        ? `?z=${LZString.compressToEncodedURIComponent(JSON.stringify(z))}`
-        : '';
+      const packed = packZ();
       window.history.replaceState(
         null,
         '',
-        `${window.location.pathname}${packed}${window.location.hash}`,
+        `${window.location.pathname}${packed ? `?z=${packed}` : ''}${window.location.hash}`,
       );
     }, 400);
     return () => window.clearTimeout(timer);
-  }, [
-    attackerId,
-    transcend,
-    affinity,
-    skillLvls,
-    weaponSlug,
-    weaponTier,
-    amuletSlug,
-    amuletTier,
-    setPicks,
-    talismanOn,
-    eeOwned,
-    eeLevel,
-    statVals,
-    hpPct,
-    targetTab,
-    targetId,
-    spawnIdx,
-    tgtElement,
-    tgtStats,
-    tgtBoss,
-    tgtHpPct,
-    targetsHit,
-    allies,
-    atkFx,
-    tgtFx,
-  ]);
+  });
 
   const offensiveSkills = kit.filter((s) => s.offensive);
   const supportSkills = kit.filter((s) => !s.offensive);
@@ -1247,20 +1246,22 @@ export function DamageCalculatorBrowser({
             de la fiche saisie avant d'appliquer les buffs (27/07/2026). */}
           <Card title={L.settings.codex}>
             <div className="flex items-center gap-3">
+              {/* La courbe est indexée PAR NIVEAU : [0] = niveau 0 (0 %),
+                [1..11] = les 11 paliers du jeu. */}
               <span className="text-content-muted min-w-0 flex-1 font-mono text-[11px] tabular-nums">
-                {codexLvl > 0 && codexTiers[codexLvl - 1]
+                {codexLvl > 0 && codexTiers[codexLvl]
                   ? ['atk', 'def', 'hp']
                       .map(
                         (s) =>
-                          `${s.toUpperCase()} +${(codexTiers[codexLvl - 1][s as 'atk' | 'def' | 'hp'] ?? 0) / 10}%`,
+                          `${s.toUpperCase()} +${(codexTiers[codexLvl][s as 'atk' | 'def' | 'hp'] ?? 0) / 10}%`,
                       )
                       .join(' · ')
                   : '—'}
               </span>
               <Stepper
-                value={Math.min(codexLvl, codexTiers.length)}
+                value={Math.min(codexLvl, codexTiers.length - 1)}
                 min={0}
-                max={codexTiers.length}
+                max={codexTiers.length - 1}
                 onChange={setCodexLvl}
                 format={(v) => `Lv ${v}`}
               />
@@ -1344,7 +1345,7 @@ export function DamageCalculatorBrowser({
           <button
             type="button"
             onClick={() => {
-              void navigator.clipboard.writeText(window.location.href).then(() => {
+              void navigator.clipboard.writeText(flushShareUrl()).then(() => {
                 setCopied(true);
                 window.setTimeout(() => setCopied(false), 1500);
               });
@@ -1675,8 +1676,10 @@ export function DamageCalculatorBrowser({
                               </span>
                               <span className="text-content block font-mono text-sm font-bold tabular-nums">
                                 {f.percent
-                                  ? `${spawn.stats[f.key as keyof DcSpawn['stats']] / 10}%`
-                                  : spawn.stats[f.key as keyof DcSpawn['stats']].toLocaleString()}
+                                  ? `${(spawn.stats[f.key as keyof DcSpawn['stats']] ?? 0) / 10}%`
+                                  : (
+                                      spawn.stats[f.key as keyof DcSpawn['stats']] ?? 0
+                                    ).toLocaleString()}
                               </span>
                             </div>
                           ))}
@@ -1756,7 +1759,7 @@ export function DamageCalculatorBrowser({
                       setTgtStats(
                         Object.fromEntries(
                           targetStatFields.map((f) => {
-                            const v = spawn.stats[f.key as keyof DcSpawn['stats']];
+                            const v = spawn.stats[f.key as keyof DcSpawn['stats']] ?? 0;
                             return [f.key, String(f.percent ? v / 10 : v)];
                           }),
                         ),
@@ -1994,7 +1997,7 @@ export function DamageCalculatorBrowser({
                           portrait: target ? (
                             <span className="relative h-16 w-16 shrink-0">
                               <img
-                                src={target.iconSrc}
+                                src={monsterIcon(target.icon)}
                                 alt=""
                                 className="border-line-subtle h-full w-full rounded-lg border object-cover"
                                 loading="lazy"
@@ -2202,6 +2205,7 @@ export function DamageCalculatorBrowser({
         <DebugHarness
           state={debugState}
           skills={offensiveSkills.map((s) => ({ slot: s.slot, name: s.name }))}
+          getZ={packZ}
         />
       )}
     </div>
@@ -2582,7 +2586,7 @@ function TargetPicker({
           {value ? (
             <span className="relative block h-full w-full">
               <img
-                src={value.iconSrc}
+                src={monsterIcon(value.icon)}
                 alt=""
                 className="h-full w-full object-cover"
                 loading="lazy"
@@ -2664,7 +2668,7 @@ function TargetPicker({
                   close();
                 }}
               >
-                <img src={o.iconSrc} alt="" className="h-8 w-8 rounded" loading="lazy" />
+                <img src={monsterIcon(o.icon)} alt="" className="h-8 w-8 rounded" loading="lazy" />
                 <span className="min-w-0 flex-col">
                   <span className="flex items-center gap-1.5">
                     <span className="truncate font-semibold">{o.name}</span>

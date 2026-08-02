@@ -77,11 +77,14 @@ function Fold({
 export function DebugHarness({
   state,
   skills,
+  getZ,
 }: {
   /** `debugState` du calculateur — le contrat d'entrée du moteur. */
   state: unknown;
   /** Skills OFFENSIFS de l'attaquant (slots de la trace et de la capture). */
   skills: { slot: string; name: string }[];
+  /** `?z=` de l'état COURANT (jamais l'URL, en retard de debounce). */
+  getZ: () => string;
 }) {
   const [open, setOpen] = useState<Record<string, boolean>>({});
   const [copied, setCopied] = useState(false);
@@ -91,13 +94,13 @@ export function DebugHarness({
   // la table rend déjà le format final (spec § 3).
   const fixtures: DamageFixture[] = [];
 
-  // « Capturer » : compose le DamageFixture du scénario courant (le `?z=` de
-  // l'URL) → presse-papiers. Les dégâts `observed` sont à remplacer par les
-  // valeurs constatées EN JEU (le moteur pré-remplira ses calculés).
+  // « Capturer » : compose le DamageFixture du scénario COURANT →
+  // presse-papiers. Les dégâts `observed` sont à remplacer par les valeurs
+  // constatées EN JEU (le moteur pré-remplira ses calculés).
   const capture = () => {
     const fixture: DamageFixture = {
       name: '',
-      z: new URLSearchParams(window.location.search).get('z') ?? '',
+      z: getZ(),
       gameVersion: GAME_VERSION,
       observed: skills.flatMap((s) =>
         BRANCHES.map((b) => ({ slot: s.slot, branch: b.key, damage: 0 })),

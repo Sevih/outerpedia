@@ -55,6 +55,7 @@ import {
   type DcSet,
   type DcQuirkGroup,
   type DcSkillRow,
+  type DcSpawn,
   type DcStatField,
   type DcTalisman,
   type DcTarget,
@@ -534,18 +535,21 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         // hpLines/adv ne sont PAS exposés : l'adv est déjà APPLIQUÉ dans les
         // stats effectives, l'afficher en plus troublait (décision Sevih
         // 27/07/2026 — « le reste on s'en fiche »).
-        return {
-          label:
-            s.stageLabel ??
-            (s.rank ? `Rank ${s.rank}` : s.stage ? `#${s.stage}` : i ? `#${i + 1}` : ''),
-          level: s.level,
-          stats: {
-            hp: at('hp'),
-            def: at('def'),
-            dmgRed: at('dmg_reduce'),
-            cdmgRed: at('enemy_critical_dmg_reduce'),
-          },
-        };
+        // Payload : label vide et stats à 0 sont OMIS (élagage Sevih 27/07/2026).
+        const label =
+          s.stageLabel ??
+          (s.rank ? `Rank ${s.rank}` : s.stage ? `#${s.stage}` : i ? `#${i + 1}` : '');
+        const stats: DcSpawn['stats'] = {};
+        for (const [key, slug] of [
+          ['hp', 'hp'],
+          ['def', 'def'],
+          ['dmgRed', 'dmg_reduce'],
+          ['cdmgRed', 'enemy_critical_dmg_reduce'],
+        ] as const) {
+          const v = at(slug);
+          if (v) stats[key] = v;
+        }
+        return { ...(label ? { label } : {}), level: s.level, stats };
       });
       if (!spawns.length) continue;
       const path = cascadeOf(ref, monster.element, diff);
@@ -561,11 +565,9 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         label: isFloor ? floorTpl.replace('{n}', String(ref.floor)) : dungeonName,
         name: lRec(monster.name, lang) || monster.name.en,
         cls: monster.class,
-        // Règle d'icône de monstre (miroir de `monsterIconSrc`, serveur only) :
-        // icône '2…' = modèle de perso → face, sinon portrait de boss MT_*.
-        iconSrc: monster.icon.startsWith('2')
-          ? img.face(monster.icon)
-          : img.boss(`MT_${monster.icon}`),
+        // Nom BRUT : l'URL est dérivée côté client (`monsterIcon`) — inutile
+        // de sérialiser ~700 URLs complètes (élagage Sevih 27/07/2026).
+        icon: monster.icon,
         element: monster.element,
         spawns,
       });
@@ -746,10 +748,10 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     },
   };
 
-  // Courbe du Codex (archive) : 11 paliers de taux ‰ appliqués sur la stat de
-  // BASE seule, HORS multiplicateur de buffs (CalcFinalStat, spec formule § 3)
-  // — même donnée que la fiche perso (progression.json, extraction directe de
-  // CharacterArchiveStatTemplet).
+  // Courbe du Codex (archive), indexée PAR NIVEAU ([0] = niveau 0, [1..11] =
+  // les 11 paliers du jeu) : taux ‰ appliqués sur la stat de BASE seule, HORS
+  // multiplicateur de buffs (CalcFinalStat, spec formule § 3) — même donnée
+  // que la fiche perso (progression.json, extraction de CharacterArchiveStatTemplet).
   const codexTiers = (progressionData as { codex: { atk: number; def: number; hp: number }[] })
     .codex;
 
