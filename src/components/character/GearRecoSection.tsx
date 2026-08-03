@@ -416,7 +416,20 @@ export function SubstatPrioBar({ prio }: { prio: string }) {
       {tiers.map((tier) =>
         tier.stats.map((stat) => (
           <div key={stat}>
-            <span className="text-sm text-zinc-200">{stat}</span>
+            {/* Icône avant le nom — même gabarit que les main stats de l'EE. */}
+            <span className="inline-flex items-center gap-1 text-sm text-zinc-200">
+              {STAT_ICON[stat] && (
+                <img
+                  src={img.statIcon(STAT_ICON[stat])}
+                  alt=""
+                  aria-hidden
+                  className="h-3.5 w-3.5"
+                  width={14}
+                  height={14}
+                />
+              )}
+              {stat}
+            </span>
             <div className="mt-1 flex gap-0.5">
               {Array.from({ length: TOTAL_SEGMENTS }, (_, i) => (
                 <div

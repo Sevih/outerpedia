@@ -228,6 +228,20 @@ function toItemSource(s: ResolvedSource | undefined, lang: Lang): ResolvedItemSo
   };
 }
 
+/**
+ * Executioner's Charm s'affiche « +10 » DANS LES RECOS D'ÉQUIPEMENT, et nulle
+ * part ailleurs (décision Sevih, 03/08) : la reco vise ce palier précis.
+ *
+ * ⚠ NE PAS GÉNÉRALISER. Cinq autres talismans gagnent eux aussi un passif à +10
+ * (Gladiator's, Rogue's, Sage's, Prophet's, Saint's Charm) et ne doivent PAS
+ * porter la mention : c'est un choix éditorial, pas une propriété de la donnée.
+ * Posé ici et pas dans `ItemRow`, qui sert aussi au butin de donjon.
+ *
+ * Comparé au SLUG et non au nom : le nom est déjà localisé au moment du rendu,
+ * un test sur l'anglais ne matcherait que sur la version EN du site.
+ */
+const RECO_PLUS_10_SLUG = 'executioners-charm';
+
 function resolveItem(
   slot: Slot,
   table: Record<string, EquipEntry>,
@@ -250,16 +264,18 @@ function resolveItem(
       ? effectAtMax(f, lang)
       : { texts: [] };
   const maxes = slot === 'talismans' ? {} : mainStatMaxOf(f ? topEntry(table, f) : e, mainStat);
+  const slug = variant ? variant.slug : f?.slug;
+  const name = lRec(variant ? withClassSuffix(e.name, variant.classLimit) : e.name, lang);
   return {
     id,
-    name: lRec(variant ? withClassSuffix(e.name, variant.classLimit) : e.name, lang),
+    name: slot === 'talismans' && slug === RECO_PLUS_10_SLUG ? `${name} +10` : name,
     // Tuile du HAUT de famille (6★) — les paliers bas ont d'autres miniatures —
     // SAUF variante de classe : sa propre tuile.
     icon: variant ? e.icon : (f?.icon ?? e.icon),
     grade: f?.grade ?? e.grade,
     star: f?.stars.at(-1),
     mainStat,
-    slug: variant ? variant.slug : f?.slug,
+    slug,
     overlayIcon: eff.icon || undefined,
     classType: variant
       ? variant.classLimit

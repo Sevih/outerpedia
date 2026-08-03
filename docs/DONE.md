@@ -6,6 +6,20 @@
 
 ## 2026-08-03
 
+- **Gear reco, deux retouches d'affichage** (demande Sevih, validées à l'écran).
+  (1) La barre de PRIORITÉ DES SUBSTATS porte l'icône de la stat avant son nom,
+  au même gabarit que les main stats de l'EE. Tous les jetons réellement
+  utilisés (`ATK`, `CHC`, `CHD`, `DEF%`, `DMG RED%`, `DMG UP%`…) sont des clés
+  directes de `STAT_ICON` — vérifié sur la donnée, aucune normalisation requise.
+  (2) Executioner's Charm s'affiche « +10 » DANS LES RECOS, et nulle part
+  ailleurs. ⚠ CAS ÉDITORIAL ASSUMÉ, à NE PAS généraliser : cinq autres talismans
+  gagnent eux aussi un passif au niveau 10 (Gladiator's, Rogue's, Sage's,
+  Prophet's, Saint's Charm) et ne portent PAS la mention — arbitrage explicite de
+  Sevih quand je l'ai signalé. Posé dans `resolveItem` (`lib/data/gear-reco.ts`),
+  qui EST le résolveur des recos, et non dans `ItemRow` qui sert aussi au butin de
+  donjon. Comparé au SLUG et pas au nom : le nom est déjà localisé au rendu, un
+  test sur l'anglais n'aurait marché que sur la version EN du site.
+
 - **Gear reco : le sélecteur ne propose plus l'objet d'une AUTRE classe**
   (signalé par Sevih) — sur un mage, choisir « Briareos's Ambition » enregistrait
   l'accessoire du STRIKER.
