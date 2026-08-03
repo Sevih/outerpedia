@@ -60,10 +60,10 @@
 ## ⚙️ Config / infra
 
 - [ ] **Bouton « partager » (Discord) sur les pages à état** — premier
-      consommateur du raccourcisseur `/s/[id]` (livré 03/08 : `POST
-    /api/shortlink { path }` → `{ id }`, `GET /s/[id]` → 302, dégradation
-      lien long sans BDD). Optionnel, à dessiner : où le poser (tier-list
-      maker ? progress tracker ?) et quel rendu côté Discord.
+      consommateur du raccourcisseur `/s/[id]` livré le 03/08 :
+      `POST /api/shortlink { path }` répond `{ id }`, `GET /s/[id]` → 302,
+      dégradation lien long sans BDD (cf. DONE). Optionnel, à dessiner : où le
+      poser (tier-list maker ? progress tracker ?) et quel rendu côté Discord.
 
 ## 🤔 Décisions en attente (Sevih)
 
