@@ -7110,6 +7110,164 @@
       "substats": "$dps2"
     }
   ],
+  "2000118": [
+    {
+      "name": "Penetration",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "substats": "$dps2",
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ]
+    },
+    {
+      "name": "Attack",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "substats": "$dps2",
+      "sets": [
+        {
+          "preset": "a4"
+        }
+      ]
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "substats": "$dps2",
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ]
+    },
+    {
+      "name": "Revenge",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "substats": "$dps2",
+      "sets": [
+        {
+          "preset": "r4"
+        }
+      ]
+    },
+    {
+      "name": "Attack mix",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "substats": "$dps2",
+      "sets": [
+        {
+          "preset": "p2a2"
+        },
+        {
+          "preset": "a2chd2"
+        },
+        {
+          "preset": "a2s2"
+        }
+      ]
+    }
+  ],
   "2000119": [
     {
       "name": "Penetration",
