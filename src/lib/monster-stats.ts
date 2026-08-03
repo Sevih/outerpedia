@@ -45,7 +45,9 @@ export interface SpawnContext {
   /** BARRE d'un palier à score : largeur de la tranche de dégâts, PAS des PV. */
   bar?: number;
   hpLines?: number;
-  /** Niveau de transcendance du boss au palier (barème à part, non appliqué). */
+  /** Niveau du palier SUIVANT (chaîne de level-up des boss à score, 0 = dernier
+   * palier) — « Trans » = transition, PAS transcendance : vérifié binaire
+   * 03/08/2026, jamais appliqué aux stats. */
   transLevel?: number;
   /** Tranche de dégâts du palier (modes à score). */
   damage?: RankDamage;

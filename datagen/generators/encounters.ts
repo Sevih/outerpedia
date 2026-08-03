@@ -124,7 +124,9 @@ export interface DungeonRank {
   stage?: number;
   /** Niveau RÉEL du boss à ce palier (remplace celui du spawn). */
   level?: number;
-  /** Niveau de TRANSCENDANCE du boss (colonne TransLevel — barème à part). */
+  /** Niveau du palier SUIVANT (colonne TransLevel — chaîne de level-up des boss
+   * à score, 0 = dernier palier ; « Trans » = transition, pas transcendance —
+   * vérifié binaire 03/08/2026, jamais appliqué aux stats). */
   transLevel?: number;
   /**
    * PV de la BARRE du palier — PAS les PV totaux du boss : dans les modes à
