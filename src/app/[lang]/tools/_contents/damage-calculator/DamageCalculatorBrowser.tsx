@@ -342,17 +342,22 @@ function Stepper({
   max,
   onChange,
   format,
+  className,
 }: {
   value: number;
   min: number;
   max: number;
   onChange: (v: number) => void;
   format?: (v: number) => string;
+  /** Classes de POSITION dans le conteneur (ml-auto, shrink-0…). */
+  className?: string;
 }) {
   const btn =
     'text-content-muted hover:text-accent h-6 w-5 cursor-pointer text-sm leading-none transition';
   return (
-    <span className="border-line-subtle bg-surface-sunken/70 inline-flex items-center overflow-hidden rounded-md border">
+    <span
+      className={`border-line-subtle bg-surface-sunken/70 inline-flex items-center overflow-hidden rounded-md border ${className ?? ''}`}
+    >
       <button
         type="button"
         className={`${btn} border-line-subtle border-r`}
@@ -807,8 +812,8 @@ const EMPTY_ALLY: AllyPick = {
  * Tout est REVALIDÉ à l'hydratation (ids inconnus écartés, nombres bornés).
  */
 interface UrlState {
-  /** Attaquant + palier de transcendance + affinité (0..5) + niveaux de skill
-   *  + niveau du perso (1..120, omis à 120). */
+  /** Attaquant + palier de transcendance + affinité (NIVEAU 0..100, paliers
+   *  tous les 20) + niveaux de skill + niveau du perso (1..120, omis à 120). */
   a?: string;
   x?: number;
   af?: number;
@@ -882,9 +887,12 @@ export function DamageCalculatorBrowser({
   const [eeOwned, setEeOwned] = useState(true);
   // Niveau d'enchant de l'EE (+0..+10) — ne sert qu'aux mains « dégâts vs élément ».
   const [eeLevel, setEeLevel] = useState(10);
-  // Affinité (Trust) 0..5 — buffs passifs plats ABSENTS de la fiche affichée
-  // (canal buffValue, vérifié binaire 27/07/2026) : le moteur les ajoute.
-  const [affinity, setAffinity] = useState(0);
+  // Affinité (Trust) : la SAISIE est le niveau 0..100 (paliers tous les 20 —
+  // Sevih 03/08/2026), le palier 0..5 dérivé sert seul aux calculs. Buffs
+  // passifs plats ABSENTS de la fiche affichée (canal buffValue, binaire
+  // 27/07/2026) : le moteur les ajoute.
+  const [affinityLvl, setAffinityLvl] = useState(0);
+  const affinityTier = Math.floor(affinityLvl / 20);
   // Niveau du perso (1..120, défaut 120) : le terme Codex de la reconstruction
   // fiche → combat (spec formule § 16.1, `sheetToCombatStat`) exige la stat de
   // BASE, donc le niveau (demande Sevih 03/08/2026).
@@ -956,7 +964,7 @@ export function DamageCalculatorBrowser({
   const pickAttacker = (id: string) => {
     setAttackerId(id);
     setTranscend((chars.find((c) => c.id === id)?.transcend.length ?? 1) - 1);
-    setAffinity(0);
+    setAffinityLvl(0);
     const lvls: Record<string, number> = {};
     for (const row of kits[id] ?? []) lvls[row.slot] = row.maxLevel;
     setSkillLvls(lvls);
@@ -971,7 +979,7 @@ export function DamageCalculatorBrowser({
   const resetScenario = () => {
     setAttackerId(null);
     setTranscend(0);
-    setAffinity(0);
+    setAffinityLvl(0);
     setLevel(120);
     setSkillLvls({});
     setSetPicks([]);
@@ -1030,7 +1038,9 @@ export function DamageCalculatorBrowser({
         setAttackerId(char.id);
         const maxIdx = Math.max(char.transcend.length - 1, 0);
         setTranscend(typeof st.x === 'number' ? Math.min(Math.max(st.x, 0), maxIdx) : maxIdx);
-        if (typeof st.af === 'number') setAffinity(Math.min(Math.max(st.af, 0), 5));
+        // `af` = NIVEAU 0..100 depuis le 03/08/2026 (avant : palier 0..5 —
+        // outil unlisted, pas de rétrocompat des vieilles URLs).
+        if (typeof st.af === 'number') setAffinityLvl(Math.min(Math.max(st.af, 0), 100));
         if (typeof st.lv === 'number') setLevel(Math.min(Math.max(st.lv, 1), 120));
         const lvls: Record<string, number> = {};
         for (const row of kits[char.id] ?? []) {
@@ -1108,7 +1118,7 @@ export function DamageCalculatorBrowser({
     if (attackerId) {
       z.a = attackerId;
       z.x = transcend;
-      if (affinity) z.af = affinity;
+      if (affinityLvl) z.af = affinityLvl;
       if (level !== 120) z.lv = level;
       z.k = skillLvls;
       if (weaponSlug) {
@@ -1189,7 +1199,9 @@ export function DamageCalculatorBrowser({
           id: attacker.id,
           level,
           transcend: attacker.transcend[transcend]?.label ?? null,
-          affinity,
+          // Le palier 0..5 est LA valeur de calcul ; le niveau saisi ne sert
+          // qu'à l'UI (paliers tous les 20 — Sevih 03/08/2026).
+          affinity: { level: affinityLvl, tier: affinityTier },
           skills: skillLvls,
           weapon: weapon ? { slug: weapon.slug, tier: weaponTier } : null,
           amulet: amulet ? { slug: amulet.slug, tier: amuletTier } : null,
@@ -1412,15 +1424,28 @@ export function DamageCalculatorBrowser({
                 </div>
               )}
 
-              {/* Affinité (Trust) 0..5 : buffs passifs plats ABSENTS de la
-                fiche affichée — le moteur les ajoutera (binaire 27/07/2026). */}
+              {/* Affinité (Trust) : saisie au NIVEAU 0..100, paliers tous les
+                20 (Sevih 03/08/2026) — seuls les paliers 0..5 comptent pour
+                les calculs (buffs passifs plats ABSENTS de la fiche affichée,
+                le moteur les ajoutera — binaire 27/07/2026). */}
               {attacker && (
                 <div className="flex items-center gap-2">
                   <span className="text-content-subtle font-mono text-[9px] tracking-wide uppercase">
                     {L.affinity}
                   </span>
-                  <span className="flex-1" />
-                  <Stepper value={affinity} min={0} max={5} onChange={setAffinity} />
+                  <input
+                    type="range"
+                    min={0}
+                    max={100}
+                    value={affinityLvl}
+                    onChange={(e) => setAffinityLvl(Number(e.target.value))}
+                    className="h-3 min-w-0 flex-1 cursor-pointer accent-sky-500"
+                    aria-label={`${L.affinity} ${affinityLvl}`}
+                  />
+                  <span className="text-content font-mono text-xs tabular-nums">{affinityLvl}</span>
+                  <span className="text-content-subtle font-mono text-[10px] tabular-nums">
+                    {affinityTier}/5
+                  </span>
                 </div>
               )}
             </Card>
@@ -1532,18 +1557,23 @@ export function DamageCalculatorBrowser({
                   <SetsSlot sets={sets} picks={setPicks} onChange={setSetPicks} labels={L} />
 
                   <div className={`${wellClass} space-y-1.5 p-2`}>
-                    <div className="flex items-center gap-2">
+                    {/* Même garde anti-débordement que GearSlot : le titre EE
+                      est long, le Stepper wrappe sous lui au lieu de sortir
+                      de la case (bug signalé Sevih 03/08/2026). */}
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                       <Eyebrow>{L.equipment.ee}</Eyebrow>
-                      <span className="flex-1" />
-                      {/* Le niveau ne sert qu'aux mains « dégâts vs élément »
-                        (les autres mains sont déjà dans la fiche saisie). */}
-                      {eeOwned && ee?.dmgMain && (
+                      {/* Le niveau sert aux mains « dégâts vs élément » ET au
+                        choix du palier de passif Lv0/Lv10 — visible pour TOUT
+                        EE possédé (demande Sevih 03/08/2026 ; il n'était
+                        affiché qu'avec une main dmgMain). */}
+                      {eeOwned && ee && (
                         <Stepper
                           value={eeLevel}
                           min={0}
                           max={10}
                           onChange={setEeLevel}
                           format={(v) => `+${v}`}
+                          className="ml-auto shrink-0"
                         />
                       )}
                     </div>
@@ -1575,22 +1605,30 @@ export function DamageCalculatorBrowser({
                           </div>
                         </label>
                         {/* Un palier par ligne : Lv0 / Lv10 SÉPARÉS (le palier
-                          +10 remplace le précédent), « + » quand il s'AJOUTE. */}
-                        {ee.rows.map((row, i) => (
-                          <div
-                            key={i}
-                            className={`flex items-start gap-1.5 ${eeOwned ? '' : 'opacity-60'}`}
-                          >
-                            <span className="border-line-subtle text-accent mt-0.5 rounded border px-1 font-mono text-[9px] font-bold whitespace-nowrap">
-                              {row.isAdd ? '+' : ''}
-                              {row.level >= 10 ? L.equipment.lv10 : L.equipment.lv0}
-                            </span>
-                            <GameText
-                              text={row.html}
-                              className={`min-w-0 flex-1 text-[11px] leading-relaxed whitespace-pre-line ${eeOwned ? 'text-content-muted' : 'text-content-subtle'}`}
-                            />
-                          </div>
-                        ))}
+                          +10 remplace le précédent), « + » quand il s'AJOUTE.
+                          Le palier inactif AU NIVEAU CHOISI est grisé : sous
+                          +10 les lignes Lv10 dorment ; à +10 une ligne Lv10
+                          non-« + » remplace la Lv0. */}
+                        {ee.rows.map((row, i) => {
+                          const lv10Replaces = ee.rows.some((r) => r.level >= 10 && !r.isAdd);
+                          const active =
+                            eeLevel >= 10 ? row.level >= 10 || !lv10Replaces : row.level < 10;
+                          return (
+                            <div
+                              key={i}
+                              className={`flex items-start gap-1.5 ${eeOwned && active ? '' : 'opacity-60'}`}
+                            >
+                              <span className="border-line-subtle text-accent mt-0.5 rounded border px-1 font-mono text-[9px] font-bold whitespace-nowrap">
+                                {row.isAdd ? '+' : ''}
+                                {row.level >= 10 ? L.equipment.lv10 : L.equipment.lv0}
+                              </span>
+                              <GameText
+                                text={row.html}
+                                className={`min-w-0 flex-1 text-[11px] leading-relaxed whitespace-pre-line ${eeOwned && active ? 'text-content-muted' : 'text-content-subtle'}`}
+                              />
+                            </div>
+                          );
+                        })}
                       </>
                     ) : (
                       <p className="text-content-subtle text-[11px]">{L.equipment.eeNone}</p>
@@ -2280,11 +2318,13 @@ function GearSlot({
   };
   return (
     <div className="border-line-subtle bg-surface-sunken/70 space-y-1.5 rounded-lg border p-2">
-      <div className="flex items-center gap-2">
+      {/* La case est étroite (grille 2 colonnes) : l'en-tête WRAP — le groupe
+        Stepper+✕ descend sous le titre au lieu de déborder sous la case
+        voisine, qui recouvrait le « + » (bug signalé Sevih 03/08/2026). */}
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
         <Eyebrow>{title}</Eyebrow>
-        <span className="flex-1" />
         {value && (
-          <>
+          <span className="ml-auto flex shrink-0 items-center gap-2">
             <Stepper value={tier} min={0} max={4} onChange={onTier} format={(v) => `T${v}`} />
             <button
               type="button"
@@ -2294,7 +2334,7 @@ function GearSlot({
             >
               ✕
             </button>
-          </>
+          </span>
         )}
       </div>
       <div className="flex min-w-0 items-center gap-2">
