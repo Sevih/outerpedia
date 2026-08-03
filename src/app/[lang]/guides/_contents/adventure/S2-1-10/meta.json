@@ -7,11 +7,11 @@
     "fr": "S2 Hard : Grand Calamari"
   },
   "description": {
-    "en": "Boss strategy guide.",
-    "jp": "ボス攻略ガイド。",
-    "kr": "보스 전략 가이드.",
-    "zh": "首领攻略指南",
-    "fr": "Guide de stratégie pour le Boss."
+    "en": "S2 Hard 1-10 boss Grand Calamari — stuns your highest-ATK hero and stretches debuff durations; manage the enrage before its ultimate. Mechanics & tips.",
+    "jp": "ストーリーS2ハード1-10ボス「グラン・カラマリー」攻略 — 最高攻撃力の味方をスタンさせ、デバフを延長してくる。激怒前の管理が鍵。ギミックと編成、クリアのコツ。",
+    "kr": "스토리 S2 하드 1-10 보스 그랑 칼라마리 공략 — 최고 공격력 아군을 기절시키고 디버프를 연장한다. 격노 관리가 핵심. 기믹과 팀 편성, 클리어 팁.",
+    "zh": "主线S2困难1-10 Boss海怪攻略 — 眩晕攻击最高的队友并延长debuff持续；大招前管理好狂暴。机制、队伍与通关技巧。",
+    "fr": "Boss S2 Hard 1-10 : Grand Calamari — stun le héros à la plus haute ATK et allonge vos debuffs ; gérez l'enrage avant son ultime. Mécaniques, équipe et astuces."
   },
   "icon": "T_DungeonArea_11",
   "author": "Sevih",

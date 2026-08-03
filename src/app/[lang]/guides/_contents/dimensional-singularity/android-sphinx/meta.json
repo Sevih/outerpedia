@@ -7,11 +7,11 @@
     "fr": "Android Sphinx"
   },
   "description": {
-    "en": "Dimensional Singularity boss guide — skills, teams & strategies",
-    "jp": "次元特異点ボス攻略 — スキル、チーム編成、攻略法",
-    "kr": "차원 특이점 보스 공략 — 스킬, 팀 편성, 공략법",
-    "zh": "次元奇点Boss攻略 — 技能、队伍编成与策略",
-    "fr": "Guide du Boss Dimensional Singularity — compétences, équipes et stratégies"
+    "en": "Android Sphinx (Water), Dimensional Singularity — Poison him or he ignores 30% Defense; Seal his hoarded buffs and pace the 7-action Berserk. Skills, teams & strategies.",
+    "jp": "次元特異点「アンドロ・スフィンクス」攻略 — 中毒がないと防御30%無視、中毒中は被ダメ+100%。溜め込むバフは封印で対処。スキル・編成・攻略法。",
+    "kr": "차원 특이점: 안드로 스핑크스 공략 — 중독이 없으면 방어 30% 무시, 중독 중엔 받는 피해 +100%. 쌓아두는 버프는 봉인으로 대응. 스킬, 팀 편성, 공략법.",
+    "zh": "次元奇点：狮身人面像攻略 — 未中毒时无视30%防御，中毒时受伤+100%；囤积的增益用封印应对。技能、队伍编成与策略。",
+    "fr": "Singularité Dimensionnelle : Android Sphinx (Water) — sans Poison il ignore 30% de la Défense ; Seal ses buffs accumulés et gérez le Berserk (7 actions). Compétences, équipes et stratégies."
   },
   "icon": "CM_Gate_Icon_Monad",
   "author": "Shiraen / Sevih",

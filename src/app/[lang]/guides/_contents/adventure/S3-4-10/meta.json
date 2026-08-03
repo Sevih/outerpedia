@@ -7,11 +7,11 @@
     "fr": "S3 Hard : Hilde & sisters"
   },
   "description": {
-    "en": "Boss strategy guide.",
-    "jp": "ボス攻略ガイド。",
-    "kr": "보스 전략 가이드.",
-    "zh": "首领攻略指南",
-    "fr": "Guide de stratégie pour le Boss."
+    "en": "S3 Hard 4-10 boss Hilde & sisters — she calls backup, resurrects, and gains a full turn whenever she hits an undebuffed hero: keep everything debuffed. Tips & team.",
+    "jp": "ストーリーS3ハード4-10ボス「ヒルデ＆姉妹」攻略 — 増援と蘇生を繰り返し、デバフのない敵を叩くと行動ゲージが全回復。デバフを絶やさないこと。クリアのコツ。",
+    "kr": "스토리 S3 하드 4-10 보스 힐데&자매 공략 — 지원군 소환과 부활을 반복하고, 디버프 없는 적을 때리면 행동 게이지가 가득 찬다. 디버프를 끊지 말 것. 클리어 팁.",
+    "zh": "主线S3困难4-10 Boss希尔德&姐妹攻略 — 呼叫援军并复活同伴，攻击无debuff目标时行动条直接充满：保持全场debuff。机制与通关技巧。",
+    "fr": "Boss S3 Hard 4-10 : Hilde & ses sœurs — appelle des renforts, ressuscite, et gagne un tour en frappant un allié sans debuff : debuffez tout. Mécaniques et astuces."
   },
   "icon": "T_DungeonArea_24",
   "author": "Sevih",

@@ -7,11 +7,11 @@
     "fr": "S2 Hard : Sacreed Guardian"
   },
   "description": {
-    "en": "Boss strategy guide.",
-    "jp": "ボス攻略ガイド。",
-    "kr": "보스 전략 가이드.",
-    "zh": "首领攻略指南",
-    "fr": "Guide de stratégie pour le Boss."
+    "en": "S2 Hard 3-10 boss Sacreed Guardian — executes your highest-ATK hero and only takes gauge damage while enraged, every 5 turns. Mechanics, team and clear tips.",
+    "jp": "ストーリーS2ハード3-10ボス「セイクリッドガーディアン」攻略 — 最高攻撃力の味方をS3で処刑。弱点ゲージは5ターンごとの激怒中のみ削れる。ギミックとクリアのコツ。",
+    "kr": "스토리 S2 하드 3-10 보스 세이크리드 가디언 공략 — 최고 공격력 아군을 S3로 처형. 약점 게이지는 5턴마다의 격노 중에만 깎인다. 기믹과 클리어 팁.",
+    "zh": "主线S2困难3-10 Boss圣科利德守护者攻略 — 用S3处决攻击最高的队友；弱点条仅在每5回合的狂暴期间可削。机制与通关技巧。",
+    "fr": "Boss S2 Hard 3-10 : Sacreed Guardian — exécute le héros à la plus haute ATK ; sa jauge ne s'entame qu'en enrage, tous les 5 tours. Mécaniques, équipe et astuces."
   },
   "icon": "T_DungeonArea_13",
   "author": "Sevih",

@@ -7,11 +7,11 @@
     "fr": "Guide de la Requête spéciale Masterless Guardian"
   },
   "description": {
-    "en": "Strategy guide for Special Request: Ecology Study mission",
-    "jp": "特別依頼：生態調査ミッションの攻略ガイド",
-    "kr": "특별 의뢰: 생태 조사 미션 공략 가이드",
-    "zh": "特殊委托：生态调查任务攻略指南",
-    "fr": "Guide de stratégie pour la mission Special Request : Ecology Study"
+    "en": "Masterless Guardian (Fire) Ecology Study Special Request — no debuffs means no gauge damage; clear the minions with AoE before they feed him turns. Teams & tips.",
+    "jp": "特別依頼・生態調査「主を失ったガーディアン」攻略ガイド — デバフがないと弱点ゲージを削れない。取り巻きは行動ゲージを与える前に範囲攻撃で処理。おすすめ編成と攻略のコツ。",
+    "kr": "특별 의뢰 생태 조사: 주인 잃은 가디언 공략 — 디버프가 없으면 약점 게이지를 깎을 수 없다. 하수인은 행동 게이지를 주기 전에 광역기로 정리. 추천 팀 편성과 공략 팁.",
+    "zh": "特殊委托·生态调查：失去主人的守护者攻略 — 没有debuff就无法削减弱点条；小怪要在给Boss行动条前用群攻清掉。推荐队伍与实用技巧。",
+    "fr": "Special Request Ecology Study : Masterless Guardian (Fire) — sans debuff, pas de dégâts de jauge ; nettoyez les sbires en AoE avant qu'ils ne lui donnent des tours. Équipes et astuces."
   },
   "icon": "CLG_Raid_Armor_Fire",
   "author": "Ducky",

@@ -7,11 +7,11 @@
     "fr": "Planet Purification Unit"
   },
   "description": {
-    "en": "Dimensional Singularity boss guide — skills, teams & strategies",
-    "jp": "次元特異点ボス攻略 — スキル、チーム編成、攻略法",
-    "kr": "차원 특이점 보스 공략 — 스킬, 팀 편성, 공략법",
-    "zh": "次元奇点Boss攻略 — 技能、队伍编成与策略",
-    "fr": "Guide du Boss Dimensional Singularity — compétences, équipes et stratégies"
+    "en": "Planet Purification Unit (Fire), Dimensional Singularity — bring Water Strikers and a Defender; immune to DoTs, CC and buff removal, Fixed damage capped. Skills, teams & strategies.",
+    "jp": "次元特異点「惑星浄化ユニット」攻略 — 水属性ストライカー＋ディフェンダー編成がほぼ必須。DoT・行動妨害・バフ解除は全て無効。スキル・編成・攻略法。",
+    "kr": "차원 특이점: 행성 정화 유닛 공략 — 수속성 스트라이커+디펜더 조합이 사실상 필수. 도트·군중 제어·버프 해제 모두 면역. 스킬, 팀 편성, 공략법.",
+    "zh": "次元奇点：净化行星单位攻略 — 强烈偏向水属性突击手+防御者编成；免疫持续伤害、控制与驱散，固定伤害有上限。技能、队伍编成与策略。",
+    "fr": "Singularité Dimensionnelle : Planet Purification Unit (Fire) — équipe Water Striker avec Defender ; immunisé aux DoT, au contrôle et au dispel, dégâts fixes plafonnés. Compétences, équipes et stratégies."
   },
   "icon": "CM_Gate_Icon_Monad",
   "author": "Sevih",

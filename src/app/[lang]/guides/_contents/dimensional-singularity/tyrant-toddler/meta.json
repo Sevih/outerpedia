@@ -7,11 +7,11 @@
     "fr": "Tyrant Toddler"
   },
   "description": {
-    "en": "Dimensional Singularity boss guide — skills, teams & strategies",
-    "jp": "次元特異点ボス攻略 — スキル、チーム編成、攻略法",
-    "kr": "차원 특이점 보스 공략 — 스킬, 팀 편성, 공략법",
-    "zh": "次元奇点Boss攻略 — 技能、队伍编成与策略",
-    "fr": "Guide du Boss Dimensional Singularity — compétences, équipes et stratégies"
+    "en": "Tyrant Toddler (Water), Dimensional Singularity — outspeed him for +100% damage, but Slowed heroes eat +50% and get Frozen by his Ultimate. Skills, teams & strategies.",
+    "jp": "次元特異点「タイラントの幼生」攻略 — 自分より速い相手からは被ダメ+100%。速度低下中の味方には与ダメ+50%＋必殺技で凍結。スキル・編成・攻略法。",
+    "kr": "차원 특이점: 타일런트 유생체 공략 — 자신보다 빠른 상대에겐 받는 피해 +100%. 속도 감소 상태의 아군에겐 주는 피해 +50%에 궁극기로 빙결까지. 스킬, 팀 편성, 공략법.",
+    "zh": "次元奇点：幼体泰兰特攻略 — 被更快的目标攻击时受伤+100%；对减速目标伤害+50%并用大招冰冻。技能、队伍编成与策略。",
+    "fr": "Singularité Dimensionnelle : Tyrant Toddler (Water) — le devancer donne +100% de dégâts, mais les héros ralentis subissent +50% et se font geler par l'Ultime. Compétences, équipes et stratégies."
   },
   "icon": "CM_Gate_Icon_Monad",
   "author": "Shiraen / Sevih",

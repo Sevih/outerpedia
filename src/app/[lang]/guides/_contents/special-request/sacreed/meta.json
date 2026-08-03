@@ -7,11 +7,11 @@
     "fr": "Guide de la Requête spéciale Sacreed Guardian"
   },
   "description": {
-    "en": "Strategy guide for Special Request: Ecology Study mission",
-    "jp": "特別依頼：生態調査ミッションの攻略ガイド",
-    "kr": "특별 의뢰: 생태 조사 미션 공략 가이드",
-    "zh": "特殊委托：生态调查任务攻略指南",
-    "fr": "Guide de stratégie pour la mission Special Request : Ecology Study"
+    "en": "Sacreed Guardian (Light) Ecology Study Special Request — strip or steal every buff before his turn (Seal is immune) or eat a team-wide Stun plus Invincibility.",
+    "jp": "特別依頼・生態調査「セイクリッドガーディアン」攻略ガイド — 行動前にバフを必ず剥がすか奪う（封印は無効）。残すと全体スタン＋無敵。おすすめ編成と攻略のコツ。",
+    "kr": "특별 의뢰 생태 조사: 세이크리드 가디언 공략 — 행동 전에 버프를 반드시 제거하거나 강탈(봉인 면역). 남기면 전체 기절+무적. 추천 팀 편성과 공략 팁.",
+    "zh": "特殊委托·生态调查：圣科利德守护者攻略 — 行动前务必清除或偷取其所有增益（免疫封印），否则全队眩晕+无敌。推荐队伍与实用技巧。",
+    "fr": "Special Request Ecology Study : Sacreed Guardian (Light) — retirer chaque buff avant son tour (Seal immunisé), sinon Stun d'équipe + Invincibilité. Équipes et astuces."
   },
   "icon": "CLG_Raid_Armor_Light",
   "author": "SADtherobot",

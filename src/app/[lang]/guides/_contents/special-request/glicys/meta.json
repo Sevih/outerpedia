@@ -7,11 +7,11 @@
     "fr": "Guide de la Requête spéciale Glicys"
   },
   "description": {
-    "en": "Strategy guide for Special Request: Identification mission",
-    "jp": "特別依頼：正体究明ミッションの攻略ガイド",
-    "kr": "특별 의뢰: 정체 규명 미션 공략 가이드",
-    "zh": "特殊委托：身份确认任务攻略指南",
-    "fr": "Guide de stratégie pour la mission Special Request : Identification"
+    "en": "Glicys (Water) Identification Special Request — kill the Freeze-spamming add first; single-target hits on the boss restore her gauge while it lives. Teams & tips.",
+    "jp": "特別依頼・正体究明「グリシス」攻略ガイド — まず凍結を撒く取り巻きを処理。残したままボスへ単体攻撃するとゲージが回復してしまう。おすすめ編成と攻略のコツ。",
+    "kr": "특별 의뢰 정체 규명: 글리시스 공략 — 빙결을 거는 소환수부터 처치. 남겨둔 채 보스를 단일 공격하면 게이지가 회복된다. 추천 팀 편성과 공략 팁.",
+    "zh": "特殊委托·身份确认：克里希丝攻略 — 先处理施放冰冻的小怪；小怪存活时单体攻击Boss会回复其弱点条。推荐队伍与实用技巧。",
+    "fr": "Special Request Identification : Glicys (Water) — tuez d'abord l'add qui spam Freeze ; taper le boss en mono-cible avant restaure sa jauge. Équipes et astuces."
   },
   "icon": "CLG_Raid_Weapon_Water",
   "author": "Arabyss & Kilvanoshei",

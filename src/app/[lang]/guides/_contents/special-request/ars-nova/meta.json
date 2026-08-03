@@ -7,11 +7,11 @@
     "fr": "Guide de la Requête spéciale Ars Nova"
   },
   "description": {
-    "en": "Strategy guide for Special Request: Identification mission",
-    "jp": "特別依頼：正体究明ミッションの攻略ガイド",
-    "kr": "특별 의뢰: 정체 규명 미션 공략 가이드",
-    "zh": "特殊委托：身份确认任务攻略指南",
-    "fr": "Guide de stratégie pour la mission Special Request : Identification"
+    "en": "Ars Nova (Light) Identification Special Request — only Dark units deal full gauge damage, keep CP under 150 and clear the Inferior Cores fast. Teams & tips.",
+    "jp": "特別依頼・正体究明「アルス・ノーヴァ」攻略ガイド — 弱点ゲージは闇属性のみ有効、CPは150未満に抑え、コアを素早く処理。おすすめ編成と攻略のコツ。",
+    "kr": "특별 의뢰 정체 규명: 아르스 노바 공략 — 약점 게이지는 암속성만 유효, CP는 150 미만으로 유지하고 코어를 빠르게 정리. 추천 팀 편성과 공략 팁.",
+    "zh": "特殊委托·身份确认：艺术新星攻略 — 只有暗属性能造成完整弱点伤害，CP需保持150以下并迅速清理劣质核心。推荐队伍与实用技巧。",
+    "fr": "Special Request Identification : Ars Nova (Light) — seules les unités Dark entament vraiment la jauge, gardez le CP sous 150 et tuez vite les Inferior Cores. Équipes et astuces."
   },
   "icon": "CLG_Raid_Weapon_Light",
   "author": "SADtherobot",

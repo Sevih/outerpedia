@@ -7,11 +7,11 @@
     "fr": "S3 Hard : Betrayed Deshret"
   },
   "description": {
-    "en": "Boss strategy guide.",
-    "jp": "ボス攻略ガイド。",
-    "kr": "보스 전략 가이드.",
-    "zh": "首领攻略指南",
-    "fr": "Guide de stratégie pour le Boss."
+    "en": "S3 Hard 2-10 boss Betrayed Deshret — every AoE skill is punished: bring single-target Fire DPS and keep it surgical. Mechanics, team and clear tips.",
+    "jp": "ストーリーS3ハード2-10ボス「見捨てられたデシュレト」攻略 — 範囲攻撃は全て咎められる。火属性の単体アタッカーで丁寧に削る。ギミックとクリアのコツ。",
+    "kr": "스토리 S3 하드 2-10 보스 배신당한 데슈레트 공략 — 광역기는 전부 응징당한다. 화속성 단일 딜러로 신중하게 공략. 기믹과 클리어 팁.",
+    "zh": "主线S3困难2-10 Boss被背叛的戴休雷特攻略 — 所有群攻都会遭到惩罚：用火属性单体输出精准作战。机制与通关技巧。",
+    "fr": "Boss S3 Hard 2-10 : Betrayed Deshret — chaque AoE est punie : DPS Fire mono-cible et jeu chirurgical. Mécaniques, équipe et astuces."
   },
   "icon": "T_DungeonArea_22",
   "author": "Sevih",

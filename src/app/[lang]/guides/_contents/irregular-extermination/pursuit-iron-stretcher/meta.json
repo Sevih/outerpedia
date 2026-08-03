@@ -7,17 +7,20 @@
     "fr": "Pursuit : Iron Stretcher"
   },
   "description": {
-    "en": "Boss strategy guide",
-    "jp": "ボス攻略ガイド",
-    "kr": "보스 전략 가이드",
-    "zh": "首领攻略指南",
-    "fr": "Guide de stratégie pour le Boss."
+    "en": "Pursuit: Iron Stretcher guide (Irregular Extermination) — kill the Machine Gun add to unlock his gauge and answer the 5-turn Invincibility. Teams & tips.",
+    "jp": "イレギュラー掃討「アイアンストレッチャー」攻略 — 取り巻きのマシンガンを倒さないと弱点ゲージが削れない。必殺技の5ターン無敵は強奪・封印で対処。編成と攻略のコツ。",
+    "kr": "이레귤러 토벌: 아이언 스트레쳐 공략 — 기관총 소환수를 처치해야 약점 게이지를 깎을 수 있다. 궁극기의 5턴 무적은 강탈·봉인으로 대응. 팀 편성과 공략 팁.",
+    "zh": "异型怪讨伐：铁血伸张者攻略 — 必须先击杀机枪小怪才能削弱点条；大招的5回合无敌用偷取/封印应对。队伍编成与实用技巧。",
+    "fr": "Guide Pursuit : Iron Stretcher (Irregular Extermination) — tuez l'add Machine Gun pour débloquer la jauge et contrez l'Invincibilité de 5 tours. Équipes et astuces."
   },
   "icon": "CM_Irregular_Infiltrate",
   "author": "Shiraen",
   "updated": "2025-11-30",
   "order": 1,
   "bossId": "51202001",
-  "mapPos": { "top": 43, "left": 24 },
+  "mapPos": {
+    "top": 43,
+    "left": 24
+  },
   "group": "irregular_chase:1"
 }

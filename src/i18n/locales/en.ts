@@ -68,6 +68,12 @@ const en = {
     'Explore all Outerplane weapons, accessories, talismans, and armor sets. Compare stats and find the best gear for your characters. Updated {monthYear}.',
   'page.equipment.meta_description':
     '{name} — stats, main and substats, passive effects, ascension, and where to get it in Outerplane. Full equipment breakdown on Outerpedia.',
+  'page.equipment.title_suffix': ' — Outerplane {type}',
+  'page.equipment.kind.weapon': 'Weapon',
+  'page.equipment.kind.amulet': 'Accessory',
+  'page.equipment.kind.talisman': 'Talisman',
+  'page.equipment.kind.set': 'Armor Set',
+  'page.equipment.kind.ee': 'Exclusive Equipment',
   'equip.tab.weapons': 'Weapons',
   'equip.tab.accessories': 'Accessories',
   'equip.tab.sets': 'Armor Sets',
@@ -146,7 +152,7 @@ const en = {
   'page.tools.title': 'Outerplane Tools & Utilities',
   'page.tools.description':
     'Outerplane tools: gear solver, team planner, pull simulator, progress tracker, and more.',
-  'page.tool.meta_title': '{title}',
+  'page.tool.meta_title': '{title} — Outerplane Tool',
   // ─── Tools page UI ──────────────────────────────────────────────────────
   'tools.featured': 'Featured',
   'tools.count': '{count} tools',

@@ -7,11 +7,11 @@
     "fr": "S2 Hard : Demiurge Drakhan & Demiurge Vlada"
   },
   "description": {
-    "en": "Boss strategy guide.",
-    "jp": "ボス攻略ガイド。",
-    "kr": "보스 전략 가이드.",
-    "zh": "首领攻略指南",
-    "fr": "Guide de stratégie pour le Boss."
+    "en": "S2 Hard 10-10 boss Demiurge Drakhan & Vlada — percent fixed damage and executes on low HP; her enrage blocks gauge damage. Mechanics, team and clear tips.",
+    "jp": "ストーリーS2ハード10-10ボス「ドレイカーン＆ヴラダ」攻略 — 割合固定ダメージと低HP処刑が脅威。激怒中は弱点ゲージが削れない。ギミックとクリアのコツ。",
+    "kr": "스토리 S2 하드 10-10 보스 드레이칸&블라다 공략 — 비율 고정 피해와 낮은 HP 처형이 위협적. 격노 중엔 약점 게이지를 깎을 수 없다. 기믹과 클리어 팁.",
+    "zh": "主线S2困难10-10 Boss德雷坎&布拉达攻略 — 百分比固定伤害并处决残血目标；狂暴期间无法削弱点条。机制、队伍与通关技巧。",
+    "fr": "Boss S2 Hard 10-10 : Demiurge Drakhan & Vlada — dégâts fixes en % et exécution des PV bas ; l'enrage bloque la jauge. Mécaniques, équipe et astuces."
   },
   "icon": "T_DungeonArea_20",
   "author": "Sevih",

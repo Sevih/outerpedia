@@ -7,11 +7,11 @@
     "fr": "S3 Hard : Ancient Foe"
   },
   "description": {
-    "en": "Boss strategy guide.",
-    "jp": "ボス攻略ガイド。",
-    "kr": "보스 전략 가이드.",
-    "zh": "首领攻略指南",
-    "fr": "Guide de stratégie pour le Boss."
+    "en": "S3 Hard 6-10 boss Ancient Foe — Curses everyone and Freezes heroes under 70% HP right through Immunity: stay topped up and pace the enrage. Tips & team.",
+    "jp": "ストーリーS3ハード6-10ボス「氷幻帝竜ハルシュナ」攻略 — 呪いを撒き、HP70%未満の味方を免疫貫通で凍結。HPを高く保ち激怒を管理。クリアのコツ。",
+    "kr": "스토리 S3 하드 6-10 보스 빙환제룡 하르슈나 공략 — 저주를 뿌리고 HP 70% 미만 아군을 면역 관통 빙결. HP를 높게 유지하며 격노 관리. 클리어 팁.",
+    "zh": "主线S3困难6-10 Boss冰幻帝龙赫索纳攻略 — 不断施加诅咒，并无视免疫冰冻低于70%血量的队友：保持满血并管理狂暴。机制与通关技巧。",
+    "fr": "Boss S3 Hard 6-10 : Ancient Foe — Curse en boucle et Freeze sous 70% PV même à travers l'Immunité : restez full vie et gérez l'enrage. Mécaniques et astuces."
   },
   "icon": "T_DungeonArea_26",
   "author": "Sevih",

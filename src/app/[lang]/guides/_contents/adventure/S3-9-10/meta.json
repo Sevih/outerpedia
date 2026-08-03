@@ -7,11 +7,11 @@
     "fr": "S3 Hard : Gnosis Nella"
   },
   "description": {
-    "en": "Boss strategy guide.",
-    "jp": "ボス攻略ガイド。",
-    "kr": "보스 전략 가이드.",
-    "zh": "首领攻略指南",
-    "fr": "Guide de stratégie pour le Boss."
+    "en": "S3 Hard 9-10 boss Gnosis Nella — barely takes damage without high Penetration, and executes the whole team every 30 actions: bring pen and speed. Tips & team.",
+    "jp": "ストーリーS3ハード9-10ボス「ネラ」攻略 — 高い貫通がないとダメージが通らず、30行動ごとに全体処刑。貫通と速度で押し切る。ギミックとクリアのコツ。",
+    "kr": "스토리 S3 하드 9-10 보스 넬라 공략 — 높은 관통 없이는 피해가 들어가지 않고, 30행동마다 전체 처형. 관통과 속도로 승부. 기믹과 클리어 팁.",
+    "zh": "主线S3困难9-10 Boss内拉攻略 — 没有高穿透几乎打不动，每30次行动处决全队：穿透与速度缺一不可。机制与通关技巧。",
+    "fr": "Boss S3 Hard 9-10 : Gnosis Nella — quasi insensible sans grosse Pénétration, et exécute toute l'équipe toutes les 30 actions : pen et vitesse. Mécaniques et astuces."
   },
   "icon": "T_DungeonArea_29",
   "author": "Sevih",

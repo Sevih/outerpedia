@@ -108,7 +108,10 @@ export async function generateMetadata({
   return createPageMetadata({
     lang,
     path: `/characters/${slug}`,
-    title: name,
+    // Même suffixe que le h1 lecteur d'écran : « Ame — Outerplane Water Mage
+    // Guide ». Un nom seul faisait un title trop court et quasi-dupliqué
+    // (audit Sitebulb 20/07 : 572 titles courts, surtout les pages générées).
+    title: `${name}${t('page.character.sr_suffix', { element: el, classType: cl })}`,
     description: t('page.character.meta_description', { name, element: el, classType: cl }),
     // FI en PNG (aperçus Discord/OG) — mêmes propriété et taille que la V2.
     ogImage: img.facePng(char.id),

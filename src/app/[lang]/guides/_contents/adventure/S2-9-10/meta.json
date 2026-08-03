@@ -7,11 +7,11 @@
     "fr": "S2 Hard : Vladi Max"
   },
   "description": {
-    "en": "Boss strategy guide.",
-    "jp": "ボス攻略ガイド。",
-    "kr": "보스 전략 가이드.",
-    "zh": "首领攻略指南",
-    "fr": "Guide de stratégie pour le Boss."
+    "en": "S2 Hard 9-10 boss Vladi Max — drains your chain points and guarantees Stuns on Defense-debuffed heroes; counters won't save you. Mechanics, team and clear tips.",
+    "jp": "ストーリーS2ハード9-10ボス「ブラッディマックス」攻略 — チェインポイントを吸い取り、防御ダウン中の味方を確定スタン。反撃も貫通してくる。ギミックとクリアのコツ。",
+    "kr": "스토리 S2 하드 9-10 보스 블라디 맥스 공략 — 체인 포인트를 흡수하고 방어 감소 상태의 아군을 확정 기절. 반격도 통하지 않는다. 기믹과 클리어 팁.",
+    "zh": "主线S2困难9-10 Boss血腥麦克斯攻略 — 吸取连锁点数，对减防队友必定眩晕；反击类被动全部无效。机制与通关技巧。",
+    "fr": "Boss S2 Hard 9-10 : Vladi Max — draine vos points de chaîne et stun à coup sûr les héros en Defense down ; les counters ne sauvent pas. Mécaniques, équipe et astuces."
   },
   "icon": "T_DungeonArea_19",
   "author": "Sevih",

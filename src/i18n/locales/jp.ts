@@ -62,6 +62,12 @@ const jp: Record<TranslationKey, string> = {
     'アウタープレーンの全装備を探索。武器、アクセサリー、タリスマン、セット効果のステータス比較。{monthYear}更新。',
   'page.equipment.meta_description':
     '{name} — ステータス、メイン/サブステータス、パッシブ効果、覚醒、入手方法。Outerpediaの装備詳細。',
+  'page.equipment.title_suffix': ' — Outerplane {type}',
+  'page.equipment.kind.weapon': '武器',
+  'page.equipment.kind.amulet': 'アクセサリー',
+  'page.equipment.kind.talisman': 'タリスマン',
+  'page.equipment.kind.set': '防具セット',
+  'page.equipment.kind.ee': '専用装備',
   'equip.tab.weapons': '武器',
   'equip.tab.accessories': 'アクセサリー',
   'equip.tab.sets': 'セット',
@@ -139,7 +145,7 @@ const jp: Record<TranslationKey, string> = {
   'page.tools.title': 'アウタープレーン ツール & ユーティリティ',
   'page.tools.description':
     'アウタープレーンのツール：装備ソルバー、チームプランナー、ガチャシミュレーター、進捗トラッカーなど。',
-  'page.tool.meta_title': '{title}',
+  'page.tool.meta_title': '{title} — Outerplaneツール',
   // ─── Tools page UI ──────────────────────────────────────────────────────
   'tools.featured': '注目のツール',
   'tools.count': 'ツール {count} 件',

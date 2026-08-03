@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { normalizeLang } from '@/lib/i18n/config';
-import { getT } from '@/i18n';
+import { getT, type TranslationKey } from '@/i18n';
 import { createPageMetadata, buildUrl } from '@/lib/seo';
 import { img } from '@/lib/images';
 import JsonLd from '@/components/seo/JsonLd';
@@ -33,7 +33,11 @@ export async function generateMetadata({
   return createPageMetadata({
     lang,
     path: `/equipment/${slug}`,
-    title: model.name,
+    // Nom + type localisé (« Cursed Sword — Outerplane Weapon ») : un nom seul
+    // faisait un title trop court (audit Sitebulb 20/07, pages générées).
+    title: `${model.name}${t('page.equipment.title_suffix', {
+      type: t(`page.equipment.kind.${model.kind}` as TranslationKey),
+    })}`,
     description: t('page.equipment.meta_description', { name: model.name }),
     // Icône de l'item en PNG (aperçus Discord/OG) — propriété et taille V2.
     ogImage: model.eeCharacterId ? img.eePng(model.eeCharacterId) : img.equipmentPng(model.icon),

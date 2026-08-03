@@ -7,17 +7,20 @@
     "fr": "Pursuit : Blockbuster"
   },
   "description": {
-    "en": "Boss strategy guide",
-    "jp": "ボス攻略ガイド",
-    "kr": "보스 전략 가이드",
-    "zh": "首领攻略指南",
-    "fr": "Guide de stratégie pour le Boss."
+    "en": "Pursuit: Blockbuster guide (Irregular Extermination) — critical hits trigger heavy damage reduction and gauge recovery: bring Heavy Strike heroes. Teams & tips.",
+    "jp": "イレギュラー掃討「ブラックバスター」攻略 — 会心を受けるとダメージ軽減＋ゲージ回復で固くなる。ヘビーストライク持ちで殴るのが正解。編成と攻略のコツ。",
+    "kr": "이레귤러 토벌: 블록버스터 공략 — 치명타를 맞으면 피해 감소+게이지 회복으로 단단해진다. 헤비 스트라이크 보유 영웅으로 공략. 팀 편성과 공략 팁.",
+    "zh": "异型怪讨伐：破坏猛兽攻略 — 受到暴击会大幅减伤并回复弱点条，用重击角色规避。队伍编成与实用技巧。",
+    "fr": "Guide Pursuit : Blockbuster (Irregular Extermination) — les coups critiques déclenchent une grosse réduction de dégâts : misez sur les héros Heavy Strike. Équipes et astuces."
   },
   "icon": "CM_Irregular_Infiltrate",
   "author": "Shiraen",
   "updated": "2025-11-30",
   "order": 2,
   "bossId": "51202002",
-  "mapPos": { "top": 41, "left": 77 },
+  "mapPos": {
+    "top": 41,
+    "left": 77
+  },
   "group": "irregular_chase:2"
 }

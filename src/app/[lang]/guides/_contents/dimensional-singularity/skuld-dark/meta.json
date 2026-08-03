@@ -7,11 +7,11 @@
     "fr": "Skuld (Dark)"
   },
   "description": {
-    "en": "Dimensional Singularity boss guide — skills, teams & strategies",
-    "jp": "次元特異点ボス攻略 — スキル、チーム編成、攻略法",
-    "kr": "차원 특이점 보스 공략 — 스킬, 팀 편성, 공략법",
-    "zh": "次元奇点Boss攻略 — 技能、队伍编成与策略",
-    "fr": "Guide du Boss Dimensional Singularity — compétences, équipes et stratégies"
+    "en": "Skuld (Dark), Dimensional Singularity — a Speed puzzle: slower heroes hit her harder, faster ones take +50%, and she ramps your SPD every turn. Skills, teams & strategies.",
+    "jp": "次元特異点「スクルド（闇）」攻略 — 速度の逆転パズル。スクルドより遅いと与ダメ+50%、速いと被ダメ+50%、しかも毎ターン味方の速度が上がる。スキル・編成・攻略法。",
+    "kr": "차원 특이점: 스쿨드(암) 공략 — 속도 역전 퍼즐. 스쿨드보다 느리면 주는 피해 +50%, 빠르면 받는 피해 +50%, 게다가 매 턴 아군 속도가 오른다. 스킬, 팀 편성, 공략법.",
+    "zh": "次元奇点：斯库尔德（暗）攻略 — 速度谜题：比她慢伤害+50%，比她快受伤+50%，且每回合全队速度被动上升。技能、队伍编成与策略。",
+    "fr": "Singularité Dimensionnelle : Skuld (Dark) — un puzzle de Vitesse : les héros lents la frappent plus fort, les rapides subissent +50%, et elle booste votre SPD chaque tour. Compétences, équipes et stratégies."
   },
   "icon": "CM_Gate_Icon_Monad",
   "author": "Sevih",

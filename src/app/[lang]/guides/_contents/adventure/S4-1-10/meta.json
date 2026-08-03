@@ -7,11 +7,11 @@
     "fr": "S4 Hard : Three Cries"
   },
   "description": {
-    "en": "Boss strategy guide.",
-    "jp": "ボス攻略ガイド。",
-    "kr": "보스 전략 가이드.",
-    "zh": "首领攻略指南",
-    "fr": "Guide de stratégie pour le Boss."
+    "en": "S4 Hard 1-10 boss Three Cries — nearly invincible undebuffed: keep your buffs up, land Freeze to pierce its damage reduction, then chain burst. Tips & team.",
+    "jp": "ストーリーS4ハード1-10ボス「三つの鳴き声」攻略 — デバフなしではほぼ無敵。バフを維持しつつ凍結でダメージ軽減を貫き、チェインで一気に削る。クリアのコツ。",
+    "kr": "스토리 S4 하드 1-10 보스 세 울음소리 공략 — 디버프 없이는 거의 무적. 버프를 유지하며 빙결로 피해 감소를 뚫고 체인으로 폭딜. 클리어 팁.",
+    "zh": "主线S4困难1-10 Boss三声啼哭攻略 — 无debuff时近乎无敌：保持己方增益，靠冰冻穿透其减伤，再用连锁爆发。机制与通关技巧。",
+    "fr": "Boss S4 Hard 1-10 : Three Cries — quasi invincible sans debuff : gardez vos buffs, posez Freeze pour percer sa réduction, puis burst en chaîne. Mécaniques et astuces."
   },
   "icon": "T_DungeonArea_30",
   "author": "Sevih",

@@ -7,11 +7,11 @@
     "fr": "Guide de la Requête spéciale Amadeus"
   },
   "description": {
-    "en": "Strategy guide for Special Request: Identification mission",
-    "jp": "特別依頼：正体究明ミッションの攻略ガイド",
-    "kr": "특별 의뢰: 정체 규명 미션 공략 가이드",
-    "zh": "特殊委托：身份确认任务攻略指南",
-    "fr": "Guide de stratégie pour la mission Special Request : Identification"
+    "en": "Amadeus (Dark) Identification Special Request — keep debuffs rolling to open his gauge, and cleanse the immunity-piercing ones he spreads. Teams & tips.",
+    "jp": "特別依頼・正体究明「アマデウス」攻略ガイド — デバフを絶やさないことが鍵、免疫を貫通するランダムデバフは即解除。おすすめ編成と攻略のコツ。",
+    "kr": "특별 의뢰 정체 규명: 아마데우스 공략 — 디버프를 끊기지 않게 유지하는 것이 핵심, 면역을 무시하는 무작위 디버프는 즉시 해제. 추천 팀 편성과 공략 팁.",
+    "zh": "特殊委托·身份确认：阿玛迪斯攻略 — 关键是持续保持debuff，无视免疫的随机debuff要及时净化。推荐队伍与实用技巧。",
+    "fr": "Special Request Identification : Amadeus (Dark) — maintenez vos debuffs pour entamer sa jauge, et cleansez ceux qu'il sème en perçant l'Immunité. Équipes et astuces."
   },
   "icon": "CLG_Raid_Weapon_Dark",
   "author": "SADtherobot",

@@ -47,22 +47,15 @@
 > Le gros de l'audit est traité (cf. DONE 20-22/07). Ce qui suit est du VOLUME
 > éditorial, pas du bug — ce n'est pas mécanisable. Détail : `docs/seo&audit/`.
 
-- [ ] **Titles / meta descriptions courts** (572 / 135 pages au 20/07) — surtout
-      les pages générées ; à arbitrer. Les 147 titres de GUIDES portent leur
-      catégorie depuis le 22/07 (uniques et plus longs) ; restent les fiches
-      perso, l'équipement et les pages d'outils.
-- [ ] **Meta descriptions de guides GÉNÉRIQUES / dupliquées** — les familles à
-      contenu templaté partagent une description identique, dans
-      `_contents/<famille>/<slug>/meta.json`.
-      RE-MESURÉ le 26/07 sur special-request, et c'est PIRE que ce que disait cet
-      item : non pas une description partagée par 8 guides sur 10, mais DEUX
-      (4× « Strategy guide for Special Request: Identification mission », 5×
-      « … Ecology Study mission ») — seul `beatles` a une description propre à son
-      boss, `chimera` non. Soit 9 génériques sur 10.
-      Même motif probable ailleurs (adventure-license, irregular-extermination,
-      dimensional-singularity…). Éditorial, famille par famille : une phrase par
-      boss. NB : le nom du boss est fiable (résolu depuis `TextCharacter` du jeu),
-      donc utilisable comme graine.
+- [ ] **Reste du lot « titles/descriptions courts » : re-mesurer, puis les
+      descriptions d'OUTILS** — le gros est traité le 03/08 (cf. DONE : titles
+      des fiches perso/équipement/outils enrichis, 53 descriptions de guides
+      dédupliquées). Restent : (1) re-passer Sitebulb pour re-compter ce qui
+      est encore court après ces deux lots ; (2) les descriptions des ~17 pages
+      d'outils (une phrase, honnête mais courte) — ARBITRAGE REQUIS : la même
+      chaîne i18n (`tools.<slug>.desc`) sert AUSSI de sous-titre visible dans
+      ToolShell et sur la landing /tools — l'allonger pour le SEO change
+      l'écran. Options : découpler (clé meta dédiée) ou assumer le texte court.
 
 ## ⚙️ Config / infra
 

@@ -7,11 +7,11 @@
     "fr": "Frozen Dragon of Phantasm Harshna"
   },
   "description": {
-    "en": "Dimensional Singularity boss guide — skills, teams & strategies",
-    "jp": "次元特異点ボス攻略 — スキル、チーム編成、攻略法",
-    "kr": "차원 특이점 보스 공략 — 스킬, 팀 편성, 공략법",
-    "zh": "次元奇点Boss攻略 — 技能、队伍编成与策略",
-    "fr": "Guide du Boss Dimensional Singularity — compétences, équipes et stratégies"
+    "en": "Frozen Dragon of Phantasm Harshna (Water), Dimensional Singularity — strips your leftmost hero, cleanses itself; Crit Damage buff holders deal +100%. Skills, teams & strategies.",
+    "jp": "次元特異点「氷幻帝竜ハルシュナ」攻略 — 左端の味方のバフを解除し自身のデバフを浄化。会心ダメージ増加持ちからは被ダメ+100%。スキル・編成・攻略法。",
+    "kr": "차원 특이점: 빙환제룡 하르슈나 공략 — 왼쪽 끝 아군의 버프를 해제하고 자신의 디버프를 정화. 치명 피해 증가 보유자에겐 받는 피해 +100%. 스킬, 팀 편성, 공략법.",
+    "zh": "次元奇点：冰幻帝龙赫索纳攻略 — 驱散最左侧队友的增益并净化自身debuff；对持暴击伤害增益者受伤+100%。技能、队伍编成与策略。",
+    "fr": "Singularité Dimensionnelle : Frozen Dragon of Phantasm Harshna (Water) — dissipe le héros le plus à gauche, se purifie ; +100% de dégâts via buff de Dégâts Critiques. Compétences, équipes et stratégies."
   },
   "icon": "CM_Gate_Icon_Monad",
   "author": "Shiraen / Sevih",

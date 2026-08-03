@@ -7,11 +7,11 @@
     "fr": "S3 Hard : Sphinx Guardian"
   },
   "description": {
-    "en": "Boss strategy guide.",
-    "jp": "ボス攻略ガイド。",
-    "kr": "보스 전략 가이드.",
-    "zh": "首领攻略指南",
-    "fr": "Guide de stratégie pour le Boss."
+    "en": "S3 Hard 1-10 boss Sphinx Guardian — bring a Ranger or your Speed drops to 0, but it executes Rangers with S1: a true team-building riddle. Mechanics & tips.",
+    "jp": "ストーリーS3ハード1-10ボス「スフィンクスガーディアン」攻略 — レンジャーなしだと速度0、しかしS1がレンジャーを処刑してくる編成パズル。ギミックとクリアのコツ。",
+    "kr": "스토리 S3 하드 1-10 보스 스핑크스 가디언 공략 — 레인저가 없으면 속도가 0이 되지만, S1이 레인저를 처형하는 편성 퍼즐. 기믹과 클리어 팁.",
+    "zh": "主线S3困难1-10 Boss狮身守卫攻略 — 不带射手全队速度归0，但其S1又会处决射手：真正的配队谜题。机制与通关技巧。",
+    "fr": "Boss S3 Hard 1-10 : Sphinx Guardian — sans Ranger votre Vitesse tombe à 0, mais son S1 exécute les Rangers : un vrai casse-tête de composition. Mécaniques et astuces."
   },
   "icon": "T_DungeonArea_21",
   "author": "Sevih",

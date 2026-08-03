@@ -7,11 +7,11 @@
     "fr": "Verdandi (Light)"
   },
   "description": {
-    "en": "Dimensional Singularity boss guide — skills, teams & strategies",
-    "jp": "次元特異点ボス攻略 — スキル、チーム編成、攻略法",
-    "kr": "차원 특이점 보스 공략 — 스킬, 팀 편성, 공략법",
-    "zh": "次元奇点Boss攻略 — 技能、队伍编成与策略",
-    "fr": "Guide du Boss Dimensional Singularity — compétences, équipes et stratégies"
+    "en": "Verdandi (Light), Dimensional Singularity — keep her halved Curses on you for +10% damage per debuff, and bench Immunity: it refills her gauge. Skills, teams & strategies.",
+    "jp": "次元特異点「ヴェルダンディ（光）」攻略 — 呪いはあえて受けたまま戦う（デバフ1つにつき与ダメ+10%）。免疫持ちは弱点ゲージを回復させるためNG。スキル・編成・攻略法。",
+    "kr": "차원 특이점: 베르단디(광) 공략 — 저주는 일부러 유지한 채 싸운다(디버프 1개당 주는 피해 +10%). 면역 보유자는 약점 게이지를 회복시키므로 금지. 스킬, 팀 편성, 공략법.",
+    "zh": "次元奇点：贝尔丹迪（光）攻略 — 故意保留她减半的诅咒：每个debuff伤害+10%；别带免疫，会回复其弱点条。技能、队伍编成与策略。",
+    "fr": "Singularité Dimensionnelle : Verdandi (Light) — gardez ses Curses (affaiblies) sur vous : +10% de dégâts par debuff porté, et bannissez l'Immunité qui recharge sa jauge. Compétences, équipes et stratégies."
   },
   "icon": "CM_Gate_Icon_Monad",
   "author": "Sevih",

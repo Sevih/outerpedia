@@ -7,6 +7,28 @@
 
 ## 2026-08-03
 
+- **Lot SEO éditorial : 53 descriptions de guides dédupliquées + titles des
+  pages générées enrichis** (items Sitebulb du 20/07, demande Sevih).
+  INVENTAIRE D'ABORD, et il corrige le TODO : les familles réellement
+  touchées étaient adventure (×20 « Boss strategy guide. »),
+  dimensional-singularity (×14), world-boss (×6), special-request (×9) et
+  irregular-extermination (×4) — adventure-license, que l'item soupçonnait,
+  était déjà propre. 94 uniques sur 147 avant, **147/147 après** (re-mesuré).
+  MÉTHODE : chaque description est SOURCÉE du guide lui-même (intro de
+  content.json, tips tactiques, strings) — nom du boss depuis la donnée du
+  jeu (×4 langues + EN pour le FR, convention du site), élément, et LA
+  mécanique signature en accroche ; ×5 langues, ~120-160 caractères. Aucun
+  nom de perso/allié inventé en CJK (seuls les noms présents dans
+  monsters.json sont utilisés).
+  TITLES (l'autre moitié du lot) : fiche perso = nom + le suffixe
+  `sr_suffix` DÉJÀ localisé du h1 lecteur d'écran (« Ame — Outerplane Water
+  Mage Guide ») ; fiche équipement = nom + type localisé via `model.kind`
+  (7 clés i18n neuves ×5) ; outils = `page.tool.meta_title` passait de
+  `'{title}'` nu à « {title} — Outerplane Tool ».
+  ARBITRAGE ASSUMÉ : les descriptions d'outils (courtes) ne sont PAS
+  gonflées — la même chaîne sert de sous-titre visible dans ToolShell et sur
+  la landing ; découpler ou assumer reste au TODO avec la re-mesure Sitebulb.
+
 - **CHANGELOG.md racine : GELÉ — l'item « resync ou assouplir » est tranché,
   assouplir.** Le retard mesuré au moment du gel : **422 commits** depuis la
   dernière écriture (17/07), après 216 relevés le 17/07 et 612 le 26/07 — la

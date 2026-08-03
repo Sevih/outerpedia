@@ -7,17 +7,20 @@
     "fr": "Pursuit : Irregular Queen"
   },
   "description": {
-    "en": "Boss strategy guide",
-    "jp": "ボス攻略ガイド",
-    "kr": "보스 전략 가이드",
-    "zh": "首领攻略指南",
-    "fr": "Guide de stratégie pour le Boss."
+    "en": "Pursuit: Irregular Queen guide (Irregular Extermination) — she only takes gauge damage while debuffed, but every debuff triggers her counter. Teams & tips.",
+    "jp": "イレギュラー掃討「イレギュラークイーン」攻略 — デバフ中しか弱点ゲージが削れないが、デバフを付けるたびに反撃が飛んでくる。編成と攻略のコツ。",
+    "kr": "이레귤러 토벌: 이레귤러 퀸 공략 — 디버프 상태에서만 약점 게이지를 깎을 수 있지만, 디버프를 걸 때마다 반격이 날아온다. 팀 편성과 공략 팁.",
+    "zh": "异型怪讨伐：异型怪女王攻略 — 只有在debuff状态下才能削其弱点条，但每次上debuff都会触发反击。队伍编成与实用技巧。",
+    "fr": "Guide Pursuit : Irregular Queen (Irregular Extermination) — sa jauge ne s'entame que debuffée, mais chaque debuff déclenche son counter. Équipes et astuces."
   },
   "icon": "CM_Irregular_Infiltrate",
   "author": "Sevih / Shiraen",
   "updated": "2025-11-30",
   "order": 4,
   "bossId": "51202004",
-  "mapPos": { "top": 23, "left": 47 },
+  "mapPos": {
+    "top": 23,
+    "left": 47
+  },
   "group": "irregular_chase:4"
 }

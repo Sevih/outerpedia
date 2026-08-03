@@ -7,11 +7,11 @@
     "fr": "S2 Hard : Demiurge Astei"
   },
   "description": {
-    "en": "Boss strategy guide.",
-    "jp": "ボス攻略ガイド。",
-    "kr": "보스 전략 가이드.",
-    "zh": "首领攻略指南",
-    "fr": "Guide de stratégie pour le Boss."
+    "en": "S2 Hard 5-10 boss Demiurge Astei — chains crit buffs into team-wide Petrify that upgrades past Immunity; gauge opens only during enrage. Mechanics & tips.",
+    "jp": "ストーリーS2ハード5-10ボス「アステ（闇）」攻略 — 全体石化を免疫貫通まで強化してくる。弱点ゲージは激怒中のみ、激怒必殺は即死級。ギミックとクリアのコツ。",
+    "kr": "스토리 S2 하드 5-10 보스 아스테(암) 공략 — 전체 석화를 면역 관통까지 강화한다. 약점 게이지는 격노 중에만, 격노 궁극기는 즉사급. 기믹과 클리어 팁.",
+    "zh": "主线S2困难5-10 Boss奥斯黛（暗）攻略 — 全体石化会强化至无视免疫；弱点条仅狂暴期间可削，狂暴大招足以团灭。机制与通关技巧。",
+    "fr": "Boss S2 Hard 5-10 : Demiurge Astei — enchaîne vers une Pétrification de groupe perçant l'Immunité ; jauge ouverte seulement en enrage. Mécaniques, équipe et astuces."
   },
   "icon": "T_DungeonArea_15",
   "author": "Sevih",

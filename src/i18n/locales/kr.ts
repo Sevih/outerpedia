@@ -61,6 +61,12 @@ const kr: Record<TranslationKey, string> = {
     '아우터플레인의 모든 장비를 탐색하세요. 무기, 악세서리, 탈리스만, 세트 효과 비교. {monthYear} 업데이트.',
   'page.equipment.meta_description':
     '{name} — 스탯, 메인/서브 스탯, 패시브 효과, 각성, 획득 경로. Outerpedia 장비 상세 정보.',
+  'page.equipment.title_suffix': ' — Outerplane {type}',
+  'page.equipment.kind.weapon': '무기',
+  'page.equipment.kind.amulet': '장신구',
+  'page.equipment.kind.talisman': '탈리스만',
+  'page.equipment.kind.set': '방어구 세트',
+  'page.equipment.kind.ee': '전용 장비',
   'equip.tab.weapons': '무기',
   'equip.tab.accessories': '악세서리',
   'equip.tab.sets': '세트',
@@ -138,7 +144,7 @@ const kr: Record<TranslationKey, string> = {
   'page.tools.title': '아우터플레인 도구 & 유틸리티',
   'page.tools.description':
     '아우터플레인 도구: 장비 솔버, 팀 플래너, 뽑기 시뮬레이터, 진행 트래커 등.',
-  'page.tool.meta_title': '{title}',
+  'page.tool.meta_title': '{title} — Outerplane 툴',
   // ─── Tools page UI ──────────────────────────────────────────────────────
   'tools.featured': '추천 도구',
   'tools.count': '도구 {count}개',

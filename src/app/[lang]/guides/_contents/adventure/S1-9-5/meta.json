@@ -7,11 +7,11 @@
     "fr": "S1 Hard : Leo & Alpha"
   },
   "description": {
-    "en": "Boss strategy guide.",
-    "jp": "ボス攻略ガイド。",
-    "kr": "보스 전략 가이드.",
-    "zh": "首领攻略指南",
-    "fr": "Guide de stratégie pour le Boss."
+    "en": "S1 Hard 9-5 boss Leo & Alpha — shields and Defense-scaling damage; control his buffs before the S3 nuke. Mechanics, team and clear tips.",
+    "jp": "ストーリーS1ハード9-5ボス「レオ＆アルファ」攻略 — シールドと防御力参照ダメージが特徴。S3の全体攻撃前にバフ管理を。ギミックと編成、クリアのコツ。",
+    "kr": "스토리 S1 하드 9-5 보스 레오&알파 공략 — 실드와 방어력 비례 피해가 특징. S3 광역기 전에 버프 관리 필수. 기믹과 팀 편성, 클리어 팁.",
+    "zh": "主线S1困难9-5 Boss雷欧&阿尔法攻略 — 护盾与基于防御的伤害；在S3爆发前控制其增益。机制、队伍与通关技巧。",
+    "fr": "Boss S1 Hard 9-5 : Leo & Alpha — boucliers et dégâts basés sur la Défense ; contrôlez ses buffs avant la nuke du S3. Mécaniques, équipe et astuces."
   },
   "icon": "T_DungeonArea_09",
   "author": "Sevih",

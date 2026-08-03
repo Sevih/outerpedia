@@ -62,6 +62,12 @@ const fr: Record<TranslationKey, string> = {
     "Explorez toutes les armes, accessoires, talismans et sets d'armure d'Outerplane. Comparez les statistiques et trouvez le meilleur équipement pour vos personnages. Mis à jour {monthYear}.",
   'page.equipment.meta_description':
     "{name} — statistiques, stat principale et secondaires, effets passifs, ascension et où l'obtenir dans Outerplane. Fiche d'équipement complète sur Outerpedia.",
+  'page.equipment.title_suffix': ' — {type} Outerplane',
+  'page.equipment.kind.weapon': 'Arme',
+  'page.equipment.kind.amulet': 'Accessoire',
+  'page.equipment.kind.talisman': 'Talisman',
+  'page.equipment.kind.set': "Set d'armure",
+  'page.equipment.kind.ee': 'Équipement exclusif',
   'equip.tab.weapons': 'Armes',
   'equip.tab.accessories': 'Accessoires',
   'equip.tab.sets': "Sets d'armure",
@@ -140,7 +146,7 @@ const fr: Record<TranslationKey, string> = {
   'page.tools.title': 'Outils et utilitaires Outerplane',
   'page.tools.description':
     "Outils Outerplane : solveur d'équipement, planificateur d'équipe, simulateur de pulls, suivi de progression, et plus encore.",
-  'page.tool.meta_title': '{title}',
+  'page.tool.meta_title': '{title} — Outil Outerplane',
   // ─── Tools page UI ──────────────────────────────────────────────────────
   'tools.featured': 'À la une',
   'tools.count': '{count} outils',

@@ -7,17 +7,21 @@
     "fr": "Pursuit : Mutated Wyvre"
   },
   "description": {
-    "en": "Boss strategy guide",
-    "jp": "ボス攻略ガイド",
-    "kr": "보스 전략 가이드",
-    "zh": "首领攻略指南",
-    "fr": "Guide de stratégie pour le Boss."
+    "en": "Pursuit: Mutated Wyvre guide (Irregular Extermination) — Counterattack, Revenge and non-attack skills all Stun your team: pure offense only. Teams & tips.",
+    "jp": "イレギュラー掃討「変異したワイブル」攻略 — 反撃・報復・非攻撃スキルを使うと全体1ターンスタン。攻撃スキルのみで押し切る。編成と攻略のコツ。",
+    "kr": "이레귤러 토벌: 변이된 와이브르 공략 — 반격·복수·비공격 스킬을 쓰면 전원 1턴 기절. 공격 스킬만으로 밀어붙일 것. 팀 편성과 공략 팁.",
+    "zh": "异型怪讨伐：变异双足飞龙攻略 — 使用反击、复仇或非攻击技能会让全队眩晕1回合：只用攻击技能强推。队伍编成与实用技巧。",
+    "fr": "Guide Pursuit : Mutated Wyvre (Irregular Extermination) — Contre-attaque, Revenge et skills non offensifs stun toute l'équipe : offense pure uniquement. Équipes et astuces."
   },
   "icon": "CM_Irregular_Infiltrate",
   "author": "Shiraen",
   "updated": "2025-11-30",
   "order": 3,
   "bossId": "51202003",
-  "mapPos": { "top": 59, "left": 53, "mobileTop": 64 },
+  "mapPos": {
+    "top": 59,
+    "left": 53,
+    "mobileTop": 64
+  },
   "group": "irregular_chase:3"
 }

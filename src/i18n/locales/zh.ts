@@ -61,6 +61,12 @@ const zh: Record<TranslationKey, string> = {
     '异域战记全部装备：武器、饰品、护身符、套装\n探索对比数值、技能，找到适用角色。{monthYear}更新。',
   'page.equipment.meta_description':
     '{name} — 属性、主属性与副属性、被动效果、觉醒及获取途径。Outerpedia 装备详解。',
+  'page.equipment.title_suffix': ' — Outerplane {type}',
+  'page.equipment.kind.weapon': '武器',
+  'page.equipment.kind.amulet': '饰品',
+  'page.equipment.kind.talisman': '护符',
+  'page.equipment.kind.set': '防具套装',
+  'page.equipment.kind.ee': '专属装备',
   'equip.tab.weapons': '武器',
   'equip.tab.accessories': '饰品',
   'equip.tab.sets': '套装',
@@ -136,7 +142,7 @@ const zh: Record<TranslationKey, string> = {
   'tierlist.versus.tools_count': '排行榜',
   'page.tools.title': '异域战记 实用工具程序',
   'page.tools.description': '异域战记工具：装备推荐器、队伍规划器、抽卡模拟器、进度追踪器等。',
-  'page.tool.meta_title': '{title}',
+  'page.tool.meta_title': '{title} — Outerplane工具',
   // ─── Tools page UI ──────────────────────────────────────────────────────
   'tools.featured': '精选',
   'tools.count': '{count} 个工具',

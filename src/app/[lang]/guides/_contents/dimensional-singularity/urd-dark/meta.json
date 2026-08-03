@@ -7,11 +7,11 @@
     "fr": "Urd (Dark)"
   },
   "description": {
-    "en": "Dimensional Singularity boss guide — skills, teams & strategies",
-    "jp": "次元特異点ボス攻略 — スキル、チーム編成、攻略法",
-    "kr": "차원 특이점 보스 공략 — 스킬, 팀 편성, 공략법",
-    "zh": "次元奇点Boss攻略 — 技能、队伍编成与策略",
-    "fr": "Guide du Boss Dimensional Singularity — compétences, équipes et stratégies"
+    "en": "Urd (Dark), Dimensional Singularity — keep a Defender up front or eat 20% Max-HP hits; his buffs raise his damage taken, your debuffs feed his. Skills, teams & strategies.",
+    "jp": "次元特異点「ウルド（闇）」攻略 — 先頭がディフェンダーでないと最大HP20%の固定ダメージ。自身のバフが多いほど被ダメ増、デバフを付けるほど敵の火力が上がる。スキル・編成・攻略法。",
+    "kr": "차원 특이점: 울드(암) 공략 — 선두가 디펜더가 아니면 최대 HP 20% 고정 피해. 버프가 많을수록 받는 피해 증가, 디버프를 걸수록 보스 화력이 오른다. 스킬, 팀 편성, 공략법.",
+    "zh": "次元奇点：乌尔德（暗）攻略 — 首位必须是防御者，否则吃最大生命20%固定伤害；他身上增益越多受伤越高，你上的debuff反而会提升他的伤害。技能、队伍编成与策略。",
+    "fr": "Singularité Dimensionnelle : Urd (Dark) — un Defender en tête sinon 20% des PV max en dégâts fixes ; ses buffs augmentent ses dégâts subis, vos debuffs nourrissent les siens. Compétences, équipes et stratégies."
   },
   "icon": "CM_Gate_Icon_Monad",
   "author": "Sevih",

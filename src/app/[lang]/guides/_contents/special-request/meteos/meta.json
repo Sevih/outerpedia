@@ -7,11 +7,11 @@
     "fr": "Guide de la Requête spéciale Blazing Knight Meteos"
   },
   "description": {
-    "en": "Strategy guide for Special Request: Identification mission",
-    "jp": "特別依頼：正体究明ミッションの攻略ガイド",
-    "kr": "특별 의뢰: 정체 규명 미션 공략 가이드",
-    "zh": "特殊委托：身份确认任务攻略指南",
-    "fr": "Guide de stratégie pour la mission Special Request : Identification"
+    "en": "Blazing Knight Meteos (Fire) Identification Special Request — an AoE counter every 5 hits and permanent heal Seal: duals, chains, and few debuffs. Teams & tips.",
+    "jp": "特別依頼・正体究明「火炎の騎士メテウス」攻略ガイド — 5回被弾ごとに全体カウンター、回復は永続封印。デュアル・チェイン中心でデバフは控えめに。おすすめ編成と攻略のコツ。",
+    "kr": "특별 의뢰 정체 규명: 화염기사 메테우스 공략 — 5회 피격마다 광역 반격, 회복은 영구 봉인. 듀얼·체인 위주로 디버프는 최소화. 추천 팀 편성과 공략 팁.",
+    "zh": "特殊委托·身份确认：火焰骑士梅修斯攻略 — 每受击5次触发群体反击，治疗被永久封印：以双人/连锁攻击为主，少上debuff。推荐队伍与实用技巧。",
+    "fr": "Special Request Identification : Blazing Knight Meteos (Fire) — counter AoE toutes les 5 attaques et Seal des soins permanent : duals, chains, peu de debuffs. Équipes et astuces."
   },
   "icon": "CLG_Raid_Weapon_Fire",
   "author": "Arabyss & Kilvanoshei",
