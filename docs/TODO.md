@@ -36,7 +36,6 @@
       ⚠ SURTOUT NE PAS se baser sur la V2 pour cet outil (décision Sevih 22/07 :
       le calculateur V2 est foireux) — exception à la règle « V2 = oracle »,
       conception V3 native.
-- [ ] **`/tools` — MAJ progress tracker : ad stamina, , condition sur le dopplegange'r
 - [ ] **`/contributing` — outil privé pour le ranking
 - [ ] **`/tools` — outil pour track l'avancée du compte sur les hero (niveau, skill, affinity)
 

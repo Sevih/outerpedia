@@ -1135,10 +1135,13 @@ const en = {
   'progress.terminusSupportPackDesc': 'Increases Terminus Isle daily limit from 1 to 2',
   'progress.veronicaPremiumPack': 'Veronica Premium Pack',
   'progress.veronicaPremiumPackDesc':
-    'Increases daily limits from 3 to 4 for Hypnotic Frog Hall and Ark Raid',
+    'Increases daily limits from 3 to 4 for Hypnotic Frog Hall and Ark Raid; ad stamina is claimed automatically (task hidden)',
   'progress.elementalTowerCompleted': 'Elemental Tower Completed',
   'progress.elementalTowerCompletedDesc':
     'Hide Elemental Tower from daily tasks (permanent content that never resets)',
+  'progress.allRegularHeroesSixStar': 'All Regular Heroes at 6★',
+  'progress.allRegularHeroesSixStarDesc':
+    'Hide Defeat Doppelganger from daily tasks (only useful while raising regular heroes to 6★)',
   'progress.category.tasks': 'Tasks',
   'progress.category.craft': 'Craft',
   'progress.category.shop': 'Shop',

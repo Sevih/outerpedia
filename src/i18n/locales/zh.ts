@@ -1081,9 +1081,13 @@ const zh: Record<TranslationKey, string> = {
   'progress.terminusSupportPack': '灭亡之岛探索支援包',
   'progress.terminusSupportPackDesc': '将灭亡之岛每日限制从1次增加到2次',
   'progress.veronicaPremiumPack': '维罗妮卡豪华包',
-  'progress.veronicaPremiumPackDesc': '将催眠青蛙殿堂、方舟强袭的每日限制从3次增加到4次',
+  'progress.veronicaPremiumPackDesc':
+    '将催眠青蛙殿堂、方舟强袭的每日限制从3次增加到4次；广告体力自动领取（任务隐藏）',
   'progress.elementalTowerCompleted': '元素之塔已完成',
   'progress.elementalTowerCompletedDesc': '从每日任务中隐藏元素之塔（已完成）',
+  'progress.allRegularHeroesSixStar': '所有常驻英雄已6星',
+  'progress.allRegularHeroesSixStarDesc':
+    '从每日任务中隐藏讨伐二重身（仅在培养常驻英雄至6星时有用）',
   'progress.category.tasks': '任务',
   'progress.category.craft': '制作',
   'progress.category.shop': '商店',

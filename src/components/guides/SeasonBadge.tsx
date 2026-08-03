@@ -20,8 +20,15 @@ export async function SeasonBadge({ bossId, lang }: { bossId?: string; lang: Lan
   const t = await getT(lang);
   const { state, season } = standing;
   // En cours → on annonce la fin du COMBAT ; sinon → le début de la saison.
+  // `battleEnd` est une borne EXCLUSIVE (minuit UTC en pratique) : afficher sa
+  // date calendaire promettait un jour de trop — « jusqu'au 4 août » pour une
+  // fin le 4 à 00:00, alors qu'en jeu tout ferme le 3 au soir. On affiche donc
+  // le DERNIER JOUR JOUABLE (la date de l'instant battleEnd − 1 ms), « jusqu'au
+  // 3 août » inclusif. `start`, borne inclusive, reste affichée telle quelle.
   const date = formatGuideDate(
-    (state === 'live' ? season.battleEnd : season.start).slice(0, 10),
+    state === 'live'
+      ? new Date(Date.parse(season.battleEnd) - 1).toISOString().slice(0, 10)
+      : season.start.slice(0, 10),
     lang,
   );
   const label = t(

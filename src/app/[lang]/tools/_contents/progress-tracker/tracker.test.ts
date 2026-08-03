@@ -129,6 +129,18 @@ describe('disponibilité calendaire', () => {
     expect(activeTaskIds('daily', s, WED)).toContain('dimensional-singularity');
     expect(activeTaskIds('daily', s, SUN)).not.toContain('dimensional-singularity');
   });
+
+  it('ad stamina masquée avec le pack premium Veronica (stamina auto-réclamée)', () => {
+    const pack = settingsWith({ hasVeronicaPremiumPack: true });
+    expect(activeTaskIds('daily', createDefaultSettings(), WED)).toContain('ad-stamina');
+    expect(activeTaskIds('daily', pack, WED)).not.toContain('ad-stamina');
+  });
+
+  it('doppelganger masqué quand tous les héros réguliers sont en 6★', () => {
+    const done = settingsWith({ hasAllRegularHeroesSixStar: true });
+    expect(activeTaskIds('daily', createDefaultSettings(), WED)).toContain('defeat-doppelganger');
+    expect(activeTaskIds('daily', done, WED)).not.toContain('defeat-doppelganger');
+  });
 });
 
 describe('synchro réglages ⇄ progression', () => {

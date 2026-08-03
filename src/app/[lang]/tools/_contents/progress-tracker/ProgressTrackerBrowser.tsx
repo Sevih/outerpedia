@@ -86,6 +86,8 @@ export interface TrackerLabels {
   veronicaPremiumPackDesc: string;
   elementalTowerCompleted: string;
   elementalTowerCompletedDesc: string;
+  allRegularHeroesSixStar: string;
+  allRegularHeroesSixStarDesc: string;
   displayMode: string;
   displayModeDesc: string;
   displayModeTabs: string;
@@ -517,6 +519,17 @@ export function ProgressTrackerBrowser({
                   setSettings({
                     ...settings,
                     hasCompletedElementalTower: !settings.hasCompletedElementalTower,
+                  })
+                }
+              />
+              <SettingToggle
+                checked={settings.hasAllRegularHeroesSixStar}
+                title={labels.allRegularHeroesSixStar}
+                desc={labels.allRegularHeroesSixStarDesc}
+                onChange={() =>
+                  setSettings({
+                    ...settings,
+                    hasAllRegularHeroesSixStar: !settings.hasAllRegularHeroesSixStar,
                   })
                 }
               />

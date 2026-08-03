@@ -1110,10 +1110,14 @@ const jp: Record<TranslationKey, string> = {
   'progress.terminusSupportPack': 'テルミナス島探査応援パック',
   'progress.terminusSupportPackDesc': 'テルミナス島のデイリー上限を1から2に増加',
   'progress.veronicaPremiumPack': 'ヴェロニカのプレミアムパック',
-  'progress.veronicaPremiumPackDesc': '催眠カエルの殿堂、アーク強襲のデイリー上限を3から4に増加',
+  'progress.veronicaPremiumPackDesc':
+    '催眠カエルの殿堂、アーク強襲のデイリー上限を3から4に増加。広告スタミナは自動受取（タスク非表示）',
   'progress.elementalTowerCompleted': '元素の塔クリア済み',
   'progress.elementalTowerCompletedDesc':
     '元素の塔をデイリータスクから非表示にする（リセットしない永続コンテンツ）',
+  'progress.allRegularHeroesSixStar': '一般ヒーロー全員6★達成',
+  'progress.allRegularHeroesSixStarDesc':
+    'ドッペルゲンガー討伐をデイリータスクから非表示にする（一般ヒーローの6★育成にのみ有用）',
   'progress.category.tasks': 'タスク',
   'progress.category.craft': '製作',
   'progress.category.shop': 'ショップ',

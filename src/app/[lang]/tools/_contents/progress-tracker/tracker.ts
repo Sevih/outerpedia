@@ -43,12 +43,17 @@ export interface UserSettings {
   enabledTasks: Record<TaskType, string[]>;
   /** Terminus Isle : 1 → 2 entrées/jour. */
   hasTerminusSupportPack: boolean;
-  /** Hypnotic Frog Hall + Ark Raid : 3 → 4 entrées/jour. */
+  /**
+   * Hypnotic Frog Hall + Ark Raid : 3 → 4 entrées/jour ; le pack réclame
+   * aussi la stamina des pubs AUTOMATIQUEMENT → tâche ad-stamina masquée.
+   */
   hasVeronicaPremiumPack: boolean;
   /** Adventure license : combats par étage (× 3 étages). */
   adventureLicenseCombatsPerStage: 2 | 3 | 4;
   /** Tour élémentaire finie une fois pour toutes → tâche masquée. */
   hasCompletedElementalTower: boolean;
+  /** Tous les héros réguliers en 6★ → tâche doppelganger masquée. */
+  hasAllRegularHeroesSixStar: boolean;
   /**
    * Contenus saisonniers (JC / guild raid / world boss) pilotés par le
    * CALENDRIER du jeu plutôt qu'à la main. Activé par défaut.
@@ -102,6 +107,7 @@ export function normalizeSettings(raw: unknown): UserSettings {
     hasVeronicaPremiumPack: d.hasVeronicaPremiumPack === true,
     adventureLicenseCombatsPerStage: combats === 3 || combats === 4 ? combats : 2,
     hasCompletedElementalTower: d.hasCompletedElementalTower === true,
+    hasAllRegularHeroesSixStar: d.hasAllRegularHeroesSixStar === true,
     // Défaut ACTIF, y compris pour un réglage stocké d'avant l'option : sans
     // elle, l'utilisateur devait cocher/décocher trois cases à chaque saison.
     autoSeasonalTasks: d.autoSeasonalTasks !== false,
@@ -180,6 +186,10 @@ export function activeTaskIds(
     }
     if (auto && !enabled.includes(id)) return false;
     if (id === 'elemental-tower' && settings.hasCompletedElementalTower) return false;
+    // Le pack Veronica réclame la stamina des pubs tout seul : plus rien à cocher.
+    if (id === 'ad-stamina' && settings.hasVeronicaPremiumPack) return false;
+    // Le doppelganger ne sert qu'à monter les héros réguliers en 6★.
+    if (id === 'defeat-doppelganger' && settings.hasAllRegularHeroesSixStar) return false;
     if (id === 'dimensional-singularity' && !isDimensionalSingularityActive(now)) return false;
     return true;
   });

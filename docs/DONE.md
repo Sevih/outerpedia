@@ -4,6 +4,27 @@
 > ne garde que le « à faire »). Un item traité migre ici avec sa date ; le
 > détail vit dans git. Ne pas confondre avec le `CHANGELOG.md` racine (public).
 
+## 2026-08-03
+
+- **Progress tracker : 2 masquages pilotés par les réglages + pastille de
+  saison honnête** (item TODO du 03/08, demande Sevih).
+  (1) Pack premium Veronica → la tâche « ad stamina » disparaît : le pack
+  réclame la stamina des pubs automatiquement, plus rien à cocher. Même
+  mécanique que la tour élémentaire (filtre dans `activeTaskIds`), et la
+  description du réglage l'annonce (×5 langues).
+  (2) Nouveau réglage Game « tous les héros réguliers en 6★ »
+  (`hasAllRegularHeroesSixStar`) → la tâche doppelganger disparaît (elle ne
+  sert qu'à cette montée). Réglage additif : les réglages stockés d'avant
+  l'option se normalisent en `false` sans migration.
+  (3) Question Sevih « jusqu'au 4 août, inclus ou exclu ? » : `battleEnd` est
+  une borne EXCLUSIVE (minuit UTC — vérifié sur la saison 47 : fin
+  04/08 00:00Z, soit les ~14 h restantes en jeu le 03/08). La pastille
+  SeasonBadge affichait la date calendaire de la borne, promettant un jour de
+  trop ; elle affiche désormais le DERNIER JOUR JOUABLE (date de
+  battleEnd − 1 ms) — « jusqu'au 3 août », inclusif. Seul affichage de
+  `battleEnd` du site (vérifié) ; la détection auto du tracker comparait déjà
+  les bornes exactes, rien à corriger là.
+
 ## 2026-07-28
 
 - **Garde perso dans `promote` : un perso non intégré ne part JAMAIS avec un

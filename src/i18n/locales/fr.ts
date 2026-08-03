@@ -1146,10 +1146,13 @@ const fr: Record<TranslationKey, string> = {
   'progress.terminusSupportPackDesc': 'Augmente la limite quotidienne de Terminus Isle de 1 à 2',
   'progress.veronicaPremiumPack': 'Veronica Premium Pack',
   'progress.veronicaPremiumPackDesc':
-    'Augmente les limites quotidiennes de 3 à 4 pour Hypnotic Frog Hall et Ark Raid',
+    'Augmente les limites quotidiennes de 3 à 4 pour Hypnotic Frog Hall et Ark Raid ; la stamina des pubs est réclamée automatiquement (tâche masquée)',
   'progress.elementalTowerCompleted': 'Elemental Tower terminée',
   'progress.elementalTowerCompletedDesc':
     'Masquer Elemental Tower des tâches quotidiennes (contenu permanent qui ne se reset jamais)',
+  'progress.allRegularHeroesSixStar': 'Tous les héros réguliers en 6★',
+  'progress.allRegularHeroesSixStarDesc':
+    'Masquer Defeat Doppelganger des tâches quotidiennes (utile seulement pour monter les héros réguliers en 6★)',
   'progress.category.tasks': 'Tâches',
   'progress.category.craft': 'Craft',
   'progress.category.shop': 'Boutique',

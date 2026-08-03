@@ -120,6 +120,8 @@ export default async function ProgressTracker({ lang }: { lang: Lang }) {
     veronicaPremiumPackDesc: t('progress.veronicaPremiumPackDesc'),
     elementalTowerCompleted: t('progress.elementalTowerCompleted'),
     elementalTowerCompletedDesc: t('progress.elementalTowerCompletedDesc'),
+    allRegularHeroesSixStar: t('progress.allRegularHeroesSixStar'),
+    allRegularHeroesSixStarDesc: t('progress.allRegularHeroesSixStarDesc'),
     displayMode: t('progress.displayMode'),
     displayModeDesc: t('progress.displayModeDesc'),
     displayModeTabs: t('progress.displayModeTabs'),

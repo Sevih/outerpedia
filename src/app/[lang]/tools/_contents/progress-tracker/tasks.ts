@@ -72,6 +72,7 @@ export const DAILY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('dai
   // 3 → 4 avec le pack premium Veronica (réglage)
   'hypnotic-frog-hall': { category: 'task', permanent: true, maxCount: 3 },
   'ark-raid': { category: 'task', permanent: true, maxCount: 3 },
+  // Masquée par le réglage « tous les héros réguliers en 6★ »
   'defeat-doppelganger': { category: 'task', permanent: true, maxCount: 10 },
   'special-request-ecology': { category: 'task', permanent: true, maxCount: 6 },
   'special-request-identification': { category: 'task', permanent: true, maxCount: 6 },
@@ -79,7 +80,8 @@ export const DAILY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('dai
   'story-hard': { category: 'task', permanent: true, maxCount: 30 },
   // Masquée par le réglage « tour élémentaire terminée »
   'elemental-tower': { category: 'task', permanent: true, maxCount: 5 },
-  // 10 pubs × 18 stamina = 180 stamina/jour
+  // 10 pubs × 18 stamina = 180 stamina/jour — masquée avec le pack premium
+  // Veronica (la stamina est alors réclamée automatiquement, sans pub)
   'ad-stamina': { category: 'task', permanent: true, maxCount: 10 },
   // 2 entrées/jour, ouvert mercredi → samedi seulement (filtré à la synchro)
   'dimensional-singularity': { category: 'task', permanent: true, maxCount: 2 },

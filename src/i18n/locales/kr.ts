@@ -1099,10 +1099,14 @@ const kr: Record<TranslationKey, string> = {
   'progress.terminusSupportPack': '멸망의 섬 탐사 지원팩',
   'progress.terminusSupportPackDesc': '멸망의 섬 일일 한도를 1에서 2로 증가',
   'progress.veronicaPremiumPack': '베로니카 프리미엄 팩',
-  'progress.veronicaPremiumPackDesc': '최면 개구리의 전당, 방주 습격의 일일 한도를 3에서 4로 증가',
+  'progress.veronicaPremiumPackDesc':
+    '최면 개구리의 전당, 방주 습격의 일일 한도를 3에서 4로 증가. 광고 스태미나는 자동 수령 (작업 숨김)',
   'progress.elementalTowerCompleted': '원소의 탑 완료',
   'progress.elementalTowerCompletedDesc':
     '원소의 탑을 일일 작업에서 숨김 (리셋되지 않는 영구 콘텐츠)',
+  'progress.allRegularHeroesSixStar': '일반 영웅 전원 6성 달성',
+  'progress.allRegularHeroesSixStarDesc':
+    '도플갱어 토벌을 일일 작업에서 숨김 (일반 영웅 6성 육성에만 유용)',
   'progress.category.tasks': '할 일',
   'progress.category.craft': '제작',
   'progress.category.shop': '상점',
