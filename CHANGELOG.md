@@ -1,14 +1,27 @@
 # Changelog
 
-Tous les changements notables de ce projet sont documentés ici.
+> **Fichier GELÉ le 2026-08-03** (décision tracée dans docs/DONE.md — l'item
+> TODO « resync ou assouplir » est tranché : assouplir). Un journal par
+> versions ne colle pas au flux réel du projet — pas de tag, pas de release,
+> déploiement continu, commits directs sur `main` — et ce fichier avait
+> **422 commits de retard** au moment du gel, après deux resyncs déjà ratées.
+> Les journaux VIVANTS sont :
+>
+> - [docs/DONE.md](./docs/DONE.md) — le suivi curé, mis à jour DANS le commit
+>   de chaque changement (c'est LA convention réellement appliquée,
+>   cf. CONVENTIONS § Commits) ;
+> - `git log` — l'historique intégral, en conventional commits ;
+> - [outerpedia.com/changelog](https://outerpedia.com/changelog) — le journal
+>   PUBLIC du site, à destination des joueurs.
+>
+> Si le projet adopte un jour des versions taguées, ce fichier reprendra du
+> service, reconstruit du log git (le format des messages est verrouillé par
+> `pnpm commit` précisément pour ça).
 
-Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/),
-et le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
+L'instantané ci-dessous — conservé tel quel — résume les ~130 premiers commits,
+jusqu'au 2026-07-17.
 
 ## [Non publié]
-
-> Le dépôt n'a pas encore de tag git : tout l'historique (~130 commits) vit ici,
-> résumé par thème. Un découpage par version sera fait au premier tag.
 
 ### Ajouté
 

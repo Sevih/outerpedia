@@ -12,6 +12,7 @@
 ## Checklist
 
 - [ ] CI verte (lint + typecheck + tests + build)
-- [ ] `CHANGELOG.md` mis à jour (section « Non publié »)
+- [ ] `docs/DONE.md` mis à jour dans le commit + item `docs/TODO.md` retiré
+      (cf. CONVENTIONS § Commits — le CHANGELOG racine est gelé)
 - [ ] Rendu vérifié desktop **et** mobile (si UI)
 - [ ] Pas de clé i18n dupliquée / locales alignées (si i18n)

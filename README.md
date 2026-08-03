@@ -42,7 +42,8 @@ pas du code (voir [datagen/README.md](./datagen/README.md)).
 - [datagen/README.md](./datagen/README.md) — l'atelier de données (architecture, flux patch)
 - [docs/procedure/](./docs/procedure/) — installation, patch du jeu, ajout de contenu
 - [docs/TODO.md](./docs/TODO.md) · [docs/DONE.md](./docs/DONE.md) — le suivi du projet
-- [CHANGELOG.md](./CHANGELOG.md) — journal des changements
+- [CHANGELOG.md](./CHANGELOG.md) — instantané historique, gelé (le journal
+  vivant est docs/DONE.md + le log git)
 
 L'infrastructure du serveur (Docker, Caddy, secrets, sauvegardes) vit dans un
 repo d'Infrastructure-as-Code séparé, qui reste privé.

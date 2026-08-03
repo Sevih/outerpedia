@@ -7,7 +7,8 @@
 > garder ici en produirait une copie qui finirait par mentir.
 > État de référence : **26/07**.
 > Re-vérifier chaque item contre le code au moment de le traiter (le 26/07, cette
-> relecture a corrigé deux chiffres périmés — cf. les items SEO et CHANGELOG).
+> relecture a corrigé deux chiffres périmés — cf. l'item SEO ; l'autre, le
+> CHANGELOG, est tranché depuis : gelé, cf. DONE 03/08).
 
 ---
 
@@ -72,14 +73,6 @@
       d'URL absolue — zéro open redirect), `GET /s/[id]` → 302. Réutilise
       `src/lib/db.ts` ; sans BDD → dégradation lien long. Premier consommateur
       envisagé : bouton « partager » optionnel (Discord) sur les pages à état.
-
-## 📚 Docs à resynchroniser
-
-- [ ] **CHANGELOG.md** (dev, racine — PAS `/changelog` du site, livré le 20/07) :
-      le retard a encore grossi — **612 commits** au 26/07, contre 216 relevés le
-      17/07, et le fichier en est toujours à `## [Non publié]`. Resync, ou
-      assouplir la règle PR qui l'exige (la seconde option se défend : le journal
-      de suivi interne vit dans DONE.md, qui est à jour).
 
 ## 🤔 Décisions en attente (Sevih)
 

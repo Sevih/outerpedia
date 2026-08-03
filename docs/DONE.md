@@ -2,9 +2,27 @@
 
 > Pendant « fait » de [TODO.md](./TODO.md) (décision Sevih 2026-07-17 : le TODO
 > ne garde que le « à faire »). Un item traité migre ici avec sa date ; le
-> détail vit dans git. Ne pas confondre avec le `CHANGELOG.md` racine (public).
+> détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
+> ce fichier et le log git SONT le journal du projet.
 
 ## 2026-08-03
+
+- **CHANGELOG.md racine : GELÉ — l'item « resync ou assouplir » est tranché,
+  assouplir.** Le retard mesuré au moment du gel : **422 commits** depuis la
+  dernière écriture (17/07), après 216 relevés le 17/07 et 612 le 26/07 — la
+  resync avait déjà raté deux fois, et re-raterait : la règle qui devait
+  l'alimenter (checkbox du template PR) ne s'applique presque jamais, `main`
+  recevant des commits directs par convention. Le journal que la convention
+  APPLIQUE réellement — DONE.md dans le commit de chaque changement — est à
+  jour, lui. Un journal par versions ne colle pas non plus au flux (pas de
+  tag, pas de release, déploiement continu).
+  FAIT : en-tête de gel dans CHANGELOG.md (pointe vers DONE.md, le log git et
+  le /changelog public du site), l'instantané des ~130 premiers commits
+  conservé tel quel ; checkbox du template PR remplacée par « DONE.md mis à
+  jour dans le commit » ; CONVENTIONS (§ Commits et § Branches & PR) et README
+  réalignés. RÉVERSIBLE : au premier tag, le fichier se reconstruit du log git
+  — c'est pour ça que `pnpm commit` verrouille le format des messages (le
+  commentaire de scripts/commit.ts le dit déjà, inchangé).
 
 - **Gear reco, deux retouches d'affichage** (demande Sevih, validées à l'écran).
   (1) La barre de PRIORITÉ DES SUBSTATS porte l'icône de la stat avant son nom,

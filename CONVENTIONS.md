@@ -20,7 +20,10 @@ fix(i18n): correct broken key in jp locale
 chore(deps): bump next to 16.2.0
 ```
 
-Un commit = un changement cohérent. Les messages alimentent le CHANGELOG.
+Un commit = un changement cohérent. Les messages sont, avec
+[docs/DONE.md](./docs/DONE.md), le journal du projet — le `CHANGELOG.md` racine
+est GELÉ (cf. son en-tête) ; s'il reprend un jour du service, il se
+reconstruira de ce log, d'où le format verrouillé.
 
 **Stager par chemins explicites** — jamais `git add -A` ni `git add <dossier>` :
 un dossier entier embarque le travail en cours d'à côté. Et jamais de fichier à
@@ -38,7 +41,8 @@ l'entrée DONE ne cite pas le hash du commit, inconnu au moment de l'écrire.
 - Pour une contribution extérieure ou un gros chantier : une branche
   `type/sujet` (ex. `feat/admin-auth`), une PR par sujet, la CI verte
   (lint + typecheck + tests + build) avant merge.
-- Mettre à jour le `CHANGELOG.md` (section « Non publié »).
+- Mettre à jour `docs/DONE.md` dans le commit (cf. § Commits) — pas le
+  `CHANGELOG.md` racine, gelé.
 
 ## Style de code
 
