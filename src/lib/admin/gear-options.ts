@@ -44,17 +44,45 @@ function toOptions(data: EquipJson): GearOption[] {
   return [...map.values()].sort((a, b) => a.label.localeCompare(b.label));
 }
 
-/** Options depuis les familles : id canonique, icône 6★, classe, main stats. */
+/**
+ * Options depuis les familles : id canonique, icône 6★, classe, main stats.
+ *
+ * ⚠ UNE FAMILLE MULTI-CLASSES DONNE UNE OPTION PAR CLASSE (Briareos, Gorgon : 5
+ * objets DISTINCTS en jeu, un par classe). Une option unique portait l'id de
+ * TÊTE de famille — le striker — tout en annonçant les 5 classes : elle passait
+ * donc le filtre de classe de l'éditeur, et choisir « Briareos's Ambition » sur
+ * un mage enregistrait l'accessoire du STRIKER (signalé par Sevih le 26/07 ;
+ * `memberClassVariant` prévenait déjà que « la tête de famille ne représente pas
+ * les vues qui référencent un id précis », dont le build curé).
+ *
+ * Chaque option porte donc l'id du membre de SA classe, son icône, sa restriction
+ * de classe SEULE — le filtre ne laisse plus passer que la bonne — et ses propres
+ * main stats, chaque classe ayant son pool.
+ */
 function familyOptions(families: GearFamily[]): GearOption[] {
   return families
     .filter((f) => f.name.en)
-    .map((f) => ({
-      id: f.id,
-      label: f.name.en,
-      icon: f.icon, // 6★ (top de famille)
-      classLimits: f.classLimits,
-      mainStats: f.mainStats,
-    }))
+    .flatMap((f): GearOption[] =>
+      f.classPassives?.length
+        ? f.classPassives.map((v) => ({
+            id: v.id,
+            // Suffixe de classe explicite : sans lui, cinq lignes identiques dans
+            // le select, impossible de savoir laquelle on prend.
+            label: `${f.name.en} [${v.classLimit}]`,
+            icon: v.icon,
+            classLimits: [v.classLimit],
+            mainStats: v.mainStats,
+          }))
+        : [
+            {
+              id: f.id,
+              label: f.name.en,
+              icon: f.icon, // 6★ (top de famille)
+              classLimits: f.classLimits,
+              mainStats: f.mainStats,
+            },
+          ],
+    )
     .sort((a, b) => a.label.localeCompare(b.label));
 }
 

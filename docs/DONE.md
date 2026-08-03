@@ -6,6 +6,36 @@
 
 ## 2026-08-03
 
+- **Gear reco : le sélecteur ne propose plus l'objet d'une AUTRE classe**
+  (signalé par Sevih) — sur un mage, choisir « Briareos's Ambition » enregistrait
+  l'accessoire du STRIKER.
+  CAUSE : quatre familles sont multi-classes (Briareos's Ambition / Recklessness,
+  Gorgon's Vanity / Wrath), soit cinq objets DISTINCTS en jeu, un par classe.
+  `familyOptions` n'en produisait qu'UNE option, portant l'id de TÊTE de famille
+  (le striker) tout en annonçant les cinq classes : elle passait donc le filtre de
+  classe de l'éditeur pour n'importe quel perso, et le select affichait un libellé
+  sans suffixe — cinq objets réduits à une ligne indiscernable.
+  Le modèle SAVAIT déjà : `memberClassVariant` prévient noir sur blanc que « la
+  tête de famille ne représente pas les vues qui référencent un id précis (build
+  curé, outils d'usage) ». Le constructeur d'options ignorait purement et
+  simplement `classPassives`.
+  CORRIGÉ À LA SOURCE. `classPassives` porte désormais l'id canonique du membre de
+  chaque classe (le plus petit numériquement = l'objet de base, pas une copie
+  pré-roulée `93xxx` de la Singularité — déterministe quel que soit l'ordre de
+  `families.json`). `familyOptions` éclate alors une famille multi-classes en une
+  option PAR classe : le bon id, son icône, sa restriction de classe SEULE — le
+  filtre ne laisse plus passer que la bonne — et ses propres main stats, chaque
+  classe ayant son pool (l'union de la famille était affichée jusqu'ici).
+  MESURÉ AVANT DE CORRIGER : les 63 références existantes à un id de tête sont
+  TOUTES sur des persos striker (7 persos), donc aucune donnée à réparer. NB : ma
+  première mesure disait « 0 incohérente » parce que la jointure était fausse —
+  `gear-reco.json` est keyé par ID de perso et les persos n'ont pas de `slug`,
+  donc le lookup rendait `undefined` en silence. Refaite proprement.
+  TESTS : cinq cas sur la donnée committée, dont l'invariant qui manquait — si
+  l'objet pointé par une option est réservé à une classe, l'option doit annoncer
+  CETTE classe et elle seule. C'est lui qui aurait attrapé le bug, et il attrapera
+  la prochaine famille multi-classes ajoutée par un patch. 1259 tests verts.
+
 - **Progress tracker : 2 masquages pilotés par les réglages + pastille de
   saison honnête** (item TODO du 03/08, demande Sevih).
   (1) Pack premium Veronica → la tâche « ad stamina » disparaît : le pack

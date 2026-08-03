@@ -422,6 +422,13 @@ export interface GearFamily {
    */
   classPassives?: {
     classLimit: string;
+    /**
+     * Id du membre de CETTE classe — le seul que doive référencer une vue qui
+     * pointe un objet précis (build curé, sélecteurs admin). `id`/`icon`/`slug`
+     * de la famille désignent la TÊTE, donc le striker : les utiliser pour un
+     * mage donne l'objet d'une autre classe.
+     */
+    id: string;
     slug: string;
     icon: string;
     passives: PassiveRef[];
@@ -497,7 +504,7 @@ function materializeFamilies(
       // afficher l'union de famille.
       const byClass = new Map<
         string,
-        { icon: string; passives: PassiveRef[]; groups: string[][] }
+        { id: string; icon: string; passives: PassiveRef[]; groups: string[][] }
       >();
       for (const id of topIds) {
         const m = table[id];
@@ -505,8 +512,14 @@ function materializeFamilies(
         if (!cl) continue;
         const groups = 'options' in m ? (m as SpecialItem).options : (m as GearItem).main;
         const e = byClass.get(cl);
-        if (e) e.groups.push(groups);
-        else byClass.set(cl, { icon: m.icon, passives: m.passives, groups: [groups] });
+        // Id canonique de la classe = le PLUS PETIT numériquement, donc l'objet
+        // de base (1796) plutôt qu'une copie pré-roulée de la Singularité
+        // (93xxx). Même règle « premier id numérique gagne » qu'ailleurs, et
+        // surtout DÉTERMINISTE quel que soit l'ordre de `families.json`.
+        if (e) {
+          e.groups.push(groups);
+          if (Number(id) < Number(e.id)) e.id = id;
+        } else byClass.set(cl, { id, icon: m.icon, passives: m.passives, groups: [groups] });
       }
       const sig = (ps: PassiveRef[]) => ps.map((p) => p.id).join(',');
       const classPassives =
@@ -518,6 +531,7 @@ function materializeFamilies(
               const rolledCl = v.groups.filter((gs) => gs.some((g) => (POOLS[g] ?? []).length > 1));
               return {
                 classLimit,
+                id: v.id,
                 // Slug de LA variante (« briareoss-recklessness-striker ») — les
                 // URLs V2 avaient le suffixe dans le nom, les liens survivent.
                 slug: slugifyEquipment(withClassSuffix(top.name, classLimit).en),
