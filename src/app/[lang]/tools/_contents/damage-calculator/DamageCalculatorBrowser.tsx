@@ -807,11 +807,13 @@ const EMPTY_ALLY: AllyPick = {
  * Tout est REVALIDÉ à l'hydratation (ids inconnus écartés, nombres bornés).
  */
 interface UrlState {
-  /** Attaquant + palier de transcendance + affinité (0..5) + niveaux de skill. */
+  /** Attaquant + palier de transcendance + affinité (0..5) + niveaux de skill
+   *  + niveau du perso (1..120, omis à 120). */
   a?: string;
   x?: number;
   af?: number;
   k?: Record<string, number>;
+  lv?: number;
   /** Arme / accessoire (slug + breakthrough). */
   w?: string;
   y?: number;
@@ -883,6 +885,10 @@ export function DamageCalculatorBrowser({
   // Affinité (Trust) 0..5 — buffs passifs plats ABSENTS de la fiche affichée
   // (canal buffValue, vérifié binaire 27/07/2026) : le moteur les ajoute.
   const [affinity, setAffinity] = useState(0);
+  // Niveau du perso (1..120, défaut 120) : le terme Codex de la reconstruction
+  // fiche → combat (spec formule § 16.1, `sheetToCombatStat`) exige la stat de
+  // BASE, donc le niveau (demande Sevih 03/08/2026).
+  const [level, setLevel] = useState(120);
   const [statVals, setStatVals] = useState<Record<string, string>>({});
   const [quirkLvls, setQuirkLvls] = useStoredState(QUIRKS_STORE);
   const [codexLvl, setCodexLvl] = useStoredState(CODEX_STORE);
@@ -966,6 +972,7 @@ export function DamageCalculatorBrowser({
     setAttackerId(null);
     setTranscend(0);
     setAffinity(0);
+    setLevel(120);
     setSkillLvls({});
     setSetPicks([]);
     setWeaponSlug(null);
@@ -1024,6 +1031,7 @@ export function DamageCalculatorBrowser({
         const maxIdx = Math.max(char.transcend.length - 1, 0);
         setTranscend(typeof st.x === 'number' ? Math.min(Math.max(st.x, 0), maxIdx) : maxIdx);
         if (typeof st.af === 'number') setAffinity(Math.min(Math.max(st.af, 0), 5));
+        if (typeof st.lv === 'number') setLevel(Math.min(Math.max(st.lv, 1), 120));
         const lvls: Record<string, number> = {};
         for (const row of kits[char.id] ?? []) {
           const v = st.k?.[row.slot];
@@ -1101,6 +1109,7 @@ export function DamageCalculatorBrowser({
       z.a = attackerId;
       z.x = transcend;
       if (affinity) z.af = affinity;
+      if (level !== 120) z.lv = level;
       z.k = skillLvls;
       if (weaponSlug) {
         z.w = weaponSlug;
@@ -1178,6 +1187,7 @@ export function DamageCalculatorBrowser({
     attacker: attacker
       ? {
           id: attacker.id,
+          level,
           transcend: attacker.transcend[transcend]?.label ?? null,
           affinity,
           skills: skillLvls,
@@ -1381,6 +1391,26 @@ export function DamageCalculatorBrowser({
                   ) : undefined
                 }
               />
+
+              {/* Niveau (1..120, défaut 120) : requis par le terme Codex de la
+                reconstruction fiche → combat (spec § 16.1 — Sevih 03/08/2026). */}
+              {attacker && (
+                <div className="flex items-center gap-2">
+                  <span className="text-content-subtle font-mono text-[9px] tracking-wide uppercase">
+                    {L.target.lv}
+                  </span>
+                  <input
+                    type="range"
+                    min={1}
+                    max={120}
+                    value={level}
+                    onChange={(e) => setLevel(Number(e.target.value))}
+                    className="h-3 min-w-0 flex-1 cursor-pointer accent-sky-500"
+                    aria-label={`${L.target.lv} ${level}`}
+                  />
+                  <span className="text-content font-mono text-xs tabular-nums">{level}</span>
+                </div>
+              )}
 
               {/* Affinité (Trust) 0..5 : buffs passifs plats ABSENTS de la
                 fiche affichée — le moteur les ajoutera (binaire 27/07/2026). */}
