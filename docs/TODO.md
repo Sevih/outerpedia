@@ -59,13 +59,11 @@
 
 ## ⚙️ Config / infra
 
-- [ ] **Raccourcisseur interne `/s/[id]`** (idée actée 21/07, non prioritaire —
-      la barre d'adresse en `?z=` compact couvre le besoin réel de partage) :
-      table `short_links` (id = hash du chemin, 12 chars, upsert idempotent),
-      `POST /api/shortlink { path }` validé chemin INTERNE seulement (jamais
-      d'URL absolue — zéro open redirect), `GET /s/[id]` → 302. Réutilise
-      `src/lib/db.ts` ; sans BDD → dégradation lien long. Premier consommateur
-      envisagé : bouton « partager » optionnel (Discord) sur les pages à état.
+- [ ] **Bouton « partager » (Discord) sur les pages à état** — premier
+      consommateur du raccourcisseur `/s/[id]` (livré 03/08 : `POST
+    /api/shortlink { path }` → `{ id }`, `GET /s/[id]` → 302, dégradation
+      lien long sans BDD). Optionnel, à dessiner : où le poser (tier-list
+      maker ? progress tracker ?) et quel rendu côté Discord.
 
 ## 🤔 Décisions en attente (Sevih)
 

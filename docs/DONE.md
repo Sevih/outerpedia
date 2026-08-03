@@ -7,6 +7,23 @@
 
 ## 2026-08-03
 
+- **Raccourcisseur interne `/s/[id]` livré** (idée actée 21/07, demande
+  Sevih) : `POST /api/shortlink { path }` → `{ id }` (12 chars, hash sha256
+  du chemin — même chemin ⇒ même id, upsert idempotent) et `GET /s/[id]` →
+  302, calqués sur le partage tier-list (connexion éphémère `src/lib/db.ts`,
+  `ensureTable` mémoïsé, 503 sans BDD → le client garde le lien long `?z=`).
+  SÉCURITÉ : `isInternalPath` n'accepte que des chemins internes ASCII
+  imprimable — refuse URL absolue, `//` protocol-relative, `\` (normalisé en
+  `/` par les navigateurs), espaces/contrôles ; testé au niveau lib (6 tests,
+  chaque trou serait un open redirect). PIÈGE ÉVITÉ : le proxy i18n aurait
+  réécrit `/s/xyz` en `/{lang}/s/xyz` (route jamais atteinte) — `/s/` rejoint
+  les exclusions ; la langue du lien partagé est portée par le SOUS-DOMAINE,
+  le chemin stocké reste sans préfixe. Au passage : le rate-limiter par IP de
+  la route tier-list est extrait en factory `src/lib/rate-limit.ts` (un quota
+  par route), consommé par les deux POST. La table `short_links` se crée au
+  premier appel. Reste au TODO : le bouton « partager » (Discord), premier
+  consommateur envisagé.
+
 - **pnpm épinglé 11.13.0 → 11.13.1 : la CI du commit SEO (run 30812484820)
   échouait dès `pnpm/action-setup`.** La release 11.13.0 est cassée côté npm
   (`@pnpm/exe` publié sans binaire) et pnpm la refuse désormais à

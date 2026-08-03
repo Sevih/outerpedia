@@ -1,14 +1,14 @@
 import { NextResponse } from 'next/server';
 import { getDbConnection } from '@/lib/db';
 import { createRateLimiter, clientIp } from '@/lib/rate-limit';
-import { ensureTable, payloadId, MAX_PAYLOAD } from './_store';
+import { ensureTable, isInternalPath, pathId, MAX_PATH } from '@/lib/short-links';
 
 export const dynamic = 'force-dynamic';
 
 /**
- * POST { z } → stocke la tier-list encodée, répond { id } (id court à mettre
- * dans `?s=`). Portage V2. Sans BDD configurée (dev) : 503, le client garde
- * son lien long `?z=` autoporté.
+ * POST { path } → stocke le chemin INTERNE, répond { id } (à mettre dans
+ * `/s/[id]`). Sans BDD configurée (dev) : 503, le client garde son lien long
+ * `?z=` autoporté — même dégradation que le partage tier-list.
  */
 
 const rateLimited = createRateLimiter();
@@ -18,26 +18,25 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
   }
 
-  let z: unknown;
+  let path: unknown;
   try {
-    z = ((await request.json()) as { z?: unknown })?.z;
+    path = ((await request.json()) as { path?: unknown })?.path;
   } catch {
     return NextResponse.json({ error: 'bad_request' }, { status: 400 });
   }
-  // `z[0] === '1'` : préfixe de version du format d'encodage (cf. share-codec).
-  if (typeof z !== 'string' || z.length < 2 || z.length > MAX_PAYLOAD || z[0] !== '1') {
-    return NextResponse.json({ error: 'bad_payload' }, { status: 400 });
+  if (typeof path !== 'string' || path.length > MAX_PATH || !isInternalPath(path)) {
+    return NextResponse.json({ error: 'bad_path' }, { status: 400 });
   }
 
   const conn = await getDbConnection();
   if (!conn) return NextResponse.json({ error: 'storage_unavailable' }, { status: 503 });
   try {
     await ensureTable(conn);
-    const id = payloadId(z);
-    // Même payload ⇒ même id ; l'upsert rend l'appel idempotent.
+    const id = pathId(path);
+    // Même chemin ⇒ même id ; l'upsert rend l'appel idempotent.
     await conn.execute(
-      'INSERT INTO tier_lists (id, payload) VALUES (?, ?) ON DUPLICATE KEY UPDATE id = id',
-      [id, z],
+      'INSERT INTO short_links (id, path) VALUES (?, ?) ON DUPLICATE KEY UPDATE id = id',
+      [id, path],
     );
     return NextResponse.json({ id });
   } catch {

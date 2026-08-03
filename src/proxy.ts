@@ -27,6 +27,9 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Assets statiques, API, outils locaux (admin/dev) : on ne touche pas.
+  // `/s/` : le raccourcisseur (src/app/s/[id]) vit à la RACINE, hors langue —
+  // le chemin stocké est sans préfixe, c'est le sous-domaine qui porte la
+  // langue. Réécrit en /{lang}/s/…, la route ne serait jamais atteinte.
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
@@ -35,7 +38,8 @@ export function proxy(request: NextRequest) {
     pathname.startsWith('/images') ||
     pathname.startsWith('/icons') ||
     pathname.startsWith('/audio') ||
-    pathname.startsWith('/feed')
+    pathname.startsWith('/feed') ||
+    pathname.startsWith('/s/')
   ) {
     return NextResponse.next();
   }
