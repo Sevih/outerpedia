@@ -6,3 +6,5 @@ export * from './types';
 export * from './formula';
 export * from './recovery';
 export * from './item';
+export * from './sheet';
+export * from './aggregate';

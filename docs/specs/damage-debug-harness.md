@@ -55,7 +55,11 @@ Règles :
 ## 3. Table attendu / calculé / en jeu
 
 Le juge de paix n'est pas la spec, c'est le JEU. Chaque scénario vérifié en jeu
-devient un **fixture** :
+devient un **fixture** — et il en faut **N, pas un témoin unique** (Sevih
+03/08) : au câblage du moteur, c'est le CROISEMENT de plusieurs scénarios qui
+met le doigt sur la cause d'un écart (un scénario sans équipement isole la
+croissance, un avec crit isole la couche crit, etc.). On en capture autant que
+nécessaire, elles s'accumulent dans le repo :
 
 ```ts
 interface DamageFixture {
@@ -100,13 +104,13 @@ Les fixtures ne servent pas qu'à l'œil : un test vitest les rejoue SANS UI.
   `skip` avec la référence — il devient le test d'acceptation du jour où on
   tranche.
 
-## 5. Décisions à trancher (Sevih)
+## 5. Décisions (statut au 03/08/2026)
 
-| Question                                                          | Proposition                                                                                                                               |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| i18n du harnais (règle repo : tout libellé passe par les locales) | Exemption explicite : le harnais est dev-only, libellés en dur en anglais (le titre « Debug » de la carte reste localisé, il existe déjà) |
-| Tolérance par défaut                                              | 0.5 % relatif, surchargable par fixture                                                                                                   |
-| Les fixtures survivent-elles à un patch de jeu ?                  | Oui — `gameVersion` les date ; un patch qui change les tables les invalide explicitement, pas silencieusement                             |
+| Question                                                          | Statut                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| i18n du harnais (règle repo : tout libellé passe par les locales) | ✅ Exemption actée et implémentée (27/07) : harnais dev-only, libellés en dur (le titre « Debug » de la carte reste localisé)                                                                                                                                                                                                                                                                                                             |
+| Tolérance par défaut                                              | ✅ TRANCHÉE (Sevih 03/08) : 0.5 % relatif, surchargable par fixture. C'est un réglage de MISE AU POINT : l'objectif à terme est 0 — on resserre au fil de la validation, on ne s'installe pas dans l'écart                                                                                                                                                                                                                                |
+| Les fixtures survivent-elles à un patch de jeu ?                  | ✅ TRANCHÉE (Sevih 03/08) : un patch n'invalide RIEN d'office — « pourquoi invalider si c'est toujours bon ? ». Le test anti-régression continue de rejouer TOUTES les fixtures contre les tables courantes : celle qui reste verte est toujours un témoin valide ; celle qui passe rouge avec un `gameVersion` ancien s'affiche « à revérifier en jeu » (badge), PAS « moteur cassé ». C'est le test lui-même qui départage, pas la date |
 
 ## 6. Prompt de session — design du harnais (à coller tel quel)
 

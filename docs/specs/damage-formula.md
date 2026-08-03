@@ -334,6 +334,14 @@ hitRecovery = FloorToInt( (float32)(Defender.Data.HitHPRecovery × dmg) × 0.001
 
 ## 9. Agrégation des buffs de taux (CCharacterBattle)
 
+> RÉALISÉ (03/08/2026) : `src/lib/damage/aggregate.ts` — les familles des
+> tables § 9.1/9.2/9.3 (enums `BT_*` réels de BuffTemplet), la valeur
+> effective § 14.1 (`value × stacks`), les canaux `BT_STAT` par stat pour
+> l'identité § 16.1, et les drapeaux § 6/§ 7/§ 10.1 (marking, invincible,
+> élément forcé/enchant, enemy-team-decrease, swap d'attaque). Contexte
+> EXPLICITE : une famille sans son contexte contribue 0. `CheckAvailable`
+> (§ 12) n'est pas émulé — l'UI ne propose que des buffs actifs.
+
 ### 9.1 FindBuffAdditionalDamage (0x26DD9B4) — buffs de l'ATTAQUANT, somme (‰)
 
 Parcourt `m_BuffList` de l'attaquant ; chaque buff passe `CheckAvailable` (conditions
@@ -767,6 +775,13 @@ de : la fiche saisie, la stat de base recalculée, le niveau de Codex, le palier
 d'affinité, et les buffs du scénario. (Re-vérification du 27/07/2026 : la
 formule § 3 a été re-dérivée indépendamment depuis `CalcFinalStat.asm` —
 conforme, y compris le clamp `bic` et les troncatures vers zéro.)
+
+> RÉALISÉ (03/08/2026) : `src/lib/damage/sheet.ts` (`sheetToCombatStat`,
+> `archiveTerm`, `sheetToCombatStatAtLevel`) — l'identité est PROUVÉE par test
+> de propriété (`sheet.test.ts` : 500 configurations de couches balayées, la
+> reconstruction est EXACTEMENT `calcFinalStat`, pas une approximation).
+> NB pour l'amont : le terme Codex exige la stat de BASE, donc le NIVEAU de
+> l'attaquant — l'UI ne le demande pas encore (défaut 120 à prévoir).
 
 ## 17. Agrégation des couches — CCharacterData.CalcStat (0x27E2870) et satellites
 
