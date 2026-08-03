@@ -6,6 +6,11 @@ on:
     paths-ignore: ['**.md']
   pull_request:
     branches: [main]
+  # Relance MANUELLE (build + deploy compris). Le cas qui l'a imposée
+  # (03/08) : un run échoue avant deploy, le commit de fix ne touche que du
+  # .md → `paths-ignore` ne déclenche RIEN, et re-lancer le run échoué
+  # rejouerait l'ancien commit — la prod restait coincée sans levier.
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
@@ -52,7 +57,7 @@ jobs:
   # Build de l'image Docker + publication sur GHCR (uniquement sur push main).
   docker:
     needs: check
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -116,7 +121,7 @@ jobs:
   # Déploiement automatique sur le VPS (après build de l'image).
   deploy:
     needs: docker
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     # Deux pushes rapprochés = deux deploys simultanés sur le même VPS. Vécu le
     # 30/07 (runs 30560351230/30560401933) : pendant le recreate du premier,

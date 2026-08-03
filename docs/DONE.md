@@ -7,6 +7,20 @@
 
 ## 2026-08-03
 
+- **CI rouge ×2 sur le commit du raccourcisseur — deux causes emboîtées,
+  toutes deux réglées.** (1) Prettier NE CONVERGE PAS sur un code inline
+  coupé en fin de ligne dans un item de liste Markdown : chaque `--write`
+  déplace l'indentation de la ligne de suite sans jamais stabiliser — le
+  pre-commit « formate » et commite de bonne foi, le `--check` de la CI
+  refuse (run 30813507816). Fix : reformuler pour ne jamais couper un code
+  inline ; vérifié `--write` idempotent + `--check` vert sur tout le repo.
+  RÈGLE D'ÉCRITURE à retenir pour tous les .md du repo. (2) Le commit de fix
+  ne touchait que du .md → `paths-ignore: ['**.md']` n'a RIEN déclenché, et
+  re-lancer le run échoué aurait rejoué l'ancien commit : la prod restait
+  coincée sans levier. Fix : `workflow_dispatch:` ajouté au workflow (les
+  jobs docker/deploy l'acceptent), relance manuelle possible depuis
+  l'onglet Actions.
+
 - **Raccourcisseur interne `/s/[id]` livré** (idée actée 21/07, demande
   Sevih) : `POST /api/shortlink { path }` → `{ id }` (12 chars, hash sha256
   du chemin — même chemin ⇒ même id, upsert idempotent) et `GET /s/[id]` →
