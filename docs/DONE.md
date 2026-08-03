@@ -7,6 +7,15 @@
 
 ## 2026-08-03
 
+- **pnpm épinglé 11.13.0 → 11.13.1 : la CI du commit SEO (run 30812484820)
+  échouait dès `pnpm/action-setup`.** La release 11.13.0 est cassée côté npm
+  (`@pnpm/exe` publié sans binaire) et pnpm la refuse désormais à
+  l'installation — le poste local, qui l'avait déjà, continuait de tourner,
+  d'où une CI rouge sans aucun rapport avec le contenu du commit. 11.13.1 est
+  la republication réparée de la même version. Les 4 points d'épingle
+  alignés : `packageManager` (source de vérité), Dockerfile (pin répété
+  assumé), installation.md, init.ps1.
+
 - **Lot SEO éditorial : 53 descriptions de guides dédupliquées + titles des
   pages générées enrichis** (items Sitebulb du 20/07, demande Sevih).
   INVENTAIRE D'ABORD, et il corrige le TODO : les familles réellement

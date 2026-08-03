@@ -161,12 +161,12 @@ if ($SkipToolchain) {
   Run 'corepack' @('enable')
   # corepack fourni avec Node peut avoir des clés de signature npm périmées
   # (« Cannot find matching keyid ») : on tente, et on répare via corepack@latest.
-  & corepack prepare pnpm@11.13.0 --activate
+  & corepack prepare pnpm@11.13.1 --activate
   if ($LASTEXITCODE -ne 0) {
     Warn "corepack prepare a échoué (clés npm périmées ?) — mise à jour de corepack."
     Run 'npm' @('install', '-g', 'corepack@latest')
     Run 'corepack' @('enable')
-    Run 'corepack' @('prepare', 'pnpm@11.13.0', '--activate')
+    Run 'corepack' @('prepare', 'pnpm@11.13.1', '--activate')
   }
   Info "pnpm $(pnpm -v)."
 
