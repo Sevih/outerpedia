@@ -27,6 +27,22 @@ Les tirages n'existent pas dans le rapport : chaque aléa (crit, esquive,
 résistance) devient une **branche avec sa probabilité**. C'est pour ça que le
 moteur prend des `rolls` injectés.
 
+> RÉALISÉ (03/08/2026) : `src/lib/damage/report.ts` — `buildSkillReport`
+> produit, par ÉTAT du skill (une chaîne de hits = une sous-ligne : base,
+> burst 1/2/3, upgrade — décision § 5.4, regroupement `groupHitsByChain` en
+> ordre de première apparition, sans deviner l'état « de base »), les branches
+> à probabilité > 0 (formule § 4 exacte, esquive tirée avant crit), chaque hit
+> dans l'ordre du binaire (multi-hit déplié § 8.1, rattrapage du dernier hit
+> § 8.3, vampirique/récup § 8.4 sur les dégâts AVANT rattrapage — ordre du
+> binaire), l'espérance pondérée, les dégâts de jauge § 11 et le taux § 7 par
+> branche via le chemin « additive » de `checkDamageRate` (résultat fixé,
+> même arithmétique, aucun tirage forgé). `buildDotLine` compose § 11 + § 5
+> (tick + proba de pose CreateRate × non-résistance). Restent HORS de ce
+> module (couche de branchement UI, à venir) : la liaison skill → buffs DOT /
+> soins / shields (`recovery.ts` porte déjà les formules § 14) et le partage
+> de dégâts côté cible (`calcCharacterSharedDamage` § 11, dispo dans le
+> moteur).
+
 ## 2. La chaîne de calcul (déjà couverte par le moteur)
 
 ```text
