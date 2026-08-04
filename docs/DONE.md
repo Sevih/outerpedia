@@ -7,6 +7,13 @@
 
 ## 2026-08-04
 
+- **Ranking helper : « Demiurge Demiurge Astei » — préfixe doublé** (capture
+  Sevih). Le contrat du site : `characterDisplayName` rend le nom COMPLET
+  (préfixe inclus) et les composants qui affichent le préfixe à part le
+  RETRANCHENT du nom (`CharacterCard` fait `name.replace(prefix, '')`).
+  L'outil préfixait une seconde fois. Fix : champ `prefix` retiré de la
+  donnée et des rendus, `name` seul partout.
+
 - **Ranking helper : retours Discord (Shiraen, Arabyss) après mise en ligne.**
   (1) BUG : en modes EE, éteindre toutes les chips d'effets pour ne comparer
   qu'en structurel (« Same role » seul) VIDAIT la cohorte — le filtre

@@ -1,6 +1,5 @@
 import {
   characterDisplayName,
-  characterNamePrefix,
   characterSearchNames,
   getCharacterListItems,
   slugForId,
@@ -43,8 +42,8 @@ export interface RankingHelperEE {
 export interface RankingHelperRow {
   id: string;
   slug: string;
+  /** Nom AFFICHABLE complet (préfixe « Demiurge »/« Core Fusion » inclus). */
   name: string;
-  prefix?: string;
   searchNames: string[];
   element: string;
   class: string;
@@ -68,7 +67,6 @@ export function rankingHelperRows(): RankingHelperRow[] {
       id: c.id,
       slug: slugForId(c.id) ?? c.id,
       name: characterDisplayName(c, 'en'),
-      prefix: characterNamePrefix(c, 'en') ?? undefined,
       searchNames: characterSearchNames(c, aliases[c.id]),
       element: c.element,
       class: c.class,

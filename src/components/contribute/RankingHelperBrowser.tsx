@@ -150,10 +150,7 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
                   <span className="w-7 shrink-0">
                     <CharacterPortrait id={r.id} name={r.name} size={28} showName={false} />
                   </span>
-                  <span className="text-content-strong">
-                    {r.prefix ? `${r.prefix} ` : ''}
-                    {r.name}
-                  </span>
+                  <span className="text-content-strong">{r.name}</span>
                 </button>
               </li>
             ))}
@@ -333,7 +330,6 @@ function HeroSheet({
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-2">
             <h2 className="text-content-strong text-xl font-semibold">
-              {hero.prefix ? `${hero.prefix} ` : ''}
               {hero.name}{' '}
               {/* Nouvel onglet : ouvrir la fiche ne doit pas perdre l'état de
                   l'outil (perso, mode, filtres) — suggestion Arabyss 04/08. */}
