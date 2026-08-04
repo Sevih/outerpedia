@@ -22,7 +22,12 @@ const MODES: Array<{ key: RankMode; label: string }> = [
   { key: 'eePlus10', label: 'EE (+10)' },
 ];
 
-/** Critères de cohorte combinables (ET). Par défaut rôle + élément. */
+/**
+ * Critères de cohorte combinables (ET), pour PvE/PvP seulement. Par défaut
+ * rôle + élément. Les modes EE comparent par EFFETS SIMILAIRES (chips de la
+ * carte EE) : un EE de « combat readiness » se discute face aux autres EE de
+ * combat readiness, pas face aux porteurs du même élément.
+ */
 const CRITERIA = [
   { key: 'role', label: 'Same role' },
   { key: 'element', label: 'Same element' },
@@ -35,6 +40,11 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [mode, setMode] = useState<RankMode>('pve');
   const [criteria, setCriteria] = useState<Set<Criterion>>(new Set(['role', 'element']));
+  // Chips d'effet DÉSACTIVÉES (modes EE) — vide à chaque changement de perso :
+  // par défaut, tous les effets de l'EE choisi comptent.
+  const [disabledRefs, setDisabledRefs] = useState<Set<string>>(new Set());
+
+  const isEeMode = mode === 'eeBase' || mode === 'eePlus10';
 
   const byId = useMemo(() => new Map(rows.map((r) => [r.id, r])), [rows]);
   const selected = selectedId ? (byId.get(selectedId) ?? null) : null;
@@ -56,23 +66,37 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
       return next;
     });
 
-  // Homologues : tous les persos RANGÉS dans le mode courant qui matchent
-  // chaque critère actif (un critère sans valeur côté perso choisi est ignoré
-  // plutôt que de vider la cohorte — un perso sans rôle curé arrive).
+  // Refs d'effet ACTIVES du perso choisi (modes EE).
+  const activeRefs = useMemo(() => {
+    const chips = selected?.ee?.chips ?? [];
+    return new Set(chips.map((c) => c.ref).filter((ref) => !disabledRefs.has(ref)));
+  }, [selected, disabledRefs]);
+
+  // Homologues. PvE/PvP : persos RANGÉS matchant chaque critère structurel
+  // actif (un critère sans valeur côté perso choisi est ignoré plutôt que de
+  // vider la cohorte — un perso sans rôle curé arrive). Modes EE : porteurs
+  // d'un EE rangé partageant AU MOINS UNE chip active avec l'EE choisi.
   const peers = useMemo(() => {
     if (!selected) return [];
-    return rows
-      .filter((r) => r.ranks[mode])
-      .filter((r) => (criteria.has('role') && selected.role ? r.role === selected.role : true))
-      .filter((r) => (criteria.has('element') ? r.element === selected.element : true))
-      .filter((r) => (criteria.has('class') ? r.class === selected.class : true))
-      .sort(tierListRankOrder((r) => r.ranks[mode]));
-  }, [rows, selected, mode, criteria]);
+    const ranked = rows.filter((r) => r.ranks[mode]);
+    const cohort = isEeMode
+      ? ranked.filter((r) => r.id === selected.id || r.ee?.chips.some((c) => activeRefs.has(c.ref)))
+      : ranked
+          .filter((r) => (criteria.has('role') && selected.role ? r.role === selected.role : true))
+          .filter((r) => (criteria.has('element') ? r.element === selected.element : true))
+          .filter((r) => (criteria.has('class') ? r.class === selected.class : true));
+    return cohort.sort(tierListRankOrder((r) => r.ranks[mode]));
+  }, [rows, selected, mode, criteria, isEeMode, activeRefs]);
 
   const pick = (id: string) => {
     setSelectedId(id);
     setQuery('');
+    setDisabledRefs(new Set());
   };
+
+  /** Noms des effets partagés avec l'EE choisi (tooltip des homologues EE). */
+  const sharedWith = (r: RankingHelperRow): string[] =>
+    (r.ee?.chips ?? []).filter((c) => activeRefs.has(c.ref)).map((c) => c.name);
 
   return (
     <div className="space-y-6">
@@ -191,21 +215,61 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
                   </button>
                 ))}
               </div>
-              {CRITERIA.map((c) => (
-                <button
-                  key={c.key}
-                  type="button"
-                  onClick={() => toggleCriterion(c.key)}
-                  className={`rounded-full border px-3 py-1 text-xs transition-colors ${
-                    criteria.has(c.key)
-                      ? 'border-accent bg-accent/15 text-content-strong'
-                      : 'border-line text-content-muted hover:bg-line/50'
-                  }`}
-                >
-                  {c.label}
-                </button>
-              ))}
+              {!isEeMode &&
+                CRITERIA.map((c) => (
+                  <button
+                    key={c.key}
+                    type="button"
+                    onClick={() => toggleCriterion(c.key)}
+                    className={`rounded-full border px-3 py-1 text-xs transition-colors ${
+                      criteria.has(c.key)
+                        ? 'border-accent bg-accent/15 text-content-strong'
+                        : 'border-line text-content-muted hover:bg-line/50'
+                    }`}
+                  >
+                    {c.label}
+                  </button>
+                ))}
             </div>
+
+            {/* Modes EE : la cohorte se définit par EFFETS SIMILAIRES — les
+                chips de l'EE choisi, désactivables une à une. */}
+            {isEeMode &&
+              (selected.ee?.chips.length ? (
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-content-subtle text-xs">Similar effects:</span>
+                  {selected.ee.chips.map((c) => {
+                    const active = !disabledRefs.has(c.ref);
+                    return (
+                      <button
+                        key={c.ref}
+                        type="button"
+                        onClick={() =>
+                          setDisabledRefs((prev) => {
+                            const next = new Set(prev);
+                            if (next.has(c.ref)) next.delete(c.ref);
+                            else next.add(c.ref);
+                            return next;
+                          })
+                        }
+                        className={`rounded-full border px-3 py-1 text-xs transition-colors ${
+                          active
+                            ? c.isDebuff
+                              ? 'text-content-strong border-rose-500/60 bg-rose-500/10'
+                              : 'text-content-strong border-emerald-500/60 bg-emerald-500/10'
+                            : 'border-line text-content-muted hover:bg-line/50'
+                        }`}
+                      >
+                        {c.name}
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : (
+                <p className="text-content-subtle text-sm">
+                  This hero has no exclusive equipment — nothing to compare by effect.
+                </p>
+              ))}
 
             {!selected.ranks[mode] && (
               <p className="text-content-subtle text-sm">
@@ -223,12 +287,17 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
                   peers={inTier}
                   selectedId={selected.id}
                   onPick={pick}
+                  titleFor={(r) => {
+                    if (!isEeMode || r.id === selected.id) return r.name;
+                    const shared = sharedWith(r);
+                    return shared.length ? `${r.name} — shared: ${shared.join(', ')}` : r.name;
+                  }}
                 />
               );
             })}
             {peers.length === 0 && (
               <p className="text-content-subtle text-sm">
-                No ranked hero matches the active criteria — loosen them above.
+                No ranked hero matches the active filters — loosen them above.
               </p>
             )}
           </div>
@@ -243,11 +312,14 @@ function TierRow({
   peers,
   selectedId,
   onPick,
+  titleFor,
 }: {
   tier: Tier;
   peers: RankingHelperRow[];
   selectedId: string;
   onPick: (id: string) => void;
+  /** Tooltip d'un homologue (modes EE : liste des effets partagés). */
+  titleFor: (r: RankingHelperRow) => string;
 }) {
   return (
     <div className={`rounded-lg border bg-gradient-to-r p-2 ${TIER_COLORS[tier]}`}>
@@ -261,7 +333,7 @@ function TierRow({
               key={r.id}
               type="button"
               onClick={() => onPick(r.id)}
-              title={r.name}
+              title={titleFor(r)}
               className={`rounded-md p-0.5 transition-transform hover:scale-105 ${
                 r.id === selectedId ? 'ring-accent ring-2' : ''
               }`}

@@ -16,10 +16,17 @@
   un perso → fiche condensée (élément/classe/rôle/tags, les 4 rangs, textes
   des passifs EE niv.1 et niv.10 aux valeurs MAX comme les tooltips) + ses
   homologues groupés par tier S→E dans le mode choisi (PvE/PvP/EE base/
-  EE+10), cliquables pour pivoter. « Homologues » = critères COMBINABLES
-  (rôle/élément/classe, défaut rôle+élément) — un critère sans valeur côté
-  perso choisi est ignoré plutôt que de vider la cohorte. Anglais seul et
-  noindex, comme tout `/contribute`.
+  EE+10), cliquables pour pivoter. « Homologues » : en PvE/PvP, critères
+  COMBINABLES (rôle/élément/classe, défaut rôle+élément — un critère sans
+  valeur côté perso choisi est ignoré plutôt que de vider la cohorte) ; en
+  modes EE, précision Sevih du 03/08 : la comparaison se fait par EFFETS
+  SIMILAIRES — cohorte = porteurs d'un EE rangé partageant au moins une
+  chip d'effet ACTIVE avec l'EE choisi (chips désactivables une à une,
+  tooltip des homologues = effets partagés). Le vocabulaire est celui de la
+  CARTE EE (curation `chipHide`/`chipAdd` appliquée — nouveau helper
+  `eeCuratedChips` à côté d'`eeEditorChips`, corps commun factorisé) : on
+  compare ce que les joueurs voient, pas les positions brutes. Anglais seul
+  et noindex, comme tout `/contribute`.
 
 - **Vraie page 404 localisée** (demande Sevih « on devrait pas aussi faire
   des vraies pages 404 ? ») : aucun `not-found.tsx` n'existait — chaque

@@ -8,6 +8,7 @@ import {
 import { characterTags, loadCuratedCharacters } from '@/lib/data/curated';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { getEEViews, resolvePassives } from '@/lib/data/equipment';
+import { eeCuratedChips } from '@/lib/data/equipment-detail';
 
 /**
  * Données de l'outil de contribution « ranking helper » (`/contribute/
@@ -22,6 +23,12 @@ export interface RankingHelperEE {
   name: string;
   /** Paliers résolus : niv. 1 puis niv. 10 (remplace ou s'ajoute). */
   passives: Array<{ level: number; isAdd: boolean; text: string }>;
+  /**
+   * Chips d'effets telles qu'affichées sur la carte EE (curation appliquée) —
+   * le vocabulaire de la comparaison « effets similaires » : en mode EE, les
+   * homologues sont les porteurs d'un EE partageant au moins une chip active.
+   */
+  chips: Array<{ ref: string; name: string; icon?: string; isDebuff: boolean }>;
 }
 
 export interface RankingHelperRow {
@@ -74,6 +81,12 @@ export function rankingHelperRows(): RankingHelperRow[] {
                 // `first`/`last` = valeurs reforge min/max : la discussion de
                 // ranking se fait au max, comme les tooltips du site.
                 text: p.last ?? p.first,
+              })),
+              chips: eeCuratedChips(c.id, 'en').map((chip) => ({
+                ref: chip.ref,
+                name: chip.name,
+                ...(chip.icon ? { icon: chip.icon } : {}),
+                isDebuff: chip.isDebuff,
               })),
             },
           }
