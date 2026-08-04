@@ -57,6 +57,20 @@ checkDamageRate (par branche) ──► calcDamageCore (par hit) ──► sorti
 Le moteur (`src/lib/damage/`) couvre tout le bas de la chaîne. Ce qui manque,
 c'est **l'amont** : fabriquer les entrées à partir du build + des données du jeu.
 
+> RÉALISÉ (04/08/2026) : `src/lib/damage/inputs.ts` — `buildDamageReport`
+> (fonction PURE, importable node — exigence harnais § 4) prend le miroir typé
+> du `debugState` + les JSON damage et produit stats de combat (§ 16.1, terme
+> Codex depuis `growth.archive`, palier post-100 depuis `maxLevelSteps`),
+> affinité résolue des buffs `trust_level_*` (jamais codée en dur), chips de
+> scénario via `FX_CATALOG` (magnitudes STANDARD doublement sourcées :
+> glossaire officiel + valeur dominante de buffs.json — ATK ±300 ‰,
+> DEF ±500 ‰, CDD ±500 plat, PEN ±300 plat, SPD ±300 ‰, EFF/RES ±1000 ‰ ;
+> les chips « certain percentage » partent en `unresolvedFx`, contribution 0),
+> et les lignes S1/S2/S3 + SOUS-LIGNES burst (SKT_BURST_1..3 rattachés au S2,
+> même niveau saisi — vérifié 372/372) via `buildSkillReport`. HORS v1
+> (documenté en tête de module) : passifs d'équipement § 15, lignes DOT,
+> immunités de cible. Tests `inputs.test.ts` sur les VRAIS artefacts commis.
+
 ## 3. Classification de chaque entrée
 
 Quatre origines. C'est CETTE classification qui borne les extracteurs.
