@@ -75,6 +75,50 @@ describe('entryFor — réduction en clé comparable', () => {
     });
   });
 
+  it('stat de combat CONNUE = identité canonique, tooltip ou pas (anti-fragmentation)', () => {
+    // Le jeu n'attache un tooltip qu'à CERTAINS buffs de stat : clé par
+    // statut ici séparerait deux « Speed up » identiques (mesuré : 30
+    // porteurs sur 124 fragmentés).
+    const withTooltip = entryFor(stat({ tooltip: 'combat_readiness_var' }), GLOSSARY);
+    expect(withTooltip.key).toBe('stat:pierce_power_rate:up');
+    expect(withTooltip).toEqual(entryFor(stat(), GLOSSARY));
+  });
+
+  it('slug fourre-tout HORS statNames → le statut nommé fait l’identité (get_gold_rate)', () => {
+    // Le jeu réemploie `get_gold_rate` comme support de mécaniques propres à
+    // un perso : l'effet réel est le tooltip (« Fierce Offensive » chez
+    // Notia), pas la stat porteuse.
+    const e = entryFor(stat({ stat: 'get_gold_rate', tooltip: 'combat_readiness_var' }), GLOSSARY);
+    expect(e).toEqual({
+      key: 'status:combat_readiness',
+      label: 'Combat Readiness',
+      isDebuff: false,
+    });
+  });
+
+  it('stat anonyme hors statNames, sans tooltip → slug prettifié', () => {
+    expect(entryFor(stat({ stat: 'some_new_stat' }), GLOSSARY).label).toBe('Some new stat up');
+  });
+
+  it('ref de statut hors glossaire → repli lisible (cas WEAKNESS_GAUGE_DAMAGE)', () => {
+    const e = entryFor(
+      {
+        family: 'special',
+        category: 'buff',
+        type: 'BT_X',
+        target: 'me',
+        label: 'WEAKNESS_GAUGE_DAMAGE',
+      },
+      GLOSSARY,
+    );
+    expect(e.label).toBe('Weakness gauge DMG');
+    const generic = entryFor(
+      { family: 'special', category: 'buff', type: 'BT_X', target: 'me', label: 'SOME_NEW_LABEL' },
+      GLOSSARY,
+    );
+    expect(generic.label).toBe('Some new label');
+  });
+
   it('mécanique adossée à une stat ≠ buff de la même stat', () => {
     const scaling = entryFor(
       { family: 'damage', category: 'buff', type: 'BT_DMG', target: 'me', stat: 'speed' },

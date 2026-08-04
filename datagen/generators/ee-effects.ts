@@ -54,6 +54,21 @@ function typeLabel(type: string): string {
   return TYPE_LABELS[type] ?? type.replace(/^BT_/, '').replace(/_/g, ' ').toLowerCase();
 }
 
+/**
+ * Refs de statut sans entrée de glossaire — relevées sur la donnée réelle
+ * (un slug brut à l'écran est un bug). Weakness gauge DMG : dégâts infligés
+ * à la jauge de faiblesse du boss (vidée = break) — sens confirmé par Sevih.
+ */
+const STATUS_FALLBACK: Record<string, string> = {
+  WEAKNESS_GAUGE_DAMAGE: 'Weakness gauge DMG',
+};
+
+/** Dernier recours : slug/clé → texte lisible (jamais de `_` à l'écran). */
+function prettifySlug(slug: string): string {
+  const s = slug.replace(/_/g, ' ').toLowerCase();
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
 export interface EeEffectsInput {
   ee: Record<string, ExclusiveItem>;
   passives: Record<string, Passive>;
@@ -70,20 +85,35 @@ export function entryFor(
   input: Pick<EeEffectsInput, 'statNames' | 'effects' | 'byTooltip' | 'byLabel'>,
 ): EeEffectEntry {
   const isDebuff = e.category === 'debuff' || e.category === 'cc';
-  if (e.family === 'stat' && e.stat) {
+  // Une stat de COMBAT CONNUE (présente dans `statNames`) est l'identité
+  // canonique de l'effet : deux « Speed up » matchent, que le jeu ait attaché
+  // un tooltip ou non (il n'en met qu'à certains — clé par statut ici
+  // FRAGMENTERAIT le vocabulaire, mesuré : 30 porteurs sur 124).
+  if (e.family === 'stat' && e.stat && input.statNames[e.stat]) {
     const dir = e.mode === 'down' ? 'down' : 'up';
-    const name = input.statNames[e.stat]?.en ?? e.stat;
-    return { key: `stat:${e.stat}:${dir}`, label: `${name} ${dir}`, isDebuff };
+    return {
+      key: `stat:${e.stat}:${dir}`,
+      label: `${input.statNames[e.stat].en} ${dir}`,
+      isDebuff,
+    };
   }
+  // Sinon, le STATUT NOMMÉ fait l'identité : le jeu réemploie des slugs
+  // fourre-tout HORS statNames (`get_gold_rate`) comme support de mécaniques
+  // PROPRES à un perso — l'effet réel est le tooltip (« Fierce Offensive »
+  // chez Notia), pas la stat porteuse (relevé Sevih 04/08).
   const ref = e.tooltip ?? e.label;
   if (ref) {
     const id = (e.tooltip ? input.byTooltip.get(ref) : input.byLabel.get(ref)) ?? ref;
     const eff = input.effects.get(id);
     return {
       key: `status:${id}`,
-      label: eff?.name.en ?? ref,
+      label: eff?.name.en ?? STATUS_FALLBACK[ref] ?? prettifySlug(ref),
       isDebuff: eff?.isDebuff ?? isDebuff,
     };
+  }
+  if (e.family === 'stat' && e.stat) {
+    const dir = e.mode === 'down' ? 'down' : 'up';
+    return { key: `stat:${e.stat}:${dir}`, label: `${prettifySlug(e.stat)} ${dir}`, isDebuff };
   }
   if (e.stat) return { key: `${e.family}:${e.type}:${e.stat}`, label: typeLabel(e.type), isDebuff };
   return { key: `type:${e.type}`, label: typeLabel(e.type), isDebuff };

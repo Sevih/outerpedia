@@ -7,6 +7,23 @@
 
 ## 2026-08-04
 
+- **ee-effects : labels non résolus (« get_gold_rate up ») — et une leçon.**
+  Capture Sevih sur Notia. Le slug `get_gold_rate` est un RÉEMPLOI
+  fourre-tout du jeu pour des mécaniques propres à un perso (« Fierce
+  Offensive » chez Notia) : l'identité réelle de l'effet est son tooltip.
+  PREMIER fix (statut prime toujours) REJETÉ à la mesure : il fragmentait le
+  vocabulaire (30 porteurs sur 124 — le jeu n'attache un tooltip qu'à
+  CERTAINS buffs de stat, deux « Speed up » identiques ne matchaient plus).
+  Règle finale : une stat de combat CONNUE (dans `statNames`) reste
+  l'identité canonique, tooltip ou pas ; le statut nommé ne fait l'identité
+  que pour les slugs HORS statNames. `WEAKNESS_GAUGE_DAMAGE` (dégâts à la
+  jauge de faiblesse — vidée = break, sens confirmé Sevih) : libellé en
+  repli explicite + prettifier générique capitalisé en dernier recours
+  (plus jamais de `_` à l'écran, testé). Diff final chirurgical : 14
+  porteurs, labels seuls sauf l'identité voulue des fourre-tout. LEÇON :
+  j'avais d'abord libellé « Gold gain » d'après le nom du slug — faux, le
+  slug ment ; lire le texte réel du passif avant de nommer quoi que ce soit.
+
 - **Ranking helper : « Demiurge Demiurge Astei » — préfixe doublé** (capture
   Sevih). Le contrat du site : `characterDisplayName` rend le nom COMPLET
   (préfixe inclus) et les composants qui affichent le préfixe à part le

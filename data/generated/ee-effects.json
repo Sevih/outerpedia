@@ -375,7 +375,7 @@
     },
     {
       "key": "status:UNCOUNTERABLE",
-      "label": "UNCOUNTERABLE",
+      "label": "Uncounterable",
       "isDebuff": false
     }
   ],
@@ -406,7 +406,7 @@
   "2000038": [
     {
       "key": "status:WEAKNESS_GAUGE_DAMAGE",
-      "label": "WEAKNESS_GAUGE_DAMAGE",
+      "label": "Weakness gauge DMG",
       "isDebuff": false
     },
     {
@@ -573,7 +573,7 @@
     },
     {
       "key": "status:WEAKNESS_GAUGE_DAMAGE",
-      "label": "WEAKNESS_GAUGE_DAMAGE",
+      "label": "Weakness gauge DMG",
       "isDebuff": false
     }
   ],
@@ -586,8 +586,8 @@
   ],
   "2000056": [
     {
-      "key": "stat:get_gold_rate:up",
-      "label": "get_gold_rate up",
+      "key": "status:2000056",
+      "label": "Fierce Offensive",
       "isDebuff": false
     },
     {
@@ -617,8 +617,8 @@
   ],
   "2000059": [
     {
-      "key": "stat:get_gold_rate:up",
-      "label": "get_gold_rate up",
+      "key": "status:2000059",
+      "label": "Doll Garden's Caretaker",
       "isDebuff": false
     },
     {
@@ -767,7 +767,7 @@
     },
     {
       "key": "status:WEAKNESS_GAUGE_DAMAGE",
-      "label": "WEAKNESS_GAUGE_DAMAGE",
+      "label": "Weakness gauge DMG",
       "isDebuff": false
     }
   ],
@@ -959,7 +959,7 @@
     },
     {
       "key": "status:WEAKNESS_GAUGE_DAMAGE",
-      "label": "WEAKNESS_GAUGE_DAMAGE",
+      "label": "Weakness gauge DMG",
       "isDebuff": false
     }
   ],
@@ -1024,7 +1024,7 @@
     },
     {
       "key": "status:UNCOUNTERABLE",
-      "label": "UNCOUNTERABLE",
+      "label": "Uncounterable",
       "isDebuff": false
     }
   ],
@@ -1093,7 +1093,7 @@
   "2000099": [
     {
       "key": "status:WEAKNESS_GAUGE_DAMAGE",
-      "label": "WEAKNESS_GAUGE_DAMAGE",
+      "label": "Weakness gauge DMG",
       "isDebuff": false
     },
     {
@@ -1166,7 +1166,7 @@
   "2000103": [
     {
       "key": "status:WEAKNESS_GAUGE_DAMAGE",
-      "label": "WEAKNESS_GAUGE_DAMAGE",
+      "label": "Weakness gauge DMG",
       "isDebuff": false
     },
     {
@@ -1178,7 +1178,7 @@
   "2000105": [
     {
       "key": "status:UNCOUNTERABLE",
-      "label": "UNCOUNTERABLE",
+      "label": "Uncounterable",
       "isDebuff": false
     },
     {
@@ -1320,7 +1320,7 @@
     },
     {
       "key": "status:UNCOUNTERABLE",
-      "label": "UNCOUNTERABLE",
+      "label": "Uncounterable",
       "isDebuff": false
     }
   ],
@@ -1344,7 +1344,7 @@
     },
     {
       "key": "status:UNCOUNTERABLE",
-      "label": "UNCOUNTERABLE",
+      "label": "Uncounterable",
       "isDebuff": false
     }
   ],
@@ -1404,7 +1404,7 @@
     },
     {
       "key": "status:UNCOUNTERABLE",
-      "label": "UNCOUNTERABLE",
+      "label": "Uncounterable",
       "isDebuff": false
     }
   ],
