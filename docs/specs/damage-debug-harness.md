@@ -25,6 +25,19 @@
 
 ## 2. Trace de calcul (à construire avec le branchement)
 
+> RÉALISÉ côté MOTEUR (04/08/2026, design validé par Sevih) : paramètre
+> optionnel `trace?: TraceStep[]` sur `calcDamageCore` (§ 8.2, une étape par
+> troncature exécutée), `checkDamageRate` (§ 7 : taux de base de la branche,
+> modificateurs additifs, plancher quand il agit) et `sheetToCombatStat`
+> (§ 16.1) ; `buildSkillReport(skill, scenario, { trace: true })` produit
+> `BranchLine.trace` (préambule § 10.1/§ 6/§ 9.2/§ 9.3, § 9.1 par branche,
+> § 7, § 8.2 du TOTAL, § 8.3 en dernière étape) et `SkillReport.wgTrace`
+> (§ 11). Coût nul sans trace (`trace?.push`). Étape `unresolved` émise pour
+> le swap § 10.1 sans lecteur de stat — jamais de valeur plausible. Tests :
+> `src/lib/damage/trace.test.ts` (l'étape finale de chaque trace === la
+> valeur retournée). Le RENDU (accordéon) reste à brancher dans la carte
+> Debug avec l'amont pur.
+
 Le moteur retourne, EN PLUS des nombres, une **trace** — il ne faut jamais que
 l'UI la reconstruise (elle mentirait au premier écart) :
 

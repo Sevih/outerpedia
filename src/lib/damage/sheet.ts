@@ -22,6 +22,7 @@
  */
 
 import { calcBaseStat } from './formula';
+import type { TraceStep } from './harness';
 
 const div1000 = (x: bigint): bigint => x / 1000n;
 
@@ -47,12 +48,34 @@ export interface SheetToCombatInput {
   buffValueRate: number;
 }
 
-/** Fiche saisie → stat de combat (identité § 16.1, arithmétique du binaire). */
-export function sheetToCombatStat(input: SheetToCombatInput): number {
+/**
+ * Fiche saisie → stat de combat (identité § 16.1, arithmétique du binaire).
+ * `trace` (harnais § 2) : coût nul quand absent.
+ */
+export function sheetToCombatStat(input: SheetToCombatInput, trace?: TraceStep[]): number {
   const a = BigInt(archiveTerm(input.baseValue, input.archiveRatePermille));
+  trace?.push({
+    ref: '§ 16.1',
+    label: 'terme Codex/archive (base × taux ÷1000)',
+    in: { baseValue: input.baseValue, archiveRatePermille: input.archiveRatePermille },
+    out: Number(a),
+  });
   const sub = BigInt(input.sheetValue) - a + BigInt(input.buffValue);
+  trace?.push({
+    ref: '§ 16.1',
+    label: 'fiche − archive + buffs plats',
+    in: { sheetValue: input.sheetValue, buffValue: input.buffValue },
+    out: Number(sub),
+  });
   const total = div1000(sub * BigInt(1000 + input.buffValueRate)) + a;
-  return total < 0n ? 0 : Number(total);
+  const combat = total < 0n ? 0 : Number(total);
+  trace?.push({
+    ref: '§ 16.1',
+    label: 'multiplicateur des buffs (‰) + archive (clamp ≥ 0)',
+    in: { buffValueRate: input.buffValueRate },
+    out: combat,
+  });
+  return combat;
 }
 
 /**

@@ -46,7 +46,7 @@ import {
   getElementeryDamageRate,
   mulPermille,
 } from './formula';
-import type { DamageBranch } from './harness';
+import type { DamageBranch, TraceStep } from './harness';
 import { DamageRateType, type Element } from './types';
 
 // ── Probabilités exactes (§ 4 — jamais de tirage dans le rapport) ───────────
@@ -227,6 +227,12 @@ export interface BranchLine {
   hits: HitLine[];
   /** Σ des hits (rattrapage § 8.3 inclus) = total exact de la compétence. */
   totalDamage: number;
+  /**
+   * Trace du calcul (harnais § 2) — présente si demandée via
+   * `buildSkillReport(..., { trace: true })` : agrégats § 9, taux § 7,
+   * cœur § 8.2 du TOTAL, rattrapage § 8.3. Ordre réel d'exécution.
+   */
+  trace?: TraceStep[];
 }
 
 export interface StateLine {
@@ -245,6 +251,14 @@ export interface SkillReport {
   weaknessGaugeDamage: number;
   /** Défenseur invincible (§ 7 étape 2) : branches non émises, dégâts nuls. */
   defenderInvincible: boolean;
+  /** Trace de la jauge § 11 (si demandée). */
+  wgTrace?: TraceStep[];
+}
+
+/** Options de `buildSkillReport`. */
+export interface SkillReportOptions {
+  /** Produire les traces (harnais § 2) — coût nul sinon. */
+  trace?: boolean;
 }
 
 // ── Construction du rapport ──────────────────────────────────────────────────
@@ -293,16 +307,34 @@ function unfoldHits(hits: ReportHitInput[]): { id: string; damageFactor: number 
  * couches : drapeaux (aggregate), agrégats § 9 PAR BRANCHE, taux § 7, cœur
  * § 8.2, rattrapage § 8.3, annexes § 8.4, jauge § 11.
  */
-export function buildSkillReport(skill: ReportSkillInput, scenario: ReportScenario): SkillReport {
+export function buildSkillReport(
+  skill: ReportSkillInput,
+  scenario: ReportScenario,
+  options?: SkillReportOptions,
+): SkillReport {
   const attackerBuffs = scenario.attackerBuffs ?? [];
   const defenderBuffs = scenario.defenderBuffs ?? [];
   const flags = collectCombatFlags(attackerBuffs, defenderBuffs);
+  const withTrace = options?.trace === true;
 
+  const wgTrace = withTrace ? ([] as TraceStep[]) : undefined;
   const weaknessGaugeDamage = calcDamageWG({
     defenderWgInvincible: flags.defenderWgInvincible,
     skillWgReduce: skill.wgReduce ?? 0,
     wgReduceFlat: scenario.wgReduceFlat,
     wgReduceRate: scenario.wgReduceRate,
+  });
+  wgTrace?.push({
+    ref: '§ 11',
+    label: flags.defenderWgInvincible
+      ? 'jauge : BT_WG_INVINCIBLE → 0'
+      : 'dégâts de jauge (BT 83/84 : agrégation non désassemblée, § 12.3 — entrées telles que fournies)',
+    in: {
+      skillWgReduce: skill.wgReduce ?? 0,
+      wgReduceFlat: scenario.wgReduceFlat ?? 0,
+      wgReduceRate: scenario.wgReduceRate ?? 0,
+    },
+    out: weaknessGaugeDamage,
   });
 
   if (flags.defenderInvincible) {
@@ -315,6 +347,7 @@ export function buildSkillReport(skill: ReportSkillInput, scenario: ReportScenar
       })),
       weaknessGaugeDamage,
       defenderInvincible: true,
+      ...(wgTrace ? { wgTrace } : {}),
     };
   }
 
@@ -339,6 +372,51 @@ export function buildSkillReport(skill: ReportSkillInput, scenario: ReportScenar
     casterAliveAllies: scenario.defenderCasterAliveAllies,
   });
 
+  // Préambule de trace commun aux branches (ordre réel : stat d'attaque § 10.1,
+  // élément § 6, agrégats défenseur § 9.2/9.3 — § 9.1 dépend de la branche).
+  const preamble: TraceStep[] = [];
+  if (withTrace) {
+    if (flags.swapAttack && !scenario.additionalContext?.attackerStat) {
+      // Contexte incomplet (§ 10.1) : on NE devine pas la stat swappée.
+      preamble.push({
+        ref: '§ 10.1',
+        label: 'swap d’attaque actif SANS lecteur de stat — ST_ATK conservé',
+        in: { attackStat: scenario.attacker.attackStat },
+        out: attackStat,
+        unresolved: true,
+      });
+    } else if (flags.swapAttack) {
+      preamble.push({
+        ref: '§ 10.1',
+        label: `stat d’attaque swappée (${flags.swapAttack.stat})`,
+        in: { swapValue: flags.swapAttack.value },
+        out: attackStat,
+      });
+    }
+    preamble.push({
+      ref: '§ 6',
+      label: 'taux élémentaire',
+      in: {
+        attackerElement: scenario.attacker.element,
+        defenderElement: scenario.defender.element,
+        enchantBonus: flags.elementDamageRateBonus,
+      },
+      out: elementalRate,
+    });
+    preamble.push({
+      ref: '§ 9.2',
+      label: 'somme des réductions du défenseur',
+      in: { defenderBuffs: defenderBuffs.length },
+      out: damageReduceRate,
+    });
+    preamble.push({
+      ref: '§ 9.3',
+      label: 'réduction finale du défenseur (MAX, pas somme)',
+      in: { defenderBuffs: defenderBuffs.length },
+      out: finalReduceRate,
+    });
+  }
+
   const branches = enumerateBranches(
     scenario.attacker,
     scenario.defender,
@@ -348,33 +426,53 @@ export function buildSkillReport(skill: ReportSkillInput, scenario: ReportScenar
   // Taux § 7 par branche — via le chemin « additive » de checkDamageRate
   // (résultat fixé, même arithmétique que le chemin tiré, cf. en-tête).
   const branchRates = branches.map(({ branch, probability }) => {
+    const rateTrace = withTrace ? [...preamble] : undefined;
     const additionalDamageRate = findBuffAdditionalDamage(attackerBuffs, {
       ...scenario.additionalContext,
       branch,
     });
-    let { rate } = checkDamageRate({
-      attacker: scenario.attacker,
-      defender: { ...scenario.defender, hasInvincibleBuff: false },
-      additionalDamageRate,
-      damageReduceRate,
-      previousResult: BRANCH_TYPE[branch],
-      rolls: { avoid: 0, critical: 0 }, // ignorés : résultat déjà fixé
+    rateTrace?.push({
+      ref: '§ 9.1',
+      label: 'somme additionnelle de l’attaquant (selon branche)',
+      in: { attackerBuffs: attackerBuffs.length },
+      out: additionalDamageRate,
     });
+    let { rate } = checkDamageRate(
+      {
+        attacker: scenario.attacker,
+        defender: { ...scenario.defender, hasInvincibleBuff: false },
+        additionalDamageRate,
+        damageReduceRate,
+        previousResult: BRANCH_TYPE[branch],
+        rolls: { avoid: 0, critical: 0 }, // ignorés : résultat déjà fixé
+      },
+      rateTrace,
+    );
     if (scenario.decreaseTargetCount !== undefined && flags.enemyTeamDecreaseValue !== 0) {
       rate = addCheckEnemyTeamDecreaseDamageRate(
         rate,
         flags.enemyTeamDecreaseValue,
         scenario.decreaseTargetCount,
       );
+      rateTrace?.push({
+        ref: '§ 7',
+        label: 'cibles décomptées (BT_DMG_ENEMY_TEAM_DECREASE)',
+        in: {
+          enemyTeamDecreaseValue: flags.enemyTeamDecreaseValue,
+          decreaseTargetCount: scenario.decreaseTargetCount,
+        },
+        out: rate,
+      });
     }
-    return { branch, probability, rate };
+    return { branch, probability, rate, rateTrace };
   });
 
   const states = skill.states.map((state): StateLine => {
     const occurrences = unfoldHits(state.hits);
     const totalFactor = occurrences.reduce((sum, o) => sum + o.damageFactor, 0);
 
-    const branchLines = branchRates.map(({ branch, probability, rate }): BranchLine => {
+    const branchLines = branchRates.map(({ branch, probability, rate, rateTrace }): BranchLine => {
+      const trace = rateTrace ? [...rateTrace] : undefined;
       const core = {
         attackStat,
         skillFactor: skill.skillFactor,
@@ -389,7 +487,7 @@ export function buildSkillReport(skill: ReportSkillInput, scenario: ReportScenar
         finalReduceRate,
       };
       // § 8.1 : le total de la compétence se calcule sur le facteur TOTAL…
-      const totalDamage = calcDamageCore({ ...core, damageFactor: totalFactor });
+      const totalDamage = calcDamageCore({ ...core, damageFactor: totalFactor }, trace);
       // …§ 8.3 : chaque hit se calcule sur SON facteur, le dernier rattrape.
       let accumulated = 0;
       const hits = occurrences.map((occ, i): HitLine => {
@@ -411,14 +509,32 @@ export function buildSkillReport(skill: ReportSkillInput, scenario: ReportScenar
           adjusted: damage !== r.damage,
         };
       });
-      return { branch, probability, damageRate: rate, hits, totalDamage: accumulated };
+      trace?.push({
+        ref: '§ 8.3',
+        label: 'répartition par hit et rattrapage du dernier hit',
+        in: { totalDamage, hits: occurrences.length },
+        out: accumulated,
+      });
+      return {
+        branch,
+        probability,
+        damageRate: rate,
+        hits,
+        totalDamage: accumulated,
+        ...(trace ? { trace } : {}),
+      };
     });
 
     const expectedDamage = branchLines.reduce((e, b) => e + b.probability * b.totalDamage, 0);
     return { chain: state.chain, totalFactor, branches: branchLines, expectedDamage };
   });
 
-  return { states, weaknessGaugeDamage, defenderInvincible: false };
+  return {
+    states,
+    weaknessGaugeDamage,
+    defenderInvincible: false,
+    ...(wgTrace ? { wgTrace } : {}),
+  };
 }
 
 function totalFactorOf(hits: ReportHitInput[]): number {

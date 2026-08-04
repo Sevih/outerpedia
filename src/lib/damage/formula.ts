@@ -13,6 +13,7 @@
  *    référence float32 en rationnels — cf. test « float32 exact ».
  */
 
+import type { TraceStep } from './harness';
 import {
   DamageRateType,
   Element,
@@ -204,18 +205,39 @@ export function getElementeryDamageRate(input: ElementRateInput): number {
 
 // ── CheckDamageRate — RVA 0x2C5A448 ─────────────────────────────────────────
 
+/** Libellés de trace par résultat de hit (harnais § 2 — dev only). */
+const RATE_TYPE_LABEL: Record<DamageRateType, string> = {
+  [DamageRateType.None]: 'aucun',
+  [DamageRateType.Normal]: 'normal',
+  [DamageRateType.Critical]: 'critique',
+  [DamageRateType.Missed]: 'esquivé',
+  [DamageRateType.Invincible]: 'invincible',
+};
+
 /**
  * Détermine le résultat du hit (normal / crit / miss / invincible) et son taux (‰).
  * Ordre exact du binaire : world boss finish → invincible → additive → esquive →
  * crit → overrides → modificateurs additifs → plancher 300 ‰.
+ * `trace` (harnais § 2) : coût nul quand absent — les étapes suivent l'ordre
+ * RÉEL d'exécution, valeurs brutes.
  */
-export function checkDamageRate(input: CheckDamageRateInput): DamageRateResult {
+export function checkDamageRate(
+  input: CheckDamageRateInput,
+  trace?: TraceStep[],
+): DamageRateResult {
   const { attacker, defender, rolls } = input;
 
   if (input.worldBossFinishAttackByBoss) {
+    trace?.push({
+      ref: '§ 7.1',
+      label: 'world boss finish : normal, taux fixe',
+      in: {},
+      out: 1000,
+    });
     return { type: DamageRateType.Normal, rate: 1000 };
   }
   if (defender.hasInvincibleBuff) {
+    trace?.push({ ref: '§ 7.2', label: 'défenseur invincible : taux nul', in: {}, out: 0 });
     return { type: DamageRateType.Invincible, rate: 0 };
   }
 
@@ -248,13 +270,39 @@ export function checkDamageRate(input: CheckDamageRateInput): DamageRateResult {
       rate = 1000;
     }
   }
+  trace?.push({
+    ref: '§ 7',
+    label: `résultat « ${RATE_TYPE_LABEL[type]} » : taux de base`,
+    in:
+      type === DamageRateType.Critical
+        ? {
+            criticalDmgRate: attacker.criticalDmgRate,
+            enemyCriticalDamageReduce: defender.enemyCriticalDamageReduce,
+          }
+        : {},
+    out: rate,
+  });
 
   rate += input.additionalDamageRate ?? 0;
   rate -= input.damageReduceRate ?? 0;
   rate += attacker.dmgBoost;
   rate -= defender.dmgReduceRate;
+  trace?.push({
+    ref: '§ 7.6',
+    label: 'modificateurs additifs du taux',
+    in: {
+      additionalDamageRate: input.additionalDamageRate ?? 0,
+      damageReduceRate: input.damageReduceRate ?? 0,
+      dmgBoost: attacker.dmgBoost,
+      defenderDmgReduceRate: defender.dmgReduceRate,
+    },
+    out: rate,
+  });
 
-  if (rate <= MIN_DAMAGE_RATE_PERMILLE - 1) rate = MIN_DAMAGE_RATE_PERMILLE;
+  if (rate <= MIN_DAMAGE_RATE_PERMILLE - 1) {
+    rate = MIN_DAMAGE_RATE_PERMILLE;
+    trace?.push({ ref: '§ 7.7', label: 'plancher du taux', in: {}, out: rate });
+  }
   return { type, rate };
 }
 
@@ -284,22 +332,83 @@ function defenseTerm(defense: number, piercePowerRate: number, piercePower: numb
 /**
  * Cœur du calcul d'un hit (<CalcDamage>g__CalcDamage|17_0). Chaque étape tronque
  * vers zéro, dans l'ordre exact du binaire. Minimum 1.
+ * `trace` (harnais § 2) : coût nul quand absent — une étape par troncature,
+ * dans l'ordre RÉEL, valeurs brutes (les étapes conditionnelles n'apparaissent
+ * que si le binaire les exécute).
  */
-export function calcDamageCore(input: DamageCoreInput): number {
+export function calcDamageCore(input: DamageCoreInput, trace?: TraceStep[]): number {
   const defTerm = defenseTerm(input.defense, input.piercePowerRate, input.piercePower);
 
   let d = div1000(
     BigInt(input.attackStat) * BigInt(input.damageFactor) * BigInt(input.skillFactor),
   );
+  trace?.push({
+    ref: '§ 8.2',
+    label: 'atk × facteur du hit × facteur du skill (÷1000)',
+    in: {
+      attackStat: input.attackStat,
+      damageFactor: input.damageFactor,
+      skillFactor: input.skillFactor,
+    },
+    out: Number(d),
+  });
   d = (d * 1_000_000n) / (1_000_000n + defTerm);
+  trace?.push({
+    ref: '§ 8.2',
+    label: 'mitigation défense (pénétration incluse)',
+    in: {
+      defense: input.defense,
+      piercePowerRate: input.piercePowerRate,
+      piercePower: input.piercePower,
+      defTerm: Number(defTerm),
+    },
+    out: Number(d),
+  });
   d = div1000(d * BigInt(input.damageRate));
-  if (input.defenderMarked) d = div1000(d * BigInt(MARKING_DAMAGE_RATE_PERMILLE));
+  trace?.push({
+    ref: '§ 8.2',
+    label: 'taux du hit (§ 7)',
+    in: { damageRate: input.damageRate },
+    out: Number(d),
+  });
+  if (input.defenderMarked) {
+    d = div1000(d * BigInt(MARKING_DAMAGE_RATE_PERMILLE));
+    trace?.push({
+      ref: '§ 8.2',
+      label: 'cible marquée (BT_MARKING)',
+      in: { markingRate: MARKING_DAMAGE_RATE_PERMILLE },
+      out: Number(d),
+    });
+  }
   d = div1000(d * BigInt(input.elementalRate));
+  trace?.push({
+    ref: '§ 8.2',
+    label: 'taux élémentaire (§ 6)',
+    in: { elementalRate: input.elementalRate },
+    out: Number(d),
+  });
   if (input.isMissed) {
-    d = div1000(d * BigInt(input.missedDamageRatePermille ?? MISSED_DAMAGE_RATE_PERMILLE));
+    const missedRate = input.missedDamageRatePermille ?? MISSED_DAMAGE_RATE_PERMILLE;
+    d = div1000(d * BigInt(missedRate));
+    trace?.push({
+      ref: '§ 8.2',
+      label: 'pénalité de MISS',
+      in: { missedDamageRate: missedRate },
+      out: Number(d),
+    });
   }
   d = (d * BigInt(1000 - (input.finalReduceRate ?? 0))) / 1_000_000n;
-  return d > 1n ? Number(d) : 1;
+  trace?.push({
+    ref: '§ 8.2',
+    label: "réduction finale (§ 9.3) et retombée d'échelle (÷1e6)",
+    in: { finalReduceRate: input.finalReduceRate ?? 0 },
+    out: Number(d),
+  });
+  if (d < 1n) {
+    trace?.push({ ref: '§ 8.2', label: 'minimum 1 par hit', in: {}, out: 1 });
+    return 1;
+  }
+  return Number(d);
 }
 
 /**
