@@ -32,4 +32,10 @@ export const CONTRIBUTE_TOOLS: ContributeTool[] = [
     description:
       'Write or adjust a hero’s synergy groups (partner heroes + a reason), then export that hero to send back.',
   },
+  {
+    slug: 'ranking-helper',
+    title: 'Ranking helper',
+    description:
+      'Pick a hero and see their condensed sheet (role, tags, EE at both tiers) plus where comparable heroes sit in each ranking — everything a ranking discussion needs in one view.',
+  },
 ];

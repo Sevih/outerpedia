@@ -7,6 +7,20 @@
 
 ## 2026-08-03
 
+- **`/contribute/ranking-helper` livré** (item « outil pour aider au
+  ranking », précisé par Sevih le 03/08 : pour ranker un perso sur Discord
+  il faut le perso, son EE, ET où sont ses homologues dans le classement).
+  Consultation pure — contrairement aux autres outils du hub, rien à
+  exporter : l'outil JOINT des données déjà publiques (curé `rank`/`rankPvp`
+  /`role`, `getEEViews` pour EE base/+10, tags) en une seule vue. On entre
+  un perso → fiche condensée (élément/classe/rôle/tags, les 4 rangs, textes
+  des passifs EE niv.1 et niv.10 aux valeurs MAX comme les tooltips) + ses
+  homologues groupés par tier S→E dans le mode choisi (PvE/PvP/EE base/
+  EE+10), cliquables pour pivoter. « Homologues » = critères COMBINABLES
+  (rôle/élément/classe, défaut rôle+élément) — un critère sans valeur côté
+  perso choisi est ignoré plutôt que de vider la cohorte. Anglais seul et
+  noindex, comme tout `/contribute`.
+
 - **Vraie page 404 localisée** (demande Sevih « on devrait pas aussi faire
   des vraies pages 404 ? ») : aucun `not-found.tsx` n'existait — chaque
   `notFound()` du site rendait la page par défaut de Next (anglais seul,
