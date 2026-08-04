@@ -55,6 +55,7 @@ import { buildGameVersion } from './generators/game-version';
 import { buildBgmMapping } from './generators/bgm-mapping';
 import { buildWallpapers } from './generators/wallpapers';
 import { buildCharactersList } from './generators/characters-list';
+import { buildEeEffects } from './generators/ee-effects';
 import { buildDamageScaling } from './generators/damage-scaling';
 import { buildSkills } from './generators/skills';
 import { buildUnlockContent } from './generators/unlock-content';
@@ -193,6 +194,19 @@ async function main(): Promise<void> {
       effectFilters,
       ee: equipment.ee,
       passives: equipment.passives,
+    }),
+  );
+  // Effets comparables des EE (outil /contribute/ranking-helper) : clés de
+  // comparaison normalisées depuis les effets BRUTS des passifs.
+  await writeJson(
+    'ee-effects.json',
+    buildEeEffects({
+      ee: equipment.ee,
+      passives: equipment.passives,
+      statNames: equipment.statNames,
+      effects,
+      byTooltip,
+      byLabel,
     }),
   );
   await writeJson('monsters.json', monstersFile);

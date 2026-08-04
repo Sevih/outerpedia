@@ -652,13 +652,15 @@ export interface EeChipMeta {
   desc?: string;
 }
 
-/** Corps commun des deux vues chips d'un EE (éditeur / curée). */
-function eeChipsMeta(
-  view: EEView,
-  cur: { chipHide?: string[]; chipAdd?: string[] },
-  lang: Lang,
-): EeChipMeta[] {
-  const effects = eeChipEffects(view.passives, cur);
+/**
+ * Chips AUTO d'un EE (curation IGNORÉE — positions « règles pures »), résolues
+ * nom/icône/nature via la statusMap, dédoublonnées par ref. Pour l'éditeur de
+ * câblage : liste des chips masquables de la carte EE.
+ */
+export function eeEditorChips(characterId: string, lang: Lang): EeChipMeta[] {
+  const view = getEEViews().find((v) => v.characterId === characterId);
+  if (!view) return [];
+  const effects = eeChipEffects(view.passives, {});
   const statuses = mergeStatusEffects({}, effects, lang);
   const seen = new Set<string>();
   const out: EeChipMeta[] = [];
@@ -676,30 +678,6 @@ function eeChipsMeta(
     });
   }
   return out;
-}
-
-/**
- * Chips AUTO d'un EE (curation IGNORÉE — positions « règles pures »), résolues
- * nom/icône/nature via la statusMap, dédoublonnées par ref. Pour l'éditeur de
- * câblage : liste des chips masquables de la carte EE.
- */
-export function eeEditorChips(characterId: string, lang: Lang): EeChipMeta[] {
-  const view = getEEViews().find((v) => v.characterId === characterId);
-  if (!view) return [];
-  return eeChipsMeta(view, {}, lang);
-}
-
-/**
- * Chips d'un EE telles qu'AFFICHÉES sur sa carte (curation `chipHide`/`chipAdd`
- * appliquée) — le vocabulaire de comparaison « effets similaires » du ranking
- * helper : deux EE se comparent sur ce que les joueurs VOIENT, pas sur les
- * positions brutes.
- */
-export function eeCuratedChips(characterId: string, lang: Lang): EeChipMeta[] {
-  const view = getEEViews().find((v) => v.characterId === characterId);
-  if (!view) return [];
-  const cur = loadEquipmentEditorial().ee[characterId] ?? {};
-  return eeChipsMeta(view, cur, lang);
 }
 
 /**

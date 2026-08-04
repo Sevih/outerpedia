@@ -1,0 +1,1435 @@
+{
+  "2000001": [
+    {
+      "key": "status:48",
+      "label": "Buff Removal",
+      "isDebuff": true
+    }
+  ],
+  "2000002": [
+    {
+      "key": "stat:critical_dmg_rate:up",
+      "label": "Crit DMG up",
+      "isDebuff": false
+    }
+  ],
+  "2000003": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    }
+  ],
+  "2000004": [
+    {
+      "key": "stat:atk:up",
+      "label": "Attack up",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:def:up",
+      "label": "Defense up",
+      "isDebuff": false
+    }
+  ],
+  "2000005": [
+    {
+      "key": "type:BT_DMG_ENEMY_TEAM_DECREASE",
+      "label": "Enemy team DMG down",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_GROUP",
+      "label": "Group bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:pierce_power_rate:up",
+      "label": "Penetration up",
+      "isDebuff": false
+    }
+  ],
+  "2000006": [
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_ACTION_GAUGE_ENHANCE",
+      "label": "Action gauge boost",
+      "isDebuff": false
+    }
+  ],
+  "2000007": [
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    }
+  ],
+  "2000008": [
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:speed:up",
+      "label": "Speed up",
+      "isDebuff": false
+    }
+  ],
+  "2000009": [
+    {
+      "key": "status:63",
+      "label": "Cooldown Reduction",
+      "isDebuff": false
+    }
+  ],
+  "2000010": [
+    {
+      "key": "status:49",
+      "label": "Debuff Removal",
+      "isDebuff": false
+    }
+  ],
+  "2000011": [
+    {
+      "key": "stat:speed:down",
+      "label": "Speed down",
+      "isDebuff": true
+    }
+  ],
+  "2000012": [
+    {
+      "key": "status:40",
+      "label": "Dual Attack",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:speed:up",
+      "label": "Speed up",
+      "isDebuff": false
+    }
+  ],
+  "2000013": [
+    {
+      "key": "stat:speed:up",
+      "label": "Speed up",
+      "isDebuff": false
+    }
+  ],
+  "2000014": [
+    {
+      "key": "status:2",
+      "label": "Cursed",
+      "isDebuff": true
+    }
+  ],
+  "2000015": [
+    {
+      "key": "status:44",
+      "label": "Extra Turn",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:pierce_power_rate:up",
+      "label": "Penetration up",
+      "isDebuff": false
+    }
+  ],
+  "2000016": [
+    {
+      "key": "status:30",
+      "label": "Immunity",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    }
+  ],
+  "2000017": [
+    {
+      "key": "status:63",
+      "label": "Cooldown Reduction",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:critical_rate:up",
+      "label": "Crit Chance up",
+      "isDebuff": false
+    }
+  ],
+  "2000018": [
+    {
+      "key": "status:5",
+      "label": "Shocked",
+      "isDebuff": true
+    },
+    {
+      "key": "status:34",
+      "label": "Stunned",
+      "isDebuff": true
+    }
+  ],
+  "2000019": [
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_DMG_TO_BOSS",
+      "label": "DMG vs bosses",
+      "isDebuff": false
+    }
+  ],
+  "2000020": [
+    {
+      "key": "stat:speed:up",
+      "label": "Speed up",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    }
+  ],
+  "2000021": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    }
+  ],
+  "2000022": [
+    {
+      "key": "type:BT_DMG_ENEMY_TEAM_DECREASE",
+      "label": "Enemy team DMG down",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_GROUP",
+      "label": "Group bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:pierce_power_rate:up",
+      "label": "Penetration up",
+      "isDebuff": false
+    }
+  ],
+  "2000023": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    }
+  ],
+  "2000024": [
+    {
+      "key": "status:63",
+      "label": "Cooldown Reduction",
+      "isDebuff": false
+    },
+    {
+      "key": "heal:BT_HEAL_BASED_CASTER:hp",
+      "label": "heal based caster",
+      "isDebuff": false
+    }
+  ],
+  "2000025": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    }
+  ],
+  "2000026": [
+    {
+      "key": "status:32",
+      "label": "Taunted",
+      "isDebuff": true
+    }
+  ],
+  "2000027": [
+    {
+      "key": "stat:speed:up",
+      "label": "Speed up",
+      "isDebuff": false
+    },
+    {
+      "key": "status:63",
+      "label": "Cooldown Reduction",
+      "isDebuff": false
+    }
+  ],
+  "2000028": [
+    {
+      "key": "stat:atk:up",
+      "label": "Attack up",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:def:up",
+      "label": "Defense up",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_GROUP",
+      "label": "Group bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:pierce_power_rate:up",
+      "label": "Penetration up",
+      "isDebuff": false
+    }
+  ],
+  "2000029": [
+    {
+      "key": "damage:BT_DMG_OWNER_STAT:speed",
+      "label": "dmg owner stat",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_GROUP",
+      "label": "Group bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "status:50",
+      "label": "Buff Duration Increase",
+      "isDebuff": false
+    }
+  ],
+  "2000030": [
+    {
+      "key": "heal:BT_HEAL_BASED_TARGET:hp",
+      "label": "heal based target",
+      "isDebuff": false
+    }
+  ],
+  "2000031": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    },
+    {
+      "key": "damage:BT_DMG_OWNER_STAT:speed",
+      "label": "dmg owner stat",
+      "isDebuff": false
+    }
+  ],
+  "2000032": [
+    {
+      "key": "stat:atk:up",
+      "label": "Attack up",
+      "isDebuff": false
+    }
+  ],
+  "2000033": [
+    {
+      "key": "type:BT_DMG_ENEMY_TEAM_DECREASE",
+      "label": "Enemy team DMG down",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_GROUP",
+      "label": "Group bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:pierce_power_rate:up",
+      "label": "Penetration up",
+      "isDebuff": false
+    }
+  ],
+  "2000034": [
+    {
+      "key": "stat:speed:up",
+      "label": "Speed up",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:atk:up",
+      "label": "Attack up",
+      "isDebuff": false
+    }
+  ],
+  "2000035": [
+    {
+      "key": "status:1003",
+      "label": "Bleeding",
+      "isDebuff": true
+    },
+    {
+      "key": "status:UNCOUNTERABLE",
+      "label": "UNCOUNTERABLE",
+      "isDebuff": false
+    }
+  ],
+  "2000036": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    },
+    {
+      "key": "heal:BT_HEAL_BASED_CASTER:hp",
+      "label": "heal based caster",
+      "isDebuff": false
+    }
+  ],
+  "2000037": [
+    {
+      "key": "damage:BT_DMG_OWNER_STAT:hp",
+      "label": "dmg owner stat",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:hp:up",
+      "label": "Health up",
+      "isDebuff": false
+    }
+  ],
+  "2000038": [
+    {
+      "key": "status:WEAKNESS_GAUGE_DAMAGE",
+      "label": "WEAKNESS_GAUGE_DAMAGE",
+      "isDebuff": false
+    },
+    {
+      "key": "status:63",
+      "label": "Cooldown Reduction",
+      "isDebuff": false
+    }
+  ],
+  "2000039": [
+    {
+      "key": "status:62",
+      "label": "Priority Decrease",
+      "isDebuff": true
+    },
+    {
+      "key": "stat:atk:up",
+      "label": "Attack up",
+      "isDebuff": false
+    }
+  ],
+  "2000040": [
+    {
+      "key": "type:BT_DMG_CASTER_LOST_HP_RATE",
+      "label": "DMG scaling with lost HP",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    }
+  ],
+  "2000041": [
+    {
+      "key": "status:100",
+      "label": "Stealing Buff",
+      "isDebuff": true
+    }
+  ],
+  "2000042": [
+    {
+      "key": "stat:def:up",
+      "label": "Defense up",
+      "isDebuff": false
+    },
+    {
+      "key": "status:31",
+      "label": "Revival",
+      "isDebuff": false
+    }
+  ],
+  "2000043": [
+    {
+      "key": "status:44",
+      "label": "Extra Turn",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    }
+  ],
+  "2000044": [
+    {
+      "key": "status:SYS_BUFF_CHARGE_AP",
+      "label": "Gain Action Points",
+      "isDebuff": false
+    }
+  ],
+  "2000045": [
+    {
+      "key": "status:44",
+      "label": "Extra Turn",
+      "isDebuff": false
+    }
+  ],
+  "2000046": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    }
+  ],
+  "2000047": [
+    {
+      "key": "status:29",
+      "label": "Barrier",
+      "isDebuff": false
+    }
+  ],
+  "2000048": [
+    {
+      "key": "status:63",
+      "label": "Cooldown Reduction",
+      "isDebuff": false
+    }
+  ],
+  "2000049": [
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_DMG_TO_BOSS",
+      "label": "DMG vs bosses",
+      "isDebuff": false
+    }
+  ],
+  "2000050": [
+    {
+      "key": "heal:BT_HEAL_BASED_CASTER:hp",
+      "label": "heal based caster",
+      "isDebuff": false
+    },
+    {
+      "key": "status:SYS_BUFF_CHARGE_AP",
+      "label": "Gain Action Points",
+      "isDebuff": false
+    }
+  ],
+  "2000051": [
+    {
+      "key": "stat:counter_rate:up",
+      "label": "Counterattack Chance up",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:buff_resist:up",
+      "label": "Resilience up",
+      "isDebuff": false
+    }
+  ],
+  "2000052": [
+    {
+      "key": "status:34",
+      "label": "Stunned",
+      "isDebuff": true
+    },
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    }
+  ],
+  "2000053": [
+    {
+      "key": "status:SYS_BUFF_CHARGE_AP",
+      "label": "Gain Action Points",
+      "isDebuff": false
+    }
+  ],
+  "2000054": [
+    {
+      "key": "stat:speed:up",
+      "label": "Speed up",
+      "isDebuff": false
+    },
+    {
+      "key": "status:WEAKNESS_GAUGE_DAMAGE",
+      "label": "WEAKNESS_GAUGE_DAMAGE",
+      "isDebuff": false
+    }
+  ],
+  "2000055": [
+    {
+      "key": "stat:pierce_power_rate:up",
+      "label": "Penetration up",
+      "isDebuff": false
+    }
+  ],
+  "2000056": [
+    {
+      "key": "stat:get_gold_rate:up",
+      "label": "get_gold_rate up",
+      "isDebuff": false
+    },
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    }
+  ],
+  "2000057": [
+    {
+      "key": "stat:atk:up",
+      "label": "Attack up",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    }
+  ],
+  "2000058": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    }
+  ],
+  "2000059": [
+    {
+      "key": "stat:get_gold_rate:up",
+      "label": "get_gold_rate up",
+      "isDebuff": false
+    },
+    {
+      "key": "status:SYS_BUFF_CHARGE_AP",
+      "label": "Gain Action Points",
+      "isDebuff": false
+    }
+  ],
+  "2000060": [
+    {
+      "key": "stat:enter_ap:up",
+      "label": "Gains AP at the start of battle up",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    }
+  ],
+  "2000061": [
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:hp:up",
+      "label": "Health up",
+      "isDebuff": false
+    }
+  ],
+  "2000062": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    },
+    {
+      "key": "status:2",
+      "label": "Cursed",
+      "isDebuff": true
+    }
+  ],
+  "2000063": [
+    {
+      "key": "heal:BT_HEAL_BASED_TARGET:hp",
+      "label": "heal based target",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:hp:up",
+      "label": "Health up",
+      "isDebuff": false
+    }
+  ],
+  "2000064": [
+    {
+      "key": "status:SYS_BUFF_EXTEND_DEBUFF_UP",
+      "label": "Debuff Duration Increase",
+      "isDebuff": true
+    },
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    }
+  ],
+  "2000065": [
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:pierce_power_rate:up",
+      "label": "Penetration up",
+      "isDebuff": false
+    }
+  ],
+  "2000066": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    },
+    {
+      "key": "status:SYS_BUFF_CHARGE_AP",
+      "label": "Gain Action Points",
+      "isDebuff": false
+    }
+  ],
+  "2000067": [
+    {
+      "key": "status:49",
+      "label": "Debuff Removal",
+      "isDebuff": false
+    },
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    }
+  ],
+  "2000068": [
+    {
+      "key": "stat:speed:up",
+      "label": "Speed up",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    }
+  ],
+  "2000069": [
+    {
+      "key": "status:90",
+      "label": "Immortality",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    }
+  ],
+  "2000070": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    },
+    {
+      "key": "status:SYS_BUFF_CHARGE_AP",
+      "label": "Gain Action Points",
+      "isDebuff": false
+    }
+  ],
+  "2000071": [
+    {
+      "key": "type:BT_DMG_REDUCE",
+      "label": "DMG reduction",
+      "isDebuff": false
+    },
+    {
+      "key": "status:WEAKNESS_GAUGE_DAMAGE",
+      "label": "WEAKNESS_GAUGE_DAMAGE",
+      "isDebuff": false
+    }
+  ],
+  "2000072": [
+    {
+      "key": "stat:hp:up",
+      "label": "Health up",
+      "isDebuff": false
+    },
+    {
+      "key": "status:98",
+      "label": "Stealth",
+      "isDebuff": false
+    }
+  ],
+  "2000073": [
+    {
+      "key": "status:1",
+      "label": "Burned",
+      "isDebuff": true
+    },
+    {
+      "key": "stat:atk:up",
+      "label": "Attack up",
+      "isDebuff": false
+    }
+  ],
+  "2000074": [
+    {
+      "key": "type:BT_GROUP",
+      "label": "Group bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    }
+  ],
+  "2000075": [
+    {
+      "key": "damage:BT_DMG_TARGET_STAT:hp",
+      "label": "dmg target stat",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    }
+  ],
+  "2000076": [
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    }
+  ],
+  "2000077": [
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:def:up",
+      "label": "Defense up",
+      "isDebuff": false
+    }
+  ],
+  "2000078": [
+    {
+      "key": "damage:BT_DMG_CASTER_STAT:speed",
+      "label": "dmg caster stat",
+      "isDebuff": false
+    },
+    {
+      "key": "damage:BT_DMG_TARGET_STAT:speed",
+      "label": "dmg target stat",
+      "isDebuff": false
+    }
+  ],
+  "2000079": [
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    },
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    }
+  ],
+  "2000080": [
+    {
+      "key": "type:BT_DMG_TO_BOSS",
+      "label": "DMG vs bosses",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:def:down",
+      "label": "Defense down",
+      "isDebuff": true
+    }
+  ],
+  "2000081": [
+    {
+      "key": "status:1",
+      "label": "Burned",
+      "isDebuff": true
+    },
+    {
+      "key": "stat:atk:up",
+      "label": "Attack up",
+      "isDebuff": false
+    }
+  ],
+  "2000082": [
+    {
+      "key": "status:50",
+      "label": "Buff Duration Increase",
+      "isDebuff": false
+    },
+    {
+      "key": "status:62",
+      "label": "Priority Decrease",
+      "isDebuff": true
+    }
+  ],
+  "2000083": [
+    {
+      "key": "stat:enter_ap:up",
+      "label": "Gains AP at the start of battle up",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:speed:up",
+      "label": "Speed up",
+      "isDebuff": false
+    }
+  ],
+  "2000084": [
+    {
+      "key": "heal:BT_HEAL_BASED_CASTER:hp",
+      "label": "heal based caster",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:def:up",
+      "label": "Defense up",
+      "isDebuff": false
+    }
+  ],
+  "2000085": [
+    {
+      "key": "damage:BT_DMG_TARGET_STAT:atk",
+      "label": "dmg target stat",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:critical_dmg_rate:up",
+      "label": "Crit DMG up",
+      "isDebuff": false
+    }
+  ],
+  "2000086": [
+    {
+      "key": "damage:BT_DMG_OWNER_STAT:buff_chance",
+      "label": "dmg owner stat",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    }
+  ],
+  "2000087": [
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_DMG_TO_BOSS",
+      "label": "DMG vs bosses",
+      "isDebuff": false
+    },
+    {
+      "key": "status:WEAKNESS_GAUGE_DAMAGE",
+      "label": "WEAKNESS_GAUGE_DAMAGE",
+      "isDebuff": false
+    }
+  ],
+  "2000088": [
+    {
+      "key": "stat:hp:up",
+      "label": "Health up",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    }
+  ],
+  "2000089": [
+    {
+      "key": "stat:pierce_power_rate:up",
+      "label": "Penetration up",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:def:up",
+      "label": "Defense up",
+      "isDebuff": false
+    }
+  ],
+  "2000090": [
+    {
+      "key": "status:29",
+      "label": "Barrier",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    }
+  ],
+  "2000091": [
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_DMG_TO_BOSS",
+      "label": "DMG vs bosses",
+      "isDebuff": false
+    },
+    {
+      "key": "status:63",
+      "label": "Cooldown Reduction",
+      "isDebuff": false
+    }
+  ],
+  "2000092": [
+    {
+      "key": "type:BT_2000092_ENHANCE",
+      "label": "2000092 enhance",
+      "isDebuff": true
+    },
+    {
+      "key": "status:UNCOUNTERABLE",
+      "label": "UNCOUNTERABLE",
+      "isDebuff": false
+    }
+  ],
+  "2000093": [
+    {
+      "key": "stat:enter_ap:up",
+      "label": "Gains AP at the start of battle up",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_DMG_TO_BOSS",
+      "label": "DMG vs bosses",
+      "isDebuff": false
+    }
+  ],
+  "2000094": [
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:atk:up",
+      "label": "Attack up",
+      "isDebuff": false
+    }
+  ],
+  "2000095": [
+    {
+      "key": "type:BT_STAT",
+      "label": "Stat bonus",
+      "isDebuff": false
+    }
+  ],
+  "2000096": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    }
+  ],
+  "2000097": [
+    {
+      "key": "damage:BT_DMG_TARGET_STAT:hp",
+      "label": "dmg target stat",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:pierce_power_rate:up",
+      "label": "Penetration up",
+      "isDebuff": false
+    }
+  ],
+  "2000098": [
+    {
+      "key": "type:BT_DMG_REDUCE",
+      "label": "DMG reduction",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    }
+  ],
+  "2000099": [
+    {
+      "key": "status:WEAKNESS_GAUGE_DAMAGE",
+      "label": "WEAKNESS_GAUGE_DAMAGE",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    }
+  ],
+  "2000100": [
+    {
+      "key": "status:49",
+      "label": "Debuff Removal",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:buff_resist:up",
+      "label": "Resilience up",
+      "isDebuff": false
+    }
+  ],
+  "2000101": [
+    {
+      "key": "status:SYS_BUFF_CHARGE_AP",
+      "label": "Gain Action Points",
+      "isDebuff": false
+    }
+  ],
+  "2000102": [
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:hp:up",
+      "label": "Health up",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_2000092_ENHANCE",
+      "label": "2000092 enhance",
+      "isDebuff": true
+    },
+    {
+      "key": "type:BT_BURN_ENHANCE",
+      "label": "burn enhance",
+      "isDebuff": true
+    },
+    {
+      "key": "type:BT_BLEED_ENHANCE",
+      "label": "Bleed enhance",
+      "isDebuff": true
+    },
+    {
+      "key": "type:BT_POISON_ENHANCE",
+      "label": "Poison enhance",
+      "isDebuff": true
+    },
+    {
+      "key": "type:BT_LIGHTNING_ENHANCE",
+      "label": "lightning enhance",
+      "isDebuff": true
+    },
+    {
+      "key": "type:BT_CURSE_ENHANCE",
+      "label": "curse enhance",
+      "isDebuff": true
+    }
+  ],
+  "2000103": [
+    {
+      "key": "status:WEAKNESS_GAUGE_DAMAGE",
+      "label": "WEAKNESS_GAUGE_DAMAGE",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:hp:up",
+      "label": "Health up",
+      "isDebuff": false
+    }
+  ],
+  "2000105": [
+    {
+      "key": "status:UNCOUNTERABLE",
+      "label": "UNCOUNTERABLE",
+      "isDebuff": false
+    },
+    {
+      "key": "status:50",
+      "label": "Buff Duration Increase",
+      "isDebuff": false
+    }
+  ],
+  "2000106": [
+    {
+      "key": "type:BT_DMG_TO_BOSS",
+      "label": "DMG vs bosses",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_RESOURCE_CHARGE_BUFF_CASTER",
+      "label": "Resource charge",
+      "isDebuff": false
+    }
+  ],
+  "2000107": [
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_BLEED_ENHANCE",
+      "label": "Bleed enhance",
+      "isDebuff": false
+    }
+  ],
+  "2000108": [
+    {
+      "key": "stat:hp:up",
+      "label": "Health up",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    }
+  ],
+  "2000109": [
+    {
+      "key": "status:103",
+      "label": "Corrosive Poison",
+      "isDebuff": true
+    },
+    {
+      "key": "stat:pierce_power_rate:up",
+      "label": "Penetration up",
+      "isDebuff": false
+    }
+  ],
+  "2000110": [
+    {
+      "key": "type:BT_DMG_TO_BOSS",
+      "label": "DMG vs bosses",
+      "isDebuff": false
+    },
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    }
+  ],
+  "2000111": [
+    {
+      "key": "stat:critical_dmg_rate:up",
+      "label": "Crit DMG up",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_RESOURCE_CHARGE_BUFF_CASTER",
+      "label": "Resource charge",
+      "isDebuff": false
+    }
+  ],
+  "2000112": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:def:up",
+      "label": "Defense up",
+      "isDebuff": false
+    }
+  ],
+  "2000113": [
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    }
+  ],
+  "2000114": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_NONE",
+      "label": "none",
+      "isDebuff": false
+    },
+    {
+      "key": "status:53",
+      "label": "Debuff Duration Reduction",
+      "isDebuff": false
+    }
+  ],
+  "2000116": [
+    {
+      "key": "stat:def:up",
+      "label": "Defense up",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:pierce_power_rate:up",
+      "label": "Penetration up",
+      "isDebuff": false
+    }
+  ],
+  "2000117": [
+    {
+      "key": "stat:critical_dmg_rate:up",
+      "label": "Crit DMG up",
+      "isDebuff": false
+    },
+    {
+      "key": "status:UNCOUNTERABLE",
+      "label": "UNCOUNTERABLE",
+      "isDebuff": false
+    }
+  ],
+  "2000118": [
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:pierce_power_rate:up",
+      "label": "Penetration up",
+      "isDebuff": false
+    }
+  ],
+  "2000119": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    },
+    {
+      "key": "status:UNCOUNTERABLE",
+      "label": "UNCOUNTERABLE",
+      "isDebuff": false
+    }
+  ],
+  "2000121": [
+    {
+      "key": "damage:BT_DMG_TARGET_STAT:hp",
+      "label": "dmg target stat",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:pierce_power_rate:up",
+      "label": "Penetration up",
+      "isDebuff": false
+    }
+  ],
+  "2700003": [
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:pierce_power_rate:up",
+      "label": "Penetration up",
+      "isDebuff": false
+    }
+  ],
+  "2700005": [
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:atk:up",
+      "label": "Attack up",
+      "isDebuff": false
+    }
+  ],
+  "2700037": [
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
+      "isDebuff": false
+    },
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    }
+  ],
+  "2700043": [
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    },
+    {
+      "key": "status:UNCOUNTERABLE",
+      "label": "UNCOUNTERABLE",
+      "isDebuff": false
+    }
+  ],
+  "2700056": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_POISON_ENHANCE",
+      "label": "Poison enhance",
+      "isDebuff": true
+    }
+  ],
+  "2700070": [
+    {
+      "key": "status:61",
+      "label": "Priority Increase",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:def:up",
+      "label": "Defense up",
+      "isDebuff": false
+    }
+  ]
+}

@@ -5,6 +5,22 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-04
+
+- **Ranking helper : le vocabulaire « effets similaires » passe dans un
+  GÉNÉRATEUR dédié** (`datagen/generators/ee-effects.ts` →
+  `ee-effects.json`, décision Sevih : dériver des effets BRUTS des fichiers
+  du jeu, pas des chips curées de la carte EE). Par porteur : clés
+  normalisées `stat:<slug>:<dir>` (nom réel du jeu via `statNames` —
+  « Penetration up »), `status:<id>` (id canonique du glossaire via
+  `byTooltip`/`byLabel`), `<family>:<type>:<stat>` (mécanique adossée à une
+  stat ≠ buff de la stat), `type:<type>` sinon. THROW si un EE n'a aucun
+  effet comparable (preuve requise, pas de silence). 7 tests purs colocalisés
+  (dont le cas d'origine Triaena/Frost Nova) ; l'app devient un lecteur bête
+  du JSON — `eeCuratedChips`, ajouté le matin même pour l'approche chips,
+  est RETIRÉ (equipment-detail restauré à l'identique). Promotion ciblée
+  `--only ee-effects.json --apply` (124 porteurs).
+
 ## 2026-08-03
 
 - **`/contribute/ranking-helper` livré** (item « outil pour aider au
