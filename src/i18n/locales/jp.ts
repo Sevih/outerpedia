@@ -1,6 +1,10 @@
 ﻿import type { TranslationKey } from './en';
 
 const jp: Record<TranslationKey, string> = {
+  // Page 404
+  'notFound.title': 'ページが見つかりません',
+  'notFound.message': 'このページは存在しないか、移動されました。以下のリンクからお戻りください。',
+
   // Navigation
   'nav.home': 'ホーム',
   'nav.characters': 'キャラクター',

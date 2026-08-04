@@ -1,6 +1,10 @@
 ﻿import type { TranslationKey } from './en';
 
 const zh: Record<TranslationKey, string> = {
+  // Page 404
+  'notFound.title': '页面未找到',
+  'notFound.message': '该页面不存在或已被移动。请使用以下链接返回。',
+
   // Navigation
   'nav.home': '主页',
   'nav.characters': '角色',

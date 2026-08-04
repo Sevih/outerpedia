@@ -7,6 +7,11 @@
 // vestiges).
 
 const en = {
+  // Page 404
+  'notFound.title': 'Page not found',
+  'notFound.message':
+    'This page does not exist or has been moved. The links below will get you back on track.',
+
   // Navigation
   'nav.home': 'Home',
   'nav.characters': 'Characters',

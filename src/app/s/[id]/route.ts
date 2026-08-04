@@ -16,10 +16,15 @@ export const dynamic = 'force-dynamic';
  */
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  if (!ID_RE.test(id)) return new NextResponse(null, { status: 404 });
+  // Lien mort ou stockage indisponible : redirection vers l'accueil de l'hôte
+  // appelé plutôt qu'une réponse vide — celui qui clique un vieux lien partagé
+  // doit atterrir quelque part, pas sur une page blanche. Pas de Cache-Control
+  // ici : un id peut être créé après coup, l'indisponibilité est temporaire.
+  const home = () => NextResponse.redirect(new URL('/', request.url), 302);
+  if (!ID_RE.test(id)) return home();
 
   const conn = await getDbConnection();
-  if (!conn) return new NextResponse(null, { status: 503 });
+  if (!conn) return home();
   try {
     await ensureTable(conn);
     const [rows] = await conn.execute<RowDataPacket[]>(
@@ -27,7 +32,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
       [id],
     );
     const row = rows[0];
-    if (!row) return new NextResponse(null, { status: 404 });
+    if (!row) return home();
     // L'id étant un hash du chemin, l'association ne change jamais : la
     // redirection peut se mettre en cache (Cloudflare est devant).
     return NextResponse.redirect(new URL(row.path as string, request.url), {

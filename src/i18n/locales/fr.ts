@@ -1,6 +1,11 @@
 ﻿import type { TranslationKey } from './en';
 
 const fr: Record<TranslationKey, string> = {
+  // Page 404
+  'notFound.title': 'Page introuvable',
+  'notFound.message':
+    "Cette page n'existe pas ou a été déplacée. Les liens ci-dessous vous remettront sur la bonne voie.",
+
   // Navigation
   'nav.home': 'Accueil',
   'nav.characters': 'Personnages',

@@ -1,6 +1,10 @@
 ﻿import type { TranslationKey } from './en';
 
 const kr: Record<TranslationKey, string> = {
+  // Page 404
+  'notFound.title': '페이지를 찾을 수 없습니다',
+  'notFound.message': '페이지가 존재하지 않거나 이동되었습니다. 아래 링크를 이용해 주세요.',
+
   // Navigation
   'nav.home': '홈',
   'nav.characters': '캐릭터',

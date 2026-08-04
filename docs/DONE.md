@@ -7,6 +7,21 @@
 
 ## 2026-08-03
 
+- **Vraie page 404 localisée** (demande Sevih « on devrait pas aussi faire
+  des vraies pages 404 ? ») : aucun `not-found.tsx` n'existait — chaque
+  `notFound()` du site rendait la page par défaut de Next (anglais seul,
+  sans header ni retour possible), et un lien court `/s/` mort renvoyait
+  une réponse VIDE. Livré : `src/app/[lang]/not-found.tsx` rendue dans le
+  layout (header/footer présents), 2 clés i18n neuves ×5 + réutilisation
+  des clés nav pour les liens de sortie (accueil, persos, outils, guides).
+  ASTUCE STRUCTURELLE : une not-found ne reçoit pas les params du segment —
+  la langue vient du store à portée requête posé par le layout
+  (`getRequestLang`). Les `/s/` morts redirigent maintenant vers l'accueil
+  de l'hôte appelé (302 sans cache) au lieu de la page blanche.
+  « Under construction » : RIEN à créer — la landing `/tools` a déjà ses
+  badges (`coming-soon`/`hidden`/`unlisted`) et les cibles du header
+  existent toutes ; le patron « badge sans lien mort » reste la règle.
+
 - **Raccourcisseur branché sur les boutons « partager » des pages à état**
   (demande Sevih — solde l'item « bouton partager Discord »). INVENTAIRE des
   copies de lien : deux vrais consommateurs, le team-planner (lien `?z=`) et
