@@ -22,11 +22,18 @@
   modes EE, précision Sevih du 03/08 : la comparaison se fait par EFFETS
   SIMILAIRES — cohorte = porteurs d'un EE rangé partageant au moins une
   chip d'effet ACTIVE avec l'EE choisi (chips désactivables une à une,
-  tooltip des homologues = effets partagés). Le vocabulaire est celui de la
-  CARTE EE (curation `chipHide`/`chipAdd` appliquée — nouveau helper
-  `eeCuratedChips` à côté d'`eeEditorChips`, corps commun factorisé) : on
-  compare ce que les joueurs voient, pas les positions brutes. Anglais seul
-  et noindex, comme tout `/contribute`.
+  tooltip des homologues = effets partagés). Le vocabulaire est en DEUX
+  couches : les chips nommées de la CARTE EE (curation `chipHide`/`chipAdd`
+  appliquée — nouveau helper `eeCuratedChips` à côté d'`eeEditorChips`,
+  corps commun factorisé), PLUS des clés synthétiques pour les effets
+  structurés sans statut nommé (`stat:<slug>:<dir>` libellées via
+  `statAbbr`, clés par type sinon). MESURÉ après le test Sevih sur Lambda :
+  41 EE sur 124 n'ont AUCUNE chip nommée (« Penetration against bosses
+  +30% » est un effet de stat muet) — sans la couche 2, un tiers du roster
+  était incomparable et l'UI concluait à tort « pas d'EE ». Test de
+  régression sur la donnée réelle : tout perso à EE a ≥1 chip, et Lambda
+  (Triaena) partage `stat:pierce_power_rate:up` avec Snow core-fusion
+  (Frost Nova). Anglais seul et noindex, comme tout `/contribute`.
 
 - **Vraie page 404 localisée** (demande Sevih « on devrait pas aussi faire
   des vraies pages 404 ? ») : aucun `not-found.tsx` n'existait — chaque

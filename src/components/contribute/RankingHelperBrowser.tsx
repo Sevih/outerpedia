@@ -234,8 +234,14 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
 
             {/* Modes EE : la cohorte se définit par EFFETS SIMILAIRES — les
                 chips de l'EE choisi, désactivables une à une. */}
+            {isEeMode && !selected.ee && (
+              <p className="text-content-subtle text-sm">
+                This hero has no exclusive equipment — nothing to compare by effect.
+              </p>
+            )}
             {isEeMode &&
-              (selected.ee?.chips.length ? (
+              selected.ee &&
+              (selected.ee.chips.length ? (
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-content-subtle text-xs">Similar effects:</span>
                   {selected.ee.chips.map((c) => {
@@ -267,7 +273,7 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
                 </div>
               ) : (
                 <p className="text-content-subtle text-sm">
-                  This hero has no exclusive equipment — nothing to compare by effect.
+                  No comparable effect found on this EE.
                 </p>
               ))}
 
