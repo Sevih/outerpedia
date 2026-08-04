@@ -7,6 +7,22 @@
 
 ## 2026-08-03
 
+- **Raccourcisseur branché sur les boutons « partager » des pages à état**
+  (demande Sevih — solde l'item « bouton partager Discord »). INVENTAIRE des
+  copies de lien : deux vrais consommateurs, le team-planner (lien `?z=`) et
+  le browser de personnages (filtres dans l'URL, sync continue en 150 ms).
+  Helper client `src/lib/short-share.ts` — fichier SÉPARÉ de
+  `short-links.ts` (qui importe crypto/mysql2, interdit de bundle client) :
+  rend `/s/<id>` si le serveur répond, sinon le lien long autoporté (même
+  dégradation que le partage tier-list), et NE raccourcit PAS une URL sans
+  query/hash (le canonique est déjà court, zéro ligne en BDD pour rien).
+  NON branchés, à dessein : tier-list-maker (a déjà son `?s=` qui stocke le
+  CONTENU — le doubler d'un `/s/` serait deux mécanismes pour le même
+  bouton), ShareButtons des pages de contenu (URL canonique, rien à
+  raccourcir), progress-tracker (copie un JSON d'état, pas un lien),
+  damage-calculator (chantier d'un autre worker). Le rendu Discord vient des
+  meta de la page cible après la 302 — rien à faire de plus.
+
 - **CI rouge ×2 sur le commit du raccourcisseur — deux causes emboîtées,
   toutes deux réglées.** (1) Prettier NE CONVERGE PAS sur un code inline
   coupé en fin de ligne dans un item de liste Markdown : chaque `--write`

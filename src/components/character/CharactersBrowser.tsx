@@ -14,6 +14,7 @@ import {
 import type { AdvancedPanelLabels, FilterOption } from './filters/AdvancedFiltersPanel';
 import { ELEMENT_HEX, ROLE_HEX, RARITY_HEX, TONE } from './filters/FilterAtoms';
 import { decodeFilters, encodeFilters } from './filters/filter-codec';
+import { shortShareUrl } from '@/lib/short-share';
 import type { EffectGroup } from '@/lib/data/effect-filters';
 
 /** Ligne allégée pour l'affichage + le filtrage. */
@@ -315,10 +316,13 @@ export function CharactersBrowser({
   };
   const copyShareUrl = () => {
     if (typeof window === 'undefined') return;
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1200);
-    });
+    // Lien court `/s/<id>` si le serveur répond, URL courante sinon.
+    void shortShareUrl().then((url) =>
+      navigator.clipboard.writeText(url).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1200);
+      }),
+    );
   };
 
   // ── Chips actifs ──

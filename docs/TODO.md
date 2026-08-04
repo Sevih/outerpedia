@@ -57,14 +57,6 @@
       ToolShell et sur la landing /tools — l'allonger pour le SEO change
       l'écran. Options : découpler (clé meta dédiée) ou assumer le texte court.
 
-## ⚙️ Config / infra
-
-- [ ] **Bouton « partager » (Discord) sur les pages à état** — premier
-      consommateur du raccourcisseur `/s/[id]` livré le 03/08 :
-      `POST /api/shortlink { path }` répond `{ id }`, `GET /s/[id]` → 302,
-      dégradation lien long sans BDD (cf. DONE). Optionnel, à dessiner : où le
-      poser (tier-list maker ? progress tracker ?) et quel rendu côté Discord.
-
 ## 🤔 Décisions en attente (Sevih)
 
 - [ ] `TODO(guides)` de `datagen/extractor/version-monster.ts:16` : « Versionner »

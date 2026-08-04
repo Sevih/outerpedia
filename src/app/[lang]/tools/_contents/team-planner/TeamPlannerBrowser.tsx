@@ -23,6 +23,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import LZString from 'lz-string';
 import { FaArrowRotateLeft, FaCheck, FaLink, FaXmark } from 'react-icons/fa6';
 import { img, CHAIN_PILL, ELEMENT_ORDER } from '@/lib/images';
+import { shortShareUrl } from '@/lib/short-share';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import {
   EffectChip,
@@ -526,10 +527,13 @@ export function TeamPlannerBrowser({ chars, fx, statuses, labels: L }: Props) {
     if (teamName) compact.n = teamName;
     const z = LZString.compressToEncodedURIComponent(JSON.stringify(compact));
     window.history.replaceState(null, '', `${window.location.pathname}?z=${z}`);
-    void navigator.clipboard.writeText(window.location.href).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    });
+    // Lien court `/s/<id>` si le serveur répond, lien long `?z=` sinon.
+    void shortShareUrl().then((url) =>
+      navigator.clipboard.writeText(url).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+      }),
+    );
   }, [team, chainOrder, teamName]);
 
   const handleChainSlotClick = useCallback(
