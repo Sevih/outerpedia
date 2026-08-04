@@ -83,7 +83,10 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
   // Homologues : persos RANGÉS matchant chaque critère structurel actif (un
   // critère sans valeur côté perso choisi est ignoré plutôt que de vider la
   // cohorte — un perso sans rôle curé ou sans subclass arrive). Modes EE : en
-  // PLUS, partager AU MOINS UNE chip d'effet active avec l'EE choisi.
+  // PLUS, partager au moins une chip d'effet active — SAUF si l'utilisateur a
+  // tout éteint : zéro chip active = critère effets DÉSACTIVÉ, on compare en
+  // structurel seul (retour Shiraen 04/08 : tout éteindre pour ne filtrer que
+  // par classe vidait la cohorte au lieu de l'élargir).
   const peers = useMemo(() => {
     if (!selected) return [];
     const structural = rows
@@ -98,11 +101,12 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
           ? r.subClass === selected.subClass
           : true,
       );
-    const cohort = isEeMode
-      ? structural.filter(
-          (r) => r.id === selected.id || r.ee?.chips.some((c) => activeRefs.has(c.ref)),
-        )
-      : structural;
+    const cohort =
+      isEeMode && activeRefs.size > 0
+        ? structural.filter(
+            (r) => r.id === selected.id || r.ee?.chips.some((c) => activeRefs.has(c.ref)),
+          )
+        : structural;
     return cohort.sort(tierListRankOrder((r) => r.ranks[mode]));
   }, [rows, selected, mode, activeCriteria, isEeMode, activeRefs]);
 
@@ -330,7 +334,18 @@ function HeroSheet({
           <div className="flex items-start justify-between gap-2">
             <h2 className="text-content-strong text-xl font-semibold">
               {hero.prefix ? `${hero.prefix} ` : ''}
-              {hero.name}
+              {hero.name}{' '}
+              {/* Nouvel onglet : ouvrir la fiche ne doit pas perdre l'état de
+                  l'outil (perso, mode, filtres) — suggestion Arabyss 04/08. */}
+              <a
+                href={`/characters/${hero.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Open character page in a new tab"
+                className="text-content-subtle hover:text-accent align-middle text-sm font-normal"
+              >
+                ↗
+              </a>
             </h2>
             {(onClose || onFocus) && (
               <span className="flex shrink-0 gap-1">

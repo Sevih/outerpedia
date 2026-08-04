@@ -7,6 +7,14 @@
 
 ## 2026-08-04
 
+- **Ranking helper : retours Discord (Shiraen, Arabyss) après mise en ligne.**
+  (1) BUG : en modes EE, éteindre toutes les chips d'effets pour ne comparer
+  qu'en structurel (« Same role » seul) VIDAIT la cohorte — le filtre
+  exigeait « partage une chip active » face à un ensemble vide. Corrigé :
+  zéro chip active = critère effets DÉSACTIVÉ, cohorte structurelle seule.
+  (2) Suggestion : lien ↗ vers la fiche du perso depuis chaque cadre —
+  NOUVEL onglet, ouvrir la fiche ne doit pas perdre l'état de l'outil.
+
 - **Ranking helper : second cadre de comparaison** (demande Sevih : « il ne
   faut pas perdre le focus du hero »). Cliquer un homologue n'écrase plus le
   perso discuté : sa fiche s'ouvre À CÔTÉ (grille 2 colonnes en large,
