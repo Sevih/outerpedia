@@ -7,6 +7,20 @@
 
 ## 2026-08-04
 
+- **Ranking helper : passe UI d'après capture Sevih.** (1) Fiche cassée —
+  cause : le span racine de `CharacterPortrait` est `w-full`, lâché dans une
+  rangée flex il avale toute la largeur → conteneurs à largeur FIXE autour
+  de chaque portrait en rangée. (2) Les textes d'EE passaient BRUTS
+  (`<color=#…>`, `\n` littéraux) → rendus via `GameText` (fiche) et
+  nettoyés pour les tooltips natifs. (3) « Comparer les EE sans voir les
+  effets des persos affichés est difficile » → en modes EE, les homologues
+  deviennent des CARTES (portrait + nom + LEURS chips d'effets, partagées
+  en surbrillance, texte complet de l'EE en tooltip) au lieu de portraits
+  nus. (4) Demande complémentaire : filtres structurels dans TOUS les modes
+  (+ « Same subclass » ajouté, `subClass` exposé dans la donnée et la
+  fiche) — état séparé pour les modes EE, défaut VIDE (les effets font la
+  cohorte, un Set partagé imposerait rôle+élément aux comparaisons EE).
+
 - **Ranking helper : le vocabulaire « effets similaires » passe dans un
   GÉNÉRATEUR dédié** (`datagen/generators/ee-effects.ts` →
   `ee-effects.json`, décision Sevih : dériver des effets BRUTS des fichiers

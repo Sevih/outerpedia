@@ -48,6 +48,7 @@ export interface RankingHelperRow {
   searchNames: string[];
   element: string;
   class: string;
+  subClass?: string;
   rarity: number;
   role?: string;
   tags: string[];
@@ -71,6 +72,7 @@ export function rankingHelperRows(): RankingHelperRow[] {
       searchNames: characterSearchNames(c, aliases[c.id]),
       element: c.element,
       class: c.class,
+      subClass: c.subClass,
       rarity: c.rarity,
       role: cu.role,
       tags: characterTags(c, curated),

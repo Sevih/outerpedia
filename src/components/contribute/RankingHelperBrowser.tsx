@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
+import { GameText } from '@/components/ui/GameText';
 import { TIERS, TIER_COLORS, tierListRankOrder, type Tier } from '@/components/tierlist/tiers';
 import type { RankingHelperRow } from '@/lib/contribute/ranking-helper-data';
 
@@ -23,15 +24,18 @@ const MODES: Array<{ key: RankMode; label: string }> = [
 ];
 
 /**
- * Critères de cohorte combinables (ET), pour PvE/PvP seulement. Par défaut
- * rôle + élément. Les modes EE comparent par EFFETS SIMILAIRES (chips de la
- * carte EE) : un EE de « combat readiness » se discute face aux autres EE de
- * combat readiness, pas face aux porteurs du même élément.
+ * Critères STRUCTURELS de cohorte, combinables (ET), disponibles dans tous
+ * les modes. PvE/PvP : défaut rôle + élément. Modes EE : défaut AUCUN — la
+ * cohorte y est d'abord affaire d'EFFETS SIMILAIRES (un EE de « combat
+ * readiness » se discute face aux autres EE de combat readiness, pas face
+ * aux porteurs du même élément) ; les critères s'y AJOUTENT à la demande
+ * (ne garder que les DPS, que les mêmes subclasses…).
  */
 const CRITERIA = [
   { key: 'role', label: 'Same role' },
   { key: 'element', label: 'Same element' },
   { key: 'class', label: 'Same class' },
+  { key: 'subclass', label: 'Same subclass' },
 ] as const;
 type Criterion = (typeof CRITERIA)[number]['key'];
 
@@ -40,6 +44,9 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [mode, setMode] = useState<RankMode>('pve');
   const [criteria, setCriteria] = useState<Set<Criterion>>(new Set(['role', 'element']));
+  // Critères des modes EE, à part : leur défaut est VIDE (les effets font la
+  // cohorte), un même Set partagé imposerait rôle+élément aux comparaisons EE.
+  const [eeCriteria, setEeCriteria] = useState<Set<Criterion>>(new Set());
   // Chips d'effet DÉSACTIVÉES (modes EE) — vide à chaque changement de perso :
   // par défaut, tous les effets de l'EE choisi comptent.
   const [disabledRefs, setDisabledRefs] = useState<Set<string>>(new Set());
@@ -58,8 +65,9 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
       .slice(0, 12);
   }, [rows, q]);
 
+  const activeCriteria = isEeMode ? eeCriteria : criteria;
   const toggleCriterion = (key: Criterion) =>
-    setCriteria((prev) => {
+    (isEeMode ? setEeCriteria : setCriteria)((prev) => {
       const next = new Set(prev);
       if (next.has(key)) next.delete(key);
       else next.add(key);
@@ -72,31 +80,37 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
     return new Set(chips.map((c) => c.ref).filter((ref) => !disabledRefs.has(ref)));
   }, [selected, disabledRefs]);
 
-  // Homologues. PvE/PvP : persos RANGÉS matchant chaque critère structurel
-  // actif (un critère sans valeur côté perso choisi est ignoré plutôt que de
-  // vider la cohorte — un perso sans rôle curé arrive). Modes EE : porteurs
-  // d'un EE rangé partageant AU MOINS UNE chip active avec l'EE choisi.
+  // Homologues : persos RANGÉS matchant chaque critère structurel actif (un
+  // critère sans valeur côté perso choisi est ignoré plutôt que de vider la
+  // cohorte — un perso sans rôle curé ou sans subclass arrive). Modes EE : en
+  // PLUS, partager AU MOINS UNE chip d'effet active avec l'EE choisi.
   const peers = useMemo(() => {
     if (!selected) return [];
-    const ranked = rows.filter((r) => r.ranks[mode]);
+    const structural = rows
+      .filter((r) => r.ranks[mode])
+      .filter((r) =>
+        activeCriteria.has('role') && selected.role ? r.role === selected.role : true,
+      )
+      .filter((r) => (activeCriteria.has('element') ? r.element === selected.element : true))
+      .filter((r) => (activeCriteria.has('class') ? r.class === selected.class : true))
+      .filter((r) =>
+        activeCriteria.has('subclass') && selected.subClass
+          ? r.subClass === selected.subClass
+          : true,
+      );
     const cohort = isEeMode
-      ? ranked.filter((r) => r.id === selected.id || r.ee?.chips.some((c) => activeRefs.has(c.ref)))
-      : ranked
-          .filter((r) => (criteria.has('role') && selected.role ? r.role === selected.role : true))
-          .filter((r) => (criteria.has('element') ? r.element === selected.element : true))
-          .filter((r) => (criteria.has('class') ? r.class === selected.class : true));
+      ? structural.filter(
+          (r) => r.id === selected.id || r.ee?.chips.some((c) => activeRefs.has(c.ref)),
+        )
+      : structural;
     return cohort.sort(tierListRankOrder((r) => r.ranks[mode]));
-  }, [rows, selected, mode, criteria, isEeMode, activeRefs]);
+  }, [rows, selected, mode, activeCriteria, isEeMode, activeRefs]);
 
   const pick = (id: string) => {
     setSelectedId(id);
     setQuery('');
     setDisabledRefs(new Set());
   };
-
-  /** Noms des effets partagés avec l'EE choisi (tooltip des homologues EE). */
-  const sharedWith = (r: RankingHelperRow): string[] =>
-    (r.ee?.chips ?? []).filter((c) => activeRefs.has(c.ref)).map((c) => c.name);
 
   return (
     <div className="space-y-6">
@@ -118,7 +132,11 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
                   onClick={() => pick(r.id)}
                   className="hover:bg-line/50 flex w-full items-center gap-2 px-3 py-1.5 text-left text-sm"
                 >
-                  <CharacterPortrait id={r.id} name={r.name} size={28} showName={false} />
+                  {/* Largeur FIXE : le span racine du portrait est w-full,
+                      lâché dans une rangée flex il avale toute la largeur. */}
+                  <span className="w-7 shrink-0">
+                    <CharacterPortrait id={r.id} name={r.name} size={28} showName={false} />
+                  </span>
                   <span className="text-content-strong">
                     {r.prefix ? `${r.prefix} ` : ''}
                     {r.name}
@@ -142,15 +160,17 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
           {/* ── Fiche condensée ── */}
           <div className="border-line-subtle bg-surface-raised rounded-lg border p-4">
             <div className="flex items-start gap-4">
-              <CharacterPortrait
-                id={selected.id}
-                name={selected.name}
-                element={selected.element}
-                classType={selected.class}
-                rarity={selected.rarity}
-                size={72}
-                showName={false}
-              />
+              <div className="w-18 shrink-0">
+                <CharacterPortrait
+                  id={selected.id}
+                  name={selected.name}
+                  element={selected.element}
+                  classType={selected.class}
+                  rarity={selected.rarity}
+                  size={72}
+                  showName={false}
+                />
+              </div>
               <div className="min-w-0 flex-1">
                 <h2 className="text-content-strong text-xl font-semibold">
                   {selected.prefix ? `${selected.prefix} ` : ''}
@@ -158,6 +178,7 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
                 </h2>
                 <p className="text-content-muted mt-0.5 text-sm capitalize">
                   {selected.element} · {selected.class}
+                  {selected.subClass ? ` (${selected.subClass})` : ''}
                   {selected.role ? ` · ${selected.role}` : ''}
                 </p>
                 {selected.tags.length > 0 && (
@@ -183,12 +204,15 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
                 </h3>
                 <ul className="mt-1 space-y-1">
                   {selected.ee.passives.map((p, i) => (
-                    <li key={i} className="text-content-muted text-sm">
+                    <li key={i} className="text-sm">
                       <span className="text-content-subtle">
                         Lv.{p.level}
-                        {p.level > 1 ? (p.isAdd ? ' (adds)' : ' (replaces)') : ''} —{' '}
-                      </span>
-                      {p.text}
+                        {p.level > 1 ? (p.isAdd ? ' (adds)' : ' (replaces)') : ''} —
+                      </span>{' '}
+                      <GameText
+                        text={p.text}
+                        className="text-content-muted inline whitespace-pre-line"
+                      />
                     </li>
                   ))}
                 </ul>
@@ -215,21 +239,20 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
                   </button>
                 ))}
               </div>
-              {!isEeMode &&
-                CRITERIA.map((c) => (
-                  <button
-                    key={c.key}
-                    type="button"
-                    onClick={() => toggleCriterion(c.key)}
-                    className={`rounded-full border px-3 py-1 text-xs transition-colors ${
-                      criteria.has(c.key)
-                        ? 'border-accent bg-accent/15 text-content-strong'
-                        : 'border-line text-content-muted hover:bg-line/50'
-                    }`}
-                  >
-                    {c.label}
-                  </button>
-                ))}
+              {CRITERIA.map((c) => (
+                <button
+                  key={c.key}
+                  type="button"
+                  onClick={() => toggleCriterion(c.key)}
+                  className={`rounded-full border px-3 py-1 text-xs transition-colors ${
+                    activeCriteria.has(c.key)
+                      ? 'border-accent bg-accent/15 text-content-strong'
+                      : 'border-line text-content-muted hover:bg-line/50'
+                  }`}
+                >
+                  {c.label}
+                </button>
+              ))}
             </div>
 
             {/* Modes EE : la cohorte se définit par EFFETS SIMILAIRES — les
@@ -293,11 +316,8 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
                   peers={inTier}
                   selectedId={selected.id}
                   onPick={pick}
-                  titleFor={(r) => {
-                    if (!isEeMode || r.id === selected.id) return r.name;
-                    const shared = sharedWith(r);
-                    return shared.length ? `${r.name} — shared: ${shared.join(', ')}` : r.name;
-                  }}
+                  eeMode={isEeMode}
+                  activeRefs={activeRefs}
                 />
               );
             })}
@@ -313,19 +333,31 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
   );
 }
 
+/** Texte COMPLET d'un EE en tooltip natif : balises couleur et `\n` retirés. */
+function eeTitle(r: RankingHelperRow): string {
+  if (!r.ee) return r.name;
+  const lines = r.ee.passives.map(
+    (p) => `Lv.${p.level}: ${p.text.replace(/<\/?color[^>]*>/gi, '').replace(/\\n/g, ' — ')}`,
+  );
+  return `${r.name} — ${r.ee.name}\n${lines.join('\n')}`;
+}
+
 function TierRow({
   tier,
   peers,
   selectedId,
   onPick,
-  titleFor,
+  eeMode,
+  activeRefs,
 }: {
   tier: Tier;
   peers: RankingHelperRow[];
   selectedId: string;
   onPick: (id: string) => void;
-  /** Tooltip d'un homologue (modes EE : liste des effets partagés). */
-  titleFor: (r: RankingHelperRow) => string;
+  /** Modes EE : cartes avec les effets de CHAQUE homologue, pas juste le portrait. */
+  eeMode: boolean;
+  /** Refs d'effet actives de l'EE choisi (surbrillance des effets partagés). */
+  activeRefs: Set<string>;
 }) {
   return (
     <div className={`rounded-lg border bg-gradient-to-r p-2 ${TIER_COLORS[tier]}`}>
@@ -334,19 +366,56 @@ function TierRow({
           {tier}
         </span>
         <div className="flex flex-wrap gap-2">
-          {peers.map((r) => (
-            <button
-              key={r.id}
-              type="button"
-              onClick={() => onPick(r.id)}
-              title={titleFor(r)}
-              className={`rounded-md p-0.5 transition-transform hover:scale-105 ${
-                r.id === selectedId ? 'ring-accent ring-2' : ''
-              }`}
-            >
-              <CharacterPortrait id={r.id} name={r.name} size={48} showName={false} />
-            </button>
-          ))}
+          {peers.map((r) =>
+            eeMode ? (
+              <button
+                key={r.id}
+                type="button"
+                onClick={() => onPick(r.id)}
+                title={eeTitle(r)}
+                className={`border-line/60 bg-surface-raised/70 hover:border-accent flex max-w-full min-w-52 items-start gap-2 rounded-md border p-2 text-left transition-colors ${
+                  r.id === selectedId ? 'ring-accent ring-2' : ''
+                }`}
+              >
+                <span className="w-10 shrink-0">
+                  <CharacterPortrait id={r.id} name={r.name} size={40} showName={false} />
+                </span>
+                <span className="min-w-0">
+                  <span className="text-content-strong block truncate text-xs font-semibold">
+                    {r.name}
+                  </span>
+                  <span className="mt-1 flex flex-wrap gap-1">
+                    {(r.ee?.chips ?? []).map((c) => (
+                      <span
+                        key={c.ref}
+                        className={`rounded-full border px-1.5 py-px text-[10px] leading-4 ${
+                          activeRefs.has(c.ref)
+                            ? c.isDebuff
+                              ? 'text-content-strong border-rose-500/60 bg-rose-500/10'
+                              : 'text-content-strong border-emerald-500/60 bg-emerald-500/10'
+                            : 'border-line text-content-muted'
+                        }`}
+                      >
+                        {c.name}
+                      </span>
+                    ))}
+                  </span>
+                </span>
+              </button>
+            ) : (
+              <button
+                key={r.id}
+                type="button"
+                onClick={() => onPick(r.id)}
+                title={r.name}
+                className={`rounded-md p-0.5 transition-transform hover:scale-105 ${
+                  r.id === selectedId ? 'ring-accent ring-2' : ''
+                }`}
+              >
+                <CharacterPortrait id={r.id} name={r.name} size={48} showName={false} />
+              </button>
+            ),
+          )}
         </div>
       </div>
     </div>
