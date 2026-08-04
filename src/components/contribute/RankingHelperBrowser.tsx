@@ -434,7 +434,7 @@ function TierRow({
   activeRefs: Set<string>;
 }) {
   return (
-    <div className={`rounded-lg border bg-gradient-to-r p-2 ${TIER_COLORS[tier]}`}>
+    <div className={`rounded-lg border bg-linear-to-r p-2 ${TIER_COLORS[tier]}`}>
       <div className="flex items-start gap-3">
         <span className="text-content-strong w-6 shrink-0 pt-1 text-center text-lg font-bold">
           {tier}

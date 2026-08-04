@@ -36,7 +36,7 @@ export interface EditorialAccentClasses {
   borderT: string;
   /** Puce lumineuse des listes à points. */
   dot: string;
-  /** Départ du dégradé des cartes featured (avec `bg-gradient-to-b … to-transparent`). */
+  /** Départ du dégradé des cartes featured (avec `bg-linear-to-b … to-transparent`). */
   from: string;
 }
 
