@@ -106,11 +106,20 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
     return cohort.sort(tierListRankOrder((r) => r.ranks[mode]));
   }, [rows, selected, mode, activeCriteria, isEeMode, activeRefs]);
 
+  // Second cadre : le perso discuté GARDE le focus, cliquer un homologue
+  // l'ouvre en COMPARAISON à côté (demande Sevih) — « Focus » le promeut.
+  const [comparedId, setComparedId] = useState<string | null>(null);
+  const compared = comparedId && comparedId !== selectedId ? (byId.get(comparedId) ?? null) : null;
+
   const pick = (id: string) => {
     setSelectedId(id);
     setQuery('');
     setDisabledRefs(new Set());
+    setComparedId(null);
   };
+
+  const compare = (id: string) =>
+    setComparedId((prev) => (id === selectedId || prev === id ? null : id));
 
   return (
     <div className="space-y-6">
@@ -157,66 +166,15 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
 
       {selected && (
         <>
-          {/* ── Fiche condensée ── */}
-          <div className="border-line-subtle bg-surface-raised rounded-lg border p-4">
-            <div className="flex items-start gap-4">
-              <div className="w-18 shrink-0">
-                <CharacterPortrait
-                  id={selected.id}
-                  name={selected.name}
-                  element={selected.element}
-                  classType={selected.class}
-                  rarity={selected.rarity}
-                  size={72}
-                  showName={false}
-                />
-              </div>
-              <div className="min-w-0 flex-1">
-                <h2 className="text-content-strong text-xl font-semibold">
-                  {selected.prefix ? `${selected.prefix} ` : ''}
-                  {selected.name}
-                </h2>
-                <p className="text-content-muted mt-0.5 text-sm capitalize">
-                  {selected.element} · {selected.class}
-                  {selected.subClass ? ` (${selected.subClass})` : ''}
-                  {selected.role ? ` · ${selected.role}` : ''}
-                </p>
-                {selected.tags.length > 0 && (
-                  <p className="text-content-subtle mt-1 text-xs">{selected.tags.join(' · ')}</p>
-                )}
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {MODES.map((m) => (
-                    <span
-                      key={m.key}
-                      className="border-line bg-surface-sunken text-content-strong rounded border px-2 py-0.5 text-xs"
-                    >
-                      {m.label} : <strong>{selected.ranks[m.key] ?? '—'}</strong>
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {selected.ee && (
-              <div className="border-line-subtle mt-4 border-t pt-3">
-                <h3 className="text-content-strong text-sm font-semibold">
-                  EE — {selected.ee.name}
-                </h3>
-                <ul className="mt-1 space-y-1">
-                  {selected.ee.passives.map((p, i) => (
-                    <li key={i} className="text-sm">
-                      <span className="text-content-subtle">
-                        Lv.{p.level}
-                        {p.level > 1 ? (p.isAdd ? ' (adds)' : ' (replaces)') : ''} —
-                      </span>{' '}
-                      <GameText
-                        text={p.text}
-                        className="text-content-muted inline whitespace-pre-line"
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          {/* ── Fiche(s) : le perso discuté + l'homologue comparé ── */}
+          <div className={`grid gap-4 ${compared ? 'items-start lg:grid-cols-2' : ''}`}>
+            <HeroSheet hero={selected} />
+            {compared && (
+              <HeroSheet
+                hero={compared}
+                onClose={() => setComparedId(null)}
+                onFocus={() => pick(compared.id)}
+              />
             )}
           </div>
 
@@ -315,7 +273,8 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
                   tier={tier}
                   peers={inTier}
                   selectedId={selected.id}
-                  onPick={pick}
+                  comparedId={comparedId}
+                  onPick={compare}
                   eeMode={isEeMode}
                   activeRefs={activeRefs}
                 />
@@ -342,10 +301,108 @@ function eeTitle(r: RankingHelperRow): string {
   return `${r.name} — ${r.ee.name}\n${lines.join('\n')}`;
 }
 
+/** Fiche condensée d'un perso — cadre principal ET cadre de comparaison. */
+function HeroSheet({
+  hero,
+  onClose,
+  onFocus,
+}: {
+  hero: RankingHelperRow;
+  /** Présents sur le cadre de COMPARAISON seulement. */
+  onClose?: () => void;
+  onFocus?: () => void;
+}) {
+  return (
+    <div className="border-line-subtle bg-surface-raised rounded-lg border p-4">
+      <div className="flex items-start gap-4">
+        <div className="w-18 shrink-0">
+          <CharacterPortrait
+            id={hero.id}
+            name={hero.name}
+            element={hero.element}
+            classType={hero.class}
+            rarity={hero.rarity}
+            size={72}
+            showName={false}
+          />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-start justify-between gap-2">
+            <h2 className="text-content-strong text-xl font-semibold">
+              {hero.prefix ? `${hero.prefix} ` : ''}
+              {hero.name}
+            </h2>
+            {(onClose || onFocus) && (
+              <span className="flex shrink-0 gap-1">
+                {onFocus && (
+                  <button
+                    type="button"
+                    onClick={onFocus}
+                    title="Make this hero the main focus"
+                    className="border-line text-content-muted hover:border-accent hover:text-content-strong rounded border px-2 py-0.5 text-xs transition-colors"
+                  >
+                    Focus
+                  </button>
+                )}
+                {onClose && (
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    aria-label="Close comparison"
+                    className="border-line text-content-muted hover:border-accent hover:text-content-strong rounded border px-2 py-0.5 text-xs transition-colors"
+                  >
+                    ✕
+                  </button>
+                )}
+              </span>
+            )}
+          </div>
+          <p className="text-content-muted mt-0.5 text-sm capitalize">
+            {hero.element} · {hero.class}
+            {hero.subClass ? ` (${hero.subClass})` : ''}
+            {hero.role ? ` · ${hero.role}` : ''}
+          </p>
+          {hero.tags.length > 0 && (
+            <p className="text-content-subtle mt-1 text-xs">{hero.tags.join(' · ')}</p>
+          )}
+          <div className="mt-3 flex flex-wrap gap-2">
+            {MODES.map((m) => (
+              <span
+                key={m.key}
+                className="border-line bg-surface-sunken text-content-strong rounded border px-2 py-0.5 text-xs"
+              >
+                {m.label} : <strong>{hero.ranks[m.key] ?? '—'}</strong>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {hero.ee && (
+        <div className="border-line-subtle mt-4 border-t pt-3">
+          <h3 className="text-content-strong text-sm font-semibold">EE — {hero.ee.name}</h3>
+          <ul className="mt-1 space-y-1">
+            {hero.ee.passives.map((p, i) => (
+              <li key={i} className="text-sm">
+                <span className="text-content-subtle">
+                  Lv.{p.level}
+                  {p.level > 1 ? (p.isAdd ? ' (adds)' : ' (replaces)') : ''} —
+                </span>{' '}
+                <GameText text={p.text} className="text-content-muted inline whitespace-pre-line" />
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function TierRow({
   tier,
   peers,
   selectedId,
+  comparedId,
   onPick,
   eeMode,
   activeRefs,
@@ -353,6 +410,8 @@ function TierRow({
   tier: Tier;
   peers: RankingHelperRow[];
   selectedId: string;
+  /** Homologue ouvert dans le cadre de comparaison (anneau distinct). */
+  comparedId: string | null;
   onPick: (id: string) => void;
   /** Modes EE : cartes avec les effets de CHAQUE homologue, pas juste le portrait. */
   eeMode: boolean;
@@ -374,7 +433,11 @@ function TierRow({
                 onClick={() => onPick(r.id)}
                 title={eeTitle(r)}
                 className={`border-line/60 bg-surface-raised/70 hover:border-accent flex max-w-full min-w-52 items-start gap-2 rounded-md border p-2 text-left transition-colors ${
-                  r.id === selectedId ? 'ring-accent ring-2' : ''
+                  r.id === selectedId
+                    ? 'ring-accent ring-2'
+                    : r.id === comparedId
+                      ? 'ring-2 ring-emerald-400'
+                      : ''
                 }`}
               >
                 <span className="w-10 shrink-0">
@@ -409,7 +472,11 @@ function TierRow({
                 onClick={() => onPick(r.id)}
                 title={r.name}
                 className={`rounded-md p-0.5 transition-transform hover:scale-105 ${
-                  r.id === selectedId ? 'ring-accent ring-2' : ''
+                  r.id === selectedId
+                    ? 'ring-accent ring-2'
+                    : r.id === comparedId
+                      ? 'ring-2 ring-emerald-400'
+                      : ''
                 }`}
               >
                 <CharacterPortrait id={r.id} name={r.name} size={48} showName={false} />

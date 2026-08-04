@@ -7,6 +7,14 @@
 
 ## 2026-08-04
 
+- **Ranking helper : second cadre de comparaison** (demande Sevih : « il ne
+  faut pas perdre le focus du hero »). Cliquer un homologue n'écrase plus le
+  perso discuté : sa fiche s'ouvre À CÔTÉ (grille 2 colonnes en large,
+  empilée en mobile), avec ✕ pour fermer et « Focus » pour le promouvoir en
+  principal. Anneau accent = perso discuté, anneau vert = comparé ;
+  re-cliquer le même homologue ferme la comparaison. La fiche condensée est
+  extraite en `HeroSheet`, partagée par les deux cadres.
+
 - **Ranking helper : passe UI d'après capture Sevih.** (1) Fiche cassée —
   cause : le span racine de `CharacterPortrait` est `w-full`, lâché dans une
   rangée flex il avale toute la largeur → conteneurs à largeur FIXE autour
