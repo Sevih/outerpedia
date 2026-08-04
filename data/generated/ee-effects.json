@@ -238,7 +238,7 @@
     },
     {
       "key": "heal:BT_HEAL_BASED_CASTER:hp",
-      "label": "heal based caster",
+      "label": "Heal (caster-based)",
       "isDebuff": false
     }
   ],
@@ -298,7 +298,7 @@
   "2000029": [
     {
       "key": "damage:BT_DMG_OWNER_STAT:speed",
-      "label": "dmg owner stat",
+      "label": "DMG scaling with own stat",
       "isDebuff": false
     },
     {
@@ -315,7 +315,7 @@
   "2000030": [
     {
       "key": "heal:BT_HEAL_BASED_TARGET:hp",
-      "label": "heal based target",
+      "label": "Heal (target-based)",
       "isDebuff": false
     }
   ],
@@ -327,7 +327,7 @@
     },
     {
       "key": "damage:BT_DMG_OWNER_STAT:speed",
-      "label": "dmg owner stat",
+      "label": "DMG scaling with own stat",
       "isDebuff": false
     }
   ],
@@ -387,14 +387,14 @@
     },
     {
       "key": "heal:BT_HEAL_BASED_CASTER:hp",
-      "label": "heal based caster",
+      "label": "Heal (caster-based)",
       "isDebuff": false
     }
   ],
   "2000037": [
     {
       "key": "damage:BT_DMG_OWNER_STAT:hp",
-      "label": "dmg owner stat",
+      "label": "DMG scaling with own stat",
       "isDebuff": false
     },
     {
@@ -525,7 +525,7 @@
   "2000050": [
     {
       "key": "heal:BT_HEAL_BASED_CASTER:hp",
-      "label": "heal based caster",
+      "label": "Heal (caster-based)",
       "isDebuff": false
     },
     {
@@ -666,7 +666,7 @@
   "2000063": [
     {
       "key": "heal:BT_HEAL_BASED_TARGET:hp",
-      "label": "heal based target",
+      "label": "Heal (target-based)",
       "isDebuff": false
     },
     {
@@ -810,7 +810,7 @@
   "2000075": [
     {
       "key": "damage:BT_DMG_TARGET_STAT:hp",
-      "label": "dmg target stat",
+      "label": "Dmg target stat",
       "isDebuff": false
     },
     {
@@ -841,12 +841,12 @@
   "2000078": [
     {
       "key": "damage:BT_DMG_CASTER_STAT:speed",
-      "label": "dmg caster stat",
+      "label": "Dmg caster stat",
       "isDebuff": false
     },
     {
       "key": "damage:BT_DMG_TARGET_STAT:speed",
-      "label": "dmg target stat",
+      "label": "Dmg target stat",
       "isDebuff": false
     }
   ],
@@ -913,7 +913,7 @@
   "2000084": [
     {
       "key": "heal:BT_HEAL_BASED_CASTER:hp",
-      "label": "heal based caster",
+      "label": "Heal (caster-based)",
       "isDebuff": false
     },
     {
@@ -925,7 +925,7 @@
   "2000085": [
     {
       "key": "damage:BT_DMG_TARGET_STAT:atk",
-      "label": "dmg target stat",
+      "label": "Dmg target stat",
       "isDebuff": false
     },
     {
@@ -937,7 +937,7 @@
   "2000086": [
     {
       "key": "damage:BT_DMG_OWNER_STAT:buff_chance",
-      "label": "dmg owner stat",
+      "label": "DMG scaling with own stat",
       "isDebuff": false
     },
     {
@@ -1019,7 +1019,7 @@
   "2000092": [
     {
       "key": "type:BT_2000092_ENHANCE",
-      "label": "2000092 enhance",
+      "label": "Eternal Bleeding enhance",
       "isDebuff": true
     },
     {
@@ -1069,7 +1069,7 @@
   "2000097": [
     {
       "key": "damage:BT_DMG_TARGET_STAT:hp",
-      "label": "dmg target stat",
+      "label": "Dmg target stat",
       "isDebuff": false
     },
     {
@@ -1133,34 +1133,9 @@
       "isDebuff": false
     },
     {
-      "key": "type:BT_2000092_ENHANCE",
-      "label": "2000092 enhance",
-      "isDebuff": true
-    },
-    {
-      "key": "type:BT_BURN_ENHANCE",
-      "label": "burn enhance",
-      "isDebuff": true
-    },
-    {
-      "key": "type:BT_BLEED_ENHANCE",
-      "label": "Bleed enhance",
-      "isDebuff": true
-    },
-    {
-      "key": "type:BT_POISON_ENHANCE",
-      "label": "Poison enhance",
-      "isDebuff": true
-    },
-    {
-      "key": "type:BT_LIGHTNING_ENHANCE",
-      "label": "lightning enhance",
-      "isDebuff": true
-    },
-    {
-      "key": "type:BT_CURSE_ENHANCE",
-      "label": "curse enhance",
-      "isDebuff": true
+      "key": "dot:taken",
+      "label": "Ally DoT taken",
+      "isDebuff": false
     }
   ],
   "2000103": [
@@ -1291,7 +1266,7 @@
     },
     {
       "key": "type:BT_NONE",
-      "label": "none",
+      "label": "None",
       "isDebuff": false
     },
     {
@@ -1351,7 +1326,7 @@
   "2000121": [
     {
       "key": "damage:BT_DMG_TARGET_STAT:hp",
-      "label": "dmg target stat",
+      "label": "Dmg target stat",
       "isDebuff": false
     },
     {

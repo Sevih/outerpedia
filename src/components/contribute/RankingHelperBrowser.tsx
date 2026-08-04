@@ -330,7 +330,6 @@ function HeroSheet({
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-2">
             <h2 className="text-content-strong text-xl font-semibold">
-              {hero.name}{' '}
               {/* Nouvel onglet : ouvrir la fiche ne doit pas perdre l'état de
                   l'outil (perso, mode, filtres) — suggestion Arabyss 04/08. */}
               <a
@@ -338,9 +337,9 @@ function HeroSheet({
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Open character page in a new tab"
-                className="text-content-subtle hover:text-accent align-middle text-sm font-normal"
+                className="hover:text-accent transition-colors"
               >
-                ↗
+                {hero.name}
               </a>
             </h2>
             {(onClose || onFocus) && (

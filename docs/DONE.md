@@ -7,6 +7,21 @@
 
 ## 2026-08-04
 
+- **ee-effects : DoT enhance — deux sens opposés sous le même type** (rapport
+  Sevih : Gnosis Beth « 2000092 enhance », Omega Nadja spammée de six chips
+  enhance). (1) `BT_2000092_ENHANCE` : le nombre est l'id du PERSO (Gnosis
+  Beth), PAS un id de statut — le résoudre par le glossaire des effets tombe
+  sur un homonyme (« Retribution's Dominion ») ; le nom vient du texte du
+  passif → « Eternal Bleeding enhance » en libellé explicite. (2) « Ally DoT
+  taken -30% » (Nadja +10) est implémenté par le jeu comme UN effet
+  `*_ENHANCE` PAR type de DoT ciblant les alliés : replié en UNE clé
+  `dot:taken` (« Ally DoT taken ») — la CIBLE distingue ce cas de l'enhance
+  offensif de Beth (target enemy_team). Au passage : libellés lisibles pour
+  les types restants (« DMG scaling with own stat », « Heal (caster-based)
+  »…), fallback capitalisé partout — plus aucun label brut ou minuscule
+  (vérifié sur les 124). Lien fiche perso : sur le NOM directement (nouvel
+  onglet), plus de flèche.
+
 - **ee-effects : labels non résolus (« get_gold_rate up ») — et une leçon.**
   Capture Sevih sur Notia. Le slug `get_gold_rate` est un RÉEMPLOI
   fourre-tout du jeu pour des mécaniques propres à un perso (« Fierce

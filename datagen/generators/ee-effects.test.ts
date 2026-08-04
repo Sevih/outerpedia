@@ -119,6 +119,34 @@ describe('entryFor — réduction en clé comparable', () => {
     expect(generic.label).toBe('Some new label');
   });
 
+  it('DoT enhance côté ALLIÉ → replié en UNE clé « Ally DoT taken » (cas Omega Nadja)', () => {
+    // « Ally DoT taken -30% » = un effet *_ENHANCE par type de DoT, target
+    // allié — six chips « enhance » pour un seul effet défensif sinon.
+    const dot = (type: string): EffectShape => ({
+      family: 'dot',
+      category: 'debuff',
+      type,
+      target: 'me',
+    });
+    const entries = ['BT_2000092_ENHANCE', 'BT_BURN_ENHANCE', 'BT_BLEED_ENHANCE'].map((t) =>
+      entryFor(dot(t), GLOSSARY),
+    );
+    expect(new Set(entries.map((e) => e.key)).size).toBe(1);
+    expect(entries[0]).toEqual({ key: 'dot:taken', label: 'Ally DoT taken', isDebuff: false });
+  });
+
+  it('DoT enhance OFFENSIF (target enemy) → clé par type, DoT signature nommé', () => {
+    const beth = entryFor(
+      { family: 'dot', category: 'debuff', type: 'BT_2000092_ENHANCE', target: 'enemy_team' },
+      GLOSSARY,
+    );
+    expect(beth).toEqual({
+      key: 'type:BT_2000092_ENHANCE',
+      label: 'Eternal Bleeding enhance',
+      isDebuff: true,
+    });
+  });
+
   it('mécanique adossée à une stat ≠ buff de la même stat', () => {
     const scaling = entryFor(
       { family: 'damage', category: 'buff', type: 'BT_DMG', target: 'me', stat: 'speed' },
@@ -140,7 +168,7 @@ describe('entryFor — réduction en clé comparable', () => {
     );
     expect(unknown).toEqual({
       key: 'type:BT_SOMETHING_NEW',
-      label: 'something new',
+      label: 'Something new',
       isDebuff: true,
     });
   });
