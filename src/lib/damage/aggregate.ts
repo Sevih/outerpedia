@@ -51,14 +51,40 @@ export interface StatChannel {
   rate: number;
 }
 
-/** Buffs `BT_STAT` → canaux plat/taux PAR stat (`ST_*`). */
-export function collectStatChannels(buffs: ActiveBuff[]): Record<string, StatChannel> {
+/** Contexte des stats « PV perdus » (BT 31/32, § 14) — absent : contribution 0. */
+export interface StatChannelContext {
+  owner?: { maxHP: number; hp: number };
+}
+
+/** Buffs `BT_STAT` (+ familles « PV perdus » § 14 : BT 31 OWNER_LOST_HP_RATE,
+ *  BT 32 `_HALF` — `InstanceValue = GetLostHPRateValue`) → canaux plat/taux
+ *  PAR stat (`ST_*`). */
+export function collectStatChannels(
+  buffs: ActiveBuff[],
+  ctx?: StatChannelContext,
+): Record<string, StatChannel> {
   const channels: Record<string, StatChannel> = {};
   for (const b of buffs) {
-    if (b.type !== 'BT_STAT' || !b.stat) continue;
+    if (!b.stat) continue;
+    let v: number;
+    if (b.type === 'BT_STAT') v = effectiveValue(b);
+    else if (
+      b.type === 'BT_STAT_OWNER_LOST_HP_RATE' ||
+      b.type === 'BT_STAT_OWNER_LOST_HP_RATE_HALF'
+    ) {
+      const owner = ctx?.owner;
+      if (!owner) continue; // contexte absent → 0, jamais deviné
+      // § 14 BT 32 : hpEff = clamp(2×HP − MaxHP, 0, MaxHP) — le bonus croît
+      // deux fois plus vite et sature quand HP ≤ 50 %.
+      const hp =
+        b.type === 'BT_STAT_OWNER_LOST_HP_RATE_HALF'
+          ? Math.min(Math.max(2 * owner.hp - owner.maxHP, 0), owner.maxHP)
+          : owner.hp;
+      v = getLostHPRateValue(owner.maxHP, hp, effectiveValue(b));
+    } else continue;
     const ch = (channels[b.stat] ??= { value: 0, rate: 0 });
-    if (b.applyingType === 'OAT_RATE') ch.rate += effectiveValue(b);
-    else ch.value += effectiveValue(b);
+    if (b.applyingType === 'OAT_RATE') ch.rate += v;
+    else ch.value += v;
   }
   return channels;
 }

@@ -151,7 +151,7 @@ export function collectBuffRefs(
   for (const g of Object.values(equipment.optionGroups)) for (const o of g) add(o.buffId);
   for (const g of Object.values(equipment.specialGroups))
     for (const s of g) {
-      add(s.buffId);
+      for (const b of s.buffIds ?? []) add(b);
       add(s.twoPiece?.buffId);
       add(s.fourPiece?.buffId);
     }

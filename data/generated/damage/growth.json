@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.10.804",
+  "resVersion": "1.10.805",
   "transcend": [
     {
       "basicStar": 1,
@@ -7061,6 +7061,162 @@
         "optionType": "IOT_BUFF",
         "buffId": "monad_gate_upgrade_2000079_3"
       }
+    }
+  ],
+  "guildMaxHp": [
+    {
+      "level": 1,
+      "maxHpValue": 8,
+      "modes": [
+        "DM_NORMAL",
+        "DM_SIDESTORY",
+        "DM_GOLD",
+        "DM_FARMING",
+        "DM_RAID_1",
+        "DM_RAID_2",
+        "DM_TOWER",
+        "DM_GUILD_DUNGEON"
+      ]
+    },
+    {
+      "level": 2,
+      "maxHpValue": 8,
+      "modes": [
+        "DM_NORMAL",
+        "DM_SIDESTORY",
+        "DM_GOLD",
+        "DM_FARMING",
+        "DM_RAID_1",
+        "DM_RAID_2",
+        "DM_TOWER",
+        "DM_GUILD_DUNGEON"
+      ]
+    },
+    {
+      "level": 3,
+      "maxHpValue": 8,
+      "modes": [
+        "DM_NORMAL",
+        "DM_SIDESTORY",
+        "DM_GOLD",
+        "DM_FARMING",
+        "DM_RAID_1",
+        "DM_RAID_2",
+        "DM_TOWER",
+        "DM_GUILD_DUNGEON"
+      ]
+    },
+    {
+      "level": 4,
+      "maxHpValue": 10,
+      "modes": [
+        "DM_NORMAL",
+        "DM_SIDESTORY",
+        "DM_GOLD",
+        "DM_FARMING",
+        "DM_RAID_1",
+        "DM_RAID_2",
+        "DM_TOWER",
+        "DM_GUILD_DUNGEON"
+      ]
+    },
+    {
+      "level": 5,
+      "maxHpValue": 10,
+      "modes": [
+        "DM_NORMAL",
+        "DM_SIDESTORY",
+        "DM_GOLD",
+        "DM_FARMING",
+        "DM_RAID_1",
+        "DM_RAID_2",
+        "DM_TOWER",
+        "DM_GUILD_DUNGEON"
+      ]
+    },
+    {
+      "level": 6,
+      "maxHpValue": 10,
+      "modes": [
+        "DM_NORMAL",
+        "DM_SIDESTORY",
+        "DM_GOLD",
+        "DM_FARMING",
+        "DM_RAID_1",
+        "DM_RAID_2",
+        "DM_TOWER",
+        "DM_GUILD_DUNGEON"
+      ]
+    },
+    {
+      "level": 7,
+      "maxHpValue": 12,
+      "modes": [
+        "DM_NORMAL",
+        "DM_SIDESTORY",
+        "DM_GOLD",
+        "DM_FARMING",
+        "DM_RAID_1",
+        "DM_RAID_2",
+        "DM_TOWER",
+        "DM_GUILD_DUNGEON"
+      ]
+    },
+    {
+      "level": 8,
+      "maxHpValue": 13,
+      "modes": [
+        "DM_NORMAL",
+        "DM_SIDESTORY",
+        "DM_GOLD",
+        "DM_FARMING",
+        "DM_RAID_1",
+        "DM_RAID_2",
+        "DM_TOWER",
+        "DM_GUILD_DUNGEON"
+      ]
+    },
+    {
+      "level": 9,
+      "maxHpValue": 14,
+      "modes": [
+        "DM_NORMAL",
+        "DM_SIDESTORY",
+        "DM_GOLD",
+        "DM_FARMING",
+        "DM_RAID_1",
+        "DM_RAID_2",
+        "DM_TOWER",
+        "DM_GUILD_DUNGEON"
+      ]
+    },
+    {
+      "level": 10,
+      "maxHpValue": 15,
+      "modes": [
+        "DM_NORMAL",
+        "DM_SIDESTORY",
+        "DM_GOLD",
+        "DM_FARMING",
+        "DM_RAID_1",
+        "DM_RAID_2",
+        "DM_TOWER",
+        "DM_GUILD_DUNGEON"
+      ]
+    }
+  ],
+  "titleMaxHp": [
+    {
+      "group": 65,
+      "title": "SYS_BUFF_USERNICKNAME_LICENSE_04",
+      "maxHpValue": 5,
+      "modes": [
+        "DM_NORMAL",
+        "DM_RAID_1",
+        "DM_RAID_2",
+        "DM_ADVENTURE_MISSION",
+        "DM_ADVENTURE_CHALLENGE"
+      ]
     }
   ]
 }

@@ -193,6 +193,9 @@ export interface ReportScenario {
   defenderCasterAliveAllies?: number;
   /** Overrides de contenu § 7.5bis (world boss special / infiltrate) : normal ×1000 forcé. */
   forceNormalOverride?: boolean;
+  /** Force l'émission de la branche MISS même sans esquive — le miss n'existe
+   *  plus hors buff de « miss chance » ; sert à comparer un coup manqué. */
+  includeMissBranch?: boolean;
   /** Cibles décomptées pour BT_DMG_ENEMY_TEAM_DECREASE (helper § 7). */
   decreaseTargetCount?: number;
   /** GameConfig MISSED_DAMAGE_RATE — défaut 500 (1.4.9). */
@@ -279,15 +282,22 @@ export function enumerateBranches(
   attacker: Pick<ReportAttacker, 'criticalRate'>,
   defender: Pick<ReportDefender, 'avoid'>,
   forceNormalOverride?: boolean,
+  includeMiss?: boolean,
 ): { branch: DamageBranch; probability: number }[] {
   if (forceNormalOverride) return [{ branch: 'normal', probability: 1 }];
   const pMiss = permilleSuccessProbability(defender.avoid);
   const pCrit = (1 - pMiss) * permilleSuccessProbability(attacker.criticalRate);
   const pNormal = 1 - pMiss - pCrit;
-  const branches: { branch: DamageBranch; probability: number }[] = [];
-  if (pNormal > 0) branches.push({ branch: 'normal', probability: pNormal });
-  if (pCrit > 0) branches.push({ branch: 'critical', probability: pCrit });
-  if (pMiss > 0) branches.push({ branch: 'miss', probability: pMiss });
+  // Normal et critique sont TOUJOURS émises (Sevih 05/08/2026) : les dégâts
+  // d'une branche ne dépendent pas de sa probabilité — P = 0 reste exact et
+  // l'espérance n'en pondère rien. Le miss n'existe plus dans le jeu courant
+  // hors buff de « miss chance » : émis seulement si possible (esquive > 0)
+  // ou FORCÉ par le scénario (comparaison d'un coup manqué observé).
+  const branches: { branch: DamageBranch; probability: number }[] = [
+    { branch: 'normal', probability: pNormal > 0 ? pNormal : 0 },
+    { branch: 'critical', probability: pCrit },
+  ];
+  if (pMiss > 0 || includeMiss) branches.push({ branch: 'miss', probability: pMiss });
   return branches;
 }
 
@@ -421,6 +431,7 @@ export function buildSkillReport(
     scenario.attacker,
     scenario.defender,
     scenario.forceNormalOverride,
+    scenario.includeMissBranch,
   );
 
   // Taux § 7 par branche — via le chemin « additive » de checkDamageRate

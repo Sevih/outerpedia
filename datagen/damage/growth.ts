@@ -96,12 +96,46 @@ export interface DamageMonadNode {
   effect: Omit<DamageNodeEffect, 'level'>;
 }
 
+/**
+ * Le buff de guilde par niveau 1..10 (spec § 16.2) : `GuildBuffTemplet` →
+ * `BuffSystemTemplet` (par `GroupID`) ; des 3 buffs système accordés, seul
+ * l'event buff `EBT_MAX_HP` pèse en combat. `maxHpValue` BRUT — le jeu fait
+ * `MaxHPRate = float32(100 + v) × 0.01f` puis `floor(rate × HP)` ; les modes
+ * `DM_*` sont émis NON traduits (règle transversale : enums bruts).
+ */
+export interface DamageGuildBuffTier {
+  level: number;
+  maxHpValue: number;
+  /** `DungeonMode` de la ligne — les modes où le buff s'applique. */
+  modes: string[];
+  /** `IgnoreDungeonMode` (vide en 1.4.9 pour la guilde — émis si présent). */
+  ignoreModes?: string[];
+}
+
+/**
+ * Event buff `EBT_MAX_HP` HORS guilde (spec § 16.2) : en 1.4.9, la seule
+ * ligne est le buff de TITRE « Premium Body » (groupe 65, +5 % PV max,
+ * accordé côté serveur — pass Story License premium). Émis en liste : un
+ * patch qui en ajoute est détecté par le test datagen, jamais absorbé en
+ * silence. Même arithmétique que la guilde (somme du manager, § 16.2).
+ */
+export interface DamageTitleMaxHpBuff {
+  group: number;
+  /** Clé du nom officiel (TextSystem) — identifie la ligne, jamais un libellé. */
+  title: string;
+  maxHpValue: number;
+  modes: string[];
+  ignoreModes?: string[];
+}
+
 export interface DamageGrowthData {
   transcend: DamageTranscendLine[];
   archive: DamageArchiveTier[];
   maxLevelSteps: DamageMaxLevelStep[];
   awakening: DamageAwakeningNode[];
   monad: DamageMonadNode[];
+  guildMaxHp: DamageGuildBuffTier[];
+  titleMaxHp: DamageTitleMaxHpBuff[];
 }
 
 /** Effet brut d'une ligne à couple `OptionType`/`StatType`/`BuffID` (champs
@@ -197,5 +231,47 @@ export function buildDamageGrowth(): DamageGrowthData {
     effect: nodeEffect(m),
   }));
 
-  return { transcend, archive, maxLevelSteps, awakening, monad };
+  // Buff de guilde : jointure GuildBuffTemplet.BuffGroupID → BuffSystemTemplet
+  // par GroupID (vérifié binaire 04/08/2026 — spec § 16.2), seul EBT_MAX_HP
+  // est retenu (GOLD/CHAR_EXP = économie, jamais en combat § 16).
+  const buffSystemByGroup = new Map<string, Row>();
+  for (const r of loadTable('BuffSystemTemplet')) {
+    if (r.GroupID) buffSystemByGroup.set(r.GroupID, r);
+  }
+  const guildGroups = new Set<string>();
+  const guildMaxHp: DamageGuildBuffTier[] = loadTable('GuildBuffTemplet')
+    .flatMap((g) => {
+      for (const id of splitCsv(g.BuffGroupID)) guildGroups.add(id);
+      const hp = splitCsv(g.BuffGroupID)
+        .map((id) => buffSystemByGroup.get(id))
+        .find((r) => r?.BuffType === 'EBT_MAX_HP');
+      if (!hp) return [];
+      const ignoreModes = splitCsv(hp.IgnoreDungeonMode);
+      return [
+        {
+          level: num(g.Level),
+          maxHpValue: num(hp.BuffValue),
+          modes: splitCsv(hp.DungeonMode),
+          ...(ignoreModes.length ? { ignoreModes } : {}),
+        },
+      ];
+    })
+    .sort((a, b) => a.level - b.level);
+
+  // EBT_MAX_HP hors guilde (buffs de titre serveur — « Premium Body » en 1.4.9).
+  const titleMaxHp: DamageTitleMaxHpBuff[] = loadTable('BuffSystemTemplet')
+    .filter((r) => r.BuffType === 'EBT_MAX_HP' && !guildGroups.has(r.GroupID ?? ''))
+    .map((r) => {
+      const ignoreModes = splitCsv(r.IgnoreDungeonMode);
+      return {
+        group: num(r.GroupID),
+        title: r.Title ?? '',
+        maxHpValue: num(r.BuffValue),
+        modes: splitCsv(r.DungeonMode),
+        ...(ignoreModes.length ? { ignoreModes } : {}),
+      };
+    })
+    .sort((a, b) => a.group - b.group);
+
+  return { transcend, archive, maxLevelSteps, awakening, monad, guildMaxHp, titleMaxHp };
 }

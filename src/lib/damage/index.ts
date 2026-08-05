@@ -10,3 +10,6 @@ export * from './sheet';
 export * from './aggregate';
 export * from './report';
 export * from './inputs';
+export * from './passives';
+export * from './gear';
+export * from './scenario';

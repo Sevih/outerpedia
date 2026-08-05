@@ -26,6 +26,19 @@ import { EffectIconTile } from '@/components/character/EffectChips';
 import { SearchField } from '@/components/character/filters/FilterAtoms';
 import { FilterPill } from '@/components/character/filters/FilterPill';
 import { GameText } from '@/components/ui/GameText';
+import {
+  buildInputsFromZ,
+  flattenReport,
+  type CalculatorUrlState as UrlState,
+} from '@/lib/damage/scenario';
+import {
+  buildDamageReport,
+  elementOf,
+  type DamageData,
+  type DamageReportResult,
+} from '@/lib/damage/inputs';
+import { passiveConditionMet } from '@/lib/damage/passives';
+import { ENGINE_GAME_VERSION, type DamageBranch, type DamageFixture } from '@/lib/damage/harness';
 import { DebugHarness } from './DebugHarness';
 
 // ── Contrats wrapper → client ──────────────────────────────────────────────
@@ -74,6 +87,10 @@ export interface DcGear {
   tiers: string[];
   /** Variantes par classe (Briareos/Gorgon) — remplace `tiers` si la classe matche. */
   classTiers?: Record<string, string[]>;
+  /** Groupes d'options UNIQUES des tables damage (moteur § 15). */
+  dmgGroups?: string[];
+  /** Groupes par classe quand les variantes diffèrent (Briareos/Gorgon). */
+  dmgGroupsByClass?: Record<string, string[]>;
 }
 
 export interface DcSet {
@@ -109,6 +126,9 @@ export interface DcTalisman {
   /** Icône d'effet du passif, posée en overlay sur la tuile. */
   overlayIcon?: string;
   text: string | null;
+  /** Groupes d'options UNIQUES des tables damage (moteur § 15). */
+  dmgGroups?: string[];
+  dmgGroupsByClass?: Record<string, string[]>;
 }
 
 export interface DcEERow {
@@ -140,10 +160,28 @@ export interface DcSpawn {
   stats: { hp?: number; def?: number; dmgRed?: number; cdmgRed?: number };
 }
 
+/** Passif de BOSS (lib passives.ts) — chip AUTO de la section buff/débuff :
+ *  posé par le boss lui-même, jamais togglable (en jeu il est permanent et
+ *  indélébile). La condition élémentaire brute est évaluée CLIENT contre
+ *  l'attaquant courant (même relation § 6 que le moteur). */
+export interface DcBossPassive {
+  /** Nom localisé du passif porteur (« Starving Devil »). */
+  name: string;
+  /** Qui le subit : l'équipe du joueur (attacker) ou le boss (target). */
+  side: 'attacker' | 'target';
+  /** Libellé PRÊT : stat localisée + valeur signée (« CRIT DMG −85% »). */
+  label: string;
+  /** `ATTACKER_ELEMENT_WIN/EQUAL/LOSE` — absent = toujours actif. */
+  condition?: string;
+}
+
 export interface DcTarget {
   id: string;
   /** Libellé de MODE localisé (glossaire du jeu) — premier niveau du picker. */
   mode: string;
+  /** Slug de mode BRUT d'encounters (`normal`, `raid_1`…) — décide le buff
+   *  de guilde § 16.2, jamais parsé du libellé localisé. */
+  modeSlug: string;
   /** CASCADE de selects sous le mode quand la donnée la porte (Saison puis
    *  Épisode en histoire, ligue de world boss, phase de guild raid…). */
   path?: string[];
@@ -157,6 +195,8 @@ export interface DcTarget {
   icon: string;
   element: string;
   spawns: DcSpawn[];
+  /** Passifs de boss à impact sur les dégâts — chips auto, jamais togglables. */
+  passives?: DcBossPassive[];
 }
 
 export interface DcStatField {
@@ -197,6 +237,8 @@ export interface DcLabels {
     subtitle: string;
     quirks: string;
     codex: string;
+    guild: string;
+    premium: string;
     reset: string;
     activateAll: string;
   };
@@ -228,6 +270,9 @@ export interface DcLabels {
     stage: string;
     fight: string;
     bossFlag: string;
+    breakFlag: string;
+    guildBuffFlag: string;
+    titleBuffFlag: string;
   };
   toolbar: { reset: string; copy: string; copied: string };
   context: {
@@ -245,6 +290,8 @@ export interface DcLabels {
     atkDebuff: string;
     tgtBuff: string;
     tgtDebuff: string;
+    bossPassive: string;
+    bossPassiveInactive: string;
   };
   report: {
     empty: string;
@@ -254,6 +301,8 @@ export interface DcLabels {
     critical: string;
     miss: string;
     supportSkills: string;
+    loading: string;
+    tablesError: string;
   };
 }
 
@@ -283,6 +332,11 @@ interface Props {
   /** Courbe du Codex, indexée PAR NIVEAU ([0] = niveau 0, [1..11] = paliers) :
    *  taux ‰ (ATK/DEF/HP) sur la stat de BASE. */
   codexTiers: { atk: number; def: number; hp: number }[];
+  /** `% de PV max` du buff de guilde par NIVEAU (index 0 = sans guilde = 0) —
+   *  résolu de la donnée damage (growth.guildMaxHp, spec § 16.2). */
+  guildTiers: number[];
+  /** `% de PV max` du buff de titre « Premium Body » (growth.titleMaxHp). */
+  titleHpPct: number;
   labels: DcLabels;
 }
 
@@ -301,6 +355,70 @@ const CODEX_STORE: StoreSpec<number> = {
   version: 1,
   fallback: 0,
 };
+
+/** Niveau de GUILDE (0 = sans guilde) — réglage de COMPTE : son buff MAX_HP
+ *  (spec formule § 16.2) ne joue que dans certains modes, décidés par la
+ *  cible (preset) ou une coche (manuel). */
+const GUILD_STORE: StoreSpec<number> = {
+  key: 'outerpedia:damage-calculator:guild',
+  version: 1,
+  fallback: 0,
+};
+
+/** Buff de TITRE « Premium Body » (+5 % PV, § 16.2) — réglage de COMPTE,
+ *  accordé côté serveur (pass) : introuvable en jeu par Sevih (05/08/2026),
+ *  on l'expose en settings et les fixtures diront s'il matche quelque part. */
+const PREMIUM_STORE: StoreSpec<boolean> = {
+  key: 'outerpedia:damage-calculator:premium-hp',
+  version: 1,
+  fallback: false,
+};
+
+// ── Cycle de capture des scénarios (DEV ONLY — libellés en dur, exemption
+// harnais § 5). La saisie « en jeu » vit DANS la table Résultat, le cycle
+// save/load au-dessus du panneau Debug (Sevih 05/08/2026).
+
+/** Vrai en dev : la saisie « en jeu », le cycle save/load et le panneau Debug
+ *  ne se rendent jamais en production. */
+const DEV = process.env.NODE_ENV !== 'production';
+
+/** Un scénario sauvegardé = UNE ligne de dégâts (Sevih 05/08/2026) : le `+`
+ *  d'une cellule de la table Résultat fige le `z` courant (TOUS les réglages
+ *  de l'UI y sont), les réglages de compte, la ligne (slot × branche) et la
+ *  valeur constatée EN JEU. Le calculé n'est JAMAIS stocké : il est rejoué à
+ *  l'affichage — un moteur qui bouge se voit immédiatement dans le Δ. */
+interface SavedScenario {
+  /** Identité d'affichage figée à la sauvegarde (localisée à ce moment-là). */
+  atk: string;
+  tgt: string;
+  /** Clé de ligne `flattenReport` (`S1`, `S2b1`, `#chaîne`…). */
+  slot: string;
+  branch: DamageBranch;
+  /** Dégâts constatés EN JEU. */
+  real: number;
+  z: string;
+  codex?: number;
+  guild?: number;
+  premium?: boolean;
+  gameVersion: string;
+  savedAt: string;
+}
+
+/** Scénarios sauvegardés — dev-only mais PERSISTANTS (les captures se font en
+ *  plusieurs sessions). v2 : une ligne par scénario (v1 = fixture complète,
+ *  format abandonné → repart à vide). */
+const SCENARIOS_STORE: StoreSpec<SavedScenario[]> = {
+  key: 'outerpedia:damage-calculator:debug-scenarios',
+  version: 2,
+  fallback: [],
+};
+
+/** Clé d'upsert d'un scénario : même état d'UI + même ligne = même scénario. */
+const scnKey = (s: Pick<SavedScenario, 'z' | 'slot' | 'branch'>): string =>
+  `${s.z}|${s.slot}|${s.branch}`;
+
+/** Tolérance d'affichage du Δ (± %) — même défaut que fixtures.test.ts. */
+const DEFAULT_TOLERANCE = 0.5;
 
 // ── Briques d'affichage ────────────────────────────────────────────────────
 
@@ -806,48 +924,9 @@ const EMPTY_ALLY: AllyPick = {
   eePlus: true,
 };
 
-/**
- * État sérialisé dans l'URL (`?z=` lz-string, motif team-planner) — clés
- * COURTES, valeurs par défaut omises : un refresh ne perd plus le scénario.
- * Tout est REVALIDÉ à l'hydratation (ids inconnus écartés, nombres bornés).
- */
-interface UrlState {
-  /** Attaquant + palier de transcendance + affinité (NIVEAU 0..100, paliers
-   *  tous les 20) + niveaux de skill + niveau du perso (1..120, omis à 120). */
-  a?: string;
-  x?: number;
-  af?: number;
-  k?: Record<string, number>;
-  lv?: number;
-  /** Arme / accessoire (slug + breakthrough). */
-  w?: string;
-  y?: number;
-  m?: string;
-  q?: number;
-  /** Sets choisis ([id, enchanté 0/1]) · Rogue's Charm · EE absent · niveau d'EE. */
-  s?: [string, number][];
-  t?: 1;
-  eo?: 0;
-  e?: number;
-  /** Stats saisies · PV actuels (%). */
-  v?: Record<string, string>;
-  h?: string;
-  /** Cible : onglet manuel, preset + stage, élément + stats manuelles + flag
-   *  boss (manuel) + PV actuels (%). */
-  g?: 1;
-  ti?: string;
-  si?: number;
-  te?: string;
-  tv?: Record<string, string>;
-  tb?: 1;
-  th?: string;
-  /** Cibles touchées · alliés ([id, palier, main talisman, enhancement,
-   *  EE possédé 0/1, EE+10 0/1]) · buffs actifs. */
-  n?: number;
-  al?: [string, number, string, number, number, number][];
-  b?: string[];
-  d?: string[];
-}
+// L'état `?z=` (`UrlState`) vit dans la LIB (`CalculatorUrlState`,
+// src/lib/damage/scenario.ts) : le pont z → entrées moteur et le test des
+// fixtures lisent LA même définition que ce composant.
 
 // ── Composant principal ────────────────────────────────────────────────────
 
@@ -866,6 +945,8 @@ export function DamageCalculatorBrowser({
   buffOptions,
   quirks,
   codexTiers,
+  guildTiers,
+  titleHpPct,
   labels: L,
 }: Props) {
   const [tab, setTab] = useState<'calc' | 'settings'>('calc');
@@ -900,6 +981,8 @@ export function DamageCalculatorBrowser({
   const [statVals, setStatVals] = useState<Record<string, string>>({});
   const [quirkLvls, setQuirkLvls] = useStoredState(QUIRKS_STORE);
   const [codexLvl, setCodexLvl] = useStoredState(CODEX_STORE);
+  const [guildLvl, setGuildLvl] = useStoredState(GUILD_STORE);
+  const [premiumOn, setPremiumOn] = useStoredState(PREMIUM_STORE);
   // Cible : preset (donjon réel) OU saisie manuelle — le type de contenu se
   // DÉDUIT du preset choisi, le PvP est hors périmètre (Sevih 27/07/2026).
   const [targetTab, setTargetTab] = useState<'preset' | 'manual'>('preset');
@@ -910,6 +993,14 @@ export function DamageCalculatorBrowser({
   const [tgtElement, setTgtElement] = useState<string | null>(null);
   const [tgtStats, setTgtStats] = useState<Record<string, string>>({});
   const [tgtBoss, setTgtBoss] = useState(false);
+  // Buffs MAX_HP en MANUEL : le mode du contenu est inconnu → une coche
+  // explicite PAR buff, leurs listes de modes diffèrent (en preset, le mode
+  // du donjon décide seul — spec § 16.2).
+  const [tgtGuildBuff, setTgtGuildBuff] = useState(false);
+  const [tgtTitleBuff, setTgtTitleBuff] = useState(false);
+  // Cible en BREAK (jauge détruite) — contexte § 9.1 (Rogue's Charm +10,
+  // set Pulverization, EE Lv10…) ; vaut pour preset ET manuel.
+  const [tgtBroken, setTgtBroken] = useState(false);
   // PV actuels de la cible (%) — skills qui tapent sur PV max/actuels/manquants.
   const [tgtHpPct, setTgtHpPct] = useState('100');
   const [targetsHit, setTargetsHit] = useState(1);
@@ -919,6 +1010,35 @@ export function DamageCalculatorBrowser({
   const [tgtFx, setTgtFx] = useState<string[]>([]);
   // PV actuels de l'attaquant (%) — ne sert qu'aux sets « missing Health ».
   const [hpPct, setHpPct] = useState('100');
+
+  // ── Cycle de capture (DEV) : saisie « en jeu » dans la table Résultat, un
+  // scénario = UNE ligne sauvée d'un `+` (Sevih 05/08/2026). ──
+  // `obs` : valeur constatée EN JEU par ligne, clé `slot|branch` (flattenReport).
+  const [obs, setObs] = useState<Record<string, string>>({});
+  // Branches OBSERVABLES : quelles colonnes prennent une saisie. `miss` coché
+  // FORCE sa branche (sans esquive, le miss n'existe qu'avec un buff de miss
+  // chance) ; décocher `normal` sert le crit forcé (passif → P(normal) = 0).
+  const [branchOn, setBranchOn] = useState<Record<DamageBranch, boolean>>({
+    normal: true,
+    critical: true,
+    miss: false,
+  });
+  const [savedScnsRaw, setSavedScns] = useStoredState(SCENARIOS_STORE);
+  // ASSAINI avant tout rendu : un état chaud d'HMR (entrées v1 encore en
+  // mémoire après le swap de code, vu le 05/08 — `s.real` undefined) ou une
+  // donnée corrompue ne doit jamais faire tomber le composant.
+  const savedScns = savedScnsRaw.filter(
+    (s) =>
+      typeof s?.real === 'number' &&
+      typeof s?.z === 'string' &&
+      typeof s?.slot === 'string' &&
+      typeof s?.branch === 'string',
+  );
+  const [flash, setFlash] = useState<string | null>(null);
+  const say = (msg: string) => {
+    setFlash(msg);
+    window.setTimeout(() => setFlash(null), 2500);
+  };
 
   const attacker = attackerId ? chars.find((c) => c.id === attackerId) : undefined;
   const kit = attackerId ? (kits[attackerId] ?? []) : [];
@@ -998,11 +1118,16 @@ export function DamageCalculatorBrowser({
     setTgtElement(null);
     setTgtStats({});
     setTgtBoss(false);
+    setTgtBroken(false);
+    setTgtGuildBuff(false);
+    setTgtTitleBuff(false);
     setTgtHpPct('100');
     setTargetsHit(1);
     setAllies([EMPTY_ALLY, EMPTY_ALLY, EMPTY_ALLY]);
     setAtkFx([]);
     setTgtFx([]);
+    // Cycle de capture (dev) : un nouveau scénario repart d'observés vides.
+    setObs({});
   };
 
   // Chips proposés : même filtre de pertinence que la saisie des stats.
@@ -1011,11 +1136,110 @@ export function DamageCalculatorBrowser({
   const toggleFx = (set: (fn: (prev: string[]) => string[]) => void, key: string) =>
     set((prev) => (prev.includes(key) ? prev.filter((x) => x !== key) : [...prev, key]));
 
+  // Passifs de BOSS du preset — chips AUTO (jamais togglables : en jeu ils
+  // sont permanents et indélébiles). La condition élémentaire s'évalue contre
+  // l'attaquant COURANT, même relation § 6 que le moteur.
+  const bossPassivesFor = (s: DcBossPassive['side']): DcBossPassive[] =>
+    (target?.passives ?? []).filter((p) => p.side === s);
+  const bossPassiveActive = (p: DcBossPassive): boolean => {
+    if (!p.condition) return true;
+    const a = attacker ? elementOf(attacker.element) : undefined;
+    const d = target ? elementOf(target.element) : undefined;
+    return a !== undefined && d !== undefined && passiveConditionMet(p.condition, a, d);
+  };
+
   // ── Persistance URL (`?z=` lz-string, motif team-planner) ────────────────
   // Hydratation UNE fois au mount, puis écriture DÉBOUNCÉE à chaque
   // changement : un refresh ne perd plus le scénario (demande Sevih
   // 27/07/2026). Les QUIRKS restent en localStorage — réglage de COMPTE.
   const didHydrate = useRef(false);
+  // Applique un état `?z=` DÉCOMPRESSÉ aux états du scénario — revalidation
+  // complète (ids inconnus écartés, nombres bornés) : l'entrée vient de l'URL
+  // ou d'un scénario sauvegardé, jamais fiable. Partagé entre l'hydratation au
+  // mount et « Charger » du harnais (les deux chemins restent d'accord).
+  const applyZ = (st: UrlState) => {
+    const char = st.a ? chars.find((c) => c.id === st.a) : undefined;
+    if (char) {
+      setAttackerId(char.id);
+      const maxIdx = Math.max(char.transcend.length - 1, 0);
+      setTranscend(typeof st.x === 'number' ? Math.min(Math.max(st.x, 0), maxIdx) : maxIdx);
+      // `af` = NIVEAU 0..100 depuis le 03/08/2026 (avant : palier 0..5 —
+      // outil unlisted, pas de rétrocompat des vieilles URLs).
+      if (typeof st.af === 'number') setAffinityLvl(Math.min(Math.max(st.af, 0), 100));
+      if (typeof st.lv === 'number') setLevel(Math.min(Math.max(st.lv, 1), 120));
+      const lvls: Record<string, number> = {};
+      for (const row of kits[char.id] ?? []) {
+        const v = st.k?.[row.slot];
+        lvls[row.slot] =
+          typeof v === 'number' ? Math.min(Math.max(v, 1), row.maxLevel) : row.maxLevel;
+      }
+      setSkillLvls(lvls);
+      if (st.w && weapons.some((x) => x.slug === st.w)) setWeaponSlug(st.w);
+      if (typeof st.y === 'number') setWeaponTier(Math.min(Math.max(st.y, 0), 4));
+      if (st.m && amulets.some((x) => x.slug === st.m)) setAmuletSlug(st.m);
+      if (typeof st.q === 'number') setAmuletTier(Math.min(Math.max(st.q, 0), 4));
+      if (Array.isArray(st.s))
+        setSetPicks(
+          st.s
+            .filter(
+              (p): p is [string, number] => Array.isArray(p) && sets.some((x) => x.id === p[0]),
+            )
+            .slice(0, 2)
+            .map(([setId, tier]) => ({ setId, tier: tier ? 1 : 0 })),
+        );
+      if (st.t) setTalismanOn(true);
+      if (st.eo === 0) setEeOwned(false);
+      if (typeof st.e === 'number') setEeLevel(Math.min(Math.max(st.e, 0), 10));
+      if (st.v && typeof st.v === 'object')
+        setStatVals(
+          Object.fromEntries(Object.entries(st.v).filter(([, v]) => typeof v === 'string')),
+        );
+      if (typeof st.h === 'string') setHpPct(st.h);
+      if (Array.isArray(st.b)) setAtkFx(st.b.filter((x): x is string => typeof x === 'string'));
+      if (Array.isArray(st.d)) setTgtFx(st.d.filter((x): x is string => typeof x === 'string'));
+    }
+    if (st.g) setTargetTab('manual');
+    if (st.ti && targets.some((tg) => tg.id === st.ti)) {
+      setTargetId(st.ti);
+      if (typeof st.si === 'number') setSpawnIdx(Math.max(st.si, 0));
+    }
+    if (st.te && (ELEMENT_ORDER as readonly string[]).includes(st.te)) setTgtElement(st.te);
+    if (st.tv && typeof st.tv === 'object')
+      setTgtStats(
+        Object.fromEntries(Object.entries(st.tv).filter(([, v]) => typeof v === 'string')),
+      );
+    if (st.tb) setTgtBoss(true);
+    if (st.bk) setTgtBroken(true);
+    if (st.gb) setTgtGuildBuff(true);
+    if (st.pb) setTgtTitleBuff(true);
+    if (typeof st.th === 'string') setTgtHpPct(st.th);
+    if (typeof st.n === 'number') setTargetsHit(Math.min(Math.max(st.n, 1), 4));
+    if (Array.isArray(st.al))
+      setAllies(
+        Array.from({ length: 3 }, (_, i) => {
+          const row = st.al?.[i];
+          if (!Array.isArray(row)) return EMPTY_ALLY;
+          const [id, tx, tal, tlv, eo, ep] = row;
+          const c = typeof id === 'string' ? chars.find((x) => x.id === id) : undefined;
+          if (!c) return EMPTY_ALLY;
+          const maxIdx = Math.max(c.transcend.length - 1, 0);
+          const ee = typeof eo === 'number' ? Boolean(eo) : true;
+          return {
+            id: c.id,
+            transcend: typeof tx === 'number' ? Math.min(Math.max(tx, 0), maxIdx) : maxIdx,
+            talisman:
+              typeof tal === 'string' && talismanMains.some((mn) => mn.key === tal) ? tal : null,
+            talismanLv: typeof tlv === 'number' ? Math.min(Math.max(tlv, 0), 10) : 10,
+            ee,
+            eePlus: ee && (typeof ep === 'number' ? Boolean(ep) : true),
+          };
+        }),
+      );
+  };
+
+  // Hydratation `?z=` UNE fois au mount — SANS tableau de deps, à dessein :
+  // le garde `didHydrate` ne laisse passer que le premier rendu, et l'effet
+  // voit toujours l'`applyZ` du rendu courant (pas de liste de deps à tenir).
   useEffect(() => {
     if (didHydrate.current) return;
     didHydrate.current = true;
@@ -1032,88 +1256,40 @@ export function DamageCalculatorBrowser({
     if (!parsed || typeof parsed !== 'object') return;
     const st = parsed;
     // Règle set-state-in-effect : la pose d'état est déférée en microtâche.
-    void Promise.resolve().then(() => {
-      const char = st.a ? chars.find((c) => c.id === st.a) : undefined;
-      if (char) {
-        setAttackerId(char.id);
-        const maxIdx = Math.max(char.transcend.length - 1, 0);
-        setTranscend(typeof st.x === 'number' ? Math.min(Math.max(st.x, 0), maxIdx) : maxIdx);
-        // `af` = NIVEAU 0..100 depuis le 03/08/2026 (avant : palier 0..5 —
-        // outil unlisted, pas de rétrocompat des vieilles URLs).
-        if (typeof st.af === 'number') setAffinityLvl(Math.min(Math.max(st.af, 0), 100));
-        if (typeof st.lv === 'number') setLevel(Math.min(Math.max(st.lv, 1), 120));
-        const lvls: Record<string, number> = {};
-        for (const row of kits[char.id] ?? []) {
-          const v = st.k?.[row.slot];
-          lvls[row.slot] =
-            typeof v === 'number' ? Math.min(Math.max(v, 1), row.maxLevel) : row.maxLevel;
-        }
-        setSkillLvls(lvls);
-        if (st.w && weapons.some((x) => x.slug === st.w)) setWeaponSlug(st.w);
-        if (typeof st.y === 'number') setWeaponTier(Math.min(Math.max(st.y, 0), 4));
-        if (st.m && amulets.some((x) => x.slug === st.m)) setAmuletSlug(st.m);
-        if (typeof st.q === 'number') setAmuletTier(Math.min(Math.max(st.q, 0), 4));
-        if (Array.isArray(st.s))
-          setSetPicks(
-            st.s
-              .filter(
-                (p): p is [string, number] => Array.isArray(p) && sets.some((x) => x.id === p[0]),
-              )
-              .slice(0, 2)
-              .map(([setId, tier]) => ({ setId, tier: tier ? 1 : 0 })),
-          );
-        if (st.t) setTalismanOn(true);
-        if (st.eo === 0) setEeOwned(false);
-        if (typeof st.e === 'number') setEeLevel(Math.min(Math.max(st.e, 0), 10));
-        if (st.v && typeof st.v === 'object')
-          setStatVals(
-            Object.fromEntries(Object.entries(st.v).filter(([, v]) => typeof v === 'string')),
-          );
-        if (typeof st.h === 'string') setHpPct(st.h);
-        if (Array.isArray(st.b)) setAtkFx(st.b.filter((x): x is string => typeof x === 'string'));
-        if (Array.isArray(st.d)) setTgtFx(st.d.filter((x): x is string => typeof x === 'string'));
-      }
-      if (st.g) setTargetTab('manual');
-      if (st.ti && targets.some((tg) => tg.id === st.ti)) {
-        setTargetId(st.ti);
-        if (typeof st.si === 'number') setSpawnIdx(Math.max(st.si, 0));
-      }
-      if (st.te && (ELEMENT_ORDER as readonly string[]).includes(st.te)) setTgtElement(st.te);
-      if (st.tv && typeof st.tv === 'object')
-        setTgtStats(
-          Object.fromEntries(Object.entries(st.tv).filter(([, v]) => typeof v === 'string')),
-        );
-      if (st.tb) setTgtBoss(true);
-      if (typeof st.th === 'string') setTgtHpPct(st.th);
-      if (typeof st.n === 'number') setTargetsHit(Math.min(Math.max(st.n, 1), 4));
-      if (Array.isArray(st.al))
-        setAllies(
-          Array.from({ length: 3 }, (_, i) => {
-            const row = st.al?.[i];
-            if (!Array.isArray(row)) return EMPTY_ALLY;
-            const [id, tx, tal, tlv, eo, ep] = row;
-            const c = typeof id === 'string' ? chars.find((x) => x.id === id) : undefined;
-            if (!c) return EMPTY_ALLY;
-            const maxIdx = Math.max(c.transcend.length - 1, 0);
-            const ee = typeof eo === 'number' ? Boolean(eo) : true;
-            return {
-              id: c.id,
-              transcend: typeof tx === 'number' ? Math.min(Math.max(tx, 0), maxIdx) : maxIdx,
-              talisman:
-                typeof tal === 'string' && talismanMains.some((mn) => mn.key === tal) ? tal : null,
-              talismanLv: typeof tlv === 'number' ? Math.min(Math.max(tlv, 0), 10) : 10,
-              ee,
-              eePlus: ee && (typeof ep === 'number' ? Boolean(ep) : true),
-            };
-          }),
-        );
-    });
-  }, [chars, kits, weapons, amulets, sets, targets, talismanMains]);
+    void Promise.resolve().then(() => applyZ(st));
+  });
 
-  // État d'URL COURANT (compressé) — partagé entre l'effet débouncé, le bouton
-  // « copier le lien » et la capture de fixture : ces deux-là ne doivent JAMAIS
-  // lire une URL en retard de debounce (Sevih 27/07/2026).
-  const packZ = (): string => {
+  // « Charger » du harnais : rejoue un scénario SAUVEGARDÉ dans le calculateur
+  // entier — reset puis applyZ (un champ absent de z doit retrouver sa valeur
+  // par défaut, pas celle du scénario précédent). Les réglages de COMPTE
+  // capturés (codex/guilde/titre) sont REPOSÉS : le recalcul doit reproduire
+  // la capture, pas l'état courant du compte.
+  const loadScenario = (f: {
+    z: string;
+    codex?: number;
+    guild?: number;
+    premium?: boolean;
+  }): boolean => {
+    let st: UrlState | null = null;
+    try {
+      st = JSON.parse(LZString.decompressFromEncodedURIComponent(f.z) || 'null') as UrlState | null;
+    } catch {
+      st = null;
+    }
+    if (!st || typeof st !== 'object') return false;
+    resetScenario();
+    applyZ(st);
+    setCodexLvl(f.codex ?? 0);
+    setGuildLvl(f.guild ?? 0);
+    setPremiumOn(f.premium === true);
+    return true;
+  };
+
+  // État d'URL COURANT — partagé entre l'effet débouncé, le bouton « copier
+  // le lien », la capture de fixture ET le rapport du harnais : aucun d'eux
+  // ne doit lire une URL en retard de debounce (Sevih 27/07/2026). `buildZ`
+  // rend l'OBJET (le pont z → moteur le consomme), `packZ` le compresse.
+  const buildZ = (): UrlState => {
     const z: UrlState = {};
     if (attackerId) {
       z.a = attackerId;
@@ -1148,6 +1324,9 @@ export function DamageCalculatorBrowser({
     const tv = Object.fromEntries(Object.entries(tgtStats).filter(([, v]) => v !== ''));
     if (Object.keys(tv).length) z.tv = tv;
     if (tgtBoss) z.tb = 1;
+    if (tgtBroken) z.bk = 1;
+    if (tgtGuildBuff) z.gb = 1;
+    if (tgtTitleBuff) z.pb = 1;
     if (tgtHpPct !== '100') z.th = tgtHpPct;
     if (targetsHit > 1) z.n = targetsHit;
     if (allies.some((a) => a.id))
@@ -1159,6 +1338,10 @@ export function DamageCalculatorBrowser({
         Number(a.ee),
         Number(a.eePlus),
       ]);
+    return z;
+  };
+  const packZ = (): string => {
+    const z = buildZ();
     return Object.keys(z).length ? LZString.compressToEncodedURIComponent(JSON.stringify(z)) : '';
   };
 
@@ -1185,6 +1368,190 @@ export function DamageCalculatorBrowser({
     }, 400);
     return () => window.clearTimeout(timer);
   });
+
+  // ── MOTEUR BRANCHÉ (05/08/2026) : le rapport PUBLIC passe par le MÊME pont
+  // que le panneau Debug et fixtures.test.ts (buildInputsFromZ → amont pur) —
+  // jamais un deuxième chemin de calcul. Les tables damage (~11 Mo de JSON)
+  // se chargent en import dynamique à la PREMIÈRE sélection d'attaquant :
+  // rien dans le bundle initial, un seul chargement par session.
+  const [dmgData, setDmgData] = useState<DamageData | null>(null);
+  const [dmgErr, setDmgErr] = useState<string | null>(null);
+  const dmgLoading = useRef(false);
+  useEffect(() => {
+    if (!attackerId || dmgData || dmgErr || dmgLoading.current) return;
+    dmgLoading.current = true;
+    void Promise.all([
+      import('@data/generated/damage/characters.json'),
+      import('@data/generated/damage/growth.json'),
+      import('@data/generated/damage/buffs.json'),
+      import('@data/generated/damage/targets.json'),
+      import('@data/generated/damage/equipment.json'),
+    ])
+      .then(([c, g, b, t, q]) => {
+        setDmgData({
+          characters: c.default,
+          growth: g.default,
+          buffs: b.default,
+          targets: t.default,
+          equipment: q.default,
+        } as unknown as DamageData);
+      })
+      .catch((e: unknown) => setDmgErr(e instanceof Error ? e.message : String(e)));
+  }, [attackerId, dmgData, dmgErr]);
+
+  // Cible preset → stats effectives au spawn — partagé entre le rapport
+  // public et le harnais (même closure, mêmes stats que l'affichage).
+  const resolvePresetLocal = (ti: string, si: number) => {
+    const tg = targets.find((x) => x.id === ti);
+    const sp = tg?.spawns[Math.min(si, (tg?.spawns.length ?? 1) - 1)];
+    return tg && sp
+      ? {
+          element: tg.element,
+          stats: sp.stats,
+          mode: tg.modeSlug,
+          // `id` = `${encounterId}:${bossId}` — même découpe que le resolver
+          // node (preset-target.ts).
+          monsterId: ti.slice(ti.lastIndexOf(':') + 1),
+        }
+      : undefined;
+  };
+
+  // Équipement (slug UI → groupes d'options uniques des tables damage) —
+  // même contrat que le resolver node (preset-gear.ts) : les props portent la
+  // jointure, la variante PAR CLASSE suit l'attaquant (Briareos/Gorgon).
+  const resolveGearLocal = (kind: 'weapon' | 'amulet' | 'talisman', slug: string, aId: string) => {
+    const g =
+      kind === 'weapon'
+        ? weapons.find((x) => x.slug === slug)
+        : kind === 'amulet'
+          ? amulets.find((x) => x.slug === slug)
+          : talismans.find((x) => x.slug === slug);
+    // La classe vient de l'ATTAQUANT DU SCÉNARIO (celui du z rejoué — pas
+    // forcément la sélection courante) : variantes Briareos/Gorgon.
+    const cls = chars.find((c) => c.id === aId)?.cls;
+    const groups = (cls && g?.dmgGroupsByClass?.[cls]) || g?.dmgGroups;
+    return groups?.length ? { groups } : undefined;
+  };
+
+  // Entrées + rapport du scénario COURANT — recalculés au rendu (quelques ms
+  // sur un kit complet) ; null tant que le scénario est incomplet ou les
+  // tables absentes. Le détail d'une erreur moteur vit dans le panneau Debug.
+  const scenarioInputs = buildInputsFromZ(buildZ(), {
+    codexLevel: codexLvl,
+    guildLevel: guildLvl,
+    premiumHp: premiumOn,
+    resolvePreset: resolvePresetLocal,
+    resolveGear: resolveGearLocal,
+  });
+  let report: DamageReportResult | null = null;
+  if (dmgData && scenarioInputs.attacker && scenarioInputs.target) {
+    try {
+      report = buildDamageReport(scenarioInputs.attacker, scenarioInputs.target, dmgData, {
+        // La coche MISS (dev) force sa branche — en prod elle reste false.
+        includeMissBranch: branchOn.miss,
+      });
+    } catch {
+      report = null;
+    }
+  }
+  /** Valeur de stat finale → affichage (‰ des stats % → « x% », plat brut). */
+  const fmtStat = (v: number | undefined, percent: boolean): string =>
+    v === undefined ? '—' : percent ? `${v / 10}%` : v.toLocaleString();
+
+  // ── Cycle de capture (DEV) : un scénario = UNE ligne de dégâts ──
+  // Le `+` d'une cellule fige z (TOUS les réglages UI) + réglages de compte +
+  // la ligne (slot × branche) + la valeur EN JEU saisie.
+  const saveCell = (slot: string, branch: DamageBranch, real: number) => {
+    const entry: SavedScenario = {
+      atk: attacker?.label ?? '?',
+      tgt: target ? target.name : `${tgtElement ?? '?'} (${L.target.manual})`,
+      slot,
+      branch,
+      real,
+      z: packZ(),
+      ...(codexLvl > 0 ? { codex: codexLvl } : {}),
+      ...(guildLvl > 0 ? { guild: guildLvl } : {}),
+      ...(premiumOn ? { premium: true } : {}),
+      gameVersion: ENGINE_GAME_VERSION,
+      savedAt: new Date().toISOString(),
+    };
+    setSavedScns((prev) => {
+      const i = prev.findIndex((s) => scnKey(s) === scnKey(entry));
+      return i >= 0 ? prev.map((s, j) => (j === i ? entry : s)) : [...prev, entry];
+    });
+    say(`${entry.slot} ${entry.branch} sauvegardé`);
+  };
+
+  // Calculés des scénarios sauvegardés — REJOUÉS à l'affichage par le même
+  // pont, jamais stockés : un moteur qui bouge se voit immédiatement dans le
+  // Δ. Pas de useMemo : le React Compiler mémoïse seul.
+  const savedCalcs = (): Map<string, number> => {
+    const out = new Map<string, number>();
+    if (!dmgData) return out;
+    for (const s of savedScns) {
+      try {
+        const st = JSON.parse(
+          LZString.decompressFromEncodedURIComponent(s.z) || 'null',
+        ) as UrlState | null;
+        if (!st) continue;
+        const inp = buildInputsFromZ(st, {
+          codexLevel: s.codex ?? 0,
+          guildLevel: s.guild ?? 0,
+          premiumHp: s.premium === true,
+          resolvePreset: resolvePresetLocal,
+          resolveGear: resolveGearLocal,
+        });
+        if (!inp.attacker || !inp.target) continue;
+        const r = buildDamageReport(
+          inp.attacker,
+          inp.target,
+          dmgData,
+          s.branch === 'miss' ? { includeMissBranch: true } : {},
+        );
+        const hit = flattenReport(r).find((l) => l.slot === s.slot && l.branch === s.branch);
+        if (hit) out.set(scnKey(s), hit.damage);
+      } catch {
+        // z illisible → pas de calculé, la ligne l'affiche « — »
+      }
+    }
+    return out;
+  };
+
+  // « Charger » : re-remplit le calculateur ENTIER (reset + applyZ + réglages
+  // de compte) puis pré-remplit la cellule observée et coche sa branche.
+  const loadSaved = (s: SavedScenario) => {
+    if (!loadScenario(s)) {
+      say(`${s.atk} vs ${s.tgt} : z illisible — non chargé`);
+      return;
+    }
+    setObs({ [`${s.slot}|${s.branch}`]: String(s.real) });
+    setBranchOn((p) => ({ ...p, [s.branch]: true }));
+    say(`${s.atk} vs ${s.tgt} chargé`);
+  };
+
+  // « ⧉ JSON » : le DamageFixture (une ligne observée) à committer dans
+  // src/lib/damage/fixtures/ puis référencer dans fixtures/index.ts.
+  const copyScenario = (s: SavedScenario) => {
+    const fixture: DamageFixture = {
+      name: `${s.atk} vs ${s.tgt} · ${s.slot} ${s.branch}`,
+      z: s.z,
+      ...(s.codex !== undefined ? { codex: s.codex } : {}),
+      ...(s.guild !== undefined ? { guild: s.guild } : {}),
+      ...(s.premium ? { premium: true } : {}),
+      gameVersion: s.gameVersion,
+      observed: [{ slot: s.slot, branch: s.branch, damage: s.real }],
+      notes: '',
+    };
+    void navigator.clipboard
+      .writeText(JSON.stringify(fixture, null, 2))
+      .then(() => say('copié — coller dans src/lib/damage/fixtures/'));
+  };
+
+  const deleteScenario = (s: SavedScenario) =>
+    setSavedScns((prev) => prev.filter((x) => scnKey(x) !== scnKey(s)));
+
+  // Rejoué une fois par rendu (vide en prod : aucun scénario n'y existe).
+  const savedCalcMap = DEV ? savedCalcs() : new Map<string, number>();
 
   const offensiveSkills = kit.filter((s) => s.offensive);
   const supportSkills = kit.filter((s) => !s.offensive);
@@ -1214,7 +1581,16 @@ export function DamageCalculatorBrowser({
       : null,
     target:
       targetTab === 'manual'
-        ? { manual: { element: tgtElement, stats: tgtStats, boss: tgtBoss, hpPct: tgtHpPct } }
+        ? {
+            manual: {
+              element: tgtElement,
+              stats: tgtStats,
+              boss: tgtBoss,
+              guildBuff: tgtGuildBuff,
+              titleBuff: tgtTitleBuff,
+              hpPct: tgtHpPct,
+            },
+          }
         : target
           ? {
               id: target.id,
@@ -1223,7 +1599,7 @@ export function DamageCalculatorBrowser({
               hpPct: tgtHpPct,
             }
           : null,
-    context: { targetsHit, attackerFx: atkFx, targetFx: tgtFx },
+    context: { targetsHit, targetBroken: tgtBroken, attackerFx: atkFx, targetFx: tgtFx },
     team: allies
       .filter((a) => a.id)
       .map((a) => ({
@@ -1234,11 +1610,13 @@ export function DamageCalculatorBrowser({
       })),
     quirks: Object.fromEntries(Object.entries(quirkLvls).filter(([, v]) => v > 0)),
     codex: codexLvl,
+    guild: guildLvl,
+    premium: premiumOn,
   };
 
   return (
     <div className="mx-auto w-full max-w-400 space-y-4">
-      {/* Bandeau : le moteur n'est PAS branché — l'UI est la seule chose livrée. */}
+      {/* Bandeau : le CAVEAT du moteur (ce qui n'est pas encore compté). */}
       <div className="border-warn/30 bg-warn/10 text-warn rounded-lg border px-4 py-2.5 text-center text-sm">
         {L.report.wip}
       </div>
@@ -1288,6 +1666,42 @@ export function DamageCalculatorBrowser({
                 format={(v) => `Lv ${v}`}
               />
             </div>
+          </Card>
+
+          {/* Guilde : buff MAX_HP (§ 16.2) — le NIVEAU est un réglage de
+            compte ; son application dépend du MODE du contenu (preset) ou de
+            la coche de la cible manuelle. */}
+          <Card title={L.settings.guild}>
+            <div className="flex items-center gap-3">
+              {/* Indexé PAR NIVEAU : [0] = sans guilde (0 %), [1..10] = paliers. */}
+              <span className="text-content-muted min-w-0 flex-1 font-mono text-[11px] tabular-nums">
+                {guildLvl > 0 && guildTiers[guildLvl] ? `HP +${guildTiers[guildLvl]}%` : '—'}
+              </span>
+              <Stepper
+                value={Math.min(guildLvl, guildTiers.length - 1)}
+                min={0}
+                max={guildTiers.length - 1}
+                onChange={setGuildLvl}
+                format={(v) => `Lv ${v}`}
+              />
+            </div>
+          </Card>
+
+          {/* Titre « Premium Body » (+5 % PV, § 16.2) : accordé côté SERVEUR
+            (pass) — introuvable en jeu (Sevih 05/08/2026), exposé ici pour
+            que les fixtures disent s'il matche quelque part. */}
+          <Card title={L.settings.premium}>
+            <label className="flex cursor-pointer items-center gap-3">
+              <span className="text-content-muted min-w-0 flex-1 font-mono text-[11px] tabular-nums">
+                {premiumOn && titleHpPct > 0 ? `HP +${titleHpPct}%` : '—'}
+              </span>
+              <input
+                type="checkbox"
+                checked={premiumOn}
+                onChange={() => setPremiumOn(!premiumOn)}
+                className="accent-accent h-4 w-4 cursor-pointer"
+              />
+            </label>
           </Card>
 
           {/* Tout à 0 / tout au max — réglage de COMPTE, pas de scénario. */}
@@ -1795,6 +2209,30 @@ export function DamageCalculatorBrowser({
                     <span className="text-content-muted text-xs">{L.target.bossFlag}</span>
                   </label>
 
+                  {/* Buffs MAX_HP (§ 16.2) : en manuel le MODE est inconnu →
+                    une coche PAR buff (listes de modes différentes) ; sans
+                    effet si le réglage de compte correspondant est éteint. */}
+                  <label className="flex cursor-pointer items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={tgtGuildBuff}
+                      onChange={() => setTgtGuildBuff(!tgtGuildBuff)}
+                      className="accent-accent h-3.5 w-3.5 cursor-pointer"
+                    />
+                    <span className="text-content-muted text-xs">{L.target.guildBuffFlag}</span>
+                  </label>
+                  {premiumOn && (
+                    <label className="flex cursor-pointer items-center gap-2">
+                      <input
+                        type="checkbox"
+                        checked={tgtTitleBuff}
+                        onChange={() => setTgtTitleBuff(!tgtTitleBuff)}
+                        className="accent-accent h-3.5 w-3.5 cursor-pointer"
+                      />
+                      <span className="text-content-muted text-xs">{L.target.titleBuffFlag}</span>
+                    </label>
+                  )}
+
                   <div className="grid grid-cols-2 gap-2">
                     {targetStatFields.map((f) => (
                       <label key={f.key} className="min-w-0 space-y-1">
@@ -2009,6 +2447,20 @@ export function DamageCalculatorBrowser({
                     ))}
                   </div>
 
+                  {/* Cible en BREAK — état de combat qui pèse via § 9.1
+                    (Rogue's Charm +10, set Pulverization, EE Lv10…). */}
+                  <label className="flex cursor-pointer items-center gap-2 text-xs">
+                    <input
+                      type="checkbox"
+                      checked={tgtBroken}
+                      onChange={() => setTgtBroken(!tgtBroken)}
+                      className="accent-accent"
+                    />
+                    <span className={tgtBroken ? 'text-content' : 'text-content-muted'}>
+                      {L.target.breakFlag}
+                    </span>
+                  </label>
+
                   {/* Cibles touchées : SEULEMENT si le kit a un skill offensif
                     multi-cible — la décroissance AoE ne concerne pas les kits
                     mono-cible (décision Sevih 27/07/2026). */}
@@ -2059,6 +2511,7 @@ export function DamageCalculatorBrowser({
                           ],
                           on: atkFx,
                           set: setAtkFx,
+                          passives: bossPassivesFor('attacker'),
                         },
                         {
                           key: 'tgt',
@@ -2097,6 +2550,7 @@ export function DamageCalculatorBrowser({
                           ],
                           on: tgtFx,
                           set: setTgtFx,
+                          passives: bossPassivesFor('target'),
                         },
                       ] as const
                     ).map((side) => (
@@ -2140,6 +2594,34 @@ export function DamageCalculatorBrowser({
                             </div>
                           </div>
                         ))}
+                        {side.passives.length > 0 && (
+                          <div className="space-y-1">
+                            <Eyebrow>{L.buffs.bossPassive}</Eyebrow>
+                            <div className="flex flex-wrap gap-1.5">
+                              {side.passives.map((p, i) => {
+                                const on = bossPassiveActive(p);
+                                return (
+                                  <span
+                                    key={`${p.name}:${p.label}:${i}`}
+                                    title={
+                                      on ? p.name : `${p.name} · ${L.buffs.bossPassiveInactive}`
+                                    }
+                                    className={`flex items-center gap-1.5 rounded-lg border px-2 py-1 text-xs ${
+                                      on
+                                        ? side.key === 'atk'
+                                          ? 'border-danger bg-danger/10 text-content'
+                                          : 'border-accent bg-accent/10 text-content'
+                                        : 'border-line-subtle bg-surface-raised/40 text-content-subtle'
+                                    }`}
+                                  >
+                                    <span className="font-semibold">{p.name}</span>
+                                    <span className={on ? '' : 'line-through'}>{p.label}</span>
+                                  </span>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -2153,9 +2635,10 @@ export function DamageCalculatorBrowser({
                     {L.buffs.fromKits} · {L.buffs.kitsSoon}
                   </button>
 
-                  {/* Stats FINALES des deux combattants — SORTIE du moteur
-                    (buffs & co appliqués), pas branchée en phase UI. C'est du
-                    contexte, comme les PV actuels (Sevih 27/07/2026). */}
+                  {/* Stats FINALES des deux combattants — SORTIE du moteur :
+                    attaquant = combatStats § 16.1 (affinité, chips, passifs de
+                    boss, MAX_HP § 16.2 appliqués) ; cible = les entrées
+                    effectives que le moteur consomme (spawn ou saisie). */}
                   <div className={`${wellClass} space-y-1.5 p-2.5`}>
                     <div className="flex items-baseline gap-2">
                       <span className="text-accent font-mono text-[10px] font-bold tracking-wide uppercase">
@@ -2166,8 +2649,22 @@ export function DamageCalculatorBrowser({
                     <div className="grid gap-x-4 gap-y-1.5 sm:grid-cols-2">
                       {(
                         [
-                          { title: L.panels.attacker, fields: sheetFields },
-                          { title: L.panels.target, fields: targetStatFields },
+                          {
+                            title: L.panels.attacker,
+                            fields: sheetFields,
+                            values: (report?.combatStats ?? {}) as Record<
+                              string,
+                              number | undefined
+                            >,
+                          },
+                          {
+                            title: L.panels.target,
+                            fields: targetStatFields,
+                            values: (scenarioInputs.target?.stats ?? {}) as Record<
+                              string,
+                              number | undefined
+                            >,
+                          },
                         ] as const
                       ).map((col) => (
                         <div key={col.title} className="min-w-0 space-y-0.5">
@@ -2178,8 +2675,14 @@ export function DamageCalculatorBrowser({
                             <span key={f.key} className="flex items-baseline gap-2 text-[11px]">
                               <span className="text-content-subtle truncate">{f.label}</span>
                               <span className="flex-1" />
-                              <span className="text-content-muted font-mono font-bold tabular-nums">
-                                —
+                              <span
+                                className={`font-mono font-bold tabular-nums ${
+                                  col.values[f.key] !== undefined
+                                    ? 'text-content'
+                                    : 'text-content-muted'
+                                }`}
+                              >
+                                {fmtStat(col.values[f.key], f.percent)}
                               </span>
                             </span>
                           ))}
@@ -2198,6 +2701,14 @@ export function DamageCalculatorBrowser({
               </span>
             </div>
 
+            {attacker && !dmgData && (
+              <p
+                className={`text-center text-[11px] ${dmgErr ? 'text-danger' : 'text-content-subtle'}`}
+              >
+                {dmgErr ? L.report.tablesError : L.report.loading}
+              </p>
+            )}
+
             {!attacker ? (
               <div className="border-line-subtle bg-surface-raised/40 text-content-subtle rounded-xl border px-4 py-10 text-center text-sm">
                 {L.report.empty}
@@ -2209,48 +2720,158 @@ export function DamageCalculatorBrowser({
                 <div className="border-line bg-surface-raised/60 overflow-hidden rounded-xl border">
                   <div className="bg-line-subtle grid grid-cols-[auto_1fr_1fr_1fr] gap-px">
                     <div className="bg-surface-sunken/60 px-3 py-2" />
-                    {[L.report.normal, L.report.critical, L.report.miss].map((branch, i) => (
+                    {(
+                      [
+                        { br: 'normal', label: L.report.normal },
+                        { br: 'critical', label: L.report.critical },
+                        { br: 'miss', label: L.report.miss },
+                      ] as const
+                    ).map(({ br, label }) => (
                       <div
-                        key={branch}
-                        className={`bg-surface-sunken/60 grid place-items-center px-2 py-2 text-center font-mono text-[9px] tracking-wide uppercase ${
-                          i === 1 ? 'text-warn' : 'text-content-subtle'
+                        key={br}
+                        className={`bg-surface-sunken/60 flex items-center justify-center gap-1.5 px-2 py-2 text-center font-mono text-[9px] tracking-wide uppercase ${
+                          br === 'critical' ? 'text-warn' : 'text-content-subtle'
                         }`}
                       >
-                        {branch}
+                        {/* DEV : la coche décide quelles colonnes prennent une
+                          saisie « en jeu » et partent dans la capture ; MISS
+                          cochée force sa branche (buff de miss chance). */}
+                        {DEV && (
+                          <input
+                            type="checkbox"
+                            checked={branchOn[br]}
+                            onChange={() => setBranchOn((p) => ({ ...p, [br]: !p[br] }))}
+                            className="accent-accent h-3 w-3 cursor-pointer"
+                          />
+                        )}
+                        {label}
                       </div>
                     ))}
-                    {offensiveSkills.map((sk) => (
-                      <Fragment key={sk.slot}>
-                        <div
-                          className="bg-surface-raised/80 flex items-center gap-2 px-3 py-1.5"
-                          title={sk.name}
-                        >
-                          {sk.iconSrc ? (
-                            <img
-                              src={sk.iconSrc}
-                              alt=""
-                              className="h-7 w-7 rounded-md"
-                              loading="lazy"
-                            />
-                          ) : (
-                            <span className="border-line-subtle bg-surface-sunken/70 h-7 w-7 rounded-md border" />
-                          )}
-                          <span className="text-content-subtle font-mono text-[10px] font-bold">
-                            {sk.slot}
-                          </span>
-                        </div>
-                        {[0, 1, 2].map((b) => (
+                    {offensiveSkills.flatMap((sk) => {
+                      // Une ligne par SlotReport du moteur (le S2 déplie ses
+                      // états burst en sous-lignes B1..B3) ; un slot que le
+                      // moteur v1 ne calcule pas garde sa ligne à « — ».
+                      const slotReports = report?.slots.filter((s) => s.slot === sk.slot) ?? [];
+                      const rows = slotReports.length ? slotReports : [null];
+                      return rows.map((sr, ri) => (
+                        <Fragment key={`${sk.slot}:${sr?.burst ?? `p${ri}`}`}>
                           <div
-                            key={b}
-                            className="bg-surface-raised/80 grid place-items-center px-2 py-1.5"
+                            className="bg-surface-raised/80 flex items-center gap-2 px-3 py-1.5"
+                            title={sk.name}
                           >
-                            <span className="text-content-muted font-mono text-sm font-bold tabular-nums">
-                              —
+                            {sk.iconSrc ? (
+                              <img
+                                src={sk.iconSrc}
+                                alt=""
+                                className="h-7 w-7 rounded-md"
+                                loading="lazy"
+                              />
+                            ) : (
+                              <span className="border-line-subtle bg-surface-sunken/70 h-7 w-7 rounded-md border" />
+                            )}
+                            <span className="text-content-subtle font-mono text-[10px] font-bold">
+                              {sk.slot}
+                              {sr?.burst !== undefined && (
+                                <span className="text-warn"> B{sr.burst}</span>
+                              )}
                             </span>
                           </div>
-                        ))}
-                      </Fragment>
-                    ))}
+                          {(['normal', 'critical', 'miss'] as const).map((br) => {
+                            const states = sr?.report.states ?? [];
+                            const branch = states[0]?.branches.find((b) => b.branch === br);
+                            // Plusieurs états de chaîne : la cellule montre la
+                            // chaîne de BASE, le détail passe en tooltip.
+                            const detail =
+                              states.length > 1
+                                ? states
+                                    .map(
+                                      (st) =>
+                                        `${st.chain}: ${
+                                          st.branches
+                                            .find((b) => b.branch === br)
+                                            ?.totalDamage.toLocaleString() ?? '—'
+                                        }`,
+                                    )
+                                    .join('\n')
+                                : undefined;
+                            // DEV : clé de saisie « en jeu » — la MÊME que
+                            // flattenReport (l'état de base quand il y a
+                            // plusieurs chaînes).
+                            const lineSlot = sr
+                              ? `${sr.slot}${sr.burst !== undefined ? `b${sr.burst}` : ''}${
+                                  states.length > 1 ? `#${states[0].chain}` : ''
+                                }`
+                              : null;
+                            const obsKey = lineSlot !== null ? `${lineSlot}|${br}` : null;
+                            const seen = obsKey !== null ? Number(obs[obsKey]) : NaN;
+                            const filled = Number.isFinite(seen) && seen > 0;
+                            const delta =
+                              branch && filled
+                                ? ((branch.totalDamage - seen) / seen) * 100
+                                : undefined;
+                            return (
+                              <div
+                                key={br}
+                                className="bg-surface-raised/80 flex flex-col items-center gap-1 px-2 py-1.5"
+                                title={detail}
+                              >
+                                <span
+                                  className={`flex items-center gap-1.5 font-mono text-sm font-bold tabular-nums ${
+                                    branch ? 'text-content' : 'text-content-muted'
+                                  }`}
+                                >
+                                  {branch ? branch.totalDamage.toLocaleString() : '—'}
+                                  {branch && detail !== undefined && (
+                                    <span className="text-content-subtle">*</span>
+                                  )}
+                                  {/* `+` = sauvegarder CE scénario (cette ligne
+                                    + le z courant), à droite du calculé. */}
+                                  {DEV && branchOn[br] && branch && lineSlot !== null && obsKey && (
+                                    <button
+                                      type="button"
+                                      onClick={() => saveCell(lineSlot, br, Math.round(seen))}
+                                      disabled={!filled}
+                                      title={
+                                        filled
+                                          ? 'sauvegarder ce scénario'
+                                          : 'saisir la valeur en jeu d’abord'
+                                      }
+                                      className="text-success hover:text-accent cursor-pointer font-mono text-base leading-none font-extrabold disabled:cursor-not-allowed disabled:opacity-35"
+                                    >
+                                      +
+                                    </button>
+                                  )}
+                                </span>
+                                {DEV && branchOn[br] && branch && lineSlot !== null && obsKey && (
+                                  <span className="flex items-center gap-1.5">
+                                    <input
+                                      value={obs[obsKey] ?? ''}
+                                      onChange={(e) =>
+                                        setObs((p) => ({ ...p, [obsKey]: e.target.value }))
+                                      }
+                                      inputMode="numeric"
+                                      placeholder="en jeu"
+                                      className="border-line-subtle bg-surface-sunken/70 text-content focus:border-accent h-6 w-24 rounded border px-1.5 text-right font-mono text-[11px] outline-none"
+                                    />
+                                    <span
+                                      className={`w-14 text-center font-mono text-[10px] ${
+                                        delta === undefined
+                                          ? 'text-content-subtle'
+                                          : Math.abs(delta) <= DEFAULT_TOLERANCE
+                                            ? 'text-success'
+                                            : 'text-danger'
+                                      }`}
+                                    >
+                                      {delta !== undefined ? `${delta.toFixed(2)}%` : 'Δ'}
+                                    </span>
+                                  </span>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </Fragment>
+                      ));
+                    })}
                   </div>
                 </div>
 
@@ -2267,13 +2888,137 @@ export function DamageCalculatorBrowser({
         </div>
       )}
 
-      {/* DEV ONLY (Sevih 27/07/2026) — maquette Claude Design implémentée,
-        spec docs/specs/damage-debug-harness.md ; libellés en dur (§ 5). */}
-      {tab === 'calc' && process.env.NODE_ENV !== 'production' && (
+      {/* Cycle de capture (DEV) : sauvegarde + brouillons de scénarios — la
+        saisie « en jeu » vit DANS la table Résultat ci-dessus (checkbox par
+        colonne de branche). AU-DESSUS du panneau Debug (Sevih 05/08/2026). */}
+      {tab === 'calc' && DEV && (
+        <section className="border-line-subtle bg-surface-raised/60 space-y-3 rounded-xl border p-3.5">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <span className="text-content-subtle text-[10px] font-bold tracking-[0.14em] uppercase">
+              Scénarios
+            </span>
+            <span className="text-warn border-warn/35 bg-warn/10 rounded border px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-wide">
+              DEV ONLY
+            </span>
+            <span className="text-content-subtle text-[11px]">
+              un scénario = une ligne (le « + » d&apos;une cellule Résultat) · calculé REJOUÉ à
+              l&apos;affichage · ⧉ = fixture à committer dans src/lib/damage/fixtures/
+            </span>
+            <span className="flex-1" />
+            {flash && (
+              <span className="text-success border-success/40 bg-surface-sunken rounded-md border px-2.5 py-1 font-mono text-[10px]">
+                ✓ {flash}
+              </span>
+            )}
+          </div>
+          {/* Table de comparaison : atk vs cible · en jeu vs calculé · Δ. */}
+          <div className="border-line-subtle bg-surface-sunken/70 overflow-x-auto rounded-lg border">
+            {savedScns.length ? (
+              <div className="min-w-160">
+                <div className="border-line-subtle text-content-subtle grid grid-cols-[minmax(0,3fr)_110px_110px_70px_150px] gap-2 border-b px-3 py-1.5 font-mono text-[9px] tracking-wide uppercase">
+                  <span>Scénario</span>
+                  <span className="text-right">En jeu</span>
+                  <span className="text-right">Calculé</span>
+                  <span className="text-right">Δ %</span>
+                  <span />
+                </div>
+                {savedScns.map((s) => {
+                  const calc = savedCalcMap.get(scnKey(s));
+                  const delta = calc !== undefined ? ((calc - s.real) / s.real) * 100 : undefined;
+                  const cls =
+                    delta === undefined
+                      ? 'text-content-subtle'
+                      : Math.abs(delta) <= DEFAULT_TOLERANCE
+                        ? 'text-success'
+                        : 'text-danger';
+                  const stale =
+                    delta !== undefined &&
+                    Math.abs(delta) > DEFAULT_TOLERANCE &&
+                    s.gameVersion !== ENGINE_GAME_VERSION;
+                  return (
+                    <div
+                      key={scnKey(s)}
+                      className="grid grid-cols-[minmax(0,3fr)_110px_110px_70px_150px] items-center gap-2 px-3 py-1.5 font-mono text-[11px]"
+                    >
+                      <span className="text-content truncate font-sans text-xs">
+                        {s.atk} <span className="text-content-subtle">vs</span> {s.tgt}{' '}
+                        <span className="text-content-subtle font-mono text-[9px]">
+                          {s.slot} {s.branch} · {s.gameVersion}
+                        </span>
+                        {stale && (
+                          <span className="text-warn border-warn/35 bg-warn/10 ml-1.5 rounded border px-1 py-px font-mono text-[9px] font-bold">
+                            à revérifier en jeu
+                          </span>
+                        )}
+                      </span>
+                      <span className="text-content-muted text-right">
+                        {s.real.toLocaleString()}
+                      </span>
+                      <span className="text-content-muted text-right">
+                        {calc !== undefined ? calc.toLocaleString() : '—'}
+                      </span>
+                      <span className={`text-right ${cls}`}>
+                        {delta !== undefined ? delta.toFixed(3) : '—'}
+                      </span>
+                      <span className="flex justify-end gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => loadSaved(s)}
+                          className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-accent h-6 cursor-pointer rounded border px-2 font-mono text-[10px]"
+                        >
+                          Charger
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => copyScenario(s)}
+                          title="copier le JSON de fixture"
+                          className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-accent h-6 cursor-pointer rounded border px-2 font-mono text-[10px]"
+                        >
+                          ⧉
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => deleteScenario(s)}
+                          title="supprimer"
+                          className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-danger h-6 cursor-pointer rounded border px-2 font-mono text-[10px]"
+                        >
+                          ✕
+                        </button>
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="text-content-subtle px-3 py-3 text-[11px]">
+                aucun scénario — saisir « en jeu » puis cliquer « + » dans la table Résultat
+              </p>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* DEV ONLY (Sevih 27/07/2026) — spec docs/specs/damage-debug-harness.md ;
+        libellés en dur (§ 5). Branché sur le moteur : l'état courant passe par
+        le pont partagé (buildInputsFromZ) — le même chemin que fixtures.test.ts. */}
+      {tab === 'calc' && DEV && (
         <DebugHarness
           state={debugState}
           skills={offensiveSkills.map((s) => ({ slot: s.slot, name: s.name }))}
-          getZ={packZ}
+          zState={buildZ()}
+          resolvePreset={resolvePresetLocal}
+          resolveGear={resolveGearLocal}
+          codexLevel={codexLvl}
+          guildLevel={guildLvl}
+          premiumHp={premiumOn}
+          includeMiss={branchOn.miss}
+          data={dmgData}
+          dataErr={dmgErr}
+          extraIgnored={[
+            // Hors-v1 que le pont ne peut pas voir depuis z (défauts omis).
+            ...(ee && eeOwned ? ['EE — passif § 15 hors v1'] : []),
+            ...(Object.values(quirkLvls).some((v) => v > 0) ? ['quirks — hors v1'] : []),
+          ]}
         />
       )}
     </div>

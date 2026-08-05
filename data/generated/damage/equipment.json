@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.10.804",
+  "resVersion": "1.10.805",
   "pieces": {
     "1": {
       "id": "1",
@@ -46909,7 +46909,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_01"
+        "buffIds": ["BID_ITEM_UO_WEAPON_01"]
       }
     ],
     "1002": [
@@ -46918,7 +46918,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_02"
+        "buffIds": ["BID_ITEM_UO_WEAPON_02"]
       }
     ],
     "1003": [
@@ -46927,7 +46927,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_03"
+        "buffIds": ["BID_ITEM_UO_WEAPON_03"]
       }
     ],
     "1004": [
@@ -46936,7 +46936,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_04"
+        "buffIds": ["BID_ITEM_UO_WEAPON_04"]
       }
     ],
     "1005": [
@@ -46945,7 +46945,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_05"
+        "buffIds": ["BID_ITEM_UO_WEAPON_05"]
       }
     ],
     "1006": [
@@ -46954,7 +46954,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_06"
+        "buffIds": ["BID_ITEM_UO_WEAPON_06"]
       }
     ],
     "1007": [
@@ -46963,7 +46963,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_07"
+        "buffIds": ["BID_ITEM_UO_WEAPON_07"]
       }
     ],
     "1008": [
@@ -46972,7 +46972,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_08"
+        "buffIds": ["BID_ITEM_UO_WEAPON_08"]
       }
     ],
     "1009": [
@@ -46981,7 +46981,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_09"
+        "buffIds": ["BID_ITEM_UO_WEAPON_09"]
       }
     ],
     "1010": [
@@ -46990,7 +46990,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_10"
+        "buffIds": ["BID_ITEM_UO_WEAPON_10"]
       }
     ],
     "1011": [
@@ -46999,7 +46999,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_11"
+        "buffIds": ["BID_ITEM_UO_WEAPON_11"]
       }
     ],
     "1012": [
@@ -47008,7 +47008,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_12"
+        "buffIds": ["BID_ITEM_UO_WEAPON_12"]
       }
     ],
     "1013": [
@@ -47017,7 +47017,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_13"
+        "buffIds": ["BID_ITEM_UO_WEAPON_13"]
       }
     ],
     "1014": [
@@ -47026,7 +47026,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_14"
+        "buffIds": ["BID_ITEM_UO_WEAPON_14"]
       }
     ],
     "1015": [
@@ -47035,7 +47035,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_15"
+        "buffIds": ["BID_ITEM_UO_WEAPON_15"]
       }
     ],
     "1016": [
@@ -47044,7 +47044,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_16"
+        "buffIds": ["BID_ITEM_UO_WEAPON_16"]
       }
     ],
     "1017": [
@@ -47053,7 +47053,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_17"
+        "buffIds": ["BID_ITEM_UO_WEAPON_17"]
       }
     ],
     "1018": [
@@ -47062,7 +47062,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_18"
+        "buffIds": ["BID_ITEM_UO_WEAPON_18"]
       }
     ],
     "1019": [
@@ -47071,7 +47071,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_19"
+        "buffIds": ["BID_ITEM_UO_WEAPON_19"]
       }
     ],
     "1020": [
@@ -47080,7 +47080,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_20"
+        "buffIds": ["BID_ITEM_UO_WEAPON_20"]
       }
     ],
     "1021": [
@@ -47089,7 +47089,13 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_21,BID_ITEM_UO_WEAPON_21_2,BID_ITEM_UO_WEAPON_21_3,BID_ITEM_UO_WEAPON_21_4,BID_ITEM_UO_WEAPON_21_5"
+        "buffIds": [
+          "BID_ITEM_UO_WEAPON_21",
+          "BID_ITEM_UO_WEAPON_21_2",
+          "BID_ITEM_UO_WEAPON_21_3",
+          "BID_ITEM_UO_WEAPON_21_4",
+          "BID_ITEM_UO_WEAPON_21_5"
+        ]
       }
     ],
     "1022": [
@@ -47098,7 +47104,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_22,BID_ITEM_UO_WEAPON_22_2"
+        "buffIds": ["BID_ITEM_UO_WEAPON_22", "BID_ITEM_UO_WEAPON_22_2"]
       }
     ],
     "1023": [
@@ -47107,7 +47113,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_23"
+        "buffIds": ["BID_ITEM_UO_WEAPON_23"]
       }
     ],
     "1024": [
@@ -47116,7 +47122,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_24"
+        "buffIds": ["BID_ITEM_UO_WEAPON_24"]
       }
     ],
     "1025": [
@@ -47125,7 +47131,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_WEAPON_25"
+        "buffIds": ["BID_ITEM_UO_WEAPON_25"]
       }
     ],
     "1026": [
@@ -47134,7 +47140,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_12"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_12"]
       }
     ],
     "1027": [
@@ -47143,7 +47149,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_LICENSE_UO_WEAPON_1"
+        "buffIds": ["BID_LICENSE_UO_WEAPON_1"]
       }
     ],
     "1028": [
@@ -47152,7 +47158,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_WEAPON_1"
+        "buffIds": ["BID_IRREGULAR_UO_WEAPON_1"]
       }
     ],
     "1029": [
@@ -47161,7 +47167,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_WEAPON_2"
+        "buffIds": ["BID_IRREGULAR_UO_WEAPON_2"]
       }
     ],
     "1030": [
@@ -47170,7 +47176,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_WEAPON_3"
+        "buffIds": ["BID_IRREGULAR_UO_WEAPON_3"]
       }
     ],
     "1031": [
@@ -47179,7 +47185,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_WEAPON_4"
+        "buffIds": ["BID_IRREGULAR_UO_WEAPON_4"]
       }
     ],
     "1032": [
@@ -47188,7 +47194,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_WEAPON_5,BID_IRREGULAR_UO_WEAPON_COOL"
+        "buffIds": ["BID_IRREGULAR_UO_WEAPON_5", "BID_IRREGULAR_UO_WEAPON_COOL"]
       }
     ],
     "1033": [
@@ -47197,7 +47203,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_WEAPON_6,BID_IRREGULAR_UO_WEAPON_6_2"
+        "buffIds": ["BID_IRREGULAR_UO_WEAPON_6", "BID_IRREGULAR_UO_WEAPON_6_2"]
       }
     ],
     "1034": [
@@ -47206,7 +47212,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_WEAPON_7"
+        "buffIds": ["BID_IRREGULAR_UO_WEAPON_7"]
       }
     ],
     "1035": [
@@ -47215,7 +47221,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_WEAPON_8,BID_IRREGULAR_UO_WEAPON_COOL"
+        "buffIds": ["BID_IRREGULAR_UO_WEAPON_8", "BID_IRREGULAR_UO_WEAPON_COOL"]
       }
     ],
     "1036": [
@@ -47224,7 +47230,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_WEAPON_9"
+        "buffIds": ["BID_IRREGULAR_UO_WEAPON_9"]
       }
     ],
     "1037": [
@@ -47233,7 +47239,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_WEAPON_10"
+        "buffIds": ["BID_IRREGULAR_UO_WEAPON_10"]
       }
     ],
     "1038": [
@@ -47242,7 +47248,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_FESTIVAL_UO_WEAPON_1"
+        "buffIds": ["BID_FESTIVAL_UO_WEAPON_1"]
       }
     ],
     "1039": [
@@ -47251,7 +47257,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_FESTIVAL_UO_WEAPON_2"
+        "buffIds": ["BID_FESTIVAL_UO_WEAPON_2"]
       }
     ],
     "1040": [
@@ -47260,7 +47266,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_FESTIVAL_UO_WEAPON_3"
+        "buffIds": ["BID_FESTIVAL_UO_WEAPON_3"]
       }
     ],
     "1041": [
@@ -47269,7 +47275,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_FESTIVAL_UO_WEAPON_4"
+        "buffIds": ["BID_FESTIVAL_UO_WEAPON_4"]
       }
     ],
     "1042": [
@@ -47278,7 +47284,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_FESTIVAL_UO_WEAPON_5"
+        "buffIds": ["BID_FESTIVAL_UO_WEAPON_5"]
       }
     ],
     "1043": [
@@ -47287,7 +47293,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENT_IRREGULAR_UO_WEAPON_2"
+        "buffIds": ["BID_EVENT_IRREGULAR_UO_WEAPON_2"]
       }
     ],
     "1044": [
@@ -47296,7 +47302,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_09_2"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_09_2"]
       }
     ],
     "2001": [
@@ -47305,7 +47311,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_01"
+        "buffIds": ["BID_ITEM_UO_ACC_01"]
       }
     ],
     "2002": [
@@ -47314,7 +47320,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_02"
+        "buffIds": ["BID_ITEM_UO_ACC_02"]
       }
     ],
     "2003": [
@@ -47323,7 +47329,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_03"
+        "buffIds": ["BID_ITEM_UO_ACC_03"]
       }
     ],
     "2004": [
@@ -47332,7 +47338,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_04"
+        "buffIds": ["BID_ITEM_UO_ACC_04"]
       }
     ],
     "2005": [
@@ -47341,7 +47347,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_05"
+        "buffIds": ["BID_ITEM_UO_ACC_05"]
       }
     ],
     "2006": [
@@ -47350,7 +47356,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_06"
+        "buffIds": ["BID_ITEM_UO_ACC_06"]
       }
     ],
     "2007": [
@@ -47359,7 +47365,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_07"
+        "buffIds": ["BID_ITEM_UO_ACC_07"]
       }
     ],
     "2008": [
@@ -47368,7 +47374,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_08,BID_ITEM_UO_ACC_08_2"
+        "buffIds": ["BID_ITEM_UO_ACC_08", "BID_ITEM_UO_ACC_08_2"]
       }
     ],
     "2009": [
@@ -47377,7 +47383,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_09"
+        "buffIds": ["BID_ITEM_UO_ACC_09"]
       }
     ],
     "2010": [
@@ -47386,7 +47392,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_10"
+        "buffIds": ["BID_ITEM_UO_ACC_10"]
       }
     ],
     "2011": [
@@ -47395,7 +47401,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_11"
+        "buffIds": ["BID_ITEM_UO_ACC_11"]
       }
     ],
     "2012": [
@@ -47404,7 +47410,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_12"
+        "buffIds": ["BID_ITEM_UO_ACC_12"]
       }
     ],
     "2013": [
@@ -47413,7 +47419,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_13"
+        "buffIds": ["BID_ITEM_UO_ACC_13"]
       }
     ],
     "2014": [
@@ -47422,7 +47428,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_14"
+        "buffIds": ["BID_ITEM_UO_ACC_14"]
       }
     ],
     "2015": [
@@ -47431,7 +47437,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_15"
+        "buffIds": ["BID_ITEM_UO_ACC_15"]
       }
     ],
     "2016": [
@@ -47440,7 +47446,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_16"
+        "buffIds": ["BID_ITEM_UO_ACC_16"]
       }
     ],
     "2017": [
@@ -47449,7 +47455,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_17"
+        "buffIds": ["BID_ITEM_UO_ACC_17"]
       }
     ],
     "2018": [
@@ -47458,7 +47464,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_18"
+        "buffIds": ["BID_ITEM_UO_ACC_18"]
       }
     ],
     "2019": [
@@ -47467,7 +47473,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_19"
+        "buffIds": ["BID_ITEM_UO_ACC_19"]
       }
     ],
     "2020": [
@@ -47476,7 +47482,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_20"
+        "buffIds": ["BID_ITEM_UO_ACC_20"]
       }
     ],
     "2021": [
@@ -47485,7 +47491,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_21"
+        "buffIds": ["BID_ITEM_UO_ACC_21"]
       }
     ],
     "2022": [
@@ -47494,7 +47500,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_22"
+        "buffIds": ["BID_ITEM_UO_ACC_22"]
       }
     ],
     "2023": [
@@ -47503,7 +47509,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_23"
+        "buffIds": ["BID_ITEM_UO_ACC_23"]
       }
     ],
     "2024": [
@@ -47512,7 +47518,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_24"
+        "buffIds": ["BID_ITEM_UO_ACC_24"]
       }
     ],
     "2025": [
@@ -47521,7 +47527,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_ITEM_UO_ACC_25,BID_ITEM_UO_ACC_25_2"
+        "buffIds": ["BID_ITEM_UO_ACC_25", "BID_ITEM_UO_ACC_25_2"]
       }
     ],
     "2026": [
@@ -47530,7 +47536,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_LICENSE_UO_ACC_01"
+        "buffIds": ["BID_LICENSE_UO_ACC_01"]
       }
     ],
     "2029": [
@@ -47539,7 +47545,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_ACC_01"
+        "buffIds": ["BID_IRREGULAR_UO_ACC_01"]
       }
     ],
     "2030": [
@@ -47548,7 +47554,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_ACC_02"
+        "buffIds": ["BID_IRREGULAR_UO_ACC_02"]
       }
     ],
     "2031": [
@@ -47557,7 +47563,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_ACC_03,BID_IRREGULAR_UO_ACC_COOL"
+        "buffIds": ["BID_IRREGULAR_UO_ACC_03", "BID_IRREGULAR_UO_ACC_COOL"]
       }
     ],
     "2032": [
@@ -47566,7 +47572,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_ACC_04"
+        "buffIds": ["BID_IRREGULAR_UO_ACC_04"]
       }
     ],
     "2033": [
@@ -47575,7 +47581,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_ACC_05"
+        "buffIds": ["BID_IRREGULAR_UO_ACC_05"]
       }
     ],
     "2034": [
@@ -47584,7 +47590,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_ACC_06_2"
+        "buffIds": ["BID_IRREGULAR_UO_ACC_06_2"]
       }
     ],
     "2035": [
@@ -47593,7 +47599,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_ACC_07,BID_IRREGULAR_UO_ACC_COOL"
+        "buffIds": ["BID_IRREGULAR_UO_ACC_07", "BID_IRREGULAR_UO_ACC_COOL"]
       }
     ],
     "2036": [
@@ -47602,7 +47608,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_ACC_08"
+        "buffIds": ["BID_IRREGULAR_UO_ACC_08"]
       }
     ],
     "2037": [
@@ -47611,7 +47617,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_ACC_09"
+        "buffIds": ["BID_IRREGULAR_UO_ACC_09"]
       }
     ],
     "2038": [
@@ -47620,7 +47626,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_UO_ACC_10"
+        "buffIds": ["BID_IRREGULAR_UO_ACC_10"]
       }
     ],
     "3001": [
@@ -47629,7 +47635,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_4_01"
+        "buffIds": ["BID_OOPART_CP_4_01"]
       }
     ],
     "3002": [
@@ -47638,7 +47644,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_4_02"
+        "buffIds": ["BID_OOPART_CP_4_02"]
       }
     ],
     "3003": [
@@ -47647,7 +47653,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_4_03"
+        "buffIds": ["BID_OOPART_CP_4_03"]
       }
     ],
     "3004": [
@@ -47656,7 +47662,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_4_04"
+        "buffIds": ["BID_OOPART_CP_4_04"]
       }
     ],
     "3005": [
@@ -47665,7 +47671,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_4_05"
+        "buffIds": ["BID_OOPART_CP_4_05"]
       }
     ],
     "3006": [
@@ -47674,7 +47680,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_4_06,BID_OOPART_CP_4_06_1"
+        "buffIds": ["BID_OOPART_CP_4_06", "BID_OOPART_CP_4_06_1"]
       }
     ],
     "3007": [
@@ -47683,7 +47689,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_4_01"
+        "buffIds": ["BID_OOPART_AP_4_01"]
       }
     ],
     "3008": [
@@ -47692,7 +47698,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_4_02"
+        "buffIds": ["BID_OOPART_AP_4_02"]
       }
     ],
     "3009": [
@@ -47701,7 +47707,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_4_03"
+        "buffIds": ["BID_OOPART_AP_4_03"]
       }
     ],
     "3010": [
@@ -47710,7 +47716,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_4_04"
+        "buffIds": ["BID_OOPART_AP_4_04"]
       }
     ],
     "3011": [
@@ -47719,7 +47725,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_4_05"
+        "buffIds": ["BID_OOPART_AP_4_05"]
       }
     ],
     "3012": [
@@ -47728,7 +47734,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_5_01"
+        "buffIds": ["BID_OOPART_CP_5_01"]
       }
     ],
     "3013": [
@@ -47737,7 +47743,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_5_02"
+        "buffIds": ["BID_OOPART_CP_5_02"]
       }
     ],
     "3014": [
@@ -47746,7 +47752,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_5_03"
+        "buffIds": ["BID_OOPART_CP_5_03"]
       }
     ],
     "3015": [
@@ -47755,7 +47761,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_5_04"
+        "buffIds": ["BID_OOPART_CP_5_04"]
       }
     ],
     "3016": [
@@ -47764,7 +47770,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_5_05"
+        "buffIds": ["BID_OOPART_CP_5_05"]
       }
     ],
     "3017": [
@@ -47773,7 +47779,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_5_06,BID_OOPART_CP_5_06_1"
+        "buffIds": ["BID_OOPART_CP_5_06", "BID_OOPART_CP_5_06_1"]
       }
     ],
     "3018": [
@@ -47782,7 +47788,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_5_01"
+        "buffIds": ["BID_OOPART_AP_5_01"]
       }
     ],
     "3019": [
@@ -47791,7 +47797,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_5_02"
+        "buffIds": ["BID_OOPART_AP_5_02"]
       }
     ],
     "3020": [
@@ -47800,7 +47806,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_5_03"
+        "buffIds": ["BID_OOPART_AP_5_03"]
       }
     ],
     "3021": [
@@ -47809,7 +47815,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_5_04"
+        "buffIds": ["BID_OOPART_AP_5_04"]
       }
     ],
     "3022": [
@@ -47818,7 +47824,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_5_05"
+        "buffIds": ["BID_OOPART_AP_5_05"]
       }
     ],
     "3023": [
@@ -47827,14 +47833,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_6_01"
+        "buffIds": ["BID_OOPART_CP_6_01"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_6_01_lv10"
+        "buffIds": ["BID_OOPART_CP_6_01_lv10"]
       }
     ],
     "3024": [
@@ -47843,14 +47849,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_6_02"
+        "buffIds": ["BID_OOPART_CP_6_02"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_6_02-_lv10"
+        "buffIds": ["BID_OOPART_CP_6_02-_lv10"]
       }
     ],
     "3025": [
@@ -47859,14 +47865,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_6_03"
+        "buffIds": ["BID_OOPART_CP_6_03"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_6_03_lv10"
+        "buffIds": ["BID_OOPART_CP_6_03_lv10"]
       }
     ],
     "3026": [
@@ -47875,14 +47881,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_6_04"
+        "buffIds": ["BID_OOPART_CP_6_04"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_6_04_lv10"
+        "buffIds": ["BID_OOPART_CP_6_04_lv10"]
       }
     ],
     "3027": [
@@ -47891,14 +47897,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_6_05"
+        "buffIds": ["BID_OOPART_CP_6_05"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_6_05_lv10"
+        "buffIds": ["BID_OOPART_CP_6_05_lv10"]
       }
     ],
     "3028": [
@@ -47907,14 +47913,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_6_06,BID_OOPART_CP_6_06_1"
+        "buffIds": ["BID_OOPART_CP_6_06", "BID_OOPART_CP_6_06_1"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_6_06_lv10"
+        "buffIds": ["BID_OOPART_CP_6_06_lv10"]
       }
     ],
     "3029": [
@@ -47923,14 +47929,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_6_01"
+        "buffIds": ["BID_OOPART_AP_6_01"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_6_01"
+        "buffIds": ["BID_OOPART_AP_6_01"]
       }
     ],
     "3030": [
@@ -47939,14 +47945,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_6_02"
+        "buffIds": ["BID_OOPART_AP_6_02"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_6_02"
+        "buffIds": ["BID_OOPART_AP_6_02"]
       }
     ],
     "3031": [
@@ -47955,14 +47961,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_6_03"
+        "buffIds": ["BID_OOPART_AP_6_03"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_6_03"
+        "buffIds": ["BID_OOPART_AP_6_03"]
       }
     ],
     "3032": [
@@ -47971,14 +47977,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_6_04"
+        "buffIds": ["BID_OOPART_AP_6_04"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_6_04"
+        "buffIds": ["BID_OOPART_AP_6_04"]
       }
     ],
     "3033": [
@@ -47987,14 +47993,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_6_05"
+        "buffIds": ["BID_OOPART_AP_6_05"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_6_05"
+        "buffIds": ["BID_OOPART_AP_6_05"]
       }
     ],
     "3034": [
@@ -48003,7 +48009,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_EVENT_01"
+        "buffIds": ["BID_OOPART_EVENT_01"]
       }
     ],
     "3035": [
@@ -48012,7 +48018,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_EVENT_02"
+        "buffIds": ["BID_OOPART_EVENT_02"]
       }
     ],
     "4001": [
@@ -48021,7 +48027,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_01"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_01"]
       }
     ],
     "4002": [
@@ -48030,7 +48036,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_02"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_02"]
       }
     ],
     "4003": [
@@ -48039,7 +48045,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_03"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_03"]
       }
     ],
     "4004": [
@@ -48048,7 +48054,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_04"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_04"]
       }
     ],
     "4005": [
@@ -48057,7 +48063,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_05"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_05"]
       }
     ],
     "4006": [
@@ -48066,7 +48072,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_06"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_06"]
       }
     ],
     "4007": [
@@ -48075,7 +48081,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_ACC_01"
+        "buffIds": ["BID_EVENTITEM_UO_ACC_01"]
       }
     ],
     "4008": [
@@ -48084,7 +48090,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_ACC_02"
+        "buffIds": ["BID_EVENTITEM_UO_ACC_02"]
       }
     ],
     "4009": [
@@ -48093,7 +48099,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_07"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_07"]
       }
     ],
     "4010": [
@@ -48102,7 +48108,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_08"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_08"]
       }
     ],
     "4011": [
@@ -48111,7 +48117,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_ACC_03"
+        "buffIds": ["BID_EVENTITEM_UO_ACC_03"]
       }
     ],
     "4012": [
@@ -48120,7 +48126,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_ACC_04"
+        "buffIds": ["BID_EVENTITEM_UO_ACC_04"]
       }
     ],
     "4013": [
@@ -48129,7 +48135,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_09"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_09"]
       }
     ],
     "4014": [
@@ -48138,7 +48144,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_ACC_05"
+        "buffIds": ["BID_EVENTITEM_UO_ACC_05"]
       }
     ],
     "4015": [
@@ -48147,7 +48153,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_10"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_10"]
       }
     ],
     "4016": [
@@ -48156,7 +48162,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_11"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_11"]
       }
     ],
     "4017": [
@@ -48165,7 +48171,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_ACC_06"
+        "buffIds": ["BID_EVENTITEM_UO_ACC_06"]
       }
     ],
     "4018": [
@@ -48174,7 +48180,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_ACC_07"
+        "buffIds": ["BID_EVENTITEM_UO_ACC_07"]
       }
     ],
     "4019": [
@@ -48183,7 +48189,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_ACC_08"
+        "buffIds": ["BID_EVENTITEM_UO_ACC_08"]
       }
     ],
     "4020": [
@@ -48192,7 +48198,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_ACC_09"
+        "buffIds": ["BID_EVENTITEM_UO_ACC_09"]
       }
     ],
     "4021": [
@@ -48201,7 +48207,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_14"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_14"]
       }
     ],
     "4022": [
@@ -48210,7 +48216,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_13"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_13"]
       }
     ],
     "4023": [
@@ -48219,7 +48225,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_15"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_15"]
       }
     ],
     "4024": [
@@ -48228,7 +48234,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_16"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_16"]
       }
     ],
     "4025": [
@@ -48237,7 +48243,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_ACC_11"
+        "buffIds": ["BID_EVENTITEM_UO_ACC_11"]
       }
     ],
     "4026": [
@@ -48246,7 +48252,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_ACC_12"
+        "buffIds": ["BID_EVENTITEM_UO_ACC_12"]
       }
     ],
     "4027": [
@@ -48255,7 +48261,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_WEAPON_17"
+        "buffIds": ["BID_EVENTITEM_UO_WEAPON_17"]
       }
     ],
     "4028": [
@@ -48264,7 +48270,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_ACC_13,BID_IRREGULAR_UO_ACC_COOL"
+        "buffIds": ["BID_EVENTITEM_UO_ACC_13", "BID_IRREGULAR_UO_ACC_COOL"]
       }
     ],
     "4029": [
@@ -48273,7 +48279,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_FESTIVAL_UO_ACC_1"
+        "buffIds": ["BID_FESTIVAL_UO_ACC_1"]
       }
     ],
     "4030": [
@@ -48282,7 +48288,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_FESTIVAL_UO_ACC_2"
+        "buffIds": ["BID_FESTIVAL_UO_ACC_2"]
       }
     ],
     "4031": [
@@ -48291,7 +48297,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_FESTIVAL_UO_ACC_3_1,BID_FESTIVAL_UO_ACC_3_2"
+        "buffIds": ["BID_FESTIVAL_UO_ACC_3_1", "BID_FESTIVAL_UO_ACC_3_2"]
       }
     ],
     "4032": [
@@ -48300,7 +48306,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_FESTIVAL_UO_ACC_4"
+        "buffIds": ["BID_FESTIVAL_UO_ACC_4"]
       }
     ],
     "4033": [
@@ -48309,7 +48315,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_FESTIVAL_UO_ACC_5"
+        "buffIds": ["BID_FESTIVAL_UO_ACC_5"]
       }
     ],
     "4044": [
@@ -48318,7 +48324,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_IRREGULAR_EVENTITEM_UO_ACC_02"
+        "buffIds": ["BID_IRREGULAR_EVENTITEM_UO_ACC_02"]
       }
     ],
     "4045": [
@@ -48327,7 +48333,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_EVENTITEM_UO_ACC_19"
+        "buffIds": ["BID_EVENTITEM_UO_ACC_19"]
       }
     ],
     "5001": [
@@ -48336,7 +48342,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_CP_6_07"
+        "buffIds": ["BID_OOPART_CP_6_07"]
       },
       {
         "level": 10,
@@ -48351,7 +48357,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_OOPART_AP_6_06"
+        "buffIds": ["BID_OOPART_AP_6_06"]
       },
       {
         "level": 10,
@@ -48366,14 +48372,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000001"
+        "buffIds": ["BID_CEQUIP_2000001"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000001_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000001_CHANGE"]
       }
     ],
     "2000002": [
@@ -48382,14 +48388,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000002"
+        "buffIds": ["BID_CEQUIP_2000002"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000002_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000002_CHANGE"]
       }
     ],
     "2000003": [
@@ -48398,14 +48404,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000003"
+        "buffIds": ["BID_CEQUIP_2000003"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000003_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000003_CHANGE"]
       }
     ],
     "2000004": [
@@ -48414,14 +48420,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000004_1,BID_CEQUIP_2000004_2"
+        "buffIds": ["BID_CEQUIP_2000004_1", "BID_CEQUIP_2000004_2"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000004_1_CHANGE,BID_CEQUIP_2000004_2_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000004_1_CHANGE", "BID_CEQUIP_2000004_2_CHANGE"]
       }
     ],
     "2000005": [
@@ -48430,14 +48436,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000005"
+        "buffIds": ["BID_CEQUIP_2000005"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000005_1_ADD"
+        "buffIds": ["BID_CEQUIP_2000005_1_ADD"]
       }
     ],
     "2000006": [
@@ -48446,14 +48452,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000006"
+        "buffIds": ["BID_CEQUIP_2000006"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000006_ADD"
+        "buffIds": ["BID_CEQUIP_2000006_ADD"]
       }
     ],
     "2000007": [
@@ -48462,14 +48468,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000007"
+        "buffIds": ["BID_CEQUIP_2000007"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000007_ADD"
+        "buffIds": ["BID_CEQUIP_2000007_ADD"]
       }
     ],
     "2000008": [
@@ -48478,14 +48484,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000008_1,BID_CEQUIP_2000008_2"
+        "buffIds": ["BID_CEQUIP_2000008_1", "BID_CEQUIP_2000008_2"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000008_ADD"
+        "buffIds": ["BID_CEQUIP_2000008_ADD"]
       }
     ],
     "2000009": [
@@ -48494,14 +48500,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000009"
+        "buffIds": ["BID_CEQUIP_2000009"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000009_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000009_CHANGE"]
       }
     ],
     "2000010": [
@@ -48510,14 +48516,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000010"
+        "buffIds": ["BID_CEQUIP_2000010"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000010_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000010_CHANGE"]
       }
     ],
     "2000011": [
@@ -48526,14 +48532,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000011"
+        "buffIds": ["BID_CEQUIP_2000011"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000011_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000011_CHANGE"]
       }
     ],
     "2000012": [
@@ -48542,14 +48548,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000012"
+        "buffIds": ["BID_CEQUIP_2000012"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000012_ADD"
+        "buffIds": ["BID_CEQUIP_2000012_ADD"]
       }
     ],
     "2000013": [
@@ -48558,14 +48564,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000013"
+        "buffIds": ["BID_CEQUIP_2000013"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000013_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000013_CHANGE"]
       }
     ],
     "2000014": [
@@ -48574,14 +48580,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000014_1,BID_CEQUIP_2000014_2"
+        "buffIds": ["BID_CEQUIP_2000014_1", "BID_CEQUIP_2000014_2"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000014_ADD"
+        "buffIds": ["BID_CEQUIP_2000014_ADD"]
       }
     ],
     "2000015": [
@@ -48590,14 +48596,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000015"
+        "buffIds": ["BID_CEQUIP_2000015"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000015_ADD"
+        "buffIds": ["BID_CEQUIP_2000015_ADD"]
       }
     ],
     "2000016": [
@@ -48606,14 +48612,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000016"
+        "buffIds": ["BID_CEQUIP_2000016"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000016_ADD"
+        "buffIds": ["BID_CEQUIP_2000016_ADD"]
       }
     ],
     "2000017": [
@@ -48622,14 +48628,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000017"
+        "buffIds": ["BID_CEQUIP_2000017"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000017_ADD"
+        "buffIds": ["BID_CEQUIP_2000017_ADD"]
       }
     ],
     "2000018": [
@@ -48638,14 +48644,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000018"
+        "buffIds": ["BID_CEQUIP_2000018"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000018_ADD"
+        "buffIds": ["BID_CEQUIP_2000018_ADD"]
       }
     ],
     "2000019": [
@@ -48654,14 +48660,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000019"
+        "buffIds": ["BID_CEQUIP_2000019"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000019_ADD"
+        "buffIds": ["BID_CEQUIP_2000019_ADD"]
       }
     ],
     "2000020": [
@@ -48670,14 +48676,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000020"
+        "buffIds": ["BID_CEQUIP_2000020"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000020_ADD"
+        "buffIds": ["BID_CEQUIP_2000020_ADD"]
       }
     ],
     "2000021": [
@@ -48686,14 +48692,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000021"
+        "buffIds": ["BID_CEQUIP_2000021"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000021_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000021_CHANGE"]
       }
     ],
     "2000022": [
@@ -48702,14 +48708,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000022"
+        "buffIds": ["BID_CEQUIP_2000022"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000022_1_ADD"
+        "buffIds": ["BID_CEQUIP_2000022_1_ADD"]
       }
     ],
     "2000023": [
@@ -48718,14 +48724,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000023"
+        "buffIds": ["BID_CEQUIP_2000023"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000023_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000023_CHANGE"]
       }
     ],
     "2000024": [
@@ -48734,14 +48740,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000024"
+        "buffIds": ["BID_CEQUIP_2000024"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000024_ADD"
+        "buffIds": ["BID_CEQUIP_2000024_ADD"]
       }
     ],
     "2000025": [
@@ -48750,14 +48756,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000025"
+        "buffIds": ["BID_CEQUIP_2000025"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000025_ADD"
+        "buffIds": ["BID_CEQUIP_2000025_ADD"]
       }
     ],
     "2000026": [
@@ -48766,14 +48772,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000026"
+        "buffIds": ["BID_CEQUIP_2000026"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000026_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000026_CHANGE"]
       }
     ],
     "2000027": [
@@ -48782,14 +48788,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000027"
+        "buffIds": ["BID_CEQUIP_2000027"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000027_ADD"
+        "buffIds": ["BID_CEQUIP_2000027_ADD"]
       }
     ],
     "2000028": [
@@ -48798,14 +48804,19 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000028_1,BID_CEQUIP_2000028_2,BID_CEQUIP_2000028_3,BID_CEQUIP_2000028_4"
+        "buffIds": [
+          "BID_CEQUIP_2000028_1",
+          "BID_CEQUIP_2000028_2",
+          "BID_CEQUIP_2000028_3",
+          "BID_CEQUIP_2000028_4"
+        ]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000028_1_ADD"
+        "buffIds": ["BID_CEQUIP_2000028_1_ADD"]
       }
     ],
     "2000029": [
@@ -48814,14 +48825,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000029"
+        "buffIds": ["BID_CEQUIP_2000029"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000029_ADD"
+        "buffIds": ["BID_CEQUIP_2000029_ADD"]
       }
     ],
     "2000030": [
@@ -48830,14 +48841,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000030"
+        "buffIds": ["BID_CEQUIP_2000030"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000030_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000030_CHANGE"]
       }
     ],
     "2000031": [
@@ -48846,14 +48857,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000031"
+        "buffIds": ["BID_CEQUIP_2000031"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000031_ADD"
+        "buffIds": ["BID_CEQUIP_2000031_ADD"]
       }
     ],
     "2000032": [
@@ -48862,14 +48873,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000032"
+        "buffIds": ["BID_CEQUIP_2000032"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000032_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000032_CHANGE"]
       }
     ],
     "2000033": [
@@ -48878,14 +48889,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000033"
+        "buffIds": ["BID_CEQUIP_2000033"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000033_1_ADD"
+        "buffIds": ["BID_CEQUIP_2000033_1_ADD"]
       }
     ],
     "2000034": [
@@ -48894,14 +48905,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000034"
+        "buffIds": ["BID_CEQUIP_2000034"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000034_ADD"
+        "buffIds": ["BID_CEQUIP_2000034_ADD"]
       }
     ],
     "2000035": [
@@ -48910,14 +48921,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000035"
+        "buffIds": ["BID_CEQUIP_2000035"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000035_ADD"
+        "buffIds": ["BID_CEQUIP_2000035_ADD"]
       }
     ],
     "2000036": [
@@ -48926,14 +48937,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000036"
+        "buffIds": ["BID_CEQUIP_2000036"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000036_ADD"
+        "buffIds": ["BID_CEQUIP_2000036_ADD"]
       }
     ],
     "2000037": [
@@ -48942,14 +48953,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000037"
+        "buffIds": ["BID_CEQUIP_2000037"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000037_ADD"
+        "buffIds": ["BID_CEQUIP_2000037_ADD"]
       }
     ],
     "2000038": [
@@ -48958,14 +48969,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000038"
+        "buffIds": ["BID_CEQUIP_2000038"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000038_ADD"
+        "buffIds": ["BID_CEQUIP_2000038_ADD"]
       }
     ],
     "2000039": [
@@ -48974,14 +48985,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000039"
+        "buffIds": ["BID_CEQUIP_2000039"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000039_ADD"
+        "buffIds": ["BID_CEQUIP_2000039_ADD"]
       }
     ],
     "2000040": [
@@ -48990,14 +49001,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000040"
+        "buffIds": ["BID_CEQUIP_2000040"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000040_ADD"
+        "buffIds": ["BID_CEQUIP_2000040_ADD"]
       }
     ],
     "2000041": [
@@ -49006,14 +49017,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000041"
+        "buffIds": ["BID_CEQUIP_2000041"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000041_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000041_CHANGE"]
       }
     ],
     "2000042": [
@@ -49022,14 +49033,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000042"
+        "buffIds": ["BID_CEQUIP_2000042"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000042_ADD"
+        "buffIds": ["BID_CEQUIP_2000042_ADD"]
       }
     ],
     "2000043": [
@@ -49038,14 +49049,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000043"
+        "buffIds": ["BID_CEQUIP_2000043"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000020_ADD"
+        "buffIds": ["BID_CEQUIP_2000020_ADD"]
       }
     ],
     "2000044": [
@@ -49054,14 +49065,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000044"
+        "buffIds": ["BID_CEQUIP_2000044"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000044_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000044_CHANGE"]
       }
     ],
     "2000045": [
@@ -49070,14 +49081,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000045"
+        "buffIds": ["BID_CEQUIP_2000045"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000045_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000045_CHANGE"]
       }
     ],
     "2000046": [
@@ -49086,14 +49097,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000046"
+        "buffIds": ["BID_CEQUIP_2000046"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000046_ADD"
+        "buffIds": ["BID_CEQUIP_2000046_ADD"]
       }
     ],
     "2000047": [
@@ -49102,14 +49113,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000047"
+        "buffIds": ["BID_CEQUIP_2000047"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000047_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000047_CHANGE"]
       }
     ],
     "2000048": [
@@ -49118,14 +49129,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000048"
+        "buffIds": ["BID_CEQUIP_2000048"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000048_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000048_CHANGE"]
       }
     ],
     "2000049": [
@@ -49134,14 +49145,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000049"
+        "buffIds": ["BID_CEQUIP_2000049"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000049_ADD"
+        "buffIds": ["BID_CEQUIP_2000049_ADD"]
       }
     ],
     "2000050": [
@@ -49150,14 +49161,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000050"
+        "buffIds": ["BID_CEQUIP_2000050"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000050_ADD"
+        "buffIds": ["BID_CEQUIP_2000050_ADD"]
       }
     ],
     "2000051": [
@@ -49166,14 +49177,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000051"
+        "buffIds": ["BID_CEQUIP_2000051"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000051_ADD"
+        "buffIds": ["BID_CEQUIP_2000051_ADD"]
       }
     ],
     "2000052": [
@@ -49182,14 +49193,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000052"
+        "buffIds": ["BID_CEQUIP_2000052"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000052_ADD"
+        "buffIds": ["BID_CEQUIP_2000052_ADD"]
       }
     ],
     "2000053": [
@@ -49198,14 +49209,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000053"
+        "buffIds": ["BID_CEQUIP_2000053"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000053_ADD"
+        "buffIds": ["BID_CEQUIP_2000053_ADD"]
       }
     ],
     "2000054": [
@@ -49214,14 +49225,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000054"
+        "buffIds": ["BID_CEQUIP_2000054"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000054_ADD"
+        "buffIds": ["BID_CEQUIP_2000054_ADD"]
       }
     ],
     "2000055": [
@@ -49230,14 +49241,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000055"
+        "buffIds": ["BID_CEQUIP_2000055"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000055_ADD"
+        "buffIds": ["BID_CEQUIP_2000055_ADD"]
       }
     ],
     "2000056": [
@@ -49246,14 +49257,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000056"
+        "buffIds": ["BID_CEQUIP_2000056"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000056_ADD"
+        "buffIds": ["BID_CEQUIP_2000056_ADD"]
       }
     ],
     "2000057": [
@@ -49262,14 +49273,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000057"
+        "buffIds": ["BID_CEQUIP_2000057"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000057_ADD"
+        "buffIds": ["BID_CEQUIP_2000057_ADD"]
       }
     ],
     "2000058": [
@@ -49278,14 +49289,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000058"
+        "buffIds": ["BID_CEQUIP_2000058"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000058_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000058_CHANGE"]
       }
     ],
     "2000059": [
@@ -49294,14 +49305,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000059"
+        "buffIds": ["BID_CEQUIP_2000059"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000059_ADD"
+        "buffIds": ["BID_CEQUIP_2000059_ADD"]
       }
     ],
     "2000060": [
@@ -49310,14 +49321,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000060"
+        "buffIds": ["BID_CEQUIP_2000060"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000060_ADD"
+        "buffIds": ["BID_CEQUIP_2000060_ADD"]
       }
     ],
     "2000061": [
@@ -49326,14 +49337,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000061"
+        "buffIds": ["BID_CEQUIP_2000061"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000061_ADD"
+        "buffIds": ["BID_CEQUIP_2000061_ADD"]
       }
     ],
     "2000062": [
@@ -49342,14 +49353,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000062"
+        "buffIds": ["BID_CEQUIP_2000062"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000062_ADD"
+        "buffIds": ["BID_CEQUIP_2000062_ADD"]
       }
     ],
     "2000063": [
@@ -49358,14 +49369,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000063"
+        "buffIds": ["BID_CEQUIP_2000063"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000063_ADD"
+        "buffIds": ["BID_CEQUIP_2000063_ADD"]
       }
     ],
     "2000064": [
@@ -49374,14 +49385,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000064"
+        "buffIds": ["BID_CEQUIP_2000064"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000064_ADD"
+        "buffIds": ["BID_CEQUIP_2000064_ADD"]
       }
     ],
     "2000065": [
@@ -49390,14 +49401,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000065"
+        "buffIds": ["BID_CEQUIP_2000065"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000065_ADD"
+        "buffIds": ["BID_CEQUIP_2000065_ADD"]
       }
     ],
     "2000066": [
@@ -49406,14 +49417,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000066"
+        "buffIds": ["BID_CEQUIP_2000066"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000066_ADD"
+        "buffIds": ["BID_CEQUIP_2000066_ADD"]
       }
     ],
     "2000067": [
@@ -49422,14 +49433,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000067"
+        "buffIds": ["BID_CEQUIP_2000067"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000067_ADD"
+        "buffIds": ["BID_CEQUIP_2000067_ADD"]
       }
     ],
     "2000068": [
@@ -49438,14 +49449,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000068"
+        "buffIds": ["BID_CEQUIP_2000068"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000068_ADD"
+        "buffIds": ["BID_CEQUIP_2000068_ADD"]
       }
     ],
     "2000069": [
@@ -49454,14 +49465,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000069"
+        "buffIds": ["BID_CEQUIP_2000069"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000069_ADD"
+        "buffIds": ["BID_CEQUIP_2000069_ADD"]
       }
     ],
     "2000070": [
@@ -49470,14 +49481,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000070"
+        "buffIds": ["BID_CEQUIP_2000070"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000070_ADD"
+        "buffIds": ["BID_CEQUIP_2000070_ADD"]
       }
     ],
     "2000071": [
@@ -49486,14 +49497,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000071"
+        "buffIds": ["BID_CEQUIP_2000071"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000071_ADD"
+        "buffIds": ["BID_CEQUIP_2000071_ADD"]
       }
     ],
     "2000072": [
@@ -49502,14 +49513,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000072"
+        "buffIds": ["BID_CEQUIP_2000072"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000072_ADD"
+        "buffIds": ["BID_CEQUIP_2000072_ADD"]
       }
     ],
     "2000073": [
@@ -49518,14 +49529,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000073"
+        "buffIds": ["BID_CEQUIP_2000073"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000073_ADD"
+        "buffIds": ["BID_CEQUIP_2000073_ADD"]
       }
     ],
     "2000074": [
@@ -49534,14 +49545,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000074"
+        "buffIds": ["BID_CEQUIP_2000074"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000074_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000074_CHANGE"]
       }
     ],
     "2000075": [
@@ -49550,14 +49561,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000075"
+        "buffIds": ["BID_CEQUIP_2000075"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000075_ADD"
+        "buffIds": ["BID_CEQUIP_2000075_ADD"]
       }
     ],
     "2000076": [
@@ -49566,14 +49577,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000076"
+        "buffIds": ["BID_CEQUIP_2000076"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000076_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000076_CHANGE"]
       }
     ],
     "2000077": [
@@ -49582,14 +49593,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000077"
+        "buffIds": ["BID_CEQUIP_2000077"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000077_ADD"
+        "buffIds": ["BID_CEQUIP_2000077_ADD"]
       }
     ],
     "2000078": [
@@ -49598,7 +49609,7 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000078,BID_CEQUIP_2000078_1"
+        "buffIds": ["BID_CEQUIP_2000078", "BID_CEQUIP_2000078_1"]
       },
       {
         "level": 10,
@@ -49613,14 +49624,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000079"
+        "buffIds": ["BID_CEQUIP_2000079"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000079_ADD"
+        "buffIds": ["BID_CEQUIP_2000079_ADD"]
       }
     ],
     "2000080": [
@@ -49629,14 +49640,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000080"
+        "buffIds": ["BID_CEQUIP_2000080"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000080_ADD"
+        "buffIds": ["BID_CEQUIP_2000080_ADD"]
       }
     ],
     "2000081": [
@@ -49645,14 +49656,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000081"
+        "buffIds": ["BID_CEQUIP_2000081"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000081_ADD"
+        "buffIds": ["BID_CEQUIP_2000081_ADD"]
       }
     ],
     "2000082": [
@@ -49661,14 +49672,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000082"
+        "buffIds": ["BID_CEQUIP_2000082"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000082_ADD"
+        "buffIds": ["BID_CEQUIP_2000082_ADD"]
       }
     ],
     "2000083": [
@@ -49677,14 +49688,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000083"
+        "buffIds": ["BID_CEQUIP_2000083"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000083_ADD"
+        "buffIds": ["BID_CEQUIP_2000083_ADD"]
       }
     ],
     "2000084": [
@@ -49693,14 +49704,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000084"
+        "buffIds": ["BID_CEQUIP_2000084"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000084_ADD"
+        "buffIds": ["BID_CEQUIP_2000084_ADD"]
       }
     ],
     "2000085": [
@@ -49709,14 +49720,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000085"
+        "buffIds": ["BID_CEQUIP_2000085"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000085_ADD"
+        "buffIds": ["BID_CEQUIP_2000085_ADD"]
       }
     ],
     "2000086": [
@@ -49725,14 +49736,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000086"
+        "buffIds": ["BID_CEQUIP_2000086"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000086_ADD"
+        "buffIds": ["BID_CEQUIP_2000086_ADD"]
       }
     ],
     "2000087": [
@@ -49741,14 +49752,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000087_1,BID_CEQUIP_2000087_2,BID_CEQUIP_2000087_3"
+        "buffIds": ["BID_CEQUIP_2000087_1", "BID_CEQUIP_2000087_2", "BID_CEQUIP_2000087_3"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000087_ADD"
+        "buffIds": ["BID_CEQUIP_2000087_ADD"]
       }
     ],
     "2000088": [
@@ -49757,14 +49768,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000088"
+        "buffIds": ["BID_CEQUIP_2000088"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000088_ADD"
+        "buffIds": ["BID_CEQUIP_2000088_ADD"]
       }
     ],
     "2000089": [
@@ -49773,14 +49784,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000089"
+        "buffIds": ["BID_CEQUIP_2000089"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000089_ADD"
+        "buffIds": ["BID_CEQUIP_2000089_ADD"]
       }
     ],
     "2000090": [
@@ -49789,14 +49800,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000090"
+        "buffIds": ["BID_CEQUIP_2000090"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000090_ADD"
+        "buffIds": ["BID_CEQUIP_2000090_ADD"]
       }
     ],
     "2000091": [
@@ -49805,14 +49816,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000091_1,BID_CEQUIP_2000091_2"
+        "buffIds": ["BID_CEQUIP_2000091_1", "BID_CEQUIP_2000091_2"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000091_ADD"
+        "buffIds": ["BID_CEQUIP_2000091_ADD"]
       }
     ],
     "2000092": [
@@ -49821,14 +49832,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000092"
+        "buffIds": ["BID_CEQUIP_2000092"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000092_ADD"
+        "buffIds": ["BID_CEQUIP_2000092_ADD"]
       }
     ],
     "2000093": [
@@ -49837,14 +49848,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000093"
+        "buffIds": ["BID_CEQUIP_2000093"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000093_ADD"
+        "buffIds": ["BID_CEQUIP_2000093_ADD"]
       }
     ],
     "2000094": [
@@ -49853,14 +49864,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000094"
+        "buffIds": ["BID_CEQUIP_2000094"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000094_ADD"
+        "buffIds": ["BID_CEQUIP_2000094_ADD"]
       }
     ],
     "2000095": [
@@ -49869,14 +49880,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000095"
+        "buffIds": ["BID_CEQUIP_2000095"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000095_ADD"
+        "buffIds": ["BID_CEQUIP_2000095_ADD"]
       }
     ],
     "2000096": [
@@ -49885,14 +49896,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000096"
+        "buffIds": ["BID_CEQUIP_2000096"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000096_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000096_CHANGE"]
       }
     ],
     "2000097": [
@@ -49901,14 +49912,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000097"
+        "buffIds": ["BID_CEQUIP_2000097"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000097_ADD"
+        "buffIds": ["BID_CEQUIP_2000097_ADD"]
       }
     ],
     "2000098": [
@@ -49917,14 +49928,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000098"
+        "buffIds": ["BID_CEQUIP_2000098"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000098_ADD"
+        "buffIds": ["BID_CEQUIP_2000098_ADD"]
       }
     ],
     "2000099": [
@@ -49933,14 +49944,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000099"
+        "buffIds": ["BID_CEQUIP_2000099"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000099_ADD"
+        "buffIds": ["BID_CEQUIP_2000099_ADD"]
       }
     ],
     "2000100": [
@@ -49949,14 +49960,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000100"
+        "buffIds": ["BID_CEQUIP_2000100"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000100_ADD"
+        "buffIds": ["BID_CEQUIP_2000100_ADD"]
       }
     ],
     "2000101": [
@@ -49965,14 +49976,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000101"
+        "buffIds": ["BID_CEQUIP_2000101"]
       },
       {
         "level": 10,
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000101_CHANGE"
+        "buffIds": ["BID_CEQUIP_2000101_CHANGE"]
       }
     ],
     "2000102": [
@@ -49981,14 +49992,21 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000102_1,BID_CEQUIP_2000102_2"
+        "buffIds": ["BID_CEQUIP_2000102_1", "BID_CEQUIP_2000102_2"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000102_ADD_1,BID_CEQUIP_2000102_ADD_2,BID_CEQUIP_2000102_ADD_3,BID_CEQUIP_2000102_ADD_4,BID_CEQUIP_2000102_ADD_5,BID_CEQUIP_2000102_ADD_6"
+        "buffIds": [
+          "BID_CEQUIP_2000102_ADD_1",
+          "BID_CEQUIP_2000102_ADD_2",
+          "BID_CEQUIP_2000102_ADD_3",
+          "BID_CEQUIP_2000102_ADD_4",
+          "BID_CEQUIP_2000102_ADD_5",
+          "BID_CEQUIP_2000102_ADD_6"
+        ]
       }
     ],
     "2000103": [
@@ -49997,14 +50015,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000103"
+        "buffIds": ["BID_CEQUIP_2000103"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000103_1_ADD,BID_CEQUIP_2000103_2_ADD"
+        "buffIds": ["BID_CEQUIP_2000103_1_ADD", "BID_CEQUIP_2000103_2_ADD"]
       }
     ],
     "2000105": [
@@ -50013,14 +50031,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000105"
+        "buffIds": ["BID_CEQUIP_2000105"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000105_ADD"
+        "buffIds": ["BID_CEQUIP_2000105_ADD"]
       }
     ],
     "2000106": [
@@ -50029,14 +50047,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000106"
+        "buffIds": ["BID_CEQUIP_2000106"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000106_ADD"
+        "buffIds": ["BID_CEQUIP_2000106_ADD"]
       }
     ],
     "2000107": [
@@ -50045,14 +50063,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000107"
+        "buffIds": ["BID_CEQUIP_2000107"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000107_ADD"
+        "buffIds": ["BID_CEQUIP_2000107_ADD"]
       }
     ],
     "2000108": [
@@ -50061,14 +50079,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000108_1,BID_CEQUIP_2000108_2"
+        "buffIds": ["BID_CEQUIP_2000108_1", "BID_CEQUIP_2000108_2"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000108_ADD"
+        "buffIds": ["BID_CEQUIP_2000108_ADD"]
       }
     ],
     "2000109": [
@@ -50077,14 +50095,19 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000109_1,BID_CEQUIP_2000109_2,BID_CEQUIP_2000109_3,BID_CEQUIP_2000109_4"
+        "buffIds": [
+          "BID_CEQUIP_2000109_1",
+          "BID_CEQUIP_2000109_2",
+          "BID_CEQUIP_2000109_3",
+          "BID_CEQUIP_2000109_4"
+        ]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000109_ADD"
+        "buffIds": ["BID_CEQUIP_2000109_ADD"]
       }
     ],
     "2000110": [
@@ -50093,14 +50116,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000110"
+        "buffIds": ["BID_CEQUIP_2000110"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000110_ADD"
+        "buffIds": ["BID_CEQUIP_2000110_ADD"]
       }
     ],
     "2000111": [
@@ -50109,14 +50132,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000111"
+        "buffIds": ["BID_CEQUIP_2000111"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000111_ADD"
+        "buffIds": ["BID_CEQUIP_2000111_ADD"]
       }
     ],
     "2000112": [
@@ -50125,14 +50148,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000112"
+        "buffIds": ["BID_CEQUIP_2000112"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000112_ADD"
+        "buffIds": ["BID_CEQUIP_2000112_ADD"]
       }
     ],
     "2000113": [
@@ -50141,14 +50164,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000113"
+        "buffIds": ["BID_CEQUIP_2000113"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000113_ADD"
+        "buffIds": ["BID_CEQUIP_2000113_ADD"]
       }
     ],
     "2000114": [
@@ -50157,14 +50180,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000114"
+        "buffIds": ["BID_CEQUIP_2000114"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000114_ADD_1,BID_CEQUIP_2000114_ADD_2"
+        "buffIds": ["BID_CEQUIP_2000114_ADD_1", "BID_CEQUIP_2000114_ADD_2"]
       }
     ],
     "2000116": [
@@ -50173,14 +50196,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000116_1,BID_CEQUIP_2000116_2"
+        "buffIds": ["BID_CEQUIP_2000116_1", "BID_CEQUIP_2000116_2"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000116_ADD"
+        "buffIds": ["BID_CEQUIP_2000116_ADD"]
       }
     ],
     "2000117": [
@@ -50189,14 +50212,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000117_1,BID_CEQUIP_2000117_2"
+        "buffIds": ["BID_CEQUIP_2000117_1", "BID_CEQUIP_2000117_2"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000117_ADD"
+        "buffIds": ["BID_CEQUIP_2000117_ADD"]
       }
     ],
     "2000118": [
@@ -50205,14 +50228,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000118"
+        "buffIds": ["BID_CEQUIP_2000118"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000118_ADD"
+        "buffIds": ["BID_CEQUIP_2000118_ADD"]
       }
     ],
     "2000119": [
@@ -50221,14 +50244,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000119"
+        "buffIds": ["BID_CEQUIP_2000119"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000119_ADD"
+        "buffIds": ["BID_CEQUIP_2000119_ADD"]
       }
     ],
     "2000121": [
@@ -50237,14 +50260,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000121"
+        "buffIds": ["BID_CEQUIP_2000121"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2000121_ADD"
+        "buffIds": ["BID_CEQUIP_2000121_ADD"]
       }
     ],
     "2700003": [
@@ -50253,14 +50276,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2700003"
+        "buffIds": ["BID_CEQUIP_2700003"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2700003_ADD"
+        "buffIds": ["BID_CEQUIP_2700003_ADD"]
       }
     ],
     "2700005": [
@@ -50269,14 +50292,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2700005"
+        "buffIds": ["BID_CEQUIP_2700005"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2700005_ADD"
+        "buffIds": ["BID_CEQUIP_2700005_ADD"]
       }
     ],
     "2700037": [
@@ -50285,14 +50308,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2700037"
+        "buffIds": ["BID_CEQUIP_2700037"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2700037_ADD"
+        "buffIds": ["BID_CEQUIP_2700037_ADD"]
       }
     ],
     "2700043": [
@@ -50301,14 +50324,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2700043"
+        "buffIds": ["BID_CEQUIP_2700043"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2700043_ADD"
+        "buffIds": ["BID_CEQUIP_2700043_ADD"]
       }
     ],
     "2700056": [
@@ -50317,14 +50340,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2700056"
+        "buffIds": ["BID_CEQUIP_2700056"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2700056_ADD"
+        "buffIds": ["BID_CEQUIP_2700056_ADD"]
       }
     ],
     "2700070": [
@@ -50333,14 +50356,14 @@
         "isAdd": false,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2700070"
+        "buffIds": ["BID_CEQUIP_2700070"]
       },
       {
         "level": 10,
         "isAdd": true,
         "breakLimitCounts": [],
         "ignoreLowSet": false,
-        "buffId": "BID_CEQUIP_2700070_ADD"
+        "buffIds": ["BID_CEQUIP_2700070_ADD"]
       }
     ]
   },

@@ -23,8 +23,17 @@ import {
 import { getMonster } from '@/lib/data/monsters';
 import { getTranscendTiers } from '@/lib/data/char-progression';
 import progressionData from '@data/generated/progression.json';
-import { statAt } from '@/lib/monster-stats';
+import damageGrowthData from '@data/generated/damage/growth.json';
 import { statName } from '@/lib/data/stat-glossary';
+import { SHEET_FIELDS, TARGET_FIELDS } from '@/lib/damage/scenario';
+import { presetSpawnStats } from '@/lib/damage/preset-target';
+import { familyMembersFor, uniqueGroupsOf } from '@/lib/damage/preset-gear';
+import { staticBossPassives } from '@/lib/damage/passives';
+import { sheetSlugOfStat, type DamageBuffsData, type DamageTargetsData } from '@/lib/damage/inputs';
+import type { ActiveBuff } from '@/lib/damage/aggregate';
+import damageTargetsData from '@data/generated/damage/targets.json';
+import damageBuffsData from '@data/generated/damage/buffs.json';
+import monsterSkillsData from '@data/generated/monster-skills.json';
 import { dedupSkills } from '@/lib/skill-view';
 import { img } from '@/lib/images';
 import type {
@@ -47,6 +56,7 @@ import encountersData from '@data/generated/encounters.json';
 import quirksRaw from '@data/generated/quirks.json';
 import {
   DamageCalculatorBrowser,
+  type DcBossPassive,
   type DcBuffOption,
   type DcChar,
   type DcEE,
@@ -204,19 +214,10 @@ const KIT_SLOTS: { type: string; slot: string }[] = [
  * de la fiche — le Penetration Set est donc capturé par la saisie, pas par un
  * passif (confirmé Sevih 26/07/2026). Le lifesteal est IGNORÉ : il ne touche
  * pas aux dégâts. Ce tableau fixe l'ordre et l'unité ; ce qui est réellement
- * DEMANDÉ par perso vient de `statKeysFor`.
+ * DEMANDÉ par perso vient de `statKeysFor`. La table vit dans la LIB
+ * (`SHEET_FIELDS`) : le pont z → moteur applique les MÊMES percent (% → ‰).
  */
-const SHEET_STATS: { slug: string; percent: boolean }[] = [
-  { slug: 'atk', percent: false },
-  { slug: 'def', percent: false },
-  { slug: 'hp', percent: false },
-  { slug: 'speed', percent: false },
-  { slug: 'critical_rate', percent: true },
-  { slug: 'critical_dmg', percent: true },
-  { slug: 'pierce_power_rate', percent: true },
-  { slug: 'dmg_boost', percent: true },
-  { slug: 'buff_chance', percent: false },
-];
+const SHEET_STATS = SHEET_FIELDS;
 
 /**
  * Stats de la fiche à SAISIR pour un perso — on ne demande QUE ce qui sert à
@@ -361,6 +362,19 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
               ),
             }
           : {}),
+        // Groupes d'options UNIQUES des tables damage (moteur § 15) — par
+        // classe quand les variantes diffèrent (Briareos/Gorgon).
+        ...(uniqueGroupsOf(f.ids).length ? { dmgGroups: uniqueGroupsOf(f.ids) } : {}),
+        ...(f.classPassives
+          ? {
+              dmgGroupsByClass: Object.fromEntries(
+                f.classPassives.map((cp) => [
+                  cp.classLimit,
+                  uniqueGroupsOf(familyMembersFor(f, cp.classLimit)),
+                ]),
+              ),
+            }
+          : {}),
       }))
       .sort((a, b) => a.label.localeCompare(b.label));
   const weapons = gearOf(getWeaponFamilies());
@@ -420,6 +434,9 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       star: f.stars[f.stars.length - 1] ?? 0,
       ...(effectIconOf(f.passives) ? { overlayIcon: effectIconOf(f.passives) } : {}),
       text: f.passives.length ? (gearPassivesText(f.passives, lang, false, true) ?? null) : null,
+      // Moteur § 15 : seul le 6★ porte l'effet Lv10 (dégâts vs break) — les
+      // groupes des variantes basses n'apportent que du CP, sans effet calculé.
+      ...(uniqueGroupsOf(f.ids).length ? { dmgGroups: uniqueGroupsOf(f.ids) } : {}),
     }));
 
   // EE par perso porteur — UNE ligne PAR palier de passif (Lv0 / Lv10), texte
@@ -510,6 +527,47 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     if (diff) return [diff];
     return undefined;
   };
+  // Passifs de BOSS (lib passives.ts — « un débuff comme un autre », Sevih
+  // 05/08/2026) : chips AUTO de la section buff/débuff. Le wrapper compose des
+  // props LÉGÈRES (nom localisé du passif + libellé stat/valeur) ; la
+  // condition élémentaire brute part au client, qui l'évalue contre
+  // l'attaquant COURANT avec la même relation § 6 que le moteur.
+  const DMG_TARGETS = damageTargetsData as unknown as DamageTargetsData;
+  const DMG_BUFFS = damageBuffsData as unknown as DamageBuffsData;
+  const MONSTER_SKILLS = monsterSkillsData as Record<
+    string,
+    { name?: Record<string, string> } | undefined
+  >;
+  const passiveLabel = (b: ActiveBuff): string => {
+    const v = b.value ?? 0;
+    const pct = (x: number) => `${x > 0 ? '+' : ''}${x / 10}%`;
+    if (b.type === 'BT_STAT' && b.stat) {
+      const slug = sheetSlugOfStat(b.stat);
+      const label = slug ? statName(slug, lang) : b.stat;
+      const percent = SHEET_FIELDS.find((f) => f.slug === slug)?.percent === true;
+      return `${label} ${b.applyingType === 'OAT_RATE' || percent ? pct(v) : `${v > 0 ? '+' : ''}${v}`}`;
+    }
+    if (b.type === 'BT_DMG_REDUCE') return `${statName('dmg_reduce_rate', lang)} ${pct(v)}`;
+    return `${b.type} ${pct(v)}`;
+  };
+  const passivesCache = new Map<string, DcBossPassive[]>();
+  const bossPassiveChips = (bossId: string): DcBossPassive[] => {
+    const hit = passivesCache.get(bossId);
+    if (hit) return hit;
+    const out: DcBossPassive[] = [];
+    for (const e of staticBossPassives(bossId, DMG_TARGETS, DMG_BUFFS)?.entries ?? []) {
+      const nameRec = MONSTER_SKILLS[e.skillId]?.name;
+      out.push({
+        name: nameRec ? lRec(nameRec, lang) || nameRec.en || e.skillId : e.skillId,
+        side: e.side === 'attacker' ? 'attacker' : 'target',
+        label: passiveLabel(e.buff),
+        ...(e.condition !== undefined ? { condition: e.condition } : {}),
+      });
+    }
+    passivesCache.set(bossId, out);
+    return out;
+  };
+
   const targets: DcTarget[] = [];
   const floorOf = new Map<string, number>();
   for (const [id, ref] of Object.entries(DUNGEONS)) {
@@ -527,11 +585,9 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       const spawns = encounterSpawnContexts(e, boss, lang).map((s, i) => {
         // Stats EFFECTIVES au spawn — les défensives qui pèsent sur les dégâts
         // reçus : HP, DEF, DMG RED %, CDMG RED % (décision Sevih 27/07/2026).
-        // `statAt` = le calcul partagé des fiches monstre (niveau + adv + bossHp).
-        const at = (slug: string): number => {
-          const r = monster.stats[slug];
-          return r ? statAt(slug, r, s) : 0;
-        };
+        // Le calcul (`statAt` : niveau + adv + bossHp) et le mapping vivent
+        // dans la LIB (`presetSpawnStats`) : le rejeu node des fixtures
+        // résout les MÊMES stats que ce que l'UI affiche.
         // hpLines/adv ne sont PAS exposés : l'adv est déjà APPLIQUÉ dans les
         // stats effectives, l'afficher en plus troublait (décision Sevih
         // 27/07/2026 — « le reste on s'en fiche »).
@@ -539,25 +595,20 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         const label =
           s.stageLabel ??
           (s.rank ? `Rank ${s.rank}` : s.stage ? `#${s.stage}` : i ? `#${i + 1}` : '');
-        const stats: DcSpawn['stats'] = {};
-        for (const [key, slug] of [
-          ['hp', 'hp'],
-          ['def', 'def'],
-          ['dmgRed', 'dmg_reduce'],
-          ['cdmgRed', 'enemy_critical_dmg_reduce'],
-        ] as const) {
-          const v = at(slug);
-          if (v) stats[key] = v;
-        }
+        const stats: DcSpawn['stats'] = presetSpawnStats(monster, s);
         return { ...(label ? { label } : {}), level: s.level, stats };
       });
       if (!spawns.length) continue;
       const path = cascadeOf(ref, monster.element, diff);
       const isFloor = ref.mode === 'irregular_infiltrate' && ref.floor != null;
       if (isFloor) floorOf.set(`${id}:${boss.id}`, ref.floor as number);
+      const passives = bossPassiveChips(boss.id);
       targets.push({
         id: `${id}:${boss.id}`,
         mode: modeLabel(ref, lang),
+        // Slug BRUT : le buff de guilde (§ 16.2) se décide sur lui, jamais
+        // sur le libellé localisé.
+        modeSlug: ref.mode,
         ...(path ? { path } : {}),
         // Le nom du donjon porte déjà stage/étage/difficulté quand le jeu les
         // nomme ; en infiltration tous les étages partagent le même libellé
@@ -570,6 +621,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         icon: monster.icon,
         element: monster.element,
         spawns,
+        ...(passives.length ? { passives } : {}),
       });
     }
   }
@@ -591,15 +643,14 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     percent,
   }));
 
-  // Stats DÉFENSIVES de la cible (affichage preset + saisie manuelle) — slugs
-  // du glossaire des NOMS (`dmg_reduce_rate`/`e_cri_dmg_reduce`), les tables de
-  // monstre disent `dmg_reduce`/`enemy_critical_dmg_reduce` pour les mêmes stats.
-  const targetStatFields: DcStatField[] = [
-    { key: 'hp', label: statName('hp', lang), percent: false },
-    { key: 'def', label: statName('def', lang), percent: false },
-    { key: 'dmgRed', label: statName('dmg_reduce_rate', lang), percent: true },
-    { key: 'cdmgRed', label: statName('e_cri_dmg_reduce', lang), percent: true },
-  ];
+  // Stats DÉFENSIVES de la cible (affichage preset + saisie manuelle) — la
+  // table (clés, percent, slugs du glossaire des NOMS) vit dans la LIB
+  // (`TARGET_FIELDS`) : le pont z → moteur applique les MÊMES conversions.
+  const targetStatFields: DcStatField[] = TARGET_FIELDS.map(({ key, statSlug, percent }) => ({
+    key,
+    label: statName(statSlug, lang),
+    percent,
+  }));
 
   // Main stats de talisman proposées pour les ALLIÉS — union des pools réels
   // (mêmes 9 stats à tous les paliers), dans l'ordre du jeu.
@@ -671,6 +722,8 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       subtitle: t(k('settings.subtitle')),
       quirks: t(k('settings.quirks')),
       codex: t(k('settings.codex')),
+      guild: t(k('settings.guild')),
+      premium: t(k('settings.premium')),
       reset: t(k('settings.reset')),
       activateAll: t(k('settings.activate_all')),
     },
@@ -707,6 +760,9 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       stage: t(k('target.stage')),
       fight: t(k('target.fight')),
       bossFlag: t(k('target.boss_flag')),
+      breakFlag: t(k('target.break_flag')),
+      guildBuffFlag: t(k('target.guild_buff_flag')),
+      titleBuffFlag: t(k('target.title_buff_flag')),
     },
     toolbar: {
       reset: t(k('toolbar.reset')),
@@ -736,6 +792,8 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       atkDebuff: t(k('buffs.col.attacker_debuff')),
       tgtBuff: t(k('buffs.col.target_buff')),
       tgtDebuff: t(k('buffs.col.target_debuff')),
+      bossPassive: t(k('buffs.boss_passive')),
+      bossPassiveInactive: t(k('buffs.boss_passive_inactive')),
     },
     report: {
       empty: t(k('result.empty')),
@@ -745,6 +803,8 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       critical: t(k('report.critical')),
       miss: t(k('report.miss')),
       supportSkills: t(k('report.support_skills')),
+      loading: t(k('report.loading')),
+      tablesError: t(k('report.tables_error')),
     },
   };
 
@@ -754,6 +814,19 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
   // que la fiche perso (progression.json, extraction de CharacterArchiveStatTemplet).
   const codexTiers = (progressionData as { codex: { atk: number; def: number; hp: number }[] })
     .codex;
+
+  // Buffs MAX_HP (spec formule § 16.2), résolus de la donnée damage — jamais
+  // codés en dur : guilde indexée PAR NIVEAU ([0] = sans guilde), titre
+  // « Premium Body » (somme des lignes hors guilde — une seule en 1.4.9).
+  const damageGrowth = damageGrowthData as {
+    guildMaxHp: { level: number; maxHpValue: number }[];
+    titleMaxHp: { maxHpValue: number }[];
+  };
+  const guildTiers: number[] = [0];
+  for (const tier of damageGrowth.guildMaxHp) {
+    guildTiers[tier.level] = tier.maxHpValue;
+  }
+  const titleHpPct = damageGrowth.titleMaxHp.reduce((s, t) => s + t.maxHpValue, 0);
 
   return (
     <DamageCalculatorBrowser
@@ -771,6 +844,8 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       buffOptions={buffOptions}
       quirks={quirks}
       codexTiers={codexTiers}
+      guildTiers={guildTiers}
+      titleHpPct={titleHpPct}
       labels={labels}
     />
   );

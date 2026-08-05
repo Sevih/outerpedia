@@ -65,13 +65,21 @@ describe('report — probabilités § 4', () => {
     expect(branches.reduce((s, b) => s + b.probability, 0)).toBeCloseTo(1, 12);
   });
 
-  it('une branche impossible n’existe pas ; un override § 7.5bis force normal P=1', () => {
+  it('normal et crit TOUJOURS émis (P=0 autorisé) ; miss si possible ou forcé ; override § 7.5bis', () => {
+    // Les dégâts d'une branche ne dépendent pas de sa probabilité (Sevih
+    // 05/08/2026) : sans CHC, le crit est émis à P=0 — jamais caché.
     expect(enumerateBranches({ criticalRate: 0 }, { avoid: 0 })).toEqual([
       { branch: 'normal', probability: 1 },
+      { branch: 'critical', probability: 0 },
     ]);
-    // crit 100 % : la branche normale disparaît, l'esquive reste possible.
+    // crit 100 % : la branche normale reste émise à P=0, l'esquive possible.
     const sure = enumerateBranches({ criticalRate: 1000 }, { avoid: 100 });
-    expect(sure.map((b) => b.branch)).toEqual(['critical', 'miss']);
+    expect(sure.map((b) => b.branch)).toEqual(['normal', 'critical', 'miss']);
+    expect(sure[0].probability).toBe(0);
+    // Le miss n'existe plus hors buff de « miss chance » : absent par défaut,
+    // FORCÉ (P=0) pour comparer un coup manqué observé.
+    const forced = enumerateBranches({ criticalRate: 0 }, { avoid: 0 }, false, true);
+    expect(forced.at(-1)).toEqual({ branch: 'miss', probability: 0 });
     expect(enumerateBranches({ criticalRate: 1000 }, { avoid: 100 }, true)).toEqual([
       { branch: 'normal', probability: 1 },
     ]);
@@ -98,7 +106,8 @@ describe('report — buildSkillReport', () => {
     );
     expect(report.defenderInvincible).toBe(false);
     const [state] = report.states;
-    expect(state.branches).toHaveLength(1);
+    // Normal P=1 + crit P=0 (toujours émis) — l'espérance ne pondère que P>0.
+    expect(state.branches.map((b) => b.branch)).toEqual(['normal', 'critical']);
     expect(state.branches[0]).toMatchObject({ branch: 'normal', probability: 1, damageRate: 1000 });
     expect(state.branches[0].hits[0].damage).toBe(10000);
     expect(state.expectedDamage).toBe(10000);

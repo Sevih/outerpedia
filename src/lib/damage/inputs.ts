@@ -18,13 +18,16 @@
  *    `skillFactor` et LEURS chaînes (vérifié : 372/372 bursts ont le même
  *    nombre de niveaux que leur S2 — le niveau saisi s'applique 1:1).
  *
- * HORS périmètre v1 (documenté, jamais comblé en douce) : passifs
- * d'équipement § 15 (sets/EE/arme/accessoire/talisman — chantier chips→kits),
- * lignes DOT (liaison buffIds → templets de buff), immunités de cible.
+ * HORS périmètre v1 (documenté, jamais comblé en douce) : lignes DOT
+ * (liaison buffIds → templets de buff), immunités de cible. Les passifs
+ * d'équipement § 15 (canal 2 — buffs) sont branchés via gear.ts ; le canal 1
+ * (stats chiffrées main/sub/sets %) reste dans la fiche SAISIE.
  */
 
 import { collectStatChannels, type ActiveBuff } from './aggregate';
 import { calcBaseStat } from './formula';
+import { resolveGearPassives, type GearPassivesInfo, type GearSelection } from './gear';
+import { resolveBossPassives, type BossPassivesInfo } from './passives';
 import {
   buildSkillReport,
   groupHitsByChain,
@@ -88,6 +91,22 @@ export interface DamageGrowthData {
     maxLevel: number;
     modifierAfter100: number;
   }[];
+  /** Buff de guilde (§ 16.2) : par niveau 1..10, la part MAX_HP et ses modes. */
+  guildMaxHp: {
+    level: number;
+    maxHpValue: number;
+    modes: string[];
+    ignoreModes?: string[];
+  }[];
+  /** Event buffs MAX_HP HORS guilde (§ 16.2) — buff de titre « Premium
+   *  Body » en 1.4.9 ; même somme du manager. */
+  titleMaxHp: {
+    group: number;
+    title: string;
+    maxHpValue: number;
+    modes: string[];
+    ignoreModes?: string[];
+  }[];
 }
 
 export interface DataBuffLevel {
@@ -96,16 +115,96 @@ export interface DataBuffLevel {
   stat?: string;
   applyingType?: string;
   value?: number;
+  /** Cible du buff (`ME`, `ENEMY_TEAM`…) — classement des passifs de boss. */
+  targetType?: string;
+  /** `PASSIVE` = permanent au combat ; le reste est dynamique (état). */
+  createType?: string;
+  /** `BUFF_CONDITION_TYPE` brut (`ATTACKER_ELEMENT_WIN`…). */
+  conditionType?: string;
+  /** `BuffConditionValue` — pour `TARGET_ELEMENT` : CET_* de la CIBLE
+   *  (absent = 0 = terre, preuve gear.ts). */
+  conditionValue?: number;
 }
 
 export interface DamageBuffsData {
   buffs: Record<string, DataBuffLevel[]>;
 }
 
+// ── Miroirs minimaux d'equipment.json (la vérité : datagen/damage/equipment.ts) ──
+
+export interface DataItemOption {
+  id: string;
+  optionType: string;
+  stat?: string;
+  applyingType?: string;
+  value?: number;
+  factor?: number;
+  maxValue?: number;
+  buffId?: string;
+  rate: number;
+}
+
+export interface DataSetEffect {
+  optionType: string;
+  stat?: string;
+  applyingType?: string;
+  value?: number;
+  buffId?: string;
+  buffLevel?: number;
+}
+
+export interface DataSpecialOption {
+  level: number;
+  isAdd: boolean;
+  breakLimitCounts: number[];
+  twoPiece?: DataSetEffect;
+  fourPiece?: DataSetEffect;
+  buffIds?: string[];
+}
+
+export interface DataPiece {
+  id: string;
+  subType: string;
+  characterLimit?: string;
+  mainOptionGroups: string[];
+  uniqueOptionGroups: string[];
+  setOptionGroups: string[];
+}
+
+export interface DamageEquipmentData {
+  pieces: Record<string, DataPiece>;
+  optionGroups: Record<string, DataItemOption[]>;
+  specialGroups: Record<string, DataSpecialOption[]>;
+}
+
+/** Kit d'un monstre preset (miroir minimal de targets.json). */
+export interface DataTargetSkill {
+  id: string;
+  subType: string;
+  levels: { level: number; buffIds: string[] }[];
+}
+
+export interface DataTarget {
+  id: string;
+  element: string;
+  skills: { slot: number; id: string }[];
+}
+
+export interface DamageTargetsData {
+  targets: Record<string, DataTarget>;
+  skills: Record<string, DataTargetSkill>;
+}
+
 export interface DamageData {
   characters: DamageCharactersData;
   growth: DamageGrowthData;
   buffs: DamageBuffsData;
+  /** Cibles preset (kits → passifs de boss) — OPTIONNEL : sans elle, un
+   *  `monsterId` de cible est signalé non résolu, jamais tu. */
+  targets?: DamageTargetsData;
+  /** Pièces/groupes d'options (passifs d'équipement § 15) — OPTIONNEL : sans
+   *  elle, un équipement sélectionné est signalé non résolu, jamais tu. */
+  equipment?: DamageEquipmentData;
 }
 
 // ── Référentiels ─────────────────────────────────────────────────────────────
@@ -141,6 +240,11 @@ const SHEET_STAT_MAP: Record<string, { st: string; base?: string }> = {
   buff_chance: { st: 'ST_BUFF_CHANCE', base: 'BuffChance' },
 };
 
+/** Enum `ST_*` → slug de fiche UI (libellés des passifs de boss, § 9.1). */
+export function sheetSlugOfStat(st: string): string | undefined {
+  return Object.entries(SHEET_STAT_MAP).find(([, m]) => m.st === st)?.[0];
+}
+
 /** Taux Codex par stat (‰ CUMULÉS au niveau du compte) — seuls ATK/DEF/HP. */
 function archiveRateFor(slug: string, codexLevel: number, growth: DamageGrowthData): number {
   if (codexLevel < 1) return 0;
@@ -150,6 +254,51 @@ function archiveRateFor(slug: string, codexLevel: number, growth: DamageGrowthDa
   if (slug === 'def') return row.defRate;
   if (slug === 'hp') return row.hpRate;
   return 0;
+}
+
+// ── Buff de guilde (spec § 16.2 — event buff MAX_HP, prouvé binaire) ────────
+
+/**
+ * Slug de mode d'encounters → `DUNGEON_MODE` brut. `normal_hard` est un
+ * `AGT_HARD` du MÊME mode DM_NORMAL ; tous les autres slugs sont l'enum en
+ * minuscules sans préfixe (vérifié sur la liste 1.4.9).
+ */
+export function dungeonModeOf(encounterMode: string): string {
+  return encounterMode === 'normal_hard' ? 'DM_NORMAL' : `DM_${encounterMode.toUpperCase()}`;
+}
+
+/** `MaxHPRate` du binaire : `float32(100 + Σ) × 0.01f` (constante 0x1056648) —
+ *  Σ = somme des `BuffValue` de TOUS les event buffs MAX_HP actifs. */
+export function eventMaxHpRate(sum: number): number {
+  return Math.fround((sum + 100) * Math.fround(0.01));
+}
+
+/** `get_MaxHP` (0x27DFB20) : `floor(float32(rate × float32(HP)))`. */
+export function applyMaxHpRate(hp: number, rate: number): number {
+  return Math.floor(Math.fround(rate * Math.fround(hp)));
+}
+
+/** Une part de la somme MAX_HP § 16.2 (guilde, titre…), active ou non. */
+export interface MaxHpBuffPart {
+  source: 'guild' | 'title';
+  /** Niveau de guilde retenu (part guilde seulement, clampé au dernier palier). */
+  level?: number;
+  /** `BuffValue` brut des tables (‰ de rien — des points de %). */
+  value: number;
+  /** Vrai si le mode du contenu est éligible (ou coche manuelle). */
+  active: boolean;
+}
+
+/** La somme MAX_HP appliquée (ou pas) au scénario — exposée pour le harnais. */
+export interface MaxHpBuffInfo {
+  parts: MaxHpBuffPart[];
+  /** Σ des valeurs ACTIVES (0 = rien ne s'applique dans ce contenu). */
+  sum: number;
+  /** Multiplicateur float32 réellement appliqué quand Σ > 0. */
+  rate: number;
+  hpBefore: number;
+  /** HP de combat après application — égal à `hpBefore` si Σ = 0. */
+  hpAfter: number;
 }
 
 /** Palier post-100 applicable au niveau donné (spec § 3.2) — 0 sinon. */
@@ -253,6 +402,12 @@ export interface AttackerBuildInput {
   hpPct?: number;
   /** Chips de scénario actifs (clés du catalogue FX). */
   fx?: string[];
+  /** Niveau de GUILDE du compte (0..10) — buff MAX_HP § 16.2, hors z. */
+  guildLevel?: number;
+  /** Buff de TITRE « Premium Body » possédé (+5 % PV, § 16.2) — hors z. */
+  premiumHp?: boolean;
+  /** Équipement porté (passifs § 15 canal 2) — résolu par le pont (gear.ts). */
+  gear?: GearSelection;
 }
 
 export interface TargetBuildInput {
@@ -262,15 +417,29 @@ export interface TargetBuildInput {
   stats: { hp?: number; def?: number; dmgRed?: number; cdmgRed?: number };
   /** Cible boss (presets : toujours vrai). */
   boss?: boolean;
+  /** Cible en BREAK (jauge détruite) — contexte § 9.1 (BT_DMG_TARGET_BREAK :
+   *  Rogue's Charm +10, set Pulverization, EE…). */
+  broken?: boolean;
   /** PV actuels en % (défaut 100). */
   hpPct?: number;
   /** Chips de scénario actifs côté cible. */
   fx?: string[];
+  /** Mode d'encounters du PRESET (slug) — décide les buffs MAX_HP § 16.2. */
+  mode?: string;
+  /** ID de MONSTRE du preset — active ses passifs de boss (passives.ts). */
+  monsterId?: string;
+  /** Coche MANUELLE « buff de guilde actif » (cible sans mode connu). */
+  guildBuffOn?: boolean;
+  /** Coche MANUELLE « buff de titre actif » (cible sans mode connu). */
+  titleBuffOn?: boolean;
 }
 
 export interface BuildReportOptions extends SkillReportOptions {
   /** Cibles touchées (décroissance § 7 — réservé ; 1 par défaut). */
   targetsHit?: number;
+  /** Force la branche MISS (sans esquive, le miss n'existe qu'avec un buff de
+   *  « miss chance ») — comparaison d'un coup manqué observé en jeu. */
+  includeMissBranch?: boolean;
 }
 
 /** Une ligne de rapport par source de skill (S2 et ses bursts séparés). */
@@ -287,11 +456,21 @@ export interface SlotReport {
 }
 
 export interface DamageReportResult {
-  /** Stats de COMBAT reconstruites (par slug UI saisi) — § 16.1. */
+  /** Stats de COMBAT reconstruites (par slug UI saisi) — § 16.1, buff de
+   *  guilde § 16.2 déjà appliqué au HP quand actif. */
   combatStats: Record<string, number>;
   slots: SlotReport[];
   /** Chips actifs SANS magnitude standard — contribution 0, à afficher. */
   unresolvedFx: string[];
+  /** Somme des buffs MAX_HP § 16.2 — présente dès qu'un réglage de compte
+   *  (guilde, titre) est actif. */
+  maxHpBuff?: MaxHpBuffInfo;
+  /** Passifs de boss du preset (entrées évaluées + non-résolus signalés) —
+   *  présent dès que la cible porte un `monsterId`. */
+  bossPassives?: BossPassivesInfo;
+  /** Passifs d'équipement § 15 (appliqués + procs signalés + non-résolus) —
+   *  présent dès que l'attaquant porte du `gear`. */
+  gearPassives?: GearPassivesInfo;
 }
 
 // ── Construction ─────────────────────────────────────────────────────────────
@@ -312,8 +491,11 @@ export function buildCombatStats(
   char: DataCharacter,
   growth: DamageGrowthData,
   activeBuffs: ActiveBuff[],
+  /** PV du porteur (§ 14 BT 31/32 — stats « PV perdus ») ; absent : ces
+   *  familles contribuent 0. */
+  owner?: { maxHP: number; hp: number },
 ): Record<string, number> {
-  const channels = collectStatChannels(activeBuffs);
+  const channels = collectStatChannels(activeBuffs, owner ? { owner } : undefined);
   const modifier = modifierAfter100For(char, attacker.level, growth);
   const combat: Record<string, number> = {};
   for (const [slug, sheetValue] of Object.entries(attacker.sheet)) {
@@ -349,23 +531,143 @@ export function buildDamageReport(
   const char = data.characters.characters[attacker.id];
   if (!char) throw new Error(`buildDamageReport: personnage inconnu ${attacker.id}`);
 
-  // Buffs actifs des deux côtés : affinité (donnée) + chips (catalogue).
-  const atkFx = resolveFx(attacker.fx ?? []);
-  const tgtFx = resolveFx(target.fx ?? []);
-  const attackerBuffs = [...trustBuffs(attacker.affinityTier, data.buffs), ...atkFx.buffs];
-  const defenderBuffs = tgtFx.buffs;
-
-  const combatStats = buildCombatStats(attacker, char, data.growth, attackerBuffs);
-  const statOf = (st: string): number => {
-    const slug = Object.entries(SHEET_STAT_MAP).find(([, m]) => m.st === st)?.[0];
-    return slug !== undefined ? (combatStats[slug] ?? 0) : 0;
-  };
-
   const attackerElement = elementOf(char.element);
   const defenderElement = elementOf(target.element);
   if (attackerElement === undefined || defenderElement === undefined) {
     throw new Error(`buildDamageReport: élément inconnu (${char.element} / ${target.element})`);
   }
+
+  // Passifs de BOSS du preset (passives.ts) : « un débuff comme un autre »
+  // (Sevih 05/08) — ils traversent les MÊMES canaux que les chips, jamais les
+  // stats saisies. Conditions élémentaires évaluées ici ; le reste est signalé.
+  let bossPassives: BossPassivesInfo | undefined;
+  if (target.monsterId !== undefined) {
+    bossPassives = data.targets
+      ? resolveBossPassives(
+          target.monsterId,
+          data.targets,
+          data.buffs,
+          attackerElement,
+          defenderElement,
+        )
+      : undefined;
+    bossPassives ??= {
+      entries: [],
+      unresolved: [
+        {
+          buffId: target.monsterId,
+          reason: data.targets
+            ? 'monstre absent des tables targets'
+            : 'tables targets non chargées',
+        },
+      ],
+    };
+  }
+  const passiveBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>
+    (bossPassives?.entries ?? []).filter((e) => e.side === side && e.active).map((e) => e.buff);
+
+  // Passifs d'ÉQUIPEMENT § 15 (gear.ts) : mêmes canaux que les chips — le
+  // porteur reçoit les entrées actives côté attaquant, les débuffs permanents
+  // posés par l'équipement partent côté défenseur. Procs/conditions non
+  // évaluables : signalés, jamais tus.
+  let gearPassives: GearPassivesInfo | undefined;
+  if (attacker.gear !== undefined) {
+    gearPassives = data.equipment
+      ? resolveGearPassives(
+          attacker.id,
+          attacker.gear,
+          data.equipment,
+          data.buffs,
+          attackerElement,
+          defenderElement,
+        )
+      : {
+          entries: [],
+          dynamic: [],
+          unresolved: [
+            {
+              source: 'weapon',
+              sourceId: attacker.id,
+              buffId: attacker.id,
+              reason: 'tables equipment non chargées',
+            },
+          ],
+        };
+  }
+  const gearBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>
+    (gearPassives?.entries ?? []).filter((e) => e.side === side && e.active).map((e) => e.buff);
+
+  // Buffs actifs des deux côtés : affinité (donnée) + chips (catalogue) +
+  // passifs de boss et d'équipement (donnée, évalués ci-dessus).
+  const atkFx = resolveFx(attacker.fx ?? []);
+  const tgtFx = resolveFx(target.fx ?? []);
+  const attackerBuffs = [
+    ...trustBuffs(attacker.affinityTier, data.buffs),
+    ...atkFx.buffs,
+    ...passiveBuffs('attacker'),
+    ...gearBuffs('attacker'),
+  ];
+  const defenderBuffs = [...tgtFx.buffs, ...passiveBuffs('defender'), ...gearBuffs('defender')];
+
+  let combatStats = buildCombatStats(attacker, char, data.growth, attackerBuffs);
+  // Familles « PV perdus » § 14 (BT 31/32 — sets Revenge/Patience/Swiftness) :
+  // leur contexte est le PV de COMBAT, connu seulement après la première
+  // passe — on rejoue alors la construction avec le contexte (le PV lui-même
+  // n'est jamais scalé par ces familles : la seconde passe est stable).
+  if (attackerBuffs.some((b) => b.type.startsWith('BT_STAT_OWNER_LOST_HP_RATE'))) {
+    const maxHP = combatStats.hp ?? 0;
+    if (maxHP > 0) {
+      combatStats = buildCombatStats(attacker, char, data.growth, attackerBuffs, {
+        maxHP,
+        hp: Math.floor((maxHP * (attacker.hpPct ?? 100)) / 100),
+      });
+    }
+  }
+
+  // Buffs MAX_HP § 16.2 (guilde + titre) : seul le HP MAX bouge. Chaque part
+  // est active dans SES modes (preset) ou sur SA coche (cible manuelle) —
+  // jamais supposée ; la SOMME des parts actives fait le taux, comme le
+  // manager du jeu. Appliqué AVANT le scénario : le HP servi au swap § 10.1
+  // et au contexte PV est celui du combat réel.
+  let maxHpBuff: MaxHpBuffInfo | undefined;
+  const guildLevel = attacker.guildLevel ?? 0;
+  const premiumHp = attacker.premiumHp === true;
+  if (guildLevel > 0 || premiumHp) {
+    const dm = target.mode !== undefined ? dungeonModeOf(target.mode) : undefined;
+    const modeOk = (modes: string[], ignore?: string[]): boolean =>
+      dm !== undefined && modes.includes(dm) && !ignore?.includes(dm);
+    const parts: MaxHpBuffPart[] = [];
+    if (guildLevel > 0 && data.growth.guildMaxHp.length) {
+      const tiers = data.growth.guildMaxHp;
+      const tier = tiers.find((t) => t.level === guildLevel) ?? tiers[tiers.length - 1];
+      parts.push({
+        source: 'guild',
+        level: tier.level,
+        value: tier.maxHpValue,
+        active: target.guildBuffOn === true || modeOk(tier.modes, tier.ignoreModes),
+      });
+    }
+    if (premiumHp) {
+      for (const t of data.growth.titleMaxHp) {
+        parts.push({
+          source: 'title',
+          value: t.maxHpValue,
+          active: target.titleBuffOn === true || modeOk(t.modes, t.ignoreModes),
+        });
+      }
+    }
+    const sum = parts.reduce((s, p) => s + (p.active ? p.value : 0), 0);
+    const hpBefore = combatStats.hp ?? 0;
+    const rate = eventMaxHpRate(sum);
+    const hpAfter = sum > 0 && hpBefore > 0 ? applyMaxHpRate(hpBefore, rate) : hpBefore;
+    if (sum > 0 && hpBefore > 0) combatStats.hp = hpAfter;
+    maxHpBuff = { parts, sum, rate, hpBefore, hpAfter };
+  }
+
+  const statOf = (st: string): number => {
+    const slug = sheetSlugOfStat(st);
+    return slug !== undefined ? (combatStats[slug] ?? 0) : 0;
+  };
 
   const attackerMaxHP = combatStats.hp ?? 0;
   const defenderMaxHP = target.stats.hp ?? 0;
@@ -388,6 +690,7 @@ export function buildDamageReport(
     },
     attackerBuffs,
     defenderBuffs,
+    ...(options?.includeMissBranch ? { includeMissBranch: true } : {}),
     additionalContext: {
       attacker:
         attackerMaxHP > 0
@@ -405,6 +708,7 @@ export function buildDamageReport(
           : undefined,
       attackerStat: statOf,
       targetIsBoss: target.boss === true,
+      ...(target.broken !== undefined ? { targetIsBreak: target.broken } : {}),
       scene: 'pve',
     },
   };
@@ -457,5 +761,8 @@ export function buildDamageReport(
     combatStats,
     slots,
     unresolvedFx: [...atkFx.unresolved, ...tgtFx.unresolved],
+    ...(maxHpBuff ? { maxHpBuff } : {}),
+    ...(bossPassives ? { bossPassives } : {}),
+    ...(gearPassives ? { gearPassives } : {}),
   };
 }

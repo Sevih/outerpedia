@@ -70,8 +70,9 @@ export interface DamageSpecialOption {
   ignoreLowSet: boolean;
   twoPiece?: DamageSetEffect;
   fourPiece?: DamageSetEffect;
-  /** Effet « solo » (unique EE/talisman) : `BuffID` de la ligne. */
-  buffId?: string;
+  /** Effet « solo » (unique EE/talisman) : `BuffID` de la ligne — CSV éclaté
+   *  (30 lignes en 1.4.9 portent DEUX buffs, ex. Absolute Music). */
+  buffIds?: string[];
 }
 
 /** Une pièce équipable (`ItemTemplet`, `ITS_EQUIP_*`). */
@@ -241,7 +242,7 @@ export function buildDamageEquipment(): DamageEquipmentData {
           ignoreLowSet: bool(s.IgnoreLowSet),
           ...(twoPiece ? { twoPiece } : {}),
           ...(fourPiece ? { fourPiece } : {}),
-          ...(s.BuffID ? { buffId: s.BuffID } : {}),
+          ...(s.BuffID ? { buffIds: splitCsv(s.BuffID) } : {}),
         };
       })
       .sort((a, b) => a.level - b.level);

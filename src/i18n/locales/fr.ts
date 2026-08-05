@@ -383,6 +383,8 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.settings.subtitle': 'Codex + Quirks partagés entre tous les personnages',
   'tools.damage-calculator.settings.quirks': 'Quirks',
   'tools.damage-calculator.settings.codex': 'Codex des héros',
+  'tools.damage-calculator.settings.guild': 'Buff de guilde',
+  'tools.damage-calculator.settings.premium': 'Buff de titre [Premium Body]',
   'tools.damage-calculator.settings.reset': 'Réinitialiser',
   'tools.damage-calculator.settings.activate_all': 'Tout activer',
   'tools.damage-calculator.settings.quirk_element': 'Élément',
@@ -459,6 +461,8 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.buffs.col.attacker_debuff': 'Debuffs du lanceur',
   'tools.damage-calculator.buffs.col.target_buff': 'Buffs de la cible',
   'tools.damage-calculator.buffs.col.target_debuff': 'Debuffs de la cible',
+  'tools.damage-calculator.buffs.boss_passive': 'Passif du boss',
+  'tools.damage-calculator.buffs.boss_passive_inactive': 'inactif contre cet élément',
   // Common UI strings
   'tools.damage-calculator.common.select': '— sélectionner —',
   'tools.damage-calculator.common.no_matches': 'Aucune correspondance',
@@ -476,6 +480,9 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.stage': 'Stage',
   'tools.damage-calculator.target.fight': 'Combat {n}',
   'tools.damage-calculator.target.boss_flag': 'Boss',
+  'tools.damage-calculator.target.break_flag': 'Cible en break (jauge détruite)',
+  'tools.damage-calculator.target.guild_buff_flag': 'Buff de guilde actif',
+  'tools.damage-calculator.target.title_buff_flag': 'Buff de titre actif',
   'tools.damage-calculator.toolbar.reset': 'Réinitialiser le scénario',
   'tools.damage-calculator.toolbar.copy_link': 'Copier le lien',
   'tools.damage-calculator.toolbar.copied': 'Copié !',
@@ -589,8 +596,11 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.buffs.kits_soon':
     'nécessite les données de buffs des kits — arrive avec le moteur',
   'tools.damage-calculator.report.engine_wip':
-    'Moteur de calcul pas encore branché — mise en page finale avec valeurs factices.',
+    'Moteur v1 — pas encore comptés : alliés, DoT, procs d’équipement en combat (représentez leur état via les buffs/débuffs).',
   'tools.damage-calculator.report.branches_note': 'branches énumérées · probabilités exactes',
+  'tools.damage-calculator.report.loading': 'chargement des tables de calcul…',
+  'tools.damage-calculator.report.tables_error':
+    'échec du chargement des tables — recharger la page',
   'tools.damage-calculator.report.critical': 'Critique',
   'tools.damage-calculator.report.miss': 'Esquivé',
   'tools.damage-calculator.report.support_skills': 'Skills de soutien (sans carte) : {names}',

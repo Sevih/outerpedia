@@ -9,6 +9,13 @@
  * panneau Debug et rejoué par `fixtures.test.ts` (vitest, sans UI).
  */
 
+/**
+ * Version du jeu des TABLES courantes (binaire de référence des extracteurs).
+ * Le panneau Debug la compare au `gameVersion` des fixtures (badge « à
+ * revérifier en jeu ») et `fixtures.test.ts` oriente son message d'échec.
+ */
+export const ENGINE_GAME_VERSION = '1.4.9';
+
 /** Une étape de la trace de calcul (spec § 2). */
 export interface TraceStep {
   /** Référence de spec — « § 8.2 », « § 9 »… ancre de damage-formula.md. */
@@ -35,12 +42,35 @@ export interface DamageFixture {
   name: string;
   /** Le scénario COMPLET : la valeur `?z=` de l'URL du calculateur (lz-string). */
   z: string;
+  /**
+   * Niveau du Codex du COMPTE à la capture — HORS `z` (réglage localStorage,
+   * jamais dans l'URL) mais il pèse dès qu'un buff est actif (§ 16.1) :
+   * capturé à part pour que le rejeu soit complet. Absent = 0.
+   */
+  codex?: number;
+  /**
+   * Niveau de GUILDE du compte à la capture — HORS `z` (réglage localStorage) ;
+   * son buff MAX_HP (§ 16.2) change le HP de combat dans les modes éligibles.
+   * Absent = 0.
+   */
+  guild?: number;
+  /**
+   * Buff de TITRE « Premium Body » possédé à la capture (+5 % PV, § 16.2) —
+   * HORS `z` aussi. Absent = non.
+   */
+  premium?: boolean;
   /** Version du jeu au moment de l'observation (« 1.4.9 »). */
   gameVersion: string;
   /** Observations en jeu : par slot de skill × branche, dégâts constatés. */
   observed: { slot: string; branch: DamageBranch; damage: number }[];
   /** Tolérance relative acceptée (défaut 0.5 % — arrondis d'affichage du jeu). */
   tolerance?: number;
+  /**
+   * Référence d'incertitude § 12 (damage-formula.md) dont le scénario dépend :
+   * le test la `skip` (harnais § 4) et la table l'affiche en gris — le fixture
+   * devient le test d'acceptation du jour où on tranche.
+   */
+  skipRef?: string;
   /** Contexte libre : ce qui était actif en jeu et difficile à encoder. */
   notes?: string;
 }

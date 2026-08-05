@@ -106,8 +106,9 @@ m_nSpawnAdvantageRate = spawnAdvRate                          // conservé pour 
   100 : au palier 3, chaque niveau post-100 rapporte 1,7× le pas linéaire 1→100.
 - La branche post-100 est réservée aux personnages (`Type == CT_PC`) ; les monstres
   restent sur CalcStat pur quel que soit le niveau.
-- `addRate` : multiplicateur appliqué directement à la base (qui l'utilise et avec
-  quelles valeurs : non tracé, § 12.13).
+- `addRate` : multiplicateur appliqué directement à la base — posé UNIQUEMENT
+  par le scaling d'overgrade du boss de guild raid (§ 12.13, RÉSOLU), 0 partout
+  ailleurs.
 - `CCustomBossStatValue.SetBaseValue` (0x28D3DC4) : pour ST_HP, `base = max − min` ;
   pour les autres stats, CalcStat normal.
 
@@ -499,14 +500,35 @@ return restant
 12. **`ProcessDamage` / `ProcessDamageSimulator`** : l'orchestration autour de
     `CalcDamage` (ordre shield → HP, WG, événements on-damage) n'est pas
     désassemblée — les formules qu'elle appelle le sont toutes.
-13. **`addRate` de `SetBaseValue`** (§ 3.2) : identifié comme
-    `CCharacterData.AddRateAtk`/`AddRateDef` (champs 0xC0/0xC4 — seuls ATK et DEF
-    en ont). Les écritures sont inlinées (aucun `bl` vers les setters) : la source
-    de la valeur reste non tracée. Défaut 0 pour le calculateur.
+13. ~~`addRate` de `SetBaseValue`~~ — **RÉSOLU** (04/08/2026, scan exhaustif des
+    stores inlinés 0xC0/0xC4 du binaire + callers de `SetStatValue` 0x27E46B0) :
+    la SEULE source combat est `CGuildRaidSpawnData.GetCharacterData`
+    (0x22EFFD0) — le scaling du BOSS de guild raid en **overgrade**. Au-delà du
+    grade 10, avec `GameConfig.GUILD_RAID_AFTER_10_BOSS_STAT` (enum 149) =
+    `[300, 300, 10]` :
+    `MaxHP = floor(float32((1 + overGrade × 300 × 0.001f)) × float32(BossMonsterHP))`
+    (+30 %/overgrade), `AddRateAtk = overGrade × 300` (‰, +30 %/overgrade),
+    `AddRateDef = overGrade × 10` (‰, +1 %/overgrade) — le canal addRate § 3.2.
+    L'overgrade est un état SERVEUR (progression de la guilde pendant le raid) :
+    les presets du calculateur restent au grade de table (overgrade 0) ; une
+    fixture guild raid doit NOTER l'overgrade courant. (`CUICharacterToolTip.Open`
+    refait le même calcul pour l'affichage.) Les 11 autres fabriques de spawn
+    (`CSpawnData` et sous-classes — world boss, guild dungeon, event challenge,
+    singularity, monad, adventure…) n'appliquent AUCUN modificateur de stat
+    custom (audit de leurs `GetCharacterData`, 04/08/2026) : leurs spawns sont
+    fidèles aux tables + spawn advantage standard.
 14. **Colonnes `Normal_i`/`Magic_i`/`Rare_i`/`Unique_i` de `ItemEnchantTemplet`** :
     consommateurs non tracés (getters inlinés). Hors chemin de calcul déterministe —
     la croissance des stats à l'enchant passe par `UpgradeFactorforOP` (§ 17.5) et
     les sub-options effectives d'une pièce sont une entrée utilisateur.
+15. **Modificateurs de RUN d'infiltration** :
+    `CInfiltrateSpawnData.GetCharacterData` applique
+    `CInfiltrate.GetSpawnAdventageRates` — des `SpawnAdvantageRate_*` accumulés
+    PENDANT la run (items/nœuds ramassés,
+    `IrregularInfiltrate{Item,Node}Templet`). Les presets du calculateur donnent
+    l'état de base (sans objets de run) ; l'agrégation exacte n'est pas
+    désassemblée — une fixture d'infiltration doit être capturée en début de
+    run, sans modificateur actif.
 
 ## 13. À vérifier in-game (phase 2)
 
@@ -662,6 +684,29 @@ Exclusive, Ooparts)` → `m_ItemBuffTempletList` (0x18) ;
    remet à zéro ; `AddItemBuffCool` incrémente le compteur (cadence
    d'incrémentation non désassemblée).
 
+> RÉALISÉ (05/08/2026) : `src/lib/damage/gear.ts` — le canal 2 (buffs) est
+> branché pour l'ÉQUIPEMENT DU PORTEUR : arme, accessoire (niveau de buff
+> = breakthrough + 1), sets (ligne par `BreakLimitCount` 0/4, 1 set choisi
+> = 2P + 4P), Rogue's Charm (interrupteur « +10 », ligne Lv10
+> `BT_DMG_TARGET_BREAK`), EE (lignes spéciales ≤ `max(enchant, 1)`, main à
+> buff au niveau `enchant + 1` — § 17.5). Créations `PASSIVE`/`PASSIVE2`
+> appliquées via les canaux § 9/§ 16.1 ; les familles « PV perdus » § 14
+> (BT 31/32) alimentent désormais les canaux de stats (contexte = PV de
+> combat × % saisis). Procs damage-pertinents : signalés `dynamic`, jamais
+> simulés (le marking de Rampaging Caracal se coche en chip d'état).
+> `MY_TEAM_WITHOUT_ME` (Absolute Music) : jamais appliqué au porteur, affiché
+> inactif. `BT_WG_*` → non résolu § 12.3 ; conditions non évaluables § 12.1 →
+> non résolu, contribution 0.
+>
+> Condition `TARGET_ELEMENT` PROUVÉE : `BuffConditionValue` =
+> `CHARACTER_ELEMENT_TYPE` de la CIBLE (dump.cs : EARTH=0, WATER=1, FIRE=2,
+> LIGHT=3, DARK=4 ; valeur absente = 0 = terre). Corroborations : la desc
+> officielle de l'EE 2000019 (« damage dealt to Fire enemies ») porte la
+> valeur 2 = CET_FIRE ; les mains d'EE `BID_CEQUIP_MAIN_DMG_<EL>` visent
+> l'élément que le porteur BAT (feu → terre…), les armes de Singularité
+> `Singularity_equip_dmg_<el>` l'élément qui les contre — les deux familles
+> se déduisent de la même table sans exception.
+
 ## 16. Couches contextuelles au-dessus de CalcFinalStat — CStatValue (audit de couverture)
 
 La stat lue en combat est `CStatValue.GetFinalValue` (0x28D33B4), pas la sortie brute
@@ -783,6 +828,124 @@ conforme, y compris le clamp `bic` et les troncatures vers zéro.)
 > NB pour l'amont : le terme Codex exige la stat de BASE, donc le NIVEAU de
 > l'attaquant — l'UI ne le demande pas encore (défaut 120 à prévoir).
 
+### 16.2 Buff de guilde (event buff MAX_HP) — get_MaxHP (0x27DFB20), 04/08/2026
+
+Signalé par Sevih (le « buff de guilde » n'est pas actif dans tous les modes) ;
+chaîne ENTIÈRE vérifiée au binaire :
+
+```text
+// Au CHARGEMENT du donjon (CDungeonScene.<LoadResource>d__247.MoveNext,
+// 0x2567e58) — seul appelant dans tout le binaire :
+rate = CBuffSystemManager.CheckMaxHPEvent(dungeonMode, dungeonPlayMode, areaID)
+CCharacterData.MaxHPRate = rate                       // str s0, [x20, #0x120]
+// remis à neutre par ResetMaxHPRate (CStateResult.OnStart, fin de combat)
+
+// CBuffSystemManager.CheckMaxHPEvent (0x2469068) :
+sum  = Σ CEventBuffGroupData.CheckMaxHPEvent(...)     // par groupe de buff actif
+     + (buff de ZONE type EBT_MAX_HP=5 si areaID matche et playMode ≠ 2)
+rate = float32(sum + 100) × 0.01f                     // constante 0.01f à 0x1056648
+
+// CCharacterData.get_MaxHP (0x27DFB20) :
+MaxHP = floor(float32(MaxHPRate × float32(HP_final)))  // scvtf/fmul/frintm
+        // HP_final = la stat § 16/§ 3 ; float32 exact tant que HP < 2^24
+```
+
+**La donnée** (`BuffSystemTemplet` via `GuildBuffTemplet.BuffGroupID` →
+`BuffSystemTemplet.GroupID`) : chaque niveau de guilde 1..10 accorde 3 buffs
+système — GOLD et CHAR_EXP (économie, sans effet combat) et **EBT_MAX_HP**, le
+seul qui pèse : `BuffValue` = 8 (Lv 1–3), 10 (Lv 4–6), 12 (Lv 7), 13 (Lv 8),
+14 (Lv 9), 15 (Lv 10) → jusqu'à ×1.15 de PV max.
+
+**Modes où le MAX_HP s'applique** (`DungeonMode` de la ligne, identique aux 10
+niveaux ; `IgnoreDungeonMode` vide) : `DM_NORMAL` (histoire, y compris hard —
+`normal_hard` d'encounters est un AGT_HARD du même mode), `DM_SIDESTORY`,
+`DM_GOLD`, `DM_FARMING`, `DM_RAID_1`, `DM_RAID_2` (Special Request),
+`DM_TOWER` (Skyward normal SEULEMENT), `DM_GUILD_DUNGEON`. Donc PAS en world
+boss, guild raid, tours hard/very hard/élémentaires, irregular, PvP, monad,
+adventure — ni nulle part ailleurs.
+
+**Conséquences moteur** : la FICHE hors combat n'inclut jamais ce taux
+(`MaxHPRate` n'est posé qu'au chargement d'un donjon) — en contenu éligible,
+le HP de combat = `floor(float32(rate × HP_fiche_reconstruite))`, à reproduire
+en float32 (`Math.fround`). Seul le HP max bouge (scaling § 10.1 sur HP,
+contexte PV § 8, vampiric § 14) ; l'ATK/DEF/vitesse ne sont pas touchés, et
+les MONSTRES n'ont pas ce champ (classe `CCharacterData` = persos).
+
+**Autres sources `EBT_MAX_HP` recensées** (scan exhaustif 04/08/2026 :
+`BuffSystemTemplet` entier + `UserNickNameTemplet` + `GameConfigTemplet` +
+stores binaires de `MaxHPRate`) : UNE seule autre ligne existe — groupe 65,
+« Title Buff [Premium Body] » (`SYS_BUFF_USERNICKNAME_LICENSE_04`) :
+**+5 % PV max**, modes `DM_NORMAL`, `DM_RAID_1`, `DM_RAID_2`,
+`DM_ADVENTURE_MISSION`, `DM_ADVENTURE_CHALLENGE`. Aucune table CLIENT ne
+l'accorde (ce n'est pas un titre de `UserNickNameTemplet`) : buff poussé par le
+SERVEUR — vraisemblablement le pass Story License premium. Il se CUMULE avec le
+buff de guilde dans la somme du manager (listes de modes différentes : lui ne
+couvre ni side story/gold/farming/tour/donjon de guilde ; la guilde ne couvre
+pas les modes Adventure). Les event buffs des ~24 autres types
+(`EVENT_BUFF_TYPE`) sont TOUS économie/QoL (gold, exp, drop, stamina,
+entrées…) — aucun autre ne touche une stat de combat, et les buffs de titres
+existants ne portent que gold/exp/drop/stamina.
+
+> RÉALISÉ (05/08/2026, décision Sevih — le +5 % est introuvable dans l'UI du
+> jeu, on l'expose et les fixtures trancheront) : la SOMME du manager est
+> implémentée dans l'amont (`MaxHpBuffInfo` : parts guilde + titre, chacune
+> active selon SES modes ou SA coche manuelle,
+> `rate = float32(100 + Σ actives) × 0.01f`). L'extracteur émet
+> `growth.titleMaxHp` (lignes EBT_MAX_HP hors guilde — le test datagen casse
+> si un patch en ajoute) ; réglage de compte « Title Buff [Premium Body] »
+> (toggle settings, localStorage, hors z), coche manuelle dédiée (`pb`),
+> capturé dans `DamageFixture.premium`. Le tooltip in-game du buff de guilde
+> (Sevih 05/08/2026) corrobore les 8 modes de la table : Story, Side Story,
+> Hypnotic Frog Hall (gold), Ark Raid (farming), les deux Special Request
+> (raid_1/raid_2), Skyward Tower (normale), Guild Security Area (donjon de
+> guilde).
+
+### 16.3 Passifs de boss (kits de monstres preset) — 05/08/2026
+
+Les monstres portent leurs skills aux slots `Skill_<n>` du templet ; les
+`SkillSubType == PASSIVE` posent leurs `BuffID` en PERMANENT au combat quand la
+ligne de buff a `BuffCreateType == PASSIVE` (les autres `BuffCreateType` sont
+des créations DYNAMIQUES — `ON_TURN`, `SKILL_FINISH`… — dépendantes de l'état
+du combat). Ce sont de VRAIS buffs de `BuffTemplet` : mêmes familles `BT_*`,
+mêmes canaux d'agrégation § 9/§ 16.1 — décision Sevih 05/08/2026 : « c'est un
+débuff comme un autre », on ne trafique JAMAIS les stats saisies pour les
+simuler.
+
+**Classement par `TargetType`** (point de vue du boss) : `ENEMY_TEAM*` =
+l'équipe du JOUEUR (ex. « Starving Devil » de l'Unidentified Chimera, stage 12,
+skill 131113 : `4076007_15_1` crit +1000 ‰ forcé + `4076007_15_2` crit dmg
+−850 ‰, tous deux `BT_STAT OAT_ADD` permanents et indélébiles
+`IsIgnoreInterruption`) ; `ME`/`MY_TEAM` = le boss lui-même (réductions de
+dégâts, ex. buffs génériques `1`/`2`/`3` : `BT_DMG_REDUCE OAT_RATE` −150/+500/
++500 conditionnés à l'élément de l'attaquant).
+
+**Conditions élémentaires** : `ATTACKER_ELEMENT_WIN/EQUAL/LOSE`
+(`BUFF_CONDITION_TYPE` 123-125) s'évaluent par `CheckElementWin` →
+`ELEMENT_SUPERIORITY_TYPE`, enum à TROIS valeurs (`ATTACKER_WIN`/`EQUAL`/
+`ATTACKER_LOSE`) : **EQUAL est le « ni avantage ni désavantage »** (couvre
+même-élément ET les hors-cycle type lumière vs terre), pas « même élément ».
+C'est la MÊME relation que le taux élémentaire § 6 — corroboré par la desc du
+passif (le monde y est partagé en « Fire / non-Fire » pour un boss terre).
+Toute autre condition (`OWNER_HAS_BUFF` — le WG reduce sous bouclier de rage —,
+`OWNER_RAGE`…) dépend de l'état du combat : non évaluable statiquement.
+
+> RÉALISÉ (05/08/2026) : `src/lib/damage/passives.ts` —
+> `staticBossPassives(monsterId)` (targets.json → skills PASSIVE → buffs.json,
+> 650/650 passifs mono-niveau, garde datagen) classe les lignes par côté ;
+> `resolveBossPassives` évalue les conditions élémentaires via
+> `getElementSuperiority` (§ 6). `buildDamageReport` verse les entrées actives
+> dans `attackerBuffs`/`defenderBuffs` (le crit forcé passe par le canal
+> § 16.1 → la branche critique devient P = 1 dès que la CHC est saisie) et
+> expose `result.bossPassives` (harnais). NON appliqué et SIGNALÉ
+> (`unresolved`, contribution 0) : `BT_WG_DMG_REDUCE` (agrégation jauge non
+> désassemblée § 12.3), conditions non élémentaires, `BT_STAT` sur le boss
+> (canal défenseur non consommé — aucun cas statique en 1.4.9). Ignorés
+> silencieusement (documenté) : `BT_DMG*` sortants du boss (le rapport ne
+> calcule jamais les dégâts de la cible) et les soins/CP/boucliers. Côté UI,
+> le preset porte `monsterId` (pont + resolvers) et la section buff/débuff
+> affiche les chips AUTO « passif du boss » (nom localisé du skill, jamais
+> togglables, état actif/inactif selon l'élément de l'attaquant courant).
+
 ## 17. Agrégation des couches — CCharacterData.CalcStat (0x27E2870) et satellites
 
 Le mapping templet → 13 paramètres de CalcFinalStat, extrait fonction par fonction
@@ -814,7 +977,8 @@ avec les paires Min/Max du CharacterTemplet. Particularités :
   `SpawnAdvantageRate{Atk,Def,HP,Spd}` (remplis par les colonnes
   `SpawnAdvantageRate_*` des tables de contenu — monstres).
 - `addRate` n'existe que pour ATK (`AddRateAtk`, 0xC0) et DEF (`AddRateDef`, 0xC4) —
-  écritures inlinées non tracées (§ 12.13), défaut 0.
+  posés par `SetStatValue(ST_ATK|ST_DEF, v)`, dont la seule source combat est
+  l'overgrade du boss de guild raid (§ 12.13, RÉSOLU) ; défaut 0.
 - Les stats sans paire Min/Max partent de 0.
 
 ### 17.3 Évolution (cumulative) et archive

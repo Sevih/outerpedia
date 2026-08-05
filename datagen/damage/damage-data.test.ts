@@ -165,6 +165,45 @@ describe('damage/growth.json — canaux de CalcFinalStat', () => {
     }
   });
 
+  it('buff de guilde : 10 niveaux, MAX_HP 8→15, modes stables (spec § 16.2)', () => {
+    expect(growth.guildMaxHp.map((t) => t.level)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    // Témoins re-vérifiés sur BuffSystemTemplet (04/08/2026).
+    expect(growth.guildMaxHp.map((t) => t.maxHpValue)).toEqual([
+      8, 8, 8, 10, 10, 10, 12, 13, 14, 15,
+    ]);
+    const modes = growth.guildMaxHp[0].modes;
+    expect(modes).toContain('DM_NORMAL');
+    expect(modes).toContain('DM_RAID_1');
+    expect(modes).toContain('DM_TOWER');
+    expect(modes).not.toContain('DM_WORLD_BOSS');
+    expect(modes).not.toContain('DM_TOWER_HARD');
+    // Les 10 niveaux partagent la MÊME liste de modes (1.4.9) — un écart
+    // signalerait un patch à re-vérifier.
+    for (const t of growth.guildMaxHp) {
+      expect(t.modes, `Lv ${t.level}`).toEqual(modes);
+      expect(t.ignoreModes, `Lv ${t.level}`).toBeUndefined();
+    }
+  });
+
+  it('buff de titre MAX_HP : la seule ligne 1.4.9 est « Premium Body » +5 %', () => {
+    // Un patch qui en ajoute doit CASSER ce test (revue § 16.2, jamais absorbé).
+    expect(growth.titleMaxHp).toHaveLength(1);
+    const t = growth.titleMaxHp[0];
+    expect(t).toMatchObject({
+      group: 65,
+      title: 'SYS_BUFF_USERNICKNAME_LICENSE_04',
+      maxHpValue: 5,
+    });
+    expect(t.modes).toEqual([
+      'DM_NORMAL',
+      'DM_RAID_1',
+      'DM_RAID_2',
+      'DM_ADVENTURE_MISSION',
+      'DM_ADVENTURE_CHALLENGE',
+    ]);
+    expect(t.ignoreModes).toBeUndefined();
+  });
+
   it('éveil : chaque nœud a des niveaux, IOT_STAT complet, IOT_BUFF référencé', () => {
     const bad: string[] = [];
     for (const n of growth.awakening) {
@@ -270,7 +309,7 @@ describe('damage/growth.json — canaux de CalcFinalStat', () => {
     for (const g of Object.values(equipment.optionGroups)) for (const o of g) add(o.buffId);
     for (const g of Object.values(equipment.specialGroups))
       for (const s of g) {
-        add(s.buffId);
+        for (const b of s.buffIds ?? []) add(b);
         add(s.twoPiece?.buffId);
         add(s.fourPiece?.buffId);
       }
@@ -278,6 +317,16 @@ describe('damage/growth.json — canaux de CalcFinalStat', () => {
     const missing = [...refs].filter((r) => !buffsFile.buffs[r]);
     expect(missing).toEqual([]);
     expect(Object.keys(buffsFile.buffs).length).toBeGreaterThan(2000);
+  });
+
+  it('groupes spéciaux : les BuffID CSV sont ÉCLATÉS (bug vu le 05/08/2026)', () => {
+    for (const [gid, rows] of Object.entries(equipment.specialGroups))
+      for (const s of rows) for (const b of s.buffIds ?? []) expect(b, gid).not.toContain(',');
+    // Témoin : l'option unique d'Absolute Music porte DEUX buffs sur sa ligne.
+    expect(equipment.specialGroups['2025'][0].buffIds).toEqual([
+      'BID_ITEM_UO_ACC_25',
+      'BID_ITEM_UO_ACC_25_2',
+    ]);
   });
 
   it('buffs : niveaux triés et typés ; l’option principale d’EE a ses 11 niveaux', () => {
@@ -412,6 +461,54 @@ describe('damage/targets.json — cibles de preset (boss des rencontres vivantes
     expect(b1.createType).toBe('ON_BREAK');
     expect(buffsFile.buffs['BID_BREAK_2'][0].stat).toBe('ST_AVOID');
     expect(buffsFile.buffs['BID_BREAK_3'][0].stat).toBe('ST_BUFF_RESIST');
+  });
+
+  it('les PASSIFS de monstre sont TOUS mono-niveau (hypothèse de passives.ts)', () => {
+    // La lib applique le niveau UNIQUE d'un passif (650/650 en 1.4.9) : un
+    // patch qui introduit un passif multi-niveaux doit CASSER ce test — il
+    // faudra alors prouver au binaire quel niveau s'applique.
+    const multi = Object.values(targetsFile.skills).filter(
+      (s) => s.subType === 'PASSIVE' && s.levels.length !== 1,
+    );
+    expect(multi.map((s) => s.id)).toEqual([]);
+  });
+
+  it('témoin « Starving Devil » (Chimera stage 12) : le passif et ses buffs sont extraits', () => {
+    // Le cas qui a motivé les passifs de boss (Sevih 05/08/2026). Attendus
+    // dérivés de BuffTemplet — un patch qui les change doit se voir ICI.
+    const chimera = targetsFile.targets['403400261'];
+    expect(chimera?.skills.map((s) => s.id)).toContain('131113');
+    const passive = targetsFile.skills['131113'];
+    expect(passive.subType).toBe('PASSIVE');
+    const buffIds = passive.levels[0].buffIds;
+    for (const id of ['1', '2', '3', '4076007_15_1', '4076007_15_2']) {
+      expect(buffIds, id).toContain(id);
+      expect(buffsFile.buffs[id], id).toBeDefined();
+    }
+    // Équipe joueuse : crit +100 % (forcé) et crit dmg −85 %, permanents.
+    expect(buffsFile.buffs['4076007_15_1'][0]).toMatchObject({
+      type: 'BT_STAT',
+      targetType: 'ENEMY_TEAM',
+      stat: 'ST_CRITICAL_RATE',
+      applyingType: 'OAT_ADD',
+      value: 1000,
+      createType: 'PASSIVE',
+    });
+    expect(buffsFile.buffs['4076007_15_2'][0]).toMatchObject({
+      stat: 'ST_CRITICAL_DMG_RATE',
+      value: -850,
+    });
+    // Boss : réductions conditionnées à l'élément de l'attaquant (§ 6).
+    expect(buffsFile.buffs['1'][0]).toMatchObject({
+      type: 'BT_DMG_REDUCE',
+      targetType: 'ME',
+      value: -150,
+      conditionType: 'ATTACKER_ELEMENT_WIN',
+    });
+    expect(buffsFile.buffs['2'][0]).toMatchObject({
+      value: 500,
+      conditionType: 'ATTACKER_ELEMENT_LOSE',
+    });
   });
 
   it('les buffs de palier (rangs guilde/singularity) sont collectés et résolus', () => {

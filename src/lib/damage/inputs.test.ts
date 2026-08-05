@@ -13,7 +13,9 @@ import { calcBaseStat } from './formula';
 import {
   buildCombatStats,
   buildDamageReport,
+  dungeonModeOf,
   elementOf,
+  eventMaxHpRate,
   modifierAfter100For,
   resolveFx,
   trustBuffs,
@@ -126,12 +128,16 @@ describe('inputs — buildDamageReport', () => {
     // Niveau par défaut = max du skill ; les bursts suivent le S2 (372/372).
     for (const s of result.slots) expect(s.skillLevel).toBeGreaterThan(0);
     expect(result.unresolvedFx).toEqual([]);
-    // Sans CHC saisie : une seule branche (normal, P = 1) — le crit est un
-    // interrupteur de scénario, pas une devinette.
+    // Normal et crit sont TOUJOURS émis (les dégâts d'une branche ne
+    // dépendent pas de sa probabilité) : sans CHC saisie, P(crit) = 0 mais
+    // la valeur reste affichable. Le miss n'existe qu'avec un buff de
+    // « miss chance » — absent par défaut.
     for (const s of result.slots) {
       for (const st of s.report.states) {
-        expect(st.branches.map((b) => b.branch)).toEqual(['normal']);
-        expect(st.branches[0].totalDamage).toBeGreaterThanOrEqual(1);
+        expect(st.branches.map((b) => b.branch)).toEqual(['normal', 'critical']);
+        expect(st.branches[0].probability).toBe(1);
+        expect(st.branches[1].probability).toBe(0);
+        for (const b of st.branches) expect(b.totalDamage).toBeGreaterThanOrEqual(1);
       }
     }
   });
@@ -157,5 +163,75 @@ describe('inputs — buildDamageReport', () => {
     const result = buildDamageReport(attackerBase(), target(), data, { trace: true });
     const branch = result.slots[0].report.states[0].branches[0];
     expect(branch.trace?.at(-1)).toMatchObject({ ref: '§ 8.3', out: branch.totalDamage });
+  });
+});
+
+describe('inputs — buffs MAX_HP (§ 16.2 : guilde + titre)', () => {
+  const withHp = (): AttackerBuildInput => ({
+    ...attackerBase(),
+    sheet: { atk: 10000, hp: 50000 },
+    guildLevel: 10,
+  });
+  const target = () => ({ element: 'earth', stats: { hp: 500000, def: 2000 }, boss: true });
+  const applied = (sum: number, hp: number) =>
+    Math.floor(Math.fround(eventMaxHpRate(sum) * Math.fround(hp)));
+
+  it('slug de mode → DUNGEON_MODE ; normal_hard = DM_NORMAL (même mode, AGT_HARD)', () => {
+    expect(dungeonModeOf('normal')).toBe('DM_NORMAL');
+    expect(dungeonModeOf('normal_hard')).toBe('DM_NORMAL');
+    expect(dungeonModeOf('raid_1')).toBe('DM_RAID_1');
+    expect(dungeonModeOf('world_boss')).toBe('DM_WORLD_BOSS');
+  });
+
+  it('guilde seule, mode éligible : HP = floor(float32(rate × HP))', () => {
+    const r = buildDamageReport(withHp(), { ...target(), mode: 'raid_1' }, data);
+    expect(r.maxHpBuff).toMatchObject({ sum: 15, hpBefore: 50000 }); // Lv 10 → 15
+    expect(r.combatStats.hp).toBe(applied(15, 50000));
+  });
+
+  it('guilde + titre CUMULÉS en Special Request (Σ = 15 + 5 = 20)', () => {
+    const a = { ...withHp(), premiumHp: true };
+    const r = buildDamageReport(a, { ...target(), mode: 'raid_1' }, data);
+    expect(r.maxHpBuff?.sum).toBe(20);
+    expect(r.maxHpBuff?.parts.map((p) => [p.source, p.active])).toEqual([
+      ['guild', true],
+      ['title', true],
+    ]);
+    expect(r.combatStats.hp).toBe(applied(20, 50000));
+  });
+
+  it('les listes de modes DIFFÈRENT : tour normale = guilde seule, adventure = titre seul', () => {
+    const a = { ...withHp(), premiumHp: true };
+    const tower = buildDamageReport(a, { ...target(), mode: 'tower' }, data);
+    expect(tower.maxHpBuff?.sum).toBe(15); // guilde oui, titre non
+    const adv = buildDamageReport(a, { ...target(), mode: 'adventure_mission' }, data);
+    expect(adv.maxHpBuff?.sum).toBe(5); // titre oui, guilde non
+  });
+
+  it('mode exclu des deux (world boss…) : Σ = 0, HP intact, parts signalées', () => {
+    const a = { ...withHp(), premiumHp: true };
+    for (const mode of ['world_boss', 'tower_hard', 'guild_raid_main_boss']) {
+      const r = buildDamageReport(a, { ...target(), mode }, data);
+      expect(r.maxHpBuff?.sum, mode).toBe(0);
+      expect(r.combatStats.hp, mode).toBe(50000);
+    }
+  });
+
+  it('cible manuelle : coches INDÉPENDANTES par buff', () => {
+    const a = { ...withHp(), premiumHp: true };
+    expect(buildDamageReport(a, target(), data).maxHpBuff?.sum).toBe(0);
+    expect(buildDamageReport(a, { ...target(), guildBuffOn: true }, data).maxHpBuff?.sum).toBe(15);
+    expect(buildDamageReport(a, { ...target(), titleBuffOn: true }, data).maxHpBuff?.sum).toBe(5);
+    expect(
+      buildDamageReport(a, { ...target(), guildBuffOn: true, titleBuffOn: true }, data).maxHpBuff
+        ?.sum,
+    ).toBe(20);
+  });
+
+  it('sans aucun réglage de compte : aucun bloc maxHpBuff, rien ne bouge', () => {
+    const a = { ...withHp(), guildLevel: 0 };
+    const r = buildDamageReport(a, { ...target(), mode: 'raid_1' }, data);
+    expect(r.maxHpBuff).toBeUndefined();
+    expect(r.combatStats.hp).toBe(50000);
   });
 });

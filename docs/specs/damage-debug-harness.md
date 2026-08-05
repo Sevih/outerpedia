@@ -35,8 +35,26 @@
 > (§ 11). Coût nul sans trace (`trace?.push`). Étape `unresolved` émise pour
 > le swap § 10.1 sans lecteur de stat — jamais de valeur plausible. Tests :
 > `src/lib/damage/trace.test.ts` (l'étape finale de chaque trace === la
-> valeur retournée). Le RENDU (accordéon) reste à brancher dans la carte
-> Debug avec l'amont pur.
+> valeur retournée).
+>
+> RÉALISÉ côté PANNEAU (04/08/2026) : la carte Debug est BRANCHÉE. L'état
+> `?z=` courant passe par le pont partagé `buildInputsFromZ`
+> (`src/lib/damage/scenario.ts` — z décompressé → entrées de l'amont, la
+> MÊME fonction que rejouera `fixtures.test.ts`) puis `buildDamageReport`
+> (`{ trace: true }`). Rendu : accordéon par slot du rapport (S1/S2/S3,
+> bursts en sous-lignes), dedans les états (chaînes) × branches à P > 0 —
+> en-tête `branche · P · total` puis la trace `§ref · label · in → out`
+> (valeurs brutes), la jauge § 11 (`wgTrace`) en pied. La reconstruction
+> fiche → combat (§ 16.1) est affichée (`slug=saisi→combat`). Ce que le
+> moteur v1 IGNORE est signalé en ambre, jamais tu : pans hors périmètre
+> (`ignored` du pont : arme/accessoire/sets/talisman § 15, alliés,
+> multi-cible ; + EE et quirks via le parent) et chips sans magnitude
+> standard (`unresolvedFx`). Les tables damage (~11 Mo avec targets.json)
+> sont importées en DYNAMIQUE par le PARENT à la première sélection
+> d'attaquant — depuis le branchement du rapport PUBLIC (05/08/2026), le
+> panneau les reçoit en props (`data`/`dataErr`), un seul chargement pour le
+> rapport et le debug. Le Codex (réglage de compte, HORS z) est passé à part
+> et capturé dans le champ `codex` du fixture — schéma § 3.
 
 Le moteur retourne, EN PLUS des nombres, une **trace** — il ne faut jamais que
 l'UI la reconstruise (elle mentirait au premier écart) :
@@ -80,12 +98,26 @@ interface DamageFixture {
   name: string;
   /** Le scénario COMPLET : la valeur `?z=` de l'URL du calculateur (lz-string). */
   z: string;
+  /** Codex du COMPTE à la capture — HORS z (localStorage), mais il pèse dès
+   *  qu'un buff est actif (§ 16.1). Absent = 0. */
+  codex?: number;
+  /** Niveau de GUILDE du compte — HORS z aussi ; son buff MAX_HP (§ 16.2)
+   *  change le HP de combat dans les modes éligibles. Absent = 0. */
+  guild?: number;
+  /** Buff de titre « Premium Body » possédé (+5 % PV, § 16.2) — HORS z.
+   *  Absent = non. */
+  premium?: boolean;
   /** Version du jeu au moment de l'observation (« 1.4.9 »). */
   gameVersion: string;
-  /** Observations en jeu : par slot de skill × branche, dégâts constatés. */
+  /** Observations en jeu : par slot × branche, dégâts constatés. La clé de
+   *  slot est STABLE (pont `flattenReport`) : `S1`/`S2`/`S3`, burst en
+   *  suffixe (`S2b1`), état non-base en `#chaîne` (`S2#nom`). */
   observed: { slot: string; branch: 'normal' | 'critical' | 'miss'; damage: number }[];
   /** Tolérance relative acceptée (défaut 0.5 % — arrondis d'affichage du jeu). */
   tolerance?: number;
+  /** Référence d'incertitude § 12 dont le scénario dépend → test `skip`,
+   *  table grise ; devient le test d'acceptation du jour où on tranche. */
+  skipRef?: string;
   /** Contexte libre : ce qui était actif en jeu et difficile à encoder. */
   notes?: string;
 }
@@ -94,15 +126,50 @@ interface DamageFixture {
 - **Emplacement** : `src/lib/damage/fixtures/*.json` — dans le repo, versionnés,
   relus en PR comme du code. PAS de localStorage comme stockage de vérité (il ne
   survit ni au navigateur ni à l'équipe).
-- **Capture** : bouton dev « Capturer ce scénario » dans la carte Debug →
-  compose le JSON (z courant + résultats calculés pré-remplis en `observed`, à
-  corriger avec les valeurs constatées en jeu) → presse-papiers. Le navigateur
-  n'écrit pas de fichier ; le dev colle dans `fixtures/`.
-- **Rendu** : table dans la carte Debug — une ligne par observation :
+- **Capture** — REDESSINÉE (Sevih 05/08/2026, itérée 2× le même jour :
+  « un scénario = UNE ligne de dégâts », la saisie vit dans la TABLE RÉSULTAT
+  publique) :
+  - **Table Résultat** (dev) : chaque colonne de branche porte une CHECKBOX
+    (normal/critique/miss — miss cochée FORCE sa branche, le miss n'existe
+    plus hors buff de « miss chance » ; décocher normal sert le crit forcé)
+    et, sous chaque valeur calculée d'une branche cochée, une INPUT
+    « en jeu » → Δ % immédiat (vert/rouge à ±0.5 %) et un bouton **`+`** qui
+    SAUVEGARDE ce scénario : le `z` courant (tous les réglages UI y sont) +
+    codex/guilde/titre + la ligne (clé `flattenReport`, état de base pour les
+    multi-chaînes) + la valeur en jeu. Upsert par (z, slot, branche),
+    localStorage `outerpedia:damage-calculator:debug-scenarios` (v2).
+  - **Section « Scénarios »** (AU-DESSUS du panneau Debug) : table de
+    comparaison `atk vs cible · en jeu · calculé · Δ %` — le calculé n'est
+    JAMAIS stocké, il est REJOUÉ à l'affichage par le pont partagé (un moteur
+    qui bouge se voit immédiatement ; Δ hors tolérance + `gameVersion`
+    ancienne → badge « à revérifier en jeu »). Actions : **Charger**
+    (re-remplit le calculateur ENTIER — reset + `applyZ`, la même fonction que
+    l'hydratation `?z=` — + réglages de compte REPOSÉS, cellule observée
+    pré-remplie, branche cochée), **⧉** (copie le `DamageFixture` équivalent —
+    une ligne observée — à coller dans `fixtures/` et référencer dans
+    `fixtures/index.ts` ; le localStorage reste un BROUILLON, le stockage de
+    vérité est toujours le fichier committé), **✕** (supprime).
+  - Le panneau Debug, lui, garde la trace, l'état fiche→combat, les passifs
+    de boss et la table des fixtures COMMITTÉES.
+- **Rendu** (fixtures committées) : table dans la carte Debug — une ligne par
+  observation :
   `fixture · skill · branche · attendu (en jeu) · calculé · Δ %`, verte sous la
   tolérance, rouge au-dessus, grise si le scénario touche une incertitude § 12.
 
 ## 4. Anti-régression
+
+> RÉALISÉ (04/08/2026) : `src/lib/damage/fixtures.test.ts` rejoue le registre
+> `FIXTURES` (`src/lib/damage/fixtures/index.ts`) — décompression `z`, pont
+> partagé `buildInputsFromZ` + `resolvePresetTarget`
+> (`src/lib/damage/preset-target.ts`, node : MÊME `statAt` que le wrapper via
+> `presetSpawnStats`, refactor à source unique ; PAS dans le barrel — lit au
+> disque), amont pur, comparaison par (slot, branche) avec la tolérance du
+> fixture. Le message d'échec oriente : `gameVersion` ≠ tables → « revérifier
+> EN JEU d'abord » ; sinon → « régression moteur probable, comparer la
+> trace ». `skipRef` → suite sautée. Le registre est VIDE au 04/08 : les
+> premières fixtures restent à capturer en jeu (Sevih) — coller le JSON du
+> bouton « Capturer » dans `fixtures/`, corriger `observed`, l'importer dans
+> `fixtures/index.ts`.
 
 Les fixtures ne servent pas qu'à l'œil : un test vitest les rejoue SANS UI.
 
