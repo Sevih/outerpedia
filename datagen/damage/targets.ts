@@ -34,10 +34,12 @@
  * ses `BuffID` (passifs défensifs — réductions, auras, enrage) et ses types,
  * pas ses hits.
  *
- * GARDE DE SORTIE : seuls les monstres apparaissant en BOSS d'une rencontre
- * peuplée et non retirée d'`encounters.json` sont émis (preuve d'intégration,
- * même philosophie que `roster.ts`) — les presets ne ciblent que des boss, la
- * cible manuelle couvre le reste.
+ * GARDE DE SORTIE : tout monstre d'une rencontre peuplée et non retirée
+ * d'`encounters.json` est émis — boss ET renforts (preuve d'intégration, même
+ * philosophie que `roster.ts`). Historique : boss seuls jusqu'au 06/08/2026 ;
+ * le picker story liste désormais les VAGUES complètes d'un stage (demande
+ * Sevih), donc chaque monstre spawné doit être ciblable en preset. La cible
+ * manuelle couvre ce qui ne spawne nulle part.
  */
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -101,11 +103,11 @@ const RANK_TABLES = [
 const MAX_SKILL_SLOTS = 23;
 
 /**
- * IDs des monstres BOSS des rencontres vivantes — la preuve d'intégration.
- * `encounters.json` illisible → warn + `null` (pas de filtre), comme roster.ts :
- * on filtre sur une preuve, jamais sur une absence.
+ * IDs des monstres (boss ET renforts) des rencontres vivantes — la preuve
+ * d'intégration. `encounters.json` illisible → warn + `null` (pas de filtre),
+ * comme roster.ts : on filtre sur une preuve, jamais sur une absence.
  */
-export function presetBossIds(): Set<string> | null {
+export function presetMonsterIds(): Set<string> | null {
   try {
     const raw = readFileSync(resolve('data/generated/encounters.json'), 'utf8');
     const encounters = JSON.parse(raw) as Record<
@@ -115,10 +117,10 @@ export function presetBossIds(): Set<string> | null {
     const ids = new Set<string>();
     for (const ref of Object.values(encounters)) {
       if (ref.retired || !ref.monsters?.length) continue;
-      for (const m of ref.monsters) if (m.role === 'boss') ids.add(m.id);
+      for (const m of ref.monsters) ids.add(m.id);
     }
     if (ids.size) return ids;
-    console.warn('⚠ encounters.json sans boss — extraction targets SANS filtre.');
+    console.warn('⚠ encounters.json sans monstre — extraction targets SANS filtre.');
     return null;
   } catch {
     console.warn('⚠ data/generated/encounters.json illisible — extraction targets SANS filtre.');
@@ -127,7 +129,7 @@ export function presetBossIds(): Set<string> | null {
 }
 
 export function buildDamageTargets(): DamageTargetsData {
-  const gate = presetBossIds();
+  const gate = presetMonsterIds();
   const templet = loadTable('MonsterTemplet').filter((m) => !gate || gate.has(m.ID));
   const skillTemplet = indexBy(loadTable('MonsterSkillTemplet'));
   const levelsBySkill = groupBy(loadTable('MonsterSkillLevelTemplet'), 'SkillID');

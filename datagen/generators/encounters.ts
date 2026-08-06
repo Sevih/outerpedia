@@ -172,11 +172,17 @@ export interface DungeonMonster {
    * tuer un boss fait apparaître le suivant). C'est l'ordre où le jeu envoie
    * les groupes : au Special Request « Masterless Guardian », les
    * Spear-Wielders (vague 1) précèdent le boss (vague 2). ÉMIS SEULEMENT si
-   * le donjon a plusieurs groupes — absent = combat en une vague. Un monstre
-   * répété à même niveau sur plusieurs vagues porte sa PREMIÈRE vague (la
-   * dédup garde la première occurrence).
+   * le donjon a plusieurs groupes — absent = combat en une vague. La dédup
+   * est PAR VAGUE : un monstre répété à même niveau sur plusieurs vagues a
+   * une entrée par vague (ses spawns inverses restent UNE ligne par niveau).
    */
   wave?: number;
+  /**
+   * Exemplaires ENGAGÉS de ce monstre dans SA vague, à ce niveau (absent = 1)
+   * — story 1-1 aligne 2 × le même loup en vague 1 (remarque Sevih
+   * 06/08/2026) : l'UI des vagues affiche « ×2 », jamais une carte muette.
+   */
+  count?: number;
 }
 
 /**
@@ -196,7 +202,7 @@ export interface DungeonMonster {
  *   - raid_1/raid_2 (Special Request) : `stage_1..13` (chiffres de la clé
  *     du nom — SYS_RAID_1_DUNGEON_E01), 5 échelles de boss par mode ;
  *   - story/tours/adventure : PAS de champ — la difficulté EST le mode
- *     (normal vs normal_hard, tower/_hard/_very_hard).
+ *     (normal vs normal_hard, origin vs origin_hard, tower/_hard/_very_hard).
  */
 export interface DungeonDifficulty {
   key: string;
@@ -302,9 +308,15 @@ export interface DungeonRef {
    * glossaire `geas`. Contenu phase 2, pas encore ouvert in-game.
    */
   geasRewards?: string[];
-  /** STORY (`normal`/`normal_hard`) : saison et épisode (AreaTemplet). */
+  /** STORY (cf. `STORY_MODES`) : saison et épisode (AreaTemplet). */
   season?: number;
   episode?: number;
+  /**
+   * STORY : numéro du stage DANS l'épisode (chiffres de la clé ShortNameID —
+   * « 5-13 » s'affiche `episode`-`stage`). Absent quand le jeu n'a pas de clé
+   * (l'intro de la story refondue).
+   */
+  stage?: number;
   /** Modificateurs de stats du donjon (cf. `DungeonAdv`). */
   adv?: DungeonAdv;
   /**
@@ -353,6 +365,13 @@ export interface MonsterEncounters {
 export interface EncountersData {
   /** Libellés localisés des modes de contenu (slug → titre), quand connus. */
   modes: Record<string, LangDict>;
+  /**
+   * Titres officiels des FAMILLES story (« Story », « Origin Story ») — pour
+   * les sélecteurs qui replient les 4 slugs `STORY_MODES` en 2 entrées
+   * (Normal/Hard devient un toggle). Clés TextSystem curées
+   * (mode-titles.json § families), jamais de texte main.
+   */
+  storyFamilies: Record<string, LangDict>;
   /** Passifs de palier résolus (`OptionID` → buff) — rejoint `glossaries`. */
   rankOptions: Record<string, RankOption>;
   /**
@@ -388,6 +407,20 @@ export interface EncountersData {
 //   2. `ContentLockTemplet` (ContentType → TextID) par recoupement de tokens —
 //      couvre les contenus sans clé conventionnelle (MONAD_BATTLE → MONADGATE,
 //      CHAR_PIECE → PIECE_DUNGEON, IVANEZ_DUNGEON → IVANEZ_FESTIVAL…).
+
+/**
+ * Slugs SYNTHÉTIQUES de l'histoire — DM_NORMAL éclaté par le type de zone
+ * (cf. la passe story de `buildEncounters`) : `normal`/`normal_hard` = la
+ * story courante (zones AGT_NEW_*, refonte), `origin`/`origin_hard` = l'Origin
+ * Story (zones AGT_NORMAL/AGT_HARD historiques). Le pendant UI vit dans
+ * `src/lib/data/encounters.ts` (`storyFamilyOf`) — même liste, côté client.
+ */
+export const STORY_MODES: ReadonlySet<string> = new Set([
+  'normal',
+  'normal_hard',
+  'origin',
+  'origin_hard',
+]);
 
 /** Qualificatifs de fin (difficulté/rôle) — pas des noms de contenu. */
 const MODE_QUALIFIERS = new Set([
@@ -589,6 +622,8 @@ interface ModeTitleContext {
   contentTitles: ContentTitle[];
   /** Slug de mode → clé TextSystem curée (décision humaine prioritaire). */
   curatedTitles: Record<string, string>;
+  /** Famille story (`story`/`origin`) → clé TextSystem du titre officiel. */
+  familyTitles: Record<string, string>;
   /** Modes ignorés à l'extraction (décision humaine, `_docIgnore`). */
   ignoredModes: Set<string>;
   /** Libellés génériques de difficulté (slug → clé TextSystem). */
@@ -634,6 +669,8 @@ function titleContext(): ModeTitleContext {
   // (rien ne relie DM_MONAD_BATTLE_2 à « Dimensional Singularity » dans les
   // tables). Les textes restent ceux du jeu (clé, jamais de texte main).
   const curatedTitles: Record<string, string> = {};
+  // Titres des FAMILLES story (« Story », « Origin Story ») — cf. _docFamilies.
+  const familyTitles: Record<string, string> = {};
   // Modes IGNORÉS (décision humaine, cf. _docIgnore du fichier curé) : leurs
   // donjons/spawns ne sortent pas — ni rencontres, ni mode dans la sidebar.
   const ignoredModes = new Set<string>();
@@ -644,12 +681,14 @@ function titleContext(): ModeTitleContext {
   // Absent = pas de décisions curées ; JSON cassé = throw nommé (readCuratedJson).
   const curated = readCuratedJson<{
     titles?: Record<string, string>;
+    families?: Record<string, string>;
     ignore?: string[];
     difficulties?: Record<string, string>;
     chaseDifficulties?: Record<string, string>;
   }>('data/curated/mode-titles.json');
   if (curated) {
     Object.assign(curatedTitles, curated.titles ?? {});
+    Object.assign(familyTitles, curated.families ?? {});
     for (const m of curated.ignore ?? []) ignoredModes.add(m);
     Object.assign(difficultyNames, curated.difficulties ?? {});
     Object.assign(chaseDifficulties, curated.chaseDifficulties ?? {});
@@ -661,6 +700,7 @@ function titleContext(): ModeTitleContext {
       keysByNorm,
       contentTitles,
       curatedTitles,
+      familyTitles,
       ignoredModes,
       difficultyNames,
       chaseDifficulties,
@@ -789,10 +829,18 @@ export function buildEncounters(): EncountersData {
     keysByNorm,
     contentTitles,
     curatedTitles,
+    familyTitles,
     ignoredModes,
     difficultyNames,
     chaseDifficulties,
   } = titleContext();
+  // Titres des familles story (curés — « Story », « Origin Story ») : résolus
+  // une fois, émis au glossaire pour les sélecteurs qui replient Normal/Hard.
+  const storyFamilies: Record<string, LangDict> = {};
+  for (const [family, key] of Object.entries(familyTitles)) {
+    const title = resolveText(tsys, key);
+    if (title.en) storyFamilies[family] = title;
+  }
   /** Difficulté structurée : libellé générique curé (absent = pas de name). */
   const difficultyOf = (key: string, order: number): DungeonDifficulty => {
     const nameKey = difficultyNames[key];
@@ -865,12 +913,23 @@ export function buildEncounters(): EncountersData {
     const groupIds = [...new Set([...spawnGroupIds(d), ...(wbLeague.get(d.ID)?.chain ?? [])])];
     if (!groupIds.length) continue;
 
-    // Monstres du donjon, dédupliqués par (monstre, niveau) — plusieurs vagues
-    // peuvent répéter le même mob au même niveau (il garde sa PREMIÈRE vague).
-    // Une VAGUE = un groupe de spawn qui engage (a des lignes), dans l'ordre de
-    // `groupIds` (positions puis chaîne) — cf. doc de `DungeonMonster.wave`.
-    const seen = new Set<string>();
-    const found: Array<{ id: string; level: number; hpLines?: number; wave: number }> = [];
+    // Monstres du donjon, dédupliqués par (VAGUE, monstre, niveau) : un mob
+    // répété DANS sa vague porte `count` (story 1-1 aligne 2 × le même loup —
+    // remarque Sevih 06/08/2026, l'UI des vagues doit le montrer) ; répété sur
+    // PLUSIEURS vagues, une entrée par vague. Une VAGUE = un groupe de spawn
+    // qui engage (a des lignes), dans l'ordre de `groupIds` (positions puis
+    // chaîne) — cf. doc de `DungeonMonster.wave`.
+    const seen = new Map<
+      string,
+      { id: string; level: number; hpLines?: number; wave: number; count: number }
+    >();
+    const found: Array<{
+      id: string;
+      level: number;
+      hpLines?: number;
+      wave: number;
+      count: number;
+    }> = [];
     let wave = 0;
     for (const g of groupIds) {
       const rows = spawnsByGroup.get(g) ?? [];
@@ -880,11 +939,22 @@ export function buildEncounters(): EncountersData {
         for (let i = 0; i < 4; i++) {
           for (const mid of splitCsv(w[`ID${i}`] ?? '')) {
             const level = num(w[`Level${i}`]);
-            const key = `${mid}|${level}`;
-            if (seen.has(key)) continue;
-            seen.add(key);
+            const key = `${wave}|${mid}|${level}`;
+            const prev = seen.get(key);
+            if (prev) {
+              prev.count++;
+              continue;
+            }
             const hpLines = num(w.HPLineCount);
-            found.push({ id: mid, level, wave, ...(hpLines > 1 ? { hpLines } : {}) });
+            const entry = {
+              id: mid,
+              level,
+              wave,
+              count: 1,
+              ...(hpLines > 1 ? { hpLines } : {}),
+            };
+            seen.set(key, entry);
+            found.push(entry);
           }
         }
       }
@@ -892,12 +962,28 @@ export function buildEncounters(): EncountersData {
     if (!found.length) continue;
     const waveCount = wave;
 
-    // STORY : DM_NORMAL couvre les deux difficultés — la zone tranche
-    // (AreaTemplet.AreaGroupType, AGT_NORMAL/AGT_HARD). Slug synthétique
-    // `normal_hard`, titres curés (mode-titles.json : Story Normal/Hard).
+    // STORY : DM_NORMAL couvre QUATRE contenus — la zone tranche
+    // (AreaTemplet.AreaGroupType). Depuis la refonte de l'histoire, les zones
+    // AGT_NEW_* portent la STORY courante (« Story Season 1 Normal/Hard »,
+    // 3 épisodes) et les zones AGT_NORMAL/AGT_HARD d'avant la refonte sont
+    // devenues l'ORIGIN STORY (« Origin Story Season 1..4 » — clés
+    // SYS_SEASON_NAME_* de TextSystem, vérifié 06/08/2026 ; l'Origin Story se
+    // débloque en finissant la story 3-16, clé SYS_CONTENT_POPUP_ORIGIN_STORY_
+    // LOCK). Slugs SYNTHÉTIQUES (le jeu ne connaît que DM_NORMAL — cf.
+    // `dungeonModeOf` côté moteur), titres curés (mode-titles.json :
+    // Story Normal/Hard, Origin Normal/Hard).
     let mode = slugEnum(d.DungeonMode);
     const areaRow = areaById.get(d.AreaID ?? '');
-    if (mode === 'normal' && areaRow?.AreaGroupType === 'AGT_HARD') mode = 'normal_hard';
+    if (mode === 'normal') {
+      const agt = areaRow?.AreaGroupType;
+      if (agt === 'AGT_NEW_HARD') mode = 'normal_hard';
+      else if (agt === 'AGT_NORMAL') mode = 'origin';
+      else if (agt === 'AGT_HARD') mode = 'origin_hard';
+      // Le donjon de TEST oublié dans les tables (100000000, NameID
+      // « THIS_IS_TEST_DUNGEON » — irrésolvable) n'est pas un stage : exclu.
+      // Tous les stages réels de l'histoire ont un titre résolu.
+      if (!resolveText(tsys, d.NameID).en) continue;
+    }
     if (ignoredModes.has(mode)) continue;
     if (!(mode in modes)) {
       const curatedKey = curatedTitles[mode];
@@ -922,11 +1008,20 @@ export function buildEncounters(): EncountersData {
       ...(f.hpLines ? { hpLines: f.hpLines } : {}),
       role: monsterTypeById.get(f.id) === 'CT_MONSTER' ? ('add' as const) : ('boss' as const),
       ...(waveCount > 1 ? { wave: f.wave } : {}),
+      ...(f.count > 1 ? { count: f.count } : {}),
     }));
-    // Story : saison/épisode de la zone (AreaTemplet) — la sidebar les affiche.
-    if (mode === 'normal' || mode === 'normal_hard') {
+    // Story / Origin Story : saison, épisode (AreaTemplet) et numéro du stage
+    // DANS l'épisode — les deux derniers chiffres de la clé ShortNameID
+    // (SYS_DUNGEON_SHORT_NAME_<ép.><stage> : « 0513 » = stage affiché 5-13 ;
+    // structurel, jamais parsé du texte localisé). Absent légitimement sur les
+    // stages sans clé (l'intro « Fateful Encounter » de la story refondue).
+    if (STORY_MODES.has(mode)) {
       if (num(areaRow?.SeasonID)) ref.season = num(areaRow!.SeasonID);
       if (num(areaRow?.EpisodeNum)) ref.episode = num(areaRow!.EpisodeNum);
+      const sn = /^SYS_DUNGEON_SHORT_NAME_\d{2}(\d{2})$/.exec(
+        (d.ShortNameID ?? '').replace(/\s+/g, ''),
+      );
+      if (sn) ref.stage = Number(sn[1]);
     }
     // World boss : la ligue est la difficulté (nom + niveau structurel), le
     // boss de la rotation courante est le groupe de combat.
@@ -988,7 +1083,14 @@ export function buildEncounters(): EncountersData {
     if (Object.keys(adv).length) ref.adv = adv;
     dungeons[d.ID] = ref;
 
+    // Spawns INVERSES dédupliqués par (monstre, niveau) — `found` peut porter
+    // le même couple sur plusieurs vagues (cf. dédup par vague ci-dessus), la
+    // localisation d'un monstre reste UNE ligne par donjon et niveau.
+    const spawnSeen = new Set<string>();
     for (const f of found) {
+      const key = `${f.id}|${f.level}`;
+      if (spawnSeen.has(key)) continue;
+      spawnSeen.add(key);
       const entry = (monsters[f.id] ??= { spawns: [] });
       entry.spawns.push({
         dungeon: d.ID,
@@ -1434,7 +1536,16 @@ export function buildEncounters(): EncountersData {
   lastRewardGapsSig = gapsSig;
 
   cache = {
-    data: { modes, rankOptions, bossQuirkMods, rewardTables, geas, dungeons, monsters },
+    data: {
+      modes,
+      storyFamilies,
+      rankOptions,
+      bossQuirkMods,
+      rewardTables,
+      geas,
+      dungeons,
+      monsters,
+    },
     stamp,
   };
   return cache.data;

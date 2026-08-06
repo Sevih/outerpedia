@@ -277,6 +277,13 @@ export interface Glossaries {
    */
   modes?: Record<string, LangDict>;
   /**
+   * Titres officiels des FAMILLES story (« Story », « Origin Story » — clé
+   * `story`/`origin`) : pour les sélecteurs qui replient les 4 slugs story en
+   * 2 entrées, Normal/Hard en toggle. Curé dans mode-titles.json § families.
+   * Optionnel comme `modes`.
+   */
+  storyFamilies?: Record<string, LangDict>;
+  /**
    * Passifs de PALIER résolus (`DungeonRank.options` → buff : nom localisé,
    * réf tooltip, stat/valeur) — cf. generators/encounters. Optionnel comme
    * `modes` (absent avant la première promotion).

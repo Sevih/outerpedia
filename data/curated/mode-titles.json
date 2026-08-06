@@ -1,12 +1,19 @@
 {
-  "_doc": "Titres de modes CURÉS : slug de DungeonMode → CLÉ TextSystem du titre officiel (jamais de texte écrit main — la localisation vient du jeu). Ne curer que les échecs du résolveur automatique de generators/encounters (il ne peut pas deviner que DM_MONAD_BATTLE_2 = la Singularité). `normal`/`normal_hard` : la STORY (le résolveur donnerait « Normal » aux deux moitiés — le slug _hard est synthétique, dérivé d'AreaTemplet.AreaGroupType=AGT_HARD). Les deux modes adventure_* sont le menu Adventure License (Weekly Conquest + Promotion Challenge), pas la story.",
+  "_doc": "Titres de modes CURÉS : slug de DungeonMode → CLÉ TextSystem du titre officiel (jamais de texte écrit main — la localisation vient du jeu). Ne curer que les échecs du résolveur automatique de generators/encounters (il ne peut pas deviner que DM_MONAD_BATTLE_2 = la Singularité). Les QUATRE slugs story sont synthétiques (DM_NORMAL éclaté par AreaTemplet.AreaGroupType, cf. STORY_MODES du générateur) : `normal`/`normal_hard` = la story courante (zones AGT_NEW_*, refonte — SYS_ADVENTURE = « Story Normal »), `origin`/`origin_hard` = l'Origin Story (zones historiques — clés des onglets de l'archive story, « Origin Normal/Hard »). Les deux modes adventure_* sont le menu Adventure License (Weekly Conquest + Promotion Challenge), pas la story.",
   "titles": {
     "monad_battle_1": "SYS_MONAD_GATE",
     "monad_battle_2": "SYS_SINGULARITY_MAIN_TITLE",
     "normal": "SYS_ADVENTURE",
     "normal_hard": "SYS_STORY_MAIN_HARD",
+    "origin": "SYS_STORY_ARCHIVE_TAP_ORIGIN_NORMAL",
+    "origin_hard": "SYS_STORY_ARCHIVE_TAP_ORIGIN_HARD",
     "adventure_mission": "SYS_ADVENTURE_LICENSE_MISSION",
     "adventure_challenge": "SYS_ADVENTURE_LICENSE_RANK_CHALLENGE"
+  },
+  "_docFamilies": "FAMILLES story (regroupement des 4 slugs par contenu, pour les sélecteurs qui replient Normal/Hard) : clé stable → clé TextSystem du titre officiel (« Story », « Origin Story »). Émises dans glossaries.storyFamilies — jamais de texte écrit main.",
+  "families": {
+    "story": "SYS_STORY_MAIN",
+    "origin": "SYS_ORIGIN_STORY"
   },
   "_docDifficulties": "Libellés GÉNÉRIQUES de difficulté (slug stable → clé TextSystem) pour DungeonRef.difficulty.name — le jeu n'a pas de jeu de clés unifié : SYS_DIFFICULTY_* couvre normal/hard, la clé tour couvre very_hard (texte « Very Hard » nu). Le slug reste la référence stable côté site (le français vient du site, jamais du jeu).",
   "difficulties": {

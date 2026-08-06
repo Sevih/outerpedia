@@ -67,7 +67,8 @@ let siteIdsCache: { stamp: string; ids: Set<string> } | undefined;
  * ÉDITORIALE (pas une donnée du jeu) ; tout NOUVEAU mode est inclus d'office.
  */
 const NON_SITE_MODES = new Set([
-  'normal', // story principale
+  'normal', // story principale (refonte, zones AGT_NEW_*)
+  'origin', // Origin Story (l'histoire d'avant la refonte, même statut éditorial)
   'adventure_mission', // missions de story
   'sidestory',
   'tutorial',

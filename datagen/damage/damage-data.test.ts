@@ -397,14 +397,16 @@ describe('damage/growth.json — canaux de CalcFinalStat', () => {
   });
 });
 
-describe('damage/targets.json — cibles de preset (boss des rencontres vivantes)', () => {
-  it('versionné, et la garde de sortie tient (boss des presets, jamais le templet brut)', () => {
+describe('damage/targets.json — cibles de preset (monstres des rencontres vivantes)', () => {
+  it('versionné, et la garde de sortie tient (monstres des presets, jamais le templet brut)', () => {
     expect((targetsData as { resVersion: string }).resVersion).toMatch(/^\d+\.\d+/);
     const n = Object.keys(targetsFile.targets).length;
-    expect(n).toBeGreaterThanOrEqual(1000);
+    // Boss ET renforts depuis le 06/08/2026 (vagues du picker story) — 2443
+    // monstres intégrés en 1.10.805.
+    expect(n).toBeGreaterThanOrEqual(1500);
     // 4492 lignes au templet 1.10.804 : un compte qui s'en approche signale que
-    // le filtre « boss d'encounters.json » a sauté.
-    expect(n).toBeLessThan(3000);
+    // le filtre « monstres d'encounters.json » a sauté.
+    expect(n).toBeLessThan(3500);
   });
 
   it('chaque cible a une identité, les stats de combat de base et un kit résolu', () => {

@@ -9255,13 +9255,7 @@
     },
     "aiType": "attack",
     "pushBack": true,
-    "pushUp": true,
-    "spawns": [
-      {
-        "dungeon": "100000000",
-        "level": 1
-      }
-    ]
+    "pushUp": true
   },
   "4000001": {
     "id": "4000001",

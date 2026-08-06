@@ -5870,11 +5870,23 @@
       "kr": "스토리(노멀)",
       "zh": "故事普通"
     },
+    "origin": {
+      "en": "Origin Normal",
+      "jp": "オリジンノーマル",
+      "kr": "오리진 노멀",
+      "zh": "起源普通"
+    },
     "normal_hard": {
       "en": "Story Hard",
       "jp": "ストーリーハード",
       "kr": "스토리 하드",
       "zh": "故事困难"
+    },
+    "origin_hard": {
+      "en": "Origin Hard",
+      "jp": "オリジンハード",
+      "kr": "오리진 하드",
+      "zh": "起源困难"
     },
     "raid_1": {
       "en": "Special Request: Ecology Study",
@@ -5971,6 +5983,20 @@
       "jp": "次元特異点",
       "kr": "차원 특이점",
       "zh": "次元奇点"
+    }
+  },
+  "storyFamilies": {
+    "story": {
+      "en": "Story",
+      "jp": "ストーリー",
+      "kr": "스토리",
+      "zh": "故事"
+    },
+    "origin": {
+      "en": "Origin Story",
+      "jp": "オリジンストーリー",
+      "kr": "오리진 스토리",
+      "zh": "起源剧情"
     }
   },
   "rankOptions": {

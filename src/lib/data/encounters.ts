@@ -52,6 +52,23 @@ export function getEncounter(id: string): DungeonRef | undefined {
 }
 
 /**
+ * FAMILLE story d'un slug de mode — pendant UI de `STORY_MODES` du générateur
+ * (datagen/generators/encounters.ts, même liste) : DM_NORMAL est éclaté par
+ * type de zone en story COURANTE (`normal`/`normal_hard`, zones refondues
+ * AGT_NEW_*) et ORIGIN STORY (`origin`/`origin_hard`, zones historiques
+ * S1-S4). `undefined` hors histoire.
+ */
+export function storyFamilyOf(
+  mode: string,
+): { family: 'story' | 'origin'; hard: boolean } | undefined {
+  if (mode === 'normal' || mode === 'normal_hard')
+    return { family: 'story', hard: mode === 'normal_hard' };
+  if (mode === 'origin' || mode === 'origin_hard')
+    return { family: 'origin', hard: mode === 'origin_hard' };
+  return undefined;
+}
+
+/**
  * Les donjons d'un même combat, du plus facile au plus dur.
  *
  * L'ordre vient de `difficulty.order` (donnée du jeu), jamais de l'ordre des
@@ -126,9 +143,18 @@ export function bossWaveMonsters(e: Encounter): DungeonMonster[] {
  * Un id absent du donjon est ignoré ICI (un même guide couvre plusieurs donjons
  * aux monstres distincts) ; c'est à l'appelant de vérifier qu'aucun id ne tombe
  * dans le vide sur TOUS ses donjons — sinon la carte disparaîtrait en silence.
+ *
+ * Dédup par (id, niveau) : depuis que la donnée émet une entrée PAR VAGUE
+ * (06/08/2026 — les vagues du calculateur), un monstre rejoué à même niveau
+ * sur deux vagues aurait DEUX cartes identiques ici ; une seule fait sens.
  */
 export function pickMonsters(e: Encounter, ids: readonly string[]): DungeonMonster[] {
-  return ids.flatMap((id) => e.monsters.filter((m) => m.id === id));
+  return ids.flatMap((id) => {
+    const seen = new Set<number>();
+    return e.monsters.filter(
+      (m) => m.id === id && !seen.has(m.level) && Boolean(seen.add(m.level)),
+    );
+  });
 }
 
 /**

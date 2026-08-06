@@ -209,10 +209,12 @@ describe('adventure — les guides désignent des donjons réels', () => {
     }
   });
 
-  it('les donjons vont du plus facile au plus dur (Story Normal puis Story Hard)', () => {
+  it('les donjons vont du plus facile au plus dur (Normal puis Hard)', () => {
     for (const g of guides) {
       const modes = encountersOfIds(g.dungeons!).map((e) => e.ref.mode);
-      expect(modes, g.slug).toEqual([...modes].sort()); // 'normal' < 'normal_hard'
+      // 'normal' < 'normal_hard' et 'origin' < 'origin_hard' (les stages
+      // d'avant la refonte sont l'Origin Story depuis le 06/08/2026).
+      expect(modes, g.slug).toEqual([...modes].sort());
     }
   });
 

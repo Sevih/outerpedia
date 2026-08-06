@@ -144,12 +144,14 @@ describe('encounters.json — invariants référentiels', () => {
     expect(missing).toEqual([]);
   });
 
-  it('vagues : tout-ou-rien par donjon, 1-based, non-décroissantes', () => {
+  it('vagues : tout-ou-rien par donjon, 1-based, non-décroissantes, counts ≥ 2', () => {
     // Contrat de `DungeonMonster.wave` : ÉMIS SEULEMENT si le donjon a
-    // plusieurs groupes (absent = combat en une vague), et la dédup garde la
-    // PREMIÈRE occurrence d'un monstre — des trous dans la séquence sont donc
-    // légitimes (une vague entière de doublons disparaît de la liste). Ce qui
-    // doit tenir : pas de mélange avec/sans dans un même donjon, valeurs ≥ 1,
+    // plusieurs groupes (absent = combat en une vague). La dédup est PAR
+    // VAGUE (06/08/2026 — les vagues du calculateur) : un monstre répété DANS
+    // sa vague porte `count` (≥ 2 quand présent, jamais 1 sérialisé), répété
+    // sur plusieurs vagues il a une entrée par vague — un même (id, niveau)
+    // ne se répète donc JAMAIS au sein d'une vague. Ce qui doit tenir en
+    // plus : pas de mélange avec/sans dans un même donjon, valeurs ≥ 1,
     // ordre du tableau = ordre d'engagement (non-décroissant).
     const bad: string[] = [];
     for (const [id, d] of dungeonEntries) {
@@ -167,6 +169,13 @@ describe('encounters.json — invariants référentiels', () => {
           break;
         }
         prev = m.wave!;
+      }
+      const seen = new Set<string>();
+      for (const m of ms) {
+        if (m.count !== undefined && m.count < 2) bad.push(`${id} : count ${m.count} sérialisé`);
+        const key = `${m.wave ?? 1}|${m.id}|${m.level}`;
+        if (seen.has(key)) bad.push(`${id} : doublon intra-vague ${key}`);
+        seen.add(key);
       }
     }
     expect(bad).toEqual([]);

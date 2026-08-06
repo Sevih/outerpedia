@@ -781,12 +781,15 @@ export function buildAssetManifest(): AssetRequest[] {
     candidates: ['CM_Goods_Guild_Coin'],
     domain: 'ui',
   });
-  // Tier-list maker : pool des BOSS — monstres `type: 'boss'` référencés par au
-  // moins une rencontre, dédupliqués par icône. MÊME règle que le wrapper de
-  // l'outil (src/app/[lang]/tools/_contents/tier-list-maker/index.tsx : les
-  // deux doivent rester alignées). Icône « 2… » = modèle de perso (face icon,
-  // dédupliquée par clé avec le domaine perso) ; sinon vignette MT_ sous le
-  // namespace boss existant (même clé que guides/sources — jamais deux copies).
+  // Monstres RÉFÉRENCÉS par une rencontre — TOUS types confondus, dédupliqués
+  // par icône. Deux consommateurs : le pool des boss du tier-list-maker
+  // (`type: 'boss'`, même règle que son wrapper) et le picker de cible du
+  // damage calculator, qui liste depuis le 06/08/2026 les VAGUES complètes
+  // des stages d'histoire — chaque renfort (`type: 'monster'`) a son portrait,
+  // sinon 404 (`MT_4041041`, remarque Sevih). Icône « 2… » = modèle de perso
+  // (face icon, dédupliquée par clé avec le domaine perso) ; sinon vignette
+  // MT_ sous le namespace boss existant (même clé que guides/sources — jamais
+  // deux copies).
   {
     const monsters = load('monsters.json') as Record<string, { type?: string; icon?: string }>;
     const encounters = load('encounters.json') as Record<string, { monsters?: { id: string }[] }>;
@@ -795,8 +798,7 @@ export function buildAssetManifest(): AssetRequest[] {
       for (const mo of enc.monsters ?? []) referenced.add(mo.id);
     const seenBossIcons = new Set<string>();
     for (const [mid, m] of Object.entries(monsters)) {
-      if (m.type !== 'boss' || !m.icon || !referenced.has(mid) || seenBossIcons.has(m.icon))
-        continue;
+      if (!m.icon || !referenced.has(mid) || seenBossIcons.has(m.icon)) continue;
       seenBossIcons.add(m.icon);
       if (m.icon.startsWith('2'))
         push({
@@ -813,6 +815,16 @@ export function buildAssetManifest(): AssetRequest[] {
           domain: 'ui',
         });
     }
+    // Fonds de RARETÉ des vignettes monstre (at_thumbnailmonsterruntime) :
+    // Normal / Magic / Rare — posés SOUS le portrait (`img.monsterSlot`),
+    // même namespace que les vignettes qu'ils encadrent.
+    for (const frame of ['Normal', 'Magic', 'Rare'])
+      push({
+        kind: 'image',
+        key: `images/ui/boss/MT_Slot_${frame}.webp`,
+        candidates: [`MT_Slot_${frame}`],
+        domain: 'ui',
+      });
   }
   // Catalogue d'items UNIFIÉ : TOUTES les icônes déclarées (items + monnaies +
   // costumes + overrides/créations curés) sous le namespace `images/items/`. Un
