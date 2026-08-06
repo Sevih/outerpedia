@@ -493,6 +493,9 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.boss_enrage_badge': 'Enrage',
   'tools.damage-calculator.target.lv_prefix': 'Nv',
   'tools.damage-calculator.target.pve_label': 'Counteract Strong Enemies',
+  // Picker visuel story (les titres de famille viennent du glossaire du jeu)
+  'tools.damage-calculator.target.back': 'Retour',
+  'tools.damage-calculator.target.wave_label': 'Vague {n}',
   // Target picker — mode tabs + manual form
   'tools.damage-calculator.target.tab.cascade': 'Préréglage',
   'tools.damage-calculator.target.tab.manual': 'Manuel',
@@ -604,6 +607,9 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.report.critical': 'Critique',
   'tools.damage-calculator.report.miss': 'Esquivé',
   'tools.damage-calculator.report.support_skills': 'Skills de soutien (sans carte) : {names}',
+  'tools.damage-calculator.report.unsupported': 'pas encore supporté',
+  'tools.damage-calculator.report.unsupported_hint':
+    'chaîne de hits pas encore extraite du jeu — cette ligne ne peut pas être calculée',
   'page.guides.title': 'Guides Outerplane',
   'page.guides.description':
     "Guides Outerplane pour les étapes d'aventure, les combats de Boss, les Guild Raid, les World Boss et les conseils débutants.",

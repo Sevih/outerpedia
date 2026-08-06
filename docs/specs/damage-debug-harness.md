@@ -1,4 +1,4 @@
-# Damage calculator — harnais de debug (DEV ONLY)
+# Damage calculator — harnais de debug
 
 > Cinquième volet : [damage-formula.md](./damage-formula.md) dit COMMENT le jeu
 > calcule, [damage-data-mapping.md](./damage-data-mapping.md) OÙ vit la donnée,
@@ -6,8 +6,12 @@
 > [damage-calculator-ui.md](./damage-calculator-ui.md) l'UI livrée. Ce document
 > spécifie l'outillage de MISE AU POINT du moteur : comment on voit ce qu'il
 > calcule, comment on le confronte au jeu réel, et comment on l'empêche de
-> régresser. **Tout ici est dev-only** — jamais rendu en production
-> (`process.env.NODE_ENV !== 'production'`, inliné par Next au build).
+> régresser. **Tout ici est du mode harnais** — actif d'office en build de dev,
+> et en production sur opt-in `?dev=1` dans l'URL (avant `z` — décision Sevih
+> 06/08/2026, flux beta testeurs : ils capturent des scénarios via `?dev=1`,
+> envoient le JSON ⧉, Sevih les rejoue via le bouton « Importer »). Le gate est
+> donc un ÉTAT runtime (`devMode`), plus un inline de build : le code du
+> harnais fait partie du bundle de prod, mais ne se REND jamais sans opt-in.
 
 ## 1. Ce qui existe déjà (27/07/2026)
 
@@ -188,7 +192,7 @@ Les fixtures ne servent pas qu'à l'œil : un test vitest les rejoue SANS UI.
 
 | Question                                                          | Statut                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| i18n du harnais (règle repo : tout libellé passe par les locales) | ✅ Exemption actée et implémentée (27/07) : harnais dev-only, libellés en dur (le titre « Debug » de la carte reste localisé)                                                                                                                                                                                                                                                                                                             |
+| i18n du harnais (règle repo : tout libellé passe par les locales) | ✅ Exemption actée et implémentée (27/07) : libellés du harnais en dur (le titre « Debug » de la carte reste localisé) ; maintenue le 06/08 avec l'opt-in `?dev=1` — le harnais est un outil de CONTRIBUTION, pas l'UI publique (le placeholder « pas encore supporté » de la table Résultat, lui, est public → locales)                                                                                                                  |
 | Tolérance par défaut                                              | ✅ TRANCHÉE (Sevih 03/08) : 0.5 % relatif, surchargable par fixture. C'est un réglage de MISE AU POINT : l'objectif à terme est 0 — on resserre au fil de la validation, on ne s'installe pas dans l'écart                                                                                                                                                                                                                                |
 | Les fixtures survivent-elles à un patch de jeu ?                  | ✅ TRANCHÉE (Sevih 03/08) : un patch n'invalide RIEN d'office — « pourquoi invalider si c'est toujours bon ? ». Le test anti-régression continue de rejouer TOUTES les fixtures contre les tables courantes : celle qui reste verte est toujours un témoin valide ; celle qui passe rouge avec un `gameVersion` ancien s'affiche « à revérifier en jeu » (badge), PAS « moteur cassé ». C'est le test lui-même qui départage, pas la date |
 
@@ -229,9 +233,9 @@ Les fixtures ne servent pas qu'à l'œil : un test vitest les rejoue SANS UI.
 > **Contraintes absolues.** Source de vérité = binaire libil2cpp 1.4.9 + tables
 > `.gamedata/parsed/` ; jamais de formule inventée, jamais `outerpedia-v2` ;
 > toute incertitude vit dans `damage-formula.md` § 12 et devient une étape
-> `unresolved`, jamais une valeur plausible. Le harnais est DEV ONLY
-> (`process.env.NODE_ENV !== 'production'`) : le bundle de prod ne doit pas le
-> contenir. UI : tokens Tailwind du projet uniquement (bg-scrim, bg-accent,
+> `unresolved`, jamais une valeur plausible. Le harnais est en mode HARNAIS
+> (build de dev, ou `?dev=1` en prod — cf. en-tête de cette spec) : il ne se
+> rend jamais sans opt-in. UI : tokens Tailwind du projet uniquement (bg-scrim, bg-accent,
 > text-warn…), jamais de couleur en dur. pnpm only ; ne JAMAIS lancer le
 > serveur dev ; `pnpm exec tsc --noEmit`, eslint et prettier sur chaque fichier
 > touché, `vitest run` sur les tests concernés ; commits uniquement sur

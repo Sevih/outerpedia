@@ -194,9 +194,36 @@ export interface DcTarget {
   /** Nom BRUT d'icône de monstre — l'URL est dérivée client (`monsterIcon`). */
   icon: string;
   element: string;
+  /** Rareté (BasicStar) — fond de la vignette (`img.monsterSlot`). */
+  rarity: number;
   spawns: DcSpawn[];
   /** Passifs de boss à impact sur les dégâts — chips auto, jamais togglables. */
   passives?: DcBossPassive[];
+  /**
+   * Navigation du picker VISUEL de l'histoire (modes story/origin story,
+   * demande Sevih 06/08/2026) : toggle Normal/Hard → saisons → épisodes →
+   * stages → vagues. Absent hors histoire — ces modes gardent la cascade de
+   * selects en attendant leur propre visuel.
+   */
+  story?: {
+    /** `story` = la story courante (refonte) ; `origin` = l'Origin Story. */
+    family: 'story' | 'origin';
+    hard: boolean;
+    season: number;
+    episode: number;
+    /** Titre localisé de l'épisode (la zone : « Outer City »). */
+    episodeName: string;
+    /** N° du stage DANS l'épisode (« 5-13 » = épisode 5, stage 13) — absent
+     *  sur l'intro sans clé du jeu (elle ouvre l'épisode). */
+    stage?: number;
+    /**
+     * Apparitions du monstre dans le stage, une entrée PAR VAGUE (1-based) :
+     * `count` = exemplaires engagés dans cette vague (absent = 1 — story 1-1
+     * aligne 2 × le même loup), `level` = niveau à cette vague.
+     */
+    waves: { wave: number; level: number; count?: number }[];
+    role: 'boss' | 'add';
+  };
 }
 
 export interface DcStatField {
@@ -273,6 +300,18 @@ export interface DcLabels {
     breakFlag: string;
     guildBuffFlag: string;
     titleBuffFlag: string;
+    /** Picker visuel story : familles (les 4 modes repliés en 2 entrées),
+     *  toggle de difficulté, navigation et vagues. */
+    familyStory: string;
+    familyOrigin: string;
+    diffNormal: string;
+    diffHard: string;
+    back: string;
+    /** Gabarit « Saison {n} ». */
+    seasonTpl: string;
+    episode: string;
+    /** Gabarit « Vague {n} ». */
+    waveTpl: string;
   };
   toolbar: { reset: string; copy: string; copied: string };
   context: {
@@ -301,6 +340,9 @@ export interface DcLabels {
     critical: string;
     miss: string;
     supportSkills: string;
+    /** Ligne dont la chaîne de hits n'est pas extraite (§ 12.4) — placeholder. */
+    unsupported: string;
+    unsupportedHint: string;
     loading: string;
     tablesError: string;
   };
@@ -374,13 +416,15 @@ const PREMIUM_STORE: StoreSpec<boolean> = {
   fallback: false,
 };
 
-// ── Cycle de capture des scénarios (DEV ONLY — libellés en dur, exemption
+// ── Cycle de capture des scénarios (harnais — libellés en dur, exemption
 // harnais § 5). La saisie « en jeu » vit DANS la table Résultat, le cycle
 // save/load au-dessus du panneau Debug (Sevih 05/08/2026).
 
-/** Vrai en dev : la saisie « en jeu », le cycle save/load et le panneau Debug
- *  ne se rendent jamais en production. */
-const DEV = process.env.NODE_ENV !== 'production';
+/** Build de dev : le harnais est TOUJOURS actif. En production il reste caché
+ *  sauf opt-in par URL `?dev=1` (avant `z`) — les beta testeurs capturent des
+ *  scénarios et envoient le JSON ⧉ à Sevih (06/08/2026). Le gate est donc un
+ *  ÉTAT runtime, plus un inline de build : le code du harnais part en prod. */
+const DEV_BUILD = process.env.NODE_ENV !== 'production';
 
 /** Un scénario sauvegardé = UNE ligne de dégâts (Sevih 05/08/2026) : le `+`
  *  d'une cellule de la table Résultat fige le `z` courant (TOUS les réglages
@@ -400,6 +444,8 @@ interface SavedScenario {
   codex?: number;
   guild?: number;
   premium?: boolean;
+  /** Quirks du compte à la capture (nœud → niveau, seuls les > 0). */
+  quirks?: Record<string, number>;
   gameVersion: string;
   savedAt: string;
 }
@@ -605,6 +651,54 @@ function SlotTile({
 const monsterIcon = (icon: string): string =>
   icon.startsWith('2') ? img.face(icon) : img.boss(`MT_${icon}`);
 
+/**
+ * Portrait de MONSTRE complet — LE MÊME rendu partout (cible sélectionnée,
+ * listes du picker, vagues du browser story — demande Sevih 06/08/2026) :
+ * fond de RARETÉ du jeu (`MT_Slot_Normal/Magic/Rare` selon BasicStar) sous la
+ * vignette, overlays élément/classe/boss/niveau par-dessus. À dimensionner
+ * par `className` (carré).
+ */
+function MonsterPortrait({
+  tg,
+  level,
+  className,
+}: {
+  tg: Pick<DcTarget, 'icon' | 'element' | 'cls' | 'rarity' | 'name' | 'story'>;
+  level?: number;
+  className: string;
+}) {
+  return (
+    <span className={`relative block shrink-0 overflow-hidden rounded ${className}`}>
+      <img
+        src={img.monsterSlot(tg.rarity)}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 h-full w-full"
+        loading="lazy"
+      />
+      {/* Vignette plus petite que son fond et CENTRÉE : le fond de rareté
+          fait aussi office de bordure (demande Sevih 06/08/2026). Taille
+          EXPLICITE : une <img> absolue ne s'étire pas depuis ses insets
+          (élément remplacé, width:auto = taille intrinsèque — la bordure ne
+          se voyait qu'en haut/gauche). */}
+      <img
+        src={monsterIcon(tg.icon)}
+        alt={tg.name}
+        className="absolute top-[4%] left-[4%] h-[92%] w-[92%] rounded object-cover"
+        loading="lazy"
+      />
+      {/* Hors histoire les presets sont tous des boss ; en story le rôle vient
+          de la donnée (les renforts n'ont pas la bannière boss). */}
+      <TileOverlays
+        element={tg.element}
+        cls={tg.cls}
+        boss={!tg.story || tg.story.role === 'boss'}
+        level={level}
+      />
+    </span>
+  );
+}
+
 const ROW_CLASS =
   'hover:bg-surface-raised/80 flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm transition';
 const SELECT_CLASS =
@@ -650,15 +744,16 @@ function TileOverlays({
           className="absolute top-0 right-0 h-[34%] w-[34%] drop-shadow-md"
         />
       )}
+      {/* Classe à la MÊME taille que l'élément (demande Sevih 06/08/2026). */}
       {cls && (
         <img
           src={img.klass(cls)}
           alt={cls}
-          className="absolute top-[40%] right-0 h-[24%] w-[24%] drop-shadow-md"
+          className="absolute top-[36%] right-0 h-[34%] w-[34%] drop-shadow-md"
         />
       )}
       {level != null && (
-        <span className="bg-scrim/70 text-content absolute top-[64%] right-0 rounded-l px-0.5 font-mono text-[9px] font-bold tabular-nums">
+        <span className="bg-scrim/70 text-content absolute top-[72%] right-0 rounded-l px-0.5 font-mono text-[9px] font-bold tabular-nums">
           {level}
         </span>
       )}
@@ -1011,8 +1106,11 @@ export function DamageCalculatorBrowser({
   // PV actuels de l'attaquant (%) — ne sert qu'aux sets « missing Health ».
   const [hpPct, setHpPct] = useState('100');
 
-  // ── Cycle de capture (DEV) : saisie « en jeu » dans la table Résultat, un
-  // scénario = UNE ligne sauvée d'un `+` (Sevih 05/08/2026). ──
+  // ── Cycle de capture (harnais) : saisie « en jeu » dans la table Résultat,
+  // un scénario = UNE ligne sauvée d'un `+` (Sevih 05/08/2026). ──
+  // Harnais visible : toujours en build de dev, opt-in `?dev=1` en prod (beta
+  // testeurs). Posé APRÈS le mount (lecture d'URL) — le SSR rend sans harnais.
+  const [devMode, setDevMode] = useState(DEV_BUILD);
   // `obs` : valeur constatée EN JEU par ligne, clé `slot|branch` (flattenReport).
   const [obs, setObs] = useState<Record<string, string>>({});
   // Branches OBSERVABLES : quelles colonnes prennent une saisie. `miss` coché
@@ -1039,6 +1137,10 @@ export function DamageCalculatorBrowser({
     setFlash(msg);
     window.setTimeout(() => setFlash(null), 2500);
   };
+  // « Importer » : coller le JSON ⧉ reçu d'un beta testeur (le flux inverse
+  // de ⧉ — eux capturent via `?dev=1`, Sevih vérifie ici, 06/08/2026).
+  const [importOpen, setImportOpen] = useState(false);
+  const [importTxt, setImportTxt] = useState('');
 
   const attacker = attackerId ? chars.find((c) => c.id === attackerId) : undefined;
   const kit = attackerId ? (kits[attackerId] ?? []) : [];
@@ -1243,7 +1345,13 @@ export function DamageCalculatorBrowser({
   useEffect(() => {
     if (didHydrate.current) return;
     didHydrate.current = true;
-    const zRaw = new URLSearchParams(window.location.search).get('z');
+    const params = new URLSearchParams(window.location.search);
+    // `?dev=1` (avant `z` dans les liens partagés) : active le harnais en
+    // production — lu AVANT le retour anticipé, un lien peut n'avoir que lui.
+    if (params.get('dev') === '1') {
+      void Promise.resolve().then(() => setDevMode(true));
+    }
+    const zRaw = params.get('z');
     if (!zRaw) return;
     let parsed: UrlState | null = null;
     try {
@@ -1269,6 +1377,7 @@ export function DamageCalculatorBrowser({
     codex?: number;
     guild?: number;
     premium?: boolean;
+    quirks?: Record<string, number>;
   }): boolean => {
     let st: UrlState | null = null;
     try {
@@ -1282,6 +1391,14 @@ export function DamageCalculatorBrowser({
     setCodexLvl(f.codex ?? 0);
     setGuildLvl(f.guild ?? 0);
     setPremiumOn(f.premium === true);
+    // Quirks capturés avec le scénario : restaurés tels quels (réglage de
+    // compte — un scénario d'un autre compte doit rejouer SES quirks). Un
+    // scénario SANS quirks (capturé avant le branchement) ne dit rien : on ne
+    // touche pas aux réglages courants — le re-tamponnage (« Charger » puis
+    // `+`) refige alors la ligne AVEC les quirks du compte.
+    if (f.quirks) {
+      setQuirkLvls(Object.fromEntries(Object.entries(f.quirks).map(([k, v]) => [Number(k), v])));
+    }
     return true;
   };
 
@@ -1345,10 +1462,16 @@ export function DamageCalculatorBrowser({
     return Object.keys(z).length ? LZString.compressToEncodedURIComponent(JSON.stringify(z)) : '';
   };
 
+  /** Query string de l'état courant : `dev=1` (mode harnais collant — il doit
+   *  survivre aux réécritures d'URL) AVANT `z`. */
+  const buildQuery = (packed: string): string => {
+    const parts = [...(devMode && !DEV_BUILD ? ['dev=1'] : []), ...(packed ? [`z=${packed}`] : [])];
+    return parts.length ? `?${parts.join('&')}` : '';
+  };
+
   /** URL de partage de l'état courant — et l'écrit dans la barre au passage. */
   const flushShareUrl = (): string => {
-    const packed = packZ();
-    const url = `${window.location.pathname}${packed ? `?z=${packed}` : ''}${window.location.hash}`;
+    const url = `${window.location.pathname}${buildQuery(packZ())}${window.location.hash}`;
     window.history.replaceState(null, '', url);
     return `${window.location.origin}${url}`;
   };
@@ -1359,11 +1482,10 @@ export function DamageCalculatorBrowser({
   useEffect(() => {
     if (!didHydrate.current) return;
     const timer = window.setTimeout(() => {
-      const packed = packZ();
       window.history.replaceState(
         null,
         '',
-        `${window.location.pathname}${packed ? `?z=${packed}` : ''}${window.location.hash}`,
+        `${window.location.pathname}${buildQuery(packZ())}${window.location.hash}`,
       );
     }, 400);
     return () => window.clearTimeout(timer);
@@ -1436,10 +1558,15 @@ export function DamageCalculatorBrowser({
   // Entrées + rapport du scénario COURANT — recalculés au rendu (quelques ms
   // sur un kit complet) ; null tant que le scénario est incomplet ou les
   // tables absentes. Le détail d'une erreur moteur vit dans le panneau Debug.
+  // Quirks ACTIFS du compte (niveau > 0) — réglage hors z, comme le Codex.
+  const activeQuirks: Record<string, number> = Object.fromEntries(
+    Object.entries(quirkLvls).filter(([, v]) => v > 0),
+  );
   const scenarioInputs = buildInputsFromZ(buildZ(), {
     codexLevel: codexLvl,
     guildLevel: guildLvl,
     premiumHp: premiumOn,
+    quirks: activeQuirks,
     resolvePreset: resolvePresetLocal,
     resolveGear: resolveGearLocal,
   });
@@ -1458,7 +1585,7 @@ export function DamageCalculatorBrowser({
   const fmtStat = (v: number | undefined, percent: boolean): string =>
     v === undefined ? '—' : percent ? `${v / 10}%` : v.toLocaleString();
 
-  // ── Cycle de capture (DEV) : un scénario = UNE ligne de dégâts ──
+  // ── Cycle de capture (harnais) : un scénario = UNE ligne de dégâts ──
   // Le `+` d'une cellule fige z (TOUS les réglages UI) + réglages de compte +
   // la ligne (slot × branche) + la valeur EN JEU saisie.
   const saveCell = (slot: string, branch: DamageBranch, real: number) => {
@@ -1472,6 +1599,7 @@ export function DamageCalculatorBrowser({
       ...(codexLvl > 0 ? { codex: codexLvl } : {}),
       ...(guildLvl > 0 ? { guild: guildLvl } : {}),
       ...(premiumOn ? { premium: true } : {}),
+      ...(Object.keys(activeQuirks).length ? { quirks: activeQuirks } : {}),
       gameVersion: ENGINE_GAME_VERSION,
       savedAt: new Date().toISOString(),
     };
@@ -1485,8 +1613,12 @@ export function DamageCalculatorBrowser({
   // Calculés des scénarios sauvegardés — REJOUÉS à l'affichage par le même
   // pont, jamais stockés : un moteur qui bouge se voit immédiatement dans le
   // Δ. Pas de useMemo : le React Compiler mémoïse seul.
-  const savedCalcs = (): Map<string, number> => {
-    const out = new Map<string, number>();
+  const savedCalcs = (): { calcs: Map<string, number>; pending: Set<string> } => {
+    const calcs = new Map<string, number>();
+    // Lignes EN ATTENTE : le slot existe mais sa chaîne de hits est irrésolue
+    // (§ 12.4) — la valeur en jeu est gardée, le Δ attendra le moteur.
+    const pending = new Set<string>();
+    const out = { calcs, pending };
     if (!dmgData) return out;
     for (const s of savedScns) {
       try {
@@ -1498,6 +1630,7 @@ export function DamageCalculatorBrowser({
           codexLevel: s.codex ?? 0,
           guildLevel: s.guild ?? 0,
           premiumHp: s.premium === true,
+          ...(s.quirks ? { quirks: s.quirks } : {}),
           resolvePreset: resolvePresetLocal,
           resolveGear: resolveGearLocal,
         });
@@ -1509,7 +1642,18 @@ export function DamageCalculatorBrowser({
           s.branch === 'miss' ? { includeMissBranch: true } : {},
         );
         const hit = flattenReport(r).find((l) => l.slot === s.slot && l.branch === s.branch);
-        if (hit) out.set(scnKey(s), hit.damage);
+        if (hit) {
+          calcs.set(scnKey(s), hit.damage);
+        } else {
+          const base = s.slot.split('#')[0];
+          const stuck = r.slots.some(
+            (sl) =>
+              sl.hitsUnresolved === true &&
+              sl.report.states.length === 0 &&
+              `${sl.slot}${sl.burst !== undefined ? `b${sl.burst}` : ''}` === base,
+          );
+          if (stuck) pending.add(scnKey(s));
+        }
       } catch {
         // z illisible → pas de calculé, la ligne l'affiche « — »
       }
@@ -1538,9 +1682,9 @@ export function DamageCalculatorBrowser({
       ...(s.codex !== undefined ? { codex: s.codex } : {}),
       ...(s.guild !== undefined ? { guild: s.guild } : {}),
       ...(s.premium ? { premium: true } : {}),
+      ...(s.quirks ? { quirks: s.quirks } : {}),
       gameVersion: s.gameVersion,
       observed: [{ slot: s.slot, branch: s.branch, damage: s.real }],
-      notes: '',
     };
     void navigator.clipboard
       .writeText(JSON.stringify(fixture, null, 2))
@@ -1550,8 +1694,67 @@ export function DamageCalculatorBrowser({
   const deleteScenario = (s: SavedScenario) =>
     setSavedScns((prev) => prev.filter((x) => scnKey(x) !== scnKey(s)));
 
-  // Rejoué une fois par rendu (vide en prod : aucun scénario n'y existe).
-  const savedCalcMap = DEV ? savedCalcs() : new Map<string, number>();
+  // Import : une fixture ⧉ (ou un tableau de fixtures) → un scénario sauvé
+  // PAR ligne observée, upsert par clé (z + slot + branche) comme le `+`.
+  const importScenarios = () => {
+    let parsed: unknown = null;
+    try {
+      parsed = JSON.parse(importTxt);
+    } catch {
+      say('JSON illisible — rien importé');
+      return;
+    }
+    const list = (Array.isArray(parsed) ? parsed : [parsed]) as Partial<DamageFixture>[];
+    const entries: SavedScenario[] = [];
+    for (const f of list) {
+      if (typeof f?.z !== 'string' || !Array.isArray(f.observed)) continue;
+      // Libellés d'affichage : le nom ⧉ suit « atk vs tgt · ligne » — sinon
+      // le nom entier sert d'attaquant (affichage seulement, le z fait foi).
+      const name = typeof f.name === 'string' ? f.name : '';
+      const m = /^(.+?) vs (.+?)(?: · .+)?$/.exec(name);
+      for (const o of f.observed) {
+        const branchOk =
+          typeof o?.branch === 'string' && ['normal', 'critical', 'miss'].includes(o.branch);
+        if (typeof o?.slot !== 'string' || !branchOk) continue;
+        if (typeof o.damage !== 'number' || o.damage <= 0) continue;
+        entries.push({
+          atk: m?.[1] ?? (name || 'import'),
+          tgt: m?.[2] ?? '?',
+          slot: o.slot,
+          branch: o.branch as DamageBranch,
+          real: o.damage,
+          z: f.z,
+          ...(typeof f.codex === 'number' && f.codex > 0 ? { codex: f.codex } : {}),
+          ...(typeof f.guild === 'number' && f.guild > 0 ? { guild: f.guild } : {}),
+          ...(f.premium === true ? { premium: true } : {}),
+          ...(f.quirks && typeof f.quirks === 'object' ? { quirks: f.quirks } : {}),
+          gameVersion: typeof f.gameVersion === 'string' ? f.gameVersion : '?',
+          savedAt: new Date().toISOString(),
+        });
+      }
+    }
+    if (!entries.length) {
+      say('aucune ligne valide — rien importé');
+      return;
+    }
+    setSavedScns((prev) => {
+      const next = [...prev];
+      for (const e of entries) {
+        const i = next.findIndex((s) => scnKey(s) === scnKey(e));
+        if (i >= 0) next[i] = e;
+        else next.push(e);
+      }
+      return next;
+    });
+    setImportTxt('');
+    setImportOpen(false);
+    say(`${entries.length} ligne(s) importée(s)`);
+  };
+
+  // Rejoué une fois par rendu (hors harnais : aucun scénario, maps vides).
+  const savedCalcMap = devMode
+    ? savedCalcs()
+    : { calcs: new Map<string, number>(), pending: new Set<string>() };
 
   const offensiveSkills = kit.filter((s) => s.offensive);
   const supportSkills = kit.filter((s) => !s.offensive);
@@ -2733,10 +2936,10 @@ export function DamageCalculatorBrowser({
                           br === 'critical' ? 'text-warn' : 'text-content-subtle'
                         }`}
                       >
-                        {/* DEV : la coche décide quelles colonnes prennent une
-                          saisie « en jeu » et partent dans la capture ; MISS
-                          cochée force sa branche (buff de miss chance). */}
-                        {DEV && (
+                        {/* Harnais : la coche décide quelles colonnes prennent
+                          une saisie « en jeu » et partent dans la capture ;
+                          MISS cochée force sa branche (buff de miss chance). */}
+                        {devMode && (
                           <input
                             type="checkbox"
                             checked={branchOn[br]}
@@ -2747,12 +2950,16 @@ export function DamageCalculatorBrowser({
                         {label}
                       </div>
                     ))}
-                    {offensiveSkills.flatMap((sk) => {
+                    {kit.flatMap((sk) => {
                       // Une ligne par SlotReport du moteur (le S2 déplie ses
-                      // états burst en sous-lignes B1..B3) ; un slot que le
-                      // moteur v1 ne calcule pas garde sa ligne à « — ».
+                      // états burst en sous-lignes B1..B3 — y compris quand le
+                      // S2 lui-même est un skill de SOUTIEN : chez Valentine le
+                      // burst améliore le S1 mais reste rattaché au slot S2).
+                      // Un slot offensif que le moteur v1 ne calcule pas garde
+                      // sa ligne à « — » ; un soutien sans burst n'a pas de
+                      // ligne (note sous la table).
                       const slotReports = report?.slots.filter((s) => s.slot === sk.slot) ?? [];
-                      const rows = slotReports.length ? slotReports : [null];
+                      const rows = slotReports.length ? slotReports : sk.offensive ? [null] : [];
                       return rows.map((sr, ri) => (
                         <Fragment key={`${sk.slot}:${sr?.burst ?? `p${ri}`}`}>
                           <div
@@ -2778,6 +2985,12 @@ export function DamageCalculatorBrowser({
                           </div>
                           {(['normal', 'critical', 'miss'] as const).map((br) => {
                             const states = sr?.report.states ?? [];
+                            // Slot présent mais chaîne de hits IRRÉSOLUE
+                            // (§ 12.4) : placeholder « pas encore supporté »
+                            // — et la saisie « en jeu » reste possible, la
+                            // valeur attendra le moteur (Sevih 06/08/2026).
+                            const unsupported =
+                              sr !== null && sr.hitsUnresolved === true && states.length === 0;
                             const branch = states[0]?.branches.find((b) => b.branch === br);
                             // Plusieurs états de chaîne : la cellule montre la
                             // chaîne de BASE, le détail passe en tooltip.
@@ -2794,7 +3007,7 @@ export function DamageCalculatorBrowser({
                                     )
                                     .join('\n')
                                 : undefined;
-                            // DEV : clé de saisie « en jeu » — la MÊME que
+                            // Harnais : clé de saisie « en jeu » — la MÊME que
                             // flattenReport (l'état de base quand il y a
                             // plusieurs chaînes).
                             const lineSlot = sr
@@ -2820,52 +3033,73 @@ export function DamageCalculatorBrowser({
                                     branch ? 'text-content' : 'text-content-muted'
                                   }`}
                                 >
-                                  {branch ? branch.totalDamage.toLocaleString() : '—'}
+                                  {branch ? (
+                                    branch.totalDamage.toLocaleString()
+                                  ) : unsupported && (br !== 'miss' || branchOn.miss) ? (
+                                    <span
+                                      title={L.report.unsupportedHint}
+                                      className="text-content-muted cursor-help font-sans text-[10px] font-medium italic"
+                                    >
+                                      {L.report.unsupported}
+                                    </span>
+                                  ) : (
+                                    '—'
+                                  )}
                                   {branch && detail !== undefined && (
                                     <span className="text-content-subtle">*</span>
                                   )}
                                   {/* `+` = sauvegarder CE scénario (cette ligne
-                                    + le z courant), à droite du calculé. */}
-                                  {DEV && branchOn[br] && branch && lineSlot !== null && obsKey && (
-                                    <button
-                                      type="button"
-                                      onClick={() => saveCell(lineSlot, br, Math.round(seen))}
-                                      disabled={!filled}
-                                      title={
-                                        filled
-                                          ? 'sauvegarder ce scénario'
-                                          : 'saisir la valeur en jeu d’abord'
-                                      }
-                                      className="text-success hover:text-accent cursor-pointer font-mono text-base leading-none font-extrabold disabled:cursor-not-allowed disabled:opacity-35"
-                                    >
-                                      +
-                                    </button>
-                                  )}
+                                    + le z courant), à droite du calculé — les
+                                    lignes « pas encore supporté » se capturent
+                                    AUSSI (valeur en attente du moteur). */}
+                                  {devMode &&
+                                    branchOn[br] &&
+                                    (branch || unsupported) &&
+                                    lineSlot !== null &&
+                                    obsKey && (
+                                      <button
+                                        type="button"
+                                        onClick={() => saveCell(lineSlot, br, Math.round(seen))}
+                                        disabled={!filled}
+                                        title={
+                                          filled
+                                            ? 'sauvegarder ce scénario'
+                                            : 'saisir la valeur en jeu d’abord'
+                                        }
+                                        className="text-success hover:text-accent cursor-pointer font-mono text-base leading-none font-extrabold disabled:cursor-not-allowed disabled:opacity-35"
+                                      >
+                                        +
+                                      </button>
+                                    )}
                                 </span>
-                                {DEV && branchOn[br] && branch && lineSlot !== null && obsKey && (
-                                  <span className="flex items-center gap-1.5">
-                                    <input
-                                      value={obs[obsKey] ?? ''}
-                                      onChange={(e) =>
-                                        setObs((p) => ({ ...p, [obsKey]: e.target.value }))
-                                      }
-                                      inputMode="numeric"
-                                      placeholder="en jeu"
-                                      className="border-line-subtle bg-surface-sunken/70 text-content focus:border-accent h-6 w-24 rounded border px-1.5 text-right font-mono text-[11px] outline-none"
-                                    />
-                                    <span
-                                      className={`w-14 text-center font-mono text-[10px] ${
-                                        delta === undefined
-                                          ? 'text-content-subtle'
-                                          : Math.abs(delta) <= DEFAULT_TOLERANCE
-                                            ? 'text-success'
-                                            : 'text-danger'
-                                      }`}
-                                    >
-                                      {delta !== undefined ? `${delta.toFixed(2)}%` : 'Δ'}
+                                {devMode &&
+                                  branchOn[br] &&
+                                  (branch || unsupported) &&
+                                  lineSlot !== null &&
+                                  obsKey && (
+                                    <span className="flex items-center gap-1.5">
+                                      <input
+                                        value={obs[obsKey] ?? ''}
+                                        onChange={(e) =>
+                                          setObs((p) => ({ ...p, [obsKey]: e.target.value }))
+                                        }
+                                        inputMode="numeric"
+                                        placeholder="en jeu"
+                                        className="border-line-subtle bg-surface-sunken/70 text-content focus:border-accent h-6 w-24 rounded border px-1.5 text-right font-mono text-[11px] outline-none"
+                                      />
+                                      <span
+                                        className={`w-14 text-center font-mono text-[10px] ${
+                                          delta === undefined
+                                            ? 'text-content-subtle'
+                                            : Math.abs(delta) <= DEFAULT_TOLERANCE
+                                              ? 'text-success'
+                                              : 'text-danger'
+                                        }`}
+                                      >
+                                        {delta !== undefined ? `${delta.toFixed(2)}%` : 'Δ'}
+                                      </span>
                                     </span>
-                                  </span>
-                                )}
+                                  )}
                               </div>
                             );
                           })}
@@ -2888,22 +3122,33 @@ export function DamageCalculatorBrowser({
         </div>
       )}
 
-      {/* Cycle de capture (DEV) : sauvegarde + brouillons de scénarios — la
-        saisie « en jeu » vit DANS la table Résultat ci-dessus (checkbox par
+      {/* Cycle de capture (harnais) : sauvegarde + brouillons de scénarios —
+        la saisie « en jeu » vit DANS la table Résultat ci-dessus (checkbox par
         colonne de branche). AU-DESSUS du panneau Debug (Sevih 05/08/2026). */}
-      {tab === 'calc' && DEV && (
+      {tab === 'calc' && devMode && (
         <section className="border-line-subtle bg-surface-raised/60 space-y-3 rounded-xl border p-3.5">
           <div className="flex flex-wrap items-center gap-2.5">
             <span className="text-content-subtle text-[10px] font-bold tracking-[0.14em] uppercase">
               Scénarios
             </span>
-            <span className="text-warn border-warn/35 bg-warn/10 rounded border px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-wide">
-              DEV ONLY
+            <span
+              title="build de dev, ou ?dev=1 dans l'URL"
+              className="text-warn border-warn/35 bg-warn/10 rounded border px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-wide"
+            >
+              HARNAIS
             </span>
             <span className="text-content-subtle text-[11px]">
               un scénario = une ligne (le « + » d&apos;une cellule Résultat) · calculé REJOUÉ à
               l&apos;affichage · ⧉ = fixture à committer dans src/lib/damage/fixtures/
             </span>
+            <button
+              type="button"
+              onClick={() => setImportOpen((v) => !v)}
+              title="coller le JSON ⧉ d'un testeur"
+              className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-accent h-6 cursor-pointer rounded border px-2 font-mono text-[10px]"
+            >
+              Importer
+            </button>
             <span className="flex-1" />
             {flash && (
               <span className="text-success border-success/40 bg-surface-sunken rounded-md border px-2.5 py-1 font-mono text-[10px]">
@@ -2911,6 +3156,37 @@ export function DamageCalculatorBrowser({
               </span>
             )}
           </div>
+          {importOpen && (
+            <div className="space-y-2">
+              <textarea
+                value={importTxt}
+                onChange={(e) => setImportTxt(e.target.value)}
+                placeholder="coller ici le JSON ⧉ d'un testeur (une fixture, ou un tableau de fixtures)"
+                rows={5}
+                className="border-line-subtle bg-surface-sunken/70 text-content focus:border-accent w-full rounded border px-2 py-1.5 font-mono text-[11px] outline-none"
+              />
+              <div className="flex gap-1.5">
+                <button
+                  type="button"
+                  onClick={importScenarios}
+                  disabled={!importTxt.trim()}
+                  className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-accent h-6 cursor-pointer rounded border px-2 font-mono text-[10px] disabled:cursor-not-allowed disabled:opacity-35"
+                >
+                  Ajouter
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setImportOpen(false);
+                    setImportTxt('');
+                  }}
+                  className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-danger h-6 cursor-pointer rounded border px-2 font-mono text-[10px]"
+                >
+                  Annuler
+                </button>
+              </div>
+            </div>
+          )}
           {/* Table de comparaison : atk vs cible · en jeu vs calculé · Δ. */}
           <div className="border-line-subtle bg-surface-sunken/70 overflow-x-auto rounded-lg border">
             {savedScns.length ? (
@@ -2923,7 +3199,10 @@ export function DamageCalculatorBrowser({
                   <span />
                 </div>
                 {savedScns.map((s) => {
-                  const calc = savedCalcMap.get(scnKey(s));
+                  const calc = savedCalcMap.calcs.get(scnKey(s));
+                  // EN ATTENTE : slot rejoué mais chaîne de hits irrésolue
+                  // (§ 12.4) — la valeur en jeu attend le moteur.
+                  const isPending = savedCalcMap.pending.has(scnKey(s));
                   const delta = calc !== undefined ? ((calc - s.real) / s.real) * 100 : undefined;
                   const cls =
                     delta === undefined
@@ -2955,7 +3234,18 @@ export function DamageCalculatorBrowser({
                         {s.real.toLocaleString()}
                       </span>
                       <span className="text-content-muted text-right">
-                        {calc !== undefined ? calc.toLocaleString() : '—'}
+                        {calc !== undefined ? (
+                          calc.toLocaleString()
+                        ) : isPending ? (
+                          <span
+                            title="chaîne de hits irrésolue (§ 12.4) — valeur gardée, le Δ attendra le moteur"
+                            className="text-warn cursor-help text-[10px]"
+                          >
+                            § 12.4
+                          </span>
+                        ) : (
+                          '—'
+                        )}
                       </span>
                       <span className={`text-right ${cls}`}>
                         {delta !== undefined ? delta.toFixed(3) : '—'}
@@ -2998,10 +3288,10 @@ export function DamageCalculatorBrowser({
         </section>
       )}
 
-      {/* DEV ONLY (Sevih 27/07/2026) — spec docs/specs/damage-debug-harness.md ;
+      {/* HARNAIS (Sevih 27/07/2026) — spec docs/specs/damage-debug-harness.md ;
         libellés en dur (§ 5). Branché sur le moteur : l'état courant passe par
         le pont partagé (buildInputsFromZ) — le même chemin que fixtures.test.ts. */}
-      {tab === 'calc' && DEV && (
+      {tab === 'calc' && devMode && (
         <DebugHarness
           state={debugState}
           skills={offensiveSkills.map((s) => ({ slot: s.slot, name: s.name }))}
@@ -3012,13 +3302,9 @@ export function DamageCalculatorBrowser({
           guildLevel={guildLvl}
           premiumHp={premiumOn}
           includeMiss={branchOn.miss}
+          quirks={activeQuirks}
           data={dmgData}
           dataErr={dmgErr}
-          extraIgnored={[
-            // Hors-v1 que le pont ne peut pas voir depuis z (défauts omis).
-            ...(ee && eeOwned ? ['EE — passif § 15 hors v1'] : []),
-            ...(Object.values(quirkLvls).some((v) => v > 0) ? ['quirks — hors v1'] : []),
-          ]}
         />
       )}
     </div>
@@ -3325,11 +3611,247 @@ function SetsSlot({
 }
 
 /**
- * Picker de cible en MODALE, tout en SELECTS (demande Sevih 27/07/2026) :
- * mode → cascade portée par la donnée (`path` : Saison puis Épisode en
- * histoire, ligue de world boss, phase de guild raid, élément…) → liste des
- * entrées. Chaque niveau n'apparaît que si le mode le porte, et se vide quand
- * l'amont change. La recherche traverse la sélection courante.
+ * Browser VISUEL de l'histoire (Story / Origin Story — demande Sevih
+ * 06/08/2026) : toggle Normal/Hard (rendu ROUGEÂTRE en hard), puis
+ * saisons → épisodes (portrait du boss de l'épisode) → stages à combat
+ * (accordéon des N vagues — TOUS les monstres d'une vague sont ciblables,
+ * pas seulement le boss). Les stages sans combat n'existent pas dans la
+ * donnée (aucun spawn) : rien à masquer.
+ */
+function StoryTargetBrowser({
+  entries,
+  labels,
+  onPick,
+}: {
+  /** Entrées de la famille (story OU origin), les deux difficultés mêlées. */
+  entries: DcTarget[];
+  labels: DcLabels;
+  onPick: (id: string) => void;
+}) {
+  const [hard, setHard] = useState(false);
+  const [season, setSeason] = useState<number | null>(null);
+  const [episode, setEpisode] = useState<number | null>(null);
+  /** Stage déplié (id de donjon) — accordéon des vagues. */
+  const [openStage, setOpenStage] = useState<string | null>(null);
+
+  // Difficulté courante : Normal et Hard sont des DONJONS distincts (ids
+  // disjoints), la sélection saison/épisode survit au toggle (mêmes numéros
+  // des deux côtés), le stage déplié non.
+  const pool = entries.filter((tg) => tg.story?.hard === hard);
+  const seasons = [...new Set(pool.map((tg) => tg.story!.season))].sort((a, b) => a - b);
+  const inSeason = season != null ? pool.filter((tg) => tg.story!.season === season) : [];
+  const inEpisode = episode != null ? inSeason.filter((tg) => tg.story!.episode === episode) : [];
+
+  const dungeonIdOf = (tg: DcTarget) => tg.id.slice(0, tg.id.lastIndexOf(':'));
+  /** Boss « d'affiche » d'un lot d'entrées : le boss du stage le plus haut. */
+  const posterOf = (list: DcTarget[]): DcTarget | undefined => {
+    let best: DcTarget | undefined;
+    for (const tg of list) {
+      if (tg.story!.role !== 'boss') continue;
+      if (!best || (tg.story!.stage ?? 0) >= (best.story!.stage ?? 0)) best = tg;
+    }
+    return best ?? list[list.length - 1];
+  };
+
+  const episodes = season != null ? [...new Set(inSeason.map((tg) => tg.story!.episode))] : [];
+  episodes.sort((a, b) => a - b);
+
+  /** Stages de l'épisode, dans l'ordre du jeu (l'intro sans numéro ouvre). */
+  const stages: { id: string; label: string; poster: DcTarget | undefined; list: DcTarget[] }[] =
+    [];
+  if (episode != null) {
+    const byStage = new Map<string, DcTarget[]>();
+    for (const tg of inEpisode) {
+      const did = dungeonIdOf(tg);
+      const list = byStage.get(did);
+      if (list) list.push(tg);
+      else byStage.set(did, [tg]);
+    }
+    for (const [did, list] of byStage)
+      stages.push({ id: did, label: list[0].label, poster: posterOf(list), list });
+    stages.sort((a, b) => (a.list[0].story!.stage ?? 0) - (b.list[0].story!.stage ?? 0));
+  }
+
+  // Rougeâtre en Hard (demande Sevih) : la teinte porte sur le CONTENEUR et
+  // les cartes — tokens danger du thème, jamais de rouge Tailwind brut.
+  const cardTint = hard
+    ? 'bg-danger/10 hover:bg-danger/20'
+    : 'bg-surface-sunken/50 hover:bg-surface-raised/80';
+  const CARD = `flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm transition ${cardTint}`;
+
+  const back = (onClick: () => void, text: string) => (
+    <button
+      type="button"
+      onClick={onClick}
+      className="text-content-muted hover:text-content flex cursor-pointer items-center gap-1 text-xs transition"
+    >
+      <span aria-hidden>←</span> {text}
+    </button>
+  );
+
+  return (
+    <div
+      className={`space-y-2 rounded-xl p-2 ring-1 transition ${
+        hard ? 'bg-danger/5 ring-danger/25' : 'ring-line-subtle'
+      }`}
+    >
+      <div className="flex items-center justify-between gap-2">
+        <div className="border-line-subtle bg-surface-sunken/70 inline-flex overflow-hidden rounded-lg border text-xs">
+          <button
+            type="button"
+            onClick={() => {
+              setHard(false);
+              setOpenStage(null);
+            }}
+            className={`cursor-pointer px-3 py-1.5 font-semibold transition ${
+              hard ? 'text-content-muted hover:bg-surface-raised/60' : 'bg-accent text-accent-fg'
+            }`}
+          >
+            {labels.target.diffNormal}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setHard(true);
+              setOpenStage(null);
+            }}
+            className={`cursor-pointer px-3 py-1.5 font-semibold transition ${
+              hard ? 'bg-danger text-on-vivid' : 'text-content-muted hover:bg-surface-raised/60'
+            }`}
+          >
+            {labels.target.diffHard}
+          </button>
+        </div>
+        {season != null &&
+          back(
+            () => {
+              if (episode != null) {
+                setEpisode(null);
+                setOpenStage(null);
+              } else {
+                setSeason(null);
+              }
+            },
+            episode != null
+              ? labels.target.seasonTpl.replace('{n}', String(season))
+              : labels.target.back,
+          )}
+      </div>
+
+      {season == null ? (
+        <div className="grid gap-1.5 sm:grid-cols-2">
+          {seasons.map((n) => {
+            const eps = new Set(
+              pool.filter((tg) => tg.story!.season === n).map((tg) => tg.story!.episode),
+            );
+            return (
+              <button key={n} type="button" className={CARD} onClick={() => setSeason(n)}>
+                <span className="min-w-0 flex-col">
+                  <span className="font-semibold">
+                    {labels.target.seasonTpl.replace('{n}', String(n))}
+                  </span>
+                  <span className="text-content-subtle block text-[10px]">
+                    {eps.size} × {labels.target.episode}
+                  </span>
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      ) : episode == null ? (
+        <div className="grid gap-1.5 sm:grid-cols-2">
+          {episodes.map((n) => {
+            const list = inSeason.filter((tg) => tg.story!.episode === n);
+            const poster = posterOf(list);
+            return (
+              <button key={n} type="button" className={CARD} onClick={() => setEpisode(n)}>
+                {poster && <MonsterPortrait tg={poster} className="h-12 w-12" />}
+                <span className="min-w-0 flex-col">
+                  <span className="text-content-subtle block text-[10px] font-bold tracking-[0.14em] uppercase">
+                    {labels.target.episode} {n}
+                  </span>
+                  <span className="truncate font-semibold">{list[0].story!.episodeName}</span>
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="space-y-1">
+          {stages.map((st) => (
+            <div key={st.id}>
+              <button
+                type="button"
+                className={CARD}
+                onClick={() => setOpenStage(openStage === st.id ? null : st.id)}
+              >
+                {st.poster && <MonsterPortrait tg={st.poster} className="h-10 w-10" />}
+                <span className="min-w-0 flex-1 truncate font-semibold">{st.label}</span>
+                <span className="text-content-subtle text-[10px]" aria-hidden>
+                  {openStage === st.id ? '▾' : '▸'}
+                </span>
+              </button>
+              {openStage === st.id && (
+                <div className="border-line-subtle ml-3 space-y-1.5 border-l py-1.5 pl-2">
+                  {[...new Set(st.list.flatMap((tg) => tg.story!.waves.map((w) => w.wave)))]
+                    .sort((a, b) => a - b)
+                    .map((w) => (
+                      <div key={w}>
+                        <Eyebrow>{labels.target.waveTpl.replace('{n}', String(w))}</Eyebrow>
+                        <div className="grid gap-0.5 sm:grid-cols-2">
+                          {st.list
+                            .map((tg) => ({
+                              tg,
+                              occ: tg.story!.waves.find((x) => x.wave === w),
+                            }))
+                            .filter(({ occ }) => occ)
+                            .map(({ tg, occ }) => (
+                              <button
+                                key={tg.id}
+                                type="button"
+                                className={CARD}
+                                onClick={() => onPick(tg.id)}
+                              >
+                                <MonsterPortrait tg={tg} className="h-12 w-12" />
+                                <span className="min-w-0 flex-1 flex-col">
+                                  <span className="flex items-center gap-1.5">
+                                    <span className="truncate font-semibold">{tg.name}</span>
+                                    {/* Exemplaires multiples dans la vague
+                                        (story 1-1 : 2 × le même loup). */}
+                                    {(occ!.count ?? 1) > 1 && (
+                                      <span className="text-content-muted shrink-0 text-[11px] font-bold">
+                                        ×{occ!.count}
+                                      </span>
+                                    )}
+                                  </span>
+                                  <span className="text-content-subtle block text-[10px]">
+                                    {labels.target.lv}
+                                    {occ!.level}
+                                  </span>
+                                </span>
+                              </button>
+                            ))}
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Picker de cible en MODALE : mode → contenu. L'HISTOIRE (Story / Origin
+ * Story) a son picker VISUEL (`StoryTargetBrowser` — demande Sevih
+ * 06/08/2026) : ses 4 modes se replient en 2 entrées de famille, le toggle
+ * Normal/Hard vit dans le browser. Les autres modes gardent la cascade de
+ * selects portée par la donnée (`path` : ligue de world boss, phase de guild
+ * raid, élément…) en attendant leur propre visuel. La recherche traverse la
+ * sélection courante (en famille story, elle bascule sur la liste à plat).
  */
 function TargetPicker({
   targets,
@@ -3353,14 +3875,42 @@ function TargetPicker({
   const [search, setSearch] = useState('');
   const [mode, setMode] = useState('');
   const [path, setPath] = useState<string[]>([]);
+
+  // Les 4 modes story se REPLIENT en 2 familles (le toggle Normal/Hard vit
+  // dans le browser visuel) : leurs libellés de mode sortent de la liste,
+  // remplacés par une entrée par famille présente. Valeurs préfixées
+  // (`fam:`) — jamais confondues avec un libellé localisé.
+  const storyModeLabels = new Set<string>();
+  const famPresent = new Set<'story' | 'origin'>();
+  for (const tg of targets)
+    if (tg.story) {
+      storyModeLabels.add(tg.mode);
+      famPresent.add(tg.story.family);
+    }
+  const modeOptions: { value: string; label: string }[] = [
+    ...(famPresent.has('story') ? [{ value: 'fam:story', label: labels.target.familyStory }] : []),
+    ...(famPresent.has('origin')
+      ? [{ value: 'fam:origin', label: labels.target.familyOrigin }]
+      : []),
+    ...modes.filter((m) => !storyModeLabels.has(m)).map((m) => ({ value: m, label: m })),
+  ];
+  const fam =
+    mode === 'fam:story' ? ('story' as const) : mode === 'fam:origin' ? ('origin' as const) : null;
+
   const inMode = useMemo(
-    () => (mode ? targets.filter((tg) => tg.mode === mode) : targets),
-    [targets, mode],
+    () =>
+      fam
+        ? targets.filter((tg) => tg.story?.family === fam)
+        : mode
+          ? targets.filter((tg) => tg.mode === mode)
+          : targets,
+    [targets, mode, fam],
   );
   // Options de chaque niveau de cascade, dépendantes des choix amont : le
-  // niveau i+1 ne se peuple qu'une fois le niveau i choisi.
+  // niveau i+1 ne se peuple qu'une fois le niveau i choisi. (Jamais en
+  // famille story : la navigation est le browser visuel.)
   const levels: string[][] = [];
-  if (mode) {
+  if (mode && !fam) {
     let cascade = inMode;
     for (let i = 0; ; i++) {
       const seen = new Set<string>();
@@ -3398,18 +3948,7 @@ function TargetPicker({
           clearTitle={labels.clear}
           title={value?.name ?? labels.select}
         >
-          {value ? (
-            <span className="relative block h-full w-full">
-              <img
-                src={monsterIcon(value.icon)}
-                alt=""
-                className="h-full w-full object-cover"
-                loading="lazy"
-              />
-              {/* Tous les presets ciblent un BOSS (role de la donnée). */}
-              <TileOverlays element={value.element} cls={value.cls} boss level={level} />
-            </span>
-          ) : null}
+          {value ? <MonsterPortrait tg={value} level={level} className="h-full w-full" /> : null}
         </SlotTile>
         {value ? (
           <span className="min-w-0 flex-1">
@@ -3440,9 +3979,9 @@ function TargetPicker({
               className={SELECT_CLASS}
             >
               <option value="">{labels.target.all}</option>
-              {modes.map((m) => (
-                <option key={m} value={m}>
-                  {m}
+              {modeOptions.map((m) => (
+                <option key={m.value} value={m.value}>
+                  {m.label}
                 </option>
               ))}
             </select>
@@ -3471,7 +4010,16 @@ function TargetPicker({
             </label>
           ))}
         </div>
-        {filtered.length ? (
+        {fam && !q ? (
+          <StoryTargetBrowser
+            entries={inMode}
+            labels={labels}
+            onPick={(id) => {
+              onPick(id);
+              close();
+            }}
+          />
+        ) : filtered.length ? (
           <div className="grid gap-0.5 sm:grid-cols-2">
             {filtered.map((o) => (
               <button
@@ -3483,16 +4031,9 @@ function TargetPicker({
                   close();
                 }}
               >
-                <img src={monsterIcon(o.icon)} alt="" className="h-8 w-8 rounded" loading="lazy" />
+                <MonsterPortrait tg={o} className="h-10 w-10" />
                 <span className="min-w-0 flex-col">
-                  <span className="flex items-center gap-1.5">
-                    <span className="truncate font-semibold">{o.name}</span>
-                    <img
-                      src={img.element(o.element)}
-                      alt={o.element}
-                      className="h-3.5 w-3.5 shrink-0"
-                    />
-                  </span>
+                  <span className="truncate font-semibold">{o.name}</span>
                   <span className="text-content-subtle block truncate text-[10px]">
                     {[mode ? null : o.mode, ...(o.path ?? []), o.label].filter(Boolean).join(' · ')}
                   </span>

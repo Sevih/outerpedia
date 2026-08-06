@@ -75,6 +75,13 @@ export const img = {
     `${BASE}/images/ui/bg/TI_Slot_${SLOT_FRAME[grade] ?? 'Normal'}.webp`,
   /** Portrait d'un boss (`MT_*`, sources d'obtention d'équipement). */
   boss: (icon: string) => `${BASE}/images/ui/boss/${icon}.webp`,
+  /**
+   * Fond de rareté d'une vignette de MONSTRE (sprites `MT_Slot_*` du jeu,
+   * famille at_thumbnailmonsterruntime) : rareté 1 = Normal, 2 = Magic,
+   * 3+ = Rare — corrélé au type (mob de base / named / boss) dans les tables.
+   */
+  monsterSlot: (rarity: number) =>
+    `${BASE}/images/ui/boss/MT_Slot_${rarity >= 3 ? 'Rare' : rarity === 2 ? 'Magic' : 'Normal'}.webp`,
   /** Variante PNG (og:image des guides de boss — Discord/OG préfèrent le PNG). */
   bossPng: (icon: string) => `${BASE}/images/ui/boss/${icon}.png`,
   /**

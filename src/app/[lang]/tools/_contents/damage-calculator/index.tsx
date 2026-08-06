@@ -18,6 +18,7 @@ import {
   difficultyLabel,
   encounterSpawnContexts,
   modeLabel,
+  storyFamilyOf,
   type Encounter,
 } from '@/lib/data/encounters';
 import { getMonster } from '@/lib/data/monsters';
@@ -147,6 +148,11 @@ const GLOSS = glossariesData as unknown as {
   effectByKey: { buff: Record<string, string>; debuff: Record<string, string> };
   /** Noms localisés des éléments (niveaux de cascade du picker de cible). */
   elements: Record<string, LangDict>;
+  /** Titres officiels des familles story (« Story », « Origin Story ») —
+   *  entrées du picker de cible qui replient Normal/Hard en toggle. */
+  storyFamilies?: Record<string, LangDict>;
+  /** Titres localisés des modes (repli si une famille manquait au glossaire). */
+  modes?: Record<string, LangDict>;
 };
 
 /**
@@ -477,7 +483,9 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
   }
 
   // Presets de cible : TOUS les donjons peuplés et NON RETIRÉS d'encounters.json,
-  // UNE entrée PAR BOSS — de TOUTES les vagues, pas seulement la dernière : les
+  // UNE entrée PAR MONSTRE — par BOSS hors histoire, et TOUS rôles confondus en
+  // story/origin story (les vagues complètes du picker visuel, demande Sevih
+  // 06/08/2026). Toujours de TOUTES les vagues, pas seulement la dernière : les
   // ligues Very Hard/Extreme du world boss jouent leur phase 1 en vague 1 et la
   // phase 2 en vague 2 (`encounterSpawnContexts` partitionne l'échelle de rangs
   // par boss) ; ne garder que la vague finale CACHAIT les phases 1 (bug relevé
@@ -575,14 +583,20 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     const e: Encounter = { id, ref, monsters: ref.monsters };
     const diff = difficultyLabel(ref, lang, t);
     const dungeonName = lRec(ref.name, lang) || ref.name.en;
-    const seenBosses = new Set<string>();
-    for (const boss of e.monsters.filter((m) => m.role === 'boss')) {
-      // Un même boss peut réapparaître d'une vague à l'autre : une seule entrée.
-      if (seenBosses.has(boss.id)) continue;
-      seenBosses.add(boss.id);
-      const monster = getMonster(boss.id);
+    // STORY : TOUS les monstres du stage sont ciblables (les vagues du picker
+    // visuel — demande Sevih 06/08/2026) ; ailleurs, les boss seuls comme
+    // avant (le visuel propre de ces modes viendra plus tard).
+    const fam = storyFamilyOf(ref.mode);
+    const seenIds = new Set<string>();
+    for (const mon of fam ? e.monsters : e.monsters.filter((m) => m.role === 'boss')) {
+      // Un même monstre peut réapparaître d'une vague à l'autre (ou à un autre
+      // niveau) : une seule entrée — la PREMIÈRE, même dédup que le resolver
+      // node (`resolvePresetTarget`).
+      if (seenIds.has(mon.id)) continue;
+      seenIds.add(mon.id);
+      const monster = getMonster(mon.id);
       if (!monster) continue;
-      const spawns = encounterSpawnContexts(e, boss, lang).map((s, i) => {
+      const spawns = encounterSpawnContexts(e, mon, lang).map((s, i) => {
         // Stats EFFECTIVES au spawn — les défensives qui pèsent sur les dégâts
         // reçus : HP, DEF, DMG RED %, CDMG RED % (décision Sevih 27/07/2026).
         // Le calcul (`statAt` : niveau + adv + bossHp) et le mapping vivent
@@ -601,10 +615,17 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       if (!spawns.length) continue;
       const path = cascadeOf(ref, monster.element, diff);
       const isFloor = ref.mode === 'irregular_infiltrate' && ref.floor != null;
-      if (isFloor) floorOf.set(`${id}:${boss.id}`, ref.floor as number);
-      const passives = bossPassiveChips(boss.id);
+      if (isFloor) floorOf.set(`${id}:${mon.id}`, ref.floor as number);
+      const passives = bossPassiveChips(mon.id);
+      // Story : le libellé porte le NUMÉRO du stage comme en jeu
+      // (« 3-16. Part of the Plan ») — il nomme la carte du picker visuel et
+      // rend la recherche « 3-16 » possible. L'intro sans clé reste nue.
+      const storyLabel =
+        fam && ref.episode != null && ref.stage != null
+          ? `${ref.episode}-${ref.stage}. ${dungeonName}`
+          : dungeonName;
       targets.push({
-        id: `${id}:${boss.id}`,
+        id: `${id}:${mon.id}`,
         mode: modeLabel(ref, lang),
         // Slug BRUT : le buff de guilde (§ 16.2) se décide sur lui, jamais
         // sur le libellé localisé.
@@ -613,15 +634,41 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         // Le nom du donjon porte déjà stage/étage/difficulté quand le jeu les
         // nomme ; en infiltration tous les étages partagent le même libellé
         // (« Search Coordinates: Unknown ») → « Floor N » (extrait de la clé).
-        label: isFloor ? floorTpl.replace('{n}', String(ref.floor)) : dungeonName,
+        label: isFloor ? floorTpl.replace('{n}', String(ref.floor)) : storyLabel,
         name: lRec(monster.name, lang) || monster.name.en,
         cls: monster.class,
         // Nom BRUT : l'URL est dérivée côté client (`monsterIcon`) — inutile
         // de sérialiser ~700 URLs complètes (élagage Sevih 27/07/2026).
         icon: monster.icon,
         element: monster.element,
+        // Rareté (BasicStar) : choisit le FOND de la vignette (`monsterSlot`).
+        rarity: monster.rarity,
         spawns,
         ...(passives.length ? { passives } : {}),
+        // Navigation du picker visuel story — cf. `DcTarget.story`. Les vagues
+        // viennent de TOUTES les occurrences du monstre dans le donjon (la
+        // donnée émet une entrée par vague, avec `count` si exemplaires
+        // multiples — story 1-1 : 2 × le même loup en vague 1).
+        ...(fam && ref.season != null && ref.episode != null
+          ? {
+              story: {
+                family: fam.family,
+                hard: fam.hard,
+                season: ref.season,
+                episode: ref.episode,
+                episodeName: ref.area ? lRec(ref.area, lang) || ref.area.en : '',
+                ...(ref.stage != null ? { stage: ref.stage } : {}),
+                waves: e.monsters
+                  .filter((m) => m.id === mon.id)
+                  .map((m) => ({
+                    wave: m.wave ?? 1,
+                    level: m.level,
+                    ...(m.count && m.count > 1 ? { count: m.count } : {}),
+                  })),
+                role: mon.role,
+              },
+            }
+          : {}),
       });
     }
   }
@@ -696,6 +743,13 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     }))
     .filter((g) => g.nodes.length);
 
+  /** Titre officiel d'une famille story (glossaire `storyFamilies`), repli sur
+   *  le titre du mode NORMAL de la famille — jamais de texte écrit main. */
+  const famLabel = (family: string, modeSlug: string): string => {
+    const rec = GLOSS.storyFamilies?.[family] ?? GLOSS.modes?.[modeSlug];
+    return (rec && (lRec(rec, lang) || rec.en)) || family;
+  };
+
   const labels: DcLabels = {
     search: t('common.search'),
     select: t(k('common.select')),
@@ -763,6 +817,20 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       breakFlag: t(k('target.break_flag')),
       guildBuffFlag: t(k('target.guild_buff_flag')),
       titleBuffFlag: t(k('target.title_buff_flag')),
+      // Picker visuel story : les deux FAMILLES (le toggle Normal/Hard vit
+      // dans le browser, pas dans la liste des modes), la navigation et les
+      // vagues. Titres de famille = textes OFFICIELS du jeu (glossaire
+      // `storyFamilies`, curé dans mode-titles.json — jamais écrits main) ;
+      // repli sur le titre du mode normal de la famille si la curation
+      // manquait. Difficultés : les libellés transverses des guides.
+      familyStory: famLabel('story', 'normal'),
+      familyOrigin: famLabel('origin', 'origin'),
+      diffNormal: t('guides.difficulty.normal'),
+      diffHard: t('guides.difficulty.hard'),
+      back: t(k('target.back')),
+      seasonTpl,
+      episode: episodeLbl,
+      waveTpl: t(k('target.wave_label')),
     },
     toolbar: {
       reset: t(k('toolbar.reset')),
@@ -803,6 +871,8 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       critical: t(k('report.critical')),
       miss: t(k('report.miss')),
       supportSkills: t(k('report.support_skills')),
+      unsupported: t(k('report.unsupported')),
+      unsupportedHint: t(k('report.unsupported_hint')),
       loading: t(k('report.loading')),
       tablesError: t(k('report.tables_error')),
     },

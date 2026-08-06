@@ -1,8 +1,9 @@
 'use client';
 
 /**
- * Panneau Debug du damage calculator — DEV ONLY (jamais rendu en prod, le
- * parent le monte derrière `process.env.NODE_ENV !== 'production'`).
+ * Panneau Debug du damage calculator — HARNAIS (le parent le monte quand le
+ * mode harnais est actif : build de dev, ou opt-in `?dev=1` en production —
+ * flux beta testeurs, Sevih 06/08/2026).
  *
  * BRANCHÉ sur le moteur (harnais § 2–3) : l'état `?z=` courant passe par le
  * pont partagé (`buildInputsFromZ`) puis l'amont pur (`buildDamageReport`,
@@ -14,7 +15,8 @@
  * branchement du rapport public (05/08/2026), l'import dynamique vit dans
  * DamageCalculatorBrowser — un seul chargement pour le rapport ET le panneau.
  *
- * Libellés EN DUR (pas de locales) : exemption dev-only actée — spec § 5.
+ * Libellés EN DUR (pas de locales) : exemption harnais actée — spec § 5 (le
+ * public opt-in `?dev=1` est un outil de contribution, pas l'UI publique).
  */
 
 import { useState } from 'react';
@@ -126,6 +128,7 @@ export function DebugHarness({
   guildLevel,
   premiumHp,
   includeMiss,
+  quirks,
   data,
   dataErr,
   extraIgnored,
@@ -152,9 +155,11 @@ export function DebugHarness({
   /** Tables damage chargées par le PARENT (import dynamique partagé avec le
    *  rapport public — un seul chargement). Null tant qu'elles n'y sont pas. */
   data: DamageData | null;
+  /** QUIRKS actifs du compte (réglage hors z — comme codex/guilde). */
+  quirks: Record<string, number>;
   /** Erreur de chargement des tables, le cas échéant. */
   dataErr: string | null;
-  /** Hors-v1 que seul le parent sait (EE possédé, quirks actifs…). */
+  /** Hors-v1 que seul le parent sait. */
   extraIgnored?: string[];
 }) {
   const [open, setOpen] = useState<Record<string, boolean>>({});
@@ -167,6 +172,7 @@ export function DebugHarness({
     codexLevel,
     guildLevel,
     premiumHp,
+    quirks,
     resolvePreset,
     resolveGear,
   });
@@ -199,6 +205,7 @@ export function DebugHarness({
         codexLevel: f.codex ?? 0,
         guildLevel: f.guild ?? 0,
         premiumHp: f.premium === true,
+        ...(f.quirks ? { quirks: f.quirks } : {}),
         resolvePreset,
         resolveGear,
       });
@@ -225,10 +232,10 @@ export function DebugHarness({
           Debug
         </span>
         <span className="text-warn border-warn/35 bg-warn/10 rounded border px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-wide">
-          DEV ONLY
+          HARNAIS
         </span>
         <span className="text-content-subtle font-mono text-[9px]">
-          NODE_ENV !== &apos;production&apos;
+          build de dev, ou ?dev=1 dans l&apos;URL
         </span>
       </div>
 
@@ -401,6 +408,86 @@ export function DebugHarness({
               result.gearPassives.unresolved.length === 0 && (
                 <p className="text-content-subtle font-mono text-[10px]">aucun passif statique</p>
               )}
+          </div>
+        )}
+
+        {/* Passifs du KIT du perso (gear.ts § 16.3 côté joueur). */}
+        {result?.kitPassives && (
+          <div className={`${WELL} px-3 py-2`}>
+            <p className="text-content-subtle mb-1 font-mono text-[9px] tracking-wide uppercase">
+              passifs du kit (perso)
+            </p>
+            {result.kitPassives.entries.map((e, i) => (
+              <p
+                key={`${e.buffId}:${i}`}
+                className={`font-mono text-[10px] leading-relaxed ${
+                  e.active ? 'text-content-muted' : 'text-content-subtle'
+                }`}
+              >
+                [{e.sourceId}] {e.buffId} · {e.buff.type}
+                {e.buff.stat ? ` ${e.buff.stat}` : ''}
+                {e.buff.value !== undefined
+                  ? ` ${e.buff.value > 0 ? '+' : ''}${e.buff.value}${e.buff.applyingType === 'OAT_RATE' ? '‰' : ''}`
+                  : ''}
+                {e.condition ? ` · si ${e.condition}` : ''}
+                {e.side === 'allies'
+                  ? ' — alliés seulement'
+                  : e.active
+                    ? ''
+                    : ' — inactif (condition)'}
+              </p>
+            ))}
+            {result.kitPassives.dynamic.map((d, i) => (
+              <p key={`d:${d.buffId}:${i}`} className="text-content-subtle font-mono text-[10px]">
+                ⏱ [{d.sourceId}] {d.buffId} · {d.buff.type} · proc {d.createType} — non simulé
+                (représenter l&apos;état par une chip)
+              </p>
+            ))}
+            {result.kitPassives.unresolved.map((u, i) => (
+              <p key={`u:${u.buffId}:${i}`} className="text-warn font-mono text-[10px]">
+                ⚠ [{u.sourceId}] {u.buffId} : {u.reason} — contribution 0
+              </p>
+            ))}
+            {result.kitPassives.entries.length === 0 &&
+              result.kitPassives.dynamic.length === 0 &&
+              result.kitPassives.unresolved.length === 0 && (
+                <p className="text-content-subtle font-mono text-[10px]">aucun passif statique</p>
+              )}
+          </div>
+        )}
+
+        {/* QUIRKS du compte (nœuds d'éveil à buff — gear.ts). */}
+        {result?.quirkPassives && (
+          <div className={`${WELL} px-3 py-2`}>
+            <p className="text-content-subtle mb-1 font-mono text-[9px] tracking-wide uppercase">
+              quirks du compte
+            </p>
+            {result.quirkPassives.entries.map((e, i) => (
+              <p
+                key={`${e.buffId}:${i}`}
+                className={`font-mono text-[10px] leading-relaxed ${
+                  e.active ? 'text-content-muted' : 'text-content-subtle'
+                }`}
+              >
+                [nœud {e.sourceId}] {e.buffId} · {e.buff.type}
+                {e.buff.stat ? ` ${e.buff.stat}` : ''}
+                {e.buff.value !== undefined
+                  ? ` ${e.buff.value > 0 ? '+' : ''}${e.buff.value}${e.buff.applyingType === 'OAT_RATE' ? '‰' : ''}`
+                  : ''}
+                {e.condition ? ` · si ${e.condition}` : ''}
+                {e.active ? '' : ' — inactif (condition)'}
+              </p>
+            ))}
+            {result.quirkPassives.dynamic.map((d, i) => (
+              <p key={`d:${d.buffId}:${i}`} className="text-content-subtle font-mono text-[10px]">
+                ⏱ [nœud {d.sourceId}] {d.buffId} · {d.buff.type} · proc {d.createType} — non simulé
+              </p>
+            ))}
+            {result.quirkPassives.unresolved.map((u, i) => (
+              <p key={`u:${u.buffId}:${i}`} className="text-warn font-mono text-[10px]">
+                ⚠ [nœud {u.sourceId}] {u.buffId} : {u.reason} — contribution 0
+              </p>
+            ))}
           </div>
         )}
 

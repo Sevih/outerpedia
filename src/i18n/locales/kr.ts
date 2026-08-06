@@ -467,6 +467,9 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.boss_enrage_badge': '광폭화',
   'tools.damage-calculator.target.lv_prefix': 'Lv',
   'tools.damage-calculator.target.pve_label': '강적 대응',
+  // 스토리 비주얼 피커(패밀리 이름은 게임 용어집에서)
+  'tools.damage-calculator.target.back': '뒤로',
+  'tools.damage-calculator.target.wave_label': '웨이브 {n}',
   // Target picker — mode tabs + manual form
   'tools.damage-calculator.target.tab.cascade': '프리셋',
   'tools.damage-calculator.target.tab.manual': '수동',
@@ -576,6 +579,9 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.report.critical': '치명타',
   'tools.damage-calculator.report.miss': '회피',
   'tools.damage-calculator.report.support_skills': '서포트 스킬(카드 없음): {names}',
+  'tools.damage-calculator.report.unsupported': '아직 미지원',
+  'tools.damage-calculator.report.unsupported_hint':
+    '히트 체인이 아직 추출되지 않아 이 줄은 계산할 수 없습니다',
   'page.guides.title': '아우터플레인 공략 가이드',
   'page.guides.description':
     '아우터플레인 공략 가이드. 모험 스테이지, 보스전, 길드 레이드, 월드 보스, 초보자 팁.',

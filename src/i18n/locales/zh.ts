@@ -460,6 +460,9 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.boss_enrage_badge': '狂暴',
   'tools.damage-calculator.target.lv_prefix': 'Lv',
   'tools.damage-calculator.target.pve_label': '克制强敌',
+  // 剧情可视化选择器（系列名称来自游戏术语表）
+  'tools.damage-calculator.target.back': '返回',
+  'tools.damage-calculator.target.wave_label': '波次 {n}',
   // Target picker — mode tabs + manual form
   'tools.damage-calculator.target.tab.cascade': '游戏内选择',
   'tools.damage-calculator.target.tab.manual': '手动设置',
@@ -566,6 +569,8 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.report.critical': '暴击',
   'tools.damage-calculator.report.miss': '闪避',
   'tools.damage-calculator.report.support_skills': '辅助技能（无卡片）：{names}',
+  'tools.damage-calculator.report.unsupported': '暂不支持',
+  'tools.damage-calculator.report.unsupported_hint': '尚未提取命中链，此行暂时无法计算',
   'page.guides.title': '异域战记攻略',
   'page.guides.description': '异域战记攻略：冒险关卡、Boss战、公会突袭、世界首领、新手攻略。',
   'page.guides.list': '攻略列表',

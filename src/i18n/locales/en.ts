@@ -487,6 +487,9 @@ const en = {
   'tools.damage-calculator.target.boss_enrage_badge': 'Enrage',
   'tools.damage-calculator.target.lv_prefix': 'Lv',
   'tools.damage-calculator.target.pve_label': 'Counteract Strong Enemies',
+  // Story visual picker (family titles come from the game glossary)
+  'tools.damage-calculator.target.back': 'Back',
+  'tools.damage-calculator.target.wave_label': 'Wave {n}',
   // Target picker — mode tabs + manual form
   'tools.damage-calculator.target.tab.cascade': 'Preset',
   'tools.damage-calculator.target.tab.manual': 'Manual',
@@ -597,6 +600,9 @@ const en = {
   'tools.damage-calculator.report.critical': 'Critical',
   'tools.damage-calculator.report.miss': 'Miss',
   'tools.damage-calculator.report.support_skills': 'Support skills (no card): {names}',
+  'tools.damage-calculator.report.unsupported': 'not yet supported',
+  'tools.damage-calculator.report.unsupported_hint':
+    'hit chain not extracted from the game yet — this line cannot be computed',
   'page.guides.title': 'Outerplane Guides',
   'page.guides.description':
     'Outerplane guides for adventure stages, boss fights, guild raids, world bosses, and beginner tips.',

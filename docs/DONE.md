@@ -5,6 +5,53 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-06
+
+- **Story vs Origin Story — l'histoire retrouve son vrai découpage.** Depuis
+  la refonte du jeu, DM_NORMAL couvre DEUX contenus : la story courante
+  (zones `AGT_NEW_*`, « Story Season 1 », 3 épisodes) et l'Origin Story
+  (zones historiques S1-S4 — clés `SYS_SEASON_NAME_*`, déblocage après la
+  story 3-16). Le site mélangeait tout sous « Story Normal/Hard », et les
+  stages hard refondus (`AGT_NEW_HARD`) étaient MAL CLASSÉS en normal.
+  Encounters émet désormais 4 slugs synthétiques (`normal`/`normal_hard`/
+  `origin`/`origin_hard`, titres du jeu curés « Origin Normal/Hard ») + le
+  NUMÉRO de stage dans l'épisode (chiffres de la clé `ShortNameID`, « 0513 »
+  = 5-13) ; le donjon de test oublié dans les tables (`THIS_IS_TEST_DUNGEON`)
+  est exclu (retenu `retired` par la promotion). Moteur : les 4 slugs →
+  `DM_NORMAL` (`dungeonModeOf`, gate § 16.2 inchangé). Les guides des boss
+  d'histoire affichent maintenant « Origin Normal/Hard » — fidèle au jeu.
+
+- **Damage calculator : picker de cible VISUEL pour l'histoire + toutes les
+  vagues ciblables** (demande Sevih). Les 4 modes story se replient en 2
+  familles (« Story », « Origin Story ») ; choisir une famille ouvre un
+  browser : toggle Normal/Hard (rendu rougeâtre en hard, tokens `danger`),
+  saisons → épisodes (portrait du boss de l'épisode) → stages à combat
+  (accordéon des N vagues, portrait du boss du stage) → chaque monstre d'une
+  vague est ciblable — plus seulement les boss. La recherche bascule sur la
+  liste à plat (les libellés story portent le numéro en jeu : « 3-16. Part
+  of the Plan »). Donnée : `damage/targets.json` passe des boss aux monstres
+  des rencontres vivantes (1560 → 2443 cibles, fermeture buffs élargie) ;
+  `resolvePresetTarget` ne filtre plus sur le rôle (id répété = première
+  entrée, même dédup que l'UI). Les autres modes gardent la cascade de
+  selects en attendant leur propre visuel. Au passage : le regen rattrape
+  les tables 1.10.802 → 1.10.805.
+
+- **Picker story — retours Sevih (2e passe).** (1) Titres des familles
+  « Story »/« Origin Story » : plus de texte main dans les locales — clés
+  TextSystem curées (mode-titles.json § families) émises au glossaire
+  (`storyFamilies`), repli sur le titre du mode. (2) Portraits manquants
+  (404 `MT_4041041`) : la collecte d'assets prenait les seuls `type: 'boss'`
+  référencés — désormais TOUS les monstres référencés par une rencontre, +
+  les fonds de rareté `MT_Slot_Normal/Magic/Rare` (rareté 1/2/3+ →
+  `img.monsterSlot`). Le push R2 reste à faire. (3) Vagues fidèles : la
+  dédup d'encounters devient PAR VAGUE avec `count` (story 1-1 : 2 × le même
+  loup en vague 1 → « ×2 » ; un monstre rejoué sur plusieurs vagues a une
+  entrée par vague, spawns inverses inchangés, `pickMonsters` dédoublonne
+  pour les guides). (4) UN composant portrait (`MonsterPortrait` : fond de
+  rareté + vignette + overlays élément/classe/boss/niveau) partagé entre la
+  cible sélectionnée, la liste à plat et les vagues du browser ; l'icône de
+  classe passe à la taille de celle de l'élément (TileOverlays).
+
 ## 2026-08-04
 
 - **ee-effects : DoT enhance — deux sens opposés sous le même type** (rapport

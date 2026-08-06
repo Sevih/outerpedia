@@ -475,6 +475,9 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.boss_enrage_badge': '激怒',
   'tools.damage-calculator.target.lv_prefix': 'Lv',
   'tools.damage-calculator.target.pve_label': '強敵対策',
+  // ストーリーのビジュアルピッカー（ファミリー名はゲームの用語集から）
+  'tools.damage-calculator.target.back': '戻る',
+  'tools.damage-calculator.target.wave_label': 'ウェーブ {n}',
   // Target picker — mode tabs + manual form
   'tools.damage-calculator.target.tab.cascade': 'プリセット',
   'tools.damage-calculator.target.tab.manual': 'マニュアル',
@@ -583,6 +586,9 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.report.critical': 'クリティカル',
   'tools.damage-calculator.report.miss': '回避',
   'tools.damage-calculator.report.support_skills': 'サポートスキル（カードなし）：{names}',
+  'tools.damage-calculator.report.unsupported': '未対応',
+  'tools.damage-calculator.report.unsupported_hint':
+    'ヒットチェーン未抽出のため、この行はまだ計算できません',
   'page.guides.title': 'アウタープレーン 攻略ガイド',
   'page.guides.description':
     'アウタープレーン攻略ガイド。冒険ステージ、ボス戦、ギルドレイド、ワールドボス、初心者向けのヒント。',
