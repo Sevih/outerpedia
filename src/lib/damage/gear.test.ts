@@ -21,7 +21,7 @@ import charactersData from '../../../data/generated/damage/characters.json';
 import growthData from '../../../data/generated/damage/growth.json';
 import buffsData from '../../../data/generated/damage/buffs.json';
 import equipmentData from '../../../data/generated/damage/equipment.json';
-import { resolveGearPassives, gearConditionMet } from './gear';
+import { gearConditionMet, resolveGearPassives, uniquePassiveLevel } from './gear';
 import {
   buildDamageReport,
   type AttackerBuildInput,
@@ -250,5 +250,108 @@ describe('gear — intégration buildDamageReport', () => {
   it('sans gear : rien ne bouge (pas de gearPassives)', () => {
     const r = buildDamageReport({ ...attacker({}), gear: undefined }, target(), data);
     expect(r.gearPassives).toBeUndefined();
+  });
+});
+
+describe('kit — passifs du perso (H.Dianne, donnée réelle)', () => {
+  it('palier du passif UNIQUE par transcendance (growth.transcend.skillLevel)', () => {
+    const g = data.growth.transcend;
+    expect(uniquePassiveLevel(g, 3, 9)).toBe(4);
+    expect(uniquePassiveLevel(g, 3, 5)).toBe(2);
+    expect(uniquePassiveLevel(g, 3, 3)).toBe(1);
+    expect(uniquePassiveLevel(g, 3, 2)).toBe(0);
+  });
+
+  it('BT_STAT_PREMIUM (transcendance) : déjà dans la fiche AFFICHÉE — jamais recompté', () => {
+    const r = buildDamageReport({ ...attacker({}), gear: undefined }, target(), data);
+    // Aucune entrée premium (pierce/dmg boost de transcendance), stats intactes.
+    expect(r.kitPassives?.entries.map((e) => e.buffId)).not.toContain('trancendent_8_pierce_30');
+    expect(r.combatStats.atk).toBe(10000);
+    // Le passif « un buff aléatoire par tour » (groupe 103) est SIGNALÉ
+    // dynamique — c'est ce que représentent les chips atk/chd/crit/spd.
+    expect(r.kitPassives?.dynamic.map((d) => d.buffId)).toContain('2000093_passive');
+  });
+
+  it('la transcendance BASSE recule le palier du passif unique (transcendIndex)', () => {
+    const low = buildDamageReport(
+      { ...attacker({}), gear: undefined, transcendIndex: 0 },
+      target(),
+      data,
+    );
+    // À T0 (transStar 3, niveau 1) le kit ne porte AUCUN buff de palier 8.
+    expect(low.kitPassives?.dynamic.map((d) => d.buffId)).not.toContain('2000093_trancendent');
+  });
+});
+
+describe('quirks — nœuds d’éveil du compte (donnée réelle)', () => {
+  it('nœud boss 231 lv3 : +9 % aux boss (§ 9.1) ; portée élémentaire respectée', () => {
+    const r = buildDamageReport(
+      { ...attacker({}), gear: undefined, quirks: { '231': 3, '1': 10 } },
+      target(),
+      data,
+    );
+    // 231 (PVE, AAT_NONE) : Awakening_Boss_Dmg_3 = BT_DMG_TO_BOSS +90‰, actif.
+    expect(r.quirkPassives?.entries).toMatchObject([
+      {
+        source: 'quirk',
+        sourceId: '231',
+        active: true,
+        buff: { type: 'BT_DMG_TO_BOSS', value: 90 },
+      },
+    ]);
+    // 1 = arbre élémentaire TERRE (applyTypeValue 0) : Dianne est FEU → écarté.
+    expect(r.quirkPassives?.entries.some((e) => e.sourceId === '1')).toBe(false);
+    // Et il pèse sur le calcul (cible boss).
+    const bare = buildDamageReport({ ...attacker({}), gear: undefined }, target(), data);
+    expect(r.slots[0].report.states[0].branches[0].totalDamage).toBeGreaterThan(
+      bare.slots[0].report.states[0].branches[0].totalDamage,
+    );
+  });
+
+  it('arbre élémentaire FEU (nœud 41) : s’applique à Dianne, niveau = la ligne saisie', () => {
+    const r = buildDamageReport(
+      { ...attacker({}), gear: undefined, quirks: { '41': 10 } },
+      target(),
+      data,
+    );
+    const e = r.quirkPassives?.entries.find((x) => x.sourceId === '41');
+    expect(e?.active).toBe(true);
+    // Nœud inconnu : signalé, jamais tu.
+    const bad = buildDamageReport(
+      { ...attacker({}), gear: undefined, quirks: { '999999': 1 } },
+      target(),
+      data,
+    );
+    expect(bad.quirkPassives?.unresolved[0].reason).toContain('absent');
+  });
+
+  it('gates prouvés par les captures Valentine (06/08) : licence et chain', () => {
+    const quirks = { '251': 10, '232': 1 };
+    // Contenu NORMAL : l'arbre licence (+100 % boss) ne s'applique PAS ; le
+    // nœud « Chain Damage » est réservé aux chain attacks (SKT_STRIKE_*) —
+    // hors des lignes du rapport, signalé.
+    const normal = buildDamageReport(
+      { ...attacker({}), gear: undefined, quirks },
+      { ...target(), mode: 'normal' },
+      data,
+    );
+    expect(normal.quirkPassives?.entries).toEqual([]);
+    expect(
+      normal.quirkPassives?.unresolved.some(
+        (u) => u.buffId === 'Awakening_Chain_Dmg_1' && u.reason.includes('SKT_STRIKE'),
+      ),
+    ).toBe(true);
+    // Contenu Adventure License : l'arbre licence s'applique.
+    const licence = buildDamageReport(
+      { ...attacker({}), gear: undefined, quirks },
+      { ...target(), mode: 'adventure_mission' },
+      data,
+    );
+    expect(licence.quirkPassives?.entries).toMatchObject([
+      { sourceId: '251', active: true, buff: { type: 'BT_DMG_TO_BOSS', value: 1000 } },
+    ]);
+    // Cible MANUELLE (mode inconnu) : l'arbre licence est SIGNALÉ, jamais deviné.
+    const manual = buildDamageReport({ ...attacker({}), gear: undefined, quirks }, target(), data);
+    expect(manual.quirkPassives?.unresolved.some((u) => u.reason.includes('licence'))).toBe(true);
   });
 });

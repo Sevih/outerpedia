@@ -59,6 +59,11 @@ export interface DamageFixture {
    * HORS `z` aussi. Absent = non.
    */
   premium?: boolean;
+  /**
+   * QUIRKS du compte à la capture (nœud d'éveil → niveau, seuls les > 0) —
+   * HORS `z` aussi (réglage localStorage). Absent = aucun.
+   */
+  quirks?: Record<string, number>;
   /** Version du jeu au moment de l'observation (« 1.4.9 »). */
   gameVersion: string;
   /** Observations en jeu : par slot de skill × branche, dégâts constatés. */

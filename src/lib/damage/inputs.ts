@@ -26,7 +26,13 @@
 
 import { collectStatChannels, type ActiveBuff } from './aggregate';
 import { calcBaseStat } from './formula';
-import { resolveGearPassives, type GearPassivesInfo, type GearSelection } from './gear';
+import {
+  resolveGearPassives,
+  resolveKitPassives,
+  resolveQuirkPassives,
+  type GearPassivesInfo,
+  type GearSelection,
+} from './gear';
 import { resolveBossPassives, type BossPassivesInfo } from './passives';
 import {
   buildSkillReport,
@@ -73,6 +79,10 @@ export interface DataSkill {
 export interface DataCharacter {
   id: string;
   element: string;
+  basicStar: number;
+  /** `CCT_*` / nom d'enum de sous-classe — portée des quirks (gear.ts). */
+  class?: string;
+  subClass?: string;
   baseStats: Record<string, DataStatPair>;
   skills: { slot: number; id: string }[];
 }
@@ -84,6 +94,18 @@ export interface DamageCharactersData {
 
 export interface DamageGrowthData {
   archive: { level: number; atkRate: number; defRate: number; hpRate: number }[];
+  /** Paliers de transcendance — `skillLevel` = niveau du passif UNIQUE. */
+  transcend: { basicStar: number; transStar: number; skillLevel: number }[];
+  /** Nœuds d'éveil (quirks du compte) — les `IOT_BUFF` seuls comptent ici. */
+  awakening: {
+    id: string;
+    /** `ELEMENTAL`/`JOB`/`UTILITY` (tous contenus), `PVE`, `ADVENTURE_LICENSE`
+     *  (contenu licence SEULEMENT — colonne de scope de la table des groupes). */
+    groupType: string;
+    applyType: string;
+    applyTypeValue: number;
+    levels: { level: number; optionType: string; value?: number; buffId?: string }[];
+  }[];
   maxLevelSteps: {
     basicStar: number;
     element: string;
@@ -124,6 +146,11 @@ export interface DataBuffLevel {
   /** `BuffConditionValue` — pour `TARGET_ELEMENT` : CET_* de la CIBLE
    *  (absent = 0 = terre, preuve gear.ts). */
   conditionValue?: number;
+  /** `TargetSkillType` (`SKT_*`) — buff restreint à UN skill. */
+  targetSkillType?: string;
+  /** `CallerSkillType` (`SKT_*`, CSV) — buff restreint aux skills LANCEURS
+   *  (ex. nœuds « Chain Damage » : SKT_STRIKE_* seulement). */
+  callerSkillType?: string;
 }
 
 export interface DamageBuffsData {
@@ -259,12 +286,19 @@ function archiveRateFor(slug: string, codexLevel: number, growth: DamageGrowthDa
 // ── Buff de guilde (spec § 16.2 — event buff MAX_HP, prouvé binaire) ────────
 
 /**
- * Slug de mode d'encounters → `DUNGEON_MODE` brut. `normal_hard` est un
- * `AGT_HARD` du MÊME mode DM_NORMAL ; tous les autres slugs sont l'enum en
- * minuscules sans préfixe (vérifié sur la liste 1.4.9).
+ * Slug de mode d'encounters → `DUNGEON_MODE` brut. Les QUATRE slugs story
+ * (`normal`, `normal_hard`, `origin`, `origin_hard` — DM_NORMAL éclaté par
+ * type de zone AreaTemplet, cf. STORY_MODES du générateur encounters) sont le
+ * MÊME mode DM_NORMAL ; tous les autres slugs sont l'enum en minuscules sans
+ * préfixe (vérifié sur la liste 1.4.9 — qui ne connaît ni AGT_NEW_* ni
+ * l'Origin Story : découpage purement site).
  */
 export function dungeonModeOf(encounterMode: string): string {
-  return encounterMode === 'normal_hard' ? 'DM_NORMAL' : `DM_${encounterMode.toUpperCase()}`;
+  return encounterMode === 'normal_hard' ||
+    encounterMode === 'origin' ||
+    encounterMode === 'origin_hard'
+    ? 'DM_NORMAL'
+    : `DM_${encounterMode.toUpperCase()}`;
 }
 
 /** `MaxHPRate` du binaire : `float32(100 + Σ) × 0.01f` (constante 0x1056648) —
@@ -390,6 +424,9 @@ export interface AttackerBuildInput {
   id: string;
   /** Niveau 1..120 (slider UI). */
   level: number;
+  /** INDEX du palier de transcendance (z `x`) — transStar = basicStar + index ;
+   *  absent = palier MAX (défaut UI). Sert au passif UNIQUE du kit. */
+  transcendIndex?: number;
   /** Palier d'affinité 0..5 (dérivé du niveau 0..100 côté UI). */
   affinityTier: number;
   /** Niveau du Codex du COMPTE (0..11). */
@@ -408,6 +445,8 @@ export interface AttackerBuildInput {
   premiumHp?: boolean;
   /** Équipement porté (passifs § 15 canal 2) — résolu par le pont (gear.ts). */
   gear?: GearSelection;
+  /** QUIRKS du compte (nœud d'éveil → niveau) — réglage hors z, comme Codex. */
+  quirks?: Record<string, number>;
 }
 
 export interface TargetBuildInput {
@@ -471,6 +510,12 @@ export interface DamageReportResult {
   /** Passifs d'équipement § 15 (appliqués + procs signalés + non-résolus) —
    *  présent dès que l'attaquant porte du `gear`. */
   gearPassives?: GearPassivesInfo;
+  /** Passifs du KIT de l'attaquant (skills `*_PASSIVE`, § 16.3 côté joueur) —
+   *  toujours présent (le kit vient avec le perso). */
+  kitPassives?: GearPassivesInfo;
+  /** QUIRKS du compte (nœuds d'éveil à buff) — présent dès qu'un niveau > 0
+   *  est fourni. */
+  quirkPassives?: GearPassivesInfo;
 }
 
 // ── Construction ─────────────────────────────────────────────────────────────
@@ -597,6 +642,44 @@ export function buildDamageReport(
   const gearBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>
     (gearPassives?.entries ?? []).filter((e) => e.side === side && e.active).map((e) => e.buff);
 
+  // Passifs du KIT (§ 16.3 côté joueur) : skills `*_PASSIVE` du perso — le
+  // passif UNIQUE suit la TRANSCENDANCE (growth.transcend.skillLevel).
+  const maxTransStar = data.growth.transcend.reduce(
+    (m, r) => (r.basicStar === char.basicStar && r.transStar > m ? r.transStar : m),
+    char.basicStar,
+  );
+  const transStar =
+    attacker.transcendIndex !== undefined
+      ? Math.min(char.basicStar + attacker.transcendIndex, maxTransStar)
+      : maxTransStar;
+  const kitPassives = resolveKitPassives(
+    char,
+    transStar,
+    data.characters.skills,
+    data.growth.transcend,
+    data.buffs,
+    attackerElement,
+    defenderElement,
+  );
+  const kitBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>
+    kitPassives.entries.filter((e) => e.side === side && e.active).map((e) => e.buff);
+
+  // QUIRKS du compte (nœuds d'éveil à buff) — portée élément/classe évaluée
+  // dans gear.ts ; les nœuds de stats sont déjà dans la fiche (§ 17.4).
+  let quirkPassives: GearPassivesInfo | undefined;
+  if (attacker.quirks && Object.keys(attacker.quirks).length) {
+    quirkPassives = resolveQuirkPassives(
+      attacker.quirks,
+      data.growth.awakening,
+      { element: attackerElement, class: char.class, subClass: char.subClass },
+      data.buffs,
+      defenderElement,
+      target.mode !== undefined ? dungeonModeOf(target.mode) : undefined,
+    );
+  }
+  const quirkBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>
+    (quirkPassives?.entries ?? []).filter((e) => e.side === side && e.active).map((e) => e.buff);
+
   // Buffs actifs des deux côtés : affinité (donnée) + chips (catalogue) +
   // passifs de boss et d'équipement (donnée, évalués ci-dessus).
   const atkFx = resolveFx(attacker.fx ?? []);
@@ -606,8 +689,16 @@ export function buildDamageReport(
     ...atkFx.buffs,
     ...passiveBuffs('attacker'),
     ...gearBuffs('attacker'),
+    ...kitBuffs('attacker'),
+    ...quirkBuffs('attacker'),
   ];
-  const defenderBuffs = [...tgtFx.buffs, ...passiveBuffs('defender'), ...gearBuffs('defender')];
+  const defenderBuffs = [
+    ...tgtFx.buffs,
+    ...passiveBuffs('defender'),
+    ...gearBuffs('defender'),
+    ...kitBuffs('defender'),
+    ...quirkBuffs('defender'),
+  ];
 
   let combatStats = buildCombatStats(attacker, char, data.growth, attackerBuffs);
   // Familles « PV perdus » § 14 (BT 31/32 — sets Revenge/Patience/Swiftness) :
@@ -764,5 +855,7 @@ export function buildDamageReport(
     ...(maxHpBuff ? { maxHpBuff } : {}),
     ...(bossPassives ? { bossPassives } : {}),
     ...(gearPassives ? { gearPassives } : {}),
+    kitPassives,
+    ...(quirkPassives ? { quirkPassives } : {}),
   };
 }

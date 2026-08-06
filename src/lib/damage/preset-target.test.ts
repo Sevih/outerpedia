@@ -22,10 +22,29 @@ const ti = (() => {
   return undefined;
 })();
 
+/** Premier RENFORT constructible (role add) — ciblable depuis le 06/08/2026
+ *  (les vagues complètes du picker story, demande Sevih). */
+const tiAdd = (() => {
+  for (const [id, ref] of Object.entries(DUNGEONS)) {
+    if (ref.retired) continue;
+    const add = ref.monsters?.find((m) => m.role === 'add' && getMonster(m.id));
+    if (add) return `${id}:${add.id}`;
+  }
+  return undefined;
+})();
+
 describe('resolvePresetTarget (node)', () => {
   it('résout un preset réel : élément + au moins une stat défensive > 0', () => {
     expect(ti).toBeDefined();
     const r = resolvePresetTarget(ti as string, 0);
+    expect(r).toBeDefined();
+    expect(r?.element).toBeTruthy();
+    expect(Object.values(r?.stats ?? {}).some((v) => (v ?? 0) > 0)).toBe(true);
+  });
+
+  it('résout aussi un RENFORT (role add) — les vagues du picker story', () => {
+    expect(tiAdd).toBeDefined();
+    const r = resolvePresetTarget(tiAdd as string, 0);
     expect(r).toBeDefined();
     expect(r?.element).toBeTruthy();
     expect(Object.values(r?.stats ?? {}).some((v) => (v ?? 0) > 0)).toBe(true);

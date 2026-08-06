@@ -51,6 +51,11 @@ describe('fixtures dorées (harnais § 4)', () => {
       // code de composant. Toute erreur est capturée pour échouer en `it`.
       let lines: ObservedLine[] | null = null;
       let error: unknown = null;
+      // Clés de slot EN ATTENTE : le slot existe mais sa chaîne de hits est
+      // irrésolue (§ 12.4) — une valeur observée capturée dessus est GARDÉE
+      // (test skippé), elle devient le test d'acceptation du jour où § 12.4
+      // est tranché (même logique que `skipRef`, mais par ligne).
+      let pending = new Set<string>();
       try {
         const st = JSON.parse(
           LZString.decompressFromEncodedURIComponent(f.z) || 'null',
@@ -60,6 +65,7 @@ describe('fixtures dorées (harnais § 4)', () => {
           codexLevel: f.codex ?? 0,
           guildLevel: f.guild ?? 0,
           premiumHp: f.premium === true,
+          ...(f.quirks ? { quirks: f.quirks } : {}),
           resolvePreset: resolvePresetTarget,
           resolveGear: resolveGearGroups,
         });
@@ -68,8 +74,17 @@ describe('fixtures dorées (harnais § 4)', () => {
         // Un miss observé force sa branche (sans esquive, le miss n'existe
         // qu'avec un buff de « miss chance » — jamais émis par défaut).
         const wantMiss = f.observed.some((o) => o.branch === 'miss');
-        lines = flattenReport(
-          buildDamageReport(attacker, target, data, wantMiss ? { includeMissBranch: true } : {}),
+        const report = buildDamageReport(
+          attacker,
+          target,
+          data,
+          wantMiss ? { includeMissBranch: true } : {},
+        );
+        lines = flattenReport(report);
+        pending = new Set(
+          report.slots
+            .filter((s) => s.hitsUnresolved === true && s.report.states.length === 0)
+            .map((s) => `${s.slot}${s.burst !== undefined ? `b${s.burst}` : ''}`),
         );
       } catch (e) {
         error = e;
@@ -82,6 +97,12 @@ describe('fixtures dorées (harnais § 4)', () => {
 
       const tol = f.tolerance ?? 0.5;
       for (const o of f.observed) {
+        // Ligne sur un slot § 12.4 : skip NOMMÉ (visible dans le rapport de
+        // test), jamais un échec ni un silence.
+        if (pending.has(o.slot.split('#')[0])) {
+          it.skip(`${o.slot} · ${o.branch} — EN ATTENTE : chaîne de hits irrésolue (§ 12.4)`);
+          continue;
+        }
         it(`${o.slot} · ${o.branch} : Δ ≤ ${tol} %`, () => {
           expect(
             o.damage,

@@ -8,7 +8,6 @@
  */
 
 import type { DamageFixture } from '../harness';
+import valentineRhona from './valentine-rhona.json';
 
-export const FIXTURES: DamageFixture[] = [
-  // import delta_s3_wb from './delta-s3-wb.json' → ...(delta_s3_wb as DamageFixture)
-];
+export const FIXTURES: DamageFixture[] = [valentineRhona as DamageFixture];

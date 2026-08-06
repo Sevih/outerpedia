@@ -128,6 +128,9 @@ export interface ScenarioBuildOptions {
   /** Buff de TITRE « Premium Body » possédé — HORS z, capturé à part
    *  (`DamageFixture.premium`) ; +5 % PV § 16.2. */
   premiumHp?: boolean;
+  /** QUIRKS du compte (nœud d'éveil → niveau, seuls les > 0 comptent) — HORS
+   *  z (localStorage), capturés à part (`DamageFixture.quirks`). */
+  quirks?: Record<string, number>;
   /** Résolution d'un preset de cible (`ti`/`si`) — sans lui, pas de cible. */
   resolvePreset?: (targetId: string, spawnIdx: number) => ResolvedPresetTarget | undefined;
   /** Résolution d'un équipement (slug UI → groupes d'options uniques des
@@ -183,6 +186,9 @@ export function buildInputsFromZ(
     attacker = {
       id: st.a,
       level: clamp(st.lv ?? 120, 1, 120),
+      // Index du palier de transcendance (absent = max, défaut UI) — le
+      // moteur en dérive transStar pour le passif UNIQUE du kit.
+      ...(typeof st.x === 'number' ? { transcendIndex: clamp(st.x, 0, 12) } : {}),
       // Le palier 0..5 est LA valeur de calcul ; `af` porte le niveau 0..100.
       affinityTier: Math.floor(clamp(st.af ?? 0, 0, 100) / 20),
       codexLevel: opts.codexLevel ?? 0,
@@ -192,6 +198,7 @@ export function buildInputsFromZ(
       ...(st.b?.length ? { fx: st.b } : {}),
       ...(opts.guildLevel ? { guildLevel: clamp(opts.guildLevel, 0, 10) } : {}),
       ...(opts.premiumHp ? { premiumHp: true } : {}),
+      ...(opts.quirks && Object.keys(opts.quirks).length ? { quirks: opts.quirks } : {}),
     };
     // Équipement § 15 (canal 2 — buffs) : slugs UI → groupes des tables via
     // le resolver de l'appelant ; un slug non résolu est SIGNALÉ, jamais tu.

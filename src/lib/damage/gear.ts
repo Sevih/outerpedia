@@ -75,7 +75,7 @@ export interface GearSelection {
 
 // ── Sorties ─────────────────────────────────────────────────────────────────
 
-export type GearSource = 'weapon' | 'amulet' | 'set' | 'talisman' | 'ee';
+export type GearSource = 'weapon' | 'amulet' | 'set' | 'talisman' | 'ee' | 'kit' | 'quirk';
 
 export interface GearPassiveEntry {
   source: GearSource;
@@ -164,6 +164,17 @@ const ELEMENT_CONDITIONS = new Set([
   'ATTACKER_ELEMENT_LOSE',
 ]);
 
+/** Les skills que le rapport LIGNE réellement (S1/S2/S3 + bursts) — un buff
+ *  restreint hors de cet ensemble (chain attacks…) ne pèse sur aucune ligne. */
+const REPORT_SKILL_TYPES = new Set([
+  'SKT_FIRST',
+  'SKT_SECOND',
+  'SKT_ULTIMATE',
+  'SKT_BURST_1',
+  'SKT_BURST_2',
+  'SKT_BURST_3',
+]);
+
 /** Une condition d'équipement est-elle satisfaite ? `undefined` = non
  *  évaluable statiquement (§ 12.1) → l'appelant remonte `unresolved`. */
 export function gearConditionMet(
@@ -216,18 +227,16 @@ function toActiveBuff(row: DataBuffLevel): ActiveBuff {
   };
 }
 
-/**
- * Les passifs d'équipement du porteur, ÉVALUÉS contre les éléments du
- * scénario. `attackerId` sert à retrouver l'EE (`characterLimit`).
- */
-export function resolveGearPassives(
-  attackerId: string,
-  gear: GearSelection,
-  equipment: DamageEquipmentData,
+/** Collecteur partagé équipement/kit : classe et range les lignes de buff. */
+function makeCollector(
   buffs: DamageBuffsData,
   attackerElement: Element,
   defenderElement: Element,
-): GearPassivesInfo {
+): {
+  info: GearPassivesInfo;
+  feed: (source: GearSource, sourceId: string, buffId: string, row: DataBuffLevel) => void;
+  feedBuff: (source: GearSource, sourceId: string, buffId: string, level: number) => void;
+} {
   const info: GearPassivesInfo = { entries: [], dynamic: [], unresolved: [] };
 
   /** Classe et range une ligne de buff (au niveau déjà choisi). */
@@ -235,7 +244,7 @@ export function resolveGearPassives(
     const ct = row.createType;
     if (ct !== 'PASSIVE' && ct !== 'PASSIVE2') {
       // Proc — jamais simulé ; signalé seulement s'il peut peser sur le hit.
-      if (damageRelevant(row) || row.type === 'BT_MARKING') {
+      if (damageRelevant(row) || row.type === 'BT_MARKING' || row.type.startsWith('BT_GROUP')) {
         info.dynamic.push({
           source,
           sourceId,
@@ -246,6 +255,12 @@ export function resolveGearPassives(
       }
       return;
     }
+    // BT_STAT_PREMIUM (paliers de transcendance, mains d'EE…) : AFFICHÉ dans
+    // la fiche du héros, donc déjà dans les stats SAISIES — jamais recompté.
+    // Preuve : pierce 30 % identique sur deux équipements différents de la
+    // même Dianne T-max (captures Sevih 05/08/2026) = le
+    // `trancendent_8_pierce_30` rendu dans la fiche.
+    if (row.type === 'BT_STAT_PREMIUM') return;
     const target = row.targetType ?? '';
     let side: GearPassiveEntry['side'] | undefined;
     if (target === 'MY_TEAM_WITHOUT_ME') side = 'allies';
@@ -272,6 +287,34 @@ export function resolveGearPassives(
         return;
       } else return;
     } else return;
+
+    // Buff restreint à UN skill (`TargetSkillType`) : l'application par slot
+    // n'est pas branchée — signalé, contribution 0 (jamais versé à tous).
+    if (row.targetSkillType !== undefined && side !== 'allies') {
+      info.unresolved.push({
+        source,
+        sourceId,
+        buffId,
+        reason: `restreint à ${row.targetSkillType} — application par slot non branchée`,
+      });
+      return;
+    }
+    // Restriction par skill LANCEUR (`CallerSkillType`, CSV — ex. nœuds
+    // « Chain Damage » : SKT_STRIKE_* seulement). Les chain attacks ne sont
+    // pas des lignes du rapport : hors intersection → contribution 0, signalé.
+    if (row.callerSkillType !== undefined && row.callerSkillType !== 'SKT_ALL') {
+      const callers = row.callerSkillType.split(',').map((s) => s.trim());
+      const overlaps = callers.some((c) => REPORT_SKILL_TYPES.has(c));
+      info.unresolved.push({
+        source,
+        sourceId,
+        buffId,
+        reason: overlaps
+          ? `restreint à ${row.callerSkillType} — application par slot non branchée`
+          : `réservé à ${row.callerSkillType} (hors des lignes du rapport) — contribution 0`,
+      });
+      return;
+    }
 
     const condition = row.conditionType;
     // `allies` : jamais appliqué au porteur — affiché inactif, pas de condition.
@@ -312,6 +355,23 @@ export function resolveGearPassives(
     const row = pickBuffRow(rows, level);
     if (row) feed(source, sourceId, buffId, row);
   };
+
+  return { info, feed, feedBuff };
+}
+
+/**
+ * Les passifs d'équipement du porteur, ÉVALUÉS contre les éléments du
+ * scénario. `attackerId` sert à retrouver l'EE (`characterLimit`).
+ */
+export function resolveGearPassives(
+  attackerId: string,
+  gear: GearSelection,
+  equipment: DamageEquipmentData,
+  buffs: DamageBuffsData,
+  attackerElement: Element,
+  defenderElement: Element,
+): GearPassivesInfo {
+  const { info, feedBuff } = makeCollector(buffs, attackerElement, defenderElement);
 
   /** Groupes d'options UNIQUES (arme/accessoire/talisman/EE) au niveau spécial
    *  donné ; `buffLevel` = niveau demandé aux buffs de ces lignes. */
@@ -383,5 +443,186 @@ export function resolveGearPassives(
     }
   }
 
+  return info;
+}
+
+// ── Passifs du PERSONNAGE (kit — même canal que les boss, côté joueur) ──────
+
+/** Miroir minimal du kit (characters.json) consommé ici. */
+export interface KitCharacter {
+  id: string;
+  basicStar: number;
+  skills: { slot: number; id: string }[];
+}
+
+export interface KitSkill {
+  id: string;
+  type: string;
+  levels: { level: number; buffIds: string[] }[];
+}
+
+/** Palier du passif UNIQUE par transcendance (`growth.transcend.skillLevel`,
+ *  prouvé tables : basicStar 3 → transStar 9 = niveau 4). */
+export function uniquePassiveLevel(
+  transcend: { basicStar: number; transStar: number; skillLevel: number }[],
+  basicStar: number,
+  transStar: number,
+): number {
+  let best = 0;
+  for (const r of transcend) {
+    if (r.basicStar !== basicStar || r.transStar > transStar) continue;
+    if (r.skillLevel > best) best = r.skillLevel;
+  }
+  return best;
+}
+
+/**
+ * Les passifs STATIQUES du kit de l'attaquant (skills `*_PASSIVE`), évalués
+ * contre les éléments du scénario — même doctrine que l'équipement :
+ * `BT_STAT_PREMIUM` (affiché dans la fiche) jamais recompté, procs/GROUP
+ * signalés `dynamic` (ex. le passif par tour de H.Dianne = les chips
+ * atk/chd/crit/spd), restrictions par skill signalées.
+ *
+ * Sélection de niveau : `SKT_UNIQUE_PASSIVE` = palier de TRANSCENDANCE
+ * (`growth.transcend.skillLevel`) ; les autres passifs (classe, chain…) au
+ * niveau MAX (pas de saisie UI — les niveaux ne portent que des textes en
+ * 1.4.9 pour ces slots).
+ */
+// ── QUIRKS du compte (nœuds d'éveil « à impact » — buffs, jamais les stats) ──
+
+/** Miroir minimal d'un nœud d'éveil (growth.awakening). */
+export interface QuirkNode {
+  id: string;
+  groupType: string;
+  applyType: string;
+  applyTypeValue: number;
+  levels: { level: number; optionType: string; buffId?: string }[];
+}
+
+/** Enums du binaire (dump.cs) — portée d'un nœud par classe/sous-classe. */
+const CLASS_ENUM: Record<string, number> = {
+  CCT_DEFENDER: 1,
+  CCT_ATTACKER: 2,
+  CCT_RANGER: 3,
+  CCT_MAGE: 4,
+  CCT_PRIEST: 5,
+};
+const SUBCLASS_ENUM: Record<string, number> = {
+  ATTACKER: 1,
+  BRUISER: 2,
+  WIZARD: 3,
+  ENCHANTER: 4,
+  VANGUARD: 5,
+  TACTICIAN: 6,
+  SWEEPER: 7,
+  PHALANX: 8,
+  RELIEVER: 9,
+  SAGE: 10,
+};
+
+/**
+ * Les QUIRKS actifs du compte (réglage UI, hors z — comme le Codex), niveau
+ * par nœud → buff du niveau (les nœuds `IOT_STAT` sont dans la fiche
+ * AFFICHÉE via le paramètre éveil de CalcFinalStat § 17.4 — jamais recomptés,
+ * l'UI ne propose d'ailleurs que les nœuds « à impact »). Portée du nœud :
+ * `AAT_NONE` = tous, `AAT_ELEMENTAL`/`AAT_CLASS`/`AAT_SUBCLASS` = l'attaquant
+ * doit matcher (enums du binaire ci-dessus) ; un type de portée inconnu est
+ * SIGNALÉ, jamais deviné.
+ */
+export function resolveQuirkPassives(
+  quirks: Record<string, number>,
+  awakening: QuirkNode[],
+  char: { element: Element; class?: string; subClass?: string },
+  buffs: DamageBuffsData,
+  defenderElement: Element,
+  /** `DUNGEON_MODE` du combat (`DM_NORMAL`…) — gate de CONTENU de l'arbre
+   *  licence ; absent (cible manuelle) = inconnu, signalé. */
+  targetMode?: string,
+): GearPassivesInfo {
+  const { info, feedBuff } = makeCollector(buffs, char.element, defenderElement);
+  for (const [nodeId, level] of Object.entries(quirks)) {
+    if (level < 1) continue;
+    const node = awakening.find((n) => n.id === nodeId);
+    if (!node) {
+      info.unresolved.push({
+        source: 'quirk',
+        sourceId: nodeId,
+        buffId: nodeId,
+        reason: 'nœud absent des tables awakening',
+      });
+      continue;
+    }
+    // Gate de CONTENU du groupe (colonne de scope de la table des groupes —
+    // preuve : les 4 captures Valentine 06/08/2026 rejouent EXACTEMENT en
+    // retirant l'arbre licence hors contenu Adventure License) :
+    // ELEMENTAL/JOB/UTILITY = tous contenus ; PVE = tout le PvE (seule scène
+    // du rapport) ; ADVENTURE_LICENSE = ce contenu-là seulement.
+    if (node.groupType === 'ADVENTURE_LICENSE') {
+      if (targetMode === undefined) {
+        info.unresolved.push({
+          source: 'quirk',
+          sourceId: nodeId,
+          buffId: nodeId,
+          reason: 'arbre licence — mode du combat inconnu (cible manuelle), contribution 0',
+        });
+        continue;
+      }
+      if (!targetMode.startsWith('DM_ADVENTURE')) continue; // hors contenu : rien
+    } else if (!['ELEMENTAL', 'JOB', 'UTILITY', 'PVE'].includes(node.groupType)) {
+      info.unresolved.push({
+        source: 'quirk',
+        sourceId: nodeId,
+        buffId: nodeId,
+        reason: `arbre ${node.groupType} — portée de contenu inconnue, contribution 0`,
+      });
+      continue;
+    }
+    // Portée du nœud : ne s'applique qu'à l'attaquant qui matche.
+    if (node.applyType === 'AAT_ELEMENTAL') {
+      if (char.element !== (node.applyTypeValue as Element)) continue;
+    } else if (node.applyType === 'AAT_CLASS') {
+      if (CLASS_ENUM[char.class ?? ''] !== node.applyTypeValue) continue;
+    } else if (node.applyType === 'AAT_SUBCLASS') {
+      if (SUBCLASS_ENUM[char.subClass ?? ''] !== node.applyTypeValue) continue;
+    } else if (node.applyType !== 'AAT_NONE') {
+      info.unresolved.push({
+        source: 'quirk',
+        sourceId: nodeId,
+        buffId: nodeId,
+        reason: `portée ${node.applyType} inconnue — contribution 0`,
+      });
+      continue;
+    }
+    // Le niveau saisi REMPLACE les inférieurs (un buff par niveau).
+    const row = node.levels.find((l) => l.level === level) ?? node.levels[node.levels.length - 1];
+    if (row?.optionType !== 'IOT_BUFF' || !row.buffId) continue; // stat : déjà en fiche
+    feedBuff('quirk', nodeId, row.buffId, 1);
+  }
+  return info;
+}
+
+export function resolveKitPassives(
+  char: KitCharacter,
+  transStar: number,
+  skills: Record<string, KitSkill>,
+  transcend: { basicStar: number; transStar: number; skillLevel: number }[],
+  buffs: DamageBuffsData,
+  attackerElement: Element,
+  defenderElement: Element,
+): GearPassivesInfo {
+  const { info, feedBuff } = makeCollector(buffs, attackerElement, defenderElement);
+  for (const ref of char.skills) {
+    const sk = skills[ref.id];
+    if (!sk || !sk.type.includes('PASSIVE')) continue;
+    const wanted =
+      sk.type === 'SKT_UNIQUE_PASSIVE'
+        ? uniquePassiveLevel(transcend, char.basicStar, transStar)
+        : sk.levels.length;
+    if (wanted < 1) continue;
+    const lv =
+      sk.levels.filter((l) => l.level <= wanted).sort((a, b) => b.level - a.level)[0] ??
+      sk.levels[0];
+    for (const b of lv.buffIds) feedBuff('kit', sk.id, b, 1);
+  }
   return info;
 }

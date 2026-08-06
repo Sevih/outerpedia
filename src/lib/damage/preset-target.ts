@@ -1,6 +1,6 @@
 /**
  * Résolution d'une cible PRESET du calculateur (`ti`/`si` de l'état `?z=`) —
- * élément du boss + stats défensives EFFECTIVES au spawn, par le MÊME calcul
+ * élément du monstre + stats défensives EFFECTIVES au spawn, par le MÊME calcul
  * que le wrapper serveur (`statAt` : niveau + adv + bossHp). Node-safe : le
  * rejeu des fixtures (harnais § 4) résout ici ce que l'UI affichait, le
  * wrapper construit ses spawns avec `presetSpawnStats` — une seule source.
@@ -46,8 +46,13 @@ export function presetSpawnStats(
 }
 
 /**
- * `ti` (= `${encounterId}:${bossId}`) + index de spawn → cible résolue.
+ * `ti` (= `${encounterId}:${monsterId}`) + index de spawn → cible résolue.
  * `undefined` si l'id ne se résout pas — jamais de stats plausibles.
+ *
+ * TOUT monstre de la rencontre est ciblable (boss ET renforts — les vagues du
+ * picker story, 06/08/2026 ; boss seuls avant). Un monstre répété dans le
+ * donjon à PLUSIEURS niveaux y a plusieurs entrées de même id : la PREMIÈRE
+ * fait foi (même dédup que l'UI, qui n'émet qu'une entrée par id).
  */
 export function resolvePresetTarget(
   targetId: string,
@@ -56,22 +61,22 @@ export function resolvePresetTarget(
   const sep = targetId.lastIndexOf(':');
   if (sep <= 0) return undefined;
   const encounterId = targetId.slice(0, sep);
-  const bossId = targetId.slice(sep + 1);
+  const monsterId = targetId.slice(sep + 1);
   const ref = DUNGEONS[encounterId];
   if (!ref?.monsters?.length) return undefined;
-  const boss = ref.monsters.find((m) => m.id === bossId && m.role === 'boss');
-  const monster = getMonster(bossId);
-  if (!boss || !monster) return undefined;
+  const entry = ref.monsters.find((m) => m.id === monsterId);
+  const monster = getMonster(monsterId);
+  if (!entry || !monster) return undefined;
   const e: Encounter = { id: encounterId, ref, monsters: ref.monsters };
   // La langue ne teinte que les LIBELLÉS des contextes — jamais les stats.
-  const contexts = encounterSpawnContexts(e, boss, 'en');
+  const contexts = encounterSpawnContexts(e, entry, 'en');
   const ctx = contexts[Math.min(Math.max(spawnIdx, 0), contexts.length - 1)];
   if (!ctx) return undefined;
   return {
     element: monster.element,
     stats: presetSpawnStats(monster, ctx),
     mode: ref.mode,
-    // Le boss du preset EST le monstre : ses passifs s'activent (passives.ts).
-    monsterId: bossId,
+    // La cible du preset EST le monstre : ses passifs s'activent (passives.ts).
+    monsterId,
   };
 }

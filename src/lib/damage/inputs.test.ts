@@ -176,9 +176,11 @@ describe('inputs — buffs MAX_HP (§ 16.2 : guilde + titre)', () => {
   const applied = (sum: number, hp: number) =>
     Math.floor(Math.fround(eventMaxHpRate(sum) * Math.fround(hp)));
 
-  it('slug de mode → DUNGEON_MODE ; normal_hard = DM_NORMAL (même mode, AGT_HARD)', () => {
+  it('slug de mode → DUNGEON_MODE ; les 4 slugs story = DM_NORMAL (découpage site)', () => {
     expect(dungeonModeOf('normal')).toBe('DM_NORMAL');
     expect(dungeonModeOf('normal_hard')).toBe('DM_NORMAL');
+    expect(dungeonModeOf('origin')).toBe('DM_NORMAL');
+    expect(dungeonModeOf('origin_hard')).toBe('DM_NORMAL');
     expect(dungeonModeOf('raid_1')).toBe('DM_RAID_1');
     expect(dungeonModeOf('world_boss')).toBe('DM_WORLD_BOSS');
   });

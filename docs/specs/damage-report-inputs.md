@@ -194,9 +194,15 @@ formules, avec `gameVersion` et le statut ✅/⚠️ hérité du mapping :
    ✅ LIVRÉ (03/08/2026) : `data/generated/damage/targets.json` — 1560 cibles
    (boss des rencontres peuplées non retirées d'`encounters.json` — preuve
    d'intégration, même philosophie que `roster.ts`), 2480 skills de monstre.
-   Conception actée ce jour :
+   ÉLARGI (06/08/2026) : TOUS les monstres des rencontres vivantes (boss ET
+   renforts — 2443 cibles en 1.10.805) : le picker visuel story liste les
+   vagues complètes d'un stage, chaque monstre spawné est ciblable en preset
+   (`resolvePresetTarget` ne filtre plus sur le rôle ; un id répété à
+   plusieurs niveaux dans un donjon garde sa PREMIÈRE entrée, même dédup que
+   l'UI).
+   Conception actée le 03/08 :
    - **Clé de liaison = l'ID de monstre** (`MonsterTemplet.ID`) — déjà la clé
-     des presets UI (`${encounterId}:${bossId}`), de `monsters.json` et des
+     des presets UI (`${encounterId}:${monsterId}`), de `monsters.json` et des
      tables brutes ; aucune clé nouvelle.
    - **Spawns NON ré-extraits** : les contextes (niveau réel, adv ‰, PV de
      boss, paliers) vivent déjà en brut dans `encounters.json` ; la couche

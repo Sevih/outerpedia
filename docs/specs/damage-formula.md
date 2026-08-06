@@ -857,8 +857,9 @@ seul qui pèse : `BuffValue` = 8 (Lv 1–3), 10 (Lv 4–6), 12 (Lv 7), 13 (Lv 8)
 14 (Lv 9), 15 (Lv 10) → jusqu'à ×1.15 de PV max.
 
 **Modes où le MAX_HP s'applique** (`DungeonMode` de la ligne, identique aux 10
-niveaux ; `IgnoreDungeonMode` vide) : `DM_NORMAL` (histoire, y compris hard —
-`normal_hard` d'encounters est un AGT_HARD du même mode), `DM_SIDESTORY`,
+niveaux ; `IgnoreDungeonMode` vide) : `DM_NORMAL` (l'histoire ENTIÈRE — les
+quatre slugs d'encounters `normal`/`normal_hard`/`origin`/`origin_hard` sont
+un découpage site par zone AreaTemplet du même mode DM_NORMAL), `DM_SIDESTORY`,
 `DM_GOLD`, `DM_FARMING`, `DM_RAID_1`, `DM_RAID_2` (Special Request),
 `DM_TOWER` (Skyward normal SEULEMENT), `DM_GUILD_DUNGEON`. Donc PAS en world
 boss, guild raid, tours hard/very hard/élémentaires, irregular, PvP, monad,
