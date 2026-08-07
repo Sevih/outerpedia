@@ -32,8 +32,10 @@ import type {
 import { InlineTextField } from '@/components/admin/InlineTextField';
 import { CharacterChips, chipView } from '@/components/admin/CharacterChips';
 import { CharacterPicker, type CharOption } from '@/components/admin/CharacterPicker';
+import { LANGS } from '@/lib/i18n/config';
 
-export const LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
+/** Langues du SITE (5) — dérivées de la source de vérité i18n. */
+export { LANGS };
 export type L = (typeof LANGS)[number];
 export type LText = { en?: string } & Record<string, string | undefined>;
 

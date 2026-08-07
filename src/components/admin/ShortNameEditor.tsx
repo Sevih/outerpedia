@@ -9,8 +9,8 @@
 import { useState } from 'react';
 import type { LocalizedText } from '@contracts';
 import { postJson } from '@/lib/admin/post-json';
+import { LANGS } from '@/lib/i18n/config';
 
-const LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
 type L = (typeof LANGS)[number];
 
 const btn =

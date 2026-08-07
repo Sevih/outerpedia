@@ -62,11 +62,6 @@
       path. 110 sites d'appel et un cast pour rien. Si on le garde, c'est le
       commentaire qu'il faut corriger (« gelé par le routing sous-domaine »),
       pas le code.
-- [ ] **`GAME_LANGS` / `SITE_LANGS`** — le même identifiant `LANGS` désigne deux
-      concepts opposés selon le fichier : les 4 langues DE JEU
-      (`LangDict = Record<GameLang, string>`) et les 5 langues DU SITE
-      (`LocalizedText`, `fr` compris). Les usages actuels sont **corrects** (vérifié
-      le 07/08, ce n'est pas un bug) — c'est le nommage qui tend le piège.
 
 ### Lots de fond SEO/perf (audit Sitebulb 20/07 — non urgents)
 

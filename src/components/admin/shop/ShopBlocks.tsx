@@ -28,8 +28,10 @@ import type {
 import { InlineTextField } from '@/components/admin/InlineTextField';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { img } from '@/lib/images';
+import { LANGS } from '@/lib/i18n/config';
 
-export const LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
+/** Langues du SITE (5) — dérivées de la source de vérité i18n. */
+export { LANGS };
 export type L = (typeof LANGS)[number];
 export type Priority = 'S' | 'A' | 'B' | 'C';
 export const PRIORITIES: Priority[] = ['S', 'A', 'B', 'C'];

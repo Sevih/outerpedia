@@ -6,8 +6,12 @@ import type { ItemCurated } from '@/lib/admin/item-curated-store';
 import { postJson } from '@/lib/admin/post-json';
 import { img } from '@/lib/images';
 import { ItemInline } from '@/components/inline/ItemInline';
+import { GAME_LANGS } from '@/lib/i18n/config';
 
-const LANGS = ['en', 'jp', 'kr', 'zh'] as const;
+// Langues de JEU (4), PAS les 5 du site : cet écran écrit un `LangDict`, dont
+// `fr` n'est pas une clé (traduction communautaire, absente des données de jeu).
+// Un `LANGS` à 5 ici produirait une clé hors contrat — et comme les deux sont
+// des listes de codes langue, ça compilerait. D'où le nom distinct.
 const field =
   'w-full rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm text-content focus:border-accent focus:outline-none';
 const label = 'text-xs font-semibold uppercase tracking-wide text-content-subtle';
@@ -17,7 +21,7 @@ type Loc = Record<string, string>;
 
 const compact = (v: Loc): LangDict | undefined => {
   const out: Record<string, string> = {};
-  for (const l of LANGS) if (v[l]?.trim()) out[l] = v[l].trim();
+  for (const l of GAME_LANGS) if (v[l]?.trim()) out[l] = v[l].trim();
   return Object.keys(out).length ? (out as LangDict) : undefined;
 };
 
@@ -138,7 +142,7 @@ export function ItemCuratedEditor({
           </button>
         </div>
         <div className="grid gap-2 sm:grid-cols-2">
-          {LANGS.map((l) => (
+          {GAME_LANGS.map((l) => (
             <div key={l} className="flex items-center gap-2">
               <span className="text-content-subtle w-6 text-xs uppercase">{l}</span>
               <input
@@ -170,7 +174,7 @@ export function ItemCuratedEditor({
           </button>
         </div>
         <div className="grid gap-2 sm:grid-cols-2">
-          {LANGS.map((l) => (
+          {GAME_LANGS.map((l) => (
             <div key={l} className="flex items-start gap-2">
               <span className="text-content-subtle w-6 pt-2 text-xs uppercase">{l}</span>
               <textarea

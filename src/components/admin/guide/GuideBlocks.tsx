@@ -21,8 +21,10 @@ import { hasText, type RecoGroupDraft } from '@/lib/admin/guide-draft';
 import { InlinePreview } from '@/components/admin/InlinePreview';
 import { CharacterChips, type ChipView } from '@/components/admin/CharacterChips';
 import { CharacterGroups, type GroupWithReason } from '@/components/admin/CharacterGroups';
+import { LANGS } from '@/lib/i18n/config';
 
-export const LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
+/** Langues du SITE (5) — dérivées de la source de vérité i18n. */
+export { LANGS };
 export type L = (typeof LANGS)[number];
 
 /** Nombre max de slots d'une équipe (contrainte du jeu). */

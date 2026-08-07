@@ -7,6 +7,32 @@
 
 ## 2026-08-07
 
+- **`LANGS` : trois choses portaient le même nom, le TYPE tient maintenant
+  l'alignement.** Suite de l'audit. Le nom `LANGS` désignait, selon le fichier
+  ouvert : les **5** langues du site importées de `i18n/config` (sitemap,
+  layout, Footer, `ChangelogEditor`, `EventsEditor`), les **5** mêmes recopiées
+  à la main dans 7 écrans admin, et les **4** langues de jeu dans
+  `ItemCuratedEditor`. Les usages étaient corrects — le danger était qu'ils le
+  restent : les trois sont des listes de codes langue, donc **confondre les deux
+  compile**. Supprimer la const locale d'`ItemCuratedEditor`, ou laisser
+  l'auto-import de l'IDE résoudre `LANGS` vers config, lui aurait fait écrire
+  une clé `fr` dans un `LangDict` — donnée hors contrat, sans une erreur.
+
+  `config.ts` gagne `GAME_LANGS`, **dérivé** de `LANGUAGES` par `isOfficial`
+  (jamais un littéral) et annoté `readonly GameLang[]`. Les 8 littéraux
+  disparaissent au profit de `LANGS` ou `GAME_LANGS` selon le type édité
+  (`LocalizedText` ou `LangDict`) : le choix est désormais lisible au nom, plus
+  à la longueur du tableau.
+
+  Détail qui a motivé le geste : une version de cette constante avait été
+  retirée de `config.ts` « faute de consommateur » — inexact, `ItemCuratedEditor`
+  la réimplémentait en dur. Et `config.ts` / `datagen/lib/lang.ts` se
+  renvoyaient l'alignement en commentaire (« DOIVENT rester alignées »), sans
+  que personne ne le vérifie. **C'est maintenant le compilateur** : passer `fr`
+  à `isOfficial: true` sans l'ajouter à `GAME_LANGS` côté datagen produit
+  `Type '"fr"' is not assignable to type '"en" | "jp" | "kr" | "zh"'`. Vérifié
+  en le cassant exprès. `import type` seul, donc `config.ts` reste client-safe.
+
 - **Audit complet du site, et ses trois premiers correctifs.** Rapport damage
   sorti à part ([audit/damage-calculator.md](./audit/damage-calculator.md),
   constats **D1–D5**) — le domaine a son worker dédié, l'audit global n'en garde
@@ -53,7 +79,7 @@ is not a function` sur les routes admin). Redémarrage requis ; à ne pas
     `LangDict = Record<GameLang, string>`, et `fr` est `isOfficial: false`), là
     où `EffectCuratedEditor` a raison de l'inclure (il édite un
     `LocalizedText`). Reste que le même identifiant désigne deux concepts
-    opposés — `GAME_LANGS` / `SITE_LANGS` lèverait le piège. Non fait.
+    opposés — **traité dans la foulée**, cf. l'entrée suivante.
 
   **Reste ouvert, volontairement non fait** (cf. TODO) : le `_ui.ts` admin
   (`btn`/`input`/`DATALIST_ID` recopiés dans 18 fichiers) et le retrait de

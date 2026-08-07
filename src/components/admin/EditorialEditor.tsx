@@ -24,10 +24,10 @@ import {
   type LocalizedText,
   type SynergyGroup,
 } from '@/components/admin/editorial/EditorialFields';
+import { LANGS } from '@/lib/i18n/config';
 
 export type { HeroView } from '@/components/admin/editorial/EditorialFields';
 
-const LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
 type L = (typeof LANGS)[number];
 
 const btn =

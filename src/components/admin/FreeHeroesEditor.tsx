@@ -33,8 +33,8 @@ import {
   viewsByName,
 } from '@/components/admin/CharacterChips';
 import type { CharOption } from '@/components/admin/CharacterPicker';
+import { LANGS } from '@/lib/i18n/config';
 
-const LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
 type L = (typeof LANGS)[number];
 type LText = { en?: string } & Record<string, string | undefined>;
 
