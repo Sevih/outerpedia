@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { Route } from 'next';
 import Link from 'next/link';
+import { Thumbnail, type MonsterThumb } from '@/components/ui/Thumbnail';
 
 /** Un stage guidé, préparé côté serveur (URLs complètes, textes localisés). */
 export interface StageCard {
@@ -15,7 +16,7 @@ export interface StageCard {
   /** Art de la zone (l'icône du meta). */
   src: string;
   /** Le boss du guide — caché tant que le lecteur n'a pas accepté le spoiler. */
-  boss: { name: string; src: string };
+  boss: { name: string; thumb: MonsterThumb };
 }
 
 /** Une saison de l'histoire : sa section dans la page. */
@@ -106,13 +107,11 @@ function StageTile({ stage, spoilers }: { stage: StageCard; spoilers: boolean })
 
       {spoilers && (
         <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-1 p-2">
-          <img
-            src={stage.boss.src}
-            alt={stage.boss.name}
-            loading="lazy"
-            className="ring-line h-10 w-10 rounded-md object-cover ring-1 sm:h-14 sm:w-14"
-            width={40}
-            height={40}
+          <Thumbnail
+            {...stage.boss.thumb}
+            kind="monster"
+            name={stage.boss.name}
+            className="h-10 w-10 sm:h-14 sm:w-14"
           />
           <span className="text-content-strong hidden max-w-full truncate text-xs font-medium drop-shadow-lg sm:block">
             {stage.boss.name}

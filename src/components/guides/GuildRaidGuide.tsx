@@ -35,7 +35,7 @@ import {
   type GuideContentProps,
 } from '@/lib/data/guides';
 import { geasUnlockTable, resolveGeas } from '@/lib/data/geas';
-import { monsterDisplayNames, monsterIconSrc } from '@/lib/data/monsters';
+import { monsterDisplayNames, monsterIconSrc, monsterThumb } from '@/lib/data/monsters';
 import { BossEncounters } from '@/components/guides/BossEncounters';
 import {
   GeasUnlockList,
@@ -188,7 +188,7 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
     if (!unlocks.length) return undefined;
     const m = groupBossMonster(group);
     return {
-      portraitSrc: m ? monsterIconSrc(m) : undefined,
+      thumb: m ? monsterThumb(m) : undefined,
       name: m ? (monsterDisplayNames([m.id], lang).get(m.id) ?? m.name.en) : '',
       unlocks,
     };

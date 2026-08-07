@@ -13,7 +13,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import type { Route } from 'next';
-import { img } from '@/lib/images';
+import { Thumbnail, type MonsterThumb } from '@/components/ui/Thumbnail';
 
 export interface TowerMenuEntry {
   /** Clé stable (n° d'étage ou id de boss) — compare à `currentKey`. */
@@ -23,12 +23,13 @@ export interface TowerMenuEntry {
   label: string;
   /** Badge numérique à gauche (n° d'étage) — tours standard. */
   number?: number;
-  /** Portrait du boss à gauche (face icon) — very hard. */
-  portraitSrc?: string;
-  /** Élément du boss (icône à droite). */
-  element?: string;
-  /** Classe du boss (icône à droite). */
-  classType?: string;
+  /**
+   * Le boss réduit à sa vignette (`monsterThumb`). Absent = pas de portrait
+   * (les archives n'en ont pas). Il portait avant une URL déjà résolue plus un
+   * `element` et un `classType` rendus SÉPARÉMENT au bout de la rangée : trois
+   * champs pour recomposer à la main ce que la vignette pose elle-même.
+   */
+  thumb?: MonsterThumb;
   /** Pastille « a une restriction fixe » — tours standard. */
   flag?: boolean;
 }
@@ -100,42 +101,10 @@ export function TowerFloorMenu({
                       {e.number}
                     </span>
                   )}
-                  {e.portraitSrc && (
-                    <img
-                      src={e.portraitSrc}
-                      alt=""
-                      aria-hidden
-                      className="border-line-subtle h-8 w-8 shrink-0 rounded-full border object-cover"
-                      loading="lazy"
-                      width={32}
-                      height={32}
-                    />
-                  )}
+                  {e.thumb && <Thumbnail {...e.thumb} kind="monster" className="h-8 w-8" />}
+                  {/* Élément et classe ne ferment plus la rangée : la vignette
+                      les porte, aux places du jeu. */}
                   <span className="min-w-0 flex-1 truncate">{e.label}</span>
-                  {(e.element || e.classType) && (
-                    <span className="flex shrink-0 items-center gap-1">
-                      {e.classType && (
-                        <img
-                          src={img.klass(e.classType)}
-                          alt=""
-                          aria-hidden
-                          className="h-4 w-4"
-                          width={16}
-                          height={16}
-                        />
-                      )}
-                      {e.element && (
-                        <img
-                          src={img.element(e.element)}
-                          alt=""
-                          aria-hidden
-                          className="h-4 w-4"
-                          width={16}
-                          height={16}
-                        />
-                      )}
-                    </span>
-                  )}
                   {e.flag && (
                     <span aria-hidden className="bg-accent/70 h-1.5 w-1.5 shrink-0 rounded-full" />
                   )}

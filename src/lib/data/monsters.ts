@@ -16,6 +16,9 @@ import { lRec } from '@/lib/i18n/localize';
 import { loadDataJson } from '@/lib/data/disk';
 import { expandRankContexts, type SpawnContext } from '@/lib/monster-stats';
 import { img } from '@/lib/images';
+// Type SEUL (effacé à la compilation) : le contrat de props de la vignette vit
+// avec elle, pas dupliqué ici.
+import type { MonsterThumb } from '@/components/ui/Thumbnail';
 
 // Lus au DISQUE (cache mtime), pas importés : l'admin réécrit ces fichiers à
 // chaque « Enregistrer » — un import statique les mettrait dans le graphe de
@@ -126,13 +129,30 @@ export function rankOptionLabels(contexts: SpawnContext[], lang: Lang): Record<s
 }
 
 /**
- * Icône d'un monstre (convention du jeu) : `icon` commençant par « 2 » =
+ * Icône NUE d'un monstre (convention du jeu) : `icon` commençant par « 2 » =
  * modèle de PERSONNAGE réutilisé en boss → face icon composée ; sinon vignette
  * `MT_<icon>` (namespace boss existant — même clé que les sources d'équipement,
  * jamais de doublon inter-namespace).
+ *
+ * Pour un PORTRAIT, prendre `monsterThumb` : celui-ci ne rend que l'image, sans
+ * le fond, les étoiles ni la bannière que le jeu pose autour. Il reste bon pour
+ * les icônes posées dans du texte ou dans l'étiquette d'un onglet, où la
+ * vignette complète serait illisible.
  */
 export function monsterIconSrc(m: Pick<Monster, 'icon'>): string {
   return m.icon.startsWith('2') ? img.face(m.icon) : img.boss(`MT_${m.icon}`);
+}
+
+/**
+ * Le monstre réduit à ce que sa VIGNETTE demande (cf. `MonsterThumb`) — à passer
+ * tel quel à `Thumbnail`. Les vues qui traversent la frontière serveur → client
+ * transportent cette forme, jamais une URL déjà résolue : c'est ce raccourci qui
+ * faisait perdre le type, la rareté, l'élément et la classe en chemin.
+ */
+export function monsterThumb(
+  m: Pick<Monster, 'icon' | 'type' | 'rarity' | 'element' | 'class'>,
+): MonsterThumb {
+  return { icon: m.icon, type: m.type, stars: m.rarity, element: m.element, cls: m.class };
 }
 
 /**

@@ -6,10 +6,11 @@ import { localePath } from '@/lib/navigation';
 import { GRADE_TEXT, img } from '@/lib/images';
 import type { Guide } from '@/lib/data/guides';
 import { GUIDE_CATEGORIES, categoryArt } from '@/lib/data/guide-categories';
-import { getMonster } from '@/lib/data/monsters';
+import { getMonster, monsterThumb } from '@/lib/data/monsters';
 import { encountersOfGroup } from '@/lib/data/encounters';
 import { pursuitLoot, type LootVariant } from '@/lib/data/rewards';
 import { ItemInline } from '@/components/inline/ItemInline';
+import { Thumbnail } from '@/components/ui/Thumbnail';
 import { EmptyCategory } from './EmptyCategory';
 import type { CategoryViewProps } from './types';
 
@@ -90,11 +91,6 @@ function BossPin({ guide, lang, t }: { guide: Guide; lang: Lang; t: TFunction })
   }
 
   const name = lRec(monster.name, lang) || monster.name.en;
-  // Icône commençant par « 2 » = modèle de perso réutilisé → face icon du
-  // domaine perso (même règle que `monsterOgImage`).
-  const portraitSrc = monster.icon.startsWith('2')
-    ? img.face(monster.icon)
-    : img.boss(`MT_${monster.icon}`);
   // Butin = le donjon le plus DUR de la poursuite (c'est lui qu'on farme).
   const top = ladder[ladder.length - 1];
   const tableId = top.ref.rewardWin ?? top.ref.reward;
@@ -126,17 +122,17 @@ function BossPin({ guide, lang, t }: { guide: Guide; lang: Lang; t: TFunction })
         >
           {name}
         </span>
-        <span className="border-danger-deep group-hover:border-danger relative h-12 w-12 shrink-0 overflow-hidden rounded-md border transition-all lg:h-16 lg:w-16">
-          <img
-            src={img.slotFrame('unique')}
-            alt=""
-            aria-hidden
-            className="absolute inset-0 h-full w-full object-contain"
-          />
-          <img
-            src={portraitSrc}
-            alt={name}
-            className="relative z-10 h-full w-full object-contain"
+        {/* Le pin portait un cadre de rareté d'ITEM (`TI_Slot_Unique`) détourné
+            en fond de monstre. Le jeu a le sien (`MT_Slot_*`, choisi par le
+            type) et la vignette le pose. Le halo rouge du survol passe sur un
+            conteneur : rien ne doit rogner la vignette, son icône d'élément sort
+            volontairement du cadre. */}
+        <span className="ring-danger-deep group-hover:ring-danger shrink-0 rounded-md ring-1 transition-all">
+          <Thumbnail
+            {...monsterThumb(monster)}
+            kind="monster"
+            name={name}
+            className="h-12 w-12 lg:h-16 lg:w-16"
           />
         </span>
       </Link>

@@ -7,6 +7,43 @@
 
 ## 2026-08-08
 
+- **Les portraits de MONSTRE des guides rejoignent la vignette — six vues, et
+  une règle pour trancher le reste.** Le premier balayage n'avait cherché que ce
+  qui EMPILAIT la géométrie du portrait ; il manquait toute une famille qui
+  passait par `monsterIconSrc` (remarque Sevih). Deux d'entre elles redessinaient
+  à la main des calques que le jeu a en sprite :
+  - `GeasUnlockList` écrivait la bannière BOSS **en CSS** — une pastille
+    `bg-debuff` avec le mot « BOSS » en 7 px, au coin haut-gauche, là où le jeu
+    pose `MT_Boss`. La vignette la pose seule, d'après le type.
+  - `IrregularChaseMap` posait le portrait sur `img.slotFrame('unique')`, un
+    cadre de rareté d'**ITEM** (`TI_Slot_Unique`) détourné en fond de monstre,
+    alors que `MT_Slot_*` existe pour exactement ça.
+  - Puis `BossPanel`, `TowerFloorMenu`, `TowerAddsSelector` et `AdventureGrid`,
+    avec leurs alimentateurs (`TowerGuide`, `AdventureSeasons`, `GuildRaidGuide`).
+  - **`MonsterThumb` + `monsterThumb()`** : les guides résolvent leurs monstres
+    côté serveur puis passent le résultat à des composants CLIENT. Ils leur
+    passaient une URL déjà construite — assez pour une face nue, mais le type, la
+    rareté, l'élément et la classe restaient au vestiaire. La forme plate les
+    transporte et se déverse dans `Thumbnail` (`{...thumb}`). Trois champs de
+    `TowerMenuEntry` (`portraitSrc` + `element` + `classType`) fondent en un.
+  - **La règle appliquée**, pour que la suite se tranche sans rediscuter : un
+    monstre rendu comme PORTRAIT (image carrée autonome, ≥ 32 px) prend la
+    vignette ; une icône ≤ 28 px posée dans du texte ou dans l'étiquette d'un
+    onglet, à côté de son propre libellé, garde `monsterIconSrc`. La vignette
+    complète y serait illisible et ferait doubler la hauteur des barres
+    d'onglets. Restent donc à l'icône nue : les onglets de `MonsterLineup` (24)
+    et de `GuildRaidGuide` (28), les `InlineIcon` des guides rédigés, et les
+    og:image (`monsterOgImage`, PNG).
+  - Élément et classe disparaissent d'à côté des noms dans `BossPanel` et
+    `TowerFloorMenu` : la vignette les porte aux places du jeu, les répéter les
+    montrait deux fois.
+  - Écartés, et vérifiés un par un : les sources d'équipement
+    (`GearRecoSection`, `EquipmentDetail`…) dont la donnée ne porte que
+    `{id, name, icon}` — ni type, ni élément, ni classe ; `SingularityRotation`,
+    qui préfère `img.singularity`, l'avatar rond que le jeu dédie à ce mode ;
+    `SpecialRequestSplit` et les `VariantIcon`, qui montrent de l'ÉQUIPEMENT et
+    non des monstres.
+
 - **Tous les portraits passent par la vignette transcrite : trois rendus à l'œil
   supprimés, un seul reste.** `Thumbnail` existait mais rien ne s'en servait — le
   site portait EN PARALLÈLE trois géométries recopiées les unes des autres et

@@ -31,13 +31,14 @@ import {
   getMonster,
   getMonsterSkills,
   getStatScales,
-  monsterIconSrc,
+  monsterThumb,
   getBossQuirkMods,
   monsterSpawnContexts,
   rankOptionLabels,
 } from '@/lib/data/monsters';
 import type { CardSkill } from '@/components/character/SkillCard';
 import { EffectIconBadge } from '@/components/character/EffectChips';
+import { Thumbnail } from '@/components/ui/Thumbnail';
 import { statIconSprite, statAbbr } from '@/lib/stats';
 import { statName } from '@/lib/data/stat-glossary';
 import { MonsterSkills, MonsterSkillBody } from './MonsterSkills';
@@ -175,13 +176,7 @@ export async function BossCard({
             cherche (le jeu l'écrit au même endroit) ; il suit la glissière, d'où
             le contexte partagé. */}
         <div className="flex items-center gap-4">
-          <img
-            src={monsterIconSrc(monster)}
-            alt={name}
-            className="border-line-subtle h-16 w-16 rounded-lg border object-cover"
-            width={64}
-            height={64}
-          />
+          <Thumbnail {...monsterThumb(monster)} kind="monster" name={name} className="h-16 w-16" />
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <h2 className="text-content-strong text-xl font-bold">{name}</h2>
@@ -194,21 +189,11 @@ export async function BossCard({
                 </span>
               )}
             </div>
+            {/* Élément et classe ne sont plus écrits ici : la vignette les
+                porte, aux places exactes où le jeu les met. Les répéter à côté
+                du nom les montrait deux fois. Reste le NIVEAU, que la vignette
+                ne peut pas donner — il suit la glissière de palier. */}
             <div className="mt-1 flex items-center gap-2">
-              <img
-                src={img.element(monster.element)}
-                alt={monster.element}
-                className="h-5 w-5"
-                width={20}
-                height={20}
-              />
-              <img
-                src={img.klass(monster.class)}
-                alt={monster.class}
-                className="h-5 w-5"
-                width={20}
-                height={20}
-              />
               <BossLevel label={t('page.character.skill.level')} />
             </div>
           </div>

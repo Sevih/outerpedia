@@ -433,6 +433,26 @@ export type ThumbnailProps = Common &
   );
 
 /**
+ * CE QU'IL FAUT D'UN MONSTRE POUR EN RENDRE LA VIGNETTE, et rien de plus.
+ *
+ * Les guides résolvent leurs monstres côté SERVEUR (`lib/data/monsters` lit le
+ * disque) puis passent le résultat à des composants client — menus d'étage,
+ * sélecteurs de renforts, grilles de stages. Ils leur passaient jusqu'ici une
+ * URL déjà construite, ce qui suffisait à afficher une face nue mais perdait en
+ * route le type, la rareté, l'élément et la classe : de quoi rendre la vignette,
+ * jamais transmis. D'où cette forme, sérialisable et volontairement plate — elle
+ * se déverse telle quelle dans `Thumbnail` (`{...thumb}`), et `monsterThumb()`
+ * la construit depuis un `Monster`.
+ */
+export interface MonsterThumb {
+  icon: string;
+  type: string;
+  stars: number;
+  element: string;
+  cls: string;
+}
+
+/**
  * La rangée d'étoiles : une teinte par étoile, de gauche à droite. Vide = pas de
  * rangée. Chez le monstre c'est un compteur ; chez le perso, la table décide.
  */

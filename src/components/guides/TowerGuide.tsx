@@ -40,7 +40,7 @@ import {
   type TowerCombatGroup,
 } from '@/lib/data/towers';
 import { getEncounter, bossWaveMonsters } from '@/lib/data/encounters';
-import { getMonster, monsterIconSrc } from '@/lib/data/monsters';
+import { getMonster, monsterThumb } from '@/lib/data/monsters';
 import { resolveGuideCharacter } from '@/lib/data/characters';
 import { renderGameText } from '@/components/inline/GameTokens';
 import { BossCard } from './BossPanel';
@@ -179,7 +179,7 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
                 return {
                   id: a.id,
                   name: monsterName(a.id, lang),
-                  iconSrc: m ? monsterIconSrc(m) : undefined,
+                  thumb: m ? monsterThumb(m) : undefined,
                   card: (
                     <BossCard
                       monsterId={a.id}
@@ -242,9 +242,7 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
               key: c.boss.id,
               href: detailHref(c.boss.id),
               label: monsterName(c.boss.id, lang),
-              portraitSrc: m ? monsterIconSrc(m) : undefined,
-              element: m?.element,
-              classType: m?.class,
+              thumb: m ? monsterThumb(m) : undefined,
             };
           }),
       }))
@@ -293,9 +291,7 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
           href: detailHref(f.floor),
           label: b ? lRec(b.name, lang) || b.name.en : '',
           number: f.floor,
-          portraitSrc: b ? monsterIconSrc(b) : undefined,
-          element: b?.element,
-          classType: b?.class,
+          thumb: b ? monsterThumb(b) : undefined,
           flag: f.restrictions.length > 0,
         };
       }),

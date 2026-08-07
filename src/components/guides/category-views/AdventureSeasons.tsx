@@ -5,7 +5,7 @@ import { localePath } from '@/lib/navigation';
 import { img } from '@/lib/images';
 import type { Guide } from '@/lib/data/guides';
 import { encountersOfIds } from '@/lib/data/encounters';
-import { getMonster, monsterIconSrc } from '@/lib/data/monsters';
+import { getMonster, monsterThumb } from '@/lib/data/monsters';
 import { EmptyCategory } from './EmptyCategory';
 import { AdventureGrid, type SeasonSection, type StageCard } from './AdventureGrid';
 import type { CategoryViewProps } from './types';
@@ -91,6 +91,6 @@ function stageCard(guide: Guide, lang: Lang, t: TFunction): StageCard {
     // qu'on vient justement de mettre derrière un bouton.
     area: (dungeon.area ? lRec(dungeon.area, lang) : '') || lRec(guide.title, lang),
     src: img.guideIcon(guide.icon),
-    boss: { name: lRec(monster.name, lang) || monster.name.en, src: monsterIconSrc(monster) },
+    boss: { name: lRec(monster.name, lang) || monster.name.en, thumb: monsterThumb(monster) },
   };
 }

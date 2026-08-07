@@ -17,6 +17,7 @@ import type { TFunction } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { TintedIcon } from '@/components/character/EffectChips';
 import { isBonusGeas, resolveGeas, type GeasRef, type GeasUnlock } from '@/lib/data/geas';
+import { Thumbnail, type MonsterThumb } from '@/components/ui/Thumbnail';
 
 /** Score signé lisible : `points` est per-mille (−700 = −70 %). */
 function formatPoints(points: number): string {
@@ -153,7 +154,8 @@ export function ActiveGeasRow({ geas, lang, t }: { geas: GeasRef[]; lang: Lang; 
 
 /** Une colonne de sous-boss pour la table combinée : portrait + table de déblocage. */
 export interface GeasColumn {
-  portraitSrc?: string;
+  /** Le monstre réduit à sa vignette (`monsterThumb`). Absent = pas de portrait. */
+  thumb?: MonsterThumb;
   name: string;
   unlocks: GeasUnlock[];
 }
@@ -194,26 +196,16 @@ function GeasTableCell({
   );
 }
 
-/** Portrait de boss en tête de colonne (carte + badge « BOSS »). */
+/**
+ * Portrait de boss en tête de colonne. La bannière « BOSS » était écrite ICI, en
+ * dur : une pastille `bg-debuff` avec le mot en 7 px — alors que le jeu a le
+ * sprite pour ça, et que la vignette le pose toute seule d'après le type.
+ */
 function BossHead({ col }: { col: GeasColumn }) {
-  if (!col.portraitSrc) return <div className="h-14" aria-hidden />;
+  if (!col.thumb) return <div className="h-14" aria-hidden />;
   return (
     <div className="flex h-14 items-center justify-center">
-      <span className="relative shrink-0">
-        <img
-          src={col.portraitSrc}
-          alt={col.name}
-          width={48}
-          height={48}
-          className="border-line-subtle h-12 w-12 rounded border object-cover"
-        />
-        <span
-          style={{ color: '#fff' }}
-          className="bg-debuff absolute top-0 left-0 rounded-br px-1 text-[7px] font-bold"
-        >
-          BOSS
-        </span>
-      </span>
+      <Thumbnail {...col.thumb} kind="monster" name={col.name} className="h-12 w-12" />
     </div>
   );
 }

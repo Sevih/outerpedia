@@ -10,11 +10,13 @@
  * est préservé). Un seul add ⇒ pas de sélecteur, juste la carte.
  */
 import { useState, type ReactNode } from 'react';
+import { Thumbnail, type MonsterThumb } from '@/components/ui/Thumbnail';
 
 export interface TowerAdd {
   id: string;
   name: string;
-  iconSrc?: string;
+  /** L'add réduit à sa vignette (`monsterThumb`). */
+  thumb?: MonsterThumb;
   card: ReactNode;
 }
 
@@ -41,17 +43,7 @@ export function TowerAddsSelector({ adds }: { adds: TowerAdd[] }) {
                   on ? 'border-accent bg-accent/10' : 'border-line-subtle hover:border-line',
                 ].join(' ')}
               >
-                {a.iconSrc && (
-                  <img
-                    src={a.iconSrc}
-                    alt=""
-                    aria-hidden
-                    className="h-11 w-11 rounded-md object-cover"
-                    loading="lazy"
-                    width={44}
-                    height={44}
-                  />
-                )}
+                {a.thumb && <Thumbnail {...a.thumb} kind="monster" className="h-11 w-11" />}
                 <span className="text-content-muted max-w-14 truncate text-[11px] leading-tight">
                   {a.name}
                 </span>
