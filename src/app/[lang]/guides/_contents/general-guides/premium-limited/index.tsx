@@ -34,6 +34,13 @@ export default async function PremiumLimitedGuide({ lang }: { lang: Lang }) {
   const ctx: ParseCtx = { lang, t, strict: true };
   const L = (m: (typeof LABELS)[keyof typeof LABELS]): string => lRec(m, lang);
 
+  // Les collab sont rendus translucides par PriorityTiers : la légende ne
+  // s'affiche que sur l'onglet qui en contient (aucun côté Premium).
+  const hasCollab = (order: PriorityOrder): boolean =>
+    [order.first, order.second, order.third].some((tier) =>
+      tier.some((pick) => (findCharacterByName(pick.name)?.tags ?? []).includes('collab')),
+    );
+
   const priorityPanel = (order: PriorityOrder): ReactNode => {
     const tiers: PriorityTier[] = [
       { title: L(LABELS.priority1st), entries: order.first },
@@ -46,6 +53,9 @@ export default async function PremiumLimitedGuide({ lang }: { lang: Lang }) {
           {L(LABELS.recommendedChoices)}
         </h2>
         <PriorityTiers tiers={tiers} lang={lang} where={WHERE} />
+        {hasCollab(order) && (
+          <p className="text-content-subtle m-0 text-center text-xs">{L(LABELS.collabNote)}</p>
+        )}
         <div className="border-line-subtle border-t pt-5">
           <div className="text-content-strong mb-3 text-center text-sm font-semibold">
             {L(LABELS.transcendPriority)}

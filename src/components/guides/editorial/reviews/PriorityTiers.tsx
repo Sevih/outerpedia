@@ -3,6 +3,9 @@
  * groupés par palier, l'étoile affichée est la CIBLE éditoriale (pas la rareté),
  * séparateurs `>`/`≥` optionnels entre entrées (ordre strict, guide Core
  * Fusion). Les noms éditoriaux résolvent au BUILD (nom inconnu = build cassé).
+ *
+ * Les héros de COLLAB sont rendus translucides : leur palier dit où ils se
+ * situeraient, mais ils ne sont pas un choix réel de bannière (retour Shiraen).
  */
 import type { Lang } from '@/lib/i18n/config';
 import { resolveGuideCharacter } from '@/lib/data/characters';
@@ -61,6 +64,7 @@ export function PriorityTiers({
                       rarity={e.stars}
                       size={64}
                       href={g.href}
+                      dimmed={(g.character.tags ?? []).includes('collab')}
                     />
                   </span>
                 );

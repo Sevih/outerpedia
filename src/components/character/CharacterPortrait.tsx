@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Route } from 'next';
+import { cn } from '@/lib/cn';
 import { img } from '@/lib/images';
 
 /**
@@ -17,6 +18,7 @@ export function CharacterPortrait({
   size = 64,
   href,
   showName = true,
+  dimmed = false,
 }: {
   id: string;
   name: string;
@@ -32,10 +34,15 @@ export function CharacterPortrait({
    * L'`alt` de l'image le porte de toute façon.
    */
   showName?: boolean;
+  /**
+   * Portrait translucide : le perso est montré pour situer sa place, mais il
+   * n'est pas un choix réel (héros de collab dans les guides de pull).
+   */
+  dimmed?: boolean;
 }) {
   const starSize = Math.round(size * 0.17);
   const content = (
-    <span className="flex w-full flex-col items-center gap-1">
+    <span className={cn('flex w-full flex-col items-center gap-1', dimmed && 'opacity-70')}>
       <span className="relative inline-block shrink-0" style={{ width: size, height: size }}>
         <img
           src={img.face(id)}

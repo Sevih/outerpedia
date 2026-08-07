@@ -7,6 +7,24 @@
 
 ## 2026-08-07
 
+- **Guide « Premium & Limited » : les collab se voient sans être un choix
+  (retour Shiraen).** Les héros de collab étaient classés dans les paliers de
+  priorité comme n'importe quel autre — utile comme repère (« voilà où ils se
+  situent »), trompeur comme conseil : ils ne sont pas tirables sur la bannière.
+  Les portraits de collab sont désormais rendus à **70 % d'opacité** dans
+  `PriorityTiers` — DÉRIVÉ du tag `collab` de la data, pas d'un champ éditorial
+  à maintenir : un futur collab est atténué tout seul, et rien à re-vérifier
+  dans le JSON de priorités. Nouvelle prop `dimmed` sur `CharacterPortrait`
+  (composant partagé, défaut inchangé). Une légende `collabNote` (5 langues)
+  explicite l'intention sous les paliers — le translucide seul se lit aussi bien
+  comme « pas encore sorti » ou comme un bug de rendu ; elle ne s'affiche que
+  sur l'onglet qui contient des collab, donc pas côté Premium.
+  • **Heatwave Cop Delta ajoutée en 2e priorité Limited, juste après Ryu Lion**
+  (consensus Shiraen/Sevih) : c'est la copie de Ryu (Terre/Ranger, skillset
+  partagé, exclusion mutuelle en deck), et elle avait déjà sa review dans le
+  guide — seule la ligne de priorités manquait, si bien que le seul des deux
+  visible dans les paliers était l'indisponible.
+
 - **`pnpm dev` ne meurt plus sur une machine sans UnityPy.** L'étape python
   face-layout (la seule du projet) s'exécutait dès que `.gamedata` existait —
   mais tirer les bundles n'implique pas avoir l'outillage python : sur le

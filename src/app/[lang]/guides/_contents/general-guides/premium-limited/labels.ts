@@ -46,6 +46,14 @@ export const LABELS = {
     fr: '3e Priorité',
   },
 
+  collabNote: {
+    en: 'Collab heroes are shown translucent: their tier shows where they would land, but they are not an actual choice on this banner.',
+    jp: 'コラボヒーローは半透明で表示されます。順位は本来の位置を示していますが、このバナーでは実際の選択肢ではありません。',
+    kr: '콜라보 영웅은 반투명으로 표시됩니다. 순위는 원래 위치를 나타내지만, 이 배너에서는 실제 선택지가 아닙니다.',
+    zh: '联动英雄以半透明显示：其优先级表示他们本应所处的位置，但在此卡池中并非实际可选。',
+    fr: 'Les Héros de collab sont affichés en translucide : leur palier indique où ils se situeraient, mais ils ne sont pas un choix réel sur cette bannière.',
+  },
+
   transcendPriority: {
     en: 'Transcendence Priority',
     jp: '超越優先順位',
