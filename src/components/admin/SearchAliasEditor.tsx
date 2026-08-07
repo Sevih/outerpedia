@@ -47,10 +47,17 @@ export function SearchAliasEditor({
   };
 
   async function save() {
+    // Le texte encore DANS le champ compte comme un alias. Sans ce flush, « taper
+    // puis cliquer Save » (sans Entrée) envoyait une liste vide — donc SUPPRIMAIT
+    // la clé du perso — en affichant « ✓ saved ».
+    const pending = draft.trim();
+    const next = pending && !has(pending) ? [...aliases, pending] : aliases;
+    setAliases(next);
+    setDraft('');
     setState('saving');
     setError(null);
     try {
-      await postJson(`/api/admin/curated/search-aliases/${id}`, aliases);
+      await postJson(`/api/admin/curated/search-aliases/${id}`, next);
       setState('saved');
     } catch (e) {
       setState('error');

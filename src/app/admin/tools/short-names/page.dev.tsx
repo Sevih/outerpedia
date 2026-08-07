@@ -12,7 +12,8 @@ export default function ToolShortNamesIndex() {
     <div className="space-y-3">
       <h1 className="text-content-strong text-xl font-semibold">Tools · Short names</h1>
       <p className="text-content-muted text-sm">
-        {done}/{items.length} persos ont un nom court. Choisis un perso à gauche pour éditer.
+        {done}/{items.length} persos ont un nom court. Choisis un perso à gauche pour éditer — la
+        liste va du nom le plus long au plus court, les premiers étant ceux qui débordent.
       </p>
       <p className="text-content-subtle text-sm">
         Nom d&apos;affichage abrégé et localisé (« D.Stella » pour « Demiurge Stella »), utilisé là

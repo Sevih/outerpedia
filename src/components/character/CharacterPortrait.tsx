@@ -4,6 +4,45 @@ import { cn } from '@/lib/cn';
 import { img } from '@/lib/images';
 
 /**
+ * Le nom TIENT-IL sur deux lignes dans `maxWidth` (px) ? Estimation
+ * typographique, pas une mesure : le portrait est rendu côté serveur, il n'y a
+ * pas de DOM à interroger. Largeur moyenne d'un caractère en `text-xs`
+ * semibold, pleine chasse pour les scripts CJK, retour à la ligne glouton par
+ * mots (un mot trop large est coupé par `wrap-break-word`, donc il consomme
+ * plusieurs lignes). Volontairement grossier : se tromper d'un caractère fait
+ * afficher « D.Stella » au lieu de « Demiurge Stella », ça ne casse rien.
+ */
+const NARROW_PX = 6.6;
+const WIDE_PX = 12;
+const SPACE_PX = 3.3;
+/** Scripts à pleine chasse (kana, hangul, idéogrammes, ponctuation large). */
+const WIDE_CHAR = /[ᄀ-ᇿ⺀-꓏가-퟿豈-﫿︰-﹏＀-｠]/;
+
+function fitsOnTwoLines(text: string, maxWidth: number): boolean {
+  const widthOf = (s: string): number =>
+    [...s].reduce((w, ch) => w + (WIDE_CHAR.test(ch) ? WIDE_PX : NARROW_PX), 0);
+  let lines = 1;
+  let used = 0;
+  for (const word of text.split(/\s+/).filter(Boolean)) {
+    const w = widthOf(word);
+    if (used > 0 && used + SPACE_PX + w > maxWidth) {
+      lines += 1;
+      used = 0;
+    }
+    if (w > maxWidth) {
+      // Mot plus large que la colonne : coupé, il occupe plusieurs lignes.
+      const total = used + w;
+      lines += Math.ceil(total / maxWidth) - 1;
+      used = total % maxWidth;
+    } else {
+      used += (used ? SPACE_PX : 0) + w;
+    }
+    if (lines > 2) return false;
+  }
+  return true;
+}
+
+/**
  * Portrait compact d'un personnage (face icon FI_*) + overlays — géométrie du
  * thumbnail du jeu, comme en V2 : élément en haut à droite, classe à droite au
  * milieu, étoiles de rareté centrées en bas et légèrement chevauchées. Nom en
@@ -19,6 +58,7 @@ export function CharacterPortrait({
   href,
   showName = true,
   dimmed = false,
+  shortName,
 }: {
   id: string;
   name: string;
@@ -39,8 +79,16 @@ export function CharacterPortrait({
    * n'est pas un choix réel (héros de collab dans les guides de pull).
    */
   dimmed?: boolean;
+  /**
+   * Nom COURT curé (`short-names.json`, déjà résolu dans la langue par
+   * l'appelant : ce module lit le fs, le portrait tourne aussi côté client).
+   * Employé UNIQUEMENT en dernier recours, quand le nom complet ne tient pas
+   * sur les deux lignes disponibles — sinon on affiche toujours le vrai nom.
+   */
+  shortName?: string;
 }) {
   const starSize = Math.round(size * 0.17);
+  const label = shortName && !fitsOnTwoLines(name, size + 24) ? shortName : name;
   const content = (
     <span className={cn('flex w-full flex-col items-center gap-1', dimmed && 'opacity-70')}>
       <span className="relative inline-block shrink-0" style={{ width: size, height: size }}>
@@ -93,12 +141,14 @@ export function CharacterPortrait({
         // `size + 24`. La largeur reste celle du portrait (rangées alignées) et
         // la hauteur est réservée à 2 lignes (`2.5em` = 2 × `leading-tight`),
         // sinon un voisin à une seule ligne décentre les portraits entre eux.
+        // `title` porte TOUJOURS le nom complet, y compris quand on se rabat
+        // sur le nom court.
         <span
           title={name}
           className="text-content-strong line-clamp-2 min-h-[2.5em] w-full text-center text-xs leading-tight font-semibold wrap-break-word"
           style={{ maxWidth: size + 24 }}
         >
-          {name}
+          {label}
         </span>
       )}
     </span>

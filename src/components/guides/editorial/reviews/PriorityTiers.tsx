@@ -9,6 +9,7 @@
  */
 import type { Lang } from '@/lib/i18n/config';
 import { resolveGuideCharacter } from '@/lib/data/characters';
+import { loadShortNames } from '@/lib/data/short-names';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 
 export interface PriorityEntry {
@@ -35,6 +36,9 @@ export function PriorityTiers({
   lang: Lang;
   where: string;
 }) {
+  // Noms courts curés : le portrait ne s'en sert que si le nom complet ne tient
+  // pas sous la vignette (lecture fs — ce composant est rendu côté serveur).
+  const shorts = loadShortNames();
   return (
     <div className="space-y-5">
       {tiers
@@ -65,6 +69,7 @@ export function PriorityTiers({
                       size={64}
                       href={g.href}
                       dimmed={(g.character.tags ?? []).includes('collab')}
+                      shortName={shorts[g.character.id]?.[lang] ?? shorts[g.character.id]?.en}
                     />
                   </span>
                 );

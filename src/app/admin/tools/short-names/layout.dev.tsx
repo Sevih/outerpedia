@@ -13,7 +13,10 @@ export default function ToolsShortNamesLayout({ children }: { children: React.Re
       name: characterDisplayName(c),
       done: Boolean(shortNames[c.id] && Object.keys(shortNames[c.id]).length),
     }))
-    .sort((a, b) => a.name.localeCompare(b.name));
+    // Du nom le PLUS LONG au plus court : ce sont eux qui débordent sous les
+    // portraits, donc les seuls à avoir besoin d'un nom court. L'alphabétique
+    // ne sert plus qu'à départager deux noms de même longueur (ordre stable).
+    .sort((a, b) => b.name.length - a.name.length || a.name.localeCompare(b.name));
 
   return (
     <div className="flex gap-6">
