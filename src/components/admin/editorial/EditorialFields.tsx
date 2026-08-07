@@ -18,6 +18,7 @@ import { CharacterGroups } from '@/components/admin/CharacterGroups';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import type { InlineSegment } from '@/lib/parse-text';
 import { renderInlineBatch } from '@/lib/admin/inline-preview-actions';
+import { btn } from '../_ui';
 
 export type LocalizedText = Partial<Record<'en' | 'jp' | 'kr' | 'zh' | 'fr', string>>;
 export interface SynergyGroup {
@@ -36,9 +37,6 @@ export interface HeroView {
 }
 
 export type EditorialLang = 'en' | 'jp' | 'kr' | 'zh' | 'fr';
-
-const btn =
-  'rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm hover:border-accent disabled:opacity-50';
 
 /** Datalist des noms de héros, partagée par les groupes de synergie. */
 const HERO_DATALIST = 'hero-names';

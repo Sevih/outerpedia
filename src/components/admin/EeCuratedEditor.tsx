@@ -8,13 +8,10 @@ import type { EeChipMeta } from '@/lib/data/equipment-detail';
 import type { EffectOption } from '@/components/admin/CharacterKitEditor';
 import { img } from '@/lib/images';
 import { postJson } from '@/lib/admin/post-json';
+import { field, label } from './_ui';
 
 /** Rangs éditoriaux EE avec image (`IG_Event_Rank_*`). */
 const RANKS = ['', 'S', 'A', 'B', 'C', 'D'];
-
-const field =
-  'w-full rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm text-content focus:border-accent focus:outline-none';
-const label = 'text-xs font-semibold uppercase tracking-wide text-content-subtle';
 
 /** Sélecteur de rang + aperçu image (déblocage ou +10). */
 function RankSelect({

@@ -5,10 +5,10 @@ import type { GearPresets, SetComboPiece } from '@contracts';
 import type { GearOption } from '@/lib/admin/gear-options';
 import { postJson } from '@/lib/admin/post-json';
 import { rowKey } from '@/lib/admin/keyed';
+import { label } from './_ui';
 
 const field =
   'rounded-md border border-line bg-surface-base px-2 py-1 text-sm text-content focus:border-accent focus:outline-none';
-const label = 'text-xs font-semibold uppercase tracking-wide text-content-subtle';
 const btn = 'rounded border border-line px-2 py-0.5 text-xs text-content-subtle hover:text-content';
 
 type Status = { kind: 'idle' | 'ok' | 'err'; msg?: string };

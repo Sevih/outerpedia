@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { VideoRef } from '@contracts';
+import { btn } from './_ui';
 
 /** Candidat renvoyé par /api/admin/youtube/search (méta complète). */
 interface Candidate {
@@ -15,9 +16,6 @@ interface Candidate {
 }
 
 const thumb = (id: string) => `https://i.ytimg.com/vi/${id}/mqdefault.jpg`;
-
-const btn =
-  'rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm hover:border-accent disabled:opacity-50';
 
 export function VideoCurator({
   characterName,

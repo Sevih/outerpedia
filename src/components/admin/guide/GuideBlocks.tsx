@@ -22,6 +22,8 @@ import { InlinePreview } from '@/components/admin/InlinePreview';
 import { CharacterChips, type ChipView } from '@/components/admin/CharacterChips';
 import { CharacterGroups, type GroupWithReason } from '@/components/admin/CharacterGroups';
 import { LANGS } from '@/lib/i18n/config';
+import { btn, inputFull as input } from '../_ui';
+export { btn, input };
 
 /** Langues du SITE (5) — dérivées de la source de vérité i18n. */
 export { LANGS };
@@ -34,10 +36,6 @@ export const DATALIST_ID = 'guide-char-names';
 /** Jeton stocké par les guides = NOM D'AFFICHAGE EN du perso. */
 export type ViewOf = (token: string) => ChipView | undefined;
 
-export const btn =
-  'rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm hover:border-accent disabled:opacity-50';
-export const input =
-  'w-full rounded-md border border-line bg-surface-base px-2 py-1 text-sm focus:border-accent focus:outline-none';
 export const heading = 'text-content-strong text-sm font-semibold';
 
 /** Cadre commun des textes au repos — cliquable pour passer en édition. */

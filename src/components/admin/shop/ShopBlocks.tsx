@@ -29,6 +29,8 @@ import { InlineTextField } from '@/components/admin/InlineTextField';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { img } from '@/lib/images';
 import { LANGS } from '@/lib/i18n/config';
+import { btn, input } from '../_ui';
+export { btn };
 
 /** Langues du SITE (5) — dérivées de la source de vérité i18n. */
 export { LANGS };
@@ -60,10 +62,6 @@ export const DERIVED_LABEL: Record<string, string> = {
   survey: 'Survey Hub',
 };
 
-export const btn =
-  'rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm hover:border-accent disabled:opacity-50';
-const input =
-  'rounded-md border border-line bg-surface-base px-2 py-1 text-sm focus:border-accent focus:outline-none';
 const th = 'px-2.5 py-1.5 text-left text-xs font-medium text-content-subtle';
 const td = 'px-2.5 py-1.5 align-top';
 

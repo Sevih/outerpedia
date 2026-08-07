@@ -19,14 +19,12 @@ import { renderInlineBatch } from '@/lib/admin/inline-preview-actions';
 import { InlinePreview } from '@/components/admin/InlinePreview';
 import { InlineTextField } from '@/components/admin/InlineTextField';
 import { CharacterChips, type ChipView } from '@/components/admin/CharacterChips';
+import { btn } from './_ui';
 
 export interface GroupWithReason {
   heroes: string[];
   reason?: LocalizedText;
 }
-
-const btn =
-  'rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm hover:border-accent disabled:opacity-50';
 
 export function CharacterGroups<G extends GroupWithReason>({
   groups,

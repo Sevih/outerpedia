@@ -25,13 +25,11 @@ import {
   type SynergyGroup,
 } from '@/components/admin/editorial/EditorialFields';
 import { LANGS } from '@/lib/i18n/config';
+import { btn } from './_ui';
 
 export type { HeroView } from '@/components/admin/editorial/EditorialFields';
 
 type L = (typeof LANGS)[number];
-
-const btn =
-  'rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm hover:border-accent disabled:opacity-50';
 
 export function EditorialEditor({
   id,

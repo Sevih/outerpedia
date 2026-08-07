@@ -34,17 +34,13 @@ import {
 } from '@/components/admin/CharacterChips';
 import type { CharOption } from '@/components/admin/CharacterPicker';
 import { LANGS } from '@/lib/i18n/config';
+import { btn, inputFull as input } from './_ui';
 
 type L = (typeof LANGS)[number];
 type LText = { en?: string } & Record<string, string | undefined>;
 
 /** Datalist des noms de persos, posée une fois par page. */
 const DATALIST_ID = 'free-heroes-char-names';
-
-const btn =
-  'rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm hover:border-accent disabled:opacity-50';
-const input =
-  'w-full rounded-md border border-line bg-surface-base px-2 py-1 text-sm focus:border-accent focus:outline-none';
 
 /** Lignes keyées : sources et entrées portent une clé React stable. */
 type KEntry = Keyed<FreeHeroSourceData['entries'][number]>;

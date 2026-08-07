@@ -5,6 +5,7 @@ import type { CharacterCurated, CuratedRole, SkillPriority, VideoRef } from '@co
 import { postJson } from '@/lib/admin/post-json';
 import { rowKey } from '@/lib/admin/keyed';
 import { VideoCurator } from './VideoCurator';
+import { field, label } from './_ui';
 
 const ROLES: Array<'' | CuratedRole> = ['', 'dps', 'support', 'sustain'];
 const RANKS = ['', 'S', 'A', 'B', 'C', 'D', 'E'];
@@ -20,10 +21,6 @@ const STARS = ['1', '2', '3', '4', '5', '6'];
  * `free` reste humain : aucune table ne marque un perso comme offert.
  */
 const HUMAN_TAGS = ['free'];
-
-const field =
-  'w-full rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm text-content focus:border-accent focus:outline-none';
-const label = 'text-xs font-semibold uppercase tracking-wide text-content-subtle';
 
 type Status = { kind: 'idle' | 'ok' | 'err'; msg?: string };
 

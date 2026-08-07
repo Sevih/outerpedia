@@ -16,13 +16,14 @@
  * lisibilité douteux. Ce qui sort ici, ce sont les briques réellement autonomes.
  */
 import type { GearOption } from '@/lib/admin/gear-options';
+import { label } from '../_ui';
+export { label };
 
 export const NOTE_LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
 export type NoteLang = (typeof NOTE_LANGS)[number];
 
 export const field =
   'w-full rounded-md border border-line bg-surface-base px-2 py-1 text-sm text-content focus:border-accent focus:outline-none';
-export const label = 'text-xs font-semibold uppercase tracking-wide text-content-subtle';
 export const btn =
   'rounded border border-line px-2 py-0.5 text-xs text-content-subtle hover:text-content';
 

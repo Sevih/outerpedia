@@ -5,9 +5,9 @@ import type { Banner } from '@/lib/admin/promo-banner-store';
 import { postJson } from '@/lib/admin/post-json';
 import { type Keyed, rowKey, withKey } from '@/lib/admin/keyed';
 import { CharacterPicker, type CharOption } from '@/components/admin/CharacterPicker';
+import { input as inputBase } from './_ui';
 
-const input =
-  'rounded-md border border-line bg-surface-base px-2 py-1 text-sm text-content focus:border-accent focus:outline-none';
+const input = `${inputBase} text-content`;
 
 type Status = { kind: 'idle' | 'ok' | 'err'; msg?: string };
 type Row = Keyed<Banner>;

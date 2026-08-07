@@ -6,10 +6,7 @@ import { postJson } from '@/lib/admin/post-json';
 import { img } from '@/lib/images';
 import { EFFECT_FAMILIES, effectFamilyLabel } from '@/lib/data/effect-families';
 import { LANGS } from '@/lib/i18n/config';
-
-const field =
-  'w-full rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm text-content focus:border-accent focus:outline-none';
-const label = 'text-xs font-semibold uppercase tracking-wide text-content-subtle';
+import { field, label } from './_ui';
 
 type Status = { kind: 'idle' | 'ok' | 'err'; msg?: string };
 

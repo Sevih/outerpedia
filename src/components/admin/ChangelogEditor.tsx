@@ -13,9 +13,9 @@ import {
   rebuiltContent,
   type Localized,
 } from '@/components/admin/changelog/changelog-text';
+import { input as inputBase } from './_ui';
 
-const input =
-  'rounded-md border border-line bg-surface-base px-2 py-1 text-sm text-content focus:border-accent focus:outline-none';
+const input = `${inputBase} text-content`;
 
 /** Les 6 familles + libellé court (admin FR). */
 const TYPES: { value: ChangelogType; label: string }[] = [

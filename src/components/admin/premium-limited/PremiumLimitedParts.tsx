@@ -33,6 +33,7 @@ import { InlineTextField } from '@/components/admin/InlineTextField';
 import { CharacterChips, chipView } from '@/components/admin/CharacterChips';
 import { CharacterPicker, type CharOption } from '@/components/admin/CharacterPicker';
 import { LANGS } from '@/lib/i18n/config';
+import { btn, input } from '../_ui';
 
 /** Langues du SITE (5) — dérivées de la source de vérité i18n. */
 export { LANGS };
@@ -42,10 +43,6 @@ export type LText = { en?: string } & Record<string, string | undefined>;
 const STARS = ['3', '4', '5', '6'] as const;
 export const DATALIST_ID = 'premium-limited-char-names';
 
-const btn =
-  'rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm hover:border-accent disabled:opacity-50';
-const input =
-  'rounded-md border border-line bg-surface-base px-2 py-1 text-sm focus:border-accent focus:outline-none';
 const heading = 'text-content-strong text-sm font-semibold';
 
 export const emptyReview = (): ReviewEntryData => ({

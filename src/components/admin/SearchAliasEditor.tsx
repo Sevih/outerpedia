@@ -12,11 +12,7 @@
  */
 import { useState } from 'react';
 import { postJson } from '@/lib/admin/post-json';
-
-const btn =
-  'rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm hover:border-accent disabled:opacity-50';
-const input =
-  'w-full rounded-md border border-line bg-surface-base px-2 py-1 text-sm focus:border-accent focus:outline-none';
+import { btn, inputFull as input } from './_ui';
 
 export function SearchAliasEditor({
   id,

@@ -14,6 +14,7 @@
 import { useState } from 'react';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import type { CharOption } from '@/components/admin/CharacterPicker';
+import { inputFull as input } from './_ui';
 
 /** Portrait d'une puce — forme commune aux `CharOption` et aux héros résolus. */
 export interface ChipView {
@@ -23,9 +24,6 @@ export interface ChipView {
   classType?: string;
   rarity?: number;
 }
-
-const input =
-  'w-full rounded-md border border-line bg-surface-base px-2 py-1 text-sm focus:border-accent focus:outline-none';
 
 /** Datalist des noms EN à poser une fois par page (référencée par `datalistId`). */
 export function CharacterNameDatalist({ id, options }: { id: string; options: CharOption[] }) {

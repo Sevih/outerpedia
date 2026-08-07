@@ -22,9 +22,8 @@ import {
   type Bucket,
 } from '@/components/admin/premium-limited/PremiumLimitedParts';
 import { makeContribution, type ReviewContributionPayload } from '@/lib/contribute/contribution';
+import { btn } from '../_ui';
 
-const btn =
-  'rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm hover:border-accent disabled:opacity-50';
 const fileSlug = (s: string) =>
   s
     .trim()

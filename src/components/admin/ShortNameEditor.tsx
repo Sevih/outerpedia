@@ -10,13 +10,11 @@ import { useState } from 'react';
 import type { LocalizedText } from '@contracts';
 import { postJson } from '@/lib/admin/post-json';
 import { LANGS } from '@/lib/i18n/config';
+import { btn, inputFull } from './_ui';
 
 type L = (typeof LANGS)[number];
 
-const btn =
-  'rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm hover:border-accent disabled:opacity-50';
-const input =
-  'w-full max-w-xs rounded-md border border-line bg-surface-base px-2 py-1 text-sm focus:border-accent focus:outline-none';
+const input = `${inputFull} max-w-xs`;
 
 export function ShortNameEditor({
   id,

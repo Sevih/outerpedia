@@ -23,9 +23,9 @@ import {
   type EventType,
   type EventVideoPlatform,
 } from '@/lib/data/events';
+import { input as inputBase } from '../_ui';
 
-export const input =
-  'rounded-md border border-line bg-surface-base px-2 py-1 text-sm text-content focus:border-accent focus:outline-none';
+export const input = `${inputBase} text-content`;
 export const btn = 'rounded-md border border-line px-2.5 py-1 text-xs hover:border-accent';
 
 export const TYPE_LABEL: Record<EventType, string> = {

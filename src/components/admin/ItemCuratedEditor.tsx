@@ -7,14 +7,12 @@ import { postJson } from '@/lib/admin/post-json';
 import { img } from '@/lib/images';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { GAME_LANGS } from '@/lib/i18n/config';
+import { field, label } from './_ui';
 
 // Langues de JEU (4), PAS les 5 du site : cet écran écrit un `LangDict`, dont
 // `fr` n'est pas une clé (traduction communautaire, absente des données de jeu).
 // Un `LANGS` à 5 ici produirait une clé hors contrat — et comme les deux sont
 // des listes de codes langue, ça compilerait. D'où le nom distinct.
-const field =
-  'w-full rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm text-content focus:border-accent focus:outline-none';
-const label = 'text-xs font-semibold uppercase tracking-wide text-content-subtle';
 
 type Status = { kind: 'idle' | 'ok' | 'err'; msg?: string };
 type Loc = Record<string, string>;

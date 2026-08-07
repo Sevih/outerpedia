@@ -9,9 +9,7 @@
  */
 import { useRef, useState } from 'react';
 import { importContribution, type ImportResult } from '@/lib/admin/contribution-actions';
-
-const btn =
-  'rounded-md border border-line bg-surface-base px-3 py-1.5 text-sm hover:border-accent disabled:opacity-50';
+import { btn } from './_ui';
 
 export function ContributionImport() {
   const fileRef = useRef<HTMLInputElement>(null);
