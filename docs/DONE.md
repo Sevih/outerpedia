@@ -51,9 +51,36 @@ RouteImpl<"/">'`. Avec le routing par sous-domaine, les routes typées de l'app
   `characters.json`, tous les JSON valides) ; i18n (`keys.test.ts` vert, aucune
   clé morte) ; titres (aucune page à deux `h1`, et les 7 qui semblaient en
   manquer les délèguent à `ToolShell`/`HomeHero`/`guide-detail`) ; zéro `catch`
-  vide sur 815 fichiers ; `fetchDiscordCounts` correctement gardé (try/catch,
-  `!res.ok`, cache 1 h) — il lui manque seulement un `AbortSignal.timeout`, seul
-  reliquat de cette passe, non fait.
+  vide sur 815 fichiers.
+
+- **Les 4 `fetch` serveur vers un hôte externe ont enfin un plafond d'attente.**
+  Reliquat de la 2ᵉ passe, élargi en le traitant : le défaut repéré sur
+  `fetchDiscordCounts` était le même sur trois autres appels, dont un bien plus
+  exposé.
+
+  Tous étaient correctement gardés — `try/catch`, `!res.ok`, repli committé — et
+  tous avaient le même angle mort : **un `catch` attrape un échec, jamais une
+  absence de réponse**. Un socket accepté mais non servi laisse `fetch` pendre,
+  et le repli promis en commentaire ne se déclenche alors JAMAIS. Comme ces
+  appels sont awaités pendant le rendu serveur, c'est la régénération ISR qui
+  reste suspendue.
+
+  | Appel                         | Hôte             | Pages concernées            | Plafond |
+  | ----------------------------- | ---------------- | --------------------------- | ------- |
+  | `loadRuntimeJson` (générique) | R2               | accueil, /coupons, /event   | 3 s     |
+  | `getReviewsForCharacter`      | API du bot (VPS) | **toutes les fiches perso** | 2 s     |
+  | `loadComics`                  | R2               | /4-comics                   | 3 s     |
+  | `fetchDiscordCounts`          | API Discord      | accueil                     | 3 s     |
+
+  Le plus exposé n'était pas Discord mais **`runtime-json.ts`** : c'est le
+  lecteur générique de toute la donnée vive du site. Et `reviews.ts` vise un
+  service SÉPARÉ du VPS, dont un conteneur en cours de démarrage accepte la
+  connexion sans répondre — le cas exact que le `catch` ne voit pas, sur la
+  page la plus nombreuse du site, avec `revalidate: 60`.
+
+  Les 3 `fetch` restants (`/api/tierlist`, `/api/search`, `/api/shortlink`) sont
+  laissés tels quels : same-origin ET côté client, un timeout y serait du
+  confort d'UX, pas de la robustesse de rendu.
 
 - **Heatwave Cop Delta rejoint Ryu Lion partout où celle-ci est recommandée.**
   Même kit (skillset partagé, exclusion mutuelle en deck) : tout guide qui

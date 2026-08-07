@@ -27,11 +27,21 @@ export interface Review {
 
 const BOT_API_URL = (process.env.BOT_API_URL ?? 'http://localhost:3001').replace(/\/$/, '');
 
-/** Reviews d'un perso, triées par le bot (score puis date). `[]` en toute erreur. */
+/**
+ * Reviews d'un perso, triées par le bot (score puis date). `[]` en toute erreur.
+ *
+ * Timeout indispensable ici : le bot est un service SÉPARÉ du VPS, et un
+ * conteneur en cours de démarrage accepte la connexion sans répondre — cas où
+ * le `catch` ne voit rien et où `fetch` pend. Comme cet appel est awaité au
+ * rendu de la FICHE PERSO (avec `revalidate: 60`, donc très souvent), une
+ * indisponibilité du bot suspendrait la régénération de toutes les fiches.
+ * 2 s : les reviews sont un complément, la fiche se rend très bien sans.
+ */
 export async function getReviewsForCharacter(slug: string): Promise<Review[]> {
   try {
     const res = await fetch(`${BOT_API_URL}/reviews/${encodeURIComponent(slug)}`, {
       next: { revalidate: 60 },
+      signal: AbortSignal.timeout(2000),
     });
     if (!res.ok) return [];
     return (await res.json()) as Review[];

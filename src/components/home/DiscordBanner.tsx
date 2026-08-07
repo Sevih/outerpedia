@@ -20,12 +20,24 @@ export interface DiscordStrings {
   online: string;
 }
 
+/**
+ * Compteurs Discord, ou `null` si l'API ne répond pas comme attendu.
+ *
+ * `AbortSignal.timeout` n'est PAS redondant avec le `try/catch` : celui-ci
+ * n'attrape qu'un échec, pas une absence de réponse. Un socket accepté mais
+ * jamais servi laisse `fetch` pendre — et comme cet appel est awaité pendant le
+ * rendu SERVEUR de l'accueil, c'est la régénération ISR de la page la plus vue
+ * du site qui reste suspendue. 3 s : cet encart est décoratif, la home ne
+ * l'attend pas plus longtemps. Le timeout rejette, le `catch` existant rend
+ * `null`, et la section s'affiche sans compteurs — la dégradation prévue.
+ */
 async function fetchDiscordCounts(): Promise<{ members: number; online: number } | null> {
   try {
     const res = await fetch(
       `https://discord.com/api/v9/invites/${DISCORD_INVITE_CODE}?with_counts=true`,
       {
         next: { revalidate: 3600 },
+        signal: AbortSignal.timeout(3000),
       },
     );
     if (!res.ok) return null;

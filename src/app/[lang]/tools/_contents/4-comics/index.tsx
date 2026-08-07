@@ -18,10 +18,14 @@ async function loadComics(): Promise<ComicsData> {
     try {
       const res = await fetch(`${BASE}/images/4-comics/comics.json`, {
         next: { revalidate: 600 },
+        // Sans timeout, le repli committé ci-dessous ne couvre QUE l'échec, pas
+        // l'absence de réponse : R2 qui pend suspendrait la régénération ISR de
+        // la page (même correctif que `runtime-json.ts`, audit du 07/08).
+        signal: AbortSignal.timeout(3000),
       });
       if (res.ok) return (await res.json()) as ComicsData;
     } catch {
-      /* R2 injoignable → repli committé */
+      /* R2 injoignable OU trop lent → repli committé */
     }
   }
   return comicsFallback as ComicsData;
