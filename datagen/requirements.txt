@@ -1,12 +1,15 @@
-# Dépendances du SEUL script python du projet : datagen/assets/extract-face-layout.py
-# (typetrees RectTransform d'un prefab Unity → face-icon-layout.json committé —
-# cf. datagen/README § « Exception assumée : un (seul) outil Python »).
+# Dépendances des scripts python du projet — tous deux lisent des typetrees Unity
+# vers un JSON committé (cf. datagen/README § « Exception assumée : l'outillage
+# Python (UnityPy) ») :
+#   - assets/extract-face-layout.py  → face-icon-layout.json  (cadrage des FI_)
+#   - assets/extract-sprite-rect.py  → sprite-rect.json       (taille logique des
+#                                      sprites rognés par le packer d'atlas)
 #
 #   python -m pip install -r datagen/requirements.txt
 #
-# FACULTATIF PAR MACHINE : sans UnityPy, `refresh` saute l'étape face-layout avec
-# un avertissement (au lieu de faire échouer tout `pnpm dev`) et le layout committé
-# prend le relais — seuls les FI_ de persos/skins récents manqueraient. À installer
+# FACULTATIF PAR MACHINE : sans UnityPy, `refresh` saute ces étapes avec un
+# avertissement (au lieu de faire échouer tout `pnpm dev`) et les JSON committés
+# prennent le relais — seuls les sprites arrivés depuis manqueraient. À installer
 # sur la machine de datamine, superflu ailleurs.
 #
 # Plancher, pas épingle : borné sous la 2.x (l'API des typetrees pourrait bouger

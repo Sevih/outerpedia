@@ -46,28 +46,28 @@ function pythonToolingMissing(): string | null {
 }
 
 /**
- * Étape PYTHON — la seule du projet (extract-face-layout, cf. datagen/README) :
- * lit les prefabs FaceIcon des bundles pullés → face-icon-layout.json
- * (committé). Sans elle, collect ne peut pas produire les FI_ des nouveaux
- * persos/skins, et il fallait relancer dev à la main après l'avoir jouée.
- * Locale par construction : ce code ne s'exécute que si `.gamedata` existe
- * (la machine de datamine), jamais en CI.
+ * Étapes PYTHON — les seules du projet (cf. datagen/README). Elles lisent les
+ * TYPETREES des bundles pullés via UnityPy, chacune vers un JSON COMMITTÉ :
+ *   - `extract-face-layout`  → cadrage des FI_ par personnage ;
+ *   - `extract-sprite-rect`  → taille logique des sprites rognés par l'atlas.
+ * Sans elles, collect produit des assets faux (FI_ manquants pour les nouveaux
+ * persos, vignettes décalées dans leur fond). Locales par construction : ce code
+ * ne s'exécute que si `.gamedata` existe (machine de datamine), jamais en CI.
  *
  * OUTILLAGE SONDÉ AVANT DE LANCER. `.gamedata` présent n'implique pas python +
  * UnityPy installés : sur une machine secondaire, l'import raté faisait échouer
  * TOUT `pnpm dev`, pour une étape dont la sortie est COMMITTÉE. On la saute donc
- * avec un avertissement — le dev tourne sur le layout du dernier passage, seuls
- * les FI_ de persos/skins arrivés depuis manqueraient. Un échec du script
- * LUI-MÊME (bundle absent, prefab illisible) lève toujours : là, c'est un vrai
- * problème de la machine de datamine, pas un défaut d'outillage.
+ * avec un avertissement — le dev tourne sur les tables du dernier passage. Un
+ * échec du script LUI-MÊME (bundle absent, prefab illisible) lève toujours :
+ * là, c'est un vrai problème de la machine de datamine, pas un défaut d'outillage.
  */
 function pyStep(label: string, file: string): void {
   console.log(`\n▶ ${label}`);
   const missing = pythonToolingMissing();
   if (missing) {
     console.warn(
-      `  ⚠ SAUTÉE — ${missing}. face-icon-layout.json committé conservé ;\n` +
-        '    les FI_ des persos/skins récents peuvent manquer sur cette machine.\n' +
+      `  ⚠ SAUTÉE — ${missing}. Les JSON committés (face-icon-layout, sprite-rect)\n` +
+        '    prennent le relais ; seuls les sprites arrivés depuis manqueraient.\n' +
         '    Pour l’outiller : pip install UnityPy, puis `pnpm datagen:patch --force`.',
     );
     return;
@@ -179,6 +179,7 @@ export async function refresh(opts: RefreshOptions = {}): Promise<void> {
       'face-layout (prefabs → face-icon-layout.json)',
       'datagen/assets/extract-face-layout.py',
     );
+    pyStep('sprite-rect (atlas → sprite-rect.json)', 'datagen/assets/extract-sprite-rect.py');
     step('build    (générateurs → data/extracted)', 'datagen/build.ts');
     step(
       apply ? 'promote  (extracted → generated)' : 'promote  (revue du diff — dry-run)',

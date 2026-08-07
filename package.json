@@ -46,7 +46,8 @@
     "editorial:push": "tsx datagen/assets/editorial.ts push",
     "assets:push": "node scripts/assets-push.mjs",
     "images": "pnpm assets:collect && pnpm assets:collect-audio && pnpm assets:collect-wallpapers && pnpm assets:collect-comics && pnpm assets:push",
-    "datagen:face-layout": "python datagen/assets/extract-face-layout.py"
+    "datagen:face-layout": "python datagen/assets/extract-face-layout.py",
+    "datagen:sprite-rect": "python datagen/assets/extract-sprite-rect.py"
   },
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.23",

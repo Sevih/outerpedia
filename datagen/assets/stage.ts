@@ -31,6 +31,7 @@ import sharp from 'sharp';
 import { FACE_ICON_LAYOUT, makeFaceIcon } from './face-icon';
 import type { AssetRequest } from './manifest';
 import { findImage, type ImageIndex } from './source';
+import { hasRect, paddingFor, SPRITE_RECT } from './sprite-rect';
 
 export const STAGING_DIR = resolve('.assets-staging');
 /**
@@ -193,7 +194,9 @@ export async function stageAssets(
         const { fresh, commit } = check(
           req.key,
           dest,
-          [portrait, FACE_ICON_LAYOUT],
+          hasRect(portrait)
+            ? [portrait, FACE_ICON_LAYOUT, SPRITE_RECT]
+            : [portrait, FACE_ICON_LAYOUT],
           `face-icon:${format}`,
         );
         if (fresh) {
@@ -247,14 +250,34 @@ export async function stageAssets(
 
       // PNG : variantes og:image (aperçus Discord/OG) ; webp partout ailleurs.
       const png = req.key.endsWith('.png');
-      const { fresh, commit } = check(req.key, dest, [src], png ? 'png' : 'webp:90');
+      // La table de rognage est une SOURCE de la cible — mais SEULEMENT pour les
+      // sprites qu'elle concerne : la lier à toutes les images ferait re-produire
+      // tout le staging à chaque ré-extraction (cf. `hasRect`).
+      const sources = hasRect(src) ? [src, SPRITE_RECT] : [src];
+      const { fresh, commit } = check(req.key, dest, sources, png ? 'png' : 'webp:90');
       if (fresh) {
         result.present++;
         continue;
       }
       mkdirSync(dirname(dest), { recursive: true });
-      if (png) await sharp(src).png().toFile(dest);
-      else await sharp(src).webp({ quality: 90 }).toFile(dest);
+      // Sprite rogné par le packer d'atlas : on repose les marges transparentes
+      // AVANT conversion, pour que l'asset servi ait la taille que le jeu lui
+      // donne. Sans ça, tout consommateur qui l'étire le décale.
+      let pipeline = sharp(src);
+      const { width, height } = await pipeline.metadata();
+      const pad = width && height ? paddingFor(src, width, height) : undefined;
+      if (pad === null) {
+        result.missing.push({
+          key: req.key,
+          reason: `rognage incohérent avec l'image (${width}×${height}) — table à ré-extraire`,
+        });
+        continue;
+      }
+      if (pad) {
+        pipeline = pipeline.extend({ ...pad, background: { r: 0, g: 0, b: 0, alpha: 0 } });
+      }
+      if (png) await pipeline.png().toFile(dest);
+      else await pipeline.webp({ quality: 90 }).toFile(dest);
       commit();
       produced();
     } catch (e) {

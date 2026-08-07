@@ -64,32 +64,52 @@ promote.ts      refresh.ts définition UNIQUE du flux « rafraîchir depuis le
 - **`curated/`** — outillage de la couche curée : les schémas de validation
   (personnages, gear reco, tags, effets…). L'édition se fait via l'admin.
 
-### Exception assumée : un (seul) outil Python
+### Exception assumée : l'outillage Python (UnityPy)
 
-`datagen/assets/extract-face-layout.py` (`pnpm datagen:face-layout`) est la **seule
-exception** au « tout-TS ». Il lit les **typetrees RectTransform** d'un prefab Unity
-via **UnityPy** — même domaine spécialisé que l'extracteur .NET de la couche 0, donc
-**délibérément non réécrit en TS**. Il est :
+Deux scripts échappent au « tout-TS », pour la **même** raison : lire des
+**typetrees Unity** — domaine spécialisé au même titre que l'extracteur .NET de
+la couche 0, donc **délibérément non réécrits en TS**.
 
-- **local** : joué automatiquement par le flux `refresh` (`pnpm dev` /
+| Script                                  | Sortie committée                       | Ce qu'il évite                                                      |
+| --------------------------------------- | -------------------------------------- | ------------------------------------------------------------------- |
+| `extract-face-layout.py`                | `datagen/assets/face-icon-layout.json` | Des `FI_` absents pour les persos/skins récents                     |
+| `extract-sprite-rect.py` _(2026-08-07)_ | `datagen/assets/sprite-rect.json`      | Des sprites servis à leur taille ROGNÉE, donc décalés à l'affichage |
+
+Le second mérite un mot : le packer d'atlas coupe les bords transparents, et
+AssetStudio n'exporte que ce qui reste. Un fichier de 111×128 pour un sprite de
+128×128 — et le rognage est rarement symétrique (`MT_4031033` perd 30 px à gauche
+et 0 à droite). Tout consommateur qui l'étire à la taille attendue le déforme ET
+le déplace : c'est ce qui décalait le portrait dans son fond sur **232 des 515**
+vignettes de monstres. Le staging repose les marges (`sprite-rect.ts`), donc
+l'asset servi a la taille que le jeu lui donne et **aucun composant n'a à le
+savoir**. La table est bornée à `at_thumbnailmonsterruntime` et
+`at_thumbnailcharacterruntime` : le défaut est général (83 % de
+`at_dungeonruntime`, 97 % de `at_thumbnailcostumeruntime`), mais élargir la liste
+re-découpe tous les icônes déjà servis par cet atlas — un atlas à la fois, et
+délibérément.
+
+Tous deux sont :
+
+- **locaux** : joués automatiquement par le flux `refresh` (`pnpm dev` /
   `datagen:patch`) entre convert et build — uniquement sur la machine de
-  datamine (le refresh ne génère que si `.gamedata` existe) ; relançable seul
-  via `pnpm datagen:face-layout`. Depuis le 2026-07-14 : avant, il fallait le
-  jouer à la main puis relancer dev pour produire les FI_ des nouveaux persos ;
-- **absent du build et de la CI** ;
-- **borné à un JSON committé** : sa sortie `datagen/assets/face-icon-layout.json` est
-  versionnée et c'est ce que lit `datagen/assets/face-icon.ts`. **Le serveur/build ne
-  touche jamais Python** — d'où « aucun python _dans le build_ », qui reste vrai ;
-- **optionnel par machine** (depuis le 2026-08-07) : `refresh` sonde l'import
+  datamine (le refresh ne génère que si `.gamedata` existe) ; relançables seuls
+  via `pnpm datagen:face-layout` / `pnpm datagen:sprite-rect`. Depuis le
+  2026-07-14 : avant, il fallait les jouer à la main puis relancer dev ;
+- **absents du build et de la CI** ;
+- **bornés à un JSON committé** : leurs sorties sont versionnées et c'est ce que
+  lisent `datagen/assets/face-icon.ts` et `datagen/assets/sprite-rect.ts`. **Le
+  serveur/build ne touche jamais Python** — d'où « aucun python _dans le build_ »,
+  qui reste vrai ;
+- **optionnels par machine** (depuis le 2026-08-07) : `refresh` sonde l'import
   UnityPy avant de lancer l'étape, et la SAUTE avec un avertissement si
   l'outillage manque — au lieu de faire échouer tout `pnpm dev`. Avoir
   `.gamedata` n'implique pas avoir UnityPy : un PC secondaire tire les bundles
-  sans être outillé. Le layout committé prend alors le relais ; seuls les FI_ de
-  persos ou skins arrivés depuis manqueraient sur cette machine. Pour l'outiller :
-  `pip install UnityPy` puis `pnpm datagen:patch --force`. Un échec du script
+  sans être outillé. Les JSON committés prennent alors le relais ; seuls les
+  sprites arrivés depuis manqueraient sur cette machine. Pour l'outiller :
+  `pip install UnityPy` puis `pnpm datagen:patch --force`. Un échec d'un script
   lui-même (bundle absent, prefab illisible) lève toujours.
 
-Porter ce script en TS reste possible (AssetStudioModCLI a un mode `-m dump`) mais non
+Les porter en TS reste possible (AssetStudioModCLI a un mode `-m dump`) mais non
 prioritaire : cf. le fork tranché en faveur de l'isolation.
 
 ---

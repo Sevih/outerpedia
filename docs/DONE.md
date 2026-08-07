@@ -7,6 +7,33 @@
 
 ## 2026-08-07
 
+- **Les sprites rognés par l'atlas retrouvent leur taille logique — 782 fichiers
+  changeaient de cadrage sans qu'on le sache.** Le packer d'atlas de Unity coupe
+  les bords transparents d'un sprite et ne stocke que les pixels utiles ;
+  AssetStudio exporte ce rognage tel quel. Un `MT_` déclaré 128×128 sortait donc
+  en 126×121, décalé, et de façon ASYMÉTRIQUE — 232 des 515 vignettes de monstre
+  sont concernées. Toute mise à l'échelle en aval reposait sur une image qui
+  n'était plus celle que le jeu compose : le buste ne tombait plus sur la ligne
+  du bas, et le décalage variait d'un monstre à l'autre.
+  - `extract-sprite-rect.py` (UnityPy) relève `m_Rect` contre
+    `m_RD.textureRect` / `textureRectOffset` et produit `sprite-rect.json`
+    (564 entrées, committé). Les clés sont `<atlas>/<sprite>` et pas le seul nom :
+    **32 sprites portent le même nom dans deux atlas avec des géométries
+    différentes**, une clé plate en aurait écrasé la moitié.
+  - `stage.ts` repose les marges à la production. Le défaut est GÉNÉRAL (83 %
+    de `at_dungeonruntime`, 97 % des costumes, 76 % des items) mais la table est
+    volontairement limitée aux deux atlas de vignettes : élargir se fait un
+    atlas à la fois, en regardant le rendu.
+  - La fraîcheur n'ajoute `sprite-rect.json` aux sources QUE pour les images qui
+    y figurent (`hasRect`) — sans ce filtre, les 3998 fichiers staged se
+    reproduisaient à chaque passe.
+  - `face-icon.ts` pose les marges dans une passe sharp SÉPARÉE : sharp applique
+    ses étapes dans son ordre (resize puis extend), pas dans l'ordre des appels,
+    donc un `.extend().resize()` chaîné paddait l'image DÉJÀ étirée et les
+    355 icônes échouaient à la composition.
+  - Bénéficie à tout ce qui existait déjà (en-têtes de boss, lineups, tours,
+    guild raid, sources d'équipement), pas seulement au nouveau composant.
+
 - **2ᵉ passe d'audit : landmark `<main>` dupliqué, et le site n'avait aucun
   écran d'erreur.** Passe ciblée sur ce que la première n'avait pas regardé —
   a11y, boundaries d'erreur, intégrité des données, streaming.

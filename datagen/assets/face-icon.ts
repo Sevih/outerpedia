@@ -12,6 +12,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
+import { paddingFor } from './sprite-rect';
 
 interface FaceIconVariant {
   frame: { w: number; h: number };
@@ -59,7 +60,24 @@ export async function makeFaceIcon(
   const visH = Math.min(fh, top + ch) - visTop;
   if (visW <= 0 || visH <= 0) return null;
 
-  const portraitClip = await sharp(portraitPath)
+  // Le portrait sort de l'atlas ROGNÉ (176×340 pour un sprite de 180×344) : on
+  // repose ses marges AVANT de le redimensionner, sinon le `fit: 'fill'` étire
+  // de 2,3 % et décale le cadrage que le prefab a calculé sur la taille logique.
+  //
+  // PASSE SÉPARÉE, et pas un maillon de la chaîne : sharp applique ses étapes
+  // dans SON ordre (resize puis extend), pas dans l'ordre des appels — chaîner
+  // `extend` avant `resize` l'aurait appliqué après, et le padding se serait
+  // ajouté à l'image déjà étirée.
+  const meta = await sharp(portraitPath).metadata();
+  const pad = meta.width && meta.height ? paddingFor(portraitPath, meta.width, meta.height) : null;
+  const source = pad
+    ? await sharp(portraitPath)
+        .extend({ ...pad, background: { r: 0, g: 0, b: 0, alpha: 0 } })
+        .png()
+        .toBuffer()
+    : portraitPath;
+
+  const portraitClip = await sharp(source)
     .resize(cw, ch, { fit: 'fill', kernel: 'lanczos3' })
     .extract({ left: visLeft - left, top: visTop - top, width: visW, height: visH })
     .toBuffer();
