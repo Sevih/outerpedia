@@ -2719,20 +2719,14 @@ export function DamageCalculatorBrowser({
                         {
                           key: 'tgt',
                           portrait: target ? (
-                            <span className="relative h-16 w-16 shrink-0">
-                              <img
-                                src={monsterIcon(target.icon)}
-                                alt=""
-                                className="border-line-subtle h-full w-full rounded-lg border object-cover"
-                                loading="lazy"
-                              />
-                              <TileOverlays
-                                element={target.element}
-                                cls={target.cls}
-                                boss
-                                level={spawn?.level}
-                              />
-                            </span>
+                            // Le MÊME composant portrait que le picker et la
+                            // tuile de cible (fond de rareté + overlays, rôle
+                            // de la donnée — un renfort n'a pas le badge boss).
+                            <MonsterPortrait
+                              tg={target}
+                              level={spawn?.level}
+                              className="h-16 w-16"
+                            />
                           ) : tgtElement ? (
                             <span className="border-line-subtle grid h-16 w-16 shrink-0 place-items-center rounded-lg border">
                               <img

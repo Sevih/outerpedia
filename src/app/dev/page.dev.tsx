@@ -19,6 +19,11 @@ const PAGES: { href: string; title: string; desc: string }[] = [
     title: 'Parse-text (tags inline)',
     desc: 'Tous les tags éditoriaux `{B/…}` `{SK/…}` `{I-W/…}`… rendus par le vrai moteur, avec leur infobulle.',
   },
+  {
+    href: '/dev/thumbnail',
+    title: 'Vignette du jeu',
+    desc: 'La vignette transcrite des prefabs `uimonsterthumbnail` et `uicharacterthumbnail` : ce que les deux habillages partagent, et les huit calques où ils divergent.',
+  },
 ];
 
 export default function DevIndex() {

@@ -7,6 +7,54 @@
 
 ## 2026-08-07
 
+- **La vignette du jeu, transcrite des binaires — `src/components/ui/Thumbnail.tsx`
+  - page de contrôle `/dev/thumbnail`.** Pas un portrait « inspiré du jeu » :
+    chaque nombre est une valeur de RectTransform relevée aux bundles avec UnityPy.
+    UN SEUL composant parce que le jeu n'en a qu'un — les prefabs
+    `uimonsterthumbnail` et `uicharacterthumbnail` portent le même MonoBehaviour,
+    `CUICharacterThumbnail`, et c'est cette classe « perso » qui expose
+    `SetMonsterBG`. Deux habillages, pas deux composants. API en union discriminée
+    (`kind="monster"` avec `icon`/`type`/`stars`, `kind="character"` avec
+    `id`/`rarity`/`transcendence`) pour qu'on ne puisse pas croiser les deux.
+  * **Le fond d'un monstre vient du TYPE, pas de la rareté** (`SetMonsterBG`
+    prend un `CHARACTER_TYPE`) ; chez le perso c'est l'inverse, la rareté choisit
+    Magic/Rare/Unique. Les deux axes sont indépendants : 951 monstres où la règle
+    « rareté ≥ 3 = rouge » peignait à l'envers. `img.monsterSlotByType` et
+    `img.characterSlot` portent chacune leur règle.
+  * **Un sprite posé n'est pas un sprite dessiné.** Les deux prefabs assignent un
+    cartouche au niveau (`MT_Slot_Level_Box` / `CT_Slot_Level_Bg`) avec
+    `m_Color.a = 0` et un CanvasRenderer qui cull les meshes transparents : il
+    n'est JAMAIS rendu. Le chiffre tient sur ses effets de texte. Même piège pour
+    `DefaultBG` côté perso — trois sprites écartés du manifeste pour cette raison.
+  * **Le vignetage n'est pas l'état grisé** : `m_DimImage` pointe le `Dim` de
+    124×124 (allumé par `SetDim`) et vaut null chez le monstre ; celui de 122×122
+    est un décor fixe. Vérifié, pas supposé.
+  * **`CT_Slot_Bottom` et `MT_Slot_Bottom` sont identiques octet pour octet mais
+    ne se rendent pas pareil** : leur `m_Border` vaut 28 d'un côté, 0 de l'autre.
+    Rendu en `border-image`, qui couvre les deux cas (`slice: 0` se réduit à
+    l'étirement). Rien dans les fichiers ne le dit — d'où deux fichiers collectés
+    pour un même bitmap, plutôt qu'un renvoi implicite d'une famille à l'autre.
+  * **Les étoiles d'un perso ne se comptent pas, elles se lisent dans une table.**
+    Le prefab fige quatre rangées (`Star_4`, `Star_5`, `Star_5_Plus`, `Star_6`)
+    d'apparence plausible : elles sont INACTIVES et `Star_6` contredit le jeu. La
+    règle vit dans `CharacterTranscendentTemplet` (`ShowUIStar` / `StarColor` /
+    `StarPlus`), portée telle quelle. `StarPlus` n'est pas un nombre d'étoiles
+    colorées mais le « + » du palier : il n'y en a jamais qu'une, la dernière. Le
+    nombre d'étoiles ne suit pas le palier — 4 au palier 5, 5 aux paliers 6, 7 ET
+    8, 6 au palier 9. **Correction Sevih**, deux fois : c'est le seul calque dont
+    la vérité n'est pas dans le prefab.
+  * `m_BestFit` porté (approximation à chasse fixe, commentée) : la boîte du
+    niveau perso ne fait que 32 de large, un nombre à trois chiffres en sortait.
+  * 15 sprites `CT_` ajoutés au manifeste. Ils vont dans `ui/boss/`, dont le nom
+    ne dit plus ce qu'il contient : historique, et le renommer en `ui/thumbnail/`
+    laisserait autant d'orphelins sur R2 (le push ne supprime rien, `rclone
+delete` est manuel). Ménage à décider pour lui-même. **PAS ENCORE POUSSÉS.**
+  * Page `/dev/thumbnail` : un tableau des huit calques qui divergent, une rangée
+    par axe. La comparaison « rareté ≠ type » a été retirée — on veut le rendu du
+    jeu, l'autre axe n'a rien à y faire même en contre-exemple.
+  * `CharacterPortrait` (21 appelants) et le `MonsterPortrait` du calculateur
+    gardent leur rendu à l'œil : les brancher n'a pas été demandé.
+
 - **Les sprites rognés par l'atlas retrouvent leur taille logique — 782 fichiers
   changeaient de cadrage sans qu'on le sache.** Le packer d'atlas de Unity coupe
   les bords transparents d'un sprite et ne stocke que les pixels utiles ;

@@ -815,14 +815,110 @@ export function buildAssetManifest(): AssetRequest[] {
           domain: 'ui',
         });
     }
-    // Fonds de RARETÉ des vignettes monstre (at_thumbnailmonsterruntime) :
-    // Normal / Magic / Rare — posés SOUS le portrait (`img.monsterSlot`),
-    // même namespace que les vignettes qu'ils encadrent.
+    // Fonds des vignettes MONSTRE (at_thumbnailmonsterruntime) : Normal / Magic
+    // / Rare, posés SOUS le portrait (`img.monsterSlotByType`), même namespace
+    // que les vignettes qu'ils encadrent.
     for (const frame of ['Normal', 'Magic', 'Rare'])
       push({
         kind: 'image',
         key: `images/ui/boss/MT_Slot_${frame}.webp`,
         candidates: [`MT_Slot_${frame}`],
+        domain: 'ui',
+      });
+    // Les AUTRES calques de la vignette monstre du jeu (prefab
+    // `prefabs/ui/uimonsterthumbnail`, rendu par `Thumbnail`) : ombre du bas,
+    // vignetage, étoile de rareté.
+    //
+    // Élément et classe viennent d'ICI et pas de `images/ui/elem|class` : le jeu
+    // a DEUX jeux de sprites distincts (les `IG_Turn_*` de l'ordre de tour que
+    // sert le reste du site, et les `MT_*` de la vignette). Ce ne sont pas des
+    // copies — rendus différents, et `MT_Element_Light` ne fait même pas la même
+    // taille (43×45 contre 41×44). La vignette porte donc les siens ; c'est le
+    // prefab qui dimensionne chaque boîte au sprite qu'il attend.
+    // NB : pas de `MT_Slot_Level_Box`. Le prefab lui assigne bien ce sprite,
+    // mais avec `m_Color.a = 0` et un CanvasRenderer qui cull les meshes
+    // transparents — il n'est jamais dessiné. Le niveau tient sur ses effets de
+    // texte (Outline + Shadow), pas sur une plaque.
+    for (const sprite of [
+      'MT_Slot_Bottom',
+      'MT_Slot_Star',
+      'CT_Slot_Dim_2', // vignetage — le prefab MONSTRE pointe bien le sprite CT_
+      ...['Fire', 'Water', 'Earth', 'Light', 'Dark'].map((e) => `MT_Element_${e}`),
+    ])
+      push({
+        kind: 'image',
+        key: `images/ui/boss/${sprite}.webp`,
+        candidates: [sprite],
+        domain: 'ui',
+      });
+    // Classes : la CLÉ porte le slug canonique du site, le CANDIDAT l'enum du
+    // jeu — même règle que `images/ui/class/IG_Turn_Class_*` plus haut, pour que
+    // `img.klass`-style `cap(slug)` marche sans table de traduction au rendu.
+    for (const [slug, enumName] of [
+      ['Striker', 'Attacker'],
+      ['Healer', 'Priest'],
+      ['Defender', 'Defender'],
+      ['Ranger', 'Ranger'],
+      ['Mage', 'Mage'],
+    ])
+      push({
+        kind: 'image',
+        key: `images/ui/boss/MT_Class_${slug}.webp`,
+        candidates: [`MT_Class_${enumName}`],
+        domain: 'ui',
+      });
+    // Les MÊMES calques pour la vignette de PERSONNAGE (prefab
+    // `prefabs/ui/uicharacterthumbnail`, at_thumbnailcharacterruntime) : le jeu
+    // n'a qu'un composant (`CUICharacterThumbnail`) habillé de deux familles de
+    // sprites, et `Thumbnail` rend les deux.
+    //
+    // Le fond vient ici de la RARETÉ (Magic / Rare / Unique, `m_BGObjects`
+    // indexé sur le BasicStar) là où le monstre le prend du type — deux règles,
+    // deux familles, un seul composant.
+    //
+    // Le namespace `ui/boss/` porte donc désormais des sprites de PERSO, ce que
+    // son nom ne dit pas : il est historique (il a d'abord servi les portraits
+    // `MT_<icon>`) et il garde tous les calques de vignette au même endroit,
+    // `CT_Slot_Dim_2` compris — que le prefab MONSTRE utilise déjà. Le renommer
+    // en `ui/thumbnail/` laisserait autant d'orphelins sur R2 (le push ne
+    // supprime rien : `rclone delete` est un geste manuel), donc c'est un
+    // ménage à décider pour lui-même, pas un effet de bord d'un rendu.
+    //
+    // `CT_Slot_Bottom` et `MT_Slot_Bottom` sont identiques OCTET POUR OCTET, de
+    // même que `CT_Slot_Unique` et `MT_Slot_Rare` : on les collecte quand même.
+    // D'abord parce que l'égalité des bitmaps ne fait pas l'égalité des rendus —
+    // le `m_Border` du CT_Slot_Bottom vaut 28 et celui du MT_ zéro, donc l'un se
+    // découpe en 9-slice quand l'autre s'étire, et ça ne se voit dans AUCUN des
+    // deux fichiers. Ensuite parce qu'un renvoi implicite d'une famille à
+    // l'autre casserait en biais le jour où le jeu en retouche un seul.
+    //
+    // NB : ni `CT_Slot_Level_Bg` (même piège que `MT_Slot_Level_Box` : alpha 0 +
+    // cull, jamais dessiné), ni `CT_Slot_Dim` (124×124 — c'est `m_DimImage`,
+    // l'état grisé allumé par `SetDim`, pas le vignetage fixe), ni `CT_Slot_Box`
+    // (le `DefaultBG`, lui aussi à alpha 0).
+    for (const sprite of [
+      ...['Magic', 'Rare', 'Unique'].map((f) => `CT_Slot_${f}`),
+      'CT_Slot_Bottom',
+      'CT_Slot_Boss',
+      ...['Fire', 'Water', 'Earth', 'Light', 'Dark'].map((e) => `CT_Element_${e}`),
+    ])
+      push({
+        kind: 'image',
+        key: `images/ui/boss/${sprite}.webp`,
+        candidates: [sprite],
+        domain: 'ui',
+      });
+    for (const [slug, enumName] of [
+      ['Striker', 'Attacker'],
+      ['Healer', 'Priest'],
+      ['Defender', 'Defender'],
+      ['Ranger', 'Ranger'],
+      ['Mage', 'Mage'],
+    ])
+      push({
+        kind: 'image',
+        key: `images/ui/boss/CT_Class_${slug}.webp`,
+        candidates: [`CT_Class_${enumName}`],
         domain: 'ui',
       });
   }

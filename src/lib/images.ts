@@ -9,6 +9,28 @@ const BASE = process.env.NEXT_PUBLIC_IMG_BASE ?? '';
 
 const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 
+// Deux briques nommées à part : `img.monster` a besoin des DEUX, et une entrée
+// d'objet ne peut pas en référencer une autre à la construction.
+const faceSrc = (id: string) => `${BASE}/images/characters/faceicon/FI_${id}.webp`;
+const bossSrc = (icon: string) => `${BASE}/images/ui/boss/${icon}.webp`;
+
+/**
+ * Fond de vignette monstre par TYPE — la règle du jeu (`SetMonsterBG` prend un
+ * `CHARACTER_TYPE`, pas une rareté). Les étoiles, elles, viennent du BasicStar :
+ * les deux axes sont indépendants, et `MonsterTemplet` le montre (523 mobs de
+ * base à 3★, 386 boss à 2★).
+ */
+const MONSTER_SLOT_BY_TYPE: Record<string, string> = {
+  monster: 'Normal',
+  named: 'Magic',
+  boss: 'Rare',
+  area_boss: 'Rare',
+  season_boss: 'Rare',
+};
+
+/** Fond de vignette PERSO — indexé sur la rareté, cf. `img.characterSlot`. */
+const CHARACTER_SLOT_BY_RARITY: Record<number, string> = { 1: 'Magic', 2: 'Rare', 3: 'Unique' };
+
 export const img = {
   /** Portrait cadré (vignette/header). */
   portrait: (id: string) => `${BASE}/images/characters/portrait/CT_${id}.webp`,
@@ -17,7 +39,7 @@ export const img = {
   /** Corps entier (grand visuel). */
   full: (id: string) => `${BASE}/images/characters/full/IMG_${id}.webp`,
   /** Icône de visage (listes). */
-  face: (id: string) => `${BASE}/images/characters/faceicon/FI_${id}.webp`,
+  face: faceSrc,
   /** Variante PNG (og:image — les aperçus Discord/OG préfèrent le PNG). */
   facePng: (id: string) => `${BASE}/images/characters/faceicon/FI_${id}.png`,
   /** Icône d'ordre de tour (barre ATB en combat). */
@@ -37,8 +59,12 @@ export const img = {
   eePng: (id: string) => `${BASE}/images/characters/ee/${id}.png`,
   /** Icône de sous-classe (slug → CamelCase). */
   subClass: (sc: string) => `${BASE}/images/ui/class/CM_Sub_Class_${cap(sc)}.webp`,
-  /** Étoile de rareté (jaune). */
-  star: () => `${BASE}/images/ui/star/CM_icon_star_y.webp`,
+  /**
+   * Étoile de rareté. Les quatre teintes sont celles du jeu : jaune par défaut,
+   * puis orange / rouge / violet selon le grade de transcendance (le prefab de
+   * vignette fige une rangée par grade — cf. `SKIN.character.star`).
+   */
+  star: (tone: 'y' | 'o' | 'r' | 'v' = 'y') => `${BASE}/images/ui/star/CM_icon_star_${tone}.webp`,
   /** Étoile Singularity (item ascendé). */
   starSingularity: () => `${BASE}/images/ui/star/CM_Star_Singularity.webp`,
   /** Icône de tag éditorial (premium/limited/…). */
@@ -74,14 +100,37 @@ export const img = {
   slotFrame: (grade: string) =>
     `${BASE}/images/ui/bg/TI_Slot_${SLOT_FRAME[grade] ?? 'Normal'}.webp`,
   /** Portrait d'un boss (`MT_*`, sources d'obtention d'équipement). */
-  boss: (icon: string) => `${BASE}/images/ui/boss/${icon}.webp`,
+  boss: bossSrc,
+  /**
+   * Icône d'un MONSTRE depuis son `FaceIconID` brut : commençant par « 2 » =
+   * modèle de PERSONNAGE réutilisé → face icon composée, sinon vignette `MT_`.
+   *
+   * La règle vit ICI et nulle part ailleurs : `lib/data/monsters` lit le disque
+   * (serveur only), donc un composant client ne peut pas l'importer — c'est ce
+   * qui avait fait naître trois recopies de ce `startsWith('2')`.
+   */
+  monster: (icon: string) => (icon.startsWith('2') ? faceSrc(icon) : bossSrc(`MT_${icon}`)),
   /**
    * Fond de rareté d'une vignette de MONSTRE (sprites `MT_Slot_*` du jeu,
    * famille at_thumbnailmonsterruntime) : rareté 1 = Normal, 2 = Magic,
    * 3+ = Rare — corrélé au type (mob de base / named / boss) dans les tables.
+   *
+   * @deprecated Le jeu ne choisit PAS le fond par la rareté (cf.
+   * `monsterSlotByType`) : cette corrélation est fausse pour ~900 monstres.
+   * Reste en place tant que `DamageCalculatorBrowser` s'en sert.
    */
   monsterSlot: (rarity: number) =>
     `${BASE}/images/ui/boss/MT_Slot_${rarity >= 3 ? 'Rare' : rarity === 2 ? 'Magic' : 'Normal'}.webp`,
+  /** Fond de vignette monstre par TYPE — la règle du jeu (`SetMonsterBG`). */
+  monsterSlotByType: (type: string) => bossSrc(`MT_Slot_${MONSTER_SLOT_BY_TYPE[type] ?? 'Normal'}`),
+  /**
+   * Fond de vignette PERSO par rareté — l'autre règle du jeu. Le prefab
+   * `uicharacterthumbnail` porte `m_BGObjects = [Magic, Rare, Unique]` et le
+   * `SetData` privé l'indexe sur `_byBasicStar` : rareté 1 → Magic, 2 → Rare,
+   * 3 → Unique. C'est bien la RARETÉ ici, à l'inverse du monstre.
+   */
+  characterSlot: (rarity: number) =>
+    bossSrc(`CT_Slot_${CHARACTER_SLOT_BY_RARITY[rarity] ?? 'Magic'}`),
   /** Variante PNG (og:image des guides de boss — Discord/OG préfèrent le PNG). */
   bossPng: (icon: string) => `${BASE}/images/ui/boss/${icon}.png`,
   /**
