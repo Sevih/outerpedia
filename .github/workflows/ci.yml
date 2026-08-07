@@ -42,9 +42,11 @@ jobs:
       - run: pnpm format:check
       - run: pnpm lint
       - run: pnpm typecheck
-      # La suite Vitest (~3 s) : sans elle, les 278 tests ne gardent RIEN —
+      # La suite Vitest (~25 s) : sans elle, les 1400+ tests ne gardent RIEN —
       # lefthook ne joue que format/lint/typecheck, et personne d'autre ne les
-      # lance. C'est ici la seule barrière automatique.
+      # lance. C'est ici la seule barrière automatique. (Ordre de grandeur
+      # volontaire : un compte exact re-périme à chaque test ajouté — il
+      # annonçait encore 278 le 07/08, pour 1416 réels.)
       - run: pnpm test
       # Le build (~7 min) ne tourne QUE sur les PR. Sur push main, le job
       # `docker` refait exactement ce `next build` dans l'image — le jouer aussi

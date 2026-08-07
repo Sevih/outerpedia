@@ -9,6 +9,12 @@
 >
 > Ce document ne réécrit pas les constats : il **relie**, dédoublonne les
 > recouvrements et donne UN ordre de traitement pour les trois à la fois.
+>
+> **Volet POSTÉRIEUR, hors de cette synthèse** (domaine à worker dédié, aucun
+> recouvrement avec les trois ci-dessus) :
+> [damage-calculator.md](./damage-calculator.md) — calculateur de dégâts
+> `src/lib/damage/` + `tools/_contents/damage-calculator/` (constats **D1–D5**,
+> 2026-08-07).
 
 ## Verdict croisé
 

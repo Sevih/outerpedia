@@ -7,6 +7,60 @@
 
 ## 2026-08-07
 
+- **Audit complet du site, et ses trois premiers correctifs.** Rapport damage
+  sorti à part ([audit/damage-calculator.md](./audit/damage-calculator.md),
+  constats **D1–D5**) — le domaine a son worker dédié, l'audit global n'en garde
+  rien. Ce qui a été corrigé dans la foulée :
+  - **`next` 16.2.10 → 16.3.0** — 4 avis _high_ dont **« Middleware / Proxy
+    bypass in App Router (Turbopack + single locale) »** et **« SSRF in rewrites
+    via attacker-controlled destination hostname »**, tous deux visant
+    exactement ce que fait `src/proxy.ts` (routing i18n par sous-domaine +
+    exclusion `/admin`, `/api`, `/dev`). Corrigés en amont dès 16.2.11 : on
+    était à une version patch. `pnpm audit` passe de 26 à 12 avis, et les 12
+    restants sont **tous** en devDependencies (`cheerio`, `concurrently`,
+    `eslint`) — zéro surface prod. ⚠️ La mise à jour a été faite **serveur de
+    dev allumé**, ce qui a swappé `node_modules` sous lui (`TypeError: this.load
+is not a function` sur les routes admin). Redémarrage requis ; à ne pas
+    refaire sans prévenir.
+  - **Sitemap : `/changelog`, `/event` et ses fiches étaient absents.** Pages
+    indexables et pré-rendues (`generateStaticParams`), mais rien ne les
+    signalait au crawl. `sitemap()` passe en `async` pour `listEventSlugs`, qui
+    filtre déjà les brouillons. `/contribute` reste dehors, à raison : il porte
+    `robots: { index: false }`.
+  - **Socle de partage factorisé** — `src/lib/hash-store.ts`. `short-links.ts`
+    et `api/tierlist/_store.ts` portaient chacun leur copie caractère pour
+    caractère de `ensureTable` (mémoïsé) et de l'id-hash `sha256 → base64url →
+12`. Le 3ᵉ partage annoncé dans `db.ts` (les équipes) n'aura plus qu'à
+    déclarer sa table. `ID_RE` de la tier-list reste **volontairement** plus
+    permissif (`{1,16}`) : des liens `?s=` V2 en dépendent. 9 tests couvrent ce
+    que la factorisation pouvait casser — déterminisme des ids et **isolation de
+    la mémoïsation entre stores**.
+  - Commentaire CI qui annonçait « 278 tests » pour 1416 réels → ordre de
+    grandeur, qui ne re-périmera pas.
+
+  **Deux constats de l'audit ont été INVALIDÉS en les vérifiant**, et ne
+  laissent donc aucune tâche :
+  - _« 38 des 41 `<img>` sans `loading="lazy"` »_ — mesure brute et trompeuse :
+    elle comptait des **lignes**, pas des rendus. La politique est déjà en
+    place (48 `loading=` posés), et posée aux bons endroits — `CharacterCard`
+    gère même le LCP (`priority ? 'eager' : 'lazy'`), `CharacterPortrait`,
+    `EquipmentIcon`, `GuideCard` et toutes les grilles de guides en portent un
+    qui sert des centaines de vignettes. Ce qui reste sans attribut, ce sont des
+    icônes d'overlay de 16 à 56 px (élément, classe, étoile, rang) : les passer
+    en `lazy` serait une régression.
+  - _« `LANGS` redéclaré 8× avec des contenus divergents »_ — ce n'est pas une
+    dérive : `ItemCuratedEditor` a **raison** d'omettre `fr` (il édite un
+    `LangDict = Record<GameLang, string>`, et `fr` est `isOfficial: false`), là
+    où `EffectCuratedEditor` a raison de l'inclure (il édite un
+    `LocalizedText`). Reste que le même identifiant désigne deux concepts
+    opposés — `GAME_LANGS` / `SITE_LANGS` lèverait le piège. Non fait.
+
+  **Reste ouvert, volontairement non fait** (cf. TODO) : le `_ui.ts` admin
+  (`btn`/`input`/`DATALIST_ID` recopiés dans 18 fichiers) et le retrait de
+  `localePath()` (no-op appelé 110×). Les deux sont cosmétiques et hors bundle
+  de prod ; ils touchent `SearchAliasEditor.tsx` et `ShortNameEditor.tsx`, en
+  cours d'édition ce jour-là. À lancer sur un arbre propre.
+
 - **Les noms sous les portraits ne sont plus tronqués.** `CharacterPortrait`
   écrivait le nom sur UNE ligne `truncate` large de `size + 24` (88 px pour un
   portrait de 64) : tout ce qui dépasse deux mots courts finissait en « Heatwave
@@ -19,6 +73,34 @@
   (`min-h-[2.5em]`) — sans ça, un voisin tenant sur une seule ligne décentre les
   portraits d'une même rangée sous `items-center`. `title` ajouté pour le nom
   qui déborde quand même (Tamamo-no-Mae et consorts).
+  • **Et pour ceux qui débordent MALGRÉ les deux lignes, repli sur le nom
+  court curé** (`short-names.json`, déjà localisé et déjà consommé par le
+  tier-list-maker et les recos d'équipement — rien à construire). Le portrait
+  reçoit `shortName` en PROP : `loadShortNames()` lit le fs, or le composant
+  tourne aussi côté client, donc la résolution (`short[lang] ?? short.en`,
+  fallback maison) reste chez l'appelant serveur. Le repli n'est employé qu'en
+  DERNIER recours, arbitré par `fitsOnTwoLines` — estimation typographique
+  (largeur moyenne par caractère, pleine chasse pour les scripts CJK, wrap
+  glouton par mots), pas une mesure DOM : le portrait est rendu côté serveur.
+  Vérifié sur les noms réels : « Heatwave Cop Delta », « Demiurge Stella » et
+  les noms JP/KR/ZH tiennent et gardent leur nom complet ; « Holy Night's
+  Blessing Dianne », « Kitsune of Eternity Tamamo-no-Mae » et « Summer Knight's
+  Dream Ember » basculent. `alt` et `title` gardent TOUJOURS le nom complet.
+  Branché sur `PriorityTiers` (guides) ; les browsers client (team-planner,
+  most-used-units, synergies…) restent à câbler, `shortName` se posant à côté
+  de `searchNames` dans la ligne construite côté serveur.
+  • Liste de l'admin Short names triée **du nom le plus long au plus court**
+  (alphabétique en départage, sinon l'ordre serait instable) : les persos qui
+  débordent arrivent en tête, ce sont les seuls à traiter.
+
+- **L'éditeur d'alias de recherche VIDAIT la clé au lieu d'enregistrer.** Le
+  texte tapé reste un brouillon local tant qu'on n'a pas fait Entrée ou
+  virgule ; `save()` n'envoyait que les chips déjà validées. Taper un alias puis
+  cliquer Save postait donc une liste VIDE — et « liste vide ⇒ supprime la clé »
+  côté store — en affichant « ✓ saved ». Diagnostiqué sur un
+  `data/curated/search-aliases.json` réduit à `{}` après une saisie de Sevih.
+  `save()` valide désormais le champ en cours avant d'envoyer. Seul éditeur admin
+  bâti sur ce motif chips + brouillon (vérifié).
 
 - **Guide « Premium & Limited » : les collab se voient sans être un choix
   (retour Shiraen).** Les héros de collab étaient classés dans les paliers de
