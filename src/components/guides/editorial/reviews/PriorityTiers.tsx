@@ -53,6 +53,7 @@ export function PriorityTiers({
             <div className="flex flex-wrap items-center justify-center gap-3">
               {tier.entries.map((e, j) => {
                 const g = resolveGuideCharacter(e.name, lang, where);
+                const isCollab = (g.character.tags ?? []).includes('collab');
                 return (
                   <span key={j} className="flex items-center gap-3">
                     {j > 0 && tier.entries[j - 1].op && (
@@ -68,7 +69,8 @@ export function PriorityTiers({
                       rarity={e.stars}
                       size={64}
                       href={g.href}
-                      dimmed={(g.character.tags ?? []).includes('collab')}
+                      dimmed={isCollab}
+                      badgeTag={isCollab ? 'collab' : undefined}
                       shortName={shorts[g.character.id]?.[lang] ?? shorts[g.character.id]?.en}
                     />
                   </span>

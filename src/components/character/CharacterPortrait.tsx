@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Route } from 'next';
 import { cn } from '@/lib/cn';
-import { img } from '@/lib/images';
+import { img, RECRUIT_TAG_SPRITE } from '@/lib/images';
 
 /**
  * Le nom TIENT-IL sur deux lignes dans `maxWidth` (px) ? Estimation
@@ -59,6 +59,7 @@ export function CharacterPortrait({
   showName = true,
   dimmed = false,
   shortName,
+  badgeTag,
 }: {
   id: string;
   name: string;
@@ -86,8 +87,15 @@ export function CharacterPortrait({
    * sur les deux lignes disponibles — sinon on affiche toujours le vrai nom.
    */
   shortName?: string;
+  /**
+   * Badge de recrutement en haut à gauche (`collab`, `seasonal`, `premium`…),
+   * même sprite et même coin que sur `CharacterCard`. Ignoré si le tag n'a pas
+   * de sprite : la carte fait déjà ce filtre, on ne construit pas d'URL morte.
+   */
+  badgeTag?: string;
 }) {
   const starSize = Math.round(size * 0.17);
+  const badge = badgeTag && badgeTag in RECRUIT_TAG_SPRITE ? badgeTag : undefined;
   const label = shortName && !fitsOnTwoLines(name, size + 24) ? shortName : name;
   const content = (
     <span className={cn('flex w-full flex-col items-center gap-1', dimmed && 'opacity-70')}>
@@ -100,6 +108,13 @@ export function CharacterPortrait({
           height={size}
           className="border-line-subtle h-full w-full rounded-lg border object-cover"
         />
+        {badge && (
+          <img
+            src={img.recruitTag(badge)}
+            alt={badge}
+            className="absolute top-0 left-0 z-10 w-[55%] drop-shadow-md"
+          />
+        )}
         {element && (
           <img
             src={img.element(element)}
