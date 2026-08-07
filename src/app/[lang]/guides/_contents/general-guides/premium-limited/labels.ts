@@ -47,11 +47,11 @@ export const LABELS = {
   },
 
   collabNote: {
-    en: 'Collab heroes are only obtainable during their collaboration event, and a rerun is never guaranteed. They are shown translucent to indicate where they rank rather than as a choice you can make right now.',
-    jp: 'コラボヒーローはコラボイベント開催中のみ入手でき、再開催が保証されることはありません。今すぐ選べる選択肢ではなく、順位の目安として半透明で表示しています。',
-    kr: '콜라보 영웅은 콜라보 이벤트 기간에만 획득할 수 있으며, 재개최는 결코 보장되지 않습니다. 지금 선택할 수 있는 대상이 아니라 순위의 기준으로서 반투명하게 표시됩니다.',
-    zh: '联动英雄仅在联动活动期间可获得，且复刻从无保证。此处以半透明显示，仅用于标示他们的定位，而非当前可做的选择。',
-    fr: "Les Héros de collab ne sont obtenables que pendant leur événement de collaboration, et un retour n'est jamais garanti. Ils sont affichés en translucide pour situer leur niveau, pas comme un choix possible aujourd'hui.",
+    en: 'Collab heroes are only obtainable during their collaboration event, and a rerun is never guaranteed. They are shown translucent to indicate where they would rank rather than as an option to look out for.',
+    jp: 'コラボヒーローはコラボイベント開催中のみ入手でき、再開催が保証されることはありません。狙うべき選択肢としてではなく、順位の目安を示すために半透明で表示しています。',
+    kr: '콜라보 영웅은 콜라보 이벤트 기간에만 획득할 수 있으며, 재개최는 결코 보장되지 않습니다. 노려야 할 선택지가 아니라 순위의 기준을 나타내기 위해 반투명하게 표시됩니다.',
+    zh: '联动英雄仅在联动活动期间可获得，且复刻从无保证。此处以半透明显示，仅用于标示他们的定位，而非值得关注的选项。',
+    fr: "Les Héros de collab ne sont obtenables que pendant leur événement de collaboration, et un retour n'est jamais garanti. Ils sont affichés en translucide pour situer leur niveau, pas comme une option à guetter.",
   },
 
   transcendPriority: {

@@ -7,6 +7,19 @@
 
 ## 2026-08-07
 
+- **Les noms sous les portraits ne sont plus tronqués.** `CharacterPortrait`
+  écrivait le nom sur UNE ligne `truncate` large de `size + 24` (88 px pour un
+  portrait de 64) : tout ce qui dépasse deux mots courts finissait en « Heatwave
+  Cop D… ». Repéré par Sevih sur les paliers du guide Premium & Limited, mais le
+  composant sert sur une vingtaine d'écrans (team-planner, synergies,
+  pull-simulator, admin…) — c'était partout. Le nom passe sur **2 lignes**
+  (`line-clamp-2`, `leading-tight`, `wrap-break-word`) à largeur de colonne
+  INCHANGÉE : les rangées `flex-wrap` gardent leur alignement, ce que faisait
+  gagner la troncature. La hauteur est réservée en dur à 2 lignes
+  (`min-h-[2.5em]`) — sans ça, un voisin tenant sur une seule ligne décentre les
+  portraits d'une même rangée sous `items-center`. `title` ajouté pour le nom
+  qui déborde quand même (Tamamo-no-Mae et consorts).
+
 - **Guide « Premium & Limited » : les collab se voient sans être un choix
   (retour Shiraen).** Les héros de collab étaient classés dans les paliers de
   priorité comme n'importe quel autre — utile comme repère (« voilà où ils se

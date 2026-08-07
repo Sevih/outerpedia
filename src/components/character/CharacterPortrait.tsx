@@ -88,8 +88,14 @@ export function CharacterPortrait({
         ) : null}
       </span>
       {showName && (
+        // Nom sur DEUX lignes au lieu d'une ligne tronquée : « Heatwave Cop
+        // Delta » ou « Holy Night's Blessing Dianne » ne tiennent pas en
+        // `size + 24`. La largeur reste celle du portrait (rangées alignées) et
+        // la hauteur est réservée à 2 lignes (`2.5em` = 2 × `leading-tight`),
+        // sinon un voisin à une seule ligne décentre les portraits entre eux.
         <span
-          className="text-content-strong w-full truncate text-center text-xs font-semibold"
+          title={name}
+          className="text-content-strong line-clamp-2 min-h-[2.5em] w-full text-center text-xs leading-tight font-semibold wrap-break-word"
           style={{ maxWidth: size + 24 }}
         >
           {name}
