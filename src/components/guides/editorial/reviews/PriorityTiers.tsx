@@ -4,8 +4,9 @@
  * séparateurs `>`/`≥` optionnels entre entrées (ordre strict, guide Core
  * Fusion). Les noms éditoriaux résolvent au BUILD (nom inconnu = build cassé).
  *
- * Les héros de COLLAB sont rendus translucides : leur palier dit où ils se
- * situeraient, mais ils ne sont pas un choix réel de bannière (retour Shiraen).
+ * Les héros de COLLAB portent le BADGE `collab` : leur palier dit où ils se
+ * situeraient, mais ils ne s'obtiennent que pendant leur événement (retour
+ * Shiraen — le badge a remplacé l'atténuation, jugée trop discrète).
  */
 import type { Lang } from '@/lib/i18n/config';
 import { resolveGuideCharacter } from '@/lib/data/characters';
@@ -69,7 +70,6 @@ export function PriorityTiers({
                       rarity={e.stars}
                       size={64}
                       href={g.href}
-                      dimmed={isCollab}
                       badgeTag={isCollab ? 'collab' : undefined}
                       shortName={shorts[g.character.id]?.[lang] ?? shorts[g.character.id]?.en}
                     />

@@ -9,6 +9,7 @@ import type { ReactNode } from 'react';
 import type { Lang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
+import { img } from '@/lib/images';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import { findCharacterByName, resolveGuideCharacter } from '@/lib/data/characters';
 import { SegmentedTabs } from '@/components/guides/SegmentedTabs';
@@ -54,7 +55,18 @@ export default async function PremiumLimitedGuide({ lang }: { lang: Lang }) {
         </h2>
         <PriorityTiers tiers={tiers} lang={lang} where={WHERE} />
         {hasCollab(order) && (
-          <p className="text-content-subtle m-0 text-center text-xs">{L(LABELS.collabNote)}</p>
+          // Le badge OUVRE la note : le lecteur relie le sprite vu sur les
+          // portraits à l'explication sans avoir à le deviner. Décoratif — le
+          // mot « Collab » est dans la phrase juste à côté.
+          <p className="text-content-subtle m-0 text-center text-xs">
+            <img
+              src={img.recruitTag('collab')}
+              alt=""
+              aria-hidden
+              className="mr-1.5 inline-block h-4 w-auto align-text-bottom"
+            />
+            {L(LABELS.collabNote)}
+          </p>
         )}
         <div className="border-line-subtle border-t pt-5">
           <div className="text-content-strong mb-3 text-center text-sm font-semibold">

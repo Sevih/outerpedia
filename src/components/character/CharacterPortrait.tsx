@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import type { Route } from 'next';
-import { cn } from '@/lib/cn';
 import { img, RECRUIT_TAG_SPRITE } from '@/lib/images';
 
 /**
@@ -57,7 +56,6 @@ export function CharacterPortrait({
   size = 64,
   href,
   showName = true,
-  dimmed = false,
   shortName,
   badgeTag,
 }: {
@@ -76,11 +74,6 @@ export function CharacterPortrait({
    */
   showName?: boolean;
   /**
-   * Portrait translucide : le perso est montré pour situer sa place, mais il
-   * n'est pas un choix réel (héros de collab dans les guides de pull).
-   */
-  dimmed?: boolean;
-  /**
    * Nom COURT curé (`short-names.json`, déjà résolu dans la langue par
    * l'appelant : ce module lit le fs, le portrait tourne aussi côté client).
    * Employé UNIQUEMENT en dernier recours, quand le nom complet ne tient pas
@@ -98,7 +91,7 @@ export function CharacterPortrait({
   const badge = badgeTag && badgeTag in RECRUIT_TAG_SPRITE ? badgeTag : undefined;
   const label = shortName && !fitsOnTwoLines(name, size + 24) ? shortName : name;
   const content = (
-    <span className={cn('flex w-full flex-col items-center gap-1', dimmed && 'opacity-70')}>
+    <span className="flex w-full flex-col items-center gap-1">
       <span className="relative inline-block shrink-0" style={{ width: size, height: size }}>
         <img
           src={img.face(id)}
@@ -112,7 +105,7 @@ export function CharacterPortrait({
           <img
             src={img.recruitTag(badge)}
             alt={badge}
-            className="absolute top-0 left-0 z-10 w-[55%] drop-shadow-md"
+            className="absolute top-0 left-0 z-10 w-[68%] drop-shadow-md"
           />
         )}
         {element && (
