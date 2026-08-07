@@ -27,7 +27,7 @@ jobs:
       # C'est voulu : la version de pnpm se déclare à UN seul endroit, sinon le
       # CI et le poste de dev dérivent en silence (on a tourné en 11 en local
       # pendant que le CI et l'image de prod restaient en 10).
-      - uses: pnpm/action-setup@v6
+      - uses: pnpm/action-setup@v6.0.9
 
       - uses: actions/setup-node@v7
         with:
