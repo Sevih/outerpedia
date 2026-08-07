@@ -22,7 +22,9 @@ powershell -ExecutionPolicy Bypass -File scripts\init.ps1
 [`scripts/init.ps1`](../../scripts/init.ps1) est un orchestrateur mince : il
 enchaîne les commandes ci-dessous (`corepack`, `pnpm`, `pnpm datagen:*`) et
 **auto-installe via winget** ce qui manque — `nvm-windows`, le runtime **.NET**
-(Il2CppDumper) et `rclone` — en rafraîchissant le PATH dans la foulée.
+(Il2CppDumper) et `rclone` — en rafraîchissant le PATH dans la foulée. Il pose
+aussi **UnityPy** (`datagen/requirements.txt`) si python est présent — il
+n'installe pas python lui-même, l'étape qu'il sert étant facultative (§1).
 
 Ce qui reste **irréductiblement manuel** : `git` (il a fallu cloner ce repo pour
 avoir le script), le `.env.local` (§2.1), et un **émulateur LDPlayer lancé avec
@@ -56,6 +58,12 @@ Les sections suivantes détaillent chaque étape (et servent de secours manuel).
 - **git**.
 - Pour (re)générer la data : un **émulateur Android** (LDPlayer) avec Outerplane
   installé + **adb** dans le PATH. Sinon, récupérer `.gamedata/` depuis R2.
+- **Python + UnityPy — FACULTATIF**, pour la seule étape python du projet
+  (face-layout) : `python -m pip install -r datagen/requirements.txt`
+  (`init.ps1` le fait si python est présent). Sans lui, le refresh saute l'étape
+  avec un avertissement — le `face-icon-layout.json` committé prend le relais et
+  seuls les FI_ de persos/skins récents manqueraient **sur cette machine**. À
+  installer sur la machine de datamine, superflu ailleurs.
 
 ---
 
@@ -146,7 +154,13 @@ pnpm datagen:extract     # .bytes + images → .gamedata/extracted/ (via AssetSt
 pnpm datagen:convert     # .bytes → tables parsées (.gamedata/parsed/*.json)
 pnpm datagen:regen       # build + promote --apply → data/extracted (lit parsed + dump.cs)
 pnpm assets:pull         # ensemble d'images PUBLIÉ sur R2 → .assets-staging/images
+pnpm editorial:pull      # pool éditorial (BD 4-cut + wallpapers faits main) depuis R2
 ```
+
+> `editorial:pull` n'est utile que pour **publier** une BD ou un wallpaper depuis
+> cette machine — voir [ajouter-comic.md](ajouter-comic.md). Il est gratuit
+> autrement, et c'est le seul moyen d'avoir ce contenu : il n'est ni dans le jeu,
+> ni dans git.
 
 > `datagen:dump` a besoin de l'émulateur **lancé** avec le jeu **installé** (il lit
 > l'APK via adb). Il ne change qu'aux MAJ de code du jeu — inutile de le rejouer à

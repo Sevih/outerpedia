@@ -1,0 +1,14 @@
+# Dépendances du SEUL script python du projet : datagen/assets/extract-face-layout.py
+# (typetrees RectTransform d'un prefab Unity → face-icon-layout.json committé —
+# cf. datagen/README § « Exception assumée : un (seul) outil Python »).
+#
+#   python -m pip install -r datagen/requirements.txt
+#
+# FACULTATIF PAR MACHINE : sans UnityPy, `refresh` saute l'étape face-layout avec
+# un avertissement (au lieu de faire échouer tout `pnpm dev`) et le layout committé
+# prend le relais — seuls les FI_ de persos/skins récents manqueraient. À installer
+# sur la machine de datamine, superflu ailleurs.
+#
+# Plancher, pas épingle : borné sous la 2.x (l'API des typetrees pourrait bouger
+# à une majeure) sans figer les correctifs de la 1.x.
+UnityPy>=1.25,<2

@@ -5,6 +5,53 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-07
+
+- **`pnpm dev` ne meurt plus sur une machine sans UnityPy.** L'étape python
+  face-layout (la seule du projet) s'exécutait dès que `.gamedata` existait —
+  mais tirer les bundles n'implique pas avoir l'outillage python : sur le
+  portable, `ModuleNotFoundError: No module named 'UnityPy'` faisait échouer
+  TOUT le refresh, donc tout `pnpm dev`, pour une étape dont la sortie
+  (`face-icon-layout.json`) est COMMITTÉE. `refresh` sonde désormais
+  `python -c "import UnityPy"` et SAUTE l'étape avec un avertissement actionnable
+  (`pip install UnityPy` puis `pnpm datagen:patch --force`) : le dev tourne sur
+  le layout du dernier passage, seuls les FI_ de persos/skins arrivés depuis
+  manqueraient sur cette machine. Un échec du script LUI-MÊME (bundle absent,
+  prefab illisible) lève toujours — c'est un vrai problème de la machine de
+  datamine, à ne pas avaler. `datagen/README` § exception python mis à jour.
+  • **Et la dépendance est enfin DÉCLARÉE** : `datagen/requirements.txt`
+  (`UnityPy>=1.25,<2` — plancher borné sous la 2.x, pas épingle). Elle ne vivait
+  nulle part : ni requirements, ni pyproject, ni doc — juste un `pip install`
+  fait à la main sur le fixe un jour, que rien ne rejouait ailleurs. `init.ps1`
+  la pose désormais si python est présent (§1c), SANS installer python via
+  winget : gros runtime pour une étape facultative, et le refresh la tolère
+  absente. Prérequis §1 d'`installation.md` complété (+ `editorial:pull` ajouté
+  au §4). UnityPy 1.25.3 installé sur le portable dans la foulée (wheels
+  disponibles pour Python 3.14, aucune compilation) — sonde repassée au vert.
+
+- **`.editorial/` a enfin une source de vérité — `editorial:pull` /
+  `editorial:push`.** Le pool éditorial (27×3 BD 4-cut + 5 wallpapers faits
+  main) est du contenu ORIGINAL absent des fichiers du jeu ET de git
+  (gitignoré, binaires) : il ne vivait que sur le PC fixe. Aucune sauvegarde
+  hors-machine, et deux PC qui divergent en silence. Conséquence concrète
+  repérée depuis le portable : `collect-comics` régénère le manifeste R2 depuis
+  le pool LOCAL, donc un `pnpm images` (que `pnpm commit` enchaîne !) sur une
+  machine au pool partiel faisait tomber la galerie de 27 BD à ce qu'elle avait
+  — les webp survivant sur R2 (le push n'efface rien), mais plus personne ne les
+  demandant. Les ORIGINAUX montent désormais sur R2 sous le préfixe `editorial/`
+  (distinct d'`images/`, hors staging) via `r2Upload` ajouté au runner rclone
+  partagé. **`copy` dans les deux sens, jamais `sync`** : union des machines,
+  aucun transfert ne peut détruire un pool (même doctrine qu'`assets:pull`) ;
+  corollaire assumé, retirer une BD partout reste manuel.
+  • **Garde-fou** dans `collect-comics` : le manifeste n'est plus écrit si le
+  pool local compte moins de BD que le seed committé `comics.json` (la trace
+  versionnée du pool complet) — warning qui renvoie sur `editorial:pull`,
+  `--force` pour le retrait volontaire. Les webp, eux, partent quand même :
+  rien n'est perdu, seule la liste est retenue. Vérifié dans les deux sens sur
+  un pool factice (1 < 81 → retenu ; `--force` → écrit). Procédure
+  `docs/procedure/ajouter-comic.md` complétée (étape 0 « avoir le pool
+  complet », `editorial:push` ajouté à la publication). tsc datagen + eslint OK.
+
 ## 2026-08-06
 
 - **Story vs Origin Story — l'histoire retrouve son vrai découpage.** Depuis

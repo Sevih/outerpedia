@@ -6,6 +6,20 @@ lu à la requête : ajouter une BD **ne demande AUCUN redéploiement**.
 
 Détail de l'archi dans [DONE.md](../DONE.md) (entrée `/4-comics` du 19/07).
 
+## 0. Avoir le pool complet
+
+`.editorial/` est gitignoré : un clone frais ne l'a pas, et deux machines
+divergent. Sa source de vérité est R2 :
+
+```bash
+pnpm editorial:pull    # récupère le pool complet (BD + wallpapers)
+```
+
+**Obligatoire avant de publier depuis une machine secondaire** : le manifeste
+est régénéré depuis le pool LOCAL, donc publier avec un pool partiel amputerait
+la galerie. Un garde-fou retient le manifeste dans ce cas (il compare au seed
+committé et te renvoie ici), mais le bon geste reste le pull.
+
 ## 1. Déposer l'image
 
 Un fichier **jpg ou png** (tel quel depuis Discord) dans le dossier de la LANGUE
@@ -28,16 +42,22 @@ tu n'as que l'EN, juste `EN/`.
 ## 2. Publier
 
 ```bash
-pnpm images   # convertit en webp + pousse images & comics.json sur R2 + purge l'edge
+pnpm images            # convertit en webp + pousse images & comics.json sur R2 + purge l'edge
+pnpm editorial:push    # sauvegarde les ORIGINAUX sur R2 (les autres machines les auront)
 ```
 
-C'est tout. La BD apparaît sur `/4-comics` en **< 10 min**, sans build, sans
-commit, sans `datagen:build` : le manifeste se régénère depuis le contenu du
-dossier.
+La BD apparaît sur `/4-comics` en **< 10 min**, sans build, sans commit, sans
+`datagen:build` : le manifeste se régénère depuis le contenu du dossier.
+
+Le `editorial:push` n'est pas facultatif : sans lui, l'original ne vit que sur
+cette machine — ni sauvegardé, ni visible de l'autre PC.
 
 ## Notes
 
 - Rien à committer : les images sont hors git (R2), la liste vit sur R2.
+- `editorial:pull`/`push` sont des `copy`, jamais des `sync` : ils n'effacent
+  rien, ni en local ni sur R2. Retirer une BD partout reste un geste manuel
+  (puis `pnpm assets:collect-comics --force` pour écrire le manifeste réduit).
 - Le `data/generated/comics.json` du repo n'est qu'un **repli** (dev / R2 down).
   Pour le rafraîchir : `pnpm datagen:build` puis promote (facultatif, la prod
   n'en dépend pas).

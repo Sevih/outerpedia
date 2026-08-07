@@ -13,7 +13,7 @@
  *   - `pnpm dev`         → scripts/dev-refresh.ts : { apply, collect, news } = true
  *   - `pnpm datagen:patch` → CLI ci-dessous : promote en DRY (revue), sans extras
  */
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
@@ -35,15 +35,43 @@ function step(label: string, file: string, args: string[] = []): void {
 }
 
 /**
+ * Outillage python de l'étape face-layout. Null si tout est là, sinon le motif
+ * du manque (message destiné à l'utilisateur).
+ */
+function pythonToolingMissing(): string | null {
+  const probe = spawnSync('python', ['-c', 'import UnityPy'], { stdio: 'ignore' });
+  if (probe.error) return 'python introuvable';
+  if (probe.status !== 0) return 'module UnityPy absent';
+  return null;
+}
+
+/**
  * Étape PYTHON — la seule du projet (extract-face-layout, cf. datagen/README) :
  * lit les prefabs FaceIcon des bundles pullés → face-icon-layout.json
  * (committé). Sans elle, collect ne peut pas produire les FI_ des nouveaux
  * persos/skins, et il fallait relancer dev à la main après l'avoir jouée.
  * Locale par construction : ce code ne s'exécute que si `.gamedata` existe
  * (la machine de datamine), jamais en CI.
+ *
+ * OUTILLAGE SONDÉ AVANT DE LANCER. `.gamedata` présent n'implique pas python +
+ * UnityPy installés : sur une machine secondaire, l'import raté faisait échouer
+ * TOUT `pnpm dev`, pour une étape dont la sortie est COMMITTÉE. On la saute donc
+ * avec un avertissement — le dev tourne sur le layout du dernier passage, seuls
+ * les FI_ de persos/skins arrivés depuis manqueraient. Un échec du script
+ * LUI-MÊME (bundle absent, prefab illisible) lève toujours : là, c'est un vrai
+ * problème de la machine de datamine, pas un défaut d'outillage.
  */
 function pyStep(label: string, file: string): void {
   console.log(`\n▶ ${label}`);
+  const missing = pythonToolingMissing();
+  if (missing) {
+    console.warn(
+      `  ⚠ SAUTÉE — ${missing}. face-icon-layout.json committé conservé ;\n` +
+        '    les FI_ des persos/skins récents peuvent manquer sur cette machine.\n' +
+        '    Pour l’outiller : pip install UnityPy, puis `pnpm datagen:patch --force`.',
+    );
+    return;
+  }
   execFileSync('python', [resolve(file)], { stdio: 'inherit' });
 }
 

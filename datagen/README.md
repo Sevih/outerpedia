@@ -79,7 +79,15 @@ via **UnityPy** — même domaine spécialisé que l'extracteur .NET de la couch
 - **absent du build et de la CI** ;
 - **borné à un JSON committé** : sa sortie `datagen/assets/face-icon-layout.json` est
   versionnée et c'est ce que lit `datagen/assets/face-icon.ts`. **Le serveur/build ne
-  touche jamais Python** — d'où « aucun python _dans le build_ », qui reste vrai.
+  touche jamais Python** — d'où « aucun python _dans le build_ », qui reste vrai ;
+- **optionnel par machine** (depuis le 2026-08-07) : `refresh` sonde l'import
+  UnityPy avant de lancer l'étape, et la SAUTE avec un avertissement si
+  l'outillage manque — au lieu de faire échouer tout `pnpm dev`. Avoir
+  `.gamedata` n'implique pas avoir UnityPy : un PC secondaire tire les bundles
+  sans être outillé. Le layout committé prend alors le relais ; seuls les FI_ de
+  persos ou skins arrivés depuis manqueraient sur cette machine. Pour l'outiller :
+  `pip install UnityPy` puis `pnpm datagen:patch --force`. Un échec du script
+  lui-même (bundle absent, prefab illisible) lève toujours.
 
 Porter ce script en TS reste possible (AssetStudioModCLI a un mode `-m dump`) mais non
 prioritaire : cf. le fork tranché en faveur de l'isolation.
@@ -134,10 +142,19 @@ prioritaire : cf. le fork tranché en faveur de l'isolation.
 | ----------------------------------- | ------------------------- | ------------------------------------------------- |
 | Coder / éditer `curated/` / builder | `git` (tout est committé) | `git pull` — c'est tout                           |
 | **Régénérer** (jeu a patché)        | l'aire `.gamedata/`       | la récupérer depuis **R2** (pas de ré-extraction) |
+| **Publier une BD / un wallpaper**   | le pool `.editorial/`     | `pnpm editorial:pull` (puis `:push` après ajout)  |
 
 Le quotidien est 100% git. Seule la régénération (rare) a besoin de `.gamedata/`,
 qui n'est **pas** synchronisé entre machines : sur l'autre PC, on le reconstitue
 par un `pnpm datagen:pull` depuis LDPlayer.
+
+`.editorial/` (BD 4-cut + wallpapers faits main) est le seul contenu ORIGINAL du
+projet : absent du jeu ET de git (binaires). Sa source de vérité est R2, préfixe
+`editorial/` — `pnpm editorial:pull` / `pnpm editorial:push`, en `copy` jamais en
+`sync` (union des machines, aucun transfert ne détruit un pool). **Pull avant de
+publier** : `collect-comics` régénère le manifeste depuis le pool LOCAL, donc un
+pool partiel amputerait la galerie (un garde-fou retient le manifeste dans ce
+cas, cf. `datagen/assets/collect-comics.ts`).
 
 ---
 

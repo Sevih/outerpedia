@@ -1,6 +1,7 @@
 /**
  * r2 — runner rclone minimal pour le bucket R2, PARTAGÉ par les bootstraps
- * (`datagen:tools`, `datagen:dump`) et `assets:pull`.
+ * (`datagen:tools`, `datagen:dump`), `assets:pull` et la synchro éditoriale
+ * (`editorial:pull` / `editorial:push`).
  *
  * Réutilise EXACTEMENT le schéma de scripts/assets-push.mjs : connexion S3
  * anonyme `:s3:`, identifiants lus dans `.env.local` (parse maison, sans dépendance)
@@ -54,20 +55,24 @@ export function rclone(args: string[], env: R2Env = r2Env()): void {
   }
 }
 
+/** Options rclone communes aux transferts (jamais de listing du bucket entier). */
+const TRANSFER_OPTS = ['--s3-no-check-bucket', '--transfers', '16', '--progress'];
+
 /** Copie `:s3:BUCKET/<srcPrefix>` → `<destDir>` (récupération d'artefacts). */
 export function r2Copy(srcPrefix: string, destDir: string, extra: string[] = []): void {
   const env = r2Env();
-  rclone(
-    [
-      'copy',
-      `:s3:${env.R2_BUCKET}/${srcPrefix}`,
-      destDir,
-      '--s3-no-check-bucket',
-      '--transfers',
-      '16',
-      '--progress',
-      ...extra,
-    ],
-    env,
-  );
+  rclone(['copy', `:s3:${env.R2_BUCKET}/${srcPrefix}`, destDir, ...TRANSFER_OPTS, ...extra], env);
+}
+
+/**
+ * Copie `<srcDir>` → `:s3:BUCKET/<destPrefix>` (dépôt d'artefacts).
+ *
+ * `copy`, JAMAIS `sync` : on ne supprime rien à distance. Le miroir destructif
+ * serait une arme braquée sur le pool — un push depuis une machine au pool
+ * partiel effacerait le reste (cf. la synchro éditoriale, où les deux machines
+ * divergent par construction).
+ */
+export function r2Upload(srcDir: string, destPrefix: string, extra: string[] = []): void {
+  const env = r2Env();
+  rclone(['copy', srcDir, `:s3:${env.R2_BUCKET}/${destPrefix}`, ...TRANSFER_OPTS, ...extra], env);
 }
