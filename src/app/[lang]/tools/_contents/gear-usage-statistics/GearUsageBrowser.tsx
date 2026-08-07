@@ -13,6 +13,10 @@ export interface GearUsageChar {
   id: string;
   slug: string;
   name: string;
+  /** Calques de la vignette du jeu ; la rareté (BasicStar) en choisit le fond. */
+  element: string;
+  class: string;
+  rarity: number;
 }
 
 /** Ligne du classement d'une catégorie (déjà triée par count décroissant). */
@@ -205,7 +209,15 @@ export function GearUsageBrowser({
                       >
                         {/* Largeur fixe : le span racine du portrait est en w-full. */}
                         <span className="w-10 shrink-0">
-                          <CharacterPortrait id={c.id} name={c.name} size={40} showName={false} />
+                          <CharacterPortrait
+                            id={c.id}
+                            name={c.name}
+                            element={c.element}
+                            classType={c.class}
+                            rarity={c.rarity}
+                            size={40}
+                            showName={false}
+                          />
                         </span>
                         <span className="text-content text-xs">{c.name}</span>
                       </Link>

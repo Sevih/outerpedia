@@ -22,6 +22,10 @@ export interface GachaMinor {
   name: string;
   /** Préfixe de titre (surnom affiché — rendu au-dessus du nom). */
   prefix?: string;
+  /** Calques de la vignette du jeu ; la rareté (BasicStar) en choisit le fond. */
+  element: string;
+  cls: string;
+  rarity: number;
 }
 
 /** Perso 3★ tirable, catégorisé pour les pools de bannière. */
@@ -310,7 +314,15 @@ export function PullSimulatorBrowser({
                 >
                   {/* Largeur fixe : le span racine du portrait est en w-full. */}
                   <span className="w-7 shrink-0">
-                    <CharacterPortrait id={char.id} name={char.name} size={28} showName={false} />
+                    <CharacterPortrait
+                      id={char.id}
+                      name={char.name}
+                      element={char.element}
+                      classType={char.cls}
+                      rarity={char.rarity}
+                      size={28}
+                      showName={false}
+                    />
                   </span>
                   <span className="text-xs font-medium text-red-300">{displayName(char)}</span>
                   <span className="text-content-subtle text-[10px] group-hover:text-red-200">
@@ -356,6 +368,9 @@ export function PullSimulatorBrowser({
                           <CharacterPortrait
                             id={char.id}
                             name={char.name}
+                            element={char.element}
+                            classType={char.cls}
+                            rarity={char.rarity}
                             size={32}
                             showName={false}
                           />
@@ -462,7 +477,15 @@ export function PullSimulatorBrowser({
                   }`}
                 >
                   {char && (
-                    <CharacterPortrait id={char.id} name={char.name} size={56} showName={false} />
+                    <CharacterPortrait
+                      id={char.id}
+                      name={char.name}
+                      element={char.element}
+                      classType={char.cls}
+                      rarity={char.rarity}
+                      size={56}
+                      showName={false}
+                    />
                   )}
                   <div className="mt-1 w-full text-center leading-tight">
                     {char ? (

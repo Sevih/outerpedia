@@ -9,7 +9,8 @@ export interface RosterGroupCardCharacter {
   name: string;
   element?: string;
   classType?: string;
-  rarity?: number;
+  /** BasicStar — REQUISE : elle choisit le fond de la vignette (`Thumbnail`). */
+  rarity: number;
   href?: string;
 }
 

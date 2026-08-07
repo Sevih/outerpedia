@@ -4,10 +4,17 @@ import { img } from '@/lib/images';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import { FLAGSHIP_ACCENT, type FlagshipKey } from './tierlistTheme';
 
-/** Perso du cluster d'aperçu (portrait décoratif : id + nom pour l'alt). */
+/**
+ * Perso du cluster d'aperçu (portrait décoratif : le nom ne sert que d'`alt`).
+ * Élément, classe et rareté ne décorent pas : ce sont les calques de la vignette
+ * du jeu, et la rareté en choisit le fond.
+ */
 export interface FlagshipTopHero {
   id: string;
   name: string;
+  element: string;
+  class: string;
+  rarity: number;
 }
 
 /**
@@ -101,7 +108,15 @@ export function FlagshipCard({
                     toute la largeur au lieu de serrer le coin. */}
                 {topHeroes.slice(5, 10).map((h) => (
                   <span key={h.id} className="w-8 shrink-0">
-                    <CharacterPortrait id={h.id} name={h.name} size={32} showName={false} />
+                    <CharacterPortrait
+                      id={h.id}
+                      name={h.name}
+                      element={h.element}
+                      classType={h.class}
+                      rarity={h.rarity}
+                      size={32}
+                      showName={false}
+                    />
                   </span>
                 ))}
               </div>
@@ -111,7 +126,15 @@ export function FlagshipCard({
               >
                 {topHeroes.slice(0, 5).map((h) => (
                   <span key={h.id} className="w-12 shrink-0">
-                    <CharacterPortrait id={h.id} name={h.name} size={48} showName={false} />
+                    <CharacterPortrait
+                      id={h.id}
+                      name={h.name}
+                      element={h.element}
+                      classType={h.class}
+                      rarity={h.rarity}
+                      size={48}
+                      showName={false}
+                    />
                   </span>
                 ))}
               </div>

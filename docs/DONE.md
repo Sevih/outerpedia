@@ -5,6 +5,51 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-08
+
+- **Tous les portraits passent par la vignette transcrite : trois rendus à l'œil
+  supprimés, un seul reste.** `Thumbnail` existait mais rien ne s'en servait — le
+  site portait EN PARALLÈLE trois géométries recopiées les unes des autres et
+  déjà divergentes : `CharacterPortrait` (élément à `-top-1 -right-1` en 39 %,
+  classe à 40 % là où le prefab dit 30 %, étoiles chevauchées d'un quart, aucun
+  fond de rareté), le `MonsterPortrait` du calculateur (vignette à 92 % du fond
+  au lieu de 122/128, élément et classe à 34 % l'un sous l'autre, niveau en
+  pastille alors que le jeu l'écrit à nu) et ses `TileOverlays` sur les faces de
+  perso. Les trois sont partis.
+  - `CharacterPortrait` ne pose PLUS une seule mesure : il ne garde que ce que le
+    jeu n'a pas — le nom sous la vignette, le lien, et le badge de recrutement,
+    convention du site posée PAR-DESSUS plutôt que dans `Thumbnail` (qui est une
+    transcription du prefab, et le prefab n'a pas ce calque). Ses 16 appelants
+    n'ont pas bougé d'une ligne.
+  - **`rarity` devient REQUISE** — c'est elle qui choisit le fond de la vignette,
+    et le jeu n'a pas de vignette sans fond. Neuf appelants ne l'avaient pas : la
+    donnée a été câblée à LA SOURCE (`FlagshipTopHero`, `GachaMinor`,
+    `GearUsageChar`, `FinderCharacter`, `CharOption`, `ChipView`,
+    `RosterGroupCardCharacter`) plutôt que devinée dans le composant. Tous les
+    constructeurs l'avaient déjà sous la main.
+  - **`PriorityTiers` peignait un palier de transcendance comme une rareté.**
+    `stars` y est la CIBLE éditoriale (jusqu'à 9) : un palier 5 posait un fond de
+    rareté inexistant et alignait cinq étoiles jaunes. Il passe désormais par
+    `transcendence`, et la table du jeu rend les vraies teintes (4 jaunes + 1
+    violette au palier 8).
+  - **`img.monsterSlot` supprimée** : son dernier appelant était le calculateur.
+    Elle déduisait le fond de la rareté — faux pour ~900 monstres. `DcTarget`
+    porte maintenant `type` (le fond) ET `rarity` (les étoiles), les deux axes
+    que le jeu tient séparés.
+  - `SlotTile` perd son `overflow-hidden` : l'icône d'élément sort volontairement
+    du cadre (le prefab l'ancre en dehors), rogner la recadrait en biais. Même
+    raison pour l'anneau de sélection du picker, déplacé sur un conteneur.
+  - **Laissés de côté, et pourquoi.** `TierListMakerBrowser` a un JUMEAU CANVAS
+    qui doit produire la même image à l'export PNG : basculer le DOM seul les
+    ferait diverger, et porter le 9-slice + la géométrie du prefab en `drawImage`
+    est un chantier à part, à faire en regardant le rendu. Les pages admin
+    monstres et `ExtractorSidebar` servent leurs sprites par
+    `/api/admin/sprite/*` et non par le pipeline d'assets : les `MT_` des 4382
+    monstres ne sont PAS collectés, `Thumbnail` n'y afficherait que des images
+    mortes — leurs cadres `GD_Slot_Bg_*` sont une convention admin assumée, pas
+    une copie ratée du jeu. `CharacterCard` est un autre prefab (la carte
+    verticale `CT_`), pas une vignette.
+
 ## 2026-08-07
 
 - **La vignette du jeu, transcrite des binaires — `src/components/ui/Thumbnail.tsx`
@@ -54,7 +99,7 @@
     par axe. La comparaison « rareté ≠ type » a été retirée — on veut le rendu du
     jeu, l'autre axe n'a rien à y faire même en contre-exemple.
   * `CharacterPortrait` (21 appelants) et le `MonsterPortrait` du calculateur
-    gardent leur rendu à l'œil : les brancher n'a pas été demandé.
+    gardaient leur rendu à l'œil : branchés le 08/08, cf. l'entrée du jour.
 
 - **Les sprites rognés par l'atlas retrouvent leur taille logique — 782 fichiers
   changeaient de cadrage sans qu'on le sache.** Le packer d'atlas de Unity coupe

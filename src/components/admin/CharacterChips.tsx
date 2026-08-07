@@ -22,7 +22,8 @@ export interface ChipView {
   name: string;
   element?: string;
   classType?: string;
-  rarity?: number;
+  /** BasicStar — REQUISE : elle choisit le fond de la vignette (`Thumbnail`). */
+  rarity: number;
 }
 
 /** Datalist des noms EN à poser une fois par page (référencée par `datalistId`). */

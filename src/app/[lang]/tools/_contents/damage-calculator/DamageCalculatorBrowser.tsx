@@ -26,6 +26,7 @@ import { EffectIconTile } from '@/components/character/EffectChips';
 import { SearchField } from '@/components/character/filters/FilterAtoms';
 import { FilterPill } from '@/components/character/filters/FilterPill';
 import { GameText } from '@/components/ui/GameText';
+import { Thumbnail } from '@/components/ui/Thumbnail';
 import {
   buildInputsFromZ,
   flattenReport,
@@ -194,7 +195,9 @@ export interface DcTarget {
   /** Nom BRUT d'icône de monstre — l'URL est dérivée client (`monsterIcon`). */
   icon: string;
   element: string;
-  /** Rareté (BasicStar) — fond de la vignette (`img.monsterSlot`). */
+  /** Slug de `CHARACTER_TYPE` — choisit le FOND de la vignette. */
+  type: string;
+  /** Rareté (BasicStar) — compte les ÉTOILES, pas le fond (axes distincts). */
   rarity: number;
   spawns: DcSpawn[];
   /** Passifs de boss à impact sur les dégâts — chips auto, jamais togglables. */
@@ -626,7 +629,10 @@ function SlotTile({
         type="button"
         title={title}
         onClick={onClick}
-        className={`border-line-subtle bg-surface-sunken/70 hover:border-accent grid cursor-pointer place-items-center overflow-hidden rounded-lg border transition ${
+        // PAS d'`overflow-hidden` : les portraits posés ici sont des vignettes
+        // du jeu, dont l'icône d'élément sort volontairement du cadre (le prefab
+        // l'ancre en dehors). Rogner la recadrait en biais.
+        className={`border-line-subtle bg-surface-sunken/70 hover:border-accent grid cursor-pointer place-items-center rounded-lg border transition ${
           large ? 'h-16 w-16' : 'h-12 w-12'
         }`}
       >
@@ -646,56 +652,40 @@ function SlotTile({
   );
 }
 
-/** Règle d'icône de monstre (miroir de `monsterIconSrc`, serveur only) :
- *  icône '2…' = modèle de perso → face, sinon portrait de boss MT_*. */
-const monsterIcon = (icon: string): string =>
-  icon.startsWith('2') ? img.face(icon) : img.boss(`MT_${icon}`);
-
 /**
- * Portrait de MONSTRE complet — LE MÊME rendu partout (cible sélectionnée,
- * listes du picker, vagues du browser story — demande Sevih 06/08/2026) :
- * fond de RARETÉ du jeu (`MT_Slot_Normal/Magic/Rare` selon BasicStar) sous la
- * vignette, overlays élément/classe/boss/niveau par-dessus. À dimensionner
- * par `className` (carré).
+ * Portrait de MONSTRE — LE MÊME rendu partout (cible sélectionnée, listes du
+ * picker, vagues du browser story — demande Sevih 06/08/2026).
+ *
+ * Ce n'est plus qu'un adaptateur : la vignette vient de `Thumbnail`, transcrite
+ * du prefab `uimonsterthumbnail`. Ce qu'il portait avant à l'œil est parti avec
+ * lui — un fond déduit de la RARETÉ (le jeu le déduit du TYPE, cf. `DcTarget`),
+ * une vignette à 92 % du fond au lieu de 122/128, un élément et une classe à
+ * 34 % l'un sous l'autre, et un niveau en pastille alors que le jeu l'écrit à nu.
  */
 function MonsterPortrait({
   tg,
   level,
   className,
 }: {
-  tg: Pick<DcTarget, 'icon' | 'element' | 'cls' | 'rarity' | 'name' | 'story'>;
+  tg: Pick<DcTarget, 'icon' | 'element' | 'cls' | 'type' | 'rarity' | 'name' | 'story'>;
   level?: number;
   className: string;
 }) {
   return (
-    <span className={`relative block shrink-0 overflow-hidden rounded ${className}`}>
-      <img
-        src={img.monsterSlot(tg.rarity)}
-        alt=""
-        aria-hidden
-        className="absolute inset-0 h-full w-full"
-        loading="lazy"
-      />
-      {/* Vignette plus petite que son fond et CENTRÉE : le fond de rareté
-          fait aussi office de bordure (demande Sevih 06/08/2026). Taille
-          EXPLICITE : une <img> absolue ne s'étire pas depuis ses insets
-          (élément remplacé, width:auto = taille intrinsèque — la bordure ne
-          se voyait qu'en haut/gauche). */}
-      <img
-        src={monsterIcon(tg.icon)}
-        alt={tg.name}
-        className="absolute top-[4%] left-[4%] h-[92%] w-[92%] rounded object-cover"
-        loading="lazy"
-      />
-      {/* Hors histoire les presets sont tous des boss ; en story le rôle vient
-          de la donnée (les renforts n'ont pas la bannière boss). */}
-      <TileOverlays
-        element={tg.element}
-        cls={tg.cls}
-        boss={!tg.story || tg.story.role === 'boss'}
-        level={level}
-      />
-    </span>
+    <Thumbnail
+      kind="monster"
+      icon={tg.icon}
+      type={tg.type}
+      stars={tg.rarity}
+      element={tg.element}
+      cls={tg.cls}
+      level={level}
+      name={tg.name}
+      // Hors histoire les presets sont tous des boss ; en story le rôle vient
+      // de la donnée (les renforts n'ont pas la bannière boss).
+      boss={!tg.story || tg.story.role === 'boss'}
+      className={className}
+    />
   );
 }
 
@@ -709,55 +699,21 @@ function NoMatches({ label }: { label: string }) {
 }
 
 /**
- * Overlays de portrait façon `CharacterPortrait` — posés SUR la tuile pour
- * libérer la place des icônes à côté des noms (demande Sevih 27/07/2026).
- * Colonne de droite : élément, puis classe, puis niveau (cibles) ; la bannière
- * BOSS (sprite éditorial `MT_Boss`, 60×20) traverse le haut et décale la
- * colonne. À poser dans un conteneur `relative`.
+ * Portrait de PERSO du calculateur — l'autre habillage de la même vignette.
+ * Adaptateur symétrique de `MonsterPortrait` : `DcChar` porte déjà tout ce que
+ * le prefab demande.
  */
-function TileOverlays({
-  element,
-  cls,
-  boss,
-  level,
-}: {
-  element?: string;
-  cls?: string;
-  /** Bannière BOSS — cibles de preset (tous les presets ciblent un boss). */
-  boss?: boolean;
-  /** Niveau du spawn résolu, sous l'icône de classe. */
-  level?: number;
-}) {
+function CharPortrait({ c, className }: { c: DcChar; className: string }) {
   return (
-    <>
-      {boss && (
-        <img
-          src={img.tag('MT_Boss')}
-          alt="boss"
-          className="absolute top-0 left-0 h-[20%] w-auto drop-shadow-md"
-        />
-      )}
-      {element && (
-        <img
-          src={img.element(element)}
-          alt={element}
-          className="absolute top-0 right-0 h-[34%] w-[34%] drop-shadow-md"
-        />
-      )}
-      {/* Classe à la MÊME taille que l'élément (demande Sevih 06/08/2026). */}
-      {cls && (
-        <img
-          src={img.klass(cls)}
-          alt={cls}
-          className="absolute top-[36%] right-0 h-[34%] w-[34%] drop-shadow-md"
-        />
-      )}
-      {level != null && (
-        <span className="bg-scrim/70 text-content absolute top-[72%] right-0 rounded-l px-0.5 font-mono text-[9px] font-bold tabular-nums">
-          {level}
-        </span>
-      )}
-    </>
+    <Thumbnail
+      kind="character"
+      id={c.id}
+      rarity={c.rarity}
+      element={c.element}
+      cls={c.cls}
+      name={c.label}
+      className={className}
+    />
   );
 }
 
@@ -812,12 +768,7 @@ function CharPicker({
           clearTitle={labels.clear}
           title={current?.label ?? placeholder}
         >
-          {current ? (
-            <span className="relative block h-full w-full">
-              <img src={img.face(current.id)} alt="" className="h-full w-full" loading="lazy" />
-              <TileOverlays element={current.element} cls={current.cls} />
-            </span>
-          ) : null}
+          {current ? <CharPortrait c={current} className="h-full w-full" /> : null}
         </SlotTile>
         {current ? (
           <div className="min-w-0 flex-1 space-y-0.5">
@@ -873,16 +824,15 @@ function CharPicker({
                   close();
                 }}
               >
-                <span className="relative">
-                  <img
-                    src={img.face(c.id)}
-                    alt=""
-                    className={`group-hover:border-accent h-16 w-16 rounded-lg border transition ${
-                      c.id === value ? 'border-accent' : 'border-line-subtle'
-                    }`}
-                    loading="lazy"
-                  />
-                  <TileOverlays element={c.element} cls={c.cls} />
+                {/* L'anneau de sélection sur un CONTENEUR, pas sur la vignette :
+                    elle n'est plus une image carrée qu'on peut border — son
+                    icône d'élément déborde volontairement du cadre. */}
+                <span
+                  className={`rounded-lg ring-2 transition ${
+                    c.id === value ? 'ring-accent' : 'group-hover:ring-accent/50 ring-transparent'
+                  }`}
+                >
+                  <CharPortrait c={c} className="h-16 w-16" />
                 </span>
                 <span className="text-content-muted group-hover:text-content w-full text-center text-[10px] leading-tight wrap-break-word">
                   {c.label}
@@ -2696,17 +2646,7 @@ export function DamageCalculatorBrowser({
                       [
                         {
                           key: 'atk',
-                          portrait: (
-                            <span className="relative h-16 w-16 shrink-0">
-                              <img
-                                src={img.face(attacker.id)}
-                                alt=""
-                                className="border-line-subtle h-full w-full rounded-lg border"
-                                loading="lazy"
-                              />
-                              <TileOverlays element={attacker.element} cls={attacker.cls} />
-                            </span>
-                          ),
+                          portrait: <CharPortrait c={attacker} className="h-16 w-16" />,
                           name: attacker.label,
                           groups: [
                             { title: L.buffs.atkBuff, options: buffOptions.atkBuff },

@@ -122,7 +122,15 @@ export function LimitedHeroesList({
             {/* CharacterPortrait s'étire (w-full) : on le borne à sa taille pour
                 que le texte colle au portrait. */}
             <span className="w-16 shrink-0">
-              <CharacterPortrait id={c.id} name={name} size={64} showName={false} />
+              <CharacterPortrait
+                id={c.id}
+                name={name}
+                element={c.element}
+                classType={c.class}
+                rarity={c.rarity}
+                size={64}
+                showName={false}
+              />
             </span>
             <span className="flex flex-col">
               <span className="text-content-strong font-medium">{name}</span>

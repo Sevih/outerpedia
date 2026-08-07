@@ -9,7 +9,8 @@ export interface CharOption {
   name: string;
   element?: string;
   class?: string;
-  rarity?: number;
+  /** BasicStar — REQUISE : elle choisit le fond de la vignette (`Thumbnail`). */
+  rarity: number;
 }
 
 /**

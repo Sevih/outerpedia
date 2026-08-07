@@ -28,7 +28,18 @@ export default async function GearUsageFinder({ lang }: { lang: Lang }) {
     (id): FinderCharacter[] => {
       const c = getCharacter(id);
       const slug = slugForId(id);
-      return c && slug ? [{ id, slug, name: characterDisplayName(c, lang), class: c.class }] : [];
+      return c && slug
+        ? [
+            {
+              id,
+              slug,
+              name: characterDisplayName(c, lang),
+              class: c.class,
+              element: c.element,
+              rarity: c.rarity,
+            },
+          ]
+        : [];
     },
   );
 

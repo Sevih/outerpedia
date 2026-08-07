@@ -51,7 +51,13 @@ function topHeroesFor(
   const candidates = getCharacterListItems().filter((c) => select(curated[c.id] ?? {}) === 'S');
   return seededShuffle(candidates, dailySeed(seedKey))
     .slice(0, cap)
-    .map((c) => ({ id: c.id, name: characterDisplayName(c, lang) }));
+    .map((c) => ({
+      id: c.id,
+      name: characterDisplayName(c, lang),
+      element: c.element,
+      class: c.class,
+      rarity: c.rarity,
+    }));
 }
 
 /** Graine déterministe qui change une fois par jour (hash djb2 de `jour:clé`). */

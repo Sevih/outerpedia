@@ -641,7 +641,11 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         // de sérialiser ~700 URLs complètes (élagage Sevih 27/07/2026).
         icon: monster.icon,
         element: monster.element,
-        // Rareté (BasicStar) : choisit le FOND de la vignette (`monsterSlot`).
+        // Les DEUX axes de la vignette, et ils sont indépendants : le TYPE
+        // choisit le fond (`SetMonsterBG` prend un CHARACTER_TYPE), le BasicStar
+        // compte les étoiles. La tuile déduisait le fond de la rareté — faux
+        // pour ~900 monstres.
+        type: monster.type,
         rarity: monster.rarity,
         spawns,
         ...(passives.length ? { passives } : {}),

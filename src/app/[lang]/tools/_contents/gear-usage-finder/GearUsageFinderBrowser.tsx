@@ -69,6 +69,9 @@ export interface FinderCharacter {
   slug: string;
   name: string;
   class: string;
+  /** Calques de la vignette du jeu ; la rareté (BasicStar) en choisit le fond. */
+  element: string;
+  rarity: number;
 }
 
 export interface FinderLabels {
@@ -429,7 +432,15 @@ export function GearUsageFinderBrowser({
                     )}
                     {/* Largeur fixe : le span racine du portrait est en w-full. */}
                     <span className="w-12 shrink-0">
-                      <CharacterPortrait id={char.id} name={char.name} size={48} showName={false} />
+                      <CharacterPortrait
+                        id={char.id}
+                        name={char.name}
+                        element={char.element}
+                        classType={char.class}
+                        rarity={char.rarity}
+                        size={48}
+                        showName={false}
+                      />
                     </span>
                     <span className="min-w-0 flex-1">
                       <span className="text-content block truncate text-sm font-medium">

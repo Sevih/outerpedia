@@ -110,17 +110,6 @@ export const img = {
    * qui avait fait naître trois recopies de ce `startsWith('2')`.
    */
   monster: (icon: string) => (icon.startsWith('2') ? faceSrc(icon) : bossSrc(`MT_${icon}`)),
-  /**
-   * Fond de rareté d'une vignette de MONSTRE (sprites `MT_Slot_*` du jeu,
-   * famille at_thumbnailmonsterruntime) : rareté 1 = Normal, 2 = Magic,
-   * 3+ = Rare — corrélé au type (mob de base / named / boss) dans les tables.
-   *
-   * @deprecated Le jeu ne choisit PAS le fond par la rareté (cf.
-   * `monsterSlotByType`) : cette corrélation est fausse pour ~900 monstres.
-   * Reste en place tant que `DamageCalculatorBrowser` s'en sert.
-   */
-  monsterSlot: (rarity: number) =>
-    `${BASE}/images/ui/boss/MT_Slot_${rarity >= 3 ? 'Rare' : rarity === 2 ? 'Magic' : 'Normal'}.webp`,
   /** Fond de vignette monstre par TYPE — la règle du jeu (`SetMonsterBG`). */
   monsterSlotByType: (type: string) => bossSrc(`MT_Slot_${MONSTER_SLOT_BY_TYPE[type] ?? 'Normal'}`),
   /**

@@ -148,7 +148,15 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
                   {/* Largeur FIXE : le span racine du portrait est w-full,
                       lâché dans une rangée flex il avale toute la largeur. */}
                   <span className="w-7 shrink-0">
-                    <CharacterPortrait id={r.id} name={r.name} size={28} showName={false} />
+                    <CharacterPortrait
+                      id={r.id}
+                      name={r.name}
+                      element={r.element}
+                      classType={r.class}
+                      rarity={r.rarity}
+                      size={28}
+                      showName={false}
+                    />
                   </span>
                   <span className="text-content-strong">{r.name}</span>
                 </button>
@@ -451,7 +459,15 @@ function TierRow({
                 }`}
               >
                 <span className="w-10 shrink-0">
-                  <CharacterPortrait id={r.id} name={r.name} size={40} showName={false} />
+                  <CharacterPortrait
+                    id={r.id}
+                    name={r.name}
+                    element={r.element}
+                    classType={r.class}
+                    rarity={r.rarity}
+                    size={40}
+                    showName={false}
+                  />
                 </span>
                 <span className="min-w-0">
                   <span className="text-content-strong block truncate text-xs font-semibold">
@@ -489,7 +505,15 @@ function TierRow({
                       : ''
                 }`}
               >
-                <CharacterPortrait id={r.id} name={r.name} size={48} showName={false} />
+                <CharacterPortrait
+                  id={r.id}
+                  name={r.name}
+                  element={r.element}
+                  classType={r.class}
+                  rarity={r.rarity}
+                  size={48}
+                  showName={false}
+                />
               </button>
             ),
           )}

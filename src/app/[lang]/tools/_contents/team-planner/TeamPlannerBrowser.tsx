@@ -307,6 +307,7 @@ function EffectSection({
                   name={c.label}
                   element={c.element}
                   classType={c.cls}
+                  rarity={c.rarity}
                   size={48}
                   showName={false}
                 />

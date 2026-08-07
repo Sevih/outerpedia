@@ -33,6 +33,9 @@ export default async function PullSimulator({ lang }: { lang: Lang }) {
       id: c.id,
       name: (c.name as Record<string, string>)[lang] ?? c.name.en,
       prefix: characterNamePrefix(c, lang) ?? undefined,
+      element: c.element,
+      cls: c.class,
+      rarity: c.rarity,
     };
     if (c.rarity === 1) {
       pool1.push(minor);

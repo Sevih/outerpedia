@@ -37,7 +37,18 @@ export default async function GearUsageStatistics({ lang }: { lang: Lang }) {
         characters: e.characters.flatMap((id) => {
           const c = getCharacter(id);
           const slug = slugForId(id);
-          return c && slug ? [{ id, slug, name: characterDisplayName(c, lang) }] : [];
+          return c && slug
+            ? [
+                {
+                  id,
+                  slug,
+                  name: characterDisplayName(c, lang),
+                  element: c.element,
+                  class: c.class,
+                  rarity: c.rarity,
+                },
+              ]
+            : [];
         }),
       })),
     ]),

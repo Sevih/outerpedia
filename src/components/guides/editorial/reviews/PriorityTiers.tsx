@@ -15,7 +15,13 @@ import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 
 export interface PriorityEntry {
   name: string;
-  /** Étoile CIBLE affichée sous le portrait. */
+  /**
+   * PALIER DE TRANSCENDANCE visé par l'éditorial (4..9), pas la rareté du perso.
+   * C'est lui qui décide combien d'étoiles la vignette affiche et de quelle
+   * teinte — un palier 8 montre quatre étoiles jaunes et une violette, pas huit
+   * étoiles. Tant que ce nombre partait dans `rarity`, un palier 5 posait un
+   * fond de rareté inexistant et alignait cinq étoiles jaunes.
+   */
   stars: number;
   /** Relation avec l'entrée SUIVANTE (`>` strictement avant, `≥`). */
   op?: '>' | '>=' | null;
@@ -67,7 +73,8 @@ export function PriorityTiers({
                       name={g.name}
                       element={g.character.element}
                       classType={g.character.class}
-                      rarity={e.stars}
+                      rarity={g.character.rarity}
+                      transcendence={e.stars}
                       size={64}
                       href={g.href}
                       badgeTag={isCollab ? 'collab' : undefined}

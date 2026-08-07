@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Route } from 'next';
 import { img, RECRUIT_TAG_SPRITE } from '@/lib/images';
+import { Thumbnail } from '@/components/ui/Thumbnail';
 
 /**
  * Le nom TIENT-IL sur deux lignes dans `maxWidth` (px) ? Estimation
@@ -15,7 +16,7 @@ const NARROW_PX = 6.6;
 const WIDE_PX = 12;
 const SPACE_PX = 3.3;
 /** Scripts à pleine chasse (kana, hangul, idéogrammes, ponctuation large). */
-const WIDE_CHAR = /[ᄀ-ᇿ⺀-꓏가-퟿豈-﫿︰-﹏＀-｠]/;
+const WIDE_CHAR = /[ᄀ-ᇿ⺀-꓏가-퟿豈-﫿︰-﹏＀-｠]/;
 
 function fitsOnTwoLines(text: string, maxWidth: number): boolean {
   const widthOf = (s: string): number =>
@@ -42,10 +43,28 @@ function fitsOnTwoLines(text: string, maxWidth: number): boolean {
 }
 
 /**
- * Portrait compact d'un personnage (face icon FI_*) + overlays — géométrie du
- * thumbnail du jeu, comme en V2 : élément en haut à droite, classe à droite au
- * milieu, étoiles de rareté centrées en bas et légèrement chevauchées. Nom en
- * dessous. Le format « référence de perso » des pages équipement. Composant pur.
+ * LA VIGNETTE DE PERSO DU JEU, plus le chrome du SITE : nom en dessous, lien,
+ * badge de recrutement. C'est le format « référence de perso » des guides et des
+ * pages équipement.
+ *
+ * Le rendu de la vignette elle-même n'est PAS ici : il vit dans `Thumbnail`,
+ * transcrit du prefab `uicharacterthumbnail`. Ce module ne pose plus une seule
+ * mesure de portrait — avant, il en portait quatre à l'œil (élément à −1/−1 en
+ * 39 %, classe à 40 % là où le prefab dit 30 %, étoiles jaunes chevauchées d'un
+ * quart, aucun fond de rareté), et le damage calculator comme le tier-list-maker
+ * en avaient recopié des variantes divergentes.
+ *
+ * Ce qui reste ici est exactement ce que le jeu N'A PAS :
+ *
+ *   - le NOM sous la vignette (le jeu l'écrit ailleurs dans son écran) ;
+ *   - le LIEN vers la fiche ;
+ *   - le BADGE de recrutement (`collab`, `premium`…), convention éditoriale du
+ *     site. Il se pose PAR-DESSUS la vignette plutôt que dedans : `Thumbnail`
+ *     est une transcription du prefab, et le prefab n'a pas ce calque. Il occupe
+ *     le coin haut-gauche, celui de la bannière BOSS — sans conflit, un perso
+ *     n'en porte jamais.
+ *
+ * Composant PUR (aucun état, aucune lecture disque) : serveur comme client.
  */
 export function CharacterPortrait({
   id,
@@ -53,6 +72,8 @@ export function CharacterPortrait({
   element,
   classType,
   rarity,
+  transcendence,
+  level,
   size = 64,
   href,
   showName = true,
@@ -63,8 +84,22 @@ export function CharacterPortrait({
   name: string;
   element?: string;
   classType?: string;
-  /** Nombre d'étoiles de rareté (masquées si absent). */
-  rarity?: number;
+  /**
+   * BasicStar 1..3. REQUISE : c'est elle qui choisit le fond de la vignette
+   * (Magic / Rare / Unique), et le jeu n'a pas de vignette sans fond. Un
+   * appelant qui ne l'avait pas la tient désormais de sa propre donnée — c'est
+   * le seul endroit où la corriger.
+   */
+  rarity: number;
+  /**
+   * Palier de transcendance (4..9). Décide COMBIEN d'étoiles s'affichent et de
+   * quelle teinte — ce n'est pas un compteur (cf. `Thumbnail`). Omis = perso non
+   * transcendé. À passer quand le contexte parle d'une CIBLE éditoriale plutôt
+   * que d'un état d'inventaire.
+   */
+  transcendence?: number;
+  /** Niveau affiché dans la vignette. Omis = pas de chiffre. */
+  level?: number;
   size?: number;
   href?: string;
   /**
@@ -87,19 +122,25 @@ export function CharacterPortrait({
    */
   badgeTag?: string;
 }) {
-  const starSize = Math.round(size * 0.17);
   const badge = badgeTag && badgeTag in RECRUIT_TAG_SPRITE ? badgeTag : undefined;
   const label = shortName && !fitsOnTwoLines(name, size + 24) ? shortName : name;
   const content = (
     <span className="flex w-full flex-col items-center gap-1">
-      <span className="relative inline-block shrink-0" style={{ width: size, height: size }}>
-        <img
-          src={img.face(id)}
-          alt={name}
-          loading="lazy"
-          width={size}
-          height={size}
-          className="border-line-subtle h-full w-full rounded-lg border object-cover"
+      {/* Boîte à la taille DEMANDÉE, la vignette la remplit. L'icône d'élément
+          déborde volontairement de cette boîte (le prefab l'ancre en dehors) :
+          rien ne doit rogner ici, et l'appelant qui serre ses portraits verra
+          ce léger chevauchement — c'est celui du jeu. */}
+      <span className="relative block shrink-0" style={{ width: size, height: size }}>
+        <Thumbnail
+          kind="character"
+          id={id}
+          name={name}
+          rarity={rarity}
+          transcendence={transcendence}
+          element={element}
+          cls={classType}
+          level={level}
+          className="h-full w-full"
         />
         {badge && (
           <img
@@ -108,40 +149,6 @@ export function CharacterPortrait({
             className="absolute top-0 left-0 z-10 w-[68%] drop-shadow-md"
           />
         )}
-        {element && (
-          <img
-            src={img.element(element)}
-            alt={element}
-            className="absolute -top-1 -right-1 h-[39%] w-[39%] drop-shadow-md"
-          />
-        )}
-        {classType && (
-          <img
-            src={img.klass(classType)}
-            alt={classType}
-            className="absolute top-[40%] right-0 h-[27%] w-[27%] drop-shadow-md"
-          />
-        )}
-        {rarity ? (
-          <span
-            className="absolute inset-x-0 bottom-[3%] flex items-center justify-center"
-            role="img"
-            aria-label={`${rarity} stars`}
-          >
-            {Array.from({ length: rarity }, (_, i) => (
-              <img
-                key={i}
-                src={img.star()}
-                alt=""
-                aria-hidden
-                width={starSize}
-                height={starSize}
-                className="drop-shadow-md"
-                style={{ marginLeft: i ? -starSize * 0.25 : 0 }}
-              />
-            ))}
-          </span>
-        ) : null}
       </span>
       {showName && (
         // Nom sur DEUX lignes au lieu d'une ligne tronquée : « Heatwave Cop
