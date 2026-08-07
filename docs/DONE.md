@@ -7,6 +7,50 @@
 
 ## 2026-08-07
 
+- **Clôture de l'audit : primitives admin, forme des reviews, et TROIS constats
+  tombés.** Dernière passe, sur un arbre propre.
+  - **`components/admin/_ui.ts`** — `btn` était déclaré 17×, `input` 11×,
+    `field` 7×, `label` 6×, et aucun n'était importé d'ailleurs (les
+    `export const btn` existants n'avaient aucun consommateur : de l'export
+    mort). 25 fichiers en dérivent. Règle tenue : **on n'unifie que des chaînes
+    strictement identiques** — les variantes réelles se composent à l'appel
+    (`inputFull`, `${input} text-content`, `${inputFull} max-w-xs`), et les
+    styles franchement distincts (le `btn` « chip » de `gear/`, le compact
+    d'`events/`) restent locaux. Vérifié **mécaniquement** : un script compare
+    les classes avant/après en résolvant imports et compositions — aucune
+    divergence. Un refactor de style qui déplace une classe ne se voit pas au
+    typecheck, seulement à l'écran.
+  - **`lib/admin/review-shape.ts`** — `normalizeReview` était écrit deux fois à
+    l'identique, `hasText` deux fois à une garde près. Ce n'était **pas** de la
+    négligence : `general-guide-store.ts` tire `node:fs`, et
+    `PremiumLimitedParts.tsx` est une brique PARTAGÉE avec `/contribute` qui
+    part en prod — elle ne peut pas importer le store. La dédup correcte passait
+    donc par un module **pur**, ce que réclame déjà `SHARED_BRICK_MSG` dans
+    `eslint.config.mjs`. `ReviewEntryData`/`StarKey` y déménagent (le type vit
+    avec les fonctions qui le façonnent) et le store les ré-exporte : aucun
+    consommateur ne bouge. Pour `hasText`, on garde le corps **défensif**
+    (`typeof x === 'string'`) — ces objets viennent aussi d'un JSON importé à la
+    main, où une valeur peut être un nombre ou `null`, et l'autre variante
+    jetait.
+
+  **Trois constats de l'audit se sont révélés FAUX à la vérification** — notés
+  ici pour qu'ils ne soient pas rouverts :
+  - **`monsterIconSrc` n'est pas un doublon.** `lib/admin/` résout vers la route
+    sprite admin (`/api/admin/sprite/MT_*`, sprites non collectés, dev),
+    `lib/data/` vers le CDN R2 (`img.boss`). Même nom, deux sources — les
+    fusionner aurait été un bug.
+  - **`DATALIST_ID` n'est pas dupliqué.** Les 3 déclarations portent 3 valeurs
+    distinctes (`free-heroes-`, `guide-`, `premium-limited-char-names`) : un id
+    de datalist par écran, ce qui est correct.
+  - **`localePath()` n'est pas un no-op à supprimer**, et l'audit a failli le
+    faire. Le `_lang` ne sert plus depuis les sous-domaines, mais le
+    `as Route` du corps porte tout : `typedRoutes: true` fait de `Route` une
+    union de littéraux, et **44 des 68 appels** passent un template
+    (`/characters/${slug}`). Le retirer ne supprimerait pas un cast — il en
+    disperserait 44. Le commentaire de `navigation.ts` dit désormais pourquoi la
+    fonction reste. (Chiffre de l'audit corrigé au passage : 68 appels, pas 110
+    — le premier comptait les occurrences du mot, imports compris.)
+
 - **`LANGS` : trois choses portaient le même nom, le TYPE tient maintenant
   l'alignement.** Suite de l'audit. Le nom `LANGS` désignait, selon le fichier
   ouvert : les **5** langues du site importées de `i18n/config` (sitemap,
@@ -81,11 +125,9 @@ is not a function` sur les routes admin). Redémarrage requis ; à ne pas
     `LocalizedText`). Reste que le même identifiant désigne deux concepts
     opposés — **traité dans la foulée**, cf. l'entrée suivante.
 
-  **Reste ouvert, volontairement non fait** (cf. TODO) : le `_ui.ts` admin
-  (`btn`/`input`/`DATALIST_ID` recopiés dans 18 fichiers) et le retrait de
-  `localePath()` (no-op appelé 110×). Les deux sont cosmétiques et hors bundle
-  de prod ; ils touchent `SearchAliasEditor.tsx` et `ShortNameEditor.tsx`, en
-  cours d'édition ce jour-là. À lancer sur un arbre propre.
+  **Reliquat traité le jour même**, une fois l'arbre propre : `_ui.ts` admin et
+  `review-shape.ts` (cf. entrées suivantes). Ce qui laisse l'audit **clos**,
+  hors volet damage.
 
 - **Les noms sous les portraits ne sont plus tronqués.** `CharacterPortrait`
   écrivait le nom sur UNE ligne `truncate` large de `size + 24` (88 px pour un
@@ -145,6 +187,24 @@ is not a function` sur les routes admin). Redémarrage requis ; à ne pas
   « pas un choix sur CETTE bannière » aurait été fausse : ce n'est pas un
   manque ponctuel, c'est le format collab. Elle ne s'affiche que sur l'onglet
   qui contient des collab, donc pas côté Premium.
+  • **Second tour de retours (Shiraen, 11:33) : un BADGE `collab` sur les
+  portraits de priorité**, le contraste de la seule opacité étant jugé trop
+  faible. Prop `badgeTag` sur `CharacterPortrait` : même sprite de recrutement
+  et même coin (haut-gauche, libre) que sur `CharacterCard`, filtré par
+  `RECRUIT_TAG_SPRITE` pour qu'un tag sans sprite ne fabrique pas d'URL morte.
+  Le badge a REMPLACÉ l'atténuation, pas complété : opacité rendue à 100 % et
+  prop `dimmed` SUPPRIMÉE (plus aucun appelant — une prop morte dans un
+  composant servi sur vingt écrans finit recopiée par erreur). Le ruban occupe
+  68 % de la largeur du portrait, sous les 100 % pour ne pas courir jusque sous
+  l'icône d'élément du coin opposé. La légende ne parle plus de translucidité,
+  devenue sans objet : elle garde le fait (obtenable pendant l'événement
+  seulement, retour jamais garanti), la formulation EN de Shiraen, et s'OUVRE
+  sur le sprite lui-même — le lecteur relie le badge des portraits à
+  l'explication sans le deviner (`alt=""`, le mot « Collab » suit). À revoir si
+  Major9 tient sa piste d'intégrations de collab durables : le format
+  changerait, la note aussi.
+  • **Poolside Trickster Regina et Holy Night's Blessing Dianne échangent leurs
+  paliers** (Limited) : Regina passe en 2e priorité, Dianne en 3e.
   • **Heatwave Cop Delta ajoutée en 2e priorité Limited, juste après Ryu Lion**
   (consensus Shiraen/Sevih) : c'est la copie de Ryu (Terre/Ranger, skillset
   partagé, exclusion mutuelle en deck), et elle avait déjà sa review dans le

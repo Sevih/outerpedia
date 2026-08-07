@@ -41,27 +41,10 @@
 
 ## 🧹 Dette code
 
-### Reliquat de l'audit du 07/08 (le reste est traité, cf. DONE)
-
-> Les deux sont **cosmétiques et hors bundle de prod** (admin dev-only pour le
-> premier). Ils n'ont pas été faits le 07/08 parce qu'ils touchent des fichiers
-> alors en cours d'édition — à lancer sur un arbre propre, pas au fil de l'eau.
-> Le volet damage a son backlog séparé :
-> [audit/damage-calculator.md](./audit/damage-calculator.md) (**D1–D5**).
-
-- [ ] **`components/admin/_ui.ts`** — `btn`, `input` et `DATALIST_ID` sont
-      recopiés dans **18 fichiers** de `components/admin/`. `EventBlocks`,
-      `GuideBlocks` et `GearBlocks` exportent DÉJÀ ces primitives : il ne manque
-      qu'un module qui les centralise, et 18 imports. Refactor mécanique, garanti
-      par le typecheck. ⚠️ Touche `SearchAliasEditor.tsx` et
-      `ShortNameEditor.tsx` — vérifier qu'ils ne sont pas en cours d'édition.
-- [ ] **Retirer `localePath()`** (`src/lib/navigation.ts`) — no-op
-      (`return path as Route`) appelé **110×**. Le commentaire l'assume comme
-      point d'extension, mais depuis le passage au routing par SOUS-DOMAINE il
-      ne peut plus rien faire : la langue est portée par l'hôte, jamais par le
-      path. 110 sites d'appel et un cast pour rien. Si on le garde, c'est le
-      commentaire qu'il faut corriger (« gelé par le routing sous-domaine »),
-      pas le code.
+> L'audit du 07/08 est **entièrement traité** — hors volet damage, qui a son
+> backlog séparé : [audit/damage-calculator.md](./audit/damage-calculator.md)
+> (**D1–D5**). Bilan, y compris les constats tombés à la vérification, dans
+> [DONE.md](./DONE.md).
 
 ### Lots de fond SEO/perf (audit Sitebulb 20/07 — non urgents)
 
