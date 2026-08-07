@@ -121,7 +121,7 @@
           }
         },
         {
-          "characters": ["Laplace", "Tamamo-no-Mae", "Ryu Lion"],
+          "characters": ["Laplace", "Tamamo-no-Mae", "Ryu Lion", "Heatwave Cop Delta"],
           "reason": {
             "en": "A source of {D/BT_FIXED_DAMAGE}.",
             "jp": "{D/BT_FIXED_DAMAGE}の供給源。",

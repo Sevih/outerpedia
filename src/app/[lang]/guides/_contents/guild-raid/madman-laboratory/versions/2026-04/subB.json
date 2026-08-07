@@ -1,7 +1,7 @@
 {
   "recommended": [
     {
-      "characters": ["Ryu Lion", "Notia", "Core Fusion Notia"],
+      "characters": ["Ryu Lion", "Heatwave Cop Delta", "Notia", "Core Fusion Notia"],
       "reason": {
         "en": "{C/Ranger} dps {E/Earth}.",
         "jp": "{C/Ranger} {E/Earth}アタッカー。",
@@ -24,7 +24,13 @@
   "team": {
     "slots": [
       ["Viella", "Saeran", "Monad Eva"],
-      ["Ryu Lion", "Demiurge Luna", "Ame", "Kitsune of Eternity Tamamo-no-Mae"],
+      [
+        "Ryu Lion",
+        "Heatwave Cop Delta",
+        "Demiurge Luna",
+        "Ame",
+        "Kitsune of Eternity Tamamo-no-Mae"
+      ],
       ["Mystic Sage Ame", "Notia", "Core Fusion Notia"],
       ["Kappa", "Tamara", "Hanbyul Lee"]
     ]

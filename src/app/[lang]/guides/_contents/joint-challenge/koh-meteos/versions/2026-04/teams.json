@@ -2,7 +2,14 @@
   "slots": [
     ["Demiurge Luna", "Regina"],
     ["Bryn"],
-    ["Mystic Sage Ame", "Gnosis Dahlia", "Regina", "Holy Night's Blessing Dianne", "Ryu Lion"],
+    [
+      "Mystic Sage Ame",
+      "Gnosis Dahlia",
+      "Regina",
+      "Holy Night's Blessing Dianne",
+      "Ryu Lion",
+      "Heatwave Cop Delta"
+    ],
     ["Monad Eva", "Omega Nadja"]
   ],
   "note": {

@@ -1,6 +1,13 @@
 [
   {
-    "characters": ["Rey", "Ryu Lion", "Ame", "Noa", "Kitsune of Eternity Tamamo-no-Mae"],
+    "characters": [
+      "Rey",
+      "Ryu Lion",
+      "Heatwave Cop Delta",
+      "Ame",
+      "Noa",
+      "Kitsune of Eternity Tamamo-no-Mae"
+    ],
     "reason": {
       "en": "{E/Earth} DPS options.",
       "jp": "{E/Earth} DPSオプション。",

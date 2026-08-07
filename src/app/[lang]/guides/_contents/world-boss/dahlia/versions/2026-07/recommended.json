@@ -141,7 +141,7 @@
           }
         },
         {
-          "characters": ["Ryu Lion"],
+          "characters": ["Ryu Lion", "Heatwave Cop Delta"],
           "reason": {
             "en": "Provides {D/BT_FIXED_DAMAGE} and {B/BT_STAT|ST_SPEED}.",
             "jp": "{D/BT_FIXED_DAMAGE}と{B/BT_STAT|ST_SPEED}を提供。",

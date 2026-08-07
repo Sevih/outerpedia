@@ -30,7 +30,7 @@
     }
   },
   {
-    "characters": ["Ryu Lion", "Holy Night's Blessing Dianne"],
+    "characters": ["Ryu Lion", "Heatwave Cop Delta", "Holy Night's Blessing Dianne"],
     "reason": {
       "en": "{B/BT_ACTION_GAUGE} support (ideally slower than {P/Demiurge Luna}).",
       "jp": "{B/BT_ACTION_GAUGE}サポート（{P/Demiurge Luna}より遅いのが理想）。",

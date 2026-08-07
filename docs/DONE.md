@@ -7,6 +7,28 @@
 
 ## 2026-08-07
 
+- **Heatwave Cop Delta rejoint Ryu Lion partout où celle-ci est recommandée.**
+  Même kit (skillset partagé, exclusion mutuelle en deck) : tout guide qui
+  conseillait Ryu conseille désormais les deux. **52 listes dans 45 fichiers**
+  (adventure-license, guild-raid, joint-challenge, world-boss, special-request,
+  skyward-tower), Delta insérée JUSTE APRÈS Ryu — dans un slot d'équipe les
+  entrées sont des alternatives, la placer là la présente en substitut et non
+  en unité de plus. 1425 tests au vert.
+  • **Les versions ARCHIVÉES ont été épargnées, délibérément** : Delta est
+  sortie le **2026-07-14** (`banner.json`), l'écrire dans `koh-meteos/2025-05`
+  ou `frost-legion/2025-05` inventerait une reco qui ne pouvait pas exister.
+  Critère retenu : la version la PLUS RÉCENTE de chaque guide (celle qui
+  s'affiche par défaut, donc le conseil courant) + les guides non versionnés —
+  ce qui garde `madman-laboratory/2026-04` et `ragnakeus/2025-12`, antérieurs à
+  sa sortie mais toujours actifs. 24 fichiers laissés tels quels.
+  • **Un doublon rattrapé** : `shichifuja/2026-07` proposait déjà Delta dans un
+  AUTRE slot — l'ajouter près de Ryu l'aurait fait apparaître deux fois dans la
+  même équipe. Ajout annulé sur ce fichier, mention d'origine conservée.
+  • La PROSE n'a pas été touchée (seules les listes de persos) : la note de
+  `madman-laboratory/2026-04` cite encore Ryu seule là où `android-sphinx` cite
+  déjà les deux — décision éditoriale, pas mécanique. `stats/labels.ts` garde
+  Ryu comme cas d'école (`{SK/Ryu Lion|S2}`, bonus 4★), à raison.
+
 - **Clôture de l'audit : primitives admin, forme des reviews, et TROIS constats
   tombés.** Dernière passe, sur un arbre propre.
   - **`components/admin/_ui.ts`** — `btn` était déclaré 17×, `input` 11×,

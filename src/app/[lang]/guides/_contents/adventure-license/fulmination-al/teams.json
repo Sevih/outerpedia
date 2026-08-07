@@ -24,7 +24,12 @@
       "effect": "BT_COUNTERATTACK",
       "side": "buff"
     },
-    "slots": [["Viella", "Delta", "Idith"], ["Fran"], ["Rey", "Rhona"], ["Ame", "Noa", "Ryu Lion"]],
+    "slots": [
+      ["Viella", "Delta", "Idith"],
+      ["Fran"],
+      ["Rey", "Rhona"],
+      ["Ame", "Noa", "Ryu Lion", "Heatwave Cop Delta"]
+    ],
     "note": [
       {
         "en": "Alternative approach using Counter and Revenge mechanics.",

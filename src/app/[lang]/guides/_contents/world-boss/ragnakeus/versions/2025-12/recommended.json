@@ -40,7 +40,7 @@
           }
         },
         {
-          "characters": ["Fran", "Laplace", "Tamamo-no-Mae", "Ryu Lion"],
+          "characters": ["Fran", "Laplace", "Tamamo-no-Mae", "Ryu Lion", "Heatwave Cop Delta"],
           "reason": {
             "en": "{D/BT_FIXED_DAMAGE} Starter/Finisher options.",
             "jp": "{D/BT_FIXED_DAMAGE}スターター/フィニッシャーオプション。",
@@ -60,7 +60,14 @@
           }
         },
         {
-          "characters": ["Luna", "Caren", "Christina", "Ryu Lion", "Poolside Trickster Regina"],
+          "characters": [
+            "Luna",
+            "Caren",
+            "Christina",
+            "Ryu Lion",
+            "Heatwave Cop Delta",
+            "Poolside Trickster Regina"
+          ],
           "reason": {
             "en": "{D/BT_STEAL_BUFF} and {D/BT_SEALED} options.",
             "jp": "{D/BT_STEAL_BUFF}と{D/BT_SEALED}オプション。",
@@ -121,7 +128,13 @@
           }
         },
         {
-          "characters": ["Gnosis Nella", "Demiurge Stella", "Iota", "Ryu Lion"],
+          "characters": [
+            "Gnosis Nella",
+            "Demiurge Stella",
+            "Iota",
+            "Ryu Lion",
+            "Heatwave Cop Delta"
+          ],
           "reason": {
             "en": "{D/BT_FIXED_DAMAGE} Starter/Finisher options.",
             "jp": "{D/BT_FIXED_DAMAGE}スターター/フィニッシャーオプション。",

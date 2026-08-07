@@ -3,7 +3,17 @@
     ["Monad Eva"],
     ["Kanon", "Caren", "Aer"],
     ["Poolside Trickster Regina", "Francesca", "Regina"],
-    ["Tamara", "Mystic Sage Ame", "Eliza", "Ryu Lion", "Delta", "Fran", "Stella", "Kappa"]
+    [
+      "Tamara",
+      "Mystic Sage Ame",
+      "Eliza",
+      "Ryu Lion",
+      "Heatwave Cop Delta",
+      "Delta",
+      "Fran",
+      "Stella",
+      "Kappa"
+    ]
   ],
   "note": {
     "en": "Remove {B/BT_INVINCIBLE} from boss ASAP with {D/BT_STEAL_BUFF} or {D/BT_REMOVE_BUFF}. Keep at least one buff on your team to prevent boss's {D/BT_FIXED_DAMAGE}.",

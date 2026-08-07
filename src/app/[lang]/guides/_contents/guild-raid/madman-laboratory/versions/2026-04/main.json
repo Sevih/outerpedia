@@ -6,7 +6,7 @@
       },
       "element": "earth",
       "slots": [
-        ["Ryu Lion", "Rhona", "Ame", "Rey"],
+        ["Ryu Lion", "Heatwave Cop Delta", "Rhona", "Ame", "Rey"],
         ["Notia", "Laine"],
         ["Charlotte", "Viella", "Fran"],
         ["Kappa", "Hanbyul Lee"]
@@ -420,7 +420,12 @@
       "title": {
         "en": "Ryu Revenge Team"
       },
-      "slots": [["Charlotte"], ["Ryu Lion"], ["Core Fusion Notia"], ["Pesketh"]],
+      "slots": [
+        ["Charlotte"],
+        ["Ryu Lion", "Heatwave Cop Delta"],
+        ["Core Fusion Notia"],
+        ["Pesketh"]
+      ],
       "geasActive": {
         "bonus": ["3", "89", "49", "91", "53", "92"],
         "malus": ["5", "38", "18", "20", "90", "86", "60", "58", "10"]
