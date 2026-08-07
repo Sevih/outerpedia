@@ -36,7 +36,7 @@ export default async function CouponsPage({ params }: { params: Promise<{ lang: 
   const coupons = await getAllCoupons(lang);
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-6 md:px-6">
+    <div className="mx-auto max-w-3xl px-4 py-6 md:px-6">
       {/* fit-content (globals.css) : le centrage passe par mx-auto, pas text-center. */}
       <h1 className="text-content-strong mx-auto mb-3 text-center text-3xl font-bold">
         {t('page.coupons.title')}
@@ -64,6 +64,6 @@ export default async function CouponsPage({ params }: { params: Promise<{ lang: 
           validity: t('coupons.validity'),
         }}
       />
-    </main>
+    </div>
   );
 }

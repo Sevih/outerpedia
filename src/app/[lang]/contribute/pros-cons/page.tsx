@@ -33,7 +33,7 @@ export default async function ContributeProsConsPage({
   const data = editorialToolData();
 
   return (
-    <main className="mx-auto max-w-4xl space-y-6 px-4 py-8">
+    <div className="mx-auto max-w-4xl space-y-6 px-4 py-8">
       <Link
         href={localePath(lang, '/contribute')}
         className="text-content-subtle hover:text-accent text-sm"
@@ -44,6 +44,6 @@ export default async function ContributeProsConsPage({
         Pros / Cons — contribution
       </h1>
       <EditorialPublicTool slice="prosCons" kind="character-pros-cons" {...data} />
-    </main>
+    </div>
   );
 }

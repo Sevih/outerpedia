@@ -21,7 +21,7 @@ export default async function ContributeHubPage({ params }: { params: Promise<{ 
   const lang = normalizeLang(raw);
 
   return (
-    <main className="mx-auto max-w-4xl space-y-6 px-4 py-8">
+    <div className="mx-auto max-w-4xl space-y-6 px-4 py-8">
       <div className="space-y-2">
         <h1 className="text-content-strong mx-auto text-2xl font-semibold">Contribution tools</h1>
         <p className="text-content-subtle text-sm">
@@ -47,6 +47,6 @@ export default async function ContributeHubPage({ params }: { params: Promise<{ 
           ))}
         </ul>
       )}
-    </main>
+    </div>
   );
 }

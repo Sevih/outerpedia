@@ -7,6 +7,54 @@
 
 ## 2026-08-07
 
+- **2ᵉ passe d'audit : landmark `<main>` dupliqué, et le site n'avait aucun
+  écran d'erreur.** Passe ciblée sur ce que la première n'avait pas regardé —
+  a11y, boundaries d'erreur, intégrité des données, streaming.
+  - **`<main>` imbriqué sur 9 pages publiques**, dont l'accueil et la fiche
+    perso. Le layout pose `<main>{children}</main>` et ces pages en rendaient un
+    SECOND à l'intérieur : invalide en HTML (un `main` ne peut pas descendre d'un
+    `main`) et **deux régions « principal »** annoncées aux lecteurs d'écran, ce
+    qui rend la navigation par landmark ambiguë. Origine lisible dans le
+    commentaire du layout : « chaque page pose le sien » parlait du CONTENEUR de
+    mise en page ; le `<main>` du layout est venu après, sans nettoyer les pages
+    qui en avaient déjà un. Les 9 passent en `<div>` (classes inchangées), sauf
+    l'accueil dont le `<main>` était nu → fragment. Le layout porte désormais
+    l'avertissement pour éviter la récidive par copier-coller.
+  - **`error.tsx` + `global-error.tsx`** — il n'existait AUCUN écran d'erreur,
+    seulement `not-found.tsx`. Toute exception de rendu servait la page par
+    défaut de Next : anglais, sans header/footer, sans chemin de retour. Ce
+    n'est pas théorique ici — un `meta.bossId` absent de `monsters.json` fait
+    JETER le rendu d'un guide (cf. la note du TODO). `error.tsx` reprend le
+    gabarit de la 404 ; `global-error.tsx` est VOLONTAIREMENT autonome (styles
+    inline, aucune dépendance à `RootDocument`, `globals.css`, Tailwind ou
+    l'i18n) : il ne se déclenche que si le layout racine a échoué, donc au
+    moment précis où il ne faut dépendre de rien. Il affiche le `digest`, seul
+    lien entre l'écran du visiteur et la stack dans les logs.
+  - Traduction de `error.tsx` : un écran d'erreur est forcément un Client
+    Component, donc ni `getT` ni `getRequestLang`. On n'importe PAS `@/i18n`
+    pour autant — aucun composant client ne le fait, et ce serait tirer 519 clés
+    × 5 locales dans le bundle pour trois phrases. Dictionnaire local de 5
+    langues, saisi sur `<html lang>` via `useSyncExternalStore` (et pas un
+    `setState` dans un effet : `react-hooks/set-state-in-effect` est gardée
+    active sur ce projet, c'est exactement le cas qu'elle vise).
+
+  **Confirmation au passage — `localePath` est encore plus justifié que
+  l'audit ne le croyait.** Le `<Link href="/">` d'`error.tsx` a été REFUSÉ par
+  le typecheck : `Type '"/"' is not assignable to type 'UrlObject |
+RouteImpl<"/">'`. Avec le routing par sous-domaine, les routes typées de l'app
+  router sont `/[lang]/…` — `/` n'en est pas une. Ce que la 1ʳᵉ passe n'avait pas
+  pu prouver faute de `.next/dev/types/routes.d.ts` généré est donc vérifié :
+  sans `localePath`, ce sont 44 casts qu'il faudrait disséminer.
+
+  **Sain, vérifié, à ne pas re-auditer** : données curées (124 persos, 91 recos
+  d'équipement, 9 noms courts — **zéro référence orpheline** vers
+  `characters.json`, tous les JSON valides) ; i18n (`keys.test.ts` vert, aucune
+  clé morte) ; titres (aucune page à deux `h1`, et les 7 qui semblaient en
+  manquer les délèguent à `ToolShell`/`HomeHero`/`guide-detail`) ; zéro `catch`
+  vide sur 815 fichiers ; `fetchDiscordCounts` correctement gardé (try/catch,
+  `!res.ok`, cache 1 h) — il lui manque seulement un `AbortSignal.timeout`, seul
+  reliquat de cette passe, non fait.
+
 - **Heatwave Cop Delta rejoint Ryu Lion partout où celle-ci est recommandée.**
   Même kit (skillset partagé, exclusion mutuelle en deck) : tout guide qui
   conseillait Ryu conseille désormais les deux. **52 listes dans 45 fichiers**

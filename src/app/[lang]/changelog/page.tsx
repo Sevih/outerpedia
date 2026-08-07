@@ -44,7 +44,7 @@ export default async function ChangelogPage({ params }: Props) {
   });
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-8 md:px-6">
+    <div className="mx-auto max-w-3xl px-4 py-8 md:px-6">
       <JsonLd data={jsonLd} id="ld-changelog" />
 
       <header className="mb-8 text-center">
@@ -59,6 +59,6 @@ export default async function ChangelogPage({ params }: Props) {
           <ChangelogEntryCard key={`${entry.date}-${i}`} entry={entry} lang={lang} t={t} />
         ))}
       </div>
-    </main>
+    </div>
   );
 }

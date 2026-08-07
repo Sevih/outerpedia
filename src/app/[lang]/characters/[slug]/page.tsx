@@ -636,7 +636,7 @@ export default async function CharacterDetail({
 
       <QuickToc sections={tocSections} hex={hex} ariaLabel={t('page.character.toc.on_this_page')} />
 
-      <main className="pb-20">
+      <div className="pb-20">
         <TranscendTierProvider initial={Math.max(0, statLayers.transcend.length - 1)}>
           {rows.map((row) => (
             <div
@@ -654,7 +654,7 @@ export default async function CharacterDetail({
             </div>
           ))}
         </TranscendTierProvider>
-      </main>
+      </div>
     </div>
   );
 }

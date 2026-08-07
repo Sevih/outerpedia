@@ -61,7 +61,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   );
 
   return (
-    <main>
+    <>
       <HomeHero
         strings={{
           title: t('page.home.title'),
@@ -146,6 +146,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           t={t}
         />
       </div>
-    </main>
+    </>
   );
 }

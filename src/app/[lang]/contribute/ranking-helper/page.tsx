@@ -28,7 +28,7 @@ export default async function ContributeRankingHelperPage({
   const lang = normalizeLang(raw);
 
   return (
-    <main className="mx-auto max-w-4xl space-y-6 px-4 py-8">
+    <div className="mx-auto max-w-4xl space-y-6 px-4 py-8">
       <Link
         href={localePath(lang, '/contribute')}
         className="text-content-subtle hover:text-accent text-sm"
@@ -37,6 +37,6 @@ export default async function ContributeRankingHelperPage({
       </Link>
       <h1 className="text-content-strong mx-auto text-2xl font-semibold">Ranking helper</h1>
       <RankingHelperBrowser rows={rankingHelperRows()} />
-    </main>
+    </div>
   );
 }
