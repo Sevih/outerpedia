@@ -13,6 +13,7 @@
  * éditeur (sélecteurs sur la donnée réelle) et revérifiées au rendu (build).
  */
 import type { LocalizedText } from '@contracts';
+import { hasText } from './review-shape';
 import type { SectionTitle } from '@/lib/data/guide-sections';
 import type { VideoItem } from '@/components/ui/MultiVideoEmbed';
 
@@ -224,8 +225,7 @@ export type RawTeams = SlotsTeamRaw | BucketTeamRaw | NamedTeamRaw;
 
 /* --- Helpers partagés --- */
 
-export const hasText = (t?: LocalizedText): boolean =>
-  t ? Object.values(t).some((x) => typeof x === 'string' && x.trim()) : false;
+export { hasText } from './review-shape';
 
 const clean = <T extends LText>(list: T[]): T[] => list.filter(hasText);
 const cleanNames = (names: string[]): string[] => names.map((n) => n.trim()).filter(Boolean);

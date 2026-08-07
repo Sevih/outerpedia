@@ -12,6 +12,8 @@ import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { writeJson } from '@datagen/lib/json';
 import type { LocalizedText } from '@contracts';
+import { normalizeReview, type ReviewEntryData } from './review-shape';
+export { normalizeReview };
 import { characterDisplayName, findCharacterByName, getAllCharacters } from '@/lib/data/characters';
 
 const CONTENTS_DIR = resolve(process.cwd(), 'src/app/[lang]/guides/_contents');
@@ -83,25 +85,8 @@ export async function saveFreeHeroes(data: FreeHeroesData): Promise<string[]> {
 
 /* --- Modèle « Premium & Limited » (reviews + recommended choices) --- */
 
-const STARS = ['3', '4', '5', '6'] as const;
-type StarKey = (typeof STARS)[number];
-
-export interface ReviewEntryData {
-  name: string;
-  review: LocalizedText;
-  /** Cibles de transcendance recommandées (texte éditorial : « 4 to 5 », « Any »…). */
-  recommendedPve: string;
-  recommendedPvp: string;
-  /** Note éditoriale (1-5) par étoile de transcendance, PvE/PvP. */
-  impact: Record<StarKey, { pve: string; pvp: string }>;
-  /**
-   * Perso PAS ENCORE SORTI (absent de la data du site) : la review est rédigée
-   * d'avance (contribution). On N'exige PAS que le nom résolve, et le rendu du
-   * guide SAUTE l'entrée tant que le perso n'existe pas — elle apparaît toute
-   * seule à la sortie (cf. `reviewCards`).
-   */
-  unreleased?: boolean;
-}
+// Forme + normalisation : `review-shape.ts` (PUR — partagé avec la brique client).
+export type { ReviewEntryData, StarKey } from './review-shape';
 export interface PriorityPickData {
   name: string;
   stars: number;
@@ -125,30 +110,6 @@ export interface PremiumLimitedData {
 const plDir = () => resolve(GENERAL_DIR, 'premium-limited');
 const plReviewsPath = () => resolve(plDir(), 'premium-reviews.json');
 const plPrioritiesPath = () => resolve(plDir(), 'premium-priorities.json');
-
-const emptyImpact = (): ReviewEntryData['impact'] => ({
-  '3': { pve: '', pvp: '' },
-  '4': { pve: '', pvp: '' },
-  '5': { pve: '', pvp: '' },
-  '6': { pve: '', pvp: '' },
-});
-
-/** Normalise une review chargée/importée (impact complet, champs présents). */
-export function normalizeReview(r: Partial<ReviewEntryData>): ReviewEntryData {
-  const impact = emptyImpact();
-  for (const s of STARS) {
-    const cell = r.impact?.[s];
-    if (cell) impact[s] = { pve: cell.pve ?? '', pvp: cell.pvp ?? '' };
-  }
-  return {
-    name: r.name ?? '',
-    review: (r.review ?? { en: '' }) as LocalizedText,
-    recommendedPve: r.recommendedPve ?? '',
-    recommendedPvp: r.recommendedPvp ?? '',
-    impact,
-    ...(r.unreleased ? { unreleased: true } : {}),
-  };
-}
 
 const PREMIUM_TAG = 'premium';
 const LIMITED_TAGS = ['limited', 'seasonal', 'collab'];

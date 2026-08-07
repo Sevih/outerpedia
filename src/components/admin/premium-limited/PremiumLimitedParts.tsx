@@ -34,46 +34,19 @@ import { CharacterChips, chipView } from '@/components/admin/CharacterChips';
 import { CharacterPicker, type CharOption } from '@/components/admin/CharacterPicker';
 import { LANGS } from '@/lib/i18n/config';
 import { btn, input } from '../_ui';
+// Forme des reviews : module PUR, seule dédup possible avec le store serveur
+// (qui tire `node:fs` et ne peut donc pas être importé depuis cette brique).
+import { STARS, emptyReview, normalizeReview } from '@/lib/admin/review-shape';
+export { emptyReview, normalizeReview };
 
 /** Langues du SITE (5) — dérivées de la source de vérité i18n. */
 export { LANGS };
 export type L = (typeof LANGS)[number];
 export type LText = { en?: string } & Record<string, string | undefined>;
 
-const STARS = ['3', '4', '5', '6'] as const;
 export const DATALIST_ID = 'premium-limited-char-names';
 
 const heading = 'text-content-strong text-sm font-semibold';
-
-export const emptyReview = (): ReviewEntryData => ({
-  name: '',
-  review: { en: '' },
-  recommendedPve: '',
-  recommendedPvp: '',
-  impact: {
-    '3': { pve: '', pvp: '' },
-    '4': { pve: '', pvp: '' },
-    '5': { pve: '', pvp: '' },
-    '6': { pve: '', pvp: '' },
-  },
-});
-
-/** Normalise une review importée (impact complet, champs présents) — côté client. */
-export function normalizeReview(r: Partial<ReviewEntryData>): ReviewEntryData {
-  const base = emptyReview();
-  for (const s of STARS) {
-    const cell = r.impact?.[s];
-    if (cell) base.impact[s] = { pve: cell.pve ?? '', pvp: cell.pvp ?? '' };
-  }
-  return {
-    name: r.name ?? '',
-    review: (r.review ?? { en: '' }) as LText,
-    recommendedPve: r.recommendedPve ?? '',
-    recommendedPvp: r.recommendedPvp ?? '',
-    impact: base.impact,
-    ...(r.unreleased ? { unreleased: true } : {}),
-  };
-}
 
 /** Normalise un bundle importé (les deux buckets). */
 export function normalizeBundle(b: Partial<ReviewsBundle>): ReviewsBundle {

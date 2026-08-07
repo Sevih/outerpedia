@@ -73,8 +73,7 @@ export const PRIORITY_BADGE: Record<Priority, string> = {
 };
 
 const fmt = (n: number): string => n.toLocaleString('en-US');
-export const hasText = (t?: LocalizedText): boolean =>
-  t ? Object.values(t).some((v) => v?.trim()) : false;
+export { hasText } from '@/lib/admin/review-shape';
 
 /* --- Sélecteur de priorité (S/A/B/C, re-clic = efface) --- */
 
