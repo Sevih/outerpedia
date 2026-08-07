@@ -38,11 +38,18 @@ const body = [
   '</CORSConfiguration>',
 ].join('');
 
-/** @param {import('node:crypto').BinaryLike} s */
+// `string | Buffer` et PAS `BinaryLike` : depuis @types/node 26, `BinaryLike`
+// inclut `ArrayBuffer`, que `.update()` n'accepte pas (il veut
+// `string | ArrayBufferView`) — le JSDoc promettait donc plus large que ce que
+// l'appel derrière sait avaler, et le typecheck le refuse à juste titre. Nos
+// deux seuls usages sont une chaîne (le corps XML) et un Buffer (la sortie de
+// `hmac`, chaînée dans la dérivation SigV4).
+
+/** @param {string | Buffer} s */
 const sha256 = (s) => createHash('sha256').update(s).digest('hex');
 /**
- * @param {import('node:crypto').BinaryLike} key
- * @param {import('node:crypto').BinaryLike} s
+ * @param {string | Buffer} key
+ * @param {string | Buffer} s
  */
 const hmac = (key, s) => createHmac('sha256', key).update(s).digest();
 
