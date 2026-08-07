@@ -45,10 +45,11 @@
     la vérité n'est pas dans le prefab.
   * `m_BestFit` porté (approximation à chasse fixe, commentée) : la boîte du
     niveau perso ne fait que 32 de large, un nombre à trois chiffres en sortait.
-  * 15 sprites `CT_` ajoutés au manifeste. Ils vont dans `ui/boss/`, dont le nom
-    ne dit plus ce qu'il contient : historique, et le renommer en `ui/thumbnail/`
-    laisserait autant d'orphelins sur R2 (le push ne supprime rien, `rclone
-delete` est manuel). Ménage à décider pour lui-même. **PAS ENCORE POUSSÉS.**
+  * 15 sprites `CT_` ajoutés au manifeste, collectés et poussés sur R2 (Sevih,
+    07/08). Ils vont dans `ui/boss/`, dont le nom ne dit plus ce qu'il contient :
+    historique, et le renommer en `ui/thumbnail/` laisserait autant d'orphelins
+    sur R2 (le push ne supprime rien, `rclone delete` est manuel). Ménage à
+    décider pour lui-même.
   * Page `/dev/thumbnail` : un tableau des huit calques qui divergent, une rangée
     par axe. La comparaison « rareté ≠ type » a été retirée — on veut le rendu du
     jeu, l'autre axe n'a rien à y faire même en contre-exemple.
