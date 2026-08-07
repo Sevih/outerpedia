@@ -1,18 +1,27 @@
-import { createHash } from 'crypto';
-import type { Connection } from 'mysql2/promise';
+import { createHashStore } from '@/lib/hash-store';
 
 /**
- * Aides communes au raccourcisseur interne (`POST /api/shortlink` + `GET
- * /s/[id]`, deux arbres de routes distincts — d'où `src/lib/` et pas un
- * `_store.ts` local comme pour la tier-list).
+ * Raccourcisseur interne (`POST /api/shortlink` + `GET /s/[id]`, deux arbres de
+ * routes distincts — d'où `src/lib/` et pas un `_store.ts` local comme pour la
+ * tier-list).
  *
- * L'id est un HASH du chemin (même chemin ⇒ même id, upsert idempotent) : pas
- * de compteur à réserver, pas de doublon possible, et un lien re-partagé ne
- * crée jamais de nouvelle ligne.
+ * La mécanique table + id-hash vient de `hash-store.ts` (socle partagé avec la
+ * tier-list). Ce qui est PROPRE au raccourcisseur, et vit donc ici : la
+ * validation de chemin ci-dessous — c'est elle qui tient l'absence d'open
+ * redirect, pas le stockage.
  */
 
 export const MAX_PATH = 2048;
-export const ID_RE = /^[A-Za-z0-9_-]{12}$/;
+
+const store = createHashStore({ table: 'short_links', column: 'path', maxLength: MAX_PATH });
+
+export const ID_RE = store.idPattern;
+
+/** Crée la table `short_links` une fois par process (idempotent, mémoïsé). */
+export const ensureTable = store.ensureTable;
+
+/** Id court DÉTERMINISTE dérivé du chemin — même chemin ⇒ même id. */
+export const pathId = store.id;
 
 /**
  * N'accepte QUE des chemins INTERNES — jamais d'URL absolue, zéro open
@@ -28,31 +37,4 @@ export function isInternalPath(path: string): boolean {
   if (path.startsWith('//')) return false;
   if (path.includes('\\')) return false;
   return /^[\x21-\x7e]+$/.test(path);
-}
-
-/** Id court DÉTERMINISTE dérivé du chemin — même chemin ⇒ même id. */
-export function pathId(path: string): string {
-  return createHash('sha256').update(path).digest('base64url').slice(0, 12);
-}
-
-let tableReady: Promise<void> | null = null;
-
-/** Crée la table `short_links` une fois par process (idempotent, mémoïsé). */
-export function ensureTable(conn: Connection): Promise<void> {
-  if (!tableReady) {
-    tableReady = conn
-      .query(
-        `CREATE TABLE IF NOT EXISTS short_links (
-           id VARCHAR(16) NOT NULL PRIMARY KEY,
-           path VARCHAR(${MAX_PATH}) NOT NULL,
-           created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-         ) ENGINE=InnoDB DEFAULT CHARSET=ascii`,
-      )
-      .then(() => undefined)
-      .catch((err) => {
-        tableReady = null;
-        throw err;
-      });
-  }
-  return tableReady;
 }

@@ -1,38 +1,32 @@
-import { createHash } from 'crypto';
-import type { Connection } from 'mysql2/promise';
+import { createHashStore } from '@/lib/hash-store';
 
 /**
  * Aides communes aux routes de partage tier-list (portage V2 à l'identique :
  * MÊME table, MÊMES ids — les liens `?s=` V2 restent valides une fois la
  * table migrée sur le MySQL du VPS).
+ *
+ * La mécanique table + id-hash vient de `hash-store.ts` (socle partagé avec le
+ * raccourcisseur). Seul `ID_RE` s'en écarte, à dessein : cf. ci-dessous.
  */
 
 export const MAX_PAYLOAD = 1024;
+
+/**
+ * Plus PERMISSIF que les ids produits (12 caractères) : la V2 a émis des ids
+ * d'autres longueurs et ses liens `?s=` doivent rester lisibles. À ne pas
+ * resserrer sur `ID_LENGTH` — ce serait casser des liens déjà partagés.
+ */
 export const ID_RE = /^[A-Za-z0-9_-]{1,16}$/;
 
-let tableReady: Promise<void> | null = null;
+const store = createHashStore({
+  table: 'tier_lists',
+  column: 'payload',
+  maxLength: MAX_PAYLOAD,
+  idPattern: ID_RE,
+});
 
 /** Crée la table `tier_lists` une fois par process (idempotent, mémoïsé). */
-export function ensureTable(conn: Connection): Promise<void> {
-  if (!tableReady) {
-    tableReady = conn
-      .query(
-        `CREATE TABLE IF NOT EXISTS tier_lists (
-           id VARCHAR(16) NOT NULL PRIMARY KEY,
-           payload VARCHAR(${MAX_PAYLOAD}) NOT NULL,
-           created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-         ) ENGINE=InnoDB DEFAULT CHARSET=ascii`,
-      )
-      .then(() => undefined)
-      .catch((err) => {
-        tableReady = null;
-        throw err;
-      });
-  }
-  return tableReady;
-}
+export const ensureTable = store.ensureTable;
 
 /** Id court DÉTERMINISTE dérivé du payload — même liste ⇒ même id. */
-export function payloadId(z: string): string {
-  return createHash('sha256').update(z).digest('base64url').slice(0, 12);
-}
+export const payloadId = store.id;
