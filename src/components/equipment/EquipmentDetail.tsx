@@ -17,6 +17,7 @@ import { img } from '@/lib/images';
 import { STAT_ICON } from '@/lib/stats';
 import { SkillDescription } from '@/components/character/SkillDescription';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
+import { Thumbnail } from '@/components/ui/Thumbnail';
 import { EffectChipsRow } from '@/components/character/EffectChips';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { EquipmentIcon } from './EquipmentIcon';
@@ -767,14 +768,7 @@ function SourceDetail({ source }: { source: NonNullable<DetailModel['source']> }
     <div className="flex flex-col gap-2">
       {source.bosses.map((b) => (
         <div key={b.id} className="flex items-center gap-2.5">
-          <img
-            src={img.boss(`MT_${b.icon}`)}
-            alt=""
-            aria-hidden
-            className="border-line-subtle h-10 w-10 rounded-lg border object-cover"
-            width={40}
-            height={40}
-          />
+          {b.thumb && <Thumbnail {...b.thumb} kind="monster" name={b.name} className="h-10 w-10" />}
           <div className="min-w-0">
             <div className="text-content-strong text-sm font-semibold">{b.name}</div>
             {b.sourceLabel && <div className="text-content-subtle text-xs">{b.sourceLabel}</div>}

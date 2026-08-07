@@ -43,6 +43,8 @@ import {
   getCharacter,
   slugForId,
 } from '@/lib/data/characters';
+import { getMonster, monsterThumb } from '@/lib/data/monsters';
+import type { MonsterThumb } from '@/components/ui/Thumbnail';
 import { loadCuratedCharacters } from '@/lib/data/curated';
 import { loadShortNames } from '@/lib/data/short-names';
 import { effectForTooltip, getMergedEffect, mergeStatusEffects } from '@/lib/data/effects';
@@ -182,7 +184,7 @@ export interface DetailModel {
   /** Bloc Ascension localisé (activation, pas +11..+15, bonus +15). */
   ascension: AscensionView;
   source?: {
-    bosses: { id: string; name: string; icon: string; sourceLabel?: string }[];
+    bosses: { id: string; name: string; thumb?: MonsterThumb; sourceLabel?: string }[];
     /** Slugs de boutique extraits (traduits par la page). */
     shops?: string[];
     label?: string;
@@ -376,13 +378,26 @@ function buildSetIds(b: { sets?: { preset?: string; pieces?: { set: string }[] }
 function toSourceView(source: ResolvedSource | undefined, lang: Lang) {
   if (!source) return undefined;
   return {
-    bosses: source.bosses.map((b) => ({
-      id: b.id,
-      name: lRec(b.name, lang) || b.name.en,
-      icon: b.icon,
-      // Titre extrait du contenu où on l'affronte (« Special Request: … »).
-      ...(b.source ? { sourceLabel: lRec(b.source, lang) || b.source.en } : {}),
-    })),
+    bosses: source.bosses.map((b) => {
+      // `bosses.json` sort de `MonsterTemplet` — la MÊME table que
+      // `monsters.json`, aux mêmes ids — mais `buildBosses` n'en retient que le
+      // nom, l'icône et l'élément : le type, la rareté et la classe, dont la
+      // vignette a besoin, restent en chemin. On les reprend à la source
+      // plutôt que d'élargir le générateur pour 14 lignes.
+      //
+      // `thumb` reste FACULTATIF : la liste des boss peut venir de la couche
+      // curée (`entry.source.bosses`), qui nomme des ids à la main. Un id qui
+      // ne retombe pas sur un monstre ne doit pas faire tomber la page
+      // d'équipement — il perd son portrait, pas son nom.
+      const m = getMonster(b.id);
+      return {
+        id: b.id,
+        name: lRec(b.name, lang) || b.name.en,
+        ...(m ? { thumb: monsterThumb(m) } : {}),
+        // Titre extrait du contenu où on l'affronte (« Special Request: … »).
+        ...(b.source ? { sourceLabel: lRec(b.source, lang) || b.source.en } : {}),
+      };
+    }),
     shops: source.shops.length ? source.shops : undefined,
     label: source.label,
   };

@@ -37,9 +37,19 @@
   - Élément et classe disparaissent d'à côté des noms dans `BossPanel` et
     `TowerFloorMenu` : la vignette les porte aux places du jeu, les répéter les
     montrait deux fois.
-  - Écartés, et vérifiés un par un : les sources d'équipement
-    (`GearRecoSection`, `EquipmentDetail`…) dont la donnée ne porte que
-    `{id, name, icon}` — ni type, ni élément, ni classe ; `SingularityRotation`,
+  - **Le bloc « Source » d'une fiche d'équipement** (le boss qui lâche l'objet,
+    40 px) suit — sur remarque de Sevih, qui a vu que ces boss SONT des monstres.
+    Ils le sont : `bosses.json` sort de `MonsterTemplet`, la même table que
+    `monsters.json`, aux mêmes ids ; `buildBosses` n'en retient simplement que le
+    nom, l'icône et l'élément et laisse tomber le type, la rareté et la classe.
+    Un `getMonster(b.id)` dans `toSourceView` les reprend — pas besoin d'élargir
+    le générateur pour 14 lignes. `thumb` y est FACULTATIF : la liste des boss
+    peut venir de la couche curée, qui nomme des ids à la main, et un id sans
+    monstre doit perdre son portrait, pas faire tomber la page. (Les quatre
+    autres rendus de source — `cards.tsx` 24 px, `GearRecoSection` 20 px ×2,
+    l'option de filtre d'`EquipmentBrowser` — restent à l'icône nue : la règle
+    ci-dessus les y range.)
+  - Écartés, et vérifiés un par un : `SingularityRotation`,
     qui préfère `img.singularity`, l'avatar rond que le jeu dédie à ce mode ;
     `SpecialRequestSplit` et les `VariantIcon`, qui montrent de l'ÉQUIPEMENT et
     non des monstres.
