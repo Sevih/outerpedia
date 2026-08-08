@@ -1,7 +1,7 @@
 import type { SkillBuffVars } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { resolveSkillText } from '@/lib/skills';
-import { renderGameColors } from '@/components/ui/GameText';
+import { gameLineBreaks, renderGameColors } from '@/components/ui/GameText';
 import { renderGameText } from '@/components/inline/GameTokens';
 
 /**
@@ -24,8 +24,6 @@ export function SkillDescription({
   lang?: Lang;
   className?: string;
 }) {
-  // Les tables du jeu portent des `\n` LITTÉRAUX (deux caractères) → vrais
-  // sauts de ligne (rendus par whitespace-pre-line).
-  const text = resolveSkillText(desc, vars).replace(/\\n/g, '\n');
+  const text = gameLineBreaks(resolveSkillText(desc, vars));
   return <p className={className}>{lang ? renderGameText(text, lang) : renderGameColors(text)}</p>;
 }

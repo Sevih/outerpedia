@@ -33,6 +33,13 @@ export function renderGameColors(
 }
 
 /**
+ * Les tables du jeu portent des `\n` LITTÉRAUX (deux caractères) : à convertir
+ * en vrais sauts de ligne partout où l'on affiche ce texte (le rendu final les
+ * montre via `whitespace-pre-line`).
+ */
+export const gameLineBreaks = (text: string) => text.replace(/\\n/g, '\n');
+
+/**
  * Paragraphe de texte du jeu : couleurs rendues + `\n` LITTÉRAUX des tables
  * convertis en vrais sauts de ligne (affichés par `whitespace-pre-line`).
  */
@@ -43,5 +50,5 @@ export function GameText({
   text: string;
   className?: string;
 }) {
-  return <p className={className}>{renderGameColors(text.replace(/\\n/g, '\n'))}</p>;
+  return <p className={className}>{renderGameColors(gameLineBreaks(text))}</p>;
 }

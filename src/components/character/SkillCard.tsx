@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import type { SkillBuffVars } from '@contracts';
 import { img } from '@/lib/images';
 import { levelAt } from '@/lib/skills';
+import { gameLineBreaks, renderGameColors } from '@/components/ui/GameText';
 import { SkillDescription } from './SkillDescription';
 import { EffectChipsRow, type ClientEffect, type StatusMap } from './EffectChips';
 
@@ -111,7 +112,15 @@ export function EnhancementList({
             className={`flex gap-2 text-xs transition-opacity ${level >= l.level ? '' : 'opacity-30'}`}
           >
             <span className="shrink-0 font-semibold text-yellow-400">+{l.level}</span>
-            <span className="text-zinc-300">{l.upgrades!.join(', ')}</span>
+            {/* Texte du JEU : balises de couleur et `\n` littéraux comme dans les descs. */}
+            <span className="whitespace-pre-line text-zinc-300">
+              {l.upgrades!.map((u, i) => (
+                <Fragment key={i}>
+                  {i > 0 && ', '}
+                  {renderGameColors(gameLineBreaks(u))}
+                </Fragment>
+              ))}
+            </span>
           </div>
         ))}
       </div>

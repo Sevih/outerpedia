@@ -7,6 +7,25 @@
 
 ## 2026-08-08
 
+- **Les paliers d'amélioration sont du TEXTE DE JEU, comme les descs** (constat
+  Sevih). `EnhancementList` les rendait en texte brut (`upgrades.join(', ')`) :
+  la balise de couleur et le `\n` littéral s'affichaient tels quels. Trois
+  upgrades sont concernées dans `data/generated/skills.json` — dont
+  `increases <color=#28d9ed>You're Fired!</color> damage by +20%` — et rien ne
+  garantit qu'il n'en arrivera pas d'autres : ces chaînes sortent des mêmes
+  tables que les descs, elles portent donc le même balisage. Elles passent
+  maintenant par `renderGameColors`, le span étant en `whitespace-pre-line` ; le
+  séparateur `, ` entre upgrades d'un même palier est conservé. `ChainDualSection`
+  en bénéficie, il partage le composant.
+  - Le `\n` littéral → vrai saut de ligne était déjà écrit deux fois (`GameText`,
+    `SkillDescription`) ; en faire une troisième copie aurait figé la convention
+    à trois endroits. Extrait en `gameLineBreaks` (`components/ui/GameText`),
+    les trois appelants s'en servent.
+  - **Non fait, assumé** : les upgrades ne rendent pas les icônes inline
+    d'élément/classe (`renderGameText`) — `EnhancementList` ne reçoit pas de
+    `lang`. Aucune upgrade actuelle ne mentionne d'élément ni de classe, donc
+    l'affichage est identique ; à faire descendre le jour où c'est le cas.
+
 - **Les postes d'équipe cessent de se traverser — et `/dev/carousel` pour le voir.**
   Le carrousel est le seul endroit du site où une carte est TOURNÉE : ses voisines
   se projettent hors de la scène, et l'écart du conteneur essayait de couvrir ce
