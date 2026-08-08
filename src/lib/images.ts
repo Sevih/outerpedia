@@ -169,8 +169,8 @@ export const img = {
    */
   starEmpty: () => `${BASE}/images/ui/star/CM_icon_star_B.webp`,
   /**
-   * Badge « synchronisé » du PORTRAIT (`m_SynchroObj`, 34×34). Présent dans le seul
-   * habillage `mainPage` — `long` a ce champ à NULL.
+   * Badge « synchronisé » du PORTRAIT (`m_SynchroObj`, 34×34) — il partage son
+   * emplacement avec le badge core-fusion, les deux états s'excluant. Cf. `Portrait`.
    */
   syncIcon: () => `${BASE}/images/ui/boss/CT_Sync_Icon.webp`,
   /**

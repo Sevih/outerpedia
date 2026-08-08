@@ -41,13 +41,18 @@
     « titre et nom n'ont pas l'air d'être régis par les mêmes règles de style » ;
     les `m_Font` le confirmaient sans les nommer, et le bundle `font2` manquait sur
     le disque. Sevih l'a extrait : `Text_Name` (et les deux textes du niveau)
-    pointent **NotoSans_Bold**, `Text_Demi` **NotoSans_Regular** — même famille,
-    deux graisses, d'où l'écart de style. Les deux fichiers du jeu sont convertis
-    en woff2 dans `src/fonts/` (196 et 194 Ko) et déclarés dans `root-document` en
+    prennent l'asset `NotoSans_Bold`, `Text_Demi` l'asset `NotoSans_Regular`.
+    **L'ÉTIQUETTE UNITY MENT**, et c'est le script d'extraction qui l'a montré :
+    leur table `name` dit **SUIT ExtraBold** (usWeightClass 800) et **SUIT Bold**
+    (700), une famille coréenne de Sunn sous licence libre. Ni des Noto, ni les
+    graisses annoncées — une seule graisse d'écart, ce qui explique que le titre
+    reste franchement gras en jeu. Les fichiers de `src/fonts/` portent donc le
+    VRAI nom (196 et 194 Ko), et le lien avec l'asset se lit dans le script, pas
+    dans un nom de fichier faux. Déclarées dans `root-document` en
     `preload: false` : la `@font-face` existe partout, mais rien ne se télécharge
     tant qu'aucun portrait n'est peint. Elles ne couvrent que latin + hangûl
     (11 435 glyphes) : sur `jp` et `zh`, le jeu retombe lui aussi ailleurs.
-  - **Le crénage est DÉSACTIVÉ, et c'est fidèle** : les deux Noto ont un `GPOS`
+  - **Le crénage est DÉSACTIVÉ, et c'est fidèle** : les deux polices ont un `GPOS`
     avec du crénage que le navigateur applique par défaut, mais le `Text`
     historique d'Unity empile les chasses sans moteur de composition (c'est
     TextMeshPro qui a introduit le crénage). `fontKerning: 'none'` colle donc au
@@ -115,17 +120,17 @@
     la largeur par classe de caractère ; il sous-évaluait ce nom de **10,6 %**, soit
     16 unités sur 150 — le « n » passait hors cadre. Une estimation ne pouvait pas
     tenir, parce que la contrainte n'est pas « à peu près » : c'est déborder ou non.
-    Le composant porte donc UNE TABLE PAR POLICE — 101 chasses chacune, lues au
-    `hmtx` de NotoSans_Bold et NotoSans_Regular et divisées par leur `unitsPerEm`
-    de 1000, groupées par valeur pour rester relisibles ligne à ligne. Les 202
-    entrées ont été recontrôlées une à une contre les fichiers : zéro écart.
-    Vérifié ensuite en rejouant les 992 chaînes du corpus (nom et titre, quatre
-    langues) rendues par FreeType en layout BASIC — celui qui ne crène pas, comme
-    Unity : zéro débordement, le résidu (0,03 % au pire) étant l'arrondi entier du
-    corps par FreeType, qui s'efface quand on augmente la résolution du témoin.
-    Reste hors mesure ce que ces polices NE couvrent PAS — kana et idéogrammes,
-    peints par une police système et supposés pleine chasse ; le hangûl, lui, est
-    mesuré (11 172 syllabes à 0,874, identique dans les deux graisses).
+    Les chasses sont DÉRIVÉES, pas transcrites : `extract-font-metrics.py` relit le
+    `hmtx` des deux fichiers de `src/fonts/` et écrit `portrait-font-metrics.json`
+    — 263 chasses par police (tout ce qu'elles couvrent hors hangûl, pris en
+    entier plutôt que choisi à la main), plus la chasse unique des 11 172 syllabes
+    hangûl, que le script REFUSE de résumer si elle cesse d'être unique. Vérifié en
+    rejouant les 992 chaînes du corpus (nom et titre, quatre langues) rendues par
+    FreeType en layout BASIC — celui qui ne crène pas, comme Unity : zéro
+    débordement, le résidu (0,03 % au pire) étant l'arrondi entier du corps par
+    FreeType, qui s'efface quand on augmente la résolution du témoin. Reste hors
+    mesure ce que ces polices NE couvrent PAS — kana et idéogrammes, peints par une
+    police système et supposés pleine chasse.
   - **Le titre n'est pas affiché pour tout le monde**, et ça ne se déduit pas du
     `nickname` — les 124 en ont un en base. L'indication est `showNickName`
     (21 persos sur 124), et la règle du site vit déjà dans `characterNamePrefix`,
@@ -140,11 +145,47 @@
     `#FCDB42` (appuyée sur une absence dans le désassemblage), le sprite exact des
     étoiles allumées (le runtime écrase celui du prefab, et le littéral n'a pas pu
     être résolu), et la largeur des KANA et IDÉOGRAMMES — et d'eux seuls, puisque
-    aucune des deux Noto n'en porte : c'est une police système qui les peint, dans
-    le jeu comme ici, et on la suppose pleine chasse. Il ne reste donc que DEUX
-    incertitudes de fond ; celle sur les polices est levée. La variante
+    aucune des deux polices n'en porte : c'est une police système qui les peint,
+    dans le jeu comme ici, et on la suppose pleine chasse. Il ne reste donc que
+    DEUX incertitudes de fond ; celle sur les polices est levée. La variante
     `cuirecruit` de la boîte du nom (170 de large) a été essayée et écartée : elle
     déplaçait aussi l'origine et sortait le texte du cadre.
+  - **L'habillage `long` est ÉCARTÉ : le site ne veut que la carte.** Le composant
+    ne rend plus que `CharacterThumbnailList` — plus de table `SKIN`, plus de prop
+    `variant`, les rects sont posés en clair. L'avoir transcrit n'a rien coûté pour
+    autant : c'est en le comparant que la lecture s'est confirmée (rail, élément,
+    classe, voile, ancrage du niveau identiques au pixel) et que le nom écrasé s'est
+    expliqué. Ses QUATRE valeurs divergentes (boîte du nom en 100 au lieu de 150,
+    titre ancré dans celle du nom, `m_Alignment = 6` au lieu de 3, étoiles teintées
+    #FCDB42) restent notées en commentaire — pour qu'on sache que la différence a
+    été vue et écartée, pas manquée.
+  - **Trois nettoyages, après relecture demandée par Sevih.** `starTint` était
+    posé dans la table `SKIN` et jamais lu : un champ mort fait croire à un
+    branchement qui n'existe pas, la valeur passe en commentaire sur `SKIN.long`.
+    Les six étoiles allumées étaient six littéraux là où le prefab pose une
+    progression EXACTE (31,21 puis pas de 15, sans le flottement d'un pixel que
+    les creux, eux, portent) : elles se génèrent. Et la lisibilité du nom en petit
+    n'entre PAS dans le composant — un seuil que le jeu n'a pas n'a rien à faire
+    dans un fichier dont tout le reste est relevé ; c'est `hideName` que
+    l'appelant coupe, pour réécrire titre ET nom sous le cadre comme
+    `CharacterPortrait` le fait déjà, avec son repli sur le nom court curé.
+  - **La rangée « trois tailles » MONTRE ce déplacement** (remarque Sevih : sinon
+    elle affiche un nom illisible en donnant à croire que c'est le rendu voulu).
+    Elle rend TROIS portraits, pas six : chaque taille telle que l'appelant devra
+    la rendre — un premier jet doublait chaque taille pour laisser choisir le seuil
+    à l'œil, mais une rangée de comparaison n'est pas une rangée de rendu (seconde
+    remarque Sevih). Le seuil est donc posé, et c'est le SEUL nombre de la page qui
+    ne vienne pas du jeu : 128 px de large, la largeur à laquelle le nom passe sous
+    `text-xs` (12 px, le plus petit corps du site). Il vit sur la page, pas dans
+    `Portrait`, parce que c'est un choix de lisibilité et pas un relevé. Le repli
+    n'est pas imité mais EXÉCUTÉ : `fitsOnTwoLines` est exportée de
+    `CharacterPortrait` et appelée — la recopier aurait fait diverger la page de la
+    règle qu'elle illustre. Et le libellé du bas est un SEUL bloc « titre + nom »,
+    la forme que les appelants passent déjà : les séparer en deux lignes paraissait
+    plus fidèle au cadre, mais vidait la règle de son sens — vérifié sur les neuf
+    noms courts curés, un nom seul tient toujours sur deux lignes et le repli ne se
+    déclencherait jamais. En un bloc, « Kitsune of Eternity Tamamo-no-Mae » tient à
+    128 et 180 px et bascule sur « E.Tamamo » à 80.
 
 - **Les portraits de MONSTRE des guides rejoignent la vignette — six vues, et
   une règle pour trancher le reste.** Le premier balayage n'avait cherché que ce

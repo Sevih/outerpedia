@@ -23,22 +23,25 @@ const paybooc = localFont({
   display: 'swap',
 });
 // Les DEUX polices que le portrait du jeu utilise (`src/components/character/
-// Portrait`) : `Text_Name` et le niveau en NotoSans_Bold, `Text_Demi` en
-// NotoSans_Regular — résolues en suivant le `m_PathID` de leur `m_Font` jusqu'au
-// bundle `font2`, puis converties en woff2 depuis les fichiers du jeu. Elles ne
-// servent QUE là, donc `preload: false` : déclarer la @font-face ne télécharge
-// rien tant qu'aucun élément ne réclame la famille.
-const notoSansBold = localFont({
-  src: '../fonts/NotoSans_Bold.woff2',
+// Portrait`), résolues en suivant le `m_PathID` de leur `m_Font` jusqu'au bundle
+// `font2` puis converties en woff2 : le nom et le niveau prennent l'asset
+// `NotoSans_Bold`, le titre l'asset `NotoSans_Regular`. L'ÉTIQUETTE MENT — leur
+// table `name` dit SUIT ExtraBold (800) et SUIT Bold (700), une famille coréenne
+// de Sunn. Les graisses déclarées ici sont donc les VRAIES, et les fichiers
+// portent le vrai nom (cf. datagen/assets/extract-font-metrics.py).
+// Elles ne servent QUE au portrait, d'où `preload: false` : déclarer la
+// @font-face ne télécharge rien tant qu'aucun élément ne réclame la famille.
+const suitExtraBold = localFont({
+  src: '../fonts/SUIT-ExtraBold.woff2',
   variable: '--font-portrait-name',
-  weight: '700',
+  weight: '800',
   display: 'swap',
   preload: false,
 });
-const notoSansRegular = localFont({
-  src: '../fonts/NotoSans_Regular.woff2',
+const suitBold = localFont({
+  src: '../fonts/SUIT-Bold.woff2',
   variable: '--font-portrait-demi',
-  weight: '400',
+  weight: '700',
   display: 'swap',
   preload: false,
 });
@@ -56,7 +59,7 @@ export function RootDocument({ lang, children }: { lang: Lang; children: React.R
   return (
     <html
       lang={lang}
-      className={`${geistSans.variable} ${geistMono.variable} ${paybooc.variable} ${notoSansBold.variable} ${notoSansRegular.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${paybooc.variable} ${suitExtraBold.variable} ${suitBold.variable}`}
       // Fonds décoratifs → base R2 (globals.css les lit en var — cf. cssBackgroundVars).
       style={cssBackgroundVars as React.CSSProperties}
     >

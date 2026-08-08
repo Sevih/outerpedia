@@ -11,6 +11,12 @@ import { Thumbnail } from '@/components/ui/Thumbnail';
  * mots (un mot trop large est coupé par `wrap-break-word`, donc il consomme
  * plusieurs lignes). Volontairement grossier : se tromper d'un caractère fait
  * afficher « D.Stella » au lieu de « Demiurge Stella », ça ne casse rien.
+ *
+ * EXPORTÉE pour `/dev/portrait`, qui montre à quel moment le grand portrait doit
+ * sortir son nom du cadre : cette page-là rejouerait la règle de travers si elle
+ * la recopiait, et c'est la MÊME qui servira quand les appelants passeront au
+ * portrait. Ici, à l'inverse du grand format, l'estimation peut rester grossière
+ * — elle choisit entre deux libellés, elle ne décide pas d'un débordement.
  */
 const NARROW_PX = 6.6;
 const WIDE_PX = 12;
@@ -18,7 +24,7 @@ const SPACE_PX = 3.3;
 /** Scripts à pleine chasse (kana, hangul, idéogrammes, ponctuation large). */
 const WIDE_CHAR = /[ᄀ-ᇿ⺀-꓏가-퟿豈-﫿︰-﹏＀-｠]/;
 
-function fitsOnTwoLines(text: string, maxWidth: number): boolean {
+export function fitsOnTwoLines(text: string, maxWidth: number): boolean {
   const widthOf = (s: string): number =>
     [...s].reduce((w, ch) => w + (WIDE_CHAR.test(ch) ? WIDE_PX : NARROW_PX), 0);
   let lines = 1;

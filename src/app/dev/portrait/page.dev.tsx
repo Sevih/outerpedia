@@ -2,12 +2,14 @@
  * RENDU DE CONTRÔLE DE `Portrait` (dev-only, route `/dev/portrait` — `.dev.tsx`
  * non buildé en prod).
  *
- * Le portrait est la transcription de DEUX nœuds du jeu qui portent le même
- * MonoBehaviour : `CharacterThumbnailList` (la carte de la page « personnages »,
- * habillage `mainPage`, celui du défaut) et `CUICharacterLongThumbnail` (celui que
- * `CUIFaceIcon.m_LongThumbnail` désigne, habillage `long`). Cette page existe pour
- * les CONFRONTER au jeu, pas pour les illustrer : une rangée par axe que les
- * prefabs font varier, et rien de plus.
+ * Le portrait est la transcription de `CharacterThumbnailList` — la carte de la
+ * page « personnages ». Cette page existe pour la CONFRONTER au jeu, pas pour
+ * l'illustrer : une rangée par axe que le prefab fait varier, et rien de plus.
+ *
+ * Le jeu a un second nœud en 180×344, `CUICharacterLongThumbnail` (celui que
+ * `CUIFaceIcon.m_LongThumbnail` désigne), qui porte le même MonoBehaviour. Il a été
+ * transcrit d'abord puis écarté : le site ne veut que la carte. Les quatre valeurs
+ * où il diverge sont notées en commentaire dans `Portrait`.
  *
  * Elle porte aussi ce qui ne se voit PAS sur un rendu — ce que le portrait ne
  * partage pas avec la vignette carrée, et les écarts que les deux copies
@@ -16,8 +18,10 @@
  *
  * Composant SERVEUR — il lit la donnée générée directement.
  */
+import { fitsOnTwoLines } from '@/components/character/CharacterPortrait';
 import { Portrait } from '@/components/character/Portrait';
 import { characterNamePrefix, getAllCharacters } from '@/lib/data/characters';
+import { loadShortNames } from '@/lib/data/short-names';
 import { lRec } from '@/lib/i18n/localize';
 import type { Character } from '@contracts';
 
@@ -45,6 +49,27 @@ function first(pred: (c: Character) => boolean): Character {
   return c;
 }
 
+/**
+ * Ce qui s'écrit SOUS le cadre quand l'appelant coupe `hideName`, et c'est la règle
+ * de `CharacterPortrait` — appelée, pas recopiée.
+ *
+ * UN SEUL BLOC « titre + nom », pas deux lignes : c'est la forme que les appelants
+ * passent déjà (« Holy Night's Blessing Dianne »), et c'est elle que mesure
+ * `fitsOnTwoLines`. Séparer le titre du nom paraîtrait plus fidèle au cadre, mais
+ * viderait la règle de son sens : un nom seul tient presque toujours sur deux
+ * lignes, et le repli sur le nom court ne se déclencherait jamais.
+ *
+ * Le `+ 24` est celui de là-bas : le libellé déborde un peu du portrait, c'est voulu.
+ */
+const SHORT_NAMES = loadShortNames();
+
+function belowLabel(c: Character, px: number): string {
+  const prefix = characterNamePrefix(c, 'en');
+  const full = prefix ? `${prefix} ${name(c)}` : name(c);
+  const short = lRec(SHORT_NAMES[c.id] ?? {}, 'en');
+  return short && !fitsOnTwoLines(full, px + 24) ? short : full;
+}
+
 const ELEMENTS = ['fire', 'water', 'earth', 'light', 'dark'] as const;
 const CLASSES = ['striker', 'defender', 'ranger', 'mage', 'healer'] as const;
 
@@ -62,11 +87,29 @@ const STATE_SUBJECT = byId('2000086');
 /** Les paliers d'un 3★, de sa rareté à 9 — cf. la table `TRANSCENDENCE`. */
 const TRANS_STEPS = [3, 4, 5, 6, 7, 8, 9];
 
+/**
+ * Le `px` double la classe Tailwind parce que la règle des deux lignes de
+ * `CharacterPortrait` raisonne en pixels, pas en classes — c'est elle qu'on rejoue
+ * plus bas, telle quelle.
+ */
 const SIZES = [
-  { label: 'w-20', cls: 'w-20' },
-  { label: 'w-32', cls: 'w-32' },
-  { label: 'w-45 (taille du prefab)', cls: 'w-45' },
+  { label: 'w-20 · 80 px', cls: 'w-20', px: 80 },
+  { label: 'w-32 · 128 px', cls: 'w-32', px: 128 },
+  { label: 'w-45 · 180 px (prefab)', cls: 'w-45', px: 180 },
 ];
+
+/**
+ * LE SEUL NOMBRE DE CETTE PAGE QUI NE VIENNE PAS DU JEU, et il est ici — pas dans
+ * `Portrait` — précisément pour ça.
+ *
+ * En dessous de cette largeur de cadre, l'appelant coupe `hideName` et réécrit le
+ * nom sous le portrait. La valeur : le nom rendu vaut 16,9 unités sur 180, soit
+ * `16,9 × largeur / 180` px ; il passe sous `text-xs` (12 px, le plus petit corps
+ * du site) en dessous de 128. C'est un choix de lisibilité, pas un relevé — et
+ * c'est cette rangée qui doit le faire réviser, à l'œil, quand on branchera les
+ * appelants.
+ */
+const NAME_INSIDE_MIN_PX = 128;
 
 /**
  * Les cas qui mettent `m_BestFit` à l'épreuve : le nom le plus court du site, le
@@ -75,7 +118,7 @@ const SIZES = [
  * « Ais Wallenstein » est le cas qui a fait tomber le premier jet : la largeur y
  * était ESTIMÉE par classe de caractère et sortait 10,6 % trop courte, assez pour
  * que le « n » final passe hors cadre. Elle est maintenant lue au `hmtx` des deux
- * polices du jeu (NotoSans_Bold pour le nom, NotoSans_Regular pour le titre). Les
+ * polices du jeu (SUIT ExtraBold pour le nom, SUIT Bold pour le titre). Les
  * trois écritures non latines vérifient l'autre moitié de la table — hangûl à
  * 0,874, kana et idéogrammes à pleine chasse sur une police système.
  */
@@ -110,7 +153,7 @@ const VS_THUMBNAIL: [string, string, string][] = [
   [
     'Écriture du prefab',
     'unités absolues + `m_AnchoredPosition`',
-    '`mainPage` en unités absolues, `long` en ancres NORMALISÉES — d’où des rects résolus dans la table',
+    'unités absolues aussi — mais l’autre nœud écrit en ancres NORMALISÉES, d’où des rects RÉSOLUS pour pouvoir les comparer',
   ],
   [
     'Fond',
@@ -141,7 +184,7 @@ const VS_THUMBNAIL: [string, string, string][] = [
   [
     'Teinte des étoiles',
     '`m_Color` blanc',
-    'blanc en `mainPage`, #FCDB42 en `long` — le seul calque où les deux habillages divergent en couleur',
+    '`m_Color` blanc aussi — c’est l’autre nœud qui les teinte en #FCDB42, le seul calque où les deux divergent en couleur',
   ],
   ['Élément', 'coin HAUT-droit, débordant', 'coin BAS-droit, 46×46, à 9,4 du bord'],
   [
@@ -158,7 +201,7 @@ const VS_THUMBNAIL: [string, string, string][] = [
   [
     'Police',
     'une seule, celle du site',
-    'DEUX : NotoSans_Bold (nom, niveau) et NotoSans_Regular (titre), embarquées depuis le jeu',
+    'DEUX : SUIT ExtraBold (nom, niveau) et SUIT Bold (titre), embarquées depuis le jeu',
   ],
   ['Bannière BOSS', '`CT_Slot_Boss` au coin haut-gauche', 'aucune — `m_BossImage` est NULL'],
 ];
@@ -191,7 +234,7 @@ const DRIFT: { where: string; what: string; game: string }[] = [
   {
     where: 'CharacterCard — badge de recrutement',
     what: 'pose `RECRUIT_TAG_SPRITE` au coin haut-gauche',
-    game: 'aucun badge de RECRUTEMENT : `m_BossImage`, `m_NewImage`, `m_RareFrameImage`, `m_RecommandImage` sont NULL dans les deux habillages. Les deux seuls que le jeu pose sont core-fusion et synchro, et uniquement en `mainPage`.',
+    game: 'aucun badge de RECRUTEMENT : `m_BossImage`, `m_NewImage`, `m_RareFrameImage`, `m_RecommandImage` sont NULL. Les deux seuls que le jeu pose sont core-fusion et synchro, qui partagent un emplacement.',
   },
   {
     where: 'CharacterCard — élément / classe',
@@ -217,9 +260,9 @@ const DRIFT: { where: string; what: string; game: string }[] = [
 
 /** Ce qui reste incertain — listé à part, jamais noyé dans le reste. */
 const UNSURE: string[] = [
-  'La teinte #FCDB42, relevée mais NON APPLIQUÉE — et seulement sur l’habillage `long`, `mainPage` (le défaut) laissant ses étoiles blanches. `m_Color` MULTIPLIE le sprite, ce qui n’a pas d’équivalent CSS simple sur une image non monochrome. L’écart est faible (le sprite est déjà doré, 233/184/61, et la teinte le fonce vers l’orangé) mais réel ; la valeur est dans `SKIN.long.starTint`, prête à brancher d’un seul endroit.',
+  'La teinte #FCDB42 des étoiles allumées — relevée sur l’AUTRE nœud, celui qu’on ne rend plus. Le nœud rendu laisse les siennes blanches, donc le cas courant est exact et rien ne manque à l’écran ; ce qui reste incertain, c’est qu’on ne saurait pas la rendre s’il le fallait : `m_Color` MULTIPLIE le sprite, ce qui n’a pas d’équivalent CSS simple sur une image non monochrome. La valeur est en commentaire dans `Portrait`, avec les trois autres divergences.',
   'Le sprite exact des étoiles allumées. Le prefab pose `CT_Slot_Star`, mais `SetStarImage` fait `set_sprite` avec une ressource chargée par nom — le prefab est donc écrasé au runtime. Le littéral n’a pas pu être résolu (les slots de metadata ne sont pas mappés dans le dump). On sert `CM_icon_star_*`, comme la vignette carrée, puisque c’est la MÊME fonction qui charge : les deux bitmaps sont de toute façon quasi identiques (233,184,61 contre 239,188,62).',
-  'La largeur des KANA et des IDÉOGRAMMES, et d’eux seuls. Le reste ne s’estime plus : les chasses viennent du `hmtx` des deux polices du jeu, `NotoSans_Bold` pour le nom et `NotoSans_Regular` pour le titre, divisées par leur `unitsPerEm` de 1000 — et les 101 entrées de chaque table ont été recontrôlées une à une contre le fichier. Ce que ces polices ne couvrent PAS, c’est le japonais et le chinois (0 kana, 0 idéogramme sur 20 992) : là, c’est une police système qui peint, dans le jeu comme ici, et on la suppose pleine chasse. Le hangûl, lui, est mesuré : 11 172 syllabes à 0,874, la même valeur dans les deux graisses.',
+  'La largeur des KANA et des IDÉOGRAMMES, et d’eux seuls. Le reste ne s’estime plus : `datagen/assets/extract-font-metrics.py` relit le `hmtx` des deux polices et écrit `portrait-font-metrics.json` — 263 chasses par police, plus la chasse unique des 11 172 syllabes hangûl (0,874, identique dans les deux). Ce que ces polices ne couvrent PAS, c’est le japonais et le chinois (0 kana, 0 idéogramme sur 20 992) : là, c’est une police SYSTÈME qui peint, dans le jeu comme ici, et on la suppose pleine chasse — vrai de toutes les polices CJK usuelles, mais non mesuré.',
 ];
 
 /**
@@ -259,10 +302,11 @@ export default function DevPortrait() {
       <header className="mb-8">
         <h1 className="text-content-strong text-2xl font-bold">Portrait du jeu</h1>
         <p className="text-content-muted mt-1 max-w-3xl text-sm">
-          Transcription de <code>CUICharacterLongThumbnail</code>, le nœud désigné par{' '}
-          <code>CUIFaceIcon.m_LongThumbnail</code>. Onze copies concordantes dans quatre écrans ; le
-          nombre d’étoiles et leur sens de remplissage viennent du code (
-          <code>CUtilUI.SetStarImage</code>), pas du prefab.
+          Transcription de <code>CharacterThumbnailList</code>, la carte de la page « personnages »,
+          dans <code>CUICharacterMainPageScrollCell</code>. Le nombre d’étoiles et leur sens de
+          remplissage viennent du code (<code>CUtilUI.SetStarImage</code>), pas du prefab ; les
+          chasses des deux polices viennent des fichiers eux-mêmes (
+          <code>portrait-font-metrics.json</code>).
         </p>
       </header>
 
@@ -389,57 +433,94 @@ export default function DevPortrait() {
         </div>
       </section>
 
-      <Row
-        title="Trois tailles"
-        desc="Toute la géométrie est en % du cadre : le texte suit par @container, et la proportion est tenue par aspect-180/344."
-        chars={SIZES.map(() => TRANS_SUBJECT)}
-        render={(c, i) => (
-          <figure key={SIZES[i].label} className="flex flex-col items-center gap-1">
-            <Portrait
-              id={c.id}
-              name={name(c)}
-              rarity={c.rarity}
-              element={c.element}
-              cls={c.class}
-              level={100}
-              className={SIZES[i].cls}
-            />
-            <figcaption className="text-content-subtle font-mono text-xs">
-              {SIZES[i].label}
-            </figcaption>
-          </figure>
-        )}
-      />
+      <section className="mb-8">
+        <h2 className="text-content-strong font-semibold">
+          Trois tailles — et le point où le nom sort du cadre
+        </h2>
+        <p className="text-content-muted mb-3 max-w-3xl text-sm">
+          Toute la géométrie est en % du cadre : le texte suit par <code>@container</code>, et la
+          proportion est tenue par <code>aspect-180/344</code>. Il en découle MÉCANIQUEMENT que le
+          texte rétrécit avec le portrait — le nom passe de 16,9 px à 180 de large, à 12,0 px à 128,
+          à 7,5 px à 80 ; le titre, lui, de 14 à 10 puis 6,2.
+        </p>
+        <p className="text-content-muted mb-3 max-w-3xl text-sm">
+          Chaque taille est donc rendue ICI COMME L’APPELANT DEVRA LA RENDRE, pas deux fois : au
+          large, le nom et son titre restent dans le cadre ; en dessous de{' '}
+          <code>{NAME_INSIDE_MIN_PX} px</code>, l’appelant coupe avec <code>hideName</code> et les
+          réécrit sous le cadre en un SEUL bloc « titre + nom » — la forme que les appelants passent
+          déjà. Les séparer en deux lignes paraîtrait plus fidèle au cadre, mais viderait la règle
+          de son sens : un nom seul tient presque toujours sur deux lignes.
+        </p>
+        <p className="text-content-muted mb-3 max-w-3xl text-sm">
+          <strong className="text-content-strong">
+            Ce seuil est LE SEUL nombre de cette page qui ne vienne pas du jeu.
+          </strong>{' '}
+          Il vaut la largeur à laquelle le nom tombe sous <code>text-xs</code> (12 px), le plus
+          petit corps du site — c’est un choix, pas un relevé, et c’est pour ça qu’il vit ici et non
+          dans <code>Portrait</code>. Le repli sur le nom court, lui, n’est pas imité mais EXÉCUTÉ :{' '}
+          <code>fitsOnTwoLines</code>, importée de <code>CharacterPortrait</code>, remplace le
+          libellé dès qu’il déborde deux lignes — d’où «{' '}
+          {lRec(SHORT_NAMES[STATE_SUBJECT.id] ?? {}, 'en')} » à 80 px là où 128 et 180 garderaient «{' '}
+          {characterNamePrefix(STATE_SUBJECT, 'en')} {name(STATE_SUBJECT)} ».
+        </p>
+        <div className="flex flex-wrap items-start gap-6">
+          {SIZES.map(({ label, cls, px }) => {
+            const inside = px >= NAME_INSIDE_MIN_PX;
+            return (
+              <figure key={label} className={`flex flex-col items-center gap-1 ${cls}`}>
+                <Portrait
+                  id={STATE_SUBJECT.id}
+                  name={name(STATE_SUBJECT)}
+                  rarity={STATE_SUBJECT.rarity}
+                  element={STATE_SUBJECT.element}
+                  cls={STATE_SUBJECT.class}
+                  level={100}
+                  prefix={characterNamePrefix(STATE_SUBJECT, 'en') ?? undefined}
+                  hideName={!inside}
+                  className="w-full"
+                />
+                {/* Le chrome de l'APPELANT — classes et largeur de mesure
+                    (`px + 24`) reprises de `CharacterPortrait`. */}
+                {!inside && (
+                  <span className="text-content-strong line-clamp-2 min-h-[2.5em] w-full text-center text-xs leading-tight font-semibold wrap-break-word">
+                    {belowLabel(STATE_SUBJECT, px)}
+                  </span>
+                )}
+                <figcaption className="text-content-subtle font-mono text-xs">
+                  {label} · {inside ? 'dans le cadre' : 'sous le cadre'}
+                </figcaption>
+              </figure>
+            );
+          })}
+        </div>
+      </section>
 
       <section className="mb-8">
-        <h2 className="text-content-strong font-semibold">Les deux habillages, côte à côte</h2>
+        <h2 className="text-content-strong font-semibold">La carte, et ses deux badges</h2>
         <p className="text-content-muted mb-3 text-sm">
-          Le jeu a UN MonoBehaviour (<code>CUICharacterThumbnail</code>) et deux nœuds qui le
-          portent en 180×344. Rail d’étoiles, élément, classe, voile et ancrage du niveau y sont
-          rigoureusement identiques ; ce qui change tient en quatre lignes — la boîte du nom (150
-          contre 100, donc un nom plus gros à gauche), l’alignement vertical du titre (MiddleLeft
-          contre LowerLeft), la teinte des étoiles, et l’emplacement de badge que <code>long</code>{' '}
-          n’a pas. <code>mainPage</code> est le défaut : c’est la carte de la page « personnages »,
-          celle que les grilles du site imitent.
+          Le nœud rendu est <code>CharacterThumbnailList</code>, la carte de la page « personnages »
+          — celle que les grilles du site imitent. Le jeu en a un SECOND en 180×344,{' '}
+          <code>CUICharacterLongThumbnail</code> (pvploading, synchro, infiltrate, recruit), qui
+          porte le même <code>CUICharacterThumbnail</code> ; il a été transcrit d’abord, puis
+          écarté. Ce n’est pas une perte : les deux ne divergent que sur QUATRE valeurs, notées en
+          commentaire dans le composant, et le lire a servi à confirmer tout le reste — rail
+          d’étoiles, élément, classe, voile et ancrage du niveau y sont rigoureusement identiques.
         </p>
         <div className="flex flex-wrap items-end gap-4">
-          {(['mainPage', 'long'] as const).map((v) => (
-            <figure key={v} className="flex flex-col items-center gap-1">
-              <Portrait
-                id={STATE_SUBJECT.id}
-                name={name(STATE_SUBJECT)}
-                rarity={STATE_SUBJECT.rarity}
-                transcendence={7}
-                element={STATE_SUBJECT.element}
-                cls={STATE_SUBJECT.class}
-                level={100}
-                prefix={characterNamePrefix(STATE_SUBJECT, 'en') ?? undefined}
-                variant={v}
-                className="w-45"
-              />
-              <figcaption className="text-content-subtle font-mono text-xs">{v}</figcaption>
-            </figure>
-          ))}
+          <figure className="flex flex-col items-center gap-1">
+            <Portrait
+              id={STATE_SUBJECT.id}
+              name={name(STATE_SUBJECT)}
+              rarity={STATE_SUBJECT.rarity}
+              transcendence={7}
+              element={STATE_SUBJECT.element}
+              cls={STATE_SUBJECT.class}
+              level={100}
+              prefix={characterNamePrefix(STATE_SUBJECT, 'en') ?? undefined}
+              className="w-45"
+            />
+            <figcaption className="text-content-subtle font-mono text-xs">nom + titre</figcaption>
+          </figure>
           {/* Les deux badges partagent UN emplacement (le `VerticalLayoutGroup` de
               `Sync_Core` cale son enfant actif en bas), et ils s'excluent : un
               core-fusion ne peut pas être synchronisé. On les montre donc
@@ -461,9 +542,7 @@ export default function DevPortrait() {
                 {...flag}
                 className="w-45"
               />
-              <figcaption className="text-content-subtle font-mono text-xs">
-                mainPage + {label}
-              </figcaption>
+              <figcaption className="text-content-subtle font-mono text-xs">{label}</figcaption>
             </figure>
           ))}
         </div>

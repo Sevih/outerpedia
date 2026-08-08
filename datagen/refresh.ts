@@ -180,6 +180,12 @@ export async function refresh(opts: RefreshOptions = {}): Promise<void> {
       'datagen/assets/extract-face-layout.py',
     );
     pyStep('sprite-rect (atlas → sprite-rect.json)', 'datagen/assets/extract-sprite-rect.py');
+    // Celle-ci ne lit PAS `.gamedata` mais `src/fonts/` (committé) : elle tourne
+    // donc même sans machine de datamine, et ne change que si une police change.
+    pyStep(
+      'font-metrics (polices → portrait-font-metrics.json)',
+      'datagen/assets/extract-font-metrics.py',
+    );
     step('build    (générateurs → data/extracted)', 'datagen/build.ts');
     step(
       apply ? 'promote  (extracted → generated)' : 'promote  (revue du diff — dry-run)',
