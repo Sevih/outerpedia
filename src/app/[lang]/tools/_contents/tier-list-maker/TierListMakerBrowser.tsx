@@ -19,6 +19,14 @@ import {
 import { useStoredState, type StoreSpec } from '@/lib/client-storage';
 import { img, ELEMENT_ORDER } from '@/lib/images';
 import { FilterPill } from '@/components/character/filters/FilterPill';
+import { Portrait } from '@/components/character/Portrait';
+import {
+  drawPortrait,
+  portraitHeight,
+  portraitSources,
+  resolvePortraitFonts,
+  type PortraitPaint,
+} from '@/components/character/portrait-canvas';
 import { TIER_PALETTE, buildCanon, decodeState, encodeState, type Tier } from './share-codec';
 
 // ── Types ──
@@ -31,8 +39,21 @@ export interface TierItem {
   short?: string;
   /** Vignette carrée (face icon / EE / portrait de boss). */
   img: string;
-  /** Portrait haut `CT_*` (persos + costumes) — grille en mode « cartes ». */
-  card?: string;
+  /**
+   * Id du modèle (perso ou costume) dont on peut peindre le PORTRAIT du jeu —
+   * absent pour les EE et les boss, qui n'en ont pas, et c'est ce qui décide qu'un
+   * item est rangeable en mode « cartes ».
+   *
+   * L'ID et non l'URL : le mode « cartes » ne colle plus une image, il rend le
+   * `Portrait` transcrit du prefab, qui compose lui-même ses sources.
+   */
+  cardId?: string;
+  /**
+   * Titre du jeu au-dessus du nom (`Text_Demi`) — le nickname des persos qui
+   * l'affichent, cf. `characterNamePrefix`. Le portrait l'écrit dans un champ à
+   * part ; `label` reste donc le nom NU.
+   */
+  prefix?: string;
   element?: string;
   cls?: string;
   rarity?: number;
@@ -306,13 +327,19 @@ const ITEM_SIZES: Record<IconSize, { box: string; col: string }> = {
   l: { box: 'h-16 w-16 sm:h-20 sm:w-20', col: 'w-16 sm:w-20' },
 };
 
-/** Largeurs des cartes de la grille rangée (portrait `CT_*`, ratio 120×231). */
+/**
+ * Largeurs des cartes de la grille rangée. La HAUTEUR ne s'écrit plus ici : c'est
+ * `Portrait` qui porte le ratio du cadre du jeu (180×344), et il n'était pas celui
+ * qu'on posait — `aspect-[120/231]` valait 0,5195 quand le prefab dit 0,5233, soit
+ * un cadre étiré de 0,7 % que l'`object-cover` rattrapait en ROGNANT l'art.
+ */
 const CARD_SIZES: Record<IconSize, string> = {
   s: 'w-[66px]',
   m: 'w-25',
   l: 'w-30',
 };
-const CARD_ASPECT = 'aspect-[120/231]';
+/** Les mêmes largeurs en pixels — l'export PNG et l'aperçu de glissé en ont besoin. */
+const CARD_PX: Record<IconSize, number> = { s: 66, m: 100, l: 120 };
 
 type ItemViewProps = {
   item: TierItem;
@@ -425,6 +452,23 @@ const ItemView = memo(function ItemView({
 
 // ── Carte pleine (grille rangée en mode « cartes ») ──
 
+/**
+ * LA CARTE, C'EST LE PORTRAIT DU JEU — plus le chrome de l'outil.
+ *
+ * Elle en portait une IMITATION : l'art collé en `object-cover` dans un cadre au
+ * mauvais ratio, les étoiles empilées à la verticale sans le rail sombre ni les six
+ * creux, la classe à 26 % de la largeur et l'élément à 24 % (le prefab dit 20,6 %
+ * et 25,6 %, et ils ne sont PAS alignés l'un sur l'autre), le nom posé sur un
+ * dégradé qui n'existe pas dans le prefab (`LowBg` y est inactif), et pas de titre
+ * du tout. Trois transcriptions manuscrites du même nœud vivaient sur le site ; il
+ * n'en reste qu'une, et elle est lue au prefab.
+ *
+ * Les réglages de l'outil se traduisent en props du portrait plutôt qu'en calques
+ * dessinés à côté : l'élément et la classe se coupent en n'étant pas passés, le nom
+ * par `hideName`, les étoiles par `hideStars`. Seul le badge de recrutement reste
+ * posé PAR-DESSUS — c'est une convention éditoriale du site, le jeu n'en a pas sur
+ * ce nœud (cf. `CharacterCard`, qui fait exactement pareil).
+ */
 type CardViewProps = {
   item: TierItem;
   selected: boolean;
@@ -470,58 +514,24 @@ const CardView = memo(function CardView({
     >
       <div
         className={[
-          CARD_ASPECT,
           'relative w-full overflow-hidden rounded transition',
           selected ? 'ring-2 ring-amber-400' : 'ring-line-subtle ring-1',
         ].join(' ')}
       >
-        <img
-          src={item.card ?? item.img}
-          alt={label}
-          draggable={false}
-          loading="lazy"
-          className="bg-surface-overlay h-full w-full object-cover"
-          onError={(e) => {
-            e.currentTarget.style.visibility = 'hidden';
-          }}
+        <Portrait
+          id={item.cardId!}
+          name={label}
+          prefix={item.prefix}
+          rarity={item.rarity ?? 1}
+          element={showElement ? item.element : undefined}
+          cls={showClass ? item.cls : undefined}
+          hideName={!showName}
+          hideStars={!showStars}
+          className="w-full"
         />
+        {/* Le badge de recrutement — le seul calque qui reste par-dessus : c'est
+            une convention du site, pas du prefab (cf. `CharacterCard`). */}
         {badge && <img src={badge} alt="" aria-hidden className="absolute top-1 left-1 w-[60%]" />}
-        {showStars && item.rarity ? (
-          <span className="absolute top-1 right-1 flex flex-col items-center">
-            {Array.from({ length: item.rarity }, (_, i) => (
-              <img
-                key={i}
-                src={img.star()}
-                alt=""
-                aria-hidden
-                className="h-3 w-3 drop-shadow-md"
-                width={12}
-                height={12}
-              />
-            ))}
-          </span>
-        ) : null}
-        {showClass && item.cls && (
-          <img
-            src={img.klass(item.cls)}
-            alt=""
-            aria-hidden
-            className="absolute right-1 bottom-[26%] w-[26%] drop-shadow-md"
-          />
-        )}
-        {showElement && item.element && (
-          <img
-            src={img.element(item.element)}
-            alt=""
-            aria-hidden
-            className="absolute right-1 bottom-1 w-[24%] drop-shadow-md"
-          />
-        )}
-        {showName && (
-          <span className="from-scrim/90 text-content-strong absolute inset-x-0 bottom-0 bg-linear-to-t to-transparent px-1 pt-4 pb-1 text-center text-[10px] leading-tight font-semibold">
-            {label}
-          </span>
-        )}
       </div>
       {skinLabel && (
         <span className="text-content-subtle mt-0.5 line-clamp-2 w-full text-center text-[10px] leading-tight">
@@ -577,7 +587,8 @@ function DropPreview({
   size: IconSize;
   card?: boolean;
 }) {
-  const sizeCls = card ? `${CARD_SIZES[size]} ${CARD_ASPECT}` : ITEM_SIZES[size].box;
+  // Le cadre du jeu (180×344) quand c'est une carte, sinon la boîte carrée.
+  const sizeCls = card ? `${CARD_SIZES[size]} aspect-180/344` : ITEM_SIZES[size].box;
   return (
     <div
       className={`${sizeCls} shrink-0 overflow-hidden rounded-md border-2 border-dashed border-amber-400/80 bg-amber-400/10`}
@@ -1062,12 +1073,12 @@ export function TierListMakerBrowser({
 
   // ── Export PNG (reflète les réglages d'affichage à l'écran) ──
   const exportPng = useCallback(async () => {
-    // Géométrie : portrait carré sans cartes, carte haute sinon.
+    // Géométrie : vignette carrée sans cartes, cadre du jeu sinon — le RATIO DU
+    // PREFAB (180×344), pas le 120×231 que cet export supposait.
     const ICON = { s: 56, m: 76, l: 100 }[iconSize];
-    const CARD_W = { s: 66, m: 100, l: 120 }[cardSize];
-    const CARD_H = Math.round((CARD_W * 231) / 120);
+    const CARD_W = CARD_PX[cardSize];
     const cellW = showCards ? CARD_W : ICON;
-    const cellH = showCards ? CARD_H : ICON;
+    const cellH = showCards ? Math.round(portraitHeight(CARD_W)) : ICON;
     const PER_ROW = 12,
       PAD = 20,
       LABEL_W = 110;
@@ -1087,21 +1098,43 @@ export function TierListMakerBrowser({
         im.src = src;
       });
 
+    /**
+     * L'ÉTAT DE PORTRAIT d'un item, dérivé UNE FOIS des réglages — la même valeur
+     * sert à lister les images à précharger et à les peindre. Deux dérivations
+     * séparées, c'était la panne naturelle de cet export : un calque dessiné sans
+     * avoir été chargé ne peint rien, en silence.
+     */
+    const paintOf = (it: TierItem): PortraitPaint => ({
+      id: it.cardId!,
+      name: labelFor(it),
+      prefix: it.prefix,
+      rarity: it.rarity ?? 1,
+      element: showElement ? it.element : undefined,
+      cls: showClass ? it.cls : undefined,
+      hideName: !showNames,
+      hideStars: !showRarity,
+    });
+    const isCardItem = (it: TierItem) => !!(showCards && it.cardId);
+
     // Toutes les URLs : vignettes + les overlays que les réglages demandent.
     const urls = new Set<string>();
     for (const tr of tiers)
       for (const k of tr.items) {
         const it = itemMap.get(k);
         if (!it) continue;
-        urls.add(showCards && it.card ? it.card : it.img);
+        if (isCardItem(it)) {
+          for (const u of portraitSources(paintOf(it))) urls.add(u);
+          if (showCardTags) {
+            const b = recruitBadge(it.tags);
+            if (b) urls.add(b);
+          }
+          continue;
+        }
+        urls.add(it.img);
         if (showElement && it.element) urls.add(img.element(it.element));
         if (showClass && it.cls) urls.add(img.klass(it.cls));
-        if (showCards && showCardTags) {
-          const b = recruitBadge(it.tags);
-          if (b) urls.add(b);
-        }
+        if (showRarity) urls.add(img.star());
       }
-    if (showRarity) urls.add(img.star());
     const loaded = new Map<string, HTMLImageElement>();
     await Promise.all(
       [...urls].map(async (u) => {
@@ -1109,6 +1142,10 @@ export function TierListMakerBrowser({
         if (im) loaded.set(u, im);
       }),
     );
+    // Les polices du jeu : le canvas ne résout pas une variable CSS, et
+    // `next/font` en `preload: false` n'a rien téléchargé tant qu'aucun portrait
+    // n'a été peint à l'écran (cf. `resolvePortraitFonts`).
+    const gameFonts = showCards ? await resolvePortraitFonts() : null;
 
     const canvas = document.createElement('canvas');
     // willReadFrequently force un canvas CPU : readback plus rapide, et
@@ -1120,6 +1157,10 @@ export function TierListMakerBrowser({
     // Deux lignes possibles sous une cellule — nom du PERSO (toggle « noms »)
     // et nom du COSTUME (toggle « noms de skin ») — même règle que l'écran,
     // tuiles comme cartes.
+    //
+    // Une carte n'écrit PAS son nom dessous : le portrait le porte DANS le cadre,
+    // avec son titre, exactement comme à l'écran. Le nom du costume, lui, reste en
+    // dessous dans les deux modes — le jeu n'a pas de champ pour lui.
     ctx.font = NAME_FONT;
     const baseNameLines = new Map<string, string[]>();
     const skinNameLines = new Map<string, string[]>();
@@ -1127,7 +1168,7 @@ export function TierListMakerBrowser({
       for (const k of tr.items) {
         const it = itemMap.get(k);
         if (!it) continue;
-        if (showNames)
+        if (showNames && !isCardItem(it))
           baseNameLines.set(k, wrapLabel(ctx, shortFor(it) ?? labelFor(it), cellW - 2));
         if (it.isSkin && showSkinNames)
           skinNameLines.set(k, wrapLabel(ctx, it.short ?? it.label, cellW - 2));
@@ -1177,6 +1218,24 @@ export function TierListMakerBrowser({
         h = im.height * k;
       ctx.drawImage(im, dx + (d - w) / 2, dy + (d - h) / 2, w, h);
     };
+    /** Les lignes de nom SOUS une cellule — nom du perso puis nom du costume. */
+    const drawNamesBelow = (key: string, cellX: number, cellY: number) => {
+      ctx.font = NAME_FONT;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      let ty = cellY + cellH + 2;
+      const bn = baseNameLines.get(key) ?? [];
+      if (bn.length) {
+        ctx.fillStyle = '#d4d4d8';
+        bn.forEach((ln, i) => ctx.fillText(ln, cellX + cellW / 2, ty + i * NAME_LH));
+        ty += bn.length * NAME_LH;
+      }
+      const sn = skinNameLines.get(key) ?? [];
+      if (sn.length) {
+        ctx.fillStyle = '#a1a1aa';
+        sn.forEach((ln, i) => ctx.fillText(ln, cellX + cellW / 2, ty + i * NAME_LH));
+      }
+    };
 
     let y = PAD;
     if (titleH) {
@@ -1207,59 +1266,49 @@ export function TierListMakerBrowser({
       tr.items.forEach((k, idx) => {
         const it = itemMap.get(k);
         if (!it) return;
-        const isCard = !!(showCards && it.card);
-        const src = isCard ? it.card! : it.img;
-        const im = loaded.get(src);
-        if (!im) return;
+        const isCard = isCardItem(it);
         const cellX = PAD + LABEL_W + (idx % PER_ROW) * cellW;
         const cellY = y + Math.floor(idx / PER_ROW) * cellTotalH[ti];
-        const pad = isCard ? 0 : 3;
-        const boxW = cellW - pad * 2;
-        const boxH = cellH - pad * 2;
-        const bx = cellX + pad,
-          by = cellY + pad;
-        // Vignette (arrondie, recadrée pour remplir)
-        ctx.save();
-        ctx.beginPath();
-        ctx.roundRect(bx, by, boxW, boxH, isCard ? 4 : 6);
-        ctx.clip();
-        drawCover(im, bx, by, boxW, boxH);
-        ctx.restore();
-        // Overlays — positions par mode (cartes : élément/classe en bas à
-        // droite ; portrait : élément en haut, classe sur le côté).
+
+        // ── Mode CARTES : le portrait du jeu, peint par le même relevé que le
+        // rendu à l'écran (`portrait-canvas`). Aucune géométrie ici. ──
         if (isCard) {
-          if (showElement && it.element) {
-            const el = loaded.get(img.element(it.element));
-            if (el) {
-              const s = boxW * 0.24;
-              drawContain(el, bx + boxW - s - 2, by + boxH - s - 4, s);
-            }
-          }
-          if (showClass && it.cls) {
-            const cl = loaded.get(img.klass(it.cls));
-            if (cl) {
-              const s = boxW * 0.26;
-              drawContain(cl, bx + boxW - s - 2, by + boxH - s * 2 - 8, s);
-            }
-          }
-          if (showRarity && it.rarity) {
-            const star = loaded.get(img.star());
-            if (star) {
-              const s = boxW * 0.16;
-              for (let r = 0; r < it.rarity; r++)
-                drawContain(star, bx + boxW - s - 4, by + 4 + r * (s + 1), s);
-            }
-          }
+          drawPortrait(
+            ctx,
+            { x: cellX, y: cellY, w: cellW, h: cellH },
+            paintOf(it),
+            loaded,
+            gameFonts,
+          );
+          // Le badge de recrutement PAR-DESSUS — convention du site, pas du
+          // prefab, exactement comme à l'écran.
           if (showCardTags) {
             const badgeSrc = recruitBadge(it.tags);
             const bd = badgeSrc ? loaded.get(badgeSrc) : null;
             if (bd) {
-              const bw = boxW * 0.6;
-              const bh = (bw * bd.height) / bd.width;
-              ctx.drawImage(bd, bx + 2, by + 2, bw, bh);
+              const bw = cellW * 0.6;
+              ctx.drawImage(bd, cellX, cellY, bw, (bw * bd.height) / bd.width);
             }
           }
-        } else {
+          drawNamesBelow(k, cellX, cellY);
+          return;
+        }
+
+        // ── Mode VIGNETTES : inchangé (la vignette carrée reste à porter). ──
+        const im = loaded.get(it.img);
+        if (!im) return;
+        const pad = 3;
+        const boxW = cellW - pad * 2;
+        const boxH = cellH - pad * 2;
+        const bx = cellX + pad,
+          by = cellY + pad;
+        ctx.save();
+        ctx.beginPath();
+        ctx.roundRect(bx, by, boxW, boxH, 6);
+        ctx.clip();
+        drawCover(im, bx, by, boxW, boxH);
+        ctx.restore();
+        {
           if (showElement && it.element) {
             const el = loaded.get(img.element(it.element));
             if (el) {
@@ -1287,23 +1336,7 @@ export function TierListMakerBrowser({
             }
           }
         }
-        // Noms sous la cellule — nom du perso puis nom du costume (mêmes
-        // règles que l'écran, cf. le pré-wrap plus haut).
-        ctx.font = NAME_FONT;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'top';
-        let ty = cellY + cellH + 2;
-        const bn = baseNameLines.get(k) ?? [];
-        if (bn.length) {
-          ctx.fillStyle = '#d4d4d8';
-          bn.forEach((ln, i) => ctx.fillText(ln, cellX + cellW / 2, ty + i * NAME_LH));
-          ty += bn.length * NAME_LH;
-        }
-        const sn = skinNameLines.get(k) ?? [];
-        if (sn.length) {
-          ctx.fillStyle = '#a1a1aa';
-          sn.forEach((ln, i) => ctx.fillText(ln, cellX + cellW / 2, ty + i * NAME_LH));
-        }
+        drawNamesBelow(k, cellX, cellY);
       });
       y += rh;
     });
@@ -1615,8 +1648,8 @@ export function TierListMakerBrowser({
                       const showMarker = !!drag && dropAt?.tierId === tier.id;
                       const markerIdx = dropAt?.index ?? -1;
                       const dragIt = drag ? itemMap.get(drag.key) : undefined;
-                      const useCardForDrag = showCards && !!dragIt?.card;
-                      const dragImg = useCardForDrag ? dragIt!.card : dragIt?.img;
+                      const useCardForDrag = showCards && !!dragIt?.cardId;
+                      const dragImg = useCardForDrag ? img.portrait(dragIt!.cardId!) : dragIt?.img;
                       const marker = (
                         <DropPreview
                           key="drop-marker"
@@ -1630,7 +1663,7 @@ export function TierListMakerBrowser({
                         if (showMarker && i === markerIdx) nodes.push(marker);
                         const it = itemMap.get(key);
                         if (!it) return;
-                        if (showCards && it.card) {
+                        if (showCards && it.cardId) {
                           nodes.push(
                             <CardView
                               key={key}

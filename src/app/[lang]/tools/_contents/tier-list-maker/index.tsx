@@ -1,7 +1,7 @@
 import { getT } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
-import { getAllCharacters } from '@/lib/data/characters';
+import { characterNamePrefix, getAllCharacters } from '@/lib/data/characters';
 import { loadShortNames } from '@/lib/data/short-names';
 import { loadDataJson } from '@/lib/data/disk';
 import { monsterIconSrc } from '@/lib/data/monsters';
@@ -75,7 +75,10 @@ export default async function TierListMaker({ lang }: { lang: Lang }) {
       label,
       short,
       img: img.face(c.id),
-      card: img.portrait(c.id),
+      cardId: c.id,
+      // Le portrait écrit le titre et le nom dans DEUX champs séparés : `label`
+      // reste le nom nu, le titre voyage à côté (cf. `characterDisplayName`).
+      prefix: characterNamePrefix(c, lang) ?? undefined,
       element: c.element,
       cls: c.class,
       rarity: c.rarity,
@@ -88,7 +91,7 @@ export default async function TierListMaker({ lang }: { lang: Lang }) {
         label: lRec(cos.name, lang),
         short: shorts[cos.model]?.[lang],
         img: img.face(cos.model),
-        card: img.portrait(cos.model),
+        cardId: cos.model,
         // un costume garde l'élément/classe/rareté du personnage
         element: c.element,
         cls: c.class,
