@@ -3,7 +3,8 @@ import type { Lang } from '@/lib/i18n/config';
 import { buildItemListJsonLd, buildUrl, getMonthYear } from '@/lib/seo';
 import JsonLd from '@/components/seo/JsonLd';
 import {
-  characterDisplayName,
+  characterBaseName,
+  joinDisplayName,
   characterNamePrefix,
   characterSearchNames,
   getCharacterListItems,
@@ -11,6 +12,8 @@ import {
 } from '@/lib/data/characters';
 import { characterTags, loadCuratedCharacters } from '@/lib/data/curated';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
+import { loadShortNames } from '@/lib/data/short-names';
+import { lRec } from '@/lib/i18n/localize';
 import { getEEViews } from '@/lib/data/equipment';
 import {
   TierListBrowser,
@@ -72,6 +75,7 @@ export async function TierListTool({ lang, mode }: { lang: Lang; mode: TierListM
   const slug = SLUG[mode];
   const curated = loadCuratedCharacters();
   const aliases = loadSearchAliases();
+  const shorts = loadShortNames();
   const ranks = rankByCharacter(mode);
 
   const rows: TierListRow[] = getCharacterListItems()
@@ -80,8 +84,9 @@ export async function TierListTool({ lang, mode }: { lang: Lang; mode: TierListM
       return {
         id: c.id,
         slug: slugForId(c.id) ?? c.id,
-        name: characterDisplayName(c, lang),
+        name: characterBaseName(c, lang),
         prefix: characterNamePrefix(c, lang),
+        shortName: lRec(shorts[c.id] ?? {}, lang) || undefined,
         searchNames: characterSearchNames(c, aliases[c.id]),
         element: c.element,
         class: c.class,
@@ -105,7 +110,11 @@ export async function TierListTool({ lang, mode }: { lang: Lang; mode: TierListM
     items: [...rows]
       .filter((r) => r.rank)
       .sort(tierListRankOrder((r) => r.rank))
-      .map((r) => ({ name: r.name, url: buildUrl(lang, `/characters/${r.slug}`) })),
+      // JSON-LD : le nom COMPLET, recomposé — c'est celui que le lecteur cherche.
+      .map((r) => ({
+        name: joinDisplayName(r.prefix, r.name),
+        url: buildUrl(lang, `/characters/${r.slug}`),
+      })),
   });
 
   const labels = buildLabels(t, mode, rows);

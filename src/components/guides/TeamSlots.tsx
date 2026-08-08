@@ -1,8 +1,12 @@
 import type { ReactNode } from 'react';
 import type { Lang } from '@/lib/i18n/config';
-import { characterNamePrefix, resolveGuideCharacter } from '@/lib/data/characters';
+import {
+  characterBaseName,
+  characterNamePrefix,
+  resolveGuideCharacter,
+} from '@/lib/data/characters';
 import { characterTags, loadCuratedCharacters } from '@/lib/data/curated';
-import { ResponsiveCharacterCard } from '@/components/character/ResponsiveCharacterCard';
+import { CharacterCard } from '@/components/character/CharacterCard';
 import { TeamSlotCarousel } from './TeamSlotCarousel';
 
 /**
@@ -13,7 +17,7 @@ import { TeamSlotCarousel } from './TeamSlotCarousel';
  * carrousel le dit (cf. `TeamSlotCarousel`).
  *
  * Des CARTES, pas des vignettes : c'est la même brique que le roster
- * (`ResponsiveCharacterCard`, aux cotes du jeu), donc le lecteur reconnaît d'un
+ * (`CharacterCard`, aux cotes du jeu), donc le lecteur reconnaît d'un
  * coup d'œil ce qu'il voit — élément, classe, rareté, badge de recrutement, nom.
  * Une face icon de 64 px ne porte que la moitié de ça.
  */
@@ -66,11 +70,11 @@ export function TeamSlots({
               prevLabel={labels.prev}
               nextLabel={labels.next}
             >
-              {resolved.map(({ character: c, name, href }) => (
-                <ResponsiveCharacterCard
+              {resolved.map(({ character: c, href }) => (
+                <CharacterCard
                   key={c.id}
                   id={c.id}
-                  name={name}
+                  name={characterBaseName(c, lang)}
                   prefix={characterNamePrefix(c, lang)}
                   element={c.element}
                   classType={c.class}

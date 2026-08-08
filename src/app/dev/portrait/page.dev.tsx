@@ -88,26 +88,33 @@ const STATE_SUBJECT = byId('2000086');
 const TRANS_STEPS = [3, 4, 5, 6, 7, 8, 9];
 
 /**
- * Le `px` double la classe Tailwind parce que la règle des deux lignes de
- * `CharacterPortrait` raisonne en pixels, pas en classes — c'est elle qu'on rejoue
- * plus bas, telle quelle.
+ * LES QUATRE PALIERS QUE `CharacterCard` SERT, plus la taille du prefab pour
+ * mesurer l'écart. Le `px` double la classe Tailwind parce que la règle des deux
+ * lignes de `CharacterPortrait` raisonne en pixels, pas en classes — c'est elle
+ * qu'on rejoue plus bas, telle quelle.
  */
 const SIZES = [
-  { label: 'w-20 · 80 px', cls: 'w-20', px: 80 },
-  { label: 'w-32 · 128 px', cls: 'w-32', px: 128 },
-  { label: 'w-45 · 180 px (prefab)', cls: 'w-45', px: 180 },
+  { label: 'w-20 · 80 px · <640', cls: 'w-20', px: 80 },
+  { label: 'w-26 · 104 px · ≥640', cls: 'w-26', px: 104 },
+  { label: 'w-32 · 128 px · ≥1024', cls: 'w-32', px: 128 },
+  { label: 'w-38 · 152 px · ≥1280', cls: 'w-38', px: 152 },
+  { label: 'w-45 · 180 px · prefab', cls: 'w-45', px: 180 },
 ];
 
 /**
  * LE SEUL NOMBRE DE CETTE PAGE QUI NE VIENNE PAS DU JEU, et il est ici — pas dans
  * `Portrait` — précisément pour ça.
  *
- * En dessous de cette largeur de cadre, l'appelant coupe `hideName` et réécrit le
- * nom sous le portrait. La valeur : le nom rendu vaut 16,9 unités sur 180, soit
- * `16,9 × largeur / 180` px ; il passe sous `text-xs` (12 px, le plus petit corps
- * du site) en dessous de 128. C'est un choix de lisibilité, pas un relevé — et
- * c'est cette rangée qui doit le faire réviser, à l'œil, quand on branchera les
- * appelants.
+ * En dessous de cette largeur de cadre, l'appelant masque le nom du portrait
+ * (`textClassName`) et le réécrit sous la carte. La valeur : le nom rendu vaut
+ * 16,9 unités sur 180, soit `16,9 × largeur / 180` px ; il passe sous `text-xs`
+ * (12 px, le plus petit corps du site) en dessous de 128. C'est un choix de
+ * lisibilité, pas un relevé.
+ *
+ * Il est RECOPIÉ ici depuis la table `SCALE` de `CharacterCard`, où il vit sous
+ * forme de classes (`hidden lg:flex` / `lg:hidden`) — Tailwind ne sait pas générer
+ * une classe depuis un nombre calculé. Cette rangée est donc l'endroit où le
+ * réviser à l'œil, mais la table de `CharacterCard` reste celle qui décide.
  */
 const NAME_INSIDE_MIN_PX = 128;
 
@@ -207,54 +214,64 @@ const VS_THUMBNAIL: [string, string, string][] = [
 ];
 
 /**
- * Les ÉCARTS des deux copies manuscrites actuelles. Chacun est un bug que le site
- * porte aujourd'hui ; le branchement des appelants est un second lot.
+ * Ce que le branchement a CORRIGÉ, et ce qui reste à corriger.
+ *
+ * `CharacterCard` portait 250 lignes de mesures relevées à l'œil en V2 ; elles ont
+ * disparu, la carte n'est plus qu'une coquille de chrome sur `Portrait`. La liste
+ * garde la trace de chaque écart : c'est elle qui dit ce qu'on a changé pour les
+ * lecteurs, et ce qu'il reste de divergent dans le tier-list-maker.
  */
-const DRIFT: { where: string; what: string; game: string }[] = [
+const DRIFT: { where: string; what: string; game: string; done?: boolean }[] = [
   {
     where: 'CharacterCard — proportions',
     what: '66×128, 100×192, 120×231 → ratio 0,516 / 0,521 / 0,519',
-    game: '180×344 = 0,5233. Les trois tailles écrasent l’art de 0,3 à 1,4 %.',
+    game: '180×344 = 0,5233. Les trois tailles écrasaient l’art de 0,3 à 1,4 % ; `aspect-180/344` le tient désormais.',
+    done: true,
   },
   {
     where: 'CharacterCard — cadrage',
-    what: '`object-cover` sur un cadre au mauvais ratio → l’art est ROGNÉ',
-    game: 'le cadre est à la taille de l’art : rien n’est rogné.',
+    what: '`object-cover` sur un cadre au mauvais ratio → l’art était ROGNÉ',
+    game: 'le cadre est à la taille de l’art : plus rien n’est rogné.',
+    done: true,
   },
   {
     where: 'CharacterCard — dégradé du bas',
-    what: 'ajoute `bg-linear-to-t from-black/80` sur le quart inférieur',
-    game: 'aucun dégradé : `LowBg` est inactif dans les onze copies du prefab.',
+    what: 'ajoutait `bg-linear-to-t from-black/80` sur le quart inférieur',
+    game: 'aucun dégradé : `LowBg` est inactif dans le prefab. Supprimé.',
+    done: true,
   },
   {
     where: 'CharacterCard — étoiles',
-    what: 'compte les étoiles = `rarity`, sans creux, alignées en HAUT du slot',
-    game: '6 creux fixes ; le nombre vient de `ShowUIStar`, pas de la rareté (un 3★ non transcendé en montre 3, un palier 6 en montre 5).',
-  },
-  {
-    where: 'CharacterCard — badge de recrutement',
-    what: 'pose `RECRUIT_TAG_SPRITE` au coin haut-gauche',
-    game: 'aucun badge de RECRUTEMENT : `m_BossImage`, `m_NewImage`, `m_RareFrameImage`, `m_RecommandImage` sont NULL. Les deux seuls que le jeu pose sont core-fusion et synchro, qui partagent un emplacement.',
+    what: 'comptait les étoiles = `rarity`, sans creux, alignées en HAUT du slot',
+    game: '6 creux fixes ; le nombre vient de `ShowUIStar`. La tier list passait même son palier de transcendance À LA PLACE de la rareté pour obtenir le bon compte — elle a maintenant `transcendence`, sa vraie prop, et récupère la teinte du « + ».',
+    done: true,
   },
   {
     where: 'CharacterCard — élément / classe',
     what: 'même taille pour les deux (18/22/26 px), collés au même `right-1`',
     game: 'élément 46 et classe 37, à des retraits DIFFÉRENTS (9,4 et 15).',
+    done: true,
   },
   {
     where: 'CharacterCard — nom',
-    what: '`text-shadow` à 4 copies de 1 px, `font-bold`',
-    game: 'Outline(1,−1) à 50 % ET Shadow(1,−1) à 50 %, graisse NORMALE.',
+    what: '`text-shadow` à 4 copies de 1 px, `font-bold`, corps réglé à la main par gabarit',
+    game: 'Outline(1,−1) à 50 % ET Shadow(1,−1) à 50 %, graisse du jeu, corps par `m_BestFit`.',
+    done: true,
+  },
+  {
+    where: 'CharacterCard — badge de recrutement',
+    what: 'pose `RECRUIT_TAG_SPRITE` au coin haut-gauche',
+    game: 'aucun badge de RECRUTEMENT dans le prefab : `m_BossImage`, `m_NewImage`, `m_RareFrameImage`, `m_RecommandImage` sont NULL. C’est une convention ÉDITORIALE du site — elle reste, posée par-dessus le portrait et non dedans.',
   },
   {
     where: 'tier-list-maker (mode « cartes »)',
-    what: 'seconde copie manuscrite, avec des nombres ENCORE différents : étoiles `h-3 w-3` sans slot, classe à `bottom-[26%]`, élément à `bottom-1`, dégradé du bas',
-    game: 'les mêmes valeurs que ci-dessus — deux copies qui divergent l’une de l’autre autant que du jeu.',
+    what: 'seconde copie manuscrite, avec des nombres ENCORE différents : `aspect-[120/231]` + `object-cover`, étoiles `h-3 w-3` sans slot, élément et classe redessinés',
+    game: 'les mêmes valeurs que `Portrait` — non branché, c’est le lot suivant.',
   },
   {
     where: 'tier-list-maker — jumeau canvas',
-    what: 'l’export PNG redessine tout au `drawImage`, une TROISIÈME fois',
-    game: 'à faire dériver de la même table que le rendu DOM, sinon l’export et l’écran divergeront toujours.',
+    what: 'l’export PNG redessine tout au `drawImage`, une TROISIÈME fois (ratios 0,24 / 0,26 / 0,16)',
+    game: 'à faire dériver de la même table que le rendu DOM, sinon l’export et l’écran divergeront toujours. Non branché.',
   },
 ];
 
@@ -440,8 +457,10 @@ export default function DevPortrait() {
         <p className="text-content-muted mb-3 max-w-3xl text-sm">
           Toute la géométrie est en % du cadre : le texte suit par <code>@container</code>, et la
           proportion est tenue par <code>aspect-180/344</code>. Il en découle MÉCANIQUEMENT que le
-          texte rétrécit avec le portrait — le nom passe de 16,9 px à 180 de large, à 12,0 px à 128,
-          à 7,5 px à 80 ; le titre, lui, de 14 à 10 puis 6,2.
+          texte rétrécit avec le portrait : le nom passe de 16,9 px à la taille du prefab, à 14,3 px
+          à 152, 12,0 px à 128, 9,8 px à 104 et 7,5 px à 80 — le titre, lui, de 14 à 11,8, 10, 8,1
+          puis 6,2. Les quatre premières largeurs sont les paliers que <code>CharacterCard</code>{' '}
+          sert (44 / 58 / 71 / 84 % de la taille du jeu) ; la cinquième est le prefab.
         </p>
         <p className="text-content-muted mb-3 max-w-3xl text-sm">
           Chaque taille est donc rendue ICI COMME L’APPELANT DEVRA LA RENDRE, pas deux fois : au
@@ -605,14 +624,12 @@ export default function DevPortrait() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-content-strong font-semibold">
-          Les écarts que le site porte aujourd’hui
-        </h2>
-        <p className="text-content-muted mb-3 text-sm">
-          <code>CharacterCard</code> et le mode « cartes » du tier-list-maker rendent déjà{' '}
-          <code>img.portrait(id)</code>, chacun avec sa chrome posée à l’estime — et des nombres
-          différents l’un de l’autre. Rien n’est modifié dans ce lot ; le branchement est un second
-          lot.
+        <h2 className="text-content-strong font-semibold">Les écarts, corrigés et restants</h2>
+        <p className="text-content-muted mb-3 max-w-3xl text-sm">
+          <code>CharacterCard</code> est branché : ses 250 lignes de chrome relevée à l’œil ont
+          disparu, il ne reste qu’une coquille (lien, badge de recrutement, nom sous la carte,
+          étiquette a11y) autour de <code>Portrait</code>. Le mode « cartes » du tier-list-maker et
+          son jumeau canvas, eux, redessinent toujours — c’est le lot suivant.
         </p>
         <ul className="space-y-3">
           {DRIFT.map((d) => (
@@ -620,9 +637,18 @@ export default function DevPortrait() {
               key={d.where}
               className="border-line-subtle bg-surface-raised rounded-lg border p-3"
             >
-              <div className="text-content-strong font-mono text-xs">{d.where}</div>
+              <div className="flex items-center gap-2">
+                <span
+                  className={`font-mono text-xs ${d.done ? 'text-emerald-400' : 'text-amber-400'}`}
+                >
+                  {d.done ? 'corrigé' : 'restant'}
+                </span>
+                <span className="text-content-strong font-mono text-xs">{d.where}</span>
+              </div>
               <div className="text-content-muted mt-1 text-sm">
-                <span className="text-content-subtle">aujourd’hui : </span>
+                <span className="text-content-subtle">
+                  {d.done ? 'avant : ' : 'aujourd’hui : '}
+                </span>
                 {d.what}
               </div>
               <div className="mt-1 text-sm">

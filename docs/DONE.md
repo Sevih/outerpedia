@@ -7,6 +7,87 @@
 
 ## 2026-08-08
 
+- **Les cartes du site BRANCHÉES sur le portrait, et une seule table de tailles.**
+  Le lot précédent livrait la transcription sans la raccorder ; celui-ci raccorde
+  les cinq appelants DOM (liste des persos, tier lists, bannières d'accueil,
+  équipes de guide, admin) et supprime tout ce qui doublonnait au passage. Le
+  tier-list-maker (mode « cards » + son jumeau canvas pour l'export PNG) reste
+  explicitement pour un autre lot.
+  - **Trois composants pour une carte, il en reste un.**
+    `ResponsiveCharacterCard` SUPPRIMÉ : il n'existait que pour choisir une
+    taille au `useMediaQuery`, donc côté client, avec le décalage d'hydratation
+    que ça suppose — des classes Tailwind responsives font la même chose en CSS,
+    dans un composant serveur. `CharacterCard` réécrit en coquille au-dessus de
+    `Portrait` (256 → 180 lignes) : il ne pose plus une seule mesure de portrait,
+    seulement ce que le prefab n'a pas (lien, badge de recrutement, nom sous la
+    carte, étiquette a11y de la rareté).
+  - **UN NOM A TROIS FORMES, et la lib n'en exposait que deux** (constat Sevih,
+    capture à l'appui : « les titres sont dupliqués » — « Core Fusion » puis
+    « Core Fusion Epsilon » l'un sous l'autre). Le portrait du jeu écrit le titre
+    et le nom dans DEUX champs séparés (`Text_Demi`, `Text_Name`), il lui faut
+    donc le nom NU — que personne n'avait jamais eu à produire, le site écrivant
+    toujours le nom d'un bloc. Ma première correction le retrouvait en retirant
+    le préfixe au `replace` ; Sevih l'a refusée à raison (« plutôt que de faire
+    un traitement bizarre, il faudrait pas plutôt corriger l'extraction /
+    génération ? »). D'où `characterBaseName` + `joinDisplayName`, avec
+    `characterDisplayName` REDÉFINIE par-dessus les deux : la composition n'existe
+    plus qu'à un seul endroit. C'est le nom nu qui circule dans les rangées
+    d'affichage, le complet qui se reconstruit là où il sert (tri, JSON-LD,
+    `title`) — composer est sûr, décomposer ne l'est pas.
+  - **Le barème : 80 / 104 / 128 / 152 px** à base / 640 / 1024 / 1440, soit 44 à
+    84 % du prefab là où le site servait 66 / 100 / 120 (37 à 67 %) — c'était la
+    cause de fond du problème de lisibilité. Le nom passe DANS le cadre à partir
+    de 128, la largeur à laquelle son corps rendu atteint 12 px (le plus petit du
+    site) : c'est le SEUL nombre du lot qui ne vienne pas du jeu, et il vit dans
+    la table `SCALE`, pas dans `Portrait`. Largeur et placement du nom y sont
+    solidaires par construction. 1440 n'est pas un breakpoint Tailwind (les
+    défauts sautent de 1280 à 1536) et n'a pas à le devenir pour un seul usage :
+    variante arbitraire, thème intact pour les ~440 autres usages.
+  - **Le repli sur le nom court NE SE DÉCLENCHAIT JAMAIS.** Il jugeait sur 128 px
+    (104 + 24 hérités de `CharacterPortrait`, qui laisse son libellé déborder sa
+    vignette — pas la carte, qui le rend en `w-full`) un texte rendu sur 80. La
+    condition était donc toujours vraie et 16 couples (perso, langue) se faisaient
+    tronquer en silence par le `line-clamp-2`. Il mesure désormais au PLUS ÉTROIT
+    des paliers où le libellé s'affiche : ce qui tient en 80 tient a fortiori en
+    104, l'inverse est faux. `card-label.test.ts` grave l'invariant — 124 persos ×
+    5 langues, chacun doit tenir sur deux lignes en 80 px, au besoin via son nom
+    court. Si un perso arrive avec un nom long, c'est le test qui le dit, plus le
+    rendu.
+  - **`short-names.json` localisé** (demande Sevih : « un fallback anglais sur les
+    shortname ça fait bizarre »). Les entrées n'avaient qu'une clé `en`, servie
+    telle quelle aux lecteurs jp/kr/zh par le repli de `lRec` — trois cellules
+    l'affichaient réellement. Clés `jp`/`kr`/`zh` ajoutées aux dix entrées,
+    dérivées du TITRE LOCALISÉ : le jeu n'a pas d'abréviations, il n'y avait rien
+    à relever dans le binaire, et un natif peut légitimement corriger ligne à
+    ligne. Chaque langue suit SON titre plutôt que la traduction de l'anglais —
+    « Summer Knight's Dream » est 青雲の志 en jp, « l'ambition des nuages d'azur »,
+    sans rapport avec l'été. Nouvelle entrée `MR.Skadi` (seule Skadi débordait en
+    jp, 14 caractères pleine chasse). `CF. Epsilon` → `CF Epsilon` (constat
+    Sevih : seule des trois core-fusion à porter un point). Convention EN
+    confirmée par Sevih et laissée telle quelle : le préfixe marque la SAISON pour
+    les `seasonal` (d'où deux `S.`, Regina et Ember étant toutes deux estivales),
+    le titre sinon.
+  - **`TeamSlotCarousel` MESURE la carte au lieu d'en recopier les cotes.** Il
+    portait trois gabarits (66×128, 100×192, 120×231) sous un commentaire qui
+    jurait qu'ils venaient « telles quelles de `CharacterCard` » : vrai le jour où
+    ils ont été écrits, faux depuis deux refontes de la carte. La scène chaussait
+    encore du 66 de large pour une carte de 104, et les cartes débordaient leur
+    cylindre par le bas jusqu'à 105 px — droit sur les flèches et les points de
+    navigation. Elle prend maintenant sa LARGEUR des classes exportées
+    (`CARD_WIDTH`) et sa HAUTEUR d'un vrai exemplaire de carte laissé dans le
+    flux ; plus aucun nombre à tenir à jour, et la hauteur suit toute seule les
+    34 px du nom tant qu'il n'est pas passé dans le cadre. Le `ResizeObserver` ne
+    sert plus qu'au rayon et à la conversion « pixels glissés → degrés », les deux
+    seules choses qui ne s'expriment pas en CSS — dernier `useMediaQuery` de la
+    chaîne retiré. Bonus : ce gabarit EST le rendu serveur, là où le cylindre
+    était inerte sans JS.
+  - **Le palier de transcendance passe enfin par sa vraie prop.**
+    `TierListBrowser` le passait À LA PLACE de la rareté pour obtenir le bon
+    nombre d'étoiles : ça marchait par accident et perdait la teinte du « + ».
+  - **`/dev/portrait`** montre les quatre paliers du barème plus la taille du
+    prefab, chacun rendu COMME L'APPELANT doit le rendre (nom dedans ou dessous,
+    repli sur le nom court compris) — la page ne rejoue plus la règle de travers.
+
 - **Le PORTRAIT du jeu transcrit (`Portrait`), et la page `/dev/portrait`.** Le
   grand format vertical (180×344). Rien n'est branché dans ce lot : on livre la
   transcription et son rendu de contrôle, le raccordement des appelants se

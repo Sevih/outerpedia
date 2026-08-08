@@ -1,5 +1,5 @@
 import type { Lang } from '@/lib/i18n/config';
-import { ResponsiveCharacterCard } from '@/components/character/ResponsiveCharacterCard';
+import { CharacterCard } from '@/components/character/CharacterCard';
 import { getActiveBanners } from '@/lib/home';
 import { BannerCountdown, BannerWrapper } from './BannerCountdown';
 
@@ -29,7 +29,7 @@ export async function CurrentBanners({
         {banners.map((b) => (
           <BannerWrapper key={b.id} endDate={b.end}>
             <div className="flex flex-col items-center gap-2">
-              <ResponsiveCharacterCard
+              <CharacterCard
                 id={b.id}
                 name={b.name}
                 prefix={b.prefix}

@@ -437,17 +437,32 @@ export interface PortraitProps {
    */
   prefix?: string;
   /**
-   * Cache le nom ET son titre — certains écrans du jeu ne les montrent pas.
-   *
-   * C'est aussi la RÉPONSE À LA LISIBILITÉ EN PETIT. Le nom est écrit DANS le
-   * cadre, à un corps proportionnel : sous une centaine de pixels de large il
-   * devient illisible, et le titre l'est avant lui. Le composant ne s'en occupe
-   * pas — il rendrait un seuil que le jeu n'a pas, dans un fichier dont tout le
-   * reste est relevé. C'est à l'appelant de couper ici et d'écrire le nom SOUS le
-   * cadre, ce que `CharacterPortrait` fait déjà pour la vignette carrée (avec son
-   * repli sur le nom court curé quand le nom complet ne tient pas).
+   * Cache le nom ET son titre — certains écrans du jeu ne les montrent pas, et
+   * c'est aussi ce qu'un appelant coupe quand le portrait est trop petit pour eux
+   * (cf. `textClassName`).
    */
   hideName?: boolean;
+  /**
+   * Classes ajoutées au nom ET au titre — le seul levier de l'appelant sur eux.
+   *
+   * LA LISIBILITÉ EN PETIT SE RÈGLE ICI, et pas dans ce fichier. Le nom est écrit
+   * DANS le cadre à un corps proportionnel : sous ~128 px de large il passe sous
+   * `text-xs`, et le titre bien avant. Poser ce seuil dans le composant reviendrait
+   * à y écrire un nombre que le jeu n'a pas, alors que tout le reste est relevé —
+   * et il dépend de l'appelant, pas du portrait.
+   *
+   * D'où cette prop plutôt qu'un `hideName` conditionnel : `CharacterCard` passe
+   * `hidden md:flex` et écrit le nom SOUS le cadre en dessous de ce palier, comme
+   * `CharacterPortrait` le fait pour la vignette carrée. Un seul DOM, la bascule
+   * est purement CSS — un composant client qui mesure le viewport rendrait le même
+   * service au prix d'un décalage à l'hydratation.
+   */
+  textClassName?: string;
+  /**
+   * Charge l'art en `eager` au lieu de `lazy` — pour les portraits peints
+   * au-dessus de la ligne de flottaison, qui sont souvent le LCP de leur page.
+   */
+  priority?: boolean;
   /** `SetDim(true)` : le voile noir de l'état grisé (cf. piège 3). */
   dim?: boolean;
   /**
@@ -477,6 +492,8 @@ export function Portrait({
   level,
   prefix,
   hideName = false,
+  textClassName = '',
+  priority = false,
   dim = false,
   coreFusion = false,
   synchro = false,
@@ -495,7 +512,12 @@ export function Portrait({
     // étirerait de 4,6 %.
     <span className={`@container relative block aspect-180/344 shrink-0 ${className}`}>
       {/* L'ART — plein cadre, malgré ce que dit `m_FaceIconRect` (cf. piège 2). */}
-      <img src={img.portrait(id)} alt={name} className="absolute inset-0 h-full w-full" />
+      <img
+        src={img.portrait(id)}
+        alt={name}
+        loading={priority ? 'eager' : 'lazy'}
+        className="absolute inset-0 h-full w-full"
+      />
 
       {/* LE RAIL D'ÉTOILES — le slot sombre, six creux, puis les allumées. */}
       <img
@@ -592,14 +614,15 @@ export function Portrait({
         </span>
       )}
 
-      {/* LE TITRE puis LE NOM. Aucun dégradé sous eux : `LowBg` est inactif dans les
-          le prefab — ils ne tiennent que par leurs effets. */}
+      {/* LE TITRE puis LE NOM. Aucun dégradé sous eux : `LowBg` est inactif dans
+          le prefab — ils ne tiennent que par leurs effets. `textClassName` est le
+          levier de l'appelant : le seuil de lisibilité vit chez lui. */}
       {!hideName && (
         <>
           {prefix && (
             // `m_Alignment = 3` = MiddleLeft, comme le nom.
             <span
-              className="absolute flex items-center overflow-hidden leading-none whitespace-nowrap"
+              className={`absolute flex items-center overflow-hidden leading-none whitespace-nowrap ${textClassName}`}
               style={{
                 ...box(DEMI_BOX),
                 fontSize: cqw(bestFit(prefix, DEMI_BOX.w, DEMI_SIZE, DEMI_FONT)),
@@ -613,7 +636,7 @@ export function Portrait({
           )}
           {/* `m_Alignment = 3` = MiddleLeft. */}
           <span
-            className="absolute flex items-center overflow-hidden leading-none whitespace-nowrap"
+            className={`absolute flex items-center overflow-hidden leading-none whitespace-nowrap ${textClassName}`}
             style={{
               ...box(NAME_BOX),
               fontSize: cqw(bestFit(name, NAME_BOX.w, NAME_SIZE, NAME_FONT)),

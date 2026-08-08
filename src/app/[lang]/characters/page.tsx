@@ -9,7 +9,7 @@ import {
   type CharactersBrowserLabels,
 } from '@/components/character/CharactersBrowser';
 import {
-  characterDisplayName,
+  characterBaseName,
   characterNamePrefix,
   characterSearchNames,
   getCharacterListItems,
@@ -17,6 +17,8 @@ import {
 } from '@/lib/data/characters';
 import { characterTags, loadCuratedCharacters } from '@/lib/data/curated';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
+import { loadShortNames } from '@/lib/data/short-names';
+import { lRec } from '@/lib/i18n/localize';
 import { buildEffectGroups, canonicalizeKeys } from '@/lib/data/effect-filters';
 import { img } from '@/lib/images';
 import { STAT_ICON } from '@/lib/stats';
@@ -81,12 +83,14 @@ export async function generateMetadata({
 function buildRows(lang: Lang): CharacterRow[] {
   const curated = loadCuratedCharacters();
   const aliases = loadSearchAliases();
+  const shorts = loadShortNames();
   return getCharacterListItems().map((c) => {
     return {
       id: c.id,
       slug: slugForId(c.id) ?? c.id,
-      name: characterDisplayName(c, lang),
+      name: characterBaseName(c, lang),
       prefix: characterNamePrefix(c, lang),
+      shortName: lRec(shorts[c.id] ?? {}, lang) || undefined,
       searchNames: characterSearchNames(c, aliases[c.id]),
       element: c.element,
       class: c.class,

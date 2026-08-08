@@ -38,14 +38,25 @@ type Named = {
 };
 
 /**
- * Nom AFFICHABLE — source unique. Préfixes : « Core Fusion » (libellé du jeu)
- * pour les entités core-fusion (c'est leur nom complet), sinon le surnom quand
- * le perso l'inclut (`showNickName`), ex. « Monad Iota ».
+ * LES TROIS FORMES D'UN NOM, et pourquoi elles sont trois.
+ *
+ *   `characterBaseName`     le nom NU        « Epsilon », « Beth »
+ *   `characterNamePrefix`   le TITRE, ou null  « Core Fusion », « Gnosis »
+ *   `characterDisplayName`  les deux collés  « Core Fusion Epsilon »
+ *
+ * La lib n'exposait que les deux dernières, et il a fallu le portrait du jeu pour
+ * que ça se voie : lui écrit le titre et le nom dans DEUX champs séparés
+ * (`Text_Demi` et `Text_Name`), donc il lui faut le nom nu. `CharacterCard` le
+ * retrouvait en retirant le préfixe du nom complet par `replace` — un décollage à
+ * la pince qui écrivait « Core Fusion » puis « Core Fusion Epsilon » l'un sous
+ * l'autre dès que le préfixe se répétait dans le nom.
+ *
+ * Composer est sûr, décomposer ne l'est pas : c'est donc le nom NU qui circule
+ * dans les rangées d'affichage, et le complet qui se reconstruit là où on en a
+ * besoin (tri, JSON-LD, `title`) — via `joinDisplayName`.
  */
-export function characterDisplayName(c: Named, lang: string = 'en'): string {
-  const prefix = characterNamePrefix(c, lang);
-  const base = ((c.name as Record<string, string>)[lang] ?? c.name.en) as string;
-  return prefix ? `${prefix} ${base}` : base;
+export function characterBaseName(c: Named, lang: string = 'en'): string {
+  return ((c.name as Record<string, string>)[lang] ?? c.name.en) as string;
 }
 
 /** Préfixe de titre seul (« Core Fusion » / surnom), null sinon. */
@@ -54,6 +65,20 @@ export function characterNamePrefix(c: Named, lang: string = 'en'): string | nul
   if (c.originalCharacter) return pick(FUSION_TITLE);
   if (c.showNickName && c.nickname) return pick(c.nickname);
   return null;
+}
+
+/** Recolle un titre et un nom nu — la SEULE façon d'obtenir le nom complet. */
+export function joinDisplayName(prefix: string | null | undefined, base: string): string {
+  return prefix ? `${prefix} ${base}` : base;
+}
+
+/**
+ * Nom AFFICHABLE complet — source unique. Préfixes : « Core Fusion » (libellé du
+ * jeu) pour les entités core-fusion (c'est leur nom complet), sinon le surnom
+ * quand le perso l'inclut (`showNickName`), ex. « Monad Iota ».
+ */
+export function characterDisplayName(c: Named, lang: string = 'en'): string {
+  return joinDisplayName(characterNamePrefix(c, lang), characterBaseName(c, lang));
 }
 
 /** Item allégé pour les listes (admin/grilles). */

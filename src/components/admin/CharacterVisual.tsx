@@ -1,5 +1,9 @@
 import type { Character } from '@contracts';
-import { characterDisplayName, characterNamePrefix } from '@/lib/data/characters';
+import {
+  characterBaseName,
+  characterDisplayName,
+  characterNamePrefix,
+} from '@/lib/data/characters';
 import { CharacterCard } from '@/components/character/CharacterCard';
 import { CHAIN_PILL, img } from '@/lib/admin/assets';
 
@@ -23,13 +27,12 @@ export function CharacterVisual({ char, tags }: { char: Character; tags?: string
       {/* Carte du site : rareté, élément, classe, badges — source unique */}
       <CharacterCard
         id={char.id}
-        name={name}
+        name={characterBaseName(char)}
         prefix={characterNamePrefix(char)}
         element={char.element}
         classType={char.class}
         rarity={char.rarity}
         tags={tags}
-        size="lg"
       />
 
       <div className="min-w-0 flex-1 space-y-3">

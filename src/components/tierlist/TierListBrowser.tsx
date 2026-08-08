@@ -3,7 +3,8 @@
 import { useEffect, useDeferredValue, useMemo, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { img } from '@/lib/images';
-import { ResponsiveCharacterCard } from '@/components/character/ResponsiveCharacterCard';
+import { CharacterCard } from '@/components/character/CharacterCard';
+import { joinDisplayName } from '@/lib/data/characters';
 import {
   CharactersFiltersBar,
   type FiltersBarLabels,
@@ -19,9 +20,12 @@ const TRANSCEND_LEVELS = [3, 4, 5, 6] as const;
 export interface TierListRow {
   id: string;
   slug: string;
-  /** Nom complet localisé (affiché sur la carte). */
+  /** Nom NU localisé — le titre est à part, cf. `prefix`. */
   name: string;
+  /** Titre affiché au-dessus du nom (« Core Fusion », surnom). */
   prefix?: string | null;
+  /** Nom court curé — le libellé sous la carte s'y rabat s'il déborde 2 lignes. */
+  shortName?: string;
   /** Noms recherchables (toutes langues + id + slug), déjà normalisés. */
   searchNames: string[];
   element: string;
@@ -172,7 +176,11 @@ export function TierListBrowser({
       const tier = row.rank as Tier;
       if (map.has(tier)) map.get(tier)!.push(row);
     }
-    for (const list of map.values()) list.sort((a, b) => a.name.localeCompare(b.name));
+    // Tri sur le nom COMPLET, comme avant que la rangée ne porte le nom nu.
+    for (const list of map.values())
+      list.sort((a, b) =>
+        joinDisplayName(a.prefix, a.name).localeCompare(joinDisplayName(b.prefix, b.name)),
+      );
     return map;
   }, [filtered]);
 
@@ -265,18 +273,25 @@ export function TierListBrowser({
                 {/* Grille de personnages */}
                 <div className="flex flex-wrap gap-2 py-3 pr-3 lg:gap-3">
                   {chars.map((row, index) => (
-                    <ResponsiveCharacterCard
+                    <CharacterCard
                       key={row.id}
                       id={row.id}
                       name={row.name}
                       prefix={row.prefix}
+                      shortName={row.shortName}
                       element={row.element}
                       classType={row.class}
-                      rarity={withTranscend ? transcend : row.rarity}
+                      rarity={row.rarity}
+                      // Le palier passe désormais par `transcendence`, sa vraie
+                      // prop : il décide du nombre d'étoiles ET de la teinte du
+                      // « + ». Jusqu'ici il était passé À LA PLACE de la rareté
+                      // pour obtenir le bon compte — ça marchait par accident, et
+                      // la teinte se perdait.
+                      transcendence={withTranscend ? transcend : undefined}
                       tags={row.tags}
                       href={`/characters/${row.slug}`}
                       starAriaLabel={labels.bar.starAria}
-                      sizes={{ base: 'sm', md: 'sm', lg: 'md' }}
+                      scale="dense"
                       priority={tier === 'S' && index <= 5}
                     />
                   ))}

@@ -15,7 +15,7 @@ import { lRec } from '@/lib/i18n/localize';
 import { localePath } from '@/lib/navigation';
 import { img } from '@/lib/images';
 import {
-  characterDisplayName,
+  characterBaseName,
   characterNamePrefix,
   getCharacter,
   slugForId,
@@ -93,7 +93,7 @@ export async function getActiveBanners(lang: Lang): Promise<BannerVM[]> {
     if (!c || !slug) continue;
     byId.set(b.id, {
       id: c.id,
-      name: characterDisplayName(c, lang),
+      name: characterBaseName(c, lang),
       prefix: characterNamePrefix(c, lang),
       element: c.element,
       classType: c.class,

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { ResponsiveCharacterCard } from './ResponsiveCharacterCard';
+import { CharacterCard } from './CharacterCard';
 import { CharactersFiltersBar, type FiltersBarLabels } from './filters/CharactersFiltersBar';
 import { CharactersFiltersSidebar } from './filters/CharactersFiltersSidebar';
 import { CharactersFiltersDrawer, type DrawerLabels } from './filters/CharactersFiltersDrawer';
@@ -21,9 +21,12 @@ import type { EffectGroup } from '@/lib/data/effect-filters';
 export interface CharacterRow {
   id: string;
   slug: string;
-  /** Nom complet localisé (affiché sur la carte). */
+  /** Nom NU localisé — le titre est à part, cf. `prefix`. */
   name: string;
+  /** Titre affiché au-dessus du nom (« Core Fusion », surnom). */
   prefix?: string | null;
+  /** Nom court curé — le libellé sous la carte s'y rabat s'il déborde 2 lignes. */
+  shortName?: string;
   /** Noms recherchables (toutes langues + id + slug), déjà normalisés. */
   searchNames: string[];
   element: string;
@@ -531,12 +534,13 @@ export function CharactersBrowser({
           ) : (
             <div className="flex flex-wrap justify-center gap-4 lg:gap-6">
               {filtered.map((row, i) => (
-                <ResponsiveCharacterCard
+                <CharacterCard
                   key={row.id}
                   starAriaLabel={labels.bar.starAria}
                   id={row.id}
                   name={row.name}
                   prefix={row.prefix}
+                  shortName={row.shortName}
                   element={row.element}
                   classType={row.class}
                   rarity={row.rarity}

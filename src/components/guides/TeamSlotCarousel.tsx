@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef, useState, type ReactNode } from 'react';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { CARD_WIDTH } from '@/components/character/CharacterCard';
 import { onTabListKeyDown } from '@/lib/tablist';
 
 /**
@@ -23,16 +23,29 @@ import { onTabListKeyDown } from '@/lib/tablist';
  */
 
 /**
- * Cotes du jeu, reprises telles quelles de `CharacterCard` — la scène doit
- * chausser EXACTEMENT la carte, sinon le cylindre tourne autour du vide.
+ * LA SCÈNE NE CONNAÎT PLUS LES COTES DE LA CARTE — ELLE LES MESURE.
+ *
+ * Elle en portait une copie : trois gabarits (66×128, 100×192, 120×231) sous un
+ * commentaire qui affirmait qu'ils venaient « telles quelles de `CharacterCard` ».
+ * C'était vrai le jour où ils ont été écrits. La carte a changé deux fois depuis,
+ * la copie non : la scène chaussait encore du 66 de large quand la carte en faisait
+ * 104, et les cartes débordaient de leur cylindre par le bas jusqu'à 105 px — droit
+ * sur les flèches et les points de navigation. Deux tables qui basculent en plus à
+ * des seuils différents (768/1024 ici, 640/1024/1440 là-bas) ne pouvaient que
+ * rediverger.
+ *
+ * Désormais : la scène prend la LARGEUR de la carte par ses classes (`CARD_WIDTH`,
+ * exportée), et sa HAUTEUR d'un vrai exemplaire de carte laissé dans le flux. Aucun
+ * nombre à tenir à jour — et la hauteur suit toute seule les 34 px que le nom prend
+ * sous la carte tant qu'il n'est pas passé dans le cadre.
+ *
  * `perspective` est COURTE (comme en V2) : c'est elle qui écrase les cartes de
- * derrière et les tasse au lieu de les laisser s'étaler sur les côtés.
+ * derrière et les tasse au lieu de les laisser s'étaler sur les côtés. Elle est
+ * maintenant UNIQUE — c'est la valeur que les deux grandes scènes utilisaient déjà,
+ * et sur la petite elle retrouve à 5 % près le rapport perspective/largeur de
+ * l'ancien couple 120 px / 66 px.
  */
-const SCENES = {
-  sm: { cls: 'h-32 w-[66px] perspective-[120px]', width: 66 },
-  md: { cls: 'h-48 w-25 perspective-[150px]', width: 100 },
-  lg: { cls: 'h-[231px] w-30 perspective-[150px]', width: 120 },
-} as const;
+const PERSPECTIVE_PX = 150;
 
 /**
  * Le survol des cartes est ÉTEINT dans le cylindre.
@@ -75,9 +88,22 @@ export function TeamSlotCarousel({
   /** Le geste a-t-il VRAIMENT bougé ? — sinon un glissé finirait par ouvrir la fiche du perso. */
   const moved = useRef(false);
 
-  const isMd = useMediaQuery('(min-width: 768px)');
-  const isLg = useMediaQuery('(min-width: 1024px)');
-  const scene = SCENES[isLg ? 'lg' : isMd ? 'md' : 'sm'];
+  /**
+   * Largeur RÉELLE de la scène, mesurée. C'est le dernier endroit où le cylindre a
+   * besoin d'un nombre : le rayon et la conversion « pixels glissés → degrés » ne
+   * s'expriment pas en CSS. Un `ResizeObserver` plutôt qu'un `useMediaQuery` —
+   * l'ancienne paire de média-queries redécidait en JS ce que les classes de la
+   * carte décident déjà en CSS, et se trompait dès que l'un des deux bougeait.
+   */
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(0);
+  useEffect(() => {
+    const el = sceneRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => setWidth(entry.contentRect.width));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   const count = children.length;
 
@@ -97,7 +123,7 @@ export function TeamSlotCarousel({
    * 1,4 de la V2. Le terme en `count` recule un peu la roue quand les options se
    * pressent, pour qu'à huit cartes elles ne se traversent pas.
    */
-  const radius = Math.round(scene.width * 1.4) + Math.max(0, count - 5) * 10;
+  const radius = Math.round(width * 1.4) + Math.max(0, count - 5) * 10;
   const active = ((index % count) + count) % count;
 
   /** Va vers l'option `i` par le PLUS COURT chemin — jamais un tour complet. */
@@ -121,20 +147,22 @@ export function TeamSlotCarousel({
     if (!dragging) return;
     const dx = e.clientX - dragX.current;
     if (Math.abs(dx) > 4) moved.current = true;
-    setDragDeg((dx / scene.width) * step);
+    setDragDeg((dx / (width || 1)) * step);
   };
   const onUp = (e: React.PointerEvent) => {
     if (!dragging) return;
     const dx = e.clientX - dragX.current;
     setDragging(false);
     setDragDeg(0);
-    setIndex(index - Math.round(dx / scene.width));
+    setIndex(index - Math.round(dx / (width || 1)));
   };
 
   return (
     <div className="flex flex-col items-center gap-2">
       <div
-        className={`relative touch-pan-y select-none ${scene.cls} ${dragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+        ref={sceneRef}
+        style={{ perspective: `${PERSPECTIVE_PX}px` }}
+        className={`relative touch-pan-y select-none ${CARD_WIDTH} ${dragging ? 'cursor-grabbing' : 'cursor-grab'}`}
         onPointerDown={onDown}
         onPointerMove={onMove}
         onPointerUp={onUp}
@@ -154,8 +182,25 @@ export function TeamSlotCarousel({
           e.stopPropagation();
         }}
       >
+        {/*
+          LE GABARIT — une VRAIE carte, laissée dans le flux, qui donne sa hauteur à
+          la scène. Les cartes du cylindre sont en `absolute` : sans elle la scène
+          serait plate et il faudrait lui écrire une hauteur à la main, c'est-à-dire
+          recommencer la copie de cotes qu'on vient de retirer.
+
+          Elle reste VISIBLE tant que la mesure n'a pas eu lieu, ce qui la rend
+          aussi le rendu serveur : le HTML servi porte une carte lisible et cliquable
+          (un cylindre 3D ne tourne de toute façon pas sans JS), et le cylindre la
+          recouvre à l'hydratation. `invisible` la retire alors du tableau
+          d'accessibilité et de l'ordre de tabulation — il ne reste pas deux fois la
+          même fiche à parcourir.
+        */}
+        <div className={width ? 'invisible' : ''}>{children[0]}</div>
+
         <div
-          className={`absolute inset-0 transform-3d ${dragging ? '' : 'transition-transform duration-300'}`}
+          className={`absolute inset-0 transform-3d ${dragging ? '' : 'transition-transform duration-300'} ${
+            width ? '' : 'invisible'
+          }`}
           style={{ transform: `translateZ(-${radius}px) rotateY(${-step * index + dragDeg}deg)` }}
         >
           {children.map((child, i) => {
