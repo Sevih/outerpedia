@@ -22,6 +22,26 @@ const paybooc = localFont({
   weight: '700',
   display: 'swap',
 });
+// Les DEUX polices que le portrait du jeu utilise (`src/components/character/
+// Portrait`) : `Text_Name` et le niveau en NotoSans_Bold, `Text_Demi` en
+// NotoSans_Regular — résolues en suivant le `m_PathID` de leur `m_Font` jusqu'au
+// bundle `font2`, puis converties en woff2 depuis les fichiers du jeu. Elles ne
+// servent QUE là, donc `preload: false` : déclarer la @font-face ne télécharge
+// rien tant qu'aucun élément ne réclame la famille.
+const notoSansBold = localFont({
+  src: '../fonts/NotoSans_Bold.woff2',
+  variable: '--font-portrait-name',
+  weight: '700',
+  display: 'swap',
+  preload: false,
+});
+const notoSansRegular = localFont({
+  src: '../fonts/NotoSans_Regular.woff2',
+  variable: '--font-portrait-demi',
+  weight: '400',
+  display: 'swap',
+  preload: false,
+});
 
 /**
  * Coquille <html>/<body> COMMUNE aux layouts racine. Il y en a plusieurs
@@ -36,7 +56,7 @@ export function RootDocument({ lang, children }: { lang: Lang; children: React.R
   return (
     <html
       lang={lang}
-      className={`${geistSans.variable} ${geistMono.variable} ${paybooc.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${paybooc.variable} ${notoSansBold.variable} ${notoSansRegular.variable}`}
       // Fonds décoratifs → base R2 (globals.css les lit en var — cf. cssBackgroundVars).
       style={cssBackgroundVars as React.CSSProperties}
     >

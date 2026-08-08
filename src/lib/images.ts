@@ -159,6 +159,26 @@ export const img = {
   power: () => `${BASE}/images/ui/stat/CM_Icon_Power.webp`,
   /** Fond sombre des étoiles de rareté (cartes de persos). */
   starSlot: () => `${BASE}/images/ui/star/CM_Character_Thumbnail_Star_Slot.webp`,
+  /**
+   * Étoile ÉTEINTE du rail vertical du PORTRAIT (`CM_icon_star_B`).
+   *
+   * Sprite distinct de `CM_icon_star_w` : le portrait fige six emplacements
+   * toujours visibles (`Star_Off_0..5`) sur lesquels le jeu allume les étoiles
+   * gagnées — la vignette carrée, elle, n'affiche que les étoiles allumées et
+   * n'a donc aucun besoin d'un « creux ». Cf. `Portrait`.
+   */
+  starEmpty: () => `${BASE}/images/ui/star/CM_icon_star_B.webp`,
+  /**
+   * Badge « synchronisé » du PORTRAIT (`m_SynchroObj`, 34×34). Présent dans le seul
+   * habillage `mainPage` — `long` a ce champ à NULL.
+   */
+  syncIcon: () => `${BASE}/images/ui/boss/CT_Sync_Icon.webp`,
+  /**
+   * Voile de l'état grisé du PORTRAIT (`m_DimImage`, allumé par `SetDim`).
+   * Aplat noir à la taille exacte du cadre, coins compris — ce n'est PAS le
+   * vignetage fixe de la vignette carrée (`CT_Slot_Dim_2`), qui lui est décoratif.
+   */
+  portraitDim: () => `${BASE}/images/ui/star/CM_Character_Thumbnail_Dim.webp`,
   /** Badge de recrutement (premium/limited/…) sur les cartes. */
   recruitTag: (tag: string) => `${BASE}/images/ui/recruit/${RECRUIT_TAG_SPRITE[tag]}.webp`,
   /** Sprite de recrutement par NOM (boutons/rubans de bannière — recruit.json). */

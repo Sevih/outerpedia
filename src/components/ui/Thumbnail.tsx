@@ -193,7 +193,7 @@ interface Skin {
 }
 
 /** `CHARACTER_STAR_COLOR` du jeu, dans le suffixe de sprite (`CM_icon_star_*`). */
-type StarTone = 'y' | 'o' | 'r' | 'v';
+export type StarTone = 'y' | 'o' | 'r' | 'v';
 
 /**
  * LES ÉTOILES D'UN PERSO NE SE COMPTENT PAS, ELLES SE LISENT DANS UNE TABLE.
@@ -256,6 +256,27 @@ const TRANSCENDENCE: Record<number, Record<number, readonly [number, StarTone, n
     9: [6, 'y', 0],
   },
 };
+
+/**
+ * La ligne de `TRANSCENDENCE` qui s'applique, sous la forme du jeu :
+ * `[ShowUIStar, StarColor, StarPlus]`.
+ *
+ * Exportée parce que le PORTRAIT (`components/character/Portrait`) la lit aussi
+ * — et pas par ressemblance : les deux habillages passent par la MÊME fonction,
+ * `CUtilUI.SetStarImage(Image[], BasicStar, TransStar, CHARACTER_TYPE)`, qui va
+ * chercher `GetCharacterTranscendent` et lit ces trois colonnes. Une seule règle
+ * dans le jeu, une seule table ici.
+ *
+ * Rareté ou palier hors table : on retombe sur « autant de jaunes que la
+ * rareté ». Une donnée inattendue ne doit pas faire disparaître les étoiles.
+ */
+export function transcendenceRow(
+  rarity: number,
+  transcendence?: number,
+): readonly [number, StarTone, number] {
+  const row = TRANSCENDENCE[rarity]?.[transcendence ?? rarity];
+  return row ?? [Math.min(Math.max(rarity, 0), 6), 'y', 0];
+}
 
 const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 
@@ -461,12 +482,7 @@ function starRow(props: ThumbnailProps): StarTone[] {
     const n = props.stars && props.stars > 0 ? Math.min(props.stars, 6) : 0;
     return Array.from({ length: n }, () => 'y');
   }
-  const row = TRANSCENDENCE[props.rarity]?.[props.transcendence ?? props.rarity];
-  // Rareté ou palier hors table : on retombe sur « autant de jaunes que la
-  // rareté » plutôt que de ne rien afficher — une donnée inattendue ne doit pas
-  // faire disparaître la rangée.
-  if (!row) return Array.from({ length: Math.min(Math.max(props.rarity, 0), 6) }, () => 'y');
-  const [show, tone, plus] = row;
+  const [show, tone, plus] = transcendenceRow(props.rarity, props.transcendence);
   return Array.from({ length: show }, (_, i) => (plus > 0 && i === show - 1 ? tone : 'y'));
 }
 

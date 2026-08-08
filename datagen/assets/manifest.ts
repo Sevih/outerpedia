@@ -639,6 +639,14 @@ export function buildAssetManifest(): AssetRequest[] {
         'CM_icon_star_o',
         'CM_icon_star_r',
         'CM_icon_star_v',
+        // PORTRAIT (`CUICharacterLongThumbnail`, cf. src/components/character/Portrait).
+        // L'étoile ÉTEINTE de son rail vertical : le portrait montre six
+        // emplacements en creux et allume ceux qui sont acquis, là où la vignette
+        // carrée n'affiche que les étoiles allumées. `_B` n'est pas `_w` — le
+        // prefab pointe bien ce sprite-ci.
+        'CM_icon_star_B',
+        // Le voile de `SetDim` (état grisé), aux dimensions exactes du cadre.
+        'CM_Character_Thumbnail_Dim',
       ],
     ],
     ['evo', ['CM_Evolution_Tab', 'CM_Evolution_Tab_Select']],
@@ -901,6 +909,9 @@ export function buildAssetManifest(): AssetRequest[] {
       'CT_Slot_Bottom',
       'CT_Slot_Boss',
       ...['Fire', 'Water', 'Earth', 'Light', 'Dark'].map((e) => `CT_Element_${e}`),
+      // Badge « synchronisé » du PORTRAIT (`m_SynchroObj`, 34×34) — présent dans
+      // le seul habillage `mainPage`, cf. src/components/character/Portrait.
+      'CT_Sync_Icon',
     ])
       push({
         kind: 'image',

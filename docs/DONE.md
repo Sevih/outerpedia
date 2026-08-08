@@ -7,6 +7,145 @@
 
 ## 2026-08-08
 
+- **Le PORTRAIT du jeu transcrit (`Portrait`), et la page `/dev/portrait`.** Le
+  grand format vertical (180×344). Rien n'est branché dans ce lot : on livre la
+  transcription et son rendu de contrôle, le raccordement des appelants se
+  décidera après vue.
+  - **DEUX habillages, un seul composant**, parce que le jeu fait exactement ça :
+    deux nœuds portent le même MonoBehaviour `CUICharacterThumbnail` en 180×344.
+    `mainPage` (`CharacterThumbnailList`, dans `CUICharacterMainPageScrollCell`) —
+    la carte de la page « personnages », de l'archive et de la transcendance,
+    c'est CELLE que les grilles du site imitent, et c'est le défaut ; `long`
+    (`CUICharacterLongThumbnail`) — pvploading, synchro, infiltrate, recruit.
+    Trouvés en balayant les 578 bundles `prefabs/ui` à la recherche d'un cadre de
+    cette taille. Le rail d'étoiles, l'élément, la classe, le voile et l'ancrage
+    du niveau y sont RIGOUREUSEMENT identiques : la table `SKIN` ne porte que la
+    boîte du nom (150 contre 100), la teinte des étoiles, et les deux badges que
+    `long` n'a pas.
+  - **La boîte du nom décide de sa TAILLE** (constat Sevih sur le jeu : le nom est
+    plus gros que son titre, aucun des deux tronqué). Comme `m_BestFit` réduit le
+    corps jusqu'à ce que le texte tienne, la largeur de la boîte décide du corps
+    rendu : sur « Tamamo-no-Mae » et « Kitsune of Eternity », une boîte de 150
+    descend le nom à 16,9 pendant que le titre reste plafonné à son maximum de 14 —
+    l'écart se lit ; à 100 ils tombent à 11,3 et 10,6, c'est-à-dire au même corps.
+    La variante `cuirecruit` (170) a été essayée et écartée : elle déplaçait aussi
+    l'origine (5 au lieu de 20 du bord) et sortait le texte du cadre.
+  - **L'alignement VERTICAL du titre diffère entre les deux habillages**, et c'est
+    la seule valeur de typographie qu'ils n'écrivent pas pareil : `m_Alignment`
+    vaut `MiddleLeft` (3) en `mainPage` contre `LowerLeft` (6) en `long`. Le
+    composant appliquait `LowerLeft` aux deux, ce qui descendait le titre de
+    8 unités en `mainPage` et le collait au nom (remarque Sevih : « le titre a
+    l'air d'être un peu plus haut en vrai »). Corrigé, et le témoin PIL montre le
+    décalage de 8 unités exactement.
+  - **Les DEUX polices du jeu, résolues et embarquées.** Sevih avait vu à l'œil que
+    « titre et nom n'ont pas l'air d'être régis par les mêmes règles de style » ;
+    les `m_Font` le confirmaient sans les nommer, et le bundle `font2` manquait sur
+    le disque. Sevih l'a extrait : `Text_Name` (et les deux textes du niveau)
+    pointent **NotoSans_Bold**, `Text_Demi` **NotoSans_Regular** — même famille,
+    deux graisses, d'où l'écart de style. Les deux fichiers du jeu sont convertis
+    en woff2 dans `src/fonts/` (196 et 194 Ko) et déclarés dans `root-document` en
+    `preload: false` : la `@font-face` existe partout, mais rien ne se télécharge
+    tant qu'aucun portrait n'est peint. Elles ne couvrent que latin + hangûl
+    (11 435 glyphes) : sur `jp` et `zh`, le jeu retombe lui aussi ailleurs.
+  - **Le crénage est DÉSACTIVÉ, et c'est fidèle** : les deux Noto ont un `GPOS`
+    avec du crénage que le navigateur applique par défaut, mais le `Text`
+    historique d'Unity empile les chasses sans moteur de composition (c'est
+    TextMeshPro qui a introduit le crénage). `fontKerning: 'none'` colle donc au
+    jeu — et rend exacte la somme sur laquelle `m_BestFit` s'appuie.
+  - **Les deux badges d'état partagent UN emplacement** (constat Sevih : un
+    core-fusion ne peut pas être synchronisé). Le prefab les pose pourtant à deux
+    hauteurs, et c'est un leurre : leur parent `Sync_Core` (34×74) porte un
+    `VerticalLayoutGroup` en `m_ChildAlignment = 7` (LowerCenter), qui replace au
+    runtime l'enfant ACTIF — les `m_AnchoredPosition` écrits sont de l'état
+    d'éditeur, celle de `Core` tombant même hors du conteneur. L'unique badge est
+    donc calé en bas des 74, à `top` 191.
+  - **Les sprites de classe se demandent au SLUG DU SITE**, pas à l'énum du jeu :
+    le datagen publie `CT_Class_Attacker` sous la clé `CT_Class_Striker` et
+    `CT_Class_Priest` sous `CT_Class_Healer`. Traduire vers l'énum donnait deux 404
+    (remarque Sevih) ; c'est `img.boss(\`CT_Class_${cap(slug)}\`)` qu'il faut,
+    exactement comme la vignette carrée le fait déjà.
+  - **Le nœud identifié, avec sa preuve.** `CUIFaceIcon.m_LongThumbnail` (7ᵉ
+    champ `GameObject`, aligné sur `FACE_TYPE.LONGTHUMBNAIL = 6`) pointe le
+    GameObject **`MainThumbnail`** — vérifié en suivant le `m_PathID` du champ,
+    pas le nom, sur **les 255 prefabs `FI_` qui le renseignent, sans exception**
+    (les 478 autres l'ont à `path_id = 0`). Mais `MainThumbnail` ne porte AUCUNE
+    chrome : juste un masque de 180×344 et un `Character` à (0,0), taille égale.
+    La chrome vit ailleurs, dans **`CUICharacterLongThumbnail`** — trouvé en
+    balayant les 578 bundles `prefabs/ui` à la recherche d'un cadre de 180×344.
+    Il porte le MonoBehaviour **`CUICharacterThumbnail`**, la MÊME classe que les
+    deux vignettes carrées, qui expose un `SetLongData` en propre.
+  - **Les 478 sans portrait long sont des MONSTRES** (ids `4xxxxxx`), plus quatre
+    cas isolés. Les **124 personnages du site ont TOUS leur `MainThumbnail`** :
+    la page n'a aucun trou à signaler côté persos.
+  - **Le sens de remplissage des étoiles ne se lit pas dans le prefab** — il a
+    fallu désassembler `libil2cpp.so`. `CUtilUI.SetStarImage` (la même fonction
+    que la vignette carrée, d'où la table `TRANSCENDENCE` réutilisée et non
+    recopiée) éteint tout le tableau, puis allume `m_StarImage[0..ShowUIStar-1]`
+    par indexation DIRECTE et colore `m_StarImage[ShowUIStar-1]`. Or le prefab
+    câble ce tableau `[Star5 … Star0]`, index 0 en HAUT : les étoiles gagnées
+    occupent donc le haut du rail, et la teinte du « + » va à la plus BASSE des
+    allumées. Validé au compositeur PIL sur les sept paliers d'un 3★.
+  - **Quatre pièges tranchés par la donnée.** Le masque `CT_Mask_Thumbnail` est
+    en 9-slice border 28 — de quoi croire à des coins arrondis — mais son alpha
+    est à 255 partout, coins compris : il n'écrête rien, donc pas de
+    `border-radius`. `Dim` est `m_DimImage` (aplat noir, `SetDim`), pas un
+    vignetage : le prefab le laisse actif en éditeur, le rendre par défaut
+    noircirait tout. `LowBg` (le dégradé sous le nom) est INACTIF dans les onze
+    copies. Et **tous** les champs de badge du MonoBehaviour sont NULL, y compris
+    `m_BGObjects` — le portrait ne porte aucune pastille, et son fond est cuit
+    dans le PNG.
+  - **Deux sprites au manifeste** : `CM_icon_star_B` (l'étoile en creux du rail,
+    et non `_w`) et `CM_Character_Thumbnail_Dim`. Élément, classe et slot
+    d'étoiles réutilisent les sprites déjà collectés.
+  - **La page liste les 9 ÉCARTS que le site porte aujourd'hui** : `CharacterCard`
+    et le mode « cartes » du tier-list-maker rendent déjà `img.portrait(id)` avec
+    leur chrome à l'estime, et des nombres différents l'un de l'autre — ratio
+    faux (0,516/0,521/0,519 contre 0,5233) avec `object-cover` qui rogne l'art,
+    dégradé du bas inventé, étoiles comptées sur la rareté au lieu de
+    `ShowUIStar`, badge de recrutement que le jeu ne pose pas. Plus un TROISIÈME
+    rendu, le jumeau canvas de l'export PNG.
+  - **`m_BestFit` porté, pas éludé** (remarque Sevih : ça débordait dès qu'un nom
+    était long ou accompagné d'un titre). Les quatre textes l'ont actif ; le corps
+    est donc réduit jusqu'à `m_MinSize` pour tenir **sur une ligne** — leur
+    `m_HorizontalOverflow` vaut pourtant Wrap, mais Sevih a vérifié en jeu que ni
+    le nom ni le titre ne passent à la ligne. `FitText` n'a pas été réutilisé : il
+    comprime en `scaleX`, ce qui DÉFORME la lettre au lieu de réduire le corps.
+  - **La largeur du texte est MESURÉE, plus estimée** (remarque Sevih : « Ais
+    Wallenstein » sortait coupé au milieu du « i » final). Un premier jet estimait
+    la largeur par classe de caractère ; il sous-évaluait ce nom de **10,6 %**, soit
+    16 unités sur 150 — le « n » passait hors cadre. Une estimation ne pouvait pas
+    tenir, parce que la contrainte n'est pas « à peu près » : c'est déborder ou non.
+    Le composant porte donc UNE TABLE PAR POLICE — 101 chasses chacune, lues au
+    `hmtx` de NotoSans_Bold et NotoSans_Regular et divisées par leur `unitsPerEm`
+    de 1000, groupées par valeur pour rester relisibles ligne à ligne. Les 202
+    entrées ont été recontrôlées une à une contre les fichiers : zéro écart.
+    Vérifié ensuite en rejouant les 992 chaînes du corpus (nom et titre, quatre
+    langues) rendues par FreeType en layout BASIC — celui qui ne crène pas, comme
+    Unity : zéro débordement, le résidu (0,03 % au pire) étant l'arrondi entier du
+    corps par FreeType, qui s'efface quand on augmente la résolution du témoin.
+    Reste hors mesure ce que ces polices NE couvrent PAS — kana et idéogrammes,
+    peints par une police système et supposés pleine chasse ; le hangûl, lui, est
+    mesuré (11 172 syllabes à 0,874, identique dans les deux graisses).
+  - **Le titre n'est pas affiché pour tout le monde**, et ça ne se déduit pas du
+    `nickname` — les 124 en ont un en base. L'indication est `showNickName`
+    (21 persos sur 124), et la règle du site vit déjà dans `characterNamePrefix`,
+    qui couvre aussi le « Core Fusion » des entités fusionnées : c'est elle que la
+    page appelle, pas le nickname brut.
+  - **Deux valeurs relevées mais non appliquées, corrigées** : `m_FontStyle = 2`
+    sur les deux textes du niveau vaut ITALIQUE (dans Unity 1 = gras) — les seuls
+    du portrait à ne pas être droits ; et le `ContentSizeFitter` de `Level` a
+    `m_HorizontalFit = 2` (PreferredSize), donc sa boîte s'ajuste au nombre au
+    lieu de le contraindre — seuls son `left` et son `top` s'appliquent.
+  - **Ce qui reste incertain est listé à part sur la page**, pas noyé : la teinte
+    `#FCDB42` (appuyée sur une absence dans le désassemblage), le sprite exact des
+    étoiles allumées (le runtime écrase celui du prefab, et le littéral n'a pas pu
+    être résolu), et la largeur des KANA et IDÉOGRAMMES — et d'eux seuls, puisque
+    aucune des deux Noto n'en porte : c'est une police système qui les peint, dans
+    le jeu comme ici, et on la suppose pleine chasse. Il ne reste donc que DEUX
+    incertitudes de fond ; celle sur les polices est levée. La variante
+    `cuirecruit` de la boîte du nom (170 de large) a été essayée et écartée : elle
+    déplaçait aussi l'origine et sortait le texte du cadre.
+
 - **Les portraits de MONSTRE des guides rejoignent la vignette — six vues, et
   une règle pour trancher le reste.** Le premier balayage n'avait cherché que ce
   qui EMPILAIT la géométrie du portrait ; il manquait toute une famille qui

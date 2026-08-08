@@ -24,6 +24,11 @@ const PAGES: { href: string; title: string; desc: string }[] = [
     title: 'Vignette du jeu',
     desc: 'La vignette transcrite des prefabs `uimonsterthumbnail` et `uicharacterthumbnail` : ce que les deux habillages partagent, et les huit calques où ils divergent.',
   },
+  {
+    href: '/dev/portrait',
+    title: 'Portrait du jeu',
+    desc: 'Le grand format vertical (180×344), transcrit de `CUICharacterLongThumbnail` : le rail d’étoiles rempli par le haut, et les écarts que `CharacterCard` et le tier-list-maker portent aujourd’hui.',
+  },
 ];
 
 export default function DevIndex() {
