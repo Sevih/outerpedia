@@ -7,6 +7,38 @@
 
 ## 2026-08-08
 
+- **Le mismatch d'hydratation du tier list maker venait de FIREFOX, pas du code**
+  (signalé par Sevih, extensions déjà écartées). Serveur et client calculaient la
+  MÊME chose — le HTML servi portait bien `disabled=""` sur les cinq boutons
+  « vider la ligne », et `tier.items.length === 0` vaut `true` des deux côtés au
+  premier rendu. Ce que React signalait, c'est que l'attribut avait DISPARU du DOM
+  avant l'hydratation : au rechargement (F5), Firefox restaure l'état des contrôles
+  de formulaire, donc les boutons que le JS avait activés après coup — les lignes
+  remplies par le `?z=` de l'URL — revenaient activés avant que React ne prenne la
+  main. Le lien du rapport le prouve : son payload décode en `counts [1,0,1,0,0]`,
+  et le diff ne portait que sur `t0` et `t2`.
+  - `RowBtn` s'inactive maintenant par `aria-disabled`, jamais par l'attribut
+    `disabled` : Firefox n'a plus rien à restaurer, et le bouton reste au parcours
+    clavier (ce que `disabled` lui retire sans l'annoncer). La garde passe dans le
+    `onClick`, le `stopPropagation` restant INCONDITIONNEL — un bouton `disabled`
+    n'émettait pas de clic du tout ; sans ça, le clic retomberait maintenant sur le
+    `onClick` de la ligne et y placerait l'item sélectionné.
+  - Les cinq boutons de ligne sont couverts, pas seulement « vider » : un lien
+    partagé dont le nombre de lignes diffère du défaut décale aussi les boutons
+    monter/descendre inactifs. HTML servi vérifié après coup — 0 `disabled`, 25
+    `aria-disabled` (5 lignes × 5 boutons).
+  - Les autres outils à état client ne sont PAS exposés, mesuré sur le HTML servi :
+    0 occurrence de `disabled` au SSR pour le progress tracker (garde `!ready`
+    explicite), le damage calculator et le team planner (état vide au SSR, `?z=`
+    décodé dans un effet). Firefox ne restaure que ce qu'il a parsé ; ce que React
+    crée ensuite lui échappe. Le tier list maker était le seul à peindre son
+    éditeur complet côté serveur.
+  - **Le piège à retenir** n'est donc pas `disabled` : c'est un contrôle de
+    formulaire PRÉSENT dans le HTML SSR dont `disabled`/`checked`/`value` bascule
+    après restauration client. Les cases à cocher y sont plus exposées encore
+    (`checked` est ce que Firefox restaure le plus volontiers) ; aucune n'est
+    rendue au SSR aujourd'hui.
+
 - **Les paliers d'amélioration sont du TEXTE DE JEU, comme les descs** (constat
   Sevih). `EnhancementList` les rendait en texte brut (`upgrades.join(', ')`) :
   la balise de couleur et le `\n` littéral s'affichaient tels quels. Trois

@@ -1995,6 +1995,16 @@ function ToolbarButton({
   );
 }
 
+/**
+ * Bouton de commande de ligne — inactivé par `aria-disabled`, JAMAIS par
+ * l'attribut `disabled` : Firefox RESTAURE l'état des contrôles de formulaire
+ * au rechargement (F5), donc un bouton que le JS avait activé après coup (une
+ * ligne remplie par le `?z=` de l'URL) revient activé AVANT l'hydratation —
+ * React voit un DOM qui ne correspond plus à son rendu et crie au mismatch.
+ * Rien à restaurer ici : l'attribut ne bouge plus, la garde est dans le
+ * `onClick` (le `stopPropagation` reste inconditionnel, sinon un clic sur un
+ * bouton inactif retomberait sur le `onClick` de la ligne).
+ */
 function RowBtn({
   onClick,
   disabled,
@@ -2013,9 +2023,10 @@ function RowBtn({
       type="button"
       onClick={(e) => {
         e.stopPropagation();
+        if (disabled) return;
         onClick();
       }}
-      disabled={disabled}
+      aria-disabled={!!disabled}
       title={title}
       className={[
         'flex h-6 w-6 items-center justify-center rounded text-sm transition',
