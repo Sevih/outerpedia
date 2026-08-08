@@ -71,6 +71,17 @@ import { fitsOnTwoLines } from '@/components/character/CharacterPortrait';
  */
 export const CARD_WIDTH = 'w-20 sm:w-26 lg:w-32 min-[1440px]:w-38';
 
+/**
+ * Les MÊMES largeurs, en pixels — l'ordre et les valeurs de `CARD_WIDTH`, à garder
+ * côte à côte pour qu'une modification de l'une saute aux yeux sur l'autre (une
+ * classe Tailwind ne se calcule pas depuis un nombre : le scanner ne lit que des
+ * littéraux, la dérivation est impossible).
+ *
+ * Le carrousel d'équipe en a besoin AVANT tout rendu client : sa réserve latérale
+ * doit être connue du serveur, sinon la rangée se réaligne sous les yeux du lecteur.
+ */
+export const CARD_PX = [80, 104, 128, 152] as const;
+
 const SCALE = {
   default: {
     width: CARD_WIDTH,

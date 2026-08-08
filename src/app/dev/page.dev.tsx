@@ -29,6 +29,11 @@ const PAGES: { href: string; title: string; desc: string }[] = [
     title: 'Portrait du jeu',
     desc: 'Le grand format vertical (180×344), transcrit de `CUICharacterLongThumbnail` : le rail d’étoiles rempli par le haut, et les écarts que `CharacterCard` et le tier-list-maker portent aujourd’hui.',
   },
+  {
+    href: '/dev/carousel',
+    title: 'Carrousel d’équipe',
+    desc: 'Les postes des guides aux quatre paliers du barème et aux six cardinalités réelles, dans quatre vrais viewports : de combien les cartes tournées débordent de leur scène, et ce que l’emprise déclarée y change.',
+  },
 ];
 
 export default function DevIndex() {

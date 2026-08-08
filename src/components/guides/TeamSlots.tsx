@@ -46,6 +46,11 @@ export function TeamSlots({
   // recrutement) — comme le fait le roster.
   const curated = loadCuratedCharacters();
 
+  // La place que les cartes tournées prennent hors scène est une propriété de la
+  // RANGÉE, pas du poste : le poste le plus fourni la fixe pour tous, sinon les
+  // quatre cartes d'une équipe cessent d'être régulièrement espacées.
+  const rowOptions = Math.max(...slots.map((options) => options.length));
+
   return (
     <section className="space-y-3">
       {(title || badge) && (
@@ -54,11 +59,17 @@ export function TeamSlots({
           {title}
         </h2>
       )}
-      {/* Les postes RESPIRENT : chaque carte est le nez d'un cylindre dont les
-          voisines débordent sur les côtés. Collées, deux roues voisines se
-          marchent dessus et on ne sait plus quelle carte appartient à quel
-          poste. */}
-      <div className="flex flex-wrap justify-center gap-12 sm:gap-16 lg:gap-24">
+      {/* AUCUN écart horizontal, et c'est voulu. Chaque carte est le nez d'un
+          cylindre dont les voisines débordent sur les côtés ; cet écart-là a
+          longtemps essayé de couvrir ce débordement à l'aveugle (48 → 64 → 96 px
+          selon le viewport), alors qu'il dépend du NOMBRE D'OPTIONS et pas de la
+          taille de l'écran — un poste à trois options avait trop d'air, un poste à
+          huit se traversait quand même. Le carrousel RÉSERVE désormais sa propre
+          emprise (cf. `sideOverflow`) : deux emprises accolées ne se touchent déjà
+          pas, en rajouter par-dessus ne ferait que délaver la rangée.
+          L'écart VERTICAL reste, lui : l'emprise réservée est latérale, elle ne
+          dit rien de deux rangées enroulées l'une sous l'autre. */}
+      <div className="flex flex-wrap justify-center gap-x-0 gap-y-6">
         {slots.map((options, i) => {
           // Nom inconnu = erreur de contenu → le build SSG CASSE (le résolveur jette).
           const resolved = options.map((name) => resolveGuideCharacter(name, lang, 'TeamSlots'));
@@ -69,6 +80,7 @@ export function TeamSlots({
               labels={resolved.map((r) => r.name)}
               prevLabel={labels.prev}
               nextLabel={labels.next}
+              rowOptions={rowOptions}
             >
               {resolved.map(({ character: c, href }) => (
                 <CharacterCard

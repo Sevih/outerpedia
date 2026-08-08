@@ -7,6 +7,62 @@
 
 ## 2026-08-08
 
+- **Les postes d'équipe cessent de se traverser — et `/dev/carousel` pour le voir.**
+  Le carrousel est le seul endroit du site où une carte est TOURNÉE : ses voisines
+  se projettent hors de la scène, et l'écart du conteneur essayait de couvrir ce
+  débordement à l'aveugle. Il grandissait avec l'ÉCRAN (48 → 64 → 96 px) quand le
+  débordement dépend du NOMBRE D'OPTIONS — deux quantités sur deux axes qui ne se
+  croisent jamais : suffisant au-dessus de 1024, jamais en dessous, et les roues
+  voisines s'y traversaient.
+  - **Le débordement se CALCULE** (`sideOverflow`) à partir du transform lui-même :
+    `x₃ = x₀·cos θ + r·sin θ`, `z₃ = r·cos θ − x₀·sin θ − r`, puis la perspective.
+    Ma première version était FAUSSE — elle réduisait la carte à son centre avec une
+    seule échelle. C'est la question de Sevih (« il est calculé comment ? ») qui l'a
+    sortie : une carte tournée n'est pas plate face à l'œil, ses deux arêtes
+    verticales sont à des profondeurs différentes donc à des échelles différentes.
+    L'erreur allait dans les DEUX sens — 12 px réservés pour 35 nécessaires à quatre
+    options et 152 px de carte, ce qui ramenait le chevauchement sur le cas le plus
+    fréquent des guides ; 73 pour 49 réels à huit options.
+  - Le résultat reste contre-intuitif, et c'est pourquoi le calcul vit dans le
+    composant plutôt qu'en écart choisi à l'œil : le débordement NE DÉPEND PRESQUE
+    PAS de la taille de la carte (35 à 43 px de quatre à six options, sur les quatre
+    paliers) — la perspective étant fixe, une carte plus grande tourne sur un rayon
+    plus grand mais recule d'autant.
+  - **La réserve est une propriété de la RANGÉE, pas du poste** (constat Sevih,
+    capture d'une équipe 2/2/6/2) : chacun réservant la sienne, le poste fourni
+    écartait ses voisins de lui seul et les quatre cartes cessaient d'être
+    régulièrement espacées. `TeamSlots` calcule le maximum une fois et le passe à
+    tous (`rowOptions`). Le poste à une SEULE option — qui ne rend pas de cylindre —
+    porte désormais le `ref` et la réserve : faute de mesure il ne réservait rien et
+    décalait la rangée à lui seul.
+  - **Plancher à une équipe pleine**, quatre options (décision Sevih : « 1 affichée +
+    3 en réserve »). En dessous la géométrie ne déborde presque plus — 0 px à deux
+    options — et les cartes se colleraient bord à bord. Effet secondaire meilleur que
+    le correctif lui-même : toutes les rangées peu fournies partagent la même
+    réserve, donc les équipes d'un guide restent alignées ENTRE ELLES, pas seulement
+    à l'intérieur d'une rangée.
+  - **Plus d'écart horizontal dans le conteneur** (`gap-x-0 gap-y-6`) : deux emprises
+    accolées ne se touchent déjà pas, en rajouter délaverait la rangée. Le vertical
+    reste — la réserve est latérale, elle ne dit rien de deux rangées enroulées.
+  - **Aucun réalignement au chargement** (constat Sevih : « y'a comme un flash »).
+    DEUX causes distinctes. La réserve dépendait de la mesure, donc n'existait pas au
+    rendu serveur : elle se calcule maintenant sur le pire des quatre paliers
+    (`CARD_PX`, exportée à côté de `CARD_WIDTH` — une classe Tailwind ne se dérive
+    pas d'un nombre, les deux formes restent littérales et côte à côte), soit 2 à 4 px
+    d'approximation contre une valeur disponible au PREMIER rendu. Et le cylindre
+    était rendu d'emblée avec un rayon de 0 — cartes empilées au centre à pleine
+    taille — puis le `transition-transform` ouvrait la roue en 300 ms à chaque
+    chargement ; il n'est plus MONTÉ tant que la scène n'est pas mesurée, le masquer
+    ne suffisait pas (une transition court aussi sur un élément qu'on vient de rendre
+    visible).
+  - **`/dev/carousel`** : quatre iframes aux largeurs des quatre paliers. Une page ne
+    peut pas montrer quatre viewports à la fois, et une prop de contournement
+    finirait par diverger de la prod — là, c'est le vrai composant dans le vrai
+    chemin de code. La rangée y est HÉTÉROGÈNE (`[max, 1, moitié, max]`) : quatre
+    postes égaux ne montreraient jamais le défaut d'alignement. La bascule
+    avant/après rétablit AUSSI les anciens écarts du conteneur — comparer sans cela
+    truquerait la démonstration en faveur du correctif.
+
 - **Les cartes du site BRANCHÉES sur le portrait, et une seule table de tailles.**
   Le lot précédent livrait la transcription sans la raccorder ; celui-ci raccorde
   les cinq appelants DOM (liste des persos, tier lists, bannières d'accueil,
