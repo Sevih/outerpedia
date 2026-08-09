@@ -36,16 +36,24 @@
  */
 import FX from '@datagen/assets/portrait-fx.json';
 
-/** Un dégradé Unity : deux rampes INDÉPENDANTES, couleurs et alphas. */
+/**
+ * Un dégradé Unity : deux rampes INDÉPENDANTES, couleurs et alphas.
+ *
+ * `mode` 0 = Blend (interpolation), 1 = Fixed — chaque clé règne jusqu'à son
+ * temps, sans fondu. Le `star` de `_2000086` tire sa teinte d'un Fixed à quatre
+ * couleurs : le lisser fabriquerait des mélanges que le jeu n'affiche jamais.
+ */
 export interface Gradient {
+  mode?: number;
   rgb: { t: number; c: number[] }[];
   a: { t: number; a: number }[];
 }
 
 /**
  * `MinMaxGradient` — `mode` 0 = couleur, 1 = dégradé, 2 = deux couleurs (tirage
- * au sort à la naissance), 3 = deux dégradés. Les modes 2 et 3 n'apparaissent
- * que sur les émetteurs décoratifs.
+ * au sort à la naissance), 3 = deux dégradés, 4 = couleur ALÉATOIRE (un point
+ * tiré dans `maxGradient` à la naissance). Les modes 2 à 4 n'apparaissent que
+ * sur les émetteurs décoratifs.
  */
 export interface MinMaxGradient {
   mode: number;

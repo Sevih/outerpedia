@@ -116,10 +116,20 @@ interface SizeOverLifetimeRaw {
  * Les deux rampes s'interpolent SÉPARÉMENT, comme Unity le fait : les points de
  * contrôle des couleurs et ceux des alphas ne coïncident pas (`m_NumColorKeys`
  * et `m_NumAlphaKeys` diffèrent souvent). Hors bornes, la clé la plus proche.
+ *
+ * En mode FIXED (`mode = 1`), pas de fondu : chaque clé règne jusqu'à son temps
+ * — la couleur est celle de la PREMIÈRE clé dont le temps couvre `t`, et la
+ * dernière règne au-delà. C'est le mode du dégradé quatre-teintes du `star` de
+ * `_2000086` : l'interpoler fabriquerait des mélanges que le jeu n'affiche pas.
  */
 export function evalGradient(g: Gradient, t: number): [number, number, number, number] {
+  const fixed = g.mode === 1;
   const pick = <K extends { t: number }>(keys: K[]): [K, K, number] => {
     if (keys.length === 1) return [keys[0], keys[0], 0];
+    if (fixed) {
+      const k = keys.find((key) => key.t >= t) ?? keys[keys.length - 1];
+      return [k, k, 0];
+    }
     let i = 0;
     while (i < keys.length - 2 && keys[i + 1].t < t) i++;
     const a = keys[i];
@@ -141,8 +151,11 @@ export function evalGradient(g: Gradient, t: number): [number, number, number, n
  * La couleur d'un `MinMaxGradient` à l'âge `t`.
  *
  * Les modes « deux » (2 et 3) tirent au sort À LA NAISSANCE de la particule, une
- * fois pour toutes : `lerp` est donc le tirage, pas une moyenne. Les calques de
- * cadre n'en usent pas ; `star` tire son gradient entre deux rampes bleutées.
+ * fois pour toutes : `lerp` est donc le tirage, pas une moyenne. Le mode 4
+ * (couleur aléatoire) tire de même, mais c'est un POINT du dégradé qu'il tire :
+ * `lerp` devient l'abscisse, et l'âge ne compte plus — chaque étincelle du
+ * `star` de `_2000086` garde sa teinte (violet, turquoise, orange ou rose,
+ * dégradé Fixed) toute sa vie.
  */
 export function evalMinMax(
   m: MinMaxGradient,
@@ -164,6 +177,8 @@ export function evalMinMax(
     }
     case 1:
       return m.maxGradient ? evalGradient(m.maxGradient, t) : [1, 1, 1, 1];
+    case 4:
+      return m.maxGradient ? evalGradient(m.maxGradient, lerp) : [1, 1, 1, 1];
     default: {
       const a = m.minGradient ? evalGradient(m.minGradient, t) : [1, 1, 1, 1];
       const b = m.maxGradient ? evalGradient(m.maxGradient, t) : [1, 1, 1, 1];
@@ -295,6 +310,35 @@ export function unsupportedBillboard(e: FxEmitter): string | null {
   const size = e.sizeOverLifetime as SizeOverLifetimeRaw | undefined;
   if (size?.separateAxes) missing.push('taille sur la vie par axe');
   return missing.length ? missing.join(', ') : null;
+}
+
+/**
+ * Un CALQUE-QUAD : un émetteur billboard qui n'est PAS une pluie de particules
+ * mais un calque de cadre de plus — une rafale unique d'UNE particule immobile
+ * dont la vie reboucle (`ringBufferMode = 2`), le patron exact d'`inner`/`out`,
+ * dessiné en quad plein plutôt qu'en maille. Le `web` de `_2000086` est le
+ * premier du genre : un voile de 33 × (6,72 ; 11,50) ≈ 222 × 380 unités qui
+ * couvre la carte entière.
+ *
+ * Les critères collent au patron, pas à l'à-peu-près : le moindre écart
+ * (vitesse, rotation initiale, forme d'émission, seconde rafale) renvoie
+ * l'émetteur vers la simulation, qui refuse LOUD ce qu'elle ne transcrit pas.
+ */
+export function isQuadLayer(e: FxEmitter): boolean {
+  const bursts = e.emission.bursts as { count: number }[];
+  return (
+    e.renderMode === 0 &&
+    !e.shape &&
+    e.emission.rateOverTime === 0 &&
+    bursts.length === 1 &&
+    bursts[0].count === 1 &&
+    e.ringBufferMode === 2 &&
+    e.startSpeed === 0 &&
+    e.startSpeedMode === 0 &&
+    e.startRotation === 0 &&
+    e.startRotationMode === 0 &&
+    e.startSizeMode === 0
+  );
 }
 
 /** Une particule prête à dessiner — unités du CADRE, relatives à l'émetteur, Y vers le HAUT. */
@@ -578,6 +622,14 @@ export function fxBleed(effectName: string): { x: number; y: number } {
     if (e.renderMode === 4 && mesh) {
       for (const [vx, vy] of mesh.v)
         feed(ox + vx * e.startSize * e.scale[0], oy - vy * e.startSize * e.scale[1]);
+    } else if (isQuadLayer(e) && e.material) {
+      // Le quad plein d'un calque-quad, étiré par axe comme sa maille l'aurait
+      // été — sa rotation initiale est nulle (critère d'`isQuadLayer`), les
+      // extents sont donc alignés aux axes, sans marge de rotation à prendre.
+      const hw = 0.5 * e.startSize * e.scale[0];
+      const hh = 0.5 * (e.size3D ? e.startSizeY : e.startSize) * e.scale[1];
+      feed(ox - hw, oy - hh);
+      feed(ox + hw, oy + hh);
     } else if (e.renderMode === 0 && e.material && e.shape && !unsupportedBillboard(e)) {
       const shape = e.shape as ShapeRaw;
       const s = e.scale[0];

@@ -88,7 +88,7 @@ EFFECT_PREFIX = 'FX_UI_Character_List_'
 
 #: Les effets rendus par le site. Élargir cette liste est le SEUL geste à faire
 #: pour en servir un de plus — le reste du script est data-driven.
-DEFAULT_EFFECTS = ['Demi', 'Dungeon', 'Seasonal']
+DEFAULT_EFFECTS = ['Demi', 'Dungeon', 'Seasonal', '2000086']
 
 
 def bundle_path(name: str) -> Path:
@@ -347,8 +347,14 @@ def gradient(g: dict) -> dict:
     Unity range les temps en entiers 16 bits ; les deux rampes sont indépendantes
     (`m_NumColorKeys` / `m_NumAlphaKeys`) et il faut les garder telles quelles :
     les fusionner inventerait des points de contrôle.
+
+    `m_Mode` fait partie de la donnée : 0 = Blend (interpolation), 1 = Fixed —
+    chaque clé règne jusqu'à son temps, SANS fondu. Le `star` de `_2000086` tire
+    sa couleur d'un dégradé Fixed à quatre teintes : le lisser inventerait des
+    mélanges que le jeu n'affiche jamais.
     """
     return {
+        'mode': g.get('m_Mode', 0),
         'rgb': [
             {'t': r(g[f'ctime{i}'] / 65535), 'c': [r(g[f'key{i}'][k]) for k in 'rgb']}
             for i in range(g.get('m_NumColorKeys', 0))
@@ -361,14 +367,23 @@ def gradient(g: dict) -> dict:
 
 
 def min_max_gradient(m: dict) -> dict:
-    """`MinMaxGradient` : 0 = couleur, 1 = dégradé, 2 = deux couleurs, 3 = deux dégradés."""
+    """`MinMaxGradient` : 0 = couleur, 1 = dégradé, 2 = deux couleurs, 3 = deux
+    dégradés, 4 = COULEUR ALÉATOIRE — un tirage unique à la naissance dans
+    `maxGradient` (c'est le seul que l'inspecteur montre dans ce mode).
+
+    Un mode inconnu CASSE l'extraction : publier `{'mode': n}` nu ferait rendre
+    du blanc en silence — vécu avec le 4, dont le repli blanchissait les
+    étincelles multicolores du `star` de `_2000086`.
+    """
     mode = m['minMaxState']
+    if mode not in (0, 1, 2, 3, 4):
+        raise RuntimeError(f'MinMaxGradient : mode {mode} inconnu — à transcrire avant de publier')
     out: dict[str, Any] = {'mode': mode}
     if mode in (0, 2):
         out['max'] = [r(m['maxColor'][k]) for k in 'rgba']
     if mode == 2:
         out['min'] = [r(m['minColor'][k]) for k in 'rgba']
-    if mode in (1, 3):
+    if mode in (1, 3, 4):
         out['maxGradient'] = gradient(m['maxGradient'])
     if mode == 3:
         out['minGradient'] = gradient(m['minGradient'])

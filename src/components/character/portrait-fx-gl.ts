@@ -76,6 +76,7 @@ import {
   evalMinMax,
   frameAge,
   fxBleed,
+  isQuadLayer,
   unsupportedBillboard,
   type BillboardSim,
 } from './portrait-fx-sim';
@@ -563,6 +564,34 @@ export function mountPortraitFx(
         indices: new Uint16Array(mesh.i),
         vao: null,
         count: mesh.i.length,
+        xform: [
+          (2 * sx) / spanW,
+          (2 * sy) / spanH,
+          (2 * (ox + bleed.x * frame.w)) / spanW - 1,
+          1 - (2 * (oy + bleed.y * frame.h)) / spanH,
+        ],
+      });
+    } else if (e.renderMode === 0 && isQuadLayer(e)) {
+      // Un CALQUE-QUAD (cf. `isQuadLayer`) : même patron qu'un calque-maille —
+      // une particule éternelle, l'âge par `frameAge` — mais la géométrie est le
+      // quad unitaire du billboard, UV pleins, v = 0 en BAS comme les mailles.
+      // La taille suit la même règle : `startSize` × échelle du transform, PAR
+      // AXE — un billboard sous l'échelle non uniforme du mode Hierarchy
+      // s'étire, et le `web` de `_2000086` (×6,7 en X, ×11,5 en Y) ne couvre la
+      // carte de 344 qu'à cette condition.
+      const sx = e.startSize * e.scale[0];
+      const sy = (e.size3D ? e.startSizeY : e.startSize) * e.scale[1];
+      prepared.push({
+        kind: 'mesh',
+        emitter: e,
+        material: mat,
+        order: e.sortingOrder,
+        data: new Float32Array([
+          -0.5, -0.5, 0, 0, 0.5, -0.5, 1, 0, -0.5, 0.5, 0, 1, 0.5, 0.5, 1, 1,
+        ]),
+        indices: new Uint16Array([0, 1, 2, 2, 1, 3]),
+        vao: null,
+        count: 6,
         xform: [
           (2 * sx) / spanW,
           (2 * sy) / spanH,

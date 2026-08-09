@@ -34,8 +34,9 @@ function byId(id: string): Character {
 const DEMI = 'FX_UI_Character_List_Demi';
 const DUNGEON = 'FX_UI_Character_List_Dungeon';
 const SEASONAL = 'FX_UI_Character_List_Seasonal';
+const FX2000086 = 'FX_UI_Character_List_2000086';
 /** Les effets servis, dans l'ordre du portage — la table par calque les déroule tous. */
-const SERVED = [DEMI, DUNGEON, SEASONAL];
+const SERVED = [DEMI, DUNGEON, SEASONAL, FX2000086];
 
 /**
  * LES PORTEURS, tels que le jeu les désigne — et l'écart entre ce qu'il pose et
@@ -66,6 +67,7 @@ const SEASONAL_SUBJECTS = CARRIERS.filter((c) => c.short === 'Seasonal' && c.cha
   (c) => c.char!,
 );
 const SUBJECT = byId('2000053'); // Stella — le premier porteur de `_Demi` par id
+const SUBJECT_2000086 = byId('2000086'); // l'unique porteur de son effet sur mesure
 
 /**
  * Les QUATRE paliers responsives de `CharacterCard` — mêmes libellés que
@@ -117,6 +119,10 @@ const FROM_BINARY: { k: string; v: string }[] = [
     v: 'Un seul émetteur, `bubble` : 7/s plafonné à 40, vie 2 à 3 s, vitesse tirée entre 0,2 et 9 — même Box plat sous la carte, même nœud à −90°, même frein qu’`atlas`/`star` (plafond 0,5–1, amorti 0,1, traînée 0,5 ×section ×vitesse²) et même bruit statique. Pas de feuille UV : `T_FX_2000045_Bubble` est la bulle entière, alpha par son canal A (`_MAIN_ALPHACHANNEL_ON`), `_MainStrength` 6, en `SrcAlpha One`. Et `out (1)` reprend une TROISIÈME fois le matériau de `_Demi` — trois effets, trois teintes, un matériau.',
   },
   {
+    k: 'Ce que `_2000086` ajoute',
+    v: 'Quatre calques, dont deux inédits en NATURE. `star` tire sa couleur en mode RandomColor (`minMaxState = 4`) dans un dégradé FIXED à quatre teintes — violet, turquoise, orange, rose — un point par naissance, sans fondu entre les clés (`m_Mode = 1`) : deux modes que l’extracteur ne transcrivait pas, et dont le repli rendait les étincelles BLANCHES. `web` est un CALQUE-QUAD : `renderMode = Billboard` mais une rafale unique d’UNE particule immobile en ring buffer — le patron exact d’`inner`/`out` sans maille. Son quad de 33 est étiré PAR AXE par l’échelle du nœud (×6,72 ; ×11,50) : c’est le comportement Hierarchy d’Unity, et il ne couvre la carte de 344 qu’à cette condition. Et `inner` allume `_ALPHA_TEX_ON` pour la première fois : son alpha vient de `T_FX_cutscene_eye_mask`, échantillonnée à `st (0,5 ; 0,5) + (1,27 ; −0,74)` — un décalage HORS de [0,1] que le wrap Repeat ramène dans la texture. `applyActiveColorSpace` est FAUX sur les quatre.',
+  },
+  {
     k: 'La couleur de particule',
     v: '`startColor` × `colorOverLifetime` arrive au shader en couleur de SOMMET, avec DEUX conversions possibles sur la route : `m_ApplyActiveColorSpace` (relevé émetteur par émetteur) la linéarise à la cuisson, puis la chaîne UIParticle → Canvas linéarise TOUTES les couleurs cuites en projet Linear. Les calques de `_Demi` cumulent donc les deux — c’est ce qui fait le rouge PROFOND du liseré (0,618 → 0,34 → 0,095), confronté à l’écran du jeu : une conversion seule plafonne le rapport vert/rouge à 0,34 et rend le ruban blanc rosé, jamais rouge.',
   },
@@ -141,7 +147,7 @@ const UNSURE: string[] = [
 
 /** Ce qui n'est pas fait, et qu'il vaut mieux écrire que sous-entendre. */
 const TODO: string[] = [
-  'LES SEPT AUTRES EFFETS. `extract-portrait-fx.py` sort `_Demi`, `_Dungeon` et `_Seasonal` par défaut. Le simulateur couvre les émetteurs billboard à forme Box sans rafales — `atlas`, `star` et `bubble` y passent tous — mais les six effets sur mesure demandent des branches du shader qu’on n’a pas relues (`_POLAR_UV_ON`, `_DISSOLVE_UV_ON`), et `_Synchro` (posé par `SetSynchroEffect`, pas par la table des porteurs) n’a pas été relevé. Chaque refus est LOUD : un calque non transcrit ne se rend pas à moitié, il se dit.',
+  'LES SIX AUTRES EFFETS. `extract-portrait-fx.py` sort `_Demi`, `_Dungeon`, `_Seasonal` et `_2000086` par défaut. Le simulateur couvre les émetteurs billboard à forme Box sans rafales (`atlas`, `star`, `bubble`) et les calques-quads (`web`) — mais les cinq effets sur mesure restants (2000093, 2000106, 2000110, 2000114, 2000121) peuvent demander des branches du shader qu’on n’a pas relues (`_POLAR_UV_ON`, `_DISSOLVE_UV_ON` — `_2000086` n’en demandait AUCUNE, ça se joue prefab par prefab), et `_Synchro` (posé par `SetSynchroEffect`, pas par la table des porteurs) n’a pas été relevé. Chaque refus est LOUD : un calque non transcrit ne se rend pas à moitié, il se dit.',
   'UN CONTEXTE WebGL PARTAGÉ. Aujourd’hui, un contexte par carte, plafonné à 8 et recyclé par ordre de dernière apparition — ça tient une page, pas une grille de 124 personnages dont 15 animés. Un seul contexte qui peindrait toutes les cartes lèverait le plafond ET le déphasage noté plus haut.',
   'LE PASSAGE DANS `characters.json`. La table `byCharacter` vit dans `portrait-fx.json` parce qu’une page /dev ne justifie pas d’ouvrir un contrat de données. Le jour où l’effet sort d’ici, sa place est un champ de perso — le datagen lit déjà `CharacterExtraTemplet` pour `showNickName`.',
   'LE `Dim` DU PORTRAIT STATIQUE. Sans rapport avec l’effet, mais vu en lisant l’ordre des nœuds : dans le prefab, `Dim` est le 2ᵉ enfant de `CharacterInfo`, donc SOUS le rail d’étoiles, l’élément, la classe et le niveau. `Portrait` le rend en dernier, donc par-dessus tout. À vérifier en jeu avant de toucher quoi que ce soit.',
@@ -169,12 +175,12 @@ export default function DevAnimatedPortrait() {
           <code>portrait-fx-gl</code>). Rien ici n’est une approximation CSS.
         </p>
         <p className="text-content-muted mt-2 max-w-3xl text-sm">
-          <strong className="text-content-strong">Trois effets sont servis : </strong>
+          <strong className="text-content-strong">Quatre effets sont servis : </strong>
           <code>_Demi</code> ({DEMI_SUBJECTS.length} porteurs), <code>_Dungeon</code> (
-          {DUNGEON_SUBJECTS.length} porteurs) et <code>_Seasonal</code> ({SEASONAL_SUBJECTS.length}{' '}
-          porteur) — les deux derniers amènent les émetteurs de PARTICULES simulés (
-          <code>portrait-fx-sim</code>). Les sept autres sont dans la table mais pas extraits — cf.
-          « ce qui reste » en bas.
+          {DUNGEON_SUBJECTS.length} porteurs), <code>_Seasonal</code> ({SEASONAL_SUBJECTS.length}{' '}
+          porteur) et <code>_2000086</code> (1 porteur, le premier effet SUR MESURE) — les trois
+          derniers amènent les émetteurs de PARTICULES simulés (<code>portrait-fx-sim</code>). Les
+          six autres sont dans la table mais pas extraits — cf. « ce qui reste » en bas.
         </p>
       </header>
 
@@ -318,6 +324,54 @@ export default function DevAnimatedPortrait() {
               </Figure>
             );
           })}
+        </div>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-content-strong font-semibold">
+          <code>_2000086</code> — voile, cadres et étincelles
+        </h2>
+        <p className="text-content-muted mb-3 max-w-3xl text-sm">
+          Le premier effet SUR MESURE : quatre calques. <code>inner</code> et <code>out</code>{' '}
+          reprennent les mailles de <code>_Demi</code> (et <code>out</code> jusqu’à son matériau,
+          teinte violette — 4ᵉ réutilisation), <code>star</code> est le jumeau du <code>star</code>{' '}
+          de <code>_Dungeon</code> avec des étincelles MULTICOLORES (couleur aléatoire tirée dans un
+          dégradé Fixed à quatre teintes), et <code>web</code> est un CALQUE-QUAD : une seule
+          particule immobile en ring buffer, un quad de ~222 × 380 unités qui pose son motif sur
+          toute la carte. Aucune branche de shader nouvelle — mais la première utilisation d’
+          <code>_ALPHA_TEX_ON</code> (l’alpha d’<code>inner</code> vient d’une texture dédiée,
+          décalée hors de [0,1]).
+        </p>
+        <div className="flex flex-wrap items-end gap-6">
+          <Figure label="Portrait (statique)">
+            <Portrait
+              id={SUBJECT_2000086.id}
+              name={name(SUBJECT_2000086)}
+              rarity={SUBJECT_2000086.rarity}
+              element={SUBJECT_2000086.element}
+              cls={SUBJECT_2000086.class}
+              level={100}
+              className="w-45"
+            />
+          </Figure>
+          {[undefined, ['star'], ['web']].map((only, i) => (
+            <Figure
+              key={only ? only.join('+') : 'tout'}
+              label={only ? only.join(' + ') : 'AnimatedPortrait'}
+            >
+              <AnimatedPortrait
+                id={SUBJECT_2000086.id}
+                name={name(SUBJECT_2000086)}
+                rarity={SUBJECT_2000086.rarity}
+                element={SUBJECT_2000086.element}
+                cls={SUBJECT_2000086.class}
+                level={100}
+                fxEmitters={only}
+                hideName={i > 0}
+                className="w-45"
+              />
+            </Figure>
+          ))}
         </div>
       </section>
 
