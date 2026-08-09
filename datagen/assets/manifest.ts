@@ -46,6 +46,14 @@ export type AssetRequest =
       domain: string;
       /** Copie depuis `data/editorial` si aucun sprite du jeu ne matche (icônes wiki). */
       editorialFallback?: string;
+      /**
+       * WebP SANS PERTE au lieu du q90 par défaut. Réservé aux textures qu'un
+       * shader AMPLIFIE : celles de l'effet animé du portrait passent par
+       * `_MainStrength = 70`, où une erreur de quantification de 1/255 ressort à
+       * ~0,27 à l'écran — du banding franc sur un dégradé. Coût mesuré sur les
+       * huit textures de `_Demi` : 384 Ko contre 71.
+       */
+      lossless?: boolean;
     }
   | { kind: 'face-icon'; key: string; id: string; domain: string }
   | { kind: 'editorial'; key: string; source: string; domain: string };
@@ -53,6 +61,22 @@ export type AssetRequest =
 type Dict = Record<string, Record<string, unknown>>;
 const load = (p: string): Dict =>
   JSON.parse(readFileSync(resolve('data/generated', p), 'utf8')) as Dict;
+
+/**
+ * Les textures de l'effet animé du portrait, telles que `extract-portrait-fx.py`
+ * les a listées. Table absente = extraction jamais lancée : aucune demande, pas
+ * une erreur — comme les événements curés plus haut.
+ */
+function portraitFxTextures(): Record<string, unknown> {
+  try {
+    const data = JSON.parse(readFileSync(resolve('datagen/assets/portrait-fx.json'), 'utf8')) as {
+      textures?: Record<string, unknown>;
+    };
+    return data.textures ?? {};
+  } catch {
+    return {};
+  }
+}
 
 const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 
@@ -276,6 +300,22 @@ export function buildAssetManifest(): AssetRequest[] {
       key: `images/characters/full/${f}.webp`,
       candidates: [f],
       domain: 'characters',
+    });
+
+  // --- Effet ANIMÉ du portrait (`CUICharacterThumbnail.m_EffectHolder`) -------
+  // Les textures que le shader du jeu fait défiler. Elles ne sont PAS dans le pool
+  // général : `datagen:extract images` exclut explicitement `T_FX_*`, et ces
+  // fichiers-là sont posés par `extract-portrait-fx.py`, qui ne sort QUE celles
+  // dont les matériaux des effets rendus ont besoin. La liste vient donc de
+  // `portrait-fx.json` — jamais d'un dossier balayé, sinon on pousserait les 34
+  // textures du bundle pour n'en servir huit.
+  for (const name of Object.keys(portraitFxTextures()))
+    push({
+      kind: 'image',
+      key: `images/characters/portrait-fx/${name}.webp`,
+      candidates: [name],
+      domain: 'characters',
+      lossless: true,
     });
 
   // --- Glossaires UI : éléments / classes / sous-classes ---------------------

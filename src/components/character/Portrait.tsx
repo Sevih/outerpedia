@@ -142,6 +142,14 @@ function textShadow(layers: readonly TextEffect[]): string {
     .join(', ');
 }
 
+/**
+ * Les classes du CADRE. `aspect-180/344` tient la proportion, la LARGEUR vient de
+ * l'appelant — d'où l'assemblage par jointure : perdre un espace entre les deux
+ * suffit à donner un cadre de largeur nulle, muet.
+ */
+const ROOT_CLASS = (className: string) =>
+  ['@container relative block aspect-180/344 shrink-0', className].join(' ');
+
 /** Ce qu'un texte du portrait pose comme style de police. */
 function fontOf(font: GameFont): React.CSSProperties {
   return {
@@ -237,6 +245,18 @@ export interface PortraitProps {
    * hauteur. Un rectangle d'un autre ratio décalerait tout.
    */
   className?: string;
+  /**
+   * Le contenu de `FX_Holder` (`m_EffectHolder`) — l'effet ANIMÉ que `SetEffect`
+   * instancie pour 25 personnages sur 124.
+   *
+   * Une PROP et non un calque en dur, parce que cet effet est du WebGL : il tient
+   * un contexte, une boucle et des textures, donc un composant CLIENT, quand ce
+   * fichier-ci est serveur et doit le rester (les guides l'appellent). `Portrait`
+   * n'en connaît que la PLACE, qui est du prefab et rien d'autre — juste après
+   * l'art, sous le rail d'étoiles, l'élément, la classe, le niveau et le nom.
+   * Cf. `AnimatedPortrait`, qui la remplit.
+   */
+  fx?: React.ReactNode;
 }
 
 export function Portrait({
@@ -256,6 +276,7 @@ export function Portrait({
   coreFusion = false,
   synchro = false,
   className = 'w-40',
+  fx,
 }: PortraitProps) {
   const [show, tone, plus] = transcendenceRow(rarity, transcendence);
   // `m_StarImage[ShowUIStar-1]` reçoit la teinte — soit, dans l'ordre du tableau
@@ -268,7 +289,9 @@ export function Portrait({
     // au cadre et non au flux typographique de la page (cf. `cqw`).
     // `aspect-180/344` : la proportion EXACTE de l'art (1,911:1), pas 1:2 — un 1:2
     // étirerait de 4,6 %.
-    <span className={`@container relative block aspect-180/344 shrink-0 ${className}`}>
+    // L'effet animé n'impose rien ici : le canvas peint l'art LUI-MÊME et mélange
+    // en interne — aucun `mix-blend-mode`, donc aucun `isolate` à poser.
+    <span className={ROOT_CLASS(className)}>
       {/* L'ART — plein cadre, malgré ce que dit `m_FaceIconRect` (cf. piège 2). */}
       <img
         src={img.portrait(id)}
@@ -276,6 +299,10 @@ export function Portrait({
         loading={priority ? 'eager' : 'lazy'}
         className="absolute inset-0 h-full w-full"
       />
+
+      {/* `FX_Holder` — à sa place du prefab : au-dessus de l'art, sous tout le
+          reste. Vide pour 99 personnages sur 124. */}
+      {fx}
 
       {/* LE RAIL D'ÉTOILES — le slot sombre, six creux, puis les allumées. */}
       {!hideStars && (

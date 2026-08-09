@@ -14,3 +14,9 @@ pnpm-lock.yaml
 # un diff de 12 000 lignes à chaque patch sans qu'une valeur ait changé. Le
 # format du script fait foi ; personne ne lit ce tableau de 15 000 lignes.
 datagen/assets/face-icon-layout.json
+
+# Même cas, même script Python (`extract-portrait-fx.py`) : sommets de mailles,
+# UV et paramètres de matériaux. Prettier recollerait les paires de coordonnées,
+# l'extraction suivante les redéplierait — chacun défaisant l'autre. Celui-ci se
+# LIT, contrairement au précédent, d'où l'indentation à 2 espaces du script.
+datagen/assets/portrait-fx.json

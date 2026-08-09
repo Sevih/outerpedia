@@ -254,7 +254,10 @@ export async function stageAssets(
       // sprites qu'elle concerne : la lier à toutes les images ferait re-produire
       // tout le staging à chaque ré-extraction (cf. `hasRect`).
       const sources = hasRect(src) ? [src, SPRITE_RECT] : [src];
-      const { fresh, commit } = check(req.key, dest, sources, png ? 'png' : 'webp:90');
+      // La RECETTE fait partie de l'empreinte : passer une texture en sans-perte
+      // la refait, au lieu de laisser traîner la version compressée.
+      const recipe = png ? 'png' : req.lossless ? 'webp:lossless' : 'webp:90';
+      const { fresh, commit } = check(req.key, dest, sources, recipe);
       if (fresh) {
         result.present++;
         continue;
@@ -277,6 +280,7 @@ export async function stageAssets(
         pipeline = pipeline.extend({ ...pad, background: { r: 0, g: 0, b: 0, alpha: 0 } });
       }
       if (png) await pipeline.png().toFile(dest);
+      else if (req.lossless) await pipeline.webp({ lossless: true, effort: 6 }).toFile(dest);
       else await pipeline.webp({ quality: 90 }).toFile(dest);
       commit();
       produced();

@@ -179,6 +179,14 @@ export const img = {
    * vignetage fixe de la vignette carrée (`CT_Slot_Dim_2`), qui lui est décoratif.
    */
   portraitDim: () => `${BASE}/images/ui/star/CM_Character_Thumbnail_Dim.webp`,
+  /**
+   * Texture de l'EFFET ANIMÉ du portrait (`m_EffectHolder`) — bruits, dégradés
+   * et masques que le shader du jeu fait défiler. Namespace à part parce qu'elles
+   * ne sont pas des sprites d'UI : elles ne s'affichent jamais telles quelles, et
+   * elles seules sont servies en WebP SANS PERTE (le shader les amplifie, cf. le
+   * manifest). Le nom est celui du jeu, tel que `portrait-fx.json` le porte.
+   */
+  portraitFx: (name: string) => `${BASE}/images/characters/portrait-fx/${name}.webp`,
   /** Badge de recrutement (premium/limited/…) sur les cartes. */
   recruitTag: (tag: string) => `${BASE}/images/ui/recruit/${RECRUIT_TAG_SPRITE[tag]}.webp`,
   /** Sprite de recrutement par NOM (boutons/rubans de bannière — recruit.json). */

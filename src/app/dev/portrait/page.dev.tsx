@@ -12,9 +12,11 @@
  * où il diverge sont notées en commentaire dans `Portrait`.
  *
  * Elle porte aussi ce qui ne se voit PAS sur un rendu — ce que le portrait ne
- * partage pas avec la vignette carrée, et les écarts que les deux copies
- * manuscrites actuelles (`CharacterCard`, mode « cartes » du tier-list-maker)
- * portent aujourd'hui. C'est le tableau de bord du portage, pas une galerie.
+ * partage pas avec la vignette carrée, et les écarts que portaient les trois
+ * transcriptions manuscrites du même nœud (`CharacterCard`, mode « cartes » du
+ * tier-list-maker, et le peintre canvas de son export PNG). Les trois sont
+ * branchées ; la liste garde leur trace parce qu'un écart corrigé sans trace
+ * revient. C'est le tableau de bord du portage, pas une galerie.
  *
  * Composant SERVEUR — il lit la donnée générée directement.
  */
@@ -214,64 +216,72 @@ const VS_THUMBNAIL: [string, string, string][] = [
 ];
 
 /**
- * Ce que le branchement a CORRIGÉ, et ce qui reste à corriger.
+ * Ce que le branchement a CORRIGÉ, et le seul calque qu'on garde en le sachant.
  *
- * `CharacterCard` portait 250 lignes de mesures relevées à l'œil en V2 ; elles ont
- * disparu, la carte n'est plus qu'une coquille de chrome sur `Portrait`. La liste
- * garde la trace de chaque écart : c'est elle qui dit ce qu'on a changé pour les
- * lecteurs, et ce qu'il reste de divergent dans le tier-list-maker.
+ * Les TROIS transcriptions manuscrites sont branchées : `CharacterCard` (250 lignes
+ * de mesures relevées à l'œil en V2, disparues), le mode « cartes » du
+ * tier-list-maker, et le peintre canvas de son export PNG. La liste garde la trace
+ * de chaque écart plutôt que de rétrécir : c'est elle qui dit ce qu'on a changé pour
+ * les lecteurs, et un écart corrigé sans trace se réintroduit tout seul.
+ *
+ * `status` vaut 'done' pour un écart refermé, 'kept' pour un calque que le site pose
+ * SCIEMMENT contre le prefab. Il n'y a plus de troisième cas — ce qui restait à
+ * faire l'a été.
  */
-const DRIFT: { where: string; what: string; game: string; done?: boolean }[] = [
+const DRIFT: { where: string; what: string; game: string; status: 'done' | 'kept' }[] = [
   {
     where: 'CharacterCard — proportions',
     what: '66×128, 100×192, 120×231 → ratio 0,516 / 0,521 / 0,519',
     game: '180×344 = 0,5233. Les trois tailles écrasaient l’art de 0,3 à 1,4 % ; `aspect-180/344` le tient désormais.',
-    done: true,
+    status: 'done',
   },
   {
     where: 'CharacterCard — cadrage',
     what: '`object-cover` sur un cadre au mauvais ratio → l’art était ROGNÉ',
     game: 'le cadre est à la taille de l’art : plus rien n’est rogné.',
-    done: true,
+    status: 'done',
   },
   {
     where: 'CharacterCard — dégradé du bas',
     what: 'ajoutait `bg-linear-to-t from-black/80` sur le quart inférieur',
     game: 'aucun dégradé : `LowBg` est inactif dans le prefab. Supprimé.',
-    done: true,
+    status: 'done',
   },
   {
     where: 'CharacterCard — étoiles',
     what: 'comptait les étoiles = `rarity`, sans creux, alignées en HAUT du slot',
     game: '6 creux fixes ; le nombre vient de `ShowUIStar`. La tier list passait même son palier de transcendance À LA PLACE de la rareté pour obtenir le bon compte — elle a maintenant `transcendence`, sa vraie prop, et récupère la teinte du « + ».',
-    done: true,
+    status: 'done',
   },
   {
     where: 'CharacterCard — élément / classe',
     what: 'même taille pour les deux (18/22/26 px), collés au même `right-1`',
     game: 'élément 46 et classe 37, à des retraits DIFFÉRENTS (9,4 et 15).',
-    done: true,
+    status: 'done',
   },
   {
     where: 'CharacterCard — nom',
     what: '`text-shadow` à 4 copies de 1 px, `font-bold`, corps réglé à la main par gabarit',
     game: 'Outline(1,−1) à 50 % ET Shadow(1,−1) à 50 %, graisse du jeu, corps par `m_BestFit`.',
-    done: true,
+    status: 'done',
   },
   {
     where: 'CharacterCard — badge de recrutement',
     what: 'pose `RECRUIT_TAG_SPRITE` au coin haut-gauche',
-    game: 'aucun badge de RECRUTEMENT dans le prefab : `m_BossImage`, `m_NewImage`, `m_RareFrameImage`, `m_RecommandImage` sont NULL. C’est une convention ÉDITORIALE du site — elle reste, posée par-dessus le portrait et non dedans.',
+    game: 'aucun badge de RECRUTEMENT dans le prefab : `m_BossImage`, `m_NewImage`, `m_RareFrameImage`, `m_RecommandImage` sont NULL. C’est une convention ÉDITORIALE du site — elle reste, posée PAR-DESSUS le portrait et non dedans, à l’identique dans `CharacterCard`, dans le mode « cartes » et dans l’export PNG.',
+    status: 'kept',
   },
   {
     where: 'tier-list-maker (mode « cartes »)',
     what: 'seconde copie manuscrite, avec des nombres ENCORE différents : `aspect-[120/231]` + `object-cover`, étoiles `h-3 w-3` sans slot, élément et classe redessinés',
-    game: 'les mêmes valeurs que `Portrait` — non branché, c’est le lot suivant.',
+    game: 'branché sur `Portrait`. Les réglages de l’outil sont devenus des PROPS au lieu de calques dessinés à côté : l’élément et la classe se coupent en n’étant pas passés, le nom par `hideName`, les étoiles par `hideStars` — c’est `hideStars` qui existe pour lui. De la géométrie il ne reste que `CARD_SIZES`, et il ne donne plus que des LARGEURS : la hauteur vient du ratio du prefab.',
+    status: 'done',
   },
   {
     where: 'tier-list-maker — jumeau canvas',
-    what: 'l’export PNG redessine tout au `drawImage`, une TROISIÈME fois (ratios 0,24 / 0,26 / 0,16)',
-    game: 'à faire dériver de la même table que le rendu DOM, sinon l’export et l’écran divergeront toujours. Non branché.',
+    what: 'l’export PNG redessinait tout au `drawImage`, une TROISIÈME fois (ratios 0,24 / 0,26 / 0,16)',
+    game: '`portrait-canvas` peint la MÊME table que le DOM — `drawPortrait` sur `portrait-layout`, plus `portraitHeight` pour la cellule et `portraitSources` pour le préchargement ; l’appelant n’écrit plus une seule mesure. Deux écarts subsistent, inhérents au canvas et notés là-bas : l’ombre du creux d’étoile passe par `shadowColor` plutôt qu’un `filter`, et les copies d’`Outline`/`Shadow` du texte sont peintes à la main sous le texte — soit exactement ce que le `text-shadow` fait, écrit explicitement.',
+    status: 'done',
   },
 ];
 
@@ -624,12 +634,17 @@ export default function DevPortrait() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-content-strong font-semibold">Les écarts, corrigés et restants</h2>
+        <h2 className="text-content-strong font-semibold">
+          Les écarts, refermés — et le seul qu’on garde
+        </h2>
         <p className="text-content-muted mb-3 max-w-3xl text-sm">
-          <code>CharacterCard</code> est branché : ses 250 lignes de chrome relevée à l’œil ont
-          disparu, il ne reste qu’une coquille (lien, badge de recrutement, nom sous la carte,
-          étiquette a11y) autour de <code>Portrait</code>. Le mode « cartes » du tier-list-maker et
-          son jumeau canvas, eux, redessinent toujours — c’est le lot suivant.
+          Les TROIS transcriptions manuscrites sont branchées. <code>CharacterCard</code> : ses 250
+          lignes de chrome relevée à l’œil ont disparu, il ne reste qu’une coquille (lien, badge de
+          recrutement, nom sous la carte, étiquette a11y) autour de <code>Portrait</code>. Le mode «
+          cartes » du tier-list-maker rend le même <code>Portrait</code>, et son export PNG le peint
+          par <code>portrait-canvas</code>, sur la même table — une transcription, deux surfaces. Ce
+          qui reste ci-dessous en <span className="text-amber-400">assumé</span> n’est pas un
+          chantier : c’est le seul calque que le site pose SCIEMMENT contre le prefab.
         </p>
         <ul className="space-y-3">
           {DRIFT.map((d) => (
@@ -639,15 +654,15 @@ export default function DevPortrait() {
             >
               <div className="flex items-center gap-2">
                 <span
-                  className={`font-mono text-xs ${d.done ? 'text-emerald-400' : 'text-amber-400'}`}
+                  className={`font-mono text-xs ${d.status === 'done' ? 'text-emerald-400' : 'text-amber-400'}`}
                 >
-                  {d.done ? 'corrigé' : 'restant'}
+                  {d.status === 'done' ? 'corrigé' : 'assumé'}
                 </span>
                 <span className="text-content-strong font-mono text-xs">{d.where}</span>
               </div>
               <div className="text-content-muted mt-1 text-sm">
                 <span className="text-content-subtle">
-                  {d.done ? 'avant : ' : 'aujourd’hui : '}
+                  {d.status === 'done' ? 'avant : ' : 'aujourd’hui : '}
                 </span>
                 {d.what}
               </div>
