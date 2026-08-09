@@ -118,7 +118,7 @@ const FROM_BINARY: { k: string; v: string }[] = [
   },
   {
     k: 'La couleur de particule',
-    v: '`startColor` × `colorOverLifetime` arrive au shader en couleur de SOMMET, et Unity ne la linéarise QUE si `ParticleSystemRenderer.m_ApplyActiveColorSpace` le demande. Relevé par l’extracteur et porté par la table, émetteur par émetteur : VRAI pour les deux calques de `_Demi`, FAUX pour la plupart des autres prefabs — où la couleur part brute, l’écart UI classique d’Unity en Linear. Le rendu suit le champ, pas une règle globale.',
+    v: '`startColor` × `colorOverLifetime` arrive au shader en couleur de SOMMET, avec DEUX conversions possibles sur la route : `m_ApplyActiveColorSpace` (relevé émetteur par émetteur) la linéarise à la cuisson, puis la chaîne UIParticle → Canvas linéarise TOUTES les couleurs cuites en projet Linear. Les calques de `_Demi` cumulent donc les deux — c’est ce qui fait le rouge PROFOND du liseré (0,618 → 0,34 → 0,095), confronté à l’écran du jeu : une conversion seule plafonne le rapport vert/rouge à 0,34 et rend le ruban blanc rosé, jamais rouge.',
   },
   {
     k: 'Ce que `_Demi` pose',

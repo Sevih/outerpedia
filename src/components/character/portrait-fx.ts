@@ -111,11 +111,13 @@ export interface FxEmitter {
   sortingOrder: number;
   /**
    * `ParticleSystemRenderer.m_ApplyActiveColorSpace` : si vrai, Unity convertit
-   * la couleur de particule (startColor × colorOverLifetime) en LINÉAIRE avant le
-   * shader ; sinon elle part BRUTE — le classique écart UI d'Unity en Linear.
-   * VARIE PAR ÉMETTEUR : vrai pour les deux calques de `_Demi`, faux pour la
-   * plupart des autres prefabs. Un `toLinear` systématique mentirait dès le
-   * deuxième effet servi.
+   * la couleur de particule (startColor × colorOverLifetime) en LINÉAIRE à la
+   * cuisson. La chaîne UIParticle → Canvas ajoute ensuite SA conversion à TOUS
+   * les émetteurs (UGUI ne convertit pas les couleurs de sommet en Linear, le
+   * paquet s'en charge) : un émetteur qui porte ce drapeau arrive donc DEUX fois
+   * converti au shader — relevé à l'écran, le rouge profond du liseré `_Demi`
+   * ne s'obtient pas autrement. VARIE PAR ÉMETTEUR : vrai pour les deux calques
+   * de `_Demi`, faux pour la plupart des autres prefabs.
    */
   applyActiveColorSpace: boolean;
   mesh: string | null;

@@ -939,12 +939,17 @@ export function mountPortraitFx(
         gl.uniform2f(U[SPEED_OF[slot]], sp[0], sp[1]);
       });
 
-      // Unity ne convertit la couleur de particule en LINÉAIRE que si le renderer
-      // le demande — `m_ApplyActiveColorSpace`, relevé par l'extracteur. Les deux
-      // calques de `_Demi` l'ont ; TOUT `_Dungeon` ne l'a pas, et sa couleur part
-      // alors BRUTE au shader (le classique écart UI d'Unity en Linear). L'alpha,
-      // lui, n'est jamais converti.
-      const lin = e.applyActiveColorSpace ? toLinear : (v: number) => v;
+      // DEUX conversions possibles sur la route de la couleur de particule :
+      // `m_ApplyActiveColorSpace` la linéarise à la CUISSON (émetteur par
+      // émetteur, relevé dans la table), puis la chaîne UIParticle → Canvas
+      // linéarise TOUTES les couleurs de sommet cuites — UGUI ne le fait pas en
+      // Linear, le paquet s'en charge. Un émetteur qui porte le drapeau arrive
+      // donc DEUX fois converti. Confronté à l'écran du jeu : le corps du liseré
+      // de `_Demi` est rouge PROFOND (vert/rouge ≈ 0,1) — une conversion seule
+      // plafonne ce rapport à 0,34 (le rose 0,618 → 0,34) et blanchit le ruban,
+      // deux le mènent à 0,095, exactement la teinte du jeu. L'alpha, lui, n'est
+      // jamais converti.
+      const lin = e.applyActiveColorSpace ? (v: number) => toLinear(toLinear(v)) : toLinear;
 
       if (p.kind === 'mesh') {
         const age = frameAge(e, t);

@@ -167,6 +167,9 @@ function PortraitFxCanvas({
           fx = mountPortraitFx(canvas, {
             effect,
             art,
+            // Le moteur logge déjà chaque refus en console (`mountPortraitFx`
+            // préfixe et fait `console.error` AVANT de relayer) : ce rapporteur
+            // ne sert qu'aux pages qui veulent AFFICHER le refus.
             onError: (m) => report.current?.(m),
             only,
             autoplay: !reduced,
