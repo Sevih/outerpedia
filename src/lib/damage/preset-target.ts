@@ -5,19 +5,20 @@
  * rejeu des fixtures (harnais § 4) résout ici ce que l'UI affichait, le
  * wrapper construit ses spawns avec `presetSpawnStats` — une seule source.
  *
- * PAS exporté du barrel `src/lib/damage/index.ts` : `getMonster` lit au
- * DISQUE (loadDataJson) — ce module est serveur/node UNIQUEMENT, l'inclure
- * dans le barrel le tirerait dans les bundles client qui l'importent.
+ * PAS exporté du barrel `src/lib/damage/index.ts` : ce module lit au DISQUE
+ * (loadDataJson — `getMonster` ET `encounters.json`, une seule voie de
+ * chargement, audit D5 07/08/2026) — serveur/node UNIQUEMENT, l'inclure dans
+ * le barrel le tirerait dans les bundles client qui l'importent.
  */
 
-import encountersData from '@data/generated/encounters.json';
 import type { EncountersFile, Monster } from '@contracts';
+import { loadDataJson } from '@/lib/data/disk';
 import { encounterSpawnContexts, type Encounter } from '@/lib/data/encounters';
 import { getMonster } from '@/lib/data/monsters';
 import { statAt, type SpawnContext } from '@/lib/monster-stats';
 import type { ResolvedPresetTarget } from './scenario';
 
-const DUNGEONS = encountersData as unknown as EncountersFile;
+const dungeons = (): EncountersFile => loadDataJson<EncountersFile>('generated/encounters.json');
 
 /** Clés du calculateur → slugs des tables monstre (les MÊMES stats). */
 const PRESET_STAT_SLUGS = [
@@ -62,7 +63,7 @@ export function resolvePresetTarget(
   if (sep <= 0) return undefined;
   const encounterId = targetId.slice(0, sep);
   const monsterId = targetId.slice(sep + 1);
-  const ref = DUNGEONS[encounterId];
+  const ref = dungeons()[encounterId];
   if (!ref?.monsters?.length) return undefined;
   const entry = ref.monsters.find((m) => m.id === monsterId);
   const monster = getMonster(monsterId);

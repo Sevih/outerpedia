@@ -40,7 +40,16 @@ import {
 } from '@/lib/damage/inputs';
 import { passiveConditionMet } from '@/lib/damage/passives';
 import { ENGINE_GAME_VERSION, type DamageBranch, type DamageFixture } from '@/lib/damage/harness';
-import { DebugHarness } from './DebugHarness';
+import dynamic from 'next/dynamic';
+
+/**
+ * Harnais de capture OPT-IN (build de dev, ou `?dev=1` en prod) : chargé à la
+ * DEMANDE — ses ~700 lignes sortent du bundle initial que télécharge tout
+ * visiteur de la page (audit D2, 07/08/2026 ; seule occurrence de
+ * `next/dynamic` du projet — ailleurs le découpage par route suffit, ici le
+ * composant est opt-in DANS la route).
+ */
+const DebugHarness = dynamic(() => import('./DebugHarness').then((m) => m.DebugHarness));
 
 // ── Contrats wrapper → client ──────────────────────────────────────────────
 

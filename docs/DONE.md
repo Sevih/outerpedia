@@ -5,6 +5,24 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-09
+
+- **Audit damage du 07/08 : D1, D2, D3, D5 traités** (D4 — le découpage du
+  browser 4 000+ lignes — reste la condition de sortie du chantier, après
+  stabilisation du moteur). D1 : `stat-compose.calcFinalStat` ne remodélise
+  plus la formule — adaptateur qui délègue à `damage/formula.calcFinalStat`
+  (BigInt, couches absentes à 0, entrées tronquées en garde-fou : BigInt
+  jette sur une fraction et les entrées de la fiche sont entières par
+  contrat) ; la fiche perso est désormais couverte par le test de propriété
+  du moteur, plus de divergence possible. D2 : `DebugHarness` en
+  `next/dynamic` — le harnais opt-in (~700 l.) sort du bundle initial de la
+  page. D3 : les quatre gros JSON du wrapper (skills, monster-skills,
+  damage/targets, damage/buffs — ~23 Mo) passent par `loadDataJson` (cache
+  mtime) au lieu d'imports statiques : plus de recompilation Turbopack à
+  chaque « Enregistrer » de l'admin. D5 : `preset-target.ts` lit
+  `encounters.json` au disque comme le reste du module — une seule voie de
+  chargement. Statuts consignés dans [audit/damage-calculator.md](./audit/damage-calculator.md).
+
 ## 2026-08-08
 
 - **Le mismatch d'hydratation du tier list maker venait de FIREFOX, pas du code**

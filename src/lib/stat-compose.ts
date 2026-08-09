@@ -6,6 +6,14 @@
  * section Stats) — les couches sont résolues côté serveur
  * (`char-progression.getStatLayers`).
  *
+ * L'ARITHMÉTIQUE de la formule vit dans le moteur damage
+ * (`damage/formula.calcFinalStat` — BigInt, divisions tronquées vers zéro,
+ * test de propriété sur 500 configurations) : ce module n'en garde qu'un
+ * ADAPTATEUR (audit D1, 07/08/2026 — deux modélisations indépendantes
+ * pouvaient diverger en silence, la fiche perso portant celle sans test de
+ * propriété). `formula` est du calcul pur sans `node:fs` : l'import reste
+ * client-safe.
+ *
  * Formule (taux en per-mille, plats en entiers, trunc = division ARM64) :
  *   sum_flat = base + évo + quirksStat
  *   sum_rate = quirksStatRate + transcendRate
@@ -15,6 +23,8 @@
  *   codex    = trunc(base × codexRate / 1000)
  *   final    = max(0, part2 + codex)
  */
+
+import { calcFinalStat as engineCalcFinalStat } from './damage/formula';
 
 /** Stats affichées, dans l'ordre du jeu/V2 (clé = abréviation canonique).
  * PEN / Crit DMG Reduc : base 0, nourries par les couches (transcendance,
@@ -98,7 +108,16 @@ export interface ComposeSelection {
   quirksOn: boolean;
 }
 
-/** `CalcFinalStat` du client — trunc, PAS floor (divergence sur négatifs). */
+/**
+ * `CalcFinalStat` du client — DÉLÈGUE au moteur (`damage/formula`) : une seule
+ * source de vérité, couvertes toutes deux par son test de propriété. Les
+ * couches que la fiche ne connaît pas (monad, spawn advantage, item options)
+ * valent 0. Entrées ENTIÈRES par contrat (les clés qui passent ici sont en
+ * unités d'affichage entières — vérifié : les `/10` de char-progression ne
+ * touchent que les clés %, hors de ce chemin) ; `Math.trunc` en garde-fou car
+ * `BigInt` JETTE sur une fraction — une future donnée fractionnaire doit
+ * perdre sa décimale, pas casser la fiche.
+ */
 export function calcFinalStat(
   base: number,
   evo: number,
@@ -109,10 +128,21 @@ export function calcFinalStat(
   buffFlat: number,
   buffPM: number,
 ): number {
-  const part1 = Math.trunc(((base + evo + awakFlat) * (1000 + awakPM + transcendPM)) / 1000);
-  const part2 = Math.trunc(((part1 + buffFlat) * (1000 + buffPM)) / 1000);
-  const codex = Math.trunc((base * codexPM) / 1000);
-  return Math.max(0, part2 + codex);
+  return engineCalcFinalStat({
+    baseValue: Math.trunc(base),
+    evolutionValue: Math.trunc(evo),
+    awakeningValue: Math.trunc(awakFlat),
+    awakeningValueRate: Math.trunc(awakPM),
+    transcendentStarValueRate: Math.trunc(transcendPM),
+    archiveStatValueRate: Math.trunc(codexPM),
+    buffValue: Math.trunc(buffFlat),
+    buffValueRate: Math.trunc(buffPM),
+    monadEnchantValue: 0,
+    monadEnchantValueRate: 0,
+    spawnAdvantageRate: 0,
+    itemOptionValue: 0,
+    itemOptionValueRate: 0,
+  });
 }
 
 const flatOf = (p: LayerParts | undefined, k: StepStatKey) => p?.flat?.[k] ?? 0;

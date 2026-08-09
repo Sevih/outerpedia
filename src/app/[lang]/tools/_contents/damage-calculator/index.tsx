@@ -32,9 +32,7 @@ import { familyMembersFor, uniqueGroupsOf } from '@/lib/damage/preset-gear';
 import { staticBossPassives } from '@/lib/damage/passives';
 import { sheetSlugOfStat, type DamageBuffsData, type DamageTargetsData } from '@/lib/damage/inputs';
 import type { ActiveBuff } from '@/lib/damage/aggregate';
-import damageTargetsData from '@data/generated/damage/targets.json';
-import damageBuffsData from '@data/generated/damage/buffs.json';
-import monsterSkillsData from '@data/generated/monster-skills.json';
+import { loadDataJson } from '@/lib/data/disk';
 import { dedupSkills } from '@/lib/skill-view';
 import { img } from '@/lib/images';
 import type {
@@ -45,7 +43,6 @@ import type {
   QuirksData,
   Skill,
 } from '@contracts';
-import skillsData from '@data/generated/skills.json';
 import scalingData from '@data/generated/damage-scaling.json';
 import passivesData from '@data/generated/equipment/passives.json';
 import eeRawData from '@data/generated/equipment/ee.json';
@@ -88,10 +85,23 @@ import {
  *   - monad hors périmètre.
  */
 
-const SKILLS = skillsData as unknown as Record<string, Skill>;
 const SCALING = scalingData as unknown as DamageScalingFile;
 const DUNGEONS = encountersData as unknown as EncountersFile;
 const QUIRKS = quirksRaw as unknown as QuirksData;
+
+// Les QUATRE gros JSON (skills 5,9 Mo, monster-skills 9 Mo, damage/targets,
+// damage/buffs — ~23 Mo au total) sont lus au DISQUE (`loadDataJson`, cache
+// par mtime) et non importés statiquement : un import les mettrait dans le
+// graphe de modules, et chaque « Enregistrer » de l'admin qui les réécrit
+// recompilait la route (10-40 s de « Compiling… ») — audit D3, 07/08/2026,
+// même règle que `lib/data/monsters.ts`. Les petits JSON restent en import.
+const loadSkills = () => loadDataJson<Record<string, Skill>>('generated/skills.json');
+const loadMonsterSkills = () =>
+  loadDataJson<Record<string, { name?: Record<string, string>; icon?: string } | undefined>>(
+    'generated/monster-skills.json',
+  );
+const loadDamageTargets = () => loadDataJson<DamageTargetsData>('generated/damage/targets.json');
+const loadDamageBuffs = () => loadDataJson<DamageBuffsData>('generated/damage/buffs.json');
 
 interface PassiveEntry {
   name: LangDict;
@@ -298,6 +308,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
   const k = (s: string) => `tools.damage-calculator.${s}` as Parameters<typeof t>[0];
 
   // Roster + kit par perso (types de skills depuis la donnée, jamais devinés).
+  const SKILLS = loadSkills();
   const chars: DcChar[] = [];
   const kits: Record<string, DcSkillRow[]> = {};
   for (const c of getAllCharacters()) {
@@ -540,12 +551,9 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
   // props LÉGÈRES (nom localisé du passif + libellé stat/valeur) ; la
   // condition élémentaire brute part au client, qui l'évalue contre
   // l'attaquant COURANT avec la même relation § 6 que le moteur.
-  const DMG_TARGETS = damageTargetsData as unknown as DamageTargetsData;
-  const DMG_BUFFS = damageBuffsData as unknown as DamageBuffsData;
-  const MONSTER_SKILLS = monsterSkillsData as Record<
-    string,
-    { name?: Record<string, string> } | undefined
-  >;
+  const DMG_TARGETS = loadDamageTargets();
+  const DMG_BUFFS = loadDamageBuffs();
+  const MONSTER_SKILLS = loadMonsterSkills();
   const passiveLabel = (b: ActiveBuff): string => {
     const v = b.value ?? 0;
     const pct = (x: number) => `${x > 0 ? '+' : ''}${x / 10}%`;

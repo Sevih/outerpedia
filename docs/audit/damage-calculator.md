@@ -38,13 +38,23 @@ modules, un test de propriété sur 500 configurations, des fixtures dorées, et
 une discipline client/serveur explicite. Les cinq constats portent tous sur la
 **frontière** du moteur — ce qui l'entoure, pas ce qu'il calcule.
 
-| #   | Constat                                                     | Sévérité     | Effort  |
-| --- | ----------------------------------------------------------- | ------------ | ------- |
-| D1  | `CalcFinalStat` modélisé deux fois, sans oracle croisé      | **Moyenne+** | ~1 h    |
-| D2  | `DebugHarness` (691 l.) dans le bundle client de production | Moyenne      | 15 min  |
-| D3  | ~23 Mo de JSON en import statique dans le wrapper serveur   | Moyenne      | ~30 min |
-| D4  | `DamageCalculatorBrowser.tsx` — 4 050 lignes                | Dette        | Élevé   |
-| D5  | `preset-target.ts` mélange les deux voies de chargement     | Faible       | 5 min   |
+| #   | Constat                                                     | Sévérité     | Effort  | Statut                 |
+| --- | ----------------------------------------------------------- | ------------ | ------- | ---------------------- |
+| D1  | `CalcFinalStat` modélisé deux fois, sans oracle croisé      | **Moyenne+** | ~1 h    | ✅ traité 09/08/2026   |
+| D2  | `DebugHarness` (691 l.) dans le bundle client de production | Moyenne      | 15 min  | ✅ traité 09/08/2026   |
+| D3  | ~23 Mo de JSON en import statique dans le wrapper serveur   | Moyenne      | ~30 min | ✅ traité 09/08/2026   |
+| D4  | `DamageCalculatorBrowser.tsx` — 4 050 lignes                | Dette        | Élevé   | ⏳ condition de sortie |
+| D5  | `preset-target.ts` mélange les deux voies de chargement     | Faible       | 5 min   | ✅ traité 09/08/2026   |
+
+> **Traitement du 09/08/2026** — D1 : `stat-compose.calcFinalStat` est un
+> adaptateur qui délègue à `damage/formula.calcFinalStat` (couches absentes à
+> 0, entrées tronquées en garde-fou : BigInt jette sur une fraction) ; le test
+> de propriété du moteur couvre désormais la fiche perso. D2 : `DebugHarness`
+> passe par `next/dynamic`. D3 : skills / monster-skills / damage-targets /
+> damage-buffs lus par `loadDataJson` dans le wrapper. D5 : `preset-target.ts`
+> lit `encounters.json` par `loadDataJson` — une seule voie dans le module.
+> D4 reste ouvert, à dessein : découpage après stabilisation du moteur, avant
+> `unlisted` → `available`.
 
 ---
 
