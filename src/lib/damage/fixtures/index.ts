@@ -9,5 +9,9 @@
 
 import type { DamageFixture } from '../harness';
 import valentineRhona from './valentine-rhona.json';
+import noaRhona from './noa-rhona.json';
 
-export const FIXTURES: DamageFixture[] = [valentineRhona as DamageFixture];
+export const FIXTURES: DamageFixture[] = [
+  valentineRhona as DamageFixture,
+  noaRhona as DamageFixture,
+];

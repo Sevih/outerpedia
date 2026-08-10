@@ -21,7 +21,14 @@ import charactersData from '../../../data/generated/damage/characters.json';
 import growthData from '../../../data/generated/damage/growth.json';
 import buffsData from '../../../data/generated/damage/buffs.json';
 import equipmentData from '../../../data/generated/damage/equipment.json';
-import { gearConditionMet, resolveGearPassives, uniquePassiveLevel } from './gear';
+import {
+  gearConditionMet,
+  resolveGearPassives,
+  resolveKitPassives,
+  uniquePassiveLevel,
+  type KitCharacter,
+  type KitSkill,
+} from './gear';
 import {
   buildDamageReport,
   type AttackerBuildInput,
@@ -353,5 +360,100 @@ describe('quirks — nœuds d’éveil du compte (donnée réelle)', () => {
     // Cible MANUELLE (mode inconnu) : l'arbre licence est SIGNALÉ, jamais deviné.
     const manual = buildDamageReport({ ...attacker({}), gear: undefined, quirks }, target(), data);
     expect(manual.quirkPassives?.unresolved.some((u) => u.reason.includes('licence'))).toBe(true);
+  });
+});
+
+describe('buffs restreints par slot — Noa (donnée réelle, fixture 10/08/2026)', () => {
+  /** Noa — terre, +3 % PV cible sur le S2 (2000022_2_2), EE à décompte (§ 7). */
+  const NOA = '2000022';
+  const noaChar = data.characters.characters[NOA] as unknown as KitCharacter;
+  const noaSkills = data.characters.skills as unknown as Record<string, KitSkill>;
+
+  it('kit ACTIF : 2000022_2_2 collecté au niveau de skill saisi, gaté SKT_SECOND', () => {
+    const kit = resolveKitPassives(
+      noaChar,
+      3,
+      noaSkills,
+      data.growth.transcend,
+      buffs,
+      Element.Earth,
+      Element.Earth,
+      { S2: 5 },
+    );
+    const e = kit.entries.find((x) => x.buffId === '2000022_2_2');
+    // Niveau 5 → ligne 5 (30 ‰ des PV max de la CIBLE) ; porte son lanceur.
+    expect(e).toMatchObject({
+      side: 'attacker',
+      active: true,
+      callers: ['SKT_SECOND'],
+      buff: { type: 'BT_DMG_TARGET_STAT', stat: 'ST_HP', value: 30 },
+    });
+    // Niveau 1 → ligne 1 (10 ‰) : la sélection suit le NIVEAU SAISI.
+    const low = resolveKitPassives(
+      noaChar,
+      3,
+      noaSkills,
+      data.growth.transcend,
+      buffs,
+      Element.Earth,
+      Element.Earth,
+      { S2: 1 },
+    );
+    expect(low.entries.find((x) => x.buffId === '2000022_2_2')?.buff.value).toBe(10);
+    // Le 3 % PV du S3 (2000022_3_3) : condition OWNER_RESOURCE (5 énergies) —
+    // non évaluable statiquement, SIGNALÉ, jamais deviné.
+    expect(
+      kit.unresolved.some((u) => u.buffId === '2000022_3_3' && u.reason.includes('OWNER_RESOURCE')),
+    ).toBe(true);
+  });
+
+  it('EE +0 : BID_CEQUIP_2000022 (150 ‰ × décompte) gaté SKT_ULTIMATE', () => {
+    const info = resolveGearPassives(
+      NOA,
+      { ee: { enchant: 0 } },
+      equipment,
+      buffs,
+      Element.Earth,
+      Element.Earth,
+    );
+    expect(info.entries.find((e) => e.buffId === 'BID_CEQUIP_2000022')).toMatchObject({
+      source: 'ee',
+      active: true,
+      callers: ['SKT_ULTIMATE'],
+      buff: { type: 'BT_DMG_ENEMY_TEAM_DECREASE', value: 150 },
+    });
+    // La main « dégâts vs élément » vise l'EAU (BuffConditionValue 1) —
+    // inactive contre une cible terre (cohérent avec le Δ 0 de la fixture).
+    expect(info.entries.find((e) => e.buffId === 'BID_CEQUIP_MAIN_DMG_EARTH')).toMatchObject({
+      condition: 'TARGET_ELEMENT',
+      conditionElement: Element.Water,
+      active: false,
+    });
+  });
+
+  it('application PAR SLOT : le taux du S2 porte le +3 % PV cible, pas le S1', () => {
+    const noa: AttackerBuildInput = {
+      id: NOA,
+      level: 100,
+      affinityTier: 0,
+      codexLevel: 0,
+      skillLevels: { S1: 5, S2: 5, S3: 5 },
+      sheet: { atk: 2034, critical_dmg: 1880 },
+      gear: { ee: { enchant: 0 } },
+    };
+    // Stats de la fixture Noa vs Rhona (spawn 100210) — Δ 0 prouvé.
+    const rhona: TargetBuildInput = {
+      element: 'earth',
+      stats: { hp: 11876, def: 429, dmgRed: 33 },
+      boss: true,
+    };
+    const r = buildDamageReport(noa, rhona, data, { targetsHit: 1 });
+    const rateOf = (slot: string) =>
+      r.slots.find((s) => s.slot === slot && s.burst === undefined)?.report.states[0].branches[0]
+        .damageRate;
+    // S2 − S1 = getStatValuePermille(11876, 30) = 356 ‰ (le buff ne pèse QUE
+    // sur son lanceur) ; S3 − S1 = 150 × (4 − 1) = 450 ‰ (EE, décompte § 7).
+    expect(rateOf('S2')! - rateOf('S1')!).toBe(356);
+    expect(rateOf('S3')! - rateOf('S1')!).toBe(450);
   });
 });

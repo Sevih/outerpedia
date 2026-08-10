@@ -143,9 +143,12 @@ describe('buildInputsFromZ — équipement § 15 et hors périmètre signalés',
   };
 
   it('sans resolver de gear : arme/accessoire/talisman SIGNALÉS, jamais tus', () => {
-    const { ignored, attacker } = buildInputsFromZ(z);
+    const { ignored, attacker, targetsHit } = buildInputsFromZ(z);
     expect(ignored.filter((l) => l.includes('non résolu'))).toHaveLength(3);
-    expect(ignored.filter((l) => l.includes('hors v1'))).toHaveLength(2);
+    // Alliés : hors v1, signalé. Cibles touchées (`n`) : BRANCHÉ (décompte
+    // § 7, 10/08/2026) — exposé à l'appelant, plus jamais « ignoré ».
+    expect(ignored.filter((l) => l.includes('hors v1'))).toHaveLength(1);
+    expect(targetsHit).toBe(3);
     // Les sets ne dépendent d'aucun resolver (GroupID = id de set, jointure
     // 1:1) ; un seul set choisi = 4 pièces enchantées ; `eo: 0` = pas d'EE.
     expect(attacker?.gear).toEqual({

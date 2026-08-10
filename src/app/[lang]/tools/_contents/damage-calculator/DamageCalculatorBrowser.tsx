@@ -1080,7 +1080,7 @@ export function DamageCalculatorBrowser({
     critical: true,
     miss: false,
   });
-  const [savedScnsRaw, setSavedScns] = useStoredState(SCENARIOS_STORE);
+  const [savedScnsRaw, setSavedScns, scnsReady] = useStoredState(SCENARIOS_STORE);
   // ASSAINI avant tout rendu : un état chaud d'HMR (entrées v1 encore en
   // mémoire après le swap de code, vu le 05/08 — `s.real` undefined) ou une
   // donnée corrompue ne doit jamais faire tomber le composant.
@@ -1091,6 +1091,21 @@ export function DamageCalculatorBrowser({
       typeof s?.slot === 'string' &&
       typeof s?.branch === 'string',
   );
+  // Miroir FICHIER en dev (Sevih 10/08/2026) : write-through de la liste vers
+  // `.dev/damage-scenarios.json` via la route dev — un lecteur hors navigateur
+  // (agent) lit les captures sans copier-coller. Gaté sur `scnsReady` : ne
+  // jamais écraser le fichier avec le fallback [] d'avant hydratation. Build
+  // de dev SEULEMENT (en prod `?dev=1`, la route n'existe pas).
+  useEffect(() => {
+    if (!DEV_BUILD || !scnsReady) return;
+    void fetch('/api/dev/damage-scenarios', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(savedScnsRaw),
+    }).catch(() => {
+      /* miroir best-effort : le localStorage reste la vérité */
+    });
+  }, [savedScnsRaw, scnsReady]);
   const [flash, setFlash] = useState<string | null>(null);
   const say = (msg: string) => {
     setFlash(msg);
@@ -1542,6 +1557,9 @@ export function DamageCalculatorBrowser({
       report = buildDamageReport(scenarioInputs.attacker, scenarioInputs.target, dmgData, {
         // La coche MISS (dev) force sa branche — en prod elle reste false.
         includeMissBranch: branchOn.miss,
+        ...(scenarioInputs.targetsHit !== undefined
+          ? { targetsHit: scenarioInputs.targetsHit }
+          : {}),
       });
     } catch {
       report = null;
@@ -1601,12 +1619,10 @@ export function DamageCalculatorBrowser({
           resolveGear: resolveGearLocal,
         });
         if (!inp.attacker || !inp.target) continue;
-        const r = buildDamageReport(
-          inp.attacker,
-          inp.target,
-          dmgData,
-          s.branch === 'miss' ? { includeMissBranch: true } : {},
-        );
+        const r = buildDamageReport(inp.attacker, inp.target, dmgData, {
+          ...(s.branch === 'miss' ? { includeMissBranch: true } : {}),
+          ...(inp.targetsHit !== undefined ? { targetsHit: inp.targetsHit } : {}),
+        });
         const hit = flattenReport(r).find((l) => l.slot === s.slot && l.branch === s.branch);
         if (hit) {
           calcs.set(scnKey(s), hit.damage);

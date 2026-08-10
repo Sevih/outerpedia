@@ -184,6 +184,7 @@ export function DebugHarness({
       result = buildDamageReport(inputs.attacker, inputs.target, data, {
         trace: true,
         includeMissBranch: includeMiss,
+        ...(inputs.targetsHit !== undefined ? { targetsHit: inputs.targetsHit } : {}),
       });
     } catch (e) {
       engineErr = e instanceof Error ? e.message : String(e);
@@ -212,12 +213,10 @@ export function DebugHarness({
       if (!inp.attacker || !inp.target) return null;
       // Un miss observé force sa branche — même règle que fixtures.test.ts.
       const wantMiss = f.observed.some((o) => o.branch === 'miss');
-      const r = buildDamageReport(
-        inp.attacker,
-        inp.target,
-        data,
-        wantMiss ? { includeMissBranch: true } : {},
-      );
+      const r = buildDamageReport(inp.attacker, inp.target, data, {
+        ...(wantMiss ? { includeMissBranch: true } : {}),
+        ...(inp.targetsHit !== undefined ? { targetsHit: inp.targetsHit } : {}),
+      });
       return new Map(flattenReport(r).map((l) => [`${l.slot}|${l.branch}`, l.damage]));
     } catch {
       return null;

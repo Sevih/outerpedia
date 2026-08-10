@@ -248,6 +248,13 @@ Points fermes :
 appelé par le code d'attaque (hors CFormula) pour les compétences dont la cible
 « décroît » : `rate += FindBuffEnemyTeamDecreaseDamageRate(Attacker) × count`
 (somme des buffs BT_DMG_ENEMY_TEAM_DECREASE (96) × nombre de cibles décomptées).
+Le calcul du `count` par le code d'attaque n'est pas désassemblé ; **prouvé en
+jeu** (fixture Noa vs Rhona 10/08/2026, EE +0 `BID_CEQUIP_2000022` 150 ‰,
+Δ 0 exact) : `count = MAX_USER_TEAM_MEMBER − cibles touchées` (la taille
+d'équipe, `CCommonDefine.MAX_USER_TEAM_MEMBER = 4` — dump.cs ; vague à
+1 ennemi → ×3 → +450 ‰). Le moteur applique ce décompte via
+`BuildReportOptions.targetsHit` (z `n`, défaut 1) ; le buff arrive gaté par
+son `CallerSkillType` (application par slot, gear.ts).
 
 ## 8. CalcDamage — RVA 0x2C5AD30 (+ helper local 0x2C5B4DC)
 

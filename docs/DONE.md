@@ -5,6 +5,43 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-10
+
+- **Buffs restreints par slot BRANCHÉS — les 4 captures Noa vs Rhona rejouent
+  à Δ 0 exact** (elles divergeaient de 13-24 %). Diagnostic aux traces § 7.6 :
+  l'écart était un taux additif constant par slot, identique normal/crit —
+  S2 +356 ‰ = `trunc(11876 × 30/1000)` (buff `2000022_2_2`, 3 % des PV max de
+  la CIBLE, `CallerSkillType SKT_SECOND`) ; S3 +450 ‰ = 150 × 3 (EE +0
+  `BID_CEQUIP_2000022`, `BT_DMG_ENEMY_TEAM_DECREASE`, `SKT_ULTIMATE`). Branché :
+  - **gear.ts** : un buff à `CallerSkillType` recoupant les lignes du rapport
+    devient une entrée PORTANT ses lanceurs (`callers`) au lieu d'un
+    « non branché » ; les familles à canal de stat gatées restent signalées
+    (stats de combat globales) ; `TargetSkillType` reste signalé (gate de
+    mécanique, pas de lanceur).
+  - **kit** : `resolveKitPassives` collecte aussi les `buffIds` des skills
+    ACTIFS (S1/S2/S3/bursts) au NIVEAU SAISI (z `k`) — c'est là que vivent les
+    passifs permanents gatés comme le +3 % PV cible de Noa ; conditions à état
+    (`OWNER_RESOURCE` = 5 Kaizer Energy) signalées, jamais devinées.
+  - **inputs.ts** : `buildSkillReport` reçoit par slot les buffs gatés dont le
+    lanceur matche (`sk.type`, bursts compris) ; `additionalContext` gagne
+    `defenderStat` (famille TARGET_STAT § 9.1 — lisait 0 faute de lecteur) ;
+    `decreaseTargetCount = 4 − cibles touchées` (z `n` branché de bout en bout,
+    la référence 4 est PROUVÉE par la fixture — spec formule § 7 mise à jour).
+  - Fixture [noa-rhona.json](../src/lib/damage/fixtures/noa-rhona.json)
+    committée en dorée (Δ 0 aux 4 lignes) — elle prouve aussi le décompte § 7
+    et la sélection de niveau des buffs de skill (paliers 1/3/5).
+- **Miroir fichier des scénarios du harnais en dev** (demande Sevih 10/08) :
+  la liste localStorage s'écrit en write-through vers
+  `.dev/damage-scenarios.json` (gitignoré) via la route dev
+  `/api/dev/damage-scenarios` — un agent lit les captures sans copier-coller ;
+  seule la CAPTURE est stockée (z + en jeu + réglages de compte), calculé et Δ
+  se rejouent. Gaté sur l'hydratation (jamais d'écrasement par le fallback).
+- **Chargement des tables damage quand le harnais a des scénarios sauvés** :
+  l'import dynamique ne partait qu'à la sélection d'un attaquant — arrivé sur
+  la page avec des scénarios en localStorage, la table restait sans Calculé/Δ.
+  Le déclencheur couvre maintenant `devMode && savedScns.length` (les deux
+  arrivent après montage → dépendances de l'effet).
+
 ## 2026-08-09
 
 - **Audit damage du 07/08 : D1, D2, D3, D5 traités** (D4 — le découpage du

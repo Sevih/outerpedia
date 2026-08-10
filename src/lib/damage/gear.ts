@@ -90,6 +90,13 @@ export interface GearPassiveEntry {
   condition?: string;
   /** Élément visé par `TARGET_ELEMENT` (enum binaire). */
   conditionElement?: Element;
+  /**
+   * `CallerSkillType` du buff (SKT_* ∩ lignes du rapport) : l'entrée ne pèse
+   * que sur les slots dont le skill lanceur matche (application par slot,
+   * branchée 10/08/2026 — preuve fixture Noa : 2000022_2_2 sur le S2 seul,
+   * EE BID_CEQUIP_2000022 sur le S3 seul). Absent = tous les slots.
+   */
+  callers?: string[];
 }
 
 export interface GearPassiveApplied extends GearPassiveEntry {
@@ -288,32 +295,46 @@ function makeCollector(
       } else return;
     } else return;
 
-    // Buff restreint à UN skill (`TargetSkillType`) : l'application par slot
-    // n'est pas branchée — signalé, contribution 0 (jamais versé à tous).
+    // Buff restreint à UN skill (`TargetSkillType`) : gate de MÉCANIQUE
+    // (ressource, cooldown… du skill VISÉ), pas de lanceur — non branché,
+    // signalé, contribution 0 (jamais versé à tous).
     if (row.targetSkillType !== undefined && side !== 'allies') {
       info.unresolved.push({
         source,
         sourceId,
         buffId,
-        reason: `restreint à ${row.targetSkillType} — application par slot non branchée`,
+        reason: `restreint à ${row.targetSkillType} (TargetSkillType) — non branché`,
       });
       return;
     }
-    // Restriction par skill LANCEUR (`CallerSkillType`, CSV — ex. nœuds
-    // « Chain Damage » : SKT_STRIKE_* seulement). Les chain attacks ne sont
-    // pas des lignes du rapport : hors intersection → contribution 0, signalé.
+    // Restriction par skill LANCEUR (`CallerSkillType`, CSV) — application
+    // PAR SLOT (10/08/2026) : l'entrée porte ses lanceurs, `buildDamageReport`
+    // ne la verse qu'aux slots qui matchent. Hors intersection avec les lignes
+    // du rapport (chain attacks, backups…) : contribution 0, signalé. Les
+    // familles à canal de STAT (§ 16.1 — stats de combat GLOBALES du rapport)
+    // ne savent pas varier par slot : signalées, jamais versées à tous.
+    let callers: string[] | undefined;
     if (row.callerSkillType !== undefined && row.callerSkillType !== 'SKT_ALL') {
-      const callers = row.callerSkillType.split(',').map((s) => s.trim());
-      const overlaps = callers.some((c) => REPORT_SKILL_TYPES.has(c));
-      info.unresolved.push({
-        source,
-        sourceId,
-        buffId,
-        reason: overlaps
-          ? `restreint à ${row.callerSkillType} — application par slot non branchée`
-          : `réservé à ${row.callerSkillType} (hors des lignes du rapport) — contribution 0`,
-      });
-      return;
+      const all = row.callerSkillType.split(',').map((s) => s.trim());
+      callers = all.filter((c) => REPORT_SKILL_TYPES.has(c));
+      if (!callers.length) {
+        info.unresolved.push({
+          source,
+          sourceId,
+          buffId,
+          reason: `réservé à ${row.callerSkillType} (hors des lignes du rapport) — contribution 0`,
+        });
+        return;
+      }
+      if (row.type.startsWith('BT_STAT')) {
+        info.unresolved.push({
+          source,
+          sourceId,
+          buffId,
+          reason: `stat restreinte à ${row.callerSkillType} — les stats de combat sont globales, contribution 0`,
+        });
+        return;
+      }
     }
 
     const condition = row.conditionType;
@@ -341,6 +362,7 @@ function makeCollector(
       ...(condition === 'TARGET_ELEMENT'
         ? { conditionElement: (row.conditionValue ?? 0) as Element }
         : {}),
+      ...(callers ? { callers } : {}),
       active: met,
     });
   };
@@ -601,6 +623,17 @@ export function resolveQuirkPassives(
   return info;
 }
 
+/** Slot UI dont un skill ACTIF tient son niveau (bursts = niveau du S2 —
+ *  vérifié : 372/372 bursts ont le même nombre de niveaux que leur S2). */
+const ACTIVE_SLOT_OF: Record<string, 'S1' | 'S2' | 'S3'> = {
+  SKT_FIRST: 'S1',
+  SKT_SECOND: 'S2',
+  SKT_ULTIMATE: 'S3',
+  SKT_BURST_1: 'S2',
+  SKT_BURST_2: 'S2',
+  SKT_BURST_3: 'S2',
+};
+
 export function resolveKitPassives(
   char: KitCharacter,
   transStar: number,
@@ -609,20 +642,35 @@ export function resolveKitPassives(
   buffs: DamageBuffsData,
   attackerElement: Element,
   defenderElement: Element,
+  /** Niveaux de skill SAISIS (z `k`) — sélection des lignes de buff des skills
+   *  ACTIFS ; absent = niveau max (défaut UI). */
+  skillLevels: Partial<Record<'S1' | 'S2' | 'S3', number>> = {},
 ): GearPassivesInfo {
   const { info, feedBuff } = makeCollector(buffs, attackerElement, defenderElement);
   for (const ref of char.skills) {
     const sk = skills[ref.id];
-    if (!sk || !sk.type.includes('PASSIVE')) continue;
-    const wanted =
-      sk.type === 'SKT_UNIQUE_PASSIVE'
-        ? uniquePassiveLevel(transcend, char.basicStar, transStar)
-        : sk.levels.length;
+    if (!sk) continue;
+    // Niveau effectif : passif UNIQUE = palier de transcendance ; skill ACTIF
+    // = niveau saisi (clampé) — ses `buffIds` par niveau portent les passifs
+    // permanents du kit (ex. Noa 2000022_2_2, +3 % PV cible sur le S2, niveaux
+    // 10/20/30 ‰ aux paliers 1/3/5) ; autres passifs (classe, chain…) = max.
+    let wanted: number;
+    if (sk.type === 'SKT_UNIQUE_PASSIVE') {
+      wanted = uniquePassiveLevel(transcend, char.basicStar, transStar);
+    } else if (sk.type.includes('PASSIVE')) {
+      wanted = sk.levels.length;
+    } else {
+      const slot = ACTIVE_SLOT_OF[sk.type];
+      if (slot === undefined && !sk.levels.some((l) => l.buffIds.length)) continue;
+      const asked = slot !== undefined ? skillLevels[slot] : undefined;
+      wanted = Math.min(Math.max(asked ?? sk.levels.length, 1), sk.levels.length);
+    }
     if (wanted < 1) continue;
     const lv =
       sk.levels.filter((l) => l.level <= wanted).sort((a, b) => b.level - a.level)[0] ??
       sk.levels[0];
-    for (const b of lv.buffIds) feedBuff('kit', sk.id, b, 1);
+    if (!lv) continue;
+    for (const b of lv.buffIds) feedBuff('kit', sk.id, b, wanted);
   }
   return info;
 }

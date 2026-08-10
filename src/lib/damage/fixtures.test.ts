@@ -61,7 +61,7 @@ describe('fixtures dorées (harnais § 4)', () => {
           LZString.decompressFromEncodedURIComponent(f.z) || 'null',
         ) as CalculatorUrlState | null;
         if (!st) throw new Error('z indéchiffrable — fixture corrompue ?');
-        const { attacker, target } = buildInputsFromZ(st, {
+        const { attacker, target, targetsHit } = buildInputsFromZ(st, {
           codexLevel: f.codex ?? 0,
           guildLevel: f.guild ?? 0,
           premiumHp: f.premium === true,
@@ -74,12 +74,10 @@ describe('fixtures dorées (harnais § 4)', () => {
         // Un miss observé force sa branche (sans esquive, le miss n'existe
         // qu'avec un buff de « miss chance » — jamais émis par défaut).
         const wantMiss = f.observed.some((o) => o.branch === 'miss');
-        const report = buildDamageReport(
-          attacker,
-          target,
-          data,
-          wantMiss ? { includeMissBranch: true } : {},
-        );
+        const report = buildDamageReport(attacker, target, data, {
+          ...(wantMiss ? { includeMissBranch: true } : {}),
+          ...(targetsHit !== undefined ? { targetsHit } : {}),
+        });
         lines = flattenReport(report);
         pending = new Set(
           report.slots

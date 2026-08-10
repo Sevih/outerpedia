@@ -46,6 +46,15 @@ export const PVP_HEAL_PENALTY_REDUCE_RATE_PERMILLE = 500;
 /** Plancher du taux de dégâts après tous les modificateurs (CheckDamageRate). */
 export const MIN_DAMAGE_RATE_PERMILLE = 300;
 
+/**
+ * CCommonDefine.MAX_USER_TEAM_MEMBER — dump.cs, version 1.4.9 : taille d'une
+ * équipe. Référence du décompte § 7 (`decreaseTargetCount = 4 − cibles
+ * touchées`, BT_DMG_ENEMY_TEAM_DECREASE) — le code d'attaque qui calcule le
+ * décompte n'est pas désassemblé, la référence est PROUVÉE par la fixture Noa
+ * vs Rhona (10/08/2026) : 150 ‰ × 3 = +450 ‰ exacts sur une vague à 1 ennemi.
+ */
+export const MAX_USER_TEAM_MEMBER = 4;
+
 /** Multiplicateur subi par une cible marquée (buff BT_MARKING, type 5). */
 export const MARKING_DAMAGE_RATE_PERMILLE = 1150;
 

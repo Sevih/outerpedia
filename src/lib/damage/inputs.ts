@@ -42,7 +42,7 @@ import {
   type SkillReportOptions,
 } from './report';
 import { sheetToCombatStat } from './sheet';
-import { Element } from './types';
+import { Element, MAX_USER_TEAM_MEMBER } from './types';
 
 // ── Types structurels des JSON `data/generated/damage/` ─────────────────────
 // (miroirs minimaux — la vérité est produite par datagen/damage/*)
@@ -272,6 +272,16 @@ export function sheetSlugOfStat(st: string): string | undefined {
   return Object.entries(SHEET_STAT_MAP).find(([, m]) => m.st === st)?.[0];
 }
 
+/** Enum `ST_*` → clé des stats de CIBLE du scénario (famille TARGET_STAT
+ *  § 9.1) — pendant défenseur de SHEET_STAT_MAP : les seules stats que la
+ *  cible du scénario porte (preset ou saisie), le reste contribue 0. */
+const TARGET_STAT_MAP: Record<string, keyof TargetBuildInput['stats']> = {
+  ST_HP: 'hp',
+  ST_DEF: 'def',
+  ST_DMG_REDUCE_RATE: 'dmgRed',
+  ST_E_CRI_DMG_REDUCE: 'cdmgRed',
+};
+
 /** Taux Codex par stat (‰ CUMULÉS au niveau du compte) — seuls ATK/DEF/HP. */
 function archiveRateFor(slug: string, codexLevel: number, growth: DamageGrowthData): number {
   if (codexLevel < 1) return 0;
@@ -474,7 +484,8 @@ export interface TargetBuildInput {
 }
 
 export interface BuildReportOptions extends SkillReportOptions {
-  /** Cibles touchées (décroissance § 7 — réservé ; 1 par défaut). */
+  /** Cibles touchées (z `n`, défaut 1) — décompte § 7 :
+   *  `decreaseTargetCount = 4 − n` (BT_DMG_ENEMY_TEAM_DECREASE). */
   targetsHit?: number;
   /** Force la branche MISS (sans esquive, le miss n'existe qu'avec un buff de
    *  « miss chance ») — comparaison d'un coup manqué observé en jeu. */
@@ -640,7 +651,9 @@ export function buildDamageReport(
         };
   }
   const gearBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>
-    (gearPassives?.entries ?? []).filter((e) => e.side === side && e.active).map((e) => e.buff);
+    (gearPassives?.entries ?? [])
+      .filter((e) => e.side === side && e.active && !e.callers)
+      .map((e) => e.buff);
 
   // Passifs du KIT (§ 16.3 côté joueur) : skills `*_PASSIVE` du perso — le
   // passif UNIQUE suit la TRANSCENDANCE (growth.transcend.skillLevel).
@@ -660,9 +673,10 @@ export function buildDamageReport(
     data.buffs,
     attackerElement,
     defenderElement,
+    attacker.skillLevels,
   );
   const kitBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>
-    kitPassives.entries.filter((e) => e.side === side && e.active).map((e) => e.buff);
+    kitPassives.entries.filter((e) => e.side === side && e.active && !e.callers).map((e) => e.buff);
 
   // QUIRKS du compte (nœuds d'éveil à buff) — portée élément/classe évaluée
   // dans gear.ts ; les nœuds de stats sont déjà dans la fiche (§ 17.4).
@@ -678,7 +692,20 @@ export function buildDamageReport(
     );
   }
   const quirkBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>
-    (quirkPassives?.entries ?? []).filter((e) => e.side === side && e.active).map((e) => e.buff);
+    (quirkPassives?.entries ?? [])
+      .filter((e) => e.side === side && e.active && !e.callers)
+      .map((e) => e.buff);
+
+  // Buffs restreints par slot (`CallerSkillType`, gear.ts) : versés SEULEMENT
+  // au slot dont le skill lanceur matche — jamais aux stats de combat (les
+  // familles à canal de stat gatées sont signalées, pas des entrées).
+  const gatedInfos = () => [gearPassives, kitPassives, quirkPassives];
+  const gatedBuffs = (side: 'attacker' | 'defender', skillType: string): ActiveBuff[] =>
+    gatedInfos().flatMap((i) =>
+      (i?.entries ?? [])
+        .filter((e) => e.side === side && e.active && e.callers?.includes(skillType))
+        .map((e) => e.buff),
+    );
 
   // Buffs actifs des deux côtés : affinité (donnée) + chips (catalogue) +
   // passifs de boss et d'équipement (donnée, évalués ci-dessus).
@@ -759,6 +786,13 @@ export function buildDamageReport(
     const slug = sheetSlugOfStat(st);
     return slug !== undefined ? (combatStats[slug] ?? 0) : 0;
   };
+  // Stats FINALES du défenseur (famille TARGET_STAT § 9.1 — ex. Noa
+  // 2000022_2_2 : +3 % des PV max de la CIBLE en taux) : celles que le
+  // scénario porte (TARGET_STAT_MAP) ; absente → 0, jamais devinée.
+  const defenderStatOf = (st: string): number => {
+    const key = TARGET_STAT_MAP[st];
+    return key !== undefined ? (target.stats[key] ?? 0) : 0;
+  };
 
   const attackerMaxHP = combatStats.hp ?? 0;
   const defenderMaxHP = target.stats.hp ?? 0;
@@ -782,6 +816,11 @@ export function buildDamageReport(
     attackerBuffs,
     defenderBuffs,
     ...(options?.includeMissBranch ? { includeMissBranch: true } : {}),
+    // BT_DMG_ENEMY_TEAM_DECREASE (§ 7) : cibles décomptées = taille d'équipe
+    // (CCommonDefine.MAX_USER_TEAM_MEMBER) − cibles touchées. Le décompte du
+    // code d'attaque n'est pas désassemblé — la référence est PROUVÉE par la
+    // fixture Noa vs Rhona (10/08/2026, +450 ‰ = 150 × 3 exacts, 1 ennemi).
+    decreaseTargetCount: Math.max(0, MAX_USER_TEAM_MEMBER - (options?.targetsHit ?? 1)),
     additionalContext: {
       attacker:
         attackerMaxHP > 0
@@ -798,6 +837,7 @@ export function buildDamageReport(
             }
           : undefined,
       attackerStat: statOf,
+      defenderStat: defenderStatOf,
       targetIsBoss: target.boss === true,
       ...(target.broken !== undefined ? { targetIsBreak: target.broken } : {}),
       scene: 'pve',
@@ -818,6 +858,19 @@ export function buildDamageReport(
     const level = Math.min(Math.max(wanted, 1), sk.levels.length);
     const lv = sk.levels.find((l) => l.level === level) ?? sk.levels[sk.levels.length - 1];
     if (!lv || lv.damageFactor <= 0) return; // skill sans dégâts : pas de ligne
+    // Buffs restreints par slot : le scénario de CE slot reçoit en plus les
+    // entrées dont le `CallerSkillType` matche son skill (ex. Noa : le +3 %
+    // PV cible sur le S2 seul, l'EE sur le S3 seul — fixture 10/08/2026).
+    const gatedAtk = gatedBuffs('attacker', sk.type);
+    const gatedDef = gatedBuffs('defender', sk.type);
+    const slotScenario: ReportScenario =
+      gatedAtk.length || gatedDef.length
+        ? {
+            ...scenario,
+            attackerBuffs: [...attackerBuffs, ...gatedAtk],
+            defenderBuffs: [...defenderBuffs, ...gatedDef],
+          }
+        : scenario;
     const report = buildSkillReport(
       {
         skillFactor: lv.damageFactor,
@@ -826,7 +879,7 @@ export function buildDamageReport(
         monoTarget: sk.rangeType === 'SINGLE',
         states: groupHitsByChain(sk.hits),
       },
-      scenario,
+      slotScenario,
       options,
     );
     slots.push({

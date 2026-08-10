@@ -23,6 +23,10 @@ next-env.d.ts
 # `data/generated/` (via `pnpm datagen:promote`) est committé et servi.
 /data/extracted/
 
+# Miroir dev des scénarios du harnais damage (write-through localStorage →
+# fichier, route /api/dev/damage-scenarios) — donnée locale, jamais committée.
+/.dev/
+
 # Tests / couverture
 /coverage
 

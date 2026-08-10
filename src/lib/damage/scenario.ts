@@ -11,6 +11,7 @@
 
 import type { DamageBranch } from './harness';
 import type { AttackerBuildInput, DamageReportResult, TargetBuildInput } from './inputs';
+import { MAX_USER_TEAM_MEMBER } from './types';
 
 // ── Référentiels de saisie (l'UI et le pont lisent LA même table) ───────────
 
@@ -146,6 +147,9 @@ export interface ScenarioBuildOptions {
 export interface ScenarioBuildResult {
   attacker?: AttackerBuildInput;
   target?: TargetBuildInput;
+  /** Cibles touchées (z `n`, défaut 1) — à passer en
+   *  `BuildReportOptions.targetsHit` (décompte § 7, branché 10/08/2026). */
+  targetsHit?: number;
   /** Pans du scénario que le moteur v1 IGNORE (à afficher, jamais tus). */
   ignored: string[];
 }
@@ -228,9 +232,8 @@ export function buildInputsFromZ(
     // EE : porté par défaut (`eo: 0` = absent), enchant par défaut +10.
     if (st.eo !== 0) gear.ee = { enchant: clamp(st.e ?? 10, 0, 10) };
     if (Object.keys(gear).length) attacker.gear = gear;
-    // Hors périmètre v1 (team, décroissance § 7) : signalé.
+    // Hors périmètre v1 (team) : signalé.
     if (st.al?.some((row) => row[0])) ignored.push('alliés — passifs de team hors v1');
-    if ((st.n ?? 1) > 1) ignored.push('cibles touchées > 1 — décroissance § 7 hors v1');
   }
 
   let target: TargetBuildInput | undefined;
@@ -275,7 +278,12 @@ export function buildInputsFromZ(
       };
   }
 
-  return { attacker, target, ignored };
+  return {
+    attacker,
+    target,
+    ...(typeof st.n === 'number' ? { targetsHit: clamp(st.n, 1, MAX_USER_TEAM_MEMBER) } : {}),
+    ignored,
+  };
 }
 
 // ── Aplat du rapport (capture et rejeu parlent LA même clé) ─────────────────
