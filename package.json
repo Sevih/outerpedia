@@ -67,7 +67,7 @@
     "concurrently": "^10.0.4",
     "eslint": "^9",
     "eslint-config-next": "16.3.0",
-    "happy-dom": "^20.11.1",
+    "happy-dom": "^20.11.2",
     "lefthook": "^2.1.10",
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1",
