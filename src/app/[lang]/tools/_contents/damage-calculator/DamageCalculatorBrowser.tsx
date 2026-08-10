@@ -1453,13 +1453,17 @@ export function DamageCalculatorBrowser({
   // ── MOTEUR BRANCHÉ (05/08/2026) : le rapport PUBLIC passe par le MÊME pont
   // que le panneau Debug et fixtures.test.ts (buildInputsFromZ → amont pur) —
   // jamais un deuxième chemin de calcul. Les tables damage (~11 Mo de JSON)
-  // se chargent en import dynamique à la PREMIÈRE sélection d'attaquant :
-  // rien dans le bundle initial, un seul chargement par session.
+  // se chargent en import dynamique à la PREMIÈRE sélection d'attaquant — ou
+  // dès l'hydratation si le HARNAIS a des scénarios sauvés qui attendent leur
+  // Δ (le rejeu de la table Scénarios passe par `savedCalcs`, qui a besoin des
+  // tables ; hors harnais la table n'existe pas, on ne charge pas) : rien dans
+  // le bundle initial pour le visiteur public, un seul chargement par session.
   const [dmgData, setDmgData] = useState<DamageData | null>(null);
   const [dmgErr, setDmgErr] = useState<string | null>(null);
   const dmgLoading = useRef(false);
   useEffect(() => {
-    if (!attackerId || dmgData || dmgErr || dmgLoading.current) return;
+    const scnsWaiting = devMode && savedScns.length > 0;
+    if ((!attackerId && !scnsWaiting) || dmgData || dmgErr || dmgLoading.current) return;
     dmgLoading.current = true;
     void Promise.all([
       import('@data/generated/damage/characters.json'),
@@ -1478,7 +1482,10 @@ export function DamageCalculatorBrowser({
         } as unknown as DamageData);
       })
       .catch((e: unknown) => setDmgErr(e instanceof Error ? e.message : String(e)));
-  }, [attackerId, dmgData, dmgErr]);
+    // `savedScns.length` : les scénarios arrivent APRÈS montage (hydratation
+    // localStorage de useStoredState) — l'effet doit re-tirer à ce moment-là.
+    // `devMode` aussi : `?dev=1` est lu dans un effet, après le premier rendu.
+  }, [attackerId, dmgData, dmgErr, devMode, savedScns.length]);
 
   // Cible preset → stats effectives au spawn — partagé entre le rapport
   // public et le harnais (même closure, mêmes stats que l'affichage).
