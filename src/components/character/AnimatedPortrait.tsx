@@ -84,6 +84,14 @@ export interface AnimatedPortraitProps extends Omit<PortraitProps, 'fx'> {
    * d'elle, personne ne devrait passer ça : le jeu, lui, ne choisit pas.
    */
   effect?: string;
+  /**
+   * Id qui PORTE l'effet quand il diffère de l'id affiché — le cas du skin :
+   * `id` est le modèle de costume (l'art), mais l'effet appartient au
+   * PERSONNAGE, comme dans le jeu (un skin posé ne fait pas disparaître la
+   * parure — vécu avec 2020059 sur 2000059, la table n'a pas de ligne par
+   * modèle). Absent : l'effet se résout sur `id`.
+   */
+  fxId?: string;
   /** Remonte les refus du moteur (WebGL absent, branche non transcrite…). */
   onFxError?: (message: string) => void;
   /** N'afficher que ces calques, par nom de nœud — page de contrôle uniquement. */
@@ -230,11 +238,12 @@ function PortraitFxCanvas({
 
 export function AnimatedPortrait({
   effect,
+  fxId,
   onFxError,
   fxEmitters,
   ...props
 }: AnimatedPortraitProps) {
-  const name = effect ?? fxNameOf(props.id);
+  const name = effect ?? fxNameOf(fxId ?? props.id);
   // Un nom d'effet que la table connaît mais qu'on n'a pas extrait ne rend rien :
   // c'est un palier de portage, pas une absence d'effet. `portrait-fx-gl` le dirait
   // aussi, mais autant ne pas monter un contexte WebGL pour l'entendre.

@@ -16,10 +16,11 @@
  * ce chunk sans l'avoir demandé. Pendant le chargement, le portrait statique
  * tient la place (mêmes props), la bascule est invisible.
  *
- * L'effet animé suit l'ID AFFICHÉ, pas le perso : la table du jeu
- * (`CharacterExtraTemplet.ThumbnailEffect`) a ses propres lignes pour les
- * modèles de skin (le skin 2010063 y figure) — un portrait skinné garde donc
- * exactement l'effet que le jeu lui donne, y compris aucun.
+ * L'effet animé suit le PERSONNAGE, pas le modèle affiché : la table du jeu
+ * (`CharacterExtraTemplet.ThumbnailEffect`) est par perso, et poser un skin ne
+ * fait pas disparaître la parure (vécu : 2020059 sur 2000059 éteignait
+ * l'effet quand il se résolvait sur l'id d'art). D'où `fxId` : l'art vient du
+ * skin, l'effet du perso.
  */
 
 import { lazy, Suspense } from 'react';
@@ -40,7 +41,7 @@ export function CardPortrait(props: Omit<PortraitProps, 'fx'>) {
   if (!SITE_SETTINGS_ENABLED || !animatedPortraits) return <Portrait {...props} id={id} />;
   return (
     <Suspense fallback={<Portrait {...props} id={id} />}>
-      <AnimatedPortrait {...props} id={id} />
+      <AnimatedPortrait {...props} id={id} fxId={props.id} />
     </Suspense>
   );
 }
