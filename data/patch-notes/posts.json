@@ -1,6 +1,36 @@
 {
   "posts": [
     {
+      "id": 10588,
+      "date": "2026-08-10",
+      "modified": "2026-08-10T09:02:26",
+      "slug": "notice-8-11-tue-update-maintenance-and-patch-notes-delay-notice",
+      "lang": "en",
+      "type": "notice",
+      "title": "[Notice] 8/11 (Tue) Update Maintenance and Patch Notes Delay Notice",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/6751a61933da5e30.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello, Masters.</p>\n\n\n\n<p>We would like to provide an advance notice regarding the update maintenance scheduled for Monday, August 11.</p>\n\n\n\n<p>The market review for the new update is currently underway. However, as it is difficult to accurately predict when the review will be completed, we are not yet able to confirm whether tomorrow’s maintenance will proceed as scheduled.</p>\n\n\n\n<p>As the market review may be delayed, the patch notes notice, which was planned to provide detailed information about the update, has also been unavoidably delayed.</p>\n\n\n\n<p>We sincerely apologize for any concern this delay in both the schedule and the notice may cause to Masters who have been waiting for the update.</p>\n\n\n\n<p>We are continuing to monitor the market review status closely. As soon as the maintenance schedule is finalized, we will promptly share a follow-up notice with the confirmed maintenance schedule and update patch notes.</p>\n\n\n\n<p>We once again sincerely apologize for not being able to provide smoother service.</p>\n\n\n\n<p>Thank you.</p>\n"
+    },
+    {
+      "id": 10598,
+      "date": "2026-08-10",
+      "modified": "2026-08-10T09:03:58",
+      "slug": "%ec%95%88%eb%82%b4-%eb%a7%88%ec%bc%93-%ea%b2%80%ec%88%98-%ec%a7%80%ec%97%b0%ec%97%90-%eb%94%b0%eb%a5%b8-8-11%ed%99%94-%ec%a0%90%ea%b2%80-%ec%9d%bc%ec%a0%95-%eb%b0%8f-%ed%8c%a8%ec%b9%98%eb%85%b8",
+      "lang": "kr",
+      "type": "notice",
+      "title": "[안내] 마켓 검수 지연에 따른 8/11(화) 점검 일정 및 패치노트 공개 지연 안내",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/90db829624102f79.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n\n<p>8월 11일(화) 진행 예정인 업데이트 점검과 관련하여 사전 안내해 드립니다.</p>\n\n\n\n<p>현재 신규 업데이트를 위한 마켓 검수가 진행 중이나, 검수 완료 시점을 정확히 예측하기 어려워 내일 점검의 정상 진행 여부가 아직 확정되지 않은 상황입니다.</p>\n\n\n\n<p>마켓 검수 지연 가능성이 제기됨에 따라, 오너님들께 업데이트 상세 내용을 안내해 드리는 패치노트 공지 또한 부득이하게 지연되고 있습니다.</p>\n\n\n\n<p>업데이트 소식을 기다리고 계실 오너 여러분께 일정 및 공지 지연으로 심려를 끼쳐드려 진심으로 죄송합니다.</p>\n\n\n\n<p>현재 운영팀은 마켓 검수 현황을 지속적으로 확인하고 있으며, 점검 일정이 최종 확정되는 대로 추가 공지를 통해 점검 일정과 업데이트 패치노트를 신속하게 안내해 드리겠습니다.</p>\n\n\n\n<p>원활한 서비스를 제공해 드리지 못한 점 다시 한번 깊이 사과드립니다.</p>\n\n\n\n<p>감사합니다.</p>\n\n\n\n<p></p>\n"
+    },
+    {
+      "id": 10623,
+      "date": "2026-08-10",
+      "modified": "2026-08-10T09:04:39",
+      "slug": "maintenence_dealy_260811_jp",
+      "lang": "jp",
+      "type": "notice",
+      "title": "【お知らせ】ストア審査の遅延に伴う8/11(火)のメンテナンス日程およびパッチノート公開遅延について",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/3819f5f7ab09ef1b.webp\" alt=\"\"></figure>\n\n\n\n<p>マスターの皆様、こんにちは。 GMあめです。</p>\n\n\n\n<p>8月11日(火)に実施予定のアップデートメンテナンスにつきまして、事前のご案内を申し上げます。</p>\n\n\n\n<p>現在、新規アップデートのためのストアでの審査が進行中ですが、完了時刻の予測が難しく、明日のメンテナンスが予定通り実施できるか未定の状況となっております。</p>\n\n\n\n<p>このストア審査遅延の可能性に伴い、マスター様へアップデート詳細をお知らせするパッチノートの公開もやむを得ず遅延しております。</p>\n\n\n\n<p>アップデートをお待ちいただいているマスター様には、日程およびお知らせの遅延によりご迷惑をおかけしておりますこと、深くお詫び申し上げます。</p>\n\n\n\n<p>現在、運営チームにて審査状況を継続して確認しており、メンテナンス日程が確定次第、別途のお知らせにて日程とパッチノートを迅速にご案内いたします。</p>\n\n\n\n<p>円滑なサービスをご提供できず、改めて深くお詫び申し上げます。</p>\n\n\n\n<p>今後とも『アウタープレーン』をよろしくお願いいたします。</p>\n\n\n\n<p></p>\n"
+    },
+    {
       "id": 10584,
       "date": "2026-08-06",
       "modified": "2026-08-06T07:19:40",
