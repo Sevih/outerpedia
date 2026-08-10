@@ -1,28 +1,40 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import { SITE_SETTINGS_ENABLED, setSkin, useSiteSettings } from '@/lib/site-settings';
 
 export interface FullArt {
   src: string;
   alt: string;
   /** Nom du skin en légende ; null pour l'art par défaut. */
   label: string | null;
+  /**
+   * ModelNameID du costume — la clé des réglages du site (« utiliser ce
+   * portrait ») ; null pour l'art de BASE, dont le choix EFFACE l'entrée.
+   */
+  model: string | null;
 }
 
 /**
  * Visionneuse d'art en pied (portage V2) : image simple s'il n'y a qu'un art,
- * carrousel swipe (flèches + points + légende) dès qu'il y a des skins.
+ * carrousel swipe (flèches + points + légende) dès qu'il y a des skins — avec,
+ * sous les points, le bouton « utiliser ce portrait » qui pose le skin courant
+ * dans les réglages du site (`site-settings`, partagé avec la modale du header).
  */
 export function FullArtCarousel({
   items,
+  charId,
   hex,
   strings,
 }: {
   items: FullArt[];
+  /** Id de BASE du perso de la fiche — la clé sous laquelle le choix est rangé. */
+  charId: string;
   hex: string;
   /** Libellés a11y localisés (composant client) — `show` : gabarit `{n}`. */
-  strings: { prev: string; next: string; show: string };
+  strings: { prev: string; next: string; show: string; usePortrait: string; inUse: string };
 }) {
+  const { skins } = useSiteSettings();
   const [active, setActive] = useState(0);
   const touchStartX = useRef<number | null>(null);
   const length = items.length;
@@ -126,6 +138,29 @@ export function FullArtCarousel({
           />
         ))}
       </div>
+
+      {/* Le choix de portrait — même store que la modale du header. L'art de
+          base (`model` null) est « actuel » quand aucune entrée n'existe.
+          Soumis au kill-switch des réglages du site, comme toutes les surfaces. */}
+      {SITE_SETTINGS_ENABLED &&
+        (() => {
+          const isCurrent = (skins[charId] ?? null) === current.model;
+          return (
+            <button
+              type="button"
+              disabled={isCurrent}
+              onClick={() => setSkin(charId, current.model)}
+              className={`rounded-full border px-3 py-1 text-xs transition ${
+                isCurrent
+                  ? 'cursor-default border-white/20 text-zinc-300'
+                  : 'border-white/10 bg-slate-950/55 text-zinc-200 hover:bg-slate-950/80 hover:text-white'
+              }`}
+              style={isCurrent ? { borderColor: hex, color: hex } : undefined}
+            >
+              {isCurrent ? strings.inUse : strings.usePortrait}
+            </button>
+          );
+        })()}
     </div>
   );
 }

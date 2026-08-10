@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { Route } from 'next';
 import { img, RECRUIT_TAG_SPRITE } from '@/lib/images';
 import { joinDisplayName } from '@/lib/data/characters';
-import { Portrait } from '@/components/character/Portrait';
+import { CardPortrait } from '@/components/character/SettingsPortrait';
 import { fitsOnTwoLines } from '@/components/character/CharacterPortrait';
 
 /**
@@ -28,7 +28,9 @@ import { fitsOnTwoLines } from '@/components/character/CharacterPortrait';
  *
  * Composant SERVEUR (aucun état, aucun hook) : les quatre appelants publics le
  * rendaient jusqu'ici via un `ResponsiveCharacterCard` client qui mesurait le
- * viewport au `useMediaQuery` — supprimé, cf. `SCALE`.
+ * viewport au `useMediaQuery` — supprimé, cf. `SCALE`. Son portrait est délégué
+ * à une feuille cliente (`CardPortrait`) qui applique les réglages du site
+ * (skin choisi, portrait animé).
  */
 
 /**
@@ -170,7 +172,9 @@ export function CharacterCard({
 
   const card = (
     <span className={`relative block ${s.width}`}>
-      <Portrait
+      {/* Feuille CLIENTE : applique les réglages du site (skin choisi, portrait
+          animé) — la carte, elle, reste serveur. */}
+      <CardPortrait
         id={id}
         name={name}
         rarity={rarity ?? 1}

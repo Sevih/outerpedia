@@ -158,7 +158,7 @@ export default async function CharacterDetail({
   // Préfixe de titre : « Core Fusion » (libellé du jeu) ou surnom.
   const prefix = characterNamePrefix(char, lang);
   const baseName = lRec(char.name, lang);
-  const fullArts: FullArt[] = [{ src: img.full(char.id), alt: name, label: null }];
+  const fullArts: FullArt[] = [{ src: img.full(char.id), alt: name, label: null, model: null }];
   // Skins : full arts des costumes (rendus existants seulement). Une core-
   // fusion hérite des skins de sa base via leur modèle fusionné.
   {
@@ -169,7 +169,7 @@ export default async function CharacterDetail({
       const hasArt = isFusion ? cos.fusionArt : cos.art;
       if (!hasArt || !model || model === '0' || model === char.id) continue;
       const label = lRec(cos.name, lang) || cos.name.en;
-      fullArts.push({ src: img.full(model), alt: `${name} — ${label}`, label });
+      fullArts.push({ src: img.full(model), alt: `${name} — ${label}`, label, model });
     }
   }
   // Badge « type d'unité » : le tag de recrutement du perso (extraction) ou
@@ -605,6 +605,7 @@ export default async function CharacterDetail({
 
       <OverviewSection
         hex={hex}
+        charId={char.id}
         fullArts={fullArts}
         unitTag={
           unitTagSlug ? { label: tagLabel(unitTagSlug, lang), iconSrc: img.tag(unitTagSlug) } : null

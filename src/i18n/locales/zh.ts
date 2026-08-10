@@ -749,6 +749,20 @@ const zh: Record<TranslationKey, string> = {
   'header.lang.community': '社区',
   'header.lang.community_note': '游戏数据的社区翻译将以英语显示。',
 
+  // Site settings (header modal + character page gallery)
+  'settings.title': '网站设置',
+  'settings.animated': '动态立绘',
+  'settings.animated_note': '在拥有卡片特效的立绘上重现游戏内效果，可能占用更多资源。',
+  'settings.skins': '显示皮肤',
+  'settings.skins_note': '选择每个角色在全站显示的服装。保存在此浏览器中。',
+  'settings.default_portrait': '默认',
+  'settings.reset_skins': '全部重置',
+  'settings.filter': '搜索角色…',
+  'settings.close': '关闭',
+  'settings.back': '返回',
+  'settings.use_portrait': '使用此立绘',
+  'settings.portrait_in_use': '当前立绘',
+
   // Navigation (short labels for md-xl breakpoint)
   'nav.characters.short': '角色',
   'nav.equipment.short': '装备',

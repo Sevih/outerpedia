@@ -795,6 +795,22 @@ const fr: Record<TranslationKey, string> = {
   'header.lang.community_note':
     "Les traductions communautaires utilisent l'anglais pour les données du jeu.",
 
+  // Site settings (header modal + character page gallery)
+  'settings.title': 'Réglages du site',
+  'settings.animated': 'Portraits animés',
+  'settings.animated_note':
+    "Rejoue l'effet de carte du jeu sur les portraits qui en ont un. Peut consommer plus de ressources.",
+  'settings.skins': 'Skins affichés',
+  'settings.skins_note':
+    'Choisissez la tenue affichée pour chaque personnage sur tout le site. Enregistré dans ce navigateur.',
+  'settings.default_portrait': 'Par défaut',
+  'settings.reset_skins': 'Tout réinitialiser',
+  'settings.filter': 'Filtrer les personnages…',
+  'settings.close': 'Fermer',
+  'settings.back': 'Retour',
+  'settings.use_portrait': 'Utiliser ce portrait',
+  'settings.portrait_in_use': 'Portrait actuel',
+
   // Navigation (short labels for md-xl breakpoint)
   'nav.characters.short': 'Persos',
   'nav.equipment.short': 'Équip',

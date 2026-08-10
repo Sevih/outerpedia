@@ -14,6 +14,8 @@ export interface OverviewBadge {
 
 export interface OverviewProps {
   hex: string;
+  /** Id de BASE du perso — la clé du choix de portrait (réglages du site). */
+  charId: string;
   fullArts: FullArt[];
   /** Badge type d'unité (premium/limited/…), si taggé. */
   unitTag: OverviewBadge | null;
@@ -53,11 +55,14 @@ export async function OverviewSection(p: OverviewProps) {
       <div className="mx-auto grid max-w-330 grid-cols-1 gap-8 px-4 py-8 md:px-6 lg:grid-cols-[360px_1fr] lg:gap-14 lg:px-8 lg:py-14">
         <FullArtCarousel
           items={p.fullArts}
+          charId={p.charId}
           hex={p.hex}
           strings={{
             prev: t('aria.prev_art'),
             next: t('aria.next_art'),
             show: t('aria.show_art'),
+            usePortrait: t('settings.use_portrait'),
+            inUse: t('settings.portrait_in_use'),
           }}
         />
 

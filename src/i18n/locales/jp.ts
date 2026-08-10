@@ -770,6 +770,22 @@ const jp: Record<TranslationKey, string> = {
   'header.lang.community': 'コミュニティ',
   'header.lang.community_note': 'コミュニティ翻訳はゲームデータには英語版が使用されます。',
 
+  // Site settings (header modal + character page gallery)
+  'settings.title': 'サイト設定',
+  'settings.animated': 'アニメーションポートレート',
+  'settings.animated_note':
+    'ゲーム内のカードエフェクトを持つポートレートで再生します。リソースを多く使用する場合があります。',
+  'settings.skins': '表示スキン',
+  'settings.skins_note':
+    'サイト全体で各キャラクターに表示する衣装を選択します。このブラウザに保存されます。',
+  'settings.default_portrait': 'デフォルト',
+  'settings.reset_skins': 'すべてリセット',
+  'settings.filter': 'キャラクターを検索…',
+  'settings.close': '閉じる',
+  'settings.back': '戻る',
+  'settings.use_portrait': 'このポートレートを使用',
+  'settings.portrait_in_use': '使用中のポートレート',
+
   // Navigation (short labels for md-xl breakpoint)
   'nav.characters.short': 'キャラ',
   'nav.equipment.short': '装備',

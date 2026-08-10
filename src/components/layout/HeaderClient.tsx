@@ -5,6 +5,8 @@ import type { Route } from 'next';
 import { useEffect, useState } from 'react';
 import { LanguageSwitcher, type LanguageSwitcherStrings } from './LanguageSwitcher';
 import { SearchModal, type SearchStrings } from './SearchModal';
+import { SettingsModal, type SettingsStrings, type SkinCatalogEntry } from './SettingsModal';
+import { SITE_SETTINGS_ENABLED } from '@/lib/site-settings';
 import type { Lang } from '@/lib/i18n/config';
 
 /** Item de nav pré-localisé côté serveur (icône = URL R2 résolue). */
@@ -22,6 +24,8 @@ export interface HeaderStrings {
   lang: LanguageSwitcherStrings;
   /** Palette de recherche (Ctrl+K) : libellés + placeholder court du trigger. */
   search: SearchStrings & { short: string };
+  /** Modale des réglages du site (portrait animé, skins). */
+  settings: SettingsStrings;
 }
 
 /** Loupe (trigger + barre de la palette). */
@@ -38,6 +42,22 @@ function NavIcon({ src, alt, size }: { src: string; alt: string; size: number })
   return <img src={src} alt={alt} width={size} height={size} className="object-contain" />;
 }
 
+/** Engrenage (réglages du site). */
+function GearIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
+      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" />
+      <path
+        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.01a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 /**
  * En-tête interactif (structure V2, tokens V3) : logo + badges de version,
  * nav à icônes de jeu (libellé court < xl, long ≥ xl), dropdown Guides au
@@ -51,16 +71,20 @@ export function HeaderClient({
   appVersion,
   gameVersion,
   strings,
+  skinCatalog,
 }: {
   lang: Lang;
   nav: HeaderNavItem[];
   appVersion: string;
   gameVersion: string;
   strings: HeaderStrings;
+  /** Catalogue pré-localisé des persos à skins — cf. `SettingsModal`. */
+  skinCatalog: SkinCatalogEntry[];
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   // Raccourci global Ctrl/⌘+K (convention des palettes de recherche) + événement
   // `op:open-search` : d'autres surfaces (bandeau d'accueil…) ouvrent la palette
@@ -209,10 +233,21 @@ export function HeaderClient({
               </Link>
             </>
           )}
+          {SITE_SETTINGS_ENABLED && (
+            <button
+              type="button"
+              onClick={() => setSettingsOpen(true)}
+              aria-label={strings.settings.title}
+              title={strings.settings.title}
+              className="border-line bg-surface-base text-content-subtle hover:text-content-muted flex items-center rounded-md border px-2.5 py-1.5 transition"
+            >
+              <GearIcon size={14} />
+            </button>
+          )}
           <LanguageSwitcher current={lang} strings={strings.lang} />
         </div>
 
-        {/* Droite mobile : recherche + burger */}
+        {/* Droite mobile : recherche + réglages + burger */}
         <div className="ml-auto flex items-center gap-2 md:hidden">
           <button
             className="border-line bg-surface-base text-content-muted hover:bg-surface-overlay flex size-9 items-center justify-center rounded-lg border transition"
@@ -221,6 +256,15 @@ export function HeaderClient({
           >
             <SearchIcon size={16} />
           </button>
+          {SITE_SETTINGS_ENABLED && (
+            <button
+              className="border-line bg-surface-base text-content-muted hover:bg-surface-overlay flex size-9 items-center justify-center rounded-lg border transition"
+              onClick={() => setSettingsOpen(true)}
+              aria-label={strings.settings.title}
+            >
+              <GearIcon size={16} />
+            </button>
+          )}
           <button
             className="border-line bg-surface-base text-content-muted hover:bg-surface-overlay flex size-9 items-center justify-center rounded-lg border transition"
             onClick={() => setMenuOpen((v) => !v)}
@@ -308,6 +352,13 @@ export function HeaderClient({
 
       {searchOpen && (
         <SearchModal lang={lang} strings={strings.search} onClose={() => setSearchOpen(false)} />
+      )}
+      {SITE_SETTINGS_ENABLED && settingsOpen && (
+        <SettingsModal
+          catalog={skinCatalog}
+          strings={strings.settings}
+          onClose={() => setSettingsOpen(false)}
+        />
       )}
     </header>
   );

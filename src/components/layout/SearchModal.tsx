@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
+import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import type { Route } from 'next';
 import type { SearchEntry, SearchKind } from '@/lib/search-index';
@@ -141,7 +142,11 @@ export function SearchModal({
     guide: strings.guides,
   };
 
-  return (
+  // PORTAL vers `document.body` : le header porte `backdrop-blur`, et
+  // `backdrop-filter` fait de lui le bloc conteneur des descendants `fixed`
+  // (spec Filter Effects) — rendue dans le header, la palette « plein écran »
+  // était confinée à sa bande, et le clic sous elle ne fermait pas.
+  return createPortal(
     <div
       className="fixed inset-0 z-9999 flex items-start justify-center px-4 pt-[12vh]"
       role="dialog"
@@ -232,6 +237,7 @@ export function SearchModal({
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

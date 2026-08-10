@@ -764,6 +764,22 @@ const kr: Record<TranslationKey, string> = {
   'header.lang.community': '커뮤니티',
   'header.lang.community_note': '커뮤니티 번역은 게임 데이터에서 영어로 대체됩니다.',
 
+  // Site settings (header modal + character page gallery)
+  'settings.title': '사이트 설정',
+  'settings.animated': '애니메이션 초상화',
+  'settings.animated_note':
+    '카드 이펙트가 있는 초상화에서 게임 내 효과를 재생합니다. 리소스를 더 사용할 수 있습니다.',
+  'settings.skins': '표시 스킨',
+  'settings.skins_note':
+    '사이트 전체에서 각 캐릭터에 표시할 의상을 선택합니다. 이 브라우저에 저장됩니다.',
+  'settings.default_portrait': '기본',
+  'settings.reset_skins': '모두 초기화',
+  'settings.filter': '캐릭터 검색…',
+  'settings.close': '닫기',
+  'settings.back': '뒤로',
+  'settings.use_portrait': '이 초상화 사용',
+  'settings.portrait_in_use': '사용 중인 초상화',
+
   // Navigation (short labels for md-xl breakpoint)
   'nav.characters.short': '캐릭',
   'nav.equipment.short': '장비',

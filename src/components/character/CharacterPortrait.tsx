@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Route } from 'next';
 import { img, RECRUIT_TAG_SPRITE } from '@/lib/images';
-import { Thumbnail } from '@/components/ui/Thumbnail';
+import { CardThumbnail } from '@/components/character/SettingsPortrait';
 
 /**
  * Le nom TIENT-IL sur deux lignes dans `maxWidth` (px) ? Estimation
@@ -70,7 +70,9 @@ export function fitsOnTwoLines(text: string, maxWidth: number): boolean {
  *     le coin haut-gauche, celui de la bannière BOSS — sans conflit, un perso
  *     n'en porte jamais.
  *
- * Composant PUR (aucun état, aucune lecture disque) : serveur comme client.
+ * Composant PUR (aucun état, aucune lecture disque) : serveur comme client. Sa
+ * vignette est déléguée à une feuille cliente (`CardThumbnail`) qui applique le
+ * skin choisi dans les réglages du site.
  */
 export function CharacterPortrait({
   id,
@@ -137,8 +139,9 @@ export function CharacterPortrait({
           rien ne doit rogner ici, et l'appelant qui serre ses portraits verra
           ce léger chevauchement — c'est celui du jeu. */}
       <span className="relative block shrink-0" style={{ width: size, height: size }}>
-        <Thumbnail
-          kind="character"
+        {/* Feuille CLIENTE : la vignette suit le skin choisi dans les réglages
+            du site — le reste du composant reste pur. */}
+        <CardThumbnail
           id={id}
           name={name}
           rarity={rarity}

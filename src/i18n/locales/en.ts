@@ -789,6 +789,22 @@ const en = {
   'header.lang.community': 'Community',
   'header.lang.community_note': 'Community translations fall back to English for game data.',
 
+  // Site settings (header modal + character page gallery)
+  'settings.title': 'Site settings',
+  'settings.animated': 'Animated portraits',
+  'settings.animated_note':
+    'Replay the in-game card effect on portraits that have one. May use more resources.',
+  'settings.skins': 'Displayed skins',
+  'settings.skins_note':
+    'Choose which outfit each character shows across the site. Saved in this browser.',
+  'settings.default_portrait': 'Default',
+  'settings.reset_skins': 'Reset all',
+  'settings.filter': 'Filter characters...',
+  'settings.close': 'Close',
+  'settings.back': 'Back',
+  'settings.use_portrait': 'Use this portrait',
+  'settings.portrait_in_use': 'Current portrait',
+
   // Navigation (short labels for md-xl breakpoint)
   'nav.characters.short': 'Chars',
   'nav.equipment.short': 'Equip',
