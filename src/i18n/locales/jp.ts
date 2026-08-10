@@ -781,6 +781,8 @@ const jp: Record<TranslationKey, string> = {
   'settings.default_portrait': 'デフォルト',
   'settings.reset_skins': 'すべてリセット',
   'settings.filter': 'キャラクターを検索…',
+  'settings.no_results': '該当するキャラクターがいません。',
+  'settings.clear_filter': 'フィルターをクリア',
   'settings.close': '閉じる',
   'settings.back': '戻る',
   'settings.use_portrait': 'このポートレートを使用',

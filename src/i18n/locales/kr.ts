@@ -775,6 +775,8 @@ const kr: Record<TranslationKey, string> = {
   'settings.default_portrait': '기본',
   'settings.reset_skins': '모두 초기화',
   'settings.filter': '캐릭터 검색…',
+  'settings.no_results': '일치하는 캐릭터가 없습니다.',
+  'settings.clear_filter': '필터 지우기',
   'settings.close': '닫기',
   'settings.back': '뒤로',
   'settings.use_portrait': '이 초상화 사용',

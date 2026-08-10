@@ -800,6 +800,8 @@ const en = {
   'settings.default_portrait': 'Default',
   'settings.reset_skins': 'Reset all',
   'settings.filter': 'Filter characters...',
+  'settings.no_results': 'No characters match.',
+  'settings.clear_filter': 'Clear filter',
   'settings.close': 'Close',
   'settings.back': 'Back',
   'settings.use_portrait': 'Use this portrait',

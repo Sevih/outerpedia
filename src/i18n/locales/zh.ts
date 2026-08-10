@@ -758,6 +758,8 @@ const zh: Record<TranslationKey, string> = {
   'settings.default_portrait': '默认',
   'settings.reset_skins': '全部重置',
   'settings.filter': '搜索角色…',
+  'settings.no_results': '没有符合条件的角色。',
+  'settings.clear_filter': '清除筛选',
   'settings.close': '关闭',
   'settings.back': '返回',
   'settings.use_portrait': '使用此立绘',

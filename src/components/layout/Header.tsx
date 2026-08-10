@@ -92,6 +92,8 @@ export async function Header() {
           defaultPortrait: t('settings.default_portrait'),
           resetSkins: t('settings.reset_skins'),
           filterPlaceholder: t('settings.filter'),
+          noResults: t('settings.no_results'),
+          clearFilter: t('settings.clear_filter'),
           close: t('settings.close'),
           back: t('settings.back'),
         },

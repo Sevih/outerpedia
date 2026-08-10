@@ -806,6 +806,8 @@ const fr: Record<TranslationKey, string> = {
   'settings.default_portrait': 'Par défaut',
   'settings.reset_skins': 'Tout réinitialiser',
   'settings.filter': 'Filtrer les personnages…',
+  'settings.no_results': 'Aucun personnage ne correspond.',
+  'settings.clear_filter': 'Effacer le filtre',
   'settings.close': 'Fermer',
   'settings.back': 'Retour',
   'settings.use_portrait': 'Utiliser ce portrait',
