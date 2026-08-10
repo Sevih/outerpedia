@@ -1,5 +1,44 @@
 [
   {
+    "date": "2026-08-10",
+    "type": "feature",
+    "draft": true,
+    "title": {
+      "en": "Site settings: animated portraits & skins",
+      "jp": "サイト設定：アニメーションポートレートとスキン",
+      "kr": "사이트 설정: 애니메이션 초상화 & 스킨",
+      "zh": "网站设置：动态立绘与皮肤",
+      "fr": "Réglages du site : portraits animés et skins"
+    },
+    "content": {
+      "en": [
+        "A new gear icon in the header opens the site settings.",
+        "Animated portraits: replay the in-game card effects on every portrait that has one — off by default.",
+        "Displayed skins: choose which outfit each character shows across the whole site — also available from the art gallery on each character page. Saved in your browser."
+      ],
+      "jp": [
+        "ヘッダーの歯車アイコンからサイト設定を開けるようになりました。",
+        "アニメーションポートレート：ゲーム内のカードエフェクトをサイト上で再現します（デフォルトはオフ）。",
+        "表示スキン：各キャラクターがサイト全体で表示する衣装を選べます。キャラクターページのアートギャラリーからも設定でき、ブラウザに保存されます。"
+      ],
+      "kr": [
+        "헤더의 톱니바퀴 아이콘으로 사이트 설정을 열 수 있습니다.",
+        "애니메이션 초상화: 게임 내 카드 이펙트를 사이트에서 재현합니다 (기본값은 꺼짐).",
+        "표시 스킨: 각 캐릭터가 사이트 전체에서 표시할 의상을 선택할 수 있습니다. 캐릭터 페이지의 아트 갤러리에서도 설정 가능하며, 브라우저에 저장됩니다."
+      ],
+      "zh": [
+        "点击页眉的齿轮图标即可打开网站设置。",
+        "动态立绘：在网站上重现游戏内的卡片特效（默认关闭）。",
+        "显示皮肤：为每个角色选择在全站显示的服装，也可在角色页面的立绘画廊中设置，保存在浏览器中。"
+      ],
+      "fr": [
+        "Un engrenage dans l'en-tête ouvre les réglages du site.",
+        "Portraits animés : rejoue les effets de carte du jeu sur les portraits qui en ont un — désactivé par défaut.",
+        "Skins affichés : choisissez la tenue de chaque personnage sur tout le site — aussi depuis la galerie d'arts de sa fiche. Enregistré dans votre navigateur."
+      ]
+    }
+  },
+  {
     "date": "2026-08-02",
     "type": "update",
     "title": {
