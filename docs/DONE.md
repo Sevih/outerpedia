@@ -7,6 +7,29 @@
 
 ## 2026-08-10
 
+- **Mécaniques perso : conditions d'ÉTAT DE COMBAT déclarables** (demande
+  Sevih 10/08 — « Noa a un délire de stack sur son S3 »). Générique, pas un
+  cas Noa : les passifs kit/EE/quirks gatés par une condition d'état
+  (`STATE_CONDITIONS` de gear.ts — `OWNER_RESOURCE`, `OWNER/TARGET_HAS_BUFF`
+  ×172, `OWNER_ALONE`, seuils de PV…, `CheckAvailable` § 12.1 non désassemblé)
+  sortent en entrées `stateful`, INACTIVES par défaut, activées seulement si
+  le scénario déclare la condition remplie — nouveau champ z `cs` (buffIds).
+  Coches PUBLIQUES dans le panneau Contexte (« Mécaniques du kit », demande
+  Sevih : un bouton pour l'utilisateur pas dev) : le libellé est le NOM DU JEU
+  de la source (skill du kit via le slot lanceur, EE, nœud d'éveil — jamais de
+  texte écrit main ; l'habillage passe par les locales en/fr/jp/kr/zh, repli
+  buffId brut si la source ne se résout pas). La coche voyage dans z, donc
+  dans les captures/fixtures. Prouvé par test (le 3 % PV
+  du S3 de Noa déclaré rempli ajoute exactement 356 ‰) puis VALIDÉ EN JEU le
+  jour même : capture S3 crit à 5 Kaizer Energy vs Unidentified Chimera
+  (cible ET build différents des autres fixtures — niveau 100, stats réelles
+  avec pierce), perfect match à la première capture → fixture dorée
+  [noa-chimera.json](../src/lib/damage/fixtures/noa-chimera.json).
+
+- **Table Scénarios du harnais : le plus récent en haut** — tri d'affichage
+  par `savedAt` décroissant (un re-save remonte sa ligne), le stockage garde
+  l'ordre d'ajout.
+
 - **Buffs restreints par slot BRANCHÉS — les 4 captures Noa vs Rhona rejouent
   à Δ 0 exact** (elles divergeaient de 13-24 %). Diagnostic aux traces § 7.6 :
   l'écart était un taux additif constant par slot, identique normal/crit —

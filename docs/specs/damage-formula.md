@@ -469,6 +469,11 @@ return restant
 1. **`CBuff.CheckAvailable`** : conditions d'activation internes (conditions de cible,
    « once per skill » via `MarkUsedHitOverThisSkill`) — non désassemblé. Le moteur TS
    prend les agrégats (§ 9) comme entrées. (`CBuff.get_Value` est lui résolu, § 14.1.)
+   Les conditions d'ÉTAT DE COMBAT des passifs kit/équipement/quirks (ressource
+   unique, buffs posés, seuils de PV… — liste `STATE_CONDITIONS` de gear.ts) ne
+   sont JAMAIS devinées : l'entrée sort `stateful`, inactive par défaut, et ne
+   s'active que si le scénario la DÉCLARE remplie (z `cs`, coche du harnais —
+   10/08/2026, ex. les 5 Kaizer Energy du S3 de Noa, `2000022_3_3`).
 2. ~~`CCharacterData.CalcStat`~~ — **RÉSOLU** : le mapping complet templet → 13
    paramètres est désormais extrait, voir § 17.
 3. **`FindBuffWGDamageReduce`** (BT 83/84) : les deux sorties (flat, rate) sont

@@ -331,6 +331,9 @@ export interface DcLabels {
     targetsHit: string;
     attackerHp: string;
     targetHp: string;
+    /** Mécaniques PERSO (conditions d'état de combat — entrées `stateful`). */
+    mechanics: string;
+    mechanicsHint: string;
   };
   team: { emptySlot: string; eeOwned: string; eePlus: string };
   buffs: {
@@ -1062,6 +1065,9 @@ export function DamageCalculatorBrowser({
   // Buffs/débuffs de scénario ACTIFS (clés de DcBuffOption), par côté.
   const [atkFx, setAtkFx] = useState<string[]>([]);
   const [tgtFx, setTgtFx] = useState<string[]>([]);
+  // Conditions d'ÉTAT déclarées remplies (z `cs`, buffIds) — mécaniques perso
+  // (entrées `stateful` de gear.ts) ; toggles dans le harnais.
+  const [metConds, setMetConds] = useState<string[]>([]);
   // PV actuels de l'attaquant (%) — ne sert qu'aux sets « missing Health ».
   const [hpPct, setHpPct] = useState('100');
 
@@ -1202,6 +1208,7 @@ export function DamageCalculatorBrowser({
     setAllies([EMPTY_ALLY, EMPTY_ALLY, EMPTY_ALLY]);
     setAtkFx([]);
     setTgtFx([]);
+    setMetConds([]);
     // Cycle de capture (dev) : un nouveau scénario repart d'observés vides.
     setObs({});
   };
@@ -1273,6 +1280,8 @@ export function DamageCalculatorBrowser({
       if (typeof st.h === 'string') setHpPct(st.h);
       if (Array.isArray(st.b)) setAtkFx(st.b.filter((x): x is string => typeof x === 'string'));
       if (Array.isArray(st.d)) setTgtFx(st.d.filter((x): x is string => typeof x === 'string'));
+      if (Array.isArray(st.cs))
+        setMetConds(st.cs.filter((x): x is string => typeof x === 'string'));
     }
     if (st.g) setTargetTab('manual');
     if (st.ti && targets.some((tg) => tg.id === st.ti)) {
@@ -1405,6 +1414,7 @@ export function DamageCalculatorBrowser({
       if (hpPct !== '100') z.h = hpPct;
       if (atkFx.length) z.b = atkFx;
       if (tgtFx.length) z.d = tgtFx;
+      if (metConds.length) z.cs = metConds;
     }
     if (targetTab === 'manual') z.g = 1;
     if (targetId) {
@@ -1568,6 +1578,42 @@ export function DamageCalculatorBrowser({
   /** Valeur de stat finale → affichage (‰ des stats % → « x% », plat brut). */
   const fmtStat = (v: number | undefined, percent: boolean): string =>
     v === undefined ? '—' : percent ? `${v / 10}%` : v.toLocaleString();
+
+  // Mécaniques perso : entrées `stateful` du rapport (kit/EE/quirks) — leur
+  // condition d'ÉTAT de combat (ressource, buffs posés… — CheckAvailable
+  // § 12.1) n'est jamais évaluée par le moteur ; la coche du panneau Contexte
+  // la déclare remplie (z `cs`).
+  const statefulPassives = report
+    ? [report.kitPassives, report.gearPassives, report.quirkPassives].flatMap((i) =>
+        (i?.entries ?? []).filter((e) => e.stateful),
+      )
+    : [];
+  // Libellé d'une mécanique : le NOM du jeu de sa source (skill du kit via le
+  // slot lanceur, EE, nœud d'éveil) — jamais de texte écrit main ; repli sur
+  // le buffId brut (identifiant stable) si la source ne se résout pas.
+  const SLOT_OF_CALLER: Record<string, string> = {
+    SKT_FIRST: 'S1',
+    SKT_SECOND: 'S2',
+    SKT_ULTIMATE: 'S3',
+    SKT_BURST_1: 'S2',
+    SKT_BURST_2: 'S2',
+    SKT_BURST_3: 'S2',
+  };
+  const mechLabel = (e: (typeof statefulPassives)[number]): { name: string; slot?: string } => {
+    const slot = e.callers?.map((c) => SLOT_OF_CALLER[c]).find((s) => s !== undefined);
+    if (e.source === 'kit' && slot) {
+      const nm = kit.find((r) => r.slot === slot)?.name;
+      if (nm) return { name: nm, slot };
+    }
+    if (e.source === 'ee' && ee) return { name: ee.name, ...(slot ? { slot } : {}) };
+    if (e.source === 'quirk') {
+      for (const g of quirks) {
+        const n = g.nodes.find((x) => String(x.id) === e.sourceId);
+        if (n) return { name: n.name, ...(slot ? { slot } : {}) };
+      }
+    }
+    return { name: e.buffId, ...(slot ? { slot } : {}) };
+  };
 
   // ── Cycle de capture (harnais) : un scénario = UNE ligne de dégâts ──
   // Le `+` d'une cellule fige z (TOUS les réglages UI) + réglages de compte +
@@ -2646,6 +2692,46 @@ export function DamageCalculatorBrowser({
                     </span>
                   </label>
 
+                  {/* Mécaniques PERSO (entrées `stateful` du moteur) : conditions
+                    d'état de combat des passifs kit/EE/quirks — ex. les 5 Kaizer
+                    Energy du S3 de Noa. Jamais évaluées par le moteur
+                    (CheckAvailable § 12.1) : la coche déclare « remplie en jeu »
+                    et voyage dans z (`cs`). Libellé = nom du jeu de la source. */}
+                  {statefulPassives.length > 0 && (
+                    <div className="space-y-1">
+                      <span className="text-content-subtle font-mono text-[9px] tracking-wide uppercase">
+                        {L.context.mechanics}
+                      </span>
+                      <p className="text-content-subtle text-[10px]">{L.context.mechanicsHint}</p>
+                      {statefulPassives.map((e) => {
+                        const m = mechLabel(e);
+                        const on = metConds.includes(e.buffId);
+                        return (
+                          <label
+                            key={`${e.source}:${e.sourceId}:${e.buffId}`}
+                            title={`${e.buffId}${e.condition ? ` · ${e.condition}` : ''}`}
+                            className="flex cursor-pointer items-center gap-2 text-xs"
+                          >
+                            <input
+                              type="checkbox"
+                              checked={on}
+                              onChange={() => toggleFx(setMetConds, e.buffId)}
+                              className="accent-accent"
+                            />
+                            <span className={on ? 'text-content' : 'text-content-muted'}>
+                              {m.name}
+                            </span>
+                            {m.slot && (
+                              <span className="text-content-subtle font-mono text-[9px]">
+                                {m.slot}
+                              </span>
+                            )}
+                          </label>
+                        );
+                      })}
+                    </div>
+                  )}
+
                   {/* Cibles touchées : SEULEMENT si le kit a un skill offensif
                     multi-cible — la décroissance AoE ne concerne pas les kits
                     mono-cible (décision Sevih 27/07/2026). */}
@@ -3164,86 +3250,91 @@ export function DamageCalculatorBrowser({
                   <span className="text-right">Δ %</span>
                   <span />
                 </div>
-                {savedScns.map((s) => {
-                  const calc = savedCalcMap.calcs.get(scnKey(s));
-                  // EN ATTENTE : slot rejoué mais chaîne de hits irrésolue
-                  // (§ 12.4) — la valeur en jeu attend le moteur.
-                  const isPending = savedCalcMap.pending.has(scnKey(s));
-                  const delta = calc !== undefined ? ((calc - s.real) / s.real) * 100 : undefined;
-                  const cls =
-                    delta === undefined
-                      ? 'text-content-subtle'
-                      : Math.abs(delta) <= DEFAULT_TOLERANCE
-                        ? 'text-success'
-                        : 'text-danger';
-                  const stale =
-                    delta !== undefined &&
-                    Math.abs(delta) > DEFAULT_TOLERANCE &&
-                    s.gameVersion !== ENGINE_GAME_VERSION;
-                  return (
-                    <div
-                      key={scnKey(s)}
-                      className="grid grid-cols-[minmax(0,3fr)_110px_110px_70px_150px] items-center gap-2 px-3 py-1.5 font-mono text-[11px]"
-                    >
-                      <span className="text-content truncate font-sans text-xs">
-                        {s.atk} <span className="text-content-subtle">vs</span> {s.tgt}{' '}
-                        <span className="text-content-subtle font-mono text-[9px]">
-                          {s.slot} {s.branch} · {s.gameVersion}
+                {/* Le plus RÉCENT en haut (Sevih 10/08) — tri d'AFFICHAGE par
+                  savedAt décroissant (ISO, ordre lexicographique) : un upsert
+                  remonte, le stockage garde son ordre. */}
+                {[...savedScns]
+                  .sort((a, b) => (b.savedAt > a.savedAt ? 1 : b.savedAt < a.savedAt ? -1 : 0))
+                  .map((s) => {
+                    const calc = savedCalcMap.calcs.get(scnKey(s));
+                    // EN ATTENTE : slot rejoué mais chaîne de hits irrésolue
+                    // (§ 12.4) — la valeur en jeu attend le moteur.
+                    const isPending = savedCalcMap.pending.has(scnKey(s));
+                    const delta = calc !== undefined ? ((calc - s.real) / s.real) * 100 : undefined;
+                    const cls =
+                      delta === undefined
+                        ? 'text-content-subtle'
+                        : Math.abs(delta) <= DEFAULT_TOLERANCE
+                          ? 'text-success'
+                          : 'text-danger';
+                    const stale =
+                      delta !== undefined &&
+                      Math.abs(delta) > DEFAULT_TOLERANCE &&
+                      s.gameVersion !== ENGINE_GAME_VERSION;
+                    return (
+                      <div
+                        key={scnKey(s)}
+                        className="grid grid-cols-[minmax(0,3fr)_110px_110px_70px_150px] items-center gap-2 px-3 py-1.5 font-mono text-[11px]"
+                      >
+                        <span className="text-content truncate font-sans text-xs">
+                          {s.atk} <span className="text-content-subtle">vs</span> {s.tgt}{' '}
+                          <span className="text-content-subtle font-mono text-[9px]">
+                            {s.slot} {s.branch} · {s.gameVersion}
+                          </span>
+                          {stale && (
+                            <span className="text-warn border-warn/35 bg-warn/10 ml-1.5 rounded border px-1 py-px font-mono text-[9px] font-bold">
+                              à revérifier en jeu
+                            </span>
+                          )}
                         </span>
-                        {stale && (
-                          <span className="text-warn border-warn/35 bg-warn/10 ml-1.5 rounded border px-1 py-px font-mono text-[9px] font-bold">
-                            à revérifier en jeu
-                          </span>
-                        )}
-                      </span>
-                      <span className="text-content-muted text-right">
-                        {s.real.toLocaleString()}
-                      </span>
-                      <span className="text-content-muted text-right">
-                        {calc !== undefined ? (
-                          calc.toLocaleString()
-                        ) : isPending ? (
-                          <span
-                            title="chaîne de hits irrésolue (§ 12.4) — valeur gardée, le Δ attendra le moteur"
-                            className="text-warn cursor-help text-[10px]"
+                        <span className="text-content-muted text-right">
+                          {s.real.toLocaleString()}
+                        </span>
+                        <span className="text-content-muted text-right">
+                          {calc !== undefined ? (
+                            calc.toLocaleString()
+                          ) : isPending ? (
+                            <span
+                              title="chaîne de hits irrésolue (§ 12.4) — valeur gardée, le Δ attendra le moteur"
+                              className="text-warn cursor-help text-[10px]"
+                            >
+                              § 12.4
+                            </span>
+                          ) : (
+                            '—'
+                          )}
+                        </span>
+                        <span className={`text-right ${cls}`}>
+                          {delta !== undefined ? delta.toFixed(3) : '—'}
+                        </span>
+                        <span className="flex justify-end gap-1.5">
+                          <button
+                            type="button"
+                            onClick={() => loadSaved(s)}
+                            className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-accent h-6 cursor-pointer rounded border px-2 font-mono text-[10px]"
                           >
-                            § 12.4
-                          </span>
-                        ) : (
-                          '—'
-                        )}
-                      </span>
-                      <span className={`text-right ${cls}`}>
-                        {delta !== undefined ? delta.toFixed(3) : '—'}
-                      </span>
-                      <span className="flex justify-end gap-1.5">
-                        <button
-                          type="button"
-                          onClick={() => loadSaved(s)}
-                          className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-accent h-6 cursor-pointer rounded border px-2 font-mono text-[10px]"
-                        >
-                          Charger
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => copyScenario(s)}
-                          title="copier le JSON de fixture"
-                          className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-accent h-6 cursor-pointer rounded border px-2 font-mono text-[10px]"
-                        >
-                          ⧉
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => deleteScenario(s)}
-                          title="supprimer"
-                          className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-danger h-6 cursor-pointer rounded border px-2 font-mono text-[10px]"
-                        >
-                          ✕
-                        </button>
-                      </span>
-                    </div>
-                  );
-                })}
+                            Charger
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => copyScenario(s)}
+                            title="copier le JSON de fixture"
+                            className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-accent h-6 cursor-pointer rounded border px-2 font-mono text-[10px]"
+                          >
+                            ⧉
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => deleteScenario(s)}
+                            title="supprimer"
+                            className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-danger h-6 cursor-pointer rounded border px-2 font-mono text-[10px]"
+                          >
+                            ✕
+                          </button>
+                        </span>
+                      </div>
+                    );
+                  })}
               </div>
             ) : (
               <p className="text-content-subtle px-3 py-3 text-[11px]">

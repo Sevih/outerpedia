@@ -558,6 +558,8 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.targets_hit': '目标数',
   'tools.damage-calculator.context.attacker_hp': '攻击方当前生命值',
   'tools.damage-calculator.context.target_hp': '目标当前生命值',
+  'tools.damage-calculator.context.mechanics': '角色专属机制',
+  'tools.damage-calculator.context.mechanics_hint': '战斗状态条件——勾选实战中满足的条件',
   'tools.damage-calculator.buffs.from_kits': '+ 从技能组',
   'tools.damage-calculator.buffs.await_pick': '请先选择攻击者和目标',
   'tools.damage-calculator.buffs.kits_soon': '需要技能组增益数据 — 与引擎一同推出',

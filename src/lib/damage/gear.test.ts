@@ -401,10 +401,31 @@ describe('buffs restreints par slot — Noa (donnée réelle, fixture 10/08/2026
     );
     expect(low.entries.find((x) => x.buffId === '2000022_2_2')?.buff.value).toBe(10);
     // Le 3 % PV du S3 (2000022_3_3) : condition OWNER_RESOURCE (5 énergies) —
-    // non évaluable statiquement, SIGNALÉ, jamais deviné.
-    expect(
-      kit.unresolved.some((u) => u.buffId === '2000022_3_3' && u.reason.includes('OWNER_RESOURCE')),
-    ).toBe(true);
+    // état de combat, jamais évalué par le moteur : entrée `stateful`,
+    // INACTIVE par défaut.
+    expect(kit.entries.find((x) => x.buffId === '2000022_3_3')).toMatchObject({
+      stateful: true,
+      active: false,
+      condition: 'OWNER_RESOURCE',
+      callers: ['SKT_ULTIMATE'],
+    });
+    // Déclarée remplie (z `cs`) : l'entrée s'active, au niveau de skill saisi.
+    const met = resolveKitPassives(
+      noaChar,
+      3,
+      noaSkills,
+      data.growth.transcend,
+      buffs,
+      Element.Earth,
+      Element.Earth,
+      { S3: 5 },
+      new Set(['2000022_3_3']),
+    );
+    expect(met.entries.find((x) => x.buffId === '2000022_3_3')).toMatchObject({
+      stateful: true,
+      active: true,
+      buff: { type: 'BT_DMG_TARGET_STAT', stat: 'ST_HP', value: 30 },
+    });
   });
 
   it('EE +0 : BID_CEQUIP_2000022 (150 ‰ × décompte) gaté SKT_ULTIMATE', () => {
@@ -455,5 +476,14 @@ describe('buffs restreints par slot — Noa (donnée réelle, fixture 10/08/2026
     // sur son lanceur) ; S3 − S1 = 150 × (4 − 1) = 450 ‰ (EE, décompte § 7).
     expect(rateOf('S2')! - rateOf('S1')!).toBe(356);
     expect(rateOf('S3')! - rateOf('S1')!).toBe(450);
+    // Mécanique perso déclarée remplie (5 Kaizer Energy, z `cs`) : le 3 % PV
+    // du 3_3 s'ajoute au S3 — 450 + 356 = 806 ‰. EN ATTENTE d'une capture en
+    // jeu à 5 énergies pour devenir une ligne de fixture dorée.
+    const full = buildDamageReport({ ...noa, metConditions: ['2000022_3_3'] }, rhona, data, {
+      targetsHit: 1,
+    });
+    const fullS3 = full.slots.find((s) => s.slot === 'S3' && s.burst === undefined)?.report
+      .states[0].branches[0].damageRate;
+    expect(fullS3! - rateOf('S1')!).toBe(806);
   });
 });

@@ -567,6 +567,8 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.targets_hit': '대상 수',
   'tools.damage-calculator.context.attacker_hp': '공격자 현재 HP',
   'tools.damage-calculator.context.target_hp': '대상 현재 HP',
+  'tools.damage-calculator.context.mechanics': '킷 고유 메커니즘',
+  'tools.damage-calculator.context.mechanics_hint': '전투 상태 조건 — 실전에서 충족한 항목을 체크',
   'tools.damage-calculator.buffs.from_kits': '+ 킷에서',
   'tools.damage-calculator.buffs.await_pick': '먼저 공격자와 대상을 선택하세요',
   'tools.damage-calculator.buffs.kits_soon': '킷 버프 데이터 필요 — 엔진과 함께 제공',

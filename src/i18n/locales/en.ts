@@ -588,6 +588,9 @@ const en = {
   'tools.damage-calculator.context.targets_hit': 'Targets hit',
   'tools.damage-calculator.context.attacker_hp': 'Attacker current HP',
   'tools.damage-calculator.context.target_hp': 'Target current HP',
+  'tools.damage-calculator.context.mechanics': 'Kit mechanics',
+  'tools.damage-calculator.context.mechanics_hint':
+    'combat-state conditions — check the ones met in battle',
   'tools.damage-calculator.buffs.from_kits': '+ From kits',
   'tools.damage-calculator.buffs.await_pick': 'Pick an attacker and a target first',
   'tools.damage-calculator.buffs.kits_soon': 'needs kit buff data — coming with the engine',

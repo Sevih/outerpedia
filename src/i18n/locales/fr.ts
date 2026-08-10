@@ -594,6 +594,9 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.targets_hit': 'Cibles touchées',
   'tools.damage-calculator.context.attacker_hp': 'PV actuels — attaquant',
   'tools.damage-calculator.context.target_hp': 'PV actuels — cible',
+  'tools.damage-calculator.context.mechanics': 'Mécaniques du kit',
+  'tools.damage-calculator.context.mechanics_hint':
+    "conditions d'état de combat — cochez celles remplies en jeu",
   'tools.damage-calculator.buffs.from_kits': '+ Depuis les kits',
   'tools.damage-calculator.buffs.await_pick': "Choisis d'abord un attaquant et une cible",
   'tools.damage-calculator.buffs.kits_soon':

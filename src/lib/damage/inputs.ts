@@ -457,6 +457,10 @@ export interface AttackerBuildInput {
   gear?: GearSelection;
   /** QUIRKS du compte (nœud d'éveil → niveau) — réglage hors z, comme Codex. */
   quirks?: Record<string, number>;
+  /** Conditions d'ÉTAT DE COMBAT déclarées REMPLIES (z `cs`, buffIds) —
+   *  mécaniques perso (STATE_CONDITIONS, gear.ts) : active les entrées
+   *  `stateful` (ex. `2000022_3_3` = 5 Kaizer Energy au S3 de Noa). */
+  metConditions?: string[];
 }
 
 export interface TargetBuildInput {
@@ -622,6 +626,12 @@ export function buildDamageReport(
   const passiveBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>
     (bossPassives?.entries ?? []).filter((e) => e.side === side && e.active).map((e) => e.buff);
 
+  // Conditions d'ÉTAT déclarées remplies (z `cs`) — consommées par les
+  // entrées `stateful` des trois collecteurs (mécaniques perso, gear.ts).
+  const metConditions = attacker.metConditions?.length
+    ? new Set(attacker.metConditions)
+    : undefined;
+
   // Passifs d'ÉQUIPEMENT § 15 (gear.ts) : mêmes canaux que les chips — le
   // porteur reçoit les entrées actives côté attaquant, les débuffs permanents
   // posés par l'équipement partent côté défenseur. Procs/conditions non
@@ -636,6 +646,7 @@ export function buildDamageReport(
           data.buffs,
           attackerElement,
           defenderElement,
+          metConditions,
         )
       : {
           entries: [],
@@ -674,6 +685,7 @@ export function buildDamageReport(
     attackerElement,
     defenderElement,
     attacker.skillLevels,
+    metConditions,
   );
   const kitBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>
     kitPassives.entries.filter((e) => e.side === side && e.active && !e.callers).map((e) => e.buff);
@@ -689,6 +701,7 @@ export function buildDamageReport(
       data.buffs,
       defenderElement,
       target.mode !== undefined ? dungeonModeOf(target.mode) : undefined,
+      metConditions,
     );
   }
   const quirkBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>

@@ -10,8 +10,10 @@
 import type { DamageFixture } from '../harness';
 import valentineRhona from './valentine-rhona.json';
 import noaRhona from './noa-rhona.json';
+import noaChimera from './noa-chimera.json';
 
 export const FIXTURES: DamageFixture[] = [
   valentineRhona as DamageFixture,
   noaRhona as DamageFixture,
+  noaChimera as DamageFixture,
 ];

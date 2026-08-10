@@ -858,6 +858,10 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       // PV actuels des DEUX combattants — du contexte (Sevih 27/07/2026).
       attackerHp: t(k('context.attacker_hp')),
       targetHp: t(k('context.target_hp')),
+      // Mécaniques PERSO (conditions d'état, 10/08/2026) : le NOM du
+      // skill/EE/quirk vient du jeu, seul l'habillage passe par les locales.
+      mechanics: t(k('context.mechanics')),
+      mechanicsHint: t(k('context.mechanics_hint')),
     },
     team: {
       emptySlot: t(k('team.empty')),

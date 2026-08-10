@@ -574,6 +574,9 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.targets_hit': '対象数',
   'tools.damage-calculator.context.attacker_hp': '攻撃側の現在HP',
   'tools.damage-calculator.context.target_hp': '対象の現在HP',
+  'tools.damage-calculator.context.mechanics': 'キット固有ギミック',
+  'tools.damage-calculator.context.mechanics_hint':
+    '戦闘中の状態条件 — 実際に満たしたものをチェック',
   'tools.damage-calculator.buffs.from_kits': '+ キットから',
   'tools.damage-calculator.buffs.await_pick': '先にアタッカーとターゲットを選択してください',
   'tools.damage-calculator.buffs.kits_soon': 'キットのバフデータが必要 — エンジンと同時に実装',

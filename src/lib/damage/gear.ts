@@ -97,6 +97,12 @@ export interface GearPassiveEntry {
    * EE BID_CEQUIP_2000022 sur le S3 seul). Absent = tous les slots.
    */
   callers?: string[];
+  /**
+   * Condition d'ÉTAT DE COMBAT (STATE_CONDITIONS — mécanique perso) : le
+   * moteur ne l'évalue pas, `active` reflète la DÉCLARATION du scénario
+   * (z `cs` : condition remplie en jeu). Défaut : inactive.
+   */
+  stateful?: boolean;
 }
 
 export interface GearPassiveApplied extends GearPassiveEntry {
@@ -171,6 +177,35 @@ const ELEMENT_CONDITIONS = new Set([
   'ATTACKER_ELEMENT_LOSE',
 ]);
 
+/**
+ * Conditions d'ÉTAT DE COMBAT (mécaniques perso — ressource unique, buffs
+ * posés, seuils de PV, position…) : `CBuff.CheckAvailable` (§ 12.1, non
+ * désassemblé) les évalue en combat, le calculateur ne PEUT pas — et ne
+ * devine jamais. L'entrée sort `stateful` : INACTIVE par défaut, activée
+ * seulement si le scénario déclare la condition remplie (z `cs`, coche du
+ * harnais — ex. les 5 Kaizer Energy du S3 de Noa, `2000022_3_3`). Toute
+ * condition hors de cette liste ET hors évaluation statique reste signalée
+ * `unresolved` (§ 12.1).
+ */
+const STATE_CONDITIONS = new Set([
+  'OWNER_RESOURCE',
+  'OWNER_HAS_BUFF',
+  'OWNER_HAS_ALL_BUFF',
+  'OWNER_HAS_NOT_BUFF',
+  'OWNER_ALONE',
+  'OWNER_TOGETHER',
+  'OWNER_RUN_COUNTER',
+  'CASTER_HAS_BUFF',
+  'CASTER_HAS_NOT_BUFF',
+  'CASTER_ENEMY_TEAM_HAS_BUFF',
+  'CASTER_HPRATE_OVER',
+  'TARGET_HAS_BUFF',
+  'TARGET_HAS_NOT_BUFF',
+  'TARGET_HPRATE_OVER',
+  'TARGET_HPRATE_UNDER',
+  'TARGET_RUN_COUNTER',
+]);
+
 /** Les skills que le rapport LIGNE réellement (S1/S2/S3 + bursts) — un buff
  *  restreint hors de cet ensemble (chain attacks…) ne pèse sur aucune ligne. */
 const REPORT_SKILL_TYPES = new Set([
@@ -234,11 +269,14 @@ function toActiveBuff(row: DataBuffLevel): ActiveBuff {
   };
 }
 
-/** Collecteur partagé équipement/kit : classe et range les lignes de buff. */
+/** Collecteur partagé équipement/kit : classe et range les lignes de buff.
+ *  `metConditions` : buffIds dont la condition d'ÉTAT est déclarée remplie
+ *  par le scénario (z `cs`) — consommé par la branche `stateful`. */
 function makeCollector(
   buffs: DamageBuffsData,
   attackerElement: Element,
   defenderElement: Element,
+  metConditions?: ReadonlySet<string>,
 ): {
   info: GearPassivesInfo;
   feed: (source: GearSource, sourceId: string, buffId: string, row: DataBuffLevel) => void;
@@ -344,6 +382,22 @@ function makeCollector(
         ? false
         : gearConditionMet(condition, row.conditionValue, attackerElement, defenderElement);
     if (met === undefined) {
+      // Condition d'ÉTAT DE COMBAT (STATE_CONDITIONS) : entrée `stateful`,
+      // active seulement si le scénario la déclare remplie — jamais devinée.
+      if (condition !== undefined && STATE_CONDITIONS.has(condition)) {
+        info.entries.push({
+          source,
+          sourceId,
+          buffId,
+          side,
+          buff: toActiveBuff(row),
+          condition,
+          ...(callers ? { callers } : {}),
+          stateful: true,
+          active: metConditions?.has(buffId) === true,
+        });
+        return;
+      }
       info.unresolved.push({
         source,
         sourceId,
@@ -392,8 +446,9 @@ export function resolveGearPassives(
   buffs: DamageBuffsData,
   attackerElement: Element,
   defenderElement: Element,
+  metConditions?: ReadonlySet<string>,
 ): GearPassivesInfo {
-  const { info, feedBuff } = makeCollector(buffs, attackerElement, defenderElement);
+  const { info, feedBuff } = makeCollector(buffs, attackerElement, defenderElement, metConditions);
 
   /** Groupes d'options UNIQUES (arme/accessoire/talisman/EE) au niveau spécial
    *  donné ; `buffLevel` = niveau demandé aux buffs de ces lignes. */
@@ -560,8 +615,9 @@ export function resolveQuirkPassives(
   /** `DUNGEON_MODE` du combat (`DM_NORMAL`…) — gate de CONTENU de l'arbre
    *  licence ; absent (cible manuelle) = inconnu, signalé. */
   targetMode?: string,
+  metConditions?: ReadonlySet<string>,
 ): GearPassivesInfo {
-  const { info, feedBuff } = makeCollector(buffs, char.element, defenderElement);
+  const { info, feedBuff } = makeCollector(buffs, char.element, defenderElement, metConditions);
   for (const [nodeId, level] of Object.entries(quirks)) {
     if (level < 1) continue;
     const node = awakening.find((n) => n.id === nodeId);
@@ -645,8 +701,9 @@ export function resolveKitPassives(
   /** Niveaux de skill SAISIS (z `k`) — sélection des lignes de buff des skills
    *  ACTIFS ; absent = niveau max (défaut UI). */
   skillLevels: Partial<Record<'S1' | 'S2' | 'S3', number>> = {},
+  metConditions?: ReadonlySet<string>,
 ): GearPassivesInfo {
-  const { info, feedBuff } = makeCollector(buffs, attackerElement, defenderElement);
+  const { info, feedBuff } = makeCollector(buffs, attackerElement, defenderElement, metConditions);
   for (const ref of char.skills) {
     const sk = skills[ref.id];
     if (!sk) continue;

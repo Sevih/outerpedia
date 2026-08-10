@@ -103,6 +103,9 @@ export interface CalculatorUrlState {
   al?: [string, number, string, number, number, number][];
   b?: string[];
   d?: string[];
+  /** Conditions d'ÉTAT déclarées remplies (buffIds des entrées `stateful` —
+   *  mécaniques perso, STATE_CONDITIONS de gear.ts). */
+  cs?: string[];
 }
 
 // ── Construction des entrées ────────────────────────────────────────────────
@@ -200,6 +203,9 @@ export function buildInputsFromZ(
       sheet,
       ...(hpPct !== undefined ? { hpPct } : {}),
       ...(st.b?.length ? { fx: st.b } : {}),
+      ...(st.cs?.length
+        ? { metConditions: st.cs.filter((x): x is string => typeof x === 'string') }
+        : {}),
       ...(opts.guildLevel ? { guildLevel: clamp(opts.guildLevel, 0, 10) } : {}),
       ...(opts.premiumHp ? { premiumHp: true } : {}),
       ...(opts.quirks && Object.keys(opts.quirks).length ? { quirks: opts.quirks } : {}),
