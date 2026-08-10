@@ -203,7 +203,7 @@ export function SettingsModal({
                       {isCurrent && (
                         <span
                           aria-hidden
-                          className="bg-accent text-accent-fg absolute top-1.5 right-1.5 flex size-[18px] items-center justify-center rounded-full text-[10px] font-bold"
+                          className="bg-accent text-accent-fg absolute top-1.5 right-1.5 flex size-4.5 items-center justify-center rounded-full text-[10px] font-bold"
                         >
                           ✓
                         </span>
@@ -324,7 +324,7 @@ export function SettingsModal({
                             <>
                               <span
                                 aria-hidden
-                                className="border-accent absolute -inset-[3px] rounded-[10px] border-2"
+                                className="border-accent absolute -inset-0.75 rounded-[10px] border-2"
                               />
                               <span
                                 aria-hidden
