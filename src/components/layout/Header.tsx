@@ -7,7 +7,6 @@ import { img } from '@/lib/images';
 import { getGameVersion } from '@/lib/data/game-version';
 import { GUIDE_CATEGORIES, GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
 import { characterDisplayName, getAllCharacters, getCharacter } from '@/lib/data/characters';
-import { SITE_SETTINGS_ENABLED } from '@/lib/site-settings-flag';
 import type { Lang } from '@/lib/i18n/config';
 import { HeaderClient, type HeaderNavItem } from './HeaderClient';
 import type { SkinCatalogEntry } from './SettingsModal';
@@ -66,7 +65,7 @@ export async function Header() {
       nav={nav}
       appVersion={process.env.NEXT_PUBLIC_APP_VERSION || 'dev'}
       gameVersion={getGameVersion()}
-      skinCatalog={SITE_SETTINGS_ENABLED ? buildSkinCatalog(lang) : []}
+      skinCatalog={buildSkinCatalog(lang)}
       strings={{
         toggleMenu: t('aria.toggle_menu'),
         lang: {

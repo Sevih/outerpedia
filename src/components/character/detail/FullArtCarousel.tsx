@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { SITE_SETTINGS_ENABLED, setSkin, useSiteSettings } from '@/lib/site-settings';
+import { setSkin, useSiteSettings } from '@/lib/site-settings';
 
 export interface FullArt {
   src: string;
@@ -140,27 +140,25 @@ export function FullArtCarousel({
       </div>
 
       {/* Le choix de portrait — même store que la modale du header. L'art de
-          base (`model` null) est « actuel » quand aucune entrée n'existe.
-          Soumis au kill-switch des réglages du site, comme toutes les surfaces. */}
-      {SITE_SETTINGS_ENABLED &&
-        (() => {
-          const isCurrent = (skins[charId] ?? null) === current.model;
-          return (
-            <button
-              type="button"
-              disabled={isCurrent}
-              onClick={() => setSkin(charId, current.model)}
-              className={`rounded-full border px-3 py-1 text-xs transition ${
-                isCurrent
-                  ? 'cursor-default border-white/20 text-zinc-300'
-                  : 'border-white/10 bg-slate-950/55 text-zinc-200 hover:bg-slate-950/80 hover:text-white'
-              }`}
-              style={isCurrent ? { borderColor: hex, color: hex } : undefined}
-            >
-              {isCurrent ? strings.inUse : strings.usePortrait}
-            </button>
-          );
-        })()}
+          base (`model` null) est « actuel » quand aucune entrée n'existe. */}
+      {(() => {
+        const isCurrent = (skins[charId] ?? null) === current.model;
+        return (
+          <button
+            type="button"
+            disabled={isCurrent}
+            onClick={() => setSkin(charId, current.model)}
+            className={`rounded-full border px-3 py-1 text-xs transition ${
+              isCurrent
+                ? 'cursor-default border-white/20 text-zinc-300'
+                : 'border-white/10 bg-slate-950/55 text-zinc-200 hover:bg-slate-950/80 hover:text-white'
+            }`}
+            style={isCurrent ? { borderColor: hex, color: hex } : undefined}
+          >
+            {isCurrent ? strings.inUse : strings.usePortrait}
+          </button>
+        );
+      })()}
     </div>
   );
 }

@@ -27,12 +27,6 @@
 import { useSyncExternalStore } from 'react';
 import { readStored, writeStored, type StoreSpec } from './client-storage';
 
-// Le kill-switch vit dans son propre module SANS React (`site-settings-flag`) :
-// le composant serveur `Header` doit pouvoir le lire, et ce module-ci lui est
-// interdit (il tire `useSyncExternalStore`). Ré-exporté pour que les surfaces
-// clientes n'aient qu'un import.
-export { SITE_SETTINGS_ENABLED } from './site-settings-flag';
-
 export interface SiteSettings {
   /** Rejouer l'effet de carte du jeu (WebGL) sur les portraits qui en portent un. */
   animatedPortraits: boolean;

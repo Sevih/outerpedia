@@ -26,7 +26,7 @@
 import { lazy, Suspense } from 'react';
 import { Portrait, type PortraitProps } from './Portrait';
 import { Thumbnail, type ThumbnailProps } from '@/components/ui/Thumbnail';
-import { SITE_SETTINGS_ENABLED, useSiteSettings } from '@/lib/site-settings';
+import { useSiteSettings } from '@/lib/site-settings';
 
 const AnimatedPortrait = lazy(() =>
   import('./AnimatedPortrait').then((m) => ({ default: m.AnimatedPortrait })),
@@ -34,11 +34,9 @@ const AnimatedPortrait = lazy(() =>
 
 /** Le grand portrait d'une carte, réglages appliqués (skin + animation). */
 export function CardPortrait(props: Omit<PortraitProps, 'fx'>) {
-  // Le hook s'appelle sans condition (règle des hooks) ; le kill-switch — une
-  // constante de build — décide ensuite d'ignorer ce qu'il rapporte.
   const { animatedPortraits, skins } = useSiteSettings();
-  const id = SITE_SETTINGS_ENABLED ? (skins[props.id] ?? props.id) : props.id;
-  if (!SITE_SETTINGS_ENABLED || !animatedPortraits) return <Portrait {...props} id={id} />;
+  const id = skins[props.id] ?? props.id;
+  if (!animatedPortraits) return <Portrait {...props} id={id} />;
   return (
     <Suspense fallback={<Portrait {...props} id={id} />}>
       <AnimatedPortrait {...props} id={id} fxId={props.id} />
@@ -49,6 +47,6 @@ export function CardPortrait(props: Omit<PortraitProps, 'fx'>) {
 /** La vignette carrée d'un perso, skin appliqué (pas d'animation à ce format). */
 export function CardThumbnail(props: Omit<Extract<ThumbnailProps, { kind: 'character' }>, 'kind'>) {
   const { skins } = useSiteSettings();
-  const id = SITE_SETTINGS_ENABLED ? (skins[props.id] ?? props.id) : props.id;
+  const id = skins[props.id] ?? props.id;
   return <Thumbnail {...props} kind="character" id={id} />;
 }

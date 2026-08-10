@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { LanguageSwitcher, type LanguageSwitcherStrings } from './LanguageSwitcher';
 import { SearchModal, type SearchStrings } from './SearchModal';
 import { SettingsModal, type SettingsStrings, type SkinCatalogEntry } from './SettingsModal';
-import { SITE_SETTINGS_ENABLED } from '@/lib/site-settings';
 import type { Lang } from '@/lib/i18n/config';
 
 /** Item de nav pré-localisé côté serveur (icône = URL R2 résolue). */
@@ -233,17 +232,15 @@ export function HeaderClient({
               </Link>
             </>
           )}
-          {SITE_SETTINGS_ENABLED && (
-            <button
-              type="button"
-              onClick={() => setSettingsOpen(true)}
-              aria-label={strings.settings.title}
-              title={strings.settings.title}
-              className="border-line bg-surface-base text-content-subtle hover:text-content-muted flex items-center rounded-md border px-2.5 py-1.5 transition"
-            >
-              <GearIcon size={14} />
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={() => setSettingsOpen(true)}
+            aria-label={strings.settings.title}
+            title={strings.settings.title}
+            className="border-line bg-surface-base text-content-subtle hover:text-content-muted flex items-center rounded-md border px-2.5 py-1.5 transition"
+          >
+            <GearIcon size={14} />
+          </button>
           <LanguageSwitcher current={lang} strings={strings.lang} />
         </div>
 
@@ -256,15 +253,13 @@ export function HeaderClient({
           >
             <SearchIcon size={16} />
           </button>
-          {SITE_SETTINGS_ENABLED && (
-            <button
-              className="border-line bg-surface-base text-content-muted hover:bg-surface-overlay flex size-9 items-center justify-center rounded-lg border transition"
-              onClick={() => setSettingsOpen(true)}
-              aria-label={strings.settings.title}
-            >
-              <GearIcon size={16} />
-            </button>
-          )}
+          <button
+            className="border-line bg-surface-base text-content-muted hover:bg-surface-overlay flex size-9 items-center justify-center rounded-lg border transition"
+            onClick={() => setSettingsOpen(true)}
+            aria-label={strings.settings.title}
+          >
+            <GearIcon size={16} />
+          </button>
           <button
             className="border-line bg-surface-base text-content-muted hover:bg-surface-overlay flex size-9 items-center justify-center rounded-lg border transition"
             onClick={() => setMenuOpen((v) => !v)}
@@ -353,7 +348,7 @@ export function HeaderClient({
       {searchOpen && (
         <SearchModal lang={lang} strings={strings.search} onClose={() => setSearchOpen(false)} />
       )}
-      {SITE_SETTINGS_ENABLED && settingsOpen && (
+      {settingsOpen && (
         <SettingsModal
           catalog={skinCatalog}
           strings={strings.settings}
