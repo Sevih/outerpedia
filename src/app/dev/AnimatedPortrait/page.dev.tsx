@@ -244,7 +244,7 @@ const UNSURE: string[] = [
 
 /** Ce qui n'est pas fait, et qu'il vaut mieux écrire que sous-entendre. */
 const TODO: string[] = [
-  'LE DIXIÈME EFFET, `_Synchro`. Les NEUF effets de la table des porteurs sont extraits et rendus ; `_Synchro`, lui, est posé par `SetSynchroEffect` — un autre chemin de code, pas `ThumbnailEffect` — et n’a pas été relevé : qui le déclenche, sur qui, et ce que son prefab demande restent à lire. Les branches du shader jamais rencontrées (`_POLAR_UV_ON`, `_DISSOLVE_UV_ON`) restent non transcrites — aucun des neuf ne les demande, et chaque refus est LOUD : un calque non transcrit ne se rend pas à moitié, il se dit.',
+  'LE DIXIÈME EFFET, `_Synchro` — ÉCARTÉ, pas oublié (décision du 10/08/2026). Ce n’est pas la parure d’un personnage : `CUICharacterThumbnail.SetSynchroEffect()` (sans paramètre, hors `ThumbnailEffect`) le pose sur la vignette de N’IMPORTE QUEL perso placé dans le Synchro Device — un état du COMPTE joueur, que le site n’a pas et n’aura pas. Relevé quand même pour mémoire : deux calques de cadre bleus (0,102 ; 0,275 ; 0,802), zéro émetteur, mais une feuille UV 5×5 à tuile ALÉATOIRE sur un calque-maille et le matériau `M_FX_UI_Char_out_UI` sur la troisième maille du bundle — deux choses que le moteur ne transcrit pas, et n’aura pas à transcrire. Les branches du shader jamais rencontrées (`_POLAR_UV_ON`, `_DISSOLVE_UV_ON`) restent non transcrites — aucun des neuf servis ne les demande, et chaque refus est LOUD : un calque non transcrit ne se rend pas à moitié, il se dit.',
   'UN CONTEXTE WebGL PARTAGÉ. Aujourd’hui, un contexte par carte, plafonné à 8 et recyclé par ordre de dernière apparition — ça tient une page, pas une grille de 124 personnages dont 15 animés. Un seul contexte qui peindrait toutes les cartes lèverait le plafond ET le déphasage noté plus haut.',
   'LE PASSAGE DANS `characters.json`. La table `byCharacter` vit dans `portrait-fx.json` parce qu’une page /dev ne justifie pas d’ouvrir un contrat de données. Le jour où l’effet sort d’ici, sa place est un champ de perso — le datagen lit déjà `CharacterExtraTemplet` pour `showNickName`.',
   'LE `Dim` DU PORTRAIT STATIQUE. Sans rapport avec l’effet, mais vu en lisant l’ordre des nœuds : dans le prefab, `Dim` est le 2ᵉ enfant de `CharacterInfo`, donc SOUS le rail d’étoiles, l’élément, la classe et le niveau. `Portrait` le rend en dernier, donc par-dessus tout. À vérifier en jeu avant de toucher quoi que ce soit.',
@@ -276,9 +276,9 @@ export default function DevAnimatedPortrait() {
           <code>_Demi</code> ({DEMI_SUBJECTS.length} porteurs), <code>_Dungeon</code> (
           {DUNGEON_SUBJECTS.length} porteurs), <code>_Seasonal</code> ({SEASONAL_SUBJECTS.length}{' '}
           porteur) et les SIX effets sur mesure (1 porteur chacun) — tous sauf <code>_Demi</code>{' '}
-          amènent les émetteurs de PARTICULES simulés (<code>portrait-fx-sim</code>). Seul{' '}
-          <code>_Synchro</code>, posé par un autre chemin que la table des porteurs, reste à relever
-          — cf. « ce qui reste » en bas.
+          amènent les émetteurs de PARTICULES simulés (<code>portrait-fx-sim</code>). Le dixième,{' '}
+          <code>_Synchro</code>, est un état de compte joueur — écarté volontairement, cf. « ce qui
+          reste » en bas.
         </p>
       </header>
 
