@@ -35,8 +35,23 @@ const DEMI = 'FX_UI_Character_List_Demi';
 const DUNGEON = 'FX_UI_Character_List_Dungeon';
 const SEASONAL = 'FX_UI_Character_List_Seasonal';
 const FX2000086 = 'FX_UI_Character_List_2000086';
+const FX2000093 = 'FX_UI_Character_List_2000093';
+const FX2000106 = 'FX_UI_Character_List_2000106';
+const FX2000110 = 'FX_UI_Character_List_2000110';
+const FX2000114 = 'FX_UI_Character_List_2000114';
+const FX2000121 = 'FX_UI_Character_List_2000121';
 /** Les effets servis, dans l'ordre du portage — la table par calque les déroule tous. */
-const SERVED = [DEMI, DUNGEON, SEASONAL, FX2000086];
+const SERVED = [
+  DEMI,
+  DUNGEON,
+  SEASONAL,
+  FX2000086,
+  FX2000093,
+  FX2000106,
+  FX2000110,
+  FX2000114,
+  FX2000121,
+];
 
 /**
  * LES PORTEURS, tels que le jeu les désigne — et l'écart entre ce qu'il pose et
@@ -68,6 +83,80 @@ const SEASONAL_SUBJECTS = CARRIERS.filter((c) => c.short === 'Seasonal' && c.cha
 );
 const SUBJECT = byId('2000053'); // Stella — le premier porteur de `_Demi` par id
 const SUBJECT_2000086 = byId('2000086'); // l'unique porteur de son effet sur mesure
+const SUBJECT_2000093 = byId('2000093'); // idem — chaque effet sur mesure n'a qu'un porteur
+
+/**
+ * Les quatre derniers effets sur mesure — une seule FAMILLE : même `out (1)`
+ * violet (le matériau de `_Demi`, 6ᵉ à 9ᵉ réutilisation), mêmes `star` moulés
+ * sur ceux de `_2000093`, seules les teintes et le calque signature changent.
+ * Une boucle les rend, pas quatre sections copiées-collées.
+ */
+const LAST_FOUR: {
+  fx: string;
+  char: Character;
+  title: string;
+  iso: string[];
+  blurb: React.ReactNode;
+}[] = [
+  {
+    fx: FX2000106,
+    char: byId('2000106'),
+    title: 'dauphins et halos arc-en-ciel',
+    iso: ['atlas', 'star (1)'],
+    blurb: (
+      <>
+        Le voile <code>inner</code> n’a <strong>pas de texture principale</strong> : le shader
+        échantillonne son défaut « white », qui porte la luminance ET l’alpha — c’est le dégradé en
+        second (multiplié) et les DAUPHINS en third (additionnés, défilant vers le haut) qui font
+        tout. <code>atlas</code> est le premier billboard à <code>_SECOND_TEX_ON</code> : le halo n°
+        5 de la planche 4×4, teinté par un dégradé arc-en-ciel, propulsé à 1-10 u/s au-dessus des
+        cadres (<code>sortingOrder</code> 10).
+      </>
+    ),
+  },
+  {
+    fx: FX2000110,
+    char: byId('2000110'),
+    title: 'cercles magiques',
+    iso: ['inner', 'inner_2'],
+    blurb: (
+      <>
+        Premier émetteur décoratif à matériau SUR MESURE : <code>inner</code> est un billboard (2/s,
+        6 au plus) qui fait tournoyer des CERCLES MAGIQUES — tuile 2 d’une planche 2×2, amplifiés
+        ×4, alpha par leur canal A. <code>inner_2</code> est le voile-cadre : une gradation
+        verticale plus un bruit additionné qui dérive en biais (−0,02 ; 0,05).
+      </>
+    ),
+  },
+  {
+    fx: FX2000114,
+    char: byId('2000114'),
+    title: 'emblèmes flottants',
+    iso: ['inner'],
+    blurb: (
+      <>
+        Le squelette de <code>_2000110</code>, jusqu’à RÉUTILISER son matériau de voile (
+        <code>FX_UI_Character_List_2000110_2</code>) tel quel : seul le billboard <code>inner</code>{' '}
+        change — l’emblème <code>T_FX_2000114_Icon</code> entier, sans feuille UV, amplifié ×2 — et
+        les étincelles passent aux rosés.
+      </>
+    ),
+  },
+  {
+    fx: FX2000121,
+    char: byId('2000121'),
+    title: 'voile en diagonale',
+    iso: ['star (1)'],
+    blurb: (
+      <>
+        Trois calques, le plus sobre des quatre. Son voile fait défiler la MÊME texture deux fois :
+        tuilée 2×4 en principal, glissant en DIAGONALE (−0,06 ; −0,2), et étirée ×1,2 en third
+        additionné montant — deux nappes du même motif qui se croisent. Sa force de bruit est
+        NÉGATIVE (−0,03), une inversion de sens que la formule absorbe telle quelle.
+      </>
+    ),
+  },
+];
 
 /**
  * Les QUATRE paliers responsives de `CharacterCard` — mêmes libellés que
@@ -123,6 +212,14 @@ const FROM_BINARY: { k: string; v: string }[] = [
     v: 'Quatre calques, dont deux inédits en NATURE. `star` tire sa couleur en mode RandomColor (`minMaxState = 4`) dans un dégradé FIXED à quatre teintes — violet, turquoise, orange, rose — un point par naissance, sans fondu entre les clés (`m_Mode = 1`) : deux modes que l’extracteur ne transcrivait pas, et dont le repli rendait les étincelles BLANCHES. `web` est un CALQUE-QUAD : `renderMode = Billboard` mais une rafale unique d’UNE particule immobile en ring buffer — le patron exact d’`inner`/`out` sans maille. Son quad de 33 est étiré PAR AXE par l’échelle du nœud (×6,72 ; ×11,50) : c’est le comportement Hierarchy d’Unity, et il ne couvre la carte de 344 qu’à cette condition. Et `inner` allume `_ALPHA_TEX_ON` pour la première fois : son alpha vient de `T_FX_cutscene_eye_mask`, échantillonnée à `st (0,5 ; 0,5) + (1,27 ; −0,74)` — un décalage HORS de [0,1] que le wrap Repeat ramène dans la texture. `applyActiveColorSpace` est FAUX sur les quatre.',
   },
   {
+    k: 'Ce que `_2000093` ajoute',
+    v: 'La première variante `_THIRD_TYPE_ADD` : `inner` compose `T_5040030_Snow` (étirée ×2 en V, défilant vers le bas à 0,1 UV/s) PLUS `T_FX_Snow_Sub_01` (même étirement, défilant vers le HAUT) — deux nappes de neige en sens opposés, là où `_Demi` et `_Seasonal` multipliaient leur troisième texture. L’alpha vient de `T_FX_2000047_Shield_Mask` (décalée de −0,06 en U), et `_SecondTex` est CÂBLÉE mais éteinte : `_SECOND_TEX_ON` absent des mots-clés, la texture reste lettre morte — les mots-clés font foi. Les deux `star` tirent leur couleur en RandomBetweenTwoGradients (`minMaxState = 3`, premier emploi) : chaque flocon naît QUELQUE PART entre deux dégradés constants — vert pâle ↔ rose pour `star` (tuile 11 de la planche 8×8, FIXE : `frameOverTime` constant à 11/64), olive ↔ rouge pour `star (1)` (`T_FX_Star_glow` entière, pas de feuille). Et leur taille suit une courbe à 7 clés (0 → 0,82 → 0,15 → 0,95 → 0,32 → 1 → 0) : un SCINTILLEMENT, pas une croissance. `applyActiveColorSpace` FAUX partout, comme `_2000086`.',
+  },
+  {
+    k: 'Ce que les quatre derniers ajoutent',
+    v: 'Une seule FAMILLE, relevée d’un bloc : `_2000106`, `_2000110`, `_2000114` et `_2000121` partagent le `out (1)` violet de `_Demi` (6ᵉ à 9ᵉ réutilisation du matériau, la teinte de particule ne bouge même plus) et des `star` moulés sur ceux de `_2000093` — dégradés en `minMaxState = 3`, seules les teintes changent. Trois nouveautés quand même. D’abord un matériau SANS `_MainTex` (`inner` de `_2000106`) : le shader retombe sur son défaut « white » (relevé dans `m_ParsedForm` — TOUS les slots y déclarent `white`), qui porte la luminance ET l’alpha ; un sampler non lié rendrait noir en WebGL2, donc alpha = 0 et calque invisible — d’où la texture blanche 1×1 posée sur les slots vides du moteur. Ensuite les premiers émetteurs DÉCORATIFS à matériau sur mesure : les cercles magiques de `_2000110` (tuile 2 d’une planche 2×2, ×4) et l’emblème de `_2000114` — qui réutilise par ailleurs le matériau de voile `FX_UI_Character_List_2000110_2` TEL QUEL, seul cas d’un matériau signature partagé entre deux effets. Enfin des minuties qui ne s’inventent pas : la force de bruit NÉGATIVE de `_2000121` (−0,03), son motif tuilé 2×4 défilant en diagonale, et l’arc-en-ciel de `_2000106` — première `_SECOND_TEX_ON` sur un billboard. Aucun des quatre ne demande `_POLAR_UV_ON` ni `_DISSOLVE_UV_ON` : les branches non transcrites du shader restent non demandées.',
+  },
+  {
     k: 'La couleur de particule',
     v: '`startColor` × `colorOverLifetime` arrive au shader en couleur de SOMMET, avec DEUX conversions possibles sur la route : `m_ApplyActiveColorSpace` (relevé émetteur par émetteur) la linéarise à la cuisson, puis la chaîne UIParticle → Canvas linéarise TOUTES les couleurs cuites en projet Linear. Les calques de `_Demi` cumulent donc les deux — c’est ce qui fait le rouge PROFOND du liseré (0,618 → 0,34 → 0,095), confronté à l’écran du jeu : une conversion seule plafonne le rapport vert/rouge à 0,34 et rend le ruban blanc rosé, jamais rouge.',
   },
@@ -147,7 +244,7 @@ const UNSURE: string[] = [
 
 /** Ce qui n'est pas fait, et qu'il vaut mieux écrire que sous-entendre. */
 const TODO: string[] = [
-  'LES SIX AUTRES EFFETS. `extract-portrait-fx.py` sort `_Demi`, `_Dungeon`, `_Seasonal` et `_2000086` par défaut. Le simulateur couvre les émetteurs billboard à forme Box sans rafales (`atlas`, `star`, `bubble`) et les calques-quads (`web`) — mais les cinq effets sur mesure restants (2000093, 2000106, 2000110, 2000114, 2000121) peuvent demander des branches du shader qu’on n’a pas relues (`_POLAR_UV_ON`, `_DISSOLVE_UV_ON` — `_2000086` n’en demandait AUCUNE, ça se joue prefab par prefab), et `_Synchro` (posé par `SetSynchroEffect`, pas par la table des porteurs) n’a pas été relevé. Chaque refus est LOUD : un calque non transcrit ne se rend pas à moitié, il se dit.',
+  'LE DIXIÈME EFFET, `_Synchro`. Les NEUF effets de la table des porteurs sont extraits et rendus ; `_Synchro`, lui, est posé par `SetSynchroEffect` — un autre chemin de code, pas `ThumbnailEffect` — et n’a pas été relevé : qui le déclenche, sur qui, et ce que son prefab demande restent à lire. Les branches du shader jamais rencontrées (`_POLAR_UV_ON`, `_DISSOLVE_UV_ON`) restent non transcrites — aucun des neuf ne les demande, et chaque refus est LOUD : un calque non transcrit ne se rend pas à moitié, il se dit.',
   'UN CONTEXTE WebGL PARTAGÉ. Aujourd’hui, un contexte par carte, plafonné à 8 et recyclé par ordre de dernière apparition — ça tient une page, pas une grille de 124 personnages dont 15 animés. Un seul contexte qui peindrait toutes les cartes lèverait le plafond ET le déphasage noté plus haut.',
   'LE PASSAGE DANS `characters.json`. La table `byCharacter` vit dans `portrait-fx.json` parce qu’une page /dev ne justifie pas d’ouvrir un contrat de données. Le jour où l’effet sort d’ici, sa place est un champ de perso — le datagen lit déjà `CharacterExtraTemplet` pour `showNickName`.',
   'LE `Dim` DU PORTRAIT STATIQUE. Sans rapport avec l’effet, mais vu en lisant l’ordre des nœuds : dans le prefab, `Dim` est le 2ᵉ enfant de `CharacterInfo`, donc SOUS le rail d’étoiles, l’élément, la classe et le niveau. `Portrait` le rend en dernier, donc par-dessus tout. À vérifier en jeu avant de toucher quoi que ce soit.',
@@ -175,12 +272,13 @@ export default function DevAnimatedPortrait() {
           <code>portrait-fx-gl</code>). Rien ici n’est une approximation CSS.
         </p>
         <p className="text-content-muted mt-2 max-w-3xl text-sm">
-          <strong className="text-content-strong">Quatre effets sont servis : </strong>
+          <strong className="text-content-strong">Neuf effets sont servis : </strong>
           <code>_Demi</code> ({DEMI_SUBJECTS.length} porteurs), <code>_Dungeon</code> (
           {DUNGEON_SUBJECTS.length} porteurs), <code>_Seasonal</code> ({SEASONAL_SUBJECTS.length}{' '}
-          porteur) et <code>_2000086</code> (1 porteur, le premier effet SUR MESURE) — les trois
-          derniers amènent les émetteurs de PARTICULES simulés (<code>portrait-fx-sim</code>). Les
-          six autres sont dans la table mais pas extraits — cf. « ce qui reste » en bas.
+          porteur) et les SIX effets sur mesure (1 porteur chacun) — tous sauf <code>_Demi</code>{' '}
+          amènent les émetteurs de PARTICULES simulés (<code>portrait-fx-sim</code>). Seul{' '}
+          <code>_Synchro</code>, posé par un autre chemin que la table des porteurs, reste à relever
+          — cf. « ce qui reste » en bas.
         </p>
       </header>
 
@@ -374,6 +472,94 @@ export default function DevAnimatedPortrait() {
           ))}
         </div>
       </section>
+
+      <section className="mb-8">
+        <h2 className="text-content-strong font-semibold">
+          <code>_2000093</code> — neige, cadres et flocons
+        </h2>
+        <p className="text-content-muted mb-3 max-w-3xl text-sm">
+          Le deuxième effet sur mesure : quatre calques, tout en réutilisation structurelle.{' '}
+          <code>inner</code> et <code>out (1)</code> reprennent les mailles de <code>_Demi</code> (
+          <code>out (1)</code> jusqu’à son matériau, 5ᵉ réutilisation, même violet que{' '}
+          <code>_2000086</code>) ; <code>inner</code> superpose DEUX couches de neige qui défilent
+          en sens opposés — la première branche <code>_THIRD_TYPE_ADD</code> du portage. Les deux
+          émetteurs <code>star</code> sont les jumeaux du <code>star</code> de <code>_Dungeon</code>{' '}
+          (même Box plat sous la carte, même frein, même bruit), mais leur couleur se tire ENTRE
+          deux dégradés (vert pâle ↔ rose, olive ↔ rouge) et leur taille suit une courbe à 7 clés
+          qui les fait SCINTILLER au lieu de grandir puis mourir.
+        </p>
+        <div className="flex flex-wrap items-end gap-6">
+          <Figure label="Portrait (statique)">
+            <Portrait
+              id={SUBJECT_2000093.id}
+              name={name(SUBJECT_2000093)}
+              rarity={SUBJECT_2000093.rarity}
+              element={SUBJECT_2000093.element}
+              cls={SUBJECT_2000093.class}
+              level={100}
+              className="w-45"
+            />
+          </Figure>
+          {[undefined, ['star'], ['star (1)']].map((only, i) => (
+            <Figure
+              key={only ? only.join('+') : 'tout'}
+              label={only ? only.join(' + ') : 'AnimatedPortrait'}
+            >
+              <AnimatedPortrait
+                id={SUBJECT_2000093.id}
+                name={name(SUBJECT_2000093)}
+                rarity={SUBJECT_2000093.rarity}
+                element={SUBJECT_2000093.element}
+                cls={SUBJECT_2000093.class}
+                level={100}
+                fxEmitters={only}
+                hideName={i > 0}
+                className="w-45"
+              />
+            </Figure>
+          ))}
+        </div>
+      </section>
+
+      {LAST_FOUR.map(({ fx, char, title, iso, blurb }) => (
+        <section key={fx} className="mb-8">
+          <h2 className="text-content-strong font-semibold">
+            <code>{fx.replace('FX_UI_Character_List_', '_')}</code> — {title}
+          </h2>
+          <p className="text-content-muted mb-3 max-w-3xl text-sm">{blurb}</p>
+          <div className="flex flex-wrap items-end gap-6">
+            <Figure label="Portrait (statique)">
+              <Portrait
+                id={char.id}
+                name={name(char)}
+                rarity={char.rarity}
+                element={char.element}
+                cls={char.class}
+                level={100}
+                className="w-45"
+              />
+            </Figure>
+            {[undefined, ...iso.map((e) => [e])].map((only, i) => (
+              <Figure
+                key={only ? only.join('+') : 'tout'}
+                label={only ? only.join(' + ') : 'AnimatedPortrait'}
+              >
+                <AnimatedPortrait
+                  id={char.id}
+                  name={name(char)}
+                  rarity={char.rarity}
+                  element={char.element}
+                  cls={char.class}
+                  level={100}
+                  fxEmitters={only}
+                  hideName={i > 0}
+                  className="w-45"
+                />
+              </Figure>
+            ))}
+          </div>
+        </section>
+      ))}
 
       <section className="mb-8">
         <h2 className="text-content-strong font-semibold">Quatre tailles</h2>

@@ -24,7 +24,10 @@
  *     une animation d'images, un CHOIX de tuile (le halo n° 5 en 4×4, le glint
  *     n° 12 en 8×8 de la même planche) ;
  *   - le SCINTILLEMENT : la courbe de taille de `star` (12 clés en dents de scie),
- *     évaluée en Hermite comme Unity le fait.
+ *     évaluée en Hermite comme Unity le fait ;
+ *   - la ROTATION sur la vie (`RotationModule`, venu avec `_2000093`) : une
+ *     vitesse angulaire CONSTANTE tirée par particule (±1,22 rad/s sur les
+ *     flocons), intégrée en `rot₀ + ω·âge` — une vraie courbe resterait refusée.
  *
  * TROIS APPROXIMATIONS ASSUMÉES, parce que le moteur du jeu ne les publie pas :
  *
@@ -104,6 +107,12 @@ interface NoiseRaw {
 }
 
 interface SizeOverLifetimeRaw {
+  curve: MinMaxCurveRaw;
+  separateAxes: boolean;
+}
+
+/** `RotationModule` : `curve` est la VITESSE angulaire Z, en radians par seconde. */
+interface RotationOverLifetimeRaw {
   curve: MinMaxCurveRaw;
   separateAxes: boolean;
 }
@@ -298,7 +307,13 @@ export function unsupportedBillboard(e: FxEmitter): string | null {
     missing.push(`forme ${shape.type} (seul le Box est transcrit)`);
   else if (shape.randomDirectionAmount) missing.push('randomDirectionAmount');
   if (e.emission.bursts.length) missing.push('rafales (bursts)');
-  if (e.rotationOverLifetime) missing.push('rotationOverLifetime');
+  // La rotation sur la vie est transcrite quand c'est une vitesse CONSTANTE par
+  // particule (état 0 ou 3) — c'est le cas des flocons de `_2000093` (±1,22 rad/s).
+  // Une vraie courbe demanderait une intégration qu'on n'a pas relue.
+  const rotOver = e.rotationOverLifetime as RotationOverLifetimeRaw | undefined;
+  if (rotOver?.separateAxes) missing.push('rotation sur la vie par axe');
+  else if (rotOver && rotOver.curve.minMaxState !== 0 && rotOver.curve.minMaxState !== 3)
+    missing.push(`rotation sur la vie en courbe (état ${rotOver.curve.minMaxState})`);
   if (e.velocityOverLifetime) missing.push('velocityOverLifetime');
   const sheet = e.textureSheet as SheetRaw | undefined;
   if (sheet && (sheet.mode !== 0 || sheet.timeMode !== 0))
@@ -367,6 +382,8 @@ interface Particle {
   size: number;
   sizeY: number;
   rot: number;
+  /** Vitesse angulaire (rad/s), tirée à la naissance — 0 sans `RotationModule`. */
+  omega: number;
   limit: number;
   lerpStart: number;
   lerpOver: number;
@@ -435,6 +452,7 @@ export function createBillboardSim(e: FxEmitter, seed: number): BillboardSim {
   const lim = e.limitVelocity as LimitVelocityRaw | undefined;
   const noise = e.noise as NoiseRaw | undefined;
   const sizeOver = e.sizeOverLifetime as SizeOverLifetimeRaw | undefined;
+  const rotOver = e.rotationOverLifetime as RotationOverLifetimeRaw | undefined;
 
   // `scalingMode = Hierarchy` : la même échelle porte positions, tailles et
   // vitesses — on simule en unités LOCALES et on ne multiplie qu'à la sortie.
@@ -476,6 +494,11 @@ export function createBillboardSim(e: FxEmitter, seed: number): BillboardSim {
       // Même aléa que X — approximation n° 3 de l'en-tête.
       sizeY: e.size3D ? mmScalar(e.startSizeY, e.startSizeYMin, e.startSizeYMode, su) : size,
       rot: mmScalar(e.startRotation, e.startRotationMin, e.startRotationMode, rnd()),
+      // Un émetteur SANS module ne consomme pas de tirage : la séquence aléatoire
+      // des effets déjà servis ne bouge pas.
+      omega: rotOver
+        ? mmScalar(rotOver.curve.scalar, rotOver.curve.minScalar, rotOver.curve.minMaxState, rnd())
+        : 0,
       limit: lim ? evalMinMaxCurve(lim.magnitude, 0, rnd()) : Infinity,
       lerpStart: rnd(),
       lerpOver: rnd(),
@@ -543,7 +566,7 @@ export function createBillboardSim(e: FxEmitter, seed: number): BillboardSim {
           y: world[1] * s,
           w: p.size * mul * s,
           h: p.sizeY * mul * s,
-          rot: p.rot,
+          rot: p.rot + p.omega * age,
           age01: u,
           lerpStart: p.lerpStart,
           lerpOver: p.lerpOver,

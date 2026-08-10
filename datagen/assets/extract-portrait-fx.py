@@ -88,7 +88,8 @@ EFFECT_PREFIX = 'FX_UI_Character_List_'
 
 #: Les effets rendus par le site. Élargir cette liste est le SEUL geste à faire
 #: pour en servir un de plus — le reste du script est data-driven.
-DEFAULT_EFFECTS = ['Demi', 'Dungeon', 'Seasonal', '2000086']
+DEFAULT_EFFECTS = ['Demi', 'Dungeon', 'Seasonal', '2000086', '2000093',
+                   '2000106', '2000110', '2000114', '2000121']
 
 
 def bundle_path(name: str) -> Path:

@@ -657,6 +657,11 @@ export function mountPortraitFx(
   let bbVao: WebGLVertexArrayObject | null = null;
   const byName = new Map<string, WebGLTexture>();
   let artTex: WebGLTexture | null = null;
+  /** Le « white » d'Unity : TOUT slot du shader a `white` pour défaut (relevé dans
+   * `m_ParsedForm`), et `_2000106` s'en sert — son `inner` n'a PAS de `_MainTex`.
+   * Un sampler non lié rendrait noir (spec WebGL2), donc alpha = main.r = 0 :
+   * calque invisible au lieu du voile du jeu. */
+  let whiteTex: WebGLTexture | null = null;
   let FORMATS: [number, string][] = [];
   let fbo: WebGLFramebuffer | null = null;
   let fboTex: WebGLTexture | null = null;
@@ -789,6 +794,21 @@ export function mountPortraitFx(
     gl!.enableVertexAttribArray(1);
     gl!.vertexAttribPointer(1, 2, gl!.FLOAT, false, 16, 8);
     gl!.bindVertexArray(null);
+
+    // Le blanc vaut 1,0 dans les deux espaces : RGBA8 suffit, rien à linéariser.
+    whiteTex = gl!.createTexture()!;
+    gl!.bindTexture(gl!.TEXTURE_2D, whiteTex);
+    gl!.texImage2D(
+      gl!.TEXTURE_2D,
+      0,
+      gl!.RGBA8,
+      1,
+      1,
+      0,
+      gl!.RGBA,
+      gl!.UNSIGNED_BYTE,
+      new Uint8Array([255, 255, 255, 255]),
+    );
 
     // LA CIBLE LINÉAIRE. Tout se dessine dedans, en lumière linéaire, et le report
     // en sRGB n'a lieu qu'une fois — la seule façon de reproduire un pipeline
@@ -962,7 +982,9 @@ export function mountPortraitFx(
       SLOTS.forEach((slot, unit) => {
         const decl = m.textures[slot];
         gl.activeTexture(gl.TEXTURE0 + unit);
-        gl.bindTexture(gl.TEXTURE_2D, decl ? (byName.get(decl.tex) ?? null) : null);
+        // Slot non câblé → le « white » du shader ; câblé mais pas encore chargé
+        // → null (noir), l'état transitoire du chargement, jamais un flash blanc.
+        gl.bindTexture(gl.TEXTURE_2D, decl ? (byName.get(decl.tex) ?? null) : whiteTex);
         gl.uniform1i(U[UNIFORM_OF[slot]], unit);
         const sp = m.vectors[SPEED_PROP[slot]] ?? [0, 0, 0, 0];
         gl.uniform2f(U[SPEED_OF[slot]], sp[0], sp[1]);
