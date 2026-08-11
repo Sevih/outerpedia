@@ -75,17 +75,12 @@
 > doit la montrer plutôt que la cacher — l'archive garde le snapshot si on change
 > d'avis. Absence de pin = live, donc zéro migration sur les 16 guides existants.
 
-> FAIT depuis (cf. DONE 11/08) : le rendu sait lire un id épinglé (étape 1), le
-> PLAN de ré-épinglage existe en dry-run (`planRepin`, étape 2a), l'archive est
-> AUTO-SUFFISANTE — elle fige ses sources de résolution, donc un boss épinglé
-> garde ses libellés d'époque — et la garde est posée. Reste ci-dessous ce qui
-> ÉCRIT dans les guides, volontairement laissé pour la fin.
+> FAIT depuis (cf. DONE 11/08) : le rendu sait lire un id épinglé, l'archive est
+> AUTO-SUFFISANTE (elle fige ses sources, donc un boss épinglé garde ses libellés
+> d'époque), la garde est posée, et « Versionner » RÉ-ÉPINGLE tout seul les guides
+> qui nomment le monstre. Ne reste que le cas des guides VERSIONNÉS, qui ne
+> nomment pas leur boss — c'est le seul qui demande du code de RENDU.
 
-- [ ] **Appliquer le plan de ré-épinglage.** `planRepin` dit déjà ce que le geste
-      ferait ; il reste à l'exécuter depuis « Versionner » (admin + CLI). ⚠ Grouper
-      par FICHIER, pas par édition : `adventure/S1-8-5` porte le même id dans
-      `meta.bossId` ET dans `meta.monsters` — deux éditions, un seul `meta.json`
-      (verrouillé par un test de `repin-guides.test.ts`).
 - [ ] **La liste `pinned` des guides VERSIONNÉS.** Les références indirectes
       (`meta.group`, `meta.dungeons`, groupes des `config.json`) désignent un
       COMBAT : il n'y a aucun id à réécrire, le pin ne peut être qu'une liste à

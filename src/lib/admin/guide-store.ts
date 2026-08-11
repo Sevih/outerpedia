@@ -112,25 +112,50 @@ export function loadGuideDraft(category: string, slug: string): GuideDraft {
   });
 }
 
-/** Fusionne un champ dans `meta.json` (préserve tout le reste ; vide supprime). */
-async function patchGuideMeta(
+/** Champs de `meta.json` que l'admin sait fusionner. */
+export type GuideMetaKey = 'group' | 'bossId' | 'dungeons' | 'monsters';
+
+/**
+ * Fusionne PLUSIEURS champs dans `meta.json` en UNE écriture (préserve tout le
+ * reste ; une valeur vide supprime la clé). Rend `false` si le guide est
+ * introuvable ou hors périmètre.
+ *
+ * Le multi-champs n'est pas un confort : `meta.json` est relu à chaque appel via
+ * un cache mtime, donc deux patchs successifs sur le MÊME fichier peuvent partir
+ * du même état et le second écraserait le premier. Le cas existe pour de vrai —
+ * `adventure/S1-8-5` porte le même monstre dans `bossId` ET dans `monsters`, et
+ * le ré-épinglage touche les deux (cf. `applyRepin`).
+ */
+export async function patchGuideMetaFields(
   category: string,
   slug: string,
-  key: 'group' | 'bossId' | 'dungeons',
-  value: string | string[] | undefined,
-): Promise<void> {
+  fields: Partial<Record<GuideMetaKey, string | string[] | undefined>>,
+): Promise<boolean> {
   const guide = getGuide(category, slug);
-  if (!guide) return;
+  if (!guide) return false;
+  const dir = guideDir(category, slug);
+  if (!dir) return false; // hors périmètre (le guide existe pourtant : `getGuide` a répondu)
   const meta = (readGuideFile<Record<string, unknown>>(guide, 'meta.json') ?? {}) as Record<
     string,
     unknown
   >;
-  const empty = value === undefined || (Array.isArray(value) && value.length === 0);
-  if (empty) delete meta[key];
-  else meta[key] = value;
-  const dir = guideDir(category, slug);
-  if (!dir) return; // hors périmètre (le guide existe pourtant : `getGuide` a répondu)
+  for (const [key, value] of Object.entries(fields)) {
+    const empty = value === undefined || (Array.isArray(value) && value.length === 0);
+    if (empty) delete meta[key];
+    else meta[key] = value;
+  }
   await writeJson(resolve(dir, 'meta.json'), meta);
+  return true;
+}
+
+/** Fusionne un champ dans `meta.json` (préserve tout le reste ; vide supprime). */
+async function patchGuideMeta(
+  category: string,
+  slug: string,
+  key: GuideMetaKey,
+  value: string | string[] | undefined,
+): Promise<void> {
+  await patchGuideMetaFields(category, slug, { [key]: value });
 }
 
 /** Valide puis écrit un guide. Renvoie les écarts bloquants (vide = OK). */

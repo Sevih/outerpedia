@@ -13,7 +13,7 @@
 import { describe, expect, it } from 'vitest';
 import { listGuides } from '@/lib/data/guides';
 import { encountersOfGroup } from '@/lib/data/encounters';
-import { planRepin } from './repin-guides';
+import { applyRepin, planRepin, type RepinPlan } from './repin-guides';
 
 const guides = listGuides();
 /** Premier guide qui NOMME son boss — référence directe. */
@@ -79,5 +79,96 @@ describe('planRepin — ce que « Versionner » ferait', () => {
   it('le plan reporte l’id et la clé qu’on lui a donnés', () => {
     const plan = planRepin('X', 'X@3');
     expect([plan.id, plan.key]).toEqual(['X', 'X@3']);
+  });
+});
+
+/**
+ * L'APPLICATION — le seul geste de cette affaire qui écrit dans le contenu
+ * éditorial. L'écriture est substituée par un journal : la vérifier pour de vrai
+ * demanderait un faux arbre de guides complet, et le seul autre choix serait de
+ * ne pas vérifier le groupage du tout.
+ */
+describe('applyRepin — ce que « Versionner » écrit', () => {
+  /** Journal des écritures : un appel = un `meta.json` réécrit. */
+  function journal(ok = true) {
+    const calls: Array<{ category: string; slug: string; fields: Record<string, unknown> }> = [];
+    const write = async (category: string, slug: string, fields: Record<string, unknown>) => {
+      calls.push({ category, slug, fields });
+      return ok;
+    };
+    return { calls, write: write as never };
+  }
+
+  it('deux éditions sur le MÊME guide ne font qu’UNE écriture', async () => {
+    // Le cas réel `adventure/S1-8-5` : même monstre dans `bossId` ET `monsters`.
+    // Écrire édition par édition ferait relire un état mis en cache, et la
+    // seconde écriture perdrait la première.
+    const id = direct.bossId!;
+    const plan = planRepin(id, `${id}@1`);
+    const twoFields = plan.edits.filter((e) => e.field === 'meta.monsters');
+    if (!twoFields.length) return; // aucun guide à double référence dans la donnée
+    const { calls, write } = journal();
+    await applyRepin(plan, write);
+    const perGuide = new Map<string, number>();
+    for (const c of calls)
+      perGuide.set(`${c.category}/${c.slug}`, (perGuide.get(`${c.category}/${c.slug}`) ?? 0) + 1);
+    expect([...perGuide.values()].every((n) => n === 1)).toBe(true);
+    // …et le guide à double référence porte bien SES DEUX champs d'un coup.
+    const target = twoFields[0].guide;
+    const call = calls.find((c) => `${c.category}/${c.slug}` === target)!;
+    expect(Object.keys(call.fields).sort()).toEqual(['bossId', 'monsters']);
+  });
+
+  it('écrit les valeurs dans la FORME du champ, pas en texte', async () => {
+    // `meta.monsters` est une LISTE. Un « a, b » recollé produirait un JSON faux
+    // — silencieusement, et dans le contenu.
+    const id = direct.bossId!;
+    const { calls, write } = journal();
+    await applyRepin(planRepin(id, `${id}@1`), write);
+    for (const c of calls) {
+      if ('bossId' in c.fields) expect(typeof c.fields.bossId).toBe('string');
+      if ('monsters' in c.fields) expect(Array.isArray(c.fields.monsters)).toBe(true);
+    }
+  });
+
+  it('un guide qu’on ne sait pas écrire est RAPPORTÉ, pas oublié', async () => {
+    const plan: RepinPlan = {
+      id: 'X',
+      key: 'X@1',
+      edits: [
+        {
+          guide: 'categorie/inconnue',
+          file: 'categorie/inconnue/meta.json',
+          field: 'meta.bossId',
+          before: 'X',
+          after: 'X@1',
+        },
+      ],
+      pending: [],
+    };
+    const { write } = journal(false);
+    const res = await applyRepin(plan, write);
+    expect(res.skipped).toEqual(['categorie/inconnue']);
+    expect(res.applied).toEqual([]);
+    expect(res.files).toEqual([]);
+  });
+
+  it('les références indirectes ressortent telles quelles', async () => {
+    // Elles ne sont PAS appliquées (aucun id à réécrire) : les taire ferait
+    // croire le ré-épinglage complet alors qu'il ne l'est pas.
+    const plan = planRepin('X', 'X@1');
+    const withPending = {
+      ...plan,
+      pending: [{ guide: 'a/b', origin: 'meta.group' as const, group: 'g' }],
+    };
+    const { write } = journal();
+    expect((await applyRepin(withPending, write)).pending).toEqual(withPending.pending);
+  });
+
+  it('un plan vide n’écrit rien', async () => {
+    const { calls, write } = journal();
+    const res = await applyRepin(planRepin('id-qui-nexiste-pas', 'id-qui-nexiste-pas@1'), write);
+    expect(calls).toEqual([]);
+    expect(res.files).toEqual([]);
   });
 });

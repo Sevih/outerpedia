@@ -7,6 +7,34 @@
 
 ## 2026-08-11
 
+- **« Versionner » RÉ-ÉPINGLE les guides tout seul** — le `TODO(guides)` de
+  `version-monster.ts:16` (« versionner ne doit JAMAIS demander d'éditer un guide
+  à la main ») est tenu pour les références DIRECTES.
+  Le bouton faisait la moitié du chemin : il écrivait l'archive, et les guides
+  continuaient de pointer l'id vivant — donc l'ancien guide affichait le NOUVEAU
+  boss, exactement ce que versionner cherche à éviter. La route enchaîne
+  maintenant les deux gestes, le ré-épinglage APRÈS l'archive et seulement si elle
+  s'est écrite : on ne fait pas pointer des guides vers un fichier absent (le
+  rendu lèverait). `{ repin: false }` versionne sans toucher aux guides et rend le
+  plan — rattrapage, ou inspection avant d'appliquer.
+  GROUPÉ PAR FICHIER, et réglé À LA SOURCE : `patchGuideMeta` n'écrivait qu'un
+  champ à la fois, or `meta.json` est relu via un cache mtime — deux patchs sur le
+  MÊME fichier seraient partis du même état et le second aurait écrasé le premier.
+  Le cas est réel (`adventure/S1-8-5` nomme son boss dans `bossId` ET dans
+  `monsters`, vérifié sur la donnée : 2 éditions, 1 fichier). D'où
+  `patchGuideMetaFields`, multi-champs en une écriture.
+  CORRIGÉ AU PASSAGE : `RepinEdit.before/after` joignait les listes en `"a, b"`
+  pour l'affichage. Écrire ça dans `meta.monsters` aurait produit un JSON faux, en
+  silence, dans le contenu. Les valeurs sont désormais STRUCTURÉES (chaîne pour
+  `bossId`, liste pour `monsters`) et c'est l'affichage qui joint.
+  LE RÉSULTAT SE VOIT : la fiche admin liste les fichiers de guides réécrits (à
+  committer aussi), et AVERTIT pour les références qui passent par un combat —
+  elles ne sont pas ré-épinglables automatiquement et attendent la liste `pinned`.
+  Les taire ferait croire le geste complet alors qu'il ne l'est pas.
+  Cinq cas de plus (12 en tout), écriture SUBSTITUÉE par un journal : la vérifier
+  pour de vrai demanderait un faux arbre de guides complet, et le seul autre choix
+  serait de ne pas vérifier le groupage. 1498 tests verts.
+
 - **Épinglage des boss, étape 3 : la GARDE sur les références de boss**
   CONSTAT en allant l'écrire : l'invariant « chaque `meta.bossId` existe dans
   `monsters.json` » n'existait PAS comme test — c'était une note de TODO. Les

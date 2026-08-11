@@ -25,6 +25,7 @@
  */
 import { listGuides, readGuideVersionFile, type Guide } from '@/lib/data/guides';
 import { encountersOfGroup } from '@/lib/data/encounters';
+import { patchGuideMetaFields } from '@/lib/admin/guide-store';
 
 /** Clés d'un `config.json` de version qui désignent un COMBAT. */
 const GROUP_KEYS = ['group', 'main', 'subA', 'subB'] as const;
@@ -36,9 +37,22 @@ export interface RepinEdit {
   file: string;
   /** Champ touché. */
   field: 'meta.bossId' | 'meta.monsters';
-  before: string;
-  after: string;
+  /**
+   * Valeurs AVANT/APRÈS, dans la forme qu'a le champ : une chaîne pour
+   * `meta.bossId`, une LISTE pour `meta.monsters`. Structurées et pas jointes
+   * pour l'œil — c'est `after` qu'on écrit, et un `"a, b"` recollé serait une
+   * conversion à refaire au moment le plus risqué (cf. `applyRepin`).
+   */
+  before: string | string[];
+  after: string | string[];
 }
+
+/** Clé de `meta.json` touchée par une édition. */
+export const metaKey = (e: RepinEdit): 'bossId' | 'monsters' =>
+  e.field === 'meta.bossId' ? 'bossId' : 'monsters';
+
+/** Rendu lisible d'une valeur d'édition (l'affichage joint, le disque non). */
+export const showValue = (v: string | string[]): string => (Array.isArray(v) ? v.join(', ') : v);
 
 /** Référence INDIRECTE (un combat) : rapportée, pas éditable en l'état. */
 export interface RepinPending {
@@ -100,8 +114,8 @@ export function planRepin(id: string, key: string): RepinPlan {
         guide: name,
         file: metaFile(g),
         field: 'meta.monsters',
-        before: monsters.join(', '),
-        after: monsters.map((m) => (isLiveRef(m, id) ? key : m)).join(', '),
+        before: monsters,
+        after: monsters.map((m) => (isLiveRef(m, id) ? key : m)),
       });
     }
 
@@ -121,4 +135,62 @@ export function planRepin(id: string, key: string): RepinPlan {
   }
 
   return { id, key, edits, pending };
+}
+
+/** Ce que l'application a vraiment fait. */
+export interface RepinResult {
+  /** Fichiers réécrits, `<catégorie>/<slug>/meta.json`. */
+  files: string[];
+  /** Éditions effectivement écrites. */
+  applied: RepinEdit[];
+  /** Guides du plan qu'on n'a PAS su écrire (introuvables, hors périmètre). */
+  skipped: string[];
+  /**
+   * Références indirectes : elles atteignent le monstre par un COMBAT, il n'y a
+   * aucun id à réécrire. Rendues telles quelles pour que l'appelant les dise —
+   * les taire ferait croire le ré-épinglage complet alors qu'il ne l'est pas.
+   */
+  pending: RepinPending[];
+}
+
+/**
+ * APPLIQUE le plan. Écrit dans les `meta.json` des guides — le seul geste de
+ * cette affaire qui touche au contenu éditorial.
+ *
+ * GROUPÉ PAR FICHIER, et c'est la seule façon correcte : un guide peut porter
+ * deux éditions sur le même `meta.json` (`adventure/S1-8-5` nomme son boss dans
+ * `bossId` ET dans `monsters`). Écrire édition par édition ferait relire un état
+ * mis en cache et la seconde écriture perdrait la première.
+ */
+export async function applyRepin(
+  plan: RepinPlan,
+  /**
+   * L'écriture, substituable — défaut : le vrai `meta.json`. Les tests passent
+   * un journal : vérifier le groupage en écrivant pour de bon demanderait un
+   * faux arbre de guides complet, et le seul autre choix serait de ne pas le
+   * vérifier du tout.
+   */
+  write: typeof patchGuideMetaFields = patchGuideMetaFields,
+): Promise<RepinResult> {
+  const byGuide = new Map<string, RepinEdit[]>();
+  for (const e of plan.edits) {
+    const list = byGuide.get(e.guide);
+    if (list) list.push(e);
+    else byGuide.set(e.guide, [e]);
+  }
+
+  const files: string[] = [];
+  const applied: RepinEdit[] = [];
+  const skipped: string[] = [];
+  for (const [guide, edits] of byGuide) {
+    const [category, slug] = guide.split('/');
+    const fields = Object.fromEntries(edits.map((e) => [metaKey(e), e.after]));
+    if (await write(category, slug, fields)) {
+      files.push(edits[0].file);
+      applied.push(...edits);
+    } else {
+      skipped.push(guide);
+    }
+  }
+  return { files, applied, skipped, pending: plan.pending };
 }

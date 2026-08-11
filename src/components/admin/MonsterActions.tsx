@@ -16,10 +16,21 @@ interface VersionReport {
   file: string;
 }
 
+/**
+ * Ce que le ré-épinglage a fait aux guides. Redéclaré ici comme `VersionReport`
+ * — le contrat de la route, vu du client.
+ */
+interface RepinReport {
+  files: string[];
+  applied: Array<{ guide: string; field: string }>;
+  skipped: string[];
+  pending: Array<{ guide: string; origin: string; version?: string }>;
+}
+
 type Status =
   | { kind: 'idle' | 'busy' }
   | { kind: 'saved'; report: IntegrateReport }
-  | { kind: 'versioned'; report: VersionReport }
+  | { kind: 'versioned'; report: VersionReport; repin: RepinReport }
   | { kind: 'err'; msg: string };
 
 /**
@@ -60,10 +71,11 @@ export function MonsterActions({
   async function version() {
     setStatus({ kind: 'busy' });
     try {
-      const data = await postJson<{ report: VersionReport }>(`/api/admin/version/monster/${id}`, {
-        label,
-      });
-      setStatus({ kind: 'versioned', report: data.report });
+      const data = await postJson<{ report: VersionReport; repin: RepinReport }>(
+        `/api/admin/version/monster/${id}`,
+        { label },
+      );
+      setStatus({ kind: 'versioned', report: data.report, repin: data.repin });
       setLabel('');
       router.refresh();
     } catch (e) {
@@ -112,13 +124,45 @@ export function MonsterActions({
         </p>
       )}
       {status.kind === 'versioned' && (
-        <p className="border-success/40 bg-success/5 text-success rounded-md border p-3 text-sm">
-          ✓ Frozen under <code>{status.report.key}</code>
-          {status.report.name ? ` (${status.report.name})` : ''} — {status.report.skills} skill(s),
-          source {status.report.ref}
-          {status.report.gameVersion ? `, game ${status.report.gameVersion}` : ''}. Commit{' '}
-          <code>{status.report.file}</code>.
-        </p>
+        <div className="space-y-2 text-sm">
+          <p className="border-success/40 bg-success/5 text-success rounded-md border p-3">
+            ✓ Frozen under <code>{status.report.key}</code>
+            {status.report.name ? ` (${status.report.name})` : ''} — {status.report.skills}{' '}
+            skill(s), source {status.report.ref}
+            {status.report.gameVersion ? `, game ${status.report.gameVersion}` : ''}. Commit{' '}
+            <code>{status.report.file}</code>.
+          </p>
+          {/* Le ré-épinglage réécrit du CONTENU : ce qu'il a touché doit se lire,
+              sinon on committe des guides modifiés sans le savoir. */}
+          {status.repin.files.length > 0 && (
+            <p className="border-success/40 bg-success/5 text-success rounded-md border p-3">
+              ✓ Re-pinned {status.repin.applied.length} reference(s) in {status.repin.files.length}{' '}
+              guide file(s) — commit them too:{' '}
+              {status.repin.files.map((f) => (
+                <code key={f} className="mr-1">
+                  {f}
+                </code>
+              ))}
+            </p>
+          )}
+          {/* Une référence qui passe par un COMBAT n'a aucun id à réécrire : la
+              taire ferait croire le ré-épinglage complet alors qu'il ne l'est pas. */}
+          {status.repin.pending.length > 0 && (
+            <p className="border-warn/40 bg-warn/5 text-warn rounded-md border p-3">
+              ⚠ {status.repin.pending.length} reference(s) reach this monster through an encounter
+              group and could not be re-pinned automatically — they need the versioned guide’s{' '}
+              <code>pinned</code> list:{' '}
+              {status.repin.pending
+                .map((p) => `${p.guide}${p.version ? ` (${p.version})` : ''}`)
+                .join(', ')}
+            </p>
+          )}
+          {status.repin.skipped.length > 0 && (
+            <p className="border-danger/40 bg-danger/5 text-danger rounded-md border p-3">
+              ✗ Could not write: {status.repin.skipped.join(', ')}
+            </p>
+          )}
+        </div>
       )}
       {status.kind === 'err' && <p className="text-danger text-sm">{status.msg}</p>}
     </div>
