@@ -425,14 +425,29 @@ describe('guides versionnés — le contenu de CHAQUE version résout', () => {
  * avoir son fichier d'archive. Sans cette seconde branche, le premier
  * ré-épinglage passerait toute la suite au rouge — l'invariant interdirait
  * précisément le mécanisme qu'il est censé protéger.
+ *
+ * Le scan lit AUSSI les `pinned` des versions, et c'est le cas qui compte le
+ * plus : un guide versionné ne nomme pas son boss, donc TOUTES ses références
+ * épinglées passent par là. Le mode de panne visé est concret — déposer les
+ * `config.json` sans committer `data/generated/monster-archive/` rend un pin qui
+ * ne résout nulle part, et le rendu ne l'apprendrait qu'au build de prod.
  */
 describe('boss d’un guide — la référence résout, vivante ou épinglée', () => {
   const refs = listGuides().flatMap((g) => {
     const guide = `${g.category}/${g.slug}`;
     const monsters = (g as { monsters?: string[] }).monsters ?? [];
+    const pinned = g.versions.flatMap((v) => {
+      const cfg = readGuideVersionFile<{ pinned?: string[] }>(g, v.key, 'config.json');
+      return (cfg?.pinned ?? []).map((id) => ({
+        guide,
+        field: `versions/${v.key}/config.json · pinned`,
+        id,
+      }));
+    });
     return [
       ...(g.bossId ? [{ guide, field: 'meta.bossId', id: g.bossId }] : []),
       ...monsters.map((id) => ({ guide, field: 'meta.monsters', id })),
+      ...pinned,
     ];
   });
 
@@ -441,6 +456,9 @@ describe('boss d’un guide — la référence résout, vivante ou épinglée', 
     // un chiffre gelé ici finirait par échouer pour la bonne raison — la leçon
     // du comptage de `tags.test.ts`. Ce seuil ne garde qu'une chose : que le
     // scan n'a pas silencieusement cessé de trouver les références.
+    // CE QU'IL NE GARDE PAS : que la branche `pinned` trouve encore quelque chose —
+    // elle est minoritaire en nombre, et zéro pin est un état éditorial légitime
+    // (plus aucun boss épinglé). Un plancher dessus échouerait pour une bonne raison.
     expect(refs.length).toBeGreaterThan(50);
   });
 

@@ -7,6 +7,27 @@
 
 ## 2026-08-12
 
+- **Premier passage BOUT EN BOUT du mécanisme, sur du contenu réel** — Sevih a
+  re-versionné les trois Prototype EX-78 (les trois difficultés du Joint
+  Challenge sont TROIS monstres distincts, pas trois fois le même) avec le geste
+  complet. Ce qu'il a produit, sans qu'aucun fichier soit édité à la main :
+  trois archives auto-suffisantes (`4548161@1`, `4548171@1`, `4548181@1`, ref
+  `31a5203`, sources figées) et la clé `pinned` posée toute seule dans les DEUX
+  `config.json` de version qui rejouent ce combat (2025-10 et 2026-03).
+  Vérifié sur le diff réel : `meta.json` NON touché — la règle `kept` tient en
+  conditions réelles, et pas seulement en test. La version 2024-12 n'a pas de
+  `group` et n'a donc rien reçu : correct, elle ne montre pas ce combat.
+- **La garde des références de boss lit AUSSI les `pinned`** — trou ouvert le
+  jour même : elle ne scannait que `meta.bossId` et `meta.monsters`, or un guide
+  versionné ne nomme pas son boss, donc 100 % de ses références épinglées
+  passaient à côté. Le mode de panne n'a rien de théorique : déposer les
+  `config.json` sans committer `data/generated/monster-archive/` laisse des pins
+  qui ne résolvent nulle part, et le rendu ne l'apprend qu'au build de prod.
+  CONTRE-ÉPREUVE faite (archive retirée → la garde rougit en nommant le fichier
+  manquant et la cause). Ce que le plancher `> 50` ne garde PAS est écrit dans le
+  test : zéro pin reste un état éditorial légitime, un seuil dessus échouerait
+  pour une bonne raison. 1508 tests verts.
+
 - **La liste `pinned` : les guides qui ne NOMMENT pas leur boss savent l'épingler**
   — le dernier morceau, et celui qui rend tout le reste utile.
   Un guide versionné (joint-challenge, world-boss, guild-raid) désigne un COMBAT :
