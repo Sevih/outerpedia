@@ -178,6 +178,18 @@ export function getBossView(id: string): BossView | undefined {
     ...(entry?.sources?.curatedMonsterSkills
       ? { curation: entry.sources.curatedMonsterSkills }
       : {}),
+    // Le tampon d'archive voyage AVEC la vue : la carte est la seule à pouvoir
+    // dire « ceci est figé », et elle ne relira pas le disque pour le savoir.
+    ...(entry
+      ? {
+          archived: {
+            version: entry.version,
+            ...(entry.gameVersion ? { gameVersion: entry.gameVersion } : {}),
+            committedAt: entry.committedAt,
+            ...(entry.label ? { label: entry.label } : {}),
+          },
+        }
+      : {}),
   });
 }
 

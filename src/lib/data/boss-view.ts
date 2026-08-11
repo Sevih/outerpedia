@@ -100,6 +100,25 @@ export interface BossView {
   spawns: MonsterSpawn[];
   dungeons: Record<string, DungeonRef>;
   modes: Record<string, LangDict>;
+  /**
+   * Présent SEULEMENT si la vue est figée — c'est ce qui rend l'épinglage
+   * VISIBLE. Sans ça, un boss archivé et un boss vivant sont pixel pour pixel
+   * identiques à l'écran : rien ne dit au lecteur (ni à l'éditeur) laquelle des
+   * deux il regarde, et une carte périmée se lit comme à jour.
+   */
+  archived?: BossArchiveStamp;
+}
+
+/** Ce qu'une vue figée doit pouvoir dire d'elle-même. */
+export interface BossArchiveStamp {
+  /** Numéro d'archive — `<id>@<version>`. */
+  version: number;
+  /** `resVersion` du jeu à la capture, si connue (archives anciennes : absente). */
+  gameVersion?: string;
+  /** Date ISO du commit source. */
+  committedAt: string;
+  /** Note humaine de l'archive (« avant la maj 1.11 »), si posée. */
+  label?: string;
 }
 
 /**
@@ -114,6 +133,12 @@ export interface BossViewSources extends KitSources {
   modes?: Record<string, LangDict>;
   /** Curation d'affichage des kits monstres — absente = celle du live. */
   curation?: MonsterKitCuration;
+  /**
+   * Provenance de l'archive, quand la vue en vient. Passée par les sources et
+   * pas déduite ici : `buildBossView` ne lit pas le disque, et c'est ce qui la
+   * garde testable à sec.
+   */
+  archived?: BossArchiveStamp;
 }
 
 /** Un effet fusionné réduit à ce qu'un statut affiche. */
@@ -218,6 +243,7 @@ export function buildBossView(
     spawns,
     dungeons,
     modes,
+    ...(src.archived ? { archived: src.archived } : {}),
   };
 }
 

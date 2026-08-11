@@ -120,6 +120,15 @@ export async function BossEncounters({
    * montrer dans leur état FIGÉ plutôt que vivant. Liste CREUSE — un monstre
    * absent reste live. C'est le seul moyen pour un guide qui désigne un COMBAT :
    * il ne nomme aucun monstre, il n'a donc aucun id à réécrire chez lui.
+   *
+   * CE QUI N'EST PAS ÉPINGLÉ, ET C'EST VOULU (décision arbitrée avec Sevih le
+   * 11/08) : la COMPOSITION de la rencontre. Les monstres présents, leurs vagues
+   * et leurs paliers restent lus dans `encounters.json` VIVANT. Si le jeu ajoute
+   * une phase à un combat, un vieux guide doit la MONTRER plutôt que la cacher —
+   * un lecteur qui prépare ce combat aujourd'hui le fera avec la phase en face
+   * de lui. Le pin ne fige que l'ÉTAT d'un monstre (stats, kit, libellés), pas
+   * la liste de qui se bat. L'archive porte quand même le snapshot des donjons,
+   * si on change d'avis un jour.
    */
   pinned,
 }: {

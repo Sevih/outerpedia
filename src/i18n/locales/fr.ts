@@ -679,6 +679,11 @@ const fr: Record<TranslationKey, string> = {
   'guides.boss_display.rank_prev': 'Palier précédent',
   'guides.boss_display.rank_next': 'Palier suivant',
   'guides.boss_display.add': 'Renfort',
+  'guides.boss_display.archived': 'Boss archivé',
+  'guides.boss_display.archived_version':
+    'Affiché tel qu’il était en version {version} du jeu — archivé le {date}. Le boss actuel peut différer.',
+  'guides.boss_display.archived_date':
+    'Affiché tel qu’il était lors de l’archivage, le {date}. Le boss actuel peut différer.',
   'guides.difficulty.title': 'Difficulté',
   'guides.difficulty.stage': 'Étape {n}',
   'guides.difficulty.stage_range': 'Étapes {from}–{to}',

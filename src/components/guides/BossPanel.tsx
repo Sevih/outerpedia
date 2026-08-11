@@ -34,6 +34,20 @@ import { BossRankProvider, BossLevel } from './BossRank';
 import { BossStats, type StatLabel } from './BossStats';
 import { Disclosure } from '@/components/ui/Disclosure';
 
+/**
+ * Date d'archivage, au format long de la langue. `committedAt` porte l'HEURE du
+ * commit : on n'en garde que le jour — la minute où le fichier a été écrit n'est
+ * une information pour personne, et l'afficher ferait croire à une précision qui
+ * n'a pas de sens (l'archive décrit un état du JEU, pas un instant).
+ */
+function archiveDate(iso: string, lang: Lang): string {
+  return new Date(iso).toLocaleDateString(LANGUAGES[lang].htmlLang, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
 export async function BossCard({
   monsterId,
   spawns: modeSpawns,
@@ -136,6 +150,34 @@ export async function BossCard({
           `lg:` (qui mesure le VIEWPORT) laisserait la demi-carte étaler ses stats
           sur une ligne prévue pour le double : elles s'écrasaient. */}
       <section className="@container space-y-4">
+        {/* BOSS FIGÉ : le dire AVANT de le montrer. Sans ce bandeau, une carte
+            archivée et une carte vivante sont identiques à l'écran — le lecteur
+            prend un boss d'il y a six mois pour l'actuel, et l'éditeur ne peut
+            même pas vérifier ce que sa version affiche.
+            PAR CARTE, et c'est la seule place juste : la liste `pinned` est
+            CREUSE, donc une rencontre peut mêler un boss figé et ses renforts
+            vivants. Un bandeau posé en tête de section mentirait sur la moitié
+            des cartes qu'il surplombe. */}
+        {view.archived && (
+          <p className="border-warn/40 bg-warn/5 text-warn rounded-md border px-3 py-2 text-xs">
+            <span className="font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
+              {t('guides.boss_display.archived')}
+            </span>{' '}
+            {/* La note humaine de l'archive PRIME quand elle existe : « avant la
+                refonte de la maj 1.11 » dit au lecteur ce qu'un numéro de
+                version ne lui dira jamais. */}
+            {view.archived.label ??
+              (view.archived.gameVersion
+                ? t('guides.boss_display.archived_version', {
+                    version: view.archived.gameVersion,
+                    date: archiveDate(view.archived.committedAt, lang),
+                  })
+                : t('guides.boss_display.archived_date', {
+                    date: archiveDate(view.archived.committedAt, lang),
+                  }))}
+          </p>
+        )}
+
         {/* EN-TÊTE : qui est ce boss — icône, nom, élément, classe, et son NIVEAU
             au palier courant. Le niveau se lit là parce que c'est là qu'on le
             cherche (le jeu l'écrit au même endroit) ; il suit la glissière, d'où

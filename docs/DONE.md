@@ -7,6 +7,33 @@
 
 ## 2026-08-12
 
+- **Un boss figé le DIT** — dernier item de l'épinglage, et celui que le premier
+  usage réel a rendu urgent : Sevih, devant ses trois versions de guide, ne
+  pouvait pas savoir laquelle montrait quoi. Une carte archivée et une carte
+  vivante étaient identiques au pixel près. Un lecteur prenait donc un boss d'il
+  y a six mois pour l'actuel, et l'éditeur n'avait aucun moyen de vérifier son
+  propre épinglage autrement qu'en lisant le JSON.
+  La vue porte désormais un TAMPON (`BossView.archived` : numéro d'archive,
+  version du jeu, date, note humaine), rempli par `getBossView` depuis l'entrée
+  et recopié par `buildBossView` depuis ses sources — la fonction reste PURE, le
+  tampon voyage avec les données au lieu d'être relu au disque par la carte.
+  Bandeau PAR CARTE, et c'est la seule place juste : la liste `pinned` est
+  CREUSE, donc une rencontre peut mêler un boss figé et ses renforts vivants. Un
+  bandeau en tête de section mentirait sur la moitié des cartes qu'il surplombe.
+  La note humaine de l'archive (`label`) PRIME sur le numéro de version : « avant
+  la refonte de la maj 1.11 » dit ce qu'un `1.10.805` ne dira jamais.
+  Trois clés dans les cinq langues, la phrase ENTIÈRE par cas (avec ou sans
+  version de jeu) et jamais des fragments recollés — une langue qui place la date
+  avant la version n'aurait aucun moyen de le dire.
+  CONTRE-ÉPREUVE : la vue vivante n'a pas de tampon. Sans elle, un tampon posé
+  inconditionnellement passerait le test tout en marquant « archivé » toutes les
+  cartes du site. 1510 tests verts.
+  La section `🧊` de TODO.md est retirée : le mécanisme est complet. Sa dernière
+  décision sans trace ailleurs — la COMPOSITION de la rencontre reste LIVE, un
+  vieux guide doit MONTRER une phase ajoutée depuis plutôt que la cacher — est
+  descendue dans le code, sur la prop `pinned` de `BossEncounters`, là où on se
+  pose la question.
+
 - **Premier passage BOUT EN BOUT du mécanisme, sur du contenu réel** — Sevih a
   re-versionné les trois Prototype EX-78 (les trois difficultés du Joint
   Challenge sont TROIS monstres distincts, pas trois fois le même) avec le geste

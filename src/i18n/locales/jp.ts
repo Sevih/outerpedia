@@ -657,6 +657,11 @@ const jp: Record<TranslationKey, string> = {
   'guides.boss_display.rank_prev': '前のランク',
   'guides.boss_display.rank_next': '次のランク',
   'guides.boss_display.add': '取り巻き',
+  'guides.boss_display.archived': 'アーカイブ済みのボス',
+  'guides.boss_display.archived_version':
+    'ゲームバージョン {version} 時点の状態を表示しています（{date} にアーカイブ）。現在のボスとは異なる場合があります。',
+  'guides.boss_display.archived_date':
+    '{date} にアーカイブされた時点の状態を表示しています。現在のボスとは異なる場合があります。',
   'guides.difficulty.title': '難易度',
   'guides.difficulty.stage': '{n}段階',
   'guides.difficulty.stage_range': '{from}〜{to}段階',

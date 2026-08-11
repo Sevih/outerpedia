@@ -225,6 +225,27 @@ describe('id ÉPINGLÉ — l’état figé', () => {
     expect(v.id).toBe(PIN);
   });
 
+  it('la vue figée porte son TAMPON — de quoi le dire au lecteur', () => {
+    // Sans lui, une carte archivée et une carte vivante sont identiques à
+    // l'écran : rien ne distingue un boss d'il y a six mois de l'actuel.
+    const v = getBossView(PIN)!;
+    expect(v.archived).toEqual({
+      version: 1,
+      committedAt: '2026-01-01T00:00:00Z',
+      label: 'avant la maj 1.11',
+    });
+    // `gameVersion` ABSENT de l'archive ⇒ absent du tampon, pas inventé : c'est
+    // le cas des archives d'avant que `versionMonster` la relève, et la carte
+    // doit pouvoir choisir sa phrase là-dessus.
+    expect(v.archived).not.toHaveProperty('gameVersion');
+  });
+
+  it('CONTRE-ÉPREUVE : la vue VIVANTE n’a pas de tampon', () => {
+    // Un tampon posé inconditionnellement satisferait le test précédent tout en
+    // marquant « archivé » toutes les cartes du site.
+    expect(getBossView(LIVE_ID)!.archived).toBeUndefined();
+  });
+
   it('un pin SANS archive lève en nommant le fichier attendu', () => {
     // Plutôt qu'un `undefined` qui ferait dire à l'appelant « absent de
     // monsters.json » — faux, et qui envoie chercher au mauvais endroit.

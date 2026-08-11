@@ -672,6 +672,13 @@ const en = {
   'guides.boss_display.rank_prev': 'Previous rank',
   'guides.boss_display.rank_next': 'Next rank',
   'guides.boss_display.add': 'Add',
+  // BOSS FIGÉ — la phrase entière par cas, jamais des fragments recollés : une
+  // langue qui place la date avant la version n'aurait aucun moyen de le dire.
+  'guides.boss_display.archived': 'Archived boss',
+  'guides.boss_display.archived_version':
+    'Shown as it was in game version {version} — archived on {date}. The live boss may differ.',
+  'guides.boss_display.archived_date':
+    'Shown as it was when archived on {date}. The live boss may differ.',
   // DIFFICULTÉS — accrochées aux CLÉS stables du jeu (`difficulty.key`). Le jeu
   // fournit son propre libellé en en/jp/kr/zh et JAMAIS en français : ces
   // entrées sont le repli, et la seule source possible côté FR.

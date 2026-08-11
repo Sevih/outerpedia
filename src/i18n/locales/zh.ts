@@ -636,6 +636,10 @@ const zh: Record<TranslationKey, string> = {
   'guides.boss_display.rank_prev': '上一评级',
   'guides.boss_display.rank_next': '下一评级',
   'guides.boss_display.add': '随从',
+  'guides.boss_display.archived': '已归档的首领',
+  'guides.boss_display.archived_version':
+    '显示的是游戏版本 {version} 时的状态（{date} 归档）。当前版本的首领可能已不同。',
+  'guides.boss_display.archived_date': '显示的是 {date} 归档时的状态。当前版本的首领可能已不同。',
   'guides.difficulty.title': '难度',
   'guides.difficulty.stage': '第{n}阶段',
   'guides.difficulty.stage_range': '第{from}–{to}阶段',

@@ -61,32 +61,6 @@
       ToolShell et sur la landing /tools — l'allonger pour le SEO change
       l'écran. Options : découpler (clé meta dédiée) ou assumer le texte court.
 
-## 🧊 Épinglage des boss versionnés (`TODO(guides)`)
-
-> Cadrage ARBITRÉ avec Sevih le 11/08, étape 1 FAITE (cf. DONE). Le geste
-> « Versionner » écrit `monster-archive/<id>@<n>.json` depuis longtemps ; ce qu'il
-> manque, c'est que versionner mette à jour les références tout seul.
-> DÉCISIONS PRISES, à ne pas re-débattre : le pin d'un guide VERSIONNÉ vit dans le
-> `config.json` de la version (seul endroit qui peut différer d'une version à
-> l'autre), sous forme de LISTE creuse de clés d'archive — un groupe pointe
-> plusieurs monstres et une maj n'en touche souvent qu'un. `meta.bossId` reste
-> LIVE (H1, portrait, jointure saison = l'entité courante). La COMPOSITION de la
-> rencontre reste live elle aussi : si le jeu ajoute une phase, un vieux guide
-> doit la montrer plutôt que la cacher — l'archive garde le snapshot si on change
-> d'avis. Absence de pin = live, donc zéro migration sur les 16 guides existants.
-
-> LE MÉCANISME EST COMPLET (cf. DONE 11 et 12/08) : le rendu lit un id épinglé,
-> l'archive est AUTO-SUFFISANTE (elle fige ses sources, donc un boss épinglé garde
-> ses libellés d'époque), la garde est posée, et « Versionner » ré-épingle tout
-> seul — en réécrivant `meta.bossId`/`meta.monsters` des guides qui NOMMENT le
-> monstre, et en posant `pinned` dans le `config.json` des versions de ceux qui
-> désignent un COMBAT (joint-challenge, world-boss, guild-raid). Ne reste que le
-> confort de lecture ci-dessous.
-
-- [ ] _(optionnel)_ **Bandeau lecteur** « boss tel qu'avant la maj X » sur la
-      carte d'un guide épinglé : l'archive porte déjà `label`, `gameVersion` et
-      `committedAt`. Sans ça, un guide figé est indiscernable d'un guide à jour.
-
 ---
 
 ## 📌 Notes de référence (à ne pas perdre)

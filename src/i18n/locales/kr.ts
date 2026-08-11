@@ -650,6 +650,11 @@ const kr: Record<TranslationKey, string> = {
   'guides.boss_display.rank_prev': '이전 등급',
   'guides.boss_display.rank_next': '다음 등급',
   'guides.boss_display.add': '부하 몬스터',
+  'guides.boss_display.archived': '보관된 보스',
+  'guides.boss_display.archived_version':
+    '게임 버전 {version} 당시의 상태를 표시합니다({date} 보관). 현재 보스와 다를 수 있습니다.',
+  'guides.boss_display.archived_date':
+    '{date}에 보관된 당시의 상태를 표시합니다. 현재 보스와 다를 수 있습니다.',
   'guides.difficulty.title': '난이도',
   'guides.difficulty.stage': '{n}단계',
   'guides.difficulty.stage_range': '{from}~{to}단계',
