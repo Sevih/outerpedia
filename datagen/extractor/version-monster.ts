@@ -21,7 +21,14 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { writeJson } from '../lib/json';
-import type { Glossaries, MonsterArchiveEntry } from '../contracts';
+import { ARCHIVED_GLOSSARY_KEYS } from '../contracts';
+import type {
+  EffectCurated,
+  Glossaries,
+  MonsterArchiveEntry,
+  MonsterArchiveSources,
+  MonsterKitCuration,
+} from '../contracts';
 import type { Monster } from './specs/monster';
 import type { DungeonRef } from '../generators/encounters';
 import type { LangDict } from '../lib/lang';
@@ -33,6 +40,19 @@ const MONSTER_SKILLS = 'data/generated/monster-skills.json';
 const ENCOUNTERS = 'data/generated/encounters.json';
 const GLOSSARIES = 'data/generated/glossaries.json';
 const GAME_VERSION = 'data/generated/game-version.json';
+const CURATED_EFFECTS = 'data/curated/effects.json';
+const CURATED_MONSTER_SKILLS = 'data/curated/monster-skills.json';
+
+/** JSON d'une réf, ou `undefined` — un fichier curé peut légitimement manquer. */
+function readJsonAt<T>(ref: string, path: string): T | undefined {
+  const raw = readAt(ref, path);
+  if (!raw) return undefined;
+  try {
+    return JSON.parse(raw) as T;
+  } catch {
+    return undefined;
+  }
+}
 
 /** Contenu d'un fichier à une réf git (`undefined` si absent de la réf). */
 function gitShow(ref: string, path: string): string | undefined {
@@ -121,13 +141,12 @@ export async function versionMonster(
   // Localisation FIGÉE avec l'entité : snapshot des donjons référencés par ses
   // spawns (+ titres de modes) — l'archive reste lisible même si le donjon
   // disparaît du live (l'événement retiré, le stage re-niveauté…).
+  const glossaries = readJsonAt<Glossaries>(ref, GLOSSARIES);
   const dungeons: Record<string, DungeonRef> = {};
   const modes: Record<string, LangDict> = {};
   if (monster.spawns?.length) {
-    const encRaw = readAt(ref, ENCOUNTERS);
-    const allDungeons = encRaw ? (JSON.parse(encRaw) as Record<string, DungeonRef>) : {};
-    const glossRaw = readAt(ref, GLOSSARIES);
-    const allModes = glossRaw ? ((JSON.parse(glossRaw) as Glossaries).modes ?? {}) : {};
+    const allDungeons = readJsonAt<Record<string, DungeonRef>>(ref, ENCOUNTERS) ?? {};
+    const allModes = glossaries?.modes ?? {};
     for (const s of monster.spawns) {
       const d = allDungeons[s.dungeon];
       if (!d) continue;
@@ -135,6 +154,31 @@ export async function versionMonster(
       if (allModes[d.mode]) modes[d.mode] = allModes[d.mode];
     }
   }
+
+  // SOURCES DE RÉSOLUTION, à la MÊME réf que l'entité. C'est le point de tout
+  // l'exercice : figer le boss sans figer ce qui NOMME ses buffs le laisserait
+  // s'afficher avec les libellés du nouveau. Lues à `ref` et pas au disque —
+  // en dev, l'auto-apply a déjà pu écraser le working tree avec la nouvelle maj.
+  //
+  // Rien d'écrit du tout si le glossaire manque à cette réf : des sources
+  // VIDES figeraient un rendu appauvri (chips muettes, immunités en rouge),
+  // alors que leur absence fait simplement retomber le rendu sur le live —
+  // le comportement que les archives ont toujours eu.
+  const sources: MonsterArchiveSources | undefined = glossaries
+    ? {
+        glossary: Object.fromEntries(
+          ARCHIVED_GLOSSARY_KEYS.filter((k) => glossaries[k] !== undefined).map((k) => [
+            k,
+            glossaries[k],
+          ]),
+        ),
+        curatedEffects: readJsonAt<Record<string, EffectCurated>>(ref, CURATED_EFFECTS) ?? {},
+        ...(() => {
+          const c = readJsonAt<MonsterKitCuration>(ref, CURATED_MONSTER_SKILLS);
+          return c ? { curatedMonsterSkills: c } : {};
+        })(),
+      }
+    : undefined;
 
   // Numéro de version : max existant + 1 (l'archive est append-only).
   const dir = ARCHIVE();
@@ -165,6 +209,7 @@ export async function versionMonster(
     skills,
     ...(Object.keys(dungeons).length ? { dungeons } : {}),
     ...(Object.keys(modes).length ? { modes } : {}),
+    ...(sources ? { sources } : {}),
   };
   const file = `data/generated/monster-archive/${id}@${n}.json`;
   await writeJson(resolve(file), entry);

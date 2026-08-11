@@ -189,6 +189,7 @@ export type {
 
 import type { LangDict } from '../lib/lang';
 import type { Effect } from '../lib/effects';
+import type { EffectCurated } from '../curated/effects';
 import type { Character, StatScale } from '../extractor/specs/character';
 import type { Monster } from '../extractor/specs/monster';
 import type { DungeonRef, GuildRaidGeas, RankOption, RewardTable } from '../generators/encounters';
@@ -365,6 +366,70 @@ export interface MonsterArchiveEntry {
    */
   dungeons?: Record<string, DungeonRef>;
   modes?: Record<string, LangDict>;
+  /**
+   * SOURCES DE RÉSOLUTION figées avec l'entité. Un skill ne stocke que des
+   * RÉFÉRENCES d'effets (`tooltip`, `label`, `type`) : le nom, l'icône et la
+   * description sont rejoués à l'affichage. Sans ce snapshot, un boss épinglé
+   * afficherait les libellés d'AUJOURD'HUI et perdrait les chips dont la
+   * référence a disparu depuis — l'archive ne serait figée qu'à moitié.
+   *
+   * Absent = archive d'avant ce mécanisme : le rendu retombe sur le live (cf.
+   * `getBossView`), ce qui reste le comportement qu'elle a toujours eu.
+   */
+  sources?: MonsterArchiveSources;
+}
+
+/**
+ * Sections du glossaire dont dépend le RENDU d'un boss : les cinq index qui
+ * disent ce qu'une référence d'effet désigne, plus les quatre tables de la carte
+ * (échelles de stats, quirks de compte, passifs de palier, titres de modes). Le
+ * reste (geas, filtres, cadeaux, familles story…) ne sert pas ici et resterait
+ * mort dans chaque archive.
+ *
+ * C'est un CONTRAT, pas un détail du versionneur : le rendu d'un boss épinglé
+ * ne dispose de rien d'autre. Qu'elles suffisent est vérifié par un test
+ * (`boss-view.test.ts`), pas espéré — le jour où la carte consultera une
+ * dixième section, il tombera au lieu de laisser passer une archive muette.
+ */
+export const ARCHIVED_GLOSSARY_KEYS = [
+  'effects',
+  'effectByTooltip',
+  'effectByLabel',
+  'effectByKey',
+  'tooltipKinds',
+  'statScales',
+  'bossQuirkMods',
+  'rankOptions',
+  'modes',
+] as const satisfies readonly (keyof Glossaries)[];
+
+/** Ce dont l'affichage d'un boss a besoin EN PLUS de l'entité et de ses skills. */
+export interface MonsterArchiveSources {
+  /**
+   * Sections du glossaire dont dépend le rendu d'un boss (cf. `GLOSSARY_KEYS`).
+   * Gardées ENTIÈRES : déduire les seuls effets utiles demanderait de tracer la
+   * résolution, et une restriction ratée produirait une archive silencieusement
+   * incomplète — le pire des résultats pour un mécanisme dont tout l'intérêt est
+   * la fidélité. Le glossaire complet ne pèse que ~270 Ko, et versionner est un
+   * geste rare.
+   */
+  glossary: Partial<Glossaries>;
+  /** `data/curated/effects.json` — overrides et créations d'effets (~12 Ko). */
+  curatedEffects: Record<string, EffectCurated>;
+  /** `data/curated/monster-skills.json` — curation d'affichage des kits (~7 Ko). */
+  curatedMonsterSkills?: MonsterKitCuration;
+}
+
+/**
+ * Curation d'AFFICHAGE des kits monstres — déplacement (`chipOwner`), ajout
+ * (`chipAdd`) et masquage (`chipHide`) de chips. Le contrat vit ici parce que
+ * l'archive le fige ; la doc d'usage est dans `src/lib/skill-view.ts`, qui le
+ * ré-exporte.
+ */
+export interface MonsterKitCuration {
+  chipOwner?: Record<string, string | string[]>;
+  chipAdd?: Record<string, string[]>;
+  chipHide?: Record<string, string[]>;
 }
 /**
  * `data/generated/items.json` — CATALOGUE UNIFIÉ servi : items de jeu +

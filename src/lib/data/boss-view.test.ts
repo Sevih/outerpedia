@@ -11,6 +11,7 @@
  * Les ids sont DÉRIVÉS de la donnée committée, jamais écrits en dur.
  */
 import { describe, expect, it } from 'vitest';
+import { ARCHIVED_GLOSSARY_KEYS } from '@contracts';
 import type { EffectCurated, Monster } from '@contracts';
 import { loadDataJson } from '@/lib/data/disk';
 import { liveKitSources } from '@/lib/skill-view';
@@ -104,6 +105,42 @@ describe('buildBossView', () => {
     const v = viewOf(richId);
     const used = new Set(v.spawns.map((s) => s.dungeon));
     expect(Object.keys(v.dungeons).every((d) => used.has(d))).toBe(true);
+  });
+
+  it('le rendu ne consulte QUE les sections de glossaire que l’archive fige', () => {
+    // LE contrat de `ARCHIVED_GLOSSARY_KEYS`. Une archive ne porte que ces
+    // sections et ne se complète PAS avec le live : si la carte se mettait un
+    // jour à lire une dixième section, tous les boss épinglés l'afficheraient
+    // vide — en silence. Ce test tombe à ce moment-là, pas six mois après.
+    // Vérifié sur TOUT le catalogue : une section manquante peut ne se voir que
+    // sur les quelques boss qui l'exercent.
+    const full = liveKitSources();
+    const kept = Object.fromEntries(
+      ARCHIVED_GLOSSARY_KEYS.filter((k) => full.g[k] !== undefined).map((k) => [k, full.g[k]]),
+    ) as unknown as typeof full.g;
+    const trimmed = { g: kept, fx: { ...full.fx, effects: kept.effects } };
+    const diffs = Object.keys(monsters).filter((id) => {
+      const m = getMonster(id)!;
+      const skills = getMonsterSkills(m, id);
+      const a = buildBossView(id, m, skills, sources());
+      const b = buildBossView(id, m, skills, sources(trimmed));
+      return JSON.stringify(a) !== JSON.stringify(b);
+    });
+    expect(diffs).toEqual([]);
+
+    // …et ce test MORD : priver la vue du catalogue d'effets doit la changer.
+    // Sans cette contre-épreuve, la comparaison ci-dessus passerait aussi bien
+    // si les sources n'étaient jamais lues.
+    // (Mesuré au passage : vider `effectByTooltip` seul ne change RIEN sur bien
+    // des boss — leurs réfs de tooltip SONT déjà des ids d'effets, et
+    // `toChipEffect` retombe sur la résolution directe. L'index reste figé par
+    // prudence, mais il ne ferait pas une contre-épreuve honnête.)
+    const amputated = { g: { ...kept, effects: {} }, fx: { ...trimmed.fx, effects: {} } };
+    const m = getMonster(richId)!;
+    const skills = getMonsterSkills(m, richId);
+    expect(JSON.stringify(buildBossView(richId, m, skills, sources(amputated)))).not.toBe(
+      JSON.stringify(buildBossView(richId, m, skills, sources())),
+    );
   });
 
   it('un skill répété ne compte qu’une fois', () => {

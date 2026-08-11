@@ -15,7 +15,7 @@ import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { loadDataJson } from '@/lib/data/disk';
 import { buildBossView, type BossView } from '@/lib/data/boss-view';
-import { liveKitSources } from '@/lib/skill-view';
+import { liveKitSources, type KitSources } from '@/lib/skill-view';
 import { img } from '@/lib/images';
 // Type SEUL (effacé à la compilation) : le contrat de props de la vignette vit
 // avec elle, pas dupliqué ici.
@@ -140,10 +140,51 @@ export function getBossView(id: string): BossView | undefined {
   if (!monster) return undefined;
   const entry = isPinned(id) ? archived(id) : undefined;
   return buildBossView(id, monster, getMonsterSkills(monster, id), {
-    ...liveKitSources(),
+    ...bossKitSources(entry),
     dungeons: entry?.dungeons ?? DUNGEONS(),
     ...(entry?.modes ? { modes: entry.modes } : {}),
+    ...(entry?.sources?.curatedMonsterSkills
+      ? { curation: entry.sources.curatedMonsterSkills }
+      : {}),
   });
+}
+
+/**
+ * D'où le boss tire le SENS de ses références d'effets. Une archive qui porte
+ * ses sources gouverne seule : on ne complète PAS avec le live, sinon la moitié
+ * figée et la moitié courante se mélangeraient sans qu'on puisse dire laquelle
+ * on regarde. Que les sections figées suffisent est vérifié par un test, pas
+ * espéré (`boss-view.test.ts` : « le rendu ne consulte que les sections figées »).
+ *
+ * Une archive SANS sources est d'avant ce mécanisme : elle retombe sur le live,
+ * ce qui reste exactement le comportement qu'elle a toujours eu.
+ */
+function bossKitSources(entry?: MonsterArchiveEntry): KitSources {
+  const s = entry?.sources;
+  if (!s) return liveKitSources();
+  // Index manquant → index VIDE, jamais `undefined` : la chaîne de résolution
+  // indexe ces tables sans les tester (`g.effectByTooltip[ref]`), et une archive
+  // écrite par une version antérieure du versionneur peut ne pas toutes les
+  // porter. Un guide qui plante au rendu pour une section absente serait un
+  // très mauvais échange — une réf non résolue se voit déjà à l'écran.
+  const g = {
+    ...s.glossary,
+    effects: s.glossary.effects ?? {},
+    effectByTooltip: s.glossary.effectByTooltip ?? {},
+    effectByLabel: s.glossary.effectByLabel ?? {},
+    effectByKey: s.glossary.effectByKey ?? { buff: {}, debuff: {} },
+    statScales: s.glossary.statScales ?? {},
+  } as Glossaries;
+  return {
+    g,
+    fx: {
+      effects: g.effects,
+      byTooltip: g.effectByTooltip,
+      byLabel: g.effectByLabel,
+      byKey: g.effectByKey,
+      curated: s.curatedEffects,
+    },
+  };
 }
 
 // Échelles de stats, quirks de compte, passifs de palier et rencontres du

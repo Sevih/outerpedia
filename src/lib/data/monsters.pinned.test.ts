@@ -23,10 +23,28 @@ import type { Monster, MonsterArchiveEntry, Skill } from '@contracts';
 const dict = (en: string) => ({ en, jp: en, kr: en, zh: en });
 const monster = (name: string, skills: string[]) =>
   ({ name: dict(name), skills, element: 'fire', icon: 'MT_X' }) as unknown as Monster;
-const skill = (name: string) => ({ name: dict(name) }) as unknown as Skill;
 
 const LIVE_ID = '4086023';
 const PIN = `${LIVE_ID}@1`;
+
+/**
+ * Une réf de statut et un id d'effet que le VRAI glossaire ne connaît pas : ils
+ * ne peuvent donc être résolus que par les sources de l'archive. C'est ce qui
+ * rend la démonstration sans ambiguïté.
+ */
+const TT = 'TOOLTIP-DE-TEST';
+const EFF = 'EFFET-DE-TEST';
+
+/** Un skill qui applique un statut nommé, donc une chip à résoudre. */
+const chipSkill = (name: string) =>
+  ({
+    id: 's1',
+    type: 'monster_1',
+    name: dict(name),
+    maxLevel: 1,
+    levels: [{ level: 1 }],
+    effects: [{ type: 'BT_TEST', family: 'stat', category: 'buff', tooltip: TT, target: 'enemy' }],
+  }) as unknown as Skill;
 
 let root: string;
 
@@ -34,15 +52,32 @@ beforeAll(() => {
   root = mkdtempSync(join(tmpdir(), 'monsters-pinned-'));
   const gen = join(root, 'data/generated');
   mkdirSync(join(gen, 'monster-archive'), { recursive: true });
+  mkdirSync(join(root, 'data/curated'), { recursive: true });
 
   // Table VIVANTE : le boss après sa refonte.
   writeFileSync(
     join(gen, 'monsters.json'),
     JSON.stringify({ [LIVE_ID]: monster('Dahlia (live)', ['s1']) }),
   );
-  writeFileSync(join(gen, 'monster-skills.json'), JSON.stringify({ s1: skill('Skill LIVE') }));
+  writeFileSync(join(gen, 'monster-skills.json'), JSON.stringify({ s1: chipSkill('Skill LIVE') }));
+  // Le glossaire du LIVE est complet mais ignore `TT` : rien ne le résout hors
+  // de l'archive.
+  writeFileSync(
+    join(gen, 'glossaries.json'),
+    JSON.stringify({
+      effects: {},
+      effectByTooltip: {},
+      effectByLabel: {},
+      effectByKey: { buff: {}, debuff: {} },
+      statScales: {},
+      modes: {},
+    }),
+  );
+  writeFileSync(join(gen, 'encounters.json'), JSON.stringify({}));
+  writeFileSync(join(root, 'data/curated/monster-skills.json'), JSON.stringify({}));
 
-  // ARCHIVE : le même boss AVANT la refonte — même id de skill, autre contenu.
+  // ARCHIVE : le même boss AVANT la refonte — même id de skill, autre contenu,
+  // et SES PROPRES sources de résolution (ce qui nomme ses buffs).
   const entry: MonsterArchiveEntry = {
     id: LIVE_ID,
     version: 1,
@@ -50,8 +85,27 @@ beforeAll(() => {
     committedAt: '2026-01-01T00:00:00Z',
     label: 'avant la maj 1.11',
     monster: monster('Dahlia (figée)', ['s1']),
-    skills: { s1: skill('Skill FIGÉ') },
-  };
+    skills: { s1: chipSkill('Skill FIGÉ') },
+    sources: {
+      glossary: {
+        effects: {
+          [EFF]: {
+            id: EFF,
+            name: dict('Statut D’ÉPOQUE'),
+            desc: dict(''),
+            icon: '',
+            isDebuff: false,
+            origin: 'tooltip',
+            tooltips: [TT],
+          },
+        },
+        effectByTooltip: { [TT]: EFF },
+        effectByLabel: {},
+        effectByKey: { buff: {}, debuff: {} },
+      },
+      curatedEffects: {},
+    },
+  } as unknown as MonsterArchiveEntry;
   writeFileSync(join(gen, `monster-archive/${PIN}.json`), JSON.stringify(entry));
 
   vi.spyOn(process, 'cwd').mockReturnValue(root);
@@ -64,7 +118,7 @@ afterAll(() => {
 
 // APRÈS la redirection : le module lit au disque à chaque appel, mais on garde
 // l'ordre du bac à sable des stores — c'est l'habitude du dépôt.
-const { getMonster, getMonsterSkills } = await import('./monsters');
+const { getMonster, getMonsterSkills, getBossView } = await import('./monsters');
 
 describe('id VIVANT — rien ne change', () => {
   it('est servi par la table vivante', () => {
@@ -98,6 +152,26 @@ describe('id ÉPINGLÉ — l’état figé', () => {
     // Les deux coexistent : c'est tout l'intérêt (une version du guide décrit
     // l'ancien état, la suivante le nouveau).
     expect(getMonster(LIVE_ID)?.name.en).toBe('Dahlia (live)');
+  });
+
+  it('résout ses statuts avec les SOURCES de l’archive, pas le glossaire courant', () => {
+    // Le cœur de l'affaire. Un skill ne stocke qu'une RÉFÉRENCE de statut : sans
+    // les sources figées, le boss d'époque emprunterait au glossaire
+    // d'aujourd'hui — libellés actuels, et chips muettes pour les réfs
+    // supprimées depuis. Ici le glossaire courant ignore `TT` : seul le pin sait
+    // le nommer.
+    const pinned = getBossView(PIN)!;
+    expect(pinned.statuses[TT]?.name.en).toBe('Statut D’ÉPOQUE');
+
+    const live = getBossView(LIVE_ID)!;
+    expect(live.statuses[TT]).toBeUndefined();
+  });
+
+  it('la vue épinglée porte bien le kit et le nom d’époque', () => {
+    const v = getBossView(PIN)!;
+    expect(v.name.en).toBe('Dahlia (figée)');
+    expect(v.skills.map((s) => s.name.en)).toEqual(['Skill FIGÉ']);
+    expect(v.id).toBe(PIN);
   });
 
   it('un pin SANS archive lève en nommant le fichier attendu', () => {

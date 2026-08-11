@@ -7,6 +7,42 @@
 
 ## 2026-08-11
 
+- **Épinglage des boss, étape 2d : l'archive devient AUTO-SUFFISANTE**
+  (direction Sevih : « le versionnage sauvegarde tout ce dont l'affichage a besoin »).
+  `versionMonster` fige désormais, À LA MÊME RÉF GIT que l'entité, les sources qui
+  donnent un SENS à ses références : les 9 sections du glossaire dont dépend le
+  rendu d'un boss (`ARCHIVED_GLOSSARY_KEYS`), `curated/effects.json` et
+  `curated/monster-skills.json`. Lues à la réf et pas au disque — en dev,
+  l'auto-apply a déjà pu écraser le working tree avec la nouvelle maj, et figer
+  l'ancien boss avec les libellés du nouveau n'aurait servi à rien.
+  MESURÉ AVANT DE TRANCHER : le glossaire entier ne fait que 270 Ko (dont 125 pour
+  les effets), les deux curés 12 et 7 Ko. On garde donc les sections ENTIÈRES
+  plutôt que de déduire les seuls effets utiles : la déduction demanderait de
+  tracer la résolution, et une restriction ratée produirait une archive
+  silencieusement incomplète — le pire résultat pour un mécanisme dont tout
+  l'intérêt est la fidélité. Versionner est un geste rare.
+  UNE ARCHIVE QUI PORTE SES SOURCES GOUVERNE SEULE : on ne complète pas avec le
+  live, sinon moitié figée et moitié courante se mélangeraient sans qu'on puisse
+  dire laquelle on regarde. Une archive SANS sources (celles d'avant) retombe sur
+  le live — comportement inchangé, donc zéro migration.
+  LA GARDE QUI REND LA LISTE HONNÊTE : un test reconstruit les 4492 vues avec le
+  glossaire RESTREINT aux 9 sections et exige l'égalité avec le glossaire complet.
+  Le jour où la carte lira une dixième section, il tombe — au lieu de laisser
+  passer des archives muettes. Avec sa CONTRE-ÉPREUVE : priver la vue du catalogue
+  d'effets doit la changer, sinon la comparaison ne prouverait rien.
+  TROUVÉ EN ÉCRIVANT CETTE CONTRE-ÉPREUVE : vider `effectByTooltip` seul ne change
+  RIEN sur bien des boss — leurs réfs de tooltip SONT déjà des ids d'effets et
+  `toChipEffect` retombe sur la résolution directe. L'index reste figé par
+  prudence, mais il ne ferait pas une contre-épreuve honnête (noté dans le test).
+  TROUVÉ AUSSI, par le bac à sable : un glossaire d'archive incomplet faisait
+  PLANTER le rendu (la chaîne indexe `g.effectByTooltip[ref]` sans le tester).
+  Normalisé à la frontière — index manquant = index vide. Un guide qui jette pour
+  une section absente serait un très mauvais échange, une réf non résolue se voit
+  déjà à l'écran.
+  Bout en bout au disque (bac à sable `process.cwd()`) : une archive dont les
+  sources nomment un statut que le glossaire courant ignore l'affiche quand même,
+  et le live ne l'a pas. 1491 tests verts.
+
 - **Épinglage des boss, étape 2c : `BossView` — la carte ne va plus rien chercher**
   `BossCard` mélangeait deux métiers : trouver la donnée (glossaire des effets,
   curation d'affichage, échelles de stats, donjons, quirks, passifs de palier) et

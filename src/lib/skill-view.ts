@@ -8,7 +8,7 @@
  * deux moitiés (titres colorés + saut de ligne). Les WGR réels par niveau
  * vivent aussi sur strike/backup.
  */
-import type { Glossaries, Skill } from '@contracts';
+import type { Glossaries, MonsterKitCuration, Skill } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { MAIN_SKILL_TYPES, levelAt, splitChainDual } from '@/lib/skills';
@@ -363,12 +363,12 @@ export interface MonsterSkillView {
   effects?: ClientEffect[];
 }
 
-/** Forme de la curation d'affichage monstres (fichier curé ou override). */
-export interface MonsterKitCuration {
-  chipOwner?: Record<string, string | string[]>;
-  chipAdd?: Record<string, string[]>;
-  chipHide?: Record<string, string[]>;
-}
+/**
+ * Forme de la curation d'affichage monstres (fichier curé ou override). Le
+ * CONTRAT vit dans `@contracts` parce que l'archive d'un boss versionné le fige
+ * avec lui ; on le ré-expose ici, là où on s'en sert.
+ */
+export type { MonsterKitCuration } from '@contracts';
 
 export function monsterSkillViews(
   skills: Skill[],
