@@ -7,6 +7,24 @@
 
 ## 2026-08-11
 
+- **Épinglage des boss, étape 3 : la GARDE sur les références de boss**
+  CONSTAT en allant l'écrire : l'invariant « chaque `meta.bossId` existe dans
+  `monsters.json` » n'existait PAS comme test — c'était une note de TODO. Les
+  tests de guides ne vérifiaient que la cohérence `bossId` ↔ `encounters`, par
+  catégorie. Une référence morte ne se voyait donc qu'au build de prod, une fois
+  le contenu déposé (le rendu JETTE sur un monstre absent).
+  Il est posé, et d'emblée pour LES DEUX formes que le rendu accepte : un id
+  vivant doit être dans `monsters.json`, un id épinglé `<id>@<n>` doit avoir son
+  fichier d'archive. Sans cette seconde branche, le premier ré-épinglage aurait
+  passé toute la suite au rouge — l'invariant aurait interdit le mécanisme qu'il
+  est censé protéger. Le message d'erreur d'un pin sans archive est rapporté tel
+  quel : c'est lui qui nomme le fichier attendu.
+  Plancher (>50 références), pas comptage figé : le nombre de guides monte
+  légitimement. Les 89 références actuelles résolvent toutes.
+  TODO.md remis d'aplomb : ce qui reste est ce qui ÉCRIT dans les guides —
+  appliquer le plan (en groupant par fichier) et la liste `pinned` des guides
+  versionnés, qui demande une lecture côté rendu.
+
 - **Épinglage des boss, étape 2d : l'archive devient AUTO-SUFFISANTE**
   (direction Sevih : « le versionnage sauvegarde tout ce dont l'affichage a besoin »).
   `versionMonster` fige désormais, À LA MÊME RÉF GIT que l'entité, les sources qui

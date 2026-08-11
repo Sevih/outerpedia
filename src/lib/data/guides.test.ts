@@ -14,6 +14,7 @@ import {
 } from '@/lib/data/guide-categories';
 import { bossWaveMonsters, encountersOfGroup, encountersOfIds } from '@/lib/data/encounters';
 import { findCharacterByName } from '@/lib/data/characters';
+import { getMonster } from '@/lib/data/monsters';
 import { checkText } from '@/lib/parse-text';
 
 /**
@@ -411,5 +412,48 @@ describe('guides versionnés — le contenu de CHAQUE version résout', () => {
         }
       }
     }
+  });
+});
+
+/**
+ * LE BOSS D'UN GUIDE DOIT EXISTER — sinon le rendu JETTE (`BossCard` et
+ * `AdventureSeasons` lèvent sur un monstre absent), et l'erreur n'apparaissait
+ * qu'au build de prod, une fois le contenu déposé.
+ *
+ * La règle accepte les DEUX formes de référence, parce que le rendu les accepte :
+ * un id VIVANT doit être dans `monsters.json`, un id ÉPINGLÉ `<id>@<n>` doit
+ * avoir son fichier d'archive. Sans cette seconde branche, le premier
+ * ré-épinglage passerait toute la suite au rouge — l'invariant interdirait
+ * précisément le mécanisme qu'il est censé protéger.
+ */
+describe('boss d’un guide — la référence résout, vivante ou épinglée', () => {
+  const refs = listGuides().flatMap((g) => {
+    const guide = `${g.category}/${g.slug}`;
+    const monsters = (g as { monsters?: string[] }).monsters ?? [];
+    return [
+      ...(g.bossId ? [{ guide, field: 'meta.bossId', id: g.bossId }] : []),
+      ...monsters.map((id) => ({ guide, field: 'meta.monsters', id })),
+    ];
+  });
+
+  it('il y a des références à vérifier (le scan ne rend pas une liste tronquée)', () => {
+    // PLANCHER, pas comptage figé : le nombre de guides monte légitimement, et
+    // un chiffre gelé ici finirait par échouer pour la bonne raison — la leçon
+    // du comptage de `tags.test.ts`. Ce seuil ne garde qu'une chose : que le
+    // scan n'a pas silencieusement cessé de trouver les références.
+    expect(refs.length).toBeGreaterThan(50);
+  });
+
+  it('chacune désigne un monstre qui existe', () => {
+    // `getMonster` LÈVE sur un pin sans archive, en nommant le fichier attendu :
+    // on rapporte ce message tel quel, c'est lui qui dit quoi faire.
+    const broken = refs.flatMap((r) => {
+      try {
+        return getMonster(r.id) ? [] : [`${r.guide} · ${r.field} : « ${r.id} » absent`];
+      } catch (e) {
+        return [`${r.guide} · ${r.field} : ${(e as Error).message}`];
+      }
+    });
+    expect(broken).toEqual([]);
   });
 });
