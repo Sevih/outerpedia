@@ -9,13 +9,13 @@ import type {
   Monster,
   MonsterSkillsFile,
   MonstersFile,
-  RankOption,
   Skill,
 } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { loadDataJson } from '@/lib/data/disk';
-import { expandRankContexts, type SpawnContext } from '@/lib/monster-stats';
+import { buildBossView, type BossView } from '@/lib/data/boss-view';
+import { liveKitSources } from '@/lib/skill-view';
 import { img } from '@/lib/images';
 // Type SEUL (effacé à la compilation) : le contrat de props de la vignette vit
 // avec elle, pas dupliqué ici.
@@ -127,50 +127,31 @@ export function getMonsterSkills(m: Monster, id: string): Skill[] {
   return m.skills.map((sid) => skills[sid]).filter((s): s is Skill => Boolean(s));
 }
 
-/** Échelle d'affichage des stats (per-mille → % ou brut) — glossaire global. */
-export function getStatScales(): Record<string, string> {
-  return G().statScales;
-}
-
-/** Quirks de compte réduisant les stats affichées des boss (EFF/RES −10 %). */
-export function getBossQuirkMods(): Record<string, number> {
-  return G().bossQuirkMods ?? {};
-}
-
 /**
- * Passifs de PALIER (`glossaries.rankOptions`) : les buffs que le boss gagne en
- * montant de palier. Optionnel dans le glossaire — absent = aucun passif
- * affiché (jamais une valeur inventée).
+ * La VUE d'un boss, prête à rendre — le SEUL endroit où l'affichage choisit sa
+ * provenance. Un id vivant lit le live ; un id épinglé lit l'archive, y compris
+ * ses DONJONS : `versionMonster` les fige exprès pour que la carte garde ses
+ * contextes de stats quand le donjon disparaît du live (événement retiré, stage
+ * re-niveauté). Ils n'étaient jusqu'ici jamais relus — promesse écrite dans
+ * l'archive, non tenue au rendu.
  */
-export function getRankOptions(): Record<string, RankOption> {
-  return G().rankOptions ?? {};
+export function getBossView(id: string): BossView | undefined {
+  const monster = getMonster(id);
+  if (!monster) return undefined;
+  const entry = isPinned(id) ? archived(id) : undefined;
+  return buildBossView(id, monster, getMonsterSkills(monster, id), {
+    ...liveKitSources(),
+    dungeons: entry?.dungeons ?? DUNGEONS(),
+    ...(entry?.modes ? { modes: entry.modes } : {}),
+  });
 }
 
-/**
- * Libellés localisés des passifs de palier d'un monstre, prêts pour le rendu
- * client (id d'option → « Increased Penetration +30% »). Une option inconnue du
- * glossaire est simplement OMISE : mieux vaut ne rien dire qu'inventer.
- * (L'admin a son pendant `rankOptionAdminLabels` — EN seul, repli en cascade.)
- */
-export function rankOptionLabels(contexts: SpawnContext[], lang: Lang): Record<string, string> {
-  const glossary = getRankOptions();
-  const out: Record<string, string> = {};
-  for (const id of new Set(contexts.flatMap((c) => c.options ?? []))) {
-    const o = glossary[id];
-    if (!o) continue;
-    const name = o.name ? lRec(o.name, lang) : undefined;
-    if (!name) continue;
-    // `value` est un per-mille pour les taux (convention du jeu, cf. statScales).
-    const amount =
-      o.value && o.stat && G().statScales?.[o.stat] === 'percent'
-        ? ` ${o.value > 0 ? '+' : ''}${o.value / 10}%`
-        : o.value
-          ? ` ${o.value > 0 ? '+' : ''}${o.value}`
-          : '';
-    out[id] = `${name}${amount}`;
-  }
-  return out;
-}
+// Échelles de stats, quirks de compte, passifs de palier et rencontres du
+// monstre vivent désormais DANS la vue : ils venaient du glossaire live, alors
+// que la carte d'un boss épinglé doit les lire à SA source. Leurs accesseurs
+// (`getStatScales`, `getBossQuirkMods`, `getRankOptions`, `rankOptionLabels`,
+// `monsterSpawnContexts`) n'avaient qu'un appelant — la carte — et sont partis
+// avec lui : cf. `bossRankOptionLabels` et `bossSpawnContexts` (boss-view.ts).
 
 /**
  * Icône NUE d'un monstre (convention du jeu) : `icon` commençant par « 2 » =
@@ -208,29 +189,4 @@ export function monsterThumb(
  */
 export function monsterOgImage(m: Pick<Monster, 'icon'>): string {
   return m.icon.startsWith('2') ? img.facePng(m.icon) : img.bossPng(`MT_${m.icon}`);
-}
-
-/**
- * Rencontres connues d'un monstre, avec les MODIFICATEURS du donjon (adv
- * per-mille, PV réels du mode) et un libellé « Mode · Stage » localisé — prêt
- * pour le calcul de stats effectives (src/lib/monster-stats).
- */
-export function monsterSpawnContexts(m: Monster, lang: Lang): SpawnContext[] {
-  const dungeons = DUNGEONS();
-  const g = G();
-  return (m.spawns ?? []).flatMap((s) => {
-    const d = dungeons[s.dungeon];
-    if (!d) return [];
-    const mode = g.modes?.[d.mode] ? lRec(g.modes[d.mode], lang) : d.mode;
-    return expandRankContexts(
-      {
-        level: s.level,
-        label: `${mode} · ${lRec(d.name, lang) || d.name.en}`,
-        ...(d.adv ? { adv: d.adv } : {}),
-        ...(d.bossHp ? { bossHp: d.bossHp } : {}),
-        ...(s.hpLines ? { hpLines: s.hpLines } : {}),
-      },
-      d.ranks,
-    );
-  });
 }

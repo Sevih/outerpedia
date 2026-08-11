@@ -7,6 +7,36 @@
 
 ## 2026-08-11
 
+- **Épinglage des boss, étape 2c : `BossView` — la carte ne va plus rien chercher**
+  `BossCard` mélangeait deux métiers : trouver la donnée (glossaire des effets,
+  curation d'affichage, échelles de stats, donjons, quirks, passifs de palier) et
+  la rendre. `buildBossView` prend le premier, et c'est une fonction PURE : tout
+  vient de ses sources, rien du disque — donc la même carte se rend depuis le live
+  ou depuis une archive, avec le MÊME code.
+  CE QUI N'EST PAS DANS LA VUE, et pourquoi : les `spawns` d'une rencontre
+  appartiennent au MODE, pas au boss (le guide dit contre quoi on se bat, la vue
+  dit qui est le boss) — seules les rencontres PROPRES du monstre y sont, et
+  `BossCard` les prend quand aucun mode ne lui en impose (ce que faisait
+  `BossPanel`, qui n'est plus qu'un alias). Le chrome d'interface reste live : le
+  figer casserait les traductions.
+  BUG RÉEL CORRIGÉ AU PASSAGE : les donjons. `versionMonster` les fige depuis
+  toujours « pour que l'archive reste lisible même si le donjon disparaît du
+  live », et le rendu ne les avait jamais relus — un boss épinglé dont le donjon
+  disparaissait (événement retiré, stage re-niveauté) perdait TOUS ses contextes
+  de stats. `getBossView` lit maintenant ceux de l'archive.
+  CODE MORT EMPORTÉ : `monsterSpawnContexts`, `rankOptionLabels`, `getStatScales`,
+  `getBossQuirkMods`, `getRankOptions` n'avaient qu'un appelant — la carte — et
+  lisaient le glossaire live, ce qu'un boss figé ne doit pas faire.
+  PREUVE D'ÉQUIVALENCE avant de committer : la vue comparée au rendu d'origine,
+  champ par champ (nom, vignette, stats, échelles, quirks, cartes de skills,
+  statuts, immunités, spawns, libellés de palier) sur les 4492 monstres du
+  catalogue — IDENTIQUES. Le test jetable qui l'a prouvé est parti avec l'ancien
+  code qu'il comparait ; ce qui reste est un test de PROVENANCE (7 cas) : la vue
+  sort de ses sources et de rien d'autre. Le cas central renomme un effet dans les
+  sources et l'exige à l'écran — sans lui, une résolution qui court-circuiterait
+  `src` passerait à l'œil et rendrait toute l'archive inutile.
+  1488 tests verts.
+
 - **Épinglage des boss, étape 2b : la résolution des kits devient PARAMÉTRABLE**
   (préalable à l'archive auto-suffisante — direction Sevih : « le versionnage
   sauvegarde tout ce dont l'affichage a besoin »).

@@ -19,23 +19,10 @@ import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { img } from '@/lib/images';
 import { RANGE_TO_TARGET } from '@/lib/skills';
-import { monsterPanelStats, type SpawnContext } from '@/lib/monster-stats';
-import {
-  buildStatusMap,
-  dedupSkills,
-  immunityChipEffects,
-  monsterSkillViews,
-} from '@/lib/skill-view';
-import { effectForTooltip, getMergedEffect, mergeStatusEffects } from '@/lib/data/effects';
-import {
-  getMonster,
-  getMonsterSkills,
-  getStatScales,
-  monsterThumb,
-  getBossQuirkMods,
-  monsterSpawnContexts,
-  rankOptionLabels,
-} from '@/lib/data/monsters';
+import type { SpawnContext } from '@/lib/monster-stats';
+import { localizeStatuses } from '@/lib/data/effects';
+import { getBossView } from '@/lib/data/monsters';
+import { bossRankOptionLabels, bossSpawnContexts, type BossSkillView } from '@/lib/data/boss-view';
 import type { CardSkill } from '@/components/character/SkillCard';
 import { EffectIconBadge } from '@/components/character/EffectChips';
 import { Thumbnail } from '@/components/ui/Thumbnail';
@@ -46,11 +33,10 @@ import { SegmentedTabs, type TabItem } from './SegmentedTabs';
 import { BossRankProvider, BossLevel } from './BossRank';
 import { BossStats, type StatLabel } from './BossStats';
 import { Disclosure } from '@/components/ui/Disclosure';
-import type { Skill } from '@contracts';
 
 export async function BossCard({
   monsterId,
-  spawns,
+  spawns: modeSpawns,
   lang,
   role,
   followStages,
@@ -59,8 +45,12 @@ export async function BossCard({
   compact,
 }: {
   monsterId: string;
-  /** Les rencontres à parcourir — imposées par le mode, jamais devinées ici. */
-  spawns: SpawnContext[];
+  /**
+   * Les rencontres à parcourir — imposées par le MODE. Absentes, ce sont celles
+   * du monstre lui-même : un boss qu'aucun mode ne contextualise se décrit par
+   * ses propres rencontres (c'était le rôle de `BossPanel`).
+   */
+  spawns?: SpawnContext[];
   lang: Lang;
   /** Rôle dans la rencontre (`DungeonMonster.role`) — badge sur les renforts. */
   role?: 'boss' | 'add';
@@ -81,9 +71,12 @@ export async function BossCard({
    */
   afterStats?: React.ReactNode;
 }) {
-  const monster = getMonster(monsterId);
+  // TOUT ce que la carte affiche vient d'ICI : identité, stats, kit résolu,
+  // immunités, sous-glossaire des statuts. Live ou archive, même code —
+  // c'est `getBossView` qui choisit la provenance (cf. src/lib/data/boss-view.ts).
+  const view = getBossView(monsterId);
   // Réf de contenu cassée = bug de guide : on casse le build, pas de repli muet.
-  if (!monster) {
+  if (!view) {
     throw new Error(
       `BossCard : monstre « ${monsterId} » absent de data/generated/monsters.json — ` +
         `à extraire/valider via l'admin (Extractor › Monsters).`,
@@ -91,60 +84,30 @@ export async function BossCard({
   }
 
   const t = await getT(lang);
-  const name = lRec(monster.name, lang);
-  // `monsterId` et pas seulement `monster` : sur un id épinglé `<id>@<n>`, les
-  // skills doivent venir de l'archive (mêmes ids, contenu figé).
-  const skills = dedupSkills(getMonsterSkills(monster, monsterId));
-  const statuses = buildStatusMap(skills, lang);
+  const name = lRec(view.name, lang);
+  const spawns = modeSpawns ?? bossSpawnContexts(view, lang);
+  const statuses = localizeStatuses(view.statuses, lang);
 
-  const targetLabel = (s: Skill): string | undefined => {
+  const targetLabel = (s: BossSkillView): string | undefined => {
     const key = RANGE_TO_TARGET[s.range ?? ''];
     if (!key) return undefined;
     return t(`page.character.skill.target_${key}${s.offensive ? '' : '_ally'}` as TranslationKey);
   };
-  // Vue « kit » monstre : chips réattribuées par réf de desc, enrage fusionné
-  // (le rage_finish sans nom disparaît, ses chips rejoignent la carte enter).
-  const cardSkills: CardSkill[] = monsterSkillViews(skills)
-    .filter(({ skill: s }) => s.name.en)
-    .map(({ skill: s, effects }) => ({
-      id: s.id,
-      name: lRec(s.name, lang),
-      desc: s.desc ? lRec(s.desc, lang) : undefined,
-      icon: s.icon,
-      targetLabel: targetLabel(s),
-      maxLevel: s.maxLevel,
-      levels: s.levels.map((l) => ({
-        level: l.level,
-        cool: l.cool,
-        wgReduce: l.wgReduce,
-        vars: l.vars,
-      })),
-      effects,
-    }));
-  // Chips curées en plus (chipAdd) : leur statut n'est pas porté par les
-  // skills eux-mêmes — résolu depuis les chips des cartes.
-  mergeStatusEffects(
-    statuses,
-    cardSkills.flatMap((c) => c.effects ?? []),
-    lang,
-  );
+  const cardSkills: CardSkill[] = view.skills.map((s) => ({
+    id: s.id,
+    name: lRec(s.name, lang),
+    desc: s.desc ? lRec(s.desc, lang) : undefined,
+    icon: s.icon,
+    targetLabel: targetLabel(s),
+    maxLevel: s.maxLevel,
+    levels: s.levels,
+    effects: s.effects,
+  }));
 
-  // Immunités : tooltips affichés en jeu + TYPES de mécanique (BT_STUN,
-  // BT_COOL_CHARGE, ST_ATK…), résolus vers les effets canoniques
-  // (immunityChipEffects — même logique que l'admin). Une réf non résolue
-  // s'affiche en ROUGE (signal d'erreur de contenu, comme parse-text).
-  const { effects: immunityRefs, unresolved } = immunityChipEffects(monster);
-  const immunities = [
-    ...immunityRefs.map((e) => ({
-      tid: e.tooltip!,
-      effect: effectForTooltip(e.tooltip!) ?? getMergedEffect(e.tooltip!),
-    })),
-    ...unresolved.map((tid) => ({ tid, effect: undefined })),
-  ];
-
-  // Le panneau du jeu montre deux lignes que `MonsterTemplet` ne porte pas
-  // (pénétration %, réduction de DGT CRIT subie) — cf. `monsterPanelStats`.
-  const panelStats = monsterPanelStats(monster.stats);
+  // Immunités déjà résolues : une réf que le glossaire ne connaît pas arrive
+  // SANS effet et s'affiche en ROUGE (signal d'erreur de contenu, comme parse-text).
+  const immunities = view.immunities;
+  const panelStats = view.stats;
 
   // Le jeu nomme ses stats : on ne fait que traduire le slug en icône + nom
   // localisé, une fois, ici — `BossStats` est client, il ne traduit rien.
@@ -178,7 +141,7 @@ export async function BossCard({
             cherche (le jeu l'écrit au même endroit) ; il suit la glissière, d'où
             le contexte partagé. */}
         <div className="flex items-center gap-4">
-          <Thumbnail {...monsterThumb(monster)} kind="monster" name={name} className="h-16 w-16" />
+          <Thumbnail {...view.thumb} kind="monster" name={name} className="h-16 w-16" />
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <h2 className="text-content-strong text-xl font-bold">{name}</h2>
@@ -225,7 +188,7 @@ export async function BossCard({
                       name: lRec(effect.name, lang) || effect.name.en,
                       icon: effect.icon,
                       isDebuff: effect.isDebuff,
-                      desc: lRec(effect.desc, lang),
+                      desc: effect.desc ? lRec(effect.desc, lang) : undefined,
                     }}
                   />
                 ) : (
@@ -242,11 +205,11 @@ export async function BossCard({
           const stats = (
             <BossStats
               stats={panelStats}
-              scales={getStatScales()}
-              quirkMods={getBossQuirkMods()}
+              scales={view.statScales}
+              quirkMods={view.quirkMods}
               statLabels={statLabels}
               locale={LANGUAGES[lang].htmlLang}
-              rankOptionLabels={rankOptionLabels(spawns, lang)}
+              rankOptionLabels={bossRankOptionLabels(view, spawns, lang)}
               hideContextLabel={hideSpawnLabel}
               labels={{
                 level: t('page.character.skill.level'),
@@ -323,14 +286,7 @@ export async function BossCard({
  * paliers). Reste le point d'entrée des guides qui ne désignent qu'un monstre.
  */
 export async function BossPanel({ monsterId, lang }: { monsterId: string; lang: Lang }) {
-  const monster = getMonster(monsterId);
-  if (!monster) {
-    throw new Error(
-      `BossPanel : monstre « ${monsterId} » absent de data/generated/monsters.json — ` +
-        `à extraire/valider via l'admin (Extractor › Monsters).`,
-    );
-  }
-  return (
-    <BossCard monsterId={monsterId} spawns={monsterSpawnContexts(monster, lang)} lang={lang} />
-  );
+  // Sans `spawns`, la carte prend les rencontres PROPRES du monstre — ce que
+  // faisait ce panneau. Une seule résolution de vue au lieu de deux.
+  return <BossCard monsterId={monsterId} lang={lang} />;
 }
