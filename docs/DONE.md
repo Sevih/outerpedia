@@ -7,6 +7,33 @@
 
 ## 2026-08-11
 
+- **Épinglage des boss, étape 1/3 : le rendu sait enfin LIRE une version figée**
+  (`TODO(guides)` de `version-monster.ts:16`, cadré avec Sevih).
+  ÉTAT DES LIEUX avant de toucher quoi que ce soit : le côté écriture était
+  complet depuis longtemps — `versionMonster` fige l'entité, ses skills, et même
+  un snapshot des donjons de ses spawns. Mais `data/generated/monster-archive/`
+  est VIDE : la fonctionnalité n'avait jamais servi. Et pour cause, RIEN ne savait
+  relire ces fichiers. `getMonster` faisait un simple `MONSTERS()[id]` : épingler
+  un guide sur `<id>@<n>` l'aurait fait JETER au rendu (`BossEncounters` et
+  `AdventureSeasons` lèvent sur un monstre absent). La convention était pourtant
+  à moitié posée — `seasonsForBoss` coupe déjà le suffixe pour la jointure saison.
+  `getMonster` résout donc l'archive quand l'id porte un `@`. Posé DANS la
+  fonction et pas chez les appelants : 31 sites d'appel, et un id vivant ne
+  contient pas de `@` — leur comportement est strictement inchangé.
+  `getMonsterSkills` prend désormais l'id, en paramètre REQUIS. C'est le piège de
+  l'affaire : les ids de skills survivent à une refonte, seul leur CONTENU change.
+  Un appelant qui l'oublierait afficherait les skills du NOUVEAU boss sous
+  l'entité figée, sans le moindre signe. Le typage force à trancher (un seul
+  appelant aujourd'hui, `BossPanel`, qui a le pin sous la main).
+  Un pin sans archive LÈVE en nommant le fichier attendu, au lieu de rendre
+  `undefined` — l'appelant dirait alors « absent de monsters.json », ce qui est
+  faux et envoie chercher au mauvais endroit. Même esprit que `readCuratedJson`.
+  SEPT CAS de test, lecture réelle au disque via un bac à sable `process.cwd()` :
+  id vivant inchangé, id inconnu qui rend toujours `undefined`, monstre et skills
+  archivés, coexistence des deux états, et le message du pin orphelin.
+  Étapes 2 (ré-épinglage automatique) et 3 (la garde) dans TODO.md, avec les
+  décisions d'architecture arbitrées pour ne pas les re-débattre. 1474 tests verts.
+
 - **La transcendance ne se compte plus, elle se lit — une seule fois** (signalé
   Sevih 11/08 : « la tier list PvE filtre sur 3/4/5/6 mais portrait utilise les
   vrais step 4 5 6 7… »). Le sélecteur PvE offrait des COMPTES D'ÉTOILES là où le

@@ -92,7 +92,9 @@ export async function BossCard({
 
   const t = await getT(lang);
   const name = lRec(monster.name, lang);
-  const skills = dedupSkills(getMonsterSkills(monster));
+  // `monsterId` et pas seulement `monster` : sur un id épinglé `<id>@<n>`, les
+  // skills doivent venir de l'archive (mêmes ids, contenu figé).
+  const skills = dedupSkills(getMonsterSkills(monster, monsterId));
   const statuses = buildStatusMap(skills, lang);
 
   const targetLabel = (s: Skill): string | undefined => {

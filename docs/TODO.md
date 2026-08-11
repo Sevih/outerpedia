@@ -61,12 +61,35 @@
       ToolShell et sur la landing /tools — l'allonger pour le SEO change
       l'écran. Options : découpler (clé meta dédiée) ou assumer le texte court.
 
-## 🤔 Décisions en attente (Sevih)
+## 🧊 Épinglage des boss versionnés (`TODO(guides)`)
 
-- [ ] `TODO(guides)` de `datagen/extractor/version-monster.ts:16` : « Versionner »
-      doit RÉ-ÉPINGLER les guides `<id>` → `<id>@<n>` — le domaine guides existe,
-      c'est actionnable. (Vérifié présent dans le code le 26/07, également noté
-      dans `datagen/README.md:215`.)
+> Cadrage ARBITRÉ avec Sevih le 11/08, étape 1 FAITE (cf. DONE). Le geste
+> « Versionner » écrit `monster-archive/<id>@<n>.json` depuis longtemps ; ce qu'il
+> manque, c'est que versionner mette à jour les références tout seul.
+> DÉCISIONS PRISES, à ne pas re-débattre : le pin d'un guide VERSIONNÉ vit dans le
+> `config.json` de la version (seul endroit qui peut différer d'une version à
+> l'autre), sous forme de LISTE creuse de clés d'archive — un groupe pointe
+> plusieurs monstres et une maj n'en touche souvent qu'un. `meta.bossId` reste
+> LIVE (H1, portrait, jointure saison = l'entité courante). La COMPOSITION de la
+> rencontre reste live elle aussi : si le jeu ajoute une phase, un vieux guide
+> doit la montrer plutôt que la cacher — l'archive garde le snapshot si on change
+> d'avis. Absence de pin = live, donc zéro migration sur les 16 guides existants.
+
+- [ ] **Étape 2 — ré-épinglage automatique.** `versionMonster` doit réécrire les
+      références au monstre versionné : fonction PURE qui rend la liste des
+      éditions (testable à sec), appliquée ensuite. Règle : « ré-épingler ce qui
+      est encore en live », appliquée PAR MONSTRE — elle se maintient seule d'une
+      version à l'autre. Trois formes de référence à couvrir : `meta.bossId`,
+      `meta.monsters`, et le `config.json` des versions.
+      ⚠ NE PAS piloter ça depuis `GUIDE_SPECS` : guild-raid n'y est pas (non
+      éditable par l'admin) alors qu'elle représente 5 des 16 guides versionnés.
+      Les 3 catégories versionnées sont joint-challenge, world-boss ET guild-raid.
+- [ ] **Étape 3 — la garde.** L'invariant « chaque `meta.bossId` existe dans
+      `monsters.json` » doit accepter un id épinglé ET vérifier que le fichier
+      d'archive existe — sinon le premier ré-épinglage passe la suite au rouge.
+- [ ] _(optionnel)_ **Bandeau lecteur** « boss tel qu'avant la maj X » sur le
+      `BossPanel` d'un guide épinglé : l'archive porte déjà `label`, `gameVersion`
+      et `committedAt`. Sans ça, un guide figé est indiscernable d'un guide à jour.
 
 ---
 

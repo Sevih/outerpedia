@@ -3,6 +3,7 @@
  * public (guides). L'admin a son propre store (`src/lib/admin/monster-store`).
  */
 import type {
+  MonsterArchiveEntry,
   EncountersFile,
   Glossaries,
   Monster,
@@ -29,8 +30,42 @@ const SKILLS = (): MonsterSkillsFile =>
 const DUNGEONS = (): EncountersFile => loadDataJson<EncountersFile>('generated/encounters.json');
 const G = (): Glossaries => loadDataJson<Glossaries>('generated/glossaries.json');
 
+/**
+ * ID ÉPINGLÉ : `<id>@<n>` désigne un ÉTAT FIGÉ du boss, archivé par le bouton
+ * « Versionner » de l'admin (`datagen/extractor/version-monster.ts`), et non
+ * l'entité vivante. Un guide écrit contre l'ancien état continue ainsi de
+ * décrire ce qu'il décrit après une refonte du boss en jeu.
+ *
+ * La convention était déjà posée côté jointure saison (`seasonsForBoss` coupe le
+ * suffixe pour retrouver l'entité), mais rien ne savait LIRE l'archive : y
+ * épingler un guide l'aurait fait jeter au rendu. C'est ce trou-ci que ferme
+ * cette résolution.
+ *
+ * Un id vivant ne contient pas de `@` : pour lui, rien ne change.
+ */
+const isPinned = (id: string): boolean => id.includes('@');
+
+/**
+ * Entrée d'archive d'un id épinglé. LÈVE si le fichier manque : un pin qui ne
+ * résout pas est une erreur de donnée (l'archive est append-only, elle ne perd
+ * rien), et échouer ici nomme le vrai problème — laisser passer `undefined`
+ * ferait dire à l'appelant « absent de monsters.json », ce qui est faux et
+ * enverrait chercher au mauvais endroit.
+ */
+function archived(key: string): MonsterArchiveEntry {
+  try {
+    return loadDataJson<MonsterArchiveEntry>(`generated/monster-archive/${key}.json`);
+  } catch {
+    throw new Error(
+      `Monstre épinglé « ${key} » : archive introuvable ` +
+        `(data/generated/monster-archive/${key}.json). Un guide pointe une version ` +
+        `figée qui n'a jamais été écrite, ou le fichier n'a pas été committé.`,
+    );
+  }
+}
+
 export function getMonster(id: string): Monster | undefined {
-  return MONSTERS()[id];
+  return isPinned(id) ? archived(id).monster : MONSTERS()[id];
 }
 
 /**
@@ -77,10 +112,19 @@ export function monsterDisplayNames(ids: string[], lang: Lang): Map<string, stri
   return names;
 }
 
-/** Skills d'un monstre (dans l'ordre du kit ; ids inconnus ignorés). */
-export function getMonsterSkills(m: Monster): Skill[] {
-  const skills = SKILLS();
-  return m.skills.map((id) => skills[id]).filter((s): s is Skill => Boolean(s));
+/**
+ * Skills d'un monstre (dans l'ordre du kit ; ids inconnus ignorés). `id` est
+ * celui qui a servi à l'obtenir : sur un id
+ * ÉPINGLÉ, les skills viennent de l'archive, pas de la table vivante.
+ *
+ * Le paramètre est REQUIS, et volontairement : les ids de skills sont les mêmes
+ * avant et après une refonte, seul leur CONTENU change. Un appelant qui
+ * l'oublierait afficherait donc les skills du nouveau boss sous l'entité figée —
+ * faux, et parfaitement silencieux. Le typage force à trancher.
+ */
+export function getMonsterSkills(m: Monster, id: string): Skill[] {
+  const skills = isPinned(id) ? archived(id).skills : SKILLS();
+  return m.skills.map((sid) => skills[sid]).filter((s): s is Skill => Boolean(s));
 }
 
 /** Échelle d'affichage des stats (per-mille → % ou brut) — glossaire global. */
