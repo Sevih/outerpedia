@@ -34,6 +34,13 @@ interface VersionConfig {
    */
   group?: string;
   /**
+   * ÉPINGLAGE : les clés d'archive (`<id>@<n>`) des monstres que CETTE version
+   * montre dans leur état figé. Liste CREUSE — un monstre du combat qui n'y est
+   * pas reste live, donc versionner un boss ne demande d'y toucher que pour lui.
+   * C'est le seul endroit possible : le guide désigne un combat, pas un monstre.
+   */
+  pinned?: string[];
+  /**
    * Paragraphes libres de la version (parseText) — le format d'avant les
    * sections structurées : certaines archives ne sont QUE ça, un texte et une
    * vidéo. Rendus entre les conseils et les persos.
@@ -146,12 +153,21 @@ export async function VersionedBossGuide({ lang, guide }: GuideContentProps) {
    * saisons jouent le même combat, le panneau monte au-dessus des onglets. Le
    * jour où un guide en aurait deux, chaque version reprend le sien.
    */
-  const groups = new Set(
-    guide.versions
-      .map((v) => readGuideVersionFile<VersionConfig>(guide, v.key, 'config.json')?.group)
-      .filter((g): g is string => Boolean(g)),
-  );
-  const sharedGroup = groups.size === 1 ? [...groups][0] : undefined;
+  // Ce qu'une version MONTRE, ce n'est pas seulement son combat : c'est son
+  // combat DANS UN ÉTAT. Deux saisons qui rejouent le même groupe mais dont
+  // l'une épingle le boss d'avant une refonte ne montrent PAS la même chose —
+  // partager le panneau afficherait alors le même boss aux deux, et la version
+  // figée mentirait. La signature comprend donc l'épinglage.
+  const shownBoss = (key: string): { group: string; pinned: readonly string[] } | undefined => {
+    const cfg = readGuideVersionFile<VersionConfig>(guide, key, 'config.json');
+    return cfg?.group ? { group: cfg.group, pinned: cfg.pinned ?? [] } : undefined;
+  };
+  const shown = guide.versions
+    .map((v) => shownBoss(v.key))
+    .filter((s): s is { group: string; pinned: readonly string[] } => Boolean(s));
+  const signature = (s: { group: string; pinned: readonly string[] }) =>
+    `${s.group}|${[...s.pinned].sort().join(',')}`;
+  const sharedBoss = new Set(shown.map(signature)).size === 1 ? shown[0] : undefined;
 
   const versions: GuideVersionEntry[] = guide.versions.map((v, i) => {
     const cfg = readGuideVersionFile<VersionConfig>(guide, v.key, 'config.json');
@@ -178,7 +194,9 @@ export async function VersionedBossGuide({ lang, guide }: GuideContentProps) {
         <>
           {/* Le panneau ne redescend ici que si les saisons jouent des combats
               DIFFÉRENTS — sinon il est rendu une fois, au-dessus des onglets. */}
-          {!sharedGroup && cfg?.group && <BossEncounters group={cfg.group} lang={lang} />}
+          {!sharedBoss && cfg?.group && (
+            <BossEncounters group={cfg.group} lang={lang} pinned={cfg.pinned} />
+          )}
 
           {/* Les conseils sont écrits pour UNE difficulté — celle que le mode
               fait viser (la plus dure). Le dire, plutôt que de laisser croire
@@ -268,7 +286,11 @@ export async function VersionedBossGuide({ lang, guide }: GuideContentProps) {
       <GuideVersions
         versions={versions}
         label={t('page.guide.versions')}
-        shared={sharedGroup ? <BossEncounters group={sharedGroup} lang={lang} /> : undefined}
+        shared={
+          sharedBoss ? (
+            <BossEncounters group={sharedBoss.group} lang={lang} pinned={sharedBoss.pinned} />
+          ) : undefined
+        }
       />
     </>
   );

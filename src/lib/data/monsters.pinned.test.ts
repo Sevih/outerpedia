@@ -118,7 +118,58 @@ afterAll(() => {
 
 // APRÈS la redirection : le module lit au disque à chaque appel, mais on garde
 // l'ordre du bac à sable des stores — c'est l'habitude du dépôt.
-const { getMonster, getMonsterSkills, getBossView } = await import('./monsters');
+const { getMonster, getMonsterSkills, getBossView, pinResolver } = await import('./monsters');
+
+/**
+ * ÉPINGLAGE D'UN GUIDE VERSIONNÉ — le cas où le guide ne NOMME pas son boss.
+ *
+ * Joint challenge, world boss et guild raid désignent un COMBAT : leurs monstres
+ * sont résolus au rendu depuis `encounters.json`, il n'y a aucun id à réécrire
+ * dans le guide. Le pin vit donc dans une liste à part (`pinned` du `config.json`
+ * de la version) et c'est le RENDU qui doit faire passer chaque id au travers.
+ * Sans ça, versionner un boss de mode versionné ne change rigoureusement rien à
+ * l'écran — l'archive existe et personne ne la lit.
+ */
+describe('pinResolver — la liste `pinned` d’une version', () => {
+  it('sans liste, ne touche à rien', () => {
+    expect(pinResolver()('4548161')).toBe('4548161');
+    expect(pinResolver([])('4548161')).toBe('4548161');
+  });
+
+  it('épingle le monstre nommé par la liste', () => {
+    expect(pinResolver(['4548161@1'])('4548161')).toBe('4548161@1');
+  });
+
+  it('la liste est CREUSE : un monstre absent reste LIVE', () => {
+    // C'est ce qui fait qu'un combat à trois difficultés n'oblige pas à figer
+    // les trois, et surtout : zéro migration sur les guides existants.
+    const pin = pinResolver(['4548161@1']);
+    expect(pin('4548171')).toBe('4548171');
+    expect(pin('4548181')).toBe('4548181');
+  });
+
+  it('un id DÉJÀ épinglé n’est pas retouché', () => {
+    // Le guide a tranché lui-même : la liste ne le contredit pas.
+    expect(pinResolver(['4548161@1'])('4548161@2')).toBe('4548161@2');
+  });
+
+  it('deux pins du même monstre : le PREMIER gagne', () => {
+    // Erreur de contenu ; prendre le second silencieusement la rendrait
+    // invisible, et le guide afficherait un état sans qu'on sache pourquoi.
+    expect(pinResolver(['4548161@1', '4548161@2'])('4548161')).toBe('4548161@1');
+  });
+
+  it('plusieurs monstres épinglés d’un même combat', () => {
+    // Le cas normal d'un joint challenge : trois difficultés, trois monstres
+    // DIFFÉRENTS — les figer tous demande trois entrées.
+    const pin = pinResolver(['4548161@1', '4548171@1', '4548181@1']);
+    expect(['4548161', '4548171', '4548181'].map(pin)).toEqual([
+      '4548161@1',
+      '4548171@1',
+      '4548181@1',
+    ]);
+  });
+});
 
 describe('id VIVANT — rien ne change', () => {
   it('est servi par la table vivante', () => {

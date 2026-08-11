@@ -204,4 +204,42 @@ describe('applyRepin — ce que « Versionner » écrit', () => {
     expect(calls).toEqual([]);
     expect(res.files).toEqual([]);
   });
+
+  it('une référence de VERSION est épinglée dans son `config.json`', async () => {
+    // Le cas majoritaire, et le seul qui compte pour joint challenge / world
+    // boss / guild raid : le guide ne nomme aucun monstre, donc le pin ne peut
+    // aller que là. Sans cette écriture, versionner un boss de mode versionné ne
+    // change RIEN à l'écran — l'archive existe et personne ne la lit.
+    if (!viaGroup) return; // aucun guide versionné à combat peuplé
+    const id = encountersOfGroup(viaGroup.group)[0].monsters[0].id;
+    const plan = planRepin(id, `${id}@1`);
+    const pins: string[] = [];
+    const pin = async (c: string, s: string, v: string, key: string) => {
+      pins.push(`${c}/${s}@${v}=${key}`);
+      return true;
+    };
+    const { write } = journal();
+    const res = await applyRepin(plan, write, pin as never);
+    expect(pins.length).toBeGreaterThan(0);
+    expect(pins.every((p) => p.endsWith(`=${id}@1`))).toBe(true);
+    // …et ce qui a été épinglé ne reste PAS en attente.
+    expect(res.pinnedVersions.length).toBe(pins.length);
+    expect(res.pending.some((p) => p.origin === 'version.config')).toBe(false);
+  });
+
+  it('ce qu’on ne sait pas épingler RESTE en attente', async () => {
+    // Un guide PLAT qui désigne un combat n'a pas de version où poser le pin —
+    // et il suit le live par nature. Le dire plutôt que le perdre.
+    const plan: RepinPlan = {
+      id: 'X',
+      key: 'X@1',
+      edits: [],
+      pending: [{ guide: 'a/b', origin: 'meta.group', group: 'g' }],
+      kept: [],
+    };
+    const { write } = journal();
+    const res = await applyRepin(plan, write, (async () => true) as never);
+    expect(res.pinnedVersions).toEqual([]);
+    expect(res.pending).toEqual(plan.pending);
+  });
 });

@@ -74,6 +74,12 @@ interface VersionConfig {
   subB?: string;
   /** Combat du boss principal (phase 2). */
   main?: string;
+  /**
+   * ÉPINGLAGE de la version : clés d'archive (`<id>@<n>`) des monstres à montrer
+   * figés. UNE liste pour les trois combats — elle est indexée par monstre, pas
+   * par combat, donc rien à répartir. Creuse : un absent reste live.
+   */
+  pinned?: string[];
   /** Vidéos de la page (en plus de celles par boss/équipe). */
   videos?: VideoItem[];
 }
@@ -229,9 +235,13 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
   };
 
   /** Un sous-boss de phase 1 : panneau (si combat), geas, éditorial. */
-  const renderSubBoss = (group: string | undefined, data: SubBossData | undefined) => (
+  const renderSubBoss = (
+    group: string | undefined,
+    data: SubBossData | undefined,
+    pinned?: string[],
+  ) => (
     <div className="space-y-4">
-      {group && <BossEncounters group={group} lang={lang} hideSpawnLabel compact />}
+      {group && <BossEncounters group={group} lang={lang} pinned={pinned} hideSpawnLabel compact />}
       {group &&
         (() => {
           const unlocks = geasUnlockTable(group);
@@ -308,14 +318,14 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
       subBossTabs.push({
         key: 'a',
         label: subBossTabLabel(cfg?.subA, 0),
-        content: renderSubBoss(cfg?.subA, subA),
+        content: renderSubBoss(cfg?.subA, subA, cfg?.pinned),
       });
     }
     if (cfg?.subB || subB) {
       subBossTabs.push({
         key: 'b',
         label: subBossTabLabel(cfg?.subB, 1),
-        content: renderSubBoss(cfg?.subB, subB),
+        content: renderSubBoss(cfg?.subB, subB, cfg?.pinned),
       });
     }
 
@@ -364,7 +374,15 @@ export async function GuildRaidGuide({ lang, guide }: GuideContentProps) {
         label: t('guides.tips.phase2'),
         content: (
           <div className="space-y-6">
-            {cfg?.main && <BossEncounters group={cfg.main} lang={lang} hideSpawnLabel compact />}
+            {cfg?.main && (
+              <BossEncounters
+                group={cfg.main}
+                lang={lang}
+                pinned={cfg.pinned}
+                hideSpawnLabel
+                compact
+              />
+            )}
             <SegmentedTabs
               ariaLabel={t('guides.tips.phase2')}
               tabs={teamTabs}

@@ -148,6 +148,36 @@ export async function patchGuideMetaFields(
   return true;
 }
 
+/**
+ * Ajoute une clé d'archive au `pinned` du `config.json` d'UNE version (idempotent).
+ * Rend `false` si le guide, la version ou le fichier est introuvable.
+ *
+ * C'est le seul endroit où le pin d'un guide VERSIONNÉ peut vivre : le guide
+ * désigne un COMBAT, pas un monstre, donc il n'a aucun id à réécrire chez lui —
+ * et seul le `config.json` d'une version peut différer d'une version à l'autre.
+ */
+export async function addVersionPin(
+  category: string,
+  slug: string,
+  versionKey: string,
+  archiveKey: string,
+): Promise<boolean> {
+  const guide = getGuide(category, slug);
+  if (!guide) return false;
+  const dir = guideDir(category, slug);
+  if (!dir || !VERSION_KEY_RE.test(versionKey)) return false;
+  const cfg = readGuideVersionFile<Record<string, unknown>>(guide, versionKey, 'config.json');
+  if (!cfg) return false; // une version sans config n'a pas de combat à épingler
+  const pinned = Array.isArray(cfg.pinned) ? (cfg.pinned as string[]) : [];
+  // Idempotent, et le monstre ne peut être épinglé qu'à UN état par version :
+  // re-versionner remplace le pin précédent plutôt que d'en empiler deux, ce que
+  // `pinResolver` trancherait en silence (premier gagnant).
+  const live = archiveKey.split('@')[0];
+  const next = [...pinned.filter((k) => k.split('@')[0] !== live), archiveKey].sort();
+  await writeJson(resolve(dir, 'versions', versionKey, 'config.json'), { ...cfg, pinned: next });
+  return true;
+}
+
 /** Fusionne un champ dans `meta.json` (préserve tout le reste ; vide supprime). */
 async function patchGuideMeta(
   category: string,

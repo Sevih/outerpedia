@@ -26,7 +26,7 @@ import {
   encountersOfIds,
   type Encounter,
 } from '@/lib/data/encounters';
-import { getMonster, monsterDisplayNames, monsterIconSrc } from '@/lib/data/monsters';
+import { getMonster, monsterDisplayNames, monsterIconSrc, pinResolver } from '@/lib/data/monsters';
 import { BossCard } from './BossPanel';
 import { MonsterLineup, type LineupItem } from './MonsterLineup';
 import { EncounterPane, EncounterSelection, EncounterTabs } from './EncounterSelection';
@@ -47,28 +47,31 @@ function lineup(
   afterStats: ReactNode,
   hideSpawnLabel: boolean,
   compact: boolean,
+  pin: (id: string) => string,
 ): LineupItem[] {
   const ordered = [...monsters].sort((a, b) => Number(a.role === 'add') - Number(b.role === 'add'));
-  const names = monsterDisplayNames(
-    ordered.map((m) => m.id),
-    lang,
-  );
+  // Les ids passent par l'ÉPINGLAGE avant tout le reste : sur une version figée,
+  // c'est le monstre d'époque qu'il faut nommer, illustrer et décrire — pas
+  // seulement dans sa carte.
+  const ids = ordered.map((m) => pin(m.id));
+  const names = monsterDisplayNames(ids, lang);
 
   return ordered.map((m, slot) => {
-    const monster = getMonster(m.id);
+    const id = ids[slot];
+    const monster = getMonster(id);
     if (!monster) {
       throw new Error(
-        `BossEncounters : monstre « ${m.id} » (donjon ${e.id}) absent de ` +
+        `BossEncounters : monstre « ${id} » (donjon ${e.id}) absent de ` +
           `data/generated/monsters.json — à extraire/valider via l'admin.`,
       );
     }
     return {
       role: m.role === 'add' ? 'add' : 'boss',
-      name: names.get(m.id) ?? monster.name.en,
+      name: names.get(id) ?? monster.name.en,
       iconSrc: monsterIconSrc(monster),
       card: (
         <BossCard
-          monsterId={m.id}
+          monsterId={id}
           spawns={encounterSpawnContexts(e, m, lang)}
           lang={lang}
           role={m.role}
@@ -112,6 +115,13 @@ export async function BossEncounters({
   hideSpawnLabel = false,
   /** Mode COMPACT des cartes de boss (cf. `BossCard`) — stats repliées, skills en onglets. */
   compact = false,
+  /**
+   * ÉPINGLAGE de la version : les clés d'archive (`<id>@<n>`) des monstres à
+   * montrer dans leur état FIGÉ plutôt que vivant. Liste CREUSE — un monstre
+   * absent reste live. C'est le seul moyen pour un guide qui désigne un COMBAT :
+   * il ne nomme aucun monstre, il n'a donc aucun id à réécrire chez lui.
+   */
+  pinned,
 }: {
   /** Le COMBAT — pour les modes qui en déclarent un (`DungeonRef.group`). */
   group?: string;
@@ -126,8 +136,10 @@ export async function BossEncounters({
   monsters?: (encounter: Encounter) => DungeonMonster[];
   hideSpawnLabel?: boolean;
   compact?: boolean;
+  pinned?: readonly string[];
 }) {
   const t = await getT(lang);
+  const pin = pinResolver(pinned);
 
   if (!group === !dungeons) {
     throw new Error('BossEncounters : exactement un de « group » / « dungeons » est attendu.');
@@ -169,7 +181,7 @@ export async function BossEncounters({
                 BOSS, jamais sous celle d'un renfort. */}
             <MonsterLineup
               addsLabel={t('guides.boss_display.add')}
-              items={lineup(e, monsters(e), lang, afterStats?.(e), hideSpawnLabel, compact)}
+              items={lineup(e, monsters(e), lang, afterStats?.(e), hideSpawnLabel, compact, pin)}
             />
           </EncounterPane>
         ))}

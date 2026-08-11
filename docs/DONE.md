@@ -7,6 +7,35 @@
 
 ## 2026-08-12
 
+- **La liste `pinned` : les guides qui ne NOMMENT pas leur boss savent l'épingler**
+  — le dernier morceau, et celui qui rend tout le reste utile.
+  Un guide versionné (joint-challenge, world-boss, guild-raid) désigne un COMBAT :
+  ses monstres sont résolus au rendu depuis `encounters.json`, il n'y a aucun id à
+  réécrire chez lui. Le pin ne peut donc vivre que dans une LISTE à part — `pinned`
+  du `config.json` de la version, seul endroit qui puisse différer d'une version à
+  l'autre — et c'est le RENDU qui doit faire passer chaque id du combat au travers.
+  Sans ça, versionner un boss de mode versionné ne changeait rigoureusement rien à
+  l'écran : l'archive existait et personne ne la lisait. Or c'est le cas
+  MAJORITAIRE (mesuré : pour les boss versionnés par Sevih, 100 % des références
+  sont indirectes).
+  LECTURE : `pinResolver` (creux — un monstre absent de la liste reste live, donc
+  zéro migration), branché dans `BossEncounters` et remonté aux quatre points
+  d'appel des guides versionnés. `monsterDisplayNames` passe par `getMonster` au
+  lieu de la table vivante : sur une version figée, c'est le nom D'ÉPOQUE qu'il
+  faut désambiguïser, pas seulement dans la carte.
+  ÉCRITURE : « Versionner » pose la clé lui-même (`addVersionPin`), idempotent et
+  un seul état par monstre et par version — re-versionner REMPLACE le pin plutôt
+  que d'en empiler deux, ce que `pinResolver` trancherait en silence.
+  RÈGLE DE RENDU RETOUCHÉE, et c'est le piège de l'affaire : `VersionedBossGuide`
+  monte le panneau de boss au-dessus des onglets quand toutes les versions jouent
+  le même combat. Deux saisons qui rejouent le même groupe mais dont l'une épingle
+  le boss d'avant une refonte ne montrent PAS la même chose — le panneau partagé
+  aurait affiché le même boss aux deux, et la version figée aurait menti. La
+  signature de partage comprend donc l'épinglage.
+  Ce qui n'est PAS épinglable reste dit : un guide PLAT qui atteint le monstre par
+  un combat n'a pas de version où poser le pin — et il suit le live par nature,
+  puisqu'il décrit le contenu courant. 1508 tests verts.
+
 - **Le `meta.bossId` d'un guide VERSIONNÉ ne doit JAMAIS être épinglé** — bug
   attrapé au PREMIER usage réel du mécanisme, et payé sur un fichier de contenu.
   Sevih a versionné trois boss (Annihilator ×2, Prototype EX-78). Le ré-épinglage

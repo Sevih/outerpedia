@@ -69,6 +69,35 @@ export function getMonster(id: string): Monster | undefined {
 }
 
 /**
+ * ÉPINGLAGE D'UN GUIDE VERSIONNÉ — `<id>` → `<id>@<n>`, pour les guides qui ne
+ * NOMMENT pas leur boss.
+ *
+ * Un guide versionné (joint challenge, world boss, guild raid) désigne un COMBAT
+ * (`group`), pas un monstre : ses monstres sont résolus au rendu depuis
+ * `encounters.json`, et il n'y a donc aucun id à réécrire dans le guide. Le pin
+ * ne peut vivre que dans une LISTE à part — `pinned` dans le `config.json` de la
+ * version — et c'est le rendu qui doit faire passer chaque id du combat au
+ * travers. C'est ce que fait ce résolveur.
+ *
+ * La liste est CREUSE, exprès : un combat amène plusieurs monstres et une maj
+ * n'en touche souvent qu'un. Un id absent reste donc LIVE, ce qui rend zéro
+ * migration nécessaire sur les guides existants.
+ *
+ * Un id déjà épinglé n'est pas retouché : le guide a alors tranché lui-même.
+ */
+export function pinResolver(pinned?: readonly string[]): (id: string) => string {
+  if (!pinned?.length) return (id) => id;
+  const byLiveId = new Map<string, string>();
+  // Premier gagnant : deux pins du même monstre dans une version est une erreur
+  // de contenu, et prendre le second silencieusement la rendrait invisible.
+  for (const key of pinned) {
+    const live = key.split('@')[0];
+    if (!byLiveId.has(live)) byLiveId.set(live, key);
+  }
+  return (id) => (isPinned(id) ? id : (byLiveId.get(id) ?? id));
+}
+
+/**
  * Tous les monstres, étiquetés par leur nom — pour un SÉLECTEUR (admin, guides
  * dimensional-singularity : `meta.bossId`). Trié par nom.
  */
@@ -94,19 +123,22 @@ export function listMonsters(lang: Lang): { id: string; label: string }[] {
  * déjà distincts.
  */
 export function monsterDisplayNames(ids: string[], lang: Lang): Map<string, string> {
-  const monsters = MONSTERS();
   const names = new Map<string, string>();
   const count = new Map<string, number>();
+  const byId = new Map<string, Monster>();
   for (const id of ids) {
-    const m = monsters[id];
+    // `getMonster` et pas la table vivante : un guide épinglé passe ici des ids
+    // `<id>@<n>`, et c'est le nom D'ÉPOQUE qu'il faut désambiguïser.
+    const m = getMonster(id);
     if (!m) continue;
+    byId.set(id, m);
     const name = lRec(m.name, lang);
     names.set(id, name);
     count.set(name, (count.get(name) ?? 0) + 1);
   }
   for (const [id, name] of names) {
     if ((count.get(name) ?? 0) < 2) continue;
-    const element = lRec(G().elements?.[monsters[id]!.element], lang);
+    const element = lRec(G().elements?.[byId.get(id)!.element], lang);
     if (element) names.set(id, `${name} (${element})`);
   }
   return names;

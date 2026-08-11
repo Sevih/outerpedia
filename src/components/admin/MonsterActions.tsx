@@ -24,6 +24,7 @@ interface RepinReport {
   files: string[];
   applied: Array<{ guide: string; field: string }>;
   skipped: string[];
+  pinnedVersions: string[];
   pending: Array<{ guide: string; origin: string; version?: string }>;
   kept: Array<{ guide: string; field: string; reason: string }>;
 }
@@ -146,13 +147,21 @@ export function MonsterActions({
               ))}
             </p>
           )}
-          {/* Une référence qui passe par un COMBAT n'a aucun id à réécrire : la
-              taire ferait croire le ré-épinglage complet alors qu'il ne l'est pas. */}
+          {/* Un guide versionné ne NOMME pas son boss : son pin vit dans le
+              `config.json` de la version, qui est du contenu lui aussi. */}
+          {status.repin.pinnedVersions.length > 0 && (
+            <p className="border-success/40 bg-success/5 text-success rounded-md border p-3">
+              ✓ Pinned in {status.repin.pinnedVersions.length} guide version(s) — commit their{' '}
+              <code>config.json</code> too: {status.repin.pinnedVersions.join(', ')}
+            </p>
+          )}
+          {/* Ce qui reste : un guide PLAT qui atteint le monstre par un combat
+              n'a pas de version où poser le pin — et il suit le live par nature.
+              Le taire ferait croire le geste complet alors qu'il ne l'est pas. */}
           {status.repin.pending.length > 0 && (
             <p className="border-warn/40 bg-warn/5 text-warn rounded-md border p-3">
               ⚠ {status.repin.pending.length} reference(s) reach this monster through an encounter
-              group and could not be re-pinned automatically — they need the versioned guide’s{' '}
-              <code>pinned</code> list:{' '}
+              group with no version to pin — those guides follow the live boss:{' '}
               {status.repin.pending
                 .map((p) => `${p.guide}${p.version ? ` (${p.version})` : ''}`)
                 .join(', ')}

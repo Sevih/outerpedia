@@ -25,7 +25,7 @@
  */
 import { listGuides, readGuideVersionFile, type Guide } from '@/lib/data/guides';
 import { encountersOfGroup } from '@/lib/data/encounters';
-import { patchGuideMetaFields } from '@/lib/admin/guide-store';
+import { addVersionPin, patchGuideMetaFields } from '@/lib/admin/guide-store';
 
 /** Clés d'un `config.json` de version qui désignent un COMBAT. */
 const GROUP_KEYS = ['group', 'main', 'subA', 'subB'] as const;
@@ -173,10 +173,13 @@ export interface RepinResult {
   applied: RepinEdit[];
   /** Guides du plan qu'on n'a PAS su écrire (introuvables, hors périmètre). */
   skipped: string[];
+  /** Versions dont le `config.json` a reçu la clé d'archive (`pinned`). */
+  pinnedVersions: string[];
   /**
-   * Références indirectes : elles atteignent le monstre par un COMBAT, il n'y a
-   * aucun id à réécrire. Rendues telles quelles pour que l'appelant les dise —
-   * les taire ferait croire le ré-épinglage complet alors qu'il ne l'est pas.
+   * Références indirectes qu'on n'a PAS su épingler — un guide plat qui désigne
+   * un combat n'a pas de version où poser le pin, et il suit le live par nature
+   * (il décrit le contenu courant, il n'a pas d'archive à lire). Rendues telles
+   * quelles : les taire ferait croire le geste complet.
    */
   pending: RepinPending[];
   /** Références laissées en live à dessein (cf. `RepinKept`). */
@@ -201,6 +204,8 @@ export async function applyRepin(
    * vérifier du tout.
    */
   write: typeof patchGuideMetaFields = patchGuideMetaFields,
+  /** L'écriture du pin de version, substituable pour les mêmes raisons. */
+  pin: typeof addVersionPin = addVersionPin,
 ): Promise<RepinResult> {
   const byGuide = new Map<string, RepinEdit[]>();
   for (const e of plan.edits) {
@@ -222,5 +227,22 @@ export async function applyRepin(
       skipped.push(guide);
     }
   }
-  return { files, applied, skipped, pending: plan.pending, kept: plan.kept };
+  // Références INDIRECTES : rien à réécrire dans le guide, le pin va dans le
+  // `config.json` de la VERSION. C'est le seul chemin pour un guide versionné —
+  // et c'est le cas majoritaire (joint challenge, world boss, guild raid).
+  const pinnedVersions: string[] = [];
+  const stillPending: RepinPending[] = [];
+  for (const p of plan.pending) {
+    const [category, slug] = p.guide.split('/');
+    if (
+      p.origin === 'version.config' &&
+      p.version &&
+      (await pin(category, slug, p.version, plan.key))
+    ) {
+      pinnedVersions.push(`${p.guide}@${p.version}`);
+    } else {
+      stillPending.push(p);
+    }
+  }
+  return { files, applied, skipped, pinnedVersions, pending: stillPending, kept: plan.kept };
 }

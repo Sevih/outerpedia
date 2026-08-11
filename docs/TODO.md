@@ -75,21 +75,14 @@
 > doit la montrer plutôt que la cacher — l'archive garde le snapshot si on change
 > d'avis. Absence de pin = live, donc zéro migration sur les 16 guides existants.
 
-> FAIT depuis (cf. DONE 11/08) : le rendu sait lire un id épinglé, l'archive est
-> AUTO-SUFFISANTE (elle fige ses sources, donc un boss épinglé garde ses libellés
-> d'époque), la garde est posée, et « Versionner » RÉ-ÉPINGLE tout seul les guides
-> qui nomment le monstre. Ne reste que le cas des guides VERSIONNÉS, qui ne
-> nomment pas leur boss — c'est le seul qui demande du code de RENDU.
+> LE MÉCANISME EST COMPLET (cf. DONE 11 et 12/08) : le rendu lit un id épinglé,
+> l'archive est AUTO-SUFFISANTE (elle fige ses sources, donc un boss épinglé garde
+> ses libellés d'époque), la garde est posée, et « Versionner » ré-épingle tout
+> seul — en réécrivant `meta.bossId`/`meta.monsters` des guides qui NOMMENT le
+> monstre, et en posant `pinned` dans le `config.json` des versions de ceux qui
+> désignent un COMBAT (joint-challenge, world-boss, guild-raid). Ne reste que le
+> confort de lecture ci-dessous.
 
-- [ ] **La liste `pinned` des guides VERSIONNÉS.** Les références indirectes
-      (`meta.group`, `meta.dungeons`, groupes des `config.json`) désignent un
-      COMBAT : il n'y a aucun id à réécrire, le pin ne peut être qu'une liste à
-      part dans le `config.json` de la version — et LE RENDU DOIT APPRENDRE À LA
-      LIRE (`BossEncounters` résoudrait chaque id du combat au travers). Décisions
-      déjà arbitrées, cf. l'encadré ci-dessus.
-      ⚠ NE PAS piloter ça depuis `GUIDE_SPECS` : guild-raid n'y est pas (non
-      éditable par l'admin) alors qu'elle représente 5 des 16 guides versionnés.
-      Les 3 catégories versionnées sont joint-challenge, world-boss ET guild-raid.
 - [ ] _(optionnel)_ **Bandeau lecteur** « boss tel qu'avant la maj X » sur la
       carte d'un guide épinglé : l'archive porte déjà `label`, `gameVersion` et
       `committedAt`. Sans ça, un guide figé est indiscernable d'un guide à jour.
