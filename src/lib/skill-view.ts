@@ -12,7 +12,15 @@ import type { Glossaries, Skill } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { MAIN_SKILL_TYPES, levelAt, splitChainDual } from '@/lib/skills';
-import { curatedKeyIndex, getMergedEffect, mergeStatusEffects } from '@/lib/data/effects';
+import {
+  curatedKeyIndex,
+  getMergedEffect,
+  liveEffectSources,
+  mergeStatusEffects,
+  mergeStatusEffectsI18n,
+  type EffectSources,
+  type StatusMapI18n,
+} from '@/lib/data/effects';
 import { loadDataJson } from '@/lib/data/disk';
 import { isDebuffEffect } from '@/components/character/EffectChips';
 import type { ClientEffect, StatusMap } from '@/components/character/EffectChips';
@@ -35,6 +43,35 @@ const G = (): Glossaries => loadDataJson<Glossaries>('generated/glossaries.json'
  * caller a déjà rendu la chip au skill qui la décrit. */
 const monsterCurated = (): MonsterKitCuration =>
   loadDataJson<MonsterKitCuration>('curated/monster-skills.json');
+
+/**
+ * SOURCES de résolution d'un kit : l'index du glossaire (quelle réf désigne quel
+ * statut) et les effets fusionnés (son nom, son icône, sa description). Passées
+ * en paramètre OPTIONNEL partout — défaut = le live, donc invisible pour les
+ * appelants ordinaires.
+ *
+ * Elles existent pour le boss ÉPINGLÉ : un skill figé ne stocke que des RÉFÉRENCES
+ * d'effets, rejouées à l'affichage. Contre le glossaire courant, un guide versionné
+ * afficherait les libellés d'aujourd'hui — et perdrait les chips dont la réf a
+ * disparu depuis. L'archive fige donc ses sources et les passe ici (cf. `EffectSources`).
+ */
+export interface KitSources {
+  g: Glossaries;
+  fx: EffectSources;
+}
+
+// Mémoïsé sur l'identité des deux sources (chacune déjà cachée sur son mtime) :
+// `liveKitSources` est le défaut de fonctions appelées des milliers de fois par page.
+let liveKitCache: KitSources | null = null;
+
+/** Sources du LIVE : glossaire du disque + effets fusionnés courants. */
+export function liveKitSources(): KitSources {
+  const g = G();
+  const fx = liveEffectSources();
+  if (liveKitCache && liveKitCache.g === g && liveKitCache.fx === fx) return liveKitCache;
+  liveKitCache = { g, fx };
+  return liveKitCache;
+}
 
 /**
  * Curation d'affichage des kits PERSOS (cf. doc dans le fichier curé). Deux
@@ -74,11 +111,12 @@ function applyCardCuration(
   effects: ClientEffect[],
   cardId: string,
   cur: CharacterKitCuration,
+  src: KitSources,
 ): ClientEffect[] {
   const hidden = new Set(cur.chipHide?.[cardId] ?? []);
   let out = hidden.size ? effects.filter((e) => !hidden.has(e.tooltip ?? e.label ?? '')) : effects;
   for (const ref of cur.chipAdd?.[cardId] ?? []) {
-    if (!getMergedEffect(G().effectByTooltip[ref] ?? ref)) continue;
+    if (!getMergedEffect(src.g.effectByTooltip[ref] ?? ref, src.fx)) continue;
     out = [...out, { family: 'stat', category: 'buff', tooltip: ref }];
   }
   return out;
@@ -91,16 +129,17 @@ function applyCardCuration(
  */
 export function monsterChipMeta(
   e: NonNullable<Skill['effects']>[number],
+  src: KitSources = liveKitSources(),
 ): { name: string; icon?: string; isDebuff: boolean } | null {
   if (e.type.startsWith('BT_WG')) return null;
-  const chip = toChipEffect(e);
+  const chip = toChipEffect(e, src);
   if (!chip) return null;
   const key = chip.tooltip ?? chip.label;
   if (!key) return null;
-  const g = G();
+  const g = src.g;
   const eff = chip.tooltip
-    ? getMergedEffect(g.effectByTooltip[chip.tooltip] ?? chip.tooltip)
-    : getMergedEffect(g.effectByLabel[chip.label!] ?? chip.label!);
+    ? getMergedEffect(g.effectByTooltip[chip.tooltip] ?? chip.tooltip, src.fx)
+    : getMergedEffect(g.effectByLabel[chip.label!] ?? chip.label!, src.fx);
   return {
     name: eff?.name.en ?? key,
     ...(eff?.icon ? { icon: eff.icon } : {}),
@@ -159,8 +198,12 @@ function isTranscendUpgrade(s: Skill, e: RawEffect): boolean {
  * (`bySideKey`) est PARTAGÉ avec `resolveEffectKey`, mémoïsé sur le mtime du
  * fichier curé (cf. `curatedKeyIndex` d'effects.ts) — plus de cache local qui se
  * périmerait dans le process admin long-running. */
-function curatedCreationFor(side: 'buff' | 'debuff', type: string): string | undefined {
-  const { bySideKey } = curatedKeyIndex();
+function curatedCreationFor(
+  side: 'buff' | 'debuff',
+  type: string,
+  src: KitSources,
+): string | undefined {
+  const { bySideKey } = curatedKeyIndex(src.fx);
   return (
     bySideKey.get(`${side}|${type}`) ??
     bySideKey.get(`${side === 'buff' ? 'debuff' : 'buff'}|${type}`)
@@ -178,10 +221,10 @@ function curatedCreationFor(side: 'buff' | 'debuff', type: string): string | und
  * Les upgrades de transcendance sont filtrés en amont (`isTranscendUpgrade`,
  * qui a besoin du skill porteur).
  */
-function toChipEffect(e: RawEffect): ClientEffect | null {
+function toChipEffect(e: RawEffect, src: KitSources): ClientEffect | null {
   if (e.choice) return null;
   if (e.buff && NON_CHIP_BUFFS.has(e.buff)) return null;
-  const g = G();
+  const g = src.g;
   const base = {
     family: e.family,
     category: e.category,
@@ -189,7 +232,7 @@ function toChipEffect(e: RawEffect): ClientEffect | null {
     stat: e.stat,
     mode: e.mode,
   };
-  if (e.tooltip && (g.effectByTooltip[e.tooltip] ?? getMergedEffect(e.tooltip)))
+  if (e.tooltip && (g.effectByTooltip[e.tooltip] ?? getMergedEffect(e.tooltip, src.fx)))
     return { ...base, tooltip: e.tooltip };
   const isStatLike = e.type === 'BT_STAT' || e.type === 'BT_STAT_PREMIUM' || e.type === 'BT_NONE';
   // CAS ISOLÉ : `BT_CALL_BACKUP_2` (« double dual », Eva/Luna/Iota…) réutilise le
@@ -197,7 +240,7 @@ function toChipEffect(e: RawEffect): ClientEffect | null {
   // simple et FUSIONNE avec lui (dédup). On force son identité curée propre
   // (Dual Attack x2). Ciblé exprès : les autres types à label restent label-first.
   if (e.type === 'BT_CALL_BACKUP_2') {
-    const cid = curatedCreationFor(e.category === 'buff' ? 'buff' : 'debuff', e.type);
+    const cid = curatedCreationFor(e.category === 'buff' ? 'buff' : 'debuff', e.type, src);
     if (cid) return { ...base, tooltip: cid };
   }
   if (e.label && !isStatLike && !WIRING_LABELS.has(e.label) && g.effectByLabel[e.label])
@@ -209,17 +252,20 @@ function toChipEffect(e: RawEffect): ClientEffect | null {
   // HP de la cible pour les dégâts fixes — pas un buff de stat).
   if (!isStatLike) {
     const side = e.category === 'buff' ? 'buff' : 'debuff';
-    const cid = curatedCreationFor(side, e.type);
+    const cid = curatedCreationFor(side, e.type, src);
     if (cid) return { ...base, tooltip: cid };
   }
   return null;
 }
 
 /** Effets structurés d'un skill → forme client (chips affichables seulement). */
-export function toClientEffects(s: Skill): ClientEffect[] | undefined {
+export function toClientEffects(
+  s: Skill,
+  src: KitSources = liveKitSources(),
+): ClientEffect[] | undefined {
   return s.effects
     ?.filter((e) => !isTranscendUpgrade(s, e))
-    .map(toChipEffect)
+    .map((e) => toChipEffect(e, src))
     .filter((e): e is ClientEffect => Boolean(e));
 }
 
@@ -245,24 +291,38 @@ export function mainSkills(skills: Skill[]): Skill[] {
  * icône et description depuis les effets FUSIONNÉS (les overrides curés de
  * /admin/effects comptent) — utilisé par le site ET l'admin.
  */
-export function buildStatusMap(skills: Skill[], lang: Lang): StatusMap {
-  const statuses: StatusMap = {};
+export function buildStatusMap(
+  skills: Skill[],
+  lang: Lang,
+  src: KitSources = liveKitSources(),
+): StatusMap {
+  return mergeStatusEffects({}, statusSourceEffects(skills, src), lang, src.fx);
+}
+
+/**
+ * Mêmes statuts, dictionnaires ENTIERS (non localisés) — la forme que fige
+ * l'archive d'un boss versionné : un guide épinglé se lit dans les cinq langues.
+ */
+export function buildStatusMapI18n(
+  skills: Skill[],
+  src: KitSources = liveKitSources(),
+): StatusMapI18n {
+  return mergeStatusEffectsI18n({}, statusSourceEffects(skills, src), src.fx);
+}
+
+/** Les effets dont un kit tire ses statuts nommés (une seule liste, deux vues). */
+function statusSourceEffects(skills: Skill[], src: KitSources): ClientEffect[] {
   const burstable = mainSkills(skills).find((s) => s.burstAP?.length);
-  mergeStatusEffects(
-    statuses,
-    [
-      // Chips affichables (mêmes réfs que les cartes — ponts curés inclus).
-      ...skills.flatMap((s) => toClientEffects(s) ?? []),
-      // Statuts affichés par les niveaux (Heavy Strike…) — sans dédup ici :
-      // une entrée de plus dans la map est inoffensive sans chip.
-      ...skills.flatMap((s) => levelTooltipEffects(s)),
-      // Effets synthétiques (bonus WG des bursts) — leur statut vient d'une
-      // création curée, résolue par id directement.
-      ...(burstable ? syntheticBurstEffects(skills) : []),
-    ],
-    lang,
-  );
-  return statuses;
+  return [
+    // Chips affichables (mêmes réfs que les cartes — ponts curés inclus).
+    ...skills.flatMap((s) => toClientEffects(s, src) ?? []),
+    // Statuts affichés par les niveaux (Heavy Strike…) — sans dédup ici :
+    // une entrée de plus dans la map est inoffensive sans chip.
+    ...skills.flatMap((s) => levelTooltipEffects(s, undefined, src)),
+    // Effets synthétiques (bonus WG des bursts) — leur statut vient d'une
+    // création curée, résolue par id directement.
+    ...(burstable ? syntheticBurstEffects(skills) : []),
+  ];
 }
 
 /**
@@ -315,6 +375,7 @@ export function monsterSkillViews(
   // Curation substituable (ADMIN : l'éditeur de câblage passe `{}` pour
   // obtenir les positions « règles pures », et sa propre copie en prévisualisation).
   curated: MonsterKitCuration = monsterCurated(),
+  src: KitSources = liveKitSources(),
 ): MonsterSkillView[] {
   // Le buff est-il référencé par la desc (id EXACT, frontière de mot) ?
   const mentions = (s: Skill, buffId: string): boolean =>
@@ -381,7 +442,7 @@ export function monsterSkillViews(
     const own = (s.effects ?? []).filter((e) => !isWg(e) && !movedFrom.get(s.id)?.has(e));
     return [...own, ...(extraOf.get(s.id) ?? [])]
       .filter((e) => !e.buff || !hidden.has(e.buff))
-      .map(toChipEffect)
+      .map((e) => toChipEffect(e, src))
       .filter((e): e is ClientEffect => Boolean(e));
   };
 
@@ -442,7 +503,7 @@ export function monsterSkillViews(
     // Chips CURÉES en plus (chipAdd) : statuts décrits par la desc mais
     // appliqués hors kit — seules les réfs résolubles passent.
     for (const t of curated.chipAdd?.[s.id] ?? []) {
-      if (!getMergedEffect(G().effectByTooltip[t] ?? t)) continue;
+      if (!getMergedEffect(src.g.effectByTooltip[t] ?? t, src.fx)) continue;
       effects = [...effects, { family: 'stat', category: 'buff', tooltip: t }];
     }
     const deduped = dedupList(effects);
@@ -468,18 +529,21 @@ export function monsterSkillViews(
  * Dédup par effet CANONIQUE (un tooltip et son type pointent le même statut).
  * `unresolved` = types sans entrée au glossaire, à afficher bruts.
  */
-export function immunityChipEffects(m: {
-  buffImmune?: string[];
-  statBuffImmune?: string[];
-  immuneTooltips?: string[];
-}): { effects: ClientEffect[]; unresolved: string[] } {
+export function immunityChipEffects(
+  m: {
+    buffImmune?: string[];
+    statBuffImmune?: string[];
+    immuneTooltips?: string[];
+  },
+  src: KitSources = liveKitSources(),
+): { effects: ClientEffect[]; unresolved: string[] } {
   const effects: ClientEffect[] = [];
   const unresolved: string[] = [];
   const seen = new Set<string>();
-  const g = G();
+  const g = src.g;
   const push = (ref: string): boolean => {
     const canonical = g.effectByTooltip[ref] ?? ref;
-    if (!getMergedEffect(canonical)) return false;
+    if (!getMergedEffect(canonical, src.fx)) return false;
     if (!seen.has(canonical)) {
       seen.add(canonical);
       effects.push({ family: 'immunity', category: 'debuff', tooltip: ref });
@@ -539,6 +603,7 @@ function syntheticBurstEffects(skills: Skill[]): ClientEffect[] {
 function levelTooltipEffects(
   s: Skill,
   ctx?: { refs: Set<string | undefined>; kinds: Set<string> },
+  src: KitSources = liveKitSources(),
 ): ClientEffect[] {
   const present = new Set((s.effects ?? []).map((e) => e.tooltip).filter(Boolean));
   // Tooltips du NIVEAU MAX (ce que le jeu affiche au palier consulté), PAS
@@ -557,13 +622,13 @@ function levelTooltipEffects(
       `(?:if|when)[^.]*\\bha(?:s|ve)\\b[^.]*${name!.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`,
       'i',
     ).test(desc);
-  const g = G();
+  const g = src.g;
   return [...ids]
     .filter((t) => {
       // Déjà représenté par une chip du kit : même réf (chips de passifs
       // attribués — Pureblood's Dominion, 2000035)…
       if (present.has(t) || ctx?.refs.has(t)) return false;
-      const eff = getMergedEffect(g.effectByTooltip[t] ?? t);
+      const eff = getMergedEffect(g.effectByTooltip[t] ?? t, src.fx);
       if (!eff?.icon) return false;
       // …ou même TYPE de mécanique sous un statut custom : le générique est
       // une redite (« Execution time! » ⊃ « Increased Damage Taken », 2000020).
@@ -615,9 +680,14 @@ function passiveKitRaw(skills: Skill[], kit: string, kitSkills: Skill[]): RawEff
   return raw;
 }
 
-function passiveKitEffects(skills: Skill[], kit: string, kitSkills: Skill[]): ClientEffect[] {
+function passiveKitEffects(
+  skills: Skill[],
+  kit: string,
+  kitSkills: Skill[],
+  src: KitSources,
+): ClientEffect[] {
   return passiveKitRaw(skills, kit, kitSkills)
-    .map(toChipEffect)
+    .map((e) => toChipEffect(e, src))
     .filter((e): e is ClientEffect => Boolean(e));
 }
 
@@ -633,6 +703,7 @@ export function cardEffects(
   // Curation substituable (ADMIN : l'éditeur passe `{}` pour les positions
   // « règles pures », et sa propre copie en prévisualisation).
   curated: CharacterKitCuration = characterCurated(),
+  src: KitSources = liveKitSources(),
 ): ClientEffect[] | undefined {
   // VARIANTES du même type (formes/copies — Luna 2000119/120 : White Night ET
   // Polar Night) : l'union de leurs effets = ce que le kit fait, quelle que
@@ -644,15 +715,15 @@ export function cardEffects(
   // Dédup : plusieurs buffs techniques d'un même skill peuvent pointer le
   // même statut (S2 de Demiurge Luna : 2 buffs → tooltip « White Night »).
   const chips = dedupList([
-    ...own.flatMap((k) => toClientEffects(k) ?? []),
-    ...passiveKitEffects(skills, s.type, [s]),
+    ...own.flatMap((k) => toClientEffects(k, src) ?? []),
+    ...passiveKitEffects(skills, s.type, [s], src),
   ]);
   // Réfs et types de mécanique déjà représentés par une chip — dédup des
   // statuts de niveau (mêmes règles que le contrôle V2).
   const rawChipped = [
     ...own.flatMap((k) => (k.effects ?? []).filter((e) => !isTranscendUpgrade(k, e))),
     ...passiveKitRaw(skills, s.type, [s]),
-  ].filter((e) => toChipEffect(e));
+  ].filter((e) => toChipEffect(e, src));
   const ctx = {
     refs: new Set(chips.map((c) => c.tooltip)),
     kinds: new Set(rawChipped.map(kindOf)),
@@ -660,11 +731,12 @@ export function cardEffects(
   const merged = applyCardCuration(
     [
       ...chips,
-      ...levelTooltipEffects(s, ctx),
+      ...levelTooltipEffects(s, ctx, src),
       ...(s.burstAP?.length ? syntheticBurstEffects(skills) : []),
     ],
     s.id,
     curated,
+    src,
   );
   return merged.length ? merged : undefined;
 }
@@ -725,14 +797,15 @@ function dedupList(effects: ClientEffect[]): ClientEffect[] {
 }
 
 /** Dédoublonne des effets venus de plusieurs skills techniques (aerial/ground…). */
-function dedupEffects(list: Skill[]): ClientEffect[] {
-  return dedupList(list.flatMap((s) => toClientEffects(s) ?? []));
+function dedupEffects(list: Skill[], src: KitSources): ClientEffect[] {
+  return dedupList(list.flatMap((s) => toClientEffects(s, src) ?? []));
 }
 
 export function buildChainView(
   skills: Skill[],
   lang: Lang,
   curated: CharacterKitCuration = characterCurated(),
+  src: KitSources = liveKitSources(),
 ): ChainView | null {
   const cp = skills.find((s) => s.type === 'chain_passive');
   if (!cp) return null;
@@ -764,13 +837,13 @@ export function buildChainView(
   const { chain, dual } = cp.desc ? splitChainDual(lRec(cp.desc, lang)) : { chain: '', dual: '' };
   // Effets de PASSIFS rattachés à la chaîne/duo (convention `_chain`/`_backup`),
   // répartis entre les deux moitiés par leur id de buff.
-  const passive = passiveKitEffects(skills, 'chain_passive', [cp, ...strikes, ...backups]);
+  const passive = passiveKitEffects(skills, 'chain_passive', [cp, ...strikes, ...backups], src);
   const chainChips = dedupList([
-    ...dedupEffects([cp, ...strikes]),
+    ...dedupEffects([cp, ...strikes], src),
     ...passive.filter((e) => !e.buff?.includes('_backup')),
   ]);
   const dualChips = dedupList([
-    ...dedupEffects(backups),
+    ...dedupEffects(backups, src),
     ...passive.filter((e) => e.buff?.includes('_backup')),
   ]);
   // Statuts affichés par les NIVEAUX du chain passive (« Heavy Strike ») — le
@@ -779,11 +852,15 @@ export function buildChainView(
   const rawChipped = [cp, ...strikes, ...backups]
     .flatMap((k) => (k.effects ?? []).filter((e) => !isTranscendUpgrade(k, e)))
     .concat(passiveKitRaw(skills, 'chain_passive', [cp, ...strikes, ...backups]))
-    .filter((e) => toChipEffect(e));
-  const levelChips = levelTooltipEffects(cp, {
-    refs: new Set([...chainChips, ...dualChips].map((c) => c.tooltip)),
-    kinds: new Set(rawChipped.map(kindOf)),
-  });
+    .filter((e) => toChipEffect(e, src));
+  const levelChips = levelTooltipEffects(
+    cp,
+    {
+      refs: new Set([...chainChips, ...dualChips].map((c) => c.tooltip)),
+      kinds: new Set(rawChipped.map(kindOf)),
+    },
+    src,
+  );
   return {
     name: lRec(cp.name, lang),
     maxLevel: cp.maxLevel,
@@ -792,8 +869,8 @@ export function buildChainView(
     dualDesc: dual,
     // Curation locale : la chaîne porte l'id du chain_passive, le duo son
     // suffixe dédié (même carte affichée, deux groupes de chips distincts).
-    chainEffects: applyCardCuration([...chainChips, ...levelChips], cp.id, curated),
-    dualEffects: applyCardCuration(dualChips, cp.id + DUAL_CARD_SUFFIX, curated),
+    chainEffects: applyCardCuration([...chainChips, ...levelChips], cp.id, curated, src),
+    dualEffects: applyCardCuration(dualChips, cp.id + DUAL_CARD_SUFFIX, curated, src),
   };
 }
 
@@ -820,11 +897,11 @@ export interface TeamKitView {
 }
 
 /** Chips + cibles d'une liste d'effets bruts, dédupliquées par (réf, cible). */
-function targetedChips(raw: RawEffect[]): TargetedChip[] {
+function targetedChips(raw: RawEffect[], src: KitSources): TargetedChip[] {
   const out: TargetedChip[] = [];
   const seen = new Set<string>();
   for (const e of raw) {
-    const chip = toChipEffect(e);
+    const chip = toChipEffect(e, src);
     if (!chip) continue;
     const key = `${chip.tooltip ?? chip.label}|${e.target}`;
     if (seen.has(key)) continue;
@@ -849,30 +926,38 @@ function rawOf(s: Skill): RawEffect[] {
  * flag `burst` du générateur skill-buffs V2).
  * `extraBase` : effets hors skills rattachés au kit de base (passifs de l'EE).
  */
-export function buildTeamKitView(skills: Skill[], extraBase: RawEffect[] = []): TeamKitView {
+export function buildTeamKitView(
+  skills: Skill[],
+  extraBase: RawEffect[] = [],
+  src: KitSources = liveKitSources(),
+): TeamKitView {
   const kitRaw = (kit: string): RawEffect[] => {
     const variants = skills.filter((s) => s.type === kit);
     return [...variants.flatMap(rawOf), ...passiveKitRaw(skills, kit, variants)];
   };
-  const base = targetedChips([...MAIN_SKILL_TYPES.flatMap(kitRaw), ...extraBase]);
+  const base = targetedChips([...MAIN_SKILL_TYPES.flatMap(kitRaw), ...extraBase], src);
 
   const baseRefs = new Set(base.map((c) => c.chip.tooltip ?? c.chip.label));
   const burst = targetedChips(
     skills.filter((s) => s.type.startsWith('burst_')).flatMap(rawOf),
+    src,
   ).filter((c) => !baseRefs.has(c.chip.tooltip ?? c.chip.label));
 
   const cp = skills.find((s) => s.type === 'chain_passive');
   const strikes = skills.filter((s) => s.type.startsWith('strike_'));
   const backups = skills.filter((s) => s.type.startsWith('backup_'));
   const passive = cp ? passiveKitRaw(skills, 'chain_passive', [cp, ...strikes, ...backups]) : [];
-  const chain = targetedChips([
-    ...(cp ? [cp, ...strikes] : []).flatMap(rawOf),
-    ...passive.filter((e) => !e.buff?.includes('_backup')),
-  ]);
-  const dual = targetedChips([
-    ...backups.flatMap(rawOf),
-    ...passive.filter((e) => e.buff?.includes('_backup')),
-  ]);
+  const chain = targetedChips(
+    [
+      ...(cp ? [cp, ...strikes] : []).flatMap(rawOf),
+      ...passive.filter((e) => !e.buff?.includes('_backup')),
+    ],
+    src,
+  );
+  const dual = targetedChips(
+    [...backups.flatMap(rawOf), ...passive.filter((e) => e.buff?.includes('_backup'))],
+    src,
+  );
 
   return { base, burst, chain, dual };
 }

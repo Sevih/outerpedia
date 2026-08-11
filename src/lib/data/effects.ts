@@ -18,8 +18,49 @@ const G = glossariesData as unknown as Glossaries;
 const EFFECTS = G.effects as Record<string, Effect>;
 const BY_TOOLTIP = G.effectByTooltip as Record<string, string>;
 const BY_LABEL = G.effectByLabel as Record<string, string>;
+const BY_KEY = G.effectByKey as Record<'buff' | 'debuff', Record<string, string>>;
 
 const CURATED_PATH = resolve(process.cwd(), 'data/curated/effects.json');
+
+/**
+ * SOURCES de résolution d'un effet : le glossaire extrait + la curation. Toutes
+ * les fonctions de ce module les prennent en paramètre OPTIONNEL, défaut = le
+ * live — les appelants ordinaires ne les voient donc jamais.
+ *
+ * Pourquoi ce paramètre existe : un boss ÉPINGLÉ (`<id>@<n>`) doit s'afficher
+ * tel qu'il était, or un skill ne stocke que des RÉFÉRENCES d'effets (`tooltip`,
+ * `label`, `type`) — le nom, l'icône et la description sont rejoués à
+ * l'affichage. Résolus contre le glossaire courant, un guide figé montrerait les
+ * libellés d'aujourd'hui, et une réf supprimée depuis disparaîtrait de l'écran.
+ * L'archive fige donc ses propres sources, et le rendu les passe ici.
+ */
+export interface EffectSources {
+  effects: Record<string, Effect>;
+  byTooltip: Record<string, string>;
+  byLabel: Record<string, string>;
+  byKey: Record<'buff' | 'debuff', Record<string, string>>;
+  curated: Record<string, EffectCurated>;
+}
+
+// Mémoïsé sur l'IDENTITÉ du curé (qui change avec son mtime) : `liveSources` est
+// appelé par défaut à CHAQUE résolution — en allouer un objet à chaque fois
+// mettrait une pression inutile sur des milliers d'appels par page.
+let liveCache: { curated: Record<string, EffectCurated>; src: EffectSources } | null = null;
+
+/** Sources du LIVE : glossaire du build + curation fraîche du disque. */
+export function liveEffectSources(): EffectSources {
+  const curated = loadCuratedEffects();
+  if (liveCache?.curated === curated) return liveCache.src;
+  const src: EffectSources = {
+    effects: EFFECTS,
+    byTooltip: BY_TOOLTIP,
+    byLabel: BY_LABEL,
+    byKey: BY_KEY,
+    curated,
+  };
+  liveCache = { curated, src };
+  return src;
+}
 
 /** Effet extrait + overrides curés appliqués (ou création 100 % curée). */
 export interface MergedEffect {
@@ -88,13 +129,13 @@ interface CuratedKeyIndex {
 let curatedKeyIndexCache: { ref: Record<string, EffectCurated>; index: CuratedKeyIndex } | null =
   null;
 
-export function curatedKeyIndex(): CuratedKeyIndex {
-  const data = loadCuratedEffects();
+export function curatedKeyIndex(src: EffectSources = liveEffectSources()): CuratedKeyIndex {
+  const data = src.curated;
   if (curatedKeyIndexCache && curatedKeyIndexCache.ref === data) return curatedKeyIndexCache.index;
   const byKey = new Map<string, string>();
   const bySideKey = new Map<string, string>();
   for (const [id, c] of Object.entries(data)) {
-    const side = (c.isDebuff ?? getMergedEffect(id)?.isDebuff) ? 'debuff' : 'buff';
+    const side = (c.isDebuff ?? getMergedEffect(id, src)?.isDebuff) ? 'debuff' : 'buff';
     for (const k of c.keys ?? []) {
       if (!byKey.has(k)) byKey.set(k, id);
       const sk = `${side}|${k}`;
@@ -147,21 +188,22 @@ function fromCreation(id: string, c: EffectCurated): MergedEffect {
 }
 
 /** Tous les effets fusionnés : extraits + créations curées (triés par id). */
-export function getMergedEffects(): MergedEffect[] {
-  const curated = loadCuratedEffects();
-  const merged = Object.values(EFFECTS).map((e) => merge(e, curated[e.id]));
-  for (const [id, c] of Object.entries(curated)) {
-    if (!EFFECTS[id]) merged.push(fromCreation(id, c));
+export function getMergedEffects(src: EffectSources = liveEffectSources()): MergedEffect[] {
+  const merged = Object.values(src.effects).map((e) => merge(e, src.curated[e.id]));
+  for (const [id, c] of Object.entries(src.curated)) {
+    if (!src.effects[id]) merged.push(fromCreation(id, c));
   }
   return merged.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 }
 
 /** Un effet fusionné par id (extrait ou création curée). */
-export function getMergedEffect(id: string): MergedEffect | undefined {
-  const e = EFFECTS[id];
-  const curated = loadCuratedEffects();
-  if (e) return merge(e, curated[id]);
-  return curated[id] ? fromCreation(id, curated[id]) : undefined;
+export function getMergedEffect(
+  id: string,
+  src: EffectSources = liveEffectSources(),
+): MergedEffect | undefined {
+  const e = src.effects[id];
+  if (e) return merge(e, src.curated[id]);
+  return src.curated[id] ? fromCreation(id, src.curated[id]) : undefined;
 }
 
 /** Ajoute au StatusMap les statuts référencés par des effets (chips de skills,
@@ -172,46 +214,102 @@ export function mergeStatusEffects(
   statuses: StatusMap,
   effects: ClientEffect[],
   lang: Lang,
+  src: EffectSources = liveEffectSources(),
 ): StatusMap {
   for (const e of effects) {
     const key = e.tooltip ?? e.label;
     if (!key || statuses[key]) continue;
-    // Tooltip du jeu → effet canonique ; sinon le tooltip EST un id d'effet
-    // (créations curées des effets synthétiques).
-    const effId = e.tooltip ? (BY_TOOLTIP[e.tooltip] ?? e.tooltip) : BY_LABEL[e.label!];
-    const eff = effId ? getMergedEffect(effId) : undefined;
+    const eff = statusEffectFor(e, src);
+    if (eff) statuses[key] = localizeStatus(eff, lang);
+  }
+  return statuses;
+}
+
+/**
+ * Effet canonique derrière une chip : tooltip du jeu → effet canonique ; sinon
+ * le tooltip EST un id d'effet (créations curées des effets synthétiques).
+ */
+function statusEffectFor(e: ClientEffect, src: EffectSources): MergedEffect | undefined {
+  const effId = e.tooltip ? (src.byTooltip[e.tooltip] ?? e.tooltip) : src.byLabel[e.label!];
+  return effId ? getMergedEffect(effId, src) : undefined;
+}
+
+/** Un statut résolu mais PAS ENCORE localisé — la forme que l'archive fige. */
+export interface StatusI18n {
+  name: Record<string, string>;
+  isDebuff: boolean;
+  icon?: string;
+  desc?: LangDict;
+  hidden?: boolean;
+}
+export type StatusMapI18n = Record<string, StatusI18n>;
+
+/**
+ * Même résolution que `mergeStatusEffects`, mais SANS choisir de langue : les
+ * dictionnaires restent entiers. C'est ce qu'on fige pour un boss épinglé — un
+ * guide versionné se lit dans les cinq langues, pas seulement en anglais.
+ */
+export function mergeStatusEffectsI18n(
+  statuses: StatusMapI18n,
+  effects: ClientEffect[],
+  src: EffectSources = liveEffectSources(),
+): StatusMapI18n {
+  for (const e of effects) {
+    const key = e.tooltip ?? e.label;
+    if (!key || statuses[key]) continue;
+    const eff = statusEffectFor(e, src);
+    // Les variantes irremovable sont des EFFETS distincts (icône à cadre
+    // spécial portée par l'effet lui-même — jamais recolorée à l'affichage).
     if (eff) {
-      // Les variantes irremovable sont des EFFETS distincts (icône à cadre
-      // spécial portée par l'effet lui-même — jamais recolorée à l'affichage).
       statuses[key] = {
-        name: lRec(eff.name, lang),
+        name: eff.name,
         isDebuff: eff.isDebuff,
-        icon: eff.icon || undefined,
-        desc: lRec(eff.desc, lang) || eff.desc.en || undefined,
-        hidden: eff.hidden || undefined,
+        ...(eff.icon ? { icon: eff.icon } : {}),
+        ...(eff.desc ? { desc: eff.desc } : {}),
+        ...(eff.hidden ? { hidden: true } : {}),
       };
     }
   }
   return statuses;
 }
 
-// --- Résolution par CLÉ éditoriale ({B/…}/{D/…}) ------------------------------
+/** Un statut i18n → la forme localisée attendue par les chips. */
+function localizeStatus(eff: StatusI18n | MergedEffect, lang: Lang): StatusMap[string] {
+  return {
+    name: lRec(eff.name, lang),
+    isDebuff: eff.isDebuff,
+    icon: eff.icon || undefined,
+    desc: (eff.desc && (lRec(eff.desc, lang) || eff.desc.en)) || undefined,
+    hidden: eff.hidden || undefined,
+  };
+}
 
-const BY_KEY = G.effectByKey as Record<'buff' | 'debuff', Record<string, string>>;
+/** Fige-t-on ou pas, l'écran veut une langue : `StatusMapI18n` → `StatusMap`. */
+export function localizeStatuses(statuses: StatusMapI18n, lang: Lang): StatusMap {
+  const out: StatusMap = {};
+  for (const [key, eff] of Object.entries(statuses)) out[key] = localizeStatus(eff, lang);
+  return out;
+}
+
+// --- Résolution par CLÉ éditoriale ({B/…}/{D/…}) ------------------------------
 
 /**
  * Résout une clé éditoriale (`BT_STAT|ST_ATK`, `POLAR_NIGHT`, alias V2…) vers
  * son effet fusionné. Ordre : index généré (côté demandé puis opposé — le
  * contenu porte le côté via {B}/{D}) puis créations curées (`keys`).
  */
-export function resolveEffectKey(side: 'buff' | 'debuff', key: string): MergedEffect | undefined {
+export function resolveEffectKey(
+  side: 'buff' | 'debuff',
+  key: string,
+  src: EffectSources = liveEffectSources(),
+): MergedEffect | undefined {
   // Une seule résolution : on détermine l'id (index généré, puis créations
   // curées) et on ne fusionne qu'une fois en sortie.
   const id =
-    BY_KEY[side]?.[key] ??
-    BY_KEY[side === 'buff' ? 'debuff' : 'buff']?.[key] ??
-    curatedKeyIndex().byKey.get(key);
-  return id ? getMergedEffect(id) : undefined;
+    src.byKey[side]?.[key] ??
+    src.byKey[side === 'buff' ? 'debuff' : 'buff']?.[key] ??
+    curatedKeyIndex(src).byKey.get(key);
+  return id ? getMergedEffect(id, src) : undefined;
 }
 
 /** Effet EXTRAIT brut par id (sans override), pour l'admin. */
@@ -231,13 +329,19 @@ export function getExtractedEffect(id: string): Effect | undefined {
  * court-circuitait la fusion. Le brut reste accessible via
  * `getExtractedEffect` (admin).
  */
-export function effectForTooltip(tooltipId: string): MergedEffect | undefined {
-  const id = BY_TOOLTIP[tooltipId];
-  return id ? getMergedEffect(id) : undefined;
+export function effectForTooltip(
+  tooltipId: string,
+  src: EffectSources = liveEffectSources(),
+): MergedEffect | undefined {
+  const id = src.byTooltip[tooltipId];
+  return id ? getMergedEffect(id, src) : undefined;
 }
 
 /** Effet canonique pour un label (symbole CreateText) — FUSIONNÉ, même règle. */
-export function effectForLabel(label: string): MergedEffect | undefined {
-  const id = BY_LABEL[label];
-  return id ? getMergedEffect(id) : undefined;
+export function effectForLabel(
+  label: string,
+  src: EffectSources = liveEffectSources(),
+): MergedEffect | undefined {
+  const id = src.byLabel[label];
+  return id ? getMergedEffect(id, src) : undefined;
 }

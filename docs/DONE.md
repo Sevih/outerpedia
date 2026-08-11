@@ -7,6 +7,31 @@
 
 ## 2026-08-11
 
+- **Épinglage des boss, étape 2b : la résolution des kits devient PARAMÉTRABLE**
+  (préalable à l'archive auto-suffisante — direction Sevih : « le versionnage
+  sauvegarde tout ce dont l'affichage a besoin »).
+  LE CONSTAT QUI L'A DÉCLENCHÉ : l'archive fige l'entité, ses skills et ses donjons,
+  mais un skill ne stocke que des RÉFÉRENCES d'effets (`tooltip`, `label`, `type`) —
+  nom, icône et description sont rejoués à l'affichage contre le glossaire COURANT.
+  Un boss épinglé affichait donc les libellés d'aujourd'hui, et aurait perdu les
+  chips dont la réf disparaît. Restaient live aussi : la curation d'affichage des
+  kits, `statScales`, `bossQuirkMods`, `rankOptions` — et les DONJONS, alors que
+  `versionMonster` les fige exprès depuis toujours en promettant « l'archive reste
+  lisible même si le donjon disparaît du live ». Promesse écrite, jamais tenue.
+  LE GESTE : `EffectSources` (glossaire + curation d'effets) et `KitSources`
+  (glossaire + effets) passées en paramètre OPTIONNEL de toute la chaîne de
+  résolution, défaut = le live. Aucun appelant à changer. `mergeStatusEffectsI18n`
+  et `buildStatusMapI18n` résolvent SANS choisir de langue : un guide versionné se
+  lit dans les cinq langues, pas seulement en anglais (arbitrage Sevih).
+  POURQUOI PAS UN SECOND COMPOSANT, comme envisagé : `BossCard` fait 270 lignes et
+  sert quatre modes de guide ; deux rendus censés être identiques divergent, et la
+  divergence tombe sur les vieux guides, ceux que personne ne relit. On sépare
+  RÉSOUDRE de RENDRE plutôt que de dupliquer.
+  FILET, parce qu'il n'y en avait aucun : `skill-view.ts` (879 lignes, le code le
+  plus subtil du rendu) n'a pas un seul test. Capture de référence des vues de kit,
+  immunités et statuts des 4492 monstres du catalogue avant/après le geste :
+  IDENTIQUES au hash près. 1481 tests verts.
+
 - **Épinglage des boss, étape 2a : le PLAN de ré-épinglage (dry-run)** — `planRepin`
   dit ce que « Versionner » ferait aux guides, sans rien écrire. Inspectable avant
   de toucher 87 fichiers de contenu.
@@ -19,12 +44,16 @@
   résolus au rendu depuis `encounters.json` : il n'y a aucun id à réécrire, donc le
   pin ne peut être qu'une liste à part QUE LE RENDU DOIT APPRENDRE À LIRE. Le plan
   les rapporte séparément plutôt que de faire semblant de les traiter.
-  CE QUE LE DRY-RUN SUR DONNÉE RÉELLE A MONTRÉ, et qui tranche la suite : versionner
-  le boss de `special-request/beatles` donne 1 édition applicable ; versionner
-  celui de `world-boss/dahlia` en donne **ZÉRO**, et trois références en attente —
-  ses trois versions pointent le MÊME groupe `world_boss:4086019`. Autrement dit,
-  pour un guide versionné, tout le ré-épinglage passe par la liste `pinned`. Sans
-  elle, versionner un world boss ne ré-épingle rigoureusement rien.
+  CE QUE LE DRY-RUN SUR DONNÉE RÉELLE A MONTRÉ : versionner le boss de
+  `special-request/beatles` donne 1 édition applicable ; versionner celui de
+  `world-boss/dahlia` en donne ZÉRO, et trois références en attente — ses trois
+  versions pointent le MÊME groupe `world_boss:4086019`.
+  CORRECTION DE LECTURE (Sevih, 11/08) : ce zéro n'est PAS un trou. Une nouvelle
+  version de GUIDE ne veut pas dire une nouvelle version de BOSS — les world boss
+  de Dahlia ont été rerun plusieurs fois avec le même boss et les mêmes skills,
+  donc il n'y a rien à ré-épingler. Ce qui reste vrai : le jour où un boss de mode
+  versionné change vraiment, la référence du guide est un GROUPE et non un id, donc
+  le pin ne peut passer que par la liste `pinned` — que le rendu doit lire.
   SEPT CAS, ids DÉRIVÉS de la donnée committée et jamais écrits en dur — la leçon
   du comptage figé de `tags.test.ts`. Dont l'invariant « une référence déjà
   épinglée n'est pas re-planifiée », qui est ce qui fait tenir la règle
