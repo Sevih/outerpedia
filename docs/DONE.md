@@ -5,6 +5,29 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-12
+
+- **Le `meta.bossId` d'un guide VERSIONNÉ ne doit JAMAIS être épinglé** — bug
+  attrapé au PREMIER usage réel du mécanisme, et payé sur un fichier de contenu.
+  Sevih a versionné trois boss (Annihilator ×2, Prototype EX-78). Le ré-épinglage
+  automatique a réécrit `joint-challenge/annihilator/meta.json` :
+  `bossId: "4318062"` → `"4318062@1"`. Or ce guide a QUATRE versions, et sur un
+  guide versionné `meta.bossId` ne désigne pas le boss d'une version : il porte le
+  portrait, le H1, l'og:image et la jointure saison — l'entité COURANTE. Épinglé,
+  l'illustration du guide serait restée sur l'ancien boss jusque sur sa version la
+  plus récente. C'était écrit dans la décision arbitrée (« `meta.bossId` reste
+  LIVE ») ; `planRepin` ne faisait simplement pas la distinction.
+  Fichier restauré, règle corrigée à la source : sur un guide versionné, la
+  référence part dans `kept` — VUE et rapportée, jamais éditée. Une référence qui
+  disparaît du plan sans un mot se lit comme un oubli, et l'admin l'affiche.
+  MESURÉ SUR LES TROIS BOSS : toutes leurs vraies références sont INDIRECTES
+  (`version.config` → `event_boss:…`), 0 édition légitime. Autrement dit le
+  ré-épinglage automatique n'apportait rien ici et ne faisait que du mal —
+  ces guides attendent la liste `pinned`, qui devient le vrai sujet.
+  Deux cas de plus, dont la CONTRE-ÉPREUVE (un guide PLAT voit bien son `bossId`
+  épinglé) : sans elle, la règle serait satisfaite par un plan qui n'épingle plus
+  rien. 1500 tests verts.
+
 ## 2026-08-11
 
 - **« Versionner » RÉ-ÉPINGLE les guides tout seul** — le `TODO(guides)` de

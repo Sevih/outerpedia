@@ -54,6 +54,16 @@ export const metaKey = (e: RepinEdit): 'bossId' | 'monsters' =>
 /** Rendu lisible d'une valeur d'édition (l'affichage joint, le disque non). */
 export const showValue = (v: string | string[]): string => (Array.isArray(v) ? v.join(', ') : v);
 
+/**
+ * Référence que le plan voit et laisse EXPRÈS en live. Rapportée quand même :
+ * une référence qui disparaît du plan sans un mot ressemble à un oubli.
+ */
+export interface RepinKept {
+  guide: string;
+  field: 'meta.bossId';
+  reason: 'guide versionné — le portrait et le H1 suivent l’entité courante';
+}
+
 /** Référence INDIRECTE (un combat) : rapportée, pas éditable en l'état. */
 export interface RepinPending {
   guide: string;
@@ -72,6 +82,8 @@ export interface RepinPlan {
   edits: RepinEdit[];
   /** Références qui atteignent le monstre sans le nommer. */
   pending: RepinPending[];
+  /** Références nommées qu'on laisse volontairement en live. */
+  kept: RepinKept[];
 }
 
 /** Ids des monstres d'un combat (toutes ses rencontres confondues). */
@@ -94,19 +106,35 @@ function metaFile(g: Guide): string {
 export function planRepin(id: string, key: string): RepinPlan {
   const edits: RepinEdit[] = [];
   const pending: RepinPending[] = [];
+  const kept: RepinKept[] = [];
 
   for (const g of listGuides()) {
     const name = `${g.category}/${g.slug}`;
 
     // --- Références DIRECTES : l'id est écrit, on le réécrit ------------------
     if (g.bossId && isLiveRef(g.bossId, id)) {
-      edits.push({
-        guide: name,
-        file: metaFile(g),
-        field: 'meta.bossId',
-        before: g.bossId,
-        after: key,
-      });
+      // SAUF sur un guide VERSIONNÉ, où `meta.bossId` ne désigne pas le boss
+      // d'une version : il porte le portrait, le H1, l'og:image et la jointure
+      // saison — l'entité COURANTE. L'épingler figerait l'illustration du guide
+      // sur l'ancien boss jusque sur sa version la plus récente. Le pin d'un
+      // guide versionné vit dans le `config.json` de la version concernée
+      // (décision arbitrée avec Sevih, cf. TODO.md), et il n'y a donc rien à
+      // réécrire ici — les vraies références ressortent en `pending`.
+      if (g.versions.length) {
+        kept.push({
+          guide: name,
+          field: 'meta.bossId',
+          reason: 'guide versionné — le portrait et le H1 suivent l’entité courante',
+        });
+      } else {
+        edits.push({
+          guide: name,
+          file: metaFile(g),
+          field: 'meta.bossId',
+          before: g.bossId,
+          after: key,
+        });
+      }
     }
     const monsters = (g as Guide & { monsters?: string[] }).monsters;
     if (monsters?.some((m) => isLiveRef(m, id))) {
@@ -134,7 +162,7 @@ export function planRepin(id: string, key: string): RepinPlan {
     }
   }
 
-  return { id, key, edits, pending };
+  return { id, key, edits, pending, kept };
 }
 
 /** Ce que l'application a vraiment fait. */
@@ -151,6 +179,8 @@ export interface RepinResult {
    * les taire ferait croire le ré-épinglage complet alors qu'il ne l'est pas.
    */
   pending: RepinPending[];
+  /** Références laissées en live à dessein (cf. `RepinKept`). */
+  kept: RepinKept[];
 }
 
 /**
@@ -192,5 +222,5 @@ export async function applyRepin(
       skipped.push(guide);
     }
   }
-  return { files, applied, skipped, pending: plan.pending };
+  return { files, applied, skipped, pending: plan.pending, kept: plan.kept };
 }

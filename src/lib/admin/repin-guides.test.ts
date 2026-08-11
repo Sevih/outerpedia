@@ -70,10 +70,42 @@ describe('planRepin — ce que « Versionner » ferait', () => {
     expect(plan.edits.some((e) => e.guide === name)).toBe(false);
   });
 
+  it('le `meta.bossId` d’un guide VERSIONNÉ n’est JAMAIS épinglé', () => {
+    // Payé pour de vrai le 12/08 : versionner le boss d'Annihilator a épinglé son
+    // `meta.bossId`, alors que sur un guide versionné ce champ ne désigne pas le
+    // boss d'une version — il porte le portrait, le H1, l'og:image et la jointure
+    // saison, c'est-à-dire l'entité COURANTE. Le figer aurait montré l'ancien
+    // boss jusque sur la version la plus récente du guide. Le pin d'un guide
+    // versionné vit dans le `config.json` de sa version (décision arbitrée).
+    const versioned = guides.filter((g) => g.versions.length && g.bossId);
+    expect(
+      versioned.length,
+      'aucun guide versionné à bossId : le test ne garde rien',
+    ).toBeGreaterThan(0);
+    for (const g of versioned) {
+      const plan = planRepin(g.bossId!, `${g.bossId}@1`);
+      const name = `${g.category}/${g.slug}`;
+      expect(plan.edits.some((e) => e.guide === name && e.field === 'meta.bossId')).toBe(false);
+      // …et ce n'est pas un oubli silencieux : le plan le DIT.
+      expect(plan.kept.some((k) => k.guide === name)).toBe(true);
+    }
+  });
+
+  it('un guide PLAT, lui, voit bien son `meta.bossId` épinglé', () => {
+    // La contre-épreuve : sans elle, la règle ci-dessus serait satisfaite par un
+    // plan qui n'épingle plus rien du tout.
+    const flat = guides.find((g) => !g.versions.length && g.bossId)!;
+    expect(flat, 'aucun guide plat à bossId').toBeTruthy();
+    const plan = planRepin(flat.bossId!, `${flat.bossId}@1`);
+    const name = `${flat.category}/${flat.slug}`;
+    expect(plan.edits.some((e) => e.guide === name && e.field === 'meta.bossId')).toBe(true);
+  });
+
   it('un id inconnu ne planifie rien du tout', () => {
     const plan = planRepin('id-qui-nexiste-pas', 'id-qui-nexiste-pas@1');
     expect(plan.edits).toEqual([]);
     expect(plan.pending).toEqual([]);
+    expect(plan.kept).toEqual([]);
   });
 
   it('le plan reporte l’id et la clé qu’on lui a donnés', () => {
@@ -145,6 +177,7 @@ describe('applyRepin — ce que « Versionner » écrit', () => {
         },
       ],
       pending: [],
+      kept: [],
     };
     const { write } = journal(false);
     const res = await applyRepin(plan, write);

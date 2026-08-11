@@ -25,6 +25,7 @@ interface RepinReport {
   applied: Array<{ guide: string; field: string }>;
   skipped: string[];
   pending: Array<{ guide: string; origin: string; version?: string }>;
+  kept: Array<{ guide: string; field: string; reason: string }>;
 }
 
 type Status =
@@ -155,6 +156,16 @@ export function MonsterActions({
               {status.repin.pending
                 .map((p) => `${p.guide}${p.version ? ` (${p.version})` : ''}`)
                 .join(', ')}
+            </p>
+          )}
+          {/* Laissé en live À DESSEIN : le dire, sinon l'absence du guide dans
+              le compte-rendu se lit comme un oubli. */}
+          {status.repin.kept.length > 0 && (
+            <p className="border-line-subtle bg-surface-sunken text-content-muted rounded-md border p-3">
+              Left live on purpose:{' '}
+              {status.repin.kept.map((k) => `${k.guide} (${k.field})`).join(', ')} — a versioned
+              guide’s <code>meta.bossId</code> carries its portrait and heading, which must follow
+              the current entity.
             </p>
           )}
           {status.repin.skipped.length > 0 && (
