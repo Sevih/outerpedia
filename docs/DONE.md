@@ -7,6 +7,32 @@
 
 ## 2026-08-11
 
+- **Épinglage des boss, étape 2a : le PLAN de ré-épinglage (dry-run)** — `planRepin`
+  dit ce que « Versionner » ferait aux guides, sans rien écrire. Inspectable avant
+  de toucher 87 fichiers de contenu.
+  INVENTAIRE DES RÉFÉRENCES, mesuré : `meta.bossId` 87 guides, `meta.group` 40,
+  `meta.dungeons` 20, `meta.monsters` 2. Deux natures qui NE SE TRAITENT PAS
+  PAREIL. Les références DIRECTES (`bossId`, `monsters`) nomment un monstre : on
+  réécrit l'id en place, et ça marche déjà puisque l'étape 1 apprend à `getMonster`
+  à résoudre `<id>@<n>`. Les références INDIRECTES (`group`, `dungeons`, les
+  groupes des configs de version) désignent un COMBAT dont les monstres sont
+  résolus au rendu depuis `encounters.json` : il n'y a aucun id à réécrire, donc le
+  pin ne peut être qu'une liste à part QUE LE RENDU DOIT APPRENDRE À LIRE. Le plan
+  les rapporte séparément plutôt que de faire semblant de les traiter.
+  CE QUE LE DRY-RUN SUR DONNÉE RÉELLE A MONTRÉ, et qui tranche la suite : versionner
+  le boss de `special-request/beatles` donne 1 édition applicable ; versionner
+  celui de `world-boss/dahlia` en donne **ZÉRO**, et trois références en attente —
+  ses trois versions pointent le MÊME groupe `world_boss:4086019`. Autrement dit,
+  pour un guide versionné, tout le ré-épinglage passe par la liste `pinned`. Sans
+  elle, versionner un world boss ne ré-épingle rigoureusement rien.
+  SEPT CAS, ids DÉRIVÉS de la donnée committée et jamais écrits en dur — la leçon
+  du comptage figé de `tags.test.ts`. Dont l'invariant « une référence déjà
+  épinglée n'est pas re-planifiée », qui est ce qui fait tenir la règle
+  « ré-épingler ce qui est encore en live » d'une version à la suivante.
+  Trouvé au passage : `adventure/S1-8-5` porte le même id dans `bossId` ET dans
+  `monsters` — deux éditions sur le MÊME fichier. L'application devra grouper par
+  fichier, c'est verrouillé par un test. 1481 tests verts.
+
 - **Épinglage des boss, étape 1/3 : le rendu sait enfin LIRE une version figée**
   (`TODO(guides)` de `version-monster.ts:16`, cadré avec Sevih).
   ÉTAT DES LIEUX avant de toucher quoi que ce soit : le côté écriture était
