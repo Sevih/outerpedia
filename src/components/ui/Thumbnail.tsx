@@ -54,6 +54,7 @@
  * comme depuis un composant client.
  */
 import { img } from '@/lib/images';
+import { transcendenceStars, type StarTone } from '@/lib/transcendence';
 
 /**
  * Les deux prefabs travaillent dans une case de 128×128 — toutes les mesures
@@ -192,91 +193,19 @@ interface Skin {
   boss: string;
 }
 
-/** `CHARACTER_STAR_COLOR` du jeu, dans le suffixe de sprite (`CM_icon_star_*`). */
-export type StarTone = 'y' | 'o' | 'r' | 'v';
-
 /**
- * LES ÉTOILES D'UN PERSO NE SE COMPTENT PAS, ELLES SE LISENT DANS UNE TABLE.
+ * LES TROIS COLONNES D'AFFICHAGE DE LA TRANSCENDANCE VIVENT AILLEURS.
  *
- * `CharacterTranscendentTemplet`, colonnes `ShowUIStar` / `StarColor` /
- * `StarPlus`, portée telle quelle : clé = BasicStar, sous-clé = TransStar (le
- * palier de transcendance), valeur = [étoiles affichées, teinte, niveau du +].
+ * `ShowUIStar` / `StarColor` / `StarPlus` étaient TRANSCRITES À LA MAIN ici — une
+ * table de 27 lignes, fidèle mais recopiée — alors que l'extraction publie déjà les
+ * mêmes colonnes dans `data/generated/transcend.json`, d'où le slider de la fiche
+ * perso et le damage calculator les tirent. Deux lectures d'une même table du jeu,
+ * que rien n'obligeait à rester d'accord.
  *
- * Deux pièges, et le prefab ment sur les deux :
- *
- *   1. `StarPlus` n'est PAS un nombre d'étoiles colorées, c'est le « + » du
- *      palier (5★+1, 5★+2). Il n'y a jamais qu'UNE étoile colorée — la dernière
- *      — et seulement quand ce niveau dépasse 0.
- *
- *   2. Le prefab fige quatre rangées `Star_4` / `Star_5` / `Star_5_Plus` /
- *      `Star_6` qui ressemblent à la règle. Elles sont INACTIVES, et `Star_6`
- *      (six étoiles violettes) ne correspond à AUCUNE ligne de la table : le
- *      palier à six étoiles les affiche jaunes. Ce sont des maquettes d'éditeur.
- *      La rangée réellement rendue est `Star`, dont le script réassigne les
- *      sprites d'après cette table.
- *
- * Le nombre d'étoiles ne suit donc pas le palier : 4 étoiles au palier 5, puis 5
- * au palier 6, puis toujours 5 aux paliers 7 et 8, puis 6 au palier 9.
- *
- * Les raretés 1 et 2 gardent leur `StarPlus` mais avec une teinte JAUNE : le +
- * existe, il ne se voit pas. Seuls les persos 3★ ont des étoiles colorées.
- *
- * (La table porte aussi 70 lignes propres à dix personnages — toutes rigoureuse-
- * ment identiques au générique 3★ pour ces trois colonnes. Rien à porter.)
+ * Elles sont désormais lues une seule fois, dans `lib/transcendence` — un module sans
+ * autre dépendance que ce JSON (745 o gzippés), donc lisible depuis un composant
+ * client. La vignette n'en garde que ce qui la regarde : sa rangée d'étoiles.
  */
-const TRANSCENDENCE: Record<number, Record<number, readonly [number, StarTone, number]>> = {
-  1: {
-    1: [1, 'y', 0],
-    2: [2, 'y', 0],
-    3: [3, 'y', 0],
-    4: [4, 'y', 0],
-    5: [4, 'y', 1],
-    6: [5, 'y', 0],
-    7: [5, 'y', 1],
-    8: [5, 'y', 2],
-    9: [6, 'y', 0],
-  },
-  2: {
-    2: [2, 'y', 0],
-    3: [3, 'y', 0],
-    4: [4, 'y', 0],
-    5: [4, 'y', 1],
-    6: [5, 'y', 0],
-    7: [5, 'y', 1],
-    8: [5, 'y', 2],
-    9: [6, 'y', 0],
-  },
-  3: {
-    3: [3, 'y', 0],
-    4: [4, 'y', 0],
-    5: [4, 'o', 1],
-    6: [5, 'y', 0],
-    7: [5, 'r', 1],
-    8: [5, 'v', 2],
-    9: [6, 'y', 0],
-  },
-};
-
-/**
- * La ligne de `TRANSCENDENCE` qui s'applique, sous la forme du jeu :
- * `[ShowUIStar, StarColor, StarPlus]`.
- *
- * Exportée parce que le PORTRAIT (`components/character/Portrait`) la lit aussi
- * — et pas par ressemblance : les deux habillages passent par la MÊME fonction,
- * `CUtilUI.SetStarImage(Image[], BasicStar, TransStar, CHARACTER_TYPE)`, qui va
- * chercher `GetCharacterTranscendent` et lit ces trois colonnes. Une seule règle
- * dans le jeu, une seule table ici.
- *
- * Rareté ou palier hors table : on retombe sur « autant de jaunes que la
- * rareté ». Une donnée inattendue ne doit pas faire disparaître les étoiles.
- */
-export function transcendenceRow(
-  rarity: number,
-  transcendence?: number,
-): readonly [number, StarTone, number] {
-  const row = TRANSCENDENCE[rarity]?.[transcendence ?? rarity];
-  return row ?? [Math.min(Math.max(rarity, 0), 6), 'y', 0];
-}
 
 const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 
@@ -482,8 +411,7 @@ function starRow(props: ThumbnailProps): StarTone[] {
     const n = props.stars && props.stars > 0 ? Math.min(props.stars, 6) : 0;
     return Array.from({ length: n }, () => 'y');
   }
-  const [show, tone, plus] = transcendenceRow(props.rarity, props.transcendence);
-  return Array.from({ length: show }, (_, i) => (plus > 0 && i === show - 1 ? tone : 'y'));
+  return transcendenceStars(props.rarity, props.transcendence);
 }
 
 export function Thumbnail(props: ThumbnailProps) {

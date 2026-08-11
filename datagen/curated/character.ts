@@ -53,7 +53,15 @@ export interface SynergyGroup {
 export interface CharacterCurated {
   /** Tier PvE (S, A, B…). */
   rank?: string;
-  /** Tier PvP. */
+  /**
+   * Tier PvP — ABSENT veut parfois dire « inéligible », pas « pas encore rangé ».
+   *
+   * Le PvP n'admet que les personnages dont la BASE est 3★. Deux Core Fusion y
+   * échappent, Snow (2700003) et Lisha (2700005), fusionnés depuis un 2★ : ils ont
+   * un rang PvE et n'en auront jamais en PvP. Le piège est que leur forme fusionnée
+   * porte `rarity: 3` comme les quatre autres — rien, sur leur fiche, ne dit d'où
+   * elles viennent sinon `originalCharacter`. Ne pas « compléter » ces deux trous.
+   */
   rankPvp?: string;
   /** Rôle de combat. */
   role?: CuratedRole;

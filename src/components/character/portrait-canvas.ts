@@ -58,7 +58,7 @@ import {
   type Rect,
 } from './portrait-layout';
 import { img } from '@/lib/images';
-import { transcendenceRow, type StarTone } from '@/components/ui/Thumbnail';
+import { transcendenceStars } from '@/lib/transcendence';
 
 /** L'état d'un portrait à peindre — le sous-ensemble des props de `Portrait`. */
 export interface PortraitPaint {
@@ -87,20 +87,14 @@ export interface PortraitPaint {
 export function portraitSources(p: PortraitPaint): string[] {
   const out = [img.portrait(p.id)];
   if (!p.hideStars) {
-    const [show, tone, plus] = transcendenceRow(p.rarity, p.transcendence);
     out.push(img.starSlot(), img.starEmpty());
-    for (let i = 0; i < show; i++) out.push(img.star(litTone(i, show, tone, plus)));
+    for (const tone of transcendenceStars(p.rarity, p.transcendence)) out.push(img.star(tone));
   }
   if (p.cls && CLASS_SLUGS.has(p.cls)) out.push(img.boss(`CT_Class_${cap(p.cls)}`));
   if (p.element) out.push(img.boss(`CT_Element_${cap(p.element)}`));
   if (p.coreFusion || p.synchro) out.push(p.coreFusion ? img.coreFusionTag() : img.syncIcon());
   if (p.dim) out.push(img.portraitDim());
   return out;
-}
-
-/** La teinte d'une étoile allumée — cf. le piège 4 de `Portrait.tsx`. */
-function litTone(i: number, show: number, tone: StarTone, plus: number): StarTone {
-  return plus > 0 && i === show - 1 ? tone : 'y';
 }
 
 /** Les deux familles de police résolues, telles que `ctx.font` les accepte. */
@@ -191,7 +185,6 @@ export function drawPortrait(
 
   // LE RAIL D'ÉTOILES — slot, six creux, puis les allumées par le HAUT.
   if (!p.hideStars) {
-    const [show, tone, plus] = transcendenceRow(p.rarity, p.transcendence);
     put(img.starSlot(), STAR_SLOT, STAR_SLOT_ALPHA);
     // Le `Shadow(2,−2)` du creux : une ombre de FORME, comme le `drop-shadow` du
     // DOM — `shadowBlur` reste à 0, le prefab n'écrit aucun flou.
@@ -201,7 +194,9 @@ export function drawPortrait(
     ctx.shadowOffsetY = STAR_OFF_SHADOW.y * k;
     for (const r of STAR_OFF) put(img.starEmpty(), r, STAR_OFF_ALPHA);
     ctx.restore();
-    for (let i = 0; i < show; i++) put(img.star(litTone(i, show, tone, plus)), STAR_ON[i]);
+    transcendenceStars(p.rarity, p.transcendence).forEach((tone, i) =>
+      put(img.star(tone), STAR_ON[i]),
+    );
   }
 
   // CLASSE puis ÉLÉMENT — non alignés, et c'est dans la donnée (cf. la table).

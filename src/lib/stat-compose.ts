@@ -79,8 +79,22 @@ export interface LayerParts {
 }
 
 export interface TranscendLayer {
-  /** Libellé du palier (« 4+ », « 6 »…). */
+  /** Libellé du palier (« 4+ », « 6 »…) — POUR L'ŒIL, pas pour un calcul. */
   label: string;
+  /**
+   * Les deux nombres du palier, tels que la table les donne : étoiles affichées
+   * (`ShowUIStar`) et niveau du « + » (`StarPlus`).
+   *
+   * Ils sont ici parce que le Combat Power en a besoin (`showUIStar * 500 +
+   * starPlus * 120`) et qu'il les RECONSTRUISAIT depuis `label`, au `parseInt`
+   * et au `/\+/g`. Un aller-retour par une chaîne d'affichage : le libellé
+   * n'était pas seulement lu par un humain, il était le SEUL porteur de deux
+   * grandeurs de calcul. C'est ce qui a fait voyager jusqu'au CP le défaut du
+   * libellé (suffixe déduit de la couleur, donc « + » perdu sur les raretés 1 et
+   * 2) — trois paliers y valaient `starPlus: 0` au lieu de 1, 1 et 2.
+   */
+  showStar: number;
+  starPlus: number;
   /** Bonus per-mille ATK/DEF/HP (couche sum_rate). */
   atkPM: number;
   defPM: number;

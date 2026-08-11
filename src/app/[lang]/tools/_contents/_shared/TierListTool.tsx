@@ -25,6 +25,18 @@ import { TIERS, tierListRankOrder } from '@/components/tierlist/tiers';
 /** Ordre canonique des rôles (pills de la barre). */
 const ROLE_ORDER = ['dps', 'support', 'sustain'];
 
+/**
+ * LE PALIER QUE LA LISTE PVP SUPPOSE — son propre avertissement l'énonce
+ * (`tierlist.disclaimer_pvp` : « assumes 6-star transcends and level 10
+ * Exclusive Equipment »), et le palier 9 est celui qui affiche 6 étoiles.
+ *
+ * Sans lui, les portraits sortaient à la RARETÉ, soit trois étoiles sous un texte
+ * qui en promet six. Le PvE, lui, laisse le lecteur choisir son palier, et les
+ * deux listes EE ne supposent aucune transcendance : elles classent un
+ * équipement, pas un état de personnage.
+ */
+const PVP_TRANSCEND = 9;
+
 export type TierListMode = 'pve' | 'pvp' | 'ee-base' | 'ee-plus10';
 
 const SLUG: Record<TierListMode, string> = {
@@ -122,7 +134,12 @@ export async function TierListTool({ lang, mode }: { lang: Lang; mode: TierListM
   return (
     <>
       <JsonLd data={itemList} id="ld-tierlist" />
-      <TierListBrowser rows={rows} labels={labels} withTranscend={mode === 'pve'} />
+      <TierListBrowser
+        rows={rows}
+        labels={labels}
+        withTranscend={mode === 'pve'}
+        fixedTranscend={mode === 'pvp' ? PVP_TRANSCEND : undefined}
+      />
     </>
   );
 }

@@ -81,6 +81,16 @@ export function CharactersFiltersBar({
 }: Props) {
   const basicsCount = elementFilter.length + classFilter.length + rarityFilter.length;
   const showRoles = Boolean(roles?.length && roleFilter && onToggleRole);
+  /**
+   * UN FILTRE À UNE SEULE VALEUR NE FILTRE RIEN — il occupe une place et invite à
+   * un clic sans effet. Le cas se rencontre sur la tier list PvP, dont les 88
+   * personnages sont TOUS 3★ : la barre y proposait une pastille « ★★★ » seule.
+   *
+   * La règle est posée ici, pas chez l'appelant, parce que c'est la barre qui
+   * reçoit les valeurs présentes et qui décide de son propre contenu — la même
+   * liste sert /characters (trois raretés) et les quatre tier lists.
+   */
+  const showRarity = rarities.length > 1;
 
   return (
     <div className="space-y-3">
@@ -124,16 +134,20 @@ export function CharactersFiltersBar({
               size="sm"
             />
           ))}
-          <span className="bg-line-subtle mx-1 h-5 w-px" />
-          {rarities.map((r) => (
-            <StarPill
-              key={r}
-              stars={r}
-              active={rarityFilter.includes(r)}
-              onClick={() => onToggleRarity(r)}
-              ariaLabel={labels.starAria.replace('{rarity}', String(r))}
-            />
-          ))}
+          {showRarity && (
+            <>
+              <span className="bg-line-subtle mx-1 h-5 w-px" />
+              {rarities.map((r) => (
+                <StarPill
+                  key={r}
+                  stars={r}
+                  active={rarityFilter.includes(r)}
+                  onClick={() => onToggleRarity(r)}
+                  ariaLabel={labels.starAria.replace('{rarity}', String(r))}
+                />
+              ))}
+            </>
+          )}
         </div>
         {showRoles && (
           <div className="flex flex-wrap items-center justify-center gap-1.5">
@@ -187,19 +201,22 @@ export function CharactersFiltersBar({
           ))}
         </BarGroup>
 
-        <ToolbarDivider />
-
-        <BarGroup label={labels.rarity}>
-          {rarities.map((r) => (
-            <StarPill
-              key={r}
-              stars={r}
-              active={rarityFilter.includes(r)}
-              onClick={() => onToggleRarity(r)}
-              ariaLabel={labels.starAria.replace('{rarity}', String(r))}
-            />
-          ))}
-        </BarGroup>
+        {showRarity && (
+          <>
+            <ToolbarDivider />
+            <BarGroup label={labels.rarity}>
+              {rarities.map((r) => (
+                <StarPill
+                  key={r}
+                  stars={r}
+                  active={rarityFilter.includes(r)}
+                  onClick={() => onToggleRarity(r)}
+                  ariaLabel={labels.starAria.replace('{rarity}', String(r))}
+                />
+              ))}
+            </BarGroup>
+          </>
+        )}
 
         {showRoles && (
           <>

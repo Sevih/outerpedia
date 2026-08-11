@@ -5,6 +5,54 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-11
+
+- **La transcendance ne se compte plus, elle se lit — une seule fois** (signalé
+  Sevih 11/08 : « la tier list PvE filtre sur 3/4/5/6 mais portrait utilise les
+  vrais step 4 5 6 7… »). Le sélecteur PvE offrait des COMPTES D'ÉTOILES là où le
+  portrait n'a jamais connu que le palier (`TransStar`), et les deux ne coïncident
+  plus au-delà de 4 : le palier 6 montre 5 étoiles, le 9 en montre 6. La pastille
+  « 6★ » rendait donc des portraits à 5 étoiles. La donnée curée portait la même
+  lecture humaine, sous un contrat qui disait pourtant déjà « transStar → tier ».
+  Arbitrage Sevih : corriger la DONNÉE, pas l'habillage.
+  - **Migration** de `rankByTranscend`/`roleByTranscend` (3★→3, 4★→4, 5★→6, 6★→9)
+    — 15 champs sur 14 persos, 30 lignes de diff, aucun reformatage.
+  - **Source unique.** Les colonnes `ShowUIStar`/`StarColor`/`StarPlus` étaient
+    lues à deux endroits : `transcend.json` (extrait — slider de la fiche, damage
+    calculator, sweetspots) et une transcription À LA MAIN de 27 lignes dans
+    `Thumbnail`. Elles concordaient, rien ne les y obligeait. La copie est
+    supprimée ; tout passe par [transcendence.ts](../src/lib/transcendence.ts),
+    seul lecteur de l'extraction. Objection bundle levée par la mesure :
+    `transcend.json` pèse **745 o gzippés** contre ~1 ko pour la table manuelle.
+    La règle « quelle étoile prend la teinte » y vit aussi — elle était écrite
+    quatre fois (vignette, portrait, canvas ×2).
+  - **Filtre PvE** limité aux paliers PLEINS (3, 4, 6, 9 → 3★/4★/5★/6★, demande
+    Sevih) : trois pastilles à cinq étoiles ne se distinguant qu'à la teinte ne
+    font pas un filtre. Éditeur admin aligné. Résolution en ESCALIER (`atStep`) :
+    la curation ne note que les paliers où le rang bascule, un cran non curé prend
+    le cran curé juste en dessous — et non la base, qui est le 6★.
+  - **Tier list PvP** : portraits au palier 9, comme son propre avertissement
+    l'annonce (« assumes 6-star transcends ») — ils sortaient à la rareté, donc
+    3 étoiles sous un texte qui en promet six. Filtre rareté masqué (88 persos
+    tous 3★) ; la règle « un filtre à une seule valeur ne filtre rien » est posée
+    dans `CharactersFiltersBar`, pas chez l'appelant.
+  - **Deux bugs préexistants trouvés en chemin, sur les 34 persos 1★ et 2★** dont
+    le jeu laisse les paliers « + » en JAUNE (le + existe, il ne se voit pas) :
+    le libellé du slider se déduisait de la COULEUR et affichait « 4 | 4 | 5 | 5
+    | 5 | 6 », trois crans homonymes ; et le Combat Power reconstruisait
+    `showUIStar`/`starPlus` en PARSANT ce libellé (`parseInt` + `/\+/g`), d'où un
+    CP sous-évalué de 120 aux paliers 4★+ et 5★+, de 240 au 5★++. Le libellé vient
+    maintenant de `StarPlus`, et `TranscendLayer` porte les deux nombres : plus
+    aucune grandeur de calcul ne transite par du texte d'affichage.
+  - **PvP = base 3★** écrit sur le champ `rankPvp` du contrat : Snow (2700003) et
+    Lisha (2700005), Core Fusion d'un 2★, n'ont pas de rang PvP et n'en auront
+    jamais. Leur forme fusionnée porte `rarity: 3` comme les quatre autres — le
+    trou ressemble à une curation manquante, il n'en est pas une.
+  - 12 tests neufs
+    ([transcend-step.test.ts](../src/components/tierlist/transcend-step.test.ts))
+    gravent la confusion palier/étoiles, la règle du libellé, l'escalier, et
+    interdisent le retour d'un compte d'étoiles dans le curé.
+
 ## 2026-08-10
 
 - **Mécaniques perso : conditions d'ÉTAT DE COMBAT déclarables** (demande

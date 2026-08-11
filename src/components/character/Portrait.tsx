@@ -81,7 +81,7 @@
  * lisent tous deux. Une transcription, deux rendus.
  */
 import { img } from '@/lib/images';
-import { transcendenceRow, type StarTone } from '@/components/ui/Thumbnail';
+import { transcendenceStars } from '@/lib/transcendence';
 import {
   BADGE_BOX,
   bestFit,
@@ -278,11 +278,10 @@ export function Portrait({
   className = 'w-40',
   fx,
 }: PortraitProps) {
-  const [show, tone, plus] = transcendenceRow(rarity, transcendence);
   // `m_StarImage[ShowUIStar-1]` reçoit la teinte — soit, dans l'ordre du tableau
-  // (haut → bas), la DERNIÈRE allumée, donc la plus basse. Elle ne se distingue que
-  // si le palier porte un « + » ; sinon la table donne déjà 'y'.
-  const litTone = (i: number): StarTone => (plus > 0 && i === show - 1 ? tone : 'y');
+  // (haut → bas), la DERNIÈRE allumée, donc la plus basse. La règle vit avec la
+  // table (`transcendenceStars`) : elle était recopiée ici et deux fois au canvas.
+  const lit = transcendenceStars(rarity, transcendence);
 
   return (
     // `@container` : le niveau et le nom sont du TEXTE, il leur faut une taille liée
@@ -330,14 +329,14 @@ export function Portrait({
           />
         ))}
       {!hideStars &&
-        STAR_ON.slice(0, show).map((r, i) => (
+        lit.map((tone, i) => (
           <img
             key={`on-${i}`}
-            src={img.star(litTone(i))}
+            src={img.star(tone)}
             alt=""
             aria-hidden
             className="absolute"
-            style={box(r)}
+            style={box(STAR_ON[i])}
           />
         ))}
 

@@ -11,10 +11,34 @@ import {
 } from '@/components/character/filters/CharactersFiltersBar';
 import { FilterPill } from '@/components/character/filters/FilterPill';
 import type { FilterOption } from '@/components/character/filters/AdvancedFiltersPanel';
+import {
+  transcendenceFullSteps,
+  transcendenceLabel,
+  transcendenceStars,
+} from '@/lib/transcendence';
 import { TIERS, TIER_COLORS, type Tier } from './tiers';
 
-/** Niveaux de transcendance sélectionnables (PvE) — 6★ = défaut (= `rank`). */
-const TRANSCEND_LEVELS = [3, 4, 5, 6] as const;
+/**
+ * LES PALIERS DU SÉLECTEUR (PvE) — les VRAIS, ceux du jeu (`TransStar`).
+ *
+ * Ce tableau valait `[3, 4, 5, 6]`, et ces nombres n'étaient PAS des paliers :
+ * c'était le compte d'étoiles affichées, une lecture humaine. Le portrait, lui,
+ * ne connaît que le palier — et les deux ne coïncident pas au-delà de 4 (le
+ * palier 6 montre 5 étoiles, le palier 9 en montre 6). La pastille « 6★ »
+ * rendait donc des portraits à 5 étoiles, et la « 5★ » des 4 étoiles avec un
+ * « + » orange. La donnée curée portait la même lecture humaine et a été migrée
+ * avec ce fichier ; son contrat, lui, disait déjà « transStar → tier ».
+ *
+ * Les paliers se LISENT dans la table du jeu plutôt que de se réécrire ici —
+ * c'est justement cette réécriture qui avait divergé. On ne garde que les PLEINS
+ * (3, 4, 6, 9 → 3★, 4★, 5★, 6★) : c'est la granularité à laquelle un rang
+ * éditorial bascule, et trois pastilles à cinq étoiles qui ne se distingueraient
+ * qu'à la teinte de la dernière ne feraient pas un filtre lisible.
+ */
+const PILL_RARITY = 3;
+const TRANSCEND_STEPS = transcendenceFullSteps(PILL_RARITY);
+/** Le palier de défaut : le plus haut, celui que `rank` décrit (6★). */
+const TOP_STEP = TRANSCEND_STEPS[TRANSCEND_STEPS.length - 1];
 
 /** Ligne allégée pour l'affichage + le filtrage (rang déjà résolu par MODE). */
 export interface TierListRow {
@@ -35,9 +59,36 @@ export interface TierListRow {
   tags: string[];
   /** Rang du mode courant (PvE : `rank` 6★ ; PvP : `rankPvp`). */
   rank?: string;
-  /** Surcharges par niveau de transcendance (PvE uniquement). */
+  /**
+   * Surcharges par PALIER de transcendance (PvE uniquement) — clés `TransStar`,
+   * pas des comptes d'étoiles, et SPARSES : la curation ne note que les paliers
+   * où la valeur change (cf. `atStep`).
+   */
   rankByTranscend?: Record<string, string>;
   roleByTranscend?: Record<string, string>;
+}
+
+/**
+ * La valeur curée au palier demandé — un ESCALIER, pas une table complète.
+ *
+ * La curation ne note QUE les paliers où le rang bascule : sur les sept crans,
+ * les 14 persos concernés en portent quatre. Demander 5★+ quand seuls 3★, 4★,
+ * 5★ et 6★ sont notés doit donc rendre le 5★ — le palier curé le plus haut qui
+ * ne dépasse pas celui demandé. Sous le premier palier curé, c'est ce premier
+ * qui s'applique ; aucun palier curé du tout → la valeur de base.
+ *
+ * Se rabattre directement sur la base (`?? rank`, ce que faisait ce composant
+ * quand les quatre clés couvraient tout le sélecteur) donnerait à un 5★+ le rang
+ * du 6★ : exactement l'inverse de ce que le cran veut dire.
+ */
+export function atStep(map: Record<string, string> | undefined, step: number, base?: string) {
+  const steps = Object.keys(map ?? {})
+    .map(Number)
+    .filter((n) => Number.isFinite(n))
+    .sort((a, b) => a - b);
+  if (!steps.length) return base;
+  const floor = steps.filter((s) => s <= step).pop() ?? steps[0];
+  return map![String(floor)] ?? base;
 }
 
 export interface TierListBrowserLabels {
@@ -62,15 +113,27 @@ const enc = (arr: (string | number)[]) => (arr.length ? arr.join(',') : undefine
  * rang/rôle d'un perso peut changer avec ses étoiles — repli sur le rang 6★),
  * rangées S→E. Filtres synchronisés à l'URL en paramètres à plat (idiome
  * `CharactersBrowser`, pas le `?z=` compressé de la V2).
+ *
+ * LES PORTRAITS SONT RENDUS AU PALIER QUE LA LISTE SUPPOSE, et c'est le rôle de
+ * `atStep`/`step` : PvE le laisse choisir, PvP le FIXE au 6★ que son avertisse-
+ * ment annonce (« assumes 6-star transcends »), les listes EE ne supposent rien
+ * et montrent la rareté. Un portrait à 3 étoiles sous un texte qui promet du 6★
+ * n'est pas un détail : c'est la page qui se contredit.
  */
 export function TierListBrowser({
   rows,
   labels,
   withTranscend = false,
+  fixedTranscend,
 }: {
   rows: TierListRow[];
   labels: TierListBrowserLabels;
   withTranscend?: boolean;
+  /**
+   * Palier (`TransStar`) auquel rendre les portraits quand il n'y a pas de
+   * sélecteur — l'hypothèse que la liste énonce. Omis = la rareté du perso.
+   */
+  fixedTranscend?: number;
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -81,7 +144,7 @@ export function TierListBrowser({
   const [klass, setKlass] = useState<string[]>([]);
   const [rarity, setRarity] = useState<number[]>([]);
   const [role, setRole] = useState<string[]>([]);
-  const [transcend, setTranscend] = useState(6);
+  const [transcend, setTranscend] = useState(TOP_STEP);
 
   const hydrated = useRef(false);
   const lastUrl = useRef('');
@@ -114,8 +177,11 @@ export function TierListBrowser({
     );
     setRole(list('role'));
     const tr = Number(p.get('tr'));
-    setTranscend((TRANSCEND_LEVELS as readonly number[]).includes(tr) ? tr : 6);
+    setTranscend(TRANSCEND_STEPS.includes(tr) ? tr : TOP_STEP);
     // (`tr` n'est écrit que si `withTranscend` — le lire sans est inoffensif.)
+    // `tr` porte désormais un PALIER et non un compte d'étoiles : un vieux lien
+    // `tr=5` disait 5★ et dit maintenant 4★+. Les deux valeurs restent valides,
+    // rien ne casse — et une URL de filtre ne se conserve pas.
   }, []);
 
   // ── Sync filtres → URL (débattu) ──
@@ -128,7 +194,7 @@ export function TierListBrowser({
     set('cl', enc(klass));
     set('r', enc(rarity));
     set('role', enc(role));
-    if (withTranscend && transcend !== 6) set('tr', String(transcend));
+    if (withTranscend && transcend !== TOP_STEP) set('tr', String(transcend));
     const search = params.toString();
     const url = search ? `${pathname}?${search}` : pathname;
     const handle = setTimeout(() => {
@@ -140,14 +206,16 @@ export function TierListBrowser({
     return () => clearTimeout(handle);
   }, [q, element, klass, rarity, role, transcend, withTranscend, pathname, router]);
 
-  // ── Rang/rôle résolus au niveau de transcendance courant ──
+  /** Le palier auquel la liste se lit — choisi (PvE), imposé (PvP) ou aucun (EE). */
+  const step = withTranscend ? transcend : fixedTranscend;
+
+  // ── Rang/rôle résolus au palier de transcendance courant ──
   const resolved = useMemo(() => {
     if (!withTranscend) return rows;
-    const lvl = String(transcend);
     return rows.map((r) => ({
       ...r,
-      rank: r.rankByTranscend?.[lvl] ?? r.rank,
-      role: r.roleByTranscend?.[lvl] ?? r.role,
+      rank: atStep(r.rankByTranscend, transcend, r.rank),
+      role: atStep(r.roleByTranscend, transcend, r.role),
     }));
   }, [rows, withTranscend, transcend]);
 
@@ -229,17 +297,22 @@ export function TierListBrowser({
           <p className="text-content-muted text-center font-mono text-[10px] font-semibold tracking-[0.16em] uppercase">
             {labels.transcendLevel}
           </p>
+          {/* Les pastilles peignent la RANGÉE DU JEU, pas un compte : le cran 5★ (le
+              palier 6) montre cinq étoiles, le 6★ (palier 9) en montre six — c'est
+              ce que le portrait rendra juste en dessous. `title` porte le nom
+              lisible, et fait l'étiquette a11y du bouton (qui n'a pas de texte). */}
           <div className="flex flex-wrap justify-center gap-2">
-            {TRANSCEND_LEVELS.map((lvl) => (
+            {TRANSCEND_STEPS.map((s) => (
               <FilterPill
-                key={lvl}
-                active={transcend === lvl}
-                onClick={() => setTranscend(lvl)}
+                key={s}
+                active={transcend === s}
+                onClick={() => setTranscend(s)}
+                title={transcendenceLabel(PILL_RARITY, s)}
                 className="h-8 px-3"
               >
                 <span className="flex items-center -space-x-1">
-                  {Array.from({ length: lvl }, (_, i) => (
-                    <img key={i} src={img.star()} alt="" aria-hidden width={16} height={16} />
+                  {transcendenceStars(PILL_RARITY, s).map((tone, i) => (
+                    <img key={i} src={img.star(tone)} alt="" aria-hidden width={16} height={16} />
                   ))}
                 </span>
               </FilterPill>
@@ -282,12 +355,13 @@ export function TierListBrowser({
                       element={row.element}
                       classType={row.class}
                       rarity={row.rarity}
-                      // Le palier passe désormais par `transcendence`, sa vraie
-                      // prop : il décide du nombre d'étoiles ET de la teinte du
-                      // « + ». Jusqu'ici il était passé À LA PLACE de la rareté
-                      // pour obtenir le bon compte — ça marchait par accident, et
-                      // la teinte se perdait.
-                      transcendence={withTranscend ? transcend : undefined}
+                      // Le palier passe par `transcendence`, sa vraie prop : il
+                      // décide du nombre d'étoiles ET de la teinte du « + ». Il
+                      // était passé À LA PLACE de la rareté pour obtenir le bon
+                      // compte (accident, teinte perdue), puis sous forme de
+                      // compte d'étoiles — ce qui décalait le rendu d'un cran.
+                      // C'est un PALIER, maintenant, des deux côtés.
+                      transcendence={step}
                       tags={row.tags}
                       href={`/characters/${row.slug}`}
                       starAriaLabel={labels.bar.starAria}

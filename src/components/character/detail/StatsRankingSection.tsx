@@ -84,8 +84,13 @@ export function StatsRankingSection({
 
   // Combat Power SANS équipement (CalcBattlePower, gear zéroé) sur les stats
   // AFFICHÉES (palier + couches actives) — skills supposés Lv5, étoiles du
-  // palier de transcendance sélectionné (« 5+ » → 5 étoiles, +1).
-  const tierLabel = tierIdx >= 0 ? layers.transcend[tierIdx]?.label : undefined;
+  // palier de transcendance sélectionné.
+  //
+  // Les deux termes d'étoiles se LISENT sur le palier. Ils se reconstruisaient
+  // ici depuis son libellé (`parseInt` + comptage des « + »), qui perdait le
+  // « + » sur les raretés 1 et 2 : le CP y était sous-évalué de 120 aux paliers
+  // 4★+ et 5★+, de 240 au 5★++. Un libellé est fait pour être lu, pas parsé.
+  const tier = tierIdx >= 0 ? layers.transcend[tierIdx] : undefined;
   const cp = composed
     ? calcNoGearBattlePower({
         atk: composed.ATK.value,
@@ -100,8 +105,8 @@ export function StatsRankingSection({
         dmgUp: composed['DMG UP%'].value,
         dmgReduce: composed['DMG RED%'].value,
         critDmgReduce: composed['CDMG RED%'].value,
-        showUIStar: tierLabel ? parseInt(tierLabel, 10) || baseStar : baseStar,
-        starPlus: tierLabel ? (tierLabel.match(/\+/g)?.length ?? 0) : 0,
+        showUIStar: tier?.showStar ?? baseStar,
+        starPlus: tier?.starPlus ?? 0,
         skills: { first: 5, second: 5, ultimate: 5, chainPassive: 5 },
         fused,
       })

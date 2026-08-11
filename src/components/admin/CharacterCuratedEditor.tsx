@@ -5,12 +5,27 @@ import type { CharacterCurated, CuratedRole, SkillPriority, VideoRef } from '@co
 import { postJson } from '@/lib/admin/post-json';
 import { rowKey } from '@/lib/admin/keyed';
 import { VideoCurator } from './VideoCurator';
+import { transcendenceFullSteps, transcendenceLabel } from '@/lib/transcendence';
 import { field, label } from './_ui';
 
 const ROLES: Array<'' | CuratedRole> = ['', 'dps', 'support', 'sustain'];
 const RANKS = ['', 'S', 'A', 'B', 'C', 'D', 'E'];
-/** Paliers de transcendance sélectionnables (transStar). */
-const STARS = ['1', '2', '3', '4', '5', '6'];
+/**
+ * LES PALIERS SÉLECTIONNABLES — les vrais (`TransStar`), lus dans la table du jeu.
+ *
+ * Ce champ a toujours DIT « transStar » : le contrat (`characterCuratedSchema`)
+ * comme ce commentaire. Il offrait pourtant `1..6`, soit un compte d'étoiles
+ * déguisé, et la donnée saisie l'était en comptes — d'où la tier list PvE qui
+ * rendait 5 étoiles sur son cran « 6★ ».
+ *
+ * Seuls les paliers PLEINS sont proposés (3★, 4★, 5★, 6★ — soit 3, 4, 6 et 9),
+ * la granularité à laquelle la tier list se range : curer un 5★+ écrirait une
+ * valeur qu'aucun cran du site n'atteindrait jamais. Une valeur héritée hors de
+ * cette liste reste éditable et enregistrable — l'option de repli plus bas — et
+ * `atStep` la respecte côté rendu.
+ */
+const STAR_RARITY = 3;
+const STARS = transcendenceFullSteps(STAR_RARITY).map(String);
 /**
  * Tags ÉDITABLES ici = les tags HUMAINS. Il n'y en a qu'un.
  *
@@ -77,7 +92,7 @@ function TranscendMapEditor({
               {r.star && !STARS.includes(r.star) && <option value={r.star}>Trans {r.star}</option>}
               {STARS.map((s) => (
                 <option key={s} value={s}>
-                  Trans {s}
+                  {transcendenceLabel(STAR_RARITY, Number(s))}
                 </option>
               ))}
             </select>

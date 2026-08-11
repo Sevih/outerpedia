@@ -24,6 +24,7 @@ import type {
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { transcendStarRow } from '@/lib/images';
+import { stepLabel } from '@/lib/transcendence';
 import { GRADE_RANK } from '@/lib/data/gear-order';
 import {
   STEP_STAT_KEYS,
@@ -190,7 +191,9 @@ export function getStatLayers(char: Character): StatLayersView {
     const parts: LayerParts = {};
     for (const b of s8?.[String(s.skillLevel)] ?? []) addBonus(parts, b);
     return {
-      label: `${s.showStar}${COLOR_SUFFIX[s.starColor] ?? ''}`,
+      label: stepLabel(s),
+      showStar: s.showStar,
+      starPlus: s.starPlus,
       atkPM: s.atk,
       defPM: s.def,
       hpPM: s.hp,
@@ -249,8 +252,22 @@ export interface TranscendTierView {
   passives: string[];
 }
 
-/** Suffixe du libellé selon la couleur déclarée (4 ORANGE → « 4+ »…). */
-const COLOR_SUFFIX: Record<string, string> = { yellow: '', orange: '+', red: '+', violet: '++' };
+/*
+ * LE LIBELLÉ D'UN PALIER SE LIT DANS `StarPlus`, PAS DANS LA COULEUR.
+ *
+ * Il se déduisait ici d'une table couleur → suffixe (`yellow` → rien, `orange` et
+ * `red` → « + », `violet` → « ++ »). C'est juste sur un 3★, où le jeu colore
+ * effectivement ses paliers « + », et FAUX sur toutes les raretés 1 et 2, dont les
+ * paliers « + » restent jaunes — le + existe, il ne se voit pas (cf.
+ * `lib/transcendence`). Le slider de la fiche perso y affichait donc
+ *
+ *     1 | 2 | 3 | 4 | 4 | 5 | 5 | 5 | 6        au lieu de
+ *     1 | 2 | 3 | 4 | 4+| 5 | 5+| 5++| 6
+ *
+ * soit trois crans consécutifs nommés « 5 » sur les 34 personnages 1★ et 2★, sans
+ * moyen de savoir lequel on venait de sélectionner. `stepLabel` lit la seule colonne
+ * qui fasse foi, et sert aussi les libellés du tier-list-maker et de l'admin.
+ */
 
 /** « +X% Label » / « +X Label » / « Label +X% » / « Label +X » (X décimal possible). */
 function parseNumericBonus(
@@ -311,7 +328,7 @@ function passiveLines(unique: Skill | undefined, level: number, lang: Lang): str
 
 function toTier(s: TranscendStep, unique: Skill | undefined, lang: Lang): TranscendTierView {
   return {
-    label: `${s.showStar}${COLOR_SUFFIX[s.starColor] ?? ''}`,
+    label: stepLabel(s),
     star: s.showStar,
     color: s.starColor,
     stars: transcendStarRow(s.showStar, s.starColor),
