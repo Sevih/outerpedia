@@ -35,6 +35,19 @@ export interface CatSpec {
   contentShape?: 'story' | 'boss';
   /** Où se lit/écrit « le monstre ». */
   monster: MonsterKind;
+  /**
+   * Modes de donjon dont les combats sont ÉLIGIBLES pour cette catégorie
+   * (`DungeonRef.mode`) — le sélecteur ne propose que ceux-là.
+   *
+   * Une catégorie de guide ne décrit qu'un mode de jeu : un joint challenge ne
+   * peut pas désigner un guild raid. Sans cette restriction, le sélecteur
+   * offrait les 69 combats du jeu là où 5 sont valides, homonymes compris — on
+   * ne choisissait plus, on cherchait. Un `group` hors mode ne casse pas le
+   * rendu (il existe), il fait juste un guide qui parle d'autre chose : c'est
+   * une garde d'ERGONOMIE, et `guide-categories.test.ts` la tient à jour en la
+   * confrontant à ce que les guides utilisent réellement.
+   */
+  groupModes?: readonly string[];
   /** Forme des équipes. */
   teams: TeamKind;
   /** Persos recommandés EN SECTIONS titrées (dimensional-singularity). */
@@ -52,6 +65,7 @@ export const GUIDE_SPECS: Record<string, CatSpec> = {
   'joint-challenge': {
     versioned: true,
     monster: 'group-config',
+    groupModes: ['event_boss'],
     teams: 'slots',
     videos: true,
     notes: true,
@@ -63,6 +77,7 @@ export const GUIDE_SPECS: Record<string, CatSpec> = {
   'world-boss': {
     versioned: true,
     monster: 'group-config',
+    groupModes: ['world_boss'],
     teams: 'sections',
     recoSections: true,
     videos: true,
@@ -73,6 +88,7 @@ export const GUIDE_SPECS: Record<string, CatSpec> = {
   'special-request': {
     versioned: false,
     monster: 'group-meta',
+    groupModes: ['raid_1', 'raid_2'],
     teams: 'buckets',
     videos: true,
     notes: false,
@@ -82,6 +98,7 @@ export const GUIDE_SPECS: Record<string, CatSpec> = {
   'irregular-extermination': {
     versioned: false,
     monster: 'group-meta',
+    groupModes: ['irregular_chase'],
     teams: 'named',
     videos: true,
     notes: false,
@@ -91,6 +108,7 @@ export const GUIDE_SPECS: Record<string, CatSpec> = {
   'adventure-license': {
     versioned: false,
     monster: 'group-meta',
+    groupModes: ['adventure_challenge', 'adventure_mission'],
     teams: 'named',
     videos: true,
     notes: false,

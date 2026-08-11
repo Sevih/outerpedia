@@ -7,6 +7,26 @@
 
 ## 2026-08-12
 
+- **Le sélecteur de combat d'un guide proposait 69 réponses pour 5 valides** —
+  signalé par Sevih (« le sélecteur de monstre est éclaté à cet endroit »), et la
+  mesure lui donne raison largement : `listGroups` rendait TOUS les combats
+  peuplés du jeu, tous modes confondus (20 adventure_mission, 15 guild_raid, 9
+  adventure_challenge, 6 world_boss, 10 raid, 4 irregular_chase, 5 event_boss),
+  à une catégorie qui n'en accepte qu'un mode. Pire, 23 de ces options portent un
+  nom qu'une autre porte aussi (trois « Drakhan », deux « Dahlia », deux « Ars
+  Nova »…) : on ne choisissait plus, on cherchait parmi des homonymes.
+  `CatSpec.groupModes` déclare les modes éligibles, `listGroups(lang, modes)`
+  filtre, et le picker montre le PORTRAIT du boss — reconnaître vaut mieux que
+  lire. Joint challenge passe de 69 options à 5.
+  La table n'a pas été écrite au jugé : elle est DÉRIVÉE de ce que les guides
+  désignent réellement aujourd'hui, et un test la tient dans les DEUX sens — un
+  mode utilisé mais non déclaré échoue, un mode déclaré que personne n'utilise
+  aussi (une liste qui grossit sans jamais maigrir finit par ne plus rien
+  restreindre). Plus la contre-épreuve du mécanisme : le filtre doit retirer
+  quelque chose ET laisser de quoi choisir.
+  Portée : c'est une garde d'ERGONOMIE, pas de rendu — un `group` hors mode
+  s'afficherait très bien, il ferait juste un guide qui parle d'autre chose.
+
 - **Versionner DEUX FOIS empilait mal — les vieilles versions sautaient sur la
   dernière archive** — trouvé en vérifiant contre le code le modèle que Sevih
   décrivait, qui était le bon : `v1,v2,v3 → y1`, versionner fige `y1@1` sous

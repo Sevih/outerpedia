@@ -26,7 +26,7 @@ import type {
 import type { TFunction, TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
-import { getMonster } from '@/lib/data/monsters';
+import { getMonster, monsterIconSrc } from '@/lib/data/monsters';
 import { expandRankContexts, type SpawnContext } from '@/lib/monster-stats';
 
 const DUNGEONS = encountersData as unknown as EncountersFile;
@@ -221,17 +221,34 @@ export function modeLabel(d: DungeonRef, lang: Lang): string {
   return G.modes?.[d.mode] ? lRec(G.modes[d.mode], lang) : d.mode;
 }
 
+/** Un combat proposable dans un sélecteur. */
+export interface GroupChoice {
+  group: string;
+  label: string;
+  /** Portrait du boss le plus dur — reconnaître vaut mieux que lire. */
+  icon?: string;
+}
+
 /**
  * Tous les COMBATS proposables — un `group` distinct et peuplé, étiqueté par son
  * boss (le plus dur) et son mode. Pour un SÉLECTEUR (admin) : on ne fabrique
  * jamais un `group`, on choisit parmi ceux qui existent réellement dans
  * `encounters.json`. Le libellé sert d'ancre de recherche, l'ordre est alphabétique.
+ *
+ * `modes` RESTREINT aux combats d'un mode donné, et c'est ce qui rend le
+ * sélecteur utilisable : sans lui, la liste sortait les 69 combats du jeu à
+ * une catégorie de guide qui n'en accepte que 5, avec 23 options portant un nom
+ * qu'une autre porte aussi (trois « Drakhan », deux « Dahlia »…). Autrement dit
+ * l'écrasante majorité des réponses proposées était fausse, et la bonne se
+ * cherchait à l'œil parmi ses homonymes.
  */
-export function listGroups(lang: Lang): { group: string; label: string }[] {
+export function listGroups(lang: Lang, modes?: readonly string[]): GroupChoice[] {
+  const keep = modes?.length ? new Set(modes) : undefined;
   const seen = new Set<string>();
-  const out: { group: string; label: string }[] = [];
+  const out: GroupChoice[] = [];
   for (const d of Object.values(DUNGEONS)) {
     if (!d.group || !d.monsters?.length || seen.has(d.group)) continue;
+    if (keep && !keep.has(d.mode)) continue;
     seen.add(d.group);
     const encs = encountersOfGroup(d.group);
     const hardest = encs[encs.length - 1];
@@ -239,7 +256,11 @@ export function listGroups(lang: Lang): { group: string; label: string }[] {
     const monster = boss ? getMonster(boss.id) : undefined;
     const name = monster ? lRec(monster.name, lang) || monster.name.en : d.group;
     const mode = hardest ? modeLabel(hardest.ref, lang) : '';
-    out.push({ group: d.group, label: mode ? `${name} · ${mode}` : name });
+    out.push({
+      group: d.group,
+      label: mode ? `${name} · ${mode}` : name,
+      ...(monster ? { icon: monsterIconSrc(monster) } : {}),
+    });
   }
   return out.sort((a, b) => a.label.localeCompare(b.label));
 }

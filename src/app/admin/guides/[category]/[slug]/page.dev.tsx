@@ -95,7 +95,10 @@ export default async function GuideEditPage({
   const spec = guideSpec(category)!;
   // Options du picker de monstre selon la catégorie (une seule est pertinente).
   const usesGroup = spec.monster === 'group-config' || spec.monster === 'group-meta';
-  const groupOptions = usesGroup ? listGroups('en') : [];
+  // RESTREINT au mode de la catégorie : un joint challenge ne désigne pas un
+  // guild raid. Sans ça le sélecteur sortait les 69 combats du jeu là où 5 sont
+  // valides — la bonne réponse se cherchait parmi ses homonymes.
+  const groupOptions = usesGroup ? listGroups('en', spec.groupModes) : [];
   const dungeonOptions = spec.monster === 'dungeons-meta' ? listDungeons('en') : [];
   const monsterOptions = spec.monster === 'bossId-meta' ? listMonsters('en') : [];
 
