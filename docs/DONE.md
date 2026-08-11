@@ -7,6 +7,35 @@
 
 ## 2026-08-12
 
+- **Le pin d'une version SURVIT aux gestes d'édition** — deux fuites trouvées en
+  répondant à « comment je mets à jour, et dans quel ordre ? ». `pinned` est la
+  seule clé de `config.json` que l'éditeur ne connaît pas : posée par
+  « Versionner », jamais saisie, jamais affichée. Deux gestes ordinaires
+  l'emportaient donc EN SILENCE.
+  (1) SAUVEGARDER un guide versionné : `fromVersionDraft` reconstruit
+  `config.json` depuis le seul brouillon — corriger une faute dans les conseils
+  réécrivait le fichier sans le pin. L'archive restait sur le disque, le guide
+  repassait au live, et rien ne le disait. C'est le plus grave des deux : il se
+  déclenchait à chaque passage dans l'éditeur, sur un guide déjà épinglé.
+  (2) DUPLIQUER une version : la copie emportait le pin de la source. La nouvelle
+  version, créée précisément pour décrire le combat TEL QU'IL EST, naissait en
+  montrant le boss d'avant — et il aurait fallu penser à l'enlever à la main,
+  exactement le geste que « Versionner » existe pour supprimer.
+  Réglé aux deux endroits : report du pin présent sur le disque à la sauvegarde
+  (lu au chemin, pas via le cache de `listGuides`, qui peut rendre l'état
+  d'avant), et copie SANS `pinned` à la duplication. `addGuideVersion` devient
+  async — elle écrit désormais par `writeJson` comme le reste du store, plutôt
+  qu'un second formateur qui ferait diverger les diffs.
+  CONTRE-ÉPREUVES, les deux vérifiées en désactivant chaque correctif : une
+  version sans pin n'en reçoit pas (un report inconditionnel écrirait une clé
+  vide dans les 16 guides versionnés), et la duplication garde bien le RESTE du
+  config (sinon vider le fichier passerait pour un correctif).
+  Le bac à sable a lui-même appris quelque chose : ce store fige `CONTENTS_DIR`
+  au CHARGEMENT, donc la redirection de `process.cwd()` doit précéder l'import et
+  pas vivre dans un `beforeAll` — sinon le test écrit dans l'arbre réel du site.
+  C'est la garde « source vérifiée AVANT la cible » de `addGuideVersion` qui a
+  évité le dossier parasite au premier essai. 1515 tests verts.
+
 - **Un boss figé le DIT** — dernier item de l'épinglage, et celui que le premier
   usage réel a rendu urgent : Sevih, devant ses trois versions de guide, ne
   pouvait pas savoir laquelle montrait quoi. Une carte archivée et une carte

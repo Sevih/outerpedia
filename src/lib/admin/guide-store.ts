@@ -12,7 +12,7 @@
  * Validité des références : garantie par CONSTRUCTION côté éditeur (sélecteurs
  * sur la donnée réelle) ; le build la revérifie au rendu.
  */
-import { copyFileSync, existsSync, mkdirSync, rmSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs';
 import { resolve, sep } from 'node:path';
 import { writeJson } from '@datagen/lib/json';
 import { getGuide, readGuideFile, readGuideVersionFile } from '@/lib/data/guides';
@@ -178,6 +178,30 @@ export async function addVersionPin(
   return true;
 }
 
+/**
+ * Reporte le `pinned` DÉJÀ SUR LE DISQUE dans un `config.json` reconstruit.
+ *
+ * Lu au chemin plutôt que par `readGuideVersionFile` : ce dernier passe par le
+ * cache de `listGuides`, et une sauvegarde qui vient d'écrire dans le même
+ * dossier pourrait s'y voir rendre l'état d'avant. Ici on veut le disque, à
+ * l'instant.
+ *
+ * Un `config.json` que le brouillon voulait SUPPRIMER (payload `null`) est
+ * conservé s'il porte un pin — supprimer le fichier emporterait l'épinglage.
+ */
+function withKeptPin(vdir: string, config: RawConfig | null): RawConfig | null {
+  const path = resolve(vdir, 'config.json');
+  if (!existsSync(path)) return config;
+  let pinned: unknown;
+  try {
+    pinned = (JSON.parse(readFileSync(path, 'utf8')) as { pinned?: unknown }).pinned;
+  } catch {
+    return config; // config illisible : on n'a rien à préserver
+  }
+  if (!Array.isArray(pinned) || !pinned.length) return config;
+  return { ...(config ?? {}), pinned: pinned as string[] };
+}
+
 /** Fusionne un champ dans `meta.json` (préserve tout le reste ; vide supprime). */
 async function patchGuideMeta(
   category: string,
@@ -215,6 +239,13 @@ export async function saveGuideDraft(
       const vdir = resolve(base, 'versions', v.key);
       mkdirSync(vdir, { recursive: true });
       const payload = fromVersionDraft(spec, v);
+      // `pinned` N'EST PAS dans le modèle d'édition : il est posé par
+      // « Versionner », l'éditeur ne le voit pas et ne le renvoie donc jamais.
+      // Or `fromVersionDraft` RECONSTRUIT `config.json` de zéro — sans ce
+      // report, la moindre sauvegarde du guide (une faute corrigée dans les
+      // conseils) effacerait l'épinglage : l'archive resterait sur le disque,
+      // le guide repasserait au live, et RIEN ne le dirait.
+      payload['config.json'] = withKeptPin(vdir, payload['config.json']);
       for (const file of VERSION_FILES) await writeOrRemove(resolve(vdir, file), payload[file]);
     }
     return [];
@@ -253,12 +284,12 @@ export async function saveGuideDraft(
  * version « pour servir de base » ; vide → version VIERGE (première version d'un
  * guide qui n'en a pas encore, ex. world-boss). Renvoie les écarts (vide = OK).
  */
-export function addGuideVersion(
+export async function addGuideVersion(
   category: string,
   slug: string,
   newKey: string,
   fromKey: string,
-): string[] {
+): Promise<string[]> {
   // Catégorie en LISTE BLANCHE, comme `saveGuideDraft` : sans elle, le
   // `mkdirSync` plus bas créait un dossier parasite pour n'importe quelle
   // catégorie inventée — que le scanner de guides parcourt ensuite. Et cette
@@ -287,8 +318,37 @@ export function addGuideVersion(
   if (srcDir) {
     for (const file of [...VERSION_FILES, 'version.json']) {
       const sp = resolve(srcDir, file);
-      if (existsSync(sp)) copyFileSync(sp, resolve(dst, file));
+      if (!existsSync(sp)) continue;
+      // Le `pinned` NE SE DUPLIQUE PAS. Une nouvelle version décrit le combat
+      // TEL QU'IL EST — c'est même la raison de la créer. Hériter du pin de la
+      // version source la ferait naître en montrant le boss d'avant, sur la
+      // page censée décrire la rotation en cours, et il faudrait penser à
+      // l'enlever à la main : exactement le geste que « Versionner » existe
+      // pour supprimer. Les autres fichiers, eux, se dupliquent bien : ils sont
+      // une BASE à réécrire.
+      if (file === 'config.json') {
+        await copyConfigWithoutPin(sp, resolve(dst, file));
+        continue;
+      }
+      copyFileSync(sp, resolve(dst, file));
     }
   }
   return [];
+}
+
+/**
+ * Copie un `config.json` de version en LAISSANT son épinglage derrière lui.
+ * Écrit par `writeJson` comme tout le reste du store : un second formateur ici
+ * ferait diverger les diffs de deux fichiers pourtant identiques de nature.
+ */
+async function copyConfigWithoutPin(from: string, to: string): Promise<void> {
+  let cfg: Record<string, unknown>;
+  try {
+    cfg = JSON.parse(readFileSync(from, 'utf8')) as Record<string, unknown>;
+  } catch {
+    copyFileSync(from, to); // illisible : on duplique tel quel, comme avant
+    return;
+  }
+  delete cfg.pinned;
+  await writeJson(to, cfg);
 }

@@ -55,7 +55,7 @@ export async function POST(
   }
 
   if (body.op === 'add-version') {
-    const errors = addGuideVersion(category, slug, body.newKey, body.fromKey);
+    const errors = await addGuideVersion(category, slug, body.newKey, body.fromKey);
     if (errors.length) return NextResponse.json({ ok: false, errors }, { status: 400 });
     // Recharge le guide (la nouvelle version est découverte au scan) pour que
     // le client remplace son état sans deviner la forme dupliquée.

@@ -23,44 +23,44 @@ import { addGuideVersion } from './guide-store';
 const CAT = 'joint-challenge';
 
 describe('addGuideVersion — confinement des chemins', () => {
-  it("refuse un slug qui s'échappe de _contents (traversal)", () => {
+  it("refuse un slug qui s'échappe de _contents (traversal)", async () => {
     for (const slug of ['../../../../tmp/evil', '..', 'x/../../../..']) {
-      const errors = addGuideVersion(CAT, slug, '2026-01', '');
+      const errors = await addGuideVersion(CAT, slug, '2026-01', '');
       expect(errors.length).toBeGreaterThan(0);
       expect(errors.join()).toMatch(/Invalid guide path/);
     }
   });
 
-  it('refuse une catégorie hors liste blanche (sinon dossier parasite créé)', () => {
-    const errors = addGuideVersion('inventée', 'peu-importe', '2026-01', '');
+  it('refuse une catégorie hors liste blanche (sinon dossier parasite créé)', async () => {
+    const errors = await addGuideVersion('inventée', 'peu-importe', '2026-01', '');
     expect(errors.join()).toMatch(/Non-editable category/);
   });
 
-  it('refuse une catégorie éditable mais NON versionnée', () => {
+  it('refuse une catégorie éditable mais NON versionnée', async () => {
     // `special-request` est éditable en stockage PLAT : pas de versions/ à créer.
-    const errors = addGuideVersion('special-request', 'peu-importe', '2026-01', '');
+    const errors = await addGuideVersion('special-request', 'peu-importe', '2026-01', '');
     expect(errors.join()).toMatch(/not versioned/);
   });
 
-  it('refuse une clé de version mal formée', () => {
+  it('refuse une clé de version mal formée', async () => {
     for (const key of ['2026-13', '26-01', '2026-1', '../2026-01', '']) {
-      expect(addGuideVersion(CAT, 'peu-importe', key, '').join()).toMatch(/YYYY-MM/);
+      expect((await addGuideVersion(CAT, 'peu-importe', key, '')).join()).toMatch(/YYYY-MM/);
     }
   });
 
-  it('refuse un fromKey mal formé — il désignait le dossier source à recopier', () => {
+  it('refuse un fromKey mal formé — il désignait le dossier source à recopier', async () => {
     for (const from of ['../../../../etc', '2026-13', 'nope']) {
-      expect(addGuideVersion(CAT, 'peu-importe', '2026-01', from).join()).toMatch(
+      expect((await addGuideVersion(CAT, 'peu-importe', '2026-01', from)).join()).toMatch(
         /Source version key expected/,
       );
     }
   });
 
-  it('ne rejette pas un fromKey VIDE (version vierge, cas légitime)', () => {
+  it('ne rejette pas un fromKey VIDE (version vierge, cas légitime)', async () => {
     // On force l'arrêt sur une garde AMONT (slug hors périmètre) : si le
     // `fromKey` vide était refusé pour lui-même, l'erreur porterait sur lui.
     // Formulé ainsi, le test prouve la même chose SANS effet de bord.
-    const errors = addGuideVersion(CAT, '../../../../tmp/evil', '2026-01', '');
+    const errors = await addGuideVersion(CAT, '../../../../tmp/evil', '2026-01', '');
     expect(errors.join()).toMatch(/Invalid guide path/);
     expect(errors.join()).not.toMatch(/Source version key expected/);
   });

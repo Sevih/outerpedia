@@ -196,6 +196,13 @@ export interface RawConfig {
   group?: string;
   notes?: LText[];
   videos?: VideoItem[];
+  /**
+   * ÉPINGLAGE de la version (clés d'archive `<id>@<n>`). HORS du modèle
+   * d'édition à dessein : il est posé par « Versionner », l'éditeur ne l'affiche
+   * pas et ne le renvoie jamais. Déclaré ici parce que le store doit le
+   * PRÉSERVER en réécrivant le fichier (cf. `withKeptPin`).
+   */
+  pinned?: string[];
 }
 export interface RawTips {
   tactical?: LText[];
