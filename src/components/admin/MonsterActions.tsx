@@ -26,7 +26,7 @@ interface RepinReport {
   skipped: string[];
   pinnedVersions: string[];
   pending: Array<{ guide: string; origin: string; version?: string }>;
-  kept: Array<{ guide: string; field: string; reason: string }>;
+  kept: Array<{ guide: string; field: string; version?: string; reason: string }>;
 }
 
 type Status =
@@ -170,12 +170,23 @@ export function MonsterActions({
           {/* Laissé en live À DESSEIN : le dire, sinon l'absence du guide dans
               le compte-rendu se lit comme un oubli. */}
           {status.repin.kept.length > 0 && (
-            <p className="border-line-subtle bg-surface-sunken text-content-muted rounded-md border p-3">
-              Left live on purpose:{' '}
-              {status.repin.kept.map((k) => `${k.guide} (${k.field})`).join(', ')} — a versioned
-              guide’s <code>meta.bossId</code> carries its portrait and heading, which must follow
-              the current entity.
-            </p>
+            <div className="border-line-subtle bg-surface-sunken text-content-muted space-y-1 rounded-md border p-3">
+              <p>Left as is, on purpose:</p>
+              {/* Le motif vient de CHAQUE entrée : il y en a deux (un
+                  `meta.bossId` de guide versionné, une version déjà figée sur ce
+                  monstre), et un texte unique ici mentirait sur l'autre. */}
+              <ul className="list-disc space-y-0.5 pl-5">
+                {status.repin.kept.map((k, i) => (
+                  <li key={`${k.guide}-${k.field}-${k.version ?? ''}-${i}`}>
+                    <code>
+                      {k.guide}
+                      {k.version ? ` (${k.version})` : ''}
+                    </code>{' '}
+                    · {k.field} — {k.reason}
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
           {status.repin.skipped.length > 0 && (
             <p className="border-danger/40 bg-danger/5 text-danger rounded-md border p-3">

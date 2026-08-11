@@ -11,11 +11,30 @@
  * `tags.test.ts` (corrigé le 26/07).
  */
 import { describe, expect, it } from 'vitest';
-import { listGuides } from '@/lib/data/guides';
+import { listGuides, readGuideVersionFile } from '@/lib/data/guides';
 import { encountersOfGroup } from '@/lib/data/encounters';
 import { applyRepin, planRepin, type RepinPlan } from './repin-guides';
 
 const guides = listGuides();
+/**
+ * Une version RÉELLEMENT épinglée du contenu, s'il en existe une — avec son
+ * combat et l'id vivant qu'elle fige. C'est de la donnée éditoriale : zéro
+ * version épinglée est un état légitime, d'où la garde dans le test qui s'en
+ * sert (un `expect` de plancher rougirait le jour où Sevih dépingle tout).
+ */
+const pinnedCase = guides
+  .filter((g) => g.versions.length)
+  .flatMap((g) =>
+    g.versions.map((v) => {
+      const cfg = readGuideVersionFile<{ group?: string; pinned?: string[] }>(
+        g,
+        v.key,
+        'config.json',
+      );
+      return { g, key: v.key, group: cfg?.group, pinned: cfg?.pinned ?? [] };
+    }),
+  )
+  .find((c) => c.group && c.pinned.length);
 /** Premier guide qui NOMME son boss — référence directe. */
 const direct = guides.find((g) => g.bossId)!;
 /** Premier guide VERSIONNÉ dont une version désigne un combat peuplé. */
@@ -99,6 +118,39 @@ describe('planRepin — ce que « Versionner » ferait', () => {
     const plan = planRepin(flat.bossId!, `${flat.bossId}@1`);
     const name = `${flat.category}/${flat.slug}`;
     expect(plan.edits.some((e) => e.guide === name && e.field === 'meta.bossId')).toBe(true);
+  });
+
+  it('une version DÉJÀ figée sur ce monstre n’est pas re-planifiée', () => {
+    // L'empilement voulu : versionner une DEUXIÈME fois ne doit toucher que les
+    // versions restées en live. Sans ce filtre, chaque tour ferait sauter toutes
+    // les vieilles versions sur la dernière archive — elles finiraient par
+    // montrer le même boss, et les états intermédiaires, pourtant écrits sur le
+    // disque, ne seraient plus lus par personne.
+    if (!pinnedCase) return; // aucun contenu épinglé aujourd'hui : rien à garder
+    const id = pinnedCase.pinned[0].split('@')[0];
+    const plan = planRepin(id, `${id}@9`);
+    const name = `${pinnedCase.g.category}/${pinnedCase.g.slug}`;
+    const mine = (arr: { guide: string; version?: string }[]) =>
+      arr.filter((x) => x.guide === name && x.version === pinnedCase.key);
+    expect(mine(plan.pending)).toEqual([]);
+    // …et ce n'est pas un silence : le plan DIT qu'il la laisse.
+    expect(mine(plan.kept).length).toBe(1);
+  });
+
+  it('CONTRE-ÉPREUVE : un monstre du MÊME combat, lui, est bien planifié', () => {
+    // Sans elle, un filtre trop large (« cette version porte un pin, on n'y
+    // touche plus ») passerait le test précédent tout en rendant impossible
+    // d'épingler le deuxième boss d'une rencontre. La liste est CREUSE : le
+    // filtre se fait par MONSTRE, pas par version.
+    if (!pinnedCase?.group) return;
+    const frozen = new Set(pinnedCase.pinned.map((k) => k.split('@')[0]));
+    const other = encountersOfGroup(pinnedCase.group)
+      .flatMap((e) => e.monsters.map((m) => m.id))
+      .find((mid) => !frozen.has(mid));
+    if (!other) return; // combat dont TOUS les monstres sont figés
+    const plan = planRepin(other, `${other}@1`);
+    const name = `${pinnedCase.g.category}/${pinnedCase.g.slug}`;
+    expect(plan.pending.some((p) => p.guide === name && p.version === pinnedCase.key)).toBe(true);
   });
 
   it('un id inconnu ne planifie rien du tout', () => {

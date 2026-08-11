@@ -7,6 +7,28 @@
 
 ## 2026-08-12
 
+- **Versionner DEUX FOIS empilait mal — les vieilles versions sautaient sur la
+  dernière archive** — trouvé en vérifiant contre le code le modèle que Sevih
+  décrivait, qui était le bon : `v1,v2,v3 → y1`, versionner fige `y1@1` sous
+  elles ; `v4` naît sans pin et suit le live ; au tour suivant, `v1..v3` doivent
+  GARDER `y1@1` et seule `v4` prendre `y1@2`.
+  Le code ne faisait pas ça. La règle « ré-épingler ce qui est ENCORE EN LIVE »
+  était écrite en tête du module et appliquée aux références DIRECTES
+  (`isLiveRef`), mais jamais aux INDIRECTES : `planRepin` collectait toute
+  version dont le combat contient le monstre, sans regarder son `pinned`. Le
+  deuxième versionnage aurait donc réécrit `y1@1` en `y1@2` partout — toutes les
+  versions auraient fini par montrer le MÊME boss, et les états intermédiaires,
+  pourtant sur le disque, n'auraient plus été lus par personne. L'empilement,
+  c'est-à-dire tout l'intérêt du mécanisme, n'existait pas.
+  Filtre posé côté plan, par MONSTRE et pas par version — la liste est creuse,
+  une version figée sur un boss doit rester épinglable sur le second de sa
+  rencontre. C'est la CONTRE-ÉPREUVE du test, sans laquelle un filtre trop large
+  (« cette version porte un pin, on n'y touche plus ») passerait.
+  La version laissée tranquille part en `kept`, comme le `meta.bossId` d'un guide
+  versionné : deux motifs distincts, donc le motif descend dans l'entrée et
+  l'admin l'affiche par ligne — un texte unique côté écran mentait sur l'autre
+  cas. 1517 tests verts.
+
 - **Le pin d'une version SURVIT aux gestes d'édition** — deux fuites trouvées en
   répondant à « comment je mets à jour, et dans quel ordre ? ». `pinned` est la
   seule clé de `config.json` que l'éditeur ne connaît pas : posée par

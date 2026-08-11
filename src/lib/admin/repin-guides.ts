@@ -21,7 +21,17 @@
  *
  * Règle appliquée : « ré-épingler ce qui est ENCORE EN LIVE », par monstre. Une
  * référence déjà épinglée (`<id>@<k>`) n'est pas retouchée — c'est ce qui fait
- * que le geste se maintient tout seul d'une version de guide à la suivante.
+ * que le geste se maintient tout seul d'une version de guide à la suivante, et
+ * elle vaut des deux côtés : `meta.bossId` déjà épinglé comme `pinned` d'une
+ * version qui nomme déjà ce monstre. C'est ce qui produit l'empilement voulu —
+ *
+ *   v1,v2,v3 → y1        versionner → y1@1, v1,v2,v3 figées dessus
+ *   (le jeu change)                   v4 naît sans pin : elle suit le live
+ *   versionner → y1@2                 v1..v3 GARDENT y1@1, seule v4 prend y1@2
+ *
+ * — alors qu'un ré-épinglage aveugle ferait sauter v1..v3 sur la DERNIÈRE
+ * archive à chaque tour : toutes finiraient par montrer le même boss, et les
+ * états intermédiaires, pourtant sur le disque, ne seraient plus lus.
  */
 import { listGuides, readGuideVersionFile, type Guide } from '@/lib/data/guides';
 import { encountersOfGroup } from '@/lib/data/encounters';
@@ -60,8 +70,15 @@ export const showValue = (v: string | string[]): string => (Array.isArray(v) ? v
  */
 export interface RepinKept {
   guide: string;
-  field: 'meta.bossId';
-  reason: 'guide versionné — le portrait et le H1 suivent l’entité courante';
+  field: 'meta.bossId' | 'version.pinned';
+  /** Clé de version, pour `version.pinned`. */
+  version?: string;
+  /**
+   * Motif, EN ANGLAIS : il part tel quel dans le compte-rendu de l'admin. Porté
+   * par l'entrée et pas figé dans l'écran — il y a désormais deux motifs, et un
+   * texte unique côté vue mentirait sur l'un des deux.
+   */
+  reason: string;
 }
 
 /** Référence INDIRECTE (un combat) : rapportée, pas éditable en l'état. */
@@ -96,6 +113,14 @@ function monstersOfGroup(group: string): Set<string> {
 /** Une référence pointe-t-elle ENCORE le monstre vivant ? (déjà épinglée = non) */
 const isLiveRef = (ref: string, id: string): boolean => ref === id;
 
+/** Les ids VIVANTS que le `pinned` d'une version fige déjà (`<id>@<n>` → `<id>`). */
+function pinnedIds(pinned: unknown): Set<string> {
+  if (!Array.isArray(pinned)) return new Set();
+  return new Set(
+    pinned.filter((k): k is string => typeof k === 'string').map((k) => k.split('@')[0]),
+  );
+}
+
 function metaFile(g: Guide): string {
   return `${g.category}/${g.slug}/meta.json`;
 }
@@ -124,7 +149,8 @@ export function planRepin(id: string, key: string): RepinPlan {
         kept.push({
           guide: name,
           field: 'meta.bossId',
-          reason: 'guide versionné — le portrait et le H1 suivent l’entité courante',
+          reason:
+            'a versioned guide’s meta.bossId carries its portrait and heading — it must follow the current entity',
         });
       } else {
         edits.push({
@@ -154,9 +180,26 @@ export function planRepin(id: string, key: string): RepinPlan {
     for (const v of g.versions) {
       const cfg = readGuideVersionFile<Record<string, unknown>>(g, v.key, 'config.json');
       if (!cfg) continue;
+      // « Ré-épingler ce qui est ENCORE EN LIVE » vaut AUSSI ici. Une version
+      // dont le `pinned` nomme déjà ce monstre décrit un état FIGÉ : elle n'est
+      // plus attachée à l'entité courante, donc le versionnage suivant ne la
+      // concerne pas. Sans ce filtre, versionner une deuxième fois faisait
+      // sauter TOUTES les vieilles versions sur la dernière archive — chacune
+      // aurait fini par montrer le même boss, et les états intermédiaires,
+      // pourtant écrits sur le disque, n'auraient plus été lus par personne.
+      const already = pinnedIds(cfg.pinned).has(id);
       for (const k of GROUP_KEYS) {
         const group = cfg[k];
         if (typeof group !== 'string' || !monstersOfGroup(group).has(id)) continue;
+        if (already) {
+          kept.push({
+            guide: name,
+            field: 'version.pinned',
+            version: v.key,
+            reason: 'already frozen on this monster — it keeps the archive it was pinned to',
+          });
+          break; // un `kept` par VERSION, pas par clé de groupe
+        }
         pending.push({ guide: name, origin: 'version.config', version: v.key, group });
       }
     }
