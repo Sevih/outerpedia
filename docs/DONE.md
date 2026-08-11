@@ -7,6 +7,32 @@
 
 ## 2026-08-12
 
+- **L'onglet Monster d'une version versionnée montre ce qui BOUGE : l'état du
+  boss** — correction de cap demandée par Sevih (« perso j'aurais juste fait un
+  sélecteur de version ; là si je veux je peux assigner Deep Sea à un guide de
+  Prototype »). Il avait raison et la mesure le dit : sur les 16 guides
+  versionnés, **aucun** ne change de combat d'une version à l'autre (Annihilator
+  garde `..._0001` sur ses 4 versions, Dahlia `world_boss:4086019` sur ses 3…).
+  Le combat appartient donc au GUIDE. Le proposer par version n'ouvrait aucune
+  possibilité utile, seulement celle de se tromper — et le filtre par mode posé
+  juste avant n'y changeait rien : il ramenait 69 mauvaises réponses à 4.
+  Ce qui varie vraiment, c'est l'ÉTAT du boss, et l'admin ne savait pas l'éditer :
+  `pinned` n'était visible nulle part, posé par « Versionner » et corrigeable
+  seulement dans le JSON. Nouveau `VersionPinPicker` : un choix par monstre du
+  combat — Live / v1 · game 1.10.805 · Aug 11, 2026 / v2… — la note humaine de
+  l'archive primant sur le numéro, comme au rendu public. Le combat, lui, passe
+  en lecture avec un « Change for the whole guide… » replié, qui écrit dans
+  TOUTES les versions qui en portent un : deux versions du même guide sur deux
+  combats est exactement l'état qu'on veut rendre impossible.
+  CONTRAT À TROIS ÉTATS sur `VersionDraft.pinned`, et il porte tout : `undefined`
+  = l'écran n'en parle pas, le pin du disque est reporté (c'est le correctif du
+  matin, qui empêche une sauvegarde d'effacer l'épinglage) ; `[]` = « tout en
+  live », le pin est EFFACÉ ; une liste = écrite telle quelle, TRIÉE (sinon
+  l'ordre des clics produit un diff git). Sans le deuxième état, le sélecteur
+  serait à sens unique : on épinglerait sans jamais pouvoir revenir au live.
+  Vérifié en contre-épreuve : reporter le pin inconditionnellement fait rougir
+  les deux nouveaux cas. 1524 tests verts.
+
 - **Le sélecteur de combat d'un guide proposait 69 réponses pour 5 valides** —
   signalé par Sevih (« le sélecteur de monstre est éclaté à cet endroit »), et la
   mesure lui donne raison largement : `listGroups` rendait TOUS les combats

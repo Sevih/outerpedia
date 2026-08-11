@@ -34,6 +34,7 @@ import { renderInlineBatch } from '@/lib/admin/inline-preview-actions';
 import { CharacterNameDatalist, viewsByName } from '@/components/admin/CharacterChips';
 import type { CharOption } from '@/components/admin/CharacterPicker';
 import { GroupPicker, type GroupOption } from '@/components/admin/GroupPicker';
+import { VersionPinPicker, type PinTarget } from '@/components/admin/VersionPinPicker';
 import { IdLabelPicker, type IdLabel } from '@/components/admin/IdLabelPicker';
 import { VideoCurator } from '@/components/admin/VideoCurator';
 import type { VideoItem } from '@/components/ui/MultiVideoEmbed';
@@ -63,6 +64,7 @@ export function GuideEditor({
   groupOptions,
   dungeonOptions = [],
   monsterOptions = [],
+  pinTargets = [],
 }: {
   category: string;
   slug: string;
@@ -72,6 +74,8 @@ export function GuideEditor({
   groupOptions: GroupOption[];
   dungeonOptions?: IdLabel[];
   monsterOptions?: IdLabel[];
+  /** Monstres du combat du guide + leurs états figés (catégories versionnées). */
+  pinTargets?: PinTarget[];
 }) {
   const spec = guideSpec(category);
   const [lang, setLang] = useState<L>('en');
@@ -86,6 +90,10 @@ export function GuideEditor({
   const [newKey, setNewKey] = useState('');
   const [fromKey, setFromKey] = useState('');
   const [addBusy, setAddBusy] = useState(false);
+  // Le combat d'un guide versionné se change RAREMENT (jamais, sur les 16 du
+  // site) : le picker reste replié pour que l'onglet montre ce qui bouge —
+  // l'état du boss — plutôt qu'un choix qu'on ne refait pas.
+  const [editBattle, setEditBattle] = useState(false);
   // Photo des EN au chargement : référence de ce qui est « déjà traduit ».
   const [freshness] = useState(() =>
     createFreshness([initial.intro, ...initial.versions.flatMap(versionTexts)].map((t) => t?.en)),
@@ -319,6 +327,76 @@ export function GuideEditor({
       );
     }
     // Combat par `group` (config ou meta).
+    //
+    // VERSIONNÉ : le combat n'est PAS un choix de version. Mesuré sur les 16
+    // guides versionnés du site, aucun n'en change d'une version à l'autre — le
+    // guide DU Prototype parle du Prototype, sur toutes ses saisons. Le proposer
+    // ici n'ouvrait donc aucune possibilité utile, seulement celle d'assigner
+    // Deep Sea Guardian au guide du Prototype. Il se règle une fois, pour tout
+    // le guide, et ce qui reste par version c'est l'ÉTAT du boss.
+    if (spec!.versioned) {
+      return (
+        <section className="space-y-4">
+          <div className="space-y-1.5">
+            <p className={heading}>Battle</p>
+            {v.group ? (
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-content text-sm font-medium">{groupLabel(v.group)}</span>
+                <span className="text-content-subtle font-mono text-[10px]">{v.group}</span>
+                <button
+                  type="button"
+                  className="text-content-muted hover:text-content text-xs underline"
+                  onClick={() => setEditBattle((b) => !b)}
+                >
+                  {editBattle ? 'Cancel' : 'Change for the whole guide…'}
+                </button>
+              </div>
+            ) : (
+              <p className="text-content-subtle text-xs">
+                No battle on this version — it won’t show a boss panel (legacy versions are often
+                just a video).
+              </p>
+            )}
+            {(editBattle || !v.group) && (
+              <>
+                <GroupPicker
+                  options={groupOptions}
+                  value={v.group ?? ''}
+                  onSelect={(group) => {
+                    // À TOUTES les versions qui en portent déjà un : laisser deux
+                    // versions du même guide sur deux combats est précisément
+                    // l'état incohérent qu'on veut rendre impossible. Celles qui
+                    // n'en ont pas (legacy) gardent leur silence.
+                    setVersions((list) =>
+                      list.map((x) => (x.group || x._key === v._key ? { ...x, group } : x)),
+                    );
+                    setEditBattle(false);
+                  }}
+                />
+                <p className="text-content-subtle text-xs">
+                  Applies to every version of this guide that already has a battle.
+                </p>
+              </>
+            )}
+          </div>
+
+          <div className="space-y-1.5">
+            <p className={heading}>
+              Boss state for this version{' '}
+              <span className="text-content-subtle font-normal">
+                (what this version shows — live, or a frozen archive)
+              </span>
+            </p>
+            <VersionPinPicker
+              targets={pinTargets}
+              pinned={v.pinned ?? []}
+              onChange={(pinned) => patch({ pinned })}
+            />
+          </div>
+        </section>
+      );
+    }
+
     return (
       <section className="space-y-1.5">
         <p className={heading}>Monster (battle)</p>

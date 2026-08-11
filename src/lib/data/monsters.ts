@@ -11,6 +11,8 @@ import type {
   MonstersFile,
   Skill,
 } from '@contracts';
+import { existsSync, readdirSync } from 'node:fs';
+import { resolve } from 'node:path';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { loadDataJson } from '@/lib/data/disk';
@@ -66,6 +68,46 @@ function archived(key: string): MonsterArchiveEntry {
 
 export function getMonster(id: string): Monster | undefined {
   return isPinned(id) ? archived(id).monster : MONSTERS()[id];
+}
+
+/** Un état figé proposable pour un monstre — de quoi le choisir en connaissance. */
+export interface MonsterArchiveChoice {
+  /** Clé d'épinglage `<id>@<n>`. */
+  key: string;
+  version: number;
+  /** `resVersion` du jeu à la capture, si connue. */
+  gameVersion?: string;
+  committedAt: string;
+  /** Note humaine posée au moment de versionner. */
+  label?: string;
+}
+
+/**
+ * Les états FIGÉS disponibles pour un monstre vivant, du plus ancien au plus
+ * récent. Lit le dossier d'archives, parce qu'aucun index ne les recense : elles
+ * sont écrites une par une par un geste humain, et un index à tenir à jour
+ * serait une seconde vérité qui finirait par diverger du disque.
+ *
+ * Vide pour un id déjà épinglé — on ne fige pas un état figé.
+ */
+export function monsterArchives(id: string): MonsterArchiveChoice[] {
+  if (isPinned(id)) return [];
+  const dir = resolve(process.cwd(), 'data/generated/monster-archive');
+  if (!existsSync(dir)) return [];
+  const out: MonsterArchiveChoice[] = [];
+  for (const file of readdirSync(dir)) {
+    const m = new RegExp(`^${id}@(\\d+)\\.json$`).exec(file);
+    if (!m) continue;
+    const e = archived(`${id}@${m[1]}`);
+    out.push({
+      key: `${id}@${m[1]}`,
+      version: e.version,
+      ...(e.gameVersion ? { gameVersion: e.gameVersion } : {}),
+      committedAt: e.committedAt,
+      ...(e.label ? { label: e.label } : {}),
+    });
+  }
+  return out.sort((a, b) => a.version - b.version);
 }
 
 /**

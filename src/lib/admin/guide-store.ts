@@ -180,6 +180,7 @@ export async function addVersionPin(
 
 /**
  * Reporte le `pinned` DÉJÀ SUR LE DISQUE dans un `config.json` reconstruit.
+ * N'est appelé que pour un brouillon qui ne parle PAS d'épinglage (cf. l'appel).
  *
  * Lu au chemin plutôt que par `readGuideVersionFile` : ce dernier passe par le
  * cache de `listGuides`, et une sauvegarde qui vient d'écrire dans le même
@@ -239,13 +240,14 @@ export async function saveGuideDraft(
       const vdir = resolve(base, 'versions', v.key);
       mkdirSync(vdir, { recursive: true });
       const payload = fromVersionDraft(spec, v);
-      // `pinned` N'EST PAS dans le modèle d'édition : il est posé par
-      // « Versionner », l'éditeur ne le voit pas et ne le renvoie donc jamais.
-      // Or `fromVersionDraft` RECONSTRUIT `config.json` de zéro — sans ce
-      // report, la moindre sauvegarde du guide (une faute corrigée dans les
-      // conseils) effacerait l'épinglage : l'archive resterait sur le disque,
-      // le guide repasserait au live, et RIEN ne le dirait.
-      payload['config.json'] = withKeptPin(vdir, payload['config.json']);
+      // `fromVersionDraft` RECONSTRUIT `config.json` de zéro. Un brouillon qui
+      // ne PARLE PAS d'épinglage (`pinned` absent : guide non versionné, ou
+      // client d'avant le sélecteur) ne doit donc rien effacer — la moindre
+      // sauvegarde aurait sinon dépinglé le guide en silence. Un brouillon qui
+      // en parle, même pour dire « aucun » (`[]`), fait autorité : c'est ce qui
+      // rend le dépinglage possible depuis l'écran.
+      if (v.pinned === undefined)
+        payload['config.json'] = withKeptPin(vdir, payload['config.json']);
       for (const file of VERSION_FILES) await writeOrRemove(resolve(vdir, file), payload[file]);
     }
     return [];

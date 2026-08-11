@@ -188,6 +188,21 @@ export interface VersionDraft {
   labelOverride?: LocalizedText;
   /** Le combat désigné : `group` (group-*), ids de donjons ou id de boss. */
   group?: string;
+  /**
+   * ÉTATS FIGÉS choisis pour cette version (clés d'archive `<id>@<n>`).
+   *
+   * TROIS états, et la distinction porte tout le mécanisme :
+   *   `undefined` — l'écran ne parle pas d'épinglage (guide non versionné, ou
+   *                 client d'avant ce champ) : l'écriture ne touche À RIEN et le
+   *                 pin présent sur le disque est reporté tel quel ;
+   *   `[]`        — l'écran dit « tout en live » : le pin est EFFACÉ ;
+   *   `[…]`       — la liste choisie, écrite telle quelle.
+   *
+   * Sans le premier état, une sauvegarde venue d'un écran qui ignore le champ
+   * effacerait l'épinglage en silence (le bug du 12/08) ; sans le deuxième, on
+   * ne pourrait plus jamais dépingler depuis l'admin.
+   */
+  pinned?: string[];
   dungeons?: string[];
   bossId?: string;
   tipSections: TipSectionDraft[];
@@ -407,6 +422,9 @@ export function toVersionDraft(
     key,
     ...(labelOverride ? { labelOverride } : {}),
     ...(files.config?.group ? { group: files.config.group } : {}),
+    // Seules les catégories VERSIONNÉES portent un épinglage ; ailleurs le champ
+    // reste `undefined`, donc l'écriture n'y touchera pas (cf. `VersionDraft`).
+    ...(spec.versioned ? { pinned: files.config?.pinned ?? [] } : {}),
     tipSections: readTipSections(files.tips),
     notes: files.config?.notes ?? [],
     recommended: spec.recoSections ? [] : readRecommended(files.recommended),
@@ -427,6 +445,10 @@ export function fromVersionDraft(spec: CatSpec, v: VersionDraft): VersionFilePay
   const notes = clean(v.notes);
   const config: RawConfig = {
     ...(v.group ? { group: v.group } : {}),
+    // `undefined` ⇒ absent du payload, et le store reportera le pin du disque.
+    // `[]` ⇒ absent AUSSI, mais c'est un effacement VOULU : le store le
+    // distingue en regardant le brouillon, pas le payload (cf. `withKeptPin`).
+    ...(v.pinned?.length ? { pinned: [...v.pinned].sort() } : {}),
     ...(notes.length ? { notes } : {}),
     ...(v.videos.length ? { videos: v.videos } : {}),
   };

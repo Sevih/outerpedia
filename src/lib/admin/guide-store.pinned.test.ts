@@ -47,13 +47,17 @@ const writeConfig = (key: string, cfg: unknown) => {
   writeFileSync(join(versions, key, 'config.json'), JSON.stringify(cfg, null, 2), 'utf8');
 };
 
-/** Brouillon minimal mais VALIDE : une version, un combat, un conseil. */
-const draft = (key: string): GuideDraft => ({
+/**
+ * Brouillon minimal mais VALIDE : une version, un combat, un conseil.
+ * `pinned` omis par défaut — c'est l'état « l'écran n'en parle pas ».
+ */
+const draft = (key: string, pinned?: string[]): GuideDraft => ({
   intro: { en: 'intro' },
   versions: [
     {
       key,
       group: GROUP,
+      ...(pinned === undefined ? {} : { pinned }),
       tipSections: [{ tips: [{ en: 'un conseil' }] }],
       notes: [],
       recommended: [],
@@ -83,6 +87,23 @@ describe('sauvegarder un guide — le pin SURVIT', () => {
     // …et la sauvegarde a bien FAIT son travail par ailleurs.
     expect(cfg.group).toBe(GROUP);
     expect(existsSync(join(versions, '2026-03/tips.json'))).toBe(true);
+  });
+
+  it('un brouillon qui DIT « aucun » dépingle pour de bon', async () => {
+    // L'autre moitié du contrat, et sans elle le sélecteur serait à sens unique :
+    // on pourrait épingler depuis l'écran, jamais revenir au live. `[]` n'est pas
+    // « rien à dire », c'est « rien d'épinglé » — et c'est le report du pin
+    // disque qui doit s'effacer devant, pas l'inverse.
+    expect(await saveGuideDraft(CAT, SLUG, draft('2026-03', []))).toEqual([]);
+    expect(readConfig('2026-03')).not.toHaveProperty('pinned');
+  });
+
+  it('un brouillon qui NOMME ses pins les écrit, triés', async () => {
+    const chosen = ['4548181@2', '4548161@1'];
+    expect(await saveGuideDraft(CAT, SLUG, draft('2026-03', chosen))).toEqual([]);
+    // Triés : deux sauvegardes du même choix doivent donner le même fichier,
+    // sinon l'ordre de clic produit un diff git.
+    expect(readConfig('2026-03').pinned).toEqual(['4548161@1', '4548181@2']);
   });
 
   it('CONTRE-ÉPREUVE : une version SANS pin n’en reçoit pas', async () => {
