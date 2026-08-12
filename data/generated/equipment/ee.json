@@ -3180,6 +3180,33 @@
       }
     ]
   },
+  "2000129": {
+    "name": {
+      "en": "Original Sin",
+      "jp": "原罪",
+      "kr": "원죄",
+      "zh": "原罪"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000129",
+    "craftable": false,
+    "character": "2000129",
+    "trustLevel": 10,
+    "options": ["2000129"],
+    "passives": [
+      {
+        "id": "2000129",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100129",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
+  },
   "2700003": {
     "name": {
       "en": "Frost Nova",

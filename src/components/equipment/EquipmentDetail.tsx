@@ -58,10 +58,10 @@ export interface DetailLabels {
   /** Gabarit « and {n} more » (persos recommandés au-delà du plafond). */
   andMore: string;
   activationCost: string;
-  stepRates: string;
+  stepCosts: string;
   /** Légende de la plage des substats (« min → max »). */
   substatsRange: string;
-  /** En-tête de colonne du tableau des taux par étape. */
+  /** En-tête de colonne du tableau des coûts par palier. */
   step: string;
   grade: string;
   pieces: Record<string, string>;
@@ -790,8 +790,6 @@ const AX_COLOR: Record<string, string> = {
   S: 'var(--color-ax-grade-s)',
   'S+': 'var(--color-ax-grade-sp)',
 };
-const axRateColor = (rate: number) =>
-  rate >= 80 ? 'var(--color-success)' : rate >= 50 ? 'var(--color-warn)' : 'var(--color-danger)';
 
 function AxEyebrow({ children }: { children: ReactNode }) {
   return (
@@ -828,13 +826,18 @@ function AxActivationBand({ asc, labels }: { asc: AscView; labels: DetailLabels 
   );
 }
 
-/** Table « Step success rates » +11..+15 : coûts + taux colorés (comme V2). */
+/**
+ * Table des paliers +11..+15 : or + matériaux. Plus de colonne de taux depuis
+ * le patch du 12/08/2026 — le jeu a supprimé l'échec (100 % à chaque palier),
+ * la colonne n'affichait plus qu'une file de « 100 % ». Le `rate` reste dans la
+ * donnée, il n'a simplement plus rien à dire au lecteur.
+ */
 function AxStepsCard({ asc, labels }: { asc: AscView; labels: DetailLabels }) {
   const headMats = asc.activation.materials;
   return (
     <div className="border-line-subtle bg-surface-base/40 rounded-xl border px-4 py-3.5">
       <div className="mb-3">
-        <AxEyebrow>{labels.stepRates}</AxEyebrow>
+        <AxEyebrow>{labels.stepCosts}</AxEyebrow>
       </div>
       <table className="w-full text-sm">
         <thead>
@@ -864,9 +867,6 @@ function AxStepsCard({ asc, labels }: { asc: AscView; labels: DetailLabels }) {
                 />
               </th>
             ))}
-            <th className="text-content-subtle pb-1.5 pl-2 text-right text-[10px] font-semibold tracking-wider uppercase">
-              %
-            </th>
           </tr>
         </thead>
         <tbody>
@@ -889,12 +889,6 @@ function AxStepsCard({ asc, labels }: { asc: AscView; labels: DetailLabels }) {
                   </td>
                 );
               })}
-              <td
-                className="py-2 pl-2 text-right align-middle font-mono text-sm font-bold whitespace-nowrap tabular-nums"
-                style={{ color: axRateColor(s.rate) }}
-              >
-                {s.rate}%
-              </td>
             </tr>
           ))}
         </tbody>

@@ -3854,6 +3854,53 @@
     },
     "teamBonuses": ["SPD"]
   },
+  "2000129": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_TURN",
+      "BT_COOL_CHARGE",
+      "BT_REMOVE_DEBUFF",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_CRITICAL_DMG_RATE",
+      "BT_STAT|ST_DEF",
+      "BT_UNDEAD",
+      "BUFF_ENHANCEMENT",
+      "GAIN_ACTION_POINTS",
+      "SIN"
+    ],
+    "debuff": [
+      "BT_FIXED_DAMAGE",
+      "BT_REMOVE_BUFF",
+      "BT_STATBUFF_CONVERT_TO_STATDEBUFF",
+      "PUNISHMENT"
+    ],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_ADDITIVE_TURN", "BT_COOL_CHARGE", "BT_REMOVE_DEBUFF", "BT_STAT|ST_ATK"],
+        "debuff": ["BT_FIXED_DAMAGE", "BT_REMOVE_BUFF", "PUNISHMENT"]
+      },
+      "s2": {
+        "buff": ["BT_UNDEAD", "SIN"],
+        "debuff": ["BT_STATBUFF_CONVERT_TO_STATDEBUFF", "PUNISHMENT"]
+      },
+      "ultimate": {
+        "buff": [
+          "BT_ADDITIVE_TURN",
+          "BT_COOL_CHARGE",
+          "BT_STAT|ST_CRITICAL_DMG_RATE",
+          "BT_STAT|ST_DEF",
+          "BUFF_ENHANCEMENT",
+          "GAIN_ACTION_POINTS"
+        ],
+        "debuff": ["PUNISHMENT"]
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    },
+    "teamBonuses": ["CHC", "PEN%"]
+  },
   "2700003": {
     "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "BT_STAT|ST_SPEED"],
     "debuff": ["BT_ACTION_GAUGE", "BT_FREEZE", "WEAKNESS_GAUGE_DAMAGE"],

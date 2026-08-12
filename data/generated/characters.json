@@ -9586,7 +9586,7 @@
         "icon": "TI_Costume_Clothes_2000089_03",
         "grade": "rare",
         "sort": 2,
-        "source": "battlepass",
+        "source": "shop",
         "fusionModel": "0",
         "art": true
       }
@@ -12679,6 +12679,131 @@
     "recommendedSets": ["13", "1", "7"],
     "ignoreDefense": ["kit", "ee"],
     "tags": ["seasonal", "ignore-defense"]
+  },
+  "2000129": {
+    "id": "2000129",
+    "name": {
+      "en": "Saeran",
+      "jp": "セイラン",
+      "kr": "세이란",
+      "zh": "萨伊蓝"
+    },
+    "rarity": 3,
+    "element": "dark",
+    "class": "ranger",
+    "race": "demiurge",
+    "icon": "2000129",
+    "skills": [
+      "12901",
+      "12902",
+      "12903",
+      "12904",
+      "12905",
+      "12906",
+      "12908",
+      "12909",
+      "12910",
+      "12919",
+      "12920",
+      "12921",
+      "3",
+      "13001",
+      "13002",
+      "13003",
+      "13004",
+      "13005",
+      "13006",
+      "13008",
+      "13009",
+      "13010",
+      "13019",
+      "13020",
+      "13021"
+    ],
+    "stats": {
+      "hp": {
+        "min": 519,
+        "max": 3530
+      },
+      "atk": {
+        "min": 75,
+        "max": 757
+      },
+      "def": {
+        "min": 34,
+        "max": 341
+      },
+      "speed": {
+        "min": 138,
+        "max": 138
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 50
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "buff_chance": {
+        "min": 10,
+        "max": 10
+      },
+      "buff_resist": {
+        "min": 11,
+        "max": 110
+      }
+    },
+    "nickname": {
+      "en": "Demiurge",
+      "jp": "デミウルゴス",
+      "kr": "데미우르고스",
+      "zh": "创世之神"
+    },
+    "showNickName": true,
+    "subClass": "tactician",
+    "chainType": "join",
+    "gift": "present_05",
+    "voiceActor": {
+      "en": "Brianna Knickerbocker",
+      "jp": "伊藤静",
+      "kr": "강시현",
+      "zh": ""
+    },
+    "profile": {
+      "birthday": "09/29",
+      "height": 162,
+      "weight": 43,
+      "story": {
+        "en": "This is <Color=#FFBF00>Saeran</Color>, Acting Archbishop of Sacreed.\\nAccording to the information we gathered, she was once known as The Saint of the Sun, a symbol of benevolence who personally aided the sick and weary. However, after the anomaly appeared, she secluded herself for a time and is said to have changed into a cold, merciless judge, unlike before. Could this be because of the Singularity Core?\\n\\nSince we suspect Scientific Inheritance is involved, it seems we should step in. But Premier, you look somehow sad. Are you all right?",
+        "jp": "この方はセイクリッドの臨時大司教、<Color=#FFBF00>セイラン</Color>様です。\\n調査によると、かつては太陽の聖女として、病に苦しむ人々や疲れ果てた人々を自ら救い、その慈愛の象徴として慕われていたそうです。ですが、異常現象が発生してからしばらく姿を隠し、以前とは打って変わって、冷酷で容赦のない裁定者へと変わってしまったそうです。もしかすると、特異点コアのせいでしょうか?\\n\\n科学遺産が関与している可能性が高い以上、私たちが動くしかありませんね。ところで宰相様、どこか悲しそうなお顔をされていますが…大丈夫ですよね?",
+        "kr": "이분은 세이크리드의 임시 대주교, <Color=#FFBF00>세이란</Color> 님이세요.\\n조사한 정보에 따르면, 과거 태양의 성녀로서 병들고 지친 자를 몸소 도우신 자애의 상징이었다고 해요. 하지만 이상현상이 나타난 이후, 한동안 칩거하시더니, 이전과 다르게 냉랭하고 무자비한 심판자로 변해 버리셨다네요. 이건 혹시, 특이점 코어 때문일까요?\\n\\n과학유산이 개입되었으리라 추측되는 상황이니, 우리가 나서야겠죠. 근데 재상님, 왠지 슬픈 얼굴을 하고 계시는데. 괜찮으신 거죠?",
+        "zh": "这位是圣科利德的临时大主教，<Color=#FFBF00>萨伊蓝</Color>大人。\\n根据调查所得情报，她曾是过去的太阳圣女，以亲自照料病弱之人的慈悲象征而闻名。然而，发生异常现象之后，她曾闭门不出了一段时间，随后便性情大变，成了一位冷酷无情的审判者。这莫非，是特异点核心所致？\\n\\n既然推测有科学遗产介入其中，我们理应出面应对。不过宰相大人，怎么一脸悲伤的样子…没事吧？"
+      }
+    },
+    "ee": "2000129",
+    "recommendedSets": ["13", "3", "5"],
+    "ignoreDefense": ["transcend"],
+    "tags": ["premium", "ignore-defense"],
+    "appearances": ["2010129", "2010130"],
+    "costumes": [
+      {
+        "id": "103",
+        "model": "2010129",
+        "name": {
+          "en": "True Faith Saeran",
+          "jp": "純粋な信仰・セイラン",
+          "kr": "순수한 믿음 세이란",
+          "zh": "纯粹信仰·萨伊蓝"
+        },
+        "icon": "TI_Costume_Clothes_2000129_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "battlepass",
+        "fusionModel": "0",
+        "art": true
+      }
+    ]
   },
   "2700003": {
     "id": "2700003",

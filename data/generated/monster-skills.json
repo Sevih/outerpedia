@@ -195942,6 +195942,162 @@
       }
     ]
   },
+  "153927": {
+    "id": "153927",
+    "name": {
+      "en": "Thus Spoke the Demon",
+      "jp": "魔神曰く",
+      "kr": "마신 가라사대",
+      "zh": "魔神如是说"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1500,
+        "vars": {
+          "event_monster_buff_586": {
+            "c": "100%",
+            "v": "20%",
+            "t": "3"
+          }
+        },
+        "tooltips": ["106"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies.\\nInflicts <color=#28d9ed>Punishment</color> on the targets for <color=#28d9ed>3 turns</color>.",
+      "jp": "敵全体にダメージを与える。\\n対象に<color=#28d9ed>懲罰</color>を<color=#28d9ed>3ターン</color>の間付与する。",
+      "kr": "적 전체를 공격합니다.\\n대상에게 <color=#28d9ed>응징</color>를 <color=#28d9ed>3턴</color> 동안 부여합니다.",
+      "zh": "攻击全体敌人。\\n赋予目标<color=#28d9ed>惩戒</color>，持续<color=#28d9ed>3回合</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_First_2000130",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_PUNISH",
+        "target": "enemy_skill_target",
+        "buff": "event_monster_buff_586",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "106",
+        "caller": "first"
+      }
+    ]
+  },
+  "153928": {
+    "id": "153928",
+    "name": {
+      "en": "Final Judgment",
+      "jp": "終末の宣告",
+      "kr": "종말 선고",
+      "zh": "终末宣告"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1800,
+        "cool": 4,
+        "startCool": 3,
+        "vars": {
+          "event_monster_buff_588": {
+            "c": "100%",
+            "v": "30%",
+            "t": "4"
+          },
+          "event_monster_buff_587": {
+            "c": "100%",
+            "v": "30%",
+            "t": "4"
+          }
+        },
+        "tooltips": ["7", "15"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies.\\nIncreases the caster's <color=#28d9ed>Attack and Speed</color> for <color=#28d9ed>4 turns</color>.",
+      "jp": "敵全体にダメージを与える。\\n自分の<color=#28d9ed>攻撃力とスピード</color>を<color=#28d9ed>4ターン</color>の間UPさせる。",
+      "kr": "적 전체를 공격합니다.\\n자신에게 <color=#28d9ed>공격력 및 속도</color>를 <color=#28d9ed>4턴</color> 동안 증가시킵니다.",
+      "zh": "攻击全体敌人。\\n使自身的<color=#28d9ed>攻击力和速度</color>提升，持续<color=#28d9ed>4回合</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_2000130",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "event_monster_buff_588",
+        "stat": "speed",
+        "mode": "up",
+        "tooltip": "15",
+        "caller": "ultimate"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "event_monster_buff_587",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "7",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "153929": {
+    "id": "153929",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "event_monster_buff_589": {
+            "c": "100%",
+            "v": "70%"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "If the caster has a <color=#28d9ed>buff</color>, Final DMG taken is reduced by <color=#28d9ed>70%</color>.",
+      "jp": "自分に<color=#28d9ed>強化効果</color>がある場合、受ける最終ダメージが<color=#28d9ed>70%</color>DOWNする。",
+      "kr": "자신에게 <color=#28d9ed>강화 효과</color>가 부여된 상태라면 받는 최종 피해가 <color=#28d9ed>70%</color> 감소합니다.",
+      "zh": "自身持有<color=#28d9ed>强化效果</color>时，受到的最终伤害降低<color=#28d9ed>70%</color>。"
+    },
+    "icon": "MT_Passive_1_Dark",
+    "effects": [
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE_FINAL",
+        "target": "me",
+        "buff": "event_monster_buff_589"
+      }
+    ]
+  },
   "154001": {
     "id": "154001",
     "name": {

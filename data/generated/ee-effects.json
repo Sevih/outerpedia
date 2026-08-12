@@ -1335,6 +1335,18 @@
       "isDebuff": false
     }
   ],
+  "2000129": [
+    {
+      "key": "stat:atk:up",
+      "label": "Attack up",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_NONE",
+      "label": "None",
+      "isDebuff": false
+    }
+  ],
   "2700003": [
     {
       "key": "stat:buff_chance:up",

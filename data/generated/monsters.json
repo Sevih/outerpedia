@@ -48295,7 +48295,8 @@
       "BT_DOT_BLEED",
       "BT_DOT_POISON",
       "BT_DOT_LIGHTNING",
-      "BT_DOT_2000092"
+      "BT_DOT_2000092",
+      "BT_DOT_PUNISH"
     ],
     "statBuffImmune": ["ST_DEF", "ST_SPEED"],
     "immuneTooltips": ["104", "91", "34", "33", "35", "37", "17", "26"],
@@ -48462,7 +48463,8 @@
       "BT_DOT_BLEED",
       "BT_DOT_POISON",
       "BT_DOT_LIGHTNING",
-      "BT_DOT_2000092"
+      "BT_DOT_2000092",
+      "BT_DOT_PUNISH"
     ],
     "statBuffImmune": ["ST_DEF", "ST_SPEED"],
     "immuneTooltips": ["104", "91", "34", "33", "35", "37", "17", "26"],
@@ -48633,7 +48635,8 @@
       "BT_DOT_BLEED",
       "BT_DOT_POISON",
       "BT_DOT_LIGHTNING",
-      "BT_DOT_2000092"
+      "BT_DOT_2000092",
+      "BT_DOT_PUNISH"
     ],
     "statBuffImmune": ["ST_DEF", "ST_SPEED"],
     "immuneTooltips": ["104", "91", "34", "33", "35", "37", "17", "26"],
@@ -51782,7 +51785,8 @@
       "BT_DOT_BLEED",
       "BT_DOT_POISON",
       "BT_DOT_LIGHTNING",
-      "BT_DOT_2000092"
+      "BT_DOT_2000092",
+      "BT_DOT_PUNISH"
     ],
     "statBuffImmune": ["ST_DEF", "ST_SPEED"],
     "immuneTooltips": ["104", "91", "34", "33", "35", "37", "17", "26"]
@@ -51937,7 +51941,8 @@
       "BT_DOT_BLEED",
       "BT_DOT_POISON",
       "BT_DOT_LIGHTNING",
-      "BT_DOT_2000092"
+      "BT_DOT_2000092",
+      "BT_DOT_PUNISH"
     ],
     "statBuffImmune": ["ST_DEF", "ST_SPEED"],
     "immuneTooltips": ["104", "91", "34", "33", "35", "37", "17", "26"]
@@ -52097,7 +52102,8 @@
       "BT_DOT_BLEED",
       "BT_DOT_POISON",
       "BT_DOT_LIGHTNING",
-      "BT_DOT_2000092"
+      "BT_DOT_2000092",
+      "BT_DOT_PUNISH"
     ],
     "statBuffImmune": ["ST_DEF", "ST_SPEED"],
     "immuneTooltips": ["104", "91", "34", "33", "35", "37", "17", "26"],
@@ -89833,7 +89839,8 @@
       "BT_DOT_BLEED",
       "BT_DOT_POISON",
       "BT_DOT_LIGHTNING",
-      "BT_DOT_2000092"
+      "BT_DOT_2000092",
+      "BT_DOT_PUNISH"
     ],
     "statBuffImmune": ["ST_DEF", "ST_SPEED"],
     "immuneTooltips": ["104", "91", "34", "33", "35", "17", "26", "64"],
@@ -128173,7 +128180,8 @@
       "BT_DOT_LIGHTNING",
       "BT_ACTION_GAUGE",
       "BT_SILENCE",
-      "BT_DOT_2000092"
+      "BT_DOT_2000092",
+      "BT_DOT_PUNISH"
     ],
     "statBuffImmune": ["ST_SPEED"],
     "immuneTooltips": ["104", "91", "33", "35", "37", "32", "26", "62"],
@@ -128253,7 +128261,8 @@
       "BT_DOT_LIGHTNING",
       "BT_ACTION_GAUGE",
       "BT_SILENCE",
-      "BT_DOT_2000092"
+      "BT_DOT_2000092",
+      "BT_DOT_PUNISH"
     ],
     "statBuffImmune": ["ST_SPEED"],
     "immuneTooltips": ["104", "91", "33", "35", "37", "32", "26", "62"],
@@ -128337,7 +128346,8 @@
       "BT_DOT_LIGHTNING",
       "BT_ACTION_GAUGE",
       "BT_SILENCE",
-      "BT_DOT_2000092"
+      "BT_DOT_2000092",
+      "BT_DOT_PUNISH"
     ],
     "statBuffImmune": ["ST_SPEED"],
     "immuneTooltips": ["104", "91", "33", "35", "37", "32", "26", "62"],
@@ -201136,6 +201146,345 @@
     "pushBack": true,
     "pushUp": true
   },
+  "55200001": {
+    "id": "55200001",
+    "name": {
+      "en": "Stella",
+      "jp": "ステラ",
+      "kr": "스텔라",
+      "zh": "斯黛拉"
+    },
+    "type": "boss",
+    "race": "demiurge",
+    "class": "striker",
+    "element": "light",
+    "rarity": 3,
+    "icon": "4004003",
+    "skills": ["155284", "155285", "155286"],
+    "stats": {
+      "hp": {
+        "min": 372,
+        "max": 55200
+      },
+      "atk": {
+        "min": 120,
+        "max": 5176
+      },
+      "def": {
+        "min": 44,
+        "max": 1200
+      },
+      "speed": {
+        "min": 105,
+        "max": 160
+      },
+      "guard": {
+        "min": 10,
+        "max": 35
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 160
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 26,
+        "max": 80
+      },
+      "buff_resist": {
+        "min": 53,
+        "max": 160
+      }
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "buffImmune": ["BT_GOLDEN_CURSE", "BT_STUN", "BT_FREEZE", "BT_STONE", "BT_AGGRO", "BT_SILENCE"],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "32"]
+  },
+  "55200002": {
+    "id": "55200002",
+    "name": {
+      "en": "Saeran",
+      "jp": "セイラン",
+      "kr": "세이란",
+      "zh": "萨伊蓝"
+    },
+    "type": "area_boss",
+    "race": "demiurge",
+    "class": "ranger",
+    "element": "dark",
+    "rarity": 3,
+    "icon": "200013001",
+    "skills": ["153927", "153928"],
+    "stats": {
+      "hp": {
+        "min": 1240,
+        "max": 73600
+      },
+      "atk": {
+        "min": 180,
+        "max": 6064
+      },
+      "def": {
+        "min": 44,
+        "max": 1199
+      },
+      "speed": {
+        "min": 110,
+        "max": 165
+      },
+      "guard": {
+        "min": 15,
+        "max": 40
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 160
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 33,
+        "max": 100
+      },
+      "buff_resist": {
+        "min": 66,
+        "max": 200
+      }
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "buffImmune": [
+      "BT_GOLDEN_CURSE",
+      "BT_STUN",
+      "BT_FREEZE",
+      "BT_STONE",
+      "BT_AGGRO",
+      "BT_SILENCE",
+      "BT_REMOVE_BUFF"
+    ],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "32", "48"]
+  },
+  "55200003": {
+    "id": "55200003",
+    "name": {
+      "en": "Stella",
+      "jp": "ステラ",
+      "kr": "스텔라",
+      "zh": "斯黛拉"
+    },
+    "type": "boss",
+    "race": "demiurge",
+    "class": "striker",
+    "element": "light",
+    "rarity": 3,
+    "icon": "4004003",
+    "skills": ["155284", "155285", "155286"],
+    "stats": {
+      "hp": {
+        "min": 632,
+        "max": 93840
+      },
+      "atk": {
+        "min": 120,
+        "max": 6211
+      },
+      "def": {
+        "min": 53,
+        "max": 1800
+      },
+      "speed": {
+        "min": 105,
+        "max": 224
+      },
+      "guard": {
+        "min": 23,
+        "max": 23
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 160
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 29,
+        "max": 96
+      },
+      "buff_resist": {
+        "min": 53,
+        "max": 160
+      }
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "buffImmune": ["BT_GOLDEN_CURSE", "BT_STUN", "BT_FREEZE", "BT_STONE", "BT_AGGRO", "BT_SILENCE"],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "32"]
+  },
+  "55200004": {
+    "id": "55200004",
+    "name": {
+      "en": "Saeran",
+      "jp": "セイラン",
+      "kr": "세이란",
+      "zh": "萨伊蓝"
+    },
+    "type": "area_boss",
+    "race": "demiurge",
+    "class": "ranger",
+    "element": "dark",
+    "rarity": 3,
+    "icon": "200013001",
+    "skills": ["153927", "153928"],
+    "stats": {
+      "hp": {
+        "min": 2108,
+        "max": 125120
+      },
+      "atk": {
+        "min": 180,
+        "max": 7277
+      },
+      "def": {
+        "min": 53,
+        "max": 1799
+      },
+      "speed": {
+        "min": 110,
+        "max": 231
+      },
+      "guard": {
+        "min": 28,
+        "max": 28
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 160
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 36,
+        "max": 120
+      },
+      "buff_resist": {
+        "min": 66,
+        "max": 200
+      }
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "buffImmune": [
+      "BT_GOLDEN_CURSE",
+      "BT_STUN",
+      "BT_FREEZE",
+      "BT_STONE",
+      "BT_AGGRO",
+      "BT_SILENCE",
+      "BT_REMOVE_BUFF"
+    ],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "32", "48"]
+  },
+  "55200005": {
+    "id": "55200005",
+    "name": {
+      "en": "Saeran",
+      "jp": "セイラン",
+      "kr": "세이란",
+      "zh": "萨伊蓝"
+    },
+    "type": "area_boss",
+    "race": "demiurge",
+    "class": "ranger",
+    "element": "dark",
+    "rarity": 3,
+    "icon": "200013001",
+    "skills": ["153927", "153928", "153929"],
+    "stats": {
+      "hp": {
+        "min": 1240,
+        "max": 424243
+      },
+      "atk": {
+        "min": 216,
+        "max": 7277
+      },
+      "def": {
+        "min": 62,
+        "max": 1679
+      },
+      "speed": {
+        "min": 124,
+        "max": 259
+      },
+      "guard": {
+        "min": 15,
+        "max": 50
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 160
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 40,
+        "max": 140
+      },
+      "buff_resist": {
+        "min": 79,
+        "max": 280
+      }
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "buffImmune": [
+      "BT_GOLDEN_CURSE",
+      "BT_STUN",
+      "BT_FREEZE",
+      "BT_STONE",
+      "BT_AGGRO",
+      "BT_SILENCE",
+      "BT_REMOVE_BUFF"
+    ],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "32", "48"]
+  },
   "60000001": {
     "id": "60000001",
     "name": {
@@ -201296,7 +201645,8 @@
       "BT_DOT_BLEED",
       "BT_DOT_POISON",
       "BT_DOT_LIGHTNING",
-      "BT_DOT_2000092"
+      "BT_DOT_2000092",
+      "BT_DOT_PUNISH"
     ],
     "immuneTooltips": ["91", "104", "34", "35", "37", "32", "33", "48"],
     "spawns": [

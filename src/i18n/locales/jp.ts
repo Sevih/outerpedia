@@ -109,7 +109,7 @@ const jp: Record<TranslationKey, string> = {
   'equip.detail.singularity_suffix': '[特異点]',
   'equip.detail.and_more': '他{n}名',
   'equip.detail.activation_cost': '解放コスト',
-  'equip.detail.step_rates': '段階別成功率',
+  'equip.detail.step_costs': '段階別コスト',
   'equip.detail.grade': 'グレード',
   'equip.detail.mainstat': 'メインステータス',
   'equip.detail.minmax': 'min → max',

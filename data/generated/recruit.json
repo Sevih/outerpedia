@@ -195,7 +195,7 @@
     },
     {
       "kind": "premium",
-      "groupId": "10016",
+      "groupId": "10017",
       "rates": [
         {
           "titleKey": "SYS_RECRUIT_RATEINFO_TITLE_05",
@@ -247,7 +247,7 @@
       "ticketId": "SYS_ASSET_DEMIURGE",
       "ticketCost": 10,
       "freeCount": 1,
-      "bannerImage": "CM_Btn_Recruit_Special_11",
+      "bannerImage": "CM_Btn_Recruit_Special_12",
       "mileageCost": 200
     },
     {

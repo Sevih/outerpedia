@@ -1036,6 +1036,33 @@
       ]
     },
     {
+      "contentType": "GUIDE_QUEST_ORIGIN_HARD",
+      "requirements": [
+        {
+          "stage": "S1-10-14",
+          "dungeonName": {
+            "en": "An Automaton's Wish",
+            "jp": "オートマタの願い",
+            "kr": "자동인형의 바람",
+            "zh": "机械人偶的心愿"
+          },
+          "areaName": {
+            "en": "Ksai",
+            "jp": "ザイ",
+            "kr": "크사이",
+            "zh": "科赛"
+          },
+          "mode": "origin"
+        }
+      ],
+      "lockScreenName": {
+        "en": "Origin Quests [Hard]",
+        "jp": "オリジンハードクエスト",
+        "kr": "오리진 하드 퀘스트",
+        "zh": "起源困难任务"
+      }
+    },
+    {
       "contentType": "GUIDE_QUEST_PVE",
       "requirements": [
         {
@@ -1224,6 +1251,33 @@
           "mode": "story"
         }
       ]
+    },
+    {
+      "contentType": "GUIDE_QUEST_STORY_HARD",
+      "requirements": [
+        {
+          "stage": "S1-10-14",
+          "dungeonName": {
+            "en": "An Automaton's Wish",
+            "jp": "オートマタの願い",
+            "kr": "자동인형의 바람",
+            "zh": "机械人偶的心愿"
+          },
+          "areaName": {
+            "en": "Ksai",
+            "jp": "ザイ",
+            "kr": "크사이",
+            "zh": "科赛"
+          },
+          "mode": "origin"
+        }
+      ],
+      "lockScreenName": {
+        "en": "Story Quests [Hard]",
+        "jp": "ストーリーハードクエスト",
+        "kr": "스토리 하드 퀘스트",
+        "zh": "剧情困难任务"
+      }
     },
     {
       "contentType": "GUILD",
@@ -2277,20 +2331,12 @@
       "contentType": "PVE_REMAINS",
       "requirements": [
         {
-          "stage": "S1-5-1",
           "dungeonName": {
-            "en": "Onwards to Magnolia",
-            "jp": "マグノリアを目指して",
-            "kr": "매그놀리아를 향해",
-            "zh": "向着麦格诺里亚"
-          },
-          "areaName": {
-            "en": "Dimensional Bridge",
-            "jp": "ディメンションブリッジ",
-            "kr": "디멘션 브리지",
-            "zh": "次元之桥"
-          },
-          "mode": "origin"
+            "en": "Monad Gate: Epilogue 2",
+            "jp": "モナド・ゲート：エピローグ 2",
+            "kr": "모나드 게이트 : 에필로그 2",
+            "zh": "单子门：后记 2"
+          }
         }
       ],
       "lockScreenName": {
@@ -2304,20 +2350,12 @@
       "contentType": "PVE_REMAINS_LOOP",
       "requirements": [
         {
-          "stage": "S1-6-12",
           "dungeonName": {
-            "en": "Laplace Magnolia",
-            "jp": "ラプラス・マグノリア",
-            "kr": "라플라스 매그놀리아",
-            "zh": "拉普拉丝·麦格诺里亚"
-          },
-          "areaName": {
-            "en": "Magnolia",
-            "jp": "マグノリア",
-            "kr": "매그놀리아",
-            "zh": "麦格诺里亚"
-          },
-          "mode": "origin"
+            "en": "Monad Gate: Epilogue 2",
+            "jp": "モナド・ゲート：エピローグ 2",
+            "kr": "모나드 게이트 : 에필로그 2",
+            "zh": "单子门：后记 2"
+          }
         }
       ],
       "lockScreenName": {

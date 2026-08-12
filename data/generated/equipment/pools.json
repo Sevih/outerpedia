@@ -10750,6 +10750,32 @@
       }
     }
   ],
+  "2000129": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_DMG_DARK",
+      "levels": [170, 175, 180, 185, 191, 197, 203, 209, 216, 223, 230],
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "dmg",
+          "stat": "dmg_boost",
+          "mode": "rate",
+          "value": 170
+        }
+      ],
+      "label": {
+        "en": "DMG Increase vs Light",
+        "jp": "光属性対象の ダメージUP",
+        "kr": "명속성 대상 피해 증가",
+        "zh": "对光属性目标造成 伤害提升"
+      }
+    }
+  ],
   "2700003": [
     {
       "stat": "kill_ap",

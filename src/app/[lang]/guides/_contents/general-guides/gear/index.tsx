@@ -216,9 +216,6 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
     </span>
   );
 
-  const rateColor = (r: number): string =>
-    r >= 80 ? 'text-success' : r >= 50 ? 'text-warn' : 'text-danger';
-
   // ════════════════════════════ Onglet : Bases ════════════════════════════
   const PROP_ROWS = [
     { key: 'stars', label: L(LABELS.prop_stars) },
@@ -611,7 +608,6 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
           head={
             <tr>
               {th(L(LABELS.ascensionTable_step))}
-              {th(L(LABELS.ascensionTable_success), 'text-center')}
               {th(L(LABELS.ascensionTable_gold), 'text-right')}
               {th(L(LABELS.ascensionTable_materials))}
               {th(L(MAIN_STAT_LABEL), 'text-center')}
@@ -628,9 +624,6 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
                   </span>
                 )}
               </td>
-              <td className={`px-3 py-2 text-center font-mono font-semibold ${rateColor(s.rate)}`}>
-                {s.rate}%
-              </td>
               <td className="text-stat-accent px-3 py-2 text-right font-mono whitespace-nowrap">
                 {fmt(s.price)}
               </td>
@@ -639,9 +632,6 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
             </tr>
           ))}
         </TableShell>
-        <Callout accent="emerald" label={L(LABELS.ascension_failTitle)}>
-          {L(LABELS.ascension_failText)}
-        </Callout>
       </Card>
 
       {/* Bonus +15 */}

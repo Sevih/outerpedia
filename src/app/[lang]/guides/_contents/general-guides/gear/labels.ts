@@ -552,35 +552,17 @@ export const LABELS = {
     zh: '强化 +11 → +15',
     fr: 'Enhancement +11 → +15',
   },
+  // Le jeu a supprimé l'échec au patch du 12/08/2026 : chaque palier réussit.
+  // Le bloc « En cas d'échec » qui suivait est parti avec — il ne décrivait plus
+  // rien. Les `rate` restent dans la donnée extraite, à 100.
   ascension_stepsDesc: {
-    en: 'Once activated, you can enhance the gear from +10 to +15 across 5 successful steps. Each step consumes Gold + Singularity materials, raises the enhancement level by 1 on success, and may fail (success rate decreases as the level rises). The final step also unlocks a random bonus effect (offensive for Weapon/Accessory, defensive for Armor pieces).',
-    jp: '活性化後、5回の成功で装備を+10から+15まで強化できます。各段階はゴールドと特異点素材を消費し、成功時に強化レベルを1上げます（成功率はレベルが上がるにつれて低下）。最終段階ではランダムなボーナス効果も解放されます（武器・アクセサリーは攻撃系、防具は防御系）。',
-    kr: '활성화 후, 장비를 5번의 성공 단계로 +10에서 +15까지 강화할 수 있습니다. 각 단계는 골드와 특이점 재료를 소비하며, 성공 시 강화 레벨을 1 올립니다 (레벨이 오를수록 성공률 감소). 최종 단계에서는 랜덤 보너스 효과도 해방됩니다 (무기/액세서리는 공격형, 방어구는 방어형).',
-    zh: '激活后，可通过 5 次成功阶段将装备从 +10 提升至 +15。每一阶段消耗金币和奇点材料，成功时强化等级 +1（随等级提升，成功率递减）。最终阶段还会解锁随机额外效果（武器/饰品为攻击系，防具为防御系）。',
-    fr: "Une fois activée, vous pouvez enhance le gear de +10 à +15 en 5 étapes réussies. Chaque étape consomme du Gold et des matériaux Singularity, monte le niveau de 1 en cas de succès, et peut échouer (le taux de réussite baisse avec le niveau). La dernière étape débloque aussi un bonus effect aléatoire (offensif pour Weapon/Accessory, défensif pour les pièces d'Armor).",
-  },
-  ascension_failTitle: {
-    en: 'On Failure',
-    jp: '失敗時',
-    kr: '실패 시',
-    zh: '失败时',
-    fr: "En cas d'échec",
-  },
-  ascension_failText: {
-    en: 'A failed step has no impact on the gear: no level loss, no stat penalty, no bonus reset. Only the Gold and materials spent on that attempt are consumed — you can simply retry.',
-    jp: '失敗しても装備への影響は一切ありません：レベル低下なし、ステータス低下なし、ボーナスのリセットなし。失敗した試行のゴールドと素材のみが消費され、そのまま再挑戦できます。',
-    kr: '실패해도 장비에 영향은 전혀 없습니다: 레벨 감소 없음, 스탯 감소 없음, 보너스 초기화 없음. 실패한 시도의 골드와 재료만 소모되며, 바로 다시 시도할 수 있습니다.',
-    zh: '失败不会对装备产生任何影响：不会掉级、不会降低属性、不会重置加成。仅消耗本次尝试所用的金币和材料，可直接重试。',
-    fr: "Une étape échouée n'a aucun impact sur le gear : pas de perte de niveau, pas de pénalité de stat, pas de reset de bonus. Seuls le Gold et les matériaux utilisés pour cette tentative sont consommés ; vous pouvez simplement réessayer.",
+    en: 'Once activated, you can enhance the gear from +10 to +15 across 5 steps. Each step consumes Gold + Singularity materials and always succeeds. The final step also unlocks a random bonus effect (offensive for Weapon/Accessory, defensive for Armor pieces).',
+    jp: '活性化後、5段階で装備を+10から+15まで強化できます。各段階はゴールドと特異点素材を消費し、必ず成功します。最終段階ではランダムなボーナス効果も解放されます（武器・アクセサリーは攻撃系、防具は防御系）。',
+    kr: '활성화 후, 장비를 5단계에 걸쳐 +10에서 +15까지 강화할 수 있습니다. 각 단계는 골드와 특이점 재료를 소비하며 항상 성공합니다. 최종 단계에서는 랜덤 보너스 효과도 해방됩니다 (무기/액세서리는 공격형, 방어구는 방어형).',
+    zh: '激活后，可通过 5 个阶段将装备从 +10 提升至 +15。每一阶段消耗金币和奇点材料，且必定成功。最终阶段还会解锁随机额外效果（武器/饰品为攻击系，防具为防御系）。',
+    fr: "Une fois activée, vous pouvez enhance le gear de +10 à +15 en 5 étapes. Chaque étape consomme du Gold et des matériaux Singularity, et réussit toujours. La dernière étape débloque aussi un bonus effect aléatoire (offensif pour Weapon/Accessory, défensif pour les pièces d'Armor).",
   },
   ascensionTable_step: { en: 'Step', jp: '段階', kr: '단계', zh: '阶段', fr: 'Étape' },
-  ascensionTable_success: {
-    en: 'Success',
-    jp: '成功率',
-    kr: '성공률',
-    zh: '成功率',
-    fr: 'Réussite',
-  },
   ascensionTable_gold: { en: 'Gold', jp: 'ゴールド', kr: '골드', zh: '金币', fr: 'Gold' },
   ascensionTable_materials: {
     en: 'Materials',

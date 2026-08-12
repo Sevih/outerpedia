@@ -116,7 +116,7 @@ const en = {
   'equip.detail.singularity_suffix': '[Singularity]',
   'equip.detail.and_more': 'and {n} more',
   'equip.detail.activation_cost': 'Activation cost',
-  'equip.detail.step_rates': 'Step success rates',
+  'equip.detail.step_costs': 'Step costs',
   'equip.detail.grade': 'Grade',
   'equip.detail.mainstat': 'Main Stat',
   'equip.detail.minmax': 'min → max',

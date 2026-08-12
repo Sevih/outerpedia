@@ -108,7 +108,7 @@ const zh: Record<TranslationKey, string> = {
   'equip.detail.singularity_suffix': '[奇点]',
   'equip.detail.and_more': '及其他{n}名',
   'equip.detail.activation_cost': '激活费用',
-  'equip.detail.step_rates': '各阶段成功率',
+  'equip.detail.step_costs': '各阶段消耗',
   'equip.detail.grade': '等级',
   'equip.detail.mainstat': '主属性',
   'equip.detail.minmax': 'min → max',

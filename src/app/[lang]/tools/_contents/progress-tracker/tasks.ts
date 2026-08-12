@@ -83,8 +83,10 @@ export const DAILY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('dai
   // 10 pubs × 18 stamina = 180 stamina/jour — masquée avec le pack premium
   // Veronica (la stamina est alors réclamée automatiquement, sans pub)
   'ad-stamina': { category: 'task', permanent: true, maxCount: 10 },
-  // 2 entrées/jour, ouvert mercredi → samedi seulement (filtré à la synchro)
-  'dimensional-singularity': { category: 'task', permanent: true, maxCount: 2 },
+  // 1 entrée/jour, ouvert mercredi → samedi seulement (filtré à la synchro).
+  // Les 2 entrées ont fusionné en une seule au patch du 12/08/2026, récompense
+  // combinée — le nombre de passages baisse, pas le gain quotidien.
+  'dimensional-singularity': { category: 'task', permanent: true, maxCount: 1 },
   // Premium Shop > Normal > Daily/Weekly/Monthly
   'shop-daily-free-gift': {
     category: 'shop',

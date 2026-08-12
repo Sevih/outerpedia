@@ -91,7 +91,7 @@ export default async function EquipmentDetailPage({
     singularitySuffix: t('equip.detail.singularity_suffix'),
     andMore: t('equip.detail.and_more'),
     activationCost: t('equip.detail.activation_cost'),
-    stepRates: t('equip.detail.step_rates'),
+    stepCosts: t('equip.detail.step_costs'),
     substatsRange: t('equip.detail.minmax'),
     step: t('equip.detail.step'),
     grade: t('equip.detail.grade'),

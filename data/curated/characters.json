@@ -4459,6 +4459,23 @@
       "ultimate": 2
     }
   },
+  "2000129": {
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "hcwvfIbfINc",
+        "title": "[OUTERPLANE] Demiurge Saeran (VA. Brianna Kinckerbocker)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2026-08-12T03:30:35Z"
+      }
+    ],
+    "role": "dps",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
   "2700003": {
     "rank": "C",
     "role": "support",

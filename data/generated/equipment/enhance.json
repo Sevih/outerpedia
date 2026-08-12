@@ -74,12 +74,12 @@
       {
         "to": 11,
         "factor": 0.1,
-        "price": 300000,
-        "rate": 90,
+        "price": 600000,
+        "rate": 100,
         "materials": [
           {
             "id": "25001",
-            "count": 10,
+            "count": 20,
             "name": {
               "en": "High-Precision Chip",
               "jp": "高精度チップ",
@@ -97,7 +97,7 @@
           },
           {
             "id": "21004",
-            "count": 10,
+            "count": 20,
             "name": {
               "en": "Artisan's Hammer",
               "jp": "達人の強化ハンマー",
@@ -118,12 +118,12 @@
       {
         "to": 12,
         "factor": 0.1,
-        "price": 400000,
-        "rate": 80,
+        "price": 800000,
+        "rate": 100,
         "materials": [
           {
             "id": "25001",
-            "count": 10,
+            "count": 20,
             "name": {
               "en": "High-Precision Chip",
               "jp": "高精度チップ",
@@ -141,7 +141,7 @@
           },
           {
             "id": "21004",
-            "count": 10,
+            "count": 20,
             "name": {
               "en": "Artisan's Hammer",
               "jp": "達人の強化ハンマー",
@@ -162,12 +162,12 @@
       {
         "to": 13,
         "factor": 0.1,
-        "price": 500000,
-        "rate": 70,
+        "price": 1000000,
+        "rate": 100,
         "materials": [
           {
             "id": "25001",
-            "count": 10,
+            "count": 20,
             "name": {
               "en": "High-Precision Chip",
               "jp": "高精度チップ",
@@ -185,7 +185,7 @@
           },
           {
             "id": "21004",
-            "count": 10,
+            "count": 20,
             "name": {
               "en": "Artisan's Hammer",
               "jp": "達人の強化ハンマー",
@@ -206,12 +206,12 @@
       {
         "to": 14,
         "factor": 0.1,
-        "price": 700000,
-        "rate": 60,
+        "price": 1400000,
+        "rate": 100,
         "materials": [
           {
             "id": "25001",
-            "count": 15,
+            "count": 30,
             "name": {
               "en": "High-Precision Chip",
               "jp": "高精度チップ",
@@ -229,7 +229,7 @@
           },
           {
             "id": "21004",
-            "count": 15,
+            "count": 30,
             "name": {
               "en": "Artisan's Hammer",
               "jp": "達人の強化ハンマー",
@@ -250,12 +250,12 @@
       {
         "to": 15,
         "factor": 0.2,
-        "price": 1000000,
-        "rate": 40,
+        "price": 3000000,
+        "rate": 100,
         "materials": [
           {
             "id": "25001",
-            "count": 30,
+            "count": 90,
             "name": {
               "en": "High-Precision Chip",
               "jp": "高精度チップ",
@@ -273,7 +273,7 @@
           },
           {
             "id": "21004",
-            "count": 30,
+            "count": 90,
             "name": {
               "en": "Artisan's Hammer",
               "jp": "達人の強化ハンマー",

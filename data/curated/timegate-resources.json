@@ -39,7 +39,8 @@
 
     "22031": [
       { "source": "irregular-extermination-points", "monthly": 150 },
-      { "source": "kates-workshop", "weekly": 70 }
+      { "source": "kates-workshop", "weekly": 70 },
+      { "source": "singularity-daily-run", "weekly": 20 }
     ],
     "22033": [
       { "source": "irregular-extermination-points", "monthly": 300 },

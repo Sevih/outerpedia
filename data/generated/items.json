@@ -4022,6 +4022,27 @@
     "star": 0,
     "characterLimit": "2000103"
   },
+  "23044": {
+    "kind": "item",
+    "name": {
+      "en": "Oath with Demiurge Saeran",
+      "jp": "デミウルゴス・セイランとの誓約",
+      "kr": "데미우르고스 세이란과의 서약",
+      "zh": "与创世之神·萨伊蓝的誓约"
+    },
+    "desc": {
+      "en": "A token that allows you to form an everlasting bond with [Demiurge Saeran].\\nWhen used, grants 170,000 Affinity EXP, enough to raise [Demiurge Saeran]'s Affinity to Lv. 10 instantly.\\nIf [Demiurge Saeran]'s Affinity is already at the maximum level, you can sell this item for 300 Free Ether.",
+      "jp": "【デミウルゴス・セイラン】と永遠の絆を結ぶことができる証。\\n使用すると、【デミウルゴス・セイラン】の好感度を一度にLv.10まで上げられる好感度経験値(170,000)を獲得する。\\nすでに好感度が最大の場合、このアイテムを300無償エーテルで売却できる。",
+      "kr": "[데미우르고스 세이란]과 영원한 애정 관계를 구축할 수 있는 증표.\\n사용 시 [데미우르고스 세이란]의 애정도를 한번에 10LV까지 성장 시킬 수 있는 분량의 경험치 (170,000) 를 제공합니다.\\n이미 완벽한 애정 관계가 구축되신 경우, 해당 아이템을 300 무료 에테르로 판매하실 수 있습니다.",
+      "zh": "可与【创世之神·萨伊蓝】建立永恒亲密关系的信物。\\n使用后可获得170,000亲密度经验值，足以将【创世之神·萨伊蓝】的亲密度一次提升至Lv.10。\\n若【创世之神·萨伊蓝】的亲密度已达到最高等级，可将该道具以300无偿以太出售。"
+    },
+    "icon": "TI_present_Max_Public",
+    "grade": "unique",
+    "type": "present",
+    "subType": "present_max",
+    "star": 0,
+    "characterLimit": "2000129"
+  },
   "24001": {
     "kind": "item",
     "name": {
@@ -14750,6 +14771,106 @@
     "subType": "box_type_choice_item",
     "star": 0
   },
+  "30551": {
+    "kind": "item",
+    "name": {
+      "en": "5★ Legendary Weapon Selection Chest",
+      "jp": "★5武器選択ボックス【レジェンド】",
+      "kr": "5성 전설 무기 선택 상자",
+      "zh": "5星传说武器选择箱"
+    },
+    "desc": {
+      "en": "Select and obtain one 5★ Legendary Weapon.\\nThe equipment provided by this chest has fixed stats.",
+      "jp": "★5レジェンド武器の中から1つを選択して獲得する。\\nこのボックスから獲得する装備のオプションは固定されている。",
+      "kr": "5성 전설 무기 중 한가지를 선택하여 얻습니다.\\n해당 상자에서 지급되는 장비들은 옵션이 고정되어 지급됩니다.",
+      "zh": "选择并获得1件5星传说武器。\\n该箱子提供的装备附带固定属性。"
+    },
+    "icon": "TI_Weapon_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_choice_item",
+    "star": 0
+  },
+  "30552": {
+    "kind": "item",
+    "name": {
+      "en": "5★ Legendary Accessory Selection Chest",
+      "jp": "★5アクセサリー選択ボックス【レジェンド】",
+      "kr": "5성 전설 악세서리 선택 상자",
+      "zh": "5星传说饰品选择箱"
+    },
+    "desc": {
+      "en": "Select and obtain one 5★ Legendary Accessory.\\nThe equipment provided by this chest has fixed stats.",
+      "jp": "★5レジェンドアクセサリーの中から1つを選択して獲得する。\\nこのボックスから獲得する装備のオプションは固定されている。",
+      "kr": "5성 전설 악세서리 중 한가지를 선택하여 얻습니다.\\n해당 상자에서 지급되는 장비들은 옵션이 고정되어 지급됩니다.",
+      "zh": "选择并获得1件5星传说饰品。\\n该箱子提供的装备附带固定属性。"
+    },
+    "icon": "TI_Accessary_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_choice_item",
+    "star": 0
+  },
+  "30553": {
+    "kind": "item",
+    "name": {
+      "en": "5★ Legendary Armor Chest [Speed]",
+      "jp": "★5レジェンド防具ボックス【速度】",
+      "kr": "5성 전설 방어구 상자 [속도]",
+      "zh": "5星传说防具箱【速度】"
+    },
+    "desc": {
+      "en": "Obtain all pieces of 5★ Legendary [Speed] set armor.\\nThe equipment provided by this chest has fixed stats.",
+      "jp": "★5レジェンド防具(速度セット)をすべて獲得する。\\nこのボックスから獲得する装備のオプションは固定されている。",
+      "kr": "5성 전설 [속도] 세트 방어구를 모두 얻습니다.\\n해당 상자에서 지급되는 장비들은 옵션이 고정되어 지급됩니다.",
+      "zh": "获得所有5星传说【速度】套装防具。\\n该箱子提供的装备附带固定属性。"
+    },
+    "icon": "TI_Armor_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_random",
+    "star": 0
+  },
+  "30554": {
+    "kind": "item",
+    "name": {
+      "en": "5★ Legendary Armor Chest [Counterattack]",
+      "jp": "★5レジェンド防具ボックス【反撃】",
+      "kr": "5성 전설 방어구 상자 [반격]",
+      "zh": "5星传说防具箱【反击】"
+    },
+    "desc": {
+      "en": "Obtain all pieces of 5★ Legendary [Counterattack] set armor.\\nThe equipment provided by this chest has fixed stats.",
+      "jp": "★5レジェンド防具(反撃セット)をすべて獲得する。\\nこのボックスから獲得する装備のオプションは固定されている。",
+      "kr": "5성 전설 [반격] 세트 방어구를 모두 얻습니다.\\n해당 상자에서 지급되는 장비들은 옵션이 고정되어 지급됩니다.",
+      "zh": "获得所有5星传说【反击】套装防具。\\n该箱子提供的装备附带固定属性。"
+    },
+    "icon": "TI_Armor_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_random",
+    "star": 0
+  },
+  "30555": {
+    "kind": "item",
+    "name": {
+      "en": "5★ Legendary Armor Chest [Penetration]",
+      "jp": "★5レジェンド防具ボックス【貫通】",
+      "kr": "5성 전설 방어구 상자 [관통]",
+      "zh": "5星传说防具箱【穿透】"
+    },
+    "desc": {
+      "en": "Obtain all pieces of 5★ Legendary [Penetration] set armor.\\nThe equipment provided by this chest has fixed stats.",
+      "jp": "★5レジェンド防具(貫通セット)をすべて獲得する。\\nこのボックスから獲得する装備のオプションは固定されている。",
+      "kr": "5성 전설 [관통] 세트 방어구를 모두 얻습니다.\\n해당 상자에서 지급되는 장비들은 옵션이 고정되어 지급됩니다.",
+      "zh": "获得所有5星传说【穿透】套装防具。\\n该箱子提供的装备附带固定属性。"
+    },
+    "icon": "TI_Armor_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_random",
+    "star": 0
+  },
   "40001": {
     "kind": "item",
     "name": {
@@ -15987,16 +16108,16 @@
   "510001": {
     "kind": "item",
     "name": {
-      "en": "Dimensional Singularity Daily Participation Reward 1",
-      "jp": "次元特異点日別参加報酬1",
-      "kr": "차원 특이점 일일 참여 보상 1",
-      "zh": "次元奇点每日参与奖励1"
+      "en": "Dimensional Singularity Daily Participation Reward",
+      "jp": "次元特異点デイリー参加報酬",
+      "kr": "차원 특이점 일일 참여 보상",
+      "zh": "次元奇点每日参与奖励"
     },
     "desc": {
-      "en": "Obtain the following rewards.\\nHigh-Precision Chip x15\\nReload Cartridge x20\\nLimit Break Memory x10\\nBlue Stardust x5",
-      "jp": "以下の報酬を獲得する。\\n高精度チップ15個\\nリロードカートリッジ20個\\n限界突破メモリ10個\\nブルースターダスト5個",
-      "kr": "아래의 보상을 얻습니다.\\n고정밀 칩 15개\\n리로드 카트리지 20개\\n한계 돌파 메모리 10개\\n블루 스타 더스트 5개",
-      "zh": "获得以下奖励。\\n高精度芯片15个\\n换弹匣20个\\n极限突破记忆10个\\n蓝色星尘5个"
+      "en": "Obtain the following rewards.\\nHigh-Precision Chip x40\\nReload Cartridge x50\\nLimit Break Memory x25\\nBlue Stardust x5\\nBlue Memory Stone x5",
+      "jp": "以下の報酬を獲得する。\\n高精度チップ40個\\nリロードカートリッジ50個\\n限界突破メモリー25個\\nブルースターダスト5個\\nブルーメモリーストーン5個",
+      "kr": "아래의 보상을 얻습니다.\\n고정밀 칩 40개\\n리로드 카트리지 50개\\n한계 돌파 메모리 25개\\n블루 스타 더스트 5개\\n블루 메모리 스톤 5개",
+      "zh": "获得以下奖励。\\n高精度芯片40个\\n换弹匣50个\\n极限突破记忆25个\\n蓝色星尘5个\\n蓝色记忆石5个"
     },
     "icon": "TI_Common_Box05",
     "grade": "unique",
@@ -19703,7 +19824,7 @@
     "type": "costume",
     "star": 0,
     "characterId": "2000089",
-    "source": "battlepass"
+    "source": "shop"
   },
   "COSTUME_101": {
     "kind": "costume",
@@ -19744,6 +19865,27 @@
     "type": "costume",
     "star": 0,
     "characterId": "2000118"
+  },
+  "COSTUME_103": {
+    "kind": "costume",
+    "name": {
+      "en": "True Faith Saeran",
+      "jp": "純粋な信仰・セイラン",
+      "kr": "순수한 믿음 세이란",
+      "zh": "纯粹信仰·萨伊蓝"
+    },
+    "desc": {
+      "en": "A costume that [Demiurge Saeran] can equip.",
+      "jp": "【デミウルゴス・セイラン】のスキンです。\\nスキンは【仲間】→【スキン】で装備できます。",
+      "kr": "[데미우르고스 세이란]이 착용할 수 있는 코스튬입니다.",
+      "zh": "【创世之神萨伊蓝】可穿戴的皮肤。"
+    },
+    "icon": "TI_Costume_Clothes_2000129_02",
+    "grade": "rare",
+    "type": "costume",
+    "star": 0,
+    "characterId": "2000129",
+    "source": "battlepass"
   },
   "COSTUME_11": {
     "kind": "costume",
@@ -22067,16 +22209,16 @@
   "SYS_ASSET_EVENT_COIN_1": {
     "kind": "goods",
     "name": {
-      "en": "Fire Crystal",
-      "jp": "火の結晶",
-      "kr": "불의 결정",
-      "zh": "火之结晶"
+      "en": "Apocryphal Page",
+      "jp": "外典の頁",
+      "kr": "외경의 낱장",
+      "zh": "外典残页"
     },
     "desc": {
-      "en": "A mysterious fuel of unknown origin crafted by Tamamo-no-Mae. Exchange it for various items in the Event Shop.",
-      "jp": "タマモノマエが生み出した正体不明の燃料。\\nイベントショップでアイテムと交換できる。",
-      "kr": "타마모노마에가 만든 정체불명의 연료. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
-      "zh": "玉藻前制作的未知燃料。\\n可于活动商店兑换各种商品。"
+      "en": "Just as birth and death are inevitable, so too was destruction foretold... Can be exchanged for various items in the Event Shop.",
+      "jp": "生と死が必然であるように、滅びもまた予言されていた……イベントショップでさまざまなアイテムと交換できます。",
+      "kr": "탄생과 죽음이 당연하듯, 멸망은 예고된 것이다… 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
+      "zh": "正如诞生与死亡皆为必然，毁灭也早已被预示……可在活动商店兑换各种商品。"
     },
     "icon": "TI_Item_Event_Coin_01",
     "grade": "unique",

@@ -1,5 +1,57 @@
 [
   {
+    "date": "2026-08-12",
+    "type": "character",
+    "title": {
+      "en": "Demiurge Saeran",
+      "jp": "デミウルグ・サエラン",
+      "kr": "데미우르그 사에란",
+      "zh": "造物主萨兰",
+      "fr": "Demiurge Saeran"
+    },
+    "content": {
+      "en": ["Demiurge Saeran has been added to the database with full skills and stats."],
+      "jp": [
+        "デミウルグ・サエランが、スキルとステータス情報をすべて含めてデータベースに追加されました。"
+      ],
+      "kr": [
+        "데미우르그 사에란이 전체 스킬과 능력치를 포함한 상태로 데이터베이스에 추가되었습니다."
+      ],
+      "zh": ["造物主萨兰已连同其全部技能和属性数据一并添加至数据库中。"],
+      "fr": [
+        "Le démiurge Saeran a été ajouté à la base de données avec l'ensemble de ses compétences et de ses statistiques."
+      ]
+    },
+    "link": {
+      "kind": "character",
+      "slug": "demiurge-saeran"
+    }
+  },
+  {
+    "date": "2026-08-12",
+    "type": "update",
+    "title": {
+      "en": "Prototype EX-78 Joint Challenge Guide — August 2026",
+      "jp": "プロトタイプ EX-78 共同チャレンジガイド — 2026年8月",
+      "kr": "EX-78 프로토타입 합동 챌린지 가이드 — 2026년 8월",
+      "zh": "EX-78 原型机联合挑战指南 — 2026年8月",
+      "fr": "Guide du défi collaboratif « Prototype EX-78 » — août 2026"
+    },
+    "content": {
+      "en": ["Prototype EX-78 Joint Challenge Guide updated for August 2026 version."],
+      "jp": ["プロトタイプEX-78 ジョイントチャレンジガイドが、2026年8月版に更新されました。"],
+      "kr": ["프로토타입 EX-78 합동 챌린지 가이드가 2026년 8월 버전으로 업데이트되었습니다."],
+      "zh": ["EX-78 原型机联合挑战指南已更新至 2026 年 8 月版。"],
+      "fr": [
+        "Guide du défi collaboratif « Prototype EX-78 » mis à jour pour la version d'août 2026."
+      ]
+    },
+    "link": {
+      "kind": "guide",
+      "href": "/guides/joint-challenge/prototype-ex-78"
+    }
+  },
+  {
     "date": "2026-08-10",
     "type": "feature",
     "title": {

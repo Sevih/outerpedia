@@ -5101,6 +5101,90 @@
         "dmg_boost": 20,
         "buff_chance": 20
       }
+    },
+    "2000129": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
+    },
+    "2000130": {
+      "2": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 20
+      },
+      "3": {
+        "hp": 88,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "4": {
+        "hp": 132,
+        "speed": 3,
+        "buff_chance": 30
+      },
+      "5": {
+        "hp": 132,
+        "speed": 7,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 493,
+        "def": 105,
+        "atk": 45
+      },
+      "7": {
+        "speed": 4,
+        "hp": 240,
+        "dmg_boost": 20
+      },
+      "8": {
+        "speed": 4,
+        "atk": 28,
+        "dmg_boost": 20
+      },
+      "9": {
+        "buff_chance": 20,
+        "atk": 28,
+        "dmg_boost": 20
+      }
     }
   },
   "limitBreak": {
@@ -10023,6 +10107,24 @@
           "stat": "dmg_boost",
           "applying": "add",
           "value": 50
+        }
+      ]
+    },
+    "12908": {
+      "4": [
+        {
+          "stat": "pierce_power_rate",
+          "applying": "add",
+          "value": 300
+        }
+      ]
+    },
+    "13008": {
+      "4": [
+        {
+          "stat": "pierce_power_rate",
+          "applying": "add",
+          "value": 300
         }
       ]
     }

@@ -90592,8 +90592,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_2",
+          "Singularity_Passive_Dmg_down_s_2"
         ]
       },
       {
@@ -90616,8 +90616,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_3",
+          "Singularity_Passive_Dmg_down_s_3"
         ]
       },
       {
@@ -90672,10 +90672,10 @@
         "name": "SS++",
         "level": 180,
         "transLevel": 180,
-        "hp": 500000,
+        "hp": 250000,
         "damage": {
           "min": 2750001,
-          "max": 3250000
+          "max": 3000000
         },
         "adv": {
           "atk": -228,
@@ -90696,10 +90696,10 @@
         "name": "SSS",
         "level": 185,
         "transLevel": 185,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3250001,
-          "max": 3750000
+          "min": 3000001,
+          "max": 3300000
         },
         "adv": {
           "atk": -226,
@@ -90720,10 +90720,10 @@
         "name": "SSS+",
         "level": 190,
         "transLevel": 190,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3750001,
-          "max": 4250000
+          "min": 3300001,
+          "max": 3600000
         },
         "adv": {
           "atk": -224,
@@ -90744,10 +90744,10 @@
         "name": "SSS++",
         "level": 200,
         "transLevel": 200,
-        "hp": 750000,
+        "hp": 400000,
         "damage": {
-          "min": 4250001,
-          "max": 5000000
+          "min": 3600001,
+          "max": 4000000
         },
         "adv": {
           "atk": -222,
@@ -91249,8 +91249,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_2",
+          "Singularity_Passive_Dmg_down_s_2"
         ]
       },
       {
@@ -91273,8 +91273,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_3",
+          "Singularity_Passive_Dmg_down_s_3"
         ]
       },
       {
@@ -91329,10 +91329,10 @@
         "name": "SS++",
         "level": 180,
         "transLevel": 180,
-        "hp": 500000,
+        "hp": 250000,
         "damage": {
           "min": 2750001,
-          "max": 3250000
+          "max": 3000000
         },
         "adv": {
           "atk": -228,
@@ -91353,10 +91353,10 @@
         "name": "SSS",
         "level": 185,
         "transLevel": 185,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3250001,
-          "max": 3750000
+          "min": 3000001,
+          "max": 3300000
         },
         "adv": {
           "atk": -226,
@@ -91377,10 +91377,10 @@
         "name": "SSS+",
         "level": 190,
         "transLevel": 190,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3750001,
-          "max": 4250000
+          "min": 3300001,
+          "max": 3600000
         },
         "adv": {
           "atk": -224,
@@ -91401,10 +91401,10 @@
         "name": "SSS++",
         "level": 200,
         "transLevel": 200,
-        "hp": 750000,
+        "hp": 400000,
         "damage": {
-          "min": 4250001,
-          "max": 5000000
+          "min": 3600001,
+          "max": 4000000
         },
         "adv": {
           "atk": -222,
@@ -91906,8 +91906,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_2",
+          "Singularity_Passive_Dmg_down_s_2"
         ]
       },
       {
@@ -91930,8 +91930,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_3",
+          "Singularity_Passive_Dmg_down_s_3"
         ]
       },
       {
@@ -91986,10 +91986,10 @@
         "name": "SS++",
         "level": 180,
         "transLevel": 180,
-        "hp": 500000,
+        "hp": 250000,
         "damage": {
           "min": 2750001,
-          "max": 3250000
+          "max": 3000000
         },
         "adv": {
           "atk": -228,
@@ -92010,10 +92010,10 @@
         "name": "SSS",
         "level": 185,
         "transLevel": 185,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3250001,
-          "max": 3750000
+          "min": 3000001,
+          "max": 3300000
         },
         "adv": {
           "atk": -226,
@@ -92034,10 +92034,10 @@
         "name": "SSS+",
         "level": 190,
         "transLevel": 190,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3750001,
-          "max": 4250000
+          "min": 3300001,
+          "max": 3600000
         },
         "adv": {
           "atk": -224,
@@ -92058,10 +92058,10 @@
         "name": "SSS++",
         "level": 200,
         "transLevel": 200,
-        "hp": 750000,
+        "hp": 400000,
         "damage": {
-          "min": 4250001,
-          "max": 5000000
+          "min": 3600001,
+          "max": 4000000
         },
         "adv": {
           "atk": -222,
@@ -92563,8 +92563,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_2",
+          "Singularity_Passive_Dmg_down_s_2"
         ]
       },
       {
@@ -92587,8 +92587,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_3",
+          "Singularity_Passive_Dmg_down_s_3"
         ]
       },
       {
@@ -92643,10 +92643,10 @@
         "name": "SS++",
         "level": 180,
         "transLevel": 180,
-        "hp": 500000,
+        "hp": 250000,
         "damage": {
           "min": 2750001,
-          "max": 3250000
+          "max": 3000000
         },
         "adv": {
           "atk": -228,
@@ -92667,10 +92667,10 @@
         "name": "SSS",
         "level": 185,
         "transLevel": 185,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3250001,
-          "max": 3750000
+          "min": 3000001,
+          "max": 3300000
         },
         "adv": {
           "atk": -226,
@@ -92691,10 +92691,10 @@
         "name": "SSS+",
         "level": 190,
         "transLevel": 190,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3750001,
-          "max": 4250000
+          "min": 3300001,
+          "max": 3600000
         },
         "adv": {
           "atk": -224,
@@ -92715,10 +92715,10 @@
         "name": "SSS++",
         "level": 200,
         "transLevel": 200,
-        "hp": 750000,
+        "hp": 400000,
         "damage": {
-          "min": 4250001,
-          "max": 5000000
+          "min": 3600001,
+          "max": 4000000
         },
         "adv": {
           "atk": -222,
@@ -93220,8 +93220,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_2",
+          "Singularity_Passive_Dmg_down_s_2"
         ]
       },
       {
@@ -93244,8 +93244,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_3",
+          "Singularity_Passive_Dmg_down_s_3"
         ]
       },
       {
@@ -93300,10 +93300,10 @@
         "name": "SS++",
         "level": 180,
         "transLevel": 180,
-        "hp": 500000,
+        "hp": 250000,
         "damage": {
           "min": 2750001,
-          "max": 3250000
+          "max": 3000000
         },
         "adv": {
           "atk": -228,
@@ -93324,10 +93324,10 @@
         "name": "SSS",
         "level": 185,
         "transLevel": 185,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3250001,
-          "max": 3750000
+          "min": 3000001,
+          "max": 3300000
         },
         "adv": {
           "atk": -226,
@@ -93348,10 +93348,10 @@
         "name": "SSS+",
         "level": 190,
         "transLevel": 190,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3750001,
-          "max": 4250000
+          "min": 3300001,
+          "max": 3600000
         },
         "adv": {
           "atk": -224,
@@ -93372,10 +93372,10 @@
         "name": "SSS++",
         "level": 200,
         "transLevel": 200,
-        "hp": 750000,
+        "hp": 400000,
         "damage": {
-          "min": 4250001,
-          "max": 5000000
+          "min": 3600001,
+          "max": 4000000
         },
         "adv": {
           "atk": -222,
@@ -93877,8 +93877,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_2",
+          "Singularity_Passive_Dmg_down_s_2"
         ]
       },
       {
@@ -93901,8 +93901,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_3",
+          "Singularity_Passive_Dmg_down_s_3"
         ]
       },
       {
@@ -93957,10 +93957,10 @@
         "name": "SS++",
         "level": 180,
         "transLevel": 180,
-        "hp": 500000,
+        "hp": 250000,
         "damage": {
           "min": 2750001,
-          "max": 3250000
+          "max": 3000000
         },
         "adv": {
           "atk": -228,
@@ -93981,10 +93981,10 @@
         "name": "SSS",
         "level": 185,
         "transLevel": 185,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3250001,
-          "max": 3750000
+          "min": 3000001,
+          "max": 3300000
         },
         "adv": {
           "atk": -226,
@@ -94005,10 +94005,10 @@
         "name": "SSS+",
         "level": 190,
         "transLevel": 190,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3750001,
-          "max": 4250000
+          "min": 3300001,
+          "max": 3600000
         },
         "adv": {
           "atk": -224,
@@ -94029,10 +94029,10 @@
         "name": "SSS++",
         "level": 200,
         "transLevel": 200,
-        "hp": 750000,
+        "hp": 400000,
         "damage": {
-          "min": 4250001,
-          "max": 5000000
+          "min": 3600001,
+          "max": 4000000
         },
         "adv": {
           "atk": -222,
@@ -94556,8 +94556,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_2",
+          "Singularity_Passive_Dmg_down_s_2"
         ]
       },
       {
@@ -94580,8 +94580,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_3",
+          "Singularity_Passive_Dmg_down_s_3"
         ]
       },
       {
@@ -94636,10 +94636,10 @@
         "name": "SS++",
         "level": 180,
         "transLevel": 180,
-        "hp": 500000,
+        "hp": 250000,
         "damage": {
           "min": 2750001,
-          "max": 3250000
+          "max": 3000000
         },
         "adv": {
           "atk": -228,
@@ -94660,10 +94660,10 @@
         "name": "SSS",
         "level": 185,
         "transLevel": 185,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3250001,
-          "max": 3750000
+          "min": 3000001,
+          "max": 3300000
         },
         "adv": {
           "atk": -226,
@@ -94684,10 +94684,10 @@
         "name": "SSS+",
         "level": 190,
         "transLevel": 190,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3750001,
-          "max": 4250000
+          "min": 3300001,
+          "max": 3600000
         },
         "adv": {
           "atk": -224,
@@ -94708,10 +94708,10 @@
         "name": "SSS++",
         "level": 200,
         "transLevel": 200,
-        "hp": 750000,
+        "hp": 400000,
         "damage": {
-          "min": 4250001,
-          "max": 5000000
+          "min": 3600001,
+          "max": 4000000
         },
         "adv": {
           "atk": -222,
@@ -95213,8 +95213,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_2",
+          "Singularity_Passive_Dmg_down_s_2"
         ]
       },
       {
@@ -95237,8 +95237,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_3",
+          "Singularity_Passive_Dmg_down_s_3"
         ]
       },
       {
@@ -95293,10 +95293,10 @@
         "name": "SS++",
         "level": 180,
         "transLevel": 180,
-        "hp": 500000,
+        "hp": 250000,
         "damage": {
           "min": 2750001,
-          "max": 3250000
+          "max": 3000000
         },
         "adv": {
           "atk": -228,
@@ -95317,10 +95317,10 @@
         "name": "SSS",
         "level": 185,
         "transLevel": 185,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3250001,
-          "max": 3750000
+          "min": 3000001,
+          "max": 3300000
         },
         "adv": {
           "atk": -226,
@@ -95341,10 +95341,10 @@
         "name": "SSS+",
         "level": 190,
         "transLevel": 190,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3750001,
-          "max": 4250000
+          "min": 3300001,
+          "max": 3600000
         },
         "adv": {
           "atk": -224,
@@ -95365,10 +95365,10 @@
         "name": "SSS++",
         "level": 200,
         "transLevel": 200,
-        "hp": 750000,
+        "hp": 400000,
         "damage": {
-          "min": 4250001,
-          "max": 5000000
+          "min": 3600001,
+          "max": 4000000
         },
         "adv": {
           "atk": -222,
@@ -95870,8 +95870,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_2",
+          "Singularity_Passive_Dmg_down_s_2"
         ]
       },
       {
@@ -95894,8 +95894,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_3",
+          "Singularity_Passive_Dmg_down_s_3"
         ]
       },
       {
@@ -95950,10 +95950,10 @@
         "name": "SS++",
         "level": 180,
         "transLevel": 180,
-        "hp": 500000,
+        "hp": 250000,
         "damage": {
           "min": 2750001,
-          "max": 3250000
+          "max": 3000000
         },
         "adv": {
           "atk": -228,
@@ -95974,10 +95974,10 @@
         "name": "SSS",
         "level": 185,
         "transLevel": 185,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3250001,
-          "max": 3750000
+          "min": 3000001,
+          "max": 3300000
         },
         "adv": {
           "atk": -226,
@@ -95998,10 +95998,10 @@
         "name": "SSS+",
         "level": 190,
         "transLevel": 190,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3750001,
-          "max": 4250000
+          "min": 3300001,
+          "max": 3600000
         },
         "adv": {
           "atk": -224,
@@ -96022,10 +96022,10 @@
         "name": "SSS++",
         "level": 200,
         "transLevel": 200,
-        "hp": 750000,
+        "hp": 400000,
         "damage": {
-          "min": 4250001,
-          "max": 5000000
+          "min": 3600001,
+          "max": 4000000
         },
         "adv": {
           "atk": -222,
@@ -96527,8 +96527,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_2",
+          "Singularity_Passive_Dmg_down_s_2"
         ]
       },
       {
@@ -96551,8 +96551,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_3",
+          "Singularity_Passive_Dmg_down_s_3"
         ]
       },
       {
@@ -96607,10 +96607,10 @@
         "name": "SS++",
         "level": 180,
         "transLevel": 180,
-        "hp": 500000,
+        "hp": 250000,
         "damage": {
           "min": 2750001,
-          "max": 3250000
+          "max": 3000000
         },
         "adv": {
           "atk": -228,
@@ -96631,10 +96631,10 @@
         "name": "SSS",
         "level": 185,
         "transLevel": 185,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3250001,
-          "max": 3750000
+          "min": 3000001,
+          "max": 3300000
         },
         "adv": {
           "atk": -226,
@@ -96655,10 +96655,10 @@
         "name": "SSS+",
         "level": 190,
         "transLevel": 190,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3750001,
-          "max": 4250000
+          "min": 3300001,
+          "max": 3600000
         },
         "adv": {
           "atk": -224,
@@ -96679,10 +96679,10 @@
         "name": "SSS++",
         "level": 200,
         "transLevel": 200,
-        "hp": 750000,
+        "hp": 400000,
         "damage": {
-          "min": 4250001,
-          "max": 5000000
+          "min": 3600001,
+          "max": 4000000
         },
         "adv": {
           "atk": -222,
@@ -97184,8 +97184,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_2",
+          "Singularity_Passive_Dmg_down_s_2"
         ]
       },
       {
@@ -97208,8 +97208,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_3",
+          "Singularity_Passive_Dmg_down_s_3"
         ]
       },
       {
@@ -97264,10 +97264,10 @@
         "name": "SS++",
         "level": 180,
         "transLevel": 180,
-        "hp": 500000,
+        "hp": 250000,
         "damage": {
           "min": 2750001,
-          "max": 3250000
+          "max": 3000000
         },
         "adv": {
           "atk": -228,
@@ -97288,10 +97288,10 @@
         "name": "SSS",
         "level": 185,
         "transLevel": 185,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3250001,
-          "max": 3750000
+          "min": 3000001,
+          "max": 3300000
         },
         "adv": {
           "atk": -226,
@@ -97312,10 +97312,10 @@
         "name": "SSS+",
         "level": 190,
         "transLevel": 190,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3750001,
-          "max": 4250000
+          "min": 3300001,
+          "max": 3600000
         },
         "adv": {
           "atk": -224,
@@ -97336,10 +97336,10 @@
         "name": "SSS++",
         "level": 200,
         "transLevel": 200,
-        "hp": 750000,
+        "hp": 400000,
         "damage": {
-          "min": 4250001,
-          "max": 5000000
+          "min": 3600001,
+          "max": 4000000
         },
         "adv": {
           "atk": -222,
@@ -97841,8 +97841,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_2",
+          "Singularity_Passive_Dmg_down_s_2"
         ]
       },
       {
@@ -97865,8 +97865,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_3",
+          "Singularity_Passive_Dmg_down_s_3"
         ]
       },
       {
@@ -97921,10 +97921,10 @@
         "name": "SS++",
         "level": 180,
         "transLevel": 180,
-        "hp": 500000,
+        "hp": 250000,
         "damage": {
           "min": 2750001,
-          "max": 3250000
+          "max": 3000000
         },
         "adv": {
           "atk": -228,
@@ -97945,10 +97945,10 @@
         "name": "SSS",
         "level": 185,
         "transLevel": 185,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3250001,
-          "max": 3750000
+          "min": 3000001,
+          "max": 3300000
         },
         "adv": {
           "atk": -226,
@@ -97969,10 +97969,10 @@
         "name": "SSS+",
         "level": 190,
         "transLevel": 190,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3750001,
-          "max": 4250000
+          "min": 3300001,
+          "max": 3600000
         },
         "adv": {
           "atk": -224,
@@ -97993,10 +97993,10 @@
         "name": "SSS++",
         "level": 200,
         "transLevel": 200,
-        "hp": 750000,
+        "hp": 400000,
         "damage": {
-          "min": 4250001,
-          "max": 5000000
+          "min": 3600001,
+          "max": 4000000
         },
         "adv": {
           "atk": -222,
@@ -98498,8 +98498,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_2",
+          "Singularity_Passive_Dmg_down_s_2"
         ]
       },
       {
@@ -98522,8 +98522,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_3",
+          "Singularity_Passive_Dmg_down_s_3"
         ]
       },
       {
@@ -98578,10 +98578,10 @@
         "name": "SS++",
         "level": 180,
         "transLevel": 180,
-        "hp": 500000,
+        "hp": 250000,
         "damage": {
           "min": 2750001,
-          "max": 3250000
+          "max": 3000000
         },
         "adv": {
           "atk": -228,
@@ -98602,10 +98602,10 @@
         "name": "SSS",
         "level": 185,
         "transLevel": 185,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3250001,
-          "max": 3750000
+          "min": 3000001,
+          "max": 3300000
         },
         "adv": {
           "atk": -226,
@@ -98626,10 +98626,10 @@
         "name": "SSS+",
         "level": 190,
         "transLevel": 190,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3750001,
-          "max": 4250000
+          "min": 3300001,
+          "max": 3600000
         },
         "adv": {
           "atk": -224,
@@ -98650,10 +98650,10 @@
         "name": "SSS++",
         "level": 200,
         "transLevel": 200,
-        "hp": 750000,
+        "hp": 400000,
         "damage": {
-          "min": 4250001,
-          "max": 5000000
+          "min": 3600001,
+          "max": 4000000
         },
         "adv": {
           "atk": -222,
@@ -99155,8 +99155,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_2",
+          "Singularity_Passive_Dmg_down_s_2"
         ]
       },
       {
@@ -99179,8 +99179,8 @@
           "Singularity_Passive_Normal_2_1",
           "Singularity_Passive_Normal_2_2",
           "Singularity_Pasive_S_1",
-          "Singularity_Passive_Dmg_up_aaa_3",
-          "Singularity_Passive_Dmg_down_aaa_3"
+          "Singularity_Passive_Dmg_up_s_3",
+          "Singularity_Passive_Dmg_down_s_3"
         ]
       },
       {
@@ -99235,10 +99235,10 @@
         "name": "SS++",
         "level": 180,
         "transLevel": 180,
-        "hp": 500000,
+        "hp": 250000,
         "damage": {
           "min": 2750001,
-          "max": 3250000
+          "max": 3000000
         },
         "adv": {
           "atk": -228,
@@ -99259,10 +99259,10 @@
         "name": "SSS",
         "level": 185,
         "transLevel": 185,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3250001,
-          "max": 3750000
+          "min": 3000001,
+          "max": 3300000
         },
         "adv": {
           "atk": -226,
@@ -99283,10 +99283,10 @@
         "name": "SSS+",
         "level": 190,
         "transLevel": 190,
-        "hp": 500000,
+        "hp": 300000,
         "damage": {
-          "min": 3750001,
-          "max": 4250000
+          "min": 3300001,
+          "max": 3600000
         },
         "adv": {
           "atk": -224,
@@ -99307,10 +99307,10 @@
         "name": "SSS++",
         "level": 200,
         "transLevel": 200,
-        "hp": 750000,
+        "hp": 400000,
         "damage": {
-          "min": 4250001,
-          "max": 5000000
+          "min": 3600001,
+          "max": 4000000
         },
         "adv": {
           "atk": -222,

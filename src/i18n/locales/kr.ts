@@ -108,7 +108,7 @@ const kr: Record<TranslationKey, string> = {
   'equip.detail.singularity_suffix': '[특이점]',
   'equip.detail.and_more': '외 {n}명',
   'equip.detail.activation_cost': '활성화 비용',
-  'equip.detail.step_rates': '단계별 성공률',
+  'equip.detail.step_costs': '단계별 비용',
   'equip.detail.grade': '등급',
   'equip.detail.mainstat': '메인 스탯',
   'equip.detail.minmax': 'min → max',

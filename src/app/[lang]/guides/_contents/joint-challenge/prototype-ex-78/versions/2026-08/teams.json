@@ -1,0 +1,15 @@
+{
+  "slots": [
+    ["Viella", "Primine", "Tamara", "Charlotte", "Dianne", "Saeran"],
+    ["Luna", "Monad Eva", "Veronica"],
+    ["Ame", "Noa", "Rin", "Laplace"],
+    ["Caren", "Beth", "Rey", "Poolside Trickster Regina"]
+  ],
+  "note": {
+    "en": "Place a {C/Healer} on the leftmost position to prevent the boss from gaining {B/REDUCED_DAMAGE_TAKEN}. {E/Earth} and {E/Water} DPS deal increased damage.",
+    "jp": "ボスの{B/REDUCED_DAMAGE_TAKEN}を防ぐため、{C/Healer}を最左に配置。{E/Earth}と{E/Water} DPSがダメージ増加。",
+    "kr": "보스의 {B/REDUCED_DAMAGE_TAKEN}를 방지하려면 {C/Healer}를 가장 왼쪽에 배치. {E/Earth}와 {E/Water} DPS가 피해 증가.",
+    "zh": "将{C/Healer}放在最左侧以防止首领获得{B/REDUCED_DAMAGE_TAKEN}。{E/Earth}和{E/Water} DPS造成更多伤害。",
+    "fr": "Placez un {C/Healer} sur la position la plus à gauche pour empêcher le boss de gagner {B/REDUCED_DAMAGE_TAKEN}. Les DPS {E/Earth} et {E/Water} infligent plus de dégâts."
+  }
+}

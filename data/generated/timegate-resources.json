@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-08-04",
+  "asOf": "2026-08-18",
   "tabs": [
     {
       "key": "books",
@@ -327,6 +327,12 @@
               "monthly": 150
             },
             {
+              "sourceKey": "singularity-daily-run",
+              "origin": "cured",
+              "type": "mission",
+              "weekly": 20
+            },
+            {
               "sourceKey": "stars",
               "origin": "shop",
               "type": "shop",
@@ -340,9 +346,9 @@
             }
           ],
           "totals": {
-            "weekly": 70,
+            "weekly": 90,
             "monthly": 200,
-            "grandMonthly": 480
+            "grandMonthly": 560
           }
         },
         {

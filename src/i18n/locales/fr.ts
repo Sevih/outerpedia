@@ -110,7 +110,7 @@ const fr: Record<TranslationKey, string> = {
   'equip.detail.singularity_suffix': '[Singularité]',
   'equip.detail.and_more': 'et {n} de plus',
   'equip.detail.activation_cost': "Coût d'activation",
-  'equip.detail.step_rates': 'Taux de réussite par palier',
+  'equip.detail.step_costs': 'Coûts par palier',
   'equip.detail.grade': 'Grade',
   'equip.detail.mainstat': 'Stat principale',
   'equip.detail.minmax': 'min → max',
