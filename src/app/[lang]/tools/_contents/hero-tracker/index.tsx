@@ -70,6 +70,8 @@ function skillIcons(heroId: string): string[] {
 
 /** Les cinq éléments du jeu, dans l'ordre des écrans. */
 const ELEMENTS = ['fire', 'water', 'earth', 'light', 'dark'] as const;
+/** Les cinq classes, dans l'ordre des filtres. */
+const CLASSES = ['striker', 'defender', 'ranger', 'mage', 'healer'] as const;
 
 const LABEL_KEYS = [
   'intro',
@@ -113,6 +115,10 @@ const LABEL_KEYS = [
   'itemUnit',
   'axisAll',
   'piecesNote',
+  'sort',
+  'sortNeed',
+  'sortName',
+  'noMatch',
   'piecesPremium',
   'piecesLimited',
   'scaleHint',
@@ -201,6 +207,10 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
     ELEMENTS.map((e) => [e, t(`sys.element.${e}` as TranslationKey)]),
   );
 
+  const classNames = Object.fromEntries(
+    CLASSES.map((c) => [c, t(`sys.class.${c}` as TranslationKey)]),
+  );
+
   const labels = Object.fromEntries(
     LABEL_KEYS.map((k) => [k, t(`tools.hero-tracker.${k}` as TranslationKey)]),
   ) as unknown as HeroTrackerLabels;
@@ -220,6 +230,7 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
       transcend={transcend}
       items={items}
       elementNames={elementNames}
+      classNames={classNames}
       labels={labels}
     />
   );

@@ -119,6 +119,10 @@ export interface HeroTrackerLabels {
   itemUnit: string;
   axisAll: string;
   piecesNote: string;
+  sort: string;
+  sortNeed: string;
+  sortName: string;
+  noMatch: string;
   piecesPremium: string;
   piecesLimited: string;
   scaleHint: string;
@@ -138,6 +142,8 @@ export interface HeroTrackerData {
   items: Record<string, ItemAsset>;
   /** Nom traduit de chaque élément — les pièces se groupent comme on les farme. */
   elementNames: Record<string, string>;
+  /** Nom traduit de chaque classe — infobulle des filtres du roster. */
+  classNames: Record<string, string>;
   labels: HeroTrackerLabels;
 }
 
@@ -164,6 +170,22 @@ interface LegacyEntry {
   state: Omit<HeroProgress, 'ee' | 'fusion'> & { ee: number };
   target: Omit<HeroProgress, 'ee' | 'fusion'> & { ee: number };
 }
+
+/** Ce sur quoi on trie le roster suivi. `need` = le volume qu'il reste à farmer. */
+type SortKey = 'need' | 'level' | 'affinity' | 'name';
+interface RosterFilters {
+  element: string | null;
+  class: string | null;
+  rarity: number | null;
+}
+/** Le sens NATUREL de chaque critère : le plus gros besoin d'abord, les niveaux
+ *  et affinités les plus BAS d'abord (c'est ce qu'il reste à monter), noms A→Z. */
+const SORT_DESC: Record<SortKey, boolean> = {
+  need: true,
+  level: false,
+  affinity: false,
+  name: false,
+};
 
 const SKILL_SLOTS = 4;
 const MAX_SKILL = 5;
@@ -254,6 +276,7 @@ export function HeroTrackerBrowser({
   transcend,
   items,
   elementNames,
+  classNames,
   labels,
 }: HeroTrackerData) {
   const [stored, writeStore, ready] = useStoredState(SPEC);
@@ -262,6 +285,13 @@ export function HeroTrackerBrowser({
   const [open, setOpen] = useState<string | null>(null);
   const [picking, setPicking] = useState(false);
   const [element, setElement] = useState<string | null>(null);
+  /** Filtres du roster suivi — de session : ils trient un écran, pas un compte. */
+  const [filters, setFilters] = useState<RosterFilters>({
+    element: null,
+    class: null,
+    rarity: null,
+  });
+  const [sort, setSort] = useState<{ by: SortKey; desc: boolean }>({ by: 'need', desc: true });
 
   /**
    * Le stockage peut venir d'un état écrit AVANT l'ajout d'un réglage : le champ
@@ -398,13 +428,18 @@ export function HeroTrackerBrowser({
       };
     });
 
-  const toggle = (hero: HeroRow) =>
+  /** Ordre gelé pendant l'édition (cf. `sortedRows`) — `null` = on suit le tri. */
+  const [frozen, setFrozen] = useState<string[] | null>(null);
+
+  const toggle = (hero: HeroRow) => {
+    setFrozen(null);
     setStore((prev) => {
       const next = { ...prev.heroes };
       if (next[hero.id]) delete next[hero.id];
       else next[hero.id] = defaults(hero);
       return { ...prev, heroes: next };
     });
+  };
 
   const withTarget = !store.alwaysMax;
 
@@ -479,23 +514,64 @@ export function HeroTrackerBrowser({
     [maxTarget],
   );
 
-  /** Suivis d'abord, du plus gourmand au plus léger, les héros finis en dernier. */
-  const trackedRows = useMemo(() => {
-    const rows = heroes.filter((h) => {
+  /** Ce que les filtres du roster laissent passer, réglages de masquage compris. */
+  const trackedRows = useMemo(
+    () =>
+      heroes.filter((h) => {
+        const entry = tracked[h.id];
+        if (!entry || hidden.has(h.id)) return false;
+        if (filters.element && h.element !== filters.element) return false;
+        if (filters.class && h.class !== filters.class) return false;
+        if (filters.rarity && h.rarity !== filters.rarity) return false;
+        if (store.hideMaxed && isMaxed(h, entry.state)) return false;
+        const need = needs.get(h.id);
+        if (store.hideDone && (!need || !hasWork(need))) return false;
+        return true;
+      }),
+    [heroes, tracked, hidden, filters, needs, store.hideMaxed, store.hideDone, isMaxed],
+  );
+
+  /**
+   * L'ORDRE est figé tant que la question posée ne change pas — critère, sens,
+   * filtres, ensemble des héros suivis. Un tri recalculé à chaque frappe faisait
+   * sauter la carte qu'on est en train de remplir sous le curseur : monter un
+   * niveau déplaçait le héros, et on éditait le suivant sans l'avoir voulu.
+   * Recliquer le critère actif inverse le sens — et redonne donc un ordre frais.
+   */
+  /** L'ordre demandé, recalculé à chaque saisie — c'est lui qu'on fige au besoin. */
+  const liveSorted = useMemo(() => {
+    const value = (h: HeroRow): number => {
       const entry = tracked[h.id];
-      if (!entry || hidden.has(h.id)) return false;
-      if (store.hideMaxed && isMaxed(h, entry.state)) return false;
-      const need = needs.get(h.id);
-      if (store.hideDone && (!need || !hasWork(need))) return false;
-      return true;
-    });
-    const weight = (h: HeroRow) => {
+      if (sort.by === 'level') return entry?.state.level ?? 0;
+      if (sort.by === 'affinity') return entry?.state.affinity ?? 0;
       const n = needs.get(h.id);
-      if (!n || !hasWork(n)) return -1;
-      return Object.values(n.items).reduce((a, b) => a + b, 0);
+      // Un héros fini passe DERRIÈRE, quel que soit le sens : il n'a plus de
+      // besoin à comparer.
+      return !n || !hasWork(n) ? -1 : Object.values(n.items).reduce((a, b) => a + b, 0);
     };
-    return rows.sort((a, b) => weight(b) - weight(a) || a.name.localeCompare(b.name));
-  }, [heroes, tracked, hidden, needs, store.hideMaxed, store.hideDone, isMaxed]);
+    const rows = [...trackedRows].sort((a, b) =>
+      sort.by === 'name'
+        ? a.name.localeCompare(b.name)
+        : value(a) - value(b) || a.name.localeCompare(b.name),
+    );
+    return sort.desc ? rows.reverse() : rows;
+  }, [trackedRows, sort, tracked, needs]);
+
+  /**
+   * ÉDITER GÈLE L'ORDRE. Trier par niveau ou par besoin, c'est trier sur ce que
+   * l'on est justement en train de changer : la carte ouverte se déplaçait sous
+   * le curseur à chaque « + ». Déplier un héros fige donc la liste telle qu'elle
+   * est ; changer de tri, de filtre ou de roster la dégèle.
+   */
+  const sortedRows = useMemo(() => {
+    if (!frozen) return liveSorted;
+    const rank = new Map(frozen.map((id, i) => [id, i]));
+    // Un héros absent du gel (ajouté depuis) se range à la fin, sans bousculer
+    // ceux qu'on a sous les yeux.
+    return [...liveSorted].sort(
+      (a, b) => (rank.get(a.id) ?? Infinity) - (rank.get(b.id) ?? Infinity),
+    );
+  }, [liveSorted, frozen]);
 
   /** Suivis en tout — pour dire combien les réglages en escamotent. */
   const trackedTotal = useMemo(
@@ -567,11 +643,35 @@ export function HeroTrackerBrowser({
           </button>
         </div>
 
-        {trackedRows.length === 0 && !picking ? (
+        {trackedTotal > 0 && (
+          <RosterBar
+            filters={filters}
+            onFilters={(f) => {
+              setFrozen(null);
+              setFilters(f);
+            }}
+            sort={sort}
+            onSort={(s) => {
+              setFrozen(null);
+              setSort(s);
+            }}
+            elementNames={elementNames}
+            classNames={classNames}
+            labels={labels}
+          />
+        )}
+
+        {trackedTotal === 0 && !picking ? (
           <EmptyState labels={labels} onPick={() => setPicking(true)} />
+        ) : sortedRows.length === 0 ? (
+          // Suivre des héros et n'en voir aucun est un ÉTAT DE FILTRE, pas un
+          // roster vide : proposer « choisir mes héros » ici serait un contresens.
+          <p className="border-line-subtle text-content-subtle rounded-xl border border-dashed px-4 py-6 text-center text-sm">
+            {labels.noMatch}
+          </p>
         ) : (
           <ul className="space-y-2">
-            {trackedRows.map((hero) => (
+            {sortedRows.map((hero) => (
               <HeroCard
                 key={hero.id}
                 hero={hero}
@@ -583,7 +683,10 @@ export function HeroTrackerBrowser({
                 items={items}
                 withTarget={withTarget}
                 expanded={open === hero.id}
-                onExpand={() => setOpen((v) => (v === hero.id ? null : hero.id))}
+                onExpand={() => {
+                  setFrozen((f) => f ?? sortedRows.map((h) => h.id));
+                  setOpen((v) => (v === hero.id ? null : hero.id));
+                }}
                 onUntrack={() => toggle(hero)}
                 onChange={(side, patch) => update(hero, side, patch)}
                 labels={labels}
@@ -1644,6 +1747,9 @@ function NumberField({
 /* ─────────────────────────── Roster & état vide ─────────────────────────── */
 
 const ELEMENTS = ['fire', 'water', 'earth', 'light', 'dark'] as const;
+/** Les cinq classes et les trois raretés du jeu — filtres du roster suivi. */
+const CLASSES = ['striker', 'defender', 'ranger', 'mage', 'healer'] as const;
+const RARITIES = [3, 2, 1] as const;
 const ELEMENT_TEXT: Record<string, string> = {
   fire: 'text-fire',
   water: 'text-water',
@@ -1651,6 +1757,120 @@ const ELEMENT_TEXT: Record<string, string> = {
   light: 'text-light',
   dark: 'text-dark-elem',
 };
+
+/**
+ * Barre du roster suivi : filtrer (élément / classe / rareté) et choisir l'ordre.
+ * Un compte se remplit par paquets — « mes cinq feu », « mes soigneurs » — et une
+ * liste de trente héros sans prise se parcourt à la molette.
+ */
+function RosterBar({
+  filters,
+  onFilters,
+  sort,
+  onSort,
+  elementNames,
+  classNames,
+  labels,
+}: {
+  filters: RosterFilters;
+  onFilters: (f: RosterFilters) => void;
+  sort: { by: SortKey; desc: boolean };
+  onSort: (s: { by: SortKey; desc: boolean }) => void;
+  elementNames: Record<string, string>;
+  classNames: Record<string, string>;
+  labels: HeroTrackerLabels;
+}) {
+  const chip = (active: boolean) =>
+    `flex h-7 items-center justify-center gap-1 rounded-md border px-1.5 transition-colors ${
+      active
+        ? 'border-accent bg-accent/15'
+        : 'border-line-subtle hover:border-line opacity-70 hover:opacity-100'
+    }`;
+
+  const sorts: { key: SortKey; label: string }[] = [
+    { key: 'need', label: labels.sortNeed },
+    { key: 'level', label: labels.level },
+    { key: 'affinity', label: labels.affinity },
+    { key: 'name', label: labels.sortName },
+  ];
+
+  return (
+    <div className="border-line-subtle bg-surface-sunken flex flex-wrap items-center gap-x-3 gap-y-2 rounded-xl border px-2.5 py-2">
+      <span className="flex gap-1">
+        {ELEMENTS.map((el) => (
+          <button
+            key={el}
+            type="button"
+            title={elementNames[el] ?? el}
+            onClick={() => onFilters({ ...filters, element: filters.element === el ? null : el })}
+            className={chip(filters.element === el)}
+          >
+            <img src={img.element(el)} alt={elementNames[el] ?? el} width={18} height={18} />
+          </button>
+        ))}
+      </span>
+
+      <span className="flex gap-1">
+        {CLASSES.map((cl) => (
+          <button
+            key={cl}
+            type="button"
+            title={classNames[cl] ?? cl}
+            onClick={() => onFilters({ ...filters, class: filters.class === cl ? null : cl })}
+            className={chip(filters.class === cl)}
+          >
+            <img src={img.klass(cl)} alt={classNames[cl] ?? cl} width={18} height={18} />
+          </button>
+        ))}
+      </span>
+
+      <span className="flex gap-1">
+        {RARITIES.map((r) => (
+          <button
+            key={r}
+            type="button"
+            onClick={() => onFilters({ ...filters, rarity: filters.rarity === r ? null : r })}
+            className={`${chip(filters.rarity === r)} text-warn font-mono text-[11px]`}
+          >
+            {r}★
+          </button>
+        ))}
+      </span>
+
+      <div className="flex-1" />
+
+      <span className="flex flex-wrap items-center gap-1">
+        <span className="text-content-subtle font-mono text-[10px] tracking-wide uppercase">
+          {labels.sort}
+        </span>
+        {sorts.map((s) => {
+          const active = sort.by === s.key;
+          return (
+            <button
+              key={s.key}
+              type="button"
+              // Recliquer le critère actif inverse le sens — et c'est aussi ce
+              // qui redonne un ordre frais quand la saisie l'a périmé.
+              onClick={() =>
+                onSort(
+                  active ? { by: s.key, desc: !sort.desc } : { by: s.key, desc: SORT_DESC[s.key] },
+                )
+              }
+              className={`h-7 rounded-md border px-2 text-[11px] transition-colors ${
+                active
+                  ? 'border-accent bg-accent/15 text-accent font-semibold'
+                  : 'border-line-subtle text-content-muted hover:border-line'
+              }`}
+            >
+              {s.label}
+              {active && <span className="ml-0.5 font-mono">{sort.desc ? '↓' : '↑'}</span>}
+            </button>
+          );
+        })}
+      </span>
+    </div>
+  );
+}
 
 function HeroPicker({
   rows,

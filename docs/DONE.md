@@ -7,6 +7,25 @@
 
 ## 2026-08-12
 
+- **`/hero-tracker` — filtrer, trier, et surtout ARRÊTER DE BOUGER (Sevih, en
+  remplissant son compte en prod)** — trois gênes de saisie réelle : (1) aucun
+  filtre sur « mes héros », (2) aucun tri, (3) « la position des perso dans la
+  liste qui bouge pendant que l'on édite c'est chiant ». Une barre de roster
+  apparaît dès qu'un héros est suivi : filtres élément / classe / rareté (icônes
+  du jeu, un clic pour poser, un autre pour retirer) et quatre tris — à farmer,
+  niveau, affinité, nom — chacun avec son sens naturel (le plus gros besoin
+  d'abord, les niveaux et affinités les plus BAS d'abord : c'est ce qu'il reste
+  à monter), recliquer le critère actif inversant le sens.
+  La troisième est la vraie : trier par niveau ou par besoin, c'est trier sur ce
+  qu'on est en train de changer — la carte ouverte se déplaçait sous le curseur
+  à chaque « + ». DÉPLIER UN HÉROS GÈLE DONC LA LISTE ; changer de tri, de
+  filtre ou de roster la dégèle. (Deux impasses avant d'y arriver : ordre en
+  `useRef` puis synchronisation par `useEffect` — les règles React du repo
+  interdisent l'un comme l'autre, et elles ont raison : le gel n'est pas un état
+  dérivé, c'est une décision de l'utilisateur, prise quand il clique.)
+  Au passage : filtrer jusqu'à zéro n'affiche plus « aucun héros suivi » avec un
+  bouton « choisir mes héros » — c'est un état de filtre, pas un roster vide.
+
 - **`/hero-tracker` — PUBLIÉ (`unlisted` → `available`, ordre de Sevih)** — la
   boucle de revue passe en public : l'outil apparaît dans la landing `/tools` et
   dans la recherche. Reste au TODO ce qui ne bloque pas la publication —
