@@ -332,6 +332,7 @@ const fr: Record<TranslationKey, string> = {
     'Une Core Fusion remplace son héros de base — on ne possède jamais les deux. Choisissez celui de votre compte.',
   'tools.hero-tracker.base': 'Base',
   'tools.hero-tracker.coreFusion': 'Core Fusion',
+  'tools.hero-tracker.alwaysMax': 'Toujours viser les valeurs max',
   'tools.hero-tracker.preferredGift': 'Compter les cadeaux préférés (+50 % d’affinité)',
   'tools.team-planner': "Planificateur d'équipe",
   'tools.team-planner.desc':

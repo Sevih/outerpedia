@@ -91,6 +91,7 @@ export interface HeroTrackerLabels {
   base: string;
   coreFusion: string;
   preferredGift: string;
+  alwaysMax: string;
 }
 
 export interface HeroTrackerData {
@@ -118,6 +119,8 @@ interface TrackerState {
   fused: Record<string, boolean>;
   /** Compter les cadeaux au tarif du cadeau PRÉFÉRÉ (+50 %). */
   preferredGift: boolean;
+  /** Tout viser au maximum : les cibles ne se saisissent plus, l'écran s'allège. */
+  alwaysMax: boolean;
 }
 
 /** Schéma v1 : les entrées à plat, un seul EE, trois slots de skill. */
@@ -136,7 +139,7 @@ const PREFERRED_GIFT_BONUS = 0.5;
 const SPEC: StoreSpec<TrackerState> = {
   key: 'outerpedia:hero-tracker',
   version: 2,
-  fallback: { heroes: {}, fused: {}, preferredGift: false },
+  fallback: { heroes: {}, fused: {}, preferredGift: false, alwaysMax: false },
   // v1 ignorait la chain passive, les Core Fusion et le second EE. Une saisie
   // déjà faite vaut mieux qu'un écran remis à zéro : on la relève.
   migrate: (data, from) => {
@@ -154,7 +157,7 @@ const SPEC: StoreSpec<TrackerState> = {
       if (!e?.state || !e?.target) continue;
       heroes[id] = { state: lift(e.state), target: lift(e.target) };
     }
-    return { heroes, fused: {}, preferredGift: false };
+    return { heroes, fused: {}, preferredGift: false, alwaysMax: false };
   },
 };
 
@@ -224,45 +227,51 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
     [heroes, hidden, tracked, onlyTracked, q],
   );
 
+  /**
+   * Le PLAFOND de chaque axe pour ce héros — la cible par défaut, et la cible
+   * TOUT COURT quand le réglage « toujours viser le max » est actif. Cette
+   * surcharge ne TOUCHE PAS les cibles saisies : décocher le réglage les rend.
+   */
+  const maxTarget = useCallback(
+    (hero: HeroRow): HeroProgress => ({
+      level: rules.xpCurve.length,
+      skills: Array(SKILL_SLOTS).fill(MAX_SKILL),
+      fusion: hero.fusionLevels?.length ?? 0,
+      affinity: rules.affinityCurve.length,
+      transcend: Math.max(ladder(asTracked(hero)).length - 1, 0),
+      ee: Array(hero.fusionLevels ? 2 : 1).fill(rules.eeEnchant.length),
+    }),
+    [rules, ladder, asTracked],
+  );
+
   const needs = useMemo(() => {
     const out = new Map<string, HeroNeed>();
     for (const h of heroes) {
       const entry = tracked[h.id];
       if (!entry || hidden.has(h.id)) continue;
-      out.set(h.id, heroNeed(asTracked(h), entry.state, entry.target, fullRules));
+      const target = store.alwaysMax ? maxTarget(h) : entry.target;
+      out.set(h.id, heroNeed(asTracked(h), entry.state, target, fullRules));
     }
     return out;
-  }, [heroes, tracked, hidden, asTracked, fullRules]);
+  }, [heroes, tracked, hidden, store.alwaysMax, maxTarget, asTracked, fullRules]);
 
   const total = useMemo(() => accountNeed([...needs.values()]), [needs]);
 
   const defaults = useCallback(
-    (hero: HeroRow): HeroEntry => {
-      const eeCount = hero.fusionLevels ? 2 : 1;
-      const state: HeroProgress = {
+    (hero: HeroRow): HeroEntry => ({
+      state: {
         level: START_LEVEL,
         skills: Array(SKILL_SLOTS).fill(1),
         fusion: 0,
         affinity: 1,
         transcend: 0,
-        ee: Array(eeCount).fill(0),
-      };
-      return {
-        state,
-        // La cible vise le PLAFOND de chaque axe : c'est la question que pose
-        // l'outil (« que me reste-t-il pour finir ce héros ? »), à rabaisser
-        // héros par héros si on vise moins.
-        target: {
-          level: rules.xpCurve.length,
-          skills: Array(SKILL_SLOTS).fill(MAX_SKILL),
-          fusion: hero.fusionLevels?.length ?? 0,
-          affinity: rules.affinityCurve.length,
-          transcend: Math.max(ladder(asTracked(hero)).length - 1, 0),
-          ee: Array(eeCount).fill(rules.eeEnchant.length),
-        },
-      };
-    },
-    [rules, ladder, asTracked],
+        ee: Array(hero.fusionLevels ? 2 : 1).fill(0),
+      },
+      // La cible vise le plafond : c'est la question que pose l'outil (« que me
+      // reste-t-il pour finir ce héros ? »), à rabaisser héros par héros.
+      target: maxTarget(hero),
+    }),
+    [maxTarget],
   );
 
   const update = (hero: HeroRow, side: 'state' | 'target', patch: Partial<HeroProgress>) =>
@@ -284,6 +293,8 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
 
   const trackedIds = Object.keys(tracked).filter((id) => !hidden.has(id));
   const giftBonus = store.preferredGift ? PREFERRED_GIFT_BONUS : 0;
+  /** Viser le max partout retire la colonne de cible : plus rien à y saisir. */
+  const withTarget = !store.alwaysMax;
 
   // Les plats et cadeaux ne sont pas des coûts stockés : ce sont des CONVERSIONS
   // de l'XP et des points, faites à l'affichage.
@@ -299,6 +310,15 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
           {labels.settings}
         </summary>
         <div className="space-y-4 px-4 pt-1 pb-4">
+          <label className="text-content-muted flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={store.alwaysMax}
+              onChange={(e) => setStore((prev) => ({ ...prev, alwaysMax: e.target.checked }))}
+              className="accent-accent"
+            />
+            {labels.alwaysMax}
+          </label>
           <label className="text-content-muted flex items-center gap-2 text-sm">
             <input
               type="checkbox"
@@ -496,17 +516,20 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
 
                   {entry && (
                     <div className="mt-2 space-y-1.5">
-                      <div className="text-content-subtle grid grid-cols-[5rem_1fr_1fr] gap-2 text-[10px] uppercase">
-                        <span />
-                        <span>{labels.current}</span>
-                        <span>{labels.target}</span>
-                      </div>
+                      {withTarget && (
+                        <div className="text-content-subtle grid grid-cols-[5rem_1fr_1fr] gap-2 text-[10px] uppercase">
+                          <span />
+                          <span>{labels.current}</span>
+                          <span>{labels.target}</span>
+                        </div>
+                      )}
                       <AxisRow
                         label={labels.level}
                         min={START_LEVEL}
                         max={rules.xpCurve.length}
                         state={entry.state.level}
                         target={entry.target.level}
+                        withTarget={withTarget}
                         onState={(v) => update(hero, 'state', { level: v })}
                         onTarget={(v) => update(hero, 'target', { level: v })}
                       />
@@ -520,6 +543,7 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
                           max={hero.fusionLevels.length}
                           state={entry.state.fusion}
                           target={entry.target.fusion}
+                          withTarget={withTarget}
                           onState={(v) => update(hero, 'state', { fusion: v })}
                           onTarget={(v) => update(hero, 'target', { fusion: v })}
                         />
@@ -527,6 +551,7 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
                         <SkillsRow
                           label={labels.skills}
                           entry={entry}
+                          withTarget={withTarget}
                           onChange={(side, skills) => update(hero, side, { skills })}
                         />
                       )}
@@ -537,6 +562,7 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
                         max={rules.affinityCurve.length}
                         state={entry.state.affinity}
                         target={entry.target.affinity}
+                        withTarget={withTarget}
                         onState={(v) => update(hero, 'state', { affinity: v })}
                         onTarget={(v) => update(hero, 'target', { affinity: v })}
                       />
@@ -545,6 +571,7 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
                         steps={steps}
                         state={entry.state.transcend}
                         target={entry.target.transcend}
+                        withTarget={withTarget}
                         onState={(v) => update(hero, 'state', { transcend: v })}
                         onTarget={(v) => update(hero, 'target', { transcend: v })}
                       />
@@ -557,6 +584,7 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
                           max={rules.eeEnchant.length}
                           state={entry.state.ee[i] ?? 0}
                           target={entry.target.ee[i] ?? 0}
+                          withTarget={withTarget}
                           onState={(v) =>
                             update(hero, 'state', { ee: replace(entry.state.ee, i, v) })
                           }
@@ -614,6 +642,13 @@ function ItemChip({ asset, count }: { asset?: ItemAsset; count: number }) {
   );
 }
 
+/**
+ * Grille d'une ligne d'axe. La colonne de cible DISPARAÎT quand on vise le max
+ * partout : c'est la moitié des champs de l'écran en moins.
+ */
+const axisGrid = (withTarget: boolean) =>
+  `grid items-center gap-2 ${withTarget ? 'grid-cols-[5rem_1fr_1fr]' : 'grid-cols-[5rem_1fr]'}`;
+
 /** Une ligne « axe : actuel → cible » (deux champs numériques bornés). */
 function AxisRow({
   label,
@@ -621,6 +656,7 @@ function AxisRow({
   max,
   state,
   target,
+  withTarget,
   onState,
   onTarget,
 }: {
@@ -629,14 +665,15 @@ function AxisRow({
   max: number;
   state: number;
   target: number;
+  withTarget: boolean;
   onState: (v: number) => void;
   onTarget: (v: number) => void;
 }) {
   return (
-    <div className="grid grid-cols-[5rem_1fr_1fr] items-center gap-2">
+    <div className={axisGrid(withTarget)}>
       <span className="text-content-muted text-xs">{label}</span>
       <NumberField value={state} min={min} max={max} onChange={onState} />
-      <NumberField value={target} min={min} max={max} onChange={onTarget} />
+      {withTarget && <NumberField value={target} min={min} max={max} onChange={onTarget} />}
     </div>
   );
 }
@@ -650,6 +687,7 @@ function StarRow({
   steps,
   state,
   target,
+  withTarget,
   onState,
   onTarget,
 }: {
@@ -657,6 +695,7 @@ function StarRow({
   steps: TranscendStep[];
   state: number;
   target: number;
+  withTarget: boolean;
   onState: (v: number) => void;
   onTarget: (v: number) => void;
 }) {
@@ -674,10 +713,10 @@ function StarRow({
     </select>
   );
   return (
-    <div className="grid grid-cols-[5rem_1fr_1fr] items-center gap-2">
+    <div className={axisGrid(withTarget)}>
       <span className="text-content-muted text-xs">{label}</span>
       {select(state, onState)}
-      {select(target, onTarget)}
+      {withTarget && select(target, onTarget)}
     </div>
   );
 }
@@ -685,18 +724,21 @@ function StarRow({
 function SkillsRow({
   label,
   entry,
+  withTarget,
   onChange,
 }: {
   label: string;
   entry: HeroEntry;
+  withTarget: boolean;
   onChange: (side: 'state' | 'target', skills: number[]) => void;
 }) {
   const set = (side: 'state' | 'target', i: number, v: number) =>
     onChange(side, replace(entry[side].skills, i, v));
+  const sides = withTarget ? (['state', 'target'] as const) : (['state'] as const);
   return (
-    <div className="grid grid-cols-[5rem_1fr_1fr] items-center gap-2">
+    <div className={axisGrid(withTarget)}>
       <span className="text-content-muted text-xs">{label}</span>
-      {(['state', 'target'] as const).map((side) => (
+      {sides.map((side) => (
         <div key={side} className="flex gap-1">
           {Array.from({ length: SKILL_SLOTS }, (_, i) => (
             <NumberField

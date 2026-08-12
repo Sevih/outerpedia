@@ -321,6 +321,7 @@ const jp: Record<TranslationKey, string> = {
     'コアフュージョンは元のヒーローと入れ替わり、両方を所持することはありません。所持している方を選んでください。',
   'tools.hero-tracker.base': '通常版',
   'tools.hero-tracker.coreFusion': 'コアフュージョン',
+  'tools.hero-tracker.alwaysMax': '常に最大値を目標にする',
   'tools.hero-tracker.preferredGift': '好みのプレゼントとして計算（好感度+50%）',
   'tools.team-planner': 'チームプランナー',
   'tools.team-planner.desc': 'あらゆるコンテンツ向けのチーム編成を作成・共有。',

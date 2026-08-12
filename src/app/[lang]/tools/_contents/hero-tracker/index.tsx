@@ -80,6 +80,7 @@ const LABEL_KEYS = [
   'base',
   'coreFusion',
   'preferredGift',
+  'alwaysMax',
 ] as const;
 
 export default async function HeroTracker({ lang }: { lang: Lang }) {

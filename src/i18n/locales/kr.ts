@@ -314,6 +314,7 @@ const kr: Record<TranslationKey, string> = {
     '코어 퓨전은 원본 영웅을 대체하므로 둘 다 보유할 수 없습니다. 계정에 있는 쪽을 선택하세요.',
   'tools.hero-tracker.base': '기본',
   'tools.hero-tracker.coreFusion': '코어 퓨전',
+  'tools.hero-tracker.alwaysMax': '항상 최대치를 목표로 설정',
   'tools.hero-tracker.preferredGift': '선호 선물 기준으로 계산(호감도 +50%)',
   'tools.team-planner': '팀 플래너',
   'tools.team-planner.desc': '모든 콘텐츠에 맞는 팀 구성을 만들고 공유하세요.',
