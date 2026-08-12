@@ -57,7 +57,7 @@ const SERVED = [
  * LES PORTEURS, tels que le jeu les désigne — et l'écart entre ce qu'il pose et
  * ce que le site sait poser.
  *
- * `byCharacter` porte les 25 lignes de `CharacterExtraTemplet`, entières. Un id
+ * `byCharacter` porte les lignes de `CharacterExtraTemplet`, entières. Un id
  * peut n'être PAS un personnage du site : `2010063` est un SKIN, et la table du
  * jeu le désigne comme n'importe quel autre. C'est une information, pas un
  * accident — d'où le tri en trois seaux plutôt qu'un filtre muet.
@@ -185,7 +185,7 @@ const FROM_BINARY: { k: string; v: string }[] = [
   },
   {
     k: 'Qui en a un',
-    v: '`CharacterExtraTemplet.ThumbnailEffect` — 25 lignes, dont une pour un SKIN (2010063) que le roster du site n’a pas. Le reste du roster n’a rien : un portrait sans effet n’est pas un portrait dégradé, c’est le cas ORDINAIRE (99 sur 124).',
+    v: `\`CharacterExtraTemplet.ThumbnailEffect\` — ${CARRIERS.length} lignes, dont une pour un SKIN (2010063) que le roster du site n’a pas. Le reste du roster n’a rien : un portrait sans effet n’est pas un portrait dégradé, c’est le cas ORDINAIRE (${ROSTER.length - CARRIERS.filter((c) => c.char).length} sur ${ROSTER.length}). Le compte est CALCULÉ depuis la table extraite : un patch qui ajoute un porteur (vécu avec 2000129 → _Demi) n’a besoin que d’une régénération.`,
   },
   {
     k: 'Pourquoi ça ne s’arrête pas',
@@ -684,7 +684,9 @@ export default function DevAnimatedPortrait() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-content-strong mb-3 font-semibold">Les 25 porteurs du jeu</h2>
+        <h2 className="text-content-strong mb-3 font-semibold">
+          Les {CARRIERS.length} porteurs du jeu
+        </h2>
         <p className="text-content-muted mb-3 max-w-3xl text-sm">
           La table entière de <code>CharacterExtraTemplet</code>, y compris les lignes que le site
           ne sert pas — une liste tronquée laisserait croire qu’un perso absent n’a pas d’effet.

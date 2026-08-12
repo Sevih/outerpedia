@@ -7,7 +7,8 @@ porte un nœud que la transcription statique ignore : `FX_Holder`, soit
 enfants existants, demande à `CTempletManager.GetCharacterCardEffectByID(id)` un NOM
 d'effet, puis `CResourceManager.LoadAsset<GameObject>` + `Instantiate` sous le holder.
 Rien d'autre : pas de paramètre, pas de variante. Le nom vient de
-`CharacterExtraTemplet.ThumbnailEffect` — 25 persos sur 124 en ont un.
+`CharacterExtraTemplet.ThumbnailEffect` — une minorité de persos en ont un (26 au
+patch du 12/08/2026, et ça grandit : les compter ici pourrirait).
 
 Les prefabs correspondants vivent dans le bundle `prefabs/character/ui_effect` : dix,
 dont quatre partagés (`_Demi`, `_Dungeon`, `_Seasonal`, `_Synchro` que pose
