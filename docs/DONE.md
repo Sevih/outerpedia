@@ -7,6 +7,33 @@
 
 ## 2026-08-12
 
+- **Générateur `solver` : outerpedia alimente l'app desktop gear-solver (fin de
+  la dépendance au repo mort outerpediaV2)** — port fidèle de
+  `gear-solver/data/build.mjs` + `calc-stats.mjs` (~1500 l., la spec exécutable)
+  en `datagen/generators/solver.ts` + `solver-ingredients.ts` : **19 fichiers**
+  émis dans `data/generated/solver/` (committé/promu comme le reste), que l'app
+  téléchargera tels quels — plus aucune distillation côté client. Branché au
+  `datagen:build` standard ; la vue des sets vient du MÊME `buildEquipment()`
+  (source unique). Remplacements spécifiés : `effect_icon` curated supprimé (ISO
+  IconName couvre 100 %), prose des sets = desc du jeu OU synthèse « Label
+  +valeur » (libellés V2 exacts), `sub-ticks` recomposé depuis les pools
+  `ItemOptionTemplet` 105/106 (calibré à l'identique), `dmgStat`/`dmgSec`/
+  `noCrit` re-dérivés des tables brutes — scan S1/S2/S3 + Skill_8 (le
+  eff-scaling de Nella vit dans les buffs partagés `trancendent_8_owner_*`) +
+  Skill_22/23 (les swaps de Domine/Skadi/Anarky/Epsilon), PAS les skills backup
+  (Tamara), noCrit sur tout le kit (le `_passive` de Rhona est hors S1-S3).
+  VALIDÉ par deep-diff contre `gear-solver/data/derived` (étalon) : **12
+  fichiers identiques octet pour octet**, et tous les écarts expliqués table
+  brute à l'appui — ajouts du patch (Lambda/H.Delta/Saeran, armes 998/999),
+  armes 629/641 passées 5★→6★ par le jeu, et 6 scalings de la réf DISPARUS ou
+  nerfés dans le jeu actuel (Laine, Veronica ×2, Fatal, K.Tamamo eff 1.2,
+  Cindy 1.5→1 — balance patch, kits revérifiés buff par buff). `version.json`
+  = hash de contenu 12 hexa idempotent (builtAt repris si inchangé — clé
+  d'invalidation de cache de l'app). Le garde perso écarte 2400015 du solver
+  committé comme partout. Tests : `solver.test.ts` (10 cas — contrat de FORME
+  enums bruts/EN simple, cohérence gems↔options, courbes, version). 518/518,
+  TSC datagen + racine verts.
+
 - **Promote : les faux orphelins `damage/*` + `video-meta.json` ne crient plus**
   (question Sevih sur les ⚠ du `--apply`) — ces 7 fichiers sont des validés
   SANS équivalent extrait PAR CONSTRUCTION : `damage/` sort du pipeline dédié

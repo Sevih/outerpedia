@@ -42,6 +42,7 @@ import { buildMonsterSkills } from './generators/monster-skills';
 import { buildTranscend } from './extractor/transcend';
 import { buildSlugMap } from './lib/slug';
 import { buildEquipment } from './generators/equipment';
+import { buildSolver, type SolverSetsView } from './generators/solver';
 import { buildBosses } from './generators/bosses';
 import { buildItemSources } from './generators/sources';
 import { buildEnhanceRules } from './generators/enhance';
@@ -309,6 +310,14 @@ async function main(): Promise<void> {
   const bossIds = new Set(curatedBossIds(equipCurated));
   for (const s of Object.values(sources)) for (const b of s.bosses) bossIds.add(b);
   await writeJson('equipment/bosses.json', buildBosses([...bossIds].sort(), bossTitleKeys));
+
+  // SOLVER : les tables dérivées finies de l'app desktop gear-solver (téléchargées
+  // telles quelles depuis le repo — cf. datagen/generators/solver.ts). La vue des
+  // sets vient du MÊME buildEquipment() que ci-dessus (source unique).
+  mkdirSync(resolve(OUT, 'solver'), { recursive: true });
+  const solver = buildSolver({ setsView: equipment.sets as unknown as SolverSetsView });
+  for (const [name, data] of solver.files) await writeJson(`solver/${name}`, data);
+  await writeJson('solver/version.json', solver.version);
 
   console.log(
     `\nOK — ${Object.keys(charactersFile).length} persos, ${Object.keys(skillsFile).length} skills, ` +
