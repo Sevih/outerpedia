@@ -334,7 +334,9 @@ const fr: Record<TranslationKey, string> = {
   'tools.hero-tracker.itemUnit': 'objets',
   'tools.hero-tracker.axisAll': 'Tous',
   'tools.hero-tracker.piecesNote': 'Pièces — par héros, jamais mutualisées',
-  'tools.hero-tracker.skillHint': 'clic = actuel · maj+clic = cible',
+  'tools.hero-tracker.scaleHint': 'clic = actuel · maj+clic = objectif',
+  'tools.hero-tracker.now': 'Actuel',
+  'tools.hero-tracker.goal': 'Objectif',
   'tools.hero-tracker.settings': 'Réglages',
   'tools.hero-tracker.settingsFusion': 'Héros Core Fusion',
   'tools.hero-tracker.settingsFusionHint':

@@ -112,7 +112,9 @@ const LABEL_KEYS = [
   'itemUnit',
   'axisAll',
   'piecesNote',
-  'skillHint',
+  'scaleHint',
+  'now',
+  'goal',
 ] as const;
 
 export default async function HeroTracker({ lang }: { lang: Lang }) {

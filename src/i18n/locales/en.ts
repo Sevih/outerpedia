@@ -334,7 +334,9 @@ const en = {
   'tools.hero-tracker.itemUnit': 'items',
   'tools.hero-tracker.axisAll': 'All',
   'tools.hero-tracker.piecesNote': 'Pieces — per hero, never pooled',
-  'tools.hero-tracker.skillHint': 'click = current · shift+click = target',
+  'tools.hero-tracker.scaleHint': 'click = now · shift+click = goal',
+  'tools.hero-tracker.now': 'Now',
+  'tools.hero-tracker.goal': 'Goal',
   'tools.hero-tracker.settings': 'Settings',
   'tools.hero-tracker.settingsFusion': 'Core Fusion heroes',
   'tools.hero-tracker.settingsFusionHint':

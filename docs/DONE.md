@@ -7,6 +7,23 @@
 
 ## 2026-08-12
 
+- **`/hero-tracker` — « pas très compréhensible pour distinguer ce que l'on a de
+  ce que l'on cible » (Sevih, capture à l'appui)** — le vrai défaut : les deux
+  contrôles d'un axe (le champ, les paliers) ne disaient pas lequel portait
+  l'état et lequel portait la cible, et l'en-tête écrivait l'état en ACCENT et
+  la cible en gris — l'inverse de ce que montrait le bouton de palier
+  sélectionné. UN SEUL CODE COULEUR désormais, partout : ce qu'on possède est en
+  clair, ce qu'on vise est en accent. Chaque contrôle porte son rôle en toutes
+  lettres (« Actuel » / « Objectif »), et les échelles (transcendance, fusion,
+  skills) distinguent enfin TROIS états au lieu de deux gris jumeaux — acquis,
+  reste à faire (teinte accent), hors cible — le cran visé portant un liseré.
+  Au passage : le résumé replié suit le même code, la cible s'affiche même quand
+  le réglage « tout au max » la rend non saisissable (elle existe, elle vaut le
+  plafond), le rappel « clic = actuel · maj+clic = objectif » s'affiche sur les
+  trois échelles et non plus sur les seuls skills (`skillHint` → `scaleHint`),
+  et l'en-tête du palier de fusion cesse d'annoncer « 0 → 5 » alors que le 0
+  n'existe pas pour un fusionné qu'on possède.
+
 - **`/tools/hero-tracker` — V2 : le périmètre RÉEL du jeu (Sevih, en termes
   in-game)** — « matériaux pour monter un perso de 5 à 120 + les breakthrough
   105/110/120, les skills 1/2/3/**chain passive** de 1 à 5, l'XP d'affinité

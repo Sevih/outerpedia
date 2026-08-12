@@ -309,7 +309,9 @@ const zh: Record<TranslationKey, string> = {
   'tools.hero-tracker.itemUnit': '件',
   'tools.hero-tracker.axisAll': '全部',
   'tools.hero-tracker.piecesNote': '碎片 — 按英雄计，不可共用',
-  'tools.hero-tracker.skillHint': '点击 = 当前 · Shift+点击 = 目标',
+  'tools.hero-tracker.scaleHint': '点击 = 当前 · Shift+点击 = 目标',
+  'tools.hero-tracker.now': '当前',
+  'tools.hero-tracker.goal': '目标',
   'tools.hero-tracker.settings': '设置',
   'tools.hero-tracker.settingsFusion': '核心融合英雄',
   'tools.hero-tracker.settingsFusionHint':

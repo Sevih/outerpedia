@@ -323,7 +323,9 @@ const jp: Record<TranslationKey, string> = {
   'tools.hero-tracker.itemUnit': '個',
   'tools.hero-tracker.axisAll': 'すべて',
   'tools.hero-tracker.piecesNote': 'かけら — ヒーローごと、共用不可',
-  'tools.hero-tracker.skillHint': 'クリック=現在 · Shift+クリック=目標',
+  'tools.hero-tracker.scaleHint': 'クリック=現在 · Shift+クリック=目標',
+  'tools.hero-tracker.now': '現在',
+  'tools.hero-tracker.goal': '目標',
   'tools.hero-tracker.settings': '設定',
   'tools.hero-tracker.settingsFusion': 'コアフュージョンのヒーロー',
   'tools.hero-tracker.settingsFusionHint':

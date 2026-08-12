@@ -119,7 +119,9 @@ export interface HeroTrackerLabels {
   itemUnit: string;
   axisAll: string;
   piecesNote: string;
-  skillHint: string;
+  scaleHint: string;
+  now: string;
+  goal: string;
 }
 
 export interface HeroTrackerData {
@@ -913,13 +915,29 @@ function HeroCard({
     return [...set].sort((a, b) => a - b);
   }, [rules.eeEnchant]);
 
-  const summary = done
-    ? labels.doneHero
-    : [
-        `${labels.level} ${state.level}→${withTarget ? target.level : rules.xpCurve.length}`,
-        `${starLabel(steps[state.transcend])}→${starLabel(steps[withTarget ? target.transcend : steps.length - 1])}`,
-        labels.itemCount.replace('{count}', fmt(objects)),
-      ].join(' · ');
+  // Même code couleur que les axes dépliés : en clair ce qu'on a, en accent ce
+  // qu'on vise. Deux nombres nus séparés d'une flèche ne se distinguaient pas.
+  const aim = (from: string, to: string) => (
+    <>
+      <span className="text-content-strong">{from}</span>
+      <span className="text-content-subtle"> → </span>
+      <span className="text-accent">{to}</span>
+    </>
+  );
+  const summary = done ? (
+    labels.doneHero
+  ) : (
+    <>
+      {labels.level} {aim(`${state.level}`, `${withTarget ? target.level : rules.xpCurve.length}`)}
+      {' · '}
+      {aim(
+        starLabel(steps[state.transcend]),
+        starLabel(steps[withTarget ? target.transcend : steps.length - 1]),
+      )}
+      {' · '}
+      {labels.itemCount.replace('{count}', fmt(objects))}
+    </>
+  );
 
   return (
     <li
@@ -976,20 +994,25 @@ function HeroCard({
           <Field
             label={labels.level}
             value={`${state.level}`}
-            target={withTarget ? `${target.level}` : undefined}
+            target={`${withTarget ? target.level : rules.xpCurve.length}`}
           >
-            <div className="flex flex-wrap items-center gap-1.5">
-              <Stepper
-                value={state.level}
-                min={START_LEVEL}
-                max={rules.xpCurve.length}
-                onChange={(v) => onChange('state', { level: v })}
-              />
-              <Presets
-                values={jumps}
-                active={withTarget ? target.level : state.level}
-                onPick={(v) => onChange(withTarget ? 'target' : 'state', { level: v })}
-              />
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+              <Rail role={labels.now}>
+                <Stepper
+                  value={state.level}
+                  min={START_LEVEL}
+                  max={rules.xpCurve.length}
+                  onChange={(v) => onChange('state', { level: v })}
+                />
+              </Rail>
+              <Rail role={withTarget ? labels.goal : labels.now} aim={withTarget}>
+                <Presets
+                  values={jumps}
+                  active={withTarget ? target.level : state.level}
+                  aim={withTarget}
+                  onPick={(v) => onChange(withTarget ? 'target' : 'state', { level: v })}
+                />
+              </Rail>
             </div>
           </Field>
 
@@ -997,8 +1020,9 @@ function HeroCard({
           {hero.fusionLevels ? (
             <Field
               label={labels.fusionLevel}
-              value={`${state.fusion}`}
-              target={withTarget ? `${target.fusion}` : undefined}
+              value={`${Math.max(state.fusion, 1)}`}
+              target={`${withTarget ? Math.max(target.fusion, 1) : hero.fusionLevels.length}`}
+              hint={withTarget ? labels.scaleHint : undefined}
             >
               <Scale
                 // Les skills d'un fusionné DÉMARRENT au niveau 1 : posséder le
@@ -1014,7 +1038,7 @@ function HeroCard({
               />
             </Field>
           ) : (
-            <Field label={labels.skills} hint={withTarget ? labels.skillHint : undefined}>
+            <Field label={labels.skills} hint={withTarget ? labels.scaleHint : undefined}>
               <div className="space-y-1.5">
                 {Array.from({ length: SKILL_SLOTS }, (_, i) => (
                   <div key={i} className="flex items-center gap-2">
@@ -1050,7 +1074,8 @@ function HeroCard({
           <Field
             label={labels.transcend}
             value={starLabel(steps[state.transcend])}
-            target={withTarget ? starLabel(steps[target.transcend]) : undefined}
+            target={starLabel(steps[withTarget ? target.transcend : steps.length - 1])}
+            hint={withTarget ? labels.scaleHint : undefined}
           >
             <Scale
               values={steps.map((_, i) => i).filter((i) => i >= minTranscend)}
@@ -1086,20 +1111,25 @@ function HeroCard({
           <Field
             label={labels.affinity}
             value={`${state.affinity}`}
-            target={withTarget ? `${target.affinity}` : undefined}
+            target={`${withTarget ? target.affinity : rules.affinityCurve.length}`}
           >
-            <div className="flex flex-wrap items-center gap-1.5">
-              <Stepper
-                value={state.affinity}
-                min={1}
-                max={rules.affinityCurve.length}
-                onChange={(v) => onChange('state', { affinity: v })}
-              />
-              <Presets
-                values={AFFINITY_PRESETS.filter((n) => n <= rules.affinityCurve.length)}
-                active={withTarget ? target.affinity : state.affinity}
-                onPick={(v) => onChange(withTarget ? 'target' : 'state', { affinity: v })}
-              />
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+              <Rail role={labels.now}>
+                <Stepper
+                  value={state.affinity}
+                  min={1}
+                  max={rules.affinityCurve.length}
+                  onChange={(v) => onChange('state', { affinity: v })}
+                />
+              </Rail>
+              <Rail role={withTarget ? labels.goal : labels.now} aim={withTarget}>
+                <Presets
+                  values={AFFINITY_PRESETS.filter((n) => n <= rules.affinityCurve.length)}
+                  active={withTarget ? target.affinity : state.affinity}
+                  aim={withTarget}
+                  onPick={(v) => onChange(withTarget ? 'target' : 'state', { affinity: v })}
+                />
+              </Rail>
             </div>
           </Field>
 
@@ -1109,9 +1139,9 @@ function HeroCard({
               key={i}
               label={i === 0 ? labels.ee : labels.eeFusion}
               value={`+${state.ee[i] ?? 0}`}
-              target={withTarget ? `+${target.ee[i] ?? 0}` : undefined}
+              target={`+${withTarget ? (target.ee[i] ?? 0) : rules.eeEnchant.length}`}
             >
-              <div className="flex flex-wrap items-center gap-1.5">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
                 {hero.ee[i] && (
                   <EquipmentIcon
                     src={img.equipment(hero.ee[i].icon)}
@@ -1121,22 +1151,27 @@ function HeroCard({
                   />
                 )}
                 {/* Onze crans muets ne disaient rien : un pas à pas se lit. */}
-                <Stepper
-                  value={state.ee[i] ?? 0}
-                  min={0}
-                  max={rules.eeEnchant.length}
-                  onChange={(v) => onChange('state', { ee: replace(state.ee, i, v) })}
-                />
-                <Presets
-                  values={eeStops}
-                  active={withTarget ? (target.ee[i] ?? 0) : (state.ee[i] ?? 0)}
-                  format={(v) => `+${v}`}
-                  onPick={(v) =>
-                    onChange(withTarget ? 'target' : 'state', {
-                      ee: replace(withTarget ? target.ee : state.ee, i, v),
-                    })
-                  }
-                />
+                <Rail role={labels.now}>
+                  <Stepper
+                    value={state.ee[i] ?? 0}
+                    min={0}
+                    max={rules.eeEnchant.length}
+                    onChange={(v) => onChange('state', { ee: replace(state.ee, i, v) })}
+                  />
+                </Rail>
+                <Rail role={withTarget ? labels.goal : labels.now} aim={withTarget}>
+                  <Presets
+                    values={eeStops}
+                    active={withTarget ? (target.ee[i] ?? 0) : (state.ee[i] ?? 0)}
+                    aim={withTarget}
+                    format={(v) => `+${v}`}
+                    onPick={(v) =>
+                      onChange(withTarget ? 'target' : 'state', {
+                        ee: replace(withTarget ? target.ee : state.ee, i, v),
+                      })
+                    }
+                  />
+                </Rail>
               </div>
             </Field>
           ))}
@@ -1189,7 +1224,12 @@ function HeroCard({
   );
 }
 
-/** Un axe : intitulé, valeur courante → cible, et son contrôle. */
+/**
+ * Un axe : intitulé, « j'en suis là → je vise ça », et son contrôle.
+ *
+ * Un seul code couleur dans tout l'écran, sinon les deux nombres se confondent :
+ * ce qu'on POSSÈDE est écrit en clair, ce qu'on VISE est en accent.
+ */
 function Field({
   label,
   value,
@@ -1209,14 +1249,48 @@ function Field({
         <span className="text-content-muted text-xs">{label}</span>
         {hint && <span className="text-content-subtle font-mono text-[10px]">{hint}</span>}
         {value !== undefined && (
-          <span className="text-content-strong font-mono text-xs font-semibold">
-            <span className="text-accent">{value}</span>
-            {target !== undefined && <span className="text-content-muted"> → {target}</span>}
+          <span className="font-mono text-xs font-semibold">
+            <span className="text-content-strong">{value}</span>
+            {target !== undefined && (
+              <>
+                <span className="text-content-subtle"> → </span>
+                <span className="text-accent">{target}</span>
+              </>
+            )}
           </span>
         )}
       </div>
       {children}
     </div>
+  );
+}
+
+/**
+ * Étiquette de rôle collée au contrôle : « Actuel » devant le champ, « Objectif »
+ * devant les paliers. Sans elle, deux rangées de chiffres se ressemblent et on ne
+ * sait plus laquelle dit ce qu'on a.
+ */
+function Rail({
+  role,
+  aim = false,
+  children,
+}: {
+  role: string;
+  /** Ce contrôle pose la CIBLE — même accent que la cible dans l'en-tête. */
+  aim?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <span className="flex items-center gap-1.5">
+      <span
+        className={`font-mono text-[10px] tracking-wide uppercase ${
+          aim ? 'text-accent/80' : 'text-content-subtle'
+        }`}
+      >
+        {role}
+      </span>
+      {children}
+    </span>
   );
 }
 
@@ -1305,7 +1379,15 @@ function Scale({
     <div className="flex min-w-0 flex-1 gap-1">
       {values.map((v) => {
         const isReached = v <= current;
+        // Trois états, trois looks : ACQUIS (plein), RESTE À FAIRE (accent
+        // discret — la couleur de la cible partout ailleurs), HORS CIBLE (éteint).
+        // Deux gris presque identiques ne se distinguaient pas.
         const isAimed = v <= target;
+        const tint = isReached
+          ? reached
+          : isAimed
+            ? 'border-accent/40 bg-accent/10 text-accent/80'
+            : 'border-line-subtle bg-surface-sunken text-line';
         return (
           <button
             key={v}
@@ -1314,12 +1396,9 @@ function Scale({
             aria-label={String(render ? render(v) : v)}
             className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-px rounded-md border font-mono text-[11px] leading-none font-semibold transition-colors ${
               icon ? 'h-10' : 'h-9'
-            } ${
-              isReached
-                ? reached
-                : isAimed
-                  ? 'border-line bg-surface-sunken text-content-muted'
-                  : 'border-line-subtle bg-surface-sunken text-line'
+            } ${tint} ${
+              // Le cran visé porte un liseré, même s'il est déjà acquis.
+              withTarget && v === target ? 'ring-accent ring-1' : ''
             }`}
           >
             {icon?.(v, isReached)}
@@ -1368,14 +1447,20 @@ function Stepper({
 function Presets({
   values,
   active,
+  aim,
   onPick,
   format,
 }: {
   values: number[];
   active: number;
+  /** Ces paliers posent la CIBLE (accent) plutôt que l'état (clair). */
+  aim: boolean;
   onPick: (v: number) => void;
   format?: (v: number) => string;
 }) {
+  const picked = aim
+    ? 'border-accent bg-accent/15 text-accent font-semibold'
+    : 'border-line bg-surface-overlay text-content-strong font-semibold';
   return (
     <span className="flex flex-wrap gap-1">
       {values.map((v) => (
@@ -1385,7 +1470,7 @@ function Presets({
           onClick={() => onPick(v)}
           className={`h-9 min-w-10 rounded-lg border px-2 font-mono text-[11px] transition-colors ${
             active === v
-              ? 'border-accent bg-accent/15 text-accent font-semibold'
+              ? picked
               : 'border-line-subtle bg-surface-sunken text-content-muted hover:border-line'
           }`}
         >

@@ -316,7 +316,9 @@ const kr: Record<TranslationKey, string> = {
   'tools.hero-tracker.itemUnit': '개',
   'tools.hero-tracker.axisAll': '전체',
   'tools.hero-tracker.piecesNote': '조각 — 영웅별, 합산 불가',
-  'tools.hero-tracker.skillHint': '클릭 = 현재 · Shift+클릭 = 목표',
+  'tools.hero-tracker.scaleHint': '클릭 = 현재 · Shift+클릭 = 목표',
+  'tools.hero-tracker.now': '현재',
+  'tools.hero-tracker.goal': '목표',
   'tools.hero-tracker.settings': '설정',
   'tools.hero-tracker.settingsFusion': '코어 퓨전 영웅',
   'tools.hero-tracker.settingsFusionHint':
