@@ -21,6 +21,12 @@
   des tags CURÉS (aucune colonne du jeu ne dit comment un héros s'obtient — seul
   `data/curated/characters.json` le sait) ; le nom du héros et le « ou N
   doublons » vivent dans l'infobulle, l'icône suffit à le reconnaître.
+  DEUX familles à part, pas une (correction de Sevih) : « limité » au sens du
+  joueur couvre TOUT ce qui ne revient pas — `limited` + `seasonal` + `collab`,
+  soit 13 héros — là où les tags curés les distinguent par occasion ; le premium
+  (12) reste achetable et fait son propre groupe. Restent 100 héros classés par
+  élément. Au passage, « ajouter un héros » ne propose plus ceux déjà suivis :
+  ils vivent dans la liste au-dessus, avec leur bouton pour en sortir.
 
 - **`/hero-tracker` — les pièces portent enfin leur icône (`img.piece`, genre
   `piece-icon` du datagen que Sevih venait de construire)** — l'outil écrivait

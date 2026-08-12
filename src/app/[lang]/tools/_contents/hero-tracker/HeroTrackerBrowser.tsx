@@ -119,7 +119,8 @@ export interface HeroTrackerLabels {
   itemUnit: string;
   axisAll: string;
   piecesNote: string;
-  piecesApart: string;
+  piecesPremium: string;
+  piecesLimited: string;
   scaleHint: string;
   now: string;
   goal: string;
@@ -179,9 +180,16 @@ const LONG_PRESS_MS = 450;
 /**
  * Héros dont les pièces NE tombent PAS dans les donjons d'élément : elles ne se
  * farment pas, elles s'achètent ou se gagnent en bannière. Les grouper avec un
- * élément promettrait une source qui n'existe pas. Tags curés (`data/curated`).
+ * élément promettrait une source qui n'existe pas.
+ *
+ * Deux familles, et pas une : « limité » au sens du joueur couvre TOUT ce qui ne
+ * revient pas — festival, saisonnier, collaboration — là où les tags curés les
+ * distinguent par occasion. Le premium, lui, reste achetable.
  */
-const PIECES_APART = ['premium', 'limited'];
+const PIECES_APART: { key: string; tags: string[] }[] = [
+  { key: 'premium', tags: ['premium'] },
+  { key: 'limited', tags: ['limited', 'seasonal', 'collab'] },
+];
 
 /**
  * Paliers d'affinité où l'on s'arrête vraiment : 10 débloque l'équipement
@@ -500,11 +508,14 @@ export function HeroTrackerBrowser({
     () =>
       heroes.filter(
         (h) =>
+          // Un héros déjà suivi n'a rien à faire dans « ajouter » : il vit
+          // dans la liste au-dessus, avec son bouton pour en sortir.
+          !tracked[h.id] &&
           !hidden.has(h.id) &&
           (!element || h.element === element) &&
           (!q || h.searchNames.some((n) => n.toLowerCase().includes(q))),
       ),
-    [heroes, hidden, element, q],
+    [heroes, tracked, hidden, element, q],
   );
 
   return (
@@ -584,7 +595,6 @@ export function HeroTrackerBrowser({
         {picking && (
           <HeroPicker
             rows={pickable}
-            tracked={tracked}
             query={query}
             onQuery={setQuery}
             element={element}
@@ -632,9 +642,9 @@ function SummaryPanel({
   };
   /**
    * Les pièces se farment par ÉLÉMENT : on les groupe comme on les récolte, du
-   * plus gros besoin au plus petit. Les héros premium et festival n'ont pas
-   * cette porte de sortie — leurs pièces vivent à part, sinon la colonne « feu »
-   * promettrait un donjon qui ne les donnera jamais.
+   * plus gros besoin au plus petit. Premium et limités n'ont pas cette porte de
+   * sortie et font leurs propres groupes — sinon la colonne « feu » promettrait
+   * un donjon qui ne les donnera jamais.
    */
   const pieceGroups = useMemo(() => {
     const rows = Object.entries(total.pieces).map(([id, { pieces: count, steps }]) => ({
@@ -643,12 +653,12 @@ function SummaryPanel({
       steps,
       hero: heroById.get(id),
     }));
-    const apart = rows.filter((r) => r.hero?.tags?.some((t) => PIECES_APART.includes(t)));
-    const byElement = rows.filter((r) => !apart.includes(r));
+    const family = (r: (typeof rows)[number]) =>
+      PIECES_APART.find((f) => r.hero?.tags?.some((t) => f.tags.includes(t)))?.key;
     const order = (a: { count: number }, b: { count: number }) => b.count - a.count;
     const groups: {
       key: string;
-      /** `null` = le groupe à part : aucun donjon d'élément derrière lui. */
+      /** `null` = un groupe à part : aucun donjon d'élément derrière lui. */
       element: string | null;
       label: string;
       rows: typeof rows;
@@ -656,16 +666,22 @@ function SummaryPanel({
       key: el,
       element: el,
       label: elementNames[el] ?? el,
-      rows: byElement.filter((r) => r.hero?.element === el).sort(order),
+      rows: rows.filter((r) => !family(r) && r.hero?.element === el).sort(order),
     }));
-    groups.push({
-      key: 'apart',
-      element: null,
-      label: labels.piecesApart,
-      rows: apart.sort(order),
-    });
+    const apartLabel: Record<string, string> = {
+      premium: labels.piecesPremium,
+      limited: labels.piecesLimited,
+    };
+    for (const f of PIECES_APART) {
+      groups.push({
+        key: f.key,
+        element: null,
+        label: apartLabel[f.key],
+        rows: rows.filter((r) => family(r) === f.key).sort(order),
+      });
+    }
     return groups.filter((g) => g.rows.length > 0);
-  }, [total.pieces, heroById, elementNames, labels.piecesApart]);
+  }, [total.pieces, heroById, elementNames, labels.piecesPremium, labels.piecesLimited]);
 
   return (
     <details
@@ -1628,7 +1644,6 @@ const ELEMENT_TEXT: Record<string, string> = {
 
 function HeroPicker({
   rows,
-  tracked,
   query,
   onQuery,
   element,
@@ -1637,7 +1652,6 @@ function HeroPicker({
   labels,
 }: {
   rows: HeroRow[];
-  tracked: Record<string, HeroEntry>;
   query: string;
   onQuery: (v: string) => void;
   element: string | null;
@@ -1645,13 +1659,12 @@ function HeroPicker({
   onToggle: (hero: HeroRow) => void;
   labels: HeroTrackerLabels;
 }) {
-  const untracked = rows.filter((h) => !tracked[h.id]).length;
   return (
     <div className="border-line-subtle bg-surface-sunken space-y-2.5 rounded-xl border p-3">
       <div className="flex flex-wrap items-center gap-2">
         <h3 className="text-content-strong text-sm font-semibold">{labels.addHero}</h3>
         <span className="text-content-subtle font-mono text-[11px]">
-          {labels.untracked.replace('{count}', String(untracked))}
+          {labels.untracked.replace('{count}', String(rows.length))}
         </span>
         <div className="flex-1" />
         <input
@@ -1696,9 +1709,7 @@ function HeroPicker({
               type="button"
               onClick={() => onToggle(hero)}
               title={hero.name}
-              className={`relative block w-full transition-opacity ${
-                tracked[hero.id] ? 'opacity-45' : 'hover:brightness-110'
-              }`}
+              className="block w-full hover:brightness-110"
             >
               <CharacterPortrait
                 id={hero.id}
@@ -1709,11 +1720,6 @@ function HeroPicker({
                 size={44}
                 showName={false}
               />
-              {tracked[hero.id] && (
-                <span className="bg-success text-accent-fg absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full text-[10px] font-bold">
-                  ✓
-                </span>
-              )}
             </button>
           </li>
         ))}
