@@ -58,12 +58,25 @@ const RULES: GrowthRules = {
 
 const HERO: TrackedHero = { id: '2000118', rarity: 3, element: 'water' };
 
+/** Le même héros, mais en version Core Fusion (barème solidaire, pas de manuels). */
+const FUSED: TrackedHero = {
+  id: '2700118',
+  rarity: 3,
+  element: 'water',
+  fusionLevels: [
+    { level: 1, cost: { item: item('core', 'Fusion-Type Core'), count: 300 } },
+    { level: 2, cost: { item: item('core', 'Fusion-Type Core'), count: 150 } },
+    { level: 3, cost: { item: item('core', 'Fusion-Type Core'), count: 150 } },
+  ],
+};
+
 const progress = (over: Partial<HeroProgress> = {}): HeroProgress => ({
   level: 1,
-  skills: [1, 1, 1],
+  skills: [1, 1, 1, 1],
+  fusion: 0,
   affinity: 1,
   transcend: 0,
-  ee: 0,
+  ee: [0],
   ...over,
 });
 
@@ -99,21 +112,45 @@ describe('heroNeed — niveau', () => {
 });
 
 describe('heroNeed — skills', () => {
-  it('additionne les paliers franchis de CHAQUE slot', () => {
-    const n = heroNeed(HERO, progress(), progress({ skills: [3, 2, 1] }), RULES);
-    // slot 1 : niveaux 2+3 (3+5 manuels) ; slot 2 : niveau 2 (3) ; slot 3 : rien.
-    expect(n.items.manual1).toBe(11);
-    expect(n.gold).toBe(70000);
+  it('additionne les paliers franchis des QUATRE slots (chain passive incluse)', () => {
+    const n = heroNeed(HERO, progress(), progress({ skills: [3, 2, 1, 2] }), RULES);
+    // slot 1 : niveaux 2+3 (3+5) ; slot 2 : niveau 2 (3) ; slot 4 : niveau 2 (3).
+    expect(n.items.manual1).toBe(14);
+    expect(n.gold).toBe(90000);
   });
 
   it('un slot déjà au niveau visé ne coûte rien', () => {
     const n = heroNeed(
       HERO,
-      progress({ skills: [3, 3, 3] }),
-      progress({ skills: [3, 3, 3] }),
+      progress({ skills: [3, 3, 3, 3] }),
+      progress({ skills: [3, 3, 3, 3] }),
       RULES,
     );
     expect(n.items.manual1).toBeUndefined();
+  });
+});
+
+describe('heroNeed — Core Fusion', () => {
+  it('les skills se paient en cores, PAS en manuels — et le palier 1 est le déblocage', () => {
+    const n = heroNeed(FUSED, progress({ fusion: 0 }), progress({ fusion: 3 }), RULES);
+    expect(n.items.core).toBe(600); // 300 (déblocage) + 150 + 150
+    expect(n.items.manual1).toBeUndefined();
+    expect(n.gold).toBe(0);
+  });
+
+  it('un fusionné déjà débloqué ne repaie pas les 300', () => {
+    const n = heroNeed(FUSED, progress({ fusion: 1 }), progress({ fusion: 3 }), RULES);
+    expect(n.items.core).toBe(300);
+  });
+
+  it('les slots saisis sur un fusionné sont IGNORÉS (son barème est solidaire)', () => {
+    const n = heroNeed(
+      FUSED,
+      progress({ fusion: 1, skills: [1, 1, 1, 1] }),
+      progress({ fusion: 1, skills: [5, 5, 5, 5] }),
+      RULES,
+    );
+    expect(hasWork(n)).toBe(false);
   });
 });
 
@@ -123,31 +160,40 @@ describe('heroNeed — affinité, transcendance, EE', () => {
     expect(n.affinityPoints).toBe(6500); // 7500 − 1000
   });
 
-  it('transcendance : fragments du héros + gold des paliers franchis', () => {
+  it('transcendance : pièces du héros, gold, et le NOMBRE d’étapes (= doublons)', () => {
     const n = heroNeed(HERO, progress({ transcend: 0 }), progress({ transcend: 2 }), RULES);
-    expect(n.fragments).toBe(400); // 150 + 250
+    expect(n.pieces).toBe(400); // 150 + 250
+    expect(n.transcendSteps).toBe(2);
     expect(n.gold).toBe(30000);
   });
 
   it('transcendance : une cible au-delà de l’échelle ne fabrique pas de palier', () => {
     const n = heroNeed(HERO, progress({ transcend: 0 }), progress({ transcend: 99 }), RULES);
-    expect(n.fragments).toBe(400);
+    expect(n.pieces).toBe(400);
+    expect(n.transcendSteps).toBe(2);
   });
 
   it('EE : matériaux des paliers franchis', () => {
-    const n = heroNeed(HERO, progress({ ee: 1 }), progress({ ee: 2 }), RULES);
+    const n = heroNeed(HERO, progress({ ee: [1] }), progress({ ee: [2] }), RULES);
     expect(n.items.hammer).toBe(10);
     expect(n.gold).toBe(200000);
+  });
+
+  it('EE : un fusionné en porte DEUX, chacun compté pour lui-même', () => {
+    const n = heroNeed(FUSED, progress({ ee: [2, 0] }), progress({ ee: [2, 2] }), RULES);
+    // Le premier EE est déjà au max visé ; seul le second (0 → 2) coûte.
+    expect(n.items.hammer).toBe(15);
+    expect(n.gold).toBe(300000);
   });
 });
 
 describe('accountNeed — agrégation', () => {
-  it('additionne les items, garde les fragments PAR héros, ignore les héros à jour', () => {
-    const a = heroNeed(HERO, progress(), progress({ skills: [2, 1, 1], transcend: 1 }), RULES);
+  it('additionne les items, garde les pièces PAR héros, ignore les héros à jour', () => {
+    const a = heroNeed(HERO, progress(), progress({ skills: [2, 1, 1, 1], transcend: 1 }), RULES);
     const b = heroNeed(
       { id: '2000003', rarity: 3, element: 'water' },
       progress(),
-      progress({ skills: [2, 1, 1] }),
+      progress({ skills: [2, 1, 1, 1] }),
       RULES,
     );
     const idle = heroNeed(
@@ -159,7 +205,7 @@ describe('accountNeed — agrégation', () => {
 
     const total = accountNeed([a, b, idle]);
     expect(total.items.manual1).toBe(6); // 3 + 3
-    expect(total.fragments).toEqual({ '2000118': 150 });
+    expect(total.pieces).toEqual({ '2000118': { pieces: 150, steps: 1 } });
     expect(total.heroes.map((h) => h.heroId)).toEqual(['2000118', '2000003']);
   });
 });
@@ -189,5 +235,18 @@ describe('foodBreakdown / giftBreakdown — conversion en items', () => {
     const out = giftBreakdown(200, RULES.gifts);
     expect(out).toHaveLength(1);
     expect(out[0].count).toBe(2);
+  });
+
+  it('bonus « cadeau préféré » : le même besoin coûte moins de cadeaux', () => {
+    const plain = giftBreakdown(1500, RULES.gifts, 'present_01');
+    const bonus = giftBreakdown(1500, RULES.gifts, 'present_01', 0.5);
+    expect(plain.find((b) => b.entry.id === 'g500')?.count).toBe(3); // 3 × 500
+    expect(bonus.find((b) => b.entry.id === 'g500')?.count).toBe(2); // 2 × 750
+  });
+
+  it('le bonus n’a de sens que sur un type préféré : sans type, taux de base', () => {
+    expect(giftBreakdown(1000, RULES.gifts, undefined, 0.5)).toEqual(
+      giftBreakdown(1000, RULES.gifts),
+    );
   });
 });

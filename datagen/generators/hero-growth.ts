@@ -27,6 +27,11 @@
  *    TEXTE localisé de l'item (« …increase their Affinity level by 100 »), donc
  *    on les dérive de la description ANGLAISE avec un motif strict — et on jette
  *    si le motif ne matche plus, plutôt que de servir un barème muet et faux.
+ *  • `fusion` — Core Fusion : couple (base → fusionné), étoile de transcendance
+ *    exigée sur la base, et coût de chaque palier en Fusion-Type Core
+ *    (`CharacterFusionTemplet` + `CharacterFusionLevelTemplet`). Le déblocage est
+ *    le palier 1 ; au-delà, TOUS les skills montent ENSEMBLE d'un cran — la table
+ *    le dit colonne par colonne et le générateur le VÉRIFIE (cf. buildFusion).
  *
  * Les trois derniers servent l'outil de suivi de compte (`hero-tracker`), les
  * quatre premiers le guide « Growth Systems » — même domaine, même fichier :
@@ -96,6 +101,26 @@ export interface GiftItem extends ItemRef {
   presentType: string;
 }
 
+/**
+ * Un palier de Core Fusion. Le palier 1 est le DÉBLOCAGE (la fusion elle-même) ;
+ * les suivants montent d'un cran le niveau COMMUN à tous les skills du fusionné —
+ * un héros Core Fusion n'a pas de slots à monter séparément, ni de manuels.
+ */
+export interface FusionLevelStep {
+  /** 1 (déblocage) → 5. */
+  level: number;
+  cost: ItemCost;
+}
+
+/** Un couple base → fusionné. On ne possède JAMAIS les deux : la fusion remplace. */
+export interface FusionEntry {
+  baseId: string;
+  fusionId: string;
+  /** Étape de transcendance exigée sur la base (`star` interne de `transcend.json`). */
+  requiredStar: number;
+  levels: FusionLevelStep[];
+}
+
 export interface HeroGrowthData {
   limitBreak: Record<string, LimitBreakStep[]>;
   skillUpgrade: Record<string, SkillUpgradeRow[]>;
@@ -106,6 +131,7 @@ export interface HeroGrowthData {
   /** Points d'affinité CUMULÉS pour le niveau n : index `n - 1` (niveau 1 = 0). */
   affinityCurve: number[];
   gifts: GiftItem[];
+  fusion: FusionEntry[];
 }
 
 /** Résout une réf d'item depuis le catalogue (jette si absent — SSG strict). */
@@ -268,6 +294,56 @@ function buildGifts(catalog: Record<string, CatalogEntry>): GiftItem[] {
   return out.sort((a, b) => a.points - b.points || a.id.localeCompare(b.id));
 }
 
+/** Slots de skill qu'un palier de fusion monte SOLIDAIREMENT (le 23 = passif de fusion). */
+const FUSION_SKILL_COLUMNS = ['Skill_1_Level', 'Skill_2_Level', 'Skill_3_Level', 'Skill_4_Level'];
+
+/**
+ * Couples de Core Fusion et coût de leurs paliers.
+ *
+ * L'invariant VÉRIFIÉ ici — chaque colonne de skill vaut le numéro du palier —
+ * est ce qui autorise l'outil de suivi à n'offrir qu'UN curseur pour les skills
+ * d'un fusionné. Le jour où un Core Fusion monterait ses skills séparément, ce
+ * throw le dira au lieu de laisser l'outil sous-compter en silence.
+ */
+function buildFusion(catalog: Record<string, CatalogEntry>): FusionEntry[] {
+  const byGroup = new Map<string, FusionLevelStep[]>();
+  for (const r of loadTable('CharacterFusionLevelTemplet')) {
+    const group = String(r.FusionGroupID);
+    const level = num(r.FusionLevel);
+    const id = String(r.RequireItemID ?? '0');
+    const count = num(r.RequireItemValue);
+    if (id === '0' || count <= 0) {
+      throw new Error(`hero-growth : palier de fusion ${group}/${level} sans coût`);
+    }
+    for (const col of FUSION_SKILL_COLUMNS) {
+      if (num(r[col]) !== level) {
+        throw new Error(
+          `hero-growth : fusion ${group} palier ${level} — ${col}=${r[col]}, les skills ne montent plus ensemble`,
+        );
+      }
+    }
+    const list = byGroup.get(group) ?? [];
+    list.push({ level, cost: { item: itemRef(id, catalog), count } });
+    byGroup.set(group, list);
+  }
+
+  const out: FusionEntry[] = [];
+  for (const r of loadTable('CharacterFusionTemplet')) {
+    const levels = byGroup.get(String(r.FusionGroupID));
+    if (!levels?.length) {
+      throw new Error(`hero-growth : fusion ${r.ChangeCharID} sans aucun palier`);
+    }
+    out.push({
+      baseId: String(r.CharacterID),
+      fusionId: String(r.ChangeCharID),
+      requiredStar: num(r.CharacterTransStar),
+      levels: [...levels].sort((a, b) => a.level - b.level),
+    });
+  }
+  if (!out.length) throw new Error('hero-growth : aucun couple de Core Fusion trouvé');
+  return out.sort((a, b) => a.fusionId.localeCompare(b.fusionId));
+}
+
 export function buildHeroGrowth(): HeroGrowthData {
   const catalog = buildItemCatalog();
   const exp = loadTable('ExpCharacterTemplet');
@@ -279,6 +355,7 @@ export function buildHeroGrowth(): HeroGrowthData {
     xpCurve: cumulativeCurve(exp, 'TotalExp'),
     affinityCurve: cumulativeCurve(exp, 'TrustExp'),
     gifts: buildGifts(catalog),
+    fusion: buildFusion(catalog),
   };
 }
 
@@ -313,4 +390,9 @@ if (isMain(import.meta.url)) {
     `affinityCurve : ${d.affinityCurve.length} niveaux, max ${d.affinityCurve[d.affinityCurve.length - 1].toLocaleString('en')} pts`,
   );
   console.log('gifts :', d.gifts.map((g) => `${g.name.en}=${g.points}`).join(', '));
+  for (const f of d.fusion)
+    console.log(
+      `fusion ${f.baseId}→${f.fusionId} (★${f.requiredStar}) :`,
+      f.levels.map((l) => `L${l.level} ${l.cost.item.name.en}×${l.cost.count}`).join(' | '),
+    );
 }

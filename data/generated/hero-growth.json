@@ -1484,5 +1484,559 @@
       "points": 1000,
       "presentType": "present_05"
     }
+  ],
+  "fusion": [
+    {
+      "baseId": "2000003",
+      "fusionId": "2700003",
+      "requiredStar": 6,
+      "levels": [
+        {
+          "level": 1,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 300
+          }
+        },
+        {
+          "level": 2,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 3,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 4,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 5,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        }
+      ]
+    },
+    {
+      "baseId": "2000005",
+      "fusionId": "2700005",
+      "requiredStar": 6,
+      "levels": [
+        {
+          "level": 1,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 300
+          }
+        },
+        {
+          "level": 2,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 3,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 4,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 5,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        }
+      ]
+    },
+    {
+      "baseId": "2000037",
+      "fusionId": "2700037",
+      "requiredStar": 6,
+      "levels": [
+        {
+          "level": 1,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 300
+          }
+        },
+        {
+          "level": 2,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 3,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 4,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 5,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        }
+      ]
+    },
+    {
+      "baseId": "2000043",
+      "fusionId": "2700043",
+      "requiredStar": 6,
+      "levels": [
+        {
+          "level": 1,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 300
+          }
+        },
+        {
+          "level": 2,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 3,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 4,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 5,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        }
+      ]
+    },
+    {
+      "baseId": "2000056",
+      "fusionId": "2700056",
+      "requiredStar": 6,
+      "levels": [
+        {
+          "level": 1,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 300
+          }
+        },
+        {
+          "level": 2,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 3,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 4,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 5,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        }
+      ]
+    },
+    {
+      "baseId": "2000070",
+      "fusionId": "2700070",
+      "requiredStar": 6,
+      "levels": [
+        {
+          "level": 1,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 300
+          }
+        },
+        {
+          "level": 2,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 3,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 4,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        },
+        {
+          "level": 5,
+          "cost": {
+            "item": {
+              "id": "60001",
+              "name": {
+                "en": "Fusion-Type Core",
+                "jp": "フュージョン型コア",
+                "kr": "융합형 코어",
+                "zh": "融合型核心"
+              },
+              "icon": "TI_Item_CoreMerged",
+              "grade": "unique"
+            },
+            "count": 150
+          }
+        }
+      ]
+    }
   ]
 }

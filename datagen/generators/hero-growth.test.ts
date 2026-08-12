@@ -194,6 +194,27 @@ describe('hero-growth.json — invariants', () => {
     ]);
   });
 
+  it('fusion : paliers 1→5 continus, coût > 0, couple base ≠ fusionné', () => {
+    const bad: string[] = [];
+    expect(h.fusion.length).toBeGreaterThan(0);
+    for (const f of h.fusion) {
+      if (f.baseId === f.fusionId) bad.push(`${f.fusionId} : fusionne sur lui-même`);
+      if (f.requiredStar <= 0) bad.push(`${f.fusionId} : étoile requise ${f.requiredStar}`);
+      f.levels.forEach((l, i) => {
+        if (l.level !== i + 1) bad.push(`${f.fusionId} : palier ${l.level} en position ${i + 1}`);
+        if (l.cost.count <= 0) bad.push(`${f.fusionId} L${l.level} : coût ${l.cost.count}`);
+        if (!itemIds.has(l.cost.item.id))
+          bad.push(`${f.fusionId} L${l.level} : item ${l.cost.item.id} absent`);
+      });
+    }
+    expect(bad).toEqual([]);
+    // Le premier palier EST le déblocage, et il coûte plus cher que les suivants :
+    // l'outil s'appuie dessus pour distinguer « pas encore fusionné » de « à monter ».
+    for (const f of h.fusion) {
+      expect(f.levels[0].cost.count).toBeGreaterThan(f.levels[1].cost.count);
+    }
+  });
+
   it('chaque item de coût est résolu (id dans items.json, name/icon/grade)', () => {
     const bad: string[] = [];
     const chk = (id: string, name: { en?: string }, where: string) => {
@@ -205,6 +226,8 @@ describe('hero-growth.json — invariants', () => {
     for (const [k, grp] of Object.entries(h.specialEquip))
       for (const r of grp) for (const m of r.materials) chk(m.item.id, m.item.name, k);
     for (const f of h.xpFood) chk(f.id, f.name, 'xpFood');
+    for (const f of h.fusion)
+      for (const l of f.levels) chk(l.cost.item.id, l.cost.item.name, `fusion ${f.fusionId}`);
     expect(bad).toEqual([]);
   });
 });

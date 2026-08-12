@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useMemo, useState } from 'react';
+import type { FusionLevelStep } from '@datagen/generators/hero-growth';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import { useStoredState, type StoreSpec } from '@/lib/client-storage';
 import {
@@ -10,6 +11,7 @@ import {
   hasWork,
   heroNeed,
   type GrowthRules,
+  type HeroNeed,
   type HeroProgress,
   type TrackedHero,
   type TranscendCost,
@@ -24,6 +26,14 @@ import {
  * de sa clé dans l'état VAUT suivi.
  */
 
+/** Un palier de transcendance tel qu'il s'AFFICHE (l'étoile du jeu, pas l'index). */
+export interface TranscendStep extends TranscendCost {
+  /** Étoiles pleines affichées en jeu (1→6). */
+  showStar: number;
+  /** Petits « + » au-delà de l'étoile pleine (4★+1…). */
+  starPlus: number;
+}
+
 export interface HeroRow {
   id: string;
   slug: string;
@@ -34,6 +44,12 @@ export interface HeroRow {
   /** Type de cadeau préféré (`present_01`…) — oriente la conversion en cadeaux. */
   gift?: string;
   searchNames: string[];
+  /** Paliers de Core Fusion si CE héros est un fusionné. */
+  fusionLevels?: FusionLevelStep[];
+  /** Le fusionné qui remplace ce héros de base, si le jeu en propose un. */
+  fusionId?: string;
+  /** Le héros de base dont ce fusionné est issu. */
+  baseId?: string;
 }
 
 export interface ItemAsset {
@@ -52,19 +68,29 @@ export interface HeroTrackerLabels {
   target: string;
   level: string;
   skills: string;
+  fusionLevel: string;
   affinity: string;
   transcend: string;
   ee: string;
+  eeFusion: string;
   needTitle: string;
   needEmpty: string;
   gold: string;
   xp: string;
   affinityPoints: string;
-  fragments: string;
+  pieces: string;
+  dupes: string;
   giftNote: string;
+  giftNoteBonus: string;
   reset: string;
   resetConfirm: string;
   trackedCount: string;
+  settings: string;
+  settingsFusion: string;
+  settingsFusionHint: string;
+  base: string;
+  coreFusion: string;
+  preferredGift: string;
 }
 
 export interface HeroTrackerData {
@@ -72,10 +98,10 @@ export interface HeroTrackerData {
   rules: Omit<GrowthRules, 'transcendLadder'>;
   /** Échelles de transcendance : barème par rareté + paliers propres à un héros. */
   transcend: {
-    byStar: Record<string, TranscendCost[]>;
-    overrides: Record<string, TranscendCost[]>;
+    byStar: Record<string, TranscendStep[]>;
+    overrides: Record<string, TranscendStep[]>;
   };
-  /** Items référencés par les coûts (manuels, mémoires, matériaux EE). */
+  /** Items référencés par les coûts (manuels, mémoires, matériaux EE, cores). */
   items: Record<string, ItemAsset>;
   labels: HeroTrackerLabels;
 }
@@ -86,45 +112,63 @@ interface HeroEntry {
   target: HeroProgress;
 }
 
-type TrackerState = Record<string, HeroEntry>;
+interface TrackerState {
+  heroes: Record<string, HeroEntry>;
+  /** id du héros de BASE → on possède sa Core Fusion plutôt que lui. */
+  fused: Record<string, boolean>;
+  /** Compter les cadeaux au tarif du cadeau PRÉFÉRÉ (+50 %). */
+  preferredGift: boolean;
+}
+
+/** Schéma v1 : les entrées à plat, un seul EE, trois slots de skill. */
+interface LegacyEntry {
+  state: Omit<HeroProgress, 'ee' | 'fusion'> & { ee: number };
+  target: Omit<HeroProgress, 'ee' | 'fusion'> & { ee: number };
+}
+
+const SKILL_SLOTS = 4;
+const MAX_SKILL = 5;
+/** Un héros se recrute au niveau 5 : rien en dessous n'existe en jeu. */
+const START_LEVEL = 5;
+/** Bonus du cadeau préféré, curé dans le guide heroes-growth (aucune table). */
+const PREFERRED_GIFT_BONUS = 0.5;
 
 const SPEC: StoreSpec<TrackerState> = {
   key: 'outerpedia:hero-tracker',
-  version: 1,
-  fallback: {},
+  version: 2,
+  fallback: { heroes: {}, fused: {}, preferredGift: false },
+  // v1 ignorait la chain passive, les Core Fusion et le second EE. Une saisie
+  // déjà faite vaut mieux qu'un écran remis à zéro : on la relève.
+  migrate: (data, from) => {
+    if (from !== 1 || typeof data !== 'object' || data === null) return undefined;
+    const lift = (p: LegacyEntry['state']): HeroProgress => ({
+      level: p.level,
+      skills: Array.from({ length: SKILL_SLOTS }, (_, i) => p.skills?.[i] ?? 1),
+      fusion: 0,
+      affinity: p.affinity,
+      transcend: p.transcend,
+      ee: [p.ee ?? 0],
+    });
+    const heroes: Record<string, HeroEntry> = {};
+    for (const [id, e] of Object.entries(data as Record<string, LegacyEntry>)) {
+      if (!e?.state || !e?.target) continue;
+      heroes[id] = { state: lift(e.state), target: lift(e.target) };
+    }
+    return { heroes, fused: {}, preferredGift: false };
+  },
 };
 
-const SKILL_SLOTS = 3;
-const MAX_SKILL = 5;
-
-/**
- * Défauts d'un héros qu'on commence à suivre. La CIBLE ne vise pas le maximum
- * partout : niveau 100 (le palier avant le limit break, qui coûte des mémoires),
- * skills au max — le vrai levier de puissance —, affinité 20 (premier palier de
- * stats). Transcendance et EE partent ÉGALES à l'état : elles dépendent du gacha,
- * s'en fixer une cible d'office afficherait un besoin que personne n'a demandé.
- */
-function defaultEntry(): HeroEntry {
-  const state: HeroProgress = {
-    level: 1,
-    skills: Array(SKILL_SLOTS).fill(1),
-    affinity: 1,
-    transcend: 0,
-    ee: 0,
-  };
-  return {
-    state,
-    target: { ...state, level: 100, skills: Array(SKILL_SLOTS).fill(MAX_SKILL), affinity: 20 },
-  };
-}
-
 export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: HeroTrackerData) {
-  const [tracked, setTracked, ready] = useStoredState(SPEC);
+  const [store, setStore, ready] = useStoredState(SPEC);
   const [query, setQuery] = useState('');
   const [onlyTracked, setOnlyTracked] = useState(false);
 
+  const tracked = store.heroes;
+
+  const heroById = useMemo(() => new Map(heroes.map((h) => [h.id, h])), [heroes]);
+
   const ladder = useCallback(
-    (hero: TrackedHero): TranscendCost[] =>
+    (hero: TrackedHero): TranscendStep[] =>
       transcend.overrides[hero.id] ?? transcend.byStar[String(hero.rarity)] ?? [],
     [transcend],
   );
@@ -134,49 +178,112 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
     [rules, ladder],
   );
 
+  /** La forme d'un héros pour le moteur — c'est ELLE qui porte le régime de fusion. */
+  const asTracked = useCallback(
+    (h: HeroRow): TrackedHero => ({
+      id: h.id,
+      rarity: h.rarity,
+      element: h.element,
+      ...(h.fusionLevels ? { fusionLevels: h.fusionLevels } : {}),
+    }),
+    [],
+  );
+
+  /**
+   * Un couple base/fusion ne se possède JAMAIS entier : la version non retenue
+   * disparaît du roster (règle du jeu, réglable dans les settings).
+   */
+  const hidden = useMemo(() => {
+    const out = new Set<string>();
+    for (const h of heroes) {
+      if (!h.fusionId) continue;
+      out.add(store.fused[h.id] ? h.id : h.fusionId);
+    }
+    return out;
+  }, [heroes, store.fused]);
+
+  const fusionPairs = useMemo(
+    () =>
+      heroes
+        .filter((h) => h.fusionId)
+        .map((h) => ({ base: h, fusion: heroById.get(h.fusionId as string) }))
+        .filter((p): p is { base: HeroRow; fusion: HeroRow } => Boolean(p.fusion))
+        .sort((a, b) => a.base.name.localeCompare(b.base.name)),
+    [heroes, heroById],
+  );
+
   const q = query.trim().toLowerCase();
   const visible = useMemo(
     () =>
       heroes.filter(
         (h) =>
+          !hidden.has(h.id) &&
           (!onlyTracked || tracked[h.id]) &&
           (!q || h.searchNames.some((n) => n.toLowerCase().includes(q))),
       ),
-    [heroes, tracked, onlyTracked, q],
+    [heroes, hidden, tracked, onlyTracked, q],
   );
 
-  const total = useMemo(() => {
-    const needs = heroes
-      .filter((h) => tracked[h.id])
-      .map((h) =>
-        heroNeed(
-          { id: h.id, rarity: h.rarity, element: h.element },
-          tracked[h.id].state,
-          tracked[h.id].target,
-          fullRules,
-        ),
-      );
-    return accountNeed(needs);
-  }, [heroes, tracked, fullRules]);
+  const needs = useMemo(() => {
+    const out = new Map<string, HeroNeed>();
+    for (const h of heroes) {
+      const entry = tracked[h.id];
+      if (!entry || hidden.has(h.id)) continue;
+      out.set(h.id, heroNeed(asTracked(h), entry.state, entry.target, fullRules));
+    }
+    return out;
+  }, [heroes, tracked, hidden, asTracked, fullRules]);
 
-  const trackedIds = Object.keys(tracked);
-  const heroById = useMemo(() => new Map(heroes.map((h) => [h.id, h])), [heroes]);
+  const total = useMemo(() => accountNeed([...needs.values()]), [needs]);
 
-  const update = (id: string, side: 'state' | 'target', patch: Partial<HeroProgress>) =>
-    setTracked((prev) => {
-      const entry = prev[id] ?? defaultEntry();
-      return { ...prev, [id]: { ...entry, [side]: { ...entry[side], ...patch } } };
+  const defaults = useCallback(
+    (hero: HeroRow): HeroEntry => {
+      const eeCount = hero.fusionLevels ? 2 : 1;
+      const state: HeroProgress = {
+        level: START_LEVEL,
+        skills: Array(SKILL_SLOTS).fill(1),
+        fusion: 0,
+        affinity: 1,
+        transcend: 0,
+        ee: Array(eeCount).fill(0),
+      };
+      return {
+        state,
+        // La cible vise le PLAFOND de chaque axe : c'est la question que pose
+        // l'outil (« que me reste-t-il pour finir ce héros ? »), à rabaisser
+        // héros par héros si on vise moins.
+        target: {
+          level: rules.xpCurve.length,
+          skills: Array(SKILL_SLOTS).fill(MAX_SKILL),
+          fusion: hero.fusionLevels?.length ?? 0,
+          affinity: rules.affinityCurve.length,
+          transcend: Math.max(ladder(asTracked(hero)).length - 1, 0),
+          ee: Array(eeCount).fill(rules.eeEnchant.length),
+        },
+      };
+    },
+    [rules, ladder, asTracked],
+  );
+
+  const update = (hero: HeroRow, side: 'state' | 'target', patch: Partial<HeroProgress>) =>
+    setStore((prev) => {
+      const entry = prev.heroes[hero.id] ?? defaults(hero);
+      return {
+        ...prev,
+        heroes: { ...prev.heroes, [hero.id]: { ...entry, [side]: { ...entry[side], ...patch } } },
+      };
     });
 
-  const toggle = (id: string) =>
-    setTracked((prev) => {
-      if (prev[id]) {
-        const next = { ...prev };
-        delete next[id];
-        return next;
-      }
-      return { ...prev, [id]: defaultEntry() };
+  const toggle = (hero: HeroRow) =>
+    setStore((prev) => {
+      const next = { ...prev.heroes };
+      if (next[hero.id]) delete next[hero.id];
+      else next[hero.id] = defaults(hero);
+      return { ...prev, heroes: next };
     });
+
+  const trackedIds = Object.keys(tracked).filter((id) => !hidden.has(id));
+  const giftBonus = store.preferredGift ? PREFERRED_GIFT_BONUS : 0;
 
   // Les plats et cadeaux ne sont pas des coûts stockés : ce sont des CONVERSIONS
   // de l'XP et des points, faites à l'affichage.
@@ -185,6 +292,66 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
   return (
     <div className="space-y-6" aria-busy={!ready}>
       <p className="text-content-muted text-sm">{labels.intro}</p>
+
+      {/* ── Réglages ── */}
+      <details className="border-line-subtle bg-surface-raised rounded-lg border">
+        <summary className="text-content-strong cursor-pointer px-4 py-2 text-sm font-semibold">
+          {labels.settings}
+        </summary>
+        <div className="space-y-4 px-4 pt-1 pb-4">
+          <label className="text-content-muted flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={store.preferredGift}
+              onChange={(e) => setStore((prev) => ({ ...prev, preferredGift: e.target.checked }))}
+              className="accent-accent"
+            />
+            {labels.preferredGift}
+          </label>
+
+          <div>
+            <h3 className="text-content-strong text-sm font-semibold">{labels.settingsFusion}</h3>
+            <p className="text-content-subtle mt-0.5 text-xs">{labels.settingsFusionHint}</p>
+            <ul className="mt-2 grid gap-2 sm:grid-cols-2">
+              {fusionPairs.map(({ base, fusion }) => {
+                const isFused = Boolean(store.fused[base.id]);
+                return (
+                  <li key={base.id} className="flex items-center justify-between gap-2">
+                    <span className="text-content-muted truncate text-sm">{base.name}</span>
+                    <span className="flex shrink-0 gap-1">
+                      {(
+                        [
+                          [false, labels.base],
+                          [true, labels.coreFusion],
+                        ] as const
+                      ).map(([value, text]) => (
+                        <button
+                          key={text}
+                          type="button"
+                          onClick={() =>
+                            setStore((prev) => ({
+                              ...prev,
+                              fused: { ...prev.fused, [base.id]: value },
+                            }))
+                          }
+                          className={`rounded-full border px-2 py-0.5 text-xs transition-colors ${
+                            isFused === value
+                              ? 'border-accent bg-accent/15 text-content-strong'
+                              : 'border-line text-content-muted hover:bg-line/50'
+                          }`}
+                        >
+                          {text}
+                        </button>
+                      ))}
+                    </span>
+                    <span className="sr-only">{fusion.name}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      </details>
 
       {/* ── Ce qu'il reste à farmer ── */}
       <section className="border-line-subtle bg-surface-raised rounded-lg border p-4">
@@ -222,16 +389,21 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
             </dl>
 
             {total.affinityPoints > 0 && (
-              <p className="text-content-subtle text-xs">{labels.giftNote}</p>
+              <p className="text-content-subtle text-xs">
+                {store.preferredGift ? labels.giftNoteBonus : labels.giftNote}
+              </p>
             )}
 
-            {Object.keys(total.fragments).length > 0 && (
+            {Object.keys(total.pieces).length > 0 && (
               <div>
-                <h3 className="text-content-strong text-sm font-semibold">{labels.fragments}</h3>
+                <h3 className="text-content-strong text-sm font-semibold">{labels.pieces}</h3>
                 <ul className="text-content-muted mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm">
-                  {Object.entries(total.fragments).map(([heroId, count]) => (
+                  {Object.entries(total.pieces).map(([heroId, { pieces, steps }]) => (
                     <li key={heroId}>
-                      {heroById.get(heroId)?.name ?? heroId} : <strong>{count}</strong>
+                      {heroById.get(heroId)?.name ?? heroId} : <strong>{pieces}</strong>{' '}
+                      <span className="text-content-subtle text-xs">
+                        ({labels.dupes.replace('{count}', String(steps))})
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -268,7 +440,8 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
           <button
             type="button"
             onClick={() => {
-              if (window.confirm(labels.resetConfirm)) setTracked({});
+              if (window.confirm(labels.resetConfirm))
+                setStore((prev) => ({ ...prev, heroes: {} }));
             }}
             className="border-line text-content-muted hover:border-accent ml-auto rounded border px-2 py-1 text-xs transition-colors"
           >
@@ -281,14 +454,8 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
       <ul className="grid gap-3 md:grid-cols-2">
         {visible.map((hero) => {
           const entry = tracked[hero.id];
-          const need = entry
-            ? heroNeed(
-                { id: hero.id, rarity: hero.rarity, element: hero.element },
-                entry.state,
-                entry.target,
-                fullRules,
-              )
-            : null;
+          const need = needs.get(hero.id);
+          const steps = ladder(asTracked(hero));
           return (
             <li
               key={hero.id}
@@ -312,10 +479,15 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-content-strong truncate text-sm font-semibold">
                       {hero.name}
+                      {hero.fusionLevels && (
+                        <span className="text-accent ml-1 text-[10px] uppercase">
+                          {labels.coreFusion}
+                        </span>
+                      )}
                     </span>
                     <button
                       type="button"
-                      onClick={() => toggle(hero.id)}
+                      onClick={() => toggle(hero)}
                       className="border-line text-content-muted hover:border-accent shrink-0 rounded border px-2 py-0.5 text-xs transition-colors"
                     >
                       {entry ? labels.untrack : labels.track}
@@ -331,49 +503,68 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
                       </div>
                       <AxisRow
                         label={labels.level}
-                        min={1}
+                        min={START_LEVEL}
                         max={rules.xpCurve.length}
                         state={entry.state.level}
                         target={entry.target.level}
-                        onState={(v) => update(hero.id, 'state', { level: v })}
-                        onTarget={(v) => update(hero.id, 'target', { level: v })}
+                        onState={(v) => update(hero, 'state', { level: v })}
+                        onTarget={(v) => update(hero, 'target', { level: v })}
                       />
-                      <SkillsRow
-                        label={labels.skills}
-                        entry={entry}
-                        onChange={(side, skills) => update(hero.id, side, { skills })}
-                      />
+
+                      {hero.fusionLevels ? (
+                        // Un fusionné n'a pas de slots : ses skills montent d'un
+                        // bloc, le palier 1 étant la fusion elle-même.
+                        <AxisRow
+                          label={labels.fusionLevel}
+                          min={0}
+                          max={hero.fusionLevels.length}
+                          state={entry.state.fusion}
+                          target={entry.target.fusion}
+                          onState={(v) => update(hero, 'state', { fusion: v })}
+                          onTarget={(v) => update(hero, 'target', { fusion: v })}
+                        />
+                      ) : (
+                        <SkillsRow
+                          label={labels.skills}
+                          entry={entry}
+                          onChange={(side, skills) => update(hero, side, { skills })}
+                        />
+                      )}
+
                       <AxisRow
                         label={labels.affinity}
                         min={1}
                         max={rules.affinityCurve.length}
                         state={entry.state.affinity}
                         target={entry.target.affinity}
-                        onState={(v) => update(hero.id, 'state', { affinity: v })}
-                        onTarget={(v) => update(hero.id, 'target', { affinity: v })}
+                        onState={(v) => update(hero, 'state', { affinity: v })}
+                        onTarget={(v) => update(hero, 'target', { affinity: v })}
                       />
-                      <AxisRow
+                      <StarRow
                         label={labels.transcend}
-                        min={0}
-                        max={Math.max(
-                          ladder({ id: hero.id, rarity: hero.rarity, element: hero.element })
-                            .length - 1,
-                          0,
-                        )}
+                        steps={steps}
                         state={entry.state.transcend}
                         target={entry.target.transcend}
-                        onState={(v) => update(hero.id, 'state', { transcend: v })}
-                        onTarget={(v) => update(hero.id, 'target', { transcend: v })}
+                        onState={(v) => update(hero, 'state', { transcend: v })}
+                        onTarget={(v) => update(hero, 'target', { transcend: v })}
                       />
-                      <AxisRow
-                        label={labels.ee}
-                        min={0}
-                        max={rules.eeEnchant.length}
-                        state={entry.state.ee}
-                        target={entry.target.ee}
-                        onState={(v) => update(hero.id, 'state', { ee: v })}
-                        onTarget={(v) => update(hero.id, 'target', { ee: v })}
-                      />
+
+                      {entry.state.ee.map((_, i) => (
+                        <AxisRow
+                          key={i}
+                          label={i === 0 ? labels.ee : labels.eeFusion}
+                          min={0}
+                          max={rules.eeEnchant.length}
+                          state={entry.state.ee[i] ?? 0}
+                          target={entry.target.ee[i] ?? 0}
+                          onState={(v) =>
+                            update(hero, 'state', { ee: replace(entry.state.ee, i, v) })
+                          }
+                          onTarget={(v) =>
+                            update(hero, 'target', { ee: replace(entry.target.ee, i, v) })
+                          }
+                        />
+                      ))}
 
                       {need && hasWork(need) && (
                         <HeroNeedSummary
@@ -381,6 +572,7 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
                           items={items}
                           gifts={rules.gifts}
                           giftType={hero.gift}
+                          giftBonus={giftBonus}
                           labels={labels}
                         />
                       )}
@@ -394,6 +586,13 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
       </ul>
     </div>
   );
+}
+
+/** Remplace la i-ème valeur d'un axe multiple (les EE d'un fusionné). */
+function replace(list: number[], index: number, value: number): number[] {
+  const next = [...list];
+  next[index] = value;
+  return next;
 }
 
 function Stat({ label, value }: { label: string; value: string }) {
@@ -442,6 +641,47 @@ function AxisRow({
   );
 }
 
+/**
+ * Transcendance : on saisit l'ÉTOILE telle qu'elle s'affiche en jeu (« 5★+1 »),
+ * pas l'index d'une échelle interne que personne ne lit sur son écran.
+ */
+function StarRow({
+  label,
+  steps,
+  state,
+  target,
+  onState,
+  onTarget,
+}: {
+  label: string;
+  steps: TranscendStep[];
+  state: number;
+  target: number;
+  onState: (v: number) => void;
+  onTarget: (v: number) => void;
+}) {
+  const select = (value: number, onChange: (v: number) => void) => (
+    <select
+      value={value}
+      onChange={(e) => onChange(Number(e.target.value))}
+      className="border-line bg-surface-sunken text-content-strong focus:border-accent w-full min-w-0 rounded border px-1 py-0.5 text-center text-xs outline-none"
+    >
+      {steps.map((s, i) => (
+        <option key={i} value={i}>
+          {s.showStar}★{s.starPlus > 0 ? `+${s.starPlus}` : ''}
+        </option>
+      ))}
+    </select>
+  );
+  return (
+    <div className="grid grid-cols-[5rem_1fr_1fr] items-center gap-2">
+      <span className="text-content-muted text-xs">{label}</span>
+      {select(state, onState)}
+      {select(target, onTarget)}
+    </div>
+  );
+}
+
 function SkillsRow({
   label,
   entry,
@@ -451,11 +691,8 @@ function SkillsRow({
   entry: HeroEntry;
   onChange: (side: 'state' | 'target', skills: number[]) => void;
 }) {
-  const set = (side: 'state' | 'target', i: number, v: number) => {
-    const next = [...entry[side].skills];
-    next[i] = v;
-    onChange(side, next);
-  };
+  const set = (side: 'state' | 'target', i: number, v: number) =>
+    onChange(side, replace(entry[side].skills, i, v));
   return (
     <div className="grid grid-cols-[5rem_1fr_1fr] items-center gap-2">
       <span className="text-content-muted text-xs">{label}</span>
@@ -511,15 +748,17 @@ function HeroNeedSummary({
   items,
   gifts,
   giftType,
+  giftBonus,
   labels,
 }: {
-  need: ReturnType<typeof heroNeed>;
+  need: HeroNeed;
   items: Record<string, ItemAsset>;
   gifts: GrowthRules['gifts'];
   giftType?: string;
+  giftBonus: number;
   labels: HeroTrackerLabels;
 }) {
-  const giftPlan = giftBreakdown(need.affinityPoints, gifts, giftType);
+  const giftPlan = giftBreakdown(need.affinityPoints, gifts, giftType, giftBonus);
   return (
     <div className="border-line-subtle mt-2 flex flex-wrap gap-1.5 border-t pt-2 text-[11px]">
       {Object.entries(need.items).map(([id, count]) => (
@@ -532,9 +771,12 @@ function HeroNeedSummary({
           {b.entry.name.en} ×{b.count}
         </span>
       ))}
-      {need.fragments > 0 && (
+      {need.pieces > 0 && (
         <span className="text-content-muted">
-          {labels.fragments} ×{need.fragments}
+          {labels.pieces} ×{need.pieces}{' '}
+          <span className="text-content-subtle">
+            ({labels.dupes.replace('{count}', String(need.transcendSteps))})
+          </span>
         </span>
       )}
     </div>

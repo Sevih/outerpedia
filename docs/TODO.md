@@ -37,15 +37,14 @@
       ⚠ SURTOUT NE PAS se baser sur la V2 pour cet outil (décision Sevih 22/07 :
       le calculateur V2 est foireux) — exception à la règle « V2 = oracle »,
       conception V3 native.
-- [ ] **`/tools` — hero-tracker : boucle de revue Sevih** (V1 livrée le 04/08,
-      cf. DONE — page `unlisted`, routable pour revue). RESTE : (1) arbitrer
-      les axes réellement utiles (Sevih : « on retirera des trucs à la fin ») ;
-      (2) CONFIRMER que seuls first/second/ultimate se montent aux manuels (le
-      chain passive a `maxLevel 5` mais monte peut-être à la transcendance) ;
-      (3) le bonus « cadeau préféré » (+50 %, curé dans l'éditorial du guide
-      heroes-growth) n'est PAS appliqué — l'outil affiche un majorant, à
-      trancher ; (4) `pnpm images` (PNG de `CM_EtcMenu_Colleague` pour l'og:image)
-      puis passage `unlisted` → `available`.
+- [ ] **`/tools` — hero-tracker : boucle de revue Sevih** (V2 livrée le 12/08 au
+      périmètre in-game qu'il a dicté, cf. DONE — page `unlisted`, routable pour
+      revue). RESTE : (1) arbitrer les axes réellement utiles (Sevih : « on
+      retirera des trucs à la fin ») ; (2) VÉRIFIER quel barème de limit break
+      s'applique à un Core Fusion — l'outil prend sa rareté AFFICHÉE (3★ pour
+      CF Snow, dont la base est 2★), ce qui est un choix, pas une donnée ;
+      (3) `pnpm images` (PNG de `CM_EtcMenu_Colleague` pour l'og:image) puis
+      passage `unlisted` → `available`.
 - [ ] **Arbre de dons / awakening — outil ou guide À PART.** Constaté en
       cartographiant le hero-tracker : l'awakening n'est PAS par héros, c'est un
       arbre de COMPTE (`CharacterAwakeningTemplet` : 5 groupes, 207 nœuds,

@@ -7,6 +7,48 @@
 
 ## 2026-08-12
 
+- **`/tools/hero-tracker` — V2 : le périmètre RÉEL du jeu (Sevih, en termes
+  in-game)** — « matériaux pour monter un perso de 5 à 120 + les breakthrough
+  105/110/120, les skills 1/2/3/**chain passive** de 1 à 5, l'XP d'affinité
+  0→100, les EE de 0 à 10, les pièces restantes pour amener le héros 6★ », plus
+  un panneau de RÉGLAGES car « on ne possède pas à la fois le perso de base et
+  sa Core Fusion : c'est soit l'un soit l'autre », et « les Core Fusion montent
+  tous leurs skills en même temps mais pas avec des bouquins ».
+  QUATRE QUESTIONS, TROIS TRANCHÉES PAR LA DONNÉE plutôt que par Sevih : (1) le
+  limit break ne consomme PAS les pièces du héros — la chaîne est _Limit Break
+  Memory_ (Singularity) → _Memory [élément au choix]_ → _Limit Break Factor_ du
+  héros, donc une ressource DISTINCTE de la transcendance, agrégeable par
+  élément ; (2) `affinityCurve[9] = 170 000` = exactement le « niveau 10 »
+  annoncé par le guide et par _Oath of Determination_ → index = niveau − 1,
+  aucun décalage ; (3) le `skillLevel` de `transcend.json` monte 0→4 et le
+  passif de transcendance (`unique_passive`) a `maxLevel: 4` : c'est SON niveau,
+  pas celui de S1/S2/S3 — aucun coût, aucune interaction avec les manuels (la
+  question « le chain passive monte-t-il à la transcendance ? » est close).
+  Restaient à Sevih : la transcendance se paie en N pièces OU un doublon (le
+  moteur rend donc AUSSI `transcendSteps`, l'écran affiche « 900 pièces (ou 6
+  doublons) »), et un fusionné hérite du niveau, de l'affinité, de la
+  transcendance et de l'EE de sa base **et débloque un second EE au niveau 0** —
+  seuls les skills repartent à 1.
+  DATAGEN : `CharacterFusionTemplet` + `CharacterFusionLevelTemplet` existaient
+  → rien de curé, `hero-growth.fusion` dérive les 6 couples (base → fusionné),
+  l'étoile exigée et le barème (300 cores au déblocage puis 4 × 150 = 900, ce
+  que dit l'éditorial du guide core-fusion). Le générateur VÉRIFIE que chaque
+  colonne `Skill_n_Level` vaut le numéro du palier : c'est cet invariant qui
+  autorise l'outil à n'offrir qu'UN curseur pour les skills d'un fusionné, et il
+  jettera le jour où le jeu changera d'avis.
+  MOTEUR : 4 slots de skill (chain passive incluse), régime de fusion exclusif
+  (cores, pas de manuels, palier 1 = déblocage), `ee` devient un TABLEAU (deux
+  barres pour un fusionné), `fragments` → `pieces` + `transcendSteps`, et
+  `giftBreakdown` accepte le bonus du cadeau préféré. 21 tests (+5).
+  ÉCRAN : panneau de réglages (choix Base ⇄ Core Fusion par couple — la version
+  non retenue disparaît du roster ; bonus « cadeau préféré » +50 % en option, ce
+  qui tranche le point (3) resté ouvert au TODO en le rendant à l'utilisateur),
+  transcendance saisie en ÉTOILES DU JEU (« 5★+1 ») et non en index interne,
+  départ au niveau 5 (recrutement) et cibles préremplies au PLAFOND de chaque
+  axe — la question que pose l'outil est « que me reste-t-il pour finir ce
+  héros ? ». Store v2 avec migration depuis v1 (une saisie déjà faite vaut mieux
+  qu'un écran remis à zéro). 32 clés i18n ×5.
+
 - **Générateur `solver` : outerpedia alimente l'app desktop gear-solver (fin de
   la dépendance au repo mort outerpediaV2)** — port fidèle de
   `gear-solver/data/build.mjs` + `calc-stats.mjs` (~1500 l., la spec exécutable)
