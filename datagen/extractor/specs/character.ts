@@ -343,6 +343,29 @@ export function isRealCharacterRow(r: Row, formIds: Set<string>, fusionIds: Set<
 }
 
 /**
+ * Ids des FORMES de combat depuis `CharacterChangeTemplet` — les cibles
+ * `ChangeCharacterID` SANS identité propre. Le filtre `ownIdentity` est
+ * indispensable depuis que le jeu écrit des changements ALLER-RETOUR
+ * (MAJ 2026-08-12 : `2000119→2000120` ET `2000120→2000119`) : la BASE devient
+ * cible du « retour », et sans le filtre elle serait écartée comme forme —
+ * D.Luna disparaissait du wiki. La vraie forme, elle, EMPRUNTE toujours le
+ * `NameID` de sa base (mesuré sur les 6 cibles du jeu : seule la base cyclée a
+ * une identité propre). Une future forme à identité propre passerait la
+ * sélection et arriverait dans l'inbox — revue humaine plutôt que perte
+ * silencieuse. PUR (testable sans tables).
+ */
+export function formIdsFrom(changeRows: Row[], byId: Map<string, Row>): Set<string> {
+  const out = new Set<string>();
+  for (const r of changeRows) {
+    const tgt = r.ChangeCharacterID;
+    if (!tgt) continue;
+    const row = byId.get(tgt);
+    if (!row || !ownIdentity(row)) out.add(tgt);
+  }
+  return out;
+}
+
+/**
  * Nettoie un nom de doubleur : sentinelle « 0 » (pas de doublage) → vide, et
  * retire le préfixe d'usage (`VA. ` anglais, `CV.` jp/kr) → nom nu, le front
  * réaffiche le préfixe s'il veut.
@@ -504,13 +527,16 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
     // Tout le reste est du SKIN et emprunte une identité :
     //   - apparences (ids 201xxxx/202xxxx…) → écartées par `ownIdentity` ;
     //   - formes alternées (`CharacterChangeTemplet`, ex. Luna 2000119↔2000120 :
-    //     la cible `ChangeCharacterID` emprunte l'identité de la base) → écartées.
+    //     la cible `ChangeCharacterID` emprunte l'identité de la base) → écartées
+    //     par `formIdsFrom`, qui NE prend PAS une base cyclée pour une forme.
     // On NE filtre PLUS sur `ShowMainPage` : les persos non « sortis » mais réels
     // (ex. Lambda 2000118) doivent apparaître dans l'extracteur pour que l'admin
     // décide de les intégrer (l'intégration est la seule porte vers le site).
     const fusionIds = new Set(loadTable('CharacterFusionTemplet').map((r) => r.ChangeCharID));
-    const formIds = new Set(loadTable('CharacterChangeTemplet').map((r) => r.ChangeCharacterID));
-    return loadTable('CharacterTemplet').filter((r) => isRealCharacterRow(r, formIds, fusionIds));
+    const templet = loadTable('CharacterTemplet');
+    const byId = new Map(templet.map((r) => [r.ID, r]));
+    const formIds = formIdsFrom(loadTable('CharacterChangeTemplet'), byId);
+    return templet.filter((r) => isRealCharacterRow(r, formIds, fusionIds));
   },
 
   prepare(rows) {

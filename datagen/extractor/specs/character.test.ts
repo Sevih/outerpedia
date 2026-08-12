@@ -14,7 +14,13 @@
  */
 import { describe, expect, it } from 'vitest';
 import type { Row } from '../../lib/tables';
-import { extractStats, isInnatePierce, isRealCharacterRow, ownIdentity } from './character';
+import {
+  extractStats,
+  formIdsFrom,
+  isInnatePierce,
+  isRealCharacterRow,
+  ownIdentity,
+} from './character';
 
 /** Ligne de buff minimale : seuls les champs lus par `isInnatePierce`. */
 const buff = (over: Partial<Row>): Row => ({
@@ -113,6 +119,46 @@ describe('isRealCharacterRow — sélection des entités réelles', () => {
     // NPCCharacterTemplet n'entre même pas ici, mais la 1re porte le garantit.
     const npc = base({ ID: '2600001', Type: 'CT_NPC', NameID: '2600001_Name' });
     expect(isRealCharacterRow(npc, NONE, NONE)).toBe(false);
+  });
+});
+
+describe('formIdsFrom — cibles de change SANS identité propre', () => {
+  // La régression du 2026-08-12 : la MAJ a rendu le change-forme de D.Luna
+  // ALLER-RETOUR (119→120 ET 120→119). La base, cible du « retour », se faisait
+  // écarter comme forme → Luna disparaissait de l'extrait (« 1 removed »).
+  const base = { ID: '2000119', Type: 'CT_PC', NameID: '2000119_Name' };
+  const form = { ID: '2000120', Type: 'CT_PC', NameID: '2000119_Name' }; // emprunte
+  const byId = new Map([
+    ['2000119', base],
+    ['2000120', form],
+  ]);
+
+  it('cycle aller-retour : la FORME (identité empruntée) est écartée, pas la BASE', () => {
+    const formIds = formIdsFrom(
+      [
+        { ID: '2000119', ChangeCharacterID: '2000120' },
+        { ID: '2000120', ChangeCharacterID: '2000119' }, // le « retour » de la MAJ
+      ],
+      byId,
+    );
+    expect(formIds.has('2000120')).toBe(true);
+    expect(formIds.has('2000119')).toBe(false); // la base cyclée n'est PAS une forme
+    expect(isRealCharacterRow(base, formIds, new Set())).toBe(true); // Luna reste
+    expect(isRealCharacterRow(form, formIds, new Set())).toBe(false);
+  });
+
+  it('changement à sens unique (Saeran ON_DIE) : la cible est une forme', () => {
+    const saeranForm = { ID: '2000130', Type: 'CT_PC', NameID: '2000129_Name' };
+    const formIds = formIdsFrom(
+      [{ ID: '2000129', ChangeCharacterID: '2000130' }],
+      new Map([['2000130', saeranForm]]),
+    );
+    expect(formIds.has('2000130')).toBe(true);
+  });
+
+  it('cible absente de CharacterTemplet → traitée comme forme (prudence)', () => {
+    const formIds = formIdsFrom([{ ID: '1', ChangeCharacterID: '999' }], new Map());
+    expect(formIds.has('999')).toBe(true);
   });
 });
 

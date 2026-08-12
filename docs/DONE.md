@@ -7,6 +7,28 @@
 
 ## 2026-08-12
 
+- **D.Luna ne disparaît plus de l'extrait — le cycle de change-forme piégeait la
+  sélection (l'inbox « 1 removed » de Sevih)** — la MAJ du jour a rendu le
+  change-forme de Luna ALLER-RETOUR dans `CharacterChangeTemplet` (`2000119→
+2000120` ET `2000120→2000119`, `ON_ACTIVE_SKILL_2`). Or `select` écartait
+  comme « forme » TOUTE cible `ChangeCharacterID` : la base, devenue cible du
+  « retour », sautait — Luna extraite=absente, proposée « removed ». Correctif :
+  `formIdsFrom(changeRows, byId)` (pur, exporté, testé) — une cible n'est une
+  forme que SANS identité propre (`ownIdentity`) ; mesuré sur les 6 cibles du
+  jeu : seule la base cyclée a la sienne, toutes les vraies formes empruntent
+  leur `NameID` (y compris les 2 formes `ON_DIE` de Saeran, inchangées). Une
+  future forme à identité propre passerait en inbox (revue humaine, pas perte
+  silencieuse). +3 cas (cycle → base gardée/forme écartée ; sens unique ; cible
+  hors templet → prudence). VÉRIFIÉ par rebuild réel : 125→126, Luna revenue,
+  0 removed, seul le NEW attendu (2400015). Au passage, DIAGNOSTIQUÉ pour
+  Sevih : les 2 manquants d'assets (`CT_2010130`) = la change-forme du COSTUME
+  de Saeran s'auto-pointe en `FaceIconID` (contrairement à D.Luna qui pointe le
+  frère) et sa texture n'est pas dans les bundles téléchargés — test in-game à
+  faire avant tout fallback ; et les 2 tests rouges du moment sont l'état
+  TRANSITOIRE de l'intégration Saeran (retenue levée au prochain
+  `promote --apply`) + le nouveau contenu Singularity 75000102 (options de
+  palier `_s_2/_s_3` inconnues de rankOptions — à traiter).
+
 - **Garde perso : la retenue remplace le tout-ou-rien (question Sevih « un perso
   datamined non-release bloque tout ? »)** — oui, c'était le cas : le refus
   d'apply était ENTIER, donc un perso complet présent dans la donnée avant sa
