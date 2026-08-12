@@ -7,6 +7,21 @@
 
 ## 2026-08-12
 
+- **Garde perso : la retenue remplace le tout-ou-rien (question Sevih « un perso
+  datamined non-release bloque tout ? »)** — oui, c'était le cas : le refus
+  d'apply était ENTIER, donc un perso complet présent dans la donnée avant sa
+  sortie (bagage aux ids insécables — buff d'EE, icône de costume, vars de
+  skill) aurait bloqué TOUTE promotion en lot jusqu'à sa release, avec pour
+  seuls contournements `--only` manuel ou une intégration-spoiler. Décision
+  (arbitrée Sevih) : les fichiers où une réf survit sont **RETENUS** — jamais
+  écrits, listés `⛔ RETENU (non promu)` avec leurs ids — et **le reste du lot
+  se promeut**. La garantie « jamais publié » reste à l'octet près (aucun octet
+  contenant l'id ne part) ; les fichiers retenus rattrapent leur retard à
+  l'intégration du perso. Dry-run inchangé (avertit, EXIT=0). Tests réécrits
+  (le cas « REFUSE la promotion entière » devient « RETIENT le fichier, promeut
+  le reste », 31/31) et VÉRIFIÉ sur la donnée du jour : les 3 fichiers de
+  Saeran `⛔`, le reste promu-able.
+
 - **`pnpm dev` ne tombe plus en panne sur une MAJ à nouveau perso (deadlock du
   garde perso en dry-run)** — la MAJ du jour (Saeran `2000129`) a fait ÉCHOUER
   `dev-refresh` : le garde perso de `promote` levait AUSSI en dry-run quand une

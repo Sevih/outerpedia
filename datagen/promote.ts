@@ -139,10 +139,12 @@ export function applyRetention(
  * dans tout record, une entrée dont la CLÉ est un id non intégré saute
  * (`characters`, `characters-list`, `damage-scaling`, `progression.premium`…),
  * de même qu'une entrée dont la VALEUR est exactement cet id
- * (`characters-slug-to-id`). Une réf qui SURVIT au retrait (id dans un tableau,
- * forme nouvelle d'un futur générateur) fait REFUSER la promotion entière en
- * nommant fichier + ids : le « jamais » est garanti par erreur bloquante, pas
- * par convention. Mutation en place ; retourne les ids effectivement écartés.
+ * (`characters-slug-to-id`). Une réf qui SURVIT au retrait (id insécable : buff
+ * d'EE `BID_CEQUIP_<id>`, icône de costume, clés de vars de skill) fait RETENIR
+ * le fichier — non promu, nommé `⛔` avec ses ids — pendant que le reste du lot
+ * se promeut : le « jamais publié » est garanti à l'octet près sans qu'un perso
+ * datamined avant sa sortie bloque toute promotion (décision Sevih 2026-08-12).
+ * Mutation en place ; retourne les ids effectivement écartés.
  */
 export function stripUnintegratedCharacters(data: unknown, ids: ReadonlySet<string>): string[] {
   const removed = new Set<string>();
@@ -193,10 +195,9 @@ export interface PromoteResult {
   strippedCharacters: string[];
   /**
    * Réfs de persos non intégrés SURVIVANT à l'écartement (`fichier : ids`).
-   * En apply c'est un refus bloquant (l'erreur est levée avant d'écrire) ; en
-   * dry-run la revue continue et les liste — un nouveau perso du jeu ne doit
-   * pas mettre `pnpm dev` en panne (c'est l'admin, servi par le dev, qui
-   * permet justement de l'intégrer).
+   * Ces fichiers sont RETENUS (jamais écrits par l'apply, listés `⛔`) pendant
+   * que le reste du lot se promeut — un perso complet datamined avant sa
+   * sortie ne bloque ni `pnpm dev` (dry-run) ni la promotion en lot.
    */
   violations: string[];
 }
@@ -270,8 +271,9 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
 
     // Garde perso : écarte les persos non intégrés, puis VERROUILLE — une réf
     // survivante (bornée par des non-chiffres : `2400015` ne matche pas dans
-    // `24000151`) refuse la promotion entière, générateur à corriger.
+    // `24000151`) RETIENT le fichier : il n'est pas promu, le reste du lot si.
     let stripped: string[] = [];
+    let residue: string[] = [];
     if (unintegrated.size) {
       if ([...unintegrated].some((id) => out.includes(id))) {
         const data = JSON.parse(out) as unknown;
@@ -279,14 +281,24 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
         if (stripped.length) out = await formatJson(data);
         for (const id of stripped) strippedAll.add(id);
       }
-      const residue = [...unintegrated].filter((id) =>
-        new RegExp(`(?<!\\d)${id}(?!\\d)`).test(out),
-      );
+      residue = [...unintegrated].filter((id) => new RegExp(`(?<!\\d)${id}(?!\\d)`).test(out));
       if (residue.length) violations.push(`${rel} : ${residue.join(', ')}`);
     }
 
     if (dstText === out) {
       identical++;
+      continue;
+    }
+    // Réf survivante → fichier RETENU (décision Sevih 2026-08-12) : le refus
+    // était tout-ou-rien, donc un perso complet datamined AVANT sa sortie
+    // (bagage aux ids insécables : buff d'EE, icône de costume, vars de skill)
+    // bloquait TOUTE promotion en lot jusqu'à sa release. La garantie « jamais
+    // publié » reste à l'octet près : ce fichier-ci ne part pas ; il rattrapera
+    // son retard à l'intégration du perso.
+    if (residue.length) {
+      diffs.push(
+        `  ${rel.padEnd(34)} ⛔ RETENU (non promu) — réf(s) de perso non intégré : ${residue.join(', ')}`,
+      );
       continue;
     }
     const notes =
@@ -303,16 +315,11 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
   }
 
   if (violations.length) {
-    const msg =
-      'perso(s) non intégré(s) encore référencé(s) après écartement — promotion REFUSÉE, ' +
-      'rien n’a été écrit. Intégrer via l’admin, ou corriger le générateur fautif :\n  ' +
-      violations.join('\n  ');
-    // Apply : refus bloquant, rien n'écrire — inchangé. Dry-run : rien n'allait
-    // être écrit de toute façon → AVERTIR au lieu d'échouer, sinon une MAJ du
-    // jeu (nouveau perso, ex. Saeran 2026-07-27) met `pnpm dev` en panne… qui
-    // est précisément l'outil d'intégration (deadlock de flux).
-    if (apply) throw new Error(msg);
-    console.warn(`⚠ ${msg}\n  (dry-run : la revue continue ; l’apply, lui, refusera)`);
+    console.warn(
+      '⚠ perso(s) non intégré(s) encore référencé(s) après écartement — fichier(s) RETENU(S), ' +
+        'le reste du lot se promeut. Intégrer via l’admin pour les débloquer :\n  ' +
+        violations.join('\n  '),
+    );
   }
   for (const { path, text } of pending) {
     mkdirSync(dirname(path), { recursive: true });

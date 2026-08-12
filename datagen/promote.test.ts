@@ -12,7 +12,7 @@
  * Tout tourne sur des dossiers temporaires via les chemins injectables de
  * `promote()` — les vrais `data/extracted` / `data/generated` ne sont pas lus.
  */
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -175,30 +175,38 @@ describe('promote — garde perso à l’apply', () => {
     expect(res.diffs.join('\n')).toContain('non intégré(s) écarté(s) : 2400015');
   });
 
-  it('REFUSE la promotion entière si une réf survit au retrait — rien n’est écrit', async () => {
+  it('RETIENT le fichier où une réf survit au retrait — le reste du lot se promeut', async () => {
     await seed();
-    // Forme que le retrait générique ne couvre pas : id dans un tableau.
+    // Forme que le retrait générique ne couvre pas : id dans un tableau. Avant
+    // le 2026-08-12 c'était un refus TOUT-OU-RIEN : un perso complet datamined
+    // avant sa sortie (bagage aux ids insécables) bloquait toute promotion.
     await put(src, 'recruit.json', { banner: { chars: ['2400015'] } });
     await put(src, 'glossary.json', { g: 1 });
 
-    await expect(promote({ src, dst, apply: true })).rejects.toThrow(/recruit\.json : 2400015/);
-    // Tout-ou-rien : même les fichiers sains n'ont pas été écrits.
-    expect(read(dst, 'characters.json')).toEqual({ '2000001': { name: 'K' } });
+    const res = await promote({ src, dst, apply: true });
+
+    expect(res.violations).toEqual(['recruit.json : 2400015']);
+    // Le fichier fautif n'est PAS écrit (« jamais publié », à l'octet près)…
+    expect(existsSync(join(dst, 'recruit.json'))).toBe(false);
+    expect(res.diffs.join('\n')).toContain('RETENU (non promu)');
+    // …mais le reste du lot est promu, écartement compris.
+    expect(read(dst, 'glossary.json')).toEqual({ g: 1 });
+    expect(Object.keys(read(dst, 'characters.json'))).toEqual(['2000001']);
   });
 
   it('DRY-RUN : une réf survivante AVERTIT sans échouer (pnpm dev doit démarrer)', async () => {
     await seed();
-    // Même forme survivante que le refus… mais en revue : rien n'allait être
-    // écrit — échouer mettrait `pnpm dev` en panne à chaque MAJ avec un
-    // nouveau perso, alors que l'admin (servi par le dev) est l'outil qui
-    // permet justement de l'intégrer (cas Saeran 2026-07-27).
+    // Même forme survivante… mais en revue : rien n'allait être écrit —
+    // échouer mettrait `pnpm dev` en panne à chaque MAJ avec un nouveau perso,
+    // alors que l'admin (servi par le dev) est l'outil qui permet justement de
+    // l'intégrer (cas Saeran 2026-08-12).
     await put(src, 'recruit.json', { banner: { chars: ['2400015'] } });
 
     const res = await promote({ src, dst, apply: false });
     expect(res.violations).toEqual(['recruit.json : 2400015']);
-    // Le validé n'a pas bougé (dry-run), et l'apply, lui, refuse toujours.
+    // Le validé n'a pas bougé (dry-run).
     expect(read(dst, 'characters.json')).toEqual({ '2000001': { name: 'K' } });
-    await expect(promote({ src, dst, apply: true })).rejects.toThrow(/recruit\.json : 2400015/);
+    expect(existsSync(join(dst, 'recruit.json'))).toBe(false);
   });
 
   it('un id embarqué dans un nombre plus long ne déclenche PAS le verrou', async () => {
