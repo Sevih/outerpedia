@@ -1355,12 +1355,14 @@ function Stepper({
 }) {
   const btn =
     'border-line bg-surface-sunken text-content-muted hover:border-accent hover:text-accent flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border text-base transition-colors';
+  // Largeur NATURELLE : ces axes tiennent en trois chiffres au plus, un champ
+  // étiré sur toute la rangée pour afficher « 0 » ne sert personne.
   return (
-    <div className="flex min-w-0 flex-1 items-center gap-1.5">
+    <div className="flex shrink-0 items-center gap-1.5">
       <button type="button" onClick={() => onChange(Math.max(value - 1, min))} className={btn}>
         −
       </button>
-      <NumberField value={value} min={min} max={max} onChange={onChange} grow />
+      <NumberField value={value} min={min} max={max} onChange={onChange} />
       <button type="button" onClick={() => onChange(Math.min(value + 1, max))} className={btn}>
         +
       </button>
@@ -1396,13 +1398,11 @@ function NumberField({
   min,
   max,
   onChange,
-  grow = false,
 }: {
   value: number;
   min: number;
   max: number;
   onChange: (v: number) => void;
-  grow?: boolean;
 }) {
   return (
     <input
@@ -1417,9 +1417,7 @@ function NumberField({
         // ferait mentir l'écran par rapport au calcul.
         if (Number.isFinite(v)) onChange(Math.min(Math.max(Math.trunc(v), min), max));
       }}
-      className={`border-line-subtle bg-surface-sunken text-content-strong focus:border-accent h-9 rounded-lg border px-1.5 text-center font-mono text-sm font-semibold outline-none ${
-        grow ? 'min-w-0 flex-1' : 'w-14 shrink-0'
-      }`}
+      className="border-line-subtle bg-surface-sunken text-content-strong focus:border-accent h-9 w-14 shrink-0 rounded-lg border px-1.5 text-center font-mono text-sm font-semibold outline-none"
     />
   );
 }
