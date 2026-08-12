@@ -7,6 +7,22 @@
 
 ## 2026-08-12
 
+- **`pnpm dev` ne tombe plus en panne sur une MAJ à nouveau perso (deadlock du
+  garde perso en dry-run)** — la MAJ du jour (Saeran `2000129`) a fait ÉCHOUER
+  `dev-refresh` : le garde perso de `promote` levait AUSSI en dry-run quand une
+  réf d'un perso non intégré survit à l'écartement (formes légitimes que le strip
+  ne peut pas retirer : buff d'EE `BID_CEQUIP_2000129`, icône de costume
+  `TI_Costume_Clothes_2000129_02`, clés de vars de skill `2000129_1_1`). Or le
+  refus bloquait `pnpm dev`… qui sert l'admin, seul outil d'intégration du perso :
+  deadlock de flux. Correctif : en **apply**, refus bloquant INCHANGÉ (rien n'est
+  écrit) ; en **dry-run**, la revue AVERTIT (même message + « l'apply, lui,
+  refusera ») et continue — rien n'allait être écrit de toute façon. `violations`
+  exposé dans `PromoteResult`. Testé (31/31 promote+refresh, dont le nouveau cas
+  dry-run) et VÉRIFIÉ en rejouant le promote réel sur la donnée du jour :
+  EXIT=0, diff complet affiché, `⛔ 2000129, 2400015` listés, rien écrit. Aucun
+  générateur à corriger : les 3 formes survivantes sont des données légitimes du
+  nouveau perso, légales dès son intégration via l'admin.
+
 - **L'onglet Monster d'une version versionnée montre ce qui BOUGE : l'état du
   boss** — correction de cap demandée par Sevih (« perso j'aurais juste fait un
   sélecteur de version ; là si je veux je peux assigner Deep Sea à un guide de

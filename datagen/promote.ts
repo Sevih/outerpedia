@@ -191,6 +191,14 @@ export interface PromoteResult {
   orphans: string[];
   /** Ids de persos non intégrés écartés de la promotion (garde perso). */
   strippedCharacters: string[];
+  /**
+   * Réfs de persos non intégrés SURVIVANT à l'écartement (`fichier : ids`).
+   * En apply c'est un refus bloquant (l'erreur est levée avant d'écrire) ; en
+   * dry-run la revue continue et les liste — un nouveau perso du jeu ne doit
+   * pas mettre `pnpm dev` en panne (c'est l'admin, servi par le dev, qui
+   * permet justement de l'intégrer).
+   */
+  violations: string[];
 }
 
 /**
@@ -295,11 +303,16 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
   }
 
   if (violations.length) {
-    throw new Error(
+    const msg =
       'perso(s) non intégré(s) encore référencé(s) après écartement — promotion REFUSÉE, ' +
-        'rien n’a été écrit. Intégrer via l’admin, ou corriger le générateur fautif :\n  ' +
-        violations.join('\n  '),
-    );
+      'rien n’a été écrit. Intégrer via l’admin, ou corriger le générateur fautif :\n  ' +
+      violations.join('\n  ');
+    // Apply : refus bloquant, rien n'écrire — inchangé. Dry-run : rien n'allait
+    // être écrit de toute façon → AVERTIR au lieu d'échouer, sinon une MAJ du
+    // jeu (nouveau perso, ex. Saeran 2026-07-27) met `pnpm dev` en panne… qui
+    // est précisément l'outil d'intégration (deadlock de flux).
+    if (apply) throw new Error(msg);
+    console.warn(`⚠ ${msg}\n  (dry-run : la revue continue ; l’apply, lui, refusera)`);
   }
   for (const { path, text } of pending) {
     mkdirSync(dirname(path), { recursive: true });
@@ -328,7 +341,7 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
         : '\n(dry-run — rien n’a été écrit ; relance avec --apply pour valider)',
     );
   }
-  return { identical, diffs, orphans, strippedCharacters: [...strippedAll].sort() };
+  return { identical, diffs, orphans, strippedCharacters: [...strippedAll].sort(), violations };
 }
 
 async function main(): Promise<void> {

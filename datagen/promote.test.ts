@@ -186,6 +186,21 @@ describe('promote — garde perso à l’apply', () => {
     expect(read(dst, 'characters.json')).toEqual({ '2000001': { name: 'K' } });
   });
 
+  it('DRY-RUN : une réf survivante AVERTIT sans échouer (pnpm dev doit démarrer)', async () => {
+    await seed();
+    // Même forme survivante que le refus… mais en revue : rien n'allait être
+    // écrit — échouer mettrait `pnpm dev` en panne à chaque MAJ avec un
+    // nouveau perso, alors que l'admin (servi par le dev) est l'outil qui
+    // permet justement de l'intégrer (cas Saeran 2026-07-27).
+    await put(src, 'recruit.json', { banner: { chars: ['2400015'] } });
+
+    const res = await promote({ src, dst, apply: false });
+    expect(res.violations).toEqual(['recruit.json : 2400015']);
+    // Le validé n'a pas bougé (dry-run), et l'apply, lui, refuse toujours.
+    expect(read(dst, 'characters.json')).toEqual({ '2000001': { name: 'K' } });
+    await expect(promote({ src, dst, apply: true })).rejects.toThrow(/recruit\.json : 2400015/);
+  });
+
   it('un id embarqué dans un nombre plus long ne déclenche PAS le verrou', async () => {
     await seed();
     // `24000151` est un id DISTINCT qui contient `2400015` en préfixe — les
