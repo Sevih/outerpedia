@@ -7,6 +7,15 @@
 
 ## 2026-08-12
 
+- **`/hero-tracker` — « un grand espace vide entre level et transcendance »
+  (Sevih, sur un héros sans Core Fusion)** — la carte dépliée était une GRILLE à
+  deux colonnes : elle alignait les lignes, donc le bloc « niveau » (une rangée)
+  se retrouvait seul en haut d'une case aussi haute que les quatre rangées de
+  compétences d'en face. Les axes passent en FLUX DE COLONNES
+  (`md:columns-2` + `break-inside-avoid`) : chacun garde sa hauteur, la lecture
+  reste verticale et l'ordre du DOM inchangé. Le bilan du héros sort du flux
+  pour rester pleine largeur (une colonne CSS ne connaît pas `col-span`).
+
 - **`/hero-tracker` — le cadeau préféré devient la règle, et les pièces se lisent
   comme elles se farment (Sevih)** — (1) « au contraire il faut forcer les gift
   préférés (sinon c'est con) » : personne n'offre autre chose que son cadeau

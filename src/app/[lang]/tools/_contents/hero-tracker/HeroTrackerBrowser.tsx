@@ -1080,195 +1080,205 @@ function HeroCard({
       </div>
 
       {expanded && (
-        <div className="space-y-3.5 px-2.5 py-3 md:grid md:grid-cols-2 md:space-y-0 md:gap-x-5 md:*:mb-3.5">
-          {/* ── Niveau ── */}
-          <Field
-            label={labels.level}
-            value={`${state.level}`}
-            target={`${withTarget ? target.level : rules.xpCurve.length}`}
-          >
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-              <Rail role={labels.now}>
-                <Stepper
-                  value={state.level}
-                  min={START_LEVEL}
-                  max={rules.xpCurve.length}
-                  onChange={(v) => onChange('state', { level: v })}
-                />
-              </Rail>
-              <Rail role={withTarget ? labels.goal : labels.now} aim={withTarget}>
-                <Presets
-                  values={jumps}
-                  active={withTarget ? target.level : state.level}
-                  aim={withTarget}
-                  onPick={(v) => onChange(withTarget ? 'target' : 'state', { level: v })}
-                />
-              </Rail>
-            </div>
-          </Field>
-
-          {/* ── Compétences (ou palier de fusion) ── */}
-          {hero.fusionLevels ? (
+        // Deux COLONNES, pas une grille : les axes n'ont pas la même hauteur (les
+        // skills en font quatre rangées), et une grille alignait leurs lignes —
+        // le niveau se retrouvait seul en haut d'une case vide. Le flux de
+        // colonnes les enchaîne, chacun gardant sa hauteur.
+        <div className="px-2.5 py-3">
+          <div className="space-y-3.5 md:columns-2 md:space-y-0 md:gap-x-5 md:*:mb-3.5 md:*:break-inside-avoid">
+            {/* ── Niveau ── */}
             <Field
-              label={labels.fusionLevel}
-              value={`${Math.max(state.fusion, 1)}`}
-              target={`${withTarget ? Math.max(target.fusion, 1) : hero.fusionLevels.length}`}
-              hint={withTarget ? labels.scaleHint : undefined}
-            >
-              <Scale
-                // Les skills d'un fusionné DÉMARRENT au niveau 1 : posséder le
-                // fusionné, c'est l'avoir débloqué. Le palier 1 du barème (les
-                // 300 cores de la fusion) est donc déjà payé, jamais compté, et
-                // ni l'état ni la cible ne peuvent redescendre à 0.
-                values={Array.from({ length: hero.fusionLevels.length }, (_, i) => i + 1)}
-                current={Math.max(state.fusion, 1)}
-                target={withTarget ? Math.max(target.fusion, 1) : hero.fusionLevels.length}
-                withTarget={withTarget}
-                onCurrent={(v) => onChange('state', { fusion: v })}
-                onTarget={(v) => onChange('target', { fusion: v })}
-              />
-            </Field>
-          ) : (
-            <Field label={labels.skills} hint={withTarget ? labels.scaleHint : undefined}>
-              <div className="space-y-1.5">
-                {Array.from({ length: SKILL_SLOTS }, (_, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    {hero.skillIcons[i] ? (
-                      <img
-                        src={img.skill(hero.skillIcons[i])}
-                        alt=""
-                        aria-hidden
-                        width={26}
-                        height={26}
-                        className="border-line-subtle bg-surface-sunken h-6.5 w-6.5 shrink-0 rounded border"
-                      />
-                    ) : (
-                      <span className="border-line-subtle bg-surface-sunken text-content-muted flex h-6.5 w-6.5 shrink-0 items-center justify-center rounded border font-mono text-[10px]">
-                        {i === SKILL_SLOTS - 1 ? 'CP' : `S${i + 1}`}
-                      </span>
-                    )}
-                    <Scale
-                      values={[1, 2, 3, 4, 5]}
-                      current={state.skills[i] ?? 1}
-                      target={withTarget ? (target.skills[i] ?? 1) : MAX_SKILL}
-                      withTarget={withTarget}
-                      onCurrent={(v) => onChange('state', { skills: replace(state.skills, i, v) })}
-                      onTarget={(v) => onChange('target', { skills: replace(target.skills, i, v) })}
-                    />
-                  </div>
-                ))}
-              </div>
-            </Field>
-          )}
-
-          {/* ── Transcendance ── */}
-          <Field
-            label={labels.transcend}
-            value={starLabel(steps[state.transcend])}
-            target={starLabel(steps[withTarget ? target.transcend : steps.length - 1])}
-            hint={withTarget ? labels.scaleHint : undefined}
-          >
-            <Scale
-              values={steps.map((_, i) => i).filter((i) => i >= minTranscend)}
-              current={state.transcend}
-              target={withTarget ? target.transcend : steps.length - 1}
-              withTarget={withTarget}
-              tone="star"
-              // Le sprite d'étoile DU JEU, à la couleur que la donnée déclare
-              // pour ce palier (jaune, puis orange/rouge/violet sur les « + »)
-              // — la même image que le slider de la fiche perso.
-              icon={(i, reached) => (
-                <img
-                  src={img.transcendStar(
-                    reached
-                      ? (STAR_SPRITE[steps[i].starColor] ?? STAR_SPRITE.yellow)
-                      : STAR_SPRITE.gray,
-                  )}
-                  alt=""
-                  aria-hidden
-                  width={14}
-                  height={14}
-                />
-              )}
-              render={(i) =>
-                `${steps[i].showStar}${steps[i].starPlus > 0 ? `+${steps[i].starPlus}` : ''}`
-              }
-              onCurrent={(v) => onChange('state', { transcend: v })}
-              onTarget={(v) => onChange('target', { transcend: v })}
-            />
-          </Field>
-
-          {/* ── Affinité ── */}
-          <Field
-            label={labels.affinity}
-            value={`${state.affinity}`}
-            target={`${withTarget ? target.affinity : rules.affinityCurve.length}`}
-          >
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-              <Rail role={labels.now}>
-                <Stepper
-                  value={state.affinity}
-                  min={1}
-                  max={rules.affinityCurve.length}
-                  onChange={(v) => onChange('state', { affinity: v })}
-                />
-              </Rail>
-              <Rail role={withTarget ? labels.goal : labels.now} aim={withTarget}>
-                <Presets
-                  values={AFFINITY_PRESETS.filter((n) => n <= rules.affinityCurve.length)}
-                  active={withTarget ? target.affinity : state.affinity}
-                  aim={withTarget}
-                  onPick={(v) => onChange(withTarget ? 'target' : 'state', { affinity: v })}
-                />
-              </Rail>
-            </div>
-          </Field>
-
-          {/* ── Équipement(s) exclusif(s) ── */}
-          {state.ee.map((_, i) => (
-            <Field
-              key={i}
-              label={i === 0 ? labels.ee : labels.eeFusion}
-              value={`+${state.ee[i] ?? 0}`}
-              target={`+${withTarget ? (target.ee[i] ?? 0) : rules.eeEnchant.length}`}
+              label={labels.level}
+              value={`${state.level}`}
+              target={`${withTarget ? target.level : rules.xpCurve.length}`}
             >
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-                {hero.ee[i] && (
-                  <EquipmentIcon
-                    src={img.equipment(hero.ee[i].icon)}
-                    grade={hero.ee[i].grade}
-                    alt={hero.ee[i].name}
-                    size={30}
-                  />
-                )}
-                {/* Onze crans muets ne disaient rien : un pas à pas se lit. */}
                 <Rail role={labels.now}>
                   <Stepper
-                    value={state.ee[i] ?? 0}
-                    min={0}
-                    max={rules.eeEnchant.length}
-                    onChange={(v) => onChange('state', { ee: replace(state.ee, i, v) })}
+                    value={state.level}
+                    min={START_LEVEL}
+                    max={rules.xpCurve.length}
+                    onChange={(v) => onChange('state', { level: v })}
                   />
                 </Rail>
                 <Rail role={withTarget ? labels.goal : labels.now} aim={withTarget}>
                   <Presets
-                    values={eeStops}
-                    active={withTarget ? (target.ee[i] ?? 0) : (state.ee[i] ?? 0)}
+                    values={jumps}
+                    active={withTarget ? target.level : state.level}
                     aim={withTarget}
-                    format={(v) => `+${v}`}
-                    onPick={(v) =>
-                      onChange(withTarget ? 'target' : 'state', {
-                        ee: replace(withTarget ? target.ee : state.ee, i, v),
-                      })
-                    }
+                    onPick={(v) => onChange(withTarget ? 'target' : 'state', { level: v })}
                   />
                 </Rail>
               </div>
             </Field>
-          ))}
+
+            {/* ── Compétences (ou palier de fusion) ── */}
+            {hero.fusionLevels ? (
+              <Field
+                label={labels.fusionLevel}
+                value={`${Math.max(state.fusion, 1)}`}
+                target={`${withTarget ? Math.max(target.fusion, 1) : hero.fusionLevels.length}`}
+                hint={withTarget ? labels.scaleHint : undefined}
+              >
+                <Scale
+                  // Les skills d'un fusionné DÉMARRENT au niveau 1 : posséder le
+                  // fusionné, c'est l'avoir débloqué. Le palier 1 du barème (les
+                  // 300 cores de la fusion) est donc déjà payé, jamais compté, et
+                  // ni l'état ni la cible ne peuvent redescendre à 0.
+                  values={Array.from({ length: hero.fusionLevels.length }, (_, i) => i + 1)}
+                  current={Math.max(state.fusion, 1)}
+                  target={withTarget ? Math.max(target.fusion, 1) : hero.fusionLevels.length}
+                  withTarget={withTarget}
+                  onCurrent={(v) => onChange('state', { fusion: v })}
+                  onTarget={(v) => onChange('target', { fusion: v })}
+                />
+              </Field>
+            ) : (
+              <Field label={labels.skills} hint={withTarget ? labels.scaleHint : undefined}>
+                <div className="space-y-1.5">
+                  {Array.from({ length: SKILL_SLOTS }, (_, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      {hero.skillIcons[i] ? (
+                        <img
+                          src={img.skill(hero.skillIcons[i])}
+                          alt=""
+                          aria-hidden
+                          width={26}
+                          height={26}
+                          className="border-line-subtle bg-surface-sunken h-6.5 w-6.5 shrink-0 rounded border"
+                        />
+                      ) : (
+                        <span className="border-line-subtle bg-surface-sunken text-content-muted flex h-6.5 w-6.5 shrink-0 items-center justify-center rounded border font-mono text-[10px]">
+                          {i === SKILL_SLOTS - 1 ? 'CP' : `S${i + 1}`}
+                        </span>
+                      )}
+                      <Scale
+                        values={[1, 2, 3, 4, 5]}
+                        current={state.skills[i] ?? 1}
+                        target={withTarget ? (target.skills[i] ?? 1) : MAX_SKILL}
+                        withTarget={withTarget}
+                        onCurrent={(v) =>
+                          onChange('state', { skills: replace(state.skills, i, v) })
+                        }
+                        onTarget={(v) =>
+                          onChange('target', { skills: replace(target.skills, i, v) })
+                        }
+                      />
+                    </div>
+                  ))}
+                </div>
+              </Field>
+            )}
+
+            {/* ── Transcendance ── */}
+            <Field
+              label={labels.transcend}
+              value={starLabel(steps[state.transcend])}
+              target={starLabel(steps[withTarget ? target.transcend : steps.length - 1])}
+              hint={withTarget ? labels.scaleHint : undefined}
+            >
+              <Scale
+                values={steps.map((_, i) => i).filter((i) => i >= minTranscend)}
+                current={state.transcend}
+                target={withTarget ? target.transcend : steps.length - 1}
+                withTarget={withTarget}
+                tone="star"
+                // Le sprite d'étoile DU JEU, à la couleur que la donnée déclare
+                // pour ce palier (jaune, puis orange/rouge/violet sur les « + »)
+                // — la même image que le slider de la fiche perso.
+                icon={(i, reached) => (
+                  <img
+                    src={img.transcendStar(
+                      reached
+                        ? (STAR_SPRITE[steps[i].starColor] ?? STAR_SPRITE.yellow)
+                        : STAR_SPRITE.gray,
+                    )}
+                    alt=""
+                    aria-hidden
+                    width={14}
+                    height={14}
+                  />
+                )}
+                render={(i) =>
+                  `${steps[i].showStar}${steps[i].starPlus > 0 ? `+${steps[i].starPlus}` : ''}`
+                }
+                onCurrent={(v) => onChange('state', { transcend: v })}
+                onTarget={(v) => onChange('target', { transcend: v })}
+              />
+            </Field>
+
+            {/* ── Affinité ── */}
+            <Field
+              label={labels.affinity}
+              value={`${state.affinity}`}
+              target={`${withTarget ? target.affinity : rules.affinityCurve.length}`}
+            >
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                <Rail role={labels.now}>
+                  <Stepper
+                    value={state.affinity}
+                    min={1}
+                    max={rules.affinityCurve.length}
+                    onChange={(v) => onChange('state', { affinity: v })}
+                  />
+                </Rail>
+                <Rail role={withTarget ? labels.goal : labels.now} aim={withTarget}>
+                  <Presets
+                    values={AFFINITY_PRESETS.filter((n) => n <= rules.affinityCurve.length)}
+                    active={withTarget ? target.affinity : state.affinity}
+                    aim={withTarget}
+                    onPick={(v) => onChange(withTarget ? 'target' : 'state', { affinity: v })}
+                  />
+                </Rail>
+              </div>
+            </Field>
+
+            {/* ── Équipement(s) exclusif(s) ── */}
+            {state.ee.map((_, i) => (
+              <Field
+                key={i}
+                label={i === 0 ? labels.ee : labels.eeFusion}
+                value={`+${state.ee[i] ?? 0}`}
+                target={`+${withTarget ? (target.ee[i] ?? 0) : rules.eeEnchant.length}`}
+              >
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                  {hero.ee[i] && (
+                    <EquipmentIcon
+                      src={img.equipment(hero.ee[i].icon)}
+                      grade={hero.ee[i].grade}
+                      alt={hero.ee[i].name}
+                      size={30}
+                    />
+                  )}
+                  {/* Onze crans muets ne disaient rien : un pas à pas se lit. */}
+                  <Rail role={labels.now}>
+                    <Stepper
+                      value={state.ee[i] ?? 0}
+                      min={0}
+                      max={rules.eeEnchant.length}
+                      onChange={(v) => onChange('state', { ee: replace(state.ee, i, v) })}
+                    />
+                  </Rail>
+                  <Rail role={withTarget ? labels.goal : labels.now} aim={withTarget}>
+                    <Presets
+                      values={eeStops}
+                      active={withTarget ? (target.ee[i] ?? 0) : (state.ee[i] ?? 0)}
+                      aim={withTarget}
+                      format={(v) => `+${v}`}
+                      onPick={(v) =>
+                        onChange(withTarget ? 'target' : 'state', {
+                          ee: replace(withTarget ? target.ee : state.ee, i, v),
+                        })
+                      }
+                    />
+                  </Rail>
+                </div>
+              </Field>
+            ))}
+          </div>
 
           {/* ── Ce qui manque à CE héros ── */}
-          <div className="border-line-subtle border-t pt-2.5 md:col-span-2">
+          <div className="border-line-subtle mt-3.5 border-t pt-2.5">
             <div className="flex items-center gap-2">
               <h4 className="text-content-muted font-mono text-[11px] tracking-wide uppercase">
                 {need && !done ? labels.heroNeeds : labels.doneHero}
