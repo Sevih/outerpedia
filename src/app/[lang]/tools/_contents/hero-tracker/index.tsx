@@ -1,6 +1,9 @@
 import heroGrowthData from '@data/generated/hero-growth.json';
 import progressionData from '@data/generated/progression.json';
 import transcendData from '@data/generated/transcend.json';
+import eeData from '@data/generated/equipment/ee.json';
+import skillsData from '@data/generated/skills.json';
+import charactersData from '@data/generated/characters.json';
 import type { HeroGrowthData } from '@datagen/generators/hero-growth';
 import { getT, type TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
@@ -32,6 +35,7 @@ const growth = heroGrowthData as unknown as HeroGrowthData;
 
 /** `progression.limitBreak` est indexé `${rareté}_${élément}` (mémoire par élément). */
 interface ProgressionLimitBreakStep {
+  requireLevel: number;
   maxLevel: number;
   pieces: number;
   recallItemId: string;
@@ -46,6 +50,23 @@ const transcend = transcendData as unknown as {
   byStar: Record<string, TranscendStep[]>;
   overrides: Record<string, TranscendStep[]>;
 };
+
+/** Équipements exclusifs, indexés par héros — un par personnage, fusionnés inclus. */
+const exclusiveEquip = eeData as unknown as Record<
+  string,
+  { name: Record<string, string>; icon: string; grade: string }
+>;
+const skills = skillsData as unknown as Record<string, { type: string; icon?: string }>;
+const characters = charactersData as unknown as Record<string, { skills: string[]; ee?: string }>;
+
+/** Les quatre slots qui se montent, DANS l'ordre où l'écran les affiche. */
+const SKILL_TYPES = ['first', 'second', 'ultimate', 'chain_passive'] as const;
+
+/** Icônes des quatre skills améliorables d'un héros (vide si le type manque). */
+function skillIcons(heroId: string): string[] {
+  const owned = (characters[heroId]?.skills ?? []).map((id) => skills[id]).filter(Boolean);
+  return SKILL_TYPES.map((type) => owned.find((s) => s.type === type)?.icon ?? '');
+}
 
 const LABEL_KEYS = [
   'intro',
@@ -102,9 +123,21 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
   const fusionByBase = new Map(growth.fusion.map((f) => [f.baseId, f]));
   const fusionByHero = new Map(growth.fusion.map((f) => [f.fusionId, f]));
 
+  /** Un EE prêt au rendu (tuile à cadre de rareté), ou rien s'il n'existe pas. */
+  const eeAsset = (heroId: string): ItemAsset | null => {
+    const eeId = characters[heroId]?.ee;
+    const e = eeId ? exclusiveEquip[eeId] : undefined;
+    return e ? { name: lRec(e.name, lang) || e.name.en, icon: e.icon, grade: e.grade } : null;
+  };
+
   const heroes: HeroRow[] = getCharacterListItems().map((c) => {
     const asFusion = fusionByHero.get(c.id);
     const asBase = fusionByBase.get(c.id);
+    // Un fusionné GARDE l'EE de sa base et en débloque un second : l'hérité
+    // d'abord, le nouveau ensuite — l'ordre des barres de l'écran.
+    const ee = [asFusion ? eeAsset(asFusion.baseId) : null, eeAsset(c.id)].filter(
+      (a): a is ItemAsset => a !== null,
+    );
     return {
       id: c.id,
       slug: slugForId(c.id) ?? c.id,
@@ -114,6 +147,8 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
       rarity: c.rarity,
       ...(c.gift ? { gift: c.gift } : {}),
       searchNames: characterSearchNames(c, aliases[c.id]),
+      skillIcons: skillIcons(c.id),
+      ee,
       ...(asFusion
         ? {
             fusionLevels: asFusion.levels,
@@ -129,6 +164,7 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
   const limitBreak: Record<string, LimitBreakCost[]> = {};
   for (const [key, steps] of Object.entries(progressionLimitBreak)) {
     limitBreak[key] = steps.map((s) => ({
+      fromLevel: s.requireLevel,
       maxLevel: s.maxLevel,
       pieces: s.pieces,
       recallItemId: s.recallItemId,

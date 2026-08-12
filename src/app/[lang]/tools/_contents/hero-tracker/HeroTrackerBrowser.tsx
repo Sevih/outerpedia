@@ -4,7 +4,7 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import type { FusionLevelStep } from '@datagen/generators/hero-growth';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
-import { img } from '@/lib/images';
+import { img, STAR_SPRITE } from '@/lib/images';
 import { useStoredState, type StoreSpec } from '@/lib/client-storage';
 import {
   accountNeed,
@@ -41,6 +41,8 @@ export interface TranscendStep extends TranscendCost {
   showStar: number;
   /** Petits « + » au-delà de l'étoile pleine (4★+1…). */
   starPlus: number;
+  /** Couleur de l'étoile du palier (`STAR_SPRITE`) — jaune, puis orange/rouge/violet. */
+  starColor: string;
 }
 
 export interface HeroRow {
@@ -53,6 +55,10 @@ export interface HeroRow {
   /** Type de cadeau préféré (`present_01`…) — oriente la conversion en cadeaux. */
   gift?: string;
   searchNames: string[];
+  /** Icônes des 4 skills améliorables, dans l'ordre S1 / S2 / ultime / chain. */
+  skillIcons: string[];
+  /** Équipements exclusifs portés : l'hérité d'abord pour un fusionné, puis le sien. */
+  ee: ItemAsset[];
   /** Paliers de Core Fusion si CE héros est un fusionné. */
   fusionLevels?: FusionLevelStep[];
   /** Étoile interne exigée pour fusionner : un fusionné ne peut PAS être en deçà. */
@@ -791,10 +797,17 @@ function HeroCard({
   const objects = need ? Object.values(need.items).reduce((a, b) => a + b, 0) : 0;
   const { state, target } = entry;
 
-  /** Paliers de niveau qui coûtent une mémoire — les seuls sauts qui comptent. */
+  /**
+   * Sauts de niveau proposés : le plafond AVANT limit break (100 — là où
+   * beaucoup de comptes s'arrêtent), puis chaque palier de limit break.
+   * Tout est dérivé du barème ; aucun de ces nombres n'est écrit en dur.
+   */
   const jumps = useMemo(() => {
     const set = new Set<number>([rules.xpCurve.length]);
-    for (const s of rules.limitBreak[`${hero.rarity}_${hero.element}`] ?? []) set.add(s.maxLevel);
+    for (const s of rules.limitBreak[`${hero.rarity}_${hero.element}`] ?? []) {
+      set.add(s.maxLevel);
+      set.add(s.fromLevel);
+    }
     return [...set].sort((a, b) => a - b);
   }, [rules, hero.rarity, hero.element]);
 
@@ -910,9 +923,20 @@ function HeroCard({
               <div className="space-y-1.5">
                 {Array.from({ length: SKILL_SLOTS }, (_, i) => (
                   <div key={i} className="flex items-center gap-2">
-                    <span className="border-line-subtle bg-surface-sunken text-content-muted flex h-6 w-6 shrink-0 items-center justify-center rounded border font-mono text-[10px]">
-                      {i === SKILL_SLOTS - 1 ? 'CP' : `S${i + 1}`}
-                    </span>
+                    {hero.skillIcons[i] ? (
+                      <img
+                        src={img.skill(hero.skillIcons[i])}
+                        alt=""
+                        aria-hidden
+                        width={26}
+                        height={26}
+                        className="border-line-subtle bg-surface-sunken h-6.5 w-6.5 shrink-0 rounded border"
+                      />
+                    ) : (
+                      <span className="border-line-subtle bg-surface-sunken text-content-muted flex h-6.5 w-6.5 shrink-0 items-center justify-center rounded border font-mono text-[10px]">
+                        {i === SKILL_SLOTS - 1 ? 'CP' : `S${i + 1}`}
+                      </span>
+                    )}
                     <Scale
                       values={[1, 2, 3, 4, 5]}
                       current={state.skills[i] ?? 1}
@@ -939,7 +963,25 @@ function HeroCard({
               target={withTarget ? target.transcend : steps.length - 1}
               withTarget={withTarget}
               tone="star"
-              render={(i) => starLabel(steps[i])}
+              // Le sprite d'étoile DU JEU, à la couleur que la donnée déclare
+              // pour ce palier (jaune, puis orange/rouge/violet sur les « + »)
+              // — la même image que le slider de la fiche perso.
+              icon={(i, reached) => (
+                <img
+                  src={img.transcendStar(
+                    reached
+                      ? (STAR_SPRITE[steps[i].starColor] ?? STAR_SPRITE.yellow)
+                      : STAR_SPRITE.gray,
+                  )}
+                  alt=""
+                  aria-hidden
+                  width={14}
+                  height={14}
+                />
+              )}
+              render={(i) =>
+                `${steps[i].showStar}${steps[i].starPlus > 0 ? `+${steps[i].starPlus}` : ''}`
+              }
               onCurrent={(v) => onChange('state', { transcend: v })}
               onTarget={(v) => onChange('target', { transcend: v })}
             />
@@ -979,6 +1021,14 @@ function HeroCard({
               target={withTarget ? `+${target.ee[i] ?? 0}` : undefined}
             >
               <div className="flex items-center gap-2">
+                {hero.ee[i] && (
+                  <EquipmentIcon
+                    src={img.equipment(hero.ee[i].icon)}
+                    grade={hero.ee[i].grade}
+                    alt={hero.ee[i].name}
+                    size={30}
+                  />
+                )}
                 <Scale
                   values={Array.from({ length: rules.eeEnchant.length + 1 }, (_, n) => n)}
                   current={state.ee[i] ?? 0}
@@ -1113,6 +1163,7 @@ function Scale({
   tone = 'accent',
   compact = false,
   render,
+  icon,
   onCurrent,
   onTarget,
 }: {
@@ -1125,6 +1176,8 @@ function Scale({
   /** Segments fins et muets — l'échelle d'EE en a onze. */
   compact?: boolean;
   render?: (v: number) => string;
+  /** Visuel posé au-dessus du libellé (les étoiles du jeu, pour la transcendance). */
+  icon?: (v: number, reached: boolean) => React.ReactNode;
   onCurrent: (v: number) => void;
   onTarget: (v: number) => void;
 }) {
@@ -1170,8 +1223,8 @@ function Scale({
             type="button"
             {...press(v)}
             aria-label={String(render ? render(v) : v)}
-            className={`min-w-0 flex-1 rounded-md border font-mono text-[11px] font-semibold transition-colors ${
-              compact ? 'h-8' : 'h-9'
+            className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-px rounded-md border font-mono text-[11px] leading-none font-semibold transition-colors ${
+              compact ? 'h-8' : icon ? 'h-10' : 'h-9'
             } ${
               isReached
                 ? reached
@@ -1180,6 +1233,7 @@ function Scale({
                   : 'border-line-subtle bg-surface-sunken text-line'
             }`}
           >
+            {icon?.(v, isReached)}
             {!compact && (render ? render(v) : v)}
           </button>
         );

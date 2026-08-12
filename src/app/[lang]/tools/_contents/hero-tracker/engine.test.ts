@@ -42,8 +42,8 @@ const RULES: GrowthRules = {
   },
   limitBreak: {
     '3_water': [
-      { maxLevel: 3, pieces: 25, recallItemId: 'memory_water', price: 250000 },
-      { maxLevel: 5, pieces: 75, recallItemId: 'memory_water', price: 500000 },
+      { fromLevel: 2, maxLevel: 3, pieces: 25, recallItemId: 'memory_water', price: 250000 },
+      { fromLevel: 3, maxLevel: 5, pieces: 75, recallItemId: 'memory_water', price: 500000 },
     ],
   },
   eeEnchant: [

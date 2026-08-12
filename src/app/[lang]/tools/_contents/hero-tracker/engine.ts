@@ -65,6 +65,8 @@ export interface TranscendCost {
 
 /** Un palier de limit break (100→105→110→120) et sa mémoire d'élément. */
 export interface LimitBreakCost {
+  /** Niveau exigé pour ouvrir le palier — le plafond dont on vient. */
+  fromLevel: number;
   maxLevel: number;
   pieces: number;
   recallItemId: string;
