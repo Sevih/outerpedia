@@ -206,7 +206,11 @@ export function characterSearchNames(
   return [...new Set(names.map((s) => s.normalize('NFKC').toLowerCase().trim()).filter(Boolean))];
 }
 
-/** Items allégés, triés par rareté décroissante puis nom EN. */
+/**
+ * Items allégés, triés par rareté décroissante puis nom COMPLET EN (titre inclus,
+ * cf. `characterDisplayName`). Trier sur le nom nu rangeait « Mystic Sage Ame »
+ * juste après « Ame » — l'ordre affiché doit suivre le nom affiché.
+ */
 export function getCharacterListItems(): CharacterListItem[] {
   return Object.values(CHARACTERS)
     .map((c) => ({
@@ -226,5 +230,8 @@ export function getCharacterListItems(): CharacterListItem[] {
       tags: c.tags,
       ...CHARACTERS_LIST[c.id],
     }))
-    .sort((a, b) => b.rarity - a.rarity || a.name.en.localeCompare(b.name.en));
+    .sort(
+      (a, b) =>
+        b.rarity - a.rarity || characterDisplayName(a).localeCompare(characterDisplayName(b)),
+    );
 }

@@ -13,6 +13,7 @@ import {
   characterNamePrefix,
   characterSearchNames,
   getCharacterListItems,
+  joinDisplayName,
   slugForId,
 } from '@/lib/data/characters';
 import { characterTags, loadCuratedCharacters } from '@/lib/data/curated';
@@ -254,9 +255,14 @@ export default async function CharactersPage({ params }: { params: Promise<{ lan
     name: t('page.characters.title'),
     url: buildUrl(lang, '/characters'),
     itemListOrder: 'Unordered',
+    // Nom COMPLET (titre inclus) : les rangées portent le nom NU, et deux entrées
+    // d'URLs différentes ne peuvent pas s'appeler toutes les deux « Ame ».
     items: [...rows]
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .map((r) => ({ name: r.name, url: buildUrl(lang, `/characters/${r.slug}`) })),
+      .map((r) => ({
+        name: joinDisplayName(r.prefix, r.name),
+        url: buildUrl(lang, `/characters/${r.slug}`),
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name)),
   });
 
   return (
