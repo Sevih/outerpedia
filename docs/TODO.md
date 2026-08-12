@@ -38,13 +38,14 @@
       le calculateur V2 est foireux) — exception à la règle « V2 = oracle »,
       conception V3 native.
 - [ ] **`/tools` — hero-tracker : boucle de revue Sevih** (V2 livrée le 12/08 au
-      périmètre in-game qu'il a dicté, cf. DONE — page `unlisted`, routable pour
-      revue). RESTE : (1) arbitrer les axes réellement utiles (Sevih : « on
+      périmètre in-game qu'il a dicté, cf. DONE — page PUBLIÉE le 12/08 sur ordre
+      de Sevih). RESTE : (1) arbitrer les axes réellement utiles (Sevih : « on
       retirera des trucs à la fin ») ; (2) VÉRIFIER quel barème de limit break
       s'applique à un Core Fusion — l'outil prend sa rareté AFFICHÉE (3★ pour
       CF Snow, dont la base est 2★), ce qui est un choix, pas une donnée ;
-      (3) `pnpm images` (PNG de `CM_EtcMenu_Colleague` pour l'og:image) puis
-      passage `unlisted` → `available`.
+      (3) `pnpm images` au prochain passage : le PNG de `CM_EtcMenu_Colleague`
+      (og:image de la page) et les `PI_*` des pièces ne sont que dans le staging
+      local — le manifest les demande déjà, aucune curation à faire.
 - [ ] **Arbre de dons / awakening — outil ou guide À PART.** Constaté en
       cartographiant le hero-tracker : l'awakening n'est PAS par héros, c'est un
       arbre de COMPTE (`CharacterAwakeningTemplet` : 5 groupes, 207 nœuds,

@@ -7,6 +7,14 @@
 
 ## 2026-08-12
 
+- **`/hero-tracker` — PUBLIÉ (`unlisted` → `available`, ordre de Sevih)** — la
+  boucle de revue passe en public : l'outil apparaît dans la landing `/tools` et
+  dans la recherche. Reste au TODO ce qui ne bloque pas la publication —
+  arbitrer les axes utiles, vérifier le barème de limit break d'un Core Fusion,
+  et un `pnpm images` pour pousser le PNG d'og:image et les icônes `PI_*` des
+  pièces, qui n'existent que dans le staging local (le manifest les demande
+  déjà : rien à curer).
+
 - **`/hero-tracker` — « un grand espace vide entre level et transcendance »
   (Sevih, sur un héros sans Core Fusion)** — la carte dépliée était une GRILLE à
   deux colonnes : elle alignait les lignes, donc le bloc « niveau » (une rangée)
