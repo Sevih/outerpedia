@@ -202,12 +202,26 @@ const starLabel = (s?: TranscendStep): string =>
   s ? `${s.showStar}★${s.starPlus > 0 ? `+${s.starPlus}` : ''}` : '—';
 
 export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: HeroTrackerData) {
-  const [store, setStore, ready] = useStoredState(SPEC);
+  const [stored, writeStore, ready] = useStoredState(SPEC);
   const [query, setQuery] = useState('');
   const [axis, setAxis] = useState<NeedAxis | 'all'>('all');
   const [open, setOpen] = useState<string | null>(null);
   const [picking, setPicking] = useState(false);
   const [element, setElement] = useState<string | null>(null);
+
+  /**
+   * Le stockage peut venir d'un état écrit AVANT l'ajout d'un réglage : le champ
+   * manquant rendrait sa case NON CONTRÔLÉE (React proteste, et la case cesse de
+   * répondre). On complète donc aux DEUX bouts — à la lecture pour l'affichage,
+   * à l'écriture pour que le stockage se répare au premier changement. Bumper la
+   * version du schéma pour une case à cocher se paierait en saisie perdue.
+   */
+  const store = useMemo(() => ({ ...SPEC.fallback, ...stored }), [stored]);
+  const setStore = useCallback(
+    (fn: (prev: TrackerState) => TrackerState) =>
+      writeStore((prev) => fn({ ...SPEC.fallback, ...prev })),
+    [writeStore],
+  );
 
   const tracked = store.heroes;
   const heroById = useMemo(() => new Map(heroes.map((h) => [h.id, h])), [heroes]);
