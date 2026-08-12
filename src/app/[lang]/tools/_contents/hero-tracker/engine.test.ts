@@ -5,6 +5,7 @@ import {
   giftBreakdown,
   hasWork,
   heroNeed,
+  mergeBreakdowns,
   type GrowthRules,
   type HeroProgress,
   type TrackedHero,
@@ -248,5 +249,29 @@ describe('foodBreakdown / giftBreakdown — conversion en items', () => {
     expect(giftBreakdown(1000, RULES.gifts, undefined, 0.5)).toEqual(
       giftBreakdown(1000, RULES.gifts),
     );
+  });
+});
+
+describe('mergeBreakdowns — totaliser APRÈS avoir converti par héros', () => {
+  it('somme les quantités du même item', () => {
+    const a = foodBreakdown(1000, RULES.xpFood);
+    const b = foodBreakdown(2000, RULES.xpFood);
+    const merged = mergeBreakdowns([a, b]);
+    expect(merged.map((m) => [m.entry.id, m.count])).toEqual([['food1000', 3]]);
+  });
+
+  it('convertir héros par héros coûte PLUS que convertir le total — et c’est le vrai prix', () => {
+    // Deux héros à 100 XP chacun : chacun doit ouvrir un Sandwich (250), soit 2.
+    // Le total (200 XP) n’en demanderait qu’un — mais un plat ne se partage pas.
+    const perHero = mergeBreakdowns([
+      foodBreakdown(100, RULES.xpFood),
+      foodBreakdown(100, RULES.xpFood),
+    ]);
+    expect(perHero.map((m) => [m.entry.id, m.count])).toEqual([['food250', 2]]);
+    expect(foodBreakdown(200, RULES.xpFood).map((m) => m.count)).toEqual([1]);
+  });
+
+  it('rien à convertir → aucune ligne', () => {
+    expect(mergeBreakdowns([[], []])).toEqual([]);
   });
 });

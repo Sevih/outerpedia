@@ -10,6 +10,7 @@ import {
   giftBreakdown,
   hasWork,
   heroNeed,
+  mergeBreakdowns,
   type GrowthRules,
   type HeroNeed,
   type HeroProgress,
@@ -28,6 +29,8 @@ import {
 
 /** Un palier de transcendance tel qu'il s'AFFICHE (l'étoile du jeu, pas l'index). */
 export interface TranscendStep extends TranscendCost {
+  /** Étoile INTERNE (1→9) : c'est elle que le barème de fusion référence. */
+  star: number;
   /** Étoiles pleines affichées en jeu (1→6). */
   showStar: number;
   /** Petits « + » au-delà de l'étoile pleine (4★+1…). */
@@ -46,6 +49,8 @@ export interface HeroRow {
   searchNames: string[];
   /** Paliers de Core Fusion si CE héros est un fusionné. */
   fusionLevels?: FusionLevelStep[];
+  /** Étoile interne exigée pour fusionner : un fusionné ne peut PAS être en deçà. */
+  requiredStar?: number;
   /** Le fusionné qui remplace ce héros de base, si le jeu en propose un. */
   fusionId?: string;
   /** Le héros de base dont ce fusionné est issu. */
@@ -228,6 +233,20 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
   );
 
   /**
+   * PLANCHER de transcendance : on ne fusionne qu'un héros déjà monté à
+   * l'étoile exigée (5★ en jeu), donc un fusionné ne peut pas être en deçà —
+   * lui proposer 3★ dans la liste ferait miroiter des pièces qu'il ne doit pas.
+   */
+  const minTranscend = useCallback(
+    (hero: HeroRow): number => {
+      if (!hero.requiredStar) return 0;
+      const i = ladder(asTracked(hero)).findIndex((s) => s.star === hero.requiredStar);
+      return i < 0 ? 0 : i;
+    },
+    [ladder, asTracked],
+  );
+
+  /**
    * Le PLAFOND de chaque axe pour ce héros — la cible par défaut, et la cible
    * TOUT COURT quand le réglage « toujours viser le max » est actif. Cette
    * surcharge ne TOUCHE PAS les cibles saisies : décocher le réglage les rend.
@@ -250,10 +269,15 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
       const entry = tracked[h.id];
       if (!entry || hidden.has(h.id)) continue;
       const target = store.alwaysMax ? maxTarget(h) : entry.target;
-      out.set(h.id, heroNeed(asTracked(h), entry.state, target, fullRules));
+      // Le plancher vaut aussi pour l'état : une saisie antérieure au plancher
+      // (ou un héros devenu fusionnable après coup) ne doit pas facturer des
+      // paliers que le jeu impose d'avoir déjà franchis.
+      const floor = minTranscend(h);
+      const state = { ...entry.state, transcend: Math.max(entry.state.transcend, floor) };
+      out.set(h.id, heroNeed(asTracked(h), state, target, fullRules));
     }
     return out;
-  }, [heroes, tracked, hidden, store.alwaysMax, maxTarget, asTracked, fullRules]);
+  }, [heroes, tracked, hidden, store.alwaysMax, maxTarget, minTranscend, asTracked, fullRules]);
 
   const total = useMemo(() => accountNeed([...needs.values()]), [needs]);
 
@@ -264,14 +288,14 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
         skills: Array(SKILL_SLOTS).fill(1),
         fusion: 0,
         affinity: 1,
-        transcend: 0,
+        transcend: minTranscend(hero),
         ee: Array(hero.fusionLevels ? 2 : 1).fill(0),
       },
       // La cible vise le plafond : c'est la question que pose l'outil (« que me
       // reste-t-il pour finir ce héros ? »), à rabaisser héros par héros.
       target: maxTarget(hero),
     }),
-    [maxTarget],
+    [maxTarget, minTranscend],
   );
 
   const update = (hero: HeroRow, side: 'state' | 'target', patch: Partial<HeroProgress>) =>
@@ -297,8 +321,23 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
   const withTarget = !store.alwaysMax;
 
   // Les plats et cadeaux ne sont pas des coûts stockés : ce sont des CONVERSIONS
-  // de l'XP et des points, faites à l'affichage.
-  const food = foodBreakdown(total.xp, rules.xpFood);
+  // de l'XP et des points, faites à l'affichage — et faites HÉROS PAR HÉROS
+  // avant d'être totalisées (règle Sevih) : un plat ne se coupe pas en deux, le
+  // reste de chacun s'arrondit chez lui. Le cadeau, lui, dépend en plus du type
+  // préféré du héros : il n'y a même pas de conversion globale possible.
+  const food = useMemo(
+    () => mergeBreakdowns(total.heroes.map((n) => foodBreakdown(n.xp, rules.xpFood))),
+    [total.heroes, rules.xpFood],
+  );
+  const gifts = useMemo(
+    () =>
+      mergeBreakdowns(
+        total.heroes.map((n) =>
+          giftBreakdown(n.affinityPoints, rules.gifts, heroById.get(n.heroId)?.gift, giftBonus),
+        ),
+      ),
+    [total.heroes, rules.gifts, heroById, giftBonus],
+  );
 
   return (
     <div className="space-y-6" aria-busy={!ready}>
@@ -386,7 +425,7 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
                 .map(([id, count]) => (
                   <ItemChip key={id} asset={items[id]} count={count} />
                 ))}
-              {food.map((b) => (
+              {[...food, ...gifts].map((b) => (
                 <ItemChip
                   key={b.entry.id}
                   asset={{ name: b.entry.name.en, icon: b.entry.icon, grade: b.entry.grade }}
@@ -569,6 +608,7 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
                       <StarRow
                         label={labels.transcend}
                         steps={steps}
+                        min={minTranscend(hero)}
                         state={entry.state.transcend}
                         target={entry.target.transcend}
                         withTarget={withTarget}
@@ -685,6 +725,7 @@ function AxisRow({
 function StarRow({
   label,
   steps,
+  min,
   state,
   target,
   withTarget,
@@ -693,6 +734,8 @@ function StarRow({
 }: {
   label: string;
   steps: TranscendStep[];
+  /** Premier palier PROPOSABLE (un fusionné démarre à l'étoile qu'il a exigée). */
+  min: number;
   state: number;
   target: number;
   withTarget: boolean;
@@ -701,12 +744,12 @@ function StarRow({
 }) {
   const select = (value: number, onChange: (v: number) => void) => (
     <select
-      value={value}
+      value={Math.max(value, min)}
       onChange={(e) => onChange(Number(e.target.value))}
       className="border-line bg-surface-sunken text-content-strong focus:border-accent w-full min-w-0 rounded border px-1 py-0.5 text-center text-xs outline-none"
     >
-      {steps.map((s, i) => (
-        <option key={i} value={i}>
+      {steps.slice(min).map((s, i) => (
+        <option key={i + min} value={i + min}>
           {s.showStar}★{s.starPlus > 0 ? `+${s.starPlus}` : ''}
         </option>
       ))}

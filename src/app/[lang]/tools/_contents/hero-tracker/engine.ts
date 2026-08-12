@@ -296,6 +296,25 @@ export function foodBreakdown(xp: number, xpFood: XpFoodItem[]): Breakdown<XpFoo
 }
 
 /**
+ * Additionne des décompositions faites HÉROS PAR HÉROS.
+ *
+ * Décomposer le total du compte donnerait un chiffre plus flatteur mais FAUX :
+ * un plat ne se coupe pas en deux, le reste de chaque héros s'arrondit chez lui.
+ * On convertit donc par héros (règle Sevih) et on ne totalise qu'après.
+ */
+export function mergeBreakdowns<T extends { id: string }>(parts: Breakdown<T>[][]): Breakdown<T>[] {
+  const byId = new Map<string, Breakdown<T>>();
+  for (const part of parts) {
+    for (const b of part) {
+      const hit = byId.get(b.entry.id);
+      if (hit) hit.count += b.count;
+      else byId.set(b.entry.id, { entry: b.entry, count: b.count });
+    }
+  }
+  return [...byId.values()];
+}
+
+/**
  * Points d'affinité manquants → cadeaux d'UN type donné (un héros n'en préfère
  * qu'un). `preferredBonus` applique le bonus du cadeau préféré (+50 % dans le
  * jeu) : sans lui le compte rendu est un MAJORANT, ce que l'UI doit dire.

@@ -105,7 +105,13 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
       rarity: c.rarity,
       ...(c.gift ? { gift: c.gift } : {}),
       searchNames: characterSearchNames(c, aliases[c.id]),
-      ...(asFusion ? { fusionLevels: asFusion.levels, baseId: asFusion.baseId } : {}),
+      ...(asFusion
+        ? {
+            fusionLevels: asFusion.levels,
+            baseId: asFusion.baseId,
+            requiredStar: asFusion.requiredStar,
+          }
+        : {}),
       ...(asBase ? { fusionId: asBase.fusionId } : {}),
     };
   });
