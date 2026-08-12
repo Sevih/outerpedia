@@ -169,6 +169,13 @@ const START_LEVEL = 5;
 const PREFERRED_GIFT_BONUS = 0.5;
 /** Au-delà, l'appui devient « je vise » plutôt que « j'en suis là ». */
 const LONG_PRESS_MS = 450;
+/**
+ * Paliers d'affinité où l'on s'arrête vraiment : 10 débloque l'équipement
+ * exclusif, puis 20/40/60/80/100 donnent des stats. Aucune table ne les porte
+ * (cf. le générateur hero-growth) — les paliers 30 et 70, qui n'ajoutent qu'une
+ * conversation, ne sont une raison de viser pour personne.
+ */
+const AFFINITY_PRESETS = [10, 20, 40, 60, 80, 100];
 
 const SPEC: StoreSpec<TrackerState> = {
   key: 'outerpedia:hero-tracker',
@@ -322,7 +329,8 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
     for (const h of heroes) {
       const entry = tracked[h.id];
       if (!entry || hidden.has(h.id)) continue;
-      const target = store.alwaysMax ? maxTarget(h) : entry.target;
+      const raw = store.alwaysMax ? maxTarget(h) : entry.target;
+      const target = h.fusionLevels ? { ...raw, fusion: Math.max(raw.fusion, 1) } : raw;
       // Planchers du jeu : un fusionné a forcément franchi l'étoile exigée et
       // le premier palier de fusion. Une saisie plus basse (ou antérieure à ces
       // règles) facturerait des coûts que le jeu impose d'avoir déjà payés.
@@ -881,7 +889,7 @@ function HeroCard({
   const { state, target } = entry;
 
   /**
-   * Sauts de niveau proposés : le plafond AVANT limit break (100 — là où
+   * Paliers de niveau proposés : le plafond AVANT limit break (100 — là où
    * beaucoup de comptes s'arrêtent), puis chaque palier de limit break.
    * Tout est dérivé du barème ; aucun de ces nombres n'est écrit en dur.
    */
@@ -893,6 +901,17 @@ function HeroCard({
     }
     return [...set].sort((a, b) => a - b);
   }, [rules, hero.rarity, hero.element]);
+
+  /**
+   * Paliers d'enchantement qui CHANGENT quelque chose : celui qui ouvre un slot
+   * de gemme (5) et le maximum (10, qui débloque la passive). Dérivés du barème
+   * plutôt qu'écrits à la main.
+   */
+  const eeStops = useMemo(() => {
+    const set = new Set<number>([rules.eeEnchant.length]);
+    for (const r of rules.eeEnchant) if (r.gemSlot > 0) set.add(r.level);
+    return [...set].sort((a, b) => a - b);
+  }, [rules.eeEnchant]);
 
   const summary = done
     ? labels.doneHero
@@ -959,40 +978,18 @@ function HeroCard({
             value={`${state.level}`}
             target={withTarget ? `${target.level}` : undefined}
           >
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-1.5">
-                <Stepper
-                  value={state.level}
-                  min={START_LEVEL}
-                  max={rules.xpCurve.length}
-                  onChange={(v) => onChange('state', { level: v })}
-                />
-                <TargetField
-                  show={withTarget}
-                  value={target.level}
-                  min={START_LEVEL}
-                  max={rules.xpCurve.length}
-                  onChange={(v) => onChange('target', { level: v })}
-                />
-              </div>
-              {/* Les paliers posent la CIBLE — ce sont des objectifs (« je le
-                  monte à 110 »), pas des états qu'on déclare. */}
-              <div className="flex gap-1">
-                {jumps.map((n) => (
-                  <button
-                    key={n}
-                    type="button"
-                    onClick={() => onChange(withTarget ? 'target' : 'state', { level: n })}
-                    className={`h-7 flex-1 rounded-lg border font-mono text-[11px] transition-colors ${
-                      (withTarget ? target.level : state.level) === n
-                        ? 'border-accent bg-accent/15 text-accent font-semibold'
-                        : 'border-line-subtle bg-surface-sunken text-content-muted hover:border-line'
-                    }`}
-                  >
-                    {n}
-                  </button>
-                ))}
-              </div>
+            <div className="flex flex-wrap items-center gap-1.5">
+              <Stepper
+                value={state.level}
+                min={START_LEVEL}
+                max={rules.xpCurve.length}
+                onChange={(v) => onChange('state', { level: v })}
+              />
+              <Presets
+                values={jumps}
+                active={withTarget ? target.level : state.level}
+                onPick={(v) => onChange(withTarget ? 'target' : 'state', { level: v })}
+              />
             </div>
           </Field>
 
@@ -1006,10 +1003,11 @@ function HeroCard({
               <Scale
                 // Les skills d'un fusionné DÉMARRENT au niveau 1 : posséder le
                 // fusionné, c'est l'avoir débloqué. Le palier 1 du barème (les
-                // 300 cores de la fusion) est donc déjà payé, jamais compté.
+                // 300 cores de la fusion) est donc déjà payé, jamais compté, et
+                // ni l'état ni la cible ne peuvent redescendre à 0.
                 values={Array.from({ length: hero.fusionLevels.length }, (_, i) => i + 1)}
-                current={state.fusion}
-                target={withTarget ? target.fusion : hero.fusionLevels.length}
+                current={Math.max(state.fusion, 1)}
+                target={withTarget ? Math.max(target.fusion, 1) : hero.fusionLevels.length}
                 withTarget={withTarget}
                 onCurrent={(v) => onChange('state', { fusion: v })}
                 onTarget={(v) => onChange('target', { fusion: v })}
@@ -1090,28 +1088,17 @@ function HeroCard({
             value={`${state.affinity}`}
             target={withTarget ? `${target.affinity}` : undefined}
           >
-            <div className="flex items-center gap-2.5">
-              <input
-                type="range"
-                min={1}
-                max={rules.affinityCurve.length}
-                value={state.affinity}
-                onChange={(e) => onChange('state', { affinity: Number(e.target.value) })}
-                className="accent-accent h-9 min-w-0 flex-1"
-                aria-label={labels.affinity}
-              />
-              <NumberField
+            <div className="flex flex-wrap items-center gap-1.5">
+              <Stepper
                 value={state.affinity}
                 min={1}
                 max={rules.affinityCurve.length}
                 onChange={(v) => onChange('state', { affinity: v })}
               />
-              <TargetField
-                show={withTarget}
-                value={target.affinity}
-                min={1}
-                max={rules.affinityCurve.length}
-                onChange={(v) => onChange('target', { affinity: v })}
+              <Presets
+                values={AFFINITY_PRESETS.filter((n) => n <= rules.affinityCurve.length)}
+                active={withTarget ? target.affinity : state.affinity}
+                onPick={(v) => onChange(withTarget ? 'target' : 'state', { affinity: v })}
               />
             </div>
           </Field>
@@ -1124,7 +1111,7 @@ function HeroCard({
               value={`+${state.ee[i] ?? 0}`}
               target={withTarget ? `+${target.ee[i] ?? 0}` : undefined}
             >
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-1.5">
                 {hero.ee[i] && (
                   <EquipmentIcon
                     src={img.equipment(hero.ee[i].icon)}
@@ -1140,12 +1127,15 @@ function HeroCard({
                   max={rules.eeEnchant.length}
                   onChange={(v) => onChange('state', { ee: replace(state.ee, i, v) })}
                 />
-                <TargetField
-                  show={withTarget}
-                  value={target.ee[i] ?? 0}
-                  min={0}
-                  max={rules.eeEnchant.length}
-                  onChange={(v) => onChange('target', { ee: replace(target.ee, i, v) })}
+                <Presets
+                  values={eeStops}
+                  active={withTarget ? (target.ee[i] ?? 0) : (state.ee[i] ?? 0)}
+                  format={(v) => `+${v}`}
+                  onPick={(v) =>
+                    onChange(withTarget ? 'target' : 'state', {
+                      ee: replace(withTarget ? target.ee : state.ee, i, v),
+                    })
+                  }
                 />
               </div>
             </Field>
@@ -1370,25 +1360,38 @@ function Stepper({
   );
 }
 
-/** « → [cible] » : le second champ des axes qui se saisissent au chiffre. */
-function TargetField({
-  show,
-  value,
-  min,
-  max,
-  onChange,
+/**
+ * Paliers d'un axe : les valeurs auxquelles on s'arrête vraiment. Ils posent la
+ * CIBLE — ce sont des objectifs (« je le monte à 110 »), pas des états qu'on
+ * déclare ; quand les cibles sont masquées, ils deviennent un raccourci d'état.
+ */
+function Presets({
+  values,
+  active,
+  onPick,
+  format,
 }: {
-  show: boolean;
-  value: number;
-  min: number;
-  max: number;
-  onChange: (v: number) => void;
+  values: number[];
+  active: number;
+  onPick: (v: number) => void;
+  format?: (v: number) => string;
 }) {
-  if (!show) return null;
   return (
-    <span className="flex shrink-0 items-center gap-1.5">
-      <span className="text-content-subtle text-xs">→</span>
-      <NumberField value={value} min={min} max={max} onChange={onChange} />
+    <span className="flex flex-wrap gap-1">
+      {values.map((v) => (
+        <button
+          key={v}
+          type="button"
+          onClick={() => onPick(v)}
+          className={`h-9 min-w-10 rounded-lg border px-2 font-mono text-[11px] transition-colors ${
+            active === v
+              ? 'border-accent bg-accent/15 text-accent font-semibold'
+              : 'border-line-subtle bg-surface-sunken text-content-muted hover:border-line'
+          }`}
+        >
+          {format ? format(v) : v}
+        </button>
+      ))}
     </span>
   );
 }
