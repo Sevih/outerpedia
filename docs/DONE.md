@@ -7,6 +7,14 @@
 
 ## 2026-08-12
 
+- **`/hero-tracker` — deux réglages « ignorer les 1★ / les 2★ » (Sevih)** — « on
+  peut les renseigner mais les ressources ne sont pas comptabilisées » : leur
+  carte reste éditable et affiche son besoin, qui est vrai, mais ils n'entrent
+  dans AUCUN total — ni liste de courses, ni or/XP/affinité, ni pièces. Personne
+  ne farme les manuels d'un 1★, et les compter noyait la liste de courses sous
+  des lignes qu'on n'achètera jamais. Une marque « non compté » sur la rangée du
+  héros, sinon le total aurait l'air faux.
+
 - **`/hero-tracker` — filtrer, trier, et surtout ARRÊTER DE BOUGER (Sevih, en
   remplissant son compte en prod)** — trois gênes de saisie réelle : (1) aucun
   filtre sur « mes héros », (2) aucun tri, (3) « la position des perso dans la

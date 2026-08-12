@@ -107,6 +107,9 @@ export interface HeroTrackerLabels {
   alwaysMax: string;
   hideMaxed: string;
   hideDone: string;
+  ignore1Star: string;
+  ignore2Star: string;
+  notCounted: string;
   shoppingList: string;
   myHeroes: string;
   addHero: string;
@@ -163,6 +166,9 @@ interface TrackerState {
   hideMaxed: boolean;
   /** Sortir de la liste les héros qui n'ont plus rien à farmer POUR LEUR cible. */
   hideDone: boolean;
+  /** Laisser les héros 1★ / 2★ HORS des totaux (leur carte reste éditable). */
+  ignore1Star: boolean;
+  ignore2Star: boolean;
 }
 
 /** Schéma v1 : les entrées à plat, un seul EE, trois slots de skill. */
@@ -230,6 +236,8 @@ const SPEC: StoreSpec<TrackerState> = {
     alwaysMax: false,
     hideMaxed: false,
     hideDone: false,
+    ignore1Star: false,
+    ignore2Star: false,
   },
   // v1 ignorait la chain passive, les Core Fusion et le second EE. Une saisie
   // déjà faite vaut mieux qu'un écran remis à zéro : on la relève.
@@ -254,6 +262,8 @@ const SPEC: StoreSpec<TrackerState> = {
       alwaysMax: false,
       hideMaxed: false,
       hideDone: false,
+      ignore1Star: false,
+      ignore2Star: false,
     };
   },
 };
@@ -401,7 +411,25 @@ export function HeroTrackerBrowser({
     return out;
   }, [heroes, tracked, hidden, store.alwaysMax, maxTarget, minTranscend, asTracked, fullRules]);
 
-  const total = useMemo(() => accountNeed([...needs.values()]), [needs]);
+  /**
+   * Un héros DÉCOMPTÉ : sa carte se remplit et affiche son besoin (il est vrai),
+   * mais il n'entre dans aucun total. Personne ne farme les manuels d'un 1★ —
+   * les compter noyait la liste de courses sous des lignes qu'on n'achètera pas.
+   */
+  const counted = useCallback(
+    (hero: HeroRow): boolean =>
+      !(hero.rarity === 1 && store.ignore1Star) && !(hero.rarity === 2 && store.ignore2Star),
+    [store.ignore1Star, store.ignore2Star],
+  );
+
+  const total = useMemo(() => {
+    const kept: HeroNeed[] = [];
+    for (const [id, need] of needs) {
+      const hero = heroById.get(id);
+      if (hero && counted(hero)) kept.push(need);
+    }
+    return accountNeed(kept);
+  }, [needs, counted, heroById]);
 
   const defaults = useCallback(
     (hero: HeroRow): HeroEntry => ({
@@ -682,6 +710,7 @@ export function HeroTrackerBrowser({
                 rules={rules}
                 items={items}
                 withTarget={withTarget}
+                counted={counted(hero)}
                 expanded={open === hero.id}
                 onExpand={() => {
                   setFrozen((f) => f ?? sortedRows.map((h) => h.id));
@@ -967,7 +996,10 @@ function Settings({
   trackedCount: number;
   labels: HeroTrackerLabels;
 }) {
-  const check = (key: 'alwaysMax' | 'hideMaxed' | 'hideDone', text: string) => (
+  const check = (
+    key: 'alwaysMax' | 'hideMaxed' | 'hideDone' | 'ignore1Star' | 'ignore2Star',
+    text: string,
+  ) => (
     <label className="text-content-muted flex cursor-pointer items-center gap-2 text-xs">
       <input
         type="checkbox"
@@ -988,6 +1020,8 @@ function Settings({
         {check('alwaysMax', labels.alwaysMax)}
         {check('hideDone', labels.hideDone)}
         {check('hideMaxed', labels.hideMaxed)}
+        {check('ignore1Star', labels.ignore1Star)}
+        {check('ignore2Star', labels.ignore2Star)}
 
         <div>
           <h3 className="text-content-strong text-xs font-semibold">{labels.settingsFusion}</h3>
@@ -1060,6 +1094,7 @@ function HeroCard({
   rules,
   items,
   withTarget,
+  counted,
   expanded,
   onExpand,
   onUntrack,
@@ -1074,6 +1109,8 @@ function HeroCard({
   rules: Omit<GrowthRules, 'transcendLadder'>;
   items: Record<string, ItemAsset>;
   withTarget: boolean;
+  /** Ce héros entre-t-il dans les totaux ? (réglages « ignorer les 1★/2★ ») */
+  counted: boolean;
   expanded: boolean;
   onExpand: () => void;
   onUntrack: () => void;
@@ -1169,6 +1206,11 @@ function HeroCard({
               {hero.fusionLevels && (
                 <span className="text-accent ml-1.5 text-[10px] uppercase">
                   {labels.coreFusion}
+                </span>
+              )}
+              {!counted && (
+                <span className="text-content-subtle border-line-subtle ml-1.5 rounded border px-1 text-[10px] uppercase">
+                  {labels.notCounted}
                 </span>
               )}
             </span>
