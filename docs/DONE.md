@@ -7,6 +7,15 @@
 
 ## 2026-08-12
 
+- **`/hero-tracker` — les pièces portent enfin leur icône (`img.piece`, genre
+  `piece-icon` du datagen que Sevih venait de construire)** — l'outil écrivait
+  « Pièces du héros ×450 » en toutes lettres, seul besoin sans visuel au milieu
+  de tuiles d'items. Il rend maintenant `PI_<id>` dans les deux endroits qui
+  comptent : le chip du héros déplié et le bloc « par héros, jamais mutualisées »
+  du récap. Variante SANS halo : le `_Fx` marque les pièces « rares », une
+  donnée curée côté site qui n'existe pas encore. L'icône est composée et porte
+  déjà son cadre du jeu — pas de tuile de rareté par-dessus, qui en ferait deux.
+
 - **`/hero-tracker` — « pas très compréhensible pour distinguer ce que l'on a de
   ce que l'on cible » (Sevih, capture à l'appui)** — le vrai défaut : les deux
   contrôles d'un axe (le champ, les paliers) ne disaient pas lequel portait

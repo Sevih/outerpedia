@@ -715,6 +715,7 @@ function SummaryPanel({
             <ul className="space-y-1">
               {pieces.map(([heroId, { pieces: count, steps }]) => (
                 <li key={heroId} className="flex items-center gap-2 text-xs">
+                  <PieceIcon id={heroId} />
                   <span className="text-content-muted min-w-0 flex-1 truncate">
                     {heroById.get(heroId)?.name ?? heroId}
                   </span>
@@ -1211,8 +1212,14 @@ function HeroCard({
                   />
                 ))}
                 {need.pieces > 0 && (
-                  <span className="border-line-subtle bg-surface-sunken text-content-muted rounded-lg border px-2 py-1 text-[11px]">
-                    {labels.pieces} ×{need.pieces}
+                  <span
+                    title={labels.pieces}
+                    className="border-line-subtle bg-surface-sunken flex items-center gap-1.5 rounded-lg border py-1 pr-2 pl-1"
+                  >
+                    <PieceIcon id={hero.id} />
+                    <span className="text-content-strong font-mono text-[11px] font-semibold">
+                      ×{need.pieces}
+                    </span>
                   </span>
                 )}
               </div>
@@ -1291,6 +1298,24 @@ function Rail({
       </span>
       {children}
     </span>
+  );
+}
+
+/**
+ * Pièce d'un héros. Elle n'est PAS un item — aucune ligne d'inventaire, aucun
+ * sprite : son icône se compose (portrait masqué + cadre du jeu) au datagen, et
+ * porte donc déjà son cadre. La reposer dans une tuile de rareté en ferait deux.
+ */
+function PieceIcon({ id }: { id: string }) {
+  return (
+    <img
+      src={img.piece(id)}
+      alt=""
+      aria-hidden
+      width={22}
+      height={22}
+      className="h-5.5 w-5.5 shrink-0"
+    />
   );
 }
 
