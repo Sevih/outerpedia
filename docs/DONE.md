@@ -34,10 +34,12 @@
   Sevih : les 2 manquants d'assets (`CT_2010130`) = la change-forme du COSTUME
   de Saeran s'auto-pointe en `FaceIconID` (contrairement à D.Luna qui pointe le
   frère) et sa texture n'est pas dans les bundles téléchargés — test in-game à
-  faire avant tout fallback ; et les 2 tests rouges du moment sont l'état
-  TRANSITOIRE de l'intégration Saeran (retenue levée au prochain
-  `promote --apply`) + le nouveau contenu Singularity 75000102 (options de
-  palier `_s_2/_s_3` inconnues de rankOptions — à traiter).
+  faire avant tout fallback ; et les 2 tests rouges du moment étaient l'état
+  TRANSITOIRE de l'intégration Saeran — RÉSOLUS tous deux par le
+  `promote --apply` de Sevih (l'EE a retrouvé ses passifs/pools, et les options
+  de palier `_s_2/_s_3` du nouveau boss de Singularité « Ksai » 75000102
+  étaient déjà générées, elles attendaient juste la promotion de
+  `glossaries.json` — rien à mapper, 34/34).
 
 - **Garde perso : la retenue remplace le tout-ou-rien (question Sevih « un perso
   datamined non-release bloque tout ? »)** — oui, c'était le cas : le refus
