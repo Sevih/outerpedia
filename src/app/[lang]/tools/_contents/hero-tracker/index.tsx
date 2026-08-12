@@ -68,6 +68,9 @@ function skillIcons(heroId: string): string[] {
   return SKILL_TYPES.map((type) => owned.find((s) => s.type === type)?.icon ?? '');
 }
 
+/** Les cinq éléments du jeu, dans l'ordre des écrans. */
+const ELEMENTS = ['fire', 'water', 'earth', 'light', 'dark'] as const;
+
 const LABEL_KEYS = [
   'intro',
   'search',
@@ -86,7 +89,6 @@ const LABEL_KEYS = [
   'affinityPoints',
   'pieces',
   'dupes',
-  'giftNote',
   'giftNoteBonus',
   'reset',
   'resetConfirm',
@@ -96,7 +98,6 @@ const LABEL_KEYS = [
   'settingsFusionHint',
   'base',
   'coreFusion',
-  'preferredGift',
   'alwaysMax',
   'hideMaxed',
   'hideDone',
@@ -112,6 +113,7 @@ const LABEL_KEYS = [
   'itemUnit',
   'axisAll',
   'piecesNote',
+  'piecesApart',
   'scaleHint',
   'now',
   'goal',
@@ -151,6 +153,7 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
       rarity: c.rarity,
       ...(c.gift ? { gift: c.gift } : {}),
       searchNames: characterSearchNames(c, aliases[c.id]),
+      tags: c.tags ?? [],
       skillIcons: skillIcons(c.id),
       ee,
       ...(asFusion
@@ -191,6 +194,12 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
   for (const steps of Object.values(limitBreak)) for (const s of steps) addItem(s.recallItemId);
   for (const f of growth.fusion) for (const l of f.levels) addItem(l.cost.item.id);
 
+  // Les pièces se groupent par élément : leurs noms viennent du dictionnaire
+  // système, comme partout ailleurs sur le site.
+  const elementNames = Object.fromEntries(
+    ELEMENTS.map((e) => [e, t(`sys.element.${e}` as TranslationKey)]),
+  );
+
   const labels = Object.fromEntries(
     LABEL_KEYS.map((k) => [k, t(`tools.hero-tracker.${k}` as TranslationKey)]),
   ) as unknown as HeroTrackerLabels;
@@ -209,6 +218,7 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
       }}
       transcend={transcend}
       items={items}
+      elementNames={elementNames}
       labels={labels}
     />
   );

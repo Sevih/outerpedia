@@ -7,6 +7,21 @@
 
 ## 2026-08-12
 
+- **`/hero-tracker` — le cadeau préféré devient la règle, et les pièces se lisent
+  comme elles se farment (Sevih)** — (1) « au contraire il faut forcer les gift
+  préférés (sinon c'est con) » : personne n'offre autre chose que son cadeau
+  préféré à un héros qu'on monte, donc le +50 % est TOUJOURS appliqué et la case
+  à cocher disparaît — avec elle la note « comptés sans le bonus », qui
+  n'annonçait plus qu'un majorant théorique (deux clés i18n retirées ×5).
+  (2) Le bloc des pièces passe de la liste (nom + nombre + doublons) à une
+  GRILLE 3 COLONNES d'icônes, le besoin sous chacune, GROUPÉE PAR ÉLÉMENT —
+  parce que c'est par élément qu'on va les chercher. Les héros `premium` et
+  `limited` en sortent : leurs pièces ne tombent dans aucun donjon d'élément, et
+  les ranger sous « feu » promettrait une source qui n'existe pas. Le tri vient
+  des tags CURÉS (aucune colonne du jeu ne dit comment un héros s'obtient — seul
+  `data/curated/characters.json` le sait) ; le nom du héros et le « ou N
+  doublons » vivent dans l'infobulle, l'icône suffit à le reconnaître.
+
 - **`/hero-tracker` — les pièces portent enfin leur icône (`img.piece`, genre
   `piece-icon` du datagen que Sevih venait de construire)** — l'outil écrivait
   « Pièces du héros ×450 » en toutes lettres, seul besoin sans visuel au milieu

@@ -315,8 +315,6 @@ const en = {
   'tools.hero-tracker.affinityPoints': 'Affinity points',
   'tools.hero-tracker.pieces': 'Hero pieces',
   'tools.hero-tracker.dupes': 'or {count} dupes',
-  'tools.hero-tracker.giftNote':
-    'Gift counts assume no preference bonus — a hero’s favourite gift needs fewer.',
   'tools.hero-tracker.giftNoteBonus':
     'Gift counts assume the hero’s favourite gift (+50% affinity).',
   'tools.hero-tracker.reset': 'Reset',
@@ -334,6 +332,7 @@ const en = {
   'tools.hero-tracker.itemUnit': 'items',
   'tools.hero-tracker.axisAll': 'All',
   'tools.hero-tracker.piecesNote': 'Pieces — per hero, never pooled',
+  'tools.hero-tracker.piecesApart': 'Premium & Festival',
   'tools.hero-tracker.scaleHint': 'click = now · shift+click = goal',
   'tools.hero-tracker.now': 'Now',
   'tools.hero-tracker.goal': 'Goal',
@@ -346,7 +345,6 @@ const en = {
   'tools.hero-tracker.alwaysMax': 'Always target max values',
   'tools.hero-tracker.hideMaxed': 'Hide fully maxed heroes',
   'tools.hero-tracker.hideDone': 'Hide heroes that reached their target',
-  'tools.hero-tracker.preferredGift': 'Assume favourite gifts (+50% affinity)',
   'tools.team-planner': 'Team Planner',
   'tools.team-planner.desc': 'Build and share team compositions for any content.',
   'tools.team-planner.empty_slot': 'Empty Slot',

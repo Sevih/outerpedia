@@ -55,6 +55,8 @@ export interface HeroRow {
   /** Type de cadeau préféré (`present_01`…) — oriente la conversion en cadeaux. */
   gift?: string;
   searchNames: string[];
+  /** Tags curés (`premium`, `limited`…) — ils disent comment le héros s'obtient. */
+  tags: string[];
   /** Icônes des 4 skills améliorables, dans l'ordre S1 / S2 / ultime / chain. */
   skillIcons: string[];
   /** Équipements exclusifs portés : l'hérité d'abord pour un fusionné, puis le sien. */
@@ -93,7 +95,6 @@ export interface HeroTrackerLabels {
   affinityPoints: string;
   pieces: string;
   dupes: string;
-  giftNote: string;
   giftNoteBonus: string;
   reset: string;
   resetConfirm: string;
@@ -103,7 +104,6 @@ export interface HeroTrackerLabels {
   settingsFusionHint: string;
   base: string;
   coreFusion: string;
-  preferredGift: string;
   alwaysMax: string;
   hideMaxed: string;
   hideDone: string;
@@ -119,6 +119,7 @@ export interface HeroTrackerLabels {
   itemUnit: string;
   axisAll: string;
   piecesNote: string;
+  piecesApart: string;
   scaleHint: string;
   now: string;
   goal: string;
@@ -134,6 +135,8 @@ export interface HeroTrackerData {
   };
   /** Items référencés par les coûts (manuels, mémoires, matériaux EE, cores). */
   items: Record<string, ItemAsset>;
+  /** Nom traduit de chaque élément — les pièces se groupent comme on les farme. */
+  elementNames: Record<string, string>;
   labels: HeroTrackerLabels;
 }
 
@@ -147,8 +150,6 @@ interface TrackerState {
   heroes: Record<string, HeroEntry>;
   /** id du héros de BASE → on possède sa Core Fusion plutôt que lui. */
   fused: Record<string, boolean>;
-  /** Compter les cadeaux au tarif du cadeau PRÉFÉRÉ (+50 %). */
-  preferredGift: boolean;
   /** Tout viser au maximum : les cibles ne se saisissent plus, l'écran s'allège. */
   alwaysMax: boolean;
   /** Sortir de la liste les héros déjà au PLAFOND de chaque axe. */
@@ -167,10 +168,21 @@ const SKILL_SLOTS = 4;
 const MAX_SKILL = 5;
 /** Un héros se recrute au niveau 5 : rien en dessous n'existe en jeu. */
 const START_LEVEL = 5;
-/** Bonus du cadeau préféré, curé dans le guide heroes-growth (aucune table). */
+/**
+ * Bonus du cadeau préféré (curé dans le guide heroes-growth, aucune table).
+ * TOUJOURS appliqué : offrir autre chose que son cadeau préféré à un héros qu'on
+ * monte n'a aucune raison d'arriver — le compter serait un majorant pour rien.
+ */
 const PREFERRED_GIFT_BONUS = 0.5;
 /** Au-delà, l'appui devient « je vise » plutôt que « j'en suis là ». */
 const LONG_PRESS_MS = 450;
+/**
+ * Héros dont les pièces NE tombent PAS dans les donjons d'élément : elles ne se
+ * farment pas, elles s'achètent ou se gagnent en bannière. Les grouper avec un
+ * élément promettrait une source qui n'existe pas. Tags curés (`data/curated`).
+ */
+const PIECES_APART = ['premium', 'limited'];
+
 /**
  * Paliers d'affinité où l'on s'arrête vraiment : 10 débloque l'équipement
  * exclusif, puis 20/40/60/80/100 donnent des stats. Aucune table ne les porte
@@ -185,7 +197,6 @@ const SPEC: StoreSpec<TrackerState> = {
   fallback: {
     heroes: {},
     fused: {},
-    preferredGift: false,
     alwaysMax: false,
     hideMaxed: false,
     hideDone: false,
@@ -210,7 +221,6 @@ const SPEC: StoreSpec<TrackerState> = {
     return {
       heroes,
       fused: {},
-      preferredGift: false,
       alwaysMax: false,
       hideMaxed: false,
       hideDone: false,
@@ -230,7 +240,14 @@ const short = (n: number): string =>
 const starLabel = (s?: TranscendStep): string =>
   s ? `${s.showStar}★${s.starPlus > 0 ? `+${s.starPlus}` : ''}` : '—';
 
-export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: HeroTrackerData) {
+export function HeroTrackerBrowser({
+  heroes,
+  rules,
+  transcend,
+  items,
+  elementNames,
+  labels,
+}: HeroTrackerData) {
   const [stored, writeStore, ready] = useStoredState(SPEC);
   const [query, setQuery] = useState('');
   const [axis, setAxis] = useState<NeedAxis | 'all'>('all');
@@ -382,7 +399,6 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
     });
 
   const withTarget = !store.alwaysMax;
-  const giftBonus = store.preferredGift ? PREFERRED_GIFT_BONUS : 0;
 
   // Plats et cadeaux ne sont pas des coûts stockés : ce sont des CONVERSIONS de
   // l'XP et des points, faites HÉROS PAR HÉROS avant d'être totalisées — un plat
@@ -395,10 +411,15 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
     () =>
       mergeBreakdowns(
         total.heroes.map((n) =>
-          giftBreakdown(n.affinityPoints, rules.gifts, heroById.get(n.heroId)?.gift, giftBonus),
+          giftBreakdown(
+            n.affinityPoints,
+            rules.gifts,
+            heroById.get(n.heroId)?.gift,
+            PREFERRED_GIFT_BONUS,
+          ),
         ),
       ),
-    [total.heroes, rules.gifts, heroById, giftBonus],
+    [total.heroes, rules.gifts, heroById],
   );
 
   /** La liste de courses : items des barèmes + conversions, filtrée par axe. */
@@ -495,9 +516,9 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
           shopping={shopping}
           itemTotal={itemTotal}
           heroById={heroById}
+          elementNames={elementNames}
           axis={axis}
           onAxis={setAxis}
-          preferredGift={store.preferredGift}
           labels={labels}
         />
         <Settings
@@ -550,7 +571,6 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
                 rules={rules}
                 items={items}
                 withTarget={withTarget}
-                giftBonus={giftBonus}
                 expanded={open === hero.id}
                 onExpand={() => setOpen((v) => (v === hero.id ? null : hero.id))}
                 onUntrack={() => toggle(hero)}
@@ -591,18 +611,18 @@ function SummaryPanel({
   shopping,
   itemTotal,
   heroById,
+  elementNames,
   axis,
   onAxis,
-  preferredGift,
   labels,
 }: {
   total: ReturnType<typeof accountNeed>;
   shopping: ShoppingRow[];
   itemTotal: number;
   heroById: Map<string, HeroRow>;
+  elementNames: Record<string, string>;
   axis: NeedAxis | 'all';
   onAxis: (a: NeedAxis | 'all') => void;
-  preferredGift: boolean;
   labels: HeroTrackerLabels;
 }) {
   const axisLabel: Record<NeedAxis, string> = {
@@ -610,7 +630,42 @@ function SummaryPanel({
     skills: labels.skills,
     ee: labels.ee,
   };
-  const pieces = Object.entries(total.pieces);
+  /**
+   * Les pièces se farment par ÉLÉMENT : on les groupe comme on les récolte, du
+   * plus gros besoin au plus petit. Les héros premium et festival n'ont pas
+   * cette porte de sortie — leurs pièces vivent à part, sinon la colonne « feu »
+   * promettrait un donjon qui ne les donnera jamais.
+   */
+  const pieceGroups = useMemo(() => {
+    const rows = Object.entries(total.pieces).map(([id, { pieces: count, steps }]) => ({
+      id,
+      count,
+      steps,
+      hero: heroById.get(id),
+    }));
+    const apart = rows.filter((r) => r.hero?.tags?.some((t) => PIECES_APART.includes(t)));
+    const byElement = rows.filter((r) => !apart.includes(r));
+    const order = (a: { count: number }, b: { count: number }) => b.count - a.count;
+    const groups: {
+      key: string;
+      /** `null` = le groupe à part : aucun donjon d'élément derrière lui. */
+      element: string | null;
+      label: string;
+      rows: typeof rows;
+    }[] = ELEMENTS.map((el) => ({
+      key: el,
+      element: el,
+      label: elementNames[el] ?? el,
+      rows: byElement.filter((r) => r.hero?.element === el).sort(order),
+    }));
+    groups.push({
+      key: 'apart',
+      element: null,
+      label: labels.piecesApart,
+      rows: apart.sort(order),
+    });
+    return groups.filter((g) => g.rows.length > 0);
+  }, [total.pieces, heroById, elementNames, labels.piecesApart]);
 
   return (
     <details
@@ -702,30 +757,52 @@ function SummaryPanel({
         )}
 
         {total.affinityPoints > 0 && (
-          <p className="text-content-subtle text-[11px]">
-            {preferredGift ? labels.giftNoteBonus : labels.giftNote}
-          </p>
+          <p className="text-content-subtle text-[11px]">{labels.giftNoteBonus}</p>
         )}
 
-        {pieces.length > 0 && (
+        {pieceGroups.length > 0 && (
           <div className="border-line-subtle bg-surface-sunken rounded-lg border border-dashed p-2.5">
-            <h3 className="text-content-muted mb-1.5 font-mono text-[11px] tracking-wide uppercase">
+            <h3 className="text-content-muted font-mono text-[11px] tracking-wide uppercase">
               {labels.piecesNote}
             </h3>
-            <ul className="space-y-1">
-              {pieces.map(([heroId, { pieces: count, steps }]) => (
-                <li key={heroId} className="flex items-center gap-2 text-xs">
-                  <PieceIcon id={heroId} />
-                  <span className="text-content-muted min-w-0 flex-1 truncate">
-                    {heroById.get(heroId)?.name ?? heroId}
-                  </span>
-                  <span className="text-content-strong font-mono font-semibold">×{count}</span>
-                  <span className="text-content-subtle">
-                    {labels.dupes.replace('{count}', String(steps))}
-                  </span>
-                </li>
+            <div className="mt-2 space-y-2.5">
+              {pieceGroups.map((g) => (
+                <div key={g.key}>
+                  <h4 className="text-content-subtle flex items-center gap-1 font-mono text-[10px] tracking-wide uppercase">
+                    {g.element && (
+                      <img
+                        src={img.element(g.element)}
+                        alt=""
+                        aria-hidden
+                        width={14}
+                        height={14}
+                        className="h-3.5 w-3.5"
+                      />
+                    )}
+                    {g.label}
+                  </h4>
+                  {/* L'icône porte le héros, le nombre porte le besoin : le nom
+                      n'apporterait qu'une colonne de texte tronqué. */}
+                  <ul className="mt-1 grid grid-cols-3 gap-1.5">
+                    {g.rows.map((r) => (
+                      <li
+                        key={r.id}
+                        title={`${r.hero?.name ?? r.id} — ×${fmt(r.count)} ${labels.dupes.replace(
+                          '{count}',
+                          String(r.steps),
+                        )}`}
+                        className="border-line-subtle bg-surface-raised flex flex-col items-center gap-0.5 rounded-lg border px-1 py-1.5"
+                      >
+                        <PieceIcon id={r.id} large />
+                        <span className="text-content-strong font-mono text-[11px] font-semibold">
+                          ×{fmt(r.count)}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         )}
       </div>
@@ -771,7 +848,7 @@ function Settings({
   trackedCount: number;
   labels: HeroTrackerLabels;
 }) {
-  const check = (key: 'alwaysMax' | 'preferredGift' | 'hideMaxed' | 'hideDone', text: string) => (
+  const check = (key: 'alwaysMax' | 'hideMaxed' | 'hideDone', text: string) => (
     <label className="text-content-muted flex cursor-pointer items-center gap-2 text-xs">
       <input
         type="checkbox"
@@ -790,7 +867,6 @@ function Settings({
       </summary>
       <div className="space-y-3 px-3 pt-1 pb-3">
         {check('alwaysMax', labels.alwaysMax)}
-        {check('preferredGift', labels.preferredGift)}
         {check('hideDone', labels.hideDone)}
         {check('hideMaxed', labels.hideMaxed)}
 
@@ -865,7 +941,6 @@ function HeroCard({
   rules,
   items,
   withTarget,
-  giftBonus,
   expanded,
   onExpand,
   onUntrack,
@@ -880,7 +955,6 @@ function HeroCard({
   rules: Omit<GrowthRules, 'transcendLadder'>;
   items: Record<string, ItemAsset>;
   withTarget: boolean;
-  giftBonus: number;
   expanded: boolean;
   onExpand: () => void;
   onUntrack: () => void;
@@ -1204,7 +1278,12 @@ function HeroCard({
                     count={b.count}
                   />
                 ))}
-                {giftBreakdown(need.affinityPoints, rules.gifts, hero.gift, giftBonus).map((b) => (
+                {giftBreakdown(
+                  need.affinityPoints,
+                  rules.gifts,
+                  hero.gift,
+                  PREFERRED_GIFT_BONUS,
+                ).map((b) => (
                   <NeedChip
                     key={b.entry.id}
                     asset={{ name: b.entry.name.en, icon: b.entry.icon, grade: b.entry.grade }}
@@ -1306,15 +1385,16 @@ function Rail({
  * sprite : son icône se compose (portrait masqué + cadre du jeu) au datagen, et
  * porte donc déjà son cadre. La reposer dans une tuile de rareté en ferait deux.
  */
-function PieceIcon({ id }: { id: string }) {
+function PieceIcon({ id, large = false }: { id: string; large?: boolean }) {
+  const px = large ? 40 : 22;
   return (
     <img
       src={img.piece(id)}
       alt=""
       aria-hidden
-      width={22}
-      height={22}
-      className="h-5.5 w-5.5 shrink-0"
+      width={px}
+      height={px}
+      className={`shrink-0 ${large ? 'h-10 w-10' : 'h-5.5 w-5.5'}`}
     />
   );
 }

@@ -304,8 +304,6 @@ const jp: Record<TranslationKey, string> = {
   'tools.hero-tracker.affinityPoints': '好感度ポイント',
   'tools.hero-tracker.pieces': 'ヒーローのかけら',
   'tools.hero-tracker.dupes': 'または重複{count}体',
-  'tools.hero-tracker.giftNote':
-    'プレゼントの数は好みボーナスなしで計算しています — 好みのプレゼントなら必要数は減ります。',
   'tools.hero-tracker.giftNoteBonus':
     'プレゼントの数は好みのプレゼント（好感度+50%）で計算しています。',
   'tools.hero-tracker.reset': 'リセット',
@@ -323,6 +321,7 @@ const jp: Record<TranslationKey, string> = {
   'tools.hero-tracker.itemUnit': '個',
   'tools.hero-tracker.axisAll': 'すべて',
   'tools.hero-tracker.piecesNote': 'かけら — ヒーローごと、共用不可',
+  'tools.hero-tracker.piecesApart': 'プレミアム・フェス',
   'tools.hero-tracker.scaleHint': 'クリック=現在 · Shift+クリック=目標',
   'tools.hero-tracker.now': '現在',
   'tools.hero-tracker.goal': '目標',
@@ -335,7 +334,6 @@ const jp: Record<TranslationKey, string> = {
   'tools.hero-tracker.alwaysMax': '常に最大値を目標にする',
   'tools.hero-tracker.hideMaxed': 'カンストしたヒーローを隠す',
   'tools.hero-tracker.hideDone': '目標に到達したヒーローを隠す',
-  'tools.hero-tracker.preferredGift': '好みのプレゼントとして計算（好感度+50%）',
   'tools.team-planner': 'チームプランナー',
   'tools.team-planner.desc': 'あらゆるコンテンツ向けのチーム編成を作成・共有。',
   'tools.team-planner.empty_slot': '空きスロット',

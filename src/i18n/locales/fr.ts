@@ -315,8 +315,6 @@ const fr: Record<TranslationKey, string> = {
   'tools.hero-tracker.affinityPoints': 'Points d’affinité',
   'tools.hero-tracker.pieces': 'Pièces du héros',
   'tools.hero-tracker.dupes': 'ou {count} doublon(s)',
-  'tools.hero-tracker.giftNote':
-    'Les cadeaux sont comptés sans le bonus de préférence — le cadeau préféré d’un héros en demande moins.',
   'tools.hero-tracker.giftNoteBonus':
     'Les cadeaux sont comptés avec le cadeau préféré du héros (+50 % d’affinité).',
   'tools.hero-tracker.reset': 'Réinitialiser',
@@ -334,6 +332,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.hero-tracker.itemUnit': 'objets',
   'tools.hero-tracker.axisAll': 'Tous',
   'tools.hero-tracker.piecesNote': 'Pièces — par héros, jamais mutualisées',
+  'tools.hero-tracker.piecesApart': 'Premium & Festival',
   'tools.hero-tracker.scaleHint': 'clic = actuel · maj+clic = objectif',
   'tools.hero-tracker.now': 'Actuel',
   'tools.hero-tracker.goal': 'Objectif',
@@ -346,7 +345,6 @@ const fr: Record<TranslationKey, string> = {
   'tools.hero-tracker.alwaysMax': 'Toujours viser les valeurs max',
   'tools.hero-tracker.hideMaxed': 'Masquer les héros au maximum',
   'tools.hero-tracker.hideDone': 'Masquer les héros qui ont atteint leur cible',
-  'tools.hero-tracker.preferredGift': 'Compter les cadeaux préférés (+50 % d’affinité)',
   'tools.team-planner': "Planificateur d'équipe",
   'tools.team-planner.desc':
     "Construisez et partagez des compositions d'équipe pour tout type de contenu.",
