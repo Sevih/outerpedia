@@ -98,6 +98,8 @@ const LABEL_KEYS = [
   'coreFusion',
   'preferredGift',
   'alwaysMax',
+  'hideMaxed',
+  'hideDone',
   'shoppingList',
   'myHeroes',
   'addHero',

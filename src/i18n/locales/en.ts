@@ -342,6 +342,8 @@ const en = {
   'tools.hero-tracker.base': 'Base',
   'tools.hero-tracker.coreFusion': 'Core Fusion',
   'tools.hero-tracker.alwaysMax': 'Always target max values',
+  'tools.hero-tracker.hideMaxed': 'Hide fully maxed heroes',
+  'tools.hero-tracker.hideDone': 'Hide heroes that reached their target',
   'tools.hero-tracker.preferredGift': 'Assume favourite gifts (+50% affinity)',
   'tools.team-planner': 'Team Planner',
   'tools.team-planner.desc': 'Build and share team compositions for any content.',

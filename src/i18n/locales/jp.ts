@@ -331,6 +331,8 @@ const jp: Record<TranslationKey, string> = {
   'tools.hero-tracker.base': '通常版',
   'tools.hero-tracker.coreFusion': 'コアフュージョン',
   'tools.hero-tracker.alwaysMax': '常に最大値を目標にする',
+  'tools.hero-tracker.hideMaxed': 'カンストしたヒーローを隠す',
+  'tools.hero-tracker.hideDone': '目標に到達したヒーローを隠す',
   'tools.hero-tracker.preferredGift': '好みのプレゼントとして計算（好感度+50%）',
   'tools.team-planner': 'チームプランナー',
   'tools.team-planner.desc': 'あらゆるコンテンツ向けのチーム編成を作成・共有。',

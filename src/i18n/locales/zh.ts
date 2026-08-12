@@ -317,6 +317,8 @@ const zh: Record<TranslationKey, string> = {
   'tools.hero-tracker.base': '原版',
   'tools.hero-tracker.coreFusion': '核心融合',
   'tools.hero-tracker.alwaysMax': '始终以满级为目标',
+  'tools.hero-tracker.hideMaxed': '隐藏已满级的英雄',
+  'tools.hero-tracker.hideDone': '隐藏已达成目标的英雄',
   'tools.hero-tracker.preferredGift': '按英雄喜爱的礼物计算（好感度 +50%）',
   'tools.team-planner': '队伍规划器',
   'tools.team-planner.desc': '配置队伍并分享。',

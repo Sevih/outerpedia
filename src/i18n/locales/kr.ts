@@ -324,6 +324,8 @@ const kr: Record<TranslationKey, string> = {
   'tools.hero-tracker.base': '기본',
   'tools.hero-tracker.coreFusion': '코어 퓨전',
   'tools.hero-tracker.alwaysMax': '항상 최대치를 목표로 설정',
+  'tools.hero-tracker.hideMaxed': '만렙 영웅 숨기기',
+  'tools.hero-tracker.hideDone': '목표를 달성한 영웅 숨기기',
   'tools.hero-tracker.preferredGift': '선호 선물 기준으로 계산(호감도 +50%)',
   'tools.team-planner': '팀 플래너',
   'tools.team-planner.desc': '모든 콘텐츠에 맞는 팀 구성을 만들고 공유하세요.',

@@ -105,6 +105,8 @@ export interface HeroTrackerLabels {
   coreFusion: string;
   preferredGift: string;
   alwaysMax: string;
+  hideMaxed: string;
+  hideDone: string;
   shoppingList: string;
   myHeroes: string;
   addHero: string;
@@ -147,6 +149,10 @@ interface TrackerState {
   preferredGift: boolean;
   /** Tout viser au maximum : les cibles ne se saisissent plus, l'écran s'allège. */
   alwaysMax: boolean;
+  /** Sortir de la liste les héros déjà au PLAFOND de chaque axe. */
+  hideMaxed: boolean;
+  /** Sortir de la liste les héros qui n'ont plus rien à farmer POUR LEUR cible. */
+  hideDone: boolean;
 }
 
 /** Schéma v1 : les entrées à plat, un seul EE, trois slots de skill. */
@@ -167,7 +173,14 @@ const LONG_PRESS_MS = 450;
 const SPEC: StoreSpec<TrackerState> = {
   key: 'outerpedia:hero-tracker',
   version: 2,
-  fallback: { heroes: {}, fused: {}, preferredGift: false, alwaysMax: false },
+  fallback: {
+    heroes: {},
+    fused: {},
+    preferredGift: false,
+    alwaysMax: false,
+    hideMaxed: false,
+    hideDone: false,
+  },
   // v1 ignorait la chain passive, les Core Fusion et le second EE. Une saisie
   // déjà faite vaut mieux qu'un écran remis à zéro : on la relève.
   migrate: (data, from) => {
@@ -185,7 +198,14 @@ const SPEC: StoreSpec<TrackerState> = {
       if (!e?.state || !e?.target) continue;
       heroes[id] = { state: lift(e.state), target: lift(e.target) };
     }
-    return { heroes, fused: {}, preferredGift: false, alwaysMax: false };
+    return {
+      heroes,
+      fused: {},
+      preferredGift: false,
+      alwaysMax: false,
+      hideMaxed: false,
+      hideDone: false,
+    };
   },
 };
 
@@ -391,16 +411,51 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
 
   const itemTotal = shopping.reduce((sum, r) => sum + r.count, 0);
 
+  /**
+   * Un héros au PLAFOND de chaque axe. À distinguer de « plus rien à farmer » :
+   * un héros peut avoir atteint une cible modeste sans être au maximum, d'où
+   * deux réglages de masquage plutôt qu'un.
+   */
+  const isMaxed = useCallback(
+    (hero: HeroRow, state: HeroProgress): boolean => {
+      const max = maxTarget(hero);
+      const skillsDone = hero.fusionLevels
+        ? state.fusion >= max.fusion
+        : max.skills.every((v, i) => (state.skills[i] ?? 1) >= v);
+      return (
+        state.level >= max.level &&
+        state.affinity >= max.affinity &&
+        state.transcend >= max.transcend &&
+        skillsDone &&
+        max.ee.every((v, i) => (state.ee[i] ?? 0) >= v)
+      );
+    },
+    [maxTarget],
+  );
+
   /** Suivis d'abord, du plus gourmand au plus léger, les héros finis en dernier. */
   const trackedRows = useMemo(() => {
-    const rows = heroes.filter((h) => tracked[h.id] && !hidden.has(h.id));
+    const rows = heroes.filter((h) => {
+      const entry = tracked[h.id];
+      if (!entry || hidden.has(h.id)) return false;
+      if (store.hideMaxed && isMaxed(h, entry.state)) return false;
+      const need = needs.get(h.id);
+      if (store.hideDone && (!need || !hasWork(need))) return false;
+      return true;
+    });
     const weight = (h: HeroRow) => {
       const n = needs.get(h.id);
       if (!n || !hasWork(n)) return -1;
       return Object.values(n.items).reduce((a, b) => a + b, 0);
     };
     return rows.sort((a, b) => weight(b) - weight(a) || a.name.localeCompare(b.name));
-  }, [heroes, tracked, hidden, needs]);
+  }, [heroes, tracked, hidden, needs, store.hideMaxed, store.hideDone, isMaxed]);
+
+  /** Suivis en tout — pour dire combien les réglages en escamotent. */
+  const trackedTotal = useMemo(
+    () => heroes.filter((h) => tracked[h.id] && !hidden.has(h.id)).length,
+    [heroes, tracked, hidden],
+  );
 
   const q = query.trim().toLowerCase();
   const pickable = useMemo(
@@ -442,7 +497,12 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
         <div className="flex flex-wrap items-center gap-2">
           <h2 className="text-content-strong text-base font-semibold">
             {labels.myHeroes}{' '}
-            <span className="text-content-muted font-normal">{trackedRows.length}</span>
+            <span className="text-content-muted font-normal">
+              {/* « 4 / 12 » quand un réglage en masque : sans ça, des héros
+                  disparaissent sans que rien ne le dise. */}
+              {trackedRows.length}
+              {trackedRows.length !== trackedTotal && ` / ${trackedTotal}`}
+            </span>
           </h2>
           <div className="flex-1" />
           <button
@@ -693,7 +753,7 @@ function Settings({
   trackedCount: number;
   labels: HeroTrackerLabels;
 }) {
-  const check = (key: 'alwaysMax' | 'preferredGift', text: string) => (
+  const check = (key: 'alwaysMax' | 'preferredGift' | 'hideMaxed' | 'hideDone', text: string) => (
     <label className="text-content-muted flex cursor-pointer items-center gap-2 text-xs">
       <input
         type="checkbox"
@@ -713,6 +773,8 @@ function Settings({
       <div className="space-y-3 px-3 pt-1 pb-3">
         {check('alwaysMax', labels.alwaysMax)}
         {check('preferredGift', labels.preferredGift)}
+        {check('hideDone', labels.hideDone)}
+        {check('hideMaxed', labels.hideMaxed)}
 
         <div>
           <h3 className="text-content-strong text-xs font-semibold">{labels.settingsFusion}</h3>
