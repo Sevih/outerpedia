@@ -1,6 +1,7 @@
 {
   "buff": {
     "BT_RANDOM_STAT": { "category": "statBoosts" },
+    "BT_STAT_BUFF_ENHANCE_IR": { "category": "statBoosts", "group": "BUFF_ENHANCEMENT" },
     "BT_STAT|ST_ACCURACY": { "category": "statBoosts" },
     "BT_STAT|ST_ATK": { "category": "statBoosts" },
     "BT_STAT|ST_ATK_IR": { "category": "statBoosts", "group": "BT_STAT|ST_ATK" },
@@ -23,6 +24,7 @@
     },
     "BT_STAT|ST_SPEED": { "category": "statBoosts" },
     "BT_STAT|ST_SPEED_IR": { "category": "statBoosts", "group": "BT_STAT|ST_SPEED" },
+    "BUFF_ENHANCEMENT": { "category": "statBoosts" },
 
     "BT_BARRIER": { "category": "supporting" },
     "BT_BARRIER_IR": { "category": "supporting" },
@@ -90,8 +92,6 @@
     "WHITE_NIGHT": { "category": "unique" },
 
     "BT_DAMAGE_TAKEN": { "category": "hidden" },
-    "BT_STAT_BUFF_ENHANCE_IR": { "category": "hidden" },
-    "BUFF_ENHANCEMENT": { "category": "hidden" },
     "CORE_ENERGY": { "category": "hidden" },
     "COURAGE_AGAINST_DESPAIR": { "category": "hidden" },
     "COURAGE_DESPAIR_ELEM": { "category": "hidden" },

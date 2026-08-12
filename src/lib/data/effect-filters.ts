@@ -14,7 +14,12 @@
  * matche ≥1 perso, et chaque clé de perso a sa case — pas de filtre mort.
  */
 import glossariesData from '@data/generated/glossaries.json';
-import { resolveEffectKey } from '@/lib/data/effects';
+import {
+  getMergedEffects,
+  loadCuratedEffects,
+  resolveEffectKey,
+  type MergedEffect,
+} from '@/lib/data/effects';
 import { EFFECT_FAMILIES, type EffectSide } from '@/lib/data/effect-families';
 import type { Lang } from '@/lib/i18n/config';
 
@@ -106,6 +111,44 @@ export function canonicalizeKeys(side: EffectSide, keys: string[] | undefined): 
 }
 
 /**
+ * Index `côté|nom EN` → effet IRREMOVABLE de ce nom. Le jeu encode la version
+ * irremovable d'un statut comme un effet DISTINCT (icône à cadre `_Interruption`)
+ * — c'est ce jumeau qu'on retrouve ici depuis l'effet de base.
+ *
+ * Mémoïsé sur l'IDENTITÉ du curé (comme les index de `effects.ts`) : une icône
+ * curée depuis l'admin se voit sans redémarrage.
+ */
+let twinCache: { ref: Record<string, unknown>; index: Map<string, MergedEffect> } | null = null;
+function irremovableTwins(): Map<string, MergedEffect> {
+  const ref = loadCuratedEffects();
+  if (twinCache?.ref === ref) return twinCache.index;
+  const index = new Map<string, MergedEffect>();
+  for (const eff of getMergedEffects()) {
+    if (!eff.irremovable || !eff.name.en) continue;
+    const k = `${eff.isDebuff ? 'debuff' : 'buff'}|${eff.name.en}`;
+    if (!index.has(k)) index.set(k, eff);
+  }
+  twinCache = { ref, index };
+  return index;
+}
+
+/**
+ * Icône de la case. Les deux versions d'un statut (normale et irremovable) se
+ * replient sur UNE case ; par défaut elle prend l'icône de la version normale.
+ *
+ * Exception, famille `unique` : ces statuts sont la signature d'un perso et le
+ * jeu les applique en version IRREMOVABLE — on préfère donc le cadre
+ * `_Interruption`, celui que le joueur voit en combat (ex. « Punishment », dont
+ * la base 106 et le jumeau 1106 partagent la case). Ailleurs (Barrier, Bleeding,
+ * buffs de stat…), la même case sert des dizaines de persos dont la plupart
+ * posent la version normale : le cadre neutre reste le bon défaut.
+ */
+function optionIcon(side: EffectSide, eff: MergedEffect, category: string): string {
+  if (category !== 'unique' || eff.irremovable) return eff.icon;
+  return irremovableTwins().get(`${side}|${eff.name.en}`)?.icon ?? eff.icon;
+}
+
+/**
  * Construit les groupes d'effets d'un côté à partir des clés RÉELLEMENT présentes
  * chez les persos (union des agrégats). `titleFor(category)` résout le titre
  * localisé (`characters.effectsGroups.<side>.<category>`). Vide si la taxonomie
@@ -152,7 +195,7 @@ export function buildEffectGroups(
     bucket.push({
       key,
       label: eff.name[lang] ?? eff.name.en ?? key,
-      icon: eff.icon,
+      icon: optionIcon(side, eff, category),
     });
     byCategory.set(category, bucket);
   }

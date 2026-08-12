@@ -395,8 +395,13 @@ export default async function CharacterDetail({
         // Au +10 on n'affiche que le NOUVEAU (palier débloqué / valeur qui
         // change) — pas la répétition d'un effet de base inchangé.
         const lv10 = lv10All.filter((tx) => !lv1.includes(tx));
-        // Chips buff/debuff des passifs (comme les skills) + statuts résolus.
-        const eeEffects = model.passives.flatMap((pt) => pt.effects ?? []);
+        // Chips buff/debuff de l'EE + statuts résolus. On prend `effectChips` du
+        // modèle — MÊME source que la fiche EE, donc la curation d'affichage
+        // (`chipHide`/`chipAdd` de `equipment.json` → `ee[charId]`) s'applique ici
+        // aussi. Les rederiver depuis `passives[].effects` (les effets BRUTS des
+        // passifs) court-circuitait la curation : chips masquées toujours là,
+        // chips ajoutées jamais affichées.
+        const eeEffects = model.effectChips?.effects ?? [];
         mergeStatusEffects(statuses, eeEffects, lang);
         eeCard = {
           characterId: char.id,

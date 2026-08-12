@@ -3003,8 +3003,8 @@
     "buff": [
       "BT_ACTION_GAUGE",
       "BT_COOL_CHARGE",
-      "BT_STAT_BUFF_ENHANCE_IR",
       "BT_STAT|ST_ATK",
+      "BUFF_ENHANCEMENT",
       "EXTRA_SKILL",
       "GRACE_OF_THE_VIRGIN_GODDESS",
       "UNCOUNTERABLE"

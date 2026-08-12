@@ -43,6 +43,9 @@
       "zh": "夺取目标的强化效果。"
     }
   },
+  "106": {
+    "tag": "unique"
+  },
   "1002": {
     "icon": "IG_Buff_Dot_Curse_Interruption_D"
   },
@@ -51,6 +54,9 @@
   },
   "1010": {
     "tag": "statBoosts"
+  },
+  "1106": {
+    "tag": "unique"
   },
   "10002": {
     "tag": "statBoosts"
@@ -62,6 +68,9 @@
     "keys": ["BT_CASTER_COPY_BUFF"],
     "tag": "unique",
     "note": "copie de buffs (Dianne) : le buff BT_CASTER_COPY_BUFF n'a pas de tooltip — clé type → statut « Gift of Buffs »"
+  },
+  "2100129": {
+    "tag": "unique"
   },
   "DISCHARGE_AP": {
     "name": {
