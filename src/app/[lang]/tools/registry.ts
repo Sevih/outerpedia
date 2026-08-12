@@ -24,6 +24,9 @@ export const TOOL_COMPONENTS: Record<
   'patch-history': () => import('./_contents/patch-history'),
   'pull-simulator': () => import('./_contents/pull-simulator'),
   'progress-tracker': () => import('./_contents/progress-tracker'),
+  // Statut `unlisted` (routable pour revue, absent de la landing) le temps de
+  // la boucle Sevih ; passera `available` une fois les axes arbitrés.
+  'hero-tracker': () => import('./_contents/hero-tracker'),
   'tier-list-maker': () => import('./_contents/tier-list-maker'),
   'team-planner': () => import('./_contents/team-planner'),
   // Phase UI seule (statut `unlisted` : routable pour revue, absent de la

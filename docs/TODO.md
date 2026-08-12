@@ -37,7 +37,20 @@
       ⚠ SURTOUT NE PAS se baser sur la V2 pour cet outil (décision Sevih 22/07 :
       le calculateur V2 est foireux) — exception à la règle « V2 = oracle »,
       conception V3 native.
-- [ ] **`/tools` — outil pour track l'avancée du compte sur les hero (niveau, skill, affinity)
+- [ ] **`/tools` — hero-tracker : boucle de revue Sevih** (V1 livrée le 04/08,
+      cf. DONE — page `unlisted`, routable pour revue). RESTE : (1) arbitrer
+      les axes réellement utiles (Sevih : « on retirera des trucs à la fin ») ;
+      (2) CONFIRMER que seuls first/second/ultimate se montent aux manuels (le
+      chain passive a `maxLevel 5` mais monte peut-être à la transcendance) ;
+      (3) le bonus « cadeau préféré » (+50 %, curé dans l'éditorial du guide
+      heroes-growth) n'est PAS appliqué — l'outil affiche un majorant, à
+      trancher ; (4) `pnpm images` (PNG de `CM_EtcMenu_Colleague` pour l'og:image)
+      puis passage `unlisted` → `available`.
+- [ ] **Arbre de dons / awakening — outil ou guide À PART.** Constaté en
+      cartographiant le hero-tracker : l'awakening n'est PAS par héros, c'est un
+      arbre de COMPTE (`CharacterAwakeningTemplet` : 5 groupes, 207 nœuds,
+      conditions de niveau de compte / donjon) qui consomme Proof of Destiny,
+      Token of Connection et Proof of Worth. Rien n'est extrait aujourd'hui.
 
 ## 🧹 Dette code
 

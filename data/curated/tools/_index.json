@@ -69,6 +69,24 @@
     "status": "available",
     "keywords": ["progress", "tracker", "checklist", "daily", "weekly", "monthly"]
   },
+  "hero-tracker": {
+    "icon": "nav/CM_EtcMenu_Colleague",
+    "category": "simulators",
+    "order": 95,
+    "status": "unlisted",
+    "keywords": [
+      "hero",
+      "tracker",
+      "account",
+      "progress",
+      "level",
+      "skill",
+      "affinity",
+      "materials",
+      "farm",
+      "roster"
+    ]
+  },
   "team-planner": {
     "icon": "nav/CM_Agit_Icon_Supplier_05",
     "category": "simulators",

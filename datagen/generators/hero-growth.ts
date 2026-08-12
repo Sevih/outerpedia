@@ -19,8 +19,20 @@
  *    palier (10+20+30+40+50) — ici on donne le détail par niveau.
  *  • `xpFood` — items de nourriture d'XP : `ItemTemplet` `ITS_MATERIAL_CHAR_LEVEL`
  *    (XP = `MaterialValue`).
+ *  • `xpCurve` / `affinityCurve` — courbes d'XP CUMULÉ par niveau de héros
+ *    (1→120) et par niveau d'affinité (1→100) : `ExpCharacterTemplet`
+ *    (`TotalExp` / `TrustExp`, tous deux vérifiés monotones = cumulés).
+ *  • `gifts` — cadeaux d'affinité et leurs points. AUCUNE table ne porte ces
+ *    points (`MaterialValue` est vide sur les présents) : ils vivent dans le
+ *    TEXTE localisé de l'item (« …increase their Affinity level by 100 »), donc
+ *    on les dérive de la description ANGLAISE avec un motif strict — et on jette
+ *    si le motif ne matche plus, plutôt que de servir un barème muet et faux.
  *
- * Le reste (points des gifts d'affinité, paliers de récompense, effets de
+ * Les trois derniers servent l'outil de suivi de compte (`hero-tracker`), les
+ * quatre premiers le guide « Growth Systems » — même domaine, même fichier :
+ * dupliquer la croissance des héros dans un second JSON en ferait diverger un.
+ *
+ * Le reste (bonus d'un cadeau PRÉFÉRÉ, paliers de récompense, effets de
  * transcendance…) N'A PAS ses chiffres dans la donnée → reste éditorial dans le
  * guide (`editorial.ts`).
  */
@@ -72,11 +84,28 @@ export interface XpFoodItem extends ItemRef {
   xp: number;
 }
 
+/** Un cadeau d'affinité. */
+export interface GiftItem extends ItemRef {
+  /**
+   * Points d'affinité accordés. Bonus « cadeau PRÉFÉRÉ » NON inclus : le jeu ne
+   * le chiffre nulle part (le texte dit seulement « you will gain a bonus »),
+   * donc l'outil raisonne au taux de base — un majorant honnête.
+   */
+  points: number;
+  /** Type de présent (`present_01`…), à comparer au `gift` préféré du héros. */
+  presentType: string;
+}
+
 export interface HeroGrowthData {
   limitBreak: Record<string, LimitBreakStep[]>;
   skillUpgrade: Record<string, SkillUpgradeRow[]>;
   specialEquip: { ee: EnchantRow[]; talisman: EnchantRow[] };
   xpFood: XpFoodItem[];
+  /** XP CUMULÉ pour atteindre le niveau n : index `n - 1` (niveau 1 = 0). */
+  xpCurve: number[];
+  /** Points d'affinité CUMULÉS pour le niveau n : index `n - 1` (niveau 1 = 0). */
+  affinityCurve: number[];
+  gifts: GiftItem[];
 }
 
 /** Résout une réf d'item depuis le catalogue (jette si absent — SSG strict). */
@@ -184,13 +213,72 @@ function buildXpFood(catalog: Record<string, CatalogEntry>): XpFoodItem[] {
     .sort((a, b) => a.xp - b.xp);
 }
 
+/**
+ * Courbe cumulée d'une colonne d'`ExpCharacterTemplet`, indexée par niveau − 1.
+ * Les lignes à 0 au-delà du dernier palier (TrustExp s'arrête au niveau 100
+ * alors que la table va à 120) TERMINENT la courbe : les garder donnerait un
+ * coût qui retombe à zéro, donc « rien à farmer » au niveau max.
+ */
+export function cumulativeCurve(rows: Row[], column: 'TotalExp' | 'TrustExp'): number[] {
+  const byLevel = [...rows].sort((a, b) => num(a.Level) - num(b.Level));
+  const out: number[] = [];
+  for (const r of byLevel) {
+    const v = num(r[column]);
+    if (out.length && v === 0) break;
+    if (out.length && v < out[out.length - 1]) {
+      throw new Error(`hero-growth : ${column} non monotone au niveau ${r.Level} (${v})`);
+    }
+    out.push(v);
+  }
+  if (out.length < 2 || out[0] !== 0) {
+    throw new Error(
+      `hero-growth : ${column} inexploitable (${out.length} paliers, début ${out[0]})`,
+    );
+  }
+  return out;
+}
+
+/** « …increase their Affinity level by 1,000. » → 1000. */
+const GIFT_POINTS_RE = /Affinity(?: level)? by ([\d,]+)/i;
+
+/**
+ * Cadeaux d'affinité génériques (`present_01`…`present_05`), points dérivés de
+ * la description anglaise. Les `present_max` (item unique « à tel niveau
+ * d'affinité d'un coup ») et les présents réservés à UN héros sont écartés : ce
+ * ne sont pas des monnaies de farm, ils fausseraient un barème par grade.
+ */
+function buildGifts(catalog: Record<string, CatalogEntry>): GiftItem[] {
+  const out: GiftItem[] = [];
+  for (const [id, e] of Object.entries(catalog)) {
+    if (!/^present_0\d$/.test(e.subType ?? '') || e.characterLimit) continue;
+    const desc = e.desc?.en ?? '';
+    const m = GIFT_POINTS_RE.exec(desc);
+    if (!m) {
+      throw new Error(
+        `hero-growth : cadeau ${id} (${e.name.en}) — points d'affinité introuvables dans « ${desc.slice(0, 80)} »`,
+      );
+    }
+    out.push({
+      ...itemRef(id, catalog),
+      points: Number(m[1].replace(/,/g, '')),
+      presentType: e.subType as string,
+    });
+  }
+  if (!out.length) throw new Error('hero-growth : aucun cadeau d’affinité trouvé');
+  return out.sort((a, b) => a.points - b.points || a.id.localeCompare(b.id));
+}
+
 export function buildHeroGrowth(): HeroGrowthData {
   const catalog = buildItemCatalog();
+  const exp = loadTable('ExpCharacterTemplet');
   return {
     limitBreak: buildLimitBreak(catalog),
     skillUpgrade: buildSkillUpgrade(catalog),
     specialEquip: buildSpecialEquip(catalog),
     xpFood: buildXpFood(catalog),
+    xpCurve: cumulativeCurve(exp, 'TotalExp'),
+    affinityCurve: cumulativeCurve(exp, 'TrustExp'),
+    gifts: buildGifts(catalog),
   };
 }
 
@@ -218,4 +306,11 @@ if (isMain(import.meta.url)) {
     d.specialEquip.talisman.length,
   );
   console.log('xpFood :', d.xpFood.map((f) => `${f.name.en}=${f.xp}`).join(', '));
+  console.log(
+    `xpCurve : ${d.xpCurve.length} niveaux, max ${d.xpCurve[d.xpCurve.length - 1].toLocaleString('en')} XP`,
+  );
+  console.log(
+    `affinityCurve : ${d.affinityCurve.length} niveaux, max ${d.affinityCurve[d.affinityCurve.length - 1].toLocaleString('en')} pts`,
+  );
+  console.log('gifts :', d.gifts.map((g) => `${g.name.en}=${g.points}`).join(', '));
 }

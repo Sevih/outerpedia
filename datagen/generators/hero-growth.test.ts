@@ -17,7 +17,7 @@ import heroGrowthData from '../../data/generated/hero-growth.json';
 import itemsData from '../../data/generated/items.json';
 import type { Row } from '../lib/tables';
 import type { CatalogEntry } from './item-catalog';
-import { costsFrom, itemRef, type HeroGrowthData } from './hero-growth';
+import { costsFrom, cumulativeCurve, itemRef, type HeroGrowthData } from './hero-growth';
 
 const dict = (en: string) => ({ en, jp: '', kr: '', zh: '' });
 const catalog = {
@@ -60,6 +60,54 @@ describe('costsFrom — paires ItemID_n/ItemCnt_n → coûts', () => {
   it('écarte id=0 et count=0', () => {
     const row: Row = { ItemID_1: '0', ItemCnt_1: '5', ItemID_2: '20202', ItemCnt_2: '0' };
     expect(costsFrom(row, pairs, catalog)).toEqual([]);
+  });
+});
+
+describe('cumulativeCurve — courbes d’XP cumulé', () => {
+  const rows = (vals: [string, string][]): Row[] =>
+    vals.map(([Level, TotalExp]) => ({ Level, TotalExp }));
+
+  it('trie par niveau et rend le cumul, index = niveau − 1', () => {
+    expect(
+      cumulativeCurve(
+        rows([
+          ['3', '221'],
+          ['1', '0'],
+          ['2', '105'],
+        ]),
+        'TotalExp',
+      ),
+    ).toEqual([0, 105, 221]);
+  });
+
+  it('S’ARRÊTE au premier 0 de queue — TrustExp meurt au niveau 100, la table va à 120', () => {
+    // Sans cette coupure, les niveaux 101+ vaudraient 0 point cumulé : le coût
+    // retomberait à zéro au lieu de sortir de la plage jouable.
+    const curve = cumulativeCurve(
+      rows([
+        ['1', '0'],
+        ['2', '1000'],
+        ['3', '3000'],
+        ['4', '0'],
+        ['5', '0'],
+      ]),
+      'TotalExp',
+    );
+    expect(curve).toEqual([0, 1000, 3000]);
+  });
+
+  it('jette si la courbe recule (donnée corrompue) ou est inexploitable', () => {
+    expect(() =>
+      cumulativeCurve(
+        rows([
+          ['1', '0'],
+          ['2', '500'],
+          ['3', '400'],
+        ]),
+        'TotalExp',
+      ),
+    ).toThrow(/non monotone/);
+    expect(() => cumulativeCurve(rows([['1', '42']]), 'TotalExp')).toThrow(/inexploitable/);
   });
 });
 
@@ -113,6 +161,37 @@ describe('hero-growth.json — invariants', () => {
       prev = f.xp;
     }
     expect(bad).toEqual([]);
+  });
+
+  it('courbes : cumulées strictement croissantes, démarrant à 0 (héros 120, affinité 100)', () => {
+    const bad: string[] = [];
+    for (const [label, curve] of [
+      ['xpCurve', h.xpCurve],
+      ['affinityCurve', h.affinityCurve],
+    ] as const) {
+      if (curve[0] !== 0) bad.push(`${label} : démarre à ${curve[0]}`);
+      for (let i = 1; i < curve.length; i++)
+        if (curve[i] <= curve[i - 1]) bad.push(`${label} : palier ${i + 1} = ${curve[i]}`);
+    }
+    expect(bad).toEqual([]);
+    // Le niveau max EST le contrat de l'outil : un cran de plus et la saisie de
+    // niveau accepterait une valeur que le jeu refuse.
+    expect(h.xpCurve).toHaveLength(120);
+    expect(h.affinityCurve).toHaveLength(100);
+  });
+
+  it('cadeaux : points > 0, types present_0X, chaque grade a son palier', () => {
+    const bad: string[] = [];
+    for (const g of h.gifts) {
+      if (g.points <= 0) bad.push(`${g.id} : ${g.points} pts`);
+      if (!/^present_0\d$/.test(g.presentType)) bad.push(`${g.id} : type ${g.presentType}`);
+      if (!itemIds.has(g.id)) bad.push(`${g.id} : absent d’items.json`);
+    }
+    expect(bad).toEqual([]);
+    // Un point par grade : le barème du jeu monte 100 → 200 → 500 → 1000.
+    expect([...new Set(h.gifts.map((g) => g.points))].sort((a, b) => a - b)).toEqual([
+      100, 200, 500, 1000,
+    ]);
   });
 
   it('chaque item de coût est résolu (id dans items.json, name/icon/grade)', () => {

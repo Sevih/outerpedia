@@ -1547,6 +1547,35 @@ is not a function` sur les routes admin). Redémarrage requis ; à ne pas
 
 ## 2026-08-04
 
+- **`/tools/hero-tracker` — V1 : suivi de compte par héros → items à farmer**
+  (demande Sevih, item TODO « track l'avancée du compte sur les hero »).
+  CARTOGRAPHIE D'ABORD, et elle a décidé du reste : tout ce qu'il fallait
+  existait déjà, sauf trois choses, ajoutées au générateur `hero-growth`
+  (même domaine, même fichier — un second JSON « croissance des héros »
+  aurait divergé) : `xpCurve` (120 niveaux) et `affinityCurve` (100
+  niveaux) depuis `ExpCharacterTemplet`, et `gifts` — dont les points ne
+  sont dans AUCUNE table (`MaterialValue` vide) mais dans le TEXTE de
+  l'item : dérivés par motif strict, qui JETTE s'il ne matche plus.
+  Recoupement fort : les 20 cadeaux et leurs paliers (100/200/500/1000)
+  tombent exactement sur l'éditorial curé du guide heroes-growth.
+  MOTEUR (`engine.ts`, pur, tables injectées, 16 tests) : différentiels de
+  CUMUL pour niveau et affinité (jamais une somme de paliers), paliers
+  franchis pour skills / limit break / EE / transcendance, bornes à zéro
+  (dépasser sa cible n'est pas une dette), et les deux monnaies qui ne sont
+  pas des items — XP et points d'affinité — converties en plats/cadeaux à
+  l'affichage seulement.
+  TROUVAILLES : le limit break consomme une « Limit Break Memory [élément] »
+  GÉNÉRIQUE (`progression.limitBreak` indexé `${rareté}_${élément}`), donc
+  agrégeable sur tout le compte ; la transcendance, elle, consomme des
+  fragments PROPRES au héros — jamais additionnés entre héros. Et
+  l'awakening n'est PAS par héros (arbre de compte) : sorti du périmètre,
+  reversé au TODO.
+  État en localStorage (`outerpedia:hero-tracker`, aucun compte), roster
+  complet affiché (un héros non suivi se repère), cible préremplie par
+  héros (niveau 100, skills max, affinité 20 ; transcendance et EE égales à
+  l'état — elles dépendent du gacha). 24 clés i18n ×5. Page `unlisted` : la
+  boucle de revue et les arbitrages restants sont au TODO.
+
 - **ee-effects : DoT enhance — deux sens opposés sous le même type** (rapport
   Sevih : Gnosis Beth « 2000092 enhance », Omega Nadja spammée de six chips
   enhance). (1) `BT_2000092_ENHANCE` : le nombre est l'id du PERSO (Gnosis
