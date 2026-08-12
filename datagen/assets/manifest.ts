@@ -6,10 +6,12 @@
  * clés stables) — sauf l'ÉDITORIAL qui n'existe pas en jeu (drapeaux, image
  * OG, BD…) et vit dans `data/editorial` (versionné, héritage V2 rapatrié).
  *
- * Trois genres de demandes :
- *   - `image`     : trouver le sprite du jeu (candidats = basenames) → webp ;
- *   - `face-icon` : COMPOSÉE depuis le portrait + layout Unity (cf. face-icon.ts) ;
- *   - `editorial` : copie telle quelle depuis `data/editorial` (hors jeu).
+ * Quatre genres de demandes :
+ *   - `image`      : trouver le sprite du jeu (candidats = basenames) → webp ;
+ *   - `face-icon`  : COMPOSÉE depuis le portrait + layout Unity (cf. face-icon.ts) ;
+ *   - `piece-icon` : COMPOSÉE — pièce de héros, portrait masqué + cadre + halo
+ *     (cf. piece-icon.ts) ;
+ *   - `editorial`  : copie telle quelle depuis `data/editorial` (hors jeu).
  */
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -56,6 +58,15 @@ export type AssetRequest =
       lossless?: boolean;
     }
   | { kind: 'face-icon'; key: string; id: string; domain: string }
+  | {
+      /** Icône de PIÈCE de héros, composée portrait+masque+cadre (cf. piece-icon.ts). */
+      kind: 'piece-icon';
+      key: string;
+      id: string;
+      /** Variante halo (`Image_Fx` du slot — pièces « rares »). */
+      fx?: boolean;
+      domain: string;
+    }
   | { kind: 'editorial'; key: string; source: string; domain: string };
 
 type Dict = Record<string, Record<string, unknown>>;
@@ -169,6 +180,26 @@ export function characterAssetRequests(
       kind: 'image',
       key: `images/characters/atb/IG_Turn_${id}.webp`,
       candidates: [`IG_Turn_${id}`],
+      domain: 'characters',
+    },
+    // Pièce de héros (« Pieces of {0} ») — item qui n'a AUCUN sprite en jeu :
+    // l'icône se compose (portrait masqué + cadre + halo), cf. piece-icon.ts.
+    // Deux variantes comme le jeu : halo éteint (défaut du prefab) et allumé
+    // (`m_PieceRareObj`, pièces rares) — quel héros est « rare » est une donnée
+    // curée côté site, pas dérivable des tables : on produit les deux, le rendu
+    // choisit. Par PERSO de base uniquement : une pièce est une ressource par
+    // id de perso (pas d'item, pas de pièce par skin).
+    {
+      kind: 'piece-icon',
+      key: `images/characters/piece/PI_${id}.webp`,
+      id,
+      domain: 'characters',
+    },
+    {
+      kind: 'piece-icon',
+      key: `images/characters/piece/PI_${id}_Fx.webp`,
+      id,
+      fx: true,
       domain: 'characters',
     },
   ];

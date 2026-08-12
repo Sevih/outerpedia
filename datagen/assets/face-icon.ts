@@ -14,7 +14,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { paddingFor } from './sprite-rect';
 
-interface FaceIconVariant {
+export interface FaceIconVariant {
   frame: { w: number; h: number };
   character: { x: number; y: number; w: number; h: number; scale: [number, number] };
 }
@@ -33,6 +33,16 @@ function layout(): FaceIconLayout {
     layoutCache = JSON.parse(readFileSync(FACE_ICON_LAYOUT, 'utf8')) as FaceIconLayout;
   }
   return layoutCache;
+}
+
+/**
+ * Une variante du layout FaceIcon d'un perso (Thumbnail, Piece, Equip…) —
+ * `undefined` si le prefab ne la porte pas. Exposée pour les AUTRES icônes
+ * composées depuis le même prefab (cf. piece-icon.ts) : le layout n'a qu'un
+ * lecteur, ses consommateurs partagent le même cache.
+ */
+export function faceIconVariant(id: string, variant: string): FaceIconVariant | undefined {
+  return layout()[id]?.[variant];
 }
 
 /** Compose l'icône de visage depuis le portrait. `null` si layout absent.

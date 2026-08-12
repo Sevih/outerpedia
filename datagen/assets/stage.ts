@@ -29,6 +29,7 @@ import { createHash } from 'node:crypto';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
 import { FACE_ICON_LAYOUT, makeFaceIcon } from './face-icon';
+import { makePieceIcon } from './piece-icon';
 import type { AssetRequest } from './manifest';
 import { findImage, type ImageIndex } from './source';
 import { hasRect, paddingFor, SPRITE_RECT } from './sprite-rect';
@@ -206,6 +207,64 @@ export async function stageAssets(
         const buf = await makeFaceIcon(req.id, portrait, format);
         if (!buf) {
           result.missing.push({ key: req.key, reason: `layout FaceIcon absent pour ${req.id}` });
+          continue;
+        }
+        mkdirSync(dirname(dest), { recursive: true });
+        writeFileSync(dest, buf);
+        commit();
+        produced();
+        continue;
+      }
+
+      if (req.kind === 'piece-icon') {
+        const portrait = findImage(index, [`CT_${req.id}`]);
+        if (!portrait) {
+          result.missing.push({ key: req.key, reason: `portrait CT_${req.id} introuvable` });
+          continue;
+        }
+        // Le chrome est COMMUN à toutes les pièces — absent, c'est toute la
+        // famille qui manque, autant le dire sur chaque clé demandée.
+        const mask = findImage(index, ['CT_Mask_Piece']);
+        const frame = findImage(index, ['CM_Piece_Frame']);
+        const fx = req.fx ? findImage(index, ['TI_Piece_Fx']) : undefined;
+        const missingChrome = [
+          !mask && 'CT_Mask_Piece',
+          !frame && 'CM_Piece_Frame',
+          req.fx && !fx && 'TI_Piece_Fx',
+        ].filter(Boolean);
+        if (missingChrome.length || !mask || !frame) {
+          result.missing.push({
+            key: req.key,
+            reason: `sprite introuvable : ${missingChrome.join(', ')}`,
+          });
+          continue;
+        }
+        const format = req.key.endsWith('.png') ? ('png' as const) : ('webp' as const);
+        // Chaque calque est une source ; le layout aussi (cadrage corrigé =
+        // icône à refaire), et la table de rognage pour le portrait d'atlas.
+        const sources = [portrait, mask, frame, ...(fx ? [fx] : []), FACE_ICON_LAYOUT];
+        if (hasRect(portrait)) sources.push(SPRITE_RECT);
+        const { fresh, commit } = check(
+          req.key,
+          dest,
+          sources,
+          `piece-icon:${req.fx ? 'fx:' : ''}${format}`,
+        );
+        if (fresh) {
+          result.present++;
+          continue;
+        }
+        const buf = await makePieceIcon(
+          req.id,
+          portrait,
+          { mask, frame, fx },
+          { fx: req.fx, format },
+        );
+        if (!buf) {
+          result.missing.push({
+            key: req.key,
+            reason: `variante Piece du layout FaceIcon absente pour ${req.id}`,
+          });
           continue;
         }
         mkdirSync(dirname(dest), { recursive: true });

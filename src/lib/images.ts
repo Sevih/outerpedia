@@ -42,6 +42,10 @@ export const img = {
   face: faceSrc,
   /** Variante PNG (og:image — les aperçus Discord/OG préfèrent le PNG). */
   facePng: (id: string) => `${BASE}/images/characters/faceicon/FI_${id}.png`,
+  /** Icône de pièce de héros (« Pieces of {0} » — composée, cf. datagen/assets/piece-icon.ts).
+   *  `fx` = halo des pièces rares (`m_PieceRareObj` du slot du jeu). */
+  piece: (id: string, fx = false) =>
+    `${BASE}/images/characters/piece/PI_${id}${fx ? '_Fx' : ''}.webp`,
   /** Icône d'ordre de tour (barre ATB en combat). */
   atb: (id: string) => `${BASE}/images/characters/atb/IG_Turn_${id}.webp`,
   /** Icône d'élément (slug → CamelCase ; sprites IG_Turn_Element_*). */
