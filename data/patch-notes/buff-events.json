@@ -1119,6 +1119,71 @@
       "date": "2026-08-10",
       "type": "special-identification",
       "raw": "Challenge! Special Request: Identification Drop Rate +30%"
+    },
+    {
+      "date": "2026-08-12",
+      "type": "frog-gold",
+      "raw": "Hypnotic Frog Hall: Increased Gold Rewards by 100%"
+    },
+    {
+      "date": "2026-08-13",
+      "type": "ark-raid",
+      "raw": "Ark Raid: Increased Item Rewards by 100%"
+    },
+    {
+      "date": "2026-08-14",
+      "type": "special-ecology",
+      "raw": "Challenge! Special Request: Ecology Study Drop Rate +30%"
+    },
+    {
+      "date": "2026-08-15",
+      "type": "story-survey",
+      "raw": "[Origin Story] Survey Points x2"
+    },
+    {
+      "date": "2026-08-16",
+      "type": "doppelganger",
+      "raw": "[Doppelgänger Hunt] 3★ Hero Pieces Obtained +1"
+    },
+    {
+      "date": "2026-08-17",
+      "type": "special-identification",
+      "raw": "Challenge! Special Request: Identification Drop Rate +30%"
+    },
+    {
+      "date": "2026-08-18",
+      "type": "frog-food",
+      "raw": "Hypnotic Frog Hall: Increased Food Rewards by 100%"
+    },
+    {
+      "date": "2026-08-19",
+      "type": "frog-gold",
+      "raw": "Hypnotic Frog Hall: Increased Gold Rewards by 100%"
+    },
+    {
+      "date": "2026-08-20",
+      "type": "ark-raid",
+      "raw": "Ark Raid: Increased Item Rewards by 100%"
+    },
+    {
+      "date": "2026-08-21",
+      "type": "special-ecology",
+      "raw": "Challenge! Special Request: Ecology Study Drop Rate +30%"
+    },
+    {
+      "date": "2026-08-22",
+      "type": "kate-workshop",
+      "raw": "Kate’s Workshop Crafting Gold 30% Discount Event"
+    },
+    {
+      "date": "2026-08-23",
+      "type": "story-survey",
+      "raw": "[Origin Story] Survey Points x2"
+    },
+    {
+      "date": "2026-08-24",
+      "type": "special-identification",
+      "raw": "Challenge! Special Request: Identification Drop Rate +30%"
     }
   ]
 }
