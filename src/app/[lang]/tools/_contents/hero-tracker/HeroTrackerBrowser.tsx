@@ -1,8 +1,10 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import type { FusionLevelStep } from '@datagen/generators/hero-growth';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
+import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
+import { img } from '@/lib/images';
 import { useStoredState, type StoreSpec } from '@/lib/client-storage';
 import {
   accountNeed,
@@ -11,9 +13,11 @@ import {
   hasWork,
   heroNeed,
   mergeBreakdowns,
+  NEED_AXES,
   type GrowthRules,
   type HeroNeed,
   type HeroProgress,
+  type NeedAxis,
   type TrackedHero,
   type TranscendCost,
 } from './engine';
@@ -22,9 +26,11 @@ import {
  * Suivi de compte — écran CLIENT. L'état vit dans le localStorage (aucun
  * compte, aucune écriture serveur) ; le calcul est délégué au moteur pur voisin.
  *
- * Le roster est affiché EN ENTIER : un héros absent de l'état n'est pas suivi
- * (décision Sevih — on repère ainsi ce qu'on a laissé en friche), et la présence
- * de sa clé dans l'état VAUT suivi.
+ * Parti pris de la refonte (maquette « 2a — édition en place ») : LE RÉCAP EST
+ * L'ÉCRAN. Il reste collant pendant qu'on saisit, parce que voir le total bouger
+ * est la seule raison de remplir ce formulaire. La saisie tient dans la rangée
+ * du héros, dépliée ; le roster complet vit dans un tiroir « ajouter », pour que
+ * les 119 héros ne noient plus les cinq qu'on monte vraiment.
  */
 
 /** Un palier de transcendance tel qu'il s'AFFICHE (l'étoile du jeu, pas l'index). */
@@ -66,11 +72,7 @@ export interface ItemAsset {
 export interface HeroTrackerLabels {
   intro: string;
   search: string;
-  trackedOnly: string;
-  track: string;
   untrack: string;
-  current: string;
-  target: string;
   level: string;
   skills: string;
   fusionLevel: string;
@@ -97,6 +99,19 @@ export interface HeroTrackerLabels {
   coreFusion: string;
   preferredGift: string;
   alwaysMax: string;
+  shoppingList: string;
+  myHeroes: string;
+  addHero: string;
+  untracked: string;
+  heroNeeds: string;
+  doneHero: string;
+  emptyTitle: string;
+  emptyCta: string;
+  itemCount: string;
+  itemUnit: string;
+  axisAll: string;
+  piecesNote: string;
+  skillHint: string;
 }
 
 export interface HeroTrackerData {
@@ -140,6 +155,8 @@ const MAX_SKILL = 5;
 const START_LEVEL = 5;
 /** Bonus du cadeau préféré, curé dans le guide heroes-growth (aucune table). */
 const PREFERRED_GIFT_BONUS = 0.5;
+/** Au-delà, l'appui devient « je vise » plutôt que « j'en suis là ». */
+const LONG_PRESS_MS = 450;
 
 const SPEC: StoreSpec<TrackerState> = {
   key: 'outerpedia:hero-tracker',
@@ -166,13 +183,27 @@ const SPEC: StoreSpec<TrackerState> = {
   },
 };
 
+const fmt = (n: number): string => n.toLocaleString('en-US');
+/** 38 400 000 → « 38.4M » : la liste de courses n'a pas la place des zéros. */
+const short = (n: number): string =>
+  n >= 1_000_000
+    ? `${(n / 1_000_000).toFixed(1)}M`
+    : n >= 10_000
+      ? `${Math.round(n / 1000)}K`
+      : fmt(n);
+
+const starLabel = (s?: TranscendStep): string =>
+  s ? `${s.showStar}★${s.starPlus > 0 ? `+${s.starPlus}` : ''}` : '—';
+
 export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: HeroTrackerData) {
   const [store, setStore, ready] = useStoredState(SPEC);
   const [query, setQuery] = useState('');
-  const [onlyTracked, setOnlyTracked] = useState(false);
+  const [axis, setAxis] = useState<NeedAxis | 'all'>('all');
+  const [open, setOpen] = useState<string | null>(null);
+  const [picking, setPicking] = useState(false);
+  const [element, setElement] = useState<string | null>(null);
 
   const tracked = store.heroes;
-
   const heroById = useMemo(() => new Map(heroes.map((h) => [h.id, h])), [heroes]);
 
   const ladder = useCallback(
@@ -220,22 +251,9 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
     [heroes, heroById],
   );
 
-  const q = query.trim().toLowerCase();
-  const visible = useMemo(
-    () =>
-      heroes.filter(
-        (h) =>
-          !hidden.has(h.id) &&
-          (!onlyTracked || tracked[h.id]) &&
-          (!q || h.searchNames.some((n) => n.toLowerCase().includes(q))),
-      ),
-    [heroes, hidden, tracked, onlyTracked, q],
-  );
-
   /**
    * PLANCHER de transcendance : on ne fusionne qu'un héros déjà monté à
-   * l'étoile exigée (5★ en jeu), donc un fusionné ne peut pas être en deçà —
-   * lui proposer 3★ dans la liste ferait miroiter des pièces qu'il ne doit pas.
+   * l'étoile exigée (5★ en jeu), donc un fusionné ne peut pas être en deçà.
    */
   const minTranscend = useCallback(
     (hero: HeroRow): number => {
@@ -246,11 +264,7 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
     [ladder, asTracked],
   );
 
-  /**
-   * Le PLAFOND de chaque axe pour ce héros — la cible par défaut, et la cible
-   * TOUT COURT quand le réglage « toujours viser le max » est actif. Cette
-   * surcharge ne TOUCHE PAS les cibles saisies : décocher le réglage les rend.
-   */
+  /** Le PLAFOND de chaque axe — cible par défaut, et cible tout court en mode max. */
   const maxTarget = useCallback(
     (hero: HeroRow): HeroProgress => ({
       level: rules.xpCurve.length,
@@ -269,9 +283,6 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
       const entry = tracked[h.id];
       if (!entry || hidden.has(h.id)) continue;
       const target = store.alwaysMax ? maxTarget(h) : entry.target;
-      // Le plancher vaut aussi pour l'état : une saisie antérieure au plancher
-      // (ou un héros devenu fusionnable après coup) ne doit pas facturer des
-      // paliers que le jeu impose d'avoir déjà franchis.
       const floor = minTranscend(h);
       const state = { ...entry.state, transcend: Math.max(entry.state.transcend, floor) };
       out.set(h.id, heroNeed(asTracked(h), state, target, fullRules));
@@ -291,8 +302,6 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
         transcend: minTranscend(hero),
         ee: Array(hero.fusionLevels ? 2 : 1).fill(0),
       },
-      // La cible vise le plafond : c'est la question que pose l'outil (« que me
-      // reste-t-il pour finir ce héros ? »), à rabaisser héros par héros.
       target: maxTarget(hero),
     }),
     [maxTarget, minTranscend],
@@ -315,16 +324,12 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
       return { ...prev, heroes: next };
     });
 
-  const trackedIds = Object.keys(tracked).filter((id) => !hidden.has(id));
-  const giftBonus = store.preferredGift ? PREFERRED_GIFT_BONUS : 0;
-  /** Viser le max partout retire la colonne de cible : plus rien à y saisir. */
   const withTarget = !store.alwaysMax;
+  const giftBonus = store.preferredGift ? PREFERRED_GIFT_BONUS : 0;
 
-  // Les plats et cadeaux ne sont pas des coûts stockés : ce sont des CONVERSIONS
-  // de l'XP et des points, faites à l'affichage — et faites HÉROS PAR HÉROS
-  // avant d'être totalisées (règle Sevih) : un plat ne se coupe pas en deux, le
-  // reste de chacun s'arrondit chez lui. Le cadeau, lui, dépend en plus du type
-  // préféré du héros : il n'y a même pas de conversion globale possible.
+  // Plats et cadeaux ne sont pas des coûts stockés : ce sont des CONVERSIONS de
+  // l'XP et des points, faites HÉROS PAR HÉROS avant d'être totalisées — un plat
+  // ne se coupe pas en deux, le reste de chacun s'arrondit chez lui.
   const food = useMemo(
     () => mergeBreakdowns(total.heroes.map((n) => foodBreakdown(n.xp, rules.xpFood))),
     [total.heroes, rules.xpFood],
@@ -339,466 +344,852 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
     [total.heroes, rules.gifts, heroById, giftBonus],
   );
 
+  /** La liste de courses : items des barèmes + conversions, filtrée par axe. */
+  const shopping = useMemo(() => {
+    const source = axis === 'all' ? total.items : total.itemsByAxis[axis];
+    const rows = Object.entries(source)
+      .map(([id, count]) => ({ id, count, asset: items[id] }))
+      .filter((r) => r.asset);
+    if (axis === 'all' || axis === 'level') {
+      for (const b of food)
+        rows.push({
+          id: b.entry.id,
+          count: b.count,
+          asset: { name: b.entry.name.en, icon: b.entry.icon, grade: b.entry.grade },
+        });
+    }
+    if (axis === 'all') {
+      for (const b of gifts)
+        rows.push({
+          id: b.entry.id,
+          count: b.count,
+          asset: { name: b.entry.name.en, icon: b.entry.icon, grade: b.entry.grade },
+        });
+    }
+    return rows.sort((a, b) => b.count - a.count);
+  }, [axis, total.items, total.itemsByAxis, items, food, gifts]);
+
+  const itemTotal = shopping.reduce((sum, r) => sum + r.count, 0);
+
+  /** Suivis d'abord, du plus gourmand au plus léger, les héros finis en dernier. */
+  const trackedRows = useMemo(() => {
+    const rows = heroes.filter((h) => tracked[h.id] && !hidden.has(h.id));
+    const weight = (h: HeroRow) => {
+      const n = needs.get(h.id);
+      if (!n || !hasWork(n)) return -1;
+      return Object.values(n.items).reduce((a, b) => a + b, 0);
+    };
+    return rows.sort((a, b) => weight(b) - weight(a) || a.name.localeCompare(b.name));
+  }, [heroes, tracked, hidden, needs]);
+
+  const q = query.trim().toLowerCase();
+  const pickable = useMemo(
+    () =>
+      heroes.filter(
+        (h) =>
+          !hidden.has(h.id) &&
+          (!element || h.element === element) &&
+          (!q || h.searchNames.some((n) => n.toLowerCase().includes(q))),
+      ),
+    [heroes, hidden, element, q],
+  );
+
   return (
-    <div className="space-y-6" aria-busy={!ready}>
-      <p className="text-content-muted text-sm">{labels.intro}</p>
+    <div className="space-y-4 lg:grid lg:grid-cols-[22rem_minmax(0,1fr)] lg:items-start lg:gap-5 lg:space-y-0">
+      {/* ══ Colonne récap — collante : on voit le total bouger pendant la saisie ══ */}
+      <div className="sticky top-0 z-20 -mx-4 space-y-3 px-4 sm:mx-0 sm:px-0 lg:top-4">
+        <SummaryPanel
+          total={total}
+          shopping={shopping}
+          itemTotal={itemTotal}
+          heroById={heroById}
+          axis={axis}
+          onAxis={setAxis}
+          preferredGift={store.preferredGift}
+          labels={labels}
+        />
+        <Settings
+          store={store}
+          setStore={setStore}
+          fusionPairs={fusionPairs}
+          trackedCount={trackedRows.length}
+          labels={labels}
+        />
+      </div>
 
-      {/* ── Réglages ── */}
-      <details className="border-line-subtle bg-surface-raised rounded-lg border">
-        <summary className="text-content-strong cursor-pointer px-4 py-2 text-sm font-semibold">
-          {labels.settings}
-        </summary>
-        <div className="space-y-4 px-4 pt-1 pb-4">
-          <label className="text-content-muted flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              checked={store.alwaysMax}
-              onChange={(e) => setStore((prev) => ({ ...prev, alwaysMax: e.target.checked }))}
-              className="accent-accent"
-            />
-            {labels.alwaysMax}
-          </label>
-          <label className="text-content-muted flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              checked={store.preferredGift}
-              onChange={(e) => setStore((prev) => ({ ...prev, preferredGift: e.target.checked }))}
-              className="accent-accent"
-            />
-            {labels.preferredGift}
-          </label>
+      {/* ══ Colonne héros ══ */}
+      <div className="space-y-3" aria-busy={!ready}>
+        <div className="flex flex-wrap items-center gap-2">
+          <h2 className="text-content-strong text-base font-semibold">
+            {labels.myHeroes}{' '}
+            <span className="text-content-muted font-normal">{trackedRows.length}</span>
+          </h2>
+          <div className="flex-1" />
+          <button
+            type="button"
+            onClick={() => setPicking((v) => !v)}
+            className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+              picking
+                ? 'border-line text-content-muted hover:bg-line/40 border'
+                : 'bg-accent text-accent-fg hover:brightness-110'
+            }`}
+          >
+            {picking ? '×' : '+'} {labels.addHero}
+          </button>
+        </div>
 
-          <div>
-            <h3 className="text-content-strong text-sm font-semibold">{labels.settingsFusion}</h3>
-            <p className="text-content-subtle mt-0.5 text-xs">{labels.settingsFusionHint}</p>
-            <ul className="mt-2 grid gap-2 sm:grid-cols-2">
-              {fusionPairs.map(({ base, fusion }) => {
-                const isFused = Boolean(store.fused[base.id]);
-                return (
-                  <li key={base.id} className="flex items-center justify-between gap-2">
-                    <span className="text-content-muted truncate text-sm">{base.name}</span>
-                    <span className="flex shrink-0 gap-1">
-                      {(
-                        [
-                          [false, labels.base],
-                          [true, labels.coreFusion],
-                        ] as const
-                      ).map(([value, text]) => (
-                        <button
-                          key={text}
-                          type="button"
-                          onClick={() =>
-                            setStore((prev) => ({
-                              ...prev,
-                              fused: { ...prev.fused, [base.id]: value },
-                            }))
-                          }
-                          className={`rounded-full border px-2 py-0.5 text-xs transition-colors ${
-                            isFused === value
-                              ? 'border-accent bg-accent/15 text-content-strong'
-                              : 'border-line text-content-muted hover:bg-line/50'
-                          }`}
-                        >
-                          {text}
-                        </button>
-                      ))}
-                    </span>
-                    <span className="sr-only">{fusion.name}</span>
-                  </li>
-                );
-              })}
-            </ul>
+        {trackedRows.length === 0 && !picking ? (
+          <EmptyState labels={labels} onPick={() => setPicking(true)} />
+        ) : (
+          <ul className="space-y-2">
+            {trackedRows.map((hero) => (
+              <HeroCard
+                key={hero.id}
+                hero={hero}
+                entry={tracked[hero.id]}
+                need={needs.get(hero.id)}
+                steps={ladder(asTracked(hero))}
+                minTranscend={minTranscend(hero)}
+                rules={rules}
+                items={items}
+                withTarget={withTarget}
+                giftBonus={giftBonus}
+                expanded={open === hero.id}
+                onExpand={() => setOpen((v) => (v === hero.id ? null : hero.id))}
+                onUntrack={() => toggle(hero)}
+                onChange={(side, patch) => update(hero, side, patch)}
+                labels={labels}
+              />
+            ))}
+          </ul>
+        )}
+
+        {picking && (
+          <HeroPicker
+            rows={pickable}
+            tracked={tracked}
+            query={query}
+            onQuery={setQuery}
+            element={element}
+            onElement={setElement}
+            onToggle={toggle}
+            labels={labels}
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────── Récapitulatif ─────────────────────────── */
+
+interface ShoppingRow {
+  id: string;
+  count: number;
+  asset?: ItemAsset;
+}
+
+function SummaryPanel({
+  total,
+  shopping,
+  itemTotal,
+  heroById,
+  axis,
+  onAxis,
+  preferredGift,
+  labels,
+}: {
+  total: ReturnType<typeof accountNeed>;
+  shopping: ShoppingRow[];
+  itemTotal: number;
+  heroById: Map<string, HeroRow>;
+  axis: NeedAxis | 'all';
+  onAxis: (a: NeedAxis | 'all') => void;
+  preferredGift: boolean;
+  labels: HeroTrackerLabels;
+}) {
+  const axisLabel: Record<NeedAxis, string> = {
+    level: labels.level,
+    skills: labels.skills,
+    ee: labels.ee,
+  };
+  const pieces = Object.entries(total.pieces);
+
+  return (
+    <details
+      open
+      className="border-line bg-surface-raised overflow-hidden rounded-xl border shadow-lg"
+    >
+      <summary className="bg-surface-overlay border-line-subtle flex cursor-pointer list-none items-center gap-3 border-b px-3 py-2 [&::-webkit-details-marker]:hidden">
+        <span className="min-w-0 flex-1">
+          <span className="text-content-muted block font-mono text-[11px] tracking-wide uppercase">
+            {labels.needTitle} ·{' '}
+            {labels.trackedCount.replace('{count}', String(total.heroes.length))}
+          </span>
+          <span className="mt-0.5 flex items-baseline gap-1.5">
+            <span className="text-content-strong font-mono text-lg font-bold">
+              {fmt(itemTotal)}
+            </span>
+            <span className="text-content-muted text-xs">{labels.itemUnit}</span>
+            {total.gold > 0 && (
+              <>
+                <span className="bg-line-subtle h-3 w-px" />
+                <span className="text-warn font-mono text-sm font-semibold">
+                  {short(total.gold)}
+                </span>
+              </>
+            )}
+          </span>
+        </span>
+        <span className="flex gap-1">
+          {shopping.slice(0, 3).map((r) => (
+            <EquipmentIcon
+              key={r.id}
+              src={img.item(r.asset?.icon ?? '')}
+              grade={r.asset?.grade ?? 'normal'}
+              alt={r.asset?.name ?? ''}
+              size={26}
+            />
+          ))}
+        </span>
+      </summary>
+
+      <div className="space-y-3 p-3">
+        <div className="grid grid-cols-3 gap-2">
+          <Tile label={labels.gold} value={short(total.gold)} accent />
+          <Tile label={labels.xp} value={short(total.xp)} />
+          <Tile label={labels.affinityPoints} value={short(total.affinityPoints)} />
+        </div>
+
+        <div className="flex items-center justify-between gap-2">
+          <h3 className="text-content-strong text-sm font-semibold">{labels.shoppingList}</h3>
+          <div className="border-line-subtle bg-surface-sunken flex gap-0.5 rounded-lg border p-0.5">
+            {(['all', ...NEED_AXES] as const).map((a) => (
+              <button
+                key={a}
+                type="button"
+                onClick={() => onAxis(a)}
+                className={`rounded-md px-2 py-0.5 text-[11px] transition-colors ${
+                  axis === a
+                    ? 'bg-surface-overlay text-content-strong font-semibold'
+                    : 'text-content-muted hover:text-content-strong'
+                }`}
+              >
+                {a === 'all' ? labels.axisAll : axisLabel[a]}
+              </button>
+            ))}
           </div>
         </div>
-      </details>
 
-      {/* ── Ce qu'il reste à farmer ── */}
-      <section className="border-line-subtle bg-surface-raised rounded-lg border p-4">
-        <h2 className="text-content-strong text-lg font-semibold">{labels.needTitle}</h2>
-        {total.heroes.length === 0 ? (
-          <p className="text-content-subtle mt-2 text-sm">{labels.needEmpty}</p>
+        {shopping.length === 0 ? (
+          <p className="text-content-subtle text-sm">{labels.needEmpty}</p>
         ) : (
-          <div className="mt-3 space-y-4">
-            <div className="flex flex-wrap gap-2">
-              {Object.entries(total.items)
-                .sort((a, b) => b[1] - a[1])
-                .map(([id, count]) => (
-                  <ItemChip key={id} asset={items[id]} count={count} />
-                ))}
-              {[...food, ...gifts].map((b) => (
-                <ItemChip
-                  key={b.entry.id}
-                  asset={{ name: b.entry.name.en, icon: b.entry.icon, grade: b.entry.grade }}
-                  count={b.count}
+          <ul className="border-line-subtle divide-line-subtle divide-y overflow-hidden rounded-lg border">
+            {shopping.map((r) => (
+              <li key={r.id} className="bg-surface-raised flex items-center gap-2.5 px-2.5 py-1.5">
+                <EquipmentIcon
+                  src={img.item(r.asset?.icon ?? '')}
+                  grade={r.asset?.grade ?? 'normal'}
+                  alt=""
+                  size={32}
                 />
+                <span className="text-content min-w-0 flex-1 text-[13px] leading-tight wrap-break-word">
+                  {r.asset?.name}
+                </span>
+                <span className="text-content-strong font-mono text-sm font-semibold">
+                  ×{fmt(r.count)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {total.affinityPoints > 0 && (
+          <p className="text-content-subtle text-[11px]">
+            {preferredGift ? labels.giftNoteBonus : labels.giftNote}
+          </p>
+        )}
+
+        {pieces.length > 0 && (
+          <div className="border-line-subtle bg-surface-sunken rounded-lg border border-dashed p-2.5">
+            <h3 className="text-content-muted mb-1.5 font-mono text-[11px] tracking-wide uppercase">
+              {labels.piecesNote}
+            </h3>
+            <ul className="space-y-1">
+              {pieces.map(([heroId, { pieces: count, steps }]) => (
+                <li key={heroId} className="flex items-center gap-2 text-xs">
+                  <span className="text-content-muted min-w-0 flex-1 truncate">
+                    {heroById.get(heroId)?.name ?? heroId}
+                  </span>
+                  <span className="text-content-strong font-mono font-semibold">×{count}</span>
+                  <span className="text-content-subtle">
+                    {labels.dupes.replace('{count}', String(steps))}
+                  </span>
+                </li>
               ))}
-            </div>
-
-            <dl className="text-content-muted flex flex-wrap gap-x-6 gap-y-1 text-sm">
-              {total.xp > 0 && <Stat label={labels.xp} value={total.xp.toLocaleString('en-US')} />}
-              {total.affinityPoints > 0 && (
-                <Stat
-                  label={labels.affinityPoints}
-                  value={total.affinityPoints.toLocaleString('en-US')}
-                />
-              )}
-              {total.gold > 0 && (
-                <Stat label={labels.gold} value={total.gold.toLocaleString('en-US')} />
-              )}
-            </dl>
-
-            {total.affinityPoints > 0 && (
-              <p className="text-content-subtle text-xs">
-                {store.preferredGift ? labels.giftNoteBonus : labels.giftNote}
-              </p>
-            )}
-
-            {Object.keys(total.pieces).length > 0 && (
-              <div>
-                <h3 className="text-content-strong text-sm font-semibold">{labels.pieces}</h3>
-                <ul className="text-content-muted mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm">
-                  {Object.entries(total.pieces).map(([heroId, { pieces, steps }]) => (
-                    <li key={heroId}>
-                      {heroById.get(heroId)?.name ?? heroId} : <strong>{pieces}</strong>{' '}
-                      <span className="text-content-subtle text-xs">
-                        ({labels.dupes.replace('{count}', String(steps))})
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            </ul>
           </div>
         )}
-      </section>
+      </div>
+    </details>
+  );
+}
 
-      {/* ── Barre ── */}
-      <div className="flex flex-wrap items-center gap-3">
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder={labels.search}
-          className="border-line bg-surface-raised text-content-strong placeholder:text-content-subtle focus:border-accent w-full max-w-xs rounded-md border px-3 py-2 text-sm outline-none"
-        />
-        <button
-          type="button"
-          onClick={() => setOnlyTracked((v) => !v)}
-          className={`rounded-full border px-3 py-1 text-xs transition-colors ${
-            onlyTracked
-              ? 'border-accent bg-accent/15 text-content-strong'
-              : 'border-line text-content-muted hover:bg-line/50'
-          }`}
-        >
-          {labels.trackedOnly}
-        </button>
-        <span className="text-content-subtle text-xs">
-          {labels.trackedCount.replace('{count}', String(trackedIds.length))}
-        </span>
-        {trackedIds.length > 0 && (
+function Tile({
+  label,
+  value,
+  accent = false,
+}: {
+  label: string;
+  value: string;
+  accent?: boolean;
+}) {
+  return (
+    <div className="border-line-subtle bg-surface-sunken rounded-lg border px-2 py-1.5">
+      <div className="text-content-muted truncate font-mono text-[10px] tracking-wide uppercase">
+        {label}
+      </div>
+      <div
+        className={`mt-0.5 font-mono text-sm font-bold ${accent ? 'text-warn' : 'text-content-strong'}`}
+      >
+        {value}
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────── Réglages ─────────────────────────── */
+
+function Settings({
+  store,
+  setStore,
+  fusionPairs,
+  trackedCount,
+  labels,
+}: {
+  store: TrackerState;
+  setStore: (fn: (prev: TrackerState) => TrackerState) => void;
+  fusionPairs: { base: HeroRow; fusion: HeroRow }[];
+  trackedCount: number;
+  labels: HeroTrackerLabels;
+}) {
+  const check = (key: 'alwaysMax' | 'preferredGift', text: string) => (
+    <label className="text-content-muted flex cursor-pointer items-center gap-2 text-xs">
+      <input
+        type="checkbox"
+        checked={store[key]}
+        onChange={(e) => setStore((prev) => ({ ...prev, [key]: e.target.checked }))}
+        className="accent-accent"
+      />
+      {text}
+    </label>
+  );
+
+  return (
+    <details className="border-line-subtle bg-surface-raised rounded-xl border">
+      <summary className="text-content-strong cursor-pointer px-3 py-2 text-xs font-semibold">
+        {labels.settings}
+      </summary>
+      <div className="space-y-3 px-3 pt-1 pb-3">
+        {check('alwaysMax', labels.alwaysMax)}
+        {check('preferredGift', labels.preferredGift)}
+
+        <div>
+          <h3 className="text-content-strong text-xs font-semibold">{labels.settingsFusion}</h3>
+          <p className="text-content-subtle mt-0.5 text-[11px]">{labels.settingsFusionHint}</p>
+          <ul className="mt-1.5 space-y-1">
+            {fusionPairs.map(({ base }) => {
+              const isFused = Boolean(store.fused[base.id]);
+              return (
+                <li key={base.id} className="flex items-center gap-2">
+                  <span className="text-content-muted min-w-0 flex-1 truncate text-xs">
+                    {base.name}
+                  </span>
+                  <span className="flex shrink-0 gap-1">
+                    {(
+                      [
+                        [false, labels.base],
+                        [true, labels.coreFusion],
+                      ] as const
+                    ).map(([value, text]) => (
+                      <button
+                        key={text}
+                        type="button"
+                        onClick={() =>
+                          setStore((prev) => ({
+                            ...prev,
+                            fused: { ...prev.fused, [base.id]: value },
+                          }))
+                        }
+                        className={`rounded-full border px-2 py-0.5 text-[11px] transition-colors ${
+                          isFused === value
+                            ? 'border-accent bg-accent/15 text-content-strong'
+                            : 'border-line-subtle text-content-muted hover:bg-line/40'
+                        }`}
+                      >
+                        {text}
+                      </button>
+                    ))}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        {trackedCount > 0 && (
           <button
             type="button"
             onClick={() => {
               if (window.confirm(labels.resetConfirm))
                 setStore((prev) => ({ ...prev, heroes: {} }));
             }}
-            className="border-line text-content-muted hover:border-accent ml-auto rounded border px-2 py-1 text-xs transition-colors"
+            className="border-line text-content-muted hover:border-danger hover:text-danger rounded border px-2 py-1 text-[11px] transition-colors"
           >
             {labels.reset}
           </button>
         )}
       </div>
+    </details>
+  );
+}
 
-      {/* ── Roster ── */}
-      <ul className="grid gap-3 md:grid-cols-2">
-        {visible.map((hero) => {
-          const entry = tracked[hero.id];
-          const need = needs.get(hero.id);
-          const steps = ladder(asTracked(hero));
-          return (
-            <li
-              key={hero.id}
-              className={`border-line-subtle bg-surface-raised rounded-lg border p-3 ${
-                entry ? '' : 'opacity-70'
-              }`}
+/* ─────────────────────────── Rangée de héros ─────────────────────────── */
+
+function HeroCard({
+  hero,
+  entry,
+  need,
+  steps,
+  minTranscend,
+  rules,
+  items,
+  withTarget,
+  giftBonus,
+  expanded,
+  onExpand,
+  onUntrack,
+  onChange,
+  labels,
+}: {
+  hero: HeroRow;
+  entry: HeroEntry;
+  need?: HeroNeed;
+  steps: TranscendStep[];
+  minTranscend: number;
+  rules: Omit<GrowthRules, 'transcendLadder'>;
+  items: Record<string, ItemAsset>;
+  withTarget: boolean;
+  giftBonus: number;
+  expanded: boolean;
+  onExpand: () => void;
+  onUntrack: () => void;
+  onChange: (side: 'state' | 'target', patch: Partial<HeroProgress>) => void;
+  labels: HeroTrackerLabels;
+}) {
+  const done = !need || !hasWork(need);
+  const objects = need ? Object.values(need.items).reduce((a, b) => a + b, 0) : 0;
+  const { state, target } = entry;
+
+  /** Paliers de niveau qui coûtent une mémoire — les seuls sauts qui comptent. */
+  const jumps = useMemo(() => {
+    const set = new Set<number>([rules.xpCurve.length]);
+    for (const s of rules.limitBreak[`${hero.rarity}_${hero.element}`] ?? []) set.add(s.maxLevel);
+    return [...set].sort((a, b) => a - b);
+  }, [rules, hero.rarity, hero.element]);
+
+  const summary = done
+    ? labels.doneHero
+    : [
+        `${labels.level} ${state.level}→${withTarget ? target.level : rules.xpCurve.length}`,
+        `${starLabel(steps[state.transcend])}→${starLabel(steps[withTarget ? target.transcend : steps.length - 1])}`,
+        labels.itemCount.replace('{count}', fmt(objects)),
+      ].join(' · ');
+
+  return (
+    <li
+      className={`overflow-hidden rounded-xl border ${
+        done
+          ? 'border-success/35 bg-success/5'
+          : expanded
+            ? 'border-line bg-surface-raised'
+            : 'border-line-subtle bg-surface-raised'
+      }`}
+    >
+      <div
+        className={`flex items-center gap-2.5 px-2.5 py-2 ${expanded ? 'bg-surface-overlay' : ''}`}
+      >
+        <button
+          type="button"
+          onClick={onExpand}
+          aria-expanded={expanded}
+          className="flex min-w-0 flex-1 items-center gap-2.5 text-left"
+        >
+          <span className={`w-11 shrink-0 ${done ? 'opacity-70' : ''}`}>
+            <CharacterPortrait
+              id={hero.id}
+              name={hero.name}
+              element={hero.element}
+              classType={hero.class}
+              rarity={hero.rarity}
+              size={44}
+              showName={false}
+            />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="text-content-strong block text-sm leading-tight font-semibold wrap-break-word">
+              {hero.name}
+              {hero.fusionLevels && (
+                <span className="text-accent ml-1.5 text-[10px] uppercase">
+                  {labels.coreFusion}
+                </span>
+              )}
+            </span>
+            <span
+              className={`mt-0.5 block font-mono text-[11px] ${done ? 'text-success' : 'text-content-muted'}`}
             >
-              <div className="flex items-start gap-3">
-                <div className="w-12 shrink-0">
-                  <CharacterPortrait
-                    id={hero.id}
-                    name={hero.name}
-                    element={hero.element}
-                    classType={hero.class}
-                    rarity={hero.rarity}
-                    size={48}
-                    showName={false}
-                  />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-content-strong truncate text-sm font-semibold">
-                      {hero.name}
-                      {hero.fusionLevels && (
-                        <span className="text-accent ml-1 text-[10px] uppercase">
-                          {labels.coreFusion}
-                        </span>
-                      )}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => toggle(hero)}
-                      className="border-line text-content-muted hover:border-accent shrink-0 rounded border px-2 py-0.5 text-xs transition-colors"
-                    >
-                      {entry ? labels.untrack : labels.track}
-                    </button>
-                  </div>
+              {summary}
+            </span>
+          </span>
+          <span className="text-content-muted shrink-0 text-sm">{expanded ? '▴' : '▾'}</span>
+        </button>
+      </div>
 
-                  {entry && (
-                    <div className="mt-2 space-y-1.5">
-                      {withTarget && (
-                        <div className="text-content-subtle grid grid-cols-[5rem_1fr_1fr] gap-2 text-[10px] uppercase">
-                          <span />
-                          <span>{labels.current}</span>
-                          <span>{labels.target}</span>
-                        </div>
-                      )}
-                      <AxisRow
-                        label={labels.level}
-                        min={START_LEVEL}
-                        max={rules.xpCurve.length}
-                        state={entry.state.level}
-                        target={entry.target.level}
-                        withTarget={withTarget}
-                        onState={(v) => update(hero, 'state', { level: v })}
-                        onTarget={(v) => update(hero, 'target', { level: v })}
-                      />
-
-                      {hero.fusionLevels ? (
-                        // Un fusionné n'a pas de slots : ses skills montent d'un
-                        // bloc, le palier 1 étant la fusion elle-même.
-                        <AxisRow
-                          label={labels.fusionLevel}
-                          min={0}
-                          max={hero.fusionLevels.length}
-                          state={entry.state.fusion}
-                          target={entry.target.fusion}
-                          withTarget={withTarget}
-                          onState={(v) => update(hero, 'state', { fusion: v })}
-                          onTarget={(v) => update(hero, 'target', { fusion: v })}
-                        />
-                      ) : (
-                        <SkillsRow
-                          label={labels.skills}
-                          entry={entry}
-                          withTarget={withTarget}
-                          onChange={(side, skills) => update(hero, side, { skills })}
-                        />
-                      )}
-
-                      <AxisRow
-                        label={labels.affinity}
-                        min={1}
-                        max={rules.affinityCurve.length}
-                        state={entry.state.affinity}
-                        target={entry.target.affinity}
-                        withTarget={withTarget}
-                        onState={(v) => update(hero, 'state', { affinity: v })}
-                        onTarget={(v) => update(hero, 'target', { affinity: v })}
-                      />
-                      <StarRow
-                        label={labels.transcend}
-                        steps={steps}
-                        min={minTranscend(hero)}
-                        state={entry.state.transcend}
-                        target={entry.target.transcend}
-                        withTarget={withTarget}
-                        onState={(v) => update(hero, 'state', { transcend: v })}
-                        onTarget={(v) => update(hero, 'target', { transcend: v })}
-                      />
-
-                      {entry.state.ee.map((_, i) => (
-                        <AxisRow
-                          key={i}
-                          label={i === 0 ? labels.ee : labels.eeFusion}
-                          min={0}
-                          max={rules.eeEnchant.length}
-                          state={entry.state.ee[i] ?? 0}
-                          target={entry.target.ee[i] ?? 0}
-                          withTarget={withTarget}
-                          onState={(v) =>
-                            update(hero, 'state', { ee: replace(entry.state.ee, i, v) })
-                          }
-                          onTarget={(v) =>
-                            update(hero, 'target', { ee: replace(entry.target.ee, i, v) })
-                          }
-                        />
-                      ))}
-
-                      {need && hasWork(need) && (
-                        <HeroNeedSummary
-                          need={need}
-                          items={items}
-                          gifts={rules.gifts}
-                          giftType={hero.gift}
-                          giftBonus={giftBonus}
-                          labels={labels}
-                        />
-                      )}
-                    </div>
-                  )}
-                </div>
+      {expanded && (
+        <div className="space-y-3.5 px-2.5 py-3 md:grid md:grid-cols-2 md:space-y-0 md:gap-x-5 md:*:mb-3.5">
+          {/* ── Niveau ── */}
+          <Field
+            label={labels.level}
+            value={`${state.level}`}
+            target={withTarget ? `${target.level}` : undefined}
+          >
+            <div className="flex items-center gap-1.5">
+              <Stepper
+                value={state.level}
+                min={START_LEVEL}
+                max={rules.xpCurve.length}
+                onChange={(v) => onChange('state', { level: v })}
+              />
+              <div className="flex gap-1">
+                {jumps.map((n) => (
+                  <button
+                    key={n}
+                    type="button"
+                    onClick={() => onChange(withTarget ? 'target' : 'state', { level: n })}
+                    className={`h-9 rounded-lg border px-2 font-mono text-[11px] transition-colors ${
+                      (withTarget ? target.level : state.level) === n
+                        ? 'border-accent bg-accent/15 text-accent font-semibold'
+                        : 'border-line-subtle bg-surface-sunken text-content-muted hover:border-line'
+                    }`}
+                  >
+                    {n}
+                  </button>
+                ))}
               </div>
-            </li>
-          );
-        })}
-      </ul>
+            </div>
+          </Field>
+
+          {/* ── Compétences (ou palier de fusion) ── */}
+          {hero.fusionLevels ? (
+            <Field
+              label={labels.fusionLevel}
+              value={`${state.fusion}`}
+              target={withTarget ? `${target.fusion}` : undefined}
+            >
+              <Scale
+                values={Array.from({ length: hero.fusionLevels.length + 1 }, (_, i) => i)}
+                current={state.fusion}
+                target={withTarget ? target.fusion : hero.fusionLevels.length}
+                withTarget={withTarget}
+                onCurrent={(v) => onChange('state', { fusion: v })}
+                onTarget={(v) => onChange('target', { fusion: v })}
+              />
+            </Field>
+          ) : (
+            <Field label={labels.skills} hint={withTarget ? labels.skillHint : undefined}>
+              <div className="space-y-1.5">
+                {Array.from({ length: SKILL_SLOTS }, (_, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <span className="border-line-subtle bg-surface-sunken text-content-muted flex h-6 w-6 shrink-0 items-center justify-center rounded border font-mono text-[10px]">
+                      {i === SKILL_SLOTS - 1 ? 'CP' : `S${i + 1}`}
+                    </span>
+                    <Scale
+                      values={[1, 2, 3, 4, 5]}
+                      current={state.skills[i] ?? 1}
+                      target={withTarget ? (target.skills[i] ?? 1) : MAX_SKILL}
+                      withTarget={withTarget}
+                      onCurrent={(v) => onChange('state', { skills: replace(state.skills, i, v) })}
+                      onTarget={(v) => onChange('target', { skills: replace(target.skills, i, v) })}
+                    />
+                  </div>
+                ))}
+              </div>
+            </Field>
+          )}
+
+          {/* ── Transcendance ── */}
+          <Field
+            label={labels.transcend}
+            value={starLabel(steps[state.transcend])}
+            target={withTarget ? starLabel(steps[target.transcend]) : undefined}
+          >
+            <Scale
+              values={steps.map((_, i) => i).filter((i) => i >= minTranscend)}
+              current={state.transcend}
+              target={withTarget ? target.transcend : steps.length - 1}
+              withTarget={withTarget}
+              tone="star"
+              render={(i) => starLabel(steps[i])}
+              onCurrent={(v) => onChange('state', { transcend: v })}
+              onTarget={(v) => onChange('target', { transcend: v })}
+            />
+          </Field>
+
+          {/* ── Affinité ── */}
+          <Field
+            label={labels.affinity}
+            value={`${state.affinity}`}
+            target={withTarget ? `${target.affinity}` : undefined}
+          >
+            <div className="flex items-center gap-2.5">
+              <input
+                type="range"
+                min={1}
+                max={rules.affinityCurve.length}
+                value={state.affinity}
+                onChange={(e) => onChange('state', { affinity: Number(e.target.value) })}
+                className="accent-accent h-9 min-w-0 flex-1"
+                aria-label={labels.affinity}
+              />
+              <NumberField
+                value={state.affinity}
+                min={1}
+                max={rules.affinityCurve.length}
+                onChange={(v) => onChange('state', { affinity: v })}
+              />
+            </div>
+          </Field>
+
+          {/* ── Équipement(s) exclusif(s) ── */}
+          {state.ee.map((_, i) => (
+            <Field
+              key={i}
+              label={i === 0 ? labels.ee : labels.eeFusion}
+              value={`+${state.ee[i] ?? 0}`}
+              target={withTarget ? `+${target.ee[i] ?? 0}` : undefined}
+            >
+              <div className="flex items-center gap-2">
+                <Scale
+                  values={Array.from({ length: rules.eeEnchant.length + 1 }, (_, n) => n)}
+                  current={state.ee[i] ?? 0}
+                  target={withTarget ? (target.ee[i] ?? 0) : rules.eeEnchant.length}
+                  withTarget={withTarget}
+                  tone="star"
+                  compact
+                  onCurrent={(v) => onChange('state', { ee: replace(state.ee, i, v) })}
+                  onTarget={(v) => onChange('target', { ee: replace(target.ee, i, v) })}
+                />
+                <NumberField
+                  value={state.ee[i] ?? 0}
+                  min={0}
+                  max={rules.eeEnchant.length}
+                  onChange={(v) => onChange('state', { ee: replace(state.ee, i, v) })}
+                />
+              </div>
+            </Field>
+          ))}
+
+          {/* ── Ce qui manque à CE héros ── */}
+          <div className="border-line-subtle border-t pt-2.5 md:col-span-2">
+            <div className="flex items-center gap-2">
+              <h4 className="text-content-muted font-mono text-[11px] tracking-wide uppercase">
+                {need && !done ? labels.heroNeeds : labels.doneHero}
+              </h4>
+              <div className="flex-1" />
+              <button
+                type="button"
+                onClick={onUntrack}
+                className="border-line-subtle text-content-muted hover:border-danger hover:text-danger rounded border px-2 py-0.5 text-[11px] transition-colors"
+              >
+                {labels.untrack}
+              </button>
+            </div>
+            {need && !done && (
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {Object.entries(need.items).map(([id, count]) => (
+                  <NeedChip key={id} asset={items[id]} count={count} />
+                ))}
+                {foodBreakdown(need.xp, rules.xpFood).map((b) => (
+                  <NeedChip
+                    key={b.entry.id}
+                    asset={{ name: b.entry.name.en, icon: b.entry.icon, grade: b.entry.grade }}
+                    count={b.count}
+                  />
+                ))}
+                {giftBreakdown(need.affinityPoints, rules.gifts, hero.gift, giftBonus).map((b) => (
+                  <NeedChip
+                    key={b.entry.id}
+                    asset={{ name: b.entry.name.en, icon: b.entry.icon, grade: b.entry.grade }}
+                    count={b.count}
+                  />
+                ))}
+                {need.pieces > 0 && (
+                  <span className="border-line-subtle bg-surface-sunken text-content-muted rounded-lg border px-2 py-1 text-[11px]">
+                    {labels.pieces} ×{need.pieces}
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </li>
+  );
+}
+
+/** Un axe : intitulé, valeur courante → cible, et son contrôle. */
+function Field({
+  label,
+  value,
+  target,
+  hint,
+  children,
+}: {
+  label: string;
+  value?: string;
+  target?: string;
+  hint?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <div className="mb-1.5 flex items-baseline justify-between gap-2">
+        <span className="text-content-muted text-xs">{label}</span>
+        {hint && <span className="text-content-subtle font-mono text-[10px]">{hint}</span>}
+        {value !== undefined && (
+          <span className="text-content-strong font-mono text-xs font-semibold">
+            <span className="text-accent">{value}</span>
+            {target !== undefined && <span className="text-content-muted"> → {target}</span>}
+          </span>
+        )}
+      </div>
+      {children}
     </div>
   );
 }
 
-/** Remplace la i-ème valeur d'un axe multiple (les EE d'un fusionné). */
+function NeedChip({ asset, count }: { asset?: ItemAsset; count: number }) {
+  if (!asset) return null;
+  return (
+    <span
+      title={asset.name}
+      className="border-line-subtle bg-surface-sunken flex items-center gap-1.5 rounded-lg border py-1 pr-2 pl-1"
+    >
+      <EquipmentIcon src={img.item(asset.icon)} grade={asset.grade} alt={asset.name} size={22} />
+      <span className="text-content-strong font-mono text-[11px] font-semibold">×{count}</span>
+    </span>
+  );
+}
+
+/* ─────────────────────────── Contrôles ─────────────────────────── */
+
+/** Remplace la i-ème valeur d'un axe multiple (skills, EE d'un fusionné). */
 function replace(list: number[], index: number, value: number): number[] {
   const next = [...list];
   next[index] = value;
   return next;
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <span>
-      <dt className="text-content-subtle inline">{label} </dt>
-      <dd className="text-content-strong inline font-semibold">{value}</dd>
-    </span>
-  );
-}
-
-function ItemChip({ asset, count }: { asset?: ItemAsset; count: number }) {
-  if (!asset) return null;
-  return (
-    <span className="border-line bg-surface-sunken text-content-strong flex items-center gap-1.5 rounded border px-2 py-1 text-xs">
-      <span className="truncate">{asset.name}</span>
-      <strong>×{count.toLocaleString('en-US')}</strong>
-    </span>
-  );
-}
-
 /**
- * Grille d'une ligne d'axe. La colonne de cible DISPARAÎT quand on vise le max
- * partout : c'est la moitié des champs de l'écran en moins.
+ * Échelle à segments : un segment par valeur atteignable. Le clic pose l'état
+ * COURANT ; maj+clic (ou appui long au doigt) pose la CIBLE — deux marqueurs sur
+ * une seule rangée, au lieu des deux champs numériques jumeaux d'avant.
  */
-const axisGrid = (withTarget: boolean) =>
-  `grid items-center gap-2 ${withTarget ? 'grid-cols-[5rem_1fr_1fr]' : 'grid-cols-[5rem_1fr]'}`;
-
-/** Une ligne « axe : actuel → cible » (deux champs numériques bornés). */
-function AxisRow({
-  label,
-  min,
-  max,
-  state,
+function Scale({
+  values,
+  current,
   target,
   withTarget,
-  onState,
+  tone = 'accent',
+  compact = false,
+  render,
+  onCurrent,
   onTarget,
 }: {
-  label: string;
-  min: number;
-  max: number;
-  state: number;
+  values: number[];
+  current: number;
   target: number;
   withTarget: boolean;
-  onState: (v: number) => void;
+  /** `star` = or (transcendance, enchantement), `accent` = bleu (niveaux). */
+  tone?: 'accent' | 'star';
+  /** Segments fins et muets — l'échelle d'EE en a onze. */
+  compact?: boolean;
+  render?: (v: number) => string;
+  onCurrent: (v: number) => void;
   onTarget: (v: number) => void;
 }) {
+  const held = useRef(false);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const reached =
+    tone === 'star' ? 'border-warn bg-warn/20 text-warn' : 'border-accent bg-accent/20 text-accent';
+
+  const press = (v: number) => ({
+    onPointerDown: () => {
+      if (!withTarget) return;
+      held.current = false;
+      timer.current = setTimeout(() => {
+        held.current = true;
+        onTarget(v);
+      }, LONG_PRESS_MS);
+    },
+    onPointerUp: () => {
+      if (timer.current) clearTimeout(timer.current);
+    },
+    onPointerLeave: () => {
+      if (timer.current) clearTimeout(timer.current);
+    },
+    onClick: (e: React.MouseEvent) => {
+      if (held.current) {
+        held.current = false;
+        return; // l'appui long a déjà posé la cible
+      }
+      if (withTarget && e.shiftKey) onTarget(v);
+      else onCurrent(v);
+    },
+  });
+
   return (
-    <div className={axisGrid(withTarget)}>
-      <span className="text-content-muted text-xs">{label}</span>
-      <NumberField value={state} min={min} max={max} onChange={onState} />
-      {withTarget && <NumberField value={target} min={min} max={max} onChange={onTarget} />}
+    <div className={`flex min-w-0 flex-1 ${compact ? 'gap-px' : 'gap-1'}`}>
+      {values.map((v) => {
+        const isReached = v <= current;
+        const isAimed = v <= target;
+        return (
+          <button
+            key={v}
+            type="button"
+            {...press(v)}
+            aria-label={String(render ? render(v) : v)}
+            className={`min-w-0 flex-1 rounded-md border font-mono text-[11px] font-semibold transition-colors ${
+              compact ? 'h-8' : 'h-9'
+            } ${
+              isReached
+                ? reached
+                : isAimed
+                  ? 'border-line bg-surface-sunken text-content-muted'
+                  : 'border-line-subtle bg-surface-sunken text-line'
+            }`}
+          >
+            {!compact && (render ? render(v) : v)}
+          </button>
+        );
+      })}
     </div>
   );
 }
 
-/**
- * Transcendance : on saisit l'ÉTOILE telle qu'elle s'affiche en jeu (« 5★+1 »),
- * pas l'index d'une échelle interne que personne ne lit sur son écran.
- */
-function StarRow({
-  label,
-  steps,
-  min,
-  state,
-  target,
-  withTarget,
-  onState,
-  onTarget,
-}: {
-  label: string;
-  steps: TranscendStep[];
-  /** Premier palier PROPOSABLE (un fusionné démarre à l'étoile qu'il a exigée). */
-  min: number;
-  state: number;
-  target: number;
-  withTarget: boolean;
-  onState: (v: number) => void;
-  onTarget: (v: number) => void;
-}) {
-  const select = (value: number, onChange: (v: number) => void) => (
-    <select
-      value={Math.max(value, min)}
-      onChange={(e) => onChange(Number(e.target.value))}
-      className="border-line bg-surface-sunken text-content-strong focus:border-accent w-full min-w-0 rounded border px-1 py-0.5 text-center text-xs outline-none"
-    >
-      {steps.slice(min).map((s, i) => (
-        <option key={i + min} value={i + min}>
-          {s.showStar}★{s.starPlus > 0 ? `+${s.starPlus}` : ''}
-        </option>
-      ))}
-    </select>
-  );
-  return (
-    <div className={axisGrid(withTarget)}>
-      <span className="text-content-muted text-xs">{label}</span>
-      {select(state, onState)}
-      {withTarget && select(target, onTarget)}
-    </div>
-  );
-}
-
-function SkillsRow({
-  label,
-  entry,
-  withTarget,
-  onChange,
-}: {
-  label: string;
-  entry: HeroEntry;
-  withTarget: boolean;
-  onChange: (side: 'state' | 'target', skills: number[]) => void;
-}) {
-  const set = (side: 'state' | 'target', i: number, v: number) =>
-    onChange(side, replace(entry[side].skills, i, v));
-  const sides = withTarget ? (['state', 'target'] as const) : (['state'] as const);
-  return (
-    <div className={axisGrid(withTarget)}>
-      <span className="text-content-muted text-xs">{label}</span>
-      {sides.map((side) => (
-        <div key={side} className="flex gap-1">
-          {Array.from({ length: SKILL_SLOTS }, (_, i) => (
-            <NumberField
-              key={i}
-              value={entry[side].skills[i] ?? 1}
-              min={1}
-              max={MAX_SKILL}
-              onChange={(v) => set(side, i, v)}
-            />
-          ))}
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function NumberField({
+/** − valeur + : le pas d'un niveau, au pouce. */
+function Stepper({
   value,
   min,
   max,
@@ -808,6 +1199,34 @@ function NumberField({
   min: number;
   max: number;
   onChange: (v: number) => void;
+}) {
+  const btn =
+    'border-line bg-surface-sunken text-content-muted hover:border-accent hover:text-accent flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border text-base transition-colors';
+  return (
+    <div className="flex min-w-0 flex-1 items-center gap-1.5">
+      <button type="button" onClick={() => onChange(Math.max(value - 1, min))} className={btn}>
+        −
+      </button>
+      <NumberField value={value} min={min} max={max} onChange={onChange} grow />
+      <button type="button" onClick={() => onChange(Math.min(value + 1, max))} className={btn}>
+        +
+      </button>
+    </div>
+  );
+}
+
+function NumberField({
+  value,
+  min,
+  max,
+  onChange,
+  grow = false,
+}: {
+  value: number;
+  min: number;
+  max: number;
+  onChange: (v: number) => void;
+  grow?: boolean;
 }) {
   return (
     <input
@@ -822,48 +1241,140 @@ function NumberField({
         // ferait mentir l'écran par rapport au calcul.
         if (Number.isFinite(v)) onChange(Math.min(Math.max(Math.trunc(v), min), max));
       }}
-      className="border-line bg-surface-sunken text-content-strong focus:border-accent w-full min-w-0 rounded border px-1.5 py-0.5 text-center text-xs outline-none"
+      className={`border-line-subtle bg-surface-sunken text-content-strong focus:border-accent h-9 rounded-lg border px-1.5 text-center font-mono text-sm font-semibold outline-none ${
+        grow ? 'min-w-0 flex-1' : 'w-14 shrink-0'
+      }`}
     />
   );
 }
 
-/** Résumé compact de ce qui manque à CE héros. */
-function HeroNeedSummary({
-  need,
-  items,
-  gifts,
-  giftType,
-  giftBonus,
+/* ─────────────────────────── Roster & état vide ─────────────────────────── */
+
+const ELEMENTS = ['fire', 'water', 'earth', 'light', 'dark'] as const;
+const ELEMENT_TEXT: Record<string, string> = {
+  fire: 'text-fire',
+  water: 'text-water',
+  earth: 'text-earth',
+  light: 'text-light',
+  dark: 'text-dark-elem',
+};
+
+function HeroPicker({
+  rows,
+  tracked,
+  query,
+  onQuery,
+  element,
+  onElement,
+  onToggle,
   labels,
 }: {
-  need: HeroNeed;
-  items: Record<string, ItemAsset>;
-  gifts: GrowthRules['gifts'];
-  giftType?: string;
-  giftBonus: number;
+  rows: HeroRow[];
+  tracked: Record<string, HeroEntry>;
+  query: string;
+  onQuery: (v: string) => void;
+  element: string | null;
+  onElement: (v: string | null) => void;
+  onToggle: (hero: HeroRow) => void;
   labels: HeroTrackerLabels;
 }) {
-  const giftPlan = giftBreakdown(need.affinityPoints, gifts, giftType, giftBonus);
+  const untracked = rows.filter((h) => !tracked[h.id]).length;
   return (
-    <div className="border-line-subtle mt-2 flex flex-wrap gap-1.5 border-t pt-2 text-[11px]">
-      {Object.entries(need.items).map(([id, count]) => (
-        <span key={id} className="text-content-muted">
-          {items[id]?.name ?? id} ×{count}
+    <div className="border-line-subtle bg-surface-sunken space-y-2.5 rounded-xl border p-3">
+      <div className="flex flex-wrap items-center gap-2">
+        <h3 className="text-content-strong text-sm font-semibold">{labels.addHero}</h3>
+        <span className="text-content-subtle font-mono text-[11px]">
+          {labels.untracked.replace('{count}', String(untracked))}
         </span>
-      ))}
-      {giftPlan.map((b) => (
-        <span key={b.entry.id} className="text-content-muted">
-          {b.entry.name.en} ×{b.count}
-        </span>
-      ))}
-      {need.pieces > 0 && (
-        <span className="text-content-muted">
-          {labels.pieces} ×{need.pieces}{' '}
-          <span className="text-content-subtle">
-            ({labels.dupes.replace('{count}', String(need.transcendSteps))})
-          </span>
-        </span>
-      )}
+        <div className="flex-1" />
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => onQuery(e.target.value)}
+          placeholder={labels.search}
+          className="border-line-subtle bg-surface-raised text-content-strong placeholder:text-content-subtle focus:border-accent h-8 w-full min-w-0 rounded-lg border px-2.5 text-xs outline-none sm:w-52"
+        />
+      </div>
+
+      <div className="flex flex-wrap gap-1">
+        <button
+          type="button"
+          onClick={() => onElement(null)}
+          className={`rounded-md border px-2 py-1 text-[11px] transition-colors ${
+            element === null
+              ? 'border-accent bg-accent/15 text-accent font-semibold'
+              : 'border-line-subtle text-content-muted hover:border-line'
+          }`}
+        >
+          {labels.axisAll}
+        </button>
+        {ELEMENTS.map((el) => (
+          <button
+            key={el}
+            type="button"
+            onClick={() => onElement(element === el ? null : el)}
+            className={`rounded-md border px-2 py-1 text-[11px] capitalize transition-colors ${
+              element === el ? 'border-accent bg-accent/15' : 'border-line-subtle hover:border-line'
+            } ${ELEMENT_TEXT[el]}`}
+          >
+            {el}
+          </button>
+        ))}
+      </div>
+
+      <ul className="grid grid-cols-[repeat(auto-fill,minmax(2.75rem,1fr))] gap-1.5">
+        {rows.map((hero) => (
+          <li key={hero.id}>
+            <button
+              type="button"
+              onClick={() => onToggle(hero)}
+              title={hero.name}
+              className={`relative block w-full transition-opacity ${
+                tracked[hero.id] ? 'opacity-45' : 'hover:brightness-110'
+              }`}
+            >
+              <CharacterPortrait
+                id={hero.id}
+                name={hero.name}
+                element={hero.element}
+                classType={hero.class}
+                rarity={hero.rarity}
+                size={44}
+                showName={false}
+              />
+              {tracked[hero.id] && (
+                <span className="bg-success text-accent-fg absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full text-[10px] font-bold">
+                  ✓
+                </span>
+              )}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function EmptyState({ labels, onPick }: { labels: HeroTrackerLabels; onPick: () => void }) {
+  return (
+    <div className="border-line-subtle bg-surface-raised flex flex-col items-center gap-3 rounded-xl border px-4 py-8 text-center">
+      <div className="flex gap-1.5">
+        {[0, 1, 2].map((i) => (
+          <span
+            key={i}
+            className="border-line bg-surface-sunken h-10 w-10 rounded-lg border border-dashed"
+          />
+        ))}
+      </div>
+      <h3 className="text-content-strong text-base font-bold">{labels.emptyTitle}</h3>
+      <p className="text-content-muted max-w-xs text-sm text-pretty">{labels.intro}</p>
+      <button
+        type="button"
+        onClick={onPick}
+        className="bg-accent text-accent-fg rounded-lg px-4 py-2.5 text-sm font-semibold hover:brightness-110"
+      >
+        {labels.emptyCta}
+      </button>
     </div>
   );
 }

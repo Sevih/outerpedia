@@ -188,6 +188,39 @@ describe('heroNeed — affinité, transcendance, EE', () => {
   });
 });
 
+describe('itemsByAxis — ventilation de la liste de courses', () => {
+  it('range chaque item sous l’axe qui l’a demandé, sans doublonner le total', () => {
+    const n = heroNeed(
+      HERO,
+      progress({ level: 2, skills: [1, 1, 1, 1], ee: [0] }),
+      progress({ level: 5, skills: [2, 1, 1, 1], ee: [1] }),
+      RULES,
+    );
+    expect(n.itemsByAxis.level).toEqual({ memory_water: 100 });
+    expect(n.itemsByAxis.skills).toEqual({ manual1: 3 });
+    expect(n.itemsByAxis.ee).toEqual({ hammer: 5 });
+    // Le total reste la somme des axes — un item ne se compte pas deux fois.
+    expect(n.items).toEqual({ memory_water: 100, manual1: 3, hammer: 5 });
+  });
+
+  it('les cores d’un fusionné comptent comme des SKILLS', () => {
+    const n = heroNeed(FUSED, progress({ fusion: 0 }), progress({ fusion: 2 }), RULES);
+    expect(n.itemsByAxis.skills).toEqual({ core: 450 });
+    expect(n.itemsByAxis.level).toEqual({});
+  });
+
+  it('accountNeed agrège les axes comme il agrège le total', () => {
+    const a = heroNeed(HERO, progress(), progress({ skills: [2, 1, 1, 1] }), RULES);
+    const b = heroNeed(
+      { id: '2000003', rarity: 3, element: 'water' },
+      progress(),
+      progress({ skills: [2, 1, 1, 1] }),
+      RULES,
+    );
+    expect(accountNeed([a, b]).itemsByAxis.skills).toEqual({ manual1: 6 });
+  });
+});
+
 describe('accountNeed — agrégation', () => {
   it('additionne les items, garde les pièces PAR héros, ignore les héros à jour', () => {
     const a = heroNeed(HERO, progress(), progress({ skills: [2, 1, 1, 1], transcend: 1 }), RULES);

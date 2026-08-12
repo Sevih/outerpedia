@@ -50,11 +50,7 @@ const transcend = transcendData as unknown as {
 const LABEL_KEYS = [
   'intro',
   'search',
-  'trackedOnly',
-  'track',
   'untrack',
-  'current',
-  'target',
   'level',
   'skills',
   'fusionLevel',
@@ -81,6 +77,19 @@ const LABEL_KEYS = [
   'coreFusion',
   'preferredGift',
   'alwaysMax',
+  'shoppingList',
+  'myHeroes',
+  'addHero',
+  'untracked',
+  'heroNeeds',
+  'doneHero',
+  'emptyTitle',
+  'emptyCta',
+  'itemCount',
+  'itemUnit',
+  'axisAll',
+  'piecesNote',
+  'skillHint',
 ] as const;
 
 export default async function HeroTracker({ lang }: { lang: Lang }) {

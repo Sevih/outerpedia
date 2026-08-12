@@ -88,6 +88,20 @@ export interface GrowthRules {
   transcendLadder: (hero: TrackedHero) => TranscendCost[];
 }
 
+/**
+ * Les axes qui produisent de VRAIS items — la ventilation de la liste de
+ * courses. L'affinité et la transcendance n'en font pas partie : elles se
+ * paient en points et en pièces, converties (ou non) ailleurs.
+ */
+export const NEED_AXES = ['level', 'skills', 'ee'] as const;
+export type NeedAxis = (typeof NEED_AXES)[number];
+
+const emptyByAxis = (): Record<NeedAxis, Record<string, number>> => ({
+  level: {},
+  skills: {},
+  ee: {},
+});
+
 /** Ce qu'il reste à obtenir pour UN héros. */
 export interface HeroNeed {
   heroId: string;
@@ -98,6 +112,8 @@ export interface HeroNeed {
   gold: number;
   /** Items réels : id → quantité (manuels, mémoires, matériaux EE, cores de fusion). */
   items: Record<string, number>;
+  /** Les mêmes items, ventilés par axe — de quoi filtrer la liste de courses. */
+  itemsByAxis: Record<NeedAxis, Record<string, number>>;
   /** Pièces du héros pour la transcendance — propres à LUI, jamais agrégées. */
   pieces: number;
   /**
@@ -130,8 +146,14 @@ export function heroNeed(
     affinityPoints: 0,
     gold: 0,
     items: {},
+    itemsByAxis: emptyByAxis(),
     pieces: 0,
     transcendSteps: 0,
+  };
+  /** Un item compte deux fois : au total, et dans l'axe qui l'a demandé. */
+  const want = (axis: NeedAxis, id: string, count: number): void => {
+    addItem(need.items, id, count);
+    addItem(need.itemsByAxis[axis], id, count);
   };
 
   // ── Niveau : différence de deux CUMULS, plus les paliers de limit break
@@ -143,7 +165,7 @@ export function heroNeed(
     need.xp = rules.xpCurve[toLevel - 1] - rules.xpCurve[fromLevel - 1];
     for (const step of rules.limitBreak[`${hero.rarity}_${hero.element}`] ?? []) {
       if (step.maxLevel > fromLevel && step.maxLevel <= toLevel) {
-        addItem(need.items, step.recallItemId, step.pieces);
+        want('level', step.recallItemId, step.pieces);
         need.gold += step.price;
       }
     }
@@ -158,7 +180,7 @@ export function heroNeed(
   if (hero.fusionLevels) {
     for (const step of hero.fusionLevels) {
       if (step.level > state.fusion && step.level <= target.fusion) {
-        addItem(need.items, step.cost.item.id, step.cost.count);
+        want('skills', step.cost.item.id, step.cost.count);
       }
     }
   } else {
@@ -169,7 +191,7 @@ export function heroNeed(
       const to = target.skills[i] ?? 1;
       for (const row of ladder) {
         if (row.level > from && row.level <= to) {
-          for (const m of row.manuals) addItem(need.items, m.item.id, m.count);
+          for (const m of row.manuals) want('skills', m.item.id, m.count);
           need.gold += row.gold;
         }
       }
@@ -203,7 +225,7 @@ export function heroNeed(
     const to = target.ee[i] ?? 0;
     for (const row of rules.eeEnchant) {
       if (row.level > from && row.level <= to) {
-        for (const m of row.materials) addItem(need.items, m.item.id, m.count);
+        for (const m of row.materials) want('ee', m.item.id, m.count);
         need.gold += row.gold;
       }
     }
@@ -218,6 +240,7 @@ export interface AccountNeed {
   affinityPoints: number;
   gold: number;
   items: Record<string, number>;
+  itemsByAxis: Record<NeedAxis, Record<string, number>>;
   /** heroId → { pièces, étapes }, seulement pour les héros qui en demandent. */
   pieces: Record<string, { pieces: number; steps: number }>;
   /** Héros dont il reste quelque chose à faire. */
@@ -230,6 +253,7 @@ export function accountNeed(needs: HeroNeed[]): AccountNeed {
     affinityPoints: 0,
     gold: 0,
     items: {},
+    itemsByAxis: emptyByAxis(),
     pieces: {},
     heroes: [],
   };
@@ -239,6 +263,9 @@ export function accountNeed(needs: HeroNeed[]): AccountNeed {
     total.affinityPoints += n.affinityPoints;
     total.gold += n.gold;
     for (const [id, count] of Object.entries(n.items)) addItem(total.items, id, count);
+    for (const axis of NEED_AXES)
+      for (const [id, count] of Object.entries(n.itemsByAxis[axis]))
+        addItem(total.itemsByAxis[axis], id, count);
     if (n.pieces > 0) total.pieces[n.heroId] = { pieces: n.pieces, steps: n.transcendSteps };
     total.heroes.push(n);
   }
