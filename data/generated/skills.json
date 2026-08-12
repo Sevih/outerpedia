@@ -215211,7 +215211,7 @@
     "desc": {
       "en": "<color=#ffd732>Dominion of Pain</color>: Increases the <color=#28d9ed>Defense and Crit DMG</color> of all allies except the caster for <color=#28d9ed>[Buff_T_2000129_3_1] turns</color> and grants them <color=#28d9ed>Buff Enhancement</color> for <color=#28d9ed>[Buff_T_2000129_3_1] turns</color>.\\nThen recovers <color=#28d9ed>100 AP</color> for all allies and deals Fixed Damage to the caster equal to <color=#28d9ed>99%</color> of the caster's Max Health.\\nThis damage can transform the caster into the <color=#28d9ed>Demon</color>.\\n\\n<color=#ffd732>Final Judgment</color>: Before using the skill, inflicts <color=#28d9ed>Punishment</color> on the target for <color=#28d9ed>[Buff_T_2000130_3_1] turns</color>. If the target is a Boss, adds <color=#28d9ed>[Buff_T_2000130_3_1] turns</color> to the duration of Punishment. (Ignores Resilience)\\nAttacks all enemies, then reduces the skill cooldowns of all other <color=#28d9ed>Dark</color> allies by <color=#28d9ed>1 turn</color>.",
       "jp": "<color=#ffd732>【苦痛の権能】</color>：自分を除く味方全体の<color=#28d9ed>防御力</color>と<color=#28d9ed>会心ダメージ</color>を<color=#28d9ed>[Buff_T_2000129_3_1]ターン</color>の間UPし、<color=#28d9ed>強化促進</color>を<color=#28d9ed>[Buff_T_2000129_3_1]ターン</color>の間付与する。\\nその後、味方全体のAPを<color=#28d9ed>100</color>回復し、自分の最大HP<color=#28d9ed>99%</color>の固定ダメージを自分に与える。\\nこのダメージで<color=#28d9ed>魔神</color>に変身できる。\\n\\n<color=#ffd732>【終末の宣告】</color>：スキル使用前、対象に<color=#28d9ed>懲罰</color>を<color=#28d9ed>[Buff_T_2000130_3_1]ターン</color>の間付与し、対象がボスの場合、<color=#28d9ed>懲罰</color>をさらに<color=#28d9ed>[Buff_T_2000130_3_1]ターン</color>の間付与する。(効果抵抗無視)\\n敵全体にダメージを与えた後、自分を除く<color=#28d9ed>闇属性</color>の味方全体のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
-      "kr": "<color=#ffd732>고통의 권세</color> : 자신을 제외한 아군 전체의 <color=#28d9ed>방어력</color>,<color=#28d9ed>치명타 피해</color>를 <color=#28d9ed>[Buff_T_2000129_3_1]턴</color> 동안 증가시키고 <color=#28d9ed>강화 촉진</color>을  <color=#28d9ed>[Buff_T_2000129_3_1]턴</color> 동안 부여합니다.\\n이후 아군 전체의 AP를 <color=#28d9ed>100</color> 회복하고 자신에게 자신 최대 체력의 <color=#28d9ed>99%</color> 만큼 고정 피해를 입힙니다. \\n이 피해로 <color=#28d9ed>마신</color>으로 전환 할 수 있습니다.\\n\\n<color=#ffd732>종말 선고</color> : 스킬 사용 전 대상에게 <color=#28d9ed>응징</color>을 <color=#28d9ed>[Buff_T_2000130_3_1]턴</color> 동안 부여하고 대상이 보스인 경우 <color=#28d9ed>응징</color>을 <color=#28d9ed>[Buff_T_2000130_3_1]턴</color> 동안 추가합니다.(효과 저항 무시)\\n적 전체를 공격한 후 자신을 제외한 <color=#28d9ed>암속성</color> 아군 전체의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
+      "kr": "<color=#ffd732>고통의 권세</color> : 자신을 제외한 아군 전체의 <color=#28d9ed>방어력</color>,<color=#28d9ed>치명 피해</color>를 <color=#28d9ed>[Buff_T_2000129_3_1]턴</color> 동안 증가시키고 <color=#28d9ed>강화 촉진</color>을  <color=#28d9ed>[Buff_T_2000129_3_1]턴</color> 동안 부여합니다.\\n이후 아군 전체의 AP를 <color=#28d9ed>100</color> 회복하고 자신에게 자신 최대 체력의 <color=#28d9ed>99%</color> 만큼 고정 피해를 입힙니다. \\n이 피해로 <color=#28d9ed>마신</color>으로 전환 할 수 있습니다.\\n\\n<color=#ffd732>종말 선고</color> : 스킬 사용 전 대상에게 <color=#28d9ed>응징</color>을 <color=#28d9ed>[Buff_T_2000130_3_1]턴</color> 동안 부여하고 대상이 보스인 경우 <color=#28d9ed>응징</color>을 <color=#28d9ed>[Buff_T_2000130_3_1]턴</color> 동안 추가합니다.(효과 저항 무시)\\n적 전체를 공격한 후 자신을 제외한 <color=#28d9ed>암속성</color> 아군 전체의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
       "zh": "<color=#ffd732>痛苦权能</color>：提升除自身外全体友军的<color=#28d9ed>防御力</color>、<color=#28d9ed>暴击伤害</color>，持续<color=#28d9ed>[Buff_T_2000129_3_1]回合</color>，并赋予<color=#28d9ed>强化促进</color>，持续<color=#28d9ed>[Buff_T_2000129_3_1]回合</color>。\\n随后为全体友军回复AP<color=#28d9ed>100</color>，并对自身造成相当于自身最大生命值<color=#28d9ed>99%</color>的固定伤害。\\n可通过该伤害转化为<color=#28d9ed>魔神</color>。\\n\\n<color=#ffd732>终末宣告</color>：使用技能前，赋予目标<color=#28d9ed>惩戒</color>，持续<color=#28d9ed>[Buff_T_2000130_3_1]回合</color>。若目标为首领，则额外赋予<color=#28d9ed>惩戒</color>，持续<color=#28d9ed>[Buff_T_2000130_3_1]回合</color>。（无视效果抵抗）\\n攻击全体敌人后，使除自身外<color=#28d9ed>暗属性</color>全体友军的技能冷却时间减少<color=#28d9ed>1回合</color>。"
     },
     "target": "team",
@@ -216336,10 +216336,10 @@
   "12921": {
     "id": "12921",
     "name": {
-      "en": "Ultimate Cooldown Reset\\nExtra Turn\\nEnhanced Attack",
-      "jp": "必殺スキルターン初期化\\n追加ターン\\n強化攻撃に変更",
-      "kr": "필살기 쿨타임 초기화\\n추가 턴\\n강화 공격",
-      "zh": "必杀技冷却时间重置\\n额外回合\\n替换为强化攻击"
+      "en": "Ultimate Cooldown Reset\\nExtra Turn\\nEnhanced Attack (Demon)",
+      "jp": "必殺スキルターン初期化\\n追加ターン\\n強化攻撃に変更(魔神)",
+      "kr": "필살기 쿨타임 초기화\\n추가 턴\\n강화 공격(마신)",
+      "zh": "必杀技冷却时间重置\\n额外回合\\n替换为强化攻击（魔神）"
     },
     "type": "burst_3",
     "subType": "active",
@@ -218240,10 +218240,10 @@
   "13021": {
     "id": "13021",
     "name": {
-      "en": "Ultimate Cooldown Reset\\nExtra Turn\\nEnhanced Attack",
-      "jp": "必殺スキルターン初期化\\n追加ターン\\n強化攻撃に変更",
-      "kr": "필살기 쿨타임 초기화\\n추가 턴\\n강화 공격",
-      "zh": "必杀技冷却时间重置\\n额外回合\\n替换为强化攻击"
+      "en": "Ultimate Cooldown Reset\\nExtra Turn\\nEnhanced Attack (Demon)",
+      "jp": "必殺スキルターン初期化\\n追加ターン\\n強化攻撃に変更(魔神)",
+      "kr": "필살기 쿨타임 초기화\\n추가 턴\\n강화 공격(마신)",
+      "zh": "必杀技冷却时间重置\\n额外回合\\n替换为强化攻击（魔神）"
     },
     "type": "burst_3",
     "subType": "active",
