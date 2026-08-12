@@ -7507,6 +7507,210 @@
       "substats": "$subDpsCrit"
     }
   ],
+  "2000129": [
+    {
+      "name": "Revenge",
+      "weapons": [
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1795",
+          "mainStat": "SPD/ATK%"
+        },
+        {
+          "id": "1040",
+          "mainStat": "SPD/ATK%"
+        },
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$emrsv"],
+      "note": {
+        "en": "{I-T/Vanguard's Charm}/{I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm}/{I-T/Sage's Charm}/{I-T/Executioner's Charm}/{I-T/Mage's Charm} : PvE",
+        "jp": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
+        "kr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
+        "zh": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
+        "fr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE"
+      },
+      "sets": [
+        {
+          "preset": "r4"
+        }
+      ],
+      "substats": "$dps2"
+    },
+    {
+      "name": "Penetration",
+      "weapons": [
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1795",
+          "mainStat": "SPD/ATK%"
+        },
+        {
+          "id": "1040",
+          "mainStat": "SPD/ATK%"
+        },
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$emrsv"],
+      "note": {
+        "en": "{I-T/Vanguard's Charm}/{I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm}/{I-T/Sage's Charm}/{I-T/Executioner's Charm}/{I-T/Mage's Charm} : PvE",
+        "jp": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
+        "kr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
+        "zh": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
+        "fr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE"
+      },
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps2"
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1795",
+          "mainStat": "SPD/ATK%"
+        },
+        {
+          "id": "1040",
+          "mainStat": "SPD/ATK%"
+        },
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$emrsv"],
+      "note": {
+        "en": "{I-T/Vanguard's Charm}/{I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm}/{I-T/Sage's Charm}/{I-T/Executioner's Charm}/{I-T/Mage's Charm} : PvE",
+        "jp": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
+        "kr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
+        "zh": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
+        "fr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE"
+      },
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps2"
+    },
+    {
+      "name": "Penetration Mix",
+      "weapons": [
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1795",
+          "mainStat": "SPD/ATK%"
+        },
+        {
+          "id": "1040",
+          "mainStat": "SPD/ATK%"
+        },
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        }
+      ],
+      "talismans": ["$emrsv"],
+      "note": {
+        "en": "{I-T/Vanguard's Charm}/{I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm}/{I-T/Sage's Charm}/{I-T/Executioner's Charm}/{I-T/Mage's Charm} : PvE",
+        "jp": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
+        "kr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
+        "zh": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
+        "fr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE"
+      },
+      "sets": [
+        {
+          "preset": "p2a2"
+        },
+        {
+          "preset": "p2s2"
+        },
+        {
+          "preset": "p2sw2"
+        }
+      ],
+      "substats": "$dps2"
+    }
+  ],
   "2700003": [
     {
       "name": "Speed",
