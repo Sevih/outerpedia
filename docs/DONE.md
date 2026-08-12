@@ -7,6 +7,16 @@
 
 ## 2026-08-12
 
+- **Promote : les faux orphelins `damage/*` + `video-meta.json` ne crient plus**
+  (question Sevih sur les ⚠ du `--apply`) — ces 7 fichiers sont des validés
+  SANS équivalent extrait PAR CONSTRUCTION : `damage/` sort du pipeline dédié
+  `datagen/damage/build.ts` (source = binaire, jamais `build.ts`) et
+  `video-meta.json` de `pnpm datagen:video-meta` (à la demande). Le promote les
+  signalait « à trancher » À CHAQUE run — même motif que `comics.json` déjà
+  exclu : du bruit qui masque les vrais orphelins. Ajoutés à `isPureCurated`
+  (l'idiome existant), avec le POURQUOI par fichier. Vérifié sur le promote
+  réel : plus aucun ⚠, il ne reste que le ⛔ attendu (2400015). 25/25.
+
 - **D.Luna ne disparaît plus de l'extrait — le cycle de change-forme piégeait la
   sélection (l'inbox « 1 removed » de Sevih)** — la MAJ du jour a rendu le
   change-forme de Luna ALLER-RETOUR dans `CharacterChangeTemplet` (`2000119→

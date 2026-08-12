@@ -56,9 +56,16 @@ export const RETAIN_ENTITIES = new Set(['monsters.json', 'monster-skills.json', 
  *     `build.ts` — la liste servie est le manifeste R2 lu à la requête, ce
  *     fichier n'étant que le repli committé (cf. tools/_contents/4-comics).
  *     Il était signalé à CHAQUE promote, bruit qui masque les vrais orphelins.
+ *   - `damage/` : produit par le pipeline DÉDIÉ `datagen/damage/build.ts`
+ *     (source = binaire du jeu, pas les tables — cf. spec damage-calculator),
+ *     jamais par `build.ts` ;
+ *   - `video-meta.json` : produit à la demande par `pnpm datagen:video-meta`.
  */
 const isPureCurated = (rel: string): boolean =>
-  rel.startsWith('monster-archive/') || rel === 'comics.json';
+  rel.startsWith('monster-archive/') ||
+  rel.startsWith('damage/') ||
+  rel === 'comics.json' ||
+  rel === 'video-meta.json';
 
 /** Tous les .json d'un dossier (récursif), chemins relatifs POSIX. */
 function walk(dir: string, base = dir): string[] {
