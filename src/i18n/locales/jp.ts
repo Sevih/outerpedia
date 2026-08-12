@@ -296,7 +296,7 @@ const jp: Record<TranslationKey, string> = {
   'tools.hero-tracker.transcend': '超越',
   'tools.hero-tracker.ee': '専用装備',
   'tools.hero-tracker.eeFusion': 'フュージョン専用装備',
-  'tools.hero-tracker.needTitle': '必要なもの',
+  'tools.hero-tracker.needTitle': '必要素材',
   'tools.hero-tracker.needEmpty':
     '必要なものはありません — ヒーローを記録するか目標を上げてください。',
   'tools.hero-tracker.gold': 'ゴールド',
@@ -315,7 +315,7 @@ const jp: Record<TranslationKey, string> = {
   'tools.hero-tracker.myHeroes': '育成中のヒーロー',
   'tools.hero-tracker.addHero': 'ヒーローを追加',
   'tools.hero-tracker.untracked': '未記録{count}体',
-  'tools.hero-tracker.heroNeeds': '不足分',
+  'tools.hero-tracker.heroNeeds': 'このヒーローに必要な素材',
   'tools.hero-tracker.doneHero': '完了 — 必要なものなし',
   'tools.hero-tracker.emptyTitle': '記録中のヒーローはいません',
   'tools.hero-tracker.emptyCta': 'ヒーローを選ぶ',

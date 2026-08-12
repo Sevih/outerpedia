@@ -323,8 +323,14 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
       const entry = tracked[h.id];
       if (!entry || hidden.has(h.id)) continue;
       const target = store.alwaysMax ? maxTarget(h) : entry.target;
-      const floor = minTranscend(h);
-      const state = { ...entry.state, transcend: Math.max(entry.state.transcend, floor) };
+      // Planchers du jeu : un fusionné a forcément franchi l'étoile exigée et
+      // le premier palier de fusion. Une saisie plus basse (ou antérieure à ces
+      // règles) facturerait des coûts que le jeu impose d'avoir déjà payés.
+      const state = {
+        ...entry.state,
+        transcend: Math.max(entry.state.transcend, minTranscend(h)),
+        fusion: h.fusionLevels ? Math.max(entry.state.fusion, 1) : entry.state.fusion,
+      };
       out.set(h.id, heroNeed(asTracked(h), state, target, fullRules));
     }
     return out;
@@ -337,7 +343,8 @@ export function HeroTrackerBrowser({ heroes, rules, transcend, items, labels }: 
       state: {
         level: START_LEVEL,
         skills: Array(SKILL_SLOTS).fill(1),
-        fusion: 0,
+        // Un fusionné qu'on possède est déjà fusionné : ses skills partent de 1.
+        fusion: hero.fusionLevels ? 1 : 0,
         affinity: 1,
         transcend: minTranscend(hero),
         ee: Array(hero.fusionLevels ? 2 : 1).fill(0),
@@ -952,20 +959,31 @@ function HeroCard({
             value={`${state.level}`}
             target={withTarget ? `${target.level}` : undefined}
           >
-            <div className="flex items-center gap-1.5">
-              <Stepper
-                value={state.level}
-                min={START_LEVEL}
-                max={rules.xpCurve.length}
-                onChange={(v) => onChange('state', { level: v })}
-              />
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-1.5">
+                <Stepper
+                  value={state.level}
+                  min={START_LEVEL}
+                  max={rules.xpCurve.length}
+                  onChange={(v) => onChange('state', { level: v })}
+                />
+                <TargetField
+                  show={withTarget}
+                  value={target.level}
+                  min={START_LEVEL}
+                  max={rules.xpCurve.length}
+                  onChange={(v) => onChange('target', { level: v })}
+                />
+              </div>
+              {/* Les paliers posent la CIBLE — ce sont des objectifs (« je le
+                  monte à 110 »), pas des états qu'on déclare. */}
               <div className="flex gap-1">
                 {jumps.map((n) => (
                   <button
                     key={n}
                     type="button"
                     onClick={() => onChange(withTarget ? 'target' : 'state', { level: n })}
-                    className={`h-9 rounded-lg border px-2 font-mono text-[11px] transition-colors ${
+                    className={`h-7 flex-1 rounded-lg border font-mono text-[11px] transition-colors ${
                       (withTarget ? target.level : state.level) === n
                         ? 'border-accent bg-accent/15 text-accent font-semibold'
                         : 'border-line-subtle bg-surface-sunken text-content-muted hover:border-line'
@@ -986,7 +1004,10 @@ function HeroCard({
               target={withTarget ? `${target.fusion}` : undefined}
             >
               <Scale
-                values={Array.from({ length: hero.fusionLevels.length + 1 }, (_, i) => i)}
+                // Les skills d'un fusionné DÉMARRENT au niveau 1 : posséder le
+                // fusionné, c'est l'avoir débloqué. Le palier 1 du barème (les
+                // 300 cores de la fusion) est donc déjà payé, jamais compté.
+                values={Array.from({ length: hero.fusionLevels.length }, (_, i) => i + 1)}
                 current={state.fusion}
                 target={withTarget ? target.fusion : hero.fusionLevels.length}
                 withTarget={withTarget}
@@ -1085,6 +1106,13 @@ function HeroCard({
                 max={rules.affinityCurve.length}
                 onChange={(v) => onChange('state', { affinity: v })}
               />
+              <TargetField
+                show={withTarget}
+                value={target.affinity}
+                min={1}
+                max={rules.affinityCurve.length}
+                onChange={(v) => onChange('target', { affinity: v })}
+              />
             </div>
           </Field>
 
@@ -1105,21 +1133,19 @@ function HeroCard({
                     size={30}
                   />
                 )}
-                <Scale
-                  values={Array.from({ length: rules.eeEnchant.length + 1 }, (_, n) => n)}
-                  current={state.ee[i] ?? 0}
-                  target={withTarget ? (target.ee[i] ?? 0) : rules.eeEnchant.length}
-                  withTarget={withTarget}
-                  tone="star"
-                  compact
-                  onCurrent={(v) => onChange('state', { ee: replace(state.ee, i, v) })}
-                  onTarget={(v) => onChange('target', { ee: replace(target.ee, i, v) })}
-                />
-                <NumberField
+                {/* Onze crans muets ne disaient rien : un pas à pas se lit. */}
+                <Stepper
                   value={state.ee[i] ?? 0}
                   min={0}
                   max={rules.eeEnchant.length}
                   onChange={(v) => onChange('state', { ee: replace(state.ee, i, v) })}
+                />
+                <TargetField
+                  show={withTarget}
+                  value={target.ee[i] ?? 0}
+                  min={0}
+                  max={rules.eeEnchant.length}
+                  onChange={(v) => onChange('target', { ee: replace(target.ee, i, v) })}
                 />
               </div>
             </Field>
@@ -1237,7 +1263,6 @@ function Scale({
   target,
   withTarget,
   tone = 'accent',
-  compact = false,
   render,
   icon,
   onCurrent,
@@ -1249,8 +1274,6 @@ function Scale({
   withTarget: boolean;
   /** `star` = or (transcendance, enchantement), `accent` = bleu (niveaux). */
   tone?: 'accent' | 'star';
-  /** Segments fins et muets — l'échelle d'EE en a onze. */
-  compact?: boolean;
   render?: (v: number) => string;
   /** Visuel posé au-dessus du libellé (les étoiles du jeu, pour la transcendance). */
   icon?: (v: number, reached: boolean) => React.ReactNode;
@@ -1289,7 +1312,7 @@ function Scale({
   });
 
   return (
-    <div className={`flex min-w-0 flex-1 ${compact ? 'gap-px' : 'gap-1'}`}>
+    <div className="flex min-w-0 flex-1 gap-1">
       {values.map((v) => {
         const isReached = v <= current;
         const isAimed = v <= target;
@@ -1300,7 +1323,7 @@ function Scale({
             {...press(v)}
             aria-label={String(render ? render(v) : v)}
             className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-px rounded-md border font-mono text-[11px] leading-none font-semibold transition-colors ${
-              compact ? 'h-8' : icon ? 'h-10' : 'h-9'
+              icon ? 'h-10' : 'h-9'
             } ${
               isReached
                 ? reached
@@ -1310,7 +1333,7 @@ function Scale({
             }`}
           >
             {icon?.(v, isReached)}
-            {!compact && (render ? render(v) : v)}
+            {render ? render(v) : v}
           </button>
         );
       })}
@@ -1342,6 +1365,29 @@ function Stepper({
         +
       </button>
     </div>
+  );
+}
+
+/** « → [cible] » : le second champ des axes qui se saisissent au chiffre. */
+function TargetField({
+  show,
+  value,
+  min,
+  max,
+  onChange,
+}: {
+  show: boolean;
+  value: number;
+  min: number;
+  max: number;
+  onChange: (v: number) => void;
+}) {
+  if (!show) return null;
+  return (
+    <span className="flex shrink-0 items-center gap-1.5">
+      <span className="text-content-subtle text-xs">→</span>
+      <NumberField value={value} min={min} max={max} onChange={onChange} />
+    </span>
   );
 }
 
