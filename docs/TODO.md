@@ -45,7 +45,8 @@
       CF Snow, dont la base est 2★), ce qui est un choix, pas une donnée ;
       (3) `pnpm images` au prochain passage : le PNG de `CM_EtcMenu_Colleague`
       (og:image de la page) et les `PI_*` des pièces ne sont que dans le staging
-      local — le manifest les demande déjà, aucune curation à faire.
+      local — le manifest les demande déjà, aucune curation à faire (sa source
+      était fausse jusqu'au 13/08, cf. DONE ; il est produit depuis).
 - [ ] **Arbre de dons / awakening — outil ou guide À PART.** Constaté en
       cartographiant le hero-tracker : l'awakening n'est PAS par héros, c'est un
       arbre de COMPTE (`CharacterAwakeningTemplet` : 5 groupes, 207 nœuds,

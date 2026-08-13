@@ -1297,18 +1297,48 @@ function HeroCard({
       <span className="text-accent">{to}</span>
     </>
   );
+  /**
+   * Le résumé ne dit QUE ce qu'il reste : un axe déjà à sa cible n'y figure pas.
+   * « 6★ → 6★ » occupait la ligne pour annoncer qu'il n'y avait rien à faire.
+   */
+  const goalLevel = withTarget ? target.level : rules.xpCurve.length;
+  const goalTranscend = withTarget ? target.transcend : steps.length - 1;
+  const parts: React.ReactNode[] = [];
+  if (state.level < goalLevel) {
+    parts.push(
+      <>
+        {labels.level} {aim(`${state.level}`, `${goalLevel}`)}
+      </>,
+    );
+  }
+  if (state.transcend < goalTranscend) {
+    parts.push(aim(starLabel(steps[state.transcend]), starLabel(steps[goalTranscend])));
+  }
+  // L'affinité ne se paie qu'en cadeaux : elle n'apparaît dans AUCUN décompte
+  // d'objets, et sans ce segment un héros à qui il ne manque qu'elle n'aurait
+  // rien à dire.
+  const goalAffinity = withTarget ? target.affinity : rules.affinityCurve.length;
+  if (state.affinity < goalAffinity) {
+    parts.push(
+      <>
+        {labels.affinity} {aim(`${state.affinity}`, `${goalAffinity}`)}
+      </>,
+    );
+  }
+  if (objects > 0) parts.push(labels.itemCount.replace('{count}', fmt(objects)));
+  // Reste l'or seul (une transcendance déjà couverte en doublons, par exemple) :
+  // il y a du travail, la ligne ne peut pas rester vide.
+  if (parts.length === 0 && need && need.gold > 0) parts.push(`${short(need.gold)} ${labels.gold}`);
   const summary = done ? (
     labels.doneHero
   ) : (
     <>
-      {labels.level} {aim(`${state.level}`, `${withTarget ? target.level : rules.xpCurve.length}`)}
-      {' · '}
-      {aim(
-        starLabel(steps[state.transcend]),
-        starLabel(steps[withTarget ? target.transcend : steps.length - 1]),
-      )}
-      {' · '}
-      {labels.itemCount.replace('{count}', fmt(objects))}
+      {parts.map((part, i) => (
+        <span key={i}>
+          {i > 0 && ' · '}
+          {part}
+        </span>
+      ))}
     </>
   );
 

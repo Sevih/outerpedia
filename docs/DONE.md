@@ -5,6 +5,39 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-13
+
+- **`assets:collect` — trois « manquants » éternels, deux causes (Sevih)** —
+  (1) `CT_2010130` / `FI_2010130` : le manifest réclamait un visage pour la FORME
+  DE COMBAT du skin de Demiurge Saeran. Les bundles disent la règle sans
+  ambiguïté — AUCUNE forme n'a de visage à elle, ni celles des bases
+  (`CT_2000130`, `CT_2000120` absents) ni celles des skins (`CT_2010130`,
+  `CT_2010120` absents) ; seul `IG_Turn_` existe par forme. Le jeu ENCODE parfois
+  l'emprunt (2010120 → `FaceIconID` 2010119) et on suivait cette indirection ;
+  Saeran s'auto-référence, alors la demande partait dans le vide. La résolution
+  passe donc par le LIEN DE TRANSFORMATION (`CharacterChangeTemplet`) quand la
+  table s'auto-référence : 2010130 → 2010129, qui existe. Un seul saut — la
+  transformation de Demiurge Luna est réciproque, remonter en boucle ne
+  désignerait jamais de propriétaire. Rien ne change pour D. Luna (mêmes clés
+  qu'avant), et `IG_Turn_2010130` reste demandé. ⚠ Ceci CLÔT la question posée le
+  12/08 : pas de test en jeu à faire, l'asset n'existe pas et n'existera pas.
+  (2) `CM_EtcMenu_Colleague.png` : la boucle des icônes d'outil postulait que
+  toute icône vient du pool éditorial. Le hero-tracker est le premier outil dont
+  l'icône est un sprite du JEU (menu principal) — le `.webp` passait par le
+  dédoublonnage avec la collecte `ui/nav`, la variante PNG (og:image) réclamait au
+  pool une source qui n'y sera jamais. Même résolution que les guides : pool
+  d'abord, extraction ensuite. `assets:collect` : 0 manquant (1 produit).
+  5 tests sur le cœur pur `resolveAppearanceFace`.
+
+- **`/hero-tracker` — le résumé d'une rangée ne dit plus que ce qui RESTE (Sevih :
+  « pourquoi je vois 6★ → 6★ ? »)** — il énumérait ses axes que l'écart soit nul
+  ou non, si bien qu'un compte déjà 6★ partout lisait 119 fois « 6★ → 6★ ». Un
+  axe à sa cible ne s'affiche plus. L'affinité gagne son segment au passage :
+  elle ne se paie qu'en cadeaux, n'entre dans aucun décompte d'objets, et un
+  héros à qui il ne manquait qu'elle n'avait donc rien à dire. Repli sur l'or
+  s'il ne reste que lui — la ligne d'un héros qui a du travail ne peut pas rester
+  vide.
+
 ## 2026-08-12
 
 - **`/hero-tracker` — masquer les petites raretés, et des portraits qui disent la

@@ -144,6 +144,56 @@ function faceIconOf(id: string): string | undefined {
   return faceIconIndex.data.get(id);
 }
 
+/**
+ * Source d'une FORME DE COMBAT : l'unité dont elle sort (`CharacterChangeTemplet`,
+ * 2010129 → 2010130 à la mort de Demiurge Saeran). Paresseux, même empreinte.
+ * L'auto-référence est ignorée, et une transformation RÉCIPROQUE (Demiurge Luna,
+ * 2010119 ↔ 2010120 : chacun est la forme de l'autre) n'a pas de « source »
+ * absolue — l'appelant tranche sur un autre critère, cf. `appearanceFace`.
+ */
+let formSourceIndex: { data: Map<string, string>; stamp: string } | undefined;
+function formSourceOf(id: string): string | undefined {
+  const stamp = tablesStamp(['CharacterChangeTemplet']);
+  if (!formSourceIndex || formSourceIndex.stamp !== stamp) {
+    const data = new Map<string, string>();
+    for (const r of loadTable('CharacterChangeTemplet')) {
+      if (r.ID && r.ChangeCharacterID && r.ChangeCharacterID !== r.ID)
+        data.set(r.ChangeCharacterID, r.ID);
+    }
+    formSourceIndex = { data, stamp };
+  }
+  return formSourceIndex.data.get(id);
+}
+
+/**
+ * Visage d'une apparence. RÈGLE DU JEU : une forme de combat n'a PAS de visage
+ * à elle — l'UI montre celui de l'unité dont elle sort. Aucun `CT_` de forme
+ * n'est livré dans les bundles, ni pour la base (2000130, 2000120) ni pour le
+ * skin (2010130, 2010120) ; seul `IG_Turn_` existe par forme.
+ *
+ * Le jeu ENCODE parfois l'emprunt (2010120 → FaceIconID 2010119) — on le suit
+ * alors tel quel. Quand la ligne s'auto-référence (2010130 → 2010130), c'est le
+ * lien de transformation qui donne le propriétaire du visage ; sans ce repli,
+ * on réclamerait un `CT_2010130` que le jeu ne livre pas.
+ *
+ * Cœur PUR (testable sans `.gamedata`) : `resolveAppearanceFace`.
+ */
+export function resolveAppearanceFace(
+  app: string,
+  faceOf: (id: string) => string | undefined,
+  formSourceOf: (id: string) => string | undefined,
+): string {
+  const face = faceOf(app) ?? app;
+  if (face !== app) return face; // emprunt déclaré par la table
+  const src = formSourceOf(app);
+  // UN seul saut : la transformation de Demiurge Luna est réciproque, remonter
+  // en boucle tournerait en rond sans jamais désigner de propriétaire.
+  return src ? (faceOf(src) ?? src) : app;
+}
+
+const appearanceFace = (app: string): string =>
+  resolveAppearanceFace(app, faceIconOf, formSourceOf);
+
 /** Besoins d'UN personnage (réutilisé par le manifest global ET l'intégration). */
 export function characterAssetRequests(
   c: Record<string, unknown>,
@@ -239,14 +289,13 @@ export function characterAssetRequests(
   // les boss « personnages » réutilisent souvent le FaceIconID d'un skin
   // (MonsterTemplet.FaceIconID = 2010004…) : sans ça, FI_<skin> ne serait
   // jamais produit et l'affichage tape dans le vide.
-  // SAUF que certains skins n'ont PAS leurs propres sprites de visage : la
-  // table les fait pointer vers ceux d'un frère (2010120 → FaceIconID 2010119,
-  // aucun CT_/FI_2010120 dans les bundles). On suit donc l'indirection
-  // FaceIconID pour CT_/FI_ — comme le jeu — au lieu de la convention `_<id>` ;
-  // le dédup par clé fusionne les requêtes des jumeaux. IG_Turn_<id> reste
-  // par id : ces sprites-là existent bien par skin.
+  // SAUF que les FORMES DE COMBAT n'ont PAS de visage à elles (2010120, 2010130 :
+  // aucun CT_/FI_ dans les bundles) — elles empruntent celui de l'unité dont
+  // elles sortent. On résout donc CT_/FI_ par `appearanceFace` au lieu de la
+  // convention `_<id>` ; le dédup par clé fusionne les requêtes des jumeaux.
+  // IG_Turn_<id> reste par id : ces sprites-là existent bien par forme.
   for (const app of (c.appearances as string[] | undefined) ?? []) {
-    const face = faceIconOf(app) ?? app;
+    const face = appearanceFace(app);
     out.push(
       {
         kind: 'image',
@@ -1506,23 +1555,33 @@ export function buildAssetManifest(): AssetRequest[] {
     readFileSync(resolve('data/curated/tools/_index.json'), 'utf8'),
   ) as Record<string, { icon: string }>;
   for (const icon of new Set(Object.values(toolIndex).map((t) => t.icon))) {
-    push({
-      kind: 'editorial',
-      key: `images/ui/${icon}.webp`,
-      source: `ui/${icon}.webp`,
-      domain: 'editorial',
-    });
-    // Variante PNG : og:image des pages d'outil (`/<slug>` sert l'icône de la
-    // landing en carte de partage — Discord/OG digèrent mal le WebP, même règle
-    // que guides/faceicon/EE). Tout l'index (pas le seul sous-ensemble porté) :
-    // le registre des slugs portés vit côté `src/app`, le lire d'ici inverserait
-    // la doctrine des contrats — et chaque outil finira porté.
-    push({
-      kind: 'editorial',
-      key: `images/ui/${icon}.png`,
-      source: `ui/${icon}.webp`,
-      domain: 'editorial',
-    });
+    // La plupart des icônes d'outil sont des visuels wiki (pool éditorial), mais
+    // pas toutes : le hero-tracker reprend un sprite du JEU (`CM_EtcMenu_Colleague`,
+    // menu principal). Même résolution que les guides — pool d'abord, extraction
+    // ensuite — sinon la variante PNG réclame au pool une source qui n'y est pas.
+    const pooled = existsSync(resolve(editorialPool, `ui/${icon}.webp`));
+    const sprite = icon.split('/').pop() as string;
+    // Variante PNG en plus du webp : og:image des pages d'outil (`/<slug>` sert
+    // l'icône de la landing en carte de partage — Discord/OG digèrent mal le
+    // WebP, même règle que guides/faceicon/EE). Tout l'index (pas le seul
+    // sous-ensemble porté) : le registre des slugs portés vit côté `src/app`, le
+    // lire d'ici inverserait la doctrine des contrats — et chaque outil finira porté.
+    for (const ext of ['webp', 'png'])
+      push(
+        pooled
+          ? {
+              kind: 'editorial',
+              key: `images/ui/${icon}.${ext}`,
+              source: `ui/${icon}.webp`,
+              domain: 'editorial',
+            }
+          : {
+              kind: 'image',
+              key: `images/ui/${icon}.${ext}`,
+              candidates: [sprite],
+              domain: 'editorial',
+            },
+      );
   }
   // Icônes de tags (créées pour le wiki).
   for (const tag of [
