@@ -1,32 +1,33 @@
-; ===== GetLostHPRateValue_2 @ 0x26c6d40..0x26c6dbc (taille 124 octets) =====
-  0x26c6d40: stp      x30, x21, [sp, #-0x20]!
-  0x26c6d44: stp      x20, x19, [sp, #0x10]
-  0x26c6d48: mov      x21, x0
-  0x26c6d4c: ldr      x0, [x0, #0x28]
-  0x26c6d50: cbz      x0, #0x26c6db8
-  0x26c6d54: mov      w20, w1
-  0x26c6d58: mov      x1, xzr
-  0x26c6d5c: mov      w19, w2
-  0x26c6d60: bl       #0x27dfb20 ; -> CCharacterData$$get_MaxHP
-  0x26c6d64: cmp      w0, #1
-  0x26c6d68: b.lt     #0x26c6da8
-  0x26c6d6c: ldr      x0, [x21, #0x28]
-  0x26c6d70: cbz      x0, #0x26c6db8
-  0x26c6d74: mov      x1, xzr
-  0x26c6d78: bl       #0x27dfb20 ; -> CCharacterData$$get_MaxHP
-  0x26c6d7c: ldr      x8, [x21, #0x28]
-  0x26c6d80: cbz      x8, #0x26c6db8
-  0x26c6d84: mov      w21, w0
-  0x26c6d88: mov      x0, x8
-  0x26c6d8c: mov      x1, xzr
-  0x26c6d90: bl       #0x27dfb20 ; -> CCharacterData$$get_MaxHP
-  0x26c6d94: sub      w8, w21, w20
-  0x26c6d98: smull    x8, w8, w19
-  0x26c6d9c: sxtw     x9, w0
-  0x26c6da0: sdiv     x0, x8, x9
-  0x26c6da4: b        #0x26c6dac
-  0x26c6da8: mov      w0, wzr
-  0x26c6dac: ldp      x20, x19, [sp, #0x10]
-  0x26c6db0: ldp      x30, x21, [sp], #0x20
-  0x26c6db4: ret      
-  0x26c6db8: bl       #0x21849c0 ; -> ??? 0x21849c0
+; jeu 1.4.14 — régénéré par datagen/extract/disasm.py
+; ===== GetLostHPRateValue_2 @ 0x280f220..0x280f29c (taille 124 octets) =====
+  0x280f220: stp      x30, x21, [sp, #-0x20]!
+  0x280f224: stp      x20, x19, [sp, #0x10]
+  0x280f228: mov      x21, x0
+  0x280f22c: ldr      x0, [x0, #0x28]
+  0x280f230: cbz      x0, #0x280f298
+  0x280f234: mov      w20, w1
+  0x280f238: mov      x1, xzr
+  0x280f23c: mov      w19, w2
+  0x280f240: bl       #0x2901a30 ; -> CCharacterData$$get_MaxHP
+  0x280f244: cmp      w0, #1
+  0x280f248: b.lt     #0x280f288
+  0x280f24c: ldr      x0, [x21, #0x28]
+  0x280f250: cbz      x0, #0x280f298
+  0x280f254: mov      x1, xzr
+  0x280f258: bl       #0x2901a30 ; -> CCharacterData$$get_MaxHP
+  0x280f25c: ldr      x8, [x21, #0x28]
+  0x280f260: cbz      x8, #0x280f298
+  0x280f264: mov      w21, w0
+  0x280f268: mov      x0, x8
+  0x280f26c: mov      x1, xzr
+  0x280f270: bl       #0x2901a30 ; -> CCharacterData$$get_MaxHP
+  0x280f274: sub      w8, w21, w20
+  0x280f278: smull    x8, w8, w19
+  0x280f27c: sxtw     x9, w0
+  0x280f280: sdiv     x0, x8, x9
+  0x280f284: b        #0x280f28c
+  0x280f288: mov      w0, wzr
+  0x280f28c: ldp      x20, x19, [sp, #0x10]
+  0x280f290: ldp      x30, x21, [sp], #0x20
+  0x280f294: ret      
+  0x280f298: bl       #0x21afc18 ; -> ??? 0x21afc18

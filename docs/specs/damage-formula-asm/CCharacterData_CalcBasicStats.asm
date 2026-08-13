@@ -1,1066 +1,1067 @@
-; ===== CCharacterData_CalcBasicStats @ 0x27e4750..0x27e57f4 (taille 4260 octets) =====
-  0x27e4750: stp      x29, x30, [sp, #-0x60]!
-  0x27e4754: stp      x28, x27, [sp, #0x10]
-  0x27e4758: stp      x26, x25, [sp, #0x20]
-  0x27e475c: stp      x24, x23, [sp, #0x30]
-  0x27e4760: stp      x22, x21, [sp, #0x40]
-  0x27e4764: stp      x20, x19, [sp, #0x50]
-  0x27e4768: adrp     x20, #0x5958000
-  0x27e476c: ldrb     w8, [x20, #0x38f]
-  0x27e4770: mov      x19, x0
-  0x27e4774: tbnz     w8, #0, #0x27e4798
-  0x27e4778: adrp     x0, #0x5536000
-  0x27e477c: ldr      x0, [x0, #0xcf0] ; = 0x0 (u64 @ 0x5536cf0)
-  0x27e4780: bl       #0x2184724 ; -> ??? 0x2184724
-  0x27e4784: adrp     x0, #0x5536000
-  0x27e4788: ldr      x0, [x0, #0xcf8] ; = 0x0 (u64 @ 0x5536cf8)
-  0x27e478c: bl       #0x2184724 ; -> ??? 0x2184724
-  0x27e4790: mov      w8, #1
-  0x27e4794: strb     w8, [x20, #0x38f]
-  0x27e4798: ldr      x8, [x19]
-  0x27e479c: mov      x0, x19
-  0x27e47a0: ldp      x9, x1, [x8, #0x188]
-  0x27e47a4: blr      x9
-  0x27e47a8: ldr      x0, [x19, #0x40]
-  0x27e47ac: cbz      x0, #0x27e57f0
-  0x27e47b0: adrp     x28, #0x5536000
-  0x27e47b4: ldr      x28, [x28, #0xcf0] ; = 0x0 (u64 @ 0x5536cf0)
-  0x27e47b8: mov      w1, #2
-  0x27e47bc: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e47c0: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e47c4: mov      x29, x19
-  0x27e47c8: ldr      x9, [x29, #0xf0]!
-  0x27e47cc: cbz      x9, #0x27e57f0
-  0x27e47d0: mov      x20, x0
-  0x27e47d4: cbz      x0, #0x27e57f0
-  0x27e47d8: adrp     x26, #0x5536000
-  0x27e47dc: ldr      x26, [x26, #0xcf8] ; = 0x0 (u64 @ 0x5536cf8)
-  0x27e47e0: ldr      x8, [x20]
-  0x27e47e4: add      x27, x19, #0x79
-  0x27e47e8: ldrb     w21, [x27]
-  0x27e47ec: ldrb     w22, [x9, #0x6d]
-  0x27e47f0: ldrb     w23, [x9, #0x6c]
-  0x27e47f4: ldrh     w9, [x8, #0x12e]
-  0x27e47f8: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e47fc: cbz      x9, #0x27e4820
-  0x27e4800: ldr      x10, [x8, #0xb0]
-  0x27e4804: add      x10, x10, #8
-  0x27e4808: ldur     x11, [x10, #-8]
-  0x27e480c: cmp      x11, x1
-  0x27e4810: b.eq     #0x27e4830
-  0x27e4814: subs     x9, x9, #1
-  0x27e4818: add      x10, x10, #0x10
-  0x27e481c: b.ne     #0x27e4808
-  0x27e4820: mov      w2, #6
-  0x27e4824: mov      x0, x20
-  0x27e4828: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e482c: b        #0x27e4840
-  0x27e4830: ldr      w9, [x10]
-  0x27e4834: add      w9, w9, #6
-  0x27e4838: add      x8, x8, w9, sxtw #4
-  0x27e483c: add      x0, x8, #0x138
-  0x27e4840: ldp      x8, x7, [x0]
-  0x27e4844: mov      x0, x20
-  0x27e4848: mov      w1, w23
-  0x27e484c: mov      w2, w22
-  0x27e4850: mov      w3, w21
-  0x27e4854: mov      w4, wzr
-  0x27e4858: mov      w5, wzr
-  0x27e485c: mov      x6, x19
-  0x27e4860: blr      x8
-  0x27e4864: ldr      x0, [x19, #0x40]
-  0x27e4868: cbz      x0, #0x27e57f0
-  0x27e486c: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4870: mov      w1, #4
-  0x27e4874: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e4878: ldr      x9, [x29]
-  0x27e487c: cbz      x9, #0x27e57f0
-  0x27e4880: mov      x20, x0
-  0x27e4884: cbz      x0, #0x27e57f0
-  0x27e4888: ldr      x8, [x20]
-  0x27e488c: ldr      w21, [x19, #0xb0]
-  0x27e4890: ldr      w22, [x19, #0xc0]
-  0x27e4894: ldrb     w23, [x27]
-  0x27e4898: ldrh     w24, [x9, #0x74]
-  0x27e489c: ldrh     w25, [x9, #0x72]
-  0x27e48a0: ldrh     w9, [x8, #0x12e]
-  0x27e48a4: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e48a8: cbz      x9, #0x27e48cc
-  0x27e48ac: ldr      x10, [x8, #0xb0]
-  0x27e48b0: add      x10, x10, #8
-  0x27e48b4: ldur     x11, [x10, #-8]
-  0x27e48b8: cmp      x11, x1
-  0x27e48bc: b.eq     #0x27e48dc
-  0x27e48c0: subs     x9, x9, #1
-  0x27e48c4: add      x10, x10, #0x10
-  0x27e48c8: b.ne     #0x27e48b4
-  0x27e48cc: mov      w2, #6
-  0x27e48d0: mov      x0, x20
-  0x27e48d4: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e48d8: b        #0x27e48ec
-  0x27e48dc: ldr      w9, [x10]
-  0x27e48e0: add      w9, w9, #6
-  0x27e48e4: add      x8, x8, w9, sxtw #4
-  0x27e48e8: add      x0, x8, #0x138
-  0x27e48ec: ldp      x8, x7, [x0]
-  0x27e48f0: mov      x0, x20
-  0x27e48f4: mov      w1, w25
-  0x27e48f8: mov      w2, w24
-  0x27e48fc: mov      w3, w23
-  0x27e4900: mov      w4, w21
-  0x27e4904: mov      w5, w22
-  0x27e4908: mov      x6, x19
-  0x27e490c: blr      x8
-  0x27e4910: ldr      x0, [x19, #0x40]
-  0x27e4914: cbz      x0, #0x27e57f0
-  0x27e4918: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e491c: mov      w1, #5
-  0x27e4920: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e4924: ldr      x9, [x29]
-  0x27e4928: cbz      x9, #0x27e57f0
-  0x27e492c: mov      x20, x0
-  0x27e4930: cbz      x0, #0x27e57f0
-  0x27e4934: ldr      x8, [x20]
-  0x27e4938: ldr      w21, [x19, #0xb4]
-  0x27e493c: ldr      w22, [x19, #0xc4]
-  0x27e4940: ldrb     w23, [x27]
-  0x27e4944: ldrh     w24, [x9, #0x78]
-  0x27e4948: ldrh     w25, [x9, #0x76]
-  0x27e494c: ldrh     w9, [x8, #0x12e]
-  0x27e4950: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4954: cbz      x9, #0x27e4978
-  0x27e4958: ldr      x10, [x8, #0xb0]
-  0x27e495c: add      x10, x10, #8
-  0x27e4960: ldur     x11, [x10, #-8]
-  0x27e4964: cmp      x11, x1
-  0x27e4968: b.eq     #0x27e4988
-  0x27e496c: subs     x9, x9, #1
-  0x27e4970: add      x10, x10, #0x10
-  0x27e4974: b.ne     #0x27e4960
-  0x27e4978: mov      w2, #6
-  0x27e497c: mov      x0, x20
-  0x27e4980: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e4984: b        #0x27e4998
-  0x27e4988: ldr      w9, [x10]
-  0x27e498c: add      w9, w9, #6
-  0x27e4990: add      x8, x8, w9, sxtw #4
-  0x27e4994: add      x0, x8, #0x138
-  0x27e4998: ldp      x8, x7, [x0]
-  0x27e499c: mov      x0, x20
-  0x27e49a0: mov      w1, w25
-  0x27e49a4: mov      w2, w24
-  0x27e49a8: mov      w3, w23
-  0x27e49ac: mov      w4, w21
-  0x27e49b0: mov      w5, w22
-  0x27e49b4: mov      x6, x19
-  0x27e49b8: blr      x8
-  0x27e49bc: ldr      x0, [x19, #0x40]
-  0x27e49c0: cbz      x0, #0x27e57f0
-  0x27e49c4: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e49c8: mov      w1, #3
-  0x27e49cc: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e49d0: ldr      x9, [x29]
-  0x27e49d4: cbz      x9, #0x27e57f0
-  0x27e49d8: mov      x20, x0
-  0x27e49dc: cbz      x0, #0x27e57f0
-  0x27e49e0: ldr      x8, [x20]
-  0x27e49e4: ldr      w21, [x19, #0xbc]
-  0x27e49e8: ldrb     w22, [x27]
-  0x27e49ec: ldrh     w23, [x9, #0x70]
-  0x27e49f0: ldrh     w24, [x9, #0x6e]
-  0x27e49f4: ldrh     w9, [x8, #0x12e]
-  0x27e49f8: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e49fc: cbz      x9, #0x27e4a20
-  0x27e4a00: ldr      x10, [x8, #0xb0]
-  0x27e4a04: add      x10, x10, #8
-  0x27e4a08: ldur     x11, [x10, #-8]
-  0x27e4a0c: cmp      x11, x1
-  0x27e4a10: b.eq     #0x27e4a30
-  0x27e4a14: subs     x9, x9, #1
-  0x27e4a18: add      x10, x10, #0x10
-  0x27e4a1c: b.ne     #0x27e4a08
-  0x27e4a20: mov      w2, #6
-  0x27e4a24: mov      x0, x20
-  0x27e4a28: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e4a2c: b        #0x27e4a40
-  0x27e4a30: ldr      w9, [x10]
-  0x27e4a34: add      w9, w9, #6
-  0x27e4a38: add      x8, x8, w9, sxtw #4
-  0x27e4a3c: add      x0, x8, #0x138
-  0x27e4a40: ldp      x8, x7, [x0]
-  0x27e4a44: mov      x0, x20
-  0x27e4a48: mov      w1, w24
-  0x27e4a4c: mov      w2, w23
-  0x27e4a50: mov      w3, w22
-  0x27e4a54: mov      w4, w21
-  0x27e4a58: mov      w5, wzr
-  0x27e4a5c: mov      x6, x19
-  0x27e4a60: blr      x8
-  0x27e4a64: ldr      x0, [x19, #0x40]
-  0x27e4a68: cbz      x0, #0x27e57f0
-  0x27e4a6c: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4a70: mov      w1, #6
-  0x27e4a74: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e4a78: ldr      x9, [x29]
-  0x27e4a7c: cbz      x9, #0x27e57f0
-  0x27e4a80: mov      x20, x0
-  0x27e4a84: cbz      x0, #0x27e57f0
-  0x27e4a88: ldr      x8, [x20]
-  0x27e4a8c: ldrb     w21, [x27]
-  0x27e4a90: ldrh     w22, [x9, #0x7c]
-  0x27e4a94: ldrh     w23, [x9, #0x7a]
-  0x27e4a98: ldrh     w9, [x8, #0x12e]
-  0x27e4a9c: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4aa0: cbz      x9, #0x27e4ac4
-  0x27e4aa4: ldr      x10, [x8, #0xb0]
-  0x27e4aa8: add      x10, x10, #8
-  0x27e4aac: ldur     x11, [x10, #-8]
-  0x27e4ab0: cmp      x11, x1
-  0x27e4ab4: b.eq     #0x27e4ad4
-  0x27e4ab8: subs     x9, x9, #1
-  0x27e4abc: add      x10, x10, #0x10
-  0x27e4ac0: b.ne     #0x27e4aac
-  0x27e4ac4: mov      w2, #6
-  0x27e4ac8: mov      x0, x20
-  0x27e4acc: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e4ad0: b        #0x27e4ae4
-  0x27e4ad4: ldr      w9, [x10]
-  0x27e4ad8: add      w9, w9, #6
-  0x27e4adc: add      x8, x8, w9, sxtw #4
-  0x27e4ae0: add      x0, x8, #0x138
-  0x27e4ae4: ldp      x8, x7, [x0]
-  0x27e4ae8: mov      x0, x20
-  0x27e4aec: mov      w1, w23
-  0x27e4af0: mov      w2, w22
-  0x27e4af4: mov      w3, w21
-  0x27e4af8: mov      w4, wzr
-  0x27e4afc: mov      w5, wzr
-  0x27e4b00: mov      x6, x19
-  0x27e4b04: blr      x8
-  0x27e4b08: ldr      x0, [x19, #0x40]
-  0x27e4b0c: cbz      x0, #0x27e57f0
-  0x27e4b10: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4b14: mov      w1, #7
-  0x27e4b18: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e4b1c: ldr      x9, [x29]
-  0x27e4b20: cbz      x9, #0x27e57f0
-  0x27e4b24: mov      x20, x0
-  0x27e4b28: cbz      x0, #0x27e57f0
-  0x27e4b2c: ldr      x8, [x20]
-  0x27e4b30: ldrb     w21, [x27]
-  0x27e4b34: ldrh     w22, [x9, #0x80]
-  0x27e4b38: ldrh     w23, [x9, #0x7e]
-  0x27e4b3c: ldrh     w9, [x8, #0x12e]
-  0x27e4b40: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4b44: cbz      x9, #0x27e4b68
-  0x27e4b48: ldr      x10, [x8, #0xb0]
-  0x27e4b4c: add      x10, x10, #8
-  0x27e4b50: ldur     x11, [x10, #-8]
-  0x27e4b54: cmp      x11, x1
-  0x27e4b58: b.eq     #0x27e4b78
-  0x27e4b5c: subs     x9, x9, #1
-  0x27e4b60: add      x10, x10, #0x10
-  0x27e4b64: b.ne     #0x27e4b50
-  0x27e4b68: mov      w2, #6
-  0x27e4b6c: mov      x0, x20
-  0x27e4b70: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e4b74: b        #0x27e4b88
-  0x27e4b78: ldr      w9, [x10]
-  0x27e4b7c: add      w9, w9, #6
-  0x27e4b80: add      x8, x8, w9, sxtw #4
-  0x27e4b84: add      x0, x8, #0x138
-  0x27e4b88: ldp      x8, x7, [x0]
-  0x27e4b8c: mov      x0, x20
-  0x27e4b90: mov      w1, w23
-  0x27e4b94: mov      w2, w22
-  0x27e4b98: mov      w3, w21
-  0x27e4b9c: mov      w4, wzr
-  0x27e4ba0: mov      w5, wzr
-  0x27e4ba4: mov      x6, x19
-  0x27e4ba8: blr      x8
-  0x27e4bac: ldr      x0, [x19, #0x40]
-  0x27e4bb0: cbz      x0, #0x27e57f0
-  0x27e4bb4: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4bb8: mov      w1, #8
-  0x27e4bbc: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e4bc0: ldr      x9, [x29]
-  0x27e4bc4: cbz      x9, #0x27e57f0
-  0x27e4bc8: mov      x20, x0
-  0x27e4bcc: cbz      x0, #0x27e57f0
-  0x27e4bd0: ldr      x8, [x20]
-  0x27e4bd4: ldrb     w21, [x27]
-  0x27e4bd8: ldrh     w22, [x9, #0x84]
-  0x27e4bdc: ldrh     w23, [x9, #0x82]
-  0x27e4be0: ldrh     w9, [x8, #0x12e]
-  0x27e4be4: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4be8: cbz      x9, #0x27e4c0c
-  0x27e4bec: ldr      x10, [x8, #0xb0]
-  0x27e4bf0: add      x10, x10, #8
-  0x27e4bf4: ldur     x11, [x10, #-8]
-  0x27e4bf8: cmp      x11, x1
-  0x27e4bfc: b.eq     #0x27e4c1c
-  0x27e4c00: subs     x9, x9, #1
-  0x27e4c04: add      x10, x10, #0x10
-  0x27e4c08: b.ne     #0x27e4bf4
-  0x27e4c0c: mov      w2, #6
-  0x27e4c10: mov      x0, x20
-  0x27e4c14: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e4c18: b        #0x27e4c2c
-  0x27e4c1c: ldr      w9, [x10]
-  0x27e4c20: add      w9, w9, #6
-  0x27e4c24: add      x8, x8, w9, sxtw #4
-  0x27e4c28: add      x0, x8, #0x138
-  0x27e4c2c: ldp      x8, x7, [x0]
-  0x27e4c30: mov      x0, x20
-  0x27e4c34: mov      w1, w23
-  0x27e4c38: mov      w2, w22
-  0x27e4c3c: mov      w3, w21
-  0x27e4c40: mov      w4, wzr
-  0x27e4c44: mov      w5, wzr
-  0x27e4c48: mov      x6, x19
-  0x27e4c4c: blr      x8
-  0x27e4c50: ldr      x0, [x19, #0x40]
-  0x27e4c54: cbz      x0, #0x27e57f0
-  0x27e4c58: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4c5c: mov      w1, #9
-  0x27e4c60: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e4c64: ldr      x9, [x29]
-  0x27e4c68: cbz      x9, #0x27e57f0
-  0x27e4c6c: mov      x20, x0
-  0x27e4c70: cbz      x0, #0x27e57f0
-  0x27e4c74: ldr      x8, [x20]
-  0x27e4c78: ldrb     w21, [x27]
-  0x27e4c7c: ldrh     w22, [x9, #0x88]
-  0x27e4c80: ldrh     w23, [x9, #0x86]
-  0x27e4c84: ldrh     w9, [x8, #0x12e]
-  0x27e4c88: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4c8c: cbz      x9, #0x27e4cb0
-  0x27e4c90: ldr      x10, [x8, #0xb0]
-  0x27e4c94: add      x10, x10, #8
-  0x27e4c98: ldur     x11, [x10, #-8]
-  0x27e4c9c: cmp      x11, x1
-  0x27e4ca0: b.eq     #0x27e4cc0
-  0x27e4ca4: subs     x9, x9, #1
-  0x27e4ca8: add      x10, x10, #0x10
-  0x27e4cac: b.ne     #0x27e4c98
-  0x27e4cb0: mov      w2, #6
-  0x27e4cb4: mov      x0, x20
-  0x27e4cb8: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e4cbc: b        #0x27e4cd0
-  0x27e4cc0: ldr      w9, [x10]
-  0x27e4cc4: add      w9, w9, #6
-  0x27e4cc8: add      x8, x8, w9, sxtw #4
-  0x27e4ccc: add      x0, x8, #0x138
-  0x27e4cd0: ldp      x8, x7, [x0]
-  0x27e4cd4: mov      x0, x20
-  0x27e4cd8: mov      w1, w23
-  0x27e4cdc: mov      w2, w22
-  0x27e4ce0: mov      w3, w21
-  0x27e4ce4: mov      w4, wzr
-  0x27e4ce8: mov      w5, wzr
-  0x27e4cec: mov      x6, x19
-  0x27e4cf0: blr      x8
-  0x27e4cf4: ldr      x0, [x19, #0x40]
-  0x27e4cf8: cbz      x0, #0x27e57f0
-  0x27e4cfc: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4d00: mov      w1, #0xa
-  0x27e4d04: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e4d08: ldr      x9, [x29]
-  0x27e4d0c: cbz      x9, #0x27e57f0
-  0x27e4d10: mov      x20, x0
-  0x27e4d14: cbz      x0, #0x27e57f0
-  0x27e4d18: ldr      x8, [x20]
-  0x27e4d1c: ldrb     w21, [x27]
-  0x27e4d20: ldrh     w22, [x9, #0x8c]
-  0x27e4d24: ldrh     w23, [x9, #0x8a]
-  0x27e4d28: ldrh     w9, [x8, #0x12e]
-  0x27e4d2c: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4d30: cbz      x9, #0x27e4d54
-  0x27e4d34: ldr      x10, [x8, #0xb0]
-  0x27e4d38: add      x10, x10, #8
-  0x27e4d3c: ldur     x11, [x10, #-8]
-  0x27e4d40: cmp      x11, x1
-  0x27e4d44: b.eq     #0x27e4d64
-  0x27e4d48: subs     x9, x9, #1
-  0x27e4d4c: add      x10, x10, #0x10
-  0x27e4d50: b.ne     #0x27e4d3c
-  0x27e4d54: mov      w2, #6
-  0x27e4d58: mov      x0, x20
-  0x27e4d5c: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e4d60: b        #0x27e4d74
-  0x27e4d64: ldr      w9, [x10]
-  0x27e4d68: add      w9, w9, #6
-  0x27e4d6c: add      x8, x8, w9, sxtw #4
-  0x27e4d70: add      x0, x8, #0x138
-  0x27e4d74: ldp      x8, x7, [x0]
-  0x27e4d78: mov      x0, x20
-  0x27e4d7c: mov      w1, w23
-  0x27e4d80: mov      w2, w22
-  0x27e4d84: mov      w3, w21
-  0x27e4d88: mov      w4, wzr
-  0x27e4d8c: mov      w5, wzr
-  0x27e4d90: mov      x6, x19
-  0x27e4d94: blr      x8
-  0x27e4d98: ldr      x0, [x19, #0x40]
-  0x27e4d9c: cbz      x0, #0x27e57f0
-  0x27e4da0: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4da4: mov      w1, #0xb
-  0x27e4da8: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e4dac: ldr      x9, [x29]
-  0x27e4db0: cbz      x9, #0x27e57f0
-  0x27e4db4: mov      x20, x0
-  0x27e4db8: cbz      x0, #0x27e57f0
-  0x27e4dbc: ldr      x8, [x20]
-  0x27e4dc0: ldrb     w21, [x27]
-  0x27e4dc4: ldrh     w22, [x9, #0x90]
-  0x27e4dc8: ldrh     w23, [x9, #0x8e]
-  0x27e4dcc: ldrh     w9, [x8, #0x12e]
-  0x27e4dd0: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4dd4: cbz      x9, #0x27e4df8
-  0x27e4dd8: ldr      x10, [x8, #0xb0]
-  0x27e4ddc: add      x10, x10, #8
-  0x27e4de0: ldur     x11, [x10, #-8]
-  0x27e4de4: cmp      x11, x1
-  0x27e4de8: b.eq     #0x27e4e08
-  0x27e4dec: subs     x9, x9, #1
-  0x27e4df0: add      x10, x10, #0x10
-  0x27e4df4: b.ne     #0x27e4de0
-  0x27e4df8: mov      w2, #6
-  0x27e4dfc: mov      x0, x20
-  0x27e4e00: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e4e04: b        #0x27e4e18
-  0x27e4e08: ldr      w9, [x10]
-  0x27e4e0c: add      w9, w9, #6
-  0x27e4e10: add      x8, x8, w9, sxtw #4
-  0x27e4e14: add      x0, x8, #0x138
-  0x27e4e18: ldp      x8, x7, [x0]
-  0x27e4e1c: mov      x0, x20
-  0x27e4e20: mov      w1, w23
-  0x27e4e24: mov      w2, w22
-  0x27e4e28: mov      w3, w21
-  0x27e4e2c: mov      w4, wzr
-  0x27e4e30: mov      w5, wzr
-  0x27e4e34: mov      x6, x19
-  0x27e4e38: blr      x8
-  0x27e4e3c: ldr      x0, [x19, #0x40]
-  0x27e4e40: cbz      x0, #0x27e57f0
-  0x27e4e44: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4e48: mov      w1, #0xc
-  0x27e4e4c: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e4e50: ldr      x9, [x29]
-  0x27e4e54: cbz      x9, #0x27e57f0
-  0x27e4e58: mov      x20, x0
-  0x27e4e5c: cbz      x0, #0x27e57f0
-  0x27e4e60: ldr      x8, [x20]
-  0x27e4e64: ldrb     w21, [x27]
-  0x27e4e68: ldrh     w22, [x9, #0x94]
-  0x27e4e6c: ldrh     w23, [x9, #0x92]
-  0x27e4e70: ldrh     w9, [x8, #0x12e]
-  0x27e4e74: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4e78: cbz      x9, #0x27e4e9c
-  0x27e4e7c: ldr      x10, [x8, #0xb0]
-  0x27e4e80: add      x10, x10, #8
-  0x27e4e84: ldur     x11, [x10, #-8]
-  0x27e4e88: cmp      x11, x1
-  0x27e4e8c: b.eq     #0x27e4eac
-  0x27e4e90: subs     x9, x9, #1
-  0x27e4e94: add      x10, x10, #0x10
-  0x27e4e98: b.ne     #0x27e4e84
-  0x27e4e9c: mov      w2, #6
-  0x27e4ea0: mov      x0, x20
-  0x27e4ea4: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e4ea8: b        #0x27e4ebc
-  0x27e4eac: ldr      w9, [x10]
-  0x27e4eb0: add      w9, w9, #6
-  0x27e4eb4: add      x8, x8, w9, sxtw #4
-  0x27e4eb8: add      x0, x8, #0x138
-  0x27e4ebc: ldp      x8, x7, [x0]
-  0x27e4ec0: mov      x0, x20
-  0x27e4ec4: mov      w1, w23
-  0x27e4ec8: mov      w2, w22
-  0x27e4ecc: mov      w3, w21
-  0x27e4ed0: mov      w4, wzr
-  0x27e4ed4: mov      w5, wzr
-  0x27e4ed8: mov      x6, x19
-  0x27e4edc: blr      x8
-  0x27e4ee0: ldr      x0, [x19, #0x40]
-  0x27e4ee4: cbz      x0, #0x27e57f0
-  0x27e4ee8: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4eec: mov      w1, #0xd
-  0x27e4ef0: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e4ef4: ldr      x9, [x29]
-  0x27e4ef8: cbz      x9, #0x27e57f0
-  0x27e4efc: mov      x20, x0
-  0x27e4f00: cbz      x0, #0x27e57f0
-  0x27e4f04: ldr      x8, [x20]
-  0x27e4f08: ldrb     w21, [x27]
-  0x27e4f0c: ldrh     w22, [x9, #0x98]
-  0x27e4f10: ldrh     w23, [x9, #0x96]
-  0x27e4f14: ldrh     w9, [x8, #0x12e]
-  0x27e4f18: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4f1c: cbz      x9, #0x27e4f40
-  0x27e4f20: ldr      x10, [x8, #0xb0]
-  0x27e4f24: add      x10, x10, #8
-  0x27e4f28: ldur     x11, [x10, #-8]
-  0x27e4f2c: cmp      x11, x1
-  0x27e4f30: b.eq     #0x27e4f50
-  0x27e4f34: subs     x9, x9, #1
-  0x27e4f38: add      x10, x10, #0x10
-  0x27e4f3c: b.ne     #0x27e4f28
-  0x27e4f40: mov      w2, #6
-  0x27e4f44: mov      x0, x20
-  0x27e4f48: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e4f4c: b        #0x27e4f60
-  0x27e4f50: ldr      w9, [x10]
-  0x27e4f54: add      w9, w9, #6
-  0x27e4f58: add      x8, x8, w9, sxtw #4
-  0x27e4f5c: add      x0, x8, #0x138
-  0x27e4f60: ldp      x8, x7, [x0]
-  0x27e4f64: mov      x0, x20
-  0x27e4f68: mov      w1, w23
-  0x27e4f6c: mov      w2, w22
-  0x27e4f70: mov      w3, w21
-  0x27e4f74: mov      w4, wzr
-  0x27e4f78: mov      w5, wzr
-  0x27e4f7c: mov      x6, x19
-  0x27e4f80: blr      x8
-  0x27e4f84: ldr      x0, [x19, #0x40]
-  0x27e4f88: cbz      x0, #0x27e57f0
-  0x27e4f8c: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4f90: mov      w1, #0xe
-  0x27e4f94: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e4f98: ldr      x9, [x29]
-  0x27e4f9c: cbz      x9, #0x27e57f0
-  0x27e4fa0: mov      x20, x0
-  0x27e4fa4: cbz      x0, #0x27e57f0
-  0x27e4fa8: ldr      x8, [x20]
-  0x27e4fac: ldrb     w21, [x27]
-  0x27e4fb0: ldrh     w22, [x9, #0x9c]
-  0x27e4fb4: ldrh     w23, [x9, #0x9a]
-  0x27e4fb8: ldrh     w9, [x8, #0x12e]
-  0x27e4fbc: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e4fc0: cbz      x9, #0x27e4fe4
-  0x27e4fc4: ldr      x10, [x8, #0xb0]
-  0x27e4fc8: add      x10, x10, #8
-  0x27e4fcc: ldur     x11, [x10, #-8]
-  0x27e4fd0: cmp      x11, x1
-  0x27e4fd4: b.eq     #0x27e4ff4
-  0x27e4fd8: subs     x9, x9, #1
-  0x27e4fdc: add      x10, x10, #0x10
-  0x27e4fe0: b.ne     #0x27e4fcc
-  0x27e4fe4: mov      w2, #6
-  0x27e4fe8: mov      x0, x20
-  0x27e4fec: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e4ff0: b        #0x27e5004
-  0x27e4ff4: ldr      w9, [x10]
-  0x27e4ff8: add      w9, w9, #6
-  0x27e4ffc: add      x8, x8, w9, sxtw #4
-  0x27e5000: add      x0, x8, #0x138
-  0x27e5004: ldp      x8, x7, [x0]
-  0x27e5008: mov      x0, x20
-  0x27e500c: mov      w1, w23
-  0x27e5010: mov      w2, w22
-  0x27e5014: mov      w3, w21
-  0x27e5018: mov      w4, wzr
-  0x27e501c: mov      w5, wzr
-  0x27e5020: mov      x6, x19
-  0x27e5024: blr      x8
-  0x27e5028: ldr      x0, [x19, #0x40]
-  0x27e502c: cbz      x0, #0x27e57f0
-  0x27e5030: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e5034: mov      w1, #0xf
-  0x27e5038: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e503c: ldr      x9, [x29]
-  0x27e5040: cbz      x9, #0x27e57f0
-  0x27e5044: mov      x20, x0
-  0x27e5048: cbz      x0, #0x27e57f0
-  0x27e504c: ldr      x8, [x20]
-  0x27e5050: ldrb     w21, [x27]
-  0x27e5054: ldrh     w22, [x9, #0xa0]
-  0x27e5058: ldrh     w23, [x9, #0x9e]
-  0x27e505c: ldrh     w9, [x8, #0x12e]
-  0x27e5060: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e5064: cbz      x9, #0x27e5088
-  0x27e5068: ldr      x10, [x8, #0xb0]
-  0x27e506c: add      x10, x10, #8
-  0x27e5070: ldur     x11, [x10, #-8]
-  0x27e5074: cmp      x11, x1
-  0x27e5078: b.eq     #0x27e5098
-  0x27e507c: subs     x9, x9, #1
-  0x27e5080: add      x10, x10, #0x10
-  0x27e5084: b.ne     #0x27e5070
-  0x27e5088: mov      w2, #6
-  0x27e508c: mov      x0, x20
-  0x27e5090: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e5094: b        #0x27e50a8
-  0x27e5098: ldr      w9, [x10]
-  0x27e509c: add      w9, w9, #6
-  0x27e50a0: add      x8, x8, w9, sxtw #4
-  0x27e50a4: add      x0, x8, #0x138
-  0x27e50a8: ldp      x8, x7, [x0]
-  0x27e50ac: mov      x0, x20
-  0x27e50b0: mov      w1, w23
-  0x27e50b4: mov      w2, w22
-  0x27e50b8: mov      w3, w21
-  0x27e50bc: mov      w4, wzr
-  0x27e50c0: mov      w5, wzr
-  0x27e50c4: mov      x6, x19
-  0x27e50c8: blr      x8
-  0x27e50cc: ldr      x0, [x19, #0x40]
-  0x27e50d0: cbz      x0, #0x27e57f0
-  0x27e50d4: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e50d8: mov      w1, #0x10
-  0x27e50dc: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e50e0: ldr      x9, [x29]
-  0x27e50e4: cbz      x9, #0x27e57f0
-  0x27e50e8: mov      x20, x0
-  0x27e50ec: cbz      x0, #0x27e57f0
-  0x27e50f0: ldr      x8, [x20]
-  0x27e50f4: ldrb     w21, [x27]
-  0x27e50f8: ldrh     w22, [x9, #0xa4]
-  0x27e50fc: ldrh     w23, [x9, #0xa2]
-  0x27e5100: ldrh     w9, [x8, #0x12e]
-  0x27e5104: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e5108: cbz      x9, #0x27e512c
-  0x27e510c: ldr      x10, [x8, #0xb0]
-  0x27e5110: add      x10, x10, #8
-  0x27e5114: ldur     x11, [x10, #-8]
-  0x27e5118: cmp      x11, x1
-  0x27e511c: b.eq     #0x27e513c
-  0x27e5120: subs     x9, x9, #1
-  0x27e5124: add      x10, x10, #0x10
-  0x27e5128: b.ne     #0x27e5114
-  0x27e512c: mov      w2, #6
-  0x27e5130: mov      x0, x20
-  0x27e5134: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e5138: b        #0x27e514c
-  0x27e513c: ldr      w9, [x10]
-  0x27e5140: add      w9, w9, #6
-  0x27e5144: add      x8, x8, w9, sxtw #4
-  0x27e5148: add      x0, x8, #0x138
-  0x27e514c: ldp      x8, x7, [x0]
-  0x27e5150: mov      x0, x20
-  0x27e5154: mov      w1, w23
-  0x27e5158: mov      w2, w22
-  0x27e515c: mov      w3, w21
-  0x27e5160: mov      w4, wzr
-  0x27e5164: mov      w5, wzr
-  0x27e5168: mov      x6, x19
-  0x27e516c: blr      x8
-  0x27e5170: ldr      x0, [x19, #0x40]
-  0x27e5174: cbz      x0, #0x27e57f0
-  0x27e5178: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e517c: mov      w1, #0x11
-  0x27e5180: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e5184: ldr      x9, [x29]
-  0x27e5188: cbz      x9, #0x27e57f0
-  0x27e518c: mov      x20, x0
-  0x27e5190: cbz      x0, #0x27e57f0
-  0x27e5194: ldr      x8, [x20]
-  0x27e5198: ldrb     w21, [x27]
-  0x27e519c: ldrh     w22, [x9, #0xa8]
-  0x27e51a0: ldrh     w23, [x9, #0xa6]
-  0x27e51a4: ldrh     w9, [x8, #0x12e]
-  0x27e51a8: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e51ac: cbz      x9, #0x27e51d0
-  0x27e51b0: ldr      x10, [x8, #0xb0]
-  0x27e51b4: add      x10, x10, #8
-  0x27e51b8: ldur     x11, [x10, #-8]
-  0x27e51bc: cmp      x11, x1
-  0x27e51c0: b.eq     #0x27e51e0
-  0x27e51c4: subs     x9, x9, #1
-  0x27e51c8: add      x10, x10, #0x10
-  0x27e51cc: b.ne     #0x27e51b8
-  0x27e51d0: mov      w2, #6
-  0x27e51d4: mov      x0, x20
-  0x27e51d8: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e51dc: b        #0x27e51f0
-  0x27e51e0: ldr      w9, [x10]
-  0x27e51e4: add      w9, w9, #6
-  0x27e51e8: add      x8, x8, w9, sxtw #4
-  0x27e51ec: add      x0, x8, #0x138
-  0x27e51f0: ldp      x8, x7, [x0]
-  0x27e51f4: mov      x0, x20
-  0x27e51f8: mov      w1, w23
-  0x27e51fc: mov      w2, w22
-  0x27e5200: mov      w3, w21
-  0x27e5204: mov      w4, wzr
-  0x27e5208: mov      w5, wzr
-  0x27e520c: mov      x6, x19
-  0x27e5210: blr      x8
-  0x27e5214: ldr      x0, [x19, #0x40]
-  0x27e5218: cbz      x0, #0x27e57f0
-  0x27e521c: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e5220: mov      w1, #0x12
-  0x27e5224: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e5228: ldr      x9, [x29]
-  0x27e522c: cbz      x9, #0x27e57f0
-  0x27e5230: mov      x20, x0
-  0x27e5234: cbz      x0, #0x27e57f0
-  0x27e5238: ldr      x8, [x20]
-  0x27e523c: ldrb     w21, [x27]
-  0x27e5240: ldrh     w22, [x9, #0xac]
-  0x27e5244: ldrh     w23, [x9, #0xaa]
-  0x27e5248: ldrh     w9, [x8, #0x12e]
-  0x27e524c: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e5250: cbz      x9, #0x27e5274
-  0x27e5254: ldr      x10, [x8, #0xb0]
-  0x27e5258: add      x10, x10, #8
-  0x27e525c: ldur     x11, [x10, #-8]
-  0x27e5260: cmp      x11, x1
-  0x27e5264: b.eq     #0x27e5284
-  0x27e5268: subs     x9, x9, #1
-  0x27e526c: add      x10, x10, #0x10
-  0x27e5270: b.ne     #0x27e525c
-  0x27e5274: mov      w2, #6
-  0x27e5278: mov      x0, x20
-  0x27e527c: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e5280: b        #0x27e5294
-  0x27e5284: ldr      w9, [x10]
-  0x27e5288: add      w9, w9, #6
-  0x27e528c: add      x8, x8, w9, sxtw #4
-  0x27e5290: add      x0, x8, #0x138
-  0x27e5294: ldp      x8, x7, [x0]
-  0x27e5298: mov      x0, x20
-  0x27e529c: mov      w1, w23
-  0x27e52a0: mov      w2, w22
-  0x27e52a4: mov      w3, w21
-  0x27e52a8: mov      w4, wzr
-  0x27e52ac: mov      w5, wzr
-  0x27e52b0: mov      x6, x19
-  0x27e52b4: blr      x8
-  0x27e52b8: ldr      x0, [x19, #0x40]
-  0x27e52bc: cbz      x0, #0x27e57f0
-  0x27e52c0: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e52c4: mov      w1, #0x13
-  0x27e52c8: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e52cc: ldr      x9, [x29]
-  0x27e52d0: cbz      x9, #0x27e57f0
-  0x27e52d4: mov      x20, x0
-  0x27e52d8: cbz      x0, #0x27e57f0
-  0x27e52dc: ldr      x8, [x20]
-  0x27e52e0: ldrb     w21, [x27]
-  0x27e52e4: ldrh     w22, [x9, #0xb0]
-  0x27e52e8: ldrh     w23, [x9, #0xae]
-  0x27e52ec: ldrh     w9, [x8, #0x12e]
-  0x27e52f0: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e52f4: cbz      x9, #0x27e5318
-  0x27e52f8: ldr      x10, [x8, #0xb0]
-  0x27e52fc: add      x10, x10, #8
-  0x27e5300: ldur     x11, [x10, #-8]
-  0x27e5304: cmp      x11, x1
-  0x27e5308: b.eq     #0x27e5328
-  0x27e530c: subs     x9, x9, #1
-  0x27e5310: add      x10, x10, #0x10
-  0x27e5314: b.ne     #0x27e5300
-  0x27e5318: mov      w2, #6
-  0x27e531c: mov      x0, x20
-  0x27e5320: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e5324: b        #0x27e5338
-  0x27e5328: ldr      w9, [x10]
-  0x27e532c: add      w9, w9, #6
-  0x27e5330: add      x8, x8, w9, sxtw #4
-  0x27e5334: add      x0, x8, #0x138
-  0x27e5338: ldp      x8, x7, [x0]
-  0x27e533c: mov      x0, x20
-  0x27e5340: mov      w1, w23
-  0x27e5344: mov      w2, w22
-  0x27e5348: mov      w3, w21
-  0x27e534c: mov      w4, wzr
-  0x27e5350: mov      w5, wzr
-  0x27e5354: mov      x6, x19
-  0x27e5358: blr      x8
-  0x27e535c: ldr      x0, [x19, #0x40]
-  0x27e5360: cbz      x0, #0x27e57f0
-  0x27e5364: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e5368: mov      w1, #0x14
-  0x27e536c: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e5370: ldr      x9, [x29]
-  0x27e5374: cbz      x9, #0x27e57f0
-  0x27e5378: mov      x20, x0
-  0x27e537c: cbz      x0, #0x27e57f0
-  0x27e5380: ldr      x8, [x20]
-  0x27e5384: ldrb     w21, [x27]
-  0x27e5388: ldrh     w22, [x9, #0xb4]
-  0x27e538c: ldrh     w23, [x9, #0xb2]
-  0x27e5390: ldrh     w9, [x8, #0x12e]
-  0x27e5394: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e5398: cbz      x9, #0x27e53bc
-  0x27e539c: ldr      x10, [x8, #0xb0]
-  0x27e53a0: add      x10, x10, #8
-  0x27e53a4: ldur     x11, [x10, #-8]
-  0x27e53a8: cmp      x11, x1
-  0x27e53ac: b.eq     #0x27e53cc
-  0x27e53b0: subs     x9, x9, #1
-  0x27e53b4: add      x10, x10, #0x10
-  0x27e53b8: b.ne     #0x27e53a4
-  0x27e53bc: mov      w2, #6
-  0x27e53c0: mov      x0, x20
-  0x27e53c4: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e53c8: b        #0x27e53dc
-  0x27e53cc: ldr      w9, [x10]
-  0x27e53d0: add      w9, w9, #6
-  0x27e53d4: add      x8, x8, w9, sxtw #4
-  0x27e53d8: add      x0, x8, #0x138
-  0x27e53dc: ldp      x8, x7, [x0]
-  0x27e53e0: mov      x0, x20
-  0x27e53e4: mov      w1, w23
-  0x27e53e8: mov      w2, w22
-  0x27e53ec: mov      w3, w21
-  0x27e53f0: mov      w4, wzr
-  0x27e53f4: mov      w5, wzr
-  0x27e53f8: mov      x6, x19
-  0x27e53fc: blr      x8
-  0x27e5400: ldr      x0, [x19, #0x40]
-  0x27e5404: cbz      x0, #0x27e57f0
-  0x27e5408: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e540c: mov      w1, #0x15
-  0x27e5410: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e5414: ldr      x9, [x29]
-  0x27e5418: cbz      x9, #0x27e57f0
-  0x27e541c: mov      x20, x0
-  0x27e5420: cbz      x0, #0x27e57f0
-  0x27e5424: ldr      x8, [x20]
-  0x27e5428: ldrb     w21, [x27]
-  0x27e542c: ldrh     w22, [x9, #0xb8]
-  0x27e5430: ldrh     w23, [x9, #0xb6]
-  0x27e5434: ldrh     w9, [x8, #0x12e]
-  0x27e5438: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e543c: cbz      x9, #0x27e5460
-  0x27e5440: ldr      x10, [x8, #0xb0]
-  0x27e5444: add      x10, x10, #8
-  0x27e5448: ldur     x11, [x10, #-8]
-  0x27e544c: cmp      x11, x1
-  0x27e5450: b.eq     #0x27e5470
-  0x27e5454: subs     x9, x9, #1
-  0x27e5458: add      x10, x10, #0x10
-  0x27e545c: b.ne     #0x27e5448
-  0x27e5460: mov      w2, #6
-  0x27e5464: mov      x0, x20
-  0x27e5468: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e546c: b        #0x27e5480
-  0x27e5470: ldr      w9, [x10]
-  0x27e5474: add      w9, w9, #6
-  0x27e5478: add      x8, x8, w9, sxtw #4
-  0x27e547c: add      x0, x8, #0x138
-  0x27e5480: ldp      x8, x7, [x0]
-  0x27e5484: mov      x0, x20
-  0x27e5488: mov      w1, w23
-  0x27e548c: mov      w2, w22
-  0x27e5490: mov      w3, w21
-  0x27e5494: mov      w4, wzr
-  0x27e5498: mov      w5, wzr
-  0x27e549c: mov      x6, x19
-  0x27e54a0: blr      x8
-  0x27e54a4: ldr      x0, [x19, #0x40]
-  0x27e54a8: cbz      x0, #0x27e57f0
-  0x27e54ac: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e54b0: mov      w1, #0x16
-  0x27e54b4: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e54b8: ldr      x9, [x29]
-  0x27e54bc: cbz      x9, #0x27e57f0
-  0x27e54c0: mov      x20, x0
-  0x27e54c4: cbz      x0, #0x27e57f0
-  0x27e54c8: ldr      x8, [x20]
-  0x27e54cc: ldrb     w21, [x27]
-  0x27e54d0: ldrh     w22, [x9, #0xbc]
-  0x27e54d4: ldrh     w23, [x9, #0xba]
-  0x27e54d8: ldrh     w9, [x8, #0x12e]
-  0x27e54dc: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e54e0: cbz      x9, #0x27e5504
-  0x27e54e4: ldr      x10, [x8, #0xb0]
-  0x27e54e8: add      x10, x10, #8
-  0x27e54ec: ldur     x11, [x10, #-8]
-  0x27e54f0: cmp      x11, x1
-  0x27e54f4: b.eq     #0x27e5514
-  0x27e54f8: subs     x9, x9, #1
-  0x27e54fc: add      x10, x10, #0x10
-  0x27e5500: b.ne     #0x27e54ec
-  0x27e5504: mov      w2, #6
-  0x27e5508: mov      x0, x20
-  0x27e550c: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e5510: b        #0x27e5524
-  0x27e5514: ldr      w9, [x10]
-  0x27e5518: add      w9, w9, #6
-  0x27e551c: add      x8, x8, w9, sxtw #4
-  0x27e5520: add      x0, x8, #0x138
-  0x27e5524: ldp      x8, x7, [x0]
-  0x27e5528: mov      x0, x20
-  0x27e552c: mov      w1, w23
-  0x27e5530: mov      w2, w22
-  0x27e5534: mov      w3, w21
-  0x27e5538: mov      w4, wzr
-  0x27e553c: mov      w5, wzr
-  0x27e5540: mov      x6, x19
-  0x27e5544: blr      x8
-  0x27e5548: ldr      x0, [x19, #0x40]
-  0x27e554c: cbz      x0, #0x27e57f0
-  0x27e5550: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e5554: mov      w1, #0x17
-  0x27e5558: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e555c: ldr      x9, [x29]
-  0x27e5560: cbz      x9, #0x27e57f0
-  0x27e5564: mov      x20, x0
-  0x27e5568: cbz      x0, #0x27e57f0
-  0x27e556c: ldr      x8, [x20]
-  0x27e5570: ldrb     w21, [x27]
-  0x27e5574: ldrh     w22, [x9, #0xc0]
-  0x27e5578: ldrh     w23, [x9, #0xbe]
-  0x27e557c: ldrh     w9, [x8, #0x12e]
-  0x27e5580: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e5584: cbz      x9, #0x27e55a8
-  0x27e5588: ldr      x10, [x8, #0xb0]
-  0x27e558c: add      x10, x10, #8
-  0x27e5590: ldur     x11, [x10, #-8]
-  0x27e5594: cmp      x11, x1
-  0x27e5598: b.eq     #0x27e55b8
-  0x27e559c: subs     x9, x9, #1
-  0x27e55a0: add      x10, x10, #0x10
-  0x27e55a4: b.ne     #0x27e5590
-  0x27e55a8: mov      w2, #6
-  0x27e55ac: mov      x0, x20
-  0x27e55b0: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e55b4: b        #0x27e55c8
-  0x27e55b8: ldr      w9, [x10]
-  0x27e55bc: add      w9, w9, #6
-  0x27e55c0: add      x8, x8, w9, sxtw #4
-  0x27e55c4: add      x0, x8, #0x138
-  0x27e55c8: ldp      x8, x7, [x0]
-  0x27e55cc: mov      x0, x20
-  0x27e55d0: mov      w1, w23
-  0x27e55d4: mov      w2, w22
-  0x27e55d8: mov      w3, w21
-  0x27e55dc: mov      w4, wzr
-  0x27e55e0: mov      w5, wzr
-  0x27e55e4: mov      x6, x19
-  0x27e55e8: blr      x8
-  0x27e55ec: ldr      x0, [x19, #0x40]
-  0x27e55f0: cbz      x0, #0x27e57f0
-  0x27e55f4: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e55f8: mov      w1, #0x18
-  0x27e55fc: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e5600: ldr      x9, [x29]
-  0x27e5604: cbz      x9, #0x27e57f0
-  0x27e5608: mov      x20, x0
-  0x27e560c: cbz      x0, #0x27e57f0
-  0x27e5610: ldr      x8, [x20]
-  0x27e5614: ldrb     w21, [x27]
-  0x27e5618: ldrh     w22, [x9, #0xc4]
-  0x27e561c: ldrh     w23, [x9, #0xc2]
-  0x27e5620: ldrh     w9, [x8, #0x12e]
-  0x27e5624: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e5628: cbz      x9, #0x27e564c
-  0x27e562c: ldr      x10, [x8, #0xb0]
-  0x27e5630: add      x10, x10, #8
-  0x27e5634: ldur     x11, [x10, #-8]
-  0x27e5638: cmp      x11, x1
-  0x27e563c: b.eq     #0x27e565c
-  0x27e5640: subs     x9, x9, #1
-  0x27e5644: add      x10, x10, #0x10
-  0x27e5648: b.ne     #0x27e5634
-  0x27e564c: mov      w2, #6
-  0x27e5650: mov      x0, x20
-  0x27e5654: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e5658: b        #0x27e566c
-  0x27e565c: ldr      w9, [x10]
-  0x27e5660: add      w9, w9, #6
-  0x27e5664: add      x8, x8, w9, sxtw #4
-  0x27e5668: add      x0, x8, #0x138
-  0x27e566c: ldp      x8, x7, [x0]
-  0x27e5670: mov      x0, x20
-  0x27e5674: mov      w1, w23
-  0x27e5678: mov      w2, w22
-  0x27e567c: mov      w3, w21
-  0x27e5680: mov      w4, wzr
-  0x27e5684: mov      w5, wzr
-  0x27e5688: mov      x6, x19
-  0x27e568c: blr      x8
-  0x27e5690: ldr      x0, [x19, #0x40]
-  0x27e5694: cbz      x0, #0x27e57f0
-  0x27e5698: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e569c: mov      w1, #0x19
-  0x27e56a0: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e56a4: ldr      x9, [x29]
-  0x27e56a8: cbz      x9, #0x27e57f0
-  0x27e56ac: mov      x20, x0
-  0x27e56b0: cbz      x0, #0x27e57f0
-  0x27e56b4: ldr      x8, [x20]
-  0x27e56b8: ldrb     w21, [x27]
-  0x27e56bc: ldrh     w22, [x9, #0xc8]
-  0x27e56c0: ldrh     w23, [x9, #0xc6]
-  0x27e56c4: ldrh     w9, [x8, #0x12e]
-  0x27e56c8: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e56cc: cbz      x9, #0x27e56f0
-  0x27e56d0: ldr      x10, [x8, #0xb0]
-  0x27e56d4: add      x10, x10, #8
-  0x27e56d8: ldur     x11, [x10, #-8]
-  0x27e56dc: cmp      x11, x1
-  0x27e56e0: b.eq     #0x27e5700
-  0x27e56e4: subs     x9, x9, #1
-  0x27e56e8: add      x10, x10, #0x10
-  0x27e56ec: b.ne     #0x27e56d8
-  0x27e56f0: mov      w2, #6
-  0x27e56f4: mov      x0, x20
-  0x27e56f8: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e56fc: b        #0x27e5710
-  0x27e5700: ldr      w9, [x10]
-  0x27e5704: add      w9, w9, #6
-  0x27e5708: add      x8, x8, w9, sxtw #4
-  0x27e570c: add      x0, x8, #0x138
-  0x27e5710: ldp      x8, x7, [x0]
-  0x27e5714: mov      x0, x20
-  0x27e5718: mov      w1, w23
-  0x27e571c: mov      w2, w22
-  0x27e5720: mov      w3, w21
-  0x27e5724: mov      w4, wzr
-  0x27e5728: mov      w5, wzr
-  0x27e572c: mov      x6, x19
-  0x27e5730: blr      x8
-  0x27e5734: ldr      x0, [x19, #0x40]
-  0x27e5738: cbz      x0, #0x27e57f0
-  0x27e573c: ldr      x2, [x28] ; = 0x0 (u64 @ 0x5536000)
-  0x27e5740: mov      w1, #0x1a
-  0x27e5744: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e5748: ldr      x9, [x29]
-  0x27e574c: cbz      x9, #0x27e57f0
-  0x27e5750: mov      x20, x0
-  0x27e5754: cbz      x0, #0x27e57f0
-  0x27e5758: ldr      x8, [x20]
-  0x27e575c: ldrb     w21, [x27]
-  0x27e5760: ldrh     w22, [x9, #0xcc]
-  0x27e5764: ldrh     w23, [x9, #0xca]
-  0x27e5768: ldrh     w9, [x8, #0x12e]
-  0x27e576c: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5536000)
-  0x27e5770: cbz      x9, #0x27e5794
-  0x27e5774: ldr      x10, [x8, #0xb0]
-  0x27e5778: add      x10, x10, #8
-  0x27e577c: ldur     x11, [x10, #-8]
-  0x27e5780: cmp      x11, x1
-  0x27e5784: b.eq     #0x27e57a4
-  0x27e5788: subs     x9, x9, #1
-  0x27e578c: add      x10, x10, #0x10
-  0x27e5790: b.ne     #0x27e577c
-  0x27e5794: mov      w2, #6
-  0x27e5798: mov      x0, x20
-  0x27e579c: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e57a0: b        #0x27e57b4
-  0x27e57a4: ldr      w9, [x10]
-  0x27e57a8: add      w9, w9, #6
-  0x27e57ac: add      x8, x8, w9, sxtw #4
-  0x27e57b0: add      x0, x8, #0x138
-  0x27e57b4: ldp      x8, x7, [x0]
-  0x27e57b8: mov      x0, x20
-  0x27e57bc: mov      w1, w23
-  0x27e57c0: mov      w2, w22
-  0x27e57c4: mov      w3, w21
-  0x27e57c8: mov      x6, x19
-  0x27e57cc: ldp      x20, x19, [sp, #0x50]
-  0x27e57d0: ldp      x22, x21, [sp, #0x40]
-  0x27e57d4: ldp      x24, x23, [sp, #0x30]
-  0x27e57d8: ldp      x26, x25, [sp, #0x20]
-  0x27e57dc: ldp      x28, x27, [sp, #0x10]
-  0x27e57e0: mov      w4, wzr
-  0x27e57e4: mov      w5, wzr
-  0x27e57e8: ldp      x29, x30, [sp], #0x60
-  0x27e57ec: br       x8
-  0x27e57f0: bl       #0x21849c0 ; -> ??? 0x21849c0
+; jeu 1.4.14 — régénéré par datagen/extract/disasm.py
+; ===== CCharacterData_CalcBasicStats @ 0x2906660..0x2907704 (taille 4260 octets) =====
+  0x2906660: stp      x29, x30, [sp, #-0x60]!
+  0x2906664: stp      x28, x27, [sp, #0x10]
+  0x2906668: stp      x26, x25, [sp, #0x20]
+  0x290666c: stp      x24, x23, [sp, #0x30]
+  0x2906670: stp      x22, x21, [sp, #0x40]
+  0x2906674: stp      x20, x19, [sp, #0x50]
+  0x2906678: adrp     x20, #0x59d8000
+  0x290667c: ldrb     w8, [x20, #0x283]
+  0x2906680: mov      x19, x0
+  0x2906684: tbnz     w8, #0, #0x29066a8
+  0x2906688: adrp     x0, #0x55b6000
+  0x290668c: ldr      x0, [x0, #0x778] ; = 0x0 (u64 @ 0x55b6778)
+  0x2906690: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x2906694: adrp     x0, #0x55b6000
+  0x2906698: ldr      x0, [x0, #0x780] ; = 0x0 (u64 @ 0x55b6780)
+  0x290669c: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x29066a0: mov      w8, #1
+  0x29066a4: strb     w8, [x20, #0x283]
+  0x29066a8: ldr      x8, [x19]
+  0x29066ac: mov      x0, x19
+  0x29066b0: ldp      x9, x1, [x8, #0x188]
+  0x29066b4: blr      x9
+  0x29066b8: ldr      x0, [x19, #0x40]
+  0x29066bc: cbz      x0, #0x2907700
+  0x29066c0: adrp     x28, #0x55b6000
+  0x29066c4: ldr      x28, [x28, #0x778] ; = 0x0 (u64 @ 0x55b6778)
+  0x29066c8: mov      w1, #2
+  0x29066cc: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x29066d0: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x29066d4: mov      x29, x19
+  0x29066d8: ldr      x9, [x29, #0xf0]!
+  0x29066dc: cbz      x9, #0x2907700
+  0x29066e0: mov      x20, x0
+  0x29066e4: cbz      x0, #0x2907700
+  0x29066e8: adrp     x26, #0x55b6000
+  0x29066ec: ldr      x26, [x26, #0x780] ; = 0x0 (u64 @ 0x55b6780)
+  0x29066f0: ldr      x8, [x20]
+  0x29066f4: add      x27, x19, #0x79
+  0x29066f8: ldrb     w21, [x27]
+  0x29066fc: ldrb     w22, [x9, #0x6d]
+  0x2906700: ldrb     w23, [x9, #0x6c]
+  0x2906704: ldrh     w9, [x8, #0x12e]
+  0x2906708: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x290670c: cbz      x9, #0x2906730
+  0x2906710: ldr      x10, [x8, #0xb0]
+  0x2906714: add      x10, x10, #8
+  0x2906718: ldur     x11, [x10, #-8]
+  0x290671c: cmp      x11, x1
+  0x2906720: b.eq     #0x2906740
+  0x2906724: subs     x9, x9, #1
+  0x2906728: add      x10, x10, #0x10
+  0x290672c: b.ne     #0x2906718
+  0x2906730: mov      w2, #6
+  0x2906734: mov      x0, x20
+  0x2906738: bl       #0x2210028 ; -> ??? 0x2210028
+  0x290673c: b        #0x2906750
+  0x2906740: ldr      w9, [x10]
+  0x2906744: add      w9, w9, #6
+  0x2906748: add      x8, x8, w9, sxtw #4
+  0x290674c: add      x0, x8, #0x138
+  0x2906750: ldp      x8, x7, [x0]
+  0x2906754: mov      x0, x20
+  0x2906758: mov      w1, w23
+  0x290675c: mov      w2, w22
+  0x2906760: mov      w3, w21
+  0x2906764: mov      w4, wzr
+  0x2906768: mov      w5, wzr
+  0x290676c: mov      x6, x19
+  0x2906770: blr      x8
+  0x2906774: ldr      x0, [x19, #0x40]
+  0x2906778: cbz      x0, #0x2907700
+  0x290677c: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906780: mov      w1, #4
+  0x2906784: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2906788: ldr      x9, [x29]
+  0x290678c: cbz      x9, #0x2907700
+  0x2906790: mov      x20, x0
+  0x2906794: cbz      x0, #0x2907700
+  0x2906798: ldr      x8, [x20]
+  0x290679c: ldr      w21, [x19, #0xb0]
+  0x29067a0: ldr      w22, [x19, #0xc0]
+  0x29067a4: ldrb     w23, [x27]
+  0x29067a8: ldrh     w24, [x9, #0x74]
+  0x29067ac: ldrh     w25, [x9, #0x72]
+  0x29067b0: ldrh     w9, [x8, #0x12e]
+  0x29067b4: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x29067b8: cbz      x9, #0x29067dc
+  0x29067bc: ldr      x10, [x8, #0xb0]
+  0x29067c0: add      x10, x10, #8
+  0x29067c4: ldur     x11, [x10, #-8]
+  0x29067c8: cmp      x11, x1
+  0x29067cc: b.eq     #0x29067ec
+  0x29067d0: subs     x9, x9, #1
+  0x29067d4: add      x10, x10, #0x10
+  0x29067d8: b.ne     #0x29067c4
+  0x29067dc: mov      w2, #6
+  0x29067e0: mov      x0, x20
+  0x29067e4: bl       #0x2210028 ; -> ??? 0x2210028
+  0x29067e8: b        #0x29067fc
+  0x29067ec: ldr      w9, [x10]
+  0x29067f0: add      w9, w9, #6
+  0x29067f4: add      x8, x8, w9, sxtw #4
+  0x29067f8: add      x0, x8, #0x138
+  0x29067fc: ldp      x8, x7, [x0]
+  0x2906800: mov      x0, x20
+  0x2906804: mov      w1, w25
+  0x2906808: mov      w2, w24
+  0x290680c: mov      w3, w23
+  0x2906810: mov      w4, w21
+  0x2906814: mov      w5, w22
+  0x2906818: mov      x6, x19
+  0x290681c: blr      x8
+  0x2906820: ldr      x0, [x19, #0x40]
+  0x2906824: cbz      x0, #0x2907700
+  0x2906828: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x290682c: mov      w1, #5
+  0x2906830: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2906834: ldr      x9, [x29]
+  0x2906838: cbz      x9, #0x2907700
+  0x290683c: mov      x20, x0
+  0x2906840: cbz      x0, #0x2907700
+  0x2906844: ldr      x8, [x20]
+  0x2906848: ldr      w21, [x19, #0xb4]
+  0x290684c: ldr      w22, [x19, #0xc4]
+  0x2906850: ldrb     w23, [x27]
+  0x2906854: ldrh     w24, [x9, #0x78]
+  0x2906858: ldrh     w25, [x9, #0x76]
+  0x290685c: ldrh     w9, [x8, #0x12e]
+  0x2906860: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906864: cbz      x9, #0x2906888
+  0x2906868: ldr      x10, [x8, #0xb0]
+  0x290686c: add      x10, x10, #8
+  0x2906870: ldur     x11, [x10, #-8]
+  0x2906874: cmp      x11, x1
+  0x2906878: b.eq     #0x2906898
+  0x290687c: subs     x9, x9, #1
+  0x2906880: add      x10, x10, #0x10
+  0x2906884: b.ne     #0x2906870
+  0x2906888: mov      w2, #6
+  0x290688c: mov      x0, x20
+  0x2906890: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2906894: b        #0x29068a8
+  0x2906898: ldr      w9, [x10]
+  0x290689c: add      w9, w9, #6
+  0x29068a0: add      x8, x8, w9, sxtw #4
+  0x29068a4: add      x0, x8, #0x138
+  0x29068a8: ldp      x8, x7, [x0]
+  0x29068ac: mov      x0, x20
+  0x29068b0: mov      w1, w25
+  0x29068b4: mov      w2, w24
+  0x29068b8: mov      w3, w23
+  0x29068bc: mov      w4, w21
+  0x29068c0: mov      w5, w22
+  0x29068c4: mov      x6, x19
+  0x29068c8: blr      x8
+  0x29068cc: ldr      x0, [x19, #0x40]
+  0x29068d0: cbz      x0, #0x2907700
+  0x29068d4: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x29068d8: mov      w1, #3
+  0x29068dc: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x29068e0: ldr      x9, [x29]
+  0x29068e4: cbz      x9, #0x2907700
+  0x29068e8: mov      x20, x0
+  0x29068ec: cbz      x0, #0x2907700
+  0x29068f0: ldr      x8, [x20]
+  0x29068f4: ldr      w21, [x19, #0xbc]
+  0x29068f8: ldrb     w22, [x27]
+  0x29068fc: ldrh     w23, [x9, #0x70]
+  0x2906900: ldrh     w24, [x9, #0x6e]
+  0x2906904: ldrh     w9, [x8, #0x12e]
+  0x2906908: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x290690c: cbz      x9, #0x2906930
+  0x2906910: ldr      x10, [x8, #0xb0]
+  0x2906914: add      x10, x10, #8
+  0x2906918: ldur     x11, [x10, #-8]
+  0x290691c: cmp      x11, x1
+  0x2906920: b.eq     #0x2906940
+  0x2906924: subs     x9, x9, #1
+  0x2906928: add      x10, x10, #0x10
+  0x290692c: b.ne     #0x2906918
+  0x2906930: mov      w2, #6
+  0x2906934: mov      x0, x20
+  0x2906938: bl       #0x2210028 ; -> ??? 0x2210028
+  0x290693c: b        #0x2906950
+  0x2906940: ldr      w9, [x10]
+  0x2906944: add      w9, w9, #6
+  0x2906948: add      x8, x8, w9, sxtw #4
+  0x290694c: add      x0, x8, #0x138
+  0x2906950: ldp      x8, x7, [x0]
+  0x2906954: mov      x0, x20
+  0x2906958: mov      w1, w24
+  0x290695c: mov      w2, w23
+  0x2906960: mov      w3, w22
+  0x2906964: mov      w4, w21
+  0x2906968: mov      w5, wzr
+  0x290696c: mov      x6, x19
+  0x2906970: blr      x8
+  0x2906974: ldr      x0, [x19, #0x40]
+  0x2906978: cbz      x0, #0x2907700
+  0x290697c: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906980: mov      w1, #6
+  0x2906984: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2906988: ldr      x9, [x29]
+  0x290698c: cbz      x9, #0x2907700
+  0x2906990: mov      x20, x0
+  0x2906994: cbz      x0, #0x2907700
+  0x2906998: ldr      x8, [x20]
+  0x290699c: ldrb     w21, [x27]
+  0x29069a0: ldrh     w22, [x9, #0x7c]
+  0x29069a4: ldrh     w23, [x9, #0x7a]
+  0x29069a8: ldrh     w9, [x8, #0x12e]
+  0x29069ac: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x29069b0: cbz      x9, #0x29069d4
+  0x29069b4: ldr      x10, [x8, #0xb0]
+  0x29069b8: add      x10, x10, #8
+  0x29069bc: ldur     x11, [x10, #-8]
+  0x29069c0: cmp      x11, x1
+  0x29069c4: b.eq     #0x29069e4
+  0x29069c8: subs     x9, x9, #1
+  0x29069cc: add      x10, x10, #0x10
+  0x29069d0: b.ne     #0x29069bc
+  0x29069d4: mov      w2, #6
+  0x29069d8: mov      x0, x20
+  0x29069dc: bl       #0x2210028 ; -> ??? 0x2210028
+  0x29069e0: b        #0x29069f4
+  0x29069e4: ldr      w9, [x10]
+  0x29069e8: add      w9, w9, #6
+  0x29069ec: add      x8, x8, w9, sxtw #4
+  0x29069f0: add      x0, x8, #0x138
+  0x29069f4: ldp      x8, x7, [x0]
+  0x29069f8: mov      x0, x20
+  0x29069fc: mov      w1, w23
+  0x2906a00: mov      w2, w22
+  0x2906a04: mov      w3, w21
+  0x2906a08: mov      w4, wzr
+  0x2906a0c: mov      w5, wzr
+  0x2906a10: mov      x6, x19
+  0x2906a14: blr      x8
+  0x2906a18: ldr      x0, [x19, #0x40]
+  0x2906a1c: cbz      x0, #0x2907700
+  0x2906a20: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906a24: mov      w1, #7
+  0x2906a28: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2906a2c: ldr      x9, [x29]
+  0x2906a30: cbz      x9, #0x2907700
+  0x2906a34: mov      x20, x0
+  0x2906a38: cbz      x0, #0x2907700
+  0x2906a3c: ldr      x8, [x20]
+  0x2906a40: ldrb     w21, [x27]
+  0x2906a44: ldrh     w22, [x9, #0x80]
+  0x2906a48: ldrh     w23, [x9, #0x7e]
+  0x2906a4c: ldrh     w9, [x8, #0x12e]
+  0x2906a50: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906a54: cbz      x9, #0x2906a78
+  0x2906a58: ldr      x10, [x8, #0xb0]
+  0x2906a5c: add      x10, x10, #8
+  0x2906a60: ldur     x11, [x10, #-8]
+  0x2906a64: cmp      x11, x1
+  0x2906a68: b.eq     #0x2906a88
+  0x2906a6c: subs     x9, x9, #1
+  0x2906a70: add      x10, x10, #0x10
+  0x2906a74: b.ne     #0x2906a60
+  0x2906a78: mov      w2, #6
+  0x2906a7c: mov      x0, x20
+  0x2906a80: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2906a84: b        #0x2906a98
+  0x2906a88: ldr      w9, [x10]
+  0x2906a8c: add      w9, w9, #6
+  0x2906a90: add      x8, x8, w9, sxtw #4
+  0x2906a94: add      x0, x8, #0x138
+  0x2906a98: ldp      x8, x7, [x0]
+  0x2906a9c: mov      x0, x20
+  0x2906aa0: mov      w1, w23
+  0x2906aa4: mov      w2, w22
+  0x2906aa8: mov      w3, w21
+  0x2906aac: mov      w4, wzr
+  0x2906ab0: mov      w5, wzr
+  0x2906ab4: mov      x6, x19
+  0x2906ab8: blr      x8
+  0x2906abc: ldr      x0, [x19, #0x40]
+  0x2906ac0: cbz      x0, #0x2907700
+  0x2906ac4: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906ac8: mov      w1, #8
+  0x2906acc: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2906ad0: ldr      x9, [x29]
+  0x2906ad4: cbz      x9, #0x2907700
+  0x2906ad8: mov      x20, x0
+  0x2906adc: cbz      x0, #0x2907700
+  0x2906ae0: ldr      x8, [x20]
+  0x2906ae4: ldrb     w21, [x27]
+  0x2906ae8: ldrh     w22, [x9, #0x84]
+  0x2906aec: ldrh     w23, [x9, #0x82]
+  0x2906af0: ldrh     w9, [x8, #0x12e]
+  0x2906af4: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906af8: cbz      x9, #0x2906b1c
+  0x2906afc: ldr      x10, [x8, #0xb0]
+  0x2906b00: add      x10, x10, #8
+  0x2906b04: ldur     x11, [x10, #-8]
+  0x2906b08: cmp      x11, x1
+  0x2906b0c: b.eq     #0x2906b2c
+  0x2906b10: subs     x9, x9, #1
+  0x2906b14: add      x10, x10, #0x10
+  0x2906b18: b.ne     #0x2906b04
+  0x2906b1c: mov      w2, #6
+  0x2906b20: mov      x0, x20
+  0x2906b24: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2906b28: b        #0x2906b3c
+  0x2906b2c: ldr      w9, [x10]
+  0x2906b30: add      w9, w9, #6
+  0x2906b34: add      x8, x8, w9, sxtw #4
+  0x2906b38: add      x0, x8, #0x138
+  0x2906b3c: ldp      x8, x7, [x0]
+  0x2906b40: mov      x0, x20
+  0x2906b44: mov      w1, w23
+  0x2906b48: mov      w2, w22
+  0x2906b4c: mov      w3, w21
+  0x2906b50: mov      w4, wzr
+  0x2906b54: mov      w5, wzr
+  0x2906b58: mov      x6, x19
+  0x2906b5c: blr      x8
+  0x2906b60: ldr      x0, [x19, #0x40]
+  0x2906b64: cbz      x0, #0x2907700
+  0x2906b68: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906b6c: mov      w1, #9
+  0x2906b70: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2906b74: ldr      x9, [x29]
+  0x2906b78: cbz      x9, #0x2907700
+  0x2906b7c: mov      x20, x0
+  0x2906b80: cbz      x0, #0x2907700
+  0x2906b84: ldr      x8, [x20]
+  0x2906b88: ldrb     w21, [x27]
+  0x2906b8c: ldrh     w22, [x9, #0x88]
+  0x2906b90: ldrh     w23, [x9, #0x86]
+  0x2906b94: ldrh     w9, [x8, #0x12e]
+  0x2906b98: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906b9c: cbz      x9, #0x2906bc0
+  0x2906ba0: ldr      x10, [x8, #0xb0]
+  0x2906ba4: add      x10, x10, #8
+  0x2906ba8: ldur     x11, [x10, #-8]
+  0x2906bac: cmp      x11, x1
+  0x2906bb0: b.eq     #0x2906bd0
+  0x2906bb4: subs     x9, x9, #1
+  0x2906bb8: add      x10, x10, #0x10
+  0x2906bbc: b.ne     #0x2906ba8
+  0x2906bc0: mov      w2, #6
+  0x2906bc4: mov      x0, x20
+  0x2906bc8: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2906bcc: b        #0x2906be0
+  0x2906bd0: ldr      w9, [x10]
+  0x2906bd4: add      w9, w9, #6
+  0x2906bd8: add      x8, x8, w9, sxtw #4
+  0x2906bdc: add      x0, x8, #0x138
+  0x2906be0: ldp      x8, x7, [x0]
+  0x2906be4: mov      x0, x20
+  0x2906be8: mov      w1, w23
+  0x2906bec: mov      w2, w22
+  0x2906bf0: mov      w3, w21
+  0x2906bf4: mov      w4, wzr
+  0x2906bf8: mov      w5, wzr
+  0x2906bfc: mov      x6, x19
+  0x2906c00: blr      x8
+  0x2906c04: ldr      x0, [x19, #0x40]
+  0x2906c08: cbz      x0, #0x2907700
+  0x2906c0c: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906c10: mov      w1, #0xa
+  0x2906c14: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2906c18: ldr      x9, [x29]
+  0x2906c1c: cbz      x9, #0x2907700
+  0x2906c20: mov      x20, x0
+  0x2906c24: cbz      x0, #0x2907700
+  0x2906c28: ldr      x8, [x20]
+  0x2906c2c: ldrb     w21, [x27]
+  0x2906c30: ldrh     w22, [x9, #0x8c]
+  0x2906c34: ldrh     w23, [x9, #0x8a]
+  0x2906c38: ldrh     w9, [x8, #0x12e]
+  0x2906c3c: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906c40: cbz      x9, #0x2906c64
+  0x2906c44: ldr      x10, [x8, #0xb0]
+  0x2906c48: add      x10, x10, #8
+  0x2906c4c: ldur     x11, [x10, #-8]
+  0x2906c50: cmp      x11, x1
+  0x2906c54: b.eq     #0x2906c74
+  0x2906c58: subs     x9, x9, #1
+  0x2906c5c: add      x10, x10, #0x10
+  0x2906c60: b.ne     #0x2906c4c
+  0x2906c64: mov      w2, #6
+  0x2906c68: mov      x0, x20
+  0x2906c6c: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2906c70: b        #0x2906c84
+  0x2906c74: ldr      w9, [x10]
+  0x2906c78: add      w9, w9, #6
+  0x2906c7c: add      x8, x8, w9, sxtw #4
+  0x2906c80: add      x0, x8, #0x138
+  0x2906c84: ldp      x8, x7, [x0]
+  0x2906c88: mov      x0, x20
+  0x2906c8c: mov      w1, w23
+  0x2906c90: mov      w2, w22
+  0x2906c94: mov      w3, w21
+  0x2906c98: mov      w4, wzr
+  0x2906c9c: mov      w5, wzr
+  0x2906ca0: mov      x6, x19
+  0x2906ca4: blr      x8
+  0x2906ca8: ldr      x0, [x19, #0x40]
+  0x2906cac: cbz      x0, #0x2907700
+  0x2906cb0: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906cb4: mov      w1, #0xb
+  0x2906cb8: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2906cbc: ldr      x9, [x29]
+  0x2906cc0: cbz      x9, #0x2907700
+  0x2906cc4: mov      x20, x0
+  0x2906cc8: cbz      x0, #0x2907700
+  0x2906ccc: ldr      x8, [x20]
+  0x2906cd0: ldrb     w21, [x27]
+  0x2906cd4: ldrh     w22, [x9, #0x90]
+  0x2906cd8: ldrh     w23, [x9, #0x8e]
+  0x2906cdc: ldrh     w9, [x8, #0x12e]
+  0x2906ce0: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906ce4: cbz      x9, #0x2906d08
+  0x2906ce8: ldr      x10, [x8, #0xb0]
+  0x2906cec: add      x10, x10, #8
+  0x2906cf0: ldur     x11, [x10, #-8]
+  0x2906cf4: cmp      x11, x1
+  0x2906cf8: b.eq     #0x2906d18
+  0x2906cfc: subs     x9, x9, #1
+  0x2906d00: add      x10, x10, #0x10
+  0x2906d04: b.ne     #0x2906cf0
+  0x2906d08: mov      w2, #6
+  0x2906d0c: mov      x0, x20
+  0x2906d10: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2906d14: b        #0x2906d28
+  0x2906d18: ldr      w9, [x10]
+  0x2906d1c: add      w9, w9, #6
+  0x2906d20: add      x8, x8, w9, sxtw #4
+  0x2906d24: add      x0, x8, #0x138
+  0x2906d28: ldp      x8, x7, [x0]
+  0x2906d2c: mov      x0, x20
+  0x2906d30: mov      w1, w23
+  0x2906d34: mov      w2, w22
+  0x2906d38: mov      w3, w21
+  0x2906d3c: mov      w4, wzr
+  0x2906d40: mov      w5, wzr
+  0x2906d44: mov      x6, x19
+  0x2906d48: blr      x8
+  0x2906d4c: ldr      x0, [x19, #0x40]
+  0x2906d50: cbz      x0, #0x2907700
+  0x2906d54: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906d58: mov      w1, #0xc
+  0x2906d5c: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2906d60: ldr      x9, [x29]
+  0x2906d64: cbz      x9, #0x2907700
+  0x2906d68: mov      x20, x0
+  0x2906d6c: cbz      x0, #0x2907700
+  0x2906d70: ldr      x8, [x20]
+  0x2906d74: ldrb     w21, [x27]
+  0x2906d78: ldrh     w22, [x9, #0x94]
+  0x2906d7c: ldrh     w23, [x9, #0x92]
+  0x2906d80: ldrh     w9, [x8, #0x12e]
+  0x2906d84: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906d88: cbz      x9, #0x2906dac
+  0x2906d8c: ldr      x10, [x8, #0xb0]
+  0x2906d90: add      x10, x10, #8
+  0x2906d94: ldur     x11, [x10, #-8]
+  0x2906d98: cmp      x11, x1
+  0x2906d9c: b.eq     #0x2906dbc
+  0x2906da0: subs     x9, x9, #1
+  0x2906da4: add      x10, x10, #0x10
+  0x2906da8: b.ne     #0x2906d94
+  0x2906dac: mov      w2, #6
+  0x2906db0: mov      x0, x20
+  0x2906db4: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2906db8: b        #0x2906dcc
+  0x2906dbc: ldr      w9, [x10]
+  0x2906dc0: add      w9, w9, #6
+  0x2906dc4: add      x8, x8, w9, sxtw #4
+  0x2906dc8: add      x0, x8, #0x138
+  0x2906dcc: ldp      x8, x7, [x0]
+  0x2906dd0: mov      x0, x20
+  0x2906dd4: mov      w1, w23
+  0x2906dd8: mov      w2, w22
+  0x2906ddc: mov      w3, w21
+  0x2906de0: mov      w4, wzr
+  0x2906de4: mov      w5, wzr
+  0x2906de8: mov      x6, x19
+  0x2906dec: blr      x8
+  0x2906df0: ldr      x0, [x19, #0x40]
+  0x2906df4: cbz      x0, #0x2907700
+  0x2906df8: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906dfc: mov      w1, #0xd
+  0x2906e00: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2906e04: ldr      x9, [x29]
+  0x2906e08: cbz      x9, #0x2907700
+  0x2906e0c: mov      x20, x0
+  0x2906e10: cbz      x0, #0x2907700
+  0x2906e14: ldr      x8, [x20]
+  0x2906e18: ldrb     w21, [x27]
+  0x2906e1c: ldrh     w22, [x9, #0x98]
+  0x2906e20: ldrh     w23, [x9, #0x96]
+  0x2906e24: ldrh     w9, [x8, #0x12e]
+  0x2906e28: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906e2c: cbz      x9, #0x2906e50
+  0x2906e30: ldr      x10, [x8, #0xb0]
+  0x2906e34: add      x10, x10, #8
+  0x2906e38: ldur     x11, [x10, #-8]
+  0x2906e3c: cmp      x11, x1
+  0x2906e40: b.eq     #0x2906e60
+  0x2906e44: subs     x9, x9, #1
+  0x2906e48: add      x10, x10, #0x10
+  0x2906e4c: b.ne     #0x2906e38
+  0x2906e50: mov      w2, #6
+  0x2906e54: mov      x0, x20
+  0x2906e58: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2906e5c: b        #0x2906e70
+  0x2906e60: ldr      w9, [x10]
+  0x2906e64: add      w9, w9, #6
+  0x2906e68: add      x8, x8, w9, sxtw #4
+  0x2906e6c: add      x0, x8, #0x138
+  0x2906e70: ldp      x8, x7, [x0]
+  0x2906e74: mov      x0, x20
+  0x2906e78: mov      w1, w23
+  0x2906e7c: mov      w2, w22
+  0x2906e80: mov      w3, w21
+  0x2906e84: mov      w4, wzr
+  0x2906e88: mov      w5, wzr
+  0x2906e8c: mov      x6, x19
+  0x2906e90: blr      x8
+  0x2906e94: ldr      x0, [x19, #0x40]
+  0x2906e98: cbz      x0, #0x2907700
+  0x2906e9c: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906ea0: mov      w1, #0xe
+  0x2906ea4: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2906ea8: ldr      x9, [x29]
+  0x2906eac: cbz      x9, #0x2907700
+  0x2906eb0: mov      x20, x0
+  0x2906eb4: cbz      x0, #0x2907700
+  0x2906eb8: ldr      x8, [x20]
+  0x2906ebc: ldrb     w21, [x27]
+  0x2906ec0: ldrh     w22, [x9, #0x9c]
+  0x2906ec4: ldrh     w23, [x9, #0x9a]
+  0x2906ec8: ldrh     w9, [x8, #0x12e]
+  0x2906ecc: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906ed0: cbz      x9, #0x2906ef4
+  0x2906ed4: ldr      x10, [x8, #0xb0]
+  0x2906ed8: add      x10, x10, #8
+  0x2906edc: ldur     x11, [x10, #-8]
+  0x2906ee0: cmp      x11, x1
+  0x2906ee4: b.eq     #0x2906f04
+  0x2906ee8: subs     x9, x9, #1
+  0x2906eec: add      x10, x10, #0x10
+  0x2906ef0: b.ne     #0x2906edc
+  0x2906ef4: mov      w2, #6
+  0x2906ef8: mov      x0, x20
+  0x2906efc: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2906f00: b        #0x2906f14
+  0x2906f04: ldr      w9, [x10]
+  0x2906f08: add      w9, w9, #6
+  0x2906f0c: add      x8, x8, w9, sxtw #4
+  0x2906f10: add      x0, x8, #0x138
+  0x2906f14: ldp      x8, x7, [x0]
+  0x2906f18: mov      x0, x20
+  0x2906f1c: mov      w1, w23
+  0x2906f20: mov      w2, w22
+  0x2906f24: mov      w3, w21
+  0x2906f28: mov      w4, wzr
+  0x2906f2c: mov      w5, wzr
+  0x2906f30: mov      x6, x19
+  0x2906f34: blr      x8
+  0x2906f38: ldr      x0, [x19, #0x40]
+  0x2906f3c: cbz      x0, #0x2907700
+  0x2906f40: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906f44: mov      w1, #0xf
+  0x2906f48: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2906f4c: ldr      x9, [x29]
+  0x2906f50: cbz      x9, #0x2907700
+  0x2906f54: mov      x20, x0
+  0x2906f58: cbz      x0, #0x2907700
+  0x2906f5c: ldr      x8, [x20]
+  0x2906f60: ldrb     w21, [x27]
+  0x2906f64: ldrh     w22, [x9, #0xa0]
+  0x2906f68: ldrh     w23, [x9, #0x9e]
+  0x2906f6c: ldrh     w9, [x8, #0x12e]
+  0x2906f70: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906f74: cbz      x9, #0x2906f98
+  0x2906f78: ldr      x10, [x8, #0xb0]
+  0x2906f7c: add      x10, x10, #8
+  0x2906f80: ldur     x11, [x10, #-8]
+  0x2906f84: cmp      x11, x1
+  0x2906f88: b.eq     #0x2906fa8
+  0x2906f8c: subs     x9, x9, #1
+  0x2906f90: add      x10, x10, #0x10
+  0x2906f94: b.ne     #0x2906f80
+  0x2906f98: mov      w2, #6
+  0x2906f9c: mov      x0, x20
+  0x2906fa0: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2906fa4: b        #0x2906fb8
+  0x2906fa8: ldr      w9, [x10]
+  0x2906fac: add      w9, w9, #6
+  0x2906fb0: add      x8, x8, w9, sxtw #4
+  0x2906fb4: add      x0, x8, #0x138
+  0x2906fb8: ldp      x8, x7, [x0]
+  0x2906fbc: mov      x0, x20
+  0x2906fc0: mov      w1, w23
+  0x2906fc4: mov      w2, w22
+  0x2906fc8: mov      w3, w21
+  0x2906fcc: mov      w4, wzr
+  0x2906fd0: mov      w5, wzr
+  0x2906fd4: mov      x6, x19
+  0x2906fd8: blr      x8
+  0x2906fdc: ldr      x0, [x19, #0x40]
+  0x2906fe0: cbz      x0, #0x2907700
+  0x2906fe4: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2906fe8: mov      w1, #0x10
+  0x2906fec: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2906ff0: ldr      x9, [x29]
+  0x2906ff4: cbz      x9, #0x2907700
+  0x2906ff8: mov      x20, x0
+  0x2906ffc: cbz      x0, #0x2907700
+  0x2907000: ldr      x8, [x20]
+  0x2907004: ldrb     w21, [x27]
+  0x2907008: ldrh     w22, [x9, #0xa4]
+  0x290700c: ldrh     w23, [x9, #0xa2]
+  0x2907010: ldrh     w9, [x8, #0x12e]
+  0x2907014: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x2907018: cbz      x9, #0x290703c
+  0x290701c: ldr      x10, [x8, #0xb0]
+  0x2907020: add      x10, x10, #8
+  0x2907024: ldur     x11, [x10, #-8]
+  0x2907028: cmp      x11, x1
+  0x290702c: b.eq     #0x290704c
+  0x2907030: subs     x9, x9, #1
+  0x2907034: add      x10, x10, #0x10
+  0x2907038: b.ne     #0x2907024
+  0x290703c: mov      w2, #6
+  0x2907040: mov      x0, x20
+  0x2907044: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2907048: b        #0x290705c
+  0x290704c: ldr      w9, [x10]
+  0x2907050: add      w9, w9, #6
+  0x2907054: add      x8, x8, w9, sxtw #4
+  0x2907058: add      x0, x8, #0x138
+  0x290705c: ldp      x8, x7, [x0]
+  0x2907060: mov      x0, x20
+  0x2907064: mov      w1, w23
+  0x2907068: mov      w2, w22
+  0x290706c: mov      w3, w21
+  0x2907070: mov      w4, wzr
+  0x2907074: mov      w5, wzr
+  0x2907078: mov      x6, x19
+  0x290707c: blr      x8
+  0x2907080: ldr      x0, [x19, #0x40]
+  0x2907084: cbz      x0, #0x2907700
+  0x2907088: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x290708c: mov      w1, #0x11
+  0x2907090: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2907094: ldr      x9, [x29]
+  0x2907098: cbz      x9, #0x2907700
+  0x290709c: mov      x20, x0
+  0x29070a0: cbz      x0, #0x2907700
+  0x29070a4: ldr      x8, [x20]
+  0x29070a8: ldrb     w21, [x27]
+  0x29070ac: ldrh     w22, [x9, #0xa8]
+  0x29070b0: ldrh     w23, [x9, #0xa6]
+  0x29070b4: ldrh     w9, [x8, #0x12e]
+  0x29070b8: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x29070bc: cbz      x9, #0x29070e0
+  0x29070c0: ldr      x10, [x8, #0xb0]
+  0x29070c4: add      x10, x10, #8
+  0x29070c8: ldur     x11, [x10, #-8]
+  0x29070cc: cmp      x11, x1
+  0x29070d0: b.eq     #0x29070f0
+  0x29070d4: subs     x9, x9, #1
+  0x29070d8: add      x10, x10, #0x10
+  0x29070dc: b.ne     #0x29070c8
+  0x29070e0: mov      w2, #6
+  0x29070e4: mov      x0, x20
+  0x29070e8: bl       #0x2210028 ; -> ??? 0x2210028
+  0x29070ec: b        #0x2907100
+  0x29070f0: ldr      w9, [x10]
+  0x29070f4: add      w9, w9, #6
+  0x29070f8: add      x8, x8, w9, sxtw #4
+  0x29070fc: add      x0, x8, #0x138
+  0x2907100: ldp      x8, x7, [x0]
+  0x2907104: mov      x0, x20
+  0x2907108: mov      w1, w23
+  0x290710c: mov      w2, w22
+  0x2907110: mov      w3, w21
+  0x2907114: mov      w4, wzr
+  0x2907118: mov      w5, wzr
+  0x290711c: mov      x6, x19
+  0x2907120: blr      x8
+  0x2907124: ldr      x0, [x19, #0x40]
+  0x2907128: cbz      x0, #0x2907700
+  0x290712c: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2907130: mov      w1, #0x12
+  0x2907134: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2907138: ldr      x9, [x29]
+  0x290713c: cbz      x9, #0x2907700
+  0x2907140: mov      x20, x0
+  0x2907144: cbz      x0, #0x2907700
+  0x2907148: ldr      x8, [x20]
+  0x290714c: ldrb     w21, [x27]
+  0x2907150: ldrh     w22, [x9, #0xac]
+  0x2907154: ldrh     w23, [x9, #0xaa]
+  0x2907158: ldrh     w9, [x8, #0x12e]
+  0x290715c: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x2907160: cbz      x9, #0x2907184
+  0x2907164: ldr      x10, [x8, #0xb0]
+  0x2907168: add      x10, x10, #8
+  0x290716c: ldur     x11, [x10, #-8]
+  0x2907170: cmp      x11, x1
+  0x2907174: b.eq     #0x2907194
+  0x2907178: subs     x9, x9, #1
+  0x290717c: add      x10, x10, #0x10
+  0x2907180: b.ne     #0x290716c
+  0x2907184: mov      w2, #6
+  0x2907188: mov      x0, x20
+  0x290718c: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2907190: b        #0x29071a4
+  0x2907194: ldr      w9, [x10]
+  0x2907198: add      w9, w9, #6
+  0x290719c: add      x8, x8, w9, sxtw #4
+  0x29071a0: add      x0, x8, #0x138
+  0x29071a4: ldp      x8, x7, [x0]
+  0x29071a8: mov      x0, x20
+  0x29071ac: mov      w1, w23
+  0x29071b0: mov      w2, w22
+  0x29071b4: mov      w3, w21
+  0x29071b8: mov      w4, wzr
+  0x29071bc: mov      w5, wzr
+  0x29071c0: mov      x6, x19
+  0x29071c4: blr      x8
+  0x29071c8: ldr      x0, [x19, #0x40]
+  0x29071cc: cbz      x0, #0x2907700
+  0x29071d0: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x29071d4: mov      w1, #0x13
+  0x29071d8: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x29071dc: ldr      x9, [x29]
+  0x29071e0: cbz      x9, #0x2907700
+  0x29071e4: mov      x20, x0
+  0x29071e8: cbz      x0, #0x2907700
+  0x29071ec: ldr      x8, [x20]
+  0x29071f0: ldrb     w21, [x27]
+  0x29071f4: ldrh     w22, [x9, #0xb0]
+  0x29071f8: ldrh     w23, [x9, #0xae]
+  0x29071fc: ldrh     w9, [x8, #0x12e]
+  0x2907200: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x2907204: cbz      x9, #0x2907228
+  0x2907208: ldr      x10, [x8, #0xb0]
+  0x290720c: add      x10, x10, #8
+  0x2907210: ldur     x11, [x10, #-8]
+  0x2907214: cmp      x11, x1
+  0x2907218: b.eq     #0x2907238
+  0x290721c: subs     x9, x9, #1
+  0x2907220: add      x10, x10, #0x10
+  0x2907224: b.ne     #0x2907210
+  0x2907228: mov      w2, #6
+  0x290722c: mov      x0, x20
+  0x2907230: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2907234: b        #0x2907248
+  0x2907238: ldr      w9, [x10]
+  0x290723c: add      w9, w9, #6
+  0x2907240: add      x8, x8, w9, sxtw #4
+  0x2907244: add      x0, x8, #0x138
+  0x2907248: ldp      x8, x7, [x0]
+  0x290724c: mov      x0, x20
+  0x2907250: mov      w1, w23
+  0x2907254: mov      w2, w22
+  0x2907258: mov      w3, w21
+  0x290725c: mov      w4, wzr
+  0x2907260: mov      w5, wzr
+  0x2907264: mov      x6, x19
+  0x2907268: blr      x8
+  0x290726c: ldr      x0, [x19, #0x40]
+  0x2907270: cbz      x0, #0x2907700
+  0x2907274: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2907278: mov      w1, #0x14
+  0x290727c: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2907280: ldr      x9, [x29]
+  0x2907284: cbz      x9, #0x2907700
+  0x2907288: mov      x20, x0
+  0x290728c: cbz      x0, #0x2907700
+  0x2907290: ldr      x8, [x20]
+  0x2907294: ldrb     w21, [x27]
+  0x2907298: ldrh     w22, [x9, #0xb4]
+  0x290729c: ldrh     w23, [x9, #0xb2]
+  0x29072a0: ldrh     w9, [x8, #0x12e]
+  0x29072a4: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x29072a8: cbz      x9, #0x29072cc
+  0x29072ac: ldr      x10, [x8, #0xb0]
+  0x29072b0: add      x10, x10, #8
+  0x29072b4: ldur     x11, [x10, #-8]
+  0x29072b8: cmp      x11, x1
+  0x29072bc: b.eq     #0x29072dc
+  0x29072c0: subs     x9, x9, #1
+  0x29072c4: add      x10, x10, #0x10
+  0x29072c8: b.ne     #0x29072b4
+  0x29072cc: mov      w2, #6
+  0x29072d0: mov      x0, x20
+  0x29072d4: bl       #0x2210028 ; -> ??? 0x2210028
+  0x29072d8: b        #0x29072ec
+  0x29072dc: ldr      w9, [x10]
+  0x29072e0: add      w9, w9, #6
+  0x29072e4: add      x8, x8, w9, sxtw #4
+  0x29072e8: add      x0, x8, #0x138
+  0x29072ec: ldp      x8, x7, [x0]
+  0x29072f0: mov      x0, x20
+  0x29072f4: mov      w1, w23
+  0x29072f8: mov      w2, w22
+  0x29072fc: mov      w3, w21
+  0x2907300: mov      w4, wzr
+  0x2907304: mov      w5, wzr
+  0x2907308: mov      x6, x19
+  0x290730c: blr      x8
+  0x2907310: ldr      x0, [x19, #0x40]
+  0x2907314: cbz      x0, #0x2907700
+  0x2907318: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x290731c: mov      w1, #0x15
+  0x2907320: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2907324: ldr      x9, [x29]
+  0x2907328: cbz      x9, #0x2907700
+  0x290732c: mov      x20, x0
+  0x2907330: cbz      x0, #0x2907700
+  0x2907334: ldr      x8, [x20]
+  0x2907338: ldrb     w21, [x27]
+  0x290733c: ldrh     w22, [x9, #0xb8]
+  0x2907340: ldrh     w23, [x9, #0xb6]
+  0x2907344: ldrh     w9, [x8, #0x12e]
+  0x2907348: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x290734c: cbz      x9, #0x2907370
+  0x2907350: ldr      x10, [x8, #0xb0]
+  0x2907354: add      x10, x10, #8
+  0x2907358: ldur     x11, [x10, #-8]
+  0x290735c: cmp      x11, x1
+  0x2907360: b.eq     #0x2907380
+  0x2907364: subs     x9, x9, #1
+  0x2907368: add      x10, x10, #0x10
+  0x290736c: b.ne     #0x2907358
+  0x2907370: mov      w2, #6
+  0x2907374: mov      x0, x20
+  0x2907378: bl       #0x2210028 ; -> ??? 0x2210028
+  0x290737c: b        #0x2907390
+  0x2907380: ldr      w9, [x10]
+  0x2907384: add      w9, w9, #6
+  0x2907388: add      x8, x8, w9, sxtw #4
+  0x290738c: add      x0, x8, #0x138
+  0x2907390: ldp      x8, x7, [x0]
+  0x2907394: mov      x0, x20
+  0x2907398: mov      w1, w23
+  0x290739c: mov      w2, w22
+  0x29073a0: mov      w3, w21
+  0x29073a4: mov      w4, wzr
+  0x29073a8: mov      w5, wzr
+  0x29073ac: mov      x6, x19
+  0x29073b0: blr      x8
+  0x29073b4: ldr      x0, [x19, #0x40]
+  0x29073b8: cbz      x0, #0x2907700
+  0x29073bc: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x29073c0: mov      w1, #0x16
+  0x29073c4: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x29073c8: ldr      x9, [x29]
+  0x29073cc: cbz      x9, #0x2907700
+  0x29073d0: mov      x20, x0
+  0x29073d4: cbz      x0, #0x2907700
+  0x29073d8: ldr      x8, [x20]
+  0x29073dc: ldrb     w21, [x27]
+  0x29073e0: ldrh     w22, [x9, #0xbc]
+  0x29073e4: ldrh     w23, [x9, #0xba]
+  0x29073e8: ldrh     w9, [x8, #0x12e]
+  0x29073ec: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x29073f0: cbz      x9, #0x2907414
+  0x29073f4: ldr      x10, [x8, #0xb0]
+  0x29073f8: add      x10, x10, #8
+  0x29073fc: ldur     x11, [x10, #-8]
+  0x2907400: cmp      x11, x1
+  0x2907404: b.eq     #0x2907424
+  0x2907408: subs     x9, x9, #1
+  0x290740c: add      x10, x10, #0x10
+  0x2907410: b.ne     #0x29073fc
+  0x2907414: mov      w2, #6
+  0x2907418: mov      x0, x20
+  0x290741c: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2907420: b        #0x2907434
+  0x2907424: ldr      w9, [x10]
+  0x2907428: add      w9, w9, #6
+  0x290742c: add      x8, x8, w9, sxtw #4
+  0x2907430: add      x0, x8, #0x138
+  0x2907434: ldp      x8, x7, [x0]
+  0x2907438: mov      x0, x20
+  0x290743c: mov      w1, w23
+  0x2907440: mov      w2, w22
+  0x2907444: mov      w3, w21
+  0x2907448: mov      w4, wzr
+  0x290744c: mov      w5, wzr
+  0x2907450: mov      x6, x19
+  0x2907454: blr      x8
+  0x2907458: ldr      x0, [x19, #0x40]
+  0x290745c: cbz      x0, #0x2907700
+  0x2907460: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2907464: mov      w1, #0x17
+  0x2907468: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x290746c: ldr      x9, [x29]
+  0x2907470: cbz      x9, #0x2907700
+  0x2907474: mov      x20, x0
+  0x2907478: cbz      x0, #0x2907700
+  0x290747c: ldr      x8, [x20]
+  0x2907480: ldrb     w21, [x27]
+  0x2907484: ldrh     w22, [x9, #0xc0]
+  0x2907488: ldrh     w23, [x9, #0xbe]
+  0x290748c: ldrh     w9, [x8, #0x12e]
+  0x2907490: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x2907494: cbz      x9, #0x29074b8
+  0x2907498: ldr      x10, [x8, #0xb0]
+  0x290749c: add      x10, x10, #8
+  0x29074a0: ldur     x11, [x10, #-8]
+  0x29074a4: cmp      x11, x1
+  0x29074a8: b.eq     #0x29074c8
+  0x29074ac: subs     x9, x9, #1
+  0x29074b0: add      x10, x10, #0x10
+  0x29074b4: b.ne     #0x29074a0
+  0x29074b8: mov      w2, #6
+  0x29074bc: mov      x0, x20
+  0x29074c0: bl       #0x2210028 ; -> ??? 0x2210028
+  0x29074c4: b        #0x29074d8
+  0x29074c8: ldr      w9, [x10]
+  0x29074cc: add      w9, w9, #6
+  0x29074d0: add      x8, x8, w9, sxtw #4
+  0x29074d4: add      x0, x8, #0x138
+  0x29074d8: ldp      x8, x7, [x0]
+  0x29074dc: mov      x0, x20
+  0x29074e0: mov      w1, w23
+  0x29074e4: mov      w2, w22
+  0x29074e8: mov      w3, w21
+  0x29074ec: mov      w4, wzr
+  0x29074f0: mov      w5, wzr
+  0x29074f4: mov      x6, x19
+  0x29074f8: blr      x8
+  0x29074fc: ldr      x0, [x19, #0x40]
+  0x2907500: cbz      x0, #0x2907700
+  0x2907504: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2907508: mov      w1, #0x18
+  0x290750c: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2907510: ldr      x9, [x29]
+  0x2907514: cbz      x9, #0x2907700
+  0x2907518: mov      x20, x0
+  0x290751c: cbz      x0, #0x2907700
+  0x2907520: ldr      x8, [x20]
+  0x2907524: ldrb     w21, [x27]
+  0x2907528: ldrh     w22, [x9, #0xc4]
+  0x290752c: ldrh     w23, [x9, #0xc2]
+  0x2907530: ldrh     w9, [x8, #0x12e]
+  0x2907534: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x2907538: cbz      x9, #0x290755c
+  0x290753c: ldr      x10, [x8, #0xb0]
+  0x2907540: add      x10, x10, #8
+  0x2907544: ldur     x11, [x10, #-8]
+  0x2907548: cmp      x11, x1
+  0x290754c: b.eq     #0x290756c
+  0x2907550: subs     x9, x9, #1
+  0x2907554: add      x10, x10, #0x10
+  0x2907558: b.ne     #0x2907544
+  0x290755c: mov      w2, #6
+  0x2907560: mov      x0, x20
+  0x2907564: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2907568: b        #0x290757c
+  0x290756c: ldr      w9, [x10]
+  0x2907570: add      w9, w9, #6
+  0x2907574: add      x8, x8, w9, sxtw #4
+  0x2907578: add      x0, x8, #0x138
+  0x290757c: ldp      x8, x7, [x0]
+  0x2907580: mov      x0, x20
+  0x2907584: mov      w1, w23
+  0x2907588: mov      w2, w22
+  0x290758c: mov      w3, w21
+  0x2907590: mov      w4, wzr
+  0x2907594: mov      w5, wzr
+  0x2907598: mov      x6, x19
+  0x290759c: blr      x8
+  0x29075a0: ldr      x0, [x19, #0x40]
+  0x29075a4: cbz      x0, #0x2907700
+  0x29075a8: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x29075ac: mov      w1, #0x19
+  0x29075b0: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x29075b4: ldr      x9, [x29]
+  0x29075b8: cbz      x9, #0x2907700
+  0x29075bc: mov      x20, x0
+  0x29075c0: cbz      x0, #0x2907700
+  0x29075c4: ldr      x8, [x20]
+  0x29075c8: ldrb     w21, [x27]
+  0x29075cc: ldrh     w22, [x9, #0xc8]
+  0x29075d0: ldrh     w23, [x9, #0xc6]
+  0x29075d4: ldrh     w9, [x8, #0x12e]
+  0x29075d8: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x29075dc: cbz      x9, #0x2907600
+  0x29075e0: ldr      x10, [x8, #0xb0]
+  0x29075e4: add      x10, x10, #8
+  0x29075e8: ldur     x11, [x10, #-8]
+  0x29075ec: cmp      x11, x1
+  0x29075f0: b.eq     #0x2907610
+  0x29075f4: subs     x9, x9, #1
+  0x29075f8: add      x10, x10, #0x10
+  0x29075fc: b.ne     #0x29075e8
+  0x2907600: mov      w2, #6
+  0x2907604: mov      x0, x20
+  0x2907608: bl       #0x2210028 ; -> ??? 0x2210028
+  0x290760c: b        #0x2907620
+  0x2907610: ldr      w9, [x10]
+  0x2907614: add      w9, w9, #6
+  0x2907618: add      x8, x8, w9, sxtw #4
+  0x290761c: add      x0, x8, #0x138
+  0x2907620: ldp      x8, x7, [x0]
+  0x2907624: mov      x0, x20
+  0x2907628: mov      w1, w23
+  0x290762c: mov      w2, w22
+  0x2907630: mov      w3, w21
+  0x2907634: mov      w4, wzr
+  0x2907638: mov      w5, wzr
+  0x290763c: mov      x6, x19
+  0x2907640: blr      x8
+  0x2907644: ldr      x0, [x19, #0x40]
+  0x2907648: cbz      x0, #0x2907700
+  0x290764c: ldr      x2, [x28] ; = 0x0 (u64 @ 0x55b6000)
+  0x2907650: mov      w1, #0x1a
+  0x2907654: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2907658: ldr      x9, [x29]
+  0x290765c: cbz      x9, #0x2907700
+  0x2907660: mov      x20, x0
+  0x2907664: cbz      x0, #0x2907700
+  0x2907668: ldr      x8, [x20]
+  0x290766c: ldrb     w21, [x27]
+  0x2907670: ldrh     w22, [x9, #0xcc]
+  0x2907674: ldrh     w23, [x9, #0xca]
+  0x2907678: ldrh     w9, [x8, #0x12e]
+  0x290767c: ldr      x1, [x26] ; = 0x0 (u64 @ 0x55b6000)
+  0x2907680: cbz      x9, #0x29076a4
+  0x2907684: ldr      x10, [x8, #0xb0]
+  0x2907688: add      x10, x10, #8
+  0x290768c: ldur     x11, [x10, #-8]
+  0x2907690: cmp      x11, x1
+  0x2907694: b.eq     #0x29076b4
+  0x2907698: subs     x9, x9, #1
+  0x290769c: add      x10, x10, #0x10
+  0x29076a0: b.ne     #0x290768c
+  0x29076a4: mov      w2, #6
+  0x29076a8: mov      x0, x20
+  0x29076ac: bl       #0x2210028 ; -> ??? 0x2210028
+  0x29076b0: b        #0x29076c4
+  0x29076b4: ldr      w9, [x10]
+  0x29076b8: add      w9, w9, #6
+  0x29076bc: add      x8, x8, w9, sxtw #4
+  0x29076c0: add      x0, x8, #0x138
+  0x29076c4: ldp      x8, x7, [x0]
+  0x29076c8: mov      x0, x20
+  0x29076cc: mov      w1, w23
+  0x29076d0: mov      w2, w22
+  0x29076d4: mov      w3, w21
+  0x29076d8: mov      x6, x19
+  0x29076dc: ldp      x20, x19, [sp, #0x50]
+  0x29076e0: ldp      x22, x21, [sp, #0x40]
+  0x29076e4: ldp      x24, x23, [sp, #0x30]
+  0x29076e8: ldp      x26, x25, [sp, #0x20]
+  0x29076ec: ldp      x28, x27, [sp, #0x10]
+  0x29076f0: mov      w4, wzr
+  0x29076f4: mov      w5, wzr
+  0x29076f8: ldp      x29, x30, [sp], #0x60
+  0x29076fc: br       x8
+  0x2907700: bl       #0x21afc18 ; -> ??? 0x21afc18

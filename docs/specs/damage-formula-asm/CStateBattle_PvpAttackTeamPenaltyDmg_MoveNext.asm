@@ -1,236 +1,237 @@
-; ===== CStateBattle_PvpAttackTeamPenaltyDmg_MoveNext @ 0x25ce848..0x25cebf4 (taille 940 octets) =====
-  0x25ce848: stp      x30, x23, [sp, #-0x30]!
-  0x25ce84c: stp      x22, x21, [sp, #0x10]
-  0x25ce850: stp      x20, x19, [sp, #0x20]
-  0x25ce854: adrp     x20, #0x5957000
-  0x25ce858: ldrb     w8, [x20, #0x2f4]
-  0x25ce85c: mov      x19, x0
-  0x25ce860: tbnz     w8, #0, #0x25ce8a8
-  0x25ce864: adrp     x0, #0x5512000
-  0x25ce868: ldr      x0, [x0, #0x678] ; = 0x0 (u64 @ 0x5512678)
-  0x25ce86c: bl       #0x2184724 ; -> ??? 0x2184724
-  0x25ce870: adrp     x0, #0x5513000
-  0x25ce874: ldr      x0, [x0, #0xa30] ; = 0x0 (u64 @ 0x5513a30)
-  0x25ce878: bl       #0x2184724 ; -> ??? 0x2184724
-  0x25ce87c: adrp     x0, #0x5525000
-  0x25ce880: ldr      x0, [x0, #0xe30] ; = 0x0 (u64 @ 0x5525e30)
-  0x25ce884: bl       #0x2184724 ; -> ??? 0x2184724
-  0x25ce888: adrp     x0, #0x5525000
-  0x25ce88c: ldr      x0, [x0, #0xe38] ; = 0x0 (u64 @ 0x5525e38)
-  0x25ce890: bl       #0x2184724 ; -> ??? 0x2184724
-  0x25ce894: adrp     x0, #0x5511000
-  0x25ce898: ldr      x0, [x0, #0x8f8] ; = 0x0 (u64 @ 0x55118f8)
-  0x25ce89c: bl       #0x2184724 ; -> ??? 0x2184724
-  0x25ce8a0: mov      w8, #1
-  0x25ce8a4: strb     w8, [x20, #0x2f4]
-  0x25ce8a8: ldr      w8, [x19, #0x10]
-  0x25ce8ac: cmp      w8, #3
-  0x25ce8b0: b.hi     #0x25ceb10
-  0x25ce8b4: ldr      x20, [x19, #0x28]
-  0x25ce8b8: adrp     x9, #0x1057000
-  0x25ce8bc: add      x9, x9, #0x103
-  0x25ce8c0: adr      x10, #0x25ce8d0
-  0x25ce8c4: ldrb     w11, [x9, x8]
-  0x25ce8c8: add      x10, x10, x11, lsl #2
-  0x25ce8cc: br       x10
-  0x25ce8d0: ldr      w8, [x19, #0x20]
-  0x25ce8d4: mov      w9, #-1
-  0x25ce8d8: str      w9, [x19, #0x10]
-  0x25ce8dc: str      w8, [x19, #0x38]
-  0x25ce8e0: cbz      x20, #0x25cebf0
-  0x25ce8e4: ldrb     w8, [x20, #0x90]
-  0x25ce8e8: cbnz     w8, #0x25ceb24
-  0x25ce8ec: adrp     x8, #0x5525000
-  0x25ce8f0: ldr      x8, [x8, #0xe38] ; = 0x0 (u64 @ 0x5525e38)
-  0x25ce8f4: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5525000)
-  0x25ce8f8: bl       #0x21849b0 ; -> ??? 0x21849b0
-  0x25ce8fc: mov      x1, xzr
-  0x25ce900: mov      x22, x0
-  0x25ce904: bl       #0x48e6ab0 ; -> System.Object$$.ctor
-  0x25ce908: mov      x21, x19
-  0x25ce90c: str      x22, [x21, #0x30]!
-  0x25ce910: mov      x0, x21
-  0x25ce914: mov      x1, x22
-  0x25ce918: bl       #0x21846c8 ; -> ??? 0x21846c8
-  0x25ce91c: mov      w8, #1
-  0x25ce920: strb     w8, [x20, #0x90]
-  0x25ce924: ldr      x9, [x21]
-  0x25ce928: cbz      x9, #0x25cebf0
-  0x25ce92c: mov      x0, xzr
-  0x25ce930: strb     w8, [x9, #0x10]
-  0x25ce934: bl       #0x268afb8 ; -> CUIManager$$get_Instance
-  0x25ce938: adrp     x22, #0x5513000
-  0x25ce93c: ldr      x22, [x22, #0xa30] ; = 0x0 (u64 @ 0x5513a30)
-  0x25ce940: mov      x20, x0
-  0x25ce944: ldr      x8, [x22] ; = 0x0 (u64 @ 0x5513000)
-  0x25ce948: ldr      w9, [x8, #0xe0]
-  0x25ce94c: cbnz     w9, #0x25ce95c
-  0x25ce950: mov      x0, x8
-  0x25ce954: bl       #0x218489c ; -> ??? 0x218489c
-  0x25ce958: ldr      x8, [x22] ; = 0x0 (u64 @ 0x5513000)
-  0x25ce95c: adrp     x9, #0x5512000
-  0x25ce960: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55250b8)
-  0x25ce964: ldr      x23, [x21]
-  0x25ce968: ldr      x9, [x9, #0x678] ; = 0x0 (u64 @ 0x5512678)
-  0x25ce96c: ldr      w21, [x8, #0x5a8]
-  0x25ce970: ldr      x0, [x9] ; = 0x0 (u64 @ 0x5512000)
-  0x25ce974: bl       #0x21849b0 ; -> ??? 0x21849b0
-  0x25ce978: adrp     x8, #0x5525000
-  0x25ce97c: ldr      x8, [x8, #0xe30] ; = 0x0 (u64 @ 0x5525e30)
-  0x25ce980: mov      x1, x23
-  0x25ce984: mov      x3, xzr
-  0x25ce988: mov      x22, x0
-  0x25ce98c: ldr      x2, [x8] ; = 0x0 (u64 @ 0x5525000)
-  0x25ce990: bl       #0x480fb58 ; -> System.Action$$.ctor
-  0x25ce994: cbz      x20, #0x25cebf0
-  0x25ce998: fmov     s0, #2.00000000
-  0x25ce99c: mov      x0, x20
-  0x25ce9a0: mov      w1, w21
-  0x25ce9a4: mov      x2, x22
-  0x25ce9a8: mov      x3, xzr
-  0x25ce9ac: bl       #0x2697f0c ; -> CUIManager$$SimpleMessage
-  0x25ce9b0: b        #0x25ce9bc
-  0x25ce9b4: mov      w8, #-1
-  0x25ce9b8: str      w8, [x19, #0x10]
-  0x25ce9bc: mov      x0, x19
-  0x25ce9c0: ldr      x8, [x0, #0x30]!
-  0x25ce9c4: cbz      x8, #0x25cebf0
-  0x25ce9c8: ldrb     w8, [x8, #0x10]
-  0x25ce9cc: cbz      w8, #0x25ceb18
-  0x25ce9d0: str      xzr, [x19, #0x18]!
-  0x25ce9d4: mov      x0, x19
-  0x25ce9d8: mov      x1, xzr
-  0x25ce9dc: bl       #0x21846c8 ; -> ??? 0x21846c8
-  0x25ce9e0: mov      w0, #1
-  0x25ce9e4: stur     w0, [x19, #-8]
-  0x25ce9e8: b        #0x25cebe0
-  0x25ce9ec: mov      w8, #-1
-  0x25ce9f0: str      w8, [x19, #0x10]
-  0x25ce9f4: adrp     x21, #0x5955000
-  0x25ce9f8: ldrb     w8, [x21, #0x8f3]
-  0x25ce9fc: cbnz     w8, #0x25cea14
-  0x25cea00: adrp     x0, #0x5511000
-  0x25cea04: ldr      x0, [x0, #0x818] ; = 0x0 (u64 @ 0x5511818)
-  0x25cea08: bl       #0x2184724 ; -> ??? 0x2184724
-  0x25cea0c: mov      w8, #1
-  0x25cea10: strb     w8, [x21, #0x8f3]
-  0x25cea14: adrp     x22, #0x5511000
-  0x25cea18: ldr      x22, [x22, #0x818] ; = 0x0 (u64 @ 0x5511818)
-  0x25cea1c: ldr      x8, [x22] ; = 0x0 (u64 @ 0x5511000)
-  0x25cea20: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55250b8)
-  0x25cea24: ldr      x8, [x8] ; = 0x0 (u64 @ 0x5525000)
-  0x25cea28: cbz      x8, #0x25cebf0
-  0x25cea2c: ldr      x0, [x8, #0x90] ; = 0x0 (u64 @ 0x5525090)
-  0x25cea30: add      x20, x19, #0x38
-  0x25cea34: mov      x1, x20
-  0x25cea38: mov      x2, xzr
-  0x25cea3c: bl       #0x24dc250 ; -> CStateBattle$$<PvpAttackTeamPenaltyDmg>g__PlayDamage|79_1
-  0x25cea40: ldrb     w8, [x21, #0x8f3]
-  0x25cea44: cbnz     w8, #0x25cea5c
-  0x25cea48: adrp     x0, #0x5511000
-  0x25cea4c: ldr      x0, [x0, #0x818] ; = 0x0 (u64 @ 0x5511818)
-  0x25cea50: bl       #0x2184724 ; -> ??? 0x2184724
-  0x25cea54: mov      w8, #1
-  0x25cea58: strb     w8, [x21, #0x8f3]
-  0x25cea5c: ldr      x8, [x22] ; = 0x0 (u64 @ 0x5511000)
-  0x25cea60: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55250b8)
-  0x25cea64: ldr      x8, [x8] ; = 0x0 (u64 @ 0x5525000)
-  0x25cea68: cbz      x8, #0x25cebf0
-  0x25cea6c: ldr      x0, [x8, #0x98] ; = 0x0 (u64 @ 0x5525098)
-  0x25cea70: mov      x1, x20
-  0x25cea74: mov      x2, xzr
-  0x25cea78: bl       #0x24dc250 ; -> CStateBattle$$<PvpAttackTeamPenaltyDmg>g__PlayDamage|79_1
-  0x25cea7c: adrp     x8, #0x5511000
-  0x25cea80: ldr      x8, [x8, #0x8f8] ; = 0x0 (u64 @ 0x55118f8)
-  0x25cea84: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5511000)
-  0x25cea88: bl       #0x21849b0 ; -> ??? 0x21849b0
-  0x25cea8c: fmov     s0, #2.00000000
-  0x25cea90: mov      x1, xzr
-  0x25cea94: mov      x20, x0
-  0x25cea98: bl       #0x4f87b84 ; -> UnityEngine.WaitForSeconds$$.ctor
-  0x25cea9c: str      x20, [x19, #0x18]!
-  0x25ceaa0: mov      x0, x19
-  0x25ceaa4: mov      x1, x20
-  0x25ceaa8: bl       #0x21846c8 ; -> ??? 0x21846c8
-  0x25ceaac: mov      w8, #3
-  0x25ceab0: b        #0x25cebd8
-  0x25ceab4: mov      w8, #-1
-  0x25ceab8: str      w8, [x19, #0x10]
-  0x25ceabc: adrp     x19, #0x5955000
-  0x25ceac0: ldrb     w8, [x19, #0x8f3]
-  0x25ceac4: cbnz     w8, #0x25ceadc
-  0x25ceac8: adrp     x0, #0x5511000
-  0x25ceacc: ldr      x0, [x0, #0x818] ; = 0x0 (u64 @ 0x5511818)
-  0x25cead0: bl       #0x2184724 ; -> ??? 0x2184724
-  0x25cead4: mov      w8, #1
-  0x25cead8: strb     w8, [x19, #0x8f3]
-  0x25ceadc: adrp     x8, #0x5511000
-  0x25ceae0: ldr      x8, [x8, #0x818] ; = 0x0 (u64 @ 0x5511818)
-  0x25ceae4: ldr      x8, [x8] ; = 0x0 (u64 @ 0x5511000)
-  0x25ceae8: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55110b8)
-  0x25ceaec: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5511000)
-  0x25ceaf0: cbz      x0, #0x25cebf0
-  0x25ceaf4: mov      x1, xzr
-  0x25ceaf8: bl       #0x255a430 ; -> CDungeonScene$$UpdatePvpTurnPenalty
-  0x25ceafc: cbz      x20, #0x25cebf0
-  0x25ceb00: mov      w1, #7
-  0x25ceb04: mov      x0, x20
-  0x25ceb08: mov      x2, xzr
-  0x25ceb0c: bl       #0x24ce038 ; -> CStateBattle$$ChangeSubState
-  0x25ceb10: mov      w0, wzr
-  0x25ceb14: b        #0x25cebe0
-  0x25ceb18: mov      x1, xzr
-  0x25ceb1c: str      xzr, [x0]
-  0x25ceb20: bl       #0x21846c8 ; -> ??? 0x21846c8
-  0x25ceb24: adrp     x20, #0x5955000
-  0x25ceb28: ldrb     w8, [x20, #0x8f3]
-  0x25ceb2c: cbnz     w8, #0x25ceb44
-  0x25ceb30: adrp     x0, #0x5511000
-  0x25ceb34: ldr      x0, [x0, #0x818] ; = 0x0 (u64 @ 0x5511818)
-  0x25ceb38: bl       #0x2184724 ; -> ??? 0x2184724
-  0x25ceb3c: mov      w8, #1
-  0x25ceb40: strb     w8, [x20, #0x8f3]
-  0x25ceb44: adrp     x21, #0x5511000
-  0x25ceb48: ldr      x21, [x21, #0x818] ; = 0x0 (u64 @ 0x5511818)
-  0x25ceb4c: ldr      x8, [x21] ; = 0x0 (u64 @ 0x5511000)
-  0x25ceb50: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55110b8)
-  0x25ceb54: ldr      x8, [x8] ; = 0x0 (u64 @ 0x5511000)
-  0x25ceb58: cbz      x8, #0x25cebf0
-  0x25ceb5c: ldr      x0, [x8, #0x90] ; = 0x0 (u64 @ 0x5511090)
-  0x25ceb60: mov      x1, xzr
-  0x25ceb64: bl       #0x24dc06c ; -> CStateBattle$$<PvpAttackTeamPenaltyDmg>g__StartEffect|79_0
-  0x25ceb68: ldrb     w8, [x20, #0x8f3]
-  0x25ceb6c: cbnz     w8, #0x25ceb84
-  0x25ceb70: adrp     x0, #0x5511000
-  0x25ceb74: ldr      x0, [x0, #0x818] ; = 0x0 (u64 @ 0x5511818)
-  0x25ceb78: bl       #0x2184724 ; -> ??? 0x2184724
-  0x25ceb7c: mov      w8, #1
-  0x25ceb80: strb     w8, [x20, #0x8f3]
-  0x25ceb84: ldr      x8, [x21] ; = 0x0 (u64 @ 0x5511000)
-  0x25ceb88: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55110b8)
-  0x25ceb8c: ldr      x8, [x8] ; = 0x0 (u64 @ 0x5511000)
-  0x25ceb90: cbz      x8, #0x25cebf0
-  0x25ceb94: ldr      x0, [x8, #0x98] ; = 0x0 (u64 @ 0x5511098)
-  0x25ceb98: mov      x1, xzr
-  0x25ceb9c: bl       #0x24dc06c ; -> CStateBattle$$<PvpAttackTeamPenaltyDmg>g__StartEffect|79_0
-  0x25ceba0: adrp     x8, #0x5511000
-  0x25ceba4: ldr      x8, [x8, #0x8f8] ; = 0x0 (u64 @ 0x55118f8)
-  0x25ceba8: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5511000)
-  0x25cebac: bl       #0x21849b0 ; -> ??? 0x21849b0
-  0x25cebb0: adrp     x8, #0x1056000
-  0x25cebb4: ldr      s0, [x8, #0x654] ; = 0.20000000298023224 (f32 @ 0x1056654)
-  0x25cebb8: mov      x1, xzr
-  0x25cebbc: mov      x20, x0
-  0x25cebc0: bl       #0x4f87b84 ; -> UnityEngine.WaitForSeconds$$.ctor
-  0x25cebc4: str      x20, [x19, #0x18]!
-  0x25cebc8: mov      x0, x19
-  0x25cebcc: mov      x1, x20
-  0x25cebd0: bl       #0x21846c8 ; -> ??? 0x21846c8
-  0x25cebd4: mov      w8, #2
-  0x25cebd8: stur     w8, [x19, #-8]
-  0x25cebdc: mov      w0, #1
-  0x25cebe0: ldp      x20, x19, [sp, #0x20]
-  0x25cebe4: ldp      x22, x21, [sp, #0x10]
-  0x25cebe8: ldp      x30, x23, [sp], #0x30
-  0x25cebec: ret      
-  0x25cebf0: bl       #0x21849c0 ; -> ??? 0x21849c0
+; jeu 1.4.14 — régénéré par datagen/extract/disasm.py
+; ===== CStateBattle_PvpAttackTeamPenaltyDmg_MoveNext @ 0x2609f5c..0x260a308 (taille 940 octets) =====
+  0x2609f5c: stp      x30, x23, [sp, #-0x30]!
+  0x2609f60: stp      x22, x21, [sp, #0x10]
+  0x2609f64: stp      x20, x19, [sp, #0x20]
+  0x2609f68: adrp     x20, #0x59d6000
+  0x2609f6c: ldrb     w8, [x20, #0x97a]
+  0x2609f70: mov      x19, x0
+  0x2609f74: tbnz     w8, #0, #0x2609fbc
+  0x2609f78: adrp     x0, #0x558b000
+  0x2609f7c: ldr      x0, [x0, #0x488] ; = 0x0 (u64 @ 0x558b488)
+  0x2609f80: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x2609f84: adrp     x0, #0x558b000
+  0x2609f88: ldr      x0, [x0, #0xca8] ; = 0x0 (u64 @ 0x558bca8)
+  0x2609f8c: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x2609f90: adrp     x0, #0x559f000
+  0x2609f94: ldr      x0, [x0, #0xed8] ; = 0x0 (u64 @ 0x559fed8)
+  0x2609f98: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x2609f9c: adrp     x0, #0x559f000
+  0x2609fa0: ldr      x0, [x0, #0xee0] ; = 0x0 (u64 @ 0x559fee0)
+  0x2609fa4: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x2609fa8: adrp     x0, #0x558a000
+  0x2609fac: ldr      x0, [x0, #0x328] ; = 0x0 (u64 @ 0x558a328)
+  0x2609fb0: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x2609fb4: mov      w8, #1
+  0x2609fb8: strb     w8, [x20, #0x97a]
+  0x2609fbc: ldr      w8, [x19, #0x10]
+  0x2609fc0: cmp      w8, #3
+  0x2609fc4: b.hi     #0x260a224
+  0x2609fc8: ldr      x20, [x19, #0x28]
+  0x2609fcc: adrp     x9, #0x106e000
+  0x2609fd0: add      x9, x9, #0x37c
+  0x2609fd4: adr      x10, #0x2609fe4
+  0x2609fd8: ldrb     w11, [x9, x8]
+  0x2609fdc: add      x10, x10, x11, lsl #2
+  0x2609fe0: br       x10
+  0x2609fe4: ldr      w8, [x19, #0x20]
+  0x2609fe8: mov      w9, #-1
+  0x2609fec: str      w9, [x19, #0x10]
+  0x2609ff0: str      w8, [x19, #0x38]
+  0x2609ff4: cbz      x20, #0x260a304
+  0x2609ff8: ldrb     w8, [x20, #0x98]
+  0x2609ffc: cbnz     w8, #0x260a238
+  0x260a000: adrp     x8, #0x559f000
+  0x260a004: ldr      x8, [x8, #0xee0] ; = 0x0 (u64 @ 0x559fee0)
+  0x260a008: ldr      x0, [x8] ; = 0x0 (u64 @ 0x559f000)
+  0x260a00c: bl       #0x21afc08 ; -> ??? 0x21afc08
+  0x260a010: mov      x1, xzr
+  0x260a014: mov      x22, x0
+  0x260a018: bl       #0x49475a0 ; -> System.Object$$.ctor
+  0x260a01c: mov      x21, x19
+  0x260a020: str      x22, [x21, #0x30]!
+  0x260a024: mov      x0, x21
+  0x260a028: mov      x1, x22
+  0x260a02c: bl       #0x21af920 ; -> ??? 0x21af920
+  0x260a030: mov      w8, #1
+  0x260a034: strb     w8, [x20, #0x98]
+  0x260a038: ldr      x9, [x21]
+  0x260a03c: cbz      x9, #0x260a304
+  0x260a040: mov      x0, xzr
+  0x260a044: strb     w8, [x9, #0x10]
+  0x260a048: bl       #0x26cf64c ; -> CUIManager$$get_Instance
+  0x260a04c: adrp     x22, #0x558b000
+  0x260a050: ldr      x22, [x22, #0xca8] ; = 0x0 (u64 @ 0x558bca8)
+  0x260a054: mov      x20, x0
+  0x260a058: ldr      x8, [x22] ; = 0x0 (u64 @ 0x558b000)
+  0x260a05c: ldr      w9, [x8, #0xe0]
+  0x260a060: cbnz     w9, #0x260a070
+  0x260a064: mov      x0, x8
+  0x260a068: bl       #0x21afaf4 ; -> ??? 0x21afaf4
+  0x260a06c: ldr      x8, [x22] ; = 0x0 (u64 @ 0x558b000)
+  0x260a070: adrp     x9, #0x558b000
+  0x260a074: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x559f0b8)
+  0x260a078: ldr      x23, [x21]
+  0x260a07c: ldr      x9, [x9, #0x488] ; = 0x0 (u64 @ 0x558b488)
+  0x260a080: ldr      w21, [x8, #0x5ac]
+  0x260a084: ldr      x0, [x9] ; = 0x0 (u64 @ 0x558b000)
+  0x260a088: bl       #0x21afc08 ; -> ??? 0x21afc08
+  0x260a08c: adrp     x8, #0x559f000
+  0x260a090: ldr      x8, [x8, #0xed8] ; = 0x0 (u64 @ 0x559fed8)
+  0x260a094: mov      x1, x23
+  0x260a098: mov      x3, xzr
+  0x260a09c: mov      x22, x0
+  0x260a0a0: ldr      x2, [x8] ; = 0x0 (u64 @ 0x559f000)
+  0x260a0a4: bl       #0x4870504 ; -> System.Action$$.ctor
+  0x260a0a8: cbz      x20, #0x260a304
+  0x260a0ac: fmov     s0, #2.00000000
+  0x260a0b0: mov      x0, x20
+  0x260a0b4: mov      w1, w21
+  0x260a0b8: mov      x2, x22
+  0x260a0bc: mov      x3, xzr
+  0x260a0c0: bl       #0x26dc6cc ; -> CUIManager$$SimpleMessage
+  0x260a0c4: b        #0x260a0d0
+  0x260a0c8: mov      w8, #-1
+  0x260a0cc: str      w8, [x19, #0x10]
+  0x260a0d0: mov      x0, x19
+  0x260a0d4: ldr      x8, [x0, #0x30]!
+  0x260a0d8: cbz      x8, #0x260a304
+  0x260a0dc: ldrb     w8, [x8, #0x10]
+  0x260a0e0: cbz      w8, #0x260a22c
+  0x260a0e4: str      xzr, [x19, #0x18]!
+  0x260a0e8: mov      x0, x19
+  0x260a0ec: mov      x1, xzr
+  0x260a0f0: bl       #0x21af920 ; -> ??? 0x21af920
+  0x260a0f4: mov      w0, #1
+  0x260a0f8: stur     w0, [x19, #-8]
+  0x260a0fc: b        #0x260a2f4
+  0x260a100: mov      w8, #-1
+  0x260a104: str      w8, [x19, #0x10]
+  0x260a108: adrp     x21, #0x59d4000
+  0x260a10c: ldrb     w8, [x21, #0xfc3]
+  0x260a110: cbnz     w8, #0x260a128
+  0x260a114: adrp     x0, #0x558a000
+  0x260a118: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
+  0x260a11c: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x260a120: mov      w8, #1
+  0x260a124: strb     w8, [x21, #0xfc3]
+  0x260a128: adrp     x22, #0x558a000
+  0x260a12c: ldr      x22, [x22, #0x248] ; = 0x0 (u64 @ 0x558a248)
+  0x260a130: ldr      x8, [x22] ; = 0x0 (u64 @ 0x558a000)
+  0x260a134: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x559f0b8)
+  0x260a138: ldr      x8, [x8] ; = 0x0 (u64 @ 0x559f000)
+  0x260a13c: cbz      x8, #0x260a304
+  0x260a140: ldr      x0, [x8, #0x90] ; = 0x0 (u64 @ 0x559f090)
+  0x260a144: add      x20, x19, #0x38
+  0x260a148: mov      x1, x20
+  0x260a14c: mov      x2, xzr
+  0x260a150: bl       #0x251e4e0 ; -> CStateBattle$$<PvpAttackTeamPenaltyDmg>g__PlayDamage|81_1
+  0x260a154: ldrb     w8, [x21, #0xfc3]
+  0x260a158: cbnz     w8, #0x260a170
+  0x260a15c: adrp     x0, #0x558a000
+  0x260a160: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
+  0x260a164: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x260a168: mov      w8, #1
+  0x260a16c: strb     w8, [x21, #0xfc3]
+  0x260a170: ldr      x8, [x22] ; = 0x0 (u64 @ 0x558a000)
+  0x260a174: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x559f0b8)
+  0x260a178: ldr      x8, [x8] ; = 0x0 (u64 @ 0x559f000)
+  0x260a17c: cbz      x8, #0x260a304
+  0x260a180: ldr      x0, [x8, #0x98] ; = 0x0 (u64 @ 0x559f098)
+  0x260a184: mov      x1, x20
+  0x260a188: mov      x2, xzr
+  0x260a18c: bl       #0x251e4e0 ; -> CStateBattle$$<PvpAttackTeamPenaltyDmg>g__PlayDamage|81_1
+  0x260a190: adrp     x8, #0x558a000
+  0x260a194: ldr      x8, [x8, #0x328] ; = 0x0 (u64 @ 0x558a328)
+  0x260a198: ldr      x0, [x8] ; = 0x0 (u64 @ 0x558a000)
+  0x260a19c: bl       #0x21afc08 ; -> ??? 0x21afc08
+  0x260a1a0: fmov     s0, #2.00000000
+  0x260a1a4: mov      x1, xzr
+  0x260a1a8: mov      x20, x0
+  0x260a1ac: bl       #0x503d184 ; -> UnityEngine.WaitForSeconds$$.ctor
+  0x260a1b0: str      x20, [x19, #0x18]!
+  0x260a1b4: mov      x0, x19
+  0x260a1b8: mov      x1, x20
+  0x260a1bc: bl       #0x21af920 ; -> ??? 0x21af920
+  0x260a1c0: mov      w8, #3
+  0x260a1c4: b        #0x260a2ec
+  0x260a1c8: mov      w8, #-1
+  0x260a1cc: str      w8, [x19, #0x10]
+  0x260a1d0: adrp     x19, #0x59d4000
+  0x260a1d4: ldrb     w8, [x19, #0xfc3]
+  0x260a1d8: cbnz     w8, #0x260a1f0
+  0x260a1dc: adrp     x0, #0x558a000
+  0x260a1e0: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
+  0x260a1e4: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x260a1e8: mov      w8, #1
+  0x260a1ec: strb     w8, [x19, #0xfc3]
+  0x260a1f0: adrp     x8, #0x558a000
+  0x260a1f4: ldr      x8, [x8, #0x248] ; = 0x0 (u64 @ 0x558a248)
+  0x260a1f8: ldr      x8, [x8] ; = 0x0 (u64 @ 0x558a000)
+  0x260a1fc: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x558a0b8)
+  0x260a200: ldr      x0, [x8] ; = 0x0 (u64 @ 0x558a000)
+  0x260a204: cbz      x0, #0x260a304
+  0x260a208: mov      x1, xzr
+  0x260a20c: bl       #0x259f724 ; -> CDungeonScene$$UpdatePvpTurnPenalty
+  0x260a210: cbz      x20, #0x260a304
+  0x260a214: mov      w1, #7
+  0x260a218: mov      x0, x20
+  0x260a21c: mov      x2, xzr
+  0x260a220: bl       #0x250b2cc ; -> CStateBattle$$ChangeSubState
+  0x260a224: mov      w0, wzr
+  0x260a228: b        #0x260a2f4
+  0x260a22c: mov      x1, xzr
+  0x260a230: str      xzr, [x0]
+  0x260a234: bl       #0x21af920 ; -> ??? 0x21af920
+  0x260a238: adrp     x20, #0x59d4000
+  0x260a23c: ldrb     w8, [x20, #0xfc3]
+  0x260a240: cbnz     w8, #0x260a258
+  0x260a244: adrp     x0, #0x558a000
+  0x260a248: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
+  0x260a24c: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x260a250: mov      w8, #1
+  0x260a254: strb     w8, [x20, #0xfc3]
+  0x260a258: adrp     x21, #0x558a000
+  0x260a25c: ldr      x21, [x21, #0x248] ; = 0x0 (u64 @ 0x558a248)
+  0x260a260: ldr      x8, [x21] ; = 0x0 (u64 @ 0x558a000)
+  0x260a264: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x558a0b8)
+  0x260a268: ldr      x8, [x8] ; = 0x0 (u64 @ 0x558a000)
+  0x260a26c: cbz      x8, #0x260a304
+  0x260a270: ldr      x0, [x8, #0x90] ; = 0x0 (u64 @ 0x558a090)
+  0x260a274: mov      x1, xzr
+  0x260a278: bl       #0x251e2fc ; -> CStateBattle$$<PvpAttackTeamPenaltyDmg>g__StartEffect|81_0
+  0x260a27c: ldrb     w8, [x20, #0xfc3]
+  0x260a280: cbnz     w8, #0x260a298
+  0x260a284: adrp     x0, #0x558a000
+  0x260a288: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
+  0x260a28c: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x260a290: mov      w8, #1
+  0x260a294: strb     w8, [x20, #0xfc3]
+  0x260a298: ldr      x8, [x21] ; = 0x0 (u64 @ 0x558a000)
+  0x260a29c: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x558a0b8)
+  0x260a2a0: ldr      x8, [x8] ; = 0x0 (u64 @ 0x558a000)
+  0x260a2a4: cbz      x8, #0x260a304
+  0x260a2a8: ldr      x0, [x8, #0x98] ; = 0x0 (u64 @ 0x558a098)
+  0x260a2ac: mov      x1, xzr
+  0x260a2b0: bl       #0x251e2fc ; -> CStateBattle$$<PvpAttackTeamPenaltyDmg>g__StartEffect|81_0
+  0x260a2b4: adrp     x8, #0x558a000
+  0x260a2b8: ldr      x8, [x8, #0x328] ; = 0x0 (u64 @ 0x558a328)
+  0x260a2bc: ldr      x0, [x8] ; = 0x0 (u64 @ 0x558a000)
+  0x260a2c0: bl       #0x21afc08 ; -> ??? 0x21afc08
+  0x260a2c4: adrp     x8, #0x106d000
+  0x260a2c8: ldr      s0, [x8, #0x848] ; = 0.20000000298023224 (f32 @ 0x106d848)
+  0x260a2cc: mov      x1, xzr
+  0x260a2d0: mov      x20, x0
+  0x260a2d4: bl       #0x503d184 ; -> UnityEngine.WaitForSeconds$$.ctor
+  0x260a2d8: str      x20, [x19, #0x18]!
+  0x260a2dc: mov      x0, x19
+  0x260a2e0: mov      x1, x20
+  0x260a2e4: bl       #0x21af920 ; -> ??? 0x21af920
+  0x260a2e8: mov      w8, #2
+  0x260a2ec: stur     w8, [x19, #-8]
+  0x260a2f0: mov      w0, #1
+  0x260a2f4: ldp      x20, x19, [sp, #0x20]
+  0x260a2f8: ldp      x22, x21, [sp, #0x10]
+  0x260a2fc: ldp      x30, x23, [sp], #0x30
+  0x260a300: ret      
+  0x260a304: bl       #0x21afc18 ; -> ??? 0x21afc18

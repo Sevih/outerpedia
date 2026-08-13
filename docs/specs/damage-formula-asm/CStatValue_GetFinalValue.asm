@@ -1,106 +1,107 @@
-; ===== CStatValue_GetFinalValue @ 0x28d33b4..0x28d3558 (taille 420 octets) =====
-  0x28d33b4: str      x30, [sp, #-0x30]!
-  0x28d33b8: stp      x22, x21, [sp, #0x10]
-  0x28d33bc: stp      x20, x19, [sp, #0x20]
-  0x28d33c0: adrp     x20, #0x5958000
-  0x28d33c4: adrp     x22, #0x5511000
-  0x28d33c8: ldrb     w8, [x20, #0xbc3]
-  0x28d33cc: ldr      x22, [x22, #0xaf0] ; = 0x0 (u64 @ 0x5511af0)
-  0x28d33d0: mov      x19, x0
-  0x28d33d4: tbnz     w8, #0, #0x28d3404
-  0x28d33d8: adrp     x0, #0x5536000
-  0x28d33dc: ldr      x0, [x0, #0xec0] ; = 0x0 (u64 @ 0x5536ec0)
-  0x28d33e0: bl       #0x2184724 ; -> ??? 0x2184724
-  0x28d33e4: adrp     x0, #0x550f000
-  0x28d33e8: ldr      x0, [x0, #0x100] ; = 0x0 (u64 @ 0x550f100)
-  0x28d33ec: bl       #0x2184724 ; -> ??? 0x2184724
-  0x28d33f0: adrp     x0, #0x5511000
-  0x28d33f4: ldr      x0, [x0, #0xaf0] ; = 0x0 (u64 @ 0x5511af0)
-  0x28d33f8: bl       #0x2184724 ; -> ??? 0x2184724
-  0x28d33fc: mov      w8, #1
-  0x28d3400: strb     w8, [x20, #0xbc3]
-  0x28d3404: ldr      x0, [x22] ; = 0x0 (u64 @ 0x5511000)
-  0x28d3408: str      wzr, [sp, #0xc]
-  0x28d340c: ldur     x20, [x19, #0x74]
-  0x28d3410: ldr      w21, [x19, #0x7c]
-  0x28d3414: ldr      w8, [x0, #0xe0]
-  0x28d3418: cbnz     w8, #0x28d3420
-  0x28d341c: bl       #0x218489c ; -> ??? 0x218489c
-  0x28d3420: mov      x0, x20
-  0x28d3424: mov      x1, x21
-  0x28d3428: mov      x2, xzr
-  0x28d342c: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d3430: cmn      w0, #1
-  0x28d3434: b.eq     #0x28d3464
-  0x28d3438: ldr      x0, [x22] ; = 0x0 (u64 @ 0x5511000)
-  0x28d343c: ldur     x20, [x19, #0x74]
-  0x28d3440: ldr      w19, [x19, #0x7c]
-  0x28d3444: ldr      w8, [x0, #0xe0]
-  0x28d3448: cbnz     w8, #0x28d3450
-  0x28d344c: bl       #0x218489c ; -> ??? 0x218489c
-  0x28d3450: mov      x0, x20
-  0x28d3454: mov      x1, x19
-  0x28d3458: mov      x2, xzr
-  0x28d345c: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d3460: b        #0x28d3544
-  0x28d3464: ldrb     w8, [x19, #0xe0]
-  0x28d3468: cbz      w8, #0x28d3474
-  0x28d346c: mov      x0, x19
-  0x28d3470: bl       #0x28d2eac ; -> CStatValue$$SetFinalValue
-  0x28d3474: adrp     x21, #0x5955000
-  0x28d3478: ldrb     w8, [x21, #0x8f3]
-  0x28d347c: cbnz     w8, #0x28d3494
-  0x28d3480: adrp     x0, #0x5511000
-  0x28d3484: ldr      x0, [x0, #0x818] ; = 0x0 (u64 @ 0x5511818)
-  0x28d3488: bl       #0x2184724 ; -> ??? 0x2184724
-  0x28d348c: mov      w8, #1
-  0x28d3490: strb     w8, [x21, #0x8f3]
-  0x28d3494: adrp     x22, #0x5511000
-  0x28d3498: ldr      x22, [x22, #0x818] ; = 0x0 (u64 @ 0x5511818)
-  0x28d349c: adrp     x9, #0x550f000
-  0x28d34a0: ldr      x8, [x22] ; = 0x0 (u64 @ 0x5511000)
-  0x28d34a4: ldr      x9, [x9, #0x100] ; = 0x0 (u64 @ 0x550f100)
-  0x28d34a8: ldr      x8, [x8, #0xb8]
-  0x28d34ac: ldr      x0, [x9] ; = 0x0 (u64 @ 0x550f000)
-  0x28d34b0: ldr      x20, [x8]
-  0x28d34b4: ldr      w9, [x0, #0xe0]
-  0x28d34b8: cbnz     w9, #0x28d34c0
-  0x28d34bc: bl       #0x218489c ; -> ??? 0x218489c
-  0x28d34c0: mov      x0, x20
-  0x28d34c4: mov      x1, xzr
-  0x28d34c8: mov      x2, xzr
-  0x28d34cc: bl       #0x4f81aa0 ; -> UnityEngine.Object$$op_Inequality
-  0x28d34d0: tbz      w0, #0, #0x28d353c
-  0x28d34d4: ldrb     w8, [x21, #0x8f3]
-  0x28d34d8: cbnz     w8, #0x28d34f0
-  0x28d34dc: adrp     x0, #0x5511000
-  0x28d34e0: ldr      x0, [x0, #0x818] ; = 0x0 (u64 @ 0x5511818)
-  0x28d34e4: bl       #0x2184724 ; -> ??? 0x2184724
-  0x28d34e8: mov      w8, #1
-  0x28d34ec: strb     w8, [x21, #0x8f3]
-  0x28d34f0: ldr      x8, [x22] ; = 0x0 (u64 @ 0x5511000)
-  0x28d34f4: ldr      x8, [x8, #0xb8]
-  0x28d34f8: ldr      x8, [x8]
-  0x28d34fc: cbz      x8, #0x28d3554
-  0x28d3500: ldr      x0, [x8, #0x168]
-  0x28d3504: cbz      x0, #0x28d3554
-  0x28d3508: adrp     x8, #0x5536000
-  0x28d350c: ldr      w1, [x19, #0x10]
-  0x28d3510: ldr      x8, [x8, #0xec0] ; = 0x0 (u64 @ 0x5536ec0)
-  0x28d3514: add      x2, sp, #0xc
-  0x28d3518: ldr      x3, [x8] ; = 0x0 (u64 @ 0x5536000)
-  0x28d351c: bl       #0x3faa1d0 ; -> System.Collections.Generic.Dictionary<Int32Enum, int>$$TryGetValue
-  0x28d3520: tbz      w0, #0, #0x28d353c
-  0x28d3524: mov      x0, x19
-  0x28d3528: bl       #0x28d13f4 ; -> CStatValue$$get_m_nFinalValue
-  0x28d352c: ldr      w8, [sp, #0xc]
-  0x28d3530: cmp      w0, w8
-  0x28d3534: csel     w0, w0, w8, lt
-  0x28d3538: b        #0x28d3544
-  0x28d353c: mov      x0, x19
-  0x28d3540: bl       #0x28d13f4 ; -> CStatValue$$get_m_nFinalValue
-  0x28d3544: ldp      x20, x19, [sp, #0x20]
-  0x28d3548: ldp      x22, x21, [sp, #0x10]
-  0x28d354c: ldr      x30, [sp], #0x30
-  0x28d3550: ret      
-  0x28d3554: bl       #0x21849c0 ; -> ??? 0x21849c0
+; jeu 1.4.14 — régénéré par datagen/extract/disasm.py
+; ===== CStatValue_GetFinalValue @ 0x29fbd34..0x29fbed8 (taille 420 octets) =====
+  0x29fbd34: str      x30, [sp, #-0x30]!
+  0x29fbd38: stp      x22, x21, [sp, #0x10]
+  0x29fbd3c: stp      x20, x19, [sp, #0x20]
+  0x29fbd40: adrp     x20, #0x59d8000
+  0x29fbd44: adrp     x22, #0x558a000
+  0x29fbd48: ldrb     w8, [x20, #0x9ab]
+  0x29fbd4c: ldr      x22, [x22, #0x528] ; = 0x0 (u64 @ 0x558a528)
+  0x29fbd50: mov      x19, x0
+  0x29fbd54: tbnz     w8, #0, #0x29fbd84
+  0x29fbd58: adrp     x0, #0x55b6000
+  0x29fbd5c: ldr      x0, [x0, #0x968] ; = 0x0 (u64 @ 0x55b6968)
+  0x29fbd60: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x29fbd64: adrp     x0, #0x5587000
+  0x29fbd68: ldr      x0, [x0, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
+  0x29fbd6c: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x29fbd70: adrp     x0, #0x558a000
+  0x29fbd74: ldr      x0, [x0, #0x528] ; = 0x0 (u64 @ 0x558a528)
+  0x29fbd78: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x29fbd7c: mov      w8, #1
+  0x29fbd80: strb     w8, [x20, #0x9ab]
+  0x29fbd84: ldr      x0, [x22] ; = 0x0 (u64 @ 0x558a000)
+  0x29fbd88: str      wzr, [sp, #0xc]
+  0x29fbd8c: ldur     x20, [x19, #0x74]
+  0x29fbd90: ldr      w21, [x19, #0x7c]
+  0x29fbd94: ldr      w8, [x0, #0xe0]
+  0x29fbd98: cbnz     w8, #0x29fbda0
+  0x29fbd9c: bl       #0x21afaf4 ; -> ??? 0x21afaf4
+  0x29fbda0: mov      x0, x20
+  0x29fbda4: mov      x1, x21
+  0x29fbda8: mov      x2, xzr
+  0x29fbdac: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fbdb0: cmn      w0, #1
+  0x29fbdb4: b.eq     #0x29fbde4
+  0x29fbdb8: ldr      x0, [x22] ; = 0x0 (u64 @ 0x558a000)
+  0x29fbdbc: ldur     x20, [x19, #0x74]
+  0x29fbdc0: ldr      w19, [x19, #0x7c]
+  0x29fbdc4: ldr      w8, [x0, #0xe0]
+  0x29fbdc8: cbnz     w8, #0x29fbdd0
+  0x29fbdcc: bl       #0x21afaf4 ; -> ??? 0x21afaf4
+  0x29fbdd0: mov      x0, x20
+  0x29fbdd4: mov      x1, x19
+  0x29fbdd8: mov      x2, xzr
+  0x29fbddc: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fbde0: b        #0x29fbec4
+  0x29fbde4: ldrb     w8, [x19, #0xe0]
+  0x29fbde8: cbz      w8, #0x29fbdf4
+  0x29fbdec: mov      x0, x19
+  0x29fbdf0: bl       #0x29fb82c ; -> CStatValue$$SetFinalValue
+  0x29fbdf4: adrp     x21, #0x59d4000
+  0x29fbdf8: ldrb     w8, [x21, #0xfc3]
+  0x29fbdfc: cbnz     w8, #0x29fbe14
+  0x29fbe00: adrp     x0, #0x558a000
+  0x29fbe04: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
+  0x29fbe08: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x29fbe0c: mov      w8, #1
+  0x29fbe10: strb     w8, [x21, #0xfc3]
+  0x29fbe14: adrp     x22, #0x558a000
+  0x29fbe18: ldr      x22, [x22, #0x248] ; = 0x0 (u64 @ 0x558a248)
+  0x29fbe1c: adrp     x9, #0x5587000
+  0x29fbe20: ldr      x8, [x22] ; = 0x0 (u64 @ 0x558a000)
+  0x29fbe24: ldr      x9, [x9, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
+  0x29fbe28: ldr      x8, [x8, #0xb8]
+  0x29fbe2c: ldr      x0, [x9] ; = 0x0 (u64 @ 0x5587000)
+  0x29fbe30: ldr      x20, [x8]
+  0x29fbe34: ldr      w9, [x0, #0xe0]
+  0x29fbe38: cbnz     w9, #0x29fbe40
+  0x29fbe3c: bl       #0x21afaf4 ; -> ??? 0x21afaf4
+  0x29fbe40: mov      x0, x20
+  0x29fbe44: mov      x1, xzr
+  0x29fbe48: mov      x2, xzr
+  0x29fbe4c: bl       #0x5037138 ; -> UnityEngine.Object$$op_Inequality
+  0x29fbe50: tbz      w0, #0, #0x29fbebc
+  0x29fbe54: ldrb     w8, [x21, #0xfc3]
+  0x29fbe58: cbnz     w8, #0x29fbe70
+  0x29fbe5c: adrp     x0, #0x558a000
+  0x29fbe60: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
+  0x29fbe64: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x29fbe68: mov      w8, #1
+  0x29fbe6c: strb     w8, [x21, #0xfc3]
+  0x29fbe70: ldr      x8, [x22] ; = 0x0 (u64 @ 0x558a000)
+  0x29fbe74: ldr      x8, [x8, #0xb8]
+  0x29fbe78: ldr      x8, [x8]
+  0x29fbe7c: cbz      x8, #0x29fbed4
+  0x29fbe80: ldr      x0, [x8, #0x168]
+  0x29fbe84: cbz      x0, #0x29fbed4
+  0x29fbe88: adrp     x8, #0x55b6000
+  0x29fbe8c: ldr      w1, [x19, #0x10]
+  0x29fbe90: ldr      x8, [x8, #0x968] ; = 0x0 (u64 @ 0x55b6968)
+  0x29fbe94: add      x2, sp, #0xc
+  0x29fbe98: ldr      x3, [x8] ; = 0x0 (u64 @ 0x55b6000)
+  0x29fbe9c: bl       #0x4012910 ; -> System.Collections.Generic.Dictionary<Int32Enum, int>$$TryGetValue
+  0x29fbea0: tbz      w0, #0, #0x29fbebc
+  0x29fbea4: mov      x0, x19
+  0x29fbea8: bl       #0x29f9bc0 ; -> CStatValue$$get_m_nFinalValue
+  0x29fbeac: ldr      w8, [sp, #0xc]
+  0x29fbeb0: cmp      w0, w8
+  0x29fbeb4: csel     w0, w0, w8, lt
+  0x29fbeb8: b        #0x29fbec4
+  0x29fbebc: mov      x0, x19
+  0x29fbec0: bl       #0x29f9bc0 ; -> CStatValue$$get_m_nFinalValue
+  0x29fbec4: ldp      x20, x19, [sp, #0x20]
+  0x29fbec8: ldp      x22, x21, [sp, #0x10]
+  0x29fbecc: ldr      x30, [sp], #0x30
+  0x29fbed0: ret      
+  0x29fbed4: bl       #0x21afc18 ; -> ??? 0x21afc18

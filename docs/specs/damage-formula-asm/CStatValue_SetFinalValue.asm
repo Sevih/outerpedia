@@ -1,323 +1,324 @@
-; ===== CStatValue_SetFinalValue @ 0x28d2eac..0x28d33b4 (taille 1288 octets) =====
-  0x28d2eac: sub      sp, sp, #0xa0
-  0x28d2eb0: stp      x29, x30, [sp, #0x40]
-  0x28d2eb4: stp      x28, x27, [sp, #0x50]
-  0x28d2eb8: stp      x26, x25, [sp, #0x60]
-  0x28d2ebc: stp      x24, x23, [sp, #0x70]
-  0x28d2ec0: stp      x22, x21, [sp, #0x80]
-  0x28d2ec4: stp      x20, x19, [sp, #0x90]
-  0x28d2ec8: adrp     x20, #0x5958000
-  0x28d2ecc: ldrb     w8, [x20, #0xbc2]
-  0x28d2ed0: mov      x19, x0
-  0x28d2ed4: tbnz     w8, #0, #0x28d2ef8
-  0x28d2ed8: adrp     x0, #0x5511000
-  0x28d2edc: ldr      x0, [x0, #0xca0] ; = 0x0 (u64 @ 0x5511ca0)
-  0x28d2ee0: bl       #0x2184724 ; -> ??? 0x2184724
-  0x28d2ee4: adrp     x0, #0x5511000
-  0x28d2ee8: ldr      x0, [x0, #0xaf0] ; = 0x0 (u64 @ 0x5511af0)
-  0x28d2eec: bl       #0x2184724 ; -> ??? 0x2184724
-  0x28d2ef0: mov      w8, #1
-  0x28d2ef4: strb     w8, [x20, #0xbc2]
-  0x28d2ef8: ldr      w8, [x19, #0x10]
-  0x28d2efc: adrp     x20, #0x5511000
-  0x28d2f00: ldr      x20, [x20, #0xaf0] ; = 0x0 (u64 @ 0x5511af0)
-  0x28d2f04: cmp      w8, #7
-  0x28d2f08: b.ne     #0x28d30f4
-  0x28d2f0c: ldr      x0, [x19, #0xe8]
-  0x28d2f10: cbz      x0, #0x28d33b0
-  0x28d2f14: mov      w1, #1
-  0x28d2f18: mov      x2, xzr
-  0x28d2f1c: bl       #0x27eb080 ; -> CCharacterData$$GetCriticalStatBuffValues
-  0x28d2f20: ldr      x8, [x20] ; = 0x0 (u64 @ 0x5511000)
-  0x28d2f24: ldur     x21, [x19, #0x14]
-  0x28d2f28: ldr      w22, [x19, #0x1c]
-  0x28d2f2c: mov      x20, x0
-  0x28d2f30: ldr      w9, [x8, #0xe0]
-  0x28d2f34: lsr      x10, x0, #0x20
-  0x28d2f38: str      x10, [sp, #0x38]
-  0x28d2f3c: cbnz     w9, #0x28d2f48
-  0x28d2f40: mov      x0, x8
-  0x28d2f44: bl       #0x218489c ; -> ??? 0x218489c
-  0x28d2f48: mov      x0, x21
-  0x28d2f4c: mov      x1, x22
-  0x28d2f50: mov      x2, xzr
-  0x28d2f54: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d2f58: ldr      x8, [x19, #0x20]
-  0x28d2f5c: ldr      w1, [x19, #0x28]
-  0x28d2f60: str      w0, [sp, #0x34]
-  0x28d2f64: mov      x2, xzr
-  0x28d2f68: mov      x0, x8
-  0x28d2f6c: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d2f70: ldur     x8, [x19, #0x2c]
-  0x28d2f74: ldr      w1, [x19, #0x34]
-  0x28d2f78: mov      w22, w0
-  0x28d2f7c: mov      x2, xzr
-  0x28d2f80: mov      x0, x8
-  0x28d2f84: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d2f88: mov      w23, w0
-  0x28d2f8c: mov      x0, x19
-  0x28d2f90: bl       #0x28d124c ; -> CStatValue$$get_m_nAwakeningValue
-  0x28d2f94: ldur     x8, [x19, #0x8c]
-  0x28d2f98: ldr      w1, [x19, #0x94]
-  0x28d2f9c: mov      w24, w0
-  0x28d2fa0: mov      x2, xzr
-  0x28d2fa4: mov      x0, x8
-  0x28d2fa8: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d2fac: mov      w25, w0
-  0x28d2fb0: mov      x0, x19
-  0x28d2fb4: bl       #0x28d1320 ; -> CStatValue$$get_m_nMonadEnchantValue
-  0x28d2fb8: ldr      x8, [x19, #0x98]
-  0x28d2fbc: ldr      w1, [x19, #0xa0]
-  0x28d2fc0: mov      w26, w0
-  0x28d2fc4: mov      x2, xzr
-  0x28d2fc8: mov      x0, x8
-  0x28d2fcc: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d2fd0: ldr      x8, [x19, #0x38]
-  0x28d2fd4: ldr      w1, [x19, #0x40]
-  0x28d2fd8: mov      w27, w0
-  0x28d2fdc: mov      x2, xzr
-  0x28d2fe0: mov      x0, x8
-  0x28d2fe4: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d2fe8: ldur     x8, [x19, #0x44]
-  0x28d2fec: ldr      w1, [x19, #0x4c]
-  0x28d2ff0: mov      w28, w0
-  0x28d2ff4: mov      x2, xzr
-  0x28d2ff8: mov      x0, x8
-  0x28d2ffc: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d3000: mov      w29, w0
-  0x28d3004: mov      x0, x19
-  0x28d3008: bl       #0x28d10a4 ; -> CStatValue$$get_m_nItemOptionValue
-  0x28d300c: ldr      x8, [x19, #0x50]
-  0x28d3010: ldr      w1, [x19, #0x58]
-  0x28d3014: mov      w21, w0
-  0x28d3018: mov      x2, xzr
-  0x28d301c: mov      x0, x8
-  0x28d3020: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d3024: ldr      x8, [sp, #0x38]
-  0x28d3028: str      w0, [sp, #0x10]
-  0x28d302c: ldr      w0, [sp, #0x34]
-  0x28d3030: mov      w1, w22
-  0x28d3034: mov      w2, w23
-  0x28d3038: mov      w3, w24
-  0x28d303c: mov      w4, w25
-  0x28d3040: mov      w5, w26
-  0x28d3044: mov      w6, w27
-  0x28d3048: mov      w7, w28
-  0x28d304c: str      xzr, [sp, #0x28]
-  0x28d3050: str      w8, [sp, #0x20]
-  0x28d3054: str      w20, [sp, #0x18]
-  0x28d3058: str      w21, [sp, #8]
-  0x28d305c: str      w29, [sp]
-  0x28d3060: bl       #0x2c59e48 ; -> CFormula$$CalcFinalStat
-  0x28d3064: mov      w8, w0
-  0x28d3068: ldr      x0, [x19, #0xe8]
-  0x28d306c: cmp      w8, #0x3e8
-  0x28d3070: mov      w9, #0x3e8
-  0x28d3074: csel     w8, w8, w9, lt
-  0x28d3078: cbz      x0, #0x28d33b0
-  0x28d307c: mov      w1, wzr
-  0x28d3080: mov      x2, xzr
-  0x28d3084: bic      w21, w8, w8, asr #31
-  0x28d3088: bl       #0x27eb080 ; -> CCharacterData$$GetCriticalStatBuffValues
-  0x28d308c: adrp     x8, #0x5511000
-  0x28d3090: ldr      x8, [x8, #0xca0] ; = 0x0 (u64 @ 0x5511ca0)
-  0x28d3094: adrp     x22, #0x5511000
-  0x28d3098: mov      x20, x0
-  0x28d309c: ldr      x8, [x8] ; = 0x0 (u64 @ 0x5511000)
-  0x28d30a0: ldr      w9, [x8, #0xe0]
-  0x28d30a4: ldr      x22, [x22, #0xaf0] ; = 0x0 (u64 @ 0x5511af0)
-  0x28d30a8: cbnz     w9, #0x28d30b4
-  0x28d30ac: mov      x0, x8
-  0x28d30b0: bl       #0x218489c ; -> ??? 0x218489c
-  0x28d30b4: mov      x9, #0x3e800000000
-  0x28d30b8: mov      x10, #0xf7cf
-  0x28d30bc: add      w8, w21, w20
-  0x28d30c0: movk     x10, #0xe353, lsl #16
-  0x28d30c4: add      x9, x20, x9
-  0x28d30c8: movk     x10, #0x9ba5, lsl #32
-  0x28d30cc: sxtw     x8, w8
-  0x28d30d0: asr      x9, x9, #0x20
-  0x28d30d4: movk     x10, #0x20c4, lsl #48
-  0x28d30d8: mul      x8, x9, x8
-  0x28d30dc: smulh    x8, x8, x10
-  0x28d30e0: lsr      x9, x8, #0x3f
-  0x28d30e4: lsr      x8, x8, #7
-  0x28d30e8: add      w8, w8, w9
-  0x28d30ec: bic      w1, w8, w8, asr #31
-  0x28d30f0: b        #0x28d3250
-  0x28d30f4: ldr      x0, [x20] ; = 0x0 (u64 @ 0x5511000)
-  0x28d30f8: ldur     x20, [x19, #0x14]
-  0x28d30fc: ldr      w21, [x19, #0x1c]
-  0x28d3100: ldr      w8, [x0, #0xe0]
-  0x28d3104: cbnz     w8, #0x28d310c
-  0x28d3108: bl       #0x218489c ; -> ??? 0x218489c
-  0x28d310c: mov      x0, x20
-  0x28d3110: mov      x1, x21
-  0x28d3114: mov      x2, xzr
-  0x28d3118: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d311c: ldr      x8, [x19, #0x20]
-  0x28d3120: ldr      w1, [x19, #0x28]
-  0x28d3124: str      w0, [sp, #0x38]
-  0x28d3128: mov      x2, xzr
-  0x28d312c: mov      x0, x8
-  0x28d3130: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d3134: ldur     x8, [x19, #0x2c]
-  0x28d3138: ldr      w1, [x19, #0x34]
-  0x28d313c: str      w0, [sp, #0x34]
-  0x28d3140: mov      x2, xzr
-  0x28d3144: mov      x0, x8
-  0x28d3148: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d314c: mov      w22, w0
-  0x28d3150: mov      x0, x19
-  0x28d3154: bl       #0x28d124c ; -> CStatValue$$get_m_nAwakeningValue
-  0x28d3158: ldur     x8, [x19, #0x8c]
-  0x28d315c: ldr      w1, [x19, #0x94]
-  0x28d3160: mov      w23, w0
-  0x28d3164: mov      x2, xzr
-  0x28d3168: mov      x0, x8
-  0x28d316c: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d3170: mov      w24, w0
-  0x28d3174: mov      x0, x19
-  0x28d3178: bl       #0x28d1320 ; -> CStatValue$$get_m_nMonadEnchantValue
-  0x28d317c: ldr      x8, [x19, #0x98]
-  0x28d3180: ldr      w1, [x19, #0xa0]
-  0x28d3184: mov      w25, w0
-  0x28d3188: mov      x2, xzr
-  0x28d318c: mov      x0, x8
-  0x28d3190: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d3194: ldr      x8, [x19, #0x38]
-  0x28d3198: ldr      w1, [x19, #0x40]
-  0x28d319c: mov      w26, w0
-  0x28d31a0: mov      x2, xzr
-  0x28d31a4: mov      x0, x8
-  0x28d31a8: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d31ac: ldur     x8, [x19, #0x44]
-  0x28d31b0: ldr      w1, [x19, #0x4c]
-  0x28d31b4: mov      w27, w0
-  0x28d31b8: mov      x2, xzr
-  0x28d31bc: mov      x0, x8
-  0x28d31c0: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d31c4: mov      w28, w0
-  0x28d31c8: mov      x0, x19
-  0x28d31cc: bl       #0x28d10a4 ; -> CStatValue$$get_m_nItemOptionValue
-  0x28d31d0: ldr      x8, [x19, #0x50]
-  0x28d31d4: ldr      w1, [x19, #0x58]
-  0x28d31d8: mov      w29, w0
-  0x28d31dc: mov      x2, xzr
-  0x28d31e0: mov      x0, x8
-  0x28d31e4: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d31e8: mov      w20, w0
-  0x28d31ec: mov      x0, x19
-  0x28d31f0: bl       #0x28d1178 ; -> CStatValue$$get_m_nBuffValue
-  0x28d31f4: ldur     x8, [x19, #0x5c]
-  0x28d31f8: ldr      w1, [x19, #0x64]
-  0x28d31fc: mov      w21, w0
-  0x28d3200: mov      x2, xzr
-  0x28d3204: mov      x0, x8
-  0x28d3208: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d320c: str      w0, [sp, #0x20]
-  0x28d3210: ldp      w1, w0, [sp, #0x34]
-  0x28d3214: mov      w2, w22
-  0x28d3218: mov      w3, w23
-  0x28d321c: mov      w4, w24
-  0x28d3220: mov      w5, w25
-  0x28d3224: mov      w6, w26
-  0x28d3228: mov      w7, w27
-  0x28d322c: str      xzr, [sp, #0x28]
-  0x28d3230: str      w21, [sp, #0x18]
-  0x28d3234: str      w20, [sp, #0x10]
-  0x28d3238: str      w29, [sp, #8]
-  0x28d323c: str      w28, [sp]
-  0x28d3240: bl       #0x2c59e48 ; -> CFormula$$CalcFinalStat
-  0x28d3244: adrp     x22, #0x5511000
-  0x28d3248: ldr      x22, [x22, #0xaf0] ; = 0x0 (u64 @ 0x5511af0)
-  0x28d324c: mov      w1, w0
-  0x28d3250: mov      x0, x19
-  0x28d3254: bl       #0x28d1384 ; -> CStatValue$$set_m_nFinalValue
-  0x28d3258: mov      x0, x19
-  0x28d325c: bl       #0x28d13f4 ; -> CStatValue$$get_m_nFinalValue
-  0x28d3260: ldr      x8, [x22] ; = 0x0 (u64 @ 0x5511000)
-  0x28d3264: ldur     x22, [x19, #0x14]
-  0x28d3268: ldr      w21, [x19, #0x1c]
-  0x28d326c: mov      w20, w0
-  0x28d3270: ldr      w9, [x8, #0xe0]
-  0x28d3274: cbnz     w9, #0x28d3280
-  0x28d3278: mov      x0, x8
-  0x28d327c: bl       #0x218489c ; -> ??? 0x218489c
-  0x28d3280: mov      x0, x22
-  0x28d3284: mov      x1, x21
-  0x28d3288: mov      x2, xzr
-  0x28d328c: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d3290: ldr      x8, [x19, #0x20]
-  0x28d3294: ldr      w1, [x19, #0x28]
-  0x28d3298: mov      w21, w0
-  0x28d329c: mov      x2, xzr
-  0x28d32a0: mov      x0, x8
-  0x28d32a4: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d32a8: ldur     x8, [x19, #0x2c]
-  0x28d32ac: ldr      w1, [x19, #0x34]
-  0x28d32b0: mov      w22, w0
-  0x28d32b4: mov      x2, xzr
-  0x28d32b8: mov      x0, x8
-  0x28d32bc: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d32c0: mov      w23, w0
-  0x28d32c4: mov      x0, x19
-  0x28d32c8: bl       #0x28d124c ; -> CStatValue$$get_m_nAwakeningValue
-  0x28d32cc: ldur     x8, [x19, #0x8c]
-  0x28d32d0: ldr      w1, [x19, #0x94]
-  0x28d32d4: mov      w24, w0
-  0x28d32d8: mov      x2, xzr
-  0x28d32dc: mov      x0, x8
-  0x28d32e0: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d32e4: mov      w4, w0
-  0x28d32e8: mov      w0, w21
-  0x28d32ec: mov      w1, w22
-  0x28d32f0: mov      w2, w23
-  0x28d32f4: mov      w3, w24
-  0x28d32f8: mov      w5, wzr
-  0x28d32fc: mov      w6, wzr
-  0x28d3300: mov      w7, wzr
-  0x28d3304: str      xzr, [sp, #0x28]
-  0x28d3308: str      wzr, [sp, #0x20]
-  0x28d330c: str      wzr, [sp, #0x18]
-  0x28d3310: str      wzr, [sp, #0x10]
-  0x28d3314: str      wzr, [sp, #8]
-  0x28d3318: str      wzr, [sp]
-  0x28d331c: bl       #0x2c59e48 ; -> CFormula$$CalcFinalStat
-  0x28d3320: sub      w0, w20, w0
-  0x28d3324: mov      x1, xzr
-  0x28d3328: bl       #0x2c59b20 ; -> SVAInt$$op_Implicit
-  0x28d332c: str      x0, [x19, #0x68]
-  0x28d3330: mov      x0, x19
-  0x28d3334: str      w1, [x19, #0x70]
-  0x28d3338: bl       #0x28d13f4 ; -> CStatValue$$get_m_nFinalValue
-  0x28d333c: ldr      x8, [x19, #0x80]
-  0x28d3340: ldr      w1, [x19, #0x88]
-  0x28d3344: mov      w20, w0
-  0x28d3348: mov      x2, xzr
-  0x28d334c: mov      x0, x8
-  0x28d3350: bl       #0x2c59abc ; -> SVAInt$$op_Implicit
-  0x28d3354: add      w1, w0, w20
-  0x28d3358: mov      x0, x19
-  0x28d335c: bl       #0x28d1384 ; -> CStatValue$$set_m_nFinalValue
-  0x28d3360: ldr      w8, [x19, #0x10]
-  0x28d3364: cmp      w8, #7
-  0x28d3368: b.ne     #0x28d338c
-  0x28d336c: mov      x0, x19
-  0x28d3370: bl       #0x28d13f4 ; -> CStatValue$$get_m_nFinalValue
-  0x28d3374: cmp      w0, #0x3e8
-  0x28d3378: mov      w8, #0x3e8
-  0x28d337c: csel     w8, w0, w8, lt
-  0x28d3380: bic      w1, w8, w8, asr #31
-  0x28d3384: mov      x0, x19
-  0x28d3388: bl       #0x28d1384 ; -> CStatValue$$set_m_nFinalValue
-  0x28d338c: strb     wzr, [x19, #0xe0]
-  0x28d3390: ldp      x20, x19, [sp, #0x90]
-  0x28d3394: ldp      x22, x21, [sp, #0x80]
-  0x28d3398: ldp      x24, x23, [sp, #0x70]
-  0x28d339c: ldp      x26, x25, [sp, #0x60]
-  0x28d33a0: ldp      x28, x27, [sp, #0x50]
-  0x28d33a4: ldp      x29, x30, [sp, #0x40]
-  0x28d33a8: add      sp, sp, #0xa0
-  0x28d33ac: ret      
-  0x28d33b0: bl       #0x21849c0 ; -> ??? 0x21849c0
+; jeu 1.4.14 — régénéré par datagen/extract/disasm.py
+; ===== CStatValue_SetFinalValue @ 0x29fb82c..0x29fbd34 (taille 1288 octets) =====
+  0x29fb82c: sub      sp, sp, #0xa0
+  0x29fb830: stp      x29, x30, [sp, #0x40]
+  0x29fb834: stp      x28, x27, [sp, #0x50]
+  0x29fb838: stp      x26, x25, [sp, #0x60]
+  0x29fb83c: stp      x24, x23, [sp, #0x70]
+  0x29fb840: stp      x22, x21, [sp, #0x80]
+  0x29fb844: stp      x20, x19, [sp, #0x90]
+  0x29fb848: adrp     x20, #0x59d8000
+  0x29fb84c: ldrb     w8, [x20, #0x9aa]
+  0x29fb850: mov      x19, x0
+  0x29fb854: tbnz     w8, #0, #0x29fb878
+  0x29fb858: adrp     x0, #0x558a000
+  0x29fb85c: ldr      x0, [x0, #0x6d8] ; = 0x0 (u64 @ 0x558a6d8)
+  0x29fb860: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x29fb864: adrp     x0, #0x558a000
+  0x29fb868: ldr      x0, [x0, #0x528] ; = 0x0 (u64 @ 0x558a528)
+  0x29fb86c: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x29fb870: mov      w8, #1
+  0x29fb874: strb     w8, [x20, #0x9aa]
+  0x29fb878: ldr      w8, [x19, #0x10]
+  0x29fb87c: adrp     x20, #0x558a000
+  0x29fb880: ldr      x20, [x20, #0x528] ; = 0x0 (u64 @ 0x558a528)
+  0x29fb884: cmp      w8, #7
+  0x29fb888: b.ne     #0x29fba74
+  0x29fb88c: ldr      x0, [x19, #0xe8]
+  0x29fb890: cbz      x0, #0x29fbd30
+  0x29fb894: mov      w1, #1
+  0x29fb898: mov      x2, xzr
+  0x29fb89c: bl       #0x290d264 ; -> CCharacterData$$GetCriticalStatBuffValues
+  0x29fb8a0: ldr      x8, [x20] ; = 0x0 (u64 @ 0x558a000)
+  0x29fb8a4: ldur     x21, [x19, #0x14]
+  0x29fb8a8: ldr      w22, [x19, #0x1c]
+  0x29fb8ac: mov      x20, x0
+  0x29fb8b0: ldr      w9, [x8, #0xe0]
+  0x29fb8b4: lsr      x10, x0, #0x20
+  0x29fb8b8: str      x10, [sp, #0x38]
+  0x29fb8bc: cbnz     w9, #0x29fb8c8
+  0x29fb8c0: mov      x0, x8
+  0x29fb8c4: bl       #0x21afaf4 ; -> ??? 0x21afaf4
+  0x29fb8c8: mov      x0, x21
+  0x29fb8cc: mov      x1, x22
+  0x29fb8d0: mov      x2, xzr
+  0x29fb8d4: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fb8d8: ldr      x8, [x19, #0x20]
+  0x29fb8dc: ldr      w1, [x19, #0x28]
+  0x29fb8e0: str      w0, [sp, #0x34]
+  0x29fb8e4: mov      x2, xzr
+  0x29fb8e8: mov      x0, x8
+  0x29fb8ec: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fb8f0: ldur     x8, [x19, #0x2c]
+  0x29fb8f4: ldr      w1, [x19, #0x34]
+  0x29fb8f8: mov      w22, w0
+  0x29fb8fc: mov      x2, xzr
+  0x29fb900: mov      x0, x8
+  0x29fb904: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fb908: mov      w23, w0
+  0x29fb90c: mov      x0, x19
+  0x29fb910: bl       #0x29f9a18 ; -> CStatValue$$get_m_nAwakeningValue
+  0x29fb914: ldur     x8, [x19, #0x8c]
+  0x29fb918: ldr      w1, [x19, #0x94]
+  0x29fb91c: mov      w24, w0
+  0x29fb920: mov      x2, xzr
+  0x29fb924: mov      x0, x8
+  0x29fb928: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fb92c: mov      w25, w0
+  0x29fb930: mov      x0, x19
+  0x29fb934: bl       #0x29f9aec ; -> CStatValue$$get_m_nMonadEnchantValue
+  0x29fb938: ldr      x8, [x19, #0x98]
+  0x29fb93c: ldr      w1, [x19, #0xa0]
+  0x29fb940: mov      w26, w0
+  0x29fb944: mov      x2, xzr
+  0x29fb948: mov      x0, x8
+  0x29fb94c: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fb950: ldr      x8, [x19, #0x38]
+  0x29fb954: ldr      w1, [x19, #0x40]
+  0x29fb958: mov      w27, w0
+  0x29fb95c: mov      x2, xzr
+  0x29fb960: mov      x0, x8
+  0x29fb964: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fb968: ldur     x8, [x19, #0x44]
+  0x29fb96c: ldr      w1, [x19, #0x4c]
+  0x29fb970: mov      w28, w0
+  0x29fb974: mov      x2, xzr
+  0x29fb978: mov      x0, x8
+  0x29fb97c: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fb980: mov      w29, w0
+  0x29fb984: mov      x0, x19
+  0x29fb988: bl       #0x29f9870 ; -> CStatValue$$get_m_nItemOptionValue
+  0x29fb98c: ldr      x8, [x19, #0x50]
+  0x29fb990: ldr      w1, [x19, #0x58]
+  0x29fb994: mov      w21, w0
+  0x29fb998: mov      x2, xzr
+  0x29fb99c: mov      x0, x8
+  0x29fb9a0: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fb9a4: ldr      x8, [sp, #0x38]
+  0x29fb9a8: str      w0, [sp, #0x10]
+  0x29fb9ac: ldr      w0, [sp, #0x34]
+  0x29fb9b0: mov      w1, w22
+  0x29fb9b4: mov      w2, w23
+  0x29fb9b8: mov      w3, w24
+  0x29fb9bc: mov      w4, w25
+  0x29fb9c0: mov      w5, w26
+  0x29fb9c4: mov      w6, w27
+  0x29fb9c8: mov      w7, w28
+  0x29fb9cc: str      xzr, [sp, #0x28]
+  0x29fb9d0: str      w8, [sp, #0x20]
+  0x29fb9d4: str      w20, [sp, #0x18]
+  0x29fb9d8: str      w21, [sp, #8]
+  0x29fb9dc: str      w29, [sp]
+  0x29fb9e0: bl       #0x2cb1c6c ; -> CFormula$$CalcFinalStat
+  0x29fb9e4: mov      w8, w0
+  0x29fb9e8: ldr      x0, [x19, #0xe8]
+  0x29fb9ec: cmp      w8, #0x3e8
+  0x29fb9f0: mov      w9, #0x3e8
+  0x29fb9f4: csel     w8, w8, w9, lt
+  0x29fb9f8: cbz      x0, #0x29fbd30
+  0x29fb9fc: mov      w1, wzr
+  0x29fba00: mov      x2, xzr
+  0x29fba04: bic      w21, w8, w8, asr #31
+  0x29fba08: bl       #0x290d264 ; -> CCharacterData$$GetCriticalStatBuffValues
+  0x29fba0c: adrp     x8, #0x558a000
+  0x29fba10: ldr      x8, [x8, #0x6d8] ; = 0x0 (u64 @ 0x558a6d8)
+  0x29fba14: adrp     x22, #0x558a000
+  0x29fba18: mov      x20, x0
+  0x29fba1c: ldr      x8, [x8] ; = 0x0 (u64 @ 0x558a000)
+  0x29fba20: ldr      w9, [x8, #0xe0]
+  0x29fba24: ldr      x22, [x22, #0x528] ; = 0x0 (u64 @ 0x558a528)
+  0x29fba28: cbnz     w9, #0x29fba34
+  0x29fba2c: mov      x0, x8
+  0x29fba30: bl       #0x21afaf4 ; -> ??? 0x21afaf4
+  0x29fba34: mov      x9, #0x3e800000000
+  0x29fba38: mov      x10, #0xf7cf
+  0x29fba3c: add      w8, w21, w20
+  0x29fba40: movk     x10, #0xe353, lsl #16
+  0x29fba44: add      x9, x20, x9
+  0x29fba48: movk     x10, #0x9ba5, lsl #32
+  0x29fba4c: sxtw     x8, w8
+  0x29fba50: asr      x9, x9, #0x20
+  0x29fba54: movk     x10, #0x20c4, lsl #48
+  0x29fba58: mul      x8, x9, x8
+  0x29fba5c: smulh    x8, x8, x10
+  0x29fba60: lsr      x9, x8, #0x3f
+  0x29fba64: lsr      x8, x8, #7
+  0x29fba68: add      w8, w8, w9
+  0x29fba6c: bic      w1, w8, w8, asr #31
+  0x29fba70: b        #0x29fbbd0
+  0x29fba74: ldr      x0, [x20] ; = 0x0 (u64 @ 0x558a000)
+  0x29fba78: ldur     x20, [x19, #0x14]
+  0x29fba7c: ldr      w21, [x19, #0x1c]
+  0x29fba80: ldr      w8, [x0, #0xe0]
+  0x29fba84: cbnz     w8, #0x29fba8c
+  0x29fba88: bl       #0x21afaf4 ; -> ??? 0x21afaf4
+  0x29fba8c: mov      x0, x20
+  0x29fba90: mov      x1, x21
+  0x29fba94: mov      x2, xzr
+  0x29fba98: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fba9c: ldr      x8, [x19, #0x20]
+  0x29fbaa0: ldr      w1, [x19, #0x28]
+  0x29fbaa4: str      w0, [sp, #0x38]
+  0x29fbaa8: mov      x2, xzr
+  0x29fbaac: mov      x0, x8
+  0x29fbab0: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fbab4: ldur     x8, [x19, #0x2c]
+  0x29fbab8: ldr      w1, [x19, #0x34]
+  0x29fbabc: str      w0, [sp, #0x34]
+  0x29fbac0: mov      x2, xzr
+  0x29fbac4: mov      x0, x8
+  0x29fbac8: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fbacc: mov      w22, w0
+  0x29fbad0: mov      x0, x19
+  0x29fbad4: bl       #0x29f9a18 ; -> CStatValue$$get_m_nAwakeningValue
+  0x29fbad8: ldur     x8, [x19, #0x8c]
+  0x29fbadc: ldr      w1, [x19, #0x94]
+  0x29fbae0: mov      w23, w0
+  0x29fbae4: mov      x2, xzr
+  0x29fbae8: mov      x0, x8
+  0x29fbaec: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fbaf0: mov      w24, w0
+  0x29fbaf4: mov      x0, x19
+  0x29fbaf8: bl       #0x29f9aec ; -> CStatValue$$get_m_nMonadEnchantValue
+  0x29fbafc: ldr      x8, [x19, #0x98]
+  0x29fbb00: ldr      w1, [x19, #0xa0]
+  0x29fbb04: mov      w25, w0
+  0x29fbb08: mov      x2, xzr
+  0x29fbb0c: mov      x0, x8
+  0x29fbb10: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fbb14: ldr      x8, [x19, #0x38]
+  0x29fbb18: ldr      w1, [x19, #0x40]
+  0x29fbb1c: mov      w26, w0
+  0x29fbb20: mov      x2, xzr
+  0x29fbb24: mov      x0, x8
+  0x29fbb28: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fbb2c: ldur     x8, [x19, #0x44]
+  0x29fbb30: ldr      w1, [x19, #0x4c]
+  0x29fbb34: mov      w27, w0
+  0x29fbb38: mov      x2, xzr
+  0x29fbb3c: mov      x0, x8
+  0x29fbb40: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fbb44: mov      w28, w0
+  0x29fbb48: mov      x0, x19
+  0x29fbb4c: bl       #0x29f9870 ; -> CStatValue$$get_m_nItemOptionValue
+  0x29fbb50: ldr      x8, [x19, #0x50]
+  0x29fbb54: ldr      w1, [x19, #0x58]
+  0x29fbb58: mov      w29, w0
+  0x29fbb5c: mov      x2, xzr
+  0x29fbb60: mov      x0, x8
+  0x29fbb64: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fbb68: mov      w20, w0
+  0x29fbb6c: mov      x0, x19
+  0x29fbb70: bl       #0x29f9944 ; -> CStatValue$$get_m_nBuffValue
+  0x29fbb74: ldur     x8, [x19, #0x5c]
+  0x29fbb78: ldr      w1, [x19, #0x64]
+  0x29fbb7c: mov      w21, w0
+  0x29fbb80: mov      x2, xzr
+  0x29fbb84: mov      x0, x8
+  0x29fbb88: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fbb8c: str      w0, [sp, #0x20]
+  0x29fbb90: ldp      w1, w0, [sp, #0x34]
+  0x29fbb94: mov      w2, w22
+  0x29fbb98: mov      w3, w23
+  0x29fbb9c: mov      w4, w24
+  0x29fbba0: mov      w5, w25
+  0x29fbba4: mov      w6, w26
+  0x29fbba8: mov      w7, w27
+  0x29fbbac: str      xzr, [sp, #0x28]
+  0x29fbbb0: str      w21, [sp, #0x18]
+  0x29fbbb4: str      w20, [sp, #0x10]
+  0x29fbbb8: str      w29, [sp, #8]
+  0x29fbbbc: str      w28, [sp]
+  0x29fbbc0: bl       #0x2cb1c6c ; -> CFormula$$CalcFinalStat
+  0x29fbbc4: adrp     x22, #0x558a000
+  0x29fbbc8: ldr      x22, [x22, #0x528] ; = 0x0 (u64 @ 0x558a528)
+  0x29fbbcc: mov      w1, w0
+  0x29fbbd0: mov      x0, x19
+  0x29fbbd4: bl       #0x29f9b50 ; -> CStatValue$$set_m_nFinalValue
+  0x29fbbd8: mov      x0, x19
+  0x29fbbdc: bl       #0x29f9bc0 ; -> CStatValue$$get_m_nFinalValue
+  0x29fbbe0: ldr      x8, [x22] ; = 0x0 (u64 @ 0x558a000)
+  0x29fbbe4: ldur     x22, [x19, #0x14]
+  0x29fbbe8: ldr      w21, [x19, #0x1c]
+  0x29fbbec: mov      w20, w0
+  0x29fbbf0: ldr      w9, [x8, #0xe0]
+  0x29fbbf4: cbnz     w9, #0x29fbc00
+  0x29fbbf8: mov      x0, x8
+  0x29fbbfc: bl       #0x21afaf4 ; -> ??? 0x21afaf4
+  0x29fbc00: mov      x0, x22
+  0x29fbc04: mov      x1, x21
+  0x29fbc08: mov      x2, xzr
+  0x29fbc0c: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fbc10: ldr      x8, [x19, #0x20]
+  0x29fbc14: ldr      w1, [x19, #0x28]
+  0x29fbc18: mov      w21, w0
+  0x29fbc1c: mov      x2, xzr
+  0x29fbc20: mov      x0, x8
+  0x29fbc24: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fbc28: ldur     x8, [x19, #0x2c]
+  0x29fbc2c: ldr      w1, [x19, #0x34]
+  0x29fbc30: mov      w22, w0
+  0x29fbc34: mov      x2, xzr
+  0x29fbc38: mov      x0, x8
+  0x29fbc3c: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fbc40: mov      w23, w0
+  0x29fbc44: mov      x0, x19
+  0x29fbc48: bl       #0x29f9a18 ; -> CStatValue$$get_m_nAwakeningValue
+  0x29fbc4c: ldur     x8, [x19, #0x8c]
+  0x29fbc50: ldr      w1, [x19, #0x94]
+  0x29fbc54: mov      w24, w0
+  0x29fbc58: mov      x2, xzr
+  0x29fbc5c: mov      x0, x8
+  0x29fbc60: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fbc64: mov      w4, w0
+  0x29fbc68: mov      w0, w21
+  0x29fbc6c: mov      w1, w22
+  0x29fbc70: mov      w2, w23
+  0x29fbc74: mov      w3, w24
+  0x29fbc78: mov      w5, wzr
+  0x29fbc7c: mov      w6, wzr
+  0x29fbc80: mov      w7, wzr
+  0x29fbc84: str      xzr, [sp, #0x28]
+  0x29fbc88: str      wzr, [sp, #0x20]
+  0x29fbc8c: str      wzr, [sp, #0x18]
+  0x29fbc90: str      wzr, [sp, #0x10]
+  0x29fbc94: str      wzr, [sp, #8]
+  0x29fbc98: str      wzr, [sp]
+  0x29fbc9c: bl       #0x2cb1c6c ; -> CFormula$$CalcFinalStat
+  0x29fbca0: sub      w0, w20, w0
+  0x29fbca4: mov      x1, xzr
+  0x29fbca8: bl       #0x2cb1944 ; -> SVAInt$$op_Implicit
+  0x29fbcac: str      x0, [x19, #0x68]
+  0x29fbcb0: mov      x0, x19
+  0x29fbcb4: str      w1, [x19, #0x70]
+  0x29fbcb8: bl       #0x29f9bc0 ; -> CStatValue$$get_m_nFinalValue
+  0x29fbcbc: ldr      x8, [x19, #0x80]
+  0x29fbcc0: ldr      w1, [x19, #0x88]
+  0x29fbcc4: mov      w20, w0
+  0x29fbcc8: mov      x2, xzr
+  0x29fbccc: mov      x0, x8
+  0x29fbcd0: bl       #0x2cb18e0 ; -> SVAInt$$op_Implicit
+  0x29fbcd4: add      w1, w0, w20
+  0x29fbcd8: mov      x0, x19
+  0x29fbcdc: bl       #0x29f9b50 ; -> CStatValue$$set_m_nFinalValue
+  0x29fbce0: ldr      w8, [x19, #0x10]
+  0x29fbce4: cmp      w8, #7
+  0x29fbce8: b.ne     #0x29fbd0c
+  0x29fbcec: mov      x0, x19
+  0x29fbcf0: bl       #0x29f9bc0 ; -> CStatValue$$get_m_nFinalValue
+  0x29fbcf4: cmp      w0, #0x3e8
+  0x29fbcf8: mov      w8, #0x3e8
+  0x29fbcfc: csel     w8, w0, w8, lt
+  0x29fbd00: bic      w1, w8, w8, asr #31
+  0x29fbd04: mov      x0, x19
+  0x29fbd08: bl       #0x29f9b50 ; -> CStatValue$$set_m_nFinalValue
+  0x29fbd0c: strb     wzr, [x19, #0xe0]
+  0x29fbd10: ldp      x20, x19, [sp, #0x90]
+  0x29fbd14: ldp      x22, x21, [sp, #0x80]
+  0x29fbd18: ldp      x24, x23, [sp, #0x70]
+  0x29fbd1c: ldp      x26, x25, [sp, #0x60]
+  0x29fbd20: ldp      x28, x27, [sp, #0x50]
+  0x29fbd24: ldp      x29, x30, [sp, #0x40]
+  0x29fbd28: add      sp, sp, #0xa0
+  0x29fbd2c: ret      
+  0x29fbd30: bl       #0x21afc18 ; -> ??? 0x21afc18

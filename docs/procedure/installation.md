@@ -162,9 +162,12 @@ pnpm editorial:pull      # pool éditorial (BD 4-cut + wallpapers faits main) de
 > autrement, et c'est le seul moyen d'avoir ce contenu : il n'est ni dans le jeu,
 > ni dans git.
 
-> `datagen:dump` a besoin de l'émulateur **lancé** avec le jeu **installé** (il lit
-> l'APK via adb). Il ne change qu'aux MAJ de code du jeu — inutile de le rejouer à
-> chaque patch de données.
+> `datagen:dump` a besoin de l'émulateur **lancé** avec le jeu **installé et À JOUR**
+> (il lit l'APK via adb — un install périmé regénère du périmé, en silence). Il ne
+> change qu'aux MAJ de code du jeu — inutile de le rejouer à chaque patch de données.
+> Il enchaîne sur `disasm.py`, qui réécrit les listings de
+> [docs/specs/damage-formula-asm/](../specs/damage-formula-asm/) : ceux-là sont
+> committés, leur diff fait partie du patch.
 
 > **Remplir `.assets-staging/images` est indispensable en dev** : la route dev
 > [`/images/[...path]`](../../src/app/images/[...path]/route.dev.ts) y lit les

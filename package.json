@@ -22,6 +22,7 @@
     "datagen:extract-audio": "tsx datagen/extract/extract-audio.ts",
     "datagen:extract-wallpapers": "tsx datagen/extract/extract-wallpapers.ts",
     "datagen:dump": "tsx datagen/extract/dump.ts",
+    "datagen:disasm": "python datagen/extract/disasm.py",
     "datagen:convert": "tsx datagen/templates/convert.ts",
     "datagen:build": "tsx datagen/build.ts",
     "datagen:patch": "tsx datagen/refresh.ts",

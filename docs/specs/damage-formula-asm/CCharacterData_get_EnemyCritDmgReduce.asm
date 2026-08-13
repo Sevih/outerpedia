@@ -1,56 +1,57 @@
-; ===== CCharacterData_get_EnemyCritDmgReduce @ 0x27e12e4..0x27e13c0 (taille 220 octets) =====
-  0x27e12e4: str      x30, [sp, #-0x20]!
-  0x27e12e8: stp      x20, x19, [sp, #0x10]
-  0x27e12ec: adrp     x20, #0x5958000
-  0x27e12f0: ldrb     w8, [x20, #0x37c]
-  0x27e12f4: mov      x19, x0
-  0x27e12f8: tbnz     w8, #0, #0x27e131c
-  0x27e12fc: adrp     x0, #0x5536000
-  0x27e1300: ldr      x0, [x0, #0xcf0] ; = 0x0 (u64 @ 0x5536cf0)
-  0x27e1304: bl       #0x2184724 ; -> ??? 0x2184724
-  0x27e1308: adrp     x0, #0x5536000
-  0x27e130c: ldr      x0, [x0, #0xcf8] ; = 0x0 (u64 @ 0x5536cf8)
-  0x27e1310: bl       #0x2184724 ; -> ??? 0x2184724
-  0x27e1314: mov      w8, #1
-  0x27e1318: strb     w8, [x20, #0x37c]
-  0x27e131c: ldrb     w8, [x19, #0x28]
-  0x27e1320: cbz      w8, #0x27e132c
-  0x27e1324: mov      x0, x19
-  0x27e1328: bl       #0x27e2870 ; -> CCharacterData$$CalcStat
-  0x27e132c: ldr      x0, [x19, #0x40]
-  0x27e1330: cbz      x0, #0x27e13bc
-  0x27e1334: adrp     x8, #0x5536000
-  0x27e1338: ldr      x8, [x8, #0xcf0] ; = 0x0 (u64 @ 0x5536cf0)
-  0x27e133c: mov      w1, #0x1a
-  0x27e1340: ldr      x2, [x8] ; = 0x0 (u64 @ 0x5536000)
-  0x27e1344: bl       #0x3fb1538 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x27e1348: cbz      x0, #0x27e13bc
-  0x27e134c: adrp     x10, #0x5536000
-  0x27e1350: ldr      x8, [x0] ; = 0x0 (u64 @ 0x5536000)
-  0x27e1354: ldr      x10, [x10, #0xcf8] ; = 0x0 (u64 @ 0x5536cf8)
-  0x27e1358: mov      x19, x0
-  0x27e135c: ldrh     w9, [x8, #0x12e]
-  0x27e1360: ldr      x1, [x10] ; = 0x0 (u64 @ 0x5536000)
-  0x27e1364: cbz      x9, #0x27e1388
-  0x27e1368: ldr      x10, [x8, #0xb0] ; = 0x0 (u64 @ 0x55360b0)
-  0x27e136c: add      x10, x10, #8
-  0x27e1370: ldur     x11, [x10, #-8]
-  0x27e1374: cmp      x11, x1
-  0x27e1378: b.eq     #0x27e1398
-  0x27e137c: subs     x9, x9, #1
-  0x27e1380: add      x10, x10, #0x10
-  0x27e1384: b.ne     #0x27e1370
-  0x27e1388: mov      w2, #1
-  0x27e138c: mov      x0, x19
-  0x27e1390: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x27e1394: b        #0x27e13a8
-  0x27e1398: ldr      w9, [x10]
-  0x27e139c: add      w9, w9, #1
-  0x27e13a0: add      x8, x8, w9, sxtw #4
-  0x27e13a4: add      x0, x8, #0x138
-  0x27e13a8: ldp      x2, x1, [x0]
-  0x27e13ac: mov      x0, x19
-  0x27e13b0: ldp      x20, x19, [sp, #0x10]
-  0x27e13b4: ldr      x30, [sp], #0x20
-  0x27e13b8: br       x2
-  0x27e13bc: bl       #0x21849c0 ; -> ??? 0x21849c0
+; jeu 1.4.14 — régénéré par datagen/extract/disasm.py
+; ===== CCharacterData_get_EnemyCritDmgReduce @ 0x29031f4..0x29032d0 (taille 220 octets) =====
+  0x29031f4: str      x30, [sp, #-0x20]!
+  0x29031f8: stp      x20, x19, [sp, #0x10]
+  0x29031fc: adrp     x20, #0x59d8000
+  0x2903200: ldrb     w8, [x20, #0x270]
+  0x2903204: mov      x19, x0
+  0x2903208: tbnz     w8, #0, #0x290322c
+  0x290320c: adrp     x0, #0x55b6000
+  0x2903210: ldr      x0, [x0, #0x778] ; = 0x0 (u64 @ 0x55b6778)
+  0x2903214: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x2903218: adrp     x0, #0x55b6000
+  0x290321c: ldr      x0, [x0, #0x780] ; = 0x0 (u64 @ 0x55b6780)
+  0x2903220: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x2903224: mov      w8, #1
+  0x2903228: strb     w8, [x20, #0x270]
+  0x290322c: ldrb     w8, [x19, #0x28]
+  0x2903230: cbz      w8, #0x290323c
+  0x2903234: mov      x0, x19
+  0x2903238: bl       #0x2904780 ; -> CCharacterData$$CalcStat
+  0x290323c: ldr      x0, [x19, #0x40]
+  0x2903240: cbz      x0, #0x29032cc
+  0x2903244: adrp     x8, #0x55b6000
+  0x2903248: ldr      x8, [x8, #0x778] ; = 0x0 (u64 @ 0x55b6778)
+  0x290324c: mov      w1, #0x1a
+  0x2903250: ldr      x2, [x8] ; = 0x0 (u64 @ 0x55b6000)
+  0x2903254: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x2903258: cbz      x0, #0x29032cc
+  0x290325c: adrp     x10, #0x55b6000
+  0x2903260: ldr      x8, [x0] ; = 0x0 (u64 @ 0x55b6000)
+  0x2903264: ldr      x10, [x10, #0x780] ; = 0x0 (u64 @ 0x55b6780)
+  0x2903268: mov      x19, x0
+  0x290326c: ldrh     w9, [x8, #0x12e]
+  0x2903270: ldr      x1, [x10] ; = 0x0 (u64 @ 0x55b6000)
+  0x2903274: cbz      x9, #0x2903298
+  0x2903278: ldr      x10, [x8, #0xb0] ; = 0x0 (u64 @ 0x55b60b0)
+  0x290327c: add      x10, x10, #8
+  0x2903280: ldur     x11, [x10, #-8]
+  0x2903284: cmp      x11, x1
+  0x2903288: b.eq     #0x29032a8
+  0x290328c: subs     x9, x9, #1
+  0x2903290: add      x10, x10, #0x10
+  0x2903294: b.ne     #0x2903280
+  0x2903298: mov      w2, #1
+  0x290329c: mov      x0, x19
+  0x29032a0: bl       #0x2210028 ; -> ??? 0x2210028
+  0x29032a4: b        #0x29032b8
+  0x29032a8: ldr      w9, [x10]
+  0x29032ac: add      w9, w9, #1
+  0x29032b0: add      x8, x8, w9, sxtw #4
+  0x29032b4: add      x0, x8, #0x138
+  0x29032b8: ldp      x2, x1, [x0]
+  0x29032bc: mov      x0, x19
+  0x29032c0: ldp      x20, x19, [sp, #0x10]
+  0x29032c4: ldr      x30, [sp], #0x20
+  0x29032c8: br       x2
+  0x29032cc: bl       #0x21afc18 ; -> ??? 0x21afc18

@@ -29,6 +29,7 @@ terminal admin, `cd outerpedia-v3`, relancer la même ligne `init.ps1` (idempote
 ```powershell
 pnpm datagen:patch          # pull → extract → convert → build → diff (dry)
 pnpm datagen:promote --apply # valider
-pnpm datagen:dump           # seulement si le jeu a patché son CODE (nouveau .so)
+pnpm datagen:dump           # si le jeu a patché son CODE (nouveau .so) — jeu À JOUR
+                            #   sur l'émulateur ; réécrit aussi les listings ASM committés
 pnpm images                 # push assets R2 (avant push git)
 ```

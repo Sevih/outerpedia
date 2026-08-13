@@ -695,9 +695,56 @@
   `GetBattleRandomRange`), même format/annotations que l'existant (cibles des
   `bl`, littéraux `adrp`+`ldr`) ; une méthode du manifeste absente du dump =
   échec bruyant listant les specs peut-être périmées. Branché en fin de
-  `pnpm datagen:dump` + commande seule `pnpm datagen:disasm`. Validé sur
-  1.4.9 : 88/88 régénérés, identiques ligne à ligne aux listings d'origine
-  (seules les fins de ligne sont normalisées LF).
+  `pnpm datagen:dump` + commande seule `pnpm datagen:disasm`.
+  - **Le binaire aussi doit être frais** (constat Sevih 13/08). `datagen:dump`
+    ré-extrait déjà la paire `.so`/metadata de l'APK **installé sur
+    l'émulateur** : la source n'est pas figée de ce côté. Mais le repli de
+    `find_lib()` ramassait n'importe quel `libil2cpp.so` traînant sous
+    `.gamedata/apk/` — donc l'archive APKPure 1.4.9 du 22/06. Le run de
+    « validation » du 10/08 est passé par là (le `.so` du dump n'a jamais
+    existé sur le disque) : il comparait 1.4.9 à lui-même et ne prouvait rien.
+    Pire, le repli pouvait apparier un binaire **périmé** à un `script.json`
+    **frais** : adresses justes, octets faux, 88 listings crédibles et
+    mensongers sans une erreur. Repli SUPPRIMÉ ; `dump.ts` écrit désormais
+    `dumped/.dump-stamp.json` (sha256 du `.so` + de la metadata, `versionName`
+    lu sur l'émulateur) et `disasm.py` refuse de désassembler si le sha256 du
+    binaire n'est pas celui de l'empreinte.
+  - **Sortie déplacée vers [docs/specs/damage-formula-asm/](specs/damage-formula-asm/)**,
+    les 87 listings SUIVIS PAR GIT que la spec référence. L'ancienne sortie
+    `.gamedata/apk/asm/` était gitignorée : « régénéré à chaque patch »
+    n'atteignait jamais la copie durable, qui serait restée en 1.4.9 pour
+    toujours. Le diff d'un patch montre maintenant ce que le jeu a bougé dans
+    les formules ; chaque listing porte la version du jeu en tête. Un `.asm`
+    présent en sortie mais hors manifeste est signalé (plus régénéré = spec
+    qui se périme en silence).
+  - Deux entrées du manifeste pointaient la **mauvaise surcharge** (ordinal 0) :
+    `CItem_InitializeOptionData` tombait sur le thunk 1 argument (52 o. au lieu
+    de 2784) et `CStatValue_SetBaseValue` sur la variante `(int)` courte
+    (120 o. au lieu de 552). Corrigées en ordinal 1.
+  - Le `✅` final plantait en `UnicodeEncodeError` dès que la sortie est
+    redirigée (console cp1252) — **après** écriture des fichiers : un run
+    réussi remontait en échec à `datagen:dump`. stdout/stderr forcés en UTF-8.
+  - **Noms générés par le compilateur résolus par squelette.** Les itérateurs et
+    fonctions locales portent un compteur interne (`<PvpAttackTeamPenaltyDmg>d__79`,
+    `g__PlayDamage|79_1`) qui se renumérote à chaque recompilation de la classe
+    — `79` en 1.4.9, `81` en 1.4.14. Le manifeste tombait donc en panne sur un
+    simple recompile. Repli : si le nom exact manque, on cherche le nom dont les
+    suites de chiffres coïncident, et on ne l'accepte QUE s'il est unique (sinon
+    échec — mieux vaut rien que le mauvais listing). Renumérotation signalée.
+  - **Validé pour de vrai sur 1.4.14** (13/08, émulateur lancé, jeu à jour —
+    l'archive APKPure était 5 versions en retard). `pnpm datagen:dump` bout en
+    bout : paire extraite de l'install, empreinte écrite (`versionName=1.4.14`,
+    sha256), 88/88 listings régénérés. Le premier run a ÉCHOUÉ bruyamment sur
+    les deux noms renumérotés — le garde-fou fait ce pour quoi il est là.
+  - **Ce que le patch a bougé** (corps normalisés : RVA, pages `adrp` et slots de
+    métadonnées neutralisés) : 72/88 inchangés, 12 à allocation de registres près,
+    3 vrais changements de comportement — `CalcDamage` gagne un garde
+    `IsIgnoreTurnLimitDamage`, `FindBuffDamageReduce` gagne 492 octets (boucle de
+    buffs en plus + 2 lectures `GetGameConfig`), `CBuff_OnCreate` gagne
+    `TrySetDieByReverseHeal`. Consignés en [spec § 12.16](specs/damage-formula.md)
+    avec les sections rendues incomplètes (§ 4, § 9, § 14.1) ; en-tête de la spec
+    corrigé (1.4.9 → 1.4.14, `TypeDefIndex` 7258 → 7282). **Rien n'est reporté
+    dans le moteur TS** — à re-dériver depuis les listings, jamais supposé.
 
 - **Mécaniques perso : conditions d'ÉTAT DE COMBAT déclarables** (demande
   Sevih 10/08 — « Noa a un délire de stack sur son S3 »). Générique, pas un

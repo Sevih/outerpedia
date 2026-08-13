@@ -1,368 +1,369 @@
-; ===== CStateBattle_PvpPenalty_PlayDamage @ 0x24dc250..0x24dc80c (taille 1468 octets) =====
-  0x24dc250: sub      sp, sp, #0xc0
-  0x24dc254: stp      d9, d8, [sp, #0x50]
-  0x24dc258: stp      x29, x30, [sp, #0x60]
-  0x24dc25c: stp      x28, x27, [sp, #0x70]
-  0x24dc260: stp      x26, x25, [sp, #0x80]
-  0x24dc264: stp      x24, x23, [sp, #0x90]
-  0x24dc268: stp      x22, x21, [sp, #0xa0]
-  0x24dc26c: stp      x20, x19, [sp, #0xb0]
-  0x24dc270: adrp     x22, #0x5956000
-  0x24dc274: adrp     x20, #0x5511000
-  0x24dc278: ldrb     w8, [x22, #0x98e]
-  0x24dc27c: ldr      x20, [x20, #0x658] ; = 0x0 (u64 @ 0x5511658)
-  0x24dc280: mov      x19, x1
-  0x24dc284: mov      x21, x0
-  0x24dc288: tbnz     w8, #0, #0x24dc324
-  0x24dc28c: adrp     x0, #0x5511000
-  0x24dc290: ldr      x0, [x0, #0xca0] ; = 0x0 (u64 @ 0x5511ca0)
-  0x24dc294: bl       #0x2184724 ; -> ??? 0x2184724
-  0x24dc298: adrp     x0, #0x5511000
-  0x24dc29c: ldr      x0, [x0, #0x980] ; = 0x0 (u64 @ 0x5511980)
-  0x24dc2a0: bl       #0x2184724 ; -> ??? 0x2184724
-  0x24dc2a4: adrp     x0, #0x5511000
-  0x24dc2a8: ldr      x0, [x0, #0x988] ; = 0x0 (u64 @ 0x5511988)
-  0x24dc2ac: bl       #0x2184724 ; -> ??? 0x2184724
-  0x24dc2b0: adrp     x0, #0x5511000
-  0x24dc2b4: ldr      x0, [x0, #0x658] ; = 0x0 (u64 @ 0x5511658)
-  0x24dc2b8: bl       #0x2184724 ; -> ??? 0x2184724
-  0x24dc2bc: adrp     x0, #0x5511000
-  0x24dc2c0: ldr      x0, [x0, #0x830] ; = 0x0 (u64 @ 0x5511830)
-  0x24dc2c4: bl       #0x2184724 ; -> ??? 0x2184724
-  0x24dc2c8: adrp     x0, #0x5511000
-  0x24dc2cc: ldr      x0, [x0, #0x848] ; = 0x0 (u64 @ 0x5511848)
-  0x24dc2d0: bl       #0x2184724 ; -> ??? 0x2184724
-  0x24dc2d4: adrp     x0, #0x5511000
-  0x24dc2d8: ldr      x0, [x0, #0x850] ; = 0x0 (u64 @ 0x5511850)
-  0x24dc2dc: bl       #0x2184724 ; -> ??? 0x2184724
-  0x24dc2e0: adrp     x0, #0x5511000
-  0x24dc2e4: ldr      x0, [x0, #0x860] ; = 0x0 (u64 @ 0x5511860)
-  0x24dc2e8: bl       #0x2184724 ; -> ??? 0x2184724
-  0x24dc2ec: adrp     x0, #0x5511000
-  0x24dc2f0: ldr      x0, [x0, #0x9f8] ; = 0x0 (u64 @ 0x55119f8)
-  0x24dc2f4: bl       #0x2184724 ; -> ??? 0x2184724
-  0x24dc2f8: adrp     x0, #0x5511000
-  0x24dc2fc: ldr      x0, [x0, #0xa00] ; = 0x0 (u64 @ 0x5511a00)
-  0x24dc300: bl       #0x2184724 ; -> ??? 0x2184724
-  0x24dc304: adrp     x0, #0x5511000
-  0x24dc308: ldr      x0, [x0, #0xa08] ; = 0x0 (u64 @ 0x5511a08)
-  0x24dc30c: bl       #0x2184724 ; -> ??? 0x2184724
-  0x24dc310: adrp     x0, #0x550f000
-  0x24dc314: ldr      x0, [x0, #0x100] ; = 0x0 (u64 @ 0x550f100)
-  0x24dc318: bl       #0x2184724 ; -> ??? 0x2184724
-  0x24dc31c: mov      w8, #1
-  0x24dc320: strb     w8, [x22, #0x98e]
-  0x24dc324: ldr      x0, [x20] ; = 0x0 (u64 @ 0x5511000)
-  0x24dc328: stp      xzr, xzr, [sp, #0x30]
-  0x24dc32c: str      xzr, [sp, #0x40]
-  0x24dc330: ldr      w8, [x0, #0xe0]
-  0x24dc334: cbnz     w8, #0x24dc33c
-  0x24dc338: bl       #0x218489c ; -> ??? 0x218489c
-  0x24dc33c: mov      x0, xzr
-  0x24dc340: bl       #0x25e3bc0 ; -> CTempletManager$$get_Instance
-  0x24dc344: cbz      x0, #0x24dc6fc
-  0x24dc348: mov      w1, #0x17
-  0x24dc34c: mov      x2, xzr
-  0x24dc350: bl       #0x25eeaa0 ; -> CTempletManager$$GetDamageTypeTemplet
-  0x24dc354: cbz      x21, #0x24dc6fc
-  0x24dc358: mov      x20, x0
-  0x24dc35c: ldr      x0, [x21, #0x10]
-  0x24dc360: cbz      x0, #0x24dc6fc
-  0x24dc364: adrp     x8, #0x5511000
-  0x24dc368: ldr      x8, [x8, #0x860] ; = 0x0 (u64 @ 0x5511860)
-  0x24dc36c: adrp     x27, #0x5511000
-  0x24dc370: adrp     x28, #0x550f000
-  0x24dc374: adrp     x29, #0x5511000
-  0x24dc378: ldr      x27, [x27, #0x848] ; = 0x0 (u64 @ 0x5511848)
-  0x24dc37c: ldr      x28, [x28, #0x100] ; = 0x0 (u64 @ 0x550f100)
-  0x24dc380: ldr      x29, [x29, #0xca0] ; = 0x0 (u64 @ 0x5511ca0)
-  0x24dc384: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5511000)
-  0x24dc388: adrp     x26, #0x5511000
-  0x24dc38c: ldr      x26, [x26, #0xa08] ; = 0x0 (u64 @ 0x5511a08)
-  0x24dc390: add      x8, sp, #0x18
-  0x24dc394: bl       #0x444b3b8 ; -> System.Collections.Generic.List<object>$$GetEnumerator
-  0x24dc398: adrp     x21, #0x5511000
-  0x24dc39c: adrp     x9, #0x1056000
-  0x24dc3a0: ldur     q0, [sp, #0x18]
-  0x24dc3a4: ldr      x8, [sp, #0x28]
-  0x24dc3a8: ldr      x21, [x21, #0x818] ; = 0x0 (u64 @ 0x5511818)
-  0x24dc3ac: ldr      s9, [x9, #0x3bc] ; = 9.999999439624929e-11 (f32 @ 0x10563bc)
-  0x24dc3b0: adrp     x22, #0x5955000
-  0x24dc3b4: fmov     s8, #-1.00000000
-  0x24dc3b8: str      q0, [sp, #0x30]
-  0x24dc3bc: str      x8, [sp, #0x40]
-  0x24dc3c0: ldr      x1, [x27] ; = 0x0 (u64 @ 0x5511000)
-  0x24dc3c4: add      x0, sp, #0x30
-  0x24dc3c8: bl       #0x40a9ccc ; -> System.Collections.Generic.List.Enumerator<object>$$MoveNext
-  0x24dc3cc: tbz      w0, #0, #0x24dc698
-  0x24dc3d0: ldr      x0, [x28] ; = 0x0 (u64 @ 0x550f000)
-  0x24dc3d4: ldr      x23, [sp, #0x40]
-  0x24dc3d8: ldr      w8, [x0, #0xe0]
-  0x24dc3dc: cbnz     w8, #0x24dc3e4
-  0x24dc3e0: bl       #0x218489c ; -> ??? 0x218489c
-  0x24dc3e4: mov      x0, x23
-  0x24dc3e8: mov      x1, xzr
-  0x24dc3ec: bl       #0x4f8524c ; -> UnityEngine.Object$$op_Implicit
-  0x24dc3f0: tbz      w0, #0, #0x24dc3c0
-  0x24dc3f4: cbz      x23, #0x24dc6dc
-  0x24dc3f8: ldr      x0, [x23, #0x28]
-  0x24dc3fc: cbz      x0, #0x24dc6e0
-  0x24dc400: mov      x1, xzr
-  0x24dc404: bl       #0x27dfb20 ; -> CCharacterData$$get_MaxHP
-  0x24dc408: mov      w24, w0
-  0x24dc40c: ldr      x0, [x29] ; = 0x0 (u64 @ 0x5511000)
-  0x24dc410: ldr      w25, [x19]
-  0x24dc414: ldr      w8, [x0, #0xe0]
-  0x24dc418: cbnz     w8, #0x24dc420
-  0x24dc41c: bl       #0x218489c ; -> ??? 0x218489c
-  0x24dc420: mov      w0, w24
-  0x24dc424: mov      w1, w25
-  0x24dc428: mov      x2, xzr
-  0x24dc42c: bl       #0x28d81c0 ; -> CCommonDefine$$MulPermille
-  0x24dc430: mov      w24, w0
-  0x24dc434: neg      w1, w0
-  0x24dc438: mov      w3, #1
-  0x24dc43c: mov      x0, x23
-  0x24dc440: mov      w2, wzr
-  0x24dc444: mov      w4, wzr
-  0x24dc448: mov      x5, xzr
-  0x24dc44c: bl       #0x26c5fd8 ; -> CCharacterBattle$$AddHP
-  0x24dc450: ldrb     w8, [x22, #0x8f3]
-  0x24dc454: cbnz     w8, #0x24dc468
-  0x24dc458: mov      x0, x21
-  0x24dc45c: bl       #0x2184724 ; -> ??? 0x2184724
-  0x24dc460: mov      w8, #1
-  0x24dc464: strb     w8, [x22, #0x8f3]
-  0x24dc468: ldr      x8, [x21] ; = 0x0 (u64 @ 0x5511000)
-  0x24dc46c: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55110b8)
-  0x24dc470: ldr      x8, [x8] ; = 0x0 (u64 @ 0x5511000)
-  0x24dc474: cbz      x8, #0x24dc6d4
-  0x24dc478: ldr      x25, [x8, #0x68] ; = 0x0 (u64 @ 0x5511068)
-  0x24dc47c: mov      x0, x23
-  0x24dc480: mov      x1, xzr
-  0x24dc484: bl       #0x4f7f1a8 ; -> UnityEngine.Component$$get_transform
-  0x24dc488: cbz      x25, #0x24dc6d8
-  0x24dc48c: mov      x4, x0
-  0x24dc490: mov      x0, x25
-  0x24dc494: mov      w1, w24
-  0x24dc498: mov      w2, wzr
-  0x24dc49c: mov      w3, wzr
-  0x24dc4a0: mov      w5, wzr
-  0x24dc4a4: mov      x6, xzr
-  0x24dc4a8: bl       #0x28bc9fc ; -> CUIHud$$PlayHudTextDamage
-  0x24dc4ac: mov      x0, x23
-  0x24dc4b0: mov      x1, xzr
-  0x24dc4b4: bl       #0x26c5f5c ; -> CCharacterBattle$$get_HP
-  0x24dc4b8: cbnz     w0, #0x24dc4e0
-  0x24dc4bc: mov      x0, x23
-  0x24dc4c0: mov      x1, xzr
-  0x24dc4c4: bl       #0x27d18b4 ; -> CCharacter$$get_IsAlive
-  0x24dc4c8: tbz      w0, #0, #0x24dc4e0
-  0x24dc4cc: ldr      x8, [x23]
-  0x24dc4d0: ldp      x9, x2, [x8, #0x198]
-  0x24dc4d4: mov      x0, x23
-  0x24dc4d8: mov      w1, wzr
-  0x24dc4dc: blr      x9
-  0x24dc4e0: cbz      x20, #0x24dc6d0
-  0x24dc4e4: ldr      x8, [x20, #0x38] ; = 0x0 (u64 @ 0x5511038)
-  0x24dc4e8: cbz      x8, #0x24dc6e4
-  0x24dc4ec: ldr      w8, [x8, #0x18]
-  0x24dc4f0: cmp      w8, #1
-  0x24dc4f4: b.lt     #0x24dc544
-  0x24dc4f8: adrp     x8, #0x5511000
-  0x24dc4fc: ldr      x8, [x8, #0x988] ; = 0x0 (u64 @ 0x5511988)
-  0x24dc500: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5511000)
-  0x24dc504: bl       #0x3df53ec ; -> CSingletonBehaviour<object>$$get_Instance
-  0x24dc508: mov      x24, x0
-  0x24dc50c: mov      x0, x20
-  0x24dc510: mov      x1, xzr
-  0x24dc514: bl       #0x25a80a4 ; -> CDamageTypeTemplet$$get_SoundName
-  0x24dc518: mov      x25, x0
-  0x24dc51c: mov      x0, x23
-  0x24dc520: mov      x1, xzr
-  0x24dc524: bl       #0x4f7f1e4 ; -> UnityEngine.Component$$get_gameObject
-  0x24dc528: cbz      x24, #0x24dc6f4
-  0x24dc52c: mov      x3, x0
-  0x24dc530: mov      x0, x24
-  0x24dc534: mov      w1, wzr
-  0x24dc538: mov      x2, x25
-  0x24dc53c: mov      x4, xzr
-  0x24dc540: bl       #0x2598ff0 ; -> CSoundManager$$PlaySound
-  0x24dc544: ldr      x8, [x20, #0x50] ; = 0x0 (u64 @ 0x5511050)
-  0x24dc548: cbz      x8, #0x24dc6e8
-  0x24dc54c: ldr      w8, [x8, #0x18]
-  0x24dc550: cmp      w8, #1
-  0x24dc554: b.lt     #0x24dc624
-  0x24dc558: adrp     x8, #0x5511000
-  0x24dc55c: ldr      x8, [x8, #0x980] ; = 0x0 (u64 @ 0x5511980)
-  0x24dc560: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5511000)
-  0x24dc564: bl       #0x3df53ec ; -> CSingletonBehaviour<object>$$get_Instance
-  0x24dc568: mov      x24, x0
-  0x24dc56c: ldr      x0, [x20, #0x50] ; = 0x0 (u64 @ 0x5511050)
-  0x24dc570: cbz      x0, #0x24dc6f0
-  0x24dc574: adrp     x8, #0x5511000
-  0x24dc578: ldr      x8, [x8, #0xa00] ; = 0x0 (u64 @ 0x5511a00)
-  0x24dc57c: ldr      x2, [x8] ; = 0x0 (u64 @ 0x5511000)
-  0x24dc580: mov      w1, wzr
-  0x24dc584: bl       #0x444a4ec ; -> System.Collections.Generic.List<object>$$get_Item
-  0x24dc588: mov      x25, x0
-  0x24dc58c: mov      x0, x23
-  0x24dc590: mov      x1, xzr
-  0x24dc594: bl       #0x4f7f1a8 ; -> UnityEngine.Component$$get_transform
-  0x24dc598: cbz      x0, #0x24dc6ec
-  0x24dc59c: mov      x1, xzr
-  0x24dc5a0: bl       #0x4f8ba74 ; -> UnityEngine.Transform$$get_position
-  0x24dc5a4: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5511000)
-  0x24dc5a8: stp      xzr, xzr, [sp, #0x18]
-  0x24dc5ac: add      x0, sp, #0x18
-  0x24dc5b0: bl       #0x45b667c ; -> System.Nullable<Vector3>$$.ctor
-  0x24dc5b4: adrp     x8, #0x5955000
-  0x24dc5b8: ldrb     w8, [x8, #0x8f8]
-  0x24dc5bc: cbnz     w8, #0x24dc5d8
-  0x24dc5c0: adrp     x0, #0x5511000
-  0x24dc5c4: ldr      x0, [x0, #0x400] ; = 0x0 (u64 @ 0x5511400)
-  0x24dc5c8: bl       #0x2184724 ; -> ??? 0x2184724
-  0x24dc5cc: mov      w8, #1
-  0x24dc5d0: adrp     x9, #0x5955000
-  0x24dc5d4: strb     w8, [x9, #0x8f8]
-  0x24dc5d8: adrp     x8, #0x5511000
-  0x24dc5dc: ldr      x8, [x8, #0x400] ; = 0x0 (u64 @ 0x5511400)
-  0x24dc5e0: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5511000)
-  0x24dc5e4: ldr      x8, [x8] ; = 0x0 (u64 @ 0x5511000)
-  0x24dc5e8: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55110b8)
-  0x24dc5ec: ldp      s0, s1, [x8]
-  0x24dc5f0: ldr      s2, [x8, #8] ; = 0.0 (f32 @ 0x5511008)
-  0x24dc5f4: stp      xzr, xzr, [sp, #8]
-  0x24dc5f8: add      x0, sp, #8
-  0x24dc5fc: bl       #0x45b667c ; -> System.Nullable<Vector3>$$.ctor
-  0x24dc600: cbz      x24, #0x24dc6f8
-  0x24dc604: ldp      x4, x5, [sp, #0x18]
-  0x24dc608: ldp      x6, x7, [sp, #8]
-  0x24dc60c: mov      x0, x24
-  0x24dc610: mov      x1, x25
-  0x24dc614: mov      x2, x23
-  0x24dc618: mov      x3, x23
-  0x24dc61c: str      xzr, [sp]
-  0x24dc620: bl       #0x2b94abc ; -> CEffectManager$$Play
-  0x24dc624: mov      x0, x20
-  0x24dc628: mov      x1, xzr
-  0x24dc62c: bl       #0x25a7f98 ; -> CDamageTypeTemplet$$get_HitColorRGB
-  0x24dc630: fmul     s0, s0, s0
-  0x24dc634: fmul     s1, s1, s1
-  0x24dc638: fadd     s3, s3, s8
-  0x24dc63c: fmul     s2, s2, s2
-  0x24dc640: fadd     s0, s0, s1
-  0x24dc644: fadd     s0, s2, s0
-  0x24dc648: fmul     s1, s3, s3
-  0x24dc64c: fadd     s0, s1, s0
-  0x24dc650: fcmp     s0, s9
-  0x24dc654: b.mi     #0x24dc680
-  0x24dc658: ldr      s0, [x20, #0x30] ; = 0.0 (f32 @ 0x5511030)
-  0x24dc65c: fcmp     s0, #0.0
-  0x24dc660: b.eq     #0x24dc680
-  0x24dc664: mov      x0, x20
-  0x24dc668: mov      x1, xzr
-  0x24dc66c: bl       #0x25a7f98 ; -> CDamageTypeTemplet$$get_HitColorRGB
-  0x24dc670: ldr      s4, [x20, #0x30] ; = 0.0 (f32 @ 0x5511030)
-  0x24dc674: mov      x0, x23
-  0x24dc678: mov      x1, xzr
-  0x24dc67c: bl       #0x27db100 ; -> CCharacter$$PlayHitLightEffect
-  0x24dc680: mov      w1, #1
-  0x24dc684: mov      x0, x23
-  0x24dc688: mov      w2, wzr
-  0x24dc68c: mov      x3, xzr
-  0x24dc690: bl       #0x27dad6c ; -> CCharacter$$ChangeDamageReactState
-  0x24dc694: b        #0x24dc3c0
-  0x24dc698: adrp     x8, #0x5511000
-  0x24dc69c: ldr      x8, [x8, #0x830] ; = 0x0 (u64 @ 0x5511830)
-  0x24dc6a0: add      x0, sp, #0x30
-  0x24dc6a4: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5511000)
-  0x24dc6a8: bl       #0x40a9cc8 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
-  0x24dc6ac: ldp      x20, x19, [sp, #0xb0]
-  0x24dc6b0: ldp      x22, x21, [sp, #0xa0]
-  0x24dc6b4: ldp      x24, x23, [sp, #0x90]
-  0x24dc6b8: ldp      x26, x25, [sp, #0x80]
-  0x24dc6bc: ldp      x28, x27, [sp, #0x70]
-  0x24dc6c0: ldp      x29, x30, [sp, #0x60]
-  0x24dc6c4: ldp      d9, d8, [sp, #0x50]
-  0x24dc6c8: add      sp, sp, #0xc0
-  0x24dc6cc: ret      
-  0x24dc6d0: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x24dc6d4: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x24dc6d8: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x24dc6dc: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x24dc6e0: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x24dc6e4: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x24dc6e8: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x24dc6ec: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x24dc6f0: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x24dc6f4: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x24dc6f8: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x24dc6fc: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x24dc700: b        #0x24dc798
-  0x24dc704: b        #0x24dc798
-  0x24dc708: b        #0x24dc798
-  0x24dc70c: b        #0x24dc798
-  0x24dc710: b        #0x24dc798
-  0x24dc714: b        #0x24dc798
-  0x24dc718: b        #0x24dc798
-  0x24dc71c: b        #0x24dc798
-  0x24dc720: b        #0x24dc798
-  0x24dc724: b        #0x24dc798
-  0x24dc728: b        #0x24dc798
-  0x24dc72c: b        #0x24dc798
-  0x24dc730: b        #0x24dc798
-  0x24dc734: b        #0x24dc798
-  0x24dc738: b        #0x24dc798
-  0x24dc73c: b        #0x24dc798
-  0x24dc740: b        #0x24dc798
-  0x24dc744: b        #0x24dc798
-  0x24dc748: b        #0x24dc798
-  0x24dc74c: b        #0x24dc798
-  0x24dc750: b        #0x24dc798
-  0x24dc754: b        #0x24dc798
-  0x24dc758: b        #0x24dc798
-  0x24dc75c: b        #0x24dc798
-  0x24dc760: b        #0x24dc798
-  0x24dc764: b        #0x24dc798
-  0x24dc768: b        #0x24dc798
-  0x24dc76c: b        #0x24dc798
-  0x24dc770: b        #0x24dc798
-  0x24dc774: b        #0x24dc798
-  0x24dc778: b        #0x24dc798
-  0x24dc77c: b        #0x24dc798
-  0x24dc780: b        #0x24dc798
-  0x24dc784: b        #0x24dc798
-  0x24dc788: b        #0x24dc798
-  0x24dc78c: b        #0x24dc798
-  0x24dc790: b        #0x24dc798
-  0x24dc794: b        #0x24dc798
-  0x24dc798: mov      x19, x0
-  0x24dc79c: cmp      w1, #1
-  0x24dc7a0: b.ne     #0x24dc7d4
-  0x24dc7a4: mov      x0, x19
-  0x24dc7a8: bl       #0x51eaae0 ; -> ??? 0x51eaae0
-  0x24dc7ac: ldr      x20, [x0] ; = 0x0 (u64 @ 0x5511000)
-  0x24dc7b0: bl       #0x51eaaf0 ; -> ??? 0x51eaaf0
-  0x24dc7b4: adrp     x8, #0x5511000
-  0x24dc7b8: ldr      x8, [x8, #0x830] ; = 0x0 (u64 @ 0x5511830)
-  0x24dc7bc: add      x0, sp, #0x30
-  0x24dc7c0: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5511000)
-  0x24dc7c4: bl       #0x40a9cc8 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
-  0x24dc7c8: cbz      x20, #0x24dc6ac
-  0x24dc7cc: mov      x0, x20
-  0x24dc7d0: bl       #0x21849b8 ; -> ??? 0x21849b8
-  0x24dc7d4: mov      x20, xzr
-  0x24dc7d8: b        #0x24dc7e0
-  0x24dc7dc: mov      x19, x0
-  0x24dc7e0: adrp     x8, #0x5511000
-  0x24dc7e4: ldr      x8, [x8, #0x830] ; = 0x0 (u64 @ 0x5511830)
-  0x24dc7e8: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5511000)
-  0x24dc7ec: add      x0, sp, #0x30
-  0x24dc7f0: bl       #0x40a9cc8 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
-  0x24dc7f4: cbnz     x20, #0x24dc800
-  0x24dc7f8: mov      x0, x19
-  0x24dc7fc: bl       #0x22854d4 ; -> ??? 0x22854d4
-  0x24dc800: mov      x0, x20
-  0x24dc804: bl       #0x21849b8 ; -> ??? 0x21849b8
-  0x24dc808: bl       #0x1f5cd20 ; -> ??? 0x1f5cd20
+; jeu 1.4.14 — régénéré par datagen/extract/disasm.py
+; ===== CStateBattle_PvpPenalty_PlayDamage @ 0x251e4e0..0x251ea9c (taille 1468 octets) =====
+  0x251e4e0: sub      sp, sp, #0xc0
+  0x251e4e4: stp      d9, d8, [sp, #0x50]
+  0x251e4e8: stp      x29, x30, [sp, #0x60]
+  0x251e4ec: stp      x28, x27, [sp, #0x70]
+  0x251e4f0: stp      x26, x25, [sp, #0x80]
+  0x251e4f4: stp      x24, x23, [sp, #0x90]
+  0x251e4f8: stp      x22, x21, [sp, #0xa0]
+  0x251e4fc: stp      x20, x19, [sp, #0xb0]
+  0x251e500: adrp     x22, #0x59d6000
+  0x251e504: adrp     x20, #0x558a000
+  0x251e508: ldrb     w8, [x22, #0xf1]
+  0x251e50c: ldr      x20, [x20, #0x88] ; = 0x0 (u64 @ 0x558a088)
+  0x251e510: mov      x19, x1
+  0x251e514: mov      x21, x0
+  0x251e518: tbnz     w8, #0, #0x251e5b4
+  0x251e51c: adrp     x0, #0x558a000
+  0x251e520: ldr      x0, [x0, #0x6d8] ; = 0x0 (u64 @ 0x558a6d8)
+  0x251e524: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x251e528: adrp     x0, #0x558a000
+  0x251e52c: ldr      x0, [x0, #0x3b0] ; = 0x0 (u64 @ 0x558a3b0)
+  0x251e530: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x251e534: adrp     x0, #0x558a000
+  0x251e538: ldr      x0, [x0, #0x3b8] ; = 0x0 (u64 @ 0x558a3b8)
+  0x251e53c: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x251e540: adrp     x0, #0x558a000
+  0x251e544: ldr      x0, [x0, #0x88] ; = 0x0 (u64 @ 0x558a088)
+  0x251e548: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x251e54c: adrp     x0, #0x558a000
+  0x251e550: ldr      x0, [x0, #0x260] ; = 0x0 (u64 @ 0x558a260)
+  0x251e554: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x251e558: adrp     x0, #0x558a000
+  0x251e55c: ldr      x0, [x0, #0x278] ; = 0x0 (u64 @ 0x558a278)
+  0x251e560: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x251e564: adrp     x0, #0x558a000
+  0x251e568: ldr      x0, [x0, #0x280] ; = 0x0 (u64 @ 0x558a280)
+  0x251e56c: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x251e570: adrp     x0, #0x558a000
+  0x251e574: ldr      x0, [x0, #0x290] ; = 0x0 (u64 @ 0x558a290)
+  0x251e578: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x251e57c: adrp     x0, #0x558a000
+  0x251e580: ldr      x0, [x0, #0x428] ; = 0x0 (u64 @ 0x558a428)
+  0x251e584: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x251e588: adrp     x0, #0x558a000
+  0x251e58c: ldr      x0, [x0, #0x430] ; = 0x0 (u64 @ 0x558a430)
+  0x251e590: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x251e594: adrp     x0, #0x558a000
+  0x251e598: ldr      x0, [x0, #0x438] ; = 0x0 (u64 @ 0x558a438)
+  0x251e59c: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x251e5a0: adrp     x0, #0x5587000
+  0x251e5a4: ldr      x0, [x0, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
+  0x251e5a8: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x251e5ac: mov      w8, #1
+  0x251e5b0: strb     w8, [x22, #0xf1]
+  0x251e5b4: ldr      x0, [x20] ; = 0x0 (u64 @ 0x558a000)
+  0x251e5b8: stp      xzr, xzr, [sp, #0x30]
+  0x251e5bc: str      xzr, [sp, #0x40]
+  0x251e5c0: ldr      w8, [x0, #0xe0]
+  0x251e5c4: cbnz     w8, #0x251e5cc
+  0x251e5c8: bl       #0x21afaf4 ; -> ??? 0x21afaf4
+  0x251e5cc: mov      x0, xzr
+  0x251e5d0: bl       #0x261aa78 ; -> CTempletManager$$get_Instance
+  0x251e5d4: cbz      x0, #0x251e98c
+  0x251e5d8: mov      w1, #0x17
+  0x251e5dc: mov      x2, xzr
+  0x251e5e0: bl       #0x2625a28 ; -> CTempletManager$$GetDamageTypeTemplet
+  0x251e5e4: cbz      x21, #0x251e98c
+  0x251e5e8: mov      x20, x0
+  0x251e5ec: ldr      x0, [x21, #0x10]
+  0x251e5f0: cbz      x0, #0x251e98c
+  0x251e5f4: adrp     x8, #0x558a000
+  0x251e5f8: ldr      x8, [x8, #0x290] ; = 0x0 (u64 @ 0x558a290)
+  0x251e5fc: adrp     x27, #0x558a000
+  0x251e600: adrp     x28, #0x5587000
+  0x251e604: adrp     x29, #0x558a000
+  0x251e608: ldr      x27, [x27, #0x278] ; = 0x0 (u64 @ 0x558a278)
+  0x251e60c: ldr      x28, [x28, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
+  0x251e610: ldr      x29, [x29, #0x6d8] ; = 0x0 (u64 @ 0x558a6d8)
+  0x251e614: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
+  0x251e618: adrp     x26, #0x558a000
+  0x251e61c: ldr      x26, [x26, #0x438] ; = 0x0 (u64 @ 0x558a438)
+  0x251e620: add      x8, sp, #0x18
+  0x251e624: bl       #0x44bb5c0 ; -> System.Collections.Generic.List<object>$$GetEnumerator
+  0x251e628: adrp     x21, #0x558a000
+  0x251e62c: adrp     x9, #0x106d000
+  0x251e630: ldur     q0, [sp, #0x18]
+  0x251e634: ldr      x8, [sp, #0x28]
+  0x251e638: ldr      x21, [x21, #0x248] ; = 0x0 (u64 @ 0x558a248)
+  0x251e63c: ldr      s9, [x9, #0x5ac] ; = 9.999999439624929e-11 (f32 @ 0x106d5ac)
+  0x251e640: adrp     x22, #0x59d4000
+  0x251e644: fmov     s8, #-1.00000000
+  0x251e648: str      q0, [sp, #0x30]
+  0x251e64c: str      x8, [sp, #0x40]
+  0x251e650: ldr      x1, [x27] ; = 0x0 (u64 @ 0x558a000)
+  0x251e654: add      x0, sp, #0x30
+  0x251e658: bl       #0x4112894 ; -> System.Collections.Generic.List.Enumerator<object>$$MoveNext
+  0x251e65c: tbz      w0, #0, #0x251e928
+  0x251e660: ldr      x0, [x28] ; = 0x0 (u64 @ 0x5587000)
+  0x251e664: ldr      x23, [sp, #0x40]
+  0x251e668: ldr      w8, [x0, #0xe0]
+  0x251e66c: cbnz     w8, #0x251e674
+  0x251e670: bl       #0x21afaf4 ; -> ??? 0x21afaf4
+  0x251e674: mov      x0, x23
+  0x251e678: mov      x1, xzr
+  0x251e67c: bl       #0x503a8e4 ; -> UnityEngine.Object$$op_Implicit
+  0x251e680: tbz      w0, #0, #0x251e650
+  0x251e684: cbz      x23, #0x251e96c
+  0x251e688: ldr      x0, [x23, #0x28]
+  0x251e68c: cbz      x0, #0x251e970
+  0x251e690: mov      x1, xzr
+  0x251e694: bl       #0x2901a30 ; -> CCharacterData$$get_MaxHP
+  0x251e698: mov      w24, w0
+  0x251e69c: ldr      x0, [x29] ; = 0x0 (u64 @ 0x558a000)
+  0x251e6a0: ldr      w25, [x19]
+  0x251e6a4: ldr      w8, [x0, #0xe0]
+  0x251e6a8: cbnz     w8, #0x251e6b0
+  0x251e6ac: bl       #0x21afaf4 ; -> ??? 0x21afaf4
+  0x251e6b0: mov      w0, w24
+  0x251e6b4: mov      w1, w25
+  0x251e6b8: mov      x2, xzr
+  0x251e6bc: bl       #0x2a00d74 ; -> CCommonDefine$$MulPermille
+  0x251e6c0: mov      w24, w0
+  0x251e6c4: neg      w1, w0
+  0x251e6c8: mov      w3, #1
+  0x251e6cc: mov      x0, x23
+  0x251e6d0: mov      w2, wzr
+  0x251e6d4: mov      w4, wzr
+  0x251e6d8: mov      x5, xzr
+  0x251e6dc: bl       #0x280e4b8 ; -> CCharacterBattle$$AddHP
+  0x251e6e0: ldrb     w8, [x22, #0xfc3]
+  0x251e6e4: cbnz     w8, #0x251e6f8
+  0x251e6e8: mov      x0, x21
+  0x251e6ec: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x251e6f0: mov      w8, #1
+  0x251e6f4: strb     w8, [x22, #0xfc3]
+  0x251e6f8: ldr      x8, [x21] ; = 0x0 (u64 @ 0x558a000)
+  0x251e6fc: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x558a0b8)
+  0x251e700: ldr      x8, [x8] ; = 0x0 (u64 @ 0x558a000)
+  0x251e704: cbz      x8, #0x251e964
+  0x251e708: ldr      x25, [x8, #0x68] ; = 0x0 (u64 @ 0x558a068)
+  0x251e70c: mov      x0, x23
+  0x251e710: mov      x1, xzr
+  0x251e714: bl       #0x5034840 ; -> UnityEngine.Component$$get_transform
+  0x251e718: cbz      x25, #0x251e968
+  0x251e71c: mov      x4, x0
+  0x251e720: mov      x0, x25
+  0x251e724: mov      w1, w24
+  0x251e728: mov      w2, wzr
+  0x251e72c: mov      w3, wzr
+  0x251e730: mov      w5, wzr
+  0x251e734: mov      x6, xzr
+  0x251e738: bl       #0x28fc644 ; -> CUIHud$$PlayHudTextDamage
+  0x251e73c: mov      x0, x23
+  0x251e740: mov      x1, xzr
+  0x251e744: bl       #0x280e43c ; -> CCharacterBattle$$get_HP
+  0x251e748: cbnz     w0, #0x251e770
+  0x251e74c: mov      x0, x23
+  0x251e750: mov      x1, xzr
+  0x251e754: bl       #0x270d5c8 ; -> CCharacter$$get_IsAlive
+  0x251e758: tbz      w0, #0, #0x251e770
+  0x251e75c: ldr      x8, [x23]
+  0x251e760: ldp      x9, x2, [x8, #0x198]
+  0x251e764: mov      x0, x23
+  0x251e768: mov      w1, wzr
+  0x251e76c: blr      x9
+  0x251e770: cbz      x20, #0x251e960
+  0x251e774: ldr      x8, [x20, #0x38] ; = 0x0 (u64 @ 0x558a038)
+  0x251e778: cbz      x8, #0x251e974
+  0x251e77c: ldr      w8, [x8, #0x18]
+  0x251e780: cmp      w8, #1
+  0x251e784: b.lt     #0x251e7d4
+  0x251e788: adrp     x8, #0x558a000
+  0x251e78c: ldr      x8, [x8, #0x3b8] ; = 0x0 (u64 @ 0x558a3b8)
+  0x251e790: ldr      x0, [x8] ; = 0x0 (u64 @ 0x558a000)
+  0x251e794: bl       #0x3e5d064 ; -> CSingletonBehaviour<object>$$get_Instance
+  0x251e798: mov      x24, x0
+  0x251e79c: mov      x0, x20
+  0x251e7a0: mov      x1, xzr
+  0x251e7a4: bl       #0x25ee8c8 ; -> CDamageTypeTemplet$$get_SoundName
+  0x251e7a8: mov      x25, x0
+  0x251e7ac: mov      x0, x23
+  0x251e7b0: mov      x1, xzr
+  0x251e7b4: bl       #0x503487c ; -> UnityEngine.Component$$get_gameObject
+  0x251e7b8: cbz      x24, #0x251e984
+  0x251e7bc: mov      x3, x0
+  0x251e7c0: mov      x0, x24
+  0x251e7c4: mov      w1, wzr
+  0x251e7c8: mov      x2, x25
+  0x251e7cc: mov      x4, xzr
+  0x251e7d0: bl       #0x25dee74 ; -> CSoundManager$$PlaySound
+  0x251e7d4: ldr      x8, [x20, #0x50] ; = 0x0 (u64 @ 0x558a050)
+  0x251e7d8: cbz      x8, #0x251e978
+  0x251e7dc: ldr      w8, [x8, #0x18]
+  0x251e7e0: cmp      w8, #1
+  0x251e7e4: b.lt     #0x251e8b4
+  0x251e7e8: adrp     x8, #0x558a000
+  0x251e7ec: ldr      x8, [x8, #0x3b0] ; = 0x0 (u64 @ 0x558a3b0)
+  0x251e7f0: ldr      x0, [x8] ; = 0x0 (u64 @ 0x558a000)
+  0x251e7f4: bl       #0x3e5d064 ; -> CSingletonBehaviour<object>$$get_Instance
+  0x251e7f8: mov      x24, x0
+  0x251e7fc: ldr      x0, [x20, #0x50] ; = 0x0 (u64 @ 0x558a050)
+  0x251e800: cbz      x0, #0x251e980
+  0x251e804: adrp     x8, #0x558a000
+  0x251e808: ldr      x8, [x8, #0x430] ; = 0x0 (u64 @ 0x558a430)
+  0x251e80c: ldr      x2, [x8] ; = 0x0 (u64 @ 0x558a000)
+  0x251e810: mov      w1, wzr
+  0x251e814: bl       #0x44ba7f0 ; -> System.Collections.Generic.List<object>$$get_Item
+  0x251e818: mov      x25, x0
+  0x251e81c: mov      x0, x23
+  0x251e820: mov      x1, xzr
+  0x251e824: bl       #0x5034840 ; -> UnityEngine.Component$$get_transform
+  0x251e828: cbz      x0, #0x251e97c
+  0x251e82c: mov      x1, xzr
+  0x251e830: bl       #0x5041024 ; -> UnityEngine.Transform$$get_position
+  0x251e834: ldr      x1, [x26] ; = 0x0 (u64 @ 0x558a000)
+  0x251e838: stp      xzr, xzr, [sp, #0x18]
+  0x251e83c: add      x0, sp, #0x18
+  0x251e840: bl       #0x4626eb0 ; -> System.Nullable<Vector3>$$.ctor
+  0x251e844: adrp     x8, #0x59d4000
+  0x251e848: ldrb     w8, [x8, #0xfc8]
+  0x251e84c: cbnz     w8, #0x251e868
+  0x251e850: adrp     x0, #0x5589000
+  0x251e854: ldr      x0, [x0, #0xe30] ; = 0x0 (u64 @ 0x5589e30)
+  0x251e858: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x251e85c: mov      w8, #1
+  0x251e860: adrp     x9, #0x59d4000
+  0x251e864: strb     w8, [x9, #0xfc8]
+  0x251e868: adrp     x8, #0x5589000
+  0x251e86c: ldr      x8, [x8, #0xe30] ; = 0x0 (u64 @ 0x5589e30)
+  0x251e870: ldr      x1, [x26] ; = 0x0 (u64 @ 0x558a000)
+  0x251e874: ldr      x8, [x8] ; = 0x0 (u64 @ 0x5589000)
+  0x251e878: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55890b8)
+  0x251e87c: ldp      s0, s1, [x8]
+  0x251e880: ldr      s2, [x8, #8] ; = 0.0 (f32 @ 0x5589008)
+  0x251e884: stp      xzr, xzr, [sp, #8]
+  0x251e888: add      x0, sp, #8
+  0x251e88c: bl       #0x4626eb0 ; -> System.Nullable<Vector3>$$.ctor
+  0x251e890: cbz      x24, #0x251e988
+  0x251e894: ldp      x4, x5, [sp, #0x18]
+  0x251e898: ldp      x6, x7, [sp, #8]
+  0x251e89c: mov      x0, x24
+  0x251e8a0: mov      x1, x25
+  0x251e8a4: mov      x2, x23
+  0x251e8a8: mov      x3, x23
+  0x251e8ac: str      xzr, [sp]
+  0x251e8b0: bl       #0x2be1fc4 ; -> CEffectManager$$Play
+  0x251e8b4: mov      x0, x20
+  0x251e8b8: mov      x1, xzr
+  0x251e8bc: bl       #0x25ee7bc ; -> CDamageTypeTemplet$$get_HitColorRGB
+  0x251e8c0: fmul     s0, s0, s0
+  0x251e8c4: fmul     s1, s1, s1
+  0x251e8c8: fadd     s3, s3, s8
+  0x251e8cc: fmul     s2, s2, s2
+  0x251e8d0: fadd     s0, s0, s1
+  0x251e8d4: fadd     s0, s2, s0
+  0x251e8d8: fmul     s1, s3, s3
+  0x251e8dc: fadd     s0, s1, s0
+  0x251e8e0: fcmp     s0, s9
+  0x251e8e4: b.mi     #0x251e910
+  0x251e8e8: ldr      s0, [x20, #0x30] ; = 0.0 (f32 @ 0x558a030)
+  0x251e8ec: fcmp     s0, #0.0
+  0x251e8f0: b.eq     #0x251e910
+  0x251e8f4: mov      x0, x20
+  0x251e8f8: mov      x1, xzr
+  0x251e8fc: bl       #0x25ee7bc ; -> CDamageTypeTemplet$$get_HitColorRGB
+  0x251e900: ldr      s4, [x20, #0x30] ; = 0.0 (f32 @ 0x558a030)
+  0x251e904: mov      x0, x23
+  0x251e908: mov      x1, xzr
+  0x251e90c: bl       #0x2716d2c ; -> CCharacter$$PlayHitLightEffect
+  0x251e910: mov      w1, #1
+  0x251e914: mov      x0, x23
+  0x251e918: mov      w2, wzr
+  0x251e91c: mov      x3, xzr
+  0x251e920: bl       #0x2716998 ; -> CCharacter$$ChangeDamageReactState
+  0x251e924: b        #0x251e650
+  0x251e928: adrp     x8, #0x558a000
+  0x251e92c: ldr      x8, [x8, #0x260] ; = 0x0 (u64 @ 0x558a260)
+  0x251e930: add      x0, sp, #0x30
+  0x251e934: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
+  0x251e938: bl       #0x4112890 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
+  0x251e93c: ldp      x20, x19, [sp, #0xb0]
+  0x251e940: ldp      x22, x21, [sp, #0xa0]
+  0x251e944: ldp      x24, x23, [sp, #0x90]
+  0x251e948: ldp      x26, x25, [sp, #0x80]
+  0x251e94c: ldp      x28, x27, [sp, #0x70]
+  0x251e950: ldp      x29, x30, [sp, #0x60]
+  0x251e954: ldp      d9, d8, [sp, #0x50]
+  0x251e958: add      sp, sp, #0xc0
+  0x251e95c: ret      
+  0x251e960: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x251e964: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x251e968: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x251e96c: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x251e970: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x251e974: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x251e978: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x251e97c: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x251e980: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x251e984: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x251e988: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x251e98c: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x251e990: b        #0x251ea28
+  0x251e994: b        #0x251ea28
+  0x251e998: b        #0x251ea28
+  0x251e99c: b        #0x251ea28
+  0x251e9a0: b        #0x251ea28
+  0x251e9a4: b        #0x251ea28
+  0x251e9a8: b        #0x251ea28
+  0x251e9ac: b        #0x251ea28
+  0x251e9b0: b        #0x251ea28
+  0x251e9b4: b        #0x251ea28
+  0x251e9b8: b        #0x251ea28
+  0x251e9bc: b        #0x251ea28
+  0x251e9c0: b        #0x251ea28
+  0x251e9c4: b        #0x251ea28
+  0x251e9c8: b        #0x251ea28
+  0x251e9cc: b        #0x251ea28
+  0x251e9d0: b        #0x251ea28
+  0x251e9d4: b        #0x251ea28
+  0x251e9d8: b        #0x251ea28
+  0x251e9dc: b        #0x251ea28
+  0x251e9e0: b        #0x251ea28
+  0x251e9e4: b        #0x251ea28
+  0x251e9e8: b        #0x251ea28
+  0x251e9ec: b        #0x251ea28
+  0x251e9f0: b        #0x251ea28
+  0x251e9f4: b        #0x251ea28
+  0x251e9f8: b        #0x251ea28
+  0x251e9fc: b        #0x251ea28
+  0x251ea00: b        #0x251ea28
+  0x251ea04: b        #0x251ea28
+  0x251ea08: b        #0x251ea28
+  0x251ea0c: b        #0x251ea28
+  0x251ea10: b        #0x251ea28
+  0x251ea14: b        #0x251ea28
+  0x251ea18: b        #0x251ea28
+  0x251ea1c: b        #0x251ea28
+  0x251ea20: b        #0x251ea28
+  0x251ea24: b        #0x251ea28
+  0x251ea28: mov      x19, x0
+  0x251ea2c: cmp      w1, #1
+  0x251ea30: b.ne     #0x251ea64
+  0x251ea34: mov      x0, x19
+  0x251ea38: bl       #0x525f4e0 ; -> ??? 0x525f4e0
+  0x251ea3c: ldr      x20, [x0] ; = 0x0 (u64 @ 0x5589000)
+  0x251ea40: bl       #0x525f4f0 ; -> ??? 0x525f4f0
+  0x251ea44: adrp     x8, #0x558a000
+  0x251ea48: ldr      x8, [x8, #0x260] ; = 0x0 (u64 @ 0x558a260)
+  0x251ea4c: add      x0, sp, #0x30
+  0x251ea50: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
+  0x251ea54: bl       #0x4112890 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
+  0x251ea58: cbz      x20, #0x251e93c
+  0x251ea5c: mov      x0, x20
+  0x251ea60: bl       #0x21afc10 ; -> ??? 0x21afc10
+  0x251ea64: mov      x20, xzr
+  0x251ea68: b        #0x251ea70
+  0x251ea6c: mov      x19, x0
+  0x251ea70: adrp     x8, #0x558a000
+  0x251ea74: ldr      x8, [x8, #0x260] ; = 0x0 (u64 @ 0x558a260)
+  0x251ea78: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
+  0x251ea7c: add      x0, sp, #0x30
+  0x251ea80: bl       #0x4112890 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
+  0x251ea84: cbnz     x20, #0x251ea90
+  0x251ea88: mov      x0, x19
+  0x251ea8c: bl       #0x22b072c ; -> ??? 0x22b072c
+  0x251ea90: mov      x0, x20
+  0x251ea94: bl       #0x21afc10 ; -> ??? 0x21afc10
+  0x251ea98: bl       #0x1f86e18 ; -> ??? 0x1f86e18

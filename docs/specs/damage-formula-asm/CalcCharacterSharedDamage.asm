@@ -1,318 +1,319 @@
-; ===== CalcCharacterSharedDamage @ 0x2c5b778..0x2c5bc6c (taille 1268 octets) =====
-  0x2c5b778: stp      x30, x27, [sp, #-0x50]!
-  0x2c5b77c: stp      x26, x25, [sp, #0x10]
-  0x2c5b780: stp      x24, x23, [sp, #0x20]
-  0x2c5b784: stp      x22, x21, [sp, #0x30]
-  0x2c5b788: stp      x20, x19, [sp, #0x40]
-  0x2c5b78c: adrp     x20, #0x595a000
-  0x2c5b790: ldrb     w8, [x20, #0x909]
-  0x2c5b794: mov      w22, w1
-  0x2c5b798: mov      x19, x0
-  0x2c5b79c: tbnz     w8, #0, #0x2c5b7fc
-  0x2c5b7a0: adrp     x0, #0x5511000
-  0x2c5b7a4: ldr      x0, [x0, #0xca0] ; = 0x0 (u64 @ 0x5511ca0)
-  0x2c5b7a8: bl       #0x2184724 ; -> ??? 0x2184724
-  0x2c5b7ac: adrp     x0, #0x5523000
-  0x2c5b7b0: ldr      x0, [x0, #0x108] ; = 0x0 (u64 @ 0x5523108)
-  0x2c5b7b4: bl       #0x2184724 ; -> ??? 0x2184724
-  0x2c5b7b8: adrp     x0, #0x550f000
-  0x2c5b7bc: ldr      x0, [x0, #0x1c0] ; = 0x0 (u64 @ 0x550f1c0)
-  0x2c5b7c0: bl       #0x2184724 ; -> ??? 0x2184724
-  0x2c5b7c4: adrp     x0, #0x5551000
-  0x2c5b7c8: ldr      x0, [x0, #0x1f0] ; = 0x0 (u64 @ 0x55511f0)
-  0x2c5b7cc: bl       #0x2184724 ; -> ??? 0x2184724
-  0x2c5b7d0: adrp     x0, #0x5551000
-  0x2c5b7d4: ldr      x0, [x0, #0x1f8] ; = 0x0 (u64 @ 0x55511f8)
-  0x2c5b7d8: bl       #0x2184724 ; -> ??? 0x2184724
-  0x2c5b7dc: adrp     x0, #0x550f000
-  0x2c5b7e0: ldr      x0, [x0, #0x2b8] ; = 0x0 (u64 @ 0x550f2b8)
-  0x2c5b7e4: bl       #0x2184724 ; -> ??? 0x2184724
-  0x2c5b7e8: adrp     x0, #0x550f000
-  0x2c5b7ec: ldr      x0, [x0, #0x100] ; = 0x0 (u64 @ 0x550f100)
-  0x2c5b7f0: bl       #0x2184724 ; -> ??? 0x2184724
-  0x2c5b7f4: mov      w8, #1
-  0x2c5b7f8: strb     w8, [x20, #0x909]
-  0x2c5b7fc: cbz      x19, #0x2c5bb84
-  0x2c5b800: mov      x0, x19
-  0x2c5b804: mov      x1, xzr
-  0x2c5b808: bl       #0x26c96b8 ; -> CCharacterBattle$$GetTeam
-  0x2c5b80c: cbz      x0, #0x2c5bb84
-  0x2c5b810: adrp     x20, #0x5523000
-  0x2c5b814: adrp     x25, #0x5511000
-  0x2c5b818: ldr      x20, [x20, #0x108] ; = 0x0 (u64 @ 0x5523108)
-  0x2c5b81c: ldr      x25, [x25, #0xca0] ; = 0x0 (u64 @ 0x5511ca0)
-  0x2c5b820: mov      x1, x19
-  0x2c5b824: mov      x2, xzr
-  0x2c5b828: bl       #0x254efe4 ; -> CTeam$$GetCharactersMultiSharedDamage
-  0x2c5b82c: ldr      x1, [x20] ; = 0x0 (u64 @ 0x5523000)
-  0x2c5b830: mov      x20, x0
-  0x2c5b834: bl       #0x340a90c ; -> System.Linq.Enumerable$$Count<object>
-  0x2c5b838: cmp      w0, #1
-  0x2c5b83c: b.lt     #0x2c5b88c
-  0x2c5b840: cbz      x20, #0x2c5bb84
-  0x2c5b844: adrp     x10, #0x5551000
-  0x2c5b848: ldr      x8, [x20] ; = 0x0 (u64 @ 0x5523000)
-  0x2c5b84c: ldr      x10, [x10, #0x1f0] ; = 0x0 (u64 @ 0x55511f0)
-  0x2c5b850: ldrh     w9, [x8, #0x12e]
-  0x2c5b854: ldr      x1, [x10] ; = 0x0 (u64 @ 0x5551000)
-  0x2c5b858: cbz      x9, #0x2c5b87c
-  0x2c5b85c: ldr      x10, [x8, #0xb0]
-  0x2c5b860: add      x10, x10, #8
-  0x2c5b864: ldur     x11, [x10, #-8]
-  0x2c5b868: cmp      x11, x1
-  0x2c5b86c: b.eq     #0x2c5b894
-  0x2c5b870: subs     x9, x9, #1
-  0x2c5b874: add      x10, x10, #0x10
-  0x2c5b878: b.ne     #0x2c5b864
-  0x2c5b87c: mov      x0, x20
-  0x2c5b880: mov      w2, wzr
-  0x2c5b884: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x2c5b888: b        #0x2c5b8a0
-  0x2c5b88c: mov      w20, w22
-  0x2c5b890: b        #0x2c5ba88
-  0x2c5b894: ldrsw    x9, [x10]
-  0x2c5b898: add      x8, x8, x9, lsl #4
-  0x2c5b89c: add      x0, x8, #0x138
-  0x2c5b8a0: ldp      x8, x1, [x0]
-  0x2c5b8a4: adrp     x26, #0x550f000
-  0x2c5b8a8: adrp     x27, #0x5551000
-  0x2c5b8ac: ldr      x26, [x26, #0x2b8] ; = 0x0 (u64 @ 0x550f2b8)
-  0x2c5b8b0: ldr      x27, [x27, #0x1f8] ; = 0x0 (u64 @ 0x55511f8)
-  0x2c5b8b4: mov      x0, x20
-  0x2c5b8b8: blr      x8
-  0x2c5b8bc: mov      x21, x0
-  0x2c5b8c0: mov      w20, w22
-  0x2c5b8c4: cbz      x21, #0x2c5bb78
-  0x2c5b8c8: ldr      x8, [x21]
-  0x2c5b8cc: ldr      x1, [x26] ; = 0x0 (u64 @ 0x550f000)
-  0x2c5b8d0: ldrh     w9, [x8, #0x12e]
-  0x2c5b8d4: cbz      x9, #0x2c5b8f8
-  0x2c5b8d8: ldr      x10, [x8, #0xb0]
-  0x2c5b8dc: add      x10, x10, #8
-  0x2c5b8e0: ldur     x11, [x10, #-8]
-  0x2c5b8e4: cmp      x11, x1
-  0x2c5b8e8: b.eq     #0x2c5b908
-  0x2c5b8ec: subs     x9, x9, #1
-  0x2c5b8f0: add      x10, x10, #0x10
-  0x2c5b8f4: b.ne     #0x2c5b8e0
-  0x2c5b8f8: mov      x0, x21
-  0x2c5b8fc: mov      w2, wzr
-  0x2c5b900: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x2c5b904: b        #0x2c5b914
-  0x2c5b908: ldrsw    x9, [x10]
-  0x2c5b90c: add      x8, x8, x9, lsl #4
-  0x2c5b910: add      x0, x8, #0x138
-  0x2c5b914: ldp      x8, x1, [x0]
-  0x2c5b918: mov      x0, x21
-  0x2c5b91c: blr      x8
-  0x2c5b920: tbz      w0, #0, #0x2c5ba0c
-  0x2c5b924: ldr      x8, [x21]
-  0x2c5b928: ldr      x1, [x27] ; = 0x0 (u64 @ 0x5551000)
-  0x2c5b92c: ldrh     w9, [x8, #0x12e]
-  0x2c5b930: cbz      x9, #0x2c5b954
-  0x2c5b934: ldr      x10, [x8, #0xb0]
-  0x2c5b938: add      x10, x10, #8
-  0x2c5b93c: ldur     x11, [x10, #-8]
-  0x2c5b940: cmp      x11, x1
-  0x2c5b944: b.eq     #0x2c5b964
-  0x2c5b948: subs     x9, x9, #1
-  0x2c5b94c: add      x10, x10, #0x10
-  0x2c5b950: b.ne     #0x2c5b93c
-  0x2c5b954: mov      x0, x21
-  0x2c5b958: mov      w2, wzr
-  0x2c5b95c: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x2c5b960: b        #0x2c5b970
-  0x2c5b964: ldrsw    x9, [x10]
-  0x2c5b968: add      x8, x8, x9, lsl #4
-  0x2c5b96c: add      x0, x8, #0x138
-  0x2c5b970: ldp      x8, x1, [x0]
-  0x2c5b974: mov      x0, x21
-  0x2c5b978: blr      x8
-  0x2c5b97c: mov      x23, x0
-  0x2c5b980: cbz      x0, #0x2c5bb7c
-  0x2c5b984: mov      w1, #0x89
-  0x2c5b988: mov      x0, x23
-  0x2c5b98c: mov      x2, xzr
-  0x2c5b990: bl       #0x26c5ab0 ; -> CCharacterBattle$$FindBuffByType
-  0x2c5b994: mov      x24, x0
-  0x2c5b998: cbz      x0, #0x2c5bb80
-  0x2c5b99c: mov      x0, x24
-  0x2c5b9a0: mov      x1, xzr
-  0x2c5b9a4: bl       #0x22f4afc ; -> CBuff$$get_ApplyingType
-  0x2c5b9a8: cmp      w0, #2
-  0x2c5b9ac: b.ne     #0x2c5b8c4
-  0x2c5b9b0: mov      x0, x24
-  0x2c5b9b4: mov      x1, xzr
-  0x2c5b9b8: bl       #0x22f4b38 ; -> CBuff$$get_Value
-  0x2c5b9bc: mov      w24, w0
-  0x2c5b9c0: ldr      x0, [x25] ; = 0x0 (u64 @ 0x5511000)
-  0x2c5b9c4: ldr      w8, [x0, #0xe0]
-  0x2c5b9c8: cbnz     w8, #0x2c5b9d0
-  0x2c5b9cc: bl       #0x218489c ; -> ??? 0x218489c
-  0x2c5b9d0: mov      w0, w22
-  0x2c5b9d4: mov      w1, w24
-  0x2c5b9d8: mov      x2, xzr
-  0x2c5b9dc: bl       #0x28d81c0 ; -> CCommonDefine$$MulPermille
-  0x2c5b9e0: mov      w24, w0
-  0x2c5b9e4: mov      x0, x23
-  0x2c5b9e8: mov      x1, xzr
-  0x2c5b9ec: bl       #0x26c7224 ; -> CCharacterBattle$$get_SkillRecord
-  0x2c5b9f0: cbz      x0, #0x2c5bb90
-  0x2c5b9f4: ldr      w8, [x0, #0xa4]
-  0x2c5b9f8: sub      w9, w20, w24
-  0x2c5b9fc: bic      w20, w9, w9, asr #31
-  0x2c5ba00: add      w8, w8, w24
-  0x2c5ba04: str      w8, [x0, #0xa4]
-  0x2c5ba08: b        #0x2c5b8c4
-  0x2c5ba0c: mov      x22, xzr
-  0x2c5ba10: mov      w23, #5
-  0x2c5ba14: cbz      x21, #0x2c5ba78
-  0x2c5ba18: adrp     x10, #0x550f000
-  0x2c5ba1c: ldr      x8, [x21]
-  0x2c5ba20: ldr      x10, [x10, #0x1c0] ; = 0x0 (u64 @ 0x550f1c0)
-  0x2c5ba24: ldrh     w9, [x8, #0x12e]
-  0x2c5ba28: ldr      x1, [x10] ; = 0x0 (u64 @ 0x550f000)
-  0x2c5ba2c: cbz      x9, #0x2c5ba50
-  0x2c5ba30: ldr      x10, [x8, #0xb0]
-  0x2c5ba34: add      x10, x10, #8
-  0x2c5ba38: ldur     x11, [x10, #-8]
-  0x2c5ba3c: cmp      x11, x1
-  0x2c5ba40: b.eq     #0x2c5ba60
-  0x2c5ba44: subs     x9, x9, #1
-  0x2c5ba48: add      x10, x10, #0x10
-  0x2c5ba4c: b.ne     #0x2c5ba38
-  0x2c5ba50: mov      x0, x21
-  0x2c5ba54: mov      w2, wzr
-  0x2c5ba58: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x2c5ba5c: b        #0x2c5ba6c
-  0x2c5ba60: ldrsw    x9, [x10]
-  0x2c5ba64: add      x8, x8, x9, lsl #4
-  0x2c5ba68: add      x0, x8, #0x138
-  0x2c5ba6c: ldp      x8, x1, [x0]
-  0x2c5ba70: mov      x0, x21
-  0x2c5ba74: blr      x8
-  0x2c5ba78: cbnz     x22, #0x2c5bb88
-  0x2c5ba7c: cmp      w23, #5
-  0x2c5ba80: b.eq     #0x2c5ba88
-  0x2c5ba84: cbnz     w23, #0x2c5bb5c
-  0x2c5ba88: mov      x0, x19
-  0x2c5ba8c: mov      x1, xzr
-  0x2c5ba90: bl       #0x26c96b8 ; -> CCharacterBattle$$GetTeam
-  0x2c5ba94: cbz      x0, #0x2c5bb84
-  0x2c5ba98: adrp     x22, #0x550f000
-  0x2c5ba9c: ldr      x22, [x22, #0x100] ; = 0x0 (u64 @ 0x550f100)
-  0x2c5baa0: mov      x1, xzr
-  0x2c5baa4: bl       #0x254ee04 ; -> CTeam$$GetCharacterSharedDamage
-  0x2c5baa8: ldr      x8, [x22] ; = 0x0 (u64 @ 0x550f000)
-  0x2c5baac: mov      x21, x0
-  0x2c5bab0: ldr      w9, [x8, #0xe0]
-  0x2c5bab4: cbnz     w9, #0x2c5bac0
-  0x2c5bab8: mov      x0, x8
-  0x2c5babc: bl       #0x218489c ; -> ??? 0x218489c
-  0x2c5bac0: mov      x0, x21
-  0x2c5bac4: mov      x1, xzr
-  0x2c5bac8: bl       #0x4f8524c ; -> UnityEngine.Object$$op_Implicit
-  0x2c5bacc: tbz      w0, #0, #0x2c5bb5c
-  0x2c5bad0: ldr      x0, [x22] ; = 0x0 (u64 @ 0x550f000)
-  0x2c5bad4: ldr      w8, [x0, #0xe0]
-  0x2c5bad8: cbnz     w8, #0x2c5bae0
-  0x2c5badc: bl       #0x218489c ; -> ??? 0x218489c
-  0x2c5bae0: mov      x0, x21
-  0x2c5bae4: mov      x1, x19
-  0x2c5bae8: mov      x2, xzr
-  0x2c5baec: bl       #0x4f81aa0 ; -> UnityEngine.Object$$op_Inequality
-  0x2c5baf0: tbz      w0, #0, #0x2c5bb5c
-  0x2c5baf4: cbz      x21, #0x2c5bb84
-  0x2c5baf8: mov      x0, x21
-  0x2c5bafc: mov      x1, xzr
-  0x2c5bb00: bl       #0x26dfbdc ; -> CCharacterBattle$$FindBuffShareDamage
-  0x2c5bb04: cbz      x0, #0x2c5bb5c
-  0x2c5bb08: mov      x1, xzr
-  0x2c5bb0c: bl       #0x22f4b38 ; -> CBuff$$get_Value
-  0x2c5bb10: ldr      x8, [x25] ; = 0x0 (u64 @ 0x5511000)
-  0x2c5bb14: mov      w19, w0
-  0x2c5bb18: ldr      w9, [x8, #0xe0]
-  0x2c5bb1c: cbnz     w9, #0x2c5bb28
-  0x2c5bb20: mov      x0, x8
-  0x2c5bb24: bl       #0x218489c ; -> ??? 0x218489c
-  0x2c5bb28: mov      w0, w20
-  0x2c5bb2c: mov      w1, w19
-  0x2c5bb30: mov      x2, xzr
-  0x2c5bb34: bl       #0x28d81c0 ; -> CCommonDefine$$MulPermille
-  0x2c5bb38: mov      w19, w0
-  0x2c5bb3c: mov      x0, x21
-  0x2c5bb40: mov      x1, xzr
-  0x2c5bb44: bl       #0x26c7224 ; -> CCharacterBattle$$get_SkillRecord
-  0x2c5bb48: cbz      x0, #0x2c5bb84
-  0x2c5bb4c: ldr      w8, [x0, #0xa0]
-  0x2c5bb50: sub      w20, w20, w19
-  0x2c5bb54: add      w8, w8, w19
-  0x2c5bb58: str      w8, [x0, #0xa0]
-  0x2c5bb5c: mov      w0, w20
-  0x2c5bb60: ldp      x20, x19, [sp, #0x40]
-  0x2c5bb64: ldp      x22, x21, [sp, #0x30]
-  0x2c5bb68: ldp      x24, x23, [sp, #0x20]
-  0x2c5bb6c: ldp      x26, x25, [sp, #0x10]
-  0x2c5bb70: ldp      x30, x27, [sp], #0x50
-  0x2c5bb74: ret      
-  0x2c5bb78: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x2c5bb7c: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x2c5bb80: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x2c5bb84: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x2c5bb88: mov      x0, x22
-  0x2c5bb8c: bl       #0x21849b8 ; -> ??? 0x21849b8
-  0x2c5bb90: bl       #0x21849c0 ; -> ??? 0x21849c0
-  0x2c5bb94: b        #0x2c5bbc0
-  0x2c5bb98: b        #0x2c5bbc0
-  0x2c5bb9c: b        #0x2c5bbc0
-  0x2c5bba0: b        #0x2c5bbc0
-  0x2c5bba4: b        #0x2c5bbc0
-  0x2c5bba8: b        #0x2c5bbc0
-  0x2c5bbac: b        #0x2c5bbc0
-  0x2c5bbb0: b        #0x2c5bbc0
-  0x2c5bbb4: mov      w20, w22
-  0x2c5bbb8: b        #0x2c5bbc0
-  0x2c5bbbc: b        #0x2c5bbc0
-  0x2c5bbc0: cmp      w1, #1
-  0x2c5bbc4: b.ne     #0x2c5bbe0
-  0x2c5bbc8: bl       #0x51eaae0 ; -> ??? 0x51eaae0
-  0x2c5bbcc: ldr      x22, [x0] ; = 0x0 (u64 @ 0x550f000)
-  0x2c5bbd0: bl       #0x51eaaf0 ; -> ??? 0x51eaaf0
-  0x2c5bbd4: mov      w23, wzr
-  0x2c5bbd8: cbnz     x21, #0x2c5ba18
-  0x2c5bbdc: b        #0x2c5ba78
-  0x2c5bbe0: mov      x19, x0
-  0x2c5bbe4: mov      x22, xzr
-  0x2c5bbe8: b        #0x2c5bbf0
-  0x2c5bbec: mov      x19, x0
-  0x2c5bbf0: cbz      x21, #0x2c5bc54
-  0x2c5bbf4: adrp     x10, #0x550f000
-  0x2c5bbf8: ldr      x8, [x21]
-  0x2c5bbfc: ldr      x10, [x10, #0x1c0] ; = 0x0 (u64 @ 0x550f1c0)
-  0x2c5bc00: ldrh     w9, [x8, #0x12e]
-  0x2c5bc04: ldr      x1, [x10] ; = 0x0 (u64 @ 0x550f000)
-  0x2c5bc08: cbz      x9, #0x2c5bc2c
-  0x2c5bc0c: ldr      x10, [x8, #0xb0]
-  0x2c5bc10: add      x10, x10, #8
-  0x2c5bc14: ldur     x11, [x10, #-8]
-  0x2c5bc18: cmp      x11, x1
-  0x2c5bc1c: b.eq     #0x2c5bc3c
-  0x2c5bc20: subs     x9, x9, #1
-  0x2c5bc24: add      x10, x10, #0x10
-  0x2c5bc28: b.ne     #0x2c5bc14
-  0x2c5bc2c: mov      x0, x21
-  0x2c5bc30: mov      w2, wzr
-  0x2c5bc34: bl       #0x21e4dd0 ; -> ??? 0x21e4dd0
-  0x2c5bc38: b        #0x2c5bc48
-  0x2c5bc3c: ldrsw    x9, [x10]
-  0x2c5bc40: add      x8, x8, x9, lsl #4
-  0x2c5bc44: add      x0, x8, #0x138
-  0x2c5bc48: ldp      x8, x1, [x0]
-  0x2c5bc4c: mov      x0, x21
-  0x2c5bc50: blr      x8
-  0x2c5bc54: cbnz     x22, #0x2c5bc60
-  0x2c5bc58: mov      x0, x19
-  0x2c5bc5c: bl       #0x22854d4 ; -> ??? 0x22854d4
-  0x2c5bc60: mov      x0, x22
-  0x2c5bc64: bl       #0x21849b8 ; -> ??? 0x21849b8
-  0x2c5bc68: bl       #0x1f5cd20 ; -> ??? 0x1f5cd20
+; jeu 1.4.14 — régénéré par datagen/extract/disasm.py
+; ===== CalcCharacterSharedDamage @ 0x2cb36fc..0x2cb3bf0 (taille 1268 octets) =====
+  0x2cb36fc: stp      x30, x27, [sp, #-0x50]!
+  0x2cb3700: stp      x26, x25, [sp, #0x10]
+  0x2cb3704: stp      x24, x23, [sp, #0x20]
+  0x2cb3708: stp      x22, x21, [sp, #0x30]
+  0x2cb370c: stp      x20, x19, [sp, #0x40]
+  0x2cb3710: adrp     x20, #0x59da000
+  0x2cb3714: ldrb     w8, [x20, #0x116]
+  0x2cb3718: mov      w22, w1
+  0x2cb371c: mov      x19, x0
+  0x2cb3720: tbnz     w8, #0, #0x2cb3780
+  0x2cb3724: adrp     x0, #0x558a000
+  0x2cb3728: ldr      x0, [x0, #0x6d8] ; = 0x0 (u64 @ 0x558a6d8)
+  0x2cb372c: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x2cb3730: adrp     x0, #0x558a000
+  0x2cb3734: ldr      x0, [x0, #0xf90] ; = 0x0 (u64 @ 0x558af90)
+  0x2cb3738: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x2cb373c: adrp     x0, #0x5587000
+  0x2cb3740: ldr      x0, [x0, #0xbf0] ; = 0x0 (u64 @ 0x5587bf0)
+  0x2cb3744: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x2cb3748: adrp     x0, #0x55cb000
+  0x2cb374c: ldr      x0, [x0, #0x98] ; = 0x0 (u64 @ 0x55cb098)
+  0x2cb3750: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x2cb3754: adrp     x0, #0x55cb000
+  0x2cb3758: ldr      x0, [x0, #0xa0] ; = 0x0 (u64 @ 0x55cb0a0)
+  0x2cb375c: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x2cb3760: adrp     x0, #0x5587000
+  0x2cb3764: ldr      x0, [x0, #0xce8] ; = 0x0 (u64 @ 0x5587ce8)
+  0x2cb3768: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x2cb376c: adrp     x0, #0x5587000
+  0x2cb3770: ldr      x0, [x0, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
+  0x2cb3774: bl       #0x21af97c ; -> ??? 0x21af97c
+  0x2cb3778: mov      w8, #1
+  0x2cb377c: strb     w8, [x20, #0x116]
+  0x2cb3780: cbz      x19, #0x2cb3b08
+  0x2cb3784: mov      x0, x19
+  0x2cb3788: mov      x1, xzr
+  0x2cb378c: bl       #0x2811ba8 ; -> CCharacterBattle$$GetTeam
+  0x2cb3790: cbz      x0, #0x2cb3b08
+  0x2cb3794: adrp     x20, #0x558a000
+  0x2cb3798: adrp     x25, #0x558a000
+  0x2cb379c: ldr      x20, [x20, #0xf90] ; = 0x0 (u64 @ 0x558af90)
+  0x2cb37a0: ldr      x25, [x25, #0x6d8] ; = 0x0 (u64 @ 0x558a6d8)
+  0x2cb37a4: mov      x1, x19
+  0x2cb37a8: mov      x2, xzr
+  0x2cb37ac: bl       #0x2593940 ; -> CTeam$$GetCharactersMultiSharedDamage
+  0x2cb37b0: ldr      x1, [x20] ; = 0x0 (u64 @ 0x558a000)
+  0x2cb37b4: mov      x20, x0
+  0x2cb37b8: bl       #0x34578dc ; -> System.Linq.Enumerable$$Count<object>
+  0x2cb37bc: cmp      w0, #1
+  0x2cb37c0: b.lt     #0x2cb3810
+  0x2cb37c4: cbz      x20, #0x2cb3b08
+  0x2cb37c8: adrp     x10, #0x55cb000
+  0x2cb37cc: ldr      x8, [x20] ; = 0x0 (u64 @ 0x558a000)
+  0x2cb37d0: ldr      x10, [x10, #0x98] ; = 0x0 (u64 @ 0x55cb098)
+  0x2cb37d4: ldrh     w9, [x8, #0x12e]
+  0x2cb37d8: ldr      x1, [x10] ; = 0x0 (u64 @ 0x55cb000)
+  0x2cb37dc: cbz      x9, #0x2cb3800
+  0x2cb37e0: ldr      x10, [x8, #0xb0]
+  0x2cb37e4: add      x10, x10, #8
+  0x2cb37e8: ldur     x11, [x10, #-8]
+  0x2cb37ec: cmp      x11, x1
+  0x2cb37f0: b.eq     #0x2cb3818
+  0x2cb37f4: subs     x9, x9, #1
+  0x2cb37f8: add      x10, x10, #0x10
+  0x2cb37fc: b.ne     #0x2cb37e8
+  0x2cb3800: mov      x0, x20
+  0x2cb3804: mov      w2, wzr
+  0x2cb3808: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2cb380c: b        #0x2cb3824
+  0x2cb3810: mov      w20, w22
+  0x2cb3814: b        #0x2cb3a0c
+  0x2cb3818: ldrsw    x9, [x10]
+  0x2cb381c: add      x8, x8, x9, lsl #4
+  0x2cb3820: add      x0, x8, #0x138
+  0x2cb3824: ldp      x8, x1, [x0]
+  0x2cb3828: adrp     x26, #0x5587000
+  0x2cb382c: adrp     x27, #0x55cb000
+  0x2cb3830: ldr      x26, [x26, #0xce8] ; = 0x0 (u64 @ 0x5587ce8)
+  0x2cb3834: ldr      x27, [x27, #0xa0] ; = 0x0 (u64 @ 0x55cb0a0)
+  0x2cb3838: mov      x0, x20
+  0x2cb383c: blr      x8
+  0x2cb3840: mov      x21, x0
+  0x2cb3844: mov      w20, w22
+  0x2cb3848: cbz      x21, #0x2cb3afc
+  0x2cb384c: ldr      x8, [x21]
+  0x2cb3850: ldr      x1, [x26] ; = 0x0 (u64 @ 0x5587000)
+  0x2cb3854: ldrh     w9, [x8, #0x12e]
+  0x2cb3858: cbz      x9, #0x2cb387c
+  0x2cb385c: ldr      x10, [x8, #0xb0]
+  0x2cb3860: add      x10, x10, #8
+  0x2cb3864: ldur     x11, [x10, #-8]
+  0x2cb3868: cmp      x11, x1
+  0x2cb386c: b.eq     #0x2cb388c
+  0x2cb3870: subs     x9, x9, #1
+  0x2cb3874: add      x10, x10, #0x10
+  0x2cb3878: b.ne     #0x2cb3864
+  0x2cb387c: mov      x0, x21
+  0x2cb3880: mov      w2, wzr
+  0x2cb3884: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2cb3888: b        #0x2cb3898
+  0x2cb388c: ldrsw    x9, [x10]
+  0x2cb3890: add      x8, x8, x9, lsl #4
+  0x2cb3894: add      x0, x8, #0x138
+  0x2cb3898: ldp      x8, x1, [x0]
+  0x2cb389c: mov      x0, x21
+  0x2cb38a0: blr      x8
+  0x2cb38a4: tbz      w0, #0, #0x2cb3990
+  0x2cb38a8: ldr      x8, [x21]
+  0x2cb38ac: ldr      x1, [x27] ; = 0x0 (u64 @ 0x55cb000)
+  0x2cb38b0: ldrh     w9, [x8, #0x12e]
+  0x2cb38b4: cbz      x9, #0x2cb38d8
+  0x2cb38b8: ldr      x10, [x8, #0xb0]
+  0x2cb38bc: add      x10, x10, #8
+  0x2cb38c0: ldur     x11, [x10, #-8]
+  0x2cb38c4: cmp      x11, x1
+  0x2cb38c8: b.eq     #0x2cb38e8
+  0x2cb38cc: subs     x9, x9, #1
+  0x2cb38d0: add      x10, x10, #0x10
+  0x2cb38d4: b.ne     #0x2cb38c0
+  0x2cb38d8: mov      x0, x21
+  0x2cb38dc: mov      w2, wzr
+  0x2cb38e0: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2cb38e4: b        #0x2cb38f4
+  0x2cb38e8: ldrsw    x9, [x10]
+  0x2cb38ec: add      x8, x8, x9, lsl #4
+  0x2cb38f0: add      x0, x8, #0x138
+  0x2cb38f4: ldp      x8, x1, [x0]
+  0x2cb38f8: mov      x0, x21
+  0x2cb38fc: blr      x8
+  0x2cb3900: mov      x23, x0
+  0x2cb3904: cbz      x0, #0x2cb3b00
+  0x2cb3908: mov      w1, #0x8e
+  0x2cb390c: mov      x0, x23
+  0x2cb3910: mov      x2, xzr
+  0x2cb3914: bl       #0x280df90 ; -> CCharacterBattle$$FindBuffByType
+  0x2cb3918: mov      x24, x0
+  0x2cb391c: cbz      x0, #0x2cb3b04
+  0x2cb3920: mov      x0, x24
+  0x2cb3924: mov      x1, xzr
+  0x2cb3928: bl       #0x2320330 ; -> CBuff$$get_ApplyingType
+  0x2cb392c: cmp      w0, #2
+  0x2cb3930: b.ne     #0x2cb3848
+  0x2cb3934: mov      x0, x24
+  0x2cb3938: mov      x1, xzr
+  0x2cb393c: bl       #0x232036c ; -> CBuff$$get_Value
+  0x2cb3940: mov      w24, w0
+  0x2cb3944: ldr      x0, [x25] ; = 0x0 (u64 @ 0x558a000)
+  0x2cb3948: ldr      w8, [x0, #0xe0]
+  0x2cb394c: cbnz     w8, #0x2cb3954
+  0x2cb3950: bl       #0x21afaf4 ; -> ??? 0x21afaf4
+  0x2cb3954: mov      w0, w22
+  0x2cb3958: mov      w1, w24
+  0x2cb395c: mov      x2, xzr
+  0x2cb3960: bl       #0x2a00d74 ; -> CCommonDefine$$MulPermille
+  0x2cb3964: mov      w24, w0
+  0x2cb3968: mov      x0, x23
+  0x2cb396c: mov      x1, xzr
+  0x2cb3970: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cb3974: cbz      x0, #0x2cb3b14
+  0x2cb3978: ldr      w8, [x0, #0xa8]
+  0x2cb397c: sub      w9, w20, w24
+  0x2cb3980: bic      w20, w9, w9, asr #31
+  0x2cb3984: add      w8, w8, w24
+  0x2cb3988: str      w8, [x0, #0xa8]
+  0x2cb398c: b        #0x2cb3848
+  0x2cb3990: mov      x22, xzr
+  0x2cb3994: mov      w23, #5
+  0x2cb3998: cbz      x21, #0x2cb39fc
+  0x2cb399c: adrp     x10, #0x5587000
+  0x2cb39a0: ldr      x8, [x21]
+  0x2cb39a4: ldr      x10, [x10, #0xbf0] ; = 0x0 (u64 @ 0x5587bf0)
+  0x2cb39a8: ldrh     w9, [x8, #0x12e]
+  0x2cb39ac: ldr      x1, [x10] ; = 0x0 (u64 @ 0x5587000)
+  0x2cb39b0: cbz      x9, #0x2cb39d4
+  0x2cb39b4: ldr      x10, [x8, #0xb0]
+  0x2cb39b8: add      x10, x10, #8
+  0x2cb39bc: ldur     x11, [x10, #-8]
+  0x2cb39c0: cmp      x11, x1
+  0x2cb39c4: b.eq     #0x2cb39e4
+  0x2cb39c8: subs     x9, x9, #1
+  0x2cb39cc: add      x10, x10, #0x10
+  0x2cb39d0: b.ne     #0x2cb39bc
+  0x2cb39d4: mov      x0, x21
+  0x2cb39d8: mov      w2, wzr
+  0x2cb39dc: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2cb39e0: b        #0x2cb39f0
+  0x2cb39e4: ldrsw    x9, [x10]
+  0x2cb39e8: add      x8, x8, x9, lsl #4
+  0x2cb39ec: add      x0, x8, #0x138
+  0x2cb39f0: ldp      x8, x1, [x0]
+  0x2cb39f4: mov      x0, x21
+  0x2cb39f8: blr      x8
+  0x2cb39fc: cbnz     x22, #0x2cb3b0c
+  0x2cb3a00: cmp      w23, #5
+  0x2cb3a04: b.eq     #0x2cb3a0c
+  0x2cb3a08: cbnz     w23, #0x2cb3ae0
+  0x2cb3a0c: mov      x0, x19
+  0x2cb3a10: mov      x1, xzr
+  0x2cb3a14: bl       #0x2811ba8 ; -> CCharacterBattle$$GetTeam
+  0x2cb3a18: cbz      x0, #0x2cb3b08
+  0x2cb3a1c: adrp     x22, #0x5587000
+  0x2cb3a20: ldr      x22, [x22, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
+  0x2cb3a24: mov      x1, xzr
+  0x2cb3a28: bl       #0x2593760 ; -> CTeam$$GetCharacterSharedDamage
+  0x2cb3a2c: ldr      x8, [x22] ; = 0x0 (u64 @ 0x5587000)
+  0x2cb3a30: mov      x21, x0
+  0x2cb3a34: ldr      w9, [x8, #0xe0]
+  0x2cb3a38: cbnz     w9, #0x2cb3a44
+  0x2cb3a3c: mov      x0, x8
+  0x2cb3a40: bl       #0x21afaf4 ; -> ??? 0x21afaf4
+  0x2cb3a44: mov      x0, x21
+  0x2cb3a48: mov      x1, xzr
+  0x2cb3a4c: bl       #0x503a8e4 ; -> UnityEngine.Object$$op_Implicit
+  0x2cb3a50: tbz      w0, #0, #0x2cb3ae0
+  0x2cb3a54: ldr      x0, [x22] ; = 0x0 (u64 @ 0x5587000)
+  0x2cb3a58: ldr      w8, [x0, #0xe0]
+  0x2cb3a5c: cbnz     w8, #0x2cb3a64
+  0x2cb3a60: bl       #0x21afaf4 ; -> ??? 0x21afaf4
+  0x2cb3a64: mov      x0, x21
+  0x2cb3a68: mov      x1, x19
+  0x2cb3a6c: mov      x2, xzr
+  0x2cb3a70: bl       #0x5037138 ; -> UnityEngine.Object$$op_Inequality
+  0x2cb3a74: tbz      w0, #0, #0x2cb3ae0
+  0x2cb3a78: cbz      x21, #0x2cb3b08
+  0x2cb3a7c: mov      x0, x21
+  0x2cb3a80: mov      x1, xzr
+  0x2cb3a84: bl       #0x2828cd4 ; -> CCharacterBattle$$FindBuffShareDamage
+  0x2cb3a88: cbz      x0, #0x2cb3ae0
+  0x2cb3a8c: mov      x1, xzr
+  0x2cb3a90: bl       #0x232036c ; -> CBuff$$get_Value
+  0x2cb3a94: ldr      x8, [x25] ; = 0x0 (u64 @ 0x558a000)
+  0x2cb3a98: mov      w19, w0
+  0x2cb3a9c: ldr      w9, [x8, #0xe0]
+  0x2cb3aa0: cbnz     w9, #0x2cb3aac
+  0x2cb3aa4: mov      x0, x8
+  0x2cb3aa8: bl       #0x21afaf4 ; -> ??? 0x21afaf4
+  0x2cb3aac: mov      w0, w20
+  0x2cb3ab0: mov      w1, w19
+  0x2cb3ab4: mov      x2, xzr
+  0x2cb3ab8: bl       #0x2a00d74 ; -> CCommonDefine$$MulPermille
+  0x2cb3abc: mov      w19, w0
+  0x2cb3ac0: mov      x0, x21
+  0x2cb3ac4: mov      x1, xzr
+  0x2cb3ac8: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cb3acc: cbz      x0, #0x2cb3b08
+  0x2cb3ad0: ldr      w8, [x0, #0xa4]
+  0x2cb3ad4: sub      w20, w20, w19
+  0x2cb3ad8: add      w8, w8, w19
+  0x2cb3adc: str      w8, [x0, #0xa4]
+  0x2cb3ae0: mov      w0, w20
+  0x2cb3ae4: ldp      x20, x19, [sp, #0x40]
+  0x2cb3ae8: ldp      x22, x21, [sp, #0x30]
+  0x2cb3aec: ldp      x24, x23, [sp, #0x20]
+  0x2cb3af0: ldp      x26, x25, [sp, #0x10]
+  0x2cb3af4: ldp      x30, x27, [sp], #0x50
+  0x2cb3af8: ret      
+  0x2cb3afc: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x2cb3b00: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x2cb3b04: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x2cb3b08: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x2cb3b0c: mov      x0, x22
+  0x2cb3b10: bl       #0x21afc10 ; -> ??? 0x21afc10
+  0x2cb3b14: bl       #0x21afc18 ; -> ??? 0x21afc18
+  0x2cb3b18: b        #0x2cb3b44
+  0x2cb3b1c: b        #0x2cb3b44
+  0x2cb3b20: b        #0x2cb3b44
+  0x2cb3b24: b        #0x2cb3b44
+  0x2cb3b28: b        #0x2cb3b44
+  0x2cb3b2c: b        #0x2cb3b44
+  0x2cb3b30: b        #0x2cb3b44
+  0x2cb3b34: b        #0x2cb3b44
+  0x2cb3b38: mov      w20, w22
+  0x2cb3b3c: b        #0x2cb3b44
+  0x2cb3b40: b        #0x2cb3b44
+  0x2cb3b44: cmp      w1, #1
+  0x2cb3b48: b.ne     #0x2cb3b64
+  0x2cb3b4c: bl       #0x525f4e0 ; -> ??? 0x525f4e0
+  0x2cb3b50: ldr      x22, [x0] ; = 0x0 (u64 @ 0x5587000)
+  0x2cb3b54: bl       #0x525f4f0 ; -> ??? 0x525f4f0
+  0x2cb3b58: mov      w23, wzr
+  0x2cb3b5c: cbnz     x21, #0x2cb399c
+  0x2cb3b60: b        #0x2cb39fc
+  0x2cb3b64: mov      x19, x0
+  0x2cb3b68: mov      x22, xzr
+  0x2cb3b6c: b        #0x2cb3b74
+  0x2cb3b70: mov      x19, x0
+  0x2cb3b74: cbz      x21, #0x2cb3bd8
+  0x2cb3b78: adrp     x10, #0x5587000
+  0x2cb3b7c: ldr      x8, [x21]
+  0x2cb3b80: ldr      x10, [x10, #0xbf0] ; = 0x0 (u64 @ 0x5587bf0)
+  0x2cb3b84: ldrh     w9, [x8, #0x12e]
+  0x2cb3b88: ldr      x1, [x10] ; = 0x0 (u64 @ 0x5587000)
+  0x2cb3b8c: cbz      x9, #0x2cb3bb0
+  0x2cb3b90: ldr      x10, [x8, #0xb0]
+  0x2cb3b94: add      x10, x10, #8
+  0x2cb3b98: ldur     x11, [x10, #-8]
+  0x2cb3b9c: cmp      x11, x1
+  0x2cb3ba0: b.eq     #0x2cb3bc0
+  0x2cb3ba4: subs     x9, x9, #1
+  0x2cb3ba8: add      x10, x10, #0x10
+  0x2cb3bac: b.ne     #0x2cb3b98
+  0x2cb3bb0: mov      x0, x21
+  0x2cb3bb4: mov      w2, wzr
+  0x2cb3bb8: bl       #0x2210028 ; -> ??? 0x2210028
+  0x2cb3bbc: b        #0x2cb3bcc
+  0x2cb3bc0: ldrsw    x9, [x10]
+  0x2cb3bc4: add      x8, x8, x9, lsl #4
+  0x2cb3bc8: add      x0, x8, #0x138
+  0x2cb3bcc: ldp      x8, x1, [x0]
+  0x2cb3bd0: mov      x0, x21
+  0x2cb3bd4: blr      x8
+  0x2cb3bd8: cbnz     x22, #0x2cb3be4
+  0x2cb3bdc: mov      x0, x19
+  0x2cb3be0: bl       #0x22b072c ; -> ??? 0x22b072c
+  0x2cb3be4: mov      x0, x22
+  0x2cb3be8: bl       #0x21afc10 ; -> ??? 0x21afc10
+  0x2cb3bec: bl       #0x1f86e18 ; -> ??? 0x1f86e18

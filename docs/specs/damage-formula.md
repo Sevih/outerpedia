@@ -1,15 +1,25 @@
 # Formules de dégâts — Outerplane (extraites du binaire)
 
-> **Source de vérité** : `libil2cpp.so` ARM64, APK 1.4.9 (APKPure), classe `CFormula`
-> (TypeDefIndex 7258) + méthodes satellites de `CCharacterBattle` / `CCharacterData` /
+> **Source de vérité** : `libil2cpp.so` ARM64 de l'APK **installé sur l'émulateur**
+> (1.4.14 au 13/08/2026), classe `CFormula`
+> (TypeDefIndex 7282) + méthodes satellites de `CCharacterBattle` / `CCharacterData` /
 > `CCommonDefine`. Désassemblage ciblé capstone (mapping VA→offset via program headers
 > ELF), cibles `bl` résolues par `script.json` d'Il2CppDumper. Les listings annotés sont
-> dans [damage-formula-asm/](./damage-formula-asm/) ; les scripts de génération dans
-> `.gamedata/apk/dump_cformula.py` et `dump_deps.py`.
+> dans [damage-formula-asm/](./damage-formula-asm/), régénérés À CHAQUE PATCH par
+> `pnpm datagen:dump` (qui ré-extrait le binaire de l'APK installé sur l'émulateur,
+> puis enchaîne sur [disasm.py](../../datagen/extract/disasm.py) — manifeste des
+> méthodes résolues par NOM). Toute méthode que ce document se met à citer doit
+> être AJOUTÉE au manifeste `M` de ce script, sinon son listing se fige.
 >
 > **Règle de rédaction** : chaque pseudo-code ci-dessous est la traduction fidèle de
 > l'asm (ordre des opérations, arithmétique entière vs flottante, arrondis, clamps).
 > Aucune formule n'est devinée ; toute zone non désassemblée est signalée en § 12.
+>
+> ⚠ **Écart 1.4.9 → 1.4.14 non encore rédigé.** Les listings sont régénérés (1.4.14) ;
+> le pseudo-code ci-dessous a été dérivé de **1.4.9**. Sur 88 listings, 72 sont
+> inchangés au comportement près ; les trois écarts de fond sont détaillés en
+> [§ 12.9](#12-zones-dincertitude-à-ne-pas-combler-par-des-suppositions) et ne sont
+> PAS reflétés dans les sections concernées.
 
 ## 1. Conventions numériques
 
@@ -541,6 +551,25 @@ return restant
     l'état de base (sans objets de run) ; l'agrégation exacte n'est pas
     désassemblée — une fixture d'infiltration doit être capturée en début de
     run, sans modificateur actif.
+16. **Écart 1.4.9 → 1.4.14 (13/08/2026) non rédigé.** Les listings sont
+    régénérés en 1.4.14 ; les sections ci-dessus datent de 1.4.9. Comparaison
+    des corps normalisés (RVA, pages `adrp` et slots de métadonnées neutralisés) :
+    **72 des 88 listings sont inchangés**, 12 ne diffèrent que par des détails
+    d'allocation de registres, et **3 ont changé de comportement** :
+    - `CalcDamage` (+12 o.) appelle désormais **`CFormula.IsIgnoreTurnLimitDamage`**
+      — nouveau garde, absent en 1.4.9, avec branchement de sortie. Probable
+      exemption de la limite de dégâts par tour (§ 17.6 pénalités PvP) ; la
+      condition exacte n'est pas désassemblée. **§ 4 est donc incomplet.**
+    - `FindBuffDamageReduce` (+492 o., 293 → 416 instructions) : une boucle de
+      buffs supplémentaire, plus `CCharacterBattle.FindBuffByType` et **deux
+      lectures `CTempletManager.GetGameConfig`** absentes en 1.4.9 — la
+      réduction de dégâts est désormais paramétrée par GameConfig. **§ 9 est
+      donc incomplet** (agrégation et clé de config à extraire).
+    - `CBuff_OnCreate` (+244 o.) : nouveau **`CBuff.TrySetDieByReverseHeal`** et
+      un second `CheckReverseHealCAP` — le reverse heal peut maintenant tuer.
+      **§ 14.1 ne le décrit pas.**
+      Rien de tout cela n'est reflété dans le moteur TS. Ne PAS supposer :
+      re-dériver depuis les listings régénérés avant de toucher aux formules.
 
 ## 13. À vérifier in-game (phase 2)
 

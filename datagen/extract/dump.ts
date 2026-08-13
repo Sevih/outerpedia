@@ -20,6 +20,7 @@
  * ADB surchargeable via ADB_PATH.
  */
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { isMain } from '../lib/is-main';
@@ -34,6 +35,10 @@ const APK_DIR = resolve('.gamedata/apk');
 const META = resolve(APK_DIR, 'global-metadata.dat');
 const SO = resolve(APK_DIR, 'libil2cpp.so');
 const OUT = resolve(APK_DIR, 'dumped');
+// Empreinte du dump : ATTESTE que le script.json d'à côté sort de CE binaire.
+// `disasm.py` la vérifie avant de désassembler — un .so périmé apparié à un
+// script.json frais produirait des listings plausibles et FAUX, sans erreur.
+const STAMP = resolve(OUT, '.dump-stamp.json');
 const REMOTE_TMP = '/data/local/tmp';
 
 /** Chemins des APK (base + splits) de l'install, via `pm path`. */
@@ -64,11 +69,23 @@ function extractFromApk(serial: string, apk: string, entry: string, dest: string
   }
 }
 
+/** `versionName` de l'install (« 1.4.9 »), pour estamper le dump et les listings. */
+function gameVersion(serial: string): string {
+  try {
+    const dump = capture(['-s', serial, 'shell', 'dumpsys', 'package', PKG]);
+    return /versionName=(\S+)/.exec(dump)?.[1] ?? 'inconnue';
+  } catch {
+    // dumpsys indisponible : la version n'est qu'une étiquette, le sha256 fait foi.
+    return 'inconnue';
+  }
+}
+
 /**
  * Récupère la PAIRE ASSORTIE (metadata + so) depuis l'APK installé sur l'émulateur.
  * C'est la garantie anti-dépareillage : les deux fichiers viennent du même install.
+ * Renvoie la version du jeu ainsi extraite.
  */
-function pullMatchedPair(): void {
+function pullMatchedPair(): string {
   const serial = pickDevice();
   console.log(`📱 Device : ${serial}`);
   ensureRoot(serial);
@@ -88,7 +105,13 @@ function pullMatchedPair(): void {
   extractFromApk(serial, base, META_ENTRY, META);
   console.log('↻ extraction libil2cpp.so (split arm64)...');
   extractFromApk(serial, arm64, SO_ENTRY, SO);
-  console.log('✓ paire assortie extraite.');
+  const version = gameVersion(serial);
+  console.log(`✓ paire assortie extraite (jeu ${version}).`);
+  return version;
+}
+
+function sha256(path: string): string {
+  return createHash('sha256').update(readFileSync(path)).digest('hex');
 }
 
 /**
@@ -115,7 +138,7 @@ export function dump(): void {
   // garantie d'assortiment .so/metadata. (L'ex-IL2CPP_SO « mode avancé » a été
   // supprimée — décision Sevih 2026-07-17 : jamais utilisée, et elle faisait
   // écraser le .so fourni quand la metadata manquait.)
-  pullMatchedPair();
+  const version = pullMatchedPair();
 
   const bin = process.env.IL2CPP_DUMPER ?? ensureTool(IL2CPPDUMPER);
   disablePrompt(bin);
@@ -123,7 +146,28 @@ export function dump(): void {
   console.log('↻ Il2CppDumper → dump.cs ...');
   // Il2CppDumper.exe <binaire> <global-metadata> <dossier-sortie>
   execFileSync(bin, [SO, META, OUT], { stdio: 'inherit' });
+  // Empreinte écrite APRÈS le dumper : elle atteste que le script.json qui vient
+  // d'atterrir dans OUT sort bien de ce .so-là.
+  writeFileSync(
+    STAMP,
+    JSON.stringify(
+      {
+        gameVersion: version,
+        so: { sha256: sha256(SO), bytes: statSync(SO).size },
+        metadata: { sha256: sha256(META), bytes: statSync(META).size },
+      },
+      null,
+      2,
+    ) + '\n',
+  );
   console.log(`✅ dump généré dans ${OUT}`);
+
+  // Les listings ASM des specs damage suivent le dump À CHAQUE PATCH (Sevih
+  // 10/08/2026) : résolution PAR NOM dans script.json — les RVA bougent. Un
+  // échec ici doit se VOIR (méthode renommée = spec peut-être périmée), le
+  // dump lui-même reste acquis ; relancer seul via `pnpm datagen:disasm`.
+  console.log('↻ listings ASM (datagen/extract/disasm.py) ...');
+  execFileSync('python', [resolve('datagen/extract/disasm.py')], { stdio: 'inherit' });
 }
 
 if (isMain(import.meta.url)) {
