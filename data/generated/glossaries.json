@@ -2032,13 +2032,13 @@
       "id": "106",
       "name": {
         "en": "Punishment",
-        "jp": "懲罰",
+        "jp": "裁き",
         "kr": "응징",
         "zh": "惩戒"
       },
       "desc": {
         "en": "Decreases damage dealt by 30%. (Cannot be stacked)\\nTakes damage proportional to the caster's Attack at the start of the turn.\\nRemoved when the caster dies.",
-        "jp": "与えるダメージが30%DOWNする。(重複不可)\\nターン開始時、使用者の攻撃力が\\n高いほどダメージがUPする。\\n使用者が倒れると解除される。",
+        "jp": "与えるダメージが30%DOWNする。\\n(重複不可)\\nターン開始時、使用者の\\n攻撃力に応じたダメージを受ける。\\n使用者が倒れると解除される。",
         "kr": "피해가 30% 감소합니다. (중첩 불가)\\n턴 시작 시 시전자의 공격력에 비례한 피해를 입습니다.\\n시전자 사망시 해제됩니다.",
         "zh": "造成的伤害减少30%。（无法叠加）\\n回合开始时，受到与施法者攻击力成比例的伤害。\\n施法者死亡时解除。"
       },
@@ -3051,13 +3051,13 @@
       "id": "1106",
       "name": {
         "en": "Punishment",
-        "jp": "懲罰",
+        "jp": "裁き",
         "kr": "응징",
         "zh": "惩戒"
       },
       "desc": {
         "en": "Decreases damage dealt by 30%. (Cannot be stacked)\\nTakes damage proportional to the caster's Attack at the start of the turn.\\nRemoved when the caster dies. (Irremovable)",
-        "jp": "与えるダメージが30%DOWNする。(重複不可)\\nターン開始時、使用者の攻撃力が\\n高いほどダメージがUPする。\\n使用者が倒れると解除される。(解除不可)",
+        "jp": "与えるダメージが30%DOWNする。\\n(重複不可)\\nターン開始時、使用者の\\n攻撃力に応じたダメージを受ける。\\n使用者が倒れると解除される。\\n(解除不可)",
         "kr": "피해가 30% 감소합니다. (중첩 불가)\\n턴 시작 시 시전자의 공격력에 비례한 피해를 입습니다.\\n시전자 사망시 해제됩니다(해제 불가)",
         "zh": "造成的伤害减少30%。（无法叠加）\\n回合开始时，受到与施法者攻击力成比例的伤害。\\n施法者死亡时解除。（无法解除）"
       },
@@ -3753,7 +3753,7 @@
       },
       "desc": {
         "en": "Cannot receive Immortality, Revival, Invulnerability, Resurrection, Barrier, or Healing, but Final DMG taken decreases by 50%. (Irremovable)",
-        "jp": "不死、蘇生、無敵、復活、シールド、回復\\nの効果を受けられないが、\\n受ける最終ダメージが50%DOWNする。 (解除不可)",
+        "jp": "不死、蘇生、無敵、復活、シールド、\\n回復の効果を受けられないが、\\n受ける最終ダメージが50%DOWNする。 (解除不可)",
         "kr": "불사, 소생, 무적, 부활, 실드, 회복의 효과를 받을 수 없지만 자신이 받는 최종 피해가 50% 감소합니다.(해제 불가)",
         "zh": "无法获得不死、复苏、无敌、复活、护盾或恢复效果，但自身受到的最终伤害减少50%。（无法解除）"
       },
