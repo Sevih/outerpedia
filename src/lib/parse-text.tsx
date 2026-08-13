@@ -25,12 +25,15 @@ import { SKILL_SHORTHAND, resolveSkillText, splitChainDual } from '@/lib/skills'
 import { resolveEffectKey } from '@/lib/data/effects';
 import { characterDisplayName, findCharacterByName, slugForId } from '@/lib/data/characters';
 import {
+  gearDisplayNames,
   getAmuletFamilies,
   getSetViews,
   getTalismanFamilies,
   getWeaponFamilies,
   gearPassivesText,
   gearPassiveRefs,
+  withClassSuffix,
+  type GearClassVariant,
   type GearFamily,
   type SetView,
 } from '@/lib/data/equipment';
@@ -40,7 +43,7 @@ import { ItemInline } from '@/components/inline/ItemInline';
 import { StatInline } from '@/components/inline/StatInline';
 import { EffectIconTile } from '@/components/character/EffectChips';
 import { renderGameColors } from '@/components/ui/GameText';
-import type { CatalogEntry, Skill, LangDict } from '@contracts';
+import type { CatalogEntry, PassiveRef, Skill, LangDict } from '@contracts';
 import skillsData from '@data/generated/skills.json';
 import eeData from '@data/generated/equipment/ee.json';
 import itemsData from '@data/generated/items.json';
@@ -172,11 +175,11 @@ function characterChip(name: string, ctx: ParseCtx, k: number): ReactNode {
  * unique du miroir rendu/aperçu : `equipmentChip` ET `resolveSegment('I-…')`.
  */
 function gearDesc(
-  f: GearFamily,
+  passives: PassiveRef[],
   kind: 'weapon' | 'amulet' | 'talisman',
   lang: Lang,
 ): string | undefined {
-  return gearPassivesText(f.passives, lang, kind !== 'talisman');
+  return gearPassivesText(passives, lang, kind !== 'talisman');
 }
 
 /** Desc de tooltip d'un EE : ses passifs par niveau (byTier=false, comme la page
@@ -374,11 +377,18 @@ function setChip(name: string, ctx: ParseCtx, k: number): ReactNode {
   );
 }
 
-// Index des familles d'équipement par NOM D'AFFICHAGE EN (clé du contenu
-// éditorial, comme les persos), construit une fois par type.
-const familyIndexes: Partial<Record<'weapon' | 'amulet' | 'talisman', Map<string, GearFamily>>> =
-  {};
-function findFamily(kind: 'weapon' | 'amulet' | 'talisman', name: string): GearFamily | undefined {
+/** Ce qu'un tag d'équipement désigne : une famille, et la VARIANTE si nommée. */
+interface GearRef {
+  f: GearFamily;
+  variant?: GearClassVariant;
+}
+
+// Index des équipements par NOM D'AFFICHAGE EN (clé du contenu éditorial, comme
+// les persos), construit une fois par type. UNE ENTRÉE PAR OBJET RÉEL : une
+// famille à variantes de classe en pose cinq (Briareos/Gorgon), plus son nom nu
+// en repli pour le contenu déjà écrit.
+const familyIndexes: Partial<Record<'weapon' | 'amulet' | 'talisman', Map<string, GearRef>>> = {};
+function findFamily(kind: 'weapon' | 'amulet' | 'talisman', name: string): GearRef | undefined {
   let index = familyIndexes[kind];
   if (!index) {
     const families =
@@ -387,13 +397,40 @@ function findFamily(kind: 'weapon' | 'amulet' | 'talisman', name: string): GearF
         : kind === 'amulet'
           ? getAmuletFamilies()
           : getTalismanFamilies();
-    index = new Map(families.map((f) => [f.name.en.trim().toLowerCase(), f]));
+    index = new Map();
+    for (const f of families) {
+      // Le nom NU d'abord : repli des textes écrits avant que les variantes
+      // soient adressables — il continue de rendre la tête de famille, ce qu'il
+      // a toujours fait. Ne pas le garder casserait du contenu publié.
+      index.set(f.name.en.trim().toLowerCase(), { f });
+      for (const { name: n, classLimit } of gearDisplayNames(f)) {
+        if (!classLimit) continue;
+        const variant = f.classPassives?.find((v) => v.classLimit === classLimit);
+        index.set(n.en.trim().toLowerCase(), { f, ...(variant ? { variant } : {}) });
+      }
+    }
     familyIndexes[kind] = index;
   }
   const key = name.trim().toLowerCase();
-  // Tolère le suffixe de variante de classe des noms V2 (« … [Ranger] ») —
-  // les familles V3 regroupent les déclinaisons sous le nom nu.
+  // Repli sur le nom nu : un suffixe de classe INCONNU (faute de frappe, classe
+  // disparue) vaut mieux rendu en tête de famille qu'en référence cassée.
   return index.get(key) ?? index.get(key.replace(/\s*\[[^\]]+\]$/, ''));
+}
+
+/** Ce qu'un tag d'équipement AFFICHE — la variante prime sur la tête. */
+function gearFace(
+  ref: GearRef,
+  lang: Lang,
+): { name: string; icon: string; slug: string; passives: PassiveRef[] } {
+  const { f, variant } = ref;
+  return {
+    name: variant
+      ? lRec(withClassSuffix(f.name, variant.classLimit), lang) || f.name.en
+      : lRec(f.name, lang) || f.name.en,
+    icon: variant?.icon ?? f.icon,
+    slug: variant?.slug ?? f.slug,
+    passives: variant?.passives ?? f.passives,
+  };
 }
 
 /** Chip équipement ({I-W|A|T/nom}) : tuile du haut de famille (6★ légendaire)
@@ -404,21 +441,24 @@ function equipmentChip(
   ctx: ParseCtx,
   k: number,
 ): ReactNode {
-  const f = findFamily(kind, name);
-  if (!f) return unknownRef(name, `{I-${kind[0].toUpperCase()}/${name}}`, ctx, k);
+  const ref = findFamily(kind, name);
+  if (!ref) return unknownRef(name, `{I-${kind[0].toUpperCase()}/${name}}`, ctx, k);
+  // La VARIANTE prime quand le tag la nomme : sinon les cinq Briareos rendaient
+  // la tuile, le passif et le lien du striker.
+  const face = gearFace(ref, ctx.lang);
   return (
     <ItemInline
       key={k}
       item={{
-        name: lRec(f.name, ctx.lang) || f.name.en,
-        iconSrc: img.equipment(f.icon),
-        grade: f.grade,
-        // Tous les passifs du haut de famille au palier max : l'effet montré
-        // sur la page détail — le tooltip le reprend intégralement.
-        desc: gearDesc(f, kind, ctx.lang),
+        name: face.name,
+        iconSrc: img.equipment(face.icon),
+        grade: ref.f.grade,
+        // Tous les passifs au palier max : l'effet montré sur la page détail —
+        // le tooltip le reprend intégralement.
+        desc: gearDesc(face.passives, kind, ctx.lang),
       }}
-      color={GRADE_TEXT[f.grade] ?? 'text-equipment'}
-      href={localePath(ctx.lang, `/equipment/${f.slug}`)}
+      color={GRADE_TEXT[ref.f.grade] ?? 'text-equipment'}
+      href={localePath(ctx.lang, `/equipment/${face.slug}`)}
     />
   );
 }
@@ -811,16 +851,19 @@ function resolveSegment(type: string, value: string, lang: Lang, t: TFunction): 
     case 'I-A':
     case 'I-T': {
       const kind = type === 'I-W' ? 'weapon' : type === 'I-A' ? 'amulet' : 'talisman';
-      const f = findFamily(kind, value);
-      if (!f) return unknown();
+      const ref = findFamily(kind, value);
+      if (!ref) return unknown();
+      // MIROIR d'`equipmentChip` — l'aperçu admin doit montrer la variante que
+      // la page publiera, pas la tête de famille.
+      const face = gearFace(ref, lang);
       return {
         t: 'item',
-        name: lRec(f.name, lang) || f.name.en,
-        iconSrc: img.equipment(f.icon),
-        grade: f.grade,
-        color: GRADE_TEXT[f.grade] ?? 'text-equipment',
-        href: localePath(lang, `/equipment/${f.slug}`),
-        desc: gearDesc(f, kind, lang),
+        name: face.name,
+        iconSrc: img.equipment(face.icon),
+        grade: ref.f.grade,
+        color: GRADE_TEXT[ref.f.grade] ?? 'text-equipment',
+        href: localePath(lang, `/equipment/${face.slug}`),
+        desc: gearDesc(face.passives, kind, lang),
       };
     }
     case 'I-I': {

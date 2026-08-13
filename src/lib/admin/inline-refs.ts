@@ -13,10 +13,12 @@ import { loadDataJson } from '@/lib/data/disk';
 import { curatedKeyIndex, resolveEffectKey } from '@/lib/data/effects';
 import { getAllCharacters, characterDisplayName } from '@/lib/data/characters';
 import {
+  gearDisplayNames,
   getAmuletFamilies,
   getSetViews,
   getTalismanFamilies,
   getWeaponFamilies,
+  type GearFamily,
 } from '@/lib/data/equipment';
 import { listGuides } from '@/lib/data/guides';
 import { STAT_ICON } from '@/lib/stats';
@@ -141,8 +143,19 @@ export function buildInlineRefs(): InlineRefs {
     .map((k) => ({ value: cap(k), label: cap(k) }))
     .sort(byLabel);
 
-  const famRefs = (fams: { name: { en: string } }[]): RefItem[] =>
-    fams.map((f) => ({ value: f.name.en, label: f.name.en })).sort(byLabel);
+  /**
+   * UNE ENTRÉE PAR OBJET RÉEL, pas par famille. Briareos et Gorgon existent en
+   * CINQ objets (un par classe : tuile, passif, mains et page détail
+   * différents) ; n'en proposer qu'un rendait les quatre autres inatteignables
+   * depuis l'éditeur, et le nom nu inséré affichait le striker à leur place.
+   *
+   * Le vocabulaire vient de `gearDisplayNames`, celui-là même que le résolveur
+   * de tag indexe — le picker ne peut donc pas offrir ce que le rendu refuse.
+   */
+  const famRefs = (fams: GearFamily[]): RefItem[] =>
+    fams
+      .flatMap((f) => gearDisplayNames(f).map(({ name }) => ({ value: name.en, label: name.en })))
+      .sort(byLabel);
 
   const items =
     loadDataJson<Record<string, { name?: { en?: string }; hidden?: boolean }>>(
@@ -152,7 +165,12 @@ export function buildInlineRefs(): InlineRefs {
   const itemSeen = new Set<string>();
   for (const e of Object.values(items)) {
     const name = e.name?.en?.trim();
-    if (!name || e.hidden || itemSeen.has(name.toLowerCase())) continue;
+    // Un nom qui porte `{`, `}` ou `|` ne peut PAS voyager dans un tag : les
+    // accolades ferment `{I-I/…}` et la barre est le séparateur de `{L/…}`.
+    // Cas réel : « {0}'s Limit Break Factors », un gabarit du jeu dont le `{0}`
+    // n'est jamais substitué. Proposé, il insérait un tag cassé — c'est-à-dire
+    // que le picker offrait quelque chose que la validation refuse ensuite.
+    if (!name || e.hidden || /[{}|]/.test(name) || itemSeen.has(name.toLowerCase())) continue;
     itemSeen.add(name.toLowerCase());
     item.push({ value: name, label: name });
   }

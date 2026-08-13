@@ -397,6 +397,27 @@ export function shopSourceLabel(slug: string, t: TFunction): string {
   return key ? t(key) : slug;
 }
 
+/**
+ * UNE VARIANTE DE CLASSE d'une famille — un objet distinct en jeu, avec sa
+ * tuile, son passif, ses mains et sa page détail (Briareos/Gorgon : 5 par
+ * famille). La famille, elle, ne porte que le membre de TÊTE.
+ */
+export interface GearClassVariant {
+  classLimit: string;
+  /**
+   * Id du membre de CETTE classe — le seul que doive référencer une vue qui
+   * pointe un objet précis (build curé, sélecteurs admin). `id`/`icon`/`slug`
+   * de la famille désignent la TÊTE, donc le striker : les utiliser pour un
+   * mage donne l'objet d'une autre classe.
+   */
+  id: string;
+  slug: string;
+  icon: string;
+  passives: PassiveRef[];
+  /** Main stats de CETTE variante (chaque classe a son pool — Briareos/Gorgon). */
+  mainStats: string[];
+}
+
 export interface GearFamily {
   /** Id canonique (= clé de l'éditorial curé). */
   id: string;
@@ -420,21 +441,7 @@ export interface GearFamily {
    * tuile, son passif et sa PAGE détail au slug suffixé, comme en V2) —
    * `passives`/`icon`/`slug` de la famille ne portent que le membre de tête.
    */
-  classPassives?: {
-    classLimit: string;
-    /**
-     * Id du membre de CETTE classe — le seul que doive référencer une vue qui
-     * pointe un objet précis (build curé, sélecteurs admin). `id`/`icon`/`slug`
-     * de la famille désignent la TÊTE, donc le striker : les utiliser pour un
-     * mage donne l'objet d'une autre classe.
-     */
-    id: string;
-    slug: string;
-    icon: string;
-    passives: PassiveRef[];
-    /** Main stats de CETTE variante (chaque classe a son pool — Briareos/Gorgon). */
-    mainStats: string[];
-  }[];
+  classPassives?: GearClassVariant[];
   source?: ResolvedSource;
   /** Talisman : type de points (extrait du buff du passif). */
   mode?: 'AP' | 'CP';
@@ -574,6 +581,26 @@ export function withClassSuffix(name: LangDict, classLimit: string): LangDict {
   const out: Record<string, string> = {};
   for (const [k, v] of Object.entries(name)) out[k] = `${v} [${cls[k] ?? cls.en}]`;
   return out as LangDict;
+}
+
+/**
+ * NOMS D'AFFICHAGE d'une famille, un par objet réellement distinct en jeu.
+ *
+ * Une famille ordinaire n'en a qu'un — son nom nu. Une famille à variantes de
+ * classe en a CINQ (« Briareos's Recklessness [Ranger]»…), parce que ce sont
+ * cinq objets : tuile, passif, mains et page détail différents. Les confondre
+ * sous le nom nu fait pointer les cinq vers le striker.
+ *
+ * Point unique du vocabulaire : le picker d'insertion et le résolveur de tag
+ * DOIVENT proposer et accepter exactement la même chose, sinon l'un offre ce que
+ * l'autre refuse.
+ */
+export function gearDisplayNames(f: GearFamily): { name: LangDict; classLimit?: string }[] {
+  if (!f.classPassives?.length) return [{ name: f.name }];
+  return f.classPassives.map((v) => ({
+    name: withClassSuffix(f.name, v.classLimit),
+    classLimit: v.classLimit,
+  }));
 }
 
 /**

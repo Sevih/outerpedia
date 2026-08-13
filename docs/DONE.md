@@ -7,6 +7,35 @@
 
 ## 2026-08-13
 
+- **Briareos/Gorgon : 20 objets réels, 4 référençables — et 37 refs déjà écrites
+  affichaient le mauvais** — signalé par Sevih sur les boutons « +item » de
+  l'éditeur assisté. Ces deux familles existent en CINQ objets chacune, un par
+  classe, avec tuile, passif, mains et page détail différents ; le picker n'en
+  proposait qu'un (la tête = striker).
+  Le trou était double, et le second bien pire : `findFamily` TOLÉRAIT le suffixe
+  de classe en le RETIRANT, donc `{I-W/Gorgon's Wrath [Ranger]}` résolvait — vers
+  le striker. Icône, passif et lien de la mauvaise classe, sans le moindre
+  signal. Compté dans le contenu publié : **37 références suffixées** montraient
+  toutes le striker (14 Briareos [Ranger], 12 Gorgon's Vanity [Mage], 6 Gorgon's
+  Wrath [Ranger], 5 Gorgon's Vanity [Defender]). Le correctif les répare toutes.
+  Un seul vocabulaire, `gearDisplayNames`, sert désormais le picker ET l'index du
+  résolveur : l'un ne peut plus proposer ce que l'autre refuse. Le nom NU reste
+  accepté au rendu (contenu déjà écrit) mais n'est plus proposé — ces familles
+  sont cinq objets, pas six.
+  Le test du CONTRAT CROISÉ, posé au passage, a trouvé tout seul un défaut sans
+  rapport : le picker d'items proposait « {0}'s Limit Break Factors », un gabarit
+  du jeu dont le `{0}` n'est jamais substitué — les accolades ferment le tag,
+  donc l'insérer produisait une référence invalide. Les noms portant `{`, `}` ou
+  `|` sont désormais écartés.
+  CONTRE-ÉPREUVES, chacune vérifiée en annulant son correctif : sans les entrées
+  par variante le picker les perd, sans la variante au rendu les cinq se
+  confondent. 1602 tests verts.
+  RESTE À FAIRE CÔTÉ CONTENU (pas touché : fichier en cours d'édition ailleurs) —
+  dans `premium-limited/premium-reviews.json`, la review de Saint parle de
+  `Gorgon's Wrath [Ranger]` en EN mais du nom NU dans les quatre autres langues :
+  jusqu'ici les cinq montraient la même chose (le striker), désormais l'EN dit
+  vrai et les autres non.
+
 - **`assets:collect` — trois « manquants » éternels, deux causes (Sevih)** —
   (1) `CT_2010130` / `FI_2010130` : le manifest réclamait un visage pour la FORME
   DE COMBAT du skin de Demiurge Saeran. Les bundles disent la règle sans

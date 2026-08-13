@@ -13,6 +13,9 @@
  */
 import { describe, expect, it } from 'vitest';
 import { buildInlineRefs, effectRefsFromKeys, type InlineRefs } from './inline-refs';
+import { checkText, resolveInlineSegments } from '@/lib/parse-text';
+import { getT } from '@/i18n';
+import { gearDisplayNames, getAmuletFamilies, getWeaponFamilies } from '@/lib/data/equipment';
 
 /** Deux effets qui n'ont RIEN en commun : apparences distinctes. */
 const look = (en: string, icon = `${en}.png`, desc = `desc de ${en}`) => ({
@@ -100,5 +103,97 @@ describe('buildInlineRefs — invariant sur la donnée réelle', () => {
         .map((r) => `${name}: ${r.value}`);
     });
     expect(dups).toEqual([]);
+  });
+
+  /**
+   * LE CONTRAT CROISÉ : ce que le picker propose, le résolveur doit l'accepter.
+   * Deux listes tenues séparément dérivent — et la dérive est invisible, puisque
+   * le bouton « +item » n'a aucune raison de savoir ce que `checkText` sait.
+   */
+  it('chaque `value` proposée est une référence que `checkText` valide', () => {
+    const tag: Partial<Record<keyof InlineRefs, string>> = {
+      effectBuff: 'B',
+      effectDebuff: 'D',
+      stat: 'S',
+      element: 'E',
+      klass: 'C',
+      character: 'P',
+      characterEE: 'EE',
+      weapon: 'I-W',
+      amulet: 'I-A',
+      talisman: 'I-T',
+      set: 'AS',
+      item: 'I-I',
+      guide: 'L',
+    };
+    const bad = lists.flatMap(([name, list]) =>
+      list
+        .flatMap((r) => checkText(`{${tag[name]}/${r.value}}`))
+        .filter((c) => !c.ok)
+        .map((c) => `${name}: {${c.type}/${c.value}} — ${c.reason}`),
+    );
+    expect(bad).toEqual([]);
+  });
+});
+
+/**
+ * VARIANTES DE CLASSE — Briareos et Gorgon sont CINQ objets par famille, un par
+ * classe, chacun sa tuile, son passif, ses mains et sa page détail. Le picker
+ * n'en proposait qu'un : les quatre autres étaient inatteignables depuis
+ * l'éditeur, et le nom nu inséré rendait le striker à leur place — un rendu faux
+ * en silence, ce qui est pire qu'une référence manquante.
+ */
+describe('équipement à variantes de classe — une entrée par objet réel', () => {
+  const refs = buildInlineRefs();
+  // Le TYPE de tag vient du slot, pas d'une devinette : `{I-W/…}` et `{I-A/…}`
+  // ont chacun leur index, et se tromper de type rend « référence inconnue » —
+  // ce qui ferait passer le test suivant pour la mauvaise raison.
+  const kinds = [
+    { type: 'I-W' as const, list: refs.weapon, families: getWeaponFamilies() },
+    { type: 'I-A' as const, list: refs.amulet, families: getAmuletFamilies() },
+  ].map((k) => ({ ...k, varied: k.families.filter((f) => f.classPassives?.length) }));
+
+  it('la donnée en contient (sinon tout ce qui suit ne teste rien)', () => {
+    expect(kinds.every((k) => k.varied.length > 0)).toBe(true);
+  });
+
+  it('chaque variante est proposable, et pas seulement le nom nu', () => {
+    for (const { list, varied, type } of kinds) {
+      const proposed = new Set(list.map((r) => r.value));
+      const missing = varied.flatMap((f) =>
+        gearDisplayNames(f)
+          .map(({ name }) => name.en)
+          .filter((n) => !proposed.has(n)),
+      );
+      expect(missing, `${type} : variantes absentes du picker`).toEqual([]);
+    }
+  });
+
+  it('deux variantes ne rendent PAS la même chose', async () => {
+    // LA contre-épreuve. Proposer cinq noms qui pointent tous le striker
+    // satisferait le cas précédent tout en gardant le bug intact : ce qui compte
+    // est que le tag résolve vers la tuile, le passif et la PAGE de sa classe.
+    const ctx = { lang: 'en' as const, t: await getT('en') };
+    for (const { type, varied } of kinds) {
+      for (const f of varied) {
+        const rendered = gearDisplayNames(f).map(({ name }) => {
+          const [seg] = resolveInlineSegments(`{${type}/${name.en}}`, ctx);
+          return seg?.t === 'item' ? `${seg.iconSrc}|${seg.href}|${seg.desc ?? ''}` : 'NON-ITEM';
+        });
+        expect(rendered, `${f.name.en} : une variante ne résout pas`).not.toContain('NON-ITEM');
+        expect(new Set(rendered).size, `${f.name.en} : variantes confondues`).toBe(rendered.length);
+      }
+    }
+  });
+
+  it('le nom NU reste résolvable — le contenu déjà publié ne casse pas', () => {
+    // Il n'est plus PROPOSÉ (ces familles sont cinq objets, pas six), mais des
+    // textes l'utilisent déjà : il continue de rendre la tête de famille.
+    for (const { type, varied } of kinds) {
+      for (const f of varied) {
+        const [check] = checkText(`{${type}/${f.name.en}}`);
+        expect(check.ok, `${f.name.en} : nom nu cassé`).toBe(true);
+      }
+    }
   });
 });
