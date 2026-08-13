@@ -15,11 +15,17 @@
 > l'asm (ordre des opérations, arithmétique entière vs flottante, arrondis, clamps).
 > Aucune formule n'est devinée ; toute zone non désassemblée est signalée en § 12.
 >
-> ⚠ **Écart 1.4.9 → 1.4.14 non encore rédigé.** Les listings sont régénérés (1.4.14) ;
-> le pseudo-code ci-dessous a été dérivé de **1.4.9**. Sur 88 listings, 72 sont
-> inchangés au comportement près ; les trois écarts de fond sont détaillés en
-> [§ 12.9](#12-zones-dincertitude-à-ne-pas-combler-par-des-suppositions) et ne sont
-> PAS reflétés dans les sections concernées.
+> **Écart 1.4.9 → 1.4.14 (13/08/2026)** : sur 88 listings, 72 sont inchangés au
+> comportement près et 3 ont bougé. Les trois sont désassemblés et rédigés
+> (§ 8.5, § 9.2, § 14.5), et `BUFF_TYPE` a été **renuméroté** (§ 2 — les identifiants
+> de ce document sont à jour, ne jamais reporter un numéro d'une version à l'autre).
+> Le **moteur TS n'implémente aucun des trois** ; § 12.16 liste ce qui reste ouvert.
+>
+> Les **RVA** citées ici sont celles de 1.4.14 : les 44 adresses de 1.4.9 ont été
+> réécrites le 13/08/2026 en réidentifiant chaque méthode par son nom, et un balayage
+> final vérifie que toute adresse du document existe bien dans la table des méthodes
+> du binaire courant. Elles bougent à CHAQUE patch — l'autorité reste le nom, et
+> l'en-tête du listing correspondant dans [damage-formula-asm/](./damage-formula-asm/).
 
 ## 1. Conventions numériques
 
@@ -33,8 +39,8 @@
 - Deux fonctions utilisent du **float32** (voir `CheckResist` § 5 et HitRecovery § 8.4) ;
   `FloorToInt` = `Mathf.FloorToInt` (floor puis cast, `int.MinValue` si +∞ — quirk Unity
   jamais atteint en pratique).
-- `CCommonDefine.MulPermille(v, p)` = `div1000(v × p)` (RVA 0x28D81C0).
-- `CCommonDefine.ApplyRate(v, r)` = `div1000(v × (1000 + r))` (RVA 0x28D18E4).
+- `CCommonDefine.MulPermille(v, p)` = `div1000(v × p)` (RVA 0x2A00D74).
+- `CCommonDefine.ApplyRate(v, r)` = `div1000(v × (1000 + r))` (RVA 0x29FA264).
 
 ## 2. Enums utiles (dump.cs)
 
@@ -47,16 +53,29 @@
   12 HIT_HP_RECOVERY, 13 ACCURACY, 14 AVOID, 15 BUFF_CHANCE, 16 BUFF_RESIST,
   22 COUNTER_RATE, 23 AVOID_ADD_CAP, 24 AVOID_SUBTRACT_CAP, 25 DMG_BOOST,
   26 E_CRI_DMG_REDUCE.
-- `BUFF_TYPE` (extraits pertinents pour les dégâts) : 3 INVINCIBLE, 5 MARKING,
-  85–108 famille `BT_DMG_*` (voir § 9), 110 DMG_REDUCE, 113 DMG_REDUCE_MY_TEAM_INCREASE,
-  114–116 DMG_REDUCE_FINAL*, 136 SHARE_DMG, 137 SHARE_DMG_MULTI, 149 STEALTHED.
+- `BUFF_TYPE` (extraits pertinents pour les dégâts, **valeurs 1.4.14**) :
+  3 INVINCIBLE, 5 MARKING, 90–113 famille `BT_DMG_*` (voir § 9), 115 DMG_REDUCE,
+  118 DMG_REDUCE_MY_TEAM_INCREASE, 119–121 DMG_REDUCE_FINAL*, 141 SHARE_DMG,
+  142 SHARE_DMG_MULTI, 154 STEALTHED.
+
+> ⚠ **`BUFF_TYPE` a été RENUMÉROTÉ en 1.4.14.** L'insertion de
+> `BT_REVERSE_HEAL_BASED_{CASTER,TARGET}_ABLE_KILL` en 18/19 (§ 14.5), puis d'autres
+> membres plus loin, décale **tout ce qui suit** : le cap reverse heal passe de 18 à
+> 20, les shields de 19/20 à 21/22, `DMG_REDUCE` de 110 à 115, `STEALTHED` de 149 à
+> 154, les `IMMEDIATELY_*` de 60–65 à 63–69… Les 29 identifiants numériques cités
+> dans ce document ont été réécrits le 13/08/2026 en résolvant chaque **nom** dans
+> l'énumération 1.4.14 — ne jamais reporter un numéro d'une version à l'autre.
+>
+> Le moteur TS et les tables générées ne sont **pas** touchés : ils clés sur le nom
+> (`Type: 'BT_DMG_REDUCE'`), jamais sur l'entier. Deux commentaires portent encore
+> les anciens numéros — voir § 12.16.
 
 Les stats finales d'un personnage vivent dans `CCharacterData.StatDict[STAT_TYPE]`
 (recalcul lazy par `CCharacterData.CalcStat`) ; chaque getter (`get_Def`,
 `get_CriticalRate`…) lit simplement cette entrée. Le recalcul par stat passe par
 `CFormula.CalcFinalStat` (§ 3).
 
-## 3. CalcFinalStat — RVA 0x2C59E48
+## 3. CalcFinalStat — RVA 0x2CB1C6C
 
 Signature :
 `CalcFinalStat(base, spawnAdvRate, evo, awak, awakRate, monad, monadRate, transRate, archiveRate, itemVal, itemRate, buffVal, buffRate)`
@@ -78,7 +97,7 @@ Points fermes :
 - Le bonus d'archive s'applique **sur la stat de base seule** et s'ajoute à la fin.
 - Clamp final à ≥ 0. Chaque division tronque vers zéro.
 
-### 3.1 CalcStat — RVA 0x2C59DB0 (stat de base par niveau)
+### 3.1 CalcStat — RVA 0x2CB1BD4 (stat de base par niveau)
 
 En amont : le `base` fourni à CalcFinalStat sort de
 `CFormula.CalcStat(min, max, level)` (division magique `0xA57EB50295FAD40B`,
@@ -92,7 +111,7 @@ Interpolation **linéaire** entre la stat niveau 1 (`min`) et la stat
 niveau 100 (`max`), en 99 pas ; `level = 100` redonne exactement `max`.
 Aucune courbe, aucun palier.
 
-### 3.2 SetBaseValue — RVA 0x28D16BC (niveau > 100 et addRate)
+### 3.2 SetBaseValue — RVA 0x29FA03C (niveau > 100 et addRate)
 
 L'appelant réel de CalcStat côté personnages est
 `CStatValue.SetBaseValue(min, max, level, spawnAdvRate = 0, addRate = 0, owner)`
@@ -119,10 +138,10 @@ m_nSpawnAdvantageRate = spawnAdvRate                          // conservé pour 
 - `addRate` : multiplicateur appliqué directement à la base — posé UNIQUEMENT
   par le scaling d'overgrade du boss de guild raid (§ 12.13, RÉSOLU), 0 partout
   ailleurs.
-- `CCustomBossStatValue.SetBaseValue` (0x28D3DC4) : pour ST_HP, `base = max − min` ;
+- `CCustomBossStatValue.SetBaseValue` (0x29FC7C4) : pour ST_HP, `base = max − min` ;
   pour les autres stats, CalcStat normal.
 
-## 4. Probabilités — CheckProbability* (0x2C59DE8 / 0x2C59E30 / 0x2C59E3C)
+## 4. Probabilités — CheckProbability* (0x2CB1C0C / 0x2CB1C54 / 0x2CB1C60)
 
 ```text
 CheckProbability(value, max, isAuto):
@@ -134,13 +153,13 @@ CheckProbability(value, max, isAuto):
 
 - `CheckProbabilityPercent(v, isAuto)` = `CheckProbability(v, 100, isAuto)`.
 - `CheckProbabilityPermille(v, isAuto)` = `CheckProbability(v, 1000, isAuto)`.
-- `GetBattleRandomRange(min, max)` (0x2C59CE0) : en PvP temps réel, RNG synchronisé du
+- `GetBattleRandomRange(min, max)` (0x2CB1B04) : en PvP temps réel, RNG synchronisé du
   match (`CPvpRealtimeMatch.GetRandomRange`) ; sinon `Random.Range(min, max+1)` →
   **entier uniforme inclusif** `[min, max]`.
 - Conséquence : P(succès) = `(value+1)/(max+1)` pour `1 ≤ value ≤ max` (ex. 50 ‰ affiché
   → 51/1001 réels), 0 % si `value < 1`, 100 % si `value ≥ max`.
 
-## 5. CheckResist — RVA 0x2C5A388 (résistance aux effets)
+## 5. CheckResist — RVA 0x2CB21AC (résistance aux effets)
 
 Entrées : `chance` = BUFF_CHANCE de l'attaquant (‰), `resist` = BUFF_RESIST du défenseur (‰).
 
@@ -161,7 +180,7 @@ de vrais artefacts d'arrondi : diff=900 donne 899 (et non 900) — valeurs véri
 contre une référence float32 exacte (rationnels) sur diff ∈ [0, 20000], ancrées par
 somme de contrôle dans `src/lib/damage/formula.test.ts`.
 
-## 6. Élément — GetElementSuperiority (0x2C5AC64) & GetElementeryDamageRate (0x2C5AB60)
+## 6. Élément — GetElementSuperiority (0x2CB2A88) & GetElementeryDamageRate (0x2CB2984)
 
 ```text
 GetElementSuperiority(att, def):                 // enum § 2
@@ -186,12 +205,12 @@ GetElementeryDamageRate(Attacker, Defender):      // retourne un taux ‰
   EQUAL         → 1000
 ```
 
-- `FindBuffElementDamageRate` (0x26DF700) = **somme** des `Value` des buffs
+- `FindBuffElementDamageRate` (0x28287F8) = **somme** des `Value` des buffs
   BT_DMG_ELEMENT_ENCHANT (95) disponibles. Ne s'applique **que** quand l'attaquant a
   l'avantage (réel ou forcé par le buff 94).
 - Avantage = ×1,2 ; désavantage = ×0,8 ; neutre = ×1,0.
 
-## 7. CheckDamageRate — RVA 0x2C5A448 (fixe le résultat et le taux du hit)
+## 7. CheckDamageRate — RVA 0x2CB226C (fixe le résultat et le taux du hit)
 
 Écrit `Defender.SkillRecord.DamageRateType` (résultat) et `.DamageRate` (‰), consommés
 ensuite par `CalcDamage`. Ordre exact :
@@ -254,7 +273,7 @@ Points fermes :
 - Un MISS garde un taux de 1000 ici — la vraie pénalité (×0,5) est appliquée dans le
   cœur du calcul (§ 8.2) via `MISSED_DAMAGE_RATE`.
 
-`AddCheckEnemyTeamDecreaseDamageRate(Attacker, count, ref rate)` (0x2C5ACF8) —
+`AddCheckEnemyTeamDecreaseDamageRate(Attacker, count, ref rate)` (0x2CB2B1C) —
 appelé par le code d'attaque (hors CFormula) pour les compétences dont la cible
 « décroît » : `rate += FindBuffEnemyTeamDecreaseDamageRate(Attacker) × count`
 (somme des buffs BT_DMG_ENEMY_TEAM_DECREASE (96) × nombre de cibles décomptées).
@@ -266,7 +285,7 @@ d'équipe, `CCommonDefine.MAX_USER_TEAM_MEMBER = 4` — dump.cs ; vague à
 `BuildReportOptions.targetsHit` (z `n`, défaut 1) ; le buff arrive gaté par
 son `CallerSkillType` (application par slot, gear.ts).
 
-## 8. CalcDamage — RVA 0x2C5AD30 (+ helper local 0x2C5B4DC)
+## 8. CalcDamage — RVA 0x2CB2B54 (+ helper local 0x2CB330C)
 
 Signature : `CalcDamage(Attacker, Defender, DamageTemplet, damageRate, out dmg, out vampiric, out hitRecovery)`.
 `damageRate` = le `SkillRecord.DamageRate` produit par § 7. Sorties nulles si
@@ -289,7 +308,7 @@ totalFactor = Σ sur les events « hit » :
 Puis : `ReceiveMaxDamage = CalcDamageCore(totalFactor)` (§ 8.2),
 `TotalSkillFactor = totalFactor`, compteurs remis à zéro.
 
-### 8.2 Le cœur — `<CalcDamage>g__CalcDamage|17_0` (0x2C5B4DC)
+### 8.2 Le cœur — `<CalcDamage>g__CalcDamage|17_0` (0x2CB330C)
 
 ```text
 CalcDamageCore(factor):                       // factor = DamageFactor du hit (‰)
@@ -350,6 +369,38 @@ hitRecovery = FloorToInt( (float32)(Defender.Data.HitHPRecovery × dmg) × 0.001
               // produit int 32 bits, puis float32 (0.001f = 0x3A83126F), floor
 ```
 
+### 8.5 IsIgnoreTurnLimitDamage (0x2CB35A8) — exemption world boss, **1.4.14**
+
+`CalcDamage` gagne un garde avant la comptabilité du facteur courant (§ 8.1). Le
+prédicat est court et entièrement résolu :
+
+```text
+IsIgnoreTurnLimitDamage(attaquant):
+  scene = CDungeonScene courante
+  if scene == null:                       return false   // Unity op_Inequality
+  if !scene.IsWorldBoss:                  return false
+  if !scene.IsUseWorldBossSpecialAttack:  return false    // CDungeonScene+0x34
+  if attaquant == null:                   return false
+  return attaquant.UID == 0                               // attaquant sans UID
+```
+
+Effet dans `CalcDamage` :
+
+```text
+if IsIgnoreTurnLimitDamage(attaquant)  ou  scene.IsUseWorldBossFinishAttack:
+    accumuler dans SkillRecord.CurrentSkillFactor        // CSkillRecord+0x8C
+else:
+    … chaîne de vérifications préexistante, puis même accumulation ou abandon
+```
+
+Autrement dit : pendant l'**attaque spéciale d'un world boss**, un attaquant **sans
+UID** (source de dégâts qui n'est pas un personnage joueur instancié) échappe à la
+limite par tour. En 1.4.9 seul `IsUseWorldBossFinishAttack` ouvrait ce chemin.
+
+⚠ La **quantité accumulée** dans `CurrentSkillFactor` (`w22` au site d'appel) n'a pas
+été tracée jusqu'à sa définition — voir § 12.16. La condition d'entrée, elle, est
+certaine.
+
 ## 9. Agrégation des buffs de taux (CCharacterBattle)
 
 > RÉALISÉ (03/08/2026) : `src/lib/damage/aggregate.ts` — les familles des
@@ -360,7 +411,7 @@ hitRecovery = FloorToInt( (float32)(Defender.Data.HitHPRecovery × dmg) × 0.001
 > EXPLICITE : une famille sans son contexte contribue 0. `CheckAvailable`
 > (§ 12) n'est pas émulé — l'UI ne propose que des buffs actifs.
 
-### 9.1 FindBuffAdditionalDamage (0x26DD9B4) — buffs de l'ATTAQUANT, somme (‰)
+### 9.1 FindBuffAdditionalDamage (0x28268C0) — buffs de l'ATTAQUANT, somme (‰)
 
 Parcourt `m_BuffList` de l'attaquant ; chaque buff passe `CheckAvailable` (conditions
 internes au buff : cible, stacks, cooldown d'application — non désassemblé, § 12) :
@@ -368,56 +419,65 @@ internes au buff : cible, stacks, cooldown d'application — non désassemblé, 
 | BT  | Nom                     | Contribution                                                     |
 | --- | ----------------------- | ---------------------------------------------------------------- |
 | 85  | DMG                     | `+Value` (condition évaluée contre le défenseur)                 |
-| 86  | DMG_OWNER_LOST_HP_RATE  | `+GetLostHPRateValue(attaquant, Value)`                          |
-| 87  | DMG_TARGET_LOST_HP_RATE | `+GetLostHPRateValue(défenseur, Value)`                          |
-| 88  | DMG_OWNER_STAT          | `+min(GetStatValuePermille(att.Data, StatType, Value), 1000)`    |
-| 89  | DMG_TARGET_STAT         | idem sur les stats du **défenseur**, cap 1000                    |
-| 90  | DMG_OWNER_BUFF          | `+Value × nb de buffs (positifs) de l'attaquant`                 |
-| 91  | DMG_TARGET_BUFF         | `+Value × nb de buffs de att.TargetCharacter`                    |
-| 92  | DMG_OWNER_DEBUFF        | `+Value × nb de débuffs de l'attaquant`                          |
-| 93  | DMG_TARGET_DEBUFF       | `+Value × nb de débuffs de att.TargetCharacter`                  |
-| 97  | DMG_TARGET_BREAK        | `+Value` si la cible est en Break (`RageManager.IsBreak`)        |
-| 98  | DMG_TO_BOSS             | `+Value` si `target.Data.Type > 3` (types boss)                  |
-| 99  | DMG_KILL_COUNT_STACK    | `+Value` (stacks gérés dans CheckAvailable/Value)                |
-| 100 | DMG_NOT_CRITICAL        | `+Value` si résultat ∈ {NORMAL, MISSED}                          |
-| 101 | DMG_PVP_CONTENT         | `+Value` si scène PvP                                            |
-| 102 | DMG_CASTER_STAT         | `+min(GetStatValuePermille(caster.Data, StatType, Value), 1000)` |
-| 103 | DMG_CASTER_LOST_HP_RATE | `+GetLostHPRateValue(caster du buff, Value)`                     |
-| 105 | DMG_OWNER_TEAM_BUFF     | `+Value × Σ buffs (positifs) de l'équipe du caster`              |
-| 106 | DMG_MY_TEAM_DECREASE    | `+Value × (4 - alliés vivants de l'équipe du caster)`            |
-| 107 | DMG_MONADGATE_CONTENT   | `+Value` si scène Monad Gate                                     |
-| 108 | DMG_TOWER_CONTENT       | `+Value` si mode Tour                                            |
+| 91  | DMG_OWNER_LOST_HP_RATE  | `+GetLostHPRateValue(attaquant, Value)`                          |
+| 92  | DMG_TARGET_LOST_HP_RATE | `+GetLostHPRateValue(défenseur, Value)`                          |
+| 93  | DMG_OWNER_STAT          | `+min(GetStatValuePermille(att.Data, StatType, Value), 1000)`    |
+| 94  | DMG_TARGET_STAT         | idem sur les stats du **défenseur**, cap 1000                    |
+| 95  | DMG_OWNER_BUFF          | `+Value × nb de buffs (positifs) de l'attaquant`                 |
+| 96  | DMG_TARGET_BUFF         | `+Value × nb de buffs de att.TargetCharacter`                    |
+| 97  | DMG_OWNER_DEBUFF        | `+Value × nb de débuffs de l'attaquant`                          |
+| 98  | DMG_TARGET_DEBUFF       | `+Value × nb de débuffs de att.TargetCharacter`                  |
+| 102 | DMG_TARGET_BREAK        | `+Value` si la cible est en Break (`RageManager.IsBreak`)        |
+| 103 | DMG_TO_BOSS             | `+Value` si `target.Data.Type > 3` (types boss)                  |
+| 104 | DMG_KILL_COUNT_STACK    | `+Value` (stacks gérés dans CheckAvailable/Value)                |
+| 105 | DMG_NOT_CRITICAL        | `+Value` si résultat ∈ {NORMAL, MISSED}                          |
+| 106 | DMG_PVP_CONTENT         | `+Value` si scène PvP                                            |
+| 107 | DMG_CASTER_STAT         | `+min(GetStatValuePermille(caster.Data, StatType, Value), 1000)` |
+| 108 | DMG_CASTER_LOST_HP_RATE | `+GetLostHPRateValue(caster du buff, Value)`                     |
+| 110 | DMG_OWNER_TEAM_BUFF     | `+Value × Σ buffs (positifs) de l'équipe du caster`              |
+| 111 | DMG_MY_TEAM_DECREASE    | `+Value × (4 - alliés vivants de l'équipe du caster)`            |
+| 112 | DMG_MONADGATE_CONTENT   | `+Value` si scène Monad Gate                                     |
+| 113 | DMG_TOWER_CONTENT       | `+Value` si mode Tour                                            |
 
 Puis, en PvP temps réel : `+ CurrentMatchInfo.FieldSkillDmg`.
 
 Helpers numériques (exacts) :
 
-- `GetLostHPRateValue(c, v)` (0x26C6CBC) = `trunc((MaxHP - HP) × v / MaxHP)`, 0 si MaxHP < 1.
-- `GetStatValuePermille(data, type, p)` (0x27E14B8) = `div1000(GetStatValue(type) × p)`,
+- `GetLostHPRateValue(c, v)` (0x280F19C) = `trunc((MaxHP - HP) × v / MaxHP)`, 0 si MaxHP < 1.
+- `GetStatValuePermille(data, type, p)` (0x29033C8) = `div1000(GetStatValue(type) × p)`,
   0 si type NONE, `INT32_MAX` si le produit dépasse int32 après division. Les usages
   ci-dessus passent ensuite par `min(·, 1000.0f)` + `Math.Round` half-to-even (sans
   effet sur un entier) : **cap à 1000 ‰**.
 
-### 9.2 FindBuffDamageReduce (0x26DEBD8) — buffs du DÉFENSEUR, somme (‰)
+### 9.2 FindBuffDamageReduce (0x2827AE4) — buffs du DÉFENSEUR, somme (‰)
 
 | BT  | Nom                         | Contribution                                                                         |
 | --- | --------------------------- | ------------------------------------------------------------------------------------ |
-| 110 | DMG_REDUCE                  | `+Value` si `CheckAvailable(attaquant)` et `ApplyingType == 2`                       |
-| 149 | STEALTHED                   | `+Value` si le skill de l'attaquant n'est **pas** mono-cible (`SkillRangeType != 1`) |
-| 113 | DMG_REDUCE_MY_TEAM_INCREASE | `+Value × (alliés vivants du caster - 1)`                                            |
+| 115 | DMG_REDUCE                  | `+Value` si `CheckAvailable(attaquant)` et `ApplyingType == 2`                       |
+| 154 | STEALTHED                   | `+Value` si le skill de l'attaquant n'est **pas** mono-cible (`SkillRangeType != 1`) |
+| 118 | DMG_REDUCE_MY_TEAM_INCREASE | `+Value × (alliés vivants du caster - 1)`                                            |
 
-### 9.3 GetBuffDamgeFinalReduce (0x26DF06C) — défenseur, **MAX** (‰), pas somme
+**Nouveauté 1.4.14 — réduction liée au DOT « punish ».** La fonction gagne 492 octets :
+une quatrième boucle de buffs, un `CCharacterBattle.FindBuffByType(BT 62 BT_DOT_PUNISH)`
+et **deux lectures de `GameConfig.PUNISH_DMG_REDUCE_VALUE`** (`GAME_CONFIG` 215, valeur
+de table **300**, soit 30 %). Autrement dit : porter un DOT « punish » ouvre une
+réduction de dégâts supplémentaire dont le montant vient désormais de la config
+serveur, pas du buff. La **place exacte de ces 300 ‰ dans l'agrégation** (terme
+additionnel de la somme, ou plafond appliqué au total) n'est pas tranchée — les deux
+lectures sont sur des chemins distincts. Voir § 12.16 ; ne pas trancher au jugé.
+
+### 9.3 GetBuffDamgeFinalReduce (0x2828164) — défenseur, **MAX** (‰), pas somme
 
 Multiplicatif final `(1000 - r)/1000` dans § 8.2. `r` = maximum parmi :
 
-- BT 114 DMG_REDUCE_FINAL : `Value` (si CheckAvailable vs attaquant).
-- BT 115 DMG_REDUCE_FINAL_MY_TEAM_INCREASE : `Value × (alliés vivants du caster - 1)`.
-- BT 116 DMG_REDUCE_FINAL_WITH_OUT_FIRST_SKILL : `Value` si le skill de l'attaquant
+- BT 119 DMG_REDUCE_FINAL : `Value` (si CheckAvailable vs attaquant).
+- BT 120 DMG_REDUCE_FINAL_MY_TEAM_INCREASE : `Value × (alliés vivants du caster - 1)`.
+- BT 121 DMG_REDUCE_FINAL_WITH_OUT_FIRST_SKILL : `Value` si le skill de l'attaquant
   n'est pas le skill 1 (`SkillRecord.SkillType != 0`) ; sinon buff seulement consommé.
 
 ## 10. Stats d'entrée
 
-### 10.1 GetAttackStat (0x26E02A4)
+### 10.1 GetAttackStat (0x282939C)
 
 ```text
 if Attacker a un buff BT_SWAP_STAT_ATTACK (109) disponible :
@@ -428,14 +488,14 @@ return Attacker.Data.Attack        // stat finale ST_ATK (4), buffs inclus
 
 ### 10.2 Getters `CCharacterData.get_*`
 
-Tous identiques (ex. `get_Def` 0x27E00D8) : recalcul lazy (`CalcStat`) si dirty, puis
+Tous identiques (ex. `get_Def` 0x2901FE8) : recalcul lazy (`CalcStat`) si dirty, puis
 `StatDict[type].Value`. Les stats finales incluent base/évo/éveil/monad/trans/archive/
 items/buffs via `CalcFinalStat` (§ 3). Le détail de `CCharacterData.CalcStat`
 (assemblage des 13 paramètres par stat) n'a pas été désassemblé ici (§ 12).
 
 ## 11. Fonctions annexes
 
-### CalcDamageDOT (0x2C5BC6C) — dégâts sur la durée
+### CalcDamageDOT (0x2CB3BF0) — dégâts sur la durée
 
 Entrées : `attackRate` (‰, du templet de buff DOT) et `statValue` (stat de référence
 capturée). **Ignore** élément, crit, taux de § 7 ; seule mitigation : défense + DMG_REDUCE.
@@ -448,17 +508,17 @@ d = trunc( d × (1000 - reduce) / 1_000_000 )
 return d                                                            // PAS de clamp ≥ 1
 ```
 
-### CalcDamageWG (0x2C5BDBC) — dégâts de jauge de faiblesse
+### CalcDamageWG (0x2CB3D40) — dégâts de jauge de faiblesse
 
 ```text
 if Defender.FindBuffWGInvincible(Attacker): return 0        // BT_WG_INVINCIBLE (82)
 wg = customValue != 0 ? customValue
                       : Attacker.UsingSkill.WGReduce         // byte du SkillLevelTemplet
-(flat, rate) = Defender.FindBuffWGDamageReduce(Attacker)     // BT 83/84, non désassemblé
+(flat, rate) = Defender.FindBuffWGDamageReduce(Attacker)     // BT 88/89, non désassemblé
 return max(0, ApplyRate(flat + wg, rate))                    // = div1000((flat+wg)×(1000+rate))
 ```
 
-### CalcCharacterSharedDamage (0x2C5B778) — partage de dégâts
+### CalcCharacterSharedDamage (0x2CB36FC) — partage de dégâts
 
 ```text
 restant = dmg
@@ -486,7 +546,7 @@ return restant
    10/08/2026, ex. les 5 Kaizer Energy du S3 de Noa, `2000022_3_3`).
 2. ~~`CCharacterData.CalcStat`~~ — **RÉSOLU** : le mapping complet templet → 13
    paramètres est désormais extrait, voir § 17.
-3. **`FindBuffWGDamageReduce`** (BT 83/84) : les deux sorties (flat, rate) sont
+3. **`FindBuffWGDamageReduce`** (BT 88/89) : les deux sorties (flat, rate) sont
    identifiées mais leur agrégation interne n'est pas désassemblée.
 4. **Événements d'animation** (§ 8.1) : les noms exacts des `functionName` comparés
    sont des littéraux runtime (metadata chiffrée) non extraits ; la _structure_ du
@@ -498,7 +558,7 @@ return restant
    réalistes aucun wrap ne se produit. Le moteur TS calcule en BigInt sans émuler le
    wrap (documenté dans le code).
 7. ~~Escalade des pénalités PvP~~ — **RÉSOLU** (`CDungeonScene.UpdatePvpTurnPenalty`
-   0x255A430 + `CStateBattle.PvpAttackTeamPenaltyDmg`, § 17.6) : première pénalité au
+   0x259F724 + `CStateBattle.PvpAttackTeamPenaltyDmg`, § 17.6) : première pénalité au
    tour `PVP_ATK_PENALTY_START_TURN` (10), puis tous les `…_LOOP_TURN` (5) tours.
    À chaque cycle : (a) chaque attaquant vivant subit
    `AddHP(−MulPermille(MaxHP, dmgRate))` avec `dmgRate` = 100 ‰ puis +30 ‰/cycle,
@@ -508,8 +568,8 @@ return restant
    **cap 1000 ‰** (`min(x, 1000)`).
 8. **`CBattleManager.ProcessDamageOverTime`** : le tick périodique des DOT (qui appelle
    `CalcDamageDOT` § 11 avec la stat capturée) et l'ordre exact des ENHANCE
-   (BT 66–74) n'ont pas été désassemblés ; seul le déclenchement « immédiat »
-   (BT 60–65, § 14.6) l'a été.
+   (BT 70–76 `*_ENHANCE`) n'ont pas été désassemblés ; seul le déclenchement « immédiat »
+   (BT 63–69, § 14.6) l'a été.
 9. **Contre-attaques** : `get_CounterRate` n'est lu que par
    `CCharacterBattle.OnReturnFinishDefenderTeam` (§ 16) — le roll et le skill
    utilisé en contre ne sont pas désassemblés.
@@ -523,9 +583,9 @@ return restant
     `CalcDamage` (ordre shield → HP, WG, événements on-damage) n'est pas
     désassemblée — les formules qu'elle appelle le sont toutes.
 13. ~~`addRate` de `SetBaseValue`~~ — **RÉSOLU** (04/08/2026, scan exhaustif des
-    stores inlinés 0xC0/0xC4 du binaire + callers de `SetStatValue` 0x27E46B0) :
+    stores inlinés 0xC0/0xC4 du binaire + callers de `SetStatValue` 0x29065C0) :
     la SEULE source combat est `CGuildRaidSpawnData.GetCharacterData`
-    (0x22EFFD0) — le scaling du BOSS de guild raid en **overgrade**. Au-delà du
+    (0x231B804) — le scaling du BOSS de guild raid en **overgrade**. Au-delà du
     grade 10, avec `GameConfig.GUILD_RAID_AFTER_10_BOSS_STAT` (enum 149) =
     `[300, 300, 10]` :
     `MaxHP = floor(float32((1 + overGrade × 300 × 0.001f)) × float32(BossMonsterHP))`
@@ -551,25 +611,33 @@ return restant
     l'état de base (sans objets de run) ; l'agrégation exacte n'est pas
     désassemblée — une fixture d'infiltration doit être capturée en début de
     run, sans modificateur actif.
-16. **Écart 1.4.9 → 1.4.14 (13/08/2026) non rédigé.** Les listings sont
-    régénérés en 1.4.14 ; les sections ci-dessus datent de 1.4.9. Comparaison
-    des corps normalisés (RVA, pages `adrp` et slots de métadonnées neutralisés) :
-    **72 des 88 listings sont inchangés**, 12 ne diffèrent que par des détails
-    d'allocation de registres, et **3 ont changé de comportement** :
-    - `CalcDamage` (+12 o.) appelle désormais **`CFormula.IsIgnoreTurnLimitDamage`**
-      — nouveau garde, absent en 1.4.9, avec branchement de sortie. Probable
-      exemption de la limite de dégâts par tour (§ 17.6 pénalités PvP) ; la
-      condition exacte n'est pas désassemblée. **§ 4 est donc incomplet.**
-    - `FindBuffDamageReduce` (+492 o., 293 → 416 instructions) : une boucle de
-      buffs supplémentaire, plus `CCharacterBattle.FindBuffByType` et **deux
-      lectures `CTempletManager.GetGameConfig`** absentes en 1.4.9 — la
-      réduction de dégâts est désormais paramétrée par GameConfig. **§ 9 est
-      donc incomplet** (agrégation et clé de config à extraire).
-    - `CBuff_OnCreate` (+244 o.) : nouveau **`CBuff.TrySetDieByReverseHeal`** et
-      un second `CheckReverseHealCAP` — le reverse heal peut maintenant tuer.
-      **§ 14.1 ne le décrit pas.**
-      Rien de tout cela n'est reflété dans le moteur TS. Ne PAS supposer :
-      re-dériver depuis les listings régénérés avant de toucher aux formules.
+16. **Écart 1.4.9 → 1.4.14 (13/08/2026) — rédigé, PAS implémenté.** Comparaison
+    des 88 corps normalisés (RVA, pages `adrp` et slots de métadonnées
+    neutralisés) : **72 inchangés**, 13 à allocation de registres près, **3
+    changements de comportement** — tous les trois désassemblés et rédigés :
+    § 8.5 (`IsIgnoreTurnLimitDamage`), § 9.2 (réduction `BT_DOT_PUNISH` via
+    `GameConfig.PUNISH_DMG_REDUCE_VALUE` = 300) et § 14.5 (reverse heal
+    `_ABLE_KILL` + `TrySetDieByReverseHeal`). S'y ajoute la **renumérotation de
+    `BUFF_TYPE`** traitée en § 2.
+
+    Ce qui reste ouvert, à ne PAS combler au jugé :
+    - **§ 9.2 — place des 300 ‰.** Les deux `GetGameConfig(215)` sont sur des
+      chemins distincts ; terme additionnel de la somme ou plafond du total,
+      non tranché. Le moteur applique encore l'agrégation 1.4.9.
+    - **§ 8.5 — quantité accumulée** dans `CSkillRecord.CurrentSkillFactor`
+      (`w22` au site d'appel) : définition non atteinte par lecture linéaire,
+      il faut suivre les arcs arrière du bloc.
+    - **§ 14.5 — le slot virtuel 0x198** de `CCharacterBattle` (la mise à mort
+      appelée par `TrySetDieByReverseHeal`) n'est pas résolu en nom.
+
+    **Le moteur TS n'implémente aucun des trois.** Il n'est pas pour autant
+    faux sur les identifiants : il clé sur les noms de `BUFF_TYPE`, pas sur les
+    entiers. Deux commentaires portent en revanche les anciens numéros et
+    mentent désormais — [`src/lib/damage/recovery.ts:182`](../../src/lib/damage/recovery.ts)
+    (« BT_REVERSE_HEAL_CAP (18) », lire 20) et
+    [`src/lib/damage/types.ts:175`](../../src/lib/damage/types.ts) (« buffs
+    114/115/116 », lire 119/120/121). Laissés en l'état volontairement : cette
+    passe est documentaire, aucun fichier de code n'a été touché.
 
 ## 13. À vérifier in-game (phase 2)
 
@@ -585,7 +653,7 @@ return restant
   prime sur REDUCE (un seul des deux s'applique).
 - Le reverse heal laisse à 1 PV hors contenus « létaux » (§ 14.5).
 
-## 14. Soins, shields, reverse heal, WG — CBuff.OnCreate (0x22FC71C) & AddHP (0x26C5FD8)
+## 14. Soins, shields, reverse heal, WG — CBuff.OnCreate (0x232856C) & AddHP (0x280E4B8)
 
 Ces mécaniques ne sont pas dans `CFormula` : ce sont des **buffs**, résolus dans le
 dispatch `CBuff.OnCreate` (~12,7 Ko, table de saut sur BUFF_TYPE 10–81) et appliqués
@@ -594,13 +662,13 @@ via `CCharacterBattle.AddHP`. Listings : `CBuff_OnCreate.asm`, `CCharacterBattle
 
 ### 14.1 Valeur d'un buff et enhance
 
-- `CBuff.Value` (0x22F4B38) = `Templet.Value × StackCount` — **linéaire en stacks**,
+- `CBuff.Value` (0x232036C) = `Templet.Value × StackCount` — **linéaire en stacks**,
   partout (dégâts § 9, soins, shields…).
-- Buffs de stat (BT 27/28 STAT_BUFF/DEBUFF_ENHANCE sur le porteur) : la valeur
+- Buffs de stat (BT 29/30 STAT_BUFF/DEBUFF_ENHANCE sur le porteur) : la valeur
   effective du buff de stat posé devient `ApplyRate(value, enhance.Value)`
   = `trunc(value × (1000 + enhance) / 1000)` (stockée en `InstanceValue`).
-- BT 31 STAT_OWNER_LOST_HP_RATE : `InstanceValue = GetLostHPRateValue(owner, value)`.
-- BT 32 …_HALF : `hpEff = clamp(2×HP − MaxHP, 0, MaxHP)` puis
+- BT 33 STAT_OWNER_LOST_HP_RATE : `InstanceValue = GetLostHPRateValue(owner, value)`.
+- BT 34 …_HALF : `hpEff = clamp(2×HP − MaxHP, 0, MaxHP)` puis
   `GetLostHPRateValue(hpEff)` — le bonus croît deux fois plus vite et sature quand
   HP ≤ 50 %.
 - Un buff de MaxHP préserve le **ratio de PV** : `HP' = trunc(MaxHP' × HP / MaxHP)`
@@ -647,7 +715,7 @@ BT_UNDEAD (111) présent (et `!bIgnoreUndead`) → HP = 1. Retourne le delta eff
 (c'est lui qui alimente `SkillRecord.Heal`). Le paramètre `bHeal` n'est pas lu dans
 le corps (uniquement transmis par les appelants).
 
-### 14.4 Shields (BT 19 SHIELD_BASED_CASTER / 20 SHIELD_BASED_TARGET)
+### 14.4 Shields (BT 21 SHIELD_BASED_CASTER / 22 SHIELD_BASED_TARGET)
 
 ```text
 shield = (Templet.StatType != 0)
@@ -659,15 +727,18 @@ SetShieldHP(owner, shield)     // REMPLACE m_nShieldHP (aucun cumul), mémorise 
 Pas de réduction PvP sur les shields. La consommation est dans AddHP (§ 14.3) ;
 `RemoveBuffShield` retire le buff quand le shield tombe à 0.
 
-### 14.5 Reverse heal (BT 16 REVERSE_HEAL_BASED_CASTER / 17 …_TARGET, cap BT 18)
+### 14.5 Reverse heal (BT 16 …_CASTER / 17 …_TARGET, **18/19 `_ABLE_KILL`**, cap BT 20)
 
 ```text
 v = (Templet.StatType != 0) ? GetStatValuePermille(source.Data, StatType, value) : value
-v = CheckReverseHealCAP(v)     // min(v, plus petit BT_REVERSE_HEAL_CAP (18) dont la condition passe)
+v = CheckReverseHealCAP(v)     // min(v, plus petit BT_REVERSE_HEAL_CAP (20) dont la condition passe)
 if HP + ShieldHP > v:
   AddHP(owner, -v, bIgnoreHealModifier…)      // passe par le shield, ignore la mitigation de dégâts
 else:                                          // serait létal
-  if scène ∈ {GuildDungeon, EventChallenge, WorldBoss, MonadGateSingularity} ou owner.IsBoss:
+  if Templet.Type == 18 (BT_REVERSE_HEAL_BASED_CASTER_ABLE_KILL):   // ← 1.4.14
+    AddHP(owner, -v)
+    TrySetDieByReverseHeal()                   // tue, PARTOUT, sans condition de scène
+  elif scène ∈ {GuildDungeon, EventChallenge, WorldBoss, MonadGateSingularity} ou owner.IsBoss:
     AddHP(owner, -v)                           // peut tuer
   else:
     AddHP(owner, 1 - (HP + ShieldHP))          // laisse exactement 1 (PV+shield)
@@ -676,12 +747,32 @@ else:                                          // serait létal
 Le reverse heal ignore défense, élément, crit et DMG_REDUCE — c'est une perte de PV
 brute, pas un dégât.
 
+**Nouveauté 1.4.14 — le reverse heal peut tuer explicitement.** L'énumération gagne
+`BT_REVERSE_HEAL_BASED_CASTER_ABLE_KILL` (18) et `…_TARGET_ABLE_KILL` (19). Quand le
+buff appliqué est de ce type, la branche létale court-circuite entièrement la liste
+de scènes ci-dessus et appelle `CBuff.TrySetDieByReverseHeal` (0x232C11C) :
+
+```text
+TrySetDieByReverseHeal():
+  owner = buff.Owner
+  if owner.HP != 0:      return          // le AddHP précédent ne l'a pas mis à 0
+  if !owner.IsAlive:     return
+  if owner.IsNotDie:     return          // CCharacterBattle+0x2E8
+  owner.<slot virtuel 0x198>(false)      // la mise à mort ; méthode non résolue
+  if owner.TeamType != ENEMY: return
+  if !owner.IsBoss:           return
+  owner.GetTeam().BossKill(null)         // CTeam.BossKill — comptabilité de kill de boss
+```
+
+Le garde `IsNotDie` est le seul verrou : un porteur marqué « ne meurt pas » survit.
+Le tour de comptabilité `BossKill` ne s'exécute que pour un boss de l'équipe ENNEMIE.
+
 ### 14.6 Jauge de faiblesse et DOT immédiats
 
-- BT 80 WG_HEAL : `wg += (ApplyingType == 2) ? MulPermille(MaxWG, value) : value`.
-- BT 84 WG_DMG : si la cible peut perdre du WG :
+- BT 85 WG_HEAL : `wg += (ApplyingType == 2) ? MulPermille(MaxWG, value) : value`.
+- BT 89 WG_DMG : si la cible peut perdre du WG :
   `wg -= CalcDamageWG(caster, owner, (ApplyingType == 2) ? MulPermille(MaxWG, value) : value)`.
-- BT 60–65 IMMEDIATELY_(BURN…) : chaque DOT du type correspondant déjà présent sur la
+- BT 63–69 IMMEDIATELY_(BURN…) : chaque DOT du type correspondant déjà présent sur la
   cible tick immédiatement à `ApplyRate(dot.Value, value)` = `dot × (1000+value)/1000`
   (via `CBuffManager.ProcessDamageOverTime`, qui applique ensuite `CalcDamageDOT` § 11).
 
@@ -705,7 +796,7 @@ Exclusive, Ooparts)` → `m_ItemBuffTempletList` (0x18) ;
      PvP league, nœuds d'éveil, infiltration, Monad gate, leader PvP temps réel,
      daily gift — offsets 0x30…0x60).
 
-   Le collecteur central `CSkillManager.GetBuffList` (RVA 0x24D3138, listing
+   Le collecteur central `CSkillManager.GetBuffList` (RVA 0x2510400, listing
    `CSkillManager_GetBuffList.asm`) parcourt, dans cet ordre : les buffs des
    skills (`m_SkillList`) **puis toutes ces listes**, filtrés par
    `IsBuffCreateType` (le moment, enum `BUFF_CREATE_TYPE` : 1–2 PASSIVE, 3–4
@@ -721,7 +812,7 @@ Exclusive, Ooparts)` → `m_ItemBuffTempletList` (0x18) ;
 
    Particularité : les buffs d'équipement portant un `BuffCool` sont gardés par
    `m_EquipItemBuffCoolList` (dictionnaire par BuffID) — `CheckItemBuffCool`
-   (0x24D655C) refuse le déclenchement tant que `compteur < BuffCool` puis le
+   (0x2513824) refuse le déclenchement tant que `compteur < BuffCool` puis le
    remet à zéro ; `AddItemBuffCool` incrémente le compteur (cadence
    d'incrémentation non désassemblée).
 
@@ -732,7 +823,7 @@ Exclusive, Ooparts)` → `m_ItemBuffTempletList` (0x18) ;
 > `BT_DMG_TARGET_BREAK`), EE (lignes spéciales ≤ `max(enchant, 1)`, main à
 > buff au niveau `enchant + 1` — § 17.5). Créations `PASSIVE`/`PASSIVE2`
 > appliquées via les canaux § 9/§ 16.1 ; les familles « PV perdus » § 14
-> (BT 31/32) alimentent désormais les canaux de stats (contexte = PV de
+> (BT 33/34) alimentent désormais les canaux de stats (contexte = PV de
 > combat × % saisis). Procs damage-pertinents : signalés `dynamic`, jamais
 > simulés (le marking de Rampaging Caracal se coche en chip d'état).
 > `MY_TEAM_WITHOUT_ME` (Absolute Music) : jamais appliqué au porteur, affiché
@@ -750,7 +841,7 @@ Exclusive, Ooparts)` → `m_ItemBuffTempletList` (0x18) ;
 
 ## 16. Couches contextuelles au-dessus de CalcFinalStat — CStatValue (audit de couverture)
 
-La stat lue en combat est `CStatValue.GetFinalValue` (0x28D33B4), pas la sortie brute
+La stat lue en combat est `CStatValue.GetFinalValue` (0x29FBD34), pas la sortie brute
 de `CalcFinalStat`. Chaîne exacte (`CStatValue_SetFinalValue.asm` / `_GetFinalValue.asm`) :
 
 ```text
@@ -798,7 +889,7 @@ Audit d'exhaustivité de la classe `CFormula` (dump.cs, TypeDefIndex 7258) — l
 | ------------------------------------------------------------ | ------------------------------------------------------------------- |
 | CalcStat                                                     | § 3.1                                                               |
 | CalcFinalStat                                                | § 3                                                                 |
-| CheckProbability / …Percent / …Permille                      | § 4 (wrappers vérifiés : `b` vers 0x2C59DE8 avec max=100/1000)      |
+| CheckProbability / …Percent / …Permille                      | § 4 (wrappers vérifiés : `b` vers 0x2CB1C0C avec max=100/1000)      |
 | CheckResist                                                  | § 5                                                                 |
 | GetElementSuperiority / GetElementeryDamageRate              | § 6                                                                 |
 | CheckDamageRate / AddCheckEnemyTeamDecreaseDamageRate        | § 7                                                                 |
@@ -806,7 +897,7 @@ Audit d'exhaustivité de la classe `CFormula` (dump.cs, TypeDefIndex 7258) — l
 | CalcDamageDOT / CalcDamageWG / CalcCharacterSharedDamage     | § 11                                                                |
 | InitRandomSeed / GetRandomRange ×2 / GetBattleRandomRange ×2 | RNG — tirages injectés dans le moteur (§ 4)                         |
 | Approximately                                                | comparaison float à tolérance, aucun appel dans les formules        |
-| CalcBattlePower (0x2C59EE4)                                  | **hors périmètre** : calcul du CP affiché, ne touche pas aux dégâts |
+| CalcBattlePower (0x2CB1D08)                                  | **hors périmètre** : calcul du CP affiché, ne touche pas aux dégâts |
 
 Ce qui s'applique **hors combat vs en combat** :
 
@@ -869,24 +960,24 @@ conforme, y compris le clamp `bic` et les troncatures vers zéro.)
 > NB pour l'amont : le terme Codex exige la stat de BASE, donc le NIVEAU de
 > l'attaquant — l'UI ne le demande pas encore (défaut 120 à prévoir).
 
-### 16.2 Buff de guilde (event buff MAX_HP) — get_MaxHP (0x27DFB20), 04/08/2026
+### 16.2 Buff de guilde (event buff MAX_HP) — get_MaxHP (0x2901A30), 04/08/2026
 
 Signalé par Sevih (le « buff de guilde » n'est pas actif dans tous les modes) ;
 chaîne ENTIÈRE vérifiée au binaire :
 
 ```text
 // Au CHARGEMENT du donjon (CDungeonScene.<LoadResource>d__247.MoveNext,
-// 0x2567e58) — seul appelant dans tout le binaire :
+// 0x25ABC8C) — seul appelant dans tout le binaire :
 rate = CBuffSystemManager.CheckMaxHPEvent(dungeonMode, dungeonPlayMode, areaID)
 CCharacterData.MaxHPRate = rate                       // str s0, [x20, #0x120]
 // remis à neutre par ResetMaxHPRate (CStateResult.OnStart, fin de combat)
 
-// CBuffSystemManager.CheckMaxHPEvent (0x2469068) :
+// CBuffSystemManager.CheckMaxHPEvent (0x24A6F5C) :
 sum  = Σ CEventBuffGroupData.CheckMaxHPEvent(...)     // par groupe de buff actif
      + (buff de ZONE type EBT_MAX_HP=5 si areaID matche et playMode ≠ 2)
 rate = float32(sum + 100) × 0.01f                     // constante 0.01f à 0x1056648
 
-// CCharacterData.get_MaxHP (0x27DFB20) :
+// CCharacterData.get_MaxHP (0x2901A30) :
 MaxHP = floor(float32(MaxHPRate × float32(HP_final)))  // scvtf/fmul/frintm
         // HP_final = la stat § 16/§ 3 ; float32 exact tant que HP < 2^24
 ```
@@ -988,7 +1079,7 @@ Toute autre condition (`OWNER_HAS_BUFF` — le WG reduce sous bouclier de rage �
 > affiche les chips AUTO « passif du boss » (nom localisé du skill, jamais
 > togglables, état actif/inactif selon l'élément de l'attaquant courant).
 
-## 17. Agrégation des couches — CCharacterData.CalcStat (0x27E2870) et satellites
+## 17. Agrégation des couches — CCharacterData.CalcStat (0x2904780) et satellites
 
 Le mapping templet → 13 paramètres de CalcFinalStat, extrait fonction par fonction
 (listings `CCharacterData_*.asm`, `CStatValue_SetAwakeningNodeStatValue.asm`,
@@ -1010,7 +1101,7 @@ CalcStat():
   CalcAwakeningNodeStats()                // § 17.4 — l'éveil passe EN DERNIER
 ```
 
-### 17.2 CalcBasicStats (0x27E4750) — appels SetBaseValue par stat
+### 17.2 CalcBasicStats (0x2906660) — appels SetBaseValue par stat
 
 Chaque stat reçoit `SetBaseValue(min, max, level, spawnAdv, addRate, this)` (§ 3.2)
 avec les paires Min/Max du CharacterTemplet. Particularités :
@@ -1025,23 +1116,23 @@ avec les paires Min/Max du CharacterTemplet. Particularités :
 
 ### 17.3 Évolution (cumulative) et archive
 
-- `GetEvolutionStat(this, cumulatif=1, 0)` (0x27E6B50) : parcourt les lignes
+- `GetEvolutionStat(this, cumulatif=1, 0)` (0x2908A60) : parcourt les lignes
   `CharacterEvolutionStatTemplet` du perso et **somme** les `RewardValue_i` de
   TOUTES les lignes avec `EvolutionLevel ≤ niveau d'évolution courant`
   (`AddEvolutionStatToDictionary` : `dict[stat] += value`). Valeurs **plates**.
-- `CalcArchiveStats` (0x27E5C18) : ligne `CharacterArchiveStatTemplet` d'ID
+- `CalcArchiveStats` (0x2907B28) : ligne `CharacterArchiveStatTemplet` d'ID
   `ArchiveStatID` → `SetArchiveStatValueRate` sur ATK (+0x14), DEF (+0x16),
   HP (+0x18) — **taux**, ces trois stats seulement.
-- `CalcTranscendentStarStats` (0x27E59CC) : ligne `(BasicStar, TransStar)` de
+- `CalcTranscendentStarStats` (0x29078DC) : ligne `(BasicStar, TransStar)` de
   `CharacterTranscendentTemplet` → taux `RewardHPRate`/`RewardAtkRate`/
   `RewardDefRate` sur HP/ATK/DEF — confirme § 3 (les autres stats → 0).
 
 ### 17.4 Éveil et Monad (mêmes règles, code identique au champ près)
 
-`CalcAwakeningNodeStats` (0x27E3668) parcourt les nœuds débloqués :
+`CalcAwakeningNodeStats` (0x2905578) parcourt les nœuds débloqués :
 
 - Les nœuds de **type 2** (skill) sont ignorés pour les stats.
-- `CheckNodeApply` (0x27E6F34) filtre : l'`AwakeningApplyType` compare
+- `CheckNodeApply` (0x2908E44) filtre : l'`AwakeningApplyType` compare
   `AwakeningApplyTypeValue` à l'élément/classe/race du perso ; les nœuds
   « licence » (type 5) ne s'appliquent que si
   `CDungeonScene.IsApplyAwakeningNodeAdventureLicense()` — **dépendant du
@@ -1049,16 +1140,16 @@ avec les paires Min/Max du CharacterTemplet. Particularités :
 - `OptionType == IOT_BUFF` → chaque `BuffID` est résolu en `CBuffTemplet`
   **niveau 1** et rejoint la liste de buffs (appliqué comme un buff ordinaire).
 - `OptionType == IOT_STAT` → groupé par `StatType`, puis
-  `CStatValue.SetAwakeningNodeStatValue` (0x28D38A8) : remise à zéro puis, pour
+  `CStatValue.SetAwakeningNodeStatValue` (0x29FC228) : remise à zéro puis, pour
   chaque templet du groupe, `ApplyingType == OAT_ADD (1)` → **somme plate**
   (`awakeningValue`), `OAT_RATE (2)` → **somme de taux** (`awakeningValueRate`).
 
-`CalcMonadGateEnchantNodeStats` / `SetMonadGateEnchantNodeStatValue` (0x28D3AEC) :
+`CalcMonadGateEnchantNodeStats` / `SetMonadGateEnchantNodeStatValue` (0x29FC46C) :
 diff instruction par instruction = identique à l'éveil (champs monad à la place).
 
 ### 17.5 Options d'équipement — CItem (enchant, break limit, singularité)
 
-`CItem.InitializeOptionData` (0x230F9C4) construit les options d'une pièce :
+`CItem.InitializeOptionData` (0x2340FF0) construit les options d'une pièce :
 
 ```text
 enchantFactor     = Σ float32 UpgradeFactorforOP des lignes ItemEnchantTemplet
@@ -1066,7 +1157,7 @@ enchantFactor     = Σ float32 UpgradeFactorforOP des lignes ItemEnchantTemplet
 breakLimitFactor  = Σ float32 des valeurs BreakLimit [0..breakCount-1]   // GetBreakLimitFactor
 singularityFactor = analogue (SingularityEquipEnchantTemplet)            // GetSingularityFactor
 
-option PRINCIPALE (CItemMainOption.get_OptionValue, 0x230DB18, float32) :
+option PRINCIPALE (CItemMainOption.get_OptionValue, 0x233F1B0, float32) :
   final = trunc_f32(OptionValue × (1 + enchantFactor + singularityFactor)
                                 × (1 + breakLimitFactor))
   ordre exact : t = fround(enchantFactor + 1) ; t = fround(t + singularityFactor) ;
@@ -1083,7 +1174,7 @@ option PRINCIPALE (CItemMainOption.get_OptionValue, 0x230DB18, float32) :
   (`max(enchant, 1)` pour les enchantables), une ligne `IsAdd=false` remplace les
   niveaux inférieurs, `IsAdd=true` s'ajoute.
 
-### 17.6 Pénalités PvP (UpdatePvpTurnPenalty, 0x255A430)
+### 17.6 Pénalités PvP (UpdatePvpTurnPenalty, 0x259F724)
 
 Cycle : premier déclenchement au tour `PVP_ATK_PENALTY_START_TURN` (10), puis tous
 les `PVP_ATK_PENALTY_LOOP_TURN` (5) tours. À chaque cycle :

@@ -754,9 +754,40 @@
     `IsIgnoreTurnLimitDamage`, `FindBuffDamageReduce` gagne 492 octets (boucle de
     buffs en plus + 2 lectures `GetGameConfig`), `CBuff_OnCreate` gagne
     `TrySetDieByReverseHeal`. Consignés en [spec § 12.16](specs/damage-formula.md)
-    avec les sections rendues incomplètes (§ 4, § 9, § 14.1) ; en-tête de la spec
-    corrigé (1.4.9 → 1.4.14, `TypeDefIndex` 7258 → 7282). **Rien n'est reporté
-    dans le moteur TS** — à re-dériver depuis les listings, jamais supposé.
+    avec les sections rendues incomplètes ; en-tête de la spec corrigé
+    (1.4.9 → 1.4.14, `TypeDefIndex` 7258 → 7282).
+
+- **Spec damage remise à 1.4.14** (suite du point ci-dessus, même journée).
+  Documentaire uniquement : **aucun fichier de code touché**, le moteur TS
+  n'implémente toujours pas les trois écarts.
+  - Les 3 changements de comportement sont désassemblés et rédigés. **§ 8.5**
+    `CFormula.IsIgnoreTurnLimitDamage` : pendant l'attaque spéciale d'un world
+    boss, un attaquant **sans UID** échappe à la limite de dégâts par tour (en
+    1.4.9 seul `IsUseWorldBossFinishAttack` ouvrait ce chemin). **§ 9.2** : la
+    réduction de dégâts gagne une boucle `FindBuffByType(BT 62 BT_DOT_PUNISH)`
+    et lit `GameConfig.PUNISH_DMG_REDUCE_VALUE` (`GAME_CONFIG` 215 = **300**) —
+    porter un DOT « punish » ouvre une réduction paramétrée serveur. **§ 14.5** :
+    `BT_REVERSE_HEAL_BASED_{CASTER,TARGET}_ABLE_KILL` (18/19) + `TrySetDieByReverseHeal`
+    — ce reverse heal tue PARTOUT, sans la condition de scène, seul `IsNotDie`
+    protège ; si le mort est un boss ennemi, `CTeam.BossKill` est comptabilisé.
+  - **`BUFF_TYPE` a été RENUMÉROTÉ** — trouvaille de la re-dérivation, pas de la
+    comparaison de listings. L'insertion des deux `_ABLE_KILL` décale tout ce qui
+    suit : cap reverse heal 18 → 20, shields 19/20 → 21/22, `DMG_REDUCE` 110 → 115,
+    `STEALTHED` 149 → 154, `IMMEDIATELY_*` 60–65 → 63–69… Les **29 identifiants**
+    cités dans la spec ont été réécrits en résolvant chaque NOM dans l'énumération
+    1.4.14. Le moteur et les tables ne sont pas affectés : ils clés sur le nom
+    (`Type: 'BT_DMG_REDUCE'`), jamais sur l'entier — vérifié.
+  - **44 RVA** réécrites de même (par nom, avec désambiguïsation des homonymes :
+    `CalcStat` existe sur `CFormula` ET `CCharacterData`, `SetBaseValue` sur
+    `CStatValue` ET `CCustomBossStatValue`). Balayage final : plus une seule
+    adresse du document absente de la table des méthodes 1.4.14.
+  - 3 listings ajoutés au manifeste (`CFormula_IsIgnoreTurnLimitDamage`,
+    `CBuff_TrySetDieByReverseHeal`, `CCharacterBattle_FindBuffByType`) → 91.
+  - Restent ouverts en § 12.16, à ne pas combler au jugé : la place exacte des
+    300 ‰ dans l'agrégation § 9.2, la quantité accumulée dans
+    `CSkillRecord.CurrentSkillFactor` (§ 8.5), et le slot virtuel 0x198 de la mise
+    à mort (§ 14.5). Deux commentaires du moteur portent d'anciens numéros BT et
+    sont signalés, volontairement non corrigés (passe documentaire).
 
 - **Mécaniques perso : conditions d'ÉTAT DE COMBAT déclarables** (demande
   Sevih 10/08 — « Noa a un délire de stack sur son S3 »). Générique, pas un
