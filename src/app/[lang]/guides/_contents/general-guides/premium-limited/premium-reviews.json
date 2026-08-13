@@ -73,7 +73,7 @@
       "recommendedPvp": "5 to 6",
       "impact": {
         "3": {
-          "pve": "4",
+          "pve": "3",
           "pvp": "3"
         },
         "4": {
@@ -327,6 +327,36 @@
         "6": {
           "pve": "3",
           "pvp": "3"
+        }
+      }
+    },
+    {
+      "name": "Demiurge Saeran",
+      "review": {
+        "en": "A self-sacrificing Saint whose death unleashes her inner demon. She can grant her team several buffs including {B/BUFF_ENHANCEMENT} to have a stronger opening, but her support role is short-lived. After death she revives herself, unleashing a strong AoE attack and granting herself {B/BT_UNDEAD}. The rest of the fight she will be an AoE damage dealer with {D/PUNISHMENT} adding some damage over time. All her skills are AoE, so using {I-W/Gorgon's Wrath [Ranger]} she can extend her {B/BT_UNDEAD} indefinitely as long as there are no buff removals or crowd control effects in play. Her damage starts off average, this gets remedied by her 5 & 6-star transcends.",
+        "jp": "自己犠牲を厭わない聖女であり、その死によって内なる悪魔が解き放たれる。チームに「{B/BUFF_ENHANCEMENT}」を含む複数のバフを付与し、序盤を有利に進めることができるが、そのサポート役としての役割は短命である。死亡後、自ら復活し、強力な範囲攻撃を放つとともに、自身に「{B/BT_UNDEAD}」を付与する。 その後の戦闘では、{D/PUNISHMENT}による持続ダメージも加わり、広範囲攻撃型のダメージディーラーとして活躍します。すべてのスキルが広範囲攻撃であるため、{I-W/Gorgon's Wrath [Ranger]}を使用すれば、バフ解除や群衆制御効果が発動していない限り、{B/BT_UNDEAD}を無期限に延長できます。初期のダメージは平均的ですが、5つ星および6つ星の超越によってこれが改善されます。",
+        "kr": "자신을 희생하는 성녀로, 죽음을 맞이하면 내면의 악마가 깨어납니다. 팀원들에게 ‘{B/BUFF_ENHANCEMENT}’을 비롯한 여러 버프를 부여해 초반 전투력을 강화할 수 있지만, 서포트 역할은 오래가지 못합니다. 사망 후 스스로 부활하며 강력한 AoE 공격을 가하고, 자신에게 ‘{B/BT_UNDEAD}’을 부여합니다. 이후 전투에서는 ‘{D/PUNISHMENT}’로 지속 피해를 더하며 광역 딜러로 활약합니다. 모든 스킬이 광역 공격이므로, ‘{I-W/Gorgon's Wrath [Ranger]}’를 사용하면 버프 해제나 군중 제어 효과가 없는 한 ‘{B/BT_UNDEAD}’ 효과를 무한히 연장할 수 있습니다. 초기 피해량은 평균 수준이지만, 5성 및 6성 초월을 통해 이 문제가 해결됩니다.",
+        "zh": "一位甘愿牺牲的圣徒，她的死亡会释放出内心的恶魔。她能为团队提供多种增益效果，包括“{B/BUFF_ENHANCEMENT}”，从而让团队开局更强势，但她的辅助作用仅能维持短暂时间。死亡后她会自我复活，释放强力的范围攻击，并为自己赋予“{B/BT_UNDEAD}”。 在接下来的战斗中，她将作为范围伤害输出者，并通过“{D/PUNISHMENT}”造成持续伤害。由于所有技能均为范围攻击，只要场上没有驱散效果或控制效果，她便可利用“{I-W/Gorgon's Wrath [Ranger]}”无限延长“{B/BT_UNDEAD}”的持续时间。她的初始伤害处于平均水平，但这一缺陷可通过5星和6星的超越来弥补。",
+        "fr": "Une sainte prête au sacrifice dont la mort libère le démon qui sommeille en elle. Elle peut conférer à son équipe plusieurs bonus, notamment « {B/BUFF_ENHANCEMENT} » pour un début de combat plus percutant, mais son rôle de soutien est de courte durée. Après sa mort, elle se ressuscite, déchaînant une puissante attaque de zone et s’octroyant « {B/BT_UNDEAD} ». Pendant le reste du combat, elle infligera des dégâts de zone grâce à « {D/PUNISHMENT} », qui ajoute des dégâts sur la durée. Toutes ses compétences sont de zone ; ainsi, en utilisant « {I-W/Gorgon's Wrath [Ranger]} », elle peut prolonger indéfiniment son « {B/BT_UNDEAD} » tant qu’aucun effet de suppression de bonus ni de contrôle de foule n’est actif. Ses dégâts sont d’abord moyens, mais ses transcendances 5 et 6 étoiles y remédient."
+      },
+      "recommendedPve": "5 to 6",
+      "recommendedPvp": "Any",
+      "impact": {
+        "3": {
+          "pve": "3",
+          "pvp": "5"
+        },
+        "4": {
+          "pve": "3",
+          "pvp": "2"
+        },
+        "5": {
+          "pve": "4",
+          "pvp": "2"
+        },
+        "6": {
+          "pve": "4",
+          "pvp": "4"
         }
       }
     }
