@@ -14564,7 +14564,7 @@
     },
     "desc": {
       "en": "Grants an Extra Turn after using <color=#28d9ed>Dominion of Pain</color>\\n<color=#ffd732>Demon</color>: At the start of each turn, inflicts Punishment on the enemy with the highest Speed for <color=#28d9ed>2 additional turns</color>. (Ignores Resilience)",
-      "jp": "<color=#28d9ed>【苦痛の権能】</color>使用後、追加ターン獲得\\n<color=#ffd732>魔神</color>：毎ターン、最もスピードが高い敵に懲罰<color=#28d9ed>+2ターン</color>(効果抵抗無視)",
+      "jp": "<color=#28d9ed>【苦痛の権能】</color>使用後、追加ターン獲得\\n<color=#ffd732>魔神</color>：毎ターン、最もスピードが高い敵に裁き<color=#28d9ed>+2ターン</color>(効果抵抗無視)",
       "kr": "<color=#28d9ed>고통의 권세</color> 사용 후 추가 턴 획득\\n<color=#ffd732>마신</color> : 매 턴 가장 빠른 적 응징 <color=#28d9ed>+2턴</color> (효과 저항 무시)",
       "zh": "使用<color=#28d9ed>痛苦权能</color>后获得额外回合\\n<color=#ffd732>魔神</color>：每回合对速度最高的敌人赋予惩戒<color=#28d9ed>+2回合</color>（无视效果抵抗）"
     },

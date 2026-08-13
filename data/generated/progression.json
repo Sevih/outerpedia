@@ -10111,7 +10111,26 @@
       ]
     },
     "12908": {
+      "2": [
+        {
+          "stat": "pierce_power_rate",
+          "applying": "add",
+          "value": 100
+        }
+      ],
+      "3": [
+        {
+          "stat": "pierce_power_rate",
+          "applying": "add",
+          "value": 100
+        }
+      ],
       "4": [
+        {
+          "stat": "pierce_power_rate",
+          "applying": "add",
+          "value": 100
+        },
         {
           "stat": "pierce_power_rate",
           "applying": "add",
@@ -10120,7 +10139,26 @@
       ]
     },
     "13008": {
+      "2": [
+        {
+          "stat": "pierce_power_rate",
+          "applying": "add",
+          "value": 100
+        }
+      ],
+      "3": [
+        {
+          "stat": "pierce_power_rate",
+          "applying": "add",
+          "value": 100
+        }
+      ],
       "4": [
+        {
+          "stat": "pierce_power_rate",
+          "applying": "add",
+          "value": 100
+        },
         {
           "stat": "pierce_power_rate",
           "applying": "add",
