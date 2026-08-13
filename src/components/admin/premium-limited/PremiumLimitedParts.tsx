@@ -38,6 +38,8 @@ import { btn, input } from '../_ui';
 // (qui tire `node:fs` et ne peut donc pas être importé depuis cette brique).
 import { STARS, emptyReview, normalizeReview } from '@/lib/admin/review-shape';
 import { transcendenceFullSteps, transcendenceLabel } from '@/lib/transcendence';
+import { moveItem } from '@/lib/admin/reorder';
+import { MoveButtons } from '@/components/admin/MoveButtons';
 export { emptyReview, normalizeReview };
 
 /** Langues du SITE (5) — dérivées de la source de vérité i18n. */
@@ -421,12 +423,19 @@ const TIERS = [
 function PickRow({
   pick,
   charByName,
+  index,
+  count,
   onStars,
+  onMove,
   onRemove,
 }: {
   pick: PriorityPickData;
   charByName: Map<string, CharOption>;
+  /** Position dans le palier — l'ORDRE est le contenu ici (cf. `PriorityTiers`). */
+  index: number;
+  count: number;
   onStars: (stars: number) => void;
+  onMove: (dir: -1 | 1) => void;
   onRemove: () => void;
 }) {
   const c = charByName.get(pick.name);
@@ -436,6 +445,10 @@ function PickRow({
   const rarity = c?.rarity ?? 3;
   return (
     <div className="border-line-subtle flex items-center gap-2 rounded-lg border p-2">
+      {/* Le RANG se lit à gauche : dans un palier, l'ordre EST l'information —
+          la page les affiche de gauche à droite dans cet ordre. Sans le chiffre,
+          on réordonne à l'aveugle en comptant les lignes. */}
+      <span className="text-content-subtle w-5 text-right font-mono text-xs">{index + 1}</span>
       <span className="text-content text-sm">{c?.name ?? pick.name}</span>
       <label className="text-content-subtle ml-auto flex items-center gap-1 text-xs">
         {/* LE PIÈGE DE CE SÉLECTEUR : il affichait « 3 / 4 / 5 / 6 » et stockait
@@ -456,6 +469,7 @@ function PickRow({
           ))}
         </select>
       </label>
+      <MoveButtons index={index} count={count} onMove={onMove} what="hero" />
       <button type="button" className="text-danger text-sm" title="Remove" onClick={onRemove}>
         ✕
       </button>
@@ -489,12 +503,15 @@ export function PriorityOrderEditor({
                   key={i}
                   pick={pick}
                   charByName={charByName}
+                  index={i}
+                  count={list.length}
                   onStars={(stars) =>
                     setTier(
                       key,
                       list.map((p, j) => (j === i ? { ...p, stars } : p)),
                     )
                   }
+                  onMove={(dir) => setTier(key, [...moveItem(list, i, dir)])}
                   onRemove={() =>
                     setTier(
                       key,

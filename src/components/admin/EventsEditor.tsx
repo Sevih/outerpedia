@@ -44,6 +44,8 @@ import {
   BlockEditor,
 } from '@/components/admin/events/EventBlocks';
 import { collectTexts } from '@/components/admin/events/event-text';
+import { moveItem } from '@/lib/admin/reorder';
+import { MoveButtons } from '@/components/admin/MoveButtons';
 
 type Row = EventEntry & { _key: string };
 type Status = { kind: 'idle' | 'ok' | 'err'; msg?: string };
@@ -97,13 +99,11 @@ export function EventsEditor({ initial }: { initial: EventEntry[] }) {
   /* Blocs */
   const setBlock = (i: number, next: EventBlock) =>
     update({ blocks: (current?.blocks ?? []).map((b, j) => (j === i ? next : b)) });
-  const moveBlock = (i: number, dir: -1 | 1) => {
-    const blocks = [...(current?.blocks ?? [])];
-    const j = i + dir;
-    if (j < 0 || j >= blocks.length) return;
-    [blocks[i], blocks[j]] = [blocks[j], blocks[i]];
-    update({ blocks });
-  };
+  // Échange DÉLÉGUÉ (`lib/admin/reorder`) : la garde des extrémités s'écrivait ici
+  // et une seconde fois dans les priorités de pull — deux copies qui ne divergent
+  // que sur le cas limite, celui qui fabrique un `undefined` dans la liste.
+  const moveBlock = (i: number, dir: -1 | 1) =>
+    update({ blocks: [...moveItem(current?.blocks ?? [], i, dir)] });
 
   /* Traduction de l'événement courant */
   async function translate() {
@@ -393,22 +393,12 @@ export function EventsEditor({ initial }: { initial: EventEntry[] }) {
                     </span>
                     {isEn && (
                       <div className="ml-auto flex items-center gap-1">
-                        <button
-                          type="button"
-                          className={btn}
-                          onClick={() => moveBlock(i, -1)}
-                          aria-label="Monter le bloc"
-                        >
-                          ↑
-                        </button>
-                        <button
-                          type="button"
-                          className={btn}
-                          onClick={() => moveBlock(i, 1)}
-                          aria-label="Descendre le bloc"
-                        >
-                          ↓
-                        </button>
+                        <MoveButtons
+                          index={i}
+                          count={current.blocks.length}
+                          onMove={(dir) => moveBlock(i, dir)}
+                          what="block"
+                        />
                         <button
                           type="button"
                           className="text-danger px-1 text-sm"

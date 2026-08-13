@@ -7,6 +7,31 @@
 
 ## 2026-08-13
 
+- **Réordonner les héros d'un palier de « Recommended choices »** (demande
+  Sevih : ajouter ne suffisait pas, il faut pouvoir classer). Dans un palier
+  l'ORDRE est le contenu — la page les affiche de gauche à droite dans l'ordre de
+  la liste — et il n'était modifiable qu'en supprimant/rajoutant à la bonne
+  place. Chaque ligne porte désormais son rang à gauche et deux flèches, ces
+  dernières DÉSACTIVÉES aux extrémités : un bouton qui ne fait rien quand on
+  clique se lit comme une panne.
+  Le geste existait déjà dans `EventsEditor` (`moveBlock`). Plutôt que d'en poser
+  une seconde copie, l'échange descend dans `lib/admin/reorder` (pur, donc
+  testable seul) et les deux boutons dans `MoveButtons` ; EventsEditor est migré
+  dessus dans le même commit — laisser la copie aurait créé exactement la dette
+  qu'on voulait éviter.
+  Ce que les tests gardent n'est pas l'échange du milieu mais le CAS LIMITE : la
+  première ligne qu'on monte, la dernière qu'on descend. Sans garde, l'échange
+  avec un indice hors bornes fabrique un `undefined` dans la liste et l'éditeur
+  l'enregistre. Un mouvement bloqué rend la liste d'origine À L'IDENTITÉ PRÈS,
+  ce qui permet d'appeler sans condition sans provoquer de re-rendu — et c'est
+  vérifié, sinon la propriété se perdrait à la première réécriture.
+  1615 tests verts.
+  NON REPRODUIT, classé : l'erreur d'hydratation signalée sur le bouton « Export
+  this hero » ne réapparaît pas dans un onglet neuf (Sevih). Le code est
+  déterministe (`selected` démarre à `null`), et le HTML fautif supposait un
+  héros déjà sélectionné — un état qu'un rendu serveur frais ne peut pas
+  produire. Artefact de Fast Refresh, rien à corriger.
+
 - **Priorités de pull : une cible « 6★ » s'affichait 5★** — signalé par Sevih. Le
   champ `stars` part en `transcendence` au portrait, c'est-à-dire en PALIER
   (`TransStar`) ; le sélecteur admin, lui, proposait « ★ 3 / 4 / 5 / 6 » et
