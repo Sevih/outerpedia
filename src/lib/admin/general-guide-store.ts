@@ -15,6 +15,7 @@ import type { LocalizedText } from '@contracts';
 import { normalizeReview, type ReviewEntryData } from './review-shape';
 export { normalizeReview };
 import { characterDisplayName, findCharacterByName, getAllCharacters } from '@/lib/data/characters';
+import { transcendenceFullSteps, transcendenceLabel } from '@/lib/transcendence';
 
 const CONTENTS_DIR = resolve(process.cwd(), 'src/app/[lang]/guides/_contents');
 const GENERAL_DIR = resolve(CONTENTS_DIR, 'general-guides');
@@ -177,13 +178,32 @@ function validateReviews(bucket: string, list: ReviewEntryData[], errors: string
     if (!r.review?.en?.trim()) errors.push(`${at} (${r.name || '?'}): EN review is required.`);
   });
 }
+/**
+ * `stars` est un PALIER de transcendance (`TransStar`), pas un compte d'étoiles.
+ *
+ * L'ancienne règle — « entre 1 et 6 » — décrivait des étoiles, et c'est elle qui
+ * laissait entrer la faute : un « 6 » saisi pour 6★ passait, puis s'affichait
+ * 5★. Elle aurait de surcroît REFUSÉ la valeur correcte, le palier 9.
+ *
+ * On n'accepte donc que les paliers PLEINS de l'échelle du héros : un éditorial
+ * vise 3★/4★/5★/6★, jamais un 5★+. Le message énumère les valeurs valides avec
+ * leur libellé, puisque c'est précisément la correspondance qui n'est pas
+ * évidente.
+ */
 function validateOrder(bucket: string, order: PriorityOrderData, errors: string[]): void {
   (['first', 'second', 'third', 'transcend'] as const).forEach((tier) => {
     (order[tier] ?? []).forEach((p, i) => {
       const at = `${bucket}/${tier} #${i + 1}`;
-      if (!p.name?.trim()) errors.push(`${at}: hero is required.`);
-      else if (!findCharacterByName(p.name)) errors.push(`${at}: unknown hero “${p.name}”.`);
-      if (!(p.stars >= 1 && p.stars <= 6)) errors.push(`${at}: invalid star (1-6).`);
+      if (!p.name?.trim()) return errors.push(`${at}: hero is required.`);
+      const c = findCharacterByName(p.name);
+      if (!c) return errors.push(`${at}: unknown hero “${p.name}”.`);
+      const steps = transcendenceFullSteps(c.rarity, c.id);
+      if (!steps.includes(p.stars)) {
+        const allowed = steps.map((s) => `${s} (${transcendenceLabel(c.rarity, s, c.id)})`);
+        errors.push(
+          `${at}: “${p.stars}” is not a full transcendence step — expected ${allowed.join(', ')}.`,
+        );
+      }
     });
   });
 }

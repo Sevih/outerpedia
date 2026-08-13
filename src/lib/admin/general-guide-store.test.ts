@@ -19,7 +19,10 @@ import type { FreeHeroesData, PremiumLimitedData, ReviewEntryData } from './gene
 const ROSTER = ['Stella', 'Tamamo', 'Vlada'];
 
 vi.mock('@/lib/data/characters', () => ({
-  findCharacterByName: (n: string) => ROSTER.find((r) => r === n),
+  // Rend un PERSO, pas un booléen déguisé : la validation des priorités lit sa
+  // rareté pour connaître l'échelle de paliers qui s'applique.
+  findCharacterByName: (n: string) =>
+    ROSTER.includes(n) ? { id: n, name: { en: n }, rarity: 3, tags: ['premium'] } : undefined,
   getAllCharacters: () => ROSTER.map((name) => ({ name, tags: ['premium'] })),
   characterDisplayName: (c: { name: string }) => c.name,
 }));
@@ -122,7 +125,7 @@ describe('savePremiumLimited — reviews', () => {
     const data = plData({
       reviews: { premium: [review()], limited: [] },
       priorities: {
-        premium: { ...emptyOrder(), first: [{ name: 'Tamamo', stars: 5 }] },
+        premium: { ...emptyOrder(), first: [{ name: 'Tamamo', stars: 6 }] },
         limited: emptyOrder(),
       },
     });
@@ -182,8 +185,10 @@ describe('savePremiumLimited — priorités', () => {
     expect(errors.join()).toMatch(/Premium\/second #1: unknown hero “Inconnu”/);
   });
 
-  it('refuse une étoile hors 1-6', async () => {
-    for (const stars of [0, 7, -1, Number.NaN]) {
+  it('refuse une valeur qui n’est pas un palier PLEIN', async () => {
+    // Dont `5` et `8`, qui SONT des paliers valides (4★+ et 5★++) mais pas des
+    // crans pleins : un éditorial ne recommande pas de s'arrêter à un « + ».
+    for (const stars of [0, 7, -1, Number.NaN, 5, 8]) {
       const errors = await savePremiumLimited(
         plData({
           priorities: {
@@ -192,8 +197,41 @@ describe('savePremiumLimited — priorités', () => {
           },
         }),
       );
-      expect(errors.join()).toMatch(/invalid star \(1-6\)/);
+      expect(errors.join(), `stars=${stars}`).toMatch(/not a full transcendence step/);
     }
+  });
+
+  it('accepte les quatre crans pleins — 3★, 4★, 5★, 6★', async () => {
+    // CONTRE-ÉPREUVE : une règle qui refuserait tout passerait le test ci-dessus.
+    // Le `9` est le cas qui compte — l'ancienne règle « 1 à 6 » l'interdisait,
+    // c'est-à-dire qu'elle rendait la cible 6★ IMPOSSIBLE à enregistrer.
+    for (const stars of [3, 4, 6, 9]) {
+      const errors = await savePremiumLimited(
+        plData({
+          priorities: {
+            premium: { ...emptyOrder(), first: [{ name: 'Stella', stars }] },
+            limited: emptyOrder(),
+          },
+        }),
+      );
+      expect(errors, `stars=${stars}`).toEqual([]);
+    }
+  });
+
+  it('CE QU’ELLE NE PEUT PAS ATTRAPER — un « 6 » reste ambigu', async () => {
+    // 6 est le palier 5★ ET le nombre qu'on écrit pour dire « 6 étoiles ». Aucune
+    // validation ne les distingue : c'est pourquoi le correctif tient d'abord au
+    // SÉLECTEUR, qui affiche « 5★ » en face de la valeur 6 (cf. PickRow).
+    // Le noter ici évite de croire cette garde plus forte qu'elle n'est.
+    const errors = await savePremiumLimited(
+      plData({
+        priorities: {
+          premium: { ...emptyOrder(), first: [{ name: 'Stella', stars: 6 }] },
+          limited: emptyOrder(),
+        },
+      }),
+    );
+    expect(errors).toEqual([]);
   });
 
   it('valide les QUATRE paliers', async () => {

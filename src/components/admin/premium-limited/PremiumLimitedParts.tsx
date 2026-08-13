@@ -37,6 +37,7 @@ import { btn, input } from '../_ui';
 // Forme des reviews : module PUR, seule dédup possible avec le store serveur
 // (qui tire `node:fs` et ne peut donc pas être importé depuis cette brique).
 import { STARS, emptyReview, normalizeReview } from '@/lib/admin/review-shape';
+import { transcendenceFullSteps, transcendenceLabel } from '@/lib/transcendence';
 export { emptyReview, normalizeReview };
 
 /** Langues du SITE (5) — dérivées de la source de vérité i18n. */
@@ -429,19 +430,28 @@ function PickRow({
   onRemove: () => void;
 }) {
   const c = charByName.get(pick.name);
+  // Rareté RÉELLE du perso : c'est elle qui décide de l'échelle de paliers. 3 en
+  // repli le temps que le nom résolve — toutes les échelles partagent les crans
+  // au-dessus de 3, donc le libellé ne ment pas pendant ce court instant.
+  const rarity = c?.rarity ?? 3;
   return (
     <div className="border-line-subtle flex items-center gap-2 rounded-lg border p-2">
       <span className="text-content text-sm">{c?.name ?? pick.name}</span>
       <label className="text-content-subtle ml-auto flex items-center gap-1 text-xs">
-        ★
+        {/* LE PIÈGE DE CE SÉLECTEUR : il affichait « 3 / 4 / 5 / 6 » et stockait
+            ces nombres tels quels, alors que la valeur part en PALIER de
+            transcendance. Les deux échelles coïncident jusqu'à 4 puis divergent
+            (5★ = palier 6, 6★ = palier 9) : choisir « 6 » donnait un portrait à
+            cinq étoiles. Les options viennent donc de la table du jeu — valeur =
+            palier, libellé = ce qu'un joueur lit. */}
         <select
-          className={`${input} w-16`}
+          className={`${input} w-20`}
           value={pick.stars}
           onChange={(e) => onStars(Number(e.target.value))}
         >
-          {[3, 4, 5, 6].map((n) => (
-            <option key={n} value={n}>
-              {n}
+          {transcendenceFullSteps(rarity).map((step) => (
+            <option key={step} value={step}>
+              {transcendenceLabel(rarity, step)}
             </option>
           ))}
         </select>

@@ -16,11 +16,16 @@ import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 export interface PriorityEntry {
   name: string;
   /**
-   * PALIER DE TRANSCENDANCE visé par l'éditorial (4..9), pas la rareté du perso.
-   * C'est lui qui décide combien d'étoiles la vignette affiche et de quelle
-   * teinte — un palier 8 montre quatre étoiles jaunes et une violette, pas huit
-   * étoiles. Tant que ce nombre partait dans `rarity`, un palier 5 posait un
-   * fond de rareté inexistant et alignait cinq étoiles jaunes.
+   * PALIER DE TRANSCENDANCE visé par l'éditorial (`TransStar` : 3, 4, 6, 9 pour
+   * les crans PLEINS), pas la rareté du perso et SURTOUT pas un compte
+   * d'étoiles. Les deux échelles coïncident jusqu'à 4 puis divergent — 5★ est le
+   * palier 6, 6★ le palier 9 — et c'est la confusion qui a fait afficher « 5★ »
+   * à une cible saisie « 6★ » dans les priorités de pull. Sans erreur ni signal,
+   * puisqu'un palier 6 est parfaitement valide.
+   *
+   * Même unité que la tier list, migrée pour la même raison (cf.
+   * `transcend-step.test.ts`) : deux données voisines dans deux unités,
+   * c'est précisément ce qui produit ce bug.
    */
   stars: number;
   /** Relation avec l'entrée SUIVANTE (`>` strictement avant, `≥`). */

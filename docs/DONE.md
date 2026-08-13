@@ -7,6 +7,34 @@
 
 ## 2026-08-13
 
+- **Priorités de pull : une cible « 6★ » s'affichait 5★** — signalé par Sevih. Le
+  champ `stars` part en `transcendence` au portrait, c'est-à-dire en PALIER
+  (`TransStar`) ; le sélecteur admin, lui, proposait « ★ 3 / 4 / 5 / 6 » et
+  stockait ces nombres tels quels. Les deux échelles coïncident jusqu'à 4 puis
+  divergent — 5★ = palier 6, 6★ = palier 9 — donc choisir « 6 » donnait un
+  portrait à cinq étoiles. Sans erreur, sans signal : un palier 6 est valide.
+  EXACTEMENT la confusion déjà payée sur la tier list (cf.
+  `transcend-step.test.ts`), et corrigée pareil plutôt qu'avec une seconde
+  convention : la donnée porte des paliers, l'écran affiche des étoiles. Deux
+  données voisines dans deux unités, c'est ce qui produit ce bug.
+  Trois valeurs migrées (Monad Eva et Demiurge Vlada 5→6, Demiurge Luna 6→9) ;
+  les 3 et 4 étaient justes par coïncidence, les deux échelles s'y confondant.
+  Le sélecteur admin tire désormais ses options de la table du jeu — valeur =
+  palier, libellé = ce qu'un joueur lit — et sur la rareté RÉELLE du héros.
+  LA VALIDATION À L'ÉCRITURE ÉTAIT PIRE QUE MUETTE : sa règle « entre 1 et 6 »
+  décrivait des étoiles, laissait donc entrer la faute, et surtout REFUSAIT la
+  valeur correcte — la cible 6★ (palier 9) était impossible à enregistrer. Elle
+  n'accepte plus que les crans PLEINS de l'échelle du héros, et énumère les
+  valeurs valides avec leur libellé quand elle refuse.
+  Ce qu'elle ne peut PAS attraper est écrit dans le test : un « 6 » reste
+  ambigu — c'est le palier 5★ autant que le nombre qu'on écrit pour 6 étoiles.
+  Aucune validation ne les distingue, d'où le correctif porté d'abord par le
+  SÉLECTEUR. Le noter évite de croire la garde plus forte qu'elle n'est.
+  CONTRE-ÉPREUVES : remettre la donnée en comptes d'étoiles fait rougir le
+  nouveau test de `priorities` — avec le symptôme exact (« attendu 6★, reçu
+  5★ ») —, et un cas dédié vérifie que les quatre crans pleins passent, sans quoi
+  une règle qui refuse tout satisferait la première. 1608 tests verts.
+
 - **Briareos/Gorgon : 20 objets réels, 4 référençables — et 37 refs déjà écrites
   affichaient le mauvais** — signalé par Sevih sur les boutons « +item » de
   l'éditeur assisté. Ces deux familles existent en CINQ objets chacune, un par
