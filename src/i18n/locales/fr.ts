@@ -357,8 +357,9 @@ const fr: Record<TranslationKey, string> = {
   'tools.hero-tracker.alwaysMax': 'Toujours viser les valeurs max',
   'tools.hero-tracker.hideMaxed': 'Masquer les héros au maximum',
   'tools.hero-tracker.hideDone': 'Masquer les héros qui ont atteint leur cible',
-  'tools.hero-tracker.ignore1Star': 'Ne pas compter les héros 1★',
-  'tools.hero-tracker.ignore2Star': 'Ne pas compter les héros 2★',
+  'tools.hero-tracker.rarityRules': 'Héros de faible rareté',
+  'tools.hero-tracker.hideShort': 'Masquer',
+  'tools.hero-tracker.skipShort': 'Hors totaux',
   'tools.hero-tracker.notCounted': 'non compté',
   'tools.team-planner': "Planificateur d'équipe",
   'tools.team-planner.desc':

@@ -7,6 +7,18 @@
 
 ## 2026-08-12
 
+- **`/hero-tracker` — masquer les petites raretés, et des portraits qui disent la
+  transcendance (Sevih)** — (1) « hide 1 star / 2 star » : deux réglages de plus,
+  qui sortent ces héros de l'écran — roster suivi ET tiroir « ajouter », sinon
+  masquer laisserait les proposer. À ne pas confondre avec « hors totaux », qui
+  les garde visibles et éditables : les quatre cases vivent désormais dans une
+  GRILLE `1★ / 2★ × masquer / hors totaux`, parce que quatre phrases entières
+  disaient deux fois la même chose dans une colonne de 22 rem.
+  (2) « refléter sur le portrait l'état de la transcendance (là ils ont tous
+  leurs base star) » : la vignette d'un héros suivi prend `transcendence`, donc
+  le palier saisi — un compte 6★ partout ne s'affiche plus en 3★. Le tiroir
+  « ajouter », lui, garde la rareté de base : on ne possède pas encore le héros.
+
 - **`/hero-tracker` — import d'un roster capturé (Sevih : « je vais faire un truc
   côté gear-solver pour exporter un JSON »)** — personne ne saisit 119 héros à la
   main. Un FORMAT D'ÉCHANGE versionné (`outerpedia:hero-tracker` v1), documenté

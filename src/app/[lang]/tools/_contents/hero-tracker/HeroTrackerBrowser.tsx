@@ -108,8 +108,9 @@ export interface HeroTrackerLabels {
   alwaysMax: string;
   hideMaxed: string;
   hideDone: string;
-  ignore1Star: string;
-  ignore2Star: string;
+  rarityRules: string;
+  hideShort: string;
+  skipShort: string;
   notCounted: string;
   shoppingList: string;
   myHeroes: string;
@@ -170,6 +171,9 @@ interface TrackerState {
   /** Laisser les héros 1★ / 2★ HORS des totaux (leur carte reste éditable). */
   ignore1Star: boolean;
   ignore2Star: boolean;
+  /** Les sortir de l'écran — roster suivi ET tiroir « ajouter ». */
+  hide1Star: boolean;
+  hide2Star: boolean;
 }
 
 /** Schéma v1 : les entrées à plat, un seul EE, trois slots de skill. */
@@ -193,6 +197,16 @@ const SORT_DESC: Record<SortKey, boolean> = {
   affinity: false,
   name: false,
 };
+
+/** Les réglages qui sont de simples cases à cocher. */
+type BoolSetting =
+  | 'alwaysMax'
+  | 'hideMaxed'
+  | 'hideDone'
+  | 'ignore1Star'
+  | 'ignore2Star'
+  | 'hide1Star'
+  | 'hide2Star';
 
 const SKILL_SLOTS = 4;
 const MAX_SKILL = 5;
@@ -239,6 +253,8 @@ const SPEC: StoreSpec<TrackerState> = {
     hideDone: false,
     ignore1Star: false,
     ignore2Star: false,
+    hide1Star: false,
+    hide2Star: false,
   },
   // v1 ignorait la chain passive, les Core Fusion et le second EE. Une saisie
   // déjà faite vaut mieux qu'un écran remis à zéro : on la relève.
@@ -265,6 +281,8 @@ const SPEC: StoreSpec<TrackerState> = {
       hideDone: false,
       ignore1Star: false,
       ignore2Star: false,
+      hide1Star: false,
+      hide2Star: false,
     };
   },
 };
@@ -417,6 +435,13 @@ export function HeroTrackerBrowser({
    * mais il n'entre dans aucun total. Personne ne farme les manuels d'un 1★ —
    * les compter noyait la liste de courses sous des lignes qu'on n'achètera pas.
    */
+  /** Masqué par réglage : le héros disparaît de l'écran, suivi ou non. */
+  const shown = useCallback(
+    (hero: HeroRow): boolean =>
+      !(hero.rarity === 1 && store.hide1Star) && !(hero.rarity === 2 && store.hide2Star),
+    [store.hide1Star, store.hide2Star],
+  );
+
   const counted = useCallback(
     (hero: HeroRow): boolean =>
       !(hero.rarity === 1 && store.ignore1Star) && !(hero.rarity === 2 && store.ignore2Star),
@@ -593,7 +618,7 @@ export function HeroTrackerBrowser({
     () =>
       heroes.filter((h) => {
         const entry = tracked[h.id];
-        if (!entry || hidden.has(h.id)) return false;
+        if (!entry || hidden.has(h.id) || !shown(h)) return false;
         if (filters.element && h.element !== filters.element) return false;
         if (filters.class && h.class !== filters.class) return false;
         if (filters.rarity && h.rarity !== filters.rarity) return false;
@@ -602,7 +627,7 @@ export function HeroTrackerBrowser({
         if (store.hideDone && (!need || !hasWork(need))) return false;
         return true;
       }),
-    [heroes, tracked, hidden, filters, needs, store.hideMaxed, store.hideDone, isMaxed],
+    [heroes, tracked, hidden, shown, filters, needs, store.hideMaxed, store.hideDone, isMaxed],
   );
 
   /**
@@ -662,10 +687,11 @@ export function HeroTrackerBrowser({
           // dans la liste au-dessus, avec son bouton pour en sortir.
           !tracked[h.id] &&
           !hidden.has(h.id) &&
+          shown(h) &&
           (!element || h.element === element) &&
           (!q || h.searchNames.some((n) => n.toLowerCase().includes(q))),
       ),
-    [heroes, tracked, hidden, element, q],
+    [heroes, tracked, hidden, shown, element, q],
   );
 
   return (
@@ -1049,10 +1075,7 @@ function Settings({
   importState: { ok: boolean; message: string } | null;
   labels: HeroTrackerLabels;
 }) {
-  const check = (
-    key: 'alwaysMax' | 'hideMaxed' | 'hideDone' | 'ignore1Star' | 'ignore2Star',
-    text: string,
-  ) => (
+  const check = (key: BoolSetting, text: string) => (
     <label className="text-content-muted flex cursor-pointer items-center gap-2 text-xs">
       <input
         type="checkbox"
@@ -1073,8 +1096,44 @@ function Settings({
         {check('alwaysMax', labels.alwaysMax)}
         {check('hideDone', labels.hideDone)}
         {check('hideMaxed', labels.hideMaxed)}
-        {check('ignore1Star', labels.ignore1Star)}
-        {check('ignore2Star', labels.ignore2Star)}
+
+        {/* Les petites raretés en GRILLE : quatre phrases entières auraient rempli
+            la colonne pour dire deux fois la même chose sur deux raretés. */}
+        <div>
+          <h3 className="text-content-strong text-xs font-semibold">{labels.rarityRules}</h3>
+          <table className="mt-1.5 w-full text-[11px]">
+            <thead>
+              <tr className="text-content-subtle">
+                <th />
+                <th className="font-normal">{labels.hideShort}</th>
+                <th className="font-normal">{labels.skipShort}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(
+                [
+                  [1, 'hide1Star', 'ignore1Star'],
+                  [2, 'hide2Star', 'ignore2Star'],
+                ] as const
+              ).map(([star, hideKey, skipKey]) => (
+                <tr key={star}>
+                  <td className="text-warn font-mono">{star}★</td>
+                  {[hideKey, skipKey].map((key) => (
+                    <td key={key} className="text-center">
+                      <input
+                        type="checkbox"
+                        aria-label={`${star}★ — ${key === hideKey ? labels.hideShort : labels.skipShort}`}
+                        checked={store[key]}
+                        onChange={(e) => setStore((prev) => ({ ...prev, [key]: e.target.checked }))}
+                        className="accent-accent"
+                      />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         <div>
           <h3 className="text-content-strong text-xs font-semibold">{labels.settingsFusion}</h3>
@@ -1279,6 +1338,9 @@ function HeroCard({
               element={hero.element}
               classType={hero.class}
               rarity={hero.rarity}
+              // Les étoiles du portrait suivent la TRANSCENDANCE saisie : un héros
+              // 6★ affiché à sa rareté de base, c'est l'écran qui dément la saisie.
+              transcendence={steps[state.transcend]?.star}
               size={44}
               showName={false}
             />
