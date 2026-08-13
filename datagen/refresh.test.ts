@@ -48,34 +48,79 @@ describe('regenDecision — gating de la chaîne extract→build', () => {
 });
 
 describe('dumpDecision — re-dump du binaire quand le CODE du jeu a changé', () => {
-  it('même version → rien à faire (un patch de DONNÉES ne bouge pas le binaire)', () => {
-    expect(dumpDecision({ stamped: '1.4.14', installed: '1.4.14' })).toBeNull();
+  const same = { stampedMetaSha: 'aaaa', pulledMetaSha: 'aaaa' };
+
+  it('même version ET même metadata → rien (un patch de DONNÉES ne bouge pas le binaire)', () => {
+    expect(dumpDecision({ stamped: '1.4.14', installed: '1.4.14', ...same })).toBeNull();
   });
 
   it('version installée plus récente → re-dump (dump.cs + listings ASM périmés)', () => {
-    expect(dumpDecision({ stamped: '1.4.9', installed: '1.4.14' })).toEqual({
+    expect(dumpDecision({ stamped: '1.4.9', installed: '1.4.14', ...same })).toEqual({
       from: '1.4.9',
       to: '1.4.14',
+      reason: 'version',
     });
   });
 
   it('rollback de version : différent = re-dump, on ne présume pas du sens', () => {
-    expect(dumpDecision({ stamped: '1.4.14', installed: '1.4.9' })).toEqual({
+    expect(dumpDecision({ stamped: '1.4.14', installed: '1.4.9', ...same })).toEqual({
       from: '1.4.14',
       to: '1.4.9',
+      reason: 'version',
     });
   });
 
   it('pas d’empreinte (1er dump jamais fait) → pas de dump surprise', () => {
-    expect(dumpDecision({ stamped: null, installed: '1.4.14' })).toBeNull();
+    expect(dumpDecision({ stamped: null, installed: '1.4.14', ...same })).toBeNull();
   });
 
-  it('émulateur absent ou dumpsys muet → on se tait, ce n’est pas une preuve', () => {
-    expect(dumpDecision({ stamped: '1.4.14', installed: null })).toBeNull();
+  it('émulateur absent ou dumpsys muet → la version ne dit rien', () => {
+    expect(dumpDecision({ stamped: '1.4.14', installed: null, ...same })).toBeNull();
   });
 
   it('« inconnue » d’un côté ou de l’autre ne déclenche jamais un dump de minutes', () => {
-    expect(dumpDecision({ stamped: 'inconnue', installed: '1.4.14' })).toBeNull();
-    expect(dumpDecision({ stamped: '1.4.14', installed: 'inconnue' })).toBeNull();
+    expect(dumpDecision({ stamped: 'inconnue', installed: '1.4.14', ...same })).toBeNull();
+    expect(dumpDecision({ stamped: '1.4.14', installed: 'inconnue', ...same })).toBeNull();
+  });
+
+  it('metadata remplacée à version IDENTIQUE → re-dump quand même (correctif sans bump)', () => {
+    const v = dumpDecision({
+      stamped: '1.4.14',
+      installed: '1.4.14',
+      stampedMetaSha: '786cd61e56c3',
+      pulledMetaSha: 'ffffffffffff',
+    });
+    expect(v?.reason).toBe('metadata');
+  });
+
+  it('la version prime sur la metadata quand les deux ont bougé', () => {
+    const v = dumpDecision({
+      stamped: '1.4.9',
+      installed: '1.4.14',
+      stampedMetaSha: 'aaaa',
+      pulledMetaSha: 'bbbb',
+    });
+    expect(v).toEqual({ from: '1.4.9', to: '1.4.14', reason: 'version' });
+  });
+
+  it('metadata jamais tirée (machine sans datamine) → aucun signal', () => {
+    expect(
+      dumpDecision({
+        stamped: '1.4.14',
+        installed: '1.4.14',
+        stampedMetaSha: 'aaaa',
+        pulledMetaSha: null,
+      }),
+    ).toBeNull();
+  });
+
+  it('sans device mais metadata tirée différente → le repli suffit à déclencher', () => {
+    const v = dumpDecision({
+      stamped: '1.4.14',
+      installed: null,
+      stampedMetaSha: 'aaaa',
+      pulledMetaSha: 'bbbb',
+    });
+    expect(v?.reason).toBe('metadata');
   });
 });

@@ -33,6 +33,9 @@ const STAMP = resolve('.gamedata/.refresh-stamp');
 // Empreinte du dernier `datagen:dump` : porte la version du jeu dont sortent
 // dump.cs et les listings ASM committés.
 const DUMP_STAMP = resolve('.gamedata/apk/dumped/.dump-stamp.json');
+// La metadata que le JEU embarque dans son dossier `files/` (tirée par le pull,
+// suivie au md5). Second signal de changement de code — cf. `dumpDecision`.
+const PULLED_META = resolve('.gamedata/files/il2cpp/Metadata/global-metadata.dat');
 
 /**
  * Le CODE du client a-t-il changé depuis le dernier dump ? Compare la version
@@ -46,39 +49,68 @@ const DUMP_STAMP = resolve('.gamedata/apk/dumped/.dump-stamp.json');
  * pas d'émulateur, `dumpsys` muet, ou pas d'empreinte (auquel cas c'est un
  * premier dump à faire à la main, pas une régression à rattraper).
  */
-function codeChanged(): { from: string; to: string } | null {
+function codeChanged(): DumpVerdict {
   if (!existsSync(DUMP_STAMP)) return null;
-  let installed: string | null;
+  let stamp: { gameVersion?: string; metadata?: { sha256?: string } };
   try {
-    installed = gameVersion(pickDevice());
-  } catch {
-    return null; // pas de device : travail offline, rien à dire
-  }
-  let stamped: string | null = null;
-  try {
-    stamped = (JSON.parse(readFileSync(DUMP_STAMP, 'utf8')).gameVersion as string) ?? null;
+    stamp = JSON.parse(readFileSync(DUMP_STAMP, 'utf8'));
   } catch {
     return null; // empreinte illisible : `disasm.py` refusera de toute façon
   }
-  return dumpDecision({ stamped, installed });
+  let installed: string | null = null;
+  try {
+    installed = gameVersion(pickDevice());
+  } catch {
+    // pas de device : on peut encore juger sur la metadata déjà tirée
+  }
+  return dumpDecision({
+    stamped: stamp.gameVersion ?? null,
+    installed,
+    stampedMetaSha: stamp.metadata?.sha256 ?? null,
+    pulledMetaSha: existsSync(PULLED_META)
+      ? createHash('sha256').update(readFileSync(PULLED_META)).digest('hex')
+      : null,
+  });
 }
+
+type DumpVerdict = { from: string; to: string; reason: 'version' | 'metadata' } | null;
 
 /**
  * Décision PURE « faut-il re-dumper ? » — isolée du flux à effets de bord pour
  * être testable (cf. refresh.test), comme `regenDecision`.
  *
- * On ne re-dumpe QUE sur deux versions connues ET différentes. `inconnue`
- * (dumpsys muet au moment du dump) ne déclenche rien : ce n'est pas une preuve
- * de changement, et un dump surprise coûte plusieurs minutes.
+ * DEUX signaux, dans cet ordre :
+ *  1. `versionName` installé ≠ celui du dernier dump → l'APK a été remplacée ;
+ *  2. sinon, `global-metadata.dat` TIRÉ (`.gamedata/files/il2cpp/Metadata/`,
+ *     que le pull suit déjà au md5) ≠ celui du dump. Le jeu garde sa metadata
+ *     dans son dossier `files/`, donc elle peut être remplacée SANS réinstaller
+ *     l'APK — un correctif sans bump de version passerait sous le radar du
+ *     signal 1. (Constaté identique à celle de l'APK le 13/08/2026 ; c'est le
+ *     filet, pas le cas courant.)
+ *
+ * `inconnue` et les valeurs manquantes ne déclenchent JAMAIS rien : ce n'est
+ * pas une preuve de changement, et un dump surprise coûte plusieurs minutes.
  */
 export function dumpDecision(i: {
   stamped: string | null;
   installed: string | null;
-}): { from: string; to: string } | null {
-  const { stamped, installed } = i;
-  if (!stamped || !installed) return null;
-  if (stamped === 'inconnue' || installed === 'inconnue') return null;
-  return stamped === installed ? null : { from: stamped, to: installed };
+  stampedMetaSha?: string | null;
+  pulledMetaSha?: string | null;
+}): DumpVerdict {
+  const { stamped, installed, stampedMetaSha, pulledMetaSha } = i;
+  const known = (v: string | null | undefined): v is string => !!v && v !== 'inconnue';
+
+  if (known(stamped) && known(installed) && stamped !== installed) {
+    return { from: stamped, to: installed, reason: 'version' };
+  }
+  if (known(stampedMetaSha) && known(pulledMetaSha) && stampedMetaSha !== pulledMetaSha) {
+    return {
+      from: `${stamped ?? 'version inconnue'} / metadata ${stampedMetaSha.slice(0, 12)}…`,
+      to: `${installed ?? stamped ?? 'version inconnue'} / metadata ${pulledMetaSha.slice(0, 12)}…`,
+      reason: 'metadata',
+    };
+  }
+  return null;
 }
 
 /** Lance un script TS via tsx, en héritant du terminal. Lève si échec. */
@@ -208,8 +240,10 @@ export async function refresh(opts: RefreshOptions = {}): Promise<void> {
     const bump = codeChanged();
     if (bump) {
       console.log(
-        `\n⚙  le CODE du jeu a changé (${bump.from} → ${bump.to}) → re-dump du binaire.` +
-          `\n   (dump.cs + les listings de docs/specs/damage-formula-asm/ — leur diff fait partie du patch)`,
+        `\n⚙  le CODE du jeu a changé (${bump.reason === 'version' ? 'version installée' : 'global-metadata.dat tirée'}) :` +
+          `\n   ${bump.from} → ${bump.to}` +
+          `\n   → re-dump du binaire (dump.cs + les listings de docs/specs/damage-formula-asm/,` +
+          `\n     committés : leur diff fait partie du patch).`,
       );
       step('dump     (APK installé → dump.cs + listings ASM)', 'datagen/extract/dump.ts');
     }

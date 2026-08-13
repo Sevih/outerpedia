@@ -794,6 +794,15 @@
     = rien, versions différentes = dump dans les deux sens, et surtout empreinte
     absente / adb muet / `inconnue` ne déclenchent JAMAIS un dump de plusieurs
     minutes sur une non-preuve. `versionName` factorisé dans `adb.ts`.
+  - **Second signal : la metadata tirée** (constat en lisant un `pnpm dev` de
+    Sevih, 13/08 — la ligne `✓ il2cpp : à jour (5 fichiers, md5)`). Le jeu garde
+    son `global-metadata.dat` dans son dossier `files/`, que le pull suit déjà au
+    md5 : elle peut donc être remplacée SANS réinstaller l'APK, et un correctif
+    sans bump de `versionName` passerait sous le radar du signal 1. `dumpDecision`
+    compare aussi son sha256 à celui de l'empreinte (la version prime quand les
+    deux ont bougé). Vérifié le 13/08 : la copie `files/` et celle de l'APK sont
+    **identiques au sha256** — le dump s'appuie bien sur la metadata que le jeu
+    exécute ; ce second signal est un filet, pas le cas courant.
   - Restent ouverts en § 12.16, à ne pas combler au jugé : la place exacte des
     300 ‰ dans l'agrégation § 9.2, la quantité accumulée dans
     `CSkillRecord.CurrentSkillFactor` (§ 8.5), et le slot virtuel 0x198 de la mise
