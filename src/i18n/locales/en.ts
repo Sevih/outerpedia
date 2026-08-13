@@ -332,6 +332,13 @@ const en = {
   'tools.hero-tracker.itemUnit': 'items',
   'tools.hero-tracker.axisAll': 'All',
   'tools.hero-tracker.piecesNote': 'Pieces — per hero, never pooled',
+  'tools.hero-tracker.importTitle': 'Import a roster',
+  'tools.hero-tracker.importHint':
+    'A JSON export of your account replaces the whole tracked roster. Settings are kept.',
+  'tools.hero-tracker.importPick': 'Choose a file…',
+  'tools.hero-tracker.importDone': '{count} heroes imported',
+  'tools.hero-tracker.importUnknown': '{count} entries left out',
+  'tools.hero-tracker.importEmpty': 'Nothing to import in this file',
   'tools.hero-tracker.sort': 'Sort',
   'tools.hero-tracker.sortNeed': 'To farm',
   'tools.hero-tracker.sortName': 'Name',

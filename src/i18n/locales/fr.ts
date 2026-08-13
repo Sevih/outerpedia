@@ -332,6 +332,13 @@ const fr: Record<TranslationKey, string> = {
   'tools.hero-tracker.itemUnit': 'objets',
   'tools.hero-tracker.axisAll': 'Tous',
   'tools.hero-tracker.piecesNote': 'Pièces — par héros, jamais mutualisées',
+  'tools.hero-tracker.importTitle': 'Importer un roster',
+  'tools.hero-tracker.importHint':
+    'Un export JSON de votre compte remplace tout le roster suivi. Les réglages sont conservés.',
+  'tools.hero-tracker.importPick': 'Choisir un fichier…',
+  'tools.hero-tracker.importDone': '{count} héros importés',
+  'tools.hero-tracker.importUnknown': '{count} entrées écartées',
+  'tools.hero-tracker.importEmpty': 'Rien à importer dans ce fichier',
   'tools.hero-tracker.sort': 'Trier',
   'tools.hero-tracker.sortNeed': 'À farmer',
   'tools.hero-tracker.sortName': 'Nom',

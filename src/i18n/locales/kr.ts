@@ -314,6 +314,13 @@ const kr: Record<TranslationKey, string> = {
   'tools.hero-tracker.itemUnit': '개',
   'tools.hero-tracker.axisAll': '전체',
   'tools.hero-tracker.piecesNote': '조각 — 영웅별, 합산 불가',
+  'tools.hero-tracker.importTitle': '로스터 가져오기',
+  'tools.hero-tracker.importHint':
+    '계정 JSON 내보내기가 추적 중인 로스터 전체를 대체합니다. 설정은 유지됩니다.',
+  'tools.hero-tracker.importPick': '파일 선택…',
+  'tools.hero-tracker.importDone': '{count}명을 가져왔습니다',
+  'tools.hero-tracker.importUnknown': '{count}개 항목 제외',
+  'tools.hero-tracker.importEmpty': '이 파일에는 가져올 항목이 없습니다',
   'tools.hero-tracker.sort': '정렬',
   'tools.hero-tracker.sortNeed': '파밍량',
   'tools.hero-tracker.sortName': '이름',

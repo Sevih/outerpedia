@@ -21,6 +21,7 @@ import {
   type TrackedHero,
   type TranscendCost,
 } from './engine';
+import { importRoster, type HeroEntry, type ImportHero } from './roster-import';
 
 /**
  * Suivi de compte — écran CLIENT. L'état vit dans le localStorage (aucun
@@ -122,6 +123,12 @@ export interface HeroTrackerLabels {
   itemUnit: string;
   axisAll: string;
   piecesNote: string;
+  importTitle: string;
+  importHint: string;
+  importPick: string;
+  importDone: string;
+  importUnknown: string;
+  importEmpty: string;
   sort: string;
   sortNeed: string;
   sortName: string;
@@ -148,12 +155,6 @@ export interface HeroTrackerData {
   /** Nom traduit de chaque classe — infobulle des filtres du roster. */
   classNames: Record<string, string>;
   labels: HeroTrackerLabels;
-}
-
-/** Ce que l'utilisateur saisit pour un héros suivi. */
-interface HeroEntry {
-  state: HeroProgress;
-  target: HeroProgress;
 }
 
 interface TrackerState {
@@ -459,6 +460,51 @@ export function HeroTrackerBrowser({
   /** Ordre gelé pendant l'édition (cf. `sortedRows`) — `null` = on suit le tri. */
   const [frozen, setFrozen] = useState<string[] | null>(null);
 
+  /**
+   * IMPORT d'un roster capturé. Le fichier ne parle qu'en termes de jeu (étoile
+   * interne, niveau de fusion) : c'est ici qu'on lui donne les barèmes — échelle
+   * de transcendance du héros, plafonds de chaque axe — puisque le module
+   * d'import, lui, ne connaît aucune table.
+   */
+  const [importState, setImportState] = useState<{ ok: boolean; message: string } | null>(null);
+  const onImport = useCallback(
+    async (file: File) => {
+      try {
+        const raw: unknown = JSON.parse(await file.text());
+        const byId = new Map<string, ImportHero>(
+          heroes.map((h) => [
+            h.id,
+            {
+              id: h.id,
+              ...(h.fusionId ? { fusionId: h.fusionId } : {}),
+              ...(h.fusionLevels ? { fusionSteps: h.fusionLevels.length } : {}),
+              stars: ladder(asTracked(h)).map((s) => s.star),
+              max: maxTarget(h),
+            },
+          ]),
+        );
+        const r = importRoster(raw, byId);
+        if (r.imported === 0) throw new Error(labels.importEmpty);
+        // Le roster est REMPLACÉ, pas fusionné : un import partiel qui laisserait
+        // des héros d'une capture précédente donnerait un total invérifiable.
+        setStore((prev) => ({ ...prev, heroes: r.heroes, fused: r.fused }));
+        setOpen(null);
+        setFrozen(null);
+        setImportState({
+          ok: true,
+          message:
+            labels.importDone.replace('{count}', String(r.imported)) +
+            (r.unknown.length
+              ? ` · ${labels.importUnknown.replace('{count}', String(r.unknown.length))}`
+              : ''),
+        });
+      } catch (e) {
+        setImportState({ ok: false, message: e instanceof Error ? e.message : String(e) });
+      }
+    },
+    [heroes, ladder, asTracked, maxTarget, setStore, labels],
+  );
+
   const toggle = (hero: HeroRow) => {
     setFrozen(null);
     setStore((prev) => {
@@ -641,6 +687,8 @@ export function HeroTrackerBrowser({
           setStore={setStore}
           fusionPairs={fusionPairs}
           trackedCount={trackedRows.length}
+          onImport={onImport}
+          importState={importState}
           labels={labels}
         />
       </div>
@@ -988,12 +1036,17 @@ function Settings({
   setStore,
   fusionPairs,
   trackedCount,
+  onImport,
+  importState,
   labels,
 }: {
   store: TrackerState;
   setStore: (fn: (prev: TrackerState) => TrackerState) => void;
   fusionPairs: { base: HeroRow; fusion: HeroRow }[];
   trackedCount: number;
+  onImport: (file: File) => void;
+  /** Compte rendu du dernier import — il ne survit pas au rechargement. */
+  importState: { ok: boolean; message: string } | null;
   labels: HeroTrackerLabels;
 }) {
   const check = (
@@ -1064,6 +1117,36 @@ function Settings({
               );
             })}
           </ul>
+        </div>
+
+        <div className="border-line-subtle border-t pt-2.5">
+          <h3 className="text-content-strong text-xs font-semibold">{labels.importTitle}</h3>
+          <p className="text-content-subtle mt-0.5 text-[11px]">{labels.importHint}</p>
+          <div className="mt-1.5 flex flex-wrap items-center gap-2">
+            <label className="border-line text-content-muted hover:border-accent hover:text-accent cursor-pointer rounded border px-2 py-1 text-[11px] transition-colors">
+              {labels.importPick}
+              <input
+                type="file"
+                accept="application/json,.json"
+                className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  // Le champ garde son fichier : sans reset, réimporter LE MÊME
+                  // après correction ne déclencherait aucun événement.
+                  e.target.value = '';
+                  if (file) onImport(file);
+                }}
+              />
+            </label>
+            {importState && (
+              <span
+                className={`text-[11px] ${importState.ok ? 'text-success' : 'text-danger'}`}
+                role="status"
+              >
+                {importState.message}
+              </span>
+            )}
+          </div>
         </div>
 
         {trackedCount > 0 && (

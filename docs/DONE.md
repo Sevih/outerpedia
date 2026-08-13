@@ -7,6 +7,22 @@
 
 ## 2026-08-12
 
+- **`/hero-tracker` — import d'un roster capturé (Sevih : « je vais faire un truc
+  côté gear-solver pour exporter un JSON »)** — personne ne saisit 119 héros à la
+  main. Un FORMAT D'ÉCHANGE versionné (`outerpedia:hero-tracker` v1), documenté
+  en tête de `roster-import.ts`, et un bouton dans les réglages qui remplace tout
+  le roster suivi (les réglages, eux, sont conservés). Le fichier ne parle qu'en
+  termes de JEU — `transcend_star` est l'étoile INTERNE (1→9, qui démarre à la
+  rareté de base : un 3★ non transcendé vaut 3), `core_fusion` dit qu'on possède
+  le fusionné À LA PLACE de sa base, `owned: false` sort un héros du suivi.
+  Le module d'import est la FRONTIÈRE et se comporte comme telle : enveloppe
+  absente ou version inconnue → refus en bloc (un fichier étranger n'écrase pas
+  un roster) ; champ absent → plancher ; champ hors plage → BORNÉ, parce qu'un
+  fichier presque juste vaut mieux qu'un import refusé. 10 tests.
+  Vérifié bout en bout sur la capture réelle de Sevih (119 héros, 6 Core Fusion)
+  : l'import et le générateur de commande console produisent le même total au
+  franc près (76 441 objets, 1,16 Md d'or), et le moteur les digère.
+
 - **`/hero-tracker` — deux réglages « ignorer les 1★ / les 2★ » (Sevih)** — « on
   peut les renseigner mais les ressources ne sont pas comptabilisées » : leur
   carte reste éditable et affiche son besoin, qui est vrai, mais ils n'entrent
@@ -670,6 +686,18 @@
     interdisent le retour d'un compte d'étoiles dans le curé.
 
 ## 2026-08-10
+
+- **Listings ASM régénérés à chaque patch** (constat Sevih 10/08 : ils ne
+  l'étaient pas — outillage historique en RVA 1.4.9 figés ET gitignoré dans
+  `.gamedata/apk/`). Nouveau [datagen/extract/disasm.py](../datagen/extract/disasm.py)
+  COMMITTÉ : manifeste explicite des 88 listings résolus PAR NOM dans
+  `script.json` (ordinal d'adresse pour les surcharges — `GetLostHPRateValue`,
+  `GetBattleRandomRange`), même format/annotations que l'existant (cibles des
+  `bl`, littéraux `adrp`+`ldr`) ; une méthode du manifeste absente du dump =
+  échec bruyant listant les specs peut-être périmées. Branché en fin de
+  `pnpm datagen:dump` + commande seule `pnpm datagen:disasm`. Validé sur
+  1.4.9 : 88/88 régénérés, identiques ligne à ligne aux listings d'origine
+  (seules les fins de ligne sont normalisées LF).
 
 - **Mécaniques perso : conditions d'ÉTAT DE COMBAT déclarables** (demande
   Sevih 10/08 — « Noa a un délire de stack sur son S3 »). Générique, pas un

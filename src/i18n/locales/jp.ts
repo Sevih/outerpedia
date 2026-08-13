@@ -321,6 +321,13 @@ const jp: Record<TranslationKey, string> = {
   'tools.hero-tracker.itemUnit': '個',
   'tools.hero-tracker.axisAll': 'すべて',
   'tools.hero-tracker.piecesNote': 'かけら — ヒーローごと、共用不可',
+  'tools.hero-tracker.importTitle': 'ロスターをインポート',
+  'tools.hero-tracker.importHint':
+    'アカウントのJSONエクスポートが追跡中のロスターをすべて置き換えます。設定は保持されます。',
+  'tools.hero-tracker.importPick': 'ファイルを選択…',
+  'tools.hero-tracker.importDone': '{count}体をインポートしました',
+  'tools.hero-tracker.importUnknown': '{count}件を除外',
+  'tools.hero-tracker.importEmpty': 'このファイルにインポートできるものがありません',
   'tools.hero-tracker.sort': '並び替え',
   'tools.hero-tracker.sortNeed': '必要量',
   'tools.hero-tracker.sortName': '名前',
