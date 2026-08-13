@@ -783,6 +783,17 @@
     adresse du document absente de la table des méthodes 1.4.14.
   - 3 listings ajoutés au manifeste (`CFormula_IsIgnoreTurnLimitDamage`,
     `CBuff_TrySetDieByReverseHeal`, `CCharacterBattle_FindBuffByType`) → 91.
+  - **Le dump suit désormais le patch tout seul** (question Sevih 13/08 : « les
+    asm et l'apk sont bien regénérés auto à chaque patch ? » — non, ils ne
+    l'étaient pas : `refresh.ts` enchaînait pull → extract → convert → build →
+    promote, sans jamais `dump` ni `disasm`, et rien ne signalait qu'un patch
+    avait changé le CODE). `refresh.ts` compare maintenant la version installée
+    sur l'émulateur à celle gravée dans l'empreinte du dernier dump et lance
+    `dump` (qui enchaîne `disasm`) avant la génération. Décision isolée en
+    fonction pure `dumpDecision` (comme `regenDecision`), 6 tests : même version
+    = rien, versions différentes = dump dans les deux sens, et surtout empreinte
+    absente / adb muet / `inconnue` ne déclenchent JAMAIS un dump de plusieurs
+    minutes sur une non-preuve. `versionName` factorisé dans `adb.ts`.
   - Restent ouverts en § 12.16, à ne pas combler au jugé : la place exacte des
     300 ‰ dans l'agrégation § 9.2, la quantité accumulée dans
     `CSkillRecord.CurrentSkillFactor` (§ 8.5), et le slot virtuel 0x198 de la mise

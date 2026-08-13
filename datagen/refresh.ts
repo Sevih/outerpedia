@@ -5,6 +5,8 @@
  * du nouveau (ou `--force`). Sinon on saute toute la chaîne.
  *
  *   pull (si LDPlayer + diff)
+ *     ├─ si le CODE du jeu a changé (version installée ≠ empreinte du dump) :
+ *     │  dump (→ dump.cs + listings ASM committés)
  *     └─ si tiré : extract → convert → face-layout(py) → build →
  *        promote[ --apply] → [collect]
  *   [getNews]  ← optionnel (fetch web, indépendant du datamine)
@@ -18,6 +20,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { isMain } from './lib/is-main';
+import { gameVersion, pickDevice } from './extract/adb';
 import { pull } from './extract/pull-gamedata';
 
 const TSX_CLI = resolve('node_modules/tsx/dist/cli.mjs');
@@ -27,6 +30,56 @@ const GAMEDATA = resolve('.gamedata/files');
 // n'est écrit qu'APRÈS un succès, un extract planté en cours laisse la signature
 // désynchronisée → le run suivant se répare tout seul (sans avoir à `--force`).
 const STAMP = resolve('.gamedata/.refresh-stamp');
+// Empreinte du dernier `datagen:dump` : porte la version du jeu dont sortent
+// dump.cs et les listings ASM committés.
+const DUMP_STAMP = resolve('.gamedata/apk/dumped/.dump-stamp.json');
+
+/**
+ * Le CODE du client a-t-il changé depuis le dernier dump ? Compare la version
+ * INSTALLÉE sur l'émulateur à celle gravée dans l'empreinte du dump.
+ *
+ * Un patch de DONNÉES ne bouge pas le binaire ; un patch de CODE oui, et alors
+ * dump.cs et les 91 listings de docs/specs/damage-formula-asm/ sont périmés
+ * (constat Sevih 13/08/2026 : rien ne le signalait, il fallait y penser).
+ *
+ * Renvoie `null` quand la question ne se pose pas ou n'est pas décidable :
+ * pas d'émulateur, `dumpsys` muet, ou pas d'empreinte (auquel cas c'est un
+ * premier dump à faire à la main, pas une régression à rattraper).
+ */
+function codeChanged(): { from: string; to: string } | null {
+  if (!existsSync(DUMP_STAMP)) return null;
+  let installed: string | null;
+  try {
+    installed = gameVersion(pickDevice());
+  } catch {
+    return null; // pas de device : travail offline, rien à dire
+  }
+  let stamped: string | null = null;
+  try {
+    stamped = (JSON.parse(readFileSync(DUMP_STAMP, 'utf8')).gameVersion as string) ?? null;
+  } catch {
+    return null; // empreinte illisible : `disasm.py` refusera de toute façon
+  }
+  return dumpDecision({ stamped, installed });
+}
+
+/**
+ * Décision PURE « faut-il re-dumper ? » — isolée du flux à effets de bord pour
+ * être testable (cf. refresh.test), comme `regenDecision`.
+ *
+ * On ne re-dumpe QUE sur deux versions connues ET différentes. `inconnue`
+ * (dumpsys muet au moment du dump) ne déclenche rien : ce n'est pas une preuve
+ * de changement, et un dump surprise coûte plusieurs minutes.
+ */
+export function dumpDecision(i: {
+  stamped: string | null;
+  installed: string | null;
+}): { from: string; to: string } | null {
+  const { stamped, installed } = i;
+  if (!stamped || !installed) return null;
+  if (stamped === 'inconnue' || installed === 'inconnue') return null;
+  return stamped === installed ? null : { from: stamped, to: installed };
+}
 
 /** Lance un script TS via tsx, en héritant du terminal. Lève si échec. */
 function step(label: string, file: string, args: string[] = []): void {
@@ -146,6 +199,20 @@ export async function refresh(opts: RefreshOptions = {}): Promise<void> {
   } else {
     console.log('▶ pull (jeu → .gamedata)');
     changed = (await pull()).changed;
+  }
+
+  // 1bis) Le binaire a-t-il changé ? Si oui, re-dumper AVANT de générer : les
+  // générateurs lisent dump.cs (ASSET_TYPE), et les listings ASM que citent les
+  // specs damage en sortent aussi. `dump.ts` enchaîne `disasm.py` tout seul.
+  if (!noPull) {
+    const bump = codeChanged();
+    if (bump) {
+      console.log(
+        `\n⚙  le CODE du jeu a changé (${bump.from} → ${bump.to}) → re-dump du binaire.` +
+          `\n   (dump.cs + les listings de docs/specs/damage-formula-asm/ — leur diff fait partie du patch)`,
+      );
+      step('dump     (APK installé → dump.cs + listings ASM)', 'datagen/extract/dump.ts');
+    }
   }
 
   // 2) Décision de (re)génération. On régénère si :

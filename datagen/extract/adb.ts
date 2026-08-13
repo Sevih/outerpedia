@@ -34,6 +34,22 @@ export function pickDevice(): string {
   return lines.find((d) => d.startsWith('emulator-')) ?? lines[0];
 }
 
+/**
+ * `versionName` du jeu INSTALLÉ (« 1.4.14 »), ou `null` si on n'arrive pas à le
+ * lire. C'est ce qui dit qu'un patch a changé le CODE du client : `refresh.ts`
+ * le compare à la version gravée dans l'empreinte du dernier dump.
+ */
+export function gameVersion(serial: string): string | null {
+  try {
+    return (
+      /versionName=(\S+)/.exec(capture(['-s', serial, 'shell', 'dumpsys', 'package', PKG]))?.[1] ??
+      null
+    );
+  } catch {
+    return null;
+  }
+}
+
 /** Passage en root (nécessaire pour lire les données du jeu). Idempotent :
  * déjà root ou root non requis → on continue sans bruit. */
 export function ensureRoot(serial: string): void {

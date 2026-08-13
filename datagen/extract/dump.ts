@@ -24,7 +24,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { isMain } from '../lib/is-main';
-import { PKG, capture, ensureRoot, pickDevice, stream } from './adb';
+import { PKG, capture, ensureRoot, gameVersion, pickDevice, stream } from './adb';
 import { IL2CPPDUMPER, ensureTool } from './tools';
 
 // Entrées à extraire des APK (chemins internes stables du zip).
@@ -69,17 +69,6 @@ function extractFromApk(serial: string, apk: string, entry: string, dest: string
   }
 }
 
-/** `versionName` de l'install (« 1.4.9 »), pour estamper le dump et les listings. */
-function gameVersion(serial: string): string {
-  try {
-    const dump = capture(['-s', serial, 'shell', 'dumpsys', 'package', PKG]);
-    return /versionName=(\S+)/.exec(dump)?.[1] ?? 'inconnue';
-  } catch {
-    // dumpsys indisponible : la version n'est qu'une étiquette, le sha256 fait foi.
-    return 'inconnue';
-  }
-}
-
 /**
  * Récupère la PAIRE ASSORTIE (metadata + so) depuis l'APK installé sur l'émulateur.
  * C'est la garantie anti-dépareillage : les deux fichiers viennent du même install.
@@ -105,7 +94,7 @@ function pullMatchedPair(): string {
   extractFromApk(serial, base, META_ENTRY, META);
   console.log('↻ extraction libil2cpp.so (split arm64)...');
   extractFromApk(serial, arm64, SO_ENTRY, SO);
-  const version = gameVersion(serial);
+  const version = gameVersion(serial) ?? 'inconnue';
   console.log(`✓ paire assortie extraite (jeu ${version}).`);
   return version;
 }

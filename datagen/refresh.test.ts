@@ -9,7 +9,7 @@
  * Tourne SANS `.gamedata` : `regenDecision` ne touche ni fs ni tables.
  */
 import { describe, expect, it } from 'vitest';
-import { regenDecision } from './refresh';
+import { dumpDecision, regenDecision } from './refresh';
 
 const base = { hasGamedata: true, force: false, changed: false, prevSig: 'A', currentSig: 'A' };
 
@@ -44,5 +44,38 @@ describe('regenDecision — gating de la chaîne extract→build', () => {
       doGen: false,
       staleByStamp: false,
     });
+  });
+});
+
+describe('dumpDecision — re-dump du binaire quand le CODE du jeu a changé', () => {
+  it('même version → rien à faire (un patch de DONNÉES ne bouge pas le binaire)', () => {
+    expect(dumpDecision({ stamped: '1.4.14', installed: '1.4.14' })).toBeNull();
+  });
+
+  it('version installée plus récente → re-dump (dump.cs + listings ASM périmés)', () => {
+    expect(dumpDecision({ stamped: '1.4.9', installed: '1.4.14' })).toEqual({
+      from: '1.4.9',
+      to: '1.4.14',
+    });
+  });
+
+  it('rollback de version : différent = re-dump, on ne présume pas du sens', () => {
+    expect(dumpDecision({ stamped: '1.4.14', installed: '1.4.9' })).toEqual({
+      from: '1.4.14',
+      to: '1.4.9',
+    });
+  });
+
+  it('pas d’empreinte (1er dump jamais fait) → pas de dump surprise', () => {
+    expect(dumpDecision({ stamped: null, installed: '1.4.14' })).toBeNull();
+  });
+
+  it('émulateur absent ou dumpsys muet → on se tait, ce n’est pas une preuve', () => {
+    expect(dumpDecision({ stamped: '1.4.14', installed: null })).toBeNull();
+  });
+
+  it('« inconnue » d’un côté ou de l’autre ne déclenche jamais un dump de minutes', () => {
+    expect(dumpDecision({ stamped: 'inconnue', installed: '1.4.14' })).toBeNull();
+    expect(dumpDecision({ stamped: '1.4.14', installed: 'inconnue' })).toBeNull();
   });
 });
