@@ -6,7 +6,9 @@
  *   1. merger SON entrée (extraction fraîche) dans `characters.json` ;
  *   2. merger SES skills dans `skills.json` ;
  *   3. régénérer la carte des slugs (depuis le committé) ;
- *   4. stager SES images depuis les assets extraits du jeu (conversion webp).
+ *   4. régénérer les dates de sortie (`character-release.json`) — le perso doit
+ *      avoir la sienne le jour même, pas au prochain `datagen:build` ;
+ *   5. stager SES images depuis les assets extraits du jeu (conversion webp).
  *
  * L'ordre des clés existantes est préservé (nouvelle entrée en fin) → diffs
  * git minimaux. Les sorties transverses (glossaires, transcend) restent du
@@ -24,6 +26,7 @@ import { characterAssetRequests, skillIconsOf } from '../assets/manifest';
 import { buildImageIndex } from '../assets/source';
 import { stageAssets, type StageResult } from '../assets/stage';
 import { buildSkills } from '../generators/skills';
+import { releasesFor, type CharacterReleaseFile } from '../generators/character-release';
 import { buildMonsterSkills } from '../generators/monster-skills';
 import { buildEncounters } from '../generators/encounters';
 import { buildSlugMap } from '../lib/slug';
@@ -95,6 +98,7 @@ export async function integrateCharacterData(
   dir: string,
   char: Character,
   freshSkills: Record<string, unknown>,
+  releases?: CharacterReleaseFile,
 ): Promise<string[]> {
   // 1) Donnée du perso.
   const characters = readJson(dir, 'characters.json');
@@ -112,7 +116,17 @@ export async function integrateCharacterData(
     buildSlugMap(Object.values(characters) as unknown as Character[]),
   );
 
-  return ['characters.json', 'skills.json', 'characters-slug-to-id.json'];
+  const files = ['characters.json', 'skills.json', 'characters-slug-to-id.json'];
+
+  // 4) Dates de sortie, dérivées comme les skills par le wrapper (le cœur ne
+  // fait qu'écrire). Absentes = appel hors admin (tests) : on n'écrit rien
+  // plutôt que de produire un fichier partiel.
+  if (releases) {
+    await writeJson(dir, 'character-release.json', releases);
+    files.push('character-release.json');
+  }
+
+  return files;
 }
 
 /** Intègre UN personnage : données + images. Déclenché par l'admin uniquement. */
@@ -122,10 +136,19 @@ export async function integrateCharacter(id: string): Promise<IntegrateReport> {
   if (!char) throw new Error(`perso ${id} absent de l'extraction fraîche`);
   const freshSkills = buildSkills().skills;
 
-  // 1–3) Données (entité + skills + slugs).
-  const files = await integrateCharacterData(GEN, char, freshSkills);
+  // Dates de sortie du validé UNE FOIS LE PERSO DEDANS — calculées AVANT la
+  // moindre écriture : si le nouveau n'a de date d'aucune source (sa note de
+  // patch n'est pas encore dans l'archive committée), `releasesFor` lève et
+  // l'intégration s'arrête sans avoir touché à `characters.json`, plutôt que de
+  // laisser le validé à jour et les dates en retard. Le message dit quoi
+  // ajouter à `data/curated/character-release.json` ; l'admin l'affiche tel quel.
+  const committed = readJson(GEN, 'characters.json') as unknown as Record<string, Character>;
+  const releases = releasesFor({ ...committed, [char.id]: char });
 
-  // 4) Ses images, depuis les assets extraits du jeu.
+  // 1–4) Données (entité + skills + slugs + dates de sortie).
+  const files = await integrateCharacterData(GEN, char, freshSkills, releases);
+
+  // 5) Ses images, depuis les assets extraits du jeu.
   const index = buildImageIndex();
   const requests = characterAssetRequests(
     char as unknown as Record<string, unknown>,

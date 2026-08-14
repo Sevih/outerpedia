@@ -102,6 +102,31 @@ describe('integrateCharacterData', () => {
       snap,
     );
   });
+
+  it('écrit les dates de sortie quand le wrapper les fournit', async () => {
+    await seed();
+    const files = await integrateCharacterData(
+      dir,
+      char('new_hero', 'Stella', ['sk_n1']),
+      {},
+      {
+        existing_hero: '2024-02-13',
+        new_hero: '2026-08-12',
+      },
+    );
+    expect(files).toContain('character-release.json');
+    expect(read('character-release.json')).toEqual({
+      existing_hero: '2024-02-13',
+      new_hero: '2026-08-12',
+    });
+  });
+
+  it('n’écrit PAS de dates partielles quand le wrapper n’en fournit pas', async () => {
+    await seed();
+    const files = await integrateCharacterData(dir, char('new_hero', 'Stella', ['sk_n1']), {});
+    expect(files).not.toContain('character-release.json');
+    expect(existsSync(join(dir, 'character-release.json'))).toBe(false);
+  });
 });
 
 describe('integrateMonsterData', () => {
