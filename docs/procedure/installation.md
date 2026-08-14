@@ -58,12 +58,15 @@ Les sections suivantes détaillent chaque étape (et servent de secours manuel).
 - **git**.
 - Pour (re)générer la data : un **émulateur Android** (LDPlayer) avec Outerplane
   installé + **adb** dans le PATH. Sinon, récupérer `.gamedata/` depuis R2.
-- **Python + UnityPy — FACULTATIF**, pour la seule étape python du projet
-  (face-layout) : `python -m pip install -r datagen/requirements.txt`
-  (`init.ps1` le fait si python est présent). Sans lui, le refresh saute l'étape
-  avec un avertissement — le `face-icon-layout.json` committé prend le relais et
-  seuls les FI_ de persos/skins récents manqueraient **sur cette machine**. À
-  installer sur la machine de datamine, superflu ailleurs.
+- **Python + UnityPy + fontTools — FACULTATIF**, pour les trois étapes python du
+  projet (face-layout, sprite-rect, font-metrics) :
+  `python -m pip install -r datagen/requirements.txt` (`init.ps1` le fait si
+  python est présent). Sans eux, le refresh saute l'étape concernée avec un
+  avertissement — les JSON committés prennent le relais et seul ce qui est
+  arrivé depuis manquerait **sur cette machine**. À installer sur la machine de
+  datamine, superflu ailleurs. **Installer le fichier en entier, pas un module à
+  la carte** : une machine outillée à moitié n'est plus un cas sauté proprement,
+  c'est une étape qui échoue.
 
 ---
 

@@ -1,15 +1,22 @@
 /**
- * Tests de `refresh` — la DÉCISION DE (RE)GÉNÉRATION, isolée en fonction pure
- * (`regenDecision`). C'est le gating documenté : la chaîne extract→build ne
- * tourne QUE sur un pull neuf, `--force`, ou une signature d'entrées ≠ dernier
- * build réussi (auto-réparation). Le reste du flux est de l'orchestration à
- * effets de bord (execFileSync, pull) — non testable sans le jeu, et sa sortie
- * (data/generated) est déjà couverte par les invariants des générateurs.
+ * Tests de `refresh` — ses DÉCISIONS, isolées en fonctions pures : (re)générer
+ * (`regenDecision`), re-dumper (`dumpDecision`), reprendre après échec
+ * (`resumeDecision`), et sauter une étape non outillée (`preflightPython`). Le
+ * reste du flux est de l'orchestration à effets de bord (execFileSync, pull) —
+ * non testable sans le jeu, et sa sortie (data/generated) est déjà couverte par
+ * les invariants des générateurs.
  *
- * Tourne SANS `.gamedata` : `regenDecision` ne touche ni fs ni tables.
+ * Tourne SANS `.gamedata` : aucune de ces fonctions ne touche fs ni tables.
  */
 import { describe, expect, it } from 'vitest';
-import { dumpDecision, regenDecision } from './refresh';
+import {
+  dumpDecision,
+  genSteps,
+  preflightPython,
+  regenDecision,
+  resumeDecision,
+  stepKey,
+} from './refresh';
 
 const base = { hasGamedata: true, force: false, changed: false, prevSig: 'A', currentSig: 'A' };
 
@@ -122,5 +129,122 @@ describe('dumpDecision — re-dump du binaire quand le CODE du jeu a changé', (
       pulledMetaSha: 'bbbb',
     });
     expect(v?.reason).toBe('metadata');
+  });
+});
+
+describe('genSteps — la chaîne déclarée', () => {
+  const dry = genSteps({ apply: false, collect: false });
+
+  it('les id sont UNIQUES — deux étapes de même clé se confondraient au checkpoint', () => {
+    const keys = genSteps({ apply: true, collect: true }).map(stepKey);
+    expect(new Set(keys).size).toBe(keys.length);
+  });
+
+  it('`promote` et `promote --apply` ont des clés DISTINCTES', () => {
+    // Le piège : `pnpm dev` promeut en dry, `datagen:patch --apply` écrit
+    // data/generated. Une clé commune ferait sauter l'écriture à une reprise
+    // relancée avec --apply — le dry-run compterait pour un apply.
+    const applied = genSteps({ apply: true, collect: false });
+    expect(stepKey(dry.find((s) => s.id === 'promote')!)).toBe('promote');
+    expect(stepKey(applied.find((s) => s.id === 'promote')!)).toBe('promote --apply');
+  });
+
+  it('collect n’est dans la chaîne que si on le demande', () => {
+    expect(dry.some((s) => s.id === 'assets')).toBe(false);
+    expect(genSteps({ apply: false, collect: true }).some((s) => s.id === 'assets')).toBe(true);
+  });
+
+  it('chaque étape python déclare le module dont ELLE dépend', () => {
+    expect(dry.filter((s) => s.py).map((s) => [s.id, s.py])).toEqual([
+      ['face-layout', 'UnityPy'],
+      ['sprite-rect', 'UnityPy'],
+      ['font-metrics', 'fontTools'],
+    ]);
+  });
+});
+
+describe('preflightPython — ce qui sera sauté, su AVANT le pull', () => {
+  const steps = genSteps({ apply: false, collect: false });
+  const absent = (mods: string[]) => (m: string) =>
+    mods.includes(m) ? `module ${m} absent` : null;
+
+  it('outillage complet → rien à annoncer', () => {
+    expect(preflightPython(steps, () => null).size).toBe(0);
+  });
+
+  it('le module sondé est celui de l’ÉTAPE, pas un témoin', () => {
+    // La panne du 2026-08-14 : le garde sondait UnityPy pour tout le monde,
+    // donc une machine avec UnityPy mais sans fontTools passait le contrôle et
+    // mourait en plein run. Seule font-metrics doit être annoncée ici.
+    const missing = preflightPython(steps, absent(['fontTools']));
+    expect([...missing.keys()]).toEqual(['font-metrics']);
+  });
+
+  it('un module manquant annonce TOUTES les étapes qui en dépendent', () => {
+    expect([...preflightPython(steps, absent(['UnityPy'])).keys()]).toEqual([
+      'face-layout',
+      'sprite-rect',
+    ]);
+  });
+
+  it('python introuvable → toutes les étapes python, aucune étape TS', () => {
+    const missing = preflightPython(steps, () => 'python introuvable');
+    expect([...missing.keys()]).toEqual(['face-layout', 'sprite-rect', 'font-metrics']);
+    expect(missing.has('build')).toBe(false);
+  });
+
+  it('sondage MÉMOÏSÉ par module — un `python -c` par module, pas par étape', () => {
+    const asked: string[] = [];
+    preflightPython(steps, (m) => {
+      asked.push(m);
+      return null;
+    });
+    expect(asked).toEqual(['UnityPy', 'fontTools']);
+  });
+});
+
+describe('resumeDecision — reprendre où ça a cassé', () => {
+  const cp = { key: 'K', done: ['extract', 'convert'] };
+
+  it('pas de checkpoint → chaîne complète, et rien à annoncer', () => {
+    expect(resumeDecision({ force: false, key: 'K', checkpoint: null })).toEqual({
+      done: [],
+      discarded: null,
+    });
+  });
+
+  it('même clé → on saute ce qui a déjà réussi', () => {
+    expect(resumeDecision({ force: false, key: 'K', checkpoint: cp })).toEqual({
+      done: ['extract', 'convert'],
+      discarded: null,
+    });
+  });
+
+  it('clé différente → checkpoint JETÉ (entrées ou sources modifiées depuis)', () => {
+    // C'est le garde anti-« je corrige bytes-parser.ts puis je reprends » : la
+    // clé porte les sources, donc la reprise ne peut pas sauter un convert qui
+    // ne ferait plus le même travail.
+    expect(resumeDecision({ force: false, key: 'AUTRE', checkpoint: cp })).toEqual({
+      done: [],
+      discarded: 'stale',
+    });
+  });
+
+  it('--force jette le checkpoint même à clé identique', () => {
+    expect(resumeDecision({ force: true, key: 'K', checkpoint: cp })).toEqual({
+      done: [],
+      discarded: 'force',
+    });
+  });
+
+  it('--force sans checkpoint n’annonce RIEN — on ne jette pas ce qui n’existe pas', () => {
+    expect(resumeDecision({ force: true, key: 'K', checkpoint: null }).discarded).toBeNull();
+  });
+
+  it('checkpoint vide : pas de reprise à annoncer, mais pas un rejet non plus', () => {
+    expect(resumeDecision({ force: false, key: 'K', checkpoint: { key: 'K', done: [] } })).toEqual({
+      done: [],
+      discarded: null,
+    });
   });
 });

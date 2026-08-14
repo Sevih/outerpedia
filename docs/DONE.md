@@ -5,6 +5,79 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-14
+
+- **Une étape qui casse ne renvoie plus toute la pipeline à zéro** (constat
+  Sevih, dans la foulée de la panne fontTools ci-dessous : pull, extract,
+  convert, face-layout et sprite-rect étaient verts, une étape de deux secondes
+  les a tous fait rejouer). Le gating était binaire pour toute la chaîne — un
+  stamp unique, écrit une seule fois tout à la fin, qui dit « tout a réussi »
+  sans jamais dire QUOI. C'est une bonne propriété (auto-réparation : un extract
+  planté laisse la signature désynchronisée, le run suivant se rattrape sans
+  `--force`) mais sans aucune granularité, alors que le coût est très asymétrique
+  — `extract` sort 2,2 Go et ne cache rien, les étapes qui cassent le plus sont
+  les moins chères et les plus tardives.
+  Deux gardes posés, tous deux permis par le même préalable : **la chaîne est
+  désormais DÉCLARÉE** (`genSteps`) au lieu d'être une ligne droite d'appels. On
+  ne peut ni annoncer ni reprendre une étape qui n'a pas de nom.
+  **Pré-vol** : l'outillage python de toutes les étapes est sondé AVANT le pull,
+  et ce qui sera sauté est annoncé immédiatement. La panne de ce matin coûtait un
+  quart d'heure de datamine pour une information connaissable à la seconde 0. Le
+  verdict est calculé une fois et réutilisé par la boucle — ce qui est annoncé
+  est exactement ce qui se passe, il n'y a plus deux sondages qui pourraient
+  diverger.
+  **Reprise** : `.gamedata/.refresh-checkpoint.json`, réécrit après CHAQUE étape,
+  effacé au succès complet. Le refus explicite, c'est l'incrémental (option
+  écartée) : modéliser les entrées de chaque étape demande de n'en oublier
+  aucune, et une entrée oubliée sert de la donnée périmée EN SILENCE — bien pire
+  que rejouer. La promesse tenue est plus étroite et vérifiable : mêmes entrées,
+  mêmes sources, on reprend où ça a cassé ; tout le reste jette le checkpoint.
+  La clé porte `.gamedata/files` ET l'empreinte des sources `datagen/**`
+  (.ts/.py). Cette seconde moitié est le vrai garde : sans elle, le scénario le
+  plus probable te mord — build casse, tu corriges `bytes-parser.ts`, la reprise
+  saute `convert` et tu débogues sur du JSON périmé. Bornée aux SOURCES et pas
+  aux JSON du dossier, sinon `face-layout` changerait la clé au milieu du run et
+  invaliderait le checkpoint qu'on vient d'écrire — une reprise qui ne reprend
+  jamais. `--force` la jette aussi : « rejoue tout » et « reprends » sont
+  contradictoires.
+  L'auto-réparation par le stamp est intacte : le checkpoint est purement
+  additif, l'effacer ramène au comportement d'avant. Tests : 31 sur `refresh`
+  (les quatre décisions sont maintenant des fonctions pures — `regenDecision`,
+  `dumpDecision`, `resumeDecision`, `preflightPython`, cette dernière avec sonde
+  injectée), dont le cas de ce matin en régression : UnityPy présent + fontTools
+  absent ⇒ seule `font-metrics` annoncée. 1630 tests verts au total.
+
+- **`pnpm dev` ne meurt plus sur une machine outillée à moitié.** Sur le
+  portable, l'étape `font-metrics` a fait échouer tout le refresh
+  (`ModuleNotFoundError: No module named 'fontTools'`) — alors que le garde posé
+  le 2026-08-07 existe précisément pour SAUTER une étape python non outillée. Il
+  ne l'a pas vue : il sondait `import UnityPy` pour TOUTES les étapes, un module
+  témoin et non celui dont l'étape dépend. UnityPy étant installé, le garde
+  disait « bon » et le script mourait deux lignes plus loin. Le sondage est
+  désormais **par étape** (`pyStep(label, file, mod)`), donc un garde qui ne peut
+  plus mentir : ajouter une étape python sans déclarer son module la laisse
+  échouer bruyamment, ce qui est le bon défaut.
+  Deuxième casse au même endroit, indépendante : le script passé, il mourait sur
+  son propre log. Sous Windows python encode sa sortie dans la codepage ANSI
+  (cp1252) — les accents passent, la flèche « → » lève un `UnicodeEncodeError`.
+  `refresh` force donc `PYTHONIOENCODING=utf-8` pour toutes les étapes python,
+  ce qui décorrèle leur sortie de la console héritée. Le JSON, lui, était déjà
+  écrit : la sortie régénérée est identique au fichier committé, aucune donnée
+  n'avait bougé.
+  La dépendance ne vivait nulle part — `datagen/requirements.txt` n'a jamais
+  connu que UnityPy depuis que `extract-font-metrics.py` existe (2026-08-08).
+  Elle y est, avec **brotli** déclaré explicitement : c'est la compression du
+  WOFF2, donc non facultatif pour lire `src/fonts/*.woff2`, et il n'arrivait
+  jusqu'ici qu'en transitif d'UnityPy. `init.ps1` posait déjà le requirements
+  entier, il couvre donc le nouveau cas sans changement de logique (ses libellés
+  parlaient encore de « la SEULE étape python » — corrigés, ils sont trois).
+  fontTools 4.63 installé sur le portable dans la foulée. Doc alignée : le § de
+  `datagen/README` (le tableau des scripts gagne une colonne « Module » et une
+  ligne) et le §1 de `docs/procedure/installation.md`, qui insiste maintenant sur
+  « installer le fichier en entier, pas un module à la carte » — c'est
+  exactement la moitié d'outillage qui transforme un cas sauté proprement en
+  étape qui échoue.
+
 ## 2026-08-13
 
 - **Réordonner les héros d'un palier de « Recommended choices »** (demande

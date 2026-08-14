@@ -129,24 +129,26 @@ Install-Tool 'nvm'    'CoreyButler.NVMforWindows'  'nvm-windows'
 Install-Tool 'dotnet' 'Microsoft.DotNet.Runtime.8' '.NET 8 runtime (Il2CppDumper)'
 Install-Tool 'rclone' 'Rclone.Rclone'              'rclone'
 
-# --- 1c. Outillage python (face-layout) ----------------------------------------
-# UnityPy sert la SEULE étape python du projet. Elle est FACULTATIVE par machine :
-# `refresh` la saute avec un avertissement si l'import échoue, le
-# face-icon-layout.json committé prenant le relais. On n'installe donc PAS python
-# via winget (gros runtime pour une étape optionnelle) — mais s'il est là, on pose
-# la dépendance, sans quoi elle ne vit que dans la mémoire de l'autre machine
-# (c'est exactement comme ça que le portable s'est retrouvé sans UnityPy).
+# --- 1c. Outillage python (étapes datagen) -------------------------------------
+# UnityPy + fontTools servent les trois étapes python du projet (face-layout,
+# sprite-rect, font-metrics). Elles sont FACULTATIVES par machine : `refresh`
+# saute l'étape avec un avertissement si son import échoue, le JSON committé
+# prenant le relais. On n'installe donc PAS python via winget (gros runtime pour
+# des étapes optionnelles) — mais s'il est là, on pose TOUT le requirements, sans
+# quoi la dépendance ne vit que dans la mémoire de l'autre machine (c'est
+# exactement comme ça que le portable s'est retrouvé sans UnityPy, puis sans
+# fontTools).
 
-Say 'Outillage python (face-layout)'
+Say 'Outillage python (datagen)'
 $reqs = Join-Path $RepoRoot 'datagen/requirements.txt'
 if (-not (Have 'python')) {
-  Warn "python absent — l'étape face-layout sera sautée par le refresh (non bloquant). Pour l'activer : installe Python, puis 'python -m pip install -r datagen/requirements.txt'."
+  Warn "python absent — les étapes python du datagen seront sautées par le refresh (non bloquant). Pour les activer : installe Python, puis 'python -m pip install -r datagen/requirements.txt'."
 } else {
   & python -m pip install --disable-pip-version-check -q -r $reqs
   if ($LASTEXITCODE -ne 0) {
-    Warn "pip install a échoué — l'étape face-layout sera sautée par le refresh (non bloquant)."
+    Warn "pip install a échoué — les étapes python du datagen seront sautées par le refresh (non bloquant)."
   } else {
-    Info "UnityPy en place (face-layout jouable)."
+    Info 'Outillage python en place (face-layout, sprite-rect, font-metrics jouables).'
   }
 }
 
