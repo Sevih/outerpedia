@@ -1022,6 +1022,12 @@ const en = {
   'characters.filters.close': 'Close',
   'characters.filters.no_match': 'No characters match these filters',
 
+  // Characters sort
+  'characters.sort.label': 'Sort',
+  'characters.sort.name': 'Name',
+  'characters.sort.release': 'Release',
+  'characters.sort.reverse': 'Click to reverse the order',
+
   // Characters common
 
   // Characters chains
@@ -1110,6 +1116,7 @@ const en = {
   'page.character.gear.talisman': 'Talisman',
   'page.character.voice_actor': 'Voice Actor',
   'page.character.birthday': 'Birthday',
+  'page.character.release': 'Release date',
   'page.character.height': 'Height',
   'page.character.weight': 'Weight',
   'page.character.stats.title': 'Base Stats',

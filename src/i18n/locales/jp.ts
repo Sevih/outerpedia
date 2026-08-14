@@ -996,6 +996,12 @@ const jp: Record<TranslationKey, string> = {
   'characters.filters.close': '閉じる',
   'characters.filters.no_match': '条件に一致するキャラクターはいません',
 
+  // Characters sort
+  'characters.sort.label': '並び替え',
+  'characters.sort.name': '名前',
+  'characters.sort.release': 'リリース',
+  'characters.sort.reverse': 'クリックで並び順を反転',
+
   // Characters common
 
   // Characters chains
@@ -1084,6 +1090,7 @@ const jp: Record<TranslationKey, string> = {
   'page.character.gear.talisman': 'タリスマン',
   'page.character.voice_actor': '声優',
   'page.character.birthday': '誕生日',
+  'page.character.release': 'リリース日',
   'page.character.height': '身長',
   'page.character.weight': '体重',
   'page.character.stats.title': '基本ステータス',

@@ -41,6 +41,7 @@ import {
   listCharacterSlugs,
   slugForId,
 } from '@/lib/data/characters';
+import { formatReleaseDate, releaseDateOf } from '@/lib/data/character-release';
 import { localePath } from '@/lib/navigation';
 import {
   SynergiesSection,
@@ -176,6 +177,10 @@ export default async function CharacterDetail({
   // `free` (curé) — un seul badge, choisi par l'ordre canonique du vocabulaire.
   const unitTagSlug = firstTagOfKind(characterTags(char), 'recruit');
   const meta: Array<[string, string]> = [];
+  // Date de sortie EN TÊTE : c'est la donnée wiki de la liste (les suivantes
+  // relèvent du profil in-game). Absente tant que le perso n'est pas promu.
+  const release = releaseDateOf(char.id);
+  if (release) meta.push([t('page.character.release'), formatReleaseDate(release, lang)]);
   if (va) meta.push([t('page.character.voice_actor'), va]);
   if (char.profile?.birthday) meta.push([t('page.character.birthday'), char.profile.birthday]);
   if (char.profile?.height) meta.push([t('page.character.height'), `${char.profile.height} cm`]);

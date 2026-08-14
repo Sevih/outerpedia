@@ -67,8 +67,31 @@ Hero`, `New Boss`, `New 2★ Heroes X and Y`, `[Core Fusion] Hero Added – [X]`
   remonte tel quel. Le cœur `integrateCharacterData` ne fait qu'écrire, les
   dates lui sont branchées par le wrapper comme les skills frais.
   42 tests ajoutés, chacun citant la note dont il est tiré ; 1672 verts au total.
-  Reste de la spec : le tri de `/characters`, le bloc `meta` de la fiche et la
-  clé `page.character.release`.
+
+- **La date de sortie est SERVIE** — le reste de la spec ci-dessus, débloqué le
+  jour même par une suggestion Discord (好, 13/08 : « characters are shown in
+  alphabetical order, would be great to add the option to sort them by release
+  date ; also would be great to add release date at charas info page »). Elle
+  demandait exactement les deux consommateurs prévus, donc aucun arbitrage à
+  reprendre. Accès par `src/lib/data/character-release.ts` (import statique de la
+  donnée générée, comme `characters.ts`/`recruit.ts` ; contrat ré-exporté par
+  `@contracts`).
+  **Tri de `/characters`** : segmenté « Nom | Sortie » dans le bandeau des
+  filtres actifs — dernier réglage avant la grille, et le seul endroit visible
+  même sans aucun filtre (la barre de filtres, elle, se replie en tiroir sur
+  mobile). Re-cliquer « Sortie » inverse le sens, flèche à l'appui ; le défaut
+  est le plus RÉCENT d'abord, qui est ce qu'on vient chercher. « Nom » ne trie
+  pas : il rend l'ordre serveur (rareté décroissante puis A→Z), et comme le tri
+  natif est stable c'est aussi le départage des ex æquo par date — il y en a
+  beaucoup, 46 persos partageant le jour du lancement global.
+  Le tri voyage en clair (`?sort=release` / `release-asc`), **hors du codec
+  `?z=`** : celui-ci est un contrat public figé partagé avec la V2, on n'y ajoute
+  pas un champ pour un état d'affichage. Il n'est pas remis à zéro par le bouton
+  reset — ce n'est pas un filtre.
+  **Fiche perso** : ligne en tête du bloc `meta`, avant le profil in-game (la
+  date est une donnée wiki, pas une fiche de perso), formatée par locale en UTC
+  comme les autres dates du site. Clés `characters.sort.*` et
+  `page.character.release` dans les 5 langues.
 
 - **Une étape qui casse ne renvoie plus toute la pipeline à zéro** (constat
   Sevih, dans la foulée de la panne fontTools ci-dessous : pull, extract,

@@ -16,6 +16,7 @@ import {
   joinDisplayName,
   slugForId,
 } from '@/lib/data/characters';
+import { releaseDateOf } from '@/lib/data/character-release';
 import { characterTags, loadCuratedCharacters } from '@/lib/data/curated';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { loadShortNames } from '@/lib/data/short-names';
@@ -118,6 +119,7 @@ function buildRows(lang: Lang): CharacterRow[] {
           )
         : undefined,
       teamBonuses: c.teamBonuses,
+      releaseDate: releaseDateOf(c.id),
     };
   });
 }
@@ -213,6 +215,10 @@ function buildLabels(rows: CharacterRow[], lang: Lang, t: TFunction): Characters
       reset: t('characters.filters.reset'),
       copy: t('characters.filters.copy'),
       copied: t('common.copied'),
+      sort: t('characters.sort.label'),
+      sortName: t('characters.sort.name'),
+      sortRelease: t('characters.sort.release'),
+      sortReverse: t('characters.sort.reverse'),
     },
     drawer: {
       advanced: t('characters.filters.advanced'),
