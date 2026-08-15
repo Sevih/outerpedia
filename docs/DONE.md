@@ -23,7 +23,9 @@
   14/08) contre `6f0bc8` sur R2 ; inscrire « la vérité R2 » dans le manifeste
   aurait fait re-pousser l'ancienne image au run suivant. Le manifeste garde
   donc `9edbae` — mensonge assumé sur une clé, qui se résorbe au prochain
-  `pnpm refresh` (cette machine est en retard sur la donnée jeu).
+  `pnpm datagen:patch` suivi d'un `assets:collect` (cette machine est en retard
+  sur la donnée jeu ; `datagen:patch` ne collecte pas, c'est `pnpm images` —
+  donc `pnpm commit` — qui réécrit le staging).
   Option ÉCARTÉE : déplacer le bloc images APRÈS le push git. « Merger/pousser
   = déployer » et la prod lit R2 — le code partirait en référençant des images
   pas encore en ligne. L'ordre était juste ; c'est le départ qui manquait d'un
