@@ -2,6 +2,8 @@
  * commit — publication guidée (`pnpm commit`).
  *
  * Enchaîne, dans l'ordre, avec ARRÊT au premier problème :
+ *   0. PRÉ-VOL : la branche est-elle à jour sur origin ? (STOP si en retard)
+ *      Rejoué juste avant le push R2, seul point de non-retour.
  *   1. CONTRÔLES : format:check → lint → typecheck → test  (STOP si ça casse)
  *   2. CHOIX du bump de version (patch/minor/major) — l'écriture dans
  *      package.json est différée à l'étape 5 : abandonner ne modifie rien
@@ -68,12 +70,74 @@ function shOut(cmd: string): string {
   return execSync(cmd, { encoding: 'utf-8' }).trim();
 }
 
+/** Sortie capturée, `null` si la commande échoue (stderr avalé). */
+function shSoft(cmd: string): string | null {
+  try {
+    return execSync(cmd, { encoding: 'utf-8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * PRÉ-VOL — refuse de partir si la branche est en retard sur origin.
+ *
+ * Le push R2 est IRRÉVERSIBLE (l'edge est purgé, la prod sert aussitôt les
+ * nouveaux fichiers) là où le push git, lui, peut être REFUSÉ. Le 2026-08-15
+ * la séquence s'est arrêtée entre les deux : R2 servait deux images que le
+ * dépôt n'enregistrait pas encore.
+ *
+ * Le vrai danger n'est pas ce décalage, c'est `pushed.json`. Calculé sur une
+ * base périmée, il ignore les images qu'une AUTRE machine a déjà poussées :
+ * `assets:push` les voit alors comme « à re-pousser » et écrase du récent par
+ * du vieux — régression silencieuse, edge purgé pour servir l'ancienne image.
+ * Un `git pull` APRÈS coup ne la rattrape pas : le mal est fait sur R2.
+ *
+ * D'où l'arrêt AVANT tout effet de bord. Joué deux fois : au démarrage (échec
+ * en ~1 s au lieu de dérouler contrôles + prompts pour rien) et juste avant le
+ * push R2, car les prompts durent ce qu'ils durent et une autre machine a le
+ * temps de pousser entre-temps.
+ *
+ * Le fetch tourne MÊME en dry-run : lecture seule (il ne touche ni l'index ni
+ * l'arbre), et un dry-run qui tairait « tu es en retard » ne servirait à rien.
+ */
+function preflight(branch: string): void {
+  if (shSoft(`git fetch origin ${branch}`) === null) {
+    console.log(`\x1b[90m  origin/${branch} injoignable ou inexistant — rien à comparer.\x1b[0m`);
+    return;
+  }
+  if (shSoft(`git rev-parse --verify origin/${branch}`) === null) {
+    console.log(`\x1b[90m  ${branch} n'existe pas encore sur origin — rien à comparer.\x1b[0m`);
+    return;
+  }
+  const behind = Number(shSoft(`git rev-list --count HEAD..origin/${branch}`) ?? '0');
+  if (!behind) {
+    console.log(`\x1b[90m  origin/${branch} : à jour.\x1b[0m`);
+    return;
+  }
+  console.error(
+    `\n\x1b[31m✗ origin/${branch} a ${behind} commit(s) que tu n'as pas — rien n'a été publié.\x1b[0m\n` +
+      `  Intègre-les, puis relance :\n` +
+      `      git pull --rebase origin ${branch}\n` +
+      `  Partir en retard pousserait un pushed.json calculé sur une base périmée,\n` +
+      `  au risque d'écraser sur R2 une image plus récente par une plus ancienne.`,
+  );
+  process.exit(1);
+}
+
 async function ask(rl: readline.Interface, q: string): Promise<string> {
   return (await rl.question(q)).trim();
 }
 
 async function main(): Promise<void> {
   if (DRY_RUN) console.log('\x1b[33m[DRY RUN]\x1b[0m\n');
+
+  const branch = shOut('git rev-parse --abbrev-ref HEAD');
+
+  // 0) PRÉ-VOL — en TÊTE : inutile de dérouler 12 s de contrôles et deux
+  // prompts pour se faire refuser au push, R2 déjà écrit.
+  console.log(`\n▶ pré-vol : \x1b[36m${branch}\x1b[0m`);
+  preflight(branch);
 
   // 1) CONTRÔLES — au premier échec, on s'arrête AVANT tout effet de bord.
   //
@@ -184,6 +248,11 @@ async function main(): Promise<void> {
   sh('pnpm stamp:guides');
 
   // 5) IMAGES → R2 (la prod lit R2 ; doit précéder le push git).
+  //
+  // Dernier pré-vol : c'est LE point de non-retour, et les prompts ci-dessus
+  // ont pu durer — une autre machine a eu le temps de pousser depuis l'étape 0.
+  console.log('\n▶ pré-vol (rappel, avant publication)');
+  preflight(branch);
   console.log('\n▶ images (collect + push R2)');
   sh('pnpm images');
 
@@ -198,7 +267,6 @@ async function main(): Promise<void> {
     console.log('\nRien à committer.');
     process.exit(0);
   }
-  const branch = shOut('git rev-parse --abbrev-ref HEAD');
   console.log(`\n▶ commit sur \x1b[36m${branch}\x1b[0m`);
   sh('git add -A');
   // --no-verify : on saute les hooks git (lefthook) car les contrôles ci-dessus

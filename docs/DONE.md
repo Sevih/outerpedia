@@ -5,6 +5,30 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-15
+
+- **`pnpm commit` refuse de partir en retard sur `origin`** — pré-vol en tête de
+  séquence, rejoué juste avant le push R2
+  ([scripts/commit.ts](../scripts/commit.ts)). Le jour même la séquence s'est
+  arrêtée entre les deux : contrôles verts, 2 images poussées sur R2 et edge
+  purgé, puis `git push` REFUSÉ — `origin/main` portait 7 commits du 14/08
+  (machine `sevih`). R2 servait alors deux images que le dépôt n'enregistrait
+  pas encore.
+  Ce décalage-là est bénin. Le vrai danger est `pushed.json` : calculé sur une
+  base périmée, il ignore ce qu'une AUTRE machine a déjà poussé, et
+  `assets:push` re-pousse du vieux par-dessus du récent — régression
+  silencieuse, edge purgé pour servir l'ancienne image, qu'aucun `git pull`
+  APRÈS coup ne rattrape. Le merge du jour l'a frôlée :
+  `CM_Btn_Recruit_Special_11.webp` vaut `9edbae` en local (staging d'avant le
+  14/08) contre `6f0bc8` sur R2 ; inscrire « la vérité R2 » dans le manifeste
+  aurait fait re-pousser l'ancienne image au run suivant. Le manifeste garde
+  donc `9edbae` — mensonge assumé sur une clé, qui se résorbe au prochain
+  `pnpm refresh` (cette machine est en retard sur la donnée jeu).
+  Option ÉCARTÉE : déplacer le bloc images APRÈS le push git. « Merger/pousser
+  = déployer » et la prod lit R2 — le code partirait en référençant des images
+  pas encore en ligne. L'ordre était juste ; c'est le départ qui manquait d'un
+  garde-fou.
+
 ## 2026-08-14
 
 - **Les 125 persos ont une date de sortie** (brief
