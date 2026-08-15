@@ -1,5 +1,5 @@
 /**
- * Accents du hub tier list (portage V2). Style maison : PvE → émeraude, PvP →
+ * Accents du hub tier list (inchangés). Style maison : PvE → émeraude, PvP →
  * rouge, rail « autres classements » → bleu ciel. Couleurs vives autorisées hors
  * `guides/**` ; les neutres passent aux tokens dans les composants. Classes
  * LITTÉRALES (Tailwind v4).

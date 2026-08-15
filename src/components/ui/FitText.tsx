@@ -3,7 +3,7 @@
 import { useRef, useLayoutEffect } from 'react';
 
 /**
- * Rétrécit le texte pour tenir sur UNE ligne (portage V2) : rendu à `max` px
+ * Rétrécit le texte pour tenir sur UNE ligne (porté tel quel) : rendu à `max` px
  * puis compression visuelle par transform (évite les artefacts de hinting aux
  * petites tailles). `min` borne l'échelle.
  */

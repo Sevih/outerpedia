@@ -13,7 +13,7 @@ import { gameTabClass } from '@/components/ui/game-tab';
 const ACCENT = 'var(--cd-el)';
 const TOTAL_SEGMENTS = 6;
 
-/** Équipement affichable (résolu côté serveur, pré-localisé) — MiniCard V2. */
+/** Équipement affichable (résolu côté serveur, pré-localisé) — MiniCard. */
 export interface GearItem {
   id: string;
   name: string;
@@ -151,7 +151,7 @@ function StatChip({ abbr, value }: { abbr: string; value?: string }) {
 }
 
 /**
- * MiniCard d'équipement (port V2) : tuile avec cadre de rareté + overlays,
+ * MiniCard d'équipement (portée telle quelle) : tuile avec cadre de rareté + overlays,
  * nom cliquable vers la page détail, chips de main stats ; tooltip riche
  * (stats max, passif au palier max, source).
  */
@@ -281,7 +281,7 @@ export function ItemRow({
 }
 
 /**
- * Groupe de tuiles d'un set dans un combo (port du SetMiniCard V2) : joué à 4
+ * Groupe de tuiles d'un set dans un combo (port de l'ancien SetMiniCard) : joué à 4
  * → les 4 pièces ; combo 2+2 → Helmet+Armor pour le premier set, Gloves+Shoes
  * pour le second. Icône du set en overlay, nom cliquable, tooltip 2P/4P + source.
  */
@@ -395,7 +395,7 @@ function SetEffectLines({ eff, labels }: { eff: GearSetEffect; labels: GearRecoL
   );
 }
 
-/** Barre de priorité des substats (portage V2 SubstatPrioBar). */
+/** Barre de priorité des substats (portée de l'ancien SubstatPrioBar). */
 export function SubstatPrioBar({ prio }: { prio: string }) {
   const tiers: { stats: string[]; filled: number }[] = [];
   let level = 0;
@@ -446,7 +446,7 @@ export function SubstatPrioBar({ prio }: { prio: string }) {
 }
 
 /**
- * Section Équipement recommandé (portage V2 GearRecoSection sur le NOUVEAU
+ * Section Équipement recommandé (portée telle quelle sur le NOUVEAU
  * format curé) : onglets de builds, grille de slots, légende des bonus de
  * sets, barre de substats, note.
  */

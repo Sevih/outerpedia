@@ -36,7 +36,7 @@ function useSectionObserver(ids: string[]) {
   return active;
 }
 
-/** Nav sticky de la fiche (portage V2) : pills ancrées, section active suivie. */
+/** Nav sticky de la fiche (portée telle quelle) : pills ancrées, section active suivie. */
 export function QuickToc({
   sections,
   hex,

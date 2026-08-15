@@ -1,5 +1,5 @@
 /**
- * Accent hex par élément du layout « éditorial » de la fiche perso (portage V2).
+ * Accent hex par élément du layout « éditorial » de la fiche perso (inchangé).
  * L'accent signe la page (n° de sections, eyebrow, dernière lettre du nom,
  * traits) — jamais utilisé en aplat. Injecté en SSR comme CSS var `--cd-el` et
  * passé aux composants enfants : il faut la valeur BRUTE, pas un `var(...)`.

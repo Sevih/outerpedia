@@ -15,14 +15,14 @@ import { EmptyCategory } from './EmptyCategory';
 import type { CategoryViewProps } from './types';
 
 /**
- * Vue CARTE (visuel V2) : l'écran Irregular Chase du jeu en fond (`art` de la
+ * Vue CARTE : l'écran Irregular Chase du jeu en fond (`art` de la
  * catégorie), un pin par poursuite — nom et portrait du boss, encart de butin
  * en desktop.
  *
  * Tout vient du meta et de la donnée : le pin se place par `mapPos` (exigé par
  * la catégorie — un guide sans position casserait le scan au lieu de disparaître
- * de la carte comme en V2), le nom et le portrait par `bossId`, le butin par le
- * pool du donjon le plus dur de `group` (cf. `pursuitLoot` — la V2 portait
+ * de la carte, inchangé), le nom et le portrait par `bossId`, le butin par le
+ * pool du donjon le plus dur de `group` (cf. `pursuitLoot` — on portait
  * items, familles et classes en dur dans le composant).
  */
 export default async function IrregularChaseMap({ lang, category, guides }: CategoryViewProps) {

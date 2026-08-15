@@ -3,11 +3,11 @@
 import { useState, type ReactNode } from 'react';
 
 /**
- * Colonnes par MODE (portage V2) : côte à côte en desktop, onglets en mobile.
+ * Colonnes par MODE (porté tel quel) : côte à côte en desktop, onglets en mobile.
  *
  * Le contenu des colonnes est rendu CÔTÉ SERVEUR et passé en `ReactNode` —
  * l'état client ne porte que l'onglet actif. Générique sur le nombre de
- * sections (la V2 figeait deux onglets en dur).
+ * sections (deux onglets étaient figés en dur).
  *
  * UNE SEULE INSTANCE de chaque colonne dans le DOM (refonte 2026-07-21) : la
  * version précédente rendait un bloc mobile (l'onglet actif) PLUS un bloc

@@ -1,21 +1,23 @@
 /**
- * Codec `?z=` des filtres de `/characters` — CONTRAT PUBLIC hérité de la V2.
+ * Codec `?z=` des filtres de `/characters` — CONTRAT PUBLIC hérité du site
+ * précédent, remplacé le 21/07/2026.
  *
  * La barre d'adresse EST le lien de partage (décision Sevih 21/07) : l'état
  * complet des filtres tient dans un seul paramètre compact (~60-120 chars quel
  * que soit le nombre de facettes), au lieu de 300 chars de params en clair.
- * Format V2 à l'identique : JSON compact → lz-string. Les liens V2
- * `/characters?z=…` en circulation se décodent donc ici tels quels.
+ * Format hérité repris à l'identique : JSON compact → lz-string. Les liens
+ * `/characters?z=…` encore en circulation se décodent donc ici tels quels.
  *
  * Le contrat, ce sont les POSITIONS DE BITS et les INDICES, pas les chaînes :
- * les tables ci-dessous posent les slugs V3 aux positions V2 (`Fire`=bit 0 →
- * `fire`=bit 0…). Pour buffs/debuffs/tags (vocabulaires ouverts), les indices
- * sont GELÉS depuis `effectsIndex.json` de la V2 (snapshot du 21/07) avec la
- * canonisation V3 appliquée au décodage : un indice de VARIANTE V2 (`…_IR`,
- * déclinaison numérotée) décode vers sa clé canonique V3 — celle des cases de
- * filtre. Toute clé future SANS indice gelé voyage en clair dans les champs
- * d'extension `bx`/`dx`/`tx` (illisibles pour la V2, mais la V2 est figée) :
- * AUCUNE table à maintenir, aucun risque de dérive d'indices.
+ * les tables ci-dessous posent les slugs actuels aux positions héritées
+ * (`Fire`=bit 0 → `fire`=bit 0…). Pour buffs/debuffs/tags (vocabulaires
+ * ouverts), les indices sont GELÉS depuis l'`effectsIndex.json` du site
+ * précédent (snapshot du 21/07), la canonisation actuelle étant appliquée au
+ * décodage : un indice de VARIANTE hérité (`…_IR`, déclinaison numérotée)
+ * décode vers sa clé canonique — celle des cases de filtre. Toute clé future
+ * SANS indice gelé voyage en clair dans les champs d'extension `bx`/`dx`/`tx`
+ * (illisibles pour l'ancien format, mais celui-ci est figé) : AUCUNE table à
+ * maintenir, aucun risque de dérive d'indices.
  */
 import LZString from 'lz-string';
 
@@ -38,7 +40,7 @@ export interface FilterState {
   teamBonuses: string[];
 }
 
-/** Payload compact sérialisé (clés V2 + extensions bx/dx/tx). */
+/** Payload compact sérialisé (clés héritées + extensions bx/dx/tx). */
 interface ZPayload {
   e?: number;
   c?: number;
@@ -61,7 +63,7 @@ interface ZPayload {
   tx?: string[];
 }
 
-// ── Vocabulaires fermés : slugs V3 aux positions de bits V2 ────────────────
+// ── Vocabulaires fermés : slugs actuels aux positions de bits héritées ─────
 
 const ELEM_BIT: Record<string, number> = { fire: 0, water: 1, earth: 2, light: 3, dark: 4 };
 const CLASS_BIT: Record<string, number> = {
@@ -72,8 +74,8 @@ const CLASS_BIT: Record<string, number> = {
   mage: 4,
 };
 const CHAIN_BIT: Record<string, number> = { start: 0, join: 1, finish: 2 };
-// V2 : Science, Luxury, Magic Tool, Craftwork, Natural Object — même ordre que
-// les slugs du jeu present_01..05 (vérifié sur glossaries.gifts).
+// Ordre hérité : Science, Luxury, Magic Tool, Craftwork, Natural Object — même
+// ordre que les slugs du jeu present_01..05 (vérifié sur glossaries.gifts).
 const GIFT_BIT: Record<string, number> = {
   present_01: 0,
   present_02: 1,
@@ -83,8 +85,9 @@ const GIFT_BIT: Record<string, number> = {
 };
 const RARITY_BIT: Record<number, number> = { 1: 0, 2: 1, 3: 2 };
 const ROLE_BIT: Record<string, number> = { dps: 0, support: 1, sustain: 2 };
-// V2 : SKT_FIRST, SKT_SECOND, SKT_ULTIMATE, SKT_CHAIN_PASSIVE, DUAL_ATTACK,
-// EXCLUSIVE_EQUIP, SKT_FUSION_PASSIVE → clés de source V3, mêmes positions.
+// Ordre hérité : SKT_FIRST, SKT_SECOND, SKT_ULTIMATE, SKT_CHAIN_PASSIVE,
+// DUAL_ATTACK, EXCLUSIVE_EQUIP, SKT_FUSION_PASSIVE → clés de source actuelles,
+// mêmes positions.
 const SRC_BIT: Record<string, number> = {
   s1: 0,
   s2: 1,
@@ -94,7 +97,7 @@ const SRC_BIT: Record<string, number> = {
   exclusiveEquip: 5,
   fusionPassive: 6,
 };
-// Identique au TB_KEYS V2 (et au TB_ORDER du générateur characters-list).
+// Identique au TB_KEYS hérité (et au TB_ORDER du générateur characters-list).
 const TB_KEYS = [
   'SPD',
   'ATK',
@@ -112,10 +115,10 @@ const TB_KEYS = [
 ];
 const TB_BIT: Record<string, number> = Object.fromEntries(TB_KEYS.map((v, i) => [v, i]));
 
-// ── Vocabulaires ouverts : indices GELÉS (snapshot effectsIndex.json V2) ───
-// `*_ENC` : clé canonique V3 → son propre indice V2 (encodage).
-// `*_DEC` : indice V2 → clé canonique V3 (décodage — les variantes V2 pointent
-// leur canonique, d'où des indices multiples vers la même clé).
+// ── Vocabulaires ouverts : indices GELÉS (snapshot effectsIndex.json) ──────
+// `*_ENC` : clé canonique → son propre indice hérité (encodage).
+// `*_DEC` : indice hérité → clé canonique (décodage — les indices de variante
+// pointent leur canonique, d'où des indices multiples vers la même clé).
 // NE JAMAIS modifier une paire existante ; ne jamais réattribuer un indice.
 
 const BUFF_ENC: Record<string, number> = {
@@ -530,7 +533,7 @@ export function encodeFilters(s: FilterState): string | undefined {
   return LZString.compressToEncodedURIComponent(json);
 }
 
-/** Décode un `?z=` (V2 ou V3) — `null` si illisible. */
+/** Décode un `?z=` (ancien format ou actuel) — `null` si illisible. */
 export function decodeFilters(z: string | null | undefined): FilterState | null {
   if (!z) return null;
   try {

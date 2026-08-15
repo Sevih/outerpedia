@@ -13,7 +13,7 @@ import type { CategoryViewProps } from './types';
 
 /**
  * Vue SPECIAL REQUEST : une colonne par MODE (Ecology Study / Identification),
- * dans l'ordre du jeu — côte à côte en desktop, onglets en mobile (visuel V2 :
+ * dans l'ordre du jeu — côte à côte en desktop, onglets en mobile (visuel :
  * cartes-bannières, nom en pastille, signature de loot en surimpression).
  *
  * Le MODE se lit sur le combat que chaque guide désigne (`meta.group`, exigé
@@ -21,7 +21,7 @@ import type { CategoryViewProps } from './types';
  * `modes`). L'ORDRE — des colonnes comme des cartes — est ÉDITORIAL : `meta.order`
  * (exigé par la catégorie), déjà appliqué par `listGuidesByCategory` ; on ne
  * fait que le préserver. La signature de loot vient du pool du stage le plus
- * haut (sets d'armure ou mains d'accessoires — cf. `lootSignature`). La V2
+ * haut (sets d'armure ou mains d'accessoires — cf. `lootSignature`). On
  * faisait la même page avec une table slug→élément dans un JSON à part et le
  * loot écrit à la main ; un boss ajouté au mode y serait resté invisible.
  */
@@ -74,7 +74,7 @@ export default async function SpecialRequestSplit({ lang, guides }: CategoryView
 }
 
 /**
- * Carte-bannière d'un combat (visuel V2) : l'icône du guide est un art large
+ * Carte-bannière d'un combat : l'icône du guide est un art large
  * (`CLG_Raid_*`) rendu en fond plein, le nom en pastille, la signature de loot
  * à droite sur deux rangées.
  */
@@ -98,7 +98,7 @@ function BannerCard({ guide, lang, sig }: { guide: Guide; lang: Lang; sig: LootS
   const name = lRec(monster.name, lang) || monster.name.en;
   // Un pool ne porte qu'UNE nature de signature (sets OU stats) ; les stats
   // (icônes blanches du jeu) prennent une pastille ronde sombre pour se lire
-  // sur l'art, comme en V2.
+  // sur l'art, inchangé.
   const badges = sig.sets.length ? sig.sets : sig.stats;
   const rounded = sig.sets.length === 0;
   const half = Math.ceil(badges.length / 2);

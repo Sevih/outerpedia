@@ -1,8 +1,8 @@
 /**
  * Tests du codec `?z=` des filtres de `/characters`. Le format est un CONTRAT
- * PUBLIC (liens V2 en circulation) : le test « format V2 brut » construit le
+ * PUBLIC (anciens liens en circulation) : le test « format hérité brut » construit le
  * payload compact à la main — indépendamment de notre encodeur — et vérifie
- * qu'il décode vers les slugs V3 ; l'ÉPINGLAGE fige l'encodage octet à octet.
+ * qu'il décode vers nos slugs ; l'ÉPINGLAGE fige l'encodage octet à octet.
  */
 import LZString from 'lz-string';
 import { describe, expect, it } from 'vitest';
@@ -77,19 +77,19 @@ describe('encodeFilters', () => {
       buffs: ['BT_IMMUNE'],
       teamBonuses: ['SPD'],
     };
-    // Généré par ce codec (format V2 à l'identique) puis figé : toute évolution
+    // Généré par ce codec (format hérité à l'identique) puis figé : toute évolution
     // du format casse ce test — c'est voulu.
     expect(encodeFilters(state)).toBe('N4IgpiBcBMA0IGMpxAIygbQMwEYC68AjlCAAoCWAdiPAC7qQ4C+QA');
   });
 });
 
-describe('decodeFilters — format V2 brut', () => {
-  /** Compresse un payload compact V2 écrit à la main (sans passer par l'encodeur). */
+describe('decodeFilters — format hérité brut', () => {
+  /** Compresse un payload compact hérité écrit à la main (sans passer par l'encodeur). */
   const v2z = (payload: Record<string, unknown>) =>
     LZString.compressToEncodedURIComponent(JSON.stringify(payload));
 
-  it('bitfields V2 → slugs V3 (mêmes positions de bits)', () => {
-    // V2 : e=5 (Fire|Earth), c=1 (Striker), r=1 (1★), ch=2 (Join), g=4
+  it('bitfields hérités → slugs actuels (mêmes positions de bits)', () => {
+    // Hérité : e=5 (Fire|Earth), c=1 (Striker), r=1 (1★), ch=2 (Join), g=4
     // (Magic Tool), r2=2 (support), src=9 (SKT_FIRST|SKT_CHAIN_PASSIVE),
     // tb=3 (SPD|ATK), u=1.
     const decoded = decodeFilters(
@@ -107,7 +107,7 @@ describe('decodeFilters — format V2 brut', () => {
     expect(decoded.q).toBe('ml');
   });
 
-  it('indices d’effets/tags V2 → clés canoniques, variantes repliées + dédup', () => {
+  it('indices d’effets/tags hérités → clés canoniques, variantes repliées + dédup', () => {
     // b: 16 = CRITICAL_DMG_RATE, 17 = sa variante _IR → même canonique (dédup) ;
     // d: 60 et 61 = BT_STUN et sa variante ; t: 2 = premium, 7 = core-fusion.
     const decoded = decodeFilters(v2z({ b: [16, 17], d: [60, 61], t: [2, 7], l: 1, tl: 1 }))!;

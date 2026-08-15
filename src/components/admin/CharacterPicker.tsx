@@ -15,7 +15,7 @@ export interface CharOption {
 
 /**
  * Sélecteur de personnage par NOM (l'id est renseigné automatiquement depuis la
- * sélection). Aperçu portrait (`FI_{id}`). Un id legacy hors data V3 reste
+ * sélection). Aperçu portrait (`FI_{id}`). Un id hérité hors data courante reste
  * affiché par sa face + son nom. Adaptateur de `SearchPicker`.
  *
  * `compact` : aperçu sur UNE ligne (petite face + nom en clair) — pour les

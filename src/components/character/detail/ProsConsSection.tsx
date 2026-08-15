@@ -39,7 +39,7 @@ function Side({ label, items, tone, sign }: SideProps) {
 const COLLAPSED_COUNT = 4;
 
 /**
- * Forces & faiblesses (portage V2) : deux colonnes, repli à 4 entrées.
+ * Forces & faiblesses (porté tel quel) : deux colonnes, repli à 4 entrées.
  * Les items arrivent PRÉ-RENDUS du serveur (parse-text) — ce composant ne
  * gère que le repli/dépli.
  */

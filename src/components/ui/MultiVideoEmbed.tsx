@@ -3,7 +3,7 @@
 import { Tabs } from './Tabs';
 
 /**
- * Lecteur vidéo embarqué (portage V2) : iframe 16/9 par plateforme, onglets
+ * Lecteur vidéo embarqué (porté tel quel) : iframe 16/9 par plateforme, onglets
  * quand plusieurs vidéos (seule l'active est montée), ligne titre + auteur.
  * Le JSON-LD VideoObject est émis par la page (SEO), pas ici.
  */

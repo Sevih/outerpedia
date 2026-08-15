@@ -1,6 +1,6 @@
 /**
  * Étoile de rareté inline + interpolation `{star}` des textes éditoriaux —
- * le marqueur que la V2 utilisait pour glisser l'icône d'étoile du jeu au
+ * le marqueur historique pour glisser l'icône d'étoile du jeu au
  * milieu d'une phrase (« au moins un Héros 2{star} »).
  */
 import { Fragment } from 'react';

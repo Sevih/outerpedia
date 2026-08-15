@@ -103,7 +103,7 @@ export interface ShareStrings {
   copied: string;
 }
 
-/** Boutons de partage par langue (portage V2). */
+/** Boutons de partage par langue (portés tels quels). */
 export function ShareButtons({
   title,
   lang,

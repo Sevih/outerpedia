@@ -38,7 +38,7 @@ export interface OverviewProps {
 }
 
 /**
- * Header « héros » de la fiche (portage V2) : art en pied + badges + nom
+ * Header « héros » de la fiche (porté tel quel) : art en pied + badges + nom
  * monumental (dernière lettre à l'accent élément) + rareté/élément/classe +
  * méta profil + histoire.
  */

@@ -56,7 +56,7 @@ function searchItems(options: ItemOption[], query: string): ItemOption[] {
 
 /**
  * Sélecteur d'item : recherche par nom dans la data items (id stocké), aperçu
- * `ItemInline`. Une valeur non résolue (id inconnu / reste d'un import V2 par
+ * `ItemInline`. Une valeur non résolue (id inconnu / reste d'un vieil import par
  * nom) reste éditable et re-cherchable. Adaptateur de `SearchPicker`.
  */
 export function ItemPicker({

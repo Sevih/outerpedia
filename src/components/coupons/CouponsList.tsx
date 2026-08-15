@@ -7,7 +7,7 @@ import type { CouponFullVM, CouponStatus } from '@/lib/home';
 /**
  * Liste COMPLÈTE des codes promo (page `/coupons`) : actifs, à venir, expirés,
  * avec badge de statut, validité, récompenses (`ItemInline`) et copie
- * presse-papier. Le rachat one-click de la V2 reste OFF (accord VA Games en
+ * presse-papier. L'ancien rachat one-click reste OFF (accord VA Games en
  * attente) — non porté ici.
  */
 export interface CouponsStrings {

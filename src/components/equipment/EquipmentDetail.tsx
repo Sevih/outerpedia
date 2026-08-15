@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Vue INTERACTIVE de la page détail équipement — port de l'UX « console » V2 :
+ * Vue INTERACTIVE de la page détail équipement — port de l'UX « console » :
  * slider d'amélioration, onglets de breakthrough, ascension Singularity, choix
  * de main stat, sélection de pièce d'armure. Les maths viennent des règles
  * EXTRAITES du jeu (`rules` : base × (1 + 0.4·niv) × (1 + 0.05·palier), paliers
@@ -141,7 +141,7 @@ function FlashNum({
   );
 }
 
-/** Cadre de module (port du « Module » console V2). */
+/** Cadre de module (port du « Module » console). */
 function Module({
   title,
   span,
@@ -469,7 +469,7 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
         </section>
       </div>
 
-      {/* Rangée effet + source AU-DESSUS des stats (armes/amulettes, comme V2) */}
+      {/* Rangée effet + source AU-DESSUS des stats (armes/amulettes) */}
       {model.passives.length > 0 && subPool && (
         <div className="grid grid-cols-1 items-start gap-3 md:grid-cols-2">
           <PassiveModules
@@ -487,7 +487,7 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
         </div>
       )}
 
-      {/* Sets : bonus de set + source en tête (comme V2) */}
+      {/* Sets : bonus de set + source en tête */}
       {model.setEffects && (
         <div className={model.source ? 'grid grid-cols-1 items-start gap-3 md:grid-cols-2' : ''}>
           <Module title={labels.setEffects}>
@@ -662,7 +662,7 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
             )
           )}
 
-          {/* EE : passifs empilés à gauche (le full art occupe la droite, V2) */}
+          {/* EE : passifs empilés à gauche (le full art occupe la droite) */}
           {model.kind === 'ee' && model.passives.length > 0 && (
             <PassiveModules
               model={model}
@@ -707,7 +707,7 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
             </div>
           </Module>
         ) : model.passives.length > 0 ? (
-          // Talisman : l'effet occupe la cellule de droite (côte à côte, V2).
+          // Talisman : l'effet occupe la cellule de droite (côte à côte).
           <PassiveModules
             model={model}
             labels={labels}
@@ -718,7 +718,7 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
         ) : null}
       </div>
 
-      {/* Ascension Singularity — ledger V2 */}
+      {/* Ascension Singularity — ledger */}
       {model.canAscend && (
         <Module title={labels.ascension} span={2} ascension>
           <AscensionLedger asc={model.ascension} labels={labels} />
@@ -780,9 +780,9 @@ function SourceDetail({ source }: { source: NonNullable<DetailModel['source']> }
   );
 }
 
-// --- Ledger d'ascension Singularity (présentation V2) ----------------------------
+// --- Ledger d'ascension Singularity ----------------------------------------------
 
-/** Échelle de couleurs des grades C → S+ (palette V2, tokens globals.css). */
+/** Échelle de couleurs des grades C → S+ (tokens globals.css). */
 const AX_COLOR: Record<string, string> = {
   C: 'var(--color-ax-grade-c)',
   B: 'var(--color-ax-grade-b)',
@@ -799,7 +799,7 @@ function AxEyebrow({ children }: { children: ReactNode }) {
   );
 }
 
-/** Bande « Activation cost » : or + matériaux (comme V2). */
+/** Bande « Activation cost » : or + matériaux. */
 function AxActivationBand({ asc, labels }: { asc: AscView; labels: DetailLabels }) {
   return (
     <div className="border-line-subtle bg-surface-base/40 rounded-xl border px-4 py-3.5">
@@ -949,7 +949,7 @@ function AxBonusRow({ bonus, sel }: { bonus: AscView['bonuses'][number]; sel: st
   );
 }
 
-/** Colonne des bonus +15 : sélecteur de grade C → S+ (défaut S+, comme V2). */
+/** Colonne des bonus +15 : sélecteur de grade C → S+ (défaut S+). */
 function AxBonusColumn({ asc, labels }: { asc: AscView; labels: DetailLabels }) {
   const gradeList = asc.bonuses[0]?.grades.map((g) => g.grade) ?? [];
   const [sel, setSel] = useState(gradeList[gradeList.length - 1] ?? 'S+');
@@ -994,7 +994,7 @@ function AxBonusColumn({ asc, labels }: { asc: AscView; labels: DetailLabels }) 
 
 type AscView = DetailModel['ascension'];
 
-/** Ledger complet : [activation + steps] | [colonne bonus] (grille V2). */
+/** Ledger complet : [activation + steps] | [colonne bonus]. */
 function AscensionLedger({ asc, labels }: { asc: AscView; labels: DetailLabels }) {
   return (
     <div

@@ -12,7 +12,7 @@
  *
  * La lecture est TABULÉE pour épurer : un onglet par phase, puis un sélecteur de
  * SOUS-BOSS en phase 1 et un sélecteur d'ÉQUIPE en phase 2 — une chose à la fois
- * (cf. `SegmentedTabs`), comme le faisait la V2.
+ * (cf. `SegmentedTabs`), comme auparavant.
  *
  * Comme le `VersionedBossGuide`, un guild raid est de la DONNÉE :
  *   meta.json · strings.json · versions/YYYY-MM/{config,subA,subB,main}.json

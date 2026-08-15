@@ -40,7 +40,7 @@ interface Props {
   rarityFilter: number[];
   onToggleRarity: (v: number) => void;
 
-  /** Fournis ensemble, ajoutent un groupe Rôles dans la barre (parité V2). */
+  /** Fournis ensemble, ajoutent un groupe Rôles dans la barre (inchangé). */
   roles?: FilterOption[];
   roleFilter?: string[];
   onToggleRole?: (v: string) => void;
@@ -56,7 +56,7 @@ interface Props {
 /**
  * Barre de filtres — toolbar horizontale sur desktop (search + pills
  * élément/classe/rareté + bouton avancé), rangées empilées sur mobile. Portage
- * V2 réhabillé sur tokens V3 (accent ciel). xl+ : le bouton avancé est masqué
+ * réhabillé sur les tokens actuels (accent ciel). xl+ : le bouton avancé est masqué
  * (la sidebar persistante prend le relais).
  */
 export function CharactersFiltersBar({

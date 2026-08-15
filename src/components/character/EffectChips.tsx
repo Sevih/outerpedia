@@ -190,7 +190,7 @@ export function EffectIconBadge({
  * Pill NUE d'effet (icône + nom) avec emplacement d'ACTIONS en enfants —
  * même visuel qu'EffectChip, pour les surfaces interactives (éditeur de
  * câblage admin : croix, poignée de drag). Les couleurs restent ici, sous
- * l'exception V2 confinée à ce dossier.
+ * l'exception héritée confinée à ce dossier.
  */
 export function EffectPillShell({
   icon,
@@ -217,9 +217,9 @@ export function EffectPillShell({
 }
 
 /**
- * Chip d'effet (portage V2 BuffDebuffDisplay) : pill buff/debuff avec icône du
+ * Chip d'effet (porté de l'ancien BuffDebuffDisplay) : pill buff/debuff avec icône du
  * jeu recolorée (sauf variantes « Interruption »), NOM SEUL dans la pill — les
- * montants/durées vivent dans la description du skill, comme en V2 — et
+ * montants/durées vivent dans la description du skill, comme avant — et
  * tooltip icône + nom + description au survol.
  */
 export function EffectChip({ effect, statuses }: { effect: ClientEffect; statuses: StatusMap }) {
@@ -253,7 +253,7 @@ export function EffectChip({ effect, statuses }: { effect: ClientEffect; statuse
 }
 
 /**
- * Rangée de chips (équivalent BuffDebuffDisplay V2). Seuls les effets NOMMÉS
+ * Rangée de chips (équivalent de l'ancien BuffDebuffDisplay). Seuls les effets NOMMÉS
  * (tooltip/label) apparaissent — les effets techniques sans nom (bonus de
  * pénétration passif, dégâts proportionnels à une stat…) sont du câblage
  * interne, pas des statuts côté joueur. Les statuts curés `hidden` sont
@@ -268,7 +268,7 @@ export function EffectChipsRow({
 }) {
   // Dédup par libellé affiché (un skill peut appliquer 2 buffs du même statut,
   // ex. double « Cooldown Reduction »). La variante irremovable COEXISTE avec
-  // sa version de base (icônes différentes, comme en V2) mais se dédoublonne
+  // sa version de base (icônes différentes, comme avant) mais se dédoublonne
   // AUSSI entre elles : le flag entre dans la clé (les passifs world boss
   // appliquent 5 stacks du même « Courage Against Despair » irremovable —
   // une seule chip). La NATURE entre aussi dans la clé : deux statuts

@@ -1,5 +1,5 @@
 /**
- * Blocs SERVEUR du gabarit bannière (portage V2 : BannerRates/Rewards/
+ * Blocs SERVEUR du gabarit bannière (portés : BannerRates/Rewards/
  * Resources/MileageInfo) — les briques que composent les guides « Banners &
  * Mileage » et, demain, « Premium & Limited ».
  *
@@ -97,7 +97,7 @@ const LABELS = {
   },
 } satisfies Record<string, LocalizedText>;
 
-/** `{star}` → icône (les libellés de chrome portent le même marqueur que la V2). */
+/** `{star}` → icône (les libellés de chrome portent le marqueur historique). */
 function starText(text: string): ReactNode {
   const parts = text.split('{star}');
   return parts.map((part, i) => (

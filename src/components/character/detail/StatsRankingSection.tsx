@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Stats & Ranking (portage V2 + contrôles) : table des stats par palier de
+ * Stats & Ranking (porté tel quel + contrôles) : table des stats par palier de
  * niveau (sélecteur d'évolutions) avec les couches optionnelles du jeu —
  * transcendance, codex, quirks (formule CalcFinalStat du client) — le delta
  * vs la portion blanche en ambre, coût du limit break ; colonne droite =
@@ -219,7 +219,7 @@ export function StatsRankingSection({
               </span>
             </div>
 
-            {/* Sélecteur de paliers (onglets d'évolution du jeu, sous la table — V2) */}
+            {/* Sélecteur de paliers (onglets d'évolution du jeu, sous la table) */}
             <div className="mt-4 flex flex-wrap justify-between gap-1">
               {steps.map((s, i) => {
                 const on = i === idx;
@@ -260,7 +260,7 @@ export function StatsRankingSection({
               })}
             </div>
 
-            {/* Coût du limit break de ce palier (cadre centré — V2) */}
+            {/* Coût du limit break de ce palier (cadre centré) */}
             {step.limitBreak && (
               <div className="mt-3 flex flex-wrap items-center justify-center gap-4 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-zinc-200">
                 <span className="font-semibold text-zinc-300">{labels.limitBreakCost}</span>

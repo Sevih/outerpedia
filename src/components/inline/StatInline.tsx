@@ -1,7 +1,7 @@
 import { InlineTooltip } from './InlineTooltip';
 
 /**
- * Chip de stat partagé (port du StatInline V2) : icône du jeu + nom COMPLET
+ * Chip de stat partagé (port de l'ancien StatInline) : icône du jeu + nom COMPLET
  * officiel, tooltip avec la description officielle quand le jeu en fournit
  * une (`SYS_STAT_DESC_*`). Pré-localisé par l'appelant (statName/statDesc).
  */

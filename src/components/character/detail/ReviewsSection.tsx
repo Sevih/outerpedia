@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Reviews communautaires (portage V2) : moyenne + distribution par étoile,
+ * Reviews communautaires (portées telles quelles) : moyenne + distribution par étoile,
  * cartes d'avis (score de votes, avatar Discord, note, texte avec emojis
  * custom rendus en images), pagination « charger plus » côté client.
  *

@@ -1,7 +1,7 @@
 /**
  * Liste des héros LIMITED (limited/seasonal/collab) et de leurs passages en
  * bannière — release et dernier rerun DÉRIVÉS de `recruit.json` (bannières à
- * pickup des tables du jeu), là où la V2 maintenait `data/banner.json` à la
+ * pickup des tables du jeu), là où `data/banner.json` était maintenu à la
  * main. Les persos tagués limited SANS bannière (unités d'event, ex. Ais
  * Wallenstein) sont affichés « event uniquement » au lieu d'une fausse date.
  *
@@ -38,7 +38,7 @@ const LABELS = {
     fr: "Récompense d'event uniquement — jamais disponible en banner",
   },
   with: { en: ' with ', jp: ' × ', kr: ' × ', zh: ' × ', fr: ' avec ' },
-  // Libellés V2 (data/tags.json) — le tag `limited` s'affiche « Festival ».
+  // Libellés hérités (data/tags.json) — le tag `limited` s'affiche « Festival ».
   badgeLimited: {
     en: 'Festival Units',
     jp: 'フェスユニット',

@@ -2,7 +2,7 @@
 
 /**
  * Pastille de filtre générique (toggle) — utilisée par le panneau avancé
- * (chaîne/role/gift/source/team bonus/tags). Portage V2 sur tokens V3 : accent
+ * (chaîne/role/gift/source/team bonus/tags). Porté sur les tokens actuels : accent
  * ciel actif, surface au repos.
  */
 export function FilterPill({

@@ -11,13 +11,13 @@ import { EmptyCategory } from './EmptyCategory';
 import type { CategoryViewProps } from './types';
 
 /**
- * Vue SKYWARD TOWER (visuel V2) : deux sections empilées — les tours de
+ * Vue SKYWARD TOWER : deux sections empilées — les tours de
  * DIFFICULTÉ (bannières larges) puis les tours ÉLÉMENTAIRES (cartes hautes,
  * accent à l'élément).
  *
  * Chaque guide DÉSIGNE sa tour par `meta.tower` (clé de towers.json, requis au
  * scan) : la vue lit là son `mode` (→ quelle section) et son `element` (→ icône,
- * anneau, ordre). La V2 dérivait tout du SLUG du guide (`fire-tower`,
+ * anneau, ordre). Tout se dérivait du SLUG du guide (`fire-tower`,
  * `normal-tower`) avec deux listes d'ordre écrites en dur dans le composant —
  * un slug hors nomenclature y disparaissait sans un bruit.
  */

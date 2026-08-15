@@ -17,7 +17,7 @@ interface NodeStyle {
   textColor: string;
 }
 
-// Teintes par famille (repris du visuel V2) : jaune = jalons/chemin, vert =
+// Teintes par famille (visuel repris tel quel) : jaune = jalons/chemin, vert =
 // exploration bénéfique, rouge = combat, bleu = narratif/spécial.
 const YELLOW =
   'invert(17%) sepia(92%) saturate(5888%) hue-rotate(353deg) brightness(87%) contrast(132%)';

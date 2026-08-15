@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Wrapper client d'une page de route Monad Gate (port de `MonadRoutePage` V2) :
+ * Wrapper client d'une page de route Monad Gate (port de `MonadRoutePage`) :
  * gère les VARIANTES de layout de map (depth 10 en a deux) via des onglets et le
  * paramètre `?v=<index>` (deep-link depuis la vue de catégorie), et compose
  * l'en-tête récompense + la carte. Tout le contenu est déjà résolu côté serveur

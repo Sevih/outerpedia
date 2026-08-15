@@ -33,7 +33,7 @@ export interface StoryGuideContent {
  * RENDU PARTAGÉ d'un guide de STAGE D'HISTOIRE — intro, boss aux deux modes
  * (Story Normal / Story Hard), conseils, personnages recommandés.
  *
- * Les 20 guides adventure de la V2 étaient ISOMORPHES : aucun n'avait de section
+ * Les 20 anciens guides adventure étaient ISOMORPHES : aucun n'avait de section
  * en propre, seul variait le NOMBRE de blocs. Ils vivaient pourtant en 20 TSX
  * qui recopiaient chacun la même mécanique — et surtout, cinq d'entre eux
  * câblaient à la main les comparses du boss (Sterope, Maxie, Roxie, Vlada) dans

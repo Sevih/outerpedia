@@ -1,13 +1,13 @@
 /**
  * BANDEAU d'annonce des événements, sous le header de toutes les pages
- * (portage V2) : les événements EN COURS avec leur échéance ou leur jalon
+ * (porté tel quel) : les événements EN COURS avec leur échéance ou leur jalon
  * courant, puis ceux À VENIR. Aucun événement à annoncer = rien du tout.
  *
  * Composant SERVEUR : la donnée est résolue au rendu, rien n'arrive après
  * l'hydratation — un bandeau qui apparaîtrait côté client décalerait toute la
  * page vers le bas (CLS).
  *
- * Le GIF « event » de la V2 n'est PAS porté : 3,5 Mo d'animation chargés sur
+ * L'ancien GIF « event » n'est PAS porté : 3,5 Mo d'animation chargés sur
  * CHAQUE page du wiki, pour un bandeau que le style suffit à faire remarquer.
  */
 import type { Route } from 'next';
@@ -37,7 +37,7 @@ export async function EventBanner({ lang }: { lang: Lang }) {
               {t(`tools.event.status.${e.status}`)}
             </span>
             {/* Teaser : la donnée n'a pas envoyé le titre — on n'annonce que la
-                famille d'événement, comme la V2 (le reste est la surprise). */}
+                famille d'événement, inchangé (le reste est la surprise). */}
             <span
               className={`text-sm font-medium ${e.teased ? 'text-content-muted italic' : 'text-content-strong'}`}
             >

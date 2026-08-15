@@ -16,7 +16,7 @@ export interface LanguageSwitcherStrings {
 }
 
 /**
- * Drapeau SVG en <img> (mêmes assets que la V2, servis par le pipeline
+ * Drapeau SVG en <img> (mêmes assets qu'avant, servis par le pipeline
  * d'images) — les emojis drapeaux ne rendent pas sur Chrome/Windows.
  */
 function FlagIcon({ code, className = 'h-3.5 w-5' }: { code: string; className?: string }) {
@@ -35,7 +35,7 @@ function FlagIcon({ code, className = 'h-3.5 w-5' }: { code: string; className?:
 type Variant = 'desktop' | 'mobile-chips';
 
 /**
- * Sélecteur de langue (structure V2, tokens V3) : bouton drapeau + abréviation
+ * Sélecteur de langue (structure héritée, tokens actuels) : bouton drapeau + abréviation
  * ouvrant une liste avec badge officiel/communautaire et note de repli, ou
  * variante `mobile-chips` (rangée de puces, drawer mobile).
  *
@@ -60,7 +60,7 @@ export function LanguageSwitcher({
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
-  // Fermeture au clic extérieur + Échap (comme la V2).
+  // Fermeture au clic extérieur + Échap (inchangé).
   useEffect(() => {
     if (!open) return;
     const onDocClick = (e: MouseEvent) => {

@@ -47,7 +47,7 @@ type GuideRecommended = Array<{
  * hauts) : l'équipe des stages 1-10 n'est pas celle des stages 11-13. La plage
  * se lit sur `difficulty.order` (donnée du jeu). Ces équipes ont leur PROPRE
  * sélecteur à onglets (une plage par onglet) — deux compositions à comparer,
- * indépendantes de la glissière de stage : c'est le comportement V2.
+ * indépendantes de la glissière de stage : comportement conservé.
  */
 interface GuideTeams {
   buckets: Array<{
@@ -220,7 +220,7 @@ export async function StagedBossGuide({ lang, guide }: GuideContentProps) {
       </p>
 
       {/* La sélection ouvre sur le stage le plus DUR : c'est celui pour lequel
-          le guide est écrit (la V2 ne montrait même que celui-là). */}
+          le guide est écrit (on ne montrait même que celui-là). */}
       <EncounterSelection count={encounters.length} defaultIndex={encounters.length - 1}>
         <div className="space-y-6">
           {/* UNE carte par combattant DISTINCT, visible sur les stages où son
@@ -301,7 +301,7 @@ export async function StagedBossGuide({ lang, guide }: GuideContentProps) {
             />
           )}
 
-          {/* ÉQUIPES par PLAGE de stages — leur PROPRE sélecteur, comme en V2.
+          {/* ÉQUIPES par PLAGE de stages — leur PROPRE sélecteur, inchangé.
               Deux compositions à COMPARER (early game vs stages durs) : les
               accrocher à la glissière de stage n'en montrerait qu'une à la fois
               et forcerait à déplacer tout le reste (boss, loot) pour voir

@@ -2,7 +2,7 @@
  * Blocs du guide « Premium & Limited » : cibles PvE/PvP, table d'impact par
  * étoile, sweetspots de transcendance. Les NOTES (cibles, impact) sont
  * éditoriales ; les sweetspots DÉRIVENT des paliers officiels du jeu
- * (char-progression) — la V2 rechargeait ces textes côté client par perso.
+ * (char-progression) — ces textes étaient rechargés côté client par perso.
  */
 import type { Character } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
@@ -25,7 +25,7 @@ function StarRow({ count, size = 14 }: { count: number; size?: number }) {
 
 /**
  * Valeur de cible éditoriale → étoiles (« 4 to 5 », « Any »,
- * « 5 (support) 6 (dps) ») — même découpage que la V2 : chaque nombre devient
+ * « 5 (support) 6 (dps) ») — découpage inchangé : chaque nombre devient
  * une rangée d'étoiles, le texte restant est rendu tel quel.
  */
 function TargetDisplay({ value }: { value: string }) {

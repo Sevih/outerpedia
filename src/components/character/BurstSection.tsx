@@ -9,7 +9,7 @@ export interface BurstCard {
 }
 
 /**
- * Section Burst (portage V2) : les 3 cartes du jeu (IG_Button_Burst_0X,
+ * Section Burst (portée telle quelle) : les 3 cartes du jeu (IG_Button_Burst_0X,
  * ratio 220/310), coût AP en haut à droite, texte d'effet dans la zone basse.
  * Composant SERVEUR — les effets arrivent pré-rendus.
  * Rappel jeu : burst 1+2 dès l'obtention, burst 3 à la transcendance 5★.

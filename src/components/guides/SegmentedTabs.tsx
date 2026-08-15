@@ -40,9 +40,9 @@ export function SegmentedTabs({
   /**
    * Style des boutons : `pill` (segmenté compact, défaut), `boss` (boutons
    * riches, portrait + nom + élément, surbrillance en anneau — le sélecteur de
-   * sous-boss façon V2), `icon` (juste l'icône, anneau doré sur l'actif — les
+   * sous-boss), `icon` (juste l'icône, anneau doré sur l'actif — les
    * onglets de compétences en mode compact) ou `game` (onglets « jeu » centrés,
-   * glow doré sur l'actif — calqués sur les Tabs V2).
+   * glow doré sur l'actif — calqués sur les anciens Tabs).
    */
   variant?: 'pill' | 'boss' | 'icon' | 'game';
 }) {
@@ -94,7 +94,7 @@ export function SegmentedTabs({
       return `rounded-lg p-0.5 transition ${
         isActive ? 'ring-accent ring-2' : 'cursor-pointer opacity-50 hover:opacity-100'
       }`;
-    // `game` : onglets centrés façon V2 — visuel partagé (cf. ui/game-tab).
+    // `game` : onglets centrés — visuel partagé (cf. ui/game-tab).
     if (variant === 'game') return gameTabClass(isActive);
     return `flex items-center gap-1.5 rounded-md px-3 py-1 text-sm font-semibold transition-colors ${
       isActive ? 'bg-accent text-accent-fg' : 'text-content hover:bg-surface-raised cursor-pointer'

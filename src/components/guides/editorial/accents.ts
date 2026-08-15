@@ -1,6 +1,6 @@
 /**
  * Accents des PRIMITIVES ÉDITORIALES (QACard, Callout, TocBar…) — la palette à
- * 6 teintes du redesign FAQ de la V2, exprimée en utilitaires Tailwind.
+ * 6 teintes du redesign FAQ, exprimées en utilitaires Tailwind.
  *
  * Distincte de `guide-accents.ts` (UNE couleur par CATÉGORIE, pour les listes
  * et cartes de guides) : ici l'accent est un choix ÉDITORIAL local — chaque
@@ -11,7 +11,7 @@
  * écrites EN LITTÉRAL — jamais de concaténation.
  *
  * Les 6 teintes vivent en TOKENS `--ed-<teinte>` (base -400, cf. globals.css) ;
- * le halo des puces (`dot`) référence `--ed-<teinte>-glow` (rgba V2) en var brute
+ * le halo des puces (`dot`) référence `--ed-<teinte>-glow` (rgba) en var brute
  * dans le `shadow-[…]`. L'opacité des fonds/bords reste ici, côté classe.
  */
 

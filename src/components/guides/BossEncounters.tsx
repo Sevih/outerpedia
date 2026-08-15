@@ -167,7 +167,7 @@ export async function BossEncounters({
 
   return (
     // Difficulté ouverte au premier rendu = la PLUS DURE : celle pour laquelle
-    // les guides sont écrits (la V2 ne montrait même que celle-là).
+    // les guides sont écrits (on ne montrait même que celle-là avant).
     <EncounterSelection count={encounters.length} defaultIndex={encounters.length - 1}>
       <div className="space-y-4">
         {encounters.length > 1 && (

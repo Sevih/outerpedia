@@ -16,7 +16,7 @@ export interface FullArt {
 }
 
 /**
- * Visionneuse d'art en pied (portage V2) : image simple s'il n'y a qu'un art,
+ * Visionneuse d'art en pied (portée telle quelle) : image simple s'il n'y a qu'un art,
  * carrousel swipe (flèches + points + légende) dès qu'il y a des skins — avec,
  * sous les points, le bouton « utiliser ce portrait » qui pose le skin courant
  * dans les réglages du site (`site-settings`, partagé avec la modale du header).

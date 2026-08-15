@@ -8,13 +8,13 @@ import { MonadEndless, Tile, type EndlessDepth, type RouteTile } from './MonadGa
 import type { CategoryViewProps } from './types';
 
 /**
- * Vue MONAD GATE (visuel V2) : deux sections — les profondeurs STORY (1-5) en
+ * Vue MONAD GATE : deux sections — les profondeurs STORY (1-5) en
  * cartes fixes, puis les profondeurs ENDLESS (6-10) derrière un sélecteur.
  *
  * Chaque guide DÉCLARE sa `depth` et sa `route` (requis au scan) et, si sa page
  * expose plusieurs layouts de map, son nombre de `variants`. La vue en tire la
  * section, le sélecteur, la fusion des routes d'une profondeur et l'ordre — là
- * où la V2 lisait la profondeur dans le SLUG (`depth6-route2`) et listait en dur
+ * où la profondeur se lisait dans le SLUG (`depth6-route2`), listée en dur
  * les profondeurs endless et celles à variantes (`VARIANT_DEPTHS = [10]`).
  */
 

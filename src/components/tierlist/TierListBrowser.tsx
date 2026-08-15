@@ -107,12 +107,12 @@ export interface TierListBrowserLabels {
 const enc = (arr: (string | number)[]) => (arr.length ? arr.join(',') : undefined);
 
 /**
- * Tier list par personnage (portage V2 — PvE/PvP/EE) : barre de filtres
+ * Tier list par personnage (portée telle quelle — PvE/PvP/EE) : barre de filtres
  * (recherche, élément, classe, rareté, rôle si fourni), légende optionnelle
  * (outils EE), sélecteur de transcendance si `withTranscend` (PvE : le
  * rang/rôle d'un perso peut changer avec ses étoiles — repli sur le rang 6★),
  * rangées S→E. Filtres synchronisés à l'URL en paramètres à plat (idiome
- * `CharactersBrowser`, pas le `?z=` compressé de la V2).
+ * `CharactersBrowser`, pas le `?z=` compressé des filtres).
  *
  * LES PORTRAITS SONT RENDUS AU PALIER QUE LA LISTE SUPPOSE, et c'est le rôle de
  * `atStep`/`step` : PvE le laisse choisir, PvP le FIXE au 6★ que son avertisse-

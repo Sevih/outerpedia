@@ -20,7 +20,7 @@ export interface FlagshipTopHero {
 /**
  * Carte phare PvE / PvP : panneau d'art (dégradé radial d'accent + texture rayée
  * + grand glyphe « S » en coin) avec CLUSTER DE PORTRAITS top-tier sur deux
- * rangées (parité V2), bloc titre et pastille CTA. Sans `topHeroes`, le glyphe S
+ * rangées (inchangé), bloc titre et pastille CTA. Sans `topHeroes`, le glyphe S
  * se centre seul (dégradé propre).
  */
 export function FlagshipCard({

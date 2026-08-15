@@ -4,14 +4,14 @@ import * as HoverCard from '@radix-ui/react-hover-card';
 import { useState, useCallback, useEffect, useRef } from 'react';
 
 /**
- * Tooltip inline partagé (Radix HoverCard) — portage V2.
+ * Tooltip inline partagé (Radix HoverCard) — porté tel quel.
  * Desktop : survol. Mobile : tap pour ouvrir, tap ailleurs pour fermer.
  */
 export function InlineTooltip({
   children,
   content,
   // Fond volontairement SOMBRE (lisibilité au survol) : la surface overlay est
-  // le token le plus proche du neutral-800 historique de la V2.
+  // le token le plus proche du neutral-800 historique.
   bg = 'bg-surface-overlay',
 }: {
   children: React.ReactNode;

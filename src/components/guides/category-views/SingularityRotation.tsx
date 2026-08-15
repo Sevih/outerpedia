@@ -24,13 +24,13 @@ import type { CategoryViewProps } from './types';
  * ACTIF AUJOURD'HUI. Les guides s'y accrochent par le monstre combattu
  * (`meta.bossId`) — aucun mapping manuel.
  *
- * Écarts ASSUMÉS avec la V2, tous des corrections :
+ * Écarts ASSUMÉS avec l'ancienne vue, tous des corrections :
  *  - un boss PAR JOUR (mer→sam), pas « trois du mer au ven + un le samedi » ;
  *  - la section ne DISPARAÎT PAS du dimanche au mardi (elle bascule sur la
  *    rotation à venir) ;
  *  - pas de mise en avant « boss du week-end » en ambre : ce concept n'existait
- *    que parce que le modèle de la V2 était faux ;
- *  - sur mobile, les trois autres jours restent VISIBLES (la V2 les masquait).
+ *    que parce que l'ancien modèle était faux ;
+ *  - sur mobile, les trois autres jours restent VISIBLES (ils étaient masqués).
  *
  * Le rendu dépend du JOUR → la route est purgée chaque nuit (`/api/revalidate`).
  */
@@ -215,7 +215,7 @@ function weekday(iso: string, lang: Lang): string {
   });
 }
 
-/** Identité du boss : élément + classe, en icônes encadrées (comme la V2). */
+/** Identité du boss : élément + classe, en icônes encadrées (inchangé). */
 function Identity({
   monster,
   size,

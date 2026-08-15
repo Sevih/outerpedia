@@ -4,7 +4,7 @@
  * Éditeur du NOM COURT D'AFFICHAGE d'un perso (admin, dev). Une saisie par langue
  * (en/jp/kr/zh/fr) — texte simple, pas de tag inline. Le nom COMPLET de la langue
  * sert de placeholder (repère) ; laisser vide = pas de nom court → le rendu
- * retombe sur le nom complet. Parité V2 (`name-aliases.json`).
+ * retombe sur le nom complet. Comportement conservé (`name-aliases.json`).
  */
 import { useState } from 'react';
 import type { LocalizedText } from '@contracts';

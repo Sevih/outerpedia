@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 
 /**
  * Diff MOT À MOT de deux textes, conscient des balises `<color>` du jeu.
- * Porté de l'admin V2, recâblé sur nos tokens sémantiques (danger/success) au
+ * Porté de l'ancien admin, recâblé sur nos tokens sémantiques (danger/success) au
  * lieu des couleurs Tailwind en dur. `existing` en rouge, `extracted` en vert.
  */
 

@@ -79,7 +79,7 @@ type TabKey = 'combat' | 'effects' | 'bonus' | 'tags';
  * Corps des filtres avancés (bandeau d'onglets + contenu) — partagé par la
  * sidebar xl et le drawer mobile. État d'onglet local ; l'état des filtres vit
  * chez le parent. Les onglets Effects/Bonus n'apparaissent que si leur donnée
- * est présente (data-gated — pas d'onglet vide). Portage V2 sur tokens V3.
+ * est présente (data-gated — pas d'onglet vide). Porté sur les tokens actuels.
  */
 export function AdvancedFiltersPanel(props: AdvancedFiltersPanelProps) {
   const {
@@ -306,7 +306,7 @@ export function AdvancedFiltersPanel(props: AdvancedFiltersPanelProps) {
 
 // ── Sous-composants ──────────────────────────────────────────────────────────
 
-/** Ne garde la famille `unique` que si le toggle est activé (parité V2). */
+/** Ne garde la famille `unique` que si le toggle est activé (inchangé). */
 function visibleGroups(groups: EffectGroup[], showUnique: boolean): EffectGroup[] {
   return showUnique ? groups : groups.filter((g) => g.category !== 'unique');
 }

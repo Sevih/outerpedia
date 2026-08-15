@@ -10,7 +10,7 @@ import { fitsOnTwoLines } from '@/components/character/CharacterPortrait';
  *
  * Le rendu du portrait lui-même n'est PLUS ici : il vit dans `Portrait`, transcrit
  * du prefab `CUICharacterMainPageScrollCell`. Ce module portait avant 250 lignes de
- * mesures relevées à l'œil en V2 — trois gabarits fixes, chacun avec ses positions
+ * mesures relevées à l'œil — trois gabarits fixes, chacun avec ses positions
  * d'étoiles, d'élément, de classe et ses corps de texte — et ces nombres
  * DIVERGEAIENT du jeu : ratio de cadre faux (0,5156 / 0,5208 / 0,5195 au lieu de
  * 0,5233) rattrapé par un `object-cover` qui rognait l'art, dégradé du bas inventé,
@@ -69,7 +69,7 @@ import { fitsOnTwoLines } from '@/components/character/CharacterPortrait';
 /**
  * Les largeurs du barème `default`, EXPORTÉES — la scène du carrousel d'équipe doit
  * chausser la carte au pixel près (cf. `TeamSlotCarousel`) et les recopiait ; la
- * copie a survécu à deux refontes de la carte et pointait encore les cotes de la V2.
+ * copie a survécu à deux refontes de la carte et pointait encore de vieilles cotes.
  */
 export const CARD_WIDTH = 'w-20 sm:w-26 lg:w-32 min-[1440px]:w-38';
 
@@ -123,7 +123,7 @@ export interface CharacterCardProps {
   name: string;
   /** Le TITRE (« Core Fusion », le nickname des 21 persos qui l'affichent). */
   prefix?: string | null;
-  /** Slugs V3 (fire/striker…) — `Portrait` capitalise pour ses sprites. */
+  /** Slugs canoniques (fire/striker…) — `Portrait` capitalise pour ses sprites. */
   element?: string;
   classType?: string;
   /** BasicStar 1..3 : avec `transcendence`, décide du rail d'étoiles. */

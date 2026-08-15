@@ -44,7 +44,7 @@ const clock = {
 };
 
 /**
- * Format NUMÉRIQUE (`4:12:03`, `61:24:51`), volontairement sans unités : la V2
+ * Format NUMÉRIQUE (`4:12:03`, `61:24:51`), volontairement sans unités : on
  * écrivait « 4h 12m 3s » avec des suffixes anglais EN DUR, jamais traduits. Des
  * chiffres se lisent dans les cinq langues.
  *

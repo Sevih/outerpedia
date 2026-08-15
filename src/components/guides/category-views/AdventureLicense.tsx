@@ -7,7 +7,7 @@ import { LicenseTabs, type LicenseCard } from './LicenseTabs';
 import type { CategoryViewProps } from './types';
 
 /**
- * Vue ADVENTURE LICENSE (visuel V2) : galerie de cartes de licence hautes
+ * Vue ADVENTURE LICENSE : galerie de cartes de licence hautes
  * (l'icône du guide EST la carte du jeu, 150×260), en deux onglets — Weekly et
  * Promotion. Les cartes de promotion sont des SPOILERS : face verrouillée
  * (`*_Lock`), un clic la retourne sur la face révélée (`*_Open`) qui mène au
@@ -15,8 +15,8 @@ import type { CategoryViewProps } from './types';
  *
  * Le partage Weekly/Promotion se lit sur l'ICÔNE (`*_Lock` = promotion) : le
  * même signal qui fournit la paire de faces — pas une table de slugs comme en
- * V2 (`promote-*` en dur dans le composant). Tri par `meta.order` quand il
- * existe, sinon alphabétique (titre EN) comme en V2 — contenu permanent, sans
+ * autrefois (`promote-*` en dur dans le composant). Tri par `meta.order` quand
+ * il existe, sinon alphabétique (titre EN), inchangé — contenu permanent, sans
  * calendrier qui l'ordonnerait.
  */
 export default async function AdventureLicense({ lang, guides }: CategoryViewProps) {

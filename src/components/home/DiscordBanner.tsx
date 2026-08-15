@@ -6,7 +6,7 @@ import { DISCORD_INVITE_CODE, DISCORD_INVITE_URL } from '@/lib/discord';
 /**
  * Encart Discord — lien d'invitation + compteurs membres/en-ligne récupérés via
  * l'API d'invitation (revalidés 1 h ; absents = section sans compteurs). Icône
- * `react-icons` (pas d'asset image dédié en V3). Couleur de marque Discord en
+ * `react-icons` (pas d'asset image dédié). Couleur de marque Discord en
  * valeur littérale (hors palette sémantique, assumé).
  */
 

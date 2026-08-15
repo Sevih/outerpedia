@@ -40,7 +40,7 @@ export function videoUrl(v: EventVideo): string {
 /**
  * Vignette de la vidéo, ou `null` quand la plateforme n'en expose pas d'URL
  * stable (Twitch/Bilibili : leur API demande une clé — la carte retombe alors
- * sur le nom de la plateforme, comme en V2).
+ * sur le nom de la plateforme, inchangé).
  */
 export function videoThumbnail(v: EventVideo): string | null {
   return v.platform === 'youtube' ? `https://img.youtube.com/vi/${v.id}/hqdefault.jpg` : null;

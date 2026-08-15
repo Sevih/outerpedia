@@ -20,7 +20,7 @@ export interface SynergyGroupView {
 }
 
 /**
- * Synergies (portage V2) : une carte par groupe de partenaires — portraits
+ * Synergies (portées telles quelles) : une carte par groupe de partenaires — portraits
  * cliquables + raison (tags inline résolus côté serveur).
  */
 export function SynergiesSection({ groups }: { groups: SynergyGroupView[] }) {

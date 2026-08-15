@@ -58,10 +58,10 @@ function GearIcon({ size = 16 }: { size?: number }) {
 }
 
 /**
- * En-tête interactif (structure V2, tokens V3) : logo + badges de version,
+ * En-tête interactif (structure héritée, tokens actuels) : logo + badges de version,
  * nav à icônes de jeu (libellé court < xl, long ≥ xl), dropdown Guides au
  * survol, collapse au scroll (hystérésis), drawer mobile. L'emplacement de la
- * RECHERCHE (trigger + Ctrl+K de la V2) est réservé — cf. TODO
+ * RECHERCHE (trigger + Ctrl+K historique) est réservé — cf. TODO
  * « Pages manquantes ».
  */
 export function HeaderClient({

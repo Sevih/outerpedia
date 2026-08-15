@@ -15,7 +15,7 @@ export interface InlineItem {
 }
 
 /**
- * Badge d'item partagé (port de l'ItemInline V2) : tuile cadre de rareté +
+ * Badge d'item partagé (port de l'ancien ItemInline) : tuile cadre de rareté +
  * icône, nom souligné optionnel, tooltip nom + description au survol/tap.
  * LA brique inline des items — matériaux d'ascension, gifts, pièces de
  * rappel, tags `{I-I/…}` / `{AS/…}` du parse-text… (une seule implémentation).

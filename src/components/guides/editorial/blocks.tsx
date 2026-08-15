@@ -1,6 +1,6 @@
 /**
  * PRIMITIVES ÉDITORIALES des guides — les briques de mise en page que chaque
- * guide V2 réécrivait dans son `helpers.tsx` (cf. redesign FAQ), mutualisées.
+ * chaque guide réécrivait dans son `helpers.tsx` (cf. redesign FAQ), mutualisées.
  *
  * Composants SERVEUR, purs : ils reçoivent des chaînes/nœuds DÉJÀ localisés
  * (l'appelant fait le `lRec`/`parseText`) et une teinte de `accents.ts`.

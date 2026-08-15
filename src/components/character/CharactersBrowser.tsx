@@ -146,8 +146,8 @@ export function CharactersBrowser({
       setter((prev) => (prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]));
 
   // ── Hydratation depuis l'URL (au montage) ──
-  // `?z=` compact (codec — liens V2 inclus) d'abord ; à défaut, les params en
-  // clair (`?el=fire&…`) que la V3 a écrits entre le portage de la page et le
+  // `?z=` compact (codec — anciens liens inclus) d'abord ; à défaut, les params en
+  // clair (`?el=fire&…`) écrits entre le portage de la page et le
   // retour au codec (21/07) — des liens de cette période circulent peut-être.
   useEffect(() => {
     if (hydrated.current) return;
@@ -177,7 +177,7 @@ export function CharactersBrowser({
     setShowUnique(decoded ? decoded.showUnique : p.get('uniq') === '1');
     setTeamBonuses(decoded ? decoded.teamBonuses : list('tb'));
     // Le tri voyage en clair, HORS du codec : `?z=` est un contrat public figé
-    // partagé avec la V2, on n'y ajoute pas de champ pour un état d'affichage.
+    // un contrat public déjà en circulation : pas de champ pour un état d'affichage.
     const s = p.get('sort');
     setSort(s === 'release' || s === 'release-asc' ? 'release' : 'name');
     setReleaseDesc(s !== 'release-asc');
@@ -185,7 +185,7 @@ export function CharactersBrowser({
 
   // ── Sync filtres → URL (débattu) ──
   // La barre d'adresse EST le lien de partage : un seul `?z=` compact (l'URL
-  // reste courte quel que soit le nombre de facettes), format V2 (filter-codec).
+  // reste courte quel que soit le nombre de facettes), format hérité (filter-codec).
   useEffect(() => {
     if (!hydrated.current) return;
     const z = encodeFilters({
@@ -248,7 +248,7 @@ export function CharactersBrowser({
     const roS = new Set(role);
 
     // Un effet appliqué par le perso, RESTREINT aux sources sélectionnées le cas
-    // échéant (parité V2 `charHasEffectFromSources`). Clés déjà canoniques.
+    // échéant (règle historique `charHasEffectFromSources`). Clés déjà canoniques.
     const hasEffect = (row: CharacterRow, key: string, side: 'buff' | 'debuff') => {
       if (!sources.length) return (row[side] ?? []).includes(key);
       const ebs = row.effectsBySource;
@@ -271,7 +271,7 @@ export function CharactersBrowser({
             : tags.some((t) => row.tags.includes(t));
         if (!ok) return false;
       }
-      // Effets : buffs et debuffs combinés selon la logique ET/OU (parité V2).
+      // Effets : buffs et debuffs combinés selon la logique ET/OU (inchangé).
       if (buffs.length || debuffs.length) {
         const hb = buffs.length
           ? effectLogic === 'AND'

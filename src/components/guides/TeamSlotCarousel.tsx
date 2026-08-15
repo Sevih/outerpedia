@@ -14,9 +14,9 @@ import { onTabListKeyDown } from '@/lib/tablist';
  * ne disait qu'on n'en joue qu'UN à la fois. Le carrousel, lui, le dit : une
  * carte devant, les autres derrière.
  *
- * Cylindre 3D comme en V2, mais SANS keen-slider : la bibliothèque n'apportait
+ * Cylindre 3D inchangé, mais SANS keen-slider : la bibliothèque n'apportait
  * que la physique du glissé, qui tient ici en un `Pointer Events` — souris et
- * tactile par le même chemin. La V3 reste à quatre dépendances.
+ * tactile par le même chemin. Le projet reste à quatre dépendances.
  *
  * Les cartes sont rendues en amont et passées en enfants : ce composant ne fait
  * que tourner le cylindre.
@@ -39,7 +39,7 @@ import { onTabListKeyDown } from '@/lib/tablist';
  * nombre à tenir à jour — et la hauteur suit toute seule les 34 px que le nom prend
  * sous la carte tant qu'il n'est pas passé dans le cadre.
  *
- * `perspective` est COURTE (comme en V2) : c'est elle qui écrase les cartes de
+ * `perspective` est COURTE (inchangée) : c'est elle qui écrase les cartes de
  * derrière et les tasse au lieu de les laisser s'étaler sur les côtés. Elle est
  * maintenant UNIQUE — c'est la valeur que les deux grandes scènes utilisaient déjà,
  * et sur la petite elle retrouve à 5 % près le rapport perspective/largeur de
@@ -53,7 +53,7 @@ const PERSPECTIVE_PX = 150;
  * À l'angle θ, une carte voisine se projette en `x = r·sin θ` : plus le rayon est
  * grand, plus elle part sur le CÔTÉ, jusqu'à empiéter sur le poste d'à côté. En la
  * rapprochant de l'axe, elle s'en va DERRIÈRE plutôt qu'à côté — ce qui est le
- * propre d'un carrousel. Une largeur de carte, donc, et non les 1,4 de la V2. Le
+ * propre d'un carrousel. Une largeur de carte, donc, et non les 1,4 d'avant. Le
  * terme en `count` recule un peu la roue quand les options se pressent, pour qu'à
  * huit cartes elles ne se traversent pas.
  *

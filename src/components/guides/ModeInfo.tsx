@@ -6,7 +6,7 @@ import type { GuideCategoryInfo } from '@/lib/data/guide-categories';
  * Bloc « comment marche ce mode », rendu à partir de la DONNÉE de la catégorie
  * (`GUIDE_CATEGORIES[…].info`). Un mode qui veut le sien remplit un champ ; il
  * n'y a pas de composant à écrire par mode — c'est précisément ce que faisait la
- * V2, dont le seul bloc existant était une fonction non exportée enterrée dans
+ * avant, dont le seul bloc existant était une fonction non exportée enterrée dans
  * le fichier de liste de Singularity.
  */
 export function ModeInfo({ info, lang }: { info: GuideCategoryInfo; lang: Lang }) {

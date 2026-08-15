@@ -3,14 +3,14 @@
 import { img } from '@/lib/images';
 
 /**
- * Vocabulaire visuel des filtres de `/characters` (portage V2 réhabillé sur les
- * tokens/sprites V3). Les couleurs vives sont des COULEURS DE DONNÉE (par
+ * Vocabulaire visuel des filtres de `/characters` (porté puis réhabillé sur les
+ * nos tokens/sprites). Les couleurs vives sont des COULEURS DE DONNÉE (par
  * élément/role/rareté) posées en style inline pour composer des halos
  * `${hex}22` — mêmes teintes que les tokens `--fire`… ; l'opacité en suffixe hex
- * interdit une `var()`, d'où la table locale (même choix que `nodeStyles` V2).
+ * interdit une `var()`, d'où la table locale (même choix que l'ancien `nodeStyles`).
  */
 
-/** Teinte par élément (slug V3) — égale aux tokens `--fire`… */
+/** Teinte par élément (par slug) — égale aux tokens `--fire`… */
 export const ELEMENT_HEX: Record<string, string> = {
   fire: '#ff6b6b',
   water: '#4dabf7',

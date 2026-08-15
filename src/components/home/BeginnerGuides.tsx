@@ -5,7 +5,7 @@ import type { TranslationKey } from '@/i18n';
 import { localePath } from '@/lib/navigation';
 
 /**
- * Guides débutants — liste fixe des 5 entrées de `general-guides` (contrat V2).
+ * Guides débutants — liste fixe des 5 entrées de `general-guides` (inchangée).
  * Certaines cibles peuvent être en cours de portage : le lien existe, la page
  * s'allume quand le guide atterrit. Section purement statique (clés `home.beginner.*`).
  */

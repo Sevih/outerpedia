@@ -1,6 +1,6 @@
 /**
- * Accents par CATÉGORIE d'outils (portage V2). Hors `guides/**`, les couleurs
- * vives Tailwind sont autorisées : on reprend la palette V2 telle quelle. Seuls
+ * Accents par CATÉGORIE d'outils (inchangés). Hors `guides/**`, les couleurs
+ * vives Tailwind sont autorisées : on reprend la palette telle quelle. Seuls
  * les neutres (fonds/bordures/textes) passent aux tokens sémantiques dans les
  * composants. Tailwind v4 exige des classes LITTÉRALES — aucune concaténation.
  */

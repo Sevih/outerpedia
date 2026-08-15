@@ -2,7 +2,7 @@
  * Guides connexes en fin de guide — cartes icône + titre + description.
  *
  * Les métadonnées viennent du DATA LAYER des guides (source unique : le scan
- * de `_contents/`), là où la V2 relisait `_index.json` à la main. Une référence
+ * de `_contents/`), là où `_index.json` était relu à la main. Une référence
  * (catégorie, slug) inconnue CASSE le build : un guide renommé ne laisse jamais
  * une carte morte.
  */

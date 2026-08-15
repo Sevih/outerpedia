@@ -1,6 +1,6 @@
 /**
  * Badge de statut d'un outil (glyphe + libellé mono). `coming-soon` neutre,
- * `hidden` (DEV) ambre, `unlisted` bleu. Portage V2 (neutres → tokens).
+ * `hidden` (DEV) ambre, `unlisted` bleu. Porté tel quel (neutres → tokens).
  */
 export type ToolBadgeStatus = 'coming-soon' | 'hidden' | 'unlisted';
 

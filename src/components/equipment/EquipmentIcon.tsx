@@ -6,7 +6,7 @@ import { img } from '@/lib/images';
  *
  * État « live » optionnel (page détail) : badge +N (enhancement) en bas à
  * droite, badge T<n> (breakthrough) en bas à gauche, étoiles/cadre Singularity
- * quand l'item est ascendé — apparence du jeu, comme en V2.
+ * quand l'item est ascendé — apparence du jeu, inchangée.
  */
 export function EquipmentIcon({
   icon,
@@ -30,7 +30,7 @@ export function EquipmentIcon({
   stars?: number;
   /** Icône d'effet (passif) posée en haut à droite (namespace images/equipment). */
   overlayIcon?: string;
-  /** Slug de classe : icône posée à droite, sous l'icône d'effet (comme en jeu/V2). */
+  /** Slug de classe : icône posée à droite, sous l'icône d'effet (comme en jeu). */
   classType?: string;
   /** URL d'image complète (portraits EE) — remplace `icon`. */
   src?: string;

@@ -15,11 +15,11 @@ export interface LicenseCard {
   openSrc?: string;
 }
 
-/** Largeur de carte : 3 par rangée en mobile, 7 en desktop (portage V2). */
+/** Largeur de carte : 3 par rangée en mobile, 7 en desktop (inchangé). */
 const CARD_W = 'w-[calc((100%-2*1rem)/3)] sm:w-[calc((100%-6*2rem)/7)]';
 
 /**
- * Onglets Weekly / Promotion + galerie de cartes (portage V2). L'état client
+ * Onglets Weekly / Promotion + galerie de cartes (porté tel quel). L'état client
  * ne porte que l'onglet actif et les cartes déjà révélées — le contenu vient
  * préparé du serveur.
  */

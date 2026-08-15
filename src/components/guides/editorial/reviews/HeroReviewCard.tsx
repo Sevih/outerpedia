@@ -1,7 +1,7 @@
 /**
  * Carte de review d'un héros (guides « Premium & Limited », « Core Fusion ») —
- * l'en-tête V2 (icône ATB + nom lié + badge de tag + élément/classe) sur les
- * primitives V3. Toute l'identité visuelle DÉRIVE de la fiche perso : la V2
+ * l'en-tête historique (icône ATB + nom lié + badge de tag + élément/classe) sur
+ * les primitives actuelles. Toute l'identité visuelle DÉRIVE de la fiche perso : on
  * rechargeait ces infos côté client par nom (character-client).
  */
 import Link from 'next/link';

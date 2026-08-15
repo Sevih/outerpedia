@@ -7,7 +7,7 @@ import type { CategoryViewProps } from './types';
 /**
  * Vue par DÉFAUT : grille de cartes. Toute catégorie sans vue dédiée l'obtient
  * automatiquement — une catégorie n'est jamais vide « par oubli d'enregistrement »
- * (en V2, une vue non enregistrée dans le registre donnait une page nue).
+ * (avant, une vue non enregistrée dans le registre donnait une page nue).
  */
 export default async function DefaultGrid({ lang, guides }: CategoryViewProps) {
   const t = await getT(lang);

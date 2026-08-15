@@ -35,7 +35,7 @@ function qty(min: number, max: number): string {
 
 /**
  * Agrège et résout les récompenses d'une route : par clear (nœuds `final`) et
- * bonus de premier clear (nœuds `tending`). Comme la V2, seuls les items
+ * bonus de premier clear (nœuds `tending`). Comme avant, seuls les items
  * `RIT_ITEM` sont détaillés, plus l'or et le Free Ether.
  */
 function resolveRewards(route: MonadRouteFile, lang: Lang): RewardDisplay {

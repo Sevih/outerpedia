@@ -30,7 +30,7 @@ export interface BossGuideContent {
  * RENDU PARTAGÉ d'un guide de boss — intro, panneau du boss, conseils, équipes,
  * vidéos.
  *
- * Les 13 guides Dimensional Singularity de la V2 étaient ISOMORPHES : zéro
+ * Les 13 anciens guides Dimensional Singularity étaient ISOMORPHES : zéro
  * section propre à l'un d'eux, seul le NOMBRE de blocs variait. Ils existaient
  * pourtant en 13 fichiers TSX quasi identiques — d'où les dérives (titres
  * d'équipe divergents, id du boss écrit trois fois par fichier). Ici le rendu

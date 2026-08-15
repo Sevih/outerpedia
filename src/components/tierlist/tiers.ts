@@ -1,5 +1,5 @@
 /**
- * Vocabulaire des tiers S→E (portage V2 `_shared/tierlist.ts`) : ordre canonique,
+ * Vocabulaire des tiers S→E (porté de `_shared/tierlist.ts`) : ordre canonique,
  * accents visuels des rangées et comparateur de tri par rang. Partagé entre les
  * outils tier list (PvE/PvP) et leur JSON-LD ItemList.
  */
@@ -8,7 +8,7 @@ export type Tier = (typeof TIERS)[number];
 
 /**
  * Dégradé + bordure d'une rangée de tier (classes littérales Tailwind — couleurs
- * vives autorisées hors `guides/**`, parité V2).
+ * vives autorisées hors `guides/**`, inchangé).
  */
 export const TIER_COLORS: Record<Tier, string> = {
   S: 'from-amber-500/30 to-amber-900/10 border-amber-500/50',

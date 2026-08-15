@@ -11,14 +11,14 @@ import { AdventureGrid, type SeasonSection, type StageCard } from './AdventureGr
 import type { CategoryViewProps } from './types';
 
 /**
- * Vue ADVENTURE (visuel V2) : une section par SAISON, une carte par stage guidé
+ * Vue ADVENTURE : une section par SAISON, une carte par stage guidé
  * — l'art de la zone en fond, le boss révélé à la demande (cf. `AdventureGrid`).
  *
  * Tout se lit dans le meta et la donnée du jeu. La saison et l'épisode viennent
  * d'`order` (exigé par la catégorie) — surtout PAS d'`encounters.season`, qui
  * numérote des blocs d'histoire et non les saisons du jeu (la S2 y vaut 2 pour
  * les épisodes 1-5 et 3 pour les 6-10). La ZONE vient du donjon le plus DUR de
- * `meta.dungeons` — celui pour lequel le guide est écrit. La V2 tenait la même
+ * `meta.dungeons` — celui pour lequel le guide est écrit. On tenait la même
  * page avec un `area_name.json` curé à la main et une carte boss générée dans un
  * `guide-boss-map.json` : deux fichiers qui doublonnaient une donnée que le jeu
  * nous donne déjà.

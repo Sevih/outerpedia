@@ -15,10 +15,10 @@ export interface ChainLevel extends CardLevel {
 }
 
 /**
- * Section Attaque en chaîne & Duo (portage V2 ChainDualSection) : une carte,
+ * Section Attaque en chaîne & Duo (portée telle quelle) : une carte,
  * icône de chaîne (élément + type), WGR / Dual WGR, sélecteur de niveau,
  * les deux moitiés de description (chaîne / duo) avec leurs chips, paliers.
- * V3 : les WGR viennent des VRAIES valeurs par niveau des skills strike/backup
+ * Désormais : les WGR viennent des VRAIES valeurs par niveau des skills strike/backup
  * (plus de comptage textuel), et les vars des trois skills sont fusionnées.
  */
 export function ChainDualSection({

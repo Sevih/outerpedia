@@ -30,7 +30,7 @@ export interface SeasonSection {
  * Les stages guidés, par saison — avec l'interrupteur à SPOILERS.
  *
  * Le nom d'un boss d'histoire est un spoiler d'intrigue : les cartes s'ouvrent
- * donc sur la zone seule, et le lecteur DEMANDE les boss. La V2 avait le même
+ * donc sur la zone seule, et le lecteur DEMANDE les boss. On avait le même
  * interrupteur, mais son libellé annonçait l'état au lieu de l'action (cartes
  * masquées → bouton « Spoiler-free ») : ici le bouton dit toujours ce qu'un clic
  * FERA. L'état ne vit que le temps de la visite — rien à retenir d'une page à
@@ -77,7 +77,7 @@ export function AdventureGrid({
 }
 
 /**
- * Carte d'un stage (visuel V2) : l'art de la zone en fond, l'épisode et la zone
+ * Carte d'un stage : l'art de la zone en fond, l'épisode et la zone
  * en haut, le boss en bas — lui seul dépend du spoiler. La carte garde sa taille
  * dans les deux états : révéler les boss ne doit pas faire sauter la grille sous
  * le curseur.

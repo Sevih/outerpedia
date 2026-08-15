@@ -2,13 +2,13 @@
  * REGISTRE des vues de catégorie de guides — point de dispatch UNIQUE.
  *
  * Une catégorie sans vue dédiée retombe sur `DefaultGrid` : ajouter une
- * catégorie donne toujours une page correcte, jamais une page nue (en V2, une
+ * catégorie donne toujours une page correcte, jamais une page nue (avant, une
  * vue non enregistrée dans le registre = liste vide, sans erreur).
  *
  * Une vue ne connaît QUE `{ lang, category, guides }`. Si elle a besoin d'autre
  * chose (palier, boss…), ça passe par un champ de `meta.json` validé au scan —
  * jamais par une table slug→valeur écrite en dur dans le composant, qui était
- * le vice de forme de toutes les vues V2.
+ * le vice de forme de toutes les anciennes vues.
  *
  * Dispatch en `switch` (et non en table) pour que les composants restent
  * STATIQUES : React interdit de fabriquer un composant pendant le rendu.
@@ -35,7 +35,7 @@ export default function CategoryView(props: CategoryViewProps) {
     case 'dimensional-singularity':
       return <SingularityRotation {...props} />;
 
-    // Modes à bannière : une seule vue, trois catégories. La V2 avait TROIS
+    // Modes à bannière : une seule vue, trois catégories. Il y avait TROIS
     // fichiers strictement identiques (GuildRaidList / WorldBossList /
     // JointChallengeList).
     case 'guild-raid':

@@ -1,8 +1,8 @@
 'use client';
 
 /**
- * Carte interactive d'une route Monad Gate (port du composant V2, réécrit sur
- * les primitives V3 : pas de contexte i18n — `lang` + les chaînes d'UI
+ * Carte interactive d'une route Monad Gate (port de l'ancien composant, réécrit sur
+ * nos primitives : pas de contexte i18n — `lang` + les chaînes d'UI
  * pré-résolues arrivent en props ; sprites via `img.monad` en `<img>` R2).
  *
  * La donnée (`nodes`/`edges`) est déjà localisable (chaque libellé est un
@@ -45,7 +45,7 @@ interface Props {
 /**
  * Nœud avec coordonnées d'écran dérivées : `x = col`, `y = -row` (la rangée
  * croît vers le BAS, comme dans le jeu — la donnée porte `col`/`row` 1-based, le
- * calcul de layout raisonne en x/y comme la V2).
+ * calcul de layout raisonne en x/y, inchangé).
  */
 type PositionedNode = MonadNode & { x: number; y: number };
 

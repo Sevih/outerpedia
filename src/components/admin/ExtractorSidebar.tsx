@@ -27,7 +27,7 @@ export interface ExtractorRow {
   /** Étoiles (rareté), si pertinent. */
   stars?: number;
   status?: 'new' | 'diff' | 'ok';
-  /** Compteur d'écarts (diff extraction, issues V2…), affiché sur le badge. */
+  /** Compteur d'écarts (diff extraction, anomalies…), affiché sur le badge. */
   count?: number;
   /** Petit glyphe accent après le statut (ex. « ✎ » = entité curée). */
   marker?: string;

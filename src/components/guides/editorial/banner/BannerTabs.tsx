@@ -16,7 +16,7 @@ export interface BannerTabDef {
 
 /**
  * Onglets à CARTES-IMAGES (colonne de vignettes de bannières, contenu à
- * droite) — le sélecteur du guide « Banners & Mileage » (portage V2). Même
+ * droite) — le sélecteur du guide « Banners & Mileage » (porté tel quel). Même
  * politique d'URL que `SegmentedTabs` (règle 2026-07-16 : état interne d'un
  * guide = HASH multi-params) : `#<urlKey>=<id>` via url-hash, l'URL reste la
  * source de vérité et la page statiquement rendable. Sans `urlKey`, simple

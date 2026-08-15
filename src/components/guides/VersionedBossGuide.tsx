@@ -29,7 +29,7 @@ interface VersionConfig {
   /**
    * Le COMBAT que la saison rejoue (`DungeonRef.group`) — ses difficultés, ses
    * monstres et leurs niveaux en découlent. Un `boss` (un id de monstre) ne
-   * portait qu'UNE difficulté : le portage V2 n'avait donc que le Very Hard, et
+   * portait qu'UNE difficulté : le portage n'avait donc que le Very Hard, et
    * les deux autres n'existaient nulle part.
    */
   group?: string;
@@ -107,10 +107,10 @@ const teamSections = (teams: VersionTeams | undefined): TeamSection[] =>
  * RENDU PARTAGÉ d'un guide de boss VERSIONNÉ — un mode qui rejoue le même boss
  * saison après saison (joint challenge, world boss, et demain guild raid).
  *
- * Les 5 guides Joint Challenge de la V2 sont ISOMORPHES : chaque version enchaîne
+ * Les 5 anciens guides Joint Challenge sont ISOMORPHES : chaque version enchaîne
  * panneau du boss → conseils → persos → équipe → vidéos, plus une version
  * « legacy » qui n'est qu'une vidéo. Aucune section n'appartient à un guide en
- * propre, aucun titre n'est écrit à la main. La V2 les écrivait pourtant en cinq
+ * propre, aucun titre n'est écrit à la main. Ils l'étaient pourtant en cinq
  * TSX de ~250 lignes, où ce même bloc était RECOPIÉ une fois par version — d'où
  * ses dérives, dont celle-ci, bien réelle : la version de juin 2025 d'Annihilator
  * affichait les conseils de décembre 2025, parce que le TSX pointait la mauvaise

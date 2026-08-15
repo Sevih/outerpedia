@@ -19,7 +19,7 @@ export interface SkillPriority {
 }
 
 /**
- * Section Compétences (portage V2) : priorité de montée éventuelle puis grille
+ * Section Compétences (portée telle quelle) : priorité de montée éventuelle puis grille
  * 3 colonnes de SkillCard. Composant SERVEUR — tout arrive pré-localisé, seule
  * la carte (sélecteur de niveau) est cliente.
  */

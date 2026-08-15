@@ -46,7 +46,7 @@ type GuideRecommended = Array<{
  * proposent jusqu'à trois (« Classic Team », « 1 Run Public »…). Le titre suit
  * le même contrat que les sections de `BossGuide` (`SectionTitle`) ; absent,
  * l'équipe prend le titre générique. La note est une LISTE de paragraphes —
- * celle de la Queen en V2 était un vrai walkthrough en plusieurs blocs.
+ * celle de la Queen était un vrai walkthrough en plusieurs blocs.
  */
 type GuideTeams = Array<{
   title?: SectionTitle;
@@ -105,12 +105,12 @@ function PursuitLootIcons({
  * C'est `VersionedBossGuide` SANS l'axe des versions : le guide entier est ce
  * qu'une version y est. Le combat vient du `group` du META (comme
  * `StagedBossGuide` — pas de saison qui le porterait dans un config de
- * version). Les quatre guides irregular de la V2 étaient isomorphes — quatre
+ * version). Les quatre anciens guides irregular étaient isomorphes — quatre
  * TSX de ~90 lignes qui ne différaient que par leurs données. Ici le rendu vit
  * une fois et un guide n'est que ses JSON :
  *   meta.json · tips.json · recommended.json · teams.json · videos.json
  * Un fichier absent = une section en moins, jamais un plantage (l'intro de
- * strings.json comprise : la V2 n'en écrivait pas pour ce mode, on n'en
+ * strings.json comprise : il n'y en avait pas pour ce mode, on n'en
  * invente pas).
  *
  * La carte du boss porte le BUTIN de sa difficulté (`PursuitLootRow`, dans

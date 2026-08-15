@@ -26,7 +26,7 @@ type Props = AdvancedFiltersPanelProps & {
  * panneau latéral droit à partir de md. Sous xl uniquement (la sidebar prend le
  * relais au-delà). TOUJOURS monté, ouverture/fermeture pilotées par CSS
  * (transform + opacité) — pas de state d'animation, transitions d'entrée ET de
- * sortie gratuites. Portage V2 sur tokens V3 + token `scrim`.
+ * sortie gratuites. Porté sur les tokens actuels + token `scrim`.
  */
 export function CharactersFiltersDrawer({
   open,

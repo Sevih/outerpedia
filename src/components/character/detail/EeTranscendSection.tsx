@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Équipement exclusif + Transcendance (portage V2, côte à côte) :
+ * Équipement exclusif + Transcendance (porté tel quel, côte à côte) :
  *   - carte EE : tuile, nom (lien vers la page détail), main stats, effet
  *     Lv.1 / Lv.10 (textes des passifs extraits) ;
  *   - slider de transcendance : paliers d'étoiles DÉCLARÉS par le jeu

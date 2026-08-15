@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { cn } from '@/lib/cn';
 
 /**
- * Vignette cliquable → image plein écran (portage V2, tokens V3).
+ * Vignette cliquable → image plein écran (portée telle quelle, tokens actuels).
  * La brique des screenshots éditoriaux de guides (roadmap, schémas…) :
  * la miniature reste compacte dans l'article, le plein écran rend le
  * texte des captures lisible. Échap ou clic hors image pour fermer.

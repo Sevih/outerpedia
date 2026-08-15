@@ -13,7 +13,7 @@ import type { CategoryViewProps } from './types';
  * Vue PALIERS (`general-guides`) : parcours pédagogique, un bloc par palier.
  *
  * Le palier vient du meta (`tier`), pas d'une map slug→palier tenue à la main
- * dans le composant comme en V2 : là-bas, un guide oublié dans la map était
+ * dans le composant comme avant : là, un guide oublié dans la map était
  * simplement filtré et disparaissait de la page sans erreur. Ici `tier` est
  * exigé au scan (cf. `requires` de la catégorie) — aucun guide ne peut se
  * perdre, et l'ordre de lecture est déclaré en donnée.

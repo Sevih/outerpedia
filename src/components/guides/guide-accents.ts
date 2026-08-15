@@ -1,5 +1,5 @@
 /**
- * Accents par catégorie de guides (portage V2 : `guidesTheme.ts`).
+ * Accents par catégorie de guides (portés de `guidesTheme.ts`).
  *
  * Chaque catégorie a une couleur thématique (émeraude pour les fondamentaux,
  * ambre pour le contenu de boss, rose pour l'endgame…) déclinée en utilitaires
@@ -11,7 +11,7 @@
  * ombre colorée au survol (référencée en `var()` brute dans le `shadow-[…]`).
  *
  * Typé sur `GuideCategorySlug` (Record exhaustif) : ajouter une catégorie sans
- * son accent casse la compilation — pas de repli « other » silencieux comme en V2.
+ * son accent casse la compilation — pas de repli « other » silencieux comme avant.
  */
 import type { GuideCategorySlug } from '@/lib/data/guide-categories';
 

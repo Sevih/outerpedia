@@ -1,10 +1,10 @@
 /**
  * RENDU d'un événement communautaire — le composant unique qui remplace les
- * `events/<slug>.tsx` de la V2. Serveur, pur : il reçoit l'entrée curée et rend
+ * anciens `events/<slug>.tsx`. Serveur, pur : il reçoit l'entrée curée et rend
  * ses BLOCS dans l'ordre (cf. `EventBlock` du modèle de données).
  *
  * Toute la prose passe par `parseText` : les tags inline `{I-I/Free Ether}`,
- * `{P/perso}`… y sont résolus et LOCALISÉS côté serveur — la V2 écrivait des
+ * `{P/perso}`… y sont résolus et LOCALISÉS côté serveur — on écrivait avant des
  * `<ItemInline name="…" />` en dur dans chaque fichier d'événement.
  *
  * Une seule extension au-dessus de parseText : le LIEN EXTERNE en syntaxe

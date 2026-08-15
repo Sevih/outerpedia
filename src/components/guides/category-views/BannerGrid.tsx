@@ -14,7 +14,7 @@ import type { CategoryViewProps } from './types';
  * Vue BANNIÈRE : l'icône du guide est une bannière large (`T_Banner_*`), rendue
  * en fond plein avec titre et description en surimpression.
  *
- * UNE vue pour guild-raid / world-boss / joint-challenge — en V2 c'étaient
+ * UNE vue pour guild-raid / world-boss / joint-challenge — c'étaient avant
  * TROIS fichiers strictement identiques (GuildRaidList / WorldBossList /
  * JointChallengeList, 41 lignes copiées-collées). Rien ici ne dépend de la
  * catégorie : seul le meta du guide est lu, et le calendrier fait le reste.

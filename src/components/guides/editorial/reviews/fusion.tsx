@@ -1,8 +1,8 @@
 /**
  * Blocs du guide « Core Fusion » : pills de coût par palier (DÉRIVÉS de
- * CharacterFusionLevelTemplet — la V2 codait [300,150…] en dur), rangées de
+ * CharacterFusionLevelTemplet — [300,150…] était codé en dur), rangées de
  * changements de skills (renommages dérivés + review éditoriale), comparaison
- * d'EE base ↔ fusion (données équipement V3 — la V2 lisait son ee.json).
+ * d'EE base ↔ fusion (données équipement — un ee.json était lu avant).
  */
 import Link from 'next/link';
 import type { Route } from 'next';

@@ -3,7 +3,7 @@ import type { Route } from 'next';
 import { InlineTooltip } from './InlineTooltip';
 
 /**
- * Brique inline : icône + libellé coloré, tooltip optionnel (portage V2).
+ * Brique inline : icône + libellé coloré, tooltip optionnel (portée telle quelle).
  * Composant SERVEUR — seule l'interactivité du tooltip est cliente
  * (InlineTooltip) ; le contenu du tooltip est rendu côté serveur.
  */

@@ -7,7 +7,7 @@
  * dates), la droite édite celui qui est sélectionné — métadonnées, jalons, puis
  * les BLOCS de contenu (ajouter / monter / descendre / supprimer).
  *
- * Une seule langue à la fois (comme les autres éditeurs V3) : l'ANGLAIS est la
+ * Une seule langue à la fois (comme les autres éditeurs) : l'ANGLAIS est la
  * source, les autres langues se REGÉNÈRENT au bouton « Traduire » (DeepL puis
  * Haiku). Conséquence assumée : la STRUCTURE (nombre de puces, de vidéos, de
  * jalons) ne se modifie qu'en anglais — sinon une traduction en cours pourrait

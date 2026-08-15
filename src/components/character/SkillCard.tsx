@@ -23,7 +23,7 @@ export interface CardLevel {
   desc?: string;
 }
 
-/** Compétence pré-localisée pour la carte V2 (le serveur prépare tout). */
+/** Compétence pré-localisée pour la carte (le serveur prépare tout). */
 export interface CardSkill {
   id: string;
   name: string;
@@ -50,7 +50,7 @@ export interface SkillCardLabels {
   enhancement: string;
 }
 
-/** Sélecteur de niveau (style V2 : actif jaune). */
+/** Sélecteur de niveau (actif jaune). */
 export function LevelSelector({
   maxLevel,
   level,
@@ -129,11 +129,11 @@ export function EnhancementList({
 }
 
 /**
- * Carte de compétence (portage pixel V2 SkillCard) : icône 56px + badge burst,
+ * Carte de compétence (portage pixel de l'ancienne SkillCard) : icône 56px + badge burst,
  * métas CD/WGR/cible, chips d'effets, sélecteur de niveau, description résolue
  * au niveau choisi, paliers d'amélioration.
- * V3 : CD et WGR viennent des VRAIES valeurs par niveau (plus de comptage
- * textuel des enhancements comme en V2).
+ * Désormais : CD et WGR viennent des VRAIES valeurs par niveau (plus de comptage
+ * textuel des enhancements, inchangé).
  */
 export function SkillCard({
   skill,

@@ -7,7 +7,7 @@ import { GUIDE_CATEGORIES, type GuideCategorySlug } from '@/lib/data/guide-categ
 import { GUIDE_ACCENT } from './guide-accents';
 
 /**
- * Carte d'une catégorie sur la landing /guides (visuel V2) : tuile d'icône et
+ * Carte d'une catégorie sur la landing /guides : tuile d'icône et
  * pastille de compteur teintées à l'accent de la catégorie, halo au survol.
  */
 export function CategoryCard({
