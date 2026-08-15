@@ -1,6 +1,36 @@
 {
   "posts": [
     {
+      "id": 10822,
+      "date": "2026-08-14",
+      "modified": "2026-08-14T07:38:53",
+      "slug": "notice-regarding-lambda-pieces-in-defeat-the-doppelganger",
+      "lang": "en",
+      "type": "notice",
+      "title": "[Notice] Regarding Lambda Pieces in [Defeat the Doppelgänger]",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/6751a61933da5e30.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello, Masters.<br><br>We would like to provide an additional update regarding the previously announced issue where Lambda’s Pieces can be obtained from [Defeat the Doppelgänger].</p>\n\n\n\n<p>Upon review, we confirmed that Lambda was added to the list of Heroes whose Pieces can be obtained from [Defeat the Doppelgänger] earlier than originally intended.</p>\n\n\n\n<p>We considered removing Lambda from the available Heroes in accordance with our existing operational policy. However, as making this change could potentially cause additional inconvenience during gameplay, we have decided to keep the current availability unchanged without making any further adjustments.<br><br>Therefore, you will continue to be able to obtain Lambda’s Pieces from [Defeat the Doppelgänger], and any Lambda’s Pieces you have already obtained can also be used as normal.</p>\n\n\n\n<p>As Lambda is a starting Hero who accompanies Masters through the early stages of progression, we encourage you to take this opportunity to freely obtain Lambda’s Pieces through [Defeat the Doppelgänger] and make full use of her in your progression.<br><br>We apologize for any confusion caused by our previous notice and will continue striving to provide a more stable service.</p>\n\n\n\n<p>Thank you.</p>\n"
+    },
+    {
+      "id": 10814,
+      "date": "2026-08-14",
+      "modified": "2026-08-14T07:36:59",
+      "slug": "%ec%95%88%eb%82%b4-%eb%8f%84%ed%94%8c%ea%b0%b1%ec%96%b4-%ed%87%b4%ec%b9%98-%eb%9e%8c%eb%8b%a4-%ec%a1%b0%ea%b0%81-%ed%9a%8d%eb%93%9d-%ea%b4%80%eb%a0%a8-%ec%95%88%eb%82%b4",
+      "lang": "kr",
+      "type": "notice",
+      "title": "[공지] [도플갱어 퇴치] 람다 조각 획득 관련 안내",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/90db829624102f79.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.</p>\n\n\n\n<p>GM 아메입니다.</p>\n\n\n\n<p>앞서 알려진 이슈를 통해 안내드린 [도플갱어 퇴치]에서 람다의 조각을 획득할 수 있는 현상과 관련하여 추가 안내드립니다.</p>\n\n\n\n<p>확인 결과, 람다는 기존 운영 기준보다 이른 시점에 [도플갱어 퇴치]의 조각 획득 대상에 포함된 것으로 확인되었습니다.</p>\n\n\n\n<p>이에 기존 운영 기준에 맞춰 람다를 획득 대상에서 제외하는 방향으로 수정을 검토하였으나, 수정 과정에서 추가적인 이용 불편이 발생할 가능성이 확인되어 별도의 수정 없이 현재 상태를 유지하기로 결정하였습니다.</p>\n\n\n\n<p>따라서 앞으로도 [도플갱어 퇴치]에서 람다의 조각을 정상적으로 획득하실 수 있으며, 기존에 획득한 람다의 조각 역시 정상적으로 이용하실 수 있습니다.</p>\n\n\n\n<p>람다는 오너 여러분의 초반 성장을 함께하는 스타팅 동료인 만큼, 이번 기회에 [도플갱어 퇴치]를 통해 람다의 조각을 자유롭게 획득하여 적극적으로 육성하고 활용해 주시기 바랍니다.</p>\n\n\n\n<p>앞선 안내로 혼선을 드린 점 사과드리며, 보다 안정적인 서비스 제공을 위해 노력하겠습니다.</p>\n\n\n\n<p>감사합니다.</p>\n\n\n\n<p></p>\n"
+    },
+    {
+      "id": 10825,
+      "date": "2026-08-14",
+      "modified": "2026-08-14T07:38:43",
+      "slug": "%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91%e3%80%90%e8%87%aa%e5%b7%b1%e5%83%8f%e5%b9%bb%e8%a6%96%e9%80%80%e6%b2%bb%e3%80%91%e3%81%a7%e3%81%ae%e3%80%8c%e3%83%a9%e3%83%a0%e3%83%80%e3%80%8d",
+      "lang": "jp",
+      "type": "notice",
+      "title": "【お知らせ】【自己像幻視退治】での「ラムダ」ピース獲得について",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/3819f5f7ab09ef1b.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。<br>先に確認されている不具合としてご案内した、【自己像幻視退治】で「ラムダ」のピースを獲得できることについて、追加でご案内いたします。</p>\n\n\n\n<p>確認の結果、「ラムダ」が従来の運営方針で予定していた時期よりも早く、【自己像幻視退治】のピース獲得対象に含まれていたことを確認いたしました。<br>従来の運営方針に合わせて「ラムダ」を獲得対象から除外する対応を検討いたしましたが、修正に伴いさらなるご不便が生じる可能性が確認されたため、今回は別途修正を行わず、現在の状態を維持することといたしました。</p>\n\n\n\n<p>そのため、今後も【自己像幻視退治】で「ラムダ」のピースを正常に獲得することができ、すでに獲得された「ラムダ」のピースについてもそのままご利用いただけます。<br>「ラムダ」は、マスター様の序盤の成長を支えるスターティング仲間でもありますので、この機会に【自己像幻視退治】で「ラムダ」のピースを自由に獲得し、ぜひ育成や活用にお役立てください。</p>\n\n\n\n<p>先のご案内により混乱を招きましたことをお詫び申し上げます。</p>\n\n\n\n<p>今後もより安定したサービスをご提供できるよう努めてまいります。<br>今後とも『アウタープレーン』をよろしくお願いいたします。</p>\n"
+    },
+    {
       "id": 10798,
       "date": "2026-08-13",
       "modified": "2026-08-13T05:55:00",
@@ -13,12 +43,12 @@
     {
       "id": 10786,
       "date": "2026-08-13",
-      "modified": "2026-08-13T05:45:05",
+      "modified": "2026-08-15T03:28:16",
       "slug": "ki0813en",
       "lang": "en",
       "type": "known-issue",
-      "title": "[Issues] Known Issues (8/12 Maintenance)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/2711930b3fbdcd80.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello Masters,</p>\n\n\n\n<p>We would like to inform you about several issues that have been identified. Our apologies for the trouble while we work on fixing these issues.</p>\n\n\n\n<p>1. An issue where Nella’s voice lines play when Demiurge Saeran is hit.<br>→ Currently under investigation</p>\n\n\n\n<p>2. An issue where the 10% Penetration increase from Demiurge Saeran’s Level 4 Transcendence effect is not displayed on the Hero Info screen.<br>→ Currently under investigation</p>\n\n\n\n<p>3. An issue where some text appears in Japanese when the language is set to Chinese in the “Reverie of Falling Petals” Event Dungeon.<br>→ Currently under investigation<br><br>Once again we apologize for any inconvenience caused.<br>We will continue to inform our Masters regarding this issue via this notice.</p>\n\n\n\n<ol start=\"2\">\n<li></li>\n</ol>\n\n\n\n<p>Thank you.</p>\n\n\n\n<p></p>\n"
+      "title": "[Issues] Known Issues (8/12 Maintenance)(Added on 8/15 at 03:00 UTC)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/2711930b3fbdcd80.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello Masters,</p>\n\n\n\n<p>We would like to inform you about several issues that have been identified. Our apologies for the trouble while we work on fixing these issues.</p>\n\n\n\n<p>1. An issue where Nella’s voice lines play when Demiurge Saeran is hit.<br>→ Currently under investigation</p>\n\n\n\n<p>2. An issue where the 10% Penetration increase from Demiurge Saeran’s Level 4 Transcendence effect is not displayed on the Hero Info screen.<br>→ Currently under investigation</p>\n\n\n\n<p>3. An issue where some text appears in Japanese when the language is set to Chinese in the “Reverie of Falling Petals” Event Dungeon.<br>→ Currently under investigation<br><br>4. An issue where Lambda’s Pieces can be obtained from [Defeat the Doppelgänger]<br>→ Currently under investigation<br>→ As announced in a separate notice, the current behavior allowing Lambda’s Pieces to be obtained from [Defeat the Doppelgänger] will remain unchanged.</p>\n\n\n\n<p>5.An issue where the 200% maximum limit is not properly applied to Demiurge Seiran’s 5★ Transcendence effect, [+20% DMG per debuff on the target (Max 200%)].(Added on 8/15 at 03:00 UTC)<br>→ This issue is scheduled to be fixed in the next app store update.<br><br><br>Once again we apologize for any inconvenience caused.<br>We will continue to inform our Masters regarding this issue via this notice.</p>\n\n\n\n<p></p>\n\n\n\n<p>Thank you.</p>\n\n\n\n<p></p>\n"
     },
     {
       "id": 10795,
@@ -33,22 +63,22 @@
     {
       "id": 10781,
       "date": "2026-08-13",
-      "modified": "2026-08-13T05:43:57",
+      "modified": "2026-08-15T03:09:48",
       "slug": "ki0813kr",
       "lang": "kr",
       "type": "known-issue",
-      "title": "[이슈] 8/12 업데이트 이후 확인된 현상",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/efd8449fdbb282dd.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n\n<p>현재 확인된 현상에 대해 안내 드립니다.<br>게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다.<br><br>1. 데미우르고스 세이란의 피격 음성이 넬라의 피격 음성으로 출력되는 현상<br>ㄴ 해당 현상 확인 중에 있습니다.</p>\n\n\n\n<p>2. 데미우르고스 세이란의 4단계 초월 효과로 증가하는 관통력 10%가 동료 정보 화면에 표시되지 않는 현상<br>ㄴ 해당 현상 확인 중에 있습니다.</p>\n\n\n\n<p>3. ‘꽃이 지는 백일몽’ 이벤트 던전에서 중국어 설정 시 일부 문구가 일본어로 표시되는 현상<br>ㄴ 해당 현상 확인 중에 있습니다.<br><br>위 현상에 대해 빠르게 정상화될 수 있도록 노력하겠으며,<br>추가 현상이나 변동 사항이 있을 시 해당 공지를 통해 안내 드리겠습니다.<br><br>감사합니다.</p>\n"
+      "title": "[이슈] 8/12 업데이트 이후 확인된 현상(8/15 11:55 추가)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/efd8449fdbb282dd.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n\n<p>현재 확인된 현상에 대해 안내 드립니다.<br>게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다.<br><br><s>1. 데미우르고스 세이란의 피격 음성이 넬라의 피격 음성으로 출력되는 현상<br>ㄴ 해당 현상 확인 중에 있습니다.</s></p>\n\n\n\n<p><s>2. 데미우르고스 세이란의 4단계 초월 효과로 증가하는 관통력 10%가 동료 정보 화면에 표시되지 않는 현상<br>ㄴ 해당 현상 확인 중에 있습니다.</s></p>\n\n\n\n<p><s>3. ‘꽃이 지는 백일몽’ 이벤트 던전에서 중국어 설정 시 일부 문구가 일본어로 표시되는 현상<br>ㄴ 해당 현상 확인 중에 있습니다.</s></p>\n\n\n\n<p><s>4. [도플갱어 퇴치]에서 람다의 조각을 획득할 수 있는 현상<br>ㄴ 해당 현상 확인 중에 있습니다.</s><br>ㄴ 별도 공지를 통해 안내 드린 바와 같이, [도플갱어 퇴치]에서 [람다의 조각]을 획득할 수 있도록 현재와 동일하게 유지될 예정입니다.</p>\n\n\n\n<p>5.데미우르고스 세이란의 5초월 효과인 [대상 약화 효과 1개당 피해 +20%(최대 200%)]에서 최대 피해 증가량 제한이 정상적으로 적용되지 않는 현상 (8/15 11:55 추가)<br>ㄴ해당 현상은 다음 마켓 업데이트를 통해 수정될 예정입니다.</p>\n\n\n\n<p><br>위 현상에 대해 빠르게 정상화될 수 있도록 노력하겠으며,<br>추가 현상이나 변동 사항이 있을 시 해당 공지를 통해 안내 드리겠습니다.<br><br>감사합니다.</p>\n"
     },
     {
       "id": 10789,
       "date": "2026-08-13",
-      "modified": "2026-08-13T06:15:24",
+      "modified": "2026-08-15T03:07:59",
       "slug": "kijp0813",
       "lang": "jp",
       "type": "known-issue",
-      "title": "【不具合】現在確認されている不具合について (8/12)(8/13 15:15追記)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/213ce7185b5a83ed.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。<br>「アウタープレーン」運営チームです。<br>大変ご不便をおかけして申し訳ございません。<br>現在確認されている不具合についてご案内いたします。<br><br><s>1.「デミウルゴス・セイラン」のダメージ音声がネラのダメージ音声で再生される現象<br></s>→ 26/08/13データ更新にて修正されました。</p>\n\n\n\n<p><s><font dir=\"auto\" style=\"vertical-align: inherit;\"><font dir=\"auto\" style=\"vertical-align: inherit;\">2. 「デミウルゴス・セイラン」の★4超越効果で増加する貫通力10％効果が仲間のステータス表示画面にて表記されない現象</font></font><br></s><font dir=\"auto\" style=\"vertical-align: inherit;\"><font dir=\"auto\" style=\"vertical-align: inherit;\">→ 26/08/13データ更新にて修正されました。</font></font></p>\n\n\n\n<p><s>3．「散りゆく白日夢」で中国語簡体字設定時一部文字が日本語で表示される現象<br></s>→ 26/08/13データ更新にて修正されました。</p>\n\n\n\n<p><s><font dir=\"auto\" style=\"vertical-align: inherit;\"><font dir=\"auto\" style=\"vertical-align: inherit;\">4. </font></font>「デミウルゴス・セイラン」の効果名「懲罰」から「裁き」に変更及び説明における誤訳を修正<br></s><font dir=\"auto\" style=\"vertical-align: inherit;\"><font dir=\"auto\" style=\"vertical-align: inherit;\">→ 26/08/13データ更新にて修正されました。</font></font></p>\n\n\n\n<p><br>この度は皆さまにご迷惑をおかけしておりますことをお詫び申し上げます。<br>不具合解消まで今しばらくお待ちいただけますよう、お願い申し上げます。</p>\n\n\n\n<p></p>\n"
+      "title": "【不具合】現在確認されている不具合について (8/12)(8/15 12:00追記)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/213ce7185b5a83ed.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。<br>「アウタープレーン」運営チームです。<br>大変ご不便をおかけして申し訳ございません。<br>現在確認されている不具合についてご案内いたします。<br><br><s>1.「デミウルゴス・セイラン」のダメージ音声がネラのダメージ音声で再生される現象<br></s>→ 26/08/13データ更新にて修正されました。</p>\n\n\n\n<p><s><font dir=\"auto\" style=\"vertical-align: inherit;\"><font dir=\"auto\" style=\"vertical-align: inherit;\">2. 「デミウルゴス・セイラン」の★4超越効果で増加する貫通力10％効果が仲間のステータス表示画面にて表記されない現象</font></font><br></s><font dir=\"auto\" style=\"vertical-align: inherit;\"><font dir=\"auto\" style=\"vertical-align: inherit;\">→ 26/08/13データ更新にて修正されました。</font></font></p>\n\n\n\n<p><s>3．「散りゆく白日夢」で中国語簡体字設定時一部文字が日本語で表示される現象<br></s>→ 26/08/13データ更新にて修正されました。</p>\n\n\n\n<p><s><font dir=\"auto\" style=\"vertical-align: inherit;\"><font dir=\"auto\" style=\"vertical-align: inherit;\">4. </font></font>「デミウルゴス・セイラン」の効果名「懲罰」から「裁き」に変更及び説明における誤訳を修正<br></s><font dir=\"auto\" style=\"vertical-align: inherit;\"><font dir=\"auto\" style=\"vertical-align: inherit;\">→ 26/08/13データ更新にて修正されました。</font></font><br><br><s>5. 「自己像幻視退治」で「ラムダ」のピースを獲得できる現象<br>→ 現在、原因を確認しております。</s><br>→別途お知らせにてご案内したとおり、今後も「自己像幻視退治」で「ラムダ」のピースを獲得できる仕様を維持いたします。</p>\n\n\n\n<p>6.「デミウルゴス・セイラン」の★5超越効果「対象の弱体効果1個につきダメージ+20%（最大200%）」において、最大200%の上限が正常に適用されない現象(8/15 12:00 追記)<br>→ 本現象は、次回のストアアップデートにて修正予定です。<br></p>\n\n\n\n<p><br>この度は皆さまにご迷惑をおかけしておりますことをお詫び申し上げます。<br>不具合解消まで今しばらくお待ちいただけますよう、お願い申し上げます。</p>\n\n\n\n<p></p>\n"
     },
     {
       "id": 10801,
