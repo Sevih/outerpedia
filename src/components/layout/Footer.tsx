@@ -13,16 +13,16 @@ import { GUIDE_CATEGORIES, GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categor
 import { getGameVersion } from '@/lib/data/game-version';
 
 /**
- * Pied de page global (structure V2, tokens V3) : marque + versions + chips
+ * Pied de page global (structure héritée, tokens actuels) : marque + versions + chips
  * sociaux + chips de langues, 4 colonnes (Database / Tools / Guides /
  * Community — repliables en mobile via <details>, zéro JS), bandeau des liens
  * officiels Outerplane, disclaimer, barre légale. Les cibles pas encore
  * portées (/tierlist, /coupons, /tools, /contributors, /changelog, /legal,
  * /feed) sont ASSUMÉES 404 — cf. TODO « Pages manquantes ». Icônes de marque
- * (Discord/GitHub/…) : react-icons, comme la V2.
+ * (Discord/GitHub/…) : react-icons, inchangé.
  */
 
-/** Les 6 outils mis en avant (mêmes que la V2 ; libellés `tools.*` pré-seedés). */
+/** Les 6 outils mis en avant (inchangés ; libellés `tools.*` pré-seedés). */
 const FEATURED_TOOLS = [
   'most-used-units',
   'tierlistpve',
@@ -83,7 +83,7 @@ function buildColumns(lang: Lang, t: TFunction): Array<{ title: string; links: F
           label: t('footer.social.evamains_discord'),
           href: 'https://discord.com/invite/PNMd5mkAV8',
         },
-        { label: t('footer.social.github'), href: 'https://github.com/Sevih/outerpediaV2' },
+        { label: t('footer.social.github'), href: 'https://github.com/Sevih/outerpedia' },
         { label: t('contributors.title'), href: localePath(lang, '/contributors') },
         { label: t('changelog.title'), href: localePath(lang, '/changelog') },
         { label: t('footer.social.rss'), href: '/feed' },
@@ -141,7 +141,7 @@ function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) 
 }
 
 /**
- * Chips de langues (racine de chaque langue — même sémantique que la V2) :
+ * Chips de langues (racine de chaque langue — sémantique inchangée) :
  * drapeau + abréviation + pastille pour les traductions communautaires.
  */
 function FooterLanguages({ lang, label }: { lang: Lang; label: string }) {
@@ -242,7 +242,7 @@ export async function Footer() {
             <p className="text-content-muted mb-5 max-w-sm text-sm leading-relaxed">
               {t('footer.tagline')}
             </p>
-            {/* Rangée sociale rapide (icônes de marque, comme la V2) */}
+            {/* Rangée sociale rapide (icônes de marque) */}
             <div className="mb-6 flex gap-2">
               <a
                 href="https://discord.com/invite/PNMd5mkAV8"
@@ -255,7 +255,7 @@ export async function Footer() {
                 Discord
               </a>
               <a
-                href="https://github.com/Sevih/outerpediaV2"
+                href="https://github.com/Sevih/outerpedia"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={t('footer.social.github')}

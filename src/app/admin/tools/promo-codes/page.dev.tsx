@@ -11,10 +11,7 @@ export default function ToolPromoCodes() {
     <div className="space-y-4">
       <div>
         <h1 className="text-content-strong text-xl font-semibold">Tools · Code promo</h1>
-        <p className="text-content-muted text-sm">
-          Source V3 (rewards par id d&apos;item). « Regen depuis V2 » réimporte et mappe les noms V2
-          vers les ids d&apos;item.
-        </p>
+        <p className="text-content-muted text-sm">Rewards désignés par id d&apos;item.</p>
       </div>
       <PromoCodesEditor initial={loadCoupons()} items={rewardOptions} />
     </div>

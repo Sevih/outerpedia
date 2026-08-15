@@ -1,7 +1,7 @@
 /**
  * Guide « Beginner FAQ » — 5 sections thématiques de cartes question→réponse.
  *
- * Server Component : le contenu (content.ts, verbatim V2) est composé sur les
+ * Server Component : le contenu (content.ts, verbatim) est composé sur les
  * primitives éditoriales partagées (`components/guides/editorial`) ; seule la
  * barre de sommaire (TocBar, scroll-spy) est cliente. parse-text en STRICT :
  * une référence de contenu morte casse le build.
@@ -505,15 +505,14 @@ export default async function BeginnerFaqGuide({ lang }: { lang: Lang }) {
         </section>
 
         {/* ═══ Related Guides ═══ */}
-        {/* TODO(portage general-guides) : rajouter gear et heroes-growth ici au
-            fur et à mesure de leur portage (RelatedGuides casse le build sur
-            une référence inconnue — c'est voulu). */}
         <RelatedGuides
           lang={lang}
           title={L(LABELS.sectionRelatedGuides)}
           items={[
             { category: 'general-guides', slug: 'free-heroes-start-banner', accent: 'sky' },
             { category: 'general-guides', slug: 'premium-limited', accent: 'violet' },
+            { category: 'general-guides', slug: 'gear', accent: 'emerald' },
+            { category: 'general-guides', slug: 'heroes-growth', accent: 'amber' },
           ]}
         />
       </div>

@@ -7,6 +7,20 @@
 
 ## 2026-08-15
 
+- **Trois textes décrivaient un état disparu.** (1) Le lien **GitHub du pied de
+  page** pointait `Sevih/outerpediaV2` — dépôt **archivé** — au lieu de
+  `Sevih/outerpedia` : tout visiteur cliquant sur GitHub atterrissait sur le
+  mort. Deux occurrences dans `Footer.tsx` (liste de liens + rangée sociale).
+  (2) Trois pages d'admin (`tools/banners`, `tools/changelog`,
+  `tools/promo-codes`) annonçaient un bouton **« Regen depuis V2 »** qui
+  n'existe plus — l'import ponctuel a été retiré le 21/07 (cf. en-têtes de
+  `promo-banner-store.ts` et `changelog-store.ts`), et aucun `regen` ne subsiste
+  dans les trois éditeurs : phrases supprimées. (3) `beginner-faq` portait un
+  `TODO(portage general-guides)` demandant d'ajouter `gear` et `heroes-growth`
+  aux guides connexes « au fur et à mesure de leur portage » — les deux sont
+  portés depuis longtemps : liens ajoutés (accents emerald/amber), TODO retiré.
+  Trouvés en balayant les références à l'ancien site, pas cherchés.
+
 - **`pnpm commit` refuse de partir en retard sur `origin`** — pré-vol en tête de
   séquence, rejoué juste avant le push R2
   ([scripts/commit.ts](../scripts/commit.ts)). Le jour même la séquence s'est

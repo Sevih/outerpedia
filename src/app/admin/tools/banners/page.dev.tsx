@@ -19,8 +19,7 @@ export default function ToolBanners() {
       <div>
         <h1 className="text-content-strong text-xl font-semibold">Tools · Banner</h1>
         <p className="text-content-muted text-sm">
-          Choisis le perso par nom (l&apos;id se renseigne tout seul). « Regen depuis V2 » réimporte
-          depuis le repo voisin.
+          Choisis le perso par nom (l&apos;id se renseigne tout seul).
         </p>
       </div>
       <BannersEditor initial={loadBanners()} chars={chars} />
