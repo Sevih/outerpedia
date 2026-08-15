@@ -9,8 +9,8 @@ import { MostUsedUnitsBrowser, type MostUsedLabels, type UsageRow } from './Most
 /**
  * Most Used Units — wrapper SERVEUR : agrège l'usage depuis les fichiers de
  * guides (`usage.ts`), résout noms/titres/libellés dans la langue de la requête
- * (aucun contexte i18n client en V3) et laisse le tri filtré au client. L'ordre
- * inital est le total toutes catégories, décroissant (parité V2).
+ * (aucun contexte i18n client) et laisse le tri filtré au client. L'ordre
+ * inital est le total toutes catégories, décroissant (tri conservé).
  */
 export default async function MostUsedUnits({ lang }: { lang: Lang }) {
   const t = await getT(lang);

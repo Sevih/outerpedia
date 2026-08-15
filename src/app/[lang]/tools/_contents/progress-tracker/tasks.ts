@@ -1,5 +1,5 @@
 /**
- * Progress tracker — DÉFINITIONS des tâches (portage V2 `taskDefinitions.ts`,
+ * Progress tracker — DÉFINITIONS des tâches (portées de `taskDefinitions.ts`,
  * données à l'identique). Trois cycles (daily / weekly / monthly), trois
  * catégories : `task` (contenu du jeu), `shop` (achats boutique) et `craft`
  * (atelier de Kate).
@@ -12,7 +12,7 @@
  *
  * Libellé d'une tâche : les entrées AVEC `shopItemKey` sont libellées par
  * l'item du catalogue (résolu côté serveur, nom localisé + sprite) ; les
- * autres par la clé i18n `progress.task.<id>`. La V2 stockait un `labelKey`
+ * autres par la clé i18n `progress.task.<id>`. On stockait avant un `labelKey`
  * par entrée — même règle, dérivée ici.
  */
 

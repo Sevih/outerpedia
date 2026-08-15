@@ -16,8 +16,8 @@ import { TierListMakerBrowser, type TierItem, type TlmLabels } from './TierListM
  * localise rien) et URLs de sprites résolues. L'état vit côté client ; le
  * partage passe par `share-codec` + `/api/tierlist`.
  *
- * Canon d'encodage (compat liens V2) : les entités core-fusion sont EXCLUES du
- * pool perso — la V2 n'en avait pas, les inclure décalerait les positions des
+ * Canon d'encodage (compat des liens déjà partagés) : les entités core-fusion
+ * sont EXCLUES du pool perso — il n'y en avait pas, les inclure décalerait les positions des
  * liens `?z=` existants (le canon trie par id numérique).
  */
 

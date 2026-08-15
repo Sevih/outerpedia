@@ -35,7 +35,7 @@ async function loadComics(): Promise<ComicsData> {
  * 4-Cut Comics — wrapper SERVEUR : charge le catalogue (manifeste R2), résout
  * les libellés i18n et le compte par langue d'origine (onglets non vides
  * uniquement), puis passe le tout à la galerie client. Les BD sont faites main,
- * ramenées en V3 (`.editorial/comics/`), jamais pointées V2.
+ * ramenées dans `.editorial/comics/`, jamais pointées ailleurs.
  */
 export default async function Comics({ lang }: { lang: Lang }) {
   const t = await getT(lang);

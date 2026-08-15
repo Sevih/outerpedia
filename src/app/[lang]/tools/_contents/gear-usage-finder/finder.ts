@@ -52,7 +52,7 @@ export interface RawFinderData {
 /**
  * Assemble les données du Gear Usage Finder depuis la GEAR-RECO CURÉE et les
  * familles d'équipement, à la lecture — pas d'artefact `gear-finder-index.json`
- * committé comme en V2 (même régime que gear-usage-statistics). L'unité est la
+ * committé comme avant (même régime que gear-usage-statistics). L'unité est la
  * FAMILLE (le build recommande « Rampaging Caracal », pas une variante
  * d'étoiles) ; presets `$` résolus (sets ET substats). Une référence `!name`
  * non arbitrée est SKIPPÉE (modèle `unresolved` de la fiche perso). Les mains

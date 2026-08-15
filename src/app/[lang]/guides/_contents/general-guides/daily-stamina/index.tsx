@@ -2,7 +2,7 @@
  * Guide « Daily Stamina Burn » — la roadmap quotidienne de dépense de stamina
  * (5 priorités numérotées + suggestions hors endgame + pro tips).
  *
- * Server Component : contenu verbatim V2 (labels.ts) sur les primitives
+ * Server Component : contenu verbatim (labels.ts) sur les primitives
  * éditoriales ; parse-text STRICT (une référence d'item morte casse le build).
  * Les noms des boss irréguliers DÉRIVENT de monsters.json via les fiches
  * pursuit 512020xx (celles des guides irregular-extermination — noms complets,
@@ -28,7 +28,7 @@ const GEAR_SOURCES: { collection: string; bossIds: string[] }[] = [
   { collection: 'Gorgon Collection', bossIds: ['51202003', '51202004'] },
 ];
 
-/** Pastille de coût en stamina (le chip ambré V2). */
+/** Pastille de coût en stamina (le chip ambré). */
 function CostPill({ children }: { children: ReactNode }) {
   return (
     <span className="w-fit rounded-full border border-amber-500/20 bg-amber-500/10 px-2 py-0.5 text-xs text-amber-400">
@@ -37,7 +37,7 @@ function CostPill({ children }: { children: ReactNode }) {
   );
 }
 
-/** Numéro de priorité (cercle sky V2). */
+/** Numéro de priorité (cercle sky). */
 function NumBadge({ n, size = 'md' }: { n: number; size?: 'md' | 'sm' }) {
   return (
     <span

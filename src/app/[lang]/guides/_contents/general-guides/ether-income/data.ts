@@ -1,9 +1,9 @@
 /**
- * Sources ÉDITORIALES de revenus d'Ether — montants verbatim V2 (data.ts).
+ * Sources ÉDITORIALES de revenus d'Ether — montants repris verbatim (data.ts).
  * Les montants réguliers (missions, packs, check-in…) sont des estimations
  * éditoriales ; les récompenses PAR RANG (arène, guild raid, world boss,
  * singularity) ne vivent PLUS ici : elles dérivent des tables du jeu
- * (data/generated/ether-rankings.json) — les valeurs V2 de guild raid et
+ * (data/generated/ether-rankings.json) — les anciennes valeurs de guild raid et
  * world boss étaient d'ailleurs périmées (doublées par le jeu depuis).
  */
 
@@ -18,7 +18,7 @@ export interface EtherSource {
   /** Jours actifs par semaine (sources daily seulement, défaut 7). */
   daysPerWeek?: number;
   /** Cadence en mois (sources monthly, défaut 1) : guild raid et world boss
-   *  ALTERNENT, un mois sur deux (décision Sevih 18/07 — la V2 les comptait
+   *  ALTERNENT, un mois sur deux (décision Sevih 18/07 — on les comptait avant
    *  chaque mois). Les totaux moyennent (montant ÷ cadence). */
   monthsPerCycle?: number;
   ranked?: RankedFamily;
@@ -60,7 +60,7 @@ export const VARIABLE_SOURCE_IDS = [
 ] as const;
 
 /**
- * Paliers par défaut (le compte « moyen » de la V2) — désignés
+ * Paliers par défaut (le compte « moyen » d'origine) — désignés
  * STRUCTURELLEMENT, jamais par montant : les montants suivent le jeu.
  */
 export const DEFAULTS = {

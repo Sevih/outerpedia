@@ -219,7 +219,7 @@ const VS_THUMBNAIL: [string, string, string][] = [
  * Ce que le branchement a CORRIGÉ, et le seul calque qu'on garde en le sachant.
  *
  * Les TROIS transcriptions manuscrites sont branchées : `CharacterCard` (250 lignes
- * de mesures relevées à l'œil en V2, disparues), le mode « cartes » du
+ * de mesures relevées à l'œil autrefois, disparues), le mode « cartes » du
  * tier-list-maker, et le peintre canvas de son export PNG. La liste garde la trace
  * de chaque écart plutôt que de rétrécir : c'est elle qui dit ce qu'on a changé pour
  * les lecteurs, et un écart corrigé sans trace se réintroduit tout seul.

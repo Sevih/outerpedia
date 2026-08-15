@@ -19,7 +19,7 @@ import { TeamPlannerBrowser, type TpChar, type TpFx, type TpLabels } from './Tea
  * `StatusMap` résolue (nom/icône/nature/desc) — aucun moteur côté client.
  *
  * L'EE compte dans le kit de base (sections « Team Buffs/Debuffs »), comme la
- * clé `ee` du générateur skill-buffs V2.
+ * clé `ee` de l'ancien générateur skill-buffs.
  */
 
 type RawEffect = NonNullable<Skill['effects']>[number];

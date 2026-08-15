@@ -1,6 +1,6 @@
 /**
- * Tier-list maker — CODEC du lien de partage (portage V2, format de fil
- * IDENTIQUE : des liens `?z=` V2 circulent, ils doivent se décoder ici).
+ * Tier-list maker — CODEC du lien de partage (porté tel quel, format de fil
+ * IDENTIQUE : d'anciens liens `?z=` circulent, ils doivent se décoder ici).
  *
  * Le placement est l'essentiel du payload. Les items ne sont JAMAIS stockés en
  * clés : chaque item est une position dans une liste par type triée par id

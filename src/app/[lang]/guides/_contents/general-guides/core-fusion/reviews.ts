@@ -1,7 +1,7 @@
 /**
  * Reviews ÉDITORIALES du guide « Core Fusion » — transplantées VERBATIM de la
- * V2 (data/core_fusion_data.json, oracle de contenu). `recommendedLevels`
- * vient du texte V2 (« 3 or 5 ») ; les COÛTS de ces niveaux dérivent des
+ * l'ancien site (data/core_fusion_data.json, oracle). `recommendedLevels`
+ * vient de ce texte (« 3 or 5 ») ; les COÛTS de ces niveaux dérivent des
  * tables du jeu (fusionCumulativeCosts), plus de constantes en dur.
  */
 import type { LocalizedText } from '@contracts';

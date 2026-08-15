@@ -2,7 +2,7 @@
  * Événements communautaires — wrapper SERVEUR de la liste (`/event`).
  *
  * Résout la donnée curée en cartes déjà localisées et passe les libellés au
- * client (aucune localisation côté navigateur, règle des outils V3). Le contenu
+ * client (aucune localisation côté navigateur, règle des outils). Le contenu
  * complet d'un événement vit sur sa page `/event/<slug>` — la liste n'en porte
  * que le résumé.
  *

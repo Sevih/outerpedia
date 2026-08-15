@@ -6,8 +6,8 @@
  * dérivé (shops) / curé (non-shop). Ici ne vivent que la présentation (intro,
  * en-têtes, badges, onglets) et les NOMS de source en 5 langues, mappés par clé.
  *
- * Les libellés de source ≤ V2 sont transplantés verbatim. UN SHOP = UN ONGLET
- * d'échange réel (cf. le générateur) : les 7 shops canoniques V2, Arena unifié
+ * Les libellés de source hérités sont transplantés verbatim. UN SHOP = UN ONGLET
+ * d'échange réel (cf. le générateur) : les 7 shops canoniques, Arena unifié
  * (points d'arène + temps réel = même onglet). Tower/Remains sont écartés
  * (aucun onglet d'échange — décision Sevih 19/07).
  */
@@ -144,7 +144,7 @@ export const LABELS = {
       fr: 'Joint Challenge Shop',
     },
 
-    // Sources non-shop curées (transplant V2 verbatim).
+    // Sources non-shop curées (transplant verbatim).
     'irregular-infiltration-floor-3': {
       en: 'Irregular Infiltration Operation — Floor 3',
       jp: 'イレギュラー侵入殲滅戦 フロア3',

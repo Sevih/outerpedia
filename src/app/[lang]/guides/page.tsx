@@ -65,7 +65,7 @@ export default async function GuidesLanding({ params }: { params: Promise<{ lang
       <JsonLd data={crumbLd} />
       <JsonLd data={listLd} />
 
-      {/* Héro (visuel V2) : titre-bandeau, description, compteur. */}
+      {/* Héro : titre-bandeau, description, compteur. */}
       <div className="flex flex-col items-center text-center">
         <h1 className="h1-page">{t('page.guides.title')}</h1>
         <p className="text-content-muted mx-auto mt-2 max-w-2xl text-sm">

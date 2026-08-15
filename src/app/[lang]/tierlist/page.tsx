@@ -90,7 +90,7 @@ function seededShuffle<T>(arr: readonly T[], seed: number): T[] {
 /**
  * Hub des tier lists : deux cartes phares PvE/PvP (badge VS, cluster de
  * portraits top S-tier mélangé chaque jour) et un rail « autres classements ».
- * Les liens suivent le routeur À PLAT (`/<slug>`, parité URL prod V2) ; les
+ * Les liens suivent le routeur À PLAT (`/<slug>`, URLs de prod inchangées) ; les
  * sous-outils non portés y répondent 404 (assumé). Page statique, revalidation
  * 24 h.
  */

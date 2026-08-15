@@ -39,7 +39,7 @@ const LEGACY_TYPES = [
   'world-introduction',
 ];
 
-/** Couleur de badge par type (couleurs de donnée, parité V2). */
+/** Couleur de badge par type (couleurs de donnée, palette conservée). */
 const TYPE_COLORS: Record<string, string> = {
   update: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
   notice: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
@@ -69,7 +69,7 @@ function loadLegacy(): Promise<PatchPost[]> {
 }
 
 /**
- * Historique des patch notes (portage V2) : deux ères — Major9 (scrape getNews,
+ * Historique des patch notes (porté tel quel) : deux ères — Major9 (scrape getNews,
  * langue courante) et Smilegate (archive Stove EN, chargée à la demande) —
  * filtre par type, recherche titre+contenu, pagination, posts dépliables
  * (HTML WordPress stocké, `src` préfixés à l'affichage). L'URL porte l'état

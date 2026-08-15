@@ -6,7 +6,7 @@ import { localePath } from '@/lib/navigation';
 /**
  * 404 localisée, rendue DANS le layout `[lang]` (header/footer présents).
  * Sans ce fichier, chaque `notFound()` du site (slug de perso inconnu, vieux
- * lien V2, outil non porté…) rendait la page par défaut de Next : anglais
+ * vieux lien, outil non porté…) rendait la page par défaut de Next : anglais
  * seul, sans navigation, aucun chemin de retour.
  *
  * Une not-found ne reçoit PAS les params du segment (limite App Router) : la

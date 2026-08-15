@@ -116,7 +116,7 @@ function toGearRows(
   };
   // Famille multi-classes (Briareos/Gorgon : 5 objets distincts en jeu) : UNE
   // carte par variante — sa tuile, son passif, son nom suffixé, son slug —
-  // comme les 5 entrées séparées de la V2.
+  // comme les 5 entrées séparées de l'ancien site.
   if (f.classPassives)
     return f.classPassives.map((v) => {
       const name = withClassSuffix(f.name, v.classLimit);

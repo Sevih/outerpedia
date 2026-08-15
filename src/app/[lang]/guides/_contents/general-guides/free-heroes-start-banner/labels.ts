@@ -1,6 +1,6 @@
 /**
  * Libellés du guide « Free Heroes & Starter Banners » — transplantés VERBATIM
- * de la V2 (oracle de contenu). Le titre/description vivent dans meta.json ;
+ * de l'ancien site (oracle). Le titre/description vivent dans meta.json ;
  * les listes de persos et leurs raisons dans recommended.ts.
  */
 import type { LocalizedText } from '@contracts';

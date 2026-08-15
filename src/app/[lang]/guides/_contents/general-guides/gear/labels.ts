@@ -1,5 +1,6 @@
 /**
- * Contenu ÉDITORIAL du guide gear — prose verbatim portée de la V2 (5 langues).
+ * Contenu ÉDITORIAL du guide gear — prose portée VERBATIM de l'ancien site
+ * (5 langues).
  * Les tables NUMÉRIQUES (ascension, comparaison d'enhancement, breakthrough)
  * DÉRIVENT des données de jeu (`enhance.json`, `getEquipmentDetail`) ; ici on ne
  * garde que le texte non dérivable. Les mentions d'items sont des tags parse-text

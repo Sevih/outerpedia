@@ -1,5 +1,5 @@
 /**
- * Libellés du guide « Core Fusion » — transplantés VERBATIM de la V2
+ * Libellés du guide « Core Fusion » — transplantés VERBATIM de l'ancien site
  * (helpers.tsx, oracle de contenu). Titre/description dans meta.json ;
  * reviews dans reviews.ts, priorités dans priorities.ts.
  */

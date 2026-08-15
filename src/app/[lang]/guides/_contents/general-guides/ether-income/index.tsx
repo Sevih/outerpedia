@@ -1,9 +1,9 @@
 /**
- * Guide « Ether Income » — calculateur de revenus (portage V2). Le SERVEUR
+ * Guide « Ether Income » — calculateur de revenus (porté tel quel). Le SERVEUR
  * résout tout (libellés 5 langues, sources éditoriales, échelles de rangs
  * DÉRIVÉES du jeu — data/generated/ether-rankings.json) et passe un modèle
  * plat au calculateur client. Les paliers par défaut sont désignés
- * structurellement (data.ts) : leurs montants suivent le jeu, pas la V2
+ * structurellement (data.ts) : leurs montants suivent le jeu, pas l'éditorial
  * (dont guild raid et world boss étaient périmés — doublés depuis).
  */
 import etherRankingsData from '@data/generated/ether-rankings.json';
@@ -31,7 +31,7 @@ import {
 
 const RANKINGS = etherRankingsData as unknown as EtherRankingsData;
 
-/** « voir plus ici » du lien coupons (verbatim V2). */
+/** « voir plus ici » du lien coupons (verbatim). */
 const COUPON_LINK_LABEL: LocalizedText = {
   en: 'see more here',
   jp: '詳細はこちら',
@@ -89,7 +89,7 @@ export default async function EtherIncomeGuide({ lang }: { lang: Lang }) {
     RANKINGS.worldBoss.leagues.findIndex((lg) => lg.level === DEFAULTS.worldBossLevel),
     `ligue world boss level ${DEFAULTS.worldBossLevel}`,
   );
-  // Singularity : ordre pire → meilleur dans le sélecteur (comme la V2).
+  // Singularity : ordre pire → meilleur dans le sélecteur (inchangé).
   const singTiers = [...RANKINGS.singularity].reverse();
   const singDefault = must(
     singTiers.findIndex(
@@ -114,7 +114,7 @@ export default async function EtherIncomeGuide({ lang }: { lang: Lang }) {
   };
   const toRow = (s: EtherSource): SourceRow => {
     // Cadence bimestrielle (guild raid / world boss) : la note dédiée remplace
-    // la note de rang V2 — fourchette + « affiché en moyenne mensuelle ».
+    // l'ancienne note de rang — fourchette + « affiché en moyenne mensuelle ».
     const note =
       s.monthsPerCycle !== undefined
         ? tpl(LABELS.everyOtherMonth, noteVars[s.id] ?? {})

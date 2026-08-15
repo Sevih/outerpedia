@@ -87,7 +87,7 @@ const BANNER_FOCUS_COUNT: Record<BannerType, number> = {
   limited: 1,
 };
 
-/** Poids de sélection hors focus par catégorie (parité V2). */
+/** Poids de sélection hors focus par catégorie (inchangés). */
 const BANNER_CATEGORY_WEIGHT: Record<BannerType, Record<GachaCategory, number>> = {
   custom: { normal: 1, premium: 1, limited: 1 },
   rateup: { normal: 1, premium: 1, limited: 1 },
@@ -127,7 +127,7 @@ function weightedPick(pool: GachaChar[], weights: Record<GachaCategory, number>)
 type ResolvedPull = PullResult & { charId: string | null };
 
 /**
- * Simulateur de gacha (portage V2) : 4 bannières aux taux officiels, choix du
+ * Simulateur de gacha (porté tel quel) : 4 bannières aux taux officiels, choix du
  * focus (combobox multilingue), tirages x1/x10 avec garantie 2★, mileage,
  * résultats en cartes, statistiques de session et historique par batch. Tout
  * est local et éphémère — on tire pour voir, rien n'est persisté.

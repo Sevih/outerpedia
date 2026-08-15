@@ -5,7 +5,7 @@
  * Server Component (les SegmentedTabs sont clients, leur CONTENU est rendu
  * serveur). La section « pas encore dans la Custom Banner » se DÉRIVE du pool
  * réel du jeu (data/generated/recruit.json) : réguliers 3★ absents du
- * pool — plus de liste éditoriale par exclusion comme en V2.
+ * pool — plus de liste éditoriale par exclusion, comme c'était le cas avant.
  */
 import { Fragment, type ReactNode } from 'react';
 import type { Lang } from '@/lib/i18n/config';

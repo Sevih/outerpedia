@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 
 /**
  * POST { z } → stocke la tier-list encodée, répond { id } (id court à mettre
- * dans `?s=`). Portage V2. Sans BDD configurée (dev) : 503, le client garde
+ * dans `?s=`). Portage à l'identique. Sans BDD configurée (dev) : 503, le client garde
  * son lien long `?z=` autoporté.
  */
 

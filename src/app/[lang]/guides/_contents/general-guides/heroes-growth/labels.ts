@@ -1,6 +1,6 @@
 /**
  * Libellés du guide « Growth Systems » (heroes-growth) — prose transplantée
- * VERBATIM de la V2 (5 langues). Les tables NUMÉRIQUES (limit break, skill
+ * VERBATIM de l'ancien site (5 langues). Les tables NUMÉRIQUES (limit break, skill
  * upgrade, EE/talisman, XP food) DÉRIVENT de `data/generated/hero-growth.json` ;
  * ici ne vivent que le texte et les en-têtes. Les données éditoriales non
  * dérivables (gifts d'affinité, paliers, effets de transcendance) → editorial.ts.

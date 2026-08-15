@@ -1,6 +1,6 @@
 /**
  * Reviews ÉDITORIALES du guide « Premium & Limited » — transplantées VERBATIM
- * de la V2 (data/premium_limited_data.json, oracle de contenu). Persos désignés
+ * de l'ancien site (data/premium_limited_data.json, oracle). Persos désignés
  * par NOM D'AFFICHAGE EN (un nom inconnu casse le build à la résolution) ; les
  * reviews passent par parse-text (tags {B}/{D}/{C}… contrôlés au build).
  */

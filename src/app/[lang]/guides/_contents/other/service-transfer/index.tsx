@@ -4,9 +4,9 @@
  * section « Recovery Help » (récupération de compte, toujours d'actualité) et
  * comme référence historique.
  *
- * Server Component. Les screenshots V2 des étapes n'existent plus (pages
+ * Server Component. Les screenshots d'origine des étapes n'existent plus (pages
  * sources VAGAMES/Smilegate détruites — cf. strings.ts) : les étapes sont
- * en texte seul. Le HTML inline V2 est remplacé par ./rich.tsx.
+ * en texte seul. L'ancien HTML inline est remplacé par ./rich.tsx.
  */
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';

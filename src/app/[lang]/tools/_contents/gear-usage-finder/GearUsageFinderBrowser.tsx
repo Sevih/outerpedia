@@ -17,7 +17,7 @@ const MODES: Mode[] = ['reco', 'free'];
 
 const CLASSES = ['striker', 'defender', 'ranger', 'healer', 'mage'] as const;
 
-/** Ordres canoniques d'affichage des mains (parité V2). */
+/** Ordres canoniques d'affichage des mains (ordre conservé). */
 const WEAPON_MAIN_ORDER = ['ATK%', 'HP%', 'DEF%'];
 const AMULET_MAIN_ORDER = [
   'PEN%',
@@ -125,12 +125,12 @@ function GearCard({ item }: { item: FinderGearItem }) {
 }
 
 /**
- * Gear Usage Finder (portage V2) : « j'ai loot cette pièce, qui peut la
+ * Gear Usage Finder (porté de l'ancien site) : « j'ai loot cette pièce, qui peut la
  * jouer ? ». Deux modes — Recommandé (ne propose que pièces/mains présentes
  * dans les builds curés, main stat stricte) et Libre (tout le catalogue, les
  * résultats sont SCORÉS : main qui matche = 4 pts, chaque substat = 1 pt).
  * Parcours en étapes : type → classe → pièce → main → substats ; les persos
- * qui matchent sortent en cartes triées par score. État local pur (parité V2,
+ * qui matchent sortent en cartes triées par score. État local pur (inchangé,
  * un résultat se consulte, il ne se partage pas filtré).
  */
 export function GearUsageFinderBrowser({

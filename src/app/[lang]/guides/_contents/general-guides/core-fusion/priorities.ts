@@ -1,5 +1,5 @@
 /**
- * Priorités de déblocage — VERBATIM V2 (core-fusion-priorities.json).
+ * Priorités de déblocage — VERBATIM (core-fusion-priorities.json).
  * `op` relie une entrée à la SUIVANTE (`>` strictement avant, `>=`).
  */
 export interface FusionPriorityPick {

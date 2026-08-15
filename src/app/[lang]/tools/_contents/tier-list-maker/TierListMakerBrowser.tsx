@@ -135,7 +135,7 @@ const FILTER_TAGS = ['limited', 'collab', 'seasonal', 'free', 'premium'];
 const CLASSES = ['striker', 'defender', 'ranger', 'healer', 'mage'];
 const RARITIES = [1, 2, 3];
 
-// ── Réglages d'affichage (persistés — clé V2 `tlm-settings` absorbée) ──
+// ── Réglages d'affichage (persistés — clé héritée `tlm-settings` absorbée) ──
 
 interface TlmSettings {
   iconSize: IconSize;
@@ -163,7 +163,7 @@ const SETTINGS_FALLBACK: TlmSettings = {
   showCardTags: false,
 };
 
-/** Normalise des réglages de provenance quelconque (V2 `tlm-settings` incluse
+/** Normalise des réglages de provenance quelconque (`tlm-settings` héritée incluse
  *  — mêmes champs, on ne garde que les valeurs valides). */
 function coerceSettings(raw: unknown): TlmSettings {
   const d = (raw && typeof raw === 'object' ? raw : {}) as Partial<TlmSettings>;
@@ -609,12 +609,12 @@ function DropPreview({
 // ── Composant principal ──
 
 /**
- * Éditeur de tier list (portage V2) : glisser-déposer (souris + tactile),
+ * Éditeur de tier list (porté tel quel) : glisser-déposer (souris + tactile),
  * lignes éditables (label/couleur/ordre), pool filtrable en trois onglets,
  * partage par lien court (`?s=` via /api/tierlist, repli lien long `?z=`),
  * export PNG canvas et export/import JSON. L'état de la LISTE vit dans l'URL
  * (source de vérité partageable) ; seuls les réglages d'affichage sont
- * persistés (`useStoredState`, clé V2 `tlm-settings` absorbée).
+ * persistés (`useStoredState`, clé héritée `tlm-settings` absorbée).
  */
 export function TierListMakerBrowser({
   characters,

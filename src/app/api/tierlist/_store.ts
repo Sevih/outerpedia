@@ -1,8 +1,8 @@
 import { createHashStore } from '@/lib/hash-store';
 
 /**
- * Aides communes aux routes de partage tier-list (portage V2 à l'identique :
- * MÊME table, MÊMES ids — les liens `?s=` V2 restent valides une fois la
+ * Aides communes aux routes de partage tier-list (portage à l'identique :
+ * MÊME table, MÊMES ids — les liens `?s=` déjà en circulation restent valides une fois la
  * table migrée sur le MySQL du VPS).
  *
  * La mécanique table + id-hash vient de `hash-store.ts` (socle partagé avec le
@@ -12,7 +12,7 @@ import { createHashStore } from '@/lib/hash-store';
 export const MAX_PAYLOAD = 1024;
 
 /**
- * Plus PERMISSIF que les ids produits (12 caractères) : la V2 a émis des ids
+ * Plus PERMISSIF que les ids produits (12 caractères) : d'anciens ids
  * d'autres longueurs et ses liens `?s=` doivent rester lisibles. À ne pas
  * resserrer sur `ID_LENGTH` — ce serait casser des liens déjà partagés.
  */

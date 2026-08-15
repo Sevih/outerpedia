@@ -3,7 +3,7 @@ import type { Lang } from '@/lib/i18n/config';
 import wallpapersData from '@data/generated/wallpapers.json';
 import { WallpapersGallery, type WallpapersData } from './WallpapersGallery';
 
-/** Ordre d'affichage des catégories (parité V2). */
+/** Ordre d'affichage des catégories (inchangé). */
 const CATEGORY_ORDER = [
   'Outerpedia',
   'HeroFullArt',

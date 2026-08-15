@@ -3,10 +3,10 @@
  * Rate Up, Premium, Limited) en onglets à cartes-images, et le système de
  * mileage.
  *
- * Server Component. Ce que la V2 codait en dur est GÉNÉRÉ (`recruit.json`) :
+ * Server Component. Ce qui était codé en dur est GÉNÉRÉ (`recruit.json`) :
  * taux par palier, prix, tickets, pulls gratuits, coût mileage, et la liste
- * des héros limited avec release/rerun (la V2 maintenait `banner.json` à la
- * main). Ne reste éditorial que le texte (labels.ts, verbatim V2) et le
+ * des héros limited avec release/rerun (`banner.json` était maintenu à la
+ * main). Ne reste éditorial que le texte (labels.ts, verbatim) et le
  * mapping bannière → monnaie de mileage (aucune table ne le porte).
  */
 import type { ReactNode } from 'react';
@@ -60,7 +60,7 @@ const MILEAGE_OF = {
   limited: 'Limited Mileage',
 } as const;
 
-/** Tickets d'EVENT (variante sans mileage) par type — éditorial, comme en V2. */
+/** Tickets d'EVENT (variante sans mileage) par type — éditorial, inchangé. */
 const EVENT_TICKET_OF: Partial<Record<keyof typeof MILEAGE_OF, string>> = {
   custom: 'Special Recruitment Ticket (Event)',
   pickup: 'Special Recruitment Ticket (Event)',
@@ -75,7 +75,7 @@ const COLLAB_NAMES: Record<string, string> = {
   '2000097': 'DanMachi', // Ryu Lion
 };
 
-/** Séparateur de l'exemple Custom (V2 : ternaire en/zh, verbatim). */
+/** Séparateur de l'exemple Custom (ternaire en/zh, repris verbatim). */
 const AND: LocalizedText = { en: 'and ', zh: '和' };
 
 export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
@@ -108,7 +108,7 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
     return rows;
   };
 
-  /** Encart mileage d'un type (coût généré ; défaut V2 = 200 si absent). */
+  /** Encart mileage d'un type (coût généré ; défaut historique = 200 si absent). */
   const mileageInfo = (kind: keyof typeof MILEAGE_OF): ReactNode => {
     const info = getRecruitKind(kind);
     return (

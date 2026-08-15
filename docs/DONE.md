@@ -7,6 +7,26 @@
 
 ## 2026-08-15
 
+- **Plus aucune référence « V2 »/« V3 » dans les commentaires** (~500
+  occurrences, 300 fichiers). Ces numéros ne désignaient plus rien de
+  consultable — `outerpediaV2` est archivé — et plusieurs commentaires
+  justifiaient un choix par un dépôt que personne ne peut ouvrir. Le mot
+  disparaît, **le sens reste** : « l'ancien site », « format hérité »,
+  « inchangé », « auparavant », « nos tokens », et la raison intrinsèque plutôt
+  que la comparaison (« max-w-6xl : les vues dimensionnent leurs cartes en % du
+  conteneur », plus « même largeur que la V2 »).
+  Le piège, vérifié fichier par fichier avant de couper : **~92 de ces mentions
+  ne parlaient pas du dépôt mais d'une compatibilité EN PRODUCTION** — le codec
+  `?z=` décode les liens de filtres encore en favoris, `client-storage` absorbe
+  les clés localStorage des visiteurs sur le même origin, la tier-list hérite
+  d'anciens ids. Là, la description remplace le numéro (« CONTRAT PUBLIC hérité
+  du site précédent, remplacé le 21/07/2026 ») : rien n'est perdu.
+  Laissés en place, car ce ne sont pas des commentaires : le `d="…1.51V21a2…"`
+  d'un path SVG, le nom `outerpediaV2` quand il désigne le dépôt, et les « V2 »
+  de `docs/TODO.md` — dont un désigne la 2ᵉ version du hero-tracker, pas le site.
+  La règle est désormais dans `CONVENTIONS.md` § Langue : sans elle, un
+  « comme en V2 » repousse au prochain fichier.
+
 - **Trois textes décrivaient un état disparu.** (1) Le lien **GitHub du pied de
   page** pointait `Sevih/outerpediaV2` — dépôt **archivé** — au lieu de
   `Sevih/outerpedia` : tout visiteur cliquant sur GitHub atterrissait sur le

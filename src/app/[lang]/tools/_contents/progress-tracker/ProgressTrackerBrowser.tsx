@@ -119,7 +119,7 @@ export interface TrackerAssets {
 
 type SettingsTab = 'display' | 'game' | 'content' | 'craft' | 'shop';
 
-/** Couleurs de jauge par palier de complétion (parité V2). */
+/** Couleurs de jauge par palier de complétion (palette conservée). */
 function progressColor(percent: number): { bar: string; border: string; glow: string } {
   if (percent >= 100)
     return { bar: 'bg-green-500', border: 'border-green-500', glow: 'shadow-green-500/20' };
@@ -144,7 +144,7 @@ function debounced(fn: () => void) {
 }
 
 /**
- * Progress tracker (portage V2, état réécrit) : suivi local des tâches
+ * Progress tracker (porté de l'ancien site, état réécrit) : suivi local des tâches
  * daily/weekly/monthly du jeu. La progression STOCKÉE n'est jamais lue telle
  * quelle : chaque rendu passe par `reconcileProgress` (synchro réglages +
  * resets dus) et toute mutation part de cette vue réconciliée — les resets
@@ -602,9 +602,9 @@ export function ProgressTrackerBrowser({
                 <p className="text-content-muted mb-3 text-sm">{labels.clearDataDesc}</p>
                 <button
                   onClick={() => {
-                    // Remise à zéro des DONNÉES V3 (progression + réglages). Les
-                    // clés V2 héritées ne sont jamais touchées (filet de retour
-                    // arrière) — mais comme la clé V3 réécrite prime sur
+                    // Remise à zéro des DONNÉES courantes (progression + réglages). Les
+                    // clés héritées ne sont jamais touchées (filet de retour
+                    // arrière) — mais comme la clé courante réécrite prime sur
                     // l'absorption legacy, le reset tient bien.
                     if (window.confirm(labels.clearDataConfirm)) {
                       setProgress(EMPTY_PROGRESS);

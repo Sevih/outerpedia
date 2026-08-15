@@ -5,7 +5,7 @@ import { ensureTable, ID_RE } from '../_store';
 
 export const dynamic = 'force-dynamic';
 
-/** GET /api/tierlist/[id] → { z } (la tier-list encodée) ou 404. Portage V2. */
+/** GET /api/tierlist/[id] → { z } (la tier-list encodée) ou 404. Porté tel quel. */
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   if (!ID_RE.test(id)) return NextResponse.json({ error: 'bad_id' }, { status: 400 });

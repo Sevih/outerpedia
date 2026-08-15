@@ -1,7 +1,7 @@
 /**
- * Textes du guide « How to Play » (V2 : strings.json + cast `as` qui mentait au
+ * Textes du guide « How to Play » (avant : strings.json + cast `as` qui mentait au
  * compilateur). Ici un `satisfies` : une clé manquante ou une langue oubliée
- * sur `en` casse la compilation. Le HTML inline des textes V2 (`<strong>…`)
+ * sur `en` casse la compilation. Le HTML inline des textes d'origine (`<strong>…`)
  * est devenu de la STRUCTURE (libellé + corps séparés) — plus de
  * dangerouslySetInnerHTML.
  */

@@ -1,9 +1,9 @@
 /**
  * Guide « Premium & Limited » — deux onglets : priorités de pull + review par
  * héros. Les reviews, priorités et notes d'impact sont ÉDITORIALES (transplant
- * V2) ; l'identité des persos (élément/classe/tag), et les sweetspots de
- * transcendance DÉRIVENT des données du jeu (la V2 rechargeait tout côté
- * client, textes de transcendance compris).
+ * verbatim) ; l'identité des persos (élément/classe/tag), et les sweetspots de
+ * transcendance DÉRIVENT des données du jeu (tout était auparavant rechargé
+ * côté client, textes de transcendance compris).
  */
 import type { ReactNode } from 'react';
 import type { Lang } from '@/lib/i18n/config';

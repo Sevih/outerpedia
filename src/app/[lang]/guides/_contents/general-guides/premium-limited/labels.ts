@@ -1,5 +1,5 @@
 /**
- * Libellés du guide « Premium & Limited » — transplantés VERBATIM de la V2
+ * Libellés du guide « Premium & Limited » — transplantés VERBATIM de l'ancien site
  * (helpers.tsx, oracle de contenu). Titre/description dans meta.json ; les
  * reviews et priorités dans reviews.ts / priorities.ts.
  */

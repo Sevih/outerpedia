@@ -46,7 +46,7 @@ const SKILL_SOURCES: { value: string; labelKey: TranslationKey }[] = [
   { value: 'exclusiveEquip', labelKey: 'equip.tab.ee' },
 ];
 
-/** Ordre canonique des stats de bonus d'équipe (parité V2). */
+/** Ordre canonique des stats de bonus d'équipe (ordre historique conservé). */
 const TEAM_BONUS_ORDER = [
   'SPD',
   'ATK',
@@ -126,7 +126,7 @@ function buildRows(lang: Lang): CharacterRow[] {
 
 /**
  * Libellés du browser (client) pré-traduits côté serveur — même pattern que la
- * page équipement (aucun contexte i18n en V3, tout passe par props). Les maps
+ * page équipement (aucun contexte i18n ici, tout passe par props). Les maps
  * d'options sont dérivées des valeurs réellement présentes.
  */
 function buildLabels(rows: CharacterRow[], lang: Lang, t: TFunction): CharactersBrowserLabels {
@@ -272,7 +272,7 @@ export default async function CharactersPage({ params }: { params: Promise<{ lan
   });
 
   return (
-    // Gabarit V2 : pleine largeur (pas de max-w), en-tête centré, doubles paddings
+    // Gabarit historique : pleine largeur (pas de max-w), en-tête centré, doubles paddings
     // (outer px-4/md:px-6 + inner px-2/md:px-4 côté browser) — parité exacte.
     <div className="px-4 py-6 md:px-6">
       <JsonLd data={itemList} />

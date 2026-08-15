@@ -5,7 +5,7 @@
  * RÉSUMÉS déjà localisés (titre, résumé, statut) — le contenu d'un événement
  * n'est chargé que sur sa page, et les brouillons sont écartés côté serveur.
  *
- * En V2 la liste dépliait l'événement en place (`/event#slug`) : rien n'était
+ * La liste dépliait avant l'événement en place (`/event#slug`) : rien n'était
  * partageable ni indexable. Ici chaque carte est un lien vers `/event/<slug>`.
  */
 import { useState } from 'react';

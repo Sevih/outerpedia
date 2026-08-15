@@ -1,6 +1,6 @@
 /**
  * Tests du codec de partage. Le format de fil `z` est un CONTRAT PUBLIC :
- * des liens V2 circulent (Discord, forums) et doivent se décoder ici — d'où
+ * d'anciens liens circulent (Discord, forums) et doivent se décoder ici — d'où
  * le test d'épinglage octet-à-octet, qui doit casser si on touche au format.
  */
 import { describe, expect, it } from 'vitest';
@@ -70,12 +70,12 @@ describe('encode / decode', () => {
     expect(decodeState('1a,b,c', canon)).toBeNull(); // longueur impaire
   });
 
-  it('ÉPINGLAGE du format de fil (compat liens V2 — ne doit JAMAIS changer)', () => {
+  it('ÉPINGLAGE du format de fil (compat des liens partagés — ne doit JAMAIS changer)', () => {
     const tiers = [
       tier('S', ['c2000002', 'c2000001'], TIER_PALETTE[0]),
       tier('A', ['e2000003'], '#0a1b2c'),
     ];
-    // Généré par ce codec (portage à l'identique de l'encodeur V2) puis figé :
+    // Généré par ce codec (portage à l'identique de l'ancien encodeur) puis figé :
     // toute évolution du format casse ce test — c'est voulu.
     expect(encodeState('Pin', tiers, canon)).toBe('1UGlu,Uw,p0,QQ,c0a1b2c,wEAQAgAQEA');
     const decoded = decodeState(encodeState('Pin', tiers, canon), canon)!;

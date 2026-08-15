@@ -75,7 +75,7 @@ export default async function LangLayout({
       <Header />
       <EventBanner lang={lang} />
       {/* Pas de conteneur global : chaque page pose le sien (la fiche perso est
-          full-bleed, comme en V2). `page-container` = l'ancien gabarit.
+          full-bleed, comme avant). `page-container` = l'ancien gabarit.
           ATTENTION : « le sien » = un `<div>`, JAMAIS un `<main>`. Le landmark
           principal est posé ICI, une fois pour les 23 pages. 9 pages en
           rendaient un second à l'intérieur (dont l'accueil et la fiche perso) :

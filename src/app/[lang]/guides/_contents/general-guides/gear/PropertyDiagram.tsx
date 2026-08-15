@@ -2,7 +2,7 @@
 
 /**
  * Diagramme INTERACTIF des propriétés d'une pièce (onglet Bases) — port de
- * l'`EquipmentIntro` V2 : survoler une ligne de propriété met en surbrillance la
+ * l'ancien `EquipmentIntro` : survoler une ligne de propriété met en surbrillance la
  * zone correspondante de la tuile (étoiles, palier, +N, classe, effet…). La
  * tuile réutilise `EquipmentIcon` (cadre/étoiles/classe/effet/tier/+N déjà gérés).
  */

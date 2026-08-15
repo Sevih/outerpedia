@@ -1,6 +1,6 @@
 /**
  * Guide « How Quirks Work » (quirk / Awakening) — 3 onglets : Guide (concept
- * porté V2), Quirk Trees (arbres DÉRIVÉS de `quirks.json`), FAQ.
+ * porté tel quel), Quirk Trees (arbres DÉRIVÉS de `quirks.json`), FAQ.
  *
  * La prose est éditoriale (labels.ts, tags parse-text strict). Les ARBRES —
  * nœuds, connexions, coûts + effets par niveau — DÉRIVENT du jeu

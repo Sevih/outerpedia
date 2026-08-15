@@ -1,6 +1,6 @@
 /**
  * Contenu ÉDITORIAL du guide quirk (« Awakening / Gift » en jeu) — prose verbatim
- * portée de la V2 (5 langues). Les ARBRES eux-mêmes DÉRIVENT de `quirks.json`.
+ * portée de l'ancien site (5 langues). Les ARBRES DÉRIVENT de `quirks.json`.
  *
  * Tags : `{C/}` classe, `{E/}` élément, `{S/}` stat, `{P/}` perso, `{I-I/}` item
  * (parse-text strict). `{ICON_XXX}` = terme de catégorie, résolu au rendu (pas de

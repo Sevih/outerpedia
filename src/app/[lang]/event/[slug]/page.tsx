@@ -1,7 +1,7 @@
 /**
  * PAGE d'un événement communautaire (`/event/<slug>`).
  *
- * La V2 pliait tous les événements dans `/event#slug` : rien n'était indexable
+ * Tous les événements étaient pliés dans `/event#slug` : rien n'était indexable
  * ni partageable (un seul titre et une seule carte OG pour l'ensemble). Ici
  * chaque événement a son URL, sa meta description, sa carte de partage (sa
  * bannière) et son fil d'Ariane.

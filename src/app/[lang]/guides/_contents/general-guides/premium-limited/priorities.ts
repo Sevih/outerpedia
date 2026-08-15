@@ -1,5 +1,5 @@
 /**
- * Priorités de pull/transcendance — VERBATIM V2 (premium-priorities.json).
+ * Priorités de pull/transcendance — VERBATIM (premium-priorities.json).
  * `stars` = étoile CIBLE affichée sous le portrait (pas la rareté).
  *
  * Priorités éditables (JSON) : sorties du TS pour l'admin. Rendu inchangé.

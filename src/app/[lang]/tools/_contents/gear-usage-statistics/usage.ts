@@ -35,7 +35,7 @@ export interface RawGearUsageEntry {
 /**
  * Agrège « quelle pièce est recommandée chez qui » depuis la GEAR-RECO CURÉE
  * (source unique des builds de fiche perso), à la lecture — pas d'artefact
- * généré committé comme en V2 (même régime que most-used-units). L'unité de
+ * généré committé comme avant (même régime que most-used-units). L'unité de
  * compte est la FAMILLE d'équipement (le perso recommande « Rampaging Caracal »,
  * pas une variante d'étoiles), et le SET pour les armures ; presets `$` résolus.
  * Un id inconnu ou une référence `!name` non arbitrée est SKIPPÉ : c'est le
@@ -126,7 +126,7 @@ export function computeGearUsage(): Record<GearCategory, RawGearUsageEntry[]> {
               key: v.id,
               name: v.name,
               slug: v.slug,
-              // Tuile = la pièce d'armure (comme la V2), enchantement en overlay ;
+              // Tuile = la pièce d'armure (inchangé), enchantement en overlay ;
               // cadre `unique` — le même rendu que les cartes de /equipment.
               icon: v.pieceIcons.armor ?? Object.values(v.pieceIcons).find(Boolean) ?? '',
               grade: 'unique',

@@ -39,7 +39,7 @@ const SETS = setsData as unknown as Record<string, { name: LocalizedText }>;
 
 /**
  * VUE EXTRACTOR d'un perso : l'extraction FRAÎCHE (la proposition) + le contrôle
- * (statut, V2, diff vs committé, intégration). Lecture/vérification. La curation
+ * (statut, diff vs committé, intégration). Lecture/vérification. La curation
  * vit côté Editor (bascule en haut).
  */
 export default async function ExtractorCharacterDetail({

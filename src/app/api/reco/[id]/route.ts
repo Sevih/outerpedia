@@ -5,7 +5,8 @@ import { getRecoStatPriorities } from '@/lib/data/reco-api';
  * GET /api/reco/:id → recommandations d'équipement d'un personnage, dans le
  * vocabulaire du solveur (cf. `src/lib/data/reco-api.ts` pour le contrat).
  *
- * Portage V2 à l'identique — consommé par l'app desktop Gear Solver, qui
+ * Portage à l'identique de l'ancienne API — consommé par l'app desktop Gear
+ * Solver, qui
  * distingue le 404 (« ce perso n'a pas de preset ») d'une erreur de transport.
  * Ce 404 doit donc rester du JSON, pas la page d'erreur HTML de Next.
  */

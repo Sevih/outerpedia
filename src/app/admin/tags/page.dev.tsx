@@ -3,7 +3,7 @@ import { collectTagOccurrences } from '@/lib/admin/tag-control';
 export const dynamic = 'force-dynamic';
 
 /**
- * CONTRÔLE DES TAGS INLINE (port de l'outil V2) : diagnostic détaillé — la
+ * CONTRÔLE DES TAGS INLINE (outil porté de l'ancien site) : diagnostic détaillé — la
  * collecte vit dans `@/lib/admin/tag-control`, partagée avec le test vitest
  * BLOQUANT (`tag-control.test.ts`) qui fait sonner le pipeline avant tout
  * build si un tag n'a pas de correspondance.

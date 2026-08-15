@@ -1,11 +1,11 @@
 /**
  * Données du guide « 2026 Roadmap » (meeting offline du 17 janvier 2026).
  *
- * Portage V2 : la donnée sort du composant (helpers.tsx mélangeait données et
+ * Au portage : la donnée sort du composant (helpers.tsx mélangeait données et
  * rendu) et se type en `satisfies`. Les personnages sont désignés par NOM
  * ÉDITORIAL EN (résolus par `resolveGuideCharacter` — plus d'ids en dur) ;
  * élément/classe des nouveaux persos sont des SLUGS rendus via parse-text.
- * Le français V2, saisi sans accents, a été raccommodé au passage.
+ * Le français d'origine, saisi sans accents, a été raccommodé au passage.
  */
 import type { LocalizedText } from '@contracts';
 

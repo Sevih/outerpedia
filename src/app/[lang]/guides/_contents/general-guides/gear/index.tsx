@@ -47,7 +47,7 @@ const MAX_TIER = Math.max(
   ),
 );
 
-/** En-tête de colonne « Main Stat » du tableau d'ascension (non porté en V2). */
+/** En-tête de colonne « Main Stat » du tableau d'ascension (ajout récent). */
 const MAIN_STAT_LABEL: LocalizedText = {
   en: 'Main Stat',
   jp: 'メインステ',

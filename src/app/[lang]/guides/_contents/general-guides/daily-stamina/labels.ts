@@ -1,7 +1,7 @@
 /**
- * Libellés du guide « Daily Stamina » — transplantés VERBATIM de la V2
+ * Libellés du guide « Daily Stamina » — transplantés VERBATIM de l'ancien site
  * (index.tsx, oracle de contenu). Le titre vit dans meta.json (le H2 en page
- * « Roadmap » de la V2 suit le pattern H1-meta des autres guides) ; les noms
+ * « Roadmap » d'origine suit le pattern H1-meta des autres guides) ; les noms
  * des boss irréguliers DÉRIVENT de monsters.json (fiches pursuit 512020xx,
  * les mêmes que les guides irregular-extermination — noms complets 4 langues).
  */
@@ -225,7 +225,7 @@ export const LABELS = {
     zh: '：体力奖励保留约6天。让体力条自然恢复，需要时再领取。',
     fr: ' : Les récompenses de Stamina restent environ 6 jours. Laissez votre barre se régénérer naturellement, puis récupérez-les selon vos besoins.',
   },
-  // « Bounty Hunter » (V2) n'existe plus : le mode actuel est le Hypnotic Frog
+  // « Bounty Hunter » n'existe plus : le mode actuel est le Hypnotic Frog
   // Hall (SYS_GOLD_DUNGEON), qui consomme le {I-I/Frog Hall Ticket} officiel.
   body_noteOtherDailies: {
     en: 'Note: Other dailies like the Hypnotic Frog Hall are also valuable, but they use {I-I/Frog Hall Ticket}, not {I-I/Stamina}.',
@@ -242,7 +242,7 @@ export interface SweepRow {
   reason: LocalizedText;
 }
 
-/** Les catégories du sweep quotidien (verbatim V2). */
+/** Les catégories du sweep quotidien (verbatim). */
 export const SWEEP_ROWS: SweepRow[] = [
   {
     name: {
@@ -292,7 +292,7 @@ export const SWEEP_ROWS: SweepRow[] = [
   },
 ];
 
-/** Ecology Study — même sweep, optionnel (verbatim V2). */
+/** Ecology Study — même sweep, optionnel (verbatim). */
 export const SWEEP_OPTIONAL: SweepRow = {
   name: {
     en: 'Special Request: Ecology Study (Stage 13)',

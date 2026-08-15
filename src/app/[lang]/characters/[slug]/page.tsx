@@ -114,13 +114,13 @@ export async function generateMetadata({
     // (audit Sitebulb 20/07 : 572 titles courts, surtout les pages générées).
     title: `${name}${t('page.character.sr_suffix', { element: el, classType: cl })}`,
     description: t('page.character.meta_description', { name, element: el, classType: cl }),
-    // FI en PNG (aperçus Discord/OG) — mêmes propriété et taille que la V2.
+    // FI en PNG (aperçus Discord/OG) — propriété et taille inchangées.
     ogImage: img.facePng(char.id),
     ogImageSize: { width: 150, height: 150 },
   });
 }
 
-/** Une section éditoriale de la fiche (portage du flux V2). */
+/** Une section éditoriale de la fiche (flux porté de l'ancien site). */
 interface Sec {
   anchor: string;
   title: string;
@@ -186,7 +186,7 @@ export default async function CharacterDetail({
   if (char.profile?.height) meta.push([t('page.character.height'), `${char.profile.height} cm`]);
   if (char.profile?.weight) meta.push([t('page.character.weight'), `${char.profile.weight} kg`]);
 
-  // --- Skills : cartes V2 (mains), burst, chaîne & duo ----------------------
+  // --- Skills : cartes principales, burst, chaîne & duo ---------------------
   const skillLabels = {
     cooldown: t('page.character.skill.cooldown'),
     wgr: t('page.character.skill.wgr'),
@@ -292,7 +292,7 @@ export default async function CharacterDetail({
     { name, url: buildUrl(lang, path) },
   ]);
 
-  // --- Flux éditorial (ordre V2 ; les sections manquantes s'insèreront ici) --
+  // --- Flux éditorial (ordre historique ; les sections à venir s'insèrent ici) --
   const statLayers = getStatLayers(char);
   const secs: Sec[] = [];
   const prosCons = getCharacterProsCons(char.id);
@@ -315,7 +315,7 @@ export default async function CharacterDetail({
       ),
     });
   }
-  // Stats & Ranking : paliers calculés (formules du client, oracle V2) + tiers.
+  // Stats & Ranking : paliers calculés (formules du client) + tiers.
   {
     const view = computeStatSteps(char);
     const recallItems: Record<string, GiftView> = {};
@@ -382,7 +382,7 @@ export default async function CharacterDetail({
       ),
     });
   }
-  // EE + Transcendance (côte à côte, comme V2).
+  // EE + Transcendance (côte à côte).
   {
     const transcendTiers = getTranscendTiers(char, lang);
     let eeCard: EeCardView | undefined;
@@ -554,8 +554,8 @@ export default async function CharacterDetail({
       body: <SynergiesSection groups={groups} />,
     });
   }
-  // Ordre V2 : les reviews s'intercalent entre synergies et vidéo. Section (et
-  // entrée de toc) seulement s'il y a des avis — même règle que la V2.
+  // Ordre historique : les reviews s'intercalent entre synergies et vidéo.
+  // Section (et entrée de toc) seulement s'il y a des avis.
   if (reviews.length > 0) {
     secs.push({
       anchor: 'reviews',

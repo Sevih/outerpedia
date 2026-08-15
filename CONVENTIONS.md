@@ -4,6 +4,13 @@
 
 - **Documentation** (README, roadmap, issues...) : français.
 - **Code** (identifiants, noms de fichiers) : anglais. **Commentaires** : français — c'est la pratique de tout le codebase ; la règle « commentaires en anglais » ne l'a jamais été (alignée le 2026-07-14).
+- **Ni « V2 » ni « V3 » dans les commentaires** (purgés le 2026-08-15, ~500
+  occurrences). Ces numéros ne désignent plus rien de consultable : le dépôt
+  `outerpediaV2` est archivé. Écrire ce que la chose EST — « l'ancien site »,
+  « format hérité », « inchangé », « auparavant », « nos tokens » — et garder la
+  raison intrinsèque plutôt que la comparaison : « max-w-6xl : les vues
+  dimensionnent leurs cartes en % du conteneur », pas « même largeur que la V2 ».
+  Le nom `outerpediaV2` reste écrit quand il désigne le dépôt lui-même.
 
 ## Commits — Conventional Commits
 

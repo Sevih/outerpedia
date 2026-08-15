@@ -1,9 +1,9 @@
 'use client';
 
 /**
- * Calculateur de revenus d'Ether (portage V2, re-stylé V3) — tout le TEXTE et
+ * Calculateur de revenus d'Ether (porté puis re-stylé) — tout le TEXTE et
  * toutes les DONNÉES arrivent déjà localisés/résolus du serveur (index.tsx) :
- * ce composant ne fait que l'état des sélecteurs et l'arithmétique V2
+ * ce composant ne fait que l'état des sélecteurs et l'arithmétique d'origine
  * (totaux quotidiens/hebdo/mensuels + projection jusqu'à une date).
  */
 import { useMemo, useState } from 'react';
@@ -189,7 +189,7 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
     s.ranked ? (picked[s.ranked]?.ether ?? s.amount) : s.amount;
   /** Contribution MENSUELLE (moyenne si la source n'a pas lieu chaque mois). */
   const monthlyOf = (s: SourceRow): number => Math.round(amountOf(s) / (s.monthsPerCycle ?? 1));
-  /** Libellé effectif (palier sélectionné entre parenthèses, comme en V2). */
+  /** Libellé effectif (palier sélectionné entre parenthèses, inchangé). */
   const labelOf = (s: SourceRow): string => {
     if (!s.ranked) return s.label;
     const opt = picked[s.ranked];

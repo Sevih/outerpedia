@@ -27,7 +27,7 @@ export async function generateMetadata({
 
 /**
  * Landing des outils (catégories + cartes). Les cartes pointent l'URL À PLAT
- * `/(slug)` (parité prod V2, routeur `[lang]/[slug]`) ; les outils non encore
+ * `/(slug)` (URLs de prod inchangées, routeur `[lang]/[slug]`) ; les outils non encore
  * portés y renvoient un 404. Libellés/titres/desc résolus côté serveur (i18n),
  * filtrage/hash côté client (`ToolsBrowser`). Page statique, revalidation 24 h.
  */

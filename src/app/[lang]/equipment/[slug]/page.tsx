@@ -39,7 +39,7 @@ export async function generateMetadata({
       type: t(`page.equipment.kind.${model.kind}` as TranslationKey),
     })}`,
     description: t('page.equipment.meta_description', { name: model.name }),
-    // Icône de l'item en PNG (aperçus Discord/OG) — propriété et taille V2.
+    // Icône de l'item en PNG (aperçus Discord/OG) — propriété et taille inchangées.
     ogImage: model.eeCharacterId ? img.eePng(model.eeCharacterId) : img.equipmentPng(model.icon),
     ogImageSize: { width: 150, height: 150 },
   });

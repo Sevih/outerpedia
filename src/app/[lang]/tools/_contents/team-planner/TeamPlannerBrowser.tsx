@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Team Planner — client (portage V2 sur les primitives V3).
+ * Team Planner — client (porté sur les primitives actuelles).
  *
  * Tout le moteur d'effets est SERVEUR (wrapper) : ici on ne fait que composer
  * des RÉFS de statut avec la `StatusMap` résolue. Quatre blocs :
@@ -14,9 +14,9 @@
  *     effets d'attaque duo (équipe complète) — chips par personnage ;
  *   - le PICKER (recherche + filtres élément/classe).
  *
- * Partage : `?z=` = JSON compact {t, o, n} compressé lz-string — FORMAT V2 à
- * l'identique (des liens circulent, et les ids V3 des persos de base sont les
- * ids du jeu, mêmes valeurs qu'en V2) ; l'ancien `?t=&o=&n=` reste décodé.
+ * Partage : `?z=` = JSON compact {t, o, n} compressé lz-string — FORMAT HÉRITÉ à
+ * l'identique (des liens circulent, et nos ids de persos de base sont les
+ * ids du jeu, valeurs inchangées) ; l'ancien `?t=&o=&n=` reste décodé.
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -519,7 +519,7 @@ export function TeamPlannerBrowser({ chars, fx, statuses, labels: L }: Props) {
   }, []);
 
   const handleShare = useCallback(() => {
-    // Format V2 à l'identique (contrat public — des liens circulent).
+    // Format hérité à l'identique (contrat public — des liens circulent).
     const compact: { t?: string[]; o?: string; n?: string } = {};
     const ids = team.map((id) => id ?? '');
     if (ids.some(Boolean)) compact.t = ids;

@@ -53,11 +53,11 @@ const MAX_PILLS = 3;
 const enc = (arr: string[]) => (arr.length ? arr.join(',') : undefined);
 
 /**
- * Classement des persos les plus recommandés dans les guides (portage V2) :
+ * Classement des persos les plus recommandés dans les guides (porté tel quel) :
  * filtres (recherche, élément, classe, rareté + catégorie de guide), lignes
  * dépliables listant les guides par catégorie (liens). Le TOTAL se recalcule
  * sur les seules catégories cochées. URL partageable en params à plat
- * (q/el/cl/r/cat — pas le `?z=` compressé de la V2).
+ * (q/el/cl/r/cat — pas le `?z=` compressé des filtres de `/characters`).
  */
 export function MostUsedUnitsBrowser({
   rows,

@@ -26,7 +26,7 @@ export async function generateMetadata({
 /**
  * Codes promo Outerplane — liste complète (actifs/à venir/expirés) depuis le curé
  * `coupons.json`, récompenses résolues. Instructions de rachat manuel en tête
- * (Android / lien iOS). Le rachat one-click de la V2 reste désactivé (`redeem`,
+ * (Android / lien iOS). L'ancien rachat one-click reste désactivé (`redeem`,
  * en attente d'accord VA Games) — non porté. Page statique i18n, revalidation 24 h.
  */
 export default async function CouponsPage({ params }: { params: Promise<{ lang: string }> }) {

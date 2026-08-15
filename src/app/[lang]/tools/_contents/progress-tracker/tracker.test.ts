@@ -2,7 +2,7 @@
  * Tests de la logique pure du progress tracker : resets calés sur le serveur
  * du jeu (UTC), synchro réglages ⇄ progression, cycles spéciaux (couloir
  * infini, tour céleste very hard, fabrication précise) et interprétation du
- * schéma V2 — le contrat de migration est NON NÉGOCIABLE, il est épinglé ici.
+ * ancien schéma — le contrat de migration est NON NÉGOCIABLE, épinglé ici.
  */
 import { describe, expect, it } from 'vitest';
 import {
@@ -46,7 +46,7 @@ function settingsWith(patch: Partial<UserSettings>): UserSettings {
   return { ...createDefaultSettings(), ...patch };
 }
 
-describe('specs de storage (contrat de migration V2 → V3)', () => {
+describe('specs de storage (contrat de migration depuis l’ancien schéma)', () => {
   it('clés, versions et clés héritées EXACTES du contrat', () => {
     expect(PROGRESS_SPEC.key).toBe('outerpedia:progress-tracker');
     expect(PROGRESS_SPEC.version).toBe(1);
@@ -305,8 +305,8 @@ describe('mutations groupées et stats', () => {
   });
 });
 
-describe('interprétation du schéma V2 et import/export', () => {
-  it('coerceProgress lit une progression V2 réelle', () => {
+describe('interprétation de l’ancien schéma et import/export', () => {
+  it('coerceProgress lit une progression héritée réelle', () => {
     const v2 = {
       daily: {
         'story-hard': {
@@ -353,7 +353,7 @@ describe('interprétation du schéma V2 et import/export', () => {
     expect(coerceProgress('rien')).toBeUndefined();
   });
 
-  it('export V3 → import : aller-retour complet', () => {
+  it('export courant → import : aller-retour complet', () => {
     const s = settingsWith({ hasVeronicaPremiumPack: true });
     const p = withTaskCount(
       reconcileProgress(EMPTY_PROGRESS, s, WED),
@@ -368,7 +368,7 @@ describe('interprétation du schéma V2 et import/export', () => {
     expect(imported.settings).toEqual(s);
   });
 
-  it('import d’un export V2 (progression brute, sans réglages)', () => {
+  it('import d’un export hérité (progression brute, sans réglages)', () => {
     const raw = JSON.stringify({
       daily: { 'story-hard': { completed: false, count: 3, maxCount: 30, lastUpdated: WED } },
       weekly: {},

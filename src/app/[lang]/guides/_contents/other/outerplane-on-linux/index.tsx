@@ -1,11 +1,11 @@
 /**
- * Guide « Outerplane on Linux » — setup Waydroid (portage V2, contribution
+ * Guide « Outerplane on Linux » — setup Waydroid (porté tel quel, contribution
  * Daystars). VOLONTAIREMENT EN ANGLAIS SEUL : guide technique de niche
  * (commandes shell, public anglophone) — seuls le meta et le SEO sont
  * localisés. Server Component, aucune donnée de jeu.
  *
- * Le disclaimer que la V2 passait à GuideTemplate est ici un bandeau en tête
- * de contenu : le cadre V3 (guide-detail) n'a pas — à raison — de prop dédiée
+ * Le disclaimer, autrefois passé à GuideTemplate, est ici un bandeau en tête
+ * de contenu : le cadre actuel (guide-detail) n'a pas — à raison — de prop dédiée
  * pour un cas unique.
  */
 
@@ -38,7 +38,7 @@ function Warning({ children }: { children: React.ReactNode }) {
 export default function OuterplaneOnLinuxGuide() {
   return (
     <>
-      {/* Disclaimer (ex-prop GuideTemplate V2) */}
+      {/* Disclaimer (ex-prop de GuideTemplate) */}
       <Warning>
         <strong>Important:</strong> This is an unofficial community guide, not endorsed or supported
         by the Outerplane team. The game does not officially support Linux, and the team is unable

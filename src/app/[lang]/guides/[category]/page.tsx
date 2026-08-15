@@ -79,7 +79,7 @@ export default async function GuideCategoryPage({
   });
 
   return (
-    // Même largeur que la V2 (max-w-6xl) : les vues de catégorie dimensionnent
+    // Largeur volontairement figée (max-w-6xl) : les vues de catégorie dimensionnent
     // leurs cartes en % du conteneur (7 licences par rangée…) — l'élargir les
     // grossit toutes d'autant.
     <div className="mx-auto max-w-6xl space-y-5 px-4 py-6 md:px-6">

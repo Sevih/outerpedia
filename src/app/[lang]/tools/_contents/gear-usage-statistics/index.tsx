@@ -8,8 +8,8 @@ import { GearUsageBrowser, type GearUsageLabels, type GearUsageRow } from './Gea
 /**
  * Gear Usage Statistics — wrapper SERVEUR : agrège l'usage depuis la gear-reco
  * curée (`usage.ts`), localise noms d'items et de persos (aucun contexte i18n
- * client en V3) et passe le tout au browser. Persos dans l'ordre d'agrégation
- * (parité V2) ; un perso sans fiche publique est écarté de la liste dépliée.
+ * client) et passe le tout au browser. Persos dans l'ordre d'agrégation
+ * (comportement conservé) ; un perso sans fiche publique est écarté de la liste dépliée.
  */
 export default async function GearUsageStatistics({ lang }: { lang: Lang }) {
   const t = await getT(lang);

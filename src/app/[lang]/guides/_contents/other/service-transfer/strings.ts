@@ -1,8 +1,8 @@
 /**
- * Textes du guide « Service Transfer » (V2 : strings.json + HTML inline rendu
+ * Textes du guide « Service Transfer » (avant : strings.json + HTML inline rendu
  * en dangerouslySetInnerHTML). Ici : `satisfies` typé, et le balisage réduit à
  * `**gras**` / `[label](url)` interprétés par ./rich.tsx. Les alts des
- * screenshots V2 ont disparu avec les screenshots (les pages sources VAGAMES
+ * anciens screenshots ont disparu (les pages sources VAGAMES
  * et Smilegate ont été détruites — images perdues).
  */
 import type { LocalizedText } from '@contracts';
@@ -424,7 +424,7 @@ export const S = {
 } as const satisfies Record<string, Text>;
 
 /**
- * Récompenses de transfert : nom d'item (gras) + effet. La V2 passait par
+ * Récompenses de transfert : nom d'item (gras) + effet. On passait avant par
  * ItemInline ; ces items d'événement ne sont plus dans le catalogue — du
  * texte fort suffit pour une archive.
  */

@@ -5,7 +5,7 @@
  * Tout le factuel DÉRIVE de `data/generated/timegate-resources.json` : les
  * lignes de SHOP viennent de `ProductTemplet` (quantité auto-corrigée quand un
  * shop est rebrassé — la dérivation trouve même Tower/Remains/Real-Time Arena
- * que la hand-list V2 avait ratés) ; les lignes NON-SHOP (drops, missions,
+ * que l'ancienne hand-list avait ratés) ; les lignes NON-SHOP (drops, missions,
  * singularité, atelier de Kate) sont un overlay curé car leur quantité est une
  * estimation joueur absente de la donnée. Ici : présentation seule.
  *

@@ -1,10 +1,10 @@
 /**
- * Libellés du guide « Ether Income » — transplantés VERBATIM de la V2
+ * Libellés du guide « Ether Income » — transplantés VERBATIM de l'ancien site
  * (labels.ts, oracle de contenu), à trois différences près :
  *   - les NOMS DE PALIER (arène, ligues world boss) viennent du jeu
  *     (ether-rankings.json) — seuls les gabarits Top/Rank/Below restent ici ;
  *   - les notes de rang (arena/guild/world boss) sont des GABARITS {min}/{max}
- *     remplis depuis les données générées (les nombres V2 étaient périmés —
+ *     remplis depuis les données générées (les anciens nombres étaient périmés —
  *     le jeu a doublé guild raid et world boss) ;
  *   - le titre vit dans meta.json.
  */
@@ -306,8 +306,8 @@ export const LABELS = {
     zh: 'Top {n}以下',
     fr: 'Sous le Top {n}',
   },
-  // Cadence guild raid / world boss (V3 — la V2 les comptait chaque mois).
-  // Remplace la note de rang V2 pour ces deux sources : fourchette {min}/{max}
+  // Cadence guild raid / world boss (on les comptait chaque mois auparavant).
+  // Remplace l'ancienne note de rang pour ces deux sources : fourchette {min}/{max}
   // dérivée des échelles générées, colonne affichée en moyenne mensuelle.
   everyOtherMonth: {
     en: 'Held once every 2 months — reward from {min} to {max}. (Displayed as monthly average)',
@@ -318,7 +318,7 @@ export const LABELS = {
   },
 } as const satisfies Record<string, LocalizedText>;
 
-/** Libellés des sources de revenus (verbatim V2). */
+/** Libellés des sources de revenus (verbatim). */
 export const SOURCE_LABELS: Record<string, LocalizedText> = {
   'daily.missions': {
     en: 'Daily Missions',
@@ -480,7 +480,7 @@ export const SOURCE_NOTES: Record<string, LocalizedText> = {
   },
 };
 
-/** Sources variables/événementielles, exclues des totaux (verbatim V2). */
+/** Sources variables/événementielles, exclues des totaux (verbatim). */
 export const VARIABLE_ITEMS: Record<string, LocalizedText> = {
   'variable.terminus': {
     en: 'Terminus Island Ether rewards (22–26 on treasure reward on Terminus 10) (5 chances everyday ×2 w/ terminus pack)',

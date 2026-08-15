@@ -1,6 +1,6 @@
 /**
  * Libellés du guide « Recommended Purchases by Shop » — transplantés VERBATIM
- * de la V2. Les 8 shops permanents « à monnaie » DÉRIVENT du jeu
+ * de l'ancien site. Les 8 shops permanents « à monnaie » DÉRIVENT du jeu
  * (data/generated/shop-priorities.json) ; ces libellés ne portent que la
  * présentation (légende de priorité, colonnes, noms d'onglets) et le contenu
  * ÉDITORIAL des shops non dérivés (cf. editorial.ts).
@@ -136,7 +136,7 @@ export const LABELS = {
   },
 } as const satisfies Record<string, LocalizedText>;
 
-/** Onglets de shop (ordre d'affichage V2). `key` aligné sur le générateur. */
+/** Onglets de shop (ordre d'affichage conservé). `key` aligné sur le générateur. */
 export const SHOP_TABS: { key: string; label: LocalizedText }[] = [
   {
     key: 'guild',

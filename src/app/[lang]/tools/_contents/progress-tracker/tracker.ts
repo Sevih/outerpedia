@@ -1,11 +1,11 @@
 /**
- * Progress tracker — LOGIQUE PURE (portage V2 `progressTracker.ts`). Aucune
+ * Progress tracker — LOGIQUE PURE (portée de l'ancien `progressTracker.ts`). Aucune
  * lecture d'horloge ni de storage ici : chaque fonction reçoit `now` et rend
  * une nouvelle valeur — le composant client branche le tout sur
  * `useStoredState` et un tick de 60 s.
  *
- * Modèle V3 : `count` est LA source de vérité d'une tâche (« complétée » =
- * count ≥ max, le max étant TOUJOURS dérivé des réglages — la V2 stockait
+ * Modèle courant : `count` est LA source de vérité d'une tâche (« complétée » =
+ * count ≥ max, le max étant TOUJOURS dérivé des réglages — l'ancien site stockait
  * `completed`/`maxCount` en doublon et les resynchronisait sans cesse).
  * Resets calés sur le serveur du jeu : quotidien 00:00 UTC, hebdo lundi
  * 00:00 UTC, mensuel le 1er 00:00 UTC.
@@ -71,7 +71,7 @@ export const PRECISE_CRAFT_COOLDOWN_MS = 30 * DAY_MS;
 /* ------------------------------------------------------------------------ */
 
 /**
- * Normalise des réglages de provenance quelconque (V3 stockés, clé V2
+ * Normalise des réglages de provenance quelconque (stockés courants, clé héritée
  * absorbée, import) vers le schéma courant : ids obsolètes écartés,
  * permanents ré-ajoutés, listes remises dans l'ordre des définitions,
  * champs manquants défaultés. Idempotente.
@@ -460,13 +460,13 @@ export function formatTimeUntil(timestamp: number, now: number): string {
 }
 
 /* ------------------------------------------------------------------------ */
-/* Storage : specs V3 + interprétation du schéma V2                          */
+/* Storage : specs courants + interprétation de l'ancien schéma              */
 /* ------------------------------------------------------------------------ */
 
 /**
- * Interprète une progression de provenance quelconque — schéma V2
+ * Interprète une progression de provenance quelconque — ancien schéma
  * (`outerplane:progress` : tâches `{completed, count?, maxCount?}`) ou export
- * V3 — vers le schéma courant. `undefined` si la forme n'est pas plausible.
+ * ou courant — vers le schéma courant. `undefined` si la forme n'est pas plausible.
  */
 export function coerceProgress(data: unknown): UserProgress | undefined {
   if (!data || typeof data !== 'object') return undefined;
@@ -493,7 +493,7 @@ export function coerceProgress(data: unknown): UserProgress | undefined {
     )) {
       if (!t || typeof t !== 'object') continue;
       const stored = typeof t.count === 'number' ? Math.max(0, t.count) : 0;
-      // V2 « case cochée » sans count (vieux schéma) : préserver la complétion.
+      // « case cochée » sans count (vieux schéma) : préserver la complétion.
       const count =
         t.completed === true
           ? Math.max(stored, typeof t.maxCount === 'number' ? t.maxCount : 1)
@@ -554,8 +554,8 @@ export function exportState(progress: UserProgress, settings: UserSettings): str
 }
 
 /**
- * Lit un export V3 (`{progress, settings}`) ou un export V2 (progression
- * brute). `null` si illisible ; `settings` absent d'un export V2.
+ * Lit un export courant (`{progress, settings}`) ou un export hérité
+ * (progression brute). `null` si illisible ; `settings` absent d'un export hérité.
  */
 export function importState(
   raw: string,

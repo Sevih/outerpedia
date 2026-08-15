@@ -32,8 +32,8 @@ const PORTRAIT = new Set(['HeroFullArt', 'Cutin']);
 
 /**
  * Galerie de wallpapers : onglets de catégorie, grille cliquable (badge de
- * résolution) et lightbox (navigation clavier + téléchargement). Portage V2
- * réhabillé sur les tokens V3 (accent ciel conservé, autorisé hors `guides/**`).
+ * résolution) et lightbox (navigation clavier + téléchargement). Porté tel quel
+ * réhabillé sur nos tokens (accent ciel conservé, autorisé hors `guides/**`).
  */
 export function WallpapersGallery({
   data,

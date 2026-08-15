@@ -77,10 +77,10 @@ function rankByCharacter(mode: TierListMode): Map<string, string> {
 /**
  * Socle SERVEUR commun aux 4 tier lists par perso (PvE, PvP, EE base, EE +10) :
  * lignes construites depuis la liste extraite + le rang du mode, libellés
- * pré-traduits (aucun contexte i18n client en V3), JSON-LD ItemList trié S→E
- * (parité V2 — étendu aux EE, la V2 ne l'avait que sur PvE/PvP). Spécificités de
+ * pré-traduits (aucun contexte i18n client), JSON-LD ItemList trié S→E
+ * (inchangé — étendu aux EE, ce n'était que sur PvE/PvP avant). Spécificités de
  * mode : sélecteur de transcendance + surcharges `rankByTranscend` en PvE seul,
- * groupe Rôles sur PvE/PvP seuls, légende des tiers sur les EE seuls (parité V2).
+ * groupe Rôles sur PvE/PvP seuls, légende des tiers sur les EE seuls (inchangé).
  */
 export async function TierListTool({ lang, mode }: { lang: Lang; mode: TierListMode }) {
   const t = await getT(lang);
@@ -162,7 +162,7 @@ function buildLabels(t: TFunction, mode: TierListMode, rows: TierListRow[]): Tie
       starAria: t('aria.star_rarity'),
     },
     // Rôles sur PvE/PvP seuls ; légende du sens des tiers sur les EE seuls
-    // (parité V2).
+    // (inchangé).
     ...(isEe
       ? {
           legend: TIERS.map((tier) => ({

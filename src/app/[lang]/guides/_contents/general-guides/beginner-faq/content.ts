@@ -1,5 +1,5 @@
 /**
- * Contenu ÉDITORIAL du guide « Beginner FAQ » — transplanté VERBATIM de la V2
+ * Contenu ÉDITORIAL du guide « Beginner FAQ » — transplanté VERBATIM de l'ancien site
  * (oracle de contenu), séparé du rendu (index.tsx compose les primitives de
  * `components/guides/editorial`). Les tags inline ({P/…}, {I-I/…}, {B/…}…)
  * sont résolus par parse-text en mode STRICT : une référence morte casse le

@@ -1,10 +1,10 @@
 /**
  * Guide « 2026 Roadmap » — compte-rendu du meeting offline de janvier 2026
- * (portage V2, traduction @NewWorld). Contenu DATÉ conservé tel quel : c'est
+ * (porté tel quel, traduction @NewWorld). Contenu DATÉ conservé : c'est
  * une archive de ce qui a été annoncé, pas un suivi de ce qui a été livré.
  *
  * Server Component : les persos Core Fusion sont résolus par NOM
- * (`resolveGuideCharacter` — la V2 portait leurs ids en dur), élément/classe
+ * (`resolveGuideCharacter` — leurs ids étaient portés en dur), élément/classe
  * des nouveaux persos passent par parse-text, les captures viennent du pool
  * éditorial (`img.guideShot`).
  */

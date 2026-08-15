@@ -1,9 +1,9 @@
 /**
- * Guide « How to Play » — page de téléchargement / démarrage (portage V2).
+ * Guide « How to Play » — page de téléchargement / démarrage (porté tel quel).
  *
  * Server Component : contenu 100 % statique (liens officiels + textes de
- * strings.ts), aucune donnée de jeu. Le layout V2 est conservé (héro, deux
- * colonnes, sidebar liens rapides / officiel / communauté) sur les tokens V3.
+ * strings.ts), aucune donnée de jeu. Le layout d'origine est conservé (héro, deux
+ * colonnes, sidebar liens rapides / officiel / communauté) sur nos tokens.
  */
 import { lRec } from '@/lib/i18n/localize';
 import type { GuideContentProps } from '@/lib/data/guides';

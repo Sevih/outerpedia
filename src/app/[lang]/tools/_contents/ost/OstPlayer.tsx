@@ -42,7 +42,7 @@ function trackName(track: BgmTrack, lang: Lang): string {
 /**
  * Jukebox de l'OST : liste des pistes + lecteur fixe en bas (lecture, seek,
  * shuffle, repeat, volume, download) et raccourcis clavier. Logique reprise de
- * la V2 ; habillage refait sur les tokens sémantiques V3 (accent ciel conservé,
+ * l'ancien site ; habillage refait sur les tokens sémantiques (accent ciel conservé,
  * autorisé hors `guides/**`).
  */
 export function OstPlayer({

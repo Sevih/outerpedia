@@ -1,5 +1,5 @@
 /**
- * Libellés du guide « Banners & Mileage » — transplantés VERBATIM de la V2
+ * Libellés du guide « Banners & Mileage » — transplantés VERBATIM de l'ancien site
  * (oracle de contenu). Les TAUX, COÛTS et la liste des limited ne vivent plus
  * ici : ils sont GÉNÉRÉS (recruit.json) ; ne restent que l'éditorial (intros,
  * descriptions de bannières, avertissements) et le marqueur {star}.
@@ -309,7 +309,7 @@ export const LABELS = {
       zh: ' - 是获取限定同伴的唯一途径。',
       fr: " - Le seul moyen d'obtenir les Limited Heroes.",
     },
-    // « Festival » : le terme du jeu pour le tag `limited` (cf. tags V2 —
+    // « Festival » : le terme du jeu pour le tag `limited` (cf. tags hérités —
     // « Festival Units ») ; « Limited » désignait à tort toute la catégorie.
     type_limited_label: {
       en: 'Festival:',

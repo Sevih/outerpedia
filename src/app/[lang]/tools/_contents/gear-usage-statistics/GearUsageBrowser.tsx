@@ -46,10 +46,10 @@ export interface GearUsageLabels {
 const CATEGORIES: GearCategory[] = ['weapon', 'amulet', 'set', 'talisman'];
 
 /**
- * Statistiques d'usage des équipements (portage V2) : onglets
+ * Statistiques d'usage des équipements (porté de l'ancien site) : onglets
  * armes/accessoires/sets/talismans, recherche, lignes classées avec barre
  * proportionnelle au perso-count, dépliables sur la liste des persos dont un
- * build recommande la pièce. État local pur (pas de sync URL — parité V2, un
+ * build recommande la pièce. État local pur (pas de sync URL — inchangé, un
  * classement se consulte, il ne se partage pas filtré).
  */
 export function GearUsageBrowser({

@@ -13,7 +13,7 @@ import {
 /**
  * Gear Usage Finder — wrapper SERVEUR : assemble les données depuis la
  * gear-reco curée (`finder.ts`), localise noms d'items et de persos (aucun
- * contexte i18n client en V3) et passe le tout au browser. Seuls les persos
+ * contexte i18n client) et passe le tout au browser. Seuls les persos
  * apparaissant dans un build sont embarqués ; un perso sans fiche publique est
  * écarté (ses builds ne matcheront pas).
  */

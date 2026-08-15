@@ -1,10 +1,10 @@
 /**
  * Guide « Core Fusion » — priorités de déblocage + review par héros fusion.
- * Les reviews et priorités sont ÉDITORIALES (transplant V2) ; TOUT le reste
+ * Les reviews et priorités sont ÉDITORIALES (transplant verbatim) ; TOUT le reste
  * dérive des tables du jeu : paires base ↔ fusion (plus de hack
  * `replace('2700','2000')`), coûts par palier (plus de [300,150…] en dur),
- * renommages de skills (remplace le cf-skill-names.json généré par la V2),
- * comparaison d'EE (données équipement V3).
+ * renommages de skills (remplace l'ancien cf-skill-names.json généré),
+ * comparaison d'EE (données équipement générées).
  */
 import { Fragment, type ReactNode } from 'react';
 import type { Lang } from '@/lib/i18n/config';
@@ -32,7 +32,7 @@ import { fusionReviews, type FusionReviewEntry } from './reviews';
 
 const WHERE = 'core-fusion';
 
-/** Libellés de slot (identiques V2, non localisés — noms techniques). */
+/** Libellés de slot (inchangés, non localisés — noms techniques). */
 const SLOT_LABEL: Record<string, string> = {
   s1: 'S1',
   s2: 'S2',
@@ -141,7 +141,7 @@ export default async function CoreFusionGuide({ lang }: { lang: Lang }) {
     { title: L(LABELS.priority2nd), entries: unlockOrder.second },
     { title: L(LABELS.priority3rd), entries: unlockOrder.third },
   ].filter((tier) => tier.entries.length > 0);
-  // Comme en V2 : un seul palier rempli = pas besoin de le titrer.
+  // Un seul palier rempli = pas besoin de le titrer.
   const showTitles = tiers.length > 1;
 
   return (

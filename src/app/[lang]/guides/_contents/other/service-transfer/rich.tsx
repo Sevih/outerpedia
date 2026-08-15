@@ -2,7 +2,7 @@
  * Mini-rendu inline pour le contenu du guide service-transfer : `**gras**` et
  * `[label](url)` (liens EXTERNES ou ancres — hors périmètre des tags
  * parse-text, qui ne lient que l'interne). Remplace le HTML inline +
- * dangerouslySetInnerHTML de la V2. Local au guide : à promouvoir en
+ * dangerouslySetInnerHTML d'autrefois. Local au guide : à promouvoir en
  * primitive si un deuxième contenu en a besoin.
  */
 import type { ReactNode } from 'react';

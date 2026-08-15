@@ -1,7 +1,7 @@
 /**
  * Données ÉDITORIALES du guide heroes-growth — la part NON dérivable de la data
  * de jeu (vérifié : pas de table favor/present→points, pas de table de paliers
- * d'affinité, effets de transcendance non structurés). Transplant V2.
+ * d'affinité, effets de transcendance non structurés). Transplant verbatim.
  */
 import type { LocalizedText } from '@contracts';
 

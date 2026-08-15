@@ -14,8 +14,8 @@ import './globals.css';
 // découverte CSS ; `display: swap` couvre le rendu.
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'], preload: false });
 const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'], preload: false });
-// Police PAR DÉFAUT du site (« jeu » — titres, nom du héros… ; même rendu que la
-// V2). Préchargée : elle peint le corps de texte partout (LCP).
+// Police PAR DÉFAUT du site (« jeu » — titres, nom du héros… ; rendu inchangé
+// depuis l'ancien site). Préchargée : elle peint le corps de texte partout (LCP).
 const paybooc = localFont({
   src: '../fonts/Paybooc-Bold.woff2',
   variable: '--font-game',
@@ -55,7 +55,7 @@ const suitBold = localFont({
  * partout ; toute nouvelle racine DOIT passer par lui.
  */
 export function RootDocument({ lang, children }: { lang: Lang; children: React.ReactNode }) {
-  // Thème unique (sombre, apparence V2) — pas de provider de thème.
+  // Thème unique (sombre, apparence historique) — pas de provider de thème.
   return (
     <html
       lang={lang}

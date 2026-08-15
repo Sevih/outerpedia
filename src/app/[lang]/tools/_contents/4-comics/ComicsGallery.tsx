@@ -20,7 +20,7 @@ export interface ComicStrings {
 /**
  * Galerie de 4-cut comics : onglets de langue d'origine, grille portrait
  * cliquable et lightbox (navigation clavier). BD faites main, servies depuis R2
- * (`comicSrc`). Réhabillage V3 (accent ciel, autorisé hors `guides/**`).
+ * (`comicSrc`). Réhabillé (accent ciel, autorisé hors `guides/**`).
  */
 export function ComicsGallery({
   data,

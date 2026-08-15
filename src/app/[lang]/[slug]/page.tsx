@@ -13,7 +13,7 @@ export const revalidate = 86400;
 
 /**
  * Routeur À PLAT des outils : `/(slug)` sert le composant `_contents/<slug>`
- * (parité URL avec la prod V2 — pas de préfixe `/tools`). Seuls les slugs
+ * (URLs de prod inchangées — pas de préfixe `/tools`). Seuls les slugs
  * PORTÉS (registre) rendent ; les autres, comme tout slug inconnu, renvoient un
  * 404. Enveloppe l'outil d'un titre i18n + fil d'Ariane + retour à la landing.
  */

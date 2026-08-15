@@ -65,7 +65,7 @@ function StatGroup({
   );
 }
 
-/** Carte de contenu opaque, titre optionnel (équivalent V3 du `ContentCard`). */
+/** Carte de contenu opaque, titre optionnel (équivalent du `ContentCard`). */
 function Card({
   accent,
   title,
