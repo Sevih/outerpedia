@@ -247,7 +247,7 @@ export interface Effect {
    * normale) : icône à cadre spécial, jamais recolorée à l'affichage.
    */
   irremovable?: boolean;
-  /** Icône ABSENTE des sprites du jeu → asset communautaire (pool wiki V2). */
+  /** Icône ABSENTE des sprites du jeu → asset communautaire (pool wiki hérité). */
   iconEditorial?: boolean;
 }
 
@@ -265,7 +265,7 @@ export interface Effect {
 export type EffectSide = 'buff' | 'debuff';
 
 /**
- * Alias ÉDITORIAUX : clés historiques du wiki (V2) → clé réelle (type de jeu
+ * Alias ÉDITORIAUX : clés historiques du wiki → clé réelle (type de jeu
  * ou nom d'effet en MAJUSCULES_SOULIGNÉES). Même dialecte que les fichiers
  * pros-cons/reco ; vérifiés sur l'inventaire des tags legacy. Un alias dont le
  * SENS dépend du côté (`{B/…}` ≠ `{D/…}`) déclare une cible par côté.
@@ -279,7 +279,7 @@ const EDITORIAL_KEY_ALIASES: Record<string, string | Record<EffectSide, string>>
   BT_AGILE_RESPONSE: 'AGILE_RESPONSE',
   BT_REVENGE: 'REVENGE',
   BT_WG_REVERSE_HEAL: 'BT_WG_DMG',
-  // V2 : la même clé désignait « Reduced/Increased Damage Taken » selon le côté.
+  // Historiquement, la même clé désignait « Reduced/Increased Damage Taken » selon le côté.
   BT_DAMAGE_TAKEN: { buff: 'REDUCED_DAMAGE_TAKEN', debuff: 'INCREASED_DAMAGE_TAKEN' },
 };
 
@@ -558,7 +558,7 @@ export function buildEffectGlossary(): EffectGlossary {
   // --- Index par CLÉ éditoriale ({B/BT_STAT|ST_ATK}, {D/BT_DOT_BURN}…) --------
   // 1) Clés TYPE : chaque ligne BuffTemplet résoluble vers un effet vote pour
   //    (côté, clé type) → l'effet majoritaire gagne. Clé = `Type` du jeu, ou
-  //    `BT_STAT|ST_X` pour les stats (seul composite, comme en V2).
+  //    `BT_STAT|ST_X` pour les stats (seul composite, inchangé).
   const votes = new Map<string, Map<string, number>>(); // "side|key" → effectId → n
   // Nature majoritaire par effet (buffs qui l'utilisent) — pour corriger les
   // effets mécaniques (`origin: type`) dont la ligne source ne dit pas le côté.
@@ -617,7 +617,7 @@ export function buildEffectGlossary(): EffectGlossary {
     const side: EffectSide = eff.isDebuff ? 'debuff' : 'buff';
     if (!byKey[side].has(key)) byKey[side].set(key, id);
   }
-  // 3) Alias éditoriaux (dialecte V2) → résolus vers la clé réelle, les deux
+  // 3) Alias éditoriaux (dialecte hérité) → résolus vers la clé réelle, les deux
   //    côtés (le contenu marque le côté via {B/…}/{D/…}). Une cible PAR CÔTÉ
   //    reste sur son côté (pas de repli croisé — le sens en dépend).
   for (const side of ['buff', 'debuff'] as const) {
@@ -630,7 +630,7 @@ export function buildEffectGlossary(): EffectGlossary {
       if (id && !byKey[side].has(alias)) byKey[side].set(alias, id);
     }
   }
-  // 4) Suffixe `_IR` (dialecte V2) : `<clé>_IR` désigne la variante
+  // 4) Suffixe `_IR` (dialecte hérité) : `<clé>_IR` désigne la variante
   //    INDISSIPABLE du statut (effet DISTINCT, icône `_Interruption` —
   //    `BT_SEALED_IR`, `BT_STAT|ST_CRITICAL_RATE_IR`…). Chaque clé résolue
   //    reçoit sa déclinaison via le frère de même NameID/nature ; une clé dont
@@ -645,7 +645,7 @@ export function buildEffectGlossary(): EffectGlossary {
 
   // ÉDITORIAL : les effets SANS icône en jeu (mécaniques `origin: type`
   // surtout) reprennent une icône écrite main (map label EN → sprite, héritée
-  // du glossaire V2 puis VERSIONNÉE en V3 : `data/editorial/effect-icons.json`).
+  // de l'ancien glossaire puis VERSIONNÉE : `data/editorial/effect-icons.json`).
   // Le manifest les rapatriera du pool éditorial (`editorialFallback`) — seule
   // exception à la règle « images = extraction du jeu » : cet éditorial n'existe
   // pas dans les tables.
@@ -698,7 +698,7 @@ let mechanicLabelCache: { data: Map<string, string>; stamp: string } | undefined
  * `SYS_BUFF_ACTION_GAUGE_UP` « Priority Increase »). Clé `side|BT_TYPE` ;
  * seuls les symboles résolubles dans le glossaire sont retenus — un type sans
  * symbole majoritaire (dégâts aux boss, câblages internes…) reste innommé,
- * donc sans chip, comme dans la curation V2.
+ * donc sans chip, comme dans la curation d'origine.
  */
 export function mechanicLabelIndex(): Map<string, string> {
   const stamp = `${tablesStamp(['TextSystem'])}|${fileStamp('data/curated/effects.json')}`;

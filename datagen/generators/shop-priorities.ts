@@ -1,7 +1,7 @@
 /**
  * Générateur — ACHATS DE SHOP PAR PRIORITÉ (`shop-priorities.json`).
  *
- * Sert le guide « Recommended Purchases by Shop ». La V2 codait EN DUR le
+ * Sert le guide « Recommended Purchases by Shop ». On codait EN DUR le
  * contenu des shops (noms, coûts, limites) dans un `data.ts` de ~1000 lignes —
  * déjà PÉRIMÉ (le Guild Shop a été rebrassé le 2024-12-03 : prix changés, items
  * ajoutés/retirés). Ici tout le factuel DÉRIVE de `ProductTemplet` ; seul

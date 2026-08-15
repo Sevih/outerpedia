@@ -2,12 +2,12 @@
  * Langues officielles du jeu — celles pour lesquelles les fichiers `.bytes`
  * contiennent réellement de la donnée.
  *
- * Le français de la V3 est une traduction d'UI communautaire, PAS une langue
+ * Le français du site est une traduction d'UI communautaire, PAS une langue
  * de données de jeu : il n'a donc pas sa place ici. L'atelier `datagen` ne
  * connaît que ces 4 langues.
  *
  * À garder aligné avec les langues `isOfficial` de la future config i18n
- * (`src/lib/i18n`) quand elle sera portée depuis la V2.
+ * (`src/lib/i18n`) quand elle sera portée.
  */
 export const GAME_LANGS = ['en', 'jp', 'kr', 'zh'] as const;
 

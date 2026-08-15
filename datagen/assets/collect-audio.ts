@@ -3,9 +3,9 @@
  * pour que `assets:push` les envoie sur R2 (le push parcourt tout le staging).
  * Même étage que la collecte d'images : pool extrait du JEU → staging → push.
  *
- * Source = pool audio extrait NATIVEMENT en V3 (`pnpm datagen:extract-audio` →
+ * Source = pool audio extrait NATIVEMENT ici (`pnpm datagen:extract-audio` →
  * `.gamedata/extracted/audio/bgm`, produit par la chaîne datamine côté worker).
- * Plus aucune dépendance au repo V2. Le pool est déjà l'ensemble BGM curé (la
+ * Plus aucune dépendance à l'ancien repo. Le pool est déjà l'ensemble BGM curé (la
  * regex de familles de l'extracteur filtre) : on copie TOUT, aucun orphelin.
  *
  * On copie tout (pas de filtrage par le mapping) pour que de NOUVELLES pistes

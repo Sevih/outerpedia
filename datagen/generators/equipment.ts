@@ -482,10 +482,10 @@ function resolvePassive(
  * si possible par le symbole de la MÉCANIQUE (Priority Increase, Debuff
  * Duration Increase…) via `mechanicLabelIndex`. Un effet resté sans nom
  * (montée de stat permanente, dégâts aux boss…) n'est pas une chip — même
- * règle que les kits de skills et que la curation V2.
+ * règle que les kits de skills et que la curation d'origine.
  */
 /** Familles jamais pontées : modificateurs permanents de dégâts/soin/stat —
- * pas des statuts côté joueur, la curation V2 ne les chipait pas non plus
+ * pas des statuts côté joueur, la curation d'origine ne les chipait pas non plus
  * (le « Damage Increase » d'un passif d'EE est du câblage, pas un buff). */
 const NO_BRIDGE_FAMILIES = new Set(['damage', 'stat', 'dmg_reduce', 'heal', 'anti_heal']);
 
@@ -500,7 +500,7 @@ function refineEquipShape(sh: EffectShape): EffectShape {
   // BT_NONE = marqueur technique sans effet (état de kit « Disconnected from
   // Core »…) : jamais une chip, même si son symbole résout.
   if (sh.type === 'BT_NONE') return sh;
-  // AP au début du combat (stat premium ENTER_AP) = la chip « AP » (V2 :
+  // AP au début du combat (stat premium ENTER_AP) = la chip « AP » (héritée :
   // BT_AP_CHARGE) — seule stat permanente chipée.
   if (sh.stat === 'enter_ap') {
     sh.label = 'SYS_BUFF_CHARGE_AP';
@@ -536,7 +536,7 @@ function refineEquipShape(sh: EffectShape): EffectShape {
 let curatedKeyCache: { data: Map<string, string>; stamp: string } | undefined;
 
 /** `nature|type` → id de CRÉATION curée (`keys` de data/curated/effects.json) —
- * mécaniques sans texte dans les tables, nommées par la curation (héritée V2).
+ * mécaniques sans texte dans les tables, nommées par la curation (héritée).
  * La nature vient de l'entrée (`isDebuff`, repli sur l'effet du glossaire). */
 function curatedKeyMap(): Map<string, string> {
   const stamp = `${tablesStamp(['TextSystem'])}|${fileStamp('data/curated/effects.json')}`;

@@ -78,7 +78,7 @@ export interface QuirksData {
   categories: QuirkCategory[];
 }
 
-/** Type de groupe du jeu → clé de catégorie + ordre d'affichage (ordre V2). */
+/** Type de groupe du jeu → clé de catégorie + ordre d'affichage (inchangé). */
 const CATEGORY: Record<string, { key: QuirkCategory['key']; order: number }> = {
   PVE: { key: 'pve', order: 0 },
   JOB: { key: 'class', order: 1 },

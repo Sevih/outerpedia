@@ -4,7 +4,7 @@
  * Les tables `Text*` (`TextSystem`, `TextCharacter`, `TextSkill`, …) ont la même
  * forme : une colonne clé (`ID`) et une colonne par langue (`English`, …).
  * Ce module transforme ces lignes en « dict wiki » `{ en, jp, kr, zh }` et
- * fournit l'index clé → dict, réécrit ~6 fois dans la V2 (cf. audit).
+ * fournit l'index clé → dict, réécrit ~6 fois auparavant (cf. audit).
  */
 import { GAME_LANGS, LANG_COLUMNS, type LangDict } from './lang';
 import { indexBy, loadTable, withCaseInsensitiveGet, type Row } from './tables';

@@ -5,7 +5,7 @@
  *      icône/nom/ending), `splitLabelAndNeed` (détache la condition inline entre
  *      parenthèses, parenthèses pleine largeur incluses), `parseIndex`, et
  *      surtout `markTruePaths` — le SOLVEUR BFS (items-clés, jauge, chemins True
- *      Ending / détours). Toute la logique « portée pure de la V2 », testée sur
+ *      Ending / détours). Toute la logique « portée pure », testée sur
  *      des graphes minuscules construits à la main. Aucune table requise.
  *
  *   2. INVARIANTS RÉFÉRENTIELS sur `data/generated/monad/` committé : bijection

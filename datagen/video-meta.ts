@@ -6,7 +6,7 @@
  * `data/generated/video-meta.json` — lu par `VideoJsonLd` au rendu. Titre et
  * chaîne sont pris avec (affichage possible pour un id brut).
  *
- * Collecte DATA-DRIVEN (la V2 scannait les .tsx à la regex ; en V3 les vidéos
+ * Collecte DATA-DRIVEN (on scannait les .tsx à la regex ; désormais les vidéos
  * vivent dans la DONNÉE) : marche récursive des JSON de guides
  * (`_contents` — videos.json, content.json, versions/<clé>/config.json…) et du
  * curé personnages (`videos` par perso), à la recherche d'objets
@@ -15,7 +15,7 @@
  * INCRÉMENTAL : seuls les ids absents du cache sont interrogés (la plupart des
  * runs ne touchent pas l'API) ; les ids plus référencés nulle part sont
  * PURGÉS (même règle que les tables fantômes de convert.ts). Seed initial :
- * le cache V2 (169 entrées), transplanté verbatim.
+ * l'ancien cache (169 entrées), transplanté verbatim.
  *
  * `YOUTUBE_API_KEY` (`.env.local`) : absent → warn et cache conservé tel quel,
  * jamais d'échec — le site rend simplement moins de VideoObject.

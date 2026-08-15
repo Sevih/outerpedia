@@ -2,7 +2,7 @@
  * Générateur — DOMAINE RECRUTEMENT (`recruit.json`).
  *
  * Sert les guides de la catégorie general-guides (« Free Heroes & Starter
- * Banners », « How Banners & Mileage Work ») : tout ce que la V2 tenait à la
+ * Banners », « How Banners & Mileage Work ») : tout ce qui était tenu à la
  * main (banner.json, taux/coûts hardcodés) se lit ici dans les tables du jeu.
  *
  *   customPool  — persos recrutables au Custom Recruit :
@@ -19,7 +19,7 @@
  *                 des PriceValue sur les persos du type).
  *   banners     — TOUTES les apparitions bannière à pickup de perso
  *                 (SEASONAL/OUTER_FES + leurs SELECTION) : release/rerun des
- *                 limited se DÉRIVENT (la V2 maintenait data/banner.json à la
+ *                 limited se DÉRIVENT (data/banner.json était maintenu à la
  *                 main). Le tri éditorial (qui est « limited ») reste à la vue,
  *                 via les tags des persos. Les tables ne sont PAS un historique
  *                 fiable : VAGames purge les vieilles lignes →

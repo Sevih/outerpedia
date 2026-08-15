@@ -1206,7 +1206,7 @@ export function buildEncounters(): EncountersData {
   // 2ter) Adventure License (`adventure_mission` = Weekly Conquest,
   // `adventure_challenge` = Promotion Challenge) : le jeu ne groupe RIEN ici, et
   // c'est fidèle au mode — un donjon EST le combat, seul contre lui-même. Son
-  // échelle vit dans ses `ranks` (les 15 stages de la V2), pas dans des donjons
+  // échelle vit dans ses `ranks` (les 15 stages d'origine), pas dans des donjons
   // frères comme la poursuite ou le guild raid.
   //
   // On lui donne quand même son `group` : c'est le SEUL pointeur qu'un guide a

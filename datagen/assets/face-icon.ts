@@ -1,5 +1,5 @@
 /**
- * Génération des ICÔNES DE VISAGE (FI_<id>) — porté de V2 (logique identique).
+ * Génération des ICÔNES DE VISAGE (FI_<id>) — porté tel quel (logique identique).
  *
  * Le jeu ne fournit pas d'image FI : elle se COMPOSE en appliquant au portrait
  * CT_<id> le layout RectTransform du prefab FaceIcon (variante « Thumbnail »).

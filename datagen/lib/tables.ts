@@ -4,7 +4,7 @@
  * Toutes les tables du jeu sont parsées par `datagen:convert` en tableaux plats
  * de lignes (`Record<string, string>[]`) dans `.gamedata/parsed/<Table>.json`.
  * Ce module centralise leur chargement (avec cache) et les helpers d'indexation
- * réécrits une dizaine de fois dans la V2 (cf. audit de factorisation).
+ * réécrits une dizaine de fois auparavant (cf. audit de factorisation).
  */
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';

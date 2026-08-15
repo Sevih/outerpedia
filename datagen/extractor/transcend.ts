@@ -4,7 +4,7 @@
  * Le barème est commun à TOUS les persos d'une même rareté de base (`BasicStar`),
  * avec quelques overrides par perso. On le stocke donc UNE fois (`byStar`) + les
  * exceptions (`overrides`) — pas un blob dupliqué par personnage (c'était le
- * défaut de la V2, qui sérialisait le barème en chaînes sur chaque fiche).
+ * défaut d'avant, où le barème était sérialisé en chaînes sur chaque fiche).
  *
  * Résolution côté app : `overrides[charId] ?? byStar[character.rarity]`.
  *

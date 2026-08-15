@@ -1,6 +1,6 @@
 /**
  * Générateur — CALENDRIER DES CONTENUS SAISONNIERS (`content-schedule.json`).
- * Construit UNIQUEMENT depuis les tables du jeu (exigence Sevih : pas de V2
+ * Construit UNIQUEMENT depuis les tables du jeu (exigence Sevih : pas d'oracle
  * comme modèle) : les trois modes tournants portent leurs FENÊTRES DE DATES
  * dans leur table — le « contenu actif » est donc 100 % factuel.
  *

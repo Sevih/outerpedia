@@ -18,11 +18,11 @@
  * INVERSE `effectByKey` pour retrouver la clé de taxonomie, puis on canonicalise
  * via `effect-filters` (`group`). Même identité que les chips affichées.
  *
- * MAPPING DES SLOTS : la V3 décompose plus finement que la V2 (13 slots vs 7
+ * MAPPING DES SLOTS : on décompose plus finement qu'avant (13 slots vs 7
  * sources). Les buffs de l'attaque en CHAÎNE vivent sur les `strike_*`, ceux du
  * DUO sur les `backup_*` (cf. skill-view) — on les rattache donc à `chainPassive`
  * / `dualAttack`. Les passifs restants (class/unique/burst/extra) comptent dans
- * l'union `buff`/`debuff` mais n'ont pas de source nommée (comportement V2).
+ * l'union `buff`/`debuff` mais n'ont pas de source nommée (inchangé).
  *
  * Écriture CANONIQUE : `pnpm datagen:build` → `characters-list.json`. L'exécution
  * directe imprime des compteurs pour revue.
@@ -56,7 +56,7 @@ export interface CharacterEffects {
  * Vocabulaire FERMÉ des stats de bonus d'équipe (label du jeu → clé STAT_ICON).
  * Les noms pleins viennent des textes de transcendance (`+X% Ally Team <Stat>`) ;
  * les formes courtes (`DMG Incr`/`DMG Reduc`) sont des raccourcis propres à ces
- * textes (pas des noms de stat du glossaire) — d'où cette table, comme la V2.
+ * textes (pas des noms de stat du glossaire) — d'où cette table, inchangée.
  */
 const TEAM_STAT: Record<string, string> = {
   attack: 'ATK',
@@ -73,7 +73,7 @@ const TEAM_STAT: Record<string, string> = {
   lifesteal: 'LS',
 };
 
-/** Ordre canonique d'affichage des bonus d'équipe (déterminisme + parité V2). */
+/** Ordre canonique d'affichage des bonus d'équipe (déterminisme, ordre gardé). */
 const TB_ORDER = [
   'SPD',
   'ATK',
@@ -114,7 +114,7 @@ export function teamStatsFromDesc(desc: string, into: Set<string>): void {
 
 export type CharactersListData = Record<string, CharacterEffects>;
 
-/** Slug de SkillType (V3) → source de filtre (contrat worker). Absent = pas de source nommée. */
+/** Slug de SkillType → source de filtre (contrat worker). Absent = pas de source nommée. */
 const SLOT_SOURCE: Record<string, string> = {
   first: 's1',
   second: 's2',

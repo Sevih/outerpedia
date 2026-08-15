@@ -6,7 +6,7 @@
  *   - NOM : les pistes « jukebox » du lobby portent un nom de jeu. On lit
  *     `LobbyCustomResourceTemplet` (lignes `LRT_BGM`), dont `ResourceFile` liste
  *     les fichiers (intro,loop) et `NAME` pointe une clé `TextSystem`. On résout
- *     la clé en `LangDict` (en/jp/kr/zh d'un coup — plus riche que la V2 qui ne
+ *     la clé en `LangDict` (en/jp/kr/zh d'un coup — plus riche qu'avant, où on ne
  *     prenait que l'anglais et reportait les autres langues à la main).
  *   - Les pistes SANS ligne lobby (musiques de scène/boss non sélectionnables)
  *     retombent sur un nom dérivé du fichier (`formatFilenameAsName`).
@@ -74,7 +74,7 @@ async function getDuration(ffprobe: string, filePath: string): Promise<number | 
 
 /**
  * Nom lisible dérivé d'un nom de fichier (repli quand la piste n'a pas de ligne
- * lobby). `Boss_Season_01` → « Boss - Season 01 ». Logique reprise de la V2.
+ * lobby). `Boss_Season_01` → « Boss - Season 01 ». Logique reprise telle quelle.
  */
 export function formatFilenameAsName(filename: string): string {
   let name = filename.replace(/_[Ii]ntro$/, '');
@@ -99,7 +99,7 @@ export function formatFilenameAsName(filename: string): string {
   // NB : pas de séparateur « Préfixe - … » injecté ici. Les vrais tirets
   // (« Thema - Base », « Battle - Normal ») viennent du nom ANGLAIS du jeu
   // (`dict.en`) ; les pistes sans ligne lobby gardent un nom simple (« Battle
-  // 02 »), comme la curation V2 — pas un tiret devant un numéro.
+  // 02 »), comme la curation d'origine — pas un tiret devant un numéro.
   if (isIntro) name += ' (Intro)';
   return name;
 }

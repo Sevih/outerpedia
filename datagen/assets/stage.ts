@@ -40,8 +40,8 @@ export const STAGING_DIR = resolve('.assets-staging');
  * produit lui-même (icône corrigée d'un effet que les tables affublent du
  * sprite d'un autre…). VERSIONNÉ dans le repo : un asset qui ne vit que sur
  * une machine finit par manquer à la collecte suivante. SEUL pool depuis le
- * 22/07 : l'héritage V2 (309 fichiers, 4 Mo) y a été rapatrié et le pont
- * V2_DIR coupé (décision Sevih — la V2 se décommissionne).
+ * 22/07 : l'héritage (309 fichiers, 4 Mo) y a été rapatrié et le pont vers
+ * l'ancien dépôt coupé (décision Sevih — il se décommissionne).
  * Fichier SOURCE, jamais servi — `assets:collect` le dépose dans le staging,
  * `assets:push` l'envoie au R2 (le build CI ne le lit pas et l'image Docker ne
  * l'embarque pas : elle ne copie que .next + public).
@@ -277,7 +277,7 @@ export async function stageAssets(
       const src = findImage(index, req.candidates);
       if (!src) {
         // Repli éditorial : sprite absent de l'extraction mais existant comme
-        // asset wiki (pool V3 d'abord, pool V2 en héritage — icônes
+        // asset wiki (pool courant d'abord, pool hérité ensuite — icônes
         // retravaillées/composées à la main). `candidates: []` en fait la
         // source EXCLUSIVE : le sprite du jeu, même présent, est ignoré (série
         // de badges qui doit rester homogène — cf. manifest, recrutement).

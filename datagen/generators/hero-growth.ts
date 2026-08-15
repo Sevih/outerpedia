@@ -12,10 +12,10 @@
  *    indépendants de l'élément → on collapse par (rareté, palier).
  *  • `skillUpgrade` — coût d'amélioration de skill par rareté × niveau (2→5) :
  *    `CharacterSkillEnchantTemplet` (manuels via `ItemID_n`/`ItemCnt_n`, gold =
- *    `UpgradePrice`). Vérifié identique à la V2 (qui masquait le gold).
+ *    `UpgradePrice`). Vérifié identique à l'ancien (qui masquait le gold).
  *  • `specialEquip` — enchant EE (`ITS_EQUIP_EXCLUSIVE`) et talisman
  *    (`ITS_EQUIP_OOPARTS`) : `SpecialEquipEnchantTemplet` (matériaux, gold,
- *    déblocage de `GemSlot`). Les « 150 » de la V2 = la SOMME des coûts par
+ *    déblocage de `GemSlot`). Les « 150 » d'avant = la SOMME des coûts par
  *    palier (10+20+30+40+50) — ici on donne le détail par niveau.
  *  • `xpFood` — items de nourriture d'XP : `ItemTemplet` `ITS_MATERIAL_CHAR_LEVEL`
  *    (XP = `MaterialValue`).

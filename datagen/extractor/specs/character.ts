@@ -3,7 +3,7 @@
  *
  * Source unique du savoir « perso » : type de sortie, mapping, schéma, oracle.
  * Le mapping est repris à l'identique de l'ancien `generators/characters.ts`
- * (zéro régression) ; les manques vis-à-vis de V2 sont déclarés dans `coverage`
+ * (zéro régression) ; les manques vis-à-vis de l'ancien sont déclarés dans `coverage`
  * (`todo`) et ressortent dans le rapport de complétude.
  *
  * Patron maison conservé : on RÉFÉRENCE skills/ee/sets par id (pas de recopie) ;
@@ -417,7 +417,7 @@ const CORE_STATS = new Set(['hp', 'atk', 'def', 'speed']);
  * La plage couvre les niveaux 1..100 SANS éveils — les paliers affichés
  * (évolutions, dépassement 105/110/120) sont CALCULÉS au runtime par
  * `computeStatSteps` (src/lib/data/char-progression), validé contre l'oracle
- * V2 et in-game. Ne pas cuire les éveils ici : double-compte garanti. */
+ * l'oracle et in-game. Ne pas cuire les éveils ici : double-compte garanti. */
 export function extractStats(r: Row): Record<string, StatRange> {
   const out: Record<string, StatRange> = {};
   for (const d of STAT_DEFS) {

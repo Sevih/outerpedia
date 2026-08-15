@@ -2,7 +2,7 @@
  * Générateur — ETHER PAR CLASSEMENT (`ether-rankings.json`).
  *
  * Sert le guide « Ether Income » : les quatre échelles de récompenses d'Ether
- * par rang que la V2 codait en dur (et dont deux étaient PÉRIMÉES — le jeu a
+ * par rang qui étaient codées en dur (et dont deux étaient PÉRIMÉES — le jeu a
  * doublé le guild raid et le world boss depuis).
  *
  *   arena       — PVPRankTemplet : récompense de SAISON (hebdomadaire) par
@@ -16,7 +16,7 @@
  *                 (classement quotidien, mer–sam).
  *
  * L'Ether est la colonne `Crystal` de RewardTemplet (vérifié : arène top 1 =
- * 1500, singularity top 1 = 50 — les valeurs V2 à l'identique).
+ * 1500, singularity top 1 = 50 — les anciennes valeurs à l'identique).
  */
 import type { LangDict } from '../lib/lang';
 import { isMain } from '../lib/is-main';

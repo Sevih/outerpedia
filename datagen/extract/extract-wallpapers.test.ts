@@ -99,7 +99,7 @@ describe('getPriorityScore — représentant d’un groupe de doublons', () => {
 
   it('IMG_ départagé par l’id (score négatif décroissant avec l’id)', () => {
     // score -= id/1000 : plus l'id est GRAND, plus le score baisse → l'id le plus
-    // petit l'emporte au tri. (IMG_ est exclu des wallpapers ; tie-break legacy V2.)
+    // petit l'emporte au tri. (IMG_ est exclu des wallpapers ; tie-break hérité.)
     expect(getPriorityScore('IMG_2000001')).toBeGreaterThan(getPriorityScore('IMG_2000010'));
   });
 });

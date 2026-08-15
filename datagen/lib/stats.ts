@@ -8,7 +8,7 @@
  *     stats à valeur absolue (ATK/HP plats, compteurs AP/BP) sont brutes.
  *     (`OAT_*` décrit l'APPLICATION additive/multiplicative, pas l'affichage.)
  *
- * Échelles confirmées par la logique éprouvée de la V2 (sets : Crit +15%,
+ * Échelles confirmées par une logique éprouvée (sets : Crit +15%,
  * Counter +12%, Bursting AP +25…).
  */
 
@@ -38,9 +38,9 @@ export const PERCENT_STATS = new Set([
 /**
  * Stats % dont les valeurs FLAT des pools d'équipement (`ItemOptionTemplet`,
  * OAT_ADD) sont BRUTES et sans signe % : EFF/RES en main stat d'accessoire
- * (« EFF 21 », oracle V2 `percent:false`). Leurs valeurs de SET
+ * (« EFF 21 », oracle hérité `percent:false`). Leurs valeurs de SET
  * (`ItemSpecialOptionTemplet`) restent per-mille (180 → 18 %) — deux échelles
- * selon le contexte, confirmées ligne à ligne contre la V2.
+ * selon le contexte, confirmées ligne à ligne contre l'oracle.
  */
 export const RAW_FLAT_STATS = new Set(['buff_chance', 'buff_resist']);
 

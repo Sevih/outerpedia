@@ -1,6 +1,6 @@
 /**
  * Générateur — COMPOSITIONS DES TOURS (`towers.json`). Construit UNIQUEMENT
- * depuis les tables du jeu (exigence Sevih : pas de V2 comme modèle).
+ * depuis les tables du jeu (exigence Sevih : pas d'ancien code comme modèle).
  *
  * Huit tours dans DungeonTemplet, repérées par `DungeonMode` :
  *   DM_TOWER            Skyward Tower, 100 étages ;

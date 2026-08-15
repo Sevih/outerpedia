@@ -1,8 +1,8 @@
 /**
- * extract-wallpapers — sort les fonds d'écran (wallpapers) du jeu, en V3 native.
+ * extract-wallpapers — sort les fonds d'écran (wallpapers) du jeu, en natif ici.
  *
  * Porté de `outerpedia-v2/pipeline/steps/wallpapers.ts` (règles identiques —
- * même jeu) mais recâblé V3 : on SCANNE le pool d'images DÉJÀ extrait
+ * même jeu) mais recâblé : on SCANNE le pool d'images DÉJÀ extrait
  * (`.gamedata/extracted/images/`, produit par `extract.ts`), on ne ré-extrait
  * rien. Trois temps :
  *   1. SCAN + FILTRE : tous les PNG du pool → exclusions (EXCLUDE_PATTERNS),
@@ -23,7 +23,7 @@
  * ré-extrait pas ici (cf. `/^IMG_\d+/` dans EXCLUDE_PATTERNS).
  *
  * Sortie : `.gamedata/extracted/wallpapers/{Cutin,Full,Banner,Art}/<name>.{webp,png}`
- * — pool V3-owned, gitignoré, artefact de build (comme l'audio). `assets/collect`
+ * — pool possédé par ce repo, gitignoré, artefact de build (comme l'audio). `assets/collect`
  * le collecte ensuite vers le staging.
  *
  * Usage : `pnpm datagen:extract-wallpapers` (autonome), OU branché sur l'ombrelle
@@ -61,7 +61,7 @@ interface CategoryDef {
 }
 
 /**
- * Ordre SIGNIFICATIF (premier match gagne) — identique à la V2, MOINS
+ * Ordre SIGNIFICATIF (premier match gagne) — inchangé, MOINS
  * HeroFullArt (réutilisé ailleurs, cf. en-tête). Full est dimensionnel, les
  * autres sont par nom.
  */
@@ -73,7 +73,7 @@ const CATEGORIES: CategoryDef[] = [
 ];
 
 /**
- * Blocklist de noms (héritée V2) + `^IMG_` (HeroFullArt réutilisé ailleurs).
+ * Blocklist de noms (héritée) + `^IMG_` (HeroFullArt réutilisé ailleurs).
  *
  * MESURÉE sur le pool réel le 2026-07-26 (audit E7, 17 380 PNG) : la liste n'est
  * PAS du gras redondant avec la catégorisation — elle RATTRAPE 952 images pourtant
@@ -86,8 +86,8 @@ const CATEGORIES: CategoryDef[] = [
  *    `^T_Event_World_` (36), `_(d|body|cloud|a)` (21), `#` (10), `^sactx` (7),
  *    `^T_MonadGate_` (3), puis Recruit_Normal / Dialog_Title / `^T_Intro` /
  *    `^T_ScenarioBG_\d+` (1 chacun) ;
- *  - 12 motifs INERTES sur ce pool (0 match) — assurance héritée V2 (familles de
- *    textures/UI absentes du pool extrait V3 : FX, Lightmap, colormap, mask, SDF,
+ *  - 12 motifs INERTES sur ce pool (0 match) — assurance héritée (familles de
+ *    textures/UI absentes du pool extrait : FX, Lightmap, colormap, mask, SDF,
  *    Nebula…) GARDÉS délibérément (décision Sevih 2026-07-26) : 12 lignes pour
  *    couvrir un futur asset 2048×1024 de ces familles, l'échange en vaut la peine ;
  *  - 26 redondants INDIVIDUELLEMENT (matchent, jamais seuls) — retrait unitaire
@@ -146,7 +146,7 @@ const EXCLUDE_PATTERNS: RegExp[] = [
   /^IMG_\d+/,
 ];
 
-/** Blocklist de CHEMIN (verbatim V2) : textures de modèles 3D. */
+/** Blocklist de CHEMIN (reprise verbatim) : textures de modèles 3D. */
 const EXCLUDE_PATH_PATTERNS: RegExp[] = [/model[\\/]textures/];
 
 interface FileInfo {
@@ -160,7 +160,7 @@ interface FileInfo {
 
 /**
  * Score de priorité pour choisir le représentant d'un groupe de doublons
- * (verbatim V2) : CG scénario > BG scénario > BG event > CG event ; `_E2`
+ * (repris verbatim) : CG scénario > BG scénario > BG event > CG event ; `_E2`
  * bonifié ; les IMG_ (exclus ici) sont départagés par id décroissant.
  */
 export function getPriorityScore(filename: string): number {
@@ -216,7 +216,7 @@ async function readDims(filePath: string): Promise<{ width: number; height: numb
 }
 
 /**
- * Hash perceptuel 16×16 gris (verbatim V2) : moyenne des 256 pixels, bit à 1
+ * Hash perceptuel 16×16 gris (repris verbatim) : moyenne des 256 pixels, bit à 1
  * si > moyenne, empaqueté en hexa. Deux images visuellement proches → même hash.
  */
 async function computePerceptualHash(filePath: string): Promise<string | null> {
@@ -281,7 +281,7 @@ async function detectDuplicates(files: FileInfo[]): Promise<Set<string>> {
 /**
  * 3) Écriture par entrée retenue : webp (sharp) + png (copie verbatim). Gère la
  * collision de nom dans une catégorie (dims différentes → suffixe `_N`, comme
- * la V2) ; le suffixe fait alors partie du stem lu par le générateur.
+ * inchangé) ; le suffixe fait alors partie du stem lu par le générateur.
  */
 async function writeOutputs(files: FileInfo[], skip: Set<string>): Promise<Map<string, number>> {
   for (const c of CATEGORIES) mkdirSync(join(OUT_WP, c.name), { recursive: true });

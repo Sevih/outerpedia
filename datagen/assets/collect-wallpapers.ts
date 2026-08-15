@@ -3,7 +3,7 @@
  * `assets:push` envoie les wallpapers sur R2 (webp affichage + png download).
  * Même étage que la collecte d'images/audio : pools → staging → push.
  *
- * Deux sources, jamais la V2 :
+ * Deux sources, aucune extérieure :
  *   - **jeu** : pool extrait par le worker `.gamedata/extracted/wallpapers/<cat>`
  *     (Cutin/Full/Banner/Art) ;
  *   - **éditorial** : `.editorial/wallpapers/Outerpedia` (5 faits main, ramenés).

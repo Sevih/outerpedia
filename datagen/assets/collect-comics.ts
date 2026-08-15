@@ -3,8 +3,8 @@
  * `assets:push` envoie les BD sur R2 (webp d'affichage + MANIFESTE). Même étage
  * que la collecte images/audio/wallpapers : source éditoriale → staging → push.
  *
- * Source, jamais la V2 : `.editorial/comics/<LANG>/` (originaux png/jpg faits
- * main, ramenés en V3). On convertit en webp (recette projet `quality: 90`),
+ * Source unique : `.editorial/comics/<LANG>/` (originaux png/jpg faits
+ * main, ramenés ici). On convertit en webp (recette projet `quality: 90`),
  * PLUS une vignette `<stem>.thumb.webp` (360 px, q75) pour la grille de la
  * galerie : les planches pleine taille pèsent ~450 Ko pièce et la page en
  * rendait ~50 → 22 Mo (audit Sitebulb 20/07). La lightbox garde la pleine

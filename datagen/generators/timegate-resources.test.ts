@@ -36,7 +36,7 @@ describe('timegate-resources.json — invariants', () => {
     expect(bad).toEqual([]);
   });
 
-  it('total mensuel global = mensuel + hebdo × 4 (règle V2)', () => {
+  it('total mensuel global = mensuel + hebdo × 4 (règle héritée)', () => {
     const bad: string[] = [];
     for (const tab of tg.tabs) {
       for (const it of tab.items) {

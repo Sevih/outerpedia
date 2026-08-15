@@ -1,8 +1,8 @@
 /**
  * Couche CURÉE — recommandations d'équipement (gear reco).
  *
- * Format V3, refonte de l'ancien reco V2 (écrit main, référencé par noms EN) :
- *   - les équipements sont référencés par ID V3 (`data/generated/equipment/*`),
+ * Format actuel, refonte de l'ancien reco (écrit main, référencé par noms EN) :
+ *   - les équipements sont référencés par ID (`data/generated/equipment/*`),
  *     plus de correspondance par nom d'affichage fragile ;
  *   - les presets partagés vivent dans `data/curated/gear-presets.json` et se
  *     référencent par `$slug` (talismans, combos de sets, priorités de substats) ;
@@ -13,13 +13,13 @@
 import { validate, type Schema } from '../extractor/core/validate';
 import type { LocalizedText } from './character';
 
-/** Un équipement recommandé : id V3 + main stat conseillée (« ATK% », « PEN%/CHD »). */
+/** Un équipement recommandé : id + main stat conseillée (« ATK% », « PEN%/CHD »). */
 export interface GearPick {
   id: string;
   mainStat?: string;
 }
 
-/** Une pièce d'un combo de sets (id de set V3 + nombre de pièces). */
+/** Une pièce d'un combo de sets (id de set + nombre de pièces). */
 export interface SetComboPiece {
   set: string;
   count: number;

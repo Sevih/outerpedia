@@ -1,10 +1,10 @@
 /**
- * extract-audio — sort l'OST (BGM) des bundles Unity, en V3 native.
+ * extract-audio — sort l'OST (BGM) des bundles Unity, en natif ici.
  *
- * Trois temps, comme la chaîne V2 (`pipeline/steps/bgm-extract.ts`) mais câblée
- * sur l'outillage V3 (AssetStudioModCLI, `.gamedata/`) :
+ * Trois temps, comme l'ancienne chaîne (`pipeline/steps/bgm-extract.ts`) mais câblée
+ * sur notre outillage (AssetStudioModCLI, `.gamedata/`) :
  *   1. EXTRACTION   : AssetStudioModCLI `-t audio` → WAV, filtrés par la regex
- *      des préfixes de BGM (mêmes familles que la V2), à plat.
+ *      des préfixes de BGM (familles inchangées), à plat.
  *   2. FUSION       : chaque paire `X_intro` + `X` est concaténée (ffmpeg concat)
  *      en un seul fichier nommé `X` ; un `X_intro` sans loop `X` reste tel quel.
  *   3. CONVERSION   : WAV → MP3 192k, métadonnées enlevées ; les WAV sont jetés.
@@ -16,7 +16,7 @@
  * noms localisés sont résolus ailleurs. Aucun renommage, aucun mapping ici.
  *
  * Sortie : `.gamedata/extracted/audio/bgm/<ResourceFile>.mp3` — même racine que
- * les images extraites, pool V3-owned (fin de la dépendance à
+ * les images extraites, pool possédé par ce repo (fin de la dépendance à
  * `outerpedia-v2/public/audio/bgm`). `assets:collect-audio` le collecte ensuite.
  *
  * Usage : `pnpm datagen:extract-audio` (autonome), OU branché sur l'ombrelle
@@ -46,7 +46,7 @@ const OUT_BGM = resolve(ROOT, 'extracted/audio/bgm');
 const WAV_TMP = resolve(ROOT, 'extracted/audio/_wav');
 
 const BITRATE = '192k';
-// Familles de ResourceFile portées par l'OST (identique à la V2 — même jeu).
+// Familles de ResourceFile portées par l'OST (inchangées — même jeu).
 const BGM_FILTER =
   '^(Agitpunkt|Battle_|Boss_|Event_|Guild_Agit|Intro|Lobby_|Remains_|Scene_|Gacha_BGM|Monadgate|Result_|RTPVP_|RuinIsland)';
 

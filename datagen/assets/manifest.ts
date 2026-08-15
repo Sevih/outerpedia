@@ -4,7 +4,7 @@
  * Dérivé de `data/generated/*` : chaque entité déclare ses besoins. La SOURCE
  * est l'extraction du JEU (`.gamedata/extracted/images`, noms de sprites =
  * clés stables) — sauf l'ÉDITORIAL qui n'existe pas en jeu (drapeaux, image
- * OG, BD…) et vit dans `data/editorial` (versionné, héritage V2 rapatrié).
+ * OG, BD…) et vit dans `data/editorial` (versionné, hérité de l'ancien site).
  *
  * Quatre genres de demandes :
  *   - `image`      : trouver le sprite du jeu (candidats = basenames) → webp ;
@@ -514,8 +514,8 @@ export function buildAssetManifest(): AssetRequest[] {
   // Slot d'équipe vide, cercle de sélection, masque de colonne d'ordre de
   // chaîne, fonds d'icônes d'effet (bleu buff / rouge debuff / gris désactivé)
   // — servis par `img.skillchain`, namespace unique ui/skillchain. Repli pool
-  // V2 : `T_FX_SkillChain_Mask` est une texture de VFX absente des bundles
-  // qu'on extrait — le pool V2 (même chemin relatif) porte les six sprites.
+  // hérité : `T_FX_SkillChain_Mask` est une texture de VFX absente des bundles
+  // qu'on extrait — l'ancien pool (même chemin relatif) porte les six sprites.
   for (const icon of [
     'TI_Slot_Empty',
     'T_Tame_Select',
@@ -734,7 +734,7 @@ export function buildAssetManifest(): AssetRequest[] {
     /* pas de gear-reco curé — rien à collecter */
   }
 
-  // --- UI statique de la fiche perso (portage apparence V2) ------------------
+  // --- UI statique de la fiche perso (apparence portée de l'ancien site) -----
   // Traits de titres, étoiles, onglets d'évolution, rangs, bursts, stats…
   const UI_SPRITES: Array<[dir: string, names: string[]]> = [
     [
@@ -771,15 +771,15 @@ export function buildAssetManifest(): AssetRequest[] {
     ],
     ['evo', ['CM_Evolution_Tab', 'CM_Evolution_Tab_Select']],
     // NB : les rangs `IG_Event_Rank_*` NE sont PAS collectés ici. Les sprites du
-    // jeu sont minuscules ; Sevih a upscalé/retravaillé les siens en V2. On les
-    // ramène donc en éditorial depuis le pool V2 (voir plus bas), pas du jeu.
+    // jeu sont minuscules ; Sevih a upscalé/retravaillé les siens pour l'ancien
+    // site. On les ramène donc en éditorial depuis ce pool (voir plus bas).
     [
       'skills',
       ['CM_Skill_Icon_Burst', 'IG_Button_Burst_01', 'IG_Button_Burst_02', 'IG_Button_Burst_03'],
     ],
     [
       // Chaîne (fiche perso) + les 5 icônes du menu principal (contrat
-      // src/lib/nav.ts — mêmes sprites que la V2).
+      // src/lib/nav.ts — mêmes sprites que sur l'ancien site).
       'nav',
       [
         'IG_Chain_Arrow',
@@ -835,7 +835,7 @@ export function buildAssetManifest(): AssetRequest[] {
   // prendre du jeu quand ils s'y trouvent donnait une SÉRIE DÉPAREILLÉE — trois
   // badges au sprite du jeu, deux au visuel wiki, côte à côte sur la même
   // carte. Les cinq viennent donc du pool éditorial, versionné dans le repo :
-  // même série, et plus rien à aller chercher dans la V2 (le repli V2 ne
+  // même série, et plus rien à aller chercher ailleurs (le repli hérité ne
   // résolvait d'ailleurs PAS ici — il n'y porte que des .png quand la copie
   // éditoriale est brute, sans conversion).
   for (const name of [
@@ -870,7 +870,7 @@ export function buildAssetManifest(): AssetRequest[] {
   // Boutons de bannière du guide « Banners & Mileage » — DATA-DRIVEN : les
   // sprites (BannerImageName) sortent de recruit.json, même namespace que les
   // badges (un sprite de recrutement = ui/recruit, jamais de copie éditoriale).
-  // Repli pool V2 : le dossier banner du guide V2 porte les mêmes sprites.
+  // Repli hérité : le dossier banner de l'ancien guide porte les mêmes sprites.
   const recruit = load('recruit.json') as unknown as { kinds: Array<{ bannerImage?: string }> };
   for (const { bannerImage } of recruit.kinds) {
     if (!bannerImage) continue;
@@ -1107,8 +1107,8 @@ export function buildAssetManifest(): AssetRequest[] {
   // `editorialFallback` (qui ne se déclenche qu'en cas d'absence) ne voyait rien.
   //
   // Une liste d'exceptions aurait dérivé au premier remaniement suivant : c'est
-  // une course qu'on ne gagne pas. Le pool éditorial est FIGÉ (héritage V2
-  // rapatrié dans `data/editorial` le 22/07) et ces douze icônes y sont
+  // une course qu'on ne gagne pas. Le pool éditorial est FIGÉ (hérité de
+  // l'ancien site, rapatrié dans `data/editorial` le 22/07) et ces douze y sont
   // toutes — c'est notre chrome de navigation, pas de la donnée de jeu, et il n'a
   // aucune raison de suivre les refontes d'UI de l'éditeur.
   //
@@ -1127,7 +1127,7 @@ export function buildAssetManifest(): AssetRequest[] {
       domain: 'guides',
     });
   // L'ART de vue d'une catégorie (fond de carte irregular…) suit la même règle
-  // que les icônes de meta : le pool V2 s'il l'a, l'extraction pour l'inédit.
+  // que les icônes de meta : le pool hérité s'il l'a, l'extraction pour l'inédit.
   const categoryArts = Object.keys(GUIDE_CATEGORIES).flatMap(
     (slug) => categoryArt(slug as GuideCategorySlug) ?? [],
   );
@@ -1461,7 +1461,7 @@ export function buildAssetManifest(): AssetRequest[] {
   // Collecte DATA-DRIVEN du curé (`cover` d'un événement, `src` d'un bloc image) :
   // ajouter un événement en admin suffit, aucune liste à tenir ici. Sources
   // ÉDITORIALES par nature (aucun sprite du jeu ne décrit un concours vidéo) →
-  // pool V3 `data/editorial/events/…`, pool V2 en héritage. La variante PNG sert
+  // pool `data/editorial/events/…`, ancien pool en repli. La variante PNG sert
   // de carte de partage (Discord/OG digèrent mal le WebP, même règle qu'ailleurs).
   for (const src of eventImageSources()) {
     const rel = src.replace(/^\/images\//, '');
@@ -1513,7 +1513,7 @@ export function buildAssetManifest(): AssetRequest[] {
   });
   // Rangs `IG_Event_Rank_*` (glyphe de la landing tierlist, `img.rank`) : les
   // sprites bruts du jeu sont minuscules — on prend les versions upscalées que
-  // Sevih a retravaillées en V2, pas celles de l'extraction.
+  // Sevih a retravaillées pour l'ancien site, pas celles de l'extraction.
   for (const r of ['SSS', 'SS', 'S', 'A', 'B', 'C', 'D'])
     push({
       kind: 'editorial',
@@ -1611,7 +1611,7 @@ export function buildAssetManifest(): AssetRequest[] {
 
   // Icônes d'onglets de shop (guide « Shop Purchase Priorities ») : une par
   // shop, y compris les non dérivés (supply/rico/event/resource) et les monnaies
-  // sans icône en table (world boss, joint challenge). Sprites éditoriaux V2.
+  // sans icône en table (world boss, joint challenge). Sprites éditoriaux hérités.
   for (const shop of [
     'guild',
     'supply',

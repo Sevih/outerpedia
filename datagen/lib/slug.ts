@@ -1,7 +1,7 @@
 /**
  * Slugs de personnage (URLs) — dérivés du NOM D'AFFICHAGE anglais.
  *
- * Reprend l'algorithme V2 (minuscule, sans diacritiques ni apostrophes, tirets),
+ * Reprend l'algorithme d'origine (minuscule, sans diacritiques ni apostrophes, tirets),
  * avec suffixes de collision `-2`, `-3`… Déterministe (tri par id) pour un diff
  * git stable. Le slug est lang-agnostique (toujours EN), comme en prod.
  */
@@ -39,7 +39,7 @@ export function buildSlugMap(chars: NameLike[]): Record<string, string> {
   for (const c of [...chars].sort((a, b) => a.id.localeCompare(b.id))) {
     // Une core-fusion (`originalCharacter` posé) est une entité SÉPARÉE portant
     // le MÊME nom que sa base → sans préfixe, elle héritait d'un suffixe de
-    // collision (`notia-2`) au lieu de l'URL canonique V2 `core-fusion-notia`.
+    // collision (`notia-2`) au lieu de l'URL canonique `core-fusion-notia`.
     // Préfixe FIGÉ, pas dérivé du libellé localisé FusionTitle : un slug est une
     // URL stable, indépendante de la langue.
     const base = c.originalCharacter

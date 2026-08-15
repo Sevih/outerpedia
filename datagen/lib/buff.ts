@@ -1,7 +1,7 @@
 /**
  * Primitive #buff — résolution des buffs (BuffTemplet) et de leurs placeholders.
  *
- * Logique portée de la V2 éprouvée (equip/lib.ts + text-v2.ts) : le savoir
+ * Logique portée d'une base éprouvée (equip/lib.ts + text-v2.ts) : le savoir
  * reverse-engineeré (échelle permille, niveaux, multi-buff CSV) qu'on ne veut
  * surtout pas re-deviner.
  *
@@ -10,7 +10,7 @@
  * `[+Value]`, `[Value2]`, `[Value4]`, `[Value5]`, `[Turn2]`…) résolus depuis la
  * ligne du buff au niveau demandé.
  *
- * NOTE : on ne met PAS le wrap couleur `<color=#28d9ed>` de la V2 ici — c'est
+ * NOTE : on ne met PAS l'ancien wrap couleur `<color=#28d9ed>` ici — c'est
  * de la présentation, pas de la donnée canonique. Le front stylise s'il veut.
  */
 import { bool, loadTable, num, tablesStamp, withCaseInsensitiveGet, type Row } from './tables';
@@ -136,7 +136,7 @@ export function fillPlaceholders(template: string, v: BuffValues, color = false)
       .replace(/\[-Value\]/gi, fs(v.value, '-'))
       .replace(/\[Value\]/gi, f(v.value))
       // `[+Turn]` SANS signe, volontairement (vérifié 2026-07-21 sur les 22
-      // usages réels + la V2, qui fait pareil) : contrairement à `[+Value]` qui
+      // usages réels + l'ancien code, qui fait pareil) : contrairement à `[+Value]` qui
       // est un DELTA (« ATK +15 % »), celui-ci est une DURÉE — les gabarits du
       // jeu disent « [+Turn]ターンの間 » / « [+Turn]턴 » / « [+Turn]回合 », soit
       // « pendant N tours ». Un signe donnerait « pendant +2 tours ». Le « + » du

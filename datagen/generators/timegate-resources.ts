@@ -14,7 +14,7 @@
  *    produit est COURANT (même ancre `asOf` déterministe que `shop-priorities`,
  *    réutilisée telle quelle). La quantité = `MaxBuyCount` × période : elle se
  *    corrige toute seule quand le jeu rebrasse un shop (le Guild Shop l'a fait
- *    le 2024-12-03). La dérivation trouve MÊME des shops que la V2 hand-list
+ *    le 2024-12-03). La dérivation trouve MÊME des shops que la hand-list
  *    avait ratés (Tower Coin, Real-Time Arena, Remains).
  *
  *  • NON-SHOP (curés, `data/curated/timegate-resources.json`) — les sources
@@ -23,12 +23,12 @@
  *    de drop d'un clear de Floor, budget de points) : drops d'Infiltration
  *    Floor 3, échange de points d'Extermination, missions/récompenses de jeu
  *    hebdo, Singularité (rang/daily/ranking), atelier de Kate (la recette
- *    existe mais la limite hebdo de craft, non). Chiffres transplantés de la V2.
+ *    existe mais la limite hebdo de craft, non). Chiffres transplantés verbatim.
  *
  * Le panel d'items ET leur regroupement en onglets sont eux aussi curés (choix
  * éditorial « quelles ressources comptent »). Le générateur ne fait que : (1)
  * dériver les lignes de shop par item, (2) fusionner les lignes non-shop curées,
- * (3) calculer les totaux (mensuel global = mensuel + hebdo×4, comme la V2).
+ * (3) calculer les totaux (mensuel global = mensuel + hebdo×4, règle héritée).
  */
 import type { LangDict } from '../lib/lang';
 import { isMain } from '../lib/is-main';
@@ -46,10 +46,10 @@ import { computeAsOf, isCurrent, PERIOD, buildGearIcons, type ShopPeriod } from 
  * (`PBT_PVP_REAL`, mensuel) — grouper par monnaie le scindait en deux faux shops.
  *
  * On EXCLUT sciemment les catégories SANS onglet d'échange (`PC_TOWER`/Automaton
- * Coin, `PC_REMAINS`) : ce ne sont pas des shops d'échange listables, et la V2
+ * Coin, `PC_REMAINS`) : ce ne sont pas des shops d'échange listables, et on
  * curée à la main ne les listait pas (décision Sevih 19/07). Le Guild Shop est
  * gardé bien qu'il ait son propre écran (hall de guilde) — vrai shop, listé par
- * V2. Ordre = ordre d'affichage. Résultat = les 7 shops canoniques de la V2.
+ * plus. Ordre = ordre d'affichage. Résultat = les 7 shops canoniques.
  */
 const SHOPS: { key: string; buyTypes: string[] }[] = [
   { key: 'general', buyTypes: ['PBT_GOLD'] },
@@ -102,7 +102,7 @@ export interface TimegateSource {
   weekly?: number;
   /** Quantité mensuelle (absente si hebdomadaire ou plage). */
   monthly?: number;
-  /** Plage hebdomadaire estimée (ex. ranking : 20–240) — hors totaux, comme V2. */
+  /** Plage hebdomadaire estimée (ex. ranking : 20–240) — hors totaux, inchangé. */
   weeklyRange?: [number, number];
   /** Item de coût (craft : ex. 30 Blue Stardust → 1 Purple). */
   costItem?: { id: string; name: LangDict; icon: string; grade: string };
@@ -232,7 +232,7 @@ export function buildTimegateResources(): TimegateResourcesData {
         throw new Error(`timegate : source curée « ${cs.source} » (item ${id}) non déclarée`);
       const src: TimegateSource = { sourceKey: cs.source, origin: 'cured', type };
       if (cs.weeklyRange) {
-        src.weeklyRange = cs.weeklyRange; // hors totaux (estimation, comme V2)
+        src.weeklyRange = cs.weeklyRange; // hors totaux (estimation, inchangé)
       } else if (cs.monthly != null) {
         src.monthly = cs.monthly;
         totals.monthly += cs.monthly;

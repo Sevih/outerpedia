@@ -2,12 +2,12 @@
  * Générateur — MONAD GATE (`monad/theme.json` + `monad/routes.json`, routes
  * indexées par groupId dans UN fichier).
  *
- * Porté de l'extracteur admin V2 (`api/admin/extractor-v3/monad-gate/route.ts`),
+ * Porté de l'ancien extracteur admin (`api/admin/extractor-v3/monad-gate/route.ts`),
  * en ne gardant QUE la logique pure (graphe + solveur) et en la branchant sur
  * la lib datagen (`loadTable`/`indexBy`/`groupBy`/`resolveText`…) au lieu des
- * loaders ad-hoc de la V2.
+ * anciens loaders ad-hoc.
  *
- * RESHAPE V3 : la V2 résolvait les libellés au BUILD dans `extractGroup`, puis
+ * RESHAPE : les libellés étaient résolus au BUILD dans `extractGroup`, puis
  * les JETAIT au profit de clés (`typeNameKey`, `eventEndId`, registres
  * `labels`/`events`/`stageLabels`) re-résolues au RUNTIME (`loadRoute.ts`). Ici
  * on GARDE les chaînes résolues sur les nœuds/arêtes → le JSON de route est
@@ -27,7 +27,7 @@ import { groupBy, idSpan, indexBy, loadTable, num, splitCsv, type Row } from '..
 import { hasText, loadTextIndex, resolveText } from '../lib/text';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Types de sortie (contrat V3)
+// Types de sortie (contrat du générateur)
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** Type de nœud du site, dérivé du `NodeType` du jeu + icône/nom (cf. `mapNodeType`). */

@@ -79,8 +79,8 @@ describe('classification typographique', () => {
     expect(isTypoField({ path: 'name.en', existing: 'Poison', extracted: 'Bleed' })).toBe(false);
   });
 
-  it('isTypoField : true seulement si la seule différence est typo (guillemet SIMPLE, comme V2)', () => {
-    // V2 ne replie QUE les guillemets simples courbes (’ → '), pas les doubles.
+  it('isTypoField : true seulement si la seule différence est typo (guillemet SIMPLE)', () => {
+    // On ne replie QUE les guillemets simples courbes (’ → '), pas les doubles.
     expect(isTypoField({ path: 'desc.en', existing: 'It’s 50%.', extracted: "It's 50%." })).toBe(
       true,
     );

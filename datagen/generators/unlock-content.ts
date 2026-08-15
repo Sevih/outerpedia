@@ -3,7 +3,7 @@
  *
  * Sert le guide « Unlocking Content » : pour chaque `ContentType` verrouillé
  * (ContentLockTemplet), résout le nom joueur du mode et les stages requis.
- * Port TS du script Python V2 (oracle), réduit aux champs réellement consommés.
+ * Port TS de l'ancien script Python (oracle), réduit aux champs consommés.
  *
  *   ContentLockTemplet.UnLockConditionValue → DungeonTemplet (stage + nom)
  *     → AreaTemplet (saison/épisode pour le libellé de stage, marqueur Hard)

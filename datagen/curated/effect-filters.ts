@@ -4,7 +4,7 @@
  * La page liste `/characters` regroupe les cases à cocher buffs/debuffs par
  * FAMILLE UI (statBoosts, cc, dot…) et déduplique les variantes d'un même effet.
  * Ni la famille UI ni le regroupement ne vivent dans les tables du jeu : c'est
- * une classification 100 % ÉDITORIALE, portée de la V2 (data/effects/buffs.json
+ * une classification 100 % ÉDITORIALE, portée telle quelle (data/effects/buffs.json
  * + debuffs.json) comme oracle.
  *
  * Clé = clé `effectByKey` (le MÊME espace que `glossaries.effectByKey` :

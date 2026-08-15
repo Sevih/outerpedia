@@ -39,9 +39,9 @@ export interface ProsCons {
 }
 
 /**
- * Un groupe de synergie : partenaires (IDS de persos — format V3, plus de
+ * Un groupe de synergie : partenaires (IDS de persos — format actuel, plus de
  * slugs) + raison partagée (tags inline `{B/…}` résolus par parse-text).
- * Format SIMPLIFIÉ vs V2 (`partner[].hero[]` + LangMap dupliquée ×4) : les
+ * Format SIMPLIFIÉ vs l'ancien (`partner[].hero[]` + LangMap dupliquée ×4) : les
  * langues identiques à l'anglais ne sont plus stockées (repli `en`).
  */
 export interface SynergyGroup {

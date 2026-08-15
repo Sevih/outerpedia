@@ -5,7 +5,7 @@
  * langue d'ORIGINE de la BD, des noms de fichiers (sans extension) à servir.
  *
  * Ces BD sont FAITES MAIN : elles n'existent pas dans les fichiers du jeu. On
- * les RAMÈNE en V3 (jamais de pointeur V2) dans `.editorial/comics/<LANG>/`
+ * les RAMÈNE ici (jamais de pointeur externe) dans `.editorial/comics/<LANG>/`
  * (gitignoré → R2, comme l'éditorial wallpapers). Le catalogue se maintient
  * seul : déposer une image dans le bon dossier suffit, aucune liste à tenir.
  *
@@ -25,7 +25,7 @@ export const COMIC_LANGS = ['EN', 'JP', 'KR'] as const;
 export type ComicLang = (typeof COMIC_LANGS)[number];
 export type ComicsData = Record<ComicLang, string[]>;
 
-/** Pool éditorial ramené en V3 (une image = une BD, rangée par langue). */
+/** Pool éditorial rapatrié (une image = une BD, rangée par langue). */
 const EDITORIAL = resolve('.editorial/comics');
 
 /** Formats sources acceptés (originaux faits main + webp éventuel déjà converti). */

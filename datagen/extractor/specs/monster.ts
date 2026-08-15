@@ -1,8 +1,8 @@
 /**
  * Spec d'extraction — MONSTRES (MonsterTemplet).
  *
- * Domaine dérivé UNIQUEMENT des données du jeu — pas d'oracle V2 ni de contrôle
- * V2↔V3 sur les monstres (décision du 2026-07-10) : pas de `coverage`.
+ * Domaine dérivé UNIQUEMENT des données du jeu — pas d'oracle hérité ni de
+ * contrôle croisé sur les monstres (décision du 2026-07-10) : pas de `coverage`.
  *
  * Mêmes conventions que la spec character : slugs stables (libellés dans les
  * glossaires), stats BRUTES en paires _Min/_Max (l'échelle vit dans

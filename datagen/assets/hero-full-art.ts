@@ -3,10 +3,10 @@
  * page `/wallpapers` (catégorie HeroFullArt) ET hébergées par le manifest.
  *
  * SOURCE UNIQUE partagée (manifest ⇄ wallpapers, sans cycle d'import). On
- * réplique l'INTENTION de la V2 (`pipeline/steps/wallpapers.ts`) — catégorie
+ * réplique l'INTENTION d'origine (`pipeline/steps/wallpapers.ts`) — catégorie
  * HeroFullArt = tout sprite `IMG_<digits>` de la galerie d'illustrations, filtré
  * en largeur — mais SANS sa dédup par hash perceptuel (heuristique lossy qui
- * jetait de vrais arts alternatifs). Résultat : SUPERSET du set V2, natif,
+ * jetait de vrais arts alternatifs). Résultat : SUPERSET de l'ancien set, natif,
  * auto-maintenu (un art ajouté par un patch arrive tout seul).
  *
  * Deux détails de robustesse :
@@ -22,7 +22,7 @@ import { readPngSize } from '../lib/png';
 import { isUnreleasedCharacterAsset } from '../lib/released';
 import { GAME_IMAGES_DIR } from './source';
 
-/** Largeur minimale d'un art affichable (même seuil que la V2 : exclut les vignettes). */
+/** Largeur minimale d'un art affichable (seuil inchangé : exclut les vignettes). */
 const MIN_WIDTH = 250;
 
 export interface HeroArt {

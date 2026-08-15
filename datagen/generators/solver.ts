@@ -6,11 +6,11 @@
  *
  * Différences assumées avec l'original (spec de portage, 2026-08-12) :
  *   - source = `.gamedata/parsed` via `loadTable` (mêmes colonnes que l'ancien
- *     dump json2 d'outerpediaV2, repo mort) ;
+ *     dump json2 de l'ancien dépôt, archivé) ;
  *   - `effect_icon` curated SUPPRIMÉ — `ItemSpecialOptionTemplet.IconName`
  *     couvre 100 % des cas (le curated n'était qu'un fallback) ;
  *   - `set_icon` + prose des sets ← la génération equipment du MÊME build
- *     (paramètre `setsView`), plus le checkout V2 ;
+ *     (paramètre `setsView`), plus l'ancien checkout ;
  *   - `sub-ticks` recomposé depuis `ItemOptionTemplet` (pools de subs des
  *     gears 5★/6★) — `item-stats-detail.json` n'existe plus ;
  *   - `dmgStat`/`dmgSec`/`noCrit` re-dérivés des tables brutes
@@ -46,7 +46,7 @@ export interface SolverSetsView {
 
 // Prose des bonus de set : desc du JEU quand la vue en a une (sets à buff —
 // Revenge…), sinon SYNTHÈSE « <Label> +<valeur> » depuis le {stat, value} de
-// la vue — le libellé V2 exact (contrat de la référence gear-solver).
+// la vue — le libellé historique exact (contrat de la référence gear-solver).
 const SET_STAT_LABEL: Record<string, string> = {
   atk: 'Attack',
   def: 'Defense',
@@ -240,7 +240,7 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
 
   // ---- equipment ----
   // Icône d'effet d'option unique : ItemSpecialOptionTemplet.IconName par
-  // GroupID — couvre 100 % (l'ancien fallback curated V2 est supprimé, spec).
+  // GroupID — couvre 100 % (l'ancien fallback curé est supprimé, spec).
   const itemTemplet = loadTable('ItemTemplet');
   const specialOptRows = loadTable('ItemSpecialOptionTemplet');
   const isoIconByGroup = new Map<string, string>();
@@ -696,7 +696,7 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
   emit('codex-curve.json', ingredientsResult.codexByLevel satisfies CodexLevel[]);
 
   // ---- characters (+ dmgStat/dmgSec/noCrit re-dérivés des tables BRUTES) ----
-  // L'ancien monde lisait `public/damage-calc/buffs/{id}.json` (dérivé V2,
+  // L'ancien monde lisait `public/damage-calc/buffs/{id}.json` (dérivé,
   // disparu). Équivalences brutes, calibrées sur la référence gear-solver :
   //   - dmgStat : BT_SWAP_STAT_ATTACK (ST_DEF/ST_HP) sur un skill du kit ;
   //   - dmgSec  : BT_DMG_OWNER_STAT, ratio = Value/1000 (> 0), max par stat ;
@@ -722,7 +722,7 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
   // Skill_22 (classe — les swaps de Domine/Skadi/Anarky) et Skill_23 (core — Epsilon). PAS les skills
   // de SOUTIEN (backup, Skill_9/10) : leurs OWNER_STAT propres (Tamara
   // `_backup_1_1` spd 1500) sont les attaques de soutien, pas le kit principal —
-  // la référence V2 ne les comptait pas. noCrit, lui, se cherche sur TOUS les
+  // l'ancienne référence ne les comptait pas. noCrit, lui, se cherche sur TOUS les
   // Skill_* (le `_passive` de Rhona vit hors S1-S3).
   const MAIN_SKILL_COLS = ['Skill_1', 'Skill_2', 'Skill_3', 'Skill_8', 'Skill_22', 'Skill_23'];
   const ALL_SKILL_COLS = Array.from({ length: 23 }, (_, i) => `Skill_${i + 1}`);

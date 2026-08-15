@@ -115,7 +115,7 @@ export function buildEnhanceRules(): EnhanceRules {
   const textItem = loadTextIndex('TextItem');
 
   // Comparaison d'enhancement : base ATK d'une arme par archétype (grade, star).
-  // Archétypes repris du guide gear V2 : Normal 1★, Épic (rare) 2★, Légendaire
+  // Archétypes repris du guide gear : Normal 1★, Épic (rare) 2★, Légendaire
   // (unique) 1★ — le base sort du 1er ATK plat du groupe de main option.
   const optRows = loadTable('ItemOptionTemplet');
   const weaponItems = allItems.filter((r) => r.ItemSubType === 'ITS_EQUIP_WEAPON');
@@ -248,7 +248,7 @@ export function buildEnhanceRules(): EnhanceRules {
       });
     }
 
-    // Agrégation des 5 variantes élémentaires en UNE ligne (présentation V2) :
+    // Agrégation des 5 variantes élémentaires en UNE ligne (présentation gardée) :
     // offensif → plages identiques, libellé « vs <Element> » ; défensif →
     // deux plages distinctes (F/W/E vs L/D) portées par range/rangeAlt.
     const ELEM_OFF = /^UO_SINGULAREQUIP_DMG_TO_(EARTH|WATER|FIRE|LIGHT|DARK)_NAME$/;

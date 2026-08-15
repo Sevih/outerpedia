@@ -6,7 +6,7 @@
  * et on produit un diff STRUCTURÉ (par entité, par champ) — pas un diff de texte.
  *
  * 100 % PUR (aucune I/O) → testable, réutilisable pour TOUTE entité (perso,
- * équipement…). Répond au défaut V2 « un diff inline ré-écrit par route ».
+ * équipement…). Répond au défaut d'avant : « un diff inline ré-écrit par route ».
  */
 
 /** Une feuille qui a changé : chemin pointé (`profile.height`, `skills[2].desc.en`). */
@@ -77,7 +77,7 @@ export function diffEntity(existing: unknown, extracted: unknown): FieldDiff[] {
 }
 
 /**
- * Normalisation TYPOGRAPHIQUE (portée de la V2) : deux valeurs qui ne diffèrent
+ * Normalisation TYPOGRAPHIQUE (portée telle quelle) : deux valeurs qui ne diffèrent
  * QUE par du blanc ou des variantes de ponctuation sont ramenées à la même
  * chaîne. Sert à séparer une vraie modif d'une coquille cosmétique — guillemets
  * courbes ↔ droits, ponctuation pleine largeur/CJK ↔ ASCII, points de

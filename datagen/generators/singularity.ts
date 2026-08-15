@@ -1,7 +1,7 @@
 /**
  * Générateur — ROTATION du Dimensional Singularity / Monad Gate
  * (`singularity.json`). Construit UNIQUEMENT depuis les tables du jeu
- * (exigence Sevih : pas de V2 comme modèle), plus UNE donnée curée
+ * (exigence Sevih : pas d'ancien code comme modèle), plus UNE donnée curée
  * irréductible : l'ancre calendaire.
  *
  * Tables :

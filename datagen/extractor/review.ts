@@ -6,7 +6,7 @@
  * patch champ par champ AVANT de l'accepter — puis d'écrire à l'identique de
  * `build.ts` (même format) pour un diff git propre.
  *
- * Un seul moteur pour toutes les entités (≠ V2 : une route de diff par entité).
+ * Un seul moteur pour toutes les entités (avant : une route de diff par entité).
  */
 import { resolve } from 'node:path';
 import { readCuratedJson, writeJson } from '../lib/json';
