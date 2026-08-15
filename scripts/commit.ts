@@ -8,7 +8,7 @@
  *   2. CHOIX du bump de version (patch/minor/major) — l'écriture dans
  *      package.json est différée à l'étape 5 : abandonner ne modifie rien
  *      (la version est lue de là par next.config.ts → NEXT_PUBLIC_APP_VERSION ;
- *       pas de sw.js à synchroniser en V3)
+ *       pas de sw.js à synchroniser)
  *   3. message de commit (prompt)
  *   4. images → assets:collect + assets:push (R2)   ← AVANT le push git,
  *      car « merger/pousser = déployer » et la prod lit R2.

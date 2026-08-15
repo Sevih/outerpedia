@@ -11,7 +11,7 @@ import type { DungeonRank } from '@contracts';
  * PV du boss. Sans tranche (adventure), ce sont de vrais PV.
  *
  * Confondre les deux ne casse RIEN : ça affiche juste un nombre plausible et
- * faux. La V3 l'a fait — le panneau de la Singularity annonçait 750 000 PV au
+ * faux. C'est arrivé — le panneau de la Singularity annonçait 750 000 PV au
  * rang SSS++, soit 7,5× les PV réels du boss, parce que 750 000 est la largeur
  * de sa tranche (5 000 000 − 4 250 001 + 1). Aucun test ne pouvait le voir :
  * la valeur venait bien de la donnée, elle répondait juste à une autre question.

@@ -2,7 +2,7 @@
  * TITRES DE SECTION d'un guide de boss — GÉNÉRÉS depuis la donnée, jamais
  * recopiés.
  *
- * En V2, chaque guide portait ses propres `LangMap` de titres d'équipe, en dur
+ * Avant, chaque guide portait ses propres `LangMap` de titres d'équipe, en dur
  * dans son TSX. Résultat mécanique : la dérive. « Mero team strategy » dans
  * trois guides, « Mero strategy » dans deux autres ; le japonais de
  * `GDAHLIA_TITLE` divergeait d'un fichier à l'autre. Treize copies d'une même
@@ -10,7 +10,7 @@
  *
  * Ici, une section déclare CE QUI LA CARACTÉRISE — un personnage, un élément, un
  * effet — et le titre se fabrique : le nom vient du catalogue (donc correct en
- * JP/KR/ZH, ce que la V2 ne garantissait pas), seul le gabarit est une clé i18n.
+ * JP/KR/ZH, ce qui n'était pas garanti), seul le gabarit est une clé i18n.
  * Une référence introuvable JETTE : c'est une erreur de contenu, elle doit
  * casser le build comme les tags de `parse-text`.
  */

@@ -10,7 +10,7 @@
  */
 export type EffectSide = 'buff' | 'debuff';
 
-/** Familles valides par côté, DANS l'ordre d'affichage (parité V2). */
+/** Familles valides par côté, DANS l'ordre d'affichage (inchangé). */
 export const EFFECT_FAMILIES: Record<EffectSide, readonly string[]> = {
   buff: ['statBoosts', 'supporting', 'utility', 'unique'],
   debuff: ['statReduction', 'cc', 'dot', 'utility', 'unique'],

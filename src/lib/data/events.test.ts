@@ -89,7 +89,7 @@ describe('summarize — ce que le client reçoit', () => {
 
   it('TEASER : un événement pas encore démarré ne livre ni titre, ni résumé, ni bannière', () => {
     // La surprise fait partie de l'annonce : le client reçoit qu'un concours
-    // arrive et quand — le reste ne quitte pas le serveur (la V2 l'envoyait
+    // arrive et quand — le reste ne quitte pas le serveur (c'était envoyé
     // puis le masquait en CSS).
     const teaser = make({
       slug: 'secret',

@@ -6,7 +6,7 @@
  * でない場合 », « Increases damage received from Water and Earth enemies ». En jeu
  * ces mots sont lus comme des symboles ; en texte brut ils se noient.
  *
- * La V2 maintenait à la MAIN une table de tokens par langue (`boss-utils.ts` :
+ * On maintenait à la MAIN une table de tokens par langue (`boss-utils.ts` :
  * ELEMENT_TOKENS / CLASS_TOKENS, écrites en dur, quatre langues). Ici la table se
  * DÉDUIT du glossaire extrait (`glossaries.elements` / `.classes`) : ce sont déjà
  * les noms localisés, sortis du jeu. Un élément ajouté, une langue ajoutée —

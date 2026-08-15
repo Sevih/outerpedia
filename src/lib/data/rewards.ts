@@ -2,7 +2,7 @@
  * RÉCOMPENSES DE DONJON — la résolution `DungeonRef.reward[Win|Lose]` →
  * `reward-tables.json` → catalogue d'items / familles d'équipement.
  *
- * La V2 affichait le butin d'un boss via un champ `boss` curé À LA MAIN sur
+ * Le butin d'un boss s'affichait via un champ `boss` curé À LA MAIN sur
  * chaque équipement, et la vue de catégorie irregular portait carrément une
  * table slug→loot en dur dans le composant. Ici RIEN n'est écrit : le donjon
  * référence sa table, la table liste ses lignes, et chaque ligne se résout
@@ -246,7 +246,7 @@ export interface LootBadge {
  *    boss à l'autre), le filler magic/rare non plus — seul l'accessoire unique
  *    distingue le donjon.
  *
- * Tout se DÉRIVE du pool. La V2 portait ces listes en dur, par élément, dans un
+ * Tout se DÉRIVE du pool. Ces listes étaient en dur, par élément, dans un
  * JSON à part — avec les erreurs du travail à la main : l'icône du set
  * Fortification y était fausse (24 pour 23), un main du pool dark manquait.
  */
@@ -362,7 +362,7 @@ export interface LootVariant {
  * comme le jeu les liste. Les coffres et marteaux fixes, identiques d'une
  * poursuite à l'autre, ne distinguent rien : on ne les montre pas.
  *
- * La V2 portait tout ça en dur dans sa vue (noms d'items par slug, familles
+ * Tout ça était en dur dans la vue (noms d'items par slug, familles
  * recomposées en concaténant « [Classe] ») ; ici la table du donjon dit tout.
  */
 export function pursuitLoot(

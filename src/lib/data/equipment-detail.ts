@@ -233,7 +233,7 @@ function simpleStatOption(
  * Option spéciale EE (buff + stat propre) : DEUX options — la stat
  * CONDITIONNELLE portée par le buff (dmg_reduce 200 = 20 %, niveaux du buff)
  * ET la stat SECONDAIRE flat de la ligne (hit_ap : min(max, factor×(niv+1)),
- * formule du client — validée contre l'oracle V2 : 1..10 puis plafond).
+ * formule du client — validée contre l'oracle hérité : 1..10 puis plafond).
  */
 function toStatOptions(o: Option, lang: Lang): StatOption[] {
   if (!o.stat || o.stat === 'none') return [];
@@ -355,7 +355,7 @@ function recommendedFor(
       id: charId,
       slug: slugForId(charId) ?? charId,
       // Nom COURT d'affichage si curé (place limitée sous le portrait), sinon
-      // nom complet. Fallback V2 : short[lang] → short.en → nom complet.
+      // nom complet. Repli hérité : short[lang] → short.en → nom complet.
       name: short?.[lang] ?? short?.en ?? characterDisplayName(c, lang),
       prefix: characterNamePrefix(c, lang),
       element: c.element,
@@ -716,7 +716,7 @@ export function eeModelForView(view: EEView, lang: Lang): DetailModel {
     rarity: ch.rarity,
     tags: [...(curatedChars[ch.id]?.tags ?? []), ...(ch.fusion ? ['core-fusion'] : [])],
   });
-  // Pendant core-fusion : id 20xxxxx → 27xxxxx (convention du jeu, comme en V2).
+  // Pendant core-fusion : id 20xxxxx → 27xxxxx (convention du jeu, inchangée).
   const companion = c && c.id.startsWith('20') ? getCharacter(`27${c.id.slice(2)}`) : undefined;
   return {
     kind: 'ee',
@@ -761,7 +761,7 @@ export function eeModelForView(view: EEView, lang: Lang): DetailModel {
 /** Toutes les fiches (slug + nom EN) — sitemap, static params, index llms.txt. */
 export function allEquipmentEntries(): { slug: string; name: string }[] {
   // Famille multi-classes (Briareos/Gorgon) : les fiches PUBLIÉES sont les 5
-  // variantes (slugs suffixés, = URLs V2) — le slug de famille reste servi
+  // variantes (slugs suffixés, = URLs déjà publiées) — le slug de famille reste servi
   // (vue d'ensemble, compat) mais n'est pas listé.
   const famEntries = (fams: GearFamily[]) =>
     fams.flatMap((f) =>
@@ -802,7 +802,7 @@ function familyBySlug(
   return undefined;
 }
 
-/** Modèle complet d'une page détail, ou null (ordre de balayage V2). */
+/** Modèle complet d'une page détail, ou null (ordre de balayage inchangé). */
 export function getEquipmentDetail(slug: string, lang: Lang): DetailModel | null {
   const w = familyBySlug(getWeaponFamilies(), slug);
   if (w) return gearModel(w.f, WEAPONS, 'weapon', lang, w.v);

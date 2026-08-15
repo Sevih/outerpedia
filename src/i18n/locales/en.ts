@@ -1,9 +1,9 @@
 ﻿// Source of truth — exports TranslationKey type.
 //
-// CONTRAT (gardé par locales/keys.test.ts depuis la fin du portage V2) :
+// CONTRAT (gardé par locales/keys.test.ts depuis la fin du portage) :
 // chaque clé a un CONSOMMATEUR dans le code (littéral ou préfixe dynamique
 // détecté), et les 5 langues portent des clés IDENTIQUES. Une clé orpheline
-// fait échouer la suite — le pré-seed V2 est terminé, purgé le 22/07 (150
+// fait échouer la suite — le pré-seed hérité est terminé, purgé le 22/07 (150
 // vestiges).
 
 const en = {
@@ -684,7 +684,7 @@ const en = {
   // Catégories de guides : libellés + descriptions dans guide-categories.ts
   // (source unique, LocalizedText) — plus de clés de locale par catégorie.
   // Rotation : UN boss par jour (mer→sam), puis 3 jours de récompense.
-  // La V2 affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
+  // On affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
   'guides.singularity.week.title': 'Active this week',
   'guides.singularity.week.title_mobile': 'Active now',
   'guides.singularity.week.live': 'Live now · {dow}',
@@ -711,7 +711,7 @@ const en = {
 
   'guides.tips.tactical': 'Tactical Tips',
   // Gabarits de titre de section : le SUJET (perso / élément / effet) vient de
-  // la donnée localisée, jamais d'un LangMap recopié par guide (cf. V2).
+  // la donnée localisée, jamais d'un LangMap recopié par guide.
   'guides.tips.for': '{name} strategy',
   'guides.team.for': '{name} team',
   'guides.tips.strategy': 'Strategy',
@@ -1310,7 +1310,7 @@ const en = {
   'progress.craftSettingsDesc': 'Enable or disable crafting items you want to track.',
   'progress.shopSettingsDesc': 'Enable or disable shop purchases you want to track.',
 
-  // Guides (système V3)
+  // Guides (système actuel)
   'page.guides.empty_category': 'No guides in this category yet.',
   'page.guide.versions': 'Version',
 

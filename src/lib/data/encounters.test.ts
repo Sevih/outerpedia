@@ -178,7 +178,7 @@ describe('world boss — quatre ligues, une échelle de rangs qui ENJAMBE les bo
       ).toEqual(['league_1', 'league_2', 'league_3', 'league_4']);
       // Ligues 3 et 4 : deux boss DISTINCTS dans le même combat — le boss 1 se
       // joue jusqu'au rang A, atteindre S le fait TRANSITIONNER en boss 2. La
-      // V2 codait ces ids à la main (`boss1Ids`/`boss2Ids`), ici ils
+      // ces ids étaient codés à la main (`boss1Ids`/`boss2Ids`), ici ils
       // descendent du donjon.
       expect(
         encs.map((e) => e.monsters.length),
@@ -430,7 +430,7 @@ describe('poursuite irregular — quatre combats permanents, du butin par issue'
       expect(new Set(amounts).size, `${g} : quantités de cellules identiques`).toBe(amounts.length);
 
       // L'équipement n'est PAS un butin de tous les jours : seul le Very Hard
-      // le droppe (c'est ce qui fait monter le joueur). La V2 le listait à la
+      // le droppe (c'est ce qui fait monter le joueur). Il était listé à la
       // main dans sa vue de catégorie, sans dire d'où il tombait.
       const gearCount = loots.map((l) => l.weapons.length + l.amulets.length);
       expect(gearCount.slice(0, -1), `${g} : gear hors Very Hard`).toEqual([0, 0]);

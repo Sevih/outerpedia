@@ -661,7 +661,7 @@ const kr: Record<TranslationKey, string> = {
   // Catégories de guides : libellés + descriptions dans guide-categories.ts
   // (source unique, LocalizedText) — plus de clés de locale par catégorie.
   // Rotation : UN boss par jour (mer→sam), puis 3 jours de récompense.
-  // La V2 affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
+  // On affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
   'guides.singularity.week.title': '이번 주 보스',
   'guides.singularity.week.title_mobile': '진행 중',
   'guides.singularity.week.live': '진행 중 · {dow}',
@@ -688,7 +688,7 @@ const kr: Record<TranslationKey, string> = {
 
   'guides.tips.tactical': '전술 팁',
   // Gabarits de titre de section : le SUJET (perso / élément / effet) vient de
-  // la donnée localisée, jamais d'un LangMap recopié par guide (cf. V2).
+  // la donnée localisée, jamais d'un LangMap recopié par guide.
   'guides.tips.for': '{name} 전략',
   'guides.team.for': '{name} 팀',
   'guides.tips.strategy': '전략',
@@ -1271,7 +1271,7 @@ const kr: Record<TranslationKey, string> = {
   'progress.craftSettingsDesc': '추적할 제작 아이템을 활성화하거나 비활성화합니다.',
   'progress.shopSettingsDesc': '추적할 상점 구매를 활성화하거나 비활성화합니다.',
 
-  // Guides (système V3)
+  // Guides (système actuel)
   'page.guides.empty_category': '이 카테고리에는 아직 가이드가 없습니다.',
   'page.guide.versions': '버전',
 

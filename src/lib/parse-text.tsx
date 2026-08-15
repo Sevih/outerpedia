@@ -1,5 +1,5 @@
 /**
- * PARSE-TEXT — moteur des tags inline du contenu éditorial (portage V2, en
+ * PARSE-TEXT — moteur des tags inline du contenu éditorial (porté tel quel, en
  * mieux : résolution 100 % CÔTÉ SERVEUR contre nos données ; le client ne
  * garde que l'interactivité des tooltips).
  *
@@ -11,7 +11,7 @@
  * tooltip 2P/4P). Le tag restant ({SKB/…} — skills de boss) est rendu en texte
  * stylé neutre en attendant l'extraction du domaine monstres (portage guides).
  *
- * Une clé inconnue s'affiche en ROUGE (comme en V2) : c'est un signal d'erreur
+ * Une clé inconnue s'affiche en ROUGE (inchangé) : c'est un signal d'erreur
  * de contenu, voulu et visible.
  */
 import type { ReactNode } from 'react';
@@ -337,13 +337,13 @@ function findSet(name: string, lang: Lang): SetView | undefined {
   return index.get(name.trim().toLowerCase());
 }
 
-/** Chip set d'armure ({AS/nom}) : tuile d'armure + nom, tooltip 2P/4P (V2). */
+/** Chip set d'armure ({AS/nom}) : tuile d'armure + nom, tooltip 2P/4P. */
 function setChip(name: string, ctx: ParseCtx, k: number): ReactNode {
   const set = findSet(name, ctx.lang);
   const icon = set?.pieceIcons.armor ?? Object.values(set?.pieceIcons ?? {})[0];
   if (!set || !icon) return unknownRef(name, `{AS/${name}}`, ctx, k);
   const label = lRec(set.name, ctx.lang) || set.name.en;
-  // Effets au palier ENCHANTÉ (dernier), comme la V2.
+  // Effets au palier ENCHANTÉ (dernier), inchangé.
   const tier = set.tiers[set.tiers.length - 1];
   const tooltip = (
     <div className="flex gap-2">

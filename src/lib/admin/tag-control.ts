@@ -1,5 +1,5 @@
 /**
- * CONTRÔLE DES TAGS INLINE (port de l'outil V2) : balaye tout le contenu
+ * CONTRÔLE DES TAGS INLINE (outil porté tel quel) : balaye tout le contenu
  * éditorial ({B/…}, {P/…}, {I-W/…}…) et vérifie que chaque tag a une
  * correspondance dans la donnée — même résolution que le rendu parse-text.
  *

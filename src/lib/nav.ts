@@ -1,10 +1,10 @@
 import type { TranslationKey } from '@/i18n';
 
 /**
- * NAVIGATION PRINCIPALE — contrat V2 : mêmes items, même ordre, mêmes URL
+ * NAVIGATION PRINCIPALE — contrat hérité : mêmes items, même ordre, mêmes URL
  * (header, menu mobile, et la future recherche lisent la même source).
  *
- * Certaines cibles n'existent PAS ENCORE en V3 (/tierlist, /tools…) : ASSUMÉ
+ * Certaines cibles n'existent PAS ENCORE (/tierlist, /tools…) : ASSUMÉ
  * (décision Sevih 2026-07-17) — le layout précède les pages ; l'inventaire des
  * pages manquantes vit dans docs/TODO.md (section « Pages manquantes »).
  */

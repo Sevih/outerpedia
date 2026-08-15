@@ -5,8 +5,8 @@
  * donc vivre COMMITTÉE dans `meta.json`. Ce script la maintient au moment du
  * commit, où l'historique local est disponible.
  *
- * Modèle (décidé avec Sevih) : baseline = release V3 (tous les guides datés du
- * jour de release, une fois) ; ensuite, si un fichier PERTINENT d'un guide
+ * Modèle (décidé avec Sevih) : baseline = la mise en ligne du site (tous les
+ * guides datés de ce jour-là, une fois) ; ensuite, si un fichier PERTINENT
  * change → `updated = aujourd'hui`. « Pertinent » = les fichiers partagés du
  * guide (meta/strings/index/notes…) + la DERNIÈRE version ; les archives de
  * versions (`versions/<plus ancienne>/`) ne comptent pas — corriger un vieux

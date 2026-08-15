@@ -9,9 +9,9 @@
  *
  *   1 monstre  → `solo`    : pleine largeur ;
  *   2 monstres → `pair`    : CÔTE À CÔTE (les deux phases d'un world boss se
- *                            comparent d'un coup d'œil — c'est ce que faisait la V2) ;
+ *                            comparent d'un coup d'œil — comportement conservé) ;
  *   3 et plus  → `compact` : vignettes + une seule carte dépliée (le rendu des
- *                            renforts des tours élémentaires en V2).
+ *                            renforts des tours élémentaires).
  *
  * Les BOSS d'abord, les RENFORTS ensuite : un combat se lit par ce qu'on vient y
  * affronter, pas par l'ordre où le jeu pose ses sprites sur le terrain (il les

@@ -2,8 +2,8 @@
  * LES GEAS DU GUILD RAID — dérivés de la donnée, jamais recopiés.
  *
  * Un geas est un modificateur global du guild raid : une aide (`positive`) ou un
- * handicap, contre un ajustement de score (`points`). La V2 maintenait à la main
- * et le POOL (107 entrées) et les tables de déblocage de chaque saison. En V3 les
+ * handicap, contre un ajustement de score (`points`). On maintenait à la main
+ * et le POOL (107 entrées) et les tables de déblocage de chaque saison. Ici les
  * deux sortent des tables du jeu :
  *   - le pool vit dans `glossaries.geas` (clé → {desc, icon, positive, grade…}) ;
  *   - la table de déblocage d'un SOUS-BOSS se lit sur son COMBAT : chaque stage

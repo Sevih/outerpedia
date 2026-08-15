@@ -1,5 +1,5 @@
 /**
- * Limitation de débit par IP, en mémoire — même réglage que la V2. Un seul
+ * Limitation de débit par IP, en mémoire — réglage inchangé. Un seul
  * process Node sert la prod (pas de multi-instance), la Map suffit.
  *
  * Un limiteur PAR ROUTE (factory) et pas une Map partagée : chaque route

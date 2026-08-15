@@ -1,10 +1,10 @@
 /**
- * Les locales n'hébergent QUE des clés consommées — fin du pré-seed V2.
+ * Les locales n'hébergent QUE des clés consommées — fin du pré-seed hérité.
  *
- * Historique : les 5 fichiers de langue ont été transplantés de la V2 AVANT le
+ * Historique : les 5 fichiers de langue ont été transplantés AVANT le
  * portage des pages, chaque namespace attendant sa page (« pré-seed », tracé
  * dans TODO § Pages manquantes). Le portage étant terminé (bascule du 21/07),
- * une clé sans consommateur redevient un SIGNAL : vestige V2 à purger, ou
+ * une clé sans consommateur redevient un SIGNAL : vestige à purger, ou
  * faute de frappe entre le code et la locale.
  *
  * Deux gardes :
@@ -81,6 +81,6 @@ describe('locales — contrat des clés', () => {
         !corpus.includes(`\`${k}\``) &&
         ![...dynamic].some((p) => k.startsWith(p)),
     );
-    expect(dead, 'clés sans consommateur (vestige V2 à purger, ou typo)').toEqual([]);
+    expect(dead, 'clés sans consommateur (vestige à purger, ou typo)').toEqual([]);
   });
 });

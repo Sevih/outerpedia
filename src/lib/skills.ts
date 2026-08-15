@@ -1,7 +1,7 @@
 import type { SkillBuffVars } from '@contracts';
 
 /**
- * Raccourci de skill ÉDITORIAL → type de skill V3 (clé `Skill.type`).
+ * Raccourci de skill ÉDITORIAL → type de skill canonique (clé `Skill.type`).
  * Table unique du domaine : parse-text (`{SK/perso|S2}`) et tout futur
  * consommateur de raccourcis S1/S2/S3 importent d'ici.
  *
@@ -23,7 +23,7 @@ export const SKILL_SHORTHAND: Record<string, string> = {
 /** Ordre d'affichage des skills principaux (grille de cartes). */
 export const MAIN_SKILL_TYPES = ['first', 'second', 'ultimate'] as const;
 
-/** Portée du jeu (`RangeType` slugifié) → clé de cible éditoriale V2 (mono/multi/duo). */
+/** Portée du jeu (`RangeType` slugifié) → clé de cible éditoriale (mono/multi/duo). */
 export const RANGE_TO_TARGET: Record<string, string> = {
   single: 'mono',
   all: 'multi',

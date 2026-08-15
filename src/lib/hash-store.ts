@@ -14,7 +14,7 @@ import type { Connection } from 'mysql2/promise';
  *
  * Ce qui reste PROPRE à chaque store (donc paramétré, pas figé) : le nom de
  * table/colonne, la longueur max de la valeur, et le motif d'id accepté à la
- * LECTURE — la tier-list hérite d'ids V2 et doit rester plus permissive que ce
+ * LECTURE — la tier-list hérite d'anciens ids et doit rester plus permissive que ce
  * qu'elle produit aujourd'hui.
  */
 

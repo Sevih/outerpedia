@@ -156,7 +156,7 @@ export function listMonsters(lang: Lang): { id: string; label: string }[] {
  * Urd, Verdandi et Skuld existent chacune en DEUX exemplaires : même nom, même
  * sprite, seuls l'élément et le donjon diffèrent. Côte à côte dans la rotation,
  * deux cartes rigoureusement identiques n'apprennent rien — d'où « Urd (Light) »
- * et « Urd (Dark) », que la V2 écrivait à la main dans le titre de chaque guide.
+ * et « Urd (Dark) », qu'on écrivait à la main dans le titre de chaque guide.
  *
  * Ici c'est une RÈGLE, pas une liste : la collision est constatée sur l'ensemble
  * passé, dans la langue rendue (les noms JP/KR/ZH peuvent se heurter là où l'EN

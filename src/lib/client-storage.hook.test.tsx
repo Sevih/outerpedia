@@ -87,7 +87,7 @@ describe('useStoredState', () => {
     expect(JSON.parse(localStorage.getItem(SPEC.key)!).data).toEqual({ size: 15 });
   });
 
-  it("absorbe une clé V2 héritée au montage (écrite sous la clé V3, l'héritée reste)", () => {
+  it("absorbe une clé héritée au montage (écrite sous la clé courante, l'héritée reste)", () => {
     localStorage.setItem('legacy-hook', JSON.stringify({ s: 32 }));
     const { root, renders } = mount(SPEC);
     mounted = root;

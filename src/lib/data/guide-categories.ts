@@ -1,13 +1,13 @@
 /**
  * SOURCE DE VÉRITÉ des catégories de guides. Ajouter une catégorie = une entrée ici.
  *
- * Contrairement à la V2 (entrée `_categories.json` + vue custom enregistrée +
+ * Contrairement au montage précédent (`_categories.json` + vue enregistrée +
  * 10 clés de locale dans 5 fichiers), TOUT vit ici : slug, ordre, icône (sprite
  * du jeu, namespace `images/ui/guides/`), libellé et description localisés.
  * Le contenu éditorial est du `LocalizedText` inline — pas des clés i18n — car
  * il appartient à la donnée guides, pas au chrome du site.
  *
- * Les slugs sont un CONTRAT D'URL (V2) : ne jamais les renommer sans redirect.
+ * Les slugs sont un CONTRAT D'URL hérité : jamais de renommage sans redirect.
  */
 import type { LocalizedText } from '@contracts';
 
@@ -21,7 +21,7 @@ export type GuideRequirable =
 
 /**
  * Bloc EXPLICATIF d'un mode de jeu (« comment ça marche »), affiché en bas de sa
- * page de catégorie. C'est de la DONNÉE, pas un composant : en V2, ce bloc était
+ * page de catégorie. C'est de la DONNÉE, pas un composant : avant, ce bloc était
  * une fonction `ModeInfo` non exportée, enterrée au fond du fichier de liste du
  * seul mode qui en avait un — en écrire un deuxième aurait voulu dire écrire un
  * deuxième composant. Ici, un mode qui veut le sien remplit ce champ.
@@ -66,7 +66,7 @@ export interface GuideCategory {
 /**
  * PALIERS pédagogiques de `general-guides` (ordre de lecture conseillé).
  *
- * En V2 c'était une map `TIER_BY_SLUG` écrite À LA MAIN *dans le composant
+ * C'était auparavant une map `TIER_BY_SLUG` écrite À LA MAIN *dans le composant
  * React* : un guide absent de la map recevait `tier: null` et disparaissait
  * SILENCIEUSEMENT de la page. Ici le palier est une DONNÉE (`tier` du meta),
  * validée au scan — un guide sans palier casse le build.
@@ -187,11 +187,11 @@ export const GUIDE_CATEGORIES = {
      * Mode PERMANENT à combats désignés : `group` = le combat que le guide
      * couvre (un donjon Weekly Conquest ou Promotion Challenge, seul dans son
      * groupe — son échelle de stages vit dans ses rangs), `bossId` = le boss du
-     * donjon (og:image de la page détail — la V2 n'en avait aucune).
+     * donjon (og:image de la page détail — il n'y en avait aucune avant).
      *
      * Pas d'`order` : le mode n'a ni saison ni calendrier qui l'ordonnerait, et
      * les licences se lisent comme une galerie. La vue trie donc sur le titre,
-     * comme la V2.
+     * comme auparavant.
      */
     requires: ['group', 'bossId'],
     label: {
@@ -335,7 +335,7 @@ export const GUIDE_CATEGORIES = {
      * échelle de stages dans son meta (validé au scan) — la vue de catégorie
      * en dépend pour ranger les guides par mode (Identification / Ecology
      * Study) sans table slug→élément en dur. `order` porte l'ordre ÉDITORIAL
-     * des colonnes et des cartes (Identification d'abord, comme en V2 — les
+     * des colonnes et des cartes (Identification d'abord, choix conservé — les
      * ids de donjons du jeu mettraient Ecology en tête). `bossId` nomme la
      * carte : le nom du BOSS, pas le titre du guide (souvent générique).
      */
@@ -367,7 +367,7 @@ export const GUIDE_CATEGORIES = {
      * couvre (rendu + butin en découlent), `bossId` = le nom et le portrait du
      * pin (namespace boss existant — jamais une 2e copie du sprite), `order` =
      * le GroupID du jeu (1..4), qui est aussi l'ordre croissant de difficulté,
-     * `mapPos` = la position du pin sur l'art de la catégorie (visuel V2 :
+     * `mapPos` = la position du pin sur l'art de la catégorie (parti pris :
      * la vue est une CARTE, pas une grille). Pas de calendrier : rien à trier
      * par saison.
      */
@@ -393,9 +393,9 @@ export const GUIDE_CATEGORIES = {
     /**
      * Les PROFONDEURS et leurs routes : la vue en fait deux sections (Story 1-5,
      * Endless 6-10 avec sélecteur de profondeur) et une carte par route. `depth`
-     * et `route` sont DÉCLARÉS (requis au scan) — la V2 les lisait dans le slug
-     * (`depth6-route2`) ; `variants` (optionnel) porte le nombre de layouts de
-     * map d'une route, à la place du `VARIANT_DEPTHS` en dur du composant V2.
+     * et `route` sont DÉCLARÉS (requis au scan) — ils étaient auparavant lus
+     * dans le slug (`depth6-route2`) ; `variants` (optionnel) porte le nombre de
+     * layouts de map d'une route, à la place d'un `VARIANT_DEPTHS` en dur.
      */
     requires: ['depth', 'route'],
     label: {
@@ -421,7 +421,7 @@ export const GUIDE_CATEGORIES = {
      * Hard / Very Hard) et élémentaire (Fire…Dark). Chaque guide DÉSIGNE sa tour
      * par `meta.tower` (clé de `data/generated/towers.json`, requis au scan) —
      * la vue en tire la section, l'élément et l'ordre, sans lire le slug comme
-     * en V2.
+     * on le faisait avant.
      */
     requires: ['tower'],
     label: {
@@ -459,7 +459,7 @@ export const GUIDE_CATEGORIES = {
   },
 } as const satisfies Record<string, GuideCategory>;
 
-/** Slug de catégorie (contrat d'URL V2). */
+/** Slug de catégorie (contrat d'URL hérité). */
 export type GuideCategorySlug = keyof typeof GUIDE_CATEGORIES;
 
 /** Slugs dans l'ordre d'affichage. */

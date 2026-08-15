@@ -2,13 +2,13 @@
  * Arbre d'options des filtres d'EFFETS de `/characters` (onglet « Effects »).
  *
  * La taxonomie (famille UI + regroupement des variantes) vit dans
- * `glossaries.effectFilters` (curée, portée de la V2) ; les libellés/icônes
+ * `glossaries.effectFilters` (curée, portée telle quelle) ; les libellés/icônes
  * passent par la résolution FUSIONNÉE (`resolveEffectKey`) — MÊME source que les
  * chips d'effet des skills, donc les overrides curés (nom, icône) sont pris
  * (ex. « Priority Increase » a une icône curée `IG_Buff_Action_Gauge_Up` ; lire
  * le glossaire brut ressortait l'icône d'encyclopédie `SC_Buff_Effect_…`).
  *
- * Tout est résolu CÔTÉ SERVEUR (aucun contexte i18n en V3, `glossaries.json` et
+ * Tout est résolu CÔTÉ SERVEUR (aucun contexte i18n, `glossaries.json` et
  * les lectures disque du curé hors bundle client). L'univers des options est
  * DÉRIVÉ DES AGRÉGATS réels des persos (`characters-list.json`) : chaque case
  * matche ≥1 perso, et chaque clé de perso a sa case — pas de filtre mort.

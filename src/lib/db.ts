@@ -1,7 +1,7 @@
 import mysql from 'mysql2/promise';
 
 /**
- * Accès MySQL (portage V2) — UNIQUEMENT pour les fonctionnalités de partage
+ * Accès MySQL (porté tel quel) — UNIQUEMENT pour les fonctionnalités de partage
  * (tier-list, plus tard équipes). Tout le reste du site est statique/fichiers.
  *
  * La config vient de l'environnement (`DB_*`, câblés dans le compose du VPS —
@@ -28,7 +28,7 @@ function dbConfig(): mysql.ConnectionOptions | null {
  *
  * Une connexion par requête plutôt qu'un pool : un pool face à un MySQL dont
  * les TCP inactifs sont coupés distribue des sockets morts (requête qui pend
- * puis 500 — vécu en V2). Le volume du partage est faible, les ~quelques ms de
+ * puis 500 — déjà vécu). Le volume du partage est faible, les ~quelques ms de
  * connexion (réseau Docker interne) sont indolores.
  */
 export async function getDbConnection(): Promise<mysql.Connection | null> {

@@ -1,7 +1,7 @@
 /**
  * PUBLICATION RUNTIME des JSON curés : pousse un fichier de `data/curated/` sur
  * R2 (namespace `data/`) et purge l'edge — appelée par la sauvegarde admin (et
- * le regen V2). C'est ce qui permet aux loaders runtime de `lib/home` (coupons,
+ * l'ancien réimport). C'est ce qui permet aux loaders runtime de `lib/home` (coupons,
  * bannières) de servir une édition SANS redéploiement du site.
  *
  * Mêmes conventions que `scripts/assets-push.mjs` (rclone spawn direct sans

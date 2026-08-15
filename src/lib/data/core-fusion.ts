@@ -1,7 +1,7 @@
 /**
  * Accès lecture au domaine CORE FUSION — tout dérive des fiches persos
  * (CharacterFusionTemplet/CharacterFusionLevelTemplet extraits par la spec) :
- * paires base ↔ fusion, paliers/coûts, renommages de skills. La V2 tenait tout
+ * paires base ↔ fusion, paliers/coûts, renommages de skills. Tout était tenu
  * ça à la main (LEVEL_COSTS en dur, mapping par `replace('2700','2000')`,
  * cf-skill-names.json généré à part) — vérifié : la dérivation reproduit ses
  * 24 renommages à l'identique.

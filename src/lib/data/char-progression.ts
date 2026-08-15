@@ -3,7 +3,7 @@
  *
  * Les paliers de stats sont CALCULÉS depuis l'extraction (`progression.json`
  * + min/max de la fiche) avec les règles du client, validées contre l'oracle
- * V2 (`char-progression.test.ts`, perso 2000073) :
+ * hérité (`char-progression.test.ts`, perso 2000073) :
  *   - stats interpolées (ATK/DEF/HP/SPD/EFF/RES) :
  *     min + floor((max−min)·(L−1)/99) + Σ bonus d'évolution — référence
  *     niveau 100, EXTRAPOLÉE au-delà (limit breaks 105/110/120) ;
@@ -99,7 +99,7 @@ export function computeStatSteps(char: Character): StatStepsView {
       }
     // Au-delà du niveau 100, la croissance par niveau est AMPLIFIÉE par le
     // modificateur per-mille du limit break (LevelUpStatModifierAfter100) —
-    // validé in-game par le gear-solver (la V2 l'omettait, écart assumé).
+    // validé in-game par le gear-solver (l'oracle l'omettait, écart assumé).
     const modifier = level > 100 ? (lb.find((s) => s.maxLevel === level)?.statModifier ?? 0) : 0;
 
     const stats = {} as Record<StepStatKey, number>;
@@ -294,7 +294,7 @@ function fmtAmount(n: number): string {
  * de la table de transcendance EST le niveau de ce passif, et chaque niveau
  * porte son texte OFFICIEL (`SE_DESC_SKILL08_*` de TextSkill — le delta du
  * palier : « +4% Ally Team Critical Damage », « Burst Level 3 Unlocked »…).
- * Comme la V2 : les bonus numériques de même libellé s'additionnent
+ * Inchangé : les bonus numériques de même libellé s'additionnent
  * (+4% puis +4% → « +8% »), les autres lignes s'empilent telles quelles.
  */
 function passiveLines(unique: Skill | undefined, level: number, lang: Lang): string[] {
@@ -359,7 +359,7 @@ export interface TranscendSweetspotView {
 
 /**
  * Deltas de transcendance aux étoiles JAUNES demandées — le format des guides
- * (« pourquoi s'arrêter à 4★ ? ») : la V2 stockait ces textes par perso dans
+ * (« pourquoi s'arrêter à 4★ ? ») : ces textes étaient stockés par perso dans
  * ses JSON et les rechargeait côté client ; ici ils dérivent des paliers
  * officiels (mêmes sources que le slider de la fiche perso), stats exclues
  * (elles montent à CHAQUE palier — aucun intérêt de sweetspot).

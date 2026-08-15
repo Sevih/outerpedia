@@ -6,7 +6,7 @@
  * appel (comme la couche curée) pour que l'admin voie ses écritures aussitôt.
  * Alimente `characterSearchNames` — donc le champ recherche des browsers de perso.
  *
- * NB : DISTINCT du nom court d'AFFICHAGE (cf. `short-names`, parité V2
+ * NB : DISTINCT du nom court d'AFFICHAGE (cf. `short-names`, hérité
  * `name-aliases.json`). Ici on n'affiche rien : on élargit seulement la recherche.
  */
 import { readFileSync } from 'node:fs';

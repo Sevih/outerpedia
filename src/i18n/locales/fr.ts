@@ -692,7 +692,7 @@ const fr: Record<TranslationKey, string> = {
   // Catégories de guides : libellés + descriptions dans guide-categories.ts
   // (source unique, LocalizedText) — plus de clés de locale par catégorie.
   // Rotation : UN boss par jour (mer→sam), puis 3 jours de récompense.
-  // La V2 affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
+  // On affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
   'guides.singularity.week.title': 'Actif cette semaine',
   'guides.singularity.week.title_mobile': 'Actif maintenant',
   'guides.singularity.week.live': 'En cours · {dow}',
@@ -719,7 +719,7 @@ const fr: Record<TranslationKey, string> = {
 
   'guides.tips.tactical': 'Conseils tactiques',
   // Gabarits de titre de section : le SUJET (perso / élément / effet) vient de
-  // la donnée localisée, jamais d'un LangMap recopié par guide (cf. V2).
+  // la donnée localisée, jamais d'un LangMap recopié par guide.
   'guides.tips.for': 'Stratégie {name}',
   'guides.team.for': 'Équipe {name}',
   'guides.tips.strategy': 'Stratégie',
@@ -1324,7 +1324,7 @@ const fr: Record<TranslationKey, string> = {
   'progress.shopSettingsDesc':
     'Activez ou désactivez les achats en boutique que vous souhaitez suivre.',
 
-  // Guides (système V3)
+  // Guides (système actuel)
   'page.guides.empty_category': 'Aucun guide dans cette catégorie pour le moment.',
   'page.guide.versions': 'Version',
 

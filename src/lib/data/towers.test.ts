@@ -33,7 +33,7 @@ describe('towers.json — invariants structurels', () => {
     expect(TOWER_KEYS.slice(0, 3)).toEqual([...TOWER_DIFFICULTY_MODES]);
     for (const k of TOWER_KEYS.slice(3)) expect(k).toMatch(/^tower_element_/);
     expect(isTowerKey('tower_hard')).toBe(true);
-    expect(isTowerKey('fire-tower')).toBe(false); // slug V2, plus une clé
+    expect(isTowerKey('fire-tower')).toBe(false); // ancien slug, plus une clé
   });
 
   it('les étages sont exactement 1..N, triés (parsing des NameID)', () => {

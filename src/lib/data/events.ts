@@ -1,7 +1,7 @@
 /**
  * ÉVÉNEMENTS COMMUNAUTAIRES (`/event`, `/event/<slug>`) — modèle et lecture.
  *
- * En V2, un événement était un COMPOSANT (`events/<slug>.tsx`) : publier un
+ * Avant, un événement était un COMPOSANT (`events/<slug>.tsx`) : publier un
  * concours, corriger une date ou ajouter les gagnants demandait un commit et un
  * redéploiement, et son dictionnaire i18n vivait dans le fichier. Ici un
  * événement est une DONNÉE (`data/curated/events.json`) : des métadonnées + une
@@ -53,7 +53,7 @@ export interface EventVideo {
  * Jalon du calendrier : ce qui se joue À CETTE DATE (ouverture, clôture,
  * dépouillement…). Source UNIQUE des dates intermédiaires — le bloc `timeline`
  * les affiche et l'en-tête met en avant le jalon courant, personne ne les
- * recopie dans la prose (le défaut de la V2).
+ * recopie dans la prose (le défaut d'avant).
  */
 export interface EventPhase {
   /** ISO 8601 avec fuseau (`2026-04-28T00:00:00Z`). */
@@ -98,7 +98,7 @@ export interface EventEntry {
   draft?: boolean;
   /**
    * Montrer le contenu AVANT le début. Par défaut un événement pas encore
-   * démarré est un TEASER (règle V2) : on annonce qu'il arrive et sa famille,
+   * démarré est un TEASER (règle héritée) : on annonce qu'il arrive et sa famille,
    * pas son titre, son résumé ni ses blocs — la surprise fait partie de
    * l'annonce. À cocher quand on veut publier le règlement à l'avance pour que
    * les gens se préparent.
@@ -179,7 +179,7 @@ const isPublic = (e: EventEntry): boolean => !e.draft;
 
 /**
  * Liste résolue pour `lang`. Les BROUILLONS sont écartés côté SERVEUR (leur
- * contenu ne part jamais dans le HTML ni dans le bundle — la V2 les filtrait
+ * contenu ne part jamais dans le HTML ni dans le bundle — ils étaient filtrés
  * côté client, donc les livrait quand même) ; `includeDrafts` n'est utilisé que
  * par l'admin local.
  */
@@ -203,7 +203,7 @@ export function summarize(
       const status = eventStatus(e, now);
       const phase = status === 'ongoing' ? currentPhase(e, now) : undefined;
       // TEASER : ni titre, ni résumé, ni bannière ne QUITTENT le serveur — la
-      // V2 les rendait puis les masquait, donc les livrait quand même.
+      // on les rendait puis les masquait, donc on les livrait quand même.
       const teased = isTeased(e, status);
       return {
         slug: e.slug,

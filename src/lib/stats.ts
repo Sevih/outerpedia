@@ -89,7 +89,7 @@ export function statIconSprite(slug: string): string | undefined {
 /**
  * Seules les stats à DOUBLE nature (flat + %) prennent le suffixe « % » sur
  * leur variante rate (ATK/ATK%…) ; les stats intrinsèquement % gardent leur
- * abréviation nue (CHD, CHC…), comme en jeu/V2.
+ * abréviation nue (CHD, CHC…), comme en jeu.
  */
 const PCT_SUFFIX = new Set(['atk', 'def', 'hp']);
 

@@ -71,7 +71,7 @@ describe('champs exigés par la vue d’une catégorie (`requires`)', () => {
   });
 
   /**
-   * Le trou de la V2 : sa map `TIER_BY_SLUG` vivait dans le composant et un
+   * Le trou d'avant : la map `TIER_BY_SLUG` vivait dans le composant et un
    * guide absent était filtré SANS BRUIT. Ici la vue regroupe par palier
    * déclaré — ce test vérifie qu'aucun guide ne peut tomber hors des paniers.
    */
@@ -152,14 +152,14 @@ describe('irregular-extermination — les guides désignent des combats réels',
 /**
  * ADVENTURE LICENSE — 26 combats DÉSIGNÉS, chacun seul dans son groupe : ici
  * l'échelle n'est pas faite de donjons frères (poursuite, guild raid) mais des
- * RANGS d'un donjon unique (les stages 1-15 de la V2, rendus par la glissière de
+ * RANGS d'un donjon unique (les stages 1-15, rendus par la glissière de
  * la carte de boss). Le groupe reste le pointeur du guide vers son combat.
  *
  * Le contrôle qui compte vraiment ici est celui de l'ICÔNE : la vue range une
  * carte dans l'onglet Weekly ou Promotion selon que son icône finit par `_Lock`,
  * et elle en dérive la face révélée (`_Open`). Une icône incohérente avec le mode
  * du donjon ne casserait rien — elle rangerait juste la carte dans le mauvais
- * onglet, en silence. C'est exactement le trou que la V2 avait (elle lisait le
+ * onglet, en silence. C'est exactement le trou d'avant (on lisait le
  * préfixe du slug) et qu'on refuse de rouvrir.
  */
 describe('adventure-license — les guides désignent des combats réels', () => {
@@ -353,7 +353,7 @@ describe('contenu des guides — tout perso et tout tag inline résolvent', () =
  * Guides VERSIONNÉS (joint challenge, world boss…) : leur contenu vit dans
  * `versions/<clé>/`, que les contrôles ci-dessus — écrits pour les guides plats
  * — ne lisaient pas. Or c'est là que le contenu ARRIVE : porter une saison de la
- * V2, c'est déposer quatre JSON dont le rendu STRICT jette au SSG si un nom de
+ * avant, c'est déposer quatre JSON dont le rendu STRICT jette au SSG si un nom de
  * perso ou un tag est faux. Sans ce garde-fou, l'erreur n'apparaissait qu'au
  * build de prod.
  */

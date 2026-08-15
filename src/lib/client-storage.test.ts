@@ -74,7 +74,7 @@ describe('readStored', () => {
     expect(JSON.parse(map.get('outerpedia:test')!).v).toBe(1);
   });
 
-  it('clé V2 héritée absorbée : écrite sous la clé V3, la V2 reste en place', () => {
+  it('clé héritée absorbée : écrite sous la clé courante, l’héritée reste en place', () => {
     const map = stubStorage();
     map.set('tlm-settings', JSON.stringify({ iconSize: 40, showNames: false }));
     const spec: StoreSpec<Settings> = {
@@ -90,7 +90,7 @@ describe('readStored', () => {
     expect(map.has('tlm-settings')).toBe(true);
   });
 
-  it('la clé V3 prime sur les clés héritées', () => {
+  it('la clé courante prime sur les clés héritées', () => {
     const map = stubStorage();
     map.set('outerpedia:test', JSON.stringify({ v: 2, data: { size: 64, names: true } }));
     map.set('tlm-settings', JSON.stringify({ iconSize: 40 }));
@@ -118,7 +118,7 @@ describe('writeStored / clearStored', () => {
     expect(() => writeStored(SPEC, { size: 1, names: true })).not.toThrow();
   });
 
-  it('clearStored efface la clé V3 seulement', () => {
+  it('clearStored efface la clé courante seulement', () => {
     const map = stubStorage();
     map.set('outerpedia:test', 'x');
     map.set('tlm-settings', 'y');

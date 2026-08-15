@@ -5,11 +5,11 @@
  * `BOT_API_URL` = réseau Docker interne en prod (http://outerbot:3001) ;
  * absent en dev et au build CI. Toute erreur (bot injoignable, réponse non-OK)
  * rend `[]` : la fiche se rend alors sans section Reviews, elle ne casse
- * jamais. Revalidation courte (60 s, comme la V2) : c'est la seule donnée de
+ * jamais. Revalidation courte (60 s, inchangée) : c'est la seule donnée de
  * la fiche qui bouge sans redéploiement.
  */
 
-/** Contrat HTTP du bot (`GET /reviews/:slug`) — inchangé depuis la V2. */
+/** Contrat HTTP du bot (`GET /reviews/:slug`) — inchangé depuis l'ancien bot. */
 export interface Review {
   id: string;
   userId: string;

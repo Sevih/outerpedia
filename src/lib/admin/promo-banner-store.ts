@@ -1,7 +1,7 @@
 /**
  * Store des codes promo + bannières (couche curée éditable, ADMIN local).
- * Format hérité de la V2 tel quel ; V3 est la SOURCE DE VÉRITÉ depuis le
- * 21/07 (le « regen » d'import ponctuel depuis le repo V2 voisin a été retiré
+ * Format hérité tel quel ; ce repo est la SOURCE DE VÉRITÉ depuis le
+ * 21/07 (le « regen » d'import ponctuel depuis l'ancien repo voisin a été retiré
  * une fois les fichiers à jour — décision Sevih).
  *
  * `validateCoupons` / `validateBanners` sont les cœurs PURS (testés) : ils
@@ -22,7 +22,7 @@ export interface PromoCode {
 }
 
 export interface Banner {
-  /** id perso (V2). */
+  /** id perso (champ hérité). */
   id: string;
   name: string;
   start: string;

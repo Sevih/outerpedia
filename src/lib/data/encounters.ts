@@ -4,7 +4,7 @@
  * Un guide ne pointe plus un MONSTRE mais un COMBAT (`group`). C'est le
  * renversement qui compte : « Annihilator » n'est pas un monstre, c'est trois
  * donjons — Normal (Lv25), Hard (Lv80), Very Hard (Lv120) — chacun peuplé d'un
- * monstre DIFFÉRENT. Le portage V2 ne retenait que le Very Hard parce qu'il
+ * monstre DIFFÉRENT. Le portage ne retenait que le Very Hard parce qu'il
  * n'avait qu'un `bossId` à offrir ; les deux autres difficultés n'existaient
  * nulle part. En désignant le groupe, elles reviennent gratuitement, avec leur
  * ordre, leurs niveaux, leurs monstres et leurs récompenses.
@@ -113,7 +113,7 @@ export function encountersOfIds(ids: readonly string[]): Encounter[] {
  * Un stage d'histoire s'ouvre sur des vagues d'escorte (les gobelins avant le
  * Grand Calamari) : les documenter noierait le boss sous cinq cartes de piétaille.
  * On garde la DERNIÈRE vague où un boss apparaît — c'est là que se joue le
- * combat, et c'est là que se trouvent les comparses que la V2 câblait à la main
+ * combat, et c'est là que se trouvent les comparses qu'on câblait à la main
  * dans chaque guide (Sterope aux côtés d'Astei, Maxie et Roxie aux côtés de
  * Hilde). Ils reviennent donc de la donnée, pas d'une liste écrite deux fois.
  *
@@ -138,7 +138,7 @@ export function bossWaveMonsters(e: Encounter): DungeonMonster[] {
  * (« Leo & Alpha »), pas une escorte à ignorer. À l'inverse, le 8-5 aligne à
  * côté de Maxwell un clone et un orbe qui n'apprennent rien à personne. Quand la
  * donnée seule ne sait pas trancher, l'auteur tranche — explicitement, dans le
- * meta, et pas dans le composant comme le faisait la V2.
+ * meta, et pas dans le composant comme c'était le cas avant.
  *
  * Un id absent du donjon est ignoré ICI (un même guide couvre plusieurs donjons
  * aux monstres distincts) ; c'est à l'appelant de vérifier qu'aucun id ne tombe

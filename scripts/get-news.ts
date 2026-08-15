@@ -4,7 +4,7 @@
  * en WebP et stockées CONTENT-ADDRESSED (hash des OCTETS webp) dans le pool
  * `.assets-staging/images/patch-notes/` (poussé sur R2 par `pnpm images`) : deux
  * URLs pointant le même visuel → un seul fichier. Une image déjà sur disque n'est
- * jamais réécrite. Port de la V2, autonome.
+ * jamais réécrite. Porté tel quel, autonome.
  *
  * Usage :
  *   pnpm getNews                 # fetch incrémental (ancré sur le post le + récent)

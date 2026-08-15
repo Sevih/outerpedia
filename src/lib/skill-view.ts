@@ -160,7 +160,7 @@ export function dedupSkills(skills: Skill[]): Skill[] {
 type RawEffect = NonNullable<Skill['effects']>[number];
 
 /** Labels de CÂBLAGE générique (magnitude pure, « Damage Increase ») — jamais
- * des statuts côté joueur, même résolubles (arbitrage V2 : 2000114/2000057…). */
+ * des statuts côté joueur, même résolubles (arbitrage hérité : 2000114/2000057…). */
 const WIRING_LABELS = new Set(['SYS_BUFF_DMG']);
 
 /** Buffs ARBITRÉS non-chips (arbitrages utilisateur 2026-07-07) :
@@ -214,7 +214,7 @@ function curatedCreationFor(
  * Un effet de skill devient une CHIP s'il référence un statut/mécanique NOMMÉ
  * et RÉSOLUBLE : tooltip du glossaire, label de mécanique non-stat, ou — pour
  * les mécaniques sans texte — la CRÉATION curée adressée par type. Exclusions
- * (câblage, jamais des buffs côté joueur — même règle que le contrôle V2) :
+ * (câblage, jamais des buffs côté joueur — même règle que l'ancien contrôle) :
  * `BT_STAT*`/`BT_NONE` à label seul, labels de magnitude générique
  * (SYS_BUFF_DMG), enfants de groupe aléatoire (le statut du groupe fait la
  * chip), dégâts fixes auto-infligés (coût en HP, pas une attaque — 2000024).
@@ -578,10 +578,10 @@ const WG_TEXT = /weakness gauge|\bwg\b/i;
 /**
  * Effets SYNTHÉTIQUES du kit burstable : un burst « +N WG damage » (Anarky,
  * Rey…) n'est pas un buff dans les tables — on matérialise la chip via la
- * création curée WEAKNESS_GAUGE_DAMAGE (même règle que le contrôle V2).
+ * création curée WEAKNESS_GAUGE_DAMAGE (même règle que l'ancien contrôle).
  * Le marqueur est le TEXTE du burst, pas le `wgReduce` brut : plusieurs kits
  * (Astei, Christina, Luna) ont un WGReduce de burst supérieur dans les tables
- * sans que le jeu ne l'affiche — vérifié en jeu, la V2 ne les listait pas.
+ * sans que le jeu ne l'affiche — vérifié en jeu, ils n'étaient pas listés.
  */
 function syntheticBurstEffects(skills: Skill[]): ClientEffect[] {
   const bursts = skills.filter((b) => b.type.startsWith('burst_'));
@@ -644,7 +644,7 @@ const PASSIVE_SKILL_TYPES = new Set(['class_passive', 'unique_passive']);
 
 /**
  * Kit fonctionnel d'un effet porté par un PASSIF — même règle que le contrôle
- * V2 : `CallerSkillType` (caller), ou convention de nommage du jeu
+ * hérité : `CallerSkillType` (caller), ou convention de nommage du jeu
  * `{charId}_1|2|3_*` / `_chain` / `_backup` (buffs on-death d'Eris…).
  */
 function passiveEffectKit(e: RawEffect): string | undefined {
@@ -659,7 +659,7 @@ function passiveEffectKit(e: RawEffect): string | undefined {
 /**
  * Effets des PASSIFS appartenant fonctionnellement à un kit (caller,
  * convention de slot, ou buff référencé par la DESC d'un skill du kit) —
- * ce sont des chips du skill correspondant, comme les listait la V2.
+ * ce sont des chips du skill correspondant, comme ils l'étaient déjà.
  */
 function passiveKitRaw(skills: Skill[], kit: string, kitSkills: Skill[]): RawEffect[] {
   const raw: RawEffect[] = [];
@@ -719,7 +719,7 @@ export function cardEffects(
     ...passiveKitEffects(skills, s.type, [s], src),
   ]);
   // Réfs et types de mécanique déjà représentés par une chip — dédup des
-  // statuts de niveau (mêmes règles que le contrôle V2).
+  // statuts de niveau (mêmes règles que l'ancien contrôle).
   const rawChipped = [
     ...own.flatMap((k) => (k.effects ?? []).filter((e) => !isTranscendUpgrade(k, e))),
     ...passiveKitRaw(skills, s.type, [s]),
@@ -847,7 +847,7 @@ export function buildChainView(
     ...passive.filter((e) => e.buff?.includes('_backup')),
   ]);
   // Statuts affichés par les NIVEAUX du chain passive (« Heavy Strike ») — le
-  // jeu les montre sur la chaîne, la V2 les listait ; mêmes dédups que les
+  // jeu les montre sur la chaîne, ils étaient déjà listés ; mêmes dédups que les
   // cartes de skills (réfs + types des chips des deux moitiés).
   const rawChipped = [cp, ...strikes, ...backups]
     .flatMap((k) => (k.effects ?? []).filter((e) => !isTranscendUpgrade(k, e)))
@@ -923,7 +923,7 @@ function rawOf(s: Skill): RawEffect[] {
  * de chaque effet — perdue par les vues de cartes — et sépare le kit de base de
  * ses déclinaisons burst : `burst` ne liste que ce que le burst APPORTE (une
  * chip déjà accordée par le kit de base n'y figure pas — même règle que le
- * flag `burst` du générateur skill-buffs V2).
+ * flag `burst` de l'ancien générateur skill-buffs).
  * `extraBase` : effets hors skills rattachés au kit de base (passifs de l'EE).
  */
 export function buildTeamKitView(

@@ -3,8 +3,8 @@
  *
  * `Record<id, LocalizedText>` : nom abrégé localisé par perso (« D.Stella » pour
  * « Demiurge Stella »…), affiché là où la place manque — références de perso des
- * recos d'équipement, tuiles du tier-list-maker. Parité V2 (`name-aliases.json`,
- * keyé `c{id}`, `_name` + en/jp/kr/zh) mais ramené au modèle V3 : id direct,
+ * recos d'équipement, tuiles du tier-list-maker. Inchangé (`name-aliases.json`,
+ * keyé `c{id}`, `_name` + en/jp/kr/zh) mais ramené au modèle courant : id direct,
  * 5 langues. Lu au fs à chaque appel (l'admin voit ses écritures aussitôt).
  *
  * NB : DISTINCT des alias de RECHERCHE (cf. `search-aliases`) — ici on AFFICHE,

@@ -294,7 +294,7 @@ export function localizeStatuses(statuses: StatusMapI18n, lang: Lang): StatusMap
 // --- Résolution par CLÉ éditoriale ({B/…}/{D/…}) ------------------------------
 
 /**
- * Résout une clé éditoriale (`BT_STAT|ST_ATK`, `POLAR_NIGHT`, alias V2…) vers
+ * Résout une clé éditoriale (`BT_STAT|ST_ATK`, `POLAR_NIGHT`, alias hérité…) vers
  * son effet fusionné. Ordre : index généré (côté demandé puis opposé — le
  * contenu porte le côté via {B}/{D}) puis créations curées (`keys`).
  */

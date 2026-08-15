@@ -3,7 +3,7 @@
  *
  * Store de LISTE (pas de merge par clé) : la sauvegarde remplace le fichier
  * entier. La seule protection est donc la validation — et elle est TOUT-OU-RIEN :
- * une entrée fautive doit empêcher l'écriture des 134 autres. V3 est la seule
+ * une entrée fautive doit empêcher l'écriture des 134 autres. Ce repo est la seule
  * source de vérité depuis le 22/07 : ce qui est écrasé ici est perdu.
  *
  * Écritures réelles dans un tmp via `sandbox()` (cf. `store-fixture`).

@@ -3,7 +3,7 @@
  *
  * Écrit `data/curated/events.json` au format canonique (`writeJson`) ; la route
  * de sauvegarde publie ensuite la copie runtime sur R2 — un événement paraît en
- * prod sans redéploiement (cf. `runtime-publish`). Aucun regen V2 : la V2
+ * prod sans redéploiement (cf. `runtime-publish`). Aucun réimport : l'ancien site
  * stockait ses événements en COMPOSANTS, il n'y a rien à réimporter (les deux
  * seuls existants ont été transplantés à la main dans le nouveau modèle).
  *
@@ -87,7 +87,7 @@ function validateBlock(block: EventBlock, at: string, errors: string[]): void {
 
 /**
  * Valide la liste complète. Renvoie les écarts BLOQUANTS (vide = publiable).
- * Règle de base commune aux éditeurs V3 : l'ANGLAIS est requis (les autres
+ * Règle de base commune aux éditeurs : l'ANGLAIS est requis (les autres
  * langues sont un repli), les dates sont ISO, les slugs uniques.
  */
 export function validateEvents(list: EventEntry[]): string[] {

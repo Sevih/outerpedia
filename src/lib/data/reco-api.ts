@@ -3,10 +3,10 @@
  *
  * Consommé par l'app desktop Gear Solver (repo séparé) pour sa fonction « Get
  * preset » : elle traduit cette réponse en filtres de solveur. La FORME est un
- * contrat gelé, repris tel quel de la V2 — ne pas la changer sans prévenir en
+ * contrat gelé, repris tel quel — ne pas le changer sans prévenir en
  * face, l'app parse chaque champ.
  *
- * Deux traductions séparent le curé V3 de ce que l'app attend :
+ * Deux traductions séparent notre curé de ce que l'app attend :
  *
  *  1. VOCABULAIRE DE STATS. Le curé écrit les libellés d'affichage du wiki
  *     (« ATK% », « CHD ») ; le solveur ne connaît que ses clés moteur
@@ -16,11 +16,11 @@
  *     « Surefire Greatsword » 1★) parce que c'est la famille qui s'affiche sur
  *     le wiki. L'app, elle, résout l'effet unique via l'INVENTAIRE du joueur
  *     (`game.equipment[itemId].setId`), où l'objet possédé est le 6★ (id 754).
- *     On émet donc l'id canonique du palier max — exactement ce que la V2
+ *     On émet donc l'id canonique du palier max — exactement ce qui était
  *     produisait, qui joignait par nom sur une table réduite aux 6★.
  *     Les variantes par classe (Briareos/Gorgon : 5 objets distincts, un passif
  *     chacun) sont déjà au palier max : elles passent telles quelles, et sont
- *     désormais RÉSOLUES — la V2 les renvoyait à `itemId: null`, ce qui faisait
+ *     désormais RÉSOLUES — elles partaient à `itemId: null`, ce qui faisait
  *     sauter le filtre d'effet côté app.
  *
  *     Le palier compte DOUBLE sur les talismans : leurs passifs CHANGENT d'un
@@ -200,7 +200,7 @@ function resolveGear(pick: { id: string; mainStat?: string }, slot: Slot): RecoG
     return { name: pick.id, itemId: null, effectIcon: null, mainStat };
   }
   // Variante par classe : le nom nu est ambigu (5 objets s'appellent
-  // « Briareos's Recklessness »), on suffixe comme partout ailleurs en V3.
+  // « Briareos's Recklessness »), on suffixe comme partout ailleurs.
   const family = familyIndex[slot].get(canonical);
   const name =
     family && family.classLimits.length > 1 && entry.classLimit
@@ -215,7 +215,7 @@ function resolveGear(pick: { id: string; mainStat?: string }, slot: Slot): RecoG
   };
 }
 
-/** Nom court du set : le curé et la V2 disent « Speed », la table « Speed Set ». */
+/** Nom court du set : le curé dit « Speed », la table « Speed Set ». */
 function setName(setId: string): string {
   const raw = SETS[setId]?.name.en;
   return raw ? raw.replace(/\s+set$/i, '') : setId;

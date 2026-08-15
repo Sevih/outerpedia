@@ -92,7 +92,7 @@ export function itemBase(
 
 /**
  * Index nom EN (minuscule) → id de catalogue, sur TOUTES les entrées. Sert à
- * mapper les rewards V2 (stockés par nom) vers un id V3. Première occurrence
+ * mapper les rewards hérités (stockés par nom) vers un id. Première occurrence
  * gagnante (ordre du catalogue : items avant monnaies/costumes/créations).
  */
 export function catalogIdByName(): Map<string, string> {

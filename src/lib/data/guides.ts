@@ -9,7 +9,7 @@
  *     possible via `version.json`).
  *
  * Le registre est le SCAN de ce dossier : `_index.json` et sa double
- * comptabilité V2 n'existent plus. La validation est BRUYANTE : un meta.json
+ * comptabilité n'existent plus. La validation est BRUYANTE : un meta.json
  * invalide, un slug orphelin ou un dossier de version mal nommé font échouer
  * le build au lieu d'un notFound() silencieux. Clé = (category, slug) — deux
  * catégories peuvent porter le même slug.
@@ -68,7 +68,7 @@ export interface GuideMeta {
    * carte de section, ce n'est pas qu'un tri.
    */
   order?: number;
-  /** Monstre lié (og:image, futur affichage) — id V3, jamais un chemin. */
+  /** Monstre lié (og:image, futur affichage) — un id, jamais un chemin. */
   bossId?: string;
   /**
    * Le COMBAT que le guide traite (`DungeonRef.group`) — pour un mode PERMANENT
@@ -108,15 +108,15 @@ export interface GuideMeta {
    * La TOUR que le guide couvre (`skyward-tower`, où ce champ est obligatoire) —
    * une clé de `data/generated/towers.json` (`tower`, `tower_hard`,
    * `tower_very_hard`, `tower_element_fire`…). La vue en tire la SECTION
-   * (difficulté / élémentaire), l'élément (icône + accent) et l'ordre, là où la
-   * V2 lisait tout ça dans le slug du guide. Clé inconnue = build cassé au scan.
+   * (difficulté / élémentaire), l'élément (icône + accent) et l'ordre, là où
+   * tout ça se lisait dans le slug. Clé inconnue = build cassé au scan.
    */
   tower?: string;
   /**
    * La PROFONDEUR de Monad Gate que le guide couvre (`monad-gate`, où ce champ
    * est obligatoire) — 1 à 10. La vue en tire la SECTION (1-5 Story / 6-10
-   * Endless), le label « Depth N », le sélecteur de profondeur et l'ordre. La V2
-   * lisait ce nombre dans le slug (`depth6-route2`) ; ici il est déclaré.
+   * Endless), le label « Depth N », le sélecteur de profondeur et l'ordre. Ce
+   * nombre se lisait dans le slug (`depth6-route2`) ; ici il est déclaré.
    */
   depth?: number;
   /**
@@ -129,13 +129,13 @@ export interface GuideMeta {
    * Nombre de LAYOUTS de map que la page du guide expose via `?v=0…`
    * (`monad-gate`, optionnel, défaut 1). >1 → la carte de la liste affiche
    * autant de segments cliquables (Depth 10 : deux variantes A/B). Remplace le
-   * `VARIANT_DEPTHS = [10]` écrit en dur dans le composant V2.
+   * `VARIANT_DEPTHS = [10]` écrit en dur dans l'ancien composant.
    */
   variants?: number;
   /**
    * Palier pédagogique (`general-guides` uniquement, où il est OBLIGATOIRE —
-   * cf. `requires` de la catégorie). Remplace la map `TIER_BY_SLUG` que la V2
-   * tenait à la main dans son composant de liste.
+   * cf. `requires` de la catégorie). Remplace la map `TIER_BY_SLUG` qu'on
+   * tenait à la main dans le composant de liste.
    */
   tier?: GuideTierKey;
   /**
@@ -147,7 +147,7 @@ export interface GuideMeta {
   mapPos?: { top: number; left: number; mobileTop?: number };
   /** og:image explicite (chemin `/images/...`, PNG/JPG par convention). */
   ogImage?: string;
-  /** Exclu des listes/compteurs mais accessible en URL directe (comme V2). */
+  /** Exclu des listes/compteurs, accessible en URL directe (comportement conservé). */
   hidden?: boolean;
 }
 
@@ -188,7 +188,7 @@ const META_KEYS = new Set([
 ]);
 const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 /**
- * Le slug est un SEGMENT D'URL, et une URL V2 ne se renomme pas.
+ * Le slug est un SEGMENT D'URL, et une URL déjà publiée ne se renomme pas.
  *
  * Les stages d'histoire sont publiés depuis toujours en majuscules
  * (`/guides/adventure/S3-4-10`) : la casse fait partie du contrat, la briser
@@ -377,7 +377,7 @@ function scan(): Guide[] {
       if (!meta) continue;
       // Champs exigés par la VUE de la catégorie (ex. `tier` pour general-guides).
       // Sans ça, un guide non classé disparaîtrait de la page sans un bruit —
-      // c'est exactement le trou de la V2 (map `TIER_BY_SLUG` dans le composant).
+      // c'est exactement le trou d'avant (map `TIER_BY_SLUG` dans le composant).
       for (const field of categoryRequires(category)) {
         if (meta[field] === undefined) {
           issues.push(

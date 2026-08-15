@@ -8,7 +8,7 @@ import unlockData from '@data/generated/unlock-content.json';
 const ENTRIES = (unlockData as { entries: UnlockEntry[] }).entries;
 
 // Plusieurs lignes ContentLockTemplet peuvent partager un ContentType : la
-// dernière gagne (ordre de table du jeu — même résolution que la V2).
+// dernière gagne (ordre de table du jeu — résolution inchangée).
 let byType: Map<string, UnlockEntry> | undefined;
 
 /** Entrée de déblocage d'un ContentType (`WORLD_BOSS`, `PVE_TOWER`…). */

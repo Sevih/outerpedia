@@ -1,5 +1,5 @@
 /**
- * Moteur de GACHA du pull simulator (portage V2) : configs de bannière (taux
+ * Moteur de GACHA du pull simulator (porté tel quel) : configs de bannière (taux
  * officiels du jeu), session immuable, tirages avec garantie 2★ du x10 et
  * mileage. Logique PURE (aucune donnée de perso — le client résout qui sort).
  */
@@ -159,7 +159,7 @@ export function performPulls(
   }
 
   // « Premier 3★ » / « premier focus » : position réelle dans l'historique.
-  // (La V2 amorçait le compteur du premier 3★ à totalPulls AVANT de re-parcourir
+  // (Le compteur du premier 3★ était amorcé à totalPulls AVANT de re-parcourir
   // tout l'historique — numéro compté double. Corrigé : on compte de zéro.)
   next.pullsToFirst3Star ??= firstPullNumber(next.history, (r) => r.rarity === 3);
   next.pullsToFocus ??= firstPullNumber(next.history, (r) => r.isFocus);

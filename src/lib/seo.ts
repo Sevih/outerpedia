@@ -3,7 +3,7 @@
  *
  * Objectif : chaque page n'a qu'à appeler `createPageMetadata` (canonical +
  * hreflang + OpenGraph + Twitter) et éventuellement un builder JSON-LD, sans
- * redupliquer la logique d'URL/langue. Porté de la V2, adapté à la config V3.
+ * redupliquer la logique d'URL/langue. Porté puis adapté à la config actuelle.
  */
 import type { Metadata } from 'next';
 import { LANGUAGES, LANGS, DEFAULT_LANG, normalizeLang, type Lang } from '@/lib/i18n/config';

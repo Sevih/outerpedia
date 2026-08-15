@@ -8,11 +8,11 @@ const CHARS = charactersData as unknown as Record<string, Character>;
 
 /**
  * ORACLE : perso 2000073 (Vlada, 3★ fire striker). Jusqu'au niveau 100 =
- * `character-stats.json` V2 (mêmes tables : interpolation /99, floor,
+ * l'ancien `character-stats.json` (mêmes tables : interpolation /99, floor,
  * évolutions cumulées, premium plat CHC +5). Au-delà du niveau 100 la
  * croissance est AMPLIFIÉE par `LevelUpStatModifierAfter100` (200/400/700
- * per-mille aux LB 1/2/3) — validé 0-diff IN-GAME par le gear-solver ; la V2
- * omettait ce terme (écart assumé, la V2 sous-estimait au-delà du lv100).
+ * per-mille aux LB 1/2/3) — validé 0-diff IN-GAME par le gear-solver ; l'oracle
+ * omettait ce terme (écart assumé, il sous-estimait au-delà du lv100).
  */
 const ORACLE: Record<string, Record<string, number>> = {
   lv1_ev0: { ATK: 93, DEF: 23, HP: 486, SPD: 122, EFF: 10, RES: 11, CHC: 5, CHD: 150 },
@@ -56,14 +56,14 @@ const ORACLE: Record<string, Record<string, number>> = {
   },
 };
 
-describe('computeStatSteps (oracle V2, perso 2000073)', () => {
+describe('computeStatSteps (oracle hérité, perso 2000073)', () => {
   const view = computeStatSteps(CHARS['2000073']);
 
   it('produit les 9 paliers lv1..lv120', () => {
     expect(view.steps.map((s) => s.key)).toEqual(Object.keys(ORACLE));
   });
 
-  it.each(Object.entries(ORACLE))('%s : stats identiques à la V2', (key, expected) => {
+  it.each(Object.entries(ORACLE))('%s : stats identiques à l’oracle', (key, expected) => {
     const step = view.steps.find((s) => s.key === key)!;
     for (const [stat, value] of Object.entries(expected)) {
       expect(step.stats[stat as keyof typeof step.stats], `${key}.${stat}`).toBe(value);
@@ -128,7 +128,7 @@ describe('composeStep — couches quirks / codex / transcendance (CalcFinalStat)
 describe('getTranscendTiers (3★)', () => {
   const tiers = getTranscendTiers(CHARS['2000073'], 'en');
 
-  it('libellés V2 : 3, 4, 4+, 5, 5+, 5++, 6', () => {
+  it('libellés historiques : 3, 4, 4+, 5, 5+, 5++, 6', () => {
     expect(tiers.map((t) => t.label)).toEqual(['3', '4', '4+', '5', '5+', '5++', '6']);
   });
 

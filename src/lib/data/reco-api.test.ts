@@ -13,7 +13,7 @@ const EQUIPMENT = { ...weaponsData, ...accessoryData } as unknown as Record<stri
  * `reco-api.ts` — CONTRAT PUBLIC de `GET /api/reco/:id`, consommé par l'app
  * desktop Gear Solver (repo séparé, qu'on ne peut pas casser au vert).
  *
- * L'endpoint avait déjà disparu une fois, à la reconstruction V3 : ces tests
+ * L'endpoint avait déjà disparu une fois, à la reconstruction : ces tests
  * sont là pour que ça ne repasse pas inaperçu. Ils verrouillent les deux
  * traductions qui échouent SILENCIEUSEMENT si elles régressent — un mauvais
  * palier d'objet ou une clé de stat hors vocabulaire ne lèvent aucune erreur
@@ -112,7 +112,7 @@ describe('itemId — palier canonique', () => {
   /**
    * Le curé référence le membre BAS de famille (id 4, 1★) parce que c'est la
    * famille qu'affiche le wiki. L'app résout l'effet via l'inventaire du
-   * joueur, où l'objet possédé est le 6★ (754) — c'est ce que la V2 émettait.
+   * joueur, où l'objet possédé est le 6★ (754) — c'est ce qui était émis.
    * Émettre 4 ne lèverait aucune erreur : ça ferait juste sauter le filtre
    * d'effet de CHAQUE arme et amulette, avec un warning côté app.
    */

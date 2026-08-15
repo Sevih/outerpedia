@@ -6,7 +6,7 @@
  * alors `element` + son debuff + ses jours d'ouverture). Un guide de la
  * catégorie `skyward-tower` DÉSIGNE sa tour par sa clé (`meta.tower`) — la vue
  * en tire la section (difficulté / élémentaire), l'élément et l'ordre, là où la
- * V2 lisait tout ça dans le SLUG du guide (`fire-tower`, `normal-tower`).
+ * tout ça se lisait dans le SLUG du guide (`fire-tower`, `normal-tower`).
  */
 import towersData from '@data/generated/towers.json';
 import type { Tower, TowerFloor, TowerRestriction, TowerUnit, TowersData } from '@contracts';

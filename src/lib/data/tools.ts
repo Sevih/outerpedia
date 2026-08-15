@@ -18,7 +18,7 @@ export interface ToolMeta {
   status: ToolStatus;
   /**
    * Cible de RENVOI quand l'outil est une page existante hors routeur à plat
-   * (ex. `coupon-codes` → `/coupons`, parité V2). Absent = `/<slug>`.
+   * (ex. `coupon-codes` → `/coupons`, URL héritée). Absent = `/<slug>`.
    */
   href?: string;
 }

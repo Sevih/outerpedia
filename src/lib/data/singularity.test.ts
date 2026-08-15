@@ -36,7 +36,7 @@ describe('singularityStateAt — semaine et boss du jour', () => {
   });
 
   /**
-   * Le trou de la V2 : sa section « actif » disparaissait du dimanche au mardi.
+   * Le trou d'avant : la section « actif » disparaissait du dimanche au mardi.
    * Ici, la phase de récompense n'annule pas l'affichage — elle bascule sur la
    * semaine À VENIR, qui est la seule information encore utile.
    */

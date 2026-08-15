@@ -3,7 +3,7 @@
  *
  * Source = NOS assets extraits du jeu : en dev, `/images/*` est servi depuis
  * `.assets-staging/` (route dev) ; en prod, NEXT_PUBLIC_IMG_BASE pointe le
- * bucket R2 (img.outerpedia.com). Plus aucune référence à la prod V2.
+ * bucket R2 (img.outerpedia.com). Plus aucune référence à l'ancienne prod.
  */
 const BASE = process.env.NEXT_PUBLIC_IMG_BASE ?? '';
 
@@ -91,7 +91,7 @@ export const img = {
   shopIcon: (key: string) => `${BASE}/images/ui/shop/${key}.webp`,
   /**
    * Drapeau d'une langue (SVG éditorial — les emojis drapeaux ne rendent pas
-   * sur Chrome/Windows, même règle que la V2). `code` = LANGUAGES[lang].flag.
+   * sur Chrome/Windows, règle inchangée). `code` = LANGUAGES[lang].flag.
    */
   flag: (code: string) => `${BASE}/images/ui/flags/${code}.svg`,
   /** Icône de rang (SSS..D). */
@@ -306,7 +306,7 @@ export function transcendStarRow(star: number, color: string): string[] {
   });
 }
 
-/** Tag éditorial → sprite de badge de recrutement (ordre V2 : premier trouvé). */
+/** Tag éditorial → sprite de badge de recrutement (ordre hérité : 1er trouvé). */
 export const RECRUIT_TAG_SPRITE: Record<string, string> = {
   collab: 'CM_Recruit_Tag_Collab',
   seasonal: 'CM_Recruit_Tag_Seasonal',
@@ -315,7 +315,7 @@ export const RECRUIT_TAG_SPRITE: Record<string, string> = {
   limited: 'CM_Recruit_Tag_Fes',
 };
 
-/** Couleur de texte par grade d'item (tokens item-* : mêmes teintes que la V2). */
+/** Couleur de texte par grade d'item (tokens item-* : teintes inchangées). */
 export const GRADE_TEXT: Record<string, string> = {
   normal: 'text-item-normal',
   magic: 'text-item-superior',
@@ -358,7 +358,7 @@ export const ROLE_PILL: Record<string, string> = {
   sustain: 'bg-role-sustain/15 text-role-sustain',
 };
 
-/** Badge plein par rôle (header de fiche, apparence V2). */
+/** Badge plein par rôle (header de fiche, apparence inchangée). */
 export const ROLE_BG: Record<string, string> = {
   dps: 'bg-role-dps/70',
   support: 'bg-role-support/70',

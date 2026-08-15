@@ -6,9 +6,9 @@
  * séries sont en bijection (30 paliers ↔ 30 sprites, vérifié par test).
  *
  * Oui, c'est une dérivation depuis une chaîne — le travers qu'on reproche à la
- * V2. La différence : ici la chaîne EST l'identifiant canonique du palier
+ * avant. La différence : ici la chaîne EST l'identifiant canonique du palier
  * (`RankName` de la table), le sprite n'existe sous aucun autre nom, et un
- * palier qui ne mapperait pas fait ÉCHOUER le test. La V2, elle, décodait de la
+ * palier qui ne mapperait pas fait ÉCHOUER le test. On décodait avant de la
  * donnée métier (élément, difficulté) depuis des noms de fichiers — ça, non.
  */
 

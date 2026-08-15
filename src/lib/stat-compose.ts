@@ -26,7 +26,7 @@
 
 import { calcFinalStat as engineCalcFinalStat } from './damage/formula';
 
-/** Stats affichées, dans l'ordre du jeu/V2 (clé = abréviation canonique).
+/** Stats affichées, dans l'ordre du jeu (clé = abréviation canonique).
  * PEN / Crit DMG Reduc : base 0, nourries par les couches (transcendance,
  * quirks) — comme la fiche in-game. */
 export const STEP_STAT_KEYS = [

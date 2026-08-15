@@ -648,7 +648,7 @@ const zh: Record<TranslationKey, string> = {
   // Catégories de guides : libellés + descriptions dans guide-categories.ts
   // (source unique, LocalizedText) — plus de clés de locale par catégorie.
   // Rotation : UN boss par jour (mer→sam), puis 3 jours de récompense.
-  // La V2 affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
+  // On affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
   'guides.singularity.week.title': '本周开放',
   'guides.singularity.week.title_mobile': '进行中',
   'guides.singularity.week.live': '进行中 · {dow}',
@@ -673,7 +673,7 @@ const zh: Record<TranslationKey, string> = {
 
   'guides.tips.tactical': '战术提示',
   // Gabarits de titre de section : le SUJET (perso / élément / effet) vient de
-  // la donnée localisée, jamais d'un LangMap recopié par guide (cf. V2).
+  // la donnée localisée, jamais d'un LangMap recopié par guide.
   'guides.tips.for': '{name} 战术',
   'guides.team.for': '{name} 队伍',
   'guides.tips.strategy': '策略',
@@ -1245,7 +1245,7 @@ const zh: Record<TranslationKey, string> = {
   'progress.craftSettingsDesc': '启用或禁用您要跟踪制作的物品。',
   'progress.shopSettingsDesc': '启用或禁用您要跟踪购买的商店物品。',
 
-  // Guides (système V3)
+  // Guides (système actuel)
   'page.guides.empty_category': '该分类暂无攻略。',
   'page.guide.versions': '版本',
 

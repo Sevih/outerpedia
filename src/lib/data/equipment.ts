@@ -135,9 +135,9 @@ export function equipmentEditorialStamp(): number {
   }
 }
 
-// --- Slug (compatible V2 : basé sur le nom EN) --------------------------------
+// --- Slug (règle héritée : basé sur le nom EN) --------------------------------
 
-/** Slug d'URL d'un équipement (même règle que la V2 — les liens survivent). */
+/** Slug d'URL d'un équipement (règle inchangée — les liens survivent). */
 export function slugifyEquipment(name: string): string {
   return name
     .toLowerCase()
@@ -438,7 +438,7 @@ export interface GearFamily {
   /**
    * VARIANTES PAR CLASSE quand les passifs diffèrent au sein de la famille
    * (Briareos/Gorgon : 5 objets distincts en jeu — un par classe, chacun sa
-   * tuile, son passif et sa PAGE détail au slug suffixé, comme en V2) —
+   * tuile, son passif et sa PAGE détail au slug suffixé, inchangé) —
    * `passives`/`icon`/`slug` de la famille ne portent que le membre de tête.
    */
   classPassives?: GearClassVariant[];
@@ -540,7 +540,7 @@ function materializeFamilies(
                 classLimit,
                 id: v.id,
                 // Slug de LA variante (« briareoss-recklessness-striker ») — les
-                // URLs V2 avaient le suffixe dans le nom, les liens survivent.
+                // anciennes URLs avaient le suffixe dans le nom, les liens survivent.
                 slug: slugifyEquipment(withClassSuffix(top.name, classLimit).en),
                 icon: v.icon,
                 passives: v.passives,
@@ -571,7 +571,7 @@ function materializeFamilies(
 
 /**
  * Nom suffixé du libellé de classe OFFICIEL du jeu — « Gorgon's Wrath
- * [Defender] », 「ゴルゴンの憎悪 [防御型]」 (même convention que la V2, qui
+ * [Defender] », 「ゴルゴンの憎悪 [防御型]」 (convention inchangée, qui
  * bakait le suffixe à la main). Sert à distinguer les VARIANTES DE CLASSE
  * d'une famille (Briareos/Gorgon) partout où une variante précise s'affiche.
  */

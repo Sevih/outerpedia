@@ -7,7 +7,7 @@
  * puis viennent 3 jours de RÉCOMPENSE (dim→mar) où plus aucun boss n'est
  * combattable.
  *
- * ⚠️ La V2 affichait autre chose : ses 3 premiers boss étaient donnés comme
+ * ⚠️ On affichait autre chose avant : les 3 premiers boss étaient donnés comme
  * disponibles du mercredi au vendredi et le 4e le samedi seulement
  * (`slice(0, 3)` + `dayInfo[3]`). C'est faux, et ses propres textes se
  * contredisaient (« the target boss changes daily »). Ne pas le reproduire.
@@ -100,7 +100,7 @@ export interface SingularityWeek {
 export interface SingularityState {
   /**
    * Semaine AFFICHÉE : celle en cours pendant les jours de combat, sinon la
-   * PROCHAINE. (La V2 faisait disparaître sa section du dimanche au mardi —
+   * PROCHAINE. (La section disparaissait du dimanche au mardi —
    * la page devenait muette trois jours sur sept.)
    */
   week: SingularityWeek;
