@@ -61,6 +61,7 @@ import { buildDamageScaling } from './generators/damage-scaling';
 import { buildSkills } from './generators/skills';
 import { buildUnlockContent } from './generators/unlock-content';
 import { buildRecruit } from './generators/recruit';
+import { buildCharacterRelease } from './generators/character-release';
 import { buildEtherRankings } from './generators/ether-rankings';
 import { buildShopPriorities } from './generators/shop-priorities';
 import { buildTimegateResources } from './generators/timegate-resources';
@@ -237,6 +238,12 @@ async function main(): Promise<void> {
   // Domaine recrutement : pool custom, taux/coûts par type de bannière,
   // apparitions bannière des limited (guides general-guides).
   await writeJson('recruit.json', buildRecruit());
+  // Date de sortie par perso (tri de /characters, bloc meta de la fiche) :
+  // dérivée des fiches officielles des notes de MAJ committées, complétée par
+  // le curé pour ce que l'archive ne couvre pas (roster de lancement, trou du
+  // transfert de service). Fichier à part plutôt qu'un champ de characters.json
+  // — le contrat de l'extracteur et le flux d'intégration de l'admin ne bougent pas.
+  await writeJson('character-release.json', buildCharacterRelease());
   // Ether par classement (arène/guild raid/world boss/singularity) — guide
   // « Ether Income ».
   await writeJson('ether-rankings.json', buildEtherRankings());

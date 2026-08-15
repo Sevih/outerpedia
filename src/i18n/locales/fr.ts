@@ -1027,6 +1027,12 @@ const fr: Record<TranslationKey, string> = {
   'characters.filters.close': 'Fermer',
   'characters.filters.no_match': 'Aucun personnage ne correspond à ces filtres',
 
+  // Characters sort
+  'characters.sort.label': 'Tri',
+  'characters.sort.name': 'Nom',
+  'characters.sort.release': 'Sortie',
+  'characters.sort.reverse': "Cliquer pour inverser l'ordre",
+
   // Characters common
 
   // Characters chains
@@ -1116,6 +1122,7 @@ const fr: Record<TranslationKey, string> = {
   'page.character.gear.talisman': 'Talisman',
   'page.character.voice_actor': 'Doubleur',
   'page.character.birthday': 'Anniversaire',
+  'page.character.release': 'Date de sortie',
   'page.character.height': 'Taille',
   'page.character.weight': 'Poids',
   'page.character.stats.title': 'Stats de base',

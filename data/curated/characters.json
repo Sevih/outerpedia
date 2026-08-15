@@ -4469,11 +4469,19 @@
         "uploadDate": "2026-08-12T03:30:35Z"
       }
     ],
+    "rank": "A",
+    "rankPvp": "S",
     "role": "dps",
     "skillPriority": {
       "first": 3,
       "second": 2,
       "ultimate": 1
+    },
+    "rankByTranscend": {
+      "3": "B",
+      "4": "B",
+      "6": "A",
+      "9": "A"
     }
   },
   "2700003": {

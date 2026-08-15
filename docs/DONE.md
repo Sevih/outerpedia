@@ -5,6 +5,165 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-14
+
+- **Les 125 persos ont une date de sortie** (brief
+  [docs/specs/character-release-date.md](./specs/character-release-date.md)),
+  dérivée de l'archive des notes de MAJ COMMITTÉE — la génération ne dépend
+  d'aucun scrape. `data/generated/character-release.json`, contrat minimal
+  `id → "YYYY-MM-DD"` : 69 dates lues dans la fiche officielle de la note
+  (`# Schedule` / `＊Period`), 5 dans la maintenance annoncée en intro, 4 dans la
+  fiche d'une section voisine du même post, 47 dans le curé. Zéro libellé non
+  apparié.
+  Le brief pariait sur UNE convention (« New Hero {name} Drop Rate Up! ») et sur
+  une deuxième passe pour l'ère major9. La mesure a dit autre chose. **Dix
+  gabarits de titre** se succèdent (`New Limited/Festival/Demiurge/Collaboration
+Hero`, `New Boss`, `New 2★ Heroes X and Y`, `[Core Fusion] Hero Added – [X]`),
+  donc le titre n'est pas le signal : c'est **la fiche qu'il contient**, et elle
+  a la même forme aux deux ères au marqueur près (`#` → `＊`, `Schedule` →
+  `Period`/`Pickup Period`). Un seul parseur couvre les 89 notes ; la « passe 2 »
+  n'a pas eu lieu d'être. Deux pièges du brief tombent aussi : les homonymes se
+  résolvent seuls (`showNickName` + `nickname` reconstruit « Demiurge Stella »,
+  « Holy Night's Blessing Dianne » — aucune curation), et les Core Fusion, que le
+  brief laissait à curer, se datent par leur section major9.
+  Ce qui a vraiment coûté, ce sont les pièges du HTML : une cellule de table de
+  taux (`1.25%`) lue comme un titre de section, qui coupait la section de
+  Demiurge Stella avant sa fiche ; trois champs COLLÉS sur une ligne
+  (`# Battle Type: Mage# Subclass: Wizard# Schedule: 1/30 …`, Regina) ; six
+  écritures de date dont un `24/10/22` en `YY/MM/DD`, unique dans l'archive.
+  **La date vient de la note, jamais du post ni du titre** — l'archive major9 a
+  été rechargée dans le désordre après le transfert de service (la note de
+  Viella est datée du 2025-11-02 et couvre le 10/23), et là où intro et titre
+  coexistent ils divergent 3 fois, l'intro ayant raison les 3 fois (la note du
+  2023-08-14 s'intitule « 8/15 » et annonce « August 16 » ; la fiche de Sterope
+  tranche). `RecruitGroupTemplet` reste un CONTRÔLE, jamais une source : avant
+  09/2023 ses `StartDate` sont 8 à 26 jours en avance (dates internes/KR — la
+  table date Rin au 2023-04-27 quand la note écrit « Rin (Added on 5/23) »).
+  **Confrontation à `data/curated/banner.json` : 20 concordances au jour près,
+  zéro contradiction.** Elle a fait sortir deux coquilles d'un an dans le curé
+  (Primine `2025-02-10` pour une bannière finissant en 2026 ; la « release 2023 »
+  de Poolside Trickster Regina, dont la première mention dans les 1765 posts
+  archivés est du 2024-07-15) — corrigées par Sevih, dont 5 lignes de 2024 qui
+  suivaient une autre convention (date d'annonce + 21 j forfaitaires).
+  Le curé `data/curated/character-release.json` porte les 47 dates que l'archive
+  ne PEUT pas donner : le roster de lancement (46 persos au 2023-04-19 — les
+  Update Notice ne commencent qu'au 2023-05-01 ; vérifié qu'aucun perso ne sort
+  entre le 19/04 et le 01/05) et le trou du transfert de service (S. Ember au
+  2025-10-01, sur lequel `banner.json` et les tables concordent). Il ÉCRASE la
+  dérivation, seul moyen de corriger une dérivation fausse sans toucher au code,
+  et le générateur warne sur une entrée qu'il retrouve déjà — sinon le fichier
+  pourrit.
+  **Garde-fou** : un perso sans date d'aucune source fait échouer la génération
+  en le nommant, doublé d'un test sur le committé (sans ça le trou revient en
+  silence au prochain patch — c'est exactement ce qui était arrivé aux bannières
+  purgées). Il tient compte de la garde perso du promote : le jeu embarque les
+  persos des patchs à venir (`2400015`, sans même un nom), et on ne leur cherche
+  pas de date — filtre sur une PREUVE de non-intégration, jamais sur une absence
+  de donnée, comme `lib/released.ts`.
+  **Régénéré à l'intégration** (demande Sevih) : `integrateCharacter` calcule les
+  dates AVANT la moindre écriture, donc un perso sans date arrête l'intégration
+  sans avoir touché à `characters.json` au lieu de laisser le validé à jour et
+  les dates en retard ; le message dit quoi ajouter au curé et la route admin le
+  remonte tel quel. Le cœur `integrateCharacterData` ne fait qu'écrire, les
+  dates lui sont branchées par le wrapper comme les skills frais.
+  42 tests ajoutés, chacun citant la note dont il est tiré ; 1672 verts au total.
+
+- **La date de sortie est SERVIE** — le reste de la spec ci-dessus, débloqué le
+  jour même par une suggestion Discord (好, 13/08 : « characters are shown in
+  alphabetical order, would be great to add the option to sort them by release
+  date ; also would be great to add release date at charas info page »). Elle
+  demandait exactement les deux consommateurs prévus, donc aucun arbitrage à
+  reprendre. Accès par `src/lib/data/character-release.ts` (import statique de la
+  donnée générée, comme `characters.ts`/`recruit.ts` ; contrat ré-exporté par
+  `@contracts`).
+  **Tri de `/characters`** : segmenté « Nom | Sortie » dans le bandeau des
+  filtres actifs — dernier réglage avant la grille, et le seul endroit visible
+  même sans aucun filtre (la barre de filtres, elle, se replie en tiroir sur
+  mobile). Re-cliquer « Sortie » inverse le sens, flèche à l'appui ; le défaut
+  est le plus RÉCENT d'abord, qui est ce qu'on vient chercher. « Nom » ne trie
+  pas : il rend l'ordre serveur (rareté décroissante puis A→Z), et comme le tri
+  natif est stable c'est aussi le départage des ex æquo par date — il y en a
+  beaucoup, 46 persos partageant le jour du lancement global.
+  Le tri voyage en clair (`?sort=release` / `release-asc`), **hors du codec
+  `?z=`** : celui-ci est un contrat public figé partagé avec la V2, on n'y ajoute
+  pas un champ pour un état d'affichage. Il n'est pas remis à zéro par le bouton
+  reset — ce n'est pas un filtre.
+  **Fiche perso** : ligne en tête du bloc `meta`, avant le profil in-game (la
+  date est une donnée wiki, pas une fiche de perso), formatée par locale en UTC
+  comme les autres dates du site. Clés `characters.sort.*` et
+  `page.character.release` dans les 5 langues.
+
+- **Une étape qui casse ne renvoie plus toute la pipeline à zéro** (constat
+  Sevih, dans la foulée de la panne fontTools ci-dessous : pull, extract,
+  convert, face-layout et sprite-rect étaient verts, une étape de deux secondes
+  les a tous fait rejouer). Le gating était binaire pour toute la chaîne — un
+  stamp unique, écrit une seule fois tout à la fin, qui dit « tout a réussi »
+  sans jamais dire QUOI. C'est une bonne propriété (auto-réparation : un extract
+  planté laisse la signature désynchronisée, le run suivant se rattrape sans
+  `--force`) mais sans aucune granularité, alors que le coût est très asymétrique
+  — `extract` sort 2,2 Go et ne cache rien, les étapes qui cassent le plus sont
+  les moins chères et les plus tardives.
+  Deux gardes posés, tous deux permis par le même préalable : **la chaîne est
+  désormais DÉCLARÉE** (`genSteps`) au lieu d'être une ligne droite d'appels. On
+  ne peut ni annoncer ni reprendre une étape qui n'a pas de nom.
+  **Pré-vol** : l'outillage python de toutes les étapes est sondé AVANT le pull,
+  et ce qui sera sauté est annoncé immédiatement. La panne de ce matin coûtait un
+  quart d'heure de datamine pour une information connaissable à la seconde 0. Le
+  verdict est calculé une fois et réutilisé par la boucle — ce qui est annoncé
+  est exactement ce qui se passe, il n'y a plus deux sondages qui pourraient
+  diverger.
+  **Reprise** : `.gamedata/.refresh-checkpoint.json`, réécrit après CHAQUE étape,
+  effacé au succès complet. Le refus explicite, c'est l'incrémental (option
+  écartée) : modéliser les entrées de chaque étape demande de n'en oublier
+  aucune, et une entrée oubliée sert de la donnée périmée EN SILENCE — bien pire
+  que rejouer. La promesse tenue est plus étroite et vérifiable : mêmes entrées,
+  mêmes sources, on reprend où ça a cassé ; tout le reste jette le checkpoint.
+  La clé porte `.gamedata/files` ET l'empreinte des sources `datagen/**`
+  (.ts/.py). Cette seconde moitié est le vrai garde : sans elle, le scénario le
+  plus probable te mord — build casse, tu corriges `bytes-parser.ts`, la reprise
+  saute `convert` et tu débogues sur du JSON périmé. Bornée aux SOURCES et pas
+  aux JSON du dossier, sinon `face-layout` changerait la clé au milieu du run et
+  invaliderait le checkpoint qu'on vient d'écrire — une reprise qui ne reprend
+  jamais. `--force` la jette aussi : « rejoue tout » et « reprends » sont
+  contradictoires.
+  L'auto-réparation par le stamp est intacte : le checkpoint est purement
+  additif, l'effacer ramène au comportement d'avant. Tests : 31 sur `refresh`
+  (les quatre décisions sont maintenant des fonctions pures — `regenDecision`,
+  `dumpDecision`, `resumeDecision`, `preflightPython`, cette dernière avec sonde
+  injectée), dont le cas de ce matin en régression : UnityPy présent + fontTools
+  absent ⇒ seule `font-metrics` annoncée. 1630 tests verts au total.
+
+- **`pnpm dev` ne meurt plus sur une machine outillée à moitié.** Sur le
+  portable, l'étape `font-metrics` a fait échouer tout le refresh
+  (`ModuleNotFoundError: No module named 'fontTools'`) — alors que le garde posé
+  le 2026-08-07 existe précisément pour SAUTER une étape python non outillée. Il
+  ne l'a pas vue : il sondait `import UnityPy` pour TOUTES les étapes, un module
+  témoin et non celui dont l'étape dépend. UnityPy étant installé, le garde
+  disait « bon » et le script mourait deux lignes plus loin. Le sondage est
+  désormais **par étape** (`pyStep(label, file, mod)`), donc un garde qui ne peut
+  plus mentir : ajouter une étape python sans déclarer son module la laisse
+  échouer bruyamment, ce qui est le bon défaut.
+  Deuxième casse au même endroit, indépendante : le script passé, il mourait sur
+  son propre log. Sous Windows python encode sa sortie dans la codepage ANSI
+  (cp1252) — les accents passent, la flèche « → » lève un `UnicodeEncodeError`.
+  `refresh` force donc `PYTHONIOENCODING=utf-8` pour toutes les étapes python,
+  ce qui décorrèle leur sortie de la console héritée. Le JSON, lui, était déjà
+  écrit : la sortie régénérée est identique au fichier committé, aucune donnée
+  n'avait bougé.
+  La dépendance ne vivait nulle part — `datagen/requirements.txt` n'a jamais
+  connu que UnityPy depuis que `extract-font-metrics.py` existe (2026-08-08).
+  Elle y est, avec **brotli** déclaré explicitement : c'est la compression du
+  WOFF2, donc non facultatif pour lire `src/fonts/*.woff2`, et il n'arrivait
+  jusqu'ici qu'en transitif d'UnityPy. `init.ps1` posait déjà le requirements
+  entier, il couvre donc le nouveau cas sans changement de logique (ses libellés
+  parlaient encore de « la SEULE étape python » — corrigés, ils sont trois).
+  fontTools 4.63 installé sur le portable dans la foulée. Doc alignée : le § de
+  `datagen/README` (le tableau des scripts gagne une colonne « Module » et une
+  ligne) et le §1 de `docs/procedure/installation.md`, qui insiste maintenant sur
+  « installer le fichier en entier, pas un module à la carte » — c'est
+  exactement la moitié d'outillage qui transforme un cas sauté proprement en
+  étape qui échoue.
+
 ## 2026-08-13
 
 - **Réordonner les héros d'un palier de « Recommended choices »** (demande

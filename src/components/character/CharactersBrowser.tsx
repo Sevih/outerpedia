@@ -44,7 +44,12 @@ export interface CharacterRow {
   effectsBySource?: Record<string, { buff: string[]; debuff: string[] }>;
   /** Stats données à toute l'équipe (bonus de transcendance) — filtre Bonus. */
   teamBonuses?: string[];
+  /** Jour de sortie ISO (`2026-08-12`) — tri « Release ». */
+  releaseDate?: string;
 }
+
+/** Clé de tri de la grille. `name` = l'ordre serveur (rareté puis A→Z). */
+export type SortKey = 'name' | 'release';
 
 export interface CharactersBrowserLabels {
   bar: FiltersBarLabels;
@@ -108,6 +113,9 @@ export function CharactersBrowser({
   const [sources, setSources] = useState<string[]>([]);
   const [showUnique, setShowUnique] = useState(false);
   const [teamBonuses, setTeamBonuses] = useState<string[]>([]);
+  const [sort, setSort] = useState<SortKey>('name');
+  /** Sens du tri par sortie — les plus récents d'abord par défaut. */
+  const [releaseDesc, setReleaseDesc] = useState(true);
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -168,6 +176,11 @@ export function CharactersBrowser({
     setSources(decoded ? decoded.sources : list('src'));
     setShowUnique(decoded ? decoded.showUnique : p.get('uniq') === '1');
     setTeamBonuses(decoded ? decoded.teamBonuses : list('tb'));
+    // Le tri voyage en clair, HORS du codec : `?z=` est un contrat public figé
+    // partagé avec la V2, on n'y ajoute pas de champ pour un état d'affichage.
+    const s = p.get('sort');
+    setSort(s === 'release' || s === 'release-asc' ? 'release' : 'name');
+    setReleaseDesc(s !== 'release-asc');
   }, []);
 
   // ── Sync filtres → URL (débattu) ──
@@ -192,7 +205,9 @@ export function CharactersBrowser({
       showUnique,
       teamBonuses,
     });
-    const url = z ? `${pathname}?z=${z}` : pathname;
+    const s = sort === 'release' ? (releaseDesc ? 'release' : 'release-asc') : '';
+    const qs = [z && `z=${z}`, s && `sort=${s}`].filter(Boolean).join('&');
+    const url = qs ? `${pathname}?${qs}` : pathname;
     const handle = setTimeout(() => {
       if (lastUrl.current === url) return;
       lastUrl.current = url;
@@ -216,6 +231,8 @@ export function CharactersBrowser({
     sources,
     showUnique,
     teamBonuses,
+    sort,
+    releaseDesc,
     pathname,
     router,
   ]);
@@ -298,6 +315,25 @@ export function CharactersBrowser({
     sources,
     teamBonuses,
   ]);
+
+  // ── Tri ──
+  // `rows` arrive DÉJÀ trié par le serveur (rareté décroissante puis A→Z) : le
+  // tri par sortie n'a qu'à réordonner par date, le tri natif étant stable il
+  // conserve cet ordre serveur pour les ex æquo — et ils sont nombreux (46
+  // persos partagent la date du lancement global).
+  const shown = useMemo(() => {
+    if (sort !== 'release') return filtered;
+    const dir = releaseDesc ? -1 : 1;
+    return [...filtered].sort(
+      (a, b) => dir * (a.releaseDate ?? '').localeCompare(b.releaseDate ?? ''),
+    );
+  }, [filtered, sort, releaseDesc]);
+
+  /** Re-cliquer le tri actif inverse son sens (rien à inverser sur `name`). */
+  const changeSort = (key: SortKey) => {
+    if (key === sort && key === 'release') setReleaseDesc((v) => !v);
+    else setSort(key);
+  };
 
   // ── Reset / partage ──
   const resetAll = () => {
@@ -518,6 +554,9 @@ export function CharactersBrowser({
             onResetAll={resetAll}
             onCopyShareUrl={copyShareUrl}
             copied={copied}
+            sort={sort}
+            releaseDesc={releaseDesc}
+            onSortChange={changeSort}
           />
 
           {filtered.length === 0 ? (
@@ -533,7 +572,7 @@ export function CharactersBrowser({
             </div>
           ) : (
             <div className="flex flex-wrap justify-center gap-4 lg:gap-6">
-              {filtered.map((row, i) => (
+              {shown.map((row, i) => (
                 <CharacterCard
                   key={row.id}
                   starAriaLabel={labels.bar.starAria}

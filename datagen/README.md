@@ -64,16 +64,18 @@ promote.ts      refresh.ts définition UNIQUE du flux « rafraîchir depuis le
 - **`curated/`** — outillage de la couche curée : les schémas de validation
   (personnages, gear reco, tags, effets…). L'édition se fait via l'admin.
 
-### Exception assumée : l'outillage Python (UnityPy)
+### Exception assumée : l'outillage Python
 
-Deux scripts échappent au « tout-TS », pour la **même** raison : lire des
-**typetrees Unity** — domaine spécialisé au même titre que l'extracteur .NET de
-la couche 0, donc **délibérément non réécrits en TS**.
+Trois scripts échappent au « tout-TS », pour la **même** raison : lire un format
+binaire spécialisé — typetrees Unity pour deux d'entre eux, tables OpenType pour
+le troisième — au même titre que l'extracteur .NET de la couche 0, donc
+**délibérément non réécrits en TS**.
 
-| Script                                  | Sortie committée                       | Ce qu'il évite                                                      |
-| --------------------------------------- | -------------------------------------- | ------------------------------------------------------------------- |
-| `extract-face-layout.py`                | `datagen/assets/face-icon-layout.json` | Des `FI_` absents pour les persos/skins récents                     |
-| `extract-sprite-rect.py` _(2026-08-07)_ | `datagen/assets/sprite-rect.json`      | Des sprites servis à leur taille ROGNÉE, donc décalés à l'affichage |
+| Script                                   | Module      | Sortie committée                            | Ce qu'il évite                                                      |
+| ---------------------------------------- | ----------- | ------------------------------------------- | ------------------------------------------------------------------- |
+| `extract-face-layout.py`                 | `UnityPy`   | `datagen/assets/face-icon-layout.json`      | Des `FI_` absents pour les persos/skins récents                     |
+| `extract-sprite-rect.py` _(2026-08-07)_  | `UnityPy`   | `datagen/assets/sprite-rect.json`           | Des sprites servis à leur taille ROGNÉE, donc décalés à l'affichage |
+| `extract-font-metrics.py` _(2026-08-08)_ | `fontTools` | `datagen/assets/portrait-font-metrics.json` | Un `m_BestFit` faux, donc un nom qui déborde de sa boîte            |
 
 Le second mérite un mot : le packer d'atlas coupe les bords transparents, et
 AssetStudio n'exporte que ce qui reste. Un fichier de 111×128 pour un sprite de
@@ -88,29 +90,82 @@ savoir**. La table est bornée à `at_thumbnailmonsterruntime` et
 re-découpe tous les icônes déjà servis par cet atlas — un atlas à la fois, et
 délibérément.
 
-Tous deux sont :
+Tous trois sont :
 
 - **locaux** : joués automatiquement par le flux `refresh` (`pnpm dev` /
-  `datagen:patch`) entre convert et build — uniquement sur la machine de
-  datamine (le refresh ne génère que si `.gamedata` existe) ; relançables seuls
-  via `pnpm datagen:face-layout` / `pnpm datagen:sprite-rect`. Depuis le
-  2026-07-14 : avant, il fallait les jouer à la main puis relancer dev ;
+  `datagen:patch`) entre convert et build — les deux lecteurs de typetrees
+  uniquement sur la machine de datamine (le refresh ne génère que si `.gamedata`
+  existe) ; relançables seuls via `pnpm datagen:face-layout` /
+  `pnpm datagen:sprite-rect`. Depuis le 2026-07-14 : avant, il fallait les jouer
+  à la main puis relancer dev. `extract-font-metrics.py` fait exception à
+  l'exception : il lit `src/fonts/` (committé), pas `.gamedata`, donc il ne
+  demande PAS de machine de datamine — juste fontTools ;
 - **absents du build et de la CI** ;
 - **bornés à un JSON committé** : leurs sorties sont versionnées et c'est ce que
-  lisent `datagen/assets/face-icon.ts` et `datagen/assets/sprite-rect.ts`. **Le
-  serveur/build ne touche jamais Python** — d'où « aucun python _dans le build_ »,
-  qui reste vrai ;
+  lisent `datagen/assets/face-icon.ts`, `datagen/assets/sprite-rect.ts` et le
+  portrait. **Le serveur/build ne touche jamais Python** — d'où « aucun python
+  _dans le build_ », qui reste vrai ;
 - **optionnels par machine** (depuis le 2026-08-07) : `refresh` sonde l'import
-  UnityPy avant de lancer l'étape, et la SAUTE avec un avertissement si
-  l'outillage manque — au lieu de faire échouer tout `pnpm dev`. Avoir
-  `.gamedata` n'implique pas avoir UnityPy : un PC secondaire tire les bundles
-  sans être outillé. Les JSON committés prennent alors le relais ; seuls les
-  sprites arrivés depuis manqueraient sur cette machine. Pour l'outiller :
-  `pip install UnityPy` puis `pnpm datagen:patch --force`. Un échec d'un script
-  lui-même (bundle absent, prefab illisible) lève toujours.
+  avant de lancer l'étape, et la SAUTE avec un avertissement si l'outillage
+  manque — au lieu de faire échouer tout `pnpm dev`. Avoir `.gamedata`
+  n'implique pas avoir l'outillage : un PC secondaire tire les bundles sans être
+  outillé. Le JSON committé prend alors le relais ; seul ce qui est arrivé
+  depuis manquerait sur cette machine. Pour l'outiller :
+  `python -m pip install -r datagen/requirements.txt` puis
+  `pnpm datagen:patch --force`. Un échec d'un script lui-même (bundle absent,
+  prefab illisible) lève toujours.
+
+  **Le sondage est PAR ÉTAPE et EN PRÉ-VOL** (depuis le 2026-08-14) : il importe
+  le module dont l'étape dépend, pas un module témoin, et il le fait AVANT le
+  pull. Sonder UnityPy pour tout le monde laissait passer font-metrics sur une
+  machine outillée à moitié — le garde disait « bon » et le script mourait deux
+  lignes plus loin, emportant `pnpm dev` avec lui. Même occasion, `refresh` force
+  `PYTHONIOENCODING=utf-8` : sous Windows, python encode sa sortie en cp1252 et
+  meurt sur le premier « → » de ses propres logs.
 
 Les porter en TS reste possible (AssetStudioModCLI a un mode `-m dump`) mais non
 prioritaire : cf. le fork tranché en faveur de l'isolation.
+
+---
+
+### Pré-vol et reprise après échec
+
+Deux gardes distincts protègent la chaîne, tous deux rendus possibles par le fait
+qu'elle est **déclarée** (`genSteps`) et non écrite en ligne droite d'appels : on
+ne peut annoncer ni reprendre une étape qui n'a pas de nom.
+
+**Pré-vol** — l'outillage python de TOUTES les étapes est sondé avant le pull, et
+ce qui sera sauté est annoncé tout de suite. Sonder au moment de l'étape rendait
+la réponse juste mais tardive : un module manquant se découvrait après le pull et
+l'extract, soit un quart d'heure pour une information connaissable à la
+seconde 0. Le verdict est calculé une fois et réutilisé par la boucle — ce qui
+est annoncé est exactement ce qui se passe.
+
+**Reprise** — `.gamedata/.refresh-checkpoint.json` est réécrit **après chaque
+étape** et effacé au succès complet. Le stamp, lui, ne dit que « tout a réussi »
+et n'est gravé qu'à la fin : une étape de deux secondes qui casse renvoyait à zéro
+un extract de 2,2 Go déjà fait. Le checkpoint le complète, ne le remplace pas.
+
+Ce n'est **pas** de l'incrémental, et c'est délibéré : modéliser les entrées de
+chaque étape pour décider « celle-ci est à jour » demande de n'en oublier
+aucune, et une entrée oubliée sert de la donnée périmée **en silence** — bien
+pire que rejouer. La promesse est plus étroite et vérifiable : _mêmes entrées,
+mêmes sources, on reprend où ça a cassé_. Toute autre situation jette le
+checkpoint :
+
+- `--force` = « rejoue tout », l'honorer serait contradictoire ;
+- clé différente = le monde a bougé entre l'échec et la reprise.
+
+La clé porte l'empreinte de `.gamedata/files` **et** celle des sources
+`datagen/**` en `.ts`/`.py`. Cette seconde moitié est le garde qui compte : sans
+elle, corriger `bytes-parser.ts` après un build cassé puis reprendre sauterait
+`convert` et ferait déboguer sur du JSON périmé. Elle est bornée aux SOURCES,
+jamais aux JSON du dossier — `face-icon-layout.json` & consorts sont des sorties
+d'étapes, les inclure ferait changer la clé au milieu du run, donc invaliderait
+le checkpoint qu'on vient d'écrire.
+
+L'auto-réparation par le stamp reste intacte : le checkpoint est purement
+additif, l'ignorer (ou l'effacer à la main) ramène au comportement d'avant.
 
 ---
 

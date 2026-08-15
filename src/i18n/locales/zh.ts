@@ -963,6 +963,12 @@ const zh: Record<TranslationKey, string> = {
   'characters.filters.close': '关闭',
   'characters.filters.no_match': '没有匹配的角色',
 
+  // Characters sort
+  'characters.sort.label': '排序',
+  'characters.sort.name': '名称',
+  'characters.sort.release': '发布',
+  'characters.sort.reverse': '点击可反转顺序',
+
   // Characters common
 
   // Characters chains
@@ -1051,6 +1057,7 @@ const zh: Record<TranslationKey, string> = {
   'page.character.gear.talisman': '护身符',
   'page.character.voice_actor': '声优',
   'page.character.birthday': '生日',
+  'page.character.release': '发布日期',
   'page.character.height': '身高',
   'page.character.weight': '体重',
   'page.character.stats.title': '基础属性',

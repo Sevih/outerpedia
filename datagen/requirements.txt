@@ -1,17 +1,26 @@
-# Dépendances des scripts python du projet — tous deux lisent des typetrees Unity
-# vers un JSON committé (cf. datagen/README § « Exception assumée : l'outillage
-# Python (UnityPy) ») :
-#   - assets/extract-face-layout.py  → face-icon-layout.json  (cadrage des FI_)
-#   - assets/extract-sprite-rect.py  → sprite-rect.json       (taille logique des
-#                                      sprites rognés par le packer d'atlas)
+# Dépendances des scripts python du projet — chacun lit un format binaire
+# spécialisé vers un JSON committé (cf. datagen/README § « Exception assumée :
+# l'outillage Python ») :
+#   - assets/extract-face-layout.py   → face-icon-layout.json      (cadrage des FI_)
+#   - assets/extract-sprite-rect.py   → sprite-rect.json           (taille logique des
+#                                       sprites rognés par le packer d'atlas)
+#   - assets/extract-font-metrics.py  → portrait-font-metrics.json (chasses des
+#                                       polices du portrait)
 #
 #   python -m pip install -r datagen/requirements.txt
 #
-# FACULTATIF PAR MACHINE : sans UnityPy, `refresh` saute ces étapes avec un
-# avertissement (au lieu de faire échouer tout `pnpm dev`) et les JSON committés
-# prennent le relais — seuls les sprites arrivés depuis manqueraient. À installer
-# sur la machine de datamine, superflu ailleurs.
+# FACULTATIF PAR MACHINE : sans l'outillage, `refresh` saute l'étape CONCERNÉE
+# avec un avertissement (au lieu de faire échouer tout `pnpm dev`) et le JSON
+# committé prend le relais — seul ce qui est arrivé depuis manquerait. À
+# installer sur la machine de datamine, superflu ailleurs.
 #
 # Plancher, pas épingle : borné sous la 2.x (l'API des typetrees pourrait bouger
 # à une majeure) sans figer les correctifs de la 1.x.
 UnityPy>=1.25,<2
+
+# Lecture des tables d'une police (`name`, `hmtx`, `OS/2`, `GPOS`) pour en sortir
+# les chasses. `brotli` n'est PAS facultatif : c'est la compression du WOFF2, et
+# `src/fonts/*.woff2` est justement ce que lit le script. Il arrive aujourd'hui en
+# transitif d'UnityPy — déclaré ici parce que cette étape en dépend directement.
+fontTools>=4.50,<5
+brotli>=1.1

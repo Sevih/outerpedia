@@ -983,6 +983,12 @@ const kr: Record<TranslationKey, string> = {
   'characters.filters.close': '닫기',
   'characters.filters.no_match': '조건에 맞는 캐릭터가 없습니다',
 
+  // Characters sort
+  'characters.sort.label': '정렬',
+  'characters.sort.name': '이름',
+  'characters.sort.release': '출시',
+  'characters.sort.reverse': '클릭하면 순서가 반전됩니다',
+
   // Characters common
 
   // Characters chains
@@ -1071,6 +1077,7 @@ const kr: Record<TranslationKey, string> = {
   'page.character.gear.talisman': '탈리스만',
   'page.character.voice_actor': '성우',
   'page.character.birthday': '생일',
+  'page.character.release': '출시일',
   'page.character.height': '키',
   'page.character.weight': '체중',
   'page.character.stats.title': '기본 스탯',
