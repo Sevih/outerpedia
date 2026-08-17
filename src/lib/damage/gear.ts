@@ -88,6 +88,9 @@ export interface GearPassiveEntry {
   side: 'attacker' | 'defender' | 'allies';
   buff: ActiveBuff;
   condition?: string;
+  /** `BuffConditionValue` brut — seuil des conditions qui en portent un
+   *  (HPRATE en ‰…) ; l'UI le verse dans le libellé de la condition. */
+  conditionValue?: number;
   /** Élément visé par `TARGET_ELEMENT` (enum binaire). */
   conditionElement?: Element;
   /**
@@ -392,6 +395,7 @@ function makeCollector(
           side,
           buff: toActiveBuff(row),
           condition,
+          ...(row.conditionValue !== undefined ? { conditionValue: row.conditionValue } : {}),
           ...(callers ? { callers } : {}),
           stateful: true,
           active: metConditions?.has(buffId) === true,

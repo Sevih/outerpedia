@@ -207,6 +207,7 @@ describe('flattenReport', () => {
     const result: DamageReportResult = {
       combatStats: {},
       unresolvedFx: [],
+      attackerAmountStats: [],
       slots: [
         {
           slot: 'S1',

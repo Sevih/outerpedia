@@ -45,6 +45,30 @@
   Singularité — paliers de dégâts cumulés pendant le combat), « Stage » quand
   c'en est un (guild raid, adventure) — détecté sur la donnée (`s.rank`),
   aucune liste de modes en dur.
+- **Panneau contexte : conditions EN CLAIR et enrage** (série de demandes
+  Sevih du jour, « histoire de comprendre la condition »).
+  - Les mécaniques du kit et les chips de passifs de boss affichent leur
+    condition en libellé lisible (« Gone Surfing! S3 — Target has a buff »,
+    « · Attacker has the elemental advantage ») : enum brut → gabarit localisé
+    (20 clés `context.cond.*` × 5 langues, seuils HPRATE ‰→%), l'enum reste
+    dans le tooltip. `GearPassiveEntry.conditionValue` versé aux entrées
+    stateful pour porter le seuil.
+  - **Enrage** : coche « Enragé » (visible seulement si le boss a un skill
+    `SKT_RAGE_ENTER*`, persistée en z `en`) — les buffs posés par le skill
+    d'enrage deviennent des entrées gatées (passives.ts), les `BT_STAT`
+    défenseur damage-pertinents (canal `DEFENDER_STAT_CHANNEL`) s'appliquent
+    aux stats de la cible par l'identité § 16.1 avec A = 0 (Chimera :
+    `Common_Rage_Buff_3`, DMG Reduce +40 pts). `OWNER_RAGE` suit la même
+    coche ; durées de tours non simulées (coché = enragé). Testé sur donnée
+    réelle : off/on, les dégâts chutent.
+  - **Chips de boss : seulement ce qui est ACTIF et qui pèse un MONTANT.**
+    Les branches élémentaires non concernées disparaissent (plus de barré),
+    et la crit chance de l'équipe n'apparaît que si le kit courant la LIT :
+    le rapport expose `attackerAmountStats` (base ATK/CDMG/pierce/dmg_boost
+    - lectures des buffs actifs — familles `*_STAT` § 9.1, swap § 10.1,
+      contexte PV § 14). Vérifié sur pièce : Aer vs Chimera 12 la tait (elle ne
+      pèse que sur P(crit) § 4, gardée au moteur), 2000067 l'affiche
+      (`2000067_2_6` : +50 % du taux crit en dégâts § 9.1).
 
 ## 2026-08-15
 

@@ -607,6 +607,34 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     if (b.type === 'BT_DMG_REDUCE') return `${statName('dmg_reduce_rate', lang)} ${pct(v)}`;
     return `${b.type} ${pct(v)}`;
   };
+  // Libellés LISIBLES des conditions (Sevih 17/08/2026 — « histoire de
+  // comprendre la condition ») : enum brut → gabarit localisé, `{n}` = seuil.
+  // Habillage UI (locales, 5 langues) — l'enum brut reste dans les tooltips.
+  const CONDITION_ENUMS = [
+    'OWNER_RESOURCE',
+    'OWNER_HAS_BUFF',
+    'OWNER_HAS_ALL_BUFF',
+    'OWNER_HAS_NOT_BUFF',
+    'OWNER_ALONE',
+    'OWNER_TOGETHER',
+    'OWNER_RUN_COUNTER',
+    'CASTER_HAS_BUFF',
+    'CASTER_HAS_NOT_BUFF',
+    'CASTER_ENEMY_TEAM_HAS_BUFF',
+    'CASTER_HPRATE_OVER',
+    'TARGET_HAS_BUFF',
+    'TARGET_HAS_NOT_BUFF',
+    'TARGET_HPRATE_OVER',
+    'TARGET_HPRATE_UNDER',
+    'TARGET_RUN_COUNTER',
+    'ATTACKER_ELEMENT_WIN',
+    'ATTACKER_ELEMENT_LOSE',
+    'ATTACKER_ELEMENT_EQUAL',
+    'OWNER_RAGE',
+  ] as const;
+  const condLabels: Record<string, string> = Object.fromEntries(
+    CONDITION_ENUMS.map((c) => [c, t(k(`context.cond.${c.toLowerCase()}` as never))]),
+  );
   const passivesCache = new Map<string, DcBossPassive[]>();
   const bossPassiveChips = (bossId: string): DcBossPassive[] => {
     const hit = passivesCache.get(bossId);
@@ -614,16 +642,36 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     const out: DcBossPassive[] = [];
     for (const e of staticBossPassives(bossId, DMG_TARGETS, DMG_BUFFS)?.entries ?? []) {
       const nameRec = MONSTER_SKILLS[e.skillId]?.name;
+      // Condition en clair sur la chip : celle de la ligne, précédée du gate
+      // d'enrage quand le buff vient du skill d'enrage.
+      const condParts = [
+        ...(e.rage ? [condLabels.OWNER_RAGE] : []),
+        ...(e.condition !== undefined && e.condition !== 'OWNER_RAGE'
+          ? [condLabels[e.condition] ?? e.condition]
+          : []),
+      ];
       out.push({
         name: nameRec ? lRec(nameRec, lang) || nameRec.en || e.skillId : e.skillId,
         side: e.side === 'attacker' ? 'attacker' : 'target',
         label: passiveLabel(e.buff),
+        // Stat du BT_STAT : le Browser tait les chips attaquant dont la stat
+        // ne pèse aucun MONTANT pour le kit courant (crit chance… — sauf
+        // lecture § 9.1 comme 2000067, cf. `attackerAmountStats` du rapport).
+        ...(e.buff.type === 'BT_STAT' && e.buff.stat !== undefined ? { stat: e.buff.stat } : {}),
         ...(e.condition !== undefined ? { condition: e.condition } : {}),
+        ...(condParts.length ? { cond: condParts.join(' · ') } : {}),
+        ...(e.rage ? { rage: true as const } : {}),
       });
     }
     passivesCache.set(bossId, out);
     return out;
   };
+  /** Le monstre a-t-il un skill d'ENRAGE (`SKT_RAGE_ENTER*`) ? — gate de la
+   *  coche « Enragé » du contexte. */
+  const monsterHasRage = (bossId: string): boolean =>
+    (DMG_TARGETS.targets[bossId]?.skills ?? []).some((s) =>
+      DMG_TARGETS.skills[s.id]?.type.startsWith('SKT_RAGE_ENTER'),
+    );
 
   const targets: DcTarget[] = [];
   const floorOf = new Map<string, number>();
@@ -741,6 +789,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         // entrée à l'autre.
         ...(isGrBoss && ref.group ? { line: ref.group, stage: grStage } : {}),
         ...(ranked ? { ranked: true } : {}),
+        ...(monsterHasRage(mon.id) ? { hasRage: true } : {}),
         ...(passives.length ? { passives } : {}),
         // Navigation du picker visuel story — cf. `DcTarget.story`. Les vagues
         // viennent de TOUTES les occurrences du monstre dans le donjon (la
@@ -918,6 +967,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       breakFlag: t(k('target.break_flag')),
       guildBuffFlag: t(k('target.guild_buff_flag')),
       titleBuffFlag: t(k('target.title_buff_flag')),
+      enrageFlag: t(k('target.enrage_flag')),
       // Picker visuel story : les deux FAMILLES (le toggle Normal/Hard vit
       // dans le browser, pas dans la liste des modes), la navigation et les
       // vagues. Titres de famille = textes OFFICIELS du jeu (glossaire
@@ -952,6 +1002,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       // skill/EE/quirk vient du jeu, seul l'habillage passe par les locales.
       mechanics: t(k('context.mechanics')),
       mechanicsHint: t(k('context.mechanics_hint')),
+      conds: condLabels,
     },
     team: {
       emptySlot: t(k('team.empty')),
@@ -967,7 +1018,6 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       tgtBuff: t(k('buffs.col.target_buff')),
       tgtDebuff: t(k('buffs.col.target_debuff')),
       bossPassive: t(k('buffs.boss_passive')),
-      bossPassiveInactive: t(k('buffs.boss_passive_inactive')),
     },
     report: {
       empty: t(k('result.empty')),

@@ -33,7 +33,7 @@ import {
   type GearPassivesInfo,
   type GearSelection,
 } from './gear';
-import { resolveBossPassives, type BossPassivesInfo } from './passives';
+import { BASE_AMOUNT_STATS, resolveBossPassives, type BossPassivesInfo } from './passives';
 import {
   buildSkillReport,
   groupHitsByChain,
@@ -207,6 +207,8 @@ export interface DamageEquipmentData {
 /** Kit d'un monstre preset (miroir minimal de targets.json). */
 export interface DataTargetSkill {
   id: string;
+  /** `SKT_MONSTER_*`, `SKT_RAGE_ENTER*` (skill d'enrage — passives.ts)… */
+  type: string;
   subType: string;
   levels: { level: number; buffIds: string[] }[];
 }
@@ -485,6 +487,9 @@ export interface TargetBuildInput {
   guildBuffOn?: boolean;
   /** Coche MANUELLE « buff de titre actif » (cible sans mode connu). */
   titleBuffOn?: boolean;
+  /** Boss ENRAGÉ (coche, z `en`) : active les buffs de son skill d'enrage et
+   *  les passifs conditionnés `OWNER_RAGE` (passives.ts) — jamais deviné. */
+  enraged?: boolean;
 }
 
 export interface BuildReportOptions extends SkillReportOptions {
@@ -522,6 +527,10 @@ export interface DamageReportResult {
   /** Passifs de boss du preset (entrées évaluées + non-résolus signalés) —
    *  présent dès que la cible porte un `monsterId`. */
   bossPassives?: BossPassivesInfo;
+  /** Stats de l'attaquant qui pèsent un MONTANT dans ce scénario (base +
+   *  lectures des buffs actifs : § 9.1, § 10.1, § 14) — filtre des chips de
+   *  passifs de boss (`passiveAffectsDamageAmount`). */
+  attackerAmountStats: string[];
   /** Passifs d'équipement § 15 (appliqués + procs signalés + non-résolus) —
    *  présent dès que l'attaquant porte du `gear`. */
   gearPassives?: GearPassivesInfo;
@@ -609,6 +618,7 @@ export function buildDamageReport(
           data.buffs,
           attackerElement,
           defenderElement,
+          target.enraged === true,
         )
       : undefined;
     bossPassives ??= {
@@ -624,7 +634,39 @@ export function buildDamageReport(
     };
   }
   const passiveBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>
-    (bossPassives?.entries ?? []).filter((e) => e.side === side && e.active).map((e) => e.buff);
+    (bossPassives?.entries ?? [])
+      // Les BT_STAT défenseur (enrage) ne passent PAS en buff de scénario :
+      // ils s'appliquent aux STATS de la cible (canal § 16.1, ci-dessous).
+      .filter(
+        (e) => e.side === side && e.active && !(side === 'defender' && e.buff.type === 'BT_STAT'),
+      )
+      .map((e) => e.buff);
+
+  // ENRAGE — canal de STAT défenseur : les BT_STAT actifs posés sur le boss
+  // (ex. Common_Rage_Buff_3 : DMG Reduce +400 ‰ en OAT_ADD) s'appliquent aux
+  // stats effectives de la cible par l'identité § 16.1 avec A = 0 (un monstre
+  // n'a pas de terme d'archive) : `stat' = trunc((stat + val) × (1000 +
+  // taux) / 1000)`. Les stacks ne sont pas simulés (lignes damage-pertinentes
+  // d'enrage mono-stack en donnée).
+  const tgtStats = { ...target.stats };
+  {
+    const acc: Partial<Record<keyof TargetBuildInput['stats'], { add: number; rate: number }>> = {};
+    for (const e of bossPassives?.entries ?? []) {
+      if (e.side !== 'defender' || !e.active || e.buff.type !== 'BT_STAT') continue;
+      const key = e.buff.stat !== undefined ? TARGET_STAT_MAP[e.buff.stat] : undefined;
+      if (key === undefined) continue;
+      const slot = (acc[key] ??= { add: 0, rate: 0 });
+      if (e.buff.applyingType === 'OAT_RATE') slot.rate += e.buff.value ?? 0;
+      else slot.add += e.buff.value ?? 0;
+    }
+    for (const [key, agg] of Object.entries(acc) as [
+      keyof TargetBuildInput['stats'],
+      { add: number; rate: number },
+    ][]) {
+      const base = tgtStats[key] ?? 0;
+      tgtStats[key] = Math.trunc(((base + agg.add) * (1000 + agg.rate)) / 1000);
+    }
+  }
 
   // Conditions d'ÉTAT déclarées remplies (z `cs`) — consommées par les
   // entrées `stateful` des trois collecteurs (mécaniques perso, gear.ts).
@@ -740,6 +782,35 @@ export function buildDamageReport(
     ...quirkBuffs('defender'),
   ];
 
+  // Stats de l'attaquant qui pèsent un MONTANT dans CE scénario (filtre des
+  // chips de passifs de boss, cf. passives.ts) : la base § 8/§ 7.5/§ 9, plus
+  // ce que les buffs ACTIFS lisent — familles `*_STAT` § 9.1 (ex. 2000067_2_6 :
+  // +50 % du taux CRIT en dégâts), swap d'attaque § 10.1, contexte PV § 14 et
+  // familles PV-perdus. Les entrées gatées par slot (`callers`) lisent aussi.
+  const attackerAmountStats = new Set<string>(BASE_AMOUNT_STATS);
+  {
+    const reading = [
+      ...attackerBuffs,
+      ...gatedInfos().flatMap((i) =>
+        (i?.entries ?? [])
+          .filter((e) => e.side === 'attacker' && e.active && e.callers)
+          .map((e) => e.buff),
+      ),
+    ];
+    for (const b of reading) {
+      const readsStat =
+        b.type === 'BT_DMG_OWNER_STAT' ||
+        b.type === 'BT_DMG_CASTER_STAT' ||
+        b.type === 'BT_SWAP_STAT_ATTACK';
+      if (readsStat && b.stat !== undefined) attackerAmountStats.add(b.stat);
+      const readsHp =
+        b.type === 'BT_DMG_OWNER_LOST_HP_RATE' ||
+        b.type === 'BT_DMG_CASTER_LOST_HP_RATE' ||
+        b.type.startsWith('BT_STAT_OWNER_LOST_HP_RATE');
+      if (readsHp) attackerAmountStats.add('ST_HP');
+    }
+  }
+
   let combatStats = buildCombatStats(attacker, char, data.growth, attackerBuffs);
   // Familles « PV perdus » § 14 (BT 31/32 — sets Revenge/Patience/Swiftness) :
   // leur contexte est le PV de COMBAT, connu seulement après la première
@@ -804,11 +875,11 @@ export function buildDamageReport(
   // scénario porte (TARGET_STAT_MAP) ; absente → 0, jamais devinée.
   const defenderStatOf = (st: string): number => {
     const key = TARGET_STAT_MAP[st];
-    return key !== undefined ? (target.stats[key] ?? 0) : 0;
+    return key !== undefined ? (tgtStats[key] ?? 0) : 0;
   };
 
   const attackerMaxHP = combatStats.hp ?? 0;
-  const defenderMaxHP = target.stats.hp ?? 0;
+  const defenderMaxHP = tgtStats.hp ?? 0;
   const scenario: ReportScenario = {
     attacker: {
       attackStat: combatStats.atk ?? 0,
@@ -820,10 +891,10 @@ export function buildDamageReport(
       element: attackerElement,
     },
     defender: {
-      defense: target.stats.def ?? 0,
+      defense: tgtStats.def ?? 0,
       avoid: 0, // pas de saisie d'esquive côté cible — 0
-      dmgReduceRate: target.stats.dmgRed ?? 0,
-      enemyCriticalDamageReduce: target.stats.cdmgRed ?? 0,
+      dmgReduceRate: tgtStats.dmgRed ?? 0,
+      enemyCriticalDamageReduce: tgtStats.cdmgRed ?? 0,
       element: defenderElement,
     },
     attackerBuffs,
@@ -920,6 +991,7 @@ export function buildDamageReport(
     unresolvedFx: [...atkFx.unresolved, ...tgtFx.unresolved],
     ...(maxHpBuff ? { maxHpBuff } : {}),
     ...(bossPassives ? { bossPassives } : {}),
+    attackerAmountStats: [...attackerAmountStats],
     ...(gearPassives ? { gearPassives } : {}),
     kitPassives,
     ...(quirkPassives ? { quirkPassives } : {}),

@@ -38,7 +38,7 @@ import {
   type DamageData,
   type DamageReportResult,
 } from '@/lib/damage/inputs';
-import { passiveConditionMet } from '@/lib/damage/passives';
+import { BASE_AMOUNT_STATS, passiveConditionMet } from '@/lib/damage/passives';
 import { ENGINE_GAME_VERSION, type DamageBranch, type DamageFixture } from '@/lib/damage/harness';
 import dynamic from 'next/dynamic';
 
@@ -175,14 +175,23 @@ export interface DcSpawn {
  *  indélébile). La condition élémentaire brute est évaluée CLIENT contre
  *  l'attaquant courant (même relation § 6 que le moteur). */
 export interface DcBossPassive {
-  /** Nom localisé du passif porteur (« Starving Devil »). */
+  /** Nom localisé du passif porteur (« Starving Devil », « Enraged »). */
   name: string;
   /** Qui le subit : l'équipe du joueur (attacker) ou le boss (target). */
   side: 'attacker' | 'target';
   /** Libellé PRÊT : stat localisée + valeur signée (« CRIT DMG −85% »). */
   label: string;
-  /** `ATTACKER_ELEMENT_WIN/EQUAL/LOSE` — absent = toujours actif. */
+  /** Enum `ST_*` du BT_STAT — côté attaquant, la chip est TUE quand la stat
+   *  ne pèse aucun MONTANT pour le kit courant (`attackerAmountStats`). */
+  stat?: string;
+  /** `ATTACKER_ELEMENT_WIN/EQUAL/LOSE` ou `OWNER_RAGE` — absent = toujours
+   *  actif (hors gate d'enrage). */
   condition?: string;
+  /** Libellé LISIBLE de la condition (localisé serveur) — affiché sur la chip
+   *  pour dire POURQUOI elle est active ou barrée (Sevih 17/08/2026). */
+  cond?: string;
+  /** Buff du skill d'ENRAGE du boss — actif seulement coche « Enragé ». */
+  rage?: true;
 }
 
 export interface DcTarget {
@@ -224,6 +233,9 @@ export interface DcTarget {
    *  PENDANT le combat) : le sélecteur du panneau titre « Rank », pas
    *  « Stage ». */
   ranked?: boolean;
+  /** Le boss a un skill d'ENRAGE (`SKT_RAGE_ENTER*`) — la coche « Enragé »
+   *  du contexte n'apparaît que là. */
+  hasRage?: boolean;
   /** Passifs de boss à impact sur les dégâts — chips auto, jamais togglables. */
   passives?: DcBossPassive[];
   /**
@@ -327,6 +339,8 @@ export interface DcLabels {
     breakFlag: string;
     guildBuffFlag: string;
     titleBuffFlag: string;
+    /** Coche « boss enragé » (buffs du skill d'enrage actifs — z `en`). */
+    enrageFlag: string;
     /** Picker visuel story : familles (les 4 modes repliés en 2 entrées),
      *  toggle de difficulté, navigation et vagues. */
     familyStory: string;
@@ -351,6 +365,9 @@ export interface DcLabels {
     /** Mécaniques PERSO (conditions d'état de combat — entrées `stateful`). */
     mechanics: string;
     mechanicsHint: string;
+    /** Libellés LISIBLES des conditions (enum brut → gabarit localisé,
+     *  `{n}` = seuil — HPRATE en %). Partagés mécaniques perso / chips boss. */
+    conds: Record<string, string>;
   };
   team: { emptySlot: string; eeOwned: string; eePlus: string };
   buffs: {
@@ -362,7 +379,6 @@ export interface DcLabels {
     tgtBuff: string;
     tgtDebuff: string;
     bossPassive: string;
-    bossPassiveInactive: string;
   };
   report: {
     empty: string;
@@ -1075,6 +1091,10 @@ export function DamageCalculatorBrowser({
   // Cible en BREAK (jauge détruite) — contexte § 9.1 (Rogue's Charm +10,
   // set Pulverization, EE Lv10…) ; vaut pour preset ET manuel.
   const [tgtBroken, setTgtBroken] = useState(false);
+  // Boss ENRAGÉ (z `en`) : buffs du skill d'enrage + passifs `OWNER_RAGE`
+  // actifs (moteur passives.ts) — coche visible quand le preset a un skill
+  // d'enrage (`hasRage`), jamais deviné.
+  const [tgtEnraged, setTgtEnraged] = useState(false);
   // PV actuels de la cible (%) — skills qui tapent sur PV max/actuels/manquants.
   const [tgtHpPct, setTgtHpPct] = useState('100');
   const [targetsHit, setTargetsHit] = useState(1);
@@ -1218,6 +1238,7 @@ export function DamageCalculatorBrowser({
     setTgtStats({});
     setTgtBoss(false);
     setTgtBroken(false);
+    setTgtEnraged(false);
     setTgtGuildBuff(false);
     setTgtTitleBuff(false);
     setTgtHpPct('100');
@@ -1242,7 +1263,10 @@ export function DamageCalculatorBrowser({
   const bossPassivesFor = (s: DcBossPassive['side']): DcBossPassive[] =>
     (target?.passives ?? []).filter((p) => p.side === s);
   const bossPassiveActive = (p: DcBossPassive): boolean => {
+    // Buff d'ENRAGE : gaté par la coche du scénario (même règle que le moteur).
+    if (p.rage && !tgtEnraged) return false;
     if (!p.condition) return true;
+    if (p.condition === 'OWNER_RAGE') return tgtEnraged;
     const a = attacker ? elementOf(attacker.element) : undefined;
     const d = target ? elementOf(target.element) : undefined;
     return a !== undefined && d !== undefined && passiveConditionMet(p.condition, a, d);
@@ -1312,6 +1336,7 @@ export function DamageCalculatorBrowser({
       );
     if (st.tb) setTgtBoss(true);
     if (st.bk) setTgtBroken(true);
+    if (st.en) setTgtEnraged(true);
     if (st.gb) setTgtGuildBuff(true);
     if (st.pb) setTgtTitleBuff(true);
     if (typeof st.th === 'string') setTgtHpPct(st.th);
@@ -1443,6 +1468,7 @@ export function DamageCalculatorBrowser({
     if (Object.keys(tv).length) z.tv = tv;
     if (tgtBoss) z.tb = 1;
     if (tgtBroken) z.bk = 1;
+    if (tgtEnraged) z.en = 1;
     if (tgtGuildBuff) z.gb = 1;
     if (tgtTitleBuff) z.pb = 1;
     if (tgtHpPct !== '100') z.th = tgtHpPct;
@@ -1596,6 +1622,14 @@ export function DamageCalculatorBrowser({
   const fmtStat = (v: number | undefined, percent: boolean): string =>
     v === undefined ? '—' : percent ? `${v / 10}%` : v.toLocaleString();
 
+  // Chips de passifs de boss : ACTIVES et qui pèsent un MONTANT pour ce
+  // scénario — la crit chance de l'équipe ne s'affiche que si le kit la LIT
+  // (§ 9.1, ex. 2000067) ; sans rapport, repli sur la base (Sevih 17/08/2026).
+  const amountStats = new Set(report?.attackerAmountStats ?? BASE_AMOUNT_STATS);
+  const bossPassiveShown = (p: DcBossPassive): boolean =>
+    bossPassiveActive(p) &&
+    (p.side !== 'attacker' || p.stat === undefined || amountStats.has(p.stat));
+
   // Mécaniques perso : entrées `stateful` du rapport (kit/EE/quirks) — leur
   // condition d'ÉTAT de combat (ressource, buffs posés… — CheckAvailable
   // § 12.1) n'est jamais évaluée par le moteur ; la coche du panneau Contexte
@@ -1630,6 +1664,21 @@ export function DamageCalculatorBrowser({
       }
     }
     return { name: e.buffId, ...(slot ? { slot } : {}) };
+  };
+  /** Libellé LISIBLE de la condition d'une mécanique (« Target has a buff »,
+   *  « Target HP below 90% »…) — gabarit localisé, `{n}` = seuil (HPRATE en
+   *  ‰ → %) ; repli sur l'enum brut si le gabarit manquait. */
+  const mechCond = (e: (typeof statefulPassives)[number]): string | undefined => {
+    if (!e.condition) return undefined;
+    const tpl = L.context.conds[e.condition];
+    if (!tpl) return e.condition;
+    const n =
+      e.conditionValue !== undefined
+        ? e.condition.includes('HPRATE')
+          ? e.conditionValue / 10
+          : e.conditionValue
+        : undefined;
+    return n !== undefined ? tpl.replace('{n}', String(n)) : tpl;
   };
 
   // ── Cycle de capture (harnais) : un scénario = UNE ligne de dégâts ──
@@ -2743,6 +2792,24 @@ export function DamageCalculatorBrowser({
                     </span>
                   </label>
 
+                  {/* Boss ENRAGÉ (z `en`) : les buffs de son skill d'enrage
+                    (ex. Chimera : DMG Reduce +40 pts) et ses passifs
+                    `OWNER_RAGE` s'activent — coche visible seulement quand le
+                    preset a un skill d'enrage, jamais deviné. */}
+                  {target?.hasRage && (
+                    <label className="flex cursor-pointer items-center gap-2 text-xs">
+                      <input
+                        type="checkbox"
+                        checked={tgtEnraged}
+                        onChange={() => setTgtEnraged(!tgtEnraged)}
+                        className="accent-accent"
+                      />
+                      <span className={tgtEnraged ? 'text-content' : 'text-content-muted'}>
+                        {L.target.enrageFlag}
+                      </span>
+                    </label>
+                  )}
+
                   {/* Mécaniques PERSO (entrées `stateful` du moteur) : conditions
                     d'état de combat des passifs kit/EE/quirks — ex. les 5 Kaizer
                     Energy du S3 de Noa. Jamais évaluées par le moteur
@@ -2756,6 +2823,7 @@ export function DamageCalculatorBrowser({
                       <p className="text-content-subtle text-[10px]">{L.context.mechanicsHint}</p>
                       {statefulPassives.map((e) => {
                         const m = mechLabel(e);
+                        const cond = mechCond(e);
                         const on = metConds.includes(e.buffId);
                         return (
                           <label
@@ -2776,6 +2844,9 @@ export function DamageCalculatorBrowser({
                               <span className="text-content-subtle font-mono text-[9px]">
                                 {m.slot}
                               </span>
+                            )}
+                            {cond && (
+                              <span className="text-content-subtle text-[10px]">— {cond}</span>
                             )}
                           </label>
                         );
@@ -2900,31 +2971,32 @@ export function DamageCalculatorBrowser({
                             </div>
                           </div>
                         ))}
-                        {side.passives.length > 0 && (
+                        {side.passives.some(bossPassiveShown) && (
                           <div className="space-y-1">
                             <Eyebrow>{L.buffs.bossPassive}</Eyebrow>
                             <div className="flex flex-wrap gap-1.5">
-                              {side.passives.map((p, i) => {
-                                const on = bossPassiveActive(p);
-                                return (
-                                  <span
-                                    key={`${p.name}:${p.label}:${i}`}
-                                    title={
-                                      on ? p.name : `${p.name} · ${L.buffs.bossPassiveInactive}`
-                                    }
-                                    className={`flex items-center gap-1.5 rounded-lg border px-2 py-1 text-xs ${
-                                      on
-                                        ? side.key === 'atk'
-                                          ? 'border-danger bg-danger/10 text-content'
-                                          : 'border-accent bg-accent/10 text-content'
-                                        : 'border-line-subtle bg-surface-raised/40 text-content-subtle'
-                                    }`}
-                                  >
-                                    <span className="font-semibold">{p.name}</span>
-                                    <span className={on ? '' : 'line-through'}>{p.label}</span>
-                                  </span>
-                                );
-                              })}
+                              {/* Seules les chips ACTIVES pour ce matchup ET qui
+                                pèsent un montant sont montrées — pas les 3
+                                variantes élémentaires quand une seule concerne
+                                l'attaquant, pas la crit chance quand le kit ne
+                                la lit pas (Sevih 17/08/2026). */}
+                              {side.passives.filter(bossPassiveShown).map((p, i) => (
+                                <span
+                                  key={`${p.name}:${p.label}:${i}`}
+                                  title={p.name}
+                                  className={`flex items-center gap-1.5 rounded-lg border px-2 py-1 text-xs ${
+                                    side.key === 'atk'
+                                      ? 'border-danger bg-danger/10 text-content'
+                                      : 'border-accent bg-accent/10 text-content'
+                                  }`}
+                                >
+                                  <span className="font-semibold">{p.name}</span>
+                                  <span>{p.label}</span>
+                                  {p.cond && (
+                                    <span className="text-[10px] opacity-75">· {p.cond}</span>
+                                  )}
+                                </span>
+                              ))}
                             </div>
                           </div>
                         )}

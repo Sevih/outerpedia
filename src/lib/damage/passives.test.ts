@@ -20,7 +20,7 @@ import {
   type DamageData,
   type TargetBuildInput,
 } from './inputs';
-import { passiveConditionMet, staticBossPassives } from './passives';
+import { passiveAffectsDamageAmount, passiveConditionMet, staticBossPassives } from './passives';
 import { Element } from './types';
 
 const data = {
@@ -70,7 +70,7 @@ describe('passives — conditions élémentaires (même relation que § 6)', () 
 });
 
 describe('passives — Starving Devil (Chimera stage 12), donnée réelle', () => {
-  it('extraction statique : 5 entrées classées, 3 WG signalés § 12.3', () => {
+  it('extraction statique : 6 entrées classées (dont l’enrage), 3 WG signalés § 12.3', () => {
     const s = staticBossPassives(CHIMERA_12, data.targets!, data.buffs)!;
     expect(s).toBeDefined();
     const byId = (id: string) => s.entries.filter((e) => e.buffId === id);
@@ -91,9 +91,19 @@ describe('passives — Starving Devil (Chimera stage 12), donnée réelle', () =
     });
     expect(byId('2')[0]).toMatchObject({ condition: 'ATTACKER_ELEMENT_LOSE' });
     expect(byId('3')[0]).toMatchObject({ condition: 'ATTACKER_ELEMENT_EQUAL' });
-    expect(s.entries).toHaveLength(5);
+    // ENRAGE (skill SKT_RAGE_ENTER1, 131125) : DMG Reduce +400 ‰ en OAT_ADD
+    // sur le boss — canal de STAT défenseur § 16.1, gaté par la coche.
+    expect(byId('Common_Rage_Buff_3')[0]).toMatchObject({
+      skillId: '131125',
+      side: 'defender',
+      rage: true,
+      buff: { type: 'BT_STAT', stat: 'ST_DMG_REDUCE_RATE', applyingType: 'OAT_ADD', value: 400 },
+    });
+    expect(s.entries).toHaveLength(6);
     // BT_DMG sortants du boss (4/5/6) : jamais calculés — absents, pas signalés.
     expect(byId('4')).toHaveLength(0);
+    // Boucliers/WG heal/ATK du skill d'enrage : hors périmètre, absents aussi.
+    expect(byId('common_rage_buff_atk_turn')).toHaveLength(0);
     // Les WG_DMG_REDUCE (bouclier de rage + armures) : signalés, jamais tus.
     expect(s.unresolved.map((u) => u.buffId).sort()).toEqual([
       '4076007_15_3_1',
@@ -101,6 +111,40 @@ describe('passives — Starving Devil (Chimera stage 12), donnée réelle', () =
       'armor_common_2',
     ]);
     for (const u of s.unresolved) expect(u.reason).toContain('12.3');
+  });
+
+  it('chips : la crit CHANCE ne pèse un montant que si le kit la LIT (2000067)', () => {
+    const s = staticBossPassives(CHIMERA_12, data.targets!, data.buffs)!;
+    const byId = (id: string) => s.entries.find((e) => e.buffId === id)!;
+    // Kit qui ne lit PAS le taux crit : il ne pèse que sur P(crit) § 4 —
+    // la chip est tue, le moteur garde l'entrée (test « crit forcé »).
+    const plain = new Set(buildDamageReport(attacker(FIRE), target(), data).attackerAmountStats);
+    expect(plain.has('ST_CRITICAL_RATE')).toBe(false);
+    expect(passiveAffectsDamageAmount(byId('4076007_15_1'), plain)).toBe(false);
+    // Crit dmg −85 % : nourrit la branche crit § 7.5 → chip.
+    expect(passiveAffectsDamageAmount(byId('4076007_15_2'), plain)).toBe(true);
+    // Défenseur : feedRow ne laisse déjà passer que les canaux consommés.
+    expect(passiveAffectsDamageAmount(byId('1'), plain)).toBe(true);
+    expect(passiveAffectsDamageAmount(byId('Common_Rage_Buff_3'), plain)).toBe(true);
+    // 2000067 (2000067_2_6 : +50 % du taux CRIT en dégâts, famille § 9.1) :
+    // la lecture ouvre la stat — la chip s'affiche pour lui (Sevih 17/08/2026).
+    const reader = new Set(
+      buildDamageReport(attacker('2000067'), target(), data).attackerAmountStats,
+    );
+    expect(reader.has('ST_CRITICAL_RATE')).toBe(true);
+    expect(passiveAffectsDamageAmount(byId('4076007_15_1'), reader)).toBe(true);
+  });
+
+  it('enrage : inactif par défaut, la coche l’active et la réduction § 16.1 mord', () => {
+    const off = buildDamageReport(attacker(FIRE), target(), data);
+    const on = buildDamageReport(attacker(FIRE), { ...target(), enraged: true }, data);
+    const rageOf = (r: typeof off) =>
+      r.bossPassives!.entries.find((e) => e.buffId === 'Common_Rage_Buff_3')!;
+    expect(rageOf(off).active).toBe(false);
+    expect(rageOf(on).active).toBe(true);
+    // DMG Reduce de la cible : 0 → 400 ‰ (§ 16.1, A = 0) — les dégâts chutent.
+    const dmg = (r: typeof off) => r.slots[0].report.states[0].expectedDamage;
+    expect(dmg(on)).toBeLessThan(dmg(off));
   });
 
   it('équipe joueuse : les débuffs traversent § 16.1 — crit forcé, crit dmg −850', () => {

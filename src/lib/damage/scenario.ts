@@ -92,6 +92,8 @@ export interface CalculatorUrlState {
   tv?: Record<string, string>;
   tb?: 1;
   bk?: 1;
+  /** Boss ENRAGÉ (buffs du skill d'enrage + passifs `OWNER_RAGE` actifs). */
+  en?: 1;
   /** Coches « buff de guilde actif » / « buff de titre actif » (cible
    *  MANUELLE — en preset le MODE décide, spec formule § 16.2). */
   gb?: 1;
@@ -248,6 +250,7 @@ export function buildInputsFromZ(
     ...(tgtHpPct !== undefined ? { hpPct: tgtHpPct } : {}),
     ...(st.d?.length ? { fx: st.d } : {}),
     ...(st.bk === 1 ? { broken: true } : {}),
+    ...(st.en === 1 ? { enraged: true } : {}),
   };
   if (st.g) {
     // Cible MANUELLE : élément requis, stats saisies (percent → ‰).
