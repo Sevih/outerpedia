@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.10.805",
+  "resVersion": "1.10.905",
   "pieces": {
     "1": {
       "id": "1",
@@ -34815,6 +34815,17 @@
       "uniqueOptionGroups": ["2000121"],
       "setOptionGroups": []
     },
+    "2000129": {
+      "id": "2000129",
+      "subType": "ITS_EQUIP_EXCLUSIVE",
+      "grade": "IG_UNIQUE",
+      "basicStar": 6,
+      "characterLimit": "2000129",
+      "mainOptionGroups": ["2000129"],
+      "subOptionGroups": [],
+      "uniqueOptionGroups": ["2000129"],
+      "setOptionGroups": []
+    },
     "2700003": {
       "id": "2700003",
       "subType": "ITS_EQUIP_EXCLUSIVE",
@@ -46157,6 +46168,18 @@
         "rate": 10000
       }
     ],
+    "2000129": [
+      {
+        "id": "20129",
+        "optionType": "IOT_BUFF",
+        "stat": "ST_KILL_AP",
+        "applyingType": "OAT_ADD",
+        "factor": 2,
+        "maxValue": 20,
+        "buffId": "BID_CEQUIP_MAIN_DMG_DARK",
+        "rate": 10000
+      }
+    ],
     "2700003": [
       {
         "id": "27003",
@@ -50268,6 +50291,22 @@
         "breakLimitCounts": [],
         "ignoreLowSet": false,
         "buffIds": ["BID_CEQUIP_2000121_ADD"]
+      }
+    ],
+    "2000129": [
+      {
+        "level": 1,
+        "isAdd": false,
+        "breakLimitCounts": [],
+        "ignoreLowSet": false,
+        "buffIds": ["BID_CEQUIP_2000129"]
+      },
+      {
+        "level": 10,
+        "isAdd": true,
+        "breakLimitCounts": [],
+        "ignoreLowSet": false,
+        "buffIds": ["BID_CEQUIP_2000129_ADD"]
       }
     ],
     "2700003": [

@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.10.805",
+  "resVersion": "1.10.905",
   "targets": {
     "400101": {
       "id": "400101",
@@ -24964,7 +24964,8 @@
         "BT_DOT_BLEED",
         "BT_DOT_POISON",
         "BT_DOT_LIGHTNING",
-        "BT_DOT_2000092"
+        "BT_DOT_2000092",
+        "BT_DOT_PUNISH"
       ],
       "statBuffImmune": ["ST_DEF", "ST_SPEED"],
       "rage": {
@@ -25149,7 +25150,8 @@
         "BT_DOT_BLEED",
         "BT_DOT_POISON",
         "BT_DOT_LIGHTNING",
-        "BT_DOT_2000092"
+        "BT_DOT_2000092",
+        "BT_DOT_PUNISH"
       ],
       "statBuffImmune": ["ST_DEF", "ST_SPEED"],
       "rage": {
@@ -25338,7 +25340,8 @@
         "BT_DOT_BLEED",
         "BT_DOT_POISON",
         "BT_DOT_LIGHTNING",
-        "BT_DOT_2000092"
+        "BT_DOT_2000092",
+        "BT_DOT_PUNISH"
       ],
       "statBuffImmune": ["ST_DEF", "ST_SPEED"],
       "rage": {
@@ -107432,7 +107435,8 @@
         "BT_DOT_BLEED",
         "BT_DOT_POISON",
         "BT_DOT_LIGHTNING",
-        "BT_DOT_2000092"
+        "BT_DOT_2000092",
+        "BT_DOT_PUNISH"
       ],
       "rage": {
         "trigger": "USER_TURN_COUNT",
@@ -229723,6 +229727,8 @@
     "Singularity_Passive_Dmg_down_aaa_3",
     "Singularity_Passive_Dmg_down_c",
     "Singularity_Passive_Dmg_down_d",
+    "Singularity_Passive_Dmg_down_s_2",
+    "Singularity_Passive_Dmg_down_s_3",
     "Singularity_Passive_Dmg_down_ss",
     "Singularity_Passive_Dmg_down_ss_2",
     "Singularity_Passive_Dmg_down_ss_3",
@@ -229734,6 +229740,8 @@
     "Singularity_Passive_Dmg_up_aaa_3",
     "Singularity_Passive_Dmg_up_c",
     "Singularity_Passive_Dmg_up_d",
+    "Singularity_Passive_Dmg_up_s_2",
+    "Singularity_Passive_Dmg_up_s_3",
     "Singularity_Passive_Dmg_up_ss",
     "Singularity_Passive_Dmg_up_ss_2",
     "Singularity_Passive_Dmg_up_ss_3",
