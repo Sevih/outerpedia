@@ -160,9 +160,12 @@ async function main(): Promise<void> {
     // Titres des modes de contenu (résolus sans mapping en dur) — glossaire
     // comme les éléments/classes ; les donjons vivent dans encounters.json.
     modes: encounters.modes,
-    // Familles story (« Story », « Origin Story ») — sélecteurs qui replient
-    // les 4 slugs STORY_MODES en 2 entrées (Normal/Hard en toggle).
-    storyFamilies: encounters.storyFamilies,
+    // Familles de modes (« Story », « Origin Story », « Special Request ») —
+    // sélecteurs qui replient plusieurs slugs en une entrée.
+    modeFamilies: encounters.modeFamilies,
+    // Titres officiels des saisons de guild raid (« The Frost Legion »…) —
+    // cartes de saison du picker de cible.
+    guildRaidSeasons: encounters.guildRaidSeasons,
     // Passifs de PALIER résolus (`DungeonRank.options` → buff) — le site
     // affiche les rangs (singularity…) sans lire les tables du jeu.
     rankOptions: encounters.rankOptions,

@@ -76238,7 +76238,8 @@
       "key": "stage_10",
       "order": 10
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_MAIN"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_MAIN",
+    "overgrade": true
   },
   "70401101": {
     "mode": "guild_raid_sub_boss",
@@ -76788,7 +76789,8 @@
       "key": "stage_10",
       "order": 10
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_MAIN"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON5_MAIN",
+    "overgrade": true
   },
   "70501101": {
     "mode": "guild_raid_sub_boss",
@@ -79651,7 +79653,8 @@
       "key": "stage_10",
       "order": 10
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_MAIN"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_MAIN",
+    "overgrade": true
   },
   "70601101": {
     "mode": "guild_raid_sub_boss",
@@ -80201,7 +80204,8 @@
       "key": "stage_10",
       "order": 10
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_MAIN"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON3_MAIN",
+    "overgrade": true
   },
   "70701101": {
     "mode": "guild_raid_sub_boss",
@@ -80751,7 +80755,8 @@
       "key": "stage_10",
       "order": 10
     },
-    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_MAIN"
+    "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON1_MAIN",
+    "overgrade": true
   },
   "70801101": {
     "mode": "guild_raid_sub_boss",

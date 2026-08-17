@@ -511,12 +511,12 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.common.change': '변경',
   // Target picker labels
   'tools.damage-calculator.target.category': '카테고리',
-  'tools.damage-calculator.target.mode': '모드',
   'tools.damage-calculator.target.season': '시즌',
   'tools.damage-calculator.target.season_label': '시즌 {n}',
   'tools.damage-calculator.target.episode': '에피소드',
   'tools.damage-calculator.target.dungeon': '던전',
   'tools.damage-calculator.target.stage': '스테이지',
+  'tools.damage-calculator.target.rank': '랭크',
   'tools.damage-calculator.target.fight': '전투 {n}',
   'tools.damage-calculator.target.boss_flag': '보스',
   'tools.damage-calculator.target.break_flag': '대상 브레이크 상태(약점 게이지 파괴)',
@@ -525,8 +525,6 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.toolbar.reset': '시나리오 초기화',
   'tools.damage-calculator.toolbar.copy_link': '링크 복사',
   'tools.damage-calculator.toolbar.copied': '복사됨!',
-  'tools.damage-calculator.target.phase_main': '메인 보스',
-  'tools.damage-calculator.target.phase_sub': '서브 보스',
   'tools.damage-calculator.target.floor_label': '{n}층',
   'tools.damage-calculator.target.boss_mechanics': '보스 메커닉',
   'tools.damage-calculator.target.boss_enrage_badge': '광폭화',
@@ -535,6 +533,7 @@ const kr: Record<TranslationKey, string> = {
   // 스토리 비주얼 피커(패밀리 이름은 게임 용어집에서)
   'tools.damage-calculator.target.back': '뒤로',
   'tools.damage-calculator.target.wave_label': '웨이브 {n}',
+  'tools.damage-calculator.target.monster_count': '몬스터 {n}마리',
   // Target picker — mode tabs + manual form
   'tools.damage-calculator.target.tab.cascade': '프리셋',
   'tools.damage-calculator.target.tab.manual': '수동',

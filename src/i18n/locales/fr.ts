@@ -539,12 +539,12 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.common.change': 'modifier',
   // Target picker labels
   'tools.damage-calculator.target.category': 'Catégorie',
-  'tools.damage-calculator.target.mode': 'Mode',
   'tools.damage-calculator.target.season': 'Saison',
   'tools.damage-calculator.target.season_label': 'Saison {n}',
   'tools.damage-calculator.target.episode': 'Épisode',
   'tools.damage-calculator.target.dungeon': 'Dungeon',
   'tools.damage-calculator.target.stage': 'Stage',
+  'tools.damage-calculator.target.rank': 'Rang',
   'tools.damage-calculator.target.fight': 'Combat {n}',
   'tools.damage-calculator.target.boss_flag': 'Boss',
   'tools.damage-calculator.target.break_flag': 'Cible en break (jauge détruite)',
@@ -553,8 +553,6 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.toolbar.reset': 'Réinitialiser le scénario',
   'tools.damage-calculator.toolbar.copy_link': 'Copier le lien',
   'tools.damage-calculator.toolbar.copied': 'Copié !',
-  'tools.damage-calculator.target.phase_main': 'Boss principal',
-  'tools.damage-calculator.target.phase_sub': 'Boss secondaire',
   'tools.damage-calculator.target.floor_label': 'Étage {n}',
   'tools.damage-calculator.target.boss_mechanics': 'Mécaniques du Boss',
   'tools.damage-calculator.target.boss_enrage_badge': 'Enrage',
@@ -563,6 +561,7 @@ const fr: Record<TranslationKey, string> = {
   // Picker visuel story (les titres de famille viennent du glossaire du jeu)
   'tools.damage-calculator.target.back': 'Retour',
   'tools.damage-calculator.target.wave_label': 'Vague {n}',
+  'tools.damage-calculator.target.monster_count': '{n} monstres',
   // Target picker — mode tabs + manual form
   'tools.damage-calculator.target.tab.cascade': 'Préréglage',
   'tools.damage-calculator.target.tab.manual': 'Manuel',

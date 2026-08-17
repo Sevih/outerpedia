@@ -24,6 +24,20 @@ export interface StatRange {
   max: number;
 }
 
+/**
+ * OVERGRADE du main boss de guild raid (au-delà du dernier stage templeté) —
+ * GameConfig `GUILD_RAID_AFTER_10_BOSS_STAT` = [300, 300, 10] (hp, atk, def,
+ * ‰ par overgrade, dump 1.4.14 — gardé par damage-data.test) :
+ *   - PV : `floor(float32(1 + og × 300/1000) × float32(BossMonsterHP))`
+ *     (`CGuildRaidSpawnData.GetCharacterData`, spec damage § 12.13) ;
+ *   - ATK/DEF : canal `addRate` de SetBaseValue (spec § 3.2) —
+ *     `base × (1000 + og × taux) / 1000` arrondi bas, AVANT adv/quirks.
+ */
+export const GUILD_RAID_OVERGRADE_RATES = { hp: 300, atk: 300, def: 10 } as const;
+/** GameConfig `GUILD_RAID_MAIN_BOSS_MAX_GRADE` = 100 (dump 1.4.14) — borne de
+ *  l'échelle de stages du main boss (gardé par damage-data.test). */
+export const GUILD_RAID_MAIN_BOSS_MAX_GRADE = 100;
+
 /** Contexte d'une rencontre : niveau + modificateurs du donjon/palier. */
 export interface SpawnContext {
   level: number;
@@ -44,6 +58,9 @@ export interface SpawnContext {
   bossHp?: number;
   /** BARRE d'un palier à score : largeur de la tranche de dégâts, PAS des PV. */
   bar?: number;
+  /** Overgrade du main boss de guild raid (stage − dernier stage templeté),
+   *  cf. `GUILD_RAID_OVERGRADE_RATES`. */
+  overGrade?: number;
   hpLines?: number;
   /** Niveau du palier SUIVANT (chaîne de level-up des boss à score, 0 = dernier
    * palier) — « Trans » = transition, PAS transcendance : vérifié binaire
@@ -129,9 +146,16 @@ export function statAt(
   quirkMods?: Record<string, number>,
 ): number {
   let v = r.min + Math.floor(((r.max - r.min) * (ctx.level - 1)) / 99);
+  const og = ctx.overGrade ?? 0;
+  // Overgrade ATK/DEF = canal addRate (§ 3.2) : sur la BASE, avant adv.
+  if (og && (slug === 'atk' || slug === 'def'))
+    v = Math.floor((v * (1000 + og * GUILD_RAID_OVERGRADE_RATES[slug])) / 1000);
   const adv = ctx.adv?.[ADV_OF[slug]];
   if (adv) v = Math.floor((v * (1000 + adv)) / 1000);
   if (slug === 'hp' && ctx.bossHp) v = ctx.bossHp;
+  // Overgrade PV : le binaire multiplie en FLOAT32 puis tronque (§ 12.13).
+  if (og && slug === 'hp')
+    v = Math.floor(Math.fround(1 + (og * GUILD_RAID_OVERGRADE_RATES.hp) / 1000) * Math.fround(v));
   const q = quirkMods?.[slug];
   if (q) v = Math.floor((v * (1000 + q)) / 1000);
   return v;

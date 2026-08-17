@@ -24,11 +24,16 @@ const DAMAGE_CONFIG_KEYS = [
   'CHECK_AVOID_VALUE_2',
   'CHECK_AVOID_VALUE_3',
   'CHECK_AVOID_VALUE_4',
+  'GUILD_RAID_MAIN_BOSS_MAX_GRADE',
 ] as const;
 
 export type DamageConfigKey = (typeof DAMAGE_CONFIG_KEYS)[number];
 
-export type DamageConfigData = Record<DamageConfigKey, number>;
+export type DamageConfigData = Record<DamageConfigKey, number> & {
+  /** Overgrade du main boss de guild raid : « hp,atk,def » en ‰/grade
+   *  (spec § 12.13) — la seule clé LISTE du périmètre. */
+  GUILD_RAID_AFTER_10_BOSS_STAT: number[];
+};
 
 export function buildDamageConfig(): DamageConfigData {
   const byId = indexBy(loadTable('GameConfigTemplet'));
@@ -38,5 +43,10 @@ export function buildDamageConfig(): DamageConfigData {
     if (!row) throw new Error(`GameConfigTemplet : clé « ${key} » absente — périmètre à revoir.`);
     out[key] = num(row.ValueString);
   }
+  const list = byId.get('GUILD_RAID_AFTER_10_BOSS_STAT');
+  if (!list) throw new Error('GameConfigTemplet : clé « GUILD_RAID_AFTER_10_BOSS_STAT » absente.');
+  out.GUILD_RAID_AFTER_10_BOSS_STAT = (list.ValueString ?? '')
+    .split(',')
+    .map((v: string) => num(v));
   return out;
 }

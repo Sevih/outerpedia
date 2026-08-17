@@ -6058,7 +6058,7 @@
       "zh": "次元奇点"
     }
   },
-  "storyFamilies": {
+  "modeFamilies": {
     "story": {
       "en": "Story",
       "jp": "ストーリー",
@@ -6070,6 +6070,44 @@
       "jp": "オリジンストーリー",
       "kr": "오리진 스토리",
       "zh": "起源剧情"
+    },
+    "special_request": {
+      "en": "Special Request",
+      "jp": "特別依頼",
+      "kr": "특별 의뢰",
+      "zh": "特别委托"
+    }
+  },
+  "guildRaidSeasons": {
+    "1": {
+      "en": "The Madman's Laboratory",
+      "jp": "狂人の研究室",
+      "kr": "광인의 연구실",
+      "zh": "狂人研究室"
+    },
+    "2": {
+      "en": "Prevent World Alteration",
+      "jp": "世界変容の阻止",
+      "kr": "세계변용 저지",
+      "zh": "阻止世界之变"
+    },
+    "3": {
+      "en": "Automaton",
+      "jp": "オートマタ",
+      "kr": "오토마톤",
+      "zh": "机械人偶"
+    },
+    "4": {
+      "en": "The Frost Legion",
+      "jp": "雪国の軍勢",
+      "kr": "설국의 군세",
+      "zh": "雪国的军势"
+    },
+    "5": {
+      "en": "Dignity of the Golden Kingdom",
+      "jp": "黄金なる王国の威容",
+      "kr": "황금 왕국의 위용",
+      "zh": "黄金王国的威仪"
     }
   },
   "rankOptions": {

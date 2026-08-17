@@ -24,6 +24,10 @@ import {
   MISSED_DAMAGE_RATE_PERMILLE,
   PVP_HEAL_PENALTY_REDUCE_RATE_PERMILLE,
 } from '../../src/lib/damage/types';
+import {
+  GUILD_RAID_MAIN_BOSS_MAX_GRADE,
+  GUILD_RAID_OVERGRADE_RATES,
+} from '../../src/lib/monster-stats';
 
 const { characters, skills } = charactersData as unknown as DamageCharactersData & {
   resVersion: string;
@@ -384,6 +388,14 @@ describe('damage/growth.json — canaux de CalcFinalStat', () => {
       config.CHECK_AVOID_VALUE_3,
       config.CHECK_AVOID_VALUE_4,
     ]).toEqual([1000, 1, 100, 1]);
+    // Overgrade du main boss de guild raid (spec § 12.13, statAt) :
+    // [hp, atk, def] en ‰/grade + borne de l'échelle de stages.
+    expect(config.GUILD_RAID_AFTER_10_BOSS_STAT).toEqual([
+      GUILD_RAID_OVERGRADE_RATES.hp,
+      GUILD_RAID_OVERGRADE_RATES.atk,
+      GUILD_RAID_OVERGRADE_RATES.def,
+    ]);
+    expect(config.GUILD_RAID_MAIN_BOSS_MAX_GRADE).toBe(GUILD_RAID_MAIN_BOSS_MAX_GRADE);
   });
 
   it('monad : les nœuds ciblés portent un perso du roster et un effet', () => {

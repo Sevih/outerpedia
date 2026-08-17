@@ -503,12 +503,12 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.common.change': '更改',
   // Target picker labels
   'tools.damage-calculator.target.category': '类别',
-  'tools.damage-calculator.target.mode': '模式',
   'tools.damage-calculator.target.season': '季篇',
   'tools.damage-calculator.target.season_label': '第{n}季',
   'tools.damage-calculator.target.episode': '剧情',
   'tools.damage-calculator.target.dungeon': '副本',
   'tools.damage-calculator.target.stage': '关卡',
+  'tools.damage-calculator.target.rank': '等级',
   'tools.damage-calculator.target.fight': '战斗 {n}',
   'tools.damage-calculator.target.boss_flag': '首领',
   'tools.damage-calculator.target.break_flag': '目标处于击破状态（弱点槽已破坏）',
@@ -517,8 +517,6 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.toolbar.reset': '重置方案',
   'tools.damage-calculator.toolbar.copy_link': '复制链接',
   'tools.damage-calculator.toolbar.copied': '已复制!',
-  'tools.damage-calculator.target.phase_main': '主首领',
-  'tools.damage-calculator.target.phase_sub': '副首领',
   'tools.damage-calculator.target.floor_label': '第{n}层',
   'tools.damage-calculator.target.boss_mechanics': '首领机制',
   'tools.damage-calculator.target.boss_enrage_badge': '狂暴',
@@ -527,6 +525,7 @@ const zh: Record<TranslationKey, string> = {
   // 剧情可视化选择器（系列名称来自游戏术语表）
   'tools.damage-calculator.target.back': '返回',
   'tools.damage-calculator.target.wave_label': '波次 {n}',
+  'tools.damage-calculator.target.monster_count': '{n} 个怪物',
   // Target picker — mode tabs + manual form
   'tools.damage-calculator.target.tab.cascade': '游戏内选择',
   'tools.damage-calculator.target.tab.manual': '手动设置',

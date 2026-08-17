@@ -592,8 +592,11 @@ return restant
     (+30 %/overgrade), `AddRateAtk = overGrade × 300` (‰, +30 %/overgrade),
     `AddRateDef = overGrade × 10` (‰, +1 %/overgrade) — le canal addRate § 3.2.
     L'overgrade est un état SERVEUR (progression de la guilde pendant le raid) :
-    les presets du calculateur restent au grade de table (overgrade 0) ; une
-    fixture guild raid doit NOTER l'overgrade courant. (`CUICharacterToolTip.Open`
+    le calculateur ne le devine jamais — depuis le 17/08/2026 il l'EXPOSE en
+    sélection de stage (les stages > 10 du main boss sont des contextes de
+    spawn du donjon stage 10, `overGrade = stage − 10`, appliqués par `statAt`
+    jusqu'à la borne `GameConfig.GUILD_RAID_MAIN_BOSS_MAX_GRADE` = 100) ; une
+    fixture guild raid doit NOTER le stage joué. (`CUICharacterToolTip.Open`
     refait le même calcul pour l'affichage.) Les 11 autres fabriques de spawn
     (`CSpawnData` et sous-classes — world boss, guild dungeon, event challenge,
     singularity, monad, adventure…) n'appliquent AUCUN modificateur de stat

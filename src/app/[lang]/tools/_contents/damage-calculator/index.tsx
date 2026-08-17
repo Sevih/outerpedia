@@ -158,9 +158,13 @@ const GLOSS = glossariesData as unknown as {
   effectByKey: { buff: Record<string, string>; debuff: Record<string, string> };
   /** Noms localisés des éléments (niveaux de cascade du picker de cible). */
   elements: Record<string, LangDict>;
-  /** Titres officiels des familles story (« Story », « Origin Story ») —
-   *  entrées du picker de cible qui replient Normal/Hard en toggle. */
-  storyFamilies?: Record<string, LangDict>;
+  /** Titres officiels des familles de modes (« Story », « Origin Story »,
+   *  « Special Request ») — entrées du picker de cible qui replient plusieurs
+   *  slugs de mode en une seule. */
+  modeFamilies?: Record<string, LangDict>;
+  /** Titres officiels des saisons de guild raid (n° → « The Frost Legion »…)
+   *  — cartes de saison du picker de cible. */
+  guildRaidSeasons?: Record<string, LangDict>;
   /** Titres localisés des modes (repli si une famille manquait au glossaire). */
   modes?: Record<string, LangDict>;
 };
@@ -506,10 +510,21 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
   // 27/07/2026), chaque niveau porté par la DONNÉE — rien n'est parsé des
   // libellés localisés :
   //   Story            → Saison, Épisode (champs `season`/`episode`)
-  //   World Boss       → Ligue (difficulté)
-  //   Joint Challenge / Pursuit Operation → Difficulté
-  //   Special Request  → Élément du boss
-  //   Guild Raid       → Phase (main/sub, du slug de mode)
+  //   World Boss       → Rotation (nom du donjon, constant sur les 4 ligues),
+  //     puis Ligue (difficulté) — Sevih 17/08/2026
+  //   Joint Challenge  → Édition (nom du boss final — la difficulté vit déjà
+  //     dans le nom du donjon « … Normal/Hard/Very Hard ») — Sevih 17/08/2026
+  //   Pursuit Operation → Difficulté
+  //   Special Request  → raid_1/raid_2 REPLIÉS sous le titre du menu
+  //     (famille `special_request`), puis Sous-requête (titre officiel
+  //     complet — le jeu n'a pas d'« Ecology Study » nu), puis NOM du boss
+  //     final du donjon (les 5 échelles de stages — Sevih 17/08/2026)
+  //   Guild Raid       → Saison, nommée par le TITRE officiel du raid
+  //     (glossaire `guildRaidSeasons`, n° extrait de la CLÉ du groupe
+  //     SYS_TITLE_GUILD_RAID_SEASON4_MAIN — clé stable, pas un libellé), puis
+  //     les 3 boss de la saison en cartes de LIGNE (le stage se choisit dans
+  //     le panneau cible, overgrade > 10 inclus pour le main) — Sevih
+  //     17/08/2026, l'axe Main/Sub disparaît
   //   Tours            → Difficulté (Skyward) ou Élément (Elemental)
   //   Weekly Conquest / Promotion Challenge / Infiltration / Dimensional
   //   Singularity → à plat
@@ -518,6 +533,12 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
   const seasonTpl = t(k('target.season_label'));
   const episodeLbl = t(k('target.episode'));
   const floorTpl = t(k('target.floor_label'));
+  /** Titre officiel d'une famille de modes (glossaire `modeFamilies`), repli
+   *  sur le titre d'un mode membre — jamais de texte écrit main. */
+  const famLabel = (family: string, modeSlug: string): string => {
+    const rec = GLOSS.modeFamilies?.[family] ?? GLOSS.modes?.[modeSlug];
+    return (rec && (lRec(rec, lang) || rec.en)) || family;
+  };
   const elemName = (slug: string): string => {
     const e = GLOSS.elements[slug];
     return e ? lRec(e, lang) || e.en : slug;
@@ -527,22 +548,42 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     tower_hard: t('guides.difficulty.hard'),
     tower_very_hard: t('guides.difficulty.very_hard'),
   };
-  const PHASE: Record<string, string> = {
-    guild_raid_main_boss: t(k('target.phase_main')),
-    guild_raid_sub_boss: t(k('target.phase_sub')),
+  /** N° de saison du guild raid — extrait de la CLÉ STABLE du groupe
+   *  (`guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_MAIN`), jamais d'un libellé. */
+  const grSeasonOf = (ref: EncountersFile[string]): number | undefined => {
+    const m = /SEASON(\d+)_/.exec(ref.group ?? '');
+    return m ? Number(m[1]) : undefined;
   };
   const cascadeOf = (
     ref: EncountersFile[string],
-    bossElement: string,
+    posterName: string,
+    dungeonName: string,
     diff: string | undefined,
   ): string[] | undefined => {
     if (ref.season != null && ref.episode != null)
       return [seasonTpl.replace('{n}', String(ref.season)), `${episodeLbl} ${ref.episode}`];
-    if (ref.mode === 'raid_1' || ref.mode === 'raid_2') return [elemName(bossElement)];
-    if (PHASE[ref.mode]) return [PHASE[ref.mode]];
+    // Sous-requête, puis NOM du boss final du donjon (« Unidentified
+    // Chimera »… — Sevih 17/08/2026, plus parlant que l'élément) : le
+    // mi-boss de vague 1 des Ecology Study se range sous la même carte.
+    if (ref.mode === 'raid_1' || ref.mode === 'raid_2') return [modeLabel(ref, lang), posterName];
+    // NOM officiel du raid de la saison (« The Frost Legion »… — Sevih
+    // 17/08/2026), puis les boss de la saison À PLAT (main + subs mêlés).
+    // Replis en cascade si le glossaire ou la clé de groupe manquait :
+    // « Season {n} », puis la clé brute — jamais d'entrée sans chemin dans
+    // un mode qui en a, sinon elle devient inatteignable.
+    if (ref.mode === 'guild_raid_main_boss' || ref.mode === 'guild_raid_sub_boss') {
+      const n = grSeasonOf(ref);
+      const rec = n != null ? GLOSS.guildRaidSeasons?.[String(n)] : undefined;
+      const name = rec && (lRec(rec, lang) || rec.en);
+      return [name || (n != null ? seasonTpl.replace('{n}', String(n)) : (ref.group ?? ref.mode))];
+    }
+    // Rotation (le nom du donjon est CONSTANT sur les 4 ligues), puis ligue.
+    if (ref.mode === 'world_boss') return [dungeonName, ...(diff ? [diff] : [])];
+    // Édition = boss final ; la difficulté vit déjà dans le nom du donjon.
+    if (ref.mode === 'event_boss') return [posterName];
     if (ref.mode.startsWith('tower'))
       return [ref.element ? elemName(ref.element) : (TOWER_DIFF[ref.mode] ?? ref.mode)];
-    // Ligue du world boss, difficulté du joint challenge / de la poursuite.
+    // Difficulté de la poursuite.
     if (diff) return [diff];
     return undefined;
   };
@@ -586,6 +627,9 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
 
   const targets: DcTarget[] = [];
   const floorOf = new Map<string, number>();
+  /** Cible guild raid → n° de saison : l'ID de donjon ne suit pas les saisons
+   *  (70401=S4, 70801=S1), on remet les cartes en ordre après la boucle. */
+  const grOrder = new Map<string, number>();
   for (const [id, ref] of Object.entries(DUNGEONS)) {
     if (!ref.monsters?.length || EXCLUDED_MODES.has(ref.mode) || ref.retired) continue;
     const e: Encounter = { id, ref, monsters: ref.monsters };
@@ -595,6 +639,17 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     // visuel — demande Sevih 06/08/2026) ; ailleurs, les boss seuls comme
     // avant (le visuel propre de ces modes viendra plus tard).
     const fam = storyFamilyOf(ref.mode);
+    // Boss FINAL du donjon (vague la plus haute) — l'« affiche » qui nomme la
+    // carte de niveau 2 des Special Request. Même logique que `posterOf` du
+    // browser story.
+    let posterMon: (typeof e.monsters)[number] | undefined;
+    for (const m of e.monsters)
+      if (m.role === 'boss' && (!posterMon || (m.wave ?? 0) >= (posterMon.wave ?? 0)))
+        posterMon = m;
+    const posterMonster = posterMon ? getMonster(posterMon.id) : undefined;
+    const posterName = posterMonster
+      ? lRec(posterMonster.name, lang) || posterMonster.name.en
+      : dungeonName;
     const seenIds = new Set<string>();
     for (const mon of fam ? e.monsters : e.monsters.filter((m) => m.role === 'boss')) {
       // Un même monstre peut réapparaître d'une vague à l'autre (ou à un autre
@@ -604,7 +659,22 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       seenIds.add(mon.id);
       const monster = getMonster(mon.id);
       if (!monster) continue;
-      const spawns = encounterSpawnContexts(e, mon, lang).map((s, i) => {
+      // Guild raid : chaque stage est un DONJON (et un monstre) distinct — les
+      // entrées d'une même ligne (`ref.group`) sont regroupées par l'UI en UNE
+      // carte avec un sélecteur de stage (Sevih 17/08/2026, comme la
+      // Singularité). Le dernier stage du main boss porte en plus les stages
+      // d'OVERGRADE (contextes de spawn supplémentaires, borne du jeu = grade
+      // 100) — d'où `overgrade: true` ici ET dans `resolvePresetTarget`.
+      const isGrBoss = ref.mode === 'guild_raid_main_boss' || ref.mode === 'guild_raid_sub_boss';
+      const grStage = isGrBoss
+        ? Number(/^stage_(\d+)$/.exec(ref.difficulty?.key ?? '')?.[1] ?? 0)
+        : 0;
+      const spawnCtxs = encounterSpawnContexts(e, mon, lang, { overgrade: true });
+      // Échelle par RANGS (world boss, Singularité… — paliers de dégâts
+      // cumulés) vs par STAGES : le libellé du sélecteur du panneau cible
+      // suit (Sevih 17/08/2026, « rank » quand ce n'est pas un stage).
+      const ranked = spawnCtxs.some((s) => s.rank);
+      const spawns = spawnCtxs.map((s, i) => {
         // Stats EFFECTIVES au spawn — les défensives qui pèsent sur les dégâts
         // reçus : HP, DEF, DMG RED %, CDMG RED % (décision Sevih 27/07/2026).
         // Le calcul (`statAt` : niveau + adv + bossHp) et le mapping vivent
@@ -614,16 +684,21 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         // stats effectives, l'afficher en plus troublait (décision Sevih
         // 27/07/2026 — « le reste on s'en fiche »).
         // Payload : label vide et stats à 0 sont OMIS (élagage Sevih 27/07/2026).
-        const label =
-          s.stageLabel ??
-          (s.rank ? `Rank ${s.rank}` : s.stage ? `#${s.stage}` : i ? `#${i + 1}` : '');
+        // Guild raid : le spawn est un STAGE nommé (« Stage 14 » au-delà du
+        // templeté via `s.stage` des contextes d'overgrade).
+        const label = isGrBoss
+          ? t('guides.difficulty.stage', { n: String(s.stage ?? grStage) })
+          : (s.stageLabel ??
+            (s.rank ? `Rank ${s.rank}` : s.stage ? `#${s.stage}` : i ? `#${i + 1}` : ''));
         const stats: DcSpawn['stats'] = presetSpawnStats(monster, s);
         return { ...(label ? { label } : {}), level: s.level, stats };
       });
       if (!spawns.length) continue;
-      const path = cascadeOf(ref, monster.element, diff);
+      const path = cascadeOf(ref, posterName, dungeonName, diff);
       const isFloor = ref.mode === 'irregular_infiltrate' && ref.floor != null;
       if (isFloor) floorOf.set(`${id}:${mon.id}`, ref.floor as number);
+      if (ref.mode === 'guild_raid_main_boss' || ref.mode === 'guild_raid_sub_boss')
+        grOrder.set(`${id}:${mon.id}`, grSeasonOf(ref) ?? Number.MAX_SAFE_INTEGER);
       const passives = bossPassiveChips(mon.id);
       // Story : le libellé porte le NUMÉRO du stage comme en jeu
       // (« 3-16. Part of the Plan ») — il nomme la carte du picker visuel et
@@ -634,7 +709,12 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
           : dungeonName;
       targets.push({
         id: `${id}:${mon.id}`,
-        mode: modeLabel(ref, lang),
+        // Les deux Special Request partagent une seule entrée de mode (famille
+        // `special_request`) — la sous-requête devient le 1er niveau de cascade.
+        mode:
+          ref.mode === 'raid_1' || ref.mode === 'raid_2'
+            ? famLabel('special_request', ref.mode)
+            : modeLabel(ref, lang),
         // Slug BRUT : le buff de guilde (§ 16.2) se décide sur lui, jamais
         // sur le libellé localisé.
         modeSlug: ref.mode,
@@ -656,6 +736,11 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         type: monster.type,
         rarity: monster.rarity,
         spawns,
+        // Ligne de guild raid (cf. `DcTarget.line`) : l'UI replie les stages
+        // d'une même ligne en une carte, le sélecteur de stage bascule d'une
+        // entrée à l'autre.
+        ...(isGrBoss && ref.group ? { line: ref.group, stage: grStage } : {}),
+        ...(ranked ? { ranked: true } : {}),
         ...(passives.length ? { passives } : {}),
         // Navigation du picker visuel story — cf. `DcTarget.story`. Les vagues
         // viennent de TOUTES les occurrences du monstre dans le donjon (la
@@ -694,6 +779,18 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     const others = targets.filter((tg) => !floorOf.has(tg.id));
     targets.length = 0;
     targets.push(...others.slice(0, first), ...floors, ...others.slice(first));
+  }
+  // Même remise en ordre pour le guild raid : cartes de saison croissantes
+  // (l'ID de donjon donne S4, S5, S2, S3, S1). Tri STABLE — dans une saison,
+  // l'ordre id (main stages 1-10, puis les 2 subs) est préservé.
+  if (grOrder.size) {
+    const first = targets.findIndex((tg) => grOrder.has(tg.id));
+    const gr = targets
+      .filter((tg) => grOrder.has(tg.id))
+      .sort((a, b) => (grOrder.get(a.id) ?? 0) - (grOrder.get(b.id) ?? 0));
+    const others = targets.filter((tg) => !grOrder.has(tg.id));
+    targets.length = 0;
+    targets.push(...others.slice(0, first), ...gr, ...others.slice(first));
   }
 
   const statFields: DcStatField[] = SHEET_STATS.map(({ slug, percent }) => ({
@@ -755,13 +852,6 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     }))
     .filter((g) => g.nodes.length);
 
-  /** Titre officiel d'une famille story (glossaire `storyFamilies`), repli sur
-   *  le titre du mode NORMAL de la famille — jamais de texte écrit main. */
-  const famLabel = (family: string, modeSlug: string): string => {
-    const rec = GLOSS.storyFamilies?.[family] ?? GLOSS.modes?.[modeSlug];
-    return (rec && (lRec(rec, lang) || rec.en)) || family;
-  };
-
   const labels: DcLabels = {
     search: t('common.search'),
     select: t(k('common.select')),
@@ -820,10 +910,9 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       manual: t(k('target.tab.manual')),
       element: t(k('target.manual.element')),
       copyFromSelected: t(k('target.manual.copy_from_selected')),
-      all: t('common.all'),
-      mode: t(k('target.mode')),
       lv: t(k('target.lv_prefix')),
       stage: t(k('target.stage')),
+      rank: t(k('target.rank')),
       fight: t(k('target.fight')),
       bossFlag: t(k('target.boss_flag')),
       breakFlag: t(k('target.break_flag')),
@@ -832,7 +921,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       // Picker visuel story : les deux FAMILLES (le toggle Normal/Hard vit
       // dans le browser, pas dans la liste des modes), la navigation et les
       // vagues. Titres de famille = textes OFFICIELS du jeu (glossaire
-      // `storyFamilies`, curé dans mode-titles.json — jamais écrits main) ;
+      // `modeFamilies`, curé dans mode-titles.json — jamais écrits main) ;
       // repli sur le titre du mode normal de la famille si la curation
       // manquait. Difficultés : les libellés transverses des guides.
       familyStory: famLabel('story', 'normal'),
@@ -843,6 +932,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       seasonTpl,
       episode: episodeLbl,
       waveTpl: t(k('target.wave_label')),
+      monstersTpl: t(k('target.monster_count')),
     },
     toolbar: {
       reset: t(k('toolbar.reset')),

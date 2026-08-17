@@ -5,6 +5,47 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-17
+
+- **Picker de cibles du damage calculator refait en NAVIGATION PAR CARTES**
+  (série de demandes Sevih du jour). L'ancien sélecteur ouvrait sur la liste
+  plate « All » (~700 monstres) avec une cascade de selects ; désormais :
+  sommaire en cartes de modes (chacune avec son compte), chaque niveau
+  intermédiaire en cartes (même grammaire que les saisons du browser story),
+  breadcrumb cliquable sur TOUS les modes (la navigation saison/épisode du
+  browser story est remontée dans le picker, qui la contrôle), sous-titres des
+  cartes sans ce que le breadcrumb dit déjà. Hiérarchies par mode :
+  - **Special Request** : raid_1/raid_2 repliés sous le titre officiel du menu
+    (`SYS_RAID_TITLE`) via la généralisation des familles story en **familles
+    de modes** (`storyFamilies` → `modeFamilies`, curé dans mode-titles.json) ;
+    puis sous-requête (titre complet — le jeu n'a aucun « Ecology Study » nu),
+    puis nom du boss FINAL du donjon (le mi-boss de vague 1 se range dessous).
+  - **Guild Raid** : saison nommée par le TITRE officiel du raid (« The Frost
+    Legion »… — nouveau glossaire `guildRaidSeasons`, jointure
+    GuildRaidTemplet.TitleStr × grades × NameID, crochets décoratifs retirés),
+    puis les 3 boss en cartes de LIGNE.
+  - **Joint Challenge** : édition (boss final) → les 3 difficultés à plat ;
+    **World Boss** : rotation (nom de donjon) → ligue ; tours inchangées
+    (déjà conformes) ; l'axe Main/Sub et les clés `phase_*` disparaissent.
+- **Guild raid : le stage se CHOISIT dans le panneau cible (overgrade
+  compris)** — comme la Singularité. Chaque stage reste un donjon/monstre
+  distinct (ids vérifiés : 440400070→079) : le sélecteur bascule le `ti` ;
+  les stages > 10 du main boss sont des CONTEXTES DE SPAWN du donjon stage 10
+  (`si` = overgrade, drapeau `overgrade` émis par le générateur sur le dernier
+  stage templeté de chaque ligne) — `ti`/`si` restent le contrat du moteur,
+  `resolvePresetTarget` et le wrapper passent par la même fonction. Stats
+  overgrade par la formule prouvée au binaire (spec § 12.13) : PV
+  `floor(float32(1 + 0,3·og) × float32(BossMonsterHP))`, ATK/DEF par le canal
+  addRate § 3.2. La borne n'est pas inventée : GameConfig
+  `GUILD_RAID_MAIN_BOSS_MAX_GRADE` = 100 ; taux `[300, 300, 10]` et borne
+  extraits dans `damage/config.json` et GARDÉS par le test d'invariants
+  (même régime que MISSED_DAMAGE_RATE). Vérifié sur pièce : Gornolf S4
+  stage 11 = 6 265 911 × 1,3 = 8 145 684 PV exacts.
+- **Sélecteur du panneau : « Rank » quand l'échelle est un RANG** (world boss,
+  Singularité — paliers de dégâts cumulés pendant le combat), « Stage » quand
+  c'en est un (guild raid, adventure) — détecté sur la donnée (`s.rank`),
+  aucune liste de modes en dur.
+
 ## 2026-08-15
 
 - **Plus aucune référence « V2 »/« V3 » dans les commentaires** (~500

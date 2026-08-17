@@ -209,6 +209,21 @@ export interface DcTarget {
   /** Rareté (BasicStar) — compte les ÉTOILES, pas le fond (axes distincts). */
   rarity: number;
   spawns: DcSpawn[];
+  /**
+   * LIGNE de guild raid (`ref.group`) : chaque stage est un donjon (et un
+   * monstre) distinct, mais c'est LE MÊME combat — le picker replie la ligne
+   * en une carte et le panneau cible propose un sélecteur de stage qui
+   * bascule d'une entrée à l'autre (Sevih 17/08/2026, comme la Singularité).
+   * Le dernier stage du main boss porte en plus les stages d'overgrade dans
+   * ses `spawns` (jusqu'au grade 100, borne du jeu).
+   */
+  line?: string;
+  /** N° de stage templeté de l'entrée dans sa ligne (guild raid). */
+  stage?: number;
+  /** Échelle par RANGS (world boss, Singularité — paliers de dégâts cumulés
+   *  PENDANT le combat) : le sélecteur du panneau titre « Rank », pas
+   *  « Stage ». */
+  ranked?: boolean;
   /** Passifs de boss à impact sur les dégâts — chips auto, jamais togglables. */
   passives?: DcBossPassive[];
   /**
@@ -303,10 +318,10 @@ export interface DcLabels {
     manual: string;
     element: string;
     copyFromSelected: string;
-    all: string;
-    mode: string;
     lv: string;
     stage: string;
+    /** Titre du sélecteur des échelles par RANGS (world boss, Singularité). */
+    rank: string;
     fight: string;
     bossFlag: string;
     breakFlag: string;
@@ -324,6 +339,8 @@ export interface DcLabels {
     episode: string;
     /** Gabarit « Vague {n} ». */
     waveTpl: string;
+    /** Gabarit « {n} monstres » — cartes de modes de l'accueil du picker. */
+    monstersTpl: string;
   };
   toolbar: { reset: string; copy: string; copied: string };
   context: {
@@ -2358,24 +2375,58 @@ export function DamageCalculatorBrowser({
 
                   {target && (
                     <>
-                      {target.spawns.length > 1 && (
+                      {target.line ? (
+                        // LIGNE de guild raid : un seul sélecteur de stage qui
+                        // traverse les entrées de la ligne (chaque stage est
+                        // un donjon/monstre distinct → bascule de targetId) et
+                        // finit sur les stages d'OVERGRADE (spawns du dernier
+                        // stage templeté du main boss → bascule de spawnIdx).
                         <label className="block space-y-1">
                           <span className="text-content-subtle font-mono text-[9px] tracking-wide uppercase">
                             {L.target.stage}
                           </span>
                           <select
-                            value={spawnIdx}
-                            onChange={(e) => setSpawnIdx(Number(e.target.value))}
+                            value={`${target.id}|${spawnIdx}`}
+                            onChange={(e) => {
+                              const sep = e.target.value.lastIndexOf('|');
+                              setTargetId(e.target.value.slice(0, sep));
+                              setSpawnIdx(Number(e.target.value.slice(sep + 1)));
+                            }}
                             className={SELECT_CLASS}
                           >
-                            {target.spawns.map((s, i) => (
-                              <option key={i} value={i}>
-                                {s.label || vars(L.target.fight, { n: i + 1 })} · {L.target.lv}{' '}
-                                {s.level}
-                              </option>
-                            ))}
+                            {targets
+                              .filter((t) => t.line === target.line)
+                              .sort((a, b) => (a.stage ?? 0) - (b.stage ?? 0))
+                              .flatMap((t) =>
+                                t.spawns.map((s, si) => (
+                                  <option key={`${t.id}|${si}`} value={`${t.id}|${si}`}>
+                                    {s.label || vars(L.target.fight, { n: si + 1 })} · {L.target.lv}{' '}
+                                    {s.level}
+                                  </option>
+                                )),
+                              )}
                           </select>
                         </label>
+                      ) : (
+                        target.spawns.length > 1 && (
+                          <label className="block space-y-1">
+                            <span className="text-content-subtle font-mono text-[9px] tracking-wide uppercase">
+                              {target.ranked ? L.target.rank : L.target.stage}
+                            </span>
+                            <select
+                              value={spawnIdx}
+                              onChange={(e) => setSpawnIdx(Number(e.target.value))}
+                              className={SELECT_CLASS}
+                            >
+                              {target.spawns.map((s, i) => (
+                                <option key={i} value={i}>
+                                  {s.label || vars(L.target.fight, { n: i + 1 })} · {L.target.lv}{' '}
+                                  {s.level}
+                                </option>
+                              ))}
+                            </select>
+                          </label>
+                        )
                       )}
                       {spawn && (
                         // Stats défensives EFFECTIVES du spawn (adv/bossHp déjà
@@ -3679,15 +3730,23 @@ function StoryTargetBrowser({
   entries,
   labels,
   onPick,
+  season,
+  episode,
+  onSeason,
+  onEpisode,
 }: {
   /** Entrées de la famille (story OU origin), les deux difficultés mêlées. */
   entries: DcTarget[];
   labels: DcLabels;
   onPick: (id: string) => void;
+  /** Navigation saison/épisode CONTRÔLÉE par le picker : c'est son breadcrumb
+   *  qui remonte la hiérarchie, sur tous les modes (Sevih 17/08/2026). */
+  season: number | null;
+  episode: number | null;
+  onSeason: (n: number | null) => void;
+  onEpisode: (n: number | null) => void;
 }) {
   const [hard, setHard] = useState(false);
-  const [season, setSeason] = useState<number | null>(null);
-  const [episode, setEpisode] = useState<number | null>(null);
   /** Stage déplié (id de donjon) — accordéon des vagues. */
   const [openStage, setOpenStage] = useState<string | null>(null);
 
@@ -3736,63 +3795,37 @@ function StoryTargetBrowser({
     : 'bg-surface-sunken/50 hover:bg-surface-raised/80';
   const CARD = `flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm transition ${cardTint}`;
 
-  const back = (onClick: () => void, text: string) => (
-    <button
-      type="button"
-      onClick={onClick}
-      className="text-content-muted hover:text-content flex cursor-pointer items-center gap-1 text-xs transition"
-    >
-      <span aria-hidden>←</span> {text}
-    </button>
-  );
-
   return (
     <div
       className={`space-y-2 rounded-xl p-2 ring-1 transition ${
         hard ? 'bg-danger/5 ring-danger/25' : 'ring-line-subtle'
       }`}
     >
-      <div className="flex items-center justify-between gap-2">
-        <div className="border-line-subtle bg-surface-sunken/70 inline-flex overflow-hidden rounded-lg border text-xs">
-          <button
-            type="button"
-            onClick={() => {
-              setHard(false);
-              setOpenStage(null);
-            }}
-            className={`cursor-pointer px-3 py-1.5 font-semibold transition ${
-              hard ? 'text-content-muted hover:bg-surface-raised/60' : 'bg-accent text-accent-fg'
-            }`}
-          >
-            {labels.target.diffNormal}
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setHard(true);
-              setOpenStage(null);
-            }}
-            className={`cursor-pointer px-3 py-1.5 font-semibold transition ${
-              hard ? 'bg-danger text-on-vivid' : 'text-content-muted hover:bg-surface-raised/60'
-            }`}
-          >
-            {labels.target.diffHard}
-          </button>
-        </div>
-        {season != null &&
-          back(
-            () => {
-              if (episode != null) {
-                setEpisode(null);
-                setOpenStage(null);
-              } else {
-                setSeason(null);
-              }
-            },
-            episode != null
-              ? labels.target.seasonTpl.replace('{n}', String(season))
-              : labels.target.back,
-          )}
+      <div className="border-line-subtle bg-surface-sunken/70 inline-flex overflow-hidden rounded-lg border text-xs">
+        <button
+          type="button"
+          onClick={() => {
+            setHard(false);
+            setOpenStage(null);
+          }}
+          className={`cursor-pointer px-3 py-1.5 font-semibold transition ${
+            hard ? 'text-content-muted hover:bg-surface-raised/60' : 'bg-accent text-accent-fg'
+          }`}
+        >
+          {labels.target.diffNormal}
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setHard(true);
+            setOpenStage(null);
+          }}
+          className={`cursor-pointer px-3 py-1.5 font-semibold transition ${
+            hard ? 'bg-danger text-on-vivid' : 'text-content-muted hover:bg-surface-raised/60'
+          }`}
+        >
+          {labels.target.diffHard}
+        </button>
       </div>
 
       {season == null ? (
@@ -3802,7 +3835,7 @@ function StoryTargetBrowser({
               pool.filter((tg) => tg.story!.season === n).map((tg) => tg.story!.episode),
             );
             return (
-              <button key={n} type="button" className={CARD} onClick={() => setSeason(n)}>
+              <button key={n} type="button" className={CARD} onClick={() => onSeason(n)}>
                 <span className="min-w-0 flex-col">
                   <span className="font-semibold">
                     {labels.target.seasonTpl.replace('{n}', String(n))}
@@ -3821,7 +3854,7 @@ function StoryTargetBrowser({
             const list = inSeason.filter((tg) => tg.story!.episode === n);
             const poster = posterOf(list);
             return (
-              <button key={n} type="button" className={CARD} onClick={() => setEpisode(n)}>
+              <button key={n} type="button" className={CARD} onClick={() => onEpisode(n)}>
                 {poster && <MonsterPortrait tg={poster} className="h-12 w-12" />}
                 <span className="min-w-0 flex-col">
                   <span className="text-content-subtle block text-[10px] font-bold tracking-[0.14em] uppercase">
@@ -3907,9 +3940,16 @@ function StoryTargetBrowser({
  * 06/08/2026) : ses 4 modes se replient en 2 entrées de famille, le toggle
  * Normal/Hard vit dans le browser. Les autres modes gardent la cascade de
  * selects portée par la donnée (`path` : ligue de world boss, phase de guild
- * raid, élément…) en attendant leur propre visuel. La recherche traverse la
- * sélection courante (en famille story, elle bascule sur la liste à plat).
+ * raid, élément…), rendue en CARTES niveau par niveau — même grammaire que
+ * les saisons du browser story, plus aucun select (Sevih 17/08/2026). La
+ * recherche traverse la sélection courante (en famille story, elle bascule
+ * sur la liste à plat). À l'OUVERTURE (aucun mode, pas de recherche), pas de
+ * liste « All » : une carte par mode avec son compte de monstres — on choisit
+ * toujours un mode pour dégrossir, la liste plate intégrale ne servait jamais ;
+ * « tout » reste l'assiette de la recherche racine.
  */
+const PICKER_CARD =
+  'bg-surface-sunken/50 hover:bg-surface-raised/80 flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm transition';
 function TargetPicker({
   targets,
   modes,
@@ -3932,6 +3972,10 @@ function TargetPicker({
   const [search, setSearch] = useState('');
   const [mode, setMode] = useState('');
   const [path, setPath] = useState<string[]>([]);
+  // Navigation saison/épisode du browser story — remontée ICI pour que le
+  // breadcrumb couvre TOUS les modes (Sevih 17/08/2026).
+  const [storySeason, setStorySeason] = useState<number | null>(null);
+  const [storyEpisode, setStoryEpisode] = useState<number | null>(null);
 
   // Les 4 modes story se REPLIENT en 2 familles (le toggle Normal/Hard vit
   // dans le browser visuel) : leurs libellés de mode sortent de la liste,
@@ -3953,6 +3997,20 @@ function TargetPicker({
   ];
   const fam =
     mode === 'fam:story' ? ('story' as const) : mode === 'fam:origin' ? ('origin' as const) : null;
+  // Compte d'entrées par valeur de mode (les 4 modes story comptent dans leur
+  // famille, une LIGNE de guild raid compte pour 1) — cartes de l'accueil.
+  const countOf = new Map<string, number>();
+  {
+    const linesSeen = new Set<string>();
+    for (const tg of targets) {
+      if (tg.line) {
+        if (linesSeen.has(tg.line)) continue;
+        linesSeen.add(tg.line);
+      }
+      const key = tg.story ? `fam:${tg.story.family}` : tg.mode;
+      countOf.set(key, (countOf.get(key) ?? 0) + 1);
+    }
+  }
 
   const inMode = useMemo(
     () =>
@@ -3963,34 +4021,52 @@ function TargetPicker({
           : targets,
     [targets, mode, fam],
   );
-  // Options de chaque niveau de cascade, dépendantes des choix amont : le
-  // niveau i+1 ne se peuple qu'une fois le niveau i choisi. (Jamais en
-  // famille story : la navigation est le browser visuel.)
-  const levels: string[][] = [];
+  // Niveau de cascade COURANT (profondeur = choix déjà faits) : des CARTES,
+  // comme les saisons du browser story — plus de selects (Sevih 17/08/2026).
+  // Aucun mode ne mélange entrées avec et sans chemin (vérifié sur la donnée) :
+  // exiger un choix par niveau ne rend rien inatteignable. (Jamais en famille
+  // story : la navigation est le browser visuel.)
+  const levelOpts: { value: string; count: number }[] = [];
   if (mode && !fam) {
-    let cascade = inMode;
-    for (let i = 0; ; i++) {
-      const seen = new Set<string>();
-      const opts: string[] = [];
-      for (const tg of cascade) {
-        const v = tg.path?.[i];
-        if (v && !seen.has(v)) {
-          seen.add(v);
-          opts.push(v);
-        }
+    const seen = new Map<string, { value: string; count: number }>();
+    const linesSeen = new Set<string>();
+    for (const tg of inMode) {
+      if (!path.every((p, i) => tg.path?.[i] === p)) continue;
+      const v = tg.path?.[path.length];
+      if (!v) continue;
+      // Une ligne de guild raid = 1 carte → compte pour 1.
+      if (tg.line) {
+        if (linesSeen.has(tg.line)) continue;
+        linesSeen.add(tg.line);
       }
-      if (!opts.length) break;
-      levels.push(opts);
-      const sel = path[i];
-      if (!sel) break;
-      cascade = cascade.filter((tg) => tg.path?.[i] === sel);
+      const hit = seen.get(v);
+      if (hit) hit.count++;
+      else {
+        const opt = { value: v, count: 1 };
+        seen.set(v, opt);
+        levelOpts.push(opt);
+      }
     }
   }
   const q = search.trim().toLowerCase();
-  const pool = inMode.filter((tg) => path.every((p, i) => !p || tg.path?.[i] === p));
+  const pool = inMode.filter((tg) => path.every((p, i) => tg.path?.[i] === p));
   const filtered = q
     ? pool.filter((o) => o.label.toLowerCase().includes(q) || o.name.toLowerCase().includes(q))
     : pool;
+  // Une LIGNE de guild raid = une seule carte (la première qui matche — en
+  // recherche, celle dont le stage a matché) ; le sélecteur de stage du
+  // panneau cible fait le reste.
+  const display: DcTarget[] = [];
+  {
+    const linesSeen = new Set<string>();
+    for (const tg of filtered) {
+      if (tg.line) {
+        if (linesSeen.has(tg.line)) continue;
+        linesSeen.add(tg.line);
+      }
+      display.push(tg);
+    }
+  }
   const close = () => {
     setOpen(false);
     setSearch('');
@@ -4024,49 +4100,87 @@ function TargetPicker({
       </div>
       <Modal open={open} onClose={close} title={labels.panels.target}>
         <SearchField value={search} onChange={setSearch} placeholder={labels.search} />
-        <div className="grid gap-2 sm:grid-cols-2">
-          <label className="block space-y-1">
-            <Eyebrow>{labels.target.mode}</Eyebrow>
-            <select
-              value={mode}
-              onChange={(e) => {
-                setMode(e.target.value);
-                setPath([]);
-              }}
-              className={SELECT_CLASS}
-            >
-              <option value="">{labels.target.all}</option>
-              {modeOptions.map((m) => (
-                <option key={m.value} value={m.value}>
-                  {m.label}
-                </option>
-              ))}
-            </select>
-          </label>
-          {levels.map((opts, i) => (
-            <label key={i} className="block space-y-1 self-end">
-              <select
-                value={path[i] ?? ''}
-                onChange={(e) => {
-                  const v = e.target.value;
-                  setPath((prev) => {
-                    const next = prev.slice(0, i);
-                    if (v) next[i] = v;
-                    return next;
-                  });
-                }}
-                className={SELECT_CLASS}
-              >
-                <option value="">{labels.target.all}</option>
-                {opts.map((g) => (
-                  <option key={g} value={g}>
-                    {g}
-                  </option>
-                ))}
-              </select>
-            </label>
-          ))}
-        </div>
+        {/* BREADCRUMB (Sevih 17/08/2026) : « ← Mode / Niveau 1 / … » sur TOUS
+            les modes — en famille story les segments sont la saison et
+            l'épisode (leur navigation vit ici, le browser est contrôlé). La
+            flèche remonte d'un niveau (puis au sommaire des modes), chaque
+            segment ANCÊTRE est cliquable et saute à son niveau, le segment
+            courant est inerte. */}
+        {mode &&
+          (() => {
+            const crumbs: { label: string; jump: () => void }[] = [
+              {
+                label: modeOptions.find((o) => o.value === mode)?.label ?? mode,
+                jump: fam
+                  ? () => {
+                      setStorySeason(null);
+                      setStoryEpisode(null);
+                    }
+                  : () => setPath([]),
+              },
+              ...(fam
+                ? [
+                    ...(storySeason != null
+                      ? [
+                          {
+                            label: labels.target.seasonTpl.replace('{n}', String(storySeason)),
+                            jump: () => setStoryEpisode(null),
+                          },
+                        ]
+                      : []),
+                    ...(storyEpisode != null
+                      ? [
+                          {
+                            label: `${labels.target.episode} ${storyEpisode}`,
+                            jump: () => {},
+                          },
+                        ]
+                      : []),
+                  ]
+                : path.map((p, i) => ({ label: p, jump: () => setPath(path.slice(0, i + 1)) }))),
+            ];
+            const up = () => {
+              if (fam) {
+                if (storyEpisode != null) setStoryEpisode(null);
+                else if (storySeason != null) setStorySeason(null);
+                else setMode('');
+              } else if (path.length) {
+                setPath(path.slice(0, -1));
+              } else {
+                setMode('');
+              }
+            };
+            return (
+              <div className="text-content-muted flex flex-wrap items-center gap-1 text-xs">
+                <button
+                  type="button"
+                  onClick={up}
+                  className="hover:text-content cursor-pointer transition"
+                  title={labels.target.back}
+                >
+                  <span aria-hidden>←</span>
+                </button>
+                {crumbs.map((c, i) =>
+                  i < crumbs.length - 1 ? (
+                    <span key={i} className="flex items-center gap-1">
+                      <button
+                        type="button"
+                        onClick={c.jump}
+                        className="hover:text-content cursor-pointer transition"
+                      >
+                        {c.label}
+                      </button>
+                      <span aria-hidden>/</span>
+                    </span>
+                  ) : (
+                    <span key={i} className="text-content font-semibold">
+                      {c.label}
+                    </span>
+                  ),
+                )}
+              </div>
+            );
+          })()}
         {fam && !q ? (
           <StoryTargetBrowser
             entries={inMode}
@@ -4075,10 +4189,55 @@ function TargetPicker({
               onPick(id);
               close();
             }}
+            season={storySeason}
+            episode={storyEpisode}
+            onSeason={setStorySeason}
+            onEpisode={setStoryEpisode}
           />
-        ) : filtered.length ? (
+        ) : !mode && !q ? (
+          <div className="grid gap-1.5 sm:grid-cols-2">
+            {modeOptions.map((m) => (
+              <button
+                key={m.value}
+                type="button"
+                className={PICKER_CARD}
+                onClick={() => {
+                  setMode(m.value);
+                  setPath([]);
+                  setStorySeason(null);
+                  setStoryEpisode(null);
+                }}
+              >
+                <span className="min-w-0 flex-col">
+                  <span className="font-semibold">{m.label}</span>
+                  <span className="text-content-subtle block text-[10px]">
+                    {labels.target.monstersTpl.replace('{n}', String(countOf.get(m.value) ?? 0))}
+                  </span>
+                </span>
+              </button>
+            ))}
+          </div>
+        ) : levelOpts.length && !q ? (
+          <div className="grid gap-1.5 sm:grid-cols-2">
+            {levelOpts.map((o) => (
+              <button
+                key={o.value}
+                type="button"
+                className={PICKER_CARD}
+                onClick={() => setPath([...path, o.value])}
+              >
+                <span className="min-w-0 flex-col">
+                  <span className="font-semibold">{o.value}</span>
+                  <span className="text-content-subtle block text-[10px]">
+                    {labels.target.monstersTpl.replace('{n}', String(o.count))}
+                  </span>
+                </span>
+              </button>
+            ))}
+          </div>
+        ) : display.length ? (
           <div className="grid gap-0.5 sm:grid-cols-2">
-            {filtered.map((o) => (
+            {display.map((o) => (
               <button
                 key={o.id}
                 type="button"
@@ -4091,8 +4250,19 @@ function TargetPicker({
                 <MonsterPortrait tg={o} className="h-10 w-10" />
                 <span className="min-w-0 flex-col">
                   <span className="truncate font-semibold">{o.name}</span>
+                  {/* Sous-titre SANS ce que le breadcrumb dit déjà (mode et
+                      niveaux traversés) : il ne reste que les niveaux non
+                      choisis (recherche) et le stage (Sevih 17/08/2026) — une
+                      LIGNE repliée n'affiche pas le stage de sa carte témoin,
+                      le sélecteur du panneau le choisit. */}
                   <span className="text-content-subtle block truncate text-[10px]">
-                    {[mode ? null : o.mode, ...(o.path ?? []), o.label].filter(Boolean).join(' · ')}
+                    {[
+                      mode ? null : o.mode,
+                      ...(o.path ?? []).slice(path.length),
+                      o.line ? null : o.label,
+                    ]
+                      .filter(Boolean)
+                      .join(' · ')}
                   </span>
                 </span>
               </button>

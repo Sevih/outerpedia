@@ -331,6 +331,15 @@ export interface DungeonRef {
   /** Paliers de rencontre des modes à progression (cf. `DungeonRank`). */
   ranks?: DungeonRank[];
   /**
+   * Guild raid (main boss) : DERNIER stage templeté de sa ligne — le combat
+   * continue au-delà en OVERGRADE (mêmes donjon et monstre, stats scalées
+   * par `GUILD_RAID_AFTER_10_BOSS_STAT` jusqu'au grade
+   * `GUILD_RAID_MAIN_BOSS_MAX_GRADE` = 100). Les contextes de spawn de ce
+   * donjon se prolongent d'un contexte par overgrade (encounters.ts côté
+   * site, spec damage § 12.13).
+   */
+  overgrade?: boolean;
+  /**
    * ARCHIVE : le jeu a retiré ce donjon de ses tables, l'entrée est RETENUE
    * par la promotion (posé par `promote`, jamais par le build — cf.
    * `applyRetention`). Les invariants « vivants » (spawn inverse) ne
@@ -366,12 +375,20 @@ export interface EncountersData {
   /** Libellés localisés des modes de contenu (slug → titre), quand connus. */
   modes: Record<string, LangDict>;
   /**
-   * Titres officiels des FAMILLES story (« Story », « Origin Story ») — pour
-   * les sélecteurs qui replient les 4 slugs `STORY_MODES` en 2 entrées
-   * (Normal/Hard devient un toggle). Clés TextSystem curées
-   * (mode-titles.json § families), jamais de texte main.
+   * Titres officiels des FAMILLES de modes — pour les sélecteurs qui replient
+   * plusieurs slugs en une entrée : les 4 slugs `STORY_MODES` en « Story » /
+   * « Origin Story » (Normal/Hard devient un toggle), raid_1/raid_2 en
+   * « Special Request ». Clés TextSystem curées (mode-titles.json § families),
+   * jamais de texte main.
    */
-  storyFamilies: Record<string, LangDict>;
+  modeFamilies: Record<string, LangDict>;
+  /**
+   * Titre OFFICIEL de chaque saison de guild raid (n° de saison →
+   * `GuildRaidTemplet.TitleStr` : « The Frost Legion »…), joint via
+   * GuildRaidGradeTemplet → NameID du donjon (`…_SEASON4_MAIN`). Les
+   * crochets décoratifs ([…] / 【…】) sont retirés.
+   */
+  guildRaidSeasons: Record<string, LangDict>;
   /** Passifs de palier résolus (`OptionID` → buff) — rejoint `glossaries`. */
   rankOptions: Record<string, RankOption>;
   /**
@@ -622,7 +639,8 @@ interface ModeTitleContext {
   contentTitles: ContentTitle[];
   /** Slug de mode → clé TextSystem curée (décision humaine prioritaire). */
   curatedTitles: Record<string, string>;
-  /** Famille story (`story`/`origin`) → clé TextSystem du titre officiel. */
+  /** Famille de modes (`story`/`origin`/`special_request`) → clé TextSystem
+   *  du titre officiel. */
   familyTitles: Record<string, string>;
   /** Modes ignorés à l'extraction (décision humaine, `_docIgnore`). */
   ignoredModes: Set<string>;
@@ -669,7 +687,8 @@ function titleContext(): ModeTitleContext {
   // (rien ne relie DM_MONAD_BATTLE_2 à « Dimensional Singularity » dans les
   // tables). Les textes restent ceux du jeu (clé, jamais de texte main).
   const curatedTitles: Record<string, string> = {};
-  // Titres des FAMILLES story (« Story », « Origin Story ») — cf. _docFamilies.
+  // Titres des FAMILLES de modes (« Story », « Special Request »…) —
+  // cf. _docFamilies.
   const familyTitles: Record<string, string> = {};
   // Modes IGNORÉS (décision humaine, cf. _docIgnore du fichier curé) : leurs
   // donjons/spawns ne sortent pas — ni rencontres, ni mode dans la sidebar.
@@ -819,6 +838,38 @@ export function buildEncounters(): EncountersData {
   const grCurrent = new Set<string>();
   for (const e of grLatest.values()) for (const d of e.dungeons) grCurrent.add(d);
 
+  // Titre OFFICIEL de chaque saison de guild raid (« The Frost Legion »…) :
+  // `GuildRaidTemplet.TitleStr`, rattaché au n° de saison via les grades
+  // (GuildRaidID + BossDungeonID) et le NameID du donjon (`…_SEASONn_…`).
+  // Certains titres portent des crochets décoratifs ([…] en kr, 【…】 en jp) :
+  // retirés, même traitement que les titres ContentLock. Deux titres pour une
+  // même saison = signalé, le premier (raid le plus ancien) fait foi.
+  const grTitleStr = new Map<string, string>();
+  for (const r of loadTable('GuildRaidTemplet'))
+    if (r.ID && r.TitleStr) grTitleStr.set(r.ID, r.TitleStr);
+  const stripDecoBrackets = (d: LangDict): LangDict => {
+    const out = { ...d };
+    for (const l of Object.keys(out) as Array<keyof LangDict>) {
+      const m = /^[[【](.+)[\]】]$/.exec(out[l] ?? '');
+      if (m) out[l] = m[1];
+    }
+    return out;
+  };
+  const guildRaidSeasons: Record<string, LangDict> = {};
+  for (const r of loadTable('GuildRaidGradeTemplet')) {
+    const key = grTitleStr.get(r.GuildRaidID ?? '');
+    const season = /SEASON(\d+)_/.exec(grNameId.get(r.BossDungeonID ?? '') ?? '')?.[1];
+    if (!key || !season) continue;
+    const title = stripDecoBrackets(resolveText(tsys, key));
+    if (!title.en) continue;
+    const cur = guildRaidSeasons[season];
+    if (!cur) guildRaidSeasons[season] = title;
+    else if (cur.en !== title.en)
+      console.warn(
+        `⚠ guild raid : saison ${season} a deux titres (« ${cur.en} » / « ${title.en} ») — le premier fait foi.`,
+      );
+  }
+
   const modes: Record<string, LangDict> = {};
   const dungeons: Record<string, DungeonRef> = {};
   const monsters: Record<string, MonsterEncounters> = {};
@@ -834,12 +885,13 @@ export function buildEncounters(): EncountersData {
     difficultyNames,
     chaseDifficulties,
   } = titleContext();
-  // Titres des familles story (curés — « Story », « Origin Story ») : résolus
-  // une fois, émis au glossaire pour les sélecteurs qui replient Normal/Hard.
-  const storyFamilies: Record<string, LangDict> = {};
+  // Titres des familles de modes (curés — « Story », « Origin Story »,
+  // « Special Request ») : résolus une fois, émis au glossaire pour les
+  // sélecteurs qui replient plusieurs slugs en une entrée.
+  const modeFamilies: Record<string, LangDict> = {};
   for (const [family, key] of Object.entries(familyTitles)) {
     const title = resolveText(tsys, key);
-    if (title.en) storyFamilies[family] = title;
+    if (title.en) modeFamilies[family] = title;
   }
   /** Difficulté structurée : libellé générique curé (absent = pas de name). */
   const difficultyOf = (key: string, order: number): DungeonDifficulty => {
@@ -1183,6 +1235,19 @@ export function buildEncounters(): EncountersData {
     // Geas offerts par ce donjon (phase 2 — réfs vers le glossaire `geas`).
     const geasIds = splitCsv(r.BossGeisReward ?? '');
     if (geasIds.length) d.geasRewards = geasIds;
+  }
+  // 2quater) Le MAIN boss continue AU-DELÀ de son dernier stage templeté
+  // (overgrade — GameConfig GUILD_RAID_MAIN_BOSS_MAX_GRADE = 100) : le donjon
+  // du dernier stage de chaque ligne porte le drapeau, les contextes de spawn
+  // s'y prolongent côté site (cf. doc du champ `overgrade`).
+  {
+    const lastOfLine = new Map<string, DungeonRef>();
+    for (const d of Object.values(dungeons)) {
+      if (d.mode !== 'guild_raid_main_boss' || !d.group || !d.difficulty) continue;
+      const cur = lastOfLine.get(d.group);
+      if (!cur || d.difficulty.order > (cur.difficulty?.order ?? 0)) lastOfLine.set(d.group, d);
+    }
+    for (const d of lastOfLine.values()) d.overgrade = true;
   }
 
   // 2bis) Poursuite (irregular_chase) : la ligne porte les PV réels du boss,
@@ -1538,7 +1603,8 @@ export function buildEncounters(): EncountersData {
   cache = {
     data: {
       modes,
-      storyFamilies,
+      modeFamilies,
+      guildRaidSeasons,
       rankOptions,
       bossQuirkMods,
       rewardTables,

@@ -532,12 +532,12 @@ const en = {
   'tools.damage-calculator.common.change': 'change',
   // Target picker labels
   'tools.damage-calculator.target.category': 'Category',
-  'tools.damage-calculator.target.mode': 'Mode',
   'tools.damage-calculator.target.season': 'Season',
   'tools.damage-calculator.target.season_label': 'Season {n}',
   'tools.damage-calculator.target.episode': 'Episode',
   'tools.damage-calculator.target.dungeon': 'Dungeon',
   'tools.damage-calculator.target.stage': 'Stage',
+  'tools.damage-calculator.target.rank': 'Rank',
   'tools.damage-calculator.target.fight': 'Fight {n}',
   'tools.damage-calculator.target.boss_flag': 'Boss',
   'tools.damage-calculator.target.break_flag': 'Target broken (weakness gauge destroyed)',
@@ -546,8 +546,6 @@ const en = {
   'tools.damage-calculator.toolbar.reset': 'Reset scenario',
   'tools.damage-calculator.toolbar.copy_link': 'Copy link',
   'tools.damage-calculator.toolbar.copied': 'Copied!',
-  'tools.damage-calculator.target.phase_main': 'Main Boss',
-  'tools.damage-calculator.target.phase_sub': 'Sub Boss',
   'tools.damage-calculator.target.floor_label': 'Floor {n}',
   'tools.damage-calculator.target.boss_mechanics': 'Boss mechanics',
   'tools.damage-calculator.target.boss_enrage_badge': 'Enrage',
@@ -556,6 +554,7 @@ const en = {
   // Story visual picker (family titles come from the game glossary)
   'tools.damage-calculator.target.back': 'Back',
   'tools.damage-calculator.target.wave_label': 'Wave {n}',
+  'tools.damage-calculator.target.monster_count': '{n} monsters',
   // Target picker — mode tabs + manual form
   'tools.damage-calculator.target.tab.cascade': 'Preset',
   'tools.damage-calculator.target.tab.manual': 'Manual',

@@ -279,12 +279,19 @@ export interface Glossaries {
    */
   modes?: Record<string, LangDict>;
   /**
-   * Titres officiels des FAMILLES story (« Story », « Origin Story » — clé
-   * `story`/`origin`) : pour les sélecteurs qui replient les 4 slugs story en
-   * 2 entrées, Normal/Hard en toggle. Curé dans mode-titles.json § families.
+   * Titres officiels des FAMILLES de modes (clé `story`/`origin`/
+   * `special_request`) : pour les sélecteurs qui replient plusieurs slugs en
+   * une entrée — les 4 slugs story en 2 (Normal/Hard en toggle), raid_1/raid_2
+   * sous « Special Request ». Curé dans mode-titles.json § families.
    * Optionnel comme `modes`.
    */
-  storyFamilies?: Record<string, LangDict>;
+  modeFamilies?: Record<string, LangDict>;
+  /**
+   * Titre officiel de chaque SAISON de guild raid (n° → « The Frost
+   * Legion »…, `GuildRaidTemplet.TitleStr`) — cartes de saison du picker de
+   * cible. Optionnel comme `modes`.
+   */
+  guildRaidSeasons?: Record<string, LangDict>;
   /**
    * Passifs de PALIER résolus (`DungeonRank.options` → buff : nom localisé,
    * réf tooltip, stat/valeur) — cf. generators/encounters. Optionnel comme

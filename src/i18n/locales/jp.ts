@@ -521,12 +521,12 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.common.change': '変更',
   // Target picker labels
   'tools.damage-calculator.target.category': 'カテゴリ',
-  'tools.damage-calculator.target.mode': 'モード',
   'tools.damage-calculator.target.season': 'シーズン',
   'tools.damage-calculator.target.season_label': 'シーズン {n}',
   'tools.damage-calculator.target.episode': 'エピソード',
   'tools.damage-calculator.target.dungeon': 'ダンジョン',
   'tools.damage-calculator.target.stage': 'ステージ',
+  'tools.damage-calculator.target.rank': 'ランク',
   'tools.damage-calculator.target.fight': '戦闘 {n}',
   'tools.damage-calculator.target.boss_flag': 'ボス',
   'tools.damage-calculator.target.break_flag': '対象がブレイク状態（弱点ゲージ破壊）',
@@ -535,8 +535,6 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.toolbar.reset': 'シナリオをリセット',
   'tools.damage-calculator.toolbar.copy_link': 'リンクをコピー',
   'tools.damage-calculator.toolbar.copied': 'コピーしました',
-  'tools.damage-calculator.target.phase_main': 'メインボス',
-  'tools.damage-calculator.target.phase_sub': 'サブボス',
   'tools.damage-calculator.target.floor_label': '{n}階',
   'tools.damage-calculator.target.boss_mechanics': 'ボスメカニクス',
   'tools.damage-calculator.target.boss_enrage_badge': '激怒',
@@ -545,6 +543,7 @@ const jp: Record<TranslationKey, string> = {
   // ストーリーのビジュアルピッカー（ファミリー名はゲームの用語集から）
   'tools.damage-calculator.target.back': '戻る',
   'tools.damage-calculator.target.wave_label': 'ウェーブ {n}',
+  'tools.damage-calculator.target.monster_count': 'モンスター{n}体',
   // Target picker — mode tabs + manual form
   'tools.damage-calculator.target.tab.cascade': 'プリセット',
   'tools.damage-calculator.target.tab.manual': 'マニュアル',

@@ -27,7 +27,11 @@ import type { TFunction, TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { getMonster, monsterIconSrc } from '@/lib/data/monsters';
-import { expandRankContexts, type SpawnContext } from '@/lib/monster-stats';
+import {
+  GUILD_RAID_MAIN_BOSS_MAX_GRADE,
+  expandRankContexts,
+  type SpawnContext,
+} from '@/lib/monster-stats';
 
 const DUNGEONS = encountersData as unknown as EncountersFile;
 const G = glossariesData as unknown as Glossaries;
@@ -444,9 +448,22 @@ export function encounterSpawnContexts(
   e: Encounter,
   m: DungeonMonster,
   lang: Lang,
+  opts?: {
+    /**
+     * Prolonge le dernier stage templeté du main boss de guild raid (drapeau
+     * `overgrade` du donjon) d'UN contexte PAR grade jusqu'à la borne du jeu
+     * (GameConfig `GUILD_RAID_MAIN_BOSS_MAX_GRADE` = 100) — mêmes
+     * donjon/monstre, stats scalées par `statAt` (canal addRate + PV float32,
+     * spec damage § 12.13). Demandé par le CALCULATEUR (wrapper + resolver
+     * `resolvePresetTarget`, où l'index de spawn `si` reste le contrat :
+     * stage = dernier + si) ; les cartes admin/monstres restent aux stages
+     * templetés.
+     */
+    overgrade?: boolean;
+  },
 ): SpawnContext[] {
   const d = e.ref;
-  return expandRankContexts(
+  const contexts = expandRankContexts(
     {
       level: m.level,
       label: `${modeLabel(d, lang)} · ${lRec(d.name, lang) || d.name.en}`,
@@ -459,4 +476,14 @@ export function encounterSpawnContexts(
     },
     ranksOfMonster(e, m),
   );
+  if (opts?.overgrade && d.overgrade && m.role === 'boss' && contexts.length === 1) {
+    const lastStage = Number(/^stage_(\d+)$/.exec(d.difficulty?.key ?? '')?.[1] ?? 0);
+    if (lastStage > 0) {
+      const base = contexts[0];
+      for (let og = 1; og <= GUILD_RAID_MAIN_BOSS_MAX_GRADE - lastStage; og++) {
+        contexts.push({ ...base, overGrade: og, stage: lastStage + og });
+      }
+    }
+  }
+  return contexts;
 }

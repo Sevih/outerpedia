@@ -70,7 +70,9 @@ export function resolvePresetTarget(
   if (!entry || !monster) return undefined;
   const e: Encounter = { id: encounterId, ref, monsters: ref.monsters };
   // La langue ne teinte que les LIBELLÉS des contextes — jamais les stats.
-  const contexts = encounterSpawnContexts(e, entry, 'en');
+  // `overgrade` : les stages au-delà du dernier templeté du main boss de
+  // guild raid sont des contextes de spawn du MÊME donjon (si = index).
+  const contexts = encounterSpawnContexts(e, entry, 'en', { overgrade: true });
   const ctx = contexts[Math.min(Math.max(spawnIdx, 0), contexts.length - 1)];
   if (!ctx) return undefined;
   return {

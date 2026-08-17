@@ -10,10 +10,11 @@
     "adventure_mission": "SYS_ADVENTURE_LICENSE_MISSION",
     "adventure_challenge": "SYS_ADVENTURE_LICENSE_RANK_CHALLENGE"
   },
-  "_docFamilies": "FAMILLES story (regroupement des 4 slugs par contenu, pour les sélecteurs qui replient Normal/Hard) : clé stable → clé TextSystem du titre officiel (« Story », « Origin Story »). Émises dans glossaries.storyFamilies — jamais de texte écrit main.",
+  "_docFamilies": "FAMILLES de modes (regroupement de plusieurs slugs sous une même entrée de sélecteur) : clé stable → clé TextSystem du titre officiel — jamais de texte écrit main. `story`/`origin` replient Normal/Hard (« Story », « Origin Story ») ; `special_request` replie raid_1/raid_2 sous le titre du menu (« Special Request », SYS_RAID_TITLE — le jeu n'a AUCUNE clé « Ecology Study »/« Identification » nue, les sous-requêtes gardent leur titre complet). Émises dans glossaries.modeFamilies.",
   "families": {
     "story": "SYS_STORY_MAIN",
-    "origin": "SYS_ORIGIN_STORY"
+    "origin": "SYS_ORIGIN_STORY",
+    "special_request": "SYS_RAID_TITLE"
   },
   "_docDifficulties": "Libellés GÉNÉRIQUES de difficulté (slug stable → clé TextSystem) pour DungeonRef.difficulty.name — le jeu n'a pas de jeu de clés unifié : SYS_DIFFICULTY_* couvre normal/hard, la clé tour couvre very_hard (texte « Very Hard » nu). Le slug reste la référence stable côté site (le français vient du site, jamais du jeu).",
   "difficulties": {
