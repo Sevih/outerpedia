@@ -65,6 +65,40 @@
   pas encore en ligne. L'ordre était juste ; c'est le départ qui manquait d'un
   garde-fou.
 
+- **Le repli 4-comics se réaligne tout seul sur ce qui est en ligne**
+  ([datagen/assets/sync-comics-seed.ts](../datagen/assets/sync-comics-seed.ts),
+  dernier maillon de `pnpm images`). Symptôme : 4 BD par langue déposées,
+  `pnpm images` passé sans erreur, invisibles sur `/4-comics` en LOCAL — et
+  pourtant déjà EN LIGNE. La page lit le manifeste R2 à la requête, mais en dev
+  `NEXT_PUBLIC_IMG_BASE` est vide (il n'est défini nulle part), donc
+  `loadComics` saute le fetch et sert `data/generated/comics.json`. Ce repli
+  était à 27 BD contre 31 en ligne : personne ne l'écrivait, `buildComics`
+  n'étant délibérément pas câblé dans `build.ts`. La dérive était donc STRUCTURELLE,
+  et le docblock du générateur annonçait `pnpm datagen:build` comme writer
+  canonique — faux depuis toujours, contredit par `promote.ts`, et c'est le
+  premier fichier qu'on ouvre. Corrigé aussi : un commentaire qui ment coûte
+  plus cher que pas de commentaire (il envoyait rejouer un `datagen:build`
+  complet, sur une machine en retard sur la donnée jeu de surcroît).
+  Le sync ne recopie PAS le pool local : il copie le manifeste du staging une
+  fois son sha1 CONFIRMÉ dans `pushed.json`. Invariant « le repli est ce qui est
+  en ligne » — un push interrompu laisse le repli en retard plutôt que d'annoncer
+  des BD que R2 ne sert pas. Le garde-fou « pool partiel » de `collect-comics`
+  reste intact en amont (pas de manifeste → rien à pousser → rien à synchroniser).
+  `pnpm commit` lançant `pnpm images` avant son `git add -A`, le repli réaligné
+  part dans le même commit que les BD.
+
+- **Audit : wallpapers et BGM n'ont PAS ce piège** (résultat négatif, consigné
+  pour ne pas le refaire). `wallpapers.json` et `bgm_mapping.json` sont écrits
+  par `build.ts` (`writeJson`, lignes 280 et 284) et passent par `promote` :
+  leur docblock « écriture canonique `datagen:build` » dit vrai, et
+  `collect-wallpapers`/`collect-audio` n'écrivent aucun manifeste runtime — une
+  seule source, pas de repli à tenir. Comics était le seul cas hors-pipeline
+  (`isPureCurated`). Nuance restante, de nature différente : `buildWallpapers`
+  lit `.editorial/wallpapers/Outerpedia` (gitignoré) SANS le garde-fou « pool
+  partiel » de `collect-comics` — une machine au pool amputé produirait un
+  `wallpapers.json` tronqué. Non traité : contrairement au manifeste R2 de
+  comics, ce fichier passe par la revue de `promote`, où la troncature se voit.
+
 ## 2026-08-14
 
 - **Les 125 persos ont une date de sortie** (brief

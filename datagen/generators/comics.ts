@@ -13,8 +13,20 @@
  * conversion webp (`assets:collect-comics`), et un stem apparaît dès l'ajout de
  * la source. webp et original partagent le stem → même clé côté page.
  *
- * Écriture CANONIQUE : `pnpm datagen:build` (buildComics via writeJson +
- * promote). L'exécution directe IMPRIME pour revue.
+ * AUCUN writer dans `build.ts` — contrairement au reste de `data/generated/`.
+ * `buildComics` n'y est délibérément PAS câblé (cf. `promote.ts`,
+ * `isPureCurated`) : la liste SERVIE est le manifeste écrit par
+ * `assets:collect-comics` dans le staging, poussé sur R2 par `pnpm images` et
+ * lu à la requête, si bien qu'une BD ajoutée apparaît sans redéploiement.
+ *
+ * `data/generated/comics.json` n'est donc QUE le repli committé — servi quand
+ * R2 est injoignable, et SEULE source en dev (`NEXT_PUBLIC_IMG_BASE` y est
+ * vide, cf. tools/_contents/4-comics). Il est réaligné sur ce qui est en ligne
+ * par `assets:sync-comics-seed`, dernier maillon de `pnpm images`. Ce docblock
+ * a annoncé `datagen:build` jusqu'au 2026-08-15 : c'était faux, et le repli
+ * avait dérivé à 27 BD contre 31 en ligne — invisible en prod, trompeur en dev.
+ *
+ * L'exécution directe IMPRIME pour revue : elle n'écrit rien.
  */
 import { existsSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
