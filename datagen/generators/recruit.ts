@@ -9,10 +9,13 @@
  *                 RecruitGroupTemplet (CUSTOM) → RecruitGradeRecipeTemplet
  *                 (CHARACTER) → RecruitRecipeTemplet.CharacterID.
  *   kinds       — pour chaque TYPE de bannière documenté (custom/pickup/
- *                 premium/limited), le groupe le plus récent fait référence :
+ *                 premium/limited/equipment), le groupe le plus récent fait
+ *                 référence :
  *                 taux par palier (RecruitGradeRecipeTemplet — des POIDS, la
  *                 somme fait 100/1000/10000 selon le groupe → normalisés en %,
- *                 libellés TextSystem), prix éther (Price_1/Price_10), tickets
+ *                 libellés TextSystem ; les paliers « sac de butin » portent
+ *                 en plus leur CONTENU, RecruitItemRecipeTemplet), prix éther
+ *                 (Price_1/Price_10), tickets
  *                 (RTT_ITEM → id d'item ; RTT_ASSET → clé SYS_ASSET_* via la
  *                 même convention AT_↔SYS_ASSET que buildAssetTypes), pulls
  *                 gratuits, et coût mileage (ProductTemplet PC_MILEAGE — mode
@@ -36,6 +39,18 @@ import { readCuratedJson } from '../lib/json';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { fileStamp, loadTable, num, type Row } from '../lib/tables';
 
+/**
+ * Un LOT d'un palier (Dimensional Supply) : ce que le palier peut rendre,
+ * avec son taux ABSOLU (part du palier, pas part du lot dans le palier).
+ */
+export interface RecruitDrop {
+  itemId: string;
+  /** Quantité rendue (Reload Cartridge x20 → 20). */
+  count: number;
+  /** Taux absolu en % (4 décimales — les lots descendent sous le centième). */
+  percent: number;
+}
+
 /** Une ligne de taux d'une bannière (déjà normalisée en pourcents). */
 export interface RecruitRate {
   /** Clé TextSystem du palier (`SYS_RECRUIT_RATEINFO_TITLE_05` = pickup…) —
@@ -47,10 +62,21 @@ export interface RecruitRate {
   percent: number;
   /** Taux sur le slot garanti du x10 (%). */
   confirmPercent: number;
+  /**
+   * Ce que le palier contient, quand c'est une liste FINIE d'objets (les
+   * paliers « sac de butin » de la Dimensional Supply). Absent quand le palier
+   * rend une pièce d'ÉQUIPEMENT : ses 154 lignes sont le catalogue entier,
+   * les lister n'apprendrait rien.
+   */
+  drops?: RecruitDrop[];
 }
 
-/** Les types de bannière documentés par les guides. */
-export type RecruitKind = 'custom' | 'pickup' | 'premium' | 'limited';
+/**
+ * Les types de bannière documentés par les guides. `equipment` (Dimensional
+ * Supply) tire de l'ÉQUIPEMENT, pas des persos : ses paliers sont des recettes
+ * ITEM et sa monnaie de mileage a son propre barème.
+ */
+export type RecruitKind = 'custom' | 'pickup' | 'premium' | 'limited' | 'equipment';
 
 export interface RecruitKindInfo {
   kind: RecruitKind;
@@ -63,6 +89,9 @@ export interface RecruitKindInfo {
   /** Ticket dédié : id du catalogue d'items (RTT_ITEM → id numérique,
    *  RTT_ASSET → clé `SYS_ASSET_*`). Absent si le groupe n'en déclare pas. */
   ticketId?: string;
+  /** Ticket d'EVENT (`RecruitTicketID_FREE`) — même résolution que `ticketId`.
+   *  C'est la variante qui ne rapporte PAS de mileage. */
+  eventTicketId?: string;
   /** Tickets consommés par tirage (10 pour le Premium : Call of the Demiurge). */
   ticketCost: number;
   /** Tirages gratuits par jour. */
@@ -97,6 +126,7 @@ const KIND_OF_TYPE: Record<string, RecruitKind> = {
   DEMIURGE: 'premium',
   SEASONAL: 'limited',
   OUTER_FES: 'limited',
+  EQUIPMENT_SELECTION: 'equipment',
 };
 
 /** RecruitType → kind d'apparition bannière (persos limited). */
@@ -184,30 +214,84 @@ function buildCustomPool(groups: Row[], gradeRecipes: Row[]): string[] {
   return [...pool].sort((a, b) => a.localeCompare(b));
 }
 
-/** Taux d'un groupe : poids CHARACTER normalisés en % (2 décimales). */
+/** Options de `ratesOf` — au-delà de deux, les positionnels deviennent illisibles. */
+export interface RatesOptions {
+  /**
+   * Quelles lignes du groupe forment les paliers — un groupe en porte d'autres
+   * (ASSET…) qui ne sont pas des taux et fausseraient la somme. Les bannières
+   * de persos tirent des recettes CHARACTER, la Dimensional Supply des ITEM.
+   */
+  recipeType?: 'CHARACTER' | 'ITEM';
+  /** `RecruitItemRecipeTemplet` — sans elle, aucun détail de lot n'est produit. */
+  itemRecipes?: Row[];
+  /** L'item est-il une pièce d'ÉQUIPEMENT (`IT_EQUIP`) ? */
+  isEquip?: (itemId: string) => boolean;
+}
+
+/**
+ * Détail des lots d'un palier — `undefined` dès qu'une ligne est de
+ * l'ÉQUIPEMENT : le palier rend alors « une pièce », pas un lot nommé, et ses
+ * 154 lignes sont le catalogue d'équipement au complet.
+ *
+ * Le taux d'un lot est sa part du palier : `Rate / ΣRate × percent`. Vérifié
+ * contre les taux publiés par l'éditeur (Reload Cartridge x10 : 3/26 × 8 % =
+ * 0,9231 %).
+ */
+function dropsOf(
+  gradeId: string,
+  percent: number,
+  { itemRecipes, isEquip }: RatesOptions,
+): RecruitDrop[] | undefined {
+  if (!itemRecipes || !isEquip) return undefined;
+  const rows = itemRecipes.filter((r) => r.GradeGroupID === gradeId);
+  if (!rows.length || rows.some((r) => isEquip(r.ItemID))) return undefined;
+  const total = rows.reduce((s, r) => s + num(r.Rate), 0);
+  if (!total) return undefined;
+  return rows.map((r) => ({
+    itemId: r.ItemID,
+    count: num(r.Count) || 1,
+    percent: Math.round((num(r.Rate) / total) * percent * 10000) / 10000,
+  }));
+}
+
+/** Taux d'un groupe : poids normalisés en % (2 décimales). */
 export function ratesOf(
   gradeRecipes: Row[],
   groupId: string,
   tsys: Map<string, LangDict>,
+  opts: RatesOptions = {},
 ): RecruitRate[] {
-  const rows = gradeRecipes.filter((r) => r.GroupID === groupId && r.RecipeType === 'CHARACTER');
+  const recipeType = opts.recipeType ?? 'CHARACTER';
+  const rows = gradeRecipes.filter((r) => r.GroupID === groupId && r.RecipeType === recipeType);
   const totalNormal = rows.reduce((s, r) => s + num(r.NormalRate), 0);
   const totalConfirm = rows.reduce((s, r) => s + num(r.ConfirmRate), 0);
   if (!rows.length || !totalNormal) {
-    throw new Error(`recruit : groupe ${groupId} sans recette CHARACTER exploitable`);
+    throw new Error(`recruit : groupe ${groupId} sans recette ${recipeType} exploitable`);
   }
   const pct = (v: number, total: number) => (total ? Math.round((v / total) * 10000) / 100 : 0);
-  return rows.map((r) => ({
-    titleKey: r.Title,
-    title: resolveText(tsys, r.Title),
-    percent: pct(num(r.NormalRate), totalNormal),
-    confirmPercent: pct(num(r.ConfirmRate), totalConfirm),
-  }));
+  return rows.map((r) => {
+    const percent = pct(num(r.NormalRate), totalNormal);
+    const drops = dropsOf(r.ID, percent, opts);
+    return {
+      titleKey: r.Title,
+      title: resolveText(tsys, r.Title),
+      percent,
+      confirmPercent: pct(num(r.ConfirmRate), totalConfirm),
+      ...(drops ? { drops } : {}),
+    };
+  });
 }
 
-/** Ticket d'un groupe → id du catalogue (item ou clé SYS_ASSET_*). */
-function ticketIdOf(group: Row): string | undefined {
-  const id = group.RecruitTicketID;
+/**
+ * Ticket d'un groupe → id du catalogue (item ou clé SYS_ASSET_*).
+ * `column` vaut `RecruitTicketID` (ticket payant) ou `RecruitTicketID_FREE`
+ * (variante event, sans mileage) — les deux portent le même RTT.
+ */
+function ticketIdOf(
+  group: Row,
+  column: 'RecruitTicketID' | 'RecruitTicketID_FREE',
+): string | undefined {
+  const id = group[column];
   if (!id || id === '0') return undefined;
   if (group.RecruitTicketType === 'RTT_ASSET') {
     // Même source de vérité que le glossaire `assetTypes` (goods.ts) : l'enum
@@ -242,6 +326,15 @@ export function buildRecruit(): RecruitData {
   const groups = loadTable('RecruitGroupTemplet');
   const gradeRecipes = loadTable('RecruitGradeRecipeTemplet');
   const knownChars = new Set(loadTable('CharacterTemplet').map((c) => c.ID));
+  const itemRecipes = loadTable('RecruitItemRecipeTemplet');
+  // `IT_EQUIP` separe la piece d'equipement du lot nomme : c'est la seule chose
+  // qui les distingue, ItemTemplet portant les deux.
+  const equipIds = new Set(
+    loadTable('ItemTemplet')
+      .filter((r) => r.ItemType === 'IT_EQUIP')
+      .map((r) => r.ID),
+  );
+  const isEquip = (itemId: string): boolean => equipIds.has(itemId);
 
   // --- pool custom ------------------------------------------------------------
   const customPool = buildCustomPool(groups, gradeRecipes);
@@ -271,10 +364,11 @@ export function buildRecruit(): RecruitData {
     (a, b) => a.start.localeCompare(b.start) || a.characterId.localeCompare(b.characterId),
   );
 
-  // --- coût mileage par famille de persos --------------------------------------
+  // --- coût mileage par famille ------------------------------------------------
   // ProductTemplet PC_MILEAGE : un produit par perso échangeable (PriceValue =
   // coût mileage). Les persos des bannières limited coûtent leur propre tarif ;
-  // pour les autres types on prend le MODE des tarifs restants.
+  // pour les autres types on prend le MODE des tarifs restants. L'équipement a
+  // sa propre catégorie (PC_MILEAGE_EQUIP : un produit par pièce d'équipement).
   const limitedChars = new Set(banners.map((b) => b.characterId));
   const mileageProducts = loadTable('ProductTemplet').filter(
     (r) => r.ProductCategory === 'PC_MILEAGE' && r.ProductGoodsType === 'PGT_CHARACTER',
@@ -293,13 +387,20 @@ export function buildRecruit(): RecruitData {
       .filter((r) => !limitedChars.has(r.ProductGoodsID))
       .map((r) => num(r.PriceValue)),
   );
+  const equipMileage = modeOf(
+    loadTable('ProductTemplet')
+      .filter((r) => r.ProductCategory === 'PC_MILEAGE_EQUIP')
+      .map((r) => num(r.PriceValue)),
+  );
+  const mileageOf = (kind: RecruitKind): number | undefined =>
+    kind === 'equipment' ? equipMileage : kind === 'limited' ? limitedMileage : regularMileage;
 
   // --- fiche par type de bannière ----------------------------------------------
   // Le groupe le PLUS RÉCENT (StartDate) du type fait référence — les taux et
   // prix sont identiques d'une édition à l'autre, mais si l'éditeur les change,
   // c'est la dernière édition qui fait foi.
   const kinds: RecruitKindInfo[] = [];
-  for (const kind of ['custom', 'pickup', 'premium', 'limited'] as const) {
+  for (const kind of ['custom', 'pickup', 'premium', 'limited', 'equipment'] as const) {
     const candidates = groups
       .filter((g) => KIND_OF_TYPE[g.RecruitType] === kind)
       .sort((a, b) => (a.StartDate ?? '').localeCompare(b.StartDate ?? ''));
@@ -308,18 +409,25 @@ export function buildRecruit(): RecruitData {
     kinds.push({
       kind,
       groupId: ref.ID,
-      rates: ratesOf(gradeRecipes, ref.ID, tsys),
+      rates: ratesOf(gradeRecipes, ref.ID, tsys, {
+        recipeType: kind === 'equipment' ? 'ITEM' : 'CHARACTER',
+        itemRecipes,
+        isEquip,
+      }),
       price1: num(ref.Price_1),
       price10: num(ref.Price_10),
-      ...(ticketIdOf(ref) ? { ticketId: ticketIdOf(ref) } : {}),
+      ...(ticketIdOf(ref, 'RecruitTicketID')
+        ? { ticketId: ticketIdOf(ref, 'RecruitTicketID') }
+        : {}),
+      ...(ticketIdOf(ref, 'RecruitTicketID_FREE')
+        ? { eventTicketId: ticketIdOf(ref, 'RecruitTicketID_FREE') }
+        : {}),
       ticketCost: num(ref.RecruitTicketValue) || 1,
       freeCount: num(ref.FreeCount),
       ...(ref.BannerImageName && ref.BannerImageName !== '0'
         ? { bannerImage: ref.BannerImageName }
         : {}),
-      ...((kind === 'limited' ? limitedMileage : regularMileage) !== undefined
-        ? { mileageCost: kind === 'limited' ? limitedMileage : regularMileage }
-        : {}),
+      ...(mileageOf(kind) !== undefined ? { mileageCost: mileageOf(kind) } : {}),
     });
   }
 

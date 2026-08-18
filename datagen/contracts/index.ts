@@ -94,6 +94,7 @@ export type {
 export type {
   RecruitBanner,
   RecruitData,
+  RecruitDrop,
   RecruitKind,
   RecruitKindInfo,
   RecruitRate,

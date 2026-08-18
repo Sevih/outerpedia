@@ -8,12 +8,14 @@
  * ÉDITORIAL (avertissements, notes) arrive déjà localisé de l'appelant.
  */
 import type { ReactNode } from 'react';
-import type { LocalizedText, RecruitKindInfo, RecruitRate } from '@contracts';
+import type { LocalizedText, RecruitDrop, RecruitKindInfo, RecruitRate } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
+import { cn } from '@/lib/cn';
 import { ItemInline, type InlineItem } from '@/components/inline/ItemInline';
+import { InlineTooltip } from '@/components/inline/InlineTooltip';
 import { StarIcon } from './StarText';
-import { itemChipByName } from './items';
+import { itemChipById, itemChipByName } from './items';
 
 const LABELS = {
   specialFeature: {
@@ -29,6 +31,27 @@ const LABELS = {
     kr: '10연 모집 시 2{star} 이상 영웅 1체 이상 확정',
     zh: '10连招募保底至少1个2{star}以上英雄',
     fr: 'Utiliser Recruit x 10 garantit au moins un Héros 2{star}',
+  },
+  guaranteeHighGrade: {
+    en: 'Using Recruit x 10 guarantees at least one high-grade item',
+    jp: '10連召喚で高級アイテムが1個以上確定',
+    kr: '10연 호출 시 고급 아이템 1개 이상 확정',
+    zh: '10连召唤保底至少1个高级物品',
+    fr: 'Utiliser Recruit x 10 garantit au moins un objet de haute qualité',
+  },
+  rateUpGear: {
+    en: 'Rate-Up Gear',
+    jp: 'ピックアップ装備',
+    kr: '픽업 장비',
+    zh: '已选装备',
+    fr: 'Équipement en focus',
+  },
+  guarantee: {
+    en: 'Recruitment guarantee:',
+    jp: '募集確定:',
+    kr: '모집 확정:',
+    zh: '招募保底：',
+    fr: 'Garantie de Recruit :',
   },
   freePull: {
     en: '1 free pull per day',
@@ -109,39 +132,95 @@ function starText(text: string): ReactNode {
 }
 
 /**
- * Libellé EN du palier pickup : le jeu dit « Chance Increase », trop vague —
- * on précise. Les autres langues du jeu (« ピックアップ確率 »…) sont déjà claires.
+ * Libellés EN de paliers que le client rend mal, par clé TextSystem — les
+ * autres langues du jeu sont justes, seul l'anglais dérape :
+ *   TITLE_05      le jeu dit « Chance Increase », trop vague pour un pickup ;
+ *   EQUIP_TITLE_* le jeu dit « Advanced », là où l'éditeur communique
+ *                 « High-Dimensional Supply » (et où JP/KR/ZH disent bien
+ *                 « haute dimension » : 高次元物資 / 고차원 물자 / 高次元物资).
+ * Sans override, la prochaine régénération réécrirait le libellé du client.
  */
-const FOCUS_TITLE_EN = 'Focus Target Chance';
+const TITLE_EN_OVERRIDE: Record<string, string> = {
+  SYS_RECRUIT_RATEINFO_TITLE_05: 'Focus Target Chance',
+  SYS_RECRUIT_EQUIP_TITLE_06: 'High-Dimensional Supply III',
+  SYS_RECRUIT_EQUIP_TITLE_04: 'High-Dimensional Supply II',
+  SYS_RECRUIT_EQUIP_TITLE_02: 'High-Dimensional Supply I',
+};
+
+/**
+ * Le palier VEDETTE — ce pour quoi on tire sur la bannière. C'est le palier
+ * pickup (`*_TITLE_05`) quand il existe, sinon le 3★ (`*_TITLE_03`) : le
+ * Custom Rate Up n'a pas de ligne pickup, ses 3 persos choisis sortent du
+ * palier 3★. Dérivé des clés, donc juste sur les cinq bannières sans table à
+ * tenir.
+ */
+function jackpotKeyOf(rates: RecruitRate[]): string | undefined {
+  const find = (suffix: string) => rates.find((r) => r.titleKey.endsWith(suffix))?.titleKey;
+  return find('_TITLE_05') ?? find('_TITLE_03');
+}
 
 /**
  * Taux d'une bannière — GÉNÉRÉS (`RecruitKindInfo.rates`, libellés du jeu).
  * La garantie du x10 se DÉRIVE des taux du slot garanti (une ligne à 0 % en
- * confirm = tirage garanti remonté) ; le pull gratuit de `freeCount`.
+ * confirm = tirage garanti remonté) ; le pull gratuit de `freeCount`. Le
+ * compteur de garantie (pity) arrive en revanche du dehors (`guarantee`) : il
+ * ne vit dans aucune table.
  */
 export function BannerRates({
   info,
   lang,
   subtext,
+  guarantee,
 }: {
   info: RecruitKindInfo;
   lang: Lang;
   /** Note éditoriale sous la grille (ex. taux réel des Demiurge). */
   subtext?: string;
+  /**
+   * Règle du COMPTEUR DE GARANTIE de la bannière (déjà localisée) — le pity
+   * introduit le 25/08/2026, distinct du mileage. Éditorial : aucune colonne
+   * des tables ne le porte (`OpenRecruitCount` est un déblocage, pas ça).
+   */
+  guarantee?: string;
 }) {
   const hasGuarantee = info.rates.some((r) => r.percent > 0 && r.confirmPercent === 0);
+  const jackpotKey = jackpotKeyOf(info.rates);
   return (
     <div className="mx-auto max-w-xl space-y-3">
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         {info.rates.map((rate: RecruitRate, i) => {
-          const title =
-            rate.titleKey === 'SYS_RECRUIT_RATEINFO_TITLE_05'
-              ? { ...rate.title, en: FOCUS_TITLE_EN }
-              : rate.title;
+          const override = TITLE_EN_OVERRIDE[rate.titleKey];
+          const title = override ? { ...rate.title, en: override } : rate.title;
+          const label = lRec(title, lang) || title.en;
+          const isJackpot = rate.titleKey === jackpotKey;
+          const labelClass = isJackpot
+            ? 'text-ed-amber-soft text-sm font-semibold'
+            : 'text-content-muted text-sm';
           return (
-            <div key={i} className="border-line-subtle bg-surface-overlay/50 rounded-lg border p-3">
+            <div
+              key={i}
+              className={cn(
+                'rounded-lg border p-3',
+                isJackpot
+                  ? 'border-ed-amber/40 bg-ed-amber/8'
+                  : 'border-line-subtle bg-surface-overlay/50',
+              )}
+            >
               <div className="flex items-center justify-between gap-2">
-                <span className="text-content-muted text-sm">{lRec(title, lang) || title.en}</span>
+                {rate.drops ? (
+                  <InlineTooltip interactive content={<DropList drops={rate.drops} lang={lang} />}>
+                    <span
+                      className={cn(
+                        labelClass,
+                        'cursor-help underline decoration-dotted underline-offset-2',
+                      )}
+                    >
+                      {label}
+                    </span>
+                  </InlineTooltip>
+                ) : (
+                  <span className={labelClass}>{label}</span>
+                )}
                 <span className="text-ed-amber text-lg font-bold">{rate.percent}%</span>
               </div>
             </div>
@@ -154,7 +233,18 @@ export function BannerRates({
           <div className="border-ed-amber/25 bg-ed-amber/5 rounded-lg border p-2.5">
             <p className="text-ed-amber-soft text-sm">
               <span className="font-semibold">{lRec(LABELS.specialFeature, lang)}</span>{' '}
-              {starText(lRec(LABELS.guarantee2Star, lang))}
+              {/* La Dimensional Supply tire de l'ÉQUIPEMENT : son slot garanti
+                  ne promet pas un Héros 2★ mais un objet de haute qualité. */}
+              {info.kind === 'equipment'
+                ? lRec(LABELS.guaranteeHighGrade, lang)
+                : starText(lRec(LABELS.guarantee2Star, lang))}
+            </p>
+          </div>
+        )}
+        {guarantee && (
+          <div className="border-ed-violet/25 bg-ed-violet/5 rounded-lg border p-2.5">
+            <p className="text-ed-violet-soft text-sm">
+              <span className="font-semibold">{lRec(LABELS.guarantee, lang)}</span> {guarantee}
             </p>
           </div>
         )}
@@ -167,6 +257,40 @@ export function BannerRates({
         )}
       </div>
     </div>
+  );
+}
+
+/**
+ * Contenu d'un palier « sac de butin », au survol (tap sur mobile) — icône,
+ * nom, quantité et taux ABSOLU du lot. Volontairement sans `ItemInline` : il
+ * porte lui-même un tooltip, et imbriquer deux HoverCard ne rend rien de bon.
+ */
+function DropList({ drops, lang }: { drops: RecruitDrop[]; lang: Lang }) {
+  return (
+    <ul className="m-0 max-h-64 space-y-1 overflow-y-auto text-xs">
+      {drops.map((drop) => {
+        const item = itemChipById(drop.itemId, lang);
+        return (
+          <li key={`${drop.itemId}-${drop.count}`} className="flex items-center gap-2">
+            {item.iconSrc && (
+              <img
+                src={item.iconSrc}
+                alt=""
+                aria-hidden
+                width={16}
+                height={16}
+                className="shrink-0"
+              />
+            )}
+            <span className="text-content grow">
+              {item.name}
+              {drop.count > 1 && <span className="text-content-subtle"> x{drop.count}</span>}
+            </span>
+            <span className="text-ed-amber shrink-0 tabular-nums">{drop.percent}%</span>
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
@@ -292,12 +416,24 @@ export function MileageInfo({
   mileage,
   cost,
   lang,
+  target = 'hero',
+  note,
 }: {
   mileage: InlineItem;
-  /** Coût de l'échange du perso vedette (`RecruitKindInfo.mileageCost`). */
+  /** Coût de l'échange de la contrepartie (`RecruitKindInfo.mileageCost`). */
   cost: number;
   lang: Lang;
+  /**
+   * Ce que le mileage achète. `hero` (défaut) : le perso vedette, avec la
+   * seconde option en pièces de héros et le bonus doublon en wildcards.
+   * `gear` (Dimensional Supply) : une pièce d'équipement — ni pièces de héros
+   * ni wildcards, ces deux lignes n'existent pas sur cette bannière.
+   */
+  target?: 'hero' | 'gear';
+  /** Note éditoriale sous l'encart (déjà localisée). */
+  note?: string;
 }) {
+  const isHero = target === 'hero';
   return (
     <div className="border-ed-sky/25 bg-ed-sky/5 mx-auto max-w-xl space-y-3 rounded-lg border p-4">
       <p className="text-ed-sky-soft text-sm">
@@ -309,26 +445,37 @@ export function MileageInfo({
         </p>
         <div className="space-y-2">
           <div className="flex items-center justify-between gap-2">
-            <span className="text-content-muted text-sm">{lRec(LABELS.featuredHero, lang)}</span>
-            <span className="text-ed-amber flex items-center gap-1 font-semibold">
-              {cost} <ItemInline item={mileage} />
-            </span>
-          </div>
-          <div className="flex items-center justify-between gap-2">
-            <span className="text-content-muted flex items-center gap-1 text-sm">
-              150 <ItemInline item={itemChipByName('Hero Piece', lang)} />
+            <span className="text-content-muted text-sm">
+              {lRec(isHero ? LABELS.featuredHero : LABELS.rateUpGear, lang)}
             </span>
             <span className="text-ed-amber flex items-center gap-1 font-semibold">
               {cost} <ItemInline item={mileage} />
             </span>
           </div>
+          {isHero && (
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-content-muted flex items-center gap-1 text-sm">
+                150 <ItemInline item={itemChipByName('Hero Piece', lang)} />
+              </span>
+              <span className="text-ed-amber flex items-center gap-1 font-semibold">
+                {cost} <ItemInline item={mileage} />
+              </span>
+            </div>
+          )}
         </div>
-        <div className="border-line-subtle mt-3 border-t pt-3">
-          <p className="text-content-subtle flex flex-wrap items-center gap-1 text-xs">
-            {lRec(LABELS.ownedBonus, lang)}{' '}
-            <ItemInline item={itemChipByName('Wildcard Pieces', lang)} />
-          </p>
-        </div>
+        {isHero && (
+          <div className="border-line-subtle mt-3 border-t pt-3">
+            <p className="text-content-subtle flex flex-wrap items-center gap-1 text-xs">
+              {lRec(LABELS.ownedBonus, lang)}{' '}
+              <ItemInline item={itemChipByName('Wildcard Pieces', lang)} />
+            </p>
+          </div>
+        )}
+        {note && (
+          <div className="border-line-subtle mt-3 border-t pt-3">
+            <p className="text-content-subtle text-xs">{note}</p>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -213,6 +213,7 @@
   --ed-amber-soft: oklch(92.4% 0.12 95.746); /* amber-200 : texte clair sur callout */
   --ed-emerald-soft: oklch(90.5% 0.093 164.15); /* emerald-200 */
   --ed-sky-soft: oklch(90.1% 0.058 230.902); /* sky-200 */
+  --ed-violet-soft: oklch(89.4% 0.057 293.283); /* violet-200 */
   --ed-amber-faint: oklch(96.2% 0.059 95.617); /* amber-100 : anneau d'onglet au survol */
   --ed-sky-deep: oklch(68.5% 0.169 237.323); /* sky-500 : anneau PvE (review premium) */
   --ed-rose-deep: oklch(64.5% 0.246 16.439); /* rose-500 : anneau PvP */
@@ -351,6 +352,7 @@
   --color-ed-amber-soft: var(--ed-amber-soft);
   --color-ed-emerald-soft: var(--ed-emerald-soft);
   --color-ed-sky-soft: var(--ed-sky-soft);
+  --color-ed-violet-soft: var(--ed-violet-soft);
   --color-ed-amber-faint: var(--ed-amber-faint);
   --color-ed-sky-deep: var(--ed-sky-deep);
   --color-ed-rose-deep: var(--ed-rose-deep);

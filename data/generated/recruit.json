@@ -131,6 +131,7 @@
       "price1": 150,
       "price10": 1500,
       "ticketId": "1000002",
+      "eventTicketId": "1000004",
       "ticketCost": 1,
       "freeCount": 1,
       "bannerImage": "CM_Btn_Recruit_Custom",
@@ -188,6 +189,7 @@
       "price1": 150,
       "price10": 1500,
       "ticketId": "1000002",
+      "eventTicketId": "1000004",
       "ticketCost": 1,
       "freeCount": 0,
       "bannerImage": "CM_Btn_Recruit_PickUp",
@@ -245,6 +247,7 @@
       "price1": 225,
       "price10": 2250,
       "ticketId": "SYS_ASSET_DEMIURGE",
+      "eventTicketId": "SYS_ASSET_DEMIURGE_FREE",
       "ticketCost": 10,
       "freeCount": 1,
       "bannerImage": "CM_Btn_Recruit_Special_12",
@@ -302,9 +305,311 @@
       "price1": 150,
       "price10": 1500,
       "ticketId": "1000005",
+      "eventTicketId": "1000006",
       "ticketCost": 1,
       "freeCount": 0,
       "bannerImage": "CM_Btn_Recruit_Seasonal_Select_07",
+      "mileageCost": 150
+    },
+    {
+      "kind": "equipment",
+      "groupId": "30001",
+      "rates": [
+        {
+          "titleKey": "SYS_RECRUIT_EQUIP_TITLE_06",
+          "title": {
+            "en": "Advanced Dimensional Supply III",
+            "jp": "高次元物資III",
+            "kr": "고차원 물자 lll",
+            "zh": "高次元物资III"
+          },
+          "percent": 1,
+          "confirmPercent": 1,
+          "drops": [
+            {
+              "itemId": "500010",
+              "count": 1,
+              "percent": 0.2
+            },
+            {
+              "itemId": "500011",
+              "count": 1,
+              "percent": 0.2
+            },
+            {
+              "itemId": "500012",
+              "count": 1,
+              "percent": 0.2
+            },
+            {
+              "itemId": "500013",
+              "count": 1,
+              "percent": 0.2
+            },
+            {
+              "itemId": "500014",
+              "count": 1,
+              "percent": 0.2
+            }
+          ]
+        },
+        {
+          "titleKey": "SYS_RECRUIT_EQUIP_TITLE_05",
+          "title": {
+            "en": "Selected Rate-Up Gear",
+            "jp": "カスタムピックアップ装備",
+            "kr": "커스텀 픽업 장비",
+            "zh": "已选装备"
+          },
+          "percent": 2,
+          "confirmPercent": 2
+        },
+        {
+          "titleKey": "SYS_RECRUIT_EQUIP_TITLE_04",
+          "title": {
+            "en": "Advanced Dimensional Supply II",
+            "jp": "高次元物資II",
+            "kr": "고차원 물자 ll",
+            "zh": "高次元物资II"
+          },
+          "percent": 8,
+          "confirmPercent": 43,
+          "drops": [
+            {
+              "itemId": "25002",
+              "count": 10,
+              "percent": 0.9231
+            },
+            {
+              "itemId": "25002",
+              "count": 20,
+              "percent": 0.6154
+            },
+            {
+              "itemId": "25002",
+              "count": 30,
+              "percent": 0.3077
+            },
+            {
+              "itemId": "25001",
+              "count": 10,
+              "percent": 0.3077
+            },
+            {
+              "itemId": "30519",
+              "count": 10,
+              "percent": 0.9231
+            },
+            {
+              "itemId": "30519",
+              "count": 15,
+              "percent": 0.6154
+            },
+            {
+              "itemId": "30519",
+              "count": 20,
+              "percent": 0.3077
+            },
+            {
+              "itemId": "21107",
+              "count": 1,
+              "percent": 0.9231
+            },
+            {
+              "itemId": "21107",
+              "count": 2,
+              "percent": 0.6154
+            },
+            {
+              "itemId": "21107",
+              "count": 3,
+              "percent": 0.3077
+            },
+            {
+              "itemId": "21202",
+              "count": 1,
+              "percent": 0.9231
+            },
+            {
+              "itemId": "21202",
+              "count": 2,
+              "percent": 0.6154
+            },
+            {
+              "itemId": "21202",
+              "count": 3,
+              "percent": 0.3077
+            },
+            {
+              "itemId": "21201",
+              "count": 1,
+              "percent": 0.3077
+            }
+          ]
+        },
+        {
+          "titleKey": "SYS_RECRUIT_EQUIP_TITLE_03",
+          "title": {
+            "en": "6★ Legendary Gear (All Substats at LV 3)",
+            "jp": "★6レジェンド装備（サブオプション全てLv.3）",
+            "kr": "6성 전설 장비(모든 서브 옵션 3 LV)",
+            "zh": "6★传说装备（所有副属性Lv.3）"
+          },
+          "percent": 4,
+          "confirmPercent": 4
+        },
+        {
+          "titleKey": "SYS_RECRUIT_EQUIP_TITLE_02",
+          "title": {
+            "en": "Advanced Dimensional Supply I",
+            "jp": "高次元物資I",
+            "kr": "고차원 물자 l",
+            "zh": "高次元物资I"
+          },
+          "percent": 75,
+          "confirmPercent": 0,
+          "drops": [
+            {
+              "itemId": "30537",
+              "count": 1,
+              "percent": 6.4655
+            },
+            {
+              "itemId": "30538",
+              "count": 1,
+              "percent": 5.1724
+            },
+            {
+              "itemId": "30539",
+              "count": 1,
+              "percent": 3.8793
+            },
+            {
+              "itemId": "30540",
+              "count": 1,
+              "percent": 2.5862
+            },
+            {
+              "itemId": "30541",
+              "count": 1,
+              "percent": 1.2931
+            },
+            {
+              "itemId": "20004",
+              "count": 30,
+              "percent": 5.1724
+            },
+            {
+              "itemId": "20004",
+              "count": 40,
+              "percent": 3.8793
+            },
+            {
+              "itemId": "20004",
+              "count": 50,
+              "percent": 2.5862
+            },
+            {
+              "itemId": "20004",
+              "count": 100,
+              "percent": 1.2931
+            },
+            {
+              "itemId": "21004",
+              "count": 20,
+              "percent": 5.1724
+            },
+            {
+              "itemId": "21004",
+              "count": 30,
+              "percent": 5.1724
+            },
+            {
+              "itemId": "21004",
+              "count": 40,
+              "percent": 3.8793
+            },
+            {
+              "itemId": "21004",
+              "count": 50,
+              "percent": 2.5862
+            },
+            {
+              "itemId": "21004",
+              "count": 100,
+              "percent": 1.2931
+            },
+            {
+              "itemId": "30206",
+              "count": 5,
+              "percent": 5.1724
+            },
+            {
+              "itemId": "30206",
+              "count": 10,
+              "percent": 3.8793
+            },
+            {
+              "itemId": "30206",
+              "count": 15,
+              "percent": 2.5862
+            },
+            {
+              "itemId": "30206",
+              "count": 30,
+              "percent": 1.2931
+            },
+            {
+              "itemId": "21104",
+              "count": 40,
+              "percent": 3.8793
+            },
+            {
+              "itemId": "21104",
+              "count": 80,
+              "percent": 2.5862
+            },
+            {
+              "itemId": "21104",
+              "count": 120,
+              "percent": 1.2931
+            },
+            {
+              "itemId": "30542",
+              "count": 1,
+              "percent": 1.2931
+            },
+            {
+              "itemId": "22030",
+              "count": 5,
+              "percent": 1.2931
+            },
+            {
+              "itemId": "22031",
+              "count": 5,
+              "percent": 1.2931
+            }
+          ]
+        },
+        {
+          "titleKey": "SYS_RECRUIT_EQUIP_TITLE_01",
+          "title": {
+            "en": "6★ Legendary Gear (Random Substats)",
+            "jp": "★6レジェンド装備（オプションランダム付与）",
+            "kr": "6성 전설 장비(무작위 서브 옵션)",
+            "zh": "6★传说装备（随机副属性）"
+          },
+          "percent": 10,
+          "confirmPercent": 50
+        }
+      ],
+      "price1": 150,
+      "price10": 1500,
+      "ticketId": "1000007",
+      "eventTicketId": "1000008",
+      "ticketCost": 1,
+      "freeCount": 0,
+      "bannerImage": "CM_Btn_Recruit_Custom_Equip",
       "mileageCost": 150
     }
   ],

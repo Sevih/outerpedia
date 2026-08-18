@@ -1,13 +1,16 @@
 /**
- * Guide « Banners & Mileage » — les 4 types de bannière (Custom Rate Up,
- * Rate Up, Premium, Limited) en onglets à cartes-images, et le système de
- * mileage.
+ * Guide « Banners & Mileage » — les 5 types de bannière (Custom Rate Up,
+ * Rate Up, Premium, Limited, Dimensional Supply) en onglets à cartes-images,
+ * et le système de mileage. La Dimensional Supply est la seule à tirer de
+ * l'ÉQUIPEMENT : ni doublons, ni pièces de héros, ni garantie du 25/08.
  *
  * Server Component. Ce qui était codé en dur est GÉNÉRÉ (`recruit.json`) :
  * taux par palier, prix, tickets, pulls gratuits, coût mileage, et la liste
  * des héros limited avec release/rerun (`banner.json` était maintenu à la
- * main). Ne reste éditorial que le texte (labels.ts, verbatim) et le
- * mapping bannière → monnaie de mileage (aucune table ne le porte).
+ * main). Ne reste éditorial que le texte (labels.ts, verbatim), le mapping
+ * bannière → monnaie de mileage (aucune table ne le porte) et le SYSTÈME DE
+ * GARANTIE du 25/08/2026 — le pity ne vit dans aucune colonne des tables
+ * (`OpenRecruitCount` en est une autre : le déblocage de la bannière).
  */
 import type { ReactNode } from 'react';
 import type { LocalizedText } from '@contracts';
@@ -17,7 +20,7 @@ import { lRec } from '@/lib/i18n/localize';
 import { img } from '@/lib/images';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import { getRecruitKind } from '@/lib/data/recruit';
-import { Prose, SectionHeading } from '@/components/guides/editorial/blocks';
+import { Callout, Prose, SectionHeading } from '@/components/guides/editorial/blocks';
 import {
   BannerRates,
   BannerResources,
@@ -33,7 +36,7 @@ import { itemChipById, itemChipByName } from '@/components/guides/editorial/bann
 import { LABELS } from './labels';
 
 /** Visuel d'une carte d'onglet — GÉNÉRÉ (BannerImageName du groupe courant). */
-function tabVisual(kind: 'custom' | 'pickup' | 'premium' | 'limited'): { imageSrc: string } {
+function tabVisual(kind: keyof typeof MILEAGE_OF): { imageSrc: string } {
   const info = getRecruitKind(kind);
   if (!info.bannerImage) {
     throw new Error(`banner-mileage : pas de BannerImageName pour « ${kind} »`);
@@ -54,19 +57,18 @@ const STANDARD_REWARDS: DupeReward[] = [
  * aussi). Les NOMS résolvent contre le catalogue (build cassé sinon).
  */
 const MILEAGE_OF = {
-  custom: 'Elemental Mileage',
+  // « Elemental Mileage » est la monnaie du Selected Element Recruit (le jeu le
+  // dit dans sa description, et elle se convertit en Mileage à la fin de la
+  // période) — le Custom Rate Up rend du « Custom Mileage ».
+  custom: 'Custom Mileage',
   pickup: 'Mileage',
   premium: "False God's Proof",
   limited: 'Limited Mileage',
+  // La monnaie de la Dimensional Supply est curée sous la clé du titre de la
+  // bannière (`SYS_EQUIP_GACHA_TITLE`) : le jeu ne lui donne pas de clé
+  // `SYS_ASSET_*`, seule sa description dit que c'est bien une monnaie.
+  equipment: 'Dimensional Supply',
 } as const;
-
-/** Tickets d'EVENT (variante sans mileage) par type — éditorial, inchangé. */
-const EVENT_TICKET_OF: Partial<Record<keyof typeof MILEAGE_OF, string>> = {
-  custom: 'Special Recruitment Ticket (Event)',
-  pickup: 'Special Recruitment Ticket (Event)',
-  premium: 'Call of the Demiurge (Event)',
-  limited: 'Limited Recruitment Ticket (Event)',
-};
 
 /** Licence d'origine des persos collab (liste des limited) — éditorial. */
 const COLLAB_NAMES: Record<string, string> = {
@@ -74,6 +76,31 @@ const COLLAB_NAMES: Record<string, string> = {
   '2000096': 'DanMachi', // Ais Wallenstein
   '2000097': 'DanMachi', // Ryu Lion
 };
+
+/**
+ * Règles COMMUNES du système de garantie (25/08/2026), dans l'ordre de lecture.
+ * Le détail par bannière vit dans `LABELS.<onglet>.pity` — seul ce qui vaut
+ * pour toutes les bannières est ici.
+ */
+const GUARANTEE_RULES = [
+  'guarantee_rule_scope',
+  'guarantee_rule_early',
+  'guarantee_rule_reset',
+  'guarantee_rule_screen',
+  'guarantee_rule_startdash',
+] as const;
+
+/**
+ * Règles du CYCLE MENSUEL de la Dimensional Supply, dans l'ordre de lecture —
+ * la sélection, sa fenêtre, le partage des 2 % et la fermeture de la bannière.
+ */
+const SUPPLY_MONTHLY = [
+  'monthly_reset',
+  'monthly_once',
+  'monthly_rate',
+  'monthly_close',
+  'monthly_mileage',
+] as const;
 
 /** Séparateur de l'exemple Custom (ternaire en/zh, repris verbatim). */
 const AND: LocalizedText = { en: 'and ', zh: '和' };
@@ -88,10 +115,9 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
     const info = getRecruitKind(kind);
     const mileage = itemChipByName(MILEAGE_OF[kind], lang);
     const rows: ResourceRow[] = [];
-    const eventTicket = EVENT_TICKET_OF[kind];
-    if (eventTicket) {
+    if (info.eventTicketId) {
       rows.push({
-        items: [itemChipByName(eventTicket, lang)],
+        items: [itemChipById(info.eventTicketId, lang)],
         cost: info.ticketCost,
         mileage: null,
         ...(note ? { note } : {}),
@@ -109,13 +135,15 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
   };
 
   /** Encart mileage d'un type (coût généré ; défaut historique = 200 si absent). */
-  const mileageInfo = (kind: keyof typeof MILEAGE_OF): ReactNode => {
+  const mileageInfo = (kind: keyof typeof MILEAGE_OF, note?: string): ReactNode => {
     const info = getRecruitKind(kind);
     return (
       <MileageInfo
         mileage={itemChipByName(MILEAGE_OF[kind], lang)}
         cost={info.mileageCost ?? 200}
         lang={lang}
+        {...(kind === 'equipment' ? { target: 'gear' as const } : {})}
+        {...(note ? { note } : {})}
       />
     );
   };
@@ -131,7 +159,11 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
       content: (
         <div className="space-y-6">
           <SectionHeading accent="sky" title={L(LABELS.pickup.heading)} />
-          <BannerRates info={getRecruitKind('custom')} lang={lang} />
+          <BannerRates
+            info={getRecruitKind('custom')}
+            lang={lang}
+            guarantee={L(LABELS.pickup.pity)}
+          />
           <div className="space-y-3">
             <Prose>{L(LABELS.pickup.desc)}</Prose>
             <div className={neutralBox}>
@@ -168,7 +200,11 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
       content: (
         <div className="space-y-6">
           <SectionHeading accent="violet" title={L(LABELS.rateup.heading)} />
-          <BannerRates info={getRecruitKind('pickup')} lang={lang} />
+          <BannerRates
+            info={getRecruitKind('pickup')}
+            lang={lang}
+            guarantee={L(LABELS.rateup.pity)}
+          />
           <div className={neutralBox}>
             <p className="text-content m-0 text-sm">
               {L(LABELS.rateup.desc)}
@@ -199,6 +235,7 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
             info={getRecruitKind('premium')}
             lang={lang}
             subtext={L(LABELS.premium.subtext)}
+            guarantee={L(LABELS.premium.pity)}
           />
           <div className="rounded-lg border border-violet-400/25 bg-violet-400/5 p-3">
             <p className="m-0 text-sm text-violet-200">
@@ -224,7 +261,11 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
       content: (
         <div className="space-y-6">
           <SectionHeading accent="rose" title={L(LABELS.limited.heading)} />
-          <BannerRates info={getRecruitKind('limited')} lang={lang} />
+          <BannerRates
+            info={getRecruitKind('limited')}
+            lang={lang}
+            guarantee={L(LABELS.limited.pity)}
+          />
           <div className="space-y-3">
             <div className="rounded-lg border border-rose-400/25 bg-rose-400/5 p-3">
               <p className="m-0 mb-3 text-sm text-rose-200">
@@ -273,6 +314,49 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
         </div>
       ),
     },
+
+    /* ═══ Dimensional Supply (équipement) ═══ */
+    {
+      id: 'supply',
+      label: L(LABELS.supply.label),
+      ...tabVisual('equipment'),
+      content: (
+        <div className="space-y-6">
+          <SectionHeading accent="cyan" title={L(LABELS.supply.heading)} />
+          <BannerRates info={getRecruitKind('equipment')} lang={lang} />
+          <div className="space-y-3">
+            <div className={neutralBox}>
+              <p className="text-content m-0 text-sm">
+                <span className="font-semibold">{L(LABELS.supply.desc_bold)}</span>
+                {L(LABELS.supply.desc)}
+              </p>
+              <p className="text-content-subtle m-0 mt-2 text-xs">{L(LABELS.supply.unlock)}</p>
+            </div>
+            <div className="rounded-lg border border-cyan-400/25 bg-cyan-400/5 p-3">
+              <p className="m-0 text-sm text-cyan-200">
+                <span className="font-semibold">{L(LABELS.supply.settings_label)}</span>{' '}
+                {L(LABELS.supply.settings)}
+              </p>
+              <p className="m-0 mt-2 text-sm text-cyan-200">
+                {L(LABELS.supply.select_before)}
+                <strong className="text-ed-amber">{L(LABELS.supply.select_bold)}</strong>
+                {L(LABELS.supply.select_after)}
+              </p>
+            </div>
+          </div>
+          <Callout accent="amber" label={L(LABELS.supply.monthly_label)}>
+            <ul className="m-0 list-disc space-y-1 pl-4">
+              {SUPPLY_MONTHLY.map((key) => (
+                <li key={key}>{L(LABELS.supply[key])}</li>
+              ))}
+            </ul>
+          </Callout>
+          {/* Pas de BannerRewards : on ne tire pas de doublon de héros ici. */}
+          <BannerResources rows={resourceRows('equipment')} lang={lang} />
+          {mileageInfo('equipment', L(LABELS.supply.chips_note))}
+        </div>
+      ),
+    },
   ];
 
   return (
@@ -302,6 +386,20 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
         <strong className="text-content-strong">{L(LABELS.intro_p4_bold2)}</strong>
         {L(LABELS.intro_p4_end)}
       </Prose>
+      <Prose>
+        {L(LABELS.intro_p5_before)}
+        <span className="text-ed-violet underline">{L(LABELS.intro_p5_highlight)}</span>
+        {L(LABELS.intro_p5_mid)}
+        <strong className="text-content-strong">{L(LABELS.intro_p5_bold)}</strong>
+        {L(LABELS.intro_p5_after)}
+      </Prose>
+      <Callout accent="violet" label={L(LABELS.guarantee_rules_label)}>
+        <ul className="m-0 list-disc space-y-1 pl-4">
+          {GUARANTEE_RULES.map((key) => (
+            <li key={key}>{L(LABELS[key])}</li>
+          ))}
+        </ul>
+      </Callout>
       <BannerTabs tabs={tabs} urlKey="banner" />
     </div>
   );
