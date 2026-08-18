@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { TranslationKey } from '@/i18n';
 import { buildSearchIndex } from '@/lib/search-index';
+import { normalizeSearchText } from '@/lib/search-text';
 
 /**
  * `buildSearchIndex` s'appuie sur la donnée committée (`data/generated`, contrat
@@ -57,6 +58,56 @@ describe('buildSearchIndex', () => {
     for (const kind of ['character', 'guide'] as const) {
       const hrefs = INDEX.filter((e) => e.kind === kind).map((e) => e.href);
       expect(new Set(hrefs).size).toBe(hrefs.length);
+    }
+  });
+});
+
+/**
+ * Le bug qui a motivé `terms` : la palette ne filtrait que sur le libellé
+ * AFFICHÉ, donc sur zh.outerpedia.com uniquement sur du chinois — un nom anglais
+ * ne matchait plus rien dès la traduction de la donnée (XTY109, 18/08/2026). Ces
+ * tests appliquent aux termes la MÊME règle que la palette : tous les mots de la
+ * saisie doivent s'y trouver.
+ */
+const tokens = (s: string) => normalizeSearchText(s).split(/\s+/).filter(Boolean);
+const findable = (entry: { terms?: string }, query: string) =>
+  tokens(query).every((tk) => (entry.terms ?? '').includes(tk));
+
+describe('termes cherchables (terms)', () => {
+  it('toute entrée porte des termes normalisés', () => {
+    for (const e of INDEX) {
+      expect(e.terms).toBeTruthy();
+      expect(e.terms).toBe(normalizeSearchText(e.terms!));
+      // Le libellé affiché reste cherchable tel qu'il est lu.
+      expect(findable(e, e.label)).toBe(true);
+    }
+  });
+
+  it('un personnage reste trouvable par son nom ANGLAIS depuis zh', () => {
+    const slug = (href: string) => href.split('/characters/')[1];
+    const zh = new Map(
+      buildSearchIndex('zh', t)
+        .filter((e) => e.kind === 'character')
+        .map((e) => [slug(e.href), e]),
+    );
+    const en = INDEX.filter((e) => e.kind === 'character');
+    expect(en.length).toBeGreaterThan(0);
+    for (const e of en) {
+      const cn = zh.get(slug(e.href));
+      expect(cn).toBeDefined();
+      expect(findable(cn!, e.label)).toBe(true);
+    }
+  });
+
+  it('les pages et les guides sont trouvables par leur slug anglais', () => {
+    const characters = INDEX.find((e) => e.href === '/characters');
+    expect(findable(characters!, 'characters')).toBe(true);
+    const zhCategories = buildSearchIndex('zh', t).filter(
+      (e) => e.kind === 'page' && /\/guides\/[^/]+$/.test(e.href),
+    );
+    for (const c of zhCategories) {
+      const cat = c.href.split('/guides/')[1];
+      expect(findable(c, cat.replace(/-/g, ' '))).toBe(true);
     }
   });
 });

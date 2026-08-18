@@ -7,6 +7,22 @@
 
 ## 2026-08-18
 
+- **Recherche du header : les noms anglais revivent hors anglais** (signalé par
+  XTY109 sur zh). La palette ne filtrait que sur le libellé AFFICHÉ
+  (`characterDisplayName(c, lang)`) : depuis que les 125 persos ont un nom zh
+  distinct de l'anglais, taper « Ame » sur zh.outerpedia.com ne matchait plus
+  rien — jp et kr étaient logés à la même enseigne, personne ne l'avait dit. Le
+  champ de la page personnages, lui, marchait déjà : il cherche dans
+  `characterSearchNames` (noms toutes langues + surnoms + alias curés + id +
+  slug). L'index porte désormais un champ `terms` qui rend cette parité :
+  personnages = `characterSearchNames` complet ; pages, catégories et guides =
+  libellé localisé + SLUG (déjà la forme anglaise du sujet — les quatre titres
+  de guide coûtaient 6 Ko gzip pour ce que le slug donne). Index zh : 6,3 → 17 Ko
+  gzip, chargé à la 1re ouverture et caché par le CDN. La normalisation
+  (minuscules, diacritiques, pleine chasse) vit dans `lib/search-text.ts`,
+  SEULE source pour les deux côtés — le serveur indexe et le client tape avec la
+  même. Champ optionnel + repli sur le libellé : un index déjà en cache CDN
+  (s-maxage 1 j) reste utilisable tel quel.
 - **Liens courts `/s/` réparés** (signalé par Sevih : outerpedia.com/s/0oLx4q4AbSI3
   menait sur `https://0.0.0.0:3000/characters?z=…`). La route reconstruisait une
   URL ABSOLUE avec `new URL(path, request.url)` : dans l'image standalone,

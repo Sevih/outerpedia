@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import type { Route } from 'next';
 import type { SearchEntry, SearchKind } from '@/lib/search-index';
+import { normalizeSearchText as norm } from '@/lib/search-text';
 
 export interface SearchStrings {
   placeholder: string;
@@ -44,13 +45,6 @@ async function loadIndex(lang: string): Promise<SearchEntry[]> {
   }
   return p;
 }
-
-/** Minuscule + sans diacritiques : « Éclair » ⊃ « eclair ». */
-const norm = (s: string) =>
-  s
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '');
 
 /**
  * Palette de recherche globale (Ctrl+K) : charge l'index à la 1re ouverture,
@@ -102,8 +96,12 @@ export function SearchModal({
     if (!q) return [] as { kind: SearchKind; items: SearchEntry[] }[];
     const toks = q.split(/\s+/);
     const match = (e: SearchEntry) => {
-      const n = norm(e.label);
-      return toks.every((tk) => n.includes(tk));
+      // `terms` est pré-normalisé côté serveur et couvre le libellé AFFICHÉ plus
+      // les noms des autres langues, les alias et le slug : sur zh/jp/kr, le nom
+      // anglais reste tapable. Repli sur le seul libellé pour un index servi
+      // AVANT l'ajout du champ (CDN : s-maxage 1 jour, SWR 1 semaine).
+      const hay = e.terms ?? norm(e.label);
+      return toks.every((tk) => hay.includes(tk));
     };
     const hits = entries.filter(match);
     return KIND_ORDER.map((kind) => ({
