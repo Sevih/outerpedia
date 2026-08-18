@@ -768,7 +768,7 @@ export function resolveKitPassives(
   // Un buff référencé par PLUSIEURS skills (CSV caller « S2,B1..B3 » : le même
   // templet couvre ses déclinaisons) est UNE instance en jeu — servi au premier
   // référent seulement. Sans cette dédup, chaque référence redevenait une
-  // entrée et les lignes multi-callers comptaient N fois le même buff (Aer
+  // entrée et les lignes multi-callers comptaient N fois le même buff (Rhona
   // 2000008_1_4 : +1500 ‰ vs boss au lieu de +500 — revue 18/08/2026). Les
   // seuls buffs multi-référencés à PLUSIEURS niveaux sont hors pipeline dégâts
   // (garde datagen) : le niveau du premier référent est donc sans perte.

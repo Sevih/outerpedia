@@ -36,12 +36,12 @@
   catalogue), chargée au premier survol.
 - **Dédup des buffs de kit multi-référencés** (revue) : un buff référencé par
   plusieurs skills (CSV caller « S2,B1..B3 ») redevenait une entrée PAR
-  référence — Aer comptait 3× son `BT_DMG_TO_BOSS` (+1500 ‰ au lieu de
+  référence — Rhona (2000008) comptait 3× son `BT_DMG_TO_BOSS` (+1500 ‰ au lieu de
   +500), Caren 2× le `BT_DMG` de ses bursts (66 buffs concernés).
   `resolveKitPassives` sert désormais chaque buffId au premier référent (un
   templet = une instance). Preuves structurelles (référents ⊆ callers 63/66,
   héritage cumulatif des listes burst chez 2000129, vars du jeu identiques
-  B2/B3) ; la preuve RUNTIME manque — mesure in-game Aer S1 vs boss à
+  B2/B3) ; la preuve RUNTIME manque — mesure in-game Rhona S1 vs boss à
   capturer en fixture (dédup +50 % / cumul +150 %). Garde datagen : un buff
   multi-référencé damage-pertinent est mono-niveau (l'hypothèse « niveau du
   premier référent » casse bruyamment sinon).
@@ -53,7 +53,7 @@
   bornées, steppers CONTEXTUELS du panneau Contexte (visibles seulement si un
   passif du rapport lit la famille — Eris affiche « Débuffs sur la cible »),
   5 locales. Témoins testés : Eris 2000117_2_4 (+20 %/débuff sur S2/S3 seuls
-  — ses bursts restent hors bonus, le CSV du jeu ne les liste pas), Regina
+  — ses bursts restent hors bonus, le CSV du jeu ne les liste pas), H. Dianne
   2000093_3_1 (Σ équipe sur S3 seul). Jamais dérivés des chips : déclaration
   du joueur, absents = 0.
 - **`TARGET_IS_BOSS` : rien à brancher** (constat contre le plan de revue) :

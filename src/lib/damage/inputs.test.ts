@@ -217,10 +217,10 @@ describe('inputs — buildDamageReport', () => {
     // multi-callers comptaient double (revue 18/08/2026).
     const eris = buildDamageReport({ ...attackerBase(), id: '2000117' }, target(), data);
     expect(eris.kitPassives!.entries.filter((e) => e.buffId === '2000117_2_4')).toHaveLength(1);
-    // Aer : 2000008_1_4 (BT_DMG_TO_BOSS +500 ‰) référencé par S1/S2/S3 —
+    // Rhona : 2000008_1_4 (BT_DMG_TO_BOSS +500 ‰) référencé par S1/S2/S3 —
     // compté TROIS fois avant (+1500 ‰ vs boss).
-    const aer = buildDamageReport({ ...attackerBase(), id: '2000008' }, target(), data);
-    expect(aer.kitPassives!.entries.filter((e) => e.buffId === '2000008_1_4')).toHaveLength(1);
+    const rhona = buildDamageReport({ ...attackerBase(), id: '2000008' }, target(), data);
+    expect(rhona.kitPassives!.entries.filter((e) => e.buffId === '2000008_1_4')).toHaveLength(1);
     // Caren : 2000089_u_1_2 (BT_DMG +300 ‰, callers B1/B2) référencé par les
     // deux skills burst — les lignes B1/B2 recevaient +600 ‰.
     const caren = buildDamageReport({ ...attackerBase(), id: '2000089' }, target(), data);
@@ -255,10 +255,10 @@ describe('inputs — compteurs § 9.1 (buffs/débuffs déclarés)', () => {
     expect(n3.S2b3).toBe(n0.S2b3);
   });
 
-  it('Regina (2000093_3_1, ×Σ buffs de l’ÉQUIPE, caller S3) : teamBuffCount ne pèse que sur le S3', () => {
-    const regina = () => ({ ...attackerBase(), id: '2000093' });
-    const n0 = damages(buildDamageReport(regina(), target(), data));
-    const n4 = damages(buildDamageReport({ ...regina(), teamBuffCount: 4 }, target(), data));
+  it('H. Dianne (2000093_3_1, ×Σ buffs de l’ÉQUIPE, caller S3) : teamBuffCount ne pèse que sur le S3', () => {
+    const hdianne = () => ({ ...attackerBase(), id: '2000093' });
+    const n0 = damages(buildDamageReport(hdianne(), target(), data));
+    const n4 = damages(buildDamageReport({ ...hdianne(), teamBuffCount: 4 }, target(), data));
     expect(n4.S3).toBeGreaterThan(n0.S3);
     expect(n4.S1).toBe(n0.S1);
     expect(n4.S2).toBe(n0.S2);
