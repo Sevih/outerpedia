@@ -129,6 +129,41 @@ describe('buildInputsFromZ — cible', () => {
   });
 });
 
+describe('buildInputsFromZ — compteurs § 9.1 (ob/od/ot · db/dd)', () => {
+  it('déclarés > 0 : transmis bornés ; 0 ou absents : OMIS (contribution 0 sans clé)', () => {
+    const { attacker, target } = buildInputsFromZ({
+      a: '2000001',
+      ob: 2,
+      od: 1,
+      ot: 999, // hors borne → clampé (Σ équipe, plafond 40)
+      g: 1,
+      te: 'water',
+      db: 4,
+      dd: 25, // hors borne mono-entité → clampé à 20
+    });
+    expect(attacker?.buffCount).toBe(2);
+    expect(attacker?.debuffCount).toBe(1);
+    expect(attacker?.teamBuffCount).toBe(40);
+    expect(target?.buffCount).toBe(4);
+    expect(target?.debuffCount).toBe(20);
+    // Absents (ou 0 explicite, la valeur par défaut des steppers) : aucun
+    // champ — l'entrée moteur reste identique à l'ère pré-compteurs.
+    const bare = buildInputsFromZ({ a: '2000001', ob: 0, g: 1, te: 'water', dd: 0 });
+    expect(bare.attacker?.buffCount).toBeUndefined();
+    expect(bare.target?.debuffCount).toBeUndefined();
+  });
+
+  it('les compteurs cible transitent AUSSI en preset (tgtCommon)', () => {
+    const { target } = buildInputsFromZ(
+      { ti: 'dg:400101', dd: 3 },
+      {
+        resolvePreset: () => ({ element: 'CET_DARK', stats: { hp: 91080, def: 1200 } }),
+      },
+    );
+    expect(target?.debuffCount).toBe(3);
+  });
+});
+
 describe('buildInputsFromZ — équipement § 15 et hors périmètre signalés', () => {
   const z: CalculatorUrlState = {
     a: '2000001',

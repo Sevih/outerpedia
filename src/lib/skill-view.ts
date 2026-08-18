@@ -749,27 +749,31 @@ export interface BurstView {
   vars?: Skill['levels'][number]['vars'];
 }
 
-/** Bursts 1..3 : desc localisée + vars du dernier palier + coût AP du burstable. */
-export function buildBurstViews(skills: Skill[], lang: Lang): BurstView[] {
-  const burstable = mainSkills(skills).find((s) => s.burstAP?.length);
-  // Un seul burst par palier : les persos à FORMES portent le kit jumeau
-  // (textes identiques) — même règle que mainSkills (variante la plus complète).
+/** Déclinaisons burst_1..3 d'un kit, UNE par palier, triées : les persos à
+ *  FORMES portent le kit jumeau (textes identiques) — même règle que
+ *  mainSkills (variante la plus complète). Règle UNIQUE, partagée avec le
+ *  damage calculator (revue 18/08/2026 — plus de copie locale). */
+export function burstSkills(skills: Skill[]): Skill[] {
   const byType = new Map<string, Skill>();
   for (const b of skills.filter((s) => s.type.startsWith('burst_'))) {
     const prev = byType.get(b.type);
     if (!prev || b.levels.length > prev.levels.length) byType.set(b.type, b);
   }
-  return [...byType.values()]
-    .sort((a, b) => a.type.localeCompare(b.type))
-    .map((b, i) => {
-      const last = b.levels[b.levels.length - 1];
-      return {
-        level: (i + 1) as 1 | 2 | 3,
-        cost: burstable?.burstAP?.[i],
-        desc: b.desc ? lRec(b.desc, lang) : undefined,
-        vars: last?.vars,
-      };
-    });
+  return [...byType.values()].sort((a, b) => a.type.localeCompare(b.type));
+}
+
+/** Bursts 1..3 : desc localisée + vars du dernier palier + coût AP du burstable. */
+export function buildBurstViews(skills: Skill[], lang: Lang): BurstView[] {
+  const burstable = mainSkills(skills).find((s) => s.burstAP?.length);
+  return burstSkills(skills).map((b, i) => {
+    const last = b.levels[b.levels.length - 1];
+    return {
+      level: (i + 1) as 1 | 2 | 3,
+      cost: burstable?.burstAP?.[i],
+      desc: b.desc ? lRec(b.desc, lang) : undefined,
+      vars: last?.vars,
+    };
+  });
 }
 
 /** Vue chaîne & duo complète, pré-localisée (hors icône, qui dépend du perso). */

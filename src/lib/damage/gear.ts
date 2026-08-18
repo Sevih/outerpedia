@@ -209,6 +209,40 @@ const STATE_CONDITIONS = new Set([
   'TARGET_RUN_COUNTER',
 ]);
 
+/**
+ * Conditions dont `conditionValue` référence un BUFF précis (id de tooltip du
+ * jeu) — sous-ensemble de STATE_CONDITIONS ci-dessus. Les valeurs 9996..9999
+ * sont des SENTINELLES de catégorie (« n'importe quel buff/débuff » — vérifié
+ * sur la donnée : 2000001_1_1 « remove N buff(s) », générique), pas des ids.
+ */
+const BUFF_REF_CONDITIONS = new Set([
+  'OWNER_HAS_BUFF',
+  'OWNER_HAS_ALL_BUFF',
+  'OWNER_HAS_NOT_BUFF',
+  'CASTER_HAS_BUFF',
+  'CASTER_HAS_NOT_BUFF',
+  'CASTER_ENEMY_TEAM_HAS_BUFF',
+  'TARGET_HAS_BUFF',
+  'TARGET_HAS_NOT_BUFF',
+]);
+
+/**
+ * Id du buff RÉFÉRENCÉ par une condition, ou `undefined` (condition d'un
+ * autre genre, valeur absente, ou sentinelle de catégorie — le gabarit
+ * générique est alors le bon libellé). Prédicat UNIQUE du nommage des
+ * conditions : le wrapper collecte les noms sur lui, le client décide du
+ * suffixe sur lui — plus deux regex à garder d'accord (revue 18/08/2026).
+ */
+export function conditionBuffRef(
+  condition: string | undefined,
+  conditionValue: number | undefined,
+): string | undefined {
+  if (condition === undefined || conditionValue === undefined) return undefined;
+  if (!BUFF_REF_CONDITIONS.has(condition)) return undefined;
+  if (conditionValue >= 9996 && conditionValue <= 9999) return undefined;
+  return String(conditionValue);
+}
+
 /** Les skills que le rapport LIGNE réellement (S1/S2/S3 + bursts) — un buff
  *  restreint hors de cet ensemble (chain attacks…) ne pèse sur aucune ligne. */
 const REPORT_SKILL_TYPES = new Set([
@@ -540,6 +574,27 @@ export interface KitSkill {
   id: string;
   type: string;
   levels: { level: number; buffIds: string[] }[];
+  /** Marqueur BURSTABLE (coûts d'AP des bursts) — cf. `burstableSlotOf`. */
+  burstAP?: number[];
+}
+
+/**
+ * Slot UI du skill BURSTABLE d'un kit (marqueur `burstAP`, extrait de
+ * `RequireAP` en CSV — datagen/lib/burst.ts) : S1 chez Caren/Valentine, S2
+ * chez la plupart, S3 chez quelques-uns. `undefined` sans marqueur — l'appelant
+ * décide de la dégradation (le moteur OMET les lignes burst et le signale,
+ * jamais un slot supposé : le vieux « toujours S2 » était faux pour 74/125
+ * persos, revue 18/08/2026).
+ */
+export function burstableSlotOf(
+  skills: Iterable<{ type: string; burstAP?: number[] } | undefined>,
+): 'S1' | 'S2' | 'S3' | undefined {
+  for (const s of skills) {
+    if (!s?.burstAP?.length) continue;
+    const slot = MAIN_SLOT_OF[s.type];
+    if (slot !== undefined) return slot;
+  }
+  return undefined;
 }
 
 /** Palier du passif UNIQUE par transcendance (`growth.transcend.skillLevel`,
@@ -683,15 +738,12 @@ export function resolveQuirkPassives(
   return info;
 }
 
-/** Slot UI dont un skill ACTIF tient son niveau (bursts = niveau du S2 —
- *  vérifié : 372/372 bursts ont le même nombre de niveaux que leur S2). */
-const ACTIVE_SLOT_OF: Record<string, 'S1' | 'S2' | 'S3'> = {
+/** Slot UI des 3 skills PRINCIPAUX — les bursts tiennent leur niveau du slot
+ *  du skill BURSTABLE (`burstableSlotOf`, garde datagen : niveaux alignés). */
+const MAIN_SLOT_OF: Record<string, 'S1' | 'S2' | 'S3'> = {
   SKT_FIRST: 'S1',
   SKT_SECOND: 'S2',
   SKT_ULTIMATE: 'S3',
-  SKT_BURST_1: 'S2',
-  SKT_BURST_2: 'S2',
-  SKT_BURST_3: 'S2',
 };
 
 export function resolveKitPassives(
@@ -708,6 +760,19 @@ export function resolveKitPassives(
   metConditions?: ReadonlySet<string>,
 ): GearPassivesInfo {
   const { info, feedBuff } = makeCollector(buffs, attackerElement, defenderElement, metConditions);
+  // Slot du skill BURSTABLE : ses déclinaisons burst tiennent leur niveau de
+  // LUI (S1 chez Caren — le « toujours S2 » d'avant faussait la sélection des
+  // lignes de buff pour 74/125 persos, revue 18/08/2026). Sans marqueur, un
+  // burst retombe sur son niveau max (même règle que les actifs hors slot).
+  const burstSlot = burstableSlotOf(char.skills.map((r) => skills[r.id]));
+  // Un buff référencé par PLUSIEURS skills (CSV caller « S2,B1..B3 » : le même
+  // templet couvre ses déclinaisons) est UNE instance en jeu — servi au premier
+  // référent seulement. Sans cette dédup, chaque référence redevenait une
+  // entrée et les lignes multi-callers comptaient N fois le même buff (Aer
+  // 2000008_1_4 : +1500 ‰ vs boss au lieu de +500 — revue 18/08/2026). Les
+  // seuls buffs multi-référencés à PLUSIEURS niveaux sont hors pipeline dégâts
+  // (garde datagen) : le niveau du premier référent est donc sans perte.
+  const served = new Set<string>();
   for (const ref of char.skills) {
     const sk = skills[ref.id];
     if (!sk) continue;
@@ -721,7 +786,8 @@ export function resolveKitPassives(
     } else if (sk.type.includes('PASSIVE')) {
       wanted = sk.levels.length;
     } else {
-      const slot = ACTIVE_SLOT_OF[sk.type];
+      const slot =
+        MAIN_SLOT_OF[sk.type] ?? (sk.type.startsWith('SKT_BURST_') ? burstSlot : undefined);
       if (slot === undefined && !sk.levels.some((l) => l.buffIds.length)) continue;
       const asked = slot !== undefined ? skillLevels[slot] : undefined;
       wanted = Math.min(Math.max(asked ?? sk.levels.length, 1), sk.levels.length);
@@ -731,7 +797,11 @@ export function resolveKitPassives(
       sk.levels.filter((l) => l.level <= wanted).sort((a, b) => b.level - a.level)[0] ??
       sk.levels[0];
     if (!lv) continue;
-    for (const b of lv.buffIds) feedBuff('kit', sk.id, b, wanted);
+    for (const b of lv.buffIds) {
+      if (served.has(b)) continue;
+      served.add(b);
+      feedBuff('kit', sk.id, b, wanted);
+    }
   }
   return info;
 }

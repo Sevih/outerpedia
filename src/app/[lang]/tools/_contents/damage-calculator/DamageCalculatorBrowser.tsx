@@ -7,7 +7,10 @@
  * AUCUN dégât n'est calculé : le moteur `src/lib/damage` ne sera branché
  * qu'avec les extracteurs damage (docs/specs/damage-report-inputs.md § 6). La
  * colonne Rapport rend la mise en page finale avec des valeurs « — » et un
- * bandeau l'assumant. Aucune donnée n'est localisée ici : tout vient du wrapper.
+ * bandeau l'assumant. Aucune donnée n'est localisée ici : tout vient du wrapper
+ * — à UNE exception près : les DESCS du popover de skill (SkillTip.tsx), qui
+ * arrivent en dictionnaires complets d'une projection chargée à la demande et
+ * se localisent au rendu (`lang`).
  *
  * Décisions produit (Sevih, 26/07/2026) :
  *   - stats SAISIES depuis la fiche du jeu → l'UI ne montre que ce que la fiche
@@ -27,6 +30,8 @@ import { SearchField } from '@/components/character/filters/FilterAtoms';
 import { FilterPill } from '@/components/character/filters/FilterPill';
 import { GameText } from '@/components/ui/GameText';
 import { Thumbnail } from '@/components/ui/Thumbnail';
+import { SkillIconTip } from './SkillTip';
+import type { Lang } from '@/lib/i18n/config';
 import {
   buildInputsFromZ,
   flattenReport,
@@ -39,6 +44,7 @@ import {
   type DamageReportResult,
 } from '@/lib/damage/inputs';
 import { BASE_AMOUNT_STATS, passiveConditionMet } from '@/lib/damage/passives';
+import { conditionBuffRef } from '@/lib/damage/gear';
 import { ENGINE_GAME_VERSION, type DamageBranch, type DamageFixture } from '@/lib/damage/harness';
 import dynamic from 'next/dynamic';
 
@@ -75,12 +81,18 @@ export interface DcChar {
 
 export interface DcSkillRow {
   slot: string;
+  /** Id du skill dans le catalogue des tables — clé du popover de desc
+   *  (catalogue chargé à la demande, cf. `skillsDb`). */
+  id: string;
   name: string;
   iconSrc?: string;
   offensive: boolean;
   /** Multi-cible (RangeType all/double) — conditionne « cibles touchées ». */
   aoe?: boolean;
   maxLevel: number;
+  /** Ids des déclinaisons burst_1..3 — portés par le SEUL skill burstable du
+   *  kit ; leurs descs s'affichent en vert/bleu/rouge dans le popover. */
+  burstIds?: string[];
 }
 
 export interface DcGear {
@@ -368,6 +380,15 @@ export interface DcLabels {
     /** Libellés LISIBLES des conditions (enum brut → gabarit localisé,
      *  `{n}` = seuil — HPRATE en %). Partagés mécaniques perso / chips boss. */
     conds: Record<string, string>;
+    /** Compteurs § 9.1 (« ×N buffs/débuffs ») — steppers visibles seulement
+     *  quand un passif du rapport LIT la famille correspondante. */
+    counters: string;
+    countersHint: string;
+    ownBuffs: string;
+    ownDebuffs: string;
+    teamBuffs: string;
+    tgtBuffs: string;
+    tgtDebuffs: string;
   };
   team: { emptySlot: string; eeOwned: string; eePlus: string };
   buffs: {
@@ -427,6 +448,14 @@ interface Props {
   guildTiers: number[];
   /** `% de PV max` du buff de titre « Premium Body » (growth.titleMaxHp). */
   titleHpPct: number;
+  /** Noms LOCALISÉS des buffs référencés par les conditions `*HAS_BUFF*`
+   *  (`conditionValue` = id de tooltip → glossaire des effets) — libellés des
+   *  mécaniques du panneau contexte. Id absent = sans nom dans le jeu. */
+  condBuffNames: Record<string, string>;
+  /** Langue rendue — localise les DESCS du catalogue de skills chargé à la
+   *  demande (seul texte que le client localise : la donnée arrive en
+   *  dictionnaires complets, tout le reste vient pré-localisé du wrapper). */
+  lang: Lang;
   labels: DcLabels;
 }
 
@@ -1037,6 +1066,8 @@ export function DamageCalculatorBrowser({
   codexTiers,
   guildTiers,
   titleHpPct,
+  condBuffNames,
+  lang,
   labels: L,
 }: Props) {
   const [tab, setTab] = useState<'calc' | 'settings'>('calc');
@@ -1105,6 +1136,14 @@ export function DamageCalculatorBrowser({
   // Conditions d'ÉTAT déclarées remplies (z `cs`, buffIds) — mécaniques perso
   // (entrées `stateful` de gear.ts) ; toggles dans le harnais.
   const [metConds, setMetConds] = useState<string[]>([]);
+  // Compteurs § 9.1 DÉCLARÉS (« ×N buffs/débuffs » — z `ob`/`od`/`ot`/`db`/
+  // `dd`) : jamais dérivés des chips (elles ne couvrent pas tous les états du
+  // jeu) ; steppers visibles seulement quand un passif LIT la famille.
+  const [atkBuffN, setAtkBuffN] = useState(0);
+  const [atkDebuffN, setAtkDebuffN] = useState(0);
+  const [atkTeamBuffN, setAtkTeamBuffN] = useState(0);
+  const [tgtBuffN, setTgtBuffN] = useState(0);
+  const [tgtDebuffN, setTgtDebuffN] = useState(0);
   // PV actuels de l'attaquant (%) — ne sert qu'aux sets « missing Health ».
   const [hpPct, setHpPct] = useState('100');
 
@@ -1247,6 +1286,11 @@ export function DamageCalculatorBrowser({
     setAtkFx([]);
     setTgtFx([]);
     setMetConds([]);
+    setAtkBuffN(0);
+    setAtkDebuffN(0);
+    setAtkTeamBuffN(0);
+    setTgtBuffN(0);
+    setTgtDebuffN(0);
     // Cycle de capture (dev) : un nouveau scénario repart d'observés vides.
     setObs({});
   };
@@ -1323,6 +1367,10 @@ export function DamageCalculatorBrowser({
       if (Array.isArray(st.d)) setTgtFx(st.d.filter((x): x is string => typeof x === 'string'));
       if (Array.isArray(st.cs))
         setMetConds(st.cs.filter((x): x is string => typeof x === 'string'));
+      // Compteurs § 9.1 côté attaquant — mêmes bornes que le pont scenario.ts.
+      if (typeof st.ob === 'number') setAtkBuffN(Math.min(Math.max(st.ob, 0), 20));
+      if (typeof st.od === 'number') setAtkDebuffN(Math.min(Math.max(st.od, 0), 20));
+      if (typeof st.ot === 'number') setAtkTeamBuffN(Math.min(Math.max(st.ot, 0), 40));
     }
     if (st.g) setTargetTab('manual');
     if (st.ti && targets.some((tg) => tg.id === st.ti)) {
@@ -1340,6 +1388,8 @@ export function DamageCalculatorBrowser({
     if (st.gb) setTgtGuildBuff(true);
     if (st.pb) setTgtTitleBuff(true);
     if (typeof st.th === 'string') setTgtHpPct(st.th);
+    if (typeof st.db === 'number') setTgtBuffN(Math.min(Math.max(st.db, 0), 20));
+    if (typeof st.dd === 'number') setTgtDebuffN(Math.min(Math.max(st.dd, 0), 20));
     if (typeof st.n === 'number') setTargetsHit(Math.min(Math.max(st.n, 1), 4));
     if (Array.isArray(st.al))
       setAllies(
@@ -1457,6 +1507,9 @@ export function DamageCalculatorBrowser({
       if (atkFx.length) z.b = atkFx;
       if (tgtFx.length) z.d = tgtFx;
       if (metConds.length) z.cs = metConds;
+      if (atkBuffN > 0) z.ob = atkBuffN;
+      if (atkDebuffN > 0) z.od = atkDebuffN;
+      if (atkTeamBuffN > 0) z.ot = atkTeamBuffN;
     }
     if (targetTab === 'manual') z.g = 1;
     if (targetId) {
@@ -1472,6 +1525,8 @@ export function DamageCalculatorBrowser({
     if (tgtGuildBuff) z.gb = 1;
     if (tgtTitleBuff) z.pb = 1;
     if (tgtHpPct !== '100') z.th = tgtHpPct;
+    if (tgtBuffN > 0) z.db = tgtBuffN;
+    if (tgtDebuffN > 0) z.dd = tgtDebuffN;
     if (targetsHit > 1) z.n = targetsHit;
     if (allies.some((a) => a.id))
       z.al = allies.map((a) => [
@@ -1639,19 +1694,67 @@ export function DamageCalculatorBrowser({
         (i?.entries ?? []).filter((e) => e.stateful),
       )
     : [];
+
+  // Compteurs § 9.1 (« ×N buffs/débuffs ») : le scénario DÉCLARE les nombres
+  // (le moteur ne compte jamais les chips — elles ne couvrent pas tous les
+  // états du jeu). Un stepper n'apparaît que si un passif du rapport côté
+  // attaquant LIT sa famille (actif OU stateful — ex. Eris 2000117_2_4 :
+  // +20 % par débuff de la cible sur S2/S3).
+  const counterTypes = new Set(
+    report
+      ? [
+          ...[report.kitPassives, report.gearPassives, report.quirkPassives].flatMap(
+            (i) => i?.entries ?? [],
+          ),
+          ...(report.bossPassives?.entries ?? []),
+        ]
+          .filter((e) => e.side === 'attacker')
+          .map((e) => e.buff.type)
+      : [],
+  );
+  const counterInputs = (
+    [
+      { type: 'BT_DMG_OWNER_BUFF', label: L.context.ownBuffs, value: atkBuffN, set: setAtkBuffN },
+      {
+        type: 'BT_DMG_OWNER_DEBUFF',
+        label: L.context.ownDebuffs,
+        value: atkDebuffN,
+        set: setAtkDebuffN,
+      },
+      {
+        type: 'BT_DMG_OWNER_TEAM_BUFF',
+        label: L.context.teamBuffs,
+        value: atkTeamBuffN,
+        set: setAtkTeamBuffN,
+        // Σ sur l'ÉQUIPE entière — plafond plus large que les compteurs mono-
+        // entité (même borne que le pont scenario.ts).
+        max: 40,
+      },
+      { type: 'BT_DMG_TARGET_BUFF', label: L.context.tgtBuffs, value: tgtBuffN, set: setTgtBuffN },
+      {
+        type: 'BT_DMG_TARGET_DEBUFF',
+        label: L.context.tgtDebuffs,
+        value: tgtDebuffN,
+        set: setTgtDebuffN,
+      },
+    ] as const
+  ).filter((c) => counterTypes.has(c.type));
   // Libellé d'une mécanique : le NOM du jeu de sa source (skill du kit via le
   // slot lanceur, EE, nœud d'éveil) — jamais de texte écrit main ; repli sur
   // le buffId brut (identifiant stable) si la source ne se résout pas.
+  // Les callers BURST se résolvent sur le slot du skill BURSTABLE du kit
+  // (la rangée qui porte `burstIds` — S1 chez Caren : le « toujours S2 »
+  // d'avant contredisait la table Résultat, revue 18/08/2026).
   const SLOT_OF_CALLER: Record<string, string> = {
     SKT_FIRST: 'S1',
     SKT_SECOND: 'S2',
     SKT_ULTIMATE: 'S3',
-    SKT_BURST_1: 'S2',
-    SKT_BURST_2: 'S2',
-    SKT_BURST_3: 'S2',
   };
+  const kitBurstSlot = kit.find((r) => r.burstIds?.length)?.slot;
+  const slotOfCaller = (c: string): string | undefined =>
+    SLOT_OF_CALLER[c] ?? (c.startsWith('SKT_BURST_') ? kitBurstSlot : undefined);
   const mechLabel = (e: (typeof statefulPassives)[number]): { name: string; slot?: string } => {
-    const slot = e.callers?.map((c) => SLOT_OF_CALLER[c]).find((s) => s !== undefined);
+    const slot = e.callers?.map(slotOfCaller).find((s) => s !== undefined);
     if (e.source === 'kit' && slot) {
       const nm = kit.find((r) => r.slot === slot)?.name;
       if (nm) return { name: nm, slot };
@@ -1667,11 +1770,18 @@ export function DamageCalculatorBrowser({
   };
   /** Libellé LISIBLE de la condition d'une mécanique (« Target has a buff »,
    *  « Target HP below 90% »…) — gabarit localisé, `{n}` = seuil (HPRATE en
-   *  ‰ → %) ; repli sur l'enum brut si le gabarit manquait. */
+   *  ‰ → %) ; repli sur l'enum brut si le gabarit manquait. Quand la condition
+   *  référence un buff PRÉCIS (`conditionBuffRef` — prédicat PARTAGÉ avec le
+   *  wrapper, sentinelles « n'importe quel buff » exclues), son nom résolu est
+   *  ajouté (« Enemy team has a buff : Burned » — Sevih 18/08/2026) ; sans nom
+   *  dans le jeu (marqueur technique au NameID vide, ex. 4089002 des
+   *  Irréguliers), l'id brut plutôt qu'un libellé générique trompeur. */
   const mechCond = (e: (typeof statefulPassives)[number]): string | undefined => {
     if (!e.condition) return undefined;
     const tpl = L.context.conds[e.condition];
     if (!tpl) return e.condition;
+    const ref = conditionBuffRef(e.condition, e.conditionValue);
+    if (ref !== undefined) return `${tpl} : ${condBuffNames[ref] ?? `#${ref}`}`;
     const n =
       e.conditionValue !== undefined
         ? e.condition.includes('HPRATE')
@@ -2204,16 +2314,23 @@ export function DamageCalculatorBrowser({
                       <span className="text-content-subtle font-mono text-[10px] font-bold">
                         {row.slot}
                       </span>
-                      {row.iconSrc ? (
-                        <img
-                          src={row.iconSrc}
-                          alt={row.name}
-                          className="h-9 w-9 rounded-lg"
-                          loading="lazy"
-                        />
-                      ) : (
-                        <span className="border-line-subtle bg-surface-raised/60 h-9 w-9 rounded-lg border" />
-                      )}
+                      {/* Icône décorative (le nom est le title du puits et
+                        l'en-tête du popover) — alt vide, règle CONVENTIONS. */}
+                      <SkillIconTip row={row} lvl={skillLvls[row.slot] ?? row.maxLevel} lang={lang}>
+                        {row.iconSrc ? (
+                          <img
+                            src={row.iconSrc}
+                            alt=""
+                            aria-hidden
+                            width={36}
+                            height={36}
+                            className="block h-9 w-9 rounded-lg"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <span className="border-line-subtle bg-surface-raised/60 block h-9 w-9 rounded-lg border" />
+                        )}
+                      </SkillIconTip>
                       <SkillTag offensive={row.offensive} labels={L} />
                       <Stepper
                         value={skillLvls[row.slot] ?? row.maxLevel}
@@ -2881,6 +2998,46 @@ export function DamageCalculatorBrowser({
                     </div>
                   )}
 
+                  {/* Compteurs § 9.1 (« ×N buffs/débuffs ») — visibles quand un
+                    passif du rapport LIT la famille : le scénario déclare les
+                    nombres EN JEU (chips comprises), le moteur ne compte
+                    jamais à la place du joueur. */}
+                  {counterInputs.length > 0 && (
+                    <div className="space-y-1">
+                      <span className="text-content-subtle font-mono text-[9px] tracking-wide uppercase">
+                        {L.context.counters}
+                      </span>
+                      <p className="text-content-subtle text-[10px]">{L.context.countersHint}</p>
+                      {counterInputs.map((c) => (
+                        <label
+                          key={c.type}
+                          className="flex items-center justify-between gap-2 text-xs"
+                        >
+                          <span className={c.value > 0 ? 'text-content' : 'text-content-muted'}>
+                            {c.label}
+                          </span>
+                          <span className="border-line-subtle bg-surface-sunken/70 focus-within:border-accent flex h-7 w-16 items-center rounded-lg border px-2">
+                            <input
+                              type="text"
+                              inputMode="numeric"
+                              value={String(c.value)}
+                              onChange={(e) => {
+                                const n = Number(e.target.value);
+                                const max = 'max' in c ? c.max : 20;
+                                c.set(
+                                  Number.isFinite(n)
+                                    ? Math.min(Math.max(Math.round(n), 0), max)
+                                    : 0,
+                                );
+                              }}
+                              className="text-content w-full min-w-0 bg-transparent text-right font-mono text-sm font-bold tabular-nums outline-none"
+                            />
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+
                   <div className="grid gap-2 sm:grid-cols-2">
                     {(
                       [
@@ -3126,10 +3283,10 @@ export function DamageCalculatorBrowser({
                       </div>
                     ))}
                     {kit.flatMap((sk) => {
-                      // Une ligne par SlotReport du moteur (le S2 déplie ses
-                      // états burst en sous-lignes B1..B3 — y compris quand le
-                      // S2 lui-même est un skill de SOUTIEN : chez Valentine le
-                      // burst améliore le S1 mais reste rattaché au slot S2).
+                      // Une ligne par SlotReport du moteur — le slot du skill
+                      // BURSTABLE (`burstAP` : S1 chez Caren/Valentine, S2
+                      // chez la plupart) déplie ses états burst en sous-lignes
+                      // B1..B3.
                       // Un slot offensif que le moteur v1 ne calcule pas garde
                       // sa ligne à « — » ; un soutien sans burst n'a pas de
                       // ligne (note sous la table).
@@ -3141,16 +3298,29 @@ export function DamageCalculatorBrowser({
                             className="bg-surface-raised/80 flex items-center gap-2 px-3 py-1.5"
                             title={sk.name}
                           >
-                            {sk.iconSrc ? (
-                              <img
-                                src={sk.iconSrc}
-                                alt=""
-                                className="h-7 w-7 rounded-md"
-                                loading="lazy"
-                              />
-                            ) : (
-                              <span className="border-line-subtle bg-surface-sunken/70 h-7 w-7 rounded-md border" />
-                            )}
+                            {/* La ligne Bn cumule les descs B1..Bn (en jeu le
+                              burst n inclut les effets des paliers précédents) ;
+                              la ligne de base n'en montre aucune. */}
+                            <SkillIconTip
+                              row={sk}
+                              lvl={skillLvls[sk.slot] ?? sk.maxLevel}
+                              lang={lang}
+                              burstMax={sr?.burst ?? 0}
+                            >
+                              {sk.iconSrc ? (
+                                <img
+                                  src={sk.iconSrc}
+                                  alt=""
+                                  aria-hidden
+                                  width={28}
+                                  height={28}
+                                  className="block h-7 w-7 rounded-md"
+                                  loading="lazy"
+                                />
+                              ) : (
+                                <span className="border-line-subtle bg-surface-sunken/70 block h-7 w-7 rounded-md border" />
+                              )}
+                            </SkillIconTip>
                             <span className="text-content-subtle font-mono text-[10px] font-bold">
                               {sk.slot}
                               {sr?.burst !== undefined && (

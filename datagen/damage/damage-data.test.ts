@@ -8,6 +8,8 @@
  * Tourne SANS `.gamedata` (rien n'appelle les builders ; `chainOf` est pur).
  */
 import { describe, expect, it } from 'vitest';
+import wikiSkillsData from '../../data/generated/skills.json';
+import skillDescsData from '../../data/generated/damage/skill-descs.json';
 import charactersData from '../../data/generated/damage/characters.json';
 import growthData from '../../data/generated/damage/growth.json';
 import equipmentData from '../../data/generated/damage/equipment.json';
@@ -15,6 +17,8 @@ import targetsData from '../../data/generated/damage/targets.json';
 import buffsData from '../../data/generated/damage/buffs.json';
 import configData from '../../data/generated/damage/config.json';
 import { chainOf, type DamageCharactersData } from './characters';
+import type { SkillDescsData } from './skill-descs';
+import { levelAt, resolveSkillText } from '../../src/lib/skills';
 import type { DamageGrowthData } from './growth';
 import type { DamageEquipmentData } from './equipment';
 import type { DamageTargetsData } from './targets';
@@ -36,6 +40,17 @@ const growth = growthData as unknown as DamageGrowthData & { resVersion: string 
 const equipment = equipmentData as unknown as DamageEquipmentData & { resVersion: string };
 const targetsFile = targetsData as unknown as DamageTargetsData & { resVersion: string };
 const buffsFile = buffsData as unknown as DamageBuffsData & { resVersion: string };
+
+/** Miroir minimal du catalogue wiki (les champs que les gardes croisées lisent). */
+interface WikiSkill {
+  id: string;
+  type: string;
+  burstAP?: number[];
+  desc?: Record<string, string>;
+  levels: { level: number; vars?: Record<string, { c?: string; v?: string; t?: string }> }[];
+}
+const wikiSkills = wikiSkillsData as unknown as Record<string, WikiSkill>;
+const skillDescs = (skillDescsData as unknown as SkillDescsData & { resVersion: string }).skills;
 
 describe('chainOf — dérivation de la clé de chaîne', () => {
   it('sépare l’index de hit final', () => {
@@ -90,6 +105,82 @@ describe('damage/characters.json — forme', () => {
     expect(bad).toEqual([]);
   });
 
+  it('burstable : UN skill principal marqué par perso, bursts alignés sur ses niveaux', () => {
+    // Le moteur rattache les déclinaisons SKT_BURST_1..3 au SLOT du skill
+    // burstable (`burstAP`, CSV RequireAP — S1 chez Caren 2000089, S2 chez la
+    // plupart) et leur applique SON niveau saisi : l'un et l'autre exigent ce
+    // double invariant (inputs.ts).
+    const bad: string[] = [];
+    const MAIN = new Set(['SKT_FIRST', 'SKT_SECOND', 'SKT_ULTIMATE']);
+    for (const c of Object.values(characters)) {
+      const kit = c.skills.map((r) => skills[r.id]).filter(Boolean);
+      const bursts = kit.filter((s) => s.type.startsWith('SKT_BURST_'));
+      if (!bursts.length) continue;
+      const burstable = kit.filter((s) => MAIN.has(s.type) && s.burstAP?.length);
+      if (burstable.length !== 1) {
+        bad.push(`${c.id} : ${burstable.length} burstable(s)`);
+        continue;
+      }
+      for (const b of bursts)
+        if (b.levels.length !== burstable[0].levels.length)
+          bad.push(`${c.id} : ${b.id} ${b.levels.length} niveaux vs ${burstable[0].levels.length}`);
+    }
+    expect(bad).toEqual([]);
+    // Témoin : Caren (2000089) burst sur le S1 — le cas qui a montré le bug
+    // (Sevih 18/08/2026, « la table result affiche S2 B1… »).
+    expect(skills['8901'].burstAP).toEqual([80, 120, 160]);
+    expect(skills['8902'].burstAP).toBeUndefined();
+  });
+
+  it('garde CROISÉE : le marqueur burstAP est IDENTIQUE dans skills.json (wiki)', () => {
+    // Le moteur rattache les bursts sur la copie damage, la fiche perso et le
+    // wrapper du calculateur (burstIds) sur la copie wiki : une divergence
+    // ferait décrire un skill et en calculer un autre. Même règle datagen
+    // (datagen/lib/burst.ts) — ici on vérifie les ARTEFACTS committés.
+    const bad: string[] = [];
+    for (const s of Object.values(skills)) {
+      const wiki = wikiSkills[s.id];
+      if (!wiki) continue; // skills techniques hors catalogue wiki
+      if (JSON.stringify(s.burstAP) !== JSON.stringify(wiki.burstAP))
+        bad.push(
+          `${s.id} : damage=${JSON.stringify(s.burstAP)} wiki=${JSON.stringify(wiki.burstAP)}`,
+        );
+    }
+    expect(bad).toEqual([]);
+  });
+
+  it('un buff PASSIVE multi-référencé (plusieurs skills du même perso) est MONO-niveau', () => {
+    // La dédup du moteur (resolveKitPassives) sert un buff référencé par
+    // plusieurs skills au niveau du PREMIER référent : sans perte tant que ces
+    // buffs n'ont qu'une ligne damage-pertinente de niveau — cette garde fait
+    // casser bruyamment l'hypothèse si une donnée future la viole. Les seuls
+    // multi-niveaux multi-référencés connus (2000076_1_2, 2000111_u_2_1,
+    // 2000113_1_1, 2000116_1_1) sont hors pipeline dégâts (BT_RESOURCE_CHARGE,
+    // BT_CALL_BACKUP) — tolérés tant qu'ils le restent.
+    const DAMAGE_IRRELEVANT = new Set(['BT_RESOURCE_CHARGE', 'BT_CALL_BACKUP']);
+    const bad: string[] = [];
+    for (const c of Object.values(characters)) {
+      const refs = new Map<string, number>();
+      for (const r of c.skills) {
+        const sk = skills[r.id];
+        if (!sk) continue;
+        const own = new Set(sk.levels.flatMap((l) => l.buffIds));
+        for (const b of own) refs.set(b, (refs.get(b) ?? 0) + 1);
+      }
+      for (const [buffId, n] of refs) {
+        if (n < 2) continue;
+        const rows = (buffsFile.buffs[buffId] ?? []).filter(
+          (row) =>
+            (row.createType === 'PASSIVE' || row.createType === 'PASSIVE2') &&
+            !DAMAGE_IRRELEVANT.has(row.type),
+        );
+        if (new Set(rows.map((row) => row.level)).size > 1)
+          bad.push(`${c.id} : ${buffId} (${n} référents, niveaux multiples)`);
+      }
+    }
+    expect(bad).toEqual([]);
+  });
+
   it('les hits sont triés par (chain, hit) et portent l’ID brut', () => {
     const bad: string[] = [];
     for (const s of Object.values(skills)) {
@@ -128,6 +219,47 @@ describe('damage/characters.json — témoins vérifiés sur les tables (27/07-0
       s.levels.some((l) => l.damageFactor > 0),
     );
     expect(withFactor.length).toBeGreaterThan(300);
+  });
+});
+
+describe('damage/skill-descs.json — projection des descs du popover', () => {
+  const MAIN_TYPES = new Set(['first', 'second', 'ultimate']);
+
+  it('couvre tous les skills principaux et bursts À DESC du roster', () => {
+    const missing: string[] = [];
+    for (const c of Object.values(characters)) {
+      for (const r of c.skills) {
+        const w = wikiSkills[r.id];
+        if (!w) continue;
+        if (!MAIN_TYPES.has(w.type) && !w.type.startsWith('burst_')) continue;
+        if (!w.desc || !Object.values(w.desc).some(Boolean)) continue;
+        if (!skillDescs[w.id]) missing.push(`${c.id}:${w.id}`);
+      }
+    }
+    expect(missing).toEqual([]);
+  });
+
+  it('résout EXACTEMENT comme le catalogue à chaque niveau (élagage sans perte)', () => {
+    // La projection élague les vars aux placeholders référencés et déduplique
+    // les niveaux consécutifs identiques : pour chaque niveau du skill source,
+    // le texte résolu doit être LE MÊME par les deux chemins.
+    const bad: string[] = [];
+    for (const [id, entry] of Object.entries(skillDescs)) {
+      const w = wikiSkills[id];
+      if (!w) {
+        bad.push(`${id} : absent du catalogue wiki`);
+        continue;
+      }
+      for (const lv of w.levels) {
+        const viaProj = resolveSkillText(
+          entry.desc.en ?? '',
+          levelAt(entry.levels ?? [], lv.level)?.vars,
+        );
+        const viaWiki = resolveSkillText(w.desc?.en ?? '', levelAt(w.levels, lv.level)?.vars);
+        if (viaProj !== viaWiki) bad.push(`${id} niveau ${lv.level}`);
+      }
+    }
+    expect(bad).toEqual([]);
   });
 });
 

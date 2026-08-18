@@ -686,6 +686,14 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.mechanics': 'Mécaniques du kit',
   'tools.damage-calculator.context.mechanics_hint':
     "conditions d'état de combat — cochez celles remplies en jeu",
+  'tools.damage-calculator.context.counters': 'Nombre de buffs',
+  'tools.damage-calculator.context.counters_hint':
+    'un passif dépend de ces nombres — saisissez-les tels que vus en combat',
+  'tools.damage-calculator.context.own_buffs': "Buffs sur l'attaquant",
+  'tools.damage-calculator.context.own_debuffs': "Débuffs sur l'attaquant",
+  'tools.damage-calculator.context.team_buffs': "Buffs sur toute l'équipe",
+  'tools.damage-calculator.context.tgt_buffs': 'Buffs sur la cible',
+  'tools.damage-calculator.context.tgt_debuffs': 'Débuffs sur la cible',
   'tools.damage-calculator.buffs.from_kits': '+ Depuis les kits',
   'tools.damage-calculator.buffs.await_pick': "Choisis d'abord un attaquant et une cible",
   'tools.damage-calculator.buffs.kits_soon':

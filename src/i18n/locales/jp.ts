@@ -664,6 +664,14 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.mechanics': 'キット固有ギミック',
   'tools.damage-calculator.context.mechanics_hint':
     '戦闘中の状態条件 — 実際に満たしたものをチェック',
+  'tools.damage-calculator.context.counters': 'バフの数',
+  'tools.damage-calculator.context.counters_hint':
+    'パッシブがこの数に比例します — 戦闘中に見た数を入力',
+  'tools.damage-calculator.context.own_buffs': '攻撃側のバフ数',
+  'tools.damage-calculator.context.own_debuffs': '攻撃側のデバフ数',
+  'tools.damage-calculator.context.team_buffs': 'チーム全体のバフ数',
+  'tools.damage-calculator.context.tgt_buffs': '対象のバフ数',
+  'tools.damage-calculator.context.tgt_debuffs': '対象のデバフ数',
   'tools.damage-calculator.buffs.from_kits': '+ キットから',
   'tools.damage-calculator.buffs.await_pick': '先にアタッカーとターゲットを選択してください',
   'tools.damage-calculator.buffs.kits_soon': 'キットのバフデータが必要 — エンジンと同時に実装',

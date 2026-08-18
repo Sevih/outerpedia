@@ -5,6 +5,64 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-18
+
+- **Burst slot de bout en bout** (bug Caren signalé par Sevih : « la table
+  result affiche S2 B1… » alors que son burst est le S1). La règle `RequireAP`
+  (1er coût > 0, plusieurs coûts) est factorisée en UN helper datagen
+  (`datagen/lib/burst.ts`) partagé générateur wiki / extracteur damage —
+  marqueur `burstAP` émis dans les DEUX artefacts (garde croisée), répartition
+  réelle S1=60/S2=51/S3=14. Le moteur (`burstableSlotOf`, gear.ts) rattache
+  les lignes `SKT_BURST_1..3` au slot du skill burstable avec SON niveau ;
+  sans marqueur les lignes burst sont OMISES et signalées (`dataIssues`) —
+  plus jamais de « toujours S2 » silencieux. Le Browser résout les callers
+  burst sur la rangée qui porte `burstIds` : Contexte et Résultat disent le
+  même slot.
+- **Nommage des conditions consolidé** : prédicat unique `conditionBuffRef`
+  (sentinelles 9996..9999 = catégories « n'importe quel buff/débuff »,
+  vérifié sur pièce — le gabarit générique redevient leur libellé ; famille
+  `HAS_NOT_BUFF` incluse, 188 lignes nommables) + `buildCondBuffNames`
+  (résolution `effects` ∘ pont `effectByTooltip` — « 66 » Cooldown Increase,
+  « 59 » Detonate récupérés). 4089002 (marqueur Irregular, NameID vide) reste
+  `#4089002` — jamais un nom inventé.
+- **Popover de desc de skill refait sur l'existant** : `SkillIconTip`
+  (SkillTip.tsx) = `InlineTooltip` (portal Radix, collision, tap mobile) +
+  `SkillDescription` (même rendu que la fiche perso), descs des bursts en
+  vert/bleu/rouge cumulatives dans la table Résultat (`burstMax`). L'état du
+  survol vit dans le sous-composant : plus aucun re-rendu du Browser au
+  survol. Les 5,9 Mo de skills.json quittent le bundle client : projection
+  `damage/skill-descs.json` (~865 Ko brut, descs + vars élaguées aux
+  placeholders, niveaux dédupliqués, équivalence exacte testée contre le
+  catalogue), chargée au premier survol.
+- **Dédup des buffs de kit multi-référencés** (revue) : un buff référencé par
+  plusieurs skills (CSV caller « S2,B1..B3 ») redevenait une entrée PAR
+  référence — Aer comptait 3× son `BT_DMG_TO_BOSS` (+1500 ‰ au lieu de
+  +500), Caren 2× le `BT_DMG` de ses bursts (66 buffs concernés).
+  `resolveKitPassives` sert désormais chaque buffId au premier référent (un
+  templet = une instance). Preuves structurelles (référents ⊆ callers 63/66,
+  héritage cumulatif des listes burst chez 2000129, vars du jeu identiques
+  B2/B3) ; la preuve RUNTIME manque — mesure in-game Aer S1 vs boss à
+  capturer en fixture (dédup +50 % / cumul +150 %). Garde datagen : un buff
+  multi-référencé damage-pertinent est mono-niveau (l'hypothèse « niveau du
+  premier référent » casse bruyamment sinon).
+- **Compteurs § 9.1 branchés** (lot 1) : les familles « ×N »
+  (`BT_DMG_OWNER_BUFF/OWNER_DEBUFF/TARGET_BUFF/TARGET_DEBUFF/OWNER_TEAM_BUFF`)
+  avaient leurs cases dans `AdditionalDamageContext` mais rien ne les
+  alimentait. Saisies déclarées (`buffCount`/`debuffCount`/`teamBuffCount`
+  attaquant, `buffCount`/`debuffCount` cible), clés z `ob`/`od`/`ot`/`db`/`dd`
+  bornées, steppers CONTEXTUELS du panneau Contexte (visibles seulement si un
+  passif du rapport lit la famille — Eris affiche « Débuffs sur la cible »),
+  5 locales. Témoins testés : Eris 2000117_2_4 (+20 %/débuff sur S2/S3 seuls
+  — ses bursts restent hors bonus, le CSV du jeu ne les liste pas), Regina
+  2000093_3_1 (Σ équipe sur S3 seul). Jamais dérivés des chips : déclaration
+  du joueur, absents = 0.
+- **`TARGET_IS_BOSS` : rien à brancher** (constat contre le plan de revue) :
+  les 22 lignes réelles sont des procs `SKILL_START`/`SKILL_FINISH` (déjà
+  classés dynamic) ou des types hors pipeline (`BT_ADDITIVE_TURN`) — aucune
+  entrée active n'atteint l'évaluateur ; l'implémenter aurait été du code
+  mort. Documenté ici, point retiré du plan.
+- État : suite 146 fichiers / 1699 tests, tsc app + datagen 0, eslint 0.
+
 ## 2026-08-17
 
 - **Picker de cibles du damage calculator refait en NAVIGATION PAR CARTES**

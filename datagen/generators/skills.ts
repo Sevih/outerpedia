@@ -32,6 +32,7 @@ import { slugEnum } from '../lib/enums';
 import { isMain } from '../lib/is-main';
 import type { LangDict } from '../lib/lang';
 import { loadTextIndex, resolveText } from '../lib/text';
+import { burstAPCosts } from '../lib/burst';
 import { groupBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
 
 const OUT = resolve('.gamedata/staging/skills');
@@ -317,11 +318,11 @@ export function buildSkills(): SkillData {
       'character',
     );
     const maxLevel = skill.maxLevel;
-    if (num(s.RequireAP) > 0) {
-      skill.requireAP = num(s.RequireAP);
-      const costs = splitCsv(s.RequireAP ?? '').map(num);
-      if (costs.length > 1) skill.burstAP = costs;
-    }
+    if (num(s.RequireAP) > 0) skill.requireAP = num(s.RequireAP);
+    // Marqueur « burstable » : règle PARTAGÉE avec l'extracteur damage
+    // (datagen/lib/burst.ts) — les deux artefacts doivent s'accorder.
+    const burstCosts = burstAPCosts(s.RequireAP);
+    if (burstCosts) skill.burstAP = burstCosts;
 
     const cid = ownerBySkill.get(id);
     // Buffs de chaîne par convention (jamais référencés par un niveau) →

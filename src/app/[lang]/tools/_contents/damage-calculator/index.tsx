@@ -30,10 +30,11 @@ import { SHEET_FIELDS, TARGET_FIELDS } from '@/lib/damage/scenario';
 import { presetSpawnStats } from '@/lib/damage/preset-target';
 import { familyMembersFor, uniqueGroupsOf } from '@/lib/damage/preset-gear';
 import { staticBossPassives } from '@/lib/damage/passives';
+import { buildCondBuffNames } from './cond-names';
 import { sheetSlugOfStat, type DamageBuffsData, type DamageTargetsData } from '@/lib/damage/inputs';
 import type { ActiveBuff } from '@/lib/damage/aggregate';
 import { loadDataJson } from '@/lib/data/disk';
-import { dedupSkills } from '@/lib/skill-view';
+import { burstSkills, dedupSkills } from '@/lib/skill-view';
 import { img } from '@/lib/images';
 import type {
   BuffValues,
@@ -155,6 +156,8 @@ const HP_SCALED_SET = /missing Health/i;
 // magnitude fixe, icône IG_Buff_*).
 const GLOSS = glossariesData as unknown as {
   effects: Record<string, { name: LangDict; desc: LangDict; icon: string }>;
+  /** Réf de tooltip → id d'effet canonique (pont du nommage des conditions). */
+  effectByTooltip: Record<string, string>;
   effectByKey: { buff: Record<string, string>; debuff: Record<string, string> };
   /** Noms localisés des éléments (niveaux de cascade du picker de cible). */
   elements: Record<string, LangDict>;
@@ -317,12 +320,19 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
   const kits: Record<string, DcSkillRow[]> = {};
   for (const c of getAllCharacters()) {
     const skills = dedupSkills(c.skills.map((id) => SKILLS[id]).filter(Boolean));
+    // Déclinaisons burst_1..3 du kit (règle partagée avec la fiche perso) :
+    // leurs descs vont au popover du skill burstable, en vert/bleu/rouge.
+    const burstIds = burstSkills(skills).map((b) => b.id);
     const rows: DcSkillRow[] = [];
     for (const { type, slot } of KIT_SLOTS) {
       const sk = skills.find((s) => s.type === type);
       if (!sk) continue;
       rows.push({
         slot,
+        // Clé du catalogue de skills chargé à la demande côté client (descs
+        // du popover d'icône — Sevih 18/08/2026).
+        id: sk.id,
+        ...(sk.burstAP?.length && burstIds.length ? { burstIds } : {}),
         name: lRec(sk.name, lang) || sk.name.en,
         ...(sk.icon ? { iconSrc: img.skill(sk.icon) } : {}),
         offensive: sk.offensive,
@@ -635,6 +645,9 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
   const condLabels: Record<string, string> = Object.fromEntries(
     CONDITION_ENUMS.map((c) => [c, t(k(`context.cond.${c.toLowerCase()}` as never))]),
   );
+  // Noms des buffs RÉFÉRENCÉS par les conditions (prédicat + résolution :
+  // cond-names.ts, prédicat partagé avec le client via `conditionBuffRef`).
+  const condBuffNames = buildCondBuffNames(DMG_BUFFS, GLOSS, lang);
   const passivesCache = new Map<string, DcBossPassive[]>();
   const bossPassiveChips = (bossId: string): DcBossPassive[] => {
     const hit = passivesCache.get(bossId);
@@ -1003,6 +1016,14 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       mechanics: t(k('context.mechanics')),
       mechanicsHint: t(k('context.mechanics_hint')),
       conds: condLabels,
+      // Compteurs § 9.1 (« ×N buffs/débuffs ») — steppers contextuels.
+      counters: t(k('context.counters')),
+      countersHint: t(k('context.counters_hint')),
+      ownBuffs: t(k('context.own_buffs')),
+      ownDebuffs: t(k('context.own_debuffs')),
+      teamBuffs: t(k('context.team_buffs')),
+      tgtBuffs: t(k('context.tgt_buffs')),
+      tgtDebuffs: t(k('context.tgt_debuffs')),
     },
     team: {
       emptySlot: t(k('team.empty')),
@@ -1072,6 +1093,8 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       codexTiers={codexTiers}
       guildTiers={guildTiers}
       titleHpPct={titleHpPct}
+      condBuffNames={condBuffNames}
+      lang={lang}
       labels={labels}
     />
   );

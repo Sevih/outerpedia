@@ -121,11 +121,12 @@ describe('inputs — buildDamageReport', () => {
     boss: true,
   });
 
-  it('kit complet : S1/S2/S3 + les 3 états burst rattachés au S2', () => {
+  it('kit complet : S1/S2/S3 + les 3 états burst rattachés au slot du BURSTABLE', () => {
     const result = buildDamageReport(attackerBase(), target(), data);
     const keys = result.slots.map((s) => `${s.slot}${s.burst ? `b${s.burst}` : ''}`);
     expect(keys).toEqual(['S1', 'S2', 'S3', 'S2b1', 'S2b2', 'S2b3']);
-    // Niveau par défaut = max du skill ; les bursts suivent le S2 (372/372).
+    // Niveau par défaut = max du skill ; les bursts suivent le niveau du
+    // burstable (`burstAP` — garde datagen : niveaux alignés sur tout le roster).
     for (const s of result.slots) expect(s.skillLevel).toBeGreaterThan(0);
     expect(result.unresolvedFx).toEqual([]);
     // Normal et crit sont TOUJOURS émis (les dégâts d'une branche ne
@@ -140,6 +141,51 @@ describe('inputs — buildDamageReport', () => {
         for (const b of st.branches) expect(b.totalDamage).toBeGreaterThanOrEqual(1);
       }
     }
+  });
+
+  it('burstable au S1 (Caren 2000089) : les bursts se rattachent au S1, pas au S2', () => {
+    // Le cas qui a montré le bug (Sevih 18/08/2026 — « la table result
+    // affiche S2 B1… ») : `burstAP` vit sur son S1 (8901), les déclinaisons
+    // 8919/8920/8921 doivent suivre.
+    const result = buildDamageReport({ ...attackerBase(), id: '2000089' }, target(), data);
+    const keys = result.slots.map((s) => `${s.slot}${s.burst ? `b${s.burst}` : ''}`);
+    expect(keys).toEqual(['S1', 'S2', 'S3', 'S1b1', 'S1b2', 'S1b3']);
+    expect(result.dataIssues).toBeUndefined();
+  });
+
+  it('bursts au NIVEAU du burstable : S1 saisi = niveau des lignes burst, pas le S2', () => {
+    const result = buildDamageReport(
+      { ...attackerBase(), id: '2000089', skillLevels: { S1: 2, S2: 5 } },
+      target(),
+      data,
+    );
+    const bursts = result.slots.filter((s) => s.burst !== undefined);
+    expect(bursts).toHaveLength(3);
+    for (const b of bursts) expect(b.skillLevel).toBe(2);
+  });
+
+  it('bursts SANS marqueur burstAP : lignes omises et SIGNALÉES, jamais un slot supposé', () => {
+    // Artefact antérieur à l'extraction du marqueur (ou RequireAP inattendu) :
+    // rejouer « toujours S2 » calculerait faux en silence pour les 60 persos
+    // burst-S1 — le moteur préfère omettre et le dire (revue 18/08/2026).
+    const stripped = {
+      ...data,
+      characters: {
+        ...data.characters,
+        skills: Object.fromEntries(
+          Object.entries(data.characters.skills).map(([id, s]) => {
+            if (!s.burstAP) return [id, s];
+            const rest = { ...s };
+            delete rest.burstAP;
+            return [id, rest];
+          }),
+        ),
+      },
+    } as DamageData;
+    const result = buildDamageReport({ ...attackerBase(), id: '2000089' }, target(), stripped);
+    expect(result.slots.map((s) => s.slot)).toEqual(['S1', 'S2', 'S3']);
+    expect(result.dataIssues).toHaveLength(1);
+    expect(result.dataIssues![0]).toContain('burstAP');
   });
 
   it('l’élément joue : cible avec avantage subit plus que cible qui domine', () => {
@@ -163,6 +209,73 @@ describe('inputs — buildDamageReport', () => {
     const result = buildDamageReport(attackerBase(), target(), data, { trace: true });
     const branch = result.slots[0].report.states[0].branches[0];
     expect(branch.trace?.at(-1)).toMatchObject({ ref: '§ 8.3', out: branch.totalDamage });
+  });
+
+  it('un buff référencé par PLUSIEURS skills entre UNE fois (dédup — un templet, une instance)', () => {
+    // Eris : 2000117_2_4 est référencé par le S2 (11702) ET le S3 (11703) —
+    // avant la dédup, chaque référence redevenait une entrée et les slots
+    // multi-callers comptaient double (revue 18/08/2026).
+    const eris = buildDamageReport({ ...attackerBase(), id: '2000117' }, target(), data);
+    expect(eris.kitPassives!.entries.filter((e) => e.buffId === '2000117_2_4')).toHaveLength(1);
+    // Aer : 2000008_1_4 (BT_DMG_TO_BOSS +500 ‰) référencé par S1/S2/S3 —
+    // compté TROIS fois avant (+1500 ‰ vs boss).
+    const aer = buildDamageReport({ ...attackerBase(), id: '2000008' }, target(), data);
+    expect(aer.kitPassives!.entries.filter((e) => e.buffId === '2000008_1_4')).toHaveLength(1);
+    // Caren : 2000089_u_1_2 (BT_DMG +300 ‰, callers B1/B2) référencé par les
+    // deux skills burst — les lignes B1/B2 recevaient +600 ‰.
+    const caren = buildDamageReport({ ...attackerBase(), id: '2000089' }, target(), data);
+    expect(caren.kitPassives!.entries.filter((e) => e.buffId === '2000089_u_1_2')).toHaveLength(1);
+  });
+});
+
+describe('inputs — compteurs § 9.1 (buffs/débuffs déclarés)', () => {
+  const target = () => ({
+    element: 'earth',
+    stats: { hp: 500000, def: 2000, dmgRed: 0, cdmgRed: 0 },
+    boss: true,
+  });
+  const damages = (r: ReturnType<typeof buildDamageReport>) =>
+    Object.fromEntries(
+      r.slots.map((s) => [
+        `${s.slot}${s.burst ? `b${s.burst}` : ''}`,
+        s.report.states[0].branches[0].totalDamage,
+      ]),
+    );
+
+  it('Eris (2000117_2_4, ×débuffs de la CIBLE, callers S2/S3) : n=3 > n=0 sur S2/S3 SEULS', () => {
+    const eris = () => ({ ...attackerBase(), id: '2000117' });
+    const n0 = damages(buildDamageReport(eris(), target(), data));
+    const n3 = damages(buildDamageReport(eris(), { ...target(), debuffCount: 3 }, data));
+    expect(n3.S2).toBeGreaterThan(n0.S2);
+    expect(n3.S3).toBeGreaterThan(n0.S3);
+    // S1 hors callers : invariant. Les BURSTS aussi : le CSV du jeu ne liste
+    // que SKT_SECOND,SKT_ULTIMATE — fidélité à la donnée, jamais élargi.
+    expect(n3.S1).toBe(n0.S1);
+    expect(n3.S2b1).toBe(n0.S2b1);
+    expect(n3.S2b3).toBe(n0.S2b3);
+  });
+
+  it('Regina (2000093_3_1, ×Σ buffs de l’ÉQUIPE, caller S3) : teamBuffCount ne pèse que sur le S3', () => {
+    const regina = () => ({ ...attackerBase(), id: '2000093' });
+    const n0 = damages(buildDamageReport(regina(), target(), data));
+    const n4 = damages(buildDamageReport({ ...regina(), teamBuffCount: 4 }, target(), data));
+    expect(n4.S3).toBeGreaterThan(n0.S3);
+    expect(n4.S1).toBe(n0.S1);
+    expect(n4.S2).toBe(n0.S2);
+  });
+
+  it('compteurs absents = familles à 0 : aucun défaut deviné', () => {
+    // Même scénario avec compteurs explicitement à 0 : rapport identique.
+    const eris = () => ({ ...attackerBase(), id: '2000117' });
+    const absent = damages(buildDamageReport(eris(), target(), data));
+    const zeroed = damages(
+      buildDamageReport(
+        { ...eris(), buffCount: 0, debuffCount: 0, teamBuffCount: 0 },
+        { ...target(), buffCount: 0, debuffCount: 0 },
+        data,
+      ),
+    );
+    expect(zeroed).toEqual(absent);
   });
 });
 

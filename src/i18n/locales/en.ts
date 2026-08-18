@@ -679,6 +679,14 @@ const en = {
   'tools.damage-calculator.context.mechanics': 'Kit mechanics',
   'tools.damage-calculator.context.mechanics_hint':
     'combat-state conditions — check the ones met in battle',
+  'tools.damage-calculator.context.counters': 'Buff counts',
+  'tools.damage-calculator.context.counters_hint':
+    'a passive scales with these counts — enter the numbers as seen in battle',
+  'tools.damage-calculator.context.own_buffs': 'Buffs on the attacker',
+  'tools.damage-calculator.context.own_debuffs': 'Debuffs on the attacker',
+  'tools.damage-calculator.context.team_buffs': 'Buffs across the team',
+  'tools.damage-calculator.context.tgt_buffs': 'Buffs on the target',
+  'tools.damage-calculator.context.tgt_debuffs': 'Debuffs on the target',
   'tools.damage-calculator.buffs.from_kits': '+ From kits',
   'tools.damage-calculator.buffs.await_pick': 'Pick an attacker and a target first',
   'tools.damage-calculator.buffs.kits_soon': 'needs kit buff data — coming with the engine',

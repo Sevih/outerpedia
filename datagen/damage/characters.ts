@@ -22,6 +22,7 @@
  * GARDE DE SORTIE : seuls les persos du roster validé sont émis — cf.
  * `roster.ts` (commun aux extracteurs damage).
  */
+import { burstAPCosts } from '../lib/burst';
 import { groupBy, indexBy, loadTable, num, bool, splitCsv, type Row } from '../lib/tables';
 import { integratedIds } from './roster';
 
@@ -74,6 +75,13 @@ export interface DamageSkill {
   targetTeamType: string;
   rangeType: string;
   levels: DamageSkillLevel[];
+  /**
+   * Coûts d'AP des bursts 1/2/3 (`RequireAP` en CSV) — présent UNIQUEMENT sur
+   * le skill « burstable » du perso (même signal que le générateur skills) :
+   * les déclinaisons `SKT_BURST_1..3` se rattachent à SON slot (S1 chez
+   * Caren/Valentine, S2 chez la plupart), pas à un slot supposé.
+   */
+  burstAP?: number[];
   /** Lignes de `CharacterDamageTemplet` dont `SkillID` référence ce skill. */
   hits: DamageHit[];
   /**
@@ -200,6 +208,9 @@ export function buildDamageCharacters(): DamageCharactersData {
       .slice()
       .sort((a, b) => ord(a.chain, b.chain) || a.hit - b.hit || ord(a.id, b.id));
     const offensive = levels.some((l) => l.damageFactor > 0);
+    // Burstable : règle PARTAGÉE avec le générateur skills (datagen/lib/burst)
+    // — les deux artefacts doivent porter le même marqueur (garde croisée).
+    const burstCosts = burstAPCosts(s?.RequireAP);
     return {
       id,
       type: s?.SkillType ?? '',
@@ -207,6 +218,7 @@ export function buildDamageCharacters(): DamageCharactersData {
       targetTeamType: s?.TargetTeamType ?? '',
       rangeType: s?.RangeType ?? '',
       levels,
+      ...(burstCosts ? { burstAP: burstCosts } : {}),
       hits,
       ...(offensive && !hits.length ? { hitsUnresolved: true } : {}),
     };

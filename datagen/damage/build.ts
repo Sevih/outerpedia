@@ -22,6 +22,7 @@ import { buildDamageEquipment } from './equipment';
 import { buildDamageTargets } from './targets';
 import { buildDamageBuffs } from './buffs';
 import { buildDamageConfig } from './config';
+import { buildSkillDescs } from './skill-descs';
 
 const OUT = resolve('data/generated/damage');
 
@@ -54,6 +55,9 @@ async function main(): Promise<void> {
   await write('targets.json', targetsData);
   await write('buffs.json', buffsData);
   await write('config.json', { config: buildDamageConfig() });
+  // Projection UI (descs de popover) — dérivée des artefacts wiki committés
+  // (cf. en-tête de skill-descs.ts : régénérer APRÈS datagen:build).
+  await write('skill-descs.json', buildSkillDescs());
   if (buffsData.unresolved.length) {
     console.warn(
       `⚠ ${buffsData.unresolved.length} BuffID référencés mais absents de BuffTemplet ` +

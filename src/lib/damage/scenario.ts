@@ -108,6 +108,15 @@ export interface CalculatorUrlState {
   /** Conditions d'ÉTAT déclarées remplies (buffIds des entrées `stateful` —
    *  mécaniques perso, STATE_CONDITIONS de gear.ts). */
   cs?: string[];
+  /** Compteurs § 9.1 DÉCLARÉS (steppers du panneau Contexte, omis à 0) :
+   *  buffs/débuffs de l'attaquant (`ob`/`od`), Σ buffs de son équipe (`ot`),
+   *  buffs/débuffs de la cible (`db`/`dd`) — familles BT_DMG_OWNER_BUFF,
+   *  OWNER_DEBUFF, OWNER_TEAM_BUFF, TARGET_BUFF, TARGET_DEBUFF. */
+  ob?: number;
+  od?: number;
+  ot?: number;
+  db?: number;
+  dd?: number;
 }
 
 // ── Construction des entrées ────────────────────────────────────────────────
@@ -208,6 +217,10 @@ export function buildInputsFromZ(
       ...(st.cs?.length
         ? { metConditions: st.cs.filter((x): x is string => typeof x === 'string') }
         : {}),
+      // Compteurs § 9.1 côté attaquant — déclarés, bornés (0 = famille à 0).
+      ...(typeof st.ob === 'number' && st.ob > 0 ? { buffCount: clamp(st.ob, 0, 20) } : {}),
+      ...(typeof st.od === 'number' && st.od > 0 ? { debuffCount: clamp(st.od, 0, 20) } : {}),
+      ...(typeof st.ot === 'number' && st.ot > 0 ? { teamBuffCount: clamp(st.ot, 0, 40) } : {}),
       ...(opts.guildLevel ? { guildLevel: clamp(opts.guildLevel, 0, 10) } : {}),
       ...(opts.premiumHp ? { premiumHp: true } : {}),
       ...(opts.quirks && Object.keys(opts.quirks).length ? { quirks: opts.quirks } : {}),
@@ -251,6 +264,9 @@ export function buildInputsFromZ(
     ...(st.d?.length ? { fx: st.d } : {}),
     ...(st.bk === 1 ? { broken: true } : {}),
     ...(st.en === 1 ? { enraged: true } : {}),
+    // Compteurs § 9.1 côté cible (ex. Eris 2000117_2_4 : +20 % par débuff).
+    ...(typeof st.db === 'number' && st.db > 0 ? { buffCount: clamp(st.db, 0, 20) } : {}),
+    ...(typeof st.dd === 'number' && st.dd > 0 ? { debuffCount: clamp(st.dd, 0, 20) } : {}),
   };
   if (st.g) {
     // Cible MANUELLE : élément requis, stats saisies (percent → ‰).

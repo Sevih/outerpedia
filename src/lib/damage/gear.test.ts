@@ -22,6 +22,7 @@ import growthData from '../../../data/generated/damage/growth.json';
 import buffsData from '../../../data/generated/damage/buffs.json';
 import equipmentData from '../../../data/generated/damage/equipment.json';
 import {
+  conditionBuffRef,
   gearConditionMet,
   resolveGearPassives,
   resolveKitPassives,
@@ -426,6 +427,83 @@ describe('buffs restreints par slot — Noa (donnée réelle, fixture 10/08/2026
       active: true,
       buff: { type: 'BT_DMG_TARGET_STAT', stat: 'ST_HP', value: 30 },
     });
+  });
+
+  it('bursts : leur niveau vient du slot du BURSTABLE, plus jamais du S2', () => {
+    // Synthétique (aucun buff de burst à VALEUR par palier chez un burst-S1
+    // en donnée réelle) : S1 burstable, buff de burst 100 ‰ → 500 ‰ au
+    // palier 5. Avant la revue du 18/08/2026, ACTIVE_SLOT_OF lisait
+    // skillLevels['S2'] pour tous les bursts — faux pour 74/125 persos.
+    const char: KitCharacter = {
+      id: 'X',
+      basicStar: 3,
+      skills: [
+        { slot: 1, id: 'x1' },
+        { slot: 19, id: 'x19' },
+      ],
+    };
+    const kitSkills: Record<string, KitSkill> = {
+      x1: { id: 'x1', type: 'SKT_FIRST', burstAP: [80, 120], levels: [{ level: 1, buffIds: [] }] },
+      // Niveaux DENSES (1..5) comme la donnée réelle : le clamp du moteur
+      // borne par `levels.length`.
+      x19: {
+        id: 'x19',
+        type: 'SKT_BURST_1',
+        levels: [1, 2, 3, 4, 5].map((level) => ({ level, buffIds: ['xb'] })),
+      },
+    };
+    const kitBuffs = {
+      buffs: {
+        xb: [
+          {
+            level: 1,
+            type: 'BT_DMG',
+            targetType: 'ME',
+            applyingType: 'OAT_RATE',
+            value: 100,
+            createType: 'PASSIVE',
+            callerSkillType: 'SKT_BURST_1',
+          },
+          {
+            level: 5,
+            type: 'BT_DMG',
+            targetType: 'ME',
+            applyingType: 'OAT_RATE',
+            value: 500,
+            createType: 'PASSIVE',
+            callerSkillType: 'SKT_BURST_1',
+          },
+        ],
+      },
+    };
+    const at = (skillLevels: Partial<Record<'S1' | 'S2' | 'S3', number>>) =>
+      resolveKitPassives(
+        char,
+        3,
+        kitSkills,
+        data.growth.transcend,
+        kitBuffs,
+        Element.Fire,
+        Element.Earth,
+        skillLevels,
+      ).entries.find((e) => e.buffId === 'xb')?.buff.value;
+    // S1 saisi pilote le burst — le S2 n'y change rien.
+    expect(at({ S1: 5, S2: 1 })).toBe(500);
+    expect(at({ S1: 1, S2: 5 })).toBe(100);
+  });
+
+  it('conditionBuffRef : référence de buff nommable, sentinelles et autres exclus', () => {
+    expect(conditionBuffRef('TARGET_HAS_BUFF', 1)).toBe('1');
+    expect(conditionBuffRef('OWNER_HAS_NOT_BUFF', 4089001)).toBe('4089001');
+    expect(conditionBuffRef('CASTER_ENEMY_TEAM_HAS_BUFF', 4089002)).toBe('4089002');
+    // Sentinelles de catégorie (« n'importe quel buff/débuff ») : le gabarit
+    // générique est le bon libellé — jamais « #9996 ».
+    expect(conditionBuffRef('OWNER_HAS_BUFF', 9996)).toBeUndefined();
+    expect(conditionBuffRef('OWNER_HAS_BUFF', 9999)).toBeUndefined();
+    // Conditions d'un autre genre, ou valeur absente.
+    expect(conditionBuffRef('CASTER_HPRATE_OVER', 500)).toBeUndefined();
+    expect(conditionBuffRef('TARGET_HAS_BUFF', undefined)).toBeUndefined();
+    expect(conditionBuffRef(undefined, 1)).toBeUndefined();
   });
 
   it('EE +0 : BID_CEQUIP_2000022 (150 ‰ × décompte) gaté SKT_ULTIMATE', () => {

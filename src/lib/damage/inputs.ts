@@ -14,9 +14,11 @@
  *    un chip SANS magnitude standard (« certain percentage ») n'est JAMAIS
  *    deviné : il est remonté dans `unresolvedFx` et contribue 0 ;
  *  - kit → lignes de rapport : S1/S2/S3 (SKT_FIRST/SECOND/ULTIMATE), les
- *    états burst (SKT_BURST_1..3) rattachés au S2 en SOUS-LIGNES avec LEUR
- *    `skillFactor` et LEURS chaînes (vérifié : 372/372 bursts ont le même
- *    nombre de niveaux que leur S2 — le niveau saisi s'applique 1:1).
+ *    états burst (SKT_BURST_1..3) rattachés au slot du skill BURSTABLE
+ *    (`burstAP` — S1 chez Caren/Valentine, S2 chez la plupart) en SOUS-LIGNES
+ *    avec LEUR `skillFactor` et LEURS chaînes (garde datagen : tous les
+ *    bursts du roster ont le même nombre de niveaux que leur burstable — le
+ *    niveau saisi s'applique 1:1).
  *
  * HORS périmètre v1 (documenté, jamais comblé en douce) : lignes DOT
  * (liaison buffIds → templets de buff), immunités de cible. Les passifs
@@ -27,6 +29,7 @@
 import { collectStatChannels, type ActiveBuff } from './aggregate';
 import { calcBaseStat } from './formula';
 import {
+  burstableSlotOf,
   resolveGearPassives,
   resolveKitPassives,
   resolveQuirkPassives,
@@ -72,6 +75,9 @@ export interface DataSkill {
   type: string;
   rangeType: string;
   levels: DataSkillLevel[];
+  /** Coûts d'AP des bursts (CSV `RequireAP`) — marque le skill BURSTABLE :
+   *  ses déclinaisons `SKT_BURST_1..3` se rattachent à SON slot. */
+  burstAP?: number[];
   hits: DataHit[];
   hitsUnresolved?: boolean;
 }
@@ -463,6 +469,13 @@ export interface AttackerBuildInput {
    *  mécaniques perso (STATE_CONDITIONS, gear.ts) : active les entrées
    *  `stateful` (ex. `2000022_3_3` = 5 Kaizer Energy au S3 de Noa). */
   metConditions?: string[];
+  /** Nb de BUFFS positifs portés en jeu (compteur § 9.1 BT_DMG_OWNER_BUFF) —
+   *  déclaré, jamais dérivé des chips (elles ne couvrent pas tout). */
+  buffCount?: number;
+  /** Nb de DÉBUFFS subis en jeu (§ 9.1 BT_DMG_OWNER_DEBUFF). */
+  debuffCount?: number;
+  /** Σ des buffs positifs de l'ÉQUIPE (§ 9.1 BT_DMG_OWNER_TEAM_BUFF). */
+  teamBuffCount?: number;
 }
 
 export interface TargetBuildInput {
@@ -490,6 +503,11 @@ export interface TargetBuildInput {
   /** Boss ENRAGÉ (coche, z `en`) : active les buffs de son skill d'enrage et
    *  les passifs conditionnés `OWNER_RAGE` (passives.ts) — jamais deviné. */
   enraged?: boolean;
+  /** Nb de BUFFS positifs de la cible en jeu (§ 9.1 BT_DMG_TARGET_BUFF). */
+  buffCount?: number;
+  /** Nb de DÉBUFFS de la cible en jeu (§ 9.1 BT_DMG_TARGET_DEBUFF — ex. Eris
+   *  2000117_2_4 : +20 % par débuff sur S2/S3). */
+  debuffCount?: number;
 }
 
 export interface BuildReportOptions extends SkillReportOptions {
@@ -531,6 +549,9 @@ export interface DamageReportResult {
    *  lectures des buffs actifs : § 9.1, § 10.1, § 14) — filtre des chips de
    *  passifs de boss (`passiveAffectsDamageAmount`). */
   attackerAmountStats: string[];
+  /** Anomalies de DONNÉES rencontrées à la construction (jamais tues) — ex.
+   *  bursts présents sans marqueur `burstAP` : lignes burst omises. */
+  dataIssues?: string[];
   /** Passifs d'équipement § 15 (appliqués + procs signalés + non-résolus) —
    *  présent dès que l'attaquant porte du `gear`. */
   gearPassives?: GearPassivesInfo;
@@ -924,12 +945,23 @@ export function buildDamageReport(
       defenderStat: defenderStatOf,
       targetIsBoss: target.boss === true,
       ...(target.broken !== undefined ? { targetIsBreak: target.broken } : {}),
+      // Compteurs § 9.1 — DÉCLARÉS par le scénario (steppers UI, z), jamais
+      // dérivés des chips : absents = 0, la famille contribue 0.
+      ...(attacker.buffCount !== undefined ? { attackerBuffCount: attacker.buffCount } : {}),
+      ...(attacker.debuffCount !== undefined ? { attackerDebuffCount: attacker.debuffCount } : {}),
+      ...(attacker.teamBuffCount !== undefined
+        ? { casterTeamBuffCount: attacker.teamBuffCount }
+        : {}),
+      ...(target.buffCount !== undefined ? { defenderBuffCount: target.buffCount } : {}),
+      ...(target.debuffCount !== undefined ? { defenderDebuffCount: target.debuffCount } : {}),
       scene: 'pve',
     },
   };
 
-  // Kit : S1/S2/S3, puis les bursts rattachés au S2 (même niveau saisi —
-  // vérifié : 372/372 bursts ont le même nombre de niveaux que leur S2).
+  // Kit : S1/S2/S3, puis les bursts rattachés au slot du skill BURSTABLE
+  // (`burstAP` — S1 chez Caren/Valentine, S2 chez la plupart), même niveau
+  // saisi que lui (vérifié : tous les bursts du roster ont le même nombre de
+  // niveaux que leur skill burstable — garde datagen).
   const byType = new Map<string, DataSkill>();
   for (const ref of char.skills) {
     const sk = data.characters.skills[ref.id];
@@ -980,10 +1012,23 @@ export function buildDamageReport(
     const sk = byType.get(type);
     if (sk) pushSlot(slot, sk);
   }
-  BURST_TYPES.forEach((type, i) => {
-    const sk = byType.get(type);
-    if (sk) pushSlot('S2', sk, i + 1);
-  });
+  // Slot du burstable — SANS marqueur (artefact antérieur à `burstAP`,
+  // RequireAP inattendu), les lignes burst sont OMISES et signalées : un slot
+  // supposé rejouerait le bug « toujours S2 » avec le niveau du S2, en
+  // silence (revue 18/08/2026).
+  const burstSlot = burstableSlotOf(SLOT_TYPES.map(({ type }) => byType.get(type)));
+  const dataIssues: string[] = [];
+  if (burstSlot === undefined && BURST_TYPES.some((t) => byType.has(t))) {
+    dataIssues.push(
+      'bursts sans marqueur burstAP (damage/characters.json anterieur ?) — lignes burst omises',
+    );
+  }
+  if (burstSlot !== undefined) {
+    BURST_TYPES.forEach((type, i) => {
+      const sk = byType.get(type);
+      if (sk) pushSlot(burstSlot, sk, i + 1);
+    });
+  }
 
   return {
     combatStats,
@@ -992,6 +1037,7 @@ export function buildDamageReport(
     ...(maxHpBuff ? { maxHpBuff } : {}),
     ...(bossPassives ? { bossPassives } : {}),
     attackerAmountStats: [...attackerAmountStats],
+    ...(dataIssues.length ? { dataIssues } : {}),
     ...(gearPassives ? { gearPassives } : {}),
     kitPassives,
     ...(quirkPassives ? { quirkPassives } : {}),
