@@ -7,6 +7,18 @@
 
 ## 2026-08-18
 
+- **Liens courts `/s/` réparés** (signalé par Sevih : outerpedia.com/s/0oLx4q4AbSI3
+  menait sur `https://0.0.0.0:3000/characters?z=…`). La route reconstruisait une
+  URL ABSOLUE avec `new URL(path, request.url)` : dans l'image standalone,
+  `request.url` porte l'adresse d'ÉCOUTE du serveur (`HOSTNAME=0.0.0.0`,
+  `PORT=3000`), pas l'hôte public — tous les liens partagés depuis la mise en
+  ligne du raccourcisseur étaient morts. Le `Location` est désormais le chemin
+  RELATIF (RFC 7231) : c'est le navigateur qui le résout sur l'hôte appelé, ce
+  qui garde l'intention d'origine (jp.outerpedia.com/s/… reste sur `jp`) sans
+  jamais nommer d'hôte côté serveur. Le chemin est revalidé À LA LECTURE
+  (`isInternalPath`) puisque `new URL()` ne recadre plus rien. Trois tests de
+  route (db mockée) tiennent le `Location` relatif, l'accueil sur lien
+  mort/id invalide/BDD absente, et le refus d'un `//evil.com` lu en base.
 - **Burst slot de bout en bout** (bug Caren signalé par Sevih : « la table
   result affiche S2 B1… » alors que son burst est le S1). La règle `RequireAP`
   (1er coût > 0, plusieurs coûts) est factorisée en UN helper datagen
