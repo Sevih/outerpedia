@@ -14,7 +14,7 @@
  * Le panneau Debug la compare au `gameVersion` des fixtures (badge « à
  * revérifier en jeu ») et `fixtures.test.ts` oriente son message d'échec.
  */
-export const ENGINE_GAME_VERSION = '1.4.9';
+export const ENGINE_GAME_VERSION = '1.4.14';
 
 /** Une étape de la trace de calcul (spec § 2). */
 export interface TraceStep {

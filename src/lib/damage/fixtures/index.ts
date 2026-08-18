@@ -11,9 +11,19 @@ import type { DamageFixture } from '../harness';
 import valentineRhona from './valentine-rhona.json';
 import noaRhona from './noa-rhona.json';
 import noaChimera from './noa-chimera.json';
+import rhonaMeteos from './rhona-meteos.json';
+import carenMeteos from './caren-meteos.json';
+import carenAmadeus from './caren-amadeus.json';
 
 export const FIXTURES: DamageFixture[] = [
   valentineRhona as DamageFixture,
   noaRhona as DamageFixture,
   noaChimera as DamageFixture,
+  // Captures du 18/08/2026 (Sevih) — preuves des procs SKILL_START au
+  // lanceur, de la dédup, du facteur total et des taux PREMIUM dans la fiche
+  // (défactorisation sheet.ts : le « +60 DEF » des Caren était le terme
+  // croisé trust × premiums, résolu le jour même).
+  rhonaMeteos as DamageFixture,
+  carenMeteos as DamageFixture,
+  carenAmadeus as DamageFixture,
 ];

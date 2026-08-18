@@ -240,8 +240,15 @@ export interface BranchLine {
 
 export interface StateLine {
   chain: string;
-  /** Facteur total § 8.1 : Σ (MaxHitCount||1) × DamageFactor. */
+  /** Facteur total § 8.1 : Σ (MaxHitCount||1) × DamageFactor — porté à
+   *  1000 ‰ (et `factorFilled` posé) quand la chaîne extraite somme sous
+   *  1000 : le manque est un event du clip non extrait (§ 12.4). */
   totalFactor: number;
+  /** Chaîne INCOMPLÈTE complétée au facteur plein — le § 8.1 réel somme les
+   *  AnimationEvents du clip (« facteurs littéraux » compris), hors tables ;
+   *  un skill joue toujours 100 % de son facteur (MESURÉ : le S1 de Caren
+   *  somme 700 ‰ en table et frappe 1000 ‰ en jeu, captures 18/08/2026). */
+  factorFilled?: true;
   /** Branches à probabilité > 0 uniquement (une branche impossible n'existe pas). */
   branches: BranchLine[];
   /** Σ P(branche) × total(branche). */
@@ -480,7 +487,13 @@ export function buildSkillReport(
 
   const states = skill.states.map((state): StateLine => {
     const occurrences = unfoldHits(state.hits);
-    const totalFactor = occurrences.reduce((sum, o) => sum + o.damageFactor, 0);
+    const rawFactor = occurrences.reduce((sum, o) => sum + o.damageFactor, 0);
+    // § 8.1 : le facteur total réel somme les AnimationEvents du CLIP (dont
+    // les « facteurs littéraux ») — invisibles des tables. Une chaîne qui
+    // somme SOUS 1000 ‰ est incomplète : complétée au facteur plein (le § 8.3
+    // verse le manque dans le dernier hit). Σ > 1000 est GARDÉ tel quel
+    // (bursts renforcés plausibles — aucune mesure ne tranche, § 12.4).
+    const totalFactor = rawFactor < 1000 ? 1000 : rawFactor;
 
     const branchLines = branchRates.map(({ branch, probability, rate, rateTrace }): BranchLine => {
       const trace = rateTrace ? [...rateTrace] : undefined;
@@ -537,7 +550,13 @@ export function buildSkillReport(
     });
 
     const expectedDamage = branchLines.reduce((e, b) => e + b.probability * b.totalDamage, 0);
-    return { chain: state.chain, totalFactor, branches: branchLines, expectedDamage };
+    return {
+      chain: state.chain,
+      totalFactor,
+      ...(rawFactor < 1000 ? { factorFilled: true as const } : {}),
+      branches: branchLines,
+      expectedDamage,
+    };
   });
 
   return {

@@ -88,8 +88,55 @@
   les 22 lignes réelles sont des procs `SKILL_START`/`SKILL_FINISH` (déjà
   classés dynamic) ou des types hors pipeline (`BT_ADDITIVE_TURN`) — aucune
   entrée active n'atteint l'évaluateur ; l'implémenter aurait été du code
-  mort. Documenté ici, point retiré du plan.
-- État : suite 146 fichiers / 1699 tests, tsc app + datagen 0, eslint 0.
+  mort. Documenté ici, point retiré du plan. **RENVERSÉ le jour même par la
+  mesure** (bullet suivant) : un proc `SKILL_START` pèse sur le hit de son
+  lanceur, donc `TARGET_IS_BOSS` s'évalue bel et bien.
+- **Câblage des découvertes des 7 captures in-game du jour** (Rhona vs
+  Meteos ; Caren vs Meteos et vs Amadeus — un combat par mesure, premier coup,
+  état neutre) :
+  - **Procs `SKILL_START` au lanceur** : un buff `SKILL_START` est posé AU
+    LANCEMENT et pèse sur le hit du skill lanceur. Lanceurs = les skills
+    ACTIFS qui le référencent (Caren `2000089_3_1` : S3/B2/B3 — ratio B2/B1
+    mesuré 1.3306 vs 1.3305 calculé) ; porté par un passif seul, le CSV
+    `CallerSkillType` décide (Rhona `2000008_passive_3`, `TARGET_IS_BOSS`
+    évalué via `target.boss` passé aux trois résolveurs). Rhona S1 vs boss :
+    delta 0.00 % exact. Chaque ligne reste un PREMIER lancement (durées non
+    simulées).
+  - **Canal § 16.1 PAR SLOT** : les `BT_STAT` gatés par lanceurs recalculent
+    les stats de combat de LEUR ligne (`combatStatsWith`, 2 passes PV-perdus)
+    et celles de la CIBLE (`applyTargetStatChannel`, A = 0 — Rhona
+    `2000008_3_3` : DEF cible −50 % au lancement du S3, sur sa ligne seule) ;
+    les `BT_STAT` défenseur sont classés et consommés côté cible.
+  - **Facteur total § 8.1** : le vrai total d'un skill = Σ des AnimationEvents
+    du clip, hors tables — 165/1062 skills ont Σ hits ≠ 1000 ‰. Règle :
+    `totalFactor = max(rawFactor, 1000)` + flag `factorFilled` (témoin mesuré :
+    S1 de Caren, 700 ‰ en table, 1000 ‰ en jeu) ; les Σ > 1000 sont gardés
+    (bursts renforcés plausibles, non tranchés § 12.4).
+  - **Fixtures dorées** : `rhona-meteos` (1 obs), `caren-meteos` (4 obs),
+    `caren-amadeus` (2 obs) — gameVersion 1.4.14, quirks/codex/guilde des
+    captures, `ENGINE_GAME_VERSION` monté à 1.4.14.
+- **Le « +1.03 % résiduel » de Caren RÉSOLU : les buffs PREMIUM sont DANS la
+  fiche** (spec § 16.1 amendée). La fiche affichée `X (+Y)` inclut les
+  `BT_STAT_PREMIUM` passifs inconditionnels du porteur (`ME` et `MY_TEAM` —
+  un buff d'équipe couvre son porteur) dans le canal `buffRate` de
+  CalcFinalStat : passif de transcendance Skill_8, option d'EE Lv10, quirks
+  IOT_BUFF, artefacts. Preuve à l'unité (fiche relevée par Sevih SANS
+  équipement) : Caren lv120 T-max = 2314 (+732) = base 535 + évo 247 + quirks
+  BRUISER +800, ×1.3 (trans), ×1.1 (skill_8 100 ‰), + codex 53 ; équipée
+  5631 → sous-total 4291 avec 300 ‰ (skill_8 100 + EE Lv10 `_ADD` 200) ; DEF
+  de combat 5891 = div1000((4291 + 200 trust) × 1300) + 53 — EXACTEMENT le
+  « +60 » que les 6 captures exigeaient. Le résiduel était le TERME CROISÉ
+  trust × premiums (aucune fixture verte n'avait d'affinité > palier 0 : le
+  canal n'avait jamais été testé), pas un « premium d'équipe à assiette
+  mystérieuse ». Câblé : `gear.ts` collecte les taux premium
+  (`GearPassivesInfo.premium`, trois résolveurs), `sheet.ts` DÉFACTORISE la
+  fiche saisie par (1000+Rp) puis applique (1000+Rp+buffs) au sous-total
+  (ambiguïté ±1 documentée, nulle sans premium — identité historique
+  inchangée), `inputs.ts` agrège par stat. Les 2 fixtures Caren passent de
+  skip à VERTES (7/7 captures à 0.00 %) ; test de propriété défactorisation +
+  témoin 5891 dans `sheet.test.ts`.
+- État : suite 148 fichiers / 1725 tests (0 skip), tsc app + datagen 0,
+  eslint 0 ; rejeu des 7 captures du jour : 0.00 % partout.
 
 ## 2026-08-17
 

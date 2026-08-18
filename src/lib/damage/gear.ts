@@ -9,10 +9,16 @@
  *   - créations `PASSIVE`/`PASSIVE2` : appliquées STATIQUEMENT quand le type
  *     est consommé par le pipeline attaquant (BT_STAT, familles BT_DMG* § 9.1,
  *     drapeaux § 6/§ 10.1, stats « PV perdus » § 14) ;
- *   - procs (`SKILL_FINISH`, `ON_SPAWN`…) damage-pertinents : NON simulés —
- *     remontés `dynamic` (ex. le marking de Rampaging Caracal se représente
- *     par la chip « cible marquée ») ; les procs hors-dégâts (soins, CP/AP,
- *     jauge d'action…) sont ignorés silencieusement ;
+ *   - procs `SKILL_START` : posés AU LANCEMENT, ils pèsent sur le hit du
+ *     lanceur (PROUVÉ par les captures du 18/08/2026 — Rhona S1 vs boss exact
+ *     avec son +300 ‰ pierce `TARGET_IS_BOSS` ; Caren : pierce sur S3/B2/B3
+ *     seuls, ratio B2/B1 exact) : entrées gatées par leurs lanceurs
+ *     (`GearPassiveEntry.proc`), chaque ligne restant un PREMIER lancement
+ *     état-neutre (durées non simulées) ;
+ *   - autres procs (`SKILL_FINISH`, `ON_SPAWN`…) damage-pertinents : NON
+ *     simulés — remontés `dynamic` (ex. le marking de Rampaging Caracal se
+ *     représente par la chip « cible marquée ») ; les procs hors-dégâts
+ *     (soins, CP/AP, jauge d'action…) sont ignorés silencieusement ;
  *   - `BT_WG_*` : agrégation de la jauge non désassemblée (§ 12.3) →
  *     unresolved ; conditions non évaluables (§ 12.1) → unresolved.
  *
@@ -106,6 +112,16 @@ export interface GearPassiveEntry {
    * (z `cs` : condition remplie en jeu). Défaut : inactive.
    */
   stateful?: boolean;
+  /**
+   * Proc `SKILL_START` : posé AU LANCEMENT du skill, il pèse sur le hit du
+   * lanceur (PROUVÉ par fixture : Rhona S1 vs boss exact au point près avec
+   * son +300 ‰ pierce `TARGET_IS_BOSS`, captures 18/08/2026). `callers` porte
+   * les lanceurs : les skills ACTIFS qui référencent le buff, ou le CSV
+   * `CallerSkillType` quand seul un passif/équipement le porte. Chaque ligne
+   * du rapport reste un PREMIER lancement état-neutre : le proc ne persiste
+   * pas d'une ligne à l'autre (durées non simulées).
+   */
+  proc?: true;
 }
 
 export interface GearPassiveApplied extends GearPassiveEntry {
@@ -121,9 +137,29 @@ export interface GearDynamicEntry {
   buff: ActiveBuff;
 }
 
+/**
+ * Taux PREMIUM (‰) d'une stat du porteur — `BT_STAT_PREMIUM` passif
+ * inconditionnel en `OAT_RATE` (skill_8 de transcendance, EE Lv10, quirk
+ * IOT_BUFF, artefact). DÉJÀ compté dans la fiche affichée (prouvé 18/08/2026 :
+ * fiche nue de Caren 2314 exacte avec le taux, 2109 sans) : le moteur ne le
+ * recompte pas, il DÉFACTORISE la fiche saisie puis l'applique aux plats du
+ * canal buff (terme croisé trust × premiums — sheet.ts).
+ */
+export interface GearPremiumEntry {
+  source: GearSource;
+  sourceId: string;
+  buffId: string;
+  /** ST_* visé. */
+  stat: string;
+  /** Taux per-mille (`OAT_RATE`). */
+  valueRate: number;
+}
+
 export interface GearPassivesInfo {
   entries: GearPassiveApplied[];
   dynamic: GearDynamicEntry[];
+  /** Taux premium par stat, déjà dans la fiche — cf. `GearPremiumEntry`. */
+  premium: GearPremiumEntry[];
   unresolved: { source: GearSource; sourceId: string; buffId: string; reason: string }[];
 }
 
@@ -261,12 +297,16 @@ export function gearConditionMet(
   conditionValue: number | undefined,
   attackerElement: Element,
   defenderElement: Element,
+  /** Cible boss du scénario — évalue `TARGET_IS_BOSS` (preuve runtime : le
+   *  +300 ‰ pierce de Rhona, fixture 18/08/2026) ; absent = non évaluable. */
+  targetIsBoss?: boolean,
 ): boolean | undefined {
   if (condition === undefined) return true;
   if (ELEMENT_CONDITIONS.has(condition))
     return passiveConditionMet(condition, attackerElement, defenderElement);
   // BuffConditionValue = CET_* de la CIBLE, absente = 0 = terre (cf. en-tête).
   if (condition === 'TARGET_ELEMENT') return defenderElement === ((conditionValue ?? 0) as Element);
+  if (condition === 'TARGET_IS_BOSS') return targetIsBoss;
   return undefined;
 }
 
@@ -314,17 +354,42 @@ function makeCollector(
   attackerElement: Element,
   defenderElement: Element,
   metConditions?: ReadonlySet<string>,
+  targetIsBoss?: boolean,
 ): {
   info: GearPassivesInfo;
-  feed: (source: GearSource, sourceId: string, buffId: string, row: DataBuffLevel) => void;
-  feedBuff: (source: GearSource, sourceId: string, buffId: string, level: number) => void;
+  feed: (
+    source: GearSource,
+    sourceId: string,
+    buffId: string,
+    row: DataBuffLevel,
+    procCallers?: string[],
+  ) => void;
+  feedBuff: (
+    source: GearSource,
+    sourceId: string,
+    buffId: string,
+    level: number,
+    procCallers?: string[],
+  ) => void;
 } {
-  const info: GearPassivesInfo = { entries: [], dynamic: [], unresolved: [] };
+  const info: GearPassivesInfo = { entries: [], dynamic: [], premium: [], unresolved: [] };
 
-  /** Classe et range une ligne de buff (au niveau déjà choisi). */
-  const feed = (source: GearSource, sourceId: string, buffId: string, row: DataBuffLevel): void => {
+  /** Classe et range une ligne de buff (au niveau déjà choisi). `procCallers` :
+   *  types des skills ACTIFS qui référencent un buff `SKILL_START` — ses
+   *  lanceurs (cf. `GearPassiveEntry.proc`). */
+  const feed = (
+    source: GearSource,
+    sourceId: string,
+    buffId: string,
+    row: DataBuffLevel,
+    procCallers?: string[],
+  ): void => {
     const ct = row.createType;
-    if (ct !== 'PASSIVE' && ct !== 'PASSIVE2') {
+    // Proc SKILL_START : posé au LANCEMENT, il pèse sur le hit du lanceur
+    // (preuve fixture Rhona 18/08/2026) — traité comme une entrée gatée par
+    // ses lanceurs. Les autres créations dynamiques restent non simulées.
+    const isSkillStart = ct === 'SKILL_START';
+    if (ct !== 'PASSIVE' && ct !== 'PASSIVE2' && !isSkillStart) {
       // Proc — jamais simulé ; signalé seulement s'il peut peser sur le hit.
       if (damageRelevant(row) || row.type === 'BT_MARKING' || row.type.startsWith('BT_GROUP')) {
         info.dynamic.push({
@@ -337,12 +402,41 @@ function makeCollector(
       }
       return;
     }
-    // BT_STAT_PREMIUM (paliers de transcendance, mains d'EE…) : AFFICHÉ dans
-    // la fiche du héros, donc déjà dans les stats SAISIES — jamais recompté.
-    // Preuve : pierce 30 % identique sur deux équipements différents de la
-    // même Dianne T-max (captures Sevih 05/08/2026) = le
-    // `trancendent_8_pierce_30` rendu dans la fiche.
-    if (row.type === 'BT_STAT_PREMIUM') return;
+    // BT_STAT_PREMIUM visant le PORTEUR (`ME` comme `MY_TEAM` — un buff
+    // d'équipe couvre son porteur) : AFFICHÉ dans la fiche du héros, donc déjà
+    // dans les stats SAISIES — jamais recompté comme un buff. Mais son TAUX
+    // doit être CONNU du moteur : la fiche le porte en multiplicateur
+    // (`buffRate` de CalcFinalStat, en ville comme en combat), et les plats du
+    // canal buff (affinité, buffs plats de scénario) sont multipliés par lui.
+    // PROUVÉ 18/08/2026 (Caren) : fiche nue 2314 (+732) exacte avec
+    // Rp=100 (skill_8), fiche équipée 5631 → sub 4291 avec Rp=300 (+200 EE
+    // Lv10), DEF de combat 5891 EXACTE = « le +60 » des 6 captures — c'était
+    // le terme croisé trust(200) × Rp(300), pas un buff d'équipe à assiette
+    // mystérieuse. Compatible avec la preuve Dianne 05/08/2026 (pierce 30 %
+    // identique sur deux équipements : sans plats de trust sur la stat, le
+    // terme croisé est nul et « déjà dans la fiche » suffisait).
+    // Les plats (`OAT_ADD`) sont dans le sous-total défactorisé : rien à
+    // collecter. `MY_TEAM_WITHOUT_ME` ne touche pas le porteur (l'apport aux
+    // ALLIÉS attend le lot « buffs d'alliés »). Un premium CONDITIONNEL ou
+    // non-passif n'existe pas en donnée 1.4.14 côté porteur : signalé, jamais
+    // deviné.
+    if (row.type === 'BT_STAT_PREMIUM') {
+      const tgt = row.targetType ?? '';
+      if (tgt !== 'ME' && tgt !== 'MY_TEAM') return; // alliés seuls : lot dédié
+      if (row.conditionType !== undefined || isSkillStart) {
+        info.unresolved.push({
+          source,
+          sourceId,
+          buffId,
+          reason: 'premium conditionnel/dynamique — hors doctrine fiche, contribution 0',
+        });
+        return;
+      }
+      if (row.applyingType === 'OAT_RATE' && row.stat !== undefined) {
+        info.premium.push({ source, sourceId, buffId, stat: row.stat, valueRate: row.value ?? 0 });
+      }
+      return;
+    }
     const target = row.targetType ?? '';
     let side: GearPassiveEntry['side'] | undefined;
     if (target === 'MY_TEAM_WITHOUT_ME') side = 'allies';
@@ -358,16 +452,11 @@ function makeCollector(
         return;
       } else return; // soins, CP/AP, boucliers… : sans effet sur le hit calculé
     } else if (target.startsWith('ENEMY')) {
-      if (DEFENDER_TYPES.has(row.type)) side = 'defender';
-      else if (row.type === 'BT_STAT') {
-        info.unresolved.push({
-          source,
-          sourceId,
-          buffId,
-          reason: 'stat du défenseur — canal non consommé par le pipeline',
-        });
-        return;
-      } else return;
+      // BT_STAT posé sur l'ennemi (débuff de stat permanent ou au lancement —
+      // ex. Rhona 2000008_3_3 : DEF -50 % au début du S3) : canal § 16.1 des
+      // stats de la CIBLE, global ou par slot (branché 18/08/2026).
+      if (DEFENDER_TYPES.has(row.type) || row.type === 'BT_STAT') side = 'defender';
+      else return;
     } else return;
 
     // Buff restreint à UN skill (`TargetSkillType`) : gate de MÉCANIQUE
@@ -382,14 +471,28 @@ function makeCollector(
       });
       return;
     }
-    // Restriction par skill LANCEUR (`CallerSkillType`, CSV) — application
-    // PAR SLOT (10/08/2026) : l'entrée porte ses lanceurs, `buildDamageReport`
-    // ne la verse qu'aux slots qui matchent. Hors intersection avec les lignes
-    // du rapport (chain attacks, backups…) : contribution 0, signalé. Les
-    // familles à canal de STAT (§ 16.1 — stats de combat GLOBALES du rapport)
-    // ne savent pas varier par slot : signalées, jamais versées à tous.
+    // Restriction par skill LANCEUR — application PAR SLOT (10/08/2026) :
+    // l'entrée porte ses lanceurs, `buildDamageReport` ne la verse qu'aux
+    // slots qui matchent (les BT_STAT restreints passent par le canal § 16.1
+    // PAR SLOT depuis le 18/08/2026 — stats recalculées pour la ligne). Pour
+    // un proc SKILL_START, les lanceurs sont les skills ACTIFS qui le
+    // référencent (`procCallers` — Caren 2000089_3_1 : S3/B2/B3, mesuré) ;
+    // le CSV `CallerSkillType` ne décide que lorsqu'aucun skill actif ne le
+    // porte (proc de passif/équipement — Rhona 2000008_passive_3, mesuré).
+    // Hors intersection avec les lignes du rapport : contribution 0, signalé.
     let callers: string[] | undefined;
-    if (row.callerSkillType !== undefined && row.callerSkillType !== 'SKT_ALL') {
+    if (isSkillStart && procCallers !== undefined) {
+      callers = procCallers.filter((c) => REPORT_SKILL_TYPES.has(c));
+      if (!callers.length) {
+        info.unresolved.push({
+          source,
+          sourceId,
+          buffId,
+          reason: 'proc SKILL_START porté hors des lignes du rapport — contribution 0',
+        });
+        return;
+      }
+    } else if (row.callerSkillType !== undefined && row.callerSkillType !== 'SKT_ALL') {
       const all = row.callerSkillType.split(',').map((s) => s.trim());
       callers = all.filter((c) => REPORT_SKILL_TYPES.has(c));
       if (!callers.length) {
@@ -401,15 +504,6 @@ function makeCollector(
         });
         return;
       }
-      if (row.type.startsWith('BT_STAT')) {
-        info.unresolved.push({
-          source,
-          sourceId,
-          buffId,
-          reason: `stat restreinte à ${row.callerSkillType} — les stats de combat sont globales, contribution 0`,
-        });
-        return;
-      }
     }
 
     const condition = row.conditionType;
@@ -417,7 +511,13 @@ function makeCollector(
     const met =
       side === 'allies'
         ? false
-        : gearConditionMet(condition, row.conditionValue, attackerElement, defenderElement);
+        : gearConditionMet(
+            condition,
+            row.conditionValue,
+            attackerElement,
+            defenderElement,
+            targetIsBoss,
+          );
     if (met === undefined) {
       // Condition d'ÉTAT DE COMBAT (STATE_CONDITIONS) : entrée `stateful`,
       // active seulement si le scénario la déclare remplie — jamais devinée.
@@ -431,6 +531,7 @@ function makeCollector(
           condition,
           ...(row.conditionValue !== undefined ? { conditionValue: row.conditionValue } : {}),
           ...(callers ? { callers } : {}),
+          ...(isSkillStart ? { proc: true as const } : {}),
           stateful: true,
           active: metConditions?.has(buffId) === true,
         });
@@ -455,19 +556,26 @@ function makeCollector(
         ? { conditionElement: (row.conditionValue ?? 0) as Element }
         : {}),
       ...(callers ? { callers } : {}),
+      ...(isSkillStart ? { proc: true as const } : {}),
       active: met,
     });
   };
 
   /** Toutes les lignes de buff d'un id, au niveau demandé. */
-  const feedBuff = (source: GearSource, sourceId: string, buffId: string, level: number): void => {
+  const feedBuff = (
+    source: GearSource,
+    sourceId: string,
+    buffId: string,
+    level: number,
+    procCallers?: string[],
+  ): void => {
     const rows = buffs.buffs[buffId];
     if (!rows?.length) {
       info.unresolved.push({ source, sourceId, buffId, reason: 'buff absent de buffs.json' });
       return;
     }
     const row = pickBuffRow(rows, level);
-    if (row) feed(source, sourceId, buffId, row);
+    if (row) feed(source, sourceId, buffId, row, procCallers);
   };
 
   return { info, feed, feedBuff };
@@ -485,8 +593,15 @@ export function resolveGearPassives(
   attackerElement: Element,
   defenderElement: Element,
   metConditions?: ReadonlySet<string>,
+  targetIsBoss?: boolean,
 ): GearPassivesInfo {
-  const { info, feedBuff } = makeCollector(buffs, attackerElement, defenderElement, metConditions);
+  const { info, feedBuff } = makeCollector(
+    buffs,
+    attackerElement,
+    defenderElement,
+    metConditions,
+    targetIsBoss,
+  );
 
   /** Groupes d'options UNIQUES (arme/accessoire/talisman/EE) au niveau spécial
    *  donné ; `buffLevel` = niveau demandé aux buffs de ces lignes. */
@@ -615,9 +730,10 @@ export function uniquePassiveLevel(
 /**
  * Les passifs STATIQUES du kit de l'attaquant (skills `*_PASSIVE`), évalués
  * contre les éléments du scénario — même doctrine que l'équipement :
- * `BT_STAT_PREMIUM` (affiché dans la fiche) jamais recompté, procs/GROUP
- * signalés `dynamic` (ex. le passif par tour de H.Dianne = les chips
- * atk/chd/crit/spd), restrictions par skill signalées.
+ * `BT_STAT_PREMIUM` (déjà dans la fiche) jamais recompté comme buff mais son
+ * TAUX est collecté (`info.premium`, défactorisation sheet.ts — 18/08/2026),
+ * procs/GROUP signalés `dynamic` (ex. le passif par tour de H.Dianne = les
+ * chips atk/chd/crit/spd), restrictions par skill signalées.
  *
  * Sélection de niveau : `SKT_UNIQUE_PASSIVE` = palier de TRANSCENDANCE
  * (`growth.transcend.skillLevel`) ; les autres passifs (classe, chain…) au
@@ -675,8 +791,15 @@ export function resolveQuirkPassives(
    *  licence ; absent (cible manuelle) = inconnu, signalé. */
   targetMode?: string,
   metConditions?: ReadonlySet<string>,
+  targetIsBoss?: boolean,
 ): GearPassivesInfo {
-  const { info, feedBuff } = makeCollector(buffs, char.element, defenderElement, metConditions);
+  const { info, feedBuff } = makeCollector(
+    buffs,
+    char.element,
+    defenderElement,
+    metConditions,
+    targetIsBoss,
+  );
   for (const [nodeId, level] of Object.entries(quirks)) {
     if (level < 1) continue;
     const node = awakening.find((n) => n.id === nodeId);
@@ -758,13 +881,59 @@ export function resolveKitPassives(
    *  ACTIFS ; absent = niveau max (défaut UI). */
   skillLevels: Partial<Record<'S1' | 'S2' | 'S3', number>> = {},
   metConditions?: ReadonlySet<string>,
+  targetIsBoss?: boolean,
 ): GearPassivesInfo {
-  const { info, feedBuff } = makeCollector(buffs, attackerElement, defenderElement, metConditions);
+  const { info, feedBuff } = makeCollector(
+    buffs,
+    attackerElement,
+    defenderElement,
+    metConditions,
+    targetIsBoss,
+  );
   // Slot du skill BURSTABLE : ses déclinaisons burst tiennent leur niveau de
   // LUI (S1 chez Caren — le « toujours S2 » d'avant faussait la sélection des
   // lignes de buff pour 74/125 persos, revue 18/08/2026). Sans marqueur, un
   // burst retombe sur son niveau max (même règle que les actifs hors slot).
   const burstSlot = burstableSlotOf(char.skills.map((r) => skills[r.id]));
+  // (Niveau effectif : passif UNIQUE = palier de transcendance ; skill ACTIF
+  // = niveau saisi, clampé — ses `buffIds` par niveau portent les passifs
+  // permanents du kit ; autres passifs (classe, chain…) = max.)
+  const levelOf = (sk: KitSkill): { wanted: number; lv?: { buffIds: string[] } } => {
+    let wanted: number;
+    if (sk.type === 'SKT_UNIQUE_PASSIVE') {
+      wanted = uniquePassiveLevel(transcend, char.basicStar, transStar);
+    } else if (sk.type.includes('PASSIVE')) {
+      wanted = sk.levels.length;
+    } else {
+      const slot =
+        MAIN_SLOT_OF[sk.type] ?? (sk.type.startsWith('SKT_BURST_') ? burstSlot : undefined);
+      if (slot === undefined && !sk.levels.some((l) => l.buffIds.length)) return { wanted: 0 };
+      const asked = slot !== undefined ? skillLevels[slot] : undefined;
+      wanted = Math.min(Math.max(asked ?? sk.levels.length, 1), sk.levels.length);
+    }
+    if (wanted < 1) return { wanted: 0 };
+    const lv =
+      sk.levels.filter((l) => l.level <= wanted).sort((a, b) => b.level - a.level)[0] ??
+      sk.levels[0];
+    return { wanted, lv };
+  };
+  // Lanceurs des procs SKILL_START : les skills ACTIFS (lignes du rapport)
+  // qui référencent le buff au niveau servi — Caren 2000089_3_1 (+300 ‰
+  // pierce) vit dans les buffIds de S3/B2/B3 : il pèse sur CES hits-là et
+  // pas sur S1/B1 (mesuré 18/08/2026, ratio B2/B1 exact). Quand aucun skill
+  // actif ne le porte (proc d'un skill passif — Rhona 2000008_passive_3), le
+  // CSV `CallerSkillType` du buff décide (feed).
+  const activeRefs = new Map<string, Set<string>>();
+  for (const ref of char.skills) {
+    const sk = skills[ref.id];
+    if (!sk || !REPORT_SKILL_TYPES.has(sk.type)) continue;
+    const { lv } = levelOf(sk);
+    for (const b of lv?.buffIds ?? []) {
+      let refs = activeRefs.get(b);
+      if (!refs) activeRefs.set(b, (refs = new Set()));
+      refs.add(sk.type);
+    }
+  }
   // Un buff référencé par PLUSIEURS skills (CSV caller « S2,B1..B3 » : le même
   // templet couvre ses déclinaisons) est UNE instance en jeu — servi au premier
   // référent seulement. Sans cette dédup, chaque référence redevenait une
@@ -776,31 +945,13 @@ export function resolveKitPassives(
   for (const ref of char.skills) {
     const sk = skills[ref.id];
     if (!sk) continue;
-    // Niveau effectif : passif UNIQUE = palier de transcendance ; skill ACTIF
-    // = niveau saisi (clampé) — ses `buffIds` par niveau portent les passifs
-    // permanents du kit (ex. Noa 2000022_2_2, +3 % PV cible sur le S2, niveaux
-    // 10/20/30 ‰ aux paliers 1/3/5) ; autres passifs (classe, chain…) = max.
-    let wanted: number;
-    if (sk.type === 'SKT_UNIQUE_PASSIVE') {
-      wanted = uniquePassiveLevel(transcend, char.basicStar, transStar);
-    } else if (sk.type.includes('PASSIVE')) {
-      wanted = sk.levels.length;
-    } else {
-      const slot =
-        MAIN_SLOT_OF[sk.type] ?? (sk.type.startsWith('SKT_BURST_') ? burstSlot : undefined);
-      if (slot === undefined && !sk.levels.some((l) => l.buffIds.length)) continue;
-      const asked = slot !== undefined ? skillLevels[slot] : undefined;
-      wanted = Math.min(Math.max(asked ?? sk.levels.length, 1), sk.levels.length);
-    }
-    if (wanted < 1) continue;
-    const lv =
-      sk.levels.filter((l) => l.level <= wanted).sort((a, b) => b.level - a.level)[0] ??
-      sk.levels[0];
+    const { wanted, lv } = levelOf(sk);
     if (!lv) continue;
     for (const b of lv.buffIds) {
       if (served.has(b)) continue;
       served.add(b);
-      feedBuff('kit', sk.id, b, wanted);
+      const refs = activeRefs.get(b);
+      feedBuff('kit', sk.id, b, wanted, refs ? [...refs] : undefined);
     }
   }
   return info;

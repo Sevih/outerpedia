@@ -573,6 +573,39 @@ const SLOT_TYPES: { slot: 'S1' | 'S2' | 'S3'; type: string }[] = [
 const BURST_TYPES = ['SKT_BURST_1', 'SKT_BURST_2', 'SKT_BURST_3'];
 
 /**
+ * Canal de STAT du DÉFENSEUR : les `BT_STAT` posés sur la cible (enrage du
+ * boss, débuffs permanents d'équipement, débuffs au LANCEMENT d'un skill —
+ * ex. Rhona 2000008_3_3 : DEF -50 % au début du S3) s'appliquent aux stats
+ * effectives par l'identité § 16.1 avec A = 0 (un monstre n'a pas de terme
+ * d'archive) : `stat' = trunc((stat + val) × (1000 + taux) / 1000)`. Les
+ * stacks ne sont pas simulés (lignes damage-pertinentes mono-stack en
+ * donnée).
+ */
+function applyTargetStatChannel(
+  base: TargetBuildInput['stats'],
+  buffs: ActiveBuff[],
+): TargetBuildInput['stats'] {
+  const acc: Partial<Record<keyof TargetBuildInput['stats'], { add: number; rate: number }>> = {};
+  for (const b of buffs) {
+    if (b.type !== 'BT_STAT') continue;
+    const key = b.stat !== undefined ? TARGET_STAT_MAP[b.stat] : undefined;
+    if (key === undefined) continue;
+    const slot = (acc[key] ??= { add: 0, rate: 0 });
+    if (b.applyingType === 'OAT_RATE') slot.rate += b.value ?? 0;
+    else slot.add += b.value ?? 0;
+  }
+  const out = { ...base };
+  for (const [key, agg] of Object.entries(acc) as [
+    keyof TargetBuildInput['stats'],
+    { add: number; rate: number },
+  ][]) {
+    const value = out[key] ?? 0;
+    out[key] = Math.trunc(((value + agg.add) * (1000 + agg.rate)) / 1000);
+  }
+  return out;
+}
+
+/**
  * Stats de combat § 16.1 pour toute la fiche saisie. Les canaux de buffs par
  * stat viennent de `collectStatChannels` (affinité + chips BT_STAT).
  */
@@ -584,6 +617,9 @@ export function buildCombatStats(
   /** PV du porteur (§ 14 BT 31/32 — stats « PV perdus ») ; absent : ces
    *  familles contribuent 0. */
   owner?: { maxHP: number; hp: number },
+  /** Taux premium par ST_* (‰), DÉJÀ dans la fiche saisie — collectés par les
+   *  résolveurs kit/équipement/quirks (gear.ts) ; absent = 0 partout. */
+  premiumRates?: Record<string, number>,
 ): Record<string, number> {
   const channels = collectStatChannels(activeBuffs, owner ? { owner } : undefined);
   const modifier = modifierAfter100For(char, attacker.level, growth);
@@ -602,6 +638,7 @@ export function buildCombatStats(
       archiveRatePermille: archiveRate,
       buffValue: channel?.value ?? 0,
       buffValueRate: channel?.rate ?? 0,
+      premiumRatePermille: premiumRates?.[map.st] ?? 0,
     });
   }
   return combat;
@@ -663,32 +700,6 @@ export function buildDamageReport(
       )
       .map((e) => e.buff);
 
-  // ENRAGE — canal de STAT défenseur : les BT_STAT actifs posés sur le boss
-  // (ex. Common_Rage_Buff_3 : DMG Reduce +400 ‰ en OAT_ADD) s'appliquent aux
-  // stats effectives de la cible par l'identité § 16.1 avec A = 0 (un monstre
-  // n'a pas de terme d'archive) : `stat' = trunc((stat + val) × (1000 +
-  // taux) / 1000)`. Les stacks ne sont pas simulés (lignes damage-pertinentes
-  // d'enrage mono-stack en donnée).
-  const tgtStats = { ...target.stats };
-  {
-    const acc: Partial<Record<keyof TargetBuildInput['stats'], { add: number; rate: number }>> = {};
-    for (const e of bossPassives?.entries ?? []) {
-      if (e.side !== 'defender' || !e.active || e.buff.type !== 'BT_STAT') continue;
-      const key = e.buff.stat !== undefined ? TARGET_STAT_MAP[e.buff.stat] : undefined;
-      if (key === undefined) continue;
-      const slot = (acc[key] ??= { add: 0, rate: 0 });
-      if (e.buff.applyingType === 'OAT_RATE') slot.rate += e.buff.value ?? 0;
-      else slot.add += e.buff.value ?? 0;
-    }
-    for (const [key, agg] of Object.entries(acc) as [
-      keyof TargetBuildInput['stats'],
-      { add: number; rate: number },
-    ][]) {
-      const base = tgtStats[key] ?? 0;
-      tgtStats[key] = Math.trunc(((base + agg.add) * (1000 + agg.rate)) / 1000);
-    }
-  }
-
   // Conditions d'ÉTAT déclarées remplies (z `cs`) — consommées par les
   // entrées `stateful` des trois collecteurs (mécaniques perso, gear.ts).
   const metConditions = attacker.metConditions?.length
@@ -710,10 +721,12 @@ export function buildDamageReport(
           attackerElement,
           defenderElement,
           metConditions,
+          target.boss === true,
         )
       : {
           entries: [],
           dynamic: [],
+          premium: [],
           unresolved: [
             {
               source: 'weapon',
@@ -724,9 +737,13 @@ export function buildDamageReport(
           ],
         };
   }
+  // Les BT_STAT DÉFENSEUR sans callers ne passent pas en buff de scénario :
+  // ils vont au canal § 16.1 des stats de la cible (tgtStats, ci-dessous).
+  const scenarioSide = (e: { side: string; buff: ActiveBuff }, side: string): boolean =>
+    e.side === side && !(side === 'defender' && e.buff.type === 'BT_STAT');
   const gearBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>
     (gearPassives?.entries ?? [])
-      .filter((e) => e.side === side && e.active && !e.callers)
+      .filter((e) => scenarioSide(e, side) && e.active && !e.callers)
       .map((e) => e.buff);
 
   // Passifs du KIT (§ 16.3 côté joueur) : skills `*_PASSIVE` du perso — le
@@ -749,9 +766,12 @@ export function buildDamageReport(
     defenderElement,
     attacker.skillLevels,
     metConditions,
+    target.boss === true,
   );
   const kitBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>
-    kitPassives.entries.filter((e) => e.side === side && e.active && !e.callers).map((e) => e.buff);
+    kitPassives.entries
+      .filter((e) => scenarioSide(e, side) && e.active && !e.callers)
+      .map((e) => e.buff);
 
   // QUIRKS du compte (nœuds d'éveil à buff) — portée élément/classe évaluée
   // dans gear.ts ; les nœuds de stats sont déjà dans la fiche (§ 17.4).
@@ -765,11 +785,12 @@ export function buildDamageReport(
       defenderElement,
       target.mode !== undefined ? dungeonModeOf(target.mode) : undefined,
       metConditions,
+      target.boss === true,
     );
   }
   const quirkBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>
     (quirkPassives?.entries ?? [])
-      .filter((e) => e.side === side && e.active && !e.callers)
+      .filter((e) => scenarioSide(e, side) && e.active && !e.callers)
       .map((e) => e.buff);
 
   // Buffs restreints par slot (`CallerSkillType`, gear.ts) : versés SEULEMENT
@@ -803,6 +824,21 @@ export function buildDamageReport(
     ...quirkBuffs('defender'),
   ];
 
+  // Stats effectives de la CIBLE (canal § 16.1, A = 0) : BT_STAT actifs posés
+  // sur elle par le boss lui-même (enrage) ou par le kit/équipement/quirks du
+  // porteur — hors callers (les débuffs AU LANCEMENT d'un skill passent par
+  // le canal PAR SLOT de pushSlot, 18/08/2026).
+  const tgtStats = applyTargetStatChannel(target.stats, [
+    ...(bossPassives?.entries ?? [])
+      .filter((e) => e.side === 'defender' && e.active && e.buff.type === 'BT_STAT')
+      .map((e) => e.buff),
+    ...gatedInfos().flatMap((i) =>
+      (i?.entries ?? [])
+        .filter((e) => e.side === 'defender' && e.active && !e.callers && e.buff.type === 'BT_STAT')
+        .map((e) => e.buff),
+    ),
+  ]);
+
   // Stats de l'attaquant qui pèsent un MONTANT dans CE scénario (filtre des
   // chips de passifs de boss, cf. passives.ts) : la base § 8/§ 7.5/§ 9, plus
   // ce que les buffs ACTIFS lisent — familles `*_STAT` § 9.1 (ex. 2000067_2_6 :
@@ -832,7 +868,23 @@ export function buildDamageReport(
     }
   }
 
-  let combatStats = buildCombatStats(attacker, char, data.growth, attackerBuffs);
+  // Taux PREMIUM par stat (‰) — `BT_STAT_PREMIUM` passifs inconditionnels du
+  // porteur, collectés par les trois résolveurs : DÉJÀ dans la fiche saisie,
+  // ils servent à la défactoriser puis multiplient les plats du canal buff
+  // (sheet.ts — terme croisé trust × premiums, prouvé 18/08/2026 sur Caren).
+  const premiumRates: Record<string, number> = {};
+  for (const i of gatedInfos())
+    for (const p of i?.premium ?? [])
+      premiumRates[p.stat] = (premiumRates[p.stat] ?? 0) + p.valueRate;
+
+  let combatStats = buildCombatStats(
+    attacker,
+    char,
+    data.growth,
+    attackerBuffs,
+    undefined,
+    premiumRates,
+  );
   // Familles « PV perdus » § 14 (BT 31/32 — sets Revenge/Patience/Swiftness) :
   // leur contexte est le PV de COMBAT, connu seulement après la première
   // passe — on rejoue alors la construction avec le contexte (le PV lui-même
@@ -840,10 +892,17 @@ export function buildDamageReport(
   if (attackerBuffs.some((b) => b.type.startsWith('BT_STAT_OWNER_LOST_HP_RATE'))) {
     const maxHP = combatStats.hp ?? 0;
     if (maxHP > 0) {
-      combatStats = buildCombatStats(attacker, char, data.growth, attackerBuffs, {
-        maxHP,
-        hp: Math.floor((maxHP * (attacker.hpPct ?? 100)) / 100),
-      });
+      combatStats = buildCombatStats(
+        attacker,
+        char,
+        data.growth,
+        attackerBuffs,
+        {
+          maxHP,
+          hp: Math.floor((maxHP * (attacker.hpPct ?? 100)) / 100),
+        },
+        premiumRates,
+      );
     }
   }
 
@@ -968,25 +1027,111 @@ export function buildDamageReport(
     if (sk && !byType.has(sk.type)) byType.set(sk.type, sk);
   }
 
+  // Familles à canal de STAT (§ 16.1) — par slot, elles recalculent les
+  // stats de la ligne au lieu d'entrer en buffs de scénario.
+  const isStatChannel = (b: ActiveBuff): boolean =>
+    b.type === 'BT_STAT' || b.type.startsWith('BT_STAT_OWNER_LOST_HP_RATE');
+  // Stats de combat pour une liste de buffs (2 passes « PV perdus » § 14 +
+  // buff MAX_HP § 16.2 réappliqué) — sert le canal PAR SLOT.
+  const combatStatsWith = (buffsList: ActiveBuff[]): Record<string, number> => {
+    let stats = buildCombatStats(attacker, char, data.growth, buffsList, undefined, premiumRates);
+    if (buffsList.some((b) => b.type.startsWith('BT_STAT_OWNER_LOST_HP_RATE'))) {
+      const maxHP = stats.hp ?? 0;
+      if (maxHP > 0) {
+        stats = buildCombatStats(
+          attacker,
+          char,
+          data.growth,
+          buffsList,
+          {
+            maxHP,
+            hp: Math.floor((maxHP * (attacker.hpPct ?? 100)) / 100),
+          },
+          premiumRates,
+        );
+      }
+    }
+    if (maxHpBuff !== undefined && maxHpBuff.sum > 0 && (stats.hp ?? 0) > 0) {
+      stats.hp = applyMaxHpRate(stats.hp, maxHpBuff.rate);
+    }
+    return stats;
+  };
+
   const slots: SlotReport[] = [];
   const pushSlot = (slot: 'S1' | 'S2' | 'S3', sk: DataSkill, burst?: number) => {
     const wanted = attacker.skillLevels[slot] ?? sk.levels.length;
     const level = Math.min(Math.max(wanted, 1), sk.levels.length);
     const lv = sk.levels.find((l) => l.level === level) ?? sk.levels[sk.levels.length - 1];
     if (!lv || lv.damageFactor <= 0) return; // skill sans dégâts : pas de ligne
-    // Buffs restreints par slot : le scénario de CE slot reçoit en plus les
-    // entrées dont le `CallerSkillType` matche son skill (ex. Noa : le +3 %
-    // PV cible sur le S2 seul, l'EE sur le S3 seul — fixture 10/08/2026).
+    // Buffs restreints par slot : la ligne reçoit en buffs de scénario les
+    // entrées dont les lanceurs matchent son skill (ex. Noa : le +3 % PV
+    // cible sur le S2 seul — fixture 10/08/2026) ; ses BT_STAT (procs au
+    // LANCEMENT, passifs gated) passent par le canal § 16.1 — les stats de
+    // COMBAT de CETTE ligne sont recalculées (le pierce du B2 de Caren n'est
+    // pas celui du B1 : captures 18/08/2026, ratio exact).
     const gatedAtk = gatedBuffs('attacker', sk.type);
     const gatedDef = gatedBuffs('defender', sk.type);
-    const slotScenario: ReportScenario =
-      gatedAtk.length || gatedDef.length
-        ? {
-            ...scenario,
-            attackerBuffs: [...attackerBuffs, ...gatedAtk],
-            defenderBuffs: [...defenderBuffs, ...gatedDef],
-          }
-        : scenario;
+    let slotScenario: ReportScenario = scenario;
+    if (gatedAtk.length || gatedDef.length) {
+      const statAtk = gatedAtk.filter(isStatChannel);
+      const buffAtk = gatedAtk.filter((b) => !isStatChannel(b));
+      const statDef = gatedDef.filter((b) => b.type === 'BT_STAT');
+      const buffDef = gatedDef.filter((b) => b.type !== 'BT_STAT');
+      let slotAttacker = scenario.attacker;
+      let slotStatOf = statOf;
+      let slotAtkHp = scenario.additionalContext?.attacker;
+      if (statAtk.length) {
+        const sc = combatStatsWith([...attackerBuffs, ...statAtk]);
+        slotAttacker = {
+          ...scenario.attacker,
+          attackStat: sc.atk ?? 0,
+          criticalRate: sc.critical_rate ?? 0,
+          criticalDmgRate: sc.critical_dmg ?? 0,
+          dmgBoost: sc.dmg_boost ?? 0,
+          piercePowerRate: sc.pierce_power_rate ?? 0,
+        };
+        slotStatOf = (st: string): number => {
+          const slug = sheetSlugOfStat(st);
+          return slug !== undefined ? (sc[slug] ?? 0) : 0;
+        };
+        const hp = sc.hp ?? 0;
+        slotAtkHp =
+          hp > 0 ? { maxHP: hp, hp: Math.floor((hp * (attacker.hpPct ?? 100)) / 100) } : undefined;
+      }
+      let slotDefender = scenario.defender;
+      let slotDefStat = defenderStatOf;
+      let slotDefHp = scenario.additionalContext?.defender;
+      if (statDef.length) {
+        const ts = applyTargetStatChannel(tgtStats, statDef);
+        slotDefender = {
+          ...scenario.defender,
+          defense: ts.def ?? 0,
+          dmgReduceRate: ts.dmgRed ?? 0,
+          enemyCriticalDamageReduce: ts.cdmgRed ?? 0,
+        };
+        slotDefStat = (st: string): number => {
+          const key = TARGET_STAT_MAP[st];
+          return key !== undefined ? (ts[key] ?? 0) : 0;
+        };
+        const hp = ts.hp ?? 0;
+        slotDefHp =
+          hp > 0 ? { maxHP: hp, hp: Math.floor((hp * (target.hpPct ?? 100)) / 100) } : undefined;
+      }
+      slotScenario = {
+        ...scenario,
+        attacker: slotAttacker,
+        defender: slotDefender,
+        attackerBuffs: [...attackerBuffs, ...buffAtk],
+        defenderBuffs: [...defenderBuffs, ...buffDef],
+        additionalContext: {
+          ...scenario.additionalContext,
+          attacker: slotAtkHp,
+          defender: slotDefHp,
+          attackerStat: slotStatOf,
+          defenderStat: slotDefStat,
+        },
+      };
+    }
     const report = buildSkillReport(
       {
         skillFactor: lv.damageFactor,

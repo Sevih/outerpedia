@@ -492,6 +492,125 @@ describe('buffs restreints par slot — Noa (donnée réelle, fixture 10/08/2026
     expect(at({ S1: 1, S2: 5 })).toBe(100);
   });
 
+  it('procs SKILL_START : lanceurs = skills ACTIFS référents, ou CSV pour un porteur passif ; TARGET_IS_BOSS évalué ; premium MY_TEAM signalé', () => {
+    // Synthétique compact du modèle PROUVÉ par les captures du 18/08/2026
+    // (Rhona/Caren) : un proc porté par des skills actifs pèse sur EUX
+    // (Caren 2000089_3_1 : S3/B2/B3, pas S1/B1) ; porté par un passif seul,
+    // son CSV `CallerSkillType` décide (Rhona 2000008_passive_3).
+    const char: KitCharacter = {
+      id: 'X',
+      basicStar: 3,
+      skills: [
+        { slot: 1, id: 'a1' },
+        { slot: 3, id: 'a3' },
+        { slot: 9, id: 'p1' },
+      ],
+    };
+    const kitSkills: Record<string, KitSkill> = {
+      a1: { id: 'a1', type: 'SKT_FIRST', levels: [{ level: 1, buffIds: ['proc_actif'] }] },
+      a3: {
+        id: 'a3',
+        type: 'SKT_ULTIMATE',
+        levels: [{ level: 1, buffIds: ['proc_actif', 'proc_finish', 'premium_team'] }],
+      },
+      p1: { id: 'p1', type: 'SKT_CLASS_PASSIVE', levels: [{ level: 1, buffIds: ['proc_passif'] }] },
+    };
+    const kitBuffs = {
+      buffs: {
+        proc_actif: [
+          {
+            level: 1,
+            type: 'BT_STAT',
+            stat: 'ST_PIERCE_POWER_RATE',
+            applyingType: 'OAT_ADD',
+            value: 300,
+            targetType: 'ME',
+            createType: 'SKILL_START',
+            // Le CSV dit « tous » : les RÉFÉRENTS actifs priment (mesuré).
+            callerSkillType: 'SKT_ALL',
+          },
+        ],
+        proc_passif: [
+          {
+            level: 1,
+            type: 'BT_STAT',
+            stat: 'ST_PIERCE_POWER_RATE',
+            applyingType: 'OAT_ADD',
+            value: 300,
+            targetType: 'ME',
+            createType: 'SKILL_START',
+            callerSkillType: 'SKT_SECOND',
+            conditionType: 'TARGET_IS_BOSS',
+          },
+        ],
+        proc_finish: [
+          {
+            level: 1,
+            type: 'BT_DMG',
+            value: 300,
+            targetType: 'ME',
+            createType: 'SKILL_FINISH',
+            callerSkillType: 'SKT_ALL',
+          },
+        ],
+        premium_team: [
+          {
+            level: 1,
+            type: 'BT_STAT_PREMIUM',
+            stat: 'ST_DEF',
+            applyingType: 'OAT_RATE',
+            value: 100,
+            targetType: 'MY_TEAM',
+            createType: 'PASSIVE',
+            callerSkillType: 'SKT_ALL',
+          },
+        ],
+      },
+    };
+    const resolve = (targetIsBoss: boolean) =>
+      resolveKitPassives(
+        char,
+        3,
+        kitSkills,
+        data.growth.transcend,
+        kitBuffs,
+        Element.Fire,
+        Element.Earth,
+        {},
+        undefined,
+        targetIsBoss,
+      );
+    const vsBoss = resolve(true);
+    // Porté par S1 ET S3 (actifs) : lanceurs = les référents, pas le CSV.
+    expect(vsBoss.entries.find((e) => e.buffId === 'proc_actif')).toMatchObject({
+      proc: true,
+      active: true,
+      callers: ['SKT_FIRST', 'SKT_ULTIMATE'],
+    });
+    // Porté par le passif seul : le CSV décide ; TARGET_IS_BOSS évalué.
+    expect(vsBoss.entries.find((e) => e.buffId === 'proc_passif')).toMatchObject({
+      proc: true,
+      active: true,
+      callers: ['SKT_SECOND'],
+      condition: 'TARGET_IS_BOSS',
+    });
+    expect(resolve(false).entries.find((e) => e.buffId === 'proc_passif')).toMatchObject({
+      active: false,
+    });
+    // SKILL_FINISH : toujours un proc non simulé (dynamic).
+    expect(vsBoss.entries.find((e) => e.buffId === 'proc_finish')).toBeUndefined();
+    expect(vsBoss.dynamic.find((d) => d.buffId === 'proc_finish')).toBeDefined();
+    // Premium (ME ou MY_TEAM du porteur) : déjà dans la fiche — jamais une
+    // entrée de buff, mais son TAUX est collecté pour la défactorisation
+    // sheet.ts (prouvé 18/08/2026 : fiche nue de Caren 2314 exacte).
+    expect(vsBoss.entries.find((e) => e.buffId === 'premium_team')).toBeUndefined();
+    expect(vsBoss.unresolved.find((u) => u.buffId === 'premium_team')).toBeUndefined();
+    expect(vsBoss.premium.find((p) => p.buffId === 'premium_team')).toMatchObject({
+      stat: 'ST_DEF',
+      valueRate: 100,
+    });
+  });
+
   it('conditionBuffRef : référence de buff nommable, sentinelles et autres exclus', () => {
     expect(conditionBuffRef('TARGET_HAS_BUFF', 1)).toBe('1');
     expect(conditionBuffRef('OWNER_HAS_NOT_BUFF', 4089001)).toBe('4089001');

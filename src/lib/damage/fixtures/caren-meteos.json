@@ -1,0 +1,65 @@
+{
+  "name": "Caren vs Blazing Knight Meteos (raid) - S1/B1/B2/S3 crit",
+  "z": "N4IghiBcIEwAwLgDgJwgDQgB5QGybADMoBGBTAaylAGUSoBWTGmR5gZkYF9MA3a8ABcq0eAHY4GEAAsADlBBiGMNJgDGAJwCWgrWrAAbAPoATALYBzBTAAskzLK0BTDWqdHZAewDuLoxrBBJwUSekxzCyMAI09PAGdBBVwpEydiaAZcdnoeEF0FBjh4djgSGEg7MVwEGFwcoA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "121": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "S3",
+      "branch": "critical",
+      "damage": 18192
+    },
+    {
+      "slot": "S1b2",
+      "branch": "critical",
+      "damage": 17773
+    },
+    {
+      "slot": "S1b1",
+      "branch": "critical",
+      "damage": 13357
+    },
+    {
+      "slot": "S1",
+      "branch": "critical",
+      "damage": 12241
+    }
+  ],
+  "notes": "Captures Sevih 18/08/2026 - un combat par mesure, premier coup, pas de break, Caren SEULE en equipe. A PROUVE : pierce +300 pm sur S3/B2 seuls (ratio B2/B1 exact), facteur total 1000 pm du S1 (chaine de hits en table : 700 pm), et les taux PREMIUM dans la fiche (skill_8 100 pm + EE Lv10 200 pm) : le +1.03 % residuel etait le terme croise trust(+200 DEF plats) x premiums(300 pm) - fiche nue 2314 (+732) et DEF de combat 5891 reproduites a l'unite (defactorisation sheet.ts)."
+}

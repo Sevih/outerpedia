@@ -228,6 +228,101 @@ describe('inputs — buildDamageReport', () => {
   });
 });
 
+describe('inputs — procs SKILL_START au lanceur (captures 18/08/2026)', () => {
+  const target = (boss: boolean) => ({
+    element: 'earth',
+    stats: { hp: 500000, def: 2000, dmgRed: 0, cdmgRed: 0 },
+    boss,
+  });
+  const dmg = (r: ReturnType<typeof buildDamageReport>, key: string, branch = 'normal') => {
+    const s = r.slots.find((x) => `${x.slot}${x.burst ? `b${x.burst}` : ''}` === key);
+    return s?.report.states[0].branches.find((b) => b.branch === branch)?.totalDamage ?? 0;
+  };
+
+  it('Rhona (2000008) : +300 ‰ pierce TARGET_IS_BOSS — le S1 tape PLUS un boss qu’un non-boss', () => {
+    // Le proc `2000008_passive_3` (SKILL_START, porté par le passif de classe,
+    // caller SKT_ALL, condition TARGET_IS_BOSS) pèse sur tous ses skills face
+    // à un boss — PROUVÉ à 0.00 % par la fixture rhona-meteos. Ici, même
+    // scénario boss/non-boss : seul le pierce (et le BT_DMG_TO_BOSS) bougent.
+    const rhona = () => ({ ...attackerBase(), id: '2000008', sheet: { atk: 3000, hp: 20000 } });
+    const vsBoss = buildDamageReport(rhona(), target(true), data);
+    const vsMob = buildDamageReport(rhona(), target(false), data);
+    expect(dmg(vsBoss, 'S1')).toBeGreaterThan(dmg(vsMob, 'S1'));
+    // Son autre proc SKILL_START (`2000008_passive` : crit rate -100 %) est
+    // inconditionnel : Rhona ne crit JAMAIS — P(crit) = 0 sur toute ligne.
+    for (const s of vsBoss.slots) {
+      for (const st of s.report.states) {
+        const crit = st.branches.find((b) => b.branch === 'critical');
+        expect(crit?.probability ?? 0).toBe(0);
+      }
+    }
+  });
+
+  it('Caren (2000089) : le pierce du proc 2000089_3_1 pèse sur S3/B2 SEULS — B2 > B1, B1 = S1-facteur', () => {
+    // La donnée (buffIds de 8903/8920/8921) et la mesure (ratio B2/B1 exact)
+    // disent la même chose : le +300 ‰ pierce vit au lancement du S3, du B2
+    // et du B3 — jamais sur S1/B1.
+    const caren = () => ({
+      ...attackerBase(),
+      id: '2000089',
+      sheet: { atk: 2070, def: 5631, critical_dmg: 2400, pierce_power_rate: 110 },
+    });
+    const r = buildDamageReport(caren(), target(true), data);
+    // B1 et B2 partagent facteur et niveaux : SEUL le pierce les sépare.
+    expect(dmg(r, 'S1b2', 'critical')).toBeGreaterThan(dmg(r, 'S1b1', 'critical'));
+  });
+
+  it('facteur total § 8.1 : une chaîne qui somme sous 1000 ‰ est complétée et MARQUÉE', () => {
+    // Le S1 de Caren (300+400 ‰ en table) frappe 1000 ‰ en jeu (mesuré) ; le
+    // S3 (5×200 ‰) est complet — pas de flag.
+    const r = buildDamageReport({ ...attackerBase(), id: '2000089' }, target(true), data);
+    const state = (key: string) =>
+      r.slots.find((x) => `${x.slot}${x.burst ? `b${x.burst}` : ''}` === key)!.report.states[0];
+    expect(state('S1').totalFactor).toBe(1000);
+    expect(state('S1').factorFilled).toBe(true);
+    expect(state('S3').totalFactor).toBe(1000);
+    expect(state('S3').factorFilled).toBeUndefined();
+  });
+
+  it('débuff au LANCEMENT côté cible (Rhona 2000008_3_3 : DEF -50 % au S3) — le canal par slot baisse la DEF de SA ligne', () => {
+    // Même scénario, S3 vs S1 : la ligne S3 se calcule contre une DEF
+    // réduite de moitié — un ratio S3/S1 nettement au-dessus du seul écart
+    // de facteur de skill. Témoin directionnel : la DEF slot ne fuit pas
+    // sur les autres lignes (le S1 garde la DEF pleine).
+    const rhona = () => ({ ...attackerBase(), id: '2000008', sheet: { atk: 3000, hp: 20000 } });
+    const full = buildDamageReport(rhona(), target(true), data);
+    // Repère : le MÊME kit privé du débuff (clone), face à une cible dont la
+    // DEF est déjà divisée par deux — son S3 doit coïncider avec celui du
+    // rapport complet (le canal par slot fait exactement cette division), et
+    // son S1 face à la DEF pleine doit coïncider aussi (le débuff ne FUIT
+    // pas hors de sa ligne).
+    const stripped = {
+      ...data,
+      characters: {
+        ...data.characters,
+        skills: {
+          ...data.characters.skills,
+          '803': {
+            ...data.characters.skills['803'],
+            levels: data.characters.skills['803'].levels.map((l) => ({
+              ...l,
+              buffIds: l.buffIds.filter((b) => b !== '2000008_3_3'),
+            })),
+          },
+        },
+      },
+    } as DamageData;
+    const refHalved = buildDamageReport(
+      rhona(),
+      { ...target(true), stats: { ...target(true).stats, def: 1000 } },
+      stripped,
+    );
+    const refFull = buildDamageReport(rhona(), target(true), stripped);
+    expect(dmg(full, 'S3')).toBe(dmg(refHalved, 'S3'));
+    expect(dmg(full, 'S1')).toBe(dmg(refFull, 'S1'));
+  });
+});
+
 describe('inputs — compteurs § 9.1 (buffs/débuffs déclarés)', () => {
   const target = () => ({
     element: 'earth',

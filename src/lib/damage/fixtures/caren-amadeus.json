@@ -1,0 +1,55 @@
+{
+  "name": "Caren vs Amadeus - S1 normal + crit, premier coup",
+  "z": "N4IghiBcIEwAwLgDgJwgDQgB5QGybADMoBGBTAaylAGUSoBWTGmR5gZkYF9MA3a8ABcq0eAHY4GEAAsADlBBiGMNJgDGAJwCWgrWrAAbAPoATALYBzBTAAskzLK0BTDWqdHZAewDuLoxrBBJwUSekxzCyMAI09PAGdBBVwpEydiaAZcdnoeEF0FBjh4QpIYSDsxXAQUXBygA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "121": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "S1",
+      "branch": "normal",
+      "damage": 2293
+    },
+    {
+      "slot": "S1",
+      "branch": "critical",
+      "damage": 6633
+    }
+  ],
+  "notes": "Captures Sevih 18/08/2026 - meme reste uniforme +1.01/1.02 % que vs Meteos (deux cibles, normal et crit) : structurel a Caren, resolu comme terme croise trust x premiums (cf. caren-meteos). Deux cibles a DEF quasi identique (3150/3151) : corrobore l'uniformite, pas la decomposition pierce/ATK."
+}

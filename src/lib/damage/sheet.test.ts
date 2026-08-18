@@ -3,6 +3,9 @@
  * doit être EXACTEMENT égale à `calcFinalStat` (§ 3) sur toutes les couches —
  * pas une approximation : les troncatures s'annulent (fiche = sub_sans_buffs
  * + A). Test de propriété sur un balayage déterministe + témoins à la main.
+ * Avec des taux PREMIUM (Rp — déjà dans la fiche, 18/08/2026) : la
+ * défactorisation doit refactoriser la fiche à l'identique sans buffs, et le
+ * témoin Caren (mesuré in-game) fixe le terme croisé trust × premiums.
  */
 import { describe, expect, it } from 'vitest';
 import { calcFinalStat, calcBaseStat } from './formula';
@@ -122,6 +125,61 @@ describe('sheet — identité § 16.1 (fiche saisie → stat de combat)', () => 
         buffValueRate: 0,
       }),
     ).toBe(0);
+  });
+
+  it('premiums (Rp) : défactorisation exacte sans buffs — la fiche est refactorisée telle quelle', () => {
+    // Propriété : pour tout sous-total et tout Rp, la fiche composée
+    // div1000(sub × (1000+Rp)) + A repasse par la défactorisation sans dériver.
+    const rand = lcg(0xca1e);
+    const int = (lo: number, hi: number) => lo + Math.floor(rand() * (hi - lo + 1));
+    for (let i = 0; i < 500; i++) {
+      const sub = int(100, 60000);
+      const rp = int(1, 800);
+      const baseValue = int(50, 40000);
+      const archiveRatePermille = int(0, 60);
+      const a = archiveTerm(baseValue, archiveRatePermille);
+      const sheetValue = Math.trunc((sub * (1000 + rp)) / 1000) + a;
+      expect(
+        sheetToCombatStat({
+          sheetValue,
+          baseValue,
+          archiveRatePermille,
+          buffValue: 0,
+          buffValueRate: 0,
+          premiumRatePermille: rp,
+        }),
+        `config ${i} (sub ${sub}, rp ${rp})`,
+      ).toBe(sheetValue);
+    }
+  });
+
+  it('témoin Caren 18/08/2026 : terme croisé trust × premiums — DEF de combat 5891 EXACTE', () => {
+    // Fiche équipée 5631 (base 535, Codex 11 → A = 53), premiums 300 ‰
+    // (skill_8 100 + EE Lv10 200), trust +200 DEF plats : la défactorisation
+    // donne sub 4291, et div1000((4291+200)×1300) + 53 = 5891 — la valeur que
+    // les 6 captures in-game exigeaient (le « +60 » vs l'identité sans Rp).
+    expect(
+      sheetToCombatStat({
+        sheetValue: 5631,
+        baseValue: 535,
+        archiveRatePermille: 100,
+        buffValue: 200,
+        buffValueRate: 0,
+        premiumRatePermille: 300,
+      }),
+    ).toBe(5891);
+    // Fiche NUE 2314 (+732 affiché) : sans buffs de combat, la reconstruction
+    // rend la fiche telle quelle (Rp 100 = skill_8 seul, l'EE est retirée).
+    expect(
+      sheetToCombatStat({
+        sheetValue: 2314,
+        baseValue: 535,
+        archiveRatePermille: 100,
+        buffValue: 0,
+        buffValueRate: 0,
+        premiumRatePermille: 100,
+      }),
+    ).toBe(2314);
   });
 
   it('sheetToCombatStatAtLevel recalcule la base comme calcBaseStat (§ 3.1-3.2)', () => {

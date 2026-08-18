@@ -929,37 +929,61 @@ la faute au vocabulaire : chaque système a un nom FORMULE et un nom UI).
 | monad (`MonadGateEnchantNodeTemplet`)      | **Monad Gate**           | `monadVal`/`monadRate`                                                                   |
 | transcendance                              | **Transcendance** (aura) | `transRate` (multiplicateur commun)                                                      |
 
-**Ce que la fiche affichée contient** (pipeline § 16 sans `buffVal`/`buffRate`,
-corroboré in-game 27/07/2026 — l'affinité n'apparaît PAS dans la fiche) :
+**Ce que la fiche affichée contient** (corroboré in-game 27/07/2026, AMENDÉ
+18/08/2026 — l'affinité n'apparaît PAS dans la fiche, mais les buffs PREMIUM,
+si) :
 
-| Couche                                     | Dans la fiche ? | Multipliée par `buffRate` en combat ?          |
-| ------------------------------------------ | --------------- | ---------------------------------------------- |
-| base, évolution, éveil, monad (plats)      | oui             | oui                                            |
-| taux éveil/monad/transcendance/items       | oui             | oui                                            |
-| plats d'équipement (`itemVal`)             | oui             | oui — mais PAS multipliés par `itemRate` (§ 3) |
-| archive / **Codex**                        | oui             | **NON** (ajouté après le ×buffRate)            |
-| Trust / **Affinité**                       | **NON**         | oui (canal `buffVal`)                          |
-| buffs de combat, passifs d'équipement § 15 | non             | —                                              |
+| Couche                                        | Dans la fiche ?                      | Multipliée par `buffRate` en combat ?          |
+| --------------------------------------------- | ------------------------------------ | ---------------------------------------------- |
+| base, évolution, éveil, monad (plats)         | oui                                  | oui                                            |
+| taux éveil/monad/transcendance/items          | oui                                  | oui                                            |
+| plats d'équipement (`itemVal`)                | oui                                  | oui — mais PAS multipliés par `itemRate` (§ 3) |
+| archive / **Codex**                           | oui                                  | **NON** (ajouté après le ×buffRate)            |
+| `BT_STAT_PREMIUM` passifs inconditionnels     | **OUI** (canal `buffVal`/`buffRate`) | ils SONT (une part de) ce multiplicateur       |
+| Trust / **Affinité**                          | **NON**                              | oui (canal `buffVal`)                          |
+| autres buffs de combat, passifs d'équip. § 15 | non                                  | —                                              |
 
-**Identité de reconstruction** (EXACTE, aucune approximation — les troncatures
-s'annulent car `fiche = sub_sans_buffs + A`) : pour passer d'une stat SAISIE
-depuis la fiche à la stat de combat,
+**Buffs PREMIUM dans la fiche (mesuré 18/08/2026, Caren 2000089)** : les
+`BT_STAT_PREMIUM` passifs inconditionnels visant le porteur (`ME` comme
+`MY_TEAM` — un buff d'équipe couvre son porteur) occupent le canal
+`buffVal`/`buffRate` de CalcFinalStat en VILLE comme en combat. Sources :
+passif de transcendance (Skill_8), option spéciale d'EE (Lv10 `_ADD`), nœuds
+d'éveil IOT_BUFF, artefacts « ooparts ». Preuve à l'unité : fiche nue de Caren
+lv120 T-max **2314 (+732)** = calcFinalStat(base 535, évo 247, éveil +800,
+trans 300 ‰, codex 100 ‰, `buffRate` **100** = skill_8) — 2109 sans le taux ;
+fiche équipée 5631 → sous-total 4291 avec `buffRate` **300** (skill_8 100 +
+EE Lv10 200) ; DEF de combat **5891** = div1000((4291 + 200 trust) × 1300) +
+53, la valeur que les 6 captures exigeaient (« +60 » = terme croisé
+trust × premiums, uniforme sur deux cibles). L'affichage `X (+Y)` de la fiche
+est `valeur (delta vs portion blanche)` — `Y` est INCLUS dans `X`.
+
+**Identité de reconstruction** (EXACTE quand la stat n'a aucun premium — les
+troncatures s'annulent car `fiche = sub_sans_buffs + A`) : pour passer d'une
+stat SAISIE depuis la fiche à la stat de combat, avec `Rp` = Σ taux premium
+(‰) de la stat,
 
 ```text
 A       = div1000(base × archiveRate)        // terme Codex (base = CalcStat § 3.1)
-combat  = div1000((fiche − A + buffVal) × (1000 + buffRate)) + A
+sub     = ceil((fiche − A) × 1000 / (1000 + Rp))   // défactorisation (Rp=0 : sub = fiche − A)
+combat  = div1000((sub + buffVal) × (1000 + Rp + buffRate)) + A
 ```
 
-avec `buffVal` incluant les paliers d'affinité. Le moteur n'a donc besoin que
-de : la fiche saisie, la stat de base recalculée, le niveau de Codex, le palier
-d'affinité, et les buffs du scénario. (Re-vérification du 27/07/2026 : la
-formule § 3 a été re-dérivée indépendamment depuis `CalcFinalStat.asm` —
-conforme, y compris le clamp `bic` et les troncatures vers zéro.)
+avec `buffVal` incluant les paliers d'affinité. Le jeu garde `sub` en mémoire ;
+la défactorisation le reconstruit avec une ambiguïté de ±1 (±2 sur la stat de
+combat) quand `Rp > 0` — nulle quand `Rp = 0`. Le moteur a donc besoin de : la
+fiche saisie, la stat de base recalculée, le niveau de Codex, le palier
+d'affinité, les taux premium collectés (kit/EE/quirks/artefacts) et les buffs
+du scénario. (Re-vérification du 27/07/2026 : la formule § 3 a été re-dérivée
+indépendamment depuis `CalcFinalStat.asm` — conforme, y compris le clamp `bic`
+et les troncatures vers zéro.)
 
-> RÉALISÉ (03/08/2026) : `src/lib/damage/sheet.ts` (`sheetToCombatStat`,
-> `archiveTerm`, `sheetToCombatStatAtLevel`) — l'identité est PROUVÉE par test
-> de propriété (`sheet.test.ts` : 500 configurations de couches balayées, la
-> reconstruction est EXACTEMENT `calcFinalStat`, pas une approximation).
+> RÉALISÉ (03/08/2026, amendé 18/08/2026) : `src/lib/damage/sheet.ts`
+> (`sheetToCombatStat`, `archiveTerm`, `sheetToCombatStatAtLevel`) — l'identité
+> Rp=0 est PROUVÉE par test de propriété (`sheet.test.ts` : 500 configurations
+> de couches balayées, la reconstruction est EXACTEMENT `calcFinalStat`) ; la
+> défactorisation Rp>0 par un second balayage (refactorisation identique sans
+> buffs) et par le témoin Caren mesuré (5891). Les taux premium sont collectés
+> par `gear.ts` (`GearPassivesInfo.premium`) sur les trois résolveurs.
 > NB pour l'amont : le terme Codex exige la stat de BASE, donc le NIVEAU de
 > l'attaquant — l'UI ne le demande pas encore (défaut 120 à prévoir).
 
