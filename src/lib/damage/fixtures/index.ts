@@ -14,6 +14,11 @@ import noaChimera from './noa-chimera.json';
 import rhonaMeteos from './rhona-meteos.json';
 import carenMeteos from './caren-meteos.json';
 import carenAmadeus from './caren-amadeus.json';
+import erisMeteosS2 from './eris-meteos-s2.json';
+import erisMeteosS3 from './eris-meteos-s3.json';
+import hdianneMeteos from './hdianne-meteos.json';
+import hdianneS3crit from './hdianne-meteos-s3-crit.json';
+import hdianneS3 from './hdianne-meteos-s3.json';
 
 export const FIXTURES: DamageFixture[] = [
   valentineRhona as DamageFixture,
@@ -26,4 +31,16 @@ export const FIXTURES: DamageFixture[] = [
   rhonaMeteos as DamageFixture,
   carenMeteos as DamageFixture,
   carenAmadeus as DamageFixture,
+  // Captures du 19/08/2026 (Sevih) — compteurs § 9.1 : débuffs de la cible
+  // validés à dd=1 (S2) et dd=3 (S3) chez Eris ; scaling vitesse du burst de
+  // H. Dianne (le S2b1 ne lit PAS le compteur de buffs d'équipe).
+  erisMeteosS2 as DamageFixture,
+  erisMeteosS3 as DamageFixture,
+  hdianneMeteos as DamageFixture,
+  // S3 de H. Dianne SEULE (recapturés proprement avec ot=2 déclaré,
+  // 19/08/2026) — le compteur de buffs d'équipe se lit AU MOMENT du hit
+  // (les poses du S3 lui-même ne comptent pas), inclut le LANCEUR et les
+  // buffs sans effet sur le montant du hit.
+  hdianneS3crit as DamageFixture,
+  hdianneS3 as DamageFixture,
 ];

@@ -681,10 +681,10 @@ const en = {
     'combat-state conditions — check the ones met in battle',
   'tools.damage-calculator.context.counters': 'Buff counts',
   'tools.damage-calculator.context.counters_hint':
-    'a passive scales with these counts — enter the numbers as seen in battle',
+    'a passive scales with these counts — count the icons right before the hit lands (buffs the skill itself applies land after)',
   'tools.damage-calculator.context.own_buffs': 'Buffs on the attacker',
   'tools.damage-calculator.context.own_debuffs': 'Debuffs on the attacker',
-  'tools.damage-calculator.context.team_buffs': 'Buffs across the team',
+  'tools.damage-calculator.context.team_buffs': 'Buffs across the team (caster included)',
   'tools.damage-calculator.context.tgt_buffs': 'Buffs on the target',
   'tools.damage-calculator.context.tgt_debuffs': 'Debuffs on the target',
   'tools.damage-calculator.buffs.from_kits': '+ From kits',

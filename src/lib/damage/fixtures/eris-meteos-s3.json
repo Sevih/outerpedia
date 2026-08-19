@@ -1,0 +1,50 @@
+{
+  "name": "Eris vs Blazing Knight Meteos (raid) - S3 normal, 3 debuffs cible",
+  "z": "N4IghiBcIEwAwIIyIOwgDQgB5QGyYGspQBlRKAVkxJkuoGZKBfTAN2PABcjoZ7+MIAMYAnAJacxQsABsA+gBMAtgHMosegA5BABzEBTEUP1ydAewDuhuSLCd96uIOUq5AIzNmAzp0eC3AK4AZkFyQgAWYAB2xuqI8CAsIJLqFHDw9HCIcJAALHAouAgwFACczgpQ9ExAA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "121": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "S3",
+      "branch": "normal",
+      "damage": 2898
+    }
+  ],
+  "notes": "Capture Sevih 19/08/2026 - un combat par mesure, pas de break. VALIDE le compteur de debuffs de la cible (dd=3) : 2000117_2_4 = +20 % par debuff sur S2/S3. Delta 0.00 %."
+}

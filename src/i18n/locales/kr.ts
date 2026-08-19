@@ -656,10 +656,10 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.mechanics_hint': '전투 상태 조건 — 실전에서 충족한 항목을 체크',
   'tools.damage-calculator.context.counters': '버프 개수',
   'tools.damage-calculator.context.counters_hint':
-    '패시브가 이 개수에 비례합니다 — 전투에서 본 숫자를 입력',
+    '패시브가 이 개수에 비례합니다 — 타격 직전의 아이콘 수를 세어 입력하세요 (스킬 자체가 부여하는 버프는 타격 후에 적용)',
   'tools.damage-calculator.context.own_buffs': '공격자의 버프 수',
   'tools.damage-calculator.context.own_debuffs': '공격자의 디버프 수',
-  'tools.damage-calculator.context.team_buffs': '팀 전체 버프 수',
+  'tools.damage-calculator.context.team_buffs': '팀 전체 버프 수 (시전자 포함)',
   'tools.damage-calculator.context.tgt_buffs': '대상의 버프 수',
   'tools.damage-calculator.context.tgt_debuffs': '대상의 디버프 수',
   'tools.damage-calculator.buffs.from_kits': '+ 킷에서',

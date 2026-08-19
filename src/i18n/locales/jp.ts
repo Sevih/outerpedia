@@ -666,10 +666,10 @@ const jp: Record<TranslationKey, string> = {
     '戦闘中の状態条件 — 実際に満たしたものをチェック',
   'tools.damage-calculator.context.counters': 'バフの数',
   'tools.damage-calculator.context.counters_hint':
-    'パッシブがこの数に比例します — 戦闘中に見た数を入力',
+    'パッシブがこの数に比例します — ヒット直前のアイコン数を数えてください（スキル自身が付与するバフはヒット後に付きます）',
   'tools.damage-calculator.context.own_buffs': '攻撃側のバフ数',
   'tools.damage-calculator.context.own_debuffs': '攻撃側のデバフ数',
-  'tools.damage-calculator.context.team_buffs': 'チーム全体のバフ数',
+  'tools.damage-calculator.context.team_buffs': 'チーム全体のバフ数（使用者を含む）',
   'tools.damage-calculator.context.tgt_buffs': '対象のバフ数',
   'tools.damage-calculator.context.tgt_debuffs': '対象のデバフ数',
   'tools.damage-calculator.buffs.from_kits': '+ キットから',

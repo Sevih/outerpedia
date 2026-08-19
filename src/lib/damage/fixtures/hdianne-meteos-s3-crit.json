@@ -1,0 +1,50 @@
+{
+  "name": "H. Dianne vs Blazing Knight Meteos (raid) - S3 crit, 2 buffs portes",
+  "z": "N4IghiBcIEwAwLgTgMwgDQgB5QGybADMoBGBTAaylAGUSoBWTGmR5tSBgX0wDdrwAFyrQYAFhi4MIAMYAnAJaCFMsABsA+gBMAtgHMoIEgA440gA4KApnJlWN5gPYB3GxrlhBVwyjOZdehoARo6OAM6ChiT0mEEAroSEGjIAFmAAdnZR8NJh5lZWWlG4rDwgQVAA2kJUALqYjpGQMJjKhgxw8L5kkGJwAOy4CDAMSNJaRZAkXEA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "121": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "S3",
+      "branch": "critical",
+      "damage": 6087
+    }
+  ],
+  "notes": "Capture Sevih 19/08/2026, Dianne SEULE, ot=2 declare a la capture (2 buffs portes AVANT le coup, chip ATK up seul a effet de montant). VALIDE le compteur de buffs d equipe (2000093_3_1, +10 %/buff, S3 seul) sur la branche critique. Le compte se lit AU MOMENT du hit (les poses du S3 lui-meme ne comptent pas) et inclut le LANCEUR ainsi que les buffs sans effet de montant. Delta 0.00 %."
+}

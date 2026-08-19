@@ -645,10 +645,11 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.mechanics': '角色专属机制',
   'tools.damage-calculator.context.mechanics_hint': '战斗状态条件——勾选实战中满足的条件',
   'tools.damage-calculator.context.counters': '增益数量',
-  'tools.damage-calculator.context.counters_hint': '被动效果按数量加成——请输入实战中看到的数量',
+  'tools.damage-calculator.context.counters_hint':
+    '被动效果按数量加成——请统计命中前一刻的图标数（技能自身施加的增益在命中后才生效）',
   'tools.damage-calculator.context.own_buffs': '攻击方增益数',
   'tools.damage-calculator.context.own_debuffs': '攻击方减益数',
-  'tools.damage-calculator.context.team_buffs': '全队增益数',
+  'tools.damage-calculator.context.team_buffs': '全队增益数（含施放者）',
   'tools.damage-calculator.context.tgt_buffs': '目标增益数',
   'tools.damage-calculator.context.tgt_debuffs': '目标减益数',
   'tools.damage-calculator.buffs.from_kits': '+ 从技能组',

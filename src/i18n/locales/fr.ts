@@ -688,10 +688,10 @@ const fr: Record<TranslationKey, string> = {
     "conditions d'état de combat — cochez celles remplies en jeu",
   'tools.damage-calculator.context.counters': 'Nombre de buffs',
   'tools.damage-calculator.context.counters_hint':
-    'un passif dépend de ces nombres — saisissez-les tels que vus en combat',
+    'un passif dépend de ces nombres — comptez les icônes juste avant que le coup parte (les buffs posés par le skill lui-même arrivent après)',
   'tools.damage-calculator.context.own_buffs': "Buffs sur l'attaquant",
   'tools.damage-calculator.context.own_debuffs': "Débuffs sur l'attaquant",
-  'tools.damage-calculator.context.team_buffs': "Buffs sur toute l'équipe",
+  'tools.damage-calculator.context.team_buffs': "Buffs sur toute l'équipe (lanceur inclus)",
   'tools.damage-calculator.context.tgt_buffs': 'Buffs sur la cible',
   'tools.damage-calculator.context.tgt_debuffs': 'Débuffs sur la cible',
   'tools.damage-calculator.buffs.from_kits': '+ Depuis les kits',

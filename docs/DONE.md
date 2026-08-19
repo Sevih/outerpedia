@@ -5,6 +5,31 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-19
+
+- **Campagne de validation in-game des compteurs § 9.1** (5 captures Sevih,
+  toutes à 0.00 % — 5 fixtures dorées) :
+  - **Débuffs de la cible** (`dd`) : Eris `2000117_2_4` (+20 %/débuff,
+    S2/S3) mesurée à dd=1 (S2) et dd=3 (S3) — la droite est prouvée en deux
+    points et deux slots.
+  - **Buffs de l'équipe du lanceur** (`ot`) : H. Dianne `2000093_3_1`
+    (+10 %/buff, S3 seul), Dianne SEULE, normal + crit à ot=2. Trois faits
+    établis par la mesure : le compte se lit AU MOMENT du hit (une première
+    série où les icônes étaient lues en fin d'animation sur-comptait — les
+    poses du S3 lui-même, `SKILL_FINISH`, ne comptent pas pour son propre
+    hit) ; « l'équipe » INCLUT le lanceur (Dianne seule, ot=2 = ses propres
+    buffs) ; toute icône de buff compte, même sans effet sur le montant du
+    hit (un CHC up, sans chip déclarable côté montant, pesait dans le
+    compteur).
+  - **Scaling vitesse du burst** de Dianne (`2000093_2_1` : +150 % de la
+    SPEED de combat dans la somme § 9.1) : S2b1 exact en équipe de 4 avec
+    chip ATK up — et contre-preuve que le S2b1 ne lit PAS le compteur
+    d'équipe (son lecteur est calé `SKT_ULTIMATE`).
+- **Libellés des compteurs précisés** (5 locales) : le stepper d'équipe dit
+  « (lanceur inclus) » et le hint de section « comptez les icônes juste
+  avant que le coup parte (les buffs posés par le skill lui-même arrivent
+  après) » — les deux ambiguïtés rencontrées pendant la campagne.
+
 ## 2026-08-18
 
 - **Recherche du header : les noms anglais revivent hors anglais** (signalé par
