@@ -1,5 +1,8 @@
 /**
- * Guide « 2026 Roadmap » — compte-rendu du meeting offline de janvier 2026
+ * Guide « 2026 Roadmap — First Half » — compte-rendu du meeting offline de
+ * janvier 2026, qui ne couvrait que janvier→juillet. La suite de l'année a
+ * son propre guide (`roadmap-2026-h2`) : le slug reste `roadmap-2026`, une
+ * URL publiée ne se renomme pas.
  * (porté tel quel, traduction @NewWorld). Contenu DATÉ conservé : c'est
  * une archive de ce qui a été annoncé, pas un suivi de ce qui a été livré.
  *
@@ -154,6 +157,7 @@ export default async function Roadmap2026Guide({ lang }: GuideContentProps) {
   return (
     <>
       <p className="text-content-muted">{L('intro')}</p>
+      <p className="text-content-muted">{parseText(L('seeSecondHalf'), ctx)}</p>
 
       <section>
         <h2 className="mb-3 text-xl font-semibold">{L('developmentDirection')}</h2>

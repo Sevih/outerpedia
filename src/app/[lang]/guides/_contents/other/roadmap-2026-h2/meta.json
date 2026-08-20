@@ -1,0 +1,20 @@
+{
+  "title": {
+    "en": "2026 Roadmap — Second Half",
+    "jp": "2026年ロードマップ（後半）",
+    "kr": "2026 로드맵 (하반기)",
+    "zh": "2026路线图（下半年）",
+    "fr": "Roadmap 2026 — Deuxième moitié"
+  },
+  "description": {
+    "en": "Full recap of the 2nd Japanese player roundtable (August 14, 2026): new characters, character reworks, story plan, Steam release, Terminus Isle rework and Recruit improvements.",
+    "jp": "第二回 日本ユーザー懇談会（2026年8月14日）の全内容：新キャラクター、キャラクターリワーク、ストーリー計画、Steam版リリース、テルミナス島改編、スカウト改善。",
+    "kr": "제2회 일본 유저 간담회(2026년 8월 14일) 전체 정리: 신규 캐릭터, 캐릭터 리워크, 스토리 계획, Steam 버전 출시, 멸망의 섬 개편, 영입 개선.",
+    "zh": "第二届日本玩家恳谈会（2026年8月14日）完整整理：新角色、角色重制、剧情计划、Steam版发布、灭亡之岛改版、招募改善。",
+    "fr": "Compte-rendu intégral de la 2e rencontre des joueurs japonais (14 août 2026) : nouveaux personnages, refontes, plan scénaristique, sortie Steam, refonte de Terminus Isle et améliorations du recrutement."
+  },
+  "icon": "TI_Item_Craft_Material_10",
+  "author": "Sevih",
+  "updated": "2026-08-20",
+  "order": 5
+}

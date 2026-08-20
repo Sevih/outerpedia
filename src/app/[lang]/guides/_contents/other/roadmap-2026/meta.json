@@ -1,20 +1,20 @@
 {
   "title": {
-    "en": "2026 Roadmap",
-    "jp": "2026年ロードマップ",
-    "kr": "2026 로드맵",
-    "zh": "2026路线图",
-    "fr": "Roadmap 2026"
+    "en": "2026 Roadmap — First Half",
+    "jp": "2026年ロードマップ（前半）",
+    "kr": "2026 로드맵 (상반기)",
+    "zh": "2026路线图（上半年）",
+    "fr": "Roadmap 2026 — Première moitié"
   },
   "description": {
-    "en": "Summary of the January 2026 Offline Meeting: new characters, Core Fusion plans, RTA, Dimension Singularity and more.",
-    "jp": "2026年1月オフラインミーティングのまとめ：新キャラクター、コアフュージョン計画、RTA、次元特異点など。",
-    "kr": "2026년 1월 오프라인 미팅 요약: 신규 캐릭터, 코어 퓨전 계획, RTA, 차원 특이점 등.",
-    "zh": "2026年1月线下会议总结：新角色、核心融合计划、实时竞技、次元奇点等。",
-    "fr": "Résumé du meeting offline de janvier 2026 : nouveaux personnages, plans Core Fusion, RTA, Dimensional Singularity et plus encore."
+    "en": "First half of the 2026 roadmap, from the January 2026 Offline Meeting: January to July updates, new characters, Core Fusion plans, RTA, Dimension Singularity and more.",
+    "jp": "2026年1月オフラインミーティングで発表されたロードマップ前半：1月〜7月のアップデート、新キャラクター、コアフュージョン計画、RTA、次元特異点など。",
+    "kr": "2026년 1월 오프라인 미팅에서 공개된 로드맵 상반기: 1월~7월 업데이트, 신규 캐릭터, 코어 퓨전 계획, 실시간 아레나, 차원 특이점 등.",
+    "zh": "2026年1月线下会议公布的路线图上半年：1月至7月更新、新角色、核心融合计划、实时竞技、次元奇点等。",
+    "fr": "Première moitié de la roadmap 2026, issue du meeting offline de janvier 2026 : mises à jour de janvier à juillet, nouveaux personnages, plans Core Fusion, RTA, Dimensional Singularity et plus encore."
   },
   "icon": "TI_Item_Craft_Material_10",
   "author": "Sevih / 뉴월드",
-  "updated": "2026-01-17",
+  "updated": "2026-08-20",
   "order": 3
 }

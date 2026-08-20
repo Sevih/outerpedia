@@ -1,5 +1,6 @@
 /**
- * Données du guide « 2026 Roadmap » (meeting offline du 17 janvier 2026).
+ * Données du guide « 2026 Roadmap — First Half » (meeting offline du 17 janvier
+ * 2026, qui n'annonçait la feuille de route que jusqu'en juillet).
  *
  * Au portage : la donnée sort du composant (helpers.tsx mélangeait données et
  * rendu) et se type en `satisfies`. Les personnages sont désignés par NOM
@@ -47,6 +48,13 @@ export const LABELS = {
     kr: 'Major9와 VAGames가 2026년 Outerplane 로드맵을 발표한 2026년 1월 오프라인 미팅 요약.',
     zh: 'Major9和VAGames在2026年1月线下会议上展示的Outerplane 2026路线图摘要。',
     fr: "Résumé de l'Offline Meeting de janvier 2026 où Major9 et VAGames ont présenté la roadmap 2026 d'Outerplane.",
+  },
+  seeSecondHalf: {
+    en: 'This meeting only covered January to July — the rest of the year is in {L/2026 Roadmap — Second Half|/guides/other/roadmap-2026-h2}.',
+    jp: 'この懇談会が扱ったのは1月〜7月までです。年内の残りは{L/2026年ロードマップ（後半）|/guides/other/roadmap-2026-h2}をご覧ください。',
+    kr: '이 간담회가 다룬 범위는 1월~7월까지입니다. 남은 기간은 {L/2026 로드맵 (하반기)|/guides/other/roadmap-2026-h2}를 참고하세요.',
+    zh: '本次会议仅涵盖1月至7月，年内其余部分见{L/2026路线图（下半年）|/guides/other/roadmap-2026-h2}。',
+    fr: "Ce meeting ne couvrait que janvier à juillet — la suite de l'année est dans {L/Roadmap 2026 — Deuxième moitié|/guides/other/roadmap-2026-h2}.",
   },
   developmentDirection: {
     en: 'Development Direction',
