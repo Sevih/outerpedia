@@ -1,5 +1,13 @@
 [
   {
+    "code": "OPLIVE08",
+    "start": "2026-08-20",
+    "end": "2026-10-01",
+    "description": {
+      "SYS_ASSET_FREE_CRYSTAL": "1500"
+    }
+  },
+  {
     "code": "LOVEDELTA",
     "start": "2026-08-02",
     "end": "2026-10-11",
