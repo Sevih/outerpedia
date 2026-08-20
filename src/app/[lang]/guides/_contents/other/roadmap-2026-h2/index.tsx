@@ -39,7 +39,7 @@ import {
   PICKUP_TITLE,
   RELEASE_PLAN_COUNTS,
   RELEASE_PLAN_GOAL,
-  RELEASE_PLAN_NOTE,
+  RELEASE_PLAN_NOTES,
   RELEASE_PLAN_SHOT,
   RELEASED,
   REWORK_NOTE,
@@ -176,7 +176,6 @@ function NewCharacterCard({
             {parseText(`{E/${data.element}} {C/${data.classType}}`, ctx)}
           </p>
         )}
-        <p className="text-content-subtle text-xs">{lRec(data.note, lang)}</p>
       </div>
       <div className="flex flex-col gap-2">
         {data.images.map((file) => (
@@ -249,7 +248,11 @@ export default async function Roadmap2026SecondHalfGuide({ lang }: GuideContentP
           ))}
         </div>
         <p className="text-content mb-2">{lRec(RELEASE_PLAN_GOAL, lang)}</p>
-        <p className="text-content-subtle mb-4 text-sm">{lRec(RELEASE_PLAN_NOTE, lang)}</p>
+        <ul className="text-content-subtle mb-4 list-disc space-y-1 pl-6 text-sm">
+          {RELEASE_PLAN_NOTES.map((n, i) => (
+            <li key={i}>{lRec(n, lang)}</li>
+          ))}
+        </ul>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {NEW_CHARACTERS.map((c) => (
             <NewCharacterCard key={c.name} data={c} lang={lang} ctx={ctx} />

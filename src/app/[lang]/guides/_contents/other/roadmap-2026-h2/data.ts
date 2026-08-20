@@ -8,10 +8,15 @@
  * récapitulatif de fin devient des cartes mensuelles comme dans le premier
  * guide. Aucune diapo n'est perdue au passage.
  *
- * La source est JAPONAISE (les deux fiches de character design portent en plus
- * des annotations coréennes de l'équipe artistique, reprises telles quelles).
- * `jp` est donc la TRANSCRIPTION du texte à l'écran, pas une traduction ; les
- * quatre autres langues en dérivent.
+ * La source est JAPONAISE : `jp` est la TRANSCRIPTION du texte à l'écran, pas
+ * une traduction ; les quatre autres langues en dérivent.
+ *
+ * On ne DÉCRIT jamais une capture : le lecteur l'a sous les yeux. Les fiches de
+ * character design portent des annotations coréennes de l'équipe artistique
+ * (« détail des yeux », « médaille »…) — elles ont été écrites ici, puis
+ * retirées : c'est de la légende d'image, pas de l'information de roadmap.
+ * Même règle pour l'élément et la classe, que les puces `{E/…} {C/…}` disent
+ * déjà — et dont l'ABSENCE dit qu'ils n'ont pas été annoncés.
  *
  * Vocabulaire : les noms de personnages et de modes ne s'inventent pas, ils se
  * LISENT dans `data/generated/` (characters.json, unlock-content.json) —
@@ -74,7 +79,6 @@ export interface NewCharacterData {
   classType?: string;
   accent: { border: string; bg: string; text: string };
   date: Text;
-  note: Text;
   /** Fichiers de `data/editorial/guides/roadmap-2026-h2/`. */
   images: string[];
 }
@@ -321,13 +325,28 @@ export const RELEASE_PLAN_GOAL: Text = {
   fr: "Objectif visé : dévoiler 8 personnages d'ici la fin de l'année.",
 };
 
-export const RELEASE_PLAN_NOTE: Text = {
-  en: 'The Core Fusion line-up is not included in these figures; it will be updated once the update policy is settled.',
-  jp: 'コアフュージョンのラインナップは現在含まれておらず、アップデート方針の確定しだいアップデート予定',
-  kr: '코어 융합 라인업은 현재 포함되어 있지 않으며, 업데이트 방침이 확정되는 대로 업데이트될 예정',
-  zh: '核心融合阵容目前不包含在内，待更新方针确定后再行更新',
-  fr: "La liste des Core Fusion n'est pas comprise dans ces chiffres : elle sera mise à jour dès que la politique de mise à jour sera arrêtée.",
-};
+/**
+ * Ce qu'il faut savoir pour lire le décompte sans se tromper. La diapo annonce
+ * « 8 お披露目 » et aligne 1+1+4+2 : les 4 refontes visuelles SONT comptées
+ * dedans, alors que ce sont des persos déjà en jeu. Le lecteur qui compte 8
+ * nouveaux persos se trompe — donc on le dit, la diapo ne le disait pas.
+ */
+export const RELEASE_PLAN_NOTES: Text[] = [
+  {
+    en: 'The eight break down as 1 + 1 + 4 + 2: the four visual reworks are existing characters getting a new look, so only four of the eight are genuinely new.',
+    jp: '8名の内訳は 1＋1＋4＋2 です。ビジュアルリワークの4名は既存キャラクターの見た目の刷新であり、完全な新規は4名にとどまります。',
+    kr: '8명의 내역은 1＋1＋4＋2입니다. 비주얼 리워크 4명은 기존 캐릭터의 외형 개편이므로, 실제 신규는 4명입니다.',
+    zh: '8名的构成为 1＋1＋4＋2：视觉重制的4名是现有角色的外观翻新，因此真正的新角色只有4名。',
+    fr: "Les huit se répartissent en 1 + 1 + 4 + 2 : les quatre refontes visuelles sont des personnages existants qui changent d'apparence, donc seuls quatre des huit sont réellement nouveaux.",
+  },
+  {
+    en: 'The Core Fusion line-up is not included in these figures; it will be updated once the update policy is settled.',
+    jp: 'コアフュージョンのラインナップは現在含まれておらず、アップデート方針の確定しだいアップデート予定',
+    kr: '코어 융합 라인업은 현재 포함되어 있지 않으며, 업데이트 방침이 확정되는 대로 업데이트될 예정',
+    zh: '核心融合阵容目前不包含在内，待更新方针确定后再行更新',
+    fr: "La liste des Core Fusion n'est pas comprise dans ces chiffres : elle sera mise à jour dès que la politique de mise à jour sera arrêtée.",
+  },
+];
 
 /**
  * Les personnages dont le meeting a montré la FICHE DE DESIGN. Titia n'a ni
@@ -338,13 +357,6 @@ export const NEW_CHARACTERS: NewCharacterData[] = [
     name: 'Titia',
     accent: { border: 'border-sky-700/50', bg: 'bg-sky-900/20', text: 'text-sky-300' },
     date: { en: 'September 8', jp: '9月8日', kr: '9월 8일', zh: '9月8日', fr: '8 septembre' },
-    note: {
-      en: 'Character design sheet. The art-team annotations are in Korean: “eye detail” (눈 디테일), “apple-blossom-shaped accessory” (사과꽃 모양 악세서리), “right arm / left arm” (오른팔 / 왼팔), “arm outfit pattern” (팔 의상 문양), “cape detail” (망토 세부 디테일). Neither element nor class was announced.',
-      jp: 'キャラクターデザインシート。制作陣の注記は韓国語です：「目のディテール」(눈 디테일)、「リンゴの花モチーフのアクセサリー」(사과꽃 모양 악세서리)、「右腕／左腕」(오른팔／왼팔)、「腕の衣装の文様」(팔 의상 문양)、「マントの細部」(망토 세부 디테일)。属性・クラスの発表はありませんでした。',
-      kr: '캐릭터 디자인 시트. 아트팀 주석은 한국어 원문 그대로입니다: 눈 디테일, 사과꽃 모양 악세서리, 오른팔 / 왼팔, 팔 의상 문양, 망토 세부 디테일. 속성과 클래스는 공개되지 않았습니다.',
-      zh: '角色设计图。美术团队的标注为韩文：「眼部细节」(눈 디테일)、「苹果花造型饰品」(사과꽃 모양 악세서리)、「右臂／左臂」(오른팔／왼팔)、「手臂服饰纹样」(팔 의상 문양)、「披风细节」(망토 세부 디테일)。属性与职业未公布。',
-      fr: "Fiche de character design. Les annotations de l'équipe artistique sont en coréen : « détail des yeux » (눈 디테일), « accessoire en forme de fleur de pommier » (사과꽃 모양 악세서리), « bras droit / bras gauche » (오른팔 / 왼팔), « motif du vêtement du bras » (팔 의상 문양), « détail de la cape » (망토 세부 디테일). Ni élément ni classe n'ont été annoncés.",
-    },
     images: ['titia.webp'],
   },
   {
@@ -353,13 +365,6 @@ export const NEW_CHARACTERS: NewCharacterData[] = [
     classType: 'striker',
     accent: { border: 'border-blue-700/50', bg: 'bg-blue-900/20', text: 'text-blue-300' },
     date: { en: 'September 8', jp: '9月8日', kr: '9월 8일', zh: '9月8日', fr: '8 septembre' },
-    note: {
-      en: 'The sheet header reads “Core Fusion Rin — Water attribute / Attacker type” (코어융합 린 · 수속성 / 공격형), matching the Water Striker Rin already in the game. A “medal” (훈장) and other small Korean part labels annotate the outfit.',
-      jp: 'シート左上の表記は「コアフュージョン リン・水属性／攻撃型」(코어융합 린 · 수속성 / 공격형)。実装済みのリン（水属性・ストライカー）と一致します。衣装には「勲章」(훈장) をはじめとする韓国語のパーツ注記が入っています。',
-      kr: '시트 상단 표기는 「코어융합 린 · 수속성 / 공격형」으로, 이미 구현된 린(수속성 스트라이커)과 일치합니다. 의상에는 「훈장」 등 파츠 주석이 달려 있습니다.',
-      zh: '设计图上方标注为「核心融合 琳・水属性／攻击型」(코어융합 린 · 수속성 / 공격형)，与已实装的琳（水属性・打击者）一致。服装上另有「勋章」(훈장) 等韩文部件标注。',
-      fr: "L'en-tête de la fiche indique « Core Fusion Rin — attribut Eau / type Attaquant » (코어융합 린 · 수속성 / 공격형), ce qui correspond à la Rin Eau/Striker déjà en jeu. Une « médaille » (훈장) et d'autres petites étiquettes coréennes annotent la tenue.",
-    },
     images: ['cf-rin.webp'],
   },
 ];
