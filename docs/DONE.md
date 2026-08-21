@@ -7,6 +7,26 @@
 
 ## 2026-08-21
 
+- **Terminal de `pnpm dev` dégraissé — Caddy et Next.** Côté Caddy, les ~25
+  lignes `info` du démarrage (admin, pki, auto_https, storage, autosave…) sont
+  coupées par un bloc global `log { level WARN }` dans `Caddyfile.dev` ; ne
+  restent que les deux `warn` h2/h3 du serveur de redirection `:80`. Les six
+  `warn "stapling OCSP"` sans champ `error` n'étaient PAS un souci de config :
+  bug de log de certmagic 0.24.0 (`else { Warn }` qui se déclenche quand
+  `stapleOCSP` retourne `nil`, cas des certs internes de 12 h), embarqué dans
+  Caddy 2.10.2 et corrigé en certmagic 0.25.3 / Caddy 2.11.4 → poste mis à jour
+  (`choco upgrade caddy`). `ocsp_stapling off` ne changeait rien (testé : il
+  fait aussi retourner `nil`) ; `servers :80 { protocols h1 }` ne touche pas le
+  serveur de redirection auto-créé, et une redirection HTTP explicite échange
+  les deux `warn` h2/h3 contre un autre — on laisse. Le Caddyfile.dev n'est lu
+  que sur le poste : le Caddy prod (`sevih-tool/stack`, conteneur) n'est pas
+  concerné. Côté Next, chaque page tirait des dizaines de `GET /images/… 200`
+  (route locale `images/[...path]/route.dev.ts`) ; Next ne sait ignorer que par
+  motif d'URL (`logging.incomingRequests.ignore`), jamais par statut, et on
+  veut GARDER les 404 (asset pas collecté). D'où `scripts/dev-next.ts`, fin
+  wrapper de `next dev` qui tait uniquement les lignes `/images/*` en 200 —
+  concurrently pipait déjà Next, rien ne change pour lui.
+
 - **`capstone` : la cinquième dépendance python non déclarée — et `datagen:dump`
   échouait après avoir RÉUSSI.** Le dump 1.4.14 s'est déroulé entièrement
   (metadata, .so, globalgamemanagers, dump.cs écrit, « ✅ dump généré »), puis

@@ -7,7 +7,7 @@
     "node": ">=24"
   },
   "scripts": {
-    "dev": "pnpm clean:all && tsx scripts/dev-refresh.ts && concurrently -n next,caddy -c blue,green --restart-tries 10 --restart-after 1500 \"next dev --webpack\" \"caddy run --config Caddyfile.dev\"",
+    "dev": "pnpm clean:all && tsx scripts/dev-refresh.ts && concurrently -n next,caddy -c blue,green --restart-tries 10 --restart-after 1500 \"tsx scripts/dev-next.ts --webpack\" \"caddy run --config Caddyfile.dev\"",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

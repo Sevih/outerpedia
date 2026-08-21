@@ -8,6 +8,18 @@
 #
 # OUTERPEDIA_PORT : 3000 (dev, défaut) — exporter 3100 pour proxifier un build
 # de test (`next start`, mode A de la procédure).
+{
+	# Le démarrage déroule ~25 lignes `info` (admin, pki, auto_https, OCSP…)
+	# sans valeur pour le dev. On ne garde que warn+ ; les 4 lignes émises AVANT
+	# la lecture de la config (GOMAXPROCS, GOMEMLIMIT, using/adapted config)
+	# restent, aucun réglage ne les atteint. Les `warn "stapling OCSP"` sans
+	# champ `error` étaient un bug de log de certmagic 0.24 (Caddy ≤ 2.10.x),
+	# corrigé en 2.11 — `ocsp_stapling off` n'y changeait rien, inutile de
+	# l'ajouter.
+	log {
+		level WARN
+	}
+}
 outerpedia.local, jp.outerpedia.local, kr.outerpedia.local, zh.outerpedia.local, fr.outerpedia.local, www.outerpedia.local {
 	tls internal
 	reverse_proxy localhost:{$OUTERPEDIA_PORT:3000}
