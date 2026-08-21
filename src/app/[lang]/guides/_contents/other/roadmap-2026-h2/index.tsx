@@ -11,6 +11,12 @@
  * les tableaux repris tels quels des diapos (`SlideTableView`), le décompte
  * du plan de sortie, et le bloc Pick-up. Les cellules et les puces contiennent
  * des `\n` — `whitespace-pre-line` les restitue sans <br/> à la main.
+ *
+ * Il se ferme sur la rediffusion (`MultiVideoEmbed`) et sur le code promo du
+ * live, rendu par le `CouponsList` de la page `/coupons` : le guide ne connaît
+ * que le CODE, tout le reste (récompenses, validité, statut) sort de
+ * `coupons.json` — d'où un badge « expiré » qui apparaîtra tout seul le jour
+ * venu, la page étant revalidée toutes les 24 h comme `/coupons`.
  */
 import type { Lang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
@@ -18,17 +24,22 @@ import { lRec } from '@/lib/i18n/localize';
 import { img } from '@/lib/images';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import { resolveGuideCharacter } from '@/lib/data/characters';
+import { getAllCoupons } from '@/lib/home';
 import type { GuideContentProps } from '@/lib/data/guides';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import { ImageLightbox } from '@/components/ui/ImageLightbox';
+import { MultiVideoEmbed } from '@/components/ui/MultiVideoEmbed';
+import { CouponsList } from '@/components/coupons/CouponsList';
 import {
   AGENDA,
   AGENDA_SHOT,
+  COUPONS_SEE_ALSO,
   CORE_FUSION_CHARS,
   CORE_FUSION_NOTE,
   IMPROVEMENT_BLOCKS,
   IMPROVEMENTS_SHOT,
   LABELS,
+  LIVE_COUPON_CODE,
   MONTHLY_UPDATES,
   NEW_CHARACTERS,
   OPENING_SHOTS,
@@ -42,9 +53,11 @@ import {
   RELEASE_PLAN_NOTES,
   RELEASE_PLAN_SHOT,
   RELEASED,
+  ROADMAP_VIDEO,
   REWORK_NOTE,
   REWORK_SHOT,
   REWORKS,
+  SCHEDULE_NOTE,
   SCHEDULE_SHOT,
   SEE_FIRST_HALF,
   STORY_SHOTS,
@@ -209,6 +222,9 @@ export default async function Roadmap2026SecondHalfGuide({ lang }: GuideContentP
   // Strict : un slug d'élément/classe faux dans data.ts casse le build.
   const ctx: ParseCtx = { lang, t, strict: true };
   const L = (key: keyof typeof LABELS) => lRec(LABELS[key], lang);
+  // Le code du live, résolu depuis `coupons.json` : s'il en disparaît, la
+  // section saute au lieu d'afficher une liste vide.
+  const liveCoupon = (await getAllCoupons(lang)).filter((c) => c.code === LIVE_COUPON_CODE);
 
   return (
     <>
@@ -334,6 +350,7 @@ export default async function Roadmap2026SecondHalfGuide({ lang }: GuideContentP
       <section>
         <h2 className="mb-3 text-xl font-semibold">{L('monthlySchedule')}</h2>
         <ShotRow shots={[SCHEDULE_SHOT]} lang={lang} />
+        <p className="text-content-subtle mb-4 text-sm">{lRec(SCHEDULE_NOTE, lang)}</p>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {MONTHLY_UPDATES.map((m, i) => (
             <MonthCard key={i} data={m} lang={lang} />
@@ -341,10 +358,35 @@ export default async function Roadmap2026SecondHalfGuide({ lang }: GuideContentP
         </div>
       </section>
 
+      <section>
+        <h2 className="mb-3 text-xl font-semibold">{L('video')}</h2>
+        <MultiVideoEmbed byLabel={t('video.by')} videos={[ROADMAP_VIDEO]} />
+      </section>
+
+      {liveCoupon.length > 0 && (
+        <section>
+          <h2 className="mb-3 text-xl font-semibold">{L('promoCode')}</h2>
+          <CouponsList
+            coupons={liveCoupon}
+            strings={{
+              copy: t('home.codes.copy'),
+              copied: t('common.copied'),
+              empty: t('home.codes.empty'),
+              active: t('coupons.active'),
+              upcoming: t('coupons.upcoming'),
+              expired: t('coupons.expired'),
+              validity: t('coupons.validity'),
+            }}
+          />
+          <p className="text-content-muted mt-3 text-sm">
+            {parseText(lRec(COUPONS_SEE_ALSO, lang), ctx)}
+          </p>
+        </section>
+      )}
+
       <section className="border-line-subtle text-content-subtle space-y-1 border-t pt-4 text-sm">
         <p>{L('disclaimer')}</p>
         <p>{L('source')}</p>
-        <p>{L('titiaNote')}</p>
       </section>
     </>
   );
