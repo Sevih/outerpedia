@@ -6,6 +6,11 @@ updates:
     schedule:
       interval: 'weekly'
     open-pull-requests-limit: 5
+    # Un seul PR hebdo pour les bumps minor/patch (six PR séparées le 21/08 =
+    # six deploys si on les merge une à une). Les majors restent à part.
+    groups:
+      minor-and-patch:
+        update-types: ['minor', 'patch']
     commit-message:
       prefix: 'chore(deps)'
 

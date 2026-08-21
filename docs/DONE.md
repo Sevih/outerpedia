@@ -7,6 +7,15 @@
 
 ## 2026-08-21
 
+- **Six PR dependabot absorbées en un commit.** Les merger une à une = six
+  pushes sur `main` = six deploys, plus un rebase + CI des PR restantes à
+  chaque fois. À la place : `pnpm up` des cinq paquets (tsx, mysql2,
+  @types/node, happy-dom, eslint-config-next 16.3.1) + `pnpm/action-setup`
+  6.0.10 dans `ci.yml`, un seul `pnpm commit` ; dependabot ferme ses PR tout
+  seul en voyant les versions déjà à jour. Pour la suite, `dependabot.yml`
+  groupe les bumps minor/patch en UN PR hebdomadaire (les majors restent
+  seules, cf. eslint 10 fermée en #24).
+
 - **Recommended Gear, deuxième passe — le cas à cinq combos.** La maquette
   n'en montrait qu'un ; DLuna « Pen mix » en a cinq, et la première version
   étalait dix blocs « set » pour six sets distincts, plus une légende qui les

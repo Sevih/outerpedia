@@ -1,6 +1,6 @@
 {
   "name": "outerpedia",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "private": true,
   "packageManager": "pnpm@11.13.1",
   "engines": {
@@ -55,7 +55,7 @@
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.23",
     "lz-string": "^1.5.0",
-    "mysql2": "^3.23.2",
+    "mysql2": "^3.23.4",
     "next": "16.3.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
@@ -63,20 +63,20 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
-    "@types/node": "^26.1.2",
+    "@types/node": "^26.2.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "cheerio": "^1.2.0",
     "concurrently": "^10.0.4",
     "eslint": "^9",
-    "eslint-config-next": "16.3.0",
-    "happy-dom": "^20.11.1",
+    "eslint-config-next": "16.3.1",
+    "happy-dom": "^20.11.6",
     "lefthook": "^2.1.10",
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "sharp": "^0.35.3",
     "tailwindcss": "^4",
-    "tsx": "^4.23.9",
+    "tsx": "^4.23.12",
     "typescript": "^5",
     "vitest": "^4.1.10"
   }
