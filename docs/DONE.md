@@ -7,6 +7,17 @@
 
 ## 2026-08-21
 
+- **Pousser sans déployer : `pnpm commit --no-ci`.** Jusqu'ici tout push sur
+  `main` déclenchait check → image → deploy (voulu, mais sans échappatoire pour
+  un commit « à garder au chaud » — WIP, docs, réglage de poste). GitHub
+  Actions saute nativement tous les workflows `push`/`pull_request` quand le
+  commit de TÊTE du push porte `[skip ci]` : rien à toucher dans `ci.yml`, le
+  flag se contente de suffixer le message (après le contrôle conventional,
+  pour vérifier le format tel que tapé). À la main, un
+  `git commit -m "… [skip ci]"` fait pareil. La prod reste sur le commit
+  d'avant ; le prochain push sans tag embarque tout. Note : le push R2 des images, lui, part quand même
+  (il précède le push git, comme avec `--no-push`).
+
 - **Terminal de `pnpm dev` dégraissé — Caddy et Next.** Côté Caddy, les ~25
   lignes `info` du démarrage (admin, pki, auto_https, storage, autosave…) sont
   coupées par un bloc global `log { level WARN }` dans `Caddyfile.dev` ; ne

@@ -22,6 +22,10 @@
  * Flags :
  *   --dry-run         simule (aucune commande réelle)
  *   --no-push         commit local, pas de push
+ *   --no-ci           push SANS déclencher la CI (suffixe « [skip ci] » dans le
+ *                     message, honoré nativement par GitHub Actions : ni check,
+ *                     ni build, ni deploy — la prod reste sur le commit d'avant,
+ *                     le prochain push « normal » embarquera tout)
  *   --skip-controls   saute les contrôles (à tes risques)
  *   --msg "<texte>"   message de commit (skip le prompt)
  */
@@ -40,6 +44,14 @@ const val = (f: string): string | null => {
 
 const DRY_RUN = has('--dry-run');
 const NO_PUSH = has('--no-push');
+/**
+ * GitHub Actions saute TOUS les workflows `push`/`pull_request` si le commit de
+ * TÊTE du push contient `[skip ci]` (ou `[ci skip]`, `[no ci]`, `[skip actions]`).
+ * Aucun réglage côté ci.yml : on se contente de suffixer le message — après le
+ * contrôle conventional, pour que le format vérifié soit celui tapé.
+ */
+const NO_CI = has('--no-ci');
+const SKIP_CI_TAG = '[skip ci]';
 const SKIP_CONTROLS = has('--skip-controls');
 const FORCE_MSG = val('--msg');
 
@@ -235,6 +247,7 @@ async function main(): Promise<void> {
       console.log('Message vide — abandon.');
       process.exit(0);
     }
+    if (NO_CI && !msg.includes(SKIP_CI_TAG)) msg = `${msg} ${SKIP_CI_TAG}`;
   } finally {
     // On LIBÈRE stdin AVANT de spawn git : un readline encore ouvert perturbe
     // les hooks git (spinner lefthook / TTY) et peut figer le commit.
@@ -279,7 +292,7 @@ async function main(): Promise<void> {
   if (NO_PUSH) {
     console.log('\x1b[90m[no-push] pas de push.\x1b[0m');
   } else {
-    console.log(`\n▶ push → ${branch}`);
+    console.log(`\n▶ push → ${branch}${NO_CI ? ' \x1b[90m(sans CI)\x1b[0m' : ''}`);
     sh(`git push --no-verify origin ${branch}`);
   }
 

@@ -11,6 +11,12 @@ on:
   # .md → `paths-ignore` ne déclenche RIEN, et re-lancer le run échoué
   # rejouerait l'ancien commit — la prod restait coincée sans levier.
   workflow_dispatch:
+  #
+  # Pousser SANS rien déclencher (ni check, ni deploy) : `[skip ci]` dans le
+  # commit de TÊTE du push — natif GitHub Actions, aucun réglage ici.
+  # `pnpm commit --no-ci` le suffixe tout seul ; à la main : `git commit -m
+  # "chore: … [skip ci]"`. La prod reste sur le commit d'avant ; le prochain
+  # push sans le tag embarque tout (y compris ces commits-là).
 
 env:
   REGISTRY: ghcr.io
