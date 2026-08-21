@@ -33,6 +33,17 @@ export function isSubstatAxis(stat: string): stat is SubstatAxis {
   return (SUBSTAT_AXES as readonly string[]).includes(stat);
 }
 
+/**
+ * L'axe d'un token de priorité curée : « DEF » comme « DEF% » (quelques
+ * priorités écrivent la version que l'éditeur préfère — le verdict a
+ * justement pour rôle de dire si ce choix tient à l'investissement donné).
+ * `undefined` pour tout autre token (SPD, CHC, « DMG UP% »…).
+ */
+export function substatAxisOf(stat: string): SubstatAxis | undefined {
+  const base = stat.trim().replace(/%$/, '');
+  return isSubstatAxis(base) ? base : undefined;
+}
+
 /** Un tick de reforge : plat en points, % en points d'AFFICHAGE (4 = +4 %). */
 export interface SubTick {
   flat: number;

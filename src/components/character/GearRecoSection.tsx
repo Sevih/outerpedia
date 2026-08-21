@@ -13,6 +13,7 @@ import {
   SubstatVerdictPanel,
   type SubstatVerdictProps,
 } from '@/components/character/SubstatVerdict';
+import { SUBSTAT_AXES, substatAxisOf } from '@/lib/substat-verdict';
 
 const ACCENT = 'var(--cd-el)';
 const TOTAL_SEGMENTS = 6;
@@ -88,9 +89,6 @@ export interface GearRecoLabels {
   piece2: string;
   piece4: string;
   source: string;
-  /** Noms des 4 pièces d'armure, dans l'ordre helmet/armor/gloves/shoes
-   *  (sous-ligne « 2 pieces · Helmet + Armor » des combos). */
-  pieceNames?: string[];
 }
 
 /**
@@ -403,66 +401,156 @@ export function SetPieceGroup({
 }
 
 /**
- * Un set dans un combo, version fiche perso : tuiles + nom à droite + sous-ligne
- * « 2 pieces · Helmet + Armor ». Même tooltip que `SetPieceGroup`.
+ * Une ligne de combos FACTORISÉE : les combos 2+2 qui partagent un set sont
+ * regroupés — « Penetration + Speed · Attack · Critical Strike » — au lieu de
+ * répéter la même moitié à chaque ligne. Un set joué à 4 fait une ligne à lui
+ * seul.
+ *
+ * L'ordre des deux sets dans un combo curé n'est PAS significatif (les pièces
+ * d'un set sont interchangeables ; Helmet+Armor / Gloves+Shoes n'est qu'une
+ * convention d'affichage) et les presets ne sont pas cohérents entre eux
+ * (`p2s2` = Pen + Speed mais `p2i2` = Immunity + Pen). On met donc à gauche le
+ * set le PLUS PARTAGÉ du build, pour que la factorisation voie toutes les
+ * lignes qu'elle doit voir ; à égalité, l'ordre curé reste (tri stable).
  */
-function SetCombo({
+interface ComboLine {
+  head: GearSetPiece;
+  /** Seconds sets (Gloves + Shoes) ; vide pour un set joué à 4. */
+  tails: GearSetPiece[];
+}
+
+function groupCombos(sets: GearSetPiece[][]): ComboLine[] {
+  const freq = new Map<string, number>();
+  for (const combo of sets)
+    if (combo.length > 1) for (const p of combo) freq.set(p.id, (freq.get(p.id) ?? 0) + 1);
+  const lines: ComboLine[] = [];
+  for (const combo of sets) {
+    if (!combo.length) continue;
+    const ordered =
+      combo.length > 1
+        ? [...combo].sort((a, b) => (freq.get(b.id) ?? 0) - (freq.get(a.id) ?? 0))
+        : combo;
+    const [head, ...rest] = ordered;
+    const existing = rest.length
+      ? lines.find((l) => l.head.id === head.id && l.tails.length > 0)
+      : undefined;
+    if (existing) existing.tails.push(...rest);
+    else lines.push({ head, tails: rest });
+  }
+  return lines;
+}
+
+/** Nom d'un set (lien vers sa page), avec le tooltip 2P/4P + source. */
+function SetName({
   piece,
-  idx,
   effects,
   labels,
+  icon = false,
 }: {
   piece: GearSetPiece;
-  idx: number;
   effects: GearSetEffect[];
-  labels: Pick<GearRecoLabels, 'piece2' | 'piece4' | 'pieceNames'>;
+  labels: Pick<GearRecoLabels, 'piece2' | 'piece4'>;
+  /** Icône d'enchantement du set devant le nom (chips des seconds sets). */
+  icon?: boolean;
 }) {
-  const icons = piece.pieceIcons ?? [];
-  const which = shownPieceIdx(piece, idx);
-  const shown = which.map((i) => icons[i]).filter(Boolean);
   const eff = effects.find((e) => e.id === piece.id);
-  const pieceNames = labels.pieceNames
-    ? which.map((i) => labels.pieceNames![i]).filter(Boolean)
-    : [];
-  const sub = [piece.count >= 4 ? labels.piece4 : labels.piece2, pieceNames.join(' + ')]
-    .filter(Boolean)
-    .join(' · ');
-
+  const cls = 'font-game text-equipment text-sm font-semibold';
   return (
     <InlineTooltip content={setTooltip(piece, eff, labels)}>
-      <div className="flex cursor-default items-center gap-2">
-        <div className="flex items-center gap-2">
-          {shown.map((icon, i) => (
-            <EquipmentIcon key={i} icon={icon} grade="unique" size={38} overlayIcon={piece.icon} />
-          ))}
-        </div>
-        <div className="ml-0.5 flex min-w-0 flex-col">
-          {piece.slug ? (
-            <Link
-              href={`/equipment/${piece.slug}` as Route}
-              className="font-game text-equipment truncate text-sm font-semibold hover:underline"
-            >
-              {piece.name}
-            </Link>
-          ) : (
-            <span className="font-game text-equipment truncate text-sm font-semibold">
-              {piece.name}
-            </span>
-          )}
-          <span className="text-[11px] text-zinc-400">{sub}</span>
-        </div>
-      </div>
+      <span className="inline-flex cursor-default items-center gap-1">
+        {icon && piece.icon && (
+          <img
+            src={img.effect(piece.icon)}
+            alt=""
+            aria-hidden
+            className="h-4 w-4 object-contain"
+            width={16}
+            height={16}
+          />
+        )}
+        {piece.slug ? (
+          <Link href={`/equipment/${piece.slug}` as Route} className={`${cls} hover:underline`}>
+            {piece.name}
+          </Link>
+        ) : (
+          <span className={cls}>{piece.name}</span>
+        )}
+      </span>
     </InlineTooltip>
   );
 }
 
-/** Bonus 2p / 4p d'un set (4p seulement s'il est joué à 4). */
-function SetEffectLines({ eff, labels }: { eff: GearSetEffect; labels: GearRecoLabels }) {
+/** Tuiles d'une moitié de combo (ou des 4 pièces), 32 px. */
+function SetTiles({ piece, idx }: { piece: GearSetPiece; idx: number }) {
+  const icons = piece.pieceIcons ?? [];
+  const shown = shownPieceIdx(piece, idx)
+    .map((i) => icons[i])
+    .filter(Boolean);
+  return (
+    <span className="inline-flex items-center gap-1">
+      {shown.map((icon, i) => (
+        <EquipmentIcon key={i} icon={icon} grade="unique" size={32} overlayIcon={piece.icon} />
+      ))}
+    </span>
+  );
+}
+
+function ComboLineView({
+  line,
+  effects,
+  labels,
+}: {
+  line: ComboLine;
+  effects: GearSetEffect[];
+  labels: Pick<GearRecoLabels, 'piece2' | 'piece4'>;
+}) {
+  const { head, tails } = line;
+  return (
+    <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
+      <SetTiles piece={head} idx={0} />
+      <SetName piece={head} effects={effects} labels={labels} />
+      {head.count >= 4 && <span className="text-[11px] text-zinc-400">· {labels.piece4}</span>}
+      {tails.length > 0 && (
+        <>
+          <span className="px-1 text-zinc-200">+</span>
+          {/* Les tuiles Gloves + Shoes une seule fois ; chaque second set n'est
+              plus qu'une chip icône + nom. Un seul second set garde son overlay. */}
+          <SetTiles
+            piece={tails.length === 1 ? tails[0] : { ...tails[0], icon: undefined }}
+            idx={1}
+          />
+          <span className="inline-flex flex-wrap items-center gap-x-1.5 gap-y-1">
+            {tails.map((t, i) => (
+              <span key={`${t.id}-${i}`} className="inline-flex items-center gap-1.5">
+                {i > 0 && <span className="text-zinc-600">·</span>}
+                <SetName piece={t} effects={effects} labels={labels} icon={tails.length > 1} />
+              </span>
+            ))}
+          </span>
+        </>
+      )}
+    </div>
+  );
+}
+
+/** Bonus 2p / 4p d'un set (4p seulement s'il est joué à 4). `showCount` :
+ *  masquer le préfixe « 2 pieces » quand TOUT le build est en 2P — il ne
+ *  distingue rien et se répète à chaque ligne. */
+function SetEffectLines({
+  eff,
+  labels,
+  showCount = true,
+}: {
+  eff: GearSetEffect;
+  labels: Pick<GearRecoLabels, 'piece2' | 'piece4'>;
+  showCount?: boolean;
+}) {
   return (
     <>
       {eff.effect2 && (
         <p className="text-xs leading-relaxed text-zinc-300">
-          <span className="text-buff font-semibold">{labels.piece2}</span> {eff.effect2}
+          {showCount && <span className="text-buff font-semibold">{labels.piece2} </span>}
+          {eff.effect2}
         </p>
       )}
       {eff.maxCount >= 4 && eff.effect4 && (
@@ -535,6 +623,12 @@ export function SubstatPrioBar({
 
 /** Étiquette de rangée / de bloc : la signature mono 10 px des cartes. */
 const ROW_LABEL = 'font-mono text-[10px] font-semibold tracking-[0.18em] text-zinc-300 uppercase';
+
+/** Items d'une rangée : colonnes FIXES (auto-fill ≥ 13 rem) plutôt qu'un flux
+ *  wrap — les rangées n'ont ni le même nombre d'items ni des noms de même
+ *  longueur, seules des colonnes alignent Weapon / Accessory / Talisman entre
+ *  elles. Les noms trop longs se tronquent (ellipse) dans leur cellule. */
+const ITEM_GRID = 'grid grid-cols-[repeat(auto-fill,minmax(13rem,1fr))] gap-x-5 gap-y-2.5';
 
 /**
  * Une rangée de la carte gear : étiquette mono à gauche (96 px en ≥ sm),
@@ -612,27 +706,33 @@ export function GearRecoSection({
           <div className="card flex flex-col gap-4.5 p-4 sm:px-5.5 sm:py-5">
             {build.weapons.length > 0 && (
               <GearRow label={labels.weapon}>
-                <div className="flex flex-wrap gap-x-7 gap-y-2.5">
+                <div className={ITEM_GRID}>
                   {build.weapons.map((w, i) => (
-                    <ItemRow key={`${w.id}-${i}`} item={w} labels={labels} />
+                    <div key={`${w.id}-${i}`} className="min-w-0">
+                      <ItemRow item={w} labels={labels} />
+                    </div>
                   ))}
                 </div>
               </GearRow>
             )}
             {build.amulets.length > 0 && (
               <GearRow label={labels.amulet}>
-                <div className="flex flex-wrap gap-x-7 gap-y-2.5">
+                <div className={ITEM_GRID}>
                   {build.amulets.map((a, i) => (
-                    <ItemRow key={`${a.id}-${i}`} item={a} labels={labels} />
+                    <div key={`${a.id}-${i}`} className="min-w-0">
+                      <ItemRow item={a} labels={labels} />
+                    </div>
                   ))}
                 </div>
               </GearRow>
             )}
             {build.talismans.length > 0 && (
               <GearRow label={labels.talisman}>
-                <div className="flex flex-wrap gap-x-7 gap-y-2.5">
+                <div className={ITEM_GRID}>
                   {build.talismans.map((tl, i) => (
-                    <ItemRow key={`${tl.id}-${i}`} item={tl} labels={labels} />
+                    <div key={`${tl.id}-${i}`} className="min-w-0">
+                      <ItemRow item={tl} labels={labels} />
+                    </div>
                   ))}
                 </div>
               </GearRow>
@@ -640,39 +740,41 @@ export function GearRecoSection({
             {build.sets.length > 0 && (
               <GearRow label={labels.set} divider>
                 <div className="flex flex-col gap-3">
-                  {build.sets.map((combo, i) => (
-                    <div key={i} className="flex flex-wrap gap-x-8 gap-y-2">
-                      {combo.map((p, j) => (
-                        <SetCombo
-                          key={j}
-                          piece={p}
-                          idx={j}
-                          effects={build.setEffects}
-                          labels={labels}
-                        />
-                      ))}
-                    </div>
-                  ))}
+                  <div className="flex flex-col gap-2">
+                    {groupCombos(build.sets).map((line, i) => (
+                      <ComboLineView
+                        key={`${line.head.id}-${i}`}
+                        line={line}
+                        effects={build.setEffects}
+                        labels={labels}
+                      />
+                    ))}
+                  </div>
                   {/* Légende des bonus : dans la même rangée — c'est la réponse
-                      à la même question, plus de carte « Set Effects » à part. */}
+                      à la même question, plus de carte « Set Effects » à part.
+                      Grille nom / effet : un nom ne se coupe jamais. */}
                   {build.setEffects.length > 0 && (
-                    <div className="flex flex-col gap-1.5">
+                    <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 border-t border-white/6 pt-2.5">
                       {build.setEffects.map((eff) => (
-                        <div key={eff.id} className="flex gap-2 text-xs leading-relaxed">
+                        <div key={eff.id} className="contents">
                           {eff.slug ? (
                             <Link
                               href={`/equipment/${eff.slug}` as Route}
-                              className="font-game text-equipment w-24 shrink-0 font-semibold hover:underline"
+                              className="font-game text-equipment text-xs leading-relaxed font-semibold whitespace-nowrap hover:underline"
                             >
                               {eff.name}
                             </Link>
                           ) : (
-                            <span className="font-game text-equipment w-24 shrink-0 font-semibold">
+                            <span className="font-game text-equipment text-xs leading-relaxed font-semibold whitespace-nowrap">
                               {eff.name}
                             </span>
                           )}
                           <div className="min-w-0">
-                            <SetEffectLines eff={eff} labels={labels} />
+                            <SetEffectLines
+                              eff={eff}
+                              labels={labels}
+                              showCount={build.setEffects.some((e) => e.maxCount >= 4)}
+                            />
                           </div>
                         </div>
                       ))}
@@ -691,7 +793,14 @@ export function GearRecoSection({
               {labels.substatPrio}
             </h4>
             {verdict ? (
-              <SubstatVerdictPanel {...verdict}>
+              <SubstatVerdictPanel
+                {...verdict}
+                // Le calcul détaillé ne parle que des axes présents dans la
+                // priorité — « DEF » comme « DEF% ».
+                axes={SUBSTAT_AXES.filter((a) =>
+                  build.substats!.split(/[>=]/).map(substatAxisOf).includes(a),
+                )}
+              >
                 {(badge) => <SubstatPrioBar prio={build.substats!} badge={badge} />}
               </SubstatVerdictPanel>
             ) : (

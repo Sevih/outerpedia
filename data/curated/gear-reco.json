@@ -6421,7 +6421,7 @@
           "preset": "p2def2"
         }
       ],
-      "substats": "DEF%>EFF>CHC>HP%=SPD=CHD=DMG RED%>DMG UP%"
+      "substats": "DEF>EFF>CHC>HP=SPD=CHD=DMG RED%>DMG UP%"
     },
     {
       "name": "Pen Immu",
@@ -6451,7 +6451,7 @@
           "preset": "i2def2"
         }
       ],
-      "substats": "DEF%>EFF>CHC>HP%=SPD=CHD=DMG RED%>DMG UP%"
+      "substats": "DEF>EFF>CHC>HP=SPD=CHD=DMG RED%>DMG UP%"
     },
     {
       "name": "Pen",
@@ -6481,7 +6481,7 @@
           "preset": "p4"
         }
       ],
-      "substats": "DEF%>EFF>CHC>HP%=SPD=CHD=DMG RED%>DMG UP%"
+      "substats": "DEF>EFF>CHC>HP=SPD=CHD=DMG RED%>DMG UP%"
     },
     {
       "name": "Patience",
@@ -6511,7 +6511,7 @@
           "preset": "pat4"
         }
       ],
-      "substats": "DEF%>EFF>CHC>HP%=SPD=CHD=DMG RED%>DMG UP%"
+      "substats": "DEF>EFF>CHC>HP=SPD=CHD=DMG RED%>DMG UP%"
     }
   ],
   "2000113": [

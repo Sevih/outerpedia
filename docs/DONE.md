@@ -7,6 +7,34 @@
 
 ## 2026-08-21
 
+- **Recommended Gear, deuxième passe — le cas à cinq combos.** La maquette
+  n'en montrait qu'un ; DLuna « Pen mix » en a cinq, et la première version
+  étalait dix blocs « set » pour six sets distincts, plus une légende qui les
+  renommait tous. Désormais les combos 2+2 qui partagent un set sont
+  FACTORISÉS sur une ligne (« Penetration + Speed · Attack · Critical Strike ·
+  Augmentation · Immunity ») : tuiles 32 px, les tuiles Gloves + Shoes une
+  seule fois, les seconds sets en chips icône + nom. L'ordre des deux sets
+  dans un combo curé n'étant pas significatif et les presets pas cohérents
+  (`p2i2` = Immunity + Pen quand les autres mettent Pen devant), c'est le set
+  le PLUS PARTAGÉ du build qui passe à gauche — sinon la factorisation ratait
+  une ligne. Légende en grille nom / effet (un nom ne se coupe plus), préfixe
+  « 2 pieces » seulement s'il y a du 4P dans le build. Rangées Weapon /
+  Accessory / Talisman sur une grille à colonnes fixes (`auto-fill` ≥ 13 rem)
+  au lieu d'un flux wrap : des rangées au nombre d'items et aux noms inégaux
+  n'alignaient rien. Sous `lg`, où la carte substats est seule en largeur,
+  priorité et bloc « Flat or %? » passent côte à côte dans la carte.
+  • **Le verdict s'explique à plat, pas en tooltip** : sous les contrôles,
+  une ligne par axe présent dans la priorité (`+4 % × 1099 = +44 vs +40
+flat`), la base utilisée et les seuils de bascule, recalculés à chaque
+  input ; légende des trois badges en toutes lettres ; le troisième état
+  s'écrit « even » (clé `badge_even`), plus « ≈ ». Décision Sevih : la
+  transcendance ne revient pas, même en affichage — rien ne la fait bouger.
+  • **« DEF% » dans une priorité curée** : Domine l'écrivait, et le verdict ne
+  reconnaissait que « DEF » → ni badge ni calcul. Les 4 priorités concernées
+  (les seules du roster, `gear-presets.json` était propre) passent en forme
+  plate, et `substatAxisOf` accepte désormais les deux formes pour qu'une
+  future curation ne fasse pas disparaître le badge en silence.
+
 - **Recommended Gear refondu — une carte par question, plus de cartes dans les
   cartes** (maquette Claude Design, tour 1). La fiche perso empilait quatre
   `SlotCard` avec leurs filets internes, une carte « Set Effects » à part, une

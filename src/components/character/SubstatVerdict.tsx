@@ -2,50 +2,58 @@
 
 /**
  * FLAT OU % — annotation des substats ATK / DEF / HP de la priorité de gear :
- * un badge par axe (« % », « flat », « ≈ »), le calcul en tooltip, et les
- * inputs dont le verdict dépend — le palier de niveau (100 / 105 / 110 / 120,
- * défaut 100 : on ne suppose pas le limit break) et les quirks — visibles à
- * côté de l'annotation pour qu'on comprenne qu'elle en dépend. Le gear est
- * toujours supposé 6★ ; la transcendance n'entre pas dans le verdict (son %
- * s'additionne à celui du gear, et le limit break est ouvert à tout palier).
- * La règle vit dans `lib/substat-verdict` ; la base par palier est résolue
- * côté serveur (`char-progression.getSubstatFlatProfile`).
+ * un badge par axe (« % », « flat », « ≈ ») à côté du nom dans la barre de
+ * priorité, puis sous la barre le bloc « Flat or %? » : les deux inputs dont
+ * le verdict dépend — palier de niveau (100 / 105 / 110 / 120, défaut 100 :
+ * on ne suppose pas le limit break) et quirks — et, DESSOUS, le calcul à plat
+ * par axe (tick % × base = équivalent, contre le tick plat), la base utilisée
+ * et les seuils de bascule. Pas de tooltip : l'explication est la réponse, on
+ * ne la cache pas. Le gear est toujours supposé 6★ ; la transcendance n'entre
+ * pas dans le verdict (son % s'additionne à celui du gear, et le limit break
+ * est ouvert à tout palier). La règle vit dans `lib/substat-verdict` ; la
+ * base par palier est résolue côté serveur (`getSubstatFlatProfile`).
  */
 import { useState, type ReactNode } from 'react';
-import { InlineTooltip } from '@/components/inline/InlineTooltip';
 import {
   CLOSE_MARGIN,
   defaultLevel,
-  isSubstatAxis,
   judgeSubstat,
+  SUBSTAT_AXES,
+  substatAxisOf,
   sumFlatAt,
+  type SubstatAxis,
   type SubstatFlatProfile,
   type SubstatTicks,
-  type SubstatVerdict,
   type SubstatVerdictKind,
 } from '@/lib/substat-verdict';
 
-/** Libellés pré-traduits ; ceux du tooltip gardent leurs `{var}`. */
+/** Libellés pré-traduits ; ceux du calcul gardent leurs `{var}`. */
 export interface SubstatVerdictLabels {
   title: string;
-  hint: string;
   badgeFlat: string;
+  badgeEven: string;
   level: string;
   quirks: string;
-  tipBase: string;
-  tipAwak: string;
-  tipFlat: string;
-  tipPct: string;
-  tipBreakeven: string;
-  tipPctWins: string;
-  tipFlatWins: string;
-  tipClose: string;
+  /** Une ligne de calcul par axe : `+{pct}% × {base} = +{equiv} vs +{flat}`. */
+  calcLine: string;
+  /** La base utilisée (`{level}`, `{awak}`) et ce qui n'y entre pas. */
+  calcNote: string;
+  /** Suffixe ajouté à `calcNote` quand les quirks sont comptés. */
+  calcAwak: string;
+  /** Seuils de bascule : `{list}` = « 1000 ATK · 1000 DEF · 2434 HP ». */
+  calcBreakeven: string;
+  /** Sens de chaque badge — porté en aria-label, jamais la couleur seule. */
+  pctWins: string;
+  flatWins: string;
+  close: string;
 }
 
 export interface SubstatVerdictProps {
   profile: SubstatFlatProfile;
   ticks: SubstatTicks;
   labels: SubstatVerdictLabels;
+  /** Axes détaillés sous les contrôles — ceux de la priorité (défaut : les 3). */
+  axes?: SubstatAxis[];
 }
 
 /** `{var}` → valeur (les libellés arrivent traduits, le client les remplit). */
@@ -69,112 +77,83 @@ const toggleClass = (on: boolean): string =>
       : 'border-white/10 text-zinc-400 hover:bg-white/5'
   }`;
 
-const ROW_LABEL = 'w-13 shrink-0 text-[10px] tracking-wider text-zinc-500 uppercase';
+const ROW_LABEL = 'w-13 shrink-0 text-[10px] tracking-wider text-zinc-200 uppercase';
 
-/** Légende des trois états, accolée au titre « Flat or %? ». */
-const LEGEND: { kind: SubstatVerdictKind; text: string }[] = [
-  { kind: 'pct', text: '%' },
-  { kind: 'flat', text: 'flat' },
-  { kind: 'close', text: '≈' },
-];
+/** Légende des trois états, sous le titre « Flat or %? ». */
+const LEGEND: SubstatVerdictKind[] = ['pct', 'flat', 'close'];
 
-function VerdictBadge({
-  v,
-  level,
-  quirksOn,
-  labels,
-}: {
-  v: SubstatVerdict;
-  level: number;
-  quirksOn: boolean;
-  labels: SubstatVerdictLabels;
-}) {
-  const text = v.kind === 'pct' ? '%' : v.kind === 'flat' ? labels.badgeFlat : '≈';
-  const headline =
-    v.kind === 'pct'
-      ? labels.tipPctWins
-      : v.kind === 'flat'
-        ? labels.tipFlatWins
-        : fill(labels.tipClose, { margin: CLOSE_MARGIN * 100 });
-  const tooltip = (
-    <div className="flex max-w-72 flex-col gap-1 text-xs">
-      <span className="font-semibold text-zinc-100">{headline}</span>
-      <span className="text-zinc-300">
-        {fill(labels.tipBase, {
-          level,
-          base: v.sumFlat,
-          awak: quirksOn ? labels.tipAwak : '',
-        })}
-      </span>
-      <span className="font-mono text-zinc-200 tabular-nums">
-        {fill(labels.tipFlat, { flat: fmt(v.flatTick) })}
-      </span>
-      <span className="font-mono text-zinc-200 tabular-nums">
-        {fill(labels.tipPct, { pct: fmt(v.pctTick), base: v.sumFlat, equiv: fmt(v.equivFlat) })}
-      </span>
-      {v.breakeven != null && (
-        <span className="text-zinc-400">
-          {fill(labels.tipBreakeven, { value: Math.ceil(v.breakeven) })}
-        </span>
-      )}
-    </div>
-  );
+/** Ce que veut dire un badge, en toutes lettres (légende + aria-label). */
+function meaningOf(kind: SubstatVerdictKind, labels: SubstatVerdictLabels): string {
+  if (kind === 'pct') return labels.pctWins;
+  if (kind === 'flat') return labels.flatWins;
+  return fill(labels.close, { margin: CLOSE_MARGIN * 100 });
+}
+
+function Badge({ kind, labels }: { kind: SubstatVerdictKind; labels: SubstatVerdictLabels }) {
+  const text = kind === 'pct' ? '%' : kind === 'flat' ? labels.badgeFlat : labels.badgeEven;
   return (
-    <InlineTooltip content={tooltip}>
-      <span
-        className={`inline-flex cursor-help items-center rounded border px-1.5 py-px font-mono text-[10px] leading-4 font-semibold ${BADGE_CLASS[v.kind]}`}
-        aria-label={headline}
-      >
-        {text}
-      </span>
-    </InlineTooltip>
+    <span
+      aria-label={meaningOf(kind, labels)}
+      className={`inline-flex items-center rounded border px-1.5 py-px font-mono text-[10px] leading-4 font-semibold ${BADGE_CLASS[kind]}`}
+    >
+      {text}
+    </span>
   );
 }
 
 /**
  * Porte l'état des inputs et fournit `badge(stat)` à son enfant (render prop)
  * pour que la barre de priorité place les badges à côté des noms de stats ;
- * les contrôles se rendent en dessous.
+ * les contrôles et le calcul se rendent à côté (carte seule en largeur) ou
+ * dessous (carte dans sa colonne).
  */
 export function SubstatVerdictPanel({
   profile,
   ticks,
   labels,
+  axes = [...SUBSTAT_AXES],
   children,
 }: SubstatVerdictProps & { children: (badge: (stat: string) => ReactNode) => ReactNode }) {
   const [level, setLevel] = useState(() => defaultLevel(profile));
   const [quirksOn, setQuirksOn] = useState(true);
 
+  const verdictOf = (axis: SubstatAxis) =>
+    judgeSubstat(sumFlatAt(profile, axis, level, quirksOn), ticks[axis]);
+
+  // « DEF » comme « DEF% » : la priorité curée peut écrire la version voulue.
   const badge = (stat: string): ReactNode => {
-    if (!isSubstatAxis(stat)) return null;
-    const v = judgeSubstat(sumFlatAt(profile, stat, level, quirksOn), ticks[stat]);
-    return <VerdictBadge v={v} level={level} quirksOn={quirksOn} labels={labels} />;
+    const axis = substatAxisOf(stat);
+    return axis ? <Badge kind={verdictOf(axis).kind} labels={labels} /> : null;
   };
 
+  const detailed = axes.map((axis) => ({ axis, v: verdictOf(axis) }));
+  const breakevens = detailed
+    .filter(({ v }) => v.breakeven != null)
+    .map(({ axis, v }) => `${Math.ceil(v.breakeven!)} ${axis}`)
+    .join(' · ');
+
+  // Sous lg la carte substats est SEULE sur la largeur (la grille 2fr/1fr de
+  // la section ne s'applique qu'à partir de lg) : la priorité et le bloc
+  // « Flat or %? » passent côte à côte dès md plutôt que d'étirer six jauges
+  // sur toute la page ; à lg+ la carte est dans sa colonne, retour à l'empilé.
   return (
-    <>
-      {children(badge)}
-      <div className="flex flex-col gap-2 border-t border-white/6 pt-3 text-xs">
-        <div>
-          <span className="flex items-center gap-2">
-            <span className="font-mono text-[10px] font-semibold tracking-[0.18em] text-zinc-300 uppercase">
-              {labels.title}
-            </span>
-            {/* Légende des 3 états — le badge n'est jamais la couleur seule */}
-            {LEGEND.map((l) => (
-              <span
-                key={l.kind}
-                aria-hidden
-                className={`inline-flex items-center rounded border px-1 font-mono text-[9px] leading-4 font-semibold ${BADGE_CLASS[l.kind]}`}
-              >
-                {l.kind === 'flat' ? labels.badgeFlat : l.text}
-              </span>
-            ))}
-          </span>
-          <p className="mt-1.5 hidden text-[11px] leading-snug text-zinc-500 sm:block">
-            {labels.hint}
-          </p>
-        </div>
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
+      <div>{children(badge)}</div>
+      <div className="flex flex-col gap-2.5 border-t border-white/6 pt-3 text-xs md:border-t-0 md:border-l md:pt-0 md:pl-5 lg:border-t lg:border-l-0 lg:pt-3 lg:pl-0">
+        <span className="font-mono text-[10px] font-semibold tracking-[0.18em] text-zinc-300 uppercase">
+          {labels.title}
+        </span>
+        {/* Légende des 3 états, EN TOUTES LETTRES à taille lisible — le badge
+            n'est jamais la couleur seule, et son sens n'est pas caché dans un
+            tooltip. */}
+        <ul className="flex flex-col gap-1 text-xs">
+          {LEGEND.map((kind) => (
+            <li key={kind} className="flex items-center gap-2">
+              <Badge kind={kind} labels={labels} />
+              <span>{meaningOf(kind, labels)}</span>
+            </li>
+          ))}
+        </ul>
 
         {/* Palier de niveau — 100 (pas de LB) puis un par limit break */}
         <div className="flex items-center gap-2">
@@ -207,7 +186,31 @@ export function SubstatVerdictPanel({
             {quirksOn ? 'ON' : 'OFF'}
           </button>
         </div>
+
+        {/* Le calcul, à plat : une ligne par axe, recalculée à chaque input */}
+        {detailed.length > 0 && (
+          <div className="flex flex-col gap-1.5 border-t border-white/6 pt-2.5">
+            {detailed.map(({ axis, v }) => (
+              <div key={axis} className="flex items-center gap-2">
+                <span className="w-8 shrink-0 text-sm text-zinc-200">{axis}</span>
+                <Badge kind={v.kind} labels={labels} />
+                <span className="font-mono text-[11px] text-zinc-400 tabular-nums">
+                  {fill(labels.calcLine, {
+                    pct: fmt(v.pctTick),
+                    base: v.sumFlat,
+                    equiv: fmt(v.equivFlat),
+                    flat: fmt(v.flatTick),
+                  })}
+                </span>
+              </div>
+            ))}
+            <p className="text-[11px] leading-snug text-zinc-400">
+              {fill(labels.calcNote, { level, awak: quirksOn ? labels.calcAwak : '' })}
+              {breakevens && ` ${fill(labels.calcBreakeven, { list: breakevens })}`}
+            </p>
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 }

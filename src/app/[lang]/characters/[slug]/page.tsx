@@ -70,7 +70,6 @@ import { STEP_STAT_KEYS, type StepStatKey } from '@/lib/stat-compose';
 import { statDesc, statName } from '@/lib/data/stat-glossary';
 import { getEquipmentDetail } from '@/lib/data/equipment-detail';
 import { shopSourceLabel, slugifyEquipment } from '@/lib/data/equipment';
-import { PIECE_ORDER } from '@/lib/data/gear-order';
 import {
   StatsRankingSection,
   type TierEntry,
@@ -491,18 +490,17 @@ export default async function CharacterDetail({
           ticks: subTicks,
           labels: {
             title: t('page.character.gear.verdict.title'),
-            hint: t('page.character.gear.verdict.hint'),
             badgeFlat: t('page.character.gear.verdict.badge_flat'),
+            badgeEven: t('page.character.gear.verdict.badge_even'),
             level: t('page.character.gear.verdict.level'),
             quirks: t('page.character.stats.quirks'),
-            tipBase: t('page.character.gear.verdict.tip_base'),
-            tipAwak: t('page.character.gear.verdict.tip_awak'),
-            tipFlat: t('page.character.gear.verdict.tip_flat'),
-            tipPct: t('page.character.gear.verdict.tip_pct'),
-            tipBreakeven: t('page.character.gear.verdict.tip_breakeven'),
-            tipPctWins: t('page.character.gear.verdict.tip_pct_wins'),
-            tipFlatWins: t('page.character.gear.verdict.tip_flat_wins'),
-            tipClose: t('page.character.gear.verdict.tip_close'),
+            calcLine: t('page.character.gear.verdict.calc_line'),
+            calcNote: t('page.character.gear.verdict.calc_note'),
+            calcAwak: t('page.character.gear.verdict.calc_awak'),
+            calcBreakeven: t('page.character.gear.verdict.calc_breakeven'),
+            pctWins: t('page.character.gear.verdict.pct_wins'),
+            flatWins: t('page.character.gear.verdict.flat_wins'),
+            close: t('page.character.gear.verdict.close'),
           },
         }
       : undefined;
@@ -552,9 +550,6 @@ export default async function CharacterDetail({
             piece2: t('equip.set.2piece'),
             piece4: t('equip.set.4piece'),
             source: t('equip.detail.source'),
-            pieceNames: PIECE_ORDER.map((p) =>
-              t(`equip.detail.piece.${p}` as Parameters<typeof t>[0]),
-            ),
           }}
         />
       ),

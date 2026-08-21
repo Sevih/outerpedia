@@ -3,6 +3,7 @@ import {
   CLOSE_MARGIN,
   defaultLevel,
   judgeSubstat,
+  substatAxisOf,
   sumFlatAt,
   type SubstatFlatProfile,
 } from './substat-verdict';
@@ -72,6 +73,19 @@ describe('judgeSubstat — verdict flat vs %', () => {
       prev = r;
     }
     expect(prev).toBe(2);
+  });
+});
+
+describe('substatAxisOf — token de priorité → axe', () => {
+  it('reconnaît la forme plate ET la forme % (priorités curées « DEF% », « HP% »)', () => {
+    expect(substatAxisOf('ATK')).toBe('ATK');
+    expect(substatAxisOf('DEF%')).toBe('DEF');
+    expect(substatAxisOf(' HP% ')).toBe('HP');
+  });
+
+  it('ignore les autres tokens, y compris ceux qui finissent par %', () => {
+    for (const t of ['SPD', 'CHC', 'CHD', 'EFF', 'RES', 'DMG UP%', 'DMG RED%', 'PEN%', ''])
+      expect(substatAxisOf(t), t).toBeUndefined();
   });
 });
 
