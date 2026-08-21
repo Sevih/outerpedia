@@ -27,6 +27,34 @@
   wrapper de `next dev` qui tait uniquement les lignes `/images/*` en 200 —
   concurrently pipait déjà Next, rien ne change pour lui.
 
+- **Flat ou % sur les substats ATK / DEF / HP — la fiche perso tranche, par
+  tick de reforge.** Dans `CalcFinalStat`, le % d'un item ne multiplie QUE la
+  somme plate sans équipement (base du niveau + évolutions + quirks plats) ; le
+  plat du gear s'ajoute après, et le multiplicateur de buff s'applique aux deux.
+  Un tick de +p % vaut donc `sum_flat × p / 100` points plats, à comparer au
+  tick plat — ni le gear porté, ni les buffs, ni la transcendance (son % rejoint
+  la même somme de taux que le % du gear, et le limit break est ouvert à tout
+  palier d'étoiles) n'entrent dans le verdict. La priorité de substats du bloc
+  Gear porte un badge « % » / « flat » / « ≈ » (écart < 5 %) sur chaque axe,
+  avec le calcul en tooltip et les deux inputs dont il dépend : le palier de
+  niveau (100 / 105 / 110 / 120 — défaut 100, on ne suppose pas le LB ; chaque
+  palier EST un LB, donc son modificateur de croissance est sans ambiguïté) et
+  les quirks (plat IOT_STAT, ON/OFF). Le gear est toujours supposé 6★ : ticks
+  de `sub-ticks.json` via `lib/data/sub-ticks` (unité vérifiée au
+  chargement). Règle pure et client-safe dans `lib/substat-verdict` ; base par
+  palier dans `char-progression.getSubstatFlatProfile`, qui partage désormais
+  `whiteStatsAt` avec `computeStatSteps` (une formule, l'oracle Vlada
+  inchangé). Tests : deux côtés de la bascule, équivalent exact, égalité pile
+  → ≈, garde pctTick = 0, modificateur LB exact aux 4 paliers, verdict monotone
+  sur 100 → 120, et sanity roster (HP → % sur > 90 % du roster, DEF = l'axe
+  partagé).
+
+  > 90 % du roster, DEF = l'axe partagé, aucun verdict ne régresse quand le
+  > niveau monte).
+
+  > 90 % du roster, DEF = l'axe partagé, aucun verdict ne régresse quand le
+  > niveau monte).
+
 - **`capstone` : la cinquième dépendance python non déclarée — et `datagen:dump`
   échouait après avoir RÉUSSI.** Le dump 1.4.14 s'est déroulé entièrement
   (metadata, .so, globalgamemanagers, dump.cs écrit, « ✅ dump généré »), puis

@@ -34,6 +34,7 @@ import {
   type StatStepView,
   type StepStatKey,
 } from '@/lib/stat-compose';
+import { SUBSTAT_AXES, type SubstatAxis, type SubstatFlatProfile } from '@/lib/substat-verdict';
 import progressionData from '@data/generated/progression.json';
 import transcendData from '@data/generated/transcend.json';
 import itemsData from '@data/generated/items.json';
@@ -73,10 +74,67 @@ export interface StatStepsView {
   premiumStat?: StepStatKey;
 }
 
+type LimitBreakSteps = ProgressionData['limitBreak'][string];
+
+/**
+ * Modificateur per-mille de croissance au-delà du niveau 100
+ * (LevelUpStatModifierAfter100) — validé in-game par le gear-solver (l'oracle
+ * l'omettait, écart assumé). C'est le PALIER de limit break qui le fixe : aux
+ * niveaux où on l'appelle (les `maxLevel` des LB — 105 / 110 / 120), le plus
+ * petit palier qui atteint `level` EST ce palier, sans ambiguïté.
+ */
+function limitBreakModifier(lb: LimitBreakSteps, level: number): number {
+  if (level <= 100) return 0;
+  return lb.find((s) => s.maxLevel >= level)?.statModifier ?? 0;
+}
+
+/**
+ * Portion « blanche » d'un perso à un niveau quelconque : base interpolée
+ * (`base`) et base + bonus des évolutions `evs` (`stats`). Une seule formule
+ * pour les paliers de la fiche ET le profil par niveau des substats.
+ */
+function whiteStatsAt(
+  char: Character,
+  level: number,
+  evs: number[],
+  modifier: number,
+): { stats: Record<StepStatKey, number>; base: Record<StepStatKey, number> } {
+  const rewards = PROGRESSION.evoRewards[char.id] ?? {};
+  const cum: Partial<Record<StepStatKey, number>> = {};
+  for (const ev of evs)
+    for (const [slug, v] of Object.entries(rewards[String(ev)] ?? {})) {
+      const k = SLUG_TO_KEY[slug];
+      if (k) cum[k] = (cum[k] ?? 0) + v;
+    }
+
+  const stats = {} as Record<StepStatKey, number>;
+  const base = {} as Record<StepStatKey, number>;
+  for (const key of STEP_STAT_KEYS) {
+    if (key === 'CHC' || key === 'CHD') {
+      const slug = key === 'CHC' ? 'critical_rate' : 'critical_dmg';
+      base[key] = (char.stats[slug]?.min ?? 0) / 10;
+      stats[key] = base[key];
+    } else if (key === 'DMG UP%' || key === 'DMG RED%' || key === 'PEN%' || key === 'CDMG RED%') {
+      base[key] = 0;
+      stats[key] = (cum[key] ?? 0) / 10;
+    } else {
+      const slug = Object.entries(SLUG_TO_KEY).find(([, k]) => k === key)![0];
+      const r = char.stats[slug];
+      const mn = r?.min ?? 0;
+      const rng = (r?.max ?? 0) - mn;
+      const growth = rng > 0 ? Math.floor((rng * (level - 1)) / 99) : 0;
+      const above =
+        rng > 0 && level > 100 ? Math.floor((rng * (level - 100) * modifier) / 99000) : 0;
+      base[key] = mn + growth + above;
+      stats[key] = base[key] + (cum[key] ?? 0);
+    }
+  }
+  return { stats, base };
+}
+
 /** Paliers de stats d'un perso (lv1 + un par évolution, jusqu'au lv120). */
 export function computeStatSteps(char: Character): StatStepsView {
   const rungs = PROGRESSION.evolutions[String(char.rarity)] ?? [];
-  const rewards = PROGRESSION.evoRewards[char.id] ?? {};
   const premium = PROGRESSION.premium[char.id];
   const lb = PROGRESSION.limitBreak[`${char.rarity}_${char.element}`] ?? [];
   const premiumStat = premium ? SLUG_TO_KEY[premium.stat] : undefined;
@@ -91,39 +149,7 @@ export function computeStatSteps(char: Character): StatStepsView {
   ];
 
   const steps = points.map(({ level, evo, evs }) => {
-    const cum: Partial<Record<StepStatKey, number>> = {};
-    for (const ev of evs)
-      for (const [slug, v] of Object.entries(rewards[String(ev)] ?? {})) {
-        const k = SLUG_TO_KEY[slug];
-        if (k) cum[k] = (cum[k] ?? 0) + v;
-      }
-    // Au-delà du niveau 100, la croissance par niveau est AMPLIFIÉE par le
-    // modificateur per-mille du limit break (LevelUpStatModifierAfter100) —
-    // validé in-game par le gear-solver (l'oracle l'omettait, écart assumé).
-    const modifier = level > 100 ? (lb.find((s) => s.maxLevel === level)?.statModifier ?? 0) : 0;
-
-    const stats = {} as Record<StepStatKey, number>;
-    const base = {} as Record<StepStatKey, number>;
-    for (const key of STEP_STAT_KEYS) {
-      if (key === 'CHC' || key === 'CHD') {
-        const slug = key === 'CHC' ? 'critical_rate' : 'critical_dmg';
-        base[key] = (char.stats[slug]?.min ?? 0) / 10;
-        stats[key] = base[key];
-      } else if (key === 'DMG UP%' || key === 'DMG RED%' || key === 'PEN%' || key === 'CDMG RED%') {
-        base[key] = 0;
-        stats[key] = (cum[key] ?? 0) / 10;
-      } else {
-        const slug = Object.entries(SLUG_TO_KEY).find(([, k]) => k === key)![0];
-        const r = char.stats[slug];
-        const mn = r?.min ?? 0;
-        const rng = (r?.max ?? 0) - mn;
-        const growth = rng > 0 ? Math.floor((rng * (level - 1)) / 99) : 0;
-        const above =
-          rng > 0 && level > 100 ? Math.floor((rng * (level - 100) * modifier) / 99000) : 0;
-        base[key] = mn + growth + above;
-        stats[key] = base[key] + (cum[key] ?? 0);
-      }
-    }
+    const { stats, base } = whiteStatsAt(char, level, evs, limitBreakModifier(lb, level));
 
     const step: StatStepView = { key: `lv${level}_ev${evo}`, level, evo, stats, base };
     if (premium && premiumStat) {
@@ -224,6 +250,46 @@ export function getStatLayers(char: Character): StatLayersView {
       ? { premium: { key: premiumKey, mode: premiumInfo.mode, value: premiumInfo.value } }
       : {}),
   };
+}
+
+// --- Substats flat vs % : base aux paliers stables ---------------------------------
+
+/**
+ * Le profil que le verdict flat / % (`lib/substat-verdict`) consomme côté
+ * client : `sum_flat` = base + évolutions ATTEINTES, aux seuls paliers où une
+ * reco de gear a un sens — le cap sans limit break (100) puis le `maxLevel` de
+ * chaque LB (105 / 110 / 120), lus dans les tables. Chaque palier est
+ * exactement un LB, donc son modificateur de croissance est sans ambiguïté.
+ * Plus les quirks PLATS (IOT_STAT — leur taux est exclu, il s'ajoute à la même
+ * somme de taux que le % du gear). La transcendance n'intervient pas : le
+ * limit break est ouvert à tout palier d'étoiles.
+ */
+export function getSubstatFlatProfile(
+  char: Character,
+  layers: StatLayersView = getStatLayers(char),
+): SubstatFlatProfile {
+  const rungs = PROGRESSION.evolutions[String(char.rarity)] ?? [];
+  const lb = PROGRESSION.limitBreak[`${char.rarity}_${char.element}`] ?? [];
+  // Sans entrée de limit break pour ce couple rareté/élément, on n'invente pas
+  // de palier : un seul, le cap d'avant-LB (100 — la borne où la formule
+  // elle-même change de régime, cf. `whiteStatsAt`), pas le dernier rung
+  // d'évolution (120, qui est un niveau de LB).
+  const baseCap = lb.length
+    ? Math.min(...lb.map((s) => s.requireLevel))
+    : Math.max(1, ...rungs.map((r) => r.level).filter((l) => l <= 100));
+  const levels = [baseCap, ...lb.map((s) => s.maxLevel)].sort((a, b) => a - b);
+
+  const flatByLevel = { ATK: {}, DEF: {}, HP: {} } as Record<SubstatAxis, Record<number, number>>;
+  for (const level of levels) {
+    const evs = rungs.filter((r) => r.level <= level).map((r) => r.ev);
+    const { stats } = whiteStatsAt(char, level, evs, limitBreakModifier(lb, level));
+    for (const axis of SUBSTAT_AXES) flatByLevel[axis][level] = stats[axis];
+  }
+
+  const awakFlat = {} as Record<SubstatAxis, number>;
+  for (const axis of SUBSTAT_AXES) awakFlat[axis] = layers.quirks?.stat.flat?.[axis] ?? 0;
+
+  return { levels, flatByLevel, awakFlat };
 }
 
 // --- Transcendance -----------------------------------------------------------------

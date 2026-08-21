@@ -9,6 +9,10 @@ import { SkillDescription } from '@/components/character/SkillDescription';
 import { InlineTooltip } from '@/components/inline/InlineTooltip';
 import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
 import { gameTabClass } from '@/components/ui/game-tab';
+import {
+  SubstatVerdictPanel,
+  type SubstatVerdictProps,
+} from '@/components/character/SubstatVerdict';
 
 const ACCENT = 'var(--cd-el)';
 const TOTAL_SEGMENTS = 6;
@@ -395,8 +399,18 @@ function SetEffectLines({ eff, labels }: { eff: GearSetEffect; labels: GearRecoL
   );
 }
 
-/** Barre de priorité des substats (portée de l'ancien SubstatPrioBar). */
-export function SubstatPrioBar({ prio }: { prio: string }) {
+/**
+ * Barre de priorité des substats (portée de l'ancien SubstatPrioBar).
+ * `badge(stat)` : annotation optionnelle à côté du nom (verdict flat / % des
+ * axes ATK / DEF / HP sur la fiche perso ; rien dans l'éditeur admin).
+ */
+export function SubstatPrioBar({
+  prio,
+  badge,
+}: {
+  prio: string;
+  badge?: (stat: string) => ReactNode;
+}) {
   const tiers: { stats: string[]; filled: number }[] = [];
   let level = 0;
   for (const token of prio.split('>')) {
@@ -429,6 +443,7 @@ export function SubstatPrioBar({ prio }: { prio: string }) {
                 />
               )}
               {stat}
+              {badge?.(stat)}
             </span>
             <div className="mt-1 flex gap-0.5">
               {Array.from({ length: TOTAL_SEGMENTS }, (_, i) => (
@@ -453,9 +468,12 @@ export function SubstatPrioBar({ prio }: { prio: string }) {
 export function GearRecoSection({
   builds,
   labels,
+  verdict,
 }: {
   builds: GearBuildView[];
   labels: GearRecoLabels;
+  /** Verdict flat / % des substats ATK / DEF / HP (absent : barre nue). */
+  verdict?: SubstatVerdictProps;
 }) {
   const [active, setActive] = useState(0);
   if (!builds.length) return null;
@@ -546,7 +564,13 @@ export function GearRecoSection({
             >
               {labels.substatPrio}
             </h4>
-            <SubstatPrioBar prio={build.substats} />
+            {verdict ? (
+              <SubstatVerdictPanel {...verdict}>
+                {(badge) => <SubstatPrioBar prio={build.substats!} badge={badge} />}
+              </SubstatVerdictPanel>
+            ) : (
+              <SubstatPrioBar prio={build.substats} />
+            )}
           </div>
         )}
       </div>

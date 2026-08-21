@@ -61,9 +61,11 @@ import {
   getStatLayers,
   getGiftItems,
   getRecallItem,
+  getSubstatFlatProfile,
   getTranscendTiers,
   type GiftView,
 } from '@/lib/data/char-progression';
+import { getSubstatTicks } from '@/lib/data/sub-ticks';
 import { STEP_STAT_KEYS, type StepStatKey } from '@/lib/stat-compose';
 import { statDesc, statName } from '@/lib/data/stat-glossary';
 import { getEquipmentDetail } from '@/lib/data/equipment-detail';
@@ -479,11 +481,36 @@ export default async function CharacterDetail({
   }
   const gearBuilds = getCharacterGearReco(char.id, lang);
   if (gearBuilds) {
+    // Verdict flat / % des substats ATK / DEF / HP : base du perso aux paliers
+    // 100 / 105 / 110 / 120 (même formule que la table Stats) + ticks 6★.
+    const subTicks = getSubstatTicks();
+    const verdict = subTicks
+      ? {
+          profile: getSubstatFlatProfile(char, statLayers),
+          ticks: subTicks,
+          labels: {
+            title: t('page.character.gear.verdict.title'),
+            hint: t('page.character.gear.verdict.hint'),
+            badgeFlat: t('page.character.gear.verdict.badge_flat'),
+            level: t('page.character.gear.verdict.level'),
+            quirks: t('page.character.stats.quirks'),
+            tipBase: t('page.character.gear.verdict.tip_base'),
+            tipAwak: t('page.character.gear.verdict.tip_awak'),
+            tipFlat: t('page.character.gear.verdict.tip_flat'),
+            tipPct: t('page.character.gear.verdict.tip_pct'),
+            tipBreakeven: t('page.character.gear.verdict.tip_breakeven'),
+            tipPctWins: t('page.character.gear.verdict.tip_pct_wins'),
+            tipFlatWins: t('page.character.gear.verdict.tip_flat_wins'),
+            tipClose: t('page.character.gear.verdict.tip_close'),
+          },
+        }
+      : undefined;
     secs.push({
       anchor: 'gear',
       title: t('page.character.toc.gear'),
       body: (
         <GearRecoSection
+          verdict={verdict}
           builds={gearBuilds.map(({ note, ...b }) => {
             // Boutiques extraites → libellés traduits, fusionnés au libellé curé.
             const withLabel = <

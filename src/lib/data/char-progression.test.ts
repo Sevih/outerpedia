@@ -1,10 +1,19 @@
 import { describe, expect, it } from 'vitest';
-import type { Character } from '@contracts';
+import type { Character, ProgressionData } from '@contracts';
 import { composeStep } from '@/lib/stat-compose';
-import { computeStatSteps, getStatLayers, getTranscendTiers } from './char-progression';
+import {
+  computeStatSteps,
+  getStatLayers,
+  getSubstatFlatProfile,
+  getTranscendTiers,
+} from './char-progression';
+import { getSubstatTicks } from './sub-ticks';
+import { judgeSubstat, SUBSTAT_AXES, sumFlatAt } from '@/lib/substat-verdict';
 import charactersData from '@data/generated/characters.json';
+import progressionData from '@data/generated/progression.json';
 
 const CHARS = charactersData as unknown as Record<string, Character>;
+const PROGRESSION = progressionData as unknown as ProgressionData;
 
 /**
  * ORACLE : perso 2000073 (Vlada, 3★ fire striker). Jusqu'au niveau 100 =
@@ -156,5 +165,108 @@ describe('getTranscendTiers (3★)', () => {
     expect(tiers[6].passives).toContain('+1 Chain Passive Weakness Gauge damage');
     // Le palier de base (« 3 », niveau de passif 1) = déblocage du burst 2 seul.
     expect(tiers[0].passives).toEqual(['Burst Level 2 Unlocked']);
+  });
+});
+
+describe('getSubstatFlatProfile — base aux paliers stables pour le verdict flat / %', () => {
+  const char = CHARS['2000073'];
+  const layers = getStatLayers(char);
+  const profile = getSubstatFlatProfile(char, layers);
+  const { steps } = computeStatSteps(char);
+  const lb = PROGRESSION.limitBreak[`${char.rarity}_${char.element}`];
+
+  it('paliers lus dans les tables : 100 (sans LB) puis le maxLevel de chaque LB', () => {
+    expect(profile.levels).toEqual([100, 105, 110, 120]);
+    expect(profile.levels).toEqual([lb[0].requireLevel, ...lb.map((s) => s.maxLevel)]);
+  });
+
+  it('sans entrée de limit break (rareté/élément inconnus) : un seul palier, le lv100 — rien d’inventé', () => {
+    const orphan = { ...char, element: 'unknown_element' };
+    const p = getSubstatFlatProfile(orphan);
+    expect(p.levels).toEqual([100]);
+    // Même base qu’au lv100 de la fiche : pas de terme LB appliqué en douce.
+    for (const axis of SUBSTAT_AXES)
+      expect(p.flatByLevel[axis][100]).toBe(profile.flatByLevel[axis][100]);
+  });
+
+  it('coïncide avec les paliers de la fiche (même formule, évolutions comprises)', () => {
+    const shared = steps.filter((s) => profile.levels.includes(s.level));
+    expect(shared).toHaveLength(4);
+    for (const st of shared)
+      for (const axis of SUBSTAT_AXES)
+        expect(profile.flatByLevel[axis][st.level], `${axis} lv${st.level}`).toBe(st.stats[axis]);
+  });
+
+  it('les 4 paliers donnent le bon modificateur LB (0 / 200 / 400 / 700 ‰)', () => {
+    expect(lb.map((s) => s.statModifier)).toEqual([200, 400, 700]);
+    const { min: mn, max } = char.stats.atk;
+    const rng = max - mn;
+    const evoAt = (L: number): number => {
+      const st = steps.find((s) => s.level === L)!;
+      return st.stats.ATK - st.base.ATK;
+    };
+    // lv100 : pas de LB → pas de terme au-delà de 100.
+    expect(profile.flatByLevel.ATK[100]).toBe(mn + rng + evoAt(100));
+    for (const s of lb) {
+      const L = s.maxLevel;
+      const growth = Math.floor((rng * (L - 1)) / 99);
+      const above = Math.floor((rng * (L - 100) * s.statModifier) / 99000);
+      expect(above, `lv${L} : le modificateur doit peser`).toBeGreaterThan(0);
+      expect(profile.flatByLevel.ATK[L], `lv${L}`).toBe(mn + growth + above + evoAt(L));
+    }
+  });
+
+  it('croît de palier en palier sur chaque axe', () => {
+    for (const axis of SUBSTAT_AXES)
+      for (let i = 1; i < profile.levels.length; i++)
+        expect(profile.flatByLevel[axis][profile.levels[i]]).toBeGreaterThan(
+          profile.flatByLevel[axis][profile.levels[i - 1]],
+        );
+  });
+
+  it('quirks : le PLAT IOT_STAT seulement — le taux est exclu', () => {
+    for (const axis of SUBSTAT_AXES)
+      expect(profile.awakFlat[axis]).toBe(layers.quirks?.stat.flat?.[axis] ?? 0);
+    // Vlada est striker : le +15 % ATK du quirk de classe est un taux de BUFF —
+    // il n'entre jamais dans la somme plate du verdict.
+    expect(layers.quirks?.buff.ratePM?.ATK).toBe(150);
+    expect(profile.awakFlat.ATK).toBeLessThan(1000);
+  });
+
+  it('roster entier (gear 6★, quirks) : verdict monotone sur 100 → 105 → 110 → 120 ; HP penche vers le %, DEF est l’axe partagé', () => {
+    const ticks = getSubstatTicks();
+    expect(ticks).not.toBeNull();
+    const rank = { flat: 0, close: 1, pct: 2 } as const;
+    const tally = () =>
+      Object.fromEntries(SUBSTAT_AXES.map((a) => [a, { pct: 0, flat: 0, close: 0 }])) as Record<
+        (typeof SUBSTAT_AXES)[number],
+        Record<keyof typeof rank, number>
+      >;
+    const at100 = tally();
+    const at120 = tally();
+    let n = 0;
+    for (const c of Object.values(CHARS)) {
+      const p = getSubstatFlatProfile(c);
+      expect(p.levels).toEqual([100, 105, 110, 120]);
+      n++;
+      for (const axis of SUBSTAT_AXES) {
+        let prev = -1;
+        for (const l of p.levels) {
+          const k = judgeSubstat(sumFlatAt(p, axis, l, true), ticks![axis]).kind;
+          expect(rank[k], `${c.id} ${axis} lv${l}`).toBeGreaterThanOrEqual(prev);
+          prev = rank[k];
+        }
+        at100[axis][judgeSubstat(sumFlatAt(p, axis, 100, true), ticks![axis]).kind]++;
+        at120[axis][judgeSubstat(sumFlatAt(p, axis, 120, true), ticks![axis]).kind]++;
+      }
+    }
+    // Grosse base (HP, ATK) → le % ; petite base (DEF) → les verdicts se partagent.
+    // Un roster uniforme, ou le motif inversé, signerait une mauvaise base.
+    for (const t of [at100, at120]) {
+      expect(t.HP.pct / n).toBeGreaterThan(0.9);
+      expect(t.ATK.pct / n).toBeGreaterThan(0.5);
+      expect(t.DEF.flat).toBeGreaterThan(0);
+      expect(t.DEF.pct + t.DEF.close).toBeGreaterThan(0);
+    }
   });
 });
