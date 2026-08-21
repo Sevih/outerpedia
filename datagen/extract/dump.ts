@@ -24,6 +24,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { isMain } from '../lib/is-main';
+import { pythonToolingMissing } from '../lib/python';
 import { PKG, capture, ensureRoot, gameVersion, pickDevice, stream } from './adb';
 import { IL2CPPDUMPER, ensureTool } from './tools';
 
@@ -164,6 +165,22 @@ export function dump(): void {
   // échec ici doit se VOIR (méthode renommée = spec peut-être périmée), le
   // dump lui-même reste acquis ; relancer seul via `pnpm datagen:disasm`.
   console.log('↻ listings ASM (datagen/extract/disasm.py) ...');
+  // Outillage sondé AVANT : `capstone` absent n'est pas un échec du dump, c'est
+  // une machine non outillée — et le dump, lui, est déjà acquis (dump.cs écrit
+  // plus haut). Le faire échouer donnait un `datagen:dump a échoué` trompeur
+  // après plusieurs minutes de travail RÉUSSI (constat 21/08 sur le portable).
+  // Les listings committés prennent le relais ; un échec du script lui-même
+  // (méthode renommée, .so périmé) lève toujours — c'est tout l'intérêt.
+  const missing = pythonToolingMissing('capstone');
+  if (missing) {
+    console.warn(
+      `  ⚠ listings ASM SAUTÉS — ${missing}.\n` +
+        '    Les .asm committés restent ceux du dump précédent, donc PÉRIMÉS si les\n' +
+        '    RVA ont bougé.\n' +
+        '    → pip install -r datagen/requirements.txt, puis `pnpm datagen:disasm`.',
+    );
+    return;
+  }
   execFileSync('python', [resolve('datagen/extract/disasm.py')], { stdio: 'inherit' });
 }
 

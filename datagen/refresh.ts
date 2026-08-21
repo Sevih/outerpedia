@@ -20,11 +20,12 @@
  *   - `pnpm dev`         → scripts/dev-refresh.ts : { apply, collect, news } = true
  *   - `pnpm datagen:patch` → CLI ci-dessous : promote en DRY (revue), sans extras
  */
-import { execFileSync, spawnSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { isMain } from './lib/is-main';
+import { pythonToolingMissing } from './lib/python';
 import { gameVersion, pickDevice } from './extract/adb';
 import { pull } from './extract/pull-gamedata';
 
@@ -221,21 +222,6 @@ export function genSteps(o: { apply: boolean; collect: boolean }): Step[] {
  * l'écriture de `data/generated` à une reprise relancée avec `--apply`.
  */
 export const stepKey = (s: Step): string => [s.id, ...(s.args ?? [])].join(' ');
-
-/**
- * Outillage python d'une étape. Null si tout est là, sinon le motif du manque
- * (message destiné à l'utilisateur).
- *
- * Le module sondé est celui dont l'étape DÉPEND, pas un module témoin : sonder
- * UnityPy pour tout le monde laissait passer l'étape font-metrics (fontTools),
- * qui plantait alors en plein `pnpm dev` sur une machine outillée à moitié.
- */
-function pythonToolingMissing(mod: string): string | null {
-  const probe = spawnSync('python', ['-c', `import ${mod}`], { stdio: 'ignore' });
-  if (probe.error) return 'python introuvable';
-  if (probe.status !== 0) return `module ${mod} absent`;
-  return null;
-}
 
 /**
  * PRÉ-VOL de l'outillage python : quelles étapes seront sautées, décidé AVANT

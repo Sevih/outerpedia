@@ -7,6 +7,26 @@
 
 ## 2026-08-21
 
+- **`capstone` : la cinquième dépendance python non déclarée — et `datagen:dump`
+  échouait après avoir RÉUSSI.** Le dump 1.4.14 s'est déroulé entièrement
+  (metadata, .so, globalgamemanagers, dump.cs écrit, « ✅ dump généré »), puis
+  `disasm.py` a manqué de capstone et fait sortir tout le run en erreur — un
+  « datagen:dump a échoué » trompeur après plusieurs minutes de travail acquis.
+  Même schéma qu'UnityPy le 07/08 : un module absent n'est pas une panne du
+  script, c'est une machine non outillée. `dump.ts` sonde donc l'outillage avant
+  d'appeler disasm et SAUTE les listings avec un avertissement (en disant qu'ils
+  restent ceux du dump précédent, donc périmés si les RVA ont bougé) ; un échec
+  du script lui-même — méthode renommée, .so périmé — lève toujours, c'est tout
+  son intérêt. `capstone>=5,<6` déclaré dans `requirements.txt` avec disasm.py.
+  • **La sonde devient une primitive** : `pythonToolingMissing` quittait
+  `refresh.ts` pour `datagen/lib/python.ts`, partagée par les deux flux qui
+  appellent du python. Trois pannes de la même famille valaient bien une brique
+  commune plutôt qu'une copie.
+  • Vérifié dans la foulée : `globalgamemanagers` tiré du jeu installé résout
+  `colorSpace = linear` (fin de la dépendance à l'APK manuelle), et les 91
+  listings régénérés sont IDENTIQUES aux committés — le binaire du portable
+  correspond au dernier dump du fixe, les specs damage étaient déjà à jour.
+
 - **`extract-portrait-fx.py` entre ENFIN dans la pipeline — après avoir fermé le
   piège qui l'en empêchait.** Quatrième script python, mais le seul qui vivait
   HORS du flux alors que sa sortie est committée : `manifest.ts` réclamait ses 38
