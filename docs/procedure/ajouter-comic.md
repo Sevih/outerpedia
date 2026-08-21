@@ -42,15 +42,17 @@ tu n'as que l'EN, juste `EN/`.
 ## 2. Publier
 
 ```bash
-pnpm images            # convertit en webp + pousse images & comics.json sur R2 + purge l'edge
-pnpm editorial:push    # sauvegarde les ORIGINAUX sur R2 (les autres machines les auront)
+pnpm images   # webp + ORIGINAUX sauvegardés sur R2 + manifeste poussé + purge de l'edge
 ```
 
 La BD apparaît sur `/4-comics` en **< 10 min**, sans build, sans commit, sans
 `datagen:build` : le manifeste se régénère depuis le contenu du dossier.
 
-Le `editorial:push` n'est pas facultatif : sans lui, l'original ne vit que sur
-cette machine — ni sauvegardé, ni visible de l'autre PC.
+`pnpm images` enchaîne **`editorial:push`** avant la publication (depuis le
+2026-08-21) : l'original est sauvegardé sur R2 avant que le dérivé parte. Ce
+geste était manuel et s'oubliait — trois BD publiées depuis le fixe n'avaient
+jamais eu leurs originaux sauvegardés, donc aucun `editorial:pull` ne pouvait
+les ramener ailleurs.
 
 ## Notes
 
@@ -58,6 +60,24 @@ cette machine — ni sauvegardé, ni visible de l'autre PC.
 - `editorial:pull`/`push` sont des `copy`, jamais des `sync` : ils n'effacent
   rien, ni en local ni sur R2. Retirer une BD partout reste un geste manuel
   (puis `pnpm assets:collect-comics --force` pour écrire le manifeste réduit).
-- Le `data/generated/comics.json` du repo n'est qu'un **repli** (dev / R2 down).
-  Pour le rafraîchir : `pnpm datagen:build` puis promote (facultatif, la prod
-  n'en dépend pas).
+- **Garde-fou** : il compare les **noms**, pas les nombres — un pool qui échange
+  3 BD contre 3 autres passait le test des comptes. Quand une BD servie manque au
+  pool local, deux cas :
+  - ses webp sont déjà sur R2 (le cas courant) → elle est **conservée au
+    manifeste** et la galerie continue de la servir. Publier depuis une machine
+    au pool incomplet est donc SANS PERTE : pas besoin d'avoir toutes les BD pour
+    en ajouter une. Pense quand même à `editorial:push` depuis la machine qui
+    détient l'original, sinon il reste non sauvegardé ;
+  - ni original ici, ni dérivé sur R2 → le manifeste est retenu, et celui qu'une
+    collecte précédente aurait laissé dans le staging est **retiré** (sans quoi
+    `assets:push` enverrait une version périmée).
+
+  `--force` court-circuite tout et écrit le pool local seul : c'est le geste du
+  retrait VOLONTAIRE.
+
+- Le `data/generated/comics.json` du repo n'est qu'un **repli** (dev / R2 down)
+  — mais il n'est plus à rafraîchir à la main : `assets:sync-comics-seed`, dernier
+  maillon de `pnpm images`, le réaligne sur le manifeste RÉELLEMENT en ligne une
+  fois le push confirmé. C'est ce qui en fait une référence fiable pour le
+  garde-fou ci-dessus. **Il est committé** : le prendre dans le commit qui suit la
+  publication.

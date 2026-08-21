@@ -47,7 +47,7 @@
     "editorial:push": "tsx datagen/assets/editorial.ts push",
     "assets:push": "node scripts/assets-push.mjs",
     "assets:sync-comics-seed": "tsx datagen/assets/sync-comics-seed.ts",
-    "images": "pnpm assets:collect && pnpm assets:collect-audio && pnpm assets:collect-wallpapers && pnpm assets:collect-comics && pnpm assets:push && pnpm assets:sync-comics-seed",
+    "images": "pnpm assets:collect && pnpm assets:collect-audio && pnpm assets:collect-wallpapers && pnpm assets:collect-comics && pnpm editorial:push && pnpm assets:push && pnpm assets:sync-comics-seed",
     "datagen:face-layout": "python datagen/assets/extract-face-layout.py",
     "datagen:sprite-rect": "python datagen/assets/extract-sprite-rect.py"
   },

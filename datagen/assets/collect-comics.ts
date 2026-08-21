@@ -23,17 +23,27 @@
  *
  * Exécution : `pnpm assets:collect-comics` (ou via `pnpm images`).
  */
-import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+  statSync,
+  writeFileSync,
+} from 'node:fs';
 import { join, resolve } from 'node:path';
 // sharp 0.35 : typings en `export =` — le type `Sharp` s'importe nommé, l'accès
 // namespace `sharp.Sharp` ne compile plus.
 import sharp, { type Sharp } from 'sharp';
 import { STAGING_DIR } from './stage';
-import { buildComics } from '../generators/comics';
+import { buildComics, removedStems } from '../generators/comics';
 
 const EDITORIAL = resolve('.editorial/comics');
 /** Seed committé : la trace VERSIONNÉE du pool complet (garde-fou, cf. plus bas). */
 const SEED = resolve('data/generated/comics.json');
+/** État du push (`clé → sha1`), committé : dit ce que R2 SERT réellement. */
+const PUSHED = resolve('datagen/assets/pushed.json');
 const DEST = resolve(STAGING_DIR, 'images/4-comics');
 const LANGS = ['EN', 'JP', 'KR'] as const;
 const SRC_RE = /\.(png|jpe?g)$/i;
@@ -81,6 +91,16 @@ function totalStems(catalog: unknown): number {
   return Object.values(catalog).reduce<number>((n, l) => n + (Array.isArray(l) ? l.length : 0), 0);
 }
 
+/**
+ * Un stem est-il SERVI par R2 ? Ses DEUX dérivés doivent être confirmés poussés
+ * (pleine taille + vignette de grille) dans l'état committé du push — la seule
+ * preuve disponible hors ligne de ce que le bucket contient.
+ */
+function isServed(pushed: Record<string, unknown>, lang: string, stem: string): boolean {
+  const base = `images/4-comics/${lang}/${stem}`;
+  return !!pushed[`${base}.webp`] && !!pushed[`${base}.thumb.webp`];
+}
+
 export async function collectComics(): Promise<{ made: number; skipped: number }> {
   let made = 0;
   let skipped = 0;
@@ -93,23 +113,71 @@ export async function collectComics(): Promise<{ made: number; skipped: number }
   // la page la lise sans redéploiement. Écrit tant qu'une BD existe (sinon on ne
   // crée pas un dossier vide dans le staging).
   const manifest = buildComics();
-  const local = totalStems(manifest);
-  if (!local) return { made, skipped };
+  if (!totalStems(manifest)) return { made, skipped };
   // GARDE-FOU — le manifeste décrit le pool LOCAL et écrase celui de R2. Publier
-  // depuis une machine qui n'a qu'une partie du pool (`.editorial/` est gitignoré
-  // donc absent d'un clone frais) amputerait la galerie : les webp resteraient sur
-  // R2, mais plus personne ne les demanderait. Le seed committé étant la trace du
-  // pool complet, un pool local plus PETIT signale une machine à resynchroniser.
-  // Un vrai retrait de BD (donc local < seed volontairement) passe par --force.
-  const seed = existsSync(SEED) ? totalStems(JSON.parse(readFileSync(SEED, 'utf8'))) : 0;
-  if (local < seed && !process.argv.includes('--force')) {
-    console.warn(
-      `⚠ 4-comics : pool local PARTIEL (${local} BD contre ${seed} au seed committé) —\n` +
-        '  manifeste NON écrit, pour ne pas amputer la galerie en ligne.\n' +
-        '  → `pnpm editorial:pull` pour récupérer le pool complet, puis relancer.\n' +
-        '  → `pnpm assets:collect-comics --force` si tu as VOLONTAIREMENT retiré des BD.',
-    );
-    return { made, skipped };
+  // depuis une machine au pool incomplet (`.editorial/` est gitignoré, donc absent
+  // d'un clone frais et divergent entre PC) amputerait la galerie : les webp
+  // resteraient sur R2, mais plus personne ne les demanderait.
+  //
+  // La référence est le SEED COMMITTÉ, que `sync-comics-seed` réaligne sur le
+  // manifeste réellement EN LIGNE après chaque push — c'est donc une trace fiable
+  // de ce que sert la galerie, disponible hors ligne.
+  //
+  // On compare les ENSEMBLES DE STEMS, pas leurs tailles : un pool qui échange
+  // 3 BD contre 3 autres passait le test des comptes (cf. `removedStems`).
+  const seed: unknown = existsSync(SEED) ? JSON.parse(readFileSync(SEED, 'utf8')) : {};
+  const removed = removedStems(manifest, seed);
+  if (removed.size && !process.argv.includes('--force')) {
+    // RÉCONCILIATION plutôt que blocage. Le manifeste n'est qu'une LISTE DE NOMS :
+    // une BD dont les webp sont déjà sur R2 continue d'être servie même si son
+    // ORIGINAL manque ici. On la garde donc au catalogue au lieu de l'effacer —
+    // sinon publier une nouvelle BD depuis une machine exigerait d'avoir toutes
+    // les autres, ce qui bloquait le portable sur un `editorial:push` du fixe
+    // inaccessible (cas du 2026-08-21).
+    const pushed: Record<string, unknown> = existsSync(PUSHED)
+      ? JSON.parse(readFileSync(PUSHED, 'utf8'))
+      : {};
+    const kept: string[] = [];
+    const orphans: string[] = [];
+    for (const [lang, stems] of removed) {
+      if (!(LANGS as readonly string[]).includes(lang)) continue;
+      const list = manifest[lang as (typeof LANGS)[number]];
+      for (const stem of stems) {
+        if (isServed(pushed, lang, stem)) {
+          list.push(stem);
+          kept.push(`${lang} : ${stem}`);
+        } else {
+          orphans.push(`${lang} : ${stem}`);
+        }
+      }
+      // Le catalogue doit rester TRIÉ (invariant gravé dans comics.test).
+      list.sort();
+    }
+    if (kept.length) {
+      console.log(
+        `  ${kept.length} BD servie(s) par R2 sans original local — CONSERVÉE(S) au manifeste :\n` +
+          kept.map((k) => `      ${k}`).join('\n') +
+          '\n  (leurs originaux ne sont pas sur R2 : `pnpm editorial:push` depuis la\n' +
+          '   machine qui les détient, quand elle sera accessible.)',
+      );
+    }
+    // ORPHELINES : ni original ici, ni dérivé sur R2. Les lister donnerait des
+    // 404 ; les taire les effacerait. On retient tout le manifeste — c'est le
+    // seul cas qui exige vraiment l'autre machine.
+    if (orphans.length) {
+      console.warn(
+        `⚠ 4-comics : ${orphans.length} BD au catalogue n'ont NI original local NI dérivé sur R2 :\n` +
+          orphans.map((o) => `      ${o}`).join('\n') +
+          '\n  manifeste NON écrit (publier d’ici les ferait disparaître).\n' +
+          '  → `pnpm editorial:pull`, ou `--force` si le retrait est VOLONTAIRE.',
+      );
+      const stale = join(DEST, 'comics.json');
+      if (existsSync(stale)) {
+        rmSync(stale, { force: true });
+        console.warn('  (manifeste périmé retiré du staging : rien ne sera poussé)');
+      }
+      return { made, skipped };
+    }
   }
   mkdirSync(DEST, { recursive: true });
   writeFileSync(join(DEST, 'comics.json'), JSON.stringify(manifest, null, 2) + '\n');

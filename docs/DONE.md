@@ -5,6 +5,38 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-21
+
+- **Le garde-fou 4-comics comparait des NOMBRES — il a failli laisser effacer
+  trois BD.** Retour sur le portable après une semaine : pool local et galerie
+  affichaient 31 BD par langue… mais pas les mêmes. Trois nouvelles d'un côté,
+  trois anciennes de l'autre (`HOiDkTzbMAAcqeX` / `HOiEvqabQAAVN4T` /
+  `HOiDBeDakAAnQYP`), jamais poussées en ORIGINAL depuis le fixe — donc
+  irrattrapables par `editorial:pull`. L'échange à somme nulle passait le test
+  des comptes : `pnpm images` d'ici aurait retiré les trois de la galerie.
+  `removedStems` (generators/comics) compare désormais les ENSEMBLES de stems,
+  par langue, contre le seed committé — que `sync-comics-seed` réaligne sur ce
+  qui est réellement en ligne, donc une référence fiable et hors ligne. 5 tests.
+  • **Et ne pas écrire ne suffisait pas** : un manifeste PÉRIMÉ laissé dans le
+  staging par une collecte précédente (celui du pool d'avant le pull) serait
+  parti quand même — `assets:push` envoie tout ce qu'il trouve, et son sha1
+  différait bien de celui poussé. Le garde-fou l'ÉLAGUE maintenant, comme
+  `collect-wallpapers` le fait d'un perso non intégré. Vérifié sur le cas réel :
+  3 BD nommées, manifeste retenu ET retiré du staging.
+  • **Et le garde-fou RÉCONCILIE au lieu de bloquer** (Sevih n'ayant pas accès au
+  fixe, le blocage l'aurait laissé sans recours) : le manifeste n'étant qu'une
+  liste de NOMS, une BD dont les deux dérivés sont confirmés dans `pushed.json`
+  reste servie par R2 même sans original local — elle est donc conservée au
+  catalogue. Publier depuis une machine au pool incomplet devient SANS PERTE ;
+  seules les vraies orphelines (ni original ici, ni dérivé en ligne) retiennent
+  encore le manifeste. Vérifié sur le cas réel : 32 BD par langue, 0 perdue,
+  3 ajoutées, catalogue trié.
+  • **`pnpm images` enchaîne `editorial:push`** (avant `assets:push` : la source
+  est sauvegardée avant que le dérivé parte). C'est l'oubli de ce geste manuel
+  qui avait créé la situation — publier sans sauvegarder l'original ne doit plus
+  être possible. Procédure `ajouter-comic.md` mise à jour, et sa note sur le
+  repli corrigée (périmée depuis `sync-comics-seed`).
+
 ## 2026-08-19
 
 - **Campagne de validation in-game des compteurs § 9.1** (5 captures Sevih,

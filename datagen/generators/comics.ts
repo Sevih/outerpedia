@@ -54,6 +54,40 @@ function scanLang(dir: string): string[] {
   return [...stems].sort();
 }
 
+/** Stems par langue d'un catalogue, tolérant à un JSON étranger (repli relu du disque). */
+function stemsByLang(catalog: unknown): Map<string, Set<string>> {
+  const out = new Map<string, Set<string>>();
+  if (!catalog || typeof catalog !== 'object') return out;
+  for (const [lang, list] of Object.entries(catalog)) {
+    if (Array.isArray(list)) {
+      out.set(lang, new Set(list.filter((s): s is string => typeof s === 'string')));
+    }
+  }
+  return out;
+}
+
+/**
+ * Ce qu'un catalogue local RETIRERAIT d'un catalogue de référence : les stems
+ * que la référence porte et que le pool local n'a pas, par langue (vide = aucun
+ * retrait, donc publication sans perte).
+ *
+ * COMPARER DES ENSEMBLES, PAS DES COMPTES. Le garde-fou d'origine mesurait des
+ * tailles : il a laissé passer le cas du 2026-08-21 — un pool de 31 BD par
+ * langue face à 31 en ligne, mais PAS LES MÊMES (3 nouvelles d'un côté, 3
+ * anciennes de l'autre, jamais poussées en original). L'échange à somme nulle
+ * aurait effacé trois BD de la galerie sans qu'aucun compteur ne bouge.
+ */
+export function removedStems(local: unknown, reference: unknown): Map<string, string[]> {
+  const here = stemsByLang(local);
+  const out = new Map<string, string[]>();
+  for (const [lang, refStems] of stemsByLang(reference)) {
+    const mine = here.get(lang) ?? new Set<string>();
+    const gone = [...refStems].filter((s) => !mine.has(s));
+    if (gone.length) out.set(lang, gone);
+  }
+  return out;
+}
+
 /** Construit le catalogue des BD, par langue d'origine. */
 export function buildComics(): ComicsData {
   const out = {} as ComicsData;
