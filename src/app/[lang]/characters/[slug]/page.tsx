@@ -70,6 +70,7 @@ import { STEP_STAT_KEYS, type StepStatKey } from '@/lib/stat-compose';
 import { statDesc, statName } from '@/lib/data/stat-glossary';
 import { getEquipmentDetail } from '@/lib/data/equipment-detail';
 import { shopSourceLabel, slugifyEquipment } from '@/lib/data/equipment';
+import { PIECE_ORDER } from '@/lib/data/gear-order';
 import {
   StatsRankingSection,
   type TierEntry,
@@ -551,6 +552,9 @@ export default async function CharacterDetail({
             piece2: t('equip.set.2piece'),
             piece4: t('equip.set.4piece'),
             source: t('equip.detail.source'),
+            pieceNames: PIECE_ORDER.map((p) =>
+              t(`equip.detail.piece.${p}` as Parameters<typeof t>[0]),
+            ),
           }}
         />
       ),

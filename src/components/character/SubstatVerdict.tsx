@@ -69,7 +69,14 @@ const toggleClass = (on: boolean): string =>
       : 'border-white/10 text-zinc-400 hover:bg-white/5'
   }`;
 
-const ROW_LABEL = 'w-14 shrink-0 tracking-wider text-zinc-500 uppercase';
+const ROW_LABEL = 'w-13 shrink-0 text-[10px] tracking-wider text-zinc-500 uppercase';
+
+/** Légende des trois états, accolée au titre « Flat or %? ». */
+const LEGEND: { kind: SubstatVerdictKind; text: string }[] = [
+  { kind: 'pct', text: '%' },
+  { kind: 'flat', text: 'flat' },
+  { kind: 'close', text: '≈' },
+];
 
 function VerdictBadge({
   v,
@@ -149,10 +156,24 @@ export function SubstatVerdictPanel({
       {children(badge)}
       <div className="flex flex-col gap-2 border-t border-white/6 pt-3 text-xs">
         <div>
-          <span className="font-mono text-[10px] font-semibold tracking-[0.18em] text-zinc-300 uppercase">
-            {labels.title}
+          <span className="flex items-center gap-2">
+            <span className="font-mono text-[10px] font-semibold tracking-[0.18em] text-zinc-300 uppercase">
+              {labels.title}
+            </span>
+            {/* Légende des 3 états — le badge n'est jamais la couleur seule */}
+            {LEGEND.map((l) => (
+              <span
+                key={l.kind}
+                aria-hidden
+                className={`inline-flex items-center rounded border px-1 font-mono text-[9px] leading-4 font-semibold ${BADGE_CLASS[l.kind]}`}
+              >
+                {l.kind === 'flat' ? labels.badgeFlat : l.text}
+              </span>
+            ))}
           </span>
-          <p className="mt-1 text-[11px] leading-snug text-zinc-500">{labels.hint}</p>
+          <p className="mt-1.5 hidden text-[11px] leading-snug text-zinc-500 sm:block">
+            {labels.hint}
+          </p>
         </div>
 
         {/* Palier de niveau — 100 (pas de LB) puis un par limit break */}

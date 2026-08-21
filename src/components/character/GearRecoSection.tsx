@@ -88,6 +88,9 @@ export interface GearRecoLabels {
   piece2: string;
   piece4: string;
   source: string;
+  /** Noms des 4 pièces d'armure, dans l'ordre helmet/armor/gloves/shoes
+   *  (sous-ligne « 2 pieces · Helmet + Armor » des combos). */
+  pieceNames?: string[];
 }
 
 /**
@@ -96,7 +99,9 @@ export interface GearRecoLabels {
  * EXPORTÉE avec `ItemRow` / `SetPieceGroup` / `Row` : les guides de boss
  * affichent le POOL d'un donjon (butin détaillé) et c'est le MÊME objet à
  * l'écran qu'ici — même tuile, même tooltip, même lien détail. Une deuxième
- * implémentation aurait divergé au premier changement.
+ * implémentation aurait divergé au premier changement. (La fiche perso,
+ * elle, n'empile plus ces cartes : une seule carte à rangées, cf.
+ * `GearRecoSection`.)
  */
 export function SlotCard({
   label,
@@ -284,37 +289,20 @@ export function ItemRow({
   );
 }
 
-/**
- * Groupe de tuiles d'un set dans un combo (port de l'ancien SetMiniCard) : joué à 4
- * → les 4 pièces ; combo 2+2 → Helmet+Armor pour le premier set, Gloves+Shoes
- * pour le second. Icône du set en overlay, nom cliquable, tooltip 2P/4P + source.
- */
-export function SetPieceGroup({
-  piece,
-  idx,
-  effects,
-  labels,
-}: {
-  piece: GearSetPiece;
-  idx: number;
-  effects: GearSetEffect[];
-  labels: Pick<GearRecoLabels, 'piece2' | 'piece4'>;
-}) {
-  const icons = piece.pieceIcons ?? [];
-  const shown = piece.count >= 4 ? icons : idx === 0 ? icons.slice(0, 2) : icons.slice(2, 4);
-  const eff = effects.find((e) => e.id === piece.id);
-  const name = piece.slug ? (
-    <Link
-      href={`/equipment/${piece.slug}` as Route}
-      className="font-game text-xs text-zinc-400 hover:underline"
-    >
-      {piece.name}
-    </Link>
-  ) : (
-    <span className="font-game text-xs text-zinc-400">{piece.name}</span>
-  );
+/** Tuiles d'un set dans un combo : les 4 s'il est joué à 4, sinon Helmet+Armor
+ *  pour le premier set du combo, Gloves+Shoes pour le second. */
+function shownPieceIdx(piece: GearSetPiece, idx: number): number[] {
+  if (piece.count >= 4) return [0, 1, 2, 3];
+  return idx === 0 ? [0, 1] : [2, 3];
+}
 
-  const tooltip = (
+/** Tooltip d'un set (bonus 2P/4P + source) — partagé par les deux rendus. */
+function setTooltip(
+  piece: GearSetPiece,
+  eff: GearSetEffect | undefined,
+  labels: Pick<GearRecoLabels, 'piece2' | 'piece4'>,
+): ReactNode {
+  return (
     <div className="flex max-w-72 flex-col gap-1.5">
       <div className="flex items-center gap-2">
         {piece.icon && (
@@ -366,9 +354,42 @@ export function SetPieceGroup({
       )}
     </div>
   );
+}
+
+/**
+ * Groupe de tuiles d'un set dans un combo (port de l'ancien SetMiniCard) : joué à 4
+ * → les 4 pièces ; combo 2+2 → Helmet+Armor pour le premier set, Gloves+Shoes
+ * pour le second. Icône du set en overlay, nom cliquable, tooltip 2P/4P + source.
+ */
+export function SetPieceGroup({
+  piece,
+  idx,
+  effects,
+  labels,
+}: {
+  piece: GearSetPiece;
+  idx: number;
+  effects: GearSetEffect[];
+  labels: Pick<GearRecoLabels, 'piece2' | 'piece4'>;
+}) {
+  const icons = piece.pieceIcons ?? [];
+  const shown = shownPieceIdx(piece, idx)
+    .map((i) => icons[i])
+    .filter(Boolean);
+  const eff = effects.find((e) => e.id === piece.id);
+  const name = piece.slug ? (
+    <Link
+      href={`/equipment/${piece.slug}` as Route}
+      className="font-game text-xs text-zinc-400 hover:underline"
+    >
+      {piece.name}
+    </Link>
+  ) : (
+    <span className="font-game text-xs text-zinc-400">{piece.name}</span>
+  );
 
   return (
-    <InlineTooltip content={tooltip}>
+    <InlineTooltip content={setTooltip(piece, eff, labels)}>
       <div className="inline-flex cursor-default flex-col items-center gap-0.5">
         <div className="flex items-center gap-1">
           {shown.map((icon, i) => (
@@ -376,6 +397,60 @@ export function SetPieceGroup({
           ))}
         </div>
         {name}
+      </div>
+    </InlineTooltip>
+  );
+}
+
+/**
+ * Un set dans un combo, version fiche perso : tuiles + nom à droite + sous-ligne
+ * « 2 pieces · Helmet + Armor ». Même tooltip que `SetPieceGroup`.
+ */
+function SetCombo({
+  piece,
+  idx,
+  effects,
+  labels,
+}: {
+  piece: GearSetPiece;
+  idx: number;
+  effects: GearSetEffect[];
+  labels: Pick<GearRecoLabels, 'piece2' | 'piece4' | 'pieceNames'>;
+}) {
+  const icons = piece.pieceIcons ?? [];
+  const which = shownPieceIdx(piece, idx);
+  const shown = which.map((i) => icons[i]).filter(Boolean);
+  const eff = effects.find((e) => e.id === piece.id);
+  const pieceNames = labels.pieceNames
+    ? which.map((i) => labels.pieceNames![i]).filter(Boolean)
+    : [];
+  const sub = [piece.count >= 4 ? labels.piece4 : labels.piece2, pieceNames.join(' + ')]
+    .filter(Boolean)
+    .join(' · ');
+
+  return (
+    <InlineTooltip content={setTooltip(piece, eff, labels)}>
+      <div className="flex cursor-default items-center gap-2">
+        <div className="flex items-center gap-2">
+          {shown.map((icon, i) => (
+            <EquipmentIcon key={i} icon={icon} grade="unique" size={38} overlayIcon={piece.icon} />
+          ))}
+        </div>
+        <div className="ml-0.5 flex min-w-0 flex-col">
+          {piece.slug ? (
+            <Link
+              href={`/equipment/${piece.slug}` as Route}
+              className="font-game text-equipment truncate text-sm font-semibold hover:underline"
+            >
+              {piece.name}
+            </Link>
+          ) : (
+            <span className="font-game text-equipment truncate text-sm font-semibold">
+              {piece.name}
+            </span>
+          )}
+          <span className="text-[11px] text-zinc-400">{sub}</span>
+        </div>
       </div>
     </InlineTooltip>
   );
@@ -399,11 +474,9 @@ function SetEffectLines({ eff, labels }: { eff: GearSetEffect; labels: GearRecoL
   );
 }
 
-/**
- * Barre de priorité des substats (portée de l'ancien SubstatPrioBar).
+/** Barre de priorité des substats (portée de l'ancien SubstatPrioBar).
  * `badge(stat)` : annotation optionnelle à côté du nom (verdict flat / % des
- * axes ATK / DEF / HP sur la fiche perso ; rien dans l'éditeur admin).
- */
+ * axes ATK / DEF / HP sur la fiche perso ; rien dans l'éditeur admin). */
 export function SubstatPrioBar({
   prio,
   badge,
@@ -426,12 +499,12 @@ export function SubstatPrioBar({
     level++;
   }
   return (
-    <div className="space-y-2">
+    <div className="space-y-2.5">
       {tiers.map((tier) =>
         tier.stats.map((stat) => (
           <div key={stat}>
             {/* Icône avant le nom — même gabarit que les main stats de l'EE. */}
-            <span className="inline-flex items-center gap-1 text-sm text-zinc-200">
+            <span className="inline-flex items-center gap-1.5 text-sm text-zinc-200">
               {STAT_ICON[stat] && (
                 <img
                   src={img.statIcon(STAT_ICON[stat])}
@@ -460,10 +533,41 @@ export function SubstatPrioBar({
   );
 }
 
+/** Étiquette de rangée / de bloc : la signature mono 10 px des cartes. */
+const ROW_LABEL = 'font-mono text-[10px] font-semibold tracking-[0.18em] text-zinc-300 uppercase';
+
 /**
- * Section Équipement recommandé (portée telle quelle sur le NOUVEAU
- * format curé) : onglets de builds, grille de slots, légende des bonus de
- * sets, barre de substats, note.
+ * Une rangée de la carte gear : étiquette mono à gauche (96 px en ≥ sm),
+ * contenu à droite ; en mobile l'étiquette passe au-dessus.
+ */
+function GearRow({
+  label,
+  divider = false,
+  children,
+}: {
+  label: string;
+  divider?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <div
+      className={`grid gap-2 sm:grid-cols-[6rem_1fr] sm:gap-3.5 ${
+        divider ? 'border-t border-white/6 pt-4' : ''
+      }`}
+    >
+      <span className={`${ROW_LABEL} sm:pt-3.5`}>{label}</span>
+      <div className="min-w-0">{children}</div>
+    </div>
+  );
+}
+
+/**
+ * Section Équipement recommandé — une carte par question, plus de cartes dans
+ * les cartes : onglets de builds (quel build) → UNE carte gear à rangées
+ * étiquetées Weapon / Accessory / Talisman / Armor Set, la légende des bonus
+ * fusionnée dans la rangée du set (quoi équiper) → panneau substats avec la
+ * priorité puis le verdict flat / % (quoi chasser) → bande de note.
+ * Desktop 2fr / 1fr, mobile une colonne dans ce même ordre de lecture.
  */
 export function GearRecoSection({
   builds,
@@ -478,6 +582,8 @@ export function GearRecoSection({
   const [active, setActive] = useState(0);
   if (!builds.length) return null;
   const build = builds[Math.min(active, builds.length - 1)];
+  const hasGear =
+    build.weapons.length + build.amulets.length + build.talismans.length + build.sets.length > 0;
 
   return (
     <div className="flex flex-col gap-4">
@@ -500,68 +606,88 @@ export function GearRecoSection({
         })}
       </div>
 
-      {/* Grille de slots + jauge de substats */}
       <div className="grid gap-4 lg:grid-cols-[2fr_1fr] lg:items-start">
-        <div className="grid gap-3 sm:grid-cols-2">
-          {build.weapons.length > 0 && (
-            <SlotCard label={labels.weapon}>
-              {build.weapons.map((w, i) => (
-                <Row key={`${w.id}-${i}`}>
-                  <ItemRow item={w} labels={labels} />
-                </Row>
-              ))}
-            </SlotCard>
-          )}
-          {build.amulets.length > 0 && (
-            <SlotCard label={labels.amulet}>
-              {build.amulets.map((a, i) => (
-                <Row key={`${a.id}-${i}`}>
-                  <ItemRow item={a} labels={labels} />
-                </Row>
-              ))}
-            </SlotCard>
-          )}
-          {build.talismans.length > 0 && (
-            <SlotCard label={labels.talisman}>
-              {build.talismans.map((tl, i) => (
-                <Row key={`${tl.id}-${i}`}>
-                  <ItemRow item={tl} labels={labels} />
-                </Row>
-              ))}
-            </SlotCard>
-          )}
-          {build.sets.length > 0 && (
-            <SlotCard label={labels.set} accentBg>
-              {build.sets.map((combo, i) => (
-                <Row key={i}>
-                  <div className="flex flex-wrap items-start gap-3">
-                    {combo.map((p, j) => (
-                      <SetPieceGroup
-                        key={j}
-                        piece={p}
-                        idx={j}
-                        effects={build.setEffects}
-                        labels={labels}
-                      />
-                    ))}
-                  </div>
-                </Row>
-              ))}
-              {build.setEffects.length === 1 && (
-                <div className="mt-2 flex flex-col gap-1 border-t border-white/6 pt-2.5">
-                  <SetEffectLines eff={build.setEffects[0]} labels={labels} />
+        {/* Carte gear : 4 rangées, zéro carte imbriquée */}
+        {hasGear && (
+          <div className="card flex flex-col gap-4.5 p-4 sm:px-5.5 sm:py-5">
+            {build.weapons.length > 0 && (
+              <GearRow label={labels.weapon}>
+                <div className="flex flex-wrap gap-x-7 gap-y-2.5">
+                  {build.weapons.map((w, i) => (
+                    <ItemRow key={`${w.id}-${i}`} item={w} labels={labels} />
+                  ))}
                 </div>
-              )}
-            </SlotCard>
-          )}
-        </div>
+              </GearRow>
+            )}
+            {build.amulets.length > 0 && (
+              <GearRow label={labels.amulet}>
+                <div className="flex flex-wrap gap-x-7 gap-y-2.5">
+                  {build.amulets.map((a, i) => (
+                    <ItemRow key={`${a.id}-${i}`} item={a} labels={labels} />
+                  ))}
+                </div>
+              </GearRow>
+            )}
+            {build.talismans.length > 0 && (
+              <GearRow label={labels.talisman}>
+                <div className="flex flex-wrap gap-x-7 gap-y-2.5">
+                  {build.talismans.map((tl, i) => (
+                    <ItemRow key={`${tl.id}-${i}`} item={tl} labels={labels} />
+                  ))}
+                </div>
+              </GearRow>
+            )}
+            {build.sets.length > 0 && (
+              <GearRow label={labels.set} divider>
+                <div className="flex flex-col gap-3">
+                  {build.sets.map((combo, i) => (
+                    <div key={i} className="flex flex-wrap gap-x-8 gap-y-2">
+                      {combo.map((p, j) => (
+                        <SetCombo
+                          key={j}
+                          piece={p}
+                          idx={j}
+                          effects={build.setEffects}
+                          labels={labels}
+                        />
+                      ))}
+                    </div>
+                  ))}
+                  {/* Légende des bonus : dans la même rangée — c'est la réponse
+                      à la même question, plus de carte « Set Effects » à part. */}
+                  {build.setEffects.length > 0 && (
+                    <div className="flex flex-col gap-1.5">
+                      {build.setEffects.map((eff) => (
+                        <div key={eff.id} className="flex gap-2 text-xs leading-relaxed">
+                          {eff.slug ? (
+                            <Link
+                              href={`/equipment/${eff.slug}` as Route}
+                              className="font-game text-equipment w-24 shrink-0 font-semibold hover:underline"
+                            >
+                              {eff.name}
+                            </Link>
+                          ) : (
+                            <span className="font-game text-equipment w-24 shrink-0 font-semibold">
+                              {eff.name}
+                            </span>
+                          )}
+                          <div className="min-w-0">
+                            <SetEffectLines eff={eff} labels={labels} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </GearRow>
+            )}
+          </div>
+        )}
 
+        {/* Panneau substats : la priorité d'abord, le verdict dessous */}
         {build.substats && (
-          <div className="card flex flex-col gap-3 rounded-xl p-4">
-            <h4
-              className="font-mono text-[10px] font-semibold tracking-[0.18em] uppercase"
-              style={{ color: ACCENT }}
-            >
+          <div className="card flex flex-col gap-3.5 p-4 sm:px-5.5 sm:py-5">
+            <h4 className={ROW_LABEL} style={{ color: ACCENT }}>
               {labels.substatPrio}
             </h4>
             {verdict ? (
@@ -575,56 +701,12 @@ export function GearRecoSection({
         )}
       </div>
 
-      {/* Légende des bonus quand 2+ sets distincts sont mélangés */}
-      {build.setEffects.length >= 2 && (
-        <div className="card rounded-xl p-4">
-          <h4
-            className="mb-3 font-mono text-[10px] font-semibold tracking-[0.18em] uppercase"
-            style={{ color: ACCENT }}
-          >
-            {labels.setEffects}
-          </h4>
-          <div className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
-            {build.setEffects.map((eff) => (
-              <div key={eff.id} className="flex gap-2.5">
-                {eff.icon && (
-                  <span className="relative mt-0.5 h-6 w-6 shrink-0">
-                    <img
-                      src={img.effect(eff.icon)}
-                      alt=""
-                      aria-hidden
-                      className="absolute inset-0 h-full w-full object-contain"
-                    />
-                  </span>
-                )}
-                <div className="min-w-0 space-y-0.5">
-                  {eff.slug ? (
-                    <Link
-                      href={`/equipment/${eff.slug}` as Route}
-                      className="font-game text-equipment block text-sm font-semibold hover:underline"
-                    >
-                      {eff.name}
-                    </Link>
-                  ) : (
-                    <div className="font-game text-equipment text-sm font-semibold">{eff.name}</div>
-                  )}
-                  <SetEffectLines eff={eff} labels={labels} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Note */}
+      {/* Note : une bande, étiquette + texte */}
       {build.noteNode && (
-        <div className="card flex gap-3 rounded-xl p-4">
-          <h4
-            className="shrink-0 font-mono text-[10px] font-semibold tracking-[0.18em] uppercase"
-            style={{ color: ACCENT }}
-          >
+        <div className="card flex flex-col gap-1.5 px-4 py-3 sm:flex-row sm:items-baseline sm:gap-4.5 sm:px-5.5 sm:py-3.5">
+          <span className={`${ROW_LABEL} shrink-0`} style={{ color: ACCENT }}>
             {labels.note}
-          </h4>
+          </span>
           <p className="flex-1 text-sm leading-relaxed text-zinc-300">{build.noteNode}</p>
         </div>
       )}

@@ -7,6 +7,21 @@
 
 ## 2026-08-21
 
+- **Recommended Gear refondu — une carte par question, plus de cartes dans les
+  cartes** (maquette Claude Design, tour 1). La fiche perso empilait quatre
+  `SlotCard` avec leurs filets internes, une carte « Set Effects » à part, une
+  carte substats et une carte note. Désormais : onglets de builds inchangés →
+  UNE carte gear à rangées étiquetées (étiquette mono 96 px à gauche en ≥ sm,
+  au-dessus en mobile ; items en ligne, espacés plutôt que séparés) → la
+  rangée Armor Set porte les combos (tuiles + nom + « 2 pieces · Helmet +
+  Armor ») ET la légende des bonus 2P/4P, c'est la réponse à la même question
+  → panneau substats (priorité d'abord, verdict flat / % dessous, légende des
+  trois badges accolée au titre « Flat or %? ») → une bande de note. Liseré
+  d'accent = la signature `.cd-page .card::before` existante, rien de
+  redessiné ; `SlotCard` / `Row` / `ItemRow` / `SetPieceGroup` restent
+  exportés tels quels pour `LootPanel` (butin des donjons) et l'éditeur
+  admin. Tooltip de set factorisé (`setTooltip`) entre les deux rendus.
+
 - **Pousser sans déployer : `pnpm commit --no-ci`.** Jusqu'ici tout push sur
   `main` déclenchait check → image → deploy (voulu, mais sans échappatoire pour
   un commit « à garder au chaud » — WIP, docs, réglage de poste). GitHub
