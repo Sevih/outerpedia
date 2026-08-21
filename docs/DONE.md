@@ -7,6 +7,32 @@
 
 ## 2026-08-21
 
+- **`extract-portrait-fx.py` entre ENFIN dans la pipeline — après avoir fermé le
+  piège qui l'en empêchait.** Quatrième script python, mais le seul qui vivait
+  HORS du flux alors que sa sortie est committée : `manifest.ts` réclamait ses 38
+  textures sur toutes les machines, seule celle où on l'avait lancé à la main
+  savait les produire (34 « sprite introuvable » sur le portable le 14/08). Le
+  câbler d'abord aurait cassé le site : il écrit le `colorSpace`, que le rendu
+  exige à `linear` (`portrait-fx-gl.ts` refuse tout le reste), et cette valeur ne
+  se lit que dans `globalgamemanagers` — pris jusqu'ici d'une APK déposée à la
+  main, donc absente d'ici : chaque `pnpm dev` aurait écrit `unknown` et effacé
+  l'effet. Dans l'ordre : (1) `datagen:dump` extrait `globalgamemanagers` du jeu
+  INSTALLÉ (3ᵉ `extractFromApk` sur `base.apk`, même geste adb que la paire
+  metadata/so — plus rien à déposer à la main, ni à aller chercher dans le repo
+  archivé) ; (2) le script lit trois sources dans l'ordre — fichier tiré, APK en
+  repli, puis PRÉSERVATION de la valeur committée plutôt que `unknown` ;
+  (3) l'étape rejoint `genSteps` avec `py: 'UnityPy'`, appelée SANS argument
+  (= les 9 `DEFAULT_EFFECTS`, exactement ce que porte le JSON committé — `--all`
+  sortirait des textures que le manifeste ne demande pas). Vérifié sur cette
+  machine, sans dump ni APK : « colorSpace conservé : linear », exit 0, aucun
+  diff sur `portrait-fx.json`. 31 tests de `refresh` à jour, `pnpm
+datagen:portrait-fx` pour le relancer seul.
+  • **Au passage, la règle qui manquait** : ce qui est hors git doit être SOIT
+  reconstruit par une commande de la chaîne, SOIT sauvegardé sur R2. Le gitignore
+  n'a jamais été le problème (`.gamedata`, `data/extracted`, `.assets-staging`
+  sont régénérables et sains) — les quatre pannes de ces deux semaines venaient
+  toutes d'une reconstruction qui dépendait d'un geste qu'on devait se rappeler.
+
 - **Le garde-fou 4-comics comparait des NOMBRES — il a failli laisser effacer
   trois BD.** Retour sur le portable après une semaine : pool local et galerie
   affichaient 31 BD par langue… mais pas les mêmes. Trois nouvelles d'un côté,

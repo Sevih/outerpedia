@@ -4,6 +4,8 @@
 #   - assets/extract-face-layout.py   → face-icon-layout.json      (cadrage des FI_)
 #   - assets/extract-sprite-rect.py   → sprite-rect.json           (taille logique des
 #                                       sprites rognés par le packer d'atlas)
+#   - assets/extract-portrait-fx.py   → portrait-fx.json           (effet animé du
+#                                       portrait : table + textures PNG du pool)
 #   - assets/extract-font-metrics.py  → portrait-font-metrics.json (chasses des
 #                                       polices du portrait)
 #

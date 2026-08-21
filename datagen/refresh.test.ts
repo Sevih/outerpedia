@@ -158,6 +158,7 @@ describe('genSteps — la chaîne déclarée', () => {
     expect(dry.filter((s) => s.py).map((s) => [s.id, s.py])).toEqual([
       ['face-layout', 'UnityPy'],
       ['sprite-rect', 'UnityPy'],
+      ['portrait-fx', 'UnityPy'],
       ['font-metrics', 'fontTools'],
     ]);
   });
@@ -184,12 +185,18 @@ describe('preflightPython — ce qui sera sauté, su AVANT le pull', () => {
     expect([...preflightPython(steps, absent(['UnityPy'])).keys()]).toEqual([
       'face-layout',
       'sprite-rect',
+      'portrait-fx',
     ]);
   });
 
   it('python introuvable → toutes les étapes python, aucune étape TS', () => {
     const missing = preflightPython(steps, () => 'python introuvable');
-    expect([...missing.keys()]).toEqual(['face-layout', 'sprite-rect', 'font-metrics']);
+    expect([...missing.keys()]).toEqual([
+      'face-layout',
+      'sprite-rect',
+      'portrait-fx',
+      'font-metrics',
+    ]);
     expect(missing.has('build')).toBe(false);
   });
 

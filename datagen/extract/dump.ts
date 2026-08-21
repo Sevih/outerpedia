@@ -30,10 +30,16 @@ import { IL2CPPDUMPER, ensureTool } from './tools';
 // Entrées à extraire des APK (chemins internes stables du zip).
 const META_ENTRY = 'assets/bin/Data/Managed/Metadata/global-metadata.dat';
 const SO_ENTRY = 'lib/arm64-v8a/libil2cpp.so';
+// `globalgamemanagers` porte les PlayerSettings du build, dont l'`m_ActiveColorSpace`
+// que rien d'autre ne dit (ni prefabs, ni matériaux, ni bundles) — cf.
+// `assets/extract-portrait-fx.py`. Il vivait dans une APK déposée à la main, donc
+// sur UNE machine ; on le tire du jeu INSTALLÉ, comme la paire metadata/so.
+const GGM_ENTRY = 'assets/bin/Data/globalgamemanagers';
 
 const APK_DIR = resolve('.gamedata/apk');
 const META = resolve(APK_DIR, 'global-metadata.dat');
 const SO = resolve(APK_DIR, 'libil2cpp.so');
+const GGM = resolve(APK_DIR, 'globalgamemanagers');
 const OUT = resolve(APK_DIR, 'dumped');
 // Empreinte du dump : ATTESTE que le script.json d'à côté sort de CE binaire.
 // `disasm.py` la vérifie avant de désassembler — un .so périmé apparié à un
@@ -94,6 +100,8 @@ function pullMatchedPair(): string {
   extractFromApk(serial, base, META_ENTRY, META);
   console.log('↻ extraction libil2cpp.so (split arm64)...');
   extractFromApk(serial, arm64, SO_ENTRY, SO);
+  console.log('↻ extraction globalgamemanagers (base.apk)...');
+  extractFromApk(serial, base, GGM_ENTRY, GGM);
   const version = gameVersion(serial) ?? 'inconnue';
   console.log(`✓ paire assortie extraite (jeu ${version}).`);
   return version;

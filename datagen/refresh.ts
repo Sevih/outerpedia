@@ -173,6 +173,21 @@ export function genSteps(o: { apply: boolean; collect: boolean }): Step[] {
       file: 'datagen/assets/extract-sprite-rect.py',
       py: 'UnityPy',
     },
+    // SANS ARGUMENT = `DEFAULT_EFFECTS`, les 9 effets SERVIS par le site —
+    // exactement ce que porte le `portrait-fx.json` committé. Surtout pas `--all` :
+    // il sortirait les dix effets du bundle, donc des textures que le manifeste ne
+    // demande pas. Hors pipeline jusqu'ici alors que sa sortie est COMMITTÉE :
+    // `manifest.ts` réclamait ses 38 textures sur TOUTES les machines, mais seule
+    // celle où on l'avait lancé à la main savait les produire (34 « sprite
+    // introuvable » sur le portable, 14/08). Le `colorSpace` qu'il écrit vient
+    // désormais du jeu installé (`datagen:dump`), et à défaut est PRÉSERVÉ — sans
+    // quoi câbler l'étape aurait suffi à effacer l'effet du site.
+    {
+      id: 'portrait-fx',
+      label: 'portrait-fx (prefabs → portrait-fx.json + textures)',
+      file: 'datagen/assets/extract-portrait-fx.py',
+      py: 'UnityPy',
+    },
     // Celle-ci ne lit PAS `.gamedata` mais `src/fonts/` (committé) : elle tourne
     // donc même sans machine de datamine, et ne change que si une police change.
     {

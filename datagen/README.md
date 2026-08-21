@@ -66,16 +66,17 @@ promote.ts      refresh.ts définition UNIQUE du flux « rafraîchir depuis le
 
 ### Exception assumée : l'outillage Python
 
-Trois scripts échappent au « tout-TS », pour la **même** raison : lire un format
-binaire spécialisé — typetrees Unity pour deux d'entre eux, tables OpenType pour
-le troisième — au même titre que l'extracteur .NET de la couche 0, donc
+Quatre scripts échappent au « tout-TS », pour la **même** raison : lire un format
+binaire spécialisé — typetrees Unity pour trois d'entre eux, tables OpenType pour
+le dernier — au même titre que l'extracteur .NET de la couche 0, donc
 **délibérément non réécrits en TS**.
 
-| Script                                   | Module      | Sortie committée                            | Ce qu'il évite                                                      |
-| ---------------------------------------- | ----------- | ------------------------------------------- | ------------------------------------------------------------------- |
-| `extract-face-layout.py`                 | `UnityPy`   | `datagen/assets/face-icon-layout.json`      | Des `FI_` absents pour les persos/skins récents                     |
-| `extract-sprite-rect.py` _(2026-08-07)_  | `UnityPy`   | `datagen/assets/sprite-rect.json`           | Des sprites servis à leur taille ROGNÉE, donc décalés à l'affichage |
-| `extract-font-metrics.py` _(2026-08-08)_ | `fontTools` | `datagen/assets/portrait-font-metrics.json` | Un `m_BestFit` faux, donc un nom qui déborde de sa boîte            |
+| Script                                           | Module      | Sortie committée                                 | Ce qu'il évite                                                       |
+| ------------------------------------------------ | ----------- | ------------------------------------------------ | -------------------------------------------------------------------- |
+| `extract-face-layout.py`                         | `UnityPy`   | `datagen/assets/face-icon-layout.json`           | Des `FI_` absents pour les persos/skins récents                      |
+| `extract-sprite-rect.py` _(2026-08-07)_          | `UnityPy`   | `datagen/assets/sprite-rect.json`                | Des sprites servis à leur taille ROGNÉE, donc décalés à l'affichage  |
+| `extract-portrait-fx.py` _(câblé le 2026-08-21)_ | `UnityPy`   | `datagen/assets/portrait-fx.json` + textures PNG | 38 « sprite introuvable » à la collecte, donc un portrait sans effet |
+| `extract-font-metrics.py` _(2026-08-08)_         | `fontTools` | `datagen/assets/portrait-font-metrics.json`      | Un `m_BestFit` faux, donc un nom qui déborde de sa boîte             |
 
 Le second mérite un mot : le packer d'atlas coupe les bords transparents, et
 AssetStudio n'exporte que ce qui reste. Un fichier de 111×128 pour un sprite de
@@ -90,13 +91,24 @@ savoir**. La table est bornée à `at_thumbnailmonsterruntime` et
 re-découpe tous les icônes déjà servis par cet atlas — un atlas à la fois, et
 délibérément.
 
-Tous trois sont :
+Le dernier arrivé mérite aussi un mot : il vivait **hors pipeline** alors que sa
+sortie est committée — `manifest.ts` réclamait ses 38 textures sur toutes les
+machines, mais seule celle où on l'avait lancé à la main savait les produire. Il
+écrit en outre le `colorSpace` du build, que le rendu exige à `linear` (sinon il
+refuse de poser l'effet). Cette valeur ne se lit que dans `globalgamemanagers`,
+jadis pris d'une APK déposée à la main : **`datagen:dump` l'extrait désormais du
+jeu installé** (même geste adb que la paire metadata/so), et à défaut le script
+PRÉSERVE la valeur déjà committée au lieu d'écrire `unknown` — sans ce filet,
+câbler l'étape aurait suffi à effacer l'effet du site depuis une machine sans
+dump.
+
+Tous quatre sont :
 
 - **locaux** : joués automatiquement par le flux `refresh` (`pnpm dev` /
-  `datagen:patch`) entre convert et build — les deux lecteurs de typetrees
+  `datagen:patch`) entre convert et build — les trois lecteurs de typetrees
   uniquement sur la machine de datamine (le refresh ne génère que si `.gamedata`
   existe) ; relançables seuls via `pnpm datagen:face-layout` /
-  `pnpm datagen:sprite-rect`. Depuis le 2026-07-14 : avant, il fallait les jouer
+  `pnpm datagen:sprite-rect` / `pnpm datagen:portrait-fx`. Depuis le 2026-07-14 : avant, il fallait les jouer
   à la main puis relancer dev. `extract-font-metrics.py` fait exception à
   l'exception : il lit `src/fonts/` (committé), pas `.gamedata`, donc il ne
   demande PAS de machine de datamine — juste fontTools ;

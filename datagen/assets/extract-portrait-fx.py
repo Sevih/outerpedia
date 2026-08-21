@@ -67,6 +67,11 @@ BUNDLES_DIR = ROOT / '.gamedata' / 'files' / 'bundles'
 MANIFEST = BUNDLES_DIR / 'manifest.dat'
 EXTRA_TABLE = ROOT / '.gamedata' / 'parsed' / 'CharacterExtraTemplet.json'
 OUT_JSON = ROOT / 'datagen' / 'assets' / 'portrait-fx.json'
+# `globalgamemanagers` tiré du jeu INSTALLÉ par `pnpm datagen:dump` (adb, même
+# geste que la paire metadata/so). Source à jour et reproductible du colorSpace,
+# là où l'APK déposée à la main ne vivait que sur une machine.
+GGM = ROOT / '.gamedata' / 'apk' / 'globalgamemanagers'
+GGM_ENTRY_IN_APK = 'assets/bin/Data/globalgamemanagers'
 # Le pool que `buildImageIndex` (assets/source.ts) balaye. On reproduit le
 # rangement par container d'AssetStudio (`-g containerFull`) : l'index n'indexe
 # que le basename, mais le chemin dit d'où vient le fichier.
@@ -190,8 +195,29 @@ def read_holder() -> dict:
     }
 
 
+def previous_color_space() -> str:
+    """`colorSpace` déjà résolu dans le JSON committé, ou `unknown` s'il n'y en a pas."""
+    if not OUT_JSON.exists():
+        return 'unknown'
+    try:
+        return json.loads(OUT_JSON.read_text(encoding='utf-8')).get('colorSpace', 'unknown')
+    except (OSError, ValueError):
+        return 'unknown'
+
+
+def color_space_of(path: Path) -> str | None:
+    """Lit `m_ActiveColorSpace` des PlayerSettings d'un `globalgamemanagers`."""
+    env = UnityPy.load(str(path))
+    for o in env.objects:
+        if o.type.name != 'PlayerSettings':
+            continue
+        # UnityEngine.ColorSpace : Gamma = 0, Linear = 1.
+        return 'linear' if o.read_typetree().get('m_ActiveColorSpace') == 1 else 'gamma'
+    return None
+
+
 def read_color_space() -> str:
-    """`ColorSpace` du projet, lu dans `globalgamemanagers` de l'APK.
+    """`ColorSpace` du projet, lu dans les PlayerSettings du build.
 
     C'EST LA VALEUR QUI DÉCIDE DE TOUT L'ÉTALONNAGE, et elle ne se lit nulle part
     ailleurs : ni les prefabs, ni les matériaux, ni les bundles ne la portent.
@@ -200,26 +226,42 @@ def read_color_space() -> str:
     converti. L'écart n'est pas cosmétique — `_MainStrength` vaut 70 sur le
     liseré, et supposer `gamma` blanchit la carte entière.
 
-    Absente (APK non tiré) : on rend `unknown` plutôt qu'un défaut arbitraire, et
-    c'est au rendu de refuser — se tromper d'espace ne se voit pas « un peu ».
+    TROIS SOURCES, dans l'ordre :
+      1. `globalgamemanagers` tiré du jeu installé par `datagen:dump` — la voie
+         reproductible, sur n'importe quelle machine ayant l'émulateur ;
+      2. une APK déposée à la main (l'ancienne voie, gardée en repli) ;
+      3. à défaut, la valeur DÉJÀ RÉSOLUE dans le JSON committé, qu'on PRÉSERVE
+         au lieu de la dégrader. Une machine sans dump ni APK écrasait sinon
+         `linear` par `unknown`, et le rendu REFUSE tout ce qui n'est pas
+         `linear` (`portrait-fx-gl.ts`) : l'effet disparaissait du site en un
+         commit. `unknown` ne subsiste qu'au tout premier passage, quand il n'y a
+         rien à préserver — et là c'est bien au rendu de refuser, se tromper
+         d'espace ne se voyant pas « un peu ».
     """
+    if GGM.exists():
+        found = color_space_of(GGM)
+        if found:
+            return found
+        print("  ! globalgamemanagers sans PlayerSettings — on tente l'APK")
+
     apks = sorted((ROOT / '.gamedata' / 'apk').glob('*/com.smilegate.*.apk'))
     if not apks:
-        print('  ! APK introuvable — colorSpace non résolu')
-        return 'unknown'
+        kept = previous_color_space()
+        print(f'  ! ni globalgamemanagers ni APK — colorSpace conservé : {kept}')
+        print('    (`pnpm datagen:dump` avec LDPlayer lancé le résout pour de bon)')
+        return kept
+
     import zipfile
 
     with zipfile.ZipFile(apks[0]) as z:
-        blob = z.read('assets/bin/Data/globalgamemanagers')
-    tmp = ROOT / '.gamedata' / 'apk' / 'globalgamemanagers'
-    tmp.write_bytes(blob)
-    env = UnityPy.load(str(tmp))
-    for o in env.objects:
-        if o.type.name != 'PlayerSettings':
-            continue
-        # UnityEngine.ColorSpace : Gamma = 0, Linear = 1.
-        return 'linear' if o.read_typetree().get('m_ActiveColorSpace') == 1 else 'gamma'
-    return 'unknown'
+        blob = z.read(GGM_ENTRY_IN_APK)
+    GGM.parent.mkdir(parents=True, exist_ok=True)
+    GGM.write_bytes(blob)
+    found = color_space_of(GGM)
+    if found:
+        return found
+    # APK présente mais illisible : préserver vaut mieux que dégrader.
+    return previous_color_space()
 
 
 # --- matériaux, textures, mailles -----------------------------------------------
