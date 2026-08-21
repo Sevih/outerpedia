@@ -1,6 +1,36 @@
 {
   "posts": [
     {
+      "id": 10902,
+      "date": "2026-08-20",
+      "modified": "2026-08-20T13:13:40",
+      "slug": "wlen",
+      "lang": "en",
+      "type": "event",
+      "title": "[🎉Event] Steam Wishlist Milestone Event",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/25b09b1207952fcd.webp\" alt=\"\"></figure>\n\n\n\n<p>Dear Masters,</p>\n\n\n\n<p>Celebrate OUTERPLANE’s upcoming Steam launch with our Steam Wishlist Milestone Event! 🎉</p>\n\n\n\n<p>Add OUTERPLANE to your Steam Wishlist!<br>Each time we reach a Wishlist milestone, a reward coupon code will be unlocked for everyone. ✨</p>\n\n\n\n<p>📅 [Event Period]</p>\n\n\n\n<p>2026/8/20 (Thu) ~ 2026/8/26 (Wed)</p>\n\n\n\n<p>📌 [How to Participate]</p>\n\n\n\n<p>Add OUTERPLANE to your Steam Wishlist to participate!</p>\n\n\n\n<p>🔗 https://store.steampowered.com/app/4247320/_/</p>\n\n\n\n<p>🎁 [Event Rewards]</p>\n\n\n\n<p>Milestone 1: Reach 1,000 Wishlists / Gold ×1,000,000<br>Milestone 2: Reach 2,000 Wishlists / Ether (Free) ×300<br>Milestone 3: Reach 3,000 Wishlists / Call of the Demiurge (Event) ×100</p>\n\n\n\n<p>📢 [Milestone Rewards]</p>\n\n\n\n<p>Each time a Wishlist milestone is reached, the corresponding reward coupon code will be revealed through our official community and social media channels.</p>\n\n\n\n<p>⚠️ [Notes]<br>※ Milestones are based on the total number of Wishlists registered for OUTERPLANE on Steam.<br>※ A reward coupon code will be revealed each time a milestone is reached.<br>※ Each coupon code can be redeemed once per account.<br>※ Coupon codes will be valid from the time they are revealed until 9/22 (Tue).</p>\n\n\n\n<figure class=\"size-large\"><img width=\"1024\" height=\"576\" src=\"/images/patch-notes/9ae4331632e511bb.webp\" alt=\"\"></figure>\n"
+    },
+    {
+      "id": 10900,
+      "date": "2026-08-20",
+      "modified": "2026-08-20T13:07:56",
+      "slug": "wlkr",
+      "lang": "kr",
+      "type": "event",
+      "title": "[🎉이벤트] Steam 위시리스트 목표 달성 이벤트",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/e7793a1415b17128.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요. GM 아메입니다.</p>\n\n\n\n<p>아우터플레인의 Steam 출시를 앞두고 위시리스트 목표 달성 이벤트를 진행합니다! 🎉</p>\n\n\n\n<p>Steam에서 아우터플레인을 위시리스트에 추가해 주세요!<br>위시리스트 목표를 달성할 때마다 모든 오너님이 사용할 수 있는 보상 쿠폰이 공개됩니다. ✨</p>\n\n\n\n<p>📅 [이벤트 기간]</p>\n\n\n\n<p>2026/8/20(목) ~ 2026/8/26(수)</p>\n\n\n\n<p>📌 [참여 방법]</p>\n\n\n\n<p>Steam에서 아우터플레인을 위시리스트에 추가하면 참여 완료!</p>\n\n\n\n<p>🔗 https://store.steampowered.com/app/4247320/_/</p>\n\n\n\n<p>🎁 [이벤트 보상]</p>\n\n\n\n<p>1단계: 위시리스트 1,000건 달성 / 골드 1,000,000개<br>2단계: 위시리스트 2,000건 달성 / 에테르(무료) 300개<br>3단계: 위시리스트 3,000건 달성 / 데미우르고스의 부름(이벤트) 100개</p>\n\n\n\n<p>📢 [목표 달성 및 보상 안내]</p>\n\n\n\n<p>각 위시리스트 목표 달성 시 해당 보상을 획득할 수 있는 쿠폰 코드가 공식 커뮤니티 및 SNS를 통해 공개됩니다.</p>\n\n\n\n<p>⚠️ [안내]<br>※ 위시리스트 목표는 Steam에 등록된 아우터플레인의 누적 위시리스트 수를 기준으로 집계됩니다.<br>※ 각 단계의 목표 달성 시 해당 단계의 보상 쿠폰이 공개됩니다.<br>※ 공개된 쿠폰은 계정당 1회 사용할 수 있습니다.<br>※ 쿠폰 사용 기간은 쿠폰 공개 시점부터 2026/9/22(화)까지 입니다.</p>\n\n\n\n<figure class=\"size-large\"><img width=\"1024\" height=\"576\" src=\"/images/patch-notes/ebdfffdee2a9f942.webp\" alt=\"\"></figure>\n\n\n\n<p></p>\n"
+    },
+    {
+      "id": 10904,
+      "date": "2026-08-20",
+      "modified": "2026-08-20T13:13:49",
+      "slug": "wljp",
+      "lang": "jp",
+      "type": "event",
+      "title": "【🎉イベント】Steamウィッシュリスト登録目標達成イベント",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/7e6bf9351e53578c.webp\" alt=\"\"></figure>\n\n\n\n<p>こんにちは。GMあめです！</p>\n\n\n\n<p>『アウタープレーン』Steam版のリリースを記念して、ウィッシュリスト登録目標達成イベントを開催します！🎉</p>\n\n\n\n<p>Steamで『アウタープレーン』をウィッシュリストに追加してください！<br>各段階のウィッシュリスト目標を達成すると、皆様が使用できる報酬クーポンが公開されます。✨</p>\n\n\n\n<p>📅 [イベント期間]</p>\n\n\n\n<p>2026/8/20(木) ～ 2026/8/26(水)</p>\n\n\n\n<p>📌 [参加方法]</p>\n\n\n\n<p>Steamで『アウタープレーン』をウィッシュリストに追加すれば参加完了！</p>\n\n\n\n<p>🔗 https://store.steampowered.com/app/4247320/_/</p>\n\n\n\n<p>🎁 [イベント報酬]</p>\n\n\n\n<p>第1段階：ウィッシュリスト登録数1,000件達成 / ゴールド ×1,000,000<br>第2段階：ウィッシュリスト登録数2,000件達成 / エーテル（無償）×300<br>第3段階：ウィッシュリスト登録数3,000件達成 / デミウルゴスの呼び玉(イベント) ×100</p>\n\n\n\n<p>📢 [目標達成および報酬のご案内]</p>\n\n\n\n<p>各段階のウィッシュリスト目標を達成すると、該当する報酬クーポンコードを公式コミュニティおよびSNSにて公開します。</p>\n\n\n\n<p>⚠️ [注意事項]<br>※ ウィッシュリスト目標は、Steamに登録された『アウタープレーン』の累計ウィッシュリスト登録数を基準に集計されます。<br>※ 各段階の目標達成時に、該当する報酬クーポンが公開されます。<br>※ 各クーポンは1アカウントにつき1回のみ使用できます。<br>※ クーポン使用期間は、クーポン公開時から2026/9/22(火)までとなります。</p>\n\n\n\n<figure class=\"size-large\"><img width=\"1024\" height=\"576\" src=\"/images/patch-notes/0b6f3c8a7467725d.webp\" alt=\"\"></figure>\n"
+    },
+    {
       "id": 10882,
       "date": "2026-08-19",
       "modified": "2026-08-19T06:10:48",
