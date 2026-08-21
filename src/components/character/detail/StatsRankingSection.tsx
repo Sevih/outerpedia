@@ -141,7 +141,7 @@ export function StatsRankingSection({
         </div>
 
         {!step ? (
-          <p className="text-sm text-zinc-500">{labels.noData}</p>
+          <p className="text-sm text-zinc-200">{labels.noData}</p>
         ) : (
           <>
             {/* Table des stats (valeur composée + delta des couches en ambre) */}
@@ -181,14 +181,14 @@ export function StatsRankingSection({
             <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs">
               {layers.transcend.length > 0 && (
                 <span className="flex items-center gap-1.5">
-                  <span className="tracking-wider text-zinc-500 uppercase">{labels.transcend}</span>
+                  <span className="tracking-wider text-zinc-200 uppercase">{labels.transcend}</span>
                   <span className="font-mono text-amber-300">
                     {layers.transcend[tierIdx]?.label ?? '—'}★
                   </span>
                 </span>
               )}
               <span className="flex items-center gap-1.5">
-                <span className="tracking-wider text-zinc-500 uppercase">{labels.codex}</span>
+                <span className="tracking-wider text-zinc-200 uppercase">{labels.codex}</span>
                 <select
                   value={codexLevel}
                   onChange={(e) => setCodexLevel(Number(e.target.value))}
@@ -202,7 +202,7 @@ export function StatsRankingSection({
                 </select>
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="tracking-wider text-zinc-500 uppercase">{labels.quirks}</span>
+                <span className="tracking-wider text-zinc-200 uppercase">{labels.quirks}</span>
                 <button
                   type="button"
                   role="switch"

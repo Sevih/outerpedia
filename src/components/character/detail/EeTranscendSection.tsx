@@ -73,7 +73,7 @@ function EeCard({ ee, labels }: { ee: EeCardView; labels: EeTranscendLabels }) {
               {ee.name}
             </Link>
             <p className="text-xs text-zinc-400">
-              <span className="text-zinc-500">{labels.mainStat} </span>
+              <span className="text-zinc-200">{labels.mainStat} </span>
               {ee.mainStats.map((s, i) => (
                 <span key={i} className="mr-2 inline-flex items-center gap-1">
                   {STAT_ICON[s.key] && (
@@ -109,14 +109,14 @@ function EeCard({ ee, labels }: { ee: EeCardView; labels: EeTranscendLabels }) {
 
         <div className="space-y-2">
           <div>
-            <p className="text-xs font-semibold text-zinc-500">{labels.effect}</p>
+            <p className="text-xs font-semibold text-zinc-200">{labels.effect}</p>
             {ee.effectLv1.map((t, i) => (
               <SkillDescription key={i} desc={t} className="text-sm text-zinc-200" />
             ))}
           </div>
           {ee.effectLv10.length > 0 && (
             <div>
-              <p className="text-xs font-semibold text-zinc-500">{labels.effectMax}</p>
+              <p className="text-xs font-semibold text-zinc-200">{labels.effectMax}</p>
               {ee.effectLv10.map((t, i) => (
                 <SkillDescription key={i} desc={t} className="text-sm text-zinc-200" />
               ))}

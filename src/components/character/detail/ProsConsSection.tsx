@@ -30,7 +30,7 @@ function Side({ label, items, tone, sign }: SideProps) {
           ))}
         </ul>
       ) : (
-        <p className="text-sm text-zinc-500 italic">—</p>
+        <p className="text-sm text-zinc-200 italic">—</p>
       )}
     </div>
   );

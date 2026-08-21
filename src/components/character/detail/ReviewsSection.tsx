@@ -135,7 +135,7 @@ export function ReviewsSection({ reviews, hex, dateLocale, labels }: Props) {
       </p>
 
       {reviews.length === 0 ? (
-        <p className="text-sm text-zinc-500 italic">{labels.noReviews}</p>
+        <p className="text-sm text-zinc-200 italic">{labels.noReviews}</p>
       ) : (
         <>
           {/* Résumé : moyenne + distribution */}
@@ -148,7 +148,7 @@ export function ReviewsSection({ reviews, hex, dateLocale, labels }: Props) {
                 {average}
               </div>
               <StarRating rating={average} />
-              <span className="font-mono text-[10px] tracking-wider text-zinc-500 uppercase">
+              <span className="font-mono text-[10px] tracking-wider text-zinc-200 uppercase">
                 {labels.count}
               </span>
             </div>
@@ -165,7 +165,7 @@ export function ReviewsSection({ reviews, hex, dateLocale, labels }: Props) {
                         style={{ width: `${pct}%`, background: hex, opacity: 0.7 }}
                       />
                     </span>
-                    <span className="text-right font-mono text-[10.5px] text-zinc-500">
+                    <span className="text-right font-mono text-[10.5px] text-zinc-200">
                       {count}
                     </span>
                   </div>
@@ -180,19 +180,19 @@ export function ReviewsSection({ reviews, hex, dateLocale, labels }: Props) {
               <div key={review.id} className="card flex items-start gap-3 rounded-xl p-4">
                 {/* Score de votes */}
                 <div className="flex shrink-0 flex-col items-center gap-0.5 pt-1">
-                  <span className="text-xs text-zinc-500">👍</span>
+                  <span className="text-xs text-zinc-200">👍</span>
                   <span
                     className={`text-sm font-semibold ${
                       review.score > 0
                         ? 'text-emerald-400'
                         : review.score < 0
                           ? 'text-red-400'
-                          : 'text-zinc-500'
+                          : 'text-zinc-200'
                     }`}
                   >
                     {review.score || 0}
                   </span>
-                  <span className="text-xs text-zinc-500">👎</span>
+                  <span className="text-xs text-zinc-200">👎</span>
                 </div>
 
                 <img
@@ -208,7 +208,7 @@ export function ReviewsSection({ reviews, hex, dateLocale, labels }: Props) {
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="font-semibold text-zinc-200">{review.displayName}</span>
                     <StarRating rating={review.rating} />
-                    <span className="text-xs text-zinc-500">{formatDate(review.timestamp)}</span>
+                    <span className="text-xs text-zinc-200">{formatDate(review.timestamp)}</span>
                   </div>
                   <p className="mt-2 text-sm leading-relaxed whitespace-pre-line text-zinc-300">
                     {renderTextWithEmojis(review.text)}
@@ -227,7 +227,7 @@ export function ReviewsSection({ reviews, hex, dateLocale, labels }: Props) {
             </button>
           )}
 
-          <p className="text-xs text-zinc-500">{labels.viaDiscord}</p>
+          <p className="text-xs text-zinc-200">{labels.viaDiscord}</p>
         </>
       )}
     </div>

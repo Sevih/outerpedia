@@ -144,7 +144,7 @@ export async function OverviewSection(p: OverviewProps) {
             <div className="flex flex-wrap gap-x-8 gap-y-3 border-y border-white/6 py-3.5">
               {p.meta.map(([label, value]) => (
                 <div key={label}>
-                  <div className="font-mono text-[10px] tracking-[0.14em] text-zinc-500 uppercase">
+                  <div className="font-mono text-[10px] tracking-[0.14em] text-zinc-200 uppercase">
                     {label}
                   </div>
                   <div className="mt-0.5 text-sm text-zinc-200">{value}</div>

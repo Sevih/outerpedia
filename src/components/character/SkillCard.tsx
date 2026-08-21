@@ -101,7 +101,7 @@ export function EnhancementList({
   if (!rows.length) return null;
   return (
     <div className="mt-4">
-      <h4 className="mb-2 text-xs font-semibold tracking-wider text-zinc-500 uppercase">
+      <h4 className="mb-2 text-xs font-semibold tracking-wider text-zinc-200 uppercase">
         {title}
         <span className="sr-only"> — {skillName}</span>
       </h4>
