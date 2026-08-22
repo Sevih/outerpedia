@@ -19,6 +19,9 @@ import erisMeteosS3 from './eris-meteos-s3.json';
 import hdianneMeteos from './hdianne-meteos.json';
 import hdianneS3crit from './hdianne-meteos-s3-crit.json';
 import hdianneS3 from './hdianne-meteos-s3.json';
+import francescaS3 from './francesca-s3.json';
+import francescaS2crit from './francesca-s2-crit.json';
+import francescaS2 from './francesca-s2.json';
 
 export const FIXTURES: DamageFixture[] = [
   valentineRhona as DamageFixture,
@@ -43,4 +46,10 @@ export const FIXTURES: DamageFixture[] = [
   // buffs sans effet sur le montant du hit.
   hdianneS3crit as DamageFixture,
   hdianneS3 as DamageFixture,
+  // Francesca (22/08/2026) — condition d'état TARGET_HAS_BUFF déclarée
+  // (coche 2000015_3 : S3 exact AVEC, faux SANS) et étanchéité des callers
+  // (la coche du S3 ne fuit pas sur le S2).
+  francescaS3 as DamageFixture,
+  francescaS2crit as DamageFixture,
+  francescaS2 as DamageFixture,
 ];

@@ -242,12 +242,14 @@ export interface StateLine {
   chain: string;
   /** Facteur total § 8.1 : Σ (MaxHitCount||1) × DamageFactor — porté à
    *  1000 ‰ (et `factorFilled` posé) quand la chaîne extraite somme sous
-   *  1000 : le manque est un event du clip non extrait (§ 12.4). */
+   *  990 : le manque est un event du clip non extrait (§ 12.4) ; les sommes
+   *  ∈ [990, 1000) sont des arrondis de répartition servis BRUTS. */
   totalFactor: number;
   /** Chaîne INCOMPLÈTE complétée au facteur plein — le § 8.1 réel somme les
-   *  AnimationEvents du clip (« facteurs littéraux » compris), hors tables ;
-   *  un skill joue toujours 100 % de son facteur (MESURÉ : le S1 de Caren
-   *  somme 700 ‰ en table et frappe 1000 ‰ en jeu, captures 18/08/2026). */
+   *  AnimationEvents du clip (« facteurs littéraux » compris), hors tables.
+   *  Deux mesures bornent la règle : le S1 de Caren somme 700 ‰ en table et
+   *  frappe 1000 ‰ en jeu (18/08/2026 — comblé) ; le S2 de Noa somme 999 ‰
+   *  (3×333) et frappe 999 ‰ EXACT (22/08/2026 — brut). Seuil : 990. */
   factorFilled?: true;
   /** Branches à probabilité > 0 uniquement (une branche impossible n'existe pas). */
   branches: BranchLine[];
@@ -489,11 +491,17 @@ export function buildSkillReport(
     const occurrences = unfoldHits(state.hits);
     const rawFactor = occurrences.reduce((sum, o) => sum + o.damageFactor, 0);
     // § 8.1 : le facteur total réel somme les AnimationEvents du CLIP (dont
-    // les « facteurs littéraux ») — invisibles des tables. Une chaîne qui
-    // somme SOUS 1000 ‰ est incomplète : complétée au facteur plein (le § 8.3
-    // verse le manque dans le dernier hit). Σ > 1000 est GARDÉ tel quel
-    // (bursts renforcés plausibles — aucune mesure ne tranche, § 12.4).
-    const totalFactor = rawFactor < 1000 ? 1000 : rawFactor;
+    // les « facteurs littéraux ») — invisibles des tables. Deux mesures
+    // encadrent la règle : Caren S1 (Σ tables 700 ‰, jeu = 1000 — un morceau
+    // du clip manque aux tables, 18/08/2026) et Noa S2 (Σ 999 = 3×333, jeu =
+    // 999 EXACT — arrondi de répartition, PAS un manque, 22/08/2026). Les
+    // Σ ∈ [990, 1000) de la donnée sont tous de la seconde espèce (999 = 3×333,
+    // 996 = 6×166) : servis BRUTS ; en dessous (paliers ronds 700/750/800/
+    // 900/920…), morceau manquant : complétés au facteur plein (le § 8.3
+    // verse le manque dans le dernier hit). Le seuil 990 est une heuristique
+    // bornée par les deux mesures (§ 12.4). Σ ≥ 1000 est GARDÉ tel quel
+    // (1001/1002 = arrondis par excès ; bursts renforcés plausibles).
+    const totalFactor = rawFactor < 990 ? 1000 : rawFactor;
 
     const branchLines = branchRates.map(({ branch, probability, rate, rateTrace }): BranchLine => {
       const trace = rateTrace ? [...rateTrace] : undefined;
@@ -553,7 +561,7 @@ export function buildSkillReport(
     return {
       chain: state.chain,
       totalFactor,
-      ...(rawFactor < 1000 ? { factorFilled: true as const } : {}),
+      ...(rawFactor < 990 ? { factorFilled: true as const } : {}),
       branches: branchLines,
       expectedDamage,
     };

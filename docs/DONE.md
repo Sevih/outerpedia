@@ -5,6 +5,34 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-22
+
+- **Damage calc — TARGET_HAS_BUFF validé in-game et facteur total affiné.**
+  Trois captures Francesca (2000015, S3 ±40 % si la cible porte un buff) :
+  36798 EXACT avec la coche, 33164 sans, et le jumeau S2 (`2000015_2_5`)
+  étanche — la coche S3 ne fuit pas sur les autres skills. Au passage, la
+  question « pourquoi Noa S2 n'est plus à 0 ? » a révélé que le comblement
+  à 1000 du 18/08 était TROP grossier : Σ 999 (= 3×333, arrondi de
+  répartition) doit être servi BRUT — le jeu affiche 999. D'où le seuil
+  moteur : Σ < 990 → comblé, sinon brut (`factorFilled`), Noa repasse 7/7 à
+  0.000. Les deux S2 Francesca gardaient ±1 point : élucidé le soir même —
+  voir l'entrée suivante. Fixtures `francesca-s2{,-crit,-s3}.json`, spec
+  § 12.4 réécrit.
+
+- **AnimationEvents : les clips sont lisibles, le modèle « cascade par clip »
+  est prouvé.** Réponse à « on peux pas le faire ? » : SI. Les bundles
+  (`.gamedata/files/bundles/`, 16 Go) ne sont PAS chiffrés, `manifest.dat`
+  est du JSON en clair, et UnityPy lit les `EventAttackStart` des .anim
+  (le paramètre est dans `data`, format `templetId,valeur`). Découvertes :
+  le S2 de Francesca se joue en DEUX clips (700 ‰ puis 300 ‰) et
+  `cascade(700)+cascade(300)` reproduit ses deux mesures AU POINT PRÈS (le
+  ±1 n'était pas un arrondi) ; le clip S1 de Caren joue le hit 300 ‰ DEUX
+  FOIS + 400 ‰ = 1000 (le « comblement » mesuré est un rejeu absent des
+  tables) ; Eris S2 et Noa S2 mono-clip, déjà exacts. Le vrai § 8.1 :
+  `ReceiveMaxDamage` PAR CLIP, total du skill = Σ des cascades par clip.
+  Chantier ouvert : extraction datagen des events → moteur par clip, qui
+  supprimera le seuil 990 ET les ±1.
+
 ## 2026-08-21
 
 - **Six PR dependabot absorbées en un commit.** Les merger une à une = six

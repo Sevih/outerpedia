@@ -1,0 +1,50 @@
+{
+  "name": "Francesca vs boss lumiere 404400356 - S3 (etat SKIP) crit, cible avec buff",
+  "z": "N4IghiBcIEwAwLgRgKwgDQgB5QGyYBsA3KJBTAaylAGUkoVMaYGmBmBgX0wBdTMAplDiYSkUGB5VoAFhjyMIAMYAnAJY81SsAQD6AEwC2AcyiwAnLkUAHNQJVKBu6wHsA7vd0rJQ6EnqYAEYArgBmobpKABZgAHaOZkgAHHAg3CCBUADaINYCsSAAuphKAM7ZsIjIKLocxSCaZijIcDIIAOyQbTJtcGwoVpxAA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "121": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "S3#2000015_SKIP",
+      "branch": "critical",
+      "damage": 36798
+    }
+  ],
+  "notes": "Capture Sevih 22/08/2026. VALIDE la condition d etat TARGET_HAS_BUFF declaree (coche du buff 2000015_3 : +40 % si la cible a un buff, S3 seul) : 36798 exact avec la coche, 33164 sans - la mesure ne colle qu avec la condition remplie. Delta 0.00 %."
+}

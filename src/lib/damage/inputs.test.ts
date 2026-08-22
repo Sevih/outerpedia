@@ -272,7 +272,7 @@ describe('inputs — procs SKILL_START au lanceur (captures 18/08/2026)', () => 
     expect(dmg(r, 'S1b2', 'critical')).toBeGreaterThan(dmg(r, 'S1b1', 'critical'));
   });
 
-  it('facteur total § 8.1 : une chaîne qui somme sous 1000 ‰ est complétée et MARQUÉE', () => {
+  it('facteur total § 8.1 : une chaîne qui somme sous 990 ‰ est complétée et MARQUÉE', () => {
     // Le S1 de Caren (300+400 ‰ en table) frappe 1000 ‰ en jeu (mesuré) ; le
     // S3 (5×200 ‰) est complet — pas de flag.
     const r = buildDamageReport({ ...attackerBase(), id: '2000089' }, target(true), data);
@@ -282,6 +282,16 @@ describe('inputs — procs SKILL_START au lanceur (captures 18/08/2026)', () => 
     expect(state('S1').factorFilled).toBe(true);
     expect(state('S3').totalFactor).toBe(1000);
     expect(state('S3').factorFilled).toBeUndefined();
+  });
+
+  it('facteur total § 8.1 : un arrondi de répartition (Σ ∈ [990, 1000)) est servi BRUT', () => {
+    // Le S2 de Noa somme 999 ‰ (3×333) et frappe 999 ‰ EXACT en jeu (mesuré
+    // 22/08/2026 — la fixture noa-rhona est passée de +0.09 % à 0.000 avec le
+    // facteur brut) : PAS un morceau de clip manquant, pas de flag.
+    const r = buildDamageReport({ ...attackerBase(), id: '2000022' }, target(true), data);
+    const s2 = r.slots.find((x) => x.slot === 'S2' && x.burst === undefined)!.report.states[0];
+    expect(s2.totalFactor).toBe(999);
+    expect(s2.factorFilled).toBeUndefined();
   });
 
   it('débuff au LANCEMENT côté cible (Rhona 2000008_3_3 : DEF -50 % au S3) — le canal par slot baisse la DEF de SA ligne', () => {

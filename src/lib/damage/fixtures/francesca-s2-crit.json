@@ -1,0 +1,50 @@
+{
+  "name": "Francesca vs boss lumiere 404400356 - S2 crit, cible sans buff",
+  "z": "N4IghiBcIEwAwLgRgKwgDQgB5QGyYBsA3KJBTAaylAGUkoVMaYGmBmBgX0wBdTMAplDiYSkUGB5VoAFhjyMIAMYAnAJY81SsAQD6AEwC2AcyiwAnLkUAHNQJVKBu6wHsA7vd0rJQ6EnqYAEYArgBmobpKABZgAHaOZkgAHHAg3CCaZijIcDIIAOyQeTJ5cGwoVpxAA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "121": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "S2",
+      "branch": "critical",
+      "damage": 22028
+    }
+  ],
+  "notes": "Capture Sevih 22/08/2026, aucune condition declaree (la cible n avait pas de buff : le jumeau S2 de la condition, 2000015_2_5, reste inactif). Ecart de 1 point (-0.00 %) : repartition PAR HIT du clip multi-hit (12 evenements, section 8.3) - le jeu affiche 1 de moins que CalcDamageCore(totalFactor), ordre des events du clip non desassemble (section 12.4). Sous la tolerance, jamais compense."
+}

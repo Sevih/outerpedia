@@ -550,7 +550,28 @@ return restant
    identifiées mais leur agrégation interne n'est pas désassemblée.
 4. **Événements d'animation** (§ 8.1) : les noms exacts des `functionName` comparés
    sont des littéraux runtime (metadata chiffrée) non extraits ; la _structure_ du
-   calcul (MaxHitCount × DamageFactor + littéraux) est certaine.
+   calcul (MaxHitCount × DamageFactor + littéraux) est certaine. Le facteur TOTAL
+   d'un clip n'est donc pas lisible des tables ; 192 chaînes somment ≠ 1000 ‰ et
+   deux mesures bornent la règle du moteur : Caren S1 (Σ tables 700 ‰, jeu =
+   1000 — comblé ; 18/08/2026) et Noa S2 (Σ 999 = 3×333, jeu = 999 EXACT —
+   arrondi de répartition, servi brut ; 22/08/2026). Seuil moteur : Σ < 990 →
+   comblé à 1000 (flag `factorFilled`), sinon brut — la zone [900, 989]
+   (5 chaînes : 900, 920×4) n'est pas mesurée.
+   **En voie de résolution (22/08/2026)** : les AnimationEvents sont finalement
+   LISIBLES — les bundles Unity (`.gamedata/files/bundles/`, non chiffrés,
+   `manifest.dat` en clair) exposent les `EventAttackStart` de chaque clip via
+   UnityPy (paramètre dans le champ `data`, format `templetId,valeur`). Modèle
+   validé sur 4 témoins : le jeu calcule `ReceiveMaxDamage` PAR CLIP (§ 8.1 ne
+   scanne que le clip courant) et le total du skill = Σ des cascades § 8.3 par
+   clip. Preuves : Francesca S2 = DEUX clips (700 ‰ + 300 ‰) →
+   cascade(700)+cascade(300) reproduit les deux mesures au point près (le « −1 »
+   n'était pas un arrondi mais le découpage en clips) ; Caren S1 = un clip où le
+   hit 300 ‰ est joué DEUX fois + 400 ‰ = 1000 (le « comblement » est en réalité
+   un rejeu du même templet, absent des tables) ; Eris S2 et Noa S2 = mono-clip,
+   déjà exacts. Chantier ouvert : extraction datagen des events par perso →
+   moteur § 8.1/8.3 par clip, ce qui supprimera le seuil 990 heuristique.
+   En attendant : ±1 point possible sur les clips multi-hit non extraits —
+   ne pas compenser, l'écart est documenté dans les fixtures concernées.
 5. **`GetSkillFactor` — skill courant** : lit `CurrentSkillType` (offset 0x70 du
    SkillManager) ; la correspondance SKILL_TYPE → skill équipé est du ressort du
    code d'attaque, pas de la formule.

@@ -1,0 +1,50 @@
+{
+  "name": "Francesca vs boss lumiere 404400356 - S2 normal, coche S3 sans effet sur S2",
+  "z": "N4IghiBcIEwAwLgRgKwgDQgB5QGyYBsA3KJBTAaylAGUkoVMaYGmBmBgX0wBdTMAplDiYSkUGB5VoAFhjyMIAMYAnAJY81SsAQD6AEwC2AcyiwAnLkUAHNQJVKBu6wHsA7vd0rJQ6EnqYAEYArgBmobpKABZgAHaOZkgAHHAg3MoAzlAA2rCIyCi6HAC6vGpmKMhwMggA7JA1MjVwbChWnEA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "121": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "S2",
+      "branch": "normal",
+      "damage": 10202
+    }
+  ],
+  "notes": "Capture Sevih 22/08/2026. La coche 2000015_3 (S3 seul) est declaree mais le S2 n y reagit pas (son jumeau 2000015_2_5 n est pas coche) : verifie l etancheite des callers entre slots. Ecart de 1 point (-0.01 %) : repartition PAR HIT du clip multi-hit (12 evenements, section 8.3) - meme phenomene que la capture crit, voir section 12.4. Sous la tolerance, jamais compense."
+}
