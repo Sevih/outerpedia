@@ -46,5 +46,5 @@
       "damage": 10202
     }
   ],
-  "notes": "Capture Sevih 22/08/2026. La coche 2000015_3 (S3 seul) est declaree mais le S2 n y reagit pas (son jumeau 2000015_2_5 n est pas coche) : verifie l etancheite des callers entre slots. Ecart de 1 point (-0.01 %) : repartition PAR HIT du clip multi-hit (12 evenements, section 8.3) - meme phenomene que la capture crit, voir section 12.4. Sous la tolerance, jamais compense."
+  "notes": "Capture Sevih 22/08/2026. La coche 2000015_3 (S3 seul) est declaree mais le S2 n y reagit pas (son jumeau 2000015_2_5 n est pas coche) : verifie l etancheite des callers entre slots. EXACT (0.00 %) depuis le modele PAR CLIP (22/08/2026 au soir) : le S2 se joue en deux clips (700 + 300 pour mille, AnimationEvents extraits), cascade(700) + cascade(300) - l ecart de 1 point de l ancien modele mono-cascade etait le decoupage en clips, pas un arrondi."
 }

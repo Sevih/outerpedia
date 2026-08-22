@@ -272,26 +272,45 @@ describe('inputs — procs SKILL_START au lanceur (captures 18/08/2026)', () => 
     expect(dmg(r, 'S1b2', 'critical')).toBeGreaterThan(dmg(r, 'S1b1', 'critical'));
   });
 
-  it('facteur total § 8.1 : une chaîne qui somme sous 990 ‰ est complétée et MARQUÉE', () => {
-    // Le S1 de Caren (300+400 ‰ en table) frappe 1000 ‰ en jeu (mesuré) ; le
-    // S3 (5×200 ‰) est complet — pas de flag.
+  it('facteur total § 8.1 : le S1 de Caren est résolu par son CLIP — 300 ‰ joué deux fois + 400 ‰', () => {
+    // Les tables somment 700 ‰, le jeu frappe 1000 ‰ (mesuré 18/08/2026) : le
+    // clip 2000089_Skill_01 rejoue le hit 1_1 (AnimationEvents extraits,
+    // 22/08/2026) — plus de comblement heuristique, la séquence fait foi.
     const r = buildDamageReport({ ...attackerBase(), id: '2000089' }, target(true), data);
     const state = (key: string) =>
       r.slots.find((x) => `${x.slot}${x.burst ? `b${x.burst}` : ''}` === key)!.report.states[0];
     expect(state('S1').totalFactor).toBe(1000);
-    expect(state('S1').factorFilled).toBe(true);
+    expect(state('S1').factorFilled).toBeUndefined();
+    expect(state('S1').clips).toEqual([{ name: '2000089_Skill_01', totalFactor: 1000 }]);
     expect(state('S3').totalFactor).toBe(1000);
     expect(state('S3').factorFilled).toBeUndefined();
   });
 
-  it('facteur total § 8.1 : un arrondi de répartition (Σ ∈ [990, 1000)) est servi BRUT', () => {
-    // Le S2 de Noa somme 999 ‰ (3×333) et frappe 999 ‰ EXACT en jeu (mesuré
-    // 22/08/2026 — la fixture noa-rhona est passée de +0.09 % à 0.000 avec le
-    // facteur brut) : PAS un morceau de clip manquant, pas de flag.
+  it('facteur total § 8.1 : un arrondi de répartition (999 = 3×333) est servi BRUT par le clip', () => {
+    // Le S2 de Noa frappe 999 ‰ EXACT en jeu (mesuré 22/08/2026) : son clip
+    // unique somme 999 — aucun comblement.
     const r = buildDamageReport({ ...attackerBase(), id: '2000022' }, target(true), data);
     const s2 = r.slots.find((x) => x.slot === 'S2' && x.burst === undefined)!.report.states[0];
     expect(s2.totalFactor).toBe(999);
     expect(s2.factorFilled).toBeUndefined();
+    expect(s2.clips?.[0]?.totalFactor).toBe(999);
+  });
+
+  it('§ 8.1 par clip : le S2 de Francesca fait DEUX cascades (700 ‰ puis 300 ‰), pas une', () => {
+    // Mesures 22/08/2026 : 10202 normal et 22028 crit, exacts UNIQUEMENT en
+    // cascade(700) + cascade(300) — le S2 se joue en deux clips. Témoin
+    // structurel : le total de la ligne diffère de CalcDamageCore(1000)
+    // qu'aurait donné une cascade unique.
+    const r = buildDamageReport({ ...attackerBase(), id: '2000015' }, target(true), data);
+    const s2 = r.slots.find((x) => x.slot === 'S2' && x.burst === undefined)!.report.states[0];
+    expect(s2.clips).toEqual([
+      { name: '2000015_Skill_2_1', totalFactor: 700 },
+      { name: '2000015_Skill_2_2', totalFactor: 300 },
+    ]);
+    // Le burst du S2 (trigger Burst1 → clip unique Skill_2_Upgrade) refait UNE
+    // cascade de 1000 ‰ : même chaîne de hits, découpage différent.
+    const b1 = r.slots.find((x) => x.slot === 'S2' && x.burst === 1)!.report.states[0];
+    expect(b1.clips).toEqual([{ name: '2000015_Skill_2_Upgrade', totalFactor: 1000 }]);
   });
 
   it('débuff au LANCEMENT côté cible (Rhona 2000008_3_3 : DEF -50 % au S3) — le canal par slot baisse la DEF de SA ligne', () => {

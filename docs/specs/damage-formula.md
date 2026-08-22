@@ -291,7 +291,7 @@ Signature : `CalcDamage(Attacker, Defender, DamageTemplet, damageRate, out dmg, 
 `damageRate` = le `SkillRecord.DamageRate` produit par § 7. Sorties nulles si
 `damageRate == 0` (invincible) ou si `DamageTemplet.DamageFactor == 0`.
 
-### 8.1 Facteur total de la compétence (comptabilité multi-hit)
+### 8.1 Facteur total de la compétence (comptabilité multi-hit) — PAR CLIP
 
 Un skill multi-hit appelle `CalcDamage` une fois **par hit**, avec le
 `CDamageTemplet` du hit (`DamageFactor` ‰ du hit). Au premier hit
@@ -307,6 +307,30 @@ totalFactor = Σ sur les events « hit » :
 
 Puis : `ReceiveMaxDamage = CalcDamageCore(totalFactor)` (§ 8.2),
 `TotalSkillFactor = totalFactor`, compteurs remis à zéro.
+
+**Le scan ne voit que le clip COURANT — un skill joué en plusieurs clips fait
+plusieurs cascades** (le rattrapage § 8.3 remet les compteurs à zéro à la fin
+de chaque clip, le clip suivant re-scanne). Prouvé le 22/08/2026 par la paire
+de mesures du S2 de Francesca (10202 normal / 22028 crit, exacts UNIQUEMENT en
+`cascade(700) + cascade(300)` — ses deux clips) et validé par l'extraction des
+events (voir ci-dessous) : le S1 de Caren joue son hit 300 ‰ DEUX fois (+400 =
+1000, le « comblement » mesuré du 18/08 était un rejeu absent des tables), les
+clips uniques d'Eris S2 (1000) et Noa S2 (999, servi brut) restent exacts.
+
+**Source de la donnée (22/08/2026)** : les bundles Unity ne sont pas chiffrés —
+`datagen/damage/extract-anim-events.py` (UnityPy) extrait les
+`EventAttackStart` de chaque clip (param `<templetId>,<valeur>` — la valeur
+après la virgule n'est PAS un facteur, non élucidée) ET le mapping
+trigger → clips du controller compilé `AC_<charId>`. La liaison skill → clips
+est de la donnée aussi : `CharacterSkillTemplet.TriggerName` liste les
+triggers du skill DANS L'ORDRE (« Skill2,Skill2_2 » = deux clips chez
+Francesca ; « Burst1 » → clip `Skill_2_Upgrade` : le burst du S2 refait la
+même chaîne en UNE cascade de 1000 ‰), `TriggerNameSkip` porte l'état SKIP.
+`datagen/damage/clips.ts` assemble le tout dans `characters.json`
+(`DamageSkill.clips`) ; le moteur (`report.ts`) fait une cascade § 8.2 + § 8.3
+par clip — les events d'une AUTRE chaîne présents dans le clip comptent dans
+son facteur et consomment leur part, chaque chaîne n'affiche que ses hits.
+Aucun event « facteur littéral » n'existe dans les données extraites (1.4.14).
 
 ### 8.2 Le cœur — `<CalcDamage>g__CalcDamage|17_0` (0x2CB330C)
 
@@ -353,7 +377,11 @@ ReceiveCurrentFactorDamage + dmg_hit`, le hit courant est **rehaussé** à
 `ReceiveMaxDamage - ReceiveCurrentFactorDamage` (le total de la compétence est donc
 exactement `CalcDamageCore(totalFactor)`, pas la somme des hits tronqués — sauf cas
 dégénéré où les clamps `≥ 1` feraient dépasser, jamais corrigé à la baisse).
-`ReceiveCurrentFactorDamage += dmg_hit` après chaque hit.
+`ReceiveCurrentFactorDamage += dmg_hit` après chaque hit. Le rattrapage vaut
+PAR CLIP (§ 8.1) : le dernier event du clip atteint `TotalSkillFactor`, les
+compteurs repartent à zéro, et le clip suivant refait sa propre cascade —
+c'est la séquence RÉELLE des events (rejeux compris) qui décide qui est
+« dernier », pas les tables.
 
 Limite de dégâts par tour (gimmick de boss, sauté si
 `scene.IsUseWorldBossFinishAttack`) : si `Defender.TurnLimitMaxDamage != -1` et
@@ -548,30 +576,28 @@ return restant
    paramètres est désormais extrait, voir § 17.
 3. **`FindBuffWGDamageReduce`** (BT 88/89) : les deux sorties (flat, rate) sont
    identifiées mais leur agrégation interne n'est pas désassemblée.
-4. **Événements d'animation** (§ 8.1) : les noms exacts des `functionName` comparés
-   sont des littéraux runtime (metadata chiffrée) non extraits ; la _structure_ du
-   calcul (MaxHitCount × DamageFactor + littéraux) est certaine. Le facteur TOTAL
-   d'un clip n'est donc pas lisible des tables ; 192 chaînes somment ≠ 1000 ‰ et
-   deux mesures bornent la règle du moteur : Caren S1 (Σ tables 700 ‰, jeu =
-   1000 — comblé ; 18/08/2026) et Noa S2 (Σ 999 = 3×333, jeu = 999 EXACT —
-   arrondi de répartition, servi brut ; 22/08/2026). Seuil moteur : Σ < 990 →
-   comblé à 1000 (flag `factorFilled`), sinon brut — la zone [900, 989]
-   (5 chaînes : 900, 920×4) n'est pas mesurée.
-   **En voie de résolution (22/08/2026)** : les AnimationEvents sont finalement
-   LISIBLES — les bundles Unity (`.gamedata/files/bundles/`, non chiffrés,
-   `manifest.dat` en clair) exposent les `EventAttackStart` de chaque clip via
-   UnityPy (paramètre dans le champ `data`, format `templetId,valeur`). Modèle
-   validé sur 4 témoins : le jeu calcule `ReceiveMaxDamage` PAR CLIP (§ 8.1 ne
-   scanne que le clip courant) et le total du skill = Σ des cascades § 8.3 par
-   clip. Preuves : Francesca S2 = DEUX clips (700 ‰ + 300 ‰) →
-   cascade(700)+cascade(300) reproduit les deux mesures au point près (le « −1 »
-   n'était pas un arrondi mais le découpage en clips) ; Caren S1 = un clip où le
-   hit 300 ‰ est joué DEUX fois + 400 ‰ = 1000 (le « comblement » est en réalité
-   un rejeu du même templet, absent des tables) ; Eris S2 et Noa S2 = mono-clip,
-   déjà exacts. Chantier ouvert : extraction datagen des events par perso →
-   moteur § 8.1/8.3 par clip, ce qui supprimera le seuil 990 heuristique.
-   En attendant : ±1 point possible sur les clips multi-hit non extraits —
-   ne pas compenser, l'écart est documenté dans les fixtures concernées.
+4. ~~Événements d'animation (§ 8.1)~~ — **RÉSOLU pour l'essentiel**
+   (22/08/2026) : les bundles ne sont pas chiffrés — les `EventAttackStart`
+   des clips ET le mapping trigger → clips des controllers `AC_<charId>` sont
+   extraits (`extract-anim-events.py` → `anim-events.json` → `clips.ts`), la
+   liaison skill → clips vient de `CharacterSkillTemplet.TriggerName` (données,
+   pas convention), et le moteur fait une cascade § 8.2/8.3 PAR CLIP (§ 8.1) —
+   les 26 observations des fixtures sont toutes exactes au point près, dont la
+   paire Francesca S2 qui a prouvé le découpage en clips. RESTE non résolu :
+   (a) les chaînes `clipsUnresolvedChains` (13 en 1.4.14 : trigger menant à
+   plusieurs états alternatifs, ou couverture partielle de la chaîne par les
+   clips) et les skills sans clips extraits — le moteur retombe sur
+   l'heuristique historique « Σ tables, comblée à 1000 sous 990 » (flag
+   `factorFilled`), bornée par les deux mesures Caren S1 (700 → 1000, 18/08)
+   et Noa S2 (999 brut, 22/08) ;
+   (b) la valeur après la virgule du `data` des events (34.142, 45, 200…) —
+   PAS un facteur (les sommes tombent juste sans elle), non élucidée ;
+   (c) les noms exacts des `functionName` comparés par le binaire restent des
+   littéraux runtime non extraits — `EventAttackStart` est validé par les
+   mesures, et aucun event « facteur littéral » n'existe dans la donnée
+   1.4.14 ;
+   (d) les events des monstres (`character/monster/…`) ne sont pas extraits —
+   sans objet tant que le calculateur ne calcule pas côté monstre.
 5. **`GetSkillFactor` — skill courant** : lit `CurrentSkillType` (offset 0x70 du
    SkillManager) ; la correspondance SKILL_TYPE → skill équipé est du ressort du
    code d'attaque, pas de la formule.

@@ -38,6 +38,7 @@ import {
 } from './gear';
 import { BASE_AMOUNT_STATS, resolveBossPassives, type BossPassivesInfo } from './passives';
 import {
+  attachChainClips,
   buildSkillReport,
   groupHitsByChain,
   type ReportScenario,
@@ -80,6 +81,10 @@ export interface DataSkill {
   burstAP?: number[];
   hits: DataHit[];
   hitsUnresolved?: boolean;
+  /** Clips d'animation du skill (§ 8.1 par clip — datagen/damage/clips.ts). */
+  clips?: { name: string; events: { id: string; factor: number; count: number }[] }[];
+  /** Chaînes à l'affectation de clips NON résolue — fallback § 12.4. */
+  clipsUnresolvedChains?: string[];
 }
 
 export interface DataCharacter {
@@ -1138,7 +1143,8 @@ export function buildDamageReport(
         wgReduce: lv.wgReduce,
         isFirstSkill: slot === 'S1',
         monoTarget: sk.rangeType === 'SINGLE',
-        states: groupHitsByChain(sk.hits),
+        // § 8.1 par clip quand l'affectation est résolue (sinon fallback § 12.4).
+        states: attachChainClips(groupHitsByChain(sk.hits), sk.clips, sk.clipsUnresolvedChains),
       },
       slotScenario,
       options,

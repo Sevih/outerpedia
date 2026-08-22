@@ -46,5 +46,5 @@
       "damage": 22028
     }
   ],
-  "notes": "Capture Sevih 22/08/2026, aucune condition declaree (la cible n avait pas de buff : le jumeau S2 de la condition, 2000015_2_5, reste inactif). Ecart de 1 point (-0.00 %) : repartition PAR HIT du clip multi-hit (12 evenements, section 8.3) - le jeu affiche 1 de moins que CalcDamageCore(totalFactor), ordre des events du clip non desassemble (section 12.4). Sous la tolerance, jamais compense."
+  "notes": "Capture Sevih 22/08/2026, aucune condition declaree (la cible n avait pas de buff : le jumeau S2 de la condition, 2000015_2_5, reste inactif). EXACT (0.00 %) depuis le modele PAR CLIP (22/08/2026 au soir) : cascade(700) + cascade(300) - avec la capture normale, c est la PAIRE de mesures qui a prouve le decoupage en clips (une cascade unique de 1000 donnait 1 point de plus sur les deux branches)."
 }

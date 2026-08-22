@@ -24,6 +24,7 @@
  */
 import { burstAPCosts } from '../lib/burst';
 import { groupBy, indexBy, loadTable, num, bool, splitCsv, type Row } from '../lib/tables';
+import { buildClipIndex, resolveSkillClips, type DamageSkillClip } from './clips';
 import { integratedIds } from './roster';
 
 /** Paire Min/Max d'une stat du templet (colonnes brutes, niveau 1 → max). */
@@ -90,6 +91,15 @@ export interface DamageSkill {
    * § 12.4), non extraite — incertitude documentée, jamais comblée.
    */
   hitsUnresolved?: boolean;
+  /**
+   * Clips d'animation jouant les chaînes de ce skill (spec § 8.1 : le facteur
+   * total et le rattrapage § 8.3 se calculent PAR CLIP) — séquence réelle des
+   * `EventAttackStart`, facteurs résolus globalement. Cf. clips.ts.
+   */
+  clips?: DamageSkillClip[];
+  /** Chaînes aux clips candidats AMBIGUS (règle 3 de clips.ts) — le moteur
+   *  retombe sur l'heuristique § 12.4 pour ces états. */
+  clipsUnresolvedChains?: string[];
 }
 
 /** Un personnage jouable (`Type == CT_PC`). */
@@ -189,6 +199,8 @@ export function buildDamageCharacters(): DamageCharactersData {
     }
   }
 
+  const clipIndex = buildClipIndex();
+
   const buildSkill = (id: string): DamageSkill => {
     const s = skillTemplet.get(id);
     const levels: DamageSkillLevel[] = (levelsBySkill.get(id) ?? [])
@@ -221,6 +233,7 @@ export function buildDamageCharacters(): DamageCharactersData {
       ...(burstCosts ? { burstAP: burstCosts } : {}),
       hits,
       ...(offensive && !hits.length ? { hitsUnresolved: true } : {}),
+      ...resolveSkillClips(clipIndex, s?.TriggerName, s?.TriggerNameSkip, hits),
     };
   };
 

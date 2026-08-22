@@ -103,11 +103,46 @@ export interface ReportHitInput {
   maxHitCount?: number;
 }
 
+/**
+ * Un clip d'animation du skill (§ 8.1 : le facteur total et le rattrapage
+ * § 8.3 se calculent PAR CLIP) — séquence réelle des `EventAttackStart`,
+ * extraite des bundles (datagen/damage/clips.ts). Les events peuvent porter
+ * des templets d'AUTRES chaînes ou skills : le binaire somme tout le clip.
+ */
+export interface ReportClipInput {
+  name: string;
+  events: { id: string; factor: number; count: number }[];
+}
+
 /** Un état du skill (une chaîne de hits) — devient une sous-ligne du rapport. */
 export interface ReportState {
   /** Clé de chaîne (dérivée de la convention d'ID — l'ID brut fait foi). */
   chain: string;
   hits: ReportHitInput[];
+  /** Clips jouant cette chaîne (≥ 1 event de ses templets) — présents quand
+   *  l'affectation est RÉSOLUE par les AnimationEvents ; absents → le moteur
+   *  retombe sur l'heuristique § 12.4 (seuil 990). */
+  clips?: ReportClipInput[];
+}
+
+/**
+ * Attache aux états leurs clips résolus (`DamageSkill.clips` du datagen) :
+ * un clip appartient à l'état dont il joue ≥ 1 templet ; une chaîne listée
+ * `clipsUnresolvedChains` reste SANS clips (fallback heuristique § 12.4).
+ */
+export function attachChainClips(
+  states: ReportState[],
+  clips?: ReportClipInput[],
+  unresolvedChains?: string[],
+): ReportState[] {
+  if (!clips?.length) return states;
+  const unresolved = new Set(unresolvedChains ?? []);
+  return states.map((s) => {
+    if (unresolved.has(s.chain)) return s;
+    const ids = new Set(s.hits.map((h) => h.id));
+    const own = clips.filter((c) => c.events.some((e) => ids.has(e.id)));
+    return own.length ? { ...s, clips: own } : s;
+  });
 }
 
 /**
@@ -240,17 +275,24 @@ export interface BranchLine {
 
 export interface StateLine {
   chain: string;
-  /** Facteur total § 8.1 : Σ (MaxHitCount||1) × DamageFactor — porté à
-   *  1000 ‰ (et `factorFilled` posé) quand la chaîne extraite somme sous
-   *  990 : le manque est un event du clip non extrait (§ 12.4) ; les sommes
-   *  ∈ [990, 1000) sont des arrondis de répartition servis BRUTS. */
+  /** Facteur total § 8.1. Chaîne RÉSOLUE par les AnimationEvents : Σ des
+   *  facteurs des clips joués (chaque clip fait SA cascade § 8.2 + § 8.3 —
+   *  détail dans `clips`) ; le clip peut rejouer un templet ou mêler d'autres
+   *  chaînes, sa somme fait foi. Fallback (chaîne sans clips extraits) :
+   *  Σ (MaxHitCount||1) × DamageFactor des tables — porté à 1000 ‰ (et
+   *  `factorFilled` posé) quand la somme est sous 990 : le manque est un
+   *  event du clip non extrait (§ 12.4) ; les sommes ∈ [990, 1000) sont des
+   *  arrondis de répartition servis BRUTS. */
   totalFactor: number;
-  /** Chaîne INCOMPLÈTE complétée au facteur plein — le § 8.1 réel somme les
-   *  AnimationEvents du clip (« facteurs littéraux » compris), hors tables.
+  /** FALLBACK SEULEMENT — chaîne incomplète complétée au facteur plein.
    *  Deux mesures bornent la règle : le S1 de Caren somme 700 ‰ en table et
    *  frappe 1000 ‰ en jeu (18/08/2026 — comblé) ; le S2 de Noa somme 999 ‰
    *  (3×333) et frappe 999 ‰ EXACT (22/08/2026 — brut). Seuil : 990. */
   factorFilled?: true;
+  /** Détail § 8.1 par clip — présent quand la chaîne est résolue par les
+   *  AnimationEvents (une cascade § 8.2/8.3 par clip, mesures Francesca S2
+   *  22/08/2026 : cascade(700) + cascade(300), les deux captures exactes). */
+  clips?: { name: string; totalFactor: number }[];
   /** Branches à probabilité > 0 uniquement (une branche impossible n'existe pas). */
   branches: BranchLine[];
   /** Σ P(branche) × total(branche). */
@@ -360,7 +402,9 @@ export function buildSkillReport(
     return {
       states: skill.states.map((s) => ({
         chain: s.chain,
-        totalFactor: totalFactorOf(s.hits),
+        totalFactor: s.clips?.length
+          ? s.clips.reduce((t, c) => t + c.events.reduce((x, e) => x + e.factor * e.count, 0), 0)
+          : totalFactorOf(s.hits),
         branches: [],
         expectedDamage: 0,
       })),
@@ -488,6 +532,97 @@ export function buildSkillReport(
   });
 
   const states = skill.states.map((state): StateLine => {
+    // ── Chemin RÉSOLU : cascade § 8.2 + rattrapage § 8.3 PAR CLIP ──────────
+    // (le binaire recalcule ReceiveMaxDamage à chaque scan § 8.1, donc à
+    // chaque clip — S2 de Francesca : cascade(700) + cascade(300), mesures
+    // exactes 22/08/2026). Les events étrangers à la chaîne comptent dans le
+    // facteur du clip et consomment leur part de la cascade, mais seuls les
+    // hits de LA chaîne alimentent sa ligne (les autres ont la leur).
+    if (state.clips?.length) {
+      const chainIds = new Set(state.hits.map((h) => h.id));
+      const clipFactors = state.clips.map((clip) => ({
+        name: clip.name,
+        totalFactor: clip.events.reduce((sum, e) => sum + e.factor * e.count, 0),
+      }));
+      const branchLines = branchRates.map(
+        ({ branch, probability, rate, rateTrace }): BranchLine => {
+          const trace = rateTrace ? [...rateTrace] : undefined;
+          const core = {
+            attackStat,
+            skillFactor: skill.skillFactor,
+            piercePowerRate: scenario.attacker.piercePowerRate,
+            piercePower: scenario.attacker.piercePower,
+            defense: scenario.defender.defense,
+            damageRate: rate,
+            defenderMarked: flags.defenderMarked,
+            elementalRate,
+            isMissed: branch === 'miss',
+            missedDamageRatePermille: scenario.missedDamageRatePermille,
+            finalReduceRate,
+          };
+          const hits: HitLine[] = [];
+          let stateTotal = 0;
+          let index = 0;
+          state.clips!.forEach((clip, ci) => {
+            const clipFactor = clipFactors[ci].totalFactor;
+            const clipTotal = calcDamageCore({ ...core, damageFactor: clipFactor }, trace);
+            const occs: { id: string; factor: number }[] = [];
+            for (const e of clip.events)
+              for (let k = 0; k < e.count; k++) occs.push({ id: e.id, factor: e.factor });
+            let accumulated = 0;
+            occs.forEach((occ, i) => {
+              const r = calcDamage({
+                ...core,
+                damageFactor: occ.factor,
+                vampiric: scenario.attacker.vampiric,
+                hitHpRecovery: scenario.defender.hitHpRecovery,
+              });
+              const isLast = i === occs.length - 1;
+              const damage = isLast
+                ? adjustLastHitDamage(clipTotal, accumulated, r.damage)
+                : r.damage;
+              accumulated += damage;
+              if (chainIds.has(occ.id)) {
+                index += 1;
+                hits.push({
+                  id: occ.id,
+                  index,
+                  damage,
+                  vampiric: r.vampiric,
+                  hitRecovery: r.hitRecovery,
+                  adjusted: damage !== r.damage,
+                });
+                stateTotal += damage;
+              }
+            });
+            trace?.push({
+              ref: '§ 8.3',
+              label: `clip ${clip.name} (facteur ${clipFactor} ‰) : répartition et rattrapage`,
+              in: { clipTotal, events: occs.length },
+              out: accumulated,
+            });
+          });
+          return {
+            branch,
+            probability,
+            damageRate: rate,
+            hits,
+            totalDamage: stateTotal,
+            ...(trace ? { trace } : {}),
+          };
+        },
+      );
+      const expectedDamage = branchLines.reduce((e, b) => e + b.probability * b.totalDamage, 0);
+      return {
+        chain: state.chain,
+        totalFactor: clipFactors.reduce((s, c) => s + c.totalFactor, 0),
+        clips: clipFactors,
+        branches: branchLines,
+        expectedDamage,
+      };
+    }
+
+    // ── Fallback : chaîne sans clips extraits — heuristique § 12.4 ─────────
     const occurrences = unfoldHits(state.hits);
     const rawFactor = occurrences.reduce((sum, o) => sum + o.damageFactor, 0);
     // § 8.1 : le facteur total réel somme les AnimationEvents du CLIP (dont

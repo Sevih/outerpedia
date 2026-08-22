@@ -66,9 +66,9 @@ promote.ts      refresh.ts définition UNIQUE du flux « rafraîchir depuis le
 
 ### Exception assumée : l'outillage Python
 
-Quatre scripts échappent au « tout-TS », pour la **même** raison : lire un format
-binaire spécialisé — typetrees Unity pour trois d'entre eux, tables OpenType pour
-le dernier — au même titre que l'extracteur .NET de la couche 0, donc
+Cinq scripts échappent au « tout-TS », pour la **même** raison : lire un format
+binaire spécialisé — typetrees Unity pour quatre d'entre eux, tables OpenType
+pour le dernier — au même titre que l'extracteur .NET de la couche 0, donc
 **délibérément non réécrits en TS**.
 
 | Script                                           | Module      | Sortie committée                                 | Ce qu'il évite                                                       |
@@ -77,6 +77,13 @@ le dernier — au même titre que l'extracteur .NET de la couche 0, donc
 | `extract-sprite-rect.py` _(2026-08-07)_          | `UnityPy`   | `datagen/assets/sprite-rect.json`                | Des sprites servis à leur taille ROGNÉE, donc décalés à l'affichage  |
 | `extract-portrait-fx.py` _(câblé le 2026-08-21)_ | `UnityPy`   | `datagen/assets/portrait-fx.json` + textures PNG | 38 « sprite introuvable » à la collecte, donc un portrait sans effet |
 | `extract-font-metrics.py` _(2026-08-08)_         | `fontTools` | `datagen/assets/portrait-font-metrics.json`      | Un `m_BestFit` faux, donc un nom qui déborde de sa boîte             |
+| `extract-anim-events.py` _(2026-08-22)_          | `UnityPy`   | `datagen/damage/anim-events.json`                | Un facteur de skill § 8.1 faux (le binaire somme les events du CLIP) |
+
+Le cinquième vit dans `datagen/damage/` (pipeline damage, pas assets) et n'est
+PAS câblé dans `refresh` : il se relance à la main après un patch
+(`python datagen/damage/extract-anim-events.py`, machine de datamine), puis
+`pnpm damage:build` — même logique de revue que le reste du pipeline damage
+(le diff git de `anim-events.json` et `characters.json` fait foi).
 
 Le second mérite un mot : le packer d'atlas coupe les bords transparents, et
 AssetStudio n'exporte que ce qui reste. Un fichier de 111×128 pour un sprite de
@@ -102,7 +109,7 @@ PRÉSERVE la valeur déjà committée au lieu d'écrire `unknown` — sans ce fi
 câbler l'étape aurait suffi à effacer l'effet du site depuis une machine sans
 dump.
 
-Tous quatre sont :
+Les quatre premiers sont :
 
 - **locaux** : joués automatiquement par le flux `refresh` (`pnpm dev` /
   `datagen:patch`) entre convert et build — les trois lecteurs de typetrees

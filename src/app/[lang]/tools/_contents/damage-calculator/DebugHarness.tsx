@@ -525,6 +525,9 @@ export function DebugHarness({
                           </span>
                           <span className="text-content-subtle font-mono text-[10px]">
                             Σfacteur {st.totalFactor}
+                            {st.clips && st.clips.length > 0 && (
+                              <> ({st.clips.map((c) => c.totalFactor).join(' + ')} par clip)</>
+                            )}
                           </span>
                           <span className="flex-1" />
                           <span className="text-content-subtle font-mono text-[10px]">

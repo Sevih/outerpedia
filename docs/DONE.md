@@ -7,6 +7,27 @@
 
 ## 2026-08-22
 
+- **Damage calc — le § 8.1 passe au modèle PAR CLIP : 26/26 observations
+  exactes au point près.** Suite directe de l'entrée précédente : l'extraction
+  des AnimationEvents est devenue un pipeline. `extract-anim-events.py`
+  (5ᵉ script UnityPy de l'exception assumée, côté `datagen/damage/`) sort les
+  `EventAttackStart` de chaque clip ET le mapping trigger → clips du
+  controller compilé `AC_<charId>` ; la liaison skill → clips n'est PAS une
+  convention : `CharacterSkillTemplet.TriggerName` liste les triggers du
+  skill dans l'ordre (« Skill2,Skill2_2 » = les deux clips du S2 de
+  Francesca ; « Burst1 » → clip `Skill_2_Upgrade` : le burst refait la même
+  chaîne en UNE cascade de 1000 ‰ — différence réelle que les tables ne
+  montraient pas). `clips.ts` assemble (998/1062 skills résolus, 13 chaînes
+  ambiguës listées `clipsUnresolvedChains`, jamais devinées), le moteur fait
+  une cascade § 8.2 + rattrapage § 8.3 PAR CLIP, fallback heuristique
+  seuil 990 pour le reliquat. Résultat : les ±1 de Francesca disparaissent
+  (10202 et 22028 exacts), rien d'autre ne bouge — pire delta du corpus :
+  0.0000 %. Spec § 8.1/8.3/12.4 réécrites (12.4 : incertitude n° 4 barrée),
+  data-mapping § 4 et README datagen à jour. Contre-épreuve à l'aveugle dans
+  la foulée : Sevih capture le BURST 2 du S2 (cible neuve, Sacreed Guardian)
+  APRÈS le câblage — 30476 observé, 30476 calculé, 27ᵉ observation à 0.000
+  (fixture `francesca-s2-burst2.json`).
+
 - **Damage calc — TARGET_HAS_BUFF validé in-game et facteur total affiné.**
   Trois captures Francesca (2000015, S3 ±40 % si la cible porte un buff) :
   36798 EXACT avec la coche, 33164 sans, et le jumeau S2 (`2000015_2_5`)
